@@ -1,304 +1,201 @@
-Return-Path: <linux-doc+bounces-87866-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87868-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oMHKCjebCGoGxwMAu9opvQ
-	(envelope-from <linux-doc+bounces-87866-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 16 May 2026 18:28:39 +0200
+	id cM2wKuScCGoGxwMAu9opvQ
+	(envelope-from <linux-doc+bounces-87868-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 16 May 2026 18:35:48 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8226C55C987
-	for <lists+linux-doc@lfdr.de>; Sat, 16 May 2026 18:28:37 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id AC0BB55CA3D
+	for <lists+linux-doc@lfdr.de>; Sat, 16 May 2026 18:35:47 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id A383B300D327
-	for <lists+linux-doc@lfdr.de>; Sat, 16 May 2026 16:28:36 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 3B9863007221
+	for <lists+linux-doc@lfdr.de>; Sat, 16 May 2026 16:35:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4C4283E715C;
-	Sat, 16 May 2026 16:28:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E611B3E51EC;
+	Sat, 16 May 2026 16:35:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="AavyMMsL"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from CWXP265CU009.outbound.protection.outlook.com (mail-ukwestazon11021104.outbound.protection.outlook.com [52.101.100.104])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3749A3E3172;
-	Sat, 16 May 2026 16:28:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.100.104
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778948913; cv=fail; b=G1CZojIJ73qsOrf2g8JYVBbF8A803UUACfPOK40Z88fqHU6NbBEfIc0meYEe9m8G6x6XvZNh5hp1sPWj0n4wVkCmEdyQvdZrRzZFtHYw7Xv602Ci1E760g6Mlxn/boDtxA2z+eSdeCYPGxLGGR+afhOJiuQrUGTqQzpiatgTpKA=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778948913; c=relaxed/simple;
-	bh=VuSekCAxvrTYJlQLt8i3ji/maqGhOKAmNcPQRaLNrrs=;
-	h=From:To:Cc:Subject:Date:Message-ID:Content-Type:MIME-Version; b=T3XXoaVpgnlaxZKvxWYOmg6f14KgyJECsrAs3uXsAGWSCNu6ElpS6hG71W+xvh62/0oZXmT+XvJM+bGh+zuBtBJ7hK5+knVTGbVOeOayb3FhmRw+lw8nJfx88nC9JvqwsiljkmLU9N1Stm0hmvr9f7WYjQVtcYrmGSCyMa3CBgM=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=atomlin.com; spf=pass smtp.mailfrom=atomlin.com; arc=fail smtp.client-ip=52.101.100.104
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=atomlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=atomlin.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SPvsihMg0RIgervGrL5D8MZhL1OxdeZ9S9xYIdDJEJXV5JVzndKEmszH6ceVRYyIZ50sG/ZJmTJvAE39IwBwMFl5d9CUOKdPno+JYmIr0qw8CArZYmXtNYsZGG7EuSqYxQ65O6iiAcmdvF7A01ES5nc/EChcxAAUhPp13V0+6wp+JbvsPfluDCIhtWWg1zZeDXP38itrJCeCMBspdcqwk5gSkyUcXc8yEFoU73baEQwDQxJ1zXhLKtkOOdQtg4E7QMYj5KRIAlXmEF+oVxL46k1l/V8e9vCNh7DJ2M5w8SjyahccvBHJYw7uqBUPVsW/3HSt1LY7qI99lhf9m4aOkA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9/DfpcFvtUpNf0tRNKBchGvcQk0SKkYEt+uXtr6SXRo=;
- b=gHEcpkng6gL7O+xvN3eE4xpAFIlRJYuNzi6PYrWW22kfJszwRxB5K5WL6Z1InApsBYDVwjmCIyHSYHyZGmES0oxg4nQEkDIySOEumqYIzFCVabuzDg3jkf8YT5S6yVpCGqSy7gIUF0f26W8keZyrkFutIyZAnChUw/R+yca6nJgq90AIqtN/BTn6ucMI2WGiuU5mj8cXbuD6GOR98SPLPayZWiDlBtBZ88FYc7iASKSJ3Cn/KoxQjBJ/E+n2JkFvVJZWw2TnmEUqXhGJSRIMw8yXLqhoJOmak1KuiEO/DRSjAdFGl2Ccl5u09mG0qMG29ayzhsiIwYFY3FNcSJ4Wqg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=atomlin.com; dmarc=pass action=none header.from=atomlin.com;
- dkim=pass header.d=atomlin.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=atomlin.com;
-Received: from CWLP123MB3523.GBRP123.PROD.OUTLOOK.COM (2603:10a6:400:70::10)
- by CW1P123MB8919.GBRP123.PROD.OUTLOOK.COM (2603:10a6:400:271::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.21; Sat, 16 May
- 2026 16:28:23 +0000
-Received: from CWLP123MB3523.GBRP123.PROD.OUTLOOK.COM
- ([fe80::de8e:2e4f:6c6:f3bf]) by CWLP123MB3523.GBRP123.PROD.OUTLOOK.COM
- ([fe80::de8e:2e4f:6c6:f3bf%2]) with mapi id 15.20.9846.025; Sat, 16 May 2026
- 16:28:23 +0000
-From: Aaron Tomlin <atomlin@atomlin.com>
-To: corbet@lwn.net,
-	skhan@linuxfoundation.org
-Cc: tglx@kernel.org,
-	akpm@linux-foundation.org,
-	bp@alien8.de,
-	rdunlap@infradead.org,
-	dave.hansen@linux.intel.com,
-	feng.tang@linux.alibaba.com,
-	pawan.kumar.gupta@linux.intel.com,
-	dapeng1.mi@linux.intel.com,
-	kees@kernel.org,
-	elver@google.com,
-	paulmck@kernel.org,
-	lirongqing@baidu.com,
-	bhelgaas@google.com,
-	bigeasy@linutronix.de,
-	bagasdotme@gmail.com,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v3] docs: kernel-parameters: document scope of irqaffinity= parameter
-Date: Sat, 16 May 2026 12:28:19 -0400
-Message-ID: <20260516162819.247530-1-atomlin@atomlin.com>
-X-Mailer: git-send-email 2.51.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: BN1PR14CA0026.namprd14.prod.outlook.com
- (2603:10b6:408:e3::31) To CWLP123MB3523.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:400:70::10)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4A6F93E2AA5
+	for <linux-doc@vger.kernel.org>; Sat, 16 May 2026 16:35:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.54
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1778949330; cv=none; b=i7hOxGgEvruOt943kP+onUWbLPQSHQM8Uw9FyeFipa9P6Eu8lvuR8SnWR9ZtbEqorWQwowWcOMVVyrUKAvek+RHPLYn0gLrYcBLmGONH+1r68EFoQOxMDp3G/DAEEOsV2l9FhXXXXiN9vhPr8cnYDFs0yQ7AZvn1KsXVGKemk/o=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1778949330; c=relaxed/simple;
+	bh=ObeT11Yua0BV4EJOKCJX/brzVfO/DD/aReuB3TectNA=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=k6heVIk8uSpGatoYW1gdj0no0woMJJ40E8CssT4KG/wYwbZQc06gfQvqeDmCOTBco6F7LbeNaaSOT1lS+uVEgIGWkAMg8ALvp2SN2wDGHVZg3OS1Q6LyC8qCplWXpyy8XIHv0vIKoW4U+D4OAhRNL9LS5sCzNZEdJFTtx/bgM1w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=AavyMMsL; arc=none smtp.client-ip=209.85.128.54
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-48a3e9862f0so4237835e9.1
+        for <linux-doc@vger.kernel.org>; Sat, 16 May 2026 09:35:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1778949327; x=1779554127; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:subject:cc:to:from:date:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=IZeZfDIT56zPfGGUkR4CImZ1hE92727R56H7iAHBklM=;
+        b=AavyMMsLjPzrM/9co6HPLUCovA1mkQz+IQ9CLAnbMKZe7Q2OfhEgzIvlefLWV072u5
+         caW9LLwa9+dnudCva5YbXi5SwesQeWGefJW0prZC0cDtABDhVubtzwZH/wMFXxilRvzX
+         4fZHzmeGvR7v0g/pmsceY5mIVh9mhlx9xbXnJHWzYrOkOplJBwydY0lNzRKhgIY6mmaV
+         JeUa+j/3SAqauhuEQnR6n2VoKncRDKlgJqISmO/JWTVVYHy56nKF26XfAVWcjRrtb8aV
+         bqmuUgATVXXkm+Gi/EmFL1lMZyzdkpxg6Oo7hHh2urUc+WSg4MBQoGQsV+2PGxa8l4Wh
+         Cd8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1778949327; x=1779554127;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=IZeZfDIT56zPfGGUkR4CImZ1hE92727R56H7iAHBklM=;
+        b=UOKM04ZfauUL7eNEKx534db1gTMlcBsXBemi8FCnw5BSxJ4uyU6oCng1GsGwKmnTu6
+         YSJV8i603pZjpKt69Ed+avhSPzaRfPpydnXndtgpP1lzQfV4VEzEp1PEcF9/5/+bOfIY
+         r6T4DbSjT8AU9qKXxfKUoVGCYA+RVauHS39H0YWPJ1HH02sHWrup7BWRYFCOYy8TI4Ak
+         bNYPy5zp9dcgcaDI0jFIQkBrgtu6+Ey+JzlcwdZmexuTQ4wF0oo7oiNxoMuXRMujvCtB
+         ERwqW/JAQO6K1uIam0WsEORZk5p7w2owat2pPs+TX3ILMCGXig+Y04XwRdgHcCIhNr/u
+         dxrA==
+X-Forwarded-Encrypted: i=1; AFNElJ/DU6LOzK6amfdyN9F9I+53yV/hoqYcPp9fv1TzS+ZTLW1UCuS+Qqq7ju9U5SqHkLHVPJ8HeWGHNEw=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzAnLTzhLVI2EPyfLWZwYLovXDjm29+uNtgwx2UyN1g2kPvUAMo
+	Y2Q+yWE/WaGWqS3lgiZ/VNgDv2SRzQu7Jkrh3owAqOULR4/prKNdltCP
+X-Gm-Gg: Acq92OENqtprqIsDYLxvxA/1g3VPpXDOULo0gb9TspCGLg/jlvK2I1OSpbS/jYgp9Lg
+	nbRo/4D/rGCg+a0HSi3zTU4VQL915KmJ9615N4xKjecm21PFPY9GwGsdHGE7X2ubyZWL+d1iC6s
+	B8dLQo7Li0nJu/r4QbBBzN4mENwjXiMAy/G2CyDivdhNYH60eT06EO/zxime6E1qXkOM8EF2eEB
+	C4FZwGAspyvGeJ25h2SEFDeQdhLD0oc3kG3lUBbi54FFHR5nb1HYsutqOyyoVE/4oSZtFKH2C61
+	PKu3s3asgZoAkD+/NWePJ4/1WP7W8q4sDS1eg31LqQFVHoE01TsGcujMLGyX0/d87DEZ4sYgGfc
+	98sxsc5/kk3zftpY7jgsHlNst04u8IPq9M9Ka5q6vUdULv2J2JcjLFXsE5M9XXcfGjOJVdSgJCM
+	aG81JyMWQBBW8OWsOwalhPL4u/vLV3H9inpL+IGMMS7rA7TuWIsiWN5sX6FVoFAm+s6SjG5ZY=
+X-Received: by 2002:a05:600c:4851:b0:48a:79d8:a8d6 with SMTP id 5b1f17b1804b1-48feea99dc7mr50647655e9.7.1778949326439;
+        Sat, 16 May 2026 09:35:26 -0700 (PDT)
+Received: from pumpkin (82-69-66-36.dsl.in-addr.zen.co.uk. [82.69.66.36])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48febe79ce3sm41831365e9.31.2026.05.16.09.35.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 16 May 2026 09:35:26 -0700 (PDT)
+Date: Sat, 16 May 2026 17:35:24 +0100
+From: David Laight <david.laight.linux@gmail.com>
+To: Heiko Carstens <hca@linux.ibm.com>
+Cc: Kees Cook <kees@kernel.org>, Manuel Ebner <manuelebner@mailbox.org>,
+ Andy Shevchenko <andy.shevchenko@gmail.com>, Jonathan Corbet
+ <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Andy Whitcroft
+ <apw@canonical.com>, Joe Perches <joe@perches.com>, Dwaipayan Ray
+ <dwaipayanray1@gmail.com>, Lukas Bulwahn <lukas.bulwahn@gmail.com>, Geert
+ Uytterhoeven <geert@linux-m68k.org>, Randy Dunlap <rdunlap@infradead.org>,
+ Jani Nikula <jani.nikula@intel.com>, "open list:DOCUMENTATION PROCESS"
+ <workflows@vger.kernel.org>, "open list:DOCUMENTATION"
+ <linux-doc@vger.kernel.org>, open list <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH v2 1/3] Doc: deprecated.rst: add strlcat()
+Message-ID: <20260516173524.498984d0@pumpkin>
+In-Reply-To: <20260516152819.14597A76-hca@linux.ibm.com>
+References: <20260514160719.105084-3-manuelebner@mailbox.org>
+	<20260514162652.107714-2-manuelebner@mailbox.org>
+	<202605140931.913048A68B@keescook>
+	<20260516152819.14597A76-hca@linux.ibm.com>
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; arm-unknown-linux-gnueabihf)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CWLP123MB3523:EE_|CW1P123MB8919:EE_
-X-MS-Office365-Filtering-Correlation-Id: 231a7430-77c8-4a0e-859d-08deb36825ec
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|7416014|366016|1800799024|56012099003|18002099003|3023799003;
-X-Microsoft-Antispam-Message-Info:
-	9tvvhK8eJ+r9vjqbvFPlJnApO77JeTvj262ew0Db60jHHmDXyG8lsvoa81nLZf+dhczgqdt6ZG/G9iE3Y+XjqgRFvZSQX0KKIJd5GZbJ4bkunANMHdkro7bvcCc4wDVpw1KpEToeZyvJghscvWgUowgngZqCJQn4EmewVkdZ/WqzQW1QRKnkUk9+zm29Uahee7a0SrPhrr9WI5rrNCVAlRQIC+mHWzLWTSEs82aHneVA07pXJaLqkhg1g+ui3u/YBxIcWNk3jhO38mnjQWLoGsL3wBJsVBv00BqAMnHDlOf3mblJmxBUJ49fzkqQEEn99ktPTO07c+c8mkRHjo/h+qe/Dxo35Rg6uZGMRJhf7ts5CHWOyIsh6CvqhUBTbro5LEEhn0osfBZeYOTjCkDKc2O7+7U0r13XsEaD/uL5B7fE5QlwDlYa0CFXGF5hcF+v2Xr0PgThqYdo6cymYdrOxuUqldO1ort9sCT5MDOpm4137ezutDTT7auCbZ2knXdo5PiYeOefadHTwtUGWFddLrvaNUanZEd4EXmbzqPpwx9C5EQ/H0EaDSBalpnNr5seeroX4GDPSs4byS9CvaCE4WVAEiFaxJa8DsHQnjQKnd5GBA+WWXl6IK2VJyY6PDt0qJz1sbQ5hhlor8V75rhVvPv7Hvw/gdaKw652PGDwqfMt0lL5X4BS+mIG2KQmzEQG5rlSGWyKvoxb/h48Upltcg==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CWLP123MB3523.GBRP123.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(366016)(1800799024)(56012099003)(18002099003)(3023799003);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?pBXp4alWccKsNqrT8FUZJriO5YQ6V4PtnooX9sDZWtwiEzXjC4/JvQr/KLc7?=
- =?us-ascii?Q?JVx4d5rdd1dRbqNJHdYEZq2g0r+LuJoiWcGrrl+1W+XaT7B2cJc6b5OrRNj+?=
- =?us-ascii?Q?MzouwzSB/nAJn4rECsgDqzJT42JAKOFsp3fIp+qyIjNFqRXkZPyGtM40F9C3?=
- =?us-ascii?Q?weFH+MpGTiqvmtWWAvYbTaLi7HEOUe7FEvk3eGbzLhGW6tvv0va5eqnIfu72?=
- =?us-ascii?Q?qBC7VDTLFrmGrcZDQNsaV40nOyApeioHv9c854iwNZWy1DSo0Qn/rs5chTVu?=
- =?us-ascii?Q?efq6SwjzeRg5AVtN5/RKmOYOpK7uSgvC7JcABXrXUyyC4xEVlG5zzjVXFzTD?=
- =?us-ascii?Q?PxGSW2vAfKLtJwJNRgXT+HUe0TFRX4Q8U1QhW0nFZFczZzBPlTj4STmWXhGE?=
- =?us-ascii?Q?SSvNCnRCGiNOO8HMzrh/JdHQ1CIo91EsWYxYlNr7q8pU6kTw8nyGclb2hY1i?=
- =?us-ascii?Q?uUTI3BYQsl7S/lmGnU+SNVjKYFbW75PsKb7RZMJA3bUqEmru1gdDDFm2z2Jl?=
- =?us-ascii?Q?vvSYhRAQaEFC+7uBExbIo8XPcDhGZxQVcrbkBsS8Sz9z4NTnDFh0a7mRdbLk?=
- =?us-ascii?Q?jYxLckSXY5Pqou5ubiqUY/LgEecE7EKN2TijGHYRzLL+5/s5lvRW5Ha9zay/?=
- =?us-ascii?Q?ExyzE9VVL1hF4jpYAg851IrGGgRx8fRnxjSjNlQoC54ibYOTUlVj4i7Fk1Ih?=
- =?us-ascii?Q?ULQktIhZA63vjA8Ph0WSwUafjknHAgUwy1gdnMO05YsV80yG8yH7Cm7Tx/IG?=
- =?us-ascii?Q?L0iX/OXOv2ry7OVWfRLDIGteYcQSDnTe0c5rP8OwPALpKZSziTLYjO5cHag6?=
- =?us-ascii?Q?VMJwyhJsgI6inE4JyNdhKtP0SblenHr+YLTdZTt+/Igdq3L0ZGEIo/pa9w8r?=
- =?us-ascii?Q?bT5Sp6xJiiZDbhHGuOcn/U1pIf84g4DwlQURiLLKlIAGEOJEBfEnpoJh2CgD?=
- =?us-ascii?Q?KbhgIbSY/+Bz3rpiHTW7Tyi/wCbSphVZ1B4sDWAxamLfoFZp5B84PSCaPoBN?=
- =?us-ascii?Q?aTduagy4gnc01Q80PUWu2UdaVeWI85339TmGepf3yrkKD2PDeEC5fpE12rt6?=
- =?us-ascii?Q?YqRHLqgmXTxtcTsfuY3g/EJTbfiw9AWcb80C3brVWMp1GS5eZDeIX0jhpIp7?=
- =?us-ascii?Q?QkB3Iom+k9vV6z3/Km25ysDOrtnMBLdE/cwTm/VHvKVKXu2/r7Weei384ZUi?=
- =?us-ascii?Q?D6Utk65/DHEKQmztTyrgwgT5aMlSRSVFZceqtYlklSpflDK4NsCm7Qz2FZOD?=
- =?us-ascii?Q?EPPNmrl502uyd6D2Kzwv+iGJQSdA4nhmg14rG0IDcAiVGUfWNr9bot2+jg4d?=
- =?us-ascii?Q?NTM7Z7A/xsG7DYtNaHnbdtqNKYmUPxXreMOYMMj+kvznsUyUXqXE2DH3a+4R?=
- =?us-ascii?Q?lfcdBn/vXOmK+XamQ7WO81BQxD8pnxO+bckta235ZAYYuZvuizPsEzhHLhWq?=
- =?us-ascii?Q?KfhR63rNKtYzA3WO4dDhgtgMQ64HvX9yMKVB48JL0oOzvCRNnctxzm6jfy2j?=
- =?us-ascii?Q?6YpbspFZg/VAL0omZ3UpFQ2GbkgfRAvQhsKBj8xPf8TCC2bJUkv+O9VDKP4V?=
- =?us-ascii?Q?8Q2xsEI8k6gLkjLqef5/gwvVz0LXYmAAWEDVlb179+XIzsD3WR9Fa157avEw?=
- =?us-ascii?Q?0rsO3vX11RJ1zu1FKTi04UDtzkHfj6YNomaU4dtXRDdLcrcCrZJPPOkNOrWP?=
- =?us-ascii?Q?3JjgYucVVcL9JiskovaqsYyVBUsObeMwQUXK5zEuWLmkfkQRbWMpp5TfcY2A?=
- =?us-ascii?Q?7+aYvOwb0Q=3D=3D?=
-X-OriginatorOrg: atomlin.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 231a7430-77c8-4a0e-859d-08deb36825ec
-X-MS-Exchange-CrossTenant-AuthSource: CWLP123MB3523.GBRP123.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 May 2026 16:28:22.9396
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e6a32402-7d7b-4830-9a2b-76945bbbcb57
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: PI2fxh0+F3mTCTivzw1GAegy1l+/cntvFo0Z8FmWfROIxlfnMc3KBaCxfAwAR2hUDy2qDbaKYPl30polR+lhKg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CW1P123MB8919
-X-Rspamd-Queue-Id: 8226C55C987
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: AC0BB55CA3D
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [2.04 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
-	ARC_REJECT(1.00)[cv is fail on i=2];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-87866-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_FIVE(0.00)[5];
+	TO_DN_ALL(0.00)[];
+	TAGGED_FROM(0.00)[bounces-87868-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[kernel.org,linux-foundation.org,alien8.de,infradead.org,linux.intel.com,linux.alibaba.com,google.com,baidu.com,linutronix.de,gmail.com,vger.kernel.org];
-	DMARC_NA(0.00)[atomlin.com];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[16];
 	MIME_TRACE(0.00)[0:+];
-	FROM_NEQ_ENVFROM(0.00)[atomlin@atomlin.com,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[kernel.org,mailbox.org,gmail.com,lwn.net,linuxfoundation.org,canonical.com,perches.com,linux-m68k.org,infradead.org,intel.com,vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	NEURAL_HAM(-0.00)[-1.000];
-	TO_DN_NONE(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	R_DKIM_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
+	FROM_NEQ_ENVFROM(0.00)[davidlaightlinux@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,atomlin.com:email,atomlin.com:mid]
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,mailbox.org:email]
 X-Rspamd-Action: no action
 
-There is a common misconception that the "irqaffinity=" boot parameter
-acts as a global override for all hardware interrupts. In reality, it
-only sets the irq_default_affinity mask, which is explicitly ignored
-by managed interrupts (e.g., modern multiqueue storage controllers).
+On Sat, 16 May 2026 17:28:19 +0200
+Heiko Carstens <hca@linux.ibm.com> wrote:
 
-This patch updates kernel-parameters.txt to document this limitation,
-directs users to "isolcpus=managed_irq" and
-Documentation/core-api/irq/managed_irq.rst for further details.
-Additionally, it updates managed_irq.rst to provide a debugfs example
-demonstrating the IRQD_AFFINITY_MANAGED state flag.
+> On Thu, May 14, 2026 at 09:31:46AM -0700, Kees Cook wrote:
+> > On Thu, May 14, 2026 at 06:26:53PM +0200, Manuel Ebner wrote:  
+> > > add strlcat and alternatives
+> > > 
+> > > Signed-off-by: Manuel Ebner <manuelebner@mailbox.org>
+> > > ---
+> > >  Documentation/process/deprecated.rst | 7 +++++++
+> > >  1 file changed, 7 insertions(+)
+> > > 
+> > > diff --git a/Documentation/process/deprecated.rst b/Documentation/process/deprecated.rst
+> > > index fed56864d036..06e802f4bbfd 100644
+> > > --- a/Documentation/process/deprecated.rst
+> > > +++ b/Documentation/process/deprecated.rst
+> > > @@ -153,6 +153,13 @@ used, and the destinations should be marked with the `__nonstring
+> > >  attribute to avoid future compiler warnings. For cases still needing
+> > >  NUL-padding, strtomem_pad() can be used.
+> > >  
+> > > +strlcat()
+> > > +---------
+> > > +strlcat() must re-scan the destination string from the beginning on each
+> > > +call (O(n^2) behavior). Alternatives are seq_buf_puts() and seq_buf_printf().
+> > > +snprintf(), scnprintf() and sysfs_emit() are possible aswell, but the adoption
+> > > +of the arguments needs to be taken care off.
+> > > +  
+> > 
+> > How about just:
+> > 
+> > strlcat() must re-scan the destination string from the beginning on each
+> > call (O(n^2) behavior). Use the seq_buf API or similar instead.  
+> 
+> seq_buf API for appending something to e.g. boot_command_line seems to be odd,
+> since boot_command_line is usually "just there" (depending on architecture and
+> boot loader).
 
-Signed-off-by: Aaron Tomlin <atomlin@atomlin.com>
----
-Changes since v2 [1]:
- - Reworded the debugfs explanation to explicitly distinguish between
-   active and offline managed IRQ states
- - Clarified that the shutdown flags (IRQD_IRQ_DISABLED,
-   IRQD_IRQ_MASKED, etc.) only appear when the CPU is offlined to
-   resolve the previous contradiction with the example output
- - Explicitly labeled the debugfs snippet as an "active" managed
-   interrupt
- - Used double-colon for literal code block (Bagas Sanjaya)
+Indeed, but ISTR that code uses strcat() a lot of the time.
+The lengths are all known, so memcpy() can be used.
 
-Changes since v1 [2]:
- - Provided an example of a managed IRQ using CONFIG_GENERIC_IRQ_DEBUGFS
- - Referenced Documentation/core-api/irq/managed_irq.rst
+I don't really see why strlcat() should be deprecated.
+Clearly there are many cases where there are better ways to do things.
+The only problem with strlcat() is that it returns the 'required length'.
+So there are some broken uses.
+- fs/nfs/flexfilelayout/flexfilelayout.c
+- lib/kunit/string-stream.c (although the preceding vsnprintf() looks like the actual bug).
+There is also some very strange code in security/selinus/ima.c - but it may be ok.
 
-[1]: https://lore.kernel.org/lkml/20260421150911.42404-1-atomlin@atomlin.com/
-[2]: https://lore.kernel.org/lkml/20260414200245.1153919-1-atomlin@atomlin.com/
----
- .../admin-guide/kernel-parameters.txt         | 11 ++++
- Documentation/core-api/irq/managed_irq.rst    | 60 ++++++++++++++++++-
- 2 files changed, 68 insertions(+), 3 deletions(-)
+In reality the return value of strlcat() isn't really much worse that that
+of snprintf().
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index cf3807641d89..365c4931700a 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -2726,6 +2726,17 @@ Kernel parameters
- 	irqaffinity=	[SMP] Set the default irq affinity mask
- 			The argument is a cpu list, as described above.
- 
-+			Note: This parameter only sets the default affinity
-+			for unmanaged interrupts (e.g., legacy single-queue
-+			devices or unmanaged pre/post vectors). It is
-+			explicitly ignored by managed interrupts, such as
-+			those utilised by modern multiqueue storage
-+			controllers. To isolate CPUs from managed
-+			interrupts, see "isolcpus=managed_irq".
-+
-+			For further details see:
-+			Documentation/core-api/irq/managed_irq.rst
-+
- 	irqchip.gicv2_force_probe=
- 			[ARM,ARM64,EARLY]
- 			Format: <bool>
-diff --git a/Documentation/core-api/irq/managed_irq.rst b/Documentation/core-api/irq/managed_irq.rst
-index 05e295f3c289..649f7f7fb0ac 100644
---- a/Documentation/core-api/irq/managed_irq.rst
-+++ b/Documentation/core-api/irq/managed_irq.rst
-@@ -80,9 +80,63 @@ The following examples assume a system with 8 CPUs.
-     /proc/irq/48/effective_affinity_list:0
-     /proc/irq/48/smp_affinity_list:7
- 
--  This can be verified via the debugfs interface
--  (/sys/kernel/debug/irq/irqs/48). The dstate field will include
--  IRQD_IRQ_DISABLED, IRQD_IRQ_MASKED and IRQD_MANAGED_SHUTDOWN.
-+  If the Linux kernel was built with Kconfig CONFIG_GENERIC_IRQ_DEBUGFS
-+  enabled, this can be verified via the debugfs interface (e.g.,
-+  /sys/kernel/debug/irq/irqs/48).
-+
-+  A managed IRQ will always include IRQD_AFFINITY_MANAGED in its dstate.
-+  Furthermore, when the associated CPU is offlined, the dstate field will
-+  also include IRQD_IRQ_DISABLED, IRQD_IRQ_MASKED, and IRQD_MANAGED_SHUTDOWN,
-+  verifying that the interrupt was cleanly shut down rather than migrated.
-+
-+  For example, an active managed interrupt might look like this::
-+
-+    # cat /sys/kernel/debug/irq/irqs/87
-+    handler:  handle_edge_irq
-+    device:   0000:41:00.0
-+    status:   0x00000000
-+    istate:   0x00004000
-+    ddepth:   0
-+    wdepth:   0
-+    dstate:   0x19601200
-+		IRQD_ACTIVATED
-+		IRQD_IRQ_STARTED
-+		IRQD_SINGLE_TARGET
-+		IRQD_AFFINITY_SET
-+		IRQD_AFFINITY_MANAGED
-+		IRQD_AFFINITY_ON_ACTIVATE
-+		IRQD_HANDLE_ENFORCE_IRQCTX
-+    node:     0
-+    affinity: 3
-+    effectiv: 3
-+    pending:
-+    domain:  IR-PCI-MSIX-0000:41:00.0-12
-+     hwirq:   0x8
-+     chip:    IR-PCI-MSIX-0000:41:00.0
-+      flags:   0x430
-+		 IRQCHIP_SKIP_SET_WAKE
-+		 IRQCHIP_ONESHOT_SAFE
-+
-+      address_hi: 0x00000000
-+      address_lo: 0xfee00000
-+      msg_data:   0x00000008
-+     parent:
-+	domain:  AMD-IR-3-14
-+	 hwirq:   0x41000000
-+	 chip:    AMD-IR
-+	  flags:   0x0
-+	 parent:
-+	    domain:  VECTOR
-+	     hwirq:   0x57
-+	     chip:    APIC
-+	      flags:   0x0
-+	     Vector:    33
-+	     Target:     3
-+	     move_in_progress: 0
-+	     is_managed:       1
-+	     can_reserve:      0
-+	     has_reserved:     0
-+	     cleanup_pending:  0
- 
- - A QEMU instance is booted with "-device virtio-scsi-pci,num_queues=2"
-   and the kernel command line includes:
--- 
-2.51.0
+-- David
+
+> 
+> So if I would remove strlcat() from appending something to boot_command_line I
+> would end up open-coding strlcat(), including the chance for the usual
+> off-by-one bugs. Looks like this would be true for nearly all architectures.
+> 
+> Is performance really the only reason to deprecate strlcat()? This seems to be
+> a bit questionable to me.
 
 
