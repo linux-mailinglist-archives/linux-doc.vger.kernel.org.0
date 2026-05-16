@@ -1,220 +1,140 @@
-Return-Path: <linux-doc+bounces-87805-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87806-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aBQFONfFB2pEHwMAu9opvQ
-	(envelope-from <linux-doc+bounces-87805-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 16 May 2026 03:18:15 +0200
+	id afhHHpXMB2oRJQMAu9opvQ
+	(envelope-from <linux-doc+bounces-87806-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 16 May 2026 03:47:01 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B6B4559BAF
-	for <lists+linux-doc@lfdr.de>; Sat, 16 May 2026 03:18:15 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E895B559D04
+	for <lists+linux-doc@lfdr.de>; Sat, 16 May 2026 03:46:59 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 6CF9B301571F
-	for <lists+linux-doc@lfdr.de>; Sat, 16 May 2026 01:17:42 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 1B4F7300C936
+	for <lists+linux-doc@lfdr.de>; Sat, 16 May 2026 01:46:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 75C6823BF9F;
-	Sat, 16 May 2026 01:17:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8C2882356C6;
+	Sat, 16 May 2026 01:46:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ktroCvJU"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="zJKozhlW"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 480E622D7A1;
-	Sat, 16 May 2026 01:17:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A5A52AD10;
+	Sat, 16 May 2026 01:46:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778894251; cv=none; b=SNDYeNvhu1qSttwrhNsGwQF+RJ0Ugy2Tjees7Fihw0d5sdMHKeCcj5wNoXvnrXBZJ8/mAniNTGBikHaS2aYhMNvk5VNt58JaZ4GzObxx3PtJo9IFsbvw1euRwG0wYiNHuzY4Lqw0h7uEErL7UIYnBTNNmyImNfQ3U9O9vEJuNaY=
+	t=1778896016; cv=none; b=ZKgF3iNqTNmlif3fkiZgDEdOiwmISz8VUOKXJbTwrtGuebSB/Irzt+EbO6tSvNigtb0+MAGwnLQDHYIXXAejscclQOLYQ/i4YNa4X9syT3kn8Yr5AyifTCwB9k7yKNgjJ7QbdDdSygaO2RIK1wHgjsq0/sUrQL2sFZxdel+4rHM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778894251; c=relaxed/simple;
-	bh=vqb4ZaYQMmZhkOs6tnUeA/Kf3Oyzbjn5GJjDqFFFshs=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=iT9n4+0YLaURSXfYOp1/v3xUjg9FXIbmJSaH2umKSl7hetOOV7B31WT4kGe4R1OD8/fSobLT/RByGq5Q50dEahDAMlZ57S43BhJIfx1400lx2YTzW0mMTjNQAltXPw9v0XYwnJ/Rh8H286xTfJC9tBT1qaIrnRnpC/fyX3PEwWA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ktroCvJU; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2A252C2BCB0;
-	Sat, 16 May 2026 01:17:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1778894246;
-	bh=vqb4ZaYQMmZhkOs6tnUeA/Kf3Oyzbjn5GJjDqFFFshs=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=ktroCvJU6D57PDwDQLq18RTS9++FjObYgRd4TF3y5homw34kztyJtZyUG1L36wfBQ
-	 qXPjhXoI15exDOyy587dV1+aKFnSCRFbjeFHJUSekbghRXTMoXsC6Zz2Ee1pJ5wLH3
-	 T2ORYFvE9EWUDAA1gCpHYtTX8cGqoBjJWGNbQpD5zDSX9NAjp0bMSlKSPTCyqeS10v
-	 LECKguAZUbzU3cQ0HlppYpi7rezFxnCmw8JQyTSlNO7EwwMKwGLN108QHtD5+R2xAd
-	 5vGGX4khDry5X0qeoheaFRAcPxcAdO9Ndx4GoMZ2BJmtaPo/rbb3vE/557ujsn34nM
-	 g2bVkC6Xo8TrQ==
-From: Jakub Kicinski <kuba@kernel.org>
-To: illusion.wang@nebula-matrix.com
-Cc: Jakub Kicinski <kuba@kernel.org>,
-	dimon.zhao@nebula-matrix.com,
-	alvin.wang@nebula-matrix.com,
-	sam.chen@nebula-matrix.com,
-	netdev@vger.kernel.org,
-	andrew+netdev@lunn.ch,
-	corbet@lwn.net,
-	horms@kernel.org,
-	linux-doc@vger.kernel.org,
-	pabeni@redhat.com,
-	vadim.fedorenko@linux.dev,
-	lukas.bulwahn@redhat.com,
-	edumazet@google.com,
-	enelsonmoore@gmail.com,
-	skhan@linuxfoundation.org,
-	hkallweit1@gmail.com,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v14 net-next 11/11] net/nebula-matrix: add common dev start/stop operation
-Date: Fri, 15 May 2026 18:17:25 -0700
-Message-ID: <20260516011725.1864115-1-kuba@kernel.org>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260513011649.4404-12-illusion.wang@nebula-matrix.com>
-References: <20260513011649.4404-12-illusion.wang@nebula-matrix.com>
+	s=arc-20240116; t=1778896016; c=relaxed/simple;
+	bh=Ky6IUlNMBLAy04K7RjIF1nK1tt4hr+KDuPI3+71Lwhk=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=iciiRBL5oM8xvIUkCBdSU9eJF8ZmAb9HQBtL4c6WJwKUXAr0TxNqaYwuWjZHEc8XVuy15ljN1UZFIOkUjekXWW7NUVkPVe5FZIGrmH8HSqx3AkP5JLO5pmDdxpPCK1g3ztFb5f8NuEqWMQOpgZYiMjD01MeCMwcYpE2N5WWoo6M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=zJKozhlW; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+	bh=Ed8klWxLK7ZDNTr83IcZ6gNh9I//eWXUIAAE+5DNeH4=; b=zJKozhlW2w/ukfRtCz+h/Lq7HF
+	sg3C7cm3hN+fYReEnXwL5gLIZNHqu+AGjtUC1OWvCCpKdsE8zXfy3ZnUqXhK0Al08senDKZ2diJUa
+	Zl4Tb2sG3lWW/NtQNFCT1STFwBgaKbPTqGXv95U++yCmv7VWBNHZ+fx/qotiOezYmU+voEPpGaUEo
+	AhJ3azY1lFGihfBS7W9V462Dk2MdzXm6M67WRtpCGnN/G7MR99ZwZ3HqbMPiy91rT//+dogHgLat/
+	F2mbJ+jLy8gqlMWBc/RPQVNFjJESVfX0kTz+yCrd7K4vzyAXTiP7k3IK12Q/pPUvtz0YhvAGfRlRT
+	NSt50Tkg==;
+Received: from [50.53.43.113] (helo=[192.168.254.34])
+	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+	id 1wO47A-00000009uB9-1yAy;
+	Sat, 16 May 2026 01:46:52 +0000
+Message-ID: <933369dd-727c-462c-babc-16019365ec71@infradead.org>
+Date: Fri, 15 May 2026 18:46:50 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 8B6B4559BAF
+User-Agent: Mozilla Thunderbird
+Subject: Re: [linux-next:master 3552/4394] htmldocs:
+ Documentation/admin-guide/device-mapper/dm-inlinecrypt.rst:1: WARNING: Title
+ overline too short.
+To: kernel test robot <lkp@intel.com>,
+ Linlin Zhang <linlin.zhang@oss.qualcomm.com>
+Cc: oe-kbuild-all@lists.linux.dev, Mikulas Patocka <mpatocka@redhat.com>,
+ linux-doc@vger.kernel.org
+References: <202605160214.wOV5aa0q-lkp@intel.com>
+Content-Language: en-US
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <202605160214.wOV5aa0q-lkp@intel.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: E895B559D04
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.84 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[kernel.org,nebula-matrix.com,vger.kernel.org,lunn.ch,lwn.net,redhat.com,linux.dev,google.com,gmail.com,linuxfoundation.org];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-87806-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	TAGGED_FROM(0.00)[bounces-87805-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[infradead.org:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	RCPT_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[kuba@kernel.org,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,infradead.org:mid,infradead.org:dkim,01.org:url]
 X-Rspamd-Action: no action
 
-This is an AI-generated review of your patch. The human sending this
-email has considered the AI review valid, or at least plausible.
----
-net/nebula-matrix: add common dev start/stop operation
 
-This patch sets up common device start and stop operations. It configures the
-MSI-X map table, allocates and enables MSI-X vectors, and registers the
-mailbox ISR.
 
-> diff --git a/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c b/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c
-> index 9b7f4598fccc3..c7e632a16b40c 100644
-> --- a/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c
-> +++ b/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c
-[ ... ]
-> @@ -79,6 +259,14 @@ static void nbl_dev_clean_mailbox_task(struct work_struct *work)
->  				      NBL_CHAN_TYPE_MAILBOX);
->  }
->  
-> +static int nbl_dev_clean_mailbox_schedule(struct nbl_dev_mgt *dev_mgt)
-> +{
-> +	struct nbl_dev_common *common_dev = dev_mgt->common_dev;
-> +
-> +	nbl_common_queue_work(&common_dev->clean_mbx_task);
-> +	return 0;
-> +}
-> +
->  /* ----------  Dev init process  ---------- */
->  static int nbl_dev_setup_common_dev(struct nbl_adapter *adapter)
->  {
+On 5/15/26 5:44 PM, kernel test robot wrote:
+> tree:   https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
+> head:   e98d21c170b01ddef366f023bbfcf6b31509fa83
+> commit: b4a0774bd7fd859c1d243be0919c8df39eac20c0 [3552/4394] dm: add documentation for dm-inlinecrypt target
+> compiler: clang version 20.1.8 (https://github.com/llvm/llvm-project 87f0227cb60147a26a1eeb4fb06e3b505e9c7261)
+> docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
+> reproduce: (https://download.01.org/0day-ci/archive/20260516/202605160214.wOV5aa0q-lkp@intel.com/reproduce)
+> 
+> If you fix the issue in a separate patch/commit (i.e. not just a new version of
+> the same patch/commit), kindly add following tags
+> | Reported-by: kernel test robot <lkp@intel.com>
+> | Closes: https://lore.kernel.org/oe-kbuild-all/202605160214.wOV5aa0q-lkp@intel.com/
+> 
+> All warnings (new ones prefixed by >>):
+> 
 
-Looking at nbl_dev_setup_common_dev() in the same file:
+>>> Documentation/admin-guide/device-mapper/dm-inlinecrypt.rst:1: WARNING: Title overline too short.
+> --
 
-nbl_dev_setup_common_dev() {
-        ...
-        ret = nbl_dev_setup_chan_queue(dev_mgt, NBL_CHAN_TYPE_MAILBOX);
-        if (ret)
-                return ret;
+>>> Documentation/admin-guide/device-mapper/dm-inlinecrypt.rst: WARNING: document isn't included in any toctree [toc.not_included]
+> 
+> 
+> vim +1 Documentation/admin-guide/device-mapper/dm-inlinecrypt.rst
+> 
+>    > 1	========
+>      2	dm-inlinecrypt
+>      3	========
 
-        INIT_WORK(&common_dev->clean_mbx_task, nbl_dev_clean_mailbox_task);
-        common->vsi_id = disp_ops->get_vsi_id(priv, NBL_VSI_DATA);
-        if (common->vsi_id == U32_MAX)
-                return -ENOENT;
-        ...
-}
+Patch already available:
+https://lore.kernel.org/linux-doc/20260512180409.1193504-1-rdunlap@infradead.org/
 
-If operations like disp_ops->get_vsi_id() or disp_ops->get_eth_id() fail,
-the function returns the error directly. Could this leak the mailbox queue
-resources allocated by nbl_dev_setup_chan_queue() on these initialization
-error paths? 
 
-Since dev_mgt->common_dev is only assigned at the end of the setup function,
-it appears the caller nbl_dev_init() cannot clean this up either.
+-- 
+~Randy
 
-[ ... ]
-> @@ -220,9 +408,41 @@ void nbl_dev_remove(struct nbl_adapter *adapter)
->  /* ----------  Dev start process  ---------- */
->  int nbl_dev_start(struct nbl_adapter *adapter)
->  {
-> +	struct nbl_dev_mgt *dev_mgt = adapter->core.dev_mgt;
-> +	int ret;
-> +
-> +	ret = nbl_dev_configure_msix_map(dev_mgt);
-> +	if (ret)
-> +		goto config_msix_map_err;
-> +
-> +	ret = nbl_dev_init_interrupt_scheme(dev_mgt);
-> +	if (ret)
-> +		goto init_interrupt_scheme_err;
-> +	ret = nbl_dev_request_mailbox_irq(dev_mgt);
-> +	if (ret)
-> +		goto mailbox_request_irq_err;
-> +	ret = nbl_dev_enable_mailbox_irq(dev_mgt);
-> +	if (ret)
-> +		goto enable_mailbox_irq_err;
-> +
->  	return 0;
-> +enable_mailbox_irq_err:
-> +	nbl_dev_disable_mailbox_irq(dev_mgt);
-> +	nbl_dev_free_mailbox_irq(dev_mgt);
-> +mailbox_request_irq_err:
-> +	nbl_dev_clear_interrupt_scheme(dev_mgt);
-> +init_interrupt_scheme_err:
-> +	nbl_dev_destroy_msix_map(dev_mgt);
-> +config_msix_map_err:
-> +	return ret;
->  }
->  
->  void nbl_dev_stop(struct nbl_adapter *adapter)
->  {
-> +	struct nbl_dev_mgt *dev_mgt = adapter->core.dev_mgt;
-> +
-> +	nbl_dev_disable_mailbox_irq(dev_mgt);
-> +	nbl_dev_free_mailbox_irq(dev_mgt);
-> +	nbl_dev_clear_interrupt_scheme(dev_mgt);
-> +	nbl_dev_destroy_msix_map(dev_mgt);
->  }
-
-When nbl_dev_stop() is called, or when nbl_dev_start() takes the error path
-after enabling the mailbox IRQ, the driver disables and frees the interrupt,
-but does not cancel clean_mbx_task.
-
-If an interrupt fires just before the IRQ is disabled, the work remains
-queued on wq_mgt->ctrl_dev_wq and will execute asynchronously.
-
-Could this lead to a memory access issue if devres frees the common_dev
-memory when the device unbinds? Is it necessary to call cancel_work_sync()
-here to ensure any pending work is flushed or cancelled before the structure
-is destroyed?
 
