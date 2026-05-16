@@ -1,109 +1,77 @@
-Return-Path: <linux-doc+bounces-87911-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87913-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GM6mHannCGp4+gMAu9opvQ
-	(envelope-from <linux-doc+bounces-87911-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 16 May 2026 23:54:49 +0200
+	id b43DB+TpCGpD/QMAu9opvQ
+	(envelope-from <linux-doc+bounces-87913-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 00:04:20 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE7FC55DF80
-	for <lists+linux-doc@lfdr.de>; Sat, 16 May 2026 23:54:48 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 88F6C55E05E
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 00:04:19 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E1002301FF87
-	for <lists+linux-doc@lfdr.de>; Sat, 16 May 2026 21:54:09 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 13F7E3013B5A
+	for <lists+linux-doc@lfdr.de>; Sat, 16 May 2026 22:04:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 429A438643B;
-	Sat, 16 May 2026 21:54:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B412E374186;
+	Sat, 16 May 2026 22:04:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="JshZZZGp"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="aXDo6/EH"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B26AD374731
-	for <linux-doc@vger.kernel.org>; Sat, 16 May 2026 21:54:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.54
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87CC7405C48;
+	Sat, 16 May 2026 22:04:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778968449; cv=none; b=jG2I5j2uuQM5GM2TqZiojl7IradHcxbQ7VeBBIN2WLnrrsxFUyPFrk7lJv8MgkEB74VkZC6Khi09c4lwgM5VMvOie2nPf6YfJhLnhUc1acc3XAnAr/Oi1JyVPM53U583bUpFBA3qriOUqOgwAvXYjLHNmrgrFM4n+jvcPgIrPeI=
+	t=1778969054; cv=none; b=KRmGNmdufCRY4Vr6GzfFtItyaiW/ldYdCQNBMV6vlFV5fQjDwaTITwfXUCb5iey174K2M1XFvhMgO5KY3hED9BiTSV7MEYDIf+nv2Ncp+i7nx6MrH/pG6vI/SlRXiyXEHi7OCLL+bH+tzwo8Lo7W90g6sZFD2Rn0hEiT2lFWaQQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778968449; c=relaxed/simple;
-	bh=jz1nzUaADwE+K1cfDrDlEU5HkPkq87A/JGOsmNuUTl0=;
+	s=arc-20240116; t=1778969054; c=relaxed/simple;
+	bh=jqUJDOVFPnUp4elyBS4bsFweoUttqEpYWejG0EQ9Hc4=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=c4V20WPT867lyd1wHqPy3fy0E1sspHF7N+IbvhdNHYupF+qzeqZhGPDUcNBXIy+c3XsNaNTEMgsde3dP3EtH8vI3kmx8bfps0AG9RXpuyzpP6F1oIpo/czRRfCHKLMtWZCJIQFFB2JCD7G0KDQahCgQ2suAjEwv635padtD0Ssg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=JshZZZGp; arc=none smtp.client-ip=209.85.128.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-488a9033b2cso6115365e9.2
-        for <linux-doc@vger.kernel.org>; Sat, 16 May 2026 14:54:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778968446; x=1779573246; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Ra4pEf8zZZm6HhF+DQ/toHqE83w/pN0bRu9e9oIN56Y=;
-        b=JshZZZGpEBZAVzz6+EakEN3xOMEYQAOFnwucy7PU86hDls7D64gdM68+Ps1Opn5Uk+
-         Sn3E0VMNI4de3jDzYdBbW/rpJbJAeLPLwV7LgXvyNp5HsNNuDjIzTpNK6B+v71jpsX0N
-         Bo9u1hqhDZ6bpa1F8SpbE2sA/qIY2OiR+BExjbAg+bhs72LSokkNA8XAVZWFPKH11iaz
-         X9Qa+m0LQrPL6uePlUXSdCfvmPCWea9mM11JjtoP6765UuS+BXTj8nxlbyhy3Al9kfjF
-         9T6lkHKC2GVXUJLkhqgehB1JIpHEQjMr8OgZFZB1MG3uxSD0REpZUQz+jYR1iiKF19ff
-         w2EQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778968446; x=1779573246;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:sender:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Ra4pEf8zZZm6HhF+DQ/toHqE83w/pN0bRu9e9oIN56Y=;
-        b=cad/g2slhJp08mKiFxOK631n1tN+1cSpRMBcedJ69r4ZyeASMZRSBnxR4cKPbbgvSa
-         e2AXDgY5FOiQD9J2BMo/onwsM0LUvxLNghSEHvk4AFpARgDwnA15S0ZMnE7J9grksXZ+
-         pdQqT/vr+0F4qeSLjsljgOf+DEqCTkGm+V9U0H2WJghj1IWUZIuL5WyjxAztANu1sE7f
-         t7159Eq4qVQUj+oTPRzUl2rWUfbnuOpkQ9c2suwEkPH187r5AqoHwsDTIGcbEj6H0ufO
-         xuJImlhutSwdTLotHf1eOciehKFCBETKhSlM5SXAyBLOwjk3BDlf4kIq3venNEo34C8F
-         b8JA==
-X-Forwarded-Encrypted: i=1; AFNElJ/wLOfGC4sbAywkCHkh8Ealy6W1qUKVHmQDka9hBh115KjbnVQp4vih8Lp6drME6T3jdUoA3nlFI2c=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxC1eSG3Tb4bXvk/mQXLgd5NuwDKy/KJcTus5PTFuERD4Y5pTSr
-	Fl2Jt8zL+o/R4Q0ZJRgiQfb6+KgF2/19MPSrjBsB2bOH+Wnc+YLztBXD
-X-Gm-Gg: Acq92OHuZOOwHDv+BL+EeVw6Lh4UCirwGZILOisNu6kYTIAW55q3Rb2fE9Aena4CChS
-	gh9rce7QWgeQEBpli4inG7s8eThdwsnrCZug1+ZHeS5qcogedtJqLv9CanmisjXrSGuOgZ+UB+t
-	gy6vZzu3YA/bHFjcHXVTpIlp0mX/LvCXzcdEsEuUhtbOVe9bTQXvrr+V2yB2yIf7s8NQfgZ8Bj0
-	wHd6DZSNRy0aVszxyzkX2Bg6eZL0+6d4gh2Yz2CafQWOkLsWljLkl33v+JKijGDZ16bpTLfbkTi
-	eMgtFO1vn8L4q2nv+ILPenTDPOVVXwkrxMwpLiDWNCqi1vUFYmKOdZo+/CetTWN9NQ1JMirFGEF
-	kqXZnp5J3G21anwSLdycY7yGgRe9ZKU6dtE9F9qUclP7hiW59pF3xxGb8Gd6q1DemV6Y0PgK5+g
-	fk1Y5VuunUSrxliMsR4Tyu2sqCORgQ5PNhbRNfVewxTrURUqXdIfmJyUI=
-X-Received: by 2002:a05:600c:a11c:b0:48f:a75e:c21 with SMTP id 5b1f17b1804b1-48fe5fcdee9mr93789275e9.6.1778968446077;
-        Sat, 16 May 2026 14:54:06 -0700 (PDT)
-Received: from nixos-office (195-23-151-163.net.novis.pt. [195.23.151.163])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48fe4c90b27sm158383415e9.8.2026.05.16.14.54.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 16 May 2026 14:54:05 -0700 (PDT)
-Sender: Julian Braha <julian.braha@gmail.com>
-From: Julian Braha <julianbraha@gmail.com>
-To: nathan@kernel.org,
-	nsc@kernel.org
-Cc: jani.nikula@linux.intel.com,
-	akpm@linux-foundation.org,
-	gary@garyguo.net,
-	ljs@kernel.org,
-	arnd@arndb.de,
-	gregkh@linuxfoundation.org,
-	masahiroy@kernel.org,
-	ojeda@kernel.org,
-	corbet@lwn.net,
-	qingfang.deng@linux.dev,
-	yann.prono@telecomnancy.net,
-	demiobenour@gmail.com,
-	ej@inai.de,
-	linux-kernel@vger.kernel.org,
-	rust-for-linux@vger.kernel.org,
+	 MIME-Version; b=aBvVwmFe77HS8Ep2/ajjwPQ9lbmCznu/UbbGyC3uoiFrPCO4KlNuq1J4NEu8dxPwEbnYRDA1OLS8jhUqMCZW/5cUVXAWGQwiU7gvqJlZ3SLuH5kqAJmWrBS2UNuomFq+hVWtVkllJRSTSZ6mw/VaV+Ufk2TpaXXDMZPK6DbUcZU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=aXDo6/EH; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C5B7FC19425;
+	Sat, 16 May 2026 22:04:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1778969054;
+	bh=jqUJDOVFPnUp4elyBS4bsFweoUttqEpYWejG0EQ9Hc4=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=aXDo6/EHMP7g5zKEG7iKB4Qxz3Lrf3sdPP5zBHOr7Y3UUAL8c43gxrU6tilYE41jC
+	 PGIS05HaNt1c1lq39JLyLx7tr1fsaS4GxvX28m0svfsyH9NkRtxbHqZnAN8y5Ve3t1
+	 HlD0mwOVEvoKTnYOYUqnHiTCC+xpylEd3rKQU7sdj576eo3TbikY88DaTTWQBv5MdH
+	 oO6dwlxNN9jdO0fV8UGwzCWG9H++dAOoL5njpZ+OE6h0xY4GsC2lsx+bEuFrG4EGnu
+	 TbM/kd4xFvBR4mbObgv9kexhyiyLNK9QLPvIdM+TO/4qNFO+ScKXoKfXEPvyKzpDpH
+	 o7jpPzwCY6BKA==
+From: SeongJae Park <sj@kernel.org>
+To: SeongJae Park <sj@kernel.org>
+Cc: "Liam R. Howlett" <liam@infradead.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	David Hildenbrand <david@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Lorenzo Stoakes <ljs@kernel.org>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	Michal Hocko <mhocko@suse.com>,
+	Mike Rapoport <rppt@kernel.org>,
+	Shuah Khan <shuah@kernel.org>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Vlastimil Babka <vbabka@kernel.org>,
+	damon@lists.linux.dev,
 	linux-doc@vger.kernel.org,
-	linux-kbuild@vger.kernel.org,
-	Julian Braha <julianbraha@gmail.com>
-Subject: [RFC PATCH v3 3/3] MAINTAINERS: create entry for kconfirm
-Date: Sat, 16 May 2026 22:53:54 +0100
-Message-ID: <20260516215354.449807-4-julianbraha@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260516215354.449807-1-julianbraha@gmail.com>
-References: <20260516215354.449807-1-julianbraha@gmail.com>
+	linux-kernel@vger.kernel.org,
+	linux-kselftest@vger.kernel.org,
+	linux-mm@kvack.org,
+	linux-trace-kernel@vger.kernel.org
+Subject: Re: [RFC PATCH v3 00/28] mm/damon: introduce data attributes monitoring
+Date: Sat, 16 May 2026 15:03:16 -0700
+Message-ID: <20260516220317.4300-1-sj@kernel.org>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260516183712.81393-1-sj@kernel.org>
+References: 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -111,64 +79,58 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: DE7FC55DF80
+X-Rspamd-Queue-Id: 88F6C55E05E
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FREEMAIL_CC(0.00)[linux.intel.com,linux-foundation.org,garyguo.net,kernel.org,arndb.de,linuxfoundation.org,lwn.net,linux.dev,telecomnancy.net,gmail.com,inai.de,vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-87911-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	TAGGED_FROM(0.00)[bounces-87913-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[21];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[julianbraha@gmail.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	RCVD_COUNT_FIVE(0.00)[5];
-	TAGGED_RCPT(0.00)[linux-doc];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	TO_DN_SOME(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,osandov.com:email]
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
-Add myself as maintainer of kconfirm.
+On Sat, 16 May 2026 11:36:41 -0700 SeongJae Park <sj@kernel.org> wrote:
 
-Signed-off-by: Julian Braha <julianbraha@gmail.com>
----
- MAINTAINERS | 6 ++++++
- 1 file changed, 6 insertions(+)
+> TL; DR
+> ======
+> 
+> Extend DAMON for monitoring general data attributes other than accesses.
+> The short term motivation is lightweight page type (e.g., belonging
+> cgroup) aware monitoring.  In long term, this will help extending DAMON
+> for multiple access events capture primitives (e.g., page faults and
+> PMU) and eventually pivotting DAMON to a "Data Attributes Monitoring and
+> Operations eNgine" in long term.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index b2040011a386..8f4f5a009228 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -13824,6 +13824,12 @@ F:	Documentation/kbuild/kconfig*
- F:	scripts/Kconfig.include
- F:	scripts/kconfig/
- 
-+KCONFIRM
-+M:	Julian Braha <julianbraha@gmail.com>
-+S:	Maintained
-+F:	Documentation/dev-tools/kconfirm.rst
-+F:	scripts/kconfirm/
-+
- KCORE
- M:	Omar Sandoval <osandov@osandov.com>
- L:	linux-debuggers@vger.kernel.org
--- 
-2.53.0
+Sashiko found [1] no blocker for this version but a nice document wordsmithing
+idea.  Unless I get other opinions, I will drop RFC tag from the next version
+of this series.
 
+[1] https://lore.kernel.org/damon/20260516185032.82261-1-sj@kernel.org/
+
+
+Thanks,
+SJ
+
+[...]
 
