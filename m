@@ -1,50 +1,50 @@
-Return-Path: <linux-doc+bounces-88024-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88025-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4PffM934CWrivgQAu9opvQ
-	(envelope-from <linux-doc+bounces-88024-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 19:20:29 +0200
+	id iLp0Kt/5CWrivgQAu9opvQ
+	(envelope-from <linux-doc+bounces-88025-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 19:24:47 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A331562784
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 19:20:29 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id AB2D15627E9
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 19:24:46 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id EC2343009B3D
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 17:20:27 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 57F0B300292E
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 17:24:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A94FD3C454E;
-	Sun, 17 May 2026 17:20:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2FF983C4B8A;
+	Sun, 17 May 2026 17:24:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WJo6cs3/"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="pTx0Mu1I"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 81DC83BF69C;
-	Sun, 17 May 2026 17:20:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D24525FA10;
+	Sun, 17 May 2026 17:24:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779038424; cv=none; b=QsRZDOiAhzif45flbV8+Vi2iQCyCN4ct8Bqs1LoDhp/ApcGHt/dXDX20JYCLahGzGdbVeayVA+Qz9EKTrQ7wg6RYF6m1Vj+7Zsnj2o36MZCpk9b9wYkbjrd1xo63KWNzr5dM+czvEznOz+RJayDmrDilrdvqCQbV5cT0SOC9+08=
+	t=1779038682; cv=none; b=oHuiiSsciQ/GSSgk/ZgUK+kEgB8E7TyxttPGbk0TDL1zDll37Xvgelo6wjLFg3BtpQGAaE+na8zCaysqEpIgsn06Vj33TpfDL8lE9WqNEkN066ciRv2qvS+9s3/qqOKrjYJk43YPISJwd1UTP5/2LZ7G1lq9eOoMLBQGn4uCE3k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779038424; c=relaxed/simple;
-	bh=9zAiXASte9+QF5zhIHe0oi7WTzSBFGj/YZujYlv9iI0=;
+	s=arc-20240116; t=1779038682; c=relaxed/simple;
+	bh=18wU4AaA8QQO+xGJ2kIhTsunkndrM76R9Ox2d9eFd5E=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=nwCDbLXj/dWLB8R/cIzJGBhG8XWCrZaqF48QgC88DG+fEpGhYtr0TfidyG/wHo1H/5m52OfPV7tMQucLS/xSKDDxXTMJapTn2RlrYoYirCeLOXVkEaD8L+jAQey0QN635/9WN9brlAfYfvQrI5lglq+YSpjdeH3G6srirLSSXno=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WJo6cs3/; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8D6DFC2BCB0;
-	Sun, 17 May 2026 17:20:19 +0000 (UTC)
+	 Content-Type:Content-Disposition:In-Reply-To; b=eBPE7iF24sgWqp6LmSnq4OytWsekyoVO+YkRdMwtR8EPgC6+5KiCyRQWHheVU0cFfTdmEf6fHUP88+kwJ90eLkU9s0wO16epx9GfTk90ICAvYouBT9lCLauPhGbIPsMGskgpqVO2y2BZGvbrW3WVz+MruwbFzmjwzZouKuxxYuU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=pTx0Mu1I; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 80395C2BCB0;
+	Sun, 17 May 2026 17:24:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1779038424;
-	bh=9zAiXASte9+QF5zhIHe0oi7WTzSBFGj/YZujYlv9iI0=;
+	s=k20201202; t=1779038681;
+	bh=18wU4AaA8QQO+xGJ2kIhTsunkndrM76R9Ox2d9eFd5E=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=WJo6cs3/G+d+DgzP07h7g/GxQyDv87IyuonHXZQobWN/j+tdQjATiXjrmQtCjzsC9
-	 NyBqn4HoFfUKWA6G8ZeRsTgw0uNeD3P1bLtTkpoHKIXocS8K295tlVHrk0shwjaiww
-	 E1Ryg4TlvJy1o+Sg1bviynvbvOz1pAH5WbvfqyaYL4x2pDgl5V2Ka3ZTxMP5qeiRkH
-	 +FFtryp8VYsi1ITV9ECyMeyCxnh9kENVXjLk+ywamUugvuNeJ1tod0nGMQ3T/ewY74
-	 uE7ytb7QgSMfZYWgUVeGGQImxzxIuvz8ifr6Q39qWN0qRV79BZKws5x+BMd1SNnkn2
-	 DvkXBnt3QMezA==
-Date: Sun, 17 May 2026 20:20:15 +0300
+	b=pTx0Mu1I8DpGHA2aJuMI7NKp8xzGNMC0P0k63npy00s0iHZlPGlMRb+FwVyDrnWf9
+	 NUv4DcxtPx7aMQ4I2Kx34VcOi65DjSVPQJnL/GETiVIvTnA8tGowjq2iazzDert6P0
+	 RK0J9ayNhloK1k5Kg+LkgpODxR6Rrq0lAM1fXAjqbK5uL1GtOz72KXhepk0qmzD3/7
+	 wPPI4rJnRp8cqjgVyAn3OmyWAF2jncHX60DelW3kF2fNLKgHRQILWN0vhHIQO8Trkj
+	 FNPtfWIYKop/JzvEoixE1K+Ya35mFMRgPDLEeVJ5ADOZx7cU3UeQ+H+GQpsn4PrOUZ
+	 +FwOpkeLN/CBg==
+Date: Sun, 17 May 2026 20:24:33 +0300
 From: Mike Rapoport <rppt@kernel.org>
 To: Pasha Tatashin <pasha.tatashin@soleen.com>
 Cc: linux-kselftest@vger.kernel.org, shuah@kernel.org,
@@ -53,11 +53,11 @@ Cc: linux-kselftest@vger.kernel.org, shuah@kernel.org,
 	linux-kernel@vger.kernel.org, corbet@lwn.net, dmatlack@google.com,
 	kexec@lists.infradead.org, pratyush@kernel.org, skhawaja@google.com,
 	graf@amazon.com
-Subject: Re: [PATCH v2 01/10] liveupdate: centralize state management into
- struct luo_ser
-Message-ID: <agn4z5ZrFBi9AIGw@kernel.org>
+Subject: Re: [PATCH v2 02/10] liveupdate: Extract luo_file_deserialize_one
+ helper
+Message-ID: <agn50TRvhDpGm_9v@kernel.org>
 References: <20260514222628.931312-1-pasha.tatashin@soleen.com>
- <20260514222628.931312-2-pasha.tatashin@soleen.com>
+ <20260514222628.931312-3-pasha.tatashin@soleen.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -66,26 +66,26 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260514222628.931312-2-pasha.tatashin@soleen.com>
-X-Rspamd-Queue-Id: 4A331562784
+In-Reply-To: <20260514222628.931312-3-pasha.tatashin@soleen.com>
+X-Rspamd-Queue-Id: AB2D15627E9
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-88024-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-88025-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[14];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	MISSING_XM_UA(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
@@ -95,146 +95,23 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,soleen.com:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,soleen.com:email]
 X-Rspamd-Action: no action
 
-On Thu, May 14, 2026 at 10:26:19PM +0000, Pasha Tatashin wrote:
-> Transition the LUO to ABI v2, which centralizes state management into a
-> single struct luo_ser header.
-> 
-> Previously, LUO state was spread across multiple FDT properties and
-> subnodes. ABI v2 simplifies this by placing all core state, including
-> the liveupdate number and physical addresses for sessions and FLB
-> headers into a centralized struct luo_ser.
-> 
+On Thu, May 14, 2026 at 10:26:20PM +0000, Pasha Tatashin wrote:
+> Extract the logic for deserializing single entries for files into
+> separate helper functions. In preparation to a linked-block
+> serialization for files.
+
+It would be nice to mention that this is a pure code movement without
+indented changes.
+ 
 > Signed-off-by: Pasha Tatashin <pasha.tatashin@soleen.com>
 > ---
->  include/linux/kho/abi/luo.h      | 91 +++++++++++---------------------
->  kernel/liveupdate/luo_core.c     | 59 ++++++++++++++-------
->  kernel/liveupdate/luo_flb.c      | 65 ++++-------------------
->  kernel/liveupdate/luo_internal.h |  8 +--
->  kernel/liveupdate/luo_session.c  | 57 +++-----------------
->  5 files changed, 93 insertions(+), 187 deletions(-)
+>  kernel/liveupdate/luo_file.c | 77 ++++++++++++++++++++----------------
+>  1 file changed, 44 insertions(+), 33 deletions(-)
 
-This looks lovely :)
-
-> @@ -115,27 +117,29 @@ static int __init luo_early_startup(void)
->  		return -EINVAL;
->  	}
->  
-> -	ln_size = 0;
-> -	ptr = fdt_getprop(luo_global.fdt_in, 0, LUO_FDT_LIVEUPDATE_NUM,
-> -			  &ln_size);
-> -	if (!ptr || ln_size != sizeof(luo_global.liveupdate_num)) {
-> -		pr_err("Unable to get live update number '%s' [%d]\n",
-> -		       LUO_FDT_LIVEUPDATE_NUM, ln_size);
-> +	header_size = 0;
-> +	ptr = fdt_getprop(luo_global.fdt_in, 0, LUO_FDT_ABI_HEADER, &header_size);
-> +	if (!ptr || header_size != sizeof(u64)) {
-> +		pr_err("Unable to get ABI header '%s' [%d]\n",
-> +		       LUO_FDT_ABI_HEADER, header_size);
->  
->  		return -EINVAL;
->  	}
->  
-> -	luo_global.liveupdate_num = get_unaligned((u64 *)ptr);
-> +	luo_ser_pa = get_unaligned((u64 *)ptr);
-> +	luo_ser = phys_to_virt(luo_ser_pa);
-> +
-> +	luo_global.liveupdate_num = luo_ser->liveupdate_num;
->  	pr_info("Retrieved live update data, liveupdate number: %lld\n",
->  		luo_global.liveupdate_num);
->  
-> -	err = luo_session_setup_incoming(luo_global.fdt_in);
-> +	err = luo_session_setup_incoming(luo_ser->sessions_pa);
->  	if (err)
->  		return err;
->  
-> -	err = luo_flb_setup_incoming(luo_global.fdt_in);
-> +	luo_flb_setup_incoming(luo_ser->flbs_pa);
-
-Sashiko asks: 
-
-  Is there a leak of the preserved luo_ser memory here?
-
-  The outgoing kernel allocates the header using kho_alloc_preserve(), but
-  luo_early_startup() returns without calling kho_restore_free() on the
-  luo_ser pointer once the fields have been processed. This results in an
-  unreleased memory reservation on every successful live update.
-
-This seems preexisting, and we probably don't care enough, but still...
-
-There were more comments by sashiko, didn't check them yet.
-  
-> -	return err;
-> +	return 0;
->  }
->  
->  static int __init liveupdate_early_init(void)
-> @@ -156,7 +160,8 @@ early_initcall(liveupdate_early_init);
->  /* Called during boot to create outgoing LUO fdt tree */
->  static int __init luo_fdt_setup(void)
->  {
-> -	const u64 ln = luo_global.liveupdate_num + 1;
-> +	struct luo_ser *luo_ser;
-> +	u64 luo_ser_pa;
->  	void *fdt_out;
->  	int err;
->  
-> @@ -166,27 +171,45 @@ static int __init luo_fdt_setup(void)
->  		return PTR_ERR(fdt_out);
->  	}
->  
-> +	luo_ser = kho_alloc_preserve(sizeof(*luo_ser));
-> +	if (IS_ERR(luo_ser)) {
-> +		err = PTR_ERR(luo_ser);
-> +		goto exit_free_fdt;
-> +	}
-> +	luo_ser_pa = virt_to_phys(luo_ser);
-> +
->  	err = fdt_create(fdt_out, LUO_FDT_SIZE);
->  	err |= fdt_finish_reservemap(fdt_out);
->  	err |= fdt_begin_node(fdt_out, "");
->  	err |= fdt_property_string(fdt_out, "compatible", LUO_FDT_COMPATIBLE);
-> -	err |= fdt_property(fdt_out, LUO_FDT_LIVEUPDATE_NUM, &ln, sizeof(ln));
-> -	err |= luo_session_setup_outgoing(fdt_out);
-> -	err |= luo_flb_setup_outgoing(fdt_out);
-> +	err |= fdt_property(fdt_out, LUO_FDT_ABI_HEADER, &luo_ser_pa,
-> +			    sizeof(luo_ser_pa));
->  	err |= fdt_end_node(fdt_out);
->  	err |= fdt_finish(fdt_out);
->  	if (err)
-> -		goto exit_free;
-> +		goto exit_free_luo_ser;
-> +
-> +	err = luo_session_setup_outgoing(&luo_ser->sessions_pa);
-> +	if (err)
-> +		goto exit_free_luo_ser;
-> +
-> +	err = luo_flb_setup_outgoing(&luo_ser->flbs_pa);
-> +	if (err)
-> +		goto exit_free_luo_ser;
-> +
-> +	luo_ser->liveupdate_num = luo_global.liveupdate_num + 1;
->  
->  	err = kho_add_subtree(LUO_FDT_KHO_ENTRY_NAME, fdt_out,
->  			      fdt_totalsize(fdt_out));
->  	if (err)
-> -		goto exit_free;
-> +		goto exit_free_luo_ser;
-
-And here we also seem to leak memory allocated by sesttion/flb setup.
-
->  	luo_global.fdt_out = fdt_out;
->  
->  	return 0;
->  
-> -exit_free:
-> +exit_free_luo_ser:
-> +	kho_unpreserve_free(luo_ser);
-> +exit_free_fdt:
->  	kho_unpreserve_free(fdt_out);
->  	pr_err("failed to prepare LUO FDT: %d\n", err);
+Acked-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
 
 -- 
 Sincerely yours,
