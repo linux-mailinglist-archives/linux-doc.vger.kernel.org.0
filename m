@@ -1,243 +1,273 @@
-Return-Path: <linux-doc+bounces-87959-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87961-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OFuyDwuGCWq2dwQAu9opvQ
-	(envelope-from <linux-doc+bounces-87959-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 11:10:35 +0200
+	id qNvGKAaHCWqVeAQAu9opvQ
+	(envelope-from <linux-doc+bounces-87961-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 11:14:46 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8EFDE560124
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 11:10:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 07D8D56019E
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 11:14:45 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 3E5B3300A38E
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 09:10:33 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 66BA2300A8EE
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 09:14:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0A1B53502A9;
-	Sun, 17 May 2026 09:10:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3137834FF79;
+	Sun, 17 May 2026 09:14:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="YdF2IBdZ"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="iq6WYfpW"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F782346FB0
-	for <linux-doc@vger.kernel.org>; Sun, 17 May 2026 09:10:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08EF3277007;
+	Sun, 17 May 2026 09:14:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779009031; cv=none; b=VgHfKz0Xx9PCkIz3V0qGxsc6xwDzc/QyOYt8DikPAJX+L3a11Uw1JYu9Cf1m3rCpyFXmqdgUNkKdy4fENUwCsY8Hs9VmAF6jRXmj6LJXqQMzEQsR0t+RVkpcdD2E6m+DNwZw+c0yNDUfUxQF5V4ymSuBIF8vJM9E4zxsu/v0h9c=
+	t=1779009281; cv=none; b=Y8Nkg0kDlieizWm/C2EQGw0kqexyOT8py+W+OY4qOKoOv8CrzNoVTGCWT4GHUZRCwOu4CdN9rXGtOdlUQhdo/QKo2XjpMiBPh4cyE5V69BsVOisvSiwGvCZ5JoP5KE+gXAfVkn3i2yhLNfPpUlMQs4ypOrnUpi56u/ZZaCuP+mQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779009031; c=relaxed/simple;
-	bh=giZbbwb+KGFykexkY9wTcBPAz1X8drfgDFb3/DVXeog=;
-	h=From:Date:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=HVBuVuuh/l2KtQHwYx5ap8z4W+aOm7tYh3YWF/HgWdfhcyBZ+YrSqRM53nHWa73tScbKiQEZzmi7wM6/pyNJBW6S9AlLRzw5FetGui5NmnDj8bB4F/eFswqh6XooH0Th1D5Nt5zwwzak1IOk1mHKbczs9EanSAP1n/ytbjWF2u4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=YdF2IBdZ; arc=none smtp.client-ip=209.85.128.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-488a14c31eeso6693535e9.0
-        for <linux-doc@vger.kernel.org>; Sun, 17 May 2026 02:10:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779009029; x=1779613829; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:date:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=LhmWRu1kAEOhlZEB2pEFFWdT70xT8IhgyYEkSNuFaIY=;
-        b=YdF2IBdZWg4rU9t4PVQ3oK64oST4DZ1z8hpjIhzYOwgy7Z2EbiOag+hBR71qYb2cNh
-         X0j9CMdfBXxbiMQE3T+XQQC6PIPnUXLUllM4DMf9XlBQLovZ0j59PQTdCihxGjp2hMJd
-         vGtciWWyfHVhanqF0lZI5wAaoP1jOuV9EssKgn6OQnFNzmXann2K1dUIrSWDb3CZg+8g
-         b9cboyitGC/EfmFUTwVegrP4O8CkrJkW9V+1fJWEhy/hFpngEG8LHWp5IQaQ6CARmEaZ
-         Ypg0/1FhecElngFM0ZSuUFqHFlLixvAPcxGDPqB/HjxnM8YcZHA7n15I8r5F10Kyc1/e
-         5URg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779009029; x=1779613829;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:date:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=LhmWRu1kAEOhlZEB2pEFFWdT70xT8IhgyYEkSNuFaIY=;
-        b=orJNS9BOb0TrfczMuyGyOS2Ce5sL+U2BarH1luVNgWkKbFDc1WXEAOvIKOF3vtJKlM
-         jExzdAJsF2YKYc8lT3ZPRz6//bZoGmuO7YuqQl6o88lhOP7fQzgY/bDPRz74kXDO+riw
-         upyVLEr4Z5jXKchViPZwiEBCLemkdqM9n+cdJ8kCjYfTCLoOD2xic17Fmuv8T5bVevFM
-         mRY1nCIcLnhx1NFK5laZjM+4BiTfeliQG/nelZlIwSFoks8RRdQXJkc4qfOTtp+wFv5D
-         iwzsCdG0o0VsMjsJzu7HYzBWrN8nqJZm7Tooy4w5iqovNBe3Me8co1oufZS+kAYh8m5+
-         SRrQ==
-X-Forwarded-Encrypted: i=1; AFNElJ+Tb9mWl96UwPfJAgYQYDOnHXmDJaMFMIZEUsjoOWXFwml+tzeAsXTxvUAqd8sERJIotHsT/KoBPlw=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw5H1DTxR+WS8B4mYTaDj/CHxa1AHynC2q7YFxnfrEJm+aZcKfZ
-	6PLzmVvvWR9bsPWkT5W7rAftDkuhCxRZOdQLSDZ2uAuQr+bjWaWx02Lz
-X-Gm-Gg: Acq92OG3Swc/Y+k+4+X5FY1sw/SymHdP5ublOpGzW6QypLdYWjCFxyShfPcc4avFGzV
-	cNujLQUc7hSL4SNlbhUiOGx1KBthZk9I5silRfvTuFDXiRqbr9Y6tMlp3UL/7OdhPAUIfCTAtWB
-	GXry4YpA/C/Go2GExhI7Th1g34a+pyuBz8e/E0VrrlWIb0nTi/d9DbsqliV3j0t7ER7iqsIn2Mm
-	bgDneMu9HWGAsNc8KHy7WF+7TSsteW4q0j5bpfVHVF0iNa+KSrhnszU1rFnk01lQilsOvI3mvCu
-	YjQq34co7JWY/kha5aa4PrBqtNRRa11ZrGuZx/EDP5ApYl3WhfnNXZT3s0bM22pYGgzKaalE7r7
-	dgX1KEA7DKzXtq1QbVtTk0UkfDA3lsLF15ZmYDkXFIACPB0lh1na2VZGdNwVPOkg9KbDieW2UnN
-	dixiFxDMe7kw0zsf8qEmOEGaYU8AefE5fESMFlz2dwRA3F4+/ixdU/lRKSro7aQzXeVLkhdeoX/
-	n+hNZyNxiAV/YBvMJP++T2oUNzD81urbFHorQiah7P7tLiNWg==
-X-Received: by 2002:a05:600c:8901:b0:48e:526e:1040 with SMTP id 5b1f17b1804b1-48fe63021f9mr136814135e9.23.1779009028470;
-        Sun, 17 May 2026 02:10:28 -0700 (PDT)
-Received: from RDEALENC-L01.ad.analog.com (24.206.116.103.netskope-rdns.com. [24.206.116.103])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-45da0a19b1dsm27206239f8f.17.2026.05.17.02.10.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 17 May 2026 02:10:26 -0700 (PDT)
-From: Rodrigo Alencar <455.rodrigo.alencar@gmail.com>
-X-Google-Original-From: Rodrigo Alencar <rdealenc@rdealenc-l01.ad.analog.com>
-Date: Sun, 17 May 2026 10:10:21 +0100
-To: David Laight <david.laight.linux@gmail.com>, 
-	Rodrigo Alencar <455.rodrigo.alencar@gmail.com>
-Cc: rodrigo.alencar@analog.com, linux-kernel@vger.kernel.org, 
-	linux-iio@vger.kernel.org, devicetree@vger.kernel.org, linux-doc@vger.kernel.org, 
-	Jonathan Cameron <jic23@kernel.org>, David Lechner <dlechner@baylibre.com>, 
-	Andy Shevchenko <andy@kernel.org>, Lars-Peter Clausen <lars@metafoo.de>, 
-	Michael Hennerich <Michael.Hennerich@analog.com>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Jonathan Corbet <corbet@lwn.net>, Andrew Morton <akpm@linux-foundation.org>, 
-	Petr Mladek <pmladek@suse.com>, Steven Rostedt <rostedt@goodmis.org>, 
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, Rasmus Villemoes <linux@rasmusvillemoes.dk>, 
-	Sergey Senozhatsky <senozhatsky@chromium.org>, Shuah Khan <skhan@linuxfoundation.org>
-Subject: Re: [PATCH v12 02/11] lib: kstrtox: add kstrtoudec64() and
- kstrtodec64()
-Message-ID: <uychuflukrllg3nfzzcuu4xmfi6f4trb7326yq2lg2nrbo6zpw@xjbatdimgaal>
-References: <20260510-adf41513-iio-driver-v12-0-34af2ed2779f@analog.com>
- <20260510-adf41513-iio-driver-v12-2-34af2ed2779f@analog.com>
- <kwjoyikbygik4futknqpua2tlzokradms25n2dmfa5czyj2uts@4rdfl6zlul2q>
- <ex6p5qpgsfvm5wzalpwo7whcj4m4uxzscpzxvb5ihfu2prx3fj@7skhmz3cbshw>
- <20260515202142.5dc561e0@pumpkin>
+	s=arc-20240116; t=1779009281; c=relaxed/simple;
+	bh=zO7LLDF3IRZcpQVuuBIQHB5emxoF1gEs+Tp1KaWiBbk=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=Y3aFSJUEdFT+6dbRejguZ9bXNsjnEOnYxiO5nsK9dJKaaGGcukkYZbHE/tuUZXapuBANTaOKXTs4jeH+5dG/HN8SC59szymc/irlLqxT3G7rGu/I2wunusZ/J9PezGLJzkWQeAVrXhl9IW+VMgmSTeyNEBAmeGxGY/gyFC9M/gg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iq6WYfpW; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id A549BC2BCB0;
+	Sun, 17 May 2026 09:14:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1779009280;
+	bh=zO7LLDF3IRZcpQVuuBIQHB5emxoF1gEs+Tp1KaWiBbk=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=iq6WYfpWpxPrhRLugPJxxa1mVO1l8nQKXcppgDGef2C0zaxW5FQrdVI8W+kiowbqc
+	 J9AmQeQOmXVEaK1Ap44ZYZJQNhNxEuTzNalSE+FFawZ83+gMRzXYeRHvgz9ccG8ow4
+	 gsiYrsublvOa97M1bgQ99SDBfHklRORjJyEGiIrJ1CRtOjoTkkCeV/pNbn1Rn6Nkwj
+	 AI0AyNsCdpb7ylnGVQon2qh+LYXJCitXt05+rr3c67igtyPzpQfpB+QNLjqsf0fPLo
+	 yZHl0nCm/SWRowyKVz9iWn3k3rMh2m43G/raGtKPjaz8orth2W0M8G5qCcRtHrrFjW
+	 4dns0p1I5uKYg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FF0FCD4F21;
+	Sun, 17 May 2026 09:14:40 +0000 (UTC)
+From: Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>
+Subject: [PATCH v13 00/12] ADF41513/ADF41510 PLL frequency synthesizers
+Date: Sun, 17 May 2026 10:13:55 +0100
+Message-Id: <20260517-adf41513-iio-driver-v13-0-bb6e134a360f@analog.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260515202142.5dc561e0@pumpkin>
-X-Rspamd-Queue-Id: 8EFDE560124
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIANOGCWoC/33SzUrEMBAA4FdZeraSmfx78j3EQ5qZ7AZ0K60UZ
+ dl3Ny1IK2k9Zsh8yfzcmpGHzGPzdLo1A095zP21HEA+nJp4Cdczt5lKoEGBGgBEGygp0CDbnPu
+ Whjzx0IYQgws2OeG4KZkfA6f8tbAvr+V8yeNnP3wvr0wwR//3JmhFi5RcxyJRNPwcruGtPz/G/
+ r2ZwQlXBMHvI1iQjtEHJ0lbLytE/iJGgHD7iJx/IgmkhcBJuQpRGwTMPqIKQl1nyViHCLZC9AZ
+ BuY/opSeRHWBAolAhZoPIg8aagsSkDEpf7nWxQuyK4FE5dm6sYJLOhk5rXyFuRaQ4KMcVxBGhA
+ hujMrpC/AbBg3J8QUBiEiSskVZVCIhVKekH2ybm+SQDQhnSStfzAVgZLQ7aAsvWdpa9j4ldwpr
+ BDXO4+/PeShUSMqG1Pv1h7vf7D5f9bi61AwAA
+X-Change-ID: 20251110-adf41513-iio-driver-aaca8a7f808e
+To: linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-doc@vger.kernel.org
+Cc: Jonathan Cameron <jic23@kernel.org>, 
+ David Lechner <dlechner@baylibre.com>, Andy Shevchenko <andy@kernel.org>, 
+ Lars-Peter Clausen <lars@metafoo.de>, 
+ Michael Hennerich <Michael.Hennerich@analog.com>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+ Andrew Morton <akpm@linux-foundation.org>, Petr Mladek <pmladek@suse.com>, 
+ Steven Rostedt <rostedt@goodmis.org>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
+ Rasmus Villemoes <linux@rasmusvillemoes.dk>, 
+ Sergey Senozhatsky <senozhatsky@chromium.org>, 
+ Shuah Khan <skhan@linuxfoundation.org>, 
+ Rodrigo Alencar <rodrigo.alencar@analog.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1779009279; l=6740;
+ i=rodrigo.alencar@analog.com; s=default; h=from:subject:message-id;
+ bh=zO7LLDF3IRZcpQVuuBIQHB5emxoF1gEs+Tp1KaWiBbk=;
+ b=dCv/SosHG9dAfj4ceUD0PM+MjCQQ8b+X25G1zxWXxAM7CVijOnfWfIi6F275Tc+/fy0bzUI2R
+ 6qTpGU1RIQTDm98qlaKyXdmIICFEB10ubMpFO48EF78UphEKPKyMEYj
+X-Developer-Key: i=rodrigo.alencar@analog.com; a=ed25519;
+ pk=ULeHbgU/OYh/PG/4anHDfLgldFItQHAhOktYRVLMFRo=
+X-Endpoint-Received: by B4 Relay for rodrigo.alencar@analog.com/default
+ with auth_id=561
+X-Original-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
+Reply-To: rodrigo.alencar@analog.com
+X-Rspamd-Queue-Id: 07D8D56019E
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-87959-lists,linux-doc=lfdr.de];
-	FREEMAIL_TO(0.00)[gmail.com];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[23];
+	TAGGED_FROM(0.00)[bounces-87961-lists,linux-doc=lfdr.de,rodrigo.alencar.analog.com];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	MIME_TRACE(0.00)[0:+];
 	TO_DN_SOME(0.00)[];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	HAS_REPLYTO(0.00)[rodrigo.alencar@analog.com];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[455rodrigoalencar@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	NEURAL_HAM(-0.00)[-0.997];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	MISSING_XM_UA(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	NEURAL_HAM(-0.00)[-1.000];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
-On 26/05/15 08:21PM, David Laight wrote:
-> On Fri, 15 May 2026 17:05:06 +0100
-> Rodrigo Alencar <455.rodrigo.alencar@gmail.com> wrote:
-> 
-> > On 26/05/13 10:41AM, Rodrigo Alencar wrote:
-> > > On 26/05/10 01:42PM, Rodrigo Alencar via B4 Relay wrote:  
-> > > > From: Rodrigo Alencar <rodrigo.alencar@analog.com>
-> > > > 
-> > > > Add helpers that parses decimal numbers into 64-bit number, i.e., decimal
-> > > > point numbers with pre-defined scale are parsed into a 64-bit value (fixed
-> > > > precision). After the decimal point, digits beyond the specified scale
-> > > > are ignored.  
-> > > 
-> > > Hi Andy,
-> > > 
-> > > I am starting over here, the other conversation is getting hard to follow.
-> > > This is my new proposal...  
-> > 
-> > +cc David
-> 
-> I just wouldn't do it this way :-)
-> 
-> You end up with more code than you would get if you just converted the digits.
+This patch series adds support for the Analog Devices ADF41513 and ADF41510
+ultralow noise PLL frequency synthesizers. These devices are designed for
+implementing local oscillators (LOs) in high-frequency applications.
+The ADF41513 covers frequencies from 1 GHz to 26.5 GHz, while the ADF41510
+operates from 1 GHz to 10 GHz.
 
-I am not sure about having more code, most of it is reused. The rest is input
-validation and scaling.
+Key features supported by this driver:
+- Integer-N and fractional-N operation modes
+- High maximum PFD frequency (250 MHz integer-N, 125 MHz fractional-N)
+- 25-bit fixed modulus or 49-bit variable modulus fractional modes
+- Digital lock detect functionality
+- Phase resync capability for consistent output phase
+- Load Enable vs Reference signal syncronization
 
-...
+The series includes:
+1. PLL driver implementation
+2. Device tree bindings documentation
+3. IIO ABI documentation
 
-> > > This function now becomes:
-> > > 
-> > > 	static int _kstrtoudec64(const char *s, unsigned int scale, u64 *res)
-> > > 	{
-> > > 		u64 _res = 0;
-> > > 		unsigned int rv_int, rv_frac;
-> > > 
+Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
+---
+Changes in v13:
+- Introduce _parse_integer_limit_init()
+- Better support for 0 and larger scales in kstrtodec64()
+- Increase test scope for kstrtodec64()
+- Fix LSB_P1 check at startup when going for fixed modulus mode.
+- Clear phase adjust when setting phase (It turns out sashiko was correct).
+- Make sure Load Enable is not selected when powering up.
+- Address some minor comments.
+- Link to v12: https://lore.kernel.org/r/20260510-adf41513-iio-driver-v12-0-34af2ed2779f@analog.com
 
-integer part is parsed here:
+Changes in v12:
+- Contraint charge pump current.
+- Fix division-by-zero issues.
+- Address PM and sysfs powerdown conflicts.
+- Program proper phase resync value in clk divider mode.
+- Link to v11: https://lore.kernel.org/r/20260506-adf41513-iio-driver-v11-0-2b7e99cfe8f2@analog.com
 
-> > > 		rv_int = _parse_integer(s, 10, &_res);
-> > > 		if (rv_int & KSTRTOX_OVERFLOW)
-> > > 			return -ERANGE;
-> > > 		s += rv_int;
-> > > 
-> > > 		if (*s == '.')
-> > > 			s++; /* skip decimal point */
-> > > 
+Changes in v11:
+- Cleanup ext info attribute read/write callbacks.
+- Adjust attribute names in the documentation.
+- Turn s64 compose macros into static inline functions.
+- Link to v10: https://lore.kernel.org/r/20260415-adf41513-iio-driver-v10-0-df61046d5457@analog.com
 
-fractional part is parsed here:
-(combined into the result so we can just skip the decimal point)
+Changes in v10:
+- Drop simple_strntoull() changes
+- Create kstrtodec64() and kstrtoudec64() helpers. 
+- Add IIO value format for 64-bit decimal values.
+- PLL driver code implements new decimal format for frequency attr. 
+- Link to v9: https://lore.kernel.org/r/20260320-adf41513-iio-driver-v9-0-132f0d076374@analog.com
 
-> > > 		rv_frac = _parse_integer_limit_init(s, 10, _res, &_res, scale);
-> > > 		if (rv_frac & KSTRTOX_OVERFLOW)
-> > > 			return -ERANGE;
-> > > 		s += rv_frac;
-> > > 
+Changes in v9:
+- Expose simple_strntoull() in a safer prototype instead of new kstrntoull()
+- Link to v8: https://lore.kernel.org/r/20260303-adf41513-iio-driver-v8-0-8dd2417cc465@analog.com
 
-input validation on the presence of digits:
-(similar to checking rv in _kstrtoull())
+Changes in v8:
+- Add new function kstrntoull() to lib/kstrtox.c and tests to lib/test-kstrtox.c.
+- Drop custom iio u64 parser, replacing it for kstrntoull().
+- Dedicated MAINTAINERS entry for drivers/iio/test/iio-test-fixpoint-parse.c.
+- Link to v7: https://lore.kernel.org/r/20260216-adf41513-iio-driver-v7-0-b0ed387ab559@analog.com
 
-> > > 		if (!rv_int && !rv_frac && !isdigit(*s))
-> > > 			return -EINVAL; /* no digits at all */
-> > > 
-> > > 		while (isdigit(*s)) /* truncate digits */
-> > > 			s++;
-> > > 
+Changes in v7:
+- Addressed minor suggestions.
+- frequency_resolution ABI for AD4350 removed in favor of generic one.
+- Link to v6: https://lore.kernel.org/r/20260130-adf41513-iio-driver-v6-0-cf46239026bc@analog.com
 
-termination requirement:
+Changes in v6:
+- Drop usage of simple_strtoull().
+- Implement better overflow checks with iio_safe_strntou64().
+- Link to v5: https://lore.kernel.org/r/20260123-adf41513-iio-driver-v5-0-2dce812a2dda@analog.com
 
-> > > 		if (*s == '\n')
-> > > 			s++;
-> > > 		if (*s)
-> > > 			return -EINVAL;
-> > > 
+Changes in v5:
+- Drop local parsing of 64-bit plus fractional parts
+- Add iio_str_to_fixpoint64() to iio core with parsing tests
+- Add DT property dependency for adi,charge-pump-resistor-ohms
+- Add local definition for ADF41513_HZ_PER_GHZ and drop units.h patch
+- Link to v4: https://lore.kernel.org/r/20260116-adf41513-iio-driver-v4-0-dbb7d6782217@analog.com
 
-result is scaled according to (scale - rv_frac):
+Changes in v4:
+- Proper usage of units.h macros
+- Simplifications to DT property parsing
+- Adjustments to return value handling
+- Drop of simple DT property node example
+- Link to v3: https://lore.kernel.org/r/20260108-adf41513-iio-driver-v3-0-23d1371aef48@analog.com
 
-> > > 		if (_res && (scale > (19 + rv_frac) || /* log10(2^64) = 19.26 */
-> > > 		    check_mul_overflow(_res, int_pow(10, scale - rv_frac), &_res)))
-> > > 			return -ERANGE;
-> > > 
-> > > 		*res = _res;
-> > > 		return 0;
-> > > 	}
-> > > 
+Changes in v3:
+- Use FIELD_MODIFY macro in driver implementation
+- Drop refin_frequency iio attribute
+- Drop muxout-select property from dt-bindings (and rename logic-level property)
+- Use -mhz suffix in power-up frequency property
+- Address documentation issues
+- Link to v2: https://lore.kernel.org/r/20251219-adf41513-iio-driver-v2-0-be29a83d5793@analog.com
 
-That above looks straightforward to me and the tests in the next patch are thorough.
+Changes in v2:
+- separate driver implementation from extra features and improve commit messages
+- use macros from units.h
+- explanation of custom parse function: adf41513_parse_uhz
+- reorganize driver data structures
+- drop clock framework support for now
+- reorganize documentation
+- Link to v1: https://lore.kernel.org/r/20251110-adf41513-iio-driver-v1-0-2df8be0fdc6e@analog.com
 
-...
+---
+Rodrigo Alencar (12):
+      dt-bindings: iio: frequency: add adf41513
+      iio: kstrtox: add local _parse_integer_limit_init() helper
+      lib: kstrtox: add kstrtoudec64() and kstrtodec64()
+      lib: test-kstrtox: tests for kstrtodec64() and kstrtoudec64()
+      lib: math: div64: add div64_s64_rem()
+      iio: core: add decimal value formatting into 64-bit value
+      iio: test: iio-test-format: add test case for decimal format
+      iio: frequency: adf41513: driver implementation
+      iio: frequency: adf41513: handle LE synchronization feature
+      iio: frequency: adf41513: features on frequency change
+      docs: iio: add documentation for adf41513 driver
+      Documentation: ABI: testing: add common ABI file for iio/frequency
 
-> > I have a v13 ready with this. I'll give it a go soon...
-> > 
-> 
+ Documentation/ABI/testing/sysfs-bus-iio-frequency  |   11 +
+ .../ABI/testing/sysfs-bus-iio-frequency-adf4350    |   10 -
+ .../bindings/iio/frequency/adi,adf41513.yaml       |  227 ++++
+ Documentation/iio/adf41513.rst                     |  199 ++++
+ Documentation/iio/index.rst                        |    1 +
+ MAINTAINERS                                        |    9 +
+ drivers/iio/frequency/Kconfig                      |   10 +
+ drivers/iio/frequency/Makefile                     |    1 +
+ drivers/iio/frequency/adf41513.c                   | 1240 ++++++++++++++++++++
+ drivers/iio/industrialio-core.c                    |   46 +-
+ drivers/iio/test/iio-test-format.c                 |   97 +-
+ include/linux/iio/types.h                          |   29 +
+ include/linux/kstrtox.h                            |    3 +
+ include/linux/math64.h                             |   18 +
+ lib/kstrtox.c                                      |  139 ++-
+ lib/math/div64.c                                   |   15 +
+ lib/test-kstrtox.c                                 |  182 +++
+ 17 files changed, 2184 insertions(+), 53 deletions(-)
+---
+base-commit: 1548c54e9adc32a719499216f63fba14b2fc07c3
+change-id: 20251110-adf41513-iio-driver-aaca8a7f808e
 
+Best regards,
 -- 
-Kind regards,
+Rodrigo Alencar <rodrigo.alencar@analog.com>
 
-Rodrigo Alencar
+
 
