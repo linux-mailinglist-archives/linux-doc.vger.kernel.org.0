@@ -1,248 +1,161 @@
-Return-Path: <linux-doc+bounces-88029-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88021-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gCa8C7L7CWpPvwQAu9opvQ
-	(envelope-from <linux-doc+bounces-88029-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 19:32:34 +0200
+	id wMUoLoD0CWqBvgQAu9opvQ
+	(envelope-from <linux-doc+bounces-88021-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 19:01:52 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79101562962
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 19:32:32 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 40FD05625C1
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 19:01:51 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E1731303131A
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 17:30:48 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id A1225301C3F9
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 17:01:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E4F9A3CA490;
-	Sun, 17 May 2026 17:30:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C51B13C276E;
+	Sun, 17 May 2026 17:01:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="4ELVILYo"
+	dkim=pass (2048-bit key) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="gFFyo/bz"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ot1-f43.google.com (mail-ot1-f43.google.com [209.85.210.43])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC2473C13EC;
-	Sun, 17 May 2026 17:30:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C5AE633F5AB
+	for <linux-doc@vger.kernel.org>; Sun, 17 May 2026 17:01:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779039047; cv=none; b=qEl+M6KknM4yOtGXBi/WvksqTZsC1VzY/9mHbir4RYV5eD+hJrKRAJVbqePAK5cMgCEeVJcdVYnKyVxu0S6CmSJs53zWvTikHvhUyjIy1G4xbCRo59y3lMq0CzgH6lWRJvzqf3cAaQBsgoI3GRw7jpS60Ndi9gmk+yEihKU6WIM=
+	t=1779037287; cv=none; b=RXGSLqSHCAVdJ6QKcxHqOGzRO3COyMkUHltLCex3395UtJf0rxzQ0JHrYuDFabNMDkJJdb2l+eP0fpEChCA/E2pTeArno65GtHzzPuBwKM1cr09mBUIW3YgtDVCYQVYuMAi0msWeyNPCLDEU+4PvNsd823UZtZgh+P4S3OP2dDo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779039047; c=relaxed/simple;
-	bh=DRSfUrqAJXJbVTIdqxweCtFIaNZnQGpoE7tqg4FrNO8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=rLKRjgXeKIIgfPTnVGyTyhvSbfDyxwnKdYNY1nwLf3QH0wnKH0kvKWhDck8xfJCuO7tTuai9EvTnd2hsZ/X6vLMfwju2VHfiOfYEwxhbPvhJtNdePTsr+xYeZDQmK8D9RzDtDalJiSSlZ0UPFQRWO+7JJiHIqdwnCDXpJP6H5hs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=4ELVILYo; arc=none smtp.client-ip=198.137.202.133
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=do72l8TBC+8Jj9AHwbmpNhWmI6qpXHRcwH0HVceqiQo=; b=4ELVILYolYp0dDoclVtxjrfzkh
-	y2JUBaVKoaZYEVtU36+OkI7tKqClQn4ulgJXL4ktpUYIbCXpl9IW0LHJJQdBrkMpstxRI+zdtU1X6
-	uxRNR4o7ojvxY207YOSWtAtnga1cecOBw0CT2/86aBM8Zi6DTyG0QTe9kcpmec8F63dRX/QkXN5/C
-	V+1QJNa6erJI/CMMX51LevHoVweaRCEllmt9SVZcbE5lRAxBJBX5cjnm4C3TgDXOKSIMr5fr6tt5e
-	3QmDRkhCdpToyPh3sHhgTLy7NlFM55AUPv456ueGgcUeCREyxsy182VDEjoR6HpuK/8YDFlLSVz20
-	XknKmy/Q==;
-Received: from [50.53.43.113] (helo=[192.168.254.34])
-	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wOeSk-0000000D28F-3YTd;
-	Sun, 17 May 2026 16:35:34 +0000
-Message-ID: <9cee25bf-c2ec-4e1c-9c21-bfe043dc6720@infradead.org>
-Date: Sun, 17 May 2026 09:35:34 -0700
+	s=arc-20240116; t=1779037287; c=relaxed/simple;
+	bh=tmhO9ONS+I2ZZ/ogSFXIuW1oh1JcW7wCHoXai3f3evM=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=H1ODJp6m3r5stnq16JSG5665Il3VJO6IHaZ11c5wDzLYtWDwC63ywsLHPMenPhuTYqp+FQQDmQv7RYhF9/3AHyIaqIpOYfGE5mRynn6lMbLPNGfqKxjfi/fRV8dfWygnQJLYc6eGbP0SBZnPWq/PxSYV6rvR9OtYNdS2HmjhKBw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b=gFFyo/bz; arc=none smtp.client-ip=209.85.210.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+Received: by mail-ot1-f43.google.com with SMTP id 46e09a7af769-7dbccf6a23dso1389606a34.2
+        for <linux-doc@vger.kernel.org>; Sun, 17 May 2026 10:01:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1779037282; x=1779642082; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=eHtZ1FRLItPRp/kCXOsjA2zW8HDB2xesQ4ejF3mSkns=;
+        b=gFFyo/bzImcHmaVgDk4qOl1DTt/ieApMUF8PkY4yrZvqIr5At4+LNVPS+F5tPnh+Bc
+         6I24Bu2T7jZ5KMzC+gHlCePzc3ayUMUR90P6b0PeHf+bnjtJCZEdSjlPLA0gVHHDU7av
+         hJ65EoxJtBJIYRloAyqJl0Q2NvgrDFaWjzoYfLEsztnEbE7b5kmzD7nUELi99XNtKuJf
+         sOHFhZH+u4SrVUUFmklfhVZDt6q+ez7n69ULDCrO9A+XCbMq2kGod+/G7LimI6zQnPn3
+         HPLusXrGLptM++JWzkm5ashf3TtBftp1VqDDEvhLb4YSb0oUTV7nq97TVW5RD5TVULpQ
+         68vw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1779037282; x=1779642082;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=eHtZ1FRLItPRp/kCXOsjA2zW8HDB2xesQ4ejF3mSkns=;
+        b=Zl50PYa0T6RYerWAtuIwDuYrnOfTDKyLlYghzNEbm31YDRwf3z8LmOM+OzNV4hgJig
+         1F1hX9jKT0DbWVmtXM4ZB3VuS2glnwzqVJLJRksK3lUGAaP+M54WhemmtlnnHVmHQmDa
+         ES7N4xXHeWeRtvDmlJCgUXK671x47K6L/qXaswBOWcpG9ChBj3R/s01cSuJ59AH05EVA
+         xdZjLhzSYNMRMbYi3EFxnPmdlIK39+4j9mK3cQbUrA7yeVkj+dB97/ldmmo9moNvfjQG
+         qhkMPb3q0vjAVlDRYtOqDpijUS/L+o0ewv361fza9TrYgLoHRcb3vioUg0ZoLAoesC+0
+         wV1w==
+X-Gm-Message-State: AOJu0YxV5Rjy6fk7m+eWnd8dl8b8djaHKrMboi+wn+sAiwNqjefZSCrx
+	zEAYoHv+eFcU2BIX48xszvOEqqdA/kV735WMPSUmu87brYakO948CTInPsJDwYzn9nY=
+X-Gm-Gg: Acq92OGOMfjA0AhNLl4ztmhLEULQNBKJw3Wep0bMsZkI+/7wBM53jB/3oy0dQmj+bw5
+	FRaKq/DO/auCV+upom6m4SBCoNhBEStcdGW8HnuQkiPxQDPXRecMXZ+/5sUDKua5jHQAVs684eR
+	7Fak7iib2tLdcuFv9z5U6t7ydrliw7/AVlDjlNUe3neWW49l/WfqxVyr6FhKaN8jjtQyorhGcf+
+	PNnB2FaPfTICo4EaZef+TvAr/yAB+SthAR8HFUP/kwe6jc5ZZ9vKsGp9Ppnhdi3ryXvo2iHshpt
+	E6EH65j2vGvry81VovvUPrN/vuP+JPAV1feMtpQjWjJZYVDJ93o0FdwisrcpckVA/X3wKJHFewF
+	2U9AQ+Jtxvc+Y9UgPaR84l2oK5pSp19WDewE7Qc4XEAqHGlYIUupyODfQwQB1lzJVxlPIc+T7CJ
+	aD85OWkcOW/fzvE6wpkbW41YcgDjaStZw5pYWzMg==
+X-Received: by 2002:a05:6830:4118:b0:7dd:9b19:a875 with SMTP id 46e09a7af769-7e4ea0529cdmr8843719a34.2.1779037282041;
+        Sun, 17 May 2026 10:01:22 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:7a4b:ddf0:f61:f58d])
+        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7e55b7c68d6sm5890859a34.3.2026.05.17.10.01.21
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 17 May 2026 10:01:21 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+Subject: [PATCH 0/2] docs: iio: update dated triggered buffer example
+Date: Sun, 17 May 2026 12:00:57 -0500
+Message-Id: <20260517-iio-doc-triggered-buffer-update-helpers-v1-0-7f00d4188f6f@baylibre.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] docs: gpu: fix spelling errors and remove duplicate
- sentence
-To: Elliot Tester <elliotctester1@gmail.com>, alexander.deucher@amd.com,
- christian.koenig@amd.com, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, tzimmermann@suse.de, airlied@gmail.com, simona@ffwll.ch,
- corbet@lwn.net
-Cc: skhan@linuxfoundation.org, amd-gfx@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20260517134122.38389-1-elliotctester1@gmail.com>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20260517134122.38389-1-elliotctester1@gmail.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 79101562962
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXNQQ6CMBBG4auQWTsJoIh4FeMC2r9ljIFm2hoTw
+ t2tuvw2720UoYJI12ojxUuirEtBc6jIzOPiwWKLqa3bc901PYusbFfDScV7KCxP2Tko52DHBJ7
+ xDNDIcD2Ol6EzgztRqQWFk/fvdLv/HfP0gEnfPO37ByfuTjqLAAAA
+X-Change-ID: 20260517-iio-doc-triggered-buffer-update-helpers-ef7e3895c9f4
+To: Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>, Jonathan Cameron <jic23@kernel.org>, 
+ =?utf-8?q?Nuno_S=C3=A1?= <nuno.sa@analog.com>, 
+ Andy Shevchenko <andy@kernel.org>
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-iio@vger.kernel.org, David Lechner <dlechner@baylibre.com>
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=757; i=dlechner@baylibre.com;
+ h=from:subject:message-id; bh=tmhO9ONS+I2ZZ/ogSFXIuW1oh1JcW7wCHoXai3f3evM=;
+ b=owEBbQGS/pANAwAKAcLMIAH/AY/AAcsmYgBqCfRM1LWCrjB+ROYhux20WhU+SwORuzhIZQO3S
+ KLiHPPhofaJATMEAAEKAB0WIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCagn0TAAKCRDCzCAB/wGP
+ wPylB/9wiTNT2XhBbdQ8ztto0m10cm30vTO+JQrjM6aswOjtMrjtDqLf7I87nUqvbKM8q3HBy/a
+ UEfuCPP59lT+woFvpVfrm8kDRNRIOBNvN2q5uM0PqFUstP45GXb+KR66QgVkYGEO+9k2y+u85qZ
+ CcAmI2QKy0Pn+x1wTi9QXUxi4Qmuf601Hq6Ug36lMkri0lNAgVVvyqyhfa91pRDOiT/d7f+n1IK
+ ja0Rc/f0eC2XZpk4o7Mkjg1dCHvCy/2TGFKykc5mA+RnpVfS6ixVFsSMU2Md+SdcpUFtpV0/wr1
+ CLNqT0yIuDXUME2SJFPjSi6/X/4xoZqSk2ZMsIO9pysqpE7X
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+X-Rspamd-Queue-Id: 40FD05625C1
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[baylibre-com.20251104.gappssmtp.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[gmail.com,amd.com,linux.intel.com,kernel.org,suse.de,ffwll.ch,lwn.net];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-88029-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
+	DKIM_TRACE(0.00)[baylibre-com.20251104.gappssmtp.com:+];
+	TAGGED_FROM(0.00)[bounces-88021-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	DMARC_NA(0.00)[baylibre.com];
+	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[dlechner@baylibre.com,linux-doc@vger.kernel.org];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:email,infradead.org:mid,infradead.org:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	RCVD_COUNT_FIVE(0.00)[5];
+	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[get_maintainer.pl:url,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,baylibre.com:email,baylibre.com:mid,baylibre-com.20251104.gappssmtp.com:dkim]
 X-Rspamd-Action: no action
 
+Noticed this example was out of date while grepping for something else.
+And when I did get_maintainer.pl on it, it didn't match the IIO
+subsystem, so we get a bonus patch to fix that too.
 
+Signed-off-by: David Lechner <dlechner@baylibre.com>
+---
+David Lechner (2):
+      MAINTAINERS: add match for IIO API docs
+      docs: iio: triggered-buffers: use new helpers in example
 
-On 5/17/26 6:41 AM, Elliot Tester wrote:
-> Fix various spelling errors in GPU docs:
-> - indicies -> indices (userq.rst)
-> - umap -> unmap (userq.rst)
-> - pre-empt -> preempt (drm-compute.rst)
-> - buffer-leaks -> buffer leaks (drm-uapi.rst)
-> - Additionally to -> In addition to (drm-uapi.rst)
-> - unpriviledged -> unprivileged (drm-uapi.rst)
-> - fucntions -> functions (todo.rst)
-> - varios -> various (todo.rst)
-> - implementions -> implementations (todo.rst)
-> - complection -> completion (todo.rst)
-> 
-> Ale remove a duplicated sentance and stray "uff." in the todo.rst, add
-> missing period after drm_ioctl.c reference, and add missing newline at
-> end of drm-uapi.rst. Fixing this would make reading the docs just a
-> little bit easier.
-> 
-> Signed-off-by: Elliot Tester <elliotctester1@gmail.com>
+ Documentation/driver-api/iio/triggered-buffers.rst | 8 ++++----
+ MAINTAINERS                                        | 1 +
+ 2 files changed, 5 insertions(+), 4 deletions(-)
+---
+base-commit: 8678fb54958893818ddeccd05fea560a4e1fc759
+change-id: 20260517-iio-doc-triggered-buffer-update-helpers-ef7e3895c9f4
 
-LGTM. Thanks.
-Acked-by: Randy Dunlap <rdunlap@infradead.org>
+Best regards,
+--  
+David Lechner <dlechner@baylibre.com>
 
-> ---
->  Documentation/gpu/amdgpu/userq.rst |  4 ++--
->  Documentation/gpu/drm-compute.rst  |  2 +-
->  Documentation/gpu/drm-uapi.rst     | 10 +++++-----
->  Documentation/gpu/todo.rst         | 11 +++++------
->  4 files changed, 13 insertions(+), 14 deletions(-)
-> 
-> diff --git a/Documentation/gpu/amdgpu/userq.rst b/Documentation/gpu/amdgpu/userq.rst
-> index 88f54393b..94427e18a 100644
-> --- a/Documentation/gpu/amdgpu/userq.rst
-> +++ b/Documentation/gpu/amdgpu/userq.rst
-> @@ -156,9 +156,9 @@ IOCTL Interfaces
->  GPU virtual addresses used for queues and related data (rptrs, wptrs, context
->  save areas, etc.) should be validated by the kernel mode driver to prevent the
->  user from specifying invalid GPU virtual addresses.  If the user provides
-> -invalid GPU virtual addresses or doorbell indicies, the IOCTL should return an
-> +invalid GPU virtual addresses or doorbell indices, the IOCTL should return an
->  error message.  These buffers should also be tracked in the kernel driver so
-> -that if the user attempts to unmap the buffer(s) from the GPUVM, the umap call
-> +that if the user attempts to unmap the buffer(s) from the GPUVM, the unmap call
->  would return an error.
->  
->  INFO
-> diff --git a/Documentation/gpu/drm-compute.rst b/Documentation/gpu/drm-compute.rst
-> index f90c3e63a..35cc8d654 100644
-> --- a/Documentation/gpu/drm-compute.rst
-> +++ b/Documentation/gpu/drm-compute.rst
-> @@ -7,7 +7,7 @@ seconds. (The time let the user wait before he reaches for the power button).
->  This means that other techniques need to be used to manage those workloads,
->  that cannot use fences.
->  
-> -Some hardware may schedule compute jobs, and have no way to pre-empt them, or
-> +Some hardware may schedule compute jobs, and have no way to preempt them, or
->  have their memory swapped out from them. Or they simply want their workload
->  not to be preempted or swapped out at all.
->  
-> diff --git a/Documentation/gpu/drm-uapi.rst b/Documentation/gpu/drm-uapi.rst
-> index 579e87cb9..0ef498bff 100644
-> --- a/Documentation/gpu/drm-uapi.rst
-> +++ b/Documentation/gpu/drm-uapi.rst
-> @@ -150,10 +150,10 @@ separate render node called renderD<num>. There will be one render node
->  per device. No ioctls except PRIME-related ioctls will be allowed on
->  this node. Especially GEM_OPEN will be explicitly prohibited. For a
->  complete list of driver-independent ioctls that can be used on render
-> -nodes, see the ioctls marked DRM_RENDER_ALLOW in drm_ioctl.c  Render
-> -nodes are designed to avoid the buffer-leaks, which occur if clients
-> +nodes, see the ioctls marked DRM_RENDER_ALLOW in drm_ioctl.c.  Render
-> +nodes are designed to avoid the buffer leaks, which occur if clients
->  guess the flink names or mmap offsets on the legacy interface.
-> -Additionally to this basic interface, drivers must mark their
-> +In addition to this basic interface, drivers must mark their
->  driver-dependent render-only ioctls as DRM_RENDER_ALLOW so render
->  clients can use them. Driver authors must be careful not to allow any
->  privileged ioctls on render nodes.
-> @@ -568,7 +568,7 @@ ENOSPC:
->  EPERM/EACCES:
->          Returned for an operation that is valid, but needs more privileges.
->          E.g. root-only or much more common, DRM master-only operations return
-> -        this when called by unpriviledged clients. There's no clear
-> +        this when called by unprivileged clients. There's no clear
->          difference between EACCES and EPERM.
->  
->  ENODEV:
-> @@ -761,4 +761,4 @@ Stable uAPI events
->  From ``drivers/gpu/drm/scheduler/gpu_scheduler_trace.h``
->  
->  .. kernel-doc::  drivers/gpu/drm/scheduler/gpu_scheduler_trace.h
-> -   :doc: uAPI trace events
-> \ No newline at end of file
-> +   :doc: uAPI trace events
-> diff --git a/Documentation/gpu/todo.rst b/Documentation/gpu/todo.rst
-> index bc9f14c8a..b13cd4347 100644
-> --- a/Documentation/gpu/todo.rst
-> +++ b/Documentation/gpu/todo.rst
-> @@ -55,7 +55,7 @@ There are still drivers that use drm_simple_display_pipe. The task here is to
->  convert them to use regular atomic helpers. Search for a driver that calls
->  drm_simple_display_pipe_init() and inline all helpers from drm_simple_kms_helper.c
->  into the driver, such that no simple-KMS interfaces are required. Please also
-> -rename all inlined fucntions according to driver conventions.
-> +rename all inlined functions according to driver conventions.
->  
->  Contact: Thomas Zimmermann, respective driver maintainer
->  
-> @@ -301,7 +301,7 @@ Various hold-ups:
->    valid formats for atomic drivers.
->  
->  - Many drivers subclass drm_framebuffer, we'd need a embedding compatible
-> -  version of the varios drm_gem_fb_create functions. Maybe called
-> +  version of the various drm_gem_fb_create functions. Maybe called
->    drm_gem_fb_create/_with_dirty/_with_funcs as needed.
->  
->  Contact: Simona Vetter
-> @@ -326,10 +326,9 @@ everything after it has done the write-protect/mkwrite trickery:
->  
->        vma->vm_page_prot = pgprot_wrprotect(vma->vm_page_prot);
->  
-> -- Set the mkwrite and fsync callbacks with similar implementions to the core
-> +- Set the mkwrite and fsync callbacks with similar implementations to the core
->    fbdev defio stuff. These should all work on plain ptes, they don't actually
-> -  require a struct page.  uff. These should all work on plain ptes, they don't
-> -  actually require a struct page.
-> +  require a struct page.
->  
->  - Track the dirty pages in a separate structure (bitfield with one bit per page
->    should work) to avoid clobbering struct page.
-> @@ -914,7 +913,7 @@ Querying errors from drm_syncobj
->  ================================
->  
->  The drm_syncobj container can be used by driver independent code to signal
-> -complection of submission.
-> +completion of submission.
->  
->  One minor feature still missing is a generic DRM IOCTL to query the error
->  status of binary and timeline drm_syncobj.
-
--- 
-~Randy
 
