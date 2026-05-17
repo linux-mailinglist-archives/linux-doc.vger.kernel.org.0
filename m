@@ -1,142 +1,175 @@
-Return-Path: <linux-doc+bounces-87951-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87957-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QBceFwFxCWpmaAQAu9opvQ
-	(envelope-from <linux-doc+bounces-87951-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 09:40:49 +0200
+	id aIi2OkZ3CWo7bQQAu9opvQ
+	(envelope-from <linux-doc+bounces-87957-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 10:07:34 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id B4F2555FAF6
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 09:40:44 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5FD4F55FE3E
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 10:07:34 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id C7637300E253
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 07:40:42 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E2C6F3004614
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 08:06:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4745130EF94;
-	Sun, 17 May 2026 07:40:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=icloud.com header.i=@icloud.com header.b="zzfi9vHz"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5A0C12F290B;
+	Sun, 17 May 2026 08:06:52 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from outbound.pv.icloud.com (pv-2005g-snip4-11.eps.apple.com [57.103.66.241])
+Received: from smtp03-ext2.udag.de (smtp03-ext2.udag.de [62.146.106.30])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 24F8830DED1
-	for <linux-doc@vger.kernel.org>; Sun, 17 May 2026 07:40:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=57.103.66.241
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A314D2E1F06;
+	Sun, 17 May 2026 08:06:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=62.146.106.30
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779003641; cv=none; b=twJO5D8luXD231wrU2b6CajTxGhsrg39K9pVYMoDwXlxBlT/RR0sFgk/Tv+QuKSu3QD/84AB30O54l+ftccufHvu+hJ9YBDfJJhbvZDhiMYlY+DwFqEPmCVqhg3GsaKN1MhJNUAeVE88dHCWSyClKsZ2j6z2WCd2MBydZRuM8Ak=
+	t=1779005212; cv=none; b=EDFoUPjIUtaqkXYgYRI76LuRXFCPigl8dhcRbPGGDc1NO9ZO/proyMgKydNk/1Q0VVQTT9k6f2BNvTSp1xFjle/H4wOVrzLjCFUZi/Jf6E6EUGRw/OGjxBNlrYqPgfkZNiOtlja3NZYDaLpAPMpcu1cJoSiyftr2RARPzbFj2BA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779003641; c=relaxed/simple;
-	bh=nP22jj1IlAjz+YBki7wpHIV1Nhe8Wwk9y4RCpnKXKJY=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=mKBy9STvWN89wM1sZIR0joAdF848pWElHUpXhLv3MdcL2rxMCe41wrTfOjMUnu00UWbqWamFKHQwWtxfQiFfSpkkyeEO9mDiS5J/g+H+ol7sBkcOC5Ax0bvoyrQEDDRg4YhvpXxxNzPRR5nUqh8OBsnwD4YuY8vxqxd18w8iesA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=icloud.com; spf=pass smtp.mailfrom=icloud.com; dkim=pass (2048-bit key) header.d=icloud.com header.i=@icloud.com header.b=zzfi9vHz; arc=none smtp.client-ip=57.103.66.241
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=icloud.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=icloud.com
-Received: from outbound.pv.icloud.com (unknown [127.0.0.2])
-	by p00-icloudmta-asmtp-us-west-1a-100-percent-0 (Postfix) with ESMTPS id D7272180010D;
-	Sun, 17 May 2026 07:40:37 +0000 (UTC)
-X-ICL-Out-Info: HUtFAUMEWwJACUgBTUQeDx5WFlZNRAJCTQhKBUMDRQBBCFYBWANLVxQEC0AFBlgARnkRUAFYHlZeWhdeTVEPDwNKEAJeBV1yGVoUXBhTRVEfVFhBDgpaBlBRHV8CCgRHBFsXRgNTRUIGFxFQAVgeVl5aF15NRx9ATWJJAVoZWxxAF0puTVMPDxlaFFwYU0VRH1RYXgRTVg5CCUoFXQJaBUAOTANfB0UHRgpLHlwaGEEYCEsBW3cCURxWDVdDVARfThkMSh1SVlsTVRdGCQ==
-Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=icloud.com; s=1a1hai; t=1779003639; x=1781595639; bh=aNvb29xy+lV9pE+SL5VbNJWu0la3P/7Ev+VY2zxukOE=; h=From:To:Subject:Date:Message-ID:MIME-Version:x-icloud-hme; b=zzfi9vHzak2GMtTVMp2F0bk8evPbPRHSLgTTiSJITBLBBnf3S+vlIQz69aH0pjemLPGsSAoyv2bbq0rmdPPSkdHfLKF2eTUcjfxHuVEAjYEChsql6U8lYafDhHxv/2FBSEVofRcpXsR2NYcShn3JfpblAycuPPL+pgvm3gCG73vn2kOyZabm4QC7zsrfbU2pl9Y/mM3o6PQxZWH7iI69VO28D1G5c7od+2Q7JzYmD+OsTvO0ccmyrsnlyFzYJiT7zkp3RHslnr7HXE7nKynfn2sMdMznJqyvNMSgGze/Ufmzez4ObOekVWRIaax1MfHNY8/SPZiYZX4GbInxseojyg==
-mail-alias-created-date: 1778972301885
-Received: from localhost.localdomain (unknown [17.56.9.36])
-	by p00-icloudmta-asmtp-us-west-1a-100-percent-0 (Postfix) with ESMTPSA id 24A90180012E;
-	Sun, 17 May 2026 07:40:33 +0000 (UTC)
-From: Sakurai Shun <ssh1326@icloud.com>
-To: Alex Deucher <alexander.deucher@amd.com>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>,
-	Simona Vetter <simona@ffwll.ch>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>
-Cc: Sakurai Shun <ssh1326@icloud.com>,
-	amd-gfx@lists.freedesktop.org,
-	dri-devel@lists.freedesktop.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 RESEND] docs: fix typo in mpo-overview.rst
-Date: Sun, 17 May 2026 16:40:13 +0900
-Message-ID: <20260517074020.5633-1-ssh1326@icloud.com>
-X-Mailer: git-send-email 2.54.0
+	s=arc-20240116; t=1779005212; c=relaxed/simple;
+	bh=uhTrkKL4IJufye3y2imoYk/TBVB6PtQaTVwPh+9QMB8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Xn1LhfR0yl0arKsuAaDQJ9Q49uV4m372tdWBOC/9ldTvin1rqr9NrY5wAHY/z0oMG5uV8WFa3kJpq/h+dVhX4s0K0yl1NHJJ4sWGn6KP0USbJ2ev0CykVtZjVh++NMcek3yr9jSX/+GTWy7xaFLsL7PrG5be6PUqvMHJ42/Na60=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=birthelmer.de; spf=pass smtp.mailfrom=birthelmer.de; arc=none smtp.client-ip=62.146.106.30
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=birthelmer.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=birthelmer.de
+Received: from localhost (075-132-067-156.ip-addr.inexio.net [156.67.132.75])
+	by smtp03-ext2.udag.de (Postfix) with ESMTPA id 4B7F9E0055;
+	Sun, 17 May 2026 09:57:42 +0200 (CEST)
+Authentication-Results: smtp03-ext2.udag.de;
+	auth=pass smtp.auth=birthelmercom-0001 smtp.mailfrom=horst@birthelmer.de
+Date: Sun, 17 May 2026 09:57:41 +0200
+From: Horst Birthelmer <horst@birthelmer.de>
+To: Matthew Wilcox <willy@infradead.org>
+Cc: Horst Birthelmer <horst@birthelmer.com>, 
+	Miklos Szeredi <miklos@szeredi.hu>, Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, Alexander Viro <viro@zeniv.linux.org.uk>, 
+	Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
+	Horst Birthelmer <hbirthelmer@ddn.com>
+Subject: Re: Re: [PATCH v2] dcache: add fs.dentry-limit sysctl with
+ negative-first reaper
+Message-ID: <aglh7SrXWbYgD3nA@fedora.fritz.box>
+References: <20260516-limit-dentries-cache-v2-1-c733a78e603b@ddn.com>
+ <agj5JkPZ7eNbFueR@casper.infradead.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Authority-Info-Out: v=2.4 cv=aahsXBot c=1 sm=1 tr=0 ts=6a0970f6
- cx=c_apl:c_pps:t_out a=azHRBMxVc17uSn+fyuI/eg==:117
- a=azHRBMxVc17uSn+fyuI/eg==:17 a=NGcC8JguVDcA:10 a=x7bEGLp0ZPQA:10
- a=ZxuoajvSgW0A:10 a=VkNPw1HP01LnGYTKEx00:22 a=v3ZZPjhaAAAA:8
- a=vi3RrHiwHXUnrlATKwIA:9 a=IxSG75etxsVYPPdR13TJ:22 a=lOdrInXjANxufYs0I0OZ:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTE3MDA4MCBTYWx0ZWRfX6mTTVoH5SiGQ
- aocRPE0aKlJMtW+3bXywpNlNeEAOpk4WyljpL7Q/aiJD/zNhycEmN+XKZOuGPguxaOSNuLMSIKH
- /18ohvGoNyTce5aZMOB4Nlg7XpaBqegdIj3XxyXUcEt5rTcDs4xOd62DwkAplQp4xnsl1PhMDrj
- cQmMbmlwspJKCqG39CQTyklbgwLwGRE6fjnuRLaYibrQN7klfBkt+mxA2OiaVlv7ASyis/WYQXm
- Z7ux6g2/mz/go3QZVhny641+vhZvLMFR0VvXTmn1fL5opuZP7+66Gb5vQjc0scQOg3KMTaXc9GT
- VS8SJLAe6SQZlAcf+B6PXYUVpzxnTHbX/HLnj/TSQNHZGRDUk7UM1ElAlZs+/0=
-X-Proofpoint-GUID: ja6PTfVLb1Z_-8LArzE4K9bA2Oo9Xayc
-X-Proofpoint-ORIG-GUID: ja6PTfVLb1Z_-8LArzE4K9bA2Oo9Xayc
-X-Apple-Category-Label: MjE0Nzk4NjU5NzY6JGNhdGVnb3J5JF9QZXJzb25hbCw=
-X-Rspamd-Queue-Id: B4F2555FAF6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <agj5JkPZ7eNbFueR@casper.infradead.org>
+X-Rspamd-Queue-Id: 5FD4F55FE3E
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-1.36 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[icloud.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64];
-	R_DKIM_ALLOW(-0.20)[icloud.com:s=1a1hai];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
+	DMARC_POLICY_SOFTFAIL(0.10)[birthelmer.de : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-87951-lists,linux-doc=lfdr.de];
-	FREEMAIL_CC(0.00)[icloud.com,lists.freedesktop.org,vger.kernel.org];
-	FREEMAIL_FROM(0.00)[icloud.com];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	FREEMAIL_TO(0.00)[amd.com,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,lwn.net,linuxfoundation.org];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-87957-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ssh1326@icloud.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[icloud.com:+];
-	RCVD_COUNT_FIVE(0.00)[5];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[horst@birthelmer.de,linux-doc@vger.kernel.org];
+	MISSING_XM_UA(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	R_DKIM_NA(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[icloud.com:email,icloud.com:mid,icloud.com:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,lwn.net:url]
 X-Rspamd-Action: no action
 
-Replace "transparant" with "transparent"
+On Sun, May 17, 2026 at 12:09:26AM +0100, Matthew Wilcox wrote:
+> On Sat, May 16, 2026 at 04:52:54PM +0200, Horst Birthelmer wrote:
+> > There was a discussion at LSFMM about servers with too many cached
+> > negative dentries.
+> > That gave me the idea to keep the dentries in general limited
+> > if the system administrator needs it to.
+> 
+> I feel you should link to the dozens of previous attempts at this kind
+> of thing to show that you're aware that this has been tried before and
+> you're doing something meaningfully different.
+> 
 
-Signed-off-by: Sakurai Shun <ssh1326@icloud.com>
----
- Documentation/gpu/amdgpu/display/mpo-overview.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Hi Matthew,
 
-diff --git a/Documentation/gpu/amdgpu/display/mpo-overview.rst b/Documentation/gpu/amdgpu/display/mpo-overview.rst
-index 59a4f54a3..ed39e53ff 100644
---- a/Documentation/gpu/amdgpu/display/mpo-overview.rst
-+++ b/Documentation/gpu/amdgpu/display/mpo-overview.rst
-@@ -167,7 +167,7 @@ and interactions with operations such as DPMS and S3:
- - ``kms_plane_multiple@atomic-pipe-*-tiling-``
- - ``kms_plane_scaling@pipe-*-plane-scaling``
- - ``kms_plane_alpha_blend@pipe-*-alpha-basic``
--- ``kms_plane_alpha_blend@pipe-*-alpha-transparant-fb``
-+- ``kms_plane_alpha_blend@pipe-*-alpha-transparent-fb``
- - ``kms_plane_alpha_blend@pipe-*-alpha-opaque-fb``
- - ``kms_plane_alpha_blend@pipe-*-constant-alpha-min``
- - ``kms_plane_alpha_blend@pipe-*-constant-alpha-mid``
--- 
-2.54.0
+thanks for looking at this.
 
+- The first limitation of dentries I could find was a patch for Linux 2.6.7
+which introduced the vfs_cache_pressure option. [1]
+This is still in use today but will not limit dentries as such just the
+relation of where to release the pressure but you have to get into a pressure
+situation for it to actually matter.
+For my case when we get into pressure the fuse server could already be in heavy
+trouble (we have had OOM events for the cgroup due to this)
+
+- in 2011 there was the attempt to limit dentries by container [2] [3]
+Here Dave Chinner made the point that the dentry cache is usually not the problem
+but the inode cache, which is exactly what we see as well, since the fuse server
+has to keep a lot of private data for every cached inode. However we have the
+information for LRU only for the dentries, so it is the best way we can keep this
+under control, limit the number of dentries to an acceptable amounr.
+
+- there was an entire series by Waiman Long starting at around 2017 [4] 
+Here even you were part of the discussion, and I think the ideas are very similar,
+I'm just more worried about unused dentries (I just prefer negative ones on
+reclaim) There are several of different attempts in this context.
+
+- then there was tbe one I mentioned in the cover letter [5]
+which was trying to modify the caching to limit the excessing traversing when
+there are so many entries.
+I'm trying to save the same symptoms but not with that approach at all. I don't
+worry at all about the chache structures.
+
+- there was [6] by Gautham Ananthakrishna
+Here the focus was on the memory used for the dentries. This is none of my concern
+in this patch. I'm trying to just not keep dentries and indirectly inodes 
+unnecessarily in the kernel and as a consequence in the fuse server in user space.
+
+- currently we have the possibility via /proc/sys/fs/dentry-negative to disable
+negative dentries completely
+I am completely agnostic to this. If an admin disables negative dentries I try to
+free some by freeing unused ones and make the limit, if not this is no problem.
+
+I'm sure I have probably missed some where the limitation of dentries was a 
+secodnary effect. I have searched for patches for fs/dcache.c that had anything
+to do with dentries.
+
+--
+As a conclusion, I think I have an uncommon perspective on the cache entries
+since I don't usually work on vfs but argue from the perspective of a fuse server
+Where the kernel makes us waste resources. This hurts way more in the FUSE context
+than in a 'normal' file system.
+I have taken the look at the dentry cache just because people told me that this
+has to be solved in the vfs (and I agree). I actually have a somewhat hacky patch
+to do this from fuse and only for the fuse sb.
+
+This patch will start a worker when we pass the set limit and free the negative
+dentries then continue on with the unused dentries based on the LRU data.
+
+What I'm trying to achieve is keep only actually used entries in if we are over
+an arbitrary limit, and trying not to mess too much with the work that is done
+by the kernel. Then there is the point that shrink_dentry_list() is only there
+since 2019, so older approaches did not have tthe possibility.
+
+The short version: This is noothing new, just a new combination of already existing
+solutions, that could be useful.
+
+[1] https://www.kernel.org/pub/linux/kernel/people/akpm/patches/2.6/2.6.7/2.6.7-mm1/broken-out/vfs-shrinkage-tuning.patch
+[2] https://lwn.net/Articles/441164/
+[3] https://lore.kernel.org/all/4DBFF1AD.90303@parallels.com/
+[4] https://lore.kernel.org/all/1500298773-7510-1-git-send-email-longman@redhat.com/
+[5] https://lore.kernel.org/linux-fsdevel/20260331012925.74840-1-raven@themaw.net/
+[6] https://lore.kernel.org/all/1611235185-1685-1-git-send-email-gautham.ananthakrishna@oracle.com/
 
