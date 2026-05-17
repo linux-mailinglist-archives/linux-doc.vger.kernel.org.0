@@ -1,241 +1,213 @@
-Return-Path: <linux-doc+bounces-88064-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88066-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GDBCOVEVCmrgwgQAu9opvQ
-	(envelope-from <linux-doc+bounces-88064-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 21:21:53 +0200
+	id OMerIhIiCmpMxAQAu9opvQ
+	(envelope-from <linux-doc+bounces-88066-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 22:16:18 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id C13A556382F
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 21:21:53 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 33F3E563B8C
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 22:16:18 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 402A53006110
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 19:21:47 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 90F743010B94
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 20:16:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D155C3328FD;
-	Sun, 17 May 2026 19:21:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E84C630C174;
+	Sun, 17 May 2026 20:16:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="WNgLu7g9"
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="HyEP2MA7"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oo1-f45.google.com (mail-oo1-f45.google.com [209.85.161.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from CH4PR04CU002.outbound.protection.outlook.com (mail-northcentralusazon11013027.outbound.protection.outlook.com [40.107.201.27])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 554F4305669
-	for <linux-doc@vger.kernel.org>; Sun, 17 May 2026 19:21:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.161.45
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779045698; cv=none; b=PY6E5WD8rk5R9zhyVmM9QU0+QMFsyHk9/mv7g5440AEeW7G8Y7wnpOUlRIN+JCmRdeJ879ZUVe0WYxVVsQySLqycDFihVilPV/i+AZBMhtqqMqlZDpJebaQvxRgZcw1kLya3R/nRYed5ItI3rN9NHtZYc89auV0cK0zKnMAR2nc=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779045698; c=relaxed/simple;
-	bh=lH1GgG6AZ3p8TFNccFcpJy8FScpxCDQooWelGA+EHCY=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Ni3ixQli4UVCTALYwXsmG8ioRzysE3llU5ImfvyNEig+jX0UQBX3q+2ez0KSQFxv2lEyssijbdpGqkw6CaM906Ps96FSSWHecqZD3AHaNdVLYLif4/p57W5simgLns+qSj9JtohnW8G7c8pj4NdswUdNpp6LfU+uacxAONSiI5I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b=WNgLu7g9; arc=none smtp.client-ip=209.85.161.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
-Received: by mail-oo1-f45.google.com with SMTP id 006d021491bc7-691de293326so818385eaf.3
-        for <linux-doc@vger.kernel.org>; Sun, 17 May 2026 12:21:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1779045694; x=1779650494; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=avFUFeQjZc5s2Fh1Gw+bXzbv6Nmu8tEYY1j2IJydQzo=;
-        b=WNgLu7g9882rZjfblRCA0f7R+Si3jCbcL1IoVyJ8xem5nV0o4D+3VgpV6BfeA4DypW
-         7Vo0DDNEbaIeGQq9qpNKAXpZ3JbsRUKtkXXyQbd7LYp+UzlHtbWugKcwH9IYl6v+zreR
-         KhBLKDwI1nosZXqI7ZfeE+rJ1YwQVs/CmhQpEBtyQpi5ukocCLV7/wsBXGELBKHDcbGB
-         jQUO0U0mVjc2XXiatiROYmSGkeYuWtLX3PIGK25sItq8Y0yZxQKl3Yr3clEDHEZwTrzK
-         o/JNEU0loLdHQ2z5VhS0G0B/wYf0i1l9qJZLFJlBmossgWlMzZJb73d4iQJ+pXbLR2yZ
-         db8Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779045694; x=1779650494;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=avFUFeQjZc5s2Fh1Gw+bXzbv6Nmu8tEYY1j2IJydQzo=;
-        b=X2vKYkY8bl0w1W7LYxUTfZGiLvXCXsh/oiugKwthwy4DddqI4pIl2b53TBme7BEkA9
-         3N9ePkW79o1K64A7oTLWKdRx6xv3gDSaw+Qfez+UMXt7jQtFJA8g59TzfzM1rGyVP8Hq
-         JRq6w7Yg7oj3JCt2ftfHY5mCl9KHoC5MnIdUKNvrD6sRnRijtuEBZQQjNFRy7x8XMMtD
-         wihB+/uzmAMi6LisFq+fGDqPj2EOk3ZJoL1V/ZtwKdO76iWlIyfngY2l4NGXfJJg2l4v
-         yH1R2EeLZs0fxpKf8Rn208EpQqBwSHMnYV/Za9snbeSfCiO0F54LzycHCdJVzyL+SMg0
-         f3Uw==
-X-Forwarded-Encrypted: i=1; AFNElJ9x1XGQUgziku3Wghg+4/8oWo5OiORbujTm8pXtDnCkT87CdPMcPs4xKDE2P3w565M0JrmAKlNOAro=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzB2tbcxI7kv+r2CFnusAPRw+/u1wX164A+JttudiNE8mpZHufM
-	TQmRSigVR22Fj5Bl5vpVIYqb2undMRJCWJXtg/l4McVzODFowAalTnsODY2fBveqtI8=
-X-Gm-Gg: Acq92OF+0j8/nLGW0byheFDBKPJH4XXu9oAeULCsllpa/tdQaWRI7f30CHn0M9cD8ty
-	Xdg+4BEhXJWtq1ADNJ9+DZVTUgwq0qRV9vMDJS8ZoBdlac4iARpwZREZj5LU3O1mwC7S3oFgtf2
-	XuQdIAnecoekdnTQMv1i35buD1hUfwNKgosDh7Tb+5tDhys4XNFUgq2+lPcGqAEiwtUxcet9PMe
-	LHUa9yTQEh/IYrIEtdG0VdF7owcBHeIdrIUAxCQjWlDMaJF6nbsg/hawkBaQ0lpdVMYcj2NAiZy
-	NYqU7nnuqHMNk6lbxG3yN5thTpG/ZDkPUPkrH8pn8+NYtEk6Hr5FhELDIotMtr3vkXJUFnDzgxc
-	cK2eqnEQiJbLJo/TEHAYFsvn3sUU2uebkpwyqMzWEiADcu+W8kRNRCdzDzp2aMwSCVA5/z04QH5
-	fyQVZ5/zAyTi0u4OmTxINNOGD3qlWxf92UqN0WqqHmZNKAIE8ccmTaoSox6Y/iDiFj7yQts0WDL
-	40auRUF6g==
-X-Received: by 2002:a05:6820:4c0b:b0:694:8e6e:2e1c with SMTP id 006d021491bc7-69c9bfc92a9mr7692055eaf.60.1779045694287;
-        Sun, 17 May 2026 12:21:34 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:7a4b:ddf0:f61:f58d? ([2600:8803:e7e4:500:7a4b:ddf0:f61:f58d])
-        by smtp.gmail.com with ESMTPSA id 006d021491bc7-69d045e6567sm4530406eaf.3.2026.05.17.12.21.31
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 17 May 2026 12:21:32 -0700 (PDT)
-Message-ID: <58a66855-9fb3-48ca-8cae-ff9277f745df@baylibre.com>
-Date: Sun, 17 May 2026 14:21:30 -0500
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6BCA3248896;
+	Sun, 17 May 2026 20:16:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.201.27
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1779048974; cv=fail; b=EKRl/2NnRbRoR4fzRmqYoFRABWu7JPPDlABqI/YKVkEW2lRnoQyscC0xL+Z4ZkqfeAN1MWUR+KwfNJmDjW9Bdtg0KWPI6MsedghiFqhZ9fHWqhJFea9ZAyEdhPQtAhIAGbfQSHdAnaxtjDojYlTt+DmxHkjoSzTmOq8en6FKSQo=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1779048974; c=relaxed/simple;
+	bh=oQ3cWbhcS3dcWvfqEtEEopip8gPlADSXK0bzW52BN+U=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=VxPKssRHh7PEJdBhnH6z3fa1PZE8guoGfaQPgYnQb4/IIjyfdxThfIC7VxdsXpQ5ltmDdjtmZTqIOTPojxizArJhZxdnU2jemYyV+g/zuytAU0T2ixbnIvmcrhv7ZhwN4W3vNHU5DH9niy/XjWf4LdgRXWxF08zerrVR0hrtyNU=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=HyEP2MA7; arc=fail smtp.client-ip=40.107.201.27
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=mcLAo4fZmssevHSOjaLoapcDMZPNMSMwOxDlNep3mMPTGk2XJdr+1a6YBweL9fJBai6IBujXPUa6AwsXEa0YMSWeA/cauofGc0ZPbiewH7gDL4a6t00MuZs5p3A8on7i0ddkYl4YpJgyBVw0xWst1SMvGw6YvWzgZVzYTP/fK+BX1sCAs+YhMPSlQ8JcHOKh5azm6zI9A/+Ir+YyjAJWtZVLVF8q1Nl1VwdYwtTn6sCh/2FhaVJ3myxZklZEut5x4kZxSfqPN0kRqvJ9YIvXigJJ9CT/DBIKXXdrLzoDvrh4OGncnCjpoxuiostStCiVFUuI3pt9Ramf6eUYQW2GKg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=H+F1ty32Ng04N0XBojEbtGgS/Jt931xMq+tkjplUw0U=;
+ b=anpkGlM+zAXuUiYNUtKgWxc7Zq76jzzh2H35MXw2pBvKljOVc4XVnJm86WitF0hXiCgZ8LL7aSdhX6rjXjD1Jzc14/KJxZ6sQPxgH4rmXEdDG9WEiqelUqQD4BbZesOw3/CoEEhKsDynDcf83R5eHePNcMZBKEEvgkJlnNmNsEZiNqqjFuw2STsHW6TERvJi5ERqbwqPgJYmYZeOEiZosp9stkDa3INzNG9MF3MkKVEpBFaCiY2aMLyL4QftQMF4Yn3DZ2oqXVXJABwtRE/brEaw/W51oS8K9VVpGvhybbPy4bdn0MWmGbIqlcrgwu7wx3YlVqP8V3PIdNRfHsxEWA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.118.233) smtp.rcpttodomain=kernel.org smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=H+F1ty32Ng04N0XBojEbtGgS/Jt931xMq+tkjplUw0U=;
+ b=HyEP2MA7ZU4qU9H9BWDxHSJibVWcoCwwqsJN8OCKavvbCp+sMYtIv4wxyUEzDuXkABk8uass7WjgatXCVTq+NdEYxXsUX/d2quRCopO+ecwMnJdspqREQLpSsfvc3LwSmCYTKiY1JLMFpsXoFnrHjm+1vi2QlXqiXSnIeccfc72eHLZQdOPsCIAbuRfo/0fJ7NEcdxah65z55Xq5Coc5KGqoe2eVkZz7F5iT3ENxubwydAplOTg5W7bmE85nc9qk1FmYiytb6Buev6HRr9cla4fXdISyPPZUt/Ap5F7nl157FZKDlj5QW2ajLIJbFgtbKmjnwrWp/Ex9CgfT78vdyg==
+Received: from SA0PR13CA0009.namprd13.prod.outlook.com (2603:10b6:806:130::14)
+ by SA1PR12MB9247.namprd12.prod.outlook.com (2603:10b6:806:3af::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.22; Sun, 17 May
+ 2026 20:16:08 +0000
+Received: from SA2PEPF00003AEB.namprd02.prod.outlook.com
+ (2603:10b6:806:130:cafe::9d) by SA0PR13CA0009.outlook.office365.com
+ (2603:10b6:806:130::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.48.12 via Frontend Transport; Sun, 17
+ May 2026 20:16:08 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.118.233)
+ smtp.mailfrom=nvidia.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.118.233 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.118.233; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.118.233) by
+ SA2PEPF00003AEB.mail.protection.outlook.com (10.167.248.11) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.48.11 via Frontend Transport; Sun, 17 May 2026 20:16:08 +0000
+Received: from drhqmail201.nvidia.com (10.126.190.180) by mail.nvidia.com
+ (10.127.129.6) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Sun, 17 May
+ 2026 13:16:03 -0700
+Received: from drhqmail203.nvidia.com (10.126.190.182) by
+ drhqmail201.nvidia.com (10.126.190.180) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.20; Sun, 17 May 2026 13:16:02 -0700
+Received: from build-va-bionic-20251031.nvidia.com (10.127.8.14) by
+ mail.nvidia.com (10.126.190.182) with Microsoft SMTP Server id 15.2.2562.20
+ via Frontend Transport; Sun, 17 May 2026 13:16:02 -0700
+From: Vishwaroop A <va@nvidia.com>
+To: <broonie@kernel.org>, <linux-spi@vger.kernel.org>
+CC: <smangipudi@nvidia.com>, <jonathanh@nvidia.com>,
+	<thierry.reding@gmail.com>, <corbet@lwn.net>, <linux-doc@vger.kernel.org>,
+	<va@nvidia.com>
+Subject: [PATCH v5 0/2] spi: add new_device/delete_device sysfs interface
+Date: Sun, 17 May 2026 20:16:00 +0000
+Message-ID: <20260517201602.498135-1-va@nvidia.com>
+X-Mailer: git-send-email 2.17.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v11 3/6] iio: adc: ad4691: add triggered buffer support
-To: Jonathan Cameron <jic23@kernel.org>
-Cc: radu.sabau@analog.com, Lars-Peter Clausen <lars@metafoo.de>,
- Michael Hennerich <Michael.Hennerich@analog.com>,
- =?UTF-8?Q?Nuno_S=C3=A1?= <nuno.sa@analog.com>,
- Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, =?UTF-8?Q?Uwe_Kleine-K=C3=B6nig?=
- <ukleinek@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
- Mark Brown <broonie@kernel.org>, Linus Walleij <linusw@kernel.org>,
- Bartosz Golaszewski <brgl@kernel.org>, Philipp Zabel
- <p.zabel@pengutronix.de>, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>, linux-iio@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-pwm@vger.kernel.org, linux-gpio@vger.kernel.org,
- linux-doc@vger.kernel.org
-References: <20260515-ad4692-multichannel-sar-adc-driver-v11-0-eab27d852ac2@analog.com>
- <20260515-ad4692-multichannel-sar-adc-driver-v11-3-eab27d852ac2@analog.com>
- <9b7986e1-6550-415d-b301-33089ba10177@baylibre.com>
- <20260517132526.27c71b70@jic23-huawei>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260517132526.27c71b70@jic23-huawei>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: C13A556382F
+Content-Type: text/plain
+X-NV-OnPremToCloud: ExternallySecured
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA2PEPF00003AEB:EE_|SA1PR12MB9247:EE_
+X-MS-Office365-Filtering-Correlation-Id: 89097fed-721e-4e68-6f1b-08deb451218a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700016|376014|82310400026|1800799024|30052699003|11063799003|13003099007|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	vKJ1JKfTWzGTg5nTYCPcBCjsvtrZN+PqjO+eu/meYfMeEem1lCqDmpLe+FHeR9+zSLDXrFFwXmVfWacBhf7bAr8NLo47wcZd7f2bVDRVTEQUif56S3cFK7ElxMaNXcBG/3VQNOT7qML6GpX7qUonll1GWbFYzKFuCJSVp3i0VwpPGwPINjAl3PRKcaQvbRvQaa//36Ctp9CrKY0nZ7BqDsFKD+RcUDSfWQ6Yflqc0om4iiGrGKCJjB8iFku85AZiOTC+MkqVg0Z9d/cSeNdlyXW4xdLsa4vRiKg5ND192RuXocPyL9ysGYua/FOR0UQdNNS33c100AD0rpU1NU2e0eTA7oM7zAyQcEdBrwlmRa8KdYx51NoWJeM0HQgZNaK1DiFc88Hf9SUPKTIi2CT53mhmuAFDnVhtSE0lHbnnpLsGEdDIngXHrPSA/SEv2x85vf+xVTqWHYYdH6qKproMhDpZfV6tGP2E4zANhlhSQ3ZM2OHTpDmD7OQis2goaXuc1tS08ew3M0Z0gNVcvNcO1XrKJpQZLoawJy04IOyR8/tXkEN+o4J1xRwG3rjTGZO5EeOhvLruEpAIQKLd58C/fGWWGkBxhST9F0yGpaZi75qy1u24arZSrxp6zrvSBZfxeuWdevqKIwe8xUpvzvxWlN756b9qX2BYsTU6piW5f3VpykfStojI0lzvr58a73HYNCcl/NqdLvzmqlYIenzjDclbykQ3+ZnnmaUltOJAmvY=
+X-Forefront-Antispam-Report:
+	CIP:216.228.118.233;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc7edge2.nvidia.com;CAT:NONE;SFS:(13230040)(36860700016)(376014)(82310400026)(1800799024)(30052699003)(11063799003)(13003099007)(56012099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	aM4Az64cHmcctf6FBp+PVP9PydMkcjM3AemcXxnePwI7B8GhPpsb+6jQdKUvscsdIOvwofg7xGPbt0bjKKPfvR5vUzSLZok+EuEUV/6GXqZ11Nh/5QLaNwlHCbAa45whOeLj4Yr1mfiuKi/RLZ99wLZa7uEZRS/FosHXiuO8o8x3WkQ7YGeH2hnbvzOl2dYsqDVVHOS/3rCjcDuvskT2jyFwskRIkuFOcTs8v31wlPJ4OFKq48t2co3ouII9I2OYYUhMcXafEvoIbSzD95F+WMBrcN+Ju25fyRgqXL1bOiPdSTCe4lpbY33tM7jWfM1YVo00rrGhbovbDREFrCkwIMZFyAOtZZg/hHVmIs/VTjqH8WmeBNKilUOKHPXuNdasZzeZp0pXsTajiCa3gO3xGYvOun9y+9i/acNo8Gebhhs3vMNfhntIxr42N5bRodVH
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 May 2026 20:16:08.0512
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 89097fed-721e-4e68-6f1b-08deb451218a
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.118.233];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SA2PEPF00003AEB.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB9247
+X-Rspamd-Queue-Id: 33F3E563B8C
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
+X-Spamd-Result: default: False [2.84 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
-	R_DKIM_ALLOW(-0.20)[baylibre-com.20251104.gappssmtp.com:s=20251104];
+	MID_CONTAINS_FROM(1.00)[];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
+	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_FROM(0.00)[bounces-88064-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	DMARC_NA(0.00)[baylibre.com];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[analog.com,metafoo.de,kernel.org,gmail.com,pengutronix.de,lwn.net,linuxfoundation.org,vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[23];
+	TAGGED_FROM(0.00)[bounces-88066-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[nvidia.com,gmail.com,lwn.net,vger.kernel.org];
+	DKIM_TRACE(0.00)[Nvidia.com:+];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[baylibre-com.20251104.gappssmtp.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[dlechner@baylibre.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[va@nvidia.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_NONE(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[baylibre-com.20251104.gappssmtp.com:dkim,baylibre.com:email,baylibre.com:mid,analog.com:email,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,Nvidia.com:dkim];
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCPT_COUNT_SEVEN(0.00)[8];
+	RCVD_COUNT_SEVEN(0.00)[9]
 X-Rspamd-Action: no action
 
-On 5/17/26 7:25 AM, Jonathan Cameron wrote:
-> On Sat, 16 May 2026 12:32:51 -0500
-> David Lechner <dlechner@baylibre.com> wrote:
-> 
->> On 5/15/26 8:31 AM, Radu Sabau via B4 Relay wrote:
->>> From: Radu Sabau <radu.sabau@analog.com>
->>>
->>> Add buffered capture support using the IIO triggered buffer framework.
->>>
->>> CNV Burst Mode: the GP pin identified by interrupt-names in the device
->>> tree is configured as DATA_READY output. The IRQ handler stops
->>> conversions and fires the IIO trigger; the trigger handler executes a
->>> pre-built SPI message that reads all active channels from the AVG_IN
->>> accumulator registers and then resets accumulator state and restarts
->>> conversions for the next cycle.
->>>
->>> Manual Mode: CNV is tied to SPI CS so each transfer simultaneously
->>> reads the previous result and starts the next conversion (pipelined
->>> N+1 scheme). At preenable time a pre-built, optimised SPI message of
->>> N+1 transfers is constructed (N channel reads plus one NOOP to drain
->>> the pipeline). The trigger handler executes the message in a single
->>> spi_sync() call and collects the results. An external trigger (e.g.
->>> iio-trig-hrtimer) is required to drive the trigger at the desired
->>> sample rate.
->>>
->>> Both modes share the same trigger handler and push a complete scan —
->>> one big-endian 16-bit (__be16) slot per active channel, densely packed
->>> in scan_index order, followed by a timestamp.
->>>
->>> The CNV Burst Mode sampling frequency (PWM period) is exposed as a
->>> buffer-level attribute via IIO_DEVICE_ATTR.
->>>
->>> Signed-off-by: Radu Sabau <radu.sabau@analog.com>
-> 
->>> +
->>> +static int ad4691_manual_buffer_preenable(struct iio_dev *indio_dev)
->>> +{
->>> +	struct ad4691_state *st = iio_priv(indio_dev);
->>> +	unsigned int k, i;
->>> +	int ret;
->>> +
->>> +	memset(st->scan_xfers, 0, sizeof(st->scan_xfers));
->>> +	memset(st->scan_tx, 0, sizeof(st->scan_tx));
->>> +
->>> +	spi_message_init(&st->scan_msg);
->>> +
->>> +	k = 0;
->>> +	iio_for_each_active_channel(indio_dev, i) {
->>> +		if (i >= indio_dev->num_channels - 1)
->>> +			break; /* skip soft timestamp */  
->>
->> I don't think timestamp gets set in the scan mask. It is handled separately.
-> 
-> FWIW that is a sashiko false postive (I believe anyway!)
-> If we do hit this please shout as we have a core bug.
-> 
-> If anyone has time to look at how hard it would be to tweak
-> iio_for_each_active_channel to skip a last element timestamp that
-> would be great.
-> 
-> I think that iterates one too far which is what sashiko is tripping over.
-> 
-> I'm only keen to fix that if we can make it low cost and hid it entirely
-> from drivers.
-> 
-> Jonathan
-> 
-This is what I came up with (totally untested).
+Add I2C-style new_device/delete_device sysfs attributes to SPI host
+controllers, allowing userspace to instantiate and remove SPI devices
+at runtime without device-tree changes.
 
-Since timestamp can never be set in scan_mask/active_scan_mask, it should
-be safe to exclude it from masklength without breaking existing code.
+Changes since v4:
+  - Removed spi_unregister_device() call from new_device_store()'s
+    ctlr->dead teardown path.  That call raced with
+    device_for_each_child(__unregister) in spi_unregister_controller(),
+    causing a double-free.  The extra get_device() ref keeps the struct
+    alive; __unregister handles the actual cleanup.
 
-I didn't check all callers of masklength/iio_get_masklength() though.
+Changes since v3:
+  - Replaced holding add_lock across __spi_add_device() + list
+    insertion (which caused an ABBA deadlock between add_lock and the
+    kernfs active reference during concurrent unbind) with:
+    * A 'dead' flag on spi_controller, set in
+      spi_unregister_controller() under both add_lock and
+      userspace_clients_lock.
+    * __spi_add_device() checks ctlr->dead under add_lock to reject
+      new devices after teardown begins.
+    * new_device_store() checks ctlr->dead under userspace_clients_lock
+      before list insertion, falling back to cleanup + ENODEV.
+    * add_lock is released before device_del() so in-flight sysfs
+      stores can drain without deadlocking.
+    * get_device() taken before spi_add_device() prevents
+      use-after-free if __unregister runs concurrently.
+  - Used #if IS_ENABLED() preprocessor guard (not runtime IS_ENABLED())
+    for the ctlr->dead check in __spi_add_device(), since the dead
+    field is conditionally compiled.
 
----
-diff --git a/drivers/iio/industrialio-buffer.c b/drivers/iio/industrialio-buffer.c
-index 9d66510a1d49..17f539fc23e2 100644
---- a/drivers/iio/industrialio-buffer.c
-+++ b/drivers/iio/industrialio-buffer.c
-@@ -2300,8 +2300,10 @@ int iio_buffers_alloc_sysfs_and_mask(struct iio_dev *indio_dev)
- 	if (channels) {
- 		int ml = 0;
- 
--		for (i = 0; i < indio_dev->num_channels; i++)
--			ml = max(ml, channels[i].scan_index + 1);
-+		for (i = 0; i < indio_dev->num_channels; i++) {
-+			if (channels[i].type != IIO_TIMESTAMP)
-+				ml = max(ml, channels[i].scan_index + 1);
-+		}
- 		ACCESS_PRIVATE(indio_dev, masklength) = ml;
- 	}
- 
+Changes since v2:
+  - Gated sysfs attributes and locking on CONFIG_SPI_DYNAMIC.
 
+Changes since v1:
+  - Added locking to prevent races between new_device_store() and
+    concurrent spi_unregister_controller().
+
+Link: https://lore.kernel.org/linux-tegra/909f0c92-d110-4253-903e-5c81e21e12c9@nvidia.com/
+
+Vishwaroop A (2):
+  spi: add new_device/delete_device sysfs interface
+  docs: spi: add documentation for userspace device instantiation
+
+ .../ABI/testing/sysfs-class-spi-master        |  34 +++
+ Documentation/spi/index.rst                   |   1 +
+ Documentation/spi/instantiating-devices.rst   |  88 +++++++
+ drivers/spi/spi.c                             | 217 +++++++++++++++++-
+ include/linux/spi/spi.h                       |  13 ++
+ 5 files changed, 347 insertions(+), 6 deletions(-)
+ create mode 100644 Documentation/ABI/testing/sysfs-class-spi-master
+ create mode 100644 Documentation/spi/instantiating-devices.rst
+
+-- 
+2.17.1
 
 
