@@ -1,196 +1,130 @@
-Return-Path: <linux-doc+bounces-87956-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87958-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yGFqLwJ3CWo7bQQAu9opvQ
-	(envelope-from <linux-doc+bounces-87956-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 10:06:26 +0200
+	id GCivLk2ACWoecwQAu9opvQ
+	(envelope-from <linux-doc+bounces-87958-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 10:46:05 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6364855FE20
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 10:06:26 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3DC02560062
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 10:46:04 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E2CBB3019BB3
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 08:05:23 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id CEB66301325C
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 08:45:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DF32C2798F3;
-	Sun, 17 May 2026 08:05:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D1D5D330307;
+	Sun, 17 May 2026 08:45:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="dX9kROA7"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GaCdPL4f"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 825382F7F04
-	for <linux-doc@vger.kernel.org>; Sun, 17 May 2026 08:05:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.171
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE5B68287E;
+	Sun, 17 May 2026 08:45:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779005122; cv=none; b=cVxfnNaQIo7BpnMf9FLiNz2hU8xa+cQ+S4znBbyvuBW3e8D0UfhXv5cW1RPiCZi4oxvyNyofuxxUIr5/I42j031frNnVvIEJdArxfmAcDy+oLrYhVSj3f6Prlnfx1tTpdDOm8omcF1VtzYQYC+7x+o7kVwsh/SRa5emhpq385hg=
+	t=1779007535; cv=none; b=ZiPiYuyGReiAfucE+6xxb3uEvaeNQe5WPKJBvNYRI5LaVIv8s0cVRrQdO0hXwZuOS8PunxjzP7/Dm6m0CykavKIhB7YDjotcjmKFfJ/T4n0r40XOIm2aHkCJmRsEiKRAeOddeqPl6ESNWRerakpKAozDYrsMDDhU0UuBx63vXLE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779005122; c=relaxed/simple;
-	bh=NGMb25quMJA/qmhqXGV0PuyWAv1LkEiCtHZF83T9J/Y=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=G9jqw6HJN0WEup8J6Na4/wxSXg79HBo9xAdyFo+c/Ij4vKTZ4AdkSVIeu4Eh8Yw58641x0KSSnr/zW49NqTFEL7SnfkQfztx99/TkhV3s4MSvm85ZDmY0jY45Z2yMUlE084Ej6Phz2Tray3tVo5uzehqX+oe04w/IqIw+CbTf+U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=dX9kROA7; arc=none smtp.client-ip=209.85.214.171
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2bd2c147abaso7303775ad.3
-        for <linux-doc@vger.kernel.org>; Sun, 17 May 2026 01:05:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779005121; x=1779609921; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=yMtYakkWg6xW89eWo2V/gAFSemUpeEFr7/GQfm8tsfU=;
-        b=dX9kROA7A82iVIFYb1z97RYdleh5cBn7EHgQ3KYhRKjOmWeUu581VaJpX+J98LIqIS
-         PvTYGF9Hdaipk0QhkKbCUm4YAfff95W+k13r8mjdw1xemczO3PfZdNZgNb+Ql3NkW7k+
-         CjF1gihNTes2g2OdLMhaREbiCpJu8Icwz/vUzMpB4EjDVu9IGgsiH93z2tLNDWDGDaFX
-         WUHvdtMw5rmyNQjRaCUCxSMHoisdzVXSfurJaQVG0/uluRuP7UKUcIRuHoKtYIzMtQ0h
-         8DXlvfVwiXQFgEnPu7i6hXj24XpjCMdSzWgUhamD45rFK709gc7kcUguDvaLlD456EN6
-         +cNQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779005121; x=1779609921;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=yMtYakkWg6xW89eWo2V/gAFSemUpeEFr7/GQfm8tsfU=;
-        b=sSHsdhmPqCXSVdHzZ7d8EX/ELAgrtnQNJySJWYXDBd/LyEgS7kUXVtQs+GJs2DKfZS
-         xB62Ev1wiz9uUa2D4SSb7VMxnXcTao9yKWtaJLMfDa2Tw0So0jMTexw2vv4/oBcPP9OP
-         gyHp7X0x4+xnImwEjVAynOjfrg2xRqPp4zt3ntNS5SWhyqKJA9khx+sV5xs/1xMB3Fm6
-         Xj5nkCZM6kmugB/GKmxl+6T5TGBsBZqmDh+HPmkldD9Gz7ZAAYB4j6kee54IMqPR121f
-         OfH8mTqYp9zqF4PEQtubPyb30XwPLAUHr2J6rYDgPMNA1y1BJyzx358EAbPsfzjEjP2y
-         PiXA==
-X-Forwarded-Encrypted: i=1; AFNElJ872A6QJEKKMeu/O3Cdr5S8Bju0LxkVH5j82LaDoR4n75r1At1veczX5ev1j59MfsBwHoxON3wu2fc=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzGuSD8sXcCDaXfBEfIj5YXFGO1FMlhD6BbavAm0Kf4EZy3YZYm
-	lBUaQUOvvBxTdd9uiPjcJxZirKW+IKJ7Hc7aUpdFZgTqMebAAKIlJiiM
-X-Gm-Gg: Acq92OHQCoBm2gh3OT6ZX8n9qrx6f3Sl5bh1PIML4v9NvM0cn5WQFgItvrYpdBoDvEG
-	MzYUd0JUoQ+Crx2soxkurlxehRoBAYRj5361vIhT0Wxd1J/k4pVh6YkNBGDdUvjc0Vnl7C3IClm
-	b4HeijbXTdlHw61NjIcK6FEl5XDLyYd94j2+Qu8xjjuvLwZYRT2RrgX4j3FKPFYSJ1KqnWlItp5
-	uY/TG7xN+2B6t+pWviSFcsVrwcLH/AFs6GoIWF9abNDu0u8Zvi/dSOTNFXoED0s1sgxQzGj4UYF
-	ba1oTPSwgDel2Vs6gI67SIGPbdEJaqpZU5wrEseDaqlv/nlDGcj1ot2eZ2qwyVo+VmDERdHhPOy
-	/GQL4AHueK+tpfg3Zsj0UhwKo21lYh7gehhd3np35beZAnz6qJhXHl6trA8Qlk/yb/elAMw+3lB
-	ySJIq5VyVzWEQnRG2BVQuVQ0DFb9hMbEPIu8mIVAGg2qMEDb1q/IuWoa3d9cmQ
-X-Received: by 2002:a17:902:7d86:b0:2bc:7486:21cf with SMTP id d9443c01a7336-2bd7e9056dfmr70871815ad.36.1779005120658;
-        Sun, 17 May 2026 01:05:20 -0700 (PDT)
-Received: from fedora.taildae27b.ts.net ([2409:4064:2d80:75ca:8541:272f:2bb3:5e55])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2bd5bd5fb17sm109834595ad.1.2026.05.17.01.05.15
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 17 May 2026 01:05:20 -0700 (PDT)
-From: Shubham Chakraborty <chakrabortyshubham66@gmail.com>
-To: Guenter Roeck <linux@roeck-us.net>,
-	Florian Fainelli <florian.fainelli@broadcom.com>,
-	Jonathan Corbet <corbet@lwn.net>
-Cc: Shuah Khan <skhan@linuxfoundation.org>,
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
-	Ray Jui <rjui@broadcom.com>,
-	Scott Branden <sbranden@broadcom.com>,
-	linux-hwmon@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-rpi-kernel@lists.infradead.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-kernel@vger.kernel.org,
-	Shubham Chakraborty <chakrabortyshubham66@gmail.com>
-Subject: [PATCH v3 3/3] hwmon: raspberrypi: Fix delayed-work teardown race
-Date: Sun, 17 May 2026 13:34:45 +0530
-Message-ID: <20260517080445.103962-4-chakrabortyshubham66@gmail.com>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260517080445.103962-1-chakrabortyshubham66@gmail.com>
-References: <20260516164407.25255-1-chakrabortyshubham66@gmail.com>
- <20260517080445.103962-1-chakrabortyshubham66@gmail.com>
+	s=arc-20240116; t=1779007535; c=relaxed/simple;
+	bh=LVzeahNDHZ1WvAmPSQ8GPJ8xKeGAguvAQRUr2DznCm0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=J3CxnOEBAzHONvQGa3TFr07iI6nxaguBzu9Xs9XJtGfN/qTDmEwWQ4Xp/TItT7MNFS8HyDvVEtdcgLQm4ZXKAqQcbvVds/iLmpxKSjXaKnPE6hG6+Wf1MwopKtbBXIT7GPAvqqTUq5Oyx/ZcHsu8zw7aAiEY7XmQq1g35mDsJJo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GaCdPL4f; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 67EB8C2BCC9;
+	Sun, 17 May 2026 08:45:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1779007535;
+	bh=LVzeahNDHZ1WvAmPSQ8GPJ8xKeGAguvAQRUr2DznCm0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=GaCdPL4fOfAkwVPsyjkMALDCbw2efJ9jdDmWVk6urIWoAhsRIpVsbYQcYBxwmwZ1Z
+	 ofKhSjKK7d2I6+NtrQxKNccw8MlYhKWdmtyW7vW+cpdKxWCV9YCI/dErQEiDSinBF+
+	 cuSbEXZd6WkNvLuQkf5SkDUVzozx83ZSP73oOrmtjz2+jmi14cz8QU2/GP7h7v92Xz
+	 hvyU/GXrUf1hpT6HHRAVY6Dvx1bgORLRJWJL+kQLWeeED/FvHWK94EZlWsQ784hZ+8
+	 OM2rCDE4V8yPdYxugG36yJb8Xf3kvCdoeZ+zFErIMKyxvlc2hyWkPjpNA+RCvEjwPq
+	 WO3HEVNTXABVQ==
+Date: Sun, 17 May 2026 11:45:26 +0300
+From: Mike Rapoport <rppt@kernel.org>
+To: Sakurai Shun <ssh1326@icloud.com>
+Cc: SeongJae Park <sj@kernel.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	David Hildenbrand <david@kernel.org>,
+	Lorenzo Stoakes <ljs@kernel.org>,
+	"Liam R. Howlett" <liam@infradead.org>,
+	Vlastimil Babka <vbabka@kernel.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Michal Hocko <mhocko@suse.com>, Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>, damon@lists.linux.dev,
+	linux-mm@kvack.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 RESEND] design: fix typos in design.rst
+Message-ID: <agmAJnMaRyyd-MEc@kernel.org>
+References: <20260517073433.3015-1-ssh1326@icloud.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 6364855FE20
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260517073433.3015-1-ssh1326@icloud.com>
+X-Rspamd-Queue-Id: 3DC02560062
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FREEMAIL_CC(0.00)[linuxfoundation.org,broadcom.com,vger.kernel.org,lists.infradead.org,gmail.com];
-	TAGGED_FROM(0.00)[bounces-87956-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[chakrabortyshubham66@gmail.com,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-87958-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	RCVD_COUNT_FIVE(0.00)[5];
-	TAGGED_RCPT(0.00)[linux-doc];
-	NEURAL_HAM(-0.00)[-1.000];
+	FREEMAIL_TO(0.00)[icloud.com];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rppt@kernel.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,icloud.com:email]
 X-Rspamd-Action: no action
 
-The delayed polling work rearms itself from the work function, so use
-explicit delayed-work setup and cleanup instead of
-devm_delayed_work_autocancel().
+Hi,
 
-Initialize the delayed work with INIT_DELAYED_WORK() and register a
-devres cleanup action that calls disable_delayed_work_sync() during
-teardown.
+On Sun, May 17, 2026 at 04:34:26PM +0900, Sakurai Shun wrote:
+> Subject: [PATCH v2 RESEND] design: fix typos in design.rst
 
-This addresses the concern raised during review about the polling work
-being able to requeue itself while the driver is being removed.
+Please use more descriptive prefix next time, like SJ suggested
+Docs/mm/damon/design
 
-Signed-off-by: Shubham Chakraborty <chakrabortyshubham66@gmail.com>
----
- drivers/hwmon/raspberrypi-hwmon.c | 12 +++++++++---
- 1 file changed, 9 insertions(+), 3 deletions(-)
+"design" is too vague and gives zero clues about what subsystem it is.
 
-diff --git a/drivers/hwmon/raspberrypi-hwmon.c b/drivers/hwmon/raspberrypi-hwmon.c
-index 8ce6dacc19b0..0bbc735f74a4 100644
---- a/drivers/hwmon/raspberrypi-hwmon.c
-+++ b/drivers/hwmon/raspberrypi-hwmon.c
-@@ -8,7 +8,6 @@
-  * Copyright (C) 2026 Shubham Chakraborty <chakrabortyshubham66@gmail.com>
-  */
- #include <linux/device.h>
--#include <linux/devm-helpers.h>
- #include <linux/err.h>
- #include <linux/hwmon.h>
- #include <linux/module.h>
-@@ -96,6 +95,13 @@ static void get_values_poll(struct work_struct *work)
- 	schedule_delayed_work(&data->get_values_poll_work, 2 * HZ);
- }
- 
-+static void rpi_hwmon_cancel_poll_work(void *res)
-+{
-+	struct rpi_hwmon_data *data = res;
-+
-+	disable_delayed_work_sync(&data->get_values_poll_work);
-+}
-+
- static int rpi_read(struct device *dev, enum hwmon_sensor_types type,
- 		    u32 attr, int channel, long *val)
- {
-@@ -237,8 +243,8 @@ static int rpi_hwmon_probe(struct platform_device *pdev)
- 	if (IS_ERR(data->hwmon_dev))
- 		return PTR_ERR(data->hwmon_dev);
- 
--	ret = devm_delayed_work_autocancel(dev, &data->get_values_poll_work,
--					   get_values_poll);
-+	INIT_DELAYED_WORK(&data->get_values_poll_work, get_values_poll);
-+	ret = devm_add_action_or_reset(dev, rpi_hwmon_cancel_poll_work, data);
- 	if (ret)
- 		return ret;
- 	platform_set_drvdata(pdev, data);
+> L140: "unsinged" -> "unsigned"
+> L371: "sampleing" -> "sampling"
+> L387: "multipled" -> "multiplied"
+> 
+> Signed-off-by: Sakurai Shun <ssh1326@icloud.com>
+
+Acked-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
+
+> ---
+>  Documentation/mm/damon/design.rst | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+
 -- 
-2.54.0
-
+Sincerely yours,
+Mike.
 
