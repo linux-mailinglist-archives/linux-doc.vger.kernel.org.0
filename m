@@ -1,175 +1,226 @@
-Return-Path: <linux-doc+bounces-87972-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87973-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wL1gF2SHCWqVeAQAu9opvQ
-	(envelope-from <linux-doc+bounces-87972-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 11:16:20 +0200
+	id 9gWdLY2ICWrteQQAu9opvQ
+	(envelope-from <linux-doc+bounces-87973-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 11:21:17 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id C636E5602F1
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 11:16:19 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 381BC560383
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 11:21:17 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id EA723302DF7A
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 09:14:48 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E138530226AF
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 09:15:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 12D2035E951;
-	Sun, 17 May 2026 09:14:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EB20635C188;
+	Sun, 17 May 2026 09:15:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lT6FVVmE"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="FuS7fwfu"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DCAAD35E1BC;
-	Sun, 17 May 2026 09:14:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1B13A359A89
+	for <linux-doc@vger.kernel.org>; Sun, 17 May 2026 09:15:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.44
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779009281; cv=none; b=uNyuXeGAPBsUp4C6h+cBxcbrItuF1DWXolE11W9E2K5sDkic/rCMqfvR4eJOQ+tVpF4dalILCOWLwJCg1tEQGkHyjMamhyyLtAt1Sz758wi55SgudAwGqUoPWyxgOQ/QPgGVCgkXQwMvukDl5AYwvLgXQAbqFZcpYSFZmqOXUEE=
+	t=1779009317; cv=none; b=cFYu2vvu3ebzu1+rwdq8xPPSu6gtlYWW2C5X5fejxvL8pFmUeUPmhzNcxjqHzoMIZmVBoUhGRYuAnGpC3qw7DKEAWRzJDV6nu6M/ph4NxNcxrFsRjtHn0kXN1SCUrs56yZDpPXHXK9U3ugvHfhXvrfARTfb7olD5Z9E7cIr6BGo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779009281; c=relaxed/simple;
-	bh=aM5yeD8D0EpZb33GZB7QNZJF6fH7o1iaBw8tXcjXvyI=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=b56ToRRZg0AWEGeeIqy3mJ37esPoQL34Gejrr1Z9/rbJT5MVOYd23N0URicg1iszAFNCvk7JSxUlfEZUkp1U+1/PQyxpngAEitiWB2qvXYxd2WpEJqEf2CUik3RwtQt9rNxjLQEiTViwfXkZ7aqGp7Azn8H2DtemglMfNldQ6gE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lT6FVVmE; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 9ED05C4AF54;
-	Sun, 17 May 2026 09:14:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1779009281;
-	bh=aM5yeD8D0EpZb33GZB7QNZJF6fH7o1iaBw8tXcjXvyI=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=lT6FVVmEpcwufNYptR4hHs/ksunl8JN0Sc29MSJe+6CTTPM+lzErgmRWNVdE4yjFC
-	 q1+bcSrqtzRkGUZKnHUhscwzhyDBJElOD3SssnFebTYKCg6VhH+aI2nGjKRPu0Dgwh
-	 Wc63AA/KcN69WPVXVmCtkN6z93/cx6zH4EQUguufVPcx1BzKDFPSKCYoNEvCxcn7Bn
-	 JVfaVHMndEj0r7MDk/aJbtv6JU8Cmu6FW1C3oAS4e7fcvgyvZSGBNhqT3MtkpaqKpf
-	 li1TlMc4haCNHiruP0KbtExcgG32WQyLG2vbvnMYrSf+Ta7j/iCbmEcCwO+1u5SgWA
-	 z6vspIFsxb55g==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 90320CD4F4A;
-	Sun, 17 May 2026 09:14:41 +0000 (UTC)
-From: Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>
-Date: Sun, 17 May 2026 10:14:07 +0100
-Subject: [PATCH v13 12/12] Documentation: ABI: testing: add common ABI file
- for iio/frequency
+	s=arc-20240116; t=1779009317; c=relaxed/simple;
+	bh=61Z1Wd1LuFtHc0CWXwDXGlmkcFLquQFVca5tQpsQg6w=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=LnKMyU3UcHqitEcW/qzDbxSYMehfUH5zxtWqsGRVXFcZAyyIFrrBsf7kJ+Uons5ijwkk1MtSITNToUiDHaTskE17Aow1/jh6qLeJomhCM2B0wQxTkcn7lrOXrjp62VFJeF2pJfHjGamvbC7MRdyy18Yox9r89IHwg1jnPMUgQxs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=FuS7fwfu; arc=none smtp.client-ip=209.85.128.44
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-488d2079582so11591315e9.2
+        for <linux-doc@vger.kernel.org>; Sun, 17 May 2026 02:15:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1779009314; x=1779614114; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=XN1c+TmyGX2w/UYxycY7xEq81VHA1tvYN2TkPmssO/0=;
+        b=FuS7fwfu6dkS/ipWEVMkYQKsYDcoZ2qo5nlpj5PPmgk3N8qyGJAvfusmwngdwzdy+X
+         FtlG+TLXe39qHh3pJKHTACE65y1NHicKfPHnzC9CYfJ0NstBMTiyYBCSYJDSlVOpOqCh
+         EsH2LONZE8zImsxzqkTbO05aGnabdlN3gfji+eIDukoIfgfdOiv+hfLbh0fDvEjyd1Ow
+         178VJDQ8MsUjxwXV3XCtbQ7zEOuDU/SnfXq1VmPZF4t/gmkXMMBjk4/QewfQ/JsEHz+j
+         lOrTvypH/+pM0UphjjdQvKLmkSaDpOVGAGCbl59gCeRS6Q16nNwk25gHHE2CH34oZ58r
+         rl3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1779009314; x=1779614114;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=XN1c+TmyGX2w/UYxycY7xEq81VHA1tvYN2TkPmssO/0=;
+        b=pUxlPUiECZrFRa2qfdWOikOOf/nLpJoMZkzOcL+wn4EYRQoiifxKw2m0oDdS/rMdUS
+         ax6A7o1KZQQO1+ZP+kXcnHrk6haPTXaqA2YM2xoaZzcB3T8N6DahMY95QzBnG97BgVRw
+         Cmpg+m6u3g0S1HSr39to169/IneVvG1zW08mNOmb1aZXo0CpHU09upIfiiV0xosqX+Tf
+         tuOZ3gzYLBTO5RQG4mFYu4f6UIL2OcYnazWiUWbmBvc+pmLi+9hKfwia2Yk7Jepd/oXW
+         tDPj9o2QHa/IddTNLpkpmKd3+ji8eYVUWHNXoq+nRfpG2YbGaglM06tXUVbUbRf0djMH
+         h2xA==
+X-Forwarded-Encrypted: i=1; AFNElJ+PLPfd6lrOQk/H4z5w9KmZPFnpHXEM9D6QYSa0O+pZUiLD2yHWHQFRhbkLifW6SMszl90z2d7i3Yc=@vger.kernel.org
+X-Gm-Message-State: AOJu0Ywu5+na2008xOhly6JywQ1nzlZA1nmC67exTi4VTweL7cjNQ+uR
+	Q7VHgNKvvcbE9RVx0LZdCrSk+F3zd/IxO8o8C7LDQ632U4G3F4W2Jk/s
+X-Gm-Gg: Acq92OHeWD2JEuLVMMcPQF4U32Q+MeAmMN+jQ7CfFgpq/CTQIsZpE3vOLm1ya3+0B8n
+	4ZuLf+PTsB4MygGKxbKhuf1Di+nBsgwpEQEQZptXHragRysSzK+WloVYzBKk4tLmGHl4r2Ggzun
+	F3h3jkAAKLzn+NjSVN9lCdGCPMuZSSYxQFiHBZqqGUm3GT9scR7oiT6t/d7pbJNAYsZLVYt+ahA
+	SgGyL0rViEJ3RMz9xhk9oqg/GSTR3LnHVAJYIt0rbAW0Edv4ZC+0OZYBGtgNOutwSDS4exGSgtx
+	XNyK6RTrY1WLSu4gRJmTwzUg+iRkYQl3nZzz1Cpzr0yYMDFAgMrX/nMeCLzdsyJrU+va0epqsk4
+	XO0tWG6vLlVBuMrsmRDQgbx+H/YsPYYUC+7VF4qCS4waAtw8tGARKUSg3Vk1wmIeT9IOpRKURlv
+	v12ti2ZtLpUVFLTQLOzqWi4FPPbMuPsDPwXQWn30cfbhcnYzL5ulGQlnMhPmqOH8j/gN7PbMyPb
+	3GlV1FVmw==
+X-Received: by 2002:a05:600c:4692:b0:483:7903:c3b1 with SMTP id 5b1f17b1804b1-48fe6325978mr150764275e9.20.1779009314306;
+        Sun, 17 May 2026 02:15:14 -0700 (PDT)
+Received: from f (cst-prg-92-135.cust.vodafone.cz. [46.135.92.135])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48fffb9aac4sm98809525e9.9.2026.05.17.02.15.11
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 17 May 2026 02:15:13 -0700 (PDT)
+Date: Sun, 17 May 2026 11:15:04 +0200
+From: Mateusz Guzik <mjguzik@gmail.com>
+To: Horst Birthelmer <horst@birthelmer.com>
+Cc: Miklos Szeredi <miklos@szeredi.hu>, Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, Alexander Viro <viro@zeniv.linux.org.uk>, 
+	Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
+	Horst Birthelmer <hbirthelmer@ddn.com>
+Subject: Re: [PATCH v2] dcache: add fs.dentry-limit sysctl with
+ negative-first reaper
+Message-ID: <5afacskoalmd2u6s525dosvyrtr3j66ajd5m4p2ylymtlgytkz@excrdfpndx37>
+References: <20260516-limit-dentries-cache-v2-1-c733a78e603b@ddn.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260517-adf41513-iio-driver-v13-12-bb6e134a360f@analog.com>
-References: <20260517-adf41513-iio-driver-v13-0-bb6e134a360f@analog.com>
-In-Reply-To: <20260517-adf41513-iio-driver-v13-0-bb6e134a360f@analog.com>
-To: linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-doc@vger.kernel.org
-Cc: Jonathan Cameron <jic23@kernel.org>, 
- David Lechner <dlechner@baylibre.com>, Andy Shevchenko <andy@kernel.org>, 
- Lars-Peter Clausen <lars@metafoo.de>, 
- Michael Hennerich <Michael.Hennerich@analog.com>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
- Andrew Morton <akpm@linux-foundation.org>, Petr Mladek <pmladek@suse.com>, 
- Steven Rostedt <rostedt@goodmis.org>, 
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
- Rasmus Villemoes <linux@rasmusvillemoes.dk>, 
- Sergey Senozhatsky <senozhatsky@chromium.org>, 
- Shuah Khan <skhan@linuxfoundation.org>, 
- Rodrigo Alencar <rodrigo.alencar@analog.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1779009279; l=2211;
- i=rodrigo.alencar@analog.com; s=default; h=from:subject:message-id;
- bh=swStfLGThUgetsoO5JlOQerjXKGwa5yLnNDxX9LhxH8=;
- b=N0XXM+lskRAv8R6nuE6KcW2wvrwQoYmF9Mt8DdkyvBSFNc4PQMuHa+oq1BEPJloUASU379bAM
- ZPj4dbQL10nDwpSSDsFD8ppSIHGH5KPPsmcTekjkc0C48t+8eh8HWSi
-X-Developer-Key: i=rodrigo.alencar@analog.com; a=ed25519;
- pk=ULeHbgU/OYh/PG/4anHDfLgldFItQHAhOktYRVLMFRo=
-X-Endpoint-Received: by B4 Relay for rodrigo.alencar@analog.com/default
- with auth_id=561
-X-Original-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
-Reply-To: rodrigo.alencar@analog.com
-X-Rspamd-Queue-Id: C636E5602F1
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260516-limit-dentries-cache-v2-1-c733a78e603b@ddn.com>
+X-Rspamd-Queue-Id: 381BC560383
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-87973-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-87972-lists,linux-doc=lfdr.de,rodrigo.alencar.analog.com];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[21];
-	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	TO_DN_SOME(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	HAS_REPLYTO(0.00)[rodrigo.alencar@analog.com];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[analog.com:email,analog.com:mid,analog.com:replyto,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	FROM_NEQ_ENVFROM(0.00)[mjguzik@gmail.com,linux-doc@vger.kernel.org];
+	MISSING_XM_UA(0.00)[];
+	NEURAL_HAM(-0.00)[-0.999];
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ddn.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
+On Sat, May 16, 2026 at 04:52:54PM +0200, Horst Birthelmer wrote:
+> From: Horst Birthelmer <hbirthelmer@ddn.com>
+> 
+> The dcache only shrinks under memory pressure, which is rarely reached
+> on machines with ample RAM, so cached negative dentries can accumulate
+> without bound.  Give administrators a soft cap they can set,
+> and a background worker that prefers negative dentries when reclaiming.
+> 
+> Two new sysctls under /proc/sys/fs/:
+> 
+>   dentry-limit             -- soft cap on nr_dentry.  0 (default)
+>                               disables the feature; behaviour is then
+>                               identical to before.
+>   dentry-limit-interval-ms -- pacing for the worker while still over
+>                               the cap.  Default 1000, minimum 1.
+> 
+> When the cap is exceeded, a delayed_work runs in two phases:
+> 
+>   1. iterate_supers() draining only negative dentries from every LRU.
+>      Positive entries are rotated past so the walk makes progress.
+>      DCACHE_REFERENCED is ignored here on purpose -- an admin-imposed
+>      cap should evict even hot negatives before any positive entry.
+>   2. If still over the cap, iterate_supers() again with the same
+>      isolate callback the memory-pressure shrinker uses.
+> 
+> Signed-off-by: Horst Birthelmer <hbirthelmer@ddn.com>
+> ---
+> There was a discussion at LSFMM about servers with too many cached
+> negative dentries.
+> That gave me the idea to keep the dentries in general limited
+> if the system administrator needs it to.
+> 
 
-Add ABI documentation file for PLL/DDS devices with frequency_resolution
-sysfs entry attribute used by both ADF4350 and ADF41513.
+I wrote about the negative entries problem here:
 
-Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
----
- Documentation/ABI/testing/sysfs-bus-iio-frequency         | 11 +++++++++++
- Documentation/ABI/testing/sysfs-bus-iio-frequency-adf4350 | 10 ----------
- 2 files changed, 11 insertions(+), 10 deletions(-)
+https://lore.kernel.org/linux-fsdevel/f7bp3ggliqbb7adyysonxgvo6zn76mo4unroagfcuu3bfghynu@7wkgqkfb5c43/#t
 
-diff --git a/Documentation/ABI/testing/sysfs-bus-iio-frequency b/Documentation/ABI/testing/sysfs-bus-iio-frequency
-new file mode 100644
-index 000000000000..5af31b5b3a19
---- /dev/null
-+++ b/Documentation/ABI/testing/sysfs-bus-iio-frequency
-@@ -0,0 +1,11 @@
-+What:		/sys/bus/iio/devices/iio:deviceX/out_altvoltageY_frequency_resolution
-+KernelVersion:	3.4.0
-+Contact:	linux-iio@vger.kernel.org
-+Description:
-+		Stores channel Y frequency resolution/channel spacing in Hz for PLL
-+		devices. The given value directly influences the operating mode when
-+		fractional-N synthesis is required, as it derives values for
-+		configurable modulus parameters used in the calculation of the output
-+		frequency. It is assumed that the algorithm that is used to compute
-+		the various dividers, is able to generate proper values for multiples
-+		of channel spacing.
-diff --git a/Documentation/ABI/testing/sysfs-bus-iio-frequency-adf4350 b/Documentation/ABI/testing/sysfs-bus-iio-frequency-adf4350
-index 1254457a726e..76987a119feb 100644
---- a/Documentation/ABI/testing/sysfs-bus-iio-frequency-adf4350
-+++ b/Documentation/ABI/testing/sysfs-bus-iio-frequency-adf4350
-@@ -1,13 +1,3 @@
--What:		/sys/bus/iio/devices/iio:deviceX/out_altvoltageY_frequency_resolution
--KernelVersion:	3.4.0
--Contact:	linux-iio@vger.kernel.org
--Description:
--		Stores channel Y frequency resolution/channel spacing in Hz.
--		The value given directly influences the MODULUS used by
--		the fractional-N PLL. It is assumed that the algorithm
--		that is used to compute the various dividers, is able to
--		generate proper values for multiples of channel spacing.
--
- What:		/sys/bus/iio/devices/iio:deviceX/out_altvoltageY_refin_frequency
- KernelVersion:	3.4.0
- Contact:	linux-iio@vger.kernel.org
+The mechanism as suggested here will end up evicting *useful* negative
+entries. Granted, they will be recreated soon enough so it's not a
+tragedy but it still is an avoidable perf loss.
 
--- 
-2.43.0
+What is needed in the long run is a mechanism which aggressively
+recycles stale negative entries and recognizes which ones should be
+saved for the time being.
 
+Below some magic threshold you just allocate a new negative entry.
 
+All new entries would get a grace period where they need to get hits and
+prove useful OR get whacked. If you are at or above the threshold and
+are allocating a new entry, you can whack the oldest negative one which
+did not make it.
+
+This is just one idea, what is not up for debate is the discrepancy
+between small subset of negative entires with tons of hits vs the ones
+which get virtually no traffic at all.
+
+Whatever the mechanism it will have to take advantage of it.
+
+> This is somewhat related to [1] where it would address the same
+> symptoms but in a more unobtrusive way, by just garbage collecting
+> the negative and then the unused cache entries.
+> 
+> The other effect I have seen regarding this is that FUSE
+> will not forget inodes (no FORGET call to the FUSE server)
+> even after the latest reference has been closed until much later.
+> 
+> In a FUSE server that mirrors the kernel cached inodes in user space
+> because it has to keep a lot of private data for every node
+> this puts an unnecessarry memory strain on that userspace entity
+> especially if the memory is limited for its cgroup.
+
+I don't know anything about how FUSE works. In this context I presume
+you have a mount point backed by FUSE and the problematic memory usage
+stems from inodes created against such a mount point.
+
+This would suggest you would be better served with a mechanism which
+allows userspace to cull some number of dentries for a given mount
+point, maybe even with an optional preference for negative entries if
+that's considered better for given fs. 
+
+Or to put it differently, I would look into exposing sb shrinkers to
+root instead of rolling with a global scan.
+
+> +static enum lru_status dentry_lru_isolate_negative(struct list_head *item,
+> +		struct list_lru_one *lru, void *arg)
+> +{
+> +	struct list_head *freeable = arg;
+> +	struct dentry *dentry = container_of(item, struct dentry, d_lru);
+> +
+> +	if (!spin_trylock(&dentry->d_lock))
+> +		return LRU_SKIP;
+
+If anything of the sort is to land, you definitely want to pre-check
+d_count and d_is_negative without the lock.
 
