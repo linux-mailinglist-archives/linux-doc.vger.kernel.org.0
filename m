@@ -1,98 +1,61 @@
-Return-Path: <linux-doc+bounces-87935-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87937-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KCkKE3YcCWoXJgQAu9opvQ
-	(envelope-from <linux-doc+bounces-87935-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 03:40:06 +0200
+	id b4r+ECUnCWrILQQAu9opvQ
+	(envelope-from <linux-doc+bounces-87937-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 04:25:41 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id BB97D55EED3
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 03:40:05 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9250655F03E
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 04:25:40 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 69F293023D86
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 01:39:42 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 1DE75300E251
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 02:25:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 870AE30E82B;
-	Sun, 17 May 2026 01:39:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D3A95308F26;
+	Sun, 17 May 2026 02:25:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZBaQzoVq"
+	dkim=pass (2048-bit key) header.d=icloud.com header.i=@icloud.com header.b="y8MFib1H"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dl1-f46.google.com (mail-dl1-f46.google.com [74.125.82.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from outbound.mr.icloud.com (p-west2-cluster4-host6-snip4-3.eps.apple.com [57.103.69.164])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 59F5B309DDF
-	for <linux-doc@vger.kernel.org>; Sun, 17 May 2026 01:39:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A41D82F7F09
+	for <linux-doc@vger.kernel.org>; Sun, 17 May 2026 02:25:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=57.103.69.164
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778981974; cv=none; b=f16DHTCYSkwAzhLhCZQq+Jc6cblFn5os3m5q7jncTzYcpJdR1IqTNQv/ZN7WeAtzs8owkUI/V2HwoLkQQfzf+NrOHs/HW1qjdBRz6N0hxhh6n1B16lxoGCf0MfjMJSUnOJhY9N8LyD/9cuhxo2R4SZcIGG8f/AlJ8qLUrzFFTlo=
+	t=1778984736; cv=none; b=bviOGH3+16GlKDU8/YlyAhIwaZ02BPNw5bV0QQDzR3BFtU1LbU1iqbPULm23RMoF3FP5vVyDL9TVxFc7+8OvuybtD0hifzzBcQr0daI5TriITozAi+KWPlpT50E0Yni9lmtSiMqZlFgIcA9Ihrap8GeyiusEIQh9XwoqQRA9iyk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778981974; c=relaxed/simple;
-	bh=f+QDDurMGfhxQmUZ65LQ5eMxnphu4dd2AYmUoc6GMvM=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=WtPwT4NE+fTJTCzEMkuhdSZcNJRG/q58O3fJwRJcPMMLQO+vRtnEEtCEZxpcljFpGODXVabFwKV3ehp0Du9lj88vgTX6u3gTcr/9FtHHFeXB/AGvfC8uvRqlVNNbsxKnRlIhJ2a4W7RX/64BS0tV7erUt4x7H57KnPYYv+8JsAQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ZBaQzoVq; arc=none smtp.client-ip=74.125.82.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-dl1-f46.google.com with SMTP id a92af1059eb24-12db2e415a7so412384c88.1
-        for <linux-doc@vger.kernel.org>; Sat, 16 May 2026 18:39:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778981971; x=1779586771; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=u0pPLxc8J/TCGTd8DK6oQFMrdSIfZluTMrmkXxci8Ac=;
-        b=ZBaQzoVq9z7imL/fIQBctmABR4ES26rxnSnNVJhnz1PFIkozCZT38OFWcjLiUkt0GQ
-         afyPROLnFm93aQ4HBmgZWcy4UJvNIlW0kwfOEggJJ0P8sHDfUsW80/iT7aSyGSvejBz6
-         J3w66cSte0KmykLHsN/H24+j0hQo+JSfVyyrrSYKO/Sudn4m7tUATbv9+PhdRV+fMY2G
-         txbvuS5Pns8KVEcgve30eYw0RA5leNi5+GkKgoPa1qKqOWvp20u7EeEUokgz5Q1npI/i
-         hAJPLRGcvvHMAEGsOPyDaM9nj6KqThVbDHqwyUZKESNCcmZ0jM4TNoRH3qQwaA2yeU71
-         etCQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778981971; x=1779586771;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=u0pPLxc8J/TCGTd8DK6oQFMrdSIfZluTMrmkXxci8Ac=;
-        b=ZySV4au86dGdBvQXGnbmK5D32+q+xB7u+KMgD6siH9QHHLCyw+5RbsBk0pP71MyvKs
-         vgD5weh32AbUI5+UK6gIlkf0k2XR0J2NgA5cok3aRl3NELXNWxEODm3C7wufiR20FjSU
-         dO3H6H8yV4lRldhmAEDK8DyDbMI3Fq96xdANow3D0+Qv0AehZkQPy0qNsxgPb0O2YD/f
-         lExHonZNGVavsoDPBOTMqAksOyp+Qg01OW7cNQaZJ4/SdUg5ftAJDBBMzkbCr+hrBz0u
-         8g2RTPLhLSywEtCE2FAhiY26hYOrM8Ymp37nJZQd4l0RuSAopDg0Klza2+YgUaEv9a85
-         GWCw==
-X-Forwarded-Encrypted: i=1; AFNElJ/2DAE2bJYCQMIGC7NK3SDi//T2SCXmdUjE3OULOlampu0/exyV1mJGRNgndGdZsQK2s+IhupPUVgE=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yws3VYaD3N91WYWpcFtqHimzc4cS5CQik65JPX1HewarkNV1sqV
-	LThPuz9HHZlXxMc441QDGodmcPiZUiNCVZkB52hFapyMWZD3wM8L9zvi
-X-Gm-Gg: Acq92OFWU46LpgMF96oMp6iBMryyBs8+h9xRl1u7m70nWNGy6MrG/JMh49HxKI5JrZj
-	PLbtYNTdM8WJjGQ21sCfNbGNGfHXUmNDlbCo5ikB51V3S6WYrikv/tS5ZOn0c3wg5LyuUtOFYwk
-	8DJsVBaWK9R7WMWsw1KbRxSwV2X5/6F9K3M5wV5JdlswG1l7ojIF2LNASG3fk9Vanm72jOv4HYR
-	l3yYQR1Y8BEWW7wCNWZIpg+upSVew7IEhUi73EAVCKHxbDqrQKZpXM8NgKRx0Ga9jJbaU8lsD/R
-	XP2LYx7FUgpFI5hFc0arhKy0N0XLnevLQogiZutpngZ3rpslmsbcEpuynQbj1uP/xWQG3OgykAE
-	UgVOP2FyK5odvupBkCG5u7pB3xdRCAfS0gFZuK3DleF7+dkwZwP9L5akGKZ+I/dFYLSXdmflihW
-	ReWIunYmZbjx8dQuqPM8VWLEcMr6Om3R7fwocHeRKKM+FSBoNk5Ij3mE34WClGjVsPbAI1Ys9mv
-	BeY
-X-Received: by 2002:a05:7022:797:b0:12d:c4cf:cd7 with SMTP id a92af1059eb24-1350440c566mr4972957c88.8.1778981971532;
-        Sat, 16 May 2026 18:39:31 -0700 (PDT)
-Received: from lappy (108-228-232-20.lightspeed.sndgca.sbcglobal.net. [108.228.232.20])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-134cb5b3c20sm15898086c88.0.2026.05.16.18.39.31
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 16 May 2026 18:39:31 -0700 (PDT)
-From: "Derek J. Clark" <derekjohn.clark@gmail.com>
-To: Jiri Kosina <jikos@kernel.org>,
-	Benjamin Tissoires <bentiss@kernel.org>
-Cc: "Pierre-Loup A . Griffais" <pgriffais@valvesoftware.com>,
-	Denis Benato <denis.benato@linux.dev>,
-	Zhouwang Huang <honjow311@gmail.com>,
-	"Derek J . Clark" <derekjohn.clark@gmail.com>,
-	linux-input@vger.kernel.org,
+	s=arc-20240116; t=1778984736; c=relaxed/simple;
+	bh=rVSE+K0rWl2G9FSwBLm+gvl8jZiiZrlkfd5Cakyepcg=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Nn0AihPq7lUWc22YbYRU9mD9KCqPmXquU2RHmnEGopfR3Vq8gdD/sBfr7jnojUlYr2F80BeC8vtuaIJy+9GTWC8I2nKgx1Cx1jI+la62z0JufJK/KfpTsKwSB8gnhi5Wl+TSm4N8rULf0xpHLqNxePnz/124bo5qV9RDBxtAfdU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=icloud.com; spf=pass smtp.mailfrom=icloud.com; dkim=pass (2048-bit key) header.d=icloud.com header.i=@icloud.com header.b=y8MFib1H; arc=none smtp.client-ip=57.103.69.164
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=icloud.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=icloud.com
+Received: from outbound.mr.icloud.com (unknown [127.0.0.2])
+	by p00-icloudmta-asmtp-us-west-2a-100-percent-0 (Postfix) with ESMTPS id 56A1B1800188;
+	Sun, 17 May 2026 02:25:32 +0000 (UTC)
+X-ICL-Out-Info: HUtFAUMEWwJACUgBTUQeDx5WFlZNRAJCTQhKBUMDRQBBCFYBWANLVxQEC0AFBlgARnkRUAFYHlZeWhdeTVEPDwNKEAJeBV1yGVoUXBhTRVEfVFhBDgpSEhhcFFxQWB5GElYNXQkZBkBeUBtfAkIPHBNWFRMdQxkPKwhKBEMHRQJeCyUTCVNWWxNVF0YJGQhdHRkVWgkKVwBAC04DWAZcAkILTAZbGV4KSQxVAkBEGFpBCkoFLV4IXh9MHB0OWAYMUE0BQwgKAlEcVg1X
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=icloud.com; s=1a1hai; t=1778984735; x=1781576735; bh=sV6fhzrbrTX0iqeUo8xmtmUreYy8zZzFHjV3sir7464=; h=From:To:Subject:Date:Message-ID:MIME-Version:x-icloud-hme; b=y8MFib1H3rIfbmyeZl8olPAG4p7Ap2aO+aLMT+VrsSn0NHQyZWhjdTAgeVSvdLQbVt5sagfcJLwY9cOObAH3NXQ081TiUYa8f/uyNVza2l+LEU8TVyUoMNznKkOtHZroY4h80hmTgmFcoE107do9MeyTQZMkrxASZ/cbejK2ocMOYKlgTzZgz+CNOuutjN0degzhcrEWLg1OSsBhG4LZdRQosE+Q5qZkMHeqXs76ewyoBu2m/2vPWG8SQhbRXwn8Eu3ZpH8QpjPU2gMkgshOIlh3sucU/NGEro1Oqw0sx+NtLMWB77zK0Ebx65kmblx0c7p9HxVHu5Tf4PvJrsVxhg==
+mail-alias-created-date: 1778972301885
+Received: from localhost.localdomain (unknown [17.57.152.38])
+	by p00-icloudmta-asmtp-us-west-2a-100-percent-0 (Postfix) with ESMTPSA id 5DF73180009F;
+	Sun, 17 May 2026 02:25:29 +0000 (UTC)
+From: Sakurai Shun <ssh1326@icloud.com>
+To: Richard Weinberger <richard@nod.at>,
+	Anton Ivanov <anton.ivanov@cambridgegreys.com>,
+	Johannes Berg <johannes@sipsolutions.net>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>
+Cc: Sakurai Shun <ssh1326@icloud.com>,
+	linux-um@lists.infradead.org,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH v5 4/4] HID: hid-msi: Add Rumble Intensity Attributes
-Date: Sun, 17 May 2026 01:39:25 +0000
-Message-ID: <20260517013925.3120314-5-derekjohn.clark@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260517013925.3120314-1-derekjohn.clark@gmail.com>
-References: <20260517013925.3120314-1-derekjohn.clark@gmail.com>
+Subject: [PATCH] docs: fix typo in user_mode_linux_howto_v2.rst
+Date: Sun, 17 May 2026 11:24:44 +0900
+Message-ID: <20260517022456.5895-1-ssh1326@icloud.com>
+X-Mailer: git-send-email 2.54.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -100,280 +63,75 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: BB97D55EED3
+X-Authority-Info-Out: v=2.4 cv=GMUF0+NK c=1 sm=1 tr=0 ts=6a09271d
+ cx=c_apl:c_pps:t_out a=9OgfyREA4BUYbbCgc0Y0oA==:117
+ a=9OgfyREA4BUYbbCgc0Y0oA==:17 a=NGcC8JguVDcA:10 a=x7bEGLp0ZPQA:10
+ a=ZxuoajvSgW0A:10 a=VkNPw1HP01LnGYTKEx00:22 a=v3ZZPjhaAAAA:8
+ a=A5CT-1V7y8jouT4tXaAA:9 a=0bXxn9q0MV6snEgNplNhOjQmxlI=:19
+ a=IxSG75etxsVYPPdR13TJ:22 a=inEeFAWOpojiTzPHIy75:22
+X-Proofpoint-GUID: VM9EXsHA23NyGS9J0AjnhSgXfyAOqHVK
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTE3MDAyNSBTYWx0ZWRfX6VY+BRc+F+XG
+ nkIp9McyifMfMIUc+y/mNrw6V2JKzjK4FptQtpPrnbyFR29pLrztD0PwYQJCadGjHRCNEWaG7Eh
+ 8+vYgtBYNESBOZjTJkpFhYKsHRjC8p6h2yOS7i5hIrq4aJC7+JW3yvu2ArTtcmS+L7iWW081mTq
+ Q4BcmyFU59D1KlwPPESF5Jb3NU7+kGBZU0jaY0rS3UNVFJn1xRWAjLL1xAKPCTX3rQNT9KVLGdw
+ vlljWGThqvonsz8Kwzw17pR8z+4+G9RySCHKFzQuYSuhDyQs9oumKkjizJErOVhuEj/k6Y20k0D
+ UlmVV8SBQ0CjGC7BsQDQgNKrYZXuFYz/bkr0LwhX9YgAqb3W7QVFQjp5A8jRYg=
+X-Proofpoint-ORIG-GUID: VM9EXsHA23NyGS9J0AjnhSgXfyAOqHVK
+X-Apple-Category-Label: MjE0Nzk4NjU5NzY6JGNhdGVnb3J5JF9QZXJzb25hbCw=
+X-Rspamd-Queue-Id: 9250655F03E
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[icloud.com,quarantine];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_DKIM_ALLOW(-0.20)[icloud.com:s=1a1hai];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_FROM(0.00)[bounces-87935-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[icloud.com,lists.infradead.org,vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-87937-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_FIVE(0.00)[5];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[valvesoftware.com,linux.dev,gmail.com,vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[derekjohnclark@gmail.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[ssh1326@icloud.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	RCPT_COUNT_SEVEN(0.00)[9];
-	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_TRACE(0.00)[icloud.com:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	FREEMAIL_FROM(0.00)[icloud.com];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[icloud.com:email,icloud.com:mid,icloud.com:dkim]
 X-Rspamd-Action: no action
 
-Adds intensity adjustment for the left and right rumble motors.
+Replace "privilges" with "privileges"
 
-Claude was used during the reverse-engineering data gathering for this
-feature done by Zhouwang Huang. As the code had already been affected,
-I used Claude to create the initial framing for the feature, then did
-manual cleanup of the _show and _store functions afterwards to fix bugs
-and keep the coding style consistent. Claude was also used as an initial
-reviewer of this patch.
-
-Assisted-by: Claude:claude-sonnet-4-6
-Co-developed-by: Zhouwang Huang <honjow311@gmail.com>
-Signed-off-by: Zhouwang Huang <honjow311@gmail.com>
-Signed-off-by: Derek J. Clark <derekjohn.clark@gmail.com>
+Signed-off-by: Sakurai Shun <ssh1326@icloud.com>
 ---
-v5:
-  - Remove mkey related changes.
-v2:
-  - Use pending_profile and sync to rom mutexes.
----
- drivers/hid/hid-msi.c | 149 +++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 148 insertions(+), 1 deletion(-)
+ Documentation/virt/uml/user_mode_linux_howto_v2.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/hid/hid-msi.c b/drivers/hid/hid-msi.c
-index 4443f53b54cb1..d9951bffc8019 100644
---- a/drivers/hid/hid-msi.c
-+++ b/drivers/hid/hid-msi.c
-@@ -79,6 +79,8 @@ enum claw_profile_ack_pending {
- 	CLAW_M1_PENDING,
- 	CLAW_M2_PENDING,
- 	CLAW_RGB_PENDING,
-+	CLAW_RUMBLE_LEFT_PENDING,
-+	CLAW_RUMBLE_RIGHT_PENDING,
- };
+diff --git a/Documentation/virt/uml/user_mode_linux_howto_v2.rst b/Documentation/virt/uml/user_mode_linux_howto_v2.rst
+index c37e8e594..9224bea5e 100644
+--- a/Documentation/virt/uml/user_mode_linux_howto_v2.rst
++++ b/Documentation/virt/uml/user_mode_linux_howto_v2.rst
+@@ -234,7 +234,7 @@ an ioctl to setup the tun interface and/or use raw sockets where needed.
+ This can be achieved by granting the user a particular capability instead
+ of running UML as root.  In case of vector transport, a user can add the
+ capability ``CAP_NET_ADMIN`` or ``CAP_NET_RAW`` to the uml binary.
+-Thenceforth, UML can be run with normal user privilges, along with
++Thenceforth, UML can be run with normal user privileges, along with
+ full networking.
  
- enum claw_key_index {
-@@ -266,6 +268,11 @@ static const u16 button_mapping_addr_new[] = {
- static const u16 rgb_addr_old = 0x01fa;
- static const u16 rgb_addr_new = 0x024a;
- 
-+static const u16 rumble_addr[] = {
-+	0x0022,  /* left  */
-+	0x0023,  /* right */
-+};
-+
- struct claw_command_report {
- 	u8 report_id;
- 	u8 padding[2];
-@@ -316,8 +323,11 @@ struct claw_drvdata {
- 	enum claw_gamepad_mode_index gamepad_mode;
- 	u8 m1_codes[CLAW_KEYS_MAX];
- 	u8 m2_codes[CLAW_KEYS_MAX];
--	bool gamepad_registered;
-+	u8 rumble_intensity_right;
-+	u8 rumble_intensity_left;
-+	bool gamepad_registered;	
- 	const u16 *bmap_addr;
-+	bool rumble_support;
- 	bool bmap_support;
- 
- 	/* RGB Variables */
-@@ -403,6 +413,12 @@ static int claw_profile_event(struct claw_drvdata *drvdata, struct claw_command_
- 			drvdata->led_mc.subled_info[2].intensity = frame->zone_data.zone[0].blue;
- 		}
- 
-+		break;
-+	case CLAW_RUMBLE_LEFT_PENDING:
-+		drvdata->rumble_intensity_left = cmd_rep->data[4];
-+		break;
-+	case CLAW_RUMBLE_RIGHT_PENDING:
-+		drvdata->rumble_intensity_right = cmd_rep->data[4];
- 		break;
- 	default:
- 		dev_dbg(&drvdata->hdev->dev,
-@@ -822,6 +838,126 @@ static ssize_t button_mapping_options_show(struct device *dev,
- }
- static DEVICE_ATTR_RO(button_mapping_options);
- 
-+static ssize_t rumble_intensity_left_store(struct device *dev,
-+					   struct device_attribute *attr,
-+					   const char *buf, size_t count)
-+{
-+	u8 data[] = { 0x01, (rumble_addr[0] >> 8) & 0xff, rumble_addr[0] & 0xff, 0x01, 0x00 };
-+	struct hid_device *hdev = to_hid_device(dev);
-+	struct claw_drvdata *drvdata = hid_get_drvdata(hdev);
-+	u8 val;
-+	int ret;
-+
-+	ret = kstrtou8(buf, 10, &val);
-+	if (ret)
-+		return ret;
-+
-+	if (val > 100)
-+		return -EINVAL;
-+
-+	data[4] = val;
-+
-+	guard(mutex)(&drvdata->rom_mutex);
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_WRITE_PROFILE_DATA,
-+				    data, ARRAY_SIZE(data), 8);
-+	if (ret)
-+		return ret;
-+
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_SYNC_TO_ROM, NULL, 0, 8);
-+	if (ret)
-+		return ret;
-+
-+	drvdata->rumble_intensity_left = val;
-+
-+	return count;
-+}
-+
-+static ssize_t rumble_intensity_left_show(struct device *dev,
-+					  struct device_attribute *attr,
-+					  char *buf)
-+{
-+	u8 data[4] = { 0x01, (rumble_addr[0] >> 8) & 0xff, rumble_addr[0] & 0xff, 0x01 };
-+	struct hid_device *hdev = to_hid_device(dev);
-+	struct claw_drvdata *drvdata = hid_get_drvdata(hdev);
-+	int ret;
-+
-+	guard(mutex)(&drvdata->profile_mutex);
-+	drvdata->profile_pending = CLAW_RUMBLE_LEFT_PENDING;
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_READ_PROFILE, data,
-+				    ARRAY_SIZE(data), 8);
-+	if (ret) {
-+		drvdata->profile_pending = CLAW_NO_PENDING;
-+		return ret;
-+	}
-+
-+	return sysfs_emit(buf, "%u\n", drvdata->rumble_intensity_left);
-+}
-+static DEVICE_ATTR_RW(rumble_intensity_left);
-+
-+static ssize_t rumble_intensity_right_store(struct device *dev,
-+					    struct device_attribute *attr,
-+					    const char *buf, size_t count)
-+{
-+	u8 data[] = { 0x01, (rumble_addr[1] >> 8) & 0xff, rumble_addr[1] & 0xff, 0x01, 0x00 };
-+	struct hid_device *hdev = to_hid_device(dev);
-+	struct claw_drvdata *drvdata = hid_get_drvdata(hdev);
-+	u8 val;
-+	int ret;
-+
-+	ret = kstrtou8(buf, 10, &val);
-+	if (ret)
-+		return ret;
-+
-+	if (val > 100)
-+		return -EINVAL;
-+
-+	data[4] = val;
-+
-+	guard(mutex)(&drvdata->rom_mutex);
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_WRITE_PROFILE_DATA,
-+				    data, ARRAY_SIZE(data), 8);
-+	if (ret)
-+		return ret;
-+
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_SYNC_TO_ROM, NULL, 0, 8);
-+	if (ret)
-+		return ret;
-+
-+	drvdata->rumble_intensity_right = val;
-+
-+	return count;
-+}
-+
-+static ssize_t rumble_intensity_right_show(struct device *dev,
-+					   struct device_attribute *attr,
-+					   char *buf)
-+{
-+	u8 data[4] = { 0x01, (rumble_addr[1] >> 8) & 0xff, rumble_addr[1] & 0xff, 0x01 };
-+	struct hid_device *hdev = to_hid_device(dev);
-+	struct claw_drvdata *drvdata = hid_get_drvdata(hdev);
-+	int ret;
-+
-+	guard(mutex)(&drvdata->profile_mutex);
-+	drvdata->profile_pending = CLAW_RUMBLE_RIGHT_PENDING;
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_READ_PROFILE, data,
-+				    ARRAY_SIZE(data), 8);
-+	if (ret) {
-+		drvdata->profile_pending = CLAW_NO_PENDING;
-+		return ret;
-+	}
-+
-+	return sysfs_emit(buf, "%u\n", drvdata->rumble_intensity_right);
-+}
-+static DEVICE_ATTR_RW(rumble_intensity_right);
-+
-+static ssize_t rumble_intensity_range_show(struct device *dev,
-+					   struct device_attribute *attr,
-+					   char *buf)
-+{
-+	return sysfs_emit(buf, "0-100\n");
-+}
-+static DEVICE_ATTR_RO(rumble_intensity_range);
-+
- static umode_t claw_gamepad_attr_is_visible(struct kobject *kobj, struct attribute *attr,
- 					    int n)
- {
-@@ -842,6 +978,12 @@ static umode_t claw_gamepad_attr_is_visible(struct kobject *kobj, struct attribu
- 	    attr == &dev_attr_reset.attr)
- 		return attr->mode;
- 
-+	/* Hide rumble attrs if not supported */
-+	if (attr == &dev_attr_rumble_intensity_left.attr ||
-+	    attr == &dev_attr_rumble_intensity_right.attr ||
-+	    attr == &dev_attr_rumble_intensity_range.attr)
-+		return drvdata->rumble_support ? attr->mode : 0;
-+
- 	/* Hide button mapping attrs if it isn't supported */
- 	return drvdata->bmap_support ? attr->mode : 0;
- }
-@@ -855,6 +997,9 @@ static struct attribute *claw_gamepad_attrs[] = {
- 	&dev_attr_mkeys_function.attr,
- 	&dev_attr_mkeys_function_index.attr,
- 	&dev_attr_reset.attr,
-+	&dev_attr_rumble_intensity_left.attr,
-+	&dev_attr_rumble_intensity_right.attr,
-+	&dev_attr_rumble_intensity_range.attr,
- 	NULL,
- };
- 
-@@ -1353,6 +1498,7 @@ static void claw_features_supported(struct claw_drvdata *drvdata)
- 		drvdata->bmap_support = true;
- 		if (minor >= 0x66) {
- 			drvdata->bmap_addr = button_mapping_addr_new;
-+			drvdata->rumble_support = true;
- 			drvdata->rgb_addr = rgb_addr_new;
- 		} else {
- 			drvdata->bmap_addr = button_mapping_addr_old;
-@@ -1364,6 +1510,7 @@ static void claw_features_supported(struct claw_drvdata *drvdata)
- 	if ((major == 0x02 && minor >= 0x17) || major >= 0x03) {
- 		drvdata->bmap_support = true;
- 		drvdata->bmap_addr = button_mapping_addr_new;
-+		drvdata->rumble_support = true;
- 		drvdata->rgb_addr = rgb_addr_new;
- 		return;
- 	}
+ For example::
 -- 
-2.53.0
+2.54.0
 
 
