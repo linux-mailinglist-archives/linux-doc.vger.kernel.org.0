@@ -1,82 +1,83 @@
-Return-Path: <linux-doc+bounces-88021-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88023-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wMUoLoD0CWqBvgQAu9opvQ
-	(envelope-from <linux-doc+bounces-88021-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 19:01:52 +0200
+	id ED88H5X0CWqFvgQAu9opvQ
+	(envelope-from <linux-doc+bounces-88023-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 19:02:13 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 40FD05625C1
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 19:01:51 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id CAD5C5625D8
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 19:02:12 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id A1225301C3F9
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 17:01:29 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id A29DB302206E
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 17:01:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C51B13C276E;
-	Sun, 17 May 2026 17:01:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 559623C141F;
+	Sun, 17 May 2026 17:01:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="gFFyo/bz"
+	dkim=pass (2048-bit key) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="Whs9/7C7"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ot1-f43.google.com (mail-ot1-f43.google.com [209.85.210.43])
+Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com [209.85.210.51])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C5AE633F5AB
-	for <linux-doc@vger.kernel.org>; Sun, 17 May 2026 17:01:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B2AAE3C2788
+	for <linux-doc@vger.kernel.org>; Sun, 17 May 2026 17:01:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779037287; cv=none; b=RXGSLqSHCAVdJ6QKcxHqOGzRO3COyMkUHltLCex3395UtJf0rxzQ0JHrYuDFabNMDkJJdb2l+eP0fpEChCA/E2pTeArno65GtHzzPuBwKM1cr09mBUIW3YgtDVCYQVYuMAi0msWeyNPCLDEU+4PvNsd823UZtZgh+P4S3OP2dDo=
+	t=1779037288; cv=none; b=Api7ThYUUG4LiWrwJOx6s12YjLXDZ8iegGymQ+Ri5Yk7f+7PasoyODRfmEVf29LouAz+oOqj/yd3n342kAiNRVN64SHO/DOIg7q8AM3SUHzj9WD+BjUI1Mlo5AS4dPPduzb6st2FP8kEAF6uYziXc5YzTmqg/aRT1dTLnWffVxo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779037287; c=relaxed/simple;
-	bh=tmhO9ONS+I2ZZ/ogSFXIuW1oh1JcW7wCHoXai3f3evM=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=H1ODJp6m3r5stnq16JSG5665Il3VJO6IHaZ11c5wDzLYtWDwC63ywsLHPMenPhuTYqp+FQQDmQv7RYhF9/3AHyIaqIpOYfGE5mRynn6lMbLPNGfqKxjfi/fRV8dfWygnQJLYc6eGbP0SBZnPWq/PxSYV6rvR9OtYNdS2HmjhKBw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b=gFFyo/bz; arc=none smtp.client-ip=209.85.210.43
+	s=arc-20240116; t=1779037288; c=relaxed/simple;
+	bh=QpDJWtwhRx2DgAxOzaZv0LmkHcMquKEcvuDpOL43cYg=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=SYbFX6qY/qnPKmFAvOR9na6Uv2gkDwO1tp16Vkewvev/p1N4MmDmNyGRMzGA0qslJgQjILt2FZmjTI/IzoElfu0Yd12V9L1ccVAQxY3BpsNCkkbkqNu6IeWmhi6WM6nnVWXaxHSVkpKXZU7eiaQNpuaAyvymwbq6Kn1do0LFy58=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b=Whs9/7C7; arc=none smtp.client-ip=209.85.210.51
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
-Received: by mail-ot1-f43.google.com with SMTP id 46e09a7af769-7dbccf6a23dso1389606a34.2
-        for <linux-doc@vger.kernel.org>; Sun, 17 May 2026 10:01:23 -0700 (PDT)
+Received: by mail-ot1-f51.google.com with SMTP id 46e09a7af769-7df05fc49e5so1680790a34.3
+        for <linux-doc@vger.kernel.org>; Sun, 17 May 2026 10:01:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1779037282; x=1779642082; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:mime-version:message-id:date
-         :subject:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=eHtZ1FRLItPRp/kCXOsjA2zW8HDB2xesQ4ejF3mSkns=;
-        b=gFFyo/bzImcHmaVgDk4qOl1DTt/ieApMUF8PkY4yrZvqIr5At4+LNVPS+F5tPnh+Bc
-         6I24Bu2T7jZ5KMzC+gHlCePzc3ayUMUR90P6b0PeHf+bnjtJCZEdSjlPLA0gVHHDU7av
-         hJ65EoxJtBJIYRloAyqJl0Q2NvgrDFaWjzoYfLEsztnEbE7b5kmzD7nUELi99XNtKuJf
-         sOHFhZH+u4SrVUUFmklfhVZDt6q+ez7n69ULDCrO9A+XCbMq2kGod+/G7LimI6zQnPn3
-         HPLusXrGLptM++JWzkm5ashf3TtBftp1VqDDEvhLb4YSb0oUTV7nq97TVW5RD5TVULpQ
-         68vw==
+        d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1779037283; x=1779642083; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=yipHWAGn3k6dstQXzJlgc9fTRy+Q2C3y6WOEJwPv3hc=;
+        b=Whs9/7C784qwD5Vb/7yfbOOCOZjN4dDu4m0xgLi+LP9hOQGxErGD+kR38lXop/VM5r
+         cV2iwSik39WiqjgHsDuSQv+QORRPFpRe6bljy4QSQYU7Wx+LK24QZHXCQ/W7mvKicA+E
+         xkFRT7nEGMEgJLB/4FENp8JE/yoLm+kig5l/UQaKlF33tuAEJtRGNpOGnAA189dRohZa
+         Gv3A/VYvjE9jKR53suAdWg0y7rM36ij/n04FNCweIDPr7fAUpvJi1pmhbZyFXVi38UYq
+         JJTe6JcbUvY0/pF5F51YGUkKx8lskXwlmDcMu4xMR8mblm3x7HJJGj2wiNF1CLGYqAw1
+         /n5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779037282; x=1779642082;
-        h=cc:to:content-transfer-encoding:mime-version:message-id:date
-         :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=eHtZ1FRLItPRp/kCXOsjA2zW8HDB2xesQ4ejF3mSkns=;
-        b=Zl50PYa0T6RYerWAtuIwDuYrnOfTDKyLlYghzNEbm31YDRwf3z8LmOM+OzNV4hgJig
-         1F1hX9jKT0DbWVmtXM4ZB3VuS2glnwzqVJLJRksK3lUGAaP+M54WhemmtlnnHVmHQmDa
-         ES7N4xXHeWeRtvDmlJCgUXK671x47K6L/qXaswBOWcpG9ChBj3R/s01cSuJ59AH05EVA
-         xdZjLhzSYNMRMbYi3EFxnPmdlIK39+4j9mK3cQbUrA7yeVkj+dB97/ldmmo9moNvfjQG
-         qhkMPb3q0vjAVlDRYtOqDpijUS/L+o0ewv361fza9TrYgLoHRcb3vioUg0ZoLAoesC+0
-         wV1w==
-X-Gm-Message-State: AOJu0YxV5Rjy6fk7m+eWnd8dl8b8djaHKrMboi+wn+sAiwNqjefZSCrx
-	zEAYoHv+eFcU2BIX48xszvOEqqdA/kV735WMPSUmu87brYakO948CTInPsJDwYzn9nY=
-X-Gm-Gg: Acq92OGOMfjA0AhNLl4ztmhLEULQNBKJw3Wep0bMsZkI+/7wBM53jB/3oy0dQmj+bw5
-	FRaKq/DO/auCV+upom6m4SBCoNhBEStcdGW8HnuQkiPxQDPXRecMXZ+/5sUDKua5jHQAVs684eR
-	7Fak7iib2tLdcuFv9z5U6t7ydrliw7/AVlDjlNUe3neWW49l/WfqxVyr6FhKaN8jjtQyorhGcf+
-	PNnB2FaPfTICo4EaZef+TvAr/yAB+SthAR8HFUP/kwe6jc5ZZ9vKsGp9Ppnhdi3ryXvo2iHshpt
-	E6EH65j2vGvry81VovvUPrN/vuP+JPAV1feMtpQjWjJZYVDJ93o0FdwisrcpckVA/X3wKJHFewF
-	2U9AQ+Jtxvc+Y9UgPaR84l2oK5pSp19WDewE7Qc4XEAqHGlYIUupyODfQwQB1lzJVxlPIc+T7CJ
-	aD85OWkcOW/fzvE6wpkbW41YcgDjaStZw5pYWzMg==
-X-Received: by 2002:a05:6830:4118:b0:7dd:9b19:a875 with SMTP id 46e09a7af769-7e4ea0529cdmr8843719a34.2.1779037282041;
+        d=1e100.net; s=20251104; t=1779037283; x=1779642083;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=yipHWAGn3k6dstQXzJlgc9fTRy+Q2C3y6WOEJwPv3hc=;
+        b=Fk9tGd2JU1giXZPjAKyaWu7IDsOjl/rEOclpz671MuW9ORErsmP3p5vGpzxTd6ZXuo
+         /82K3z+db39AarekvYrE2L6DQqOwFDA8I7Q99XAosxg5I4ltRkDuYlvam4YYKMU3nbP4
+         +GSkKOTKiXqlI3vGt40wjm866TMtRGBKeSeVCGqAsvG3pHhiTh/mK5smxzalXsBpnXVL
+         MYz6pSW/PdQCaId2++DmZbonq7SJf+ZhxvWdEbvMVcRqDmByqVJQ/dH/HSnXBb0k03w7
+         LceEbAQyC9x40xUnpbVPQn4kSjwjcQVh+B2Vw9XRvRYvAxJsZgIaOZPQwLm63dj2MoaU
+         QEgA==
+X-Gm-Message-State: AOJu0YwekM0R/wvuEClmW1xN1GYAuelNZeTGi7mQKOiS/ef22p7ckOZS
+	7TDgM+XM21DJLzF/YMhGTZY8223mALG/AdCNcroZuzaWYkYAnLMhnT3Tw/3WrW0/XcU=
+X-Gm-Gg: Acq92OHrvMbCQvxXW7PFfeFl5jO9HfBH2rLVfUhwyOJArwFPGkSUB7FwL+Tve9yoifh
+	tJSY7NCbb2x3lfV6saz5N0PqbN1CPfgJuM3+r88MdmFQbgl8QFxfY/zD2ufhfssNmCf/zPpHPkE
+	DULshyDYdTJ3AgyhixSTJYqZX28/U9Pvkw6x0PVKdpRiEh8pcR3uZXr6zmkLywW0aF9EliTctgm
+	zoy7NHH2y3kAlAIZv2t6G1Q8toI47/YCbLHZrdu7WtPS35HSVyB/GkBPYKFctxDFj7hCUS8IvxT
+	VEMfuOfzXaFMjLp9wHgW0TneFE+iW1fDO5ExBbH8y0J14s+YRVnCXBk8aiL4PpC6vlLgJi/SlkP
+	fS45AHqbq1ko9XkTU5S+2GAP+5NB59aMzutTYLETjIGfjjYUCUdRYNu5le0DJL2ow8oXl6AITW7
+	tW7SO4u54oTGlRTqIAUEK997rT2nA=
+X-Received: by 2002:a05:6830:6616:b0:7de:51f3:e7ed with SMTP id 46e09a7af769-7e4fa0cc2d0mr8672950a34.26.1779037282858;
         Sun, 17 May 2026 10:01:22 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:7a4b:ddf0:f61:f58d])
-        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7e55b7c68d6sm5890859a34.3.2026.05.17.10.01.21
+        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7e55b7c68d6sm5890859a34.3.2026.05.17.10.01.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 17 May 2026 10:01:21 -0700 (PDT)
+        Sun, 17 May 2026 10:01:22 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Subject: [PATCH 0/2] docs: iio: update dated triggered buffer example
-Date: Sun, 17 May 2026 12:00:57 -0500
-Message-Id: <20260517-iio-doc-triggered-buffer-update-helpers-v1-0-7f00d4188f6f@baylibre.com>
+Date: Sun, 17 May 2026 12:00:58 -0500
+Subject: [PATCH 1/2] MAINTAINERS: add match for IIO API docs
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -85,10 +86,9 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXNQQ6CMBBG4auQWTsJoIh4FeMC2r9ljIFm2hoTw
- t2tuvw2720UoYJI12ojxUuirEtBc6jIzOPiwWKLqa3bc901PYusbFfDScV7KCxP2Tko52DHBJ7
- xDNDIcD2Ol6EzgztRqQWFk/fvdLv/HfP0gEnfPO37ByfuTjqLAAAA
-X-Change-ID: 20260517-iio-doc-triggered-buffer-update-helpers-ef7e3895c9f4
+Message-Id: <20260517-iio-doc-triggered-buffer-update-helpers-v1-1-7f00d4188f6f@baylibre.com>
+References: <20260517-iio-doc-triggered-buffer-update-helpers-v1-0-7f00d4188f6f@baylibre.com>
+In-Reply-To: <20260517-iio-doc-triggered-buffer-update-helpers-v1-0-7f00d4188f6f@baylibre.com>
 To: Jonathan Corbet <corbet@lwn.net>, 
  Shuah Khan <skhan@linuxfoundation.org>, Jonathan Cameron <jic23@kernel.org>, 
  =?utf-8?q?Nuno_S=C3=A1?= <nuno.sa@analog.com>, 
@@ -96,35 +96,35 @@ To: Jonathan Corbet <corbet@lwn.net>,
 Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
  linux-iio@vger.kernel.org, David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=757; i=dlechner@baylibre.com;
- h=from:subject:message-id; bh=tmhO9ONS+I2ZZ/ogSFXIuW1oh1JcW7wCHoXai3f3evM=;
- b=owEBbQGS/pANAwAKAcLMIAH/AY/AAcsmYgBqCfRM1LWCrjB+ROYhux20WhU+SwORuzhIZQO3S
- KLiHPPhofaJATMEAAEKAB0WIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCagn0TAAKCRDCzCAB/wGP
- wPylB/9wiTNT2XhBbdQ8ztto0m10cm30vTO+JQrjM6aswOjtMrjtDqLf7I87nUqvbKM8q3HBy/a
- UEfuCPP59lT+woFvpVfrm8kDRNRIOBNvN2q5uM0PqFUstP45GXb+KR66QgVkYGEO+9k2y+u85qZ
- CcAmI2QKy0Pn+x1wTi9QXUxi4Qmuf601Hq6Ug36lMkri0lNAgVVvyqyhfa91pRDOiT/d7f+n1IK
- ja0Rc/f0eC2XZpk4o7Mkjg1dCHvCy/2TGFKykc5mA+RnpVfS6ixVFsSMU2Md+SdcpUFtpV0/wr1
- CLNqT0yIuDXUME2SJFPjSi6/X/4xoZqSk2ZMsIO9pysqpE7X
+X-Developer-Signature: v=1; a=openpgp-sha256; l=737; i=dlechner@baylibre.com;
+ h=from:subject:message-id; bh=QpDJWtwhRx2DgAxOzaZv0LmkHcMquKEcvuDpOL43cYg=;
+ b=owEBbQGS/pANAwAKAcLMIAH/AY/AAcsmYgBqCfRThXlweZQwoMnIe5R6VLjY8Bp4ic9gssvbe
+ 8D/KRE+ApOJATMEAAEKAB0WIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCagn0UwAKCRDCzCAB/wGP
+ wKyxB/wIM6zib71iX3w2Jr6wlJnb83EdxHPdxpPW9sgPEKVGP+4Tnl1T//BmSGSvJygrVUgsoMm
+ EdCFXg+23uG4iI+IS6BjmJmkFQ2mdS3KT1vCkxQAPNQ9gabbUW+/JixtIa9/2tyCIWJm5GwiI0k
+ /5Saht3JW5QtcH2jBYPJHF7GtTvBOkSoKdWpvypqbi3yvVeJRTL1Dc59qHYmbNt4VRD+ng9S6Kw
+ 2jh2B3R82Q2kFRXqW8ELvpS/8jCw7MnJFbaXSE+MMB0lug7cJxap9+O830gdf1ppReIyXJ5lex+
+ RTLuLm4n3q0Ej7aSObwjw8Oxj6WaeBJ24fopDaXgiZM0le0Q
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
-X-Rspamd-Queue-Id: 40FD05625C1
+X-Rspamd-Queue-Id: CAD5C5625D8
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[baylibre-com.20251104.gappssmtp.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[baylibre-com.20251104.gappssmtp.com:+];
-	TAGGED_FROM(0.00)[bounces-88021-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-88023-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	DMARC_NA(0.00)[baylibre.com];
 	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	PRECEDENCE_BULK(0.00)[];
@@ -134,28 +134,32 @@ X-Spamd-Result: default: False [-1.66 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCPT_COUNT_SEVEN(0.00)[9];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[get_maintainer.pl:url,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,baylibre.com:email,baylibre.com:mid,baylibre-com.20251104.gappssmtp.com:dkim]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,baylibre.com:email,baylibre.com:mid,baylibre-com.20251104.gappssmtp.com:dkim]
 X-Rspamd-Action: no action
 
-Noticed this example was out of date while grepping for something else.
-And when I did get_maintainer.pl on it, it didn't match the IIO
-subsystem, so we get a bonus patch to fix that too.
+Add a match for Documentation/driver-api/iio/ to the IIO subsystem in
+MAINTAINERS. Any changes to the IIO API documentation should be reviewed
+IIO folks.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
-David Lechner (2):
-      MAINTAINERS: add match for IIO API docs
-      docs: iio: triggered-buffers: use new helpers in example
+ MAINTAINERS | 1 +
+ 1 file changed, 1 insertion(+)
 
- Documentation/driver-api/iio/triggered-buffers.rst | 8 ++++----
- MAINTAINERS                                        | 1 +
- 2 files changed, 5 insertions(+), 4 deletions(-)
----
-base-commit: 8678fb54958893818ddeccd05fea560a4e1fc759
-change-id: 20260517-iio-doc-triggered-buffer-update-helpers-ef7e3895c9f4
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 0de74503df08..d14854677649 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -12512,6 +12512,7 @@ T:	git git://git.kernel.org/pub/scm/linux/kernel/git/jic23/iio.git
+ F:	Documentation/ABI/testing/configfs-iio*
+ F:	Documentation/ABI/testing/sysfs-bus-iio*
+ F:	Documentation/devicetree/bindings/iio/
++F:	Documentation/driver-api/iio/
+ F:	Documentation/iio/
+ F:	drivers/iio/
+ F:	drivers/staging/iio/
 
-Best regards,
---  
-David Lechner <dlechner@baylibre.com>
+-- 
+2.43.0
 
 
