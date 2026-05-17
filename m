@@ -1,101 +1,63 @@
-Return-Path: <linux-doc+bounces-88028-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88030-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id IDmOHWv7CWpPvwQAu9opvQ
-	(envelope-from <linux-doc+bounces-88028-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 19:31:23 +0200
+	id WJUyF+H7CWpPvwQAu9opvQ
+	(envelope-from <linux-doc+bounces-88030-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 19:33:21 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id C54FA562919
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 19:31:22 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id A78BA56297A
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 19:33:20 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 27BA6300F501
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 17:30:41 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 27A5F3002286
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 17:31:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0E8083CA490;
-	Sun, 17 May 2026 17:30:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D37E83BB680;
+	Sun, 17 May 2026 17:31:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ILn6PBvA"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ATudrdgA"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96BBE3C9EEB
-	for <linux-doc@vger.kernel.org>; Sun, 17 May 2026 17:30:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 773AE3C6A27;
+	Sun, 17 May 2026 17:31:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779039039; cv=none; b=bb1UDeP+bPcz8IDlngxuKtnmg6/BVhg5ekPRRQKOBzsN+x8BpEz7gBfteZsWnPTTSbPdPrsZiRFFkjKx+Z0gV3GtIoU0rvrr9rLAYwemMdM9TKxSlUY03Rft3ih5Q3KeRAgyth0T1veRTtA6+OZI7DF4rsH0YiQ3j0Mf9lmlcso=
+	t=1779039078; cv=none; b=qIfhSNjj4yoJIA5EcpPzFPU+s7L2eDrZsm5tquWPIDCgax46Q4pXqGbj4nYolmSExrIe5aupwYDyKEDp0HU5GZEHhu6j2vciQL5+NLK+tsizpCi9nNf9cZul6iNjGQeffe8SrmxtPw52J90qmN+bWNETv6oTRwQ8DAjWAeIyGSQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779039039; c=relaxed/simple;
-	bh=ZN+M4Cchoa1lUZGVHkJaXVLB6ZtVvpayoDZ73oWRJAo=;
-	h=From:Date:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Gu60m3lHQrxDHGK9uGn2cqmMEyvesFRG/XN5msu8cK9s/xKo5LajQl+Kk0cgmrUWz1srdbDulY26HFpFmNaVHMN/mBHCV5SOoC7QHkGzLkAJmgrR++30fxTCflWz3vyof0JgHmvmcUlwUzuS1f/I4dACjuBHZiZrBUJbfn/NPBM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ILn6PBvA; arc=none smtp.client-ip=209.85.128.41
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-48e82c23840so9403055e9.3
-        for <linux-doc@vger.kernel.org>; Sun, 17 May 2026 10:30:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779039034; x=1779643834; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:date:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=biN63ninIqhGSrYMwDyAgi4Qnh2QQxC8g5gMwT2w1jQ=;
-        b=ILn6PBvAE4vEIn/gQKL3g1QZDQM5AH+iyz7FsTSK4GO7ra5i1V6PhR423ZdBEhEgKf
-         ow+u1wM/oWnxJQZODL4IllpQ/PdI4bIBjCyTpAHOteIZcE2+4ndeC1K6dKIwpcswJMYn
-         5Cib4cyH0Eel063IOE3EvRQ9Om1v5TTxs5LzGLQ0w2SzFegUKaiX7HI1BdGF0n1moeLh
-         xNWpiqD5pXS920Li9HSx25DDxqovXuZP+LvueVnSmJlg2g5lSuo0sIbFYNZW81k6sYB6
-         IILR+Bf/x8n67wqCxWmpRJtOnwAtvqiWgvJ0kDHxiqaQYy5feBVsjPhZdf7tqLFWK/by
-         whVg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779039034; x=1779643834;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:date:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=biN63ninIqhGSrYMwDyAgi4Qnh2QQxC8g5gMwT2w1jQ=;
-        b=BENIJAE3B9c91JntV16nBee9VC6Jpso7yhwmvDxqohKMd0I1sFEfJ6zHrXZUJWk43W
-         wiDPORb7Tmshp5U2ndkpyW+k/VszeOkbS9Csx1teKyCpSHjjId833X8a5MBIJe/bIjMc
-         QV3mvg07gJlaY3scjmPCZEYjcilERlzQqvD3HKwnXq3naV8J481TgtL/5bEu2qOkxdCW
-         f1gyT4rF8j/H6Sth7GXzR+hleHiM9mA7q8crfsKGkwgdSMlDv7L/3M/JGmA6pSqhfOBc
-         qnqloGxZ7vlo18vfvuggviXSCl3mypbyE4U5LV743B7ntMDW7+wxXw5ElBQKIbNkle2W
-         zCAg==
-X-Forwarded-Encrypted: i=1; AFNElJ8nCv+4t0td5RezmOxZvCPJLIIaG83iqVe3/OzRwkpF7+nALMBeZPtMbHf646RMOdDdJlALMuQw+tM=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxdtqpgjUgXNw9hdohja4ecKOBfg4hEmSxTNTlxCl3IDXwvL6Y0
-	j3IkoY0tsOvS0wIn9Fz9ZfhcS9rXCbGp9QS92cWBMJcsjC+FHT0jDPwq
-X-Gm-Gg: Acq92OEthoikngGMhTb6MEyRJ9CvvTPy1UvwDx8Iow9PHn6fOkEbVYhv94GVWpF3IpJ
-	eH+SxDqiMF7JPVnsscKc4htyQvUDeF1xwc8O0pebVvtkrJdzTDAfpmf2x3Z5GF2RJDtNZ6niHPq
-	LNnv4gjfTgRQ85Y/ZARxRYuoWRvjVt/+JO5K32RrOh2EokfXtVGmQXiLH8/fTkziX8gYkpwD3Fx
-	vxHHWPZK8N5032VP8+FI2wmnNh0KLRw/6wW8IlYHumvVW1jvWeRn1ZzGDCNTBNKohlSQl3hiB7b
-	qYUp8kFWh87h6IqJm2GKUHv8qlEjmY/5eaICJwTE4nNeS+0fu7/sbO/uMu9KrDmt597l1J/q7q2
-	s6K9L7KgmoDiaEe4+/oMazi7AuIjKSko02Z03WQ36xocNjx4HS3BZh77hTfFyYHA/USk7AI1Cb9
-	Xuz2KvpLwVAFYaQN1fisCudDGPbF7RyG+yLk7thEIYVG8Fbo5FhGyJaih0l/GxsAfCG/ztViQhU
-	m9K5lqfTXOIf1tsxuGtk0lJ/kBnA78hQJDDi+6bpF30mhxxO/U31L5ZVcjivx66JV1znxM=
-X-Received: by 2002:a05:600d:8448:b0:48f:fb0d:8d86 with SMTP id 5b1f17b1804b1-48ffb0d8ea0mr83999885e9.32.1779039033987;
-        Sun, 17 May 2026 10:30:33 -0700 (PDT)
-Received: from RDEALENC-L01.ad.analog.com (24.206.116.103.netskope-rdns.com. [24.206.116.103])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48ffed68baesm35541065e9.0.2026.05.17.10.30.31
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 17 May 2026 10:30:33 -0700 (PDT)
-From: Rodrigo Alencar <455.rodrigo.alencar@gmail.com>
-X-Google-Original-From: Rodrigo Alencar <rdealenc@rdealenc-l01.ad.analog.com>
-Date: Sun, 17 May 2026 18:30:27 +0100
-To: Jonathan Cameron <jic23@kernel.org>, 
-	Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>
-Cc: rodrigo.alencar@analog.com, linux-iio@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-hardening@vger.kernel.org, Lars-Peter Clausen <lars@metafoo.de>, 
-	Michael Hennerich <Michael.Hennerich@analog.com>, David Lechner <dlechner@baylibre.com>, 
-	Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Philipp Zabel <p.zabel@pengutronix.de>, Jonathan Corbet <corbet@lwn.net>, 
-	Shuah Khan <skhan@linuxfoundation.org>, Kees Cook <kees@kernel.org>, 
-	"Gustavo A. R. Silva" <gustavoars@kernel.org>
-Subject: Re: [PATCH RFC v4 09/10] Documentation: ABI: testing: add docs for
- ad9910 sysfs entries
-Message-ID: <yrabhhhdkzmiuxlqzrrj6a47ftlzwvva7r2korzeszdy4yqrin@xl6obhhnnas4>
-References: <20260508-ad9910-iio-driver-v4-0-d26bfd20ee3d@analog.com>
- <20260508-ad9910-iio-driver-v4-9-d26bfd20ee3d@analog.com>
- <20260517155843.7f833658@jic23-huawei>
+	s=arc-20240116; t=1779039078; c=relaxed/simple;
+	bh=+aUjJ1d0JLkcLl5wfHdzIg1GFF63EALYJshPzkwzzWE=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=PphSwXZss/Bv98GVC4TLoVSkOwFdOefKZp99afrUc0l7/7jIRRQeNddm+1xrlRfRzNVuA2R3ZkbizXTFxcDJjYEY7sQlhme0POPo0ZhCmVUvvqYt9g5eeJ+WbTrFF3r+6oIxWQVw1nqLbufm/kevosb+suY4opV2KtWjZWUk80Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ATudrdgA; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 918B0C2BCB0;
+	Sun, 17 May 2026 17:31:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1779039078;
+	bh=+aUjJ1d0JLkcLl5wfHdzIg1GFF63EALYJshPzkwzzWE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=ATudrdgAiAFP4FEfv8ThrK2psXtOQgx8sXHFshWDMMTTuGVH4CMNWy9K9lhSWo9Mf
+	 5DupSbZ6y5SI6XPloBrlt3dCIIznNJP5tSCT1346pT17DNoLyE3dqQUUlMB/4TePD2
+	 e9Mxeg6wnZm6SQ1vCGuvVSXXYbh+pvblsFS6QS2FCZi0DOdlL4Xd8V4qDG5h9L2Nge
+	 jNFBff+2mssd62VCHPlFXyW0/c2eRPnTFjTnOYphBteuCELIYPmLh0KmQMdwSu+DNl
+	 B3GTtS9UqqUjGy2KBciMoaQqQcVlWBJbJ4Gq8HUayIbjktidN91bW44PVTrzbhnofm
+	 d8+0D1W3PgWkw==
+Date: Sun, 17 May 2026 20:31:10 +0300
+From: Mike Rapoport <rppt@kernel.org>
+To: Pasha Tatashin <pasha.tatashin@soleen.com>
+Cc: linux-kselftest@vger.kernel.org, shuah@kernel.org,
+	akpm@linux-foundation.org, linux-mm@kvack.org,
+	skhan@linuxfoundation.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, corbet@lwn.net, dmatlack@google.com,
+	kexec@lists.infradead.org, pratyush@kernel.org, skhawaja@google.com,
+	graf@amazon.com
+Subject: Re: [PATCH v2 05/10] liveupdate: defer session block allocation and
+ PA setting
+Message-ID: <agn7XnuO7VU4eK52@kernel.org>
+References: <20260514222628.931312-1-pasha.tatashin@soleen.com>
+ <20260514222628.931312-6-pasha.tatashin@soleen.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -104,98 +66,80 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260517155843.7f833658@jic23-huawei>
-X-Rspamd-Queue-Id: C54FA562919
+In-Reply-To: <20260514222628.931312-6-pasha.tatashin@soleen.com>
+X-Rspamd-Queue-Id: A78BA56297A
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-88028-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	TAGGED_FROM(0.00)[bounces-88030-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[455rodrigoalencar@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	NEURAL_HAM(-0.00)[-0.997];
+	FROM_NEQ_ENVFROM(0.00)[rppt@kernel.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,rodrigo.alencar.analog.com,dt];
+	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,analog.com:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[soleen.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
-On 26/05/17 03:58PM, Jonathan Cameron wrote:
-> On Fri, 08 May 2026 18:00:25 +0100
-> Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org> wrote:
+On Thu, May 14, 2026 at 10:26:23PM +0000, Pasha Tatashin wrote:
+> Currently, luo_session_setup_outgoing() allocates the session block and
+> sets its physical address in the header immediately. With upcoming
+> dynamic block-based session management, this makes the first block
+> different from the rest. Move the allocation to where it is first needed.
 > 
-> > From: Rodrigo Alencar <rodrigo.alencar@analog.com>
-> > 
-> > Add custom ABI documentation file for the DDS AD9910 with sysfs entries to
-> > control Parallel Port, Digital Ramp Generator and OSK parameters.
-> > 
-> > Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
-> I'm fine with phase and frequency as defined, but for the scaling it made me wonder.
-> For outvoltage0 channels the assumption the value is the peak voltage so if
-> we know what input to be modulated by the ramp generator can we express them
-> in volts (well milivolts) rather than as a scaling multiplier?
+> Signed-off-by: Pasha Tatashin <pasha.tatashin@soleen.com>
 
-The DAC output is current-based and differential. Voltage conversion would happen
-outside the device... using a resistor load or an op-amp transimpedance stage,
-and I am no expert on that, but that often requires impedance matching so voltage
-levels may depend on the frequency. Then, I suppose that voltage is not the right
-unit to use.
+Acked-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
 
-The scale here controls the amplitude of the varying signal. Assuming the peak voltage
-(amplitude) is constant means we have a constant envelope, but that should not mean
-we can't control it or it should not mean that the hardware can have other ways to
-control it. That said, scale behaves as a "gain multiplier".
-
-> 
-> That seems to me like it fits better with the overall ABI.
-> 
-> > +What:		/sys/bus/iio/devices/iio:deviceX/out_altvoltageY_scale_offset
-> > +KernelVersion:
-> > +Contact:	linux-iio@vger.kernel.org
-> > +Description:
-> > +		For a channel that allows amplitude control through buffers, this
-> > +		represents the value for a base amplitude scale. The actual output
-> > +		amplitude scale is a result with the sum of this value.
-> > +
-> 
-> > +
-> > +What:		/sys/bus/iio/devices/iio:deviceX/out_altvoltageY_scale_roc
-> 
-> Silly question perhaps but can work out how this related to millivolts/sec
-> That might make a more intuitive interface than scaling multiplier per sec
-> Perhaps the combination with offset makes this impossible though maybe that
-> could be a expressed as a voltage offset?  Afterall if the amplitude being
-> scaled is 5V then 5 * (offset + scale) = 5 * offset + 5 * scale
+> ---
+> @@ -77,15 +77,16 @@
 >  
-> > +KernelVersion:
-> > +Contact:	linux-iio@vger.kernel.org
-> > +Description:
-> > +		Amplitude scale rate of change in 1/s for channels that ramp
-> > +		amplitude. This value may be influenced by the channel's
-> > +		sampling_frequency setting.
-> 
-> 
+>  /**
+>   * struct luo_session_header - Header struct for managing LUO sessions.
+> - * @count:      The number of sessions currently tracked in the @list.
+> - * @list:       The head of the linked list of `struct luo_session` instances.
+> - * @rwsem:      A read-write semaphore providing synchronized access to the
+> - *              session list and other fields in this structure.
+> - * @header_ser: The header data of serialization array.
+> - * @ser:        The serialized session data (an array of
+> - *              `struct luo_session_ser`).
+> - * @active:     Set to true when first initialized. If previous kernel did not
+> - *              send session data, active stays false for incoming.
+> + * @count:       The number of sessions currently tracked in the @list.
+> + * @list:        The head of the linked list of `struct luo_session` instances.
+> + * @rwsem:       A read-write semaphore providing synchronized access to the
+> + *               session list and other fields in this structure.
+> + * @header_ser:  The header data of serialization array.
+> + * @ser:         The serialized session data (an array of
+> + *               `struct luo_session_ser`).
+> + * @sessions_pa: Points to the location of sessions_pa within struct luo_ser.
+> + * @active:      Set to true when first initialized. If previous kernel did not
+> + *               send session data, active stays false for incoming.
+
+Hmm, why addition of a single field changed the entire block? :/
+
+>   */
+>  struct luo_session_header {
+>  	long count;
 
 -- 
-Kind regards,
-
-Rodrigo Alencar
+Sincerely yours,
+Mike.
 
