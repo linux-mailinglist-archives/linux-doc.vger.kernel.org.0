@@ -1,334 +1,188 @@
-Return-Path: <linux-doc+bounces-88224-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88289-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id IOoBOu1LC2o7FQUAu9opvQ
-	(envelope-from <linux-doc+bounces-88224-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 19:27:09 +0200
+	id aANxIzqbC2oDKAUAu9opvQ
+	(envelope-from <linux-doc+bounces-88289-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 01:05:30 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 57A9C5719AD
-	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 19:27:09 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 300AB574DEB
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 01:05:26 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 8C1453046060
-	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 17:22:46 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id DA3AB300EF75
+	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 23:05:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4D660385506;
-	Mon, 18 May 2026 17:22:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EEBC02F9985;
+	Mon, 18 May 2026 23:05:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="h/Z16HuH"
+	dkim=pass (1024-bit key) header.d=flowmailer.net header.i=@flowmailer.net header.b="oOv4FfQQ";
+	dkim=pass (2048-bit key) header.d=siemens-energy.com header.i=schuster.simon@siemens-energy.com header.b="dI1aE97G"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from PH0PR06CU001.outbound.protection.outlook.com (mail-westus3azon11011002.outbound.protection.outlook.com [40.107.208.2])
+Received: from mta-64-136.flowmailer.net (mta-64-136.flowmailer.net [185.136.64.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AFC54384250;
-	Mon, 18 May 2026 17:22:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.208.2
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779124965; cv=fail; b=LQgttkwHRXq2Ky1uDjVPYJpSRptnMPNiHH97+M9ty8yMUXXc0c1G5FVddWkAmbK31YaQ6WyykzhWR34O5pTEA9vMlMG1FA48+GneeivWfOfI4lyj1/4hm+ffjJuJ3mZnIKYIqfsbTDPFL0FtjA/CCEhEvU3B7tKIXA0v3evhvTU=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779124965; c=relaxed/simple;
-	bh=YShGaYtiiYwF3BgwWWlaIGqTGpzPopn5tgxZ1Od/UdM=;
-	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
-	 Content-Type:MIME-Version; b=V5iG8x8PMXxojij6B+QDlHUFsCYOYLQpElwz+MVLw9vxQi+zGNmyq4ba/FDiMzJMsECTeX5Lio/MVqWJwrb2u8lOsZTCjZ4tEeiv/JQwAiIgJSJHlFatTovkJu4rSAmKm8HYb6EC+X+dsVMx6EmCCxJ1Pf4oRUKsx8Fdot3lV0Q=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=h/Z16HuH; arc=fail smtp.client-ip=40.107.208.2
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nVkUs9mE/ZeGWu2wrf4yHf0vmlR8e7pPsfwwAqqupX+ZEhHR+69TqSNFGgbra2IMcblsb/oWTH5bGMiUWUAcbGd0CQg25Hj1/xnBvpEI5G7/B7IlM+LSpC3oZU86iLUtC/2YC6MyRHnKEHpIan10gNsSoOUZmfoUk+hIahX4heoxy2Rk7LJdqedvyouHqqOBv+UYZx6hRNM07SEZhzM1OXt3Qxty3bUrsL66v6QV/sAQBvhfXTX+eQf6zb307a6fxVgkv529Tuq8tlGZotJgqxJGZcqCOSZovZc5+v0ZRaFUo+4X4ENiZGgPtXJLvfMFLDmmhFlj461bYENA+qPfvg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GtZtQjUFYnitUt1W+35O0JYa2C4FrO1tHDAPplNRBXw=;
- b=hGlmMTZ40SIoT/4yxHnbp39wbz2uCAhTyxG4VmHkjZv9+amwffuqjasTcbedWzN4kfmxvOK8OUoP7MHTLlvuLfTUr1mNQSZPCCE50swFUwe/lg5F7mp13nGKvcQybFdrqSX8+mEJNfRgwVtcedFvcc63Nm20KmQ8DaR6t11Wk6IZUA6GUw5xHCLdQrbuTB2LbY5nHmZndFopyXMU7xvz5j4P0RG0nU60XFYgu37xQQWZ1nwPItqFQHdZn7p614ZePPF5/eeKawOLtXQCGItwamM4Mb+/4O5r3/kv7b2YuNSiU0+ckQA8Qo++LlfOHEuaFgaznWIHGoGg9RXE2yuYCg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GtZtQjUFYnitUt1W+35O0JYa2C4FrO1tHDAPplNRBXw=;
- b=h/Z16HuHzXbtm6fr+2q9z1KCVYRkXeWJx+2fwyGoUcO20P5cZC2vPF8B4Y0pbZe3A9hDw8IwLsOKr/D3AQolMoil0C9ThVojiUnll2jqo7C1okOoLxm7FqWSRnRQL4R/N1EAvvaxrazHzFg8TEVo2rAxLsLBUf7ttGMLw/dhX9BB+RBZynKWeSYNJMT6CTEOsBBq4qjhUEZAhFhiivrfL8qIXqk9HuQ+gs/SObypdYVcLIraajTJoJwCE60O9RdBpJlOpypFbbh79faj226nPPEio2Nsi2HHiFCXUCapLWjbjVtcvOtEGL2yFp2LPK20HUM2WSN99qLt77+QHSLyVA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from BN9PR12MB5179.namprd12.prod.outlook.com (2603:10b6:408:11c::18)
- by DM4PR12MB5794.namprd12.prod.outlook.com (2603:10b6:8:61::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.15; Mon, 18 May
- 2026 17:22:34 +0000
-Received: from BN9PR12MB5179.namprd12.prod.outlook.com
- ([fe80::cf08:f59b:d016:c95f]) by BN9PR12MB5179.namprd12.prod.outlook.com
- ([fe80::cf08:f59b:d016:c95f%4]) with mapi id 15.21.0025.022; Mon, 18 May 2026
- 17:22:34 +0000
-Message-ID: <985f976f-1144-445b-96c2-df5bd57ecf05@nvidia.com>
-Date: Mon, 18 May 2026 22:52:22 +0530
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/2] cpufreq: CPPC: add autonomous mode boot parameter
- support
-To: Mario Limonciello <mario.limonciello@amd.com>, rafael@kernel.org,
- viresh.kumar@linaro.org, pierre.gondois@arm.com, ionela.voinescu@arm.com,
- zhenglifeng1@huawei.com, zhanjie9@hisilicon.com, corbet@lwn.net,
- skhan@linuxfoundation.org, rdunlap@infradead.org, linux-pm@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Cc: linux-tegra@vger.kernel.org, treding@nvidia.com, jonathanh@nvidia.com,
- vsethi@nvidia.com, ksitaraman@nvidia.com, sanjayc@nvidia.com,
- mochs@nvidia.com, bbasu@nvidia.com
-References: <20260515122624.1920637-1-sumitg@nvidia.com>
- <20260515122624.1920637-3-sumitg@nvidia.com>
- <bf521e4e-1aa5-49ce-bec5-52845f02214e@amd.com>
- <139d2f0e-72d9-4721-9d5a-d1d4a2a95fa1@nvidia.com>
- <72fd2fcc-6303-4980-beb7-e4b711ad6406@amd.com>
- <e1a546f2-6e7e-4236-97bb-f72bea0137f7@nvidia.com>
- <7d7a6ab6-b1ea-484c-a275-19acca50c483@amd.com>
-Content-Language: en-US
-From: Sumit Gupta <sumitg@nvidia.com>
-In-Reply-To: <7d7a6ab6-b1ea-484c-a275-19acca50c483@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: MA5P287CA0081.INDP287.PROD.OUTLOOK.COM
- (2603:1096:a01:1d8::13) To BN9PR12MB5179.namprd12.prod.outlook.com
- (2603:10b6:408:11c::18)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 30430405C5C
+	for <linux-doc@vger.kernel.org>; Mon, 18 May 2026 23:05:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.136.64.136
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1779145523; cv=none; b=NGdSzlEiKdKiGBYPg5FIyP50bCLY+bGFaYMEF6TSWi9KE02z/4s5RjJ/xuI6JjOQ2DYfp9JuY/BwwK8ZHdirW2mu+Ka49XM2gQro6o3sm1S36kqOaghNh/7fA+wDbfeCH6a7wzjHIUNIKmKah8FtPvf/ifZ/RRFGgPP/tlBUJks=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1779145523; c=relaxed/simple;
+	bh=+rYo9RwlleK8Myvw5KVXSvl5djJdJZXOJbD7irbefyc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=iTqEd32Af8Q0YlZeyah7x/9eWLtG1AhBqfo+eOORI+5wb/5q+phOc1Dvq4Ukm4R2K4KJH7hzVE4xTeWgdMED31Y9oa8oCGdkAU1U40U2nCNznBoexx2bVbgjU6hBQL2I7fojv+sdIoVfyFNGeYo140HGAbmNAzB6owhsAm6+7vc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=siemens-energy.com; spf=pass smtp.mailfrom=errorhandling.siemens-energy.com; dkim=pass (1024-bit key) header.d=flowmailer.net header.i=@flowmailer.net header.b=oOv4FfQQ; dkim=pass (2048-bit key) header.d=siemens-energy.com header.i=schuster.simon@siemens-energy.com header.b=dI1aE97G; arc=none smtp.client-ip=185.136.64.136
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=siemens-energy.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=errorhandling.siemens-energy.com
+Received: by mta-64-136.flowmailer.net with ESMTPSA id 20260518172446a2ab3ecad30019fd49
+        for <linux-doc@vger.kernel.org>;
+        Mon, 18 May 2026 19:24:47 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=s1;
+ d=flowmailer.net;
+ h=from:from:sender:to:to:cc:cc:subject:subject:content-type:content-type:content-transfer-encoding:References:In-Reply-To:Date:Message-ID:MIME-Version;
+ bh=/xBoFD2ZNsbMOTky3B3enP8bn+W9UZXo1Hl2aVCLXos=;
+ b=oOv4FfQQlHtS5BCboX78gqtA1vOdIzc2Bde3Q6JtaXyf67I3yyl6ut16FqBNN9+Yj9rq9Z
+ nyDRk4mSBg/XXlSyTrgBcXgDhCrmwyDzEj+K3hddaJfeuwolNJkOXXJ8o46GUX+ljc6wR96d
+ SFujsYOnihqEglQ5vlocmhDkHNiKg=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm3;
+ d=siemens-energy.com; i=schuster.simon@siemens-energy.com;
+ h=from:from:sender:to:to:cc:cc:subject:subject:content-type:content-type:content-transfer-encoding:References:In-Reply-To:Date:Message-ID:MIME-Version;
+ bh=/xBoFD2ZNsbMOTky3B3enP8bn+W9UZXo1Hl2aVCLXos=;
+ b=dI1aE97GXW4w7iNDnE322TQwRLqhXPJ7u7OOtHXqPwbH7I8b7QZPUcsZ5dpM3aKOX+wuYT
+ LPsjcYlVTxPExZ5kMJNCcDWODnTNTrGp6pV8qtNcwDcVLy69NW0vpvbVMGwrINlSJJ+x3xuE
+ 8IjsHXj0AnDwTdczWEYMyN3ZXAMnYVljNLinrYheZqc9sCRB5uWpiqfkBE0KYz9ZVSj4gXWO
+ W3XtjKRwxfg4DG16B+5mpyk1TGNVwWG+Fbcs2a0kj3mxu3xIuWEGyaVHCYP7ptwU5BzA0nrO
+ 6VN6z+VVxxOzsIQ5H6Xp7Kj7GVjsxvKu6BvSATf/LyzOGeeNKmSh+lOw==;
+Date: Mon, 18 May 2026 19:24:44 +0200
+From: Simon Schuster <schuster.simon@siemens-energy.com>
+To: Peter Zijlstra <peterz@infradead.org>, Arnd Bergmann <arnd@arndb.de>,
+	Ethan Nelson-Moore <enelsonmoore@gmail.com>,
+	Dinh Nguyen <dinguyen@kernel.org>
+Cc: linux-doc@vger.kernel.org, devicetree@vger.kernel.org,
+ workflows@vger.kernel.org, Linux-Arch <linux-arch@vger.kernel.org>,
+ dmaengine@vger.kernel.org, linux-i2c@vger.kernel.org,
+ linux-iio@vger.kernel.org, Netdev <netdev@vger.kernel.org>,
+ linux-pci@vger.kernel.org, linux-pwm@vger.kernel.org,
+ linux-hardening@vger.kernel.org, linux-kbuild@vger.kernel.org,
+ "linux-csky@vger.kernel.org" <linux-csky@vger.kernel.org>, Jonathan Corbet
+ <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Rob Herring
+ <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Daniel Lezcano <daniel.lezcano@kernel.org>, Thomas
+ Gleixner <tglx@kernel.org>, Alex Shi <alexs@kernel.org>, Yanteng Si
+ <si.yanteng@linux.dev>, Dongliang Mu <dzm91@hust.edu.cn>, Hu Haowen
+ <2023002089@link.tyut.edu.cn>, Kees Cook <kees@kernel.org>, Oleg Nesterov
+ <oleg@redhat.com>, Will Deacon <will@kernel.org>, "Aneesh Kumar K.V (Arm)"
+ <aneesh.kumar@kernel.org>, Andrew Morton <akpm@linux-foundation.org>,
+ Nicholas Piggin <npiggin@gmail.com>, Vinod Koul <vkoul@kernel.org>, Frank
+ Li <Frank.Li@kernel.org>, Dave Penkler <dpenkler@gmail.com>, Andi Shyti
+ <andi.shyti@kernel.org>, Jonathan Cameron <jic23@kernel.org>, David Lechner
+ <dlechner@baylibre.com>, =?ISO-8859-1?Q?Nuno_S=E1?= <nuno.sa@analog.com>,
+ Andy Shevchenko <andy@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>,
+ "David S . Miller" <davem@davemloft.net>, Eric Dumazet
+ <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni
+ <pabeni@redhat.com>, Lorenzo Pieralisi <lpieralisi@kernel.org>, Krzysztof
+ WilczyDski <kwilczynski@kernel.org>, Andreas Oetken
+ <andreas.oetken@siemens-energy.com>
+Subject: Re: [PATCH] nios2: remove the architecture
+Message-ID: <20260518172444.zyd47mcagrcwu7wt@dev-vm-schuster>
+References: <20260518042833.272221-1-enelsonmoore@gmail.com>
+ <d40b1e80-37fc-4c88-9d7f-dae6458efe6c@app.fastmail.com>
+ <20260518105735.GW3126523@noisy.programming.kicks-ass.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN9PR12MB5179:EE_|DM4PR12MB5794:EE_
-X-MS-Office365-Filtering-Correlation-Id: 338ae25c-81c5-41a1-263f-08deb5020c7d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|366016|7416014|921020|56012099003|11063799003|4143699003|18002099003|3023799003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	tcANej4n2z6DoeA4b+q2GQBAmMKQEhUeH+eggK7sL9Kz//yxDnFonWbrUTKug9e1Ad+z30f1AiySMpI6KyXAxTnkhVGRggMhR61M7/1J0ucGR6cmfoC75eTp8coR5cYhpdqAwgEBUVNAyJfWYH5bXCMGDLaFvlHEQsy9fhZq9fqbWP1F5WXwK4WcQOqp+FgzdoETNxjer7xMsBDf6pEiW8OLl1ya88HH16YFZGZeL9/QVpvK+qx1dIEcNYQDA/5GiBWbFeZFgaKGZm055usDSLmI/X/w0NSiDT9t1VgQ/yFsJ+zjp7vjiALpw4uXQkPZ+xac/Sq7kBSfiZBZwW24Jmb8bgT6id4eNoa0i08wbhohjjS0E8ojiB6Ky3WIq92Ihv4VsbFvhoJnY4mI+tENDdPbpHjpiU35THdG6uWMrXG+egkxtmEtLMBRRIm2hU+xxMueiEPbDbsSDhmWHFLj/HO/xgxiBHs60eD597JudFKOHp3XPV7h9oMSbq8WyTaHOvd5Mfd6GqMv4QVH4b/DogS7B7hUshYtyJFJ6IfAlKD2z/tODALbbN86zac7UwIl6aEqWlIivr6gvOt7T21EulE5kKjGfvewnDJN7dKseAL+KUnuH/qlao5lOdj8hVSsg1vWV3FSew1B4b7Jn4RhsutDyVRUy9jdStUzJPnW4Wh2WEwtAvcWmtCVxdgqbRLDRZ/XkSL3EL1YKgapzuwRw2d9Fau4tl5cLYX8d+NSSLxVc8AP/QnrQKFBzEo5r6pQ
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN9PR12MB5179.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(7416014)(921020)(56012099003)(11063799003)(4143699003)(18002099003)(3023799003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?QzFTOGFvUjRFS3dMM1I3dFdKN0phdkxtREpSZ1R0OWlrV3BuUXdqd0VGanRz?=
- =?utf-8?B?MmtDYXpKU3F5cTNoN2w2QlI1SWZhdG0wMFVVL3BIampmUDFHTFJoOHpicXBJ?=
- =?utf-8?B?VnlobVVBSjNCNnZGdFB2RGJuRXZBSkllcVNWTEp5cWxWWnh5M002SEswRy9P?=
- =?utf-8?B?QlBvUlA2OC9DY29GYWxNbm5aWXQvQVdkTW01SCtXTWRRZEJERnJPTG56NDBB?=
- =?utf-8?B?MXBHV2FDeUtQUXdKdjhvUFJjUkcyMEIyelNWOUtjSHI2T09FN1VDbzNBM1Jq?=
- =?utf-8?B?eW15c2FPSjU3ZldlT1RiYmNjRjZGM3c3c216UE1oYlliSm5jVTNrTGNITlps?=
- =?utf-8?B?bUlsU2pIUUhwa2J3aXNkNlVBRjJhdFpXMVlqTU5yR2U2VEJhMGtCYVdGWWJU?=
- =?utf-8?B?S3NHYng1SjczRy8xSmlVY3h0aTJJbWhwVHR1RHpRbEtmc3M2M2lCYUdpeGZT?=
- =?utf-8?B?RlpML0Y2d1QzaEpwUElPN1VDc1JacERzTUQvQUtrVVhaZ3dSK0Z2Mkg4S3N2?=
- =?utf-8?B?d2hoOGtQM2xQR2RoWjAvZm5VZ0g2a1g0Vjd4ZEo0elVMOGVBUmtZelpndTJ2?=
- =?utf-8?B?S3J6c3g4ZHdyVlpEcVZZa1AwTzdlVXZuUC8zZkQzUXY4Z05XOHJuWFRWejg0?=
- =?utf-8?B?WE50cFRxd2FzbTY0WUU1MlFMT3c4UDJsTnRQa09Va29FODhieGhRSkx0NllM?=
- =?utf-8?B?WTJmK05WVXp0enpyV0JsZmd3SUZ4cUgvK0E0cUpLeFowNEpCL1BjSGM5Szhi?=
- =?utf-8?B?dDIwdUVHY21hTFJQZEQwa2xrSGwycThsWWk3eDJsVXlxRjFQbHB6S0ZNUTV4?=
- =?utf-8?B?VElPc1MyUmkxZXhEVnF4a3VDVTRDNXJUeFBnNlpyMHZTc1pLK0lKeVRFNnVR?=
- =?utf-8?B?RzRvZ2JaVW5qT1R6Q2hHMU1vZ0hWNnBUQmIyOEhQQmJsSmN6aWxZRGF6d3lx?=
- =?utf-8?B?aUx5NHhLak5BaGF3Rm9ZazZ2a2pZVTEvZ0ZvVkJSSmJjV1kreHFqVE9BcGlq?=
- =?utf-8?B?WGRrNVFDUjhjQThlZ2dEd2p2R2hKSWt4dVR6Q21HTXdQYm1XMjRiUWJDa3dv?=
- =?utf-8?B?QTdBVW9kUTlGZDQ3SEZPMmx5QnplSG9ma2ttV2FrbEF4L2NDa1dvdkVhaHFk?=
- =?utf-8?B?YVdtVjF2YnQzT2hST3hJRWFMT2puN1VwUmlmUU1LOEJuMHZRQVlmeVhkNUts?=
- =?utf-8?B?Q1UwYnBJc3pBNThQcExraDA2ZWYrUkxuSWpnM2R0Y3Z2cmlVK0IvSVI2eEha?=
- =?utf-8?B?ekRUcUZmdklIdVY1dmtTUXdXT3J6VkRKOWxlZnVQT2NLMFRnRDV3c2U5MGZ3?=
- =?utf-8?B?RjE3TGZYL0xreS9UREhzOFIwdnRJU0o2RjZQeGJoRTBDdTY0RTBOQ3VqNmx1?=
- =?utf-8?B?S0hBTldkSjdpOHlUZm93T1FlTmRMUDlwaGVLOHB6UHljUWlqeFNYTjljWVZ4?=
- =?utf-8?B?QiszS29qWjNDMUdjUG5WeGpXbWJOWFM2UTZtQ1VUbFpiaTFZeWdtMlo3MWlu?=
- =?utf-8?B?dndFdVFGVCt3L093LytPTk1wWTBjMlhoejVCWnEwQ1g4QlBVYkVsVlY3bk8w?=
- =?utf-8?B?eWlJVGJpRGJ3ejNsb245TVRmRGRDdFRtd1Ara24vRjQrREl6VTZsZzZEYWI5?=
- =?utf-8?B?bS9zRDA3WEF6bkxXY2RvNkRYdWIyMTgwcXR0dkpuMlB2dkovNzVBUE9xQUFX?=
- =?utf-8?B?TDhRdjg0WnVFUTRpYkExZmtEZHg3UWE4VERkOUZHNmgraGxUTUdqMkl2OUJt?=
- =?utf-8?B?dENJc1ExSlR5VTNFTit6RnRpN3RGbnAzSFo2WW5WczZnTmZoNVIrbVU2Skox?=
- =?utf-8?B?M1RFNVVRSGFnNDJKODZPMXYrZzRUbTFzbS9vL1E5allMa1J4QW5wSW9QTEc1?=
- =?utf-8?B?OEdzeFdDbzk0aTZoamZKaklMWGJUMmthRE5vOERVYVJ3MjNNejZiblNKU0Nz?=
- =?utf-8?B?YVFWNWY2OFZpb0ZtWk5zTEdOWHVSQUp4cVpMZjU2VzFLVGIrN0JVejd6QU55?=
- =?utf-8?B?bjFDOVg1VGtuc09ObzluMVZ0K0xzODRCcDZKMjd2REZTUG5nbjVldWNtMGtK?=
- =?utf-8?B?M0N5eEZhUkZTaUVyOGNRNGRDZXJ6dEJkaVMwKzRCcWs2V21tcmNGNy8vNkZj?=
- =?utf-8?B?U2NGQ1hCSzdEaFVIckk3bVM5bFBlMklCbDl4Y3JIUVlSN0Z1YUREdDhKeWp1?=
- =?utf-8?B?WSsxcFlSMDJYc2VwTlpOak1VQTh1a2xiMzZYU3ZLRDFVcG5iK29vSVNoME1F?=
- =?utf-8?B?YTh1RDFzb1BMSE9Za2xlYjVzaGh0VUs3N2VxWXdBMTJPcDJKSWt5N1RlaFUw?=
- =?utf-8?B?UEtkYTF6L3dTdXNGOFhjdGJXaExvRE0yTDlaNlNyQmtlTUx2ZzNtUT09?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 338ae25c-81c5-41a1-263f-08deb5020c7d
-X-MS-Exchange-CrossTenant-AuthSource: BN9PR12MB5179.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 May 2026 17:22:34.1429
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: UT216jOQRQkt+2Fdc88p4g57BYrjJfgKnYAXPzjD+ejyrrf5wkNlRNrcgq7KQ0VFvhjYyG/4dfLZTgk4chXukw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5794
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260518105735.GW3126523@noisy.programming.kicks-ass.net>
 X-Spamd-Result: default: False [-0.16 / 15.00];
-	ARC_REJECT(1.00)[cv is fail on i=2];
-	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
-	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[siemens-energy.com,reject];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_DKIM_ALLOW(-0.20)[flowmailer.net:s=s1,siemens-energy.com:s=fm3];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-88289-lists,linux-doc=lfdr.de];
 	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[21];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_FROM(0.00)[bounces-88224-lists,linux-doc=lfdr.de];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:mid,nvidia.com:email,arm.com:email,Nvidia.com:dkim,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_TO(0.00)[infradead.org,arndb.de,gmail.com,kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[flowmailer.net:+,siemens-energy.com:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[50];
 	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[schuster.simon@siemens-energy.com,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[vger.kernel.org,lwn.net,linuxfoundation.org,kernel.org,linux.dev,hust.edu.cn,link.tyut.edu.cn,redhat.com,linux-foundation.org,gmail.com,baylibre.com,analog.com,lunn.ch,davemloft.net,google.com,siemens-energy.com];
+	TAGGED_RCPT(0.00)[linux-doc,dt,netdev];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[sumitg@nvidia.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[Nvidia.com:+]
-X-Rspamd-Queue-Id: 57A9C5719AD
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,lwn.net:url]
+X-Rspamd-Queue-Id: 300AB574DEB
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
+Hi Ethan, Arnd, Peter and Dinh,
 
-On 18/05/26 19:51, Mario Limonciello wrote:
-> External email: Use caution opening links or attachments
->
->
-> On 5/18/26 09:15, Sumit Gupta wrote:
->>
->> On 18/05/26 19:20, Mario Limonciello wrote:
->>> External email: Use caution opening links or attachments
->>>
->>>
->>> On 5/18/26 08:44, Sumit Gupta wrote:
->>>> Hi Mario,
->>>>
->>>>
->>>> On 16/05/26 02:43, Mario Limonciello wrote:
->>>>> External email: Use caution opening links or attachments
->>>>>
->>>>>
->>>>> On 5/15/26 07:26, Sumit Gupta wrote:
->>>>>> Add a kernel boot parameter 'cppc_cpufreq.auto_sel_mode' to enable
->>>>>> CPPC autonomous performance selection on all CPUs at system startup.
->>>>>> When autonomous mode is enabled, the hardware automatically adjusts
->>>>>> CPU performance based on workload demands using Energy Performance
->>>>>> Preference (EPP) hints.
->>>>>>
->>>>>> When the parameter is set:
->>>>>> - Configure all CPUs for autonomous operation on first init
->>>>>> - Use HW min/max_perf when available; otherwise initialize from caps
->>>>>> - Initialize desired_perf to max_perf as a starting hint
->>>>>> - Hardware controls frequency instead of the OS governor
->>>>>> - EPP behavior depends on parameter value:
->>>>>>    - performance (or 1): override EPP to performance preference 
->>>>>> (0x0)
->>>>>>    - default_epp (or 2): preserve EPP value programmed by BIOS/
->>>>>> firmware
->>>>>>
->>>>>> The boot parameter is applied only during first policy 
->>>>>> initialization.
->>>>>> Skip applying it on CPU hotplug to preserve runtime sysfs
->>>>>> configuration.
->>>>>>
->>>>>> This patch depends on patch series [1] ("cpufreq: Set policy->min 
->>>>>> and
->>>>>> max as real QoS constraints") so that the policy->min/max set in
->>>>>> cppc_cpufreq_cpu_init() are not overridden by cpufreq_set_policy()
->>>>>> during init.
->>>>>>
->>>>>> Signed-off-by: Sumit Gupta <sumitg@nvidia.com>
->>>>>> ---
->>>>>> [1] https://lore.kernel.org/lkml/20260511135538.522653-1-
->>>>>> pierre.gondois@arm.com/
->>>>>> ---
->>>>>>   .../admin-guide/kernel-parameters.txt         |  16 +++
->>>>>>   drivers/cpufreq/cppc_cpufreq.c                | 122 +++++++++++++
->>>>>> ++++-
->>>>>>   2 files changed, 133 insertions(+), 5 deletions(-)
->>>>>>
->>>>>> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/
->>>>>> Documentation/admin-guide/kernel-parameters.txt
->>>>>> index 0eb64aab3685..7e4b3a8fd76f 100644
->>>>>> --- a/Documentation/admin-guide/kernel-parameters.txt
->>>>>> +++ b/Documentation/admin-guide/kernel-parameters.txt
->>>>>> @@ -1048,6 +1048,22 @@ Kernel parameters
->>>>>>                       policy to use. This governor must be 
->>>>>> registered
->>>>>> in the
->>>>>>                       kernel before the cpufreq driver probes.
->>>>>>
->>>>>> +     cppc_cpufreq.auto_sel_mode=
->>>>>> +                     [CPU_FREQ] Enable ACPI CPPC autonomous
->>>>>> performance
->>>>>> +                     selection. When enabled, hardware 
->>>>>> automatically
->>>>>> adjusts
->>>>>> +                     CPU frequency on all CPUs based on workload
->>>>>> demands.
->>>>>> +                     In Autonomous mode, Energy Performance
->>>>>> Preference (EPP)
->>>>>> +                     hints guide hardware toward performance (0x0)
->>>>>> or energy
->>>>>> +                     efficiency (0xff).
->>>>>> +                     Requires ACPI CPPC autonomous selection 
->>>>>> register
->>>>>> +                     support.
->>>>>> +                     Accepts:
->>>>>> +                       performance, 1: enable auto_sel + set EPP to
->>>>>> +                                       performance (0x0)
->>>>>> +                       default_epp, 2: enable auto_sel, preserve 
->>>>>> EPP
->>>>>> value
->>>>>> +                                       programmed by BIOS/firmware
->>>>>> +                     Unset: cpufreq governors are used (auto_sel
->>>>>> disabled).
->>>>>
->>>>> Rather than unset doing nothing, have you considered having it take a
->>>>> midpoint like 128?  That's what we do in amd-pstate (default to
->>>>> balance_performance).  I think it turns into a reasonable balance.
->>>>
->>>> Thanks for the suggestion.
->>>> I can add balance_performance that enables auto_sel with EPP=128 in 
->>>> v4.
->>>>
->>>> On changing the driver default (no param behavior) to auto enable
->>>> balance_performance, it would be good to keep the current behavior for
->>>> now since cppc_cpufreq is generic across ARM64/RISC-V platforms where
->>>> EPP and Autonomous Selection registers are optional.
->>>> A default change would affect existing users relying on governors.
->>>>
->>>> Thank you,
->>>> Sumit Gupta
->>>
->>> But couldn't you make the "no module parameter set" follow the behavior
->>> to only set the registers if they're available?
->>>
->>> So the systems that support it start using it, the ones that don't it's
->>> a NOP.
->>>
->>
->> Would it work to add balance_performance as a new mode in v4,
->> and discuss changing the default separately as a follow-up?
->>
->
-> Sure.
->
->> Runtime detection helps for unsupported platforms. But platforms which
->> support the registers use OS governors today, and silently switching
->> them to autonomous mode on a kernel update is a behavior change for
->> existing users. They would also have no way to boot into sw governor.
->>
->
-> But hopefully it should be better battery life/responsiveness for those
-> scenarios too, right?
->
+On Mon, May 18, 2026 at 11:29:48AM +0200, Arnd Bergmann wrote:
+> We last discussed this a year ago when Simon Schuster mentioned[1]
+> that Siemens Energy is still using NIOS-2 in production and would
+> prefer to have this still included in Linux for at least another
+> few years until the obligation for kernel updates ends.
 
-Yes in many cases, but if some workloads rely on specific OS governor
-configurations, then that would get impacted.
-I will send a separate change later to seek broader consensus on
-enabling auto_sel as default without any param.
+First off, thank you, Arnd, for remembering us as this patch series came
+up and also to Dinh for his maintenance of the architecture!
 
-Thank you,
-Sumit Gupta
+Regarding our status in relation to nios2, Arnd's response already gives
+you the gist:
 
-....
+We are well aware that the architecture was deprecated by Intel and are
+therefore phasing it out in favour of more contemporary hardware.
+I'm also fully aware of the uncertain future of 32-bit architectures as
+a whole [0] and that this fate will come to nios2 sooner or later.
+But as of now, the mainline support is still in very good shape.
 
+On Mon, May 18, 2026 at 12:57:35PM +0200, Peter Zijlstra wrote:
+> Isn't that what we have LTS branches for?
 
+Unfortunately, as we are an infrastructure provider for civil energy
+infrastructure, the refurbishment cycle is a bit slower than for
+traditional consumer systems. This implies that the traditional LTS
+support duration (max. Dec 2028 as of writing [1]) is rather short, and
+we would be glad if we could keep the architecture in mainline for at
+least 5 years and only then "decay" to LTS.
+
+On Mon, May 18, 2026 at 11:29:48AM +0200, Arnd Bergmann wrote:
+> My feeling is that the maintenance burden of keeping nios2 is
+> relatively low. On the other hand, maintaining it out of tree
+> as a patch set is also something that should not be all that
+> hard if it does get removed.
+
+Judging from the architecture's git history, it seems that it's
+currently mainly touched by treewide refactors, which are extremely
+helpful as we therefore do not have to piece these changes together 
+downstream. In other respects, we try to be good citizens and contribute
+bugfixes as well as required cleanups (such as implementing clone3 [2]
+and fixing its flag behaviour on 32-bit architectures) as they come up.
+
+If desired, we also would be happy to intensify our support regarding
+reviews or testing to share the maintnance burden if it helps to keep
+nios2 in mainline a bit longer.
+
+Best regards,
+Simon
+ 
+0: https://lwn.net/Articles/1035727/
+1: https://www.kernel.org/category/releases.html
+2: https://lore.kernel.org/lkml/20250821-nios2-implement-clone3-v1-0-1bb24017376a@siemens-energy.com/
 
