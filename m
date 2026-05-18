@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-88301-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88302-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iBBQEhSlC2qRKQUAu9opvQ
-	(envelope-from <linux-doc+bounces-88301-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 01:47:32 +0200
+	id YPzZBSalC2qRKQUAu9opvQ
+	(envelope-from <linux-doc+bounces-88302-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 01:47:50 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DEFDC575229
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 01:47:31 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id D007B575232
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 01:47:49 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 7EAD0302759A
-	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 23:44:11 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id D25AB3043890
+	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 23:44:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B44943B27D8;
-	Mon, 18 May 2026 23:41:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 13DAF3B38B6;
+	Mon, 18 May 2026 23:41:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="d49e4zgQ"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jPC2DPoC"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91B433B19D2;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E46463B2FFF;
 	Mon, 18 May 2026 23:41:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779147694; cv=none; b=g4RpWNO8dJFRfNwC2K8nvviJCHjn9PUeVZUbUD5xpHfcz88fE9tnEBW/GSVe+k/fRCSE1qdx06ZZvxtSSaWiWTdbb2QLNDM0bdgVf4/Uf21sn1rh6gny9d0RA597Ads5vLlU14mZOXr1Ohzo7LhQ3BEaZ9n18GAWNrMypAT3HPQ=
+	t=1779147695; cv=none; b=TdzB9ZYfXjlmu7kgzooQJICNMWRt0VR9XRVAa83rJ3q1pW6PWPHYs2QN2W4lHKAWqvWZsSl7RTKBt+YQsQ26kXjxGn8F5ii+NPpVcNDm05v09z7GsmUxZdMrtuuRwPxPPoT7w5EEZUV8S1NE3ojOLMG8n9qf8uYKyks8APUfleI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779147694; c=relaxed/simple;
-	bh=nrsABmJnRfG9DLDHrsalCtHOuyMv2VWZvo4tqHnGPDk=;
+	s=arc-20240116; t=1779147695; c=relaxed/simple;
+	bh=pPitw4Kbtb0sQtr+JQ+YU1RPjhVWQVsWpAxRL8y/Q/0=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Sqp1ROxgs/SSZTutXTy5GCAFugtyLLS0PcPJuWHmp37o8DOjPd/MWlppdYu4y87NptK/6tp1sKxNvlsRA0n+tI9G6/D9kvB+jg/bVX5pUak36g9knJvJaht9cxOvuli5lLvUjtnV89rsjHLdXwx+jNeUSsZv4FNM22CzQDJaP+g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=d49e4zgQ; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9A08CC2BCB7;
-	Mon, 18 May 2026 23:41:33 +0000 (UTC)
+	 MIME-Version:Content-Type; b=DR5ypAGdkEhnu0o38yUEsjZPSWB34hGrD2IUeJsbSJpjNn6uYDnxqa6PJkgtsIcu5N6ozswSIRDLCKOJRmCu0GpSfToapFfZccA9b+aWy1Bd7BQMmF2MYmpuJqNJArU344QZjnjVJyCa75FnXbrsc6rUm+ojOJcwZtrTtxwG148=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jPC2DPoC; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 481A2C2BCF7;
+	Mon, 18 May 2026 23:41:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1779147694;
-	bh=nrsABmJnRfG9DLDHrsalCtHOuyMv2VWZvo4tqHnGPDk=;
+	bh=pPitw4Kbtb0sQtr+JQ+YU1RPjhVWQVsWpAxRL8y/Q/0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=d49e4zgQExuGINRxEf5AWO8nZAgQXWtelBWGpn1NMEWBzaksn2d3KfKUKieotlrpt
-	 h4cwaSTq82DQ78IKrFyL4vrwbAAANtYApc45EkAKHec0cCfWKSoAFVqTJz4C4phgOp
-	 JkGOcScHZ9Gbb6SN+oD6pCnmPxCPaUfZ6Wsh6K4QtqyLmUkqACBAXwsex97lntkS4c
-	 bWfBiQFPEMh+0qUofHh5TfyXJ2/h51vsZJHzlka6yPmYMiXnjbIfAFJeNC/VbotLjc
-	 uB7786B+psNCQx49QDu4fqK6gD0hKvud+C5xjEczoZ5CDUCU9mLwtLUD2t0GKJ22Af
-	 hKQ/cykC4X+HQ==
+	b=jPC2DPoCuKdsge2wTxodAU12wBvMRo1AgrdbhCSONiJMpayPYlEm5Xn4XTMdbVFlb
+	 vBK+Qp3OluA8LCpioHbE8gV7xiZn6f8Jne4k79sDdK84wz4VrBMexS0cXEMRe05FU5
+	 3s7kqk+v1pzMy77OvWQ0PnmPitreSd1TLFW7RH5zDoPXJs3l++q9f8omk/2HW1o7Zm
+	 OkiQwxqBrU09EwG9LaxyeGmufRIXw+xJ5+lfht68rMSLz/jUmNO1napv9I4uhawXEq
+	 xWsurm5mbO81RbgqFULgX+iHy8ZruUoCNxNR+pPbUdcBtlGJKOsq4LjFwAk/dl3j+w
+	 KLaI3RwRN8aVw==
 From: SeongJae Park <sj@kernel.org>
 To: Andrew Morton <akpm@linux-foundation.org>
 Cc: SeongJae Park <sj@kernel.org>,
@@ -60,9 +60,9 @@ Cc: SeongJae Park <sj@kernel.org>,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	linux-mm@kvack.org
-Subject: [PATCH 27/28] Docs/mm/damon/design: update for memcg damon filter
-Date: Mon, 18 May 2026 16:41:15 -0700
-Message-ID: <20260518234119.97569-28-sj@kernel.org>
+Subject: [PATCH 28/28] Docs/admin-guide/mm/damon/usage: update for memcg damon filter
+Date: Mon, 18 May 2026 16:41:16 -0700
+Message-ID: <20260518234119.97569-29-sj@kernel.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260518234119.97569-1-sj@kernel.org>
 References: <20260518234119.97569-1-sj@kernel.org>
@@ -72,60 +72,69 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-1.16 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-88301-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-88302-lists,linux-doc=lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[15];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
 	PRECEDENCE_BULK(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: DEFDC575229
+X-Rspamd-Queue-Id: D007B575232
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Update DAMON design document for the newly added belonging memory cgroup
+Update DAMON usage document for the newly added belonging memory cgroup
 attribute monitoring feature.
 
 Signed-off-by: SeongJae Park <sj@kernel.org>
 ---
- Documentation/mm/damon/design.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ Documentation/admin-guide/mm/damon/usage.rst | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/Documentation/mm/damon/design.rst b/Documentation/mm/damon/design.rst
-index 937960d2b6d73..2da7ca0d3d17a 100644
---- a/Documentation/mm/damon/design.rst
-+++ b/Documentation/mm/damon/design.rst
-@@ -293,8 +293,8 @@ registration is made by specifying a probe per attribute.  Each of the probe
- specifies a rule to determine if a given memory region has the related
- attribute.  The rule is constructed with multiple filters.  The filters work
- same to :ref:`DAMOS filters <damon_design_damos_filters>` except the supported
--filter types.  Currently only ``anon`` filter type is supported for data
--attributes monitoring.
-+filter types.  Currently only ``anon`` and ``memcg`` filter types are supported
-+for data attributes monitoring.
+diff --git a/Documentation/admin-guide/mm/damon/usage.rst b/Documentation/admin-guide/mm/damon/usage.rst
+index abd38385b3c23..d46875e603d86 100644
+--- a/Documentation/admin-guide/mm/damon/usage.rst
++++ b/Documentation/admin-guide/mm/damon/usage.rst
+@@ -74,7 +74,7 @@ comma (",").
+     │ │ │ │ │ │ nr_regions/min,max
+     │ │ │ │ │ │ :ref:`probes <damon_usage_sysfs_probes>`/nr_probes
+     │ │ │ │ │ │ │ 0/filters/nr_filters
+-    │ │ │ │ │ │ │ │ 0/type,matching,allow
++    │ │ │ │ │ │ │ │ 0/type,matching,allow,path
+     │ │ │ │ │ │ │ │ ...
+     │ │ │ │ │ │ │ ...
+     │ │ │ │ │ :ref:`targets <sysfs_targets>`/nr_targets
+@@ -289,7 +289,9 @@ the data attribute for the probe.
+ In the beginning, ``filters`` directory has only one file, ``nr_filters``.
+ Writing a number (``N``) to the file creates the number of child directories
+ named ``0`` to ``N-1``.  Each directory represents each filter and works in a
+-way similar to that for :ref:`DAMOS filter <sysfs_filters>`.
++way similar to that for :ref:`DAMOS filter <sysfs_filters>`.  When the filter
++``type`` is ``memcg``, ``path`` file acts as ``memcg_path`` for :ref:`DAMOS
++filter <sysfs_filters>`.
  
- If such probes are registered, DAMON executes the probes for each region's
- sampling memory when it does the access :ref:`sampling
+ .. _sysfs_targets:
+ 
 -- 
 2.47.3
 
