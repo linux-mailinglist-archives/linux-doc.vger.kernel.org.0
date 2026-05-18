@@ -1,133 +1,197 @@
-Return-Path: <linux-doc+bounces-88219-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88220-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MM2/OBc9C2oJFAUAu9opvQ
-	(envelope-from <linux-doc+bounces-88219-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 18:23:51 +0200
+	id GF2jMi0/C2pdFAUAu9opvQ
+	(envelope-from <linux-doc+bounces-88220-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 18:32:45 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E093570D2A
-	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 18:23:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 73877570F7D
+	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 18:32:44 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 8BC9F30CFAB8
-	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 16:12:20 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id A4122300679B
+	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 16:25:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E2342492519;
-	Mon, 18 May 2026 16:09:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8D3423F6613;
+	Mon, 18 May 2026 16:25:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="E1kOa37c"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="ghMySlr3"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0332B4921AA;
-	Mon, 18 May 2026 16:09:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 02578279DCC;
+	Mon, 18 May 2026 16:25:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779120585; cv=none; b=luhH/tanLhVv8MX3HNwNi6tkiCX4FUnYSWCyHFcY6Afz7pqhoTJFzs8nFZwmFY2C2PANUfUme5iDRE0c7GwiXzShTQEmUtz7LTwFuB4ZO7xxAgRYWf3VGS+CDvj0HTZVfOh/uPAzFuPXlKbNDV6cSX9/m+sSW6G9MmgWH8CJZ+M=
+	t=1779121521; cv=none; b=VVMSY/DqRqbOOaFrBc+RUbiSMO4eV4BXxN2qvi4cyBFn2xcIwsfo2Jl0rQa/v7oBFad4BLhapjS9U9oUg1Ns3eNHMVGp3+hwcvTveg8mc0d8maE5mCscdOTj6RoPMxxbXAbynZz/ehnkhJ0SAq2u+23I4HLai9JH57p9ObedKxg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779120585; c=relaxed/simple;
-	bh=s7bf1gytuPn56xayEzHgxmKGWQoeuGExmsjfzDxy83E=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=cLppf2ZI5OUdE4bw91CBCmrTLC4/un9bdvGXemgAMfuWeS31IlL2uLYUgCcH0drHJnvU7q+Ef83crGMn/herRn02m1zdStJrSxdtGHswILVGOwbKyEHbMB5hbqH4OM1mkabe0hIqqqQgeWE7sgDUcr1xyE/Jak+P+9XuSB8L/uU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=E1kOa37c; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A021EC2BCB8;
-	Mon, 18 May 2026 16:09:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1779120581;
-	bh=s7bf1gytuPn56xayEzHgxmKGWQoeuGExmsjfzDxy83E=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=E1kOa37cr7bPE9swjgFFgtDKCM5l/qpuwM4pboIejehjvUZ2WUbDVb+k7AFQ5Hry8
-	 Lji4+Ka09N4UVUj/nNgZGHqrRnL7gU1YHHMkgodhyBDFjHjueJ1xripfcXawy6uGcN
-	 af0PChBPfRexi05qgulxWbVpITsvjBYsb2eJsHEje2Ps6pUXVumyWDsKnvxafZLJNT
-	 7EYPNsgwVCJpuqhtmlJ6Zamo46eCzrSDFRNYqwcKuVqNkVniC5xylD6aMsksiKn+Yg
-	 bt8MHAJkKPgRJ1eqbIa/IYe0/kdgTIF6nhlQfEa/m+iBRxYIrjm1zcwVFVr5JBh/iw
-	 CFH8fkI66NCoQ==
-Date: Mon, 18 May 2026 17:09:27 +0100
-From: Jonathan Cameron <jic23@kernel.org>
-To: "Dan Williams (nvidia)" <djbw@kernel.org>
-Cc: "Bowman, Terry" <terry.bowman@amd.com>, dave@stgolabs.net,
- dave.jiang@intel.com, alison.schofield@intel.com, bhelgaas@google.com,
- shiju.jose@huawei.com, ming.li@zohomail.com,
- Smita.KoralahalliChannabasappa@amd.com, rrichter@amd.com,
- dan.carpenter@linaro.org, PradeepVineshReddy.Kodamati@amd.com,
- lukas@wunner.de, Benjamin.Cheatham@amd.com,
- sathyanarayanan.kuppuswamy@linux.intel.com, vishal.l.verma@intel.com,
- alucerop@amd.com, ira.weiny@intel.com, corbet@lwn.net, rafael@kernel.org,
- xueshuai@linux.alibaba.com, linux-cxl@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-pci@vger.kernel.org,
- linux-acpi@vger.kernel.org, linux-doc@vger.kernel.org, Mauro Carvalho
- Chehab <mchehab@kernel.org>
-Subject: Re: [PATCH v17 02/11] cxl/ras: Unify Endpoint and Port AER trace
- events
-Message-ID: <20260518170927.2ffa8211@jic23-huawei>
-In-Reply-To: <69feaebd471c3_1b86a100b@djbw-dev.notmuch>
-References: <20260505173029.2718246-1-terry.bowman@amd.com>
-	<20260505173029.2718246-3-terry.bowman@amd.com>
-	<20260507190836.70197e24@jic23-huawei>
-	<8913c666-a343-4717-8ab2-0b8546d1bdfb@amd.com>
-	<20260508150533.04e19cf9@jic23-huawei>
-	<69feaebd471c3_1b86a100b@djbw-dev.notmuch>
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
+	s=arc-20240116; t=1779121521; c=relaxed/simple;
+	bh=Yvug/rkJy3x/DTVDt7pixegJguZz6nZS2ADuwX1DSXw=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=Z2aDxcsPRrKUfJcrXsNTw7um5pXHKntsj50JztniLDxXnTBxwsE0zZbe4EvEHYIMms45GNZUsZas5plnLY+ln/gW4BS2uS2lnPFibQLpfU/7PsIZr3IVRPfRSLeK78XdJ3BILtYd3z4J7k3gVwObHMRx093xsQUqFDZUb3T3vJs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=ghMySlr3; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:In-Reply-To:References:Cc:To:Subject:From:MIME-Version:Date:
+	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+	bh=F0k8h0P8yeIbJ9N9KuaQ7GKHxxzGm6CK/9Y9921ojuQ=; b=ghMySlr3y4a0XPq95p4/cifORm
+	GJt+qWjJj5HEnrH6x7HZHtIB/cnVbwNQtuJjFWYNYWz22LxXMz6eavNI0CdPQGO0M4d96RZXPa5yX
+	p6zOXA92EV3plLubl5UA5qWiMLfxEscN6C7wn6EqrbLJ3hgE5nTMfpwVdQAW1yYDgtfXDFtc/sWOu
+	avDyHxfRFf4lyNVO0YHyksLusQ5E8nZHce/8+q9MtLBNNB7mGiciI4AQHIR11zEvwlE6/eKh4EvR1
+	Ylfe4a3mr61SmvpkVA28xm4L5ILm/6NjzA5MG6PBFfZ6NrZWJ5WLJu7LQyr/OsGDROWFNKVing5LV
+	vSjk7I7w==;
+Received: from [50.53.43.113] (helo=[192.168.254.34])
+	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+	id 1wP0mJ-0000000GIE3-3vb9;
+	Mon, 18 May 2026 16:25:15 +0000
+Message-ID: <47b4f655-1a89-47a6-a3fb-9e82184c5fe4@infradead.org>
+Date: Mon, 18 May 2026 09:25:15 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+User-Agent: Mozilla Thunderbird
+From: Randy Dunlap <rdunlap@infradead.org>
+Subject: Re: [PATCH] docs: submitting-patches: Clarify that in English
+ "reviewer" is a person
+To: "Vlastimil Babka (SUSE)" <vbabka@kernel.org>,
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+ workflows@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ David Hildenbrand <david@kernel.org>,
+ Linus Torvalds <torvalds@linux-foundation.org>,
+ Guenter Roeck <linux@roeck-us.net>
+References: <20260516123846.63413-2-krzysztof.kozlowski@oss.qualcomm.com>
+ <ce1e5e9b-83d0-4971-aee3-dc5a8f85ce22@kernel.org>
+Content-Language: en-US
+In-Reply-To: <ce1e5e9b-83d0-4971-aee3-dc5a8f85ce22@kernel.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-88220-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[27];
+	RCPT_COUNT_TWELVE(0.00)[12];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-88219-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jic23@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_HAS_DN(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[infradead.org:+];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:email,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: 8E093570D2A
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:email,infradead.org:mid,infradead.org:dkim,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,linuxfoundation.org:email,linux-foundation.org:email,qualcomm.com:email]
+X-Rspamd-Queue-Id: 73877570F7D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Fri, 08 May 2026 20:49:17 -0700
-"Dan Williams (nvidia)" <djbw@kernel.org> wrote:
 
-> Jonathan Cameron wrote:
-> > On Thu, 7 May 2026 13:33:45 -0500
-> > "Bowman, Terry" <terry.bowman@amd.com> wrote:  
-> [..]
-> > > > This concerns me (sorry I wasn't paying attention to the v16 thread).
-> > > > It is a userspace regression against code that is out in the wild and typically
-> > > > not updated in sync with the kernel.
-> > > > 
-> > > > If you are suggesting breaking ras-daemon at the very least +CC the maintainer.  
+
+On 5/16/26 7:39 AM, Vlastimil Babka (SUSE) wrote:
+> On 5/16/26 14:38, Krzysztof Kozlowski wrote:
+>> Common understanding of word "Reviewer" is: a person performing a review
+>> work [1]. Tools are not persons, thus cannot be reviewers in this term.
+>> Also tools cannot make statements ("A Reviewed-by tag is a statement of
+>> opinion"), since making a statement needs some sort of conscious mind.
+>>
+>> Our docs already clearly mark that "Reviewed-by" must come from a
+>> person:
+>>
+>>  - "By offering my Reviewed-by: tag, I state that:"
+>>
+>>    Usage of first person "I" and word "state"
+>>
+>>  - "A Reviewed-by tag is *a statement of opinion* that the patch is an
+>>     appropriate modification of the kernel without any remaining serious"
+>>
+>>    Only a person can make a statement of opinion.
+>>
+>>  - "Any interested reviewer (who has done the work) can offer a
+>>    Reviewed-by"
+>>
+>>    A person can offer a tag thus above does not grant the tool
+>>    permission to offer a tag.
+>>
+>> However this is not enough and apparently English is not that precise,
+>> so let's clarify that only a person can state the "Reviewer's statement
+>> of oversight".
+>>
+>> Link: https://en.wiktionary.org/wiki/reviewer [1]
+>> Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+>> Cc: Vlastimil Babka <vbabka@kernel.org>
+>> Cc: Andrew Morton <akpm@linux-foundation.org>
+>> Cc: David Hildenbrand <david@kernel.org>
+>> Cc: Linus Torvalds <torvalds@linux-foundation.org>
+>> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 > 
-> Sorry, that was not the intent, see below.
+> I agree with the intent that the tag is for people (whether they use a tool
+> or not to help them). We also don't put "Tested-by: kernel test robot" or
+> syzkaller on every commit that they test and find no bugs. Review is also
+> not just about absence of bugs, but agreeing with the larger design and
+> whether the change makes sense to do in the first place.
 
+Ack that also.
 
-Sorry for slow reply - getting a bit buried in other kernel work so haven't been
-checking CXL stuff as often as normal.
+> So whether that's achieved with this particular wording or differently,
+> 
+> Acked-by: Vlastimil Babka (SUSE) <vbabka@kernel.org>
 
-Anyhow direction looks good to me.
+Acked-by: Randy Dunlap <rdunlap@infradead.org>
+Thanks.
 
-Jonathan
+> 
+>>
+>> ---
+>>
+>> I find it silly to need to describe English, but it seems it is needed.
+>>
+>> https://lore.kernel.org/all/fd3b2ca7-4d64-4c4b-98a3-7d3285fa6826@roeck-us.net/
+>> ---
+>>  Documentation/process/submitting-patches.rst | 8 ++++----
+>>  1 file changed, 4 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/Documentation/process/submitting-patches.rst b/Documentation/process/submitting-patches.rst
+>> index d7290e208e72..a989de43f3db 100644
+>> --- a/Documentation/process/submitting-patches.rst
+>> +++ b/Documentation/process/submitting-patches.rst
+>> @@ -581,10 +581,10 @@ By offering my Reviewed-by: tag, I state that:
+>>  
+>>  A Reviewed-by tag is a statement of opinion that the patch is an
+>>  appropriate modification of the kernel without any remaining serious
+>> -technical issues.  Any interested reviewer (who has done the work) can
+>> -offer a Reviewed-by tag for a patch.  This tag serves to give credit to
+>> -reviewers and to inform maintainers of the degree of review which has been
+>> -done on the patch.  Reviewed-by: tags, when supplied by reviewers known to
+>> +technical issues.  Any interested reviewer (who has done the work and is a
+>> +person) can offer a Reviewed-by tag for a patch.  This tag serves to give
+>> +credit to reviewers and to inform maintainers of the degree of review which has
+>> +been done on the patch.  Reviewed-by: tags, when supplied by reviewers known to
+>>  understand the subject area and to perform thorough reviews, will normally
+>>  increase the likelihood of your patch getting into the kernel.
+>>  
+> 
+> 
 
+-- 
+~Randy
 
