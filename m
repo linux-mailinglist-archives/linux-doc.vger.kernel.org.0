@@ -1,65 +1,65 @@
-Return-Path: <linux-doc+bounces-88254-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88256-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iCiHHdJYC2oCGAUAu9opvQ
-	(envelope-from <linux-doc+bounces-88254-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 20:22:10 +0200
+	id qB28KIlZC2oeGAUAu9opvQ
+	(envelope-from <linux-doc+bounces-88256-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 20:25:13 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03A805722BE
-	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 20:22:09 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 028A3572368
+	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 20:25:12 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 14ADD30D4B7E
-	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 18:13:49 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id CAECD313DA00
+	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 18:14:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C80AD398918;
-	Mon, 18 May 2026 18:12:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DC65D39A056;
+	Mon, 18 May 2026 18:12:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="TO11GI2c"
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="JpqmX9Y9"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from DM1PR04CU001.outbound.protection.outlook.com (mail-centralusazon11010011.outbound.protection.outlook.com [52.101.61.11])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB3CA38A29A;
-	Mon, 18 May 2026 18:12:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF3B539A05A;
+	Mon, 18 May 2026 18:12:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.61.11
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779127926; cv=fail; b=MvK2P+/5gulL7qHWBnOW1P1Sb45+sQ2cg0BXsEJqK4ZQKnsLo0EmknewP2wybe30+R47B+mtLqSkSMBCUjVZejk09AwJr6swDKCVsSck4dO3smWJJ4kriVN6crAqNB4bEDE8k2sYCVlxh6SUXosCIab2NHWfocnI+Ys8UuMDQjU=
+	t=1779127931; cv=fail; b=iekkZh7ELm8SKezefP2EDJDiyr/wNrj7TK4veZ9hgXIysWu9Pm/aV3IAor5HdmmxlJZGegpXdqkzga6sCM0RJWXihR92Oz3PO5Ckb6f8h8NilX/Lmvar+w+GNgfQJ8aB8oCmSjWKBBuyipAPVBjhq1l7Ni4q5vVOgiA5thsF/Zo=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779127926; c=relaxed/simple;
-	bh=rxDIM1useGvQa1wOSdakQ6Q+WcJ5SqBXJ4s9OxQia9Y=;
+	s=arc-20240116; t=1779127931; c=relaxed/simple;
+	bh=PZLCg1u7cnlY0F1vB4fN38BYKFFeJWVI9rbpWE26G6E=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=siEt4snDddAxJnJrXA+OZMWPhvxUrYbvkGbJNLQxWyGCgmbpUD6ptTQO76JjIKhN5hn8ab9RWCml1DIU6UEiY8qajZFcjgRuNW8Ou/wMkNFL0oap4EmzWLNPBTfl0uvTKsr5At5TItPybr4N+KOJAPBOHOgW7vjT5ubMfFSVTtg=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=TO11GI2c; arc=fail smtp.client-ip=52.101.61.11
+	 Content-Type:MIME-Version; b=lopJL7qv+iyXeRDDrn3Tprd/BL5viO93Nket8ylvRjqtPd3Dxg4osQqQscSI8+Rn1FJOX9KYGl4K9TGifLY+sncyF0s46E9QG6GWPDO9xN/Z6Z8LhvHYrNhyqpepKNnxmw5Ll66tzpZunqSHFCJiMe/cgMsFrz9yJhX2WtdpJW0=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=JpqmX9Y9; arc=fail smtp.client-ip=52.101.61.11
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
 Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=dOtQOOG3CKTeyKb2j4UbPbCMZajEGAX0cb9Asrq+vvo2mcj68FP65Xm0E18Uh9cl1UEh67xQ3VT/z6vGqyLlKQI2um1rVVr2+NX70azKMJdRDspl5O3tWHF++IVdoiAhx/hgQbcOk+IA/OBZn3+wsN5T33oKLSFuwmBk7lE39A1SZlNxcsCGWLzqP63AOsgklFKEENOajQJjwSWiwjUrWpoAvDpD7yBu6uIxv/Dmn+p1A4DAhSbG5HhjW5BZacJMWEdvak3rqKPyzzQCd80GDQyJbvHEa154wx+6Q5tvBxlZknhg86XYVK7ULfabaWUDBcjrXLpYhSa0OKeUDlEhKA==
+ b=Cmt4zJjdocTEKOU+6vfbsLfSQLTannaRshZXJO8UEusvD5WFXtqR5otrsqVO1BnrTfK1uxK1sd4K1Q0mMGBoQvhnYYEqLATJ97evYJTE70jP+aEDLvJ81UsSLsJnZQXRQtV3E4qXovD/JgS69skemD+wzkLSI3gew2K6Dv6NxWRsfGrwU6ByjoNGE1vmmQ/vwv85o4r5X+72uAw7pCa9Rfyq5DfVflPwj2dnk7wo2hulZnNQFEv2C6QOVjTLT/yHRS0EGC47lZGl359dNN/3M6HyunKpuacRG40nRchpwSVgZNp/H/Fwcrod1HU/326aXStOIugk1fnsZZxV8zz+kw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3Id9s1aMBy2OHBhcv9XUsi/3IQrb67NnqS06G3BGUco=;
- b=Si5YFUSXkJXcRcpVhEfdaHFzVs/mAnLjZIp0heUax/AHtKE0nxDV3iVeEnYI3ZBws85VQ2yKHnlQBdknkJrNVhMWKdm8zQK/XHGZpxdZazVb+GnrjfgQCkfERGpk8SRmBmUgJVGSU+3P+GRks+sDw+yvDv0zQBJwmBj14wZlumFS+mmjNHqHNdqBdfx6tm8/UsYwPbXUXWjZ+I3wrRvZuozjmjUwxAS07U+ngISHE8SZzm5FAbkL5oHV8dwTEQkNVH3UqWrWKBbpTP4VVbaYXoa1vX+iIO5Mtuw6HlNbNXp2mmdlilLTeOaAB7/3HNnwT6KA4nYRbYyUwC8PDhRoCg==
+ bh=QE0fPvoW04e3Vqv2Go07XYlDSGEZpr3r3QwfIHnp9XA=;
+ b=KRED+6CGaH1On7q6UfvRAcvcWtKF4KqSzdfAQ80YJmnFb7eolYNehQ0F6VGjqzZjhb+FOcJQ2eDYwj9v3mrTjf2RrNafl71R5kjB6m1dU6kaEL1n1NqaVCX3KZwj5yoxfTXogA3TZV5J0qMAD5bMyDpQQqprKzzNW3O5y4ql/Gwa6eIxf99YAohwJ8FyVbqvsSXs2jHt9WRCdzcuq/Yh+U9bJKHn8isKsIykDWyxATm/4v5lOgqEMWTz5UpkMbnzC64gVy+oQNxD3Tng3rvLVADQuZjElTpR0zzBHJxtl3ljsXJ8Oi8hRDXvH8iKFkMWP2kmhsaOuz25V5wAXLuY6A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3Id9s1aMBy2OHBhcv9XUsi/3IQrb67NnqS06G3BGUco=;
- b=TO11GI2c7kfvPhWzyujGFUl4CQGPaAFc+jSrUUX7xT/MSZwjyR5gS4oEgR0xwZARWwGqjMZZsZ20BqritEzwM0fVvAk0n4gl/y7JYYIAf1hkq82vIjKK8C9BNe9hNZQ41XwYd7HfYqaJKn6vyuw28tML82WzA5wnFGBmpDmS6r7aZG1R2v3DuWkFykkMXlUnl6gcCd3cwcoyrZuBiUoRJZ2enxvoAyBm8ePQIdRlw6LUwtZdKyr03+31d8FyRgiSbxHF6kGHrfuo0rr1nHagsj/K6ESzwt0AI+xGWqn1eSIWfRAZ8blvMFdYSlzBQztrg3Rc3DrPCOYzd9wiqt8VYA==
+ bh=QE0fPvoW04e3Vqv2Go07XYlDSGEZpr3r3QwfIHnp9XA=;
+ b=JpqmX9Y9wSAJ1BHzkHIKcTjqJ/XgberwOMkI23IAijvnZQuZEP+gFANm2mBzNZ8h5X+1K56O1ArCVmhqvkkADmnqmtJVM3vOCyjy796aSxS9E2lXdg3iQnLoqcI4aElhCw9IBmaOjTL+iva0vCU4HByLwxwMmVut68SX9dqqtwI4rhASGHclW00VYscvSq5yNmU8YF6f0kiNkzT5kR2yie58j4vih1Ir2CCOk3E2yhzWUjWmbupLO2T/lWtZp1Mt9nF1CYLZmhNQTeQ+hmVxpbJZuDTOaJQH9UI0/DRvrt61wlr/xUpizORQqlO8F1LLNf6nvhlBbQUmBhHA4RDFYg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nvidia.com;
 Received: from DS0PR12MB6486.namprd12.prod.outlook.com (2603:10b6:8:c5::21) by
  CH3PR12MB8727.namprd12.prod.outlook.com (2603:10b6:610:173::19) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.23; Mon, 18 May
- 2026 18:11:54 +0000
+ 2026 18:11:55 +0000
 Received: from DS0PR12MB6486.namprd12.prod.outlook.com
  ([fe80::88a9:f314:c95f:8b33]) by DS0PR12MB6486.namprd12.prod.outlook.com
  ([fe80::88a9:f314:c95f:8b33%6]) with mapi id 15.21.0025.012; Mon, 18 May 2026
- 18:11:54 +0000
+ 18:11:55 +0000
 From: Joel Fernandes <joelagnelf@nvidia.com>
 To: linux-kernel@vger.kernel.org
 Cc: Miguel Ojeda <ojeda@kernel.org>,
@@ -94,16 +94,16 @@ Cc: Miguel Ojeda <ojeda@kernel.org>,
 	joel@joelfernandes.org,
 	linux-doc@vger.kernel.org,
 	Joel Fernandes <joelagnelf@nvidia.com>
-Subject: [PATCH v1 15/16] gpu: nova-core: mm: Add BAR1 user interface
-Date: Mon, 18 May 2026 14:11:24 -0400
-Message-Id: <20260518181126.2493572-16-joelagnelf@nvidia.com>
+Subject: [PATCH v1 16/16] gpu: nova-core: mm: Add BAR1 memory management self-tests
+Date: Mon, 18 May 2026 14:11:25 -0400
+Message-Id: <20260518181126.2493572-17-joelagnelf@nvidia.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260518181126.2493572-1-joelagnelf@nvidia.com>
 References: <20260518181126.2493572-1-joelagnelf@nvidia.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: BL1PR13CA0322.namprd13.prod.outlook.com
- (2603:10b6:208:2c1::27) To DS0PR12MB6486.namprd12.prod.outlook.com
+X-ClientProxiedBy: BL1PR13CA0303.namprd13.prod.outlook.com
+ (2603:10b6:208:2c1::8) To DS0PR12MB6486.namprd12.prod.outlook.com
  (2603:10b6:8:c5::21)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -113,458 +113,469 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DS0PR12MB6486:EE_|CH3PR12MB8727:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6177a3c8-3037-4ead-1436-08deb508f034
+X-MS-Office365-Filtering-Correlation-Id: 5bad6efd-490b-44a9-c7d4-08deb508f159
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|7416014|366016|1800799024|11063799003|22082099003|56012099003|18002099003|3023799003;
+	BCL:0;ARA:13230040|376014|7416014|366016|1800799024|11063799003|22082099003|56012099003|18002099003;
 X-Microsoft-Antispam-Message-Info:
-	LX2XwuW6jnziYl2Qy9dWDsIPROhhLTh/1CxrmR3Zj189xWKFr7P9153AHd2cXBfh5UsuCa0Aa3FJ8dj7FKNWNXGv6u7tU6+D5R8CTUDCEOLX1W26uyknt6PazUCoNTW1K7ZccdFXoyXH8Q7UFsJZsOw6TV5bm7o/Ksz2rpublcSRLKQo7BKGIr825VKaNlxf0shhITCgFEu9uLXSjkPwRCIhn5lUOL/hAV16QqsV/1gMA3Kx78oKP/IHQnhJUPTx3lMlWHVjuNaOwwtLn7qEuHhcpEFR6+v0L3T7S9O7NrkOT4Mm3fBTzXsJpDobQzL4A3l8JWA8fHMqIbAWuQs5x4gGov3VomY6gs1QG87lEapCHtcwNR1oXxOP25jBhhhBV9mSpdT9nbh+uoQS1d3bHu2fBfaExclxk9azri9xTG/dqLvqy43K/2A+u5Fo1VPouFUTJ0BUzmBau0/Un7+0oLBOJdDRF9+FAoPIB58BOz13rcxteTVohSSP5UwIVgzOsLXXEsYGLOoxoLu/J0T461dMoUQLIF0U2GCMgxYjQU6l2szI5HTr8EATC5wQtB3Wv7rP+fW37jhUPu99V9J1vwa0AkgSXsIXFaA8S8KqqEAo1iY6EB3UypUHqxTBPfnfL8Va+nu1G8+n0y9jow6XMP4r0Vqg3jQrSeb/h0lfmIOW8LrJ6z/KGGcWaKesvYyP
+	R7iYdxZXTn7swmvaLH+MoZ6z7gf/u81LHwTUmRemyvlWiaXyx1D5eMsYezpkZLZyr0Mmtb9ji1k3Rza/g6UVmdIhtJWGnMfJ0PffFmuYWTT9XZBZM9b+I/e8/gZj2y9zmkvYrbDKASRRdlswetrmbx94jy7Puyq7Hebr16c9B/WUpH7Iw8Jqpp645dxpDUMHxnJR06MDaYcS4//GYPnlFHvBtLyBhzge4zIgRlh3F0/cnO6d/1YE0MuJq6EG4WK4dbqfLjuAErevhnS95USXM03pIjRcGpc+oGCrCiJWrLzs/bW7ygvxWqydcqj52fFDAn2rgK7DlpbMFH63C6MiOcSmS4KLIC5mkt6ZHWU+cp2HMG0BxHNKR1UKMfeYIiJ7Je9NTXVtV5cbxaZJihWj48Z4ahP6vLmVxNZa49iwFGbPIMw6j8f3uHW4fz+c8tVeoZ5W8QenvmjCqCE+efgWYkOXqsLNJ1DFQWg4ynjNWPSO/B/QIfu79sEj/K2VKVY7N7yuOgyn7p7ljdRFzYB3Ipvzmhuue5B9Xs596FElRj13Q2hdwfIZjrG6ITWvYpwQlhlLvRd6Lhq57yF81iuidTguAXjrbps1OCiFLXcKSiUN8hSU8jogf2kB2t8tvEv/fnMkhllo+aNfP+MjKD8ARVf/pEGTU/qHdHsXadgUXX8o7ftYyvc8guQ0nDx3cUCN
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR12MB6486.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(366016)(1800799024)(11063799003)(22082099003)(56012099003)(18002099003)(3023799003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR12MB6486.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(366016)(1800799024)(11063799003)(22082099003)(56012099003)(18002099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?FVLrZK76hlk8tuditqulCzOREe3RXI1Ua2G67FWifmdnPANLRZa0KvLKXPjB?=
- =?us-ascii?Q?wL1A9FZgaJ3P5q9FcrOAmv42t+A25Kc2n48TYNNm1wa//l4Fkvwnth1g5cKc?=
- =?us-ascii?Q?WJLJmilAeaaFEWjNBz3DGA23+tK9DtCMMRI9YwrOKhLDmYlRznYN9Qv3TN/v?=
- =?us-ascii?Q?G2qXBjjvcRkS1MCz3ByP0RALVgDh9AHP+WcMzZ/IblSpb7XOE5Ppjj1jhs77?=
- =?us-ascii?Q?K1xSfwknHVz0vBZqx8hqSWZB0vtFnJINsSIMRaAhcMCPNIznwC9Wy5OX+rYs?=
- =?us-ascii?Q?6neEpjRecKoSE5cU0dsHs/lnoMz9HZWK7PUOeqnJIcJ+SStVRrh40FzUN5DO?=
- =?us-ascii?Q?ooWqlGdpS0yvwMfVAXPF6blsOMQADDEO4ye9g/aW3luRefBSIfm+2WxSU97P?=
- =?us-ascii?Q?5feyNf1qUR/U/hC8jtK0/rnq04O7LS+8HQD4kztAdqtnNuclOkBxvFormNn2?=
- =?us-ascii?Q?TUcIJZPfMF+MkB/BemqfeqZIwivwPE59MOmh9cqKEPsAa7xNXtodPHhpoOuM?=
- =?us-ascii?Q?doI+R2bT+geX9fvdcekiUpVGKTKz+mpFMp8l5bvkgooS+KcGN4ZqpK/br7gd?=
- =?us-ascii?Q?Fogfm5l85HfrMOKvhFJBhErHMT+DB+eq92ITgLJCgXGzvhx8PmqTLuBpXG02?=
- =?us-ascii?Q?7BG8Uxn+JzdEnMzdbnYKN/l8JkM9/sUfJxuEHhpQegoj1imxoQ+QDAzO5xJp?=
- =?us-ascii?Q?oHlRGwPUxhYzx09fvJmBzckHSY3jBhIIyQSuk4aFgSIqwDbceIkD9n4Tf1Ml?=
- =?us-ascii?Q?RN2VVNOPq06KPqdYOqsG/zbM6szwI8Wkx8ULTPUx1AiIern/lNyfzg/0B/UC?=
- =?us-ascii?Q?mmOrA7uRBS3lYpslAMWdw6ktbc5PnVQjtAr63YYGs8NwPPSoNJRIYRleKx2W?=
- =?us-ascii?Q?UDWpo57s20IPplrwt6e9oWfKeETEUWPS5N9Fx5SONaz7VvWGL+QRKWH+Kh0S?=
- =?us-ascii?Q?gRrR0VmagrEwF3U37rtAcODy0vioPKq2S0Y2XpcNv1DZXYcK1W9Hi3qSj4lK?=
- =?us-ascii?Q?DenuadXgUuHv8g9xXqdbgDz4FfioAKVwlvihG0OE+adWBj3AN18lHm7b4TA5?=
- =?us-ascii?Q?1TWgWG7mz9m+5W05LpOXo79hfe0MuNczcbMAO3LsPx6E1X3ZiV3yNMxgcHZI?=
- =?us-ascii?Q?PN37BUOi/BiwkrU/v4Bx7rmDz5Ngb8jGmUdX3YOfPZ/YVQEqgAZUSeeR9lCW?=
- =?us-ascii?Q?+vCDlLoxexSG7mqfnhLJnYVD0TE9vuMVvkawzTTFQRn0s2N73NOuQ6PRqorp?=
- =?us-ascii?Q?/I9wLVNVPSxeyDuzLTYkI9nppBS8gwYj+OFRhX++7ifnFZhrXFYi9SWQRz/Z?=
- =?us-ascii?Q?ysvcwNTOwdSDTvVVhel0oGijTgnV7QpdCBiENTz2M1kaTp5EJ7sIDisIvGgs?=
- =?us-ascii?Q?omXf4W6IhgOgUmDY2lk0BA05J8EdsoVC1jfqyYQUSnQmjSyEbR1SXlWGnMTO?=
- =?us-ascii?Q?nRI7KhWuIr+JbBL/d80/Sok7mfEh8L715/a4wf/3gXC/T0Qpf5DdjCSsQ+Bf?=
- =?us-ascii?Q?P5ronDObUcm+aVFjOZ5eccgCyVTzbAjgMNchVxc50y06f0fR0iusHWjTBanM?=
- =?us-ascii?Q?yJd31q5W+5q9PGAGb3ROL5LA++Do7xEB940KcxdtxZq6/N4R3292J2J3hcwJ?=
- =?us-ascii?Q?vxu3nEEghawvQj4Uv4CQbPf7Nv/HqGEXnCKoac0201WUnTZOG69O3ENvFGKW?=
- =?us-ascii?Q?O9mD/XgsPUwVrY4t12bT848JtsyswD+9/PdYN/xfygePIPrOxrGWCMKUDjHW?=
- =?us-ascii?Q?rrDgmb8bLQ=3D=3D?=
+	=?utf-8?B?V1FmV09ZRGszSEQvSGNJTXNLRi9LeXNlSnppbzB6SkxKTHMzMlB1ZTZGMUtY?=
+ =?utf-8?B?eHpNT0dRcSsyOUFCcER2bHpzV016UmtIVGU3ZEg3OC93Y0JwdnJ4VkxGZTVm?=
+ =?utf-8?B?UjE2ZHN4NnN1emxCMGxya0pJK285a1JheGJCdEdKZmsvbnZJRWQwaTBEZVFn?=
+ =?utf-8?B?c0EyY0hWaXdSTnZHQ09vVkgyZVcyc1M0cytHbi9hcFNBcUJUNldLSTFReGVQ?=
+ =?utf-8?B?R0hWNFNIZzVNcFdSWWtjZmthMmswenlZeGRvV0FvanBjL3dya2pWdjhheDB4?=
+ =?utf-8?B?dU9HS1RtRFpuWHFuRHI1Myt1RnhWamY0N3NISHh2MXJEZHJONWJWd2NmeEpm?=
+ =?utf-8?B?TlNpSngyVnBLVEpqWE1LZzBOWTAyMXUyNnd4QmQyekx3WmUxMHZHSXVSZTRy?=
+ =?utf-8?B?eDhLQ1lLck9FaW1pY1p3MSs5SHE3VjFBcWxobWd1ZXU4MmsvNWtTbFhJSVYz?=
+ =?utf-8?B?SW1XL3cwNFhmNFZqYXREOTN0R0MzOHBRKzdOMGZjMy80RlExNmFxbjBGSFRu?=
+ =?utf-8?B?RFYwQXdRMlQxTytLc3NrS3lsUEpwWE9JbmsyQ1V0MG1NSklxYWR2Wko2R3Fm?=
+ =?utf-8?B?UTU5TzlnbDc1empoT1lENDk3QmE5UWRrLzFHRXAvRDBiQ2VlZDBMa0JNVG03?=
+ =?utf-8?B?WlVUTGJTU3VpWXFxTlo3RU1QaCtsQzdHUjE1cHJSdnBNeDEzNTB6aGw5ZklN?=
+ =?utf-8?B?SkJlQTc5UEoxVGFIYjZlOWVqYzhoU2x1YVZCZXhMNHRFMVgxc1F2VlYzWDY3?=
+ =?utf-8?B?dUtQM1FLcDhybFp3MmxOTk54UVVnRXdKSzVjcitCUmdML09iVVZIYnAyRkp0?=
+ =?utf-8?B?VlkzNWtKQytlUk5PcGJyb2Z4Nkl0K29nZWY0Z2ZkY1dGU1JzdFppM1A4Tk5T?=
+ =?utf-8?B?MGFXODROVVZFeFlxNzg2V3pHT1BZNWtIbCtUc21KRXZOUUV2Y2d2c25EQkt1?=
+ =?utf-8?B?eW1RdTFUWXZlWUxuYUJEK2lwY3BrUjhQZjIzakZ1aGVWUTVDY0hsOTh5SEZa?=
+ =?utf-8?B?MGdrajB5akZnNGRPVXBKaVlVWHJLckhaSWlWY3NpV0VoNXBrWXA2ZXluT0Zv?=
+ =?utf-8?B?QW1uYjVZQkd5akwvUnBWWDhKV1dzSm9BR0w2alJwc25uN2dCSklKL21XL25N?=
+ =?utf-8?B?S1hwaUhEUHVoM2RwYWhBU0NaRjdyRnlSTDRjRWZTMmZuVW1NRk9ya2pYTFk1?=
+ =?utf-8?B?MjY2Wit4TWRmNHVyeVpOVlpidmpzaDBsRk9nVEVpVjJaM3dtaCs0YWYwMmk3?=
+ =?utf-8?B?Ni94cDFrQmovSkozWTNWY21mek5XV1F3YlUxT2FCRDhkQlpjaHJzSklnTy9o?=
+ =?utf-8?B?QVVDallnbTB0ZkkyamIvSS9UT1BnZnZmbXBkcnBzVXNiV0dSWHhweGdNaVZj?=
+ =?utf-8?B?dHVuZFZCamhoYmYzVXFTTCswdTJNTnMyNG1tNGtHYVgwODdQTkUrVVBRUDY0?=
+ =?utf-8?B?blY4ZU9kNmExTjdZRjViUjdqQTNHb1ZaZkJGcW9sT2pudUFuTUdJeUo5cGx6?=
+ =?utf-8?B?bUJ2NnFrb01PNHc5N1BpSWY1bHFhdzNwQU5yM1hRbGppZk5vdDBmdXlmUVd6?=
+ =?utf-8?B?VDFSTFZLRTNoV1d0ODVuTUpydDh1emR5akp4UWkzTzZTTXdUMG8yWTdBaXE5?=
+ =?utf-8?B?dzh6cUF1YkZqN3o1cTEyZnVCZFl3MWg2QzZxWk9ROVJRVHRrZ01KNUM5VU5I?=
+ =?utf-8?B?Qmp1WnNPSU0xbWRhSWNOV1YzMDBRNmMzZEgwMmMrTnYxM2REL1h5NEdIMCtq?=
+ =?utf-8?B?eC9yZGhyRFp5ZnpsRlc3QWlNSUFEZ3IzOWNEdlI2S0RTMER1bXNXSGxoekJL?=
+ =?utf-8?B?aVRUaDd3TnFpYTBMcEJ5TzJBWEc3M3ZzWkRUZ1gzVzdpbXo2emkxczUwQjVa?=
+ =?utf-8?B?Nm1RN0w5YWVEVnp3QUxJU09KYjlGeFlwMHhFN29GY0l0Nmg4STFUVmpmVUFF?=
+ =?utf-8?B?Q0liZS9VN0dmSmhVeVhsWjk3eTBpMlROTGhSMElpdUxGWjZ4RXZVNWpxYXdx?=
+ =?utf-8?B?aG5kWkxKOUtjWWc1dVpXdWM5Skh3Nm9ENWUyNVQxbENKWDFRYTdBNTllWDhL?=
+ =?utf-8?B?MVl3VnJkUmV3eDRyQnlzRjljOG02enorMUlYaUZHL2g3eHlzcFd6NEROVk5V?=
+ =?utf-8?B?bXpRRnZWWkdmV2VPTGFwWkw1REFMbENCRG9FMmwrQWJsT0Q4RXlHd1YwUHhP?=
+ =?utf-8?B?cnhIcmRJRmh4ZGRuNWlGc2N5bW5CR3haZUo0cGZ3VVZwYi9vUVhEQkJpN3ZY?=
+ =?utf-8?B?Qk5UR3RRSUtWWUJkYmFSWHVJUXVRK3JIVHB1UHVJejZFUkdCZmJtbUlvbC96?=
+ =?utf-8?B?ZlJIaEttMWJxNENnNTdSZktaOVpqd2xCRWtkVnI5SUU5TC9wd2REQT09?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6177a3c8-3037-4ead-1436-08deb508f034
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5bad6efd-490b-44a9-c7d4-08deb508f159
 X-MS-Exchange-CrossTenant-AuthSource: DS0PR12MB6486.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 May 2026 18:11:52.9167
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 May 2026 18:11:55.0361
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2BD9fgww8rIijvCDqJ1XGDTq2HT8jY+gyeLnYK76B2t/P6QaMRbBXJwj1otjGpSG8OsW/qiWvgLxxB8uCueAvQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: 7zPg+AmSaYLbCXw26q47YK5BXQsA7+8+gMu6Wd+AMXpsApEyEogeQYdsJZLMF3rpk5quhVWqzuI6Vvvyy0W+fA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8727
-X-Spamd-Result: default: False [2.84 / 15.00];
+X-Spamd-Result: default: False [2.34 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	MID_CONTAINS_FROM(1.00)[];
 	ARC_REJECT(1.00)[cv is fail on i=2];
-	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64];
 	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[33];
 	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[33];
+	TAGGED_FROM(0.00)[bounces-88256-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-88254-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
 	FREEMAIL_CC(0.00)[kernel.org,garyguo.net,protonmail.com,google.com,umich.edu,redhat.com,collabora.com,lists.freedesktop.org,vger.kernel.org,lists.linux.dev,nvidia.com,gmail.com,joelfernandes.org];
-	DKIM_TRACE(0.00)[Nvidia.com:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[joelagnelf@nvidia.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[Nvidia.com:+];
 	PRECEDENCE_BULK(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[joelagnelf@nvidia.com,linux-doc@vger.kernel.org];
+	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:mid,nvidia.com:email,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,Nvidia.com:dkim]
-X-Rspamd-Queue-Id: 03A805722BE
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,nvidia.com:mid,nvidia.com:email,Nvidia.com:dkim]
+X-Rspamd-Queue-Id: 028A3572368
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Add the BAR1 user interface for CPU access to GPU virtual memory through
-the BAR1 aperture.
+Add self-tests for BAR1 access during driver probe when
+CONFIG_NOVA_MM_SELFTESTS is enabled (default disabled). This results in
+testing the Vmm, GPU buddy allocator and BAR1 region all of which should
+function correctly for the tests to pass.
 
 Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
 ---
- drivers/gpu/nova-core/driver.rs       |  22 ++-
- drivers/gpu/nova-core/gpu.rs          |  41 +++++-
- drivers/gpu/nova-core/gsp/commands.rs |   1 -
- drivers/gpu/nova-core/mm.rs           |   1 +
- drivers/gpu/nova-core/mm/bar_user.rs  | 194 ++++++++++++++++++++++++++
- 5 files changed, 255 insertions(+), 4 deletions(-)
- create mode 100644 drivers/gpu/nova-core/mm/bar_user.rs
+ drivers/gpu/nova-core/gpu.rs          |   8 +-
+ drivers/gpu/nova-core/mm.rs           |  12 +-
+ drivers/gpu/nova-core/mm/bar_user.rs  | 253 ++++++++++++++++++++++++++
+ drivers/gpu/nova-core/mm/pagetable.rs |  33 ++++
+ 4 files changed, 303 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/gpu/nova-core/driver.rs b/drivers/gpu/nova-core/driver.rs
-index b14d4b599783..207ba164cf4e 100644
---- a/drivers/gpu/nova-core/driver.rs
-+++ b/drivers/gpu/nova-core/driver.rs
-@@ -2,10 +2,12 @@
- 
- use kernel::{
-     auxiliary,
-+    device::Bound,
-     device::Core,
-     devres::Devres,
-     dma::Device,
-     dma::DmaMask,
-+    io::resource,
-     pci,
-     pci::{
-         Class,
-@@ -47,9 +49,27 @@ pub(crate) struct NovaCore {
- const GPU_DMA_BITS: u32 = 47;
- 
- pub(crate) type Bar0 = pci::Bar<BAR0_SIZE>;
--#[expect(dead_code)]
- pub(crate) type Bar1 = pci::Bar;
- 
-+/// Returns the Linux PCI resource index that holds BAR1 for an NVIDIA GPU.
-+///
-+/// On Maxwell through Ada, BAR0 is a 32-bit memory BAR occupying a single
-+/// Linux PCI resource slot, so BAR1 lives at index 1. Starting with Blackwell
-+/// (and on some Ampere GA100 / Hopper SKUs) BAR0 is a 64-bit memory BAR that
-+/// consumes two consecutive resource slots: index 0 holds the low 32 bits and
-+/// index 1 holds the high 32 bits (with no `flags` / or size of its own),
-+/// shifting BAR1 to index 2.
-+pub(crate) fn bar1_resource_index(pdev: &pci::Device<Bound>) -> Result<u32> {
-+    // Probe the `IORESOURCE_MEM_64` flag of BAR0 as a robust way of exposing
-+    // if BAR0 and hence BAR1 is 64-bit.
-+    let flags0 = pdev.resource_flags(0)?;
-+    if flags0.contains(resource::Flags::IORESOURCE_MEM_64) {
-+        Ok(2)
-+    } else {
-+        Ok(1)
-+    }
-+}
-+
- kernel::pci_device_table!(
-     PCI_TABLE,
-     MODULE_PCI_TABLE,
 diff --git a/drivers/gpu/nova-core/gpu.rs b/drivers/gpu/nova-core/gpu.rs
-index f789d956cc49..b0eebe6406e5 100644
+index b0eebe6406e5..6ed486503957 100644
 --- a/drivers/gpu/nova-core/gpu.rs
 +++ b/drivers/gpu/nova-core/gpu.rs
-@@ -19,7 +19,10 @@
+@@ -405,7 +405,13 @@ pub(crate) fn run_selftests(
+         self: Pin<&mut Self>,
+         pdev: &pci::Device<device::Bound>,
+     ) -> Result {
+-        crate::mm::run_mm_selftests(pdev, &self.mm, self.spec.chipset)?;
++        crate::mm::run_mm_selftests(
++            pdev,
++            &self.mm,
++            &self.bar1,
++            self.gsp_static_info.bar1_pde_base,
++            self.spec.chipset,
++        )?;
+         Ok(())
+     }
+ }
+diff --git a/drivers/gpu/nova-core/mm.rs b/drivers/gpu/nova-core/mm.rs
+index 4741ef60593b..ed77162db848 100644
+--- a/drivers/gpu/nova-core/mm.rs
++++ b/drivers/gpu/nova-core/mm.rs
+@@ -55,7 +55,10 @@ macro_rules! impl_pfn_bounded {
+ };
  
  use crate::{
-     bounded_enum,
 -    driver::Bar0,
 +    driver::{
 +        Bar0,
 +        Bar1, //
 +    },
-     falcon::{
-         gsp::Gsp as GspFalcon,
-         sec2::Sec2 as Sec2Falcon,
-@@ -31,8 +34,11 @@
-         Gsp, //
-     },
-     mm::{
-+        bar_user::BarUser,
-+        pagetable::MmuVersion,
-         GpuMm,
--        IntoVramRange, //
-+        IntoVramRange,
-+        VramAddress, //
-     },
-     regs,
+     gpu::Chipset, //
  };
-@@ -145,6 +151,11 @@ pub(crate) const fn arch(self) -> Architecture {
-     pub(crate) const fn needs_fwsec_bootloader(self) -> bool {
-         matches!(self.arch(), Architecture::Turing) || matches!(self, Self::GA100)
-     }
-+
-+    /// Returns the MMU version for this chipset.
-+    pub(crate) fn mmu_version(self) -> MmuVersion {
-+        MmuVersion::from(self.arch())
+ 
+@@ -122,10 +125,15 @@ pub(crate) fn tlb(&self) -> &Tlb {
+ pub(crate) fn run_mm_selftests(
+     pdev: &pci::Device<device::Bound>,
+     mm: &Arc<GpuMm>,
++    bar1: &Arc<Devres<Bar1>>,
++    bar1_pde_base: u64,
+     chipset: Chipset,
+ ) -> Result {
+     #[cfg(CONFIG_NOVA_MM_SELFTESTS)]
+-    pramin::run_self_test(pdev.as_ref(), mm.pramin(), chipset)?;
++    {
++        pramin::run_self_test(pdev.as_ref(), mm.pramin(), chipset)?;
++        bar_user::run_self_test(pdev.as_ref(), mm, bar1, bar1_pde_base, chipset)?;
 +    }
+ 
+     Ok(())
  }
- 
- // TODO
-@@ -263,6 +274,8 @@ pub(crate) struct Gpu {
-     spec: Spec,
-     /// MMIO mapping of PCI BAR 0
-     bar: Arc<Devres<Bar0>>,
-+    /// MMIO mapping of PCI BAR 1.
-+    bar1: Arc<Devres<Bar1>>,
-     /// System memory page required for flushing all pending GPU-side memory writes done through
-     /// PCIE into system memory, via sysmembar (A GPU-initiated HW memory-barrier operation).
-     sysmem_flush: SysmemFlush,
-@@ -276,6 +289,8 @@ pub(crate) struct Gpu {
-     #[pin]
-     gsp: Gsp,
-     gsp_static_info: GetGspStaticInfoReply,
-+    /// BAR1 user interface for CPU access to GPU virtual memory.
-+    bar_user: Arc<BarUser>,
- }
- 
- impl Gpu {
-@@ -348,6 +363,28 @@ pub(crate) fn new<'a>(
-                 )?
-             },
- 
-+            bar1: {
-+                let bar1_idx = crate::driver::bar1_resource_index(pdev)?;
-+                Arc::pin_init(pdev.iomap_region(bar1_idx, c"nova-core/bar1"), GFP_KERNEL)?
-+            },
-+
-+            // Create BAR1 user interface for CPU access to GPU virtual memory.
-+            bar_user: {
-+                let pdb_addr = VramAddress::new(gsp_static_info.bar1_pde_base);
-+                let bar1_idx = crate::driver::bar1_resource_index(pdev)?;
-+                let bar1_size = pdev.resource_len(bar1_idx)?;
-+                Arc::pin_init(
-+                    BarUser::new(
-+                        pdb_addr,
-+                        spec.chipset,
-+                        bar1_size,
-+                        mm.clone(),
-+                        bar1.clone(),
-+                    )?,
-+                    GFP_KERNEL,
-+                )?
-+            },
-+
-             bar: devres_bar,
-         })
-     }
-diff --git a/drivers/gpu/nova-core/gsp/commands.rs b/drivers/gpu/nova-core/gsp/commands.rs
-index bee7539eff60..301c95686efd 100644
---- a/drivers/gpu/nova-core/gsp/commands.rs
-+++ b/drivers/gpu/nova-core/gsp/commands.rs
-@@ -194,7 +194,6 @@ fn init(&self) -> impl Init<Self::Command, Self::InitError> {
- pub(crate) struct GetGspStaticInfoReply {
-     gpu_name: [u8; 64],
-     /// BAR1 Page Directory Entry base address.
--    #[expect(dead_code)]
-     pub(crate) bar1_pde_base: u64,
-     /// Usable FB (VRAM) region for driver memory allocation.
-     pub(crate) usable_fb_region: Range<u64>,
-diff --git a/drivers/gpu/nova-core/mm.rs b/drivers/gpu/nova-core/mm.rs
-index 502c7fdceba2..4741ef60593b 100644
---- a/drivers/gpu/nova-core/mm.rs
-+++ b/drivers/gpu/nova-core/mm.rs
-@@ -31,6 +31,7 @@ macro_rules! impl_pfn_bounded {
-     };
- }
- 
-+pub(crate) mod bar_user;
- pub(super) mod pagetable;
- pub(crate) mod pramin;
- pub(super) mod tlb;
 diff --git a/drivers/gpu/nova-core/mm/bar_user.rs b/drivers/gpu/nova-core/mm/bar_user.rs
-new file mode 100644
-index 000000000000..bb9742c036b7
---- /dev/null
+index bb9742c036b7..96e1389dcbe9 100644
+--- a/drivers/gpu/nova-core/mm/bar_user.rs
 +++ b/drivers/gpu/nova-core/mm/bar_user.rs
-@@ -0,0 +1,194 @@
-+// SPDX-License-Identifier: GPL-2.0
+@@ -192,3 +192,256 @@ fn drop(&mut self) {
+         // identifying the leaked VA range.
+     }
+ }
 +
-+//! BAR1 user interface for CPU access to GPU virtual memory. Used for USERD
-+//! for GPU work submission, and applications to access GPU buffers via mmap().
-+
-+use kernel::{
-+    device,
-+    devres::Devres,
-+    io::Io,
-+    new_mutex,
-+    prelude::*,
-+    sync::{
-+        Arc,
-+        Mutex, //
-+    },
-+};
-+
-+use crate::{
-+    driver::Bar1,
-+    gpu::Chipset,
-+    mm::{
-+        vmm::{
-+            MappedRange,
-+            Vmm, //
-+        },
-+        GpuMm,
-+        Pfn,
-+        Vfn,
-+        VirtualAddress,
-+        VramAddress,
-+        PAGE_SIZE, //
-+    },
-+    num::IntoSafeCast,
-+};
-+
-+/// BAR1 user interface for virtual memory mappings.
++/// Run MM subsystem self-tests during probe.
 +///
-+/// Owns the [`Vmm`] for the BAR1 address space.
-+#[pin_data]
-+pub(crate) struct BarUser {
-+    #[pin]
-+    vmm: Mutex<Vmm>,
-+    mm: Arc<GpuMm>,
-+    bar1: Arc<Devres<Bar1>>,
-+}
++/// Tests page table infrastructure and `BAR1` MMIO access using the `BAR1`
++/// address space. Uses the `GpuMm`'s buddy allocator to allocate page tables
++/// and test pages as needed.
++#[cfg(CONFIG_NOVA_MM_SELFTESTS)]
++pub(crate) fn run_self_test(
++    pdev: &device::Device<device::Bound>,
++    mm: &Arc<GpuMm>,
++    bar1_devres: &Arc<Devres<Bar1>>,
++    bar1_pdb: u64,
++    chipset: Chipset,
++) -> Result {
++    use kernel::gpu::buddy::{
++        GpuBuddyAllocFlags,
++        GpuBuddyAllocMode, //
++    };
++    use kernel::ptr::Alignment;
++    use kernel::sizes::{
++        SZ_16K,
++        SZ_32K,
++        SZ_4K,
++        SZ_64K, //
++    };
 +
-+impl BarUser {
-+    /// Create a pin-initializer for [`BarUser`].
-+    pub(crate) fn new(
-+        pdb_addr: VramAddress,
-+        chipset: Chipset,
-+        va_size: u64,
-+        mm: Arc<GpuMm>,
-+        bar1: Arc<Devres<Bar1>>,
-+    ) -> Result<impl PinInit<Self>> {
-+        let vmm = Vmm::new(pdb_addr, chipset.mmu_version(), va_size)?;
-+        Ok(pin_init!(Self {
-+            vmm <- new_mutex!(vmm, "bar_user_vmm"),
-+            mm,
-+            bar1,
-+        }))
++    // Test patterns.
++    const PATTERN_PRAMIN: u32 = 0xDEAD_BEEF;
++    const PATTERN_BAR1: u32 = 0xCAFE_BABE;
++
++    let dev = pdev;
++    let bar1: &Bar1 = bar1_devres.access(pdev)?;
++    dev_info!(dev, "MM: Starting self-test...\n");
++
++    let pdb_addr = VramAddress::new(bar1_pdb);
++
++    // Check if initial page tables are in VRAM.
++    if crate::mm::pagetable::check_pdb_valid(pdev, mm.pramin(), pdb_addr, chipset).is_err() {
++        dev_info!(dev, "MM: Self-test SKIPPED - no valid VRAM page tables\n");
++        return Ok(());
 +    }
 +
-+    /// Map physical pages to a contiguous BAR1 virtual range.
-+    pub(crate) fn map(
-+        self: &Arc<Self>,
-+        dev: &device::Device<device::Bound>,
-+        pfns: &[Pfn],
-+        writable: bool,
-+    ) -> Result<BarUserAccess> {
-+        if pfns.is_empty() {
-+            return Err(EINVAL);
++    // Set up a test page from the buddy allocator.
++    let test_page_blocks = KBox::pin_init(
++        mm.buddy().alloc_blocks(
++            GpuBuddyAllocMode::Simple,
++            SZ_4K.into_safe_cast(),
++            Alignment::new::<SZ_4K>(),
++            GpuBuddyAllocFlags::default(),
++        ),
++        GFP_KERNEL,
++    )?;
++    let test_vram_offset = test_page_blocks.iter().next().ok_or(ENOMEM)?.offset();
++    let test_vram = VramAddress::new(test_vram_offset);
++    let test_pfn = Pfn::from(test_vram);
++
++    // Create a VMM of size 64K to track virtual memory mappings.
++    let mut vmm = Vmm::new(pdb_addr, chipset.mmu_version(), SZ_64K.into_safe_cast())?;
++
++    // Create a test mapping.
++    let mapped = vmm.map_pages(pdev, mm, &[test_pfn], None, true)?;
++    let test_vfn = mapped.vfn_start;
++
++    // Pre-compute test addresses for the PRAMIN to BAR1 read test.
++    let vfn_offset: usize = test_vfn.raw().into_safe_cast();
++    let bar1_base_offset = vfn_offset.checked_mul(PAGE_SIZE).ok_or(EOVERFLOW)?;
++    let bar1_read_offset: usize = bar1_base_offset + 0x100;
++    let vram_read_addr = test_vram + 0x100;
++
++    // Test 1: Write via PRAMIN, read via BAR1.
++    {
++        let mut window = mm.pramin().get_window(pdev)?;
++        window.try_write32(vram_read_addr, PATTERN_PRAMIN)?;
++    }
++
++    // Read back via BAR1 aperture.
++    let bar1_value = bar1.try_read32(bar1_read_offset)?;
++
++    let test1_passed = if bar1_value == PATTERN_PRAMIN {
++        true
++    } else {
++        dev_err!(
++            dev,
++            "MM: Test 1 FAILED - Expected {:#010x}, got {:#010x}\n",
++            PATTERN_PRAMIN,
++            bar1_value
++        );
++        false
++    };
++
++    // Cleanup - invalidate PTE.
++    vmm.unmap_pages(pdev, mm, mapped)?;
++
++    // Test 2: Two-phase prepare/execute API.
++    let prepared = vmm.prepare_map(pdev, mm, 1, None)?;
++    let mapped2 = vmm.execute_map(pdev, mm, prepared, &[test_pfn], true)?;
++    let readback = vmm.read_mapping(pdev, mm, mapped2.vfn_start)?;
++    let test2_passed = if readback == Some(test_pfn) {
++        true
++    } else {
++        dev_err!(dev, "MM: Test 2 FAILED - Two-phase map readback mismatch\n");
++        false
++    };
++    vmm.unmap_pages(pdev, mm, mapped2)?;
++
++    // Test 3: Range-constrained allocation with a hole — exercises block.size()-driven
++    // BAR1 mapping. A 4K hole is punched at base+16K, then a single 32K allocation
++    // is requested within [base, base+36K). The buddy allocator must split around the
++    // hole, returning multiple blocks (expected: {16K, 4K, 8K, 4K} = 32K total).
++    // Each block is mapped into BAR1 and verified via PRAMIN read-back.
++    //
++    // Address layout (base = 0x10000):
++    //   [    16K    ] [HOLE 4K] [4K] [ 8K ] [4K]
++    //   0x10000       0x14000  0x15000 0x16000 0x18000 0x19000
++    let range_base: u64 = SZ_64K.into_safe_cast();
++    let sz_4k: u64 = SZ_4K.into_safe_cast();
++    let sz_16k: u64 = SZ_16K.into_safe_cast();
++    let sz_32k_4k: u64 = (SZ_32K + SZ_4K).into_safe_cast();
++
++    // Punch a 4K hole at base+16K so the subsequent 32K allocation must split.
++    let _hole = KBox::pin_init(
++        mm.buddy().alloc_blocks(
++            GpuBuddyAllocMode::Range(range_base + sz_16k..range_base + sz_16k + sz_4k),
++            SZ_4K.into_safe_cast(),
++            Alignment::new::<SZ_4K>(),
++            GpuBuddyAllocFlags::default(),
++        ),
++        GFP_KERNEL,
++    )?;
++
++    // Allocate 32K within [base, base+36K). The hole forces the allocator to return
++    // split blocks whose sizes are determined by buddy alignment.
++    let blocks = KBox::pin_init(
++        mm.buddy().alloc_blocks(
++            GpuBuddyAllocMode::Range(range_base..range_base + sz_32k_4k),
++            SZ_32K.into_safe_cast(),
++            Alignment::new::<SZ_4K>(),
++            GpuBuddyAllocFlags::default(),
++        ),
++        GFP_KERNEL,
++    )?;
++
++    let mut test3_passed = true;
++    let mut total_size = 0usize;
++
++    for block in blocks.iter() {
++        total_size += IntoSafeCast::<usize>::into_safe_cast(block.size());
++
++        // Map all pages of this block.
++        let page_size: u64 = PAGE_SIZE.into_safe_cast();
++        let num_pages: usize = (block.size() / page_size).into_safe_cast();
++
++        let mut pfns = KVec::new();
++        for j in 0..num_pages {
++            let j_u64: u64 = j.into_safe_cast();
++            pfns.push(
++                Pfn::from(VramAddress::new(
++                    block.offset() + j_u64.checked_mul(page_size).ok_or(EOVERFLOW)?,
++                )),
++                GFP_KERNEL,
++            )?;
 +        }
-+        let mut vmm = self.vmm.lock();
-+        let mapped = vmm.map_pages(dev, &self.mm, pfns, None, writable)?;
 +
-+        Ok(BarUserAccess {
-+            bar_user: self.clone(),
-+            mapped: Some(mapped),
-+        })
++        let mapped = vmm.map_pages(pdev, mm, &pfns, None, true)?;
++        let bar1_base_vfn: usize = mapped.vfn_start.raw().into_safe_cast();
++        let bar1_base = bar1_base_vfn.checked_mul(PAGE_SIZE).ok_or(EOVERFLOW)?;
++
++        for j in 0..num_pages {
++            let page_bar1_off = bar1_base + j * PAGE_SIZE;
++            let j_u64: u64 = j.into_safe_cast();
++            let page_phys = block.offset()
++                + j_u64
++                    .checked_mul(PAGE_SIZE.into_safe_cast())
++                    .ok_or(EOVERFLOW)?;
++
++            bar1.try_write32(PATTERN_BAR1, page_bar1_off)?;
++
++            let pramin_val = {
++                let mut window = mm.pramin().get_window(pdev)?;
++                window.try_read32(VramAddress::new(page_phys))?
++            };
++
++            if pramin_val != PATTERN_BAR1 {
++                dev_err!(
++                    dev,
++                    "MM: Test 3 FAILED block offset {:#x} page {} (val={:#x})\n",
++                    block.offset(),
++                    j,
++                    pramin_val
++                );
++                test3_passed = false;
++            }
++        }
++
++        vmm.unmap_pages(pdev, mm, mapped)?;
 +    }
-+}
 +
-+/// Access object for a mapped BAR1 region.
-+pub(crate) struct BarUserAccess {
-+    bar_user: Arc<BarUser>,
-+    /// [`BarUserAccess::release`] [`Option::take`]s this; `Some` at
-+    /// drop time means `release()` was never called.
-+    mapped: Option<MappedRange>,
-+}
++    // Verify aggregate: all returned block sizes must sum to allocation size.
++    if total_size != SZ_32K {
++        dev_err!(
++            dev,
++            "MM: Test 3 FAILED - total size {} != expected {}\n",
++            total_size,
++            SZ_32K
++        );
++        test3_passed = false;
++    }
 +
-+impl BarUserAccess {
-+    /// Tear down the BAR1 mapping using a caller-supplied bound device.
-+    pub(crate) fn release(mut self, dev: &device::Device<device::Bound>) -> Result {
-+        let mapped = self.mapped.take().ok_or(EINVAL)?;
-+        let mut vmm = self.bar_user.vmm.lock();
-+        vmm.unmap_pages(dev, &self.bar_user.mm, mapped)?;
++    // Release Tests 1-3's Vmm before Test 4 constructs a fresh BarUser on
++    // the same PDB.
++    drop(vmm);
++
++    // Test 4: Exercise `BarUser::map()` end-to-end.
++    let bar_user = Arc::pin_init(
++        BarUser::new(
++            pdb_addr,
++            chipset,
++            SZ_64K.into_safe_cast(),
++            mm.clone(),
++            bar1_devres.clone(),
++        )?,
++        GFP_KERNEL,
++    )?;
++    let access = bar_user.map(pdev, &[test_pfn], true)?;
++
++    // Write pattern via PRAMIN, read via BarUserAccess.
++    {
++        let mut window = mm.pramin().get_window(pdev)?;
++        window.try_write32(test_vram, PATTERN_BAR1)?;
++    }
++
++    let readback = access.try_read32(pdev, 0)?;
++    let test4_passed = if readback == PATTERN_BAR1 {
++        true
++    } else {
++        dev_err!(
++            dev,
++            "MM: Test 4 FAILED - Expected {:#010x}, got {:#010x}\n",
++            PATTERN_BAR1,
++            readback
++        );
++        false
++    };
++    access.release(pdev)?;
++
++    if test1_passed && test2_passed && test3_passed && test4_passed {
++        dev_info!(dev, "MM: All self-tests PASSED\n");
 +        Ok(())
-+    }
-+
-+    /// Returns the active mapping.
-+    fn mapped(&self) -> &MappedRange {
-+        // `mapped` is only `None` after `take()` in `release`; hence unwrap()
-+        // cannot panic here.
-+        self.mapped.as_ref().unwrap()
-+    }
-+
-+    /// Get the base virtual address of this mapping.
-+    pub(crate) fn base(&self) -> VirtualAddress {
-+        VirtualAddress::from(self.mapped().vfn_start)
-+    }
-+
-+    /// Get the total size of the mapped region in bytes.
-+    pub(crate) fn size(&self) -> usize {
-+        self.mapped().num_pages * PAGE_SIZE
-+    }
-+
-+    /// Get the starting virtual frame number.
-+    pub(crate) fn vfn_start(&self) -> Vfn {
-+        self.mapped().vfn_start
-+    }
-+
-+    /// Get the number of pages in this mapping.
-+    pub(crate) fn num_pages(&self) -> usize {
-+        self.mapped().num_pages
-+    }
-+
-+    /// Translate an offset within this mapping to a BAR1 aperture offset.
-+    fn bar_offset(&self, offset: usize) -> Result<usize> {
-+        if offset >= self.size() {
-+            return Err(EINVAL);
-+        }
-+
-+        let base_vfn: usize = self.mapped().vfn_start.raw().into_safe_cast();
-+        let base = base_vfn.checked_mul(PAGE_SIZE).ok_or(EOVERFLOW)?;
-+        base.checked_add(offset).ok_or(EOVERFLOW)
-+    }
-+
-+    // Fallible accessors with runtime bounds checking.
-+
-+    /// Read a 32-bit value at the given offset.
-+    pub(crate) fn try_read32(
-+        &self,
-+        dev: &device::Device<device::Bound>,
-+        offset: usize,
-+    ) -> Result<u32> {
-+        let off = self.bar_offset(offset)?;
-+        self.bar_user.bar1.access(dev)?.try_read32(off)
-+    }
-+
-+    /// Write a 32-bit value at the given offset.
-+    pub(crate) fn try_write32(
-+        &self,
-+        dev: &device::Device<device::Bound>,
-+        value: u32,
-+        offset: usize,
-+    ) -> Result {
-+        let off = self.bar_offset(offset)?;
-+        self.bar_user.bar1.access(dev)?.try_write32(value, off)
-+    }
-+
-+    /// Read a 64-bit value at the given offset.
-+    pub(crate) fn try_read64(
-+        &self,
-+        dev: &device::Device<device::Bound>,
-+        offset: usize,
-+    ) -> Result<u64> {
-+        let off = self.bar_offset(offset)?;
-+        self.bar_user.bar1.access(dev)?.try_read64(off)
-+    }
-+
-+    /// Write a 64-bit value at the given offset.
-+    pub(crate) fn try_write64(
-+        &self,
-+        dev: &device::Device<device::Bound>,
-+        value: u64,
-+        offset: usize,
-+    ) -> Result {
-+        let off = self.bar_offset(offset)?;
-+        self.bar_user.bar1.access(dev)?.try_write64(value, off)
++    } else {
++        dev_err!(dev, "MM: Self-tests FAILED\n");
++        Err(EIO)
 +    }
 +}
+diff --git a/drivers/gpu/nova-core/mm/pagetable.rs b/drivers/gpu/nova-core/mm/pagetable.rs
+index 042584e5178b..fb573f07b4cf 100644
+--- a/drivers/gpu/nova-core/mm/pagetable.rs
++++ b/drivers/gpu/nova-core/mm/pagetable.rs
+@@ -17,6 +17,9 @@
+ 
+ use kernel::num::Bounded;
+ 
++#[cfg(CONFIG_NOVA_MM_SELFTESTS)]
++use kernel::device;
 +
-+impl Drop for BarUserAccess {
-+    fn drop(&mut self) {
-+        if self.mapped.is_some() {
-+            kernel::pr_warn!(
-+                "BarUserAccess dropped without calling release(). BarUser address space will leak.\n"
-+            );
-+        }
-+        // The inner `MappedRange`'s own `MustUnmapGuard` will also fire,
-+        // identifying the leaked VA range.
+ use crate::gpu::Architecture;
+ use crate::mm::{
+     pramin,
+@@ -379,3 +382,33 @@ fn from(val: AperturePde) -> Self {
+         Bounded::from_expr(val as u64 & 0x3)
+     }
+ }
++
++/// Check if the PDB has valid, VRAM-backed page tables.
++#[cfg(CONFIG_NOVA_MM_SELFTESTS)]
++fn check_pdb_inner<M: MmuConfig>(
++    dev: &device::Device<device::Bound>,
++    pramin: &pramin::Pramin,
++    pdb_addr: VramAddress,
++) -> Result {
++    let mut window = pramin.get_window(dev)?;
++    let raw = window.try_read64(pdb_addr)?;
++
++    if !M::Pde::from_raw(raw).is_valid_vram() {
++        return Err(ENOENT);
++    }
++    Ok(())
++}
++
++/// Check if the PDB has valid, VRAM-backed page tables, dispatching by MMU version.
++#[cfg(CONFIG_NOVA_MM_SELFTESTS)]
++pub(super) fn check_pdb_valid(
++    dev: &device::Device<device::Bound>,
++    pramin: &pramin::Pramin,
++    pdb_addr: VramAddress,
++    chipset: crate::gpu::Chipset,
++) -> Result {
++    match MmuVersion::from(chipset.arch()) {
++        MmuVersion::V2 => check_pdb_inner::<MmuV2>(dev, pramin, pdb_addr),
++        MmuVersion::V3 => check_pdb_inner::<MmuV3>(dev, pramin, pdb_addr),
 +    }
 +}
 -- 
