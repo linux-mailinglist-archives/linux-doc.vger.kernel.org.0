@@ -1,411 +1,203 @@
-Return-Path: <linux-doc+bounces-88285-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88287-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YF7yIVqTC2p+JgUAu9opvQ
-	(envelope-from <linux-doc+bounces-88285-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 00:31:54 +0200
+	id MmBENmeXC2oxJwUAu9opvQ
+	(envelope-from <linux-doc+bounces-88287-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 00:49:11 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3512757483A
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 00:31:54 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3497A574CA9
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 00:49:11 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id BD0003061CA8
-	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 22:29:46 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 6384D3048DE7
+	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 22:43:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D6D153AEF30;
-	Mon, 18 May 2026 22:29:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6695F34750B;
+	Mon, 18 May 2026 22:43:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Iq6Ed8Rd"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jnLwwkQM"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dy1-f171.google.com (mail-dy1-f171.google.com [74.125.82.171])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D9933AE6EE
-	for <linux-doc@vger.kernel.org>; Mon, 18 May 2026 22:29:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.171
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E50B395D8E
+	for <linux-doc@vger.kernel.org>; Mon, 18 May 2026 22:43:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779143385; cv=none; b=iRKGtT+4P8ju6XC5yFhBfGHBqpWALxww8lqyRi9pGNzOfAGyrVLVcb5cBb1jipvYQ40BV7OWxYLlC81MMtvTPUyNQAHNnzIlqz0M1/A1qlemTnGh8a4yVPEB2UWXxaf0/oee09lazq6IXODR6rp30fP7tJm6NQba0l2pKFhNh28=
+	t=1779144219; cv=none; b=aZ8z742QCAt2Vh/OAZUlxW2nQrdAJSXwSLT5N/JJJhLxfaJDnB5Qg+S1vk4qdSvgn/JJO6fpmeAmOzHPRyyUxdX8kJvK/EZrKMMhoOHRn/L3RkKiNZQB2DK6sctjWcG6ztUssGglRQPBIo3sim99fXJlDX6qnqY8L51W0mJs0WY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779143385; c=relaxed/simple;
-	bh=ATIJkJpw6FNG542B7coh18izn9jy2d6IcrFe1PXuySg=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=NhoPVV25ZPtD68n0Fwa8rbLcRBazURFMDHAfrhqiYAZQx5nXMdAwOMD1BDQJMlE9X2aGTWpPMSWcBAzAjYn0Rs0P5xCbxzrNc5jOElfw/IaQzf+0oEOf/jovObYyzIfW07JyYaDkHMtKMKU2r09vI8W3KLKIbYFs1wX9Qkkagts=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Iq6Ed8Rd; arc=none smtp.client-ip=74.125.82.171
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-dy1-f171.google.com with SMTP id 5a478bee46e88-2f0d3e07e30so10684110eec.0
-        for <linux-doc@vger.kernel.org>; Mon, 18 May 2026 15:29:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779143383; x=1779748183; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=BBHGd6RpXFsgzhD8maiZ0ZUzNdvAB0Ntl39qTre2IF0=;
-        b=Iq6Ed8RdRHZXS/I8DzUOmL36+Yr/qYwDSwoAa6h286fE/EPQ2A6pxY2Bg9rdnCY/V7
-         HSqb2RqZq98PEE7si44HXO7szlQGLhlce9eJU4H9OtXZpcNCNkFSTrb3WUES3pGxb3cy
-         NmjZ3B9t4zpxXFryiCx40BPW4Oyi+9JBirEFlqJTjHQovh4FdJxmcUkcgXPPREXTDC2r
-         16BFzZ6VK8J4ep1opRuh30ya+J/Tp5nqowf2nDdiQMM/JuY+Zdffhdcv02yd1TJYiEDq
-         F1Qfic81pl4s/qXChE6b8XcMLvNFw2gwdi+IEY/hFFikhsh4qgk9xMVWLdwqzKLj9tcd
-         rLxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779143383; x=1779748183;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=BBHGd6RpXFsgzhD8maiZ0ZUzNdvAB0Ntl39qTre2IF0=;
-        b=qK1KOiimFUX+mIw+iCipTm3wufRnKZexniTdPswhfQTu7Xf8D3slRVszwXhmicwRwB
-         rDupa35n3ramTAHVdEh7O+5VI1H5FVLxMHLm/qi8TisXuph0cEJzaFwlC7LH2nQfkj5a
-         fDOaxJM26HNy1nJBBs8oVZgunM7FadSqZANJ6d+QCNEhIOUMXipnR2UASSB3fACbXBD+
-         8PHic9zXh5JFOTGz0IupIsa/9BPMqyFwRhroG9Pr0WmwD7qSNPM9c92KWGWM0537+05i
-         P4V0+PSBy6s/QG0gp5SYdj6Wtzl5sI8efg9X5pLU5EbbDCi9gOeMSiQlhfgQX/+zWOIJ
-         HZlw==
-X-Forwarded-Encrypted: i=1; AFNElJ+2j4W8zvzDNL5E8DlfCm+I2vhXZBbp1uMINBMUhCb8NnpYdUOmKvCKbCqioNFK8AtP5sMOmc7E9Ug=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwLwO35UTciwX0n3YC6/cqW+KE9vibzW81KZqAMS1zq669Io0D4
-	WelMMDdDgAvKfu/vuhPIYCUAxLQMt50oAAz4NHy/sUrQwsGsfnNuvt6R
-X-Gm-Gg: Acq92OEyo4AIhrYVc6pSoRB4ErayjXCkTwkEkHU/ylZaM6KLiUpx6lV23xWxR2PoBjG
-	5Q7yrxFRrtQTsc3ZUM7Fa0lRrFLJIC4nDIv3xWR4krAaIZ5Y6zf5EWGcvWFcGwBaZ7Spe6qlvz0
-	Jfpn9oelpyyOk8Az+y9UAx0+l/H55iGA3DrQQ+b1EmAqUgF9r2Kunj/QHq3cSgQ0X/teq3YZYLi
-	RT3EU3m7RcjTgIBiuQgJ99cj7gKEd5wPcUKWD+XwDN613o9OOFryNJN7Z0tgfzrR5f4TqOLu2Ji
-	hj+f6jLIfBRQLg41pHCGAu4A/8ikBBbhemgupjPdNTXtK1lYOzHs8q1/CvLXwTBFVMWrI9+yO7P
-	WChf1Gp3aAjiT6gIzyXlS70RB/qEmcLwc0CLbl/5fKlGA916Qyk7AnZogCZUYl9DePnRX8Uimz6
-	2MXagmhGxEU7AdChXV57If0peSeP22znGIiP0cHy7QnrCnB537Nc7q76tyimQ6KzHjgXLUaJ4TP
-	6sd
-X-Received: by 2002:a05:7301:2f85:b0:2ea:ed7c:912f with SMTP id 5a478bee46e88-303986a1430mr8039362eec.27.1779143382715;
-        Mon, 18 May 2026 15:29:42 -0700 (PDT)
-Received: from lappy (108-228-232-20.lightspeed.sndgca.sbcglobal.net. [108.228.232.20])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30296dcc464sm15797095eec.14.2026.05.18.15.29.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 May 2026 15:29:42 -0700 (PDT)
-From: "Derek J. Clark" <derekjohn.clark@gmail.com>
-To: Jiri Kosina <jikos@kernel.org>,
-	Benjamin Tissoires <bentiss@kernel.org>
-Cc: "Pierre-Loup A . Griffais" <pgriffais@valvesoftware.com>,
-	Denis Benato <denis.benato@linux.dev>,
-	Zhouwang Huang <honjow311@gmail.com>,
-	"Derek J . Clark" <derekjohn.clark@gmail.com>,
-	linux-input@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v6 4/4] HID: hid-msi: Add Rumble Intensity Attributes
-Date: Mon, 18 May 2026 22:29:35 +0000
-Message-ID: <20260518222935.1802071-5-derekjohn.clark@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260518222935.1802071-1-derekjohn.clark@gmail.com>
-References: <20260518222935.1802071-1-derekjohn.clark@gmail.com>
+	s=arc-20240116; t=1779144219; c=relaxed/simple;
+	bh=ZqxlUv6AphBiZDSxvrCBSCRC+/VdjzoWlIzND7rNfMs=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=Q3mcpdYvzb5rgvf4WSj5VRkFuwOvq6q77OcTA5NIGQLOOeC6cg2d67CFpi/5Wdwf7h+rVav8U2T8jdj8TzF9XKxDQ4/eVEeiqqb6Qr0EPjFuynmgKjFbnOv8yAuK2ORBDSnEXoYSw4qPoZgJn14hcpV3VHXGD1Ium+37ybOzlIw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jnLwwkQM; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1BBBAC2BCFA
+	for <linux-doc@vger.kernel.org>; Mon, 18 May 2026 22:43:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1779144219;
+	bh=ZqxlUv6AphBiZDSxvrCBSCRC+/VdjzoWlIzND7rNfMs=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+	b=jnLwwkQMSrXKmuTYoC8kFb+1DJ/go3KnenQZXQbnnWDMKKe8Jj3Fzm3HyLrQ0zheV
+	 fWwkQt3ckMrypK82sqP40r4dWhy/Sug1Az8mk5wtdqdi3B8OH285juzi22vXh0j4B4
+	 DUVPFgA0b1KVuKWxy8+/+DaAhru/iD/G3ca5MZBV4Onpr+/jbrySCFfaO++5TDEQvu
+	 3ogI98oJYBqD1C8zrDhoJ1leceekpoRlJDlxh07BKnKkng2BxQy7E7S80tlFJqWAgt
+	 IM9QYwIjrjB+uI75Gi/whUG4uhXcOaQc7yM0/nstduFPa55V4lKsPsP3u1KqoxhIWm
+	 csQ6T9UwG2PSg==
+Received: by mail-vs1-f46.google.com with SMTP id ada2fe7eead31-6314287380bso2059762137.3
+        for <linux-doc@vger.kernel.org>; Mon, 18 May 2026 15:43:39 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AFNElJ+sqH62l8dW2XGEikaTyQ8CcLmoV6c+K1kL/5TPY8+X3NlsTS7jbNJpdHgB8Qa2kpBqQh1qAy47eUM=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzV+b2y1fozQ72XFWnh2Gn3/nTV8uQNR7reXzOROR2r8TLQzHAj
+	gkCGFnJGRVzXYfvJCt1rzMccFdWgVhJFhvr7WFwWxH631sz/tmzcGZgxukamKkxDb7AiRCDWyg3
+	fZTyGst6vhC4Fcn326x8xt5SmhOk6p+Y=
+X-Received: by 2002:a05:6102:1497:b0:632:eef7:4b7f with SMTP id
+ ada2fe7eead31-63a3f38ed3dmr9090434137.22.1779144217888; Mon, 18 May 2026
+ 15:43:37 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-0.16 / 15.00];
+References: <20260512-v2_20230123_tjmercier_google_com-v1-0-6326701c3691@redhat.com>
+ <20260512-v2_20230123_tjmercier_google_com-v1-2-6326701c3691@redhat.com>
+ <CAGsJ_4xfznffbjOaNKwnN6oZk_H6pqOzYqd1zx4Q9XrocdzV8A@mail.gmail.com> <CADSE00LjJcL8P5M-UPEpzZijU70uEmUirnin29N8YR5W5D-oFg@mail.gmail.com>
+In-Reply-To: <CADSE00LjJcL8P5M-UPEpzZijU70uEmUirnin29N8YR5W5D-oFg@mail.gmail.com>
+From: Barry Song <baohua@kernel.org>
+Date: Tue, 19 May 2026 06:43:26 +0800
+X-Gmail-Original-Message-ID: <CAGsJ_4xwJ7SAhKPJyRtMTw6psTO7H1EcFFpDw0po1W8PX4FE8g@mail.gmail.com>
+X-Gm-Features: AVHnY4KEVuNU5LGUxbEGufPnQvVfof22PSDgrj8C9uNhmMZb-wsisqSstH9JT8s
+Message-ID: <CAGsJ_4xwJ7SAhKPJyRtMTw6psTO7H1EcFFpDw0po1W8PX4FE8g@mail.gmail.com>
+Subject: Re: [PATCH RFC 2/5] dma-heap: charge dma-buf memory via explicit memcg
+To: Albert Esteve <aesteve@redhat.com>
+Cc: Tejun Heo <tj@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>, 
+	=?UTF-8?Q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>, 
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+	Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
+	Michal Hocko <mhocko@kernel.org>, Roman Gushchin <roman.gushchin@linux.dev>, 
+	Shakeel Butt <shakeel.butt@linux.dev>, Muchun Song <muchun.song@linux.dev>, 
+	Andrew Morton <akpm@linux-foundation.org>, 
+	Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, 
+	John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, 
+	Christian Brauner <brauner@kernel.org>, Paul Moore <paul@paul-moore.com>, 
+	James Morris <jmorris@namei.org>, "Serge E. Hallyn" <serge@hallyn.com>, 
+	Stephen Smalley <stephen.smalley.work@gmail.com>, Ondrej Mosnacek <omosnace@redhat.com>, 
+	Shuah Khan <shuah@kernel.org>, cgroups@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, 
+	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, 
+	linux-mm@kvack.org, linux-security-module@vger.kernel.org, 
+	selinux@vger.kernel.org, linux-kselftest@vger.kernel.org, mripard@kernel.org, 
+	echanude@redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_FROM(0.00)[bounces-88285-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-88287-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[36];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[valvesoftware.com,linux.dev,gmail.com,vger.kernel.org];
-	TO_DN_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[derekjohnclark@gmail.com,linux-doc@vger.kernel.org];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,cmpxchg.org,suse.com,lwn.net,linuxfoundation.org,linaro.org,amd.com,linux.dev,linux-foundation.org,collabora.com,arm.com,google.com,paul-moore.com,namei.org,hallyn.com,gmail.com,redhat.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,kvack.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	MID_RHS_MATCH_FROM(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	FROM_NEQ_ENVFROM(0.00)[baohua@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: 3512757483A
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: 3497A574CA9
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Adds intensity adjustment for the left and right rumble motors.
+On Mon, May 18, 2026 at 8:16=E2=80=AFPM Albert Esteve <aesteve@redhat.com> =
+wrote:
+>
+> On Sat, May 16, 2026 at 9:37=E2=80=AFAM Barry Song <baohua@kernel.org> wr=
+ote:
+> >
+> > On Tue, May 12, 2026 at 5:18=E2=80=AFPM Albert Esteve <aesteve@redhat.c=
+om> wrote:
+> > >
+> > > On embedded platforms a central process often allocates dma-buf
+> > > memory on behalf of client applications. Without a way to
+> > > attribute the charge to the requesting client's cgroup, the
+> > > cost lands on the allocator, making per-cgroup memory limits
+> > > ineffective for the actual consumers.
+> > >
+> > > Add charge_pid_fd to struct dma_heap_allocation_data. When set to
+> > > a valid pidfd, DMA_HEAP_IOCTL_ALLOC resolves the target task's
+> > > memcg and charges the buffer there via mem_cgroup_charge_dmabuf()
+> > > inside dma_heap_buffer_alloc(). Without charge_pid_fd, and with
+> > > the mem_accounting module parameter enabled, the buffer is charged
+> > > to the allocator's own cgroup.
+> > >
+> > > Additionally, commit 3c227be90659 ("dma-buf: system_heap: account for
+> > > system heap allocation in memcg") adds __GFP_ACCOUNT to system-heap
+> > > page allocations. Keeping __GFP_ACCOUNT would charge the same pages
+> > > twice (once to kmem, once to MEMCG_DMABUF), thus remove it and route
+> > > all accounting through a single MEMCG_DMABUF path.
+> > >
+> > [...]
+> >
+> > > -               if (mem_accounting)
+> > > -                       flags |=3D __GFP_ACCOUNT;
+> >
+> > Hi Albert,
+> >
+> > would it be better to move this and its description to patch 1? It
+> > looks like patch 1 already introduces the double accounting changes,
+> > and patch 2 is mainly just supporting remote charging.
+>
+> Hi Barry,
+>
+> Thanks for looking into this series! Yes, in my head I was trying to
+> keep patch 1, which was taken from a previous, different series, and
+> then diverge from it starting with patch 2. This would clarify the
+> difference between the two. But I can see it just added some confusion
+> (for example, patch 1 charges on dma_buf_export() and then it is moved
+> to dma_heap_buffer_alloc() in patch 2). I will reorganize it better
+> for the next version, including your suggestion.
 
-Claude was used during the reverse-engineering data gathering for this
-feature done by Zhouwang Huang. As the code had already been affected,
-I used Claude to create the initial framing for the feature, then did
-manual cleanup of the _show and _store functions afterwards to fix bugs
-and keep the coding style consistent. Claude was also used as an initial
-reviewer of this patch.
+Yep, I understand the situation now. I also understand
+that you were referring to T.J.'s patch, which caused
+some back-and-forth confusion for readers when reading
+patches 1 and 2.
 
-Assisted-by: Claude:claude-sonnet-4-6
-Co-developed-by: Zhouwang Huang <honjow311@gmail.com>
-Signed-off-by: Zhouwang Huang <honjow311@gmail.com>
-Signed-off-by: Derek J. Clark <derekjohn.clark@gmail.com>
----
-v6:
-  - Make all timeouts 25ms to ensure at least 2 jiffies in a 100Hz
-    config.
-  - Add spinlock_irqsave for read/write access on rumble_intensity
-    variables.
-  - Gate all attribute show/store functions with gamepad_registered.
-v5:
-  - Remove mkey related changes.
-v2:
-  - Use pending_profile and sync to rom mutexes.
----
- drivers/hid/hid-msi.c | 167 ++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 167 insertions(+)
+>
+> >
+> > Also, mem_accounting is only used by system_heap.c; has this patchset
+> > also eliminated its need?
+>
+> No, mem_accounting is still handled in this patch for the general case
+> where no `charge_pid_fd` is used. See dma_heap_buffer_alloc() code:
+>
+> +       if (memcg)
+> +               css_get(&memcg->css);
+> +       else if (mem_accounting)
+> +               memcg =3D get_mem_cgroup_from_mm(current->mm);
 
-diff --git a/drivers/hid/hid-msi.c b/drivers/hid/hid-msi.c
-index 4d267b896da72..339f256b60dbe 100644
---- a/drivers/hid/hid-msi.c
-+++ b/drivers/hid/hid-msi.c
-@@ -78,6 +78,8 @@ enum claw_profile_ack_pending {
- 	CLAW_M1_PENDING,
- 	CLAW_M2_PENDING,
- 	CLAW_RGB_PENDING,
-+	CLAW_RUMBLE_LEFT_PENDING,
-+	CLAW_RUMBLE_RIGHT_PENDING,
- };
- 
- enum claw_key_index {
-@@ -265,6 +267,11 @@ static const u16 button_mapping_addr_new[] = {
- static const u16 rgb_addr_old = 0x01fa;
- static const u16 rgb_addr_new = 0x024a;
- 
-+static const u16 rumble_addr[] = {
-+	0x0022,  /* left  */
-+	0x0023,  /* right */
-+};
-+
- struct claw_command_report {
- 	u8 report_id;
- 	u8 padding[2];
-@@ -317,9 +324,13 @@ struct claw_drvdata {
- 	enum claw_gamepad_mode_index gamepad_mode;
- 	u8 m1_codes[CLAW_KEYS_MAX];
- 	u8 m2_codes[CLAW_KEYS_MAX];
-+	u8 rumble_intensity_right;
-+	u8 rumble_intensity_left;
- 	bool gamepad_registered;
-+	spinlock_t rumble_lock; /* lock for rumble_intensity read/write */
- 	spinlock_t mode_lock; /* Lock for mode data read/write */
- 	const u16 *bmap_addr;
-+	bool rumble_support;
- 	bool bmap_support;
- 
- 	/* RGB Variables */
-@@ -409,6 +420,14 @@ static int claw_profile_event(struct claw_drvdata *drvdata, struct claw_command_
- 		}
- 
- 		break;
-+	case CLAW_RUMBLE_LEFT_PENDING:
-+		scoped_guard(spinlock_irqsave, &drvdata->rumble_lock)
-+			drvdata->rumble_intensity_left = cmd_rep->data[4];
-+		break;
-+	case CLAW_RUMBLE_RIGHT_PENDING:
-+		scoped_guard(spinlock_irqsave, &drvdata->rumble_lock)
-+			drvdata->rumble_intensity_right = cmd_rep->data[4];
-+		break;
- 	default:
- 		dev_dbg(&drvdata->hdev->dev,
- 			"Got profile event without changes pending from command: %x\n",
-@@ -882,6 +901,142 @@ static ssize_t button_mapping_options_show(struct device *dev,
- }
- static DEVICE_ATTR_RO(button_mapping_options);
- 
-+static ssize_t rumble_intensity_left_store(struct device *dev,
-+					   struct device_attribute *attr,
-+					   const char *buf, size_t count)
-+{
-+	u8 data[] = { 0x01, (rumble_addr[0] >> 8) & 0xff, rumble_addr[0] & 0xff, 0x01, 0x00 };
-+	struct hid_device *hdev = to_hid_device(dev);
-+	struct claw_drvdata *drvdata = hid_get_drvdata(hdev);
-+	u8 val;
-+	int ret;
-+
-+	if (!drvdata->gamepad_registered)
-+		return -ENODEV;
-+
-+	ret = kstrtou8(buf, 10, &val);
-+	if (ret)
-+		return ret;
-+
-+	if (val > 100)
-+		return -EINVAL;
-+
-+	data[4] = val;
-+
-+	guard(mutex)(&drvdata->rom_mutex);
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_WRITE_PROFILE_DATA,
-+				    data, ARRAY_SIZE(data), 25);
-+	if (ret)
-+		return ret;
-+
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_SYNC_TO_ROM, NULL, 0, 25);
-+	if (ret)
-+		return ret;
-+
-+	return count;
-+}
-+
-+static ssize_t rumble_intensity_left_show(struct device *dev,
-+					  struct device_attribute *attr,
-+					  char *buf)
-+{
-+	u8 data[4] = { 0x01, (rumble_addr[0] >> 8) & 0xff, rumble_addr[0] & 0xff, 0x01 };
-+	struct hid_device *hdev = to_hid_device(dev);
-+	struct claw_drvdata *drvdata = hid_get_drvdata(hdev);
-+	int ret;
-+	u8 val;
-+
-+	if (!drvdata->gamepad_registered)
-+		return -ENODEV;
-+
-+	guard(mutex)(&drvdata->profile_mutex);
-+	drvdata->profile_pending = CLAW_RUMBLE_LEFT_PENDING;
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_READ_PROFILE, data,
-+				    ARRAY_SIZE(data), 25);
-+	if (ret) {
-+		drvdata->profile_pending = CLAW_NO_PENDING;
-+		return ret;
-+	}
-+
-+	scoped_guard(spinlock_irqsave, &drvdata->rumble_lock)
-+		val = drvdata->rumble_intensity_left;
-+
-+	return sysfs_emit(buf, "%u\n", val);
-+}
-+static DEVICE_ATTR_RW(rumble_intensity_left);
-+
-+static ssize_t rumble_intensity_right_store(struct device *dev,
-+					    struct device_attribute *attr,
-+					    const char *buf, size_t count)
-+{
-+	u8 data[] = { 0x01, (rumble_addr[1] >> 8) & 0xff, rumble_addr[1] & 0xff, 0x01, 0x00 };
-+	struct hid_device *hdev = to_hid_device(dev);
-+	struct claw_drvdata *drvdata = hid_get_drvdata(hdev);
-+	u8 val;
-+	int ret;
-+
-+	if (!drvdata->gamepad_registered)
-+		return -ENODEV;
-+
-+	ret = kstrtou8(buf, 10, &val);
-+	if (ret)
-+		return ret;
-+
-+	if (val > 100)
-+		return -EINVAL;
-+
-+	data[4] = val;
-+
-+	guard(mutex)(&drvdata->rom_mutex);
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_WRITE_PROFILE_DATA,
-+				    data, ARRAY_SIZE(data), 25);
-+	if (ret)
-+		return ret;
-+
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_SYNC_TO_ROM, NULL, 0, 25);
-+	if (ret)
-+		return ret;
-+
-+	return count;
-+}
-+
-+static ssize_t rumble_intensity_right_show(struct device *dev,
-+					   struct device_attribute *attr,
-+					   char *buf)
-+{
-+	u8 data[4] = { 0x01, (rumble_addr[1] >> 8) & 0xff, rumble_addr[1] & 0xff, 0x01 };
-+	struct hid_device *hdev = to_hid_device(dev);
-+	struct claw_drvdata *drvdata = hid_get_drvdata(hdev);
-+	int ret;
-+	u8 val;
-+
-+	if (!drvdata->gamepad_registered)
-+		return -ENODEV;
-+
-+	guard(mutex)(&drvdata->profile_mutex);
-+	drvdata->profile_pending = CLAW_RUMBLE_RIGHT_PENDING;
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_READ_PROFILE, data,
-+				    ARRAY_SIZE(data), 25);
-+	if (ret) {
-+		drvdata->profile_pending = CLAW_NO_PENDING;
-+		return ret;
-+	}
-+
-+	scoped_guard(spinlock_irqsave, &drvdata->rumble_lock)
-+		val = drvdata->rumble_intensity_right;
-+
-+	return sysfs_emit(buf, "%u\n", val);
-+}
-+static DEVICE_ATTR_RW(rumble_intensity_right);
-+
-+static ssize_t rumble_intensity_range_show(struct device *dev,
-+					   struct device_attribute *attr,
-+					   char *buf)
-+{
-+	return sysfs_emit(buf, "0-100\n");
-+}
-+static DEVICE_ATTR_RO(rumble_intensity_range);
-+
- static umode_t claw_gamepad_attr_is_visible(struct kobject *kobj, struct attribute *attr,
- 					    int n)
- {
-@@ -902,6 +1057,12 @@ static umode_t claw_gamepad_attr_is_visible(struct kobject *kobj, struct attribu
- 	    attr == &dev_attr_reset.attr)
- 		return attr->mode;
- 
-+	/* Hide rumble attrs if not supported */
-+	if (attr == &dev_attr_rumble_intensity_left.attr ||
-+	    attr == &dev_attr_rumble_intensity_right.attr ||
-+	    attr == &dev_attr_rumble_intensity_range.attr)
-+		return drvdata->rumble_support ? attr->mode : 0;
-+
- 	/* Hide button mapping attrs if it isn't supported */
- 	return drvdata->bmap_support ? attr->mode : 0;
- }
-@@ -915,6 +1076,9 @@ static struct attribute *claw_gamepad_attrs[] = {
- 	&dev_attr_mkeys_function.attr,
- 	&dev_attr_mkeys_function_index.attr,
- 	&dev_attr_reset.attr,
-+	&dev_attr_rumble_intensity_left.attr,
-+	&dev_attr_rumble_intensity_right.attr,
-+	&dev_attr_rumble_intensity_range.attr,
- 	NULL,
- };
- 
-@@ -1430,6 +1594,7 @@ static void claw_features_supported(struct claw_drvdata *drvdata)
- 		drvdata->bmap_support = true;
- 		if (minor >= 0x66) {
- 			drvdata->bmap_addr = button_mapping_addr_new;
-+			drvdata->rumble_support = true;
- 			drvdata->rgb_addr = rgb_addr_new;
- 		} else {
- 			drvdata->bmap_addr = button_mapping_addr_old;
-@@ -1441,6 +1606,7 @@ static void claw_features_supported(struct claw_drvdata *drvdata)
- 	if ((major == 0x02 && minor >= 0x17) || major >= 0x03) {
- 		drvdata->bmap_support = true;
- 		drvdata->bmap_addr = button_mapping_addr_new;
-+		drvdata->rumble_support = true;
- 		drvdata->rgb_addr = rgb_addr_new;
- 		return;
- 	}
-@@ -1488,6 +1654,7 @@ static int claw_probe(struct hid_device *hdev, u8 ep)
- 	spin_lock_init(&drvdata->cmd_lock);
- 	spin_lock_init(&drvdata->mode_lock);
- 	spin_lock_init(&drvdata->frame_lock);
-+	spin_lock_init(&drvdata->rumble_lock);
- 	init_completion(&drvdata->send_cmd_complete);
- 	INIT_DELAYED_WORK(&drvdata->cfg_resume, &cfg_resume_fn);
- 	INIT_DELAYED_WORK(&drvdata->cfg_setup, &cfg_setup_fn);
--- 
-2.53.0
+I see. What feels a bit odd to me is that mem_accounting
+could either be dropped (with unconditional charging), or
+it should cover both remote and local charge cases.
 
+I don=E2=80=99t have a strong opinion here=E2=80=94it just feels a bit
+strange, since its description is quite generic for memcg:
+
+"Enable cgroup-based memory accounting for dma-buf heap
+allocations (default=3Dfalse)."
+
+Best Regards
+Barry
 
