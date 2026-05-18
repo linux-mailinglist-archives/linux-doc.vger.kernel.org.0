@@ -1,91 +1,107 @@
-Return-Path: <linux-doc+bounces-88239-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88243-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 16i2JbdXC2oCGAUAu9opvQ
-	(envelope-from <linux-doc+bounces-88239-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 20:17:27 +0200
+	id UGKyJyhaC2ovGAUAu9opvQ
+	(envelope-from <linux-doc+bounces-88243-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 20:27:52 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 911795721A7
-	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 20:17:26 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0FB515723E3
+	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 20:27:51 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id BF2E03018174
-	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 18:08:17 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id C9376305776B
+	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 18:12:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5A75238239B;
-	Mon, 18 May 2026 18:08:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C58EE38C2D0;
+	Mon, 18 May 2026 18:11:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="NNV/bt5U"
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="g3GyudFu"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from BN8PR05CU002.outbound.protection.outlook.com (mail-eastus2azon11011028.outbound.protection.outlook.com [52.101.57.28])
+Received: from CH4PR04CU002.outbound.protection.outlook.com (mail-northcentralusazon11013052.outbound.protection.outlook.com [40.107.201.52])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 988723815F0;
-	Mon, 18 May 2026 18:08:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.57.28
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C308938AC7C;
+	Mon, 18 May 2026 18:11:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.201.52
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779127695; cv=fail; b=QAv23a60IEunTFLI0DHhS5hQDbLI9nxuCE5p0YoZDoJeneJf5udnF/1sqaQy21H98VPlnlNB3Uvm4pKHDj3mkPbZfgmTTBRwqpIa7/HxP+XH8MmnbldZAGLGtFslDz3KgV9hBQa0qJ6nYv5myvoXnisuPAva/g1pLwu8IvmIswU=
+	t=1779127907; cv=fail; b=o15uf6sWFAX/OHF5Klw6hf4D3JOpkMhEL3lSgwVsVd4GPUTJu5D5W/+iNnJlD5Jn92LIXf5+aV0pe895vXoO4SnSUDGoLfMHLjQD6xcUn5lYJrVtDcMNoWFJ7dGB7/PS8pfnmgQwEuZDk82GA3NS++4t3KiMpbWvYQ8GtlCcqPg=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779127695; c=relaxed/simple;
-	bh=Nlxi+X0afx/W4Z2OySGbtF2HBxPLx1Kh7rn5bnkjvjE=;
-	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
-	 Content-Type:MIME-Version; b=p7E06LvBl9pMj/wz5EDLPKsruNnrDxt6Mnj8iyWnRhZqWQ2Kw/2MZUA5fI2NbU6yzgRslZtAm2vIK6fHvaekNO9F5qTWFFYDk8g5eRUVsMS20mVt6RpMO9y5tgfIOLLVKOBvACqw/TsIipCo/HKKUkb3oc+PC8R8b958lOXqWR4=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=NNV/bt5U; arc=fail smtp.client-ip=52.101.57.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
+	s=arc-20240116; t=1779127907; c=relaxed/simple;
+	bh=F25DJ0aEYv+5w1+VvX8GXmHqvn1+I+9DVUmbNXzqTsc=;
+	h=From:To:Cc:Subject:Date:Message-Id:Content-Type:MIME-Version; b=gDvSOAdMD86ctE3XyZlLdErEU44j/5DGhapzfpGehlyhqutaBJRTUwstKwzMq6yg/mE5Hdc6wUuJYuxkY+/JUUgSnIowHHuZD+F+Q4idLCyyqR1OaGv/cakrK/S2LBiuLL3liajZ0uyKH7mi1WjhPIQG4rWqrQeXtaQCDUelQ08=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=g3GyudFu; arc=fail smtp.client-ip=40.107.201.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CKFXnymmcp5EfnBCWqFTiHGn/RUoPjOcOiLbJIjg5AaUdpZxoj4B3gZdjfydxjWAUP9QpHp/yr893obFTwrCvwRAtxR9lCZytde+bdvx1KZ+Rn0ewpnulfOgG3L3iJYVZEvG41ene3pgk+ObZU1nJhVq+j+jmfIj0WYRAAWQyqxWXQT8hPNCPalvTxcgr/YXS2U+n9kXfgzci6WOmb8hcay85w3USqUIobzXwjkVK7tteEFyJBd8EPm5nRqGOKoVUbqbnRobw7ULQrHPNCkLsHDJsj+baO5OfF68VnUnS4iCQOZ3IlAh6bEUF7Neksz8F//qTEINyJ4e/V1JrBRJsA==
+ b=Clm6tM9+w1jPnKyjWmjmLOm5ovS4W3oIJcxME1yw/MOdvL9Fofn3QetrJ9AxoHgPL0usM4A9EWWwlkGghByMZaPWxCma02KtbWgEo/5tjamxW1ijjt5B8eFaHnZy4opLLL55GxMqlvLLNAxWGFeY7mllHBst3QPV5TBdXhdrTdeiJPSiKTVCIrUmSOdbfRWg22KcinAlzS9clUA0Z22ij+ozbdxAkHaHSpvJb3HwaXXWCzYKf6gRd3pDowLxs2DKESJENsW/wUq8s+cOfLmM7mwP8pxO6XSKnzA59xrs0k5HCGifgXTK3fyLv52yNTzXi6ApRaqghTvyfRMWgzNmQw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jNJziEFmDmxADJwwKP3qOl0oCvax7vYbimEJBl7ECr0=;
- b=n7AReYJhO+QqkqXrU3pVkBxeMU8FbWd0UMUAQJZc7vtTA7z413fBB+hQk9VfVb7RjDczNWXIXrfKL59W++wqXdzQkKCxsde9VcHlW6/YFTXJfQ5ZogCmbOL32JlecOAVp0MjkTXrc6znNEzpyYYZdnIXFBEQXvxX4jCV3SALviA57NT01bjbPgxSvipLvkubvhy1sj2sOP1B7d3wHj7NxKxOpqtNXLAdtqtismQflunpc9sbVa/LsMbH8K7CWD7tuaItqmne/BKeLU3Qgx+BGujzRCU34Hef3Qj4XOjlRPlYiLx3EUJ3hPRM7ZTVmzs0EeeoRCZ9cF/ic7dUWfrebA==
+ bh=xBb09YLdV5uBXv4oU3uXNRNQvF3L4n/qZi9xwplljt8=;
+ b=Jb5s2+xow8bdGH1xduX6Dz+cjcOUCi2YWUu9yViy4MOSpbsOLsoGL9ysGsxulqUxSTWvxlaeFLZ2jdcP6Vd5FLrGSohCY4LDmH/NKHxG70w/LqQCKw/yh5Pnxhq2CSQHLkaTpA2YIiyyFBh+R4C5b01aCAQxUx/XE8mGoFEqepjrRK+IWfuCzFrh9jA177tb8osoyF9IRZikbptpRGFuEOYrqQQtUhdBeortgpKrKUdI/JU/k1GsibJgOzDETUfVwxA4Gd5uCzUkTaTp1BdLkF6+OsjhmgF581uKdb3HWjkWWofghknPFX2P989u0l7luvvMHDRS4pnr3Q4OublP6A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jNJziEFmDmxADJwwKP3qOl0oCvax7vYbimEJBl7ECr0=;
- b=NNV/bt5UWHJM6MlbB7VCebQOimNr6hQZMMaxWB62nVKckyc4YI+csMZDT3/SVdlret66QVr+NCZAkCudWh4vg3K6mriJ9lk9fJzvPMaoVBr0BzINvOex6Hz2aVuJI85WDp6GOeTjz+oXlzQUD9ojdfhssmymB8yj/SAJwxhz5O8=
+ bh=xBb09YLdV5uBXv4oU3uXNRNQvF3L4n/qZi9xwplljt8=;
+ b=g3GyudFuFovISEEHu444q4rxa5Tv/eaYwoiU6jJrdW10N+WsXl8pjX2TUGwrs/zksKfrKohaW3RqaLwkxQMdHtyc+YF5O2hkwjpvf21zfKFx3G0MO2HDsPt5mcFeg+2gqdva6dU+PzC9BHsD9yoXkvgLTMrd9kApnJtTYOBnXXIZmN8mJKsQQzTt8tIAobcmSy4/OfpjaNMlMMvIXnuDpQ9OMJV1F/CrXAHt4AMEv2RCqnANFlqonUmiQ86MdPKKB4J/R7Dz46qPzfrvRCvTuAhuVL/dDphWlUOQR07h+7gZR4aPlO+Lzq2dDtrf8XSvNIIivWvscCnTNfpDXnCn0A==
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from DSVPR12MB999147.namprd12.prod.outlook.com (2603:10b6:8:38b::11)
- by DM4PR12MB5769.namprd12.prod.outlook.com (2603:10b6:8:60::6) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.25.23; Mon, 18 May 2026 18:08:09 +0000
-Received: from DSVPR12MB999147.namprd12.prod.outlook.com
- ([fe80::98c5:8206:6a4:c445]) by DSVPR12MB999147.namprd12.prod.outlook.com
- ([fe80::98c5:8206:6a4:c445%3]) with mapi id 15.20.9870.023; Mon, 18 May 2026
- 18:08:09 +0000
-Message-ID: <ad24ad9a-2b30-4952-b36a-210c08a62346@amd.com>
-Date: Mon, 18 May 2026 13:08:06 -0500
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/2] cpufreq: CPPC: add autonomous mode boot parameter
- support
-Content-Language: en-US
-To: Sumit Gupta <sumitg@nvidia.com>, rafael@kernel.org,
- viresh.kumar@linaro.org, pierre.gondois@arm.com, ionela.voinescu@arm.com,
- zhenglifeng1@huawei.com, zhanjie9@hisilicon.com, corbet@lwn.net,
- skhan@linuxfoundation.org, rdunlap@infradead.org, linux-pm@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Cc: linux-tegra@vger.kernel.org, treding@nvidia.com, jonathanh@nvidia.com,
- vsethi@nvidia.com, ksitaraman@nvidia.com, sanjayc@nvidia.com,
- mochs@nvidia.com, bbasu@nvidia.com
-References: <20260515122624.1920637-1-sumitg@nvidia.com>
- <20260515122624.1920637-3-sumitg@nvidia.com>
- <bf521e4e-1aa5-49ce-bec5-52845f02214e@amd.com>
- <139d2f0e-72d9-4721-9d5a-d1d4a2a95fa1@nvidia.com>
- <72fd2fcc-6303-4980-beb7-e4b711ad6406@amd.com>
- <e1a546f2-6e7e-4236-97bb-f72bea0137f7@nvidia.com>
- <7d7a6ab6-b1ea-484c-a275-19acca50c483@amd.com>
- <985f976f-1144-445b-96c2-df5bd57ecf05@nvidia.com>
-From: Mario Limonciello <mario.limonciello@amd.com>
-In-Reply-To: <985f976f-1144-445b-96c2-df5bd57ecf05@nvidia.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from DS0PR12MB6486.namprd12.prod.outlook.com (2603:10b6:8:c5::21) by
+ BY5PR12MB4276.namprd12.prod.outlook.com (2603:10b6:a03:20f::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.24; Mon, 18 May
+ 2026 18:11:31 +0000
+Received: from DS0PR12MB6486.namprd12.prod.outlook.com
+ ([fe80::88a9:f314:c95f:8b33]) by DS0PR12MB6486.namprd12.prod.outlook.com
+ ([fe80::88a9:f314:c95f:8b33%6]) with mapi id 15.21.0025.012; Mon, 18 May 2026
+ 18:11:31 +0000
+From: Joel Fernandes <joelagnelf@nvidia.com>
+To: linux-kernel@vger.kernel.org
+Cc: Miguel Ojeda <ojeda@kernel.org>,
+	Boqun Feng <boqun@kernel.org>,
+	Gary Guo <gary@garyguo.net>,
+	Bjorn Roy Baron <bjorn3_gh@protonmail.com>,
+	Benno Lossin <lossin@kernel.org>,
+	Andreas Hindborg <a.hindborg@kernel.org>,
+	Alice Ryhl <aliceryhl@google.com>,
+	Trevor Gross <tmgross@umich.edu>,
+	Danilo Krummrich <dakr@kernel.org>,
+	Dave Airlie <airlied@redhat.com>,
+	Daniel Almeida <daniel.almeida@collabora.com>,
+	dri-devel@lists.freedesktop.org,
+	rust-for-linux@vger.kernel.org,
+	nova-gpu@lists.linux.dev,
+	Nikola Djukic <ndjukic@nvidia.com>,
+	David Airlie <airlied@gmail.com>,
+	Boqun Feng <boqun.feng@gmail.com>,
+	John Hubbard <jhubbard@nvidia.com>,
+	Alistair Popple <apopple@nvidia.com>,
+	Timur Tabi <ttabi@nvidia.com>,
+	Edwin Peer <epeer@nvidia.com>,
+	Alexandre Courbot <acourbot@nvidia.com>,
+	Andrea Righi <arighi@nvidia.com>,
+	Andy Ritger <aritger@nvidia.com>,
+	Zhi Wang <zhiw@nvidia.com>,
+	Balbir Singh <balbirs@nvidia.com>,
+	Philipp Stanner <phasta@kernel.org>,
+	alexeyi@nvidia.com,
+	Eliot Courtney <ecourtney@nvidia.com>,
+	joel@joelfernandes.org,
+	linux-doc@vger.kernel.org,
+	Joel Fernandes <joelagnelf@nvidia.com>
+Subject: [PATCH v1 00/16] Introduce page table types, vmm and bar1 mapping support
+Date: Mon, 18 May 2026 14:11:09 -0400
+Message-Id: <20260518181126.2493572-1-joelagnelf@nvidia.com>
+X-Mailer: git-send-email 2.34.1
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: SN6PR01CA0033.prod.exchangelabs.com (2603:10b6:805:b6::46)
- To DSVPR12MB999147.namprd12.prod.outlook.com (2603:10b6:8:38b::11)
+Content-Type: text/plain
+X-ClientProxiedBy: BL1P223CA0040.NAMP223.PROD.OUTLOOK.COM
+ (2603:10b6:208:5b6::13) To DS0PR12MB6486.namprd12.prod.outlook.com
+ (2603:10b6:8:c5::21)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -93,242 +109,181 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DSVPR12MB999147:EE_|DM4PR12MB5769:EE_
-X-MS-Office365-Filtering-Correlation-Id: ae4cf575-1ece-4bb1-e982-08deb5086aee
+X-MS-TrafficTypeDiagnostic: DS0PR12MB6486:EE_|BY5PR12MB4276:EE_
+X-MS-Office365-Filtering-Correlation-Id: 70885ea7-d717-40a9-8fed-08deb508e33d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|7416014|376014|1800799024|921020|11063799003|56012099003|22082099003|18002099003|4143699003|3023799003;
+	BCL:0;ARA:13230040|376014|7416014|366016|1800799024|18002099003|56012099003|13003099007|3023799003|11063799003;
 X-Microsoft-Antispam-Message-Info:
-	SqCM5lkZwGxcKmq/HeQM2+hch/pTSv+o5MntWwsrdudoyhpY4hgUp2B4KBTuFq0MyYjfC4jR1DMWOLPKhVYDfE89UIrtZ+2eLgliellHayrWXZLLaP7WH8BDlNFXK37Qj4rKe/t8jbInAj2kEwhP0vQN1g+NxBixrKnigccfx2joSTsXLOL4Tvn0/uQPzZsReS560d8ad4bey7pg+GUzfcxfZxV+JIPaYtkN3gCEqpYXwMLwdo6yPpvwxSseCk0NgdujQobUNMLsbb6sSVQR1Zs3nRezAXJ9o7XTlCGqhPgEdSqN4UIGc4vQ1mOKg0Ni6m2HNC9Ac8gZ1pvcKNy1qT6by2eq+D7uRLXvh5rKsGLPEkRqsnaaMQNDwS617Ts4/gfmUisnSvxOgcveIzbMbusmrFIk4QFHaG6wQlxjh1Iy96DjLh9kbJ2FpZF8oT5i7s8aewMgOsPyGEvIQ8D0gZxcNZO9EskXLbFQ5aHKMCNlqwvKHpasCwjfYocIFftGWk3tSSnG0vaH9HEbBQ+oBT2vYC35+BxuHKMM9uyj+2895leGVnGrPkxXxvKRbgwAtAen+jXKVZitOR2UMoWARN0jL8swYDa6cN/kunvZIz2fZ8xUnK+4mnoQN2CuXrmLzbFVDTfe2U2tPeufH+AFIQzWlken5le6Q+kUeCKnRL5ro2wQxOMSZXHT2ZqvuB4F
+	RmwR7r30Y/rGLHL1J/AwdmX1Yf1TBXefoe5vJOT952yr63AWeNwddz2A/fiajsNqeeus1UNEWfCN1hx6XtAMopyyxy0ieMo5b6uMxrOrKC57xo6T4ku2OXGV4M9mQofbWo6PMURx8W8bkwXpcf0duut/jIj6z+HFXrUd9U7mtTJgVltyL4EpyVJ9MGXSsnqIWtXxNCVOOmnnefxgR/rsWBpICN7fc39W1mTdpWuRe0mdoJ/+CfKD1OFRskoZFjdrFaRPvYfEmDpcahx22pmaAK85gvdWy0KiRD0ZukA/L0ByRl+3dF7zya6jFMy6t/JVJ2FivrgcIW7dbH7/RJpxqo0plDIyH4hYA9DLamyvc4LUijlNeDbtzXZC2i46fnJhAji5BtyOgDJ8Uciw0+fDu9E+3RAKzIyog1hYpWknLlVKyA2eiTvtkjSdVVj6gQCr3LS0x27sGaaLXQnAbvRO8OJVl5v6XvmAqke6qKPvsIIh7cKJoys0uAwSWvc3+aJ0vGxSjKfsyDbyih34mGNdjnGnL8L/0dhBhEkYdVtbcQ1N3fPK8HGDJlBAgowk5meRVBbF8xOVzB7OdPhziLr3v9eK7H8DKUiw5Uaya4hvHsVPFQMzvbjSQjn1iy4E5Jm1XvdLRDaEgoQr2ocHSUahX1Vjpc1q3i4pYHzo2bJIbiECaOdESwJ19OBEZr0rELbD
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DSVPR12MB999147.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(7416014)(376014)(1800799024)(921020)(11063799003)(56012099003)(22082099003)(18002099003)(4143699003)(3023799003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR12MB6486.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(366016)(1800799024)(18002099003)(56012099003)(13003099007)(3023799003)(11063799003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?K2RNOFZKZXFvT2VXamRLMm5uWGNHSDB2U2hNNUllTUVLc2VscUFXQWNVVW50?=
- =?utf-8?B?djJwdEZkRml4cjNiaVlZQS9mVHBoOEYwOWFSNU1WdFBWU3lnTjZvb1ZMbFBq?=
- =?utf-8?B?QmpHVHhOSXIvSjB5eHpBb0lKK1Y2dW9maGR5eWVLRGU1cENnZ2JPNDJIa1ZP?=
- =?utf-8?B?bXpGemZsb3pGaDMxWHNvQ3IxU0hpNmhuektMa2psMmo0LzcwRjdsY0RxMzJS?=
- =?utf-8?B?TmorR3lRRktpbHlDYXl2UTBKTkRTSmx2Y3lxSW9SY0VWQVg3TWRQM1VFNWJl?=
- =?utf-8?B?bkhFdXg2UkdORkE4MjZvRlhpZWlwMG96WXlvakVaYWtBOVJwclNFeWxGMVYr?=
- =?utf-8?B?VkV6MTN1RWlTdjV3R1Rnd24reHl0Mnl2YTV0MEpkWEJqeDRtNUxneFc4c3NC?=
- =?utf-8?B?eERTM1BGajNxMFIwenhyNGRqbUlEODJrclMxSVVWdUFqbDNobE5wMHoxS1M5?=
- =?utf-8?B?aGI5bGJqM2xpZ3o3L2tJREwrWGU4WVNGWC9qc0tGYW1SQnRwVmQ1WmxBaHVP?=
- =?utf-8?B?RkhxV096Vno3NEZSd1Q2enNDSGJaUXZCN2hkTkJQVmk5OHpjZ2Zhd2wxVDRJ?=
- =?utf-8?B?c285WGFlWFB6WTRmbmZZRDF4VC96RVpOL015dFowdVU4Nmt2dC9TY2dyNUdK?=
- =?utf-8?B?SldPZTg3cFpnak03L0syWHZ4QWFZMHlzQldLdm9iNkwrRy9IYlFCZEg3eERW?=
- =?utf-8?B?aUpVTEtrdHMwRzQya2dOdk11Um1yZlh5VUdSeE03TGlDVzM4MEx3b2F0dmFK?=
- =?utf-8?B?KzU5dWRJV2VxVmhOSUkwUUNZNVAzRVFTVzZuZGIxSUw4VVc5c1BGMUZmc2wv?=
- =?utf-8?B?T0VjbkFMVEwvYjNxWWwwRHZocjZNM2pYTFc0dFQ1N0hPbFEvV2k1L3RMd0k2?=
- =?utf-8?B?cjBrOFNnY2FnVE1wUjF4dnpoM0JxR0pPajVFVVl4TmVCZ081dEtKL0RDVnEx?=
- =?utf-8?B?by9PMG4yRjdEemxkWE5JWHZyeVdTQmt3QXZ2bityTytOdFI0Yng1blYrOVZx?=
- =?utf-8?B?ZXMwa1hHeWloSitObEZtQXBCSzN3UjQzQ29LYXpkZmZweXFKK2xueTdaMnN2?=
- =?utf-8?B?VXBydWh6SVMyK0tLbXpUN2Z6Y2VERktlYzZNNTFyMDFQM2M3ZnlDQVNMVi9K?=
- =?utf-8?B?a0pXcDRqdmEyQmMwd1Vjbmthdnk3Sk5Iby9OV0RDVG1WaFk3UkkyOXJzK3Jv?=
- =?utf-8?B?ZlNwWmptRitpbE1tb3lqYTRJUGpTK3hZdithVDNmWVNMNkx1N2E2MVYvTFdw?=
- =?utf-8?B?Zk1USHBkVVZVSi83L2JXT1k2eGdEeXZTcS9RVGptZ1pmUHFrejdSYW1lUWQv?=
- =?utf-8?B?RDhjVFRTc1NKZkg0R05WZTNJZzErRW5leGxvQm55ZTh6eHE1L3FxYUUxZ3ly?=
- =?utf-8?B?RSt5SDZ6K1I4M2EzeGsrcmduLy8zQ3pYajZnc3cwSW9rckIveFJYdGNGeEV4?=
- =?utf-8?B?dXZ1bjQzSXJaQkZ6UkVnak5LTHZOVDduK3I3b2pHSC9lTE83ZS95Y1REeDNz?=
- =?utf-8?B?a2E5WHZZK1cycytOTlMvYkNoLzR6OVhWclR4Slp3YVNIVGQvdDVCUmRiNTNR?=
- =?utf-8?B?N1RHL2VWNGx3UFBLcDRvcC9Edk9pYkdZZmZQbWxic2NLOXRicllQM0JPZ0Zh?=
- =?utf-8?B?QWs5NjZrQldMWmh6dTZjKzNKNmFqcU8ya0FneU1jYklmYUV4em5ZQmJzdU9S?=
- =?utf-8?B?K3FnRnd1Y1RhZWovdTNXR2FrMFVDUGRsZXFsOEZmelpoZm9BdUdSSlgwaGpu?=
- =?utf-8?B?SnhUaklRMDVGM1BwbE5oa0dFeEowTWt0WFc1MXQ1Z0x2eU1EQktkWTdod3k1?=
- =?utf-8?B?RHdnbmpBTEEveEFYanpIL1Nydnc1RFBTem5CTFp1SkhydlJ5VktXNjExRWFU?=
- =?utf-8?B?OEM2TVJzQnZML3RvTlRsMGJRNjhRcVZyUVVwNEdRSmZweis5TnprUGt2T0xZ?=
- =?utf-8?B?OU9hUjZRMzc2MTRNSDlJaTVaMWR0YUUxWWQrVnNRZlB5V2NlYlRwbU84VXFT?=
- =?utf-8?B?b1hUWGtBNm4ySEJZeHlkb1J2djBmRk9CWjM5d0hTamRXNmtMU2s0S1J1M3V2?=
- =?utf-8?B?c3FNU2szWEQ4SVh4UGtNaisvTkVmRU9KaS9nS3hIaWEvYkkyUm5VWHIyRnMw?=
- =?utf-8?B?NjJYZnp0SHVlMXNYUndpWHFQR3lWbGVaQ0hyUTMvQmlTU1REYmZSb3Jkc3Az?=
- =?utf-8?B?aDZubTNWZzJXTTV5WVp3bFBMb0VUaHQvekUvRWlRamdYRnNUcVphMzVtNXIy?=
- =?utf-8?B?QzNsVU9Ec0hxNUd6SjF3dkRIZExFeGRWUGM5eWRPRW12YmVkQXZTVkdnUEdR?=
- =?utf-8?B?RU9YeTNreEdLZjZncGxnT2RTeVFFRStaZEkrVGpONkJSRlUraGJmQT09?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ae4cf575-1ece-4bb1-e982-08deb5086aee
-X-MS-Exchange-CrossTenant-AuthSource: DSVPR12MB999147.namprd12.prod.outlook.com
+	=?us-ascii?Q?htC5gNFomwASQ2wtu4dfUKZDaFqJcumVB6MxRUa49BOBScX0YLnYBoimjyVq?=
+ =?us-ascii?Q?TTZDi7Rh8ShsTCouDe4/tzmfL9ewZkp1WlqstCpKaGjondcUvzII64RlZiJ/?=
+ =?us-ascii?Q?tRJy9kjyphB4BuqQMp2EVLLOpXfHpFChXhyFuG31aMZDlqeoAbt0xD0tB0L4?=
+ =?us-ascii?Q?XzxIAlJDqA8dFaf8RMUSrJ4x5HYs/I59xRfNOLodQVmJ163qxo3UdstnJ5a7?=
+ =?us-ascii?Q?eeI/1AGd10C06+UT9bTlddKHSY2RwOfgIye6I366Q2N7YnRNuTvhcpVN5j92?=
+ =?us-ascii?Q?TIowTcLpEbZmutye0/Xz4vSgse0Q6TK/2C9rP+3DKb4TpzKt2Ta8IFviEhVf?=
+ =?us-ascii?Q?pZwwwvO64K4tWu2TuuJ+j2w1hyZKz4MZP8mrQ+KSqkKK9syAel6MMyWCbEeN?=
+ =?us-ascii?Q?WaWC2Ek3FfgNd5VULfB2WLw+KCkSUOuax7Vk52bCzp0/hZGGHWcN7xZKV0pn?=
+ =?us-ascii?Q?fsm3qmmPAhwxOzB56ZBTt0to2u9tka4i/YKGIn1YzRvbL2bMlGra20NmrMpz?=
+ =?us-ascii?Q?kBYhsxBlQ9MVHLqwVisFPhvtz3as9GrTxa5kW+hfGydLKNBxO1nZfVYpQomT?=
+ =?us-ascii?Q?K4sTXAqQxh2IUn+saFTF4tFXGaMyIWMkemi5NUYUJXUNMurrMaz54gaooAMX?=
+ =?us-ascii?Q?bHI7/dMMs2UEX6rzia7t2SPhqqBz6VqKgu/Rd4qYiQ91jkN+Ee5EL8BPYrjt?=
+ =?us-ascii?Q?ZJcMtEnD+tuG7+2k4HRAvRYZxlkFG7LC/SK+6UEkIrzfxvR8eNedKVLBWlhl?=
+ =?us-ascii?Q?iLXBU7C0s9xL74+LTw+KFGfoEfGdTv6Qcp2JF27bjIXrWPH7XxgMShQ9mxwO?=
+ =?us-ascii?Q?FxaO3lI1jB4Sr7nVH82B9pGFHAjVVD+fuEW3nJtkee3X6hKGFe6F27D1RuSw?=
+ =?us-ascii?Q?PxCrOCfe6sAtNoNmFdYR7BnpbJlHdLk2Er7t6PPSHUubp4l8lJHdEMGY4LPQ?=
+ =?us-ascii?Q?LAgfJrFQUrEBOot3NwtJVoGXDiQmvIvrc+ZXKt7rt5kisk4HaGFV8eCQToD3?=
+ =?us-ascii?Q?gkWcq26n7EAmOg18BYrGWuWT2jckX306zxQZkxjNWbEL8l77hKzYLe0AAjL7?=
+ =?us-ascii?Q?jz1aBl0KMk8rJC3FyxMejOaV2IvYGicFxSL1k1SIRkWdSFab5ZlRI3QCPRBs?=
+ =?us-ascii?Q?QJ1jHJ6ilSDbPZBAp6U4oHYQrqiNAnZz5ttc5JyDJuvoFPYADLAHSEVa1LW5?=
+ =?us-ascii?Q?NPbvtsQSTOhGgZTG9XUipmjqsWjmcornHCQ5mHwObFl6kBNtwLP+prrjd6Ra?=
+ =?us-ascii?Q?rO7SCJ1/oLafu6EIOca6McBIKUhZjmSD/r6PBpU1o3Gl9EW9WNqdKT54e/v2?=
+ =?us-ascii?Q?IOBAmuEN15vjrElawjzhQ6WDkbEazmaSciIAxb1ZafQ+bwX8w6zJSTAUuwgv?=
+ =?us-ascii?Q?o3PR3BAYCYXvAkPKvKfElNeI19ZJThW/yNIINWIF2/ThY648Wir6is9IKoqM?=
+ =?us-ascii?Q?UiBvAN+3CdosvE2OMf5IFD0i7Zympy+H0TxCW/asaV1pYOejs5TzURnaE+5r?=
+ =?us-ascii?Q?X2hzxDtkEq3SBal60LfuY86S9CwRpLMzslRJqfsSp6hiGe4DfuihAc0LQgHv?=
+ =?us-ascii?Q?otbZmSYS2hGsn3Qvf6FOCqhFZT7js/jV8wybFwFhXvKLPZJwoxWWpOVYK/TT?=
+ =?us-ascii?Q?+WgpJi9FCov2Ceee/ucLRIHPIbdRQa9PojMdt3xdKKkLtpeB5HhRPLVEDDeQ?=
+ =?us-ascii?Q?xUfq3FqgJLzMKVdNQ/RtEwNPoKEcOvj08y51tu54ByOfuPkdZ0bL+HpVaH00?=
+ =?us-ascii?Q?k/fQDIYAWQ=3D=3D?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 70885ea7-d717-40a9-8fed-08deb508e33d
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR12MB6486.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 May 2026 18:08:09.3524
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 May 2026 18:11:31.1587
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: XM+N+9JcyIfcLvoc5ym6PsgNUpxqxW7U3fs80hdrUdyPy1hEEPV5Xu3HgMUMx47WwEtb+6Th3daGfKD64Q/KGg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5769
-X-Spamd-Result: default: False [-0.16 / 15.00];
+X-MS-Exchange-CrossTenant-UserPrincipalName: NEBcwC0sR5vHzalUSbe4xx49s24wIOCogWIBHPdiOc7XaYDoplGOpzwfhP3U3jxw5dKQazoNSCO4bg0g7w6yxw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4276
+X-Spamd-Result: default: False [2.84 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_REJECT(1.00)[cv is fail on i=2];
-	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
+	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[21];
+	URIBL_MULTI_FAIL(0.00)[Nvidia.com:server fail,nvidia.com:server fail,sea.lore.kernel.org:server fail];
 	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-88243-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[33];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,garyguo.net,protonmail.com,google.com,umich.edu,redhat.com,collabora.com,lists.freedesktop.org,vger.kernel.org,lists.linux.dev,nvidia.com,gmail.com,joelfernandes.org];
+	RCVD_COUNT_FIVE(0.00)[5];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_FROM(0.00)[bounces-88239-lists,linux-doc=lfdr.de];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,arm.com:email,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,amd.com:mid,amd.com:dkim];
-	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[joelagnelf@nvidia.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mario.limonciello@amd.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[amd.com:+]
-X-Rspamd-Queue-Id: 911795721A7
+	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[Nvidia.com:+];
+	PRECEDENCE_BULK(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,nvidia.com:mid,Nvidia.com:dkim]
+X-Rspamd-Queue-Id: 0FB515723E3
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
+This series introduces page-table types and a Virtual Memory Manager (VMM)
+for the nova-core driver, plus a BAR1 user (with selftests) layered on top.
+The page-table layer uses trait-based generics (PteOps, PdeOps, DualPdeOps,
+MmuConfig) to dispatch between MMU v2 and v3 formats. The Vmm tracks
+virtual-address ranges with a maple tree, and the BAR1 user exposes mapped
+CPU access to VRAM through a small allocation API exercised by the selftests.
+
+This series is based on drm-rust-next.
+
+It depends on the prerequisite series "Introduce nova-core mm prerequisites"
+posted alongside this one:
+https://lore.kernel.org/all/20260518180342.2387845-1-joelagnelf@nvidia.com/
+Please apply the prerequisite series first, or pull the git tag below which
+contains everything.
+
+Dependencies (not yet merged):
+
+- Alexandre Courbot's bitfield series. Tested on v2:
+  https://lore.kernel.org/all/20260409-bitfield-v2-0-23ac400071cb@nvidia.com/
+  A newer v3 of bitfield is available and should also work (haven't tested):
+  https://lore.kernel.org/all/20260501-bitfield-v3-0-aa1076c3337d@nvidia.com/
+
+- rust: maple_tree: implement Send and Sync for MapleTree (v3):
+  https://lore.kernel.org/all/20260511143604.3848176-1-joelagnelf@nvidia.com/
+
+The git tree (containing the dependencies above, the prerequisite series
+"Introduce nova-core mm prerequisites", and this series) can be found at:
+git://git.kernel.org/pub/scm/linux/kernel/git/jfern/linux.git (tag: nova-mm-v1-20260518)
+
+Change log:
+
+Changes from v12 to v1 (split-out):
+
+- Part 2 of 2; depends on the prereq series posted just before:
+  https://lore.kernel.org/all/20260518180342.2387845-1-joelagnelf@nvidia.com/
+- Kept the virtual-memory portion of v12's "Add common memory management types" patch here as "Add common types for virtual memory management".
+- Folded v12's "Add TLB flush support" into a new "Add buddy allocator and TLB to GpuMm" patch.
+- Split v12's "Add page table entry operation traits" into PteOps, PdeOps, and DualPdeOps trait patches.
+- Extracted "Add MmuConfig trait" into its own patch.
+- Moved "rust: maple_tree: Send and Sync" out as a standalone dependency; VMM's maple-tree-backed range tracking remains.
+- Smaller code touch-ups across most carried-over patches.
+
+Link to v12: https://lore.kernel.org/all/20260425211454.174696-1-joelagnelf@nvidia.com/
+
+Joel Fernandes (16):
+  gpu: nova-core: mm: Add common types for virtual memory management
+  gpu: nova-core: mm: Add buddy allocator and TLB to GpuMm
+  gpu: nova-core: mm: Add common types for all page table formats
+  gpu: nova-core: mm: pagetable: Add PteOps trait
+  gpu: nova-core: mm: pagetable: Add PdeOps trait
+  gpu: nova-core: mm: pagetable: Add DualPdeOps trait
+  gpu: nova-core: mm: Add MMU v2 page table types
+  gpu: nova-core: mm: Add MMU v3 page table types
+  gpu: nova-core: mm: pagetable: Add MmuConfig trait
+  gpu: nova-core: mm: Add page table walker for MMU v2/v3
+  gpu: nova-core: mm: Add Virtual Memory Manager
+  gpu: nova-core: mm: Add virtual address range tracking to VMM
+  gpu: nova-core: mm: Add multi-page mapping API to VMM
+  gpu: nova-core: Add BAR1 aperture type and size constant
+  gpu: nova-core: mm: Add BAR1 user interface
+  gpu: nova-core: mm: Add BAR1 memory management self-tests
+
+ drivers/gpu/nova-core/Kconfig              |   1 +
+ drivers/gpu/nova-core/driver.rs            |  22 +
+ drivers/gpu/nova-core/gpu.rs               |  71 +++-
+ drivers/gpu/nova-core/gsp/commands.rs      |   4 +-
+ drivers/gpu/nova-core/gsp/fw/commands.rs   |   8 +
+ drivers/gpu/nova-core/mm.rs                | 108 ++++-
+ drivers/gpu/nova-core/mm/bar_user.rs       | 447 +++++++++++++++++++++
+ drivers/gpu/nova-core/mm/pagetable.rs      | 414 +++++++++++++++++++
+ drivers/gpu/nova-core/mm/pagetable/map.rs  | 367 +++++++++++++++++
+ drivers/gpu/nova-core/mm/pagetable/ver2.rs | 271 +++++++++++++
+ drivers/gpu/nova-core/mm/pagetable/ver3.rs | 421 +++++++++++++++++++
+ drivers/gpu/nova-core/mm/pagetable/walk.rs | 258 ++++++++++++
+ drivers/gpu/nova-core/mm/tlb.rs            | 130 ++++++
+ drivers/gpu/nova-core/mm/vmm.rs            | 361 +++++++++++++++++
+ drivers/gpu/nova-core/regs.rs              |  65 +++
+ 15 files changed, 2941 insertions(+), 7 deletions(-)
+ create mode 100644 drivers/gpu/nova-core/mm/bar_user.rs
+ create mode 100644 drivers/gpu/nova-core/mm/pagetable.rs
+ create mode 100644 drivers/gpu/nova-core/mm/pagetable/map.rs
+ create mode 100644 drivers/gpu/nova-core/mm/pagetable/ver2.rs
+ create mode 100644 drivers/gpu/nova-core/mm/pagetable/ver3.rs
+ create mode 100644 drivers/gpu/nova-core/mm/pagetable/walk.rs
+ create mode 100644 drivers/gpu/nova-core/mm/tlb.rs
+ create mode 100644 drivers/gpu/nova-core/mm/vmm.rs
 
 
-On 5/18/26 12:22, Sumit Gupta wrote:
-> 
-> On 18/05/26 19:51, Mario Limonciello wrote:
->> External email: Use caution opening links or attachments
->>
->>
->> On 5/18/26 09:15, Sumit Gupta wrote:
->>>
->>> On 18/05/26 19:20, Mario Limonciello wrote:
->>>> External email: Use caution opening links or attachments
->>>>
->>>>
->>>> On 5/18/26 08:44, Sumit Gupta wrote:
->>>>> Hi Mario,
->>>>>
->>>>>
->>>>> On 16/05/26 02:43, Mario Limonciello wrote:
->>>>>> External email: Use caution opening links or attachments
->>>>>>
->>>>>>
->>>>>> On 5/15/26 07:26, Sumit Gupta wrote:
->>>>>>> Add a kernel boot parameter 'cppc_cpufreq.auto_sel_mode' to enable
->>>>>>> CPPC autonomous performance selection on all CPUs at system startup.
->>>>>>> When autonomous mode is enabled, the hardware automatically adjusts
->>>>>>> CPU performance based on workload demands using Energy Performance
->>>>>>> Preference (EPP) hints.
->>>>>>>
->>>>>>> When the parameter is set:
->>>>>>> - Configure all CPUs for autonomous operation on first init
->>>>>>> - Use HW min/max_perf when available; otherwise initialize from caps
->>>>>>> - Initialize desired_perf to max_perf as a starting hint
->>>>>>> - Hardware controls frequency instead of the OS governor
->>>>>>> - EPP behavior depends on parameter value:
->>>>>>>    - performance (or 1): override EPP to performance preference 
->>>>>>> (0x0)
->>>>>>>    - default_epp (or 2): preserve EPP value programmed by BIOS/
->>>>>>> firmware
->>>>>>>
->>>>>>> The boot parameter is applied only during first policy 
->>>>>>> initialization.
->>>>>>> Skip applying it on CPU hotplug to preserve runtime sysfs
->>>>>>> configuration.
->>>>>>>
->>>>>>> This patch depends on patch series [1] ("cpufreq: Set policy->min 
->>>>>>> and
->>>>>>> max as real QoS constraints") so that the policy->min/max set in
->>>>>>> cppc_cpufreq_cpu_init() are not overridden by cpufreq_set_policy()
->>>>>>> during init.
->>>>>>>
->>>>>>> Signed-off-by: Sumit Gupta <sumitg@nvidia.com>
->>>>>>> ---
->>>>>>> [1] https://lore.kernel.org/lkml/20260511135538.522653-1-
->>>>>>> pierre.gondois@arm.com/
->>>>>>> ---
->>>>>>>   .../admin-guide/kernel-parameters.txt         |  16 +++
->>>>>>>   drivers/cpufreq/cppc_cpufreq.c                | 122 +++++++++++++
->>>>>>> ++++-
->>>>>>>   2 files changed, 133 insertions(+), 5 deletions(-)
->>>>>>>
->>>>>>> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/
->>>>>>> Documentation/admin-guide/kernel-parameters.txt
->>>>>>> index 0eb64aab3685..7e4b3a8fd76f 100644
->>>>>>> --- a/Documentation/admin-guide/kernel-parameters.txt
->>>>>>> +++ b/Documentation/admin-guide/kernel-parameters.txt
->>>>>>> @@ -1048,6 +1048,22 @@ Kernel parameters
->>>>>>>                       policy to use. This governor must be 
->>>>>>> registered
->>>>>>> in the
->>>>>>>                       kernel before the cpufreq driver probes.
->>>>>>>
->>>>>>> +     cppc_cpufreq.auto_sel_mode=
->>>>>>> +                     [CPU_FREQ] Enable ACPI CPPC autonomous
->>>>>>> performance
->>>>>>> +                     selection. When enabled, hardware 
->>>>>>> automatically
->>>>>>> adjusts
->>>>>>> +                     CPU frequency on all CPUs based on workload
->>>>>>> demands.
->>>>>>> +                     In Autonomous mode, Energy Performance
->>>>>>> Preference (EPP)
->>>>>>> +                     hints guide hardware toward performance (0x0)
->>>>>>> or energy
->>>>>>> +                     efficiency (0xff).
->>>>>>> +                     Requires ACPI CPPC autonomous selection 
->>>>>>> register
->>>>>>> +                     support.
->>>>>>> +                     Accepts:
->>>>>>> +                       performance, 1: enable auto_sel + set EPP to
->>>>>>> +                                       performance (0x0)
->>>>>>> +                       default_epp, 2: enable auto_sel, preserve 
->>>>>>> EPP
->>>>>>> value
->>>>>>> +                                       programmed by BIOS/firmware
->>>>>>> +                     Unset: cpufreq governors are used (auto_sel
->>>>>>> disabled).
->>>>>>
->>>>>> Rather than unset doing nothing, have you considered having it take a
->>>>>> midpoint like 128?  That's what we do in amd-pstate (default to
->>>>>> balance_performance).  I think it turns into a reasonable balance.
->>>>>
->>>>> Thanks for the suggestion.
->>>>> I can add balance_performance that enables auto_sel with EPP=128 in 
->>>>> v4.
->>>>>
->>>>> On changing the driver default (no param behavior) to auto enable
->>>>> balance_performance, it would be good to keep the current behavior for
->>>>> now since cppc_cpufreq is generic across ARM64/RISC-V platforms where
->>>>> EPP and Autonomous Selection registers are optional.
->>>>> A default change would affect existing users relying on governors.
->>>>>
->>>>> Thank you,
->>>>> Sumit Gupta
->>>>
->>>> But couldn't you make the "no module parameter set" follow the behavior
->>>> to only set the registers if they're available?
->>>>
->>>> So the systems that support it start using it, the ones that don't it's
->>>> a NOP.
->>>>
->>>
->>> Would it work to add balance_performance as a new mode in v4,
->>> and discuss changing the default separately as a follow-up?
->>>
->>
->> Sure.
->>
->>> Runtime detection helps for unsupported platforms. But platforms which
->>> support the registers use OS governors today, and silently switching
->>> them to autonomous mode on a kernel update is a behavior change for
->>> existing users. They would also have no way to boot into sw governor.
->>>
->>
->> But hopefully it should be better battery life/responsiveness for those
->> scenarios too, right?
->>
-> 
-> Yes in many cases, but if some workloads rely on specific OS governor
-> configurations, then that would get impacted.
-> I will send a separate change later to seek broader consensus on
-> enabling auto_sel as default without any param.
-> 
-
-I suppose another option is to have a Kconfig to decide at compile time 
-whether to turn on autonomous mode by default, so systems can avoid 
-moving to this if they don't want to.
+base-commit: 03f35250485a1f78f5055c034ce7073b4c887636
+-- 
+2.34.1
 
 
