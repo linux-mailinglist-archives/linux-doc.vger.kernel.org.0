@@ -1,65 +1,65 @@
-Return-Path: <linux-doc+bounces-88229-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88231-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wGLoMMlXC2oCGAUAu9opvQ
-	(envelope-from <linux-doc+bounces-88229-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 20:17:45 +0200
+	id YPpCOoNWC2qYFgUAu9opvQ
+	(envelope-from <linux-doc+bounces-88231-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 20:12:19 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2ED725721C4
-	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 20:17:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E04257200D
+	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 20:12:19 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 85CC2311E5DB
-	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 18:04:41 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id DDE9C305A8B0
+	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 18:04:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3C51F3914E4;
-	Mon, 18 May 2026 18:03:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6061A39281F;
+	Mon, 18 May 2026 18:04:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="kKkdwkKO"
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="BC70FGAX"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from BL2PR02CU003.outbound.protection.outlook.com (mail-eastusazon11011048.outbound.protection.outlook.com [52.101.52.48])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A35C238A29A;
-	Mon, 18 May 2026 18:03:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A0DC3914E5;
+	Mon, 18 May 2026 18:03:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.52.48
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779127439; cv=fail; b=QdH3m/1lmO0cYl8gw2ThYYmE9cLdXZre6pPTWDwYDULKAHvl8PtMsej3OGc9qXXrBkEe14ZEa9p66YF8yCpOAji8qL7BkpOBgXViSjX8qL6GPTywfEIAGwQ2JsKj8JmRLhNHHQ6ePj4Pe2DHoFcZpa4ze04Oo44dYeAZINGnt40=
+	t=1779127441; cv=fail; b=eH5Zc0Bx6AbN3YBK6jI0P+rlHPbsOyMbgUPsw4/7etO7p9ozBZv4JkBg3UdJqy+LyKOzM3d1UzK8uJBVyl56i7i97KuhS+QrKjwkz76/28g49MXjZ2oEb7C/RMWJOS8LSVxPdFzUZ9oUMRAp9Fn7HDIFsj3Vvk2+PcXv7EwVX90=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779127439; c=relaxed/simple;
-	bh=23tMGzTNV+mIipUwv8RDkA+HGdIY2LWuGVaE0bw5bL4=;
+	s=arc-20240116; t=1779127441; c=relaxed/simple;
+	bh=bvZfNxojaQT5X+xWxa2oAjzz89wGo6fCDvM7e2E+FPg=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=WBkZseLi6Z0hY655JoZJ2S/yK5ZVn8Wl7LYrJdyK0FWHiaW4qYT/uMkwcr+2+WccJNDuLbu3U09KF3YczGiGhxjLplKHSRlKym5aO0fOBISP6T4+8T5u7CKj9oa5zdpM2Ze7tjNGxk9UmaxS9t9Sm7oy00i9LilnWTHZxajYUJU=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=kKkdwkKO; arc=fail smtp.client-ip=52.101.52.48
+	 Content-Type:MIME-Version; b=r/TyjeWW1vmjlv3CTtQ9tAs4quc9VXNEIrSeti3If6PedgW9HqaxaC7QDwkeYzf2w3KnNtlm/7xuLv/9h8coPYANd2Q3XTOe/Ahl2h3r0AlkqOKdQ/fuqeKXYJlLWLIPFtaqfqArgPyNuagKBwxeyfz+aDbhmlzzXjyjoGpbfgg=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=BC70FGAX; arc=fail smtp.client-ip=52.101.52.48
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
 Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UGu6cAEmHGdkan+QDaDEvLzKgKg0YE27XQjblatQytD4hDYlzodLuQgitRnCyLlS3gb06cfn1Me/4eZ/eAUsivT++EASJMHrXnG3i/dbqCJiXIL6OvTn6LgU8bBuq97tj1eOLGApgSMBq8K1gsSVhZfN/oybiQXeIw6U55/c5BTTmtPj1FdJbZmTDqhqfQwh6IsLrDazR80HE+ean6XeFdhb+ArfP/fi0V42WUvXlLVDg9eXULnHvXLTOphhDs7qykJMWVD4vEoIBVJF2cavXx9gQIaAiCz2b4xfD9HZcWlKJZJ9q5kQbz/58Y1PwfVn+Rpt+O2ce8HOWP4j/mQZHQ==
+ b=jB+ebVkikUDn4R7NjhsmEBXR2MkTEFIuITxV/csL5qkKgy684wqaD7HeG/vGFBVJy2+67/5xSoCYLi3iDnhgPw/AezQi6OBvrGuxxr/yD7JyoN8gAcK2EenQAZfYMhSV3AHOUM4Z6pgGYVDh2V2yGBAt1SWFpLJtExs8OhxxMQZefnKRR4z/gd/nu5Hj2tybFShhWQHYd8okdalQondcNx3d/ei4938BrA2dzbZ493Fz8rw1mIWBl2eqQlx1CX+sNTfxQkvr7x9hwsDQcWSnkdu4CB3rUJJ3HXByT3NRMSrrwvPHTQiR8dGCwQ6bNr4HT8XhYVYXNn973OzBt8y28Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MB5cqp0BbG0vPpl+RsAq+hf4ZZJwVTffKHqN9/J3kfA=;
- b=TxvPgHHNuUKKcSRXpyOE0U2UiM/dqe4gnOB4IVQ5pCFQAx1Ti37vwvIlTBYG27zasXxPCJGt1FhbDL0oCxQimJFxCLrg4D5jzTrR103TSy2a+3iQ4VUtRY+GwOtG8k3164KpEMhEptcsNT538AiuNMGRMkCS1f0lugdb4TFwYTkEvdV7hikZLr1SSSpK27D43Mr6G5MwLCUCb2DQaUSw44BJQqN4eyzHSnxgZ8g5X0a1V2hGyg5bZpz9yVf9SlJZUlLCq5wq0xWjJk7b5eQzS9REAiStDLmu/HxAi29RAdz8b92pHzvm0NwAbhKpE8u5sBAW4QlEmmnji+wmRNROLA==
+ bh=t0aqxY6b0VLqmL4sURQoxNzALyk36l15VoQ43Et33DY=;
+ b=MMm5oE998iVHGLcarJHeUJlfoDJkPqbenIxJUFTFQRdYoRRkN6bMCTQ68Dv16JX1kZBlWG7AEVFmIuEhw935A0znzBPbfMqMTgr/dH4dzOunICjaaVimLqDiRdb7sCJ34EIBNCQODKsGIGS0tYnmEFN0HPYUpLC5en7hyE5aKQG5SvhOT72TD5gimJSMrXyuCUhmcrYaPaz9dHjuoZGg13oDsGO0WW2cezZDymLwOrbzygD++2f5yYUYZDYsBmpr7JxLExkgarrup1cMY8WC1Okpx/2qsqFF79xuX9+oR9VwHvGFvvEQiCqjwnSzHKk0RGDIHh1w2bY/b3R7EuEEzg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MB5cqp0BbG0vPpl+RsAq+hf4ZZJwVTffKHqN9/J3kfA=;
- b=kKkdwkKOQRYQ5yP5B9kevSaJSNoIQ9KBSfLSzlj6xJy0kkyzsM7tFVaPy/QTVsWgzftbvLeQ5NBzCkQgH+VkxmpEleQfR5KtT0QrIOt01P3Hrq7RmQJJdEvW27j8bC/tudlYTlxL2k78f2jJ3CEOf9U4iep4I99xqM+iy50ax2dacaVQqA2SlsABx2OY/Pbe2HPSWiTRVfran8xiUAFP/0CQGgIP0nxVK01nkLzcKQmNTV0m8vCbYPGAj1l+cEOJrug51khz6lWCw21vGje/wQUpnhlOsDrcj6jDxLuh5f3z6dBi22dyYtUB3IUfMsDJgqN4BT+DbhzVUl3A+gTmmw==
+ bh=t0aqxY6b0VLqmL4sURQoxNzALyk36l15VoQ43Et33DY=;
+ b=BC70FGAXpo78Etsot8w14E3IKXWLigad8ilJlLZZOyllS8GxZCZ+W1WV8ih5i6mr7TwO7FtCuSQWeMtJ+dcbYVa60zwTlDzaDuzXt2KCNO2//Yq0QUgzfxtbBJ6H3hY98fPaVbic6fcHJ494B+bsCqoCZE1fCkJ8/h2nn9/elN/b/WY0xdL0YyUOd5oQ+Xa3Uzy6Bv5qwLa4slqkP6YHI1ewfdxfjqDMZI4d5/0noUlzayEDfkigjzGsdFt7nYzMf/lZVpxD5nrtErLckhSef52TJRPz4IbPI/8La0lsQ8YU2nk9fw6dD8d2sb4m8fiv/HqUl29hV79yumoSD38U8w==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nvidia.com;
 Received: from DS0PR12MB6486.namprd12.prod.outlook.com (2603:10b6:8:c5::21) by
  SJ0PR12MB8114.namprd12.prod.outlook.com (2603:10b6:a03:4e8::18) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.23; Mon, 18 May
- 2026 18:03:49 +0000
+ 2026 18:03:50 +0000
 Received: from DS0PR12MB6486.namprd12.prod.outlook.com
  ([fe80::88a9:f314:c95f:8b33]) by DS0PR12MB6486.namprd12.prod.outlook.com
  ([fe80::88a9:f314:c95f:8b33%6]) with mapi id 15.21.0025.012; Mon, 18 May 2026
- 18:03:49 +0000
+ 18:03:50 +0000
 From: Joel Fernandes <joelagnelf@nvidia.com>
 To: linux-kernel@vger.kernel.org
 Cc: Miguel Ojeda <ojeda@kernel.org>,
@@ -94,16 +94,16 @@ Cc: Miguel Ojeda <ojeda@kernel.org>,
 	joel@joelfernandes.org,
 	linux-doc@vger.kernel.org,
 	Joel Fernandes <joelagnelf@nvidia.com>
-Subject: [PATCH v1 02/12] rust: bitfield: support cast+shift accessor syntax
-Date: Mon, 18 May 2026 14:03:32 -0400
-Message-Id: <20260518180342.2387845-3-joelagnelf@nvidia.com>
+Subject: [PATCH v1 03/12] gpu: nova-core: gsp: Return GspStaticInfo from boot()
+Date: Mon, 18 May 2026 14:03:33 -0400
+Message-Id: <20260518180342.2387845-4-joelagnelf@nvidia.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260518180342.2387845-1-joelagnelf@nvidia.com>
 References: <20260518180342.2387845-1-joelagnelf@nvidia.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: BL1PR13CA0174.namprd13.prod.outlook.com
- (2603:10b6:208:2bd::29) To DS0PR12MB6486.namprd12.prod.outlook.com
+X-ClientProxiedBy: MN0PR03CA0029.namprd03.prod.outlook.com
+ (2603:10b6:208:52f::34) To DS0PR12MB6486.namprd12.prod.outlook.com
  (2603:10b6:8:c5::21)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -113,57 +113,57 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DS0PR12MB6486:EE_|SJ0PR12MB8114:EE_
-X-MS-Office365-Filtering-Correlation-Id: e464f98b-0079-41d0-6794-08deb507cfcc
+X-MS-Office365-Filtering-Correlation-Id: ce96e6c3-6bf7-40df-4c6c-08deb507d090
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|376014|1800799024|7416014|22082099003|56012099003|18002099003|11063799003;
+	BCL:0;ARA:13230040|366016|376014|1800799024|7416014|22082099003|56012099003|18002099003|3023799003|11063799003;
 X-Microsoft-Antispam-Message-Info:
-	YjV8PPQV+J4oecZToTQLxEpd7bMV91a43TzQucIdR9wYeuyEybC5ygEHeogFL/doxUcu5UYxb4y6fAc8AKHhrDBlpFUvY7Jm6yPQS1fujl4BTHV8DJ1sClnKtq+fZvpzsErDKg6ArMoaj8W45UkOjy5IdTtS+5gLWj5Be4tpEUIOsf3vjk2qThFEqb3tD9E2/oh9tqbusZ6EwgaCp1dh7fam3W3j/YjST6+sbGnb9HxgqBj0nwmG1ikmkXE4emn83J/TTop6WkExsuU3fbSzU2zy2qhLA2qw3Njmz8rtbmr6njBQak9cAG6QMKJlgn7urvHn9etwaBjOLuunzG+Dei7I+pFmhDgoFT3/GN/INoGa6rLPWJP0bPsEPfg7scxIg66LaOVPqa3APCp6/kO6eJYFqb7criRoyTADbJtMaa6yzFPqx9HlP0ghZPK5jfR5aWSddS9WGEeLROkKi6/jaVvOG3Jq1WEA7Dq7L2cSrsHwakw6xLZ9RaYu7zFrcZztjX+Fa/k6LoaKcVlDTpt8yfHl7g578DstqLqkJvtj+xVs3O+9x3qQmV1KlbfqHdvQdlGI83bj6J7HxxwHbbfMKNpspI8klJJanWJZ8QI8krFNcXz8fA78M5pJsbzUSCeViv5rKL+T2V/9Mdbahs9GqZD/C5QebS9JfvZaNopGxmaLkimjb6UUrM+yd7dFdEzZ
+	XoAQKwajGqPxeWjg9tsKi5OgXIksKiBd05f1STXTyyywBXP2/Hsrj1JjaIhHrxYnkwxsLUeit+y0vcNOczkuBmyCv4Epzy7a9agweZ52IYKiyzdwvdocg0XKLcnIHl/MLUwaRKy3VBJFWETqNxVcC+wp1jPRIY0Ubvk1lJAs2qr3e/5+S1u83GWvw1D4w+Scucc3y5gqowALgFcGU9zFaRFLChzSFGtC+UBtDQ5hs6f3+qti2c3GFEghtcloYauC1Va0Pbg6C+KLERCc3NSrm2Kwp6OlTryrDQduxSmOCgOQprZi6504jbi+Oub6ktZ5nqcB9m0o5OLTIVxAdiZpTdSWN7QV5Iez/+SO9irpSzzsOFDIu8BXch6r6UyCoYpvWK25PW8f9YV9v4IUeEE8+noOCN7hr/+WZb6L7mSq9uhluUp3Qnrnk2hcnoBHdc+5suxf8P+SmT5QDZH9YrHAuDVBr3DXkTuzZNBqkgVGCP/KnxWO1LBKX+gRYisABvKrmwhGJZQn7QoCrrvnyr8CvMoO8Z8loS+oOdD0DtABraMNnyeBnoHxJCPAMAn7/6krQ5sQz2ax7qQ+hgcwhJq8CtaEiQ5IA+KAVJQYpWg/jlyCv3Ryue5rPmSTOsogLVdD57wXSVJv19WXzA9JKtwsFIshTLhV2A27yaB+mIwAzoQ+62FQHfjPsp7cwuPr09l3
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR12MB6486.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(7416014)(22082099003)(56012099003)(18002099003)(11063799003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR12MB6486.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(7416014)(22082099003)(56012099003)(18002099003)(3023799003)(11063799003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?re8wvH1BJZtK9BSf8das5r6YGSkelI2jPtGraOO8ysz8+uxUYwmGMxERUmf+?=
- =?us-ascii?Q?VyvEaxuo7I5ju3g9hZAT1NSYPpq7WncgLJlSv3t8yE5OAu9bLVnSM+yzt318?=
- =?us-ascii?Q?M5AP+++OQRG4nt/2Nq9K0FfOC74FV0L/igsc8Mib6TyxzZK1DHvajjreuXkC?=
- =?us-ascii?Q?7PIQEKvvJtYUA530DFrjyBjp7h9QJkhtnJs+T08ZIwrwADKb/3KwBamBmabp?=
- =?us-ascii?Q?kPwVU0Y47i23lb6KPr6cNd3rR5qhweB+p0rR9pMeIVoGisYNZu74mA7JW42j?=
- =?us-ascii?Q?YCYWVKbkiIl0F04ajLkKndtwU+v8AkW0AzjD3H4BcFpfvfLXDFPywckGcam5?=
- =?us-ascii?Q?2f74TqBoRo4H5RLEztCklWPNWCPvteNcBwRqdSIx/fNdToIrvBkuCj51TiSb?=
- =?us-ascii?Q?yX3YVUGyoMNfUuJVjc3d4h5xJF0YnEG1LEeJcEOvLL++VY0VRh04N1X+GUEF?=
- =?us-ascii?Q?1aHJX5Cz/7TPoXk0v8wTwkGSn/NE+lKp0r7twitigK5V/vtT/rLOd0Pt6mZL?=
- =?us-ascii?Q?5fed4Ci0OU3TVf/iFbEamr4jlSdNxCKw5eN1Qb+qUzMKvjtnJib+cSY8rQKr?=
- =?us-ascii?Q?5+/aNRYJhr2WPs3/t9xXv7BUzDRPfKFhX2dI7YG6Xubskoi8PCNslSR9l0eD?=
- =?us-ascii?Q?qmzZ1IVOv8E6/N0GmWxVMw7bsGdYzhPknValqgt4pLQdfzpQ8chLB+zc43Ti?=
- =?us-ascii?Q?0LQt+Xj6CTp+yXejBSMMRIA6Ve0Ki9l2CzpMtAXx2Ndy5BwtLhLarVPQdtZR?=
- =?us-ascii?Q?cEpLgp5+Lb115ACMR+qr+HhWveDxENkWfLKOPcH4WHOHz+dWYvpUPi9CgpXU?=
- =?us-ascii?Q?KPNxjboHJDEf24ByjFfzvOoUaHjCvaMYu9RPQiBP9SwRAz+SvnvN1qx60eDZ?=
- =?us-ascii?Q?eNzzmwoNs9i+MSUoaFrFUgT4Z1nbmUKvlmSMt9GKaD81CgnFgINNa69UrhE/?=
- =?us-ascii?Q?WJfXQLk0J2Ki4hf5TfVU36L9Y46jJGmNOHBDLg8W7ZGGruGDoMfW2ZiyjexX?=
- =?us-ascii?Q?slolAJH1upXGzIRxns2hwNN9Hh1ej6FCEnzi40LtzpJPF9KM/7t+yDxhZIWy?=
- =?us-ascii?Q?CiyrEwo7b0jku0Jcsw0NoQdneDsfSgTXD5B9/lDjCTp0l7nN++nAhSdBmdJF?=
- =?us-ascii?Q?F0SxSP3Pee7RkpH/rp79pIak/VDXWcptGGW53fJtcGKU+BRea2hJPtK5sicL?=
- =?us-ascii?Q?Ke1xrlFwgO3uBwyX+Yo3SNEXpbZGBV04x9hXB/K0kryEgco/Ndd3jH1D02D0?=
- =?us-ascii?Q?Ahl9qH999tQIo7wz356hpZx1xRNnZC+ZEUIPNEi3+73UEems10Tnh+kVHsJs?=
- =?us-ascii?Q?kTPzb0joedo1ay0jW9pDddqGh87jMR/RFY/WD+orCXtHeXfySmYrqdTAeVwt?=
- =?us-ascii?Q?w/r0rM3/6yTIE4h6rp5DsnfZixXiaafG3KG9w9P6crYeE6T+zB8ReOvNx1gi?=
- =?us-ascii?Q?mHmN3JLMeZ4vMca8IN2eZInMoH+4lSKbN6ewgkBtnbSDZnT+QkB1wZJELcdT?=
- =?us-ascii?Q?8NFSPOVYcVOIHuh3viCFknLckgTdHondHFyuJ7m9S4b8r5IcRcezLMw2kD52?=
- =?us-ascii?Q?ZVbIGTRSZllLq9+sKjxSneZxh3tIN6loBKt5XrYzdN+ZXo//JSQ+sp9To7yH?=
- =?us-ascii?Q?kdIw8zIqEFAGwshshw3jGCL2zOV+m+ik2jwHz1imsPPBijtcpNFnjClu9Bp8?=
- =?us-ascii?Q?i0qzYukZf2kr9xIF22BXczLRIaKVJfh5wwWEXguHStsWcACM5jc44GJeAnqg?=
- =?us-ascii?Q?6Nmv79Lylw=3D=3D?=
+	=?us-ascii?Q?JQsIRm4FGD9wW6PkrhFak5z0yqY+oYLgJwWa1eOTxbtuIeu1XZguRt0X5rbN?=
+ =?us-ascii?Q?yPCCi1OssOmoz20Ye0qnqZUG9GA9WB3RX06Tk6XT85gYX3WsiW4HkEO0oHeK?=
+ =?us-ascii?Q?ITOPSI+ybxY3qHUzq6gVo37/RI08PFn1XFHltTbqEHdsr+AIcYsY3OEGnoio?=
+ =?us-ascii?Q?oD3E78emfEdKcwFo0r57yi1DCHwD2h0JMwCMLouiHb27Z4yN8+uU1klipH3h?=
+ =?us-ascii?Q?Jsho5cWuNuK0W4HTWXjcxq7Pl5LmDPW5/9f7VGYAAOxI8HuHWNZCaq4cHhif?=
+ =?us-ascii?Q?leeyqcdhPBwZHbQRUk4/l737SbbGkvToTVSV0UxUglMpb005IqEB3jvDoMje?=
+ =?us-ascii?Q?T6ikrBRZrcm5Csfs10Iz/nd1imw3BGpFn/bVIGl2m4eyw/GZ18dg6P5ZZjNm?=
+ =?us-ascii?Q?a6Xi+KA0/Rj3d/HDz5gxxXK1ualHvA2ewhgfjTqAC58EMucjpvvydfNjW8Rg?=
+ =?us-ascii?Q?Dr5L1pWi4bhL6KJ/zPCGcLM4HdS55V5l+C/P0cYQRN+4iyElVk/rlkNw6zge?=
+ =?us-ascii?Q?lNKaOjb3voMH8mVFBkVIZYtRrTigIyAvtUUz/sikHWU7xtwJIr2mmbaiOzr9?=
+ =?us-ascii?Q?VcXVa6+HhCzOD/GWB+OEhUala6Sw9R+FVpVhXyO91nG+x0SZY8rNxDj6g4P+?=
+ =?us-ascii?Q?WTHCenl57dmS73Xbxtf9nzW3JrkscqmNUzB0eCDPB6yyN8JsA4fFt2yXF+E0?=
+ =?us-ascii?Q?PPipIWcpJ7Cpk/S4hvwql5PIZWdE9ZU4JPelXHUKRiELzPor6eDDjZdXSNDU?=
+ =?us-ascii?Q?qDkftJGkVPc5NL1mF3dqhtkz1o1amTn/2mvhZFISbw+UZpAbK1gG5T9BwswK?=
+ =?us-ascii?Q?AaJth40I5KVvexhF/F3nwt+guTVhHz/BjOMqRCxRg/NDtOkrt1f4GloiPxC4?=
+ =?us-ascii?Q?V5NVqM333cIov/XKPEXo8odPuD1EB73V4dUvpW3BSIuXptjI1fdEkrykdvsZ?=
+ =?us-ascii?Q?Q0O1A+byCZSDpbq4/1NoFcdnRsiOurXrHznIGkUeA8r2ek6RNOl0Wanwg7WI?=
+ =?us-ascii?Q?l2BnJnZGH4pBJJPYc4N50n1GFzFMqQwbwewGunhvKim46fw4PeWzxeHNfSy0?=
+ =?us-ascii?Q?k7Xqsvd0+a67JCHMmqzR2Av6pbTFK9Vi9SOcMeFX1nt5gOu0ewuc1oIEtjwY?=
+ =?us-ascii?Q?RqofeYVPAsn/tfcsafWqOo3zynw/l+eooRHAB9RQya2348K+FRWaRFk6xM9X?=
+ =?us-ascii?Q?ce2MbF3B61IfoSijbJDxkRK7OU1Lxx7ntzr53wJqbYPw1GiGuqGnQn7FvZnI?=
+ =?us-ascii?Q?oGkxKEKW5IKJc3/fh+CzwMC7pZwEBRxUoqrTZ40BtXY3V46wdKzz9cz3Vn2/?=
+ =?us-ascii?Q?tTq4XdpDIl7KhEjuQ70jQkg+9GRhMXm40wtALm3l2fIMfEsSWGKl8BIXcpPn?=
+ =?us-ascii?Q?xjkEeU0undwm+HKdMUsmuIZqpEPRDoWR5T4+QPltLtOmGi+jOb9v6+F6Vtv7?=
+ =?us-ascii?Q?0I4sA4Hl6YOsxnxciUOlEWKMOs6ZMZVlNSjYBVB5IwFjPtg7pO8OgxsQou08?=
+ =?us-ascii?Q?05Von72riUOm2HUQPJqXo/PDRwU7SZ0eEXhazi2E5VbGlh6k1nIelNoB/DQ8?=
+ =?us-ascii?Q?Xbl/Ds2hlligcD5P1SdBMcVh3B/Dmw0Q9vH4IbuU9c8ThXFSWVlD6z/E4hLb?=
+ =?us-ascii?Q?lTq2fdkCiTgeCaOWbHUDpISN1FOd9npdGxwMhvDbTUywb2ulvI1XxrPLvYjS?=
+ =?us-ascii?Q?/6ZNjqMJxg20tIcg2pjC6X7optzlJWl7UsHZv+1iOoE7uR/jjGgfQ9wyMNYK?=
+ =?us-ascii?Q?lPxQkpieTg=3D=3D?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e464f98b-0079-41d0-6794-08deb507cfcc
+X-MS-Exchange-CrossTenant-Network-Message-Id: ce96e6c3-6bf7-40df-4c6c-08deb507d090
 X-MS-Exchange-CrossTenant-AuthSource: DS0PR12MB6486.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 May 2026 18:03:49.0351
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 May 2026 18:03:50.3347
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: VMWdTCKTFT0I+eFgiz3IfNPIcM5FuVAgeISx1wUzMG7FlGLJDr2nPHbJfsV41qShNSXAkjFNWwHHhuHoSPwGDQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: z/eo0aejh9zpSHMxuIxcdpGckn1/UwOrq5p5K8Z2UcsQb47VVmdUsmqG0SDuL8lpdw+WEWnKvuAxEaRxixnxsA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB8114
 X-Spamd-Result: default: False [2.84 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
@@ -180,7 +180,7 @@ X-Spamd-Result: default: False [2.84 / 15.00];
 	RCPT_COUNT_TWELVE(0.00)[33];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-88229-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-88231-lists,linux-doc=lfdr.de];
 	FREEMAIL_CC(0.00)[kernel.org,garyguo.net,protonmail.com,google.com,umich.edu,redhat.com,collabora.com,lists.freedesktop.org,vger.kernel.org,lists.linux.dev,nvidia.com,gmail.com,joelfernandes.org];
 	DKIM_TRACE(0.00)[Nvidia.com:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
@@ -191,155 +191,99 @@ X-Spamd-Result: default: False [2.84 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc];
 	RCVD_COUNT_FIVE(0.00)[5];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[Nvidia.com:dkim,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,nvidia.com:mid,nvidia.com:email]
-X-Rspamd-Queue-Id: 2ED725721C4
+	DBL_BLOCKED_OPENRESOLVER(0.00)[Nvidia.com:dkim,nvidia.com:mid,nvidia.com:email]
+X-Rspamd-Queue-Id: 4E04257200D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-The `bitfield!` macro previously generated accessors that returned the
-field's value as a `Bounded<$storage, N>` for its raw N-bit width. For
-fields whose logical interpretation is a wider value built by widening
-the storage type and shifting left (e.g., a 24-bit register field that
-stores bits 16..40 of a 40-bit address), callers had to chain
-`cast::<TargetType>()` and `shl::<SHIFT, RES>()` (or worse, raw shift
-operators) at every read site, and the inverse for writes.
+Refactor the GSP boot function to return GetGspStaticInfoReply.
 
-Add a new field declaration shape:
+This enables access required for memory management initialization to:
+- bar1_pde_base: BAR1 page directory base.
+- bar2_pde_base: BAR2 page directory base.
+- usable memory regions in video memory.
 
-  $hi:$lo $field as Bounded<$target, $res> shl $shift;
-
-The macro generates:
-
-  - A getter `$field(self) -> Bounded<$target, $res>` that extracts the
-    raw N-bit field, widens it to $target, and shifts left by $shift.
-  - A setter `with_$field(self, value: Bounded<$target, $res>) -> Self`
-    that shifts right by $shift, narrows to the storage type, and writes.
-
-Add a KUnit test mirroring nova-core driver's PRAMIN window register
-pattern as well which is the usecase for it.
-
+Reviewed-by: Eliot Courtney <ecourtney@nvidia.com>
+Reviewed-by: John Hubbard <jhubbard@nvidia.com>
 Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
 ---
- rust/kernel/bitfield.rs | 67 +++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 67 insertions(+)
+ drivers/gpu/nova-core/gpu.rs      |  8 ++++++--
+ drivers/gpu/nova-core/gsp/boot.rs | 12 ++++++++----
+ 2 files changed, 14 insertions(+), 6 deletions(-)
 
-diff --git a/rust/kernel/bitfield.rs b/rust/kernel/bitfield.rs
-index 9ab8dafff36c..1c1fc86441f2 100644
---- a/rust/kernel/bitfield.rs
-+++ b/rust/kernel/bitfield.rs
-@@ -57,6 +57,8 @@
- //!         hi:lo field_2 => ConvertedType;
- //!         // `field_3` documentation.
- //!         hi:lo field_3 ?=> ConvertedType;
-+//!         // `field_4` documentation.
-+//!         hi:lo field_4 as Bounded<TargetType, RES> shl SHIFT;
- //!         ...
- //!     }
- //! }
-@@ -66,6 +68,8 @@
- //! - `hi:lo`: Bit range (inclusive), where `hi >= lo`.
- //! - `=> Type`: Optional infallible conversion (see [below](#infallible-conversion-)).
- //! - `?=> Type`: Optional fallible conversion (see [below](#fallible-conversion-)).
-+//! - `as Bounded<T, RES> shl SHIFT`: Optional cast-and-shift accessor (see
-+//!   [below](#cast-and-shift-accessors-as-bounded-t-res-shl-shift)).
- //! - Documentation strings and attributes are optional.
- //!
- //! # Generated code
-@@ -299,6 +303,7 @@ fn from(val: $storage) -> $name {
-         $($(#[doc = $doc:expr])* $hi:literal:$lo:literal $field:ident
-             $(?=> $try_into_type:ty)?
-             $(=> $into_type:ty)?
-+            $(as Bounded<$target:ty, $res:literal> shl $shift:literal)?
-         ;
-         )*
-     }
-@@ -311,6 +316,7 @@ impl $name {
-             @public_field_accessors $(#[doc = $doc])* $vis $name $storage : $hi:$lo $field
-             $(?=> $try_into_type)?
-             $(=> $into_type)?
-+            $(as Bounded<$target, $res> shl $shift)?
-         );
-         )*
-         }
-@@ -475,6 +481,43 @@ const fn [<__with_ $field>](
-         );
-     };
+diff --git a/drivers/gpu/nova-core/gpu.rs b/drivers/gpu/nova-core/gpu.rs
+index 659f6a24ee13..775cdb653830 100644
+--- a/drivers/gpu/nova-core/gpu.rs
++++ b/drivers/gpu/nova-core/gpu.rs
+@@ -20,7 +20,10 @@
+         Falcon, //
+     },
+     fb::SysmemFlush,
+-    gsp::Gsp,
++    gsp::{
++        commands::GetGspStaticInfoReply,
++        Gsp, //
++    },
+     regs,
+ };
  
-+    // Public accessors for fields cast to a wider type and left-shifted, exposing them as
-+    // `Bounded<$target, $res>` where `$res == ($hi + 1 - $lo) + $shift`.
-+    (
-+        @public_field_accessors $(#[doc = $doc:expr])* $vis:vis $name:ident $storage:ty :
-+            $hi:literal:$lo:literal $field:ident
-+            as Bounded<$target:ty, $res:literal> shl $shift:literal
-+    ) => {
-+        ::kernel::macros::paste!(
-+
-+        $(#[doc = $doc])*
-+        #[doc = "Returns the value of this field, cast to the target type and shifted left."]
-+        #[inline(always)]
-+        $vis fn $field(self) -> ::kernel::num::Bounded<$target, $res> {
-+            $crate::const_assert!($res == ($hi + 1 - $lo) + $shift);
-+
-+            self.[<__ $field>]()
-+                .cast::<$target>()
-+                .shl::<$shift, $res>()
-+        }
-+
-+        $(#[doc = $doc])*
-+        #[doc = "Sets this field from a target-typed, pre-shifted `Bounded` value."]
-+        #[inline(always)]
-+        $vis fn [<with_ $field>](
+@@ -260,6 +263,7 @@ pub(crate) struct Gpu {
+     /// GSP runtime data. Temporarily an empty placeholder.
+     #[pin]
+     gsp: Gsp,
++    gsp_static_info: GetGspStaticInfoReply,
+ }
+ 
+ impl Gpu {
+@@ -291,7 +295,7 @@ pub(crate) fn new<'a>(
+ 
+             gsp <- Gsp::new(pdev),
+ 
+-            _: { gsp.boot(pdev, bar, spec.chipset, gsp_falcon, sec2_falcon)? },
++            gsp_static_info: { gsp.boot(pdev, bar, spec.chipset, gsp_falcon, sec2_falcon)? },
+ 
+             bar: devres_bar,
+         })
+diff --git a/drivers/gpu/nova-core/gsp/boot.rs b/drivers/gpu/nova-core/gsp/boot.rs
+index df105ef4b371..842aef403f07 100644
+--- a/drivers/gpu/nova-core/gsp/boot.rs
++++ b/drivers/gpu/nova-core/gsp/boot.rs
+@@ -36,7 +36,10 @@
+         Chipset, //
+     },
+     gsp::{
+-        commands,
++        commands::{
 +            self,
-+            value: ::kernel::num::Bounded<$target, $res>,
-+        ) -> Self {
-+            $crate::const_assert!($res == ($hi + 1 - $lo) + $shift);
-+
-+            self.[<__with_ $field>](
-+                value.shr::<$shift, { $hi + 1 - $lo }>().cast::<$storage>()
-+            )
-+        }
-+
-+        );
-+    };
-+
-     // `Debug` implementation.
-     (@debug $name:ident { $($field:ident;)* }) => {
-         impl ::kernel::fmt::Debug for $name {
-@@ -582,6 +625,15 @@ struct TestStatusRegister(u8) {
-         }
-     }
++            GetGspStaticInfoReply, //
++        },
+         sequencer::{
+             GspSequencer,
+             GspSequencerParams, //
+@@ -148,7 +151,7 @@ pub(crate) fn boot(
+         chipset: Chipset,
+         gsp_falcon: &Falcon<Gsp>,
+         sec2_falcon: &Falcon<Sec2>,
+-    ) -> Result {
++    ) -> Result<GetGspStaticInfoReply> {
+         // The FSP boot process of Hopper+ is not supported for now.
+         if matches!(
+             chipset.arch(),
+@@ -243,12 +246,13 @@ pub(crate) fn boot(
+         commands::wait_gsp_init_done(&self.cmdq)?;
  
-+    // Mirrors the PRAMIN window register pattern: a 24-bit field in a `u32` storage that
-+    // represents bits 16..40 of a 40-bit address. The accessor exposes it as the full
-+    // 40-bit `Bounded<u64, 40>`.
-+    bitfield! {
-+        struct TestWindowReg(u32) {
-+            23:0      window_base as Bounded<u64, 40> shl 16;
-+        }
-+    }
-+
-     #[test]
-     fn test_single_bits() {
-         let mut pte = TestPageTableEntry::zeroed();
-@@ -806,4 +858,19 @@ fn test_u8_bitfield() {
-         assert_eq!(status4.reserved(), 0xF);
-         assert_eq!(status4.full_byte(), 0xFF);
+         // Obtain and display basic GPU information.
+-        let info = commands::get_gsp_info(&self.cmdq, bar)?;
++        let info = commands::get_gsp_info(&self.cmdq, bar)
++            .inspect_err(|e| dev_err!(pdev, "Failed to obtain GSP static info ({:?})\n", e))?;
+         match info.gpu_name() {
+             Ok(name) => dev_info!(pdev, "GPU name: {}\n", name),
+             Err(e) => dev_warn!(pdev, "GPU name unavailable: {:?}\n", e),
+         }
+ 
+-        Ok(())
++        Ok(info)
      }
-+
-+    #[test]
-+    fn test_cast_shift_accessor() {
-+        // Set a value via the pre-shifted setter and read it back via the getter.
-+        let addr = Bounded::<u64, 40>::new::<0x12_3456_0000>();
-+        let reg = TestWindowReg::zeroed().with_window_base(addr);
-+        assert_eq!(reg.window_base().get(), 0x12_3456_0000u64);
-+        assert_eq!(u32::from(reg), 0x0012_3456u32);
-+
-+        // Setting and reading the largest 40-bit aligned value.
-+        let max_addr = Bounded::<u64, 40>::new::<0xFF_FFFF_0000>();
-+        let reg = TestWindowReg::zeroed().with_window_base(max_addr);
-+        assert_eq!(reg.window_base().get(), 0xFF_FFFF_0000u64);
-+        assert_eq!(u32::from(reg), 0x00FF_FFFFu32);
-+    }
  }
 -- 
 2.34.1
