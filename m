@@ -1,367 +1,676 @@
-Return-Path: <linux-doc+bounces-88082-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88084-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eHYAEdFmCmq60wQAu9opvQ
-	(envelope-from <linux-doc+bounces-88082-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 03:09:37 +0200
+	id WLZCCcF/Cmoo2AQAu9opvQ
+	(envelope-from <linux-doc+bounces-88084-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 04:56:01 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id C3827564B02
-	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 03:09:36 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 404C8565344
+	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 04:55:59 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 2ABDF300A4F2
-	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 01:09:22 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 5F3A1300B45F
+	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 02:55:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6CDB51E32D6;
-	Mon, 18 May 2026 01:09:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5B63537BE8B;
+	Mon, 18 May 2026 02:55:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Zqxz+AjE"
+	dkim=pass (2048-bit key) header.d=themaw.net header.i=@themaw.net header.b="YmkeXz33";
+	dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="J7KqqDrB"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dl1-f67.google.com (mail-dl1-f67.google.com [74.125.82.67])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from fout-b6-smtp.messagingengine.com (fout-b6-smtp.messagingengine.com [202.12.124.149])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD1F51F4176
-	for <linux-doc@vger.kernel.org>; Mon, 18 May 2026 01:09:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.67
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44D2B37A48B;
+	Mon, 18 May 2026 02:55:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=202.12.124.149
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779066561; cv=none; b=qreG+5r4m+aYaKAeMy+lJWWG+G885K7sWrKwU3yydZxUJkp9cLiM2fMnHvI6FfJFkP2At9XLBXpUs0NBCxAuE4jJO+5FHAIBcQmfp93ZDbLgLmhGBsX1kFgZruZKkx+sE+hXAwmhhu0D9ciBr2xQvbXoSzFUtspOfUcBz5mNehU=
+	t=1779072957; cv=none; b=NRT0LUyk3W8fjGHX284HFUKW7Hm61+mTrnmP9gQpIKKxbmhaWkG/tjA6I1E4db+4duFzIocELs5ZzswZr6IBh1GF6l91uUv81fwZyZGOwFi+8wFVwhkmuiTH1aP/hmAJx+fXZPD96Epolh4PNe1yH+TB8FSezEfLi9ZtQQ8dqnI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779066561; c=relaxed/simple;
-	bh=HRtHHOEjvmTW762UEXwLH23ZntlzxDErqOorLAVh0UU=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=KZOfVaQmOZlCmEc2aUttJUQ4kLQ/PQjqpo1HVaHgCvcRqqMjDHTIFsPc20jbvyp0bEzMBALGc81vmls6pp7B0lm5WPR1aQALJ/dKwyZLi+yFxPp+afhrdwHLDAsDyJi7dKNM3kQmJbJPrjAi7QPYrk+I/AAyrsqNyhu2xOrjOa0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Zqxz+AjE; arc=none smtp.client-ip=74.125.82.67
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-dl1-f67.google.com with SMTP id a92af1059eb24-132d1b2519eso5429660c88.0
-        for <linux-doc@vger.kernel.org>; Sun, 17 May 2026 18:09:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779066559; x=1779671359; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=zHfRiZ9eAyYIM2WmjAuL1bwyh+6hR9i7GK44MUCPHv4=;
-        b=Zqxz+AjEsHPjzyb5jaHsCLZ7pW8cOJSbyD9mevSh5u4UxgducvUHBR5AFJN34KNyMN
-         kIjL+HFZt36P/7VuOjHlrd0yTd96FKCfMNZH1X+fVtHlT1PoGsFuLwv0hklBOHFTbDCI
-         DqW8q8SIfOJrwQe/7s1XoP6p5WRr/rWNwqwc7lofcQ9sU1V1yOpJVpMJRyXluUIYMkht
-         CX55yuSWQNnah5Wi+pKBe1Noo4PHPu0uIrAcwLD15SvOCSXA6MCjvVxYYvuTYGTNhORU
-         ol3J9AsqJvxCTEmL7rSjlgPPvF1Af5o0Y1vzfFJnu/rJb1nBiN/jtyUWKnVQRbAHluPw
-         LhXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779066559; x=1779671359;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=zHfRiZ9eAyYIM2WmjAuL1bwyh+6hR9i7GK44MUCPHv4=;
-        b=J0AApOJ4Gb08i8ItIhLWkiEhXE58vni+L4gSPdRa52B3YjoJ+vuvBEeXu8k3T5ELrd
-         nccRnXXjB0OgJwMGVfdGknj868+zd/n65iDaO0U5+8u6zqdhRw6Bz3XrTuQh34xJWh9q
-         obAfFynGnQrfc9JmuAH6gtblx0LdQtrMr7D9EUfO97eZC/UhmCZ6nr2jgOU59ktJExzX
-         jxyf+Me1bnkg98JepRZG8wFFCuDH6PNczWexz0H/UjgWv6tsIr8Vl+rh/raODqrVyE0H
-         dv7w0nBzprcVuGFHMeHC1lmiRwxCVoJu1sy/V8zLBlW+ZQ3cfE4W3pbltEY3IxQYBDY/
-         q1AA==
-X-Forwarded-Encrypted: i=1; AFNElJ8djxY3VQD6x0it7N8+Ar5vqqKlq9bRzo4E/qxPW6isyxwx3UfBoglN2N29o/Ht3OxiOenI6V9lYIk=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzFSTMVncEbh9TvHlEvOMorA1LeC/IB65PEmL+mfA0+tKKBS1qP
-	AQ8ppVGvegxeg9ef4J+tH6oHQNogYfPYY1s+13SORqYmgqQB+V4Zs7SSMCfsfXIX/68=
-X-Gm-Gg: Acq92OGawBGi4sfnjq0AsJhEnbQTwApTW1EZ239cpz7SrnQGbCpl6j7b4/DfgRYc1B3
-	6fcPmBsMl1rPX4MwTVb4cCaMGJ16MVzhwxly7CmepLBCSHbEdZ3h97heIheZ3X1/f4n1wjure2f
-	3VO683a2K8FH9sc2Dib2g+ghS/5+/As8g8FPYDKd2Y5rLScOiEbxIqX8SsMIDvIH8tmY+QctWoC
-	t/Kk4RXlGalrlrCrMuWqtVq+eHpgUGZUgx+AssiTx5K+yzVUTU/n0QFmHv2AtT/jTShKf4FxCnL
-	s6ES+5aof7ZhGZBYzhHMCtnaWdbLNMknvWXVHwYIskbg43cxyS1nkF1on51p5dbXwXlLRJGkcmS
-	g12osX/4i4e992jyLDYojxV1fwj2VvXRsaArZYY7rA+tJvcy7Pcou+IC6xDrWM31Lmf7uRqZQg1
-	H59pnomStXRejeBKFF9WIT/HzuMMQJVzV+6Jf7ceqvH6yhHUM7a34X9eU6S3XhY0jgY06AN6dUu
-	cB2IQ/83dn1qojGe5dZgg4b/NGR7xEsmAr7v61KtiGsgcSCy+cjC7eeYaSSB4RL5K72eCVmdD7S
-	wRFJnOSGWQcYH6Z7bQ==
-X-Received: by 2002:a05:7022:128c:b0:124:9dea:188d with SMTP id a92af1059eb24-1350483d04amr6044192c88.30.1779066558609;
-        Sun, 17 May 2026 18:09:18 -0700 (PDT)
-Received: from ethan-latitude5420.. (host-127-24.cafrjco.fresno.ca.us.clients.pavlovmedia.net. [68.180.127.24])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-134cb5b3c20sm18891372c88.0.2026.05.17.18.09.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 17 May 2026 18:09:18 -0700 (PDT)
-From: Ethan Nelson-Moore <enelsonmoore@gmail.com>
-To: netdev@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Cc: Ethan Nelson-Moore <enelsonmoore@gmail.com>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Simon Horman <horms@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>
-Subject: [PATCH 6/7] docs: net: arcnet: remove outdated/irrelevant information; improve style
-Date: Sun, 17 May 2026 18:07:26 -0700
-Message-ID: <20260518010739.80979-7-enelsonmoore@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260518010739.80979-1-enelsonmoore@gmail.com>
-References: <20260518010739.80979-1-enelsonmoore@gmail.com>
+	s=arc-20240116; t=1779072957; c=relaxed/simple;
+	bh=ils/0XArzsr+6li/vFSk/uyj2QJ+mfof7lPCAUJlgag=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Usp9XULki2CYyPvpRXv1Nl0+ztWJnJBAs+NlQXrbVqztFhcHRo4i7fDdTkU3QCDjBYWHR4q2V9nAT9wjO+8wIfOe76NKFojcdeXC22Ew2XnoFHO4YGNTdeLqfsPReJsnrDJlv0ALw6E49evCq5PhCFJ4uFsAV5LO5JkKizQmlA4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=themaw.net; spf=pass smtp.mailfrom=themaw.net; dkim=pass (2048-bit key) header.d=themaw.net header.i=@themaw.net header.b=YmkeXz33; dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b=J7KqqDrB; arc=none smtp.client-ip=202.12.124.149
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=themaw.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=themaw.net
+Received: from phl-compute-03.internal (phl-compute-03.internal [10.202.2.43])
+	by mailfout.stl.internal (Postfix) with ESMTP id E620C1D00093;
+	Sun, 17 May 2026 22:55:52 -0400 (EDT)
+Received: from phl-frontend-04 ([10.202.2.163])
+  by phl-compute-03.internal (MEProxy); Sun, 17 May 2026 22:55:53 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=themaw.net; h=cc
+	:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm2; t=1779072952;
+	 x=1779159352; bh=Ued1SoIi3eANLqXQqgvye/DHM12pgMnF5GHPF4sjYlI=; b=
+	YmkeXz3390to4GWwPFw4aGykZ0kaO3Jv0nuqsveAQxxs8giIUYk5sTo2Kx+KGHzj
+	YsF7c+nuJ5o5FqsSp/3x6VcPZtOu3NGxfginsz9dM2KoyQXcqHSPByYKHkR+Ff0o
+	CIFpixSmTAMt6qx/3VKllMagWML70DNNMHEqoOAakdFR5oI2WQWTf1qDm/0jdcO7
+	ghR3JpeMbXQrKxrfeR0knPJSD8XkyIK5w/NBZWUVt93JiA9jylNNP+7nGmDBNyHL
+	rlwv98zrJ46ui1Vk8dCG/2Z1kq7WMWuNlcdB/D+rPSqbtSut4QcXWKH9LuDaTGIh
+	xqGYso0Jpw7IaXMXqDgONw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1779072952; x=
+	1779159352; bh=Ued1SoIi3eANLqXQqgvye/DHM12pgMnF5GHPF4sjYlI=; b=J
+	7KqqDrB29s+fa66JPBMrIzvaLN26jyuz63h4Umh+x+KUJn7iRnC6PjQfj0XeGKVS
+	7xkP3H8Lx5Bt0RYhQMZHqw9JRMAl1A/lKRBVMAWLlYrksC0mtYz6EidmPB/5Z2EO
+	5rZFsyQdTC5gnQykoCUVZRQcjmsy44wVlTgC08W6UqwcPCqp0z/DLYF96zuhp9Yu
+	SAYbqeMb6Eeg8xC1ivvW4Tn6E1b1bo7Mvk4XNYkPkPk/bsK9+1cYJWy61rlRKLqe
+	lfmUjamQZBfnivvRoAKbiG2MwQIeDfZ0QST8NngLnTQg3cWg5AyfRwEgCBh/CZ7g
+	AECKIsz0c3f17B7Jp3UfQ==
+X-ME-Sender: <xms:t38Kag8eoeEUUzXarnzgCp9dRubl2yzxNZmX0QM08pyEDuYo0l46bA>
+    <xme:t38Kat6N77r-zwUALh2O8RBm6yf52rz6kz06QkTBBOJ61wH1P9d_aqaEuEFPu27AL
+    IorAbMWSoFcKN-aPe7v1zRdftkJfPm7yN3sqbYa_yibO2RP>
+X-ME-Received: <xmr:t38KapZjhz094dBWvElpSLyb50JR9MaCdXYUxibBTQS4NlJGJE60EnMizvmJv0s2gZoegTfgsgzkZlJPqEl3rsuxPHU8JZ1IlnZ19Shr1O39uVbT0W5LWRc>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgddufeejjeefucetufdoteggodetrf
+    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
+    rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
+    gurhepkfffgggfuffvvehfhfgjtgfgsehtkeertddtvdejnecuhfhrohhmpefkrghnucfm
+    vghnthcuoehrrghvvghnsehthhgvmhgrfidrnhgvtheqnecuggftrfgrthhtvghrnhepie
+    fhheekgfeigfeggfefiedvtddvheduvefgteekfeeiueelvdejleefieeufeetnecuffho
+    mhgrihhnpehkvghrnhgvlhdrohhrghenucevlhhushhtvghrufhiiigvpedtnecurfgrrh
+    grmhepmhgrihhlfhhrohhmpehrrghvvghnsehthhgvmhgrfidrnhgvthdpnhgspghrtghp
+    thhtohepudefpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopehnvghilhessghroh
+    ifnhdrnhgrmhgvpdhrtghpthhtohephhhorhhsthessghirhhthhgvlhhmvghrrdgtohhm
+    pdhrtghpthhtoheprghmihhrjeefihhlsehgmhgrihhlrdgtohhmpdhrtghpthhtohepmh
+    hikhhlohhssehsiigvrhgvughirdhhuhdprhgtphhtthhopegtohhrsggvtheslhifnhdr
+    nhgvthdprhgtphhtthhopehskhhhrghnsehlihhnuhigfhhouhhnuggrthhiohhnrdhorh
+    hgpdhrtghpthhtohepvhhirhhoseiivghnihhvrdhlihhnuhigrdhorhhgrdhukhdprhgt
+    phhtthhopegsrhgruhhnvghrsehkvghrnhgvlhdrohhrghdprhgtphhtthhopehjrggtkh
+    esshhushgvrdgtii
+X-ME-Proxy: <xmx:t38Kav9phFbUJw2YzJ2ydGQjr43NjWo7iX_GVmWifO6K7rnl8R7rfQ>
+    <xmx:t38KagTPK4nw3JjMKU3ZRMyZjk5M85d7iYFlf984q6qYBBjaWFxFbQ>
+    <xmx:t38KaqI8NVTTw6H_BwUNwuFPcf3AxaIPRBVr98Tkjo7FkU2_sFqTFw>
+    <xmx:t38KaiTuN1P71Pt8kmBw1WZe7wxcwA7mj_gTHDxPlR8LONXydelo6g>
+    <xmx:uH8KambDNnZdkOA0XmE-BtvjbXv1jG11rkdhMCS_Xa0s9qmBl80XQxne>
+Feedback-ID: i31e841b0:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sun,
+ 17 May 2026 22:55:46 -0400 (EDT)
+Message-ID: <bc359831-e653-4269-9d57-742b48d56d9f@themaw.net>
+Date: Mon, 18 May 2026 10:55:43 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] dcache: add fs.dentry-limit sysctl with negative-first
+ reaper
+To: NeilBrown <neil@brown.name>, Horst Birthelmer <horst@birthelmer.com>,
+ Amir Goldstein <amir73il@gmail.com>
+Cc: Miklos Szeredi <miklos@szeredi.hu>, Jonathan Corbet <corbet@lwn.net>,
+ Shuah Khan <skhan@linuxfoundation.org>,
+ Alexander Viro <viro@zeniv.linux.org.uk>,
+ Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, Horst Birthelmer <hbirthelmer@ddn.com>
+References: <20260514-limit-dentries-cache-v1-1-431b9eb0c530@ddn.com>
+ <177906210551.3947082.4313294634549021141@noble.neil.brown.name>
+Content-Language: en-AU
+From: Ian Kent <raven@themaw.net>
+Autocrypt: addr=raven@themaw.net;
+ keydata= xsFNBE6c/ycBEADdYbAI5BKjE+yw+dOE+xucCEYiGyRhOI9JiZLUBh+PDz8cDnNxcCspH44o
+ E7oTH0XPn9f7Zh0TkXWA8G6BZVCNifG7mM9K8Ecp3NheQYCk488ucSV/dz6DJ8BqX4psd4TI
+ gpcs2iDQlg5CmuXDhc5z1ztNubv8hElSlFX/4l/U18OfrdTbbcjF/fivBkzkVobtltiL+msN
+ bDq5S0K2KOxRxuXGaDShvfbz6DnajoVLEkNgEnGpSLxQNlJXdQBTE509MA30Q2aGk6oqHBQv
+ zxjVyOu+WLGPSj7hF8SdYOjizVKIARGJzDy8qT4v/TLdVqPa2d0rx7DFvBRzOqYQL13/Zvie
+ kuGbj3XvFibVt2ecS87WCJ/nlQxCa0KjGy0eb3i4XObtcU23fnd0ieZsQs4uDhZgzYB8LNud
+ WXx9/Q0qsWfvZw7hEdPdPRBmwRmt2O1fbfk5CQN1EtNgS372PbOjQHaIV6n+QQP2ELIa3X5Z
+ RnyaXyzwaCt6ETUHTslEaR9nOG6N3sIohIwlIywGK6WQmRBPyz5X1oF2Ld9E0crlaZYFPMRH
+ hQtFxdycIBpTlc59g7uIXzwRx65HJcyBflj72YoTzwchN6Wf2rKq9xmtkV2Eihwo8WH3XkL9
+ cjVKjg8rKRmqIMSRCpqFBWJpT1FzecQ8EMV0fk18Q5MLj441yQARAQABzRtJYW4gS2VudCA8
+ cmF2ZW5AdGhlbWF3Lm5ldD7CwXsEEwECACUCGwMGCwkIBwMCBhUIAgkKCwQWAgMBAh4BAheA
+ BQJOnjOcAhkBAAoJEOdnc4D1T9iphrYQALHK3J5rjzy4qPiLJ0EE9eJkyV1rqtzct5Ah9pu6
+ LSkqxgQCfN3NmKOoj+TpbXGagg28qTGjkFvJSlpNY7zAj+fA11UVCxERgQBOJcPrbgaeYZua
+ E4ST+w/inOdatNZRnNWGugqvez80QGuxFRQl1ttMaky7VxgwNTXcFNjClW3ifdD75gHlrU0V
+ ZUULa1a0UVip0rNc7mFUKxhEUk+8NhowRZUk0nt1JUwezlyIYPysaN7ToVeYE4W0VgpWczmA
+ tHtkRGIAgwL7DCNNJ6a+H50FEsyixmyr/pMuNswWbr3+d2MiJ1IYreZLhkGfNq9nG/+YK/0L
+ Q2/OkIsz8bOrkYLTw8WwzfTz2RXV1N2NtsMKB/APMcuuodkSI5bzzgyu1cDrGLz43faFFmB9
+ xAmKjibRLk6ChbmrZhuCYL0nn+RkL036jMLw5F1xiu2ltEgK2/gNJhm29iBhvScUKOqUnbPw
+ DSMZ2NipMqj7Xy3hjw1CStEy3pCXp8/muaB8KRnf92VvjO79VEls29KuX6rz32bcBM4qxsVn
+ cOqyghSE69H3q4SY7EbhdIfacUSEUV+m/pZK5gnJIl6n1Rh6u0MFXWttvu0j9JEl92Ayj8u8
+ J/tYvFMpag3nTeC3I+arPSKpeWDX08oisrEp0Yw15r+6jbPjZNz7LvrYZ2fa3Am6KRn0zsFN
+ BE6c/ycBEADZzcb88XlSiooYoEt3vuGkYoSkz7potX864MSNGekek1cwUrXeUdHUlw5zwPoC
+ 4H5JF7D8q7lYoelBYJ+Mf0vdLzJLbbEtN5+v+s2UEbkDlnUQS1yRo1LxyNhJiXsQVr7WVA/c
+ 8qcDWUYX7q/4Ckg77UO4l/eHCWNnHu7GkvKLVEgRjKPKroIEnjI0HMK3f6ABDReoc741RF5X
+ X3qwmCgKZx0AkLjObXE3W769dtbNbWmW0lgFKe6dxlYrlZbq25Aubhcu2qTdQ/okx6uQ41+v
+ QDxgYtocsT/CG1u0PpbtMeIm3mVQRXmjDFKjKAx9WOX/BHpk7VEtsNQUEp1lZo6hH7jeo5me
+ CYFzgIbXdsMA9TjpzPpiWK9GetbD5KhnDId4ANMrWPNuGC/uPHDjtEJyf0cwknsRFLhL4/NJ
+ KvqAuiXQ57x6qxrkuuinBQ3S9RR3JY7R7c3rqpWyaTuNNGPkIrRNyePky/ZTgTMA5of8Wioy
+ z06XNhr6mG5xT+MHztKAQddV3xFy9f3Jrvtd6UvFbQPwG7Lv+/UztY5vPAzp7aJGz2pDbb0Q
+ BC9u1mrHICB4awPlja/ljn+uuIb8Ow3jSy+Sx58VFEK7ctIOULdmnHXMFEihnOZO3NlNa6q+
+ XZOK7J00Ne6y0IBAaNTM+xMF+JRc7Gx6bChES9vxMyMbXwARAQABwsFfBBgBAgAJBQJOnP8n
+ AhsMAAoJEOdnc4D1T9iphf4QAJuR1jVyLLSkBDOPCa3ejvEqp4H5QUogl1ASkEboMiWcQJQd
+ LaH6zHNySMnsN6g/UVhuviANBxtW2DFfANPiydox85CdH71gLkcOE1J7J6Fnxgjpc1Dq5kxh
+ imBSqa2hlsKUt3MLXbjEYL5OTSV2RtNP04KwlGS/xMfNwQf2O2aJoC4mSs4OeZwsHJFVF8rK
+ XDvL/NzMCnysWCwjVIDhHBBIOC3mecYtXrasv9nl77LgffyyaAAQZz7yZcvn8puj9jH9h+mr
+ L02W+gd+Sh6Grvo5Kk4ngzfT/FtscVGv9zFWxfyoQHRyuhk0SOsoTNYN8XIWhosp9GViyDtE
+ FXmrhiazz7XHc32u+o9+WugpTBZktYpORxLVwf9h1PY7CPDNX4EaIO64oyy9O3/huhOTOGha
+ nVvqlYHyEYCFY7pIfaSNhgZs2aV0oP13XV6PGb5xir5ah+NW9gQk/obnvY5TAVtgTjAte5tZ
+ +coCSBkOU1xMiW5Td7QwkNmtXKHyEF6dxCAMK1KHIqxrBaZO27PEDSHaIPHePi7y4KKq9C9U
+ 8k5V5dFA0mqH/st9Sw6tFbqPkqjvvMLETDPVxOzinpU2VBGhce4wufSIoVLOjQnbIo1FIqWg
+ Dx24eHv235mnNuGHrG+EapIh7g/67K0uAzwp17eyUYlE5BMcwRlaHMuKTil6
+In-Reply-To: <177906210551.3947082.4313294634549021141@noble.neil.brown.name>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: C3827564B02
+X-Rspamd-Queue-Id: 404C8565344
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[themaw.net,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64];
+	R_DKIM_ALLOW(-0.20)[themaw.net:s=fm2,messagingengine.com:s=fm3];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-88084-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[gmail.com,davemloft.net,google.com,kernel.org,redhat.com,lwn.net,linuxfoundation.org];
-	TAGGED_FROM(0.00)[bounces-88082-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_FIVE(0.00)[5];
+	FREEMAIL_TO(0.00)[brown.name,birthelmer.com,gmail.com];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[themaw.net:+,messagingengine.com:+];
+	RCPT_COUNT_TWELVE(0.00)[13];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[enelsonmoore@gmail.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[10];
+	FROM_NEQ_ENVFROM(0.00)[raven@themaw.net,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[gmail.com:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,suse.cz:email,smc.com:url,perftech.com:url,qis.net:url]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,messagingengine.com:dkim,ddn.com:email]
 X-Rspamd-Action: no action
 
-The ARCnet documentation contains a lot of outdated and irrelevant
-information (such as changes in decades-old driver versions and
-messages from a former maintainer) and has some writing style issues.
-Remove this unnecessary information and improve the writing style. Also
-remove links to pages that no longer exist.
+Hi Neil, ;)
 
-Signed-off-by: Ethan Nelson-Moore <enelsonmoore@gmail.com>
----
- Documentation/networking/arcnet-hardware.rst | 36 +++++-----
- Documentation/networking/arcnet.rst          | 69 +++-----------------
- 2 files changed, 26 insertions(+), 79 deletions(-)
+I just happen to have been caught by this problem too!
 
-diff --git a/Documentation/networking/arcnet-hardware.rst b/Documentation/networking/arcnet-hardware.rst
-index 17450e8e6ca7..37c016cee353 100644
---- a/Documentation/networking/arcnet-hardware.rst
-+++ b/Documentation/networking/arcnet-hardware.rst
-@@ -8,10 +8,8 @@ ARCnet Hardware
- 
- .. note::
- 
--   1) This file is a supplement to arcnet.rst.  Please read that for general
--      driver configuration help.
--   2) This file is no longer Linux-specific.  It should probably be moved out
--      of the kernel sources.  Ideas?
-+   This file is a supplement to arcnet.rst.  Please read that for general
-+   driver configuration help.
- 
- Because so many people (myself included) seem to have obtained ARCnet cards
- without manuals, this file contains a quick introduction to ARCnet hardware
-@@ -134,13 +132,11 @@ And now to the cabling.  What you can connect together:
-    network.
- 
- 2. A card to a passive hub.  Remember that all unused connectors on the hub
--   must be properly terminated with 93 Ohm (or something else if you don't
--   have the right ones) terminators.
-+   must be properly terminated with 93 Ohm terminators (or something else if you
-+   don't have the right ones), although the network may work without
-+   terminators.
- 
--	(Avery's note: oops, I didn't know that.  Mine (TV cable) works
--	anyway, though.)
--
--3. A card to an active hub.  Here is no need to terminate the unused
-+3. A card to an active hub.  Here there is no need to terminate the unused
-    connectors except some kind of aesthetic feeling.  But, there may not be
-    more than eleven active hubs between any two computers.  That of course
-    doesn't limit the number of active hubs on the network.
-@@ -150,7 +146,7 @@ And now to the cabling.  What you can connect together:
- 5. An active hub to passive hub.
- 
- Remember that you cannot connect two passive hubs together.  The power loss
--implied by such a connection is too high for the net to operate reliably.
-+implied by such a connection is too high for the network to operate reliably.
- 
- An example of a typical ARCnet network::
- 
-@@ -163,8 +159,8 @@ An example of a typical ARCnet network::
- 		    |
- 		    S
- 
--The BUS topology is very similar to the one used by Ethernet.  The only
--difference is in cable and terminators: they should be 93 Ohm.  Ethernet
-+The BUS topology is very similar to the one used by 10BASE2 Ethernet.  The only
-+difference is in cable and terminators: they should be 93 Ohm. 10BASE2 Ethernet
- uses 50 Ohm impedance. You use T connectors to put the computers on a single
- line of cable, the bus. You have to put terminators at both ends of the
- cable. A typical BUS ARCnet network looks like::
-@@ -177,7 +173,7 @@ cable. A typical BUS ARCnet network looks like::
-   T - T connector
- 
- But that is not all! The two types can be connected together.  According to
--the official documentation the only way of connecting them is using an active
-+the official documentation, the only way of connecting them is using an active
- hub::
- 
- 	 A------T------T------TR
-@@ -186,7 +182,7 @@ hub::
- 	 |
- 	 S
- 
--The official docs also state that you can use STAR cards at the ends of
-+The official docs also state that you can use STAR cards at the ends of a
- BUS network in place of a BUS card and a terminator::
- 
-      S------T------T------S
-@@ -211,7 +207,7 @@ example::
- 	   |   |      S------T----H---S   |
- 	   S   S             B    R       S
- 
--A basically different cabling scheme is used with Twisted Pair cabling. Each
-+A completely different cabling scheme is used with Twisted Pair cabling. Each
- of the TP cards has two RJ (phone-cord style) connectors.  The cards are
- then daisy-chained together using a cable connecting every two neighboring
- cards.  The ends are terminated with RJ 93 Ohm terminators which plug into
-@@ -292,11 +288,13 @@ Setting the Jumpers
-     Make sure you set ETS1 and ETS2 to the SAME VALUE for all cards on your
-     network.
- 
--Also, on many cards (not mine, though) there are red and green LED's.
--Vojtech Pavlik <vojtech@suse.cz> tells me this is what they mean:
-+LED Indicators
-+==============
-+
-+Many cards have red and green LEDs, which have the following meanings:
- 
- 	=============== =============== =====================================
--	GREEN           RED             Status
-+	Green           Red             Status
- 	=============== =============== =====================================
- 	OFF             OFF             Power off
- 	OFF             Short flashes   Cabling problems (broken cable or not
-diff --git a/Documentation/networking/arcnet.rst b/Documentation/networking/arcnet.rst
-index ce1b009bef96..4e541aa44aec 100644
---- a/Documentation/networking/arcnet.rst
-+++ b/Documentation/networking/arcnet.rst
-@@ -12,26 +12,6 @@ ARCnet
-    and cabling information if you're like many of us and didn't happen to get a
-    manual with your ARCnet card.
- 
--Since no one seems to listen to me otherwise, perhaps a poem will get your
--attention::
--
--		This driver's getting fat and beefy,
--		But my cat is still named Fifi.
--
--Hmm, I think I'm allowed to call that a poem, even though it's only two
--lines.  Hey, I'm in Computer Science, not English.  Give me a break.
--
--The point is:  I REALLY REALLY REALLY REALLY REALLY want to hear from you if
--you test this and get it working.  Or if you don't.  Or anything.
--
--ARCnet 0.32 ALPHA first made it into the Linux kernel 1.1.80 - this was
--nice, but after that even FEWER people started writing to me because they
--didn't even have to install the patch.  <sigh>
--
--Come on, be a sport!  Send me a success report!
--
--(hey, that was even better than my original poem... this is getting bad!)
--
- ----
- 
- These are the ARCnet drivers for Linux.
-@@ -62,31 +42,9 @@ netdev@vger.kernel.org and make sure to Cc: maintainer listed in
- Other Drivers and Info
- ----------------------
- 
--You can try my ARCNET page on the World Wide Web at:
--
--	http://www.qis.net/~jschmitz/arcnet/
--
--Also, SMC (one of the companies that makes ARCnet cards) has a WWW site you
--might be interested in, which includes several drivers for various cards
--including ARCnet.  Try:
--
--	http://www.smc.com/
--
--Performance Technologies makes various network software that supports
--ARCnet:
--
--	http://www.perftech.com/ or ftp to ftp.perftech.com.
--
--Novell makes a networking stack for DOS which includes ARCnet drivers.  Try
--FTPing to ftp.novell.com.
--
--You can get the Crynwr packet driver collection (including arcether.com, the
--one you'll want to use with ARCnet cards) from
--oak.oakland.edu:/simtel/msdos/pktdrvr. It won't work perfectly on a 386+
--without patches, though, and also doesn't like several cards.  Fixed
--versions are available on my WWW page, or via e-mail if you don't have WWW
--access.
-+You can try JoAnne Schmitz's ARCNET page on the World Wide Web at:
- 
-+	https://www.qis.net/~jschmitz/arcnet/
- 
- 
- Supported Hardware
-@@ -162,9 +120,8 @@ LAN Manager and Windows for Workgroups:
- 	are incompatible with the Internet standard.  They try to pretend
- 	the cards are Ethernet, and confuse everyone else on the network.
- 
--	However, v2.00 and higher of the Linux ARCnet driver supports this
--	protocol via the 'arc0e' device.  See the section on "Multiprotocol
--	Support" for more information.
-+	The Linux ARCnet driver supports this protocol via the 'arc0e' device.
-+	See the section on "Multiprotocol Support" for more information.
- 
- 	Using the freeware Samba server and clients for Linux, you can now
- 	interface quite nicely with TCP/IP-based WfWg or Lan Manager
-@@ -199,7 +156,7 @@ NetBSD/AmiTCP:
- Using Multiprotocol ARCnet
- --------------------------
- 
--The ARCnet driver v2.10 ALPHA supports three protocols, each on its own
-+The ARCnet driver supports three protocols, each on its own
- "virtual network device":
- 
- 	======  ===============================================================
-@@ -391,7 +348,7 @@ can set up your network then:
- It works: what now?
- -------------------
- 
--Send mail following :ref:`arcnet-netdev`. Describe your setup, preferably
-+:ref:`Send an email to netdev <arcnet-netdev>`. Describe your setup, preferably
- including driver version, kernel version, ARCnet card model, CPU type, number
- of systems on your network, and list of software in use.
- 
-@@ -435,16 +392,8 @@ You can change the debug level without recompiling the kernel by typing::
- where "xxx" is the debug level you want.  For example, "metric 1015" would put
- you at debug level 15.  Debug level 7 is currently the default.
- 
--Note that the debug level is (starting with v1.90 ALPHA) a binary
--combination of different debug flags; so debug level 7 is really 1+2+4 or
--D_NORMAL+D_EXTRA+D_INIT.  To include D_DURING, you would add 16 to this,
--resulting in debug level 23.
-+Note that the debug level is a binary combination of different debug flags;
-+debug level 7 is really 1+2+4 or D_NORMAL+D_EXTRA+D_INIT.  To include D_DURING,
-+you would add 16 to this, resulting in debug level 23.
- 
- If you don't understand that, you probably don't want to know anyway.
--E-mail me about your problem.
--
--
--I want to send money: what now?
---------------------------------
--
--Go take a nap or something.  You'll feel better in the morning.
--- 
-2.43.0
+See below.
 
+On 18/5/26 07:55, NeilBrown wrote:
+> On Fri, 15 May 2026, Horst Birthelmer wrote:
+>> From: Horst Birthelmer <hbirthelmer@ddn.com>
+>>
+>> The dcache only shrinks under memory pressure, which is rarely reached
+>> on machines with ample RAM, so cached negative dentries can accumulate
+>> without bound.  Give administrators a soft cap they can set,
+>> and a background worker that prefers negative dentries when reclaiming.
+>>
+>> Two new sysctls under /proc/sys/fs/:
+>>
+>>    dentry-limit             -- soft cap on nr_dentry.  0 (default)
+>>                                disables the feature; behaviour is then
+>>                                identical to before.
+> Is a system-wide cap really a suitable tool?  What guidance would you
+> give to sysadmins who are considering setting a number?
+>
+> Is there a better approach?
+
+That's a good question.
+
+
+In my RFC (with a different, almost trivial, approach) to get a feel for
+
+what people thought of the idea of limiting dentry going to the LRU a
+
+number of similar comments came up. The commit e6957c99dca5 (("vfs: Delete
+
+the associated dentry when deleting a file") is something like what we
+
+want but also doesn't use a limit and so lacks a calculation to work
+
+that out. It's probably a little bit "too" aggressive.
+
+
+Worse still my claim in the RFC that many entries in the dcache can lead
+
+to a performance problem with long hash chains didn't hold true when I
+
+looked closer at it. For example (and TBH I've forgotten the actual numbers
+
+now but these should be close-ish), with the dcache at 12 Million entries
+
+with around 8 million negative, AFAICT, leads to an average hash chain
+
+length of around 12 which is a little too long but not terrible by any
+
+means. In my experience an average chain length of 8 or less performs
+
+really well so this can't realistically be used and by this time the
+
+problem is already evident.
+
+
+Leaving me at a loss for a reasonable way to calculate this.
+
+>
+> According to the email you linked, a problem arises when a directory has
+> a great many negative children.  Code which walks the list of children
+> (such as fsnotify) while holding a lock can suffer unpredictable delays
+> and result in long lock-hold times.  So maybe a limit on negative
+> dentries for any parent is what we really want.  That would be clumsy to
+> implement I imagine.
+
+But the notion of dropping the dentry in ->d_delete() on last dput() is
+
+simple enough but did see regressions (the only other place in the VFS 
+besides
+
+dentry_kill() that the inode is unlinked from the dentry on dput()). I 
+wonder
+
+if the regression wwas related to the test itself deliberately recreating
+
+deleted files and if that really is normal behaviour. By itself that should
+
+prevent almost all negative dentries being retained. Although file systems
+
+could do this as well (think XFS inode recycling) it should be reasonable to
+
+require it be left to the VFS.
+
+
+But even that's not enough given that, in my case, there would still be 
+around
+
+4 million dentries in the LRU cache and in fsnotify there are directory 
+child
+
+traversals holding the parent i_lock "spinlock" that are going to cause 
+problems.
+
+That's all that much more puzzling when I see things like commit 
+172e422ffea2
+
+("fsnotify: clear PARENT_WATCHED flags lazily") which looks like it implies
+
+the child flag depends entirely on the parent state (what am I missing 
+Amir?)
+
+so why is this traversal even retained in fsnotify?
+
+
+>
+> But what if we move dentries to the end of the list when they become
+> negative, and to the start of the list when they become positive?  Then
+> code which walks the child list could simply abort on the first
+> negative.
+>
+> I doubt that would be quite as easy as it sounds, but it would at least
+> be more focused on the observed symptom rather than some whole-system
+> number which only vaguely correlates with the observed symptom.
+>
+> Maybe a completely different approach: change children-walking code to
+> drop and retake the lock (with appropriate validation) periodically.
+> What too would address the specific symptom.
+
+Another good question.
+
+
+I have assumed that dropping and re-taking the lock cannot be done but
+
+this is a question I would like answered as well. Dropping and re-taking
+
+lock would require, as Miklos pointed out to me off-list, recording the
+
+list position with say a cursor, introducing unwanted complexity when it
+
+would be better to accept the cost of a single extra access to the parent
+
+flags (which I assume is one reason to set the flag in the child).
+
+
+>
+> Thanks for attempting to resolve this issue, but I'm not convinced that
+> you have found a good solution yet.
+
+This same sort of issue comes up again and again and I have thought about
+
+it many times without actually useful ideas and it seems like I'm not
+
+alone, ;)
+
+
+Ian
+
+>
+> NeilBrown
+>
+>
+>
+>>    dentry-limit-interval-ms -- pacing for the worker while still over
+>>                                the cap.  Default 1000, minimum 1.
+>>
+>> When the cap is exceeded, a delayed_work runs in two phases:
+>>
+>>    1. iterate_supers() draining only negative dentries from every LRU.
+>>       Positive entries are rotated past so the walk makes progress.
+>>       DCACHE_REFERENCED is ignored here on purpose -- an admin-imposed
+>>       cap should evict even hot negatives before any positive entry.
+>>    2. If still over the cap, iterate_supers() again with the same
+>>       isolate callback the memory-pressure shrinker uses.
+>>
+>> Signed-off-by: Horst Birthelmer <hbirthelmer@ddn.com>
+>> ---
+>> There was a discussion at LSFMM about servers with too many cached
+>> negative dentries.
+>> That gave me the idea to keep the dentries in general limited
+>> if the system administrator needs it to.
+>>
+>> This is somewhat related to [1] where it would address the same
+>> symptoms but in a more unobtrusive way, by just garbage collecting
+>> the negative and then the unused cache entries.
+>>
+>> The other effect I have seen regarding this is that FUSE
+>> will not forget inodes (no FORGET call to the FUSE server)
+>> even after the latest reference has been closed until much later.
+>>
+>> In a FUSE server that mirrors the kernel cached inodes in user space
+>> because it has to keep a lot of private data for every node
+>> this puts an unnecessarry memory strain on that userspace entity
+>> especially if the memory is limited for its cgroup.
+>>
+>> [1]: https://lore.kernel.org/linux-fsdevel/20260331012925.74840-1-raven@themaw.net/
+>> ---
+>>   Documentation/admin-guide/sysctl/fs.rst |  28 +++++
+>>   fs/dcache.c                             | 197 ++++++++++++++++++++++++++++++++
+>>   2 files changed, 225 insertions(+)
+>>
+>> diff --git a/Documentation/admin-guide/sysctl/fs.rst b/Documentation/admin-guide/sysctl/fs.rst
+>> index 9b7f65c3efd8..0229aea45d85 100644
+>> --- a/Documentation/admin-guide/sysctl/fs.rst
+>> +++ b/Documentation/admin-guide/sysctl/fs.rst
+>> @@ -38,6 +38,34 @@ requests.  ``aio-max-nr`` allows you to change the maximum value
+>>   ``aio-max-nr`` does not result in the
+>>   pre-allocation or re-sizing of any kernel data structures.
+>>   
+>> +dentry-limit
+>> +------------
+>> +
+>> +Soft cap on the total number of dentries allocated system-wide (i.e. on
+>> +``nr_dentry`` from ``dentry-state``).  A value of ``0`` (the default)
+>> +disables the feature and the dcache grows or shrinks only under memory
+>> +pressure as before.
+>> +
+>> +When set to a non-zero value, a background worker is woken whenever
+>> +the live dentry count exceeds the limit. The worker walks every
+>> +superblock's LRU and prefers to evict negative dentries first; if it
+>> +cannot get back under the limit using negative entries alone it falls
+>> +back to the same LRU policy used by the memory-pressure shrinker.
+>> +
+>> +The limit is *soft*: allocations never fail because of it, and brief
+>> +overshoots while the worker catches up are expected. Set the cap a
+>> +comfortable margin above your steady-state working set.
+>> +
+>> +dentry-limit-interval-ms
+>> +------------------------
+>> +
+>> +How often, in milliseconds, the ``dentry-limit`` worker re-runs while
+>> +``nr_dentry`` is still above the cap. Defaults to ``1000`` (one
+>> +second); the minimum accepted value is ``1``. Smaller values trim the
+>> +cache more aggressively at the cost of more CPU spent walking LRUs;
+>> +larger values let temporary spikes ride out before any work is done.
+>> +Has no effect when ``dentry-limit`` is ``0``.
+>> +
+>>   dentry-negative
+>>   ----------------------------
+>>   
+>> diff --git a/fs/dcache.c b/fs/dcache.c
+>> index 2c61aeea41f4..4959d2c011c0 100644
+>> --- a/fs/dcache.c
+>> +++ b/fs/dcache.c
+>> @@ -144,6 +144,19 @@ static DEFINE_PER_CPU(long, nr_dentry_unused);
+>>   static DEFINE_PER_CPU(long, nr_dentry_negative);
+>>   static int dentry_negative_policy;
+>>   
+>> +/*
+>> + * Soft cap on the total number of dentries. When non-zero and exceeded,
+>> + * a background worker prunes unused dentries (preferring negative ones)
+>> + * until we are back under the limit. Zero (the default) disables the
+>> + * feature entirely; the fast path in __d_alloc() only pays the cost of
+>> + * a READ_ONCE and a branch in that case.
+>> + */
+>> +static unsigned long sysctl_dentry_limit __read_mostly;
+>> +static unsigned int sysctl_dentry_limit_interval_ms __read_mostly = 1000;
+>> +static unsigned long dentry_limit_last_kick;
+>> +
+>> +static void dentry_limit_kick(void);
+>> +
+>>   #if defined(CONFIG_SYSCTL) && defined(CONFIG_PROC_FS)
+>>   /* Statistics gathering. */
+>>   static struct dentry_stat_t dentry_stat = {
+>> @@ -199,6 +212,20 @@ static int proc_nr_dentry(const struct ctl_table *table, int write, void *buffer
+>>   	return proc_doulongvec_minmax(table, write, buffer, lenp, ppos);
+>>   }
+>>   
+>> +/*
+>> + * Writing fs.dentry-limit should give prompt feedback to admins
+>> + * lowering the cap, so kick the worker on every successful write.
+>> + */
+>> +static int proc_dentry_limit(const struct ctl_table *table, int write,
+>> +			     void *buffer, size_t *lenp, loff_t *ppos)
+>> +{
+>> +	int ret = proc_doulongvec_minmax(table, write, buffer, lenp, ppos);
+>> +
+>> +	if (write && !ret)
+>> +		dentry_limit_kick();
+>> +	return ret;
+>> +}
+>> +
+>>   static const struct ctl_table fs_dcache_sysctls[] = {
+>>   	{
+>>   		.procname	= "dentry-state",
+>> @@ -207,6 +234,21 @@ static const struct ctl_table fs_dcache_sysctls[] = {
+>>   		.mode		= 0444,
+>>   		.proc_handler	= proc_nr_dentry,
+>>   	},
+>> +	{
+>> +		.procname	= "dentry-limit",
+>> +		.data		= &sysctl_dentry_limit,
+>> +		.maxlen		= sizeof(sysctl_dentry_limit),
+>> +		.mode		= 0644,
+>> +		.proc_handler	= proc_dentry_limit,
+>> +	},
+>> +	{
+>> +		.procname	= "dentry-limit-interval-ms",
+>> +		.data		= &sysctl_dentry_limit_interval_ms,
+>> +		.maxlen		= sizeof(sysctl_dentry_limit_interval_ms),
+>> +		.mode		= 0644,
+>> +		.proc_handler	= proc_douintvec_minmax,
+>> +		.extra1		= SYSCTL_ONE,
+>> +	},
+>>   	{
+>>   		.procname	= "dentry-negative",
+>>   		.data		= &dentry_negative_policy,
+>> @@ -1325,6 +1367,160 @@ static enum lru_status dentry_lru_isolate_shrink(struct list_head *item,
+>>   	return LRU_REMOVED;
+>>   }
+>>   
+>> +#define DENTRY_LIMIT_BATCH	1024UL
+>> +
+>> +static void dentry_limit_worker_fn(struct work_struct *work);
+>> +static DECLARE_DELAYED_WORK(dentry_limit_work, dentry_limit_worker_fn);
+>> +
+>> +/*
+>> + * Variant of dentry_lru_isolate() that only frees negative dentries.
+>> + * DCACHE_REFERENCED is intentionally not honoured here: the whole point
+>> + * of an admin-imposed cap on negatives is that even frequently-looked-up
+>> + * negative entries should be evicted before any positive dentry.
+>> + * Positive entries are rotated to the tail so the walk continues to
+>> + * make progress without disturbing their LRU position.
+>> + */
+>> +static enum lru_status dentry_lru_isolate_negative(struct list_head *item,
+>> +		struct list_lru_one *lru, void *arg)
+>> +{
+>> +	struct list_head *freeable = arg;
+>> +	struct dentry *dentry = container_of(item, struct dentry, d_lru);
+>> +
+>> +	if (!spin_trylock(&dentry->d_lock))
+>> +		return LRU_SKIP;
+>> +
+>> +	/* Same handling as dentry_lru_isolate() for in-use entries. */
+>> +	if (dentry->d_lockref.count) {
+>> +		d_lru_isolate(lru, dentry);
+>> +		spin_unlock(&dentry->d_lock);
+>> +		return LRU_REMOVED;
+>> +	}
+>> +
+>> +	if (!d_is_negative(dentry)) {
+>> +		spin_unlock(&dentry->d_lock);
+>> +		return LRU_ROTATE;
+>> +	}
+>> +
+>> +	d_lru_shrink_move(lru, dentry, freeable);
+>> +	spin_unlock(&dentry->d_lock);
+>> +	return LRU_REMOVED;
+>> +}
+>> +
+>> +struct dentry_limit_ctx {
+>> +	long over;		/* remaining dentries to evict */
+>> +	list_lru_walk_cb isolate;
+>> +};
+>> +
+>> +static void dentry_limit_prune_sb(struct super_block *sb, void *arg)
+>> +{
+>> +	struct dentry_limit_ctx *ctx = arg;
+>> +	unsigned long walked = 0;
+>> +	unsigned long budget;
+>> +
+>> +	if (ctx->over <= 0)
+>> +		return;
+>> +
+>> +	/*
+>> +	 * Walk up to one full pass of this superblock's LRU, in
+>> +	 * DENTRY_LIMIT_BATCH-sized chunks. The loop matters mainly for
+>> +	 * phase 1: dentry_lru_isolate_negative() returns LRU_ROTATE for
+>> +	 * positive dentries, which still counts against list_lru_walk()'s
+>> +	 * nr_to_walk. A single batch can therefore finish having freed
+>> +	 * nothing when positives crowd the head of the LRU, and without
+>> +	 * the inner loop the worker would have to wait a full
+>> +	 * dentry-limit-interval-ms before retrying never reaching the
+>> +	 * negatives buried behind a long run of positives.
+>> +	 *
+>> +	 * The budget is snapshot at entry so a filesystem allocating
+>> +	 * dentries faster than we drain them can't keep us spinning here
+>> +	 * forever; freshly added dentries are picked up on the next
+>> +	 * worker invocation.
+>> +	 *
+>> +	 * Phase 2 normally exits much sooner: its isolate callback frees
+>> +	 * any non-referenced dentry, so ctx->over typically hits zero
+>> +	 * inside the first batch. The worst-case over-eviction is one
+>> +	 * batch past the cap, which is within the soft semantics of
+>> +	 * fs.dentry-limit.
+>> +	 */
+>> +	budget = list_lru_count(&sb->s_dentry_lru);
+>> +
+>> +	while (ctx->over > 0 && walked < budget) {
+>> +		LIST_HEAD(dispose);
+>> +		unsigned long nr;
+>> +		long freed;
+>> +
+>> +		nr = min(DENTRY_LIMIT_BATCH, budget - walked);
+>> +		freed = list_lru_walk(&sb->s_dentry_lru, ctx->isolate,
+>> +				      &dispose, nr);
+>> +		shrink_dentry_list(&dispose);
+>> +
+>> +		ctx->over -= freed;
+>> +		walked += nr;
+>> +
+>> +		cond_resched();
+>> +	}
+>> +}
+>> +
+>> +static void dentry_limit_worker_fn(struct work_struct *work)
+>> +{
+>> +	struct dentry_limit_ctx ctx;
+>> +	unsigned long limit = READ_ONCE(sysctl_dentry_limit);
+>> +	unsigned int ms;
+>> +	long nr;
+>> +
+>> +	if (!limit)
+>> +		return;
+>> +
+>> +	nr = get_nr_dentry();
+>> +	if (nr <= (long)limit)
+>> +		return;
+>> +
+>> +	ctx.over = nr - (long)limit;
+>> +
+>> +	/* Phase 1: drain negative dentries across every superblock. */
+>> +	ctx.isolate = dentry_lru_isolate_negative;
+>> +	iterate_supers(dentry_limit_prune_sb, &ctx);
+>> +
+>> +	/* Phase 2: still over? Apply the ordinary LRU policy. */
+>> +	if (ctx.over > 0) {
+>> +		ctx.isolate = dentry_lru_isolate;
+>> +		iterate_supers(dentry_limit_prune_sb, &ctx);
+>> +	}
+>> +
+>> +	/*
+>> +	 * Re-arm while still above the limit. Re-read the sysctls in
+>> +	 * case the admin raised the cap or disabled the feature during
+>> +	 * the walk.
+>> +	 */
+>> +	limit = READ_ONCE(sysctl_dentry_limit);
+>> +	if (!limit || get_nr_dentry() <= (long)limit)
+>> +		return;
+>> +
+>> +	ms = READ_ONCE(sysctl_dentry_limit_interval_ms);
+>> +	queue_delayed_work(system_unbound_wq, &dentry_limit_work,
+>> +			   msecs_to_jiffies(ms));
+>> +}
+>> +
+>> +static void dentry_limit_kick(void)
+>> +{
+>> +	unsigned long limit = READ_ONCE(sysctl_dentry_limit);
+>> +	unsigned long now;
+>> +
+>> +	if (!limit)
+>> +		return;
+>> +	if (delayed_work_pending(&dentry_limit_work))
+>> +		return;
+>> +
+>> +	now = jiffies;
+>> +	if (time_before(now, READ_ONCE(dentry_limit_last_kick) + HZ / 10))
+>> +		return;
+>> +	WRITE_ONCE(dentry_limit_last_kick, now);
+>> +
+>> +	if (get_nr_dentry() <= (long)limit)
+>> +		return;
+>> +
+>> +	queue_delayed_work(system_unbound_wq, &dentry_limit_work, 0);
+>> +}
+>>   
+>>   /**
+>>    * shrink_dcache_sb - shrink dcache for a superblock
+>> @@ -1868,6 +2064,7 @@ static struct dentry *__d_alloc(struct super_block *sb, const struct qstr *name)
+>>   	}
+>>   
+>>   	this_cpu_inc(nr_dentry);
+>> +	dentry_limit_kick();
+>>   
+>>   	return dentry;
+>>   }
+>>
+>> ---
+>> base-commit: 5d6919055dec134de3c40167a490f33c74c12581
+>> change-id: 20260513-limit-dentries-cache-63685729672b
+>>
+>> Best regards,
+>> -- 
+>> Horst Birthelmer <hbirthelmer@ddn.com>
+>>
+>>
+>>
+>
 
