@@ -1,276 +1,521 @@
-Return-Path: <linux-doc+bounces-88168-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88170-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4MMRO6kLC2pN/gQAu9opvQ
-	(envelope-from <linux-doc+bounces-88168-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 14:52:57 +0200
+	id MJJiHKQMC2pN/gQAu9opvQ
+	(envelope-from <linux-doc+bounces-88170-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 14:57:08 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7DED456D134
-	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 14:52:56 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id F223756D296
+	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 14:57:07 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 46C4B3050A70
-	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 12:50:12 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 44EA230E80F3
+	for <lists+linux-doc@lfdr.de>; Mon, 18 May 2026 12:50:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C85F543DA28;
-	Mon, 18 May 2026 12:50:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3ADD044A723;
+	Mon, 18 May 2026 12:50:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Ec0dCnIp"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="A+iE65dw";
+	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="lq0PJ5IT"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 26008413D85
-	for <linux-doc@vger.kernel.org>; Mon, 18 May 2026 12:50:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.54
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779108611; cv=none; b=lUakkc27utol4faC4iikwy2Z5z6ISIM3dWbe6j6DgDUuluCc9OFM5C0XSxWjeEMuAJxVhnG8o9pmh6neARIW8hTmcEd7t6/C3PYutGj859eP3HUKiMQGed/bpggT69e3+JAc2jOoUFu28LTL/CjaPBVFiSWLuxVs7XgcMvMGeKQ=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779108611; c=relaxed/simple;
-	bh=71B0nRHlWp/xojgpspfis42HrCowovQsOla+aGirePQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=JR9KOmg26VYNnLWK6VGWLKRuhdBPfhwaozCx3YNRRCfGSwsyqAG4IwFbwhIYzqmFMut0+M3NKZ17DQGz535bgNImtRg8lieUi7knGUl+6GmDZb4dIhWcWxPKjUaeC0JiZOp4FTgbrv3IawERFvm5WysIjN3eYLJD0AAj5eFYDkI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Ec0dCnIp; arc=none smtp.client-ip=209.85.218.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-bd8f6ef4ba6so35869366b.3
-        for <linux-doc@vger.kernel.org>; Mon, 18 May 2026 05:50:09 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 152AC449EB0
+	for <linux-doc@vger.kernel.org>; Mon, 18 May 2026 12:50:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=170.10.129.124
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1779108647; cv=pass; b=Qc7H9obR7ghka3JqvTumKZdtQL2pi4/7aDo4NRSj5gATxY0BBJS7b1m+SozneZvB6lbzBzpQPks6KaJo/QxDUKxzh2qwlZf0ugfcxLN/Zg9WLpRkCWLEMk26aEqJ7nYXHS9Ea84NIHYRimO+W1Wl4budpnIhfVgTeMvJGxq8Hbo=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1779108647; c=relaxed/simple;
+	bh=2SxzrS0DGp89vUJWVtqZoEzOzAxn7JVMcHC7WjqbRbY=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=Omo8h42PdijJgY8ixjvPEZwtgouEHyDMAQC3pN32jy+U8zaIaqrwnxC+43if8ZTpgDJmx5s21GYnRMPxRyTk++efbDuQESPf7ebSAkhtLsutQl4tdzBuqCVxRk1b4szDA6Lp83IRHMDaEBsF9o9NhZwRGTSV7L8V+YHdQLF/ViQ=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=A+iE65dw; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=lq0PJ5IT; arc=pass smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1779108644;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=eRhhMtWag6dFHgJ+9KXfvh39yjXyi0gyNukph7J5ngs=;
+	b=A+iE65dwepd/3+vSRtmUf/iqrI1tMTKPLQkOHG6tYXmDxvkUlafCeCC/KLrSGhAf3vG2rz
+	Fo3zoZcMDMFXCmHBXlS8F1azQjjDOQJQYc4YVFYCtu9a+2RAtAi0xJvN9rdrqiLNz4IRkn
+	t8YGkqbc1bh31TZmT/BVq2u71N38ZvY=
+Received: from mail-yw1-f199.google.com (mail-yw1-f199.google.com
+ [209.85.128.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-643-pat7ypulNQGo1tXzRW9tkw-1; Mon, 18 May 2026 08:50:43 -0400
+X-MC-Unique: pat7ypulNQGo1tXzRW9tkw-1
+X-Mimecast-MFC-AGG-ID: pat7ypulNQGo1tXzRW9tkw_1779108642
+Received: by mail-yw1-f199.google.com with SMTP id 00721157ae682-7bd8cb261c3so29846577b3.1
+        for <linux-doc@vger.kernel.org>; Mon, 18 May 2026 05:50:42 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779108642; cv=none;
+        d=google.com; s=arc-20240605;
+        b=Wdv3j3DA0y041xLFcdKxrm2B8nrPJ5VYrXmDiQ89ivwcg/+NtrpfdTnc3b4YnI8e3b
+         uko6uFpDD7doxcHVbnJVhgdt2ytGsXI/Fx155kdr80NwmLUCOqfe9XgFQn705+WiNA1p
+         bL51h6D7OBPrJ3q4LCQiTjsvaq6pSDIoa9R3jKzwVyfXpzHpa8/xkIxNa0Ti4ZUvhYj6
+         syAK4qtTiZNG5UB7lah64xCQJHUhAgNKfwRUNnTFIzbYVehsBX9eMUlwooiEbc8oesSH
+         3slnd3EUa5kiR1tdhiYDZirAxHqQf1I4r8h70i/Nj4FEmZIqTFK/Z5m/jkiY434hlp7V
+         gJMg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=eRhhMtWag6dFHgJ+9KXfvh39yjXyi0gyNukph7J5ngs=;
+        fh=yV3lPMoW5wZ/bMAzLmLwOI9PAYvKzef2A2vJeN+SKfU=;
+        b=XIWwT5mSv4ciML7c8XGFwwAdfViHwwgXrNP6trSsb29VpuTv1uEv9ndm09i17dbw71
+         xPbCZlZU++Nc9OJYhvD0JaPl91UMKio3a1+iu44Qnsj+bLxoMRuw8fCTQsqgloU6TRzh
+         bGKJdgk/KueXiOUTA+WCYwCrc5ZET3XavYHK1w/iTkyebGLca73bnb8UHJ+Ii8wUq3ef
+         TGPKQSxvK7Jf6IqGRbizHpn/BVGp5/AiLV98H7XyLXDpGhtCOXfdSTKmtO3rXDTAw2us
+         JKh8oAGIxeAZMwRJHw06eNZgTlu6013MMEEjE3m3gzI5DplbTC0QWdlcgU6Jz/UbqQ5Q
+         KLow==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779108608; x=1779713408; darn=vger.kernel.org;
-        h=user-agent:in-reply-to:content-disposition:mime-version:references
-         :reply-to:message-id:subject:cc:to:from:date:from:to:cc:subject:date
+        d=redhat.com; s=google; t=1779108642; x=1779713442; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=VKGGrrG5MRCv9nIegptkqAObQ0mJWvKMrBMMlmCctkg=;
-        b=Ec0dCnIp7CP5F2PJoqTEPCggb70l4WstiLwLV+aM60gbS171HBPP1NwejxlSBoXH0V
-         blDYHGqA61Ia+Mfdd/YZ6fHldjPKCal+EycFIojAZuzQ/j/0H5yKUeSf1OF8hVF6R3hf
-         lqcq1AFHIVpP7uDkCPM+WItGGNT7I4zR9QZWlEaEvJdr9rzeO9Zq8DSxprko/VzD7tnz
-         8xdAcpezIDDrZ9yCA39tyWJc7QtUR3JvtoH/Gng6Bk+t70sEDpePjt/Fv9tluQNWJTJC
-         Q5aoc9Va7tgQ4arsTNLlfAvPs/cE5JYN8tQne0EWHIwP+7LP5tQg39ExDNZc75yc2HiH
-         D82w==
+        bh=eRhhMtWag6dFHgJ+9KXfvh39yjXyi0gyNukph7J5ngs=;
+        b=lq0PJ5ITc/jbS0p2vTR4r+xln4hrYydzzjXl8vHR807q61LMtMN1KeD2tiLFB3zkPd
+         YNKUDQtTr0hkUcEJqGM1VjpLlyGt5T4RWiI2ipyDpzxkQ9YSv2kdQVBE+zygr8wdOVas
+         twvUYTDNudGAOIdSGLaZPy/R61JZAVVEBIqwiRwhuhTeIjXv8LHmtN3RUgebpggKPpZq
+         sgmaMuLp1dxdwLHf0J89AfMTz6IKIXL7IfhuIigDKuVpbqnascNrjSWx3Yi8dUfmqwvN
+         ScnySXTSVIaE1sFR4Gq5/Cmw85VBQnLWpFLggqV7wHRZ1jWQV8z9FNlfwMKy8r+EPOhb
+         Y+Mg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779108608; x=1779713408;
-        h=user-agent:in-reply-to:content-disposition:mime-version:references
-         :reply-to:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=VKGGrrG5MRCv9nIegptkqAObQ0mJWvKMrBMMlmCctkg=;
-        b=c6t47WFWg93LB5E3dv/dr/sytXzIpj/+oEMtTQ8OVUMku8YsBv4qQXuJZsFhPbhP9e
-         FjX6rTt1/bNciKeW4WqlS/YL1Ra3AhDwzCV6Ln1pOfAQZ67Qh/LicSAQMACpb6nkhWq6
-         e8IudT98eruhrn2wskiD6/Ng0YeHmVkVV9tU8aIJDaCECrwvHYz4LOoEHaIvBSMvwkSy
-         W8pBg3rPIErKw1ncKrZkmwav93xaopVGTDwO/iAaXeBu7EK1sMyS3QYwCuYiSQjtPYZ/
-         BoiMAKkEBGCNqoAf5xrfrnSkDaqlSXhvR37vKldAKYEUrV0eNHDVYRV2Suu4hRXOubO3
-         Lzvg==
-X-Gm-Message-State: AOJu0Yzq5ow/SL1f9NjWwObcmqVx46SAew33jixjXFgeqkK6tKxCrt5t
-	3KXuASktamIK1eU6YI9S5TTYNwXW97yX90wNXZTTTg+Dbe/dO1Y9Esj0
-X-Gm-Gg: Acq92OEIgyQPFe9xyi0A+Q6KMlnUDA7jUCnQ+rBD2NsTpIh8ZO+oCDG/ocGWSxrN5u2
-	Q6NdsOsQlWaqsjMiHl6J/61YBDa7DVKdyFsh7cY0RwOxAzxTdbCLjFYeBbvM/eSn9/BTDUFTlaR
-	ghP2OjMQv/C48OHjG3xHj0GZITKgpvyXWv/ELQRqzI4Tvc/y6LX7pY5EjjagVpo09qJO45YUgLK
-	bskV9mCHGqk7FSYqC7p5VqzDItPL9gqnIXQxWe6hRsxE0y+QHwEMcPMgYEz8kP2jb8djW4yTSH+
-	uAqro3fnINutnrRGLrgfZvNypwJfV0qU1sMDgkN2MeQJNYQlruJK7ivYww2m6tilmX53fJxaxaK
-	MQFER9iNJpZ/Nk+azR4ncyRc0i7aVcjDZtGI/9mAJsaDRZwkxCFJnbzKwbvZX8pFetQ/hgFwanj
-	QbeyARmT68N04iUmXv1t5zaTfg3PdaAllp
-X-Received: by 2002:a17:906:ee85:b0:bd1:ba38:c724 with SMTP id a640c23a62f3a-bd51790b3a8mr743116466b.32.1779108608313;
-        Mon, 18 May 2026 05:50:08 -0700 (PDT)
-Received: from localhost ([185.92.221.13])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-bd4f4dec7c4sm577430666b.40.2026.05.18.05.50.07
-        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
-        Mon, 18 May 2026 05:50:07 -0700 (PDT)
-Date: Mon, 18 May 2026 12:50:07 +0000
-From: Wei Yang <richard.weiyang@gmail.com>
-To: Nico Pache <npache@redhat.com>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-mm@kvack.org, linux-trace-kernel@vger.kernel.org,
-	aarcange@redhat.com, akpm@linux-foundation.org,
-	anshuman.khandual@arm.com, apopple@nvidia.com, baohua@kernel.org,
-	baolin.wang@linux.alibaba.com, byungchul@sk.com,
-	catalin.marinas@arm.com, cl@gentwo.org, corbet@lwn.net,
-	dave.hansen@linux.intel.com, david@kernel.org, dev.jain@arm.com,
-	gourry@gourry.net, hannes@cmpxchg.org, hughd@google.com,
-	jack@suse.cz, jackmanb@google.com, jannh@google.com,
-	jglisse@google.com, joshua.hahnjy@gmail.com, kas@kernel.org,
-	lance.yang@linux.dev, liam@infradead.org, ljs@kernel.org,
-	mathieu.desnoyers@efficios.com, matthew.brost@intel.com,
-	mhiramat@kernel.org, mhocko@suse.com, peterx@redhat.com,
-	pfalcato@suse.de, rakie.kim@sk.com, raquini@redhat.com,
-	rdunlap@infradead.org, richard.weiyang@gmail.com,
-	rientjes@google.com, rostedt@goodmis.org, rppt@kernel.org,
-	ryan.roberts@arm.com, shivankg@amd.com, sunnanyong@huawei.com,
-	surenb@google.com, thomas.hellstrom@linux.intel.com, tiwai@suse.de,
-	usamaarif642@gmail.com, vbabka@suse.cz, vishal.moola@gmail.com,
-	wangkefeng.wang@huawei.com, will@kernel.org, willy@infradead.org,
-	yang@os.amperecomputing.com, ying.huang@linux.alibaba.com,
-	ziy@nvidia.com, zokeefe@google.com
-Subject: Re: [PATCH mm-unstable v17 00/14] khugepaged: mTHP support
-Message-ID: <20260518125007.a4z3pw4r73uuwja4@master>
-Reply-To: Wei Yang <richard.weiyang@gmail.com>
-References: <20260511185817.686831-1-npache@redhat.com>
+        d=1e100.net; s=20251104; t=1779108642; x=1779713442;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=eRhhMtWag6dFHgJ+9KXfvh39yjXyi0gyNukph7J5ngs=;
+        b=Gr93G6WSrwXj2OEyNAma5Y4b7ybDWkeeN1J4NQb94bUs5oXhv4IxPKYD4ItNGzNKSs
+         y3LW0b0wip2SY88YP8mNz1lZXOS4iYfJdMY9Q0LyeTgcRF8VEhJpYdZ1m5oguOH+IjDl
+         PB81nLjQ8RklhEfA0bxEI4RogWkgdWOV0HbED+i+BroSw+PeTERgJtdPNGsEbq1v8anU
+         7ZdOnl0HY0jUPOeepZUrZ3wkg47Rq3Dxbvv++lL9IogA7SjcYd9FacimocNgusWEmXgg
+         O6FfkoYNuMrBx/HmUj9v0xi/om+ooWa1GvgZHLEtUWEJ5WEPjgzE/GljNeYFkRI4fYT0
+         kMcA==
+X-Forwarded-Encrypted: i=1; AFNElJ/ggMFVoDs80IXp8BJ3wMMXW714GU09H5oBVFqh9K6qr2jcKIBzF8EOqOgdMXY1FqNl8MfFcwpQssU=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwzmzNxvnANOnpl4SXqDsr7j4GlqZvoZqqe7SNyXpmYoUlG4PVE
+	XPfbkNX/gnKxSS7xqFhf/Mpbq6E+4kIaulYwZvAHUc2dw8GyJFlT+lqqnfdua8YY6GZ2nX1vCp4
+	CbLk5/V+Mzs7ciQ2XhQ82I0x6SP984UKsEhWS0H4JO7/yOSFL78YgdgBWFay44SUPvpnMP+GQRr
+	KWXnzJp2h2Nv0BdmI59mxQlNgZoyU3jrYmdZu5
+X-Gm-Gg: Acq92OEDCAHO0JwjLl5MQ61jn+tmKZ9wCdOs9/Vu7J4gKIx5b9psjUWMmLRG3v8aqMj
+	nvxgksxvL3FKJrWY9Lvq0twMulQUfKZFLDk4AyJcUhd4eSo9s/IhcPZv0Cn1FORQBjCSp/IxFvg
+	V0qRwe+KgtlIgPVe6LaoJuNph87SbVOLTn1xnTZg59fOZUPudyMU/PIvH3CU13ZnM3Z5jJH/d4O
+	CPP5w==
+X-Received: by 2002:a05:690c:c504:b0:7ba:f0ed:c5ea with SMTP id 00721157ae682-7c95c202cb8mr151839407b3.39.1779108642033;
+        Mon, 18 May 2026 05:50:42 -0700 (PDT)
+X-Received: by 2002:a05:690c:c504:b0:7ba:f0ed:c5ea with SMTP id
+ 00721157ae682-7c95c202cb8mr151838957b3.39.1779108641320; Mon, 18 May 2026
+ 05:50:41 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260511185817.686831-1-npache@redhat.com>
-User-Agent: NeoMutt/20170113 (1.7.2)
-X-Rspamd-Queue-Id: 7DED456D134
+References: <20260512-v2_20230123_tjmercier_google_com-v1-0-6326701c3691@redhat.com>
+ <20260512-v2_20230123_tjmercier_google_com-v1-2-6326701c3691@redhat.com>
+ <20260515-hinschauen-effizient-9e3a05a94f2e@brauner> <CABdmKX0d6Zsg+_TxXjB80UZR23ZvXzxYoWzORgwmx=ZiuE+Nzw@mail.gmail.com>
+ <208fb820-d8eb-4832-a343-ef8b360e8120@amd.com>
+In-Reply-To: <208fb820-d8eb-4832-a343-ef8b360e8120@amd.com>
+From: Albert Esteve <aesteve@redhat.com>
+Date: Mon, 18 May 2026 14:50:30 +0200
+X-Gm-Features: AVHnY4JVeUZbQl3fJZojeCwshobXzZdw1dcYItf6HM2iKIo4t723byYD2xZMKVg
+Message-ID: <CADSE00Lh95ygoXGKJGsYvQGEsFV8sVmwEC3uvh8M6r3ERzaJwg@mail.gmail.com>
+Subject: Re: [PATCH RFC 2/5] dma-heap: charge dma-buf memory via explicit memcg
+To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+Cc: "T.J. Mercier" <tjmercier@google.com>, Christian Brauner <brauner@kernel.org>, Tejun Heo <tj@kernel.org>, 
+	Johannes Weiner <hannes@cmpxchg.org>, =?UTF-8?Q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>, 
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+	Sumit Semwal <sumit.semwal@linaro.org>, Michal Hocko <mhocko@kernel.org>, 
+	Roman Gushchin <roman.gushchin@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
+	Muchun Song <muchun.song@linux.dev>, Andrew Morton <akpm@linux-foundation.org>, 
+	Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, 
+	John Stultz <jstultz@google.com>, Paul Moore <paul@paul-moore.com>, 
+	James Morris <jmorris@namei.org>, "Serge E. Hallyn" <serge@hallyn.com>, 
+	Stephen Smalley <stephen.smalley.work@gmail.com>, Ondrej Mosnacek <omosnace@redhat.com>, 
+	Shuah Khan <shuah@kernel.org>, cgroups@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, 
+	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, 
+	linux-mm@kvack.org, linux-security-module@vger.kernel.org, 
+	selinux@vger.kernel.org, linux-kselftest@vger.kernel.org, mripard@kernel.org, 
+	echanude@redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Rspamd-Queue-Id: F223756D296
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-88168-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[google.com,kernel.org,cmpxchg.org,suse.com,lwn.net,linuxfoundation.org,linaro.org,linux.dev,linux-foundation.org,collabora.com,arm.com,paul-moore.com,namei.org,hallyn.com,gmail.com,redhat.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,kvack.org];
+	FROM_HAS_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-88170-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_REPLYTO(0.00)[gmail.com];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TO_DN_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	HAS_REPLYTO(0.00)[richard.weiyang@gmail.com];
-	RCVD_COUNT_FIVE(0.00)[5];
-	RCPT_COUNT_GT_50(0.00)[59];
+	DKIM_TRACE(0.00)[redhat.com:+];
+	MISSING_XM_UA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[35];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[richardweiyang@gmail.com,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kvack.org,redhat.com,linux-foundation.org,arm.com,nvidia.com,kernel.org,linux.alibaba.com,sk.com,gentwo.org,lwn.net,linux.intel.com,gourry.net,cmpxchg.org,google.com,suse.cz,gmail.com,linux.dev,infradead.org,efficios.com,intel.com,suse.com,suse.de,goodmis.org,amd.com,huawei.com,os.amperecomputing.com];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[aesteve@redhat.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	REPLYTO_EQ_FROM(0.00)[]
+	RCVD_COUNT_FIVE(0.00)[5];
+	TAGGED_RCPT(0.00)[linux-doc];
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 
-On Mon, May 11, 2026 at 12:58:00PM -0600, Nico Pache wrote:
->The following series provides khugepaged with the capability to collapse
->anonymous memory regions to mTHPs.
+On Mon, May 18, 2026 at 9:20=E2=80=AFAM Christian K=C3=B6nig
+<christian.koenig@amd.com> wrote:
 >
->To achieve this we generalize the khugepaged functions to no longer depend
->on PMD_ORDER. Then during the PMD scan, we use a bitmap to track individual
->pages that are occupied (!none/zero). After the PMD scan is done, we use
->the bitmap to find the optimal mTHP sizes for the PMD range. The
->restriction on max_ptes_none is removed during the scan, to make sure we
->account for the whole PMD range in the bitmap. When no mTHP size is
->enabled, the legacy behavior of khugepaged is maintained.
+> On 5/15/26 19:06, T.J. Mercier wrote:
+> > On Fri, May 15, 2026 at 6:53=E2=80=AFAM Christian Brauner <brauner@kern=
+el.org> wrote:
+> >>
+> >> On Tue, May 12, 2026 at 11:10:44AM +0200, Albert Esteve wrote:
+> >>> On embedded platforms a central process often allocates dma-buf
+> >>> memory on behalf of client applications. Without a way to
+> >>> attribute the charge to the requesting client's cgroup, the
+> >>> cost lands on the allocator, making per-cgroup memory limits
+> >>> ineffective for the actual consumers.
+> >>>
+> >>> Add charge_pid_fd to struct dma_heap_allocation_data. When set to
+> >>
+> >> Please be aware that pidfds come in two flavors:
+> >>
+> >> thread-group pidfds and thread-specific pidfds. Make sure that your AP=
+I
+> >> doesn't implicitly depend on this distinction not existing.
+> >
+> > Hi Christian,
+> >
+> > Memcg is not a controller that supports "thread mode" so all threads
+> > in a group should belong to the same memcg.
 >
->We currently only support max_ptes_none values of 0 or HPAGE_PMD_NR - 1
->(ie 511). If any other value is specified, the kernel will emit a warning
->and no mTHP collapse will be attempted. If a mTHP collapse is attempted,
->but contains swapped out, or shared pages, we don't perform the collapse.
->It is now also possible to collapse to mTHPs without requiring the PMD THP
->size to be enabled. These limitations are to prevent collapse "creep"
->behavior. This prevents constantly promoting mTHPs to the next available
->size, which would occur because a collapse introduces more non-zero pages
->that would satisfy the promotion condition on subsequent scans.
+> BTW: Exactly that is the requirement automotive has with their native con=
+text use case.
 >
->Patch 1-2:   Generalize hugepage_vma_revalidate and alloc_charge_folio
->	     for arbitrary orders.
->Patch 3:     Rework max_ptes_* handling into helper functions
->Patch 4:     Generalize __collapse_huge_page_* for mTHP support
->Patch 5:     Require collapse_huge_page to enter/exit with the lock dropped
->Patch 6:     Generalize collapse_huge_page for mTHP collapse
->Patch 7:     Skip collapsing mTHP to smaller orders
->Patch 8-9:   Add per-order mTHP statistics and tracepoints
->Patch 10:    Introduce collapse_allowable_orders helper function
->Patch 11-13: Introduce bitmap and mTHP collapse support, fully enabled
->Patch 14:    Documentation
+> The use case is that you have a deamon which has multiple threads were ea=
+ch one is acting on behalve of some other process.
 >
->Testing:
->- Built for x86_64, aarch64, ppc64le, and s390x
->- ran all arches on test suites provided by the kernel-tests project
->- internal testing suites: functional testing and performance testing
->- selftests mm
->- I created a test script that I used to push khugepaged to its limits
->   while monitoring a number of stats and tracepoints. The code is
->   available here[1] (Run in legacy mode for these changes and set mthp
->   sizes to inherit)
->   The summary from my testings was that there was no significant
->   regression noticed through this test. In some cases my changes had
->   better collapse latencies, and was able to scan more pages in the same
->   amount of time/work, but for the most part the results were consistent.
->- redis testing. I did some testing with these changes along with my defer
->  changes (see followup [2] post for more details). We've decided to get
->  the mTHP changes merged first before attempting the defer series.
->- some basic testing on 64k page size.
->- lots of general use.
+> At the moment we basically say they are simply not using cgroups for that=
+ use case, but it would be really nice if we could handle that as well.
+>
+> Summarizing the requirement of that use case: You need a different cgroup=
+ for each thread of a process.
+
+Hi Christian,
+
+Thanks for sharing this atuomotive usecase. If I understand correctly,
+the actual requirement is attributing dma-buf charges to the right
+client, not putting each daemon thread in a different cgroup? If so,
+the `charge_pid_fd` approach achieves this directly by passing the
+client's `pid_fd`, without needing to add per-thread cgroup
+infrastructure.
+
+>
+> Regards,
+> Christian.
+>
+> >
+> > Checking the flags from pidfd_get_pid would be the best way for an
+> > explicit check of the pidfd type?
+> >
+> >>> a valid pidfd, DMA_HEAP_IOCTL_ALLOC resolves the target task's
+> >>> memcg and charges the buffer there via mem_cgroup_charge_dmabuf()
+> >>> inside dma_heap_buffer_alloc(). Without charge_pid_fd, and with
+> >>> the mem_accounting module parameter enabled, the buffer is charged
+> >>> to the allocator's own cgroup.
+> >>>
+> >>> Additionally, commit 3c227be90659 ("dma-buf: system_heap: account for
+> >>> system heap allocation in memcg") adds __GFP_ACCOUNT to system-heap
+> >>> page allocations. Keeping __GFP_ACCOUNT would charge the same pages
+> >>> twice (once to kmem, once to MEMCG_DMABUF), thus remove it and route
+> >>> all accounting through a single MEMCG_DMABUF path.
+> >>>
+> >>> Usage examples:
+> >>>
+> >>>   1. Central allocator charging to a client at allocation time.
+> >>>      The allocator knows the client's PID (e.g., from binder's
+> >>>      sender_pid) and uses pidfd to attribute the charge:
+> >>>
+> >>>        pid_t client_pid =3D txn->sender_pid;
+> >>>        int pidfd =3D pidfd_open(client_pid, 0);
+> >>>
+> >>>        struct dma_heap_allocation_data alloc =3D {
+> >>>            .len             =3D buffer_size,
+> >>>            .fd_flags        =3D O_RDWR | O_CLOEXEC,
+> >>>            .charge_pid_fd   =3D pidfd,
+> >>>        };
+> >>>        ioctl(heap_fd, DMA_HEAP_IOCTL_ALLOC, &alloc);
+> >>>        close(pidfd);
+> >>>        /* alloc.fd is now charged to client's cgroup */
+> >>>
+> >>>   2. Default allocation (no pidfd, mem_accounting=3D1).
+> >>>      When charge_pid_fd is not set and the mem_accounting module
+> >>>      parameter is enabled, the buffer is charged to the allocator's
+> >>>      own cgroup:
+> >>>
+> >>>        struct dma_heap_allocation_data alloc =3D {
+> >>>            .len      =3D buffer_size,
+> >>>            .fd_flags =3D O_RDWR | O_CLOEXEC,
+> >>>        };
+> >>>        ioctl(heap_fd, DMA_HEAP_IOCTL_ALLOC, &alloc);
+> >>>        /* charged to current process's cgroup */
+> >>>
+> >>> Current limitations:
+> >>>
+> >>>  - Single-owner model: a dma-buf carries one memcg charge regardless =
+of
+> >>>    how many processes share it. Means only the first owner (and expor=
+ter)
+> >>>    of the shared buffer bears the charge.
+> >>>  - Only memcg accounting supported. While this makes sense for system
+> >>>    heap buffers, other heaps (e.g., CMA heaps) will require selective=
+ly
+> >>>    charging also for the dmem controller.
+> >>>
+> >>> Signed-off-by: Albert Esteve <aesteve@redhat.com>
+> >>> ---
+> >>>  Documentation/admin-guide/cgroup-v2.rst |  5 ++--
+> >>>  drivers/dma-buf/dma-buf.c               | 16 ++++---------
+> >>>  drivers/dma-buf/dma-heap.c              | 42 +++++++++++++++++++++++=
++++++++---
+> >>>  drivers/dma-buf/heaps/system_heap.c     |  2 --
+> >>>  include/uapi/linux/dma-heap.h           |  6 +++++
+> >>>  5 files changed, 53 insertions(+), 18 deletions(-)
+> >>>
+> >>> diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/=
+admin-guide/cgroup-v2.rst
+> >>> index 8bdbc2e866430..824d269531eb1 100644
+> >>> --- a/Documentation/admin-guide/cgroup-v2.rst
+> >>> +++ b/Documentation/admin-guide/cgroup-v2.rst
+> >>> @@ -1636,8 +1636,9 @@ The following nested keys are defined.
+> >>>               structures.
+> >>>
+> >>>         dmabuf (npn)
+> >>> -             Amount of memory used for exported DMA buffers allocate=
+d by the cgroup.
+> >>> -             Stays with the allocating cgroup regardless of how the =
+buffer is shared.
+> >>> +             Amount of memory used for exported DMA buffers allocate=
+d by or on
+> >>> +             behalf of the cgroup. Stays with the allocating cgroup =
+regardless
+> >>> +             of how the buffer is shared.
+> >>>
+> >>>         workingset_refault_anon
+> >>>               Number of refaults of previously evicted anonymous page=
+s.
+> >>> diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+> >>> index ce02377f48908..23fb758b78297 100644
+> >>> --- a/drivers/dma-buf/dma-buf.c
+> >>> +++ b/drivers/dma-buf/dma-buf.c
+> >>> @@ -181,8 +181,11 @@ static void dma_buf_release(struct dentry *dentr=
+y)
+> >>>        */
+> >>>       BUG_ON(dmabuf->cb_in.active || dmabuf->cb_out.active);
+> >>>
+> >>> -     mem_cgroup_uncharge_dmabuf(dmabuf->memcg, PAGE_ALIGN(dmabuf->si=
+ze) / PAGE_SIZE);
+> >>> -     mem_cgroup_put(dmabuf->memcg);
+> >>> +     if (dmabuf->memcg) {
+> >>> +             mem_cgroup_uncharge_dmabuf(dmabuf->memcg,
+> >>> +                                       PAGE_ALIGN(dmabuf->size) / PA=
+GE_SIZE);
+> >>> +             mem_cgroup_put(dmabuf->memcg);
+> >>> +     }
+> >>>
+> >>>       dmabuf->ops->release(dmabuf);
+> >>>
+> >>> @@ -764,13 +767,6 @@ struct dma_buf *dma_buf_export(const struct dma_=
+buf_export_info *exp_info)
+> >>>               dmabuf->resv =3D resv;
+> >>>       }
+> >>>
+> >>> -     dmabuf->memcg =3D get_mem_cgroup_from_mm(current->mm);
+> >>> -     if (!mem_cgroup_charge_dmabuf(dmabuf->memcg, PAGE_ALIGN(dmabuf-=
+>size) / PAGE_SIZE,
+> >>> -                                   GFP_KERNEL)) {
+> >>> -             ret =3D -ENOMEM;
+> >>> -             goto err_memcg;
+> >>> -     }
+> >>> -
+> >>>       file->private_data =3D dmabuf;
+> >>>       file->f_path.dentry->d_fsdata =3D dmabuf;
+> >>>       dmabuf->file =3D file;
+> >>> @@ -781,8 +777,6 @@ struct dma_buf *dma_buf_export(const struct dma_b=
+uf_export_info *exp_info)
+> >>>
+> >>>       return dmabuf;
+> >>>
+> >>> -err_memcg:
+> >>> -     mem_cgroup_put(dmabuf->memcg);
+> >>>  err_file:
+> >>>       fput(file);
+> >>>  err_module:
+> >>> diff --git a/drivers/dma-buf/dma-heap.c b/drivers/dma-buf/dma-heap.c
+> >>> index ac5f8685a6494..ff6e259afcdc0 100644
+> >>> --- a/drivers/dma-buf/dma-heap.c
+> >>> +++ b/drivers/dma-buf/dma-heap.c
+> >>> @@ -7,13 +7,17 @@
+> >>>   */
+> >>>
+> >>>  #include <linux/cdev.h>
+> >>> +#include <linux/cgroup.h>
+> >>>  #include <linux/device.h>
+> >>>  #include <linux/dma-buf.h>
+> >>>  #include <linux/dma-heap.h>
+> >>> +#include <linux/memcontrol.h>
+> >>> +#include <linux/sched/mm.h>
+> >>>  #include <linux/err.h>
+> >>>  #include <linux/export.h>
+> >>>  #include <linux/list.h>
+> >>>  #include <linux/nospec.h>
+> >>> +#include <linux/pidfd.h>
+> >>>  #include <linux/syscalls.h>
+> >>>  #include <linux/uaccess.h>
+> >>>  #include <linux/xarray.h>
+> >>> @@ -55,10 +59,12 @@ MODULE_PARM_DESC(mem_accounting,
+> >>>                "Enable cgroup-based memory accounting for dma-buf hea=
+p allocations (default=3Dfalse).");
+> >>>
+> >>>  static int dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
+> >>> -                              u32 fd_flags,
+> >>> -                              u64 heap_flags)
+> >>> +                              u32 fd_flags, u64 heap_flags,
+> >>> +                              struct mem_cgroup *charge_to)
+> >>>  {
+> >>>       struct dma_buf *dmabuf;
+> >>> +     unsigned int nr_pages;
+> >>> +     struct mem_cgroup *memcg =3D charge_to;
+> >>>       int fd;
+> >>>
+> >>>       /*
+> >>> @@ -73,6 +79,22 @@ static int dma_heap_buffer_alloc(struct dma_heap *=
+heap, size_t len,
+> >>>       if (IS_ERR(dmabuf))
+> >>>               return PTR_ERR(dmabuf);
+> >>>
+> >>> +     nr_pages =3D len / PAGE_SIZE;
+> >>> +
+> >>> +     if (memcg)
+> >>> +             css_get(&memcg->css);
+> >>> +     else if (mem_accounting)
+> >>> +             memcg =3D get_mem_cgroup_from_mm(current->mm);
+> >>> +
+> >>> +     if (memcg) {
+> >>> +             if (!mem_cgroup_charge_dmabuf(memcg, nr_pages, GFP_KERN=
+EL)) {
+> >>> +                     mem_cgroup_put(memcg);
+> >>> +                     dma_buf_put(dmabuf);
+> >>> +                     return -ENOMEM;
+> >>> +             }
+> >>> +             dmabuf->memcg =3D memcg;
+> >>> +     }
+> >>> +
+> >>>       fd =3D dma_buf_fd(dmabuf, fd_flags);
+> >>>       if (fd < 0) {
+> >>>               dma_buf_put(dmabuf);
+> >>> @@ -102,6 +124,9 @@ static long dma_heap_ioctl_allocate(struct file *=
+file, void *data)
+> >>>  {
+> >>>       struct dma_heap_allocation_data *heap_allocation =3D data;
+> >>>       struct dma_heap *heap =3D file->private_data;
+> >>> +     struct mem_cgroup *memcg =3D NULL;
+> >>> +     struct task_struct *task;
+> >>> +     unsigned int pidfd_flags;
+> >>>       int fd;
+> >>>
+> >>>       if (heap_allocation->fd)
+> >>> @@ -113,9 +138,20 @@ static long dma_heap_ioctl_allocate(struct file =
+*file, void *data)
+> >>>       if (heap_allocation->heap_flags & ~DMA_HEAP_VALID_HEAP_FLAGS)
+> >>>               return -EINVAL;
+> >>>
+> >>> +     if (heap_allocation->charge_pid_fd) {
+> >>> +             task =3D pidfd_get_task(heap_allocation->charge_pid_fd,=
+ &pidfd_flags);
+> >>
+> >> Will always get a thread-group leader pidfd and will fail if this is a
+> >> thread-specific pidfd. pidfd_open(1234, PIDFD_THREAD) can be used to
+> >> open a thread-specific pidfd.
+> >>
+> >>> +             if (IS_ERR(task))
+> >>> +                     return PTR_ERR(task);
+> >>> +
+> >>> +             memcg =3D get_mem_cgroup_from_mm(task->mm);
+> >>> +             put_task_struct(task);
+> >>> +     }
+> >>> +
+> >>>       fd =3D dma_heap_buffer_alloc(heap, heap_allocation->len,
+> >>>                                  heap_allocation->fd_flags,
+> >>> -                                heap_allocation->heap_flags);
+> >>> +                                heap_allocation->heap_flags,
+> >>> +                                memcg);
+> >>> +     mem_cgroup_put(memcg);
+> >>>       if (fd < 0)
+> >>>               return fd;
+> >>>
+> >>> diff --git a/drivers/dma-buf/heaps/system_heap.c b/drivers/dma-buf/he=
+aps/system_heap.c
+> >>> index 03c2b87cb1112..95d7688167b93 100644
+> >>> --- a/drivers/dma-buf/heaps/system_heap.c
+> >>> +++ b/drivers/dma-buf/heaps/system_heap.c
+> >>> @@ -385,8 +385,6 @@ static struct page *alloc_largest_available(unsig=
+ned long size,
+> >>>               if (max_order < orders[i])
+> >>>                       continue;
+> >>>               flags =3D order_flags[i];
+> >>> -             if (mem_accounting)
+> >>> -                     flags |=3D __GFP_ACCOUNT;
+> >>>               page =3D alloc_pages(flags, orders[i]);
+> >>>               if (!page)
+> >>>                       continue;
+> >>> diff --git a/include/uapi/linux/dma-heap.h b/include/uapi/linux/dma-h=
+eap.h
+> >>> index a4cf716a49fa6..e02b0f8cbc6a1 100644
+> >>> --- a/include/uapi/linux/dma-heap.h
+> >>> +++ b/include/uapi/linux/dma-heap.h
+> >>> @@ -29,6 +29,10 @@
+> >>>   *                   handle to the allocated dma-buf
+> >>>   * @fd_flags:                file descriptor flags used when allocat=
+ing
+> >>>   * @heap_flags:              flags passed to heap
+> >>> + * @charge_pid_fd:   optional pidfd of the process whose cgroup shou=
+ld be
+> >>> + *                   charged for this allocation; 0 means charge the=
+ calling
+> >>> + *                   process's cgroup
+> >>> + * @__padding:               reserved, must be zero
+> >>>   *
+> >>>   * Provided by userspace as an argument to the ioctl
+> >>>   */
+> >>> @@ -37,6 +41,8 @@ struct dma_heap_allocation_data {
+> >>>       __u32 fd;
+> >>>       __u32 fd_flags;
+> >>>       __u64 heap_flags;
+> >>> +     __u32 charge_pid_fd;
+> >>> +     __u32 __padding;
+> >>>  };
+> >>>
+> >>>  #define DMA_HEAP_IOC_MAGIC           'H'
+> >>>
+> >>> --
+> >>> 2.53.0
+> >>>
 >
 
-Two links are missing. I got them from previous version.
-
-[1] - https://gitlab.com/npache/khugepaged_mthp_test
-[2] - https://lore.kernel.org/lkml/20250515033857.132535-1-npache@redhat.com/
-
-And the test in [1] is a performance test. I am thinking whether we want a
-functional test in selftests.
-
-I did a quick try with following change and some hack.
-
-@@ -744,6 +765,51 @@ static void collapse_max_ptes_none(struct collapse_context *c, struct mem_ops *o
- 	ksft_test_result_report(exit_status, "%s\n", __func__);
- }
- 
-+static void collapse_mth_ptes(struct collapse_context *c, struct mem_ops *ops)
-+{
-+	struct thp_settings settings = *thp_current_settings();
-+	void *p;
-+	int i;
-+
-+	/* Disable mthp on fault */
-+	for (i = 0; i < NR_ORDERS; i++) {
-+		settings.hugepages[i].enabled = THP_NEVER;
-+	}
-+	thp_push_settings(&settings);
-+
-+	p = ops->setup_area(1);
-+
-+	ops->fault(p, 0, hpage_pmd_size);
-+
-+	/* Expect all order-0 folio after fault */
-+	memset(expected_orders, 0, sizeof(int) * (pmd_order + 1));
-+	expected_orders[0] = hpage_pmd_nr;
-+	if (check_folio_orders(p, hpage_pmd_size, pagemap_fd,
-+					   kpageflags_fd, expected_orders,
-+					   (pmd_order + 1)))
-+		ksft_exit_fail_msg("Unexpected huge page at fault\n");
-+
-+	/* Enable mthp before collapse */
-+	thp_pop_settings();
-+	settings.hugepages[2].enabled = THP_ALWAYS;
-+	thp_push_settings(&settings);
-+
-+	c->collapse("Collapse fully populated PTE table with order 2", p, 1,
-+		    ops, true);
-+
-+	/* Expect all order-2 folio after collapse */
-+	memset(expected_orders, 0, sizeof(int) * (pmd_order + 1));
-+	expected_orders[2] = 1 << (pmd_order - 2);
-+	if (check_folio_orders(p, hpage_pmd_size, pagemap_fd,
-+					   kpageflags_fd, expected_orders,
-+					   (pmd_order + 1)))
-+		ksft_exit_fail_msg("Unexpected page order\n");
-+
-+	ops->cleanup_area(p, hpage_pmd_size);
-+	thp_pop_settings();
-+	ksft_test_result_report(exit_status, "%s\n", __func__);
-+}
-+
- static void collapse_swapin_single_pte(struct collapse_context *c, struct mem_ops *ops)
- {
- 	void *p;
-
-This leverage check_after_split_folio_orders() in split_huge_page_test.c to
-check folio order in PMD range.
-
--- 
-Wei Yang
-Help you, Help me
 
