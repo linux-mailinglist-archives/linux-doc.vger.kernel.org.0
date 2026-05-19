@@ -1,144 +1,129 @@
-Return-Path: <linux-doc+bounces-88516-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88517-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id r+OBN6mqDGq4kgUAu9opvQ
-	(envelope-from <linux-doc+bounces-88516-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 20:23:37 +0200
+	id oE0XMjarDGq4kgUAu9opvQ
+	(envelope-from <linux-doc+bounces-88517-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 20:25:58 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C3DE58397D
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 20:23:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B8505839FA
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 20:25:57 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E1D403010156
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 18:19:51 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 7591930C5405
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 18:20:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D462B367F5E;
-	Tue, 19 May 2026 18:19:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5703D367B93;
+	Tue, 19 May 2026 18:20:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=weissschuh.net header.i=@weissschuh.net header.b="NdQD2zkT"
+	dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b="OPRFuf0A"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from todd.t-8ch.de (todd.t-8ch.de [159.69.126.157])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE229367F31;
-	Tue, 19 May 2026 18:19:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=159.69.126.157
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0DA92365A0B;
+	Tue, 19 May 2026 18:20:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779214787; cv=none; b=PxWQIkMIxnzU9KjKP3QEOzTBJqd7J6oAJNey82EcyM5D5kxWKbcp+7aqBYH8CePKtJ0c9UcSILjvl7N3uLuYi0w5lc8H0OzhYsb262KoU5M3+SurOFH0UD1yaQ7Fj7kgPszL3mmZHVgaoK+kXdx6X8SKUjSvmgykaO8+zqk8QxM=
+	t=1779214851; cv=none; b=jOmLvEvQE7F+xyBnEX+x1ukcPyMCSFhX1qIireemV15iZyu0ZuZAJypbIAWI8nSQ9kjaAUTB5mfVstUCsUOL/4G9gSqR+boEY7eL2YHWglz1AdCRwBxABxwAHKS/NSLWXh2WAGyPWDP5UXnWrGtSATVSGla7dC/EWZtFqEiu71o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779214787; c=relaxed/simple;
-	bh=v4SY6HigQ/OOsllBvHWhDfaSzCSvRwcpB55NIroxYRI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=uXDLTIbSjkKCvW8FSKka23dSeioBLkP/TF9hvv1x+D/ma2+wwp80AraaRtSREogQ1SpbPs7rHTceF4HhiBIhXC8xxpfUWZaq1U1NXf+LOpfMtpPmzDFriYNB/ec3xyBrHUzahilqPpfw3iQTdYYVd2ALec4zXI++SlTBg9Zu6Ic=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=weissschuh.net; spf=pass smtp.mailfrom=weissschuh.net; dkim=pass (1024-bit key) header.d=weissschuh.net header.i=@weissschuh.net header.b=NdQD2zkT; arc=none smtp.client-ip=159.69.126.157
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=weissschuh.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=weissschuh.net
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=weissschuh.net;
-	s=mail; t=1779214783;
-	bh=v4SY6HigQ/OOsllBvHWhDfaSzCSvRwcpB55NIroxYRI=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=NdQD2zkTt1Vg9+d5xPbFs/rZabXzVYqYNbkmay7bmbURQRlVQgmdR/B+lNrKO/wnl
-	 1sbEfjBOCBZinr7ADwsrKwPOLPyNy01sn050oiI8Z1+dSOENnfOYkdJcWLo/dMo86Q
-	 BmkG/C5RjZiti4BDcsEE/fXj4HnkbrPupz3pqug4=
-Date: Tue, 19 May 2026 20:19:43 +0200
-From: Thomas =?utf-8?Q?Wei=C3=9Fschuh?= <linux@weissschuh.net>
-To: Sami Tolvanen <samitolvanen@google.com>
-Cc: Alexei Starovoitov <ast@kernel.org>, 
-	Daniel Borkmann <daniel@iogearbox.net>, Andrii Nakryiko <andrii@kernel.org>, 
-	Eduard Zingerman <eddyz87@gmail.com>, Kumar Kartikeya Dwivedi <memxor@gmail.com>, 
-	Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
-	Luis Chamberlain <mcgrof@kernel.org>, Petr Pavlu <petr.pavlu@suse.com>, 
-	Daniel Gomez <da.gomez@samsung.com>, Paul Moore <paul@paul-moore.com>, 
-	James Morris <jmorris@namei.org>, "Serge E. Hallyn" <serge@hallyn.com>, 
-	Jonathan Corbet <corbet@lwn.net>, Madhavan Srinivasan <maddy@linux.ibm.com>, 
-	Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>, 
-	Naveen N Rao <naveen@kernel.org>, Mimi Zohar <zohar@linux.ibm.com>, 
-	Roberto Sassu <roberto.sassu@huawei.com>, Dmitry Kasatkin <dmitry.kasatkin@gmail.com>, 
-	Eric Snowberg <eric.snowberg@oracle.com>, Nicolas Schier <nicolas.schier@linux.dev>, 
-	Daniel Gomez <da.gomez@kernel.org>, Aaron Tomlin <atomlin@atomlin.com>, 
-	"Christophe Leroy (CS GROUP)" <chleroy@kernel.org>, Nicolas Bouchinet <nicolas.bouchinet@oss.cyber.gouv.fr>, 
-	Xiu Jianfeng <xiujianfeng@huawei.com>, Martin KaFai Lau <martin.lau@linux.dev>, 
-	Song Liu <song@kernel.org>, Yonghong Song <yonghong.song@linux.dev>, 
-	Jiri Olsa <jolsa@kernel.org>, bpf@vger.kernel.org, 
-	Fabian =?utf-8?Q?Gr=C3=BCnbichler?= <f.gruenbichler@proxmox.com>, Arnout Engelen <arnout@bzzt.net>, 
-	Mattia Rizzolo <mattia@mapreri.org>, kpcyrd <kpcyrd@archlinux.org>, 
-	Christian Heusel <christian@heusel.eu>, =?utf-8?B?Q8OianU=?= Mihai-Drosi <mcaju95@gmail.com>, 
-	Eric Biggers <ebiggers@kernel.org>, Sebastian Andrzej Siewior <bigeasy@linutronix.de>, 
-	linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arch@vger.kernel.org, 
-	linux-modules@vger.kernel.org, linux-security-module@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linuxppc-dev@lists.ozlabs.org, linux-integrity@vger.kernel.org, debian-kernel@lists.debian.org
-Subject: Re: [PATCH v5 00/14] module: Introduce hash-based integrity checking
-Message-ID: <e00a5b59-71c9-4c52-9747-0447d5e66b51@t-8ch.de>
-References: <20260505-module-hashes-v5-0-e174a5a49fce@weissschuh.net>
- <20260518215543.GA1878854@google.com>
+	s=arc-20240116; t=1779214851; c=relaxed/simple;
+	bh=pqzU8mXuzzhrRUfzmQOzq8JDrmun2MmKpWrEicP9ns8=;
+	h=Date:From:To:Cc:Subject:Message-Id:In-Reply-To:References:
+	 Mime-Version:Content-Type; b=X2kxZ1VCWyWXJ1Beis5oOb3O4TAjLGOj2MXBwloIo3/h+AuVUz6M0EuVUrFWZ0rdPNVdcrUF9BcbXBqtykZJRprqcjOVWWmojsobDwkpYusIxVUMYy4GoznJAXxtMK0IlUe64LD/Zf6SSC5pVpASTZAGRa3thXbjcX07xsR5sfY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b=OPRFuf0A; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 05EFCC2BCB3;
+	Tue, 19 May 2026 18:20:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linux-foundation.org;
+	s=korg; t=1779214850;
+	bh=pqzU8mXuzzhrRUfzmQOzq8JDrmun2MmKpWrEicP9ns8=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=OPRFuf0AXpK/r6UWnzz8bUMh0BLWYOZzeANHLn78a9/BEaRC8ddDghRtg4wAS8Bmz
+	 s2CS34wuni31S0Q/cX2xCxKfxdA7vJwD6Kgcuj4dLFUs8cU9ijnJTC5EtSFYVQ1MlZ
+	 oKmrFjPVXaMG+4UIgAuVZBWg7tvbd/7EfeOs87mA=
+Date: Tue, 19 May 2026 11:20:49 -0700
+From: Andrew Morton <akpm@linux-foundation.org>
+To: Sarthak Sharma <sarthak.sharma@arm.com>
+Cc: David Hildenbrand <david@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ Jason Gunthorpe <jgg@ziepe.ca>, John Hubbard <jhubbard@nvidia.com>, Peter
+ Xu <peterx@redhat.com>, Lorenzo Stoakes <ljs@kernel.org>,
+ "Liam R . Howlett" <Liam.Howlett@oracle.com>, Vlastimil Babka
+ <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan
+ <surenb@google.com>, Michal Hocko <mhocko@suse.com>, Shuah Khan
+ <shuah@kernel.org>, linux-mm@kvack.org, linux-kselftest@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v2 0/2] selftests/mm: separate GUP microbenchmarking
+ from functional testing
+Message-Id: <20260519112049.a85f34eb5f2af83e11ffc777@linux-foundation.org>
+In-Reply-To: <20260519120506.184512-1-sarthak.sharma@arm.com>
+References: <20260519120506.184512-1-sarthak.sharma@arm.com>
+X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260518215543.GA1878854@google.com>
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+Mime-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [-1.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[weissschuh.net,quarantine];
+	MV_CASE(0.50)[];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[weissschuh.net:s=mail];
+	R_DKIM_ALLOW(-0.20)[linux-foundation.org:s=korg];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-88516-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[kernel.org,iogearbox.net,gmail.com,arndb.de,suse.com,samsung.com,paul-moore.com,namei.org,hallyn.com,lwn.net,linux.ibm.com,ellerman.id.au,huawei.com,oracle.com,linux.dev,atomlin.com,oss.cyber.gouv.fr,vger.kernel.org,proxmox.com,bzzt.net,mapreri.org,archlinux.org,heusel.eu,linutronix.de,lists.ozlabs.org,lists.debian.org];
-	RCVD_COUNT_THREE(0.00)[3];
+	RCVD_COUNT_THREE(0.00)[4];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux@weissschuh.net,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[weissschuh.net:+];
-	RCPT_COUNT_GT_50(0.00)[52];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	DMARC_NA(0.00)[linux-foundation.org];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-88517-lists,linux-doc=lfdr.de];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[akpm@linux-foundation.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[linux-foundation.org:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[weissschuh.net:dkim,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,t-8ch.de:mid,sashiko.dev:url]
-X-Rspamd-Queue-Id: 5C3DE58397D
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:email,linux-foundation.org:mid,linux-foundation.org:dkim,sashiko.dev:url,run_vmtests.sh:url]
+X-Rspamd-Queue-Id: 2B8505839FA
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Sami,
+On Tue, 19 May 2026 17:35:04 +0530 Sarthak Sharma <sarthak.sharma@arm.com> wrote:
 
-On 2026-05-18 21:55:43+0000, Sami Tolvanen wrote:
-> On Tue, May 05, 2026 at 11:05:04AM +0200, Thomas Weißschuh wrote:
-> > The current signature-based module integrity checking has some drawbacks
-> > in combination with reproducible builds. Either the module signing key
-> > is generated at build time, which makes the build unreproducible, or a
-> > static signing key is used, which precludes rebuilds by third parties
-> > and makes the whole build and packaging process much more complicated.
-> > 
-> > The goal is to reach bit-for-bit reproducibility. Excluding certain
-> > parts of the build output from the reproducibility analysis would be
-> > error-prone and force each downstream consumer to introduce new tooling.
-> > 
-> > Introduce a new mechanism to ensure only well-known modules are loaded
-> > by embedding a merkle tree root of all modules built as part of the full
-> > kernel build into vmlinux.
+> gup_test.c currently serves two distinct purposes: microbenchmarking
+> (GUP_FAST_BENCHMARK, PIN_FAST_BENCHMARK, PIN_LONGTERM_BENCHMARK) and
+> functional correctness testing (GUP_BASIC_TEST, PIN_BASIC_TEST,
+> DUMP_USER_PAGES_TEST). Mixing these in a single binary means functional
+> tests cannot be run or reported individually, and run_vmtests.sh must
+> invoke the binary multiple times with different flag combinations to
+> cover all configurations. This patch series separates the two concerns:
+> tools/mm/gup_bench for benchmarking and tools/testing/selftests/mm/gup_test
+> for functional testing.
 > 
-> I noticed Sashiko had a few concerns about the build changes. Would you
-> mind taking a look to see if they're valid?
+> Patch 1 adds tools/mm/gup_bench.c, a standalone microbenchmark for
+> GUP_FAST, PIN_FAST and PIN_LONGTERM via the CONFIG_GUP_TEST debugfs
+> interface. It runs the same matrix of configurations as the old
+> run_gup_matrix() shell function (all three commands, read/write,
+> private/shared, four page counts, THP on/off, hugetlb), but as a
+> standalone C program under tools/mm with no dependency on kselftest.
 > 
-> https://sashiko.dev/#/patchset/20260505-module-hashes-v5-0-e174a5a49fce%40weissschuh.net
+> Patch 2 rewrites gup_test.c as a kselftest harness-based selftest. It
+> covers all five GUP kernel functions (get_user_pages, get_user_pages_fast,
+> pin_user_pages, pin_user_pages_fast, pin_user_pages with FOLL_LONGTERM)
+> plus DUMP_USER_PAGES_TEST, across 12 mapping configurations (THP on,
+> THP off and hugetlb, each across private/shared and read/write variants)
+> and four batch sizes (1, 512, 123, all pages). Results are reported as
+> standard TAP output with no command-line arguments required.
 
-I definitively have these on my list. Unfortunately I am busy with
-something else right now. But this series and the Sashiko comments
-are next.
-
-
-Thomas
+Thanks.  AI review asked a few things which seem fairly minor to me,
+but probably legitimate:
+	https://sashiko.dev/#/patchset/20260519120506.184512-1-sarthak.sharma@arm.com
 
