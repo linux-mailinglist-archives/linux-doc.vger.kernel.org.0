@@ -1,225 +1,531 @@
-Return-Path: <linux-doc+bounces-88479-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88481-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MGsdMyVtDGpjhgUAu9opvQ
-	(envelope-from <linux-doc+bounces-88479-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 16:01:09 +0200
+	id wCGjJSNvDGpKhgUAu9opvQ
+	(envelope-from <linux-doc+bounces-88481-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 16:09:39 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7195C5802C7
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 16:01:04 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E86F458047E
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 16:09:38 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 527BD30F3B02
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 13:53:56 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id A9D0D30CE40B
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 14:01:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 83EDA3ED3DC;
-	Tue, 19 May 2026 13:53:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 55ABE3FCB18;
+	Tue, 19 May 2026 14:00:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="DX90TopH"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="LoJz+aO3"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+Received: from mail-vk1-f180.google.com (mail-vk1-f180.google.com [209.85.221.180])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6E319348C63
-	for <linux-doc@vger.kernel.org>; Tue, 19 May 2026 13:53:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.221.41
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779198833; cv=pass; b=F3oAsmw2f5s3/+rQTBgyJEP8+PdZKpRBdbXTLt8E0t1FKgr7iHVSk32/GNUytNVo1wBYZuLDHHdmX5bAv6Rl1meazF/NvOdVNY2z4qk9eEPau/PWkaCxDuBRwCWAoZTnpIXv+seUfynZPqa3gd5mD+Xkl9bRbunsR/CTH/CIkqY=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779198833; c=relaxed/simple;
-	bh=QJ4KJ/g3fInpA9dxwtg4On7IOQL0oq1w0hyYLSGGBq4=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=AidrWOk7Ly4QYV8FJhNoZlllWfeCIurRekH99R3f/XHHuG8VNTo5QU3mHC6fz/bLZmdMspqfmCRjqUKqxuJuOfn/AygSQ0h6izvGM97/aqzHCBoe1dL8Q947v5My7uNlgI4M+8y7tSqdJjgMy2xk4JcM/B8d1h4AuWAcFesM72c=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=DX90TopH; arc=pass smtp.client-ip=209.85.221.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 111763F6C30
+	for <linux-doc@vger.kernel.org>; Tue, 19 May 2026 14:00:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.180
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1779199258; cv=none; b=lYlmQwrx2h/2lqzhRb7LGSrgPTeJT56ztTqyB3g3RAc52oBo1uKlp+xCcZ1QRlQexQJ3ZBye3eRvkF18Efa4YCqPtGduR7xKIIatWap9kZKWEzlaW5eI75Z9qfLJDf+BOCMweuzfdsqdU30fAZ7mzBciPzlfLvISd5fpJvGIij4=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1779199258; c=relaxed/simple;
+	bh=5WgO+Q1oi6EoEr5VWKbRb58qJkQRcAxLfQn2nSxYq3s=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=Umg37bbVuqKo7G72xoj19KIB0Ur3qcfP5iTnCnFssl2Dt0s4EosirAWPNBWx02N9d9SvC9Lkf5aoEfcxgCCSrN0kuyc7qXOGnWqV05lZRdgIMo14PPNn6uifmlgXcVfKByGIyzQmPQWYoAW8yECHY828ZdLrx4kX8W5jgWXwOP8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=LoJz+aO3; arc=none smtp.client-ip=209.85.221.180
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-44509921fbcso2217010f8f.3
-        for <linux-doc@vger.kernel.org>; Tue, 19 May 2026 06:53:50 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779198829; cv=none;
-        d=google.com; s=arc-20240605;
-        b=EPYkyasrlXDSE8z3qnp4pE+TcVMcjsjGDJntQaFI3ZAFcx9z1S077qF2MlT0xqgn1x
-         aSNolLXYnReeNzFHGvvWoWGC32XwCDrshlGZC3Hm/XxD96lienZ2Ui094xdGH+DcyIxh
-         73WhnnrKpb0aIiL0pGYIdte6kBEy7wVNxrlxSrZ2ri8vdlobObBvYJ3ClOelzsjrin92
-         VdB/IWPDRNGnyPzyloHL15TZs3MpJDqQKBGGM4q0koSw0RzpGOvMsSjmodMddZCjrRco
-         nXuSzK8f9GF3hWzVo6FamrjX1AL6P3Rv/KQ6cMNkI1kNHrLDtrO7zhVwgtycMUYsc6LV
-         gj8g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=n1LQyxnpPi+Z+D/FQN9BLFSwJyyBjmHjXirs065b7UU=;
-        fh=6nHPE+99szU4ma/363wB4kMZI5voqun/dtxoJA/e55M=;
-        b=SlZ2TbrJbM11EYVbSxNR0POfrK5/n42G9/hWExTrHEqAt6PZdfzpYEm+HjenBnapsv
-         Fsm+cD/8/yDgeaOiUlP+Th5FU469FpBTCqGXEtlLHej1Q678VvVv1D0xr1PjbpsQYmt/
-         tRg0vwdztSBIaldKllPAgzYv7gkjozelpnmkcpv2QkbWAW7VGJHQRpbLj83abWSJD4eK
-         AXAnuKa9dCkvNKXblf8oztX83Kz/jDqTxnVmVUySsxSQE/skoS1gc7m2R6d09C4KodXj
-         hIwRCRc21S4wJjdT7IAK7h4X1MEiBalLklVnNmGIKiwBMOgxRL9gceNbOH6ZZjAwE5EI
-         zW/A==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Received: by mail-vk1-f180.google.com with SMTP id 71dfb90a1353d-57602a2d80aso1024834e0c.2
+        for <linux-doc@vger.kernel.org>; Tue, 19 May 2026 07:00:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779198829; x=1779803629; darn=vger.kernel.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=n1LQyxnpPi+Z+D/FQN9BLFSwJyyBjmHjXirs065b7UU=;
-        b=DX90TopHjSFbpsklCAD6h/VLmzrMcGBksx4fZS+T3Qu0V+HwH4hBRw4bYjVORB3t/Z
-         QVU4rELXUFMd5SFX3n/YKHPQbeFDHwebe4Hm8RUK+KInuv4t4EjcMuKwlgyh008FdO/V
-         uA9HdF/muHZpRpmGyPVCQP4RbRMOEbDzazSihsm5RPJcIuKtODxgUGbHH/PA39AhgqGa
-         clJuTpNVomY0M6RDR+2EEQx+ImplURJ2ZXeFMYog3HnaVl1cORNguts16LOjZCi0TPn4
-         AOxDx/gjfRfmaIlhfZgDKsnkcety4MdWFXHbYW5DdEk79/bOwnwG9/jDBtP2rOenWjHo
-         yUNw==
+        d=gmail.com; s=20251104; t=1779199255; x=1779804055; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=8NXBBktgPsUvkC2vPEdHd/dIDOK6P5ILP1oorCTAVGY=;
+        b=LoJz+aO3+gcYgwnjj+i4rlK4vOqfYFGkiHsdBcIs3a9XkgjlFPc0CKgLeDXkIItILA
+         tkdgxRtcwrPcOydSaiJLdz8Kxzpn07W4N2OCIWsPAYmyU1E3FptYl/PPW2Hn9+uvKOll
+         mhY9Ub5Ju0XvrLs7r1yrOko24abfg+PDWbz0r/19+McRF1EGA2NrJUM02SzFl2G0soqh
+         v4Sws2+UQLWjWWq6MFEiWeMm0B7biDfCfqxJFWd70suJgkgJL7aUUa8PF2BMnJX2JJ90
+         tkKgiRdQrZMg6pWbAlxCKzWUOSMFGRoPKhA817dGIDU3ufsBUxMGIpPNwmwdtc3pjJMH
+         SiAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779198829; x=1779803629;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1779199255; x=1779804055;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=n1LQyxnpPi+Z+D/FQN9BLFSwJyyBjmHjXirs065b7UU=;
-        b=FMHRPDXjpLXy23BOC6XMxpH6VsPuoaD/+Gp1IvY9rqQYK9hWIbCaoNI6nkpHBvWs5x
-         L36x50A+jXZjbunqbq12jPTS+4Ma6vDmqjzgxWqR9nBBSj+RpZXcm2FW8onTEcGrpfa6
-         V2O3IrW2EspUS3mFbmXIbjLBdnr9qn2WvZRwuP7uo5+BeqLzlA5KYwb6aePyA5eAoIi2
-         ZSvLFQMIU+nqbkA+/U/O5wyZO2GQ/46crzIr0YWg2bfyNupeIPoyjgVVOTg3Tr/mdCwB
-         v7F1xO5E92q/oJ0bSh0rqnGIxN6YWS4LrzhojDUZj51NIcBzuylsaZsTbnEoFEKrgRVZ
-         ANRQ==
-X-Forwarded-Encrypted: i=1; AFNElJ+u3IC3a382wbUDDegoesLk8f6+7KWfVgmo4ks8X2knIFhWoT2Iq1G26mmFdd1JcFYbrYZK2/ivWxo=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwjwIjKzgvru9pXUSrC78dDrRCRLiDRTvUaWIpIZ1Hrh8M3n2JA
-	Q/0xpsxWO9BrXAQLZSnW6nNx30JhZC0byI1tVQjqJl9IOGtO5FlMusAiTG+MaJKB9/+YuIZrh7l
-	kWmk6/YOTj7bHumqmI1/nZpDH2Web6Lk9wkqVE1g=
-X-Gm-Gg: Acq92OE76EtlwwtunBBMPR9YrwsE/cpxNaJyGmSwUIQzfeD+WNXp9n2sw0VpWoV2/8B
-	5FtzdyY9wEgav7Kr8i5ZlW++56w7Sfa2pKShomArPBU1X0bjg8IRIRBpdet1/4MgGy1p7n/OdaY
-	6Z7L02X7j3xA6JI3zClvmBao5j+AtU/FWxwPRLmdlmzXuRD0mOpN4Oq4eBVLNe1Lxsxh2gmOIFY
-	+mpmUU1PWPNSmUXgaGkTEzDi+yCyQxV+dX1rIvl8vuzSMWp6sPDTAaHYG97/BS7Kgs76OHV9v6+
-	TB3+VnQmKUxSe6c6G28n
-X-Received: by 2002:a5d:5d0d:0:b0:43c:f583:126a with SMTP id
- ffacd0b85a97d-45e5c5a0cf8mr32574801f8f.14.1779198828486; Tue, 19 May 2026
- 06:53:48 -0700 (PDT)
+        bh=8NXBBktgPsUvkC2vPEdHd/dIDOK6P5ILP1oorCTAVGY=;
+        b=BSIfTuXxG6/9lZnK90eo6VqTY/1k1VwHQaECQX/k9YbBXHXTBJGRnCTf9a8Z2aIcEI
+         aUUOOMnqbM3uj4e4FQP1Nok7xlq8m+MY2EXo+ZCBs7t7HX+ORPI3VkdfSFbRuCiz51IY
+         xglVLz+ScpisFbG4ZxSNGaujfIMworAYYwTq87EoASC8HGtnA10CxMLP4zBRNgsQGy8d
+         fzNT1RoNaCs4zHP7doG7Q8ZtJThVDuPms9tyGolqrGOWqsf8ALYfH529arJQsbFkCadu
+         XwJqywJbFTUPTTObidZuVLeJk2O/ruGXJ+GioJk4YllG6ijEs1+6wuTvbeKRUx9759Xc
+         sJpg==
+X-Gm-Message-State: AOJu0YyoaNtjeXJZcfoFL3uIcQEqITMj6eCwHD/Ufa4SoqhJkNckf4WB
+	ggN+gw/lry3rcNAmJv5bDXzUcuZPtr2hmtC45yfD0Sac7zA/H13SrFP58UtmFQ==
+X-Gm-Gg: Acq92OFmLn8Rf14kXq9dJ/HDuc0arNAYxoCA9FvNYbByGnmS5HGVIYtxe0JmFLfXMkb
+	9RKyQOgAl1hO8+vf8aYiAXWxw+L3bVec4AkBw5MVhB2KIb7Uhh2uM8vd0Q2YYYDmmgH/CrWRLkI
+	eS8vqsyb/FQ5gZXZwhWaHWUhzS4B8GctNNV4iUnUSjE1TaZRLwwSfQNOZ0v9aOCoSITDW2KiKOJ
+	k6Rq0GBzs2vCi2wJKo1JaJgp+4OCjSmvelVtR/tRXSkWO3u+u2Q6XcHlx5c4yyA8oU0vQNV9LCb
+	d6OF4kgy4YX8BHrDv9x60wqVXyVRIFgZ9P7H4E5sPOE5T7JDxP8xtuehb4IoXvPWmHXjCmCeN+U
+	G5BpijFOrMrI/Is5JQqyAtxkA5fF5lq4zpUlxvHwP7+lHNq+N5bKQegYPfmC1Jn+AeAEI8JVrDv
+	KKWeaaQugmXNsWXZD9XdFaVbCpT6UMeKKgjQ+IHWxuE01mGFvYEuH26X8Mv9ytSba0Fp8xYIlv1
+	RKIDKp0um2yOHVhjnWVSNI/tn7+cg==
+X-Received: by 2002:a05:6122:2407:b0:575:637e:9509 with SMTP id 71dfb90a1353d-5760c0940d7mr9919505e0c.13.1779199253830;
+        Tue, 19 May 2026 07:00:53 -0700 (PDT)
+Received: from localhost.localdomain (smtp.hostdime.com.br. [187.45.177.18])
+        by smtp.gmail.com with ESMTPSA id a1e0cc1a2514c-95fc2c99f63sm6409407241.1.2026.05.19.07.00.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 19 May 2026 07:00:53 -0700 (PDT)
+From: Daniel Pereira <danielmaraboo@gmail.com>
+To: linux-doc@vger.kernel.org
+Cc: corbet@lwn.net,
+	Daniel Pereira <danielmaraboo@gmail.com>
+Subject: [PATCH v3 3/4] docs: pt_BR: Translate process/kernel-docs.rst into Portuguese
+Date: Tue, 19 May 2026 11:00:33 -0300
+Message-ID: <20260519140035.1031694-1-danielmaraboo@gmail.com>
+X-Mailer: git-send-email 2.47.3
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260510182856.17569-1-aayushpatilsch@gmail.com>
- <agxW8An7fRApCY1r@codewreck.org> <CABc3pKGKCLydod2NOgETP-z0T5BHep8hyy7z2UF3o+DrWEh5yw@mail.gmail.com>
-In-Reply-To: <CABc3pKGKCLydod2NOgETP-z0T5BHep8hyy7z2UF3o+DrWEh5yw@mail.gmail.com>
-From: Aayush Patil <aayushpatilsch@gmail.com>
-Date: Tue, 19 May 2026 19:23:38 +0530
-X-Gm-Features: AVHnY4JUcQHxE5CA2_Z-v_KfhWRQX-KRwhVLbvEnNr1BdXF7V1KcN6mL2SfXxH8
-Message-ID: <CABc3pKEY8QvQzWPeU9QGBFG1dtGSdseTRdXF_5MUX1MeNBV5QQ@mail.gmail.com>
-Subject: Re: [PATCH] docs/filesystems/9p: fix broken external links
-To: Dominique Martinet <asmadeus@codewreck.org>
-Cc: ericvh@kernel.org, lucho@ionkov.net, linux_oss@crudebyte.com, 
-	corbet@lwn.net, skhan@linuxfoundation.org, v9fs@lists.linux.dev, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+Content-Type: text/plain; charset=y
+Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [-1.16 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-88479-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	RSPAMD_URIBL_FAIL(0.00)[postnix.pw:query timed out,codewreck.org:query timed out];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-88481-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[lwn.net,gmail.com];
 	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	RSPAMD_EMAILBL_FAIL(0.00)[aayushpatilsch.gmail.com:query timed out];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_THREE(0.00)[3];
 	FREEMAIL_FROM(0.00)[gmail.com];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[aayushpatilsch@gmail.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[danielmaraboo@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	RCVD_COUNT_FIVE(0.00)[5];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[archive.org:url,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,mail.gmail.com:mid,postnix.pw:url,xcpu.org:url,urjc.es:url]
-X-Rspamd-Queue-Id: 7195C5802C7
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: E86F458047E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Dominique,
+Translate Documentation/process/kernel-docs.rst into Portuguese (pt_BR)
+and update the main index.
 
-Thanks for the review! Yes, the trailing S is a typo.
+The content was adapted following the RST formatting rules and the
+appropriate technical terminology for Brazilian Portuguese.
 
-Regarding the replacement links, should I include them in v2 or leave
-those entries removed since you're not sure if they're the same files?
-Happy to go either way.
+Signed-off-by: Daniel Pereira <danielmaraboo@gmail.com>
+---
+ Documentation/translations/pt_BR/index.rst    |   1 +
+ .../pt_BR/process/kernel-docs.rst             | 373 ++++++++++++++++++
+ 2 files changed, 374 insertions(+)
+ create mode 100644 Documentation/translations/pt_BR/process/kernel-docs.rst
 
-Aayush
+diff --git a/Documentation/translations/pt_BR/index.rst b/Documentation/translations/pt_BR/index.rst
+index 77c1a1cdc..76936710b 100644
+--- a/Documentation/translations/pt_BR/index.rst
++++ b/Documentation/translations/pt_BR/index.rst
+@@ -67,6 +67,7 @@ kernel e sobre como ver seu trabalho integrado.
+    :maxdepth: 1
+ 
+    Introdução <process/1.Intro>
++   Index de documentos do Kernel <process/kernel-docs>
+    Regras de licenciamento <process/license-rules>
+    Como começar <process/howto>
+    Requisitos mínimos <process/changes>
+diff --git a/Documentation/translations/pt_BR/process/kernel-docs.rst b/Documentation/translations/pt_BR/process/kernel-docs.rst
+new file mode 100644
+index 000000000..3c8d80ffa
+--- /dev/null
++++ b/Documentation/translations/pt_BR/process/kernel-docs.rst
+@@ -0,0 +1,373 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++Índice de Documentação Adicional do Kernel
++==========================================
++
++A necessidade de um documento como este tornou-se evidente na lista de discussão
++linux-kernel, uma vez que as mesmas perguntas, solicitando referências de
++informações, apareciam repetidamente.
++
++Felizmente, à medida que cada vez mais pessoas chegam ao GNU/Linux, mais pessoas
++se interessam pelo Kernel. No entanto, ler o código-fonte nem sempre é o
++suficiente. É fácil entender o código, mas perder os conceitos, a filosofia
++e as decisões de design por trás dele.
++
++Infelizmente, não há muitos documentos disponíveis para iniciantes começarem.
++E, mesmo quando existem, não havia um local "bem conhecido" que os centralizasse.
++Estas linhas tentam suprir essa falta.
++
++POR FAVOR, se você conhece algum artigo não listado aqui ou se escrever um novo
++documento, inclua uma referência a ele aqui, seguindo o processo de envio de
++patches do kernel. Quaisquer correções, ideias ou comentários também são
++bem-vindos.
++
++Todos os documentos estão catalogados com os seguintes campos: o "Título" do
++documento, o(s) "Autor(es)", a "URL" onde podem ser encontrados, algumas
++"Palavras-chave" úteis para pesquisar tópicos específicos e uma breve
++"Descrição" do documento.
++
++.. note::
++
++   Os documentos em cada seção deste documento estão ordenados por sua data de
++   publicação, do mais recente para o mais antigo. O(s) mantenedor(es) deve(m)
++   remover periodicamente recursos à medida que se tornem obsoletos ou
++   desatualizados; com exceção de livros fundamentais.
++
++Documentação na árvore do Kernel
++--------------------------------
++
++Os manuais Sphinx devem ser compilados com ``make {htmldocs | pdfdocs | epubdocs}``.
++
++    * Nome: **linux/Documentation**
++
++      :Autor: Muitos.
++      :Localização: Documentation/
++      :Palavras-chave: arquivos de texto, Sphinx.
++      :Descrição: Documentação que acompanha o código-fonte do kernel,
++        dentro do diretório Documentation. Algumas páginas deste documento
++        (incluindo este próprio documento) foram movidas para lá e podem
++        estar mais atualizadas do que a versão web.
++
++Documentação on-line
++--------------------
++
++    * Título: **Linux Kernel Mailing List Glossary**
++
++      :Autor: diversos
++      :URL: https://kernelnewbies.org/KernelGlossary
++      :Data: versão contínua (rolling)
++      :Palavras-chave: glossário, termos, linux-kernel.
++      :Descrição: Da introdução: "Este glossário destina-se a ser uma breve
++        descrição de algumas das siglas e termos que você poderá ouvir durante
++        as discussões sobre o kernel Linux".
++
++    * Título: **The Linux Kernel Module Programming Guide**
++
++      :Autor: Peter Jay Salzman, Michael Burian, Ori Pomerantz, Bob Mottram,
++        Jim Huang.
++      :URL: https://sysprog21.github.io/lkmpg/
++      :Data: 2021
++      :Palavras-chave: módulos, livro GPL, /proc, ioctls, chamadas de sistema,
++        manipuladores de interrupção.
++      :Descrição: Um excelente livro sob licença GPL sobre o tópico de
++        programação de módulos. Repleto de exemplos. Atualmente, a nova versão
++        está sendo mantida ativamente em https://github.com/sysprog21/lkmpg.
++
++Livros Publicados
++-----------------
++
++    * Title: **The Linux Memory Manager**
++
++      :Autor: Lorenzo Stoakes
++      :Editora: No Starch Press
++      :Data: Fevereiro 2025
++      :Páginas: 1300
++      :ISBN: 978-1718504462
++      :Notas: Gerenciamento de memória. Rascunho completo disponível como acesso
++        antecipado para ré-venda, lançamento completo agendado para o
++        outono de 2025. Veja https://nostarch.com/linux-memory-manager
++        para mais informações.
++
++    * Title: **Practical Linux System Administration: A Guide to Installation, Configuration, and Management, 1st Edition**
++
++      :Autor: Kenneth Hess
++      :Editora: O'Reilly Media
++      :Data: Maio, 2023
++      :Páginas: 246
++      :ISBN: 978-1098109035
++      :Notas: Administração de sistemas
++
++    * Title: **Linux Kernel Debugging: Leverage proven tools and advanced techniques to effectively debug Linux kernels and kernel modules**
++
++      :Autor: Kaiwan N Billimoria
++      :Editora: Packt Publishing Ltd
++      :Data: Agosto, 2022
++      :Páginas: 638
++      :ISBN: 978-1801075039
++      :Notas: Livro sobre depuração (debugging)
++
++    * Title: **Linux Kernel Programming: A Comprehensive Guide to Kernel Internals, Writing Kernel Modules, and Kernel Synchronization**
++
++      :Autor: Kaiwan N Billimoria
++      :Editora: Packt Publishing Ltd
++      :Data: Março, 2021 (Segunda edição publicada em 2024)
++      :Páginas: 754
++      :ISBN: 978-1789953435 (O ISBN da segunda edição é 978-1803232225)
++
++    * Title: **Linux Kernel Programming Part 2 - Char Device Drivers and Kernel Synchronization: Create user-kernel interfaces, work with peripheral I/O, and handle hardware interrupts**
++
++      :Autor: Kaiwan N Billimoria
++      :Editora: Packt Publishing Ltd
++      :Data: Março, 2021
++      :Páginas: 452
++      :ISBN: 978-1801079518
++
++    * Title: **Linux System Programming: Talking Directly to the Kernel and C Library**
++
++      :Autor: Robert Love
++      :Editora: O'Reilly Media
++      :Data: Junho, 2013
++      :Páginas: 456
++      :ISBN: 978-1449339531
++      :Notas: Livro fundamental
++
++    * Título: **Linux Kernel Development, 3rd Edition**
++
++      :Autor: Robert Love
++      :Editora: Addison-Wesley
++      :Data: Julho de 2010
++      :Páginas: 440
++      :ISBN: 978-0672329463
++      :Notas: Livro fundamental
++
++    * Título: **Linux Device Drivers, 3rd Edition**
++
++      :Autores: Jonathan Corbet, Alessandro Rubini e Greg Kroah-Hartman
++      :Editora: O'Reilly & Associates
++      :Data: 2005
++      :Páginas: 636
++      :ISBN: 0-596-00590-3
++      :Notas: Livro fundamental. Mais informações em
++        http://www.oreilly.com/catalog/linuxdrive3/
++        Formato PDF, URL: https://lwn.net/Kernel/LDD3/
++
++    * Título: **The Design of the UNIX Operating System**
++
++      :Autor: Maurice J. Bach
++      :Editora: Prentice Hall
++      :Data: 1986
++      :Páginas: 471
++      :ISBN: 0-13-201757-1
++      :Notas: Livro fundamental
++
++Diversos
++--------
++
++    * Nome: **Cross-Referencing Linux**
++
++      :URL: https://elixir.bootlin.com/
++      :Palavras-chave: Navegação em código-fonte.
++      :Descrição: Outro navegador web para o código-fonte do kernel Linux.
++        Possui muitas referências cruzadas para variáveis e funções. Você pode
++        ver onde elas são definidas e onde são utilizadas.
++
++    * Nome: **Linux Weekly News**
++
++      :URL: https://lwn.net
++      :Palavras-chave: últimas notícias do kernel.
++      :Descrição: O título diz tudo. Há uma seção fixa sobre o kernel que
++        resume o trabalho dos desenvolvedores, correções de bugs, novos recursos
++        e versões produzidas durante a semana.
++
++    * Nome: **The home page of Linux-MM**
++
++      :Autor: A equipe Linux-MM.
++      :URL: https://linux-mm.org/
++      :Palavras-chave: gerenciamento de memória, Linux-MM, mm patches, TODO,
++        docs, mailing list.
++      :Descrição: Site dedicado ao desenvolvimento do Gerenciamento de Memória
++        do Linux. Patches relacionados à memória, HOWTOs, links, desenvolvedores
++        mm... Não perca se você estiver interessado no desenvolvimento do
++        gerenciamento de memória!
++
++    * Nome: **Kernel Newbies IRC Channel and Website**
++
++      :URL: https://www.kernelnewbies.org
++      :Palavras-chave: IRC, novatos, canal, tirar dúvidas.
++      :Descrição: #kernelnewbies em irc.oftc.net.
++        O canal #kernelnewbies é uma rede de IRC dedicada ao hacker de kernel
++        "novato" (newbie). O público consiste principalmente de pessoas que estão
++        aprendendo sobre o kernel, trabalhando em projetos do kernel ou hackers
++        profissionais que desejam ajudar pessoas menos experientes.
++        O #kernelnewbies está na rede de IRC OFTC.
++        Tente acessar irc.oftc.net como seu servidor e então digite /join #kernelnewbies.
++        O site kernelnewbies também hospeda artigos, documentos, FAQs...
++
++    * Nome: **linux-kernel mailing list archives and search engines**
++
++      :URL: https://subspace.kernel.org
++      :URL: https://lore.kernel.org
++      :Palavras-chave: linux-kernel, arquivos, busca.
++      :Descrição: Alguns dos arquivadores da lista de discussão linux-kernel.
++        Se você conhece algum outro (ou um melhor), por favor, me avise.
++
++    * Nome: **The Linux Foundation YouTube channel**
++
++      :URL: https://www.youtube.com/user/thelinuxfoundation
++      :Palavras-chave: linux, vídeos, linux-foundation, youtube.
++      :Descrição: A Linux Foundation faz o upload de gravações de vídeo de seus
++        eventos colaborativos, conferências de Linux (incluindo a LinuxCon) e
++        outras pesquisas originais e conteúdos relacionados ao Linux e ao
++        desenvolvimento de software.
++
++Rust
++----
++
++    * Título: **Rust for Linux**
++
++      :Autor: diversos
++      :URL: https://rust-for-linux.com/
++      :Data: versão contínua (rolling)
++      :Palavras-chave: glossário, termos, linux-kernel, rust.
++      :Descrição Do site: "Rust for Linux é o projeto que adiciona suporte à
++        linguagem Rust ao kernel Linux. Este site pretende ser um hub de links,
++        documentação e recursos relacionados ao projeto".
++
++    * Título: **Learn Rust the Dangerous Way**
++
++      :Autor: Cliff L. Biffle
++      :URL: https://cliffle.com/p/dangerust/
++      :Data: Acessado em 11 de setembro de 2024
++      :Palavras-chave: rust, blog.
++      :Descrição: Do site: "LRtDW é uma série de artigos que coloca os recursos
++        do Rust em contexto para programadores C de baixo nível que talvez não
++        tenham uma formação formal em Ciência da Computação, o tipo de pessoa
++        que trabalha com firmware, engines de jogos, kernels de SO e afins.
++        Basicamente, pessoas como eu.". O site ilustra conversões de linha por
++        linha de C para Rust.
++
++    * Título: **The Rust Book**
++
++      :Autor: Steve Klabnik e Carol Nichols, com contribuições da comunidade Rust
++      :URL: https://doc.rust-lang.org/book/
++      :Data: Acessado em 11 de setembro de 2024
++      :Palavras-chave: rust, livro.
++      :Descrição: Do site: "Este livro abraça totalmente o potencial do Rust para
++        capacitar seus usuários. É um texto amigável e acessível destinado a
++        ajudá-lo a elevar não apenas seu conhecimento de Rust, mas também seu
++        alcance e confiança como programador em geral. Então mergulhe de cabeça,
++        prepare-se para aprender e bem-vindo à comunidade Rust!".
++
++    * Título: **Rust for the Polyglot Programmer**
++
++      :Autor: Ian Jackson
++      :URL: https://www.chiark.greenend.org.uk/~ianmdlvl/rust-polyglot/index.html
++      :Data: Dezembro de 2022
++      :Palavras-chave: rust, blog, tooling.
++      :Descrição: Do site: "Existem muitos guias e introduções ao Rust. Este é
++        algo diferente: destina-se ao programador experiente que já conhece
++        muitas outras linguagens de programação. Tento ser abrangente o suficiente
++        para servir de ponto de partida para qualquer área do Rust, mas evito
++        entrar em detalhes excessivos, exceto onde as coisas não são como você
++        poderia esperar. Além disso, este guia não é inteiramente isento de
++        opiniões, incluindo recomendações de bibliotecas (crates), ferramentas, etc.".
++
++    * Título: **Fasterthanli.me**
++
++      :Autor: Amos Wenger
++      :URL: https://fasterthanli.me/
++      :Data: Acessado em 11 de setembro de 2024
++      :Palavras-chave: rust, blog, notícias.
++      :Descrição: Do site: "Eu crio artigos e vídeos sobre como os computadores
++        funcionam. Meu conteúdo é de formato longo, didático e exploratório
++        e frequentemente uma desculpa para ensinar Rust!".
++
++    * Título: **Comprehensive Rust**
++
++      :Autor: Equipe Android do Google
++      :URL: https://google.github.io/comprehensive-rust/
++      :Data: Acessado em 13 de setembro de 2024
++      :Palavras-chave: rust, blog.
++      :Descrição: Do site: "O curso cobre todo o espectro do Rust, desde a
++        sintaxe básica até tópicos avançados como genéricos e tratamento de erros".
++
++    * Título: **The Embedded Rust Book**
++
++      :Autor: Múltiplos colaboradores, principalmente Jorge Aparicio
++      :URL: https://docs.rust-embedded.org/book/
++      :Data: Acessado em 13 de setembro de 2024
++      :Palavras-chave: rust, blog.
++      :Descrição: Do site: "Um livro introdutório sobre o uso da linguagem de
++        programação Rust em sistemas embarcados 'Bare Metal', como microcontroladores".
++
++    * Título: **Experiment: Improving the Rust Book**
++
++      :Autor: Cognitive Engineering Lab na Brown University
++      :URL: https://rust-book.cs.brown.edu/
++      :Data: Acessado em 22 de setembro de 2024
++      :Palavras-chave: rust, blog.
++      :Descrição: Do site: "O objetivo deste experimento é avaliar e melhorar o
++        conteúdo do Rust Book para ajudar as pessoas a aprenderem Rust de forma
++        mais eficaz".
++
++    * Título: **New Rustacean** (podcast)
++
++      :Autor: Chris Krycho
++      :URL: https://newrustacean.com/
++      :Data: Acessado em 22 de setembro de 2024
++      :Palavras-chave: rust, podcast.
++      :Descrição: Do site: "Este é um podcast sobre aprender a linguagem de
++        programação Rust do zero! Além desta página inicial elegante, todo o
++        conteúdo do site é construído com as próprias ferramentas de documentação
++        do Rust".
++
++    * Título: **Opsem-team** (repositório)
++
++      :Autor: Equipe de semântica operacional (Operational semantics team)
++      :URL: https://github.com/rust-lang/opsem-team/tree/main
++      :Data: Acessado em 22 de setembro de 2024
++      :Palavras-chave: rust, repositório.
++      :Descrição: Do README: "A equipe opsem é a sucessora do grupo de trabalho
++        unsafe-code-guidelines e é responsável por responder a muitas das perguntas
++        difíceis sobre a semântica do Rust inseguro (unsafe Rust)".
++
++    * Título: **You Can't Spell Trust Without Rust**
++
++      :Autor: Alexis Beingessner
++      :URL: https://repository.library.carleton.ca/downloads/1j92g820w?locale=en
++      :Data: 2015
++      :Palavras-chave: rust, mestrado, tese.
++      :Descrição: Esta tese foca no sistema de propriedade (ownership) do Rust,
++        que garante a segurança de memória ao controlar a manipulação de dados e
++        o tempo de vida, enquanto também destaca suas limitações e o compara a
++        sistemas semelhantes no Cyclone e C++.
++
++    * Nome: **Apresentações de Rust no Linux Plumbers (LPC) 2024**
++
++      :Título: Rust microconference
++      :URL: https://lpc.events/event/18/sessions/186/#20240918
++      :Título: Rust for Linux
++      :URL: https://lpc.events/event/18/contributions/1912/
++      :Título: Journey of a C kernel engineer starting a Rust driver project
++      :URL: https://lpc.events/event/18/contributions/1911/
++      :Título: Crafting a Linux kernel scheduler that runs in user-space using Rust
++      :URL: https://lpc.events/event/18/contributions/1723/
++      :Título: openHCL: A Linux and Rust based paravisor
++      :URL: https://lpc.events/event/18/contributions/1956/
++      :Palavras-chave: rust, lpc, apresentações.
++      :Descrição: Uma série de palestras do LPC relacionadas ao Rust.
++
++    * Nome: **The Rustacean Station Podcast**
++
++      :URL: https://rustacean-station.org/
++      :Palavras-chave: rust, podcasts.
++      :Descrição: Um projeto comunitário para a criação de conteúdo em podcast
++        sobre a linguagem de programação Rust.
++
++-------
++
++Este documento foi originalmente baseado em:
++
++https://www.dit.upm.es/~jmseyas/linux/kernel/hackers-docs.html
++
++e escrito por Juan-Mariano de Goyeneche.
+-- 
+2.47.3
 
-
-On Tue, 19 May 2026 at 19:14, Aayush Patil <aayushpatilsch@gmail.com> wrote:
->
-> Hi Dominique,
->
-> Thanks for the review!
->
-> Regarding the replacement links, should I include them in v2 or leave those entries removed since you're not sure if they're the same files? Happy to go either way.
->
-> Aayush
->
->
-> On Tue, 19 May 2026 at 17:56, Dominique Martinet <asmadeus@codewreck.org> wrote:
->>
->> Aayush Patil wrote on Sun, May 10, 2026 at 11:58:56PM +0530:
->> > The xcpu.org links for xcpu-talk, kvmfs, and cellfs-talk are dead
->> > with no archived snapshots available on the Wayback Machine, so
->> > remove them. The PROSE I/O link redirects to a dead server; replace
->> > it with an archived version from web.archive.org.S
->>
->> (I assume the final S is a typo here)
->>
->> Eric, it looks like you're the one who added these links, would you
->> happen to have a copy around if you care about keeping these?
->> Otherwise I'm not sure of the value of listing the papers without the
->> actual files available, but I don't mind either way.
->>
->> I agree dead links are of little value though so will pick this up if
->> there's no reply in a while
->>
->> >
->> > Signed-off-by: Aayush Patil <aayushpatilsch@gmail.com>
->> > ---
->> >  Documentation/filesystems/9p.rst | 5 +----
->> >  1 file changed, 1 insertion(+), 4 deletions(-)
->> >
->> > diff --git a/Documentation/filesystems/9p.rst b/Documentation/filesystems/9p.rst
->> > index be3504ca034a..65809a1dad21 100644
->> > --- a/Documentation/filesystems/9p.rst
->> > +++ b/Documentation/filesystems/9p.rst
->> > @@ -23,13 +23,10 @@ the 9p client is available in the form of a USENIX paper:
->> >  Other applications are described in the following papers:
->> >
->> >       * XCPU & Clustering
->> > -       http://xcpu.org/papers/xcpu-talk.pdf
->>
->> I found http://mirtchovski.postnix.pw/p9/xcpu-talk.pdf but I'm not sure
->> if it's the same file
->>
->> >       * KVMFS: control file system for KVM
->> > -       http://xcpu.org/papers/kvmfs.pdf
->>
->> Looks close but perhaps not the same as
->> https://www.kernel.org/doc/ols/2007/ols2007v2-pages-59-64.pdf ?
->>
->> >       * CellFS: A New Programming Model for the Cell BE
->> > -       http://xcpu.org/papers/cellfs-talk.pdf
->>
->> Couldn't find anything fo this one
->>
->> >       * PROSE I/O: Using 9p to enable Application Partitions
->> > -       http://plan9.escet.urjc.es/iwp9/cready/PROSE_iwp9_2006.pdf
->> > +       http://web.archive.org/web/20110101152020/http://plan9.escet.urjc.es/iwp9/cready/PROSE_iwp9_2006.pdf
->> >       * VirtFS: A Virtualization Aware File System pass-through
->> >         https://kernel.org/doc/ols/2010/ols2010-pages-109-120.pdf
->> >
->>
->> --
->> Dominique Martinet | Asmadeus
 
