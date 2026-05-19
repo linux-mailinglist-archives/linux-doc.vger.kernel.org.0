@@ -1,53 +1,53 @@
-Return-Path: <linux-doc+bounces-88395-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88396-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sCbpJmYuDGq0XwUAu9opvQ
-	(envelope-from <linux-doc+bounces-88395-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 11:33:26 +0200
+	id yHRTGnQuDGq0XwUAu9opvQ
+	(envelope-from <linux-doc+bounces-88396-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 11:33:40 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id B6AD257B5BA
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 11:33:25 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6CF8257B5C9
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 11:33:39 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id F1B5D313475A
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 09:04:07 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 6F4873136C9D
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 09:04:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4D4DF3DCDA6;
-	Tue, 19 May 2026 09:02:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 626ED449EB6;
+	Tue, 19 May 2026 09:02:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="B/6XRxVF"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Y4cGV95U"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2927D40C5B6;
-	Tue, 19 May 2026 09:02:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3EB1B427A10;
+	Tue, 19 May 2026 09:02:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779181338; cv=none; b=pC2b8OlBVidAfuTOG3q/NAPHKoJhlmYOQ49dbyfXpPfExuz38o83+qdDSQXRiUDY76tBICDN5GZFyFCiC2Zcuob9F+6EZR5jf3CHem4iSitMP80Z560d3J7fEf4ZEN8GfNsd960vZdzaliMVJCUyiJ6cfTAS8cwR4ndMtXEjxTw=
+	t=1779181341; cv=none; b=KDPek+iXIbK7YpQp0AYJWuFviNwK06XoF/8XW0iI0cFP+8wDW1fn93aAboJfu7RB2u6qZ9j1xSmzt+/jMPIuzvbg8nhITRdFC/okcAJjvNPL2V5zeQMaWuXsuEMKGagmOr+mXkXqcLv8Wi4A/q3F7SxRjzpi0I6a81Yf26VQIeU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779181338; c=relaxed/simple;
-	bh=fl6z0LfliVCc5jA4Pfmq25TAh8lEdW0hYIuxPKlSz3I=;
+	s=arc-20240116; t=1779181341; c=relaxed/simple;
+	bh=OOzvE+PDY+lMMJPx9rpX9siTCSFetWvZ9fVlq7uKBtk=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=OzgV9BSYi0ICd7WkAOFv5BdzhPEs+5KMATOX4VNW7LPnZ1UGgLwb6prXkMEc0Gji6e9mFX4Zrs0DukxOgnDtagwiVAX39vmJMpSMJr+2K93JBBdBVjVqvJK9/ofgeLpKW/5xc0GKHbCbGqWILR6jqbk6YxErS+94yuoe2Qeqmys=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=B/6XRxVF; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7C8F1C2BCC9;
-	Tue, 19 May 2026 09:02:17 +0000 (UTC)
+	 In-Reply-To:To:Cc; b=V6JKOo1ziOLFe0GNMID6CHGpOhjWqoPLmEdQyFGaxIB7O1X7kwQJoBox1mlRlbZkMQVWbO22zgC3Oz0NZf2GSeoT+eba7tCaimSzD/IrvSjT0Fep1td80om3gJV/DmDgYvZhYl+l0X4PQRh5esBa0k12ajvjs/SUGIVnj+qbJGs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Y4cGV95U; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6442CC2BCF5;
+	Tue, 19 May 2026 09:02:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1779181338;
-	bh=fl6z0LfliVCc5jA4Pfmq25TAh8lEdW0hYIuxPKlSz3I=;
+	s=k20201202; t=1779181340;
+	bh=OOzvE+PDY+lMMJPx9rpX9siTCSFetWvZ9fVlq7uKBtk=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=B/6XRxVF+FpXQgL8BoJZOxX6PVLvnqXcsrd7aLXxExAs8GRPQ9CLlfcqbTGi1aZgw
-	 ZvZS5+LjJmcy49xtL4NJDuxDbrfdkZQCaP4NpBripws3Lo2v5CC+w8MCKumU3pA3gU
-	 HWW/YgYYSojKyLA9pgVrpfYADIGvQq0NUvmepK08wkARd5aJqMSHhbfvVNOHApvsiU
-	 vS+iA3n8Tq7QHsiPuIPwvOpqJrVEDPsnV9QatXFBid7F8dtNcHA415gx/iZC/yfu55
-	 c01zMxgDbOd5jARw+tkOAbMkolUJc6qWDGm92ntPCZpl9McMRmQeVpzSKul5yFSV+p
-	 hd6gBghJJ2fyQ==
+	b=Y4cGV95UPDj7Y9KGJgAxd9rqvaQulKEX/+tIhrOy2Q+fcuwJ4pihVzVLN3JYmfqxQ
+	 r6BZEBLbm8vw6LspNUuEQ2Ock+xGPP8EhmGMikgOaUN6N5J2GLjXTCbI3eSY8JiV+K
+	 r7BbGSupl128A8bN5Fc32DykYtEWwohNCnIhiAAJx2pH3a/iGsu6nuumLjimtiSKSu
+	 n/xPW+u4RoDJLqT5IAjj495Ez3tN8QkRH7hp/s0Oikn/I7BC7dC9QhSZqrjBNJU0PX
+	 Z/eZE+phuV+0HQDndlrwfZItYxHXiGQaD/rxjDElnK+fDqvLrzirSX+eh4zuP6++sj
+	 tesI/alMZ21BA==
 From: Maxime Ripard <mripard@kernel.org>
-Date: Tue, 19 May 2026 11:01:46 +0200
-Subject: [PATCH v5 04/19] drm/atomic: Expand atomic_create_state
- expectations for drm_private_obj
+Date: Tue, 19 May 2026 11:01:47 +0200
+Subject: [PATCH v5 05/19] drm/mode-config: Document drm_private_obj
+ exclusion from drm_mode_config_reset()
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -56,7 +56,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260519-drm-mode-config-init-v5-4-388b03321e38@kernel.org>
+Message-Id: <20260519-drm-mode-config-init-v5-5-388b03321e38@kernel.org>
 References: <20260519-drm-mode-config-init-v5-0-388b03321e38@kernel.org>
 In-Reply-To: <20260519-drm-mode-config-init-v5-0-388b03321e38@kernel.org>
 To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
@@ -87,24 +87,24 @@ Cc: dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
  Maxime Ripard <mripard@kernel.org>, 
  Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1304; i=mripard@kernel.org;
- h=from:subject:message-id; bh=fl6z0LfliVCc5jA4Pfmq25TAh8lEdW0hYIuxPKlSz3I=;
- b=owGbwMvMwCmsHn9OcpHtvjLG02pJDFk8ar9MTkz7x6t9ZtrV2l9XAjkUQoTSGrxtGl4vmRXMZ
- SZeVazeMZWFQZiTQVZMkeWJTNjp5e2LqxzsV/6AmcPKBDKEgYtTACaimMhYX53Parrq6BOfv7fX
- Ktq2P53w6cuX+7pq+gr5kd+/WAifelDpoKAgICGme2belts22RJLGBs2W8owecovKa9rjDyWYT7
- 37n2HyYtnlRe3P8y+teAOw5HMmO0PdisYf2brNO2+v3HdOjMA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1384; i=mripard@kernel.org;
+ h=from:subject:message-id; bh=OOzvE+PDY+lMMJPx9rpX9siTCSFetWvZ9fVlq7uKBtk=;
+ b=owGbwMvMwCmsHn9OcpHtvjLG02pJDFk8ar/L/PIuBqXVas85f/zTBoPfj0LMhH7POHwq4cMS7
+ rNVjJaKHVNZGIQ5GWTFFFmeyISdXt6+uMrBfuUPmDmsTCBDGLg4BWAia1Yw1odIhv8yY+yaUvL6
+ Y/G6Wpl3r1zO/WCaf3D/7Lurt2VsK1wysUi+wvPEJYfa9Y9bnQ3TfjLWVwnvKv097YfDu8Nbs/k
+ 5pZ1TmyRSv5559Xrlx628SdNq2iYrRz6rCZNpczsRIXb7oaYGAA==
 X-Developer-Key: i=mripard@kernel.org; a=openpgp;
  fpr=BE5675C37E818C8B5764241C254BCFC56BF6CE8D
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-88395-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-88396-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FREEMAIL_TO(0.00)[linux.intel.com,suse.de,gmail.com,ffwll.ch,lwn.net,linuxfoundation.org,oss.qualcomm.com,iki.fi,ideasonboard.com,intel.com,linaro.org,kernel.org,kwiboo.se,emersion.fr,amd.com,igalia.com,redhat.com,ursulin.net,sholland.org,raspberrypi.com];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -120,46 +120,46 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,renesas];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,ideasonboard.com:email]
-X-Rspamd-Queue-Id: B6AD257B5BA
+X-Rspamd-Queue-Id: 6CF8257B5C9
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-The atomic_create_state callback documentation for planes, CRTCs, and
-connectors explicitly states the expected behaviour: the returned
-state must not be assigned to the object's state pointer, and hardware
-must not be touched.
+drm_mode_config_reset() does not reset drm_private_states by design.
 
-The drm_private_state_funcs.atomic_create_state documentation is
-missing this clarification. Add it for consistency.
+This is especially significant for the DP MST and tunneling code that
+expect to be preserved across a suspend/resume cycle, where
+drm_mode_config_reset() is also used.
 
+Document this expectation.
+
+Link: https://lore.kernel.org/dri-devel/aOaQLx-7EpsHRwkH@ideak-desk/
 Reviewed-by: Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
 Signed-off-by: Maxime Ripard <mripard@kernel.org>
 ---
- include/drm/drm_atomic.h | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ drivers/gpu/drm/drm_mode_config.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/include/drm/drm_atomic.h b/include/drm/drm_atomic.h
-index 1a80a8cdf269..88087910ab1a 100644
---- a/include/drm/drm_atomic.h
-+++ b/include/drm/drm_atomic.h
-@@ -263,11 +263,14 @@ struct drm_private_state;
- struct drm_private_state_funcs {
- 	/**
- 	 * @atomic_create_state:
- 	 *
- 	 * Allocates a pristine, initialized, state for the private
--	 * object and returns it.
-+	 * object and returns it. This callback must have no side
-+	 * effects: in particular, the returned state must not be
-+	 * assigned to the object's state pointer and it must not affect
-+	 * the hardware state.
- 	 *
- 	 * RETURNS:
- 	 *
- 	 * A new, pristine, private state instance or an error pointer
- 	 * on failure.
+diff --git a/drivers/gpu/drm/drm_mode_config.c b/drivers/gpu/drm/drm_mode_config.c
+index 66f7dc37b597..c33382a38191 100644
+--- a/drivers/gpu/drm/drm_mode_config.c
++++ b/drivers/gpu/drm/drm_mode_config.c
+@@ -187,10 +187,14 @@ int drm_mode_getresources(struct drm_device *dev, void *data,
+  * @dev: drm device
+  *
+  * This functions calls all the crtc's, encoder's and connector's ->reset
+  * callback. Drivers can use this in e.g. their driver load or resume code to
+  * reset hardware and software state.
++ *
++ * Note that &drm_private_obj structures are expected to be stable across
++ * suspend/resume cycles, and drm_mode_config_reset() does not affect these
++ * structures.
+  */
+ void drm_mode_config_reset(struct drm_device *dev)
+ {
+ 	struct drm_crtc *crtc;
+ 	struct drm_colorop *colorop;
 
 -- 
 2.54.0
