@@ -1,151 +1,199 @@
-Return-Path: <linux-doc+bounces-88390-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88387-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kOV4IKIsDGq0XwUAu9opvQ
-	(envelope-from <linux-doc+bounces-88390-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 11:25:54 +0200
+	id WOCwNK4kDGroXAUAu9opvQ
+	(envelope-from <linux-doc+bounces-88387-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 10:51:58 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5929757B380
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 11:25:53 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5140B57A87B
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 10:51:58 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 6FD3F30737CA
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 08:55:59 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 3774F30B19A6
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 08:45:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EAC653EFFA1;
-	Tue, 19 May 2026 08:55:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E78583EAC76;
+	Tue, 19 May 2026 08:45:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="PqwLcI/m";
+	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="xkUFEZX1";
+	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="PqwLcI/m";
+	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="xkUFEZX1"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from frasgout13.his.huawei.com (frasgout13.his.huawei.com [14.137.139.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C7E453EF0BC;
-	Tue, 19 May 2026 08:55:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=14.137.139.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 428F93EAC86
+	for <linux-doc@vger.kernel.org>; Tue, 19 May 2026 08:45:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779180940; cv=none; b=dOMWnqYeAgMxQ984Xii1dS3GoYI7LSOTMVoYWPAmx2it/fHDr3OlPqgI/+a1ut95GXU+yEq6Egyf5U5m734yzvbFzh5mgixZe+nHlxyRHPKL1PpXkjeAITBVU74uKmlnzkjJkZODR0b8lMVd6pO86s7Y2dz3YNPrxEgOOrq00vI=
+	t=1779180313; cv=none; b=TFoUEFa9TejMh21qzPENTJPK5nKvmy5f2T5bWDKvTnDJdeqk6wkXjzj/qgn59J10GCjdQC6HR/pzoOHrAGdqGNpg6/UDOI4Ik05HQ4eMHUGn4QiBSox+JsP65YNErzqmLSaO/GSnwhH/YOBTb4Z21+9Gosc6btTSrOPWlMfa/7E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779180940; c=relaxed/simple;
-	bh=J05AeAqG71CwR6+dkANjT+VWQxCxqr/Vrlgz+AgBcz4=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=pqNwvQan/xoZsu1uwwre8BpREt1hh2YYTors2MVOTJZLfcQ7pNQwW3/PACNCbWN5Rftewn9AxA3IQFmXqDCSa7CSk162PO/DlNU+jOMOkjdMniA0vqN6XyzujkIwlg84KHkpC6JlyEvZY+pESjQQaKhiTLqqqyg4Ef67Z9jyl74=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com; spf=pass smtp.mailfrom=huaweicloud.com; arc=none smtp.client-ip=14.137.139.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huaweicloud.com
-Received: from mail.maildlp.com (unknown [172.18.224.235])
-	by frasgout13.his.huawei.com (SkyGuard) with ESMTPS id 4gKScl52lzzpTS0;
-	Tue, 19 May 2026 16:33:43 +0800 (CST)
-Received: from mail02.huawei.com (unknown [7.182.16.27])
-	by mail.maildlp.com (Postfix) with ESMTP id 2764E4056C;
-	Tue, 19 May 2026 16:38:38 +0800 (CST)
-Received: from [10.204.63.22] (unknown [10.204.63.22])
-	by APP2 (Coremail) with SMTP id GxC2BwCHymaDIQxqPxhvAQ--.19007S2;
-	Tue, 19 May 2026 09:38:37 +0100 (CET)
-Message-ID: <3e2629f86015edb92951dfbdb9f6df4e82c6a456.camel@huaweicloud.com>
-Subject: Re: [PATCH v5 00/13] ima: Introduce staging mechanism
-From: Roberto Sassu <roberto.sassu@huaweicloud.com>
-To: Lakshmi Ramasubramanian <nramas@linux.microsoft.com>, steven chen
-	 <chenste@linux.microsoft.com>, corbet@lwn.net, skhan@linuxfoundation.org, 
-	zohar@linux.ibm.com, dmitry.kasatkin@gmail.com, eric.snowberg@oracle.com, 
-	paul@paul-moore.com, jmorris@namei.org, serge@hallyn.com
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-integrity@vger.kernel.org, linux-security-module@vger.kernel.org, 
-	gregorylumen@linux.microsoft.com, Roberto Sassu <roberto.sassu@huawei.com>
-Date: Tue, 19 May 2026 10:38:24 +0200
-In-Reply-To: <8db443f1-d2f3-47ce-9116-18985ed0b290@linux.microsoft.com>
-References: <20260429160319.4162918-1-roberto.sassu@huaweicloud.com>
-	 <99c30be6-8b0f-486a-890c-cf74c5930726@linux.microsoft.com>
-	 <aaed52cf-26e1-4c40-812d-3788024ce5b5@linux.microsoft.com>
-	 <2302296a13b847960dbdbab3cf5518b275938838.camel@huaweicloud.com>
-	 <8db443f1-d2f3-47ce-9116-18985ed0b290@linux.microsoft.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.52.3-0ubuntu1 
+	s=arc-20240116; t=1779180313; c=relaxed/simple;
+	bh=XDP1fY549TYDvl03vsmX/Cl9vu/6yPcUFkdIr1jX+Y8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=rwn/0bdXx3+44aomlBvHR20NzcY4eunfnr5Y/ZjpRQlnW6O2batyMcu9dg3Xg9N5aYc7eaNHkwTl2x+rGZzbofT8QieZ2+rU26sw1VTdBK7I/5FfhutSERXQyu82NiLBRrP/vbEjFca9LMbnVCUgQILPXoik++57xREkCRKX1A8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz; spf=pass smtp.mailfrom=suse.cz; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=PqwLcI/m; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=xkUFEZX1; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=PqwLcI/m; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=xkUFEZX1; arc=none smtp.client-ip=195.135.223.130
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.cz
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by smtp-out1.suse.de (Postfix) with ESMTPS id 579385D68A;
+	Tue, 19 May 2026 08:45:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+	t=1779180310; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=nJFJUma/ZTHC3w1sDcmLeoMBS4NsPZRd9YgMW1oWErQ=;
+	b=PqwLcI/mUQreelUgHEq3UAcKmdGdQ5In2fDxkg4VaVoENEK68zRwTSL3bPzZ+o10C+wBAG
+	aMjOUOg9kvBCD7dKJKV1GhkSjBiq5mibmJQYq1ATuQawT8W6fRZymauxgvLkWpo+ldT9p/
+	Tty/28+Aj05K77LJIcUb5AbwAzk9aps=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+	s=susede2_ed25519; t=1779180310;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=nJFJUma/ZTHC3w1sDcmLeoMBS4NsPZRd9YgMW1oWErQ=;
+	b=xkUFEZX19eGGDj9fUAasJzBQ3s2HULj8kbz7JedYPsDv1lxH75Fq+Kdkkj0TiyRGpsyAV9
+	RTrMB+KX2LdX+yBw==
+Authentication-Results: smtp-out1.suse.de;
+	dkim=pass header.d=suse.cz header.s=susede2_rsa header.b="PqwLcI/m";
+	dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=xkUFEZX1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+	t=1779180310; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=nJFJUma/ZTHC3w1sDcmLeoMBS4NsPZRd9YgMW1oWErQ=;
+	b=PqwLcI/mUQreelUgHEq3UAcKmdGdQ5In2fDxkg4VaVoENEK68zRwTSL3bPzZ+o10C+wBAG
+	aMjOUOg9kvBCD7dKJKV1GhkSjBiq5mibmJQYq1ATuQawT8W6fRZymauxgvLkWpo+ldT9p/
+	Tty/28+Aj05K77LJIcUb5AbwAzk9aps=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+	s=susede2_ed25519; t=1779180310;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=nJFJUma/ZTHC3w1sDcmLeoMBS4NsPZRd9YgMW1oWErQ=;
+	b=xkUFEZX19eGGDj9fUAasJzBQ3s2HULj8kbz7JedYPsDv1lxH75Fq+Kdkkj0TiyRGpsyAV9
+	RTrMB+KX2LdX+yBw==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 4E25F593AA;
+	Tue, 19 May 2026 08:45:10 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+	by imap1.dmz-prg2.suse.org with ESMTPSA
+	id 348HExYjDGpgHgAAD6G6ig
+	(envelope-from <jack@suse.cz>); Tue, 19 May 2026 08:45:10 +0000
+Received: by quack3.suse.cz (Postfix, from userid 1000)
+	id 6523AA0ADE; Tue, 19 May 2026 10:45:09 +0200 (CEST)
+Date: Tue, 19 May 2026 10:45:09 +0200
+From: Jan Kara <jack@suse.cz>
+To: Horst Birthelmer <horst@birthelmer.de>
+Cc: Matthew Wilcox <willy@infradead.org>, 
+	Horst Birthelmer <horst@birthelmer.com>, Miklos Szeredi <miklos@szeredi.hu>, 
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+	Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
+	Horst Birthelmer <hbirthelmer@ddn.com>
+Subject: Re: [PATCH v2] dcache: add fs.dentry-limit sysctl with
+ negative-first reaper
+Message-ID: <mptmd2qxgqwkhfrq5dgwomysdnwoy6fnztr3ibrvbbsb7hvrv3@peg7mojzfucy>
+References: <20260516-limit-dentries-cache-v2-1-c733a78e603b@ddn.com>
+ <agj5JkPZ7eNbFueR@casper.infradead.org>
+ <aglh7SrXWbYgD3nA@fedora.fritz.box>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-CM-TRANSID:GxC2BwCHymaDIQxqPxhvAQ--.19007S2
-X-Coremail-Antispam: 1UD129KBjvdXoWrZrW5urWrGr17Zw4kWF4Durg_yoWfGwc_ur
-	1jyryvkF4UZw15CFZ2vFn3WrWDJ34Fy3WfGw15Xrs8J3srJwsxGrs5KrZYyF1fJrn8ZF1v
-	9rZrWFWFvrnI9jkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
-	9fnUUIcSsGvfJTRUUUbx8YFVCjjxCrM7AC8VAFwI0_Xr0_Wr1l1xkIjI8I6I8E6xAIw20E
-	Y4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l8cAvFVAK0II2c7xJM28CjxkF64kEwV
-	A0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVWUJVWUCwA2z4x0Y4vE2Ix0cI8IcVCY1x02
-	67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIE14v26r1j6r4UM28EF7xvwVC2z280aVCY1x0267
-	AKxVW8JVW8Jr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2
-	j2WlYx0E2Ix0cI8IcVAFwI0_JrI_JrylYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7x
-	kEbVWUJVW8JwACjcxG0xvEwIxGrwACI402YVCY1x02628vn2kIc2xKxwCY1x0262kKe7AK
-	xVWUtVW8ZwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F4
-	0E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_GFv_Wryl
-	IxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxV
-	AFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j
-	6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x07Udku
-	cUUUUU=
-X-CM-SenderInfo: purev21wro2thvvxqx5xdzvxpfor3voofrz/1tbiAQASBGoK9roL3wAAsv
-X-Spamd-Result: default: False [0.04 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <aglh7SrXWbYgD3nA@fedora.fritz.box>
+X-Spam-Flag: NO
+X-Spam-Score: -4.01
+X-Spam-Level: 
+X-Spamd-Result: default: False [-1.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_DKIM_ALLOW(-0.20)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	TAGGED_FROM(0.00)[bounces-88390-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	DMARC_NA(0.00)[huaweicloud.com];
-	FREEMAIL_TO(0.00)[linux.microsoft.com,lwn.net,linuxfoundation.org,linux.ibm.com,gmail.com,oracle.com,paul-moore.com,namei.org,hallyn.com];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.cz:dkim,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,suse.com:email];
+	DMARC_NA(0.00)[suse.cz];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-88387-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[13];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[suse.cz:+];
+	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[jack@suse.cz,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[roberto.sassu@huaweicloud.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	RCVD_COUNT_FIVE(0.00)[6];
-	MID_RHS_MATCH_FROM(0.00)[];
-	R_DKIM_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[huaweicloud.com:mid,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: 5929757B380
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	RCVD_COUNT_SEVEN(0.00)[7]
+X-Rspamd-Queue-Id: 5140B57A87B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Fri, 2026-05-15 at 10:37 -0700, Lakshmi Ramasubramanian wrote:
-> Thanks for the response Roberto.
->=20
-> On 5/12/2026 1:17 AM, Roberto Sassu wrote:
->=20
-> > > >=20
-> > > > This submission proposes two ways for log trimming:
-> > > >=20
-> > > > *Flavor 1:* Staging With Prompt
-> > > > *Flavor 2:* Stage and Delete N
-> > > >=20
-> >=20
-> > I'm happy to support your trimming method. Just does not fit with my
-> > use case. I would like to keep both.
-> >=20
->=20
-> If "Flavor 1: Staging With Prompt" would be beneficial to the Linux=20
-> kernel customers, in general, we should continue to review the change=20
-> and merge it eventually.
->=20
-> My request, then, would be to split this patch set into 2 parts:
->=20
-> 	Part 1: Implements "Staging With Prompt"
->=20
-> 	Part 2: Implements "Stage and Delete N"
->=20
-> I think that would make it easier for reviewing the code, test\validate,=
-=20
-> and merge.
+Hi Horst!
 
-No need in my opinion, it is simple enough.
+On Sun 17-05-26 09:57:41, Horst Birthelmer wrote:
+> On Sun, May 17, 2026 at 12:09:26AM +0100, Matthew Wilcox wrote:
+> > On Sat, May 16, 2026 at 04:52:54PM +0200, Horst Birthelmer wrote:
+> > > There was a discussion at LSFMM about servers with too many cached
+> > > negative dentries.
+> > > That gave me the idea to keep the dentries in general limited
+> > > if the system administrator needs it to.
+> > 
+> > I feel you should link to the dozens of previous attempts at this kind
+> > of thing to show that you're aware that this has been tried before and
+> > you're doing something meaningfully different.
 
-Roberto
+<snip>
 
+> As a conclusion, I think I have an uncommon perspective on the cache entries
+> since I don't usually work on vfs but argue from the perspective of a fuse server
+> Where the kernel makes us waste resources. This hurts way more in the FUSE context
+> than in a 'normal' file system.
+> I have taken the look at the dentry cache just because people told me that this
+> has to be solved in the vfs (and I agree). I actually have a somewhat hacky patch
+> to do this from fuse and only for the fuse sb.
+
+So I'm a bit confused here. The changelog speaks only about negative
+dentries (and that's what the change also concentrates on). OTOH you've
+mentioned multiple times that you are not really interested in limiting
+negative dentries but rather positive ones because you have a problem with
+cached inodes. So can you perhaps formulate what is exactly the problem
+you're trying to solve?
+
+Also you mention that cached (positive) dentries and inodes are a wasted
+memory when they aren't used. That is certainly a valid view, OTOH you can
+never predict future so you don't really know what will get used in the
+future and thus will be useful. That's why we currently side with the idea
+that memory that isn't used for something is wasted and unless there's
+something to use the memory for, we cache dentries & inodes & page cache in
+it.
+
+If I remember correctly the discussion we had at LSF, the problem why inode
+caching is a problem for you, although there's enough free memory and no
+memory pressure, is that these cached inodes pin memory on the other end of
+the FUSE communication channel and there we are getting short on memory. Is
+this what you're trying to solve?
+
+								Honza
+-- 
+Jan Kara <jack@suse.com>
+SUSE Labs, CR
 
