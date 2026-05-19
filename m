@@ -1,268 +1,256 @@
-Return-Path: <linux-doc+bounces-88389-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88391-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qLJgDS0kDGroXAUAu9opvQ
-	(envelope-from <linux-doc+bounces-88389-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 10:49:49 +0200
+	id WG7oGf0qDGq0XwUAu9opvQ
+	(envelope-from <linux-doc+bounces-88391-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 11:18:53 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8ACBA57A7E6
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 10:49:48 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 838E557B16B
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 11:18:52 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 209413013D58
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 08:49:47 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 3A9C631253D8
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 09:02:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3D8E23E834A;
-	Tue, 19 May 2026 08:49:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 988053F6C49;
+	Tue, 19 May 2026 09:02:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="UHWhEtQu"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Y1X9EXRT"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2BB9338F929;
-	Tue, 19 May 2026 08:49:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 59DFF3F660E;
+	Tue, 19 May 2026 09:02:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779180586; cv=none; b=Bcs0qWDGv0mtDWisvT40TRCKtPSjZ6Ys/t8+OtAWF3lyg4D4bERwwZpEpQHVejX3j7VJre/tt7movDOGJ0gTP/od4WIJ2xsKvlOo506XGxTvUa+onA8birgQDrHX3f9LoYhS8Agjj43YpkdxC4Xlrgw5yG27HIrIIA8HiVLGiZk=
+	t=1779181322; cv=none; b=eZfUV0KV7XD+eHZ/w5yimMbWYQ0bqvXCOP7xg4twnao9f5vDVNRZ1Zkta0RWlOCJNkYyzyPHnYpSjwVLZEqqGAlI8c9fdisCzBUVTrmLzoJM6u9XrP+cAap2e7dBTgoXX/+XmufbIjNv8Sfhgnv1dJXFDunjgzp1qF49OlCIyQA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779180586; c=relaxed/simple;
-	bh=2ItcKLOHuYuo+5+zg3nAK5dtbbWOEusz4M2dKNduT5Y=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=eO47J9qW2YlFwqcYLcJZ5HCdLNhX2EaUJ0pVj/uDenJVN9iE+r6Wz6FbIzSadCrYtbZenFr9GB7l9iOBPqzqsCnTfC8FTv0Vt7Iuk3DSbKfk+55YNdq5Kgkbha7cYcaxFw56oJQKi4eZvf42Tj4yqJaDJr9sAKy6mp+1i+76+bw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=UHWhEtQu; arc=none smtp.client-ip=217.140.110.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 61AF234FC;
-	Tue, 19 May 2026 01:49:38 -0700 (PDT)
-Received: from [10.57.24.124] (unknown [10.57.24.124])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5E89C3F85F;
-	Tue, 19 May 2026 01:49:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1779180583; bh=2ItcKLOHuYuo+5+zg3nAK5dtbbWOEusz4M2dKNduT5Y=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=UHWhEtQu0+j3+QsOWr2nLpXICsL3AQVNq2V7x/fb/XyRGPAKRbuSINGm0ljae0+i8
-	 9z42OdtXMowoLE3td48keL3MFMfcrE2qLP+5ACkvZROnd4D2JJ9PLo2A8+sjpZLK8t
-	 k19/XatDyTfkXHKjdvr06k8CRJ9nVozmozjNf8GY=
-Message-ID: <8f0b1750-a853-4895-9672-73a75f6dbd84@arm.com>
-Date: Tue, 19 May 2026 10:49:33 +0200
+	s=arc-20240116; t=1779181322; c=relaxed/simple;
+	bh=DBIFCH1cyjEz//oJo5SEbw9KVoeReft6owR9CiWCBWE=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=Ua7buADPzfbsrw6IiCFxnFUR1KUxZlkeqDjJYrlMzdn0Ga1psA2o1GV65tvLQTHlhJtVhoyCRMT+eFCyHExOQ8BuuX+nAZ6rZ8HJmGkGkggGpxky9gvQQz23pqokfPTQ3XqgdCH1bpOVOynuKhR7MIgaUnsPUt706le3zYBwSsw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Y1X9EXRT; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 84CDCC2BCC6;
+	Tue, 19 May 2026 09:02:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1779181322;
+	bh=DBIFCH1cyjEz//oJo5SEbw9KVoeReft6owR9CiWCBWE=;
+	h=From:Subject:Date:To:Cc:From;
+	b=Y1X9EXRTahEPgr2zSuhJs9c17S5jYxTLLiGu+iOrdX8ZfEte1822QcrrYUayj4jBP
+	 vmZs+qmfMCAZ3YKmfj3FzC/fKpdiial856eoB4PQqTDX/HBEKSDSLcws3SMP45rfze
+	 11vPAcbRahaj3sVLg+7mqxcLf2ruQOb0fqnwA+eGFDykY40Ssn6mm4ILJssu7bzI7p
+	 hxua60gVxA9j8n90NXdtpoC5XwfMm3YvRhiKPXUkUCGMIQSgYHOeTap1EJ2VdoIoth
+	 zIbumNIHUcKfxeTOs+oAeQ9VvtDpFsBxgZTJZP07GfaEHIXyEEAxAWgoc6VoNqtWvT
+	 iBJr/twufoIEw==
+From: Maxime Ripard <mripard@kernel.org>
+Subject: [PATCH v5 00/19] drm/atomic: Rework initial state allocation
+Date: Tue, 19 May 2026 11:01:42 +0200
+Message-Id: <20260519-drm-mode-config-init-v5-0-388b03321e38@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/8] drm/panthor: Add support for protected memory
- allocation in panthor
-To: Boris Brezillon <boris.brezillon@collabora.com>,
- Chia-I Wu <olvaffe@gmail.com>
-Cc: Liviu Dudau <liviu.dudau@arm.com>, =?UTF-8?Q?Marcin_=C5=9Alusarz?=
- <marcin.slusarz@arm.com>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- Benjamin Gaignard <benjamin.gaignard@collabora.com>,
- Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>,
- "T.J. Mercier" <tjmercier@google.com>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Steven Price <steven.price@arm.com>,
- Daniel Almeida <daniel.almeida@collabora.com>,
- Alice Ryhl <aliceryhl@google.com>, Matthias Brugger
- <matthias.bgg@gmail.com>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
- linaro-mm-sig@lists.linaro.org, linux-arm-kernel@lists.infradead.org,
- linux-mediatek@lists.infradead.org, Florent Tomasin
- <florent.tomasin@arm.com>, nd@arm.com
-References: <20260505140516.1372388-1-ketil.johnsen@arm.com>
- <20260505140516.1372388-5-ketil.johnsen@arm.com>
- <20260505181523.49a3d85c@fedora> <afxVIuVVPisBQ9p_@e129842.arm.com>
- <20260507135356.5428d50d@fedora> <agMvb_jeRsO7tSS-@e142607>
- <20260512161111.0cb7000e@fedora> <agNJasayW8VCHTiU@e142607>
- <CAPaKu7QC7FdjL6m_OSb+E5aYKs6bmT-9DAHc5PC=XctCmRph2Q@mail.gmail.com>
- <20260518091650.5a7a4f4a@fedora>
- <CAPaKu7R9ET767qc3eppBUfG2RAeyrg7E-gE0turgp-u_FU4+Vg@mail.gmail.com>
- <20260519093955.448ff899@fedora>
-Content-Language: en-US
-From: Ketil Johnsen <ketil.johnsen@arm.com>
-In-Reply-To: <20260519093955.448ff899@fedora>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/33Oy07DMBAF0F+JvGaQx488uuI/EIvaHqcWxCl2i
+ Iqq/DtOuiioCss7o3tmrixTCpTZobqyRHPIYYwl6KeK2dMx9gTBlcwEFzWXyMGlAYbREdgx+tB
+ DiGECJPRamEZpx1mpnhP5cNnY17dbTvT5VfTpNmTmmFdiGMJ0qDYzZAuRLhOsp4BrQMXW7inka
+ Uzf24czbuX/n5kRyoYa2TW2JbT+5Z1SpI/nMfWbOItfithTRFFsLT2iVNTU9kGRd0UJtaPIorS
+ mbl3nDHeteVDUXdEodhRVFN2h885aNL77oyzL8gOBd07SxwEAAA==
+X-Change-ID: 20260310-drm-mode-config-init-1e1f52b745d0
+To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, 
+ Simona Vetter <simona@ffwll.ch>, Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+ Jyri Sarha <jyri.sarha@iki.fi>, 
+ Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, 
+ Andrzej Hajda <andrzej.hajda@intel.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>, 
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
+ Simon Ser <contact@emersion.fr>, Harry Wentland <harry.wentland@amd.com>, 
+ Melissa Wen <mwen@igalia.com>, Sebastian Wick <sebastian.wick@redhat.com>, 
+ Alex Hung <alex.hung@amd.com>, Jani Nikula <jani.nikula@linux.intel.com>, 
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, 
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, 
+ Tvrtko Ursulin <tursulin@ursulin.net>, Chen-Yu Tsai <wens@kernel.org>, 
+ Samuel Holland <samuel@sholland.org>, 
+ Dave Stevenson <dave.stevenson@raspberrypi.com>, 
+ =?utf-8?q?Ma=C3=ADra_Canal?= <mcanal@igalia.com>, 
+ Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>
+Cc: dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Daniel Stone <daniels@collabora.com>, 
+ intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org, 
+ linux-arm-kernel@lists.infradead.org, linux-sunxi@lists.linux.dev, 
+ Maxime Ripard <mripard@kernel.org>, 
+ Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>, 
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5807; i=mripard@kernel.org;
+ h=from:subject:message-id; bh=DBIFCH1cyjEz//oJo5SEbw9KVoeReft6owR9CiWCBWE=;
+ b=owGbwMvMwCmsHn9OcpHtvjLG02pJDFk8aj+Xs5/e6KAh99ytpPtUhZ/FhBs7mU/XZCpdnHZwd
+ XK7sfz8jqksDMKcDLJiiixPZMJOL29fXOVgv/IHzBxWJpAhDFycAjCR5caMdYrv1m3rFszsrchY
+ uPJ1ZHDKYZWS03EeNVsPO995yl/BlRRtNZtr9edeo72zch3nM8T8Z6wzfBaoYbPE/Vnijy9iWTs
+ vnxFufHP/RMrmH+diLZ5pK07SPRfgqdShm/1hDXtXoolnYDwA
+X-Developer-Key: i=mripard@kernel.org; a=openpgp;
+ fpr=BE5675C37E818C8B5764241C254BCFC56BF6CE8D
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
-	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-88389-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-88391-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[collabora.com,gmail.com];
+	FREEMAIL_TO(0.00)[linux.intel.com,suse.de,gmail.com,ffwll.ch,lwn.net,linuxfoundation.org,oss.qualcomm.com,iki.fi,ideasonboard.com,intel.com,linaro.org,kernel.org,kwiboo.se,emersion.fr,amd.com,igalia.com,redhat.com,ursulin.net,sholland.org,raspberrypi.com];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[arm.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,lwn.net,linuxfoundation.org,linaro.org,collabora.com,google.com,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org,lists.infradead.org];
-	RCPT_COUNT_TWELVE(0.00)[31];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[40];
 	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ketil.johnsen@arm.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[arm.com:+];
+	FROM_NEQ_ENVFROM(0.00)[mripard@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:email,arm.com:mid,arm.com:dkim,collabora.com:email,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: 8ACBA57A7E6
+	TAGGED_RCPT(0.00)[linux-doc,renesas];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: 838E557B16B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 19/05/2026 09:39, Boris Brezillon wrote:
-> On Mon, 18 May 2026 17:36:40 -0700
-> Chia-I Wu <olvaffe@gmail.com> wrote:
-> 
->> On Mon, May 18, 2026 at 12:16 AM Boris Brezillon
->> <boris.brezillon@collabora.com> wrote:
->>>
->>> On Wed, 13 May 2026 12:31:32 -0700
->>> Chia-I Wu <olvaffe@gmail.com> wrote:
->>>   
->>>> On Tue, May 12, 2026 at 8:39 AM Liviu Dudau <liviu.dudau@arm.com> wrote:
->>>>>
->>>>> On Tue, May 12, 2026 at 04:11:11PM +0200, Boris Brezillon wrote:
->>>>>> On Tue, 12 May 2026 14:47:27 +0100
->>>>>> Liviu Dudau <liviu.dudau@arm.com> wrote:
->>>>>>   
->>>>>>> On Thu, May 07, 2026 at 01:53:56PM +0200, Boris Brezillon wrote:
->>>>>>>> On Thu, 7 May 2026 11:02:26 +0200
->>>>>>>> Marcin Ślusarz <marcin.slusarz@arm.com> wrote:
->>>>>>>>   
->>>>>>>>> On Tue, May 05, 2026 at 06:15:23PM +0200, Boris Brezillon wrote:
->>>>>>>>>>> @@ -277,9 +286,21 @@ int panthor_device_init(struct panthor_device *ptdev)
->>>>>>>>>>>                      return ret;
->>>>>>>>>>>      }
->>>>>>>>>>>
->>>>>>>>>>> +   /* If a protected heap name is specified but not found, defer the probe until created */
->>>>>>>>>>> +   if (protected_heap_name && strlen(protected_heap_name)) {
->>>>>>>>>>
->>>>>>>>>> Do we really need this strlen() > 0? Won't dma_heap_find() fail is the
->>>>>>>>>> name is "" already?
->>>>>>>>>
->>>>>>>>> If dma_heap_find() will fail, then the whole probe with fail too.
->>>>>>>>> This check prevents that.
->>>>>>>>
->>>>>>>> Yeah, that's also a questionable design choice. I mean, we can
->>>>>>>> currently probe and boot the FW even though we never setup the
->>>>>>>> protected FW sections, so why should we defer the probe here? Can't we
->>>>>>>> just retry the next time a group with the protected bit is created and
->>>>>>>> fail if we can find a protected heap?
->>>>>>>
->>>>>>> The problem we have with the current firmware is that it does a number of setup steps at "boot"
->>>>>>> time only. One of the steps is preparing its internal structures for when it enters protected
->>>>>>> mode and it stores them in the buffer passed in at firmware loading. We cannot later run the
->>>>>>> process when we have a group with protected mode set.
->>>>>>
->>>>>> No, but we can force a full/slow reset and have that thing
->>>>>> re-initialized, can't we? I mean, that's basically what we do when a
->>>>>> fast reset fails: we re-initialize all the sections and reset again, at
->>>>>> which point the FW should start from a fresh state, and be able to
->>>>>> properly initialize the protected-related stuff if protected sections
->>>>>> are populated. Am I missing something?
->>>>>
->>>>> Right, we can do that. For some reason I keep associating the reset with the
->>>>> error handling and not with "normal" operations.
->>>> I kind of hope we end up with either
->>>>
->>>>   - panthor knows the exact heap to use and fails with EPROBE_DEFER if
->>>> the heap is missing, or
->>>>   - panthor gets a dma-buf from userspace and does the full reset
->>>>     - userspace also needs to provide a dma-buf for each protected
->>>> group for the suspend buffer
->>>>
->>>> than something in-between. The latter is more ad-hoc and basically
->>>> kicks the issue to the userspace.
->>>
->>> Indeed, the second option is more ad-hoc, but when you think about it,
->>> userspace has to have this knowledge, because it needs to know the
->>> dma-heap to use for buffer allocation that cross a device boundary
->>> anyway. Think about frames produced by a video decoder, and composited
->>> by the GPU into a protected scanout buffer that's passed to the KMS
->>> device. Why would the GPU driver be source of truth when it comes to
->>> choosing the heap to use to allocate protected buffers for the video
->>> decoder or those used for the display?
->> I don't think the GPU driver is ever the source of truth. If the
->> system integrator wants to specify the source of truth (SoT) from
->> kernel space, they should use the device tree (or module params /
->> config options). If they want to specify the SoT in userspace, then we
->> don't really care how it is done other than providing an ioctl.
->> Panthor is always on the receiving end.
-> 
-> Okay, we're on the same page then.
-> 
->>
->> If we don't want to delay this functionality, but it takes time to
->> converge on SoT, maybe a solution that is not a long-term promise can
->> work? Of the options on the table (dt, module params, kconfig options,
->> ioctls), a kconfig option, potentially marked as experimental, seems
->> like a good candidate.
-> 
-> If Panthor is only a consumer, I actually think it'd be easier to just
-> let userspace pass the protected FW section as an imported buffer
-> through an ioctl for now. It means we don't need any of the
-> modifications to the dma_heap API in this series, and userspace is free
-> to choose its SoT (efuse, DT, ...) and pass the info back to mesa/GBM
-> somehow (envvar, driconf, ...). The only thing we need to ensure is if
-> lazy protected FW section allocation is going to work, but given the
-> current code purely and simply ignores those sections, and the FW is
-> still able to boot and act properly (at least on v10-v13), I'm pretty
-> confident this is okay, unless there's some trick the MCU can do to
-> detect that the protected section isn't mapped (which I doubt, because
-> the MCU doesn't know it lives behind an MMU).
-> 
-> Of course, once we have a consensus on how to describe this in the DT,
-> we can switch Panthor over to "protected dma_heap selection through DT",
-> and reflect that through the ioctl that exposes whether protected
-> support is ready or not (would be a DEV_QUERY), such that userspace can
-> skip this "PROTM initialization" step.
-> 
-> We're talking about an extra ioctl to set those buffers, and a
-> DEV_QUERY to query the state (ready or not), the size of the global
-> protected buffer (protected FW section) and the size of the protected
-> suspend buffer. The protected suspend buffer would be allocated and
-> passed at group creation time (extra arg passed to the existing
-> GROUP_CREATE ioctl). So, overall, I don't consider it a huge liability
-> in term of maintenance cost.
+Hi,
 
-If we can avoid the dma-heap changes, then that would surely help!
-I can try to implement this in the next version unless someone finds a 
-reason why it is a bad idea.
+This series started from my work on the hardware state readout[1], and
+more specifically a discussion with Thomas[2].
 
->>>> For the former, expressing the relation in DT seems to be the best,
->>>> but only if possible :-). Otherwise, a kconfig option (instead of
->>>> module param) should be easier to work with.
->>>>
->>>> Looking at the userspace implementation, can we also have an panthor
->>>> ioctl to return the heap to userspace?
->>>
->>> Yes, it's something we can add, but again, I'm questioning the
->>> usefulness of this: how can we ensure the heap used by panthor to
->>> allocate its protected FW buffers is suitable for scanout buffers
->>> (buffers that can be used by display drivers). There needs to be a glue
->>> leaving in usersland and taking the decision, and I'm not too sure
->>> trusting any of the component in the chain (vdec, gpu, display) is the
->>> right thing to do.
->> The heap returned by panthor is only for panfrost/panvk. It says
->> nothing about compatibility with other components on the system.
-> 
-> Okay, if it's used only for internal buffers, I guess that's fine.
+This series expands the work that has been merged recently to make
+drm_private_obj and drm_private_state allocation a bit more consistent
+and ended up creating a new atomic_create_state callback to allocate a
+new state with no side effect.
 
---
-Ketil
+The first patches document the existing behaviour and fix a few
+cleanups and typos.
+
+Then, __drm_*_state_reset() helpers are renamed to
+__drm_*_state_init() to clarify that they initialize rather than
+reset state, and we add the new atomic_create_state callback to
+every other DRM object (planes, CRTCs, connectors, colorops).
+
+Next, we leverage those new callbacks to create a new helper,
+drm_mode_config_create_initial_state(), to create the initial state
+for all the objects of a driver, and update the driver skeleton to
+recommend it.
+
+Finally, we convert the tidss driver and the bridge_connector to the
+new pattern.
+
+This was tested on a TI SK-AM62, with the tidss driver.
+
+Let me know what you think,
+Maxime
+
+1: https://lore.kernel.org/dri-devel/20250902-drm-state-readout-v1-0-14ad5315da3f@kernel.org/
+2: https://lore.kernel.org/dri-devel/5920ffe5-b6b1-484b-b320-332b9eb9db82@suse.de/
+
+Signed-off-by: Maxime Ripard <mripard@kernel.org>
+---
+Changes in v5:
+- Address sashiko reviews
+- Improve the docs
+- Fix drmm_connector_hdmi_init
+- Drop drm/tidss: Switch to drm_mode_config_create_initial_state since
+  not all possible bridges would have been converted to create_state 
+- Link to v4: https://lore.kernel.org/r/20260512-drm-mode-config-init-v4-0-591dfdcc1bf9@kernel.org
+
+Changes in v4:
+- Rebased on current drm-misc-next
+- Update drm_atomic_state to drm_atomic_commit
+- Various doc impromvements
+- Don't call drm_crtc_vblank_reset in create_state
+- Prevent mem leak if states already have a state when
+  drm_mode_config_reset or _create_initial_state are called
+- Link to v3: https://lore.kernel.org/r/20260424-drm-mode-config-init-v3-0-8b68d9db0d8b@kernel.org
+
+Changes in v3:
+- Reintroduce state documentation that was dropped by accident
+- Change name to drm_mode_config_create_initial_state()
+- Don't call drm_mode_config_create_initial_state() in drm_dev_register
+  anymore
+- Drop __drm_atomic_helper_*_create_state
+- Improve documentation and commit messages where necessary
+- Collected tags
+- Link to v2: https://lore.kernel.org/r/20260320-drm-mode-config-init-v2-0-c63f1134e76c@kernel.org
+
+Changes in v2:
+- Change the _state_reset function names to _state_init
+- Change the colorop too
+- Various doc improvements
+- Link to v1: https://lore.kernel.org/r/20260310-drm-mode-config-init-v1-0-de7397c8e1cf@kernel.org
+
+---
+Maxime Ripard (19):
+      drm/atomic: Document atomic commit lifetime
+      drm/colorop: Fix typos in the doc
+      drm/atomic: Drop drm_private_obj.state assignment from create_state
+      drm/atomic: Expand atomic_create_state expectations for drm_private_obj
+      drm/mode-config: Document drm_private_obj exclusion from drm_mode_config_reset()
+      drm/colorop: Rename __drm_colorop_state_reset()
+      drm/colorop: Create drm_atomic_helper_colorop_create_state()
+      drm/atomic-state-helper: Fix __drm_atomic_helper_plane_reset() doc typo
+      drm/atomic-state-helper: Rename __drm_atomic_helper_plane_state_reset()
+      drm/plane: Add new atomic_create_state callback
+      drm/atomic-state-helper: Rename __drm_atomic_helper_crtc_state_reset()
+      drm/crtc: Add new atomic_create_state callback
+      drm/atomic-state-helper: Rename __drm_atomic_helper_connector_state_reset()
+      drm/hdmi: Rename __drm_atomic_helper_connector_hdmi_reset()
+      drm/connector: Add new atomic_create_state callback
+      drm/mode-config: Create drm_mode_config_create_initial_state()
+      drm/drv: Switch skeleton to drm_mode_config_create_initial_state()
+      drm/tidss: Convert to atomic_create_state
+      drm/bridge_connector: Convert to atomic_create_state
+
+ Documentation/gpu/drm-kms.rst                      |   6 +
+ drivers/gpu/drm/display/drm_bridge_connector.c     |  17 +-
+ drivers/gpu/drm/display/drm_hdmi_state_helper.c    |  15 +-
+ drivers/gpu/drm/drm_atomic.c                       |  67 ++++++++
+ drivers/gpu/drm/drm_atomic_state_helper.c          | 114 ++++++++++---
+ drivers/gpu/drm/drm_colorop.c                      |  41 ++++-
+ drivers/gpu/drm/drm_connector.c                    |  10 +-
+ drivers/gpu/drm/drm_drv.c                          |   4 +-
+ drivers/gpu/drm/drm_mode_config.c                  | 189 ++++++++++++++++++++-
+ drivers/gpu/drm/i915/display/intel_crtc.c          |   2 +-
+ drivers/gpu/drm/i915/display/intel_plane.c         |   2 +-
+ drivers/gpu/drm/sun4i/sun4i_hdmi_enc.c             |   2 +-
+ drivers/gpu/drm/tests/drm_hdmi_state_helper_test.c |   2 +-
+ drivers/gpu/drm/tidss/tidss_crtc.c                 |  17 +-
+ drivers/gpu/drm/tidss/tidss_plane.c                |   2 +-
+ drivers/gpu/drm/vc4/vc4_hdmi.c                     |   2 +-
+ include/drm/display/drm_hdmi_state_helper.h        |   4 +-
+ include/drm/drm_atomic.h                           |   5 +-
+ include/drm/drm_atomic_state_helper.h              |  12 +-
+ include/drm/drm_colorop.h                          |   2 +
+ include/drm/drm_connector.h                        |  16 ++
+ include/drm/drm_crtc.h                             |  16 ++
+ include/drm/drm_mode_config.h                      |   1 +
+ include/drm/drm_plane.h                            |  16 ++
+ 24 files changed, 496 insertions(+), 68 deletions(-)
+---
+base-commit: 69c95e4c529297c25503e60acba757fba24fdc95
+change-id: 20260310-drm-mode-config-init-1e1f52b745d0
+
+Best regards,
+-- 
+Maxime Ripard <mripard@kernel.org>
+
 
