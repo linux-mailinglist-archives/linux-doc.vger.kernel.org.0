@@ -1,341 +1,151 @@
-Return-Path: <linux-doc+bounces-88386-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88390-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wIvGOIIiDGrjWwUAu9opvQ
-	(envelope-from <linux-doc+bounces-88386-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 10:42:42 +0200
+	id kOV4IKIsDGq0XwUAu9opvQ
+	(envelope-from <linux-doc+bounces-88390-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 11:25:54 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id E994B57A584
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 10:42:41 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5929757B380
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 11:25:53 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 0DAE730FB8EA
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 08:26:23 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 6FD3F30737CA
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 08:55:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CB2113E5A35;
-	Tue, 19 May 2026 08:25:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="XSeEuK8H";
-	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="PTM7iW8X"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EAC653EFFA1;
+	Tue, 19 May 2026 08:55:40 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+Received: from frasgout13.his.huawei.com (frasgout13.his.huawei.com [14.137.139.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0ED733E5593
-	for <linux-doc@vger.kernel.org>; Tue, 19 May 2026 08:25:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=170.10.133.124
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779179124; cv=pass; b=rK94Pozk9lWFXomzVbOG87lU1Rytspaugbbwcww3w+ttONSOD2f1QuXWP/PWHAMwdIIoexnVRI+Gmo5thlguM81d81iDUz0gE4Leku8mg9ICMr2mFPJhYPWQFSkip4Y0SCIJCIIJhoI62N2jLxCsWBGyMMpZZr80B0fA6oajCw8=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779179124; c=relaxed/simple;
-	bh=Zmlcsxs7JMP5bdHZ5kThghYTTdo51TjoA70ut3zJssU=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=fmNbaQycAtgJcPRnr6zTmUVSRWeXb0Hayh0vkAbZij99b7D/VGoUlVI1jtSs/v/E26eFFkvFXUqn/WIbgC5d5Xi3Aq4z8PAowsMkVx5nfO9AS/yvlHK7hE9jeLJBTcdO119DJiYQupTOKFmVnmRYY1xKFOjnG8f7OWbvgKkzWNk=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=XSeEuK8H; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=PTM7iW8X; arc=pass smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1779179122;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Zmlcsxs7JMP5bdHZ5kThghYTTdo51TjoA70ut3zJssU=;
-	b=XSeEuK8HhLnqAehTPjnPbJXtjiAhAQjl05LpHXwKxBsTFS/6Pk5HZn/lKE4HTVxBmODFnH
-	eimlojeysh9zo2NOw9SetmuwyvhqDbeZCYC4BfpJLyGDeUTLGvOUsnEvGowuxcFb1l7VPh
-	EQnnd59yVXCa41wY257j8AcLwWHY50Y=
-Received: from mail-yw1-f200.google.com (mail-yw1-f200.google.com
- [209.85.128.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-148-IIuuKbhXOU6Kd729FUpXhA-1; Tue, 19 May 2026 04:25:20 -0400
-X-MC-Unique: IIuuKbhXOU6Kd729FUpXhA-1
-X-Mimecast-MFC-AGG-ID: IIuuKbhXOU6Kd729FUpXhA_1779179119
-Received: by mail-yw1-f200.google.com with SMTP id 00721157ae682-7bd5c267082so6354877b3.0
-        for <linux-doc@vger.kernel.org>; Tue, 19 May 2026 01:25:20 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779179119; cv=none;
-        d=google.com; s=arc-20240605;
-        b=XEbkwarGBbr84m6DME5n/zsR7brIxt4dy+EJlWTLqxTFHwEPa0FhhJO7/SBaAxEr9H
-         6CtjpZ6k5/uIaB7/03/nFseEoVRTXCE9wKSP/bgNzNvSamrQ5adGu6GkW3ZgBvvBlQAb
-         +xL1wik9m7el6adb3puGZfOBcNDEUW2PL05XfWMH1oqkR2UTRjb8MggLtGVFT+iZ8YFg
-         AGv9Cj9zhVVF5gYJAOySqWWlKy14513mscxmLjxIL8PVL2H+yGRecG6cSCZpLqfXTlXt
-         qe+XGY8tCy8fKHyEOVcAzns5xeYtLdYo3UDf8jMdvH+0P27R2EZJoOaQdk45MKxe4Uet
-         SF6g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=Zmlcsxs7JMP5bdHZ5kThghYTTdo51TjoA70ut3zJssU=;
-        fh=OFgYV4FB3ii1OghrAC9iXKCIZDmKrOSkmyjAPtjk+Dw=;
-        b=FaTjnxKkhLZSXjQ/7cR+p3CQWNZBGDh0kD6DC8m7dEa9bsrlETSFB3hkHDoP/NmLXZ
-         K+S2Am0VV7ZKqyPC3P8IaTAme1J0Xh7MWNugCn+yv7HlPr/oSWFKcaOfPSGTRlv+TEyh
-         74J08QSCeCoLIkX63gNteuENr0kTSrUEWw6Fp4cw4w+kfKSpFOO4VkDCvC023sYQpKZP
-         nWbZ1fI/AKfPGkXz/qPe60hqFh82JHoh66N7izNd2/7ZaiKoGjRH0/JfBrYR8XAQUTaE
-         oE9ncZe0dx6v0s0V6jokqlq1UzBBt3L/U9Q3TwbMkG+fXk77k6tbCdmFa5qvLDSZakJc
-         QsYA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1779179119; x=1779783919; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Zmlcsxs7JMP5bdHZ5kThghYTTdo51TjoA70ut3zJssU=;
-        b=PTM7iW8XX7Fc+svTNvQEPyrabuPKevYgU4wwNa0E2GH8kYNmCTP076uluaszhaEraK
-         v/CYuBcnqj0wOzxgH7z1HHOr6Wa9fIE/4W5rKBG0UW/t69AbbsSzrRlZ+tpCYksa1jyb
-         ly/65qoT2WsmO/uRyZm4CoZxr+3IjVuIa8dazFTmDVs+YwG4skJU54pbMzwUjZtIEgkl
-         j9HrbNhe1ZDSSgEV1+zP3CDzfLrH/a3gdTDNbhpOR09W8o/DsT383zAysKPGV6RnqBmY
-         Q7tDkwuSEgOTUbmEdCyswSIz4kSFHRgVMVyG2cHf/lMXFdxONybSi0MZANYMekQRnSGz
-         I7ug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779179119; x=1779783919;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=Zmlcsxs7JMP5bdHZ5kThghYTTdo51TjoA70ut3zJssU=;
-        b=EactEVks3e3hk7CaO2u/6G3do2/w3zL63XDqCcV0HLxKfEjXOzFaNCHNfUoshKHjtM
-         MptXtTanl54+WXKlNdkr4hhjWxZB/wD15Rk/Il38K+fNAPKBw1Cfk02fHnZfJj4Kbe7P
-         EdcMs/62ZplX5X7gQdD4UYCWlw7nh64ucXpcy48J/bQQZfGRcSDCpfKweO4h7WDKVzGa
-         GdSYVjlf4V2w3Am+uE108rdDpMoC3k/n/Os4dXPJfrxZjczXYo2rCSODoJhvG/QUeMBj
-         cclQo2Mp1u9v9g/HlJjBU7cYwHtHDrV9slWCge2ZVtGjDsSg0R6OGaDQYtCU/NYXgTEJ
-         8kOg==
-X-Forwarded-Encrypted: i=1; AFNElJ8NTI5U+UXfiOzBBvgGJcNq95FkiDpHTH4uhAppdVLs/seoz8LnT1twZ+5YGeVIr1dlUa2ZkLBJxoo=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxJSTxVENG8O3t9zACOZgosQ4BhXZCoo32jk3cLHXDM6bsZMvNm
-	/LyzPPYNUcKXcsT9eUYPvsG+uOfj8nrM6ndmrXpLLDS/bVDmhrwxb8jmQx3FlsLq7dtwEmTVop8
-	/mFV6jPPm/0T0SH/Ombld7Qr/H21J8PD7ysVA88uVd1rOGD3NHNVApoPJOLyy/JmQOKlHhQOzsz
-	WX+sa0MmbQCaL5gGC95YmCg5FWuFVvw3qgdGjS
-X-Gm-Gg: Acq92OEsaucROsyIWeure0DDecoOuWOdhElP3o7jRoO19jx5gfmIEOzxzGpzAX+bLbM
-	/0NRz9vu5uzroQwoX5pQe6yAbOXWkfd40xhoxb/xSs4OUwmKBNioyf0U0WuVCBePUdSdMhiJXHl
-	+Nt1HVRPaSB390B7iURBIzc+ln1nr3cxnIfzMyhLiLVeCCKJJo9AWSA0O/FPX8tDOgG5f5YUrO2
-	jEBvA==
-X-Received: by 2002:a05:690c:e041:b0:7b3:edc7:9bb8 with SMTP id 00721157ae682-7c955b970femr172557197b3.0.1779179119465;
-        Tue, 19 May 2026 01:25:19 -0700 (PDT)
-X-Received: by 2002:a05:690c:e041:b0:7b3:edc7:9bb8 with SMTP id
- 00721157ae682-7c955b970femr172556607b3.0.1779179118837; Tue, 19 May 2026
- 01:25:18 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C7E453EF0BC;
+	Tue, 19 May 2026 08:55:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=14.137.139.46
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1779180940; cv=none; b=dOMWnqYeAgMxQ984Xii1dS3GoYI7LSOTMVoYWPAmx2it/fHDr3OlPqgI/+a1ut95GXU+yEq6Egyf5U5m734yzvbFzh5mgixZe+nHlxyRHPKL1PpXkjeAITBVU74uKmlnzkjJkZODR0b8lMVd6pO86s7Y2dz3YNPrxEgOOrq00vI=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1779180940; c=relaxed/simple;
+	bh=J05AeAqG71CwR6+dkANjT+VWQxCxqr/Vrlgz+AgBcz4=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=pqNwvQan/xoZsu1uwwre8BpREt1hh2YYTors2MVOTJZLfcQ7pNQwW3/PACNCbWN5Rftewn9AxA3IQFmXqDCSa7CSk162PO/DlNU+jOMOkjdMniA0vqN6XyzujkIwlg84KHkpC6JlyEvZY+pESjQQaKhiTLqqqyg4Ef67Z9jyl74=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com; spf=pass smtp.mailfrom=huaweicloud.com; arc=none smtp.client-ip=14.137.139.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huaweicloud.com
+Received: from mail.maildlp.com (unknown [172.18.224.235])
+	by frasgout13.his.huawei.com (SkyGuard) with ESMTPS id 4gKScl52lzzpTS0;
+	Tue, 19 May 2026 16:33:43 +0800 (CST)
+Received: from mail02.huawei.com (unknown [7.182.16.27])
+	by mail.maildlp.com (Postfix) with ESMTP id 2764E4056C;
+	Tue, 19 May 2026 16:38:38 +0800 (CST)
+Received: from [10.204.63.22] (unknown [10.204.63.22])
+	by APP2 (Coremail) with SMTP id GxC2BwCHymaDIQxqPxhvAQ--.19007S2;
+	Tue, 19 May 2026 09:38:37 +0100 (CET)
+Message-ID: <3e2629f86015edb92951dfbdb9f6df4e82c6a456.camel@huaweicloud.com>
+Subject: Re: [PATCH v5 00/13] ima: Introduce staging mechanism
+From: Roberto Sassu <roberto.sassu@huaweicloud.com>
+To: Lakshmi Ramasubramanian <nramas@linux.microsoft.com>, steven chen
+	 <chenste@linux.microsoft.com>, corbet@lwn.net, skhan@linuxfoundation.org, 
+	zohar@linux.ibm.com, dmitry.kasatkin@gmail.com, eric.snowberg@oracle.com, 
+	paul@paul-moore.com, jmorris@namei.org, serge@hallyn.com
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-integrity@vger.kernel.org, linux-security-module@vger.kernel.org, 
+	gregorylumen@linux.microsoft.com, Roberto Sassu <roberto.sassu@huawei.com>
+Date: Tue, 19 May 2026 10:38:24 +0200
+In-Reply-To: <8db443f1-d2f3-47ce-9116-18985ed0b290@linux.microsoft.com>
+References: <20260429160319.4162918-1-roberto.sassu@huaweicloud.com>
+	 <99c30be6-8b0f-486a-890c-cf74c5930726@linux.microsoft.com>
+	 <aaed52cf-26e1-4c40-812d-3788024ce5b5@linux.microsoft.com>
+	 <2302296a13b847960dbdbab3cf5518b275938838.camel@huaweicloud.com>
+	 <8db443f1-d2f3-47ce-9116-18985ed0b290@linux.microsoft.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.52.3-0ubuntu1 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260512-v2_20230123_tjmercier_google_com-v1-0-6326701c3691@redhat.com>
- <20260512-v2_20230123_tjmercier_google_com-v1-2-6326701c3691@redhat.com>
- <20260515-hinschauen-effizient-9e3a05a94f2e@brauner> <CABdmKX0d6Zsg+_TxXjB80UZR23ZvXzxYoWzORgwmx=ZiuE+Nzw@mail.gmail.com>
- <208fb820-d8eb-4832-a343-ef8b360e8120@amd.com> <CADSE00Lh95ygoXGKJGsYvQGEsFV8sVmwEC3uvh8M6r3ERzaJwg@mail.gmail.com>
- <88efe10a-8b93-4a81-8279-4a5559d0f17c@amd.com> <CABdmKX3yZubjDKbVqwrjHAiKyj_ioHzOoxd0wzFbJK=PAGOqcQ@mail.gmail.com>
- <01b6eefc-c107-4f8c-9d7c-3b86f54cabaa@amd.com>
-In-Reply-To: <01b6eefc-c107-4f8c-9d7c-3b86f54cabaa@amd.com>
-From: Albert Esteve <aesteve@redhat.com>
-Date: Tue, 19 May 2026 10:25:07 +0200
-X-Gm-Features: AVHnY4K5LncaNoVhZCnb-g1Oej_4CFtS9sUy70LBQyTJDD76MUlJZifB3Hgf-cg
-Message-ID: <CADSE00KCpCHOu2GMJ++ozXXbwF13fd2ZfmC3CnZBdLM_0p+ZMg@mail.gmail.com>
-Subject: Re: [PATCH RFC 2/5] dma-heap: charge dma-buf memory via explicit memcg
-To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-Cc: "T.J. Mercier" <tjmercier@google.com>, Christian Brauner <brauner@kernel.org>, Tejun Heo <tj@kernel.org>, 
-	Johannes Weiner <hannes@cmpxchg.org>, =?UTF-8?Q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>, 
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
-	Sumit Semwal <sumit.semwal@linaro.org>, Michal Hocko <mhocko@kernel.org>, 
-	Roman Gushchin <roman.gushchin@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
-	Muchun Song <muchun.song@linux.dev>, Andrew Morton <akpm@linux-foundation.org>, 
-	Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, 
-	John Stultz <jstultz@google.com>, Paul Moore <paul@paul-moore.com>, 
-	James Morris <jmorris@namei.org>, "Serge E. Hallyn" <serge@hallyn.com>, 
-	Stephen Smalley <stephen.smalley.work@gmail.com>, Ondrej Mosnacek <omosnace@redhat.com>, 
-	Shuah Khan <shuah@kernel.org>, cgroups@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, 
-	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, 
-	linux-mm@kvack.org, linux-security-module@vger.kernel.org, 
-	selinux@vger.kernel.org, linux-kselftest@vger.kernel.org, mripard@kernel.org, 
-	echanude@redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-CM-TRANSID:GxC2BwCHymaDIQxqPxhvAQ--.19007S2
+X-Coremail-Antispam: 1UD129KBjvdXoWrZrW5urWrGr17Zw4kWF4Durg_yoWfGwc_ur
+	1jyryvkF4UZw15CFZ2vFn3WrWDJ34Fy3WfGw15Xrs8J3srJwsxGrs5KrZYyF1fJrn8ZF1v
+	9rZrWFWFvrnI9jkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+	9fnUUIcSsGvfJTRUUUbx8YFVCjjxCrM7AC8VAFwI0_Xr0_Wr1l1xkIjI8I6I8E6xAIw20E
+	Y4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l8cAvFVAK0II2c7xJM28CjxkF64kEwV
+	A0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVWUJVWUCwA2z4x0Y4vE2Ix0cI8IcVCY1x02
+	67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIE14v26r1j6r4UM28EF7xvwVC2z280aVCY1x0267
+	AKxVW8JVW8Jr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2
+	j2WlYx0E2Ix0cI8IcVAFwI0_JrI_JrylYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7x
+	kEbVWUJVW8JwACjcxG0xvEwIxGrwACI402YVCY1x02628vn2kIc2xKxwCY1x0262kKe7AK
+	xVWUtVW8ZwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F4
+	0E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_GFv_Wryl
+	IxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxV
+	AFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j
+	6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x07Udku
+	cUUUUU=
+X-CM-SenderInfo: purev21wro2thvvxqx5xdzvxpfor3voofrz/1tbiAQASBGoK9roL3wAAsv
+X-Spamd-Result: default: False [0.04 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-88386-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[35];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	TAGGED_FROM(0.00)[bounces-88390-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[google.com,kernel.org,cmpxchg.org,suse.com,lwn.net,linuxfoundation.org,linaro.org,linux.dev,linux-foundation.org,collabora.com,arm.com,paul-moore.com,namei.org,hallyn.com,gmail.com,redhat.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,kvack.org];
+	DMARC_NA(0.00)[huaweicloud.com];
+	FREEMAIL_TO(0.00)[linux.microsoft.com,lwn.net,linuxfoundation.org,linux.ibm.com,gmail.com,oracle.com,paul-moore.com,namei.org,hallyn.com];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[aesteve@redhat.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[redhat.com:+];
-	RCVD_COUNT_FIVE(0.00)[5];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[roberto.sassu@huaweicloud.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	RCVD_COUNT_FIVE(0.00)[6];
+	MID_RHS_MATCH_FROM(0.00)[];
+	R_DKIM_NA(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,amd.com:email,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: E994B57A584
+	DBL_BLOCKED_OPENRESOLVER(0.00)[huaweicloud.com:mid,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: 5929757B380
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Tue, May 19, 2026 at 9:20=E2=80=AFAM Christian K=C3=B6nig
-<christian.koenig@amd.com> wrote:
->
-> On 5/19/26 01:39, T.J. Mercier wrote:
-> > On Mon, May 18, 2026 at 7:07=E2=80=AFAM Christian K=C3=B6nig
-> > <christian.koenig@amd.com> wrote:
-> >>
-> >> On 5/18/26 14:50, Albert Esteve wrote:
-> >>> On Mon, May 18, 2026 at 9:20=E2=80=AFAM Christian K=C3=B6nig
-> >>> <christian.koenig@amd.com> wrote:
-> >>>>
-> >>>> On 5/15/26 19:06, T.J. Mercier wrote:
-> >>>>> On Fri, May 15, 2026 at 6:53=E2=80=AFAM Christian Brauner <brauner@=
-kernel.org> wrote:
-> >>>>>>
-> >>>>>> On Tue, May 12, 2026 at 11:10:44AM +0200, Albert Esteve wrote:
-> >>>>>>> On embedded platforms a central process often allocates dma-buf
-> >>>>>>> memory on behalf of client applications. Without a way to
-> >>>>>>> attribute the charge to the requesting client's cgroup, the
-> >>>>>>> cost lands on the allocator, making per-cgroup memory limits
-> >>>>>>> ineffective for the actual consumers.
-> >>>>>>>
-> >>>>>>> Add charge_pid_fd to struct dma_heap_allocation_data. When set to
-> >>>>>>
-> >>>>>> Please be aware that pidfds come in two flavors:
-> >>>>>>
-> >>>>>> thread-group pidfds and thread-specific pidfds. Make sure that you=
-r API
-> >>>>>> doesn't implicitly depend on this distinction not existing.
-> >>>>>
-> >>>>> Hi Christian,
-> >>>>>
-> >>>>> Memcg is not a controller that supports "thread mode" so all thread=
-s
-> >>>>> in a group should belong to the same memcg.
-> >>>>
-> >>>> BTW: Exactly that is the requirement automotive has with their nativ=
-e context use case.
-> >>>>
-> >>>> The use case is that you have a deamon which has multiple threads we=
-re each one is acting on behalve of some other process.
-> >>>>
-> >>>> At the moment we basically say they are simply not using cgroups for=
- that use case, but it would be really nice if we could handle that as well=
-.
-> >>>>
-> >>>> Summarizing the requirement of that use case: You need a different c=
-group for each thread of a process.
-> >>>
-> >>> Hi Christian,
-> >>>
-> >>> Thanks for sharing this atuomotive usecase. If I understand correctly=
-,
-> >>> the actual requirement is attributing dma-buf charges to the right
-> >>> client, not putting each daemon thread in a different cgroup?
-> >>
-> >> Nope, exactly that's the difference.
-> >>
-> >> The thread acts as a filtering agent for both memory allocation and co=
-mmand submission for somebody else, the process on which behalve the daemon=
- does things can even be in a client VM, completely remote over some networ=
-k or even something like a microcontroller.
-> >>
-> >> Everything the thread does regarding CPU time, GPU driver memory alloc=
-ation as well as resources like GPU processing and I/O time etc.. needs to =
-be accounted to one client which can be different for each thread of the pr=
-ocess.
-> >>
-> >> The only thing which is shared with the main process thread is CPU mem=
-ory resources, e.g. malloc() because that is basically just needed for hous=
-ekeeping and pretty much irrelevant for this kind of use case.
-> >>
-> >> The problem is now you can't do that with cgroups at the moment but un=
-fortunately only the kernel has the information you need to know to do this=
-.
-> >>
-> >> So what you end up with is to define tons of interfaces just to get th=
-e necessary information from the kernel into userspace and then essentially=
- duplicate the same infrastructure cgroup provides in the kernel in userspa=
-ce again.
-> >>
-> >>> If so,
-> >>> the `charge_pid_fd` approach achieves this directly by passing the
-> >>> client's `pid_fd`, without needing to add per-thread cgroup
-> >>> infrastructure.
-> >>
-> >> Well it's already a massive improvemt, we could basically stop doing t=
-he whole duplication part for the GPU driver stack and just use cgroups for=
- this part.
-> >>
-> >> Doing that automatically for CPU and I/O time would just be nice to ha=
-ve additionally.
-> >>
-> >> Regards,
-> >> Christian.
-> >
-> > Hopefully I'm following correctly here.... So you are duplicating the
-> > GPU driver stack to achieve remote accounting on a per-thread basis?
->
-> Not quite, we are duplicating the handling cgroup provides in the kernel =
-in userspace.
->
-> For this memory usage information as well as execution times of the GPU k=
-ernel driver is exposed in fdinfo for example.
->
-> > Does this mean for GPU allocations you currently have some GFP_ACCOUNT
-> > magic in your driver to attribute GPU memory to the correct remote
-> > client?
->
-> No, we just expose what the kernel driver has allocated for itself. E.g. =
-page tables, buffers etc...
->
-> When userspace allocates something using memfd_create() for example we ju=
-st ignore that.
+On Fri, 2026-05-15 at 10:37 -0700, Lakshmi Ramasubramanian wrote:
+> Thanks for the response Roberto.
+>=20
+> On 5/12/2026 1:17 AM, Roberto Sassu wrote:
+>=20
+> > > >=20
+> > > > This submission proposes two ways for log trimming:
+> > > >=20
+> > > > *Flavor 1:* Staging With Prompt
+> > > > *Flavor 2:* Stage and Delete N
+> > > >=20
+> >=20
+> > I'm happy to support your trimming method. Just does not fit with my
+> > use case. I would like to keep both.
+> >=20
+>=20
+> If "Flavor 1: Staging With Prompt" would be beneficial to the Linux=20
+> kernel customers, in general, we should continue to review the change=20
+> and merge it eventually.
+>=20
+> My request, then, would be to split this patch set into 2 parts:
+>=20
+> 	Part 1: Implements "Staging With Prompt"
+>=20
+> 	Part 2: Implements "Stage and Delete N"
+>=20
+> I think that would make it easier for reviewing the code, test\validate,=
+=20
+> and merge.
 
+No need in my opinion, it is simple enough.
 
->
-> > So this series would close the gap for dma-buf allocations,
-> > but what about private GPU driver memory allocated on behalf of a
-> > client?
->
-> Well we would need a cgroup which isn't associated with any process were =
-we could charge the GPU driver allocations against.
-
-I think I better understand your framing for this now. Thanks again
-for taking the time to explain.
-
-I was looking for a way to pass cgroup around to do the charge. I
-found that `struct cgroup *cgroup_get_from_fd(int fd)` already exists
-in cgroups available symbols to handle cgroup directories.
-
-So here's an idea...
-
-Rename the charge_pid_fd to charge_fd:
-- If it is a pidfd (`!IS_ERR(pidfd_pid(fget(charge_fd)))`) then we do
-what we're already doing here.
-- If it is a cgroup_fd (`!IS_ERR(cgroup_get_from_fd(charge_fd))`) then
-we charge to that cgroup.
-
-Also we could add add an ioctl for the generic fd path similar to what
-we have for dma-buf heaps. Or have a new flavour for memfd_create:
-```
-memfd_create2(name, flags, charge_fd);
-```
-
-The transfer ioctl could also be made generic to accept both pidfds
-and cgroup_fds.
-
-For this series we could move forward as is, and make the generic
-solution a follow-up series, knowing that the field can be reused for
-cgroup fds.
-
->
-> But good point, charging against a pid wouldn't work in this use case.
->
-> Regards,
-> Christian.
->
+Roberto
 
 
