@@ -1,222 +1,209 @@
-Return-Path: <linux-doc+bounces-88501-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88504-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UIg2CtuFDGoniwUAu9opvQ
-	(envelope-from <linux-doc+bounces-88501-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 17:46:35 +0200
+	id +LgnO2WLDGo1iwUAu9opvQ
+	(envelope-from <linux-doc+bounces-88504-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 18:10:13 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DBE72581B30
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 17:46:34 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id B3A0D582027
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 18:10:13 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 9C475303FB92
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 15:45:56 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 457EB3066020
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 16:01:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4FD2033C513;
-	Tue, 19 May 2026 15:45:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6EA7A2E8B64;
+	Tue, 19 May 2026 16:01:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="hFcgK1O6"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="MiY6bFpQ";
+	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="N1odwPE0"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6CFA33B6F9
-	for <linux-doc@vger.kernel.org>; Tue, 19 May 2026 15:45:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.172
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 17D292E718B
+	for <linux-doc@vger.kernel.org>; Tue, 19 May 2026 16:01:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779205546; cv=none; b=jua/sTd5GmGlClv7UlBY6yNtodVYVZ+rUDHN0HOp3x31pTZaWCRqf85JaX/vbHA5A5tLdp27E6PcACdbWhzybxA08yNyLl4dCc/RlutSQZ7Osk9KRLtzbPkSFDnJVOXTn0IYvuA982gYmc+lS1gGjq41oKbFZjkKzP9ceIxHbWY=
+	t=1779206484; cv=none; b=BHoPTcrrOcyjo/c8qQ0rCKO5ukXnoJ1WU1kMhv8BfLFGzTPG1Z16hzJovFA7AtsH/9qGD4nhKNnhFuVO/tyYx5FMyARbZFsRyp9fhxodexzGhufw40Fr1bFrvf6GmyfBwhWVaWEMtR6JDQcm7DDG9BcyRfF0646K7zkpouFNyh8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779205546; c=relaxed/simple;
-	bh=8xTLkP5HHGOSsPXahYYct4AINZU4Xnh41shnZzK8sM0=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=hspar/rYl0FamoPkOMsAu3B7RFMcj/bKUZpGHX7HrJE0vMPYm2C87VzQP9QukMZNEiZKYmOS5yxSedDm3abbyNmxxLCfkJ+328reBuKzpTXTsXjeGbVPoiYESfkEKiL2vwPgSfZ4t4pCs07WShr3/oKW3Ap20aSN6AJueJc21bM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=hFcgK1O6; arc=none smtp.client-ip=209.85.214.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-2ba0714574fso20017725ad.2
-        for <linux-doc@vger.kernel.org>; Tue, 19 May 2026 08:45:44 -0700 (PDT)
+	s=arc-20240116; t=1779206484; c=relaxed/simple;
+	bh=6qUbI3kCpq9IrzG3DkvyvMZ2Bn6Qq+bPF5M36smFsFg=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=qcDplA+AfTVD/fC4daqHR5w0jvn1zy5Hhub1V9AiJ8g8iXaimM2DENM6ICvqXF8Y/UbwdQP+dKi6Qkhv/IBppS5XwWxWMFQbrIsSYQOJzwcDUm0VctF1GSJqN0ANbjcrrdLB9wOyHz00lFHfHmLqIgpxJP4VeRhLETK4h3nyemk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=MiY6bFpQ; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=N1odwPE0; arc=none smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1779206482;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=T6OjxI0zZxwDX8SXPRnZD+crOhWj/eJOyVt4Fi52IP8=;
+	b=MiY6bFpQK1qPcMoo+yneKt4ynjd/6YL0LIy781H56dNrRS/RZSf0uQtpaeckfrr/dJWuAT
+	iC03/sfcRIyQX99fk1D4Y/hoqyXAGK81XCIOWcP1bT8btZLuXxV37wpacHtJJJ9J932mR3
+	ij2MfH8Vf8QUDbTedTNRMau0CSAnZfw=
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
+ [209.85.222.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-591-3HF63aWpOGqcpI8I_4Kfuw-1; Tue, 19 May 2026 12:01:17 -0400
+X-MC-Unique: 3HF63aWpOGqcpI8I_4Kfuw-1
+X-Mimecast-MFC-AGG-ID: 3HF63aWpOGqcpI8I_4Kfuw_1779206477
+Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-90fd6eeed3cso925651485a.3
+        for <linux-doc@vger.kernel.org>; Tue, 19 May 2026 09:01:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779205544; x=1779810344; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=pNUJfukVCrNvL6eNTnpH1HFwWnM+ieYubC7RiDQelIA=;
-        b=hFcgK1O63VVLGtntdCe7y0qOnrxWh1SNvScVIhAhGxbC9kqdaokWe0GnywafFktK2d
-         /B3m+D/0TfkX6XBt54V5Ae8MdvBwJUDwxXMshpWcxYfrE1qxqhqZw1h95VjWlPCoP088
-         lhT2Q04//c1naK0fSTank/uW2WZAH+dxaQetsbfcPR8DTiKSJtkQcoZUQ5OTWc8cSS1y
-         2DhXoTPwGEIToQsaSstNpxR7Kfmw2DcfIictUy5CyHLGjQEjlNbgWtSMr/RA6BQ7X6GX
-         xFMRY/gyBH/cHzkuPCDww//LrIrOp32IATE2dk+xT3lvdB1QJBjuOYiuakdRk+AN0QpM
-         cIWg==
+        d=redhat.com; s=google; t=1779206477; x=1779811277; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=T6OjxI0zZxwDX8SXPRnZD+crOhWj/eJOyVt4Fi52IP8=;
+        b=N1odwPE0/siiAwiVn2M6iHvLCude0BJRLK2LIsB+9rEIEJ3zXCfHr5FNSHn5UPIwqD
+         YxjeeEkwbbTdscSOypKWq+cym/hSvdm5jgesamu6ba7XDOJTcd/YCHSkXvlUpQLSFaVK
+         a3JxL4vgocd7VuPSPa8u7CsD+zcxpfs9THAyLTb+qsF2L8tmtPzORyCrfM8b0z5WUvEN
+         EEKaP8YdghLJXHZuRgIp1Gu3iIj3nesI6YueloDzmf9UvNY+tUjd8Qe6eRODi34IzH0z
+         4LXV2gc1nuLytyOObTMDZtWowVAQH7AEcZvF+FUsfglrVaxbavRr0hUG7juYAsYMlfmB
+         Y+zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779205544; x=1779810344;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1779206477; x=1779811277;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=pNUJfukVCrNvL6eNTnpH1HFwWnM+ieYubC7RiDQelIA=;
-        b=aRu9Py21FzAIOeorGbK+DDdfK65e/uflcRBL/NQtbqusnn4d8PUvYBtplu0gnd0tfo
-         zHL6i8z0F0IAnwLAQsWSYYnB8qentfLlX0vPHjU+areSsCxwr+dcEXGdA5hW8a4I1sPv
-         PA3UlJefWnIBjzMQoXD9dJYloey0pUm6JwHV89/yJd/Hq5JKKLvrPTQ5q6XeDINbHGra
-         D6iR1lS5kN6tiLAd8sEdtB7x1jnfgBoXRHv+T6PmWnMOzhd9Kak4CkxSezH+d85uQ2eL
-         Xk259R1TRCFaWGPxIcy9jCIQv5TxSbjVMXObOhvM1ws5mVt+LLrrcIO5Lm5cRlyoO77D
-         syxw==
-X-Forwarded-Encrypted: i=1; AFNElJ9kWFvpGlo71ob314/2Qmc+SaNL3gqrTUhm7h6tIjSidoy+olVXV3Oj82YsZN4Erni6B1/3NpVABb0=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxBMtiAuR8I3/ZTekFmAhZ4it3HO3iKC3qJ00fqPYAW5fpYn72d
-	nQj2cXgXbNfrA/nN1nQMhUSl39boco6lTtSlqRTiWOCzQsSRnzO1L2Td
-X-Gm-Gg: Acq92OH1MDQAvPAkHG5ziQhLvWErUyc9WL4HWNbj39Ciclik84+WmqR+0/0Pf521v0x
-	jHQyBlcJNh9U7W8XTrIgcyG9vM0u4BljWvM1tIEHOQ/s9C6MoqXgHRXmmwrn6cqOEIbZYICRGtC
-	BPl1vCBZDWrqJLrw93zDWQbT0Ula5jcEabWZfVEXanoJhUZSR5+KIGzVOHHE0gSwNydypz8cRnl
-	3eNVG3LBtwd7q6DQvOqFtEZVVNoGXgrsR4jiol7zo2Xc4DYJm+MxfoqE1PLT1qi6nr0Nrcjor8t
-	pH1MXKF+gi7Qnb9Sex774dlY7UtnvW4ESpPKolb7BQJ7+moi3JmypVOaXdaD91gOr6N6OtecZpl
-	0J9XVmy4a/d3FmeWR5ifZyRjGxrsB0o/4uMjExU27KSxDRCf0SWh4A9qwuIbpUdd3gn9PKpWOri
-	im4wU+efbbkUUODQFYGNCUrYYpmyjEdAUXtES8lsax99UCq+GRJVo5iOTq/qDOHnKSsQ==
-X-Received: by 2002:a17:903:f8d:b0:2b0:b016:773f with SMTP id d9443c01a7336-2bd7e8a0b31mr223662135ad.11.1779205544013;
-        Tue, 19 May 2026 08:45:44 -0700 (PDT)
-Received: from harvey.lan (c-73-83-32-130.hsd1.wa.comcast.net. [73.83.32.130])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2bd5cfe7270sm187058105ad.50.2026.05.19.08.45.43
+        bh=T6OjxI0zZxwDX8SXPRnZD+crOhWj/eJOyVt4Fi52IP8=;
+        b=G108sis8DfiJQMj/5Oqt0RaCnbgbPYW4qiDw2e84jxM6TiQLa41k1287JEXER6WGPo
+         zHwCWYzz9iOatzeEitC6KfToI4qbCd2+df5MABV6mCJ8JS5fuOeEKXX+2sFBDeKpkikt
+         dPLnoumqiPSqn17AtJvGczKjIBtPRf6/C2FClEFZI/RjVNlEz7GfHMPaB0/WldvNEYZP
+         ONmujF5HE2G7iXzWfmVhBRr75T21nxlwCSvZanuF5ZPEBCqVEZlUYcICU79lnXvbqPUt
+         wfNOhjBzZHG2VItIR+6AIbbxcLmzTXLj2VmvkzRG6ainCxAvWuIHzWjIUxTEOFZq12FP
+         glhw==
+X-Forwarded-Encrypted: i=1; AFNElJ+/gXOJAkduDyGiPxSnOliQASblN4Hcil7vmdiuJ1CCc5FCGYszOZJONvyxUYQgTBp9F56SNB58h4A=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyMs0QX7cYFIcFdyre1ML4xmbXAaDCdXNPDUeVZuN4aqECPsfAh
+	VgAkTu9E01vwSsDhzL90kr0yGmyes5fSBg6EMkMQKXMg8BaUiW9jWziBob8DnNhqMV81PT6TxMG
+	eCYZ8KmmJ1mtVKAOOQyS9XYWSsGXVgSvv/iaGKMuMYJgxX1N6XSLYSJ9GV3rVsA==
+X-Gm-Gg: Acq92OEo4F8gecD2DDehMxF+GKJqBrzggNXGHt+LuYxWmCKwd5XGW40yxgdaGLxZVIS
+	VBGXWn6eY+xxRm3Yjklz+hc84soyaxywJMiaIGwfArtE1ej1QHPsmG+vOC2Rt7gzQPCqFVSZAHd
+	sPBiRIdYiFCpGzI/nfAKTPqk5ddkClCPMPg7+tHfYNsBIVBh96+ZNW4c6G8Xfi/dvZx/cHTnhs5
+	/aVOr4XBK0SmEALndbUxFYSmvsSLGkpFO+MoQn+XSRxCd5KEXvBfqs9w+0LSrdmz1bzXYl73YqL
+	3endnz78yf7sLdlEm0HwuQdQKYEmSNV2l2SddB823oaEn8TdhD6sEWznE2Vn2vrX7wnrc+pvPO+
+	W9R0wAAoUiur0pJPFDdQnhStIxx1q7blIrN/dzISaJHxWGhxmyC7fTMxEnvlxHEmiBg==
+X-Received: by 2002:a05:620a:460f:b0:911:4cb1:8a60 with SMTP id af79cd13be357-911cd178131mr3073461985a.13.1779206455569;
+        Tue, 19 May 2026 09:00:55 -0700 (PDT)
+X-Received: by 2002:a05:620a:460f:b0:911:4cb1:8a60 with SMTP id af79cd13be357-911cd178131mr3072809785a.13.1779206430240;
+        Tue, 19 May 2026 09:00:30 -0700 (PDT)
+Received: from localhost (pool-100-17-21-205.bstnma.fios.verizon.net. [100.17.21.205])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-910bc9363fcsm1883933785a.27.2026.05.19.09.00.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 19 May 2026 08:45:43 -0700 (PDT)
-From: Jim Broadus <jbroadus@gmail.com>
-To: linux-integrity@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Cc: peterhuewe@gmx.de,
-	jarkko@kernel.org,
-	jgg@ziepe.ca,
-	Jim Broadus <jbroadus@gmail.com>
-Subject: [PATCH v2] tpm: tpm_tis: Add optional delay after relinquish
-Date: Tue, 19 May 2026 08:45:30 -0700
-Message-ID: <20260519154530.6386-1-jbroadus@gmail.com>
-X-Mailer: git-send-email 2.54.0
+        Tue, 19 May 2026 09:00:29 -0700 (PDT)
+From: Eric Chanudet <echanude@redhat.com>
+Subject: [PATCH v2 0/2] cgroup/dmem: allow double-charging dmem allocations
+ to memcg
+Date: Tue, 19 May 2026 11:59:00 -0400
+Message-Id: <20260519-cgroup-dmem-memcg-double-charge-v2-0-db4d1407062b@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-0.66 / 15.00];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/4WNTQrCMBCFr1Jm7cgktRZdeQ9xkSaTH7CNJG1BS
+ u/uoAdw8Xg8+PjeBpVL4grXZoPCa6opTzL0oQEbzRQYk5MNmvSZWt2jDSUvL3QjjyixAV1ehie
+ j4EVw8orIXLwfvAaxxFTnXN7fg1VJ3X+uE7V/XatCQtv2yqmuc6zNrbCLZj7aPMJj3/cPgkfhe
+ r8AAAA=
+X-Change-ID: 20260327-cgroup-dmem-memcg-double-charge-0f100a9ffbf2
+To: Johannes Weiner <hannes@cmpxchg.org>, Michal Hocko <mhocko@kernel.org>, 
+ Roman Gushchin <roman.gushchin@linux.dev>, 
+ Shakeel Butt <shakeel.butt@linux.dev>, Muchun Song <muchun.song@linux.dev>, 
+ Andrew Morton <akpm@linux-foundation.org>, 
+ Maarten Lankhorst <dev@lankhorst.se>, Maxime Ripard <mripard@kernel.org>, 
+ Natalie Vock <natalie.vock@gmx.de>, Tejun Heo <tj@kernel.org>, 
+ =?utf-8?q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>, 
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>
+Cc: cgroups@vger.kernel.org, linux-mm@kvack.org, 
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+ "T.J. Mercier" <tjmercier@google.com>, 
+ =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
+ Maxime Ripard <mripard@redhat.com>, Albert Esteve <aesteve@redhat.com>, 
+ Dave Airlie <airlied@gmail.com>, linux-doc@vger.kernel.org, 
+ Eric Chanudet <echanude@redhat.com>
+X-Mailer: b4 0.14.2
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[gmx.de,kernel.org,ziepe.ca,gmail.com];
-	TAGGED_FROM(0.00)[bounces-88501-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jbroadus@gmail.com,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-88504-lists,linux-doc=lfdr.de];
+	FREEMAIL_TO(0.00)[cmpxchg.org,kernel.org,linux.dev,linux-foundation.org,lankhorst.se,gmx.de,suse.com,lwn.net,linuxfoundation.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[vger.kernel.org,kvack.org,lists.freedesktop.org,google.com,amd.com,redhat.com,gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[7];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[echanude@redhat.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[redhat.com:+];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,trustedcomputinggroup.org:url]
-X-Rspamd-Queue-Id: DBE72581B30
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: B3A0D582027
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Some TPMs fail to grant locality when requested immediately after being
-relinquished. In this case, the TPM_ACCESS_REQUEST_USE bit of the
-TPM_ACCESS register is cleared immediately without setting
-TPM_ACCESS_ACTIVE_LOCALITY.
+Following suggestion[1], offer a cgroupfs entry to allow an
+administrator to request that a dmem controlled region also charges to
+the memory controller.
 
-This issue can be seen at boot since tpm_chip_start, called right
-after locality is relinquished, fails. This causes the probe to fail:
+Add mem_cgroup_dmem_charge/uncharge helpers to resolve the effective
+cgroup from a dmem pool's cgroup, perform the charge and update a
+MEMCG_DMEM stat counter.
 
-tpm_tis MSFT0101:00: probe with driver tpm_tis failed with error -1
+Add a "dmem.memcg" control file at the root level to configure memcg
+charging per region. The setting is disabled by default and locked on
+first charge attempt.
 
-This occurs on some older Dell Latitudes and maybe others. To work
-around this, add a "settle" boolean param to tpm_tis. When this is
-enabled, a delay is added after locality is relinquished.
+[1] https://lore.kernel.org/all/a446b598-5041-450b-aaa9-3c39a09ff6a0@amd.com/
 
-Signed-off-by: Jim Broadus <jbroadus@gmail.com>
+Signed-off-by: Eric Chanudet <echanude@redhat.com>
 ---
- Documentation/admin-guide/kernel-parameters.txt | 7 +++++++
- drivers/char/tpm/tpm_tis.c                      | 7 +++++++
- drivers/char/tpm/tpm_tis_core.c                 | 3 +++
- drivers/char/tpm/tpm_tis_core.h                 | 1 +
- 4 files changed, 18 insertions(+)
+Changes in v2:
+- Use mem_cgroup_dmem_{,un}charge to account for memcg pages instead of
+  exposing raw nr_pages functions. Use it to centralize where to find
+  the effective cgroup from the pool's cgroup (Johannes)
+- Set depends_on for cgrp_memory if CONFIG_MEMCG by having a memory
+  controller in children cgroup (Michal)
+- Move dmem.memcg to the root level as it applies by region for all
+  cgroups
+- Add a dmem memory.stats entry for reporting memcg charges for dmem
+  allocations.
+- Wrap the memcg enable/disable/lock configuration under a single state
+  to avoid toctou races and simplify transitions.
+- Link to v1: https://lore.kernel.org/r/20260403-cgroup-dmem-memcg-double-charge-v1-0-c371d155de2a@redhat.com
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index 4d0f545fb3ec..5b7111033fbb 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -7651,6 +7651,13 @@ Kernel parameters
- 			defined by Trusted Computing Group (TCG) see
- 			https://trustedcomputinggroup.org/resource/pc-client-platform-tpm-profile-ptp-specification/
- 
-+	tpm_tis.settle= [HW,TPM]
-+			Format: <bool>
-+			When enabled, this adds a delay after locality is
-+			relinquished. Some TPMs will fail to grant locality if
-+			requested immediately after being relinquished. This
-+			causes the probe to fail.
-+
- 	tp_printk	[FTRACE]
- 			Have the tracepoints sent to printk as well as the
- 			tracing ring buffer. This is useful for early boot up
-diff --git a/drivers/char/tpm/tpm_tis.c b/drivers/char/tpm/tpm_tis.c
-index 9aa230a63616..8ac0ea78570e 100644
---- a/drivers/char/tpm/tpm_tis.c
-+++ b/drivers/char/tpm/tpm_tis.c
-@@ -101,6 +101,10 @@ module_param(force, bool, 0444);
- MODULE_PARM_DESC(force, "Force device probe rather than using ACPI entry");
- #endif
- 
-+static bool settle;
-+module_param(settle, bool, 0444);
-+MODULE_PARM_DESC(settle, "Add settle time after relinquish");
-+
- #if defined(CONFIG_PNP) && defined(CONFIG_ACPI)
- static int has_hid(struct acpi_device *dev, const char *hid)
- {
-@@ -242,6 +246,9 @@ static int tpm_tis_init(struct device *dev, struct tpm_info *tpm_info)
- 	if (itpm || is_itpm(ACPI_COMPANION(dev)))
- 		set_bit(TPM_TIS_ITPM_WORKAROUND, &phy->priv.flags);
- 
-+	if (settle)
-+		set_bit(TPM_TIS_SETTLE_AFTER_RELINQUISH, &phy->priv.flags);
-+
- 	return tpm_tis_core_init(dev, &phy->priv, irq, &tpm_tcg,
- 				 ACPI_HANDLE(dev));
- }
-diff --git a/drivers/char/tpm/tpm_tis_core.c b/drivers/char/tpm/tpm_tis_core.c
-index 21d79ad3b164..fbeee085098e 100644
---- a/drivers/char/tpm/tpm_tis_core.c
-+++ b/drivers/char/tpm/tpm_tis_core.c
-@@ -171,6 +171,9 @@ static int __tpm_tis_relinquish_locality(struct tpm_tis_data *priv, int l)
- {
- 	tpm_tis_write8(priv, TPM_ACCESS(l), TPM_ACCESS_ACTIVE_LOCALITY);
- 
-+	if (test_bit(TPM_TIS_SETTLE_AFTER_RELINQUISH, &priv->flags))
-+		tpm_msleep(TPM_TIMEOUT);
-+
- 	return 0;
- }
- 
-diff --git a/drivers/char/tpm/tpm_tis_core.h b/drivers/char/tpm/tpm_tis_core.h
-index 6c3aa480396b..413cac5e0f31 100644
---- a/drivers/char/tpm/tpm_tis_core.h
-+++ b/drivers/char/tpm/tpm_tis_core.h
-@@ -90,6 +90,7 @@ enum tpm_tis_flags {
- 	TPM_TIS_DEFAULT_CANCELLATION	= 2,
- 	TPM_TIS_IRQ_TESTED		= 3,
- 	TPM_TIS_STATUS_VALID_RETRY	= 4,
-+	TPM_TIS_SETTLE_AFTER_RELINQUISH	= 5,
- };
- 
- struct tpm_tis_data {
+---
+Eric Chanudet (2):
+      mm/memcontrol: add dmem charge/uncharge functions
+      cgroup/dmem: add dmem.memcg control file for double-charging to memcg
+
+ Documentation/admin-guide/cgroup-v2.rst |  23 +++++
+ include/linux/memcontrol.h              |  16 ++++
+ kernel/cgroup/dmem.c                    | 158 +++++++++++++++++++++++++++++++-
+ mm/memcontrol.c                         |  65 +++++++++++++
+ 4 files changed, 259 insertions(+), 3 deletions(-)
+---
+base-commit: d989f135f71699294bb2ffd4726b526456e2db68
+change-id: 20260327-cgroup-dmem-memcg-double-charge-0f100a9ffbf2
+
+Best regards,
 -- 
-2.54.0
+Eric Chanudet <echanude@redhat.com>
 
 
