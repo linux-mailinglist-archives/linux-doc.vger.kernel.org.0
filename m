@@ -1,129 +1,142 @@
-Return-Path: <linux-doc+bounces-88317-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88318-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UDZ/DgusC2omLAUAu9opvQ
-	(envelope-from <linux-doc+bounces-88317-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 02:17:15 +0200
+	id 8NH2GbutC2omLAUAu9opvQ
+	(envelope-from <linux-doc+bounces-88318-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 02:24:27 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id C1882575773
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 02:17:14 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 74395575860
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 02:24:26 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id CF2EF3024975
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 00:17:12 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 52085300BE8C
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 00:21:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9827918DB01;
-	Tue, 19 May 2026 00:17:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C65731DA0E1;
+	Tue, 19 May 2026 00:21:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TUjWG8Q9"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LwNnBkQq"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 73EB5188713;
-	Tue, 19 May 2026 00:17:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1CFF199EAD;
+	Tue, 19 May 2026 00:21:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779149831; cv=none; b=VbnKn5QmTTXEBcx/Z+0btcgkO+6w3RfYB6N4ccKrjHuVY/Gn0+twvg++UkTrWfqaadCPad85c+G71dvz53WrI+kSivfJc8NAYhJT+UQfAproc9FhpTRrnzjXbHx1LpY4ppTVte4unxJmQfGWuKTiEJLWt+RurFTipBVNyo377YI=
+	t=1779150065; cv=none; b=gOoia48YmwkVZeRHi7HTFeijF8v4sdqI+Pwl2Y4wOU3LyhzbD5cPa57QwdAUYMuWo9BpRpkE1m7Bz+e54R1S31/O5jR2aPNVF9g54VYyxL3kWedD71C0A/y79ZJaqr+/ydd8l7U9ZoKaIwfIOXgywg5Citys/X9AOprwkhShI2c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779149831; c=relaxed/simple;
-	bh=mxj47XeUru82Pt8pJLXY53mHkRiq7hhv4CRlGK/7boc=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=TEHFs8V5W5hBuceRmTH+WukvQJpG01FutjEvMXymVX0mIP/xHRLaV7ybi1bTxD2sRUDuZ26Arb0hqF3IqNZ6+6W5tBQ1/Yd/wj0nOfpOGZrOtBH1BDRzgEAwgXtIPSIwhpqJYQATXDa1IMp2wBZRDWTZlIf/OeA+d9981aQMjOA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TUjWG8Q9; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 56E85C2BCB7;
-	Tue, 19 May 2026 00:17:10 +0000 (UTC)
+	s=arc-20240116; t=1779150065; c=relaxed/simple;
+	bh=g6jM78IAiwmiKKkEI1OsTMYPwII4biLAvajfrLflMm4=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=QhmIx931sV0nwgPOUeGVVZorr22U9i/YicAmA6grqJ7m+VIXNhVpalc9YAgGHeuefJlLb/j52Lav16Bt7tvszFZzizza89Yc4yYVJcc5UjrVIep9uMvO6zPD+3uo929CngMbPPimduqJRX9dTXedD3jl2FPBtpI0zgKyDSp03J0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LwNnBkQq; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2E51EC2BCB7;
+	Tue, 19 May 2026 00:21:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1779149831;
-	bh=mxj47XeUru82Pt8pJLXY53mHkRiq7hhv4CRlGK/7boc=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=TUjWG8Q9IZC2UVyUGXZLtuyJapt1DpiayMo95tUuaJqADSEPmFRR6ncWdoX128Hrr
-	 HdXVxjLRCd0ugRtu827ZGvGiFdI0BuhNYHvalrXtm1asqbysmPjS9/4GslKv9xRTwU
-	 3/Z+qtMpBh9EeSrfMKoNX7+yzb8M9tcEwAdKkjEroTvTU3KpRF1x8/nN93rC9zjEHH
-	 2o2czCRoJikBmL/UfCVe5ookbOUyjI9Pjt9w+lx/JPvzxofklUuogJwY3rvj7W9PVx
-	 Z8bezuqzz/JkmZSX6Upinw8jKDI8Uv4gJvDeeUIA9X4kUyiL8IXkq+d8tsIIwklvLR
-	 RFqJjt6MzqRVA==
-From: SeongJae Park <sj@kernel.org>
-To: Maksym Shcherba <mshcherba2000@gmail.com>
-Cc: SeongJae Park <sj@kernel.org>,
-	akpm@linux-foundation.org,
-	david@kernel.org,
-	ljs@kernel.org,
-	liam@infradead.org,
-	vbabka@kernel.org,
-	rppt@kernel.org,
-	surenb@google.com,
-	mhocko@suse.com,
-	corbet@lwn.net,
-	skhan@linuxfoundation.org,
-	damon@lists.linux.dev,
-	linux-mm@kvack.org,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kselftest@vger.kernel.org,
-	Maksym Shcherba <maksym.shcherba@lnu.edu.ua>
-Subject: Re: [PATCH 2/6] mm/damon/sysfs: implement update_schemes_quota_goals command
-Date: Mon, 18 May 2026 17:17:02 -0700
-Message-ID: <20260519001703.99264-1-sj@kernel.org>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260518190932.42270-2-maksym.shcherba@lnu.edu.ua>
-References: 
+	s=k20201202; t=1779150065;
+	bh=g6jM78IAiwmiKKkEI1OsTMYPwII4biLAvajfrLflMm4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=LwNnBkQqWlTsR3QiBnUclIbtYOIBKYxJPhlnH+/VBpsQWfJdPmmhICceqPauQlmr9
+	 dUr/t4b7lnipWnyE+riIeb9nrx8jDn+9oV2bXpEq0MSCNWzeOB7w5j38ZJBDmw3xRp
+	 NqWLlrsb1L7eS76wKk2cFXoqfq5o0x2y1HutEZnEGuPg3MUSueE+7gMPLVznOiLL+t
+	 sNeCXfcM3eAM3vyRHiIjSpjOUlXpcLqZz2YkC2UfDEBeF768WddjNgEwTjZMoymhMN
+	 Xu4IuswwLpgBisFI71pr3RpXIvFZNHMacW3TzpVYMi5UXy4oEkQ8hPRFDAj93mGnO3
+	 yh1wyrmZ22+Eg==
+Date: Mon, 18 May 2026 20:21:03 -0400
+From: Sasha Levin <sashal@kernel.org>
+To: Paul Moore <paul@paul-moore.com>
+Cc: Song Liu <song@kernel.org>, corbet@lwn.net, akpm@linux-foundation.org,
+	skhan@linuxfoundation.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
+	gregkh@linuxfoundation.org, linux-security-module@vger.kernel.org
+Subject: Re: [PATCH] killswitch: add per-function short-circuit mitigation
+ primitive
+Message-ID: <agus77KM_AHBUrP9@laps>
+References: <20260507070547.2268452-1-sashal@kernel.org>
+ <CAHC9VhTwDt2Bx8n0io9Qge_fUEnrHsxrFAQY+KaemKWqJqBQxw@mail.gmail.com>
+ <CAPhsuW4TJRqQKXgcBYog8YgFLU2h2Zq9ReahxTYp_zpDyvO8AA@mail.gmail.com>
+ <CAHC9VhS1DJNs9gDB6gD9WKhL08giSVajBskZ+=mY0AWRCAsw7Q@mail.gmail.com>
+ <CAPhsuW5jQOzRTi1ea+=UPhx5W9bkBdivPagRE=O=nx0zf_vb8w@mail.gmail.com>
+ <CAHC9VhTGDOJZDzEA31qc0S6FJpYNC4oD__HQ-65wqqwhng=V9Q@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+In-Reply-To: <CAHC9VhTGDOJZDzEA31qc0S6FJpYNC4oD__HQ-65wqqwhng=V9Q@mail.gmail.com>
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-88317-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-88318-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
 	DKIM_TRACE(0.00)[kernel.org:+];
+	MISSING_XM_UA(0.00)[];
+	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sashal@kernel.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[10];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: C1882575773
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,paul-moore.com:email]
+X-Rspamd-Queue-Id: 74395575860
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Mon, 18 May 2026 22:09:28 +0300 Maksym Shcherba <mshcherba2000@gmail.com> wrote:
+On Mon, May 18, 2026 at 07:57:37PM -0400, Paul Moore wrote:
+>On Mon, May 18, 2026 at 7:23 PM Song Liu <song@kernel.org> wrote:
+>> On Mon, May 18, 2026 at 2:29 PM Paul Moore <paul@paul-moore.com> wrote:
+>> [...]
+>> > In my opinion, making killswitch an LSM is more of a procedural item
+>> > that deals with how we view a capability like killswitch.  I
+>> > personally view killswitch as somewhat similar to Lockdown, which is
+>> > why I made the suggestion.
+>> >
+>> > The use of kprobes, while an interesting idea, presents problems as
+>> > allowing any kernel symbol to be killed introduces the potential for
+>> > security regressions.  As a reminder, some LSMs, as well as other
+>> > kernel subsystems, have mechanisms in place to restrict root and/or
+>> > enforce one-way configuration locks; while many people equate "root"
+>> > with full control, in many cases today that is not strictly correct.
+>> >
+>> > Yes, kprobes have been around for some time, this is not a new
+>> > problem, but killswitch makes it far more convenient and accessible to
+>> > do dangerous things with kprobes.  If killswitch makes it past the RFC
+>> > stage without any significant changes to its kill mechanism, we may
+>> > need to start considering more liberal usage of NOKPROBE_SYMBOL()
+>> > which I think would be an unfortunate casualty.
+>>
+>> I don't think we can use NOKPROBE_SYMBOL(). There are functions
+>> that we don't want to killswitch, but still want to trace.
+>
+>That was exactly my point, but we need to figure something out so
+>killswitch doesn't make it easier to cause a regression.
 
-> Add the logic to copy the current_value from the internal
-> damos_quota_goal structure to the damos_sysfs_quota_goal sysfs structure.
-> Introduce the DAMON_SYSFS_CMD_UPDATE_SCHEMES_QUOTA_GOALS command
-> and integrate it with the sysfs interface via the 'state' file.
+At this point it sounds like you're trying to stop root from shooting itself in
+the foot, which we always avoided doing.
 
-Could you please further elaborate why you think this change is needed?  What
-is the expected use case and benefit?
+killswitch doesn't add any new functionality in that regard: rood can always
+load a module, write to /dev/mem, etc which would allow it to do the same
+thing. It's just a more convenient way to do it.
 
-Seems the following patches of this series depend on this patch.  I will hold
-review of more details in this and following patches until the above high level
-question is answered.
-
-
+-- 
 Thanks,
-SJ
-
-[...]
+Sasha
 
