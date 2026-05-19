@@ -1,220 +1,261 @@
-Return-Path: <linux-doc+bounces-88365-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88367-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eI2rIcAKDGo5UQUAu9opvQ
-	(envelope-from <linux-doc+bounces-88365-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 09:01:20 +0200
+	id CP8zC4ELDGo5UQUAu9opvQ
+	(envelope-from <linux-doc+bounces-88367-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 09:04:33 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DAEA75788A3
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 09:01:19 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8BACD578988
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 09:04:32 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id B332F302FB6C
-	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 06:56:05 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 3AB2030578AE
+	for <lists+linux-doc@lfdr.de>; Tue, 19 May 2026 06:58:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4C4893AA517;
-	Tue, 19 May 2026 06:56:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="a+di65vk"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D16113ACEE3;
+	Tue, 19 May 2026 06:58:39 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+Received: from mail-oo1-f71.google.com (mail-oo1-f71.google.com [209.85.161.71])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C3D83A8746
-	for <linux-doc@vger.kernel.org>; Tue, 19 May 2026 06:56:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1AC3A3ACA77
+	for <linux-doc@vger.kernel.org>; Tue, 19 May 2026 06:58:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.161.71
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779173765; cv=none; b=SPpWOB4bG4c6PoGtM7pTbuTE8c5pc07OjBI8kKQ87MsVEFt+w3fvbHzlLwWhz6u1wRPE/fgHe1DNcS85BJ2mzu3kZKimaOCLo9Hq030x3XVNBNvu7qQaBdspXP2JScOWqEqmcPfGJBj+MqmAV2w3haxyM4fCd10zbByRvkiHgxk=
+	t=1779173919; cv=none; b=ZYxvJV90TL5bVevmJtOcAqYMrw5lFdHVdW9vu3gkJacYehNkGQDiJ5XwElgKo1PNxoY8T+4hzCZMvNM1izqjBR9R8+mFDK+DII0FUrRnA2+8U1FKIzDSgd7ttkWuvb2+BH4bIU+1yQIo+tVr52gdlaJMGpFlFuDKmrIP+HZ46TQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779173765; c=relaxed/simple;
-	bh=A+23uLQLzH2qQrDwu2mwAHSU4wNnmzaN26nspzv0uu8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Sr/rmQ1kCTbhARnMKtbHbw2PT+pvA+0c/uVFqcXwlmkgCkVqXCmh5fba9HOVrwUPJEc21KOEv0VQdSsL+jL7UTr/NXfZWVYLfIAq4oAZYW9HlCRwIhd6rkeSCs4qnOvFt+OGAsZESCU2gFKb+NuBck1LEpTiQBX8pPzd4DZwbVs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=a+di65vk; arc=none smtp.client-ip=209.85.128.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-4893940bb5eso16383445e9.3
-        for <linux-doc@vger.kernel.org>; Mon, 18 May 2026 23:56:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779173762; x=1779778562; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=itPcGM/gwKQ3p1FhYekN6m8pyKpHNYH8z+J/IPhR2cE=;
-        b=a+di65vkzeNAlL1M26ty27XmMAR68h2B+P4COk+Xg7sE71SqeOwIqhZcuPfe70Txrf
-         M/2zJIqIeM0Lcvhc9I4lP2IasGlB1+7HFdEeL1kNGvaB0ow9uLKNDLDu9EjWFjW3uIGM
-         OQjGh7DjuKKp8bxakQBsuTESCxXsmMBG0d/UJG2rW06/Co6idvc01OkmbuWys4Ggr9m+
-         QNXNsHELV1Lb/LH1L9PMRKj+T0oixiNxSh3HpWSlOe5Ld3fHvyCcmIIBE+/Bve1ta1h1
-         6cSAfzPwRbljR3sxysnWO3J0aP3WDfzP0xx4ciey0GnbU+n/Vs1wBMbE0PbxNnY9PdCc
-         Abpw==
+	s=arc-20240116; t=1779173919; c=relaxed/simple;
+	bh=to/rK14F4VwRyIxQvXlYUYpd0yFzAgR3xrJ7ChL+xq0=;
+	h=MIME-Version:Date:In-Reply-To:Message-ID:Subject:From:To:Cc:
+	 Content-Type; b=qnFhcFUns5FGzi/CMeAddKQyTaYxaIix2JKkobxTLkRXlubDRwqHS45jFkcNvF+3yWbtB3P8+wjp/Od563BWxn9Mp19+TYW3ScUO2lRA46HT7Kj4bnR0ATyfJswcD/MSg8ZNL4dtMqJpqf2ufyyqOZ9eRKreWkP7kcoRfVL82sY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=syzkaller.appspotmail.com; spf=pass smtp.mailfrom=M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com; arc=none smtp.client-ip=209.85.161.71
+Authentication-Results: smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=syzkaller.appspotmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com
+Received: by mail-oo1-f71.google.com with SMTP id 006d021491bc7-6948d83a548so9574792eaf.0
+        for <linux-doc@vger.kernel.org>; Mon, 18 May 2026 23:58:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779173762; x=1779778562;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=itPcGM/gwKQ3p1FhYekN6m8pyKpHNYH8z+J/IPhR2cE=;
-        b=iRNcFAwV3v6k8jDeoDkYDcPGx16im6YmTlQ32RjL8DNPZnSQ68guFPSQnHbORsiKFo
-         d5J+FckcEnDuTSobQZoUMZXNu/XpXqo8m7qh+ifWp1nx5M53YFzJZIXpGUtp7BB24SgL
-         w+RTm9LvpGjhysYBGa8wjBDZGB4MPah8U3eGZktDziRtDFxpswn1Uirz3OzzdqSJ32RD
-         QZQSzLpBIB2/ZaKBwyQbX/RL1UNqEyFtS7exTQeUeOn1Iqf/nIRo1FAFoE5kE2kM2Qb0
-         fMKPs3wSiTIek74dTjfKSo/GNXQH54tVIlsZ0m9feN83WaHKSyhdx4xXaChKeSEp11yX
-         FLyA==
-X-Forwarded-Encrypted: i=1; AFNElJ8eb3pZhLXSiCgd9NX6ZTkobcdMWPPxygSFO4+RBmN1iHMjLpGCKuNOyXd7GL6RK5+LpMjC4V20mFY=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzAqWQzFougaxL7aD1rIshaiyFjGEiurSA46+gpKhl/T49iM781
-	cUnFFK/67fANzHbtJN6NSkY9Ej19ceXzNwYqO3lnFvVwMWjEoitIVC24
-X-Gm-Gg: Acq92OGZlex3xyQ2kTcVNzrgA40Eqy1v0nymM0uBjheQFpAwB7+K19VqZbVdD0Jz2RY
-	8e3XkBbpQO8+7B0t3L6kZ94yexPKB/dlXdRYUuugagWtctZYLT9cWcIWfjl2R5hRFtryJJtycN7
-	glTJee6NrkIeeiWzP2mtGDV3DdWAc3XmhtdVp8Aza4HJZrpUXSmjVyyCC4V0tds5Y+ZGsI4BBMS
-	atN8E6vtc+vtC3zDHuuxZZ5BXlNPRgn7awC67cHyBAsDLkkF35iJ59oU0PifytHNOe4USp37927
-	Q1r92p7OCBYdKmmaeM+LmoKK1QvpJirYa1U7VJ3vyFneBFS0HBWz+PDkphpKqw7+kKaTncAC8sH
-	h6fq5/BIzIwW9ngcIOl74C3tpiMOHj+julBSQmPjib4xwEYTb+TQ5qsUllZcyxr27VvwyEewrNW
-	KabmIew1SCmAIpIcJCyaRbkCDCboAYg3xRWP43lm5Z5A08uANQy79b+8E3w1f2IBl56o9abdyc8
-	Z8xqds=
-X-Received: by 2002:a05:600c:a30a:b0:48e:62ec:f264 with SMTP id 5b1f17b1804b1-48fe61f29femr220648785e9.17.1779173761829;
-        Mon, 18 May 2026 23:56:01 -0700 (PDT)
-Received: from ?IPV6:2a02:3033:6c2:b9c5:ec15:f5ad:b85f:a3b8? ([2a02:3033:6c2:b9c5:ec15:f5ad:b85f:a3b8])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48fe5694f2csm306900785e9.4.2026.05.18.23.55.58
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 18 May 2026 23:56:01 -0700 (PDT)
-Message-ID: <3d94a704-05e7-445c-9238-a77d22541ba3@gmail.com>
-Date: Tue, 19 May 2026 08:55:54 +0200
+        d=1e100.net; s=20251104; t=1779173917; x=1779778717;
+        h=content-transfer-encoding:cc:to:from:subject:message-id:in-reply-to
+         :date:mime-version:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ZFrB8cafc/UDPLZPmOmG8rNv10MH4VFhRr3sj9GksQk=;
+        b=dK7yZKZF9Hrr5LjhZvTa6ttP8JWxwVvXHrrOKR7NjgwzFAEzdoIdEubI57Mid9lNcQ
+         kD5DwMliLuAHWWx24F7RvnK9RT8fjcLvJJDDlFyC+t0mX4RLaCyFAvzEPuPMnkmkWmfa
+         q6ETIiUT1Rbv2Mc3B6AmE+abOOZP6nTPrQKn8Ig94oy/nJNoqTAhRFT1S01GtUe06xHi
+         +lRDO5iZ6Zk96JEFzNHkQ66I3WxL54YGmgUSMahaaIj+MaWbnS4F4h/0szHg3GbbNtnO
+         4RB4r8Zj0aDk+fmXnk2NMlE2E1fI9sdG/fBbw8e/Q8FoO6q/XoDGORTOg5XCQGYLqo2q
+         Kjsg==
+X-Forwarded-Encrypted: i=1; AFNElJ8nE4fAr9EYatIpZOxLTq3YKHm+uIYZjvEcd6fcmKtUA/jomx1CybjgjoK4TRfiu0i/fSknAuxSXpY=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyjMEQVnC3JOppMToFQjogiu5dfnGkQgHnW3Z0KYkWJEi0CJg1U
+	XRN6Gcg7cxIIh3BW9ApccEw7OO25xR4wvMKxZk2l5Sf626e+t7SpH50+OdM44R19BLg1HnP3yIo
+	YsMecu0iRieI92BvhZuw7iYhiqOaGhv72VK1O+G5nLAdUoUrR9/es5kQZieM=
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] dt-bindings: iio: dac: Add AD5529R
-To: Jonathan Cameron <jic23@kernel.org>,
- Janani Sunil <janani.sunil@analog.com>
-Cc: Lars-Peter Clausen <lars@metafoo.de>,
- Michael Hennerich <Michael.Hennerich@analog.com>,
- David Lechner <dlechner@baylibre.com>, =?UTF-8?Q?Nuno_S=C3=A1?=
- <nuno.sa@analog.com>, Andy Shevchenko <andy@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Philipp Zabel <p.zabel@pengutronix.de>,
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- linux-iio@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- rodrigo.alencar@analog.com
-References: <20260508-ad5529r-driver-v2-0-e315441685d7@analog.com>
- <20260508-ad5529r-driver-v2-1-e315441685d7@analog.com>
- <20260508134843.7646c4f5@jic23-huawei>
-Content-Language: en-US
-From: Janani Sunil <jan.sun97@gmail.com>
-In-Reply-To: <20260508134843.7646c4f5@jic23-huawei>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Received: by 2002:a05:6820:1f06:b0:694:8f3a:3f3d with SMTP id
+ 006d021491bc7-69c94375246mr11683344eaf.35.1779173917016; Mon, 18 May 2026
+ 23:58:37 -0700 (PDT)
+Date: Mon, 18 May 2026 23:58:37 -0700
+In-Reply-To: <20260519012754.240804-1-leobras.c@gmail.com>
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <6a0c0a1d.050a0220.154e79.0003.GAE@google.com>
+Subject: [syzbot ci] Re: Introduce Per-CPU Work helpers (was QPW)
+From: syzbot ci <syzbot+ci1f8633521f2ac20d@syzkaller.appspotmail.com>
+To: akpm@linux-foundation.org, axelrasmussen@google.com, baohua@kernel.org, 
+	bhe@redhat.com, boqun@kernel.org, bp@alien8.de, brauner@kernel.org, 
+	chrisl@kernel.org, cl@gentwo.org, corbet@lwn.net, coxu@redhat.com, 
+	dapeng1.mi@linux.intel.com, david@kernel.org, dianders@chromium.org, 
+	ebiggers@kernel.org, elver@google.com, feng.tang@linux.alibaba.com, 
+	frederic@kernel.org, gary@garyguo.net, hannes@cmpxchg.org, hao.li@linux.dev, 
+	harry@kernel.org, jackmanb@google.com, jannh@google.com, kasong@tencent.com, 
+	kees@kernel.org, kuba@kernel.org, leobras.c@gmail.com, liam@infradead.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-mm@kvack.org, 
+	linux-rt-devel@lists.linux.dev, lirongqing@baidu.com, ljs@kernel.org, 
+	longman@redhat.com, masahiroy@kernel.org, mhocko@suse.com, mingo@redhat.com, 
+	mtosatti@redhat.com, nathan@kernel.org, nphamcs@gmail.com, nsc@kernel.org, 
+	ojeda@kernel.org, pasha.tatashin@soleen.com, paulmck@kernel.org, 
+	peterz@infradead.org, pfalcato@suse.de, qi.zheng@linux.dev, 
+	rdunlap@infradead.org
+Cc: syzbot@lists.linux.dev, syzkaller-bugs@googlegroups.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spamd-Result: default: False [0.14 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
+	DMARC_POLICY_SOFTFAIL(0.10)[appspotmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-88365-lists,linux-doc=lfdr.de];
+	FREEMAIL_TO(0.00)[linux-foundation.org,google.com,kernel.org,redhat.com,alien8.de,gentwo.org,lwn.net,linux.intel.com,chromium.org,linux.alibaba.com,garyguo.net,cmpxchg.org,linux.dev,tencent.com,gmail.com,infradead.org,vger.kernel.org,kvack.org,lists.linux.dev,baidu.com,suse.com,soleen.com,suse.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	TAGGED_FROM(0.00)[bounces-88367-lists,linux-doc=lfdr.de,ci1f8633521f2ac20d];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCVD_TLS_LAST(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jansun97@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[analog.com:url,analog.com:email,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,devicetree.org:url]
-X-Rspamd-Queue-Id: DAEA75788A3
+	FROM_NEQ_ENVFROM(0.00)[syzbot@syzkaller.appspotmail.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	TO_DN_NONE(0.00)[];
+	R_DKIM_NA(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[52];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,googlegroups.com:email,appspotmail.com:email,gitlab.freedesktop.org:url]
+X-Rspamd-Queue-Id: 8BACD578988
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
+syzbot ci has tested the following series
 
-On 5/8/26 14:48, Jonathan Cameron wrote:
-> On Fri, 8 May 2026 13:55:47 +0200
-> Janani Sunil <janani.sunil@analog.com> wrote:
->
->> Devicetree bindings for AD5529R 16 channel 12/16 bit high voltage,
->> buffered voltage output digital-to-analog converter (DAC) with an
->> integrated precision reference.
->>
->> Signed-off-by: Janani Sunil <janani.sunil@analog.com>
->> ---
->>   .../devicetree/bindings/iio/dac/adi,ad5529r.yaml   | 96 ++++++++++++++++++++++
->>   MAINTAINERS                                        |  7 ++
->>   2 files changed, 103 insertions(+)
->>
->> diff --git a/Documentation/devicetree/bindings/iio/dac/adi,ad5529r.yaml b/Documentation/devicetree/bindings/iio/dac/adi,ad5529r.yaml
->> new file mode 100644
->> index 000000000000..f531b4865b01
->> --- /dev/null
->> +++ b/Documentation/devicetree/bindings/iio/dac/adi,ad5529r.yaml
->> @@ -0,0 +1,96 @@
->> +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
->> +%YAML 1.2
->> +---
->> +$id: http://devicetree.org/schemas/iio/dac/adi,ad5529r.yaml#
->> +$schema: http://devicetree.org/meta-schemas/core.yaml#
->> +
->> +title: Analog Devices AD5529R 16-Channel 12/16-bit High Voltage DAC
->> +  * Multiplexer for output voltage, load current sense and die temperature
->> +
->> +  Datasheet: https://www.analog.com/media/en/technical-documentation/data-sheets/ad5529r.pdf
->> +
->> +properties:
->> +  compatible:
->> +    const: adi,ad5529r
->> +
->> +  reg:
->> +    maxItems: 1
->> +
->> +  spi-max-frequency:
->> +    maximum: 50000000
->> +
->> +  reset-gpios:
->> +    maxItems: 1
->> +    description:
->> +      GPIO connected to the RESET pin. Active low. When asserted low,
->> +      performs a power-on reset and initializes the device to its default state.
->> +
->> +  vdd-supply:
->> +    description: Digital power supply (typically 3.3V)
->> +
->> +  avdd-supply:
->> +    description: Analog power supply (typically 5V)
->> +
->> +  hvdd-supply:
->> +    description: High voltage positive supply (up to 40V for output range)
->> +
->> +  hvss-supply:
->> +    description: High voltage negative supply (ground or negative voltage)
-> I don't mind doing it this way but in some similar cases where 0 is something that
-> can be considered the 'default' we've made the supply optional.  What was
-> your reasoning for requiring it in this case?
->
-> dt-bindings should be as complete as we can make them - with that in mind...
->
-> There are some more interesting corners on this device the binding doesn't
-> currently cover such as mux_out pin.  We'd normally do that by making the
-> driver potentially a client of an ADC
->
-> Easier though is !alarm which smells like an interrupt.
-> !clear probably a gpio. TG0-3 also GPIOs.
+[v4] Introduce Per-CPU Work helpers (was QPW)
+https://lore.kernel.org/all/20260519012754.240804-1-leobras.c@gmail.com
+* [PATCH v4 1/4] Introducing pw_lock() and per-cpu queue & flush work
+* [PATCH v4 2/4] mm/swap: move bh draining into a separate workqueue
+* [PATCH v4 3/4] swap: apply new pw_queue_on() interface
+* [PATCH v4 4/4] slub: apply new pw_queue_on() interface
 
-You are right, for unipolar operation, HVSS can default to ground. I will make HVSS optional.
-I will also add bindings for alarm/clear/TG1, TG2, TG3 and mux out.
+and found the following issue:
+WARNING in __pcs_replace_empty_main
 
-Best Regards,
-Janani Sunil
+Full report is available here:
+https://ci.syzbot.org/series/804f81bd-77b4-490e-bd57-6345ad2aa923
 
+***
+
+WARNING in __pcs_replace_empty_main
+
+tree:      drm-next
+URL:       https://gitlab.freedesktop.org/drm/kernel.git
+base:      5200f5f493f79f14bbdc349e402a40dfb32f23c8
+arch:      amd64
+compiler:  Debian clang version 21.1.8 (++20251221033036+2078da43e25a-1~exp=
+1~20251221153213.50), Debian LLD 21.1.8
+config:    https://ci.syzbot.org/builds/3ea80958-13bd-49da-9c64-6deb788113f=
+8/config
+
+clocksource: refined-jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_=
+idle_ns: 19112604462750000 ns
+Zone ranges:
+  DMA      [mem 0x0000000000001000-0x0000000000ffffff]
+  DMA32    [mem 0x0000000001000000-0x00000000ffffffff]
+  Normal   [mem 0x0000000100000000-0x000000023fffffff]
+  Device   empty
+Movable zone start for each node
+Early memory node ranges
+  node   0: [mem 0x0000000000001000-0x000000000009efff]
+  node   0: [mem 0x0000000000100000-0x000000007ffdefff]
+  node   0: [mem 0x0000000100000000-0x0000000160000fff]
+  node   1: [mem 0x0000000160001000-0x000000023fffffff]
+Initmem setup node 0 [mem 0x0000000000001000-0x0000000160000fff]
+Initmem setup node 1 [mem 0x0000000160001000-0x000000023fffffff]
+On node 0, zone DMA: 1 pages in unavailable ranges
+On node 0, zone DMA: 97 pages in unavailable ranges
+On node 0, zone Normal: 33 pages in unavailable ranges
+setup_percpu: NR_CPUS:8 nr_cpumask_bits:2 nr_cpu_ids:2 nr_node_ids:2
+percpu: Embedded 71 pages/cpu s250632 r8192 d31992 u2097152
+kvm-guest: PV spinlocks disabled, no host support
+Kernel command line: earlyprintk=3Dserial net.ifnames=3D0 sysctl.kernel.hun=
+g_task_all_cpu_backtrace=3D1 ima_policy=3Dtcb nf-conntrack-ftp.ports=3D2000=
+0 nf-conntrack-tftp.ports=3D20000 nf-conntrack-sip.ports=3D20000 nf-conntra=
+ck-irc.ports=3D20000 nf-conntrack-sane.ports=3D20000 binder.debug_mask=3D0 =
+rcupdate.rcu_expedited=3D1 rcupdate.rcu_cpu_stall_cputime=3D1 no_hash_point=
+ers page_owner=3Don sysctl.vm.nr_hugepages=3D4 sysctl.vm.nr_overcommit_huge=
+pages=3D4 secretmem.enable=3D1 sysctl.max_rcu_stall_to_panic=3D1 msr.allow_=
+writes=3Doff coredump_filter=3D0xffff root=3D/dev/sda console=3DttyS0 vsysc=
+all=3Dnative numa=3Dfake=3D2 kvm-intel.nested=3D1 spec_store_bypass_disable=
+=3Dprctl nopcid vivid.n_devs=3D64 vivid.multiplanar=3D1,2,1,2,1,2,1,2,1,2,1=
+,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,=
+1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2 netrom.nr_ndevs=3D32 rose.rose_ndevs=3D32 s=
+mp.csd_lock_timeout=3D100000 watchdog_thresh=3D55 workqueue.watchdog_thresh=
+=3D140 sysctl.net.core.netdev_unregister_timeout_secs=3D140 dummy_hcd.num=
+=3D32 max_loop=3D32 nbds_max=3D32 \
+Kernel command line: comedi.comedi_num_legacy_minors=3D4 panic_on_warn=3D1 =
+root=3D/dev/sda console=3DttyS0 root=3D/dev/sda1
+Unknown kernel command line parameters "nbds_max=3D32", will be passed to u=
+ser space.
+printk: log buffer data + meta data: 262144 + 917504 =3D 1179648 bytes
+software IO TLB: area num 2.
+Fallback order for Node 0: 0 1=20
+Fallback order for Node 1: 1 0=20
+Built 2 zonelists, mobility grouping on.  Total pages: 1834877
+Policy zone: Normal
+mem auto-init: stack:all(zero), heap alloc:on, heap free:off
+stackdepot: allocating hash table via alloc_large_system_hash
+stackdepot hash table entries: 1048576 (order: 12, 16777216 bytes, linear)
+stackdepot: allocating space for 8192 stack pools via memblock
+**********************************************************
+**   NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE   **
+**                                                      **
+** This system shows unhashed kernel memory addresses   **
+** via the console, logs, and other interfaces. This    **
+** might reduce the security of your system.            **
+**                                                      **
+** If you see this message and you are not debugging    **
+** the kernel, report this immediately to your system   **
+** administrator!                                       **
+**                                                      **
+** Use hash_pointers=3Dalways to force this mode off      **
+**                                                      **
+**   NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE   **
+**********************************************************
+------------[ cut here ]------------
+debug_locks && !(lock_is_held(&(&s->cpu_sheaves->lock)->dep_map) !=3D 0)
+WARNING: mm/slub.c:4601 at __pcs_replace_empty_main+0x51b/0x6e0, CPU#0: swa=
+pper/0
+Modules linked in:
+CPU: 0 UID: 0 PID: 0 Comm: swapper Not tainted syzkaller #0 PREEMPT(undef)=
+=20
+Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.2-debian-1.16=
+.2-1 04/01/2014
+RIP: 0010:__pcs_replace_empty_main+0x51b/0x6e0
+Code: 48 85 f6 74 15 4c 89 ff 48 89 c6 e8 af 5e ff ff 4d 89 74 24 38 e9 36 =
+fc ff ff 49 89 44 24 40 4d 89 74 24 38 e9 27 fc ff ff 90 <0f> 0b 90 83 7b 2=
+c 00 0f 85 23 fb ff ff 48 8b 1b e8 20 cd 82 09 41
+RSP: 0000:ffffffff8e607d58 EFLAGS: 00010046
+RAX: 0000000000000000 RBX: ffffffff91bb8398 RCX: 0000000000000002
+RDX: 0000000000000cc0 RSI: ffffffff8e21ec94 RDI: ffffffff8c28b160
+RBP: 0000000000000cc0 R08: 0000000000005e00 R09: 00000000477ac845
+R10: 0000000047d13f7f R11: 000000002fa01ecd R12: ffff88812103f308
+R13: 0000000000000000 R14: ffffffff91bb8398 R15: 0000000000000000
+FS:  0000000000000000(0000) GS:ffff88818dc8a000(0000) knlGS:000000000000000=
+0
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: ffff88823ffff000 CR3: 000000000e74a000 CR4: 00000000000000b0
+Call Trace:
+ <TASK>
+ kmem_cache_alloc_node_noprof+0x441/0x690
+ do_kmem_cache_create+0x172/0x620
+ create_boot_cache+0xbf/0x120
+ kmem_cache_init+0x11a/0x1e0
+ mm_core_init+0x7e/0xb0
+ start_kernel+0x15a/0x3e0
+ x86_64_start_reservations+0x24/0x30
+ x86_64_start_kernel+0x143/0x1c0
+ common_startup_64+0x13e/0x147
+ </TASK>
+
+
+***
+
+If these findings have caused you to resend the series or submit a
+separate fix, please add the following tag to your commit message:
+  Tested-by: syzbot@syzkaller.appspotmail.com
+
+---
+This report is generated by a bot. It may contain errors.
+syzbot ci engineers can be reached at syzkaller@googlegroups.com.
+
+To test a patch for this bug, please reply with `#syz test`
+(should be on a separate line).
+
+The patch should be attached to the email.
+Note: arguments like custom git repos and branches are not supported.
 
