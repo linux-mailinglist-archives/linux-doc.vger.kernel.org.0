@@ -1,203 +1,188 @@
-Return-Path: <linux-doc+bounces-88586-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88587-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CB86F+h4DWqfxwUAu9opvQ
-	(envelope-from <linux-doc+bounces-88586-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 11:03:36 +0200
+	id 6AIwOr+DDWoTygUAu9opvQ
+	(envelope-from <linux-doc+bounces-88587-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 11:49:51 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5FA758A5AC
-	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 11:03:35 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 871B858B12E
+	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 11:49:51 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 0283B302410B
-	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 09:02:59 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 9706A30C8F3D
+	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 09:42:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F171D3B8D4F;
-	Wed, 20 May 2026 09:02:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B79383D45E9;
+	Wed, 20 May 2026 09:41:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="fcqBMRSm"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="duYycovM"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9E1ED3B3C00;
-	Wed, 20 May 2026 09:02:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69E0E3CF049;
+	Wed, 20 May 2026 09:41:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779267764; cv=none; b=mLY3ugCjNkxnDFAfhM+TuShdyiR/bXBVPyKN8tVDwT0t3NYh3Zb56yRm5qhgFBNg1JyBv99PqrJPUuQexhTb8wxhZwnQLsROw46cjABEuM5WoosonFvSommUdGyGhNNSqzmzJNU5d2rBP3u8RBmgWt67U7DxsRkutYgThcLTXWU=
+	t=1779270104; cv=none; b=f/hDA2DjptiMh61f+HnXNdeSaYkLpLQYTcB+n0gOCXmqAOzyJqGvHrEnEpy2SKZIEcgm+3fLk/pp8HL5Ho37vQAE5Zvh8FZYtpLuxitl7Mc8FbZzEyQQWxuhESN7+mcqGhA2Vb2iCPfTbFLU89APoPj194aLB7H2YIdc/TiY8A0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779267764; c=relaxed/simple;
-	bh=Zx6Y0CSKfWg4W6fzoAK4sppujlOP/zqJnUnthLFeOBo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=NuIj11imHYDUZZrB8XrmI7A0a+4HwIK9HXmW4umnDojnyUJn0wlUekLSkAWIbY8pxSqqYu9w4Xjm0FYOVCfCnAmnrklKWhTBtMq5fVc+agTberIGJEbRXtsw9M3VUIq/3XIeq9mCso6jL85AdYJAD2F1K+EGCPJy0/wgysrXef4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=fcqBMRSm; arc=none smtp.client-ip=217.140.110.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 02228488F;
-	Wed, 20 May 2026 02:02:31 -0700 (PDT)
-Received: from [10.164.19.28] (unknown [10.164.19.28])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DDA843F85F;
-	Wed, 20 May 2026 02:02:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1779267756; bh=Zx6Y0CSKfWg4W6fzoAK4sppujlOP/zqJnUnthLFeOBo=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=fcqBMRSm1Bs2PU9kCu9oZdM8JOImdHhC3IGKxecMdKBW+50CJ9bYpCpvuakaBI9tV
-	 mF0HwUrzD5iSrX2OoZFkTKWuGU7RXRVDJzbSWGl/+r8iiLgTSNz5B94p7hVEfSYCV3
-	 oVDfBkElQp3jhAbbumHqf9ptpsd34QAsU/J9PPaE=
-Message-ID: <8eb07028-d6b2-411c-81ea-e009c8b3a4c8@arm.com>
-Date: Wed, 20 May 2026 14:32:27 +0530
+	s=arc-20240116; t=1779270104; c=relaxed/simple;
+	bh=igeRWNg6IVtLdMLgIkGN99uIFttIbOmuORlcqnAfonI=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=UGpu5n2pPSzuWq+GbpUHWPCjj+jxTCMFJIv1GbadnlJeVKbiVisNrpGBjXcLHLU346w0iL1DUNGjN1L6Et0aww5Y7YsvfQHwZfu39ca8DO6ldUCx5K5fRShtSpHfET935DzETvcG5BI2uNcrzbr5HSPYccqM5UXPHP5oT9f4xFY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=duYycovM; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 54B491F000E9;
+	Wed, 20 May 2026 09:41:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1779270098;
+	bh=QzScM81tzS6Eotxw9vObBZVuGOy7ADyFT+pJ4sgoFxc=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=duYycovM2OKOPuKU7rZixagilV6euM4g/2ojJ0cuFft9XMDjJtM3huVEJ1hmlgApm
+	 k3XvuOLfjdQkyykd3fmLymKDapWRTuLZYsID/lDCGFp2ILGDhjLsvAtMs37M/pg7eV
+	 qjs0OF3KP+ZjoUUjoEyQS0E4m/jCUBeyWTLSlItVoy0C1sxEsugTnsyqfHMxDLMgCl
+	 o8YmC/3rDfy7xq+XRG2kbP00cSF+OGXUAoSO5UmqBn2/1n7WyW5fT2TVirXL7pDgy3
+	 gVs3RQPZIz5rmSXCR7+t53LlghGlcu5UgbZk3ZBlpPo/6RPM8DbHvLcTFTnVyoGXhK
+	 cnvZElzBhpmkA==
+Date: Wed, 20 May 2026 10:41:26 +0100
+From: Jonathan Cameron <jic23@kernel.org>
+To: Janani Sunil <jan.sun97@gmail.com>
+Cc: David Lechner <dlechner@baylibre.com>, Janani Sunil
+ <janani.sunil@analog.com>, Lars-Peter Clausen <lars@metafoo.de>, Michael
+ Hennerich <Michael.Hennerich@analog.com>, Nuno =?UTF-8?B?U8Oh?=
+ <nuno.sa@analog.com>, Andy Shevchenko <andy@kernel.org>, Rob Herring
+ <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Philipp Zabel <p.zabel@pengutronix.de>, Jonathan
+ Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+ linux-iio@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ rodrigo.alencar@analog.com
+Subject: Re: [PATCH v2 1/3] dt-bindings: iio: dac: Add AD5529R
+Message-ID: <20260520104126.22a04a79@jic23-huawei>
+In-Reply-To: <e245de68-555a-42c8-900b-a4abbaa4ea3e@gmail.com>
+References: <20260508-ad5529r-driver-v2-0-e315441685d7@analog.com>
+	<20260508-ad5529r-driver-v2-1-e315441685d7@analog.com>
+	<20260508134843.7646c4f5@jic23-huawei>
+	<53d547ee-1ac3-42b9-92a6-e7f48b72fee3@baylibre.com>
+	<e245de68-555a-42c8-900b-a4abbaa4ea3e@gmail.com>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] tools/mm: add a standalone GUP microbenchmark
-To: Mike Rapoport <rppt@kernel.org>, Sarthak Sharma <sarthak.sharma@arm.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>,
- David Hildenbrand <david@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- Jason Gunthorpe <jgg@ziepe.ca>, John Hubbard <jhubbard@nvidia.com>,
- Peter Xu <peterx@redhat.com>, Lorenzo Stoakes <ljs@kernel.org>,
- "Liam R . Howlett" <Liam.Howlett@oracle.com>,
- Vlastimil Babka <vbabka@kernel.org>, Suren Baghdasaryan <surenb@google.com>,
- Michal Hocko <mhocko@suse.com>, Shuah Khan <shuah@kernel.org>,
- linux-mm@kvack.org, linux-kselftest@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- Mark Brown <broonie@kernel.org>
-References: <20260519120506.184512-1-sarthak.sharma@arm.com>
- <20260519120506.184512-2-sarthak.sharma@arm.com>
- <ag13GbKcLMIoHOHj@kernel.org>
-Content-Language: en-US
-From: Dev Jain <dev.jain@arm.com>
-In-Reply-To: <ag13GbKcLMIoHOHj@kernel.org>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
-	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[19];
-	TAGGED_FROM(0.00)[bounces-88586-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[arm.com:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	FREEMAIL_TO(0.00)[gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[18];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-88587-lists,linux-doc=lfdr.de];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[dev.jain@arm.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[jic23@kernel.org,linux-doc@vger.kernel.org];
+	TO_DN_SOME(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[run_vmtests.sh:url,arm.com:email,arm.com:mid,arm.com:dkim,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: A5FA758A5AC
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: 871B858B12E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
+On Tue, 19 May 2026 09:13:24 +0200
+Janani Sunil <jan.sun97@gmail.com> wrote:
 
+> On 5/16/26 21:25, David Lechner wrote:
+> > On 5/8/26 7:48 AM, Jonathan Cameron wrote:  
+> >> On Fri, 8 May 2026 13:55:47 +0200
+> >> Janani Sunil <janani.sunil@analog.com> wrote:
+> >>  
+> >>> Devicetree bindings for AD5529R 16 channel 12/16 bit high voltage,
+> >>> buffered voltage output digital-to-analog converter (DAC) with an
+> >>> integrated precision reference.
+> >>>
+> >>> Signed-off-by: Janani Sunil <janani.sunil@analog.com>
+> >>> ---  
+> > ...
+> >  
+> >>> +  * Multiplexer for output voltage, load current sense and die temperature
+> >>> +
+> >>> +  Datasheet: https://www.analog.com/media/en/technical-documentation/data-sheets/ad5529r.pdf
+> >>> +
+> >>> +properties:
+> >>> +  compatible:
+> >>> +    const: adi,ad5529r
+> >>> +
+> >>> +  reg:
+> >>> +    maxItems: 1
+> >>> +
+> >>> +  spi-max-frequency:
+> >>> +    maximum: 50000000
+> >>> +
+> >>> +  reset-gpios:
+> >>> +    maxItems: 1
+> >>> +    description:
+> >>> +      GPIO connected to the RESET pin. Active low. When asserted low,
+> >>> +      performs a power-on reset and initializes the device to its default state.
+> >>> +
+> >>> +  vdd-supply:
+> >>> +    description: Digital power supply (typically 3.3V)
+> >>> +
+> >>> +  avdd-supply:
+> >>> +    description: Analog power supply (typically 5V)
+> >>> +
+> >>> +  hvdd-supply:
+> >>> +    description: High voltage positive supply (up to 40V for output range)
+> >>> +
+> >>> +  hvss-supply:
+> >>> +    description: High voltage negative supply (ground or negative voltage)  
+> >> I don't mind doing it this way but in some similar cases where 0 is something that
+> >> can be considered the 'default' we've made the supply optional.  What was
+> >> your reasoning for requiring it in this case?
+> >>
+> >> dt-bindings should be as complete as we can make them - with that in mind...
+> >>
+> >> There are some more interesting corners on this device the binding doesn't
+> >> currently cover such as mux_out pin.  We'd normally do that by making the
+> >> driver potentially a client of an ADC
+> >>
+> >> Easier though is !alarm which smells like an interrupt.
+> >> !clear probably a gpio. TG0-3 also GPIOs.  
+> > also optional vref-supply for external vs internal reference  
+> 
+> I will add bindings for optional Vref supply in the next version.
+> 
+> Best Regards,
+> Janani Sunil
+Hi Janil
 
-On 20/05/26 2:25 pm, Mike Rapoport wrote:
-> (added broonie)
-> 
-> Hi,
-> 
-> On Tue, May 19, 2026 at 05:35:05PM +0530, Sarthak Sharma wrote:
->> Add a command-line tool for benchmarking get_user_pages fast-path
->> (GUP_FAST), pin_user_pages fast-path (PIN_FAST), and pin_user_pages
->> longterm (PIN_LONGTERM) via the CONFIG_GUP_TEST debugfs interface.
->>
->> When invoked without arguments, gup_bench runs the same matrix of
->> configurations as run_gup_matrix() in run_vmtests.sh: all three GUP
->> commands across read/write, private/shared mappings, and a range of
->> page counts, with THP on/off for regular mappings and hugetlb for huge
->> page mappings.
->>
->> This tool is a mix of reused and new logic. The mapping/setup path comes
->> from selftests/mm/gup_test.c, while the default benchmark matrix matches
->> run_gup_matrix() in run_vmtests.sh. The standalone CLI and tools/mm
->> integration are added here so tools/mm does not depend on kselftest.
->>
->> Add gup_bench to BUILD_TARGETS and INSTALL_TARGETS in tools/mm/Makefile,
->> and ignore the resulting binary in tools/mm/.gitignore. While here, also
->> add the missing thp_swap_allocator_test entry to .gitignore.
->>
->> Add tools/mm/gup_bench.c to the GUP entry in MAINTAINERS.
->>
->> Suggested-by: David Hildenbrand (Arm) <david@kernel.org>
->> Signed-off-by: Sarthak Sharma <sarthak.sharma@arm.com>
->> ---
->>  MAINTAINERS          |   1 +
->>  tools/mm/.gitignore  |   2 +
->>  tools/mm/Makefile    |   6 +-
->>  tools/mm/gup_bench.c | 491 +++++++++++++++++++++++++++++++++++++++++++
->>  4 files changed, 497 insertions(+), 3 deletions(-)
->>  create mode 100644 tools/mm/gup_bench.c
-> 
-> ...
->  
->> +/*
->> + * Local HugeTLB setup helpers for gup_bench.
->> + *
->> + * These helpers were copied from tools/testing/selftests/mm/ and adjusted to
->> + * remove the ksft formatting. Keep this copy local so tools/mm does not
->> + * depend on ksft output behavior.
->> + */
-> 
-> It looks like self tests of at least 5 subsystems beside mm use hugetlb:
-> 
-> $ git grep -l "Hugepagesize:" tools/testing/selftests/ | grep -v "selftests/mm"
-> tools/testing/selftests/arm64/mte/check_hugetlb_options.c
-> tools/testing/selftests/cgroup/test_hugetlb_memcg.c
-> tools/testing/selftests/kvm/lib/test_util.c
-> tools/testing/selftests/memfd/common.c
-> tools/testing/selftests/net/tcp_mmap.c
-> 
-> It seems that we need to better share the common code in
-> tools/testing/selftest.
-> 
-> And adding another copy of the hugetlb detection and setup code does not
-> seem like a great idea.
+One of those process things.  Don't reply to a review to say you
+are going to do something suggested - just save us all reading an email
+by making that clear in the change log for the next version.
 
+Lots of folk are over enthusiastic in replying like you have done initially.
+They only begin to appreciate why this is a bad idea when they start trying
+to keep up with the mailing list firehoses!
 
-Does it sound too insane to just do some sort of #include "../testing/selftests/mm/..."
-to use the common helpers?
+Jonathan
 
-> 
->> +
->> +static unsigned int psize(void)
->> +{
->> +	static unsigned int __page_size;
->> +
->> +	if (!__page_size)
->> +		__page_size = sysconf(_SC_PAGESIZE);
->> +	return __page_size;
->> +}
->> +
->> +static unsigned long default_huge_page_size(void)
->> +{
->> +	FILE *f = fopen("/proc/meminfo", "r");
->> +	unsigned long hpage_size = 0;
->> +	char buf[256];
->> +
->> +	if (!f)
->> +		return 0;
->> +	while (fgets(buf, sizeof(buf), f)) {
->> +		if (sscanf(buf, "Hugepagesize:       %lu kB", &hpage_size) == 1)
->> +			break;
->> +	}
->> +	fclose(f);
->> +	hpage_size <<= 10;
->> +	return hpage_size;
->> +}
 > 
 
 
