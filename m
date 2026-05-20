@@ -1,228 +1,358 @@
-Return-Path: <linux-doc+bounces-88688-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88690-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4LF6KoswDmoK7wUAu9opvQ
-	(envelope-from <linux-doc+bounces-88688-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 00:07:07 +0200
+	id uOpwN8wxDmou8AUAu9opvQ
+	(envelope-from <linux-doc+bounces-88690-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 00:12:28 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 293A559BBEE
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 00:07:07 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 935A359BD0E
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 00:12:28 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 53F503018C0D
-	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 22:04:10 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 76D5F300B9DE
+	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 22:12:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0965332E75A;
-	Wed, 20 May 2026 22:04:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EEB943B6C16;
+	Wed, 20 May 2026 22:11:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="Q3EmepI5"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="hk2DzEnO"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-vk1-f176.google.com (mail-vk1-f176.google.com [209.85.221.176])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6088F35F162
-	for <linux-doc@vger.kernel.org>; Wed, 20 May 2026 22:04:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.221.176
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779314647; cv=pass; b=PgJdXJn+f3SqxQJgHJBvu3Oe+zDQkA/O3dk7GjOrbdHjaptwipO5mlkRujRyOs/sRyDIcReZW8uUaeUXy2MwCMHiEJ4aaQ8YDFRXgg9ELe7PJatlUYd1RW9Mz4WDswaIQn+88GrkKv7CyflagDwkggUJcl/Bs6yQ/eozlabQSY0=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779314647; c=relaxed/simple;
-	bh=o95rfOHFgJHNn7OjrZb3oTyna54O2JGL22GSkfMr7TI=;
-	h=From:In-Reply-To:References:MIME-Version:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=KT0uX4lBfqNcg6vniuTBMvtrok3gYKZuK5TdJaLSRxSyLrDopS0L+Mq2THqq7+81qz95AFFiUfRyMn15ep62svujZoKDH8hAFGNHw+HmXh35gw+eOgw0QYk0xQvy4NK71efci5DFew/csoa/aM8IV6kqA/jUQoF7hvh8fqnmOOg=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=Q3EmepI5; arc=pass smtp.client-ip=209.85.221.176
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-vk1-f176.google.com with SMTP id 71dfb90a1353d-575602688deso1890809e0c.1
-        for <linux-doc@vger.kernel.org>; Wed, 20 May 2026 15:04:06 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779314645; cv=none;
-        d=google.com; s=arc-20240605;
-        b=fe10wGyQ5MWGA33TIV/okF+usVoRlBhlLsuvVcXAG9VHu2X7oc/Bl+pIoennooyhE3
-         RT8mrx03soppgj2RqosBaSjXd/mmNMBYW44SFxtPt9Cjj8zH6CKgCIC0Zg2+auTvW9Or
-         8KQ87JXzlZOu+XA+refuyE1VilYr49oqu2nzYU58PcQMQMEOsxWiPLa0oXeCZZlwTDMt
-         P+uEgex4EwQ8YDkHEA4wflF1FLzMHghBNY5xfwABP3oH9hThm+bhmM3pwceWhrEFq2vu
-         /fEOPqXcjrFOPmmMV0s6cel5RVuG04K/z+L3EPBmdYLT+VyDhDxtOsvoQt7kmqp4CUwf
-         5kBg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
-         :from:dkim-signature;
-        bh=9JThRUESw7nrWZ9dm2cNUbYGQDtPpp53TQuS0A6S/n8=;
-        fh=wBZJCWk1A5ZXdHVN4O8GQbUw/xPgpDW9zwRIbVQdD98=;
-        b=dAMkYcHpOUN5jd5qErgKammPLHmjIytSOX9YK0EXK4+F/D7OazwWYTXBficgz8jbQ6
-         RsrAZLNisaJOsTmxDZDzZa92I9smyRT4nswPs3tXJ/rTnUtD3Pmbh5A9Npq+nw+4juGq
-         S68M+ypH/iR9w134vQIFrl2osw3LP9Wxsfc5xpDLpdoe8wYoix9yHcedAjFsQmaD9IY7
-         FmVK9dcV9MrcWz6IdhdksOUkJ15HR6pF0Ib8cJBUtkaliBgzBInIYJvMsU66k/NVWYrl
-         0b/sABEksJdOn1nkCv4ix6Tn8tQYSpCyS6zN4rY7zij9PI+wMV5T4FA/B2iqRLR5+jkm
-         8PoQ==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1779314645; x=1779919445; darn=vger.kernel.org;
-        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=9JThRUESw7nrWZ9dm2cNUbYGQDtPpp53TQuS0A6S/n8=;
-        b=Q3EmepI5xCjM/UbrJMyjazBEEPvUNvpMFGxaJTWcCaBCoKBqpmgmVW9nSj96/V0UvR
-         YU4SKxefFwTz3vPzyLWtYsQMbMDIZ1+PRFdzrpVNZah5ht/4Lau9SK5Z7Hk2aK9da2QZ
-         ElYgUidOH8ZfxbgraipKdjfhW9iC5iCfZ89Q6AG+ReETL2u771mN9ccRwV+LUdYfW+87
-         3QCBG1HE9Y3QYujQO861kN1FgiHZbEDNl9xgINQTIQmCpP+kV0DzmjIfElgG3v10zea1
-         kXlNWkoqCpFMDgRX93W7Q1rmzGH2debKRDFM5OR34S4Px/gk4DYaiQJX04LkqOmRpVIf
-         pbhg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779314645; x=1779919445;
-        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=9JThRUESw7nrWZ9dm2cNUbYGQDtPpp53TQuS0A6S/n8=;
-        b=C4esAdtwWBiIHFq8qj+T4hiTuK6p+bxGrZO6UI1gFNTkCveyuMdQYhRbWCuZ/gal2c
-         8CgDGq9po1WpmNnaouKvlfZ081Bl3ihqqSM78r85cL1vi1VDkBKSV7XRhhLfvu8HsG+L
-         f5hsVgN9kB0f3jpBiblqYWh404x/91SAzxxp7e+KLlHANlvTx8sfupWuJEcwBS1mo2jm
-         qUXgf/Vqd0CZ4ra6yrOWRXhIh6L/Ya27UwfT/LF3UubqJEvp55Vdt6+HShZUXPqKJoEi
-         HqU0mKKTiJODqsbR1AcEzs7m2hrOry60ZUNgAySalJ9nQ5u1QuZk7C9851Yrl9rhcpPX
-         3TOA==
-X-Forwarded-Encrypted: i=1; AFNElJ/CfLIC/La61lKICAcFQMqpyoIfmnyIE8PzsSCKO/w2mK7iyDeMcA8guITGbkysRs6DtmuOndXDuG4=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyKp2uDmwt77rSrYWmBsXJp7U85qpdv7VxptvignIgYjCm3Abnv
-	rfsT500fSCmPMGOvuhlY9PO6RFTnylRzeBT49/oID+kGDK8jRRTIA2JZC1YWUpKqD9DncFUZwJH
-	EUAklsWabtE1Hp89eVcybtSmACVz1hIaFzCwHne8M
-X-Gm-Gg: Acq92OEJJBZlos5L/BUPGa0Nc0OlX8X+HWdBs0cuoSVGSowvYBXtlmwMP3LC8dJ75mv
-	AZlykVcAYoIilNXuXkObtjpfQiLKWurflL9CqKy/1BkWjmszG8sejnw/wDlKehC8TUDpzDUzilT
-	wwCoOGkSg0hSLq133Cf/zRLLEEdvfKWVE2MCgmzAQSIWWMIcktLQjfxHzxb8YamNr0LaOh+ugpr
-	oDehpIBhM/pVE5NPZIUt0tzZkM7YY697LqmZYrFQHOQW1fSODaL707cQta8JCu09A0M0dNRqev/
-	fCG0NcrF7ppoHv+QP2KK2+7jd+GijtdPQOoWzZdrHJwqDqE20uCOYvoALZyQ4jUhdtyGlPFDB92
-	pHNB7
-X-Received: by 2002:a05:6122:c87:b0:575:a6f4:46b4 with SMTP id
- 71dfb90a1353d-5842700dc5fmr95996e0c.9.1779314644642; Wed, 20 May 2026
- 15:04:04 -0700 (PDT)
-Received: from 176938342045 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 20 May 2026 15:04:03 -0700
-Received: from 176938342045 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 20 May 2026 15:04:03 -0700
-From: Ackerley Tng <ackerleytng@google.com>
-In-Reply-To: <20260507-gmem-inplace-conversion-v6-20-91ab5a8b19a4@google.com>
-References: <20260507-gmem-inplace-conversion-v6-0-91ab5a8b19a4@google.com> <20260507-gmem-inplace-conversion-v6-20-91ab5a8b19a4@google.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 793DC3B8920;
+	Wed, 20 May 2026 22:11:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1779315117; cv=none; b=eVyoVNiNwZ++MGEIG3IHM4+5M3Q9PaQGjQgomOMBQu30xwwXiEVBn3L3WKkR0LEv2v2Q+et5wFKtspQDxBh7bXlU1FK97Sr+NmtmwQjpn0DYAuXJSqg97oaph4GIvVjERGN8IJMxPC4/dTV/cmztMNhUkfHdn0EYoUcilGlSK7w=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1779315117; c=relaxed/simple;
+	bh=8luQpYpHEArlHeAmKrN95fhm+q2yTqUrReGzoJt0D1s=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=gXAqA4ZKqopw511XTmRo1eP7RhSYKDdOxm5IsrDlW5K72Hhfde82JQBPu4sk6op8OfgwhrB566uopfM85j+07oZ3HaSQ7T0IG3KjeBnYUB5QyoL53TBxrwThmQzAZOTXs5BHC+ah8lNZ9UtxCKrxkD/Dzt6g17/0N64REodwNuU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=hk2DzEnO; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+	bh=yqUTc95zaXzBCvNT6iyCp5NSrSJr7kPxrBu5IuNUhLo=; b=hk2DzEnOkPmw6uDWwtI5SKtmaF
+	Qp2HCq2BmdleB3skO3PGeFvUQgPzAsL3cl+IK/9i/ljFEWWrJBnR2csiywvddD3QTKYRXFUsGQwQ/
+	teFrfqbZYVecSUyuVJ+F934TBm2BfoaO+4WRUfvdA+ReTkyq3PDexyg7uSlySUQqVU2WgEdE1doCn
+	y+wR0zGVhrTuu8BEWB/dQvWukKiD37sk1waPzXgqD+5EAaJ0iSuDl3iNJc3ZBNythSKbaXcz1wUVc
+	evUJIV9OALldGCiiMTK+WLkUDfACXzvedH9sTk/Il0kRtRJAkgxarRi5pD88XsHQlFLVq7RVfhtBe
+	9xKXr7ow==;
+Received: from [50.53.43.113] (helo=[192.168.254.34])
+	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+	id 1wPp3h-00000005vta-0sHy;
+	Wed, 20 May 2026 22:06:33 +0000
+Message-ID: <fec6554d-3639-4c27-9a14-3d3914c51588@infradead.org>
+Date: Wed, 20 May 2026 15:06:30 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Date: Wed, 20 May 2026 15:04:03 -0700
-X-Gm-Features: AVHnY4Kk5AWPmehPTXT0rrzakigDAOdp5MPH9_MZKvxVyYhTvoPj0_nMCwFjLrY
-Message-ID: <CAEvNRgGfWNG_NgC7v70BsZ3CJUu2Nh0KQQBwDdDrcu26=cB92w@mail.gmail.com>
-Subject: Re: [PATCH v6 20/43] KVM: guest_memfd: Enable INIT_SHARED on
- guest_memfd for x86 Coco VMs
-To: Ackerley Tng via B4 Relay <devnull+ackerleytng.google.com@kernel.org>, aik@amd.com, 
-	andrew.jones@linux.dev, binbin.wu@linux.intel.com, brauner@kernel.org, 
-	chao.p.peng@linux.intel.com, david@kernel.org, ira.weiny@intel.com, 
-	jmattson@google.com, jthoughton@google.com, michael.roth@amd.com, 
-	oupton@kernel.org, pankaj.gupta@amd.com, qperret@google.com, 
-	rick.p.edgecombe@intel.com, rientjes@google.com, shivankg@amd.com, 
-	steven.price@arm.com, tabba@google.com, willy@infradead.org, 
-	wyihan@google.com, yan.y.zhao@intel.com, forkloop@google.com, 
-	pratyush@kernel.org, suzuki.poulose@arm.com, aneesh.kumar@kernel.org, 
-	liam@infradead.org, Paolo Bonzini <pbonzini@redhat.com>, 
-	Sean Christopherson <seanjc@google.com>, Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
-	Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
-	"H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
-	Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>, 
-	Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>, 
-	Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>, 
-	Nhat Pham <nphamcs@gmail.com>, Baoquan He <bhe@redhat.com>, Barry Song <baohua@kernel.org>, 
-	Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>, 
-	Wei Xu <weixugc@google.com>, Youngjun Park <youngjun.park@lge.com>, 
-	Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
-	Kiryl Shutsemau <kas@kernel.org>, Jason Gunthorpe <jgg@ziepe.ca>, Vlastimil Babka <vbabka@kernel.org>
-Cc: kvm@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kselftest@vger.kernel.org, linux-mm@kvack.org, 
-	linux-coco@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 1/4] Introducing pw_lock() and per-cpu queue & flush
+ work
+To: Leonardo Bras <leobras.c@gmail.com>, Jonathan Corbet <corbet@lwn.net>,
+ Shuah Khan <skhan@linuxfoundation.org>, Peter Zijlstra
+ <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>,
+ Will Deacon <will@kernel.org>, Boqun Feng <boqun@kernel.org>,
+ Waiman Long <longman@redhat.com>, Andrew Morton <akpm@linux-foundation.org>,
+ David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>,
+ "Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>,
+ Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>,
+ Michal Hocko <mhocko@suse.com>, Jann Horn <jannh@google.com>,
+ Pedro Falcato <pfalcato@suse.de>, Brendan Jackman <jackmanb@google.com>,
+ Johannes Weiner <hannes@cmpxchg.org>, Zi Yan <ziy@nvidia.com>,
+ Harry Yoo <harry@kernel.org>, Hao Li <hao.li@linux.dev>,
+ Christoph Lameter <cl@gentwo.org>, David Rientjes <rientjes@google.com>,
+ Roman Gushchin <roman.gushchin@linux.dev>, Chris Li <chrisl@kernel.org>,
+ Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>,
+ Nhat Pham <nphamcs@gmail.com>, Baoquan He <bhe@redhat.com>,
+ Barry Song <baohua@kernel.org>, Youngjun Park <youngjun.park@lge.com>,
+ Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>,
+ Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>,
+ Wei Xu <weixugc@google.com>, "Borislav Petkov (AMD)" <bp@alien8.de>,
+ Feng Tang <feng.tang@linux.alibaba.com>,
+ Dapeng Mi <dapeng1.mi@linux.intel.com>, Kees Cook <kees@kernel.org>,
+ Marco Elver <elver@google.com>, Jakub Kicinski <kuba@kernel.org>,
+ Li RongQing <lirongqing@baidu.com>, Eric Biggers <ebiggers@kernel.org>,
+ "Paul E. McKenney" <paulmck@kernel.org>,
+ Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>,
+ Miguel Ojeda <ojeda@kernel.org>,
+ =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
+ Thomas Gleixner <tglx@kernel.org>, Douglas Anderson <dianders@chromium.org>,
+ Gary Guo <gary@garyguo.net>, Christian Brauner <brauner@kernel.org>,
+ Pasha Tatashin <pasha.tatashin@soleen.com>, Coiby Xu <coxu@redhat.com>,
+ Masahiro Yamada <masahiroy@kernel.org>,
+ Frederic Weisbecker <frederic@kernel.org>
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-mm@kvack.org, linux-rt-devel@lists.linux.dev,
+ Marcelo Tosatti <mtosatti@redhat.com>
+References: <20260519012754.240804-1-leobras.c@gmail.com>
+ <20260519012754.240804-2-leobras.c@gmail.com>
+Content-Language: en-US
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <20260519012754.240804-2-leobras.c@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-88688-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-88690-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com,lwn.net,linuxfoundation.org,infradead.org,redhat.com,kernel.org,linux-foundation.org,google.com,suse.com,suse.de,cmpxchg.org,nvidia.com,linux.dev,gentwo.org,tencent.com,huaweicloud.com,lge.com,alien8.de,linux.alibaba.com,linux.intel.com,baidu.com,linutronix.de,chromium.org,garyguo.net,soleen.com];
 	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	FREEMAIL_TO(0.00)[kernel.org,amd.com,linux.dev,linux.intel.com,intel.com,google.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca];
+	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[google.com:+];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ackerleytng@google.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[65];
-	TAGGED_RCPT(0.00)[linux-doc,ackerleytng.google.com];
+	RCPT_COUNT_GT_50(0.00)[64];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[infradead.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,mail.gmail.com:mid]
-X-Rspamd-Queue-Id: 293A559BBEE
+	TAGGED_RCPT(0.00)[linux-doc];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,nxp.com:email,infradead.org:mid,infradead.org:dkim,linuxtv.org:url,ozlabs.org:email]
+X-Rspamd-Queue-Id: 935A359BD0E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Ackerley Tng via B4 Relay <devnull+ackerleytng.google.com@kernel.org>
-writes:
 
-> From: Sean Christopherson <seanjc@google.com>
->
-> Now that guest_memfd supports tracking private vs. shared within gmem
-> itself, allow userspace to specify INIT_SHARED on a guest_memfd instance
-> for x86 Confidential Computing (CoCo) VMs, so long as per-VM attributes
-> are disabled, i.e. when it's actually possible for a guest_memfd instance
-> to contain shared memory.
->
-> Signed-off-by: Sean Christopherson <seanjc@google.com>
-> Signed-off-by: Ackerley Tng <ackerleytng@google.com>
-> ---
->  arch/x86/kvm/x86.c | 11 +++++------
->  1 file changed, 5 insertions(+), 6 deletions(-)
->
-> diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-> index 1560de1e95be0..6609957ecfea3 100644
-> --- a/arch/x86/kvm/x86.c
-> +++ b/arch/x86/kvm/x86.c
-> @@ -14172,14 +14172,13 @@ bool kvm_arch_no_poll(struct kvm_vcpu *vcpu)
->  }
->
->  #ifdef CONFIG_KVM_GUEST_MEMFD
-> -/*
-> - * KVM doesn't yet support initializing guest_memfd memory as shared for VMs
-> - * with private memory (the private vs. shared tracking needs to be moved into
-> - * guest_memfd).
-> - */
->  bool kvm_arch_supports_gmem_init_shared(struct kvm *kvm)
->  {
-> -	return !kvm_arch_has_private_mem(kvm);
-> +	/*
-> +	 * INIT_SHARED isn't supported if the memory attributes are per-VM,
-> +	 * in which case guest_memfd can _only_ be used for private memory.
-> +	 */
-> +	return !vm_memory_attributes || !kvm_arch_has_private_mem(kvm);
 
-Adding a note here from PUCK on 2026-05-20:
+On 5/18/26 6:27 PM, Leonardo Bras wrote:
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index c2c6d79275c6..7102031207c9 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -21775,20 +21775,27 @@ QORIQ DPAA2 FSL-MC BUS DRIVER
+>  M:	Ioana Ciornei <ioana.ciornei@nxp.com>
+>  L:	linuxppc-dev@lists.ozlabs.org
+>  L:	linux-kernel@vger.kernel.org
+>  S:	Maintained
+>  F:	Documentation/ABI/stable/sysfs-bus-fsl-mc
+>  F:	Documentation/devicetree/bindings/misc/fsl,qoriq-mc.yaml
+>  F:	Documentation/networking/device_drivers/ethernet/freescale/dpaa2/overview.rst
+>  F:	drivers/bus/fsl-mc/
+>  F:	include/uapi/linux/fsl_mc.h
+>  
+> +PW Locks
+> +M:	Leonardo Bras <leobras.c@gmail.com>
+> +S:	Supported
+> +F:	Documentation/locking/pwlocks.rst
+> +F:	include/linux/pwlocks.h
+> +F:	kernel/pwlocks.c
 
-Michael pointed out that it's odd that when vm_memory_attributes is
-available, guest_memfd still can only be used for private memory.
+MAINTAINERS entries should be in alphabetical order: PW is not in the
+middle of the Q entries.
 
-It is a little odd, but we don't want to investigate the complexities of
-supporting it, and Sean says this is working as intended, in line with
-deprecating vm_memory_attributes=true.
+> +
+>  QT1010 MEDIA DRIVER
+>  L:	linux-media@vger.kernel.org
+>  S:	Orphan
+>  W:	https://linuxtv.org
+>  Q:	http://patchwork.linuxtv.org/project/linux-media/list/
+>  F:	drivers/media/tuners/qt1010*
+>  
+>  QUALCOMM ATH12K WIRELESS DRIVER
+>  M:	Jeff Johnson <jjohnson@kernel.org>
+>  L:	linux-wireless@vger.kernel.org
 
->  }
->
->  #ifdef CONFIG_HAVE_KVM_ARCH_GMEM_PREPARE
->
-> --
-> 2.54.0.563.g4f69b47b94-goog
+
+> diff --git a/Documentation/locking/pwlocks.rst b/Documentation/locking/pwlocks.rst
+> new file mode 100644
+> index 000000000000..09f4a5417bc1
+> --- /dev/null
+> +++ b/Documentation/locking/pwlocks.rst
+> @@ -0,0 +1,76 @@
+> +.. SPDX-License-Identifier: GPL-2.0
+> +
+> +=========
+> +PW (Per-CPU Work) locks
+> +=========
+
+Overline and underline should be at least as long as the heading text.
+
+> +
+> +Some places in the kernel implement a parallel programming strategy
+> +consisting on local_locks() for most of the work, and some rare remote
+> +operations are scheduled on target cpu. This keeps cache bouncing low since
+
+                            on a target CPU.
+
+> +cacheline tends to be mostly local, and avoids the cost of locks in non-RT
+> +kernels, even though the very few remote operations will be expensive due
+> +to scheduling overhead.
+> +
+> +On the other hand, for RT workloads this can represent a problem:
+> +scheduling work on remote cpu that are executing low latency tasks
+
+                             CPUs
+
+> +is undesired and can introduce unexpected deadline misses.
+
+      undesirable
+?
+
+> +
+> +PW locks help to convert sites that use local_locks (for cpu local operations)
+> +and queue_work_on (for queueing work remotely, to be executed
+> +locally on the owner cpu of the lock) to a spinlocks.
+
+                                         to spinlocks.
+
+> +
+> +The lock is declared pw_lock_t type.
+> +The lock is initialized with pw_lock_init.
+> +The lock is locked with pw_lock (takes a lock and cpu as a parameter).
+> +The lock is unlocked with pw_unlock (takes a lock and cpu as a parameter).
+> +
+> +The pw_lock_irqsave function disables interrupts and saves current interrupt state,
+> +cpu as a parameter.
+> +
+> +For trylock variant, there is the pw_trylock_t type, initialized with
+> +pw_trylock_init. Then the corresponding pw_trylock and pw_trylock_irqsave.
+> +
+> +work_struct should be replaced by pw_struct, which contains a cpu parameter
+> +(owner cpu of the lock), initialized by INIT_PW.
+> +
+> +The queue work related functions (analogous to queue_work_on and flush_work) are:
+> +pw_queue_on and pw_flush.
+> +
+> +The behaviour of the PW lock functions is as follows:
+> +
+> +* !CONFIG_PWLOCKS (or CONFIG_PWLOCKS and pwlocks=off kernel boot parameter):
+> +        - pw_lock:			local_lock
+> +        - pw_lock_irqsave:		local_lock_irqsave
+> +        - pw_trylock:			local_trylock
+> +        - pw_trylock_irqsave:		local_trylock_irqsave
+> +        - pw_unlock:			local_unlock
+> +        - pw_lock_local:		local_lock
+> +        - pw_trylock_local:		local_trylock
+> +        - pw_unlock_local:		local_unlock
+> +        - pw_queue_on:         		queue_work_on
+> +        - pw_flush:	            	flush_work
+> +
+> +* CONFIG_PWLOCKS (and CONFIG_PWLOCKS_DEFAULT=y or pwlocks=on kernel boot parameter),
+> +        - pw_lock:			spin_lock
+> +        - pw_lock_irqsave:		spin_lock_irqsave
+> +        - pw_trylock:			spin_trylock
+> +        - pw_trylock_irqsave:		spin_trylock_irqsave
+> +        - pw_unlock:			spin_unlock
+> +        - pw_lock_local:		preempt_disable OR migrate_disable + spin_lock
+> +        - pw_trylock_local:		preempt_disable OR migrate_disable + spin_trylock
+> +        - pw_unlock_local:		preempt_enable OR migrate_enable + spin_unlock
+> +        - pw_queue_on:         		executes work function on caller cpu
+> +        - pw_flush:            		empty
+> +
+> +pw_get_cpu(work_struct), to be called from within per-cpu work function,
+> +returns the target cpu.
+
+                      CPU.
+
+> +
+> +On the locking functions above, there are the local locking functions
+> +(pw_lock_local, pw_trylock_local and pw_unlock_local) that must only
+> +be used to access per-CPU data from the CPU that owns that data,
+> +and never remotely. They disable preemption/migration and don't require
+> +a cpu parameter, making them a replacement for local_lock functions that
+> +does not introduce overhead.
+> +
+> +These should only be used when accessing per-CPU data of the local CPU.
+> +
+
+Running "make htmldocs" with this patch says:
+
+Documentation/locking/pwlocks.rst: WARNING: document isn't included in any toctree [toc.not_included]
+
+> diff --git a/init/Kconfig b/init/Kconfig
+> index 2937c4d308ae..3fb751dc4530 100644
+> --- a/init/Kconfig
+> +++ b/init/Kconfig
+> @@ -764,20 +764,55 @@ config CPU_ISOLATION
+>  	depends on SMP
+>  	default y
+>  	help
+>  	  Make sure that CPUs running critical tasks are not disturbed by
+>  	  any source of "noise" such as unbound workqueues, timers, kthreads...
+>  	  Unbound jobs get offloaded to housekeeping CPUs. This is driven by
+>  	  the "isolcpus=" boot parameter.
+>  
+>  	  Say Y if unsure.
+>  
+> +config PWLOCKS
+> +	bool "Per-CPU Work locks"
+> +	depends on SMP || COMPILE_TEST
+> +	default n
+> +	help
+> +	  Allow changing the behavior on per-CPU resource sharing with cache,
+> +	  from the regular local_locks() + queue_work_on(remote_cpu) to using
+> +	  per-CPU spinlocks on both local and remote operations.
+> +
+> +	  This is useful to give user the option on reducing IPIs to CPUs, and
+
+	                 to give the user
+
+> +	  thus reduce interruptions and context switches. On the other hand, it
+> +	  increases generated code and will use atomic operations if spinlocks
+> +	  are selected.
+> +
+> +	  If set, will use the default behavior set in PWLOCKS_DEFAULT unless boot
+
+	                                                               unless the boot
+
+> +	  parameter pwlocks is passed with a different behavior.
+> +
+> +	  If unset, will use the local_lock() + queue_work_on() strategy,
+> +	  regardless of the boot parameter or PWLOCKS_DEFAULT.
+> +
+> +	  Say N if unsure.
+> +
+> +config PWLOCKS_DEFAULT
+> +	bool "Use per-CPU spinlocks by default on PWLOCKS"
+> +	depends on PWLOCKS
+> +	default n
+> +	help
+> +	  If set, will use per-CPU spinlocks as default behavior for per-CPU
+> +	  remote operations.
+> +
+> +	  If unset, will use local_lock() + queue_work_on(cpu) as default
+> +	  behavior for remote operations.
+> +
+> +	  Say N if unsure
+
+	           unsure.
+
+> +
+>  source "kernel/rcu/Kconfig"
+>  
+>  config IKCONFIG
+>  	tristate "Kernel .config support"
+>  	help
+>  	  This option enables the complete Linux kernel ".config" file
+>  	  contents to be saved in the kernel. It provides documentation
+>  	  of which kernel options are used in a running kernel or in an
+>  	  on-disk kernel.  This information can be extracted from the kernel
+>  	  image file with the script scripts/extract-ikconfig and used as
+
+-- 
+~Randy
+
 
