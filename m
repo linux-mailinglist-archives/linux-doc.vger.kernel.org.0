@@ -1,66 +1,103 @@
-Return-Path: <linux-doc+bounces-88565-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88562-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KNqiFFktDWq8uAUAu9opvQ
-	(envelope-from <linux-doc+bounces-88565-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 05:41:13 +0200
+	id 8GxvGm4rDWo2uAUAu9opvQ
+	(envelope-from <linux-doc+bounces-88562-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 05:33:02 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id A681D58754F
-	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 05:41:12 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 06B00587468
+	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 05:33:01 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id D1D91307D7D2
-	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 03:36:21 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id E070A302F57B
+	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 03:33:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D175A36E47F;
-	Wed, 20 May 2026 03:35:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1F2F33546CB;
+	Wed, 20 May 2026 03:32:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Duk+i3PY"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out28-172.mail.aliyun.com (out28-172.mail.aliyun.com [115.124.28.172])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-dl1-f66.google.com (mail-dl1-f66.google.com [74.125.82.66])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F2AB636A022;
-	Wed, 20 May 2026 03:35:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.124.28.172
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E3B4E2F6188
+	for <linux-doc@vger.kernel.org>; Wed, 20 May 2026 03:32:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.66
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779248147; cv=none; b=g/mSoslxAIA3YaEO/TprNEMQP3Su6y1T4XFji3C+44i/3AcSmZkeHFgLVpTGlBc/u4gpSGfa9c6QSW2YGVPO6nrlwozBVRO74IsAv7Cfw07N7VqVtIYEAV0AVRrR0vdo/AEZD4V37jUpckoskoOYY4KhRyw4C/P86LyPaU8Jppc=
+	t=1779247978; cv=none; b=q/v3Gu4I3+n07Wu2yQX9mC++hG7PN8HE3MLNp7jYw0JV7Mf53muevd0HrW1D6plw2sjeQ/gpAKGVC+jDZKCMgOnQF2y5m4gX3TpxgUi12ZihdP3ZYscsyi1L5zKCVTW0gHkGal4WyR4T99d5j3Nbdvc3Xbm+/FIaefYvThwEUd0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779248147; c=relaxed/simple;
-	bh=RDb7o08hiJKCfxNhNIKKs7onfmOm3vDekalG8PXX52I=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=ML7+abBXAtwUAcOg+PHH6pY+phCDx5esXjsfl4rgM9QMESX5FLijsGJqsAs8v5mBuy4HcgjJhIGI9qlBi3WkgvQtFnnW5W4FI7L7LT1kOMXm7rm82kOCENnxNRyvjNzxjDWo265FN4n0fLws0b2ov3ZqHqPESSat8jnRWb9KyGw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=nebula-matrix.com; spf=pass smtp.mailfrom=nebula-matrix.com; arc=none smtp.client-ip=115.124.28.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=nebula-matrix.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nebula-matrix.com
-X-Alimail-AntiSpam:AC=CONTINUE;BC=0.06712908|-1;CH=green;DM=|CONTINUE|false|;DS=CONTINUE|ham_alarm|0.0144292-0.00248451-0.983086;FP=16868052708355493538|0|0|0|0|-1|-1|-1;HT=maildocker-contentspam033045220102;MF=illusion.wang@nebula-matrix.com;NM=1;PH=DS;RN=18;RT=18;SR=0;TI=SMTPD_---.hbYx4FS_1779247807;
-Received: from localhost.localdomain(mailfrom:illusion.wang@nebula-matrix.com fp:SMTPD_---.hbYx4FS_1779247807 cluster:ay29)
-          by smtp.aliyun-inc.com;
-          Wed, 20 May 2026 11:30:08 +0800
-From: "illusion.wang" <illusion.wang@nebula-matrix.com>
-To: dimon.zhao@nebula-matrix.com,
-	illusion.wang@nebula-matrix.com,
-	alvin.wang@nebula-matrix.com,
-	sam.chen@nebula-matrix.com,
-	netdev@vger.kernel.org
-Cc: andrew+netdev@lunn.ch,
-	corbet@lwn.net,
-	kuba@kernel.org,
-	horms@kernel.org,
-	linux-doc@vger.kernel.org,
-	pabeni@redhat.com,
-	vadim.fedorenko@linux.dev,
-	lukas.bulwahn@redhat.com,
-	edumazet@google.com,
-	enelsonmoore@gmail.com,
-	skhan@linuxfoundation.org,
-	hkallweit1@gmail.com,
-	linux-kernel@vger.kernel.org (open list)
-Subject: [PATCH v15 net-next 11/11] net/nebula-matrix: add common dev start/stop operation
-Date: Wed, 20 May 2026 11:29:43 +0800
-Message-ID: <20260520032950.4874-12-illusion.wang@nebula-matrix.com>
+	s=arc-20240116; t=1779247978; c=relaxed/simple;
+	bh=DE7lfdFY0tW8txQ93NLpBlb9NX1IgxQFhteEfn+hLH0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=SnxMK4+bLgSRweXSZow3jqTyzllEYdaIx6DarcFttSJ21b3nLKM77w4HP+DEYPb6lMByB+Wu/kGdleQOXeFP897I8ZItkuSLHP4whESO3XgLB6wUSc3vy5RnldTt7LsVn+yVhRlNDo7PysJrOBUuxemCA9Yq4N8x21+VKbqre0I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Duk+i3PY; arc=none smtp.client-ip=74.125.82.66
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-dl1-f66.google.com with SMTP id a92af1059eb24-1329fc4bf77so1060474c88.1
+        for <linux-doc@vger.kernel.org>; Tue, 19 May 2026 20:32:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1779247975; x=1779852775; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=+ZwT6jFAkQrUSs7LqDce8uNZux1QgXwZ4Wl56JV19lI=;
+        b=Duk+i3PYiW4IdRnR82qeVs1OB63hZ2gUlunzOaZxIvb1I2wkQVC7dWma1bJ+iw94H6
+         3QCHMB4TEUflSs3XLVm+IIeJUoN1Bx8C2vhk62LxfC2GlKQcf8IP3ctyNAm3DQA/8Vlu
+         ODo7+2B0ufkSPisPlXriUm2ieaG8oh/2kwrJyhgeZrd2zGvpcbMBiFEXPbJGxp1CMTrb
+         2mZfjBnc5AZ0UTrMj15okoLmtQICEi8eahl74br0oWmVTowKZAEVD7Ry7HwhYhPGEPrw
+         3sz9DyxAWSNogPAIlmYGTHIr4rMWDBI3Ywj18YlA7WzGOOgR1V06m/In5Ufygp0T77cK
+         pe3Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1779247975; x=1779852775;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=+ZwT6jFAkQrUSs7LqDce8uNZux1QgXwZ4Wl56JV19lI=;
+        b=YLYoQJ8YRJS7YbpU9Vgud1Qydv9uphm+ZyeLR7fRN+N/x+M+bH60QY0aPI5MO88pjp
+         O47aNvB5Chp2p/TtWe5nTI9HJL9mJkI2RO+Fw2kHmGH4+92KRTHYCyyLzrT1UFaLTMIk
+         t1SDPqRGgwxT/pHqp43cK+pwDesZVcBScTggWfRO74xbFqLRkme1khPmg5X1h+HeNVhW
+         ShOGLFA8DOtl3mCbzvvfk3Dn3k+5oINKAv704+74/odbxNjkOQAfRzjnMnOicCaX5Br5
+         rE3+Yjn5fGLG2lt+0Rw1xPwukAe3c9quKNSZwZ4Wnu5hkJV1vq9j5YRVksGN38F8rGXI
+         aa0A==
+X-Gm-Message-State: AOJu0YwXD7OYVrEbOMgsAAdpXYUN0vtDjGZEbEW17HkMokz/gUaEogy9
+	Rfr7EXQ4M7OxbpdcYwKhr0MIVz79n4XsrTktpeYqx+UoCt1Gd+Dd5tPCV5r8rknLrJs=
+X-Gm-Gg: Acq92OEsSdp+BF/ickBNupIv+VAUYwX5m7r/EqLl69u5qPuzqQMOoybfFXOXiIFTlNc
+	eNVm7xMIBoSov8nN6jSG73c6vKmgW65Dvkz8VOEV3Inex/XgwlTNJHiCjtgUIssoVPtxr+Fs6T1
+	pm5VLnKT+C1aYfy9rZ+XsMDMGcz2+uMypdlz8zg8uy42f0qQMCTeCf15zvSuWHVoY6sLYqSx2i5
+	oFwW+t5fai29EoCVPMtvhKFyuMZ7cjZexq66V+ariYLX3BTLDErMJnBFnzCM0a0dTw68c1DORVQ
+	uIKo6z3AVAMGgm5CFe7ovtaB9+3ES1qQZY92xLIjck7YSSuZk8Nuzof+YJ0uMeb4P22PIwpGbPg
+	298pbhdOxJgndgk6v1aU2oLLqFzgdI3c50/nCY8snZM26J4O0kC89cGj8LjZ5tOM7G4D7oD0c+P
+	/jerSFfwXt6L5GHIJyIHappKLTQD1lm5qNS5A/TA+oDFtR50IGja5CNzOoHkv9tdeigylDF7zAJ
+	h7xyfJIucRf2yrlbWwOMJXFcC2JITYO46QY3nPwGKaTrZrfYqcrjUCiYbk7zLl4kABQhOIRsBmD
+	sc1d71nACrTBk2u1ag==
+X-Received: by 2002:a05:7022:f9d:b0:133:1ba6:f42d with SMTP id a92af1059eb24-1350451e2b2mr11405371c88.3.1779247974860;
+        Tue, 19 May 2026 20:32:54 -0700 (PDT)
+Received: from ethan-latitude5420.. (host-127-24.cafrjco.fresno.ca.us.clients.pavlovmedia.net. [68.180.127.24])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-134cbcb9ef5sm24582900c88.2.2026.05.19.20.32.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 19 May 2026 20:32:54 -0700 (PDT)
+From: Ethan Nelson-Moore <enelsonmoore@gmail.com>
+To: linux-doc@vger.kernel.org,
+	linux-alpha@vger.kernel.org,
+	linux-serial@vger.kernel.org,
+	linux-fbdev@vger.kernel.org
+Cc: Ethan Nelson-Moore <enelsonmoore@gmail.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	Matt Turner <mattst88@gmail.com>,
+	Magnus Lindholm <linmag7@gmail.com>,
+	Madhavan Srinivasan <maddy@linux.ibm.com>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	"Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Jiri Slaby <jirislaby@kernel.org>,
+	Helge Deller <deller@gmx.de>,
+	Nicolas Pitre <nico@fluxnic.net>
+Subject: [PATCH] video: console: mdacon: remove this obsolete driver
+Date: Tue, 19 May 2026 20:31:36 -0700
+Message-ID: <20260520033155.17378-1-enelsonmoore@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260520032950.4874-1-illusion.wang@nebula-matrix.com>
-References: <20260520032950.4874-1-illusion.wang@nebula-matrix.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -68,411 +105,783 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [1.54 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FREEMAIL_CC(0.00)[gmail.com,lwn.net,linuxfoundation.org,linaro.org,linux.ibm.com,ellerman.id.au,kernel.org,gmx.de,fluxnic.net];
+	TAGGED_FROM(0.00)[bounces-88562-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-88565-lists,linux-doc=lfdr.de];
-	DMARC_NA(0.00)[nebula-matrix.com];
-	TO_DN_NONE(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[18];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[lunn.ch,lwn.net,kernel.org,vger.kernel.org,redhat.com,linux.dev,google.com,gmail.com,linuxfoundation.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	R_DKIM_NA(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[enelsonmoore@gmail.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	RCVD_COUNT_FIVE(0.00)[5];
+	TAGGED_RCPT(0.00)[linux-doc];
 	NEURAL_HAM(-0.00)[-1.000];
-	FROM_NEQ_ENVFROM(0.00)[illusion.wang@nebula-matrix.com,linux-doc@vger.kernel.org];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,nebula-matrix.com:mid,nebula-matrix.com:email,illusion.wang:url,pci:email]
-X-Rspamd-Queue-Id: A681D58754F
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,ucw.cz:email]
+X-Rspamd-Queue-Id: 06B00587468
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-This patch wires up nbl_dev_start() and nbl_dev_stop() to configure
-the MSI-X map, allocate vectors, and request/enable the mailbox IRQ.
-It also replaces module_pci_driver() with explicit init/exit functions
-that additionally create and destroy the driver's workqueue via
-nbl_common_create_wq() / nbl_common_destroy_wq(), which is needed
-because the new IRQ handler schedules work through
-nbl_common_queue_work().
+The mdacon driver supports using ISA MDA or Hercules-compatible display
+adapters as a secondary text console. This was commonly used in the
+1990s and earlier for debugging software which took over the primary
+display. It is highly unlikely anyone is doing so nowadays because
+serial consoles and much better methods of debugging exist.
 
-Signed-off-by: illusion.wang <illusion.wang@nebula-matrix.com>
+The driver is not enabled by any defconfig, nor any of the
+dozens of distro configs collected at [1]. It has been relegated to VTs
+13-16 since commit 0b9cf3aa6b1e ("mdacon messing up default vc's - set
+default to vc13-16 again") in Linux 2.6.27 (and before Linux 2.5.53 -
+see the link in the message of the above commit). The change in 2.6.27
+was done because it was incorrectly detecting non-MDA adapters as MDA
+and taking over all VTs, rendering them unusable.
+
+Furthermore, vgacon supports using MDA/Hercules-compatible adapters as
+the primary text console, so any systems with only one of these
+adapters were already using vgacon and will not experience any loss in
+functionality from the removal of this driver.
+
+Given all of these factors, the mdacon driver is likely entirely
+unused. Remove it.
+
+[1] https://github.com/nyrahul/linux-kernel-configs/tree/f0bee86a135a0406ea427855f52702dd00d770f9
+
+Signed-off-by: Ethan Nelson-Moore <enelsonmoore@gmail.com>
 ---
- .../nebula-matrix/nbl/nbl_common/nbl_common.c |  34 +++
- .../nebula-matrix/nbl/nbl_core/nbl_dev.c      | 220 ++++++++++++++++++
- .../nbl/nbl_include/nbl_def_common.h          |   4 +
- .../net/ethernet/nebula-matrix/nbl/nbl_main.c |  31 ++-
- 4 files changed, 288 insertions(+), 1 deletion(-)
+ .../admin-guide/kernel-parameters.txt         |   5 -
+ arch/alpha/kernel/io.c                        |   2 +-
+ arch/powerpc/include/asm/vga.h                |   4 +-
+ drivers/tty/vt/vt.c                           |   3 -
+ drivers/video/console/Kconfig                 |  15 -
+ drivers/video/console/Makefile                |   1 -
+ drivers/video/console/mdacon.c                | 566 ------------------
+ include/linux/console.h                       |   2 -
+ include/linux/vt_buffer.h                     |   2 +-
+ 9 files changed, 4 insertions(+), 596 deletions(-)
+ delete mode 100644 drivers/video/console/mdacon.c
 
-diff --git a/drivers/net/ethernet/nebula-matrix/nbl/nbl_common/nbl_common.c b/drivers/net/ethernet/nebula-matrix/nbl/nbl_common/nbl_common.c
-index 11b1948658d9..3ee08b0cb9f4 100644
---- a/drivers/net/ethernet/nebula-matrix/nbl/nbl_common/nbl_common.c
-+++ b/drivers/net/ethernet/nebula-matrix/nbl/nbl_common/nbl_common.c
-@@ -6,6 +6,40 @@
- #include <linux/device.h>
- #include "nbl_common.h"
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+index 4d0f545fb3ec..e873b27cdd30 100644
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -36,7 +36,6 @@
+ 	M68k	M68k architecture is enabled.
+ 			These options have more detailed description inside of
+ 			Documentation/arch/m68k/kernel-options.rst.
+-	MDA	MDA console support is enabled.
+ 	MIPS	MIPS architecture is enabled.
+ 	MOUSE	Appropriate mouse support is enabled.
+ 	MSI	Message Signaled Interrupts (PCI).
+@@ -3816,10 +3815,6 @@ Kernel parameters
+ 	md=		[HW] RAID subsystems devices and level
+ 			See Documentation/admin-guide/md.rst.
  
-+static struct nbl_common_wq_mgt *wq_mgt;
-+
-+void nbl_common_queue_work(struct work_struct *task)
-+{
-+	queue_work(wq_mgt->ctrl_dev_wq, task);
-+}
-+
-+void nbl_common_destroy_wq(void)
-+{
-+	destroy_workqueue(wq_mgt->ctrl_dev_wq);
-+	kfree(wq_mgt);
-+	wq_mgt = NULL;
-+}
-+
-+int nbl_common_create_wq(void)
-+{
-+	wq_mgt = kzalloc_obj(*wq_mgt);
-+	if (!wq_mgt)
-+		return -ENOMEM;
-+
-+	wq_mgt->ctrl_dev_wq = alloc_workqueue("%s", WQ_MEM_RECLAIM | WQ_UNBOUND,
-+					      0, "nbl_ctrldev_wq");
-+	if (!wq_mgt->ctrl_dev_wq) {
-+		pr_err("Failed to create workqueue nbl_ctrldev_wq\n");
-+		goto alloc_ctrl_dev_wq_failed;
-+	}
-+
-+	return 0;
-+alloc_ctrl_dev_wq_failed:
-+	kfree(wq_mgt);
-+	wq_mgt = NULL;
-+	return -ENOMEM;
-+}
-+
- u32 nbl_common_pf_id_subtraction_mgtpf_id(struct nbl_common_info *common,
- 					  u32 pf_id)
- {
-diff --git a/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c b/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c
-index eb5d2b33a300..9b5627c245e1 100644
---- a/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c
-+++ b/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c
-@@ -6,6 +6,17 @@
- #include <linux/pci.h>
- #include "nbl_dev.h"
+-	mdacon=		[MDA]
+-			Format: <first>,<last>
+-			Specifies range of consoles to be captured by the MDA.
+-
+ 	mds=		[X86,INTEL,EARLY]
+ 			Control mitigation for the Micro-architectural Data
+ 			Sampling (MDS) vulnerability.
+diff --git a/arch/alpha/kernel/io.c b/arch/alpha/kernel/io.c
+index c28035d6d1e6..2bad1b4fb240 100644
+--- a/arch/alpha/kernel/io.c
++++ b/arch/alpha/kernel/io.c
+@@ -647,7 +647,7 @@ void _memset_c_io(volatile void __iomem *to, unsigned long c, long count)
  
-+static void nbl_dev_clean_mailbox_schedule(struct nbl_dev_mgt *dev_mgt);
-+
-+/* ----------  Interrupt config  ---------- */
-+static irqreturn_t nbl_dev_clean_mailbox(int __always_unused irq, void *data)
-+{
-+	struct nbl_dev_mgt *dev_mgt = (struct nbl_dev_mgt *)data;
-+
-+	nbl_dev_clean_mailbox_schedule(dev_mgt);
-+	return IRQ_HANDLED;
-+}
-+
- static void nbl_dev_init_msix_cnt(struct nbl_dev_mgt *dev_mgt)
- {
- 	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-@@ -14,6 +25,173 @@ static void nbl_dev_init_msix_cnt(struct nbl_dev_mgt *dev_mgt)
- 	msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num = 1;
+ EXPORT_SYMBOL(_memset_c_io);
+ 
+-#if IS_ENABLED(CONFIG_VGA_CONSOLE) || IS_ENABLED(CONFIG_MDA_CONSOLE)
++#if IS_ENABLED(CONFIG_VGA_CONSOLE)
+ 
+ #include <asm/vga.h>
+ 
+diff --git a/arch/powerpc/include/asm/vga.h b/arch/powerpc/include/asm/vga.h
+index f2dc40e1c52a..e45063b02b45 100644
+--- a/arch/powerpc/include/asm/vga.h
++++ b/arch/powerpc/include/asm/vga.h
+@@ -14,7 +14,7 @@
+ #include <asm/io.h>
+ 
+ 
+-#if defined(CONFIG_VGA_CONSOLE) || defined(CONFIG_MDA_CONSOLE)
++#ifdef CONFIG_VGA_CONSOLE
+ 
+ #define VT_BUF_HAVE_RW
+ /*
+@@ -40,7 +40,7 @@ static inline void scr_memsetw(u16 *s, u16 v, unsigned int n)
+ 	memset16(s, cpu_to_le16(v), n / 2);
  }
  
-+static int nbl_dev_request_mailbox_irq(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	struct nbl_common_info *common = dev_mgt->common;
-+	u16 local_vec_id;
-+	int irq_num;
-+	int err;
-+
-+	if (!msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num)
-+		return 0;
-+
-+	local_vec_id =
-+		msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].base_vector_id;
-+	irq_num = pci_irq_vector(common->pdev, local_vec_id);
-+	if (irq_num < 0) {
-+		dev_err(common->dev, "Failed to get mailbox IRQ vector: %d\n",
-+			irq_num);
-+		return irq_num;
-+	}
-+
-+	snprintf(dev_common->mailbox_name, sizeof(dev_common->mailbox_name),
-+		 "nbl_mailbox@pci:%s", pci_name(common->pdev));
-+	err = request_irq(irq_num, nbl_dev_clean_mailbox, 0,
-+			  dev_common->mailbox_name, dev_mgt);
-+	if (err)
-+		return err;
-+
-+	return 0;
-+}
-+
-+static void nbl_dev_free_mailbox_irq(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	struct nbl_common_info *common = dev_mgt->common;
-+	u16 local_vec_id;
-+	int irq_num;
-+
-+	if (!msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num)
-+		return;
-+
-+	local_vec_id =
-+		msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].base_vector_id;
-+	irq_num = pci_irq_vector(common->pdev, local_vec_id);
-+	if (irq_num >= 0)
-+		free_irq(irq_num, dev_mgt);
-+}
-+
-+static int nbl_dev_enable_mailbox_irq(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dispatch_ops *disp_ops = dev_mgt->disp_ops_tbl->ops;
-+	struct nbl_channel_ops *chan_ops = dev_mgt->chan_ops_tbl->ops;
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	u16 local_vec_id;
-+
-+	if (!msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num)
-+		return 0;
-+
-+	local_vec_id =
-+		msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].base_vector_id;
-+	chan_ops->set_queue_state(dev_mgt->chan_ops_tbl->priv,
-+				  NBL_CHAN_INTERRUPT_READY,
-+				  NBL_CHAN_TYPE_MAILBOX, true);
-+
-+	return disp_ops->set_mailbox_irq(dev_mgt->disp_ops_tbl->priv,
-+					    local_vec_id, true);
-+}
-+
-+static int nbl_dev_disable_mailbox_irq(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dispatch_ops *disp_ops = dev_mgt->disp_ops_tbl->ops;
-+	struct nbl_channel_ops *chan_ops = dev_mgt->chan_ops_tbl->ops;
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	u16 local_vec_id;
-+
-+	if (!msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num)
-+		return 0;
-+
-+	local_vec_id =
-+		msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].base_vector_id;
-+	chan_ops->set_queue_state(dev_mgt->chan_ops_tbl->priv,
-+				  NBL_CHAN_INTERRUPT_READY,
-+				  NBL_CHAN_TYPE_MAILBOX, false);
-+
-+	return disp_ops->set_mailbox_irq(dev_mgt->disp_ops_tbl->priv,
-+					    local_vec_id, false);
-+}
-+
-+static int nbl_dev_configure_msix_map(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dispatch_ops *disp_ops = dev_mgt->disp_ops_tbl->ops;
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	bool mask_en = msix_info->serv_info[NBL_MSIX_NET_TYPE].hw_self_mask_en;
-+	u16 msix_net_num = msix_info->serv_info[NBL_MSIX_NET_TYPE].num;
-+	u16 msix_not_net_num = 0;
-+	int err, i;
-+
-+	msix_info->serv_info[NBL_MSIX_VIRTIO_TYPE].base_vector_id = 0;
-+	for (i = NBL_MSIX_NET_TYPE; i < NBL_MSIX_TYPE_MAX; i++)
-+		msix_info->serv_info[i].base_vector_id =
-+			msix_info->serv_info[i - 1].base_vector_id +
-+			msix_info->serv_info[i - 1].num;
-+
-+	for (i = NBL_MSIX_MAILBOX_TYPE; i < NBL_MSIX_TYPE_MAX; i++)
-+		msix_not_net_num += msix_info->serv_info[i].num;
-+
-+	err = disp_ops->configure_msix_map(dev_mgt->disp_ops_tbl->priv,
-+					   msix_net_num, msix_not_net_num,
-+					   mask_en);
-+
-+	return err;
-+}
-+
-+static int nbl_dev_destroy_msix_map(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dispatch_ops *disp_ops = dev_mgt->disp_ops_tbl->ops;
-+
-+	return disp_ops->destroy_msix_map(dev_mgt->disp_ops_tbl->priv);
-+}
-+
-+static int nbl_dev_alloc_msix_intr(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	struct nbl_common_info *common = dev_mgt->common;
-+	int needed = 0;
-+	int err;
-+	int i;
-+
-+	for (i = 0; i < NBL_MSIX_TYPE_MAX; i++)
-+		needed += msix_info->serv_info[i].num;
-+
-+	err = pci_alloc_irq_vectors(common->pdev, needed, needed,
-+				    PCI_IRQ_MSIX | PCI_IRQ_AFFINITY);
-+	if (err < 0) {
-+		dev_err(common->dev,
-+			"pci_alloc_irq_vectors failed, err = %d\n", err);
-+		return err;
-+	}
-+
-+	return 0;
-+}
-+
-+static int nbl_dev_init_interrupt_scheme(struct nbl_dev_mgt *dev_mgt)
-+{
-+	int err;
-+
-+	err = nbl_dev_alloc_msix_intr(dev_mgt);
-+	if (err) {
-+		dev_err(dev_mgt->common->dev,
-+			"Failed to enable MSI-X vectors\n");
-+		return err;
-+	}
-+	return 0;
-+}
-+
-+static void nbl_dev_clear_interrupt_scheme(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_common_info *common = dev_mgt->common;
-+
-+	pci_free_irq_vectors(common->pdev);
-+}
-+
- /* ----------  Channel config  ---------- */
- static void nbl_dev_setup_chan_qinfo(struct nbl_dev_mgt *dev_mgt, u8 chan_type)
- {
-@@ -72,6 +250,13 @@ static void nbl_dev_clean_mailbox_task(struct work_struct *work)
- 				      NBL_CHAN_TYPE_MAILBOX);
- }
+-#endif /* !CONFIG_VGA_CONSOLE && !CONFIG_MDA_CONSOLE */
++#endif /* !CONFIG_VGA_CONSOLE */
  
-+static void nbl_dev_clean_mailbox_schedule(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dev_common *common_dev = dev_mgt->common_dev;
-+
-+	nbl_common_queue_work(&common_dev->clean_mbx_task);
-+}
-+
- /* ----------  Dev init process  ---------- */
- static int nbl_dev_setup_common_dev(struct nbl_adapter *adapter)
- {
-@@ -222,9 +407,44 @@ void nbl_dev_remove(struct nbl_adapter *adapter)
- /* ----------  Dev start process  ---------- */
- int nbl_dev_start(struct nbl_adapter *adapter)
- {
-+	struct nbl_dev_mgt *dev_mgt = adapter->core.dev_mgt;
-+	struct nbl_dev_common *common_dev = dev_mgt->common_dev;
-+	int ret;
-+
-+	ret = nbl_dev_configure_msix_map(dev_mgt);
-+	if (ret)
-+		return ret;
-+
-+	ret = nbl_dev_init_interrupt_scheme(dev_mgt);
-+	if (ret)
-+		goto init_interrupt_scheme_err;
-+	ret = nbl_dev_request_mailbox_irq(dev_mgt);
-+	if (ret)
-+		goto mailbox_request_irq_err;
-+	ret = nbl_dev_enable_mailbox_irq(dev_mgt);
-+	if (ret)
-+		goto enable_mailbox_irq_err;
-+
+ #ifdef __powerpc64__
+ #define VGA_MAP_MEM(x,s) ((unsigned long) ioremap((x), s))
+diff --git a/drivers/tty/vt/vt.c b/drivers/tty/vt/vt.c
+index e99636ab9db5..3ca5e3dc5ac0 100644
+--- a/drivers/tty/vt/vt.c
++++ b/drivers/tty/vt/vt.c
+@@ -3978,9 +3978,6 @@ int __init vty_init(const struct file_operations *console_fops)
+ 		panic("Couldn't register console driver\n");
+ 	kbd_init();
+ 	console_map_init();
+-#ifdef CONFIG_MDA_CONSOLE
+-	mda_console_init();
+-#endif
  	return 0;
-+enable_mailbox_irq_err:
-+	cancel_work_sync(&common_dev->clean_mbx_task);
-+	nbl_dev_disable_mailbox_irq(dev_mgt);
-+	nbl_dev_free_mailbox_irq(dev_mgt);
-+mailbox_request_irq_err:
-+	nbl_dev_clear_interrupt_scheme(dev_mgt);
-+init_interrupt_scheme_err:
-+	nbl_dev_destroy_msix_map(dev_mgt);
-+	return ret;
  }
  
- void nbl_dev_stop(struct nbl_adapter *adapter)
- {
-+	struct nbl_dev_mgt *dev_mgt = adapter->core.dev_mgt;
-+	struct nbl_dev_common *common_dev = dev_mgt->common_dev;
-+
-+	cancel_work_sync(&common_dev->clean_mbx_task);
-+	nbl_dev_disable_mailbox_irq(dev_mgt);
-+	nbl_dev_free_mailbox_irq(dev_mgt);
-+	nbl_dev_clear_interrupt_scheme(dev_mgt);
-+	nbl_dev_destroy_msix_map(dev_mgt);
- }
-diff --git a/drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_def_common.h b/drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_def_common.h
-index 09d20d3235fe..2a35399cd1ec 100644
---- a/drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_def_common.h
-+++ b/drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_def_common.h
-@@ -62,6 +62,10 @@ struct nbl_hash_tbl_del_key {
- 	void (*action_func)(void *priv, void *key, void *data);
- };
+diff --git a/drivers/video/console/Kconfig b/drivers/video/console/Kconfig
+index 12f54480f57f..9f81af3506da 100644
+--- a/drivers/video/console/Kconfig
++++ b/drivers/video/console/Kconfig
+@@ -23,21 +23,6 @@ config VGA_CONSOLE
  
-+void nbl_common_queue_work(struct work_struct *task);
-+
-+void nbl_common_destroy_wq(void);
-+int nbl_common_create_wq(void);
- u32 nbl_common_pf_id_subtraction_mgtpf_id(struct nbl_common_info *common,
- 					  u32 pf_id);
+ 	  Say Y.
  
-diff --git a/drivers/net/ethernet/nebula-matrix/nbl/nbl_main.c b/drivers/net/ethernet/nebula-matrix/nbl/nbl_main.c
-index 4cf3a804d5a5..b4cef26130a9 100644
---- a/drivers/net/ethernet/nebula-matrix/nbl/nbl_main.c
-+++ b/drivers/net/ethernet/nebula-matrix/nbl/nbl_main.c
-@@ -297,7 +297,36 @@ static struct pci_driver nbl_driver = {
- 	.remove = nbl_remove,
- };
+-config MDA_CONSOLE
+-	depends on VGA_CONSOLE && ISA
+-	tristate "MDA text console (dual-headed)"
+-	help
+-	  Say Y here if you have an old MDA or monochrome Hercules graphics
+-	  adapter in your system acting as a second head ( = video card). You
+-	  will then be able to use two monitors with your Linux system. Do not
+-	  say Y here if your MDA card is the primary card in your system; the
+-	  normal VGA driver will handle it.
+-
+-	  To compile this driver as a module, choose M here: the
+-	  module will be called mdacon.
+-
+-	  If unsure, say N.
+-
+ config SGI_NEWPORT_CONSOLE
+ 	tristate "SGI Newport Console support"
+ 	depends on SGI_IP22 && HAS_IOMEM
+diff --git a/drivers/video/console/Makefile b/drivers/video/console/Makefile
+index fd79016a0d95..f1000605210c 100644
+--- a/drivers/video/console/Makefile
++++ b/drivers/video/console/Makefile
+@@ -7,4 +7,3 @@ obj-$(CONFIG_DUMMY_CONSOLE)       += dummycon.o
+ obj-$(CONFIG_SGI_NEWPORT_CONSOLE) += newport_con.o
+ obj-$(CONFIG_STI_CONSOLE)         += sticon.o
+ obj-$(CONFIG_VGA_CONSOLE)         += vgacon.o
+-obj-$(CONFIG_MDA_CONSOLE)         += mdacon.o
+diff --git a/drivers/video/console/mdacon.c b/drivers/video/console/mdacon.c
+deleted file mode 100644
+index d52cd99cd18b..000000000000
+--- a/drivers/video/console/mdacon.c
++++ /dev/null
+@@ -1,566 +0,0 @@
+-/*
+- *  linux/drivers/video/mdacon.c -- Low level MDA based console driver
+- *
+- *	(c) 1998 Andrew Apted <ajapted@netspace.net.au>
+- *
+- *      including portions (c) 1995-1998 Patrick Caulfield.
+- *
+- *      slight improvements (c) 2000 Edward Betts <edward@debian.org>
+- *
+- *  This file is based on the VGA console driver (vgacon.c):
+- *	
+- *	Created 28 Sep 1997 by Geert Uytterhoeven
+- *
+- *	Rewritten by Martin Mares <mj@ucw.cz>, July 1998
+- *
+- *  and on the old console.c, vga.c and vesa_blank.c drivers:
+- *
+- *	Copyright (C) 1991, 1992  Linus Torvalds
+- *			    1995  Jay Estabrook
+- *
+- *  This file is subject to the terms and conditions of the GNU General Public
+- *  License.  See the file COPYING in the main directory of this archive for
+- *  more details.
+- *
+- *  Changelog:
+- *  Paul G. (03/2001) Fix mdacon= boot prompt to use __setup().
+- */
+-
+-#include <linux/types.h>
+-#include <linux/fs.h>
+-#include <linux/kernel.h>
+-#include <linux/module.h>
+-#include <linux/console.h>
+-#include <linux/string.h>
+-#include <linux/kd.h>
+-#include <linux/vt_kern.h>
+-#include <linux/vt_buffer.h>
+-#include <linux/selection.h>
+-#include <linux/spinlock.h>
+-#include <linux/ioport.h>
+-#include <linux/delay.h>
+-#include <linux/init.h>
+-
+-#include <asm/io.h>
+-#include <asm/vga.h>
+-
+-static DEFINE_SPINLOCK(mda_lock);
+-
+-/* description of the hardware layout */
+-
+-static u16		*mda_vram_base;		/* Base of video memory */
+-static unsigned long	mda_vram_len;		/* Size of video memory */
+-static unsigned int	mda_num_columns;	/* Number of text columns */
+-static unsigned int	mda_num_lines;		/* Number of text lines */
+-
+-static unsigned int	mda_index_port;		/* Register select port */
+-static unsigned int	mda_value_port;		/* Register value port */
+-static unsigned int	mda_mode_port;		/* Mode control port */
+-static unsigned int	mda_status_port;	/* Status and Config port */
+-static unsigned int	mda_gfx_port;		/* Graphics control port */
+-
+-/* current hardware state */
+-
+-static int	mda_cursor_loc=-1;
+-static int	mda_cursor_size_from=-1;
+-static int	mda_cursor_size_to=-1;
+-
+-static enum { TYPE_MDA, TYPE_HERC, TYPE_HERCPLUS, TYPE_HERCCOLOR } mda_type;
+-static char *mda_type_name;
+-
+-/* console information */
+-
+-static int	mda_first_vc = 13;
+-static int	mda_last_vc  = 16;
+-
+-static struct vc_data	*mda_display_fg = NULL;
+-
+-module_param(mda_first_vc, int, 0);
+-MODULE_PARM_DESC(mda_first_vc, "First virtual console. Default: 13");
+-module_param(mda_last_vc, int, 0);
+-MODULE_PARM_DESC(mda_last_vc, "Last virtual console. Default: 16");
+-
+-/* MDA register values
+- */
+-
+-#define MDA_CURSOR_BLINKING	0x00
+-#define MDA_CURSOR_OFF		0x20
+-#define MDA_CURSOR_SLOWBLINK	0x60
+-
+-#define MDA_MODE_GRAPHICS	0x02
+-#define MDA_MODE_VIDEO_EN	0x08
+-#define MDA_MODE_BLINK_EN	0x20
+-#define MDA_MODE_GFX_PAGE1	0x80
+-
+-#define MDA_STATUS_HSYNC	0x01
+-#define MDA_STATUS_VSYNC	0x80
+-#define MDA_STATUS_VIDEO	0x08
+-
+-#define MDA_CONFIG_COL132	0x08
+-#define MDA_GFX_MODE_EN		0x01
+-#define MDA_GFX_PAGE_EN		0x02
+-
+-
+-/*
+- * MDA could easily be classified as "pre-dinosaur hardware".
+- */
+-
+-static void write_mda_b(unsigned int val, unsigned char reg)
+-{
+-	unsigned long flags;
+-
+-	spin_lock_irqsave(&mda_lock, flags);	
+-
+-	outb_p(reg, mda_index_port); 
+-	outb_p(val, mda_value_port);
+-
+-	spin_unlock_irqrestore(&mda_lock, flags);
+-}
+-
+-static void write_mda_w(unsigned int val, unsigned char reg)
+-{
+-	unsigned long flags;
+-
+-	spin_lock_irqsave(&mda_lock, flags);
+-
+-	outb_p(reg,   mda_index_port); outb_p(val >> 8,   mda_value_port);
+-	outb_p(reg+1, mda_index_port); outb_p(val & 0xff, mda_value_port);
+-
+-	spin_unlock_irqrestore(&mda_lock, flags);
+-}
+-
+-#ifdef TEST_MDA_B
+-static int test_mda_b(unsigned char val, unsigned char reg)
+-{
+-	unsigned long flags;
+-
+-	spin_lock_irqsave(&mda_lock, flags);
+-
+-	outb_p(reg, mda_index_port); 
+-	outb  (val, mda_value_port);
+-
+-	udelay(20); val = (inb_p(mda_value_port) == val);
+-
+-	spin_unlock_irqrestore(&mda_lock, flags);
+-	return val;
+-}
+-#endif
+-
+-static inline void mda_set_cursor(unsigned int location) 
+-{
+-	if (mda_cursor_loc == location)
+-		return;
+-
+-	write_mda_w(location >> 1, 0x0e);
+-
+-	mda_cursor_loc = location;
+-}
+-
+-static inline void mda_set_cursor_size(int from, int to)
+-{
+-	if (mda_cursor_size_from==from && mda_cursor_size_to==to)
+-		return;
+-	
+-	if (from > to) {
+-		write_mda_b(MDA_CURSOR_OFF, 0x0a);	/* disable cursor */
+-	} else {
+-		write_mda_b(from, 0x0a);	/* cursor start */
+-		write_mda_b(to,   0x0b);	/* cursor end */
+-	}
+-
+-	mda_cursor_size_from = from;
+-	mda_cursor_size_to   = to;
+-}
+-
+-
+-#ifndef MODULE
+-static int __init mdacon_setup(char *str)
+-{
+-	/* command line format: mdacon=<first>,<last> */
+-
+-	int ints[3];
+-
+-	str = get_options(str, ARRAY_SIZE(ints), ints);
+-
+-	if (ints[0] < 2)
+-		return 0;
+-
+-	if (ints[1] < 1 || ints[1] > MAX_NR_CONSOLES || 
+-	    ints[2] < 1 || ints[2] > MAX_NR_CONSOLES)
+-		return 0;
+-
+-	mda_first_vc = ints[1];
+-	mda_last_vc  = ints[2];
+-	return 1;
+-}
+-
+-__setup("mdacon=", mdacon_setup);
+-#endif
+-
+-static int mda_detect(void)
+-{
+-	int count=0;
+-	u16 *p, p_save;
+-	u16 *q, q_save;
+-
+-	/* do a memory check */
+-
+-	p = mda_vram_base;
+-	q = mda_vram_base + 0x01000 / 2;
+-
+-	p_save = scr_readw(p);
+-	q_save = scr_readw(q);
+-
+-	scr_writew(0xAA55, p);
+-	if (scr_readw(p) == 0xAA55)
+-		count++;
+-
+-	scr_writew(0x55AA, p);
+-	if (scr_readw(p) == 0x55AA)
+-		count++;
+-
+-	scr_writew(p_save, p);
+-
+-	if (count != 2) {
+-		return 0;
+-	}
+-
+-	/* check if we have 4K or 8K */
+-
+-	scr_writew(0xA55A, q);
+-	scr_writew(0x0000, p);
+-	if (scr_readw(q) == 0xA55A)
+-		count++;
+-	
+-	scr_writew(0x5AA5, q);
+-	scr_writew(0x0000, p);
+-	if (scr_readw(q) == 0x5AA5)
+-		count++;
+-
+-	scr_writew(p_save, p);
+-	scr_writew(q_save, q);
+-	
+-	if (count == 4) {
+-		mda_vram_len = 0x02000;
+-	}
+-	
+-	/* Ok, there is definitely a card registering at the correct
+-	 * memory location, so now we do an I/O port test.
+-	 */
+-
+-#ifdef TEST_MDA_B
+-	/* Edward: These two mess `tests' mess up my cursor on bootup */
+-
+-	/* cursor low register */
+-	if (!test_mda_b(0x66, 0x0f))
+-		return 0;
+-
+-	/* cursor low register */
+-	if (!test_mda_b(0x99, 0x0f))
+-		return 0;
+-#endif
+-
+-	/* See if the card is a Hercules, by checking whether the vsync
+-	 * bit of the status register is changing.  This test lasts for
+-	 * approximately 1/10th of a second.
+-	 */
+-	
+-	p_save = q_save = inb_p(mda_status_port) & MDA_STATUS_VSYNC;
+-
+-	for (count = 0; count < 50000 && p_save == q_save; count++) {
+-		q_save = inb(mda_status_port) & MDA_STATUS_VSYNC;
+-		udelay(2);
+-	}
+-
+-	if (p_save != q_save) {
+-		switch (inb_p(mda_status_port) & 0x70) {
+-		case 0x10:
+-			mda_type = TYPE_HERCPLUS;
+-			mda_type_name = "HerculesPlus";
+-			break;
+-		case 0x50:
+-			mda_type = TYPE_HERCCOLOR;
+-			mda_type_name = "HerculesColor";
+-			break;
+-		default:
+-			mda_type = TYPE_HERC;
+-			mda_type_name = "Hercules";
+-			break;
+-		}
+-	}
+-
+-	return 1;
+-}
+-
+-static void mda_initialize(void)
+-{
+-	write_mda_b(97, 0x00);		/* horizontal total */
+-	write_mda_b(80, 0x01);		/* horizontal displayed */
+-	write_mda_b(82, 0x02);		/* horizontal sync pos */
+-	write_mda_b(15, 0x03);		/* horizontal sync width */
+-
+-	write_mda_b(25, 0x04);		/* vertical total */
+-	write_mda_b(6,  0x05);		/* vertical total adjust */
+-	write_mda_b(25, 0x06);		/* vertical displayed */
+-	write_mda_b(25, 0x07);		/* vertical sync pos */
+-
+-	write_mda_b(2,  0x08);		/* interlace mode */
+-	write_mda_b(13, 0x09);		/* maximum scanline */
+-	write_mda_b(12, 0x0a);		/* cursor start */
+-	write_mda_b(13, 0x0b);		/* cursor end */
+-
+-	write_mda_w(0x0000, 0x0c);	/* start address */
+-	write_mda_w(0x0000, 0x0e);	/* cursor location */
+-
+-	outb_p(MDA_MODE_VIDEO_EN | MDA_MODE_BLINK_EN, mda_mode_port);
+-	outb_p(0x00, mda_status_port);
+-	outb_p(0x00, mda_gfx_port);
+-}
+-
+-static const char *mdacon_startup(void)
+-{
+-	mda_num_columns = 80;
+-	mda_num_lines   = 25;
+-
+-	mda_vram_len  = 0x01000;
+-	mda_vram_base = (u16 *)VGA_MAP_MEM(0xb0000, mda_vram_len);
+-
+-	mda_index_port  = 0x3b4;
+-	mda_value_port  = 0x3b5;
+-	mda_mode_port   = 0x3b8;
+-	mda_status_port = 0x3ba;
+-	mda_gfx_port    = 0x3bf;
+-
+-	mda_type = TYPE_MDA;
+-	mda_type_name = "MDA";
+-
+-	if (! mda_detect()) {
+-		printk("mdacon: MDA card not detected.\n");
+-		return NULL;
+-	}
+-
+-	if (mda_type != TYPE_MDA) {
+-		mda_initialize();
+-	}
+-
+-	/* cursor looks ugly during boot-up, so turn it off */
+-	mda_set_cursor(mda_vram_len - 1);
+-
+-	printk("mdacon: %s with %ldK of memory detected.\n",
+-		mda_type_name, mda_vram_len/1024);
+-
+-	return "MDA-2";
+-}
+-
+-static void mdacon_init(struct vc_data *c, bool init)
+-{
+-	c->vc_complement_mask = 0x0800;	 /* reverse video */
+-	c->vc_display_fg = &mda_display_fg;
+-
+-	if (init) {
+-		c->vc_cols = mda_num_columns;
+-		c->vc_rows = mda_num_lines;
+-	} else
+-		vc_resize(c, mda_num_columns, mda_num_lines);
+-
+-	/* make the first MDA console visible */
+-
+-	if (mda_display_fg == NULL)
+-		mda_display_fg = c;
+-}
+-
+-static void mdacon_deinit(struct vc_data *c)
+-{
+-	/* con_set_default_unimap(c->vc_num); */
+-
+-	if (mda_display_fg == c)
+-		mda_display_fg = NULL;
+-}
+-
+-static inline u16 mda_convert_attr(u16 ch)
+-{
+-	u16 attr = 0x0700;
+-
+-	/* Underline and reverse-video are mutually exclusive on MDA.
+-	 * Since reverse-video is used for cursors and selected areas,
+-	 * it takes precedence. 
+-	 */
+-
+-	if (ch & 0x0800)	attr = 0x7000;	/* reverse */
+-	else if (ch & 0x0400)	attr = 0x0100;	/* underline */
+-
+-	return ((ch & 0x0200) << 2) | 		/* intensity */ 
+-		(ch & 0x8000) |			/* blink */ 
+-		(ch & 0x00ff) | attr;
+-}
+-
+-static u8 mdacon_build_attr(struct vc_data *c, u8 color,
+-			    enum vc_intensity intensity,
+-			    bool blink, bool underline, bool reverse,
+-			    bool italic)
+-{
+-	/* The attribute is just a bit vector:
+-	 *
+-	 *	Bit 0..1 : intensity (0..2)
+-	 *	Bit 2    : underline
+-	 *	Bit 3    : reverse
+-	 *	Bit 7    : blink
+-	 */
+-
+-	return (intensity & VCI_MASK) |
+-		(underline << 2) |
+-		(reverse << 3) |
+-		(italic << 4) |
+-		(blink << 7);
+-}
+-
+-static void mdacon_invert_region(struct vc_data *c, u16 *p, int count)
+-{
+-	for (; count > 0; count--) {
+-		scr_writew(scr_readw(p) ^ 0x0800, p);
+-		p++;
+-	}
+-}
+-
+-static inline u16 *mda_addr(unsigned int x, unsigned int y)
+-{
+-	return mda_vram_base + y * mda_num_columns + x;
+-}
+-
+-static void mdacon_putcs(struct vc_data *c, const u16 *s, unsigned int count,
+-			 unsigned int y, unsigned int x)
+-{
+-	u16 *dest = mda_addr(x, y);
+-
+-	for (; count > 0; count--) {
+-		scr_writew(mda_convert_attr(scr_readw(s++)), dest++);
+-	}
+-}
+-
+-static void mdacon_clear(struct vc_data *c, unsigned int y, unsigned int x,
+-			 unsigned int width)
+-{
+-	u16 *dest = mda_addr(x, y);
+-	u16 eattr = mda_convert_attr(c->vc_video_erase_char);
+-
+-	scr_memsetw(dest, eattr, width * 2);
+-}
+-
+-static bool mdacon_switch(struct vc_data *c)
+-{
+-	return true;	/* redrawing needed */
+-}
+-
+-static bool mdacon_blank(struct vc_data *c, enum vesa_blank_mode blank,
+-			 bool mode_switch)
+-{
+-	if (mda_type == TYPE_MDA) {
+-		if (blank) 
+-			scr_memsetw(mda_vram_base,
+-				mda_convert_attr(c->vc_video_erase_char),
+-				c->vc_screenbuf_size);
+-		/* Tell console.c that it has to restore the screen itself */
+-		return true;
+-	} else {
+-		if (blank)
+-			outb_p(0x00, mda_mode_port);	/* disable video */
+-		else
+-			outb_p(MDA_MODE_VIDEO_EN | MDA_MODE_BLINK_EN, 
+-				mda_mode_port);
+-		return false;
+-	}
+-}
+-
+-static void mdacon_cursor(struct vc_data *c, bool enable)
+-{
+-	if (!enable) {
+-		mda_set_cursor(mda_vram_len - 1);
+-		return;
+-	}
+-
+-	mda_set_cursor(c->state.y * mda_num_columns * 2 + c->state.x * 2);
+-
+-	switch (CUR_SIZE(c->vc_cursor_type)) {
+-
+-		case CUR_LOWER_THIRD:	mda_set_cursor_size(10, 13); break;
+-		case CUR_LOWER_HALF:	mda_set_cursor_size(7,  13); break;
+-		case CUR_TWO_THIRDS:	mda_set_cursor_size(4,  13); break;
+-		case CUR_BLOCK:		mda_set_cursor_size(1,  13); break;
+-		case CUR_NONE:		mda_set_cursor_size(14, 13); break;
+-		default:		mda_set_cursor_size(12, 13); break;
+-	}
+-}
+-
+-static bool mdacon_scroll(struct vc_data *c, unsigned int t, unsigned int b,
+-		enum con_scroll dir, unsigned int lines)
+-{
+-	u16 eattr = mda_convert_attr(c->vc_video_erase_char);
+-
+-	if (!lines)
+-		return false;
+-
+-	if (lines > c->vc_rows)   /* maximum realistic size */
+-		lines = c->vc_rows;
+-
+-	switch (dir) {
+-
+-	case SM_UP:
+-		scr_memmovew(mda_addr(0, t), mda_addr(0, t + lines),
+-				(b-t-lines)*mda_num_columns*2);
+-		scr_memsetw(mda_addr(0, b - lines), eattr,
+-				lines*mda_num_columns*2);
+-		break;
+-
+-	case SM_DOWN:
+-		scr_memmovew(mda_addr(0, t + lines), mda_addr(0, t),
+-				(b-t-lines)*mda_num_columns*2);
+-		scr_memsetw(mda_addr(0, t), eattr, lines*mda_num_columns*2);
+-		break;
+-	}
+-
+-	return false;
+-}
+-
+-
+-/*
+- *  The console `switch' structure for the MDA based console
+- */
+-
+-static const struct consw mda_con = {
+-	.owner =		THIS_MODULE,
+-	.con_startup =		mdacon_startup,
+-	.con_init =		mdacon_init,
+-	.con_deinit =		mdacon_deinit,
+-	.con_clear =		mdacon_clear,
+-	.con_putcs =		mdacon_putcs,
+-	.con_cursor =		mdacon_cursor,
+-	.con_scroll =		mdacon_scroll,
+-	.con_switch =		mdacon_switch,
+-	.con_blank =		mdacon_blank,
+-	.con_build_attr =	mdacon_build_attr,
+-	.con_invert_region =	mdacon_invert_region,
+-};
+-
+-int __init mda_console_init(void)
+-{
+-	int err;
+-
+-	if (mda_first_vc > mda_last_vc)
+-		return 1;
+-	console_lock();
+-	err = do_take_over_console(&mda_con, mda_first_vc-1, mda_last_vc-1, 0);
+-	console_unlock();
+-	return err;
+-}
+-
+-static void __exit mda_console_exit(void)
+-{
+-	give_up_console(&mda_con);
+-}
+-
+-module_init(mda_console_init);
+-module_exit(mda_console_exit);
+-
+-MODULE_DESCRIPTION("MDA based console driver");
+-MODULE_LICENSE("GPL");
+-
+diff --git a/include/linux/console.h b/include/linux/console.h
+index 5520e4477ad7..d624200cfc17 100644
+--- a/include/linux/console.h
++++ b/include/linux/console.h
+@@ -718,8 +718,6 @@ extern bool console_suspend_enabled;
+ extern void console_suspend_all(void);
+ extern void console_resume_all(void);
  
--module_pci_driver(nbl_driver);
-+static int __init nbl_module_init(void)
-+{
-+	int status;
-+
-+	status = nbl_common_create_wq();
-+	if (status) {
-+		pr_err("Failed to create wq, err = %d\n", status);
-+		goto wq_create_failed;
-+	}
-+	status = pci_register_driver(&nbl_driver);
-+	if (status) {
-+		pr_err("Failed to register PCI driver, err = %d\n", status);
-+		goto pci_register_driver_failed;
-+	}
-+
-+	return 0;
-+
-+pci_register_driver_failed:
-+	nbl_common_destroy_wq();
-+wq_create_failed:
-+	return status;
-+}
-+
-+static void __exit nbl_module_exit(void)
-+{
-+	pci_unregister_driver(&nbl_driver);
-+	nbl_common_destroy_wq();
-+}
+-int mda_console_init(void);
+-
+ void vcs_make_sysfs(int index);
+ void vcs_remove_sysfs(int index);
  
-+module_init(nbl_module_init);
-+module_exit(nbl_module_exit);
- MODULE_LICENSE("GPL");
- MODULE_DESCRIPTION("Nebula Matrix Network Driver");
+diff --git a/include/linux/vt_buffer.h b/include/linux/vt_buffer.h
+index b6eeb8cb6070..6c15c6a15f74 100644
+--- a/include/linux/vt_buffer.h
++++ b/include/linux/vt_buffer.h
+@@ -16,7 +16,7 @@
+ 
+ #include <linux/string.h>
+ 
+-#if IS_ENABLED(CONFIG_VGA_CONSOLE) || IS_ENABLED(CONFIG_MDA_CONSOLE)
++#if IS_ENABLED(CONFIG_VGA_CONSOLE)
+ #include <asm/vga.h>
+ #endif
+ 
 -- 
-2.47.3
+2.43.0
 
 
