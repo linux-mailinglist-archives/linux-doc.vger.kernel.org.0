@@ -1,201 +1,263 @@
-Return-Path: <linux-doc+bounces-88619-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88621-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6Eo8NrG0DWoT2QUAu9opvQ
-	(envelope-from <linux-doc+bounces-88619-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 15:18:41 +0200
+	id GBdvDFy3DWrC2QUAu9opvQ
+	(envelope-from <linux-doc+bounces-88621-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 15:30:04 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4955C58EA7E
-	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 15:18:40 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E76A458EC52
+	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 15:29:58 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 40D7B30FBF21
-	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 13:09:32 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 3AA283097F71
+	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 13:24:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F25253A256C;
-	Wed, 20 May 2026 13:09:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C01EB3D7D9E;
+	Wed, 20 May 2026 13:24:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="YpHeu5XE";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="tPIj50Bo"
+	dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b="OnSPk9B0"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B4D73E2759;
-	Wed, 20 May 2026 13:09:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=193.142.43.55
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E27AD175A6B;
+	Wed, 20 May 2026 13:24:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.251.105.195
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779282555; cv=none; b=EvN9GEJ5C8xdSfnUnsUjGX4ddwJXjXGcCn0RaPf3LXPJwqFAmmFHXEmy8z/VS5LPqGLdD+qTH0nI3+YkIiCaFsk11e7zaKjYor1+bYk1hNETbWsy3/+xduXd05R0stNp5Iz78VZtFjgAOL+vBjCWw5W8Rvj3qNkkiDr+vuO61+4=
+	t=1779283474; cv=none; b=pUa3ozj3SPaqbbybBrjEhBWoo0MKlh+G3BIMLXCuUTZHQ72WRCiTnKCVZK+4J2hxA4L0pkvD7uSYzSBIb6Oi1gqOz0pJG5Mg2/jXA1nltQrha/2qEOipTQ6dw4iM5hiyDvJre8kVHhtTpe0nLPdMHYbF2o6jwb34Isi+l7SvRLo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779282555; c=relaxed/simple;
-	bh=A1DB8YpDHku7vNj1EPA9Jz5VGyMQruSTI7VAyIjV5/M=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=tMzgMA7CdiMQC9xzHcv587BKqO4wm0/TmuFS5SGA8YXbs3XhEvwUKn/31mxrvxsYAgCvIhCe3/0kfOw+c1BTgyWpg9qNeq60UDP61wV06CDH3MteJULK2lVoAwmlxyjMm/itqK11uERSyy/RmabFRQRpACbwyENNbIRfmfKsV7s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de; spf=pass smtp.mailfrom=linutronix.de; dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=YpHeu5XE; dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=tPIj50Bo; arc=none smtp.client-ip=193.142.43.55
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linutronix.de
-Date: Wed, 20 May 2026 15:09:03 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1779282545;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=cya+tMoFymUiiUMO949m9cNeRyJ+/OxofgEYmhbqfEQ=;
-	b=YpHeu5XEac5sy2OB4xvanyH4HNjNtxA1u+7eO1k07GpkSy5GwFoA8WOl7v1VZtofZxZKPo
-	zDP42xAZanOGd53qKghSjYEL/H/8HnqzAYH86BFu8Z/8g/XnyzJGNtNmENMgHA6qmuGps2
-	1xIErcW/Tm78/NQcQbyVbOrawlYLY+Ao0+tXu6KxDCxjP78fw7Ifl7RtK2EseOIEzlNbby
-	v3AGB5p4tYCLpC6huA6timfuuHLoV4W8c8uRI4xFJlz4cIZrTyUn02t/naw700GqV2LIHS
-	BpJfp0KHCEVIT+R15se35cGI2UDN9pWTdE/FVi/WyVsZ0ZoysyjfmHKedmkzsg==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1779282545;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=cya+tMoFymUiiUMO949m9cNeRyJ+/OxofgEYmhbqfEQ=;
-	b=tPIj50Bor+vehmmu8fzN+AwNvSd1OiMEbGVBNTXebC32AR0UKdYTKpeWVm2OcmZvw/0FR9
-	cRDAia8bpc4kGjBQ==
-From: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-To: Leonardo Bras <leobras.c@gmail.com>
-Cc: Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>,
-	Boqun Feng <boqun@kernel.org>, Waiman Long <longman@redhat.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	David Hildenbrand <david@kernel.org>,
-	Lorenzo Stoakes <ljs@kernel.org>,
-	"Liam R. Howlett" <liam@infradead.org>,
-	Vlastimil Babka <vbabka@kernel.org>,
-	Mike Rapoport <rppt@kernel.org>,
-	Suren Baghdasaryan <surenb@google.com>,
-	Michal Hocko <mhocko@suse.com>, Jann Horn <jannh@google.com>,
-	Pedro Falcato <pfalcato@suse.de>,
-	Brendan Jackman <jackmanb@google.com>,
-	Johannes Weiner <hannes@cmpxchg.org>, Zi Yan <ziy@nvidia.com>,
-	Harry Yoo <harry@kernel.org>, Hao Li <hao.li@linux.dev>,
-	Christoph Lameter <cl@gentwo.org>,
-	David Rientjes <rientjes@google.com>,
-	Roman Gushchin <roman.gushchin@linux.dev>,
-	Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>,
-	Kemeng Shi <shikemeng@huaweicloud.com>,
-	Nhat Pham <nphamcs@gmail.com>, Baoquan He <bhe@redhat.com>,
-	Barry Song <baohua@kernel.org>,
-	Youngjun Park <youngjun.park@lge.com>,
-	Qi Zheng <qi.zheng@linux.dev>,
-	Shakeel Butt <shakeel.butt@linux.dev>,
-	Axel Rasmussen <axelrasmussen@google.com>,
-	Yuanchu Xie <yuanchu@google.com>, Wei Xu <weixugc@google.com>,
-	"Borislav Petkov (AMD)" <bp@alien8.de>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Thomas Gleixner <tglx@kernel.org>,
-	Feng Tang <feng.tang@linux.alibaba.com>,
-	Dapeng Mi <dapeng1.mi@linux.intel.com>, Kees Cook <kees@kernel.org>,
-	Marco Elver <elver@google.com>, Jakub Kicinski <kuba@kernel.org>,
-	Li RongQing <lirongqing@baidu.com>,
-	Eric Biggers <ebiggers@kernel.org>,
-	"Paul E. McKenney" <paulmck@kernel.org>,
-	Nathan Chancellor <nathan@kernel.org>,
-	Miguel Ojeda <ojeda@kernel.org>, Nicolas Schier <nsc@kernel.org>,
-	Thomas =?utf-8?Q?Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
-	Douglas Anderson <dianders@chromium.org>,
-	Gary Guo <gary@garyguo.net>, Christian Brauner <brauner@kernel.org>,
-	Pasha Tatashin <pasha.tatashin@soleen.com>,
-	Masahiro Yamada <masahiroy@kernel.org>, Coiby Xu <coxu@redhat.com>,
-	Frederic Weisbecker <frederic@kernel.org>,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-mm@kvack.org, linux-rt-devel@lists.linux.dev
-Subject: Re: [PATCH v4 0/4] Introduce Per-CPU Work helpers (was QPW)
-Message-ID: <20260520130903.Ebsd4aUa@linutronix.de>
-References: <20260519012754.240804-1-leobras.c@gmail.com>
+	s=arc-20240116; t=1779283474; c=relaxed/simple;
+	bh=iANpU2wer4BKKpe+gZCpKE13Eip1fp/I6bIamcuEfrY=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=YRlUP+YBDEfjSn61fj13z6Ji2YpXNX7dMFEcge7W2/BlblUmcaW9fhPPnDyCKK6tlp2+JDIeBTZDMiW2v9WJtWZZteOdZAVSURzn9bwVJH4jRk8hlqt4q9nGzwmk+XIbbNkUuuqU4gWjZkzraEaSs/btHXC0tHSPe8WNOrb7iI4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b=OnSPk9B0; arc=none smtp.client-ip=148.251.105.195
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+	s=mail; t=1779283471;
+	bh=iANpU2wer4BKKpe+gZCpKE13Eip1fp/I6bIamcuEfrY=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=OnSPk9B0L48bFnguwZmP4eGBMhFwba3shYWNjKcW6TwFfRjxpqTKVRjPBkfaz8gFI
+	 1kQgx0a74gMyhJi4XG3h/a9b/dCdZqgYf2NghwmQgUkVOcvW1OS1GI4UEZP1fp/a9x
+	 /b178LQ9OmIMk1RURdknuGUdQn/+FgJwQslNM5bbznOxPlCnZd8OC001qcFx7SpUMO
+	 JeleuE9w1KX9BGEMMnux0a+ekI+NTw8SigHEHsruMJZ3hazELgwtRinFtPKZgCZf+u
+	 LrKuL888HzQ8MCwgMtopWfLLL/iEOriJjlMigE7IlAPfPRWzfO5H0AngiFgiS/V2Wy
+	 dC9vv4t8nV22w==
+Received: from fedora (unknown [100.64.0.11])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: bbrezillon)
+	by bali.collaboradmins.com (Postfix) with ESMTPSA id 7B8E017E02A3;
+	Wed, 20 May 2026 15:24:30 +0200 (CEST)
+Date: Wed, 20 May 2026 15:24:26 +0200
+From: Boris Brezillon <boris.brezillon@collabora.com>
+To: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
+ <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie
+ <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Steven Price
+ <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>, Jonathan Corbet
+ <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Tvrtko Ursulin
+ <tursulin@ursulin.net>, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, kernel@collabora.com,
+ linux-doc@vger.kernel.org
+Subject: Re: [PATCH v4 2/3] drm/panthor: Implement evicted status for GEM
+ objects
+Message-ID: <20260520152426.4c5fef6c@fedora>
+In-Reply-To: <20260520-panthor-bo-reclaim-observability-v4-2-a47ab61cb80d@collabora.com>
+References: <20260520-panthor-bo-reclaim-observability-v4-0-a47ab61cb80d@collabora.com>
+	<20260520-panthor-bo-reclaim-observability-v4-2-a47ab61cb80d@collabora.com>
+Organization: Collabora
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260519012754.240804-1-leobras.c@gmail.com>
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linutronix.de,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[linutronix.de:s=2020,linutronix.de:s=2020e];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[collabora.com,none];
+	R_DKIM_ALLOW(-0.20)[collabora.com:s=mail];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-88619-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FREEMAIL_CC(0.00)[lwn.net,linuxfoundation.org,infradead.org,redhat.com,kernel.org,linux-foundation.org,google.com,suse.com,suse.de,cmpxchg.org,nvidia.com,linux.dev,gentwo.org,tencent.com,huaweicloud.com,gmail.com,lge.com,alien8.de,linux.alibaba.com,linux.intel.com,baidu.com,linutronix.de,chromium.org,garyguo.net,soleen.com,vger.kernel.org,kvack.org,lists.linux.dev];
+	TAGGED_FROM(0.00)[bounces-88621-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	HAS_ORG_HEADER(0.00)[];
+	FREEMAIL_CC(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,arm.com,lwn.net,linuxfoundation.org,ursulin.net,lists.freedesktop.org,vger.kernel.org,collabora.com];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[64];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[bigeasy@linutronix.de,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linutronix.de:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
 	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linutronix.de:mid,linutronix.de:dkim,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: 4955C58EA7E
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[boris.brezillon@collabora.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[collabora.com:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:email,collabora.com:email,collabora.com:dkim,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: E76A458EC52
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 2026-05-18 22:27:46 [-0300], Leonardo Bras wrote:
-> The problem:
-> Some places in the kernel implement a parallel programming strategy
-> consisting on local_locks() for most of the work, and some rare remote
-> operations are scheduled on target cpu. This keeps cache bouncing low since
-> cacheline tends to be mostly local, and avoids the cost of locks in non-RT
-> kernels, even though the very few remote operations will be expensive due
-> to scheduling overhead.
-> 
-> On the other hand, for RT workloads this can represent a problem: getting
-> an important workload scheduled out to deal with remote requests is
-> sure to introduce unexpected deadline misses.
-> 
-> The idea:
-> Currently with PREEMPT_RT=y, local_locks() become per-cpu spinlocks.
-It does not become a _spin_lock because it does not spin. It sleeps.
+On Wed, 20 May 2026 15:04:49 +0200
+Nicolas Frattaroli <nicolas.frattaroli@collabora.com> wrote:
 
-> In this case, instead of scheduling work on a remote cpu, it should
-> be safe to grab that remote cpu's per-cpu spinlock and run the required
-> work locally. That major cost, which is un/locking in every local function,
-> already happens in PREEMPT_RT.
+> For fdinfo to be able to fill its evicted counter with data, panthor
+> needs to keep track of whether a GEM object has ever been reclaimed.
+> Just checking whether the pages are resident isn't enough, as newly
+> allocated objects also won't be resident.
+> 
+> Do this with a new atomic_t member on panthor_gem_object. It's increased
+> when an object gets evicted by the shrinker, and saturates at INT_MAX.
+> This means that once an object has been evicted at least once, its
+> reclaim counter will never return to 0.
+> 
+> Due to this, it's possible to distinguish evicted non-resident pages
+> from newly allocated non-resident pages by checking whether
+> reclaimed_count is != 0
+> 
+> Use this new member to then set the appropriate DRM_GEM_OBJECT_EVICTED
+> status flag for fdinfo.
+> 
+> Also add a new column and status flag to the panthor gems debugfs: the
+> column is the number of times an object has been evicted, whereas the
+> flag indicates whether it currently is evicted.
+> 
+> Reviewed-by: Steven Price <steven.price@arm.com>
+> Signed-off-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
 
-We did have this before but only in the RT tree. It was a bit messy from
-the naming because it started with local_ but then it was a remote CPU.
-The main issue was the different code path which led to a few deadlocks
-back then.
-By the time local_lock_t went upstream, the cross-CPU locking was
-removed. As far as I remember, the cross-CPU user which did schedule
-work on a remote CPU and annoyed NOHZ folks were replaced.
+Reviewed-by: Boris Brezillon <boris.brezillon@collabora.com>
 
-> Also, there is no need to worry about extra cache bouncing:
-> The cacheline invalidation already happens due to schedule_work_on().
+> ---
+>  drivers/gpu/drm/panthor/panthor_gem.c | 18 ++++++++++++++----
+>  drivers/gpu/drm/panthor/panthor_gem.h | 10 ++++++++++
+>  2 files changed, 24 insertions(+), 4 deletions(-)
 > 
-> This will avoid schedule_work_on(), and thus avoid scheduling-out an
-> RT workload.
+> diff --git a/drivers/gpu/drm/panthor/panthor_gem.c b/drivers/gpu/drm/panthor/panthor_gem.c
+> index 13295d7a593d..068aa935c8fc 100644
+> --- a/drivers/gpu/drm/panthor/panthor_gem.c
+> +++ b/drivers/gpu/drm/panthor/panthor_gem.c
+> @@ -687,6 +687,8 @@ static void panthor_gem_evict_locked(struct panthor_gem_object *bo)
+>  	if (drm_WARN_ON_ONCE(bo->base.dev, !bo->backing.pages))
+>  		return;
+>  
+> +	atomic_add_unless(&bo->reclaimed_count, 1, INT_MAX);
+> +
+>  	panthor_gem_dev_map_cleanup_locked(bo);
+>  	panthor_gem_backing_cleanup_locked(bo);
+>  	panthor_gem_update_reclaim_state_locked(bo, NULL);
+> @@ -788,6 +790,8 @@ static enum drm_gem_object_status panthor_gem_status(struct drm_gem_object *obj)
+>  
+>  	if (drm_gem_is_imported(&bo->base) || bo->backing.pages)
+>  		res |= DRM_GEM_OBJECT_RESIDENT;
+> +	else if (atomic_read(&bo->reclaimed_count))
+> +		res |= DRM_GEM_OBJECT_EVICTED;
+>  
+>  	return res;
+>  }
+> @@ -1595,6 +1599,7 @@ static void panthor_gem_debugfs_print_flag_names(struct seq_file *m)
+>  	static const char * const gem_state_flags_names[] = {
+>  		[PANTHOR_DEBUGFS_GEM_STATE_IMPORTED_BIT] = "imported",
+>  		[PANTHOR_DEBUGFS_GEM_STATE_EXPORTED_BIT] = "exported",
+> +		[PANTHOR_DEBUGFS_GEM_STATE_EVICTED_BIT] = "evicted",
+>  	};
+>  
+>  	static const char * const gem_usage_flags_names[] = {
+> @@ -1625,6 +1630,7 @@ static void panthor_gem_debugfs_bo_print(struct panthor_gem_object *bo,
+>  {
+>  	enum panthor_gem_reclaim_state reclaim_state = bo->reclaim_state;
+>  	unsigned int refcount = kref_read(&bo->base.refcount);
+> +	int reclaimed_count = atomic_read(&bo->reclaimed_count);
+>  	char creator_info[32] = {};
+>  	size_t resident_size;
+>  	u32 gem_usage_flags = bo->debugfs.flags;
+> @@ -1638,16 +1644,20 @@ static void panthor_gem_debugfs_bo_print(struct panthor_gem_object *bo,
+>  
+>  	snprintf(creator_info, sizeof(creator_info),
+>  		 "%s/%d", bo->debugfs.creator.process_name, bo->debugfs.creator.tgid);
+> -	seq_printf(m, "%-32s%-16d%-16d%-16zd%-16zd0x%-16lx",
+> +	seq_printf(m, "%-32s%-16d%-16d%-11d%-16zd%-16zd0x%-16lx",
+>  		   creator_info,
+>  		   bo->base.name,
+>  		   refcount,
+> +		   reclaimed_count,
+>  		   bo->base.size,
+>  		   resident_size,
+>  		   drm_vma_node_start(&bo->base.vma_node));
+>  
+>  	if (drm_gem_is_imported(&bo->base))
+>  		gem_state_flags |= PANTHOR_DEBUGFS_GEM_STATE_FLAG_IMPORTED;
+> +	else if (!resident_size && reclaimed_count)
+> +		gem_state_flags |= PANTHOR_DEBUGFS_GEM_STATE_FLAG_EVICTED;
+> +
+>  	if (bo->base.dma_buf)
+>  		gem_state_flags |= PANTHOR_DEBUGFS_GEM_STATE_FLAG_EXPORTED;
+>  
+> @@ -1671,8 +1681,8 @@ static void panthor_gem_debugfs_print_bos(struct panthor_device *ptdev,
+>  
+>  	panthor_gem_debugfs_print_flag_names(m);
+>  
+> -	seq_puts(m, "created-by                      global-name     refcount        size            resident-size   file-offset       state      usage       label\n");
+> -	seq_puts(m, "----------------------------------------------------------------------------------------------------------------------------------------------\n");
+> +	seq_puts(m, "created-by                      global-name     refcount        evictions  size            resident-size   file-offset       state      usage       label\n");
+> +	seq_puts(m, "---------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+>  
+>  	scoped_guard(mutex, &ptdev->gems.lock) {
+>  		list_for_each_entry(bo, &ptdev->gems.node, debugfs.node) {
+> @@ -1680,7 +1690,7 @@ static void panthor_gem_debugfs_print_bos(struct panthor_device *ptdev,
+>  		}
+>  	}
+>  
+> -	seq_puts(m, "==============================================================================================================================================\n");
+> +	seq_puts(m, "=========================================================================================================================================================\n");
+>  	seq_printf(m, "Total size: %zd, Total resident: %zd, Total reclaimable: %zd\n",
+>  		   totals.size, totals.resident, totals.reclaimable);
+>  }
+> diff --git a/drivers/gpu/drm/panthor/panthor_gem.h b/drivers/gpu/drm/panthor/panthor_gem.h
+> index ae0491d0b121..56d63137b4eb 100644
+> --- a/drivers/gpu/drm/panthor/panthor_gem.h
+> +++ b/drivers/gpu/drm/panthor/panthor_gem.h
+> @@ -19,12 +19,16 @@ struct panthor_vm;
+>  enum panthor_debugfs_gem_state_flags {
+>  	PANTHOR_DEBUGFS_GEM_STATE_IMPORTED_BIT = 0,
+>  	PANTHOR_DEBUGFS_GEM_STATE_EXPORTED_BIT = 1,
+> +	PANTHOR_DEBUGFS_GEM_STATE_EVICTED_BIT = 2,
+>  
+>  	/** @PANTHOR_DEBUGFS_GEM_STATE_FLAG_IMPORTED: GEM BO is PRIME imported. */
+>  	PANTHOR_DEBUGFS_GEM_STATE_FLAG_IMPORTED = BIT(PANTHOR_DEBUGFS_GEM_STATE_IMPORTED_BIT),
+>  
+>  	/** @PANTHOR_DEBUGFS_GEM_STATE_FLAG_EXPORTED: GEM BO is PRIME exported. */
+>  	PANTHOR_DEBUGFS_GEM_STATE_FLAG_EXPORTED = BIT(PANTHOR_DEBUGFS_GEM_STATE_EXPORTED_BIT),
+> +
+> +	/** @PANTHOR_DEBUGFS_GEM_STATE_FLAG_EVICTED: GEM BO is evicted to swap. */
+> +	PANTHOR_DEBUGFS_GEM_STATE_FLAG_EVICTED = BIT(PANTHOR_DEBUGFS_GEM_STATE_EVICTED_BIT),
+>  };
+>  
+>  enum panthor_debugfs_gem_usage_flags {
+> @@ -172,6 +176,12 @@ struct panthor_gem_object {
+>  	/** @reclaim_state: Cached reclaim state */
+>  	enum panthor_gem_reclaim_state reclaim_state;
+>  
+> +	/**
+> +	 * @reclaimed_count: How many times object has been evicted to swap.
+> +	 * The count saturates at %INT_MAX and will never wrap around to 0.
+> +	 */
+> +	atomic_t reclaimed_count;
+> +
+>  	/**
+>  	 * @exclusive_vm_root_gem: Root GEM of the exclusive VM this GEM object
+>  	 * is attached to.
 > 
-> Proposed solution:
-> A new interface called PerCPU Work (PW), which should replace
-> Work Queue in the above mentioned use case.
-> 
-> If CONFIG_PWLOCKS=n this interfaces just wraps the current
-> local_locks + WorkQueue behavior, so no expected change in runtime.
-> 
-> If CONFIG_PWLOCKS=y, and kernel boot option pwlocks=1,
-> pw_queue_on(cpu,...) will lock that cpu's per-cpu structure
-> and perform work on it locally. 
-> 
-Sebastian
+
 
