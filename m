@@ -1,264 +1,119 @@
-Return-Path: <linux-doc+bounces-88657-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88658-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WNmpJKrLDWqq3QUAu9opvQ
-	(envelope-from <linux-doc+bounces-88657-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 16:56:42 +0200
+	id iPCWDtjLDWqq3QUAu9opvQ
+	(envelope-from <linux-doc+bounces-88658-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 16:57:28 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id EBD24590490
-	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 16:56:41 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E6AF5904C4
+	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 16:57:26 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id A6F9A3011101
-	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 14:34:07 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 7350B30FA04A
+	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 14:34:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2CA4E3DCD99;
-	Wed, 20 May 2026 14:34:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E01B13E9F9D;
+	Wed, 20 May 2026 14:34:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b="dlYlcTir"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="du42RxH4"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 879702BE7AB;
-	Wed, 20 May 2026 14:34:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.251.105.195
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCDE61F4634;
+	Wed, 20 May 2026 14:34:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779287647; cv=none; b=hlu9DjqAXMiE1evmi1ThnSKWT5VmbIRmJPWRwV2NcD3WWTkRU+UlkDGjs57AHO8o9XPs9y21kyHDSWbIv0aLV4J0Ma2PJ6novulBagv1HAgOWNXNNh6yL6rhB8nCUpQ19OGslKIcRyzzHuovIhHM4+uQQ2YAfCAJzsQykNlYfXg=
+	t=1779287686; cv=none; b=c+EGfduuVNO0La4Z6MKZHXAUAMRBEBRkS5SuHdwbOp1YqT8gDJG8DiDP3nSew6a4pQ9SXohFeIaH5J5Orpa0tLhrO9sOhEHPGrgDU2j7GE18x2nrgN6gr5US5OioGv1iIkc8q8g0TASxG/OSgCmABauaISC5gvfBU4gNY/QR8QE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779287647; c=relaxed/simple;
-	bh=Z9ehc0o77iczHKPKhQAgq61UC0W4OHTwJYBEEbgaOZY=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=pxQwcldWSyLajesr9JEbEZ/6YXekO7onUfTZlZcIEWnMQxg9Z15syssoZHAPZ1fWw9WhhEshS6G0Yp2UsBansABJYYLl7DAXX6oZYFBEzAD2h6laTpIB7TrxwGOn2GAWEbRjD1lhdDSmFxchN78DttUCimJ9Vl1ijJGZkkfWOIg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b=dlYlcTir; arc=none smtp.client-ip=148.251.105.195
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1779287643;
-	bh=Z9ehc0o77iczHKPKhQAgq61UC0W4OHTwJYBEEbgaOZY=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=dlYlcTirU16xr9XsNcZlpLFhI/q5XMHMhPDfN2v03pnhK2jIRBfcKjq7IXM5HeZdH
-	 GaR6jyTa4PcZlQFJYhP1QjHOBeBEZ3MtX/9Ng2yafYGn15d1weGxTnjyejesEUUryK
-	 0rJDhXFC45q3rklsB4baroEXtxDZ0Y1vRVutSVQ0onPD0KZKOMhrbZ/mDObKMbsENu
-	 d1X5ngskFfCTiV1Zhq646Hf/xzFrJMfT9b4n9G5z2M8R+yhZSWye4/E5/S7oT8yVbs
-	 33f0Vs9d8FMWHtM7sa7WvN1+g+cdkd3o703XJljEeoqJD9p1pvgRXl2di1SQL8Aj11
-	 wZWOjgJOdJvXQ==
-Received: from fedora (unknown [100.64.0.11])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: bbrezillon)
-	by bali.collaboradmins.com (Postfix) with ESMTPSA id 1BF0517E0411;
-	Wed, 20 May 2026 16:34:03 +0200 (CEST)
-Date: Wed, 20 May 2026 16:33:51 +0200
-From: Boris Brezillon <boris.brezillon@collabora.com>
-To: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
-Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
- <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie
- <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Steven Price
- <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>, Jonathan Corbet
- <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Tvrtko Ursulin
- <tursulin@ursulin.net>, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, kernel@collabora.com,
- linux-doc@vger.kernel.org
-Subject: Re: [PATCH v4 2/3] drm/panthor: Implement evicted status for GEM
- objects
-Message-ID: <20260520163351.702034ce@fedora>
-In-Reply-To: <20260520-panthor-bo-reclaim-observability-v4-2-a47ab61cb80d@collabora.com>
-References: <20260520-panthor-bo-reclaim-observability-v4-0-a47ab61cb80d@collabora.com>
-	<20260520-panthor-bo-reclaim-observability-v4-2-a47ab61cb80d@collabora.com>
-Organization: Collabora
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
+	s=arc-20240116; t=1779287686; c=relaxed/simple;
+	bh=Eih9ohUmcrMv1sDSaZ2K/j5Ohz0HhTUPJN67FCmkFFU=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=e5n6sMnB3jApCIRQCEI7LLyIl2zb/qPiWF1oAORCfSIjizHSFNVvztwNWA9v9QZq1eAJkNuj2o19WOMlwDypT/+KEWa07pToUiSVHGBCIknzkOnlWSPe5/eBtELKQf0VhB4cfmWdelaZxOvwjtmW3hEZaX4+aAMCy9wE3Wl/8UE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=du42RxH4; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1C0941F000E9;
+	Wed, 20 May 2026 14:34:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1779287685;
+	bh=iwa0F9i/+keh1UQ3MxQA4kdWjS+CC/JZZ8ZD9UCyHSg=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=du42RxH4+zDMiFL/XoIxxMmrKZWy3UHo3NWEtt1rBAYxPDAyG+4pHV/gPeFrn6knh
+	 FDpraGq3F4VUQe8YfFdfHj81TF3bFRc3Rrl+Jv6pJ3Uk53yAQlVFBx3v9wyFQlKnYN
+	 khqdedgoDyyox6Fay6HVvmZkPMFR69k2LZsDM6OAVQcpZQPW8HMG60kZnpfanl1KJ2
+	 Xn125Ejg0fjFXaK+IySn9+05XdhZ0sDltc/0j+UwOBDReiM10ItPA0c/jDPDghRaou
+	 bB1/KFAwCB2AqtiGM0zG2QUXd+UjiSw8UH15tawLybVjnVSaF0MDQ3/fF3fsJtAKmo
+	 pweAany3G5UDQ==
+From: Lee Jones <lee@kernel.org>
+To: lee@kernel.org, pavel@kernel.org, Armin Wolf <W_Armin@gmx.de>
+Cc: linux-kernel@vger.kernel.org, corbet@lwn.net, skhan@linuxfoundation.org, 
+ linux-leds@vger.kernel.org, linux-doc@vger.kernel.org, 
+ wse@tuxedocomputers.com, jacek.anaszewski@gmail.com, pobrn@protonmail.com, 
+ m.tretter@pengutronix.de
+In-Reply-To: <20260509214603.262368-2-W_Armin@gmx.de>
+References: <20260509214603.262368-2-W_Armin@gmx.de>
+Subject: Re: (subset) [PATCH v4 1/1] leds: Introduce the
+ multi_max_intensity sysfs attribute
+Message-Id: <177928768282.2811520.3177179770372088870.b4-ty@b4>
+Date: Wed, 20 May 2026 15:34:42 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [-1.66 / 15.00];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Mailer: b4 0.16-dev-ad80c
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[collabora.com,none];
-	R_DKIM_ALLOW(-0.20)[collabora.com:s=mail];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-88657-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	HAS_ORG_HEADER(0.00)[];
-	FREEMAIL_CC(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,arm.com,lwn.net,linuxfoundation.org,ursulin.net,lists.freedesktop.org,vger.kernel.org,collabora.com];
-	RCPT_COUNT_TWELVE(0.00)[15];
 	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[boris.brezillon@collabora.com,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-88658-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_TO(0.00)[kernel.org,gmx.de];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[collabora.com:+];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	TO_DN_SOME(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[lee@kernel.org,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[vger.kernel.org,lwn.net,linuxfoundation.org,tuxedocomputers.com,gmail.com,protonmail.com,pengutronix.de];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,collabora.com:email,collabora.com:dkim]
-X-Rspamd-Queue-Id: EBD24590490
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: 7E6AF5904C4
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Wed, 20 May 2026 15:04:49 +0200
-Nicolas Frattaroli <nicolas.frattaroli@collabora.com> wrote:
+On Sat, 09 May 2026 23:46:03 +0200, Armin Wolf wrote:
+> Some multicolor LEDs support global brightness control in hardware,
+> meaning that the maximum intensity of the color components is not
+> connected to the maximum global brightness. Such LEDs cannot be
+> described properly by the current multicolor LED class interface,
+> because it assumes that the maximum intensity of each color component
+> is described by the maximum global brightness of the LED.
+> 
+> [...]
 
-> For fdinfo to be able to fill its evicted counter with data, panthor
-> needs to keep track of whether a GEM object has ever been reclaimed.
-> Just checking whether the pages are resident isn't enough, as newly
-> allocated objects also won't be resident.
-> 
-> Do this with a new atomic_t member on panthor_gem_object. It's increased
-> when an object gets evicted by the shrinker, and saturates at INT_MAX.
-> This means that once an object has been evicted at least once, its
-> reclaim counter will never return to 0.
-> 
-> Due to this, it's possible to distinguish evicted non-resident pages
-> from newly allocated non-resident pages by checking whether
-> reclaimed_count is != 0
-> 
-> Use this new member to then set the appropriate DRM_GEM_OBJECT_EVICTED
-> status flag for fdinfo.
-> 
-> Also add a new column and status flag to the panthor gems debugfs: the
-> column is the number of times an object has been evicted, whereas the
-> flag indicates whether it currently is evicted.
-> 
-> Reviewed-by: Steven Price <steven.price@arm.com>
-> Signed-off-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
-> ---
->  drivers/gpu/drm/panthor/panthor_gem.c | 18 ++++++++++++++----
->  drivers/gpu/drm/panthor/panthor_gem.h | 10 ++++++++++
->  2 files changed, 24 insertions(+), 4 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/panthor/panthor_gem.c b/drivers/gpu/drm/panthor/panthor_gem.c
-> index 13295d7a593d..068aa935c8fc 100644
-> --- a/drivers/gpu/drm/panthor/panthor_gem.c
-> +++ b/drivers/gpu/drm/panthor/panthor_gem.c
-> @@ -687,6 +687,8 @@ static void panthor_gem_evict_locked(struct panthor_gem_object *bo)
->  	if (drm_WARN_ON_ONCE(bo->base.dev, !bo->backing.pages))
->  		return;
->  
-> +	atomic_add_unless(&bo->reclaimed_count, 1, INT_MAX);
-> +
->  	panthor_gem_dev_map_cleanup_locked(bo);
->  	panthor_gem_backing_cleanup_locked(bo);
->  	panthor_gem_update_reclaim_state_locked(bo, NULL);
-> @@ -788,6 +790,8 @@ static enum drm_gem_object_status panthor_gem_status(struct drm_gem_object *obj)
->  
->  	if (drm_gem_is_imported(&bo->base) || bo->backing.pages)
->  		res |= DRM_GEM_OBJECT_RESIDENT;
-> +	else if (atomic_read(&bo->reclaimed_count))
-> +		res |= DRM_GEM_OBJECT_EVICTED;
+Applied, thanks!
 
-Could we drop that change so we can at least have patch 2 and 3 merged
-while the discussion on the fdinfo semantics is going on?
+[1/1] leds: Introduce the multi_max_intensity sysfs attribute
+      commit: b1a9b7a904af2c793850f83a4801a013a718fc47
 
->  
->  	return res;
->  }
-> @@ -1595,6 +1599,7 @@ static void panthor_gem_debugfs_print_flag_names(struct seq_file *m)
->  	static const char * const gem_state_flags_names[] = {
->  		[PANTHOR_DEBUGFS_GEM_STATE_IMPORTED_BIT] = "imported",
->  		[PANTHOR_DEBUGFS_GEM_STATE_EXPORTED_BIT] = "exported",
-> +		[PANTHOR_DEBUGFS_GEM_STATE_EVICTED_BIT] = "evicted",
->  	};
->  
->  	static const char * const gem_usage_flags_names[] = {
-> @@ -1625,6 +1630,7 @@ static void panthor_gem_debugfs_bo_print(struct panthor_gem_object *bo,
->  {
->  	enum panthor_gem_reclaim_state reclaim_state = bo->reclaim_state;
->  	unsigned int refcount = kref_read(&bo->base.refcount);
-> +	int reclaimed_count = atomic_read(&bo->reclaimed_count);
->  	char creator_info[32] = {};
->  	size_t resident_size;
->  	u32 gem_usage_flags = bo->debugfs.flags;
-> @@ -1638,16 +1644,20 @@ static void panthor_gem_debugfs_bo_print(struct panthor_gem_object *bo,
->  
->  	snprintf(creator_info, sizeof(creator_info),
->  		 "%s/%d", bo->debugfs.creator.process_name, bo->debugfs.creator.tgid);
-> -	seq_printf(m, "%-32s%-16d%-16d%-16zd%-16zd0x%-16lx",
-> +	seq_printf(m, "%-32s%-16d%-16d%-11d%-16zd%-16zd0x%-16lx",
->  		   creator_info,
->  		   bo->base.name,
->  		   refcount,
-> +		   reclaimed_count,
->  		   bo->base.size,
->  		   resident_size,
->  		   drm_vma_node_start(&bo->base.vma_node));
->  
->  	if (drm_gem_is_imported(&bo->base))
->  		gem_state_flags |= PANTHOR_DEBUGFS_GEM_STATE_FLAG_IMPORTED;
-> +	else if (!resident_size && reclaimed_count)
-> +		gem_state_flags |= PANTHOR_DEBUGFS_GEM_STATE_FLAG_EVICTED;
-> +
->  	if (bo->base.dma_buf)
->  		gem_state_flags |= PANTHOR_DEBUGFS_GEM_STATE_FLAG_EXPORTED;
->  
-> @@ -1671,8 +1681,8 @@ static void panthor_gem_debugfs_print_bos(struct panthor_device *ptdev,
->  
->  	panthor_gem_debugfs_print_flag_names(m);
->  
-> -	seq_puts(m, "created-by                      global-name     refcount        size            resident-size   file-offset       state      usage       label\n");
-> -	seq_puts(m, "----------------------------------------------------------------------------------------------------------------------------------------------\n");
-> +	seq_puts(m, "created-by                      global-name     refcount        evictions  size            resident-size   file-offset       state      usage       label\n");
-> +	seq_puts(m, "---------------------------------------------------------------------------------------------------------------------------------------------------------\n");
->  
->  	scoped_guard(mutex, &ptdev->gems.lock) {
->  		list_for_each_entry(bo, &ptdev->gems.node, debugfs.node) {
-> @@ -1680,7 +1690,7 @@ static void panthor_gem_debugfs_print_bos(struct panthor_device *ptdev,
->  		}
->  	}
->  
-> -	seq_puts(m, "==============================================================================================================================================\n");
-> +	seq_puts(m, "=========================================================================================================================================================\n");
->  	seq_printf(m, "Total size: %zd, Total resident: %zd, Total reclaimable: %zd\n",
->  		   totals.size, totals.resident, totals.reclaimable);
->  }
-> diff --git a/drivers/gpu/drm/panthor/panthor_gem.h b/drivers/gpu/drm/panthor/panthor_gem.h
-> index ae0491d0b121..56d63137b4eb 100644
-> --- a/drivers/gpu/drm/panthor/panthor_gem.h
-> +++ b/drivers/gpu/drm/panthor/panthor_gem.h
-> @@ -19,12 +19,16 @@ struct panthor_vm;
->  enum panthor_debugfs_gem_state_flags {
->  	PANTHOR_DEBUGFS_GEM_STATE_IMPORTED_BIT = 0,
->  	PANTHOR_DEBUGFS_GEM_STATE_EXPORTED_BIT = 1,
-> +	PANTHOR_DEBUGFS_GEM_STATE_EVICTED_BIT = 2,
->  
->  	/** @PANTHOR_DEBUGFS_GEM_STATE_FLAG_IMPORTED: GEM BO is PRIME imported. */
->  	PANTHOR_DEBUGFS_GEM_STATE_FLAG_IMPORTED = BIT(PANTHOR_DEBUGFS_GEM_STATE_IMPORTED_BIT),
->  
->  	/** @PANTHOR_DEBUGFS_GEM_STATE_FLAG_EXPORTED: GEM BO is PRIME exported. */
->  	PANTHOR_DEBUGFS_GEM_STATE_FLAG_EXPORTED = BIT(PANTHOR_DEBUGFS_GEM_STATE_EXPORTED_BIT),
-> +
-> +	/** @PANTHOR_DEBUGFS_GEM_STATE_FLAG_EVICTED: GEM BO is evicted to swap. */
-> +	PANTHOR_DEBUGFS_GEM_STATE_FLAG_EVICTED = BIT(PANTHOR_DEBUGFS_GEM_STATE_EVICTED_BIT),
->  };
->  
->  enum panthor_debugfs_gem_usage_flags {
-> @@ -172,6 +176,12 @@ struct panthor_gem_object {
->  	/** @reclaim_state: Cached reclaim state */
->  	enum panthor_gem_reclaim_state reclaim_state;
->  
-> +	/**
-> +	 * @reclaimed_count: How many times object has been evicted to swap.
-> +	 * The count saturates at %INT_MAX and will never wrap around to 0.
-> +	 */
-> +	atomic_t reclaimed_count;
-> +
->  	/**
->  	 * @exclusive_vm_root_gem: Root GEM of the exclusive VM this GEM object
->  	 * is attached to.
-> 
+--
+Lee Jones [李琼斯]
 
 
