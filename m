@@ -1,247 +1,153 @@
-Return-Path: <linux-doc+bounces-88603-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88605-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OPwQKfqgDWqC0AUAu9opvQ
-	(envelope-from <linux-doc+bounces-88603-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 13:54:34 +0200
+	id OPtCOeClDWqh0wUAu9opvQ
+	(envelope-from <linux-doc+bounces-88605-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 14:15:28 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 73F8058D075
-	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 13:54:33 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 65CD458D719
+	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 14:15:28 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 4D1CC3082CEC
-	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 11:46:22 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E1315316B0A2
+	for <lists+linux-doc@lfdr.de>; Wed, 20 May 2026 11:58:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B6CEA3D6471;
-	Wed, 20 May 2026 11:46:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5D5C23D9053;
+	Wed, 20 May 2026 11:58:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="DLLFzq1N"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZdhFk2F5"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-yx1-f54.google.com (mail-yx1-f54.google.com [74.125.224.54])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 03B183C661A
-	for <linux-doc@vger.kernel.org>; Wed, 20 May 2026 11:46:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.224.54
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779277575; cv=pass; b=MqatEMrORR3aqLuhJRpBC571AuFY01WERpOQB9SbAHysEs3+mKf299YJF7HZZNmoSfOprzp04a7Xf6zg0liHsDJ7z1+yFLHUGu7BjMh+fNJ3C9uejqrru+o5Fz+4z0dT94ESt5Kx+zatWTW05GgEOP7Yzmt9/5Wazs9ETHpbQOA=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779277575; c=relaxed/simple;
-	bh=mwQC2VpgPcAOO/eSiXMuOlKGLERJ6tVL0QZy3DdZeqg=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=c74um4Ilhvf0C7fWLbaHy5T4EXdu0Jcbxw+z4cVYvg+hthc8//aG7hYO2sGj6nO6kcwvbWOjlixkeZ+QAK6rg5OWQrermcfkCx/UVdtjV97TX2QkUDjVc6r055ZTj7lmM7Nf9Zu1vHS17B7PW8aAJ7W8dVEg7AjLmrjtd2JAUkE=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=DLLFzq1N; arc=pass smtp.client-ip=74.125.224.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-yx1-f54.google.com with SMTP id 956f58d0204a3-65c5361142fso4643796d50.0
-        for <linux-doc@vger.kernel.org>; Wed, 20 May 2026 04:46:13 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779277573; cv=none;
-        d=google.com; s=arc-20240605;
-        b=cLXdjygXb+RJT2BrXtxByA4c2zn+2Mv+6Vsa2ZUGAYrPqCxJwjvliAsx3YZ5K5dJXK
-         Q50nq1kxsIO7co3Au7gDbhj8BXdrYFdhGGXfYq9dph7TF4XVwh3PAQCRhqLYtjMozjRz
-         pUwxoYBsRJwcBcr4YBkqci49e9OJWhzdavwBeyNka51DeValectfgiBaPH/l5dEvxvEP
-         B1TGhAd21JE4bW8ABKyWBi1kMCKzVwHqk5MikpvI5um1T04F8yBhzRXyyS+zuABdDokE
-         g17USnWxqC7ox8dpksHoXbRosgePnCmr02REb+vULagzbWAUSX0neLntfUhr6AY/8Sa0
-         05vA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=mwQC2VpgPcAOO/eSiXMuOlKGLERJ6tVL0QZy3DdZeqg=;
-        fh=a43vw78E8asFGEaLWKR7+cE5WLeik45PNet4MydxmM8=;
-        b=bEUrJVzezM4lG9peD8gdQd/CQo2zA04lMTct5CLcz1Ty3hrAk2n1HnBtstiiw+4uqH
-         fg3jtG7+oI8FRJYEaEofGk7YQlABct84aY4/71JYW4kYemV+zP0Fu7djw3RPgIgnaprM
-         GZnUJFCOeqeJrsCtdqga5joY77nMq4XwiS8n6RUazzr9EsB5XXGvdoxsKbXN3zJhY6Ud
-         2wJpZzqsvZoKDHYsapAdVJvPARdHGdYBPzJ5sQNsiNa5qao6mIPBjONuw3nRizzVFjbW
-         sEQ8dUAwIcwriArR5F2M+66ZorwqSQhKW2PgyF/M2oZTLiuNhhTIp1ZH6gZtkzfsK/Nu
-         uA9Q==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779277573; x=1779882373; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=mwQC2VpgPcAOO/eSiXMuOlKGLERJ6tVL0QZy3DdZeqg=;
-        b=DLLFzq1NI/jlE0KjxAF+xBgYr0bijFFLMLnQXRF9R+yg2s3RjBXBZQNjb/M41Ql3EQ
-         +ZheyYRDDN9kkHa9dnnqjzyXzQj/lZippxiK1tSuOwMhmI2qy9lMle+0b22N0RKRFbu7
-         lv+r5D+s6/LoQMztNtN2U69qRAjas2hZcCwd7hgqtUfMh+fIafWtQKACTWfQrn6UHGdy
-         Ru4qqJpuDWEMTgAfRByrjP2/ckcxnn3QmrX/lMngpYgC4lgHEVJ2w3xGDq20PHZNs8O5
-         g/JaTcX5f093Iga9G9Go7DUID3PH1u3ZyXMSGCnglb1l46M+eAwY/p9mJXVmhrxjRmv/
-         U52A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779277573; x=1779882373;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=mwQC2VpgPcAOO/eSiXMuOlKGLERJ6tVL0QZy3DdZeqg=;
-        b=OicqU48Dsi9QHw0h26VUHX4Yo+F2DF4x3j4Zrs9+HDYBgRLOB+c5CWtVoDouGDuaCX
-         cdFhDaAUb+Snu/iwVRYB8i2M7XZjfu35dFNgZYl8AR2BGdKK4dFbih/UOoNNGXSiJLAn
-         mMrbYH/LF6c+cnJftwen434DENjW5S1jObaapHzVfhWtvLnRSwNQDCbgSFaYzQhkA6oK
-         V1giUE8wVg8UFp9xzy468QOQBTUwSSfAi162Ljfnao+fc2Bo1cn6DcOJ9iuAUsWPM8AC
-         IC0iMgAB4CBxH/EdypR4t7tlm4thlD08blOmnegEBBkifEvtliYIoeqzCt01ZPkSxPza
-         5TCw==
-X-Forwarded-Encrypted: i=1; AFNElJ/I4B9YBvzVRTY23IJRdRvJVfqK4IflW6uVhQG1ExNRZBmFnNykysU0lCqzzPbfK3BMjwts0TUrkoI=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxRN41p+ydrO2VabaFmD6HG2ZivUKGJQNa/Z5mS6r6096AZM7Os
-	+BPhQQKi3d/GJDv2Q9TCSIb1DAOJDrzgTOj5pxbnzTaOvDf6d/I1epAh6QGSy3xEG//fBrS7SOG
-	Zfhz8qVO12Ou0BPdGmbwE5Sid4PTll60=
-X-Gm-Gg: Acq92OFAYANQ94ThfV30Cz1Xp1B5hRcbftlqhUOT32VmJt/V2bpm5VsjBnHlLhHlhPw
-	t8CjihieMarQdExOi0enva0i2XuoqZctroP8ly5qD5pLq9m448BCapaaVQZvLSj6c22de1f6onZ
-	80wLDilrCvG272oFOQ618CXHgMuPljH+yGWKHy7MHENoM0IC9YOMhU/wsQaf39LXi0K9N2NzUYW
-	IkPPiejpiLUUQOsGVSBPZq7Lt2tESWpOX2cYVsje8F5gjJqEpJkv7HM/rWHnvfc97KK2LENhOOr
-	eGESrnqNzpjGnruXecDmsDd0Jzu0AI/DvRZiW1Vf0BeLSaKA
-X-Received: by 2002:a05:690e:1487:b0:65e:4b06:f89b with SMTP id
- 956f58d0204a3-65e4b06fd2cmr14416343d50.51.1779277572905; Wed, 20 May 2026
- 04:46:12 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 41D973DA5BA;
+	Wed, 20 May 2026 11:58:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1779278319; cv=none; b=YweGnYc7JmgihHqXG8ERCiDgdaAzPw7ox14f6+AEFjKKtnc+1Is38UvmxknQ4iXBAxWQQX/1ysg7JuxdC2cC+Bgv2MUH2nZNPmkHn3iC9onTiIl2rH0OjZkH033ygPTsnIiKfKWHXbvOtLYEYXEszijoGB203HZIESRv3F1gR/E=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1779278319; c=relaxed/simple;
+	bh=Nvdt2XBzMkZ+30asNAQ3e3GOOKzUVXPt5E+OSJEk6nU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=OQNl2eaVIMnaBiA3WjzSghN9TS5e9SX3t1qRPEfBkKrWDOjqN/Tj5NDFfulfnG8V17eZFyfJURqoHjOiNziMmbk6Jdc9wf5bx2W6hWrIYNP8y+vqbycwAO14PTuItQohC09dtkEYvNgC8XjuO9Mf8plZcw5uASjVDg/YhSf/FYY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZdhFk2F5; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A2C6D1F000E9;
+	Wed, 20 May 2026 11:58:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1779278317;
+	bh=Nvdt2XBzMkZ+30asNAQ3e3GOOKzUVXPt5E+OSJEk6nU=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=ZdhFk2F5966kLepjIdaky6WJcw6IIG6qenuVxN3ZBN7E4N/ulH63cJrkdUGr1pTCm
+	 SYU4odwJZ/aYtrOoa4k8BZJ+v5/H4GTNUhKl5SqIvH3MAFS34X9aur3RYvklwDYGwk
+	 K7Pw4bsh3RG+VLOPM4jycGPRBsHmly1frrtwa+3GVw437KzFlPcAwyFYxo4EuWBThv
+	 kWDAV78wXt2X2SptbtLwOxedKOhBb0Jth2eOsGHvIJByUMCb6PdepA4ntPc8FKvY80
+	 LzjXt/L3HmqTmp2lhOSEA5rtlGCaRKJms1pdI0IteSlCLMZ5oQ3fiX00pNcwlQUMOu
+	 O195huIjS/mdQ==
+Date: Wed, 20 May 2026 12:58:32 +0100
+From: Mark Brown <broonie@kernel.org>
+To: Sarthak Sharma <sarthak.sharma@arm.com>
+Cc: Mike Rapoport <rppt@kernel.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	David Hildenbrand <david@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>, Jason Gunthorpe <jgg@ziepe.ca>,
+	John Hubbard <jhubbard@nvidia.com>, Peter Xu <peterx@redhat.com>,
+	Lorenzo Stoakes <ljs@kernel.org>,
+	"Liam R . Howlett" <Liam.Howlett@oracle.com>,
+	Vlastimil Babka <vbabka@kernel.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Michal Hocko <mhocko@suse.com>, Shuah Khan <shuah@kernel.org>,
+	linux-mm@kvack.org, linux-kselftest@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v2 1/2] tools/mm: add a standalone GUP microbenchmark
+Message-ID: <67e9ecff-e532-4659-b4de-7019474af608@sirena.org.uk>
+References: <20260519120506.184512-1-sarthak.sharma@arm.com>
+ <20260519120506.184512-2-sarthak.sharma@arm.com>
+ <ag13GbKcLMIoHOHj@kernel.org>
+ <9382431f-3746-4477-bbef-87abb58bf180@arm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260516-jorth-syncobj-v1-0-88ede9d98a81@gmail.com>
- <c6c91de9-a34b-4b50-a3c1-d42bf7631f8e@amd.com> <CAHijbEUzWZC4GAMU6YGV42gOYkrQaMZZPiwS4Erb4H1J-fh_8Q@mail.gmail.com>
- <69dcbcc1-da58-4d34-bfb0-5c8d33b75d59@amd.com> <CAHijbEWqc2+kSkk3i_LxB2PQ6XwUetw1UkdUdXJfdv3zgKd1kA@mail.gmail.com>
- <38551bfe-75e1-4978-b57d-adc43cebc85e@amd.com> <CAHijbEWHp960qvZFoK7+9ppHAqkAR7=UQhtMUccqWzGd_pFPQA@mail.gmail.com>
- <5ee6d5af-ac48-41d7-a19f-e08a3c5b7d19@amd.com> <CAFZQkGwmeipZnvmBkcE7KhvUSMkSE=fzLBZtiMyhv3mM04Vudg@mail.gmail.com>
- <dff60378-4e47-4753-8878-feec6e1c2690@amd.com> <385a4d4f-fe22-41a7-8d4b-4dc6bc9930d3@mailbox.org>
- <1e94106a-f72e-447e-9885-2d2cc8f8e722@amd.com>
-In-Reply-To: <1e94106a-f72e-447e-9885-2d2cc8f8e722@amd.com>
-From: Julian Orth <ju.orth@gmail.com>
-Date: Wed, 20 May 2026 13:46:00 +0200
-X-Gm-Features: AVHnY4JZYLaQrAuUqg_r9R4xrt_7B8lof_FLZgmpinm1lpd54PV11HWLkp9qJk4
-Message-ID: <CAHijbEWSnwm5_uTAbRDYOkMFwu+X3_xGHxjHyK-XeaO15KTGOQ@mail.gmail.com>
-Subject: Re: [PATCH 00/12] misc/syncobj: add /dev/syncobj device
-To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-Cc: =?UTF-8?Q?Michel_D=C3=A4nzer?= <michel.daenzer@mailbox.org>, 
-	Xaver Hugl <xaver.hugl@kde.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
-	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
-	Sumit Semwal <sumit.semwal@linaro.org>, Jonathan Corbet <corbet@lwn.net>, 
-	Shuah Khan <skhan@linuxfoundation.org>, Arnd Bergmann <arnd@arndb.de>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, dri-devel@lists.freedesktop.org, 
-	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, 
-	linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, 
-	wayland-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="Y95J1WJC+suJuyFP"
+Content-Disposition: inline
+In-Reply-To: <9382431f-3746-4477-bbef-87abb58bf180@arm.com>
+X-Cookie: Natural laws have no pity.
+X-Spamd-Result: default: False [-4.26 / 15.00];
+	SIGNED_PGP(-2.00)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
 	MAILLIST(-0.15)[generic];
-	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-88603-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-88605-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[mailbox.org,kde.org,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,lwn.net,linuxfoundation.org,arndb.de,lists.freedesktop.org,vger.kernel.org,lists.linaro.org];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[19];
-	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[juorth@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[18];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,amd.com:email]
-X-Rspamd-Queue-Id: 73F8058D075
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[broonie@kernel.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,sirena.org.uk:mid]
+X-Rspamd-Queue-Id: 65CD458D719
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Wed, May 20, 2026 at 1:21=E2=80=AFPM Christian K=C3=B6nig
-<christian.koenig@amd.com> wrote:
->
-> On 5/20/26 10:13, Michel D=C3=A4nzer wrote:
-> > On 5/19/26 18:00, Christian K=C3=B6nig wrote:
-> >> On 5/19/26 17:31, Xaver Hugl wrote:
-> >>> Am Di., 19. Mai 2026 um 15:29 Uhr schrieb Christian K=C3=B6nig
-> >>> <christian.koenig@amd.com>:
-> >>>>> 1. This series makes the ability to manipulate syncobjs available
-> >>>>> independently of attached hardware.
-> >>>>> 2. It makes it available under a consistent path /dev/syncobj.
-> >>>>
-> >>>> Exactly that is a big no-go. This has to be under /dev/dri.
-> >>> FWIW udmabuf is also under /dev directly, but I don't think any
-> >>> compositor developer would complain about a different path.
-> >>> What are the rules for that? Could this simply be put in /dev/dri/syn=
-cobj?
-> >>
-> >> The syncobj are actually the DRM specific way of doing things. The gen=
-eral kernel wide way is to use sync files (see drivers/dma-buf/sync_file.c)=
-.
-> >>
-> >> But there has already been tons of problems with those sync files. E.g=
-. they doesn't support your use case at all since they don't have wait befo=
-re submit behavior.
-> >>
-> >> So there are already ways to do this, but the Linux kernel so far told=
- everybody that this is forbidden. The DRM syncobj wait before signal funct=
-ionality is much better, but then basically the second try to do this.
-> >
-> > I'm not quite sure what you're getting at here, just to be clear though=
-:
-> >
-> > While the syncobj Wayland protocol extension supports wait-before-submi=
-t behaviour at the Wayland protocol level, it doesn't need or cause wait-be=
-fore-submit behaviour for DMA fences in the kernel. The usual rules apply t=
-o fences attached to syncobj timeline points. The wait-before-submit behavi=
-our at the Wayland protocol level comes from allowing submit before a fence=
- is attached to the acquire timeline point.
->
-> Yeah I know. I'm one of the people who came up with the idea of doing wai=
-t before signal this way in the drm_syncobj.
->
-> What I wanted to say is that a lot of people used the dma_fence to implem=
-ent wait before signal before and got a bloody nose from that.
->
-> > (It took me a while to realize this distinction, before which I mistake=
-nly thought the kernel's DMA fence rules would prohibit wait-before-submit =
-behaviour at the Wayland protocol level as well)
->
-> This is what surprised me.
->
-> The drm_syncobj implementation solved the wait before signal for the kern=
-el, but my last feedback was that we basically just moved the issue to user=
-space and Wayland compositors would have quite some overhead to implement i=
-t correctly.
->
-> That compositors now use eventfd to simplify that was news to me but make=
-s totally sense in hindsight.
->
-> But anyway, we need to somehow simplify the drm_syncobj -> eventfd usage =
-in the compositor.
 
-That is not the only usage in the compositor. Compositors use all of
-the following operations on syncobjs:
+--Y95J1WJC+suJuyFP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-- creating syncobjs
-- waiting for points synchronously
-- signaling points without a sync file
-- querying points
-- transferring sync files between points
-- exporting sync files
-- importing sync files
+On Wed, May 20, 2026 at 03:45:53PM +0530, Sarthak Sharma wrote:
+> On 5/20/26 2:25 PM, Mike Rapoport wrote:
 
-Which you can see by looking at the userspace code linked in the cover
-letter. Bypassing the handle in one ioctl would gain compositors
-nothing since they would still have to convert to handles and manage
-their lifetime for all other ioctls.
+> > It seems that we need to better share the common code in
+> > tools/testing/selftest.
 
-> That requirement is perfectly justified and avoiding importing the drm_sy=
-ncobj fd into any DRM driver should actually be really easy to implement.
+> > And adding another copy of the hugetlb detection and setup code does not
+> > seem like a great idea.
 
-That is what this series does.
+> Agreed, but that was the least disruptive approach I could think of.
 
->
-> Regards,
-> Christian.
+> I am thinking of doing this now: should I move the
+> hugepage_settings.[ch] to tools/lib/ and move the read_num(),
+> write_num(), read_file() and write_file() helpers to a separate file in
+> tools/lib/ itself without any ksft dependency? Then both
+> tools/testing/selftests/* and tools/mm/ could share the same code.
+
+Using tools/lib sounds sensible to me - as well as the sharing it makes
+it clear that it's a library used by multiple things so avoids the
+issues we sometimes have with selftest directories referencing each
+other.
+
+--Y95J1WJC+suJuyFP
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmoNoecACgkQJNaLcl1U
+h9Bl5AgAgt7Ok9vKRoNdgZt9TjhnvZ1xKFdzccZFLZzdrU0guIFV4m32I5KLw9PB
+6+fSYh9BahFlRTraKPMKUVmk++cX8pLP5U/OQ+5/F7uYzDwXhALqzH8uWsuV9cBL
+zQH1yPDS/Svb1BNviCRN4RJkBgIARQslzPOnapN1aBFTBhAZiNrRrCEoZV8aZeNI
+xi3oIEyRbHrb+/hVVc1R6JWiVjtHS6dWmguqFT3uSNpu/4uNO4k+8kIHWkCztKJM
+IvL2UUhIJsDaS4ictHYzDFcSfyS0B2aknQk29HPkxxtgWRLHTCmYktWr8ExgQMw9
+ABGVA0g/7QpFx9SPMdYJUCpfB8/YaA==
+=JG5s
+-----END PGP SIGNATURE-----
+
+--Y95J1WJC+suJuyFP--
 
