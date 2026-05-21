@@ -1,297 +1,329 @@
-Return-Path: <linux-doc+bounces-88789-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88791-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uKGdNRL3DmopDwYAu9opvQ
-	(envelope-from <linux-doc+bounces-88789-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 14:14:10 +0200
+	id aCKZGA36DmoSDwYAu9opvQ
+	(envelope-from <linux-doc+bounces-88791-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 14:26:53 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39E9C5A49CE
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 14:14:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 012085A4C41
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 14:26:52 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 96B10301C897
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 12:14:01 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 6CCE330F7963
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 12:20:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D31393CB8E6;
-	Thu, 21 May 2026 12:14:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 809133CF049;
+	Thu, 21 May 2026 12:20:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="ai2mvyeS"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ImEv4Ai5";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cLMrNeV9"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f170.google.com (mail-qt1-f170.google.com [209.85.160.170])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5507D34DB46
-	for <linux-doc@vger.kernel.org>; Thu, 21 May 2026 12:13:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.160.170
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779365640; cv=pass; b=fFS0DCLI8sy61XJbWnm+cF1e+iyhGh02jyULoCmmmx18PRcShFFG5sYjx2jC3eXtEYDQVGRGpd3GujqKm6k7C6xPfc7KAjYJtuhzx21sR6pZ8fGxUfGtUH102g06Q+7WW31VsaREAKxcCigNGmhndf+/7CGWxQlR6VBPd2Th2ac=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779365640; c=relaxed/simple;
-	bh=LYJgALBMb92rrgNb+Wzk0+WAd9qpquSCRXx7gbDTCrE=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=pjb52SwC1HJkvP8tTiTzLOF+txxgyvJd9uBbyBNNdlxd8H4dZj7fYcJdhMDeGen0WkxbQzy5i7JD80WoAqcP98KN4dBCfbM1JiI6iYxsi0ifzT/BH2K7zgOIm25OYiNetca2VhF6imCvQNBtRSIZXae0kpFT+a6IKI4JI7Iz6OM=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=ai2mvyeS; arc=pass smtp.client-ip=209.85.160.170
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-qt1-f170.google.com with SMTP id d75a77b69052e-50d864c23bdso31451cf.1
-        for <linux-doc@vger.kernel.org>; Thu, 21 May 2026 05:13:59 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779365638; cv=none;
-        d=google.com; s=arc-20240605;
-        b=eQId1TE51KfQiL4RO07wmWkJX5QC1xEQBTic+q5p9BjBFan7Xlq8ULxGQ+l6P4973j
-         wFOW65lPW1Ai+QfmOPcfqoI/12kp28ENgwl7ePsVkmfp1sTbZ9Xlvt/dK65tQ56e0P8r
-         enhZqZG0qv4BE0Np9UvluwaWzjMMXx3qhKkWkpa0NXzHc8/n0grEZsYnwqX3H8tiU9/f
-         lPKMG74AAL/JhhVyDuQAzC2+h8W1vNUPGHcFoz3fOq3toARfMe8x5ohCOIo+wHByYGkZ
-         aIGrddnMszALhjkBhxsyFLYcdBITMIuGeGWWzMBNgSAGik/oLR2e+HsN43pJUIVKYe/t
-         IHXQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=GJBi6kqgS/T+2nzhRr9ooN0dsVaPQuEMdq7fBLHxWNg=;
-        fh=wqf3Ioxkw8ORfq3N9vxEqU69WovmioZP6GluAIi5lec=;
-        b=G90Gn4HZMVY/QLd5aEtA9IRDK9fTS9Sf7nr4n4xe3mNkE9jq9CoKLitu0zlnUCm4na
-         3rydXXsHHu42BSzb8GlHo+314pvHOsu+P9cAGquwuigRF2PcxuftN3kls/FdZwQ4zlKP
-         tGVufsasY9LkFYJTZ3iSwTMahLzjDCgIR24SneZMw9Q026n1r/7f5a7aACytpABGAOD6
-         Nj/fjSxit4A6deFq9EfssRkWFFjuQFm5+PRLtoQPs9egolSbUiEt59RipSQQMIiLXa9+
-         WEmfD84vDwHUizGmOTzfe/Tvs9jZpo/6kHrtFD4vfAujwLj26NUMPK8LCQIbclDcK00A
-         X2CA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BAF753CF05B
+	for <linux-doc@vger.kernel.org>; Thu, 21 May 2026 12:20:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1779366024; cv=none; b=d+rzbSYtv0kBtCMwz9dap5hwI+9wK/5YnF1MfXKTCveDLGtpjw1kNn11yhg48A0IPqDUA7dQvmC4O6rnW8MXNVt312r50HKcdS+d33H4GZse03Bxv9n9U8WCpi9SNDWcOaUKbXvXoTrSINOU4ssS7vu7wIDh0frSp49J9gv466Q=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1779366024; c=relaxed/simple;
+	bh=m5vq5lzBfI3cQdgIp7nM79N6LDabjGabpgW/KV4LQy8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ktn8raK5W92G+A4nLC76fcCKfw8ZDH8lQgb2RUT1rMwVjf8ZdwAjr42/C/ti11R796P7QjsIdF3eYwP0KKx8kQ6UA5fP/2shpBW/SfO2VKgAq4bG0mcDEmtMnyM9qvZ0iCIabT3W6LJc7qBmz6hL8PBB8zWcy2Sq5VxDjI1/738=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ImEv4Ai5; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cLMrNeV9; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 64LAXvsw818881
+	for <linux-doc@vger.kernel.org>; Thu, 21 May 2026 12:20:22 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	TwK02OO4K1epQED36FGkSoJT4inoRnIOR99uClBefzI=; b=ImEv4Ai599CkKWct
+	28BA/t+9vRGd5MBP7ry2a53XDrFhmSAHGsRtyliCdQ5YKRfW1Bh1Gxns0N4G6ssK
+	HQET9yhe8qDT6Jy2C/JFNNPd/qE2aWrX3PEyGEQTTy8vHmvk76zfeWM7feJ3k5ga
+	RGKcE1FLRVm9bx55awCHNyRoLTicBQBYgsRo/1etey2TNkPVJX243Z6+PVqx5brP
+	qKocHiZtcdEL3XAQOUeWmmkrh8DCY2g2e844j7AFlirWv67+T15Vb3eu1Sc1fg/0
+	zZ9MMzUelSnBhh/QDqO992G3e4SyivLJq4ojL6/eu2cafltwEvyb+EILUw2EmW1J
+	zYPTCw==
+Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com [209.85.215.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ea0dkgc3q-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-doc@vger.kernel.org>; Thu, 21 May 2026 12:20:21 +0000 (GMT)
+Received: by mail-pg1-f199.google.com with SMTP id 41be03b00d2f7-c827bda2e60so3553587a12.3
+        for <linux-doc@vger.kernel.org>; Thu, 21 May 2026 05:20:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1779365638; x=1779970438; darn=vger.kernel.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=GJBi6kqgS/T+2nzhRr9ooN0dsVaPQuEMdq7fBLHxWNg=;
-        b=ai2mvyeSqWfWYz+Q7nLQxEDw82SQKcefiFjkOFabOHaNT+f6TCUGYxXfomzgDp+JNu
-         ohkpNy3Fy/WFE7DL7qvCx2z3H1jAdqxSaEMmQ8Ykl4qZ13yKFlk64YeYaVx7Kw3j1nkL
-         DZ5uw2U9mhZEMC758YycLMhPvjypav/ZxLgy3MoW4C++5YdcGYNw8Jr9yxZ393pHpUYS
-         6HRtHVsnHFo6VxTVZ2NRbpOsdgeRv1LSVYP9EJzG9olzg7w45wS34vkddA/l/ON5Ae45
-         E2F17SHzigYMl40bTRjcpdggWbs/BBCwj2eFlRtW0eYSofuwzNEK9ZpIMpCXwjLSqIST
-         5MeA==
+        d=oss.qualcomm.com; s=google; t=1779366021; x=1779970821; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=TwK02OO4K1epQED36FGkSoJT4inoRnIOR99uClBefzI=;
+        b=cLMrNeV9Uh0cbmZtjrwnUReHA1vLzJ+Q+kSi8B6WTLxXsDUze+X+vbv627UMa0YCss
+         e63Bh1xM4L6X9ufiH7Ktpk1e5q0H93NJ9mbL3UaVzmj9aVdDvLxRdtz05jw1duM1sSYt
+         wOtsPLmJjrBolRQ6HwF6SNiaX8bniMgSfxwgvf85ZVgKPQPnhdlIREWcTrADlFUKYrUo
+         YZX/so/HsB/nUjm7guDF9Kzthvl9oerzKPJpx9BM64rPSij7AHapFKzUu1K8SH73FnBp
+         TkAKzVS/ad116VHg4oQx2gs1A5WxdjO9wXspQV1d5EaQFHHmvxWrSFMo8FuC9ko46/cb
+         LpLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779365638; x=1779970438;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=GJBi6kqgS/T+2nzhRr9ooN0dsVaPQuEMdq7fBLHxWNg=;
-        b=gM9xrHS6hy/a+Gc97p7E9bvsmrBFMWQLsbDdjNY7C21VI/HsB0k/wDDX5gPwIyel8y
-         devjomKNC82/w1FQl7KVej5GyeF5jzdo+C9+GsRwDkKJyPfLDGA/L9xMCQOAFfa3j0ak
-         X+GYtelwSRsscqkLXcuWzSe2qBIykzv+T8q3lQ8SveaNZRkB7+z6pqfB/SzNDVk8rvXe
-         xhkB8ukFzaKRVR44u2gJL+ZXBymzFf5BsmZcWsdltNOD8xzqRp2776IXGkXGaVXMRt+l
-         nG0N5FDaZbDViwPfPD7H67qmMUibVAUpbSMSZn6zW3ApawvQ5Cd6HFHuWCQKZo0CgTzZ
-         DXKA==
-X-Forwarded-Encrypted: i=1; AFNElJ+NRCjrCg/FlCwZNo/3I5VeHIfj8q5nl6ftvx4TvLLhP4WU9wTsX+xhsbdwqXhdJ7KkdvIkxZASv/A=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwzrzRGHngm6gs15ptfVP97TcTj8/1oeK/Fjs1qiifEsq4tIGhl
-	D+DRFU40pfojqTpnP17jHRbwOqhoWgzXgaC116l1YMvFUT+y5kF3CrPNPYCwEtwj9BIHvVMSAY3
-	DpubHtJtSydlPG2izk96OUwnRah6ex5xIxQfqAs3y
-X-Gm-Gg: Acq92OF9Aq093/Y8bamHg6ApWfmO/74X9GWNWYLeMsBuyAquu1WChr9RgQ53KtCwQoD
-	0HZm32Otcu6JWCxTadwViJj+km0f/XSOCP58DYFIpnu2UI9NbLxh8gJLmHctjVqbjIrNx4FFu+R
-	u4ZL1v9qitCMtBxymy6cRtwQgGcBZYQcilyPskVMZOYQA0RYuE9R4bg1wgUG0gUOP/dQBi+IpTq
-	W2PxP0JX08CYnQbpKWob3CPpGJ+ll9AS+3oTYc1IjXHdTLiu7gFTcG4pHaSj0wER7c/AR7qkSLE
-	R7PCfo2CLe7DFqP/ayU=
-X-Received: by 2002:a05:622a:a94e:b0:516:4f62:85f1 with SMTP id
- d75a77b69052e-516c552fa38mr6885881cf.22.1779365636942; Thu, 21 May 2026
- 05:13:56 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1779366021; x=1779970821;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=TwK02OO4K1epQED36FGkSoJT4inoRnIOR99uClBefzI=;
+        b=WxYX/b5DW1Fb9LtE1G+KkTppKDNumjpbeg0kEkx5nIDSlBiGqnivRmrzbsj/dy62e8
+         ikzDHcU9mggH/r4XOQaOuujo1B9jy8It61c0rNSPC8n1SlxTBX/T0XGWvOfV9YzDz3rt
+         m/JR7HuUdId98rdw4cOqT25CVJy1hbgmiSkrZjvZutC6mMRSszvOyML7HSylK4+GsG3e
+         ++Qxgh/hKUG9CUrz0YIyUKQfM8gdWaOTiLF6Yp+3vp4qWfx8jFJ7MZ1dXTIMkktA5Ega
+         5VXrbyghs1JSVzrIXeUWcz2hXkGu3CnTyTXQCnz2Z1AnrrE81a6Kz7jIiRymIJCdCeWw
+         RMrg==
+X-Forwarded-Encrypted: i=1; AFNElJ8Z3wp3edNc29LLnabCfcLozB3gKuwS/peHLIpwrXk33Gw5U2jLLK85UTAkHcJnXhjNfuBQggIqZTI=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz8YgubOwhzXATa8Kql7DB995OsrNm54JTeKxvf9dN+MP1EyLkU
+	D37htjSt4QhXE1n27T3NMCIZXpNBVRYN0et7pfYhCCjDnjVOdHK3TS4XMAqtV/XLBfYqmrXeyYt
+	SgVS0NXngVOM4E9c99wuy6yRd1GS5eL+EYidJ9g46UUd4diFU7UbVjDoBKroNmvI=
+X-Gm-Gg: Acq92OEHQ5Tk9jFujhevpt0b+GPvGjgka/vq96bvujX7blLUlOnijoI/BHW0b93lEEM
+	z6BpeCMEZI7zZkzlCNrDdP9g9RLmtYffNlf5AYRsU10icli8o8qFhvjjxvZ5UveN5snFcLAfCtg
+	fMn64heYsA2JnBNURDtIKEbkh9tRn4BWcyYuYV5on2gLDLRHq5bpDZ/++SxLSCaQCw9qDHGVCIE
+	MiLan7r2hcbLsQFncEo2Wdbkxcvxeait1shfwjPUd/swZ5dfaTSLAIdEBI75Lu2V53VUcMN5ZLC
+	wqlG95lyhEymH82Jz5GSxHWRDoMUuvLRY7CQVafDQKNdWXHi0RJ/R8S8LEqE3FaAxso2BJtTQbK
+	fjVbrytikF8dlJBGthwFDoe3wBrK8LobYJiNnb59lKOkiWO7XiXyDbmwLnUs=
+X-Received: by 2002:a05:6a20:9183:b0:398:6bb5:54c4 with SMTP id adf61e73a8af0-3b30854e9c4mr3264395637.5.1779366020811;
+        Thu, 21 May 2026 05:20:20 -0700 (PDT)
+X-Received: by 2002:a05:6a20:9183:b0:398:6bb5:54c4 with SMTP id adf61e73a8af0-3b30854e9c4mr3264348637.5.1779366020198;
+        Thu, 21 May 2026 05:20:20 -0700 (PDT)
+Received: from hu-mojha-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c851980bcdcsm240706a12.14.2026.05.21.05.20.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 21 May 2026 05:20:19 -0700 (PDT)
+Date: Thu, 21 May 2026 17:50:02 +0530
+From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+To: Bjorn Andersson <andersson@kernel.org>
+Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+        Eugen Hristev <eugen.hristev@linaro.org>,
+        Arnd Bergmann <arnd@arndb.de>, Dennis Zhou <dennis@kernel.org>,
+        Tejun Heo <tj@kernel.org>, Christoph Lameter <cl@gentwo.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Thomas Gleixner <tglx@kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Anna-Maria Behnsen <anna-maria@linutronix.de>,
+        Frederic Weisbecker <frederic@kernel.org>,
+        Ingo Molnar <mingo@redhat.com>, Juri Lelli <juri.lelli@redhat.com>,
+        Vincent Guittot <vincent.guittot@linaro.org>,
+        Dietmar Eggemann <dietmar.eggemann@arm.com>,
+        Steven Rostedt <rostedt@goodmis.org>, Ben Segall <bsegall@google.com>,
+        Mel Gorman <mgorman@suse.de>, Valentin Schneider <vschneid@redhat.com>,
+        David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>,
+        "Liam R. Howlett" <Liam.Howlett@oracle.com>,
+        Vlastimil Babka <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>,
+        Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
+        Kees Cook <kees@kernel.org>, Brendan Jackman <jackmanb@google.com>,
+        Johannes Weiner <hannes@cmpxchg.org>, Zi Yan <ziy@nvidia.com>,
+        Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>,
+        Kemeng Shi <shikemeng@huaweicloud.com>, Nhat Pham <nphamcs@gmail.com>,
+        Baoquan He <bhe@redhat.com>, Barry Song <baohua@kernel.org>,
+        Youngjun Park <youngjun.park@lge.com>, Petr Mladek <pmladek@suse.com>,
+        John Ogness <john.ogness@linutronix.de>,
+        Sergey Senozhatsky <senozhatsky@chromium.org>,
+        Mathieu Poirier <mathieu.poirier@linaro.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Saravana Kannan <saravanak@kernel.org>, workflows@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arch@vger.kernel.org, linux-mm@kvack.org,
+        linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
+        devicetree@vger.kernel.org
+Subject: Re: [PATCH v2 00/25] Introduce meminspect
+Message-ID: <20260521122002.etqupwnjv67didat@hu-mojha-hyd.qualcomm.com>
+References: <20260311-minidump-v2-v2-0-f91cedc6f99e@oss.qualcomm.com>
+ <abdnp90cC5PI9wyz@baldur>
+ <20260316181647.m7x4ncmwdjho6yvr@hu-mojha-hyd.qualcomm.com>
+ <abtlUQqMOxj5PwGB@baldur>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260507-gmem-inplace-conversion-v6-0-91ab5a8b19a4@google.com> <20260507-gmem-inplace-conversion-v6-24-91ab5a8b19a4@google.com>
-In-Reply-To: <20260507-gmem-inplace-conversion-v6-24-91ab5a8b19a4@google.com>
-From: Fuad Tabba <tabba@google.com>
-Date: Thu, 21 May 2026 13:13:19 +0100
-X-Gm-Features: AVHnY4KHC9HIiDmjKgEge5iH3VKNmS75Hv9JyZN2WMHPkcnLceuX40X-36gd_Tk
-Message-ID: <CA+EHjTzfo0_uxHbrcntLdHLaLGB3uO41+JzcyW+vHr+u=VB5=g@mail.gmail.com>
-Subject: Re: [PATCH v6 24/43] KVM: selftests: Rename guest_memfd{,_offset} to gmem_{fd,offset}
-To: ackerleytng@google.com
-Cc: aik@amd.com, andrew.jones@linux.dev, binbin.wu@linux.intel.com, 
-	brauner@kernel.org, chao.p.peng@linux.intel.com, david@kernel.org, 
-	ira.weiny@intel.com, jmattson@google.com, jthoughton@google.com, 
-	michael.roth@amd.com, oupton@kernel.org, pankaj.gupta@amd.com, 
-	qperret@google.com, rick.p.edgecombe@intel.com, rientjes@google.com, 
-	shivankg@amd.com, steven.price@arm.com, willy@infradead.org, 
-	wyihan@google.com, yan.y.zhao@intel.com, forkloop@google.com, 
-	pratyush@kernel.org, suzuki.poulose@arm.com, aneesh.kumar@kernel.org, 
-	liam@infradead.org, Paolo Bonzini <pbonzini@redhat.com>, 
-	Sean Christopherson <seanjc@google.com>, Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
-	Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
-	"H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
-	Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>, 
-	Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>, 
-	Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>, 
-	Nhat Pham <nphamcs@gmail.com>, Baoquan He <bhe@redhat.com>, Barry Song <baohua@kernel.org>, 
-	Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>, 
-	Wei Xu <weixugc@google.com>, Youngjun Park <youngjun.park@lge.com>, 
-	Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
-	Kiryl Shutsemau <kas@kernel.org>, Jason Gunthorpe <jgg@ziepe.ca>, Vlastimil Babka <vbabka@kernel.org>, kvm@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
-	linux-mm@kvack.org, linux-coco@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <abtlUQqMOxj5PwGB@baldur>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTIxMDEyMyBTYWx0ZWRfX2X/e1UZqbRO1
+ R5QTLH5vAjgDLPh3yOrN6WfOCxKu2Eme/xJS3etnETpptXQfV08Wes44GaBglM+dxvqNK+hhDrU
+ EduEctoATveAKROSM+gcWd4sOOvs3BOA2NIBeOvX4j6/hu7d8lnMb4Db9jWlP4VnFkJI6evrEhj
+ bKyx8KH2VLFHLnTzzwVjIaG6FLvQSRhpiUjQ/KT8Q+cNVU7ijmW916qSOAhPbhnmapSxVzo3qBf
+ k5UWjFTsrixicOeCem7F8elxYP2PrIm/gN0ECCchFEgrfLn5IeSs0TuD6TwjQAP3N0B/yhYuv2L
+ K9X2Ys6QcW9BNcySANVCdU9NZ80AZ8lDyC79Ebc25ns8AVDmwF6PxdzE89uexvpe4bC1dFOSotl
+ WuH1EBvK0bJwA9oFmpAcUxl8DR0tjbpChjCI0RUCU12D702iwJkJiDUpyqNbxxKePB6qlcrK/I+
+ 90nYK9jDrKnRXWqMXRg==
+X-Authority-Analysis: v=2.4 cv=aueCzyZV c=1 sm=1 tr=0 ts=6a0ef885 cx=c_pps
+ a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=NEAV23lmAAAA:8 a=mDV3o1hIAAAA:8 a=0QWIX89dG7aUu2ROjmkA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=_Vgx9l1VpLgwpw_dHYaR:22
+X-Proofpoint-GUID: TlVMwii9eE6w_W83a8gAenGWebyW5sem
+X-Proofpoint-ORIG-GUID: TlVMwii9eE6w_W83a8gAenGWebyW5sem
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-05-21_02,2026-05-18_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 impostorscore=0 adultscore=0 phishscore=0 malwarescore=0
+ lowpriorityscore=0 spamscore=0 suspectscore=0 clxscore=1015
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2605130000
+ definitions=main-2605210123
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[qualcomm.com,reject];
+	R_DKIM_ALLOW(-0.20)[qualcomm.com:s=qcppdkim1,oss.qualcomm.com:s=google];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-88789-lists,linux-doc=lfdr.de];
-	FREEMAIL_CC(0.00)[amd.com,linux.dev,linux.intel.com,kernel.org,intel.com,google.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca,vger.kernel.org,kvack.org,lists.linux.dev];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[qualcomm.com:+,oss.qualcomm.com:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[google.com:+];
+	FREEMAIL_CC(0.00)[lwn.net,linuxfoundation.org,linaro.org,arndb.de,kernel.org,gentwo.org,linux-foundation.org,infradead.org,linutronix.de,redhat.com,arm.com,goodmis.org,google.com,suse.de,oracle.com,suse.com,cmpxchg.org,nvidia.com,tencent.com,huaweicloud.com,gmail.com,lge.com,chromium.org,vger.kernel.org,kvack.org];
+	TAGGED_FROM(0.00)[bounces-88791-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[oss.qualcomm.com:dkim,qualcomm.com:dkim,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,hu-mojha-hyd.qualcomm.com:mid];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tabba@google.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[64];
-	TAGGED_RCPT(0.00)[linux-doc];
-	NEURAL_HAM(-0.00)[-1.000];
+	FROM_NEQ_ENVFROM(0.00)[mukesh.ojha@oss.qualcomm.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,mail.gmail.com:mid]
-X-Rspamd-Queue-Id: 39E9C5A49CE
+	RCPT_COUNT_GT_50(0.00)[56];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	RCVD_COUNT_SEVEN(0.00)[7]
+X-Rspamd-Queue-Id: 012085A4C41
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Thu, 7 May 2026 at 21:23, Ackerley Tng via B4 Relay
-<devnull+ackerleytng.google.com@kernel.org> wrote:
->
-> From: Sean Christopherson <seanjc@google.com>
->
-> Rename local variables and function parameters for the guest memory file
-> descriptor and its offset to use a "gmem_" prefix instead of
-> "guest_memfd_".
->
-> No functional change intended.
->
-> Signed-off-by: Sean Christopherson <seanjc@google.com>
-> Signed-off-by: Ackerley Tng <ackerleytng@google.com>
+On Wed, Mar 18, 2026 at 09:55:29PM -0500, Bjorn Andersson wrote:
+> On Mon, Mar 16, 2026 at 11:46:47PM +0530, Mukesh Ojha wrote:
+> > On Sun, Mar 15, 2026 at 09:24:39PM -0500, Bjorn Andersson wrote:
+> > > On Wed, Mar 11, 2026 at 01:45:44AM +0530, Mukesh Ojha wrote:
+> [..]
+> > > >, to get all the regions as
+> > > > separate files.  The tool from the host computer will list the regions
+> > > > in the order they were downloaded.
+> > > > 
+> > > > Once you have all the files simply use `cat` to put them all together,
+> > > > in the order of the indexes.  For my kernel config and setup, here is my
+> > > > cat command : (you can use a script or something, I haven't done that so
+> > > > far):
+> > > 
+> > > So these need to be sorted in numerical order, by that number at the end
+> > > of the file name?
+> > > 
+> > > Do you manually punch these in? How do we make this user friendly?
+> > 
+> > Yes, manually.. but I think we can do better. We could make
+> > this more user‑friendly by using the section header and string table in
+> > the md_KELF binary both of which existed in the earlier implementation.
+> > Then, we can write an upstream‑friendly script that reads this KELF
+> > metadata file, checks whether a binary with the registered name is
+> > present, and stitches everything together to form a complete ELF that
+> > the crash tool can consume.  Let me know if you have any suggestion..
+> > 
+> 
+> Can we somehow identify that these regions belong to the minidump and
+> teach QDL to build the ELF for us?
 
-Reviewed-by: Fuad Tabba <tabba@google.com>
+Raised PR for the QDL https://github.com/linux-msm/qdl/pull/243 which
+does not use numerating order and we can completely drop.
 
-Cheers,
-/fuad
+With that PR, QDL will be generating minidump.elf .
 
-> ---
->  tools/testing/selftests/kvm/include/kvm_util.h |  6 +++---
->  tools/testing/selftests/kvm/lib/kvm_util.c     | 26 +++++++++++++-------------
->  2 files changed, 16 insertions(+), 16 deletions(-)
->
-> diff --git a/tools/testing/selftests/kvm/include/kvm_util.h b/tools/testing/selftests/kvm/include/kvm_util.h
-> index 2ecaaa0e99654..f19383376ee8e 100644
-> --- a/tools/testing/selftests/kvm/include/kvm_util.h
-> +++ b/tools/testing/selftests/kvm/include/kvm_util.h
-> @@ -690,17 +690,17 @@ int __vm_set_user_memory_region(struct kvm_vm *vm, u32 slot, u32 flags,
->                                 gpa_t gpa, u64 size, void *hva);
->  void vm_set_user_memory_region2(struct kvm_vm *vm, u32 slot, u32 flags,
->                                 gpa_t gpa, u64 size, void *hva,
-> -                               u32 guest_memfd, u64 guest_memfd_offset);
-> +                               u32 gmem_fd, u64 gmem_offset);
->  int __vm_set_user_memory_region2(struct kvm_vm *vm, u32 slot, u32 flags,
->                                  gpa_t gpa, u64 size, void *hva,
-> -                                u32 guest_memfd, u64 guest_memfd_offset);
-> +                                u32 gmem_fd, u64 gmem_offset);
->
->  void vm_userspace_mem_region_add(struct kvm_vm *vm,
->                                  enum vm_mem_backing_src_type src_type,
->                                  gpa_t gpa, u32 slot, u64 npages, u32 flags);
->  void vm_mem_add(struct kvm_vm *vm, enum vm_mem_backing_src_type src_type,
->                 gpa_t gpa, u32 slot, u64 npages, u32 flags,
-> -               int guest_memfd_fd, u64 guest_memfd_offset);
-> +               int gmem_fd, u64 gmem_offset);
->
->  #ifndef vm_arch_has_protected_memory
->  static inline bool vm_arch_has_protected_memory(struct kvm_vm *vm)
-> diff --git a/tools/testing/selftests/kvm/lib/kvm_util.c b/tools/testing/selftests/kvm/lib/kvm_util.c
-> index df73b23a4c66a..11da9b7546d03 100644
-> --- a/tools/testing/selftests/kvm/lib/kvm_util.c
-> +++ b/tools/testing/selftests/kvm/lib/kvm_util.c
-> @@ -947,7 +947,7 @@ void vm_set_user_memory_region(struct kvm_vm *vm, u32 slot, u32 flags,
->
->  int __vm_set_user_memory_region2(struct kvm_vm *vm, u32 slot, u32 flags,
->                                  gpa_t gpa, u64 size, void *hva,
-> -                                u32 guest_memfd, u64 guest_memfd_offset)
-> +                                u32 gmem_fd, u64 gmem_offset)
->  {
->         struct kvm_userspace_memory_region2 region = {
->                 .slot = slot,
-> @@ -955,8 +955,8 @@ int __vm_set_user_memory_region2(struct kvm_vm *vm, u32 slot, u32 flags,
->                 .guest_phys_addr = gpa,
->                 .memory_size = size,
->                 .userspace_addr = (uintptr_t)hva,
-> -               .guest_memfd = guest_memfd,
-> -               .guest_memfd_offset = guest_memfd_offset,
-> +               .guest_memfd = gmem_fd,
-> +               .guest_memfd_offset = gmem_offset,
->         };
->
->         TEST_REQUIRE_SET_USER_MEMORY_REGION2();
-> @@ -966,10 +966,10 @@ int __vm_set_user_memory_region2(struct kvm_vm *vm, u32 slot, u32 flags,
->
->  void vm_set_user_memory_region2(struct kvm_vm *vm, u32 slot, u32 flags,
->                                 gpa_t gpa, u64 size, void *hva,
-> -                               u32 guest_memfd, u64 guest_memfd_offset)
-> +                               u32 gmem_fd, u64 gmem_offset)
->  {
->         int ret = __vm_set_user_memory_region2(vm, slot, flags, gpa, size, hva,
-> -                                              guest_memfd, guest_memfd_offset);
-> +                                              gmem_fd, gmem_offset);
->
->         TEST_ASSERT(!ret, "KVM_SET_USER_MEMORY_REGION2 failed, errno = %d (%s)",
->                     errno, strerror(errno));
-> @@ -979,7 +979,7 @@ void vm_set_user_memory_region2(struct kvm_vm *vm, u32 slot, u32 flags,
->  /* FIXME: This thing needs to be ripped apart and rewritten. */
->  void vm_mem_add(struct kvm_vm *vm, enum vm_mem_backing_src_type src_type,
->                 gpa_t gpa, u32 slot, u64 npages, u32 flags,
-> -               int guest_memfd, u64 guest_memfd_offset)
-> +               int gmem_fd, u64 gmem_offset)
->  {
->         int ret;
->         struct userspace_mem_region *region;
-> @@ -1055,12 +1055,12 @@ void vm_mem_add(struct kvm_vm *vm, enum vm_mem_backing_src_type src_type,
->                 region->mmap_size += alignment;
->
->         if (flags & KVM_MEM_GUEST_MEMFD) {
-> -               if (guest_memfd < 0) {
-> -                       u32 guest_memfd_flags = 0;
-> +               if (gmem_fd < 0) {
-> +                       u32 gmem_flags = 0;
->
-> -                       TEST_ASSERT(!guest_memfd_offset,
-> +                       TEST_ASSERT(!gmem_offset,
->                                     "Offset must be zero when creating new guest_memfd");
-> -                       guest_memfd = vm_create_guest_memfd(vm, mem_size, guest_memfd_flags);
-> +                       gmem_fd = vm_create_guest_memfd(vm, mem_size, gmem_flags);
->                 } else {
->                         /*
->                          * Install a unique fd for each memslot so that the fd
-> @@ -1068,11 +1068,11 @@ void vm_mem_add(struct kvm_vm *vm, enum vm_mem_backing_src_type src_type,
->                          * needing to track if the fd is owned by the framework
->                          * or by the caller.
->                          */
-> -                       guest_memfd = kvm_dup(guest_memfd);
-> +                       gmem_fd = kvm_dup(gmem_fd);
->                 }
->
-> -               region->region.guest_memfd = guest_memfd;
-> -               region->region.guest_memfd_offset = guest_memfd_offset;
-> +               region->region.guest_memfd = gmem_fd;
-> +               region->region.guest_memfd_offset = gmem_offset;
->         } else {
->                 region->region.guest_memfd = -1;
->         }
->
-> --
-> 2.54.0.563.g4f69b47b94-goog
->
->
+And I checked the latest crash tool with no extra patching and just the
+--minimal option (as we do not have everything in the minidump) and just
+dmesg.
+
+
+$ ./crash  --minimal minidump/vmlinux ./minidump/minidump.elf
+
+crash 9.0.2++
+Copyright (C) 2002-2026  Red Hat, Inc.
+Copyright (C) 2004, 2005, 2006, 2010  IBM Corporation
+Copyright (C) 1999-2006  Hewlett-Packard Co
+Copyright (C) 2005, 2006, 2011, 2012  Fujitsu Limited
+Copyright (C) 2006, 2007  VA Linux Systems Japan K.K.
+Copyright (C) 2005, 2011, 2020-2024  NEC Corporation
+Copyright (C) 1999, 2002, 2007  Silicon Graphics, Inc.
+Copyright (C) 1999, 2000, 2001, 2002  Mission Critical Linux, Inc.
+Copyright (C) 2015, 2021  VMware, Inc.
+This program is free software, covered by the GNU General Public License,
+and you are welcome to change it and/or distribute copies of it under
+certain conditions.  Enter "help copying" to see the conditions.
+This program has absolutely no warranty.  Enter "help warranty" for details.
+
+GNU gdb (GDB) 16.2
+Copyright (C) 2024 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "--host=x86_64-pc-linux-gnu --target=aarch64-elf-linux".
+Type "show configuration" for configuration details.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+
+NOTE: minimal mode commands: log, dis, rd, sym, eval, set, extend and exit
+
+crash> log
+[    0.000000] Booting Linux on physical CPU 0x0000000000 [0x512f0030]
+[    0.000000] Linux version 7.1.0-rc2-next-20260504-00228-g2595b97d6061 (@f134cd6ce783) (aarch64-linux-gnu-gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0, GNU ld (GNU Binutils for Ubuntu) 2.42) #11 SMP PREEMPT Fri May 15 09:34:41 UTC 2026
+[    0.000000] KASLR disabled on command line
+[    0.000000] random: crng init done
+[    0.000000] Machine model: Qualcomm Technologies, Inc. XXXX
+[    0.000000] earlycon: qcom_geni0 at MMIO 0x0000000000a9c000 (options '')
+[    0.000000] printk: legacy bootconsole [qcom_geni0] enabled
+[    0.000000] efi: UEFI not found.
+...
+..
+
+
+[   48.488296] sysrq: Trigger a crash
+[   48.492004] Kernel panic - not syncing: sysrq triggered crash
+[   48.497944] CPU: 3 UID: 0 PID: 363 Comm: sh Tainted: G        W           7.1.0-rc2-next-20260504-00228-g2595b97d6061 #11 PREEMPT
+[   48.510055] Tainted: [W]=WARN
+[   48.513140] Hardware name: Qualcomm Technologies, Inc. XXXX
+[   48.519699] Call trace:
+[   48.522276]  show_stack+0x18/0x24 (C)
+[   48.526089]  dump_stack_lvl+0x34/0x8c
+[   48.529903]  dump_stack+0x18/0x24
+[   48.533366]  vpanic+0x47c/0x4dc
+[   48.536646]  do_panic_on_target_cpu+0x0/0x1c
+[   48.541078]  sysrq_reset_seq_param_set+0x0/0x94
+[   48.545788]  __handle_sysrq+0xd4/0x1b8
+[   48.549679]  write_sysrq_trigger+0xc0/0xd0
+[   48.553930]  proc_reg_write+0x9c/0xf0
+[   48.557737]  vfs_write+0xd4/0x358
+[   48.561187]  ksys_write+0x6c/0x104
+[   48.564724]  __arm64_sys_write+0x1c/0x28
+[   48.568809]  invoke_syscall+0x54/0x10c
+[   48.572704]  el0_svc_common.constprop.0+0xc0/0xe0
+[   48.577578]  do_el0_svc+0x1c/0x28
+[   48.581025]  el0_svc+0x38/0x138
+[   48.584317]  el0t_64_sync_handler+0xa0/0xe4
+[   48.588660]  el0t_64_sync+0x198/0x19c
+[   48.592474] SMP: stopping secondary CPUs
+[   48.796761] Kernel Offset: disabled
+[   48.806510] Memory Limit: none
+crash>
+
+-- 
+-Mukesh Ojha
 
