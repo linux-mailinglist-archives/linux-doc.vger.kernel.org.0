@@ -1,152 +1,293 @@
-Return-Path: <linux-doc+bounces-88757-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88755-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oHTICRjBDmrXBwYAu9opvQ
-	(envelope-from <linux-doc+bounces-88757-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 10:23:52 +0200
+	id KAz6EnK8DmrBBgYAu9opvQ
+	(envelope-from <linux-doc+bounces-88755-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 10:04:02 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 716FE5A0F83
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 10:23:50 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 98C185A09A8
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 10:04:01 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 3B65C3074024
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 08:15:24 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 02906300468A
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 08:00:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DBF631D7E41;
-	Thu, 21 May 2026 08:15:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 746BB3A05C4;
+	Thu, 21 May 2026 08:00:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="TCWK7EVH"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from frasgout12.his.huawei.com (frasgout12.his.huawei.com [14.137.139.154])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 389ED2853E0;
-	Thu, 21 May 2026 08:15:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=14.137.139.154
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C86E39FCD8
+	for <linux-doc@vger.kernel.org>; Thu, 21 May 2026 08:00:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.48
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779351323; cv=none; b=kV7NIoBbQb7/ainITT8MxzVm6SbB4bITSoEFcAJa+brPxzw+g2rlxUmuRTRZYxb1enAEhxTWSHYmnJiLwAL8dj0fr90uU1iECTXcVXOzUsh69mxtFsjoWKdEIR/Vrr68Tyujey04YPKey2q58Gy5iXgR02qjqLioZnr1rsKJEcc=
+	t=1779350425; cv=none; b=H1La7EAW8jKWHv5jymeK6+47qjlTQ+RBhjYyUgcfsMIvvlQGrfpB6tLFl817EcCY8F+XS4Qo5JWArsNYnYM4DUK+QLk0zi4kL8uN5Oh5WERzB/7KHl3ahQeeJiQYdoMQ3ueSuQJeuHMFvBUzgXuPh3rrwSp3BpD2UBeWEusB2To=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779351323; c=relaxed/simple;
-	bh=EWQ0CX0ltnO0DbWI+6/zlhkgYo4oLRVUk3SuwSeNXoA=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=sA09THlYPXtNkhnA0YoUeRhsK0SIVJXdc4NahorpZ9Ea1vC8ixDuIwPeIOzs7AgaYvDmoWSvH5dfMv+oEMOX8up1XdPCpkep2yakFHgq0fjVItX0UDuwT20i5QywZMyhVZysstmo8UCgHcnxzWgir1vGt+s2c2WdyApdDVTcY1A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com; spf=pass smtp.mailfrom=huaweicloud.com; arc=none smtp.client-ip=14.137.139.154
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huaweicloud.com
-Received: from mail.maildlp.com (unknown [172.18.224.235])
-	by frasgout12.his.huawei.com (SkyGuard) with ESMTPS id 4gLgfL6JnQzwb6L;
-	Thu, 21 May 2026 15:54:18 +0800 (CST)
-Received: from mail02.huawei.com (unknown [7.182.16.47])
-	by mail.maildlp.com (Postfix) with ESMTP id 03FEC40573;
-	Thu, 21 May 2026 15:59:00 +0800 (CST)
-Received: from [10.204.63.22] (unknown [10.204.63.22])
-	by APP1 (Coremail) with SMTP id LxC2BwDHeKIyuw5qLFiOAQ--.43055S2;
-	Thu, 21 May 2026 08:58:51 +0100 (CET)
-Message-ID: <97d4e0989fb84ed85475920c3e00320a45c3afda.camel@huaweicloud.com>
-Subject: Re: [PATCH v5 04/13] ima: Introduce per binary measurements list
- type binary_runtime_size value
-From: Roberto Sassu <roberto.sassu@huaweicloud.com>
-To: Mimi Zohar <zohar@linux.ibm.com>, corbet@lwn.net,
- skhan@linuxfoundation.org,  dmitry.kasatkin@gmail.com,
- eric.snowberg@oracle.com, paul@paul-moore.com,  jmorris@namei.org,
- serge@hallyn.com
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-integrity@vger.kernel.org, linux-security-module@vger.kernel.org, 
-	gregorylumen@linux.microsoft.com, chenste@linux.microsoft.com, 
-	nramas@linux.microsoft.com, Roberto Sassu <roberto.sassu@huawei.com>
-Date: Thu, 21 May 2026 09:58:39 +0200
-In-Reply-To: <b7f97a0a3b79b72a014d12514febc338d1ecd038.camel@linux.ibm.com>
-References: <20260429160319.4162918-1-roberto.sassu@huaweicloud.com>
-	 <20260429160319.4162918-5-roberto.sassu@huaweicloud.com>
-	 <b7f97a0a3b79b72a014d12514febc338d1ecd038.camel@linux.ibm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.52.3-0ubuntu1 
+	s=arc-20240116; t=1779350425; c=relaxed/simple;
+	bh=Tx53MwLePeLZ23fDtjKJB5lRx3lgXxTNcSrKPTCnhJw=;
+	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
+	 Message-Id:References:To; b=hKx2FelHNXAoGicPoPqF0tV1ilRozJNX/5Zfv0t9/GDFKsuEhu/qsy4OtEA6AH0kpN9i0HQbWddHKuNA0F4iGFlRbqgta0gKtNUFWtQo4IJNwBBMyQYX6VHmk8xx3iNdW6HgjmniF7VsgBOUxZzWzmakh6sdwf/m2TiKy5ReMF8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=TCWK7EVH; arc=none smtp.client-ip=209.85.128.48
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-49039a8851fso2490305e9.2
+        for <linux-doc@vger.kernel.org>; Thu, 21 May 2026 01:00:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1779350422; x=1779955222; darn=vger.kernel.org;
+        h=to:references:message-id:cc:date:in-reply-to:from:subject
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=Z9PrdA31q5x8SAejtf+3EF1jeBrhc3Rg2VGzoBKR6RQ=;
+        b=TCWK7EVHMf/5GAkugSVV+3lI+EoG3kfcJnDy406vfnum1aZ8h2etHEtGxrK0yCdqWs
+         6WT7PzY342FN2oMLt/6RN4xMvpXEMswcCaDoaRKXN1QycWYAv1JlR4Td6osTn67uO2zu
+         6SqAq1Sh2da151pdZ7Thd6QjQOQbIONGzZ4sKB85xf/B/xLEJCJLMwP/Sli9a3rgYoIy
+         NosIwzNnoHrDjIturAb5+uYjgkqVxXIQGOVAejj8xWyOMTc3ELp+KhyodrfWbhw5YqrC
+         2at/1SErzn9Sq7JSPko0ZpImjvKqfUdOHuh2tnVIDQz3gq0ACSgyFucB84+EvUGtv2t0
+         BpPQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1779350422; x=1779955222;
+        h=to:references:message-id:cc:date:in-reply-to:from:subject
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Z9PrdA31q5x8SAejtf+3EF1jeBrhc3Rg2VGzoBKR6RQ=;
+        b=pIS9wk6h/w/HFNc1zIJ8zQL026qALlrP0jbZ7hZD2woO1dMN3M8qbFgbd4RYRzKzSl
+         V1OfsO0iSTZ31m62RUjiDWkiW5Ekr5oxcceZIy75ImsOTkNQ1SKa3uCVgfykOZCdsS1L
+         73P9OgCLA/cjroWN0psc1hUuLKyyczZ+GSIGk+1vaOQXXPcI5ayyD2Q8wVqN7Aary5Zu
+         oD4PJBX/icoPyoKs+Ha3VdzwiXv8u9NKdfiod+m0lHBPJww9PgapuyA86x+7jF8eCzxK
+         xFB/7KCURbcv1uhxX4bboHS92mlpSO44kBRvMK4LBDLGAivd+jCSypHOrrT1z4q85jHB
+         xmPQ==
+X-Forwarded-Encrypted: i=1; AFNElJ+ZIemNp4pVejGV08/pOdxVGR/TyJAB8r4BFCVQb0AqT1bzQG2lCIR1p+sBRav9VSRrCZCkacrP0W4=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyJ/lQtjl7mTXRYRZmqbLRhgU1Xg09arrPihNpnf9E/xMYV24zm
+	QbGEJjOZHlMAWWURKxIYFWDEwkBO5mD9K0KRPmOvD3YFzxJx/2RliHDM
+X-Gm-Gg: Acq92OFyQL0h+/4dTvyV8smeVER3HllqX+pa4XVee4WnhposIHLg4OGQVlFYXHK43t8
+	dc0vDSMQ4x7jFBB6v9FdrLtR/vId/c2yprEERjvB34OhNjuEiRddhdkv4vlQxZ4dL3lNbL2jDXD
+	5g78QGECGaRvXd8jCxnid2Tuvjgxzjj5wBj3Jiu+U8Vq6idZmKHCtaTMWHwBg5HlpsIrfio09MK
+	aac8vBnywxEZoYhmPMhZlZEU45d2tWoKTmxRZEoEyhac6snG6vWLIBp4dBboUDaisAptp9Y9xIz
+	lSstnPqEWBghjH2hpBQJHQHid62wmYrADTUZ4yKjuIutVyNrCblL9XRoOT43hHn2CezeWjx22cA
+	af/+wNBKaxEmMjTejqz0jjP6yLmmkmmNglb8zFUPyABoaP1PnebFBSCizUFOw6uKB27ZvKaomC4
+	9pGbLqdpdS9T9xIRccevqgeGpOu9/9uJTk1w==
+X-Received: by 2002:a05:600c:468b:b0:488:aa33:dcbd with SMTP id 5b1f17b1804b1-490360c12cbmr24099035e9.26.1779350421276;
+        Thu, 21 May 2026 01:00:21 -0700 (PDT)
+Received: from smtpclient.apple ([197.250.51.26])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-45eaa92ca96sm726769f8f.19.2026.05.21.01.00.15
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Thu, 21 May 2026 01:00:19 -0700 (PDT)
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_5D209284-6E0B-4B8C-B2C6-1CF1063CB628";
+	protocol="application/pgp-signature";
+	micalg=pgp-sha256
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-X-CM-TRANSID:LxC2BwDHeKIyuw5qLFiOAQ--.43055S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7tFy7AryfJw1xXF1UXryUGFg_yoW8JFWkpF
-	WfZw1Fkr4kXa4xGrWDKa97WFWru34rJ34Dtr4DWF1kuFs5A34Fy3WUKF1rKFZ09r1kta4U
-	Zw40gr4fA3WYvaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUvjb4IE77IF4wAFF20E14v26ryj6rWUM7CY07I20VC2zVCF04k2
-	6cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4
-	vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7Cj
-	xVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVWUJVW8JwA2z4x0Y4vEx4A2jsIEc7CjxV
-	AFwI0_Gr0_Gr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40E
-	x7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x
-	0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkIwI1lc7CjxVAaw2AF
-	wI0_Jw0_GFyl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4
-	xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r4a6rW5
-	MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I
-	0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWU
-	JVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxUFk
-	u4UUUUU
-X-CM-SenderInfo: purev21wro2thvvxqx5xdzvxpfor3voofrz/1tbiAQAABGoNmbsKMgACs6
-X-Spamd-Result: default: False [0.04 / 15.00];
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3864.500.181\))
+Subject: Re: [PATCH v5 8/8] ARM: defconfig: Add a zx29 defconfig file
+From: =?utf-8?Q?Stefan_D=C3=B6singer?= <stefandoesinger@gmail.com>
+In-Reply-To: <30b96e0d-f296-4c31-8701-a15c568ebffc@app.fastmail.com>
+Date: Thu, 21 May 2026 11:00:01 +0300
+Cc: Linus Walleij <linusw@kernel.org>,
+ Jonathan Corbet <corbet@lwn.net>,
+ Shuah Khan <skhan@linuxfoundation.org>,
+ Russell King <linux@armlinux.org.uk>,
+ Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>,
+ Krzysztof Kozlowski <krzk@kernel.org>,
+ Alexandre Belloni <alexandre.belloni@bootlin.com>,
+ Drew Fustini <fustini@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Jiri Slaby <jirislaby@kernel.org>,
+ linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org,
+ devicetree@vger.kernel.org,
+ soc@lists.linux.dev,
+ linux-serial@vger.kernel.org
+Message-Id: <3B300E28-8603-4881-8A47-E9B86A355090@gmail.com>
+References: <20260421-send-v5-0-ace038e63515@gmail.com>
+ <20260421-send-v5-8-ace038e63515@gmail.com>
+ <CAD++jL=_eDY_mG_QBreSrZiho0hUrDSciedq=vrxXaTiMwrSyg@mail.gmail.com>
+ <30b96e0d-f296-4c31-8701-a15c568ebffc@app.fastmail.com>
+To: Arnd Bergmann <arnd@arndb.de>
+X-Mailer: Apple Mail (2.3864.500.181)
+X-Spamd-Result: default: False [-2.76 / 15.00];
+	SIGNED_PGP(-2.00)[];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
-	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-88757-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	RCVD_TLS_LAST(0.00)[];
-	DMARC_NA(0.00)[huaweicloud.com];
-	FREEMAIL_TO(0.00)[linux.ibm.com,lwn.net,linuxfoundation.org,gmail.com,oracle.com,paul-moore.com,namei.org,hallyn.com];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	RCPT_COUNT_TWELVE(0.00)[19];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-88755-lists,linux-doc=lfdr.de];
+	HAS_ATTACHMENT(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[roberto.sassu@huaweicloud.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	NEURAL_HAM(-0.00)[-1.000];
+	FROM_NEQ_ENVFROM(0.00)[stefandoesinger@gmail.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	MID_RHS_MATCH_FROM(0.00)[];
-	R_DKIM_NA(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[huawei.com:email,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,huaweicloud.com:mid]
-X-Rspamd-Queue-Id: 716FE5A0F83
+	APPLE_MAILER_COMMON(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	TO_DN_SOME(0.00)[]
+X-Rspamd-Queue-Id: 98C185A09A8
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Wed, 2026-05-20 at 22:06 -0400, Mimi Zohar wrote:
-> On Wed, 2026-04-29 at 18:03 +0200, Roberto Sassu wrote:
-> > From: Roberto Sassu <roberto.sassu@huawei.com>
-> >=20
-> > Make binary_runtime_size as an array, to have separate counters per bin=
-ary
-> > measurements list type. Currently, define the BINARY type for the exist=
-ing
-> > binary measurements list.
-> >=20
-> > Introduce ima_update_binary_runtime_size() to facilitate updating a
-> > binary_runtime_size value with a given binary measurement list type.
-> >=20
-> > Also add the binary measurements list type parameter to
-> > ima_get_binary_runtime_size(), to retrieve the desired value. Retrievin=
-g
-> > the value is now done under the ima_extend_list_mutex, since there can =
-be
-> > concurrent updates.
-> >=20
-> > No functional change (except for the mutex usage, that fixes the
-> > concurrency issue): the BINARY array element is equivalent to the old
-> > binary_runtime_size.
+
+--Apple-Mail=_5D209284-6E0B-4B8C-B2C6-1CF1063CB628
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=utf-8
+
+Hi Arnd,
+
+I saw your reply to my defconfig pull request, but apparently never =
+received your original reply. I only found this mail here. It looks like =
+I have to look for a better E-Mail provider as gmail is choking on the =
+volume of the linux-arm-kernel mailing list.
+
+To answer your questions I found at =
+https://lore.kernel.org/all/61452117-0cdc-4ec2-83eb-dc03ccbd410b@app.fastm=
+ail.com/ :
+
+> Either way, the patch description above should at least explain
+> why you think you need your own defconfig, as we don't normally
+> take those.
+
+It was more cluelessness / being new to kernel development that gave me =
+the impression that boards should have defconfigs. Since then I ran =
+across scripts/dt_to_config. I haven't tested it yet on my DT, but if it =
+does the right thing I don't think this board needs a defconfig.
+
+>> +CONFIG_CMDLINE=3D"console=3DttyAMA0 earlyprintk root=3D/dev/ram rw"
+
+> A definconfig should normall not rely on earlyprintk, just add
+> that when you actually need to debug the super-early boot
+> stages. With "earlycon" it should pick up the right console
+> from the stdout path and work almost as early.
+
+>> +CONFIG_BINFMT_FLAT=3Dy
+
+> Are you actually using flat binaries? I wasn't aware that this
+> is still possible on MMU-enabled kernels.
+
+>> +CONFIG_BLK_DEV_RAM=3Dy
+>> +CONFIG_BLK_DEV_RAM_COUNT=3D4
+
+> The old ramdisk boot is going away in the future, please use
+> initramfs instead. This should also save a good amount of RAM.
+
+I'll fix those in my tree and keep the defconfig around just in case, =
+but otherwise drop it from the submission. We can revisit it later when =
+the board is more complete.
+
+>> +CONFIG_DEVTMPFS=3Dy # FIXME: This is specific to my initrd. Remove=20=
+
+>> before upstream
+>stale comment?
+
+I believe I removed this in later versions though :-)
+
+Cheers,
+Stefan
+
+> Am 24.04.2026 um 11:54 schrieb Arnd Bergmann <arnd@arndb.de>:
 >=20
-> The patch is really clear and well written, but I don't see a concurrency=
- issue
-> requiring taking the ima_extend_list_mutex at least in this patch.
+> On Fri, Apr 24, 2026, at 09:13, Linus Walleij wrote:
+>> On Tue, Apr 21, 2026 at 10:24=E2=80=AFPM Stefan D=C3=B6singer
+>> <stefandoesinger@gmail.com> wrote:
+>>=20
+>>> This enables existing drivers that already are (UART) or will be =
+(USB,
+>>> GPIO) necessary to operate this board even if they aren't declared =
+in
+>>> the DTS yet.
+>>>=20
+>>> Signed-off-by: Stefan D=C3=B6singer <stefandoesinger@gmail.com>
+>>=20
+>> *I* personally (as SoC maintainer) think that having a few more =
+defconfigs
+>> is fine, even helpful.
+>>=20
+>> But I would defer this to the more senior SoC maintainers because I =
+think
+>> their stance is something like:
+>>=20
+>> - We have multi_v7_defconfig for compile testing
+>>=20
+>> - We know that binary gets way to big for your system: it's for build
+>>  testing and perhaps booting in QEMU or systems with many MB of
+>>  RAM, not for actually running it on products.
+>>=20
+>> - You are encouraged to keep your own defconfig out-of-tree.
+>=20
+> Right, we clearly need to do something better than what we are with
+> the general defconfigs, as I'm sure many of the existing ones are
+> never actually used for booting a machine, and are horribly out of
+> date with the Kconfig options.
+>=20
+> I wouldn't object to adding another defconfig for a new (or revived)
+> soc family, but I don't want to have more per-board ones.
+> Overall, we have about 70 defconfigs and 55 soc families that have =
+their
+> own mach-* directory (plus a few without code), and the number of
+> defconfigs alone makes it hard to keep them up to date.=20
+>=20
+>> However I even challenged this myself by adding a defconfig for =
+memory
+>> constrained Broadcoms a while back (NACKed/ignored ;) so if it was =
+all
+>> up to me I would merge this.
+>=20
+> I don't even remember that discussion ;-)
+>=20
+> One idea might be to have a tiny base defconfig, plus platform
+> specific fragments that add drivers. The problem is agreeing
+> what bits are essential enough to still get enabled in the
+> tiny config.
+>=20
+>       Arnd
 
-binary_runtime_size is not an atomic variable. It is updated under the
-ima_extend_list_mutex lock in ima_add_digest_entry(). The same lock
-must be taken on the reader side, ima_get_binary_runtime_size().
 
-Roberto
+--Apple-Mail=_5D209284-6E0B-4B8C-B2C6-1CF1063CB628
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP
 
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEQxb0tqoFWyeVMl1sPRO8yFRPGiIFAmoOu4EACgkQPRO8yFRP
+GiL8IQ//Zm20DYooaVaVCuklde82UX5X2MHKLX3bEwoqFm8OwrwK1a0bu61uKXRd
+TTj/RVjingjzc/MWqbhSiDLM+1tvrMaa8bhi16TRYn5upIa71KlieKL5Kd/9cmoW
+fqmI+HoIIq6mQTIYJ2GMCp0/ciADEXnE41buFWzPiu7BMeVInJMaYpX6NKyXd7ZG
+oAf3t5tCMMxrRfBq7bv4JV8TAjLdibq+SNyxH6xYoZwrW7J6pLYGeHJcbUNNHJFD
+Vl5PgpflnmNhfcQk7nTKufpY44szSAwB9GmiuOemwzmUEGv3V0e4t8Rni1FlHQsR
+gAUiB04OMbDSDV9kntSrZwbEUR4UkJLZhKanfJOTv/Sy6pNZLpcS0TB5YY7TEfcy
+lr1oKB9HXUka9mhPKFmGrC0TN7jkPKmkTLK70RXVtNX/pU4dFSsm0yP76XL2KrBA
+rfvH0At+i5cU3nPYvoOm56VkiOfHsnQB9adNQ5l8GeAUpQB6HI4jr23IhD8BYvsB
+yKxccCZ4tkD05c9InZqE+lsxvB9esDjo4gKZzFWhuXY/+4rOcRowbxsFGHt/TCWn
+9U7SU0cAsuce6Ex+oPs62EkqM0yyZ0FMVlmVGI9PJ5O1sJ5W6xYOlxwnLGH6TJNE
+bOIJ4WxSJmZra+QaQXak7qAOxAV92+Du/IioWZnoXjGc0BzTjhw=
+=rcPP
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_5D209284-6E0B-4B8C-B2C6-1CF1063CB628--
 
