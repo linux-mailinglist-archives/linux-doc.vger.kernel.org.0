@@ -1,237 +1,171 @@
-Return-Path: <linux-doc+bounces-88762-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88760-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OAQzMbvJDmovCQYAu9opvQ
-	(envelope-from <linux-doc+bounces-88762-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 11:00:43 +0200
+	id sJmLL6PJDmoACQYAu9opvQ
+	(envelope-from <linux-doc+bounces-88760-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 11:00:19 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id A64B55A1B79
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 11:00:42 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 464D95A1B58
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 11:00:19 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 5E70B3219D2C
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 08:48:45 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 107B831BA5EE
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 08:43:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BA81B36405C;
-	Thu, 21 May 2026 08:45:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A79453CE0B7;
+	Thu, 21 May 2026 08:38:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=chaosmail.tech header.i=@chaosmail.tech header.b="mqaMIEKM"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from frasgout11.his.huawei.com (frasgout11.his.huawei.com [14.137.139.23])
+Received: from chaosmail.tech (chaosmail.tech [77.81.229.115])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DB9735674C;
-	Thu, 21 May 2026 08:45:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=14.137.139.23
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA3D83C4B77;
+	Thu, 21 May 2026 08:37:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=77.81.229.115
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779353149; cv=none; b=DfgtiGEnlD1jgHMX9xWbh9RLHPPiGpfDUODCNY8WKiDA8jd4airMK6fDQcOZV6egFiPG613vhvIz7ClKmj9iQ14IlZyuidqB0VDlB+VdCwe9k6h7a2Qqhvl5Wpae6X13LBVaaZfvVGcyhiFcFm99RQM5mXV7gaxVb3Dkhd57tsA=
+	t=1779352687; cv=none; b=lIqGuPcuXKst2d43FvQyVaFiwdwasV7kQcjAWMC5WeTEF7gKUwRsBqmRSxpIVkfg0FtmZJ7PGhCoksFyBd2JZCT3KxERsrTCAHgGdxKAx7G4Yw5iVzSgVYEMInr9GA3gdy7/15lUOcQ8ONmeBalyLhKljVVRciqg9kioEZvAfeY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779353149; c=relaxed/simple;
-	bh=XVpa3gPs4WHuWXOXdevcBTIxStwkVCXV0ajpL5/HWc4=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=HGmpfl/lnrLk8MODmPnNh+7cfazliQ9c1bUoxg0wgScZ53DvisBzy14gbnUqBvVv+fIdZG62f9xlnPpfltDY4mEmP4V4Y/DSDHrESRZvVJf7RS3RCPGKNoxChBOpsOwSehlMJNaSQs4gIusyYr7JC6E+wPXJ1LJ5m81rFw+pBnc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com; spf=pass smtp.mailfrom=huaweicloud.com; arc=none smtp.client-ip=14.137.139.23
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huaweicloud.com
-Received: from mail.maildlp.com (unknown [172.18.224.235])
-	by frasgout11.his.huawei.com (SkyGuard) with ESMTPS id 4gLhL55nbJz1HCnv;
-	Thu, 21 May 2026 16:25:17 +0800 (CST)
-Received: from mail02.huawei.com (unknown [7.182.16.47])
-	by mail.maildlp.com (Postfix) with ESMTP id A972D4056C;
-	Thu, 21 May 2026 16:30:16 +0800 (CST)
-Received: from [10.204.63.22] (unknown [10.204.63.22])
-	by APP1 (Coremail) with SMTP id LxC2BwAXyaKOwg5q4q+OAQ--.43580S2;
-	Thu, 21 May 2026 09:30:16 +0100 (CET)
-Message-ID: <760aa1c86b2c8fa3f4ceab5c65c42f4f1e1f59c1.camel@huaweicloud.com>
-Subject: Re: [PATCH v5 06/13] ima: Mediate open/release method of the
- measurements list
-From: Roberto Sassu <roberto.sassu@huaweicloud.com>
-To: Mimi Zohar <zohar@linux.ibm.com>, corbet@lwn.net,
- skhan@linuxfoundation.org,  dmitry.kasatkin@gmail.com,
- eric.snowberg@oracle.com, paul@paul-moore.com,  jmorris@namei.org,
- serge@hallyn.com
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-integrity@vger.kernel.org, linux-security-module@vger.kernel.org, 
-	gregorylumen@linux.microsoft.com, chenste@linux.microsoft.com, 
-	nramas@linux.microsoft.com, Roberto Sassu <roberto.sassu@huawei.com>
-Date: Thu, 21 May 2026 10:30:04 +0200
-In-Reply-To: <db872f810f22bf25ff0ae7fe15b44f316b078079.camel@linux.ibm.com>
-References: <20260429160319.4162918-1-roberto.sassu@huaweicloud.com>
-	 <20260429160319.4162918-7-roberto.sassu@huaweicloud.com>
-	 <db872f810f22bf25ff0ae7fe15b44f316b078079.camel@linux.ibm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.52.3-0ubuntu1 
+	s=arc-20240116; t=1779352687; c=relaxed/simple;
+	bh=7BJFLEB6C86M5gqwrUoBf0DVLzH0TaU/5cXkYCFtTYk=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=BXNT/jBqyDBbhSWyXeY4r+UAZtQ8khEyGHuJCnfLnm2qYTS8nYF9tDT7O77UpXQWX6Sr0GrlHTloUESLYr6G5ZtSO8jLezeI2UiKA/BiKXDfg/voYRMtraWpsSYdCj613xNT+k+ug78z41hXVcDEC4YJMCpknCMw/oL6UdGthE8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=chaosmail.tech; spf=pass smtp.mailfrom=chaosmail.tech; dkim=pass (1024-bit key) header.d=chaosmail.tech header.i=@chaosmail.tech header.b=mqaMIEKM; arc=none smtp.client-ip=77.81.229.115
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=chaosmail.tech
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chaosmail.tech
+Received: by chaosmail.tech (Postfix) id 22E2E1C9F6D;
+	Thu, 21 May 2026 08:31:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chaosmail.tech;
+	s=mail; t=1779352311;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=ShptbacUN80FAd+vsF5oT2K8kRUNoKGz5rer5JQfYgw=;
+	b=mqaMIEKMMd+6/bcGxiu9mpGv/HfNxYnmU8zpTx4qGVObxW8zpkAnu2D9eDivVPzWW7z6yI
+	spOoeQrrNoNwETBu4B7G1Wggxb7eCM9mmGqFJy6xeDmrqCE0XOp2KkwjLytdzGX1iC1WOz
+	LJHXW1kRS5PDkegAoA7ulTuxf9j/Jic=
+From: Sasha Finkelstein <k@chaosmail.tech>
+Date: Thu, 21 May 2026 10:30:50 +0200
+Subject: [PATCH v2] Fail the build on RUST=y and RUST_IS_AVAILABLE=n
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-CM-TRANSID:LxC2BwAXyaKOwg5q4q+OAQ--.43580S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxZw43tF15Wry3CryfAry8AFb_yoW5tr4rpa
-	yDGayrCr1kJrW7CFnrGa47ArWFv3yrGa15urn3JFy3AF1rZr9I9r4Yyry7Crnrtry8tr1f
-	tr4jqrZ8uas0yaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUvjb4IE77IF4wAFF20E14v26ryj6rWUM7CY07I20VC2zVCF04k2
-	6cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4
-	vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7Cj
-	xVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVWUJVW8JwA2z4x0Y4vEx4A2jsIEc7CjxV
-	AFwI0_Gr0_Gr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40E
-	x7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x
-	0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkIwI1lc7CjxVAaw2AF
-	wI0_Jw0_GFyl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4
-	xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r4a6rW5
-	MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I
-	0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWU
-	JVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxUFk
-	u4UUUUU
-X-CM-SenderInfo: purev21wro2thvvxqx5xdzvxpfor3voofrz/1tbiAgAABGoNmbQK-wABs4
-X-Spamd-Result: default: False [0.04 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260521-evolve-to-crab-v2-1-c18e0e98fc54@chaosmail.tech>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3WOyw7CIBREf6Vh7TVAbEtc+R+mCx639ppaDCDRN
+ Py7tK5dnmTmzKwsYiCM7NysLGCmSH6pIA8Ns5NebgjkKjPJZcdbwQGznzNC8mCDNqCs0aLvlLO
+ uZbX0DDjSexdehx/Hl7mjTZtlS0wUkw+ffTGLLfdXngUIkFy5UZ2w6w1e6icfH5rmY0I7saGU8
+ gW82yG3wwAAAA==
+X-Change-ID: 20260510-evolve-to-crab-8cba1768dcd5
+To: Alice Ryhl <aliceryhl@google.com>, 
+ Andreas Hindborg <a.hindborg@kernel.org>, Benno Lossin <lossin@kernel.org>, 
+ =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
+ Boqun Feng <boqun@kernel.org>, Danilo Krummrich <dakr@kernel.org>, 
+ Gary Guo <gary@garyguo.net>, Jonathan Corbet <corbet@lwn.net>, 
+ Miguel Ojeda <ojeda@kernel.org>, Shuah Khan <skhan@linuxfoundation.org>, 
+ Trevor Gross <tmgross@umich.edu>
+Cc: Neal Gompa <neal@gompa.dev>, linux-doc@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, 
+ Sasha Finkelstein <k@chaosmail.tech>
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1779352311; l=2250;
+ i=k@chaosmail.tech; s=20241124; h=from:subject:message-id;
+ bh=7BJFLEB6C86M5gqwrUoBf0DVLzH0TaU/5cXkYCFtTYk=;
+ b=JeDfsJRRAFSdP+76aN+j2zPNtJtck8pPcvZhVBvrZoKRJlCIE+u0LqCCxO+gXmac6Nm4CZwYZ
+ /9tBqcO4UWzD/Kgq20efdpWsp7+tpTaucplh/tClliuiZvn/mVxXm1J
+X-Developer-Key: i=k@chaosmail.tech; a=ed25519;
+ pk=aSkp1PdZ+eF4jpMO6oLvz/YfT5XkBUneWwyhQrOgmsU=
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	DMARC_POLICY_ALLOW(-0.50)[chaosmail.tech,reject];
+	R_DKIM_ALLOW(-0.20)[chaosmail.tech:s=mail];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-88762-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	DMARC_NA(0.00)[huaweicloud.com];
-	FREEMAIL_TO(0.00)[linux.ibm.com,lwn.net,linuxfoundation.org,gmail.com,oracle.com,paul-moore.com,namei.org,hallyn.com];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_TO(0.00)[google.com,kernel.org,protonmail.com,garyguo.net,lwn.net,linuxfoundation.org,umich.edu];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[roberto.sassu@huaweicloud.com,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-88760-lists,linux-doc=lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[16];
-	RCVD_COUNT_FIVE(0.00)[6];
-	R_DKIM_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[k@chaosmail.tech,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[chaosmail.tech:+];
 	MID_RHS_MATCH_FROM(0.00)[];
-	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: A64B55A1B79
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[chaosmail.tech:email,chaosmail.tech:mid,chaosmail.tech:dkim,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,msgid.link:url]
+X-Rspamd-Queue-Id: 464D95A1B58
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Wed, 2026-05-20 at 22:07 -0400, Mimi Zohar wrote:
-> On Wed, 2026-04-29 at 18:03 +0200, Roberto Sassu wrote:
-> > From: Roberto Sassu <roberto.sassu@huawei.com>
-> >=20
-> > Introduce the ima_measure_users counter, to implement a semaphore-like
-> > locking scheme where the binary and ASCII measurements list interfaces =
-can
-> > be concurrently open by multiple readers, or alternatively by a single
-> > writer.
-> >=20
-> > A semaphore cannot be used because the kernel cannot return to user spa=
-ce
-> > with a lock held.
-> >=20
-> > Introduce the ima_measure_lock() and ima_measure_unlock() primitives, t=
-o
-> > respectively lock/unlock the interfaces (safely with the ima_measure_us=
-ers
-> > counter, without holding a lock).
-> >=20
-> > Finally, introduce _ima_measurements_open() to lock the interface befor=
-e
-> > seq_open(), and call it from ima_measurements_open() and
-> > ima_ascii_measurements_open(). And, introduce ima_measurements_release(=
-),
-> > to unlock the interface.
-> >=20
-> > Require CAP_SYS_ADMIN if the interface is opened for write (not possibl=
-e
-> > for the current measurements interfaces, since they only have read
-> > permission).
-> >=20
-> > No functional changes: multiple readers are allowed as before.
-> >=20
-> > Link: https://github.com/linux-integrity/linux/issues/1
-> > Signed-off-by: Roberto Sassu <roberto.sassu@huawei.com>
-> > ---
-> >  security/integrity/ima/ima_fs.c | 71 +++++++++++++++++++++++++++++++--
-> >  1 file changed, 67 insertions(+), 4 deletions(-)
-> >=20
-> > diff --git a/security/integrity/ima/ima_fs.c b/security/integrity/ima/i=
-ma_fs.c
-> > index 9a8dba14d82a..68edea7139d5 100644
-> > --- a/security/integrity/ima/ima_fs.c
-> > +++ b/security/integrity/ima/ima_fs.c
-> > @@ -25,6 +25,8 @@
-> >  #include "ima.h"
-> > =20
-> >  static DEFINE_MUTEX(ima_write_mutex);
-> > +static DEFINE_MUTEX(ima_measure_mutex);
-> > +static long ima_measure_users;
->=20
-> long?
+The current approach of silently disabling all rust drivers if the
+toolchain is missing results in users that try to compile their own
+kernels getting a "successful" build and then being confused about where
+did their drivers go. In comparison, missing openssl results in a build
+failure, not a disappearance of everything that depends on it.
 
-The limit pre process can be up to INT_MAX. Two processes could
-overflow the counter if it was int.
+This also means that allyesconfig will depend on rust, but since the
+rust experiment concluded with "rust is here to stay", i believe that
+allyesconfig should be building rust drivers too.
 
-Since privileged users can bypass the system wide max-file check (see
-alloc_empty_file()), I will add an overflow check to be sure.
+Signed-off-by: Sasha Finkelstein <k@chaosmail.tech>
+---
+Changes in v2:
+- No longer a RFC, let's make it happen.
+- Update the docs.
+- Link to v1: https://patch.msgid.link/20260510-evolve-to-crab-v1-1-208df84e67be@chaosmail.tech
+---
+ Documentation/rust/quick-start.rst | 6 +++---
+ init/Kconfig                       | 1 -
+ 2 files changed, 3 insertions(+), 4 deletions(-)
 
-> > =20
-> >  bool ima_canonical_fmt;
-> >  static int __init default_canonical_fmt_setup(char *str)
-> > @@ -209,16 +211,76 @@ static const struct seq_operations ima_measurment=
-s_seqops =3D {
-> >  	.show =3D ima_measurements_show
-> >  };
-> > =20
-> > +static int ima_measure_lock(bool write)
-> > +{
-> > +	mutex_lock(&ima_measure_mutex);
-> > +	if ((write && ima_measure_users !=3D 0) ||
-> > +	    (!write && ima_measure_users < 0)) {
-> > +		mutex_unlock(&ima_measure_mutex);
-> > +		return -EBUSY;
-> > +	}
->=20
-> Thanks, Roberto. The code is really clear and well written.  However, it =
-could
-> use a comment indicating the different ima_measure_users values as a remi=
-nder.
->=20
-> ima_measure_users:  > 0 open readers
-> ima_meaasure_users: =3D=3D -1 open writer
+diff --git a/Documentation/rust/quick-start.rst b/Documentation/rust/quick-start.rst
+index a6ec3fa94d33..764c81d0dd59 100644
+--- a/Documentation/rust/quick-start.rst
++++ b/Documentation/rust/quick-start.rst
+@@ -321,9 +321,9 @@ Configuration
+ -------------
+ 
+ ``Rust support`` (``CONFIG_RUST``) needs to be enabled in the ``General setup``
+-menu. The option is only shown if a suitable Rust toolchain is found (see
+-above), as long as the other requirements are met. In turn, this will make
+-visible the rest of options that depend on Rust.
++menu. In turn, this will make visible the rest of options that depend on Rust.
++You can check the value of ``RUST_IS_AVAILABLE`` to determine if your toolchain
++is configured correctly.
+ 
+ Afterwards, go to::
+ 
+diff --git a/init/Kconfig b/init/Kconfig
+index 2937c4d308ae..f7d4c7ea764f 100644
+--- a/init/Kconfig
++++ b/init/Kconfig
+@@ -2190,7 +2190,6 @@ config PROFILING
+ config RUST
+ 	bool "Rust support"
+ 	depends on HAVE_RUST
+-	depends on RUST_IS_AVAILABLE
+ 	select EXTENDED_MODVERSIONS if MODVERSIONS
+ 	depends on !MODVERSIONS || GENDWARFKSYMS
+ 	depends on !GCC_PLUGIN_RANDSTRUCT
 
-Ok.
+---
+base-commit: 8bc67e4db64aa72732c474b44ea8622062c903f0
+change-id: 20260510-evolve-to-crab-8cba1768dcd5
 
-> > +
-> > +	if (write)
-> > +		ima_measure_users--;
-> > +	else
-> > +		ima_measure_users++;
-> > +	mutex_unlock(&ima_measure_mutex);
-> > +	return 0;
-> > +}
-> > +
-> > +static void ima_measure_unlock(bool write)
-> > +{
-> > +	mutex_lock(&ima_measure_mutex);
-> > +	if (write)
-> > +		ima_measure_users++;
->=20
-> There should only be one writer at a time. ima_measure_users could be set=
- to
-> zero.
-
-Sure, but I find the code more clear this way.
-
-Roberto
-
-> > +	else
-> > +		ima_measure_users--;
-> > +	mutex_unlock(&ima_measure_mutex);
-> > +}
-> > +
->=20
-> thanks,
->=20
-> Mimi
+Best regards,
+--  
+Sasha Finkelstein <k@chaosmail.tech>
 
 
