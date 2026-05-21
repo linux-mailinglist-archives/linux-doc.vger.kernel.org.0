@@ -1,316 +1,186 @@
-Return-Path: <linux-doc+bounces-88767-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88775-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sC2vLNPeDmoVCwYAu9opvQ
-	(envelope-from <linux-doc+bounces-88767-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 12:30:43 +0200
+	id AFRRBUvgDmp5CwYAu9opvQ
+	(envelope-from <linux-doc+bounces-88775-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 12:36:59 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 521545A3547
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 12:30:42 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7A5415A3685
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 12:36:57 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id BC5F831DB3A5
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 09:57:27 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id DD6F2312AC07
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 10:31:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C772737FF45;
-	Thu, 21 May 2026 09:55:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AF4883A168C;
+	Thu, 21 May 2026 10:30:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="elx09jQV"
+	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="KqPnBl6S"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com [209.85.160.179])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mail-m19731109.qiye.163.com (mail-m19731109.qiye.163.com [220.197.31.109])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70B813806AA
-	for <linux-doc@vger.kernel.org>; Thu, 21 May 2026 09:55:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.160.179
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779357341; cv=pass; b=AUHResxcVeKFbdTINl6EptlE+BYWQIH3n798Szxip8li7d7iUXhHBoG/itMg0qk0G2cIwFISjl0iaJ52vfn8WS4NiSaObO1et2ma0i4jtk5VAKEu97DNTV7lzz84WOL+iwHgioGgolEUtHM6BYHCATuW74Vh16phpbNTqzU6m8w=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779357341; c=relaxed/simple;
-	bh=ZRcTPC6pJlAhg9tsnjjkWvgzcx3R4j8Gvtkq+DUOp/Q=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=hztqtHF/P863Ss1xEUoathzr7XEzoVScSlhf6OX2YSa18zaEVDKenLBTXIEjfwUYiS684uslKR53459isBElfnk3V0Lw3z4j46VhCPXizHlyltzrcxijLnd7gPFRrDk1R1r0tyiL/9z/UDgiPA+JZvnjZquBdWWP23iU9TeYZCM=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=elx09jQV; arc=pass smtp.client-ip=209.85.160.179
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-qt1-f179.google.com with SMTP id d75a77b69052e-50e61648f10so14161cf.1
-        for <linux-doc@vger.kernel.org>; Thu, 21 May 2026 02:55:39 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779357338; cv=none;
-        d=google.com; s=arc-20240605;
-        b=T1ZHxJJQDcaqtxUJF1nK4Gpxr5korm6ubs2AqN5cAoSoVmVePbNEm/X8u9c+qJ2Xbi
-         nskh0xhtn0t5m1PIoEzolEC/CO8hp88BQURickTUFcHGIeuRRSvAzn1EAcHvDXA32ID/
-         UF1zoT+A80+UGPQ64FreiW6I9bRQYQzz7aHCLF/6MGQ95SlyU5FTamJCSSVe2vqMxnAe
-         s4Dp15t55250UBxn3UAzGIxA0sZNHiQpGQASi5lnwuPgDs0ez271vTISfxFlJxOulzJQ
-         tkDOSvX8sJTRF41wAEhjS6u8VkNwHSZ1hrch1453+z/z+lPEKbBe5q/2n6EKS1/LZSWU
-         M+zA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=e7M9NhGknWQDqckmSxYqMS5E/3kqK8iG7U98plSW4NU=;
-        fh=t7kax36ovKR1dKeCEnFcqLn5GZi3eFlAXaH4F6epKTw=;
-        b=ZAAa+TdmtXTCmF9b9MhKKq+q5+JlOnyPKjRO8coi8ntEftO440vxY1d8iuItZiwbf3
-         /B0aN7xLklxHBNuPu2JGWH2BQIo0IxusIu/28rYjif3RPa4uq1QBdVnenUr4QjXbWCzI
-         EWb0TFqhvYnBGOPu0cLlgdBXpmU756CZzYBKgNdeUFi+4yTZ/u7jo3csaeUXEVsZh+aA
-         iYFqiVLeAmZI6KfaiO+hswmTFhEUEvZ1qBOAED8O5+Qb6TaBc/wvIhT/uAiZv9/RKZqv
-         WVWJSEHDtIhw2i9avwXECJ+RK2y6f+g77g9AaNpQYVwcwLRnWFexixUlHopWi2pljunA
-         1DsA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1779357338; x=1779962138; darn=vger.kernel.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=e7M9NhGknWQDqckmSxYqMS5E/3kqK8iG7U98plSW4NU=;
-        b=elx09jQVz7SP6iJ3u0MpfDH3jkMZxattoGptkSC2UILK+56zPHVFzRqiAepypA+g5R
-         uXB5cPtIMXyB/qlF5vG4MJFQJcv2hdYeysIj9yEEZDBBECIfc6KSa5REBiXZEiFC18GM
-         GMBp8Ld8V5X/AjYXnfxlER1m54tE63w5KRMcYaLbtprzb8/ATv5nYgUiqVrcnVf545dZ
-         po45aU65ELKpTNgrfydItTDIVQP21xhWajaJ2ktpVujWZVhx3jwoYmXpeoaKSbzvmViy
-         J87ZZ1NlMGoQ2RtiynFCqinyNUEWh09clnbW5BkRvfMntDPH71QiA1Y1ZNMVOdXI5uyB
-         n+gg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779357338; x=1779962138;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=e7M9NhGknWQDqckmSxYqMS5E/3kqK8iG7U98plSW4NU=;
-        b=F+WUmOf68Ormjai/+0sItRzsZmL3hlNjcBp16agkDuZAzL7EnHickWBwm+7XEZA8+C
-         BCyKmaIkv71q7IJhhN024lPeAkgCxky8Y2l+K0JnUFx6TwkFny2X2Zhry7F8zM4h5ISB
-         8nRU16rYVqyEoSSVLu6+dSdk46MozzZV5Wy9vJtw9/1FvEKiTXoS/E+MWRa2ZvB8n2a9
-         4L9OS29cVcxFXegG6Cj9cZdDJ2XmGpf90EHbD5l3E7CNH6drq/VOD2W9GViEQw+/H/ql
-         M0d7J64CvixuD/Fkh7Qt6pyoIiIJea5KB7Aqo3yIgJQyQP5cg7MqY8XvRr10zQgVe2aL
-         EhkQ==
-X-Forwarded-Encrypted: i=1; AFNElJ9WAoN3u6kwX7C4FwD0Tg9ENmsuouT+VKI/ELj2llFsucY4pbUKcL6ubXjOg6En9CzE90fPiw5FFwM=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy20E11V8k4xghpie3TQT52zQwstzY/vGQQuWdLlgP6xwQXCr8O
-	3+bLLQviPluwAgzF8eQpBFUGcebKO7Rtqe6wfGaCjfrcPEvChi7Bqi4wLD8GbUbvFE0s/RYQExj
-	UmIbVp+cbcOAG5nsF0bUV9NXo41Ch6j6CkvPVHA5T
-X-Gm-Gg: Acq92OFmtC3vpwHE7uf+UhW6cCqbs4bs/A+WPIJTlUyL4xqZ7kthsVzKdevjhAkvpoQ
-	jY5979yiKPC+Prt84ylrKNaaoGLEAjQcpXKCpcQqQKhx63a/rYeJ7WcdF4YrXm7T8+6IN4BEyHb
-	DtkvyrymdiW+XA/kAjW8qkUHgYlOFGKeNi6ADfDmplnBWbrlu60saGgi2d3vaFIhQ8TfHSGmMdk
-	EIoG585cqN+bvGXuLOqjsk1s0gMRVo5aiNi97nBsU9Vq4VuKHawjWCUwF1ivsd1EiBp/NndAA2R
-	3gMLcycx8smPclor0eU=
-X-Received: by 2002:a05:622a:8c09:b0:50e:41f3:6467 with SMTP id
- d75a77b69052e-516c545d431mr6709461cf.12.1779357337839; Thu, 21 May 2026
- 02:55:37 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48F4C364049;
+	Thu, 21 May 2026 10:30:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.109
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1779359456; cv=none; b=erw95p1acqpL9OH6evyV6zMkvzzhiaAtPCLYIou6/tK96czGKiwcQqZ23q2k45x058HZv4rr8BzbJW13pWtRGTXFZ8JFkPlYFt5RbMFg7O2QXgS4s0X8wnWQOSC37UnEWdTi9KBbVStXJHGbCybr2aHhw5JbMK64ZIxKmJWeaOc=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1779359456; c=relaxed/simple;
+	bh=dzm0mLY5dZKhBPhW9uBd8kteFQQcYiW8aGD0uMrdxSM=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=iULNtHe2qv2kZ9vjN9ErZ9mvDgNIvZacv3YrusPwD6OVG+tTSfZOs406jToR7cYB6dllT8tCSL7x1EgfVE7GKnMbXAB72P6xPujqiSO6E55A/Oxmya16u7mBPkakcIABkiiOoN4UPlHMmvowb9a3vRium6GaRxLCh85ROHm7qIY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=KqPnBl6S; arc=none smtp.client-ip=220.197.31.109
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
+Received: from server001 (unknown [222.130.22.242])
+	by smtp.qiye.163.com (Hmail) with ESMTP id 3f4cebae0;
+	Thu, 21 May 2026 17:55:17 +0800 (GMT+08:00)
+From: Kefan Bai <baikefan@leap-io-kernel.com>
+To: linux-usb@vger.kernel.org,
+	si.yanteng@linux.dev
+Cc: gregkh@linuxfoundation.org,
+	seakeel@gmail.com,
+	alexs@kernel.org,
+	dzm91@hust.edu.cn,
+	corbet@lwn.net,
+	skhan@linuxfoundation.org,
+	linux-doc@vger.kernel.org,
+	doubled@leap-io-kernel.com
+Subject: [PATCH v7 0/8] Add Chinese translation for USB subsystem
+Date: Thu, 21 May 2026 17:55:05 +0800
+Message-ID: <cover.1779355170.git.baikefan@leap-io-kernel.com>
+X-Mailer: git-send-email 2.54.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260507-gmem-inplace-conversion-v6-0-91ab5a8b19a4@google.com> <20260507-gmem-inplace-conversion-v6-21-91ab5a8b19a4@google.com>
-In-Reply-To: <20260507-gmem-inplace-conversion-v6-21-91ab5a8b19a4@google.com>
-From: Fuad Tabba <tabba@google.com>
-Date: Thu, 21 May 2026 10:55:00 +0100
-X-Gm-Features: AVHnY4LC3YVKsMDpMvqn3oyglyq0u9QSInerrEQ0lx4kHSFYhrJCi8Ex_c6F6eo
-Message-ID: <CA+EHjTwrygfMrZZSw4y7-ry8fidW2x0C7iuF2Q=dnPNHUmNtUg@mail.gmail.com>
-Subject: Re: [PATCH v6 21/43] KVM: SEV: Make 'uaddr' parameter optional for KVM_SEV_SNP_LAUNCH_UPDATE
-To: ackerleytng@google.com
-Cc: aik@amd.com, andrew.jones@linux.dev, binbin.wu@linux.intel.com, 
-	brauner@kernel.org, chao.p.peng@linux.intel.com, david@kernel.org, 
-	ira.weiny@intel.com, jmattson@google.com, jthoughton@google.com, 
-	michael.roth@amd.com, oupton@kernel.org, pankaj.gupta@amd.com, 
-	qperret@google.com, rick.p.edgecombe@intel.com, rientjes@google.com, 
-	shivankg@amd.com, steven.price@arm.com, willy@infradead.org, 
-	wyihan@google.com, yan.y.zhao@intel.com, forkloop@google.com, 
-	pratyush@kernel.org, suzuki.poulose@arm.com, aneesh.kumar@kernel.org, 
-	liam@infradead.org, Paolo Bonzini <pbonzini@redhat.com>, 
-	Sean Christopherson <seanjc@google.com>, Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
-	Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
-	"H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
-	Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>, 
-	Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>, 
-	Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>, 
-	Nhat Pham <nphamcs@gmail.com>, Baoquan He <bhe@redhat.com>, Barry Song <baohua@kernel.org>, 
-	Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>, 
-	Wei Xu <weixugc@google.com>, Youngjun Park <youngjun.park@lge.com>, 
-	Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
-	Kiryl Shutsemau <kas@kernel.org>, Jason Gunthorpe <jgg@ziepe.ca>, Vlastimil Babka <vbabka@kernel.org>, kvm@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
-	linux-mm@kvack.org, linux-coco@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+Content-Transfer-Encoding: 8bit
+X-HM-Tid: 0a9e49f5fa7609d5kunm49815c9e65c61
+X-HM-MType: 1
+X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkaQ01KVksfS0NOT01CGEoZT1YVFA
+	kWGhdVEwETFhoSFyQUDg9ZV1kYEgtZQVlJSUlVSkhLVUlJVUlPSVlXWRYaDxIVHRRZQVlLVUtVS1
+	VLWQY+
+DKIM-Signature: a=rsa-sha256;
+	b=KqPnBl6SeHCc9inqIfiNvE2AHw2XZPa8JFYkxe8FfZeSKwYywHo71q4X48OCPum7Vum4+Hro5fVSdAVCYI5zwCfJKtJvks++v3Fh3osaaL/US5lEf+Q9swmombqI25VyXntk0zrBXshclI0mt79XoPJPs9ddkGSWi7UOudh/YVtLIlRGAeXw6IKdmValQwHaL7eJqr9IYcsIP3cPtMda5REykxPd372b1ejk3iNKCdjhtfBJPJ2rAcC9V8biDby/kOmfw0KVEt1iYEIW/qOwyWeAI0Ijp8mBZKCMLAtIjjSKOGMGsSWOqDWnkqup9vjaBNDhrczrClRGSv1wztCE7Q==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
+	bh=wByCfFzaA7xkgSYZtEWHakctpq3dyEFJEGV5/ZtVpDo=;
+	h=date:mime-version:subject:message-id:from;
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[leap-io-kernel.com,quarantine];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[leap-io-kernel.com:s=default];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-88767-lists,linux-doc=lfdr.de];
-	FREEMAIL_CC(0.00)[amd.com,linux.dev,linux.intel.com,kernel.org,intel.com,google.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca,vger.kernel.org,kvack.org,lists.linux.dev];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-88775-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[linuxfoundation.org,gmail.com,kernel.org,hust.edu.cn,lwn.net,vger.kernel.org,leap-io-kernel.com];
+	TO_DN_NONE(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[google.com:+];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tabba@google.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[baikefan@leap-io-kernel.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[64];
-	TAGGED_RCPT(0.00)[linux-doc];
+	PRECEDENCE_BULK(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[10];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,mail.gmail.com:mid,sashiko.dev:url,amd.com:email]
-X-Rspamd-Queue-Id: 521545A3547
+	DKIM_TRACE(0.00)[leap-io-kernel.com:+];
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	MIME_TRACE(0.00)[0:+];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,leap-io-kernel.com:mid,leap-io-kernel.com:dkim]
+X-Rspamd-Queue-Id: 7A5415A3685
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi,
+This patch set adds Chinese translations for the USB documentation.
 
-On Thu, 7 May 2026 at 21:22, Ackerley Tng via B4 Relay
-<devnull+ackerleytng.google.com@kernel.org> wrote:
->
-> From: Michael Roth <michael.roth@amd.com>
->
-> For vm_memory_attributes=1, in-place conversion/population is not
-> supported, so the initial contents necessarily must need to come
-> from a separate src address, which is enforced by the current
-> implementation. However, for vm_memory_attributes=0, it is possible for
-> guest memory to be initialized directly from userspace by mmap()'ing the
-> guest_memfd and writing to it while the corresponding GPA ranges are in
-> a 'shared' state before converting them to the 'private' state expected
-> by KVM_SEV_SNP_LAUNCH_UPDATE.
->
-> Update the handling/documentation for KVM_SEV_SNP_LAUNCH_UPDATE to allow
-> for 'uaddr' to be set to NULL when vm_memory_attributes=0, which
-> SNP_LAUNCH_UPDATE will then use to determine when it should/shouldn't
-> copy in data from a separate memory location. Continue to enforce
-> non-NULL for the original vm_memory_attributes=1 case.
->
-> Signed-off-by: Michael Roth <michael.roth@amd.com>
-> [Added src_page check in error handling path when the firmware command fails]
-> [Dropped ifdef CONFIG_KVM_VM_MEMORY_ATTRIBUTES]
-> Signed-off-by: Ackerley Tng <ackerleytng@google.com>
+This patch set adds Chinese translations for the USB documentation.
 
-I'm not very familiar with the SEV-SNP populate flows, but it looks
-like Sashiko is on to something:
-https://sashiko.dev/#/patchset/20260507-gmem-inplace-conversion-v6-0-91ab5a8b19a4%40google.com?part=21
+Many thanks to Alex Shi for the careful review and suggestions, and
+apologies for the delay in sending this updated version.
 
-- a potential read-only page overwrite, because src_page is acquired
-via get_user_pages_fast() without the FOLL_WRITE flag, but is then
-overwritten via memcpy
-- an ordering violation with the kunmap_local() calls
+Changes in v7:
+  - Applied the formatting cleanup suggested by Alex Shi across the
+    whole series.
+  - Reflowed the translated text for cleaner line alignment and
+    adjusted title/section adornments for consistency.
+  - No content changes beyond formatting cleanup.
 
-These predate this patch series and are just being touched by the
-'src_page' addition, but if Sashiko's right, these should probably be
-fixed sooner rather than later.
+Changes in v6:
+  - Rebased the series onto the latest docs-next branch in Jon's tree
+    (git://git.lwn.net/linux.git), as suggested by Alex Shi.
+  - Added the USB maintainers to the Cc list.
+  - Rechecked and polished the Chinese translations throughout the series.
+  - Link to v6: https://lore.kernel.org/linux-usb/cover.1778415392.git.baikefan@leap-io-kernel.com/
 
-Cheers,
-/fuad
+Changes in v5:
+  - Moved the index.rst entries for acm, authorization, chipidea, dwc3,
+    ehci, and usbmon into the corresponding patches so the series builds
+    cleanly when applied patch by patch.
+  - Removed extra spaces in chipidea.rst.
+  - Sent the series to linux-usb@vger.kernel.org for review by
+    Chinese-speaking developers, as suggested by Alex Shi and Yanteng Si.
+  - Link to v5: https://lore.kernel.org/linux-usb/cover.1765180570.git.baikefan@leap-io-kernel.com/
 
+Changes in v4:
+  - Shortened overlong title underline and overline markers.
+  - Removed the CREDITS entry from index.rst.
+  - Link to v4: https://lore.kernel.org/all/cover.1764674650.git.baikefan@leap-io-kernel.com/
 
+Changes in v3:
+  - Updated my sign-off to use my full legal name, as requested by
+    Jonathan Corbet.
+  - Reviewed and fixed the RST syntax issues noted by Alex Shi.
+  - Kept the number of translated files to eight to make submission and
+    review more manageable.
+  - Link to v3: https://lore.kernel.org/all/cover.1763984424.git.baikefan@leap-io-kernel.com/
 
-> ---
->  Documentation/virt/kvm/x86/amd-memory-encryption.rst | 15 +++++++++++----
->  arch/x86/kvm/svm/sev.c                               | 18 +++++++++++++-----
->  virt/kvm/kvm_main.c                                  |  1 +
->  3 files changed, 25 insertions(+), 9 deletions(-)
->
-> diff --git a/Documentation/virt/kvm/x86/amd-memory-encryption.rst b/Documentation/virt/kvm/x86/amd-memory-encryption.rst
-> index b2395dd4769de..43085f65b2d85 100644
-> --- a/Documentation/virt/kvm/x86/amd-memory-encryption.rst
-> +++ b/Documentation/virt/kvm/x86/amd-memory-encryption.rst
-> @@ -503,7 +503,8 @@ secrets.
->
->  It is required that the GPA ranges initialized by this command have had the
->  KVM_MEMORY_ATTRIBUTE_PRIVATE attribute set in advance. See the documentation
-> -for KVM_SET_MEMORY_ATTRIBUTES for more details on this aspect.
-> +for KVM_SET_MEMORY_ATTRIBUTES/KVM_SET_MEMORY_ATTRIBUTES2 for more details on
-> +this aspect.
->
->  Upon success, this command is not guaranteed to have processed the entire
->  range requested. Instead, the ``gfn_start``, ``uaddr``, and ``len`` fields of
-> @@ -511,9 +512,15 @@ range requested. Instead, the ``gfn_start``, ``uaddr``, and ``len`` fields of
->  remaining range that has yet to be processed. The caller should continue
->  calling this command until those fields indicate the entire range has been
->  processed, e.g. ``len`` is 0, ``gfn_start`` is equal to the last GFN in the
-> -range plus 1, and ``uaddr`` is the last byte of the userspace-provided source
-> -buffer address plus 1. In the case where ``type`` is KVM_SEV_SNP_PAGE_TYPE_ZERO,
-> -``uaddr`` will be ignored completely.
-> +range plus 1, and ``uaddr`` (if specified) is the last byte of the
-> +userspace-provided source buffer address plus 1.
-> +
-> +In the case where ``type`` is KVM_SEV_SNP_PAGE_TYPE_ZERO, ``uaddr`` will be
-> +ignored completely. Otherwise, ``uaddr`` is required if
-> +kvm.vm_memory_attributes=1 and optional if kvm.vm_memory_attributes=0, since
-> +in the latter case guest memory can be initialized directly from userspace
-> +prior to converting it to private and passing the GPA range on to this
-> +interface.
->
->  Parameters (in): struct  kvm_sev_snp_launch_update
->
-> diff --git a/arch/x86/kvm/svm/sev.c b/arch/x86/kvm/svm/sev.c
-> index c2126b3c30724..bf10d24907a00 100644
-> --- a/arch/x86/kvm/svm/sev.c
-> +++ b/arch/x86/kvm/svm/sev.c
-> @@ -2343,7 +2343,15 @@ static int sev_gmem_post_populate(struct kvm *kvm, gfn_t gfn, kvm_pfn_t pfn,
->         int level;
->         int ret;
->
-> -       if (WARN_ON_ONCE(sev_populate_args->type != KVM_SEV_SNP_PAGE_TYPE_ZERO && !src_page))
-> +       /*
-> +        * For vm_memory_attributes=1, in-place conversion/population is not
-> +        * supported, so the initial contents necessarily need to come from a
-> +        * separate src address. For vm_memory_attributes=0, this isn't
-> +        * necessarily the case, since the pages may have been populated
-> +        * directly from userspace before calling KVM_SEV_SNP_LAUNCH_UPDATE.
-> +        */
-> +       if (vm_memory_attributes &&
-> +           sev_populate_args->type != KVM_SEV_SNP_PAGE_TYPE_ZERO && !src_page)
->                 return -EINVAL;
->
->         ret = snp_lookup_rmpentry((u64)pfn, &assigned, &level);
-> @@ -2390,7 +2398,7 @@ static int sev_gmem_post_populate(struct kvm *kvm, gfn_t gfn, kvm_pfn_t pfn,
->          */
->         if (ret && !snp_page_reclaim(kvm, pfn) &&
->             sev_populate_args->type == KVM_SEV_SNP_PAGE_TYPE_CPUID &&
-> -           sev_populate_args->fw_error == SEV_RET_INVALID_PARAM) {
-> +           sev_populate_args->fw_error == SEV_RET_INVALID_PARAM && src_page) {
->                 void *src_vaddr = kmap_local_page(src_page);
->                 void *dst_vaddr = kmap_local_pfn(pfn);
->
-> @@ -2422,8 +2430,8 @@ static int snp_launch_update(struct kvm *kvm, struct kvm_sev_cmd *argp)
->         if (copy_from_user(&params, u64_to_user_ptr(argp->data), sizeof(params)))
->                 return -EFAULT;
->
-> -       pr_debug("%s: GFN start 0x%llx length 0x%llx type %d flags %d\n", __func__,
-> -                params.gfn_start, params.len, params.type, params.flags);
-> +       pr_debug("%s: GFN start 0x%llx length 0x%llx type %d flags %d src %llx\n", __func__,
-> +                params.gfn_start, params.len, params.type, params.flags, params.uaddr);
->
->         if (!params.len || !PAGE_ALIGNED(params.len) || params.flags ||
->             (params.type != KVM_SEV_SNP_PAGE_TYPE_NORMAL &&
-> @@ -2479,7 +2487,7 @@ static int snp_launch_update(struct kvm *kvm, struct kvm_sev_cmd *argp)
->
->         params.gfn_start += count;
->         params.len -= count * PAGE_SIZE;
-> -       if (params.type != KVM_SEV_SNP_PAGE_TYPE_ZERO)
-> +       if (src && params.type != KVM_SEV_SNP_PAGE_TYPE_ZERO)
->                 params.uaddr += count * PAGE_SIZE;
->
->         if (copy_to_user(u64_to_user_ptr(argp->data), &params, sizeof(params)))
-> diff --git a/virt/kvm/kvm_main.c b/virt/kvm/kvm_main.c
-> index ba195bb239aaa..3bf212fd99193 100644
-> --- a/virt/kvm/kvm_main.c
-> +++ b/virt/kvm/kvm_main.c
-> @@ -105,6 +105,7 @@ module_param(allow_unsafe_mappings, bool, 0444);
->  #ifdef CONFIG_KVM_VM_MEMORY_ATTRIBUTES
->  bool vm_memory_attributes = true;
->  module_param(vm_memory_attributes, bool, 0444);
-> +EXPORT_SYMBOL_FOR_KVM_INTERNAL(vm_memory_attributes);
->  #endif
->  DEFINE_STATIC_CALL_RET0(__kvm_get_memory_attributes, kvm_get_memory_attributes_t);
->  EXPORT_SYMBOL_FOR_KVM_INTERNAL(STATIC_CALL_KEY(__kvm_get_memory_attributes));
->
-> --
-> 2.54.0.563.g4f69b47b94-goog
->
->
+Changes in v2:
+  - Updated [PATCH 01/25] docs/zh_CN: Add index.rst translation to include
+    the corresponding changes to
+    Documentation/translations/zh_CN/subsystem-apis.rst.
+  - Link to v2: https://lore.kernel.org/all/cover.1763897036.git.baikefan@leap-io-kernel.com/
+
+v1:
+  - Link: https://lore.kernel.org/all/20251123074540.34161-1-baikefan@leap-io-kernel.com/
+
+Kefan Bai (8):
+  docs/zh_CN: Add index.rst translation
+  docs/zh_CN: Add acm.rst translation
+  docs/zh_CN: Add authorization.rst translation
+  docs/zh_CN: Add chipidea.rst translation
+  docs/zh_CN: Add dwc3.rst translation
+  docs/zh_CN: Add ehci.rst translation
+  docs/zh_CN: Add usbmon.rst translation
+  docs/zh_CN: Add CREDITS translation
+
+ .../translations/zh_CN/subsystem-apis.rst     |   2 +-
+ Documentation/translations/zh_CN/usb/CREDITS  | 163 +++++++
+ Documentation/translations/zh_CN/usb/acm.rst  | 147 ++++++
+ .../translations/zh_CN/usb/authorization.rst  | 139 ++++++
+ .../translations/zh_CN/usb/chipidea.rst       | 150 ++++++
+ Documentation/translations/zh_CN/usb/dwc3.rst |  63 +++
+ Documentation/translations/zh_CN/usb/ehci.rst | 261 +++++++++++
+ .../translations/zh_CN/usb/index.rst          |  54 +++
+ .../translations/zh_CN/usb/usbmon.rst         | 427 ++++++++++++++++++
+ 9 files changed, 1405 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/translations/zh_CN/usb/CREDITS
+ create mode 100644 Documentation/translations/zh_CN/usb/acm.rst
+ create mode 100644 Documentation/translations/zh_CN/usb/authorization.rst
+ create mode 100644 Documentation/translations/zh_CN/usb/chipidea.rst
+ create mode 100644 Documentation/translations/zh_CN/usb/dwc3.rst
+ create mode 100644 Documentation/translations/zh_CN/usb/ehci.rst
+ create mode 100644 Documentation/translations/zh_CN/usb/index.rst
+ create mode 100644 Documentation/translations/zh_CN/usb/usbmon.rst
+
+--
+2.54.0
+
 
