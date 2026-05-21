@@ -1,267 +1,152 @@
-Return-Path: <linux-doc+bounces-88754-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88757-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GMANKSa8DmrBBgYAu9opvQ
-	(envelope-from <linux-doc+bounces-88754-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 10:02:46 +0200
+	id oHTICRjBDmrXBwYAu9opvQ
+	(envelope-from <linux-doc+bounces-88757-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 10:23:52 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 730B05A0965
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 10:02:44 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 716FE5A0F83
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 10:23:50 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id ED24630BF869
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 07:57:48 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 3B65C3074024
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 08:15:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 80D6824A06A;
-	Thu, 21 May 2026 07:57:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="PkK3X4dc"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DBF631D7E41;
+	Thu, 21 May 2026 08:15:23 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com [209.85.160.169])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from frasgout12.his.huawei.com (frasgout12.his.huawei.com [14.137.139.154])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B78939E9CB
-	for <linux-doc@vger.kernel.org>; Thu, 21 May 2026 07:57:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.160.169
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779350265; cv=pass; b=ld4EhQcjw5Bxk2FB9CCKJ2aFx2cnjIMHJvzE4Iza8foG3+0Xd35fDfRoguHKHGjIoTddFDqVXWbFdIHoLLLvy0R3Ux9wdAcJEdKpJ0lHQpMF2UGvFc411DUqG/Nnr0eLdFKb7PHzz3JGqd5pUld7f5J5gQWIpHRDNpDNVy3qqIc=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779350265; c=relaxed/simple;
-	bh=4KcT8rdA6d07iJNq3wBXNazPyISKqsHOcKPYno1GuIA=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=QaD2QnmVqvHI7LJYtUO8NGoGOi6FktW7Ia2ZHHxh33vyHykHsZR0s7vjADTetC/8HsG0nM2/uzNocizSXbaSlKTanLnruYd1usolgCFiXL8P54r8dcAm3+nz65KnelHfxmywZqpuLZRLjYEv+kwrROdqzdgCOU2i/NRH5Uz1Jq0=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=PkK3X4dc; arc=pass smtp.client-ip=209.85.160.169
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-qt1-f169.google.com with SMTP id d75a77b69052e-515548f390fso791cf.0
-        for <linux-doc@vger.kernel.org>; Thu, 21 May 2026 00:57:42 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779350261; cv=none;
-        d=google.com; s=arc-20240605;
-        b=biNoT9I2c11qy4A49+hI04pwKag04ME6RjPd4s/DFFsggX3+gXdoP3IdKsyU3sqW3t
-         qBSu8lxPlPu0YnLfMK72/fND+NIbMwdKyHunibp3SH1d3f079tPZyPMQHjXrKkv2Lb+3
-         8CTll1iM7jx5wizrhxiGCtNTkkUDjQkNTMAKbAC+ytu+tvqlAHvfM7qWDtOWPOvsxGLM
-         bEDEwew53LwHZLQO6NmYm+4ya7ZTGqwTK0ujO26h5Xw2XCzJIIH7rxaMSkqQogUvgMWj
-         ge+JaNpg799U0YGqfkDrjxnimSMPxgnHUiOIE2q0HVnKf3sG8IZBBBusuWWINk+c5rg8
-         BYhg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=tSn2g3kUTBO9UyvrMevDMplllFpiZxqy7FxTUXL/Xlw=;
-        fh=Fr2gCeq6BcM+4wNCHYpRondWRKL3+Vp3hv8W+c2Gk18=;
-        b=PKzKar2NgEB1eCF1+55pIpk9EK62/U9T1qs++TX17C2dPxPUX8mHwq6TLd35y+6nmf
-         kRPWU++Axjp7xI4A8i1dfGdgOuVTmvRzgWy9UiFugDG5+ZQXz4y/ijOQg+7hd2IQ4PgX
-         4CGG5K3fcKlO1UwyhXE6Pw0hg3WcmtSryWADb8EkYuZ+WnyiVm9OEIvfz4o4Sn4YirZ3
-         HStXI3xzHD15bMIsWElh5AnIzjVyMM7/FdANzToOZszG/54GHjYRa39uiP1YTVRC3Pa0
-         GeBHh93s22xT6PyFv4Ertoy9+1XJc/YOPn3XOpTHbL8LRsLqpKesMYgCftjs9/bLwMc+
-         HSgw==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1779350261; x=1779955061; darn=vger.kernel.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=tSn2g3kUTBO9UyvrMevDMplllFpiZxqy7FxTUXL/Xlw=;
-        b=PkK3X4dcbhXxrjoJ1fcTfQCLtnoA6MwpGGLw/Nqy69HN+eFeKKnsX92ARB5CK7/YrG
-         DXfmjOlnO6qjQFt8qZ5I85bxhc9gbSWZUx+RKVeYhiN+IIakoeunnIow5DYBRSJzH9fY
-         EWEeu3gHxlH8+iQ3eU1Y16A1prp7cTfIfVAjjpEESLlYX02fqBvuN+Gi2EfEQPy+Liqx
-         xrAI64RCYUX8ZKse/1yUNRQ1NCZHtjtkDWnZCN0ZXeR8MQwI3fKs/Jefh8hQfSmvQvwf
-         QCZantvkGbwFbT4UqXcxyf3i05FWqvJezxEtDZ86TnXNGIPY5UR1qmgHsWC7T5pUHsGl
-         PTkQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779350261; x=1779955061;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=tSn2g3kUTBO9UyvrMevDMplllFpiZxqy7FxTUXL/Xlw=;
-        b=fLMtgsaTX601bPzUmUhtRStyGn9yJfFOGRNGTS3QnqNGvjGJt8XUb85fzJAEKnreWn
-         uQT4a+zcjKRMSoN8gECN+cAOJUnAqCuXacOuKmvkx8OHm6gWnqU63ZJuTpe2j2g+Q0wX
-         fFdXm4/zQAj+be+AXWy8WkpfH12dFu/abzGerT/m0yeu9/B54E442KG0mMtrKGZWezMz
-         8oX4sTk4PIIXjeeDleLEUHIx+sNBWESaRK4wW7H2M8dXB3Hr9UywXlljyGL44Wbo5ap3
-         Y2o3qNlpdkbIJh56l55g0PTU02Q3O3I3Oh2mANdQIXG9jJSw/7tJV9QqgzXhd/SiVcxI
-         TfTg==
-X-Forwarded-Encrypted: i=1; AFNElJ9QN+jmVb3p+d28GpRDVCZ0p9J1CRjVPKa9g9lNMfPG0SqoNNOxrDyUIMRbS8FOzKFsflvqcJpiI2g=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwRm+wCk2OCRVAMjPB0IebFdjNbSY2DP1t+nyC5FQi6GEKOvJqc
-	K0uV//uB8eG0JmThhF/GT/ROl7Qm5dNbqrjpPmp24n1fLjKZb/bJ/4/6tg2o21qoJrKu0xVFNhj
-	Mu6t1f59fVWcxQRUL4gQqMb/RxTgVdOK8ijNgs/Dd
-X-Gm-Gg: Acq92OGUDnc9PLyUugVN1ks/CI8yQfAPAh1JGUnSlcJbHIMb59luWNhsE0U9n59e27u
-	H3P3dUwUk4cgjutAufz65QtWwPQ4i958aakCi3UQo/80HZf7NIvMQlmBSbjo4NNt/vCV6GP1PG9
-	hLjG4mTgwJc1hfOzSkp8EnWc9xSYz9T7ZnqjBSGwf2NGvqwvhykLcb+yKK4oxfKhrZwQ1Nn38k+
-	Mt0mxR9HUVeteeMo82QcUi9Vq5pNoVG8CCBg6ajcBKQW58QnnOpAmDsvhtf8pNuXVfeWnhTUtXe
-	0dsXBKZpzVDXZ2Wo4ss5B8UcVlEt+Q==
-X-Received: by 2002:a05:622a:9005:b0:50f:af60:3496 with SMTP id
- d75a77b69052e-516c53118ecmr5321871cf.1.1779350260836; Thu, 21 May 2026
- 00:57:40 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 389ED2853E0;
+	Thu, 21 May 2026 08:15:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=14.137.139.154
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1779351323; cv=none; b=kV7NIoBbQb7/ainITT8MxzVm6SbB4bITSoEFcAJa+brPxzw+g2rlxUmuRTRZYxb1enAEhxTWSHYmnJiLwAL8dj0fr90uU1iECTXcVXOzUsh69mxtFsjoWKdEIR/Vrr68Tyujey04YPKey2q58Gy5iXgR02qjqLioZnr1rsKJEcc=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1779351323; c=relaxed/simple;
+	bh=EWQ0CX0ltnO0DbWI+6/zlhkgYo4oLRVUk3SuwSeNXoA=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=sA09THlYPXtNkhnA0YoUeRhsK0SIVJXdc4NahorpZ9Ea1vC8ixDuIwPeIOzs7AgaYvDmoWSvH5dfMv+oEMOX8up1XdPCpkep2yakFHgq0fjVItX0UDuwT20i5QywZMyhVZysstmo8UCgHcnxzWgir1vGt+s2c2WdyApdDVTcY1A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com; spf=pass smtp.mailfrom=huaweicloud.com; arc=none smtp.client-ip=14.137.139.154
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huaweicloud.com
+Received: from mail.maildlp.com (unknown [172.18.224.235])
+	by frasgout12.his.huawei.com (SkyGuard) with ESMTPS id 4gLgfL6JnQzwb6L;
+	Thu, 21 May 2026 15:54:18 +0800 (CST)
+Received: from mail02.huawei.com (unknown [7.182.16.47])
+	by mail.maildlp.com (Postfix) with ESMTP id 03FEC40573;
+	Thu, 21 May 2026 15:59:00 +0800 (CST)
+Received: from [10.204.63.22] (unknown [10.204.63.22])
+	by APP1 (Coremail) with SMTP id LxC2BwDHeKIyuw5qLFiOAQ--.43055S2;
+	Thu, 21 May 2026 08:58:51 +0100 (CET)
+Message-ID: <97d4e0989fb84ed85475920c3e00320a45c3afda.camel@huaweicloud.com>
+Subject: Re: [PATCH v5 04/13] ima: Introduce per binary measurements list
+ type binary_runtime_size value
+From: Roberto Sassu <roberto.sassu@huaweicloud.com>
+To: Mimi Zohar <zohar@linux.ibm.com>, corbet@lwn.net,
+ skhan@linuxfoundation.org,  dmitry.kasatkin@gmail.com,
+ eric.snowberg@oracle.com, paul@paul-moore.com,  jmorris@namei.org,
+ serge@hallyn.com
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-integrity@vger.kernel.org, linux-security-module@vger.kernel.org, 
+	gregorylumen@linux.microsoft.com, chenste@linux.microsoft.com, 
+	nramas@linux.microsoft.com, Roberto Sassu <roberto.sassu@huawei.com>
+Date: Thu, 21 May 2026 09:58:39 +0200
+In-Reply-To: <b7f97a0a3b79b72a014d12514febc338d1ecd038.camel@linux.ibm.com>
+References: <20260429160319.4162918-1-roberto.sassu@huaweicloud.com>
+	 <20260429160319.4162918-5-roberto.sassu@huaweicloud.com>
+	 <b7f97a0a3b79b72a014d12514febc338d1ecd038.camel@linux.ibm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.52.3-0ubuntu1 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260507-gmem-inplace-conversion-v6-0-91ab5a8b19a4@google.com> <20260507-gmem-inplace-conversion-v6-17-91ab5a8b19a4@google.com>
-In-Reply-To: <20260507-gmem-inplace-conversion-v6-17-91ab5a8b19a4@google.com>
-From: Fuad Tabba <tabba@google.com>
-Date: Thu, 21 May 2026 08:56:00 +0100
-X-Gm-Features: AVHnY4ISxUZam6iBDjV_4hOaNzbNB8xZ_iFXhRAdE4nHy2L3vqI7KoUo1cTBaB4
-Message-ID: <CA+EHjTyArkNd7cWC+OAkvkcPyM9=XUxzjg1fxFFV4GSP4wLALQ@mail.gmail.com>
-Subject: Re: [PATCH v6 17/43] KVM: guest_memfd: Determine invalidation filter
- from memory attributes
-To: ackerleytng@google.com
-Cc: aik@amd.com, andrew.jones@linux.dev, binbin.wu@linux.intel.com, 
-	brauner@kernel.org, chao.p.peng@linux.intel.com, david@kernel.org, 
-	ira.weiny@intel.com, jmattson@google.com, jthoughton@google.com, 
-	michael.roth@amd.com, oupton@kernel.org, pankaj.gupta@amd.com, 
-	qperret@google.com, rick.p.edgecombe@intel.com, rientjes@google.com, 
-	shivankg@amd.com, steven.price@arm.com, willy@infradead.org, 
-	wyihan@google.com, yan.y.zhao@intel.com, forkloop@google.com, 
-	pratyush@kernel.org, suzuki.poulose@arm.com, aneesh.kumar@kernel.org, 
-	liam@infradead.org, Paolo Bonzini <pbonzini@redhat.com>, 
-	Sean Christopherson <seanjc@google.com>, Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
-	Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
-	"H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
-	Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>, 
-	Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>, 
-	Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>, 
-	Nhat Pham <nphamcs@gmail.com>, Baoquan He <bhe@redhat.com>, Barry Song <baohua@kernel.org>, 
-	Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>, 
-	Wei Xu <weixugc@google.com>, Youngjun Park <youngjun.park@lge.com>, 
-	Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
-	Kiryl Shutsemau <kas@kernel.org>, Jason Gunthorpe <jgg@ziepe.ca>, Vlastimil Babka <vbabka@kernel.org>, kvm@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
-	linux-mm@kvack.org, linux-coco@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+X-CM-TRANSID:LxC2BwDHeKIyuw5qLFiOAQ--.43055S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7tFy7AryfJw1xXF1UXryUGFg_yoW8JFWkpF
+	WfZw1Fkr4kXa4xGrWDKa97WFWru34rJ34Dtr4DWF1kuFs5A34Fy3WUKF1rKFZ09r1kta4U
+	Zw40gr4fA3WYvaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUvjb4IE77IF4wAFF20E14v26ryj6rWUM7CY07I20VC2zVCF04k2
+	6cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4
+	vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7Cj
+	xVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVWUJVW8JwA2z4x0Y4vEx4A2jsIEc7CjxV
+	AFwI0_Gr0_Gr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40E
+	x7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x
+	0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkIwI1lc7CjxVAaw2AF
+	wI0_Jw0_GFyl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4
+	xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r4a6rW5
+	MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I
+	0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWU
+	JVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxUFk
+	u4UUUUU
+X-CM-SenderInfo: purev21wro2thvvxqx5xdzvxpfor3voofrz/1tbiAQAABGoNmbsKMgACs6
+X-Spamd-Result: default: False [0.04 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-88754-lists,linux-doc=lfdr.de];
-	FREEMAIL_CC(0.00)[amd.com,linux.dev,linux.intel.com,kernel.org,intel.com,google.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca,vger.kernel.org,kvack.org,lists.linux.dev];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_FROM(0.00)[bounces-88757-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[16];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	DMARC_NA(0.00)[huaweicloud.com];
+	FREEMAIL_TO(0.00)[linux.ibm.com,lwn.net,linuxfoundation.org,gmail.com,oracle.com,paul-moore.com,namei.org,hallyn.com];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[google.com:+];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tabba@google.com,linux-doc@vger.kernel.org];
-	PRECEDENCE_BULK(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[64];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[roberto.sassu@huaweicloud.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid]
-X-Rspamd-Queue-Id: 730B05A0965
+	MID_RHS_MATCH_FROM(0.00)[];
+	R_DKIM_NA(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[huawei.com:email,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,huaweicloud.com:mid]
+X-Rspamd-Queue-Id: 716FE5A0F83
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Thu, 7 May 2026 at 21:22, Ackerley Tng via B4 Relay
-<devnull+ackerleytng.google.com@kernel.org> wrote:
->
-> From: Ackerley Tng <ackerleytng@google.com>
->
-> Before conversion, the range filter doesn't really matter:
->
-> + For non-CoCo VMs that use guest_memfd, they have no mirrored tdp, so
->   KVM_DIRECT_ROOTS would have been invalidated anyway.
-> + CoCo VMs could not use INIT_SHARED, and there's no conversion support, so
->   always using KVM_FILTER_PRIVATE would have worked.
->
-> Now with conversion support, update kvm_gmem_get_invalidate_filter to
-> inspect the memory attributes maple tree for a given range.
->
-> Instead of determining the invalidation filter based on static inode
-> flags, iterate through the attributes maple tree for the specific range
-> being invalidated. This allows KVM to identify if the range contains
-> private pages, shared pages, or both, and set the filter bits
-> accordingly.
->
-> Update kvm_gmem_invalidate_begin and kvm_gmem_release to pass the range
-> parameters to the filter helper to ensure invalidation accurately
-> targets the memory types present in the affected range.
->
-> Signed-off-by: Ackerley Tng <ackerleytng@google.com>
+On Wed, 2026-05-20 at 22:06 -0400, Mimi Zohar wrote:
+> On Wed, 2026-04-29 at 18:03 +0200, Roberto Sassu wrote:
+> > From: Roberto Sassu <roberto.sassu@huawei.com>
+> >=20
+> > Make binary_runtime_size as an array, to have separate counters per bin=
+ary
+> > measurements list type. Currently, define the BINARY type for the exist=
+ing
+> > binary measurements list.
+> >=20
+> > Introduce ima_update_binary_runtime_size() to facilitate updating a
+> > binary_runtime_size value with a given binary measurement list type.
+> >=20
+> > Also add the binary measurements list type parameter to
+> > ima_get_binary_runtime_size(), to retrieve the desired value. Retrievin=
+g
+> > the value is now done under the ima_extend_list_mutex, since there can =
+be
+> > concurrent updates.
+> >=20
+> > No functional change (except for the mutex usage, that fixes the
+> > concurrency issue): the BINARY array element is equivalent to the old
+> > binary_runtime_size.
+>=20
+> The patch is really clear and well written, but I don't see a concurrency=
+ issue
+> requiring taking the ima_extend_list_mutex at least in this patch.
 
-Reviewed-by: Fuad Tabba <tabba@google.com>
+binary_runtime_size is not an atomic variable. It is updated under the
+ima_extend_list_mutex lock in ima_add_digest_entry(). The same lock
+must be taken on the reader side, ima_get_binary_runtime_size().
 
-Cheers,
-/fuad
-> ---
->  virt/kvm/guest_memfd.c | 27 ++++++++++++++++++++-------
->  1 file changed, 20 insertions(+), 7 deletions(-)
->
-> diff --git a/virt/kvm/guest_memfd.c b/virt/kvm/guest_memfd.c
-> index 9f6eebfb68f6b..c9f155c2dc5c5 100644
-> --- a/virt/kvm/guest_memfd.c
-> +++ b/virt/kvm/guest_memfd.c
-> @@ -193,12 +193,24 @@ static struct folio *kvm_gmem_get_folio(struct inode *inode, pgoff_t index)
->         return folio;
->  }
->
-> -static enum kvm_gfn_range_filter kvm_gmem_get_invalidate_filter(struct inode *inode)
-> +static enum kvm_gfn_range_filter kvm_gmem_get_invalidate_filter(
-> +               struct inode *inode, pgoff_t start, pgoff_t end)
->  {
-> -       if (GMEM_I(inode)->flags & GUEST_MEMFD_FLAG_INIT_SHARED)
-> -               return KVM_FILTER_SHARED;
-> +       struct gmem_inode *gi = GMEM_I(inode);
-> +       enum kvm_gfn_range_filter filter = 0;
-> +       void *entry;
-> +
-> +       lockdep_assert(mt_lock_is_held(&gi->attributes));
-> +
-> +       mt_for_each(&gi->attributes, entry, start, end - 1) {
-> +               filter |= (xa_to_value(entry) & KVM_MEMORY_ATTRIBUTE_PRIVATE) ?
-> +                         KVM_FILTER_PRIVATE : KVM_FILTER_SHARED;
-> +
-> +               if (filter == (KVM_FILTER_PRIVATE | KVM_FILTER_SHARED))
-> +                       break;
-> +       }
->
-> -       return KVM_FILTER_PRIVATE;
-> +       return filter;
->  }
->
->  static void __kvm_gmem_invalidate_begin(struct gmem_file *f, pgoff_t start,
-> @@ -244,7 +256,7 @@ static void kvm_gmem_invalidate_begin(struct inode *inode, pgoff_t start,
->         enum kvm_gfn_range_filter attr_filter;
->         struct gmem_file *f;
->
-> -       attr_filter = kvm_gmem_get_invalidate_filter(inode);
-> +       attr_filter = kvm_gmem_get_invalidate_filter(inode, start, end);
->
->         kvm_gmem_for_each_file(f, inode)
->                 __kvm_gmem_invalidate_begin(f, start, end, attr_filter);
-> @@ -367,6 +379,7 @@ static long kvm_gmem_fallocate(struct file *file, int mode, loff_t offset,
->  static int kvm_gmem_release(struct inode *inode, struct file *file)
->  {
->         struct gmem_file *f = file->private_data;
-> +       enum kvm_gfn_range_filter filter;
->         struct kvm_memory_slot *slot;
->         struct kvm *kvm = f->kvm;
->         unsigned long index;
-> @@ -398,8 +411,8 @@ static int kvm_gmem_release(struct inode *inode, struct file *file)
->          * memory, as its lifetime is associated with the inode, not the file.
->          */
->         end = i_size_read(inode) >> PAGE_SHIFT;
-> -       __kvm_gmem_invalidate_begin(f, 0, end,
-> -                                   kvm_gmem_get_invalidate_filter(inode));
-> +       filter = kvm_gmem_get_invalidate_filter(inode, 0, end);
-> +       __kvm_gmem_invalidate_begin(f, 0, end, filter);
->         __kvm_gmem_invalidate_end(f, 0, end);
->
->         list_del(&f->entry);
->
-> --
-> 2.54.0.563.g4f69b47b94-goog
->
->
+Roberto
+
 
