@@ -1,48 +1,50 @@
-Return-Path: <linux-doc+bounces-88719-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88720-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SMvAHOF6DmoW/AUAu9opvQ
-	(envelope-from <linux-doc+bounces-88719-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 05:24:17 +0200
+	id 8O54B+96DmoW/AUAu9opvQ
+	(envelope-from <linux-doc+bounces-88720-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 05:24:31 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E080659E5D6
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 05:24:16 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id B363B59E5ED
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 05:24:30 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id BEBD9302733C
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 03:24:15 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 82DEC302C020
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 03:24:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B025A37F742;
-	Thu, 21 May 2026 03:24:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 72EE838399E;
+	Thu, 21 May 2026 03:24:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="CL5Hzuhe"
+	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="BdVeZsKf"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-173.mta1.migadu.com (out-173.mta1.migadu.com [95.215.58.173])
+Received: from out-188.mta1.migadu.com (out-188.mta1.migadu.com [95.215.58.188])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E692335677C;
-	Thu, 21 May 2026 03:24:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.173
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2ED5383980
+	for <linux-doc@vger.kernel.org>; Thu, 21 May 2026 03:24:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.188
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779333853; cv=none; b=gQituTSaa9Rv+34g45DvoUshcoZGBmMyIzzpsT1+fiWUiG2cltxpsbcfqmK5W5Z79h+IJ213vJA7azY+iTvyXqrTqYwRd0LEgKKqUFHQcrI7NM5r+MPqop2rDZ32LWrsmdxTsHJP3leMjHvKugPrLvjCrt+4GkbXDIoE0lnRELU=
+	t=1779333857; cv=none; b=FSxmLvHExFTRY35fTTkWMS1xju69Brkz0vxgv/W8QgBtERN+63Rq97bRAIbLIDS9/1cf/vnriN4tpxt0YFGNs3TuRaEuwJRZKMOUlCST4cnuOotGNT02tceNLoHawCCgPepunGCvQGQU49xZ0RlUkQiRqPKFol/UkK3ZtnLZS0k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779333853; c=relaxed/simple;
-	bh=q4c8WXnB8lxHVxUfr2qVebsdsB0bkjj3uGw3W6FzsV4=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=kP6CjsCfkQbK2rcdUNgqlGXFpEpeCmXVjpIZ77TouDiMkPJFhOzfrGUMS55+XgPKSGiU5v4OpB0oyj/qmLxvikRnXAIiIbL4rhFvbXXPF6e3lBDntIvi0p+rr2uTYxEB/ZFhvulU+U0i3E/4mOMh34AIST9gIPHCooDGUE6sm/U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=CL5Hzuhe; arc=none smtp.client-ip=95.215.58.173
+	s=arc-20240116; t=1779333857; c=relaxed/simple;
+	bh=rD6BPyHAy18d6Lnl6no3lJqWl9uAgSBgPoYSBUNiw2A=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=EMmZI9Ce/P4XuU6ggbYmOH2Rql70TL7TMCJN+KMybX+ZuH9YIXBOgJUPhUi911oQLVUvp8kblYGjdXOvKf/Jpvv4V7yiaqo7XfQesuo/FlsiQ6C6KfT8RevjhpUJQbQMCpD9304DJug06OOrV9gVAKFNSSBcIBKtUPcb3HQ6zmE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=BdVeZsKf; arc=none smtp.client-ip=95.215.58.188
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1779333848;
+	t=1779333854;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=KA35Xk2FG3OvOEapaqyj7NKCdRj4dTxzL2++7MtOpnI=;
-	b=CL5HzuhegMJtpkL/u51K7oeHg/sHn9M+nEMbNPv9xUGr7MxcgDHS0rnZbXuKxCVWqhSB8A
-	QyCYyWFlhiGrKtspbHky047D4ObKIN+YbzofSKuq/4ckerlOIixt9jXuLokSSB0bDbTpVG
-	6cezUimBL0mBul7zKbcsANXs7rtJLuc=
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=DKCQHFdvmeJokAPjmIjM8nkmZr0xlAyybv33vgc3Gkw=;
+	b=BdVeZsKfwPZZohrjsudY78FjsIRo1yER5lwS2PM5SQjkL/xWS2rVFKrQIPQCznKKjIw9CH
+	30MMMn2BCz2zrc7G6r/Ox06wCX+XroCbFhoIRNMPkgl70JTjSLeQ4cRhK6b7FO135W3SH/
+	TACfHhFU7TQ+9FYK7fenazpCgRhZhNU=
 From: Kaitao Cheng <kaitao.cheng@linux.dev>
 To: ast@kernel.org,
 	corbet@lwn.net,
@@ -65,11 +67,12 @@ Cc: bpf@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	linux-doc@vger.kernel.org,
 	vmalik@redhat.com,
-	linux-kselftest@vger.kernel.org,
-	Kaitao Cheng <kaitao.cheng@linux.dev>
-Subject: [PATCH bpf-next v11 0/8] bpf: Extend the bpf_list family of APIs
-Date: Thu, 21 May 2026 11:22:58 +0800
-Message-ID: <20260521032306.97118-1-kaitao.cheng@linux.dev>
+	linux-kselftest@vger.kernel.org
+Subject: [PATCH bpf-next v11 1/8] bpf: refactor __bpf_list_del to take list node pointer
+Date: Thu, 21 May 2026 11:22:59 +0800
+Message-ID: <20260521032306.97118-2-kaitao.cheng@linux.dev>
+In-Reply-To: <20260521032306.97118-1-kaitao.cheng@linux.dev>
+References: <20260521032306.97118-1-kaitao.cheng@linux.dev>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -82,148 +85,107 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-88719-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
 	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-88720-lists,linux-doc=lfdr.de];
 	FREEMAIL_TO(0.00)[kernel.org,lwn.net,linux.dev,iogearbox.net,gmail.com,fomichev.me,google.com,kylinos.cn,linuxfoundation.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[kaitao.cheng@linux.dev,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[linux.dev:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	TO_DN_NONE(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:mid,linux.dev:dkim,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: E080659E5D6
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,kylinos.cn:email,linux.dev:mid,linux.dev:dkim]
+X-Rspamd-Queue-Id: B363B59E5ED
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-In BPF, a list can only be used to implement a stack structure.
-Due to an incomplete API set, only FIFO or LIFO operations are
-supported. The patches enhance the BPF list API, making it more
-list-like.
+From: Kaitao Cheng <chengkaitao@kylinos.cn>
 
-Five new kfuncs have been added:
-bpf_list_del: remove a node from the list
-bpf_list_add_impl: insert a node after a given list node
-bpf_list_is_first: check if a node is the first in the list
-bpf_list_is_last: check if a node is the last in the list
-bpf_list_empty: check if the list is empty
+Refactor __bpf_list_del to accept (head, struct list_head *n) instead of
+(head, bool tail). The caller now passes the specific node to remove:
+bpf_list_pop_front passes h->next, bpf_list_pop_back passes h->prev.
 
-And add test cases for the aforementioned kfuncs.
+Prepares for introducing bpf_list_del(head, node) kfunc to remove an
+arbitrary node when the user holds ownership.
 
-Changes in v11:
-- Move [PATCH v10 7/8] earlier (Eduard Zingerman)
-- Fix the synchronization issue in [PATCH v10 2/8] (Eduard Zingerman,
-  Alexei Starovoitov)
+Signed-off-by: Kaitao Cheng <chengkaitao@kylinos.cn>
+Reviewed-by: Eduard Zingerman <eddyz87@gmail.com>
+---
+ kernel/bpf/helpers.c | 23 +++++++++++++++--------
+ 1 file changed, 15 insertions(+), 8 deletions(-)
 
-Changes in v10:
-- Remove the table-driven approach (Ihor Solodrai)
-- Use the __nonown_allowed suffix for bpf_list_del/front/back
-- Add test cases for __nonown_allowed
-
-Changes in v9:
-- Expand table-driven approach coverage (Emil Tsalapatis)
-- Clear list node owner and unlink before drop (Emil Tsalapatis)
-- Remove warnings caused by WARN_ON_ONCE() (Emil Tsalapatis)
-- Introduce the __nonown_allowed suffix (Alexei Starovoitov)
-
-Changes in v8:
-- Use [patch v7 5/5] as the start of the patch series (Leon Hwang)
-- Introduce double pointer prev_ptr in __bpf_list_del
-  (Kumar Kartikeya Dwivedi)
-- Extract refactored __bpf_list_del/add into separate patches (Leon Hwang)
-- Allow bpf_list_front/back result as the prev argument of bpf_list_add
-- Split test cases (Leon Hwang)
-
-Changes in v7:
-- Replace bpf_list_node_is_edge with bpf_list_is_first/is_last
-- Reimplement __bpf_list_del and __bpf_list_add (Kumar Kartikeya Dwivedi)
-- Simplify test cases (Mykyta Yatsenko)
-
-Changes in v6:
-- Merge [patch v5 (2,4,6)/6] into [patch v6 4/5] (Leon Hwang)
-- If list_head was 0-initialized, init it
-- refactor kfunc checks to table-driven approach (Leon Hwang)
-
-Changes in v5:
-- Fix bpf_obj leak on bpf_list_add_impl error
-
-Changes in v4:
-- [patch v3 1/6] Revert to version v1 (Alexei Starovoitov)
-- Change the parameters of bpf_list_add_impl to (head, new, prev, ...)
-
-Changes in v3:
-- Add a new lock_rec member to struct bpf_reference_state for lock
-  holding detection.
-- Add test cases to verify that the verifier correctly restricts calls
-  to bpf_list_del when the spin_lock is not held.
-
-Changes in v2:
-- Remove the head parameter from bpf_list_del (Alexei Starovoitov)
-- Add bpf_list_add/is_first/is_last/empty to API and test cases
-  (Alexei Starovoitov)
-
-Link to v10:
-https://lore.kernel.org/all/20260512055919.95716-1-kaitao.cheng@linux.dev/
-
-Link to v9:
-https://lore.kernel.org/all/20260329140506.9595-1-pilgrimtao@gmail.com/
-
-Link to v8:
-https://lore.kernel.org/all/20260316112843.78657-1-pilgrimtao@gmail.com/
-
-Link to v7:
-https://lore.kernel.org/all/20260308134614.29711-1-pilgrimtao@gmail.com/
-
-Link to v6:
-https://lore.kernel.org/all/20260304143459.78059-1-pilgrimtao@gmail.com/
-
-Link to v5:
-https://lore.kernel.org/all/20260304031606.43884-1-pilgrimtao@gmail.com/
-
-Link to v4:
-https://lore.kernel.org/all/20260303135219.33726-1-pilgrimtao@gmail.com/
-
-Link to v3:
-https://lore.kernel.org/all/20260302124028.82420-1-pilgrimtao@gmail.com/
-
-Link to v2:
-https://lore.kernel.org/all/20260225092651.94689-1-pilgrimtao@gmail.com/
-
-Link to v1:
-https://lore.kernel.org/all/20260209025250.55750-1-pilgrimtao@gmail.com/
-
-Kaitao Cheng (8):
-  bpf: refactor __bpf_list_del to take list node pointer
-  bpf: clear list node owner and unlink before drop
-  bpf: allow non-owning list-node args via __nonown_allowed
-  bpf: Introduce the bpf_list_del kfunc.
-  bpf: refactor __bpf_list_add to take insertion point via **prev_ptr
-  bpf: Add bpf_list_add to insert node after a given list node
-  bpf: add bpf_list_is_first/last/empty kfuncs
-  selftests/bpf: Add test cases for
-    bpf_list_del/add/is_first/is_last/empty
-
- Documentation/bpf/kfuncs.rst                  |  22 +-
- kernel/bpf/helpers.c                          | 147 ++++--
- kernel/bpf/verifier.c                         |  44 +-
- .../selftests/bpf/progs/refcounted_kptr.c     | 421 ++++++++++++++++++
- 4 files changed, 601 insertions(+), 33 deletions(-)
-
+diff --git a/kernel/bpf/helpers.c b/kernel/bpf/helpers.c
+index 07de26e7314c..094457c3e6d3 100644
+--- a/kernel/bpf/helpers.c
++++ b/kernel/bpf/helpers.c
+@@ -2550,37 +2550,44 @@ __bpf_kfunc int bpf_list_push_back_impl(struct bpf_list_head *head,
+ 	return bpf_list_push_back(head, node, meta__ign, off);
+ }
+ 
+-static struct bpf_list_node *__bpf_list_del(struct bpf_list_head *head, bool tail)
++static struct bpf_list_node *__bpf_list_del(struct bpf_list_head *head,
++					    struct list_head *n)
+ {
+-	struct list_head *n, *h = (void *)head;
++	struct list_head *h = (void *)head;
+ 	struct bpf_list_node_kern *node;
+ 
+ 	/* If list_head was 0-initialized by map, bpf_obj_init_field wasn't
+ 	 * called on its fields, so init here
+ 	 */
+-	if (unlikely(!h->next))
++	if (unlikely(!h->next)) {
+ 		INIT_LIST_HEAD(h);
++		return NULL;
++	}
+ 	if (list_empty(h))
+ 		return NULL;
+ 
+-	n = tail ? h->prev : h->next;
+ 	node = container_of(n, struct bpf_list_node_kern, list_head);
+-	if (WARN_ON_ONCE(READ_ONCE(node->owner) != head))
++	if (unlikely(READ_ONCE(node->owner) != head))
+ 		return NULL;
+ 
+ 	list_del_init(n);
+-	WRITE_ONCE(node->owner, NULL);
++	/* Ensure __bpf_list_add() sees the node as unlinked. */
++	smp_store_release(&node->owner, NULL);
+ 	return (struct bpf_list_node *)n;
+ }
+ 
+ __bpf_kfunc struct bpf_list_node *bpf_list_pop_front(struct bpf_list_head *head)
+ {
+-	return __bpf_list_del(head, false);
++	struct list_head *h = (void *)head;
++
++	return __bpf_list_del(head, h->next);
+ }
+ 
+ __bpf_kfunc struct bpf_list_node *bpf_list_pop_back(struct bpf_list_head *head)
+ {
+-	return __bpf_list_del(head, true);
++	struct list_head *h = (void *)head;
++
++	return __bpf_list_del(head, h->prev);
+ }
+ 
+ __bpf_kfunc struct bpf_list_node *bpf_list_front(struct bpf_list_head *head)
 -- 
 2.50.1 (Apple Git-155)
 
