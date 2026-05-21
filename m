@@ -1,160 +1,246 @@
-Return-Path: <linux-doc+bounces-88774-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88778-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id ABO+BmDbDmrmCgYAu9opvQ
-	(envelope-from <linux-doc+bounces-88774-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 12:16:00 +0200
+	id wC/6JGfqDmqwDAYAu9opvQ
+	(envelope-from <linux-doc+bounces-88778-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 13:20:07 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 765B95A315F
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 12:15:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B9F075A3E4B
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 13:20:06 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id C5CDB307873F
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 10:14:53 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id A374C3014429
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2026 11:20:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BDAF138E121;
-	Thu, 21 May 2026 10:14:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B2AE23A6B8E;
+	Thu, 21 May 2026 11:20:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="Ub3DXMYL"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oa1-f53.google.com (mail-oa1-f53.google.com [209.85.160.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2AD08390C90
-	for <linux-doc@vger.kernel.org>; Thu, 21 May 2026 10:14:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.53
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4F5FB3B9D80;
+	Thu, 21 May 2026 11:19:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779358490; cv=none; b=Igc+jsuDc8WBgYuqwAF2iy9Y0HgqYZjkJF2uVacE0a/dBLy4rlZ1DYx/TINYtKu0LZjvUXKACTuKYjzClq7o/9GJIWqXBjU7oQz6vgxTZYJGq+J0O8DwR4Pt7Wz899ND3WS9O7QZWp2PhY/kbMr+CS/fMa+yinR/1GH13suYzF8=
+	t=1779362402; cv=none; b=CYrVd+Sr0ACR7iU0jZvRSYAGaI7N99IlR2zWrMnZq3Pw4n74zJPV7NQMatFNVLCnKXtTvWDc3sfbILeXELT8x7S4mjmjlNKCLyWoRTYce8ug4ssIYpB6pwe4Ih7h2dND/PnyjkxeTu0C87Wtn/Noxs/vMe03Cqo6INF5RZCL1Fw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779358490; c=relaxed/simple;
-	bh=qQMwPn7/lfIvsYleutoUSdCGdr5YbpqsWWM385H7f00=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=fLPou+x/D8cVtYeCv1p29SWi+nV1OsfyyQEm0cng1VmFjev4G9MtwZ3yvefE+kKtsBUSlSYsZkpj+K4OiCg6DG/1HG9JbXwh2O/luEWoO6ymNJST0BEIv5PTrDK20R0m9TAl7GfP/zXBqk1gXo0WJ1ycwowXUte6GQ4ycfeU/aA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gompa.dev; spf=pass smtp.mailfrom=gmail.com; arc=none smtp.client-ip=209.85.160.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gompa.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-oa1-f53.google.com with SMTP id 586e51a60fabf-43a2ad7bcc4so2668602fac.1
-        for <linux-doc@vger.kernel.org>; Thu, 21 May 2026 03:14:48 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779358487; x=1779963287;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=sd7k3LYNnD6K4NFyQw1AVAVbnXODVWOuybVQwPcxYzs=;
-        b=rZggrb+e9/UALYq8wQ+TjQB/Uutq2QpZEMDi5wbTBG4lGVbp/ovTrMyCxPfomTAKQ9
-         fR7LIcLx4khM3m1q2xj61ZTWaaHRzgnfJzH6eBuK1cE6UXcjTF40qqPBgt0gxFsl9Hog
-         Izvw/scNH9zZn9V8AJklTbmVDLHRxug/x0zI8EulSgHDPUSi/kBl26Fw+KgulK0F9txo
-         5EoM7gKXD/W8SQrVU4gIQIq8iDMp65BUT/qSiWjkM++7QotUHUIADNftEIxFMymo2o/z
-         sIyZEjSoTAedeLZR1xmXrYXEw3kVKk2YCrq1l4HBrfP6ToVcM7mRPQKzRIThjdKlHBf2
-         z1xQ==
-X-Forwarded-Encrypted: i=1; AFNElJ+6lWNV91UiyjfD7xYY+zwa0pfKWKiUqSSpDNkzyMjwhqGIAdpNWg4132wA3ZWmAEWBfVPwEtOQ7ZA=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyuM/ihW8PVJhb55suLnTeveDmgbnEh1WmYE0qG/7kD1LZDAl1A
-	5GTqvMgxF3PeRXczCOFkCPS8UJuiT2FeESUBJgUFlUr3dvS9rrslPjCkkBpuI9KU
-X-Gm-Gg: Acq92OHThZKBxpu/N5m9E9fPWTV5tmT2QqPjQrfYiNeIBOB/nZiXZAkz1pOPUWlO+EL
-	lwg41Agxw13hWfQmabxtyHcbWFNhd7tmIkX4ohz/AFUyWX3mxKEdalkKUffE3LSIjqHQb9+6uQt
-	/y3YMnyYmgpemlZhyscHVHyWfCnD+0JNkQ0aJcc0qGMHEcauy34aLMQXjZjvFgYz8mOuLAFUYn/
-	HhmHfKV3RmOk1Am6agZ5u6IRfrbGpXRKy8vzm8jBdbHZJhBLhqGj5pVNUvKWgXWPeNY4djouMd6
-	RRnkmq676Z6l1PThh89KXkDDah1jEL+ZhaU+jCCG+xK92iwhN139h6MMSimZpt4pmhoVwzkb9n9
-	bqWzQ2c0854sG6SvNL/4PBPbfO0m897+smg8ya2FBYj1oArzZrvBFYPlnGgeEcRe6Ro09cxVFXg
-	ghCxDlD2QgXiU08HPDrHYqpYzFKu7tZ98Hs5FVwianuid+TycHtSCkoEgxj4k9abJbrDFuu9bXe
-	qCluAo8aI+FWlDuVo6rsbpy9Aln7UQoKm5seb0wqvhXcOoduzvFdSowepIEAeHSqQx/UCOv9Q==
-X-Received: by 2002:a05:6870:21e1:b0:439:7835:136c with SMTP id 586e51a60fabf-43b2ea90582mr1269619fac.23.1779358487510;
-        Thu, 21 May 2026 03:14:47 -0700 (PDT)
-Received: from mail-ot1-f42.google.com (mail-ot1-f42.google.com. [209.85.210.42])
-        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-43b44935225sm294314fac.5.2026.05.21.03.14.46
-        for <linux-doc@vger.kernel.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 21 May 2026 03:14:46 -0700 (PDT)
-Received: by mail-ot1-f42.google.com with SMTP id 46e09a7af769-7e4de538f83so3461649a34.1
-        for <linux-doc@vger.kernel.org>; Thu, 21 May 2026 03:14:46 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AFNElJ+xHSLo0MAygb33rKbi0Gfei7siGkS8ayAwXvpDv75VnBQY2deUXMy46bCAfBkChC3CDUvl9cJMzkk=@vger.kernel.org
-X-Received: by 2002:a05:6830:3141:b0:7dc:dd91:b5b1 with SMTP id
- 46e09a7af769-7e5ec03344cmr1089299a34.5.1779358486210; Thu, 21 May 2026
- 03:14:46 -0700 (PDT)
+	s=arc-20240116; t=1779362402; c=relaxed/simple;
+	bh=cwzzxnOYQD32jsPaPOvx8u4LjDvQ6YeghLlaggpSiF4=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Rixbw0qpAoqJ+brY1Mj4IMVmYtVu0M1hpAM89l7GdTHCoZivYXXISgu0/zeWQJDR5Z8WBCoXI7xbnF2fxNjGqEhodEohvhLaH6pdkXsd5NVL7l0jtwX5tWdOtATTkpUaxOFoT47Sk500cjoyefjOzS0vT3zLwQO4piWKLwaacts=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=Ub3DXMYL; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CB12F35FA;
+	Thu, 21 May 2026 04:19:52 -0700 (PDT)
+Received: from a081061.blr.arm.com (a081061.arm.com [10.164.19.82])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 75E0F3F7B4;
+	Thu, 21 May 2026 04:19:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1779362397; bh=cwzzxnOYQD32jsPaPOvx8u4LjDvQ6YeghLlaggpSiF4=;
+	h=From:To:Cc:Subject:Date:From;
+	b=Ub3DXMYLTy8J3/jUc8yEx/8U0b7ywRBwVRYajMBy9Q8jF6C9QrlYgiWfxkNhw+mJf
+	 56iJZw9CYBOsm2sTdnNyf6HFr60S+OSnzNb91btBTuP9h3SE4IgqMonsAqtKwZJk+7
+	 CC3L8Lwc6eq4OZtxt1KS2yYGn8VV5Ml4rvUCOQJE=
+From: Sarthak Sharma <sarthak.sharma@arm.com>
+To: Andrew Morton <akpm@linux-foundation.org>,
+	David Hildenbrand <david@kernel.org>
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	Lorenzo Stoakes <ljs@kernel.org>,
+	"Liam R . Howlett" <Liam.Howlett@oracle.com>,
+	Vlastimil Babka <vbabka@kernel.org>,
+	Mike Rapoport <rppt@kernel.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Michal Hocko <mhocko@suse.com>,
+	Shuah Khan <shuah@kernel.org>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Jason Gunthorpe <jgg@ziepe.ca>,
+	John Hubbard <jhubbard@nvidia.com>,
+	Peter Xu <peterx@redhat.com>,
+	Leon Romanovsky <leon@kernel.org>,
+	Zi Yan <ziy@nvidia.com>,
+	Baolin Wang <baolin.wang@linux.alibaba.com>,
+	Nico Pache <npache@redhat.com>,
+	Ryan Roberts <ryan.roberts@arm.com>,
+	Dev Jain <dev.jain@arm.com>,
+	Barry Song <baohua@kernel.org>,
+	Lance Yang <lance.yang@linux.dev>,
+	Mark Brown <broonie@kernel.org>,
+	linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org,
+	linux-kselftest@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	Sarthak Sharma <sarthak.sharma@arm.com>
+Subject: [PATCH v3 0/4] selftests/mm: separate GUP microbenchmarking from functional testing
+Date: Thu, 21 May 2026 16:47:57 +0530
+Message-ID: <20260521111801.173019-1-sarthak.sharma@arm.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260521-evolve-to-crab-v2-1-c18e0e98fc54@chaosmail.tech>
-In-Reply-To: <20260521-evolve-to-crab-v2-1-c18e0e98fc54@chaosmail.tech>
-From: Neal Gompa <neal@gompa.dev>
-Date: Thu, 21 May 2026 06:14:09 -0400
-X-Gmail-Original-Message-ID: <CAEg-Je96T9hQ7GrwWo5pzfesBdumEhmNtnnpFM+7jdKDPe+RZQ@mail.gmail.com>
-X-Gm-Features: AVHnY4Ku0c_K-_Ko4PGfdu84e-M2GHJhf2RMMyNarSTSj4XW-x2EBje0JdkBkmc
-Message-ID: <CAEg-Je96T9hQ7GrwWo5pzfesBdumEhmNtnnpFM+7jdKDPe+RZQ@mail.gmail.com>
-Subject: Re: [PATCH v2] Fail the build on RUST=y and RUST_IS_AVAILABLE=n
-To: Sasha Finkelstein <k@chaosmail.tech>
-Cc: Alice Ryhl <aliceryhl@google.com>, Andreas Hindborg <a.hindborg@kernel.org>, 
-	Benno Lossin <lossin@kernel.org>, =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
-	Boqun Feng <boqun@kernel.org>, Danilo Krummrich <dakr@kernel.org>, Gary Guo <gary@garyguo.net>, 
-	Jonathan Corbet <corbet@lwn.net>, Miguel Ojeda <ojeda@kernel.org>, 
-	Shuah Khan <skhan@linuxfoundation.org>, Trevor Gross <tmgross@umich.edu>, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spamd-Result: default: False [-1.46 / 15.00];
+Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
+	R_MISSING_CHARSET(0.50)[];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[google.com,kernel.org,protonmail.com,garyguo.net,lwn.net,linuxfoundation.org,umich.edu,vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	TAGGED_FROM(0.00)[bounces-88774-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	DMARC_NA(0.00)[gompa.dev];
+	TAGGED_FROM(0.00)[bounces-88778-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
+	RCPT_COUNT_TWELVE(0.00)[28];
+	FROM_NEQ_ENVFROM(0.00)[sarthak.sharma@arm.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[neal@gompa.dev,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	R_DKIM_NA(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_TRACE(0.00)[arm.com:+];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,mail.gmail.com:mid,msgid.link:url,gompa.dev:email]
-X-Rspamd-Queue-Id: 765B95A315F
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,arm.com:mid,arm.com:dkim]
+X-Rspamd-Queue-Id: B9F075A3E4B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Thu, May 21, 2026 at 4:32=E2=80=AFAM Sasha Finkelstein <k@chaosmail.tech=
-> wrote:
->
-> The current approach of silently disabling all rust drivers if the
-> toolchain is missing results in users that try to compile their own
-> kernels getting a "successful" build and then being confused about where
-> did their drivers go. In comparison, missing openssl results in a build
-> failure, not a disappearance of everything that depends on it.
->
-> This also means that allyesconfig will depend on rust, but since the
-> rust experiment concluded with "rust is here to stay", i believe that
-> allyesconfig should be building rust drivers too.
->
-> Signed-off-by: Sasha Finkelstein <k@chaosmail.tech>
-> ---
-> Changes in v2:
-> - No longer a RFC, let's make it happen.
-> - Update the docs.
-> - Link to v1: https://patch.msgid.link/20260510-evolve-to-crab-v1-1-208df=
-84e67be@chaosmail.tech
-> ---
->  Documentation/rust/quick-start.rst | 6 +++---
->  init/Kconfig                       | 1 -
->  2 files changed, 3 insertions(+), 4 deletions(-)
->
+gup_test.c currently serves two distinct purposes: microbenchmarking
+(GUP_FAST_BENCHMARK, PIN_FAST_BENCHMARK, PIN_LONGTERM_BENCHMARK) and
+functional correctness testing (GUP_BASIC_TEST, PIN_BASIC_TEST,
+DUMP_USER_PAGES_TEST). Mixing these in a single binary means functional
+tests cannot be run or reported individually and run_vmtests.sh must
+invoke the binary multiple times with different flag combinations to
+cover all configurations.
 
-At this point, yes, we should just go ahead and do this.
+This patch series separates the two concerns: tools/mm/gup_bench for
+benchmarking and tools/testing/selftests/mm/gup_test for functional
+testing. To avoid duplicating HugeTLB and related file helpers, the
+series first moves the common helper code to tools/lib/mm/ so it can be
+shared by both selftests and tools/mm.
 
-Reviewed-by: Neal Gompa <neal@gompa.dev>
+Patch 1 adds tools/lib/mm/file_utils.[ch], moving read_file(),
+write_file(), read_num() and write_num() out of vm_util.c into a shared
+helper without a kselftest dependency. It also adds tools/lib/mm/ to the
+MEMORY MANAGEMENT - MISC entry in MAINTAINERS.
+
+Patch 2 moves hugepage_settings.[ch] from selftests/mm to tools/lib/mm/,
+updates the selftests/mm users to include it from there and removes the
+remaining kselftest dependency from the implementation while dropping
+non-fatal hugetlb informational prints from the shared helper.
+
+Patch 3 adds tools/mm/gup_bench.c, a standalone microbenchmark for
+GUP_FAST, PIN_FAST and PIN_LONGTERM via the CONFIG_GUP_TEST debugfs
+interface. It runs the same matrix of configurations as the old
+run_gup_matrix() shell function (all three commands, read/write,
+private/shared, four page counts, THP on/off, hugetlb), but as a
+standalone C program under tools/mm using the shared tools/lib/mm
+helpers.
+
+Patch 4 rewrites gup_test.c as a kselftest harness-based selftest. It
+covers all five GUP kernel functions (get_user_pages, get_user_pages_fast,
+pin_user_pages, pin_user_pages_fast, pin_user_pages with FOLL_LONGTERM)
+plus DUMP_USER_PAGES_TEST, across 12 mapping configurations (THP on,
+THP off and hugetlb, each across private/shared and read/write variants)
+and four batch sizes (1, 512, 123, all pages). It also preserves the old
+sparse dump coverage for pages 0, 19 and 0x1000. Results are reported as
+standard TAP output with no command-line arguments required.
+
+---
+These patches apply on top of mm/mm-new.
+
+Changes in v3:
+- Address v2 feedback from Sashiko
+- Add shared file_utils helpers under tools/lib/mm
+- Move hugepage_settings out of selftests and into tools/lib/mm
+- Convert gup_bench to use the shared tools/lib/mm helpers
+- Guard against invalid thread counts in gup_bench
+- Handle thread-array allocation failure cleanly in gup_bench
+- Restore hugetlb settings on setup failure in gup_test
+- Add sparse DUMP_USER_PAGES_TEST coverage for pages 0, 19 and 0x1000 in gup_test
+
+Changes in v2:
+- Address v1 feedback from Sashiko
+- Add fast and longterm GUP/PUP coverage
+- Sweep nr_pages_per_call over 1, 512, 123 and all pages
+- Call madvise(MADV_NOHUGEPAGE) in non-THP variants
+- Use 256 MB for hugetlb fixtures
+- Use hugetlb_restore_settings() in FIXTURE_TEARDOWN instead of atexit()
+- Add TH_LOG to report nr_pages_per_call for each iteration
+- Update Documentation/core-api/pin_user_pages.rst unit testing section
+
+Previous versions:
+v2: https://lore.kernel.org/all/20260519120506.184512-1-sarthak.sharma@arm.com/
+v1: https://lore.kernel.org/all/20260515084840.174652-1-sarthak.sharma@arm.com/
+
+---
+Sarthak Sharma (4):
+  tools/lib/mm: add shared file helpers
+  tools/lib/mm: move hugepage_settings out of selftests
+  tools/mm: add a standalone GUP microbenchmark
+  selftests/mm: rewrite gup_test as a standalone harness-based selftest
+
+ Documentation/core-api/pin_user_pages.rst     |  12 +-
+ MAINTAINERS                                   |   2 +
+ tools/lib/mm/file_utils.c                     |  83 +++
+ tools/lib/mm/file_utils.h                     |  12 +
+ .../selftests => lib}/mm/hugepage_settings.c  |  14 +-
+ .../selftests => lib}/mm/hugepage_settings.h  |   0
+ tools/mm/.gitignore                           |   2 +
+ tools/mm/Makefile                             |  10 +-
+ tools/mm/gup_bench.c                          | 390 ++++++++++++
+ tools/testing/selftests/mm/Makefile           |   8 +-
+ tools/testing/selftests/mm/compaction_test.c  |   2 +-
+ tools/testing/selftests/mm/cow.c              |   2 +-
+ .../selftests/mm/folio_split_race_test.c      |   3 +-
+ tools/testing/selftests/mm/guard-regions.c    |   3 +-
+ tools/testing/selftests/mm/gup_longterm.c     |   2 +-
+ tools/testing/selftests/mm/gup_test.c         | 587 +++++++++++-------
+ tools/testing/selftests/mm/hmm-tests.c        |   6 +-
+ tools/testing/selftests/mm/hugetlb-madvise.c  |   3 +-
+ tools/testing/selftests/mm/hugetlb-mmap.c     |   3 +-
+ tools/testing/selftests/mm/hugetlb-mremap.c   |   3 +-
+ tools/testing/selftests/mm/hugetlb-shm.c      |   2 +-
+ .../selftests/mm/hugetlb-soft-offline.c       |   2 +-
+ tools/testing/selftests/mm/hugetlb-vmemmap.c  |   3 +-
+ tools/testing/selftests/mm/hugetlb_dio.c      |   3 +-
+ .../selftests/mm/hugetlb_fault_after_madv.c   |   2 +-
+ .../selftests/mm/hugetlb_madv_vs_map.c        |   2 +-
+ tools/testing/selftests/mm/khugepaged.c       |   3 +-
+ tools/testing/selftests/mm/ksm_tests.c        |   2 +-
+ tools/testing/selftests/mm/migration.c        |   6 +-
+ tools/testing/selftests/mm/pagemap_ioctl.c    |   2 +-
+ .../testing/selftests/mm/prctl_thp_disable.c  |   2 +-
+ tools/testing/selftests/mm/protection_keys.c  |   2 +-
+ tools/testing/selftests/mm/run_vmtests.sh     |  37 +-
+ tools/testing/selftests/mm/soft-dirty.c       |   2 +-
+ .../selftests/mm/split_huge_page_test.c       |   4 +-
+ tools/testing/selftests/mm/thuge-gen.c        |   3 +-
+ tools/testing/selftests/mm/transhuge-stress.c |   3 +-
+ tools/testing/selftests/mm/uffd-common.h      |   2 +-
+ tools/testing/selftests/mm/uffd-wp-mremap.c   |   3 +-
+ .../selftests/mm/va_high_addr_switch.c        |   2 +-
+ tools/testing/selftests/mm/vm_util.c          |  65 +-
+ tools/testing/selftests/mm/vm_util.h          |   5 -
+ 42 files changed, 935 insertions(+), 369 deletions(-)
+ create mode 100644 tools/lib/mm/file_utils.c
+ create mode 100644 tools/lib/mm/file_utils.h
+ rename tools/{testing/selftests => lib}/mm/hugepage_settings.c (98%)
+ rename tools/{testing/selftests => lib}/mm/hugepage_settings.h (100%)
+ create mode 100644 tools/mm/gup_bench.c
 
 
---=20
-=E7=9C=9F=E5=AE=9F=E3=81=AF=E3=81=84=E3=81=A4=E3=82=82=E4=B8=80=E3=81=A4=EF=
-=BC=81/ Always, there's only one truth!
+base-commit: 4c6512d033e5e9469cc76d07512c24a0ee0ac207
+--
+2.39.5
+
 
