@@ -1,98 +1,72 @@
-Return-Path: <linux-doc+bounces-88853-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-88855-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2NY7C+C3D2qCPAYAu9opvQ
-	(envelope-from <linux-doc+bounces-88853-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 03:56:48 +0200
+	id QA5AHO+4D2qCPAYAu9opvQ
+	(envelope-from <linux-doc+bounces-88855-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 04:01:19 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 837915ADCA0
-	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 03:56:47 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 75B3B5ADD47
+	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 04:01:18 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 0F74430374BE
-	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 01:55:37 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 9C9233001CFD
+	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 02:00:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 337442E2F0E;
-	Fri, 22 May 2026 01:55:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2E5AC2DC79F;
+	Fri, 22 May 2026 02:00:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="NAhobQgp"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WD5g8W38"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dy1-f181.google.com (mail-dy1-f181.google.com [74.125.82.181])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ACECE2D8DDF
-	for <linux-doc@vger.kernel.org>; Fri, 22 May 2026 01:55:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.181
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7D58B22A4E9;
+	Fri, 22 May 2026 02:00:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779414929; cv=none; b=C0xvUE2LojabJam8DbjRQH+ByCld0RcGuuwipxnqoDgGfQTys3lO1XUc8b68sGwKciaBdfYm7P6KbjNMlVKkrlcJ6lsNpqABYtKyqTFPGynaP3UO7IVl4Cr9TfM2OVSdQmbe1NAYwfCg1ni88GebXD+RtvdDWfbbLIY589wy788=
+	t=1779415214; cv=none; b=kOvOy4oe7ddju9vQ68WswrBvgtL0tFCvBwZwgophizTjmONYyz6VJqzOqhihrKSgAd/0RQ+ESA2G794uahg5EJCvmTamS954PltHIfGIfmtjydzhQLLvpN0G03pmXWpmevPs584q3b+UkS8rqe64SuEOVmD6hnRQmGDL88Ss3Kg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779414929; c=relaxed/simple;
-	bh=rKZdWBzaElVeitVFPAhB8HsQPihPR3S3ba+frqtOXmw=;
+	s=arc-20240116; t=1779415214; c=relaxed/simple;
+	bh=sV0l8JDrwjoh1tY602B7FtwUVYZNNd5lD6n1hZmALEM=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=oiEz30BFbSY8DL7bcwJre4H74uvULuyc++VXZ4MaTOOmmChD+yChLnkW6DEJNTSbhTDCAC9His8AVCfc+XQF49V5zcscQ5TnkegQw671fhxX2qytwzCBqmGX8bcHuDGJeTJBSlfMubilKsP6AUs2J+lMMLOGgMjtshfYqK+qn5c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=NAhobQgp; arc=none smtp.client-ip=74.125.82.181
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-dy1-f181.google.com with SMTP id 5a478bee46e88-3042dffd80bso2433619eec.0
-        for <linux-doc@vger.kernel.org>; Thu, 21 May 2026 18:55:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779414925; x=1780019725; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=33/HARrxzqaqtjCLOeSlyGSQZ0D0WzG3xs/wh21rVlo=;
-        b=NAhobQgptpQu14yBmyBF4PcuCcfX0NrzOR5+NBdNTFLuVYi1YEjo/QmIylCaCRqMv4
-         LKkWbrPwh5sPIPAKT2Wr7EgzMPCGCnNacHAPUry+z/DfjpHGR4sCu6UpK1uxsBaYAQ6T
-         6dSapVTDut0HUx8MNcx/E+xRxjwpY1aaBIB9NOMvXNOluXSxn6zdomotn/HRiL8sQq3r
-         JwOblebfbz6gcNcfHNGocIr4MWqw2uvuucQ7+zgCYWpKMsaMrhPOmbXpPBbZICoiIJM9
-         7pIxUwihLH7HC876XGRxzZYUXeW7ts4a6E/aaVa+Jqk+ct2qTq8pp+lsxyU0s8HQ6ZLs
-         hozQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779414925; x=1780019725;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=33/HARrxzqaqtjCLOeSlyGSQZ0D0WzG3xs/wh21rVlo=;
-        b=KV+6Ex12o7zECTGV2MQJoG3Oe6fJgdvWhIsn270Y0uevjE0D/LumHBLdxNnCE489Mz
-         yCBtInNQ/PXpiU9aM604v03C+0Y6EX6U2ju19r2nOWJYUN1ohA+zUc0fZq00wStR8qu9
-         dn9JPA/sgZifkMHwcu7gw8grT61VmNvHm2LYR6ewmPkB7s4YXPZbgebamKy7EfcrAKGS
-         eMGrUSrRSo+oRPseNg7F20YvA5F4sC4/v5cnQhkqlxcuZnCZmIBa16d5KxFfusKW4Zbh
-         AwMDCho8mkFVhm/J88wCLpd1ngF9jbXTZKH18dIvbSOJ7ZVYZ6uNcgEZa4nkonQy79s3
-         SZCA==
-X-Forwarded-Encrypted: i=1; AFNElJ8aUNut3U9yrco/qPRnITSHdAHEzCq9fEou13EIV9lobAoxvjW+yS1QGAcc9xZC7YzcL4C8ptTuKPE=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzpSZP+YKj2ioRUOlarEhlaU6glvcZ2c5466MtSNuT6oPAR0csG
-	KJEFzhpIQCNFyDPMh8i4SvJ9SNdkriAVa6VWzA1Hvz11MSsWTaKy1wp4
-X-Gm-Gg: Acq92OH60Sek2vYeXUkQjNYfq6HHa1WVdDP4cB2u0uzCIR/0AKHCvlnmvQr+icRBxh3
-	x5cV3nyISlg1HfbFoLvSUpvMwlBjwY3ePU9OI3yxFNd/UnDm+aLrTnPtYhn/4VMr2cBrs5pBBlY
-	gZ+d++jvfhymuXGNnOd9AxsSJQ81eFsr/u0JpcsfmX4P8RrOEBEFQLevwgqtYUzwQ0x8hC0NI9n
-	Yqw8opPbLMqmgqJJeH4OKo0lRpTRhF7QIhoEuv71X190gCSRJSzapbrvmnnGh5qi60l82PuRbK0
-	UKYI8Dev8KKFe/Di9iO8TPUtxCXCbVeeXcTiEBFRRLA4aQgEy8Z9iv4dvGuKeLl5gchx08FgNrc
-	iXdDjTz5EhWjPCskziac12PCqJhqOVKmdblIa0CEPh57B6aqkZIeYWgYIR/1VMNu6NdEJrlueOs
-	4HYBXDTsEtROryUo4YnVgiQTdGkQKBpK2AEvoMwE0jGYTMpsaJFePbjZqBRhaVLlm6PL98AQH2/
-	rR3
-X-Received: by 2002:a05:7300:f196:b0:2c4:dd55:ffc1 with SMTP id 5a478bee46e88-3044904e2cemr912977eec.2.1779414924624;
-        Thu, 21 May 2026 18:55:24 -0700 (PDT)
-Received: from lappy (108-228-232-20.lightspeed.sndgca.sbcglobal.net. [108.228.232.20])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3044b9123f7sm1027744eec.19.2026.05.21.18.55.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 21 May 2026 18:55:24 -0700 (PDT)
-From: "Derek J. Clark" <derekjohn.clark@gmail.com>
-To: Jiri Kosina <jikos@kernel.org>,
-	Benjamin Tissoires <bentiss@kernel.org>
-Cc: "Pierre-Loup A . Griffais" <pgriffais@valvesoftware.com>,
-	Denis Benato <denis.benato@linux.dev>,
-	Zhouwang Huang <honjow311@gmail.com>,
-	"Derek J . Clark" <derekjohn.clark@gmail.com>,
-	linux-input@vger.kernel.org,
+	 MIME-Version; b=i2RZlCcPoMSq8B6SiR+bhipZl4+zETvI4yVN25dLZOBMic36QhIEHu+jVWKZH+qB+rUuB5+vDK2xJdiq76FoL0nw/PUvsj3zKhDKHkpGLkLBvLrCHSxghPo3aJSjr/mFXBPnl7kZ6nifgmWZUBU9pffhtycUhNWiXjCssnRSFMQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WD5g8W38; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 91EA21F000E9;
+	Fri, 22 May 2026 02:00:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1779415212;
+	bh=j9pmxg8KQowtANG3LtTGcpQGvZjt0wAeuNGrCjsdwH8=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=WD5g8W38MwB9h3zXvTKvj5IXeyptjfDS2vSYH01gkkMj7ZGRuSSZiKDQtRJUaQYVA
+	 vnvF8kisMW70s/NeZ4l1IFwXAb5kBFiceN1hTqEytvkAawmZo8RSTvkvrOsfFjAUno
+	 nqAJXXcE1tNhe3BGs1Y0Fd1w9JrZX5Z5PsiGpB9GdHx3IL2nvfyXbq98BKVwFOhGov
+	 q9vsFALqfgaeJcjsF4CGnH7A4ueMnC/7gRU449QMhBXLXBUeHBvLTfx5b6VcCb8tYW
+	 QS+0BZX0voLni9ScFzHLtN0r2sV5ILPNn0bgaa4f4QBkWPZTR4tmAydHmbYo19PrPF
+	 NbVll5H13DOrg==
+From: SeongJae Park <sj@kernel.org>
+To: Maksym Shcherba <maksym.shcherba@lnu.edu.ua>
+Cc: SeongJae Park <sj@kernel.org>,
+	"Liam R. Howlett" <liam@infradead.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	David Hildenbrand <david@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Lorenzo Stoakes <ljs@kernel.org>,
+	Michal Hocko <mhocko@suse.com>,
+	Mike Rapoport <rppt@kernel.org>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Vlastimil Babka <vbabka@kernel.org>,
+	damon@lists.linux.dev,
 	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v8 4/4] HID: hid-msi: Add Rumble Intensity Attributes
-Date: Fri, 22 May 2026 01:55:18 +0000
-Message-ID: <20260522015518.1111290-5-derekjohn.clark@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260522015518.1111290-1-derekjohn.clark@gmail.com>
-References: <20260522015518.1111290-1-derekjohn.clark@gmail.com>
+	linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org
+Subject: Re: [PATCH v2 2/2] Docs/admin-guide/mm/damon/usage: clarify current_value of quota goals
+Date: Thu, 21 May 2026 19:00:03 -0700
+Message-ID: <20260522020004.86551-1-sj@kernel.org>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260521202020.126500-3-maksym.shcherba@lnu.edu.ua>
+References: 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -100,367 +74,60 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_FROM(0.00)[bounces-88853-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_FIVE(0.00)[5];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-88855-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[valvesoftware.com,linux.dev,gmail.com,vger.kernel.org];
-	TO_DN_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[derekjohnclark@gmail.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-0.996];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	TAGGED_RCPT(0.00)[linux-doc];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: 837915ADCA0
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: 75B3B5ADD47
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Adds intensity adjustment for the left and right rumble motors.
+On Thu, 21 May 2026 23:20:20 +0300 Maksym Shcherba <maksym.shcherba@lnu.edu.ua> wrote:
 
-Claude was used during the reverse-engineering data gathering for this
-feature done by Zhouwang Huang. As the code had already been affected,
-I used Claude to create the initial framing for the feature, then did
-manual cleanup of the _show and _store functions afterwards to fix bugs
-and keep the coding style consistent. Claude was also used as an initial
-reviewer of this patch.
+> The sysfs interface for DAMON quota goals includes a `current_value` file.
+> This file is not updated by the kernel and only serves to receive user
+> input.
+> 
+> Clarify in the documentation that the kernel does not update
+> `current_value`, and that reading it only has meaning when `target_metric`
+> is set to `user_input`.
+> 
+> While at it, fix missing commas in the goal files list.
 
-Assisted-by: Claude:claude-sonnet-4-6
-Co-developed-by: Zhouwang Huang <honjow311@gmail.com>
-Signed-off-by: Zhouwang Huang <honjow311@gmail.com>
-Signed-off-by: Derek J. Clark <derekjohn.clark@gmail.com>
----
-v7:
-  - Match on write address for rumble reports to prevent late ACK
-    from causing synchronization errors.
-  - Use spinlock for read/write profile_pending.
-  - Use smp_[store_release|load_acquire] pattern for checking
-    gamepad_registered to avoid possible races during teardown.
-  - Use struct for rumble reports.
-v6:
-  - Make all timeouts 25ms to ensure at least 2 jiffies in a 100Hz
-    config.
-  - Add spinlock_irqsave for read/write access on rumble_intensity
-    variables.
-  - Gate all attribute show/store functions with gamepad_registered.
-v5:
-  - Remove mkey related changes.
-v2:
-  - Use pending_profile and sync to rom mutexes.
----
- drivers/hid/hid-msi.c | 200 ++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 200 insertions(+)
+Nice!  Thank you for doing these!
 
-diff --git a/drivers/hid/hid-msi.c b/drivers/hid/hid-msi.c
-index 0b875603dbb32..add790adfa462 100644
---- a/drivers/hid/hid-msi.c
-+++ b/drivers/hid/hid-msi.c
-@@ -79,6 +79,8 @@ enum claw_profile_ack_pending {
- 	CLAW_M1_PENDING,
- 	CLAW_M2_PENDING,
- 	CLAW_RGB_PENDING,
-+	CLAW_RUMBLE_LEFT_PENDING,
-+	CLAW_RUMBLE_RIGHT_PENDING,
- };
- 
- enum claw_key_index {
-@@ -266,6 +268,11 @@ static const u16 button_mapping_addr_new[] = {
- static const u16 rgb_addr_old = 0x01fa;
- static const u16 rgb_addr_new = 0x024a;
- 
-+static const u16 rumble_addr[] = {
-+	0x0022,  /* left  */
-+	0x0023,  /* right */
-+};
-+
- struct claw_command_report {
- 	u8 report_id;
- 	u8 padding[2];
-@@ -308,6 +315,12 @@ struct claw_rgb_report {
- 	struct rgb_frame zone_data;
- } __packed;
- 
-+struct claw_rumble_report {
-+	struct claw_profile_report;
-+	u8 padding;
-+	u8 intensity;
-+} __packed;
-+
- struct claw_drvdata {
- 	/* MCU General Variables */
- 	enum claw_profile_ack_pending profile_pending;
-@@ -332,9 +345,13 @@ struct claw_drvdata {
- 	enum claw_gamepad_mode_index gamepad_mode;
- 	u8 m1_codes[CLAW_KEYS_MAX];
- 	u8 m2_codes[CLAW_KEYS_MAX];
-+	u8 rumble_intensity_right;
-+	u8 rumble_intensity_left;
- 	bool gamepad_registered;
-+	spinlock_t rumble_lock; /* lock for rumble_intensity read/write */
- 	spinlock_t mode_lock; /* Lock for mode data read/write */
- 	const u16 *bmap_addr;
-+	bool rumble_support;
- 	bool bmap_support;
- 
- 	/* RGB Variables */
-@@ -382,6 +399,7 @@ static int claw_gamepad_mode_event(struct claw_drvdata *drvdata,
- static int claw_profile_event(struct claw_drvdata *drvdata, struct claw_command_report *cmd_rep)
- {
- 	enum claw_profile_ack_pending profile;
-+	struct claw_rumble_report *rumble;
- 	struct claw_mkey_report *mkeys;
- 	struct claw_rgb_report *frame;
- 	u16 rgb_addr, read_addr;
-@@ -431,6 +449,20 @@ static int claw_profile_event(struct claw_drvdata *drvdata, struct claw_command_
- 		}
- 
- 		break;
-+	case CLAW_RUMBLE_LEFT_PENDING:
-+		rumble = (struct claw_rumble_report *)cmd_rep->data;
-+		if (be16_to_cpu(rumble->read_addr) != rumble_addr[0])
-+			return -EINVAL;
-+		scoped_guard(spinlock, &drvdata->rumble_lock)
-+			drvdata->rumble_intensity_left = rumble->intensity;
-+		break;
-+	case CLAW_RUMBLE_RIGHT_PENDING:
-+		rumble = (struct claw_rumble_report *)cmd_rep->data;
-+		if (be16_to_cpu(rumble->read_addr) != rumble_addr[1])
-+			return -EINVAL;
-+		scoped_guard(spinlock, &drvdata->rumble_lock)
-+			drvdata->rumble_intensity_right = rumble->intensity;
-+		break;
- 	default:
- 		dev_dbg(&drvdata->hdev->dev,
- 			"Got profile event without changes pending from command: %x\n",
-@@ -930,6 +962,162 @@ static ssize_t button_mapping_options_show(struct device *dev,
- }
- static DEVICE_ATTR_RO(button_mapping_options);
- 
-+static ssize_t rumble_intensity_left_store(struct device *dev,
-+					   struct device_attribute *attr,
-+					   const char *buf, size_t count)
-+{
-+	struct claw_rumble_report report = { {0x01, cpu_to_be16(rumble_addr[0])}, 0x01 };
-+	struct hid_device *hdev = to_hid_device(dev);
-+	struct claw_drvdata *drvdata = hid_get_drvdata(hdev);
-+	u8 val;
-+	int ret;
-+
-+	scoped_guard(spinlock_irqsave, &drvdata->registration_lock) {
-+		/* Pairs with smp_store_release from cfg_setup_fn in system_wq context */
-+		if (!smp_load_acquire(&drvdata->gamepad_registered))
-+			return -ENODEV;
-+	}
-+
-+	ret = kstrtou8(buf, 10, &val);
-+	if (ret)
-+		return ret;
-+
-+	if (val > 100)
-+		return -EINVAL;
-+
-+	report.intensity = val;
-+
-+	guard(mutex)(&drvdata->rom_mutex);
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_WRITE_PROFILE_DATA,
-+				    (u8 *)&report, sizeof(report), 25);
-+	if (ret)
-+		return ret;
-+
-+	/* MCU will not send ACK until the USB transaction completes. ACK is sent
-+	 * immediately after and will hit the stale state machine, before the next
-+	 * command re-arms the state machine. Timeout 0 ensures no deadlock waiting
-+	 * for ACK that ill never come.
-+	 */
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_SYNC_TO_ROM, NULL, 0, 0);
-+	if (ret)
-+		return ret;
-+
-+	return count;
-+}
-+
-+static ssize_t rumble_intensity_left_show(struct device *dev,
-+					  struct device_attribute *attr,
-+					  char *buf)
-+{
-+	struct claw_rumble_report report = { {0x01, cpu_to_be16(rumble_addr[0])}, 0x01 };
-+	struct hid_device *hdev = to_hid_device(dev);
-+	struct claw_drvdata *drvdata = hid_get_drvdata(hdev);
-+	int ret;
-+	u8 val;
-+
-+	scoped_guard(spinlock_irqsave, &drvdata->registration_lock) {
-+		/* Pairs with smp_store_release from cfg_setup_fn in system_wq context */
-+		if (!smp_load_acquire(&drvdata->gamepad_registered))
-+			return -ENODEV;
-+	}
-+
-+	guard(mutex)(&drvdata->profile_mutex);
-+	scoped_guard(spinlock_irqsave, &drvdata->profile_lock)
-+		drvdata->profile_pending = CLAW_RUMBLE_LEFT_PENDING;
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_READ_PROFILE,
-+				    (u8 *)&report, sizeof(report), 25);
-+	if (ret)
-+		return ret;
-+
-+	scoped_guard(spinlock_irqsave, &drvdata->rumble_lock)
-+		val = drvdata->rumble_intensity_left;
-+
-+	return sysfs_emit(buf, "%u\n", val);
-+}
-+static DEVICE_ATTR_RW(rumble_intensity_left);
-+
-+static ssize_t rumble_intensity_right_store(struct device *dev,
-+					    struct device_attribute *attr,
-+					    const char *buf, size_t count)
-+{
-+	struct claw_rumble_report report = { {0x01, cpu_to_be16(rumble_addr[1])}, 0x01 };
-+	struct hid_device *hdev = to_hid_device(dev);
-+	struct claw_drvdata *drvdata = hid_get_drvdata(hdev);
-+	u8 val;
-+	int ret;
-+
-+	scoped_guard(spinlock_irqsave, &drvdata->registration_lock) {
-+		/* Pairs with smp_store_release from cfg_setup_fn in system_wq context */
-+		if (!smp_load_acquire(&drvdata->gamepad_registered))
-+			return -ENODEV;
-+	}
-+
-+	ret = kstrtou8(buf, 10, &val);
-+	if (ret)
-+		return ret;
-+
-+	if (val > 100)
-+		return -EINVAL;
-+
-+	report.intensity = val;
-+
-+	guard(mutex)(&drvdata->rom_mutex);
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_WRITE_PROFILE_DATA,
-+				    (u8 *)&report, sizeof(report), 25);
-+	if (ret)
-+		return ret;
-+
-+	/* MCU will not send ACK until the USB transaction completes. ACK is sent
-+	 * immediately after and will hit the stale state machine, before the next
-+	 * command re-arms the state machine. Timeout 0 ensures no deadlock waiting
-+	 * for ACK that ill never come.
-+	 */
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_SYNC_TO_ROM, NULL, 0, 0);
-+	if (ret)
-+		return ret;
-+
-+	return count;
-+}
-+
-+static ssize_t rumble_intensity_right_show(struct device *dev,
-+					   struct device_attribute *attr,
-+					   char *buf)
-+{
-+	struct claw_rumble_report report = { {0x01, cpu_to_be16(rumble_addr[1])}, 0x01 };
-+	struct hid_device *hdev = to_hid_device(dev);
-+	struct claw_drvdata *drvdata = hid_get_drvdata(hdev);
-+	int ret;
-+	u8 val;
-+
-+	scoped_guard(spinlock_irqsave, &drvdata->registration_lock) {
-+		/* Pairs with smp_store_release from cfg_setup_fn in system_wq context */
-+		if (!smp_load_acquire(&drvdata->gamepad_registered))
-+			return -ENODEV;
-+	}
-+
-+	guard(mutex)(&drvdata->profile_mutex);
-+	scoped_guard(spinlock_irqsave, &drvdata->profile_lock)
-+		drvdata->profile_pending = CLAW_RUMBLE_RIGHT_PENDING;
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_READ_PROFILE,
-+				    (u8 *)&report, sizeof(report), 25);
-+	if (ret)
-+		return ret;
-+
-+	scoped_guard(spinlock_irqsave, &drvdata->rumble_lock)
-+		val = drvdata->rumble_intensity_right;
-+
-+	return sysfs_emit(buf, "%u\n", val);
-+}
-+static DEVICE_ATTR_RW(rumble_intensity_right);
-+
-+static ssize_t rumble_intensity_range_show(struct device *dev,
-+					   struct device_attribute *attr,
-+					   char *buf)
-+{
-+	return sysfs_emit(buf, "0-100\n");
-+}
-+static DEVICE_ATTR_RO(rumble_intensity_range);
-+
- static umode_t claw_gamepad_attr_is_visible(struct kobject *kobj, struct attribute *attr,
- 					    int n)
- {
-@@ -950,6 +1138,12 @@ static umode_t claw_gamepad_attr_is_visible(struct kobject *kobj, struct attribu
- 	    attr == &dev_attr_reset.attr)
- 		return attr->mode;
- 
-+	/* Hide rumble attrs if not supported */
-+	if (attr == &dev_attr_rumble_intensity_left.attr ||
-+	    attr == &dev_attr_rumble_intensity_right.attr ||
-+	    attr == &dev_attr_rumble_intensity_range.attr)
-+		return drvdata->rumble_support ? attr->mode : 0;
-+
- 	/* Hide button mapping attrs if it isn't supported */
- 	return drvdata->bmap_support ? attr->mode : 0;
- }
-@@ -963,6 +1157,9 @@ static struct attribute *claw_gamepad_attrs[] = {
- 	&dev_attr_mkeys_function.attr,
- 	&dev_attr_mkeys_function_index.attr,
- 	&dev_attr_reset.attr,
-+	&dev_attr_rumble_intensity_left.attr,
-+	&dev_attr_rumble_intensity_right.attr,
-+	&dev_attr_rumble_intensity_range.attr,
- 	NULL,
- };
- 
-@@ -1534,6 +1731,7 @@ static void claw_features_supported(struct claw_drvdata *drvdata)
- 		drvdata->bmap_support = true;
- 		if (minor >= 0x66) {
- 			drvdata->bmap_addr = button_mapping_addr_new;
-+			drvdata->rumble_support = true;
- 			drvdata->rgb_addr = rgb_addr_new;
- 		} else {
- 			drvdata->bmap_addr = button_mapping_addr_old;
-@@ -1545,6 +1743,7 @@ static void claw_features_supported(struct claw_drvdata *drvdata)
- 	if ((major == 0x02 && minor >= 0x17) || major >= 0x03) {
- 		drvdata->bmap_support = true;
- 		drvdata->bmap_addr = button_mapping_addr_new;
-+		drvdata->rumble_support = true;
- 		drvdata->rgb_addr = rgb_addr_new;
- 		return;
- 	}
-@@ -1594,6 +1793,7 @@ static int claw_probe(struct hid_device *hdev, u8 ep)
- 	spin_lock_init(&drvdata->mode_lock);
- 	spin_lock_init(&drvdata->profile_lock);
- 	spin_lock_init(&drvdata->frame_lock);
-+	spin_lock_init(&drvdata->rumble_lock);
- 	init_completion(&drvdata->send_cmd_complete);
- 	INIT_DELAYED_WORK(&drvdata->cfg_resume, &cfg_resume_fn);
- 	INIT_DELAYED_WORK(&drvdata->cfg_setup, &cfg_setup_fn);
--- 
-2.53.0
+> 
+> Assisted-by: Antigravity:Gemini-3.1-Pro
+> Signed-off-by: Maksym Shcherba <maksym.shcherba@lnu.edu.ua>
 
+Reviewed-by: SeongJae Park <sj@kernel.org>
+
+
+Thanks,
+SJ
+
+[...]
 
