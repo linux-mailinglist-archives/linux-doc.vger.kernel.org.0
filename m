@@ -1,217 +1,129 @@
-Return-Path: <linux-doc+bounces-89019-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89013-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6LBoF/V2EGoZXgYAu9opvQ
-	(envelope-from <linux-doc+bounces-89019-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 17:32:05 +0200
+	id uLi6M9t7EGrdXwYAu9opvQ
+	(envelope-from <linux-doc+bounces-89013-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 17:52:59 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id D2F1B5B6EEA
-	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 17:32:04 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id CB3A85B72F5
+	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 17:52:58 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 1848B305B9BA
-	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 15:28:50 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 84CF63053CA2
+	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 15:28:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 50116472764;
-	Fri, 22 May 2026 15:28:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E1D183D3332;
+	Fri, 22 May 2026 15:28:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b="L/RUx5/2"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Uk7lh0Da"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2013F478E36;
-	Fri, 22 May 2026 15:28:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.156.1
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA24D356771
+	for <linux-doc@vger.kernel.org>; Fri, 22 May 2026 15:28:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779463717; cv=none; b=jKINQf9TJ5fT4d52WDb10rflMTqnmP2YsygiYtZRB2xjF8PyE4Vs9k4ECdnYKtmzl9Banf6ZyaqZ9A+HR8z1VgEFdX+QicYThPXXIwsAQHJelJJBib9EdlMFxqky3l0zed66sPxzyJ3olCdk3bk3g9yB6T34h571cupQBuoXOQ4=
+	t=1779463701; cv=none; b=bI29O/dR7cm1sFG8RjVlPmq8GomV0SL1cTmh1Tbp8nIhsqymzmp1ltSiwu2F18RsdqLFq2Q50E0Jezs/5pGe1N84fQW6dZtpzRKDuqGe5kpgLCGbabOtzLbLwXX6t8USq4FU3RD0Z6HJAmL3utE1ojmWXet4vCDT8NxbR9ZED3Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779463717; c=relaxed/simple;
-	bh=zkBdQcfFzoC9mwjhlMBdd1iixqCfmwvBezdrlb4xR70=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=jStFaadnZZrxqcWywg+YU1PMbeIeWZl8PF8/dWcHLhGfEvIgBGbrsTP3D/+qNDo3HZQ8EUf1LC2rZGeHmRkugpCI15hBz+C1NTjAf6aDSRPsx+3q8rx+wKTqIwZmk10k2W3tYQFhYnHyL0ZcpdwumQxscq6F8ABd6As4bZ4hxVM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=L/RUx5/2; arc=none smtp.client-ip=148.163.156.1
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.ibm.com
-Received: from pps.filterd (m0356517.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 64M7a6Ve3386862;
-	Fri, 22 May 2026 15:28:22 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=pp1; bh=3l6k7dsLP3JZwEsNP
-	XWfNE6Mhp0p34DpYjZTyfH0XIk=; b=L/RUx5/2eV7/mRn/Q6DioIxiPwhdk1R7q
-	sFIMjeYiYZ14vqFoW6x2GePfAlyw7CngCl4GzCq17g73V4PlhX+ztF0YtzwfBx9a
-	ApVpfdtGwbK4kZgLiHqrR+Fv9++SVDZqrN800FpBPX66WXKhnr5Bi1Ae27Pt5UJR
-	vHcvExGeaQQiJYD1QGtSPNfRokalyc0biDeRY/rpQnM108oUPwqLVIqofCdbWcxm
-	25sqA3a+5XMQI9RHFERUsdO0W9XxraiBptPnKWgjpE+fI+oDMIa7+9FLFcdeMjgU
-	aZNltChNo4r5RVIfDx7F3H4pYTNLZ28y4wI8BmsnKCHrArHKOttOA==
-Received: from ppma12.dal12v.mail.ibm.com (dc.9e.1632.ip4.static.sl-reverse.com [50.22.158.220])
-	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4e6h75cm2t-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 22 May 2026 15:28:21 +0000 (GMT)
-Received: from pps.filterd (ppma12.dal12v.mail.ibm.com [127.0.0.1])
-	by ppma12.dal12v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 64MFO5OO011013;
-	Fri, 22 May 2026 15:28:20 GMT
-Received: from smtprelay05.fra02v.mail.ibm.com ([9.218.2.225])
-	by ppma12.dal12v.mail.ibm.com (PPS) with ESMTPS id 4e72wqhpp1-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 22 May 2026 15:28:20 +0000 (GMT)
-Received: from smtpav04.fra02v.mail.ibm.com (smtpav04.fra02v.mail.ibm.com [10.20.54.103])
-	by smtprelay05.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 64MFSHAK44892584
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Fri, 22 May 2026 15:28:17 GMT
-Received: from smtpav04.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 4F12A2004B;
-	Fri, 22 May 2026 15:28:17 +0000 (GMT)
-Received: from smtpav04.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id C2EAE20040;
-	Fri, 22 May 2026 15:28:13 +0000 (GMT)
-Received: from localhost.localdomain (unknown [9.124.216.126])
-	by smtpav04.fra02v.mail.ibm.com (Postfix) with ESMTP;
-	Fri, 22 May 2026 15:28:13 +0000 (GMT)
-From: Amit Machhiwal <amachhiw@linux.ibm.com>
-To: linuxppc-dev@lists.ozlabs.org, Madhavan Srinivasan <maddy@linux.ibm.com>
-Cc: Vaibhav Jain <vaibhav@linux.ibm.com>,
-        Amit Machhiwal <amachhiw@linux.ibm.com>,
-        Anushree Mathur <anushree.mathur@linux.ibm.com>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Nicholas Piggin <npiggin@gmail.com>,
-        Michael Ellerman <mpe@ellerman.id.au>,
-        "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Shuah Khan <skhan@linuxfoundation.org>, kvm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, lkp@intel.com
-Subject: [PATCH v3 5/5] KVM: PPC: Document KVM_PPC_GET_COMPAT_CAPS ioctl
-Date: Fri, 22 May 2026 20:57:44 +0530
-Message-ID: <20260522152744.55251-6-amachhiw@linux.ibm.com>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20260522152744.55251-1-amachhiw@linux.ibm.com>
-References: <20260522152744.55251-1-amachhiw@linux.ibm.com>
+	s=arc-20240116; t=1779463701; c=relaxed/simple;
+	bh=N3vQcOwek+Tq06UaRQHlHhxUo/IIPqSOgaDKQhRyMe4=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=GJJwmjtwsKRUohoRFApHYm3yJkn4VLzXNnmAqFGuOqKD4hs91taaJBvv1hrDv2jV9zy6mE6hE796K162sHpaHcnyqRivRwkzxX3VFTSZ95zgvPhuk5G+v+ivH0n1gS6IbFK8iE7f0JMdSqRo/SmsSKH9/YTXBXS1PVlsMlej26E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Uk7lh0Da; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B18D31F00ADE
+	for <linux-doc@vger.kernel.org>; Fri, 22 May 2026 15:28:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1779463700;
+	bh=DAT0Pn6btsy80tf5FRFYMIb1+4BzppbLEqYpwea85DU=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=Uk7lh0DaG1JUaUyv93YEOz2am21NANln8HnXRnko/e7DWVU8Wq4ha8OC4rlLY51Fc
+	 frTgf8ggkl0l09vbGkfBnmeEP7w6//0kbvKrw9RRgfDYFcZksvsUKL3RAvOSCxJ8yY
+	 20BgAwnyvVmjEAb5vNok9JbDdgiwNQSuTIsTJQfpGdD9+g5mkXA5vHvPF1axFQHBSP
+	 JFwHIrSpNJzKp7UXEn5gTR76Yj8Jr3MpCquFUnAoTsxSoJOxpmGp1L921gZuf3PkDe
+	 qHLEWYI3q7Lx5j96rXmkEBF/PPC9TZ+jjrdl4h4P/JSqxHm2DQ43q7bfpGjboqayP4
+	 uqaS7xtPIoavg==
+Received: by mail-lf1-f48.google.com with SMTP id 2adb3069b0e04-5a995ab70d1so9838469e87.3
+        for <linux-doc@vger.kernel.org>; Fri, 22 May 2026 08:28:20 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AFNElJ8/akgvReSWNM3bHO6LTlrHUY7k9tLMxuaCb9R0/NpH+4KFZPSc1KN/zph0BJG3Dz0YiSEyBb6pnzY=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwYUIhdrHdlcd1CazOgkxuLFd8LbTwF+mxCqdUND4LAvyc+24Iv
+	NA9DANQ7K4qVtK5jb85ukiL+2v1xQKhR3QxBNUdvwb+m2SrOGBc8bfLqTlJPeQ70U9fHgHP1vjj
+	a0gBW+h/SzrFXsCFesEkWp7yt233hdsg=
+X-Received: by 2002:a05:6512:3e16:b0:5a8:e367:4ddf with SMTP id
+ 2adb3069b0e04-5aa323b34f1mr1604641e87.16.1779463699191; Fri, 22 May 2026
+ 08:28:19 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-Authority-Analysis: v=2.4 cv=ffCdDUQF c=1 sm=1 tr=0 ts=6a107616 cx=c_pps
- a=bLidbwmWQ0KltjZqbj+ezA==:117 a=bLidbwmWQ0KltjZqbj+ezA==:17
- a=NGcC8JguVDcA:10 a=VkNPw1HP01LnGYTKEx00:22 a=RnoormkPH1_aCDwRdu11:22
- a=U7nrCbtTmkRpXpFmAIza:22 a=VwQbUJbxAAAA:8 a=QyXUC8HyAAAA:8 a=VnNF1IyMAAAA:8
- a=pQ3QZ_9PhTAbB05LSQIA:9
-X-Proofpoint-ORIG-GUID: xthWjmlSwBS7y_rcQfNy371c7kz1n9c_
-X-Proofpoint-GUID: Yq3yS3t5hXjft7UV8PrLQHSYHAbgAnXD
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTIyMDE1MCBTYWx0ZWRfX9qx8pc/vEaJ0
- 5yKYWqoDm5bFwrvdYy/Q+sCjomSIWc+BmjYgETfQ1M2vZ17dOVUqhcK9fuGOTijeLUo4B3QweUA
- Kpc7QrnalHyI0Z1USJmd+NB3EdcgCi7kLJ2rB19MGngTUtX3SLYDYvAu3RiRkx/Sh+sw1a30kvl
- BNKV78LzmwAC5zPKZuRiUmL0HAxBd2i/cYOV/I/BC4C0KJpRIWKXokE7OKf0z4rTs5N/ow0Q3ij
- C0PG3FMdVQ3mGdFutXT4F+gyLv/FFClMzKYdj2XYBe2hzLlesw8klEz03GXpWoAWcyoxDJ10MwY
- BR2XrHEPv+FFNvxWZbl3a3rekwxt5yBAIqMOzq1h8UgqC6SFRtNC7HHmJNxxiTwqqVUAjCgd/Qv
- +BvJc+EG0US6Q/IL+/7vY+qG+iO7rhNVDqYlf2tsBjZCfYbVXO1pv3HOdWIubfpt9coLxwjQrIX
- Hh71aKNLWLoj6h2FmFw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-05-22_04,2026-05-18_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 spamscore=0 phishscore=0 suspectscore=0 adultscore=0
- clxscore=1015 impostorscore=0 lowpriorityscore=0 bulkscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2605130000 definitions=main-2605220150
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+References: <20260507090107.10113-1-sean@mess.org> <nms5cy6tgpcteav34jdtjf5mbmidf6rwc2uuxxef456xzegsyv@54rbblkdjybt>
+In-Reply-To: <nms5cy6tgpcteav34jdtjf5mbmidf6rwc2uuxxef456xzegsyv@54rbblkdjybt>
+From: "Rafael J. Wysocki" <rafael@kernel.org>
+Date: Fri, 22 May 2026 17:28:07 +0200
+X-Gmail-Original-Message-ID: <CAJZ5v0j3ENHZw2YWCXSBoJ0H+wT-Nxsd6S_Vgcz2qnRi27d2Rg@mail.gmail.com>
+X-Gm-Features: AVHnY4KmkSfvnztTl3DuLQC3aNsUj_A5mK3oEQJDbbt1PDWa-JWdhQiQcoeeUEo
+Message-ID: <CAJZ5v0j3ENHZw2YWCXSBoJ0H+wT-Nxsd6S_Vgcz2qnRi27d2Rg@mail.gmail.com>
+Subject: Re: [PATCH v2] cpufreq: elanfreq: Drop support for AMD Elan SC4*
+To: Viresh Kumar <viresh.kumar@linaro.org>, Sean Young <sean@mess.org>
+Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+	Zhongqiu Han <zhongqiu.han@oss.qualcomm.com>, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[ibm.com,none];
-	R_DKIM_ALLOW(-0.20)[ibm.com:s=pp1];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	FREEMAIL_CC(0.00)[linux.ibm.com,redhat.com,gmail.com,ellerman.id.au,kernel.org,lwn.net,linuxfoundation.org,vger.kernel.org,intel.com];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-89019-lists,linux-doc=lfdr.de];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-89013-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[amachhiw@linux.ibm.com,linux-doc@vger.kernel.org];
+	MISSING_XM_UA(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[ibm.com:+];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:email,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,linux.ibm.com:mid];
-	TAGGED_RCPT(0.00)[linux-doc];
-	NEURAL_HAM(-0.00)[-1.000];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_SEVEN(0.00)[11]
-X-Rspamd-Queue-Id: D2F1B5B6EEA
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rafael@kernel.org,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCPT_COUNT_SEVEN(0.00)[8];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,mail.gmail.com:mid]
+X-Rspamd-Queue-Id: CB3A85B72F5
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Add documentation for the KVM_PPC_GET_COMPAT_CAPS ioctl to the KVM API
-documentation.
+On Fri, May 8, 2026 at 7:48=E2=80=AFAM Viresh Kumar <viresh.kumar@linaro.or=
+g> wrote:
+>
+> On 07-05-26, 10:01, Sean Young wrote:
+> > Since commit 8b793a92d862 ("x86/cpu: Remove M486/M486SX/ELAN support"),
+> > the AMD Elan SC4* is no longer supported, so the cpu frequency
+> > driver is no longer needed.
+> >
+> > Signed-off-by: Sean Young <sean@mess.org>
+> > ---
+> > Changes since v1:
+> >  - Also removes elanfreq=3D entry from kernel-parameters.txt
+> >
+> >  .../admin-guide/kernel-parameters.txt         |   4 -
+> >  drivers/cpufreq/Kconfig.x86                   |  15 --
+> >  drivers/cpufreq/Makefile                      |   1 -
+> >  drivers/cpufreq/elanfreq.c                    | 226 ------------------
+> >  4 files changed, 246 deletions(-)
+> >  delete mode 100644 drivers/cpufreq/elanfreq.c
+>
+> Acked-by: Viresh Kumar <viresh.kumar@linaro.org>
 
-The ioctl exposes host processor compatibility modes supported for
-nested KVM guests on PowerPC systems.
-
-Reported-by: kernel test robot <lkp@intel.com>
-Closes: https://lore.kernel.org/oe-kbuild-all/202605140717.W1StD3Ke-lkp@intel.com/
-Tested-by: Anushree Mathur <anushree.mathur@linux.ibm.com>
-Signed-off-by: Amit Machhiwal <amachhiw@linux.ibm.com>
----
- Documentation/virt/kvm/api.rst | 35 ++++++++++++++++++++++++++++++++++
- 1 file changed, 35 insertions(+)
-
-diff --git a/Documentation/virt/kvm/api.rst b/Documentation/virt/kvm/api.rst
-index 52bbbb553ce1..d11e054e6665 100644
---- a/Documentation/virt/kvm/api.rst
-+++ b/Documentation/virt/kvm/api.rst
-@@ -6555,6 +6555,41 @@ KVM_S390_KEYOP_SSKE
- 
- .. _kvm_run:
- 
-+4.145 KVM_PPC_GET_COMPAT_CAPS
-+-----------------------------
-+:Capability: KVM_CAP_PPC_COMPAT_CAPS
-+:Architectures: powerpc
-+:Type: vm ioctl
-+:Parameters: struct kvm_ppc_compat_caps (out)
-+:Returns:
-+	0 on successful completion,
-+	-EFAULT if ``struct kvm_ppc_compat_caps`` cannot be written
-+
-+IBM POWER system server-based processors provide a compatibility mode feature
-+where an Nth generation processor can operate in modes consistent with earlier
-+generations such as (N-1) and (N-2).
-+
-+This ioctl provides userspace with information about the CPU compatibility modes
-+supported by the current host processor for booting the nested KVM guests on
-+PowerNV (KVM nested APIv1) and PowerVM (KVM nested APIv2) platforms.
-+
-+::
-+
-+  struct kvm_ppc_compat_caps {
-+	__u64	flags;			/* Reserved for future use */
-+	__u64	compat_capabilities;	/* Capabilities supported by the host */
-+  };
-+
-+The ``compat_capabilities`` bit field describes the processor compatibility
-+modes supported by the host. For example, the following bits indicate support
-+for specific processor modes.
-+
-+::
-+
-+  H_GUEST_CAP_POWER9  (bit 1): KVM guests can run in Power9 processor mode
-+  H_GUEST_CAP_POWER10 (bit 2): KVM guests can run in Power10 processor mode
-+  H_GUEST_CAP_POWER11 (bit 3): KVM guests can run in Power11 processor mode
-+
- 5. The kvm_run structure
- ========================
- 
--- 
-2.50.1 (Apple Git-155)
-
+Applied as 7.2 material, thanks!
 
