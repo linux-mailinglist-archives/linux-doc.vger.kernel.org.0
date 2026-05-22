@@ -1,116 +1,116 @@
-Return-Path: <linux-doc+bounces-89026-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89028-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id AE7xKVx/EGrdXwYAu9opvQ
-	(envelope-from <linux-doc+bounces-89026-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 18:07:56 +0200
+	id 0Mu0IpWBEGoHYgYAu9opvQ
+	(envelope-from <linux-doc+bounces-89028-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 18:17:25 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 605375B75DB
-	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 18:07:55 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 12BD25B77B0
+	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 18:17:24 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 31DC93001014
-	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 16:07:55 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id A3B903005ACC
+	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 16:11:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C8B8240960C;
-	Fri, 22 May 2026 16:07:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 39A202EDD58;
+	Fri, 22 May 2026 16:11:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="PNl7Q6/b";
-	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="WsfD6CpS"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="JlT3hKo5";
+	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="L/LwCJXL"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DF49403E88
-	for <linux-doc@vger.kernel.org>; Fri, 22 May 2026 16:07:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=170.10.129.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C07D337998A
+	for <linux-doc@vger.kernel.org>; Fri, 22 May 2026 16:11:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=170.10.133.124
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779466074; cv=pass; b=eO6nUeXTGyReOD0Kwiy8CtPZtQ+3r79uELjnMi1YG6yZxSEparZpaxMdaSJk0AnY3Cl864Uy5waL/JkCYYvkqtNjPNsayEZpUy9PvL4yT9ucHbv2dKRy3timfEcRWKUYMaZtekN0hg1X1lx3u7uTaKBChE48S/8LPiJemqWn23Y=
+	t=1779466273; cv=pass; b=MoEioNqcw2vTInlRlbA0TFIHPgegg1GYg0WVIM24JOuBF8qKBh7VBGK3kQaZfcZm/81SDyQjQVC7f4JSDwlTNyeOz2TjbUlI5yevuVoLSAsaDuIKHW38mm9/qeWOcemdLm10pzDNzKItRz3BcCOz8Amj5d6I23+nGZP1hiOeMug=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779466074; c=relaxed/simple;
-	bh=Z7CZniyudQvtGykBjwFqflJux61iIz/Fi25N4Y0qOJI=;
+	s=arc-20240116; t=1779466273; c=relaxed/simple;
+	bh=La2W+yN0vzwPkY2oECj6NHOhikNkncK+jT4y0b881Cg=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=bk3ZqACZwCRfM1RrNiggktvOS4y44Hgm4PTJ3NDLmQqY/e9ZSI0UrvLw/NBgHo9jmlLGXMZTlstvJFJ5lhMGWFfzH0taLEsRFZEHWsiqAIrnpoPKB6Zho0EStpcCDbEvZUHH4FuMZWhrU7MJg21Ydsn7CYDVfjRw0Txr3Oe3nkk=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=PNl7Q6/b; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=WsfD6CpS; arc=pass smtp.client-ip=170.10.129.124
+	 To:Cc:Content-Type; b=RcvxaOZXRk4n3mZ/6NXF+qxVhTrXxYrDWcMvuK3kNS3k89v5H3/oO2MACSfSgz0TUpAxBZrQfe9XpndMGln/Ct7EWOd0cUUMgyIgxuoydIyUoH4DnGHTjyLLKF881kzry4IKiJYdj+AjRrM6QkLVnH4raBrlhFXlBLaUy7DEDT8=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=JlT3hKo5; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=L/LwCJXL; arc=pass smtp.client-ip=170.10.133.124
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1779466072;
+	s=mimecast20190719; t=1779466271;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Z7CZniyudQvtGykBjwFqflJux61iIz/Fi25N4Y0qOJI=;
-	b=PNl7Q6/bpFzjlNljoTdLqlnYTmyofZ5nREKlsDKT9jic1gkPoAQ6vx5aRIeulfzIScIUNX
-	A5WXOwfWT243UwsTXJgx24rip3fBryDqCQ8lQHgx9HdStqTwupnJj3OwVOyghiMWcZ0Z4C
-	RxNfkDjbJswHqBOSSc91RYNo47Epgto=
+	bh=IzxgIsKBLy9Uo/RJ5aMTM+y5Ci98qZZTufyvn4tb+6I=;
+	b=JlT3hKo51763Chr+28crtcDS7xH9BtWFNUwqozOalRZHjhMcrvF2ShARYATaI5XOzzMIzR
+	WadL15AHn+PgaGL47D6tbsqVx0BcCXsalMymWVt1oYZ2bU5yVrqkmuvAKOfyAZERFS548a
+	C2It6a+VYr0yPdEqWvQUFaoG5C9g8f4=
 Received: from mail-yx1-f69.google.com (mail-yx1-f69.google.com
  [74.125.224.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-495-MaFP9HSdP4a3kiqSncEFbQ-1; Fri, 22 May 2026 12:07:50 -0400
-X-MC-Unique: MaFP9HSdP4a3kiqSncEFbQ-1
-X-Mimecast-MFC-AGG-ID: MaFP9HSdP4a3kiqSncEFbQ_1779466070
-Received: by mail-yx1-f69.google.com with SMTP id 956f58d0204a3-65c5afaff48so14354687d50.0
-        for <linux-doc@vger.kernel.org>; Fri, 22 May 2026 09:07:50 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779466070; cv=none;
+ us-mta-604-U6Atk0z3PouAfJQzM4hMag-1; Fri, 22 May 2026 12:11:09 -0400
+X-MC-Unique: U6Atk0z3PouAfJQzM4hMag-1
+X-Mimecast-MFC-AGG-ID: U6Atk0z3PouAfJQzM4hMag_1779466269
+Received: by mail-yx1-f69.google.com with SMTP id 956f58d0204a3-651c15e69d7so1347903d50.0
+        for <linux-doc@vger.kernel.org>; Fri, 22 May 2026 09:11:09 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779466269; cv=none;
         d=google.com; s=arc-20240605;
-        b=G0Y+MdjcdXHAsMDjWvDwt9hJeUzItwc/L/cINuRt45uFjec5dRucZXWSXzADb+t7v9
-         GfQeVRawQ1Dmz/tkm6+2iDehUw7G3usj6C2ufqR3kM3wDKEOH3WTuO5Dz9JZRzOB0T0K
-         FxCpm6+5Ovn/ZJuvwXTZyoG8UySlSLRZh3q3oTsZ3tii3sblZt5evu910L1bfdJEiiKk
-         2Jyam2Is4gB8xDpj4r+WRUAPB8kgIti2URik1Zm3UcLIGMqrpvknbrpcSdNWCzSVvOBx
-         I8EElvmlTCFg8WWBHJoBsJgFf669x4Ncsr9JHLnOGETYA+dvOYzNVrjDtfXbxyMVzaGk
-         F61Q==
+        b=HiB3bzmjiMd9NL2e7KWcRxqvlQb5dKjjAVHbPdeEcjSNXIP4OnDkzMm/3EAPREfv5B
+         R7qqJlVP2y2bqbJKPEgdjST8KpjLm59RRTPBkjXEXZRIbOVcolrMy4h9pZ57HtGTybc4
+         El30QEUbhHEydb8jQlFxpiqr1BB2zUinagfXhT8e8GwNkpyd3qRROFHtZQZGoHVyM/Nv
+         vf49GzEobrLQHZoZ0u9MK5242DsoaB6XTLcK2EcGhX1KWE1qVc++gSXA+xHwlkzQf6vb
+         zymCLCF+MuYLVpGsmbJMR67dT8+WUE7KYr2WYVcPWU/NPMAMiajKwPkkXXWytKDeVwxb
+         GZ1A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=Z7CZniyudQvtGykBjwFqflJux61iIz/Fi25N4Y0qOJI=;
-        fh=3D24Mvw81a1Q1yPJJVAzsN4anbdeKBvwx8nZ82hhRTQ=;
-        b=CRnx7Sq/mtzt5x1K6PM7dgzMs44UVEBIyxNY/togC2m5Gj7ij2f+2wOPrM7OSpDWoQ
-         WeRGrm7MkLoiAbopQgCo5h6hSuLqOkxaRrXHLKjmGQO/IXlMZrUYCeShIqATg7keAsPG
-         aAS+EgIshFs218wZe4vDpjdVpgWIbSfbayX0eJbVpPR0Dk9u6AYva6Gph0WUTFHHWYxx
-         g9Y7qbI2T/mXre1lRQKCWHPF06A8C4NJXgN+8GmAa5vPRjGdL3MuqHmE+UuY4eaxOa/B
-         diegVItEwQfTchYzeCy26RQI/mUi1uPYaZr6qK0YZfneGZbjrvWi9N2NZvPMjzlWGWtJ
-         tJ8w==;
+        bh=IzxgIsKBLy9Uo/RJ5aMTM+y5Ci98qZZTufyvn4tb+6I=;
+        fh=qG38DUs7GM1PdFhiAApGwiSCQdww9xukaUXq2FM8OJY=;
+        b=FV7D1wA3LCNWER7cGi4V44i4PgurI0pb2fTF8Q06sjpFI5V+Wvz5+j9UqLTsmWIF65
+         y4cvRQZREm5tuQI0pVaqjVWYbl2QFJvuqIAZumHXcstHdEkkfCCGgRn7OUnYK3G/8Vq2
+         v2/VDZtA6MrSah7dpAo0ZHQMNThoJvIRVBErBEkgoRKxi+bKxvouxVhPuySFiQt8UvP8
+         4cbSmdllvL4aLNBiV0hbKsFm9oj7PA1uC6eyUKDSkP2iiv4HZbe4TupMuUdgI9Jy+n6z
+         4PnrY9Z6QsyLtU1/eBoJxLZ3X/H1yQZXT+u7Bp8yoJBB2sDZNjgy2ZPZKe5VDdogEjnO
+         v6Qg==;
         darn=vger.kernel.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1779466070; x=1780070870; darn=vger.kernel.org;
+        d=redhat.com; s=google; t=1779466269; x=1780071069; darn=vger.kernel.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Z7CZniyudQvtGykBjwFqflJux61iIz/Fi25N4Y0qOJI=;
-        b=WsfD6CpSXzMVBF5ycy8WTjt94zv/T236yoRbMrkRUFA5kEW3spKkYcQ4o/yeN0PO+q
-         2pBf8aTxs1bhtrRv+aF+Ktu6FZj+dRuMEAhXkQry2FPkqEQ31LJvDj4XYWiR/PNci/Hs
-         uVsuR4Ra7oxnpcOPsaqGjrHPRkma5Vmdaxxcz/PT1ilXSY7CR1zNzinsyg2tZZJ7pTPF
-         f1XYO1cDsunFRCTNOM27xVRquMMG53oyZfPYf3HreWXv3yU24jmgrYUzTfMipWaV6c0i
-         KK1IjBzRS6emUIzDegjLjvJYnh1vlu7d7h1LzkgK/lv4raBzuyDqz7wAgNWHuiyR4MID
-         XuXA==
+        bh=IzxgIsKBLy9Uo/RJ5aMTM+y5Ci98qZZTufyvn4tb+6I=;
+        b=L/LwCJXL2/rUxvp4jxtPXzvbBABZnRBEI+/tINv5ZwQhc/cE+Exqf2et/UnaJO25Zv
+         DMvI+LoOAWgofu4IkECDNJl3ZkWp/Aq4S3yJddAvEixut0wP/9yyzxWjRhCd4jjbylFA
+         Vu4TVwC//UA9/qSeIZ/DVaNNj8RjUHFxl5tYfNRzQkt4ta/kLo0i/mbMzBZxDL/yqRlQ
+         hmxvXXfLnXKjzZwdGjbQKOT0uOWsjahqlY4CnH7/NRAjKA0Eh3vYif30gyaNTvgcwQBJ
+         HUBxLsEhM0pmhZA1I7yuJuYOYw7svwLfXdhQ6cyExe+FQZmMmPvoyNx4BWd8hMA6yzsJ
+         yKjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779466070; x=1780070870;
+        d=1e100.net; s=20251104; t=1779466269; x=1780071069;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=Z7CZniyudQvtGykBjwFqflJux61iIz/Fi25N4Y0qOJI=;
-        b=Q59POtnpvz/+J60L72fVfbYT0jYAVgQmOSguj1HHglsnVHdM7T4+RWxRasql/ItkBM
-         GQMS7oalnq/gJMJdaXJbi/QC15JkTuZqUWCKMWjXdvWnJaK4/oKCC3VIbyHs/q4Suc0t
-         r20URtS6IOq2rJ/tqbJZhu0baqALQ3OJrwlbsXMYDbaBI4Tg6anvwKcbYiGzV+o6Uhos
-         kuszqCEAWg/KqRoZW0y+Y8ct0tLpjcELkJfzxNIn7WafzeCp/Zc2DaPjP0NQ2UNa7HsR
-         qS/tFhFXGsYnaDcspj3t0GQwidUt4mZEUer17yYcidaQa5gHQMF+3Lpgv2S0NIUsr9Tm
-         twyQ==
-X-Gm-Message-State: AOJu0YyYLv2ePGiCPKNa7LWT4z+yI92iGZEe1UktCWNDk9z2IIFi9Cgv
-	/JwGyvqQMJP5k7OFS91KntgcAvyIrm2eLVlUeXRiNPjib+R60r3ivG4bTzI4StIKwbiLrqQjRXI
-	oDkHpojAJN++k1/D6v/rh8SJZaWciCpVRKGwQsm925FCyfAANzga5LtAh4/XXITVMnvRFa+wCTk
-	IfL+cRR+VncTzILJdxSqbZehYUXoL1EhjsOBx0
-X-Gm-Gg: Acq92OE9QgaayPClVThdxDAHqMJALbHj86EGp0CO/e6F7NaMu6Nmz0VvWuGUpVymZ4M
-	t1Yz9saWltAiKN/WUmWAM7PlNeIPXuVPklceGkkLvRmwXUv6U5o7Vo93w+G831usptBRLKb1HP9
-	vy6VZvUvK0tc4a3Pd5Q1rL0eBaP28aSu7JjhzGcq81VhS2TQQjsw+1HAL1YpMmtnHT9zeyFnKBr
-	E1aPg==
-X-Received: by 2002:a05:690e:1284:b0:65c:74c2:31c6 with SMTP id 956f58d0204a3-65eca654410mr2973347d50.5.1779466070039;
-        Fri, 22 May 2026 09:07:50 -0700 (PDT)
-X-Received: by 2002:a05:690e:1284:b0:65c:74c2:31c6 with SMTP id
- 956f58d0204a3-65eca654410mr2973309d50.5.1779466069568; Fri, 22 May 2026
- 09:07:49 -0700 (PDT)
+        bh=IzxgIsKBLy9Uo/RJ5aMTM+y5Ci98qZZTufyvn4tb+6I=;
+        b=Jzhct7p7n29WfMekU8KXiSHZc+5mkkOH4LddPPF8DrqlfsUYvGZPlMpTRIuBzrXLix
+         iIRezoZVVhQwscyRgFLdWYdxbs9AH8SUS8bQmV0YmkOZb7si+Mcjtx0nOaYC9NwYiGRH
+         Xiyd8o2z6VzUUT6HqLl2/H1t0XCCCprk25ABzvimNL+8tXsd6Cn+Qu+NU4uBaZPn32IL
+         Ul+0yOJ+HRpvddDu74BAoxOgxRyKb8VmAj7j/OREAKkueUJym6Qci7ET6ej8rvUPwSf0
+         oR2GGeVlXGnJRTlRZ7FTk3/c1Yv042uVSRdWu7IDeoYJ/AI4N45ieVxPEx1BfL2k470o
+         sB4Q==
+X-Gm-Message-State: AOJu0Yx2rrduIuh93MKk5FmkmVzJ5tEVRmc7ej/RoqkVABqFE2BohItd
+	+/q2kmCDCuUsE7a1KD8m51Q/Si6bXWRZibpJ1G++c2wbKZG5bEsDZDNwkzuj/ZomNMAuQUJuaEf
+	8K8U0FOaTLnu1C6+HDqBfkFEwrTTN9V1sxAjbY9dQrG9sujxOEJ4k+YCWMxlMCyXkVxDlRQVdH7
+	c74RTZSa2MV59aOIqDGkeQx+/T+ZEs5aRvF09I+jcL3TzrR3I=
+X-Gm-Gg: Acq92OHd1lufJDCSQSds6xSF57WEmhQ64k7ntfuM0JMA7FYLS0AHBBQDkx3N8H4IJfP
+	5B61oAoukaovhqrzh6dWnuaY9RjcIAqGWaM/FzyqVGpm2xm5slir3Gn83ttkh+3xRAPt1s+mDPi
+	VBhOmv7qQh3oM0bfiqlCSJvgxLEmzVkK3QVqcvfxw1KD+jTf9q2/unCW1zRDMB8InkOx7wRXh07
+	ebW4g==
+X-Received: by 2002:a53:c049:0:20b0:65e:b05:7679 with SMTP id 956f58d0204a3-65ec9631f73mr3544900d50.3.1779466269022;
+        Fri, 22 May 2026 09:11:09 -0700 (PDT)
+X-Received: by 2002:a53:c049:0:20b0:65e:b05:7679 with SMTP id
+ 956f58d0204a3-65ec9631f73mr3544806d50.3.1779466268532; Fri, 22 May 2026
+ 09:11:08 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -118,15 +118,15 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 References: <20260522150009.121603-1-npache@redhat.com> <CAA1CXcCoDU_pnp0SmMzRi8wPGB1OBjbbokevq2X_03X1vpWtOw@mail.gmail.com>
- <ahByO_HWn6MB8z-u@lucifer>
-In-Reply-To: <ahByO_HWn6MB8z-u@lucifer>
+ <bd622950-62cf-4b57-b3ac-89635f28fa4f@kernel.org>
+In-Reply-To: <bd622950-62cf-4b57-b3ac-89635f28fa4f@kernel.org>
 From: Nico Pache <npache@redhat.com>
-Date: Fri, 22 May 2026 10:08:19 -0600
-X-Gm-Features: AVHnY4K-NMEYaoOF8CwzqrbGVrRxOSsC61YCW8vw8BzLOXMR_M4k6Y4gQwbZHRs
-Message-ID: <CAA1CXcDoFdZZ4aBx0BPA7QXYKYBYDoqUiLTLYe3L5opJ0LsJGg@mail.gmail.com>
+Date: Fri, 22 May 2026 10:11:38 -0600
+X-Gm-Features: AVHnY4Kw4pwY2uJsQhaEmVi-b5AxtiG-JxHuFGdnogUOlR8F2xU-TlkRWivxYiQ
+Message-ID: <CAA1CXcD373fFfo9YPWRj8mJ_rsnzyCrpn1uk3=k7kU=QuaLOgg@mail.gmail.com>
 Subject: Re: [PATCH mm-hotfixes-unstable v18 00/14] khugepaged: add mTHP
  collapse support
-To: Lorenzo Stoakes <ljs@kernel.org>
+To: "Vlastimil Babka (SUSE)" <vbabka@kernel.org>
 Cc: linux-doc@vger.kernel.org, akpm@linux-foundation.org, 
 	linux-kernel@vger.kernel.org, linux-mm@kvack.org, 
 	linux-trace-kernel@vger.kernel.org, aarcange@redhat.com, 
@@ -136,11 +136,11 @@ Cc: linux-doc@vger.kernel.org, akpm@linux-foundation.org,
 	dev.jain@arm.com, gourry@gourry.net, hannes@cmpxchg.org, hughd@google.com, 
 	jack@suse.cz, jackmanb@google.com, jannh@google.com, jglisse@google.com, 
 	joshua.hahnjy@gmail.com, kas@kernel.org, lance.yang@linux.dev, 
-	liam@infradead.org, mathieu.desnoyers@efficios.com, matthew.brost@intel.com, 
-	mhiramat@kernel.org, mhocko@suse.com, peterx@redhat.com, pfalcato@suse.de, 
-	rakie.kim@sk.com, raquini@redhat.com, rdunlap@infradead.org, 
-	richard.weiyang@gmail.com, rientjes@google.com, rostedt@goodmis.org, 
-	rppt@kernel.org, ryan.roberts@arm.com, shivankg@amd.com, 
+	liam@infradead.org, ljs@kernel.org, mathieu.desnoyers@efficios.com, 
+	matthew.brost@intel.com, mhiramat@kernel.org, mhocko@suse.com, 
+	peterx@redhat.com, pfalcato@suse.de, rakie.kim@sk.com, raquini@redhat.com, 
+	rdunlap@infradead.org, richard.weiyang@gmail.com, rientjes@google.com, 
+	rostedt@goodmis.org, rppt@kernel.org, ryan.roberts@arm.com, shivankg@amd.com, 
 	sunnanyong@huawei.com, surenb@google.com, thomas.hellstrom@linux.intel.com, 
 	tiwai@suse.de, usamaarif642@gmail.com, vbabka@suse.cz, vishal.moola@gmail.com, 
 	wangkefeng.wang@huawei.com, will@kernel.org, willy@infradead.org, 
@@ -152,87 +152,73 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
 	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	FREEMAIL_CC(0.00)[vger.kernel.org,linux-foundation.org,kvack.org,redhat.com,arm.com,nvidia.com,kernel.org,linux.alibaba.com,sk.com,gentwo.org,lwn.net,linux.intel.com,gourry.net,cmpxchg.org,google.com,suse.cz,gmail.com,linux.dev,infradead.org,efficios.com,intel.com,suse.com,suse.de,goodmis.org,amd.com,huawei.com,os.amperecomputing.com];
 	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-89026-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-89028-lists,linux-doc=lfdr.de];
 	DKIM_TRACE(0.00)[redhat.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	MIME_TRACE(0.00)[0:+];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[npache@redhat.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[58];
-	TAGGED_RCPT(0.00)[linux-doc];
+	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	NEURAL_HAM(-0.00)[-1.000];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,mail.gmail.com:mid]
-X-Rspamd-Queue-Id: 605375B75DB
+	RCPT_COUNT_GT_50(0.00)[59];
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[]
+X-Rspamd-Queue-Id: 12BD25B77B0
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Fri, May 22, 2026 at 9:17=E2=80=AFAM Lorenzo Stoakes <ljs@kernel.org> wr=
-ote:
+On Fri, May 22, 2026 at 9:13=E2=80=AFAM Vlastimil Babka (SUSE)
+<vbabka@kernel.org> wrote:
 >
-> On Fri, May 22, 2026 at 09:07:29AM -0600, Nico Pache wrote:
+> On 5/22/26 17:07, Nico Pache wrote:
+> > On Fri, May 22, 2026 at 8:59=E2=80=AFAM Nico Pache <npache@redhat.com> =
+wrote:
+> >>  include/trace/events/huge_memory.h         |  34 +-
+> >>  mm/huge_memory.c                           |  11 +
+> >>  mm/khugepaged.c                            | 634 ++++++++++++++++----=
+-
+> >>  5 files changed, 584 insertions(+), 172 deletions(-)
+> >>
+> >>
+> >> base-commit: 6c8cb505a5634594b3ea159fd1c71bce2acf3346
+> >
 > > Whoops I manually changed the coverletter subject to reflect that this
 > > in on mm-hotfixes-unstable but never updated the others...
-> >
-> > Hopefully that is ok. Just a small mistake. Base commit is referenced h=
-ere.
 >
-> It's not ok, this isn't suitable for a hotfix in any way shape or form?
->
-> As you know, because we told you :) May has been difficult because of
-> conferences, holidays (and in my case burnout recovery).
->
-> And unfortunately the series seems to have needed quite a bit of review a=
-gain
-> (my suggestion to you would be to ensure you don't make major changes, on=
-ly
-> small incremental ones on the basis of review feedback).
->
-> So this isn't viable for 7.2, and we'll have to target 7.3. Therefore the=
-re
-> was no rush.
->
-> Also please don't spring a respin on this series on us without discussion
-> first, with people away and (frankly) the amount of work involved here,
-> you're going to have to accept the pace that workload/availability permit=
-s.
->
-> Adding spurious hotfixes tags doesn't help anything :) please don't do th=
-at
-> again.
+> But why? That branch is for hotfixes that would go to the current 7.1-rcX
+> series. mm-unstable would be the correct one for this, AFAICT.
 
-Hi,
+Sorry this was a misunderstanding. The goal here was to base this off
+the closest base commit behind where my v17 already lies in the tree.
 
-Sorry for the confusion but Andrew and I spoke about this before I
-sent it, and he confirmed that I should send it against this tree to
-prevent merge conflicts.
+That just happened to be the hotfixes tree (previously it was
+mm-unstable, but that seems the have moved).
 
-Because Zi's series depends on this, and this is already in the mm
-tree, choosing a candidate before my commits was best to prevent merge
-conflicts.
-
-The intent wasn't that this is a hotfix, just that this was the
-closest base before the v17 that is already in the tree.
-
-Sorry for the confusion, hopefully Andrew can still apply it to the
-correct tree.
-
+Sorry...
 -- Nico
 
 >
-> Thanks, Lorenzo
+> > Hopefully that is ok. Just a small mistake. Base commit is referenced h=
+ere.
+> >
+> > -- Nico
+> >
+> >
+> >> --
+> >> 2.54.0
+> >>
+> >
 >
 
 
