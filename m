@@ -1,244 +1,286 @@
-Return-Path: <linux-doc+bounces-89012-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89014-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sCfrN0h2EGoZXgYAu9opvQ
-	(envelope-from <linux-doc+bounces-89012-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 17:29:12 +0200
+	id YIjrIct7EGrdXwYAu9opvQ
+	(envelope-from <linux-doc+bounces-89014-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 17:52:43 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 47B525B6E56
-	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 17:29:12 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 916525B72EE
+	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 17:52:42 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id F131F3009FA9
-	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 15:26:23 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id F2C663058D85
+	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 15:28:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5BAAA400E0A;
-	Fri, 22 May 2026 15:26:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 812BD466B57;
+	Fri, 22 May 2026 15:28:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b="frOLufSF"
+	dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b="ROYfWapt"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B4A1F4028FD
-	for <linux-doc@vger.kernel.org>; Fri, 22 May 2026 15:26:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A93FB29CB24;
+	Fri, 22 May 2026 15:28:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.158.5
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779463582; cv=none; b=DJGoYtE3TDvkLSsghVQP9wvkprS30W3WxpMGRacs35s7j/e1dSqTChZC0BjyqxBCIwoRcMhm4TeX1mXdzPVmmu+cl2FXUJWm5RiDZQXiXwLgB4Q1cGEG4rf1zVxr0kL6kiKPC/zu0ZQCJLUvMntc/XZ0R/m+mHULXyRAQguUt8o=
+	t=1779463704; cv=none; b=QmqqeAKKTRmKMMil3Qq1PEPIgGdRHdEhNRaTZgHCf8ZWLqS+y++Qi6KMuOdc+p0Ud9FbaS9eQ/YOmKEhUi1oVKctuJqEX+2cK/i9Y365MdJc0RemepH7Yal0B8vPyK/mCbnCxeBkGdq6xAaLOYoGUOK2iN0mBdMnZStl1PQHK7Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779463582; c=relaxed/simple;
-	bh=j3asqpI8gDocPiQLjR114Plzov6j1keIlqNEsz+jjpY=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=o1DCbJ4fGYb2rbW5DF0gcEvwJ+tt5ugAGmALvOcJ/uSACyiq2RO2/31dE5Ft2vJIt36fd1yuTM+NHZsLMW4bx8BYZgUg0kVrc/KGVWxE26MlETgEbEGaJ0LWnqOUao3LB9D9vHWnRcDPEjWhuAJbgmpvMWv9ScwLcmZonTHdSrY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b=frOLufSF; arc=none smtp.client-ip=209.85.128.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.com
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-488ab2db91aso78493065e9.3
-        for <linux-doc@vger.kernel.org>; Fri, 22 May 2026 08:26:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1779463579; x=1780068379; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=1vEySuvchtiTT5/Luvk9UxfuyTrDBUvQ3fx5cuplJao=;
-        b=frOLufSFn6M9m9T+s5hdMx7NvCM4OttOO5BOmqDn17pFqOhJTWA0DrZEaM+oHNiHZM
-         iqjkeejV72hcowzoi4bYFuXyll9t2Xb5NpFwBN0cA/CoiArH8VnSFCXGWhXkCWL/YkSq
-         pp66NmumIFoWIKZFwP818kVOBqi8osg/x+6w8huwNXdfBVOhNciuer4tl0Rkhx238m0I
-         ukO7xLMjkPOC61UgUFso8DOnuB1dEK6XiIa6uJpsrT1ae42YF+bwIgmEMVyj9q2LsP98
-         Um7qihWRA57WzR/ZVM2dcnOssFs4slDczpeIPFunbcBBUdoFCHmaOqJKp1nyjjMt3ZNV
-         64Gw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779463579; x=1780068379;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=1vEySuvchtiTT5/Luvk9UxfuyTrDBUvQ3fx5cuplJao=;
-        b=iAa/4z390q1vTyuE2kfNClcmw3EYqGRTtnSUVkR/5r+mS5GFJNPJvVa1R21exRUF/8
-         yvYnfkF4B7D4PTz+eNTLpsAltsCrYWPWm57/QaCjv66yS3ggM7mHSI01d1S+THPTLNEC
-         dhomhYbAX05yPUXTjXY7aQk4gH8l+GQiuRzagsd+DS0K4TYNNb7eZCfKBnFLn9uCb2Ar
-         whSznWZrhf9hJuxdswaEbrJuP58EZhSbxLMonKDRO6Q7Mt7MBcQGdCSSbPBnbCJpaKpS
-         74OW7BvDBv8bd6D2xM0bgrhQzhxBmgocFPVXJGho40qME+7pJru/XGPYafU2Aazldtjc
-         1iBA==
-X-Forwarded-Encrypted: i=1; AFNElJ/hSmrJbYRF1W1cRFGhx1YgrZ3hH7psoVpNL90LzsRgrRzk/JpLvqp08zul1ICP0mY9EBCHou4OZQg=@vger.kernel.org
-X-Gm-Message-State: AOJu0YymU5r8QcF3PTHzojjG3fWM+loBDSgfoXYMS7fEcmHIQpAjy5QQ
-	L1CnXRJKdW2ULHOTf/JvDcB4k6tH26oFqrmO+QdkmVQ3jnyYP3EZmZE71NBPp5iSdeQ=
-X-Gm-Gg: Acq92OHW73eQFspzO39ZTcQh8gie5szfiuOx5Jp4Nv6bg7d0BEOLfOqwrrPjBu0d5+/
-	7nrShWgZYfVzZb44nc74DpLaO0TxZV9YGkiJOkDHKWymcHN7Rao93aSB5xbGxUuIXDpRMgcnMjx
-	vzRBqnXGbKy+G10oZomnqMEHAbOSWWLE8v7BNvHowGX+eo+stS8PqnrxF+fexeUMuKnV4Ce7hzG
-	UYqVyEOf7IYMDpuykP0Wz7O73+pwHa0Kt82LruGGBo16s+oRnSd4kOCq8ZvXA5VC4/UtM6rYasp
-	El3niwcSvKuvHtDdJ50ZvPVhDpx6DW6ByvMQr75Gmi7C7ppiI97mRPiq5uzuO/09pxAgPVVLpJU
-	geYpau1NM1/duR6wmz0JhtJONZQqxsFTa2U7wJUv1u7BuWIFZUGUHyHL/SzadQJP1uyAx68r0Ui
-	A7u2052FZeOn7Ge8UPwEqpLkOk3vbv3D2n19aUlDNOdaDFVZqfoXKtq5EJqAg=
-X-Received: by 2002:a05:600c:4ecc:b0:48a:56de:d62a with SMTP id 5b1f17b1804b1-490424b3c7fmr53184145e9.11.1779463579036;
-        Fri, 22 May 2026 08:26:19 -0700 (PDT)
-Received: from localhost.localdomain (nat2.prg.suse.com. [195.250.132.146])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-490454a0b82sm53694435e9.9.2026.05.22.08.26.17
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 22 May 2026 08:26:18 -0700 (PDT)
-Date: Fri, 22 May 2026 17:26:16 +0200
-From: Michal =?utf-8?Q?Koutn=C3=BD?= <mkoutny@suse.com>
-To: Eric Chanudet <echanude@redhat.com>
-Cc: Johannes Weiner <hannes@cmpxchg.org>, Michal Hocko <mhocko@kernel.org>, 
-	Roman Gushchin <roman.gushchin@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
-	Muchun Song <muchun.song@linux.dev>, Andrew Morton <akpm@linux-foundation.org>, 
-	Maarten Lankhorst <dev@lankhorst.se>, Maxime Ripard <mripard@kernel.org>, 
-	Natalie Vock <natalie.vock@gmx.de>, Tejun Heo <tj@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
-	Shuah Khan <skhan@linuxfoundation.org>, cgroups@vger.kernel.org, linux-mm@kvack.org, 
-	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	"T.J. Mercier" <tjmercier@google.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, 
-	Maxime Ripard <mripard@redhat.com>, Albert Esteve <aesteve@redhat.com>, 
-	Dave Airlie <airlied@gmail.com>, linux-doc@vger.kernel.org
-Subject: Re: [PATCH v2 2/2] cgroup/dmem: add dmem.memcg control file for
- double-charging to memcg
-Message-ID: <ahBxB5a9sX9DEWvl@localhost.localdomain>
-References: <20260519-cgroup-dmem-memcg-double-charge-v2-0-db4d1407062b@redhat.com>
- <20260519-cgroup-dmem-memcg-double-charge-v2-2-db4d1407062b@redhat.com>
+	s=arc-20240116; t=1779463704; c=relaxed/simple;
+	bh=ENJMygQBNEXyKX3kNPC/VUchIDtSHO89qvMqyZoCGyA=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=QT0Qd8MTUodpuXM3c5cEclmLQt+IxhRVAg4SKw4W9/Og5XsINSpdwZwK+UW4NiI5BTPSbYiRZkObUFfwxioPFxWjmqLBPx3rabA7/EpMOf0cFtprvqXT3TJPW/O/eMzT8733U5D3LadnXhWOU5cPQFgKYuNqPr5X1I+ghwMSgVM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=ROYfWapt; arc=none smtp.client-ip=148.163.158.5
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.ibm.com
+Received: from pps.filterd (m0360072.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 64MEYxmc2191659;
+	Fri, 22 May 2026 15:27:58 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=pp1; bh=rMrxGouPSv/RreY0Aq+Pr4WXmG770mQeP5vSZQlFE
+	1A=; b=ROYfWaptcTTaa6DH8qXsx/ilF9y0OxFZsmzIF53EzE15tlYLYEYC4EO8C
+	FG+OstVtU5bULxrfhtfUNSaKlZTsfCM3Bcb7pvJVzvDPN/RO9ZbR8QkmuqXCQdxx
+	tYgXo6KnB5dRgQJ/YqsKFjFngEi4C6ul2uuPKhtQpAtdvsYFxFWIF9iJyiJaLBlK
+	fB9tONaiJtOmRX/KahTV3FfE3OejxzMJJCeBhxSsPsgYyEw4JLAjuRUEIDlEDT5y
+	pqBBpnR/ueq7UPsiYIaHTBpPfQwnearqzwJlbyQ1bbPp+0rjwvU5suqyUyBNgQvR
+	lZItyqvX/46INma76kMSmW2tO5mTg==
+Received: from ppma11.dal12v.mail.ibm.com (db.9e.1632.ip4.static.sl-reverse.com [50.22.158.219])
+	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4e6hawk6td-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Fri, 22 May 2026 15:27:57 +0000 (GMT)
+Received: from pps.filterd (ppma11.dal12v.mail.ibm.com [127.0.0.1])
+	by ppma11.dal12v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 64MFO7lj013973;
+	Fri, 22 May 2026 15:27:57 GMT
+Received: from smtprelay06.fra02v.mail.ibm.com ([9.218.2.230])
+	by ppma11.dal12v.mail.ibm.com (PPS) with ESMTPS id 4e75kyh5wx-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Fri, 22 May 2026 15:27:56 +0000 (GMT)
+Received: from smtpav04.fra02v.mail.ibm.com (smtpav04.fra02v.mail.ibm.com [10.20.54.103])
+	by smtprelay06.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 64MFRraX23659004
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Fri, 22 May 2026 15:27:53 GMT
+Received: from smtpav04.fra02v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 529212004B;
+	Fri, 22 May 2026 15:27:53 +0000 (GMT)
+Received: from smtpav04.fra02v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id E313E20043;
+	Fri, 22 May 2026 15:27:49 +0000 (GMT)
+Received: from localhost.localdomain (unknown [9.124.216.126])
+	by smtpav04.fra02v.mail.ibm.com (Postfix) with ESMTP;
+	Fri, 22 May 2026 15:27:49 +0000 (GMT)
+From: Amit Machhiwal <amachhiw@linux.ibm.com>
+To: linuxppc-dev@lists.ozlabs.org, Madhavan Srinivasan <maddy@linux.ibm.com>
+Cc: Vaibhav Jain <vaibhav@linux.ibm.com>,
+        Amit Machhiwal <amachhiw@linux.ibm.com>,
+        Anushree Mathur <anushree.mathur@linux.ibm.com>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Nicholas Piggin <npiggin@gmail.com>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>, kvm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, lkp@intel.com
+Subject: [PATCH v3 0/5] KVM: PPC: Handle CPU compatibility mode for nested guests
+Date: Fri, 22 May 2026 20:57:39 +0530
+Message-ID: <20260522152744.55251-1-amachhiw@linux.ibm.com>
+X-Mailer: git-send-email 2.50.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="af2hel7jza3hmfqp"
-Content-Disposition: inline
-In-Reply-To: <20260519-cgroup-dmem-memcg-double-charge-v2-2-db4d1407062b@redhat.com>
-X-Spamd-Result: default: False [-4.26 / 15.00];
-	SIGNED_PGP(-2.00)[];
+Content-Transfer-Encoding: 8bit
+X-TM-AS-GCONF: 00
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTIyMDE1MCBTYWx0ZWRfX4dQaiEJFMzwV
+ Dr3Vm1pDwnJA4jaIA8CtSpq8uTbwRRa1iZBXTv2xggVWODP6fm/crVu3bVk9sef+6BRd9Dr0LTg
+ Gdy6xk8pp85S5JiP72+ZNQ0YsCK494RRnh3+n+URtkk7bDNO3hsvZpdJ+KntLkNlJFyrBND8MG4
+ pcVVlQdhZaed73wzI82DCi17lp30P8+cvlxrwT0DQjb70Tz/WotBkkRPg/kwiAibwg7D17kVWq9
+ lR3LZ7qZa0VlWr6ozeDp6qzZArE2z9NbSG6RTL0cVj7R9lz1lWhSthgJSGNUfU+DXdNcBeUy7k4
+ 3rb0XmiGput7axMQBqs+zCnpJ8ChHELZoo79ZmK6DZfC5yHZWG3Jk/y6pcIUgzntjjiMckd82IZ
+ 5EsdvMH4ru/hA3uK7Czf40XDUP9DmCuVN7nQvqmBN7EnZmwVs8unSkZbTLI03/cFfnqJV4awaNl
+ B4WQD9LCE8V5tRKgjog==
+X-Authority-Analysis: v=2.4 cv=Np/htcdJ c=1 sm=1 tr=0 ts=6a1075fe cx=c_pps
+ a=aDMHemPKRhS1OARIsFnwRA==:117 a=aDMHemPKRhS1OARIsFnwRA==:17
+ a=NGcC8JguVDcA:10 a=VkNPw1HP01LnGYTKEx00:22 a=RnoormkPH1_aCDwRdu11:22
+ a=RzCfie-kr_QcCd8fBx8p:22 a=VwQbUJbxAAAA:8 a=VnNF1IyMAAAA:8
+ a=XsWQ994mRvDqN3FwEnAA:9
+X-Proofpoint-ORIG-GUID: lxJtId-GrOVNYhhDbsrrvrB1xA96ZzBt
+X-Proofpoint-GUID: SKu5a__dTSr5dQAhGxcMvxMyNk8g9BNq
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-05-22_04,2026-05-18_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 spamscore=0 clxscore=1011 priorityscore=1501 impostorscore=0
+ lowpriorityscore=0 suspectscore=0 adultscore=0 phishscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2605130000 definitions=main-2605220150
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[suse.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=google];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[ibm.com,none];
+	R_DKIM_ALLOW(-0.20)[ibm.com:s=pp1];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-89012-lists,linux-doc=lfdr.de];
-	FREEMAIL_CC(0.00)[cmpxchg.org,kernel.org,linux.dev,linux-foundation.org,lankhorst.se,gmx.de,lwn.net,linuxfoundation.org,vger.kernel.org,kvack.org,lists.freedesktop.org,google.com,amd.com,redhat.com,gmail.com];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	FREEMAIL_CC(0.00)[linux.ibm.com,redhat.com,gmail.com,ellerman.id.au,kernel.org,lwn.net,linuxfoundation.org,vger.kernel.org,intel.com];
+	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	DKIM_TRACE(0.00)[suse.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mkoutny@suse.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-89014-lists,linux-doc=lfdr.de];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[amachhiw@linux.ibm.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[ibm.com:+];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.ibm.com:mid,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo];
 	TAGGED_RCPT(0.00)[linux-doc];
+	NEURAL_HAM(-0.00)[-1.000];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:dkim,localhost.localdomain:mid,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: 47B525B6E56
+	RCVD_COUNT_SEVEN(0.00)[11]
+X-Rspamd-Queue-Id: 916525B72EE
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
+On POWER systems, newer processor generations can operate in compatibility
+modes corresponding to earlier generations (e.g., a Power11 system running
+in Power10 compatibility mode). In such cases, the effective CPU level
+exposed to guests differs from the physical processor generation.
 
---af2hel7jza3hmfqp
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v2 2/2] cgroup/dmem: add dmem.memcg control file for
- double-charging to memcg
-MIME-Version: 1.0
+This creates a problem for nested virtualization. When booting a nested KVM
+guest (L2) inside a host KVM guest (L1) running in a compatibility mode,
+userspace (e.g., QEMU) may derive the CPU model from the raw hardware PVR
+and attempt to configure the nested guest accordingly. However, the L1
+partition is constrained by the compatibility level negotiated with the
+hypervisor (L0), and requests exceeding that level are rejected, leading to
+guest boot failures such as:
 
-Hello Eric.
+  KVM-NESTEDv2: couldn't set guest wide elements
 
-On Tue, May 19, 2026 at 11:59:02AM -0400, Eric Chanudet <echanude@redhat.co=
-m> wrote:
-> Add a root-only cgroupfs file "dmem.memcg" that lets an administrator
-> configure whether allocations in a dmem region should also be charged to
-> the memory controller.
+This series addresses the issue in two steps:
 
-This kinda makes sense as it is not unlike io.cost.* device
-configurators.
+1. Detect and reject invalid compatibility requests early in KVM to avoid
+   late failures.
 
-Just for my better understanding -- will there be a space for userspace
-to switch this? (No charged dmem allocations happen before responsible
-userspace runs, so that the attribute remains unlocked.)
+2. Provide a mechanism for userspace to query the effective CPU
+   compatibility modes supported by the host, so it can select an
+   appropriate CPU model for nested guests.
 
-(I'm rather indifferent about the actual double charging/non-charging
-matter.)
+To achieve this, the series introduces a new KVM capability and ioctl
+(KVM_CAP_PPC_COMPAT_CAPS / KVM_PPC_GET_COMPAT_CAPS) that expose the
+compatibility modes supported by the host.
+
+Why a new UAPI?
+---------------
+While cpu-version is available in /proc/device-tree/cpus/<cpu#>/cpu-version
+on both L1 booted on PowerNV and PowerVM LPARs, the UAPI approach is
+preferable for several reasons:
+
+1. pHYP (L0) capabilities: On PowerVM, we need to rely on capabilities
+   negotiated with pHYP in KVM, not just device tree properties. The
+   cpu-version property depicts the current compat mode but doesn't point
+   to what all compat modes are supported for the nested guest.
+
+2. procfs dependency: Not all systems run with procfs enabled (CONFIG_PROC_FS
+   is optional). Minimal configurations like buildroot might disable it, but
+   KVM ioctl works regardless since it accesses kernel data structures
+   directly.
+
+3. Kernel validation: The kernel validates and normalizes the compatibility
+   information. Patch 1 adds validation logic that rejects invalid
+   compatibility requests early, ensuring userspace gets validated,
+   consistent data.
+
+4. Abstraction & stability: /proc/device-tree is an implementation detail.
+   The UAPI provides a stable interface that won't break if the underlying
+   mechanism changes.
+
+5. Semantic clarity: KVM_PPC_GET_COMPAT_CAPS clearly expresses what
+   compatibility modes can be used for KVM guests, vs. parsing device tree
+   which requires understanding the semantic meaning of cpu-version.
+
+The implementation supports both:
+
+  - PowerVM (nested API v2), where compatibility information is obtained
+    via the H_GUEST_GET_CAPABILITIES hypercall.
+  - PowerNV (nested API v1), where compatibility is derived from the device
+    tree ("cpu-version") representing the effective processor compatibility
+    level.
+
+This allows userspace (e.g., QEMU) to select a CPU model consistent with
+the host compatibility mode, avoiding mismatches and enabling successful
+nested guest boot.
+
+Changes in v3:
+  - Added "Why a new UAPI?" section to cover letter addressing questions
+    about the need for a new UAPI vs. using existing mechanisms like
+    /proc/device-tree
+  - Fixed initialization of 'r' in KVM_PPC_GET_COMPAT_CAPS ioctl handler
+    from 0 to -ENOTTY for proper error handling when the operation is not
+    supported
+  - Added Vaibhav's "Suggested-by" tags
+  - Have retained Anushree's "Tested-by" tags as no major code changes
+  - Fixed documentation build warning reported by kernel test robot and
+    added "Reported-by" and "Closes" tags to patch 5
+
+Changes in v2:
+  - Squashed patches 2 and 3 from v1 (capability introduction and ioctl
+    wiring) into a single patch for better logical grouping
+  - Changed kvm_ppc_compat_caps.flags from __u32 to __u64 for consistency
+    and future extensibility
+  - Addressed other review comments
+  - Improved commit messages with clearer explanations of the changes
+
+Patch summary:
+  [1/5] Validate arch_compat against host compatibility mode
+  [2/5] Introduce KVM_CAP_PPC_COMPAT_CAPS and wire up ioctl
+  [3/5] Implement capability retrieval for PowerVM (API v2)
+  [4/5] Add PowerNV support (API v1)
+  [5/5] Document the new ioctl
+
+Tested on:
+  - Power11 pSeries LPAR in Power10 compatibility mode (nested API v2)
+  - Power10 PowerNV system (and QEMU TCG PowerNV 11) with nested
+    virtualization (API v1) with various combinations of KVM L1/L2 guests
+    in various supported compatibility modes.
+
+With this series, nested guests boot successfully in configurations where
+they previously failed due to compatibility mismatches.
+
+Related QEMU series:
+  A corresponding QEMU series adds support for querying and using these
+  compatibility capabilities when configuring nested KVM guests:
+  https://lore.kernel.org/all/20260502140021.69712-1-amachhiw@linux.ibm.com/
+
+v2: https://lore.kernel.org/linuxppc-dev/20260513100755.83215-1-amachhiw@linux.ibm.com/
+v1: https://lore.kernel.org/linuxppc-dev/20260430054906.94431-1-amachhiw@linux.ibm.com/
+
+Amit Machhiwal (5):
+  KVM: PPC: Book3S HV: Validate arch_compat against host compatibility
+    mode
+  KVM: PPC: Introduce KVM_CAP_PPC_COMPAT_CAPS and wire up ioctl
+  KVM: PPC: Book3S HV: Implement compat CPU capability retrieval for KVM
+    on PowerVM
+  KVM: PPC: Book3S HV: Add support for compat CPU capabilities for KVM
+    on PowerNV
+  KVM: PPC: Document KVM_PPC_GET_COMPAT_CAPS ioctl
+
+ Documentation/virt/kvm/api.rst      | 35 ++++++++++++++++
+ arch/powerpc/include/asm/kvm_ppc.h  |  1 +
+ arch/powerpc/include/uapi/asm/kvm.h |  6 +++
+ arch/powerpc/kvm/book3s_hv.c        | 63 +++++++++++++++++++++++++++++
+ arch/powerpc/kvm/powerpc.c          | 21 ++++++++++
+ include/uapi/linux/kvm.h            |  4 ++
+ 6 files changed, 130 insertions(+)
 
 
->=20
-> To handle inheritance, dmem adds a depends_on the memory controller,
-> unless MEMCG isn't configured in.
->=20
-> Double-charging is disabled by default. Once a charge is attempted, the
-> setting is locked to prevent inconsistent accounting by a small 4-state
-> machine (off, on, locked off, locked on).
->=20
-> The memcg to charge is derived from the pool's cgroup, since the pool
-> holds a reference to the dmem cgroup state that keeps the cgroup alive
-> until it gets uncharged.
->=20
-> Signed-off-by: Eric Chanudet <echanude@redhat.com>
-> ---
->  Documentation/admin-guide/cgroup-v2.rst |  23 +++++
->  kernel/cgroup/dmem.c                    | 158 ++++++++++++++++++++++++++=
-+++++-
->  2 files changed, 178 insertions(+), 3 deletions(-)
->=20
-> diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admi=
-n-guide/cgroup-v2.rst
-> index 6efd0095ed995b1550317662bc1b56c7a7f3db23..1d2fa55ddf0faa17baa916a89=
-14d3033e8e42359 100644
-> --- a/Documentation/admin-guide/cgroup-v2.rst
-> +++ b/Documentation/admin-guide/cgroup-v2.rst
-> @@ -2828,6 +2828,29 @@ DMEM Interface Files
->  	  drm/0000:03:00.0/vram0 12550144
->  	  drm/0000:03:00.0/stolen 8650752
-> =20
-> +  dmem.memcg
-> +	A readwrite nested-keyed file that exists only on the root
-> +	cgroup.
-
-Strictly speaking this is not nested-keyed but flat keyed [1],
-which leads me to realization that this is the first instance of a boolean.
-All in call, such a composition comes to my mind (latter is RO):
-
-	drm/0000:03:00.0/vram0 enable=3D0|1 locked=3D0|1
-
-
-
-
-> +static ssize_t dmem_cgroup_memcg_write(struct kernfs_open_file *of, char=
- *buf,
-> +				       size_t nbytes, loff_t off)
-> +{
-> +	while (buf) {
-> +		struct dmem_cgroup_region *region;
-> +		char *options, *name;
-> +		bool flag;
-> +
-> +		options =3D buf;
-> +		buf =3D strchr(buf, '\n');
-> +		if (buf)
-> +			*buf++ =3D '\0';
-
-I recall there was a discussion about accepting only a single device per
-write(2) (at the same time I see this idiom is still present in other
-dmem.* files, so this is nothing to change in _this_ patch).
-
-Thanks,
-Michal
-
-[1] https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html#format
-
---af2hel7jza3hmfqp
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iJEEABYKADkWIQRCE24Fn/AcRjnLivR+PQLnlNv4CAUCahB1lBsUgAAAAAAEAA5t
-YW51MiwyLjUrMS4xMiwyLDIACgkQfj0C55Tb+AhJyQEA4ebIAV+4wgYjb7Cax+hS
-43nEgrk4mA0GQOKjivEd/KMA/A581miemqm16N6I0lzKn9Fm64QJ/G5K9t45IDQW
-dr8L
-=9Z82
------END PGP SIGNATURE-----
-
---af2hel7jza3hmfqp--
+base-commit: 1d5dcaa3bd65f2e8c9baa14a393d3a2dc5db7524
+-- 
+2.50.1 (Apple Git-155)
 
