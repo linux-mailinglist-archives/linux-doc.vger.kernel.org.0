@@ -1,129 +1,181 @@
-Return-Path: <linux-doc+bounces-89025-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89027-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MHlqChJ/EGrdXwYAu9opvQ
-	(envelope-from <linux-doc+bounces-89025-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 18:06:42 +0200
+	id 6E2+AQWDEGoHYgYAu9opvQ
+	(envelope-from <linux-doc+bounces-89027-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 18:23:33 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id C73DD5B75A1
-	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 18:06:41 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2EA6A5B78A1
+	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 18:23:32 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 769FB300B9C8
-	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 16:06:21 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id B8C8E302EE0A
+	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 16:08:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A06C43F54BB;
-	Fri, 22 May 2026 16:06:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5B20F395254;
+	Fri, 22 May 2026 16:08:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="IMCSY/AC"
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="uAfikFmu"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 71B24324716
-	for <linux-doc@vger.kernel.org>; Fri, 22 May 2026 16:06:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3F1F403E88
+	for <linux-doc@vger.kernel.org>; Fri, 22 May 2026 16:07:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.41
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779465976; cv=none; b=IpKEHpF0H/ULlCy2wOyE8bUSlP68BabceNE0FTYuy4Sqd+a1tRDfTt5nhoBDf6ttEhQ8JfmBVEsmKueCRKs0ylgD+/mJ1B9NOkDoTZQe3aouH9KebNZhvTootV8S50BrSUZkUQZHWvo+nFp4rwp42VSrc01rUMOVxob34djIpT0=
+	t=1779466080; cv=none; b=I52Dgzkri9BSNAQ76zLQsO2Jj9PuztYoiDgSHTGmQ234yIeuGsMn4i97tce0438cfD2Hozw/p0rKHOhgj4b0ak8XvznuhHhq2B9UehgxdyAZ3+LqELOgrsY6SCww9S3yPuCs5QlvXP0bCH7pKWmKspC87X+gKoC4RXqTwcVy9w8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779465976; c=relaxed/simple;
-	bh=9xacnRpg4W5meEuTwneUnNV8XO5zOlIIsbg3+CODjXM=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=R96RNVPvTIqfDybw/PjUxK29R6G15KojYfuT7RPP/EC2cO+wHEWKZcz1F67b+IToEcIJtlm7T6dY2/fewFvFlts2pkO8AoTvXzWwDa8nXDfU2ZI212ai/elweFrCKJCezalaPp6Nxt40DIFwODNESVxNd+zSRXUtsfOVMC5RASM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=IMCSY/AC; arc=none smtp.client-ip=185.246.84.56
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-02.galae.net (Postfix) with ESMTPS id A73441A3670;
-	Fri, 22 May 2026 16:06:11 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 71E0C6003C;
-	Fri, 22 May 2026 16:06:11 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 1590710811604;
-	Fri, 22 May 2026 18:06:06 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1779465970; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 in-reply-to:references; bh=9xacnRpg4W5meEuTwneUnNV8XO5zOlIIsbg3+CODjXM=;
-	b=IMCSY/ACLu9CWZgXj+dk/78nIdJb1q0gucT4uxcTaETe+wbx1NSPPUMewxeGUHlNFzVttv
-	Y6j6AU1i7+rN7/WmASadM/ByNeQ5gN/DIndccxv4HZzFqyrYQHRWaU6hC5/1Vjrq7w6EA4
-	EoJe8r6obpNICdEY/KCUJJ/86P3V3Z4DqDAETHPee2wT0Z6x0v2xVFXz/CZps168rt2UNG
-	XUGqjrtSXqZi34Hx+0JXW9JtiCcSHzPaADU6AL8NihbLleMWvjBplBUTKmOOX7AkV1Ydif
-	7cUd88eKeamgWqGqFYTgnx4tSbS6o9PJyFPXmTobz1nFOV1Opb8sfM+/fEWHYg==
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Tudor Ambarus <tudor.ambarus@linaro.org>
-Cc: Pratyush Yadav <pratyush@kernel.org>,  Michael Walle
- <mwalle@kernel.org>,  Takahiro Kuwano <takahiro.kuwano@infineon.com>,
-  Richard Weinberger <richard@nod.at>,  Vignesh Raghavendra
- <vigneshr@ti.com>,  Jonathan Corbet <corbet@lwn.net>,  Shuah Khan
- <skhan@linuxfoundation.org>,  Sean Anderson <sean.anderson@linux.dev>,
-  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,  Steam Lin
- <STLin2@winbond.com>,  linux-mtd@lists.infradead.org,
-  linux-kernel@vger.kernel.org,  linux-doc@vger.kernel.org
-Subject: Re: [PATCH v5 13/28] mtd: spi-nor: swp: Create a TB intermediate
- variable
-In-Reply-To: <a54562a0-1a75-401c-9508-8e0322d81a3f@linaro.org> (Tudor
-	Ambarus's message of "Fri, 22 May 2026 12:39:48 +0300")
-References: <20260507-winbond-v6-18-rc1-spi-nor-swp-v5-0-93453e1a9597@bootlin.com>
-	<20260507-winbond-v6-18-rc1-spi-nor-swp-v5-13-93453e1a9597@bootlin.com>
-	<a54562a0-1a75-401c-9508-8e0322d81a3f@linaro.org>
-User-Agent: mu4e 1.12.7; emacs 30.2
-Date: Fri, 22 May 2026 18:06:06 +0200
-Message-ID: <87zf1ro2dt.fsf@bootlin.com>
+	s=arc-20240116; t=1779466080; c=relaxed/simple;
+	bh=Y7/9dPvS9wb8CHvtV6BRUh0jJlPmGU8DE0AFSiPSA8U=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=lA+Vm9+Ma6kL11MBJVtIV6ai6sk0UmaYdONePdv16Dd/m9hxLgbzIVPu3WtnLtYb7CT38prggcSzlks8vHgwkvE5Bj1cx4SQJoSXcbJd1SkBCO9hqW0UlcgFQKoYfHcEB9ghCHMaMo9LxT8tAvmh8Ty4rqq61L0k98WfxbhgLDA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=uAfikFmu; arc=none smtp.client-ip=209.85.128.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4904127c32cso8403185e9.2
+        for <linux-doc@vger.kernel.org>; Fri, 22 May 2026 09:07:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1779466077; x=1780070877; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=ZKfMNH2kUd3DMgQ8XsJCvcvLB0TOMk+MaTvVWRLAx/Q=;
+        b=uAfikFmurOwmI9hezrpykg93cDZbmWN0u6ZdWjKGM0BGpcdTB3jMpKawfmFw6Pc5wW
+         1KdyExzLFbyNMDLPtfIqk/BwMwV5zDBbU+k22b8RTlSxqL6cxDXeyP8ZvfHnzV7ypbLj
+         hyqDYHQBZOCFsIQNMiGgjJhu9ToNyqoz111+IZi6VYa7baRI1OAiYHp7ogXrQn+ocTLx
+         0FkVgoAxUj0jfxpAUP8wV87TtNRUkSl9YAdA7QUYjC0WBr+tr3ZJ6cD7uamBtTExxsl6
+         C/8ql6sXYNJRyH/rX8F/1Zd0Jb5AdeHvg8KHtLb2/uHqOK3nlualR74OAY+SXbFRMWUi
+         D/qg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1779466077; x=1780070877;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ZKfMNH2kUd3DMgQ8XsJCvcvLB0TOMk+MaTvVWRLAx/Q=;
+        b=g2vtjvKULACcV9dtOMIIVr7n8ahiReCOqiBL2Ensys8Z93rbRoGah2OaVb5Yiaiog7
+         mbLbur0pR2pXtl/5s7xb8oGw8LiGD0EODcvTE6AvP1jV3yHeUbU8a1sAnx4QjcqP4Ibk
+         e/W9aVb6kWkeP/nepAO9ZIBhuOtT5+tod57ZaKIgdRd9p1YGAXXwtpNQopgyYvqrQJNo
+         EaA1zPYvq1FvMB+VP33+lrpSnvn163i9iKBjp6AtY9QsLBglNynt3DaDwzEwNWa/odWx
+         QFv1MkCoxvNM9U4Is9nLGsUotz7GFONz8sWK2eZ1wc8SaZlq2EMUv/qQcaOzRu0Z2giE
+         oltA==
+X-Forwarded-Encrypted: i=1; AFNElJ+Uybey43aFNHStfNz5WUtM7wU7QUDQ7J5QP26Zo+rye+G8tA62j75TghqfPXQtf/tQzytiyf1OZsc=@vger.kernel.org
+X-Gm-Message-State: AOJu0Ywv1mdzqFu2F5km+rWmmVmF1vLhf4FYcmPKcqJHBfJ1MsU6uZe4
+	tnhziXNGHnY3T2rm9cpUXh/ZKpwHHTtUByzgiSpmJYWTyR0TfBRoMDnuzkopX66m0nE=
+X-Gm-Gg: Acq92OGXGdkuhNtxYtY/fNKGpN/Km0+Rw73Mv4C7IrmFvToto0pYMV8X1H1VlBkyU5S
+	ydMjOgrl4PigJQVBfwdYj1whck44QYqOBN5IrnB6BL83oeQawjl+Ec6j0EI9CQR2sh8U+s+EKST
+	dZyAC2fs1IXIokeYJTfgdfeqnMKVwaeVDgGfK7WPUQkeHkeOdMefn9801oNzFgJt91BJvZo0WyQ
+	MEFKlJvOw0+9f6lqPJ+FzSoIOwzPCLjArdGNSAXwiAVcq0nDLpvER2DuVncjgeP+CkAxksieK8X
+	ZEq6SnOIm+cep+SLQjAvkSRJd2npJknNW79bwUzOW5XhiLN/8hjwQ498EYxz+hY+hth3nNGS9Y0
+	Al7dxTxtDzsZfHDfXY8cxccov31GwtAntUaA3JDITVaFFEA+HZ9TfuI+Hephjq2ajH1FsoO2Cxd
+	JQCjTQ30jb/w/fff5wLcWStylEvwu7c/DiRnzLK3gJ4A==
+X-Received: by 2002:a05:600c:1393:b0:489:c57:7836 with SMTP id 5b1f17b1804b1-490428e5b31mr62133915e9.27.1779466076932;
+        Fri, 22 May 2026 09:07:56 -0700 (PDT)
+Received: from [10.11.12.110] ([82.76.215.73])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-490454c600esm52915925e9.3.2026.05.22.09.07.55
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 22 May 2026 09:07:56 -0700 (PDT)
+Message-ID: <779f2680-2c67-4bbd-9576-bde8e83d111d@linaro.org>
+Date: Fri, 22 May 2026 19:07:53 +0300
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Last-TLS-Session-Version: TLSv1.3
-X-Spamd-Result: default: False [-1.66 / 15.00];
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 04/28] mtd: spi-nor: swp: Improve locking user
+ experience
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Pratyush Yadav <pratyush@kernel.org>, Michael Walle <mwalle@kernel.org>,
+ Takahiro Kuwano <takahiro.kuwano@infineon.com>,
+ Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+ Sean Anderson <sean.anderson@linux.dev>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Steam Lin <STLin2@winbond.com>, linux-mtd@lists.infradead.org,
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, stable@kernel.org
+References: <20260507-winbond-v6-18-rc1-spi-nor-swp-v5-0-93453e1a9597@bootlin.com>
+ <20260507-winbond-v6-18-rc1-spi-nor-swp-v5-4-93453e1a9597@bootlin.com>
+ <9432f07f-3724-4257-b6ab-84721e619f78@linaro.org>
+ <875x4fphgr.fsf@bootlin.com>
+Content-Language: en-US
+From: Tudor Ambarus <tudor.ambarus@linaro.org>
+In-Reply-To: <875x4fphgr.fsf@bootlin.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[bootlin.com,reject];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
-	R_DKIM_ALLOW(-0.20)[bootlin.com:s=dkim];
+	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-89025-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[14];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[bootlin.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	FROM_NEQ_ENVFROM(0.00)[miquel.raynal@bootlin.com,linux-doc@vger.kernel.org];
-	NEURAL_HAM(-0.00)[-0.998];
-	RCVD_COUNT_FIVE(0.00)[6];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	TAGGED_FROM(0.00)[bounces-89027-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[linaro.org:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[tudor.ambarus@linaro.org,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,linaro.org:email,bootlin.com:mid,bootlin.com:dkim]
-X-Rspamd-Queue-Id: C73DD5B75A1
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,linaro.org:email,linaro.org:mid,linaro.org:dkim]
+X-Rspamd-Queue-Id: 2EA6A5B78A1
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 
-On 22/05/2026 at 12:39:48 +03, Tudor Ambarus <tudor.ambarus@linaro.org> wrote:
 
-> On 5/7/26 7:46 PM, Miquel Raynal wrote:
->> Ease the future reuse of the tb (Top/Bottom) boolean by creating an
->> intermediate variable.
->
-> Please squash this in the patch that needs it.
+On 5/22/26 6:55 PM, Miquel Raynal wrote:
+> On 22/05/2026 at 12:10:45 +03, Tudor Ambarus <tudor.ambarus@linaro.org> wrote:
+> 
+>> On 5/7/26 7:46 PM, Miquel Raynal wrote:
+>>> Fixes: 3dd8012a8eeb ("mtd: spi-nor: add TB (Top/Bottom) protect support")
+>>> Cc: stable@kernel.org
+>> Fixes shall be the first patches in the set.
+> 
+> Technically speaking all four first patches are fixes, except I don't
+> ask the first one to be backported. The reason why we ask fixes to be
+> first in the series is because we want them to be as independent as
+> possible from previous cleanups/changes. Here each four first patch are
+> targeting completely different places and should not interact with each
+> other. Anyway, I will re-shuffle the patches.
 
-The problem with CMP addition is that it touches all functions all over
-the place. I want people to be able to focus on the CMP addition, not
-all the side changes which have nothing to do with the CMP addition by
-itself. Most of the preparation patches are just steps in that
-direction, they could also be squashed, but overall they make the final
-diff much simpler. I believe every small change making that last step a
-little bit easier to read goes into the right direction?
+you don't need to resend just for that I think. Pratyush or Michael can
+re-shuffle when applying.
+
+> 
+> As for Sashiko's feedback, the AI raises the same point as our previous
+> discussion: the QE bit handling is really bad, and I am working on
+
+I forgot what we talked about, sorry.
+
+> improving this, in another series which waits for this one to land.
+> 
+> However the other warning it raises is IMO wrong: mixed-modes chips
+> (either read or write working in quad mode, and the other in single
+
+that's good to know, thanks. It assures people that the AI feedback was
+considered.
+
+> mode) should enable their QE bit anyway. Please raise a warning if you
+> think this assumption is wrong.
+
+Not sure if I'll be able to allocate time to review it. No blockers from
+my side.
+
+Cheers,
+ta
 
