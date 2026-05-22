@@ -1,51 +1,51 @@
-Return-Path: <linux-doc+bounces-89106-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89107-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iBstGxzHEGoudgYAu9opvQ
-	(envelope-from <linux-doc+bounces-89106-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 23:14:04 +0200
+	id eDHxCqzHEGpIdgYAu9opvQ
+	(envelope-from <linux-doc+bounces-89107-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 23:16:28 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 110555BA465
-	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 23:14:03 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 85A795BA4A7
+	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 23:16:26 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 67FFE3010674
-	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 21:14:03 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 75E6D300FED8
+	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2026 21:16:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 63082388371;
-	Fri, 22 May 2026 21:14:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D7F5132938D;
+	Fri, 22 May 2026 21:16:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mt1p2KNz"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nNwzPSZO"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 540CD3624D7;
-	Fri, 22 May 2026 21:14:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C5714225788;
+	Fri, 22 May 2026 21:16:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779484442; cv=none; b=PYUDd4HOWwMGB5Kfcmt/HKh5FbR5/+wiG+anb0iZPhRvvzvR3m47B8S/45L1EFfZkF5J0e8L/fTK/45xuy5BORixCxNafBu8UVc5jK8OW9qIKSwjd7YZavTm76cVarwBfofC9L9saiv9ZVhpi/xiYWheH9D9DAYRHDbjSxp5drU=
+	t=1779484580; cv=none; b=VGgExNd52BLgyVaayUZl4i1AiTdzeow5+dakkQ3db0qrpg+o+oqBeGaD+655x3l+QopD3LzylDHP5HNW25clL4VzzBPiRt1uu2T7y1ZhSPfUUejHgjlp2e8+3S/7k6r++CHJTrAS3lM+aNLRb0GH4w5ZA4aXDhiuhuUF5b3dqdQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779484442; c=relaxed/simple;
-	bh=pJ57yE/va+mkoe6oPEI5tJnzG1OSU6em0vRkua7nQVU=;
+	s=arc-20240116; t=1779484580; c=relaxed/simple;
+	bh=I1zTQPdcetd5J38Cy15bTS4wTmTntgus7DqFMwD1Yps=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=oe2mWZ1KrGOQXPegGeD71H47z49dm0dwo0oTuPbSP442NgM5N2iByND9X1zihHjkwc6o09B3mZsHI0Ve2MtqizWG8btqh9y/hn/VAI3u6Yl3Vz+9VfFfBPPIjLcwOmorFdJNEuMK7cCdS6RCp/cY//6iD8ayUp5vb0NhvY/ZD20=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mt1p2KNz; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BDDCF1F000E9;
-	Fri, 22 May 2026 21:13:45 +0000 (UTC)
+	 In-Reply-To:Content-Type; b=SiL5U8AmZZDD9iYYOR1nteAFlP80PPSlzGV9A1wtSR87mt/TBgeVsfQCBL4BZ47r0uN3AHdYQJrsXQJciS2Is2oMooFwmh3FIktNHEBWMspsyJ2O7Kg9Gqb/HP9zfmSEhjo2eZ30/j8vFpEU2+5h78kwuS+IkxhhbXiOHJDUSRA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nNwzPSZO; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 495371F000E9;
+	Fri, 22 May 2026 21:16:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1779484441;
-	bh=MxoIcW7m3Gwgvr9rEQWAWTxLu3SbDYDtDoijFm4fzNw=;
+	s=k20260515; t=1779484579;
+	bh=tGmWZbG2XGjAGwpaog1iRNN4n31HKv4MBqTgH3eSn90=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=mt1p2KNzH+Nk0HmSx9lorARPf5I9gDcQTEtn2rmK1w1YDeD//CcBUFmkxUSmVOXYY
-	 dLHoTFZ/QbS6ErM1IoovI3MtaUWj1MjutgT1BPUtyZ/ObXvTSHLQO1nYL7a9tyMFys
-	 LIjE1bTBD/+rqOjygkpBXDMeBITATrou4anA/If2/pnFpnt7L2vC8Ws3tXpN5vV/CD
-	 DHUQo+bjaZw1zcmIKptewPPcY1GHze3Hv7ZJX6ENgoZ0WjRNDVC1KzymHBoHgjEloJ
-	 vtIGwQZNAuQbn7YE8vDnEmKS3Y2uXZQm56gujX+9AZJfRpi7uSC1qqfChI5JShRG0O
-	 KBrXeOqOjsJOQ==
-Message-ID: <a9f43ab4-e47d-4907-9620-32287e3e9b84@kernel.org>
-Date: Fri, 22 May 2026 23:13:42 +0200
+	b=nNwzPSZO0ZEHyiAgw1qN6z/KxhNwy1BnxwrzxfF8GndiwcyyMdaCY7X5j2j5LaUFr
+	 G4mnI05/cCDFJiSr3ohFweFxCMAqT1/Sr3dWxKvh7WtB8uu+PHmsa+HaLZqJ1RuLGB
+	 YVzdC29OzzaPwCvyalyJNimn0BpZ9tbCAlDt/D+J6czOdZcvA+5feY/Ir603AcWDX/
+	 EqvZN4LVid2f38MiJSe36TPmXRyJulrZcWynCXZjhnZ0/+FEyhtffNgG5HaY3IKmGs
+	 9+7+hTgeuJDZX9ZCdi6abfB+XMebg6A9RgpDtVNy5oQsnvENBtYj7zGbUOB5bIXWm+
+	 fRJIkUqBUP8Zw==
+Message-ID: <dc79e35f-9e38-4338-8a92-aa26b7122ed8@kernel.org>
+Date: Fri, 22 May 2026 23:16:01 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -53,13 +53,12 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH mm-hotfixes-unstable v18 00/14] khugepaged: add mTHP
- collapse support
-To: Nico Pache <npache@redhat.com>, "Vlastimil Babka (SUSE)"
- <vbabka@kernel.org>
-Cc: linux-doc@vger.kernel.org, akpm@linux-foundation.org,
+Subject: Re: [PATCH mm-unstable v18 03/14] mm/khugepaged: rework max_ptes_*
+ handling with helper functions
+To: Nico Pache <npache@redhat.com>, linux-doc@vger.kernel.org,
  linux-kernel@vger.kernel.org, linux-mm@kvack.org,
- linux-trace-kernel@vger.kernel.org, aarcange@redhat.com,
+ linux-trace-kernel@vger.kernel.org
+Cc: aarcange@redhat.com, akpm@linux-foundation.org,
  anshuman.khandual@arm.com, apopple@nvidia.com, baohua@kernel.org,
  baolin.wang@linux.alibaba.com, byungchul@sk.com, catalin.marinas@arm.com,
  cl@gentwo.org, corbet@lwn.net, dave.hansen@linux.intel.com,
@@ -75,11 +74,10 @@ Cc: linux-doc@vger.kernel.org, akpm@linux-foundation.org,
  thomas.hellstrom@linux.intel.com, tiwai@suse.de, usamaarif642@gmail.com,
  vbabka@suse.cz, vishal.moola@gmail.com, wangkefeng.wang@huawei.com,
  will@kernel.org, willy@infradead.org, yang@os.amperecomputing.com,
- ying.huang@linux.alibaba.com, ziy@nvidia.com, zokeefe@google.com
+ ying.huang@linux.alibaba.com, ziy@nvidia.com, zokeefe@google.com,
+ Usama Arif <usama.arif@linux.dev>
 References: <20260522150009.121603-1-npache@redhat.com>
- <CAA1CXcCoDU_pnp0SmMzRi8wPGB1OBjbbokevq2X_03X1vpWtOw@mail.gmail.com>
- <bd622950-62cf-4b57-b3ac-89635f28fa4f@kernel.org>
- <CAA1CXcD373fFfo9YPWRj8mJ_rsnzyCrpn1uk3=k7kU=QuaLOgg@mail.gmail.com>
+ <20260522150009.121603-4-npache@redhat.com>
 From: "David Hildenbrand (Arm)" <david@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=david@kernel.org; keydata=
@@ -126,27 +124,27 @@ Autocrypt: addr=david@kernel.org; keydata=
  3iyY2Nsd7JxfKu1PRhCGwXzRw5TlfEsoRI7V9A8isUCoqE2Dzh3FvYHVeX4Us+bRL/oqareJ
  CIFqgYMyvHj7Q06kTKmauOe4Nf0l0qEkIuIzfoLJ3qr5UyXc2hLtWyT9Ir+lYlX9efqh7mOY
  qIws/H2t
-In-Reply-To: <CAA1CXcD373fFfo9YPWRj8mJ_rsnzyCrpn1uk3=k7kU=QuaLOgg@mail.gmail.com>
+In-Reply-To: <20260522150009.121603-4-npache@redhat.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,linux-foundation.org,kvack.org,redhat.com,arm.com,nvidia.com,kernel.org,linux.alibaba.com,sk.com,gentwo.org,lwn.net,linux.intel.com,gourry.net,cmpxchg.org,google.com,suse.cz,gmail.com,linux.dev,infradead.org,efficios.com,intel.com,suse.com,suse.de,goodmis.org,amd.com,huawei.com,os.amperecomputing.com];
-	TAGGED_FROM(0.00)[bounces-89106-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[redhat.com,linux-foundation.org,arm.com,nvidia.com,kernel.org,linux.alibaba.com,sk.com,gentwo.org,lwn.net,linux.intel.com,gourry.net,cmpxchg.org,google.com,suse.cz,gmail.com,linux.dev,infradead.org,efficios.com,intel.com,suse.com,suse.de,goodmis.org,amd.com,huawei.com,os.amperecomputing.com];
+	TAGGED_FROM(0.00)[bounces-89107-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TO_DN_SOME(0.00)[];
 	RCPT_COUNT_GT_50(0.00)[59];
 	PRECEDENCE_BULK(0.00)[];
@@ -156,30 +154,24 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: 110555BA465
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: 85A795BA4A7
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 5/22/26 18:11, Nico Pache wrote:
-> On Fri, May 22, 2026 at 9:13 AM Vlastimil Babka (SUSE)
-> <vbabka@kernel.org> wrote:
->>
->> On 5/22/26 17:07, Nico Pache wrote:
->>>
->>> Whoops I manually changed the coverletter subject to reflect that this
->>> in on mm-hotfixes-unstable but never updated the others...
->>
->> But why? That branch is for hotfixes that would go to the current 7.1-rcX
->> series. mm-unstable would be the correct one for this, AFAICT.
-> 
-> Sorry this was a misunderstanding. The goal here was to base this off
-> the closest base commit behind where my v17 already lies in the tree.
 
-Ah, I guess this is a problem of "v17 is already in mm-unstable, so against what
-to base v18".
+>  int hugepage_madvise(struct vm_area_struct *vma,
+>  		     vm_flags_t *vm_flags, int advice)
+>  {
+> @@ -540,6 +598,8 @@ static enum scan_result __collapse_huge_page_isolate(struct vm_area_struct *vma,
+>  		unsigned long start_addr, pte_t *pte, struct collapse_control *cc,
+>  		struct list_head *compound_pagelist)
+>  {
+> +	const unsigned int max_ptes_none = collapse_max_ptes_none(cc, vma);
+> +	const unsigned int max_ptes_shared = collapse_max_ptes_shared(cc);
 
-Yeah, we touched on that problem in the LSF/MM process discussion ...
+
+Yeah, it's good that these are all const now.
 
 -- 
 Cheers,
