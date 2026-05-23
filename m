@@ -1,228 +1,145 @@
-Return-Path: <linux-doc+bounces-89160-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89161-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MMZCEubzEGrNfwYAu9opvQ
-	(envelope-from <linux-doc+bounces-89160-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 23 May 2026 02:25:10 +0200
+	id gDLjGTH4EGp0gAYAu9opvQ
+	(envelope-from <linux-doc+bounces-89161-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 23 May 2026 02:43:29 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB0225BBF35
-	for <lists+linux-doc@lfdr.de>; Sat, 23 May 2026 02:25:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 982FF5BC23E
+	for <lists+linux-doc@lfdr.de>; Sat, 23 May 2026 02:43:28 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 039A6303E109
-	for <lists+linux-doc@lfdr.de>; Sat, 23 May 2026 00:20:03 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 932663021D1A
+	for <lists+linux-doc@lfdr.de>; Sat, 23 May 2026 00:42:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 83F50334374;
-	Sat, 23 May 2026 00:18:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jW+U1MWi"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C77DA1A6824;
+	Sat, 23 May 2026 00:42:52 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 45BA93264F2;
-	Sat, 23 May 2026 00:18:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+Received: from azure-sdnproxy.icoremail.net (azure-sdnproxy.icoremail.net [52.229.168.213])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6BDD119004A;
+	Sat, 23 May 2026 00:42:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=52.229.168.213
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779495487; cv=none; b=gfkPRiprr5hZOdbpZZgd/pVOHolieG0qkn7th2IlbIPvQtKpOyrsxOkHz3/VXXGeXDrl9/urXQ/mYUI75kq+/3BgprOzPWCRWG9K2yMcVct7zAt7iUfTAh/8z1GZdvBfp7o+zRy4xiR9LtrkSngDnnmQ3frmqFvbNZSrhDJR4LI=
+	t=1779496972; cv=none; b=QPQdboyaG0Dh811djaLr7v4Wa0HEFTDpr1Rn9XPUpDDI2UOi+fAuB8eKwvprp873+6nG98o4ockD17B6TPlknDWJXhgoAIR1UByt3m/E3pvLhOgsr0v5ktHKe2VmfloetyOumameU+dhu5NxrrmN3kiR+lSaPEu1LM34BLoW3Ik=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779495487; c=relaxed/simple;
-	bh=KiCjq5pAn/ujlUTPsvaBF27LUM2KY3nYlbe0z2G+roM=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=JZWmiIN+2XEIFqxJHptxrVMsuUn9GB0dCrhQv/m/84X7KgoqeDjYYM789ONCCa5cHr03eKWX3pLLAs5u3uSWfKsFGqsoUS98bYNKssnRyYwLQFHS/bg9NN1X03ppWpOEeIa8UYFrZIOeHKdPQ/H7Azd+c4K6zb3qhPuffJv5iG0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jW+U1MWi; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 283F1C4AF52;
-	Sat, 23 May 2026 00:18:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1779495487;
-	bh=KiCjq5pAn/ujlUTPsvaBF27LUM2KY3nYlbe0z2G+roM=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=jW+U1MWiQJWom2SgPlokK3cz0WZ5OxjtbHGHeqL9An4Fdzj0zVpYhSl4Xa7G/sRZi
-	 Gb7KOhf2wLpWDMpIRCqocOHfQ+gp9z/7qYHMdJ2mfEqeDI+lcTeayo21kLSI1ivs14
-	 S0majg4erGq8pGPr43R4I1JiVWt92DCMBrZiY12e7sEq5E1YNS1lNjMAFB2faPODnS
-	 LnbeUjCpqrmu57G70UXM8HUEWqWplOUsq7X8U029URGLGrhbW+qrFtmZOD3QUd4HUb
-	 M5RsHC0y/Gcaon08LD64WSoUtdgaE3URFbZDysslp2sWr39spl8qqHWokFx9Z1VOAy
-	 AAoo4w/AnTh+g==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B2C2CD5BC2;
-	Sat, 23 May 2026 00:18:07 +0000 (UTC)
-From: Ackerley Tng via B4 Relay <devnull+ackerleytng.google.com@kernel.org>
-Date: Fri, 22 May 2026 17:18:24 -0700
-Subject: [PATCH v7 42/42] KVM: selftests: Update private memory exits test
- to work with per-gmem attributes
+	s=arc-20240116; t=1779496972; c=relaxed/simple;
+	bh=ML2p/Ei+1Q25hfOV6GohW1OIlNKUOsjWXTvkxK+e1Vs=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=ilTAY86YtlMRPtj7G4mQYvNoCzlNIipMQDu9Ji2eODyrzABIZTud4eshQFKAMHTkbZqR9RnnVRLRGyY77IRsoEUvQ6pqSdT8P4Kg3BhC2+BRil4QzW4OvmfsOZItjebjAGTGTPyO+Pop1RFPUFS0tXMyJF/tlLjaq0ovl7/J+Ec=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=hust.edu.cn; spf=pass smtp.mailfrom=hust.edu.cn; arc=none smtp.client-ip=52.229.168.213
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=hust.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=hust.edu.cn
+Received: from hust.edu.cn (unknown [172.16.0.50])
+	by app2 (Coremail) with SMTP id HwEQrABH+Djn9xBqIfZAAQ--.27933S2;
+	Sat, 23 May 2026 08:42:15 +0800 (CST)
+Received: from [192.168.43.158] (unknown [114.246.238.26])
+	by gateway (Coremail) with SMTP id _____wD379bk9xBqdRFaAQ--.26340S2;
+	Sat, 23 May 2026 08:42:14 +0800 (CST)
+Message-ID: <b67b9d63-7cc7-460a-ada3-630c8686e1e1@hust.edu.cn>
+Date: Sat, 23 May 2026 08:42:11 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260522-gmem-inplace-conversion-v7-42-2f0fae496530@google.com>
-References: <20260522-gmem-inplace-conversion-v7-0-2f0fae496530@google.com>
-In-Reply-To: <20260522-gmem-inplace-conversion-v7-0-2f0fae496530@google.com>
-To: aik@amd.com, andrew.jones@linux.dev, binbin.wu@linux.intel.com, 
- brauner@kernel.org, chao.p.peng@linux.intel.com, david@kernel.org, 
- ira.weiny@intel.com, jmattson@google.com, jthoughton@google.com, 
- michael.roth@amd.com, oupton@kernel.org, pankaj.gupta@amd.com, 
- qperret@google.com, rick.p.edgecombe@intel.com, rientjes@google.com, 
- shivankg@amd.com, steven.price@arm.com, tabba@google.com, 
- willy@infradead.org, wyihan@google.com, yan.y.zhao@intel.com, 
- forkloop@google.com, pratyush@kernel.org, suzuki.poulose@arm.com, 
- aneesh.kumar@kernel.org, liam@infradead.org, 
- Paolo Bonzini <pbonzini@redhat.com>, 
- Sean Christopherson <seanjc@google.com>, Thomas Gleixner <tglx@kernel.org>, 
- Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
- Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
- "H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>, 
- Masami Hiramatsu <mhiramat@kernel.org>, 
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
- Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>, 
- Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>, 
- Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>, 
- Nhat Pham <nphamcs@gmail.com>, Baoquan He <bhe@redhat.com>, 
- Barry Song <baohua@kernel.org>, Axel Rasmussen <axelrasmussen@google.com>, 
- Yuanchu Xie <yuanchu@google.com>, Wei Xu <weixugc@google.com>, 
- Youngjun Park <youngjun.park@lge.com>, Qi Zheng <qi.zheng@linux.dev>, 
- Shakeel Butt <shakeel.butt@linux.dev>, Kiryl Shutsemau <kas@kernel.org>, 
- Jason Gunthorpe <jgg@ziepe.ca>, Vlastimil Babka <vbabka@kernel.org>
-Cc: kvm@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
- linux-kselftest@vger.kernel.org, linux-mm@kvack.org, 
- linux-coco@lists.linux.dev, Ackerley Tng <ackerleytng@google.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1779495481; l=3772;
- i=ackerleytng@google.com; s=20260225; h=from:subject:message-id;
- bh=hYPink6uryd0sBR7FpUwEPEeeMvCkWE3NN5OHnrBbd0=;
- b=aMa7DgNRkSCwfgv8CIcxEnvwhI4+vvJrCFZfSdUdGE2Q6RqmCVlvuXPdDhX2ec+I5ktjI2RFF
- IDi2tcrxpkED2WPa5qzWjw+OTdH6o5XmuBdJ75HAU0/GiLoYn0RHI+R
-X-Developer-Key: i=ackerleytng@google.com; a=ed25519;
- pk=sAZDYXdm6Iz8FHitpHeFlCMXwabodTm7p8/3/8xUxuU=
-X-Endpoint-Received: by B4 Relay for ackerleytng@google.com/20260225 with
- auth_id=649
-X-Original-From: Ackerley Tng <ackerleytng@google.com>
-Reply-To: ackerleytng@google.com
-X-Spamd-Result: default: False [-2.16 / 15.00];
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] docs/zh_CN: fix KASAN SW_TAGS mode description
+To: chengyaqiang <chengyaqiang@chengyaqiang.com>, alexs@kernel.org,
+ si.yanteng@linux.dev
+Cc: corbet@lwn.net, skhan@linuxfoundation.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, chengyaqiang@tsinghua.edu.cn
+References: <20260522075735.2022734-1-chengyaqiang@chengyaqiang.com>
+From: Dongliang Mu <dzm91@hust.edu.cn>
+In-Reply-To: <20260522075735.2022734-1-chengyaqiang@chengyaqiang.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:HwEQrABH+Djn9xBqIfZAAQ--.27933S2
+Authentication-Results: app2; spf=neutral smtp.mail=dzm91@hust.edu.cn;
+X-Coremail-Antispam: 1UD129KBjvJXoW7Ar45Cw18Jr48AryxtF43Jrb_yoW8AF47pF
+	y8CrWIyFn2vr15GrW8GF4DCr1UGF1fGFW5GFnxXa4Yqrs5A39Yyr1Ykr9FqF97uwn3AFWj
+	yF4Skr9IvFWDA3JanT9S1TB71UUUUjDqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUQFb7Iv0xC_Cr1lb4IE77IF4wAFc2x0x2IEx4CE42xK8VAvwI8I
+	cIk0rVWrJVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjx
+	v20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j6F4UM28EF7xvwVC2
+	z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVWxJr0_GcWln4kS14v26r
+	126r1DM2vYz4IE04k24VAvwVAKI4IrM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI
+	12xvs2x26I8E6xACxx1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj64x0Y40En7xvr7AKxV
+	W8Jr0_Cr1UMcIj6x8ErcxFaVAv8VW8uFyUJr1UMcIj6xkF7I0En7xvr7AKxVW8Jr0_Cr1U
+	McvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwCY1x0262kKe7AKxVWUAVWUtwCF04
+	k20xvY0x0EwIxGrwCF04k20xvE74AGY7Cv6cx26r4fZr1UJr1l4I8I3I0E4IkC6x0Yz7v_
+	Jr0_Gr1l4IxYO2xFxVAFwI0_JF0_Jw1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8Gjc
+	xK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0
+	cI8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8V
+	AvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E
+	14v26r1j6r4UYxBIdaVFxhVjvjDU0xZFpf9x07jfvtZUUUUU=
+X-CM-SenderInfo: asqsiiirqrkko6kx23oohg3hdfq/
+X-Spamd-Result: default: False [-1.46 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-89160-lists,linux-doc=lfdr.de,ackerleytng.google.com];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[amd.com,linux.dev,linux.intel.com,kernel.org,intel.com,google.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca];
-	TO_DN_SOME(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	HAS_REPLYTO(0.00)[ackerleytng@google.com];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[65];
 	TAGGED_RCPT(0.00)[linux-doc];
-	NEURAL_HAM(-0.00)[-1.000];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,tsinghua.edu.cn:email];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.991];
+	MID_RHS_MATCH_FROM(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: DB0225BBF35
+	RCPT_COUNT_SEVEN(0.00)[8];
+	R_DKIM_NA(0.00)[];
+	DMARC_NA(0.00)[hust.edu.cn];
+	FROM_NEQ_ENVFROM(0.00)[dzm91@hust.edu.cn,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	TAGGED_FROM(0.00)[bounces-89161-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_FIVE(0.00)[5];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[]
+X-Rspamd-Queue-Id: 982FF5BC23E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: Sean Christopherson <seanjc@google.com>
 
-Skip setting memory to private in the private memory exits test when using
-per-gmem memory attributes, as memory is initialized to private by default
-for guest_memfd, and using vm_mem_set_private() on a guest_memfd instance
-requires creating guest_memfd with GUEST_MEMFD_FLAG_MMAP (which is totally
-doable, but would need to be conditional and is ultimately unnecessary).
+On 5/22/26 3:57 PM, chengyaqiang wrote:
+> From: chengyaqiang <chengyaqiang@tsinghua.edu.cn>
+>
+> CONFIG_KASAN_SW_TAGS enables Software Tag-Based KASAN mode, not Hardware
+> Tag-Based mode. Fix the incorrect translation in the Chinese documentation.
+>
+> The original text incorrectly described both CONFIG_KASAN_SW_TAGS and
+> CONFIG_KASAN_HW_TAGS as "基于硬件标签" (hardware tag-based).  Correct
+> CONFIG_KASAN_SW_TAGS to "基于软件标签" (software tag-based).
+>
+> Signed-off-by: chengyaqiang <chengyaqiang@tsinghua.edu.cn>
 
-Expect an emulated MMIO instead of a memory fault exit when attributes are
-per-gmem, as deleting the memslot effectively drops the private status,
-i.e. the GPA becomes shared and thus supports emulated MMIO.
+Reviewed-by: Dongliang Mu <dzm91@hust.edu.cn>
 
-Skip the "memslot not private" test entirely, as private vs. shared state
-for x86 software-protected VMs comes from the memory attributes themselves,
-and so when doing in-place conversions there can never be a disconnect
-between the expected and actual states.
 
-Signed-off-by: Sean Christopherson <seanjc@google.com>
-Signed-off-by: Ackerley Tng <ackerleytng@google.com>
----
- .../selftests/kvm/x86/private_mem_kvm_exits_test.c | 36 ++++++++++++++++++----
- 1 file changed, 30 insertions(+), 6 deletions(-)
+BTW, @yanteng shall we need to mention this situation in our how-to.rst 
+since this is the problem of Chinese translation?
 
-diff --git a/tools/testing/selftests/kvm/x86/private_mem_kvm_exits_test.c b/tools/testing/selftests/kvm/x86/private_mem_kvm_exits_test.c
-index 10db9fe6d9063..70ed16066c63e 100644
---- a/tools/testing/selftests/kvm/x86/private_mem_kvm_exits_test.c
-+++ b/tools/testing/selftests/kvm/x86/private_mem_kvm_exits_test.c
-@@ -62,8 +62,9 @@ static void test_private_access_memslot_deleted(void)
- 
- 	virt_map(vm, EXITS_TEST_GVA, EXITS_TEST_GPA, EXITS_TEST_NPAGES);
- 
--	/* Request to access page privately */
--	vm_mem_set_private(vm, EXITS_TEST_GPA, EXITS_TEST_SIZE);
-+	/* Request to access page privately. */
-+	if (!kvm_has_gmem_attributes)
-+		vm_mem_set_private(vm, EXITS_TEST_GPA, EXITS_TEST_SIZE);
- 
- 	pthread_create(&vm_thread, NULL,
- 		       (void *(*)(void *))run_vcpu_get_exit_reason,
-@@ -74,10 +75,26 @@ static void test_private_access_memslot_deleted(void)
- 	pthread_join(vm_thread, &thread_return);
- 	exit_reason = (u32)(u64)thread_return;
- 
--	TEST_ASSERT_EQ(exit_reason, KVM_EXIT_MEMORY_FAULT);
--	TEST_ASSERT_EQ(vcpu->run->memory_fault.flags, KVM_MEMORY_EXIT_FLAG_PRIVATE);
--	TEST_ASSERT_EQ(vcpu->run->memory_fault.gpa, EXITS_TEST_GPA);
--	TEST_ASSERT_EQ(vcpu->run->memory_fault.size, EXITS_TEST_SIZE);
-+	/*
-+	 * If attributes are tracked per-gmem, deleting the memslot that points
-+	 * at the gmem instance effectively makes the memory shared, and so the
-+	 * read should trigger emulated MMIO.
-+	 *
-+	 * If attributes are tracked per-VM, deleting the memslot shouldn't
-+	 * affect the private attribute, and so KVM should generate a memory
-+	 * fault exit (emulated MMIO on private GPAs is disallowed).
-+	 */
-+	if (kvm_has_gmem_attributes) {
-+		TEST_ASSERT_EQ(exit_reason, KVM_EXIT_MMIO);
-+		TEST_ASSERT_EQ(vcpu->run->mmio.phys_addr, EXITS_TEST_GPA);
-+		TEST_ASSERT_EQ(vcpu->run->mmio.len, sizeof(u64));
-+		TEST_ASSERT_EQ(vcpu->run->mmio.is_write, false);
-+	} else {
-+		TEST_ASSERT_EQ(exit_reason, KVM_EXIT_MEMORY_FAULT);
-+		TEST_ASSERT_EQ(vcpu->run->memory_fault.flags, KVM_MEMORY_EXIT_FLAG_PRIVATE);
-+		TEST_ASSERT_EQ(vcpu->run->memory_fault.gpa, EXITS_TEST_GPA);
-+		TEST_ASSERT_EQ(vcpu->run->memory_fault.size, EXITS_TEST_SIZE);
-+	}
- 
- 	kvm_vm_free(vm);
- }
-@@ -88,6 +105,13 @@ static void test_private_access_memslot_not_private(void)
- 	struct kvm_vcpu *vcpu;
- 	u32 exit_reason;
- 
-+	/*
-+	 * Accessing non-private memory as private with a software-protected VM
-+	 * isn't possible when doing in-place conversions.
-+	 */
-+	if (kvm_has_gmem_attributes)
-+		return;
-+
- 	vm = vm_create_shape_with_one_vcpu(protected_vm_shape, &vcpu,
- 					   guest_repeatedly_read);
- 
+Dongliang Mu
 
--- 
-2.54.0.794.g4f17f83d09-goog
-
+> ---
+>   Documentation/translations/zh_CN/dev-tools/kasan.rst | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/Documentation/translations/zh_CN/dev-tools/kasan.rst b/Documentation/translations/zh_CN/dev-tools/kasan.rst
+> index fd2e3afbdfad..767b280d8af0 100644
+> --- a/Documentation/translations/zh_CN/dev-tools/kasan.rst
+> +++ b/Documentation/translations/zh_CN/dev-tools/kasan.rst
+> @@ -79,7 +79,7 @@ KASAN只支持SLUB。
+>   	  CONFIG_KASAN=y
+>   
+>   同时在 ``CONFIG_KASAN_GENERIC`` (启用通用KASAN模式)， ``CONFIG_KASAN_SW_TAGS``
+> -(启用基于硬件标签的KASAN模式)，和 ``CONFIG_KASAN_HW_TAGS`` (启用基于硬件标签
+> +(启用基于软件标签的KASAN模式)，和 ``CONFIG_KASAN_HW_TAGS`` (启用基于硬件标签
+>   的KASAN模式)之间进行选择。
+>   
+>   对于软件模式，还可以在 ``CONFIG_KASAN_OUTLINE`` 和 ``CONFIG_KASAN_INLINE``
 
 
