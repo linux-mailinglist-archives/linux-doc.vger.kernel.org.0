@@ -1,53 +1,53 @@
-Return-Path: <linux-doc+bounces-89288-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89281-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CAjyNOaQE2ofDgcAu9opvQ
-	(envelope-from <linux-doc+bounces-89288-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 01:59:34 +0200
+	id AOK2DKaRE2ofDgcAu9opvQ
+	(envelope-from <linux-doc+bounces-89281-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 02:02:46 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D1D85C4E7B
-	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 01:59:34 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 882C65C4F28
+	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 02:02:45 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 58C0F3009008
-	for <lists+linux-doc@lfdr.de>; Sun, 24 May 2026 23:58:11 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 6409D304350F
+	for <lists+linux-doc@lfdr.de>; Sun, 24 May 2026 23:57:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6AAE33BED70;
-	Sun, 24 May 2026 23:57:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EC31B3B895F;
+	Sun, 24 May 2026 23:57:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UschymkL"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="VMwozZWa"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB0C63B8922;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 949143B8930;
 	Sun, 24 May 2026 23:57:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779667068; cv=none; b=EtOgNCvNJXcMDzuQMskP7dQEpooIUNQuxRKa4+PD8I72NdYr4RuYteCe0RNxMu2EqnLwurnX+dgZxtHn2ReUmheQJoH/8VQbmxup62M4MpeAFXYsMtlsjJ+ZcmnzxCFVcRHTJatqW2vy4a0kF1ZqGnAj6Og+kO0N99Cut/QyHOE=
+	t=1779667065; cv=none; b=ACCnxvytyE0qyx2KX7Txn4ePcsETMJwS1hohtmaCKbgWLcSfSeAoHK2DYSyD0oeZZ0EjjfiCHIKTv+E398ZcPjEQcz5olrI68yKf7ig4yBqV7GMYET1h8JJUVofIyBSjpvEeYjZlFdn9lgZLkSJaBPlMjQGEUF1GoCxYrQjmE9A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779667068; c=relaxed/simple;
-	bh=cQZIxogxHi6/a1bq9hWHDBDDLMtTIO/xab7UaBUTm3o=;
+	s=arc-20240116; t=1779667065; c=relaxed/simple;
+	bh=G+L29Ob1l5pZuRL1dYTcPXw+6N7JDQocSeNE8cYMlqk=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=opJsY3lkYsc+MlHYA1GsD6eZX5pbQfIMFGwIVt1A56I9rKrMmwG//Qe29hT6J0wQX1H8iEryHYFZJ63PlGd5e42SM0QYbmdC8ophwbq4C/ngiNaXbO09Dc5nlViU/55x68JG4Ovxtc3UaGt6RcLSBMEgt2VzK3yuA+5cdwvZmjU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UschymkL; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 98BE31F0155E;
-	Sun, 24 May 2026 23:57:41 +0000 (UTC)
+	 In-Reply-To:To:Cc; b=GuQqW52NGuxmXQlUf/gocKeqOpxZPD5zR4iriZfhltJ+47+I4FxuqxwGYM2lc5bkbjV0eZcJq5dqK7eDqXTdWl3JGzG0LoUk6WE8UcoC6Eo5+86+Vm+CvxUMMXpapVkwxOVs05NTdXETb3MlrG0ww5nIFPvJICF3oexhyHiqeoU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=VMwozZWa; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 58A411F01566;
+	Sun, 24 May 2026 23:57:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1779667062;
-	bh=EllR/1CEo+TtZv0/iyFInnJU3GZT/dZGiV/si/OJVsA=;
+	s=k20260515; t=1779667063;
+	bh=cUuRBu2/xKXw2Co0MSkuLR4qMvzG1/GgD9Z9r4O74iE=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=UschymkLhpsZAcrY4tvBRbXe5RxmMF0kfbcCiyoO4888lSnqXCJImwKldXyGvOYYk
-	 IkZRp4CYDfZzhOidA7rgFJtvaM1O5WzNqPcHCk9/UekwMOvWGkNNvg+DBl9wOA6GEv
-	 +N3UwHBEUByKzEEI/0p3m4TpXsM03wgoA1Ss8ilpIqqLSkPtVQUxMTh83oGcNZI32b
-	 1QCpi2QkAqHYAD7/cSmWZ2Nf7WqDRFhKHM+3gEeNmfFLzUXQRcdH3KDczdWz6DjSrL
-	 7SJM/VRo/wnkkjQqO1twyaCEwDNxC5Vi4rP/jHpB4HkePGqtl/paKoJNKWKPAzkwzi
-	 sFnFJxI/MNUgg==
+	b=VMwozZWaLAO8dZvZ8eSgUX6c810uiS2mP2bVxVNUoFrQOVBzaEeuv4qQ8R5ZZEcX7
+	 zGNk0vR3uHYhFtEm4oOBpxxw2/CH1GtWAG0j+Z3acokE1UK2Z96Na0TsrsTlRPDTh4
+	 bpTWez1rtrOnbMhoDzp96BX24X2hWU5XCVFjs+PD/0wTL46Tb3v1y2co8j5iaf8RO8
+	 U49M4aXYM7AP3tFqphdMITEg73fcKBkVjEuFYhHkOtutlAUfHV9BBmOwPQ9x8A3cZx
+	 UWckXx+NYXpUV8xujPg1mmh9b1rb2vZBw2qUpngqR+zQsQW+aBQQNXaM9nTt7tJMgi
+	 iJSi0UNb9qraw==
 From: Drew Fustini <fustini@kernel.org>
-Date: Sun, 24 May 2026 16:55:45 -0700
-Subject: [PATCH RFC v5 15/18] riscv_cbqri: resctrl: Add mbm_total_bytes
- bandwidth monitoring
+Date: Sun, 24 May 2026 16:55:46 -0700
+Subject: [PATCH RFC v5 16/18] ACPI: RISC-V: Parse RISC-V Quality of Service
+ Controller (RQSC) table
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -56,7 +56,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260524-ssqosid-cbqri-rqsc-v7-0-v5-15-78d3a7ba9dbe@kernel.org>
+Message-Id: <20260524-ssqosid-cbqri-rqsc-v7-0-v5-16-78d3a7ba9dbe@kernel.org>
 References: <20260524-ssqosid-cbqri-rqsc-v7-0-v5-0-78d3a7ba9dbe@kernel.org>
 In-Reply-To: <20260524-ssqosid-cbqri-rqsc-v7-0-v5-0-78d3a7ba9dbe@kernel.org>
 To: Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, 
@@ -95,12 +95,12 @@ Cc: linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org,
  Conor Dooley <conor@kernel.org>, linux-rt-devel@lists.linux.dev, 
  linux-doc@vger.kernel.org
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=9431; i=fustini@kernel.org;
- h=from:subject:message-id; bh=cQZIxogxHi6/a1bq9hWHDBDDLMtTIO/xab7UaBUTm3o=;
- b=owGbwMvMwCV2+43O4ZsaG3kYT6slMWQJT8i8+oHZvP8y25zQxHjb5zfcdFP1Qj76r1At+Ni5m
- fWip65HRykLgxgXg6yYIsumD3kXlniFfl0w/8U2mDmsTCBDGLg4BWAi2x8y/GSc8nJ+9HLnCWuq
- uXfKesroLz+Q1bGI5XPrw8v1ss4xkY6MDB81GRmknE9s+yPQb/l0TX6Pb0Kxx/fzLUsKpGS/BQr
- 4cwEA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=11590; i=fustini@kernel.org;
+ h=from:subject:message-id; bh=G+L29Ob1l5pZuRL1dYTcPXw+6N7JDQocSeNE8cYMlqk=;
+ b=owGbwMvMwCV2+43O4ZsaG3kYT6slMWQJT8iKWn72uq/uD7v6g+e0W8S28e1VsH55sapF+srKs
+ n+zJvIVd5SyMIhxMciKKbJs+pB3YYlX6NcF819sg5nDygQyhIGLUwAmYufByND/m696n+/KXgbN
+ shlMHyUWWjiKr95pVZn2IXA5Z/D0OGaG/7UH5T4uMllvviXAqWX9j7iup74TnmWZ76rb8VWL5QM
+ 7OycA
 X-Developer-Key: i=fustini@kernel.org; a=openpgp;
  fpr=1B6F948213EA489734F3997035D5CD577C1E6010
 X-Spamd-Result: default: False [-0.66 / 15.00];
@@ -108,11 +108,11 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-89288-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-89281-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	FREEMAIL_TO(0.00)[kernel.org,dabbelt.com,eecs.berkeley.edu,ghiti.fr,ventanamicro.com,sifive.com,baylibre.com,semihalf.com,linux.dev,rivosinc.com,microchip.com,bytedance.com,linux.alibaba.com,gmail.com,zte.com.cn,sanechips.com.cn,intel.com,amd.com,google.com,arm.com,redhat.com,alien8.de,linux.intel.com,zytor.com,linutronix.de,goodmis.org,lwn.net];
@@ -120,299 +120,353 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TO_DN_SOME(0.00)[];
 	RCPT_COUNT_GT_50(0.00)[57];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[fustini@kernel.org,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.998];
+	NEURAL_HAM(-0.00)[-0.999];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,baylibre.com:email]
-X-Rspamd-Queue-Id: 8D1D85C4E7B
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: 882C65C4F28
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Expose CBQRI bandwidth controller's combined read+write counter as
-the L3 mbm_total_bytes event. A software accumulator keeps the
-64-bit byte total monotonic across the 62-bit hardware counter wrap.
+Add a parser for the ACPI RQSC table, which describes the CBQRI
+controllers in a system. For each table entry, populate a
+cbqri_controller_info descriptor and hand it to the CBQRI driver via
+riscv_cbqri_register_controller(). The driver owns all subsequent state,
+including cpumask resolution at cbqri_resctrl_setup() time.
 
-mbm_local_bytes is not supported because the CBQRI spec has no way
-to distinguish total versus local. mbm_total_bytes is enabled only
-when the platform exposes exactly one mon-capable bandwidth
-controller and exactly one L3 domain. Pairing a single BC with
-multiple L3 domains would let standard userspace tools overcount
-system bandwidth by summing the same counter across domains.
-
+Link: https://github.com/riscv-non-isa/riscv-rqsc/blob/main/src/
+Link: https://github.com/riscv-non-isa/riscv-cbqri/releases/tag/v1.0
 Assisted-by: Claude:claude-opus-4-7
-Co-developed-by: Adrien Ricciardi <aricciardi@baylibre.com>
-Signed-off-by: Adrien Ricciardi <aricciardi@baylibre.com>
 Signed-off-by: Drew Fustini <fustini@kernel.org>
 ---
- drivers/resctrl/cbqri_resctrl.c | 191 +++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 187 insertions(+), 4 deletions(-)
+ MAINTAINERS                   |   2 +
+ arch/riscv/include/asm/acpi.h |  10 +++
+ drivers/acpi/riscv/Makefile   |   1 +
+ drivers/acpi/riscv/rqsc.c     | 194 ++++++++++++++++++++++++++++++++++++++++++
+ drivers/acpi/riscv/rqsc.h     |  63 ++++++++++++++
+ 5 files changed, 270 insertions(+)
 
-diff --git a/drivers/resctrl/cbqri_resctrl.c b/drivers/resctrl/cbqri_resctrl.c
-index ba764bc6ef17..f11709d7e479 100644
---- a/drivers/resctrl/cbqri_resctrl.c
-+++ b/drivers/resctrl/cbqri_resctrl.c
-@@ -29,6 +29,13 @@ struct cbqri_resctrl_res {
- struct cbqri_resctrl_dom {
- 	struct rdt_ctrl_domain  resctrl_ctrl_dom;
- 	struct cbqri_controller *hw_ctrl;
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 7821dd5159cb..eab31c7b5e91 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -23025,6 +23025,8 @@ S:	Supported
+ F:	arch/riscv/include/asm/qos.h
+ F:	arch/riscv/include/asm/resctrl.h
+ F:	arch/riscv/kernel/qos.c
++F:	drivers/acpi/riscv/rqsc.c
++F:	drivers/acpi/riscv/rqsc.h
+ F:	drivers/resctrl/cbqri_devices.c
+ F:	drivers/resctrl/cbqri_internal.h
+ F:	drivers/resctrl/cbqri_resctrl.c
+diff --git a/arch/riscv/include/asm/acpi.h b/arch/riscv/include/asm/acpi.h
+index 26ab37c171bc..3cfd0102085e 100644
+--- a/arch/riscv/include/asm/acpi.h
++++ b/arch/riscv/include/asm/acpi.h
+@@ -67,6 +67,16 @@ int acpi_get_riscv_isa(struct acpi_table_header *table,
+ 
+ void acpi_get_cbo_block_size(struct acpi_table_header *table, u32 *cbom_size,
+ 			     u32 *cboz_size, u32 *cbop_size);
++
++#ifdef CONFIG_RISCV_CBQRI_DRIVER
++int __init acpi_parse_rqsc(struct acpi_table_header *table);
++#else
++static inline int acpi_parse_rqsc(struct acpi_table_header *table)
++{
++	return -EINVAL;
++}
++#endif /* CONFIG_RISCV_CBQRI_DRIVER */
++
+ #else
+ static inline void acpi_init_rintc_map(void) { }
+ static inline struct acpi_madt_rintc *acpi_cpu_get_madt_rintc(int cpu)
+diff --git a/drivers/acpi/riscv/Makefile b/drivers/acpi/riscv/Makefile
+index 1284a076fa88..77f8f0101b7e 100644
+--- a/drivers/acpi/riscv/Makefile
++++ b/drivers/acpi/riscv/Makefile
+@@ -1,5 +1,6 @@
+ # SPDX-License-Identifier: GPL-2.0-only
+ obj-y					+= rhct.o init.o irq.o
++obj-$(CONFIG_RISCV_CBQRI_DRIVER)	+= rqsc.o
+ obj-$(CONFIG_ACPI_PROCESSOR_IDLE)	+= cpuidle.o
+ obj-$(CONFIG_ACPI_CPPC_LIB)		+= cppc.o
+ obj-$(CONFIG_ACPI_RIMT)			+= rimt.o
+diff --git a/drivers/acpi/riscv/rqsc.c b/drivers/acpi/riscv/rqsc.c
+new file mode 100644
+index 000000000000..1cbc5c07e191
+--- /dev/null
++++ b/drivers/acpi/riscv/rqsc.c
+@@ -0,0 +1,194 @@
++// SPDX-License-Identifier: GPL-2.0-only
++
++#define pr_fmt(fmt) "ACPI: RQSC: " fmt
++
++#include <linux/acpi.h>
++#include <linux/bits.h>
++#include <linux/riscv_cbqri.h>
++
++#include "rqsc.h"
++
++#define CBQRI_CTRL_SIZE 0x1000
++
++int __init acpi_parse_rqsc(struct acpi_table_header *table)
++{
++	struct acpi_table_rqsc *rqsc = (struct acpi_table_rqsc *)table;
++	struct acpi_rqsc_node *end, *node;
++	int num_controllers = 0;
++
 +	/*
-+	 * For an L3 capacity controller paired with a bandwidth controller
-+	 * of matching topology, paired_bc caches that BC so mbm_total_bytes
-+	 * reads / resets don't have to walk cbqri_controllers on every hit.
-+	 * NULL for non-L3 domains and L3s without a paired BC.
++	 * Reject revisions newer than this parser was written against.  A
++	 * future revision could extend the fixed RQSC header before the
++	 * first node, which would shift the resource subtables and cause the
++	 * sizeof(*node)-based offset below to point into the wrong place.
 +	 */
-+	struct cbqri_controller *paired_bc;
- };
- 
- static struct cbqri_resctrl_res cbqri_resctrl_resources[RDT_NUM_RESOURCES];
-@@ -37,7 +44,7 @@ static struct cbqri_resctrl_res cbqri_resctrl_resources[RDT_NUM_RESOURCES];
-  * Per-event controller table. Only events CBQRI can back occupy a
-  * slot, so other events do not bloat the array.
-  */
--#define CBQRI_MAX_EVENT QOS_L3_OCCUP_EVENT_ID
-+#define CBQRI_MAX_EVENT QOS_L3_MBM_TOTAL_EVENT_ID
- static struct cbqri_controller *cbqri_resctrl_counters[CBQRI_MAX_EVENT + 1];
- 
- static bool exposed_alloc_capable;
-@@ -228,6 +235,36 @@ void resctrl_arch_reset_rmid(struct rdt_resource *r, struct rdt_l3_mon_domain *d
- 		mutex_unlock(&ctrl->lock);
- 		break;
- 
-+	case QOS_L3_MBM_TOTAL_EVENT_ID: {
-+		struct cbqri_controller *bc;
-+
-+		cd = cbqri_find_ctrl_domain(&r->ctrl_domains, d->hdr.id);
-+		if (!cd)
-+			break;
-+		hw_dom = container_of(cd, struct cbqri_resctrl_dom, resctrl_ctrl_dom);
-+		bc = hw_dom->paired_bc;
-+		if (!bc)
-+			break;
-+		if (WARN_ON_ONCE(!bc->mbm_total_states))
-+			break;
-+		if (rmid >= bc->mcid_count)
-+			break;
-+
-+		mutex_lock(&bc->lock);
-+		/*
-+		 * CONFIG_EVENT both resets and re-arms. Skip the accumulator
-+		 * memset on failure. A stale hardware counter X with
-+		 * prev_ctr=0 would inject overflow(0, X) on the next read.
-+		 */
-+		if (!cbqri_mon_op(bc, CBQRI_BC_MON_CTL_OFF,
-+				  CBQRI_BC_MON_CTL_OP_CONFIG_EVENT, rmid,
-+				  CBQRI_BC_EVT_ID_TOTAL_READ_WRITE, NULL))
-+			memset(&bc->mbm_total_states[rmid], 0,
-+			       sizeof(*bc->mbm_total_states));
-+		mutex_unlock(&bc->lock);
-+		break;
++	if (rqsc->header.revision != ACPI_RQSC_REVISION) {
++		pr_err("RQSC table revision %u, expected %u, aborting\n",
++		       rqsc->header.revision, ACPI_RQSC_REVISION);
++		return -EINVAL;
 +	}
 +
- 	default:
- 		break;
- 	}
-@@ -240,8 +277,10 @@ void resctrl_arch_reset_rmid_all(struct rdt_resource *r, struct rdt_l3_mon_domai
- 	int i;
- 
- 	/* Bound by max_rmid (system-wide minimum mcid_count). */
--	for (i = 0; i < max_rmid; i++)
-+	for (i = 0; i < max_rmid; i++) {
- 		resctrl_arch_reset_rmid(r, d, 0, i, QOS_L3_OCCUP_EVENT_ID);
-+		resctrl_arch_reset_rmid(r, d, 0, i, QOS_L3_MBM_TOTAL_EVENT_ID);
++	/* Reject tables shorter than the fixed RQSC header. */
++	if (rqsc->header.length < sizeof(struct acpi_table_rqsc)) {
++		pr_err("RQSC table truncated: length %u < %zu, aborting\n",
++		       rqsc->header.length, sizeof(struct acpi_table_rqsc));
++		return -EINVAL;
 +	}
- }
- 
- int resctrl_arch_rmid_read(struct rdt_resource *r, struct rdt_domain_hdr *hdr,
-@@ -305,6 +344,82 @@ int resctrl_arch_rmid_read(struct rdt_resource *r, struct rdt_domain_hdr *hdr,
- 		mutex_unlock(&ctrl->lock);
- 		break;
- 
-+	case QOS_L3_MBM_TOTAL_EVENT_ID: {
-+		struct cbqri_controller *bc;
++
++	end = ACPI_ADD_PTR(struct acpi_rqsc_node, rqsc, rqsc->header.length);
++
++	for (node = ACPI_ADD_PTR(struct acpi_rqsc_node, rqsc,
++				 sizeof(struct acpi_table_rqsc));
++	     node < end;
++	     node = ACPI_ADD_PTR(struct acpi_rqsc_node, node, node->length)
++	) {
++		const struct acpi_rqsc_resource *res0;
++		struct cbqri_controller_info info = {};
++		int ret;
++
++		if ((void *)node + sizeof(*node) > (void *)end) {
++			pr_err("truncated entry at end of table, aborting\n");
++			riscv_cbqri_unregister_last(num_controllers);
++			return -EINVAL;
++		}
++
++		if (node->length < sizeof(*node)) {
++			pr_err("malformed RQSC entry: length %u < %zu, aborting\n",
++			       node->length, sizeof(*node));
++			riscv_cbqri_unregister_last(num_controllers);
++			return -EINVAL;
++		}
 +
 +		/*
-+		 * The L3 monitoring domain's id is the L3 cache id. The
-+		 * matching ctrl domain's hw_dom->paired_bc was cached at
-+		 * add time to avoid walking cbqri_controllers on every read.
++		 * Without this check, a node whose length claims to extend
++		 * past the end of the table would advance the loop cursor
++		 * past `end` and silently terminate.  Flag the corruption
++		 * explicitly so a malformed firmware table cannot truncate
++		 * the controller list without noise.
 +		 */
-+		d = cbqri_find_ctrl_domain(&r->ctrl_domains, hdr->id);
-+		if (!d) {
-+			err = -ENOENT;
-+			break;
-+		}
-+		hw_dom = container_of(d, struct cbqri_resctrl_dom, resctrl_ctrl_dom);
-+		bc = hw_dom->paired_bc;
-+		if (!bc) {
-+			err = -ENOENT;
-+			break;
-+		}
-+		if (WARN_ON_ONCE(!bc->mbm_total_states)) {
-+			err = -EIO;
-+			break;
-+		}
-+		if (rmid >= bc->mcid_count) {
-+			err = -ERANGE;
-+			break;
++		if ((void *)node + node->length > (void *)end) {
++			pr_err("RQSC entry length %u overruns table end, aborting\n",
++			       node->length);
++			riscv_cbqri_unregister_last(num_controllers);
++			return -EINVAL;
 +		}
 +
-+		mutex_lock(&bc->lock);
-+		/* Pass EVT_ID explicitly. Same reason as the CC path above. */
-+		err = cbqri_mon_op(bc, CBQRI_BC_MON_CTL_OFF,
-+				   CBQRI_BC_MON_CTL_OP_READ_COUNTER, rmid,
-+				   CBQRI_BC_EVT_ID_TOTAL_READ_WRITE, NULL);
-+		if (err)
-+			goto out_bc;
-+
-+		ctr_val = ioread64(bc->base + CBQRI_BC_MON_CTR_VAL_OFF);
-+
-+		if (ctr_val & CBQRI_BC_MON_CTR_VAL_INVALID) {
-+			/*
-+			 * Return the last good total and leave prev_ctr so
-+			 * the next valid sample resumes from there.
-+			 */
-+			*val = bc->mbm_total_states[rmid].chunks;
-+		} else if (ctr_val & CBQRI_BC_MON_CTR_VAL_OVF) {
-+			/*
-+			 * OVF is sticky until next CONFIG_EVENT.
-+			 * cbqri_bc_mon_overflow() can recover at most
-+			 * one wrap. With OVF set, the count is unknown,
-+			 * so re-arm and re-anchor prev_ctr=0.
-+			 */
-+			struct cbqri_bc_mon_state *s = &bc->mbm_total_states[rmid];
-+
-+			pr_warn_ratelimited("BC@%pa MCID %u: bandwidth counter overflow\n",
-+					    &bc->addr, rmid);
-+			err = cbqri_mon_op(bc, CBQRI_BC_MON_CTL_OFF,
-+					   CBQRI_BC_MON_CTL_OP_CONFIG_EVENT, rmid,
-+					   CBQRI_BC_EVT_ID_TOTAL_READ_WRITE, NULL);
-+			if (err)
-+				goto out_bc;
-+
-+			s->prev_ctr = 0;
-+			*val = s->chunks;
-+		} else {
-+			struct cbqri_bc_mon_state *s = &bc->mbm_total_states[rmid];
-+			u64 cur = ctr_val & CBQRI_BC_MON_CTR_VAL_CTR_MASK;
-+
-+			s->chunks  += cbqri_bc_mon_overflow(s->prev_ctr, cur);
-+			s->prev_ctr = cur;
-+			*val        = s->chunks;
-+		}
-+out_bc:
-+		mutex_unlock(&bc->lock);
-+		break;
-+	}
-+
- 	default:
- 		err = -EINVAL;
- 		break;
-@@ -738,6 +853,15 @@ static int cbqri_resctrl_control_init(struct cbqri_resctrl_res *cbqri_res)
- 			res->mon.num_rmid = ctrl->mcid_count;
- 			resctrl_enable_mon_event(QOS_L3_OCCUP_EVENT_ID,
- 						 false, 0, NULL);
-+
-+			/*
-+			 * Expose BC bandwidth monitoring as the L3's
-+			 * mbm_total_bytes when they share topology.
-+			 */
-+			if (cbqri_resctrl_counters[QOS_L3_MBM_TOTAL_EVENT_ID])
-+				resctrl_enable_mon_event(QOS_L3_MBM_TOTAL_EVENT_ID,
-+							 false, 0, NULL);
-+
- 			res->mon_capable = true;
- 		}
- 		break;
-@@ -824,15 +948,54 @@ static int cbqri_resctrl_pick_bw_alloc(void)
- }
- 
- /*
-- * Pick one controller per monitoring event.  L3 OCCUP comes from the
-- * picked L3 CC (if mon_capable).
-+ * Pick one controller per monitoring event. L3 OCCUP comes from the
-+ * picked L3 CC if mon_capable. MBM_TOTAL from the only mon-capable BC,
-+ * but only when the system exposes exactly one L3 cache. Pairing a
-+ * single BC with multiple L3 domains would overcount system bandwidth
-+ * by a factor equal to the L3 domain count.
-  */
- static void cbqri_resctrl_pick_counters(void)
- {
- 	struct cbqri_resctrl_res *l3 = &cbqri_resctrl_resources[RDT_RESOURCE_L3];
-+	struct cbqri_controller *ctrl, *prev;
-+	unsigned int l3_count = 0;
- 
- 	if (l3->ctrl && l3->ctrl->mon_capable)
- 		cbqri_resctrl_counters[QOS_L3_OCCUP_EVENT_ID] = l3->ctrl;
-+
-+	/* Count distinct L3 cache_ids */
-+	list_for_each_entry(ctrl, &cbqri_controllers, list) {
-+		bool seen = false;
-+
-+		if (ctrl->type != CBQRI_CONTROLLER_TYPE_CAPACITY)
++		/* GAS must describe system memory. ioremap() consumes it later. */
++		if (node->reg.space_id != ACPI_ADR_SPACE_SYSTEM_MEMORY) {
++			pr_warn("controller has unsupported address space_id=%u, skipping\n",
++				node->reg.space_id);
 +			continue;
-+		if (ctrl->cache.cache_level != 3)
-+			continue;
++		}
 +
-+		list_for_each_entry(prev, &cbqri_controllers, list) {
-+			if (prev == ctrl)
-+				break;
-+			if (prev->type != CBQRI_CONTROLLER_TYPE_CAPACITY)
++		/* Address 0 would map page 0 (reset vectors, SBI, boot ROM). */
++		if (!node->reg.address) {
++			pr_warn("controller has zero address, skipping\n");
++			continue;
++		}
++
++		info.type = node->type;
++		/* RQSC v0.9.2 section 2 Table 2: 12-byte GAS-format register interface address */
++		info.addr = node->reg.address;
++		info.size = CBQRI_CTRL_SIZE;
++		info.rcid_count = node->rcid;
++		info.mcid_count = node->mcid;
++
++		/* See CBQRI_MAX_RCID/MCID in <linux/riscv_cbqri.h> for the rationale. */
++		if (info.rcid_count > CBQRI_MAX_RCID) {
++			pr_warn("controller at %pa: rcid_count %u exceeds CBQRI_MAX_RCID %u, skipping\n",
++				&info.addr, info.rcid_count, CBQRI_MAX_RCID);
++			continue;
++		}
++
++		if (info.mcid_count > CBQRI_MAX_MCID) {
++			pr_warn("controller at %pa: mcid_count %u exceeds CBQRI_MAX_MCID %u, skipping\n",
++				&info.addr, info.mcid_count, CBQRI_MAX_MCID);
++			continue;
++		}
++
++		if (node->nres == 0) {
++			pr_warn("controller at %pa has no resource descriptors, skipping\n",
++				&info.addr);
++			continue;
++		}
++
++		/*
++		 * Resources follow the node header in-line. Only res[0] is
++		 * consumed. Bound it against end before reading its prefix so
++		 * a table that ends partway through a resource subtable is
++		 * rejected rather than read past the mapping.
++		 */
++		res0 = (const struct acpi_rqsc_resource *)
++		       ((const u8 *)node + sizeof(*node));
++		if ((void *)res0 + sizeof(*res0) > (void *)end ||
++		    node->length < sizeof(*node) + sizeof(*res0) ||
++		    res0->length < sizeof(*res0)) {
++			pr_warn("controller at %pa: node too short for resource descriptor, skipping\n",
++				&info.addr);
++			continue;
++		}
++
++		if (node->nres > 1)
++			pr_warn("controller at %pa has %u resource descriptors, using first\n",
++				&info.addr, node->nres);
++
++		/*
++		 * id1 is u64 on the wire but cache_id and prox_dom are u32
++		 * downstream (PPTT cache_id, ACPI proximity domain). Reject
++		 * rather than truncate, so a too-large id is not silently
++		 * mapped to the wrong PPTT entry or NUMA node.
++		 */
++		if (res0->id1 > U32_MAX) {
++			pr_warn("controller at %pa: id1 0x%llx exceeds u32, skipping\n",
++				&info.addr, res0->id1);
++			continue;
++		}
++
++		/*
++		 * Pair the QoS controller type with the resource descriptor
++		 * fields that index id1.  RQSC v0.9.2 Table 4 defines the
++		 * mapping: a Capacity controller indexes a Processor Cache
++		 * via PPTT cache_id, a Bandwidth controller indexes a Memory
++		 * Range via SRAT proximity domain.  Mismatched pairings
++		 * (e.g. a CC whose first resource is Memory) would otherwise
++		 * route id1 into the wrong downstream lookup.
++		 */
++		switch (info.type) {
++		case CBQRI_CONTROLLER_TYPE_CAPACITY:
++			if (res0->type != ACPI_RQSC_RESOURCE_TYPE_CACHE ||
++			    res0->id_type != ACPI_RQSC_RESOURCE_ID_TYPE_PROCESSOR_CACHE) {
++				pr_warn("CC at %pa: resource type=%u id_type=%u not (cache, processor cache), skipping\n",
++					&info.addr, res0->type, res0->id_type);
 +				continue;
-+			if (prev->cache.cache_level != 3)
-+				continue;
-+			if (prev->cache.cache_id == ctrl->cache.cache_id) {
-+				seen = true;
-+				break;
 +			}
++			info.cache_id = (u32)res0->id1;
++			break;
++		case CBQRI_CONTROLLER_TYPE_BANDWIDTH:
++			if (res0->type != ACPI_RQSC_RESOURCE_TYPE_MEMORY ||
++			    res0->id_type != ACPI_RQSC_RESOURCE_ID_TYPE_MEMORY_RANGE) {
++				pr_warn("BC at %pa: resource type=%u id_type=%u not (memory, memory range), skipping\n",
++					&info.addr, res0->type, res0->id_type);
++				continue;
++			}
++			info.prox_dom = (u32)res0->id1;
++			break;
++		default:
++			pr_warn("controller at %pa: unknown type %u, skipping\n",
++				&info.addr, info.type);
++			continue;
 +		}
-+		if (!seen)
-+			l3_count++;
++
++		pr_debug("registering controller type=%u addr=%pa rcid=%u mcid=%u\n",
++			 info.type, &info.addr, info.rcid_count, info.mcid_count);
++
++		ret = riscv_cbqri_register_controller(&info);
++		if (ret == 0)
++			num_controllers++;
++		else
++			pr_warn("controller at %pa: registration failed (%d), skipping\n",
++				&info.addr, ret);
 +	}
 +
-+	if (l3_count > 1) {
-+		pr_warn_once("multiple L3 domains (%u) detected. mbm_total_bytes disabled\n",
-+			     l3_count);
-+		return;
-+	}
++	pr_info("found %d CBQRI controllers\n", num_controllers);
++	return 0;
++}
+diff --git a/drivers/acpi/riscv/rqsc.h b/drivers/acpi/riscv/rqsc.h
+new file mode 100644
+index 000000000000..f7b556f29e16
+--- /dev/null
++++ b/drivers/acpi/riscv/rqsc.h
+@@ -0,0 +1,63 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Local definitions for the RISC-V Quality of Service Controller (RQSC)
++ * ACPI table. Will move to ACPICA's include/acpi/actbl2.h once the spec
++ * is ratified.
++ */
++#ifndef _DRIVERS_ACPI_RISCV_RQSC_H
++#define _DRIVERS_ACPI_RISCV_RQSC_H
 +
-+	cbqri_resctrl_counters[QOS_L3_MBM_TOTAL_EVENT_ID] =
-+		cbqri_find_only_mon_bc();
- }
- 
- static void cbqri_resctrl_accumulate_caps(void)
-@@ -948,6 +1111,26 @@ static int cbqri_attach_cpu_to_l3_mon(struct cbqri_controller *ctrl,
- 	else
- 		list_add_tail(&mon_dom->hdr.list, &res->mon_domains);
- 
++#include <linux/types.h>
++#include <acpi/actbl.h>
++
++#define ACPI_SIG_RQSC	"RQSC"	/* RISC-V Quality of Service Controller */
++
++/* RQSC v0.9.2 Table 1: current revision number. */
++#define ACPI_RQSC_REVISION	1
++
++/* RQSC v0.9.2 Table 4: Resource Type values for acpi_rqsc_resource.type. */
++#define ACPI_RQSC_RESOURCE_TYPE_CACHE	0
++#define ACPI_RQSC_RESOURCE_TYPE_MEMORY	1
++
++/* RQSC v0.9.2 Table 4: Resource ID Type values for .id_type. */
++#define ACPI_RQSC_RESOURCE_ID_TYPE_PROCESSOR_CACHE	0
++#define ACPI_RQSC_RESOURCE_ID_TYPE_MEMORY_RANGE		1
++
++/*
++ * Byte-packed: u64 id1 would otherwise pad to 8-byte alignment and inflate
++ * sizeof(*res) from the spec's 20 bytes to 24, mis-sizing resource subtables.
++ */
++struct acpi_rqsc_resource {
++	u8 type;
++	u8 resv;
++	u16 length;
++	u16 flags;
++	u8 resv2;
++	u8 id_type;
++	u64 id1;
++	u32 id2;
++} __packed;
++
++struct acpi_rqsc_node {
++	u8 type;
++	u8 resv;
++	u16 length;
++	/* RQSC v0.9.2 section 2 Table 2: 12-byte GAS-format register interface address */
++	struct acpi_generic_address reg;
++	u16 rcid;
++	u16 mcid;
++	u16 flags;
++	u16 nres;
 +	/*
-+	 * Pair this L3 domain with the system's mon-capable BC and
-+	 * initialise the BC's per-MCID software accumulators before
-+	 * resctrl_online_mon_domain() exposes the domain to userspace.
-+	 * A concurrent sysfs read of mbm_total_bytes between online and
-+	 * BC init would otherwise pass the !bc->mbm_total_states check
-+	 * with a half-initialised pointer.
++	 * Followed by nres acpi_rqsc_resource subtables. Walk them via
++	 * each resource's own length field so a future RQSC revision that
++	 * extends the resource layout cannot misalign older parsers.
 +	 */
-+	hw_dom = container_of(ctrl_dom, struct cbqri_resctrl_dom, resctrl_ctrl_dom);
++} __packed;
 +
-+	hw_dom->paired_bc = cbqri_find_only_mon_bc();
-+	if (hw_dom->paired_bc) {
-+		err = cbqri_init_bc_mon_counters(hw_dom->paired_bc);
-+		if (err) {
-+			pr_err("BC @%pa: mon init failed (%d)\n", &hw_dom->paired_bc->addr, err);
-+			hw_dom->paired_bc = NULL;
-+			goto err_listdel;
-+		}
-+	}
++struct acpi_table_rqsc {
++	struct acpi_table_header header;	/* Common ACPI table header */
++	u32 num;
++} __packed;
 +
- 	err = resctrl_online_mon_domain(res, &mon_dom->hdr);
- 	if (err)
- 		goto err_listdel;
++#endif /* _DRIVERS_ACPI_RISCV_RQSC_H */
 
 -- 
 2.43.0
