@@ -1,53 +1,53 @@
-Return-Path: <linux-doc+bounces-89282-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89280-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8LNBOLmRE2ofDgcAu9opvQ
-	(envelope-from <linux-doc+bounces-89282-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 02:03:05 +0200
+	id SLZDJ4WQE2ofDgcAu9opvQ
+	(envelope-from <linux-doc+bounces-89280-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 01:57:57 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 77A505C4F39
-	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 02:03:05 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 35FB15C4DA7
+	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 01:57:57 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 3C4F13045AA6
-	for <lists+linux-doc@lfdr.de>; Sun, 24 May 2026 23:57:55 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 9E71E3004D02
+	for <lists+linux-doc@lfdr.de>; Sun, 24 May 2026 23:57:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2EE853BB12B;
-	Sun, 24 May 2026 23:57:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B07803BADB4;
+	Sun, 24 May 2026 23:57:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="G52UO2GX"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="VGP9OnMN"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2997F3B83F9;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD4B83B8BA1;
 	Sun, 24 May 2026 23:57:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779667066; cv=none; b=F/8J298knfUJmx5oz27Io1iPeiQ5Qhedq8tpLQ7x9mxJ6dn2mC324xuBjesJDm3D064PVPtOTOqAQ1D2WgogBGNzIsK05sB2YZ5w0vmmKzog8YI8V/m4XxqrPeGioJXtG1N+h99qwf5ZO3eJBa5HOChbu/rsAx/V5CYAzABwIpA=
+	t=1779667065; cv=none; b=tWcwpxQ0+KdFkNLraJgpnwEdIoMEsVQuDIfpyO1W7fCoKO4Ob5Zii1bo4g4/U/PhwND6iOW1J3LJ1Yg8hjuNrFX1OQo75Lan/1HalXyIZIsEf2ny/PUlBfpPLN31X113GZMpLg/X2XXEx/LGwKVl5NVH8hQZGgOJrPlA8fXNl6Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779667066; c=relaxed/simple;
-	bh=LeGE4Ls7k9VnbGMk2R/vZx28T4pQeXBFY+LQE7hv70A=;
+	s=arc-20240116; t=1779667065; c=relaxed/simple;
+	bh=vmtFHEULsJC3IiO748IREdCMzpe08urQp1XmUWYGmFU=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=C3d6v5KCLMQ3HQwPl6Ldzg5rbakwogb4drCjy8NRn33i57USfKUHp0SXz2YfEWpkz+aoWbvGUxHzWdU2RNthUmU95E3dBTb3pgWBrpHRGxwcHlLJ4tLjTP7UCv3FiMx3fnwEjaqZdZ8C+ZyRgyosxPe3PcA758vZ+4VoF2nPOdI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=G52UO2GX; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 259DE1F01564;
+	 In-Reply-To:To:Cc; b=t+XO7pxAELYDgZKcSq3io+LwBXoLJRZYo02tLykYux1Jb42SA3Wrm4/D/sVQoeTkAKlpPCqMbMJsOmh+E16F8kNNyaRJNDGttD7M+vOqs0rqjYBEtYelFUosWgH+81bVXfEwnL71c5lGh04A/h3VeIKImvm3qYNmOXUwKwY6zSk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=VGP9OnMN; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DA8AC1F01565;
 	Sun, 24 May 2026 23:57:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1779667060;
-	bh=TTkMXHPpCkrw9mbhNwao6LVZ1u7oRci0wj3I02xL/w0=;
+	s=k20260515; t=1779667061;
+	bh=hdVl/+tyQos8I/C5ukqEi2Utow5uJHPasq4qcGSCBrc=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=G52UO2GXD1I/3xfwfQLYO0q+ktsvBNSHesAeVGlmoQkGCUroAdEZeFGc+KTH9IPk+
-	 vNLOaAuCqGeLpGBc6ey+mF24zdcr13q+2Oiq2q0xCeZlpVve8DCI+7D0FuhbC0uotA
-	 sMSYOJL1wNmygSW9xmAvTcM2sHEpmbC1+u0/9N+SgqB6+S4edjNMcItVcqDfc+ceAA
-	 lQcGL30ukvj28Ge40Z+3BDnUNwSL/JWLUmhrI525P/jRqstj0O9qm0XcwyjKyuHVrM
-	 QFCVOUBJ2Xw40rooOci2qMif4aJm5/dk3yKS4dK2D1Hm84EaWII0zO3K1PsIS8KnPX
-	 NOVG41K4YAgOA==
+	b=VGP9OnMNr0yCBjlHyljdSZMV4b13pSzUVQUURp2FBCkRXmnowEms5ELGIICP4CR66
+	 ol8ShUWl/dxn7rAKsbeY+DVTQLzZky4beP/DjW7DwfdLYvpdu7l4K77dgb+ms0+1c4
+	 o/Q+Lcb/ouVHKm7Voxknyw+ul4NwmLuvtLsuKYNTn+jkGEqffkd6dHC3fi8R0e6Bgu
+	 qER7Bs7q3Z7QAbOfQYzC6kkDRWD2FDzkEo7/HBR8spCyMNNhpeXD/GcCh/o/ga/T0U
+	 DQIGx7WOsMDueKE4wjGnEyv9onnO2bKp2LxUzXcPb0nHrh/Iwj/ACBq1nPyx6ehH+1
+	 N7uI+sXq7yPdw==
 From: Drew Fustini <fustini@kernel.org>
-Date: Sun, 24 May 2026 16:55:43 -0700
-Subject: [PATCH RFC v5 13/18] riscv_cbqri: resctrl: Add MB_MIN bandwidth
- allocation via Rbwb
+Date: Sun, 24 May 2026 16:55:44 -0700
+Subject: [PATCH RFC v5 14/18] riscv_cbqri: resctrl: Add MB_WGHT bandwidth
+ allocation via Mweight
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -56,7 +56,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260524-ssqosid-cbqri-rqsc-v7-0-v5-13-78d3a7ba9dbe@kernel.org>
+Message-Id: <20260524-ssqosid-cbqri-rqsc-v7-0-v5-14-78d3a7ba9dbe@kernel.org>
 References: <20260524-ssqosid-cbqri-rqsc-v7-0-v5-0-78d3a7ba9dbe@kernel.org>
 In-Reply-To: <20260524-ssqosid-cbqri-rqsc-v7-0-v5-0-78d3a7ba9dbe@kernel.org>
 To: Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, 
@@ -95,12 +95,12 @@ Cc: linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org,
  Conor Dooley <conor@kernel.org>, linux-rt-devel@lists.linux.dev, 
  linux-doc@vger.kernel.org
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=10637; i=fustini@kernel.org;
- h=from:subject:message-id; bh=LeGE4Ls7k9VnbGMk2R/vZx28T4pQeXBFY+LQE7hv70A=;
- b=owGbwMvMwCV2+43O4ZsaG3kYT6slMWQJT8i8PXuaxNKAxDqbNeumnXp8/snWdiaB3Eh59t6dt
- oJZocpLO0pZGMS4GGTFFFk2fci7sMQr9OuC+S+2wcxhZQIZwsDFKQATuVvA8L/qr37vhWmX7oZu
- Mm/vOP1ofcvPH/4bXnWsnV7jYezWtng3w/+ot2ozf09sXPl6b8fSgr98PS8ve4t8VFy3tr39xK5
- /pX+YAQ==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5240; i=fustini@kernel.org;
+ h=from:subject:message-id; bh=vmtFHEULsJC3IiO748IREdCMzpe08urQp1XmUWYGmFU=;
+ b=kA0DAAoW2+wsw9kosQwByyZiAGoTkGmhVR6yTIuFTkO5UZkvXJdJmfIA3lcmEJrilNj6s4WVi
+ 4h1BAAWCgAdFiEEsvBu0KRKVfWgn+i22+wsw9kosQwFAmoTkGkACgkQ2+wsw9kosQza6gD/YRL1
+ o+LihDooYDiNR9UkIftSnNfn+bvH3FQUUCT3fWIBANV0A8nE1MUBIjWl2sg/hrbZK4E7psJma3k
+ /9xYbIzwG
 X-Developer-Key: i=fustini@kernel.org; a=openpgp;
  fpr=1B6F948213EA489734F3997035D5CD577C1E6010
 X-Spamd-Result: default: False [-0.66 / 15.00];
@@ -108,11 +108,11 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-89282-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-89280-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	FREEMAIL_TO(0.00)[kernel.org,dabbelt.com,eecs.berkeley.edu,ghiti.fr,ventanamicro.com,sifive.com,baylibre.com,semihalf.com,linux.dev,rivosinc.com,microchip.com,bytedance.com,linux.alibaba.com,gmail.com,zte.com.cn,sanechips.com.cn,intel.com,amd.com,google.com,arm.com,redhat.com,alien8.de,linux.intel.com,zytor.com,linutronix.de,goodmis.org,lwn.net];
@@ -120,7 +120,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	TO_DN_SOME(0.00)[];
 	RCPT_COUNT_GT_50(0.00)[57];
 	PRECEDENCE_BULK(0.00)[];
@@ -130,218 +130,112 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[baylibre.com:email,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: 77A505C4F39
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: 35FB15C4DA7
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Add bandwidth allocation through Rbwb (reserved bandwidth blocks)
-exposed as the MB_MIN resource. Rbwb's sum constraint does not fit MBA's
-percentage cap, so MB_MIN lands as a new RDT_RESOURCE_* rather than
-masquerading as MBA.
+Add bandwidth allocation through Mweight (shared weight for unreserved
+bandwidth) exposed as the MB_WGHT resource. Mweight has no MBA
+equivalent, so it lands as a new RDT_RESOURCE_*.
 
-The sum(Rbwb) <= MRBWB (max resv bw blocks) invariant from the CBQRI
-spec is enforced at schemata-write time using a per-RCID software cache
-under ctrl->lock. -EINVAL on overflow, matching the existing
-schemata-write rejection convention.
+Mweight is an integer in [0, 255]. A value of 0 disables work-
+conserving sharing for the group, capping its bandwidth at the
+MB_MIN reservation. Values 1..255 compete for the leftover pool in
+proportion to the weight.
 
-Reset gives RCID 0 the remaining MRBWB budget after reserving 1 block
-per other RCID. default_to_min=true on MB_MIN so mkdir cannot overflow
-the sum constraint.
+The same BC backs both MB_MIN and MB_WGHT and bc_bw_alloc packs Rbwb and
+Mweight in one register. cbqri_attach_cpu_to_bw_ctrl() attaches both
+rids to the picked BC.
+
+Reset gives every RCID the new-group default (max_bw = 255) for
+equal opportunistic shares.
 
 Assisted-by: Claude:claude-opus-4-7
 Co-developed-by: Adrien Ricciardi <aricciardi@baylibre.com>
 Signed-off-by: Adrien Ricciardi <aricciardi@baylibre.com>
 Signed-off-by: Drew Fustini <fustini@kernel.org>
 ---
- drivers/resctrl/cbqri_resctrl.c | 220 ++++++++++++++++++++++++++++++++++++----
- 1 file changed, 198 insertions(+), 22 deletions(-)
+ drivers/resctrl/cbqri_resctrl.c | 60 ++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 56 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/resctrl/cbqri_resctrl.c b/drivers/resctrl/cbqri_resctrl.c
-index 3ba895c3f811..5d8389c58f4f 100644
+index 5d8389c58f4f..ba764bc6ef17 100644
 --- a/drivers/resctrl/cbqri_resctrl.c
 +++ b/drivers/resctrl/cbqri_resctrl.c
-@@ -411,6 +411,9 @@ int resctrl_arch_update_one(struct rdt_resource *r, struct rdt_ctrl_domain *d,
- 	case RDT_RESOURCE_L2:
- 	case RDT_RESOURCE_L3:
- 		return cbqri_apply_cache_config_dom(dom, r, closid, t, cfg_val);
-+	case RDT_RESOURCE_MB_MIN:
-+		/* sum(Rbwb) <= MRBWB validation runs inside cbqri_apply_rbwb(). */
-+		return cbqri_apply_rbwb(dom->hw_ctrl, closid, cfg_val, true);
+@@ -414,6 +414,8 @@ int resctrl_arch_update_one(struct rdt_resource *r, struct rdt_ctrl_domain *d,
+ 	case RDT_RESOURCE_MB_MIN:
+ 		/* sum(Rbwb) <= MRBWB validation runs inside cbqri_apply_rbwb(). */
+ 		return cbqri_apply_rbwb(dom->hw_ctrl, closid, cfg_val, true);
++	case RDT_RESOURCE_MB_WGHT:
++		return cbqri_apply_mweight_config(dom->hw_ctrl, closid, cfg_val);
  	default:
  		return -EINVAL;
  	}
-@@ -463,6 +466,14 @@ u32 resctrl_arch_get_config(struct rdt_resource *r, struct rdt_ctrl_domain *d,
- 		if (err < 0)
- 			val = resctrl_get_default_ctrl(r);
+@@ -474,6 +476,14 @@ u32 resctrl_arch_get_config(struct rdt_resource *r, struct rdt_ctrl_domain *d,
+ 			val = (u32)rbwb;
  		break;
-+	case RDT_RESOURCE_MB_MIN: {
-+		u64 rbwb;
+ 	}
++	case RDT_RESOURCE_MB_WGHT: {
++		u64 mweight;
 +
-+		err = cbqri_read_rbwb(ctrl, closid, &rbwb);
++		err = cbqri_read_mweight(ctrl, closid, &mweight);
 +		if (err == 0)
-+			val = (u32)rbwb;
++			val = (u32)mweight;
 +		break;
 +	}
  	default:
  		break;
  	}
-@@ -470,9 +481,22 @@ u32 resctrl_arch_get_config(struct rdt_resource *r, struct rdt_ctrl_domain *d,
- 	return val;
- }
- 
-+/*
-+ * RCID 0 carries the remaining MRBWB after every other RCID is seeded with
-+ * the minimum Rbwb of 1. cbqri_probe_bc() rejects a bandwidth controller
-+ * with mrbwb < rcid_count, so this subtraction cannot underflow.
-+ */
-+static u64 cbqri_rcid0_rbwb(struct cbqri_controller *ctrl)
-+{
-+	if (WARN_ON_ONCE(ctrl->bc.mrbwb < ctrl->rcid_count))
-+		return 1;
-+	return ctrl->bc.mrbwb - (ctrl->rcid_count - 1);
-+}
-+
- void resctrl_arch_reset_all_ctrls(struct rdt_resource *r)
- {
- 	struct cbqri_resctrl_res *hw_res;
-+	struct cbqri_resctrl_dom *dom;
- 	struct rdt_ctrl_domain *d;
- 	enum resctrl_conf_type t;
- 	u32 default_ctrl;
-@@ -487,15 +511,41 @@ void resctrl_arch_reset_all_ctrls(struct rdt_resource *r)
- 		return;
- 
- 	list_for_each_entry(d, &r->ctrl_domains, hdr.list) {
--		for (i = 0; i < hw_res->ctrl->rcid_count; i++) {
--			for (t = 0; t < CDP_NUM_TYPES; t++) {
-+		dom = container_of(d, struct cbqri_resctrl_dom,
-+				   resctrl_ctrl_dom);
-+
-+		switch (r->rid) {
-+		case RDT_RESOURCE_MB_MIN:
-+			/*
-+			 * CBQRI section 4.5: Rbwb >= 1, sum(Rbwb) <= MRBWB.
-+			 * Walk N-1..1 first so RCID 0 lands last with the
-+			 * remaining budget.
-+			 */
-+			for (i = 0; i < hw_res->ctrl->rcid_count; i++) {
-+				u32 rcid = (i + 1) % hw_res->ctrl->rcid_count;
-+				u64 rbwb = (rcid == 0) ?
-+					cbqri_rcid0_rbwb(dom->hw_ctrl) : 1;
- 				int rerr;
- 
--				rerr = resctrl_arch_update_one(r, d, i, t, default_ctrl);
-+				rerr = cbqri_apply_rbwb(dom->hw_ctrl, rcid, rbwb, false);
- 				if (rerr)
--					pr_err_ratelimited("rid=%d reset RCID %u type %u failed (%d)\n",
--							   r->rid, i, t, rerr);
-+					pr_err_ratelimited("RBWB reset RCID %u failed (%d)\n",
-+							   rcid, rerr);
+@@ -533,6 +543,18 @@ void resctrl_arch_reset_all_ctrls(struct rdt_resource *r)
+ 							   rcid, rerr);
  			}
-+			break;
-+		default:
+ 			break;
++		case RDT_RESOURCE_MB_WGHT:
++			/* All RCIDs start at max weight (the new-group default). */
 +			for (i = 0; i < hw_res->ctrl->rcid_count; i++) {
-+				for (t = 0; t < CDP_NUM_TYPES; t++) {
-+					int rerr;
++				int rerr;
 +
-+					rerr = resctrl_arch_update_one(r, d, i, t,
-+								       default_ctrl);
-+					if (rerr)
-+						pr_err_ratelimited("rid=%d reset RCID %u type %u failed (%d)\n",
-+								   r->rid, i, t, rerr);
-+				}
++				rerr = cbqri_apply_mweight_config(dom->hw_ctrl, i,
++								  default_ctrl);
++				if (rerr)
++					pr_err_ratelimited("Mweight reset RCID %u failed (%d)\n",
++							   i, rerr);
 +			}
 +			break;
- 		}
- 	}
- }
-@@ -520,26 +570,51 @@ static struct rdt_ctrl_domain *cbqri_new_domain(struct cbqri_controller *ctrl)
- static int cbqri_init_domain_ctrlval(struct rdt_resource *r, struct rdt_ctrl_domain *d)
- {
- 	struct cbqri_resctrl_res *hw_res;
-+	struct cbqri_resctrl_dom *dom;
- 	enum resctrl_conf_type t;
- 	int err = 0;
-+	u64 rbwb;
- 	int i;
+ 		default:
+ 			for (i = 0; i < hw_res->ctrl->rcid_count; i++) {
+ 				for (t = 0; t < CDP_NUM_TYPES; t++) {
+@@ -597,6 +619,11 @@ static int cbqri_init_domain_ctrlval(struct rdt_resource *r, struct rdt_ctrl_dom
  
- 	hw_res = container_of(r, struct cbqri_resctrl_res, resctrl_res);
-+	dom = container_of(d, struct cbqri_resctrl_dom, resctrl_ctrl_dom);
- 
- 	for (i = 0; i < hw_res->ctrl->rcid_count; i++) {
- 		/*
--		 * Seed both DATA and CODE staged slots so a later mount
--		 * with -o cdp does not see stale CODE values.
--		 * On non-AT controllers cbqri_cc_alloc_op() masks AT to 0
--		 * so all three iterations land on the same hardware state.
--		 * The redundant writes are harmless.
-+		 * For MB_MIN walk, RCIDs 1..N-1 then RCID 0 last so the sum
-+		 * doesn't exceed MRBWB during the walk.
- 		 */
--		for (t = 0; t < CDP_NUM_TYPES; t++) {
--			err = resctrl_arch_update_one(r, d, i, t,
--						      resctrl_get_default_ctrl(r));
--			if (err)
--				return err;
-+		u32 rcid = (r->rid == RDT_RESOURCE_MB_MIN) ?
-+				((i + 1) % hw_res->ctrl->rcid_count) : i;
-+
-+		switch (r->rid) {
-+		case RDT_RESOURCE_MB_MIN:
-+			/*
-+			 * CBQRI section 4.5: Rbwb >= 1, sum(Rbwb) <= MRBWB.
-+			 * RCID 0 takes the remaining budget.
-+			 */
-+			rbwb = (rcid == 0) ? cbqri_rcid0_rbwb(dom->hw_ctrl) : 1;
-+
-+			err = cbqri_apply_rbwb(dom->hw_ctrl, rcid, rbwb, false);
+ 			err = cbqri_apply_rbwb(dom->hw_ctrl, rcid, rbwb, false);
+ 			break;
++		case RDT_RESOURCE_MB_WGHT:
++			/* Match the new-group default: equal weights across RCIDs. */
++			err = cbqri_apply_mweight_config(dom->hw_ctrl, i,
++							 resctrl_get_default_ctrl(r));
 +			break;
-+		default:
-+			/*
-+			 * Seed both DATA and CODE staged slots so a later
-+			 * mount with -o cdp does not see stale CODE values.
-+			 * On non-AT controllers cbqri_cc_alloc_op() masks
-+			 * AT to 0, so all three iterations land on the same
-+			 * hardware state. The redundant writes are harmless.
-+			 */
-+			for (t = 0; t < CDP_NUM_TYPES; t++) {
-+				err = resctrl_arch_update_one(r, d, i, t,
-+							      resctrl_get_default_ctrl(r));
-+				if (err)
-+					break;
-+			}
-+			break;
- 		}
-+		if (err)
-+			return err;
- 	}
- 	return 0;
- }
-@@ -639,6 +714,31 @@ static int cbqri_resctrl_control_init(struct cbqri_resctrl_res *cbqri_res)
- 			res->mon_capable = true;
- 		}
+ 		default:
+ 			/*
+ 			 * Seed both DATA and CODE staged slots so a later
+@@ -739,6 +766,25 @@ static int cbqri_resctrl_control_init(struct cbqri_resctrl_res *cbqri_res)
+ 		INIT_LIST_HEAD(&res->mon_domains);
  		break;
-+
-+	case RDT_RESOURCE_MB_MIN:
-+		res->name = "MB_MIN";
+ 
++	case RDT_RESOURCE_MB_WGHT:
++		res->name = "MB_WGHT";
 +		res->schema_fmt = RESCTRL_SCHEMA_RANGE;
-+		/*
-+		 * resctrl requires a cache scope for MBA-style domains.
-+		 * Use L3 as a proxy until the resctrl supports non-cache
-+		 * scopes for bandwidth resources.
-+		 */
 +		res->ctrl_scope = RESCTRL_L3_CACHE;
-+		/* Rbwb is an integer block count, not a percentage. No MBA delay_linear. */
++		/* Mweight is a dimensionless ratio. No delay/linear concept. */
 +		res->membw.throttle_mode = THREAD_THROTTLE_UNDEFINED;
-+		res->membw.min_bw = 1;
-+		res->membw.max_bw = ctrl->bc.mrbwb;
-+		res->membw.bw_gran = 1;
 +		/*
-+		 * CBQRI section 4.5 caps sum(Rbwb) <= MRBWB. Default new
-+		 * groups to min_bw so mkdir cannot overflow that sum.
++		 * CBQRI section 4.5: Mweight is 0-255 (0 disables
++		 * work-conserving). No sum constraint, so leave
++		 * default_to_min false. Groups default to max_bw.
 +		 */
-+		res->membw.default_to_min = true;
++		res->membw.min_bw = 0;
++		res->membw.max_bw = 255;
++		res->membw.bw_gran = 1;
 +		res->alloc_capable = ctrl->alloc_capable;
 +		INIT_LIST_HEAD(&res->ctrl_domains);
 +		INIT_LIST_HEAD(&res->mon_domains);
@@ -350,125 +244,45 @@ index 3ba895c3f811..5d8389c58f4f 100644
  	default:
  		break;
  	}
-@@ -646,6 +746,37 @@ static int cbqri_resctrl_control_init(struct cbqri_resctrl_res *cbqri_res)
- 	return 0;
+@@ -747,13 +793,12 @@ static int cbqri_resctrl_control_init(struct cbqri_resctrl_res *cbqri_res)
  }
  
-+/*
-+ * Pick one BC to back MB_MIN.  Multiple BCs must agree on rcid_count
-+ * and mrbwb.  Mismatch is fatal because resctrl exposes a single set
-+ * of caps per rid.
-+ */
-+static int cbqri_resctrl_pick_bw_alloc(void)
-+{
-+	struct cbqri_resctrl_res *mb_min = &cbqri_resctrl_resources[RDT_RESOURCE_MB_MIN];
-+	struct cbqri_controller *ctrl;
-+
-+	list_for_each_entry(ctrl, &cbqri_controllers, list) {
-+		if (ctrl->type != CBQRI_CONTROLLER_TYPE_BANDWIDTH)
-+			continue;
-+		if (!ctrl->alloc_capable)
-+			continue;
-+
-+		if (mb_min->ctrl) {
-+			if (mb_min->ctrl->rcid_count != ctrl->rcid_count ||
-+			    mb_min->ctrl->bc.mrbwb != ctrl->bc.mrbwb) {
-+				pr_err("BW controllers have mismatched capabilities\n");
-+				return -EINVAL;
-+			}
-+			continue;
-+		}
-+
-+		mb_min->ctrl = ctrl;
-+	}
-+
-+	return 0;
-+}
-+
  /*
-  * Pick one controller per monitoring event.  L3 OCCUP comes from the
-  * picked L3 CC (if mon_capable).
-@@ -860,6 +991,37 @@ static int cbqri_attach_cpu_to_cap_ctrl(struct cbqri_controller *ctrl,
- 	return err;
- }
- 
-+static int cbqri_attach_cpu_to_one_bw_res(struct cbqri_controller *ctrl,
-+					  enum resctrl_res_level rid,
-+					  unsigned int cpu)
-+{
-+	struct cbqri_resctrl_res *hw_res = &cbqri_resctrl_resources[rid];
-+	struct rdt_resource *res = &hw_res->resctrl_res;
-+	struct rdt_ctrl_domain *domain;
-+	int dom_id = ctrl->mem.prox_dom;
-+
-+	if (!hw_res->ctrl)
-+		return 0;
-+
-+	domain = cbqri_find_ctrl_domain(&res->ctrl_domains, dom_id);
-+	if (domain) {
-+		cpumask_set_cpu(cpu, &domain->hdr.cpu_mask);
-+		return 0;
-+	}
-+
-+	domain = cbqri_create_ctrl_domain(ctrl, res, cpu, dom_id);
-+	if (IS_ERR(domain))
-+		return PTR_ERR(domain);
-+
-+	return 0;
-+}
-+
-+static int cbqri_attach_cpu_to_bw_ctrl(struct cbqri_controller *ctrl,
-+				       unsigned int cpu)
-+{
-+	return cbqri_attach_cpu_to_one_bw_res(ctrl, RDT_RESOURCE_MB_MIN, cpu);
-+}
-+
- static void cbqri_detach_cpu_from_l3_mon(struct rdt_resource *res,
- 					 unsigned int cpu)
+- * Pick one BC to back MB_MIN.  Multiple BCs must agree on rcid_count
+- * and mrbwb.  Mismatch is fatal because resctrl exposes a single set
+- * of caps per rid.
++ * Pick one BC to back both MB_MIN and MB_WGHT.
+  */
+ static int cbqri_resctrl_pick_bw_alloc(void)
  {
-@@ -937,6 +1099,10 @@ static int cbqri_resctrl_setup(void)
- 	if (err)
- 		return err;
+ 	struct cbqri_resctrl_res *mb_min = &cbqri_resctrl_resources[RDT_RESOURCE_MB_MIN];
++	struct cbqri_resctrl_res *mb_wght = &cbqri_resctrl_resources[RDT_RESOURCE_MB_WGHT];
+ 	struct cbqri_controller *ctrl;
  
-+	err = cbqri_resctrl_pick_bw_alloc();
+ 	list_for_each_entry(ctrl, &cbqri_controllers, list) {
+@@ -772,6 +817,7 @@ static int cbqri_resctrl_pick_bw_alloc(void)
+ 		}
+ 
+ 		mb_min->ctrl = ctrl;
++		mb_wght->ctrl = ctrl;
+ 	}
+ 
+ 	return 0;
+@@ -1019,7 +1065,13 @@ static int cbqri_attach_cpu_to_one_bw_res(struct cbqri_controller *ctrl,
+ static int cbqri_attach_cpu_to_bw_ctrl(struct cbqri_controller *ctrl,
+ 				       unsigned int cpu)
+ {
+-	return cbqri_attach_cpu_to_one_bw_res(ctrl, RDT_RESOURCE_MB_MIN, cpu);
++	int err;
++
++	err = cbqri_attach_cpu_to_one_bw_res(ctrl, RDT_RESOURCE_MB_MIN, cpu);
 +	if (err)
 +		return err;
 +
- 	cbqri_resctrl_pick_counters();
++	return cbqri_attach_cpu_to_one_bw_res(ctrl, RDT_RESOURCE_MB_WGHT, cpu);
+ }
  
- 	for (rid = 0; rid < RDT_NUM_RESOURCES; rid++) {
-@@ -983,14 +1149,24 @@ static int cbqri_resctrl_online_cpu(unsigned int cpu)
- 	mutex_lock(&cbqri_domain_list_lock);
- 
- 	list_for_each_entry(ctrl, &cbqri_controllers, list) {
--		if (ctrl->type != CBQRI_CONTROLLER_TYPE_CAPACITY)
--			continue;
--		if (!cpumask_test_cpu(cpu, &ctrl->cache.cpu_mask))
--			continue;
--		if (!ctrl->alloc_capable)
-+		switch (ctrl->type) {
-+		case CBQRI_CONTROLLER_TYPE_CAPACITY:
-+			if (!cpumask_test_cpu(cpu, &ctrl->cache.cpu_mask))
-+				continue;
-+			if (!ctrl->alloc_capable)
-+				continue;
-+			err = cbqri_attach_cpu_to_cap_ctrl(ctrl, cpu);
-+			break;
-+		case CBQRI_CONTROLLER_TYPE_BANDWIDTH:
-+			if (!cpumask_test_cpu(cpu, &ctrl->mem.cpu_mask))
-+				continue;
-+			if (!ctrl->alloc_capable)
-+				continue;
-+			err = cbqri_attach_cpu_to_bw_ctrl(ctrl, cpu);
-+			break;
-+		default:
- 			continue;
--
--		err = cbqri_attach_cpu_to_cap_ctrl(ctrl, cpu);
-+		}
- 		if (err)
- 			break;
- 	}
+ static void cbqri_detach_cpu_from_l3_mon(struct rdt_resource *res,
 
 -- 
 2.43.0
