@@ -1,187 +1,156 @@
-Return-Path: <linux-doc+bounces-89262-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89264-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6KChBx3/EmrK5wYAu9opvQ
-	(envelope-from <linux-doc+bounces-89262-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 24 May 2026 15:37:33 +0200
+	id yJjDMBUwE2pt8wYAu9opvQ
+	(envelope-from <linux-doc+bounces-89264-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 24 May 2026 19:06:29 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id E2DC45C2950
-	for <lists+linux-doc@lfdr.de>; Sun, 24 May 2026 15:37:31 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id AA1DD5C342A
+	for <lists+linux-doc@lfdr.de>; Sun, 24 May 2026 19:06:29 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id C19423001FA5
-	for <lists+linux-doc@lfdr.de>; Sun, 24 May 2026 13:37:28 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 31A1F3003358
+	for <lists+linux-doc@lfdr.de>; Sun, 24 May 2026 17:06:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1DEF73955ED;
-	Sun, 24 May 2026 13:37:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 880113AE703;
+	Sun, 24 May 2026 17:06:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="BAIZ6fPa"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HOTGBYFt"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-182.mta1.migadu.com (out-182.mta1.migadu.com [95.215.58.182])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1192D395ADB
-	for <linux-doc@vger.kernel.org>; Sun, 24 May 2026 13:37:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.182
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BFA0B3ADBA3;
+	Sun, 24 May 2026 17:06:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779629846; cv=none; b=ZO9Fq9WTeLPrZhEy90WYtLyhgYJda/KgWrPuTWlgoIuGeR870LNdNxQhdJPlqjt97qyBu/ZtiggnPG36n+qnslDJP6ICOTx6Q5nxGegclTZSgcjyuxfzbF7gPApBXY3tj/k2MnAOUjeky3OGXQwexox6Fg7F+aFpFm3AYrCN/3s=
+	t=1779642380; cv=none; b=I7ckjs3m+cfkJTfHE1RfgV2Tr2rvpXjCaroV9mMTLkrBn68UDfBP3jjiZqgvhqafusHsQolthmxquDTtoH60F8oCRoSdLSdVEzbUg0/i5ZTyGiXdqOjMFOtqr4w9saVxVTBZM/BxXBFXhwccrzwcVltPP5bWXACu3kibKEq3mv8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779629846; c=relaxed/simple;
-	bh=ZChN/TK63ifkoNG1MDG0wmln/ikSmoGJSIcgvfbnD9A=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=deGnpWtEcY9c8Ca0yD5lB8gBnr7HAvLyvBUpmZ4coyIZKdVRWjLdz3lWGwvtu6S3LsFKcAJBp4yKxykkRKayGriUiuwiAIho4JR9c9oAtnRu0Tx+q9nymHvPAUXct25Rn1Hsma3vdgiLUxLkUqLBe2ntDvnVr0UYWKwCemWBKYI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=BAIZ6fPa; arc=none smtp.client-ip=95.215.58.182
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1779629841;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=sOoypwVXiJS7FMQk1ugjy+9q2SWezMLwPiTi1PVsw1c=;
-	b=BAIZ6fPa9cpaXB+ilch1OPpC99v27Yn87+M8XZZnovqAuZmJZp2BvQRG5QnJDUkFWqIwtb
-	eWSqfvWRwzPEManaWLFDBqAbxcjXc14hHmefDC6jcCPwAEDBfuL4PkXPBqgKKL+5Y3Isdl
-	IKVkwA90mhMatd+uHBpFD9CgbSHIH68=
-From: Lance Yang <lance.yang@linux.dev>
-To: mattsva.kernel@gmail.com
-Cc: linux-mm@kvack.org,
-	linux-doc@vger.kernel.org,
-	akpm@linux-foundation.org,
-	sj@kernel.org,
-	david@kernel.org,
-	ljs@kernel.org,
-	liam@infradead.org,
-	vbabka@kernel.org,
-	rppt@kernel.org,
-	surenb@google.com,
-	mhocko@suse.com,
-	corbet@lwn.net,
-	skhan@linuxfoundation.org,
-	ziy@nvidia.com,
-	baolin.wang@linux.alibaba.com,
-	npache@redhat.com,
-	ryan.roberts@arm.com,
-	dev.jain@arm.com,
-	baohua@kernel.org,
-	lance.yang@linux.dev,
-	damon@lists.linux.dev,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] docs/mm: fix spelling mistakes in memory management docs
-Date: Sun, 24 May 2026 21:37:01 +0800
-Message-Id: <20260524133701.3470-1-lance.yang@linux.dev>
-In-Reply-To: <20260524124924.405071-1-mattsva.kernel@gmail.com>
-References: <20260524124924.405071-1-mattsva.kernel@gmail.com>
+	s=arc-20240116; t=1779642380; c=relaxed/simple;
+	bh=HvR3LX3b9wOHY+QZpaqYsoGBsI6xKaOXTz9pP3EU7zY=;
+	h=MIME-Version:Content-Type:Subject:From:To:Cc:In-Reply-To:
+	 References:Date:Message-Id; b=U2dIbNl1wVoYAkxfPcIYpemNGqMzniS5XcljIfhHmZ+q3vscNe+ksKXZiZICPuxNQOcDIja97ulnfxY+oyMKlXAACmrOWFPQtBPegqAvvKIlgG1WCIn8og7s6qXjvYizKHd5NUKKjFyMtkV2/T7oaOpG1JvvHahJjPvpv9Qv8Mk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HOTGBYFt; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 84FDE1F00A3A;
+	Sun, 24 May 2026 17:06:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1779642378;
+	bh=SIF+d7eP3FZA+FXOPpFTmfAEaiVGtYOh/X4XUDIQvc0=;
+	h=Subject:From:To:Cc:In-Reply-To:References:Date;
+	b=HOTGBYFtSVQVuX6OIVGpgvGVGz99mWvpmdUgcyRaIviFkNulvzY+CxrGr8DlBA1KV
+	 52BQVrRSDfQPoQsf0Ctc/SUoRuARvw/NjGp/TSVp03BHAFL1qeUzwAeYcvbPfjqS2Y
+	 /3XmKF9GQ0V5Wu3Nkp3C5pNb8iTQpVfmn95DJTDmK0XItoVhJvYScRjEpJc4XRvJRE
+	 jH57+HwOhlvQx2IVM5UQAjTouLv1so4L7p8mKhPEm6jNcCErv5leqTUHp6iXR4Cg9z
+	 jMQ4lVjknfolAjX+X52h/2XcmQHwvR7njKIBOrz2sKRx9/LCMeJuZl4vPvRbg7idaR
+	 NI2qxXj7GR3PQ==
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
-X-Spamd-Result: default: False [0.34 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v3 2/4] tools/lib/mm: move hugepage_settings out of
+ selftests
+From: Mike Rapoport <rppt@kernel.org>
+To: Sarthak Sharma <sarthak.sharma@arm.com>
+Cc: Andrew Morton <akpm@linux-foundation.org>, 
+ David Hildenbrand <david@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+ Lorenzo Stoakes <ljs@kernel.org>, 
+ "Liam R . Howlett" <Liam.Howlett@oracle.com>, 
+ Vlastimil Babka <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>, 
+ Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>, 
+ Shuah Khan <shuah@kernel.org>, Shuah Khan <skhan@linuxfoundation.org>, 
+ Jason Gunthorpe <jgg@ziepe.ca>, John Hubbard <jhubbard@nvidia.com>, 
+ Peter Xu <peterx@redhat.com>, Leon Romanovsky <leon@kernel.org>, 
+ Zi Yan <ziy@nvidia.com>, Baolin Wang <baolin.wang@linux.alibaba.com>, 
+ Nico Pache <npache@redhat.com>, Ryan Roberts <ryan.roberts@arm.com>, 
+ Dev Jain <dev.jain@arm.com>, Barry Song <baohua@kernel.org>, 
+ Lance Yang <lance.yang@linux.dev>, Mark Brown <broonie@kernel.org>, 
+ linux-kernel@vger.kernel.org, linux-mm@kvack.org, 
+ linux-kselftest@vger.kernel.org, linux-doc@vger.kernel.org
+In-Reply-To: <20260521111801.173019-3-sarthak.sharma@arm.com>
+References: <20260521111801.173019-1-sarthak.sharma@arm.com>
+ <20260521111801.173019-3-sarthak.sharma@arm.com>
+Date: Sun, 24 May 2026 20:06:02 +0300
+Message-Id: <177964236208.4000040.6637433432678119173.b4-review@b4>
+X-Mailer: b4 0.15.2
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-89262-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_NONE(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[lance.yang@linux.dev,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linux.dev:+];
-	NEURAL_HAM(-0.00)[-0.997];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-89264-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[28];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[23]
-X-Rspamd-Queue-Id: E2DC45C2950
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rppt@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: AA1DD5C342A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi,
+On Thu, 21 May 2026 16:47:59 +0530, Sarthak Sharma <sarthak.sharma@arm.com> wrote:
 
-On Sun, May 24, 2026 at 02:49:21PM +0200, mattsva wrote:
->Signed-off-by: mattsva <mattsva.kernel@gmail.com>
+Hi Sarthak,
 
-Missing changelog ... and Signed-off-by should use your real identity,
-not a handle :)
-
-checkpatch.pl is your friend, please run it next time :)
-
->---
-> Documentation/admin-guide/mm/damon/lru_sort.rst | 2 +-
-> Documentation/admin-guide/mm/damon/reclaim.rst  | 2 +-
-> Documentation/admin-guide/mm/transhuge.rst      | 2 +-
-> 3 files changed, 3 insertions(+), 3 deletions(-)
 >
->diff --git a/Documentation/admin-guide/mm/damon/lru_sort.rst b/Documentation/admin-guide/mm/damon/lru_sort.rst
->index 14cc6b2db897..25e2f042a383 100644
->--- a/Documentation/admin-guide/mm/damon/lru_sort.rst
->+++ b/Documentation/admin-guide/mm/damon/lru_sort.rst
->@@ -75,7 +75,7 @@ Make DAMON_LRU_SORT reads the input parameters again, except ``enabled``.
-> 
-> Input parameters that updated while DAMON_LRU_SORT is running are not applied
-> by default.  Once this parameter is set as ``Y``, DAMON_LRU_SORT reads values
->-of parametrs except ``enabled`` again.  Once the re-reading is done, this
->+of parameters except ``enabled`` again.  Once the re-reading is done, this
-> parameter is set as ``N``.  If invalid parameters are found while the
-> re-reading, DAMON_LRU_SORT will be disabled.
-> 
->diff --git a/Documentation/admin-guide/mm/damon/reclaim.rst b/Documentation/admin-guide/mm/damon/reclaim.rst
->index d7a0225b4950..01a34c215b66 100644
->--- a/Documentation/admin-guide/mm/damon/reclaim.rst
->+++ b/Documentation/admin-guide/mm/damon/reclaim.rst
->@@ -67,7 +67,7 @@ Make DAMON_RECLAIM reads the input parameters again, except ``enabled``.
-> 
-> Input parameters that updated while DAMON_RECLAIM is running are not applied
-> by default.  Once this parameter is set as ``Y``, DAMON_RECLAIM reads values
->-of parametrs except ``enabled`` again.  Once the re-reading is done, this
->+of parameters except ``enabled`` again.  Once the re-reading is done, this
-> parameter is set as ``N``.  If invalid parameters are found while the
-> re-reading, DAMON_RECLAIM will be disabled.
+> diff --git a/tools/testing/selftests/mm/hugepage_settings.c b/tools/lib/mm/hugepage_settings.c
+> similarity index 98%
+> rename from tools/testing/selftests/mm/hugepage_settings.c
+> rename to tools/lib/mm/hugepage_settings.c
+> index 5e947abb7425..b08b27776fc5 100644
+> --- a/tools/testing/selftests/mm/hugepage_settings.c
+> +++ b/tools/lib/mm/hugepage_settings.c
+> @@ -383,8 +387,6 @@ int detect_hugetlb_page_sizes(unsigned long sizes[], int max)
+>  		if (sscanf(entry->d_name, "hugepages-%zukB", &kb) != 1)
+>  			continue;
+>  		sizes[count++] = kb * 1024;
+> -		ksft_print_msg("[INFO] detected hugetlb page size: %zu KiB\n",
+> -			       kb);
 
-Already fixed in mm-new:
+I believe this message is useful for debugging.
 
-https://lore.kernel.org/20260426231619.107231-3-sj@kernel.org
+> @@ -503,7 +505,6 @@ unsigned long hugetlb_setup(unsigned long nr, unsigned long sizes[],
+>  		return 0;
+>  
+>  	if (nr_enabled > max) {
+> -		ksft_print_msg("detected %d huge page sizes, will only test %d\n", nr_enabled, max);
 
->diff --git a/Documentation/admin-guide/mm/transhuge.rst b/Documentation/admin-guide/mm/transhuge.rst
->index 5fbc3d89bb07..5d08a2a1c15f 100644
->--- a/Documentation/admin-guide/mm/transhuge.rst
->+++ b/Documentation/admin-guide/mm/transhuge.rst
->@@ -210,7 +210,7 @@ PMD-mappable transparent hugepage::
-> 	cat /sys/kernel/mm/transparent_hugepage/hpage_pmd_size
-> 
-> All THPs at fault and collapse time will be added to _deferred_list,
->-and will therefore be split under memory presure if they are considered
->+and will therefore be split under memory pressure if they are considered
+And this one as well.
 
-This one as well:
+>
+> diff --git a/tools/testing/selftests/mm/compaction_test.c b/tools/testing/selftests/mm/compaction_test.c
+> index de0633f9a7e5..7c58506c0aa7 100644
+> --- a/tools/testing/selftests/mm/compaction_test.c
+> +++ b/tools/testing/selftests/mm/compaction_test.c
+> @@ -15,9 +15,9 @@
+>  #include <errno.h>
+>  #include <unistd.h>
+>  #include <string.h>
+> +#include <mm/hugepage_settings.h>
 
-https://lore.kernel.org/20260520051751.74396-1-leon.hwang@linux.dev
+As with file_utils.h this can also go to vm_utils.h IMHO.
 
-> "underused". A THP is underused if the number of zero-filled pages in
-> the THP is above max_ptes_none (see below). It is possible to disable
-> this behaviour by writing 0 to shrink_underused, and enable it by writing
->-- 
+-- 
+Sincerely yours,
+Mike.
 
-So this patch is stale now: all three hunks are already covered in
-mm-new.
-
-Thanks, Lance
 
