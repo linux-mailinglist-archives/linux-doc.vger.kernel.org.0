@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-89264-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89263-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yJjDMBUwE2pt8wYAu9opvQ
-	(envelope-from <linux-doc+bounces-89264-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 24 May 2026 19:06:29 +0200
+	id EKIoKg0wE2pt8wYAu9opvQ
+	(envelope-from <linux-doc+bounces-89263-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 24 May 2026 19:06:21 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA1DD5C342A
-	for <lists+linux-doc@lfdr.de>; Sun, 24 May 2026 19:06:29 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 59C2D5C3412
+	for <lists+linux-doc@lfdr.de>; Sun, 24 May 2026 19:06:21 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 31A1F3003358
-	for <lists+linux-doc@lfdr.de>; Sun, 24 May 2026 17:06:25 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id B3D8630004C4
+	for <lists+linux-doc@lfdr.de>; Sun, 24 May 2026 17:06:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 880113AE703;
-	Sun, 24 May 2026 17:06:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 164C93AE1BC;
+	Sun, 24 May 2026 17:06:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HOTGBYFt"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GD2Kmf73"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BFA0B3ADBA3;
-	Sun, 24 May 2026 17:06:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5D71D3ACF12;
+	Sun, 24 May 2026 17:06:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779642380; cv=none; b=I7ckjs3m+cfkJTfHE1RfgV2Tr2rvpXjCaroV9mMTLkrBn68UDfBP3jjiZqgvhqafusHsQolthmxquDTtoH60F8oCRoSdLSdVEzbUg0/i5ZTyGiXdqOjMFOtqr4w9saVxVTBZM/BxXBFXhwccrzwcVltPP5bWXACu3kibKEq3mv8=
+	t=1779642377; cv=none; b=YfqyFLWGDgJmFlFCeVVBxAamy7M+EZSbTegFniOzwSxTeNZ4pmlg2fZXolcEtyU7XRuxgsMxx+TvyZ4toWP4CZkz0DCaBYMx++dLWcWhyzrDUlnEDuSr+p3Md2r2b7ixYiXcwMTwTO7ggfxqGDAevHhD+bsEzSUKN3onfVCEOg0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779642380; c=relaxed/simple;
-	bh=HvR3LX3b9wOHY+QZpaqYsoGBsI6xKaOXTz9pP3EU7zY=;
+	s=arc-20240116; t=1779642377; c=relaxed/simple;
+	bh=6lb2GNcbA12GldTAhYLkYkCUGRytI9Rj/J+3kIv+icc=;
 	h=MIME-Version:Content-Type:Subject:From:To:Cc:In-Reply-To:
-	 References:Date:Message-Id; b=U2dIbNl1wVoYAkxfPcIYpemNGqMzniS5XcljIfhHmZ+q3vscNe+ksKXZiZICPuxNQOcDIja97ulnfxY+oyMKlXAACmrOWFPQtBPegqAvvKIlgG1WCIn8og7s6qXjvYizKHd5NUKKjFyMtkV2/T7oaOpG1JvvHahJjPvpv9Qv8Mk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HOTGBYFt; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 84FDE1F00A3A;
-	Sun, 24 May 2026 17:06:12 +0000 (UTC)
+	 References:Date:Message-Id; b=ex+kcMpmB18gdQm5ADZh87w0DVJbxXwJc4vBh4gTGZ3kmUf67nPk1PQZEv5bzoVNkLgiAnfDpSkz15fDomYWb3U0mz4HgOQJSmu46xJMUymlXANt685qvWzMkboau4fXKhN8KJP3LIXJ7MuJJJt4SdkofJH2zP5XxJq1CMCJPZk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GD2Kmf73; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3B5041F000E9;
+	Sun, 24 May 2026 17:06:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1779642378;
-	bh=SIF+d7eP3FZA+FXOPpFTmfAEaiVGtYOh/X4XUDIQvc0=;
+	s=k20260515; t=1779642372;
+	bh=qU4t4qBcOzzk8o3HwKSTC0+TUYXIkGUhAgHkLXhocWU=;
 	h=Subject:From:To:Cc:In-Reply-To:References:Date;
-	b=HOTGBYFtSVQVuX6OIVGpgvGVGz99mWvpmdUgcyRaIviFkNulvzY+CxrGr8DlBA1KV
-	 52BQVrRSDfQPoQsf0Ctc/SUoRuARvw/NjGp/TSVp03BHAFL1qeUzwAeYcvbPfjqS2Y
-	 /3XmKF9GQ0V5Wu3Nkp3C5pNb8iTQpVfmn95DJTDmK0XItoVhJvYScRjEpJc4XRvJRE
-	 jH57+HwOhlvQx2IVM5UQAjTouLv1so4L7p8mKhPEm6jNcCErv5leqTUHp6iXR4Cg9z
-	 jMQ4lVjknfolAjX+X52h/2XcmQHwvR7njKIBOrz2sKRx9/LCMeJuZl4vPvRbg7idaR
-	 NI2qxXj7GR3PQ==
+	b=GD2Kmf73ddPngym8JXZudPiNGdT0w+XfmVkjxpuvoeV7yOiSPKX/m5CaRRkhY7VEA
+	 EUDy+QaCb6S1bSbrt0KR6NQem3WxDjudcFXcepSLPaniwofdCfpf6CYemegdWVeCEv
+	 tdI4AswhXCjW0ilWKnVBsEMTbCfPrE7+wcmoEhkOJKv8Eu05OVsdJinoIaGVasg0H+
+	 KAw1/OcSi3QWWv332PrkmsxxFUNNRL/87NqSrPVyPj8471YSnFSPh7h01YDHyq6kF/
+	 apnDrwHd+tS8LgZU9Knkb5s/dcUUi05JQwb18XfK0hEmjuuzmRYUhPPF5ZLd+vnRrX
+	 ksFoBSll6Y4nA==
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -52,8 +52,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v3 2/4] tools/lib/mm: move hugepage_settings out of
- selftests
+Subject: Re: [PATCH v3 1/4] tools/lib/mm: add shared file helpers
 From: Mike Rapoport <rppt@kernel.org>
 To: Sarthak Sharma <sarthak.sharma@arm.com>
 Cc: Andrew Morton <akpm@linux-foundation.org>, 
@@ -71,25 +70,25 @@ Cc: Andrew Morton <akpm@linux-foundation.org>,
  Lance Yang <lance.yang@linux.dev>, Mark Brown <broonie@kernel.org>, 
  linux-kernel@vger.kernel.org, linux-mm@kvack.org, 
  linux-kselftest@vger.kernel.org, linux-doc@vger.kernel.org
-In-Reply-To: <20260521111801.173019-3-sarthak.sharma@arm.com>
+In-Reply-To: <20260521111801.173019-2-sarthak.sharma@arm.com>
 References: <20260521111801.173019-1-sarthak.sharma@arm.com>
- <20260521111801.173019-3-sarthak.sharma@arm.com>
+ <20260521111801.173019-2-sarthak.sharma@arm.com>
 Date: Sun, 24 May 2026 20:06:02 +0300
-Message-Id: <177964236208.4000040.6637433432678119173.b4-review@b4>
+Message-Id: <177964236205.4000040.3083558454897469696.b4-review@b4>
 X-Mailer: b4 0.15.2
 X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-89264-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-89263-lists,linux-doc=lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[28];
 	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
@@ -101,53 +100,52 @@ X-Spamd-Result: default: False [-1.66 / 15.00];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: AA1DD5C342A
+X-Rspamd-Queue-Id: 59C2D5C3412
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Thu, 21 May 2026 16:47:59 +0530, Sarthak Sharma <sarthak.sharma@arm.com> wrote:
+On Thu, 21 May 2026 16:47:58 +0530, Sarthak Sharma <sarthak.sharma@arm.com> wrote:
 
 Hi Sarthak,
 
 >
-> diff --git a/tools/testing/selftests/mm/hugepage_settings.c b/tools/lib/mm/hugepage_settings.c
-> similarity index 98%
-> rename from tools/testing/selftests/mm/hugepage_settings.c
-> rename to tools/lib/mm/hugepage_settings.c
-> index 5e947abb7425..b08b27776fc5 100644
-> --- a/tools/testing/selftests/mm/hugepage_settings.c
-> +++ b/tools/lib/mm/hugepage_settings.c
-> @@ -383,8 +387,6 @@ int detect_hugetlb_page_sizes(unsigned long sizes[], int max)
->  		if (sscanf(entry->d_name, "hugepages-%zukB", &kb) != 1)
->  			continue;
->  		sizes[count++] = kb * 1024;
-> -		ksft_print_msg("[INFO] detected hugetlb page size: %zu KiB\n",
-> -			       kb);
+> diff --git a/tools/lib/mm/file_utils.c b/tools/lib/mm/file_utils.c
+> new file mode 100644
+> index 000000000000..0f9322f2cf41
+> --- /dev/null
+> +++ b/tools/lib/mm/file_utils.c
+> @@ -0,0 +1,83 @@
+> [ ... skip 48 lines ... ]
+> +	saved_errno = errno;
+> +	close(fd);
+> +	errno = saved_errno;
+> +	if (numwritten < 0) {
+> +		fprintf(stderr, "%s write(%.*s) failed: %s\n",
+> +			path, (int)(buflen - 1), buf, strerror(errno));
 
-I believe this message is useful for debugging.
+This would break TAP formatting for selftests.
 
-> @@ -503,7 +505,6 @@ unsigned long hugetlb_setup(unsigned long nr, unsigned long sizes[],
->  		return 0;
->  
->  	if (nr_enabled > max) {
-> -		ksft_print_msg("detected %d huge page sizes, will only test %d\n", nr_enabled, max);
+> +		exit(EXIT_FAILURE);
 
-And this one as well.
+and while EXIT_FAILURE == KSFT_FAIL I'm not sure it's robust enough.
 
 >
-> diff --git a/tools/testing/selftests/mm/compaction_test.c b/tools/testing/selftests/mm/compaction_test.c
-> index de0633f9a7e5..7c58506c0aa7 100644
-> --- a/tools/testing/selftests/mm/compaction_test.c
-> +++ b/tools/testing/selftests/mm/compaction_test.c
-> @@ -15,9 +15,9 @@
->  #include <errno.h>
->  #include <unistd.h>
+> diff --git a/tools/testing/selftests/mm/hugepage_settings.c b/tools/testing/selftests/mm/hugepage_settings.c
+> index 2eab2110ac6a..5e947abb7425 100644
+> --- a/tools/testing/selftests/mm/hugepage_settings.c
+> +++ b/tools/testing/selftests/mm/hugepage_settings.c
+> @@ -8,8 +8,9 @@
+>  #include <stdlib.h>
 >  #include <string.h>
-> +#include <mm/hugepage_settings.h>
+>  #include <unistd.h>
+> +#include <mm/file_utils.h>
+>  
+> -#include "vm_util.h"
 
-As with file_utils.h this can also go to vm_utils.h IMHO.
+I think it would be fine to include file_utils.h in vm_utils.h and avoid
+further churn.
 
 -- 
 Sincerely yours,
