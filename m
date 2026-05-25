@@ -1,201 +1,528 @@
-Return-Path: <linux-doc+bounces-89330-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89333-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oGtPE5gVFGpOJgcAu9opvQ
-	(envelope-from <linux-doc+bounces-89330-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 11:25:44 +0200
+	id uKIfCA8gFGpjKAcAu9opvQ
+	(envelope-from <linux-doc+bounces-89333-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 12:10:23 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF0505C886C
-	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 11:25:43 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id C7A015C908C
+	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 12:10:22 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 6922F3024465
-	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 09:25:01 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 8AF6530146B8
+	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 10:10:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EAB0A3E7BA2;
-	Mon, 25 May 2026 09:24:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A5E69346E4A;
+	Mon, 25 May 2026 10:10:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b="GVaBy0+a"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="rUfox1gf"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B4FE53E3C5A
-	for <linux-doc@vger.kernel.org>; Mon, 25 May 2026 09:24:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A93F33F5B2;
+	Mon, 25 May 2026 10:10:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779701088; cv=none; b=vEFw3JHsK/ysbFPSbuLrZUJJra7YEbG27U8/2eAipScvzic4meuIKKlcHyaN/pMesjNPbfJfVozA4PWOj8b8g6PfUHPyM06nX7KiOl/3lqG3//7LqWCoq0UepvDowlUo6R+ELop2J6L+O2GpW5Ha98UNlkcvUwof34jxdCCfc8k=
+	t=1779703813; cv=none; b=lTSz4jf4ux49h/EIiZx5mgJ8knf02TK6Z0D02ExqofNWNtH0937Wx2ZeeHCMyut4jBShkE61wm8OU67zUqtyEDNtiDdAjV3NB8a/7VOy2HXAbGsvzrpvun32oFcb69d58khn/8j2Ta93azcJm969HldyLH3kSltotMVU4e4nUAI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779701088; c=relaxed/simple;
-	bh=Usv9zpYi4do2lifC/zfE8nnMvp61yptX2XkYnVZEyU4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=VqjVIWqKTh2yiaSgzDkiiDom5SwaekHCUfJMU5paIcqZPlEywBD1PzKn05cY7E6sFUbqlmGrke5GaT2+BAhEUZasawjJHh1b4rjea6j/1GvwF+HJ1FACKVtyxGEf9dGMKiy0cP6Nxfi3K8dCoxsb3QtNpxY3ojTd1ZyUPFAPM2o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b=GVaBy0+a; arc=none smtp.client-ip=209.85.221.41
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.com
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-43d7645adbdso5989847f8f.1
-        for <linux-doc@vger.kernel.org>; Mon, 25 May 2026 02:24:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1779701084; x=1780305884; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=dXIop8scfYA59+iIi8F9PKH/sL+IWlJPcxqiOfC7myM=;
-        b=GVaBy0+al/3PPx4qotsRTWKFITYfcIsLX9GnH91MlkDd+F5uUyBXskAyv9Z+pCrPbp
-         WsDIheZgEkK4oIMUK+xU7hqwaFWEHTVZJxlo8H8wmZUBeKl/o6HlBWVJNBgSM3W++joU
-         NG+qE3LCcnk5lpC7jDWvC0IQDSwFd/DadFbl16wYuLEOodshw/HKzOkOvW5lEeocAFUg
-         y7Sb3MT64pW6sAdB3RrntmfgvGfIk1XdXsKfLTaENamM9bhWXZqdnTi/+4JisqaoWayR
-         UpKJz3Ldt2uzmzN/WA0ALeDIbB4w76qzkmYffZnHX6wiWMbVjCZT66HWlhjBoZ166Nju
-         qlfg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779701084; x=1780305884;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=dXIop8scfYA59+iIi8F9PKH/sL+IWlJPcxqiOfC7myM=;
-        b=BwGeFBhZvRMU9KGJzOzeNWelRKV3xFSjhwxxr/xRWI224Rt8QJXMzi0nmHH4LuMIcC
-         r5yBDI7+rWYCnbI8n1Ohwl0TpJlytxXuvtVUsF3ZRkBG/9grbR8SGM1/m9399M6AnuTf
-         TK8esO2Sh7ELSUnrI6MbkMw3dNlwxey7lcqRIuuSIvY2J/lvTe5hfUw6rrn34r/lji3w
-         8gUb+mkIarGEUuRb1YU+Gzx3kI6hFNLV2606XXnZXdYCpqj6+f11MYSDiFdnq4Tz4/iD
-         T7mAgAhos35tf8LstIOibzD9r9cYg2sELqSzlK/gx7bp1iHp55ndCOdcm6K25pZlcPU7
-         lmFg==
-X-Forwarded-Encrypted: i=1; AFNElJ/W5axZ3Xhz79c3HzvHWeK/ibtfRPpoAJ2HpXnJ071Nuja+duq7ViZabojiFHGS8/DXxMqabfF4PBk=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yyz9mM90EGiawCKco3KnQM0HM4PAcBnPoFdM4uqI/1AYVOqGO6i
-	NmBOlRLQthqsQX7fKPgdgHlVPPTsWDxhjuX27tZYsS3dPZIJqrksx5jXMhW6xrhqA6c=
-X-Gm-Gg: Acq92OHyKp1CR+ptp6aNNeUBCT0SD6S0d8qeLacPK5lRM7czq6F27lgw+6OF21zkm+g
-	zAsO/vISwNFIkztAmQeYf4AH+rkUOyU5+QtRfcvxbbmxQy2Fr6VnRTbnahZBSWRdpAKcNbXMHPY
-	Esx5bf+4tKvFlEw4IlZnVwbxBQpvWULK6VePiEGm5FiZHdFiERO7jKkw+gD7djdJE9sLzCd9HfN
-	6ZOcjb3R9fn0LFj31DA/ZkYQvz3vWSZA3yCr/PodSdGzV8ahdmfKTRMguSPYQYX5TDAy8u9+WW9
-	+Dfem5jMwIoZwkTz8bH4EEnjBHk4FvR1c0jPs4M/9x3YKFM7CFIFRKVBCXK4IZ5Vn1jj3E8aLnB
-	kpkgNSSyUCY3YDS5kQyHslrLC8Rx7X/Vj2yjwGicCL0vB7HseOhshrDghPupyNgT3cTLXwIpeWB
-	7HEdtdNQ04FiENbr6TII2Blk6FUIwxIxvIh88NdYLoQ5hHUNPApuAQ955tueAvJkd85CMH9L5ZF
-	cMZXoX3D3Ov6fBUrGeXnaY81CCi5BPnOmLpbfkJ0QwvSJ2+P4ESAIHIoM+5t0cD/o1MUA==
-X-Received: by 2002:a05:6000:4b04:b0:45e:9420:ed16 with SMTP id ffacd0b85a97d-45eb38b0045mr22939460f8f.10.1779701084065;
-        Mon, 25 May 2026 02:24:44 -0700 (PDT)
-Received: from ?IPV6:2a00:1028:838d:271e:8e3b:4aff:fe4c:a100? (dynamic-2a00-1028-838d-271e-8e3b-4aff-fe4c-a100.ipv6.o2.cz. [2a00:1028:838d:271e:8e3b:4aff:fe4c:a100])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-45eb6c9f598sm26426853f8f.6.2026.05.25.02.24.43
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 25 May 2026 02:24:43 -0700 (PDT)
-Message-ID: <ba0135a1-f03b-433f-96d0-39665bca1557@suse.com>
-Date: Mon, 25 May 2026 11:24:42 +0200
+	s=arc-20240116; t=1779703813; c=relaxed/simple;
+	bh=IY3lrSyL+NMcsPz3UfCb6rAso4ozOV3ypjxsCRUrcRs=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=NnRfuceuXUyibZy2KTjb3WRKiWpSEtVMsAFA9bCDhPHkl0sRJQgp9LEG12//Q/ViWBl2HlqOol4Fre7jf3lJ32ZWb0CiWr6IPMbIW5GlkoXgp/jY0BYyPgRIreROt3gCTQXPRRJ2D2JU4LjvHCqvwXGfSwMe2gNrJC7tktBgU3E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=rUfox1gf; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id E51EAC2BCB3;
+	Mon, 25 May 2026 10:10:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1779703813;
+	bh=IY3lrSyL+NMcsPz3UfCb6rAso4ozOV3ypjxsCRUrcRs=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=rUfox1gfiHxgC4gWO2hlVYwq9LM/T1nne6a1nJZmseUGolliGKNgE3xgu0RteuK/F
+	 AE4d6/tKwI4+NcyNVmzxuSLa8h06qPN3D5lxhGFQTzBbhnV1Um+KATMIqrR6wiaIz7
+	 tiq6KE/6NwOntr0N0ZhPJ82ZLngd54cbKmdGbYmZABDMrMmjxWpUcAqO2dYHk3CL8p
+	 bcs/xbdK2cIWgI52pSyMRVYCohnLt/XVDWVHQei/ClAfdI7pSidZ6AB0BI88R8G7xO
+	 6ZEn9MYjF1ALmkDcG9yeCCyNfQmqufS7gN6G1k7CRM+IPQfYxbXmwQIi8n0n16Mmme
+	 rLVgobf/eyNWQ==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C5AD6CD5BC9;
+	Mon, 25 May 2026 10:10:12 +0000 (UTC)
+From: Radu Sabau via B4 Relay <devnull+radu.sabau.analog.com@kernel.org>
+Subject: [PATCH v13 0/6] iio: adc: ad4691: add driver for AD4691
+ multichannel SAR ADC family
+Date: Mon, 25 May 2026 13:10:09 +0300
+Message-Id: <20260525-ad4692-multichannel-sar-adc-driver-v13-0-1b7626d3b35c@analog.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 19/24] dyndbg,module: make proper substructs in
- _ddebug_info
-To: Jim Cromie <jim.cromie@gmail.com>
-Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- Arnd Bergmann <arnd@arndb.de>, Jason Baron <jbaron@akamai.com>,
- Luis Chamberlain <mcgrof@kernel.org>, Daniel Gomez <da.gomez@kernel.org>,
- Sami Tolvanen <samitolvanen@google.com>, Aaron Tomlin <atomlin@atomlin.com>,
- Andrew Morton <akpm@linux-foundation.org>, Shuah Khan <shuah@kernel.org>,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-arch@vger.kernel.org, linux-modules@vger.kernel.org,
- linux-kselftest@vger.kernel.org, Louis Chauvet <louis.chauvet@bootlin.com>
-References: <20260523-dd-maint-2-v2-0-b937312aa083@gmail.com>
- <20260523-dd-maint-2-v2-19-b937312aa083@gmail.com>
-Content-Language: en-US
-From: Petr Pavlu <petr.pavlu@suse.com>
-In-Reply-To: <20260523-dd-maint-2-v2-19-b937312aa083@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIAAEgFGoC/43TzWrDMAwA4FcpOc/DkuXY2WnvMXaQbaUNdO1Iu
+ rBR+u5zCqMevhifJMznH0nXbpF5kqV72V27WdZpmc6nHIB52nXxwKe9qCnlRIcae200Kk7UD6g
+ +vo6XadtxkqNaeM75qNI8rTIr54USUUIK2GXoc5Zx+r6f8vae48O0XM7zz/3QFbbsH29b+BWUV
+ sb0iAP7FKN75RMfz/vneP7oNn/FwgTdZGI20xCCZwlWoDZNaZom02QzUAJKHhg8VCYVJrbdk7K
+ pLUbQNi/HlWlL0zWZNpsAo/NDEnLBV2b/MEm3vb3P5sjIGti6SFKZrjSHJtNt/ynG2URpxGgr0
+ xcm9E2mz2YksCFp8iObyhwK07TVaLj3p5AZhMbg614C/UAtQFvT57orgTEEcERi6ioBlGrjKG2
+ zJBzQJW+RI9YqlmpboWCbJhuMsdAjs/3f+bfb7RfZ6AwIeAQAAA==
+X-Change-ID: 20260302-ad4692-multichannel-sar-adc-driver-78e4d44d24b2
+To: Lars-Peter Clausen <lars@metafoo.de>, 
+ Michael Hennerich <Michael.Hennerich@analog.com>, 
+ Jonathan Cameron <jic23@kernel.org>, David Lechner <dlechner@baylibre.com>, 
+ =?utf-8?q?Nuno_S=C3=A1?= <nuno.sa@analog.com>, 
+ Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ =?utf-8?q?Uwe_Kleine-K=C3=B6nig?= <ukleinek@kernel.org>, 
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+ Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, 
+ Philipp Zabel <p.zabel@pengutronix.de>, Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>
+Cc: linux-iio@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-pwm@vger.kernel.org, 
+ linux-gpio@vger.kernel.org, linux-doc@vger.kernel.org, 
+ Radu Sabau <radu.sabau@analog.com>, 
+ Conor Dooley <conor.dooley@microchip.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1779703810; l=22720;
+ i=radu.sabau@analog.com; s=20260220; h=from:subject:message-id;
+ bh=IY3lrSyL+NMcsPz3UfCb6rAso4ozOV3ypjxsCRUrcRs=;
+ b=4DM9Wyp0zrJpNriuIgt2EtvAAkmwuOEf2xQK59xfxkbS2B/OfD1IwkskbSupc+rLYZ3y+x1bT
+ 67YjLnHsY8GB3T879YoKinMiuC2PNJVVK33Xz1NnrbdJnUiBH73Mf30
+X-Developer-Key: i=radu.sabau@analog.com; a=ed25519;
+ pk=lDPQHgn9jTdt0vo58Na9lLxLaE2mb330if71Cn+EvFU=
+X-Endpoint-Received: by B4 Relay for radu.sabau@analog.com/20260220 with
+ auth_id=642
+X-Original-From: Radu Sabau <radu.sabau@analog.com>
+Reply-To: radu.sabau@analog.com
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[suse.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=google];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-89330-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[17];
+	TAGGED_FROM(0.00)[bounces-89333-lists,linux-doc=lfdr.de,radu.sabau.analog.com];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[suse.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	FREEMAIL_TO(0.00)[metafoo.de,analog.com,kernel.org,baylibre.com,gmail.com,pengutronix.de,lwn.net,linuxfoundation.org];
 	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	FROM_HAS_DN(0.00)[];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[petr.pavlu@suse.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	NEURAL_HAM(-0.00)[-0.999];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	HAS_REPLYTO(0.00)[radu.sabau@analog.com];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.998];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[bootlin.com:email,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,suse.com:mid,suse.com:dkim]
-X-Rspamd-Queue-Id: DF0505C886C
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: C7A015C908C
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 5/23/26 9:14 AM, Jim Cromie wrote:
-> recompose struct _ddebug_info, inserting proper sub-structs.
-> 
-> The struct _ddebug_info has 2 pairs of _vec, num_##_vec fields, for
-> descs and classes respectively.  for_subvec() makes walking these
-> vectors less cumbersome, now lets move those field pairs into their
-> own "vec" structs: _ddebug_descs & _ddebug_class_maps, and re-compose
-> struct _ddebug_info to contain them cleanly.  This also lets us get
-> rid of for_subvec()'s num_##_vec paste-up.
-> 
-> Also recompose struct ddebug_table to contain a _ddebug_info.  This
-> reinforces its use as a cursor into relevant data for a builtin
-> module, and access to the full _ddebug state for modules.
-> 
-> NOTES:
-> 
-> Fixup names: Normalize all struct names to "struct _ddebug_*"
-> eliminating the minor/stupid variations created in classmaps-v1.
-> 
-> Invariant: These vectors ref a contiguous subrange of __section memory
-> in builtin/DATA or in loadable modules via mod->dyndbg_info; with
-> guaranteed life-time for us.
-> 
-> struct module contains a _ddebug_info field and module/main.c sets it
-> up, so that gets adjusted rather obviously.
-> 
-> Signed-off-by: Jim Cromie <jim.cromie@gmail.com>
-> Reviewed-by: Louis Chauvet <louis.chauvet@bootlin.com>
-> ---
-> [...]
-> diff --git a/kernel/module/main.c b/kernel/module/main.c
-> index 46dd8d25a605..c2b6e70f2e77 100644
-> --- a/kernel/module/main.c
-> +++ b/kernel/module/main.c
-> @@ -2774,12 +2774,12 @@ static int find_module_sections(struct module *mod, struct load_info *info)
->  		pr_warn("%s: Ignoring obsolete parameters\n", mod->name);
->  
->  #ifdef CONFIG_DYNAMIC_DEBUG_CORE
-> -	mod->dyndbg_info.descs = section_objs(info, "__dyndbg",
-> -					      sizeof(*mod->dyndbg_info.descs),
-> -					      &mod->dyndbg_info.num_descs);
-> -	mod->dyndbg_info.classes = section_objs(info, "__dyndbg_classes",
-> -						sizeof(*mod->dyndbg_info.classes),
-> -						&mod->dyndbg_info.num_classes);
-> +	mod->dyndbg_info.descs.start = section_objs(info, "__dyndbg_descriptors",
-> +						    sizeof(*mod->dyndbg_info.descs.start),
-> +						    &mod->dyndbg_info.descs.len);
-> +	mod->dyndbg_info.maps.start = section_objs(info, "__dyndbg_class_maps",
-> +						   sizeof(*mod->dyndbg_info.maps.start),
-> +						   &mod->dyndbg_info.maps.len);
->  #endif
->  
->  	return 0;
+This series adds support for the Analog Devices AD4691 family of
+high-speed, low-power multichannel successive approximation register
+(SAR) ADCs with an SPI-compatible serial interface.
 
-The update changes the names of dyndbg sections that the module loader
-looks up. However, the actual rename is not done until patch 24. It
-would be good to clean this up to avoid potential bisection issues.
+The family includes:
+  - AD4691: 16-channel, 500 kSPS
+  - AD4692: 16-channel, 1 MSPS
+  - AD4693: 8-channel, 500 kSPS
+  - AD4694: 8-channel, 1 MSPS
 
+The devices support two operating modes, auto-detected from the device
+tree:
+  - CNV Burst Mode: external PWM drives CNV independently of SPI;
+                    DATA_READY on a GP pin signals end of conversion
+  - Manual Mode: CNV tied to SPI CS; each SPI transfer reads
+                 the previous conversion result and starts the
+                 next (pipelined N+1 scheme)
+
+A new driver is warranted rather than extending ad4695: the AD4691
+data path uses an accumulator-register model — results are read from
+AVG_IN registers, with ACC_MASK, ADC_SETUP, DEVICE_SETUP, and
+GPIO_MODE registers controlling the sequencer — none of which exist
+in AD4695. CNV Burst Mode (PWM drives CNV independently of SPI) and
+Manual Mode (pipelined N+1 transfers) also have no equivalent in
+AD4695's command-embedded single-cycle protocol.
+
+The series is structured as follows:
+  1/6 - DT bindings (YAML schema) and MAINTAINERS entry
+  2/6 - Initial driver: register map via custom regmap callbacks,
+        IIO read_raw/write_raw, both operating modes, single-channel
+        reads via internal oscillator (Autonomous Mode)
+  3/6 - Triggered buffer support: IRQ-driven (DATA_READY on a GP pin
+        selected via interrupt-names) for CNV Burst Mode; external IIO
+        trigger for Manual Mode to handle the pipelined N+1 SPI protocol
+  4/6 - SPI Engine offload support: DMA-backed high-throughput
+        capture path using the SPI offload subsystem
+  5/6 - Shared oversampling ratio support for CNV Burst Mode
+  6/6 - Driver documentation (Documentation/iio/ad4691.rst)
+
+Datasheets:
+  https://www.analog.com/en/products/ad4691.html
+  https://www.analog.com/en/products/ad4692.html
+  https://www.analog.com/en/products/ad4693.html
+  https://www.analog.com/en/products/ad4694.html
+
+Signed-off-by: Radu Sabau <radu.sabau@analog.com>
+---
+Changes in v13:
+- IIO_CHAN_INFO_SAMP_FREQ and IIO_CHAN_INFO_OVERSAMPLING_RATIO moved to
+  info_mask_shared_by_all: the hardware uses a single internal oscillator
+  and a single ACC_DEPTH_IN(0) register shared across all channels, so
+  per-channel sysfs attributes were incorrect.
+- ad4691_reset: refactor to share the fsleep(300) call between hardware
+  and software reset paths.
+- ad4691_read_scan: check spi_sync() return value; skip push and emit
+  rate-limited error on failure.
+- Drop stale info_mask_separate rationale from commit 2 message.
+- Documentation updated to reflect shared sampling_frequency and
+  oversampling_ratio attributes (in_voltage_* instead of in_voltageN_*).
+- Link to v12: https://lore.kernel.org/r/20260519-ad4692-multichannel-sar-adc-driver-v12-0-5b335162aa51@analog.com
+
+Changes in v12:
+- IIO_DEV_ACQUIRE_DIRECT_MODE moved from set_sampling_freq into write_raw
+- enum ad4691_ref_ctrl: remove explicit values
+- .sign = 'u' → .format = 'u' throughout — the field has a new name
+- device_property_present(dev, "vdd-supply") / device_property_present(dev, "ref-supply")
+  pattern instead of handling -ENODEV
+- AD4691_STATE_RESET_ALL 0x01 → BIT(0)
+- spi_device_id: use named initializers instead of (kernel_ulong_t)&... cast
+- ad4691_reset: 300 µs sleep belongs after reset_control_deassert, not
+  between assert and deassert — actual RESETL minimum time (~10 ns) is
+  covered by overhead; add post-deassert sleep
+- Add guard(mutex)(&st->lock) in get_sampling_freq
+- Don't register or attach iio_trigger in manual mode
+- Remove the if (i >= indio_dev->num_channels - 1) break guards
+- ad4691_read_scan return type → void
+- Remove (u16) cast: st->scan_tx[k] = AD4691_ADC_CHAN(bit) << 8
+- sizeof(st->scan_tx[k]) → sizeof(*st->scan_tx)
+- Remove & from iio_buffer_setup_ops in offload structs
+- Add args[0] <= 3 check in ad4691_offload_trigger_request
+- Embed offload, offload_trigger, trigger_hz directly in struct ad4691_state
+- Link to v11: https://lore.kernel.org/r/20260515-ad4692-multichannel-sar-adc-driver-v11-0-eab27d852ac2@analog.com
+
+Changes in v11:
+- initial driver: fix commit message — IIO_CHAN_INFO_SAMP_FREQ is
+  info_mask_separate throughout the series, not info_mask_shared_by_all
+- initial driver: readable_reg / volatile_reg: replace open switch ranges
+  for multi-byte sparse arrays with stride checks; intermediate (unaligned)
+  addresses are now excluded so debugfs cannot trigger cross-boundary reads
+- initial driver: add comment in ad4691_get_sampling_freq noting that
+  AD4691_OSC_FREQ_REG is non-volatile and served from regcache; no lock
+  is needed
+- triggered buffer: restore .endianness = IIO_BE on AD4691_CHANNEL
+  scan_type; accidentally dropped in v10
+- triggered buffer: add early break in both iio_for_each_active_channel
+  loops to skip the soft timestamp scan index; prevents out-of-bounds
+  writes into scan_tx[] and scan_xfers[]
+- triggered buffer: fix DMA aliasing in manual mode preenable — set
+  rx_buf = NULL for the first transfer (pipeline residual) instead of
+  aliasing it to vals[0] alongside the second transfer
+- triggered buffer: add cs_change_delay of 430 ns on channel transfers
+  to satisfy the minimum CNV high time requirement
+- triggered buffer: remove cs_change=1 from the state-reset transfer;
+  must not be set on the final transfer of a SPI message
+- triggered buffer: move enable_irq() from the trigger handler into a
+  reenable callback on ad4691_trigger_ops, closing the race between
+  enable_irq and iio_trigger_notify_done; fix reenable return type
+  (void, not int)
+- triggered buffer: use two separate iio_info structs so that
+  validate_trigger (iio_validate_own_trigger) is enforced only in CNV
+  burst mode; manual mode must accept external triggers
+- triggered buffer: add comment explaining STATE_RESET_ALL sequencing
+  in CNV burst mode
+- triggered buffer: fix STD_SEQ_CONFIG write in both preenable paths —
+  apply & GENMASK(15, 0) to strip the soft timestamp bit before writing,
+  matching the existing acc_mask computation
+- oversampling: fix commit message — writing oversampling_ratio snaps
+  target_osc_freq_Hz to preserve integer sampling_frequency read-back;
+  the two attributes are not orthogonal
+- docs: add missing Buffer data format section covering the __be16
+  software path and the CPU-native offload DMA path
+- Link to v10: https://lore.kernel.org/r/20260511-ad4692-multichannel-sar-adc-driver-v10-0-e1fbb1744e38@analog.com
+
+Changes in v10:
+- initial driver: depends on REGULATOR || COMPILE_TEST
+- triggered buffer: fix vals[] layout — index vals[] with slot counter k,
+  not channel index i; fixes sparse active_scan_mask producing garbage in
+  userspace buffer
+- triggered buffer: add comment to cnv_burst_buffer_postenable explaining
+  why sampling_enable()/enable_irq() cannot be called from preenable
+- triggered buffer + offload: scan_tx changed from __be16 to u16;
+  non-offload path uses put_unaligned_be16() (bits_per_word=8); offload
+  path uses plain native u16 assignments (bits_per_word=16); also fixes
+  byte-order bug in manual preenable: command byte was in the low byte,
+  now correctly shifted to the high byte
+- oversampling: remove incorrect iio_for_each_active_channel() timestamp
+  guards; active_scan_mask never includes the timestamp channel
+- Link to v9: https://lore.kernel.org/r/20260430-ad4692-multichannel-sar-adc-driver-v9-0-33e439e4fb87@analog.com
+
+Changes in v9:
+- devm_regulator_get_enable() → devm_regulator_get_enable_optional() for
+  vdd-supply. The non-optional variant silently returns a dummy regulator
+  (ret=0) when the supply is absent from DT, so st->ldo_en was never set
+  and the internal LDO was never enabled when only ldo-in-supply was provided.
+- struct ad4691_channel_info (factoring channels + num_channels out of
+  struct ad4691_chip_info into a sw_info pointer) is now introduced in
+  commit 1 instead of commit 2. It is a pure struct cleanup with no
+  relation to triggered buffers.
+- channels and manual_channels fields in struct ad4691_channel_info
+  are now annotated with __counted_by_ptr(num_channels).
+- Link to v8: https://lore.kernel.org/r/20260416-ad4692-multichannel-sar-adc-driver-v8-0-c415bd048fa3@analog.com
+
+Changes in v8:
+- dt-bindings: add commit message note explaining why four separate
+  compatible strings are required (channel count and max rate both
+  differ between variants);
+- initial driver: sizeof(tx) instead of literal 2 in ad4691_reg_read;
+  U8_MAX/U16_MAX instead of 0xFF/0xFFFF in ad4691_reg_write
+- initial driver: extract ad4691_samp_freq_start() helper
+- initial driver: fix regulator model — vdd-supply (external 1.8V,
+  internal LDO disabled) and ldo-in-supply (feeds internal LDO) are
+  mutually exclusive; add vdd-supply to binding and driver
+- initial driver: add comment in ad4691_reset explaining why
+  devm_reset_control_get_optional_exclusive_deasserted() cannot be
+  used (datasheet requires ≥300 µs reset pulse)
+- initial driver: REF_CTRL and OSC_FREQ_REG: regmap_update_bits /
+  regmap_assign_bits → regmap_write (reserved bits are 0 at reset)
+- initial driver: use dev instead of &spi->dev in devm_iio_device_alloc
+- triggered buffer: scan_tx: add __aligned(IIO_DMA_MINALIGN);
+  scan struct: IIO_DECLARE_DMA_BUFFER_WITH_TS(__be16, vals, 16)
+- triggered buffer: full memset of scan_xfers and scan_tx in both
+  preenable functions; move buffer-dma.h / buffer-dmaengine.h to
+  commit 4; spi_optimize_message fail path: return ret directly in
+  cnv_burst_buffer_preenable; reduce devm_iio_trigger_alloc wrapping
+- SPI offload: drop AD4691_OFFLOAD_BITS_PER_WORD; use local
+  bpw = channels[0].scan_type.realbits; num_channels: ARRAY_SIZE - 1
+- SPI offload: rename offload_state.spi → .offload; remove spurious
+  STD_SEQ_CONFIG write from cnv_burst_offload predisable; extract
+  local acc_mask variable for ACC_MASK_REG write
+- SPI offload: sampling_frequency_store: IIO_DEV_ACQUIRE_DIRECT_MODE
+  for auto-release; remove explicit iio_device_release_direct calls
+- oversampling: in_voltageN_sampling_frequency now represents the
+  effective output rate (osc_freq / osr[N]), matching ad4695
+- oversampling: in_voltageN_sampling_frequency_available computed
+  dynamically from the channel's current OSR; only oscillator entries
+  divisible by osr[N] shown as effective rates; list becomes sparser
+  as OSR increases, capping at max_rate / osr[N]
+- oversampling: writing sampling_frequency snaps down to the largest
+  oscillator entry ≤ freq * osr[N] that is divisible by osr[N],
+  guaranteeing integer read-back; writing oversampling_ratio stores
+  the new depth only — target_osc_freq_Hz unchanged; the two
+  attributes are orthogonal
+- oversampling: ad4691_write_osc_freq() called from
+  ad4691_enter_conversion_mode() after manual mode early return,
+  covering all CNV burst buffer enable paths
+- oversampling: (osr + 1) oscillator period wait in single_shot_read
+  (osr for accumulation, +1 pipeline margin)
+- docs: new commit — Documentation/iio/ad4691.rst, userspace-facing
+  only; oversampling section describes effective-rate SF semantics;
+  LDO supply section corrected (vdd-supply vs ldo-in-supply)
+- Link to v7: https://lore.kernel.org/r/20260409-ad4692-multichannel-sar-adc-driver-v7-0-be375d4df2c5@analog.com
+
+Changes in v7:
+- Fix CNV burst triggered-buffer preenable: the state-reset value
+  transfer had tx_buf assigned the return value of cpu_to_be16()
+  (an integer) instead of a pointer to a buffer, which would cause
+  a kernel oops on buffer enable; extend scan_tx[] from 17 to 18
+  entries to hold the extra slot and fix the pointer assignment
+- Extend memset in ad4691_cnv_burst_buffer_preenable to cover the
+  two state-reset transfer slots (previously left with stale data
+  across buffer enable/disable cycles if the active channel count
+  changed)
+- Fix format specifier %u -> %lu for NSEC_PER_SEC in
+  sampling_frequency_show (NSEC_PER_SEC is unsigned long on 32-bit)
+- Fix missing iio_device_release_direct() on spi_offload_trigger_-
+  validate() error path in sampling_frequency_store
+- Correct SPI offload commit message: the implementation uses 16-bit
+  SPI frames (bits_per_word=16, len=2), not 32-bit; storagebits
+  remains 16 (not promoted to 32); there is no shift=16 for manual
+  mode; ad4691_manual_channels[] hides IIO_CHAN_INFO_OVERSAMPLING_-
+  RATIO (not applicable in manual mode), not encodes shift=16
+- Link to v6: https://lore.kernel.org/r/20260403-ad4692-multichannel-sar-adc-driver-v6-0-fa2a01a57c4e@analog.com
+
+Changes in v6:
+- Replace device.h with dev_printk.h + device/devres.h; add array_size.h
+- Rename osc_freqs[] → osc_freqs_Hz[] with explicit [0xN] index designators
+- Move loop variable into for() declaration in set_sampling_freq
+- Convert multi-line block comment to single-line in single_shot_read
+- Replace (u16)~ cast with ~BIT() & GENMASK(15, 0) for ACC_MASK_REG write;
+  GENMASK(15, 0) is still needed, otherwise maximum value condition line
+  in reg_write() would fail.
+- Extract osc_idx/period_us temporaries in single_shot_read; add comment
+- Use devm_regulator_bulk_get_enable() for avdd + vio supplies
+- Reformat reset_gpio_probe() comment; remove (GPIOD_OUT_HIGH) detail
+- Extract REF_CTRL value into temporary before regmap_update_bits
+- Use regmap_assign_bits for OSC_FREQ_REG in config
+- Remove ad4691_free_scan_bufs NULL assignments; they are not checked.
+- Replace indio_dev->masklength with iio_get_masklength() throughout
+- Fix spi_optimize_message error path to use goto err in preenable
+- Add iio_buffer_enabled() guard in sampling_frequency_store and
+  set_oversampling_ratio
+- Move ad4691_gpio_setup call from ad4691_config into
+  setup_triggered_buffer after IRQ lookup; remove duplicate
+  fwnode_irq_get_byname loop
+- Replace oversampling ratio search loop with is_power_of_2 + ilog2
+- Link to v5: https://lore.kernel.org/r/20260327-ad4692-multichannel-sar-adc-driver-v5-0-11f789de47b8@analog.com
+
+Changes in v5:
+- Reorder datasheets numerically
+- Fix interrupt-names: use enum with minItems/maxItems
+- Remove if/then block requiring interrupts — driver detail, not hardware constraint
+- Remove redundant .shift = 0 from channel macro
+- Write max_rate comparison as 1 * HZ_PER_MHZ
+- Invert set_sampling_freq loop to use continue
+- Fix fsleep() line break; remove blank line in read_raw
+- Reorder supply init: vio immediately after avdd
+- Move comment rewrites and OSC_FREQ_REG condition into the base driver patch
+- Add bit-15 READ comment in reg_read
+- Rewrite ldo-in handling with cleaner if/else-if pattern
+- Drop redundant refbuf_en = false; invert if (!rst) in reset
+- Drop reset_control_assert() — GPIO already asserted at probe
+- Use regmap_update_bits/assign_bits in config
+- Remove tab-column alignment of state struct members
+- Declare osc_freqs[] as const int, eliminating explicit casts
+- Drop obvious AUTONOMOUS mode comment
+- Rename ACC_COUNT_LIMIT → ACC_DEPTH_IN to match datasheet
+- Use bitmap_weight()/bitmap_read() for active_scan_mask access;
+  add #include <linux/bitmap.h>
+- Fix channel macro line-continuation tab alignment
+- Use IIO_CHAN_SOFT_TIMESTAMP(8) for 8-channel variants
+- Use aligned_s64 ts in scan struct
+- Add comment explaining start-index removal in set_sampling_freq
+- Remove trailing comma after NULL in buffer_attrs[]
+- Add IRQF_NO_AUTOEN rationale comment
+- Remove unreachable manual_mode guards in sampling_frequency_show/store
+- Remove st->trig; use indio_dev->trig directly
+- Move max_speed_hz param to the offload patch where it is used
+- Use DIV_ROUND_UP for CNV period; use compound pwm_state initializer
+- Move offload fields into a separately allocated sub-struct
+- Build TX words via u8* byte-fill; fixes sparse __be32 warnings
+- Add three scan types (NORMAL/OFFLOAD_CNV/OFFLOAD_MANUAL) with
+  get_current_scan_type; triggered buffer path uses storagebits=16
+- Fix IIO_CHAN_INFO_SCALE: use iio_get_current_scan_type() for realbits
+- Add MODULE_IMPORT_NS("IIO_DMAENGINE_BUFFER")
+- Add Documentation/iio/ad4691.rst
+- Link to v4: https://lore.kernel.org/r/20260320-ad4692-multichannel-sar-adc-driver-v4-0-052c1050507a@analog.com
+
+Changes in v4:
+- dt-bindings: add avdd-supply (required) and ldo-in-supply (optional);
+  rename vref-supply → ref-supply, vrefin-supply → refin-supply;
+  corrected reset-gpios polarity (active-high → active-low); remove
+  clocks and pwm-names; extend interrupts to up to 4 GP pins with
+  interrupt-names "gp0".."gp3"; reduce #trigger-source-cells to
+  const: 1 (GP pin number); add gpio-controller / #gpio-cells = <2>;
+  drop adi,ad4691.h header; update binding examples
+- driver: rename CNV Clock Mode → CNV Burst Mode throughout
+- driver: add avdd-supply (required) and ldo-in-supply; track ref vs.
+  refin supply for REFBUF_EN; set LDO_EN in DEVICE_SETUP when ldo-in
+  is present; add software reset fallback via SPI_CONFIG_A register
+- driver: merge ACC_MASK1_REG / ACC_MASK2_REG into ACC_MASK_REG with
+  a single ADDR_DESCENDING 16-bit SPI write
+- driver: remove clocks usage; set PWM rate directly without ref clock
+- driver: rename chip info structs (ad4691_chip_info etc.); rename
+  *chip → *info in state struct; replace adc_mode enum with manual_mode
+  bool; replace ktime sampling_period with u32 cnv_period_ns
+- driver: move IIO_CHAN_INFO_SAMP_FREQ to info_mask_separate with an
+  available list for the internal oscillator frequency
+- driver: use regcache MAPLE instead of RBTREE
+- triggered buffer: derive DATA_READY GP pin from interrupt-names in
+  firmware ("gp0".."gp3") instead of assuming GP0
+- triggered buffer: use regmap_update_bits for DEVICE_SETUP mode toggle
+  to avoid clobbering LDO_EN when toggling MANUAL_MODE bit
+- triggered buffer: split buffer setup ops into separate Manual and
+  CNV Burst variants (mirrors offload path structure)
+- SPI offload: promote channel storagebits from 16 to 32 to match DMA
+  word size; introduce ad4691_manual_channels[] with shift=16 (data in
+  upper 16 bits of the 32-bit word); update triggered-buffer paths to
+  the same layout for consistency
+- SPI offload: derive GP pin from trigger-source args[0] instead of
+  hardcoding GP0; split offload buffer setup ops per mode
+- replace put_unaligned_be32() + FIELD_PREP() with cpu_to_be32() and
+  plain bit-shift ops for SPI offload message construction
+- multiple reviewer-requested code style and correctness fixes
+  (Andy Shevchenko, Nuno Sá, Uwe Kleine-König, David Lechner)
+- Link to v3: https://lore.kernel.org/r/20260313-ad4692-multichannel-sar-adc-driver-v3-0-b4d14d81a181@analog.com
+
+Changes in v3:
+- Replace GPIO reset handling with reset controller framework
+- Replace two regmap_write() calls for ACC_MASK1/ACC_MASK2 with regmap_bulk_write()
+- Move conv_us declaration closer to its first use
+- Derive spi_device/dev from regmap instead of storing st->spi
+- ad4691_trigger_handler(): use guard(mutex)() and iio_for_each_active_channel()
+- ad4691_setup_triggered_buffer(): return -ENOMEM/-ENOENT directly instead of
+  wrapping in dev_err_probe(); fix fwnode_irq_get() check (irq <= 0 → irq < 0)
+- Add GENMASK defines for SPI offload 32-bit message layout; replace manual
+  bit-shifts with put_unaligned_be32() + FIELD_PREP()
+- Use DIV_ROUND_CLOSEST_ULL() instead of div64_u64()
+- ad4691_set_sampling_freq(): fix indentation; drop unnecessary else after return
+- ad4691_probe(): use PTR_ERR_OR_ZERO() for devm_spi_offload_get()
+- Link to v2: https://lore.kernel.org/r/20260310-ad4692-multichannel-sar-adc-driver-v2-0-d9bb8aeb5e17@analog.com
+
+Changes in v2:
+- Drop adi,spi-mode DT property; operating mode now auto-detected
+  from pwms presence (CNV Clock Mode if present, Manual Mode if not)
+- Reduce from 5 operating modes to 2 (CNV Clock Mode, Manual Mode);
+  Autonomous, SPI Burst and CNV Burst modes removed as user-selectable
+  modes; Autonomous Mode is now the internal idle/single-shot state
+- Single-shot read_raw always uses internal oscillator (Autonomous
+  Mode), independent of the configured buffer mode
+- Replace bulk regulator API with devm_regulator_get_enable() and
+  devm_regulator_get_enable_read_voltage()
+- Use guard(mutex) and IIO_DEV_ACQUIRE_DIRECT_MODE scoped helpers
+- Replace enum + indexed chip_info array with named chip_info structs
+- Remove product_id field and hardware ID check from probe
+- Factor IIO_CHAN_INFO_RAW body into ad4691_single_shot_read() helper
+- Use fwnode_irq_get(dev_fwnode(dev), 0); drop interrupt-names from
+  DT binding
+- Use devm_clk_get_enabled(dev, NULL); drop clock-names from DT
+  binding
+- Use spi_write_then_read() for DMA-safe register writes
+- Use put_unaligned_be16() for SPI header construction
+- fsleep() instead of usleep_range() in single-shot path
+- storagebits 24->32 for manual-mode channels (uniform DMA layout)
+- Collect full scan into vals[16], single iio_push_to_buffers_with_ts()
+- Use pf->timestamp instead of iio_get_time_ns() in trigger handler
+- Remove IRQF_TRIGGER_FALLING (comes from firmware/DT)
+- Fix offload xfer array size ([17]: N channels + 1 state reset)
+- Drop third DT binding example per reviewer request
+- Link to v1: https://lore.kernel.org/r/20260305-ad4692-multichannel-sar-adc-driver-v1-0-336229a8dcc7@analog.com
+
+---
+Radu Sabau (6):
+      dt-bindings: iio: adc: add AD4691 family
+      iio: adc: ad4691: add initial driver for AD4691 family
+      iio: adc: ad4691: add triggered buffer support
+      iio: adc: ad4691: add SPI offload support
+      iio: adc: ad4691: add oversampling support
+      docs: iio: adc: ad4691: add driver documentation
+
+ .../devicetree/bindings/iio/adc/adi,ad4691.yaml    |  180 ++
+ Documentation/iio/ad4691.rst                       |  226 +++
+ Documentation/iio/index.rst                        |    1 +
+ MAINTAINERS                                        |    9 +
+ drivers/iio/adc/Kconfig                            |   16 +
+ drivers/iio/adc/Makefile                           |    1 +
+ drivers/iio/adc/ad4691.c                           | 2084 ++++++++++++++++++++
+ 7 files changed, 2517 insertions(+)
+---
+base-commit: 5200f5f493f79f14bbdc349e402a40dfb32f23c8
+change-id: 20260302-ad4692-multichannel-sar-adc-driver-78e4d44d24b2
+
+Best regards,
 -- 
-Thanks,
-Petr
+Radu Sabau <radu.sabau@analog.com>
+
+
 
