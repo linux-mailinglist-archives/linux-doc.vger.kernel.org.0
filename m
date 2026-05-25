@@ -1,64 +1,66 @@
-Return-Path: <linux-doc+bounces-89399-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89400-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id EFmLH3evFGqWPQcAu9opvQ
-	(envelope-from <linux-doc+bounces-89399-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 22:22:15 +0200
+	id wEOdLMOvFGqWPQcAu9opvQ
+	(envelope-from <linux-doc+bounces-89400-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 22:23:31 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD1665CE444
-	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 22:22:14 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 358555CE45A
+	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 22:23:31 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 7F7C83016C81
-	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 20:22:13 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 310F23014743
+	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 20:23:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F3B3B35F176;
-	Mon, 25 May 2026 20:22:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 734FC35F5E3;
+	Mon, 25 May 2026 20:23:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="fyoEU8ZC"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="Z81ySdkr"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC21C29D29F;
-	Mon, 25 May 2026 20:22:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4913C29D29F;
+	Mon, 25 May 2026 20:23:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779740532; cv=none; b=Upl7KmodEBj8HXCh8SfNY1lANwP9sTqIHYu5/BcN+eKHfLQ/TGPRTjNGO+uF2LbfIZUlhlrAhkM3Ou6kceGIQ0BWBquMYPb66eZGGA3ESlq6fgUpgewmhLjHbCer7B0+rHdLoGSL7yTy1Q2Jl6rC79hyauWcwRfqjIkOAgPR5DA=
+	t=1779740609; cv=none; b=aiU9cGjg8qeI2LCIOw9GGAMbrKTpoNjhD9TtpNh8JfF2F5KYR21gWBbMOflllHFq5pXwUIEgaJtXBlQGje4CBSmVsYgYAklxKqnrIaZv6J32IgPzjDKAXXwuFVSHN65LEdTPPE+EQTfY26LcXI+wfi/72d3CRBHvdmcn9lwkT3U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779740532; c=relaxed/simple;
-	bh=IodBNjASylY6YOFuqoCqPYJgyrvior+rJJSdcGAap14=;
+	s=arc-20240116; t=1779740609; c=relaxed/simple;
+	bh=RA2AZKkKw0yEK5QDvME2ti8rM3Q0sIbT3OqJwwHNuzY=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=S2M6z9golzQvvMsZgPXpxZEaWSWzBmTF7BEZkSAhuaB+BbvhISX2k3cng1H9B218nI0UtvRA1WIkhOwHBRxpWstJ6KqrJAR/WoyLAqLb9c7Vq+ZuqejYsiqaziq6ra6F7bGS9avLc21JbXdcWsa1eskyIgTGoYdv6E83/VHVRbI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=fyoEU8ZC; arc=none smtp.client-ip=45.79.88.28
+	 MIME-Version:Content-Type; b=EgLyR0w33wktPhEYNIdbXlldn3GNj82BXjNtcF5ZglSFk2nrrH9d7sndwm/9EOxSElNXSeCIGYLusSvnfaIrCV8b/loV5E5f2o4VcxQHHwCeCvHgLTB1MIFsD4kbaKxuk2Nsy6z5sJQcJTl5Z69KigDR8Bw2cQdyivDum+xQRbM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=Z81ySdkr; arc=none smtp.client-ip=45.79.88.28
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 3127140B0C
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 9DBE240B0C
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1779740531; bh=RWviewJkQIKaj9NQsEOpwuAmrm/WAC4wnc2Ra638X+Q=;
+	t=1779740607; bh=9AsWKgEfmrIMxl67jBxbUxZhNMqcuPEASNuQqqNWJqs=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=fyoEU8ZCSZD8iBOyUL4U5EUWdU2Zo3O6D99ARk9s7eBIHlGWCryHHcaC9jJzuoOhG
-	 C5veZbHKbreeYkE53Tg+MSOnJ9ZJONoMV00p+favsVv5yOWn4xhjdSwMad/X/fHhl1
-	 WMQfRyQU71wmjBMZTDjIuZVbJWE7VAvE2F1aw6lzqaz4pL/pjfxLEoltKJ6YZtvXFM
-	 OTPGBI4vuV1HnUM1w7mVvistuyN/XGby4MyLKbNZVC49d+LidEeIrV38h0tqJyd0FK
-	 pN2EvhU/smfYfcouGTwf4hltBWqR9GSF3yj1mvXmK4pqzD0pFw1dF3h0w66vaYEDJ5
-	 EhUxO0DdHlY0w==
+	b=Z81ySdkrf0RTwdSwvwBDD1jbD/kU2ycCIoSa4sxJzCcYPGzilYvtL668gEqAErju9
+	 +6j+YQlASalQlzJMfCz4NZMkrsPNUR/MgzCaZa/+z5J+BurCvLwuLKfpqncW6OAZmZ
+	 jfTddA8h8hwZrh39/jPeWqczMr/cfbDU3NzAi6mdk1QbkRDVqYOepU6VPLwj35Gzjp
+	 G4ENFi2ajWjwnKDl73Jx9TRAXhCUEoPCtW1Thr0UMW4jw0ZfLohL8+L23pF4kKgM2U
+	 I/w7rTukgOprMvffVdD7zf7EwafEEP4NivpBA2O91tR8EKV0lUx04/rYte5LU+xaN4
+	 Txo0HjATDc8/Q==
 Received: from localhost (unknown [IPv6:2601:280:4600:27b:67c:16ff:fe81:5f9b])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 3127140B0C;
-	Mon, 25 May 2026 20:22:11 +0000 (UTC)
+	by ms.lwn.net (Postfix) with ESMTPSA id 9DBE240B0C;
+	Mon, 25 May 2026 20:23:27 +0000 (UTC)
 From: Jonathan Corbet <corbet@lwn.net>
-To: Sakurai Shun <ssh1326@icloud.com>, Shuah Khan <skhan@linuxfoundation.org>
-Cc: Sakurai Shun <ssh1326@icloud.com>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] docs: fix typo in list.rst
-In-Reply-To: <20260517040714.8024-1-ssh1326@icloud.com>
-References: <20260517040714.8024-1-ssh1326@icloud.com>
-Date: Mon, 25 May 2026 14:22:10 -0600
-Message-ID: <87zf1nz1cd.fsf@trenco.lwn.net>
+To: Sakurai Shun <ssh1326@icloud.com>, Richard Weinberger <richard@nod.at>,
+ Anton Ivanov <anton.ivanov@cambridgegreys.com>, Johannes Berg
+ <johannes@sipsolutions.net>, Shuah Khan <skhan@linuxfoundation.org>
+Cc: Sakurai Shun <ssh1326@icloud.com>, linux-um@lists.infradead.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] docs: fix typo in user_mode_linux_howto_v2.rst
+In-Reply-To: <20260517022456.5895-1-ssh1326@icloud.com>
+References: <20260517022456.5895-1-ssh1326@icloud.com>
+Date: Mon, 25 May 2026 14:23:26 -0600
+Message-ID: <87v7cbz1a9.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -68,64 +70,61 @@ MIME-Version: 1.0
 Content-Type: text/plain
 X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TO_DN_SOME(0.00)[];
-	TAGGED_FROM(0.00)[bounces-89399-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-89400-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[icloud.com,lists.infradead.org,vger.kernel.org];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_CC(0.00)[icloud.com,vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[icloud.com,linuxfoundation.org];
+	FREEMAIL_TO(0.00)[icloud.com,nod.at,cambridgegreys.com,sipsolutions.net,linuxfoundation.org];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[lwn.net:+];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	NEURAL_HAM(-0.00)[-0.995];
+	NEURAL_HAM(-0.00)[-0.994];
 	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[lwn.net:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MID_RHS_MATCH_FROMTLD(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_FIVE(0.00)[5];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[trenco.lwn.net:mid,icloud.com:email,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: DD1665CE444
+	RCPT_COUNT_SEVEN(0.00)[9];
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[trenco.lwn.net:mid,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,icloud.com:email,lwn.net:dkim]
+X-Rspamd-Queue-Id: 358555CE45A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 Sakurai Shun <ssh1326@icloud.com> writes:
 
-> Replace "reinitalizes" with "reinitializes"
+> Replace "privilges" with "privileges"
 >
 > Signed-off-by: Sakurai Shun <ssh1326@icloud.com>
 > ---
->  Documentation/core-api/list.rst | 2 +-
+>  Documentation/virt/uml/user_mode_linux_howto_v2.rst | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/Documentation/core-api/list.rst b/Documentation/core-api/list.rst
-> index 241464ca0..4819343a2 100644
-> --- a/Documentation/core-api/list.rst
-> +++ b/Documentation/core-api/list.rst
-> @@ -752,7 +752,7 @@ This is because list_splice() did not reinitialize the list_head it took
->  entries from, leaving its pointer pointing into what is now a different list.
->  
->  If we want to avoid this situation, list_splice_init() can be used. It does the
-> -same thing as list_splice(), except reinitalizes the donor list_head after the
-> +same thing as list_splice(), except reinitializes the donor list_head after the
->  transplant.
+> diff --git a/Documentation/virt/uml/user_mode_linux_howto_v2.rst b/Documentation/virt/uml/user_mode_linux_howto_v2.rst
+> index c37e8e594..9224bea5e 100644
+> --- a/Documentation/virt/uml/user_mode_linux_howto_v2.rst
+> +++ b/Documentation/virt/uml/user_mode_linux_howto_v2.rst
+> @@ -234,7 +234,7 @@ an ioctl to setup the tun interface and/or use raw sockets where needed.
+>  This can be achieved by granting the user a particular capability instead
+>  of running UML as root.  In case of vector transport, a user can add the
+>  capability ``CAP_NET_ADMIN`` or ``CAP_NET_RAW`` to the uml binary.
+> -Thenceforth, UML can be run with normal user privilges, along with
+> +Thenceforth, UML can be run with normal user privileges, along with
+>  full networking.
 
-This one was fixed a month ago; please work against docs-next (or
-linux-next) when generating patches.
-
-Thanks,
+Applied, thanks.
 
 jon
 
