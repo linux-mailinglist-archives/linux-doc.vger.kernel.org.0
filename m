@@ -1,59 +1,63 @@
-Return-Path: <linux-doc+bounces-89390-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89391-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eESMAu2hFGpdPAcAu9opvQ
-	(envelope-from <linux-doc+bounces-89390-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 21:24:29 +0200
+	id XoIfHIqjFGqXPAcAu9opvQ
+	(envelope-from <linux-doc+bounces-89391-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 21:31:22 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id A77B15CE02A
-	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 21:24:28 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id BE3005CE066
+	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 21:31:21 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id F3DA3300789E
-	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 19:24:27 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 08E59301187D
+	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 19:31:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 56BA637BE65;
-	Mon, 25 May 2026 19:24:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0FA382F0C62;
+	Mon, 25 May 2026 19:31:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b="ZSOLjv27"
+	dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b="CiwsqtlS"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B8AF290DBB;
-	Mon, 25 May 2026 19:24:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2E0D7E0E8;
+	Mon, 25 May 2026 19:31:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779737066; cv=none; b=Y5YLLlPu+M/hOirBBhDfkpSCGrYJ9UdAGpdpzD1olilAz6vKqAsAvWLSJSBy0+l2qra9nJ7utfBsAShqFoGkJ4pVMXY4m1D8+4usVnc+zUBN+nL+GB8sMFG6gp9cp2ZVwAZbSFdA8GJbBBFujyuWQLCtctHJjeCDvz9EfnB4Yq4=
+	t=1779737471; cv=none; b=Dd9+ZmX+pcuICMpNZb19OjipsDr/ylnk2bX+ZVQWCW0to7BioIPI6B3aOSP4LeRlV8Ukf8q2gjaXckYb2ksMWuzWQ7jOS7Ptzs1NYMWBZIu50XuhqHKFWYnf5QRCBT30e9xzO4JXscqsggKAJxaBgNRPKgOaIW2P0sHBQJ2BkiA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779737066; c=relaxed/simple;
-	bh=1G6+ETjl2Cro0iGpi5o2KcowAXRc5aBuFpnCFrQvRP8=;
+	s=arc-20240116; t=1779737471; c=relaxed/simple;
+	bh=N8gKdsAi0eTXOEj0ow9BrIHwETIymwpVPAEdei5eMLk=;
 	h=Date:From:To:Cc:Subject:Message-Id:In-Reply-To:References:
-	 Mime-Version:Content-Type; b=nej4YvAnVsTd1UaoOamYM9x7O4GBXdUMpR+8Do1HQKQsSUy4BPvCGk+FGesKXBqGF20rddApetNvrvhO6udnmsh+ZRCgp2SR9CGjMTjETnN1gNFvjNgBVRNDC2uQ6JUCxM2FThRoNifO4y1RY2rwnCEBbIoblGOrgugsrm1Z24s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b=ZSOLjv27; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 75BFA1F000E9;
-	Mon, 25 May 2026 19:24:24 +0000 (UTC)
+	 Mime-Version:Content-Type; b=uAhCVusHDDiJP7RMvPmycIn+BuTjYhoMtJnbciKo1KnOCk5OVMydNsT80rbFVIlufBoTU38E7zLechmd3M0mniZ9EDQf29qUfBPXUzVHPya2r8QgmR42WLJvmx5vg4NXSPGNEYYK/BbS5DpUy3LuShrxivryRxrxyRrrgvYWFfg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b=CiwsqtlS; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AC72C1F000E9;
+	Mon, 25 May 2026 19:31:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linux-foundation.org; s=korg; t=1779737064;
-	bh=TKlA8hHoa2n8yz5CbnFJQhuo/fhrP2H+HP0o5NvJ06o=;
+	d=linux-foundation.org; s=korg; t=1779737469;
+	bh=QvrEoRjjhq9hE4z0e/L8Y7gfSYwRsEYYg3744tOFPOs=;
 	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=ZSOLjv27xFVHWtdplcli0bikszi0EUeOxKRdE571PnbtV9XARQw9qYmlFe7KL5bC2
-	 BUMtvdE9gNFsrYp6BbrufSWmyVk0KyNvCM6yIj7EqmjW1n8enj+GCpqrwhCvgBovSb
-	 tp+n3yQ8qWwvRW/hG5UskkdhuIcF9u3q7Z29rKrU=
-Date: Mon, 25 May 2026 12:24:24 -0700
+	b=CiwsqtlSv5tLtltiP4np3cPPoXXu+ECJba3j5uIoAsOrZwr1PKr2Io2fOFRsFVGbj
+	 sNOM6allwT3Ub4CpsT3bHF7ez01xQ60dt2dY7DIdIZU+YashBqk0aLBV2JXYaT1SJo
+	 AVofEgKXf7njpIj9jFN0NIytr2OWDcVqwi99jS/E=
+Date: Mon, 25 May 2026 12:31:08 -0700
 From: Andrew Morton <akpm@linux-foundation.org>
-To: Hao Jia <jiahao.kernel@gmail.com>
-Cc: tj@kernel.org, hannes@cmpxchg.org, shakeel.butt@linux.dev,
- mhocko@kernel.org, yosry@kernel.org, mkoutny@suse.com, nphamcs@gmail.com,
- chengming.zhou@linux.dev, muchun.song@linux.dev, roman.gushchin@linux.dev,
- cgroups@vger.kernel.org, linux-mm@kvack.org, linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org, Hao Jia <jiahao1@lixiang.com>
-Subject: Re: [PATCH v2 0/4] mm/zswap: Implement per-cgroup proactive
- writeback
-Message-Id: <20260525122424.3b2818f06832d9d55da8d69b@linux-foundation.org>
-In-Reply-To: <20260525122242.36127-1-jiahao.kernel@gmail.com>
-References: <20260525122242.36127-1-jiahao.kernel@gmail.com>
+To: Kiryl Shutsemau <kirill@shutemov.name>
+Cc: sashiko-reviews@lists.linux.dev, kvm@vger.kernel.org, rppt@kernel.org,
+ peterx@redhat.com, david@kernel.org, ljs@kernel.org, surenb@google.com,
+ vbabka@kernel.org, Liam.Howlett@oracle.com, ziy@nvidia.com, corbet@lwn.net,
+ skhan@linuxfoundation.org, seanjc@google.com, pbonzini@redhat.com,
+ jthoughton@google.com, aarcange@redhat.com, sj@kernel.org,
+ usama.arif@linux.dev, linux-mm@kvack.org, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
+ kernel-team@meta.com
+Subject: Re: [PATCH v4 03/14] mm: rename uffd-wp PTE accessors to uffd
+Message-Id: <20260525123108.0b66d07c4be97dab3536dfde@linux-foundation.org>
+In-Reply-To: <ahRf00RTI4_0Puux@thinkstation>
+References: <20260525113737.1942478-4-kas@kernel.org>
+	<20260525120513.C51E91F00A3A@smtp.kernel.org>
+	<ahRf00RTI4_0Puux@thinkstation>
 X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -63,62 +67,48 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [0.34 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-1.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MV_CASE(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	R_DKIM_ALLOW(-0.20)[linux-foundation.org:s=korg];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[gmail.com];
-	TAGGED_FROM(0.00)[bounces-89390-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	DMARC_NA(0.00)[linux-foundation.org];
-	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-89391-lists,linux-doc=lfdr.de];
+	DMARC_NA(0.00)[linux-foundation.org];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	MIME_TRACE(0.00)[0:+];
 	DKIM_TRACE(0.00)[linux-foundation.org:+];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	MID_RHS_MATCH_FROM(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[akpm@linux-foundation.org,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[kernel.org,cmpxchg.org,linux.dev,suse.com,gmail.com,vger.kernel.org,kvack.org,lixiang.com];
-	NEURAL_HAM(-0.00)[-0.864];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.994];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linux-foundation.org:mid,linux-foundation.org:dkim,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: A77B15CE02A
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:email,linux-foundation.org:mid,linux-foundation.org:dkim]
+X-Rspamd-Queue-Id: BE3005CE066
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Mon, 25 May 2026 20:22:38 +0800 Hao Jia <jiahao.kernel@gmail.com> wrote:
+On Mon, 25 May 2026 15:43:32 +0100 Kiryl Shutsemau <kirill@shutemov.name> wrote:
 
-> Zswap currently writes back pages to backing swap reactively, triggered
-> either by the shrinker or by the pool reaching its size limit. Although
-> proactive memory reclaim can automatically write back a portion of zswap
-> pages via the shrinker, it cannot explicitly control the amount of
-> writeback for a specific memory cgroup. Moreover, proactive memory reclaim
-> may not always be triggered during a steady state.
-> 
-> In certain scenarios, it is desirable to trigger writeback in advance to
-> free up memory. For example, users may want to prepare for an upcoming
-> memory-intensive workload by flushing cold memory to the backing storage
-> when the system is relatively idle.
-> 
-> This patch series introduces a "zswap_writeback_only" key to memory.reclaim
-> cgroup interface, allowing users to proactively write back cold compressed
-> pages from zswap to the backing swap device. When specified, this key
-> bypasses standard memory reclaim and exclusively performs proactive zswap
-> writeback up to the requested budget. If omitted, the default reclaim
-> behavior remains unchanged.
+> To: sashiko-reviews@lists.linux.dev
 
-Thanks.  AI review found a few things to complain about, one of them
-described as "preexisting".
+hm.  What's this.
 
+Sashiko seems to have been useful this time around.
+
+> Confirmed and pre-existing ... Will address in a separate
+> patch on top of this series.
+
+There are quite a few like this.  Would it be better to address these
+existing issues immediately then base the new feature-add on top?
 
