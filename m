@@ -1,104 +1,153 @@
-Return-Path: <linux-doc+bounces-89409-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89410-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kCUtHTvAFGrMPwcAu9opvQ
-	(envelope-from <linux-doc+bounces-89409-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 23:33:47 +0200
+	id eA9bHRrDFGoTQAcAu9opvQ
+	(envelope-from <linux-doc+bounces-89410-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 23:46:02 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id F318C5CEE28
-	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 23:33:46 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 661315CEEB3
+	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 23:46:01 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 98EAD3008D30
-	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 21:33:45 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 7BEA63003BC8
+	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 21:45:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 51D2331A570;
-	Mon, 25 May 2026 21:33:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 659C9382F0C;
+	Mon, 25 May 2026 21:45:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="a6tOq4ZL"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="YF09pfjb"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10FCC26D4E5;
-	Mon, 25 May 2026 21:33:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E0B903090C6
+	for <linux-doc@vger.kernel.org>; Mon, 25 May 2026 21:45:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779744824; cv=none; b=AEl7uet2YcUcJR61Gr1LkkyUEplHjW4ULdcYXGV5NanwVnwTbNPBjhS6TvYbYFvngli18a6cuUoGBsJld83FrmkQBiLuwfWP0lsWaaqkJTqIJPe9IOVZgQB1J2R3LUmTY9Rf+HmTDjwVUj3tphgBRzn9nnYxSgeRJfFGKcftO48=
+	t=1779745557; cv=none; b=JQ0hgnqdWbiKemgWWNuTEyeoGeJjkM8HJILd8OvBZ8igkiahLuKHm3/rsD2DNii+esunEXmZ2e5AwsG+97wEsKgqUFyvLD1AX5CHICY/4p++7I3+pHoGSD2Gy7hgIVKAcJJYWS2ZtAGv8P4mLtpjzhBe3o8KLvQ2FQuVtXIf0dg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779744824; c=relaxed/simple;
-	bh=GFAWOc6+genFcaTAEOgZs8M7SBpmyHPbj1UI7lVYRFU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=OfhPazvde80J7XYVXh9NFobOCKJWpUQa0xqWMsskz8eBVoCtsGFahDRXmawO3GOegQNyrqT6bjmnF7hYomli3BCWF8oLc0aC3eNi5Ej8tc1YLFKaWck5BldUhilQANjo5ULRPMThFg3PG7+KpDBU1aAGCMXNW78OVrr6gcBw24I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=a6tOq4ZL; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 18B8F1F000E9;
-	Mon, 25 May 2026 21:33:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linuxfoundation.org;
-	s=korg; t=1779744822;
-	bh=KmypiuMMve/7zXa24R9evpWOyyvjtXxKo3KcAGiZbE0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=a6tOq4ZLJFCtzcD1/1qSfJVOGSS7QbjgJXffuDYl/4h6uOJSL4Xvf+s/lotj1qv06
-	 NCol8Ug2iQ18NKSHPW+lgc2scSuK5bFCoZXZrWQQQBE4lKkTpYP9N1enTzgaXhvS0t
-	 IqjXTdaAvFns4QdaDehVvUOC/uGGM7KkcRFI8X+4=
-Date: Mon, 25 May 2026 17:33:41 -0400
-From: Konstantin Ryabitsev <konstantin@linuxfoundation.org>
-To: Jonathan Corbet <corbet@lwn.net>
-Cc: Willy Tarreau <w@1wt.eu>, Baruch Siach <baruch@tkos.co.il>, 
-	Shuah Khan <skhan@linuxfoundation.org>, workflows@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH] docs: threat-model: add missing closing parenthesis
-Message-ID: <20260525-blond-goat-of-intensity-149dfe@meerkat>
-References: <da8ee1e8b4e99261ec11544c4e1a4f81316ae965.1779032501.git.baruch@tkos.co.il>
- <agnm9A9SFsmvIFZg@1wt.eu>
- <878q971but.fsf@trenco.lwn.net>
+	s=arc-20240116; t=1779745557; c=relaxed/simple;
+	bh=AQQc+qsxFBmnys3V8GWVjQdTd0RDLs3yktTX5na2/k0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=ItoQEsn+a3zPNBrdpWDfn/6UzBSp2wFcv91jCrApIvnobnPPYOEiJnGGitl8ctPNKGqDIIlVbrSE1FOoRmh2gFXrjy1f5J1ZFsDknfb1cJ16dy47/qX56QL5rb1Kvh2ZTU4f7nOVEj/qrwDy0L3O0Sck5dka8RSnLrPKemFzQl4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=YF09pfjb; arc=none smtp.client-ip=209.85.221.53
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-44a044cb827so7492825f8f.0
+        for <linux-doc@vger.kernel.org>; Mon, 25 May 2026 14:45:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1779745554; x=1780350354; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=d9ASn79Z31lGY6tK17tvuDN4xRduSs5lbhIs7+bqaYo=;
+        b=YF09pfjbyaZfdI4ah7VBEJdbrJaXiq1JQz6KHRzFHP8PzV64c7+nBhlWMYadf0x8DZ
+         Oe2Mxs5y8CvykuvuA08DvzvQqalo84jDKvRQmEMpd8BYrHVkKX3Nv+Z8xtYvUBBUBc7q
+         DUhsj2kFjwhCwKNsapNT9pR6a4NuBNbfOYzjof9WV432jTzG8NVCzGNaFxXNe8tv3sZ9
+         OWTPJJJNViJ91ChwgleY7/M58UWJPdc6rM2E6Eb1/x5UwvU70VWCkn7U0rnCYbrudWdz
+         nUsva4PSxLi/izQWFTgEXr2VYO7lT0XE5C7SiLOdVEQ178xXN5SyW0KMJxt64hvdwftc
+         SIvQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1779745554; x=1780350354;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=d9ASn79Z31lGY6tK17tvuDN4xRduSs5lbhIs7+bqaYo=;
+        b=BiGNFsyIkYQoJ2fMcLPkYdAafLVPHn3jr1fkdg3D8hhF6xArXN/d/QsrKcE+z3OgiO
+         hEu2tEFPgzo7hpsgN0ecywI5CBtubjU+VPBx6uihjOi2Cn2jCFLXg4dm27dKdRI7IZcM
+         mJkYLRGIbaKrhFlVIis+0UxWB0/85aIJ4dowjFo3gDHW8iiAD2Iu+rfmwuuyTcy3m7P/
+         rL6ZHB58l+XrBPYSpkgH1ZBkqqmf/C9JPwDB8z1bHQ3Oza6mSY47H8uzMNaHYGQsI3og
+         QP1qPzLFxpe3Fzp9erMybsfkqEmUUlVuWVaFTFR12abcufqrno05y3x7mDs5LyxymofB
+         FVLQ==
+X-Forwarded-Encrypted: i=1; AFNElJ/fvCAI27yeThKM1EBukg5wh0P+mjtZraGyreBj2Hxfl1f4ek71hP+Ah6DXJWC21IRHFyG0jlLOjhs=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwMAgAquQhTjp+jCouTzy0rxoIo/EQ2znnfZGPLJSM8AE7EeENq
+	OAqGQnXTPJ1Wh5szcyYjGtmKW/FGz4tPIMerYeKwaZZNT7MRosFs9QMNcX0T+7SR
+X-Gm-Gg: Acq92OHcxuqqqc+vEDHHphZBbe7VCsNWSXoy0/78Q3tC+pAipUOaaA+5Cm0aQhUmwbh
+	uwyr0RHwdO1LW9qR4an32mynX+Ky2VqevMhOQtMc+oInGQulEIRUDHn77oOEAdSoFf6k+tOlOG9
+	aU1oXLgzyp6l7Glj8nz1xJfTAWGrAG1q83KBDe+XVbBhEmYqFZGGuXUMsNG0Ghm0N0LqgTk80iD
+	mBqFb6clCZJRoFH8Ieg5LpDGz4in0E58UF+QWTj6/okTDyqRsrHY7n14V9wnlJ+AhhIgnjahYi2
+	+xLaGHbXCF0HOA1Az8r4zc0a/jzV1EZaT9AeHyr1JoNQi/hzZHZ/XDmyfH2iSzK+k4xB25ElIk+
+	kc9l6hEu7yuhcN+H/4g+J0IZBY+XXdw2uG9do94iiGSUvI8YfbrbCEgO+9o5s27IkPQK0K0+vDf
+	2RMe0E/+iBvuDKldsUX8ZvIE00WUnF/rVxzaMLbsfTSJ9Z/oUTVUxfkwqcc4H91qKpReb+wctLb
+	CEaLCXeaCuDUZ/Uokak7Ai7HvNOUASoNLU6wHonUkQoa8uTM97c+rFTMw==
+X-Received: by 2002:a05:6000:470b:b0:452:d03a:7aad with SMTP id ffacd0b85a97d-45eb38a6d8cmr26646552f8f.36.1779745554073;
+        Mon, 25 May 2026 14:45:54 -0700 (PDT)
+Received: from localhost.localdomain (156.red-79-154-145.dynamicip.rima-tde.net. [79.154.145.156])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-45eb6d5ed84sm29384627f8f.31.2026.05.25.14.45.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 25 May 2026 14:45:53 -0700 (PDT)
+From: =?UTF-8?q?Miguel=20Mart=C3=ADn=20Gil?= <miguel.martin.gil.uni@gmail.com>
+To: corbet@lwn.net
+Cc: skhan@linuxfoundation.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	=?UTF-8?q?Miguel=20Mart=C3=ADn=20Gil?= <miguel.martin.gil.uni@gmail.com>
+Subject: [PATCH v2] docs: md: fix grammar in speed_limit description
+Date: Mon, 25 May 2026 23:45:53 +0200
+Message-ID: <20260525214554.2196-1-miguel.martin.gil.uni@gmail.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <878q971but.fsf@trenco.lwn.net>
-X-Spamd-Result: default: False [-1.66 / 15.00];
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[linuxfoundation.org,none];
-	R_DKIM_ALLOW(-0.20)[linuxfoundation.org:s=korg];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-89410-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-89409-lists,linux-doc=lfdr.de];
-	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[linuxfoundation.org,vger.kernel.org,gmail.com];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	TO_DN_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[konstantin@linuxfoundation.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linuxfoundation.org:+];
+	FROM_NEQ_ENVFROM(0.00)[miguelmartingiluni@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[5];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,linuxfoundation.org:dkim]
-X-Rspamd-Queue-Id: F318C5CEE28
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: 661315CEEB3
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Mon, May 25, 2026 at 02:19:06PM -0600, Jonathan Corbet wrote:
-> Amusingly, b4 turned that line into:
-> 
->   Obviously: Willy Tarreau <w@1wt.eu>
-> 
-> I was tempted to leave it that way, but decided to fix it up :)
+Replace 'This are' with 'These are' in the md sysfs speed limit
+section to correct grammar and improve readability.
 
-Obviously, you should have left it as-is. ;)
+Signed-off-by: Miguel Martín Gil <miguel.martin.gil.uni@gmail.com>
+---
+ Documentation/admin-guide/md.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
--K
+diff --git a/Documentation/admin-guide/md.rst b/Documentation/admin-guide/md.rst
+index dc7eab191..003fd34f7 100644
+--- a/Documentation/admin-guide/md.rst
++++ b/Documentation/admin-guide/md.rst
+@@ -734,7 +734,7 @@ also have
+       They should be scaled by the bitmap_chunksize.
+ 
+    sync_speed_min, sync_speed_max
+-     This are similar to ``/proc/sys/dev/raid/speed_limit_{min,max}``
++     These are similar to ``/proc/sys/dev/raid/speed_limit_{min,max}``
+      however they only apply to the particular array.
+ 
+      If no value has been written to these, or if the word ``system``
+-- 
+2.43.0
+
 
