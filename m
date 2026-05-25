@@ -1,56 +1,56 @@
-Return-Path: <linux-doc+bounces-89315-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89314-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QIRhL6UNFGo7JQcAu9opvQ
-	(envelope-from <linux-doc+bounces-89315-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 10:51:49 +0200
+	id 0KRjO5oNFGpeJQcAu9opvQ
+	(envelope-from <linux-doc+bounces-89314-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 10:51:38 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 446DB5C81AD
-	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 10:51:49 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 568155C8195
+	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 10:51:38 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 1DD42302A694
-	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 08:50:30 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 659E63007CAA
+	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2026 08:50:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id ACCD53E4C61;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2FEEB3E1CF5;
 	Mon, 25 May 2026 08:50:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="0MGx/T1E"
+	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="rQY2Jwbt"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from canpmsgout03.his.huawei.com (canpmsgout03.his.huawei.com [113.46.200.218])
+Received: from canpmsgout09.his.huawei.com (canpmsgout09.his.huawei.com [113.46.200.224])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC31F358387;
-	Mon, 25 May 2026 08:50:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.218
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C0E53D34A2;
+	Mon, 25 May 2026 08:50:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.224
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779699028; cv=none; b=qZqG5hjz01kpKxENbPMU9X1pGDI23KvdQicohMni4WN6I27+sLTIIlJydVYM7A5y/NCrmJJkDrN6/6iGuAFpixnnn6X5pKt6J4uOl5SuDKcCR1pPNhgSRC7wwMNbLIuo+kc/5h5w3cTYNtly30To6a03tZfyOJmr42rQ3q0tK7c=
+	t=1779699028; cv=none; b=P7YH43CNGgDriBFYBhVCYsdjBMMNRsPk419HWtv3l5fd2Pffbq9FBDPErQwRI4PFu8zLevX+8N+1V460hr37DBcpNKiLKsTRVP9Z+6ctn6S5D5k3an5kid/JrukXEAlHP61l8HQzcqXj2TDZpvGX+yFFWUfDFUgp0OOL+99B8hQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1779699028; c=relaxed/simple;
-	bh=4JrklAuaL71xs8Fh7DT8STuKEGBgW1Q8EtKabMapkzA=;
+	bh=G2MPedMCTb1IxmCjrQ7KaWI4QhvGYVy7SA8893Hj1vk=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=PvCWNmDg19ImZg2qmV2+C82qD+uKueKy34+MuWZ5ir4Vr+cG6HVRxIvDHcQfgRJEGwW2pS166hvOZX2ON0Qa9gXiTC/CBP7EFXCKkZOLSxm2+97sWtbfCqzD+ZEmuH8HcMjAlO0M3m8HG9E9RCM9X1ee7lEi2HA7nD0JZ2bAyAA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=0MGx/T1E; arc=none smtp.client-ip=113.46.200.218
+	 MIME-Version:Content-Type; b=AYvB6Ilw9cuoPyz/nIpKVXWgiaAe5YYAGmb0d0/NwIUga5LHR0OiojTIX1oJwaxAtKPlVP0wtHEIhzFNKtQ5KA9c9/6n0cgQ3HDHe36Q+Zoar/zyYzuxYxVOkvc88UWzs3cgecLr3tddXEba6wLxOSHuyTRe0FKmRH/DHxIlxIE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=rQY2Jwbt; arc=none smtp.client-ip=113.46.200.224
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
 dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
 	c=relaxed/relaxed; q=dns/txt;
 	h=From;
-	bh=+4ILLVBcCmgg2fmuluXGQIe+Wa8wvQwZl0q7wZ0b1wA=;
-	b=0MGx/T1EiFcOPTEH6lF1r992tIy/Q8e3PhaNOPVs5akFPcfXgZZ6oaexT4tzvH4ZpP20dlPf9
-	KVcFbe/8vDwYApyATtOgB5vKBU16tI0ouoHUG/USqZ07jxw5xL2PErsfNCNc1oomEwZaMLb35ce
-	K6f4ZiCeAlhnlGSH+5OhQ6U=
-Received: from mail.maildlp.com (unknown [172.19.162.223])
-	by canpmsgout03.his.huawei.com (SkyGuard) with ESMTPS id 4gP8Xc4b7nzpSwt;
-	Mon, 25 May 2026 16:42:56 +0800 (CST)
+	bh=grVRpCvkAwJY+fOV5K8Lzt5ZFYNfAzTXtwxRRZ5smBs=;
+	b=rQY2JwbtJ94mNdfrsnD3ReS4aAn7uCeLmyZrZbXg96P7Im/aFeusy9JFI+dqTvapcVFDmpJVk
+	irf3xkUhSUI2GjgtGTC5aSTzezlrdJrvaGE98a6ZNHX860j+yuP0vRSIvNyt4xxTkQhLX18f46n
+	Ps+zCvcmlyu2sAnnmb6PRzQ=
+Received: from mail.maildlp.com (unknown [172.19.163.127])
+	by canpmsgout09.his.huawei.com (SkyGuard) with ESMTPS id 4gP8XH5zHlz1cyq4;
+	Mon, 25 May 2026 16:42:39 +0800 (CST)
 Received: from dggpemf500011.china.huawei.com (unknown [7.185.36.131])
-	by mail.maildlp.com (Postfix) with ESMTPS id 2373940561;
-	Mon, 25 May 2026 16:50:19 +0800 (CST)
+	by mail.maildlp.com (Postfix) with ESMTPS id 062AF402AB;
+	Mon, 25 May 2026 16:50:23 +0800 (CST)
 Received: from huawei.com (10.90.53.73) by dggpemf500011.china.huawei.com
  (7.185.36.131) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Mon, 25 May
- 2026 16:50:15 +0800
+ 2026 16:50:19 +0800
 From: Jinjie Ruan <ruanjinjie@huawei.com>
 To: <corbet@lwn.net>, <skhan@linuxfoundation.org>, <catalin.marinas@arm.com>,
 	<will@kernel.org>, <chenhuacai@kernel.org>, <kernel@xen0n.name>,
@@ -80,9 +80,9 @@ To: <corbet@lwn.net>, <skhan@linuxfoundation.org>, <catalin.marinas@arm.com>,
 	<linuxppc-dev@lists.ozlabs.org>, <linux-riscv@lists.infradead.org>,
 	<devicetree@vger.kernel.org>, <kexec@lists.infradead.org>
 CC: <ruanjinjie@huawei.com>
-Subject: [PATCH v14 02/17] powerpc/crash: Fix possible memory leak in update_crash_elfcorehdr()
-Date: Mon, 25 May 2026 16:49:17 +0800
-Message-ID: <20260525084932.934910-3-ruanjinjie@huawei.com>
+Subject: [PATCH v14 03/17] powerpc/crash: sort crash memory ranges before preparing elfcorehdr
+Date: Mon, 25 May 2026 16:49:18 +0800
+Message-ID: <20260525084932.934910-4-ruanjinjie@huawei.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260525084932.934910-1-ruanjinjie@huawei.com>
 References: <20260525084932.934910-1-ruanjinjie@huawei.com>
@@ -103,12 +103,12 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
 	R_MISSING_CHARSET(0.50)[];
 	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	FROM_NEQ_ENVFROM(0.00)[ruanjinjie@huawei.com,linux-doc@vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-89315-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-89314-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCPT_COUNT_GT_50(0.00)[77];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -117,46 +117,201 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	DKIM_TRACE(0.00)[huawei.com:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_NONE(0.00)[];
-	NEURAL_HAM(-0.00)[-0.984];
+	NEURAL_HAM(-0.00)[-0.985];
 	RCVD_COUNT_FIVE(0.00)[6];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[]
-X-Rspamd-Queue-Id: 446DB5C81AD
+X-Rspamd-Queue-Id: 568155C8195
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-In get_crash_memory_ranges(), if crash_exclude_mem_range() failed
-after realloc_mem_ranges() has successfully allocated the cmem
-memory, it just returns an error but leaves cmem pointing to
-the allocated memory, nor is it freed in the caller
-update_crash_elfcorehdr(), which cause a memory leak, goto out
-to free the cmem.
+From: Sourabh Jain <sourabhjain@linux.ibm.com>
 
-Cc: Sourabh Jain <sourabhjain@linux.ibm.com>
+During a memory hot-remove event, the elfcorehdr is rebuilt to exclude
+the removed memory. While updating the crash memory ranges for this
+operation, the crash memory ranges array can become unsorted. This
+happens because remove_mem_range() may split a memory range into two
+parts and append the higher-address part as a separate range at the end
+of the array.
+
+So far, no issues have been observed due to the unsorted crash memory
+ranges. However, this could lead to problems once crash memory range
+removal is handled by generic code, as introduced in the upcoming
+patches in this series.
+
+Currently, powerpc uses a platform-specific function,
+remove_mem_range(), to exclude hot-removed memory from the crash memory
+ranges. This function performs the same task as the generic
+crash_exclude_mem_range() in crash_core.c. The generic helper also
+ensures that the crash memory ranges remain sorted. So remove the
+redundant powerpc-specific implementation and instead call
+crash_exclude_mem_range_guarded() (which internally calls
+crash_exclude_mem_range()) to exclude the hot-removed memory ranges.
+
+Cc: Andrew Morton <akpm@linux-foundation.org>
+Cc: Baoquan he <bhe@redhat.com>
+Cc: Jinjie Ruan <ruanjinjie@huawei.com>
 Cc: Hari Bathini <hbathini@linux.ibm.com>
+Cc: Madhavan Srinivasan <maddy@linux.ibm.com>
+Cc: Mahesh Salgaonkar <mahesh@linux.ibm.com>
 Cc: Michael Ellerman <mpe@ellerman.id.au>
-Fixes: 849599b702ef ("powerpc/crash: add crash memory hotplug support")
-Reviewed-by: Sourabh Jain <sourabhjain@linux.ibm.com>
+Cc: Ritesh Harjani (IBM) <ritesh.list@gmail.com>
+Cc: Shivang Upadhyay <shivangu@linux.ibm.com>
+Cc: linux-kernel@vger.kernel.org
+Acked-by: Baoquan He <bhe@redhat.com>
+Reviewed-by: Ritesh Harjani (IBM) <ritesh.list@gmail.com>
+Acked-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
+Signed-off-by: Sourabh Jain <sourabhjain@linux.ibm.com>
 Signed-off-by: Jinjie Ruan <ruanjinjie@huawei.com>
 ---
- arch/powerpc/kexec/crash.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/powerpc/include/asm/kexec_ranges.h |  4 +-
+ arch/powerpc/kexec/crash.c              |  5 +-
+ arch/powerpc/kexec/ranges.c             | 87 +------------------------
+ 3 files changed, 7 insertions(+), 89 deletions(-)
 
+diff --git a/arch/powerpc/include/asm/kexec_ranges.h b/arch/powerpc/include/asm/kexec_ranges.h
+index 14055896cbcb..ad95e3792d10 100644
+--- a/arch/powerpc/include/asm/kexec_ranges.h
++++ b/arch/powerpc/include/asm/kexec_ranges.h
+@@ -7,7 +7,9 @@
+ void sort_memory_ranges(struct crash_mem *mrngs, bool merge);
+ struct crash_mem *realloc_mem_ranges(struct crash_mem **mem_ranges);
+ int add_mem_range(struct crash_mem **mem_ranges, u64 base, u64 size);
+-int remove_mem_range(struct crash_mem **mem_ranges, u64 base, u64 size);
++int crash_exclude_mem_range_guarded(struct crash_mem **mem_ranges,
++				    unsigned long long mstart,
++				    unsigned long long mend);
+ int get_exclude_memory_ranges(struct crash_mem **mem_ranges);
+ int get_reserved_memory_ranges(struct crash_mem **mem_ranges);
+ int get_crash_memory_ranges(struct crash_mem **mem_ranges);
 diff --git a/arch/powerpc/kexec/crash.c b/arch/powerpc/kexec/crash.c
-index e6539f213b3d..a520f851c3a6 100644
+index a520f851c3a6..d634db67becc 100644
 --- a/arch/powerpc/kexec/crash.c
 +++ b/arch/powerpc/kexec/crash.c
-@@ -502,7 +502,7 @@ static void update_crash_elfcorehdr(struct kimage *image, struct memory_notify *
- 	ret = get_crash_memory_ranges(&cmem);
- 	if (ret) {
- 		pr_err("Failed to get crash mem range\n");
--		return;
-+		goto out;
- 	}
+@@ -493,7 +493,7 @@ static void update_crash_elfcorehdr(struct kimage *image, struct memory_notify *
+ 	struct crash_mem *cmem = NULL;
+ 	struct kexec_segment *ksegment;
+ 	void *ptr, *mem, *elfbuf = NULL;
+-	unsigned long elfsz, memsz, base_addr, size;
++	unsigned long elfsz, memsz, base_addr, size, end;
  
- 	/*
+ 	ksegment = &image->segment[image->elfcorehdr_index];
+ 	mem = (void *) ksegment->mem;
+@@ -512,7 +512,8 @@ static void update_crash_elfcorehdr(struct kimage *image, struct memory_notify *
+ 	if (image->hp_action == KEXEC_CRASH_HP_REMOVE_MEMORY) {
+ 		base_addr = PFN_PHYS(mn->start_pfn);
+ 		size = mn->nr_pages * PAGE_SIZE;
+-		ret = remove_mem_range(&cmem, base_addr, size);
++		end = base_addr + size - 1;
++		ret = crash_exclude_mem_range_guarded(&cmem, base_addr, end);
+ 		if (ret) {
+ 			pr_err("Failed to remove hot-unplugged memory from crash memory ranges\n");
+ 			goto out;
+diff --git a/arch/powerpc/kexec/ranges.c b/arch/powerpc/kexec/ranges.c
+index 867135560e5c..6c58bcc3e130 100644
+--- a/arch/powerpc/kexec/ranges.c
++++ b/arch/powerpc/kexec/ranges.c
+@@ -553,7 +553,7 @@ int get_usable_memory_ranges(struct crash_mem **mem_ranges)
+ #endif /* CONFIG_KEXEC_FILE */
+ 
+ #ifdef CONFIG_CRASH_DUMP
+-static int crash_exclude_mem_range_guarded(struct crash_mem **mem_ranges,
++int crash_exclude_mem_range_guarded(struct crash_mem **mem_ranges,
+ 					   unsigned long long mstart,
+ 					   unsigned long long mend)
+ {
+@@ -641,89 +641,4 @@ int get_crash_memory_ranges(struct crash_mem **mem_ranges)
+ 		pr_err("Failed to setup crash memory ranges\n");
+ 	return ret;
+ }
+-
+-/**
+- * remove_mem_range - Removes the given memory range from the range list.
+- * @mem_ranges:    Range list to remove the memory range to.
+- * @base:          Base address of the range to remove.
+- * @size:          Size of the memory range to remove.
+- *
+- * (Re)allocates memory, if needed.
+- *
+- * Returns 0 on success, negative errno on error.
+- */
+-int remove_mem_range(struct crash_mem **mem_ranges, u64 base, u64 size)
+-{
+-	u64 end;
+-	int ret = 0;
+-	unsigned int i;
+-	u64 mstart, mend;
+-	struct crash_mem *mem_rngs = *mem_ranges;
+-
+-	if (!size)
+-		return 0;
+-
+-	/*
+-	 * Memory range are stored as start and end address, use
+-	 * the same format to do remove operation.
+-	 */
+-	end = base + size - 1;
+-
+-	for (i = 0; i < mem_rngs->nr_ranges; i++) {
+-		mstart = mem_rngs->ranges[i].start;
+-		mend = mem_rngs->ranges[i].end;
+-
+-		/*
+-		 * Memory range to remove is not part of this range entry
+-		 * in the memory range list
+-		 */
+-		if (!(base >= mstart && end <= mend))
+-			continue;
+-
+-		/*
+-		 * Memory range to remove is equivalent to this entry in the
+-		 * memory range list. Remove the range entry from the list.
+-		 */
+-		if (base == mstart && end == mend) {
+-			for (; i < mem_rngs->nr_ranges - 1; i++) {
+-				mem_rngs->ranges[i].start = mem_rngs->ranges[i+1].start;
+-				mem_rngs->ranges[i].end = mem_rngs->ranges[i+1].end;
+-			}
+-			mem_rngs->nr_ranges--;
+-			goto out;
+-		}
+-		/*
+-		 * Start address of the memory range to remove and the
+-		 * current memory range entry in the list is same. Just
+-		 * move the start address of the current memory range
+-		 * entry in the list to end + 1.
+-		 */
+-		else if (base == mstart) {
+-			mem_rngs->ranges[i].start = end + 1;
+-			goto out;
+-		}
+-		/*
+-		 * End address of the memory range to remove and the
+-		 * current memory range entry in the list is same.
+-		 * Just move the end address of the current memory
+-		 * range entry in the list to base - 1.
+-		 */
+-		else if (end == mend)  {
+-			mem_rngs->ranges[i].end = base - 1;
+-			goto out;
+-		}
+-		/*
+-		 * Memory range to remove is not at the edge of current
+-		 * memory range entry. Split the current memory entry into
+-		 * two half.
+-		 */
+-		else {
+-			size = mem_rngs->ranges[i].end - end + 1;
+-			mem_rngs->ranges[i].end = base - 1;
+-			ret = add_mem_range(mem_ranges, end + 1, size);
+-		}
+-	}
+-out:
+-	return ret;
+-}
+ #endif /* CONFIG_CRASH_DUMP */
 -- 
 2.34.1
 
