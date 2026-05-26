@@ -1,69 +1,68 @@
-Return-Path: <linux-doc+bounces-89661-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89662-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6AsuBq3zFWqzfwcAu9opvQ
-	(envelope-from <linux-doc+bounces-89661-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 21:25:33 +0200
+	id uGsAJ0T2FWqzfwcAu9opvQ
+	(envelope-from <linux-doc+bounces-89662-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 21:36:36 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 85E595DBF63
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 21:25:32 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2C6EE5DC0C5
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 21:36:36 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 7EE183038D3C
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 19:25:31 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 3EF1130363A3
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 19:36:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0C5D73AF665;
-	Tue, 26 May 2026 19:25:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B013C3A8741;
+	Tue, 26 May 2026 19:36:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=tipi-net.de header.i=@tipi-net.de header.b="I+q/8a5j"
+	dkim=pass (2048-bit key) header.d=tipi-net.de header.i=@tipi-net.de header.b="covj1rD9"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mail.tipi-net.de (mail.tipi-net.de [194.13.80.246])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B805352C52;
-	Tue, 26 May 2026 19:25:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 34817377009;
+	Tue, 26 May 2026 19:36:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=194.13.80.246
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779823528; cv=none; b=Hvfbk/H17ow4G5GBHYRFqverQPaHwwlBDH7EJ1zBwmbPvBmO4d+ZEO64TOC4LtRMWvlgxPCoHT2FTZDKyzgztxDK+cFWr2jwvH6vbuEj7IsLC3MvpxZJChAEkLd1SZAQvRzpcxKhSHiuBOwRsszyC+rIFaa1KGvT7ofO0y7rEWI=
+	t=1779824186; cv=none; b=jUKIm8czI19/7GqiSkVf7Rig3g6cgqbCYgAmm2i280x30P6VQYuK4BlKehXJSfXfEDEyGSSLiINGFwARPzpwwdDVD06mUTqR5HiKvNbk/dfKLw5mzpxNNJ6Pf6x+2aIFu4C/vfu5z0eUg4GrUWF1oza3Kx5x6EqKFsfKofTb2UI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779823528; c=relaxed/simple;
-	bh=W4LIlDQOM+MhDJlLpJo59skrrnE14/No7Tn7xOpv7JQ=;
+	s=arc-20240116; t=1779824186; c=relaxed/simple;
+	bh=UvKTJ9IuxiWon6lZcZAgjd8GDTaliJRts/5/4wx02SQ=;
 	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
-	 Message-ID:Content-Type; b=u7+Sc6e3haUvPkxq79DojBvA/Kgk4zSq0pYorc9mKVqwf3MFp+pYVtYYK1JRtNppC8JW7FXvBHqkiw4wZUHjmfG15Qps6Si3BnjnzCdKf7dOACoL2fv9wrr8Yqydpu4+xe08TmW+BE/VXq4nM7FaDlbtGKyegEUKthP4p9dlS8g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=tipi-net.de; spf=pass smtp.mailfrom=tipi-net.de; dkim=pass (2048-bit key) header.d=tipi-net.de header.i=@tipi-net.de header.b=I+q/8a5j; arc=none smtp.client-ip=194.13.80.246
+	 Message-ID:Content-Type; b=f+/SQ64F8SiICU5/E+Et5NzX7zRIXtOBX+SA6b2zUv3N7Ea7UC41VowE4KMU7ZNmJsYyHMQGkZYjaUMT6k3nc231Q0sDkYmavTAt3q2EHqOXxSEl5Q0+WwYN4FJrAXtVug6zJFUR5m5WLmXTA2qJyTLqzRNJuOuvmORY9e8lT8c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=tipi-net.de; spf=pass smtp.mailfrom=tipi-net.de; dkim=pass (2048-bit key) header.d=tipi-net.de header.i=@tipi-net.de header.b=covj1rD9; arc=none smtp.client-ip=194.13.80.246
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=tipi-net.de
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=tipi-net.de
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id EE260A4B73;
-	Tue, 26 May 2026 21:25:23 +0200 (CEST)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 4D94CA4B6F;
+	Tue, 26 May 2026 21:36:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tipi-net.de; s=dkim;
-	t=1779823524; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	t=1779824182; h=from:subject:date:message-id:to:cc:mime-version:content-type:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=AzVsY1iGJmoJBD2ByM8HX35fkw5gcS3qmwSaMiT/Jsk=;
-	b=I+q/8a5j3BEOT5wS5T4V+6KYivD4+SAjVBFwYaOUzoMAu0LpWId4L5n08/G3jue3wMYmx1
-	BVizIqmx4LAbqIcwe8oc16ymPArGTP74eZYnXgiVaGKrcowxCtjF+3LqK7WggjvBNMNbIc
-	mowrAI6b30ggbhlnmlbT2kk8LxRWOHsosb4AhvKd1fHZX3RzV41UvMrx5eATXfoQOr7XyI
-	mcP3450HnlBCGnRFvWFcTGHPfBB6M7kQWOX7d14SAZlzsNyd1UJi/TYbuNRRgYiwHtlhbj
-	cm+WwbLX9aCl+/Vq/l9+mh6/qqZ54h3N3No2h1U7Sa1w8y8FnIGptZmMCEDLsQ==
+	bh=FIsguaqLNZxyz4WUt9a4bb97qm80/A2ahltxZ1mLKOA=;
+	b=covj1rD9GR1X8WK5A+bMiM1jtOLj41YaqHGzVac+cWrfkKefKTAq6aVXz3cyEwDHFEIX/R
+	xvIphaJBA2K90zduUqPL0z3nyvxK7ZfVskBU8gnPkxXfq5C3fA4TxiZZny0CkQ5+Puwnbq
+	VZvMxII50RrVN/exXmU5lwJ61x6M0zDDs1M75F0LORTJrvWaj4Yg4qqGe31b5A6rR3QYEy
+	GnWj140nzrHV4IYS+9tk7u10K1KhHtaZWrK/lYdYd7t5/4AYQcuQbGPrCM6B5TNYj+YiyI
+	awyOJTm41mPUvS4A/Q6e6/Isl5kIZj/ex8jHfE6QyrP38wxxQDJB7vg5OrHwLw==
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Date: Tue, 26 May 2026 21:25:23 +0200
+Date: Tue, 26 May 2026 21:36:20 +0200
 From: Nicolai Buchwitz <nb@tipi-net.de>
 To: Jakub Kicinski <kuba@kernel.org>
 Cc: davem@davemloft.net, netdev@vger.kernel.org, edumazet@google.com,
  pabeni@redhat.com, andrew+netdev@lunn.ch, horms@kernel.org, corbet@lwn.net,
  tariqt@nvidia.com, dtatulea@nvidia.com, linux-doc@vger.kernel.org,
  hawk@kernel.org, ilias.apalodimas@linaro.org
-Subject: Re: [PATCH net-next 3/4] docs: page_pool: drop the mention of the
- legacy stats API
-In-Reply-To: <20260526155722.2790742-4-kuba@kernel.org>
+Subject: Re: [PATCH net-next 4/4] net: make page_pool_get_stats() void
+In-Reply-To: <20260526155722.2790742-5-kuba@kernel.org>
 References: <20260526155722.2790742-1-kuba@kernel.org>
- <20260526155722.2790742-4-kuba@kernel.org>
-Message-ID: <0ba941849c110930ffa4fecc4f257703@tipi-net.de>
+ <20260526155722.2790742-5-kuba@kernel.org>
+Message-ID: <8867c95fc2c88a4074526f31dfb583b9@tipi-net.de>
 X-Sender: nb@tipi-net.de
 Content-Type: text/plain; charset=US-ASCII;
  format=flowed
@@ -73,14 +72,14 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	R_DKIM_ALLOW(-0.20)[tipi-net.de:s=dkim];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	DMARC_NA(0.00)[tipi-net.de];
-	TAGGED_FROM(0.00)[bounces-89661-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-89662-lists,linux-doc=lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[13];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
@@ -96,24 +95,22 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,netdev];
 	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,tipi-net.de:email,tipi-net.de:mid,tipi-net.de:dkim]
-X-Rspamd-Queue-Id: 85E595DBF63
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,tipi-net.de:email,tipi-net.de:mid,tipi-net.de:dkim]
+X-Rspamd-Queue-Id: 2C6EE5DC0C5
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 On 26.5.2026 17:57, Jakub Kicinski wrote:
-> The Netlink support for querying page pool stats has been
-> proven out in production, let's remove the mention of the
-> helper meant for dumping page pool stats into ethtool -S
-> from the docs.
-> 
-> Call out in the kdoc that this API is deprecated.
-> Some drivers may not be able to use the Netlink API
-> (if page pool is shared across netdevs). So the old API
-> is not _completely_ dead. But we shouldn't advertise it.
+> The kdoc for page_pool_get_stats() is missing a Returns: statement.
+> Looking at this function, I have no idea what is the purpose of
+> the bool it returns. My guess was that maybe the static inline
+> stub returns false if CONFIG_PAGE_POOL_STATS=n but such static
+> inline helper doesn't exist at all. All callers pass a pointer
+> to a struct on the stack. Make this function void.
 > 
 > Signed-off-by: Jakub Kicinski <kuba@kernel.org>
+> ---
 
 > [...]
 
