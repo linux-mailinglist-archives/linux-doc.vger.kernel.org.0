@@ -1,181 +1,152 @@
-Return-Path: <linux-doc+bounces-89628-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89631-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WMCqKPzcFWrTdQcAu9opvQ
-	(envelope-from <linux-doc+bounces-89628-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 19:48:44 +0200
+	id AFNfG6LdFWrTdQcAu9opvQ
+	(envelope-from <linux-doc+bounces-89631-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 19:51:30 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id EDC9E5DAEC2
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 19:48:43 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id EEAD15DAF36
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 19:51:29 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id F00963005EAF
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 17:48:42 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 66779304FFC3
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 17:50:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 76D59413D8B;
-	Tue, 26 May 2026 17:48:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D615C421A18;
+	Tue, 26 May 2026 17:50:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="KNZXw6Ea"
+	dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b="Q3XiUAMt"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.11])
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com [136.143.188.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F01F372EF1;
-	Tue, 26 May 2026 17:48:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.11
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779817720; cv=none; b=R8TJKctB+YHoYs+eO+98VwrOTE3g9NVc8j4zMuatcFsJw628hOqFTM6XeMumygCHIbx2wa+HaObxovSMOOFmWSy7vaCaT0+vtrJHL1chKX3T2kw0EyPK1uccRr422zbwODhidwRDRno1/SfvH5AsJo1rr21mZJUBTZFiVdAlDUY=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779817720; c=relaxed/simple;
-	bh=a5Ee7f09oAdBoMKIxduYTdY6R7xOpK2bD0sHpJz4/l0=;
-	h=Date:From:To:Cc:Subject:Message-ID; b=UXs7BEe8IOt7/YM7kgVHbXf7IOvRZWy/Cs2xKJvOclEu07qSuJNcDFUZEXn/h1da5ZqyplTkVEfRDJoR/+YGRw0YFy5mxID8tZvF/RJMHJvULzIc8KNqBMSD3qtkS9GXfwqy7jvU3iGNm14OToH54E1dGfxenrLkEx2M2qla0+E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=KNZXw6Ea; arc=none smtp.client-ip=192.198.163.11
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1779817718; x=1811353718;
-  h=date:from:to:cc:subject:message-id;
-  bh=a5Ee7f09oAdBoMKIxduYTdY6R7xOpK2bD0sHpJz4/l0=;
-  b=KNZXw6EaI7uYqH8F//a6w2O/5P6dEFKhfRsXV+NkemiKm38FEELGfV+e
-   PdQELk+EETmHhe+s7W7OF+b4JgVUbzscHP9EQfrJ45Xf/drnlvsS0ctZR
-   lrtlMkThIjRgq7Sfw1y9ONEcF7gnlrP05QLiHiGMrmxVznA/ycaFyFK9F
-   FOfT2zRSoYN8OuJaH0NsCWs77gef3uwvT+1rqY9ANIJ9dYifowIE7oO1z
-   4WhWVjPIPf6NzH025V/HJGKZ9zHp2joFuiy8iCycwGxCOMSBGRM97UUbe
-   DRoza16uUUjm73y+IwzEc3KrHLbR1z33D6iQJuWuZF4IcDnrHRxXamAWm
-   w==;
-X-CSE-ConnectionGUID: sU4scsulRNOyf/rKYqBT2Q==
-X-CSE-MsgGUID: EEITXgBVSByR5BM9ImSz0g==
-X-IronPort-AV: E=McAfee;i="6800,10657,11798"; a="91211126"
-X-IronPort-AV: E=Sophos;i="6.24,170,1774335600"; 
-   d="scan'208";a="91211126"
-Received: from orviesa004.jf.intel.com ([10.64.159.144])
-  by fmvoesa105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 May 2026 10:48:38 -0700
-X-CSE-ConnectionGUID: 7NUp1wFST9aArxjbuvgHGA==
-X-CSE-MsgGUID: fJ6uiUOWRfOcRcZbelprXQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.24,170,1774335600"; 
-   d="scan'208";a="246242838"
-Received: from igk-lkp-server01.igk.intel.com (HELO bdf09bfdbd5f) ([10.211.93.152])
-  by orviesa004.jf.intel.com with ESMTP; 26 May 2026 10:48:36 -0700
-Received: from kbuild by bdf09bfdbd5f with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1wRvtI-00000000CSf-3MYG;
-	Tue, 26 May 2026 17:48:32 +0000
-Date: Tue, 26 May 2026 19:47:33 +0200
-From: kernel test robot <lkp@intel.com>
-To: Sakari Ailus <sakari.ailus@linux.intel.com>
-Cc: oe-kbuild-all@lists.linux.dev, linux-media@vger.kernel.org,
- Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Mirela Rabulea <mirela.rabulea@nxp.com>,
- Jacopo Mondi <jacopo.mondi@ideasonboard.com>, linux-doc@vger.kernel.org
-Subject: [sailus-media-tree:metadata 59/126] htmldocs:
- Documentation/userspace-api/media/v4l/subdev-config-model.rst:6: WARNING:
- duplicate label media_subdev_config_model, other instance in
- Documentation/userspace-api/media/v4l/dev-subdev.rst
-Message-ID: <202605261948.2WptznsW-lkp@intel.com>
-User-Agent: s-nail v14.9.25
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A4ED4218A1;
+	Tue, 26 May 2026 17:50:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.15
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1779817814; cv=pass; b=qGeT29iRsFth5wU92vGN8aH+iPZHVaBwTT1tbdPdir3mbcEZHTs/P9sMRycepm6dHVC4HwP7sL5954KyIzVAxjm9r5Twfy/iPclbYvJNWkWKvzX7T/eHvULgCzZEHLjMxM8Rkzs5mGd2am+9Dr6A1OsRPvhZx3YyNmjQ7TnUN2E=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1779817814; c=relaxed/simple;
+	bh=dX/xlJm99PctX3tKLrtgErPzWLirXtTDlO4/3TixXrM=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=lbA9FvxXu0Qoo2+2LA96aCXvhau0BwY+FyPo+XxEnX/kkk4hXjFl8catgXqU4QZE8xFb1nrqkxFE3XCtk8FI7XMT+ghtPrWZpPvnk9G8dAAa6QgTcn8B9+FVy+AXGyj8xdfbk2bTC3lpT0oWkLS8WvjoRISI0iZwPvZpkgtVjso=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rong.moe; spf=pass smtp.mailfrom=rong.moe; dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b=Q3XiUAMt; arc=pass smtp.client-ip=136.143.188.15
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rong.moe
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rong.moe
+ARC-Seal: i=1; a=rsa-sha256; t=1779817795; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=hnCN4E8z7/rcDswr4R0fgVmlg2HpgGYkWCJKJK2wbDyp+UdvV+f6rCJ4m/Vs6F84sCNrkjk3g8fXJpAilW9zAEjMcOfHwJRLmAFUJx9UXkMsw8/wmWKdno/xN53Tt+O7lrlq04CR9DtSObyFESqfkNwrc5yBcdz+cCixg2SWp1c=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1779817795; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=ssrG3TggKkTmtkgvrC9+Jc8mBvxiFgZczsaJ3+ndGDo=; 
+	b=DmhpvgnHHpDnXLyGXAWvjX4X24cVvaaLZTyT0vD4TFYRiriQqo0f8GMZgtTQ5Dn0aBwDC4/Dl3YfeeYfWlKFCP4MUXVdPRmVBlx6Yk6jJOf8Xv7C0HUfI2bGfE8o7TAmYmEva2fZbVAo/QERDXq/rFKBgSPj9FGRdzkpBzCa1oI=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=rong.moe;
+	spf=pass  smtp.mailfrom=i@rong.moe;
+	dmarc=pass header.from=<i@rong.moe>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1779817795;
+	s=zmail2048; d=rong.moe; i=i@rong.moe;
+	h=From:From:Subject:Subject:Date:Date:Message-Id:Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:To:To:Cc:Cc:Reply-To;
+	bh=ssrG3TggKkTmtkgvrC9+Jc8mBvxiFgZczsaJ3+ndGDo=;
+	b=Q3XiUAMtXAwUlOM1fxdHoWksZ0MM91cVfZgD3VLe1b/sfNfTvXDzLt/Q3/YImBgu
+	aZRCiSpwSahmSLcUOP3hmOBavK/2BRb3nRaxBsA8wq6/Q+QDD5WimDlvhRupIyTk69o
+	C/JMsEPAHBpqJMDzKI2CDdE3eJbRmtII1ArHwgYm5nUW//1Cm8P9PXPufgplKmUVP1s
+	0+xEIVTQ8wHFm2ctYz5syC4biJeTXDkrRVMO0aMv5B/DmyBB7IBNEXEAeRQVeMvO5W/
+	M4S28YWFad8LsYbjboMD0tlKqQJkqGp3+rAnMa4q9XFutWnUVPbOs+YQKJEUmKnPJFq
+	VbqVpsNhew==
+Received: by mx.zohomail.com with SMTPS id 1779817794286453.7977302102662;
+	Tue, 26 May 2026 10:49:54 -0700 (PDT)
+From: Rong Zhang <i@rong.moe>
+Subject: [PATCH 0/3] ALSA: usb-audio: Add QUIRK_FLAG_MIXER_SKIP_GET_CUR_VOL
+ for Sennheiser MOMENTUM 3
+Date: Wed, 27 May 2026 01:49:22 +0800
+Message-Id: <20260527-uac-quirk-get-cur-vol-v1-0-e9362b712e5e@rong.moe>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-X-Spamd-Result: default: False [1.09 / 15.00];
-	LONG_SUBJ(1.75)[233];
-	MID_CONTAINS_FROM(1.00)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIACLdFWoC/yXMQQqDQAxA0atI1gamkSr2KsWFxqhR0TbjSEG8e
+ 6d1+Rb/H+DFVDw8kgNMdvW6LhG3NAEe6qUX1DYayFHu7lRgqBnfQW3CXjbkYLivM7auoZI4k6L
+ MIbYvk04//++zuuxDMwpvvxmc5xdnEcfKeQAAAA==
+X-Change-ID: 20260527-uac-quirk-get-cur-vol-d0b292c3e796
+To: Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>
+Cc: Gordon Chen <chengordon326@gmail.com>, linux-sound@vger.kernel.org, 
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Rong Zhang <i@rong.moe>
+X-Mailer: b4 0.16-dev-d5d98
+X-ZohoMailClient: External
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[rong.moe,none];
+	R_DKIM_ALLOW(-0.20)[rong.moe:s=zmail2048];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[gmail.com,vger.kernel.org,rong.moe];
+	TAGGED_FROM(0.00)[bounces-89631-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-89628-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_COUNT_FIVE(0.00)[6];
-	TAGGED_RCPT(0.00)[linux-doc];
-	PRECEDENCE_BULK(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[rong.moe:+];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:email,intel.com:mid,intel.com:dkim,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: EDC9E5DAEC2
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[i@rong.moe,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,rong.moe:email,rong.moe:mid,rong.moe:dkim]
+X-Rspamd-Queue-Id: EEAD15DAF36
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-tree:   git://linuxtv.org/sailus/media_tree.git metadata
-head:   5b470f2ed717705b51f4a799722dffb34a37f10a
-commit: 643ed29222de6019c0321bbb7d7d65e6a50fcf4f [59/126] media: Documentation: Add subdev configuration models, raw sensor model
-compiler: clang version 20.1.8 (https://github.com/llvm/llvm-project 87f0227cb60147a26a1eeb4fb06e3b505e9c7261)
-docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
-reproduce: (https://download.01.org/0day-ci/archive/20260526/202605261948.2WptznsW-lkp@intel.com/reproduce)
+Since commit 86aa1ea1f15c ("ALSA: usb-audio: Do not expose sticky
+mixers"), the UAC mixer core utilizes volume SET_CUR and GET_CUR to
+identify devices with sticky mixers. Unfortunately, even though most
+devices with sticky GET_CUR also have corresponding sticky SET_CUR,
+which I actually met more since the commit had been merged, there is
+also a rare case that some devices may have volume mixers that responds
+to SET_CUR properly but with its GET_CUR stubbed. This cause the sticky
+check to consider the mixer to be sticky and unnecessarily disable it.
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202605261948.2WptznsW-lkp@intel.com/
+Add QUIRK_FLAG_MIXER_SKIP_GET_CUR_VOL to prevent sending GET_CUR to
+mixers by returning -ENXIO early. The error effectively skips the sticky
+check as it's only meaningful when the mixer has some sort of self-
+awareness. Similar to QUIRK_FLAG_GET_SAMPLE_RATE, this should also help
+if some unmet devices can't tolerate volume GET_CUR in other ways.
 
-All warnings (new ones prefixed by >>):
+The Sennheiser MOMENTUM 3 needs the quirk flag. Though its UAC mixer
+works fine and precisely corresponds to the reported dB range, the
+mixer's volume GET_CUR method is somehow stubbed and returns a constant
+value (15dB), resulting in it being disabled by the sticky check.
 
-   Documentation/userspace-api/landlock:550: ./include/uapi/linux/landlock.h:45: ERROR: Unknown target name: "network flags". [docutils]
-   Documentation/userspace-api/landlock:550: ./include/uapi/linux/landlock.h:50: ERROR: Unknown target name: "scope flags". [docutils]
-   Documentation/userspace-api/landlock:550: ./include/uapi/linux/landlock.h:24: ERROR: Unknown target name: "filesystem flags". [docutils]
-   Documentation/userspace-api/landlock:559: ./include/uapi/linux/landlock.h:168: ERROR: Unknown target name: "filesystem flags". [docutils]
-   Documentation/userspace-api/landlock:559: ./include/uapi/linux/landlock.h:191: ERROR: Unknown target name: "network flags". [docutils]
->> Documentation/userspace-api/media/v4l/subdev-config-model.rst:6: WARNING: duplicate label media_subdev_config_model, other instance in Documentation/userspace-api/media/v4l/dev-subdev.rst
->> Documentation/userspace-api/media/v4l/subdev-config-model.rst:35: WARNING: duplicate label media_subdev_config_model_common_raw_sensor, other instance in Documentation/userspace-api/media/v4l/dev-subdev.rst
->> Documentation/userspace-api/media/v4l/subdev-config-model.rst:: WARNING: duplicate label media_subdev_config_model_common_raw_sensor_subdev, other instance in Documentation/userspace-api/media/v4l/dev-subdev.rst
-   Documentation/networking/skbuff:36: ./include/linux/skbuff.h:181: WARNING: Failed to create a cross reference. A title or caption not found: 'crc' [ref.ref]
-   Documentation/userspace-api/media/drivers/camera-sensor.rst:147: WARNING: undefined label: 'media-metadata-layout-ccs' [ref.ref]
+Signed-off-by: Rong Zhang <i@rong.moe>
+---
+Rong Zhang (3):
+      ALSA: doc: usb-audio: Add doc for QUIRK_FLAG_IFB_SILENCE_ON_EMPTY
+      ALSA: usb-audio: Add QUIRK_FLAG_MIXER_SKIP_GET_CUR_VOL
+      ALSA: usb-audio: Add quirk flag for Sennheiser MOMENTUM 3
 
+ Documentation/sound/alsa-configuration.rst | 10 ++++++++++
+ sound/usb/mixer.c                          |  5 +++++
+ sound/usb/quirks.c                         |  3 +++
+ sound/usb/usbaudio.h                       |  6 ++++++
+ 4 files changed, 24 insertions(+)
+---
+base-commit: a23812004228d4b041a858b927db787a7ff80f50
+change-id: 20260527-uac-quirk-get-cur-vol-d0b292c3e796
 
-vim +6 Documentation/userspace-api/media/v4l/subdev-config-model.rst
+Thanks,
+Rong
 
-     4	
-     5	Sub-device configuration models
-   > 6	===============================
-     7	
-     8	The V4L2 specification defines a subdev API that exposes three type of
-     9	configuration elements: formats, selection rectangles and controls. The
-    10	specification contains generic information about how those configuration
-    11	elements behave, but not precisely how they apply to particular hardware
-    12	features. We leave some leeway to drivers to decide how to map selection
-    13	rectangles to device features, as long as they comply with the V4L2
-    14	specification. This is needed as hardware features differ between devices, so
-    15	it's the driver's responsibility to handle this mapping.
-    16	
-    17	Unfortunately, this lack of clearly defined mapping in the specification has led
-    18	to different drivers mapping the same hardware features to different API
-    19	elements, or implementing the API elements with slightly different
-    20	behaviours. Furthermore, many drivers have implemented selection rectangles in
-    21	ways that do not comply with the V4L2 specification. All of this makes userspace
-    22	development difficult.
-    23	
-    24	Sub-device configuration models specify in detail what the user space can expect
-    25	from a sub-device in terms of V4L2 sub-device interface support, semantics
-    26	included.
-    27	
-    28	A sub-device may implement more than one configuration model at the same
-    29	time. The implemented configuration models can be obtained from the sub-device's
-    30	``V4L2_CID_CONFIG_MODEL`` control.
-    31	
-    32	.. _media_subdev_config_model_common_raw_sensor:
-    33	
-    34	Common raw camera sensor model
-  > 35	------------------------------
-    36	
-
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
 
