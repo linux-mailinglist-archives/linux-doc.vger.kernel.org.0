@@ -1,59 +1,59 @@
-Return-Path: <linux-doc+bounces-89575-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89576-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MH3qOhO/FWrYZgcAu9opvQ
-	(envelope-from <linux-doc+bounces-89575-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 17:41:07 +0200
+	id 6HYLNkS7FWrKYQcAu9opvQ
+	(envelope-from <linux-doc+bounces-89576-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 17:24:52 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5550E5D8EC4
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 17:41:07 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 52DBC5D8A4D
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 17:24:51 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id CACAD3185AD2
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 15:04:30 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id AE0F5309ACC5
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 15:04:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8E3E443D500;
-	Tue, 26 May 2026 14:57:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E258543DA2C;
+	Tue, 26 May 2026 14:57:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="Jz0jq5pY"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="2u4ore6k"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 242B043D4E9
-	for <linux-doc@vger.kernel.org>; Tue, 26 May 2026 14:57:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 534D143D51A;
+	Tue, 26 May 2026 14:57:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779807463; cv=none; b=e871769adg+kRBA8hH0OW7G8dpuJSH3oB+t3SZeRdY5leIMnejL9Gii2mfk5SMzXQ5bJTtAHlzEZCJrVsVw61ybBltZQbbX6QBWvclHB6v3QHAg46LvqpT+gthzTlQPjNRocA9mFYAX8M+95Z9KalS+xZN9fPLD2P0KXLEOxBKc=
+	t=1779807465; cv=none; b=fy7g9hsK+fHxOc1riRgXp3qMMFAEHT/7+aerbdzi3IPTYV2XlRBLjItYjrLaeM8iC0nWcUUu7strgFUr58vjnH/w/W9dtRk+WpBb2rxoZXsl5ZzNVoLyp+pM+AzYbci18BIgYqd9Lt9vpDxDg3Vd86cD0QmywvoymPY6KLTYlKs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779807463; c=relaxed/simple;
-	bh=wR9fLcKMP8jfOUl1u02wruIBJQCBpAmyi7PnHqZUNKw=;
+	s=arc-20240116; t=1779807465; c=relaxed/simple;
+	bh=0wpgmlXHBRw9lGQfHW5FB6pxXYO70vjFrF4HUpKUNdQ=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=JMG2x2nfrYXGS1Xmj5OAOkVVp6PKLMWvqdBYlea2NBYOdu6rYSM9uo0GZ/CsvekbWWQJenyw3W7at9Nh9kk9keZ4keqbQbLx/yDaFojvIri4uHppDtgoR26iWk6oPGiU0pLSJJzWLg1pVAW6KjUdgYVdBNzJSKXj6zPOy89vwpw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=Jz0jq5pY; arc=none smtp.client-ip=185.171.202.116
+	 In-Reply-To:To:Cc; b=RcFtbolyVktZ/rxA2HT+e6Gng8Mx5uGjOf5YtkF0mj6LsGe02RsPrPP7sxt6QWs5lFgosWq7PhD3aUomWWoou0kAmvfRPFG+Jw20q6RFUvRu2vlIEh3cRLItNLi5Wu1VacL/RLV3/eSfkU/Y+tQ5UeBPs4aCJz4g/aarkwE9eYA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=2u4ore6k; arc=none smtp.client-ip=185.246.85.4
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id 4DBE8C79ABD;
-	Tue, 26 May 2026 14:57:40 +0000 (UTC)
+	by smtpout-03.galae.net (Postfix) with ESMTPS id 120174E42D5E;
+	Tue, 26 May 2026 14:57:43 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id E3B4C6011D;
-	Tue, 26 May 2026 14:57:40 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id B1DC1108888A7;
-	Tue, 26 May 2026 16:57:38 +0200 (CEST)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id D52166011D;
+	Tue, 26 May 2026 14:57:42 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 9F4AD10888865;
+	Tue, 26 May 2026 16:57:40 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1779807460; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	t=1779807461; h=from:subject:date:message-id:to:cc:mime-version:content-type:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=BzudXirteyCIpUHAn2PSh0cnsxh8jvQrz2NfKL2yz8c=;
-	b=Jz0jq5pYMCnSJSxN+tfwle5TYIraf3N3dz5IYIBywzxMTV7F3NiWfZd4hxO+vYR7JnG+oW
-	cCYZNRd+OfccRENH5zeT5nbOJ4Qt9DiILxvQfcem7oo5hCD31PyF68eOb0cUbTn8F6WMPO
-	ZKzDNfgwRiDMRVLqZ0Y5nRkyINFazPN2LvwinF5g3Rh/AvAl/ST5PTd/wGE0FQIZO88w3h
-	J3IPoXwbBROyBRvJlqS6EnOasU5kXyUI2a6DnENqGxhO1Jjbh4FVUo13sn3JZL0YU5t+Hv
-	a9D1+yXE7XT2n75jaIOhnEZLs/8V63CBgYzXBtBOpvU+ZYXcoD165dxPuNg8tw==
+	bh=tZrjKlrSTIx0EpT8S91i2zZxREgNAGIUjyhXtv54w/g=;
+	b=2u4ore6k2VW6md2mMVcAkBL+AYihfqTaVZB2EzIbys+W+OFuunvTVrbvzu2rfMDDI+snz2
+	o5KtTejGgqptkKJ8l7/4Jws+dcLRqWDDsAU0d8wtN9K7QE0bSIozzn+DdOd+DbUBo6/zG0
+	1otK91C0SR+dHzIZbAtk1AmKcm7bxGPLUXbWOwWCmKKdgQljy5s33c9JHUSyCpf4VfyZpI
+	JzfuHzFwaFnp4NNePOErVXpz6qIlbIYZg7V37B6HSrPObaTa4YKLM6mIivvy6XzLcIFlLT
+	1sPk2ClgHBR7GO8cJYXjVhHlulRZC9E5MFkCvZ6nm5CCeU7f2iU3rY6wuJekjA==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
-Date: Tue, 26 May 2026 16:56:51 +0200
-Subject: [PATCH v6 27/28] mtd: spi-nor: winbond: Add W25Q01NWxxIM CMP
+Date: Tue, 26 May 2026 16:56:52 +0200
+Subject: [PATCH v6 28/28] mtd: spi-nor: winbond: Add W25Q02NWxxIM CMP
  locking support
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -63,7 +63,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260526-winbond-v6-18-rc1-spi-nor-swp-v6-27-4092f1419f8f@bootlin.com>
+Message-Id: <20260526-winbond-v6-18-rc1-spi-nor-swp-v6-28-4092f1419f8f@bootlin.com>
 References: <20260526-winbond-v6-18-rc1-spi-nor-swp-v6-0-4092f1419f8f@bootlin.com>
 In-Reply-To: <20260526-winbond-v6-18-rc1-spi-nor-swp-v6-0-4092f1419f8f@bootlin.com>
 To: Pratyush Yadav <pratyush@kernel.org>, Michael Walle <mwalle@kernel.org>, 
@@ -81,12 +81,12 @@ X-Last-TLS-Session-Version: TLSv1.3
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[bootlin.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	R_DKIM_ALLOW(-0.20)[bootlin.com:s=dkim];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-89575-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-89576-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -99,22 +99,32 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[miquel.raynal@bootlin.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[bootlin.com:email,bootlin.com:mid,bootlin.com:dkim,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: 5550E5D8EC4
+	DBL_BLOCKED_OPENRESOLVER(0.00)[bootlin.com:email,bootlin.com:mid,bootlin.com:dkim,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: 52DBC5D8A4D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 This chip has support for the locking complement (CMP) feature. Add
 the relevant bit to enable it.
 
+Unfortunately, this chip also comes with an incorrect BFPT table,
+indicating the Control Register cannot be read back. This is wrong,
+reading back the register works and has no (observed) side effect. The
+datasheet clearly indicates supporting the 35h command and all bits from
+the CR are marked readable. QE and CMP bits are inside, and can be
+properly read back.
+
+Add a fixup for this, otherwise it would defeat the use of the CMP
+feature.
+
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 ---
-Test run with W25Q01NWxxIM:
+Test run with W25Q02NWxxIM:
 $ flash_lock -u /dev/mtd0
 $ flash_lock -l /dev/mtd0 $bs $all_but_one # all but the first
 $ show_sectors
@@ -146,23 +156,24 @@ locked sectors
  00000000-0ffdffff |   locked | 4094
  0ffe0000-0fffffff | unlocked | 2
 ---
- drivers/mtd/spi-nor/winbond.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ drivers/mtd/spi-nor/winbond.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/mtd/spi-nor/winbond.c b/drivers/mtd/spi-nor/winbond.c
-index 3eca7baa4d5a..3a3b7f2f1659 100644
+index 3a3b7f2f1659..8ebdbcec0b3f 100644
 --- a/drivers/mtd/spi-nor/winbond.c
 +++ b/drivers/mtd/spi-nor/winbond.c
-@@ -374,7 +374,8 @@ static const struct flash_info winbond_nor_parts[] = {
- 	}, {
- 		/* W25Q01NWxxIM */
- 		.id = SNOR_ID(0xef, 0x80, 0x21),
--		.flags = SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB | SPI_NOR_TB_SR_BIT6 | SPI_NOR_4BIT_BP,
-+		.flags = SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB | SPI_NOR_TB_SR_BIT6 |
-+			 SPI_NOR_4BIT_BP | SPI_NOR_HAS_CMP,
+@@ -379,7 +379,9 @@ static const struct flash_info winbond_nor_parts[] = {
  	}, {
  		/* W25Q02NWxxIM */
  		.id = SNOR_ID(0xef, 0x80, 0x22),
+-		.flags = SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB | SPI_NOR_TB_SR_BIT6 | SPI_NOR_4BIT_BP,
++		.flags = SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB | SPI_NOR_TB_SR_BIT6 |
++			 SPI_NOR_4BIT_BP | SPI_NOR_HAS_CMP,
++		.fixups = &winbond_rdcr_fixup,
+ 	}, {
+ 		/* W25H512NWxxAM */
+ 		.id = SNOR_ID(0xef, 0xa0, 0x20),
 
 -- 
 2.53.0
