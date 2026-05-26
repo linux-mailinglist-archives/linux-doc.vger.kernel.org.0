@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-89584-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89585-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4IqiGmbEFWqxawcAu9opvQ
-	(envelope-from <linux-doc+bounces-89584-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 18:03:50 +0200
+	id sH/MF4HEFWqxawcAu9opvQ
+	(envelope-from <linux-doc+bounces-89585-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 18:04:17 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DEBC35D9439
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 18:03:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CF4C45D9440
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 18:04:16 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id AA0A43046386
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 15:57:36 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id A802430765EC
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 15:57:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0761E391E60;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C7A5C3955F4;
 	Tue, 26 May 2026 15:57:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XP6X2i17"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="L+wqfpLJ"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5CD0390219;
-	Tue, 26 May 2026 15:57:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A1523911C7;
+	Tue, 26 May 2026 15:57:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779811052; cv=none; b=ZQMH0U5urLT7mNHUEzcCcgIBy8wDrpAbdbbD3gNqi5Tlfjwlopz0A+CGTi4UpNFYouMeoouqXBlMcegDejYqmgJBETmbdIvwIGNfVbDc+0bxl2f3t9X6mvKaMgTIlHQzpC6ChmDxmduAD7iltId266MTXU2BgRVz497++FdeHmo=
+	t=1779811053; cv=none; b=ONusjjvlYwesGVBKZSlbKSJnyTK3s7fvyPxS7kgHeTdHYptSEwotNAvQadEcsOsDEjB/VD9WffcBGqAS27WPVWGGagMdUJJkmxP32xs2OiFe29UXsTItcr+3AI5+Tn+5zSDUPEL68J8Ufk+WU/h1UwXUY4IfY+BQZdqfPvBRrjQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779811052; c=relaxed/simple;
-	bh=vRIwvHxG+joqjqpEPE7ZvbFsoxMA5MVccnWb+6K29pE=;
+	s=arc-20240116; t=1779811053; c=relaxed/simple;
+	bh=LpOshOD8CEJMPGynMo1OGhyuRPoGqSI3AU/juk3lci8=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=rcCaBI5ceSqAIMK6hjxx8yj0LykFeDPtzeeNVlWFkO5IfAtax5vvq9Q5ac+kPvgFpXkGnG+bGWdAv556nfhFY5sx4g+tUU8LPsbml8zpmcU6M7PVTAE3zoW33RXJYpK78GfsExN0B0Mmv8mbYjBFTAq3talWo2zez2DMk60tKt0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XP6X2i17; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3CB8E1F00A3A;
+	 MIME-Version; b=Z7J0DQtK7BvAYViJgeKOYj9Ggz1b9LiH+RGqlgoAG2PJRefE4jEt06VEYIZrG8cZgaU5c7Ev6HSBFvz2COWg0xlAkuaSh1HjxNiuogWxHhl8fTdVKoobrK7RuiAVG4p2uXc6P6g0x90CQIsupXZubwX8vPFogTiYOleA2ReTQ2U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=L+wqfpLJ; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EF0D81F00A3C;
 	Tue, 26 May 2026 15:57:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1779811051;
-	bh=1Q3RoikXtECR93KxeOa1YwX+EhS1rkjHWqhPH/lOn40=;
+	s=k20260515; t=1779811052;
+	bh=mxKZ0V7pV9r4fW3zIDl0k6FOYnnqt4CWUpW8VmNe5Zc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=XP6X2i17Rc8i3almstGKl7VP9v7obIeisCefS3kfebPvg1YNlaBVsv6+/VJZCM8Gy
-	 5lMEemJcZfzElrVQTWcljkbGRP/xHrIu6Suj+DkEcC2h/vpiIwcm/3Us/A8xckXyb/
-	 WKgguprVYqUQb0NiimqvheXpO04i+2hFQ6XlTlC5/ph4WwrTAoJXVMBMRixi5fjH6T
-	 NTItDx41ngRTqWWNrzboltYUnPwUCybieYxvosIcZNa88n4EPR7ve1haxGJwhPGIH0
-	 hM6qPkFV06b6jeOvAxGhRLsriiqCgRk2IXQGFBBtPMakJ1iATB39J4KdihiJjpqmVj
-	 GGEAIAgbLFRKA==
+	b=L+wqfpLJh3+LMPA/21qCoDRHyrd0GCjlKgcYxYT8XryteMyL0aXxaqr5HZMh7vIhJ
+	 RNwxvvPTWMD0pD3mARi7DmqJmEB5ElW88giyQrKWecgcv77cZXEwagWEgl4wEq/K+L
+	 h2rCnEDma1tdtSkEgLG96dJWLrSFYCTda74w877eVbEc47SejFJC3gqF45DqwksgR/
+	 auVdWI45uvcERZZlsldD/9bRXEInKQLzQJGwere2agzGHPUWG/+x0UrZndSs6Vhdg9
+	 D9L+sMSLiD3+RODflocInTecyzuSO0xjIDoJhKHArR/paajVx1bjBZh6Xq0RhMv4QJ
+	 m5yqA5FYi2Jfw==
 From: Jakub Kicinski <kuba@kernel.org>
 To: davem@davemloft.net
 Cc: netdev@vger.kernel.org,
@@ -58,9 +58,9 @@ Cc: netdev@vger.kernel.org,
 	hawk@kernel.org,
 	ilias.apalodimas@linaro.org,
 	Jakub Kicinski <kuba@kernel.org>
-Subject: [PATCH net-next 1/4] docs: net: page_pool: drop reference to removed PP_FLAG_PAGE_FRAG
-Date: Tue, 26 May 2026 08:57:19 -0700
-Message-ID: <20260526155722.2790742-2-kuba@kernel.org>
+Subject: [PATCH net-next 2/4] docs: clarify page pool NAPI consumer requirement
+Date: Tue, 26 May 2026 08:57:20 -0700
+Message-ID: <20260526155722.2790742-3-kuba@kernel.org>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260526155722.2790742-1-kuba@kernel.org>
 References: <20260526155722.2790742-1-kuba@kernel.org>
@@ -83,7 +83,7 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCPT_COUNT_TWELVE(0.00)[13];
-	TAGGED_FROM(0.00)[bounces-89584-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-89585-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
@@ -94,41 +94,56 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[kuba@kernel.org,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	NEURAL_HAM(-0.00)[-0.996];
+	NEURAL_HAM(-0.00)[-0.998];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,netdev];
 	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: DEBC35D9439
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,pp_params.dev:url]
+X-Rspamd-Queue-Id: CF4C45D9440
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-The flag was removed in commit 09d96ee5674a ("page_pool: remove
-PP_FLAG_PAGE_FRAG"), but the documentation still mentions it when
-describing fragment usage. Drop the stale reference; the fragment
-API does not require any opt-in flag.
+The comment about requirements when to set the NAPI pointer
+may not be super clear. Add more words.
 
 Signed-off-by: Jakub Kicinski <kuba@kernel.org>
 ---
- Documentation/networking/page_pool.rst | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ Documentation/networking/page_pool.rst | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
 diff --git a/Documentation/networking/page_pool.rst b/Documentation/networking/page_pool.rst
-index 9d958128a57c..6e43e1953218 100644
+index 6e43e1953218..5409c68be3fc 100644
 --- a/Documentation/networking/page_pool.rst
 +++ b/Documentation/networking/page_pool.rst
-@@ -98,9 +98,8 @@ If in doubt set ``offset`` to 0, ``max_len`` to ``PAGE_SIZE`` and
- pass -1 as ``dma_sync_size``. That combination of arguments is always
- correct.
+@@ -48,13 +48,18 @@ genetlink family (see Documentation/netlink/specs/netdev.yaml).
  
--Note that the syncing parameters are for the entire page.
--This is important to remember when using fragments (``PP_FLAG_PAGE_FRAG``),
--where allocated buffers may be smaller than a full page.
-+Note that the syncing parameters are for the **entire page**, even if
-+the driver allocates fragments (e.g. via ``page_pool_dev_alloc_frag()``).
- Unless the driver author really understands page pool internals
- it's recommended to always use ``offset = 0``, ``max_len = PAGE_SIZE``
- with fragmented page pools.
+ API interface
+ =============
+-The number of pools created **must** match the number of hardware queues
++The number of pools created **must** match the number of NAPI contexts / queues
+ unless hardware restrictions make that impossible. This would otherwise beat the
+ purpose of page pool, which is allocate pages fast from cache without locking.
+ This lockless guarantee naturally comes from running under a NAPI softirq.
+ The protection doesn't strictly have to be NAPI, any guarantee that allocating
+ a page will cause no race conditions is enough.
+ 
++If ``params.napi`` is set, the NAPI instance must be the sole consumer
++context for pages allocated from the pool. In other words, when running in
++that NAPI context, the page pool may safely access consumer-side resources
++**without any additional locking**.
++
+ .. kernel-doc:: net/core/page_pool.c
+    :identifiers: page_pool_create
+ 
+@@ -139,7 +144,7 @@ Registration
+     pp_params.pool_size = DESC_NUM;
+     pp_params.nid = NUMA_NO_NODE;
+     pp_params.dev = priv->dev;
+-    pp_params.napi = napi; /* only if locking is tied to NAPI */
++    pp_params.napi = napi; /* only if this NAPI is the sole consumer, see above */
+     pp_params.dma_dir = xdp_prog ? DMA_BIDIRECTIONAL : DMA_FROM_DEVICE;
+     page_pool = page_pool_create(&pp_params);
+ 
 -- 
 2.54.0
 
