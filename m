@@ -1,59 +1,59 @@
-Return-Path: <linux-doc+bounces-89573-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89574-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oFF3FAe/FWrYZgcAu9opvQ
-	(envelope-from <linux-doc+bounces-89573-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 17:40:55 +0200
+	id CJLtMXS4FWrKYQcAu9opvQ
+	(envelope-from <linux-doc+bounces-89574-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 17:12:52 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id B0C5A5D8EAF
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 17:40:54 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5818F5D8688
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 17:12:52 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 98C183143272
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 15:04:12 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id C301F30787C8
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 15:04:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E66DF43CEEF;
-	Tue, 26 May 2026 14:57:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0DE5643D4E6;
+	Tue, 26 May 2026 14:57:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="pox896/d"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="mcYDIShP"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D6BB43900F;
-	Tue, 26 May 2026 14:57:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 801DF43CEF9
+	for <linux-doc@vger.kernel.org>; Tue, 26 May 2026 14:57:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779807459; cv=none; b=iUerytpEVsMPK3o5u16u+sYiR807Pxu18owHWcLmAPEH9TMFg76MEElGr8zXJYMhiq/GY4G5+31HJrX8Jgjf5hVXqMOgtOmB7krk5ntWEPlaIsyna0lo1CKoWkt5lypQHVlSuoDPnWAVkM4lzj3n/Ha/ciRBCc2qvAUXbkqxjcQ=
+	t=1779807461; cv=none; b=DRw+VJmfuRKcAUmpqjsaaCdhxyn29pI8pyfgihXLnk0blyH0iR97cWxeT7ZW6FN74AF93x7sOGrt2Lni4CvuUqAzZVixfYd33UbqBV1hq9MLuWoqHl0xxh7U1+MqSiLepRQMySH055Gdzc4IZ/kjQqlb5vfbW4yElR9H3miYv48=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779807459; c=relaxed/simple;
-	bh=0Lupn6UvunZOKLowHQL5ey5eGL54gsUysgzGnV1wdO4=;
+	s=arc-20240116; t=1779807461; c=relaxed/simple;
+	bh=rInX3kRv6yDK5iSVlOduYu1C3wNRfxf3HZdAXXBol6o=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=oO6Y/y5qTC5fRKef1rTUw7rbkKhe+8SZbQVdx6gaSpQj1JM8kb49ZyUCz74GItxjZVsWMLqsMk8i1d/OaDxhhC50TggBSRyzcubsk8S+3bsiFNLjHNNtSeR0LqGS1s0bdxKhAVM3KVFY6i4POvnGMO2rV+dwYT/lzv2aTL90RVY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=pox896/d; arc=none smtp.client-ip=185.246.85.4
+	 In-Reply-To:To:Cc; b=MKE7gx+dP2lKLIEf93QPJPJ9Aieyxthxp5ZAuoGukR3ZgcAc66Q8YFnGYKgTReizuCkA6nVKb+fHDq/kGPCRORo9Ru+P4XNDsDZj0DHuOtmQCUdhySAr5361XAfezSQn2IIHGZeBhItPWN0uKHOm7XLfVNiqwOoC0+PFisk64AM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=mcYDIShP; arc=none smtp.client-ip=185.246.85.4
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id DF2E24E42D5F;
-	Tue, 26 May 2026 14:57:36 +0000 (UTC)
+	by smtpout-03.galae.net (Postfix) with ESMTPS id 41FCA4E42D5E;
+	Tue, 26 May 2026 14:57:39 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id B70456011D;
-	Tue, 26 May 2026 14:57:36 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 4EA26108888CE;
-	Tue, 26 May 2026 16:57:33 +0200 (CEST)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 16A8D6011D;
+	Tue, 26 May 2026 14:57:39 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 5742D108888CA;
+	Tue, 26 May 2026 16:57:35 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1779807455; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	t=1779807458; h=from:subject:date:message-id:to:cc:mime-version:content-type:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=edSYQazxhakuu8k26vId3X0/S/a6bSHMtg1O+5hvsoM=;
-	b=pox896/du/957Y9ugka9tY1Ib9w+8hcopJl9/kwMS9AjSR+XiLEIyztowtT1jx5zQi4ltX
-	dHINJHWWBp2XeN3GEjCDDFoPEId70cqak/UkvLd+/+xxi1zzL1rEujrnUQ6AgP/4rMppUF
-	Sq6f5GyyOox4J8VvcrVEDQpDRIbZApICjHz6A3iCrUQ29P+tB2Ip2XPqQEplYShsq13BhR
-	MDcJApnjnSBY075NbEBxH+vyEivrkLXfCWWGi/EJX8BRXiFNYG1+7/hq8Ddy85Ds6KvPGz
-	SNK1l2/94EWNvgcJasIvHxm6+c6nLj4sul8jIk55iul9TtZHZKontMwVRpbmLw==
+	bh=KojwcP/r+lQUigQvs1nLbgljyHHODmHhZ8UlG/TVtXQ=;
+	b=mcYDIShPzvtJJXl2TnCDJaENfXcuLepRRPY8JJ5sXAkh9Knrh+2mV8lHrP6zTBKqGnWAqc
+	aY4Fy/jY2bKA349zSzXV6xecmsg/P9DyhZq2iW9hTq/hHTjm4JzjcIm6rEGwiWET3jhYNJ
+	ttHZukvZgA4ePTbEYsLRvJJhesy5WijSuHCufV/92zDF/VIetli182SMSeSh6UqrO290q4
+	02S/lRvM0CZS6IbJN4SBb36TJsHGT8tlG9emWVp7flnADDd2Lmu/dzs4qxSkwmK4XApcqN
+	CmqmFfWf1eB9oa/YThgn2P4ErJyMhW9cfFN/4u0aaLfDX4CF1bVQg3CTD5wMXw==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
-Date: Tue, 26 May 2026 16:56:49 +0200
-Subject: [PATCH v6 25/28] mtd: spi-nor: winbond: Add W25H02NWxxAM CMP
+Date: Tue, 26 May 2026 16:56:50 +0200
+Subject: [PATCH v6 26/28] mtd: spi-nor: winbond: Add W25Q01NWxxIQ CMP
  locking support
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -63,7 +63,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260526-winbond-v6-18-rc1-spi-nor-swp-v6-25-4092f1419f8f@bootlin.com>
+Message-Id: <20260526-winbond-v6-18-rc1-spi-nor-swp-v6-26-4092f1419f8f@bootlin.com>
 References: <20260526-winbond-v6-18-rc1-spi-nor-swp-v6-0-4092f1419f8f@bootlin.com>
 In-Reply-To: <20260526-winbond-v6-18-rc1-spi-nor-swp-v6-0-4092f1419f8f@bootlin.com>
 To: Pratyush Yadav <pratyush@kernel.org>, Michael Walle <mwalle@kernel.org>, 
@@ -81,12 +81,12 @@ X-Last-TLS-Session-Version: TLSv1.3
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[bootlin.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	R_DKIM_ALLOW(-0.20)[bootlin.com:s=dkim];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-89573-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-89574-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -99,13 +99,13 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[miquel.raynal@bootlin.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[bootlin.com:email,bootlin.com:mid,bootlin.com:dkim,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: B0C5A5D8EAF
+	DBL_BLOCKED_OPENRESOLVER(0.00)[bootlin.com:email,bootlin.com:mid,bootlin.com:dkim,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: 5818F5D8688
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
@@ -124,7 +124,7 @@ feature.
 
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 ---
-Test run with W25H02NWxxAM:
+Test run with W25Q01NWxxIQ:
 $ flash_lock -u /dev/mtd0
 $ flash_lock -l /dev/mtd0 $bs $all_but_one # all but the first
 $ show_sectors
@@ -132,75 +132,48 @@ locked sectors
  region (in hex)   | status   | #blocks
  ------------------+----------+--------
  00000000-0000ffff | unlocked | 1
- 00010000-0fffffff |   locked | 4095
+ 00010000-07ffffff |   locked | 2047
 $ flash_lock -u /dev/mtd0 $bs 1 # all but the two first
 $ show_sectors
 locked sectors
  region (in hex)   | status   | #blocks
  ------------------+----------+--------
  00000000-0001ffff | unlocked | 2
- 00020000-0fffffff |   locked | 4094
+ 00020000-07ffffff |   locked | 2046
 $ flash_lock -u /dev/mtd0
 $ flash_lock -l /dev/mtd0 0 $all_but_one # same from the other side
 $ show_sectors
 locked sectors
  region (in hex)   | status   | #blocks
  ------------------+----------+--------
- 00000000-0ffeffff |   locked | 4095
- 0fff0000-0fffffff | unlocked | 1
-$ flash_lock -u /dev/mtd0 $(($size - (2 * $bs))) 1 # all but two
+ 00000000-07feffff |   locked | 2047
+ 07ff0000-07ffffff | unlocked | 1
+$ flash_lock -u /dev/mtd0 $(($size - (2 * $bs))) 1 # alll but two
 $ show_sectors
 locked sectors
  region (in hex)   | status   | #blocks
  ------------------+----------+--------
- 00000000-0ffdffff |   locked | 4094
- 0ffe0000-0fffffff | unlocked | 2
+ 00000000-07fdffff |   locked | 2046
+ 07fe0000-07ffffff | unlocked | 2
 ---
- drivers/mtd/spi-nor/winbond.c | 24 +++++++++++++++++++++++-
- 1 file changed, 23 insertions(+), 1 deletion(-)
+ drivers/mtd/spi-nor/winbond.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/mtd/spi-nor/winbond.c b/drivers/mtd/spi-nor/winbond.c
-index 7628fa7fb64f..2c48d6c4a0aa 100644
+index 2c48d6c4a0aa..3eca7baa4d5a 100644
 --- a/drivers/mtd/spi-nor/winbond.c
 +++ b/drivers/mtd/spi-nor/winbond.c
-@@ -73,6 +73,26 @@ static const struct spi_nor_fixups w25q256_fixups = {
- 	.post_bfpt = w25q256_post_bfpt_fixups,
- };
- 
-+static int
-+winbond_rdcr_post_bfpt_fixup(struct spi_nor *nor,
-+			     const struct sfdp_parameter_header *bfpt_header,
-+			     const struct sfdp_bfpt *bfpt)
-+{
-+	/*
-+	 * W25H02NW, unlike its W25H512NW nor W25H01NW cousins, improperly sets
-+	 * the QE BFPT configuration bits, indicating a non readable CR. This is
-+	 * both incorrect and impractical, as the chip features a CMP bit for its
-+	 * locking scheme that lays in the Control Register, and needs to be read.
-+	 */
-+	nor->flags &= ~SNOR_F_NO_READ_CR;
-+
-+	return 0;
-+}
-+
-+static const struct spi_nor_fixups winbond_rdcr_fixup = {
-+	.post_bfpt = winbond_rdcr_post_bfpt_fixup,
-+};
-+
- /**
-  * winbond_nor_select_die() - Set active die.
-  * @nor:	pointer to 'struct spi_nor'.
-@@ -370,7 +390,9 @@ static const struct flash_info winbond_nor_parts[] = {
+@@ -368,7 +368,9 @@ static const struct flash_info winbond_nor_parts[] = {
  	}, {
- 		/* W25H02NWxxAM */
- 		.id = SNOR_ID(0xef, 0xa0, 0x22),
+ 		/* W25Q01NWxxIQ */
+ 		.id = SNOR_ID(0xef, 0x60, 0x21),
 -		.flags = SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB | SPI_NOR_TB_SR_BIT6 | SPI_NOR_4BIT_BP,
 +		.flags = SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB | SPI_NOR_TB_SR_BIT6 |
 +			 SPI_NOR_4BIT_BP | SPI_NOR_HAS_CMP,
 +		.fixups = &winbond_rdcr_fixup,
- 	},
- };
- 
+ 	}, {
+ 		/* W25Q01NWxxIM */
+ 		.id = SNOR_ID(0xef, 0x80, 0x21),
 
 -- 
 2.53.0
