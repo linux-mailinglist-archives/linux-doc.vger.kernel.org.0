@@ -1,308 +1,117 @@
-Return-Path: <linux-doc+bounces-89658-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89659-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iHMROYPxFWp7fQcAu9opvQ
-	(envelope-from <linux-doc+bounces-89658-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 21:16:19 +0200
+	id IOEGLxTzFWqzfwcAu9opvQ
+	(envelope-from <linux-doc+bounces-89659-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 21:23:00 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id F0E8F5DBE19
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 21:16:18 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 191455DBF12
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 21:22:59 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 84E24301EB7D
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 19:15:41 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id B3E89300EF4B
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 19:18:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2F0DF2F8BC3;
-	Tue, 26 May 2026 19:15:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CAEC130C63A;
+	Tue, 26 May 2026 19:18:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="Fbhlw8Pe"
+	dkim=pass (2048-bit key) header.d=tipi-net.de header.i=@tipi-net.de header.b="PSR5klBt"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+Received: from mail.tipi-net.de (mail.tipi-net.de [194.13.80.246])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 620F5318B9D;
-	Tue, 26 May 2026 19:15:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E3E822DEA9D;
+	Tue, 26 May 2026 19:18:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=194.13.80.246
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779822941; cv=none; b=jkTnLr3hP0h807ISNQaUngzO7mxEw/oEJNgbK27ONUJr3OSYxg47eHt4g0Lj4/r/Pv2dAyLecHaUAmaY+PkCr2TysTdZjutlPF7fWGy9shGBGl1mXtYfD+5u15OlXK4fRggFNi77/Hms5JR9KVFO3Iy3iPzy5jNQEcsKK3a8g8I=
+	t=1779823129; cv=none; b=tVlx+Ct5+8esMcPP9VQd+NUwWedbRjvVqhwBjoXrOxpE9l5lRqUNqmm1qSkD5wXJYdBZJx/Bk1LOoyRI5LL4mnzaLlRZehLSxjqj0Mv7UAnAolg+S3MkxNCQRdJH+AZLVpRsS2xPl1AmpGb1s2LLY/m/MJ7un/XT3PGYIKv6sfU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779822941; c=relaxed/simple;
-	bh=lTrTM+deYxbAbF+eoWHTg/aQtUYUYzTNuDRA0MrLEAg=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=rvu9ik/ZI6M/7AQIoGj6DKSy8xbROrkEOMfxYpCG3E7dITByiCU6h9cQ3NpFnv4MJ70fFD58goKTyWpJo6QGfK1FfMrQeilFO6IMrKw7H3RM36rm83MDUrD0K0+sV9o5nW1sZS2R+CP1iDakRQjEahhPyNGwwHg0Gduiz6zsohY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=Fbhlw8Pe; arc=none smtp.client-ip=45.79.88.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 04AC240E30
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1779822933; bh=dB5eVTfF0zRDfVbnx1RL/rZVOm/m3B8TjzZiFdbIjUo=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=Fbhlw8Peae/8Hn0G1NPZxsR98yGpJoEnjnunxVRipUa/p8k2DOYXmReUgyriFlR9a
-	 PBNYfMv2jxeK2gZpaj1+L2TBav0nie5ztMvDq9yzLGzsrlcGRANFjUpqYTmIWOFAJQ
-	 ZIsrq+c6yhG/vdCOwxT3+rxOU2Tb9ykSaYe3Zskmz68qZNfsc1dftEyBIWfNGd6By5
-	 FxcIq1KClJquic948orLD+YRpnIs/DaTg6h5/prZ9bhv8LbDgV37+tQnuX6GvGELZ1
-	 8vYd4KZ7QkBJWo7kqBIIc/NNG/y8FZf+FbJq4b82Hlwmu7RG4hv0d2tC67xYFAHxjC
-	 fb4gsW/t4m7mg==
-Received: from localhost (unknown [IPv6:2601:280:4600:27b:67c:16ff:fe81:5f9b])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 04AC240E30;
-	Tue, 26 May 2026 19:15:33 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: Leonardo Bras <leobras.c@gmail.com>, Shuah Khan
- <skhan@linuxfoundation.org>, Leonardo Bras <leobras.c@gmail.com>, Peter
- Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>, Will
- Deacon <will@kernel.org>, Boqun Feng <boqun@kernel.org>, Waiman Long
- <longman@redhat.com>, Andrew Morton <akpm@linux-foundation.org>, David
- Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>, "Liam R.
- Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>, Mike
- Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, Michal
- Hocko <mhocko@suse.com>, Jann Horn <jannh@google.com>, Pedro Falcato
- <pfalcato@suse.de>, Brendan Jackman <jackmanb@google.com>, Johannes Weiner
- <hannes@cmpxchg.org>, Zi Yan <ziy@nvidia.com>, Harry Yoo
- <harry@kernel.org>, Hao Li <hao.li@linux.dev>, Christoph Lameter
- <cl@gentwo.org>, David Rientjes <rientjes@google.com>, Roman Gushchin
- <roman.gushchin@linux.dev>, Chris Li <chrisl@kernel.org>, Kairui Song
- <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>, Nhat Pham
- <nphamcs@gmail.com>, Baoquan He <bhe@redhat.com>, Barry Song
- <baohua@kernel.org>, Youngjun Park <youngjun.park@lge.com>, Qi Zheng
- <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, Axel
- Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>,
- Wei Xu <weixugc@google.com>, "Borislav Petkov (AMD)" <bp@alien8.de>, Randy
- Dunlap <rdunlap@infradead.org>, Feng Tang <feng.tang@linux.alibaba.com>,
- Dapeng Mi <dapeng1.mi@linux.intel.com>, Kees Cook <kees@kernel.org>, Marco
- Elver <elver@google.com>, Jakub Kicinski <kuba@kernel.org>, Li RongQing
- <lirongqing@baidu.com>, Eric Biggers <ebiggers@kernel.org>, "Paul E.
- McKenney" <paulmck@kernel.org>, Nathan Chancellor <nathan@kernel.org>,
- Nicolas Schier <nsc@kernel.org>, Miguel Ojeda <ojeda@kernel.org>, Thomas
- =?utf-8?Q?Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>, Thomas
- Gleixner
- <tglx@kernel.org>, Douglas Anderson <dianders@chromium.org>, Gary Guo
- <gary@garyguo.net>, Christian Brauner <brauner@kernel.org>, Pasha Tatashin
- <pasha.tatashin@soleen.com>, Coiby Xu <coxu@redhat.com>, Masahiro Yamada
- <masahiroy@kernel.org>, Frederic Weisbecker <frederic@kernel.org>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-mm@kvack.org, linux-rt-devel@lists.linux.dev, Marcelo Tosatti
- <mtosatti@redhat.com>
-Subject: Re: [PATCH v4 1/4] Introducing pw_lock() and per-cpu queue & flush
- work
-In-Reply-To: <20260519012754.240804-2-leobras.c@gmail.com>
-References: <20260519012754.240804-1-leobras.c@gmail.com>
- <20260519012754.240804-2-leobras.c@gmail.com>
-Date: Tue, 26 May 2026 13:15:32 -0600
-Message-ID: <87tsruvv6z.fsf@trenco.lwn.net>
+	s=arc-20240116; t=1779823129; c=relaxed/simple;
+	bh=DPzEq/k7wVWOHTlo4Pxl9AqCG45nMJgtiiYCVf0Wg+4=;
+	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
+	 Message-ID:Content-Type; b=AgcfnKDqoFsaidCs/ofXolmMArJj9YJ2wtUV9C+uEa3fVRv4uWaTki3AvzUyewHH5gBOR6/tYhnHPJBblsTN0Lxr9dBC3WCghz/0DCwGCsAbFSLgk8xw1zSWtEzEnMK3rGTLay8e1p2qBjvqMreUIjgrRix/DZKJhfZSgam7kI0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=tipi-net.de; spf=pass smtp.mailfrom=tipi-net.de; dkim=pass (2048-bit key) header.d=tipi-net.de header.i=@tipi-net.de header.b=PSR5klBt; arc=none smtp.client-ip=194.13.80.246
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=tipi-net.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=tipi-net.de
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 795CEA0334;
+	Tue, 26 May 2026 21:18:32 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tipi-net.de; s=dkim;
+	t=1779823116; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:in-reply-to:references;
+	bh=HE0ZDb6xqkrgqysSs06Kqa0Shl7aUAqROC1SPIUzU/o=;
+	b=PSR5klBt6XkghM+vxJoRLzp54noTGXCoOVtFaUunPlAKYt9wki5W+DNmFRZXWulOmc5EK1
+	dnlOqvlY1QxT9A/n7ALTrzk4Kx8qB2tkdpuW7EiHwBiJIudd74C+Z5Je9gJKvVWba/9Iq8
+	MKhM1lmdESU7oVr1Qo+SZ8IX6Cv8ZWg0aEsGOqduUC8MMzQXk2SaAg+kC23FcZJM4n2hrr
+	ARlE8xmAOeQxIHp6KnctLgZoeogCtHllcoTbB3TFzDjgG7jgArlFz44W2OW5zKGlfFdx4y
+	DOFnzzqvdlFKX78J/cAScUhqRmhPLKnKRdNug/4MOwGcHKrMWGXXJfEXI8hBMg==
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Date: Tue, 26 May 2026 21:18:32 +0200
+From: Nicolai Buchwitz <nb@tipi-net.de>
+To: Jakub Kicinski <kuba@kernel.org>
+Cc: davem@davemloft.net, netdev@vger.kernel.org, edumazet@google.com,
+ pabeni@redhat.com, andrew+netdev@lunn.ch, horms@kernel.org, corbet@lwn.net,
+ tariqt@nvidia.com, dtatulea@nvidia.com, linux-doc@vger.kernel.org,
+ hawk@kernel.org, ilias.apalodimas@linaro.org
+Subject: Re: [PATCH net-next 1/4] docs: net: page_pool: drop reference to
+ removed PP_FLAG_PAGE_FRAG
+In-Reply-To: <20260526155722.2790742-2-kuba@kernel.org>
+References: <20260526155722.2790742-1-kuba@kernel.org>
+ <20260526155722.2790742-2-kuba@kernel.org>
+Message-ID: <83168a37b8dc09413f5560d4c2715a37@tipi-net.de>
+X-Sender: nb@tipi-net.de
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
+	R_DKIM_ALLOW(-0.20)[tipi-net.de:s=dkim];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-89658-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[gmail.com,linuxfoundation.org,infradead.org,redhat.com,kernel.org,linux-foundation.org,google.com,suse.com,suse.de,cmpxchg.org,nvidia.com,linux.dev,gentwo.org,tencent.com,huaweicloud.com,lge.com,alien8.de,linux.alibaba.com,linux.intel.com,baidu.com,linutronix.de,chromium.org,garyguo.net,soleen.com];
+	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	DMARC_NA(0.00)[tipi-net.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[lwn.net:+];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	MISSING_XM_UA(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[65];
-	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-89659-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.900];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.988];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[nb@tipi-net.de,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[tipi-net.de:+];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: F0E8F5DBE19
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: 191455DBF12
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Leonardo Bras <leobras.c@gmail.com> writes:
-
-> Some places in the kernel implement a parallel programming strategy
-> consisting on local_locks() for most of the work, and some rare remote
-> operations are scheduled on target cpu. This keeps cache bouncing low since
-> cacheline tends to be mostly local, and avoids the cost of locks in non-RT
-> kernels, even though the very few remote operations will be expensive due
-> to scheduling overhead.
-
-A couple of documentation-related nits:
-
+On 26.5.2026 17:57, Jakub Kicinski wrote:
+> The flag was removed in commit 09d96ee5674a ("page_pool: remove
+> PP_FLAG_PAGE_FRAG"), but the documentation still mentions it when
+> describing fragment usage. Drop the stale reference; the fragment
+> API does not require any opt-in flag.
+> 
+> Signed-off-by: Jakub Kicinski <kuba@kernel.org>
 > ---
->  MAINTAINERS                                   |   7 +
->  .../admin-guide/kernel-parameters.txt         |  10 +
->  Documentation/locking/pwlocks.rst             |  76 +++++
 
-You have added a new RST file here, but haven't added it to the table of
-contents in index.rst.  So it won't be part of the docs build.
+> [...]
 
->  init/Kconfig                                  |  35 +++
->  kernel/Makefile                               |   2 +
->  include/linux/pwlocks.h                       | 265 ++++++++++++++++++
->  kernel/pwlocks.c                              |  47 ++++
->  7 files changed, 442 insertions(+)
->  create mode 100644 Documentation/locking/pwlocks.rst
->  create mode 100644 include/linux/pwlocks.h
->  create mode 100644 kernel/pwlocks.c
-
-[...]
-
-> diff --git a/Documentation/locking/pwlocks.rst b/Documentation/locking/pwlocks.rst
-> new file mode 100644
-> index 000000000000..09f4a5417bc1
-> --- /dev/null
-> +++ b/Documentation/locking/pwlocks.rst
-> @@ -0,0 +1,76 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +
-> +=========
-> +PW (Per-CPU Work) locks
-> +=========
-
-The over/underlines should match the text in length.
-
-> +Some places in the kernel implement a parallel programming strategy
-> +consisting on local_locks() for most of the work, and some rare remote
-> +operations are scheduled on target cpu. This keeps cache bouncing low since
-> +cacheline tends to be mostly local, and avoids the cost of locks in non-RT
-> +kernels, even though the very few remote operations will be expensive due
-> +to scheduling overhead.
-> +
-> +On the other hand, for RT workloads this can represent a problem:
-> +scheduling work on remote cpu that are executing low latency tasks
-> +is undesired and can introduce unexpected deadline misses.
-> +
-> +PW locks help to convert sites that use local_locks (for cpu local operations)
-> +and queue_work_on (for queueing work remotely, to be executed
-> +locally on the owner cpu of the lock) to a spinlocks.
-> +
-> +The lock is declared pw_lock_t type.
-> +The lock is initialized with pw_lock_init.
-> +The lock is locked with pw_lock (takes a lock and cpu as a parameter).
-> +The lock is unlocked with pw_unlock (takes a lock and cpu as a parameter).
-
-Did you want that to be an itemized list?  If so, put "- " in front of
-each line.
-
-> +The pw_lock_irqsave function disables interrupts and saves current interrupt state,
-> +cpu as a parameter.
-> +
-> +For trylock variant, there is the pw_trylock_t type, initialized with
-> +pw_trylock_init. Then the corresponding pw_trylock and pw_trylock_irqsave.
-> +
-> +work_struct should be replaced by pw_struct, which contains a cpu parameter
-> +(owner cpu of the lock), initialized by INIT_PW.
-> +
-> +The queue work related functions (analogous to queue_work_on and flush_work) are:
-> +pw_queue_on and pw_flush.
-> +
-> +The behaviour of the PW lock functions is as follows:
-> +
-> +* !CONFIG_PWLOCKS (or CONFIG_PWLOCKS and pwlocks=off kernel boot parameter):
-> +        - pw_lock:			local_lock
-> +        - pw_lock_irqsave:		local_lock_irqsave
-> +        - pw_trylock:			local_trylock
-> +        - pw_trylock_irqsave:		local_trylock_irqsave
-> +        - pw_unlock:			local_unlock
-> +        - pw_lock_local:		local_lock
-> +        - pw_trylock_local:		local_trylock
-> +        - pw_unlock_local:		local_unlock
-> +        - pw_queue_on:         		queue_work_on
-> +        - pw_flush:	            	flush_work
-
-This will not render the way you expect it to.  You want a literal block
-ere.  So end the text with "...is as follows::"  and indent the entire
-literal block.
-
-> +* CONFIG_PWLOCKS (and CONFIG_PWLOCKS_DEFAULT=y or pwlocks=on kernel boot parameter),
-> +        - pw_lock:			spin_lock
-> +        - pw_lock_irqsave:		spin_lock_irqsave
-> +        - pw_trylock:			spin_trylock
-> +        - pw_trylock_irqsave:		spin_trylock_irqsave
-> +        - pw_unlock:			spin_unlock
-> +        - pw_lock_local:		preempt_disable OR migrate_disable + spin_lock
-> +        - pw_trylock_local:		preempt_disable OR migrate_disable + spin_trylock
-> +        - pw_unlock_local:		preempt_enable OR migrate_enable + spin_unlock
-> +        - pw_queue_on:         		executes work function on caller cpu
-> +        - pw_flush:            		empty
-> +
-> +pw_get_cpu(work_struct), to be called from within per-cpu work function,
-> +returns the target cpu.
-> +
-> +On the locking functions above, there are the local locking functions
-> +(pw_lock_local, pw_trylock_local and pw_unlock_local) that must only
-
-If you write functions like pw_lock_local(), you'll get automatic cross
-links to the kerneldoc documentation ... which I'm sure must exist ...
-
-> +be used to access per-CPU data from the CPU that owns that data,
-> +and never remotely. They disable preemption/migration and don't require
-> +a cpu parameter, making them a replacement for local_lock functions that
-> +does not introduce overhead.
-> +
-> +These should only be used when accessing per-CPU data of the local CPU.
-> +
-
-[...]
-
-> +#else /* CONFIG_PWLOCKS */
-> +
-> +DECLARE_STATIC_KEY_MAYBE(CONFIG_PWLOCKS_DEFAULT, pw_sl);
-> +
-> +typedef union {
-> +	spinlock_t sl;
-> +	local_lock_t ll;
-> +} pw_lock_t;
-> +
-> +typedef union {
-> +	spinlock_t sl;
-> +	local_trylock_t ll;
-> +} pw_trylock_t;
-> +
-> +struct pw_struct {
-> +	struct work_struct work;
-> +	int cpu;
-> +};
-> +
-> +#ifdef CONFIG_PREEMPT_RT
-> +#define preempt_or_migrate_disable migrate_disable
-> +#define preempt_or_migrate_enable migrate_enable
-> +#else
-> +#define preempt_or_migrate_disable preempt_disable
-> +#define preempt_or_migrate_enable preempt_enable
-> +#endif
-> +
-> +#define pw_lock_init(lock)							\
-> +do {										\
-> +	if (static_branch_maybe(CONFIG_PWLOCKS_DEFAULT, &pw_sl))		\
-> +		spin_lock_init(lock.sl);					\
-> +	else									\
-> +		local_lock_init(lock.ll);					\
-> +} while (0)
-
-Sigh, I guess I was over-optimistic about kerneldoc comments.
-
-Is there a reason why these aren't inline functions?
-
-Thanks,
-
-jon
+Reviewed-by: Nicolai Buchwitz <nb@tipi-net.de>
 
