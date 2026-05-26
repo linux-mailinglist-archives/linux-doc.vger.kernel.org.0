@@ -1,480 +1,195 @@
-Return-Path: <linux-doc+bounces-89439-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89443-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0E8LEQEbFWrkSgcAu9opvQ
-	(envelope-from <linux-doc+bounces-89439-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 06:01:05 +0200
+	id oDwfBBQxFWouTgcAu9opvQ
+	(envelope-from <linux-doc+bounces-89443-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 07:35:16 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 902F95D089A
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 06:01:04 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id C4DC45D0E00
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 07:35:15 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 379CE3071D9D
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 03:55:35 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 92F6A3001BC5
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 05:35:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1BE6F3BB139;
-	Tue, 26 May 2026 03:55:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 00F6D358372;
+	Tue, 26 May 2026 05:35:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NZeGcnLF"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out28-74.mail.aliyun.com (out28-74.mail.aliyun.com [115.124.28.74])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A6083BB121;
-	Tue, 26 May 2026 03:55:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.124.28.74
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A0FCA288C2D;
+	Tue, 26 May 2026 05:35:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779767726; cv=none; b=sxgRlIAi1Q2+tv1cnAqC3xFSjtQXskVSgoapcQlFwyETBBzXDxBuzxA4qrgW4Hj+zXd/yjAVA5iWQm3+hfwK5mIQjnXBDYY3156QE9fvzyY30F0W/qYg5UcMkfqah/wgPkhzlW9hQnLiK6Wf2OZCHQc77igLNBmay9TDXpT+WP8=
+	t=1779773710; cv=none; b=rH++ALKnQGMx90/t9l7+wEq99Q1QMgvsRLSp0SnWzfUPJeLYqFneJ7EAKN0JMqhU9IUu9tI1F9lCDGta2VTbaTHXogycSuK6pVfC+wFvZv7pi5iU55sGA4pIJWqRzJDgfuhgoXEfMnxRm7nFsX6HlckelQK3QPpNsKNBSGxplt0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779767726; c=relaxed/simple;
-	bh=q04LCfxibnc4ys/JWTf8b/7t5auf1fg/vUVw+GLGJac=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Ac79Y8VzPxw+ATHR5aKPjF3ft87xHx+ZCCU5yWmHxjRVCU8UpCcz00PDNy128or+TXpoPhBAEk8cNqzXWrAgKycAs8pgfB1SrGGPVNes79jxzkNJrnvfVO0n1lHwaiRNaDGHoXXJ1jPPyQQnq+FH5fFCPSrxHSM7Ejyl9H6hG10=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=nebula-matrix.com; spf=pass smtp.mailfrom=nebula-matrix.com; arc=none smtp.client-ip=115.124.28.74
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=nebula-matrix.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nebula-matrix.com
-X-Alimail-AntiSpam:AC=CONTINUE;BC=0.06712908|-1;CH=green;DM=|CONTINUE|false|;DS=CONTINUE|ham_alarm|0.0160118-0.00258281-0.981405;FP=16867630513087205026|1|1|1|0|-1|-1|-1;HT=maildocker-contentspam033037021217;MF=illusion.wang@nebula-matrix.com;NM=1;PH=DS;RN=18;RT=18;SR=0;TI=SMTPD_---.hgpPbOo_1779767709;
-Received: from localhost.localdomain(mailfrom:illusion.wang@nebula-matrix.com fp:SMTPD_---.hgpPbOo_1779767709 cluster:ay29)
-          by smtp.aliyun-inc.com;
-          Tue, 26 May 2026 11:55:10 +0800
-From: "illusion.wang" <illusion.wang@nebula-matrix.com>
-To: dimon.zhao@nebula-matrix.com,
-	illusion.wang@nebula-matrix.com,
-	alvin.wang@nebula-matrix.com,
-	sam.chen@nebula-matrix.com,
-	netdev@vger.kernel.org
-Cc: andrew+netdev@lunn.ch,
-	corbet@lwn.net,
-	kuba@kernel.org,
-	horms@kernel.org,
-	linux-doc@vger.kernel.org,
-	pabeni@redhat.com,
-	vadim.fedorenko@linux.dev,
-	lukas.bulwahn@redhat.com,
-	edumazet@google.com,
-	enelsonmoore@gmail.com,
-	skhan@linuxfoundation.org,
-	hkallweit1@gmail.com,
-	linux-kernel@vger.kernel.org (open list)
-Subject: [PATCH v16 net-next 11/11] net/nebula-matrix: add common dev start/stop operation
-Date: Tue, 26 May 2026 11:54:48 +0800
-Message-ID: <20260526035453.2359-12-illusion.wang@nebula-matrix.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260526035453.2359-1-illusion.wang@nebula-matrix.com>
-References: <20260526035453.2359-1-illusion.wang@nebula-matrix.com>
+	s=arc-20240116; t=1779773710; c=relaxed/simple;
+	bh=BCZ2U2fo+yH+zZPLh+gZxROwJlkA/+J2mSkfKof/QbA=;
+	h=Date:From:To:CC:Subject:In-Reply-To:References:Message-ID:
+	 MIME-Version:Content-Type; b=HDFyGNJGpLHcb/TASFwjB9V7zn8b0mIVfoPlJSFrlLFT9lXuAusAmkeCIQ6yeANJsBw5YeXoyBN9B62zSqIBW4rot7/wf/sjR6EU6T1qAW52dAtHmdwqyIzwRT5i2JcKvPtplweKRD87sCGviPU45SvTr6p02sIGHwnBNBPbqmo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NZeGcnLF; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7A5A91F000E9;
+	Tue, 26 May 2026 05:35:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1779773709;
+	bh=BZeCFiWwomXsNSoC7p5OXyKFyX+acoYY9otOOgn2FJ0=;
+	h=Date:From:To:CC:Subject:In-Reply-To:References;
+	b=NZeGcnLFvKxmYXoy9mb+eGDs/eV9D6KkS6d2B7ZuB8Anx/O02L34gwFNZdAVS71TX
+	 XTW1hnNcj4J56+d7gK8TB9YH6l/C2obr78iLkmzLBdm0wvMkFaF88R2eT2WIRmqkIH
+	 Xxfgpsii4SR9c7k4uKh/acFZ0FQT7oVENeg3/o20veqXPIXIjA40GlDtDwfF/CViA3
+	 65vPTnSawSXL6e0de5d/ANoutOuSivQPH8qOinWjntbcmMME5qw2ypDrCjkztDcRZe
+	 jNEauHN4jBCD9pMPe/6PJVK7BQokskE24Mw5S5Du2jOCsXDiWOpAWZP/bE3/dcxGfy
+	 2IP02AT77tIcA==
+Date: Tue, 26 May 2026 07:35:06 +0200
+From: Niklas Cassel <cassel@kernel.org>
+To: Koichiro Den <den@valinux.co.jp>
+CC: Manivannan Sadhasivam <mani@kernel.org>, Frank Li <Frank.Li@kernel.org>,
+ =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+ Kishon Vijay Abraham I <kishon@kernel.org>,
+ Bjorn Helgaas <bhelgaas@google.com>, Jonathan Corbet <corbet@lwn.net>,
+ Shuah Khan <skhan@linuxfoundation.org>, Vinod Koul <vkoul@kernel.org>,
+ Arnd Bergmann <arnd@arndb.de>, Damien Le Moal <dlemoal@kernel.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>,
+ linux-pci@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v2_0/3=5D_PCI=3A_endpoint=3A_Add?=
+ =?US-ASCII?Q?_PCI_DMA_endpoint_function_=28part_3/3=29?=
+User-Agent: Thunderbird for Android
+In-Reply-To: <ll76isrjb62ieiz4vhn3u3upp46vnzed3slpqxnni5hymsc4mw@avbx7k473uo4>
+References: <20260525063456.3317509-1-den@valinux.co.jp> <xnfnxv64hpil6if4ikyohxnarvsekbmjcc37k5zej264ix46z3@qtu6xj2uy3xi> <ahQJ4kuaBKMhj52L@ryzen> <3dkicfydmrlm2i6ks34kwjdmlvb22ryftkfw2yj62o4rtj5xvl@f4gby5vlwtdf> <F31848F5-5481-4402-9B45-9EC7BCC8B0B6@kernel.org> <ll76isrjb62ieiz4vhn3u3upp46vnzed3slpqxnni5hymsc4mw@avbx7k473uo4>
+Message-ID: <F8664D81-EABE-4E36-B0C9-2B0C7FA36DC0@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [1.54 / 15.00];
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Spamd-Result: default: False [0.55 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
+	SUBJ_EXCESS_QP(1.20)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
+	XM_UA_NO_VERSION(0.01)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-89439-lists,linux-doc=lfdr.de];
-	DMARC_NA(0.00)[nebula-matrix.com];
-	TO_DN_NONE(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_FROM(0.00)[bounces-89443-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[17];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[lunn.ch,lwn.net,kernel.org,vger.kernel.org,redhat.com,linux.dev,google.com,gmail.com,linuxfoundation.org];
+	RCVD_COUNT_THREE(0.00)[4];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.738];
 	PRECEDENCE_BULK(0.00)[];
-	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.899];
-	FROM_NEQ_ENVFROM(0.00)[illusion.wang@nebula-matrix.com,linux-doc@vger.kernel.org];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[illusion.wang:url,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,nebula-matrix.com:mid,nebula-matrix.com:email,pci:email]
-X-Rspamd-Queue-Id: 902F95D089A
+	FROM_NEQ_ENVFROM(0.00)[cassel@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,renesas];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: C4DC45D0E00
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-This patch wires up nbl_dev_start() and nbl_dev_stop() to configure
-the MSI-X map, allocate vectors, and request/enable the mailbox IRQ.
-It also replaces module_pci_driver() with explicit init/exit functions
-that additionally create and destroy the driver's workqueue via
-nbl_common_create_wq() / nbl_common_destroy_wq(), which is needed
-because the new IRQ handler schedules work through
-nbl_common_queue_work().
+Hello Koichiro,
 
-Signed-off-by: illusion.wang <illusion.wang@nebula-matrix.com>
----
- .../nebula-matrix/nbl/nbl_common/nbl_common.c |  36 +++
- .../nebula-matrix/nbl/nbl_core/nbl_dev.c      | 220 ++++++++++++++++++
- .../nbl/nbl_include/nbl_def_common.h          |   4 +
- .../net/ethernet/nebula-matrix/nbl/nbl_main.c |  31 ++-
- 4 files changed, 290 insertions(+), 1 deletion(-)
+On 26 May 2026 04:04:07 CEST, Koichiro Den <den@valinux=2Eco=2Ejp> wrote:
+>On Mon, May 25, 2026 at 10:32:06PM +0200, Niklas Cassel wrote:
+>> On 25 May 2026 16:03:35 CEST, Koichiro Den <den@valinux=2Eco=2Ejp> wrot=
+e:
+>> >On Mon, May 25, 2026 at 10:35:46AM +0200, Niklas Cassel wrote:
+>> >> On Mon, May 25, 2026 at 04:05:02PM +0900, Koichiro Den wrote:
+>> >>=20
+>> >That restriction should be documented with the new NTB transport, whic=
+h I will
+>> >submit if the direction taken by this series is acceptable=2E
+>>=20
+>> This is easy for me to say, since I am not the NTB maintainer, but it w=
+ould be nice if we could somehow come up with a design where we don't only =
+support EPCs that have 'max-functions' !=3D 1, because IIRC, most PCI EPCs =
+have 'max-functions' =3D=3D 1=2E
+>
+>Yes, that's fair point=2E As a quick check on v7=2E1-rc5, among DWC-based=
+ EP nodes,
+>only 6 out of 45 set max-functions > 1 (about 13%)=2E Assuming there are =
+no cases
+>where the hardware supports more functions than the DT advertises, that m=
+eans only
+>about 13% of DWC-based EP instances described in DT could support the "NT=
+B
+>transport backed by PCI EP DMA" use case=2E If I also count non-DWC EP no=
+des, I
+>get 15 out of 64 (about 23%)=2E
 
-diff --git a/drivers/net/ethernet/nebula-matrix/nbl/nbl_common/nbl_common.c b/drivers/net/ethernet/nebula-matrix/nbl/nbl_common/nbl_common.c
-index 11b1948658d9..9482bcdc46bc 100644
---- a/drivers/net/ethernet/nebula-matrix/nbl/nbl_common/nbl_common.c
-+++ b/drivers/net/ethernet/nebula-matrix/nbl/nbl_common/nbl_common.c
-@@ -6,6 +6,42 @@
- #include <linux/device.h>
- #include "nbl_common.h"
- 
-+static struct nbl_common_wq_mgt *wq_mgt;
-+
-+void nbl_common_queue_work(struct work_struct *task)
-+{
-+	queue_work(wq_mgt->ctrl_dev_wq, task);
-+}
-+
-+void nbl_common_destroy_wq(void)
-+{
-+	if (!wq_mgt)
-+		return;
-+	destroy_workqueue(wq_mgt->ctrl_dev_wq);
-+	kfree(wq_mgt);
-+	wq_mgt = NULL;
-+}
-+
-+int nbl_common_create_wq(void)
-+{
-+	wq_mgt = kzalloc_obj(*wq_mgt);
-+	if (!wq_mgt)
-+		return -ENOMEM;
-+
-+	wq_mgt->ctrl_dev_wq = alloc_workqueue("%s", WQ_MEM_RECLAIM | WQ_UNBOUND,
-+					      0, "nbl_ctrldev_wq");
-+	if (!wq_mgt->ctrl_dev_wq) {
-+		pr_err("Failed to create workqueue nbl_ctrldev_wq\n");
-+		goto alloc_ctrl_dev_wq_failed;
-+	}
-+
-+	return 0;
-+alloc_ctrl_dev_wq_failed:
-+	kfree(wq_mgt);
-+	wq_mgt = NULL;
-+	return -ENOMEM;
-+}
-+
- u32 nbl_common_pf_id_subtraction_mgtpf_id(struct nbl_common_info *common,
- 					  u32 pf_id)
- {
-diff --git a/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c b/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c
-index 44fd1605380e..7afde0265199 100644
---- a/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c
-+++ b/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c
-@@ -6,6 +6,17 @@
- #include <linux/pci.h>
- #include "nbl_dev.h"
- 
-+static void nbl_dev_clean_mailbox_schedule(struct nbl_dev_mgt *dev_mgt);
-+
-+/* ----------  Interrupt config  ---------- */
-+static irqreturn_t nbl_dev_clean_mailbox(int __always_unused irq, void *data)
-+{
-+	struct nbl_dev_mgt *dev_mgt = (struct nbl_dev_mgt *)data;
-+
-+	nbl_dev_clean_mailbox_schedule(dev_mgt);
-+	return IRQ_HANDLED;
-+}
-+
- static void nbl_dev_init_msix_cnt(struct nbl_dev_mgt *dev_mgt)
- {
- 	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-@@ -14,6 +25,173 @@ static void nbl_dev_init_msix_cnt(struct nbl_dev_mgt *dev_mgt)
- 	msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num = 1;
- }
- 
-+static int nbl_dev_request_mailbox_irq(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	struct nbl_common_info *common = dev_mgt->common;
-+	u16 local_vec_id;
-+	int irq_num;
-+	int err;
-+
-+	if (!msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num)
-+		return 0;
-+
-+	local_vec_id =
-+		msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].base_vector_id;
-+	irq_num = pci_irq_vector(common->pdev, local_vec_id);
-+	if (irq_num < 0) {
-+		dev_err(common->dev, "Failed to get mailbox IRQ vector: %d\n",
-+			irq_num);
-+		return irq_num;
-+	}
-+
-+	snprintf(dev_common->mailbox_name, sizeof(dev_common->mailbox_name),
-+		 "nbl_mailbox@pci:%s", pci_name(common->pdev));
-+	err = request_irq(irq_num, nbl_dev_clean_mailbox, 0,
-+			  dev_common->mailbox_name, dev_mgt);
-+	if (err)
-+		return err;
-+
-+	return 0;
-+}
-+
-+static void nbl_dev_free_mailbox_irq(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	struct nbl_common_info *common = dev_mgt->common;
-+	u16 local_vec_id;
-+	int irq_num;
-+
-+	if (!msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num)
-+		return;
-+
-+	local_vec_id =
-+		msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].base_vector_id;
-+	irq_num = pci_irq_vector(common->pdev, local_vec_id);
-+	if (irq_num >= 0)
-+		free_irq(irq_num, dev_mgt);
-+}
-+
-+static int nbl_dev_enable_mailbox_irq(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dispatch_ops *disp_ops = dev_mgt->disp_ops_tbl->ops;
-+	struct nbl_channel_ops *chan_ops = dev_mgt->chan_ops_tbl->ops;
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	u16 local_vec_id;
-+
-+	if (!msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num)
-+		return 0;
-+
-+	local_vec_id =
-+		msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].base_vector_id;
-+	chan_ops->set_queue_state(dev_mgt->chan_ops_tbl->priv,
-+				  NBL_CHAN_INTERRUPT_READY,
-+				  NBL_CHAN_TYPE_MAILBOX, true);
-+
-+	return disp_ops->set_mailbox_irq(dev_mgt->disp_ops_tbl->priv,
-+					    local_vec_id, true);
-+}
-+
-+static int nbl_dev_disable_mailbox_irq(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dispatch_ops *disp_ops = dev_mgt->disp_ops_tbl->ops;
-+	struct nbl_channel_ops *chan_ops = dev_mgt->chan_ops_tbl->ops;
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	u16 local_vec_id;
-+
-+	if (!msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num)
-+		return 0;
-+
-+	local_vec_id =
-+		msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].base_vector_id;
-+	chan_ops->set_queue_state(dev_mgt->chan_ops_tbl->priv,
-+				  NBL_CHAN_INTERRUPT_READY,
-+				  NBL_CHAN_TYPE_MAILBOX, false);
-+
-+	return disp_ops->set_mailbox_irq(dev_mgt->disp_ops_tbl->priv,
-+					    local_vec_id, false);
-+}
-+
-+static int nbl_dev_configure_msix_map(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dispatch_ops *disp_ops = dev_mgt->disp_ops_tbl->ops;
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	bool mask_en = msix_info->serv_info[NBL_MSIX_NET_TYPE].hw_self_mask_en;
-+	u16 msix_net_num = msix_info->serv_info[NBL_MSIX_NET_TYPE].num;
-+	u16 msix_not_net_num = 0;
-+	int err, i;
-+
-+	msix_info->serv_info[NBL_MSIX_VIRTIO_TYPE].base_vector_id = 0;
-+	for (i = NBL_MSIX_NET_TYPE; i < NBL_MSIX_TYPE_MAX; i++)
-+		msix_info->serv_info[i].base_vector_id =
-+			msix_info->serv_info[i - 1].base_vector_id +
-+			msix_info->serv_info[i - 1].num;
-+
-+	for (i = NBL_MSIX_MAILBOX_TYPE; i < NBL_MSIX_TYPE_MAX; i++)
-+		msix_not_net_num += msix_info->serv_info[i].num;
-+
-+	err = disp_ops->configure_msix_map(dev_mgt->disp_ops_tbl->priv,
-+					   msix_net_num, msix_not_net_num,
-+					   mask_en);
-+
-+	return err;
-+}
-+
-+static int nbl_dev_destroy_msix_map(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dispatch_ops *disp_ops = dev_mgt->disp_ops_tbl->ops;
-+
-+	return disp_ops->destroy_msix_map(dev_mgt->disp_ops_tbl->priv);
-+}
-+
-+static int nbl_dev_alloc_msix_intr(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	struct nbl_common_info *common = dev_mgt->common;
-+	int needed = 0;
-+	int err;
-+	int i;
-+
-+	for (i = 0; i < NBL_MSIX_TYPE_MAX; i++)
-+		needed += msix_info->serv_info[i].num;
-+
-+	err = pci_alloc_irq_vectors(common->pdev, needed, needed,
-+				    PCI_IRQ_MSIX | PCI_IRQ_AFFINITY);
-+	if (err < 0) {
-+		dev_err(common->dev,
-+			"pci_alloc_irq_vectors failed, err = %d\n", err);
-+		return err;
-+	}
-+
-+	return 0;
-+}
-+
-+static int nbl_dev_init_interrupt_scheme(struct nbl_dev_mgt *dev_mgt)
-+{
-+	int err;
-+
-+	err = nbl_dev_alloc_msix_intr(dev_mgt);
-+	if (err) {
-+		dev_err(dev_mgt->common->dev,
-+			"Failed to enable MSI-X vectors\n");
-+		return err;
-+	}
-+	return 0;
-+}
-+
-+static void nbl_dev_clear_interrupt_scheme(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_common_info *common = dev_mgt->common;
-+
-+	pci_free_irq_vectors(common->pdev);
-+}
-+
- /* ----------  Channel config  ---------- */
- static void nbl_dev_setup_chan_qinfo(struct nbl_dev_mgt *dev_mgt, u8 chan_type)
- {
-@@ -72,6 +250,13 @@ static void nbl_dev_clean_mailbox_task(struct work_struct *work)
- 				      NBL_CHAN_TYPE_MAILBOX);
- }
- 
-+static void nbl_dev_clean_mailbox_schedule(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dev_common *common_dev = dev_mgt->common_dev;
-+
-+	nbl_common_queue_work(&common_dev->clean_mbx_task);
-+}
-+
- /* ----------  Dev init process  ---------- */
- static int nbl_dev_setup_common_dev(struct nbl_adapter *adapter)
- {
-@@ -221,9 +406,44 @@ void nbl_dev_remove(struct nbl_adapter *adapter)
- /* ----------  Dev start process  ---------- */
- int nbl_dev_start(struct nbl_adapter *adapter)
- {
-+	struct nbl_dev_mgt *dev_mgt = adapter->core.dev_mgt;
-+	struct nbl_dev_common *common_dev = dev_mgt->common_dev;
-+	int ret;
-+
-+	ret = nbl_dev_configure_msix_map(dev_mgt);
-+	if (ret)
-+		return ret;
-+
-+	ret = nbl_dev_init_interrupt_scheme(dev_mgt);
-+	if (ret)
-+		goto init_interrupt_scheme_err;
-+	ret = nbl_dev_request_mailbox_irq(dev_mgt);
-+	if (ret)
-+		goto mailbox_request_irq_err;
-+	ret = nbl_dev_enable_mailbox_irq(dev_mgt);
-+	if (ret)
-+		goto enable_mailbox_irq_err;
-+
- 	return 0;
-+enable_mailbox_irq_err:
-+	nbl_dev_disable_mailbox_irq(dev_mgt);
-+	cancel_work_sync(&common_dev->clean_mbx_task);
-+	nbl_dev_free_mailbox_irq(dev_mgt);
-+mailbox_request_irq_err:
-+	nbl_dev_clear_interrupt_scheme(dev_mgt);
-+init_interrupt_scheme_err:
-+	nbl_dev_destroy_msix_map(dev_mgt);
-+	return ret;
- }
- 
- void nbl_dev_stop(struct nbl_adapter *adapter)
- {
-+	struct nbl_dev_mgt *dev_mgt = adapter->core.dev_mgt;
-+	struct nbl_dev_common *common_dev = dev_mgt->common_dev;
-+
-+	nbl_dev_disable_mailbox_irq(dev_mgt);
-+	cancel_work_sync(&common_dev->clean_mbx_task);
-+	nbl_dev_free_mailbox_irq(dev_mgt);
-+	nbl_dev_clear_interrupt_scheme(dev_mgt);
-+	nbl_dev_destroy_msix_map(dev_mgt);
- }
-diff --git a/drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_def_common.h b/drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_def_common.h
-index 09d20d3235fe..2a35399cd1ec 100644
---- a/drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_def_common.h
-+++ b/drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_def_common.h
-@@ -62,6 +62,10 @@ struct nbl_hash_tbl_del_key {
- 	void (*action_func)(void *priv, void *key, void *data);
- };
- 
-+void nbl_common_queue_work(struct work_struct *task);
-+
-+void nbl_common_destroy_wq(void);
-+int nbl_common_create_wq(void);
- u32 nbl_common_pf_id_subtraction_mgtpf_id(struct nbl_common_info *common,
- 					  u32 pf_id);
- 
-diff --git a/drivers/net/ethernet/nebula-matrix/nbl/nbl_main.c b/drivers/net/ethernet/nebula-matrix/nbl/nbl_main.c
-index a45c0bd93540..2d60499667cb 100644
---- a/drivers/net/ethernet/nebula-matrix/nbl/nbl_main.c
-+++ b/drivers/net/ethernet/nebula-matrix/nbl/nbl_main.c
-@@ -302,7 +302,36 @@ static struct pci_driver nbl_driver = {
- 	.remove = nbl_remove,
- };
- 
--module_pci_driver(nbl_driver);
-+static int __init nbl_module_init(void)
-+{
-+	int status;
-+
-+	status = nbl_common_create_wq();
-+	if (status) {
-+		pr_err("Failed to create wq, err = %d\n", status);
-+		goto wq_create_failed;
-+	}
-+	status = pci_register_driver(&nbl_driver);
-+	if (status) {
-+		pr_err("Failed to register PCI driver, err = %d\n", status);
-+		goto pci_register_driver_failed;
-+	}
-+
-+	return 0;
-+
-+pci_register_driver_failed:
-+	nbl_common_destroy_wq();
-+wq_create_failed:
-+	return status;
-+}
-+
-+static void __exit nbl_module_exit(void)
-+{
-+	pci_unregister_driver(&nbl_driver);
-+	nbl_common_destroy_wq();
-+}
- 
-+module_init(nbl_module_init);
-+module_exit(nbl_module_exit);
- MODULE_LICENSE("GPL");
- MODULE_DESCRIPTION("Nebula Matrix Network Driver");
--- 
-2.47.3
+The only DMA "backend" added in your 3-part series is the eDMA in DWC-base=
+d controllers=2E
 
+So if all three of your series lands, then 13% of the DWC-based endpoint c=
+ontrollers can theoretically use this new feature=2E
+
+
+>
+>If supporting single-function EPCs is a requirement, then the separate PC=
+I DMA
+>EPF model is not a good choice for that NTB transport use case=2E We woul=
+d need to
+>keep the DMA delegation metadata inside the vNTB function, or use some ot=
+her
+>single-function design=2E
+>
+>That is basically option 2 from my earlier mail:
+>https://lore=2Ekernel=2Eorg/linux-pci/xnfnxv64hpil6if4ikyohxnarvsekbmjcc3=
+7k5zej264ix46z3@qtu6xj2uy3xi/
+>
+>    [snip]
+>    2=2E Treat endpoint DMA as a first-class part of vNTB=2E The RC-side =
+ntb_hw_epf
+>       would create an auxiliary device, and a new dw-edma-aux driver wou=
+ld create
+>       the delegated DMA channels on the RC side=2E
+>   =20
+>       [PATCH 00/15] PCI: endpoint: Remote DMA support via vNTB
+>       https://lore=2Ekernel=2Eorg/linux-pci/20260312165005=2E1148676-1-d=
+en@valinux=2Eco=2Ejp/
+>   =20
+>       I added an ASCII diagram for the overview as a follow-up comment h=
+ere:
+>       https://lore=2Ekernel=2Eorg/all/sn67hi7kljh7cgmgodatb3naz2astlaklq=
+fobdbxyyzgoohxqb@4nnetbhqwba4/
+>    [snip]
+>
+>Do you prefer the vNTB-integrated model over this series?
+
+My take:
+
+I do think that the design in  this series is more elegant that the vNTB-i=
+ntegrated model=2E
+
+However, if the design in this series only supports 13% of DWC-based endpo=
+int controllers, when the vNTB-integrated model can support 100% of DWC-bas=
+ed endpoint controllers=2E=2E=2E
+
+What good it is to have an elegant design if in reality, it supports drast=
+ically fewer SoCs?
+
+But please don't listen only to my opinion, Mani is the maintainer, so it =
+would be interesting to hear his thoughts as well=2E
+
+
+Kind regards,
+Niklas
 
