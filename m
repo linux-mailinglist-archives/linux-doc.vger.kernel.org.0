@@ -1,68 +1,72 @@
-Return-Path: <linux-doc+bounces-89473-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89474-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id ED1bDKd2FWrHVAcAu9opvQ
-	(envelope-from <linux-doc+bounces-89473-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 12:32:07 +0200
+	id cFH6L0Z5FWrgVQcAu9opvQ
+	(envelope-from <linux-doc+bounces-89474-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 12:43:18 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4A875D4359
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 12:32:06 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9DDCF5D4513
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 12:43:15 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 9576D3028C3F
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 10:32:05 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 727863004C40
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 10:39:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C90AD3DD856;
-	Tue, 26 May 2026 10:32:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E89843DD50E;
+	Tue, 26 May 2026 10:39:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nyN08167"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FESVv6Km"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A5042C326F;
-	Tue, 26 May 2026 10:32:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D79313DBD46;
+	Tue, 26 May 2026 10:39:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779791524; cv=none; b=LafHW5/uA6chLFeYeq4e0DOrB3IA4MjBbMFmr6dnHWXgkkWpRoIVWJgA/+hqnImA9SlkLeNqG+sr9zzdNm7NKCcpwLLCCcx9KDbq5reo2Q5FL0Fb/MJ+WjFTS0UDfGtxPkRNr5jnxZ75v64dtTJOglddJbMQMaJhPvK6cUeRNXA=
+	t=1779791953; cv=none; b=EmPYvA/zsP4BdqZRUyucqpD8SYEkNU7t7fG64/7LgCs5FVEWx3OT+bSYU0DGq0slL9GJHu4HzOAiMiygjE/EfDnvyKmSQlxCUYQsxIS2SPM6E2P69o5nj1WXQx4lwPkQ8Sa29jyLQsMokIqLEyz0tWFvahXidSU4qozCBAU6eME=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779791524; c=relaxed/simple;
-	bh=kHxjPZqCRWn5hUuh6pI7T3Lims9o5SBskDJ03Q0oHw4=;
+	s=arc-20240116; t=1779791953; c=relaxed/simple;
+	bh=Mb6jR+0huoXc9SGM7mM2JEsxyQRL6LGDl24weSuJayI=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=rnpeaM2rqmOE99B5aMpOUQT1/d9eEmZr51XEQ8jDJIDVhaevKvVPFkgb/9qy+81AtT4gjrNqkSj56cTE+LmrUFRxPGjUPjc1pHAPke+Gy7thwULz8/OJs9ZrVYkSkUuZWwehLGXAx5WwHHf8/BqAKqZ397TVWpHUd1/OLyrsWSI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nyN08167; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A44551F000E9;
-	Tue, 26 May 2026 10:32:00 +0000 (UTC)
+	 MIME-Version:Content-Type; b=jqzNGLmogdvAD82RH/t6tG/szMICddFL6gIO+mKqGrdGYKLMLvOF7Q3za6esCG7q0V80vUflpR/nxcKxSLS9F7j8kUXVlq+bSUvfLtepx50VcxOfdVKnGYeRl1yGatkN+HX4+L0nUxRIzldxX5+1PW9zPibEYvNFTyCECX1077c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FESVv6Km; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E61761F000E9;
+	Tue, 26 May 2026 10:39:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1779791523;
-	bh=Xi35KhtFKZU3jjrnJmZS3TFAyAUXL58eOylSXncyoSw=;
+	s=k20260515; t=1779791952;
+	bh=azs2doTn6WRcYeDt2Z4GFWdIIH9QPs8kBk3Pel10+sg=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date;
-	b=nyN08167ur+qEBWBettVH20Z8aVLFn/4IaVu0rWywoMYRtxwu6q3wTKGENwaqA3Xu
-	 Sfx1KWKUWXSkkS57VM2hPZAtQ5LdmHlB94s+u5tfkREJTW4e3cf05PKytkBK+Bhagt
-	 V3DMOdmKc3QFuM7F2h9+R1mGjh2FuSneJafghXT4eMiTSEJWTsmemhZKVAT+wJW2em
-	 SCfJkrWhtspM3C7lxx+FQmcY6wacKXb85cRzP79RogMcwnkbQPxdJgM+TFu8BIG17w
-	 RC1bK6NfOWKQYyMPN3CMPgvfq/iFQGNazEginyCA9Dg4sh3su8ZnRIjdA3vJOk855x
-	 gqTsYnybnrJmQ==
+	b=FESVv6KmUcG9mG5Val3ZWzwaoCbxIW1TDDMFUzHpao8wF25ZG7ukaHj6TbohtehGB
+	 ep0rgCAzaaV5mOlavkP1E5/bas4By3CpxMdnlLvcaR28FE4Vz9sTq0oZHUGbyGTMn6
+	 ypXswy17YuWTuva6bSVoj3pU0XRitbc90haYGUFbf+D1MM5Z10e+D9wTkqyiAwDYHt
+	 SVjAm5aGSnI9e7JToacTBktRYu2p46jVjkF31GNbTCDHstcQGdZFbzrVLgLxYuGF3s
+	 Q6UjQ90f/v5RZa4WQFq+PmNBsS+2RHnqqYDTl3l/J0yIZKNTMRH1/2+gCQ/2C1+Wwm
+	 Eunr4anIacNvg==
 From: Pratyush Yadav <pratyush@kernel.org>
 To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Pratyush Yadav <pratyush@kernel.org>,  Michael Walle
- <mwalle@kernel.org>,  Takahiro Kuwano <takahiro.kuwano@infineon.com>,
-  Richard Weinberger <richard@nod.at>,  Vignesh Raghavendra
- <vigneshr@ti.com>,  Jonathan Corbet <corbet@lwn.net>,  Tudor Ambarus
- <tudor.ambarus@linaro.org>,  Shuah Khan <skhan@linuxfoundation.org>,  Sean
- Anderson <sean.anderson@linux.dev>,  Thomas Petazzoni
+Cc: Tudor Ambarus <tudor.ambarus@linaro.org>,  Pratyush Yadav
+ <pratyush@kernel.org>,  Michael Walle <mwalle@kernel.org>,  Takahiro
+ Kuwano <takahiro.kuwano@infineon.com>,  Richard Weinberger
+ <richard@nod.at>,  Vignesh Raghavendra <vigneshr@ti.com>,  Jonathan Corbet
+ <corbet@lwn.net>,  Shuah Khan <skhan@linuxfoundation.org>,  Sean Anderson
+ <sean.anderson@linux.dev>,  Thomas Petazzoni
  <thomas.petazzoni@bootlin.com>,  Steam Lin <STLin2@winbond.com>,
   linux-mtd@lists.infradead.org,  linux-kernel@vger.kernel.org,
-  linux-doc@vger.kernel.org
-Subject: Re: [PATCH v5 03/28] mtd: spi-nor: Make sure the QE bit is kept
- enabled if useful
-In-Reply-To: <20260507-winbond-v6-18-rc1-spi-nor-swp-v5-3-93453e1a9597@bootlin.com>
-	(Miquel Raynal's message of "Thu, 07 May 2026 18:46:44 +0200")
+  linux-doc@vger.kernel.org,  stable@kernel.org
+Subject: Re: [PATCH v5 04/28] mtd: spi-nor: swp: Improve locking user
+ experience
+In-Reply-To: <87o6i7o0tj.fsf@bootlin.com> (Miquel Raynal's message of "Fri, 22
+	May 2026 18:39:52 +0200")
 References: <20260507-winbond-v6-18-rc1-spi-nor-swp-v5-0-93453e1a9597@bootlin.com>
-	<20260507-winbond-v6-18-rc1-spi-nor-swp-v5-3-93453e1a9597@bootlin.com>
-Date: Tue, 26 May 2026 12:31:58 +0200
-Message-ID: <2vxzcxyi5un5.fsf@kernel.org>
+	<20260507-winbond-v6-18-rc1-spi-nor-swp-v5-4-93453e1a9597@bootlin.com>
+	<9432f07f-3724-4257-b6ab-84721e619f78@linaro.org>
+	<875x4fphgr.fsf@bootlin.com>
+	<779f2680-2c67-4bbd-9576-bde8e83d111d@linaro.org>
+	<87o6i7o0tj.fsf@bootlin.com>
+Date: Tue, 26 May 2026 12:39:08 +0200
+Message-ID: <2vxz8q965ub7.fsf@kernel.org>
 User-Agent: Gnus/5.13 (Gnus v5.13)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -75,7 +79,7 @@ X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -85,8 +89,8 @@ X-Spamd-Result: default: False [-1.66 / 15.00];
 	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-89473-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[15];
+	TAGGED_FROM(0.00)[bounces-89474-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[16];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[pratyush@kernel.org,linux-doc@vger.kernel.org];
@@ -96,31 +100,36 @@ X-Spamd-Result: default: False [-1.66 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,bootlin.com:email]
-X-Rspamd-Queue-Id: A4A875D4359
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: 9DDCF5D4513
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Thu, May 07 2026, Miquel Raynal wrote:
+On Fri, May 22 2026, Miquel Raynal wrote:
 
-> Not all chips implement the 4BAIT table which typically indicates the
-> program capability, while many of them do implement the relevant SFDP
-> parts indicating the read capabilities. In such a situation, programs
-> can happen in single mode (1-1-1) and reads in quad mode (1-1-4 or
-> 1-4-4). For the reads to work in such condition, the QE bit must be set.
-> In case we later use the spi_nor_write_16bit_sr_and_check() helper with
-> a chip with such configuration, the QE bit would get incorrectly
-> cleared.
+>>> Technically speaking all four first patches are fixes, except I don't
+>>> ask the first one to be backported. The reason why we ask fixes to be
+>>> first in the series is because we want them to be as independent as
+>>> possible from previous cleanups/changes. Here each four first patch are
+>>> targeting completely different places and should not interact with each
+>>> other. Anyway, I will re-shuffle the patches.
+>>
+>> you don't need to resend just for that I think. Pratyush or Michael can
+>> re-shuffle when applying.
 >
-> Make sure this doesn't happen by keeping the QE bit under a simpler
-> condition:
-> - the quad enable hook is there (no change)
-> - and at least one of the two protocols is based on quad I/O cycles
->
-> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+> It's a bit painful to do while applying, I will send a v6.
 
-Reviewed-by: Pratyush Yadav <pratyush@kernel.org>
+I didn't get what we want to shuffle. Do you want to have this patch as
+03/28 and "mtd: spi-nor: Make sure the QE bit is kept enabled if useful"
+as 04/28? If only that, I can do this myself when applying.
+
+And here's what I am thinking: the first 9 patches are reviewed and good
+to go. I want to land them in this merge window so we cut down your
+patchset and land stuff sooner.
+
+Unfortunately I just can't seem to find time to review this series so I
+hope this helps some at least.
 
 -- 
 Regards,
