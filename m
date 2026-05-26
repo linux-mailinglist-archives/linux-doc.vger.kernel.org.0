@@ -1,58 +1,55 @@
-Return-Path: <linux-doc+bounces-89634-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89635-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MKHmEI3qFWqXegcAu9opvQ
-	(envelope-from <linux-doc+bounces-89634-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 20:46:37 +0200
+	id fJuEGCDrFWoefAcAu9opvQ
+	(envelope-from <linux-doc+bounces-89635-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 20:49:04 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9FC745DB854
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 20:46:36 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CBE75DB8CD
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 20:48:59 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id C4B6630071DD
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 18:41:26 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id DE9293035A99
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 18:48:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2F17740B6F4;
-	Tue, 26 May 2026 18:41:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A656B3BFAD1;
+	Tue, 26 May 2026 18:48:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="Nz6bHEkR"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="R66C3xZB"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D12130C630
-	for <linux-doc@vger.kernel.org>; Tue, 26 May 2026 18:41:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC67D2DEA7B;
+	Tue, 26 May 2026 18:48:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779820886; cv=none; b=B51VuixWcJTSrw5WUG93/fsmdFJzPLvs/PKf0WhT3ydTadEu9yYGgVjz36Gqo0Hkv6OWBFD3Y7YZr0xbs8L4GaU7gUfiKrKhDkWZlsvNjDti5jZNbJ1jRvI7S7MO+ZdYhtzGKLFp8IOi2Sd+aKg1+lKWlkQFpq4Nw2cOPmQaUbM=
+	t=1779821331; cv=none; b=r6P+uedlxGUZqMuUAf4kScRJz5grShd0Roxf33SU93Muwl1QUyvK4z80kgMTwnXv38hqMOQHCxQQXl2mzbCjHhbHfQmBNULy5QdTr4LGzWlmDDA/CLN93gR8uS8zYlBigbKLk0ANHm+1Qy9MwBrtRAk3vrP1dAP9uBW/Iaa495g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779820886; c=relaxed/simple;
-	bh=RkW0Bv1L0Js8MNsa7V7ZK7EapQX1yrgXE71yF21qq5A=;
+	s=arc-20240116; t=1779821331; c=relaxed/simple;
+	bh=0EL5x8+TZGDIraf8UUqY4kkZjJXXT2+S4iC1J4z4c40=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=m/I/FzK9F4JxFKTkURNw5Jlz5sgKgC7IqLwAcQC0EP6yYferJACIhG2bSpTBdBMwDWKXMkmwv93Dx8FQPNDMGQvmtL4N3feCIXjQDKzrZYG7oRFWu/s5cmOyOz842+uMxnueGIjTVYdGhRTii+FXrRkYyP945PYijxheaqvyUYk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=Nz6bHEkR; arc=none smtp.client-ip=185.171.202.116
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id 4F9E9C79ABF;
-	Tue, 26 May 2026 18:41:21 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id AC1C66011D;
-	Tue, 26 May 2026 18:41:21 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id B77FE10888A19;
-	Tue, 26 May 2026 20:41:11 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1779820880; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:content-language:in-reply-to:references;
-	bh=PIYj6/EhK5ecVCOsnUMdIrM77xOW3tv5CbH8SY6+uiQ=;
-	b=Nz6bHEkRxZkrj8vpiUPjypNGWtvq3iwyzcEPzXlDt/ZjsnM2mMc3ZBQKVKFjDosV/fSwYu
-	TOmGaW4YA4bya7sR3S4VRXWbjxOpLwxVUkYcTIzeH9yvppmgf+UE2XxwA2DtNexdyEWFXu
-	iz2b30KR6R+VPfzeSyqkdDfQFfBZkJztustGXA6DEeAUVW33kuNQTEPilC6NIV1EASdwS2
-	YPc2a4cYBJjKpk3PjVi+s5KrE3BdkWIWMzjn+LoZt7JGk1FPEhfqGi8MSeEa7qn8zr/UDQ
-	G8ZiYPgKccD3Y68+Y/bPGnsmFohUlBOjNBjLOByh08kocJcnVajrTzn5ZsUtmQ==
-Message-ID: <422219d6-8377-423c-8ccd-641b2fccaa1a@bootlin.com>
-Date: Tue, 26 May 2026 20:41:10 +0200
+	 In-Reply-To:Content-Type; b=isj3vgzOVBAcWAwI7RzxUUgTVWmJE4oixWg4X+08KlS+S1K8GDRdMw8vyRGlrHzeOXsQc3+m9u7iYTEABwU/Ln+UqMfB4b9frk6hAnMzKXfUSLG/M/lzIp9MhkUD8E7ipmuCvXYoAikEoaIo7oxYZ95UbTMr6Dlv3FVYr9nyFQM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=R66C3xZB; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+	bh=q/mZfeEODQi26JC8lul3a6HKpuOhERZOr6DhpJHYplI=; b=R66C3xZBbD38swfm8X5Vh9TTpY
+	3SCmWbtjQQxY4g53/24j0E6g5BmFHCepoU9D4IVSOikao7MYHfk47j9MqtB0SaFFJHMWiS9UJ+yNe
+	L2t3blbuZ+47pt3gboRA77PLNaIAlzaFbhNAr0REeS2CP16Lxr95arGiA/OIr7bxJnMM5Xk4Z2VZU
+	bEcvzfqXtR5GOQqA3cotbxYWRLh6xe4JlXZeLjTZUqfKtmFo80+dX+ePmi4O45l4hZxbOqU2qbnh1
+	gneSXiuj7uYtTkpiJzWqLH7XY5KsL30BtHzcpuQN1sHL5m33t3m6ZNs6URQpC6dx453beQHLQyfuN
+	JJNI+ltg==;
+Received: from [50.53.43.113] (helo=[192.168.254.34])
+	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+	id 1wRwpX-00000002sMM-1vN0;
+	Tue, 26 May 2026 18:48:43 +0000
+Message-ID: <1c341b25-e720-4f63-9db1-99348c8ebed9@infradead.org>
+Date: Tue, 26 May 2026 11:48:41 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -60,75 +57,94 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net-next 06/10] docs: net: refresh netdev feature guidance
+Subject: Re: [PATCH net-next 00/10] docs: net: updates for old and cobwebbed
+ docs
 To: Jakub Kicinski <kuba@kernel.org>, davem@davemloft.net
 Cc: netdev@vger.kernel.org, edumazet@google.com, pabeni@redhat.com,
  andrew+netdev@lunn.ch, horms@kernel.org, corbet@lwn.net,
  vladimir.oltean@nxp.com, willemb@google.com, sdf.kernel@gmail.com,
  ecree.xilinx@gmail.com, jesse.brandeburg@intel.com, linux-doc@vger.kernel.org
 References: <20260526160151.2793354-1-kuba@kernel.org>
- <20260526160151.2793354-7-kuba@kernel.org>
 Content-Language: en-US
-From: Maxime Chevallier <maxime.chevallier@bootlin.com>
-In-Reply-To: <20260526160151.2793354-7-kuba@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <20260526160151.2793354-1-kuba@kernel.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[bootlin.com,reject];
-	R_DKIM_ALLOW(-0.20)[bootlin.com:s=dkim];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-89634-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-89635-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FREEMAIL_CC(0.00)[vger.kernel.org,google.com,redhat.com,lunn.ch,kernel.org,lwn.net,nxp.com,gmail.com,intel.com];
 	RCPT_COUNT_TWELVE(0.00)[14];
 	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[maxime.chevallier@bootlin.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[bootlin.com:+];
-	NEURAL_HAM(-0.00)[-0.998];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	MID_RHS_MATCH_FROM(0.00)[];
 	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[infradead.org:+];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,bootlin.com:mid,bootlin.com:dkim]
-X-Rspamd-Queue-Id: 9FC745DB854
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,infradead.org:mid,infradead.org:dkim]
+X-Rspamd-Queue-Id: 8CBE75DB8CD
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Jakub
+Hi,
 
-On 5/26/26 18:01, Jakub Kicinski wrote:
+On 5/26/26 9:01 AM, Jakub Kicinski wrote:
+> I'm hoping to start feeding our docs into the AI review tools, instead
+> of maintaining a separate repo with review prompts. To experiment with
+> that we have to refresh the docs a little bit.
+> 
+> A read thru our current docs makes one slightly question the value
+> of including them in reviews. But directionally, I feel, it's probably
+> still right. I'm hoping the Rx Checksum section about not dropping packets
+> for example to be impactful. I don't think the current AI agents or
+> review docs include this guidance.
+> 
+> Jakub Kicinski (10):
+>   docs: net: netdevices: small fixes and clarifications
+>   docs: net: fix minor issues with driver guide
+>   docs: net: statistics: fix kernel-internal stats list
+>   docs: net: update devmem code examples
+>   docs: net: fix minor issues with the NAPI guide
+>   docs: net: refresh netdev feature guidance
+>   docs: net: fix minor issues with checksum offloads
+>   docs: net: add Rx notes to the checksum guide
+>   docs: net: render the checksum comment in checksum-offloads.rst
+>   docs: net: fix minor issues with segmentation offloads
+> 
+>  .../networking/checksum-offloads.rst          | 67 ++++++++++++-------
+>  Documentation/networking/devmem.rst           | 27 +++-----
+>  Documentation/networking/driver.rst           |  7 +-
+>  Documentation/networking/napi.rst             | 11 ++-
+>  Documentation/networking/netdev-features.rst  | 60 +++++++++++------
+>  Documentation/networking/netdevices.rst       | 31 +++++----
+>  .../networking/segmentation-offloads.rst      | 37 +++++++++-
+>  Documentation/networking/skbuff.rst           |  6 --
+>  Documentation/networking/statistics.rst       | 19 ++++--
+>  9 files changed, 172 insertions(+), 93 deletions(-)
+> 
 
->   
->    1. netdev->hw_features set contains features whose state may possibly
->       be changed (enabled or disabled) for a particular device by user's
-> -    request.  This set should be initialized in ndo_init callback and not
-> -    changed later.
-> +    request.  Drivers normally initialize this set before registration or
-> +    in the ndo_init callback. Changes after registration should be made
-> +    very carefully as other parts of the code may assume hw_features are
-> +    static. At the very least changes must be made under rtnl_lock and
-> +    the netdev instance lock, and followed by netdev_update_features().
-Feel free to keep this description as-is, but can we get somewhere the
-actual meaning of "hw" in "hw_features" ? I've seen this cause confusion
-before as this is sometimes wrongly interpreted as "Hardware features",
-which isn't correct as the hardware may do stuff without allowing users
-to change that behaviour.
+There is one more cleanup that you could do. Current (linux-next) docs builds
+give this warning:
 
-I vaguely recall something along the lines of "Host-Writeable features",
-but I am not sure at all about that...
+WARNING: ../include/linux/netdevice.h:2622 Excess struct member 'ax25_ptr' description in 'net_device'
 
-Maxime
+-- 
+~Randy
+
 
