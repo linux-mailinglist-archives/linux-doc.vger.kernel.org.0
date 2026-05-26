@@ -1,64 +1,64 @@
-Return-Path: <linux-doc+bounces-89423-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89426-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8LWiDEcHFWokSQcAu9opvQ
-	(envelope-from <linux-doc+bounces-89423-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 04:36:55 +0200
+	id 6Od4OVsHFWokSQcAu9opvQ
+	(envelope-from <linux-doc+bounces-89426-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 04:37:15 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id A245D5CFFD2
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 04:36:54 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id EE40D5CFFE8
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 04:37:14 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id B47333037BCA
-	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 02:35:48 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 6E1DB300F63E
+	for <lists+linux-doc@lfdr.de>; Tue, 26 May 2026 02:36:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id ADCD630FF20;
-	Tue, 26 May 2026 02:35:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 839C63264DE;
+	Tue, 26 May 2026 02:35:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="bo4iO5eR"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="n+9gfAAt"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.13])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3CC3430EF91;
-	Tue, 26 May 2026 02:35:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB3F130E83F;
+	Tue, 26 May 2026 02:35:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.13
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779762935; cv=none; b=Xi6PvoAau2ANmp4RxSzrZ7VUEWIxkYVbefObWRN+lX1hdC3cCdI3gN4isEKImZv3pVjtZX+tWPLJxjU8GETAwpRElNZK7pTDjtByCKsm6R64k5yu7ccvRD6zvXWdJNxXBxeLd3bVDz4hN5r77yCrfUK38nWAzQNZ86NAIBbgksc=
+	t=1779762937; cv=none; b=AKRw3fDHLR61d236K8Fpf1d5FPSkZnaszaM5kgMHIs6wzeXtO3busolGS0fKHrtTpHnV5jmoxUxJtRej3eAJQGG2H1D4R/tY6ul/U+4nY6MN0LhQ8ShN48pHGxgvOIMpGKXMUsvngvLGJd0uYMt56s7X0Yy9HT6ZLDvDWKzX3rk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779762935; c=relaxed/simple;
-	bh=roAtp1tb8HH5eiV2GjzKq9nl3/PGnRumHdTZNS+LIaM=;
+	s=arc-20240116; t=1779762937; c=relaxed/simple;
+	bh=6OPqLGzID/8yWm6UrSRl+4VbyudTj8S0aIJtkM1Jl78=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Em35Rh2p77c+IAME85WYh70mEQn1ANl71e0jjAAwXkLNaKMt7KwNp5P5QhE68qdMTBnLi4J4FVA+DjES6cX1kgp6FIhj99gi5cb5h8bFcOuEDW9VckzrgKKQv0geQ0C5vpiyD7F/9IHtxaR7PEwpyUQ/QO7WLc0ouUHYLvduUkM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=bo4iO5eR; arc=none smtp.client-ip=198.175.65.13
+	 MIME-Version; b=eKe4/nnRFuwjvgS0QV1jJCUcULuP9TIRJ7u0PzBNroiLBE5cjQkgq7h9ES70O6ZEjgH59jfyBXpvZdFIbXYeVJXeYndv285kQpoTE7m9fC7tolXTkS2yHGZ0fc4cm60i58dKX7X6MBETTxUOnDWxv6OPCaZHnbMkPu3dg5rWELE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=n+9gfAAt; arc=none smtp.client-ip=198.175.65.13
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1779762931; x=1811298931;
+  t=1779762936; x=1811298936;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=roAtp1tb8HH5eiV2GjzKq9nl3/PGnRumHdTZNS+LIaM=;
-  b=bo4iO5eRUVhzdwP+goukSM/fq+j/XyeqsSl9qZ/0mlXTg7e5+xTtZ9x+
-   nuALd1XZrUY+pYBlErIcYIbRBke7qpLbZyrjO2jLgAASA2DOGkzMZ5tZs
-   Obic+Yjfr1JvcUQYLiunKOjO+rBIFCgGd1OEaMjqYrdNdLBrpIculYsrr
-   ffqtF4tMTUPfDL4Q1Cs63k72LjfVQGWVSXnafgJqpu5TECjJCSogklexm
-   IqQVy87ieR6y/T7VgqdGj3cxugztuwxO4uWlTon0QFez3SXq1k8JZJMN/
-   TztoU0GPoAJu4uVnTacUG9knMV6hvZnzDs4yX0hZihXTIwvAuujhcrJ/w
-   w==;
-X-CSE-ConnectionGUID: vbLtjpxqTua9PB8Gj/Mzlw==
-X-CSE-MsgGUID: ooncipFgT7WICKu458f5Ow==
-X-IronPort-AV: E=McAfee;i="6800,10657,11797"; a="91677821"
+  bh=6OPqLGzID/8yWm6UrSRl+4VbyudTj8S0aIJtkM1Jl78=;
+  b=n+9gfAAtuFNeAEHXjvZHUmiZDRt95J61GqrUYQkFEYsLo8WPp3JiLkZj
+   u0r1A+0AU6qZ1Euuh+m9LB9hdlcgFNWQb3KyJT59zvJRLeEcLWH/1HXD9
+   xh1OH0SBjKNq3VMNc/i2KxY8ZbN1E3qS7bcmvz9JvqP2DMfLBBTFnambN
+   4+QLY8vvx9upvlNtmw4JQlKg2Tj6q2M6CQHdOC/trxvoMAncbUnmM1Jm8
+   hLcsJMq1/5QcfqwFk7lpemP1RscWP443bvQKhBBYQ+WHEsRQOn5NNlzyA
+   XCXSCiolKwrz2e6V92cOwv8XRzPPSWARSlr2p1HYoQiL7ZzsYTlKsssx2
+   Q==;
+X-CSE-ConnectionGUID: FZ6gjSCbQy6K1i6wLd1wpg==
+X-CSE-MsgGUID: YY3XCIaGS9OmRKE61yfwmA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11797"; a="91677829"
 X-IronPort-AV: E=Sophos;i="6.24,168,1774335600"; 
-   d="scan'208";a="91677821"
+   d="scan'208";a="91677829"
 Received: from orviesa001.jf.intel.com ([10.64.159.141])
   by orvoesa105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 May 2026 19:35:24 -0700
-X-CSE-ConnectionGUID: XLpXVkV6Qqy1ryRRTsYHTA==
-X-CSE-MsgGUID: qeATd1qGR++QxJFsCxh8Lw==
+X-CSE-ConnectionGUID: n2GKC6uIShyxAra1m/l7jQ==
+X-CSE-MsgGUID: oV/Ws18ZSHi1aErTacyYIA==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.24,168,1774335600"; 
-   d="scan'208";a="279878308"
+   d="scan'208";a="279878313"
 Received: from rpedgeco-desk.jf.intel.com ([10.88.27.139])
   by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 May 2026 19:35:24 -0700
 From: Rick Edgecombe <rick.p.edgecombe@intel.com>
@@ -82,9 +82,9 @@ To: bp@alien8.de,
 	kai.huang@intel.com
 Cc: rick.p.edgecombe@intel.com,
 	"Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>
-Subject: [PATCH v6 06/11] x86/virt/tdx: Optimize tdx_pamt_get/put()
-Date: Mon, 25 May 2026 19:35:10 -0700
-Message-ID: <20260526023515.288829-7-rick.p.edgecombe@intel.com>
+Subject: [PATCH v6 07/11] KVM: TDX: Allocate PAMT memory for TD and vCPU control structures
+Date: Mon, 25 May 2026 19:35:11 -0700
+Message-ID: <20260526023515.288829-8-rick.p.edgecombe@intel.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260526023515.288829-1-rick.p.edgecombe@intel.com>
 References: <20260526023515.288829-1-rick.p.edgecombe@intel.com>
@@ -94,219 +94,192 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-1.16 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
 	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	TAGGED_FROM(0.00)[bounces-89423-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[20];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-89426-lists,linux-doc=lfdr.de];
+	DKIM_TRACE(0.00)[intel.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rick.p.edgecombe@intel.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rick.p.edgecombe@intel.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[intel.com:+];
+	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_COUNT_FIVE(0.00)[5];
 	TAGGED_RCPT(0.00)[linux-doc];
-	NEURAL_HAM(-0.00)[-1.000];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:email,intel.com:mid,intel.com:dkim,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: A245D5CFFD2
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,intel.com:email,intel.com:mid,intel.com:dkim]
+X-Rspamd-Queue-Id: EE40D5CFFE8
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 From: "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>
 
-The Dynamic PAMT get/put helpers use a global spinlock to serialize all
-refcount updates and SEAMCALL invocations. This gives correct behavior for
-concurrent callers, but leads to contention. It is especially bad from the
-KVM side, which is designed to allow faulting in EPT under a shared lock.
-With the global spinlock, not only is the lock an exclusive one, but it is
-for all TDs instead of just a single one.
+Use control page helpers for allocating and freeing TD control structures,
+such these operations can work for Dynamic PAMT.
 
-But taking the global lock each time is actually unnecessary. Only the 0->1
-and 1->0 refcount transitions actually need the lock (to pair with
-SEAMCALLs that actually add and remove with the Dynamic PAMT pages). The
-common case of incrementing or decrementing a non-zero refcount can be
-done locklessly.
+The TDX module tracks some state for each page of physical memory that it
+might use. It calls this state the PAMT. It includes separate state for
+each page size a physical page could be utilized at within the TDX module
+(1GB, 2MB, 4KB). In Dynamic PAMT, only the 4KB page size state is
+allocated dynamically. So the kernel must install PAMT backing for each 4KB
+page before gifting it to the TDX module, and tear it down after the page
+is reclaimed.
 
-So create a fast and slow path. Check the refcount outside the lock and
-only take it for the slowpath (0->1 and 1->0 transitions).
+TD-scoped control pages (TDR, TDCS) and vCPU-scoped control pages (TDVPR,
+TDCX) are all handed to the TDX module at 4KB page size and are therefore
+subject to this requirement. Replace the raw alloc_page()/__free_page()
+calls for these pages with tdx_alloc/free_control_page().
 
-On the put side make the refcount adjustment and lock taking atomic so if
-a 'get' happens between them, it doesn't cause the Dynamic PAMT to be
-freed incorrectly. On the get side there is no technique for doing the
-refcount adjustment and lock atomically, so check the refcount again
-inside the lock.
+Switching between special Dynamic PAMT operations or normal page
+alloc/free operations is handled internally in
+tdx_alloc/free_control_page(). So don't check for Dynamic PAMT around these
+calls. Just call them unconditionally. Similarly, drop the NULL checks
+before freeing, as tdx_free_control_page() handles NULL internally.
 
-Assisted-by: GitHub Copilot:claude-opus-4-6
+No functional change intended when Dynamic PAMT is not in use.
+
+Assisted-by: GitHub Copilot:claude-opus-4-6 Claude:claude-opus-4-7
 Signed-off-by: Kirill A. Shutemov <kirill.shutemov@linux.intel.com>
-Co-developed-by: Rick Edgecombe <rick.p.edgecombe@intel.com>
+[sean: handle alloc+free+reclaim in one patch]
+Co-developed-by: Sean Christopherson <seanjc@google.com>
+Signed-off-by: Sean Christopherson <seanjc@google.com>
+[Rick: enhance log]
 Signed-off-by: Rick Edgecombe <rick.p.edgecombe@intel.com>
 ---
-v6:
- - Fix "tdx_pamt_add()" typo to "tdx_pamt_get()" in lost-race comment
- - Fix error path bug: set ret = -EIO and use WARN_ON_ONCE() instead of
-   pr_err() for unexpected PAMT.ADD failures (Sean)
- - Use "set the refcount 0->1" wording to match atomic_set() usage
- - Wrap comments to 80 columns
- - Switch to atomic_dec_and_lock() and remove handling of races that are
-   no longer needed as a result. Adjust comments as appropriate. (Dave)
- - Adjustments from dropping error helper patches
-v4:
- - Use atomic_set() in the HPA_RANGE_NOT_FREE case (Kiryl)
- - Log, comment typos (Binbin)
- - Move PAMT page allocation after refcount check in tdx_pamt_get() to
-   avoid an alloc/free in the common path.
+ arch/x86/kvm/vmx/tdx.c | 35 ++++++++++++++---------------------
+ 1 file changed, 14 insertions(+), 21 deletions(-)
 
-v3:
- - Split out optimization from “x86/virt/tdx: Add tdx_alloc/free_page() helpers”
- - Remove edge case handling that I could not find a reason for
- - Write log
----
- arch/x86/virt/vmx/tdx/tdx.c | 102 +++++++++++++++++++++---------------
- 1 file changed, 61 insertions(+), 41 deletions(-)
-
-diff --git a/arch/x86/virt/vmx/tdx/tdx.c b/arch/x86/virt/vmx/tdx/tdx.c
-index 50333eb96efa6..c41c632a4cdf2 100644
---- a/arch/x86/virt/vmx/tdx/tdx.c
-+++ b/arch/x86/virt/vmx/tdx/tdx.c
-@@ -2057,32 +2057,50 @@ static int tdx_pamt_get(kvm_pfn_t pfn)
- 	if (!tdx_supports_dynamic_pamt(&tdx_sysinfo))
- 		return 0;
+diff --git a/arch/x86/kvm/vmx/tdx.c b/arch/x86/kvm/vmx/tdx.c
+index 2539107e0ad3d..3e67e2471ffe3 100644
+--- a/arch/x86/kvm/vmx/tdx.c
++++ b/arch/x86/kvm/vmx/tdx.c
+@@ -362,7 +362,7 @@ static void tdx_reclaim_control_page(struct page *ctrl_page)
+ 	if (tdx_reclaim_page(ctrl_page))
+ 		return;
  
-+	pamt_refcount = tdx_find_pamt_refcount(pfn);
-+
-+	/*
-+	 * If the pamt page is already added (i.e. refcount >= 1),
-+	 * then just increment the refcount.
-+	 */
-+	if (atomic_inc_not_zero(pamt_refcount))
-+		return 0;
-+
- 	ret = alloc_pamt_array(pamt_pages);
- 	if (ret)
- 		return ret;
- 
--	pamt_refcount = tdx_find_pamt_refcount(pfn);
-+	spin_lock(&pamt_lock);
- 
--	scoped_guard(spinlock, &pamt_lock) {
--		/*
--		 * If the pamt page is already added (i.e. refcount >= 1),
--		 * then just increment the refcount.
--		 */
--		if (atomic_read(pamt_refcount)) {
--			atomic_inc(pamt_refcount);
--			goto out_free;
--		}
--
--		/* Try to add the pamt page and take the refcount 0->1. */
--		tdx_status = tdh_phymem_pamt_add(pfn, pamt_pages);
--		if (WARN_ON_ONCE(tdx_status != TDX_SUCCESS)) {
--			ret = -EIO;
--			goto out_free;
--		}
--
--		atomic_set(pamt_refcount, 1);
-+	/*
-+	 * Unlike tdx_pamt_put() which uses atomic_dec_and_lock() to
-+	 * atomically handle the 1->0 transition, the get side has no
-+	 * equivalent combined primitive for 0->1. Recheck under the
-+	 * lock since another get may have already done the 0->1
-+	 * transition after both saw atomic_inc_not_zero() fail.
-+	 */
-+	if (atomic_read(pamt_refcount)) {
-+		atomic_inc(pamt_refcount);
-+		spin_unlock(&pamt_lock);
-+		goto out_free;
- 	}
- 
-+	tdx_status = tdh_phymem_pamt_add(pfn, pamt_pages);
-+	if (tdx_status == TDX_SUCCESS) {
-+		/*
-+		 * The refcount is zero, and this locked path is the
-+		 * only way to increase it from 0->1.
-+		 */
-+		atomic_set(pamt_refcount, 1);
-+	} else {
-+		WARN_ON_ONCE(1);
-+		ret = -EIO;
-+		spin_unlock(&pamt_lock);
-+		goto out_free;
-+	}
-+
-+	spin_unlock(&pamt_lock);
-+
- 	return 0;
- out_free:
- 	free_pamt_array(pamt_pages);
-@@ -2104,32 +2122,34 @@ static void tdx_pamt_put(kvm_pfn_t pfn)
- 
- 	pamt_refcount = tdx_find_pamt_refcount(pfn);
- 
--	scoped_guard(spinlock, &pamt_lock) {
-+	/*
-+	 * If there is more than 1 reference on the pamt page, don't
-+	 * remove it yet. Just decrement the refcount.
-+	 */
-+	if (!atomic_dec_and_lock(pamt_refcount, &pamt_lock))
-+		return;
-+
-+	tdx_status = tdh_phymem_pamt_remove(pfn, pamt_pages);
-+
-+	/*
-+	 * Don't free pamt_pages as it could hold garbage when
-+	 * tdh_phymem_pamt_remove() fails.  Don't panic/BUG_ON(), as
-+	 * there is no risk of data corruption, but do yell loudly as
-+	 * failure indicates a kernel bug, memory is being leaked, and
-+	 * the dangling PAMT entry may cause future operations to fail.
-+	 */
-+	if (WARN_ON_ONCE(tdx_status != TDX_SUCCESS)) {
- 		/*
--		 * If the there are more than 1 references on the pamt page,
--		 * don't remove it yet. Just decrement the refcount.
-+		 * atomic_dec_and_lock() already decremented it to 0,
-+		 * but the PAMT entry still exists since REMOVE failed.
- 		 */
--		if (atomic_read(pamt_refcount) > 1) {
--			atomic_dec(pamt_refcount);
--			return;
--		}
--
--		/* Try to remove the pamt page and take the refcount 1->0. */
--		tdx_status = tdh_phymem_pamt_remove(pfn, pamt_pages);
--
--		/*
--		 * Don't free pamt_pages as it could hold garbage when
--		 * tdh_phymem_pamt_remove() fails.  Don't panic/BUG_ON(), as
--		 * there is no risk of data corruption, but do yell loudly as
--		 * failure indicates a kernel bug, memory is being leaked, and
--		 * the dangling PAMT entry may cause future operations to fail.
--		 */
--		if (WARN_ON_ONCE(tdx_status != TDX_SUCCESS))
--			return;
--
--		atomic_set(pamt_refcount, 0);
-+		atomic_set(pamt_refcount, 1);
-+		spin_unlock(&pamt_lock);
-+		return;
- 	}
- 
-+	spin_unlock(&pamt_lock);
-+
- 	free_pamt_array(pamt_pages);
+-	__free_page(ctrl_page);
++	tdx_free_control_page(ctrl_page);
  }
+ 
+ struct tdx_flush_vp_arg {
+@@ -599,7 +599,7 @@ static void tdx_reclaim_td_control_pages(struct kvm *kvm)
+ 
+ 	tdx_quirk_reset_paddr(page_to_phys(kvm_tdx->td.tdr_page), PAGE_SIZE);
+ 
+-	__free_page(kvm_tdx->td.tdr_page);
++	tdx_free_control_page(kvm_tdx->td.tdr_page);
+ 	kvm_tdx->td.tdr_page = NULL;
+ }
+ 
+@@ -2444,7 +2444,7 @@ static int __tdx_td_init(struct kvm *kvm, struct td_params *td_params,
+ 
+ 	ret = -ENOMEM;
+ 
+-	tdr_page = alloc_page(GFP_KERNEL_ACCOUNT);
++	tdr_page = tdx_alloc_control_page();
+ 	if (!tdr_page)
+ 		goto free_hkid;
+ 
+@@ -2458,7 +2458,7 @@ static int __tdx_td_init(struct kvm *kvm, struct td_params *td_params,
+ 		goto free_tdr;
+ 
+ 	for (i = 0; i < kvm_tdx->td.tdcs_nr_pages; i++) {
+-		tdcs_pages[i] = alloc_page(GFP_KERNEL_ACCOUNT);
++		tdcs_pages[i] = tdx_alloc_control_page();
+ 		if (!tdcs_pages[i])
+ 			goto free_tdcs;
+ 	}
+@@ -2576,10 +2576,8 @@ static int __tdx_td_init(struct kvm *kvm, struct td_params *td_params,
+ teardown:
+ 	/* Only free pages not yet added, so start at 'i' */
+ 	for (; i < kvm_tdx->td.tdcs_nr_pages; i++) {
+-		if (tdcs_pages[i]) {
+-			__free_page(tdcs_pages[i]);
+-			tdcs_pages[i] = NULL;
+-		}
++		tdx_free_control_page(tdcs_pages[i]);
++		tdcs_pages[i] = NULL;
+ 	}
+ 	if (!kvm_tdx->td.tdcs_pages)
+ 		kfree(tdcs_pages);
+@@ -2594,16 +2592,13 @@ static int __tdx_td_init(struct kvm *kvm, struct td_params *td_params,
+ 	free_cpumask_var(packages);
+ 
+ free_tdcs:
+-	for (i = 0; i < kvm_tdx->td.tdcs_nr_pages; i++) {
+-		if (tdcs_pages[i])
+-			__free_page(tdcs_pages[i]);
+-	}
++	for (i = 0; i < kvm_tdx->td.tdcs_nr_pages; i++)
++		tdx_free_control_page(tdcs_pages[i]);
+ 	kfree(tdcs_pages);
+ 	kvm_tdx->td.tdcs_pages = NULL;
+ 
+ free_tdr:
+-	if (tdr_page)
+-		__free_page(tdr_page);
++	tdx_free_control_page(tdr_page);
+ 	kvm_tdx->td.tdr_page = NULL;
+ 
+ free_hkid:
+@@ -2933,7 +2928,7 @@ static int tdx_td_vcpu_init(struct kvm_vcpu *vcpu, u64 vcpu_rcx)
+ 	int ret, i;
+ 	u64 err;
+ 
+-	page = alloc_page(GFP_KERNEL_ACCOUNT);
++	page = tdx_alloc_control_page();
+ 	if (!page)
+ 		return -ENOMEM;
+ 	tdx->vp.tdvpr_page = page;
+@@ -2953,7 +2948,7 @@ static int tdx_td_vcpu_init(struct kvm_vcpu *vcpu, u64 vcpu_rcx)
+ 	}
+ 
+ 	for (i = 0; i < kvm_tdx->td.tdcx_nr_pages; i++) {
+-		page = alloc_page(GFP_KERNEL_ACCOUNT);
++		page = tdx_alloc_control_page();
+ 		if (!page) {
+ 			ret = -ENOMEM;
+ 			goto free_tdcx;
+@@ -2975,7 +2970,7 @@ static int tdx_td_vcpu_init(struct kvm_vcpu *vcpu, u64 vcpu_rcx)
+ 			 * method, but the rest are freed here.
+ 			 */
+ 			for (; i < kvm_tdx->td.tdcx_nr_pages; i++) {
+-				__free_page(tdx->vp.tdcx_pages[i]);
++				tdx_free_control_page(tdx->vp.tdcx_pages[i]);
+ 				tdx->vp.tdcx_pages[i] = NULL;
+ 			}
+ 			return -EIO;
+@@ -3003,16 +2998,14 @@ static int tdx_td_vcpu_init(struct kvm_vcpu *vcpu, u64 vcpu_rcx)
+ 
+ free_tdcx:
+ 	for (i = 0; i < kvm_tdx->td.tdcx_nr_pages; i++) {
+-		if (tdx->vp.tdcx_pages[i])
+-			__free_page(tdx->vp.tdcx_pages[i]);
++		tdx_free_control_page(tdx->vp.tdcx_pages[i]);
+ 		tdx->vp.tdcx_pages[i] = NULL;
+ 	}
+ 	kfree(tdx->vp.tdcx_pages);
+ 	tdx->vp.tdcx_pages = NULL;
+ 
+ free_tdvpr:
+-	if (tdx->vp.tdvpr_page)
+-		__free_page(tdx->vp.tdvpr_page);
++	tdx_free_control_page(tdx->vp.tdvpr_page);
+ 	tdx->vp.tdvpr_page = NULL;
+ 	tdx->vp.tdvpr_pa = 0;
  
 -- 
 2.54.0
