@@ -1,126 +1,177 @@
-Return-Path: <linux-doc+bounces-89776-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89778-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0GwbEXM+F2qg9wcAu9opvQ
-	(envelope-from <linux-doc+bounces-89776-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 20:56:51 +0200
+	id AIHyHZI+F2qg9wcAu9opvQ
+	(envelope-from <linux-doc+bounces-89778-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 20:57:22 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 485A85E9451
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 20:56:49 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id AE5D35E945F
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 20:57:21 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id B82F530260BB
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 18:47:56 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id E84DA3021647
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 18:57:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 82EA9311C1D;
-	Wed, 27 May 2026 18:47:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 202E0330B11;
+	Wed, 27 May 2026 18:57:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b="osFGT9HH"
+	dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b="gXe3Cc2K"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com [136.143.188.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D4B92F7F18;
-	Wed, 27 May 2026 18:47:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779907675; cv=none; b=SB/+LhIE0bS6OEvjNzXCKRNaFCgRfFM42p55zpp9PsIK/jBQ5vRncKtgLybnczDfPUghTe8uLobdk1Q6c2Q+alE7xU1WYRLbyZoNwQQmdAamg5zHDhoNlOWtSFCJBIe/1K8lttyEhZa26ScIZKBTQWxW5Lv85l3d1aXfWfsqDKo=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779907675; c=relaxed/simple;
-	bh=FRNf0mOJK1bSkZLg+XsuNkDRMpgWAzZM4VUilgwMKa8=;
-	h=Date:From:To:Cc:Subject:Message-Id:In-Reply-To:References:
-	 Mime-Version:Content-Type; b=mGFu9Ghcbahn69pnDiMOz6cwX+PpnLCEgwKJCT1yBYmsKcJd3CJOQOkXX4WUduv210vgeE5SVuj+F3LsgcsxXuNZEoUF87ZMIXJcguEb2OvjQ/7Lqdd80a20ALxRD7hiSLXDkmj2ggi8o+/74kEu2vuGWTQCj82rCyrhj2vYx4A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b=osFGT9HH; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F19271F000E9;
-	Wed, 27 May 2026 18:47:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linux-foundation.org; s=korg; t=1779907674;
-	bh=dGFyRpMilg5FBEZHsEq53XOAuqN0WdRnl6J8HSeVqnI=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=osFGT9HHpNBx5BsDMr4gbf+ec/zmEIYPT/ARb+QrHwGAbLmbmGnL/6MYSdmMNX5Xd
-	 tpeWdohoB3dc4jZgj5fxq+4jVmU0EhzuAt6Uj5tAFl8xqbV5pT9+QGX2dHBjn7Q5Is
-	 xmLXLTQ3U68fI4GZ2lA0mMRC99J5NG6JsqHxR/zs=
-Date: Wed, 27 May 2026 11:47:52 -0700
-From: Andrew Morton <akpm@linux-foundation.org>
-To: Sarthak Sharma <sarthak.sharma@arm.com>
-Cc: David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>,
- "Liam R . Howlett" <Liam.Howlett@oracle.com>, Vlastimil Babka
- <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan
- <surenb@google.com>, Michal Hocko <mhocko@suse.com>, Shuah Khan
- <shuah@kernel.org>, Zi Yan <ziy@nvidia.com>, Baolin Wang
- <baolin.wang@linux.alibaba.com>, Nico Pache <npache@redhat.com>, Ryan
- Roberts <ryan.roberts@arm.com>, Dev Jain <dev.jain@arm.com>, Barry Song
- <baohua@kernel.org>, Lance Yang <lance.yang@linux.dev>, Jason Gunthorpe
- <jgg@ziepe.ca>, John Hubbard <jhubbard@nvidia.com>, Peter Xu
- <peterx@redhat.com>, Leon Romanovsky <leon@kernel.org>, Jonathan Corbet
- <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Mark Brown
- <broonie@kernel.org>, linux-mm@kvack.org, linux-kselftest@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4 0/5] selftests/mm: separate GUP microbenchmarking
- from functional testing
-Message-Id: <20260527114752.cf4dd3e1bda93fb8ebab5a76@linux-foundation.org>
-In-Reply-To: <20260527142432.230127-1-sarthak.sharma@arm.com>
-References: <20260527142432.230127-1-sarthak.sharma@arm.com>
-X-Mailer: Sylpheed 3.7.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0A6A3290A0;
+	Wed, 27 May 2026 18:57:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.15
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1779908232; cv=pass; b=Xs7DjEwD5WhBd4YlnDX0HA4SHCUqWf+180WTLLufxP+uF634Id9HiYv/teXnmCMRfVRVoi9VLasnsggv/PYcEodp1cOYMyFoDHlwyM40Zfw5s81G790M8C83bg2X7oVSrS0bukVN7ezOY73WkfOIN9Y71B8nndIDU1Xs3rjYjoU=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1779908232; c=relaxed/simple;
+	bh=kWBM4OX/Wwe0KACWWVvbk4dA81c5BLTTs5UZfdQiM8I=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=KiRJhz1o57yzpb49atUjiuAE+X+XtMq8A7qqXSrhoyixSZpmbz4BKjCQq9lD/WlhIOea9JgAnveEzMjqDPujeWDt2sV25UrFXWVu0upRIHyzy1YJymix2bk3SBTGC5MsPbJSUY/PTzXkLpFnPXrgtB8l+cYC9/ohb+40iW5Ogtc=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rong.moe; spf=pass smtp.mailfrom=rong.moe; dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b=gXe3Cc2K; arc=pass smtp.client-ip=136.143.188.15
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rong.moe
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rong.moe
+ARC-Seal: i=1; a=rsa-sha256; t=1779908224; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=PT7wT2hJ10fXgQkfoLr3T6mx46XLrrvcc2FebWL2dlkMiPOjWMIf5DfzfFGKhHJdQuScVgX81ZbBS+Vk3aqa7JqQ83hsaOpJVZuVMr5yOiM8y942fDA1fd9SdzUf32e11NNScSEbwMA3tWUng2A4ht5Z1I1aZ1UwDZCNvSznQzM=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1779908224; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=51aPK0a/s3+COkJJ4jOk3HeogNRfFppGJCUjkIlL3b4=; 
+	b=NqqA7kTu4PwKDsqYx3W3cA+wivJSCM5JvX/m4JywjVUcK1WoQHXxduAR243fbHCqe/NF+Dax2hPJv7Iq3r+VMPG/rlbIyFh9NufP2K5byxkXrlAvg1litEogU0jbzLp+cJr8WVdXxreKO4tTQ3oBDfZdTy2FdAVmduo6c8bitZI=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=rong.moe;
+	spf=pass  smtp.mailfrom=i@rong.moe;
+	dmarc=pass header.from=<i@rong.moe>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1779908224;
+	s=zmail2048; d=rong.moe; i=i@rong.moe;
+	h=From:From:Subject:Subject:Date:Date:Message-Id:Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:To:To:Cc:Cc:Reply-To;
+	bh=51aPK0a/s3+COkJJ4jOk3HeogNRfFppGJCUjkIlL3b4=;
+	b=gXe3Cc2KH8QRxCUpx/OVPul4JtibAbdTY1MQEmujuG1vcoIxad39lQ/4bj7tc47Y
+	6o4RF7l8hOiJpWGC/BfeIDeGr753hHA1h9sLbTBV+eCsmTkPp1aVR6uNaxayLNp44g9
+	iCRYeQ0UdAgdQW27vU9ucvVvYTACNLtM+WAP3y3aOYVg+hiIvyvADB2esDAIFLjSbuU
+	TQxNY9U4xIszZGZoBpoXEHPxMmYyma0pXm5et6BfJWJ+pBoj3z197xXLgi+A/gE78lC
+	jl/Ggd21Wop3yxXSAFQYOx2kesX4vM5zYYC636u0tfTpxP8z0kEXT/hc/Dq+WGV9AcY
+	FXTuB8ox8g==
+Received: by mx.zohomail.com with SMTPS id 1779908222700158.67998164125754;
+	Wed, 27 May 2026 11:57:02 -0700 (PDT)
+From: Rong Zhang <i@rong.moe>
+Subject: [PATCH v2 0/2] ALSA: usb-audio: Add
+ QUIRK_FLAG_MIXER_GET_CUR_BROKEN for Sennheiser MOMENTUM 3
+Date: Thu, 28 May 2026 02:56:26 +0800
+Message-Id: <20260528-uac-quirk-get-cur-vol-v2-0-84d3c8f48150@rong.moe>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [-1.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MV_CASE(0.50)[];
-	R_DKIM_ALLOW(-0.20)[linux-foundation.org:s=korg];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+X-B4-Tracking: v=1; b=H4sIAFo+F2oC/4WNSw6CQBAFr2J6bZuhCRBceQ/DAoYW2g+jPcxEQ
+ 7i7gAdwWUm9ehN4VmEPx90EylG8uGEB2u/A9vXQMUq7MJCh3GRUYKgtvoLoDTse0QbF6O7YmoZ
+ KsikXZQ7L9ql8kffWPVc/9qG5sh3X2Gr04kenn+04Jqv37yMmaJDLNKemSIgzPqkbusPDMVTzP
+ H8Bq055LMsAAAA=
+X-Change-ID: 20260527-uac-quirk-get-cur-vol-d0b292c3e796
+To: Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>
+Cc: Rong Zhang <i@rong.moe>, linux-sound@vger.kernel.org, 
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+X-Mailer: b4 0.16-dev-d5d98
+X-ZohoMailClient: External
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[rong.moe,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[rong.moe:s=zmail2048];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-89778-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-89776-lists,linux-doc=lfdr.de];
-	DMARC_NA(0.00)[linux-foundation.org];
-	RCPT_COUNT_TWELVE(0.00)[27];
+	DKIM_TRACE(0.00)[rong.moe:+];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[linux-foundation.org:+];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	MID_RHS_MATCH_FROM(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[akpm@linux-foundation.org,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,arm.com:email,sashiko.dev:url,linux-foundation.org:mid,linux-foundation.org:dkim,run_vmtests.sh:url]
-X-Rspamd-Queue-Id: 485A85E9451
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[i@rong.moe,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_SEVEN(0.00)[8];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,linuxfoundation.org:email]
+X-Rspamd-Queue-Id: AE5D35E945F
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Wed, 27 May 2026 19:54:27 +0530 Sarthak Sharma <sarthak.sharma@arm.com> wrote:
+Since commit 86aa1ea1f15c ("ALSA: usb-audio: Do not expose sticky
+mixers"), the UAC mixer core utilizes volume SET_CUR and GET_CUR to
+identify devices with sticky mixers. Unfortunately, even though most
+devices with sticky GET_CUR also have corresponding sticky SET_CUR,
+which I actually met more since the commit had been merged, there is
+also a rare case that some devices may have volume mixers that responds
+to SET_CUR properly but with its GET_CUR stubbed. This cause the sticky
+check to consider the mixer to be sticky and unnecessarily disable it.
 
-> gup_test.c currently serves two distinct purposes: microbenchmarking
-> (GUP_FAST_BENCHMARK, PIN_FAST_BENCHMARK, PIN_LONGTERM_BENCHMARK) and
-> functional correctness testing (GUP_BASIC_TEST, PIN_BASIC_TEST,
-> DUMP_USER_PAGES_TEST). Mixing these in a single binary means functional
-> tests cannot be run or reported individually and run_vmtests.sh must
-> invoke the binary multiple times with different flag combinations to
-> cover all configurations.
-> 
-> This patch series separates the two concerns: tools/mm/gup_bench for
-> benchmarking and tools/testing/selftests/mm/gup_test for functional
-> testing. To avoid duplicating HugeTLB and related file helpers, the
-> series first prepares the existing file helpers for sharing, then moves
-> the common helper code to tools/lib/mm/ so it can be shared by both
-> selftests and tools/mm.
+As the sticky check can't distinguish between sticky mixers and working
+SET_CUR but broken GET_CUR, add QUIRK_FLAG_MIXER_GET_CUR_BROKEN to tell
+that the device should fall into the second category when GET_CUR
+returns a constant value. In this case, the sticky check becomes
+non-fatal and only disables GET_CUR instead of the whole mixer. The
+current volume will then be provided by the internal cache that stores
+the last set volume.
 
-Thanks.  I'll duck this for now, see what reviewers have to say.
+The Sennheiser MOMENTUM 3 needs the quirk flag. Though its UAC mixer
+works fine and precisely corresponds to the reported dB range, the
+mixer's volume GET_CUR method is somehow stubbed and returns a constant
+value (15dB), resulting in it being disabled by the sticky check.
 
-Sashiko still has a couple of nags.  Minor stuff, arguably ignorable.
-	https://sashiko.dev/#/patchset/20260527142432.230127-1-sarthak.sharma@arm.com
+Signed-off-by: Rong Zhang <i@rong.moe>
+---
+Changes in v2:
+- Turn the approach into a less radical one
+  - Rename the quirk flag to QUIRK_FLAG_MIXER_GET_CUR_BROKEN
+  - Add a flag `get_cur_broken' to `struct usb_mixer_elem_info'
+  - When the sticky check fails, check quirk flags. Gate further GET_CUR
+    by setting `cval->get_cur_broken' if QUIRK_FLAG_MIXER_GET_CUR_BROKEN
+    is set, otherwise disable the mixer as usual
+  - The quirk flag still applies to all mixers, but as long as a mixer
+    makes the sticky check happy, it won't be affected at all. Only
+    those mixers with constant GET_CUR values will have their GET_CUR
+    gated. I assume the impact is minimal, since it's very unlikely a
+    device would have sticky mixers (broken SET_CUR) along with mixers
+    with working SET_CUR but broken GET_CUR at the same time
+- Link to v1: https://patch.msgid.link/20260527-uac-quirk-get-cur-vol-v1-0-e9362b712e5e@rong.moe
+
+To: Jaroslav Kysela <perex@perex.cz>
+To: Takashi Iwai <tiwai@suse.com>
+To: Jonathan Corbet <corbet@lwn.net>
+To: Shuah Khan <skhan@linuxfoundation.org>
+Cc: linux-sound@vger.kernel.org
+Cc: linux-doc@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+
+---
+Rong Zhang (2):
+      ALSA: usb-audio: Add QUIRK_FLAG_MIXER_GET_CUR_BROKEN
+      ALSA: usb-audio: Add quirk flag for Sennheiser MOMENTUM 3
+
+ Documentation/sound/alsa-configuration.rst | 12 ++++++++++++
+ sound/usb/mixer.c                          | 17 +++++++++++++++--
+ sound/usb/mixer.h                          |  1 +
+ sound/usb/quirks.c                         |  3 +++
+ sound/usb/usbaudio.h                       | 13 +++++++++++++
+ 5 files changed, 44 insertions(+), 2 deletions(-)
+---
+base-commit: 72d8bf668954678bfae8f7296b4b1c01990bcdc2
+change-id: 20260527-uac-quirk-get-cur-vol-d0b292c3e796
+
+Thanks,
+Rong
+
 
