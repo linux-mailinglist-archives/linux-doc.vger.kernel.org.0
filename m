@@ -1,56 +1,56 @@
-Return-Path: <linux-doc+bounces-89756-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89761-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QINMNqAPF2o12wcAu9opvQ
-	(envelope-from <linux-doc+bounces-89756-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 17:37:04 +0200
+	id 8LkwEdEPF2o12wcAu9opvQ
+	(envelope-from <linux-doc+bounces-89761-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 17:37:53 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C4225E6F80
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 17:37:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DFD2C5E6FAB
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 17:37:52 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 20F9C3087E74
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 15:33:59 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id CC9973019811
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 15:34:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8537543C06B;
-	Wed, 27 May 2026 15:33:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2316843CEFA;
+	Wed, 27 May 2026 15:33:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZugAWKNo"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NLxxE+5T"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EEE2443637D;
-	Wed, 27 May 2026 15:33:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 27E3942E006;
+	Wed, 27 May 2026 15:33:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779896004; cv=none; b=LVsPBKMIDlEuht3kcgmQ/Tx56GgFUiobP7OQDJh0kKw6aMiPcVoEQ9XHdMic1s81qkDUgDsA5m2hNJubu85ZC9o5JieiJ1x6m4EnAVu7to1ucaIsK/zxILd/4Mrh5aoT1cPtMB6Ql44wBEWrjUtTQSPoAoVSyUBuJrHyJmyQllU=
+	t=1779896004; cv=none; b=QYb6f7/3V4cdY5IRep4qA7diP8LzEX6dfZ1qDLcf6RvhVY5nRi+VYKHCf3SvRyvGQ61rft4qhy9WLlbL+kfWEZTcp79NvvSvZSXjk6wVCYeCVKfJaSE8UI7OgDQosfvu5Vc3FPHsrleW0w4ST8JXNS5+OHWkknPVb2Vizf7pzxo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1779896004; c=relaxed/simple;
-	bh=bLcxXHk+CcALqz/zzbA0F0Yybtdc+uNVe0wHT/tY7BQ=;
+	bh=h01IvEuQZ+K42AKMdxiewPanmZZ8zWWzxrsO2ouqJeY=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=N1a/hydnCoKRyLnAl1BHz9CUIfCRCIgnd8ghQUFF6uPb2B0zGATp5CFXW4DUH6IkCGtljG+rPugxK0n4iYwXht52lOtlC4BhwGsS2Ym6OxIKVnbkbreUy1FdzlAIpWLk1B3DrFfmnqr5Tu0cC4H90OVT7wM1/QTJhjKum+Qvzv0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZugAWKNo; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id C532EC2BCFB;
+	 In-Reply-To:To:Cc; b=I4E/0mk5H4vlEL3xpfDQElEItACFHBqxNpaH6UTqtLao3DmL37NJYYRp314G2ttVSJlogswAHUfhcrF0i+nAEjnTcXZVIL4x4w523LxN6R33hlrMPRN6DiqtTC9pVrfPaaf23Kt3kuTNIEGZJ5FeAwliGnu7eUY45HxgfnvJ5o4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NLxxE+5T; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id D664EC2BCF5;
 	Wed, 27 May 2026 15:33:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1779896002;
-	bh=bLcxXHk+CcALqz/zzbA0F0Yybtdc+uNVe0wHT/tY7BQ=;
+	bh=h01IvEuQZ+K42AKMdxiewPanmZZ8zWWzxrsO2ouqJeY=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=ZugAWKNou/3hhdk3/0CuslHwBG12FxSCoiQDLoZeTluxV075OF9MTYMvYc/B3dwQE
-	 pYt4TldcdTo+0VF7VMlW8lw9NewWgyAdIWMbeWvIm80t/noX6uKVj8+YHOClMxaDVo
-	 SI9Lkr34NYgh7xriAcRUxu/oNZDa6C/QUyWV/aizcmrWJh0YRhl3JQXDarb/ZgIFxK
-	 lN8OjLatlFAtuSoxeVfB037tOrc4k+2l4CHZHZ13eO0wl6Db/kaaZEXq3ztR0j5H8K
-	 zTFb9qQNeo1OydUTwLbFBUwUiAR2+ZYGsaBbOMbsyntsioUdV3Ua50kmUrprl1JrM7
-	 +H6gFaV3R5SOg==
+	b=NLxxE+5TXWyGmCUriYDo0nlcDjOg11eebRj5wA4VyIXO/DwcAyCiu/c6VM5TPj9Y+
+	 ubHjrvSWgdj+dBSWWKty3gMmxXQALoE0Bjgs5F5tp4BiciDWuZ5EMShKg/TV3rVK3h
+	 AD4XdDoaoSwzej8g3WWBKxYKVVMfdtetinaU7f2fjoYwnxiOgc74gEvV6nrt7nw1Fm
+	 wL6UFXtO+1q0OwnKNf76b1WHozB6JZqrFlzibphhfc06XvZv8gaS00T/uFZNvQBs0n
+	 HIJ9H2ir7VYTw2Ao7ibzAAlh+HDgEQJ3bDO8EDFwLKXJoBHVjX2HwemGr4lk0Lp+xD
+	 oX9QbbpMMpfwQ==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BCF9BCD4F54;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CEE42CD5BD0;
 	Wed, 27 May 2026 15:33:22 +0000 (UTC)
 From: Ackerley Tng via B4 Relay <devnull+ackerleytng.google.com@kernel.org>
-Date: Wed, 27 May 2026 08:33:18 -0700
-Subject: [PATCH RFC 06/12] Documentation: KVM: Have actual headings for
- exceptions
+Date: Wed, 27 May 2026 08:33:19 -0700
+Subject: [PATCH RFC 07/12] Documentation: KVM: Drop mention of kvm->lock in
+ SRCU documentation
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -59,7 +59,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260527-kvm-locking-docs-v1-6-4fe8b602ff47@google.com>
+Message-Id: <20260527-kvm-locking-docs-v1-7-4fe8b602ff47@google.com>
 References: <20260527-kvm-locking-docs-v1-0-4fe8b602ff47@google.com>
 In-Reply-To: <20260527-kvm-locking-docs-v1-0-4fe8b602ff47@google.com>
 To: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
@@ -74,11 +74,11 @@ Cc: kvm@vger.kernel.org, linux-doc@vger.kernel.org,
  linux-kernel@vger.kernel.org, loongarch@lists.linux.dev, 
  Ackerley Tng <ackerleytng@google.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1779896001; l=1576;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1779896001; l=1115;
  i=ackerleytng@google.com; s=20260225; h=from:subject:message-id;
- bh=omLCISL/Cs1+39lE29MDupCtm4WwTzGw7vDPKSySNYo=;
- b=hprWgud3QVI1IKRiPLGBIYGbG2occ7We7PsN9/HJiCR/0rZEaqlqEP39d5vxdyx0Gpkil7MJV
- OZNw5t9xeHOAhY9qTRJPjQQyqfcQdggNLhA0ARfSxEm8DrBNtkxx0PE
+ bh=AfvnWtgsVpXIKXd9EvhdAVtlR2WiGKaxMZJotHAsjr8=;
+ b=q6xZf/5/u1rdMaAEebXfbdUD15CwiaRJEQv8wy+OHzvYq94cMmo+p9Vjs5r6IZMkazcCQ+cOA
+ vGzpCQxTs4EDZVCNaYIQXAThy7QIfLWsIT9Wzdwv9O1z6Mi7/54mSVg
 X-Developer-Key: i=ackerleytng@google.com; a=ed25519;
  pk=sAZDYXdm6Iz8FHitpHeFlCMXwabodTm7p8/3/8xUxuU=
 X-Endpoint-Received: by B4 Relay for ackerleytng@google.com/20260225 with
@@ -93,7 +93,7 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-89756-lists,linux-doc=lfdr.de,ackerleytng.google.com];
+	TAGGED_FROM(0.00)[bounces-89761-lists,linux-doc=lfdr.de,ackerleytng.google.com];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -112,47 +112,36 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc];
 	HAS_REPLYTO(0.00)[ackerleytng@google.com];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: 3C4225E6F80
+X-Rspamd-Queue-Id: DFD2C5E6FAB
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 From: Ackerley Tng <ackerleytng@google.com>
 
-Exceptions documented are described but without headings, making it hard to
-identify where each exception description ended.
-
-Use actual headings at a lower level than that of the heading used for
-Exception to improve readability.
+The original comment says that synchronize_srcu(&kvm->srcu) is called
+inside critical sections for kvm->lock, vcpu->mutex and
+kvm->slots_lock. Drop mention of kvm->lock since this is no longer true.
 
 Signed-off-by: Ackerley Tng <ackerleytng@google.com>
 ---
- Documentation/virt/kvm/locking.rst | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ Documentation/virt/kvm/locking.rst | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/Documentation/virt/kvm/locking.rst b/Documentation/virt/kvm/locking.rst
-index 5161636cec481..fc4537a7659a9 100644
+index fc4537a7659a9..437dbfa0030b9 100644
 --- a/Documentation/virt/kvm/locking.rst
 +++ b/Documentation/virt/kvm/locking.rst
-@@ -65,7 +65,8 @@ The general rule in KVM is that any modification to shadow page tables
- (and their entries (SPTEs)) must be protected by ``kvm->mmu_lock``,
- with the exceptions described below.
+@@ -35,8 +35,8 @@ The acquisition orders for mutexes are as follows:
+ For SRCU:
  
--Fast page fault:
-+2.1. Fast page fault
-+^^^^^^^^^^^^^^^^^^^^
+ - ``synchronize_srcu(&kvm->srcu)`` is called inside critical sections
+-  for kvm->lock, vcpu->mutex and kvm->slots_lock.  These locks _cannot_
+-  be taken inside a kvm->srcu read-side critical section; that is, the
++  for vcpu->mutex and kvm->slots_lock.  These locks _cannot_ be taken
++  inside a kvm->srcu read-side critical section; that is, the
+   following is broken::
  
- Fast page fault is the fast path which fixes the guest page fault out of
- the mmu-lock on x86. Currently, the page fault can be fast in one of the
-@@ -217,7 +218,8 @@ Since the spte is "volatile" if it can be updated out of mmu-lock, we always
- atomically update the spte and the race caused by fast page fault can be avoided.
- See the comments in spte_needs_atomic_update() and mmu_spte_update().
- 
--Lockless Access Tracking:
-+2.2 Lockless Access Tracking
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- 
- This is used for Intel CPUs that are using EPT but do not support the EPT A/D
- bits. In this case, PTEs are tagged as A/D disabled (using ignored bits), and
+       srcu_read_lock(&kvm->srcu);
 
 -- 
 2.54.0.823.g6e5bcc1fc9-goog
