@@ -1,55 +1,56 @@
-Return-Path: <linux-doc+bounces-89754-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89757-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UCXAFaQPF2o12wcAu9opvQ
-	(envelope-from <linux-doc+bounces-89754-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 17:37:08 +0200
+	id yNpmFLoPF2o12wcAu9opvQ
+	(envelope-from <linux-doc+bounces-89757-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 17:37:30 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED8835E6F87
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 17:37:07 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 998CF5E6F95
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 17:37:29 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id C9783308A5FF
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 15:33:59 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 4CDA63094B3B
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 15:34:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8121A43C05B;
-	Wed, 27 May 2026 15:33:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3EDD043CECD;
+	Wed, 27 May 2026 15:33:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="H43ckgw1"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HzNMKTnH"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2C58436374;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED4522D9EDC;
 	Wed, 27 May 2026 15:33:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779896004; cv=none; b=XtIZURHoalEuMafUD1y79sptHM4/IL5oLd5pKZtAac6/dyQlWtJvq/qZM3EbIpKBsJFgvNVHdSrF9q07a9UwFk3TYeXj/519IQeHfC18Qrj3yoqOiFxAAxzQCt73jRb/QcvUvGXyRNYQddmrjpkNj27N/CeQIc1Ji3O57XSv0JQ=
+	t=1779896004; cv=none; b=LuAIpVYgQKXjEDfi/laOYgDlvMiVdNMI23VkRw0Ym2zXXZL9iXiNU5KZdTkgqevT15MvhJupNTiGmDH/p3q0qaIRSM/gEZlU5CeaHY6gI6CJAwLrSXPrtEi2YpZZBLQ+qIQvDII9SEJUosgUS/8R/L7/AYk7GDG7keRTZgMGm40=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1779896004; c=relaxed/simple;
-	bh=nVpl3TVZQU9iG/8SJ8PbEKLaQViBegpkV2M01+wMc30=;
+	bh=eF5fEOWZsn5iEd6JrTeFCCBK6A3UIngZ9wzCS6q9kjw=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=AFXNkaHAYc5q3w6wfeapfT+bsiLcA5EPAU21aXmCa/WHWDCeUMfRN691bBLlnSZjJnVy9ykukOQgVKne9YwlUsRq4I0LIFVcp0+VygNcxET6bHvN4XkIEKM1pFi99BP0gpCh+rBh0hd3E9E2Ya8LJdSAXbU7wfrQVAsdAOqKfrY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=H43ckgw1; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id A5489C2BCF6;
+	 In-Reply-To:To:Cc; b=KLtRCQO4rlmK2FA/P1QLSRzF/tI/cWZ1BPsv8mMF+6MkDM8dDux4HCOz/mgH3XrXOo7DTSzIcEvqlgrbgI/6PklQLh5p1zNglZr+5OrqkMY4UP/vN3u+Xj0TKpgY8JdZgIpyutrAxIKGy7059Ej+84FVDyfTLFdXWrgpE4yNTio=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HzNMKTnH; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id B526DC2BCFA;
 	Wed, 27 May 2026 15:33:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1779896002;
-	bh=nVpl3TVZQU9iG/8SJ8PbEKLaQViBegpkV2M01+wMc30=;
+	bh=eF5fEOWZsn5iEd6JrTeFCCBK6A3UIngZ9wzCS6q9kjw=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=H43ckgw1K/X/LMmGirCLu6olwyKN+3u+/yP/z6bq4Ct4qvvq94RCjO4PnMuw80M68
-	 8djH78hYQ/6RueZeAlOGbX/16eqZVSzD6saRHNkwrq5RgAfLSBcybMpNwVtSULUf00
-	 p4iAOaCi1NFHMkYm9rAg0cDrDyfjyQVIs6FJC3oZdgg4LbiCo+7Il/17eSinXotCrL
-	 jBqtiGCtO1xpXV2OxG/7eZgVCon6zt6es2Xn/VF1t1m0DG8/8cQsNzraqRvYxd0y7G
-	 oziRXR42K0miODftx0GpKUUz2adWvK/lDhtgoD8kIhYjikZSvRJUdUEx5x0XEj9IFb
-	 u+EENixrJHRgw==
+	b=HzNMKTnH7LjMRKl96vGWtzp8Ea9tjVE6pAzMj0dRt83r8yIQ1zFguN4GOSKbadFNp
+	 X2V3BjYTnEfG4XfGYNZwE8GzKCO2GfbR+QnLfhe+qIgu0omOj3Na0XjQ9KtoLOy7sA
+	 dTR8VbdGjrDZfTH6Ue7Rz/0RtzfZqU6b26KCLqbKZdUFYug2x2U+X5s320dAgGfJzR
+	 GgC+V2AartD7uP1VOAHvAwP9jDeAGyn84zzNh2JCFwebylEvozyLyPtiXJevW731yK
+	 Gi26+gSMbzdvjHM4gkr6sL+jaSNILuds2Ulwv8Ew0vaJaHUymwSDsS7CS95h28kzb/
+	 185uJlcton7/Q==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C8C4CD6E45;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD663CD5BD0;
 	Wed, 27 May 2026 15:33:22 +0000 (UTC)
 From: Ackerley Tng via B4 Relay <devnull+ackerleytng.google.com@kernel.org>
-Date: Wed, 27 May 2026 08:33:16 -0700
-Subject: [PATCH RFC 04/12] Documentation: KVM: Turn - into bullet point
+Date: Wed, 27 May 2026 08:33:17 -0700
+Subject: [PATCH RFC 05/12] Documentation: KVM: Explain what rule the
+ exception section is meant for
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -58,7 +59,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260527-kvm-locking-docs-v1-4-4fe8b602ff47@google.com>
+Message-Id: <20260527-kvm-locking-docs-v1-5-4fe8b602ff47@google.com>
 References: <20260527-kvm-locking-docs-v1-0-4fe8b602ff47@google.com>
 In-Reply-To: <20260527-kvm-locking-docs-v1-0-4fe8b602ff47@google.com>
 To: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
@@ -73,11 +74,11 @@ Cc: kvm@vger.kernel.org, linux-doc@vger.kernel.org,
  linux-kernel@vger.kernel.org, loongarch@lists.linux.dev, 
  Ackerley Tng <ackerleytng@google.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1779896001; l=909;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1779896001; l=866;
  i=ackerleytng@google.com; s=20260225; h=from:subject:message-id;
- bh=CVJlxPT0bvHHOwHsW6J5heOXwU/ZjkdVD+6fUMJnWDE=;
- b=KkPJHF+eM7NDmHDSEhDOiOBWhwesjg7rIQXxnzpWgTB9I02vfYnNi5BaXX0a183XJ1mq7TDDx
- YhG5/AGb4N7Df+nmEUADJYfEvIEoR/I+w01Jm8766xS2x9bSTAeKxa+
+ bh=UhewnEFTG+HebdABX6t5eYYm+bNGAkoVsLLrTGAOeg4=;
+ b=H1OQEdfNpvGS7THThfrjojW6x13TvDlSiVDOrcNRwD6ECzNiF+y3cEqXlnDWAXTlLltd+N+OR
+ mklc0Q4Qr+BDr5L6d/govG1pkusRLLY1/lYMOt9RtFH8pqsWyDfELTw
 X-Developer-Key: i=ackerleytng@google.com; a=ed25519;
  pk=sAZDYXdm6Iz8FHitpHeFlCMXwabodTm7p8/3/8xUxuU=
 X-Endpoint-Received: by B4 Relay for ackerleytng@google.com/20260225 with
@@ -88,11 +89,11 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-89754-lists,linux-doc=lfdr.de,ackerleytng.google.com];
+	TAGGED_FROM(0.00)[bounces-89757-lists,linux-doc=lfdr.de,ackerleytng.google.com];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -107,38 +108,39 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[kernel.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
 	HAS_REPLYTO(0.00)[ackerleytng@google.com];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: ED8835E6F87
+X-Rspamd-Queue-Id: 998CF5E6F95
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 From: Ackerley Tng <ackerleytng@google.com>
 
-For the :Protects: section of kvm->mmu_lock, a missing space causes the -
-to render as a literal - instead of a bullet point. Add space to make it
-render as a bullet point.
+The Exception section describes some exceptions but not the rule the
+exception is for. Add a paragraph to clarify that detail.
 
 Signed-off-by: Ackerley Tng <ackerleytng@google.com>
 ---
- Documentation/virt/kvm/locking.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ Documentation/virt/kvm/locking.rst | 4 ++++
+ 1 file changed, 4 insertions(+)
 
 diff --git a/Documentation/virt/kvm/locking.rst b/Documentation/virt/kvm/locking.rst
-index 67dd2066f6d98..e349c2cb94943 100644
+index e349c2cb94943..5161636cec481 100644
 --- a/Documentation/virt/kvm/locking.rst
 +++ b/Documentation/virt/kvm/locking.rst
-@@ -283,7 +283,7 @@ time it will be set using the Dirty tracking mechanism described above.
- ^^^^^^^^^^^^^^^^^
- :Type:		spinlock_t or rwlock_t
- :Arch:		any
--:Protects:	-shadow page/shadow tlb entry
-+:Protects:	- shadow page/shadow tlb entry
- :Comment:	it is a spinlock since it is used in mmu notifier.
+@@ -61,6 +61,10 @@ sections.
+ 2. Exception
+ ------------
  
- ``kvm->srcu``
++The general rule in KVM is that any modification to shadow page tables
++(and their entries (SPTEs)) must be protected by ``kvm->mmu_lock``,
++with the exceptions described below.
++
+ Fast page fault:
+ 
+ Fast page fault is the fast path which fixes the guest page fault out of
 
 -- 
 2.54.0.823.g6e5bcc1fc9-goog
