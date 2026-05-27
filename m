@@ -1,127 +1,138 @@
-Return-Path: <linux-doc+bounces-89691-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89692-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SjqRAoNZFmrFlgcAu9opvQ
-	(envelope-from <linux-doc+bounces-89691-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 04:40:03 +0200
+	id UIAlFMNbFmpTlwcAu9opvQ
+	(envelope-from <linux-doc+bounces-89692-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 04:49:39 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5939D5DEA14
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 04:40:01 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id AA47B5DEB51
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 04:49:38 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 53A8B300C90E
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 02:40:00 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 1CD3E3049959
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 02:48:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CBDEF27A477;
-	Wed, 27 May 2026 02:39:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8B835291C10;
+	Wed, 27 May 2026 02:48:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="XCLEH0ZV"
+	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="gIa5tfSt"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D92128634C;
-	Wed, 27 May 2026 02:39:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C129C2DB781;
+	Wed, 27 May 2026 02:48:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779849599; cv=none; b=pjAtPZ06hTVcSf1LEnR+SVpXMcGGf+ZGvcdlJ0PCwCPj3jZ7QM0n6P4zGorlUDSOiGMz/+7gCkX1imVdbTLSTe95R1SPyaxy79rZUH55Gm9Ef9gbVqj5nYlvTAHJJtBqXjFDFuCWUPPL3B05JSooxLUMCrbgtAfKuDpD/Xhi2G4=
+	t=1779850090; cv=none; b=k03/jzR2hs0hvX7uKgIaVaskH99NY/dc6RsRzxYfFfTja4+hc2Tb7cb6XiNb7j4AONOPeeh3liG2gtKsdG7GywZZ09NXWSQhHlBn9+KVBQ0eyIi6CMV2la/lORhT94kZyoYDgjJuHonR5nmglIFg808Z7gqI0q1hcCH+TPnk6oE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779849599; c=relaxed/simple;
-	bh=IxVcgxaiFRhrbxKKNt/n9CTAfyskZGeCxhccEfOgkOE=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=FnxIwlotn7vTqHdqVrGCBSsbBsDASWkZj9GxeYqAvOVHAtTaRjjBs2jJAHl/DGovOqEnvQ7vLHS0OXzS6ly+spiYCn2SJAPZnV1HyMiWf6dV2X2J9w0NU/9uBPyp1TgMTuvBRXaL0dKJPjjhuEUcWOyx+d+iKcJohfcOj8gkFlU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=XCLEH0ZV; arc=none smtp.client-ip=198.137.202.133
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=17OZ+SJ5AtcF0dHm0RawFo9m+tVpv7RAqJytRnY3cN8=; b=XCLEH0ZVNQ6eBKZvQo3vAViF8M
-	GU+IsGmQOWY/AM/EqvLA8x+TXS1Cbq3Kz7E2ZiZHHPhN15BBobGE4iLNwChY7TdK7V3/8ay4backk
-	wd0TZEHybBzfziLoK33074mPLo+esM2rHwaTKRKgB0ksLRisHtDs/KClSyXBSddQWfWCSqhkkMZ3V
-	eGD5VCU3gtyHjnGQdF8SFB4WanDBpLM9yOrLvTjuoYwHsqN+aGTwQAe5GYArSXgZmyONAED50Qa6X
-	W/1LAY69lG/60zXasFLKm7QBQXp2tly6ZoWQOIcub4avuVs5iZYEjV4YnPVboQVC8AhBrrlm5ao4S
-	whAtF/HA==;
-Received: from [50.53.43.113] (helo=[192.168.254.34])
-	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wS4BQ-00000003AxU-1t9k;
-	Wed, 27 May 2026 02:39:48 +0000
-Message-ID: <72e0f118-5fa5-4ca7-b443-b472e7ba317d@infradead.org>
-Date: Tue, 26 May 2026 19:39:47 -0700
+	s=arc-20240116; t=1779850090; c=relaxed/simple;
+	bh=OhArExhyFxW6G7UNwjQaVgZXmRB/nNTrfg+Kxp+BsiU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=MqwfM1tTVZUtVCozShmmhmyBFaAm5WLe9p5rKcL4Pvze425LLHixEWegbUoU94qEtLtEHS1LDp7yszAdDNVclSa3Vq9x4XxzELBWK7lOwdMviDX3QmSGf/HfZLBQRGDU3mfztDvTCNxPQcCEPh3R1PEzKp2H2/ZE7V1cZ2tvBww=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=gIa5tfSt; arc=none smtp.client-ip=156.67.10.101
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+	bh=NqCAB+KvGtFT9+Ag7X3oNMKQy1eE5n7+jCufEcB2qLs=; b=gIa5tfStp4zgdLLUmF0beJ8kmC
+	IURwABeBvUtoEmBv+28aSIJ3xecvXIrHKSKFcjLCAfnO2lYxinUSO79HpUtsBZostQ/qMnEgpyO1g
+	TJ+Xie6gQZ5fyeDwSDkqgoWWXS3Vyg/YX0STx1LxAKCYljyEQ8FujzdjNkRw8qAPld3w=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+	(envelope-from <andrew@lunn.ch>)
+	id 1wS4J9-004guy-Ri; Wed, 27 May 2026 04:47:47 +0200
+Date: Wed, 27 May 2026 04:47:47 +0200
+From: Andrew Lunn <andrew@lunn.ch>
+To: Jakub Kicinski <kuba@kernel.org>
+Cc: "Maxime Chevallier (Netdev Foundation)" <maxime.chevallier@bootlin.com>,
+	davem@davemloft.net, Eric Dumazet <edumazet@google.com>,
+	Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>,
+	Russell King <linux@armlinux.org.uk>,
+	Heiner Kallweit <hkallweit1@gmail.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Oleksij Rempel <o.rempel@pengutronix.de>,
+	Vladimir Oltean <vladimir.oltean@nxp.com>,
+	Florian Fainelli <f.fainelli@gmail.com>,
+	thomas.petazzoni@bootlin.com, netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH net-next] Documentation: networking: Add a test plan for
+ ethtool pause validation
+Message-ID: <5cb8e2b4-8eb6-4446-9b90-1cd4c7964cd9@lunn.ch>
+References: <20260522175109.198059-1-maxime.chevallier@bootlin.com>
+ <20260526172447.10ca4b9e@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net-next 00/10] docs: net: updates for old and cobwebbed
- docs
-To: Jakub Kicinski <kuba@kernel.org>
-Cc: davem@davemloft.net, netdev@vger.kernel.org, edumazet@google.com,
- pabeni@redhat.com, andrew+netdev@lunn.ch, horms@kernel.org, corbet@lwn.net,
- vladimir.oltean@nxp.com, willemb@google.com, sdf.kernel@gmail.com,
- ecree.xilinx@gmail.com, jesse.brandeburg@intel.com, linux-doc@vger.kernel.org
-References: <20260526160151.2793354-1-kuba@kernel.org>
- <1c341b25-e720-4f63-9db1-99348c8ebed9@infradead.org>
- <20260526153719.7261b7f2@kernel.org> <20260526154001.4a8d30bf@kernel.org>
- <9757813c-dfc2-4979-80da-c3bbf962dc4c@infradead.org>
- <20260526181513.0393ca46@kernel.org>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20260526181513.0393ca46@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260526172447.10ca4b9e@kernel.org>
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	DMARC_POLICY_ALLOW(-0.50)[lunn.ch,none];
+	R_DKIM_ALLOW(-0.20)[lunn.ch:s=20171124];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-89691-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-89692-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[davemloft.net,vger.kernel.org,google.com,redhat.com,lunn.ch,kernel.org,lwn.net,nxp.com,gmail.com,intel.com];
-	RCPT_COUNT_TWELVE(0.00)[14];
+	FREEMAIL_CC(0.00)[bootlin.com,davemloft.net,google.com,redhat.com,kernel.org,armlinux.org.uk,gmail.com,lwn.net,linuxfoundation.org,pengutronix.de,nxp.com,vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[17];
 	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	NEURAL_HAM(-0.00)[-0.999];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[infradead.org:+];
+	FROM_NEQ_ENVFROM(0.00)[andrew@lunn.ch,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[lunn.ch:+];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,infradead.org:mid,infradead.org:dkim]
-X-Rspamd-Queue-Id: 5939D5DEA14
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,lunn.ch:mid,lunn.ch:dkim]
+X-Rspamd-Queue-Id: AA47B5DEB51
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-
-
-On 5/26/26 6:15 PM, Jakub Kicinski wrote:
-> On Tue, 26 May 2026 17:51:45 -0700 Randy Dunlap wrote:
->> It's in today's linux-next (20260526), line 1950 of
->> include/linux/netdevice.h:
+On Tue, May 26, 2026 at 05:24:47PM -0700, Jakub Kicinski wrote:
+> On Fri, 22 May 2026 19:51:06 +0200 Maxime Chevallier (Netdev
+> Foundation) wrote:
+> >  Documentation/networking/pause_test_plan.rst | 556 +++++++++++++++++++
 > 
-> linux-next is useful, but we try not to merge broken code, not just
-> notice it after the fact. So it'd be great if the fix made its way
-> to Linus and therefore propagate to subsystem -next trees, not just
-> linux-next.
+> It'd be great to hear from others but IMHO in the current form this is
+> not suitable for Documentation/networking/ We can commit the "knowledge"
+> part but enumerating the test cases seems odd for Documentation/.
 
-OK. I don't quite know what you mean by that, but I just checked the
-current net-next tree and it's still there at line 1950.
+Sorry, not looked too deeply at the actual content yet.
 
--- 
-~Randy
+What i was thinking was a python file, which sphinx can ingest to
+produce documentation, and place holders were code would be added to
+implement the actual test during the next phase.
 
+This is how i've done testing in the past. I would be the evil one who
+thought up the tests and described them in detail using sphinx markup
+in a python test template file. After some review they got passed off
+to a python developer for implementation. And when they got run and
+failed, sometimes the feature developer, the test developer and myself
+got together to figure who made the error.
+
+I'm not sure we even need sphinx. What i find important is that the
+test is documented. What kAPI calls should be made with what
+parameters. What results we are expected and why? So that when a test
+fails, a developer has the information they need to fix their
+code. The Why? is important, and often missing from the kernel tests.
+
+	Andrew
 
