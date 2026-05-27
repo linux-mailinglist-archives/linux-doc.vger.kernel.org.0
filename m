@@ -1,56 +1,56 @@
-Return-Path: <linux-doc+bounces-89751-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89758-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +O+yCosPF2o12wcAu9opvQ
-	(envelope-from <linux-doc+bounces-89751-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 17:36:43 +0200
+	id 8DuZA7EPF2o12wcAu9opvQ
+	(envelope-from <linux-doc+bounces-89758-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 17:37:21 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 608525E6F71
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 17:36:42 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6DBF55E6F8E
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 17:37:20 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 322FF307F0EF
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 15:33:50 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 3BA8D3090271
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 15:34:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3DDCA438FEE;
-	Wed, 27 May 2026 15:33:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2632C43C079;
+	Wed, 27 May 2026 15:33:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CzLEmkIE"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Zsanj2tq"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1CECB42EEDF;
-	Wed, 27 May 2026 15:33:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7465436376;
+	Wed, 27 May 2026 15:33:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779896003; cv=none; b=dKoVtmmcx0gro4oyNm0RBVliEKXmMvcwXEH3BFOJw5L9TJ4ZC5jty7EzzYNysItvYUxJxd3oIIdOVawnjOyT7+CfIlUq8jMDP42zjPPHDg7U2IPuAsEN5dd25zJ13EbXjmRBDKk0E+6mUMdSCj596yb6Fq/HZ3gBaWU+rWuaaJo=
+	t=1779896004; cv=none; b=B4dUuwKpouLXF+MR9UHm/ParyeScgnzWEp5vxRwa0OakoO6t0CxfUsxx+wckYR1zzv1abtOsqSmWABiQ4pAXrYKBBGFWziZ/WSqwDvTEAoLVVkW1UmDYJKAejiUDc0jPcUs2RMGOCdZM1QWypUkatC9drJ6KQvgPg/soI5xGtZc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779896003; c=relaxed/simple;
-	bh=HE/v0i2tFIOZQbBpx1VxOShX/QBPkKvyXiEneo0YBZE=;
+	s=arc-20240116; t=1779896004; c=relaxed/simple;
+	bh=Fy7SviBXyfR5Bkm0PCeZ4kofves6M/GmlsfFUICPdbk=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=EVQva++kT3VBTOfITtVTWxHPsUFrK/LIuFg+D4M1BtdpSYIsZg/dFmPudYIC8vTjbOzwQG7GmNvG6eqe2RodoF3e+0yHCMBa6nBzqZVAQw53x3MYPbNuH5WyJeRMQzN65SqFd2j5bZzGhupU50acacpoTZWPigYBvBcHVp0Qlmo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CzLEmkIE; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 7BC73C2BCC6;
+	 In-Reply-To:To:Cc; b=XVFMP+SFfd6MWbnqnfgkOiA5qedWbj+vO6e60BNkn+gNFjl2XDxObErmCJZDjDjaSRF2MkHWc7pBQH/8CuVbcDbdIAGVr9/xZ6QSpOxC0+pyonYjtQ95xcDG30snGyRxgFNw8Mcq3eyGrZ0VWE16CEfKrTKbBe5vVvibjDIW348=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Zsanj2tq; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 8E8DCC2BCF7;
 	Wed, 27 May 2026 15:33:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1779896002;
-	bh=HE/v0i2tFIOZQbBpx1VxOShX/QBPkKvyXiEneo0YBZE=;
+	bh=Fy7SviBXyfR5Bkm0PCeZ4kofves6M/GmlsfFUICPdbk=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=CzLEmkIEmaPXWBcOq5XREbns2k0gr1S/4PckKgOu1jaSG/rihF0LOmKtpxEouu57E
-	 ZhgOGt3Dc2cuDKPXH4aKuY8EwuHD3dKuD8FTePc/MwO6kBvhzZ23H2RRqDFW7MM7eE
-	 iZdoOX8cl8E9gQzQhivCrHOxBnMSbppodYd1EqhyEeiB924t2f9CdStFR9cIiv5ufe
-	 ozpBxQa1k5HolT0yVj3J/BW16EbbjmYtiKJqPfyyoRoz9Ugr1t1Lvj2CSD0tVsnx3J
-	 3V9sGthit+sF1ZnWgX878SM9iN+v4HKjsA3+J8Wl/QMqTJ/ldnkXg4/xNcYap9MOP7
-	 aeqvF0fm6zEYQ==
+	b=Zsanj2tqyi0TtgslAqA7S3Uu361R8oEGT24pGgf4cov0NxluFq6sxzsaFDngAbGNN
+	 Zwg41zTkvnfxV//sndSvH7qpnG2G1cFT9lca1WGhcWkPRtWTmTtJtYZywShxYWauEm
+	 XCFnRLnYrUYgOb/JeAKNO5MqeXu8x666GWAxPuFjx+hxgSZL3FjzKbsVLPe2LFmOMe
+	 hIVr82GfiZrQJmxHIJuZP3oOsk6DC8fFKaTq+LNoc3dqzYrKLRCYLfWn8pF0LgPye2
+	 ZmYii46Bki8fZ4LClgbYLSuaG0uY0cT1h/G5nD/xHaoD+P/B72nse40Gv5AQ/v9Cvg
+	 QQFhv1HkqgrVA==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 73130CD6E46;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 861D7CD4F54;
 	Wed, 27 May 2026 15:33:22 +0000 (UTC)
 From: Ackerley Tng via B4 Relay <devnull+ackerleytng.google.com@kernel.org>
-Date: Wed, 27 May 2026 08:33:14 -0700
-Subject: [PATCH RFC 02/12] Documentation: KVM: Consolidate notes about
- cpu_read_lock() and kvm_lock
+Date: Wed, 27 May 2026 08:33:15 -0700
+Subject: [PATCH RFC 03/12] Documentation: KVM: Consolidate notes about
+ kvm->slots_lock and irq_lock
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -59,7 +59,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260527-kvm-locking-docs-v1-2-4fe8b602ff47@google.com>
+Message-Id: <20260527-kvm-locking-docs-v1-3-4fe8b602ff47@google.com>
 References: <20260527-kvm-locking-docs-v1-0-4fe8b602ff47@google.com>
 In-Reply-To: <20260527-kvm-locking-docs-v1-0-4fe8b602ff47@google.com>
 To: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
@@ -74,11 +74,11 @@ Cc: kvm@vger.kernel.org, linux-doc@vger.kernel.org,
  linux-kernel@vger.kernel.org, loongarch@lists.linux.dev, 
  Ackerley Tng <ackerleytng@google.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1779896001; l=1641;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1779896001; l=1205;
  i=ackerleytng@google.com; s=20260225; h=from:subject:message-id;
- bh=g71wqImwKNA2W1d9aVPqMV7Uh2kOm/LmCZhr5oX9KEc=;
- b=tp9bB0rR932atLXHEHhRX+PGjo7Pn9ZSpQ3wo1LyHKIYaRGe/jBPOdCQfNdTxOyq8w9lMnUj6
- msk2J3WyEuOBBi3gyIsz2NhLOdOGjuUnCy0Ux1Nd5x9Qy5tyibGzGaj
+ bh=5xqYuflg/lHRaHVhIbofzsJqCQI4L326JDxGJuO8b0U=;
+ b=/bIlnjfndGdNS+ll2dxYYvqLLoNppW84HDwXhvbpWFF04ZPlHUMWp75WsSLCcKYSYWt61B5P7
+ mXli/FQOdC4BvZ0ynYtyfQjBM8Q6lsysXNUKDjZXn5ui6jUMED+c4jb
 X-Developer-Key: i=ackerleytng@google.com; a=ed25519;
  pk=sAZDYXdm6Iz8FHitpHeFlCMXwabodTm7p8/3/8xUxuU=
 X-Endpoint-Received: by B4 Relay for ackerleytng@google.com/20260225 with
@@ -89,11 +89,11 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-89751-lists,linux-doc=lfdr.de,ackerleytng.google.com];
+	TAGGED_FROM(0.00)[bounces-89758-lists,linux-doc=lfdr.de,ackerleytng.google.com];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -108,54 +108,43 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[kernel.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
 	HAS_REPLYTO(0.00)[ackerleytng@google.com];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: 608525E6F71
+X-Rspamd-Queue-Id: 6DBF55E6F8E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 From: Ackerley Tng <ackerleytng@google.com>
 
-Move the detail about cpu_read_lock() and kvm_lock to where the acquisition
-order is mentioned.
+Move the detail about ordering between kvm->slots_lock and kvm->irq_lock to
+where the two locks are first mentioned.
 
 Signed-off-by: Ackerley Tng <ackerleytng@google.com>
 ---
- Documentation/virt/kvm/locking.rst | 12 +++++-------
- 1 file changed, 5 insertions(+), 7 deletions(-)
+ Documentation/virt/kvm/locking.rst | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
 diff --git a/Documentation/virt/kvm/locking.rst b/Documentation/virt/kvm/locking.rst
-index 5564c8b38b9cc..1e8cbbe3ba706 100644
+index 1e8cbbe3ba706..67dd2066f6d98 100644
 --- a/Documentation/virt/kvm/locking.rst
 +++ b/Documentation/virt/kvm/locking.rst
-@@ -10,6 +10,11 @@ KVM Lock Overview
- The acquisition orders for mutexes are as follows:
+@@ -21,12 +21,11 @@ The acquisition orders for mutexes are as follows:
+ - kvm->lock is taken outside vcpu->mutex
  
- - cpus_read_lock() is taken outside kvm_lock
-+    - Taking cpus_read_lock() outside of kvm_lock is problematic,
-+      despite it being the official ordering, as it is quite easy to
-+      unknowingly trigger cpus_read_lock() while holding kvm_lock.
-+      Use caution when walking vm_list, e.g. avoid complex operations
-+      when possible.
+ - kvm->lock is taken outside kvm->slots_lock and kvm->irq_lock
++    - kvm->slots_lock is taken outside kvm->irq_lock, though acquiring
++      them together is quite rare.
  
- - kvm_usage_lock is taken outside cpus_read_lock()
+ - vcpu->mutex is taken outside kvm->slots_lock and kvm->slots_arch_lock
  
-@@ -28,13 +33,6 @@ The acquisition orders for mutexes are as follows:
-   are taken on the waiting side when modifying memslots, so MMU notifiers
-   must not take either kvm->slots_lock or kvm->slots_arch_lock.
- 
--cpus_read_lock() vs kvm_lock:
+-- kvm->slots_lock is taken outside kvm->irq_lock, though acquiring
+-  them together is quite rare.
 -
--- Taking cpus_read_lock() outside of kvm_lock is problematic, despite that
--  being the official ordering, as it is quite easy to unknowingly trigger
--  cpus_read_lock() while holding kvm_lock.  Use caution when walking vm_list,
--  e.g. avoid complex operations when possible.
--
- For SRCU:
- 
- - ``synchronize_srcu(&kvm->srcu)`` is called inside critical sections
+ - kvm->mn_active_invalidate_count ensures that pairs of
+   invalidate_range_start() and invalidate_range_end() callbacks
+   use the same memslots array.  kvm->slots_lock and kvm->slots_arch_lock
 
 -- 
 2.54.0.823.g6e5bcc1fc9-goog
