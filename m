@@ -1,66 +1,66 @@
-Return-Path: <linux-doc+bounces-89777-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89779-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SG+CG4w+F2qg9wcAu9opvQ
-	(envelope-from <linux-doc+bounces-89777-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 20:57:16 +0200
+	id 6KZ2Dts+F2qg9wcAu9opvQ
+	(envelope-from <linux-doc+bounces-89779-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 20:58:35 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9C2E5E9458
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 20:57:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A8FFC5E947D
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 20:58:34 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id CFF82301D941
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 18:57:14 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id AA0063064451
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 18:57:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C992032BF5A;
-	Wed, 27 May 2026 18:57:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 34A46346A14;
+	Wed, 27 May 2026 18:57:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b="RPnX101X"
+	dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b="nF/21SGu"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com [136.143.188.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C04091E32D6;
-	Wed, 27 May 2026 18:57:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CECF71E32D6;
+	Wed, 27 May 2026 18:57:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.15
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779908231; cv=pass; b=u/+sN95tLneTXVCtx/altquuf8yxn6RJccRBBYPfdNGdSKvZRcftLegAw5P2ab23C6+xgM9kyefP4KqqCzhVZC1YlWwmEhubBxS26LPaIC6JZIQ/B6bODaQMjN//ZdyZLcKayiWQFGQ7VMbuIqL3pkOvMILxdPQphaStcZNHhIY=
+	t=1779908237; cv=pass; b=taSFOKK/z2cI/Cvma/4hN0R2CS5qZpCDBMTK3EJ5HwmTBdAmz3zFsMglio7C2W1WTN/PsP/qtQSXBLYoRLhSyKYs73IZYsPq901GORIOCRJ6OsgERySZyrqNE7TTFLH4NNZArFt02Ec2luv0g8NnFdh356wNh+rJTd/thOmQrTY=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779908231; c=relaxed/simple;
-	bh=TwGY9EUCgVUpudxd47mpIfAy54t39yjD/6/xHxWCcN0=;
+	s=arc-20240116; t=1779908237; c=relaxed/simple;
+	bh=dPsqvFMUthronaDNPsO9Nf2AfzZZGos2VFwXOO1haoQ=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=pYQqIk3k+GxtDQOTQluk5juASvgL05KiaDam7DfXW6v6w6t0xCTt2GZCReO9z2vhZ4Mlg2i6UKeCUHhFGD7G88s8shlyBxcJbvdIRxnJ+bpotluiuHnlQ7dAmuFwZ6+dGGe/Z7RhRlRhHJK6WG/Tmq8TKirxF4sDQmTEfyxDkF4=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rong.moe; spf=pass smtp.mailfrom=rong.moe; dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b=RPnX101X; arc=pass smtp.client-ip=136.143.188.15
+	 In-Reply-To:To:Cc; b=DHwbuMuwoP5H4TQ3jdy+VjOffY9EPYcYy0v1nl6gyxlgXHgoqwIwHFkcSpnKCjLAABV+6Mko14PL46KF1ANHaQMVHFPv82nr3CfLKnSV1g/lZRVNPeuDf0m+OlM3oF4SVs9IfVa08w6REGKCORauyxx/eUQX4SDQKiexP0cxWmk=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rong.moe; spf=pass smtp.mailfrom=rong.moe; dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b=nF/21SGu; arc=pass smtp.client-ip=136.143.188.15
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rong.moe
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rong.moe
-ARC-Seal: i=1; a=rsa-sha256; t=1779908226; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1779908230; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=b0PMW1WfhG1v4FtnIDcrTv8l8v7N/5273UBAq7XZF7jtHtGUBrJvKgaxnG5k+T9nO7otzt1FKRKEIFvIdGpNX/p4JGJuGxm/aYkZvS1Ww9+5gYmIENmnQsKSbJO1FCiJAff83gH3rLFJGNenCUKGqPXLOl1zV79rdlOLTD1I3lM=
+	b=CkWeEonTk9ONsUoUmscz1wwUp0OAFL1DmCR1Hedh25+HbXjjHV6fJXjrxSNU+lG2IVRvMmYODlM+Rplpk+cUMBIXgyx7jGSdx/Fy+gMWJXykHhzt700s/vnAM3wdW71V0M876+OlGWMvKAE2T7sd3H5MLn6GpjHHKtCI4UPITEw=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1779908226; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=k6jJHAGWv2lFTgCAtiC2RZxGb/W2yw+XcbRpOAYffwM=; 
-	b=QQ6k/MdqkAkJRPi9MBoFkltnzvhPy10Jp1jrgtLs4X9jjYC7aYDB1oM2UoWmQqsuEd9xoHqhWA1pdjqezB0qfl1JoW7Foj/XaO5N+dr88PFDNVDbe8LRP0ZtPdUdMnNN8Zp+I1moIO12/AO3S3uFShrQqp5LhZPV7ZaND444utc=
+	t=1779908230; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=1BN6G/rgB9O80LfDMRyXKYCm7YGnt9QXu63DWzyvDnA=; 
+	b=FeNP/oVv+zlAvYOvlccNCDLzGlKGeu82yfHrnLA1iO7UH6RQ1PtmR9kUU+8sdtONGmPzR3j2cpHIjP51sCYAPwRmHVYZan1j56bPYCDhjOo2iu9HF+zrSEaLvrZCN1A7MGYj53wwjmJQBJzZiORfVf4+w8oM55M5ZNIPYHWHtjM=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=rong.moe;
 	spf=pass  smtp.mailfrom=i@rong.moe;
 	dmarc=pass header.from=<i@rong.moe>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1779908226;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1779908230;
 	s=zmail2048; d=rong.moe; i=i@rong.moe;
 	h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:References:In-Reply-To:To:To:Cc:Cc:Reply-To;
-	bh=k6jJHAGWv2lFTgCAtiC2RZxGb/W2yw+XcbRpOAYffwM=;
-	b=RPnX101XkquQnOk7FhycLom+TW9ktbHdDdf9uZ/3ycGlw2ZwdBsvC6Iqv08vDWyo
-	dEjGUuvkKVoz4ZhfoYLsH9JFvGNNvHM5T+hgNh+0e1irIv3GyB7zwlI06Y7dwa8nSNY
-	KB1fudMrRgWEH+a7jKIvBe+7tchvebnem4HhUlff6/lqFYbt2XZKhROW34iiZjq5V8Y
-	LS6l12T7dsAhyHAZ0qcYStue9uueBQzH6H74vNS44rgwX3WuiOBwuOA90687LMdSTTY
-	rdz2bUwxDCWUnJE9PfKmGz7mhFErYbUGjJ0jbd/YmqYmubX4xQBJ2CLX0cMCL62S3hx
-	FGeTgQF1RQ==
-Received: by mx.zohomail.com with SMTPS id 1779908225320473.38762429553503;
-	Wed, 27 May 2026 11:57:05 -0700 (PDT)
+	bh=1BN6G/rgB9O80LfDMRyXKYCm7YGnt9QXu63DWzyvDnA=;
+	b=nF/21SGuZvfdY0GPR1SaT44THCIhckMsc36QL45w0tKhat6IvPJQoCx9dRBxsDBZ
+	TxuiSSd1aDSkO5kWiSZhMUjV9o8eH+Muppb7PND11esJrlKGFcEFVhhkx5/bNH5rUI8
+	vuA2Av24yMAxeISAxq22BT+uWVNgja7ctThTO+eAGMPlu0O+fYZdOsRNi7h0T6NSCed
+	0Bm/+RCBi8K0gJ3qF8ItvZssF/RFq8rhtnSKzP62SUpO63FxhjYIskkGt8QPwBFZxfi
+	FIlYKfk5mlBmPq/ByTxwuSTPNIddrHCJy2ecSoDiSGes5xUMMTipZwD5+XL5bBBL/s+
+	GJg2Nr3sQw==
+Received: by mx.zohomail.com with SMTPS id 1779908227965615.4832510104864;
+	Wed, 27 May 2026 11:57:07 -0700 (PDT)
 From: Rong Zhang <i@rong.moe>
-Date: Thu, 28 May 2026 02:56:27 +0800
-Subject: [PATCH v2 1/2] ALSA: usb-audio: Add
- QUIRK_FLAG_MIXER_GET_CUR_BROKEN
+Date: Thu, 28 May 2026 02:56:28 +0800
+Subject: [PATCH v2 2/2] ALSA: usb-audio: Add quirk flag for Sennheiser
+ MOMENTUM 3
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -69,7 +69,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260528-uac-quirk-get-cur-vol-v2-1-84d3c8f48150@rong.moe>
+Message-Id: <20260528-uac-quirk-get-cur-vol-v2-2-84d3c8f48150@rong.moe>
 References: <20260528-uac-quirk-get-cur-vol-v2-0-84d3c8f48150@rong.moe>
 In-Reply-To: <20260528-uac-quirk-get-cur-vol-v2-0-84d3c8f48150@rong.moe>
 To: Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
@@ -86,7 +86,7 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-89777-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-89779-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -102,167 +102,60 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	RCPT_COUNT_SEVEN(0.00)[8];
 	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: D9C2E5E9458
+	DBL_BLOCKED_OPENRESOLVER(0.00)[rong.moe:email,rong.moe:mid,rong.moe:dkim,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: A8FFC5E947D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Since commit 86aa1ea1f15c ("ALSA: usb-audio: Do not expose sticky
-mixers"), the UAC mixer core utilizes volume SET_CUR and GET_CUR to
-identify devices with sticky mixers. Unfortunately, even though most
-devices with sticky GET_CUR also have corresponding sticky SET_CUR,
-which I actually met more since the commit had been merged, there is
-also a rare case that some devices may have volume mixers that responds
-to SET_CUR properly but with its GET_CUR stubbed. This cause the sticky
-check to consider the mixer to be sticky and unnecessarily disable it.
+The Sennheiser MOMENTUM 3 is a wireless around-ear headphones featuring
+ANC, which can be connected via Bluetooth or USB-C.
 
-As the sticky check can't distinguish between sticky mixers and working
-SET_CUR but broken GET_CUR, add QUIRK_FLAG_MIXER_GET_CUR_BROKEN to tell
-that the device should fall into the second category when GET_CUR
-returns a constant value. In this case, the sticky check becomes
-non-fatal and only disables GET_CUR instead of the whole mixer. The
-current volume will then be provided by the internal cache that stores
-the last set volume.
+When connecting via USB-C, its UAC mixer works fine and precisely
+corresponds to the reported dB range. However, the mixer's volume
+GET_CUR method is somehow stubbed and returns a constant value (15dB).
+Since commit 86aa1ea1f15c ("ALSA: usb-audio: Do not expose sticky
+mixers"), the sticky check considers the mixer to be sticky and
+unnecessarily disables the mixer.
+
+Add a quirk table entry matching VID/PID=0x1377/0x6004 and applying
+the MIXER_GET_CUR_BROKEN quirk flag, so that the mixer is usable again.
+
+Quirky device sample:
+
+  usb 7-1.4.4.1.1.1: new full-speed USB device number 30 using xhci_hcd
+  usb 7-1.4.4.1.1.1: New USB device found, idVendor=1377, idProduct=6004, bcdDevice=38.85
+  usb 7-1.4.4.1.1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+  usb 7-1.4.4.1.1.1: Product: MOMENTUM 3
+  usb 7-1.4.4.1.1.1: Manufacturer: Sennheiser electronic GmbH & Co. KG
+  usb 7-1.4.4.1.1.1: SerialNumber: <REDACTED>
+  usb 7-1.4.4.1.1.1: Found last interface = 0
+  usb 7-1.4.4.1.1.1: 1:1: add audio endpoint 0x3
+  usb 7-1.4.4.1.1.1: Creating new data endpoint #3
+  usb 7-1.4.4.1.1.1: 1:1 Set sample rate 48000, clock 0
+  usb 7-1.4.4.1.1.1: 6:0: sticky mixer values (0/11520/768 => 3840), disabling
+  usb 7-1.4.4.1.1.1: [6] FU [PCM Playback Volume] skipped due to invalid volume
+  input: Sennheiser electronic GmbH & Co. KG MOMENTUM 3 as /devices/pci0000:00/0000:00:08.3/0000:67:00.4/usb7/7-1/7-1.4/7-1.4.4/7-1.4.4.1/7-1.4.4.1.1/7-1.4.4.1.1.1/7-1.4.4.1.1.1:1.2/0003:1377:6004.002B/input/input208
+  input: Sennheiser electronic GmbH & Co. KG MOMENTUM 3 Consumer Control as /devices/pci0000:00/0000:00:08.3/0000:67:00.4/usb7/7-1/7-1.4/7-1.4.4/7-1.4.4.1/7-1.4.4.1.1/7-1.4.4.1.1.1/7-1.4.4.1.1.1:1.2/0003:1377:6004.002B/input/input209
+  hid-generic 0003:1377:6004.002B: input,hiddev99,hidraw12: USB HID v1.11 Device [Sennheiser electronic GmbH & Co. KG MOMENTUM 3] on usb-0000:67:00.4-1.4.4.1.1.1/input2
 
 Signed-off-by: Rong Zhang <i@rong.moe>
 ---
- Documentation/sound/alsa-configuration.rst | 12 ++++++++++++
- sound/usb/mixer.c                          | 17 +++++++++++++++--
- sound/usb/mixer.h                          |  1 +
- sound/usb/quirks.c                         |  1 +
- sound/usb/usbaudio.h                       | 13 +++++++++++++
- 5 files changed, 42 insertions(+), 2 deletions(-)
+ sound/usb/quirks.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/Documentation/sound/alsa-configuration.rst b/Documentation/sound/alsa-configuration.rst
-index 4b30cd63c5a5..78fb484e8b04 100644
---- a/Documentation/sound/alsa-configuration.rst
-+++ b/Documentation/sound/alsa-configuration.rst
-@@ -2389,6 +2389,18 @@ quirk_flags
-           from snd_usb_handle_sync_urb. Instead fall through and enqueue a
-           packet_info containing only size-0 packets, so the OUT ring keeps
-           moving (emits silence). Needed by Behringer Flow 8 (1397:050c).
-+        * bit 30: ``mixer_get_cur_broken``
-+          Some mixers are sticky, which means that setting their current volume
-+          is a no-op, and reading the current volume returns a constant value.
-+          The sticky check disables these mixers to prevent confusing userspace.
-+          However, some devices do have a tunable volume despite the reported
-+          current volume being constant. As the sticky check can't distinguish
-+          between the two categories, setting this flag tells that the device
-+          should fall into the second category when GET_CUR returns a constant
-+          value, resulting in the sticky check being non-fatal and only
-+          disabling GET_CUR instead of the whole mixer. The current volume will
-+          then be provided by the internal cache that stores the last set
-+          volume
- 
- This module supports multiple devices, autoprobe and hotplugging.
- 
-diff --git a/sound/usb/mixer.c b/sound/usb/mixer.c
-index d61bde654219..27d6445cc319 100644
---- a/sound/usb/mixer.c
-+++ b/sound/usb/mixer.c
-@@ -420,6 +420,9 @@ static int get_cur_ctl_value(struct usb_mixer_elem_info *cval,
- static inline int get_cur_mix_raw(struct usb_mixer_elem_info *cval,
- 				  int channel, int *value)
- {
-+	if (cval->get_cur_broken)
-+		return -ENXIO;
-+
- 	return get_ctl_value(cval, UAC_GET_CUR,
- 			     (cval->control << 8) | channel,
- 			     value);
-@@ -1258,6 +1261,16 @@ static int check_sticky_volume_control(struct usb_mixer_elem_info *cval,
- 			return 0;
- 	}
- 
-+	if (cval->head.mixer->chip->quirk_flags & QUIRK_FLAG_MIXER_GET_CUR_BROKEN) {
-+		usb_audio_warn(cval->head.mixer->chip,
-+			       "%d:%d: broken mixer GET_CUR (%d/%d/%d => %d)\n",
-+			       cval->head.id, mixer_ctrl_intf(cval->head.mixer),
-+			       cval->min, cval->max, cval->res, saved);
-+
-+		cval->get_cur_broken = 1;
-+		return -ENXIO;
-+	}
-+
- 	usb_audio_err(cval->head.mixer->chip,
- 		      "%d:%d: sticky mixer values (%d/%d/%d => %d), disabling\n",
- 		      cval->head.id, mixer_ctrl_intf(cval->head.mixer),
-@@ -1360,12 +1373,12 @@ static int get_min_max_with_quirks(struct usb_mixer_elem_info *cval,
- 				goto no_checks;
- 
- 			ret = check_sticky_volume_control(cval, minchn, saved);
--			if (ret < 0) {
-+			if (ret == -ENODEV) {
- 				snd_usb_set_cur_mix_value(cval, minchn, 0, saved);
- 				return ret;
- 			}
- 
--			if (cval->min + cval->res < cval->max)
-+			if (!ret && cval->min + cval->res < cval->max)
- 				check_volume_control_res(cval, minchn, saved);
- 
- 			snd_usb_set_cur_mix_value(cval, minchn, 0, saved);
-diff --git a/sound/usb/mixer.h b/sound/usb/mixer.h
-index afbb3dd9f177..3fa1bd96f858 100644
---- a/sound/usb/mixer.h
-+++ b/sound/usb/mixer.h
-@@ -94,6 +94,7 @@ struct usb_mixer_elem_info {
- 	int cache_val[MAX_CHANNELS];
- 	u8 initialized;
- 	u8 min_mute;
-+	u8 get_cur_broken;
- 	void *private_data;
- };
- 
 diff --git a/sound/usb/quirks.c b/sound/usb/quirks.c
-index e2c95be38aca..ac2f0f6039be 100644
+index ac2f0f6039be..149f2009df12 100644
 --- a/sound/usb/quirks.c
 +++ b/sound/usb/quirks.c
-@@ -2605,6 +2605,7 @@ static const char *const snd_usb_audio_quirk_flag_names[] = {
- 	QUIRK_STRING_ENTRY(MIXER_PLAYBACK_LINEAR_VOL),
- 	QUIRK_STRING_ENTRY(MIXER_CAPTURE_LINEAR_VOL),
- 	QUIRK_STRING_ENTRY(IFB_SILENCE_ON_EMPTY),
-+	QUIRK_STRING_ENTRY(MIXER_GET_CUR_BROKEN),
- 	NULL
- };
- 
-diff --git a/sound/usb/usbaudio.h b/sound/usb/usbaudio.h
-index 9afcad8f143a..e472aef6eb87 100644
---- a/sound/usb/usbaudio.h
-+++ b/sound/usb/usbaudio.h
-@@ -242,6 +242,17 @@ extern bool snd_usb_skip_validation;
-  *  from snd_usb_handle_sync_urb. Instead fall through and enqueue a
-  *  packet_info containing only size-0 packets, so the OUT ring keeps
-  *  moving (emits silence). Needed by Behringer Flow 8 (1397:050c).
-+ * QUIRK_FLAG_MIXER_GET_CUR_BROKEN
-+ *  Some mixers are sticky, which means that setting their current volume is a
-+ *  no-op, and reading the current volume returns a constant value. The sticky
-+ *  check disables these mixers to prevent confusing userspace. However, some
-+ *  devices do have a tunable volume despite the reported current volume being
-+ *  constant. As the sticky check can't distinguish between the two categories,
-+ *  setting this flag tells that the device should fall into the second
-+ *  category when GET_CUR returns a constant value, resulting in the sticky
-+ *  check being non-fatal and only disabling GET_CUR instead of the whole mixer.
-+ *  The current volume will then be provided by the internal cache that stores
-+ *  the last set volume
-  */
- 
- enum {
-@@ -275,6 +286,7 @@ enum {
- 	QUIRK_TYPE_MIXER_PLAYBACK_LINEAR_VOL	= 27,
- 	QUIRK_TYPE_MIXER_CAPTURE_LINEAR_VOL	= 28,
- 	QUIRK_TYPE_IFB_SILENCE_ON_EMPTY		= 29,
-+	QUIRK_TYPE_MIXER_GET_CUR_BROKEN		= 30,
- /* Please also edit snd_usb_audio_quirk_flag_names */
- };
- 
-@@ -310,5 +322,6 @@ enum {
- #define QUIRK_FLAG_MIXER_PLAYBACK_LINEAR_VOL	QUIRK_FLAG(MIXER_PLAYBACK_LINEAR_VOL)
- #define QUIRK_FLAG_MIXER_CAPTURE_LINEAR_VOL	QUIRK_FLAG(MIXER_CAPTURE_LINEAR_VOL)
- #define QUIRK_FLAG_IFB_SILENCE_ON_EMPTY		QUIRK_FLAG(IFB_SILENCE_ON_EMPTY)
-+#define QUIRK_FLAG_MIXER_GET_CUR_BROKEN		QUIRK_FLAG(MIXER_GET_CUR_BROKEN)
- 
- #endif /* __USBAUDIO_H */
+@@ -2357,6 +2357,8 @@ static const struct usb_audio_quirk_flags_table quirk_flags_table[] = {
+ 		   QUIRK_FLAG_FORCE_IFACE_RESET | QUIRK_FLAG_IFACE_DELAY),
+ 	DEVICE_FLG(0x1224, 0x2a25, /* Jieli Technology USB PHY 2.0 */
+ 		   QUIRK_FLAG_GET_SAMPLE_RATE | QUIRK_FLAG_MIC_RES_16),
++	DEVICE_FLG(0x1377, 0x6004, /* Sennheiser MOMENTUM 3 */
++		   QUIRK_FLAG_MIXER_GET_CUR_BROKEN),
+ 	DEVICE_FLG(0x1395, 0x740a, /* Sennheiser DECT */
+ 		   QUIRK_FLAG_GET_SAMPLE_RATE),
+ 	DEVICE_FLG(0x1397, 0x0507, /* Behringer UMC202HD */
 
 -- 
 2.53.0
