@@ -1,407 +1,297 @@
-Return-Path: <linux-doc+bounces-89732-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89734-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +AguHIH6FmqGzwcAu9opvQ
-	(envelope-from <linux-doc+bounces-89732-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 16:06:57 +0200
+	id WP+jHd/7Fmqe0AcAu9opvQ
+	(envelope-from <linux-doc+bounces-89734-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 16:12:47 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC1185E5937
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 16:06:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C649F5E5AB4
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 16:12:46 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 09455301FD4A
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 13:59:22 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id BFF95304D71B
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 14:06:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A715C3C2B84;
-	Wed, 27 May 2026 13:59:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9334E32AAC5;
+	Wed, 27 May 2026 14:06:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b="C77Rwbr0"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mxhk.zte.com.cn (mxhk.zte.com.cn [160.30.148.35])
+Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 649FA2F531F;
-	Wed, 27 May 2026 13:59:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=160.30.148.35
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 941DE3242A9;
+	Wed, 27 May 2026 14:06:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.195.75.108
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779890360; cv=none; b=ICzTObK0sd2ygsR/Yubrqf8zMLtzKQgmpySCazfw54KYoyKzDSYzgBgUI6psNmGMA2+gzmMu6BGGLkxOWGuC7rJiYFL42monJD5YKaQXntmnZ069zDbe8qrFsNMZzDML0IvwiylMfhvO96gpJZ2P3NBGl0vgxJ+1TfLNNO8mUDs=
+	t=1779890798; cv=none; b=YXt2YtXeZTNXHSNfYBoFMYtK1xEbF38r5GF1nUT45/Ha5vs5pYdP8C5OLNngOWhNzR9gGldOBLeZHNKiEUMMDsbAQ+x0t+9RE3+lh6qKRtOwQGvEwGQGnr2B9ATZuQZqpimMXYPmblbUMFdfxdym1EV/AjMzvulsFAcg5c2C3zY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779890360; c=relaxed/simple;
-	bh=lPatLY1Gzv7CVlYfEuJxTP25o6SXMmJIk6jUjlNSdaE=;
-	h=Message-ID:In-Reply-To:References:Date:Mime-Version:From:To:Cc:
-	 Subject:Content-Type; b=ZmaSC8t+FwIvOi0sTnwkuSWyv1EuGoVBcKTSFwH6peGWkFwMDKlep3/0RlGTVetdPZ+INp/C7SGHZdZoRP/RILcF+BEEnaNITy79CAFPKr+6mAvdo0gLp0KG2N6tuAoMrX19v0oCsDjoN/jx1FwNOHbSPffbASehLV60pdYrFU0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zte.com.cn; spf=pass smtp.mailfrom=zte.com.cn; arc=none smtp.client-ip=160.30.148.35
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zte.com.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zte.com.cn
-Received: from mse-fl2.zte.com.cn (unknown [10.5.228.133])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mxhk.zte.com.cn (FangMail) with ESMTPS id 4gQWSg3mt3z7Qxs2;
-	Wed, 27 May 2026 21:59:15 +0800 (CST)
-Received: from xaxapp01.zte.com.cn ([10.88.99.176])
-	by mse-fl2.zte.com.cn with SMTP id 64RDx9c1078203;
-	Wed, 27 May 2026 21:59:09 +0800 (+08)
-	(envelope-from wang.yaxin@zte.com.cn)
-Received: from mapi (xaxapp02[null])
-	by mapi (Zmail) with MAPI id mid32;
-	Wed, 27 May 2026 21:59:12 +0800 (CST)
-X-Zmail-TransId: 2afa6a16f8b0518-0ad24
-X-Mailer: Zmail v1.0
-Message-ID: <20260527215912356_JgxYvKzK5-NE2IAC69Vs@zte.com.cn>
-In-Reply-To: <20260527215524044fG7XSpgveHiaFhraq0yAi@zte.com.cn>
-References: 20260527215524044fG7XSpgveHiaFhraq0yAi@zte.com.cn
-Date: Wed, 27 May 2026 21:59:12 +0800 (CST)
+	s=arc-20240116; t=1779890798; c=relaxed/simple;
+	bh=2jCKYTQjoKuxxT2ozar3gAihqc+gFK+1/JJPsrGwdlY=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=teC6Cdo8NtMtHCzuFKZw3XwlH6r188VsGgZNmv/NlOmk4MolCgL8vu46pZDJ+sVKW9XDW0Ddyn7wnwfrtfbasIrSvSDxLjXxr/f6NhsJ8Db47FUmj9OEYmC9R+ABmvTlKiL78ZYUkMfRvieXfQb4lp02eUB88vqO67Sz4eQzF58=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org; spf=pass smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=C77Rwbr0; arc=none smtp.client-ip=82.195.75.108
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=debian.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
+	s=smtpauto.stravinsky; h=X-Debian-User:Cc:To:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:Message-Id:Date:Subject:From:Reply-To:Content-ID:
+	Content-Description:In-Reply-To:References;
+	bh=kMARWeKKUnu5AW49H0a/tY2hHiXSjf7x6sDlYFbA0no=; b=C77Rwbr037HBrCPXLJGFa+WDPT
+	9EwbR83ut5Hui0/kA13sm2MT/I/RcHKS8I8IeDzmAmexUl6s60YOHfmKBNS5YaVfQNFcMbVxQ2GtZ
+	L76qZjTV4bR8a6Ttd852S4CzUfNb+dSztgtNC/Vwi+chw0eM1FL93k1RzEpSH8vAjU37It4Chcfae
+	tC8aLk/gtct8uIc0yM02eX+p2Y0786Q9MuZgMrSyfxKPQ2EtNiYk9JKBCvFTrYNHgnsppzgaiqajR
+	A4HxKb+Go2LgR0yeAHmSn4RoNgNzeDvgQ8p1LYlIY2wSpKsTwzkVE0NLkBH+PbYUUWJ4zzjqHLYru
+	Me3edNvw==;
+Received: from authenticated-user
+	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
+	(Exim 4.96)
+	(envelope-from <leitao@debian.org>)
+	id 1wSEts-003DSa-2P;
+	Wed, 27 May 2026 14:06:26 +0000
+From: Breno Leitao <leitao@debian.org>
+Subject: [PATCH v8 0/6] mm/memory-failure: add panic option for
+ unrecoverable pages
+Date: Wed, 27 May 2026 07:06:13 -0700
+Message-Id: <20260527-ecc_panic-v8-0-9ea0cfa16bb0@debian.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-From: <wang.yaxin@zte.com.cn>
-To: <wang.yaxin@zte.com.cn>
-Cc: <akpm@linux-foundation.org>, <fan.yu9@zte.com.cn>,
-        <yang.yang29@zte.com.cn>, <corbet@lwn.net>,
-        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <xu.xin16@zte.com.cn>
-Subject: =?UTF-8?B?W1BBVENIIDMvM10gZGVsYXl0b3A6IHNvcnQgYnkgbWF4IGRlbGF5IHRvIGhpZ2hsaWdodCB0b3AgbGF0ZW5jeSBwcm9jZXNzZXM=?=
-Content-Type: text/plain;
-	charset="UTF-8"
-X-MAIL:mse-fl2.zte.com.cn 64RDx9c1078203
-X-TLS: YES
-X-ENVELOPE-SENDER: wang.yaxin@zte.com.cn
-X-SOURCE-IP: 10.5.228.133 unknown Wed, 27 May 2026 21:59:15 +0800
-X-CLEAN: YES
-X-Fangmail-Anti-Spam-Filtered: true
-X-Fangmail-MID-QID: 6A16F8B3.001/4gQWSg3mt3z7Qxs2
-X-Spamd-Result: default: False [0.64 / 15.00];
-	SUBJ_EXCESS_BASE64(1.50)[];
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIAFX6FmoC/23QyWrDMBAG4FcxOmfKaLTGp75HKUXLKFEPdrBT0
+ xLy7sXpITLucWC+f5abmHmqPIu+u4mJlzrXcRB95w+dSOcwnBhqFn0nCMmiIgWc0sclDDWBZu1
+ U9Aq9S+LQicvEpX4/st7e/+r5K35yuq4Ba8e5ztdx+nkMW+Ta91/uIgHBUZBHko5sMq+ZYw3Dy
+ zidxBq8UEOVbCkBwpE1ZixWFxd2VD2plpupChBkTjFSkRST3lHdUtNSDQiUkZwrvliUO2oaSrq
+ lBhCCMkVHg5pM2lH7pEZubrXrwl6hpBhc1nFHXUs3tzpAiExsnGcr8/ZN9/v9FzUJaq4XAgAA
+X-Change-ID: 20260323-ecc_panic-4e473b83087c
+To: Miaohe Lin <linmiaohe@huawei.com>, 
+ Andrew Morton <akpm@linux-foundation.org>, 
+ David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>, 
+ Vlastimil Babka <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>, 
+ Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>, 
+ Shuah Khan <shuah@kernel.org>, Naoya Horiguchi <nao.horiguchi@gmail.com>, 
+ Steven Rostedt <rostedt@goodmis.org>, 
+ Masami Hiramatsu <mhiramat@kernel.org>, 
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+ "Liam R. Howlett" <liam@infradead.org>, 
+ "Liam R. Howlett" <liam@infradead.org>
+Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org, 
+ linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
+ Breno Leitao <leitao@debian.org>, linux-trace-kernel@vger.kernel.org, 
+ kernel-team@meta.com, Lance Yang <lance.yang@linux.dev>
+X-Mailer: b4 0.16-dev-d5d98
+X-Developer-Signature: v=1; a=openpgp-sha256; l=8604; i=leitao@debian.org;
+ h=from:subject:message-id; bh=2jCKYTQjoKuxxT2ozar3gAihqc+gFK+1/JJPsrGwdlY=;
+ b=owEBbQKS/ZANAwAIATWjk5/8eHdtAcsmYgBqFvpbglPkMusQgxkazyuCvti8qWt9bG/4PfTrp
+ RSqR5ICdNaJAjMEAAEIAB0WIQSshTmm6PRnAspKQ5s1o5Of/Hh3bQUCahb6WwAKCRA1o5Of/Hh3
+ baMUD/9gwdHPys6imhPmurHFc/W3OtkS1wf6kvREznCJqeTA6jqwKCBChTbWFmPZ1BjBlAzhVK2
+ fBlYDm0Ast271fYcq9j2pczdE0eJGsQjT4qiuhgPvmjBFb0D5YECz47fgVJkQH+wU8dtSK1r9KD
+ ENVj/M5otrDy81tn9SE82BGhd7nIZsZb7aM+GRPLyvZyi9kVvR4rstd5HRRadzn68GnFCtDB93l
+ VdTe9ImE2PatUhoJa4jKr4umVy4hvNW7oADNYFmqxoYQhY4V9nGmdG+TEMEmxw3smwGZW60yUrI
+ v7QIeVMwTUTFIRTzvTDBFzrbXl5FWV0UDPtjCJA/x29OPdYTgXfCuPlYLAcjsxvfFwjo5Ic3Tn0
+ Zg6pCMqbK1KtBuHEfOslgIxYVgDCJzztBeu/BtkantgV52ijn4s9OinEEKCmSMM9hWx98zD0jXi
+ 8GqkWMv+wZrpSgsSh1WS5t3QJj0dlGDtaaeBd+rNJenQS952H1oYHoXdwpu5R7j/uij4zav1FWv
+ 29/QgcUoK0G0sd5n60o4qGGL2OSwBdSB1rqzJGgixujOyVkoBzRWXx0AzCJHS0snHB/FHXI0SXc
+ aJWjSodLQmkBmZVaeWVzy1IFjy2qWM47uJCLSGRYu5mcI7+690EDOtv0Ao1pCvx5891pWCMPTN0
+ XEJIGMhWm0unMrg==
+X-Developer-Key: i=leitao@debian.org; a=openpgp;
+ fpr=AC8539A6E8F46702CA4A439B35A3939FFC78776D
+X-Debian-User: leitao
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MV_CASE(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[debian.org,none];
+	R_DKIM_ALLOW(-0.20)[debian.org:s=smtpauto.stravinsky];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[zte.com.cn : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_NO_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-89734-lists,linux-doc=lfdr.de];
+	FREEMAIL_TO(0.00)[huawei.com,linux-foundation.org,kernel.org,google.com,suse.com,gmail.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,infradead.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-89732-lists,linux-doc=lfdr.de];
-	FROM_NEQ_ENVFROM(0.00)[wang.yaxin@zte.com.cn,linux-doc@vger.kernel.org];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[25];
 	MIME_TRACE(0.00)[0:+];
-	TO_DN_NONE(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.997];
 	PRECEDENCE_BULK(0.00)[];
-	NEURAL_HAM(-0.00)[-0.473];
-	R_DKIM_NA(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[leitao@debian.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[debian.org:+];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[8];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[zte.com.cn:mid,zte.com.cn:email,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: CC1185E5937
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: C649F5E5AB4
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: Wang Yaxin <wang.yaxin@zte.com.cn>
+A multi-bit ECC error on a kernel-owned page that the memory failure
+handler cannot recover is currently swallowed: PG_hwpoison is set, the
+event is logged, and the kernel keeps running.  The corrupted memory
+remains accessible to the kernel and either drives silent data
+corruption or surfaces seconds-to-minutes later as an apparently
+unrelated crash.  In a large fleet that delayed, unattributable crash
+turns into significant engineering effort to root-cause; in a kdump
+configuration, by the time the crash happens the original error
+context (faulting PFN, MCE/GHES record, page state) is long gone.
 
-When using -t/--type option, sort tasks by the maximum delay value of
-the selected type in descending order (largest delay first).
+This series adds an opt-in sysctl,
+vm.panic_on_unrecoverable_memory_failure, that converts an
+unrecoverable kernel-page hwpoison event into an immediate panic with
+a clean dmesg/vmcore that still contains the original failure
+context.  The default is disabled so existing workloads see no
+change.
 
-This enables quickly identifying the top N processes with the highest
-delay spikes, which is essential for diagnosing latency problems by
-pinpointing which processes contributed most to system delays.
+There is a selftest that test different cases, and I tested it using
+the following variants:
 
-Signed-off-by: Wang Yaxin <wang.yaxin@zte.com.cn>
+  ┌─────────┬──────────┬───────────────────────────────────────────────────────────┐
+  │ Variant │   PFN    │                          Result                           │
+  ├─────────┼──────────┼───────────────────────────────────────────────────────────┤
+  │ rodata  │ 0x2600   │ Panic with "Memory failure: 0x2600: unrecoverable page"   │
+  ├─────────┼──────────┼───────────────────────────────────────────────────────────┤
+  │ slab    │ 0x100032 │ Panic with "Memory failure: 0x100032: unrecoverable page" │
+  ├─────────┼──────────┼───────────────────────────────────────────────────────────┤
+  │ pgtable │ 0x100000 │ Panic with "Memory failure: 0x100000: unrecoverable page" │
+  └─────────┴──────────┴───────────────────────────────────────────────────────────┘
+
+Each one shows the same call trace, exactly the path the series builds:
+
+  hard_offline_page_store
+    → memory_failure
+      → action_result
+        → panic("Memory failure: %#lx: unrecoverable page")
+
+Signed-off-by: Breno Leitao <leitao@debian.org>
 ---
- Documentation/accounting/delay-accounting.rst |  43 +++++
- tools/accounting/delaytop.c                   | 162 ++++++++++--------
- 2 files changed, 136 insertions(+), 69 deletions(-)
+Changes in v8:
+- Commit message rewording (David)
+- Add HWPoisonKernelOwned() helper (Lance)
+- Removed patch "mm/memory-failure: short-circuit PG_reserved before get_hwpoison_page()"
+- Broaden the selftest (Lance)
+- Link to v7: https://patch.msgid.link/20260513-ecc_panic-v7-0-be2e578e61da@debian.org
 
-diff --git a/Documentation/accounting/delay-accounting.rst b/Documentation/accounting/delay-accounting.rst
-index e209c46241b0..a42d830e65ce 100644
---- a/Documentation/accounting/delay-accounting.rst
-+++ b/Documentation/accounting/delay-accounting.rst
-@@ -212,3 +212,46 @@ Advanced usage examples::
+Changes in v7:
+- Move the PG_reserved / unhandlable-kernel-page classification into
+  get_any_page() and surface it via -ENOTRECOVERABLE, per David
+  Hildenbrand's and Lance Yang's review of v6.  This drops the
+  is_reserved snapshot in memory_failure() and the mf_get_page_status
+  enum / out-parameter introduced in v6.
+- Restructure the post-call branch in memory_failure() as a switch
+  over the get_hwpoison_page() return code (David).
+- Drop the "reserved" qualifier from the MF_MSG_KERNEL label and the
+  matching tracepoint string; the enum now covers both PG_reserved
+  pages and other unhandlable kernel pages.
+- Squash the former patches 1/4 ("MF_MSG_KERNEL for reserved pages")
+  and 2/4 ("classify get_any_page() failures by reason") into a
+  single classification patch; the series is now 3 patches.
+- Simplify panic_on_unrecoverable_mf() to a single return statement
+  (David).
+- Link to v6: https://patch.msgid.link/20260511-ecc_panic-v6-0-183012ba7d4b@debian.org
 
- 	# ./delaytop -d secs
- 	Specify refresh interval as secs
-+
-+	# ./delaytop -t type
-+	Display only specified delay type with avg/max/timestamp
-+    (rows sorted by MAX for that type, largest first)
-+
-+
-+
-+delaytop add delay_max fields to track the maximum delay value for each delay type
-+(cpu, blkio, irq, swapin, freepages, thrashing, compact, wpcopy) per task.
-+
-+
-+System Pressure Information: (avg10/avg60vg300/total)
-+CPU some:       0.4%/   0.2%/   0.1%/     220(ms)
-+CPU full:       0.0%/   0.0%/   0.0%/       0(ms)
-+Memory full:    0.0%/   0.0%/   0.0%/       0(ms)
-+Memory some:    0.0%/   0.0%/   0.0%/       0(ms)
-+IO full:        0.0%/   0.0%/   0.0%/      12(ms)
-+IO some:        0.0%/   0.0%/   0.0%/      13(ms)
-+IRQ full:       0.0%/   0.0%/   0.0%/       0(ms)
-+[o]sort [M]memverbose [q]quit
-+Top 20 processes (sorted by cpu MAX delay, largest first):
-+     PID      TGID  COMMAND          AVG(ms)  MAX(ms)   MAX_TIMESTAMP
-+------------------------------------------------------------------------------------------------
-+       9         9  kworker/0:0-eve   0.59   16.87  2026-05-27T13:32:39
-+      30        30  kworker/2:0H-kb   2.87   11.36  2026-05-27T13:32:36
-+      27        27  migration/2       1.05    9.51  2026-05-27T13:32:37
-+      50        50  kworker/2:1-eve   0.50    9.13  2026-05-27T13:32:37
-+      15        15  rcu_preempt       0.11    8.98  2026-05-27T13:32:37
-+       1         1  init              0.17    7.12  2026-05-27T13:32:38
-+      67        67  scsi_eh_0         1.20    4.23  2026-05-27T13:32:37
-+      23        23  ksoftirqd/1       1.12    3.77  2026-05-27T13:32:36
-+       3         3  pool_workqueue_   0.72    3.55  2026-05-27T13:32:38
-+      62        62  kworker/u20:2-a   0.49    3.03  2026-05-27T13:32:37
-+       2         2  kthreadd          0.18    2.82  2026-05-27T13:32:37
-+      11        11  kworker/0:1       1.42    2.76  2026-05-27T13:32:36
-+      39        39  kworker/u20:0-a   0.10    2.71  2026-05-27T13:32:38
-+      17        17  rcu_exp_gp_kthr   0.25    2.65  2026-05-27T13:32:37
-+      66        66  kworker/u20:3-e   0.38    2.55  2026-05-27T13:32:37
-+      20        20  cpuhp/0           0.53    2.51  2026-05-27T13:32:37
-+      28        28  ksoftirqd/2       0.59    2.48  2026-05-27T13:32:37
-+      55        55  kworker/u19:1     0.88    2.42  2026-05-27T13:32:37
-+      13        13  kworker/R-mm_pe   1.18    2.35  2026-05-27T13:32:36
-+      54        54  kworker/3:1-eve   0.14    2.20  2026-05-27T13:32:38
-diff --git a/tools/accounting/delaytop.c b/tools/accounting/delaytop.c
-index 8d22c43dceed..87fb45a6a6cd 100644
---- a/tools/accounting/delaytop.c
-+++ b/tools/accounting/delaytop.c
-@@ -284,6 +284,7 @@ static void usage(void)
- 	"  -C, --container=PATH     Monitor the container at specified cgroup path\n"
- 	"  -s, --sort=FIELD         Sort by delay field (default: cpu)\n"
- 	"  -t, --type=FIELD         Display only specified delay type with avg/max/timestamp\n"
-+	"                           (rows sorted by MAX for that type, largest first)\n"
- 	"  -M, --memverbose         Display memory detailed information\n");
- 	exit(0);
- }
-@@ -823,111 +824,129 @@ static double average_ms(unsigned long long total, unsigned long long count)
- 	return (double)total / 1000000.0 / count;
- }
+Changes in v6:
+- Dropped the selftest given the value was not clear
+- Get the status of the failure from get_any_page()
+- Small nits from different people/AIs.
+- Link to v5: https://patch.msgid.link/20260424-ecc_panic-v5-0-a35f4b50425c@debian.org
 
--/*
-- * Format __kernel_timespec to human readable string (YYYY-MM-DD HH:MM:SS)
-- * Returns formatted string or "N/A" if timestamp is zero
-- */
--static const char *format_timespec64(struct __kernel_timespec *ts)
-+static const char *format_kernel_timespec(struct __kernel_timespec *ts)
- {
- 	static char buffer[32];
--	struct tm *tm_info;
--	time_t time_sec;
-+	struct tm tm_info;
-+	__kernel_time_t time_sec;
+Changes in v5:
+- Add vm.panic_on_unrecoverable_memory_failure sysctl to panic on
+  unrecoverable kernel page hwpoison events (reserved pages, refcount-0
+  non-buddy pages, unknown state), with a recheck to avoid racing with
+  concurrent buddy allocations. (Miaohe)
+- Distinguish reserved pages as MF_MSG_KERNEL in memory_failure(),
+  document the new sysctl in Documentation/admin-guide/sysctl/vm.rst,
+  and add a selftest verifying SIGBUS recovery on userspace pages still
+  works when the sysctl is enabled. (Miaohe)
+- Added a selftest
+- Link to v4:
+  https://patch.msgid.link/20260415-ecc_panic-v4-0-2d0277f8f601@debian.org
 
--	/* Check if timestamp is zero (not set) or invalid (before year 2000) */
--	if ((ts->tv_sec == 0 && ts->tv_nsec == 0) || ts->tv_sec < 946684800) {
--		/* 946684800 is timestamp for 2000-01-01 00:00:00 UTC */
-+	/* Check if timestamp is zero (not set) */
-+	if (ts->tv_sec == 0 && ts->tv_nsec == 0)
- 		return "N/A";
--	}
+Changes in v4:
+- Drop CONFIG_BOOTPARAM_MEMORY_FAILURE_PANIC kernel configuration option.
+- Split the reserved page classification (MF_MSG_KERNEL) into its own
+  patch, separate from the panic mechanism.
+- Document why the buddy allocator TOCTOU race (between
+  get_hwpoison_page() and is_free_buddy_page()) cannot cause false
+  positives: PG_hwpoison is set beforehand and check_new_page() in the
+  page allocator rejects hwpoisoned pages.
+- Document the narrow LRU isolation race window for MF_MSG_UNKNOWN and
+  its mitigation via identify_page_state()'s two-pass design.
+- Explicitly document why MF_MSG_GET_HWPOISON is excluded from the
+  panic conditions (shared path with transient races and non-reserved
+  kernel memory).
+- Link to v3: https://patch.msgid.link/20260413-ecc_panic-v3-0-1dcbb2f12bc4@debian.org
 
--	time_sec = (time_t)ts->tv_sec;
--	tm_info = localtime(&time_sec);
--	if (!tm_info)
-+	time_sec = ts->tv_sec;
-+
-+	/* Use thread-safe localtime_r */
-+	if (localtime_r(&time_sec, &tm_info) == NULL)
- 		return "N/A";
+Changes in v3:
+- Rename is_unrecoverable_memory_failure() to panic_on_unrecoverable_mf()
+  as suggested by maintainer.
+- Add CONFIG_BOOTPARAM_MEMORY_FAILURE_PANIC kernel configuration option,
+  similar to CONFIG_BOOTPARAM_HARDLOCKUP_PANIC.
+- Add documentation for the sysctl and CONFIG option.
+- Add code comments documenting the panic condition design rationale and
+  how the retry mechanism mitigates false positives from buddy allocator
+  races.
+- Link to v2: https://patch.msgid.link/20260331-ecc_panic-v2-0-9e40d0f64f7a@debian.org
 
--	snprintf(buffer, sizeof(buffer), "%04d-%02d-%02d %02d:%02d:%02d",
--		tm_info->tm_year + 1900,
--		tm_info->tm_mon + 1,
--		tm_info->tm_mday,
--		tm_info->tm_hour,
--		tm_info->tm_min,
--		tm_info->tm_sec);
-+	snprintf(buffer, sizeof(buffer), "%04d-%02d-%02dT%02d:%02d:%02d",
-+		tm_info.tm_year + 1900,
-+		tm_info.tm_mon + 1,
-+		tm_info.tm_mday,
-+		tm_info.tm_hour,
-+		tm_info.tm_min,
-+		tm_info.tm_sec);
+Changes in v2:
+- Panic on MF_MSG_KERNEL, MF_MSG_KERNEL_HIGH_ORDER and MF_MSG_UNKNOWN
+  instead of MF_MSG_GET_HWPOISON.
+- Report MF_MSG_KERNEL for reserved pages when get_hwpoison_page() fails
+  instead of MF_MSG_GET_HWPOISON.
+- Link to v1: https://patch.msgid.link/20260323-ecc_panic-v1-0-72a1921726c5@debian.org
 
- 	return buffer;
- }
+To: Miaohe Lin <linmiaohe@huawei.com>
+To: Naoya Horiguchi <nao.horiguchi@gmail.com>
+To: Andrew Morton <akpm@linux-foundation.org>
+To: Steven Rostedt <rostedt@goodmis.org>
+To: Masami Hiramatsu <mhiramat@kernel.org>
+To: Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
+To: Jonathan Corbet <corbet@lwn.net>
+To: Shuah Khan <skhan@linuxfoundation.org>
+To: David Hildenbrand <david@kernel.org>
+To: Lorenzo Stoakes <ljs@kernel.org>
+To: "Liam R. Howlett" <liam@infradead.org>
+To: Vlastimil Babka <vbabka@kernel.org>
+To: Mike Rapoport <rppt@kernel.org>
+To: Suren Baghdasaryan <surenb@google.com>
+To: Michal Hocko <mhocko@suse.com>
+To: Shuah Khan <shuah@kernel.org>
+Cc: linux-mm@kvack.org
+Cc: linux-kernel@vger.kernel.org
+Cc: linux-trace-kernel@vger.kernel.org
+Cc: linux-doc@vger.kernel.org
+Cc: linux-kselftest@vger.kernel.org
 
--/* Comparison function for sorting tasks */
--static int compare_tasks(const void *a, const void *b)
--{
--	const struct task_info *t1 = (const struct task_info *)a;
--	const struct task_info *t2 = (const struct task_info *)b;
--	unsigned long long total1;
--	unsigned long long total2;
--	unsigned long count1;
--	unsigned long count2;
--	double avg1, avg2;
--
--	total1 = *(unsigned long long *)((char *)t1 + cfg.sort_field->total_offset);
--	total2 = *(unsigned long long *)((char *)t2 + cfg.sort_field->total_offset);
--	count1 = *(unsigned long *)((char *)t1 + cfg.sort_field->count_offset);
--	count2 = *(unsigned long *)((char *)t2 + cfg.sort_field->count_offset);
--
--	avg1 = average_ms(total1, count1);
--	avg2 = average_ms(total2, count2);
--	if (avg1 != avg2)
--		return avg2 > avg1 ? 1 : -1;
--
--	return 0;
--}
--
--/* Get delay values for a specific field */
--static void get_field_delay_values(const struct task_info *task, const struct field_desc *field,
--				   double *avg_ms, double *max_ms, struct __kernel_timespec *max_ts)
-+/* Max delay (ns) and timestamp for field (shared by display and sort) */
-+void field_delay_max_and_ts(const struct task_info *task, const struct field_desc *field,
-+				     unsigned long long *max_ns, struct __kernel_timespec *max_ts)
- {
--	unsigned long long total, count, max;
--
- 	if (!field) {
--		*avg_ms = 0;
--		*max_ms = 0;
-+		*max_ns = 0;
- 		memset(max_ts, 0, sizeof(*max_ts));
- 		return;
- 	}
+---
+Breno Leitao (6):
+      mm/memory-failure: drop dead error_states[] entry for reserved pages
+      mm/memory-failure: surface unhandlable kernel pages as -ENOTRECOVERABLE
+      mm/memory-failure: report MF_MSG_KERNEL for unrecoverable kernel pages
+      mm/memory-failure: add panic option for unrecoverable pages
+      Documentation: document panic_on_unrecoverable_memory_failure sysctl
+      selftests/mm: add hwpoison-panic destructive test
 
--	total = *(unsigned long long *)((char *)task + field->total_offset);
--	count = *(unsigned long *)((char *)task + field->count_offset);
--	*avg_ms = average_ms(total, count);
--
--	/* Get max delay and timestamp based on field name */
- 	if (strcmp(field->name, "cpu") == 0) {
--		max = task->cpu_delay_max;
-+		*max_ns = task->cpu_delay_max;
- 		*max_ts = task->cpu_delay_max_ts;
- 	} else if (strcmp(field->name, "blkio") == 0) {
--		max = task->blkio_delay_max;
-+		*max_ns = task->blkio_delay_max;
- 		*max_ts = task->blkio_delay_max_ts;
- 	} else if (strcmp(field->name, "irq") == 0) {
--		max = task->irq_delay_max;
-+		*max_ns = task->irq_delay_max;
- 		*max_ts = task->irq_delay_max_ts;
- 	} else if (strcmp(field->name, "swapin") == 0) {
--		max = task->swapin_delay_max;
-+		*max_ns = task->swapin_delay_max;
- 		*max_ts = task->swapin_delay_max_ts;
- 	} else if (strcmp(field->name, "freepages") == 0) {
--		max = task->freepages_delay_max;
-+		*max_ns = task->freepages_delay_max;
- 		*max_ts = task->freepages_delay_max_ts;
- 	} else if (strcmp(field->name, "thrashing") == 0) {
--		max = task->thrashing_delay_max;
-+		*max_ns = task->thrashing_delay_max;
- 		*max_ts = task->thrashing_delay_max_ts;
- 	} else if (strcmp(field->name, "compact") == 0) {
--		max = task->compact_delay_max;
-+		*max_ns = task->compact_delay_max;
- 		*max_ts = task->compact_delay_max_ts;
- 	} else if (strcmp(field->name, "wpcopy") == 0) {
--		max = task->wpcopy_delay_max;
-+		*max_ns = task->wpcopy_delay_max;
- 		*max_ts = task->wpcopy_delay_max_ts;
- 	} else {
--		max = 0;
-+		*max_ns = 0;
-+		memset(max_ts, 0, sizeof(*max_ts));
-+	}
-+}
-+
-+/* Get delay values for a specific field */
-+void get_field_delay_values(const struct task_info *task, const struct field_desc *field,
-+				   double *avg_ms, double *max_ms, struct __kernel_timespec *max_ts)
-+{
-+	unsigned long long total, count, max;
-+
-+	if (!field) {
-+		*avg_ms = 0;
-+		*max_ms = 0;
- 		memset(max_ts, 0, sizeof(*max_ts));
-+		return;
- 	}
-+
-+	total = *(unsigned long long *)((char *)task + field->total_offset);
-+	count = *(unsigned long *)((char *)task + field->count_offset);
-+	*avg_ms = average_ms(total, count);
-+
-+	field_delay_max_and_ts(task, field, &max, max_ts);
- 	*max_ms = (double)max / 1000000.0;  /* Convert nanoseconds to milliseconds */
- }
+ Documentation/admin-guide/sysctl/vm.rst      |  85 ++++++++++++
+ mm/memory-failure.c                          |  96 ++++++++++---
+ tools/testing/selftests/mm/Makefile          |   1 +
+ tools/testing/selftests/mm/hwpoison-panic.sh | 193 +++++++++++++++++++++++++++
+ 4 files changed, 357 insertions(+), 18 deletions(-)
+---
+base-commit: e7e28506af98ce4e1059e5ec59334b335c00a246
+change-id: 20260323-ecc_panic-4e473b83087c
 
-+/* Comparison function for sorting tasks */
-+static int compare_tasks(const void *a, const void *b)
-+{
-+	const struct task_info *t1 = (const struct task_info *)a;
-+	const struct task_info *t2 = (const struct task_info *)b;
-+	unsigned long long total1;
-+	unsigned long long total2;
-+	unsigned long count1;
-+	unsigned long count2;
-+	double avg1, avg2;
-+	unsigned long long max1, max2;
-+	struct __kernel_timespec ts_scratch;
-+
-+	/* -t/--type: default sort by MAX column for the selected type (descending) */
-+	if (cfg.display_mode == MODE_TYPE && cfg.type_field) {
-+		field_delay_max_and_ts(t1, cfg.type_field, &max1, &ts_scratch);
-+		field_delay_max_and_ts(t2, cfg.type_field, &max2, &ts_scratch);
-+		if (max1 != max2)
-+			return max2 > max1 ? 1 : -1;
-+		return 0;
-+	}
-+
-+	total1 = *(unsigned long long *)((char *)t1 + cfg.sort_field->total_offset);
-+	total2 = *(unsigned long long *)((char *)t2 + cfg.sort_field->total_offset);
-+	count1 = *(unsigned long *)((char *)t1 + cfg.sort_field->count_offset);
-+	count2 = *(unsigned long *)((char *)t2 + cfg.sort_field->count_offset);
-+
-+	avg1 = average_ms(total1, count1);
-+	avg2 = average_ms(total2, count2);
-+	if (avg1 != avg2)
-+		return avg2 > avg1 ? 1 : -1;
-+
-+	return 0;
-+}
-+
- /* Sort tasks by selected field */
- static void sort_tasks(void)
- {
-@@ -1081,8 +1100,13 @@ static void display_results(int psi_ret)
- 	}
+Best regards,
+--  
+Breno Leitao <leitao@debian.org>
 
- 	/* Task delay output */
--	suc &= BOOL_FPRINT(out, "Top %d processes (sorted by %s delay):\n",
--			cfg.max_processes, get_name_by_field(cfg.sort_field));
-+	if (cfg.display_mode == MODE_TYPE && cfg.type_field)
-+		suc &= BOOL_FPRINT(out,
-+			"Top %d processes (sorted by %s MAX delay, largest first):\n",
-+			cfg.max_processes, get_name_by_field(cfg.type_field));
-+	else
-+		suc &= BOOL_FPRINT(out, "Top %d processes (sorted by %s delay):\n",
-+				cfg.max_processes, get_name_by_field(cfg.sort_field));
-
- 	if (cfg.display_mode == MODE_TYPE && cfg.type_field) {
- 		/* Display mode for -t option: show only specified type with avg/max/timestamp */
-@@ -1123,7 +1147,7 @@ static void display_results(int psi_ret)
- 					&max_ms, &max_ts);
-
- 			suc &= BOOL_FPRINT(out, "%12.2f %12.2f %20s\n",
--				avg_ms, max_ms, format_timespec64(&max_ts));
-+				avg_ms, max_ms, format_kernel_timespec(&max_ts));
- 		} else if (cfg.display_mode == MODE_MEMVERBOSE) {
- 			suc &= BOOL_FPRINT(out, DELAY_FMT_MEMVERBOSE,
- 				TASK_AVG(tasks[i], mem),
--- 
-2.25.1
 
