@@ -1,56 +1,55 @@
-Return-Path: <linux-doc+bounces-89758-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89754-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8DuZA7EPF2o12wcAu9opvQ
-	(envelope-from <linux-doc+bounces-89758-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 17:37:21 +0200
+	id UCXAFaQPF2o12wcAu9opvQ
+	(envelope-from <linux-doc+bounces-89754-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 17:37:08 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6DBF55E6F8E
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 17:37:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ED8835E6F87
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 17:37:07 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 3BA8D3090271
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 15:34:05 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id C9783308A5FF
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 15:33:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2632C43C079;
-	Wed, 27 May 2026 15:33:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8121A43C05B;
+	Wed, 27 May 2026 15:33:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Zsanj2tq"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="H43ckgw1"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7465436376;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2C58436374;
 	Wed, 27 May 2026 15:33:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779896004; cv=none; b=B4dUuwKpouLXF+MR9UHm/ParyeScgnzWEp5vxRwa0OakoO6t0CxfUsxx+wckYR1zzv1abtOsqSmWABiQ4pAXrYKBBGFWziZ/WSqwDvTEAoLVVkW1UmDYJKAejiUDc0jPcUs2RMGOCdZM1QWypUkatC9drJ6KQvgPg/soI5xGtZc=
+	t=1779896004; cv=none; b=XtIZURHoalEuMafUD1y79sptHM4/IL5oLd5pKZtAac6/dyQlWtJvq/qZM3EbIpKBsJFgvNVHdSrF9q07a9UwFk3TYeXj/519IQeHfC18Qrj3yoqOiFxAAxzQCt73jRb/QcvUvGXyRNYQddmrjpkNj27N/CeQIc1Ji3O57XSv0JQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1779896004; c=relaxed/simple;
-	bh=Fy7SviBXyfR5Bkm0PCeZ4kofves6M/GmlsfFUICPdbk=;
+	bh=nVpl3TVZQU9iG/8SJ8PbEKLaQViBegpkV2M01+wMc30=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=XVFMP+SFfd6MWbnqnfgkOiA5qedWbj+vO6e60BNkn+gNFjl2XDxObErmCJZDjDjaSRF2MkHWc7pBQH/8CuVbcDbdIAGVr9/xZ6QSpOxC0+pyonYjtQ95xcDG30snGyRxgFNw8Mcq3eyGrZ0VWE16CEfKrTKbBe5vVvibjDIW348=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Zsanj2tq; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 8E8DCC2BCF7;
+	 In-Reply-To:To:Cc; b=AFXNkaHAYc5q3w6wfeapfT+bsiLcA5EPAU21aXmCa/WHWDCeUMfRN691bBLlnSZjJnVy9ykukOQgVKne9YwlUsRq4I0LIFVcp0+VygNcxET6bHvN4XkIEKM1pFi99BP0gpCh+rBh0hd3E9E2Ya8LJdSAXbU7wfrQVAsdAOqKfrY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=H43ckgw1; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id A5489C2BCF6;
 	Wed, 27 May 2026 15:33:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1779896002;
-	bh=Fy7SviBXyfR5Bkm0PCeZ4kofves6M/GmlsfFUICPdbk=;
+	bh=nVpl3TVZQU9iG/8SJ8PbEKLaQViBegpkV2M01+wMc30=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=Zsanj2tqyi0TtgslAqA7S3Uu361R8oEGT24pGgf4cov0NxluFq6sxzsaFDngAbGNN
-	 Zwg41zTkvnfxV//sndSvH7qpnG2G1cFT9lca1WGhcWkPRtWTmTtJtYZywShxYWauEm
-	 XCFnRLnYrUYgOb/JeAKNO5MqeXu8x666GWAxPuFjx+hxgSZL3FjzKbsVLPe2LFmOMe
-	 hIVr82GfiZrQJmxHIJuZP3oOsk6DC8fFKaTq+LNoc3dqzYrKLRCYLfWn8pF0LgPye2
-	 ZmYii46Bki8fZ4LClgbYLSuaG0uY0cT1h/G5nD/xHaoD+P/B72nse40Gv5AQ/v9Cvg
-	 QQFhv1HkqgrVA==
+	b=H43ckgw1K/X/LMmGirCLu6olwyKN+3u+/yP/z6bq4Ct4qvvq94RCjO4PnMuw80M68
+	 8djH78hYQ/6RueZeAlOGbX/16eqZVSzD6saRHNkwrq5RgAfLSBcybMpNwVtSULUf00
+	 p4iAOaCi1NFHMkYm9rAg0cDrDyfjyQVIs6FJC3oZdgg4LbiCo+7Il/17eSinXotCrL
+	 jBqtiGCtO1xpXV2OxG/7eZgVCon6zt6es2Xn/VF1t1m0DG8/8cQsNzraqRvYxd0y7G
+	 oziRXR42K0miODftx0GpKUUz2adWvK/lDhtgoD8kIhYjikZSvRJUdUEx5x0XEj9IFb
+	 u+EENixrJHRgw==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 861D7CD4F54;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C8C4CD6E45;
 	Wed, 27 May 2026 15:33:22 +0000 (UTC)
 From: Ackerley Tng via B4 Relay <devnull+ackerleytng.google.com@kernel.org>
-Date: Wed, 27 May 2026 08:33:15 -0700
-Subject: [PATCH RFC 03/12] Documentation: KVM: Consolidate notes about
- kvm->slots_lock and irq_lock
+Date: Wed, 27 May 2026 08:33:16 -0700
+Subject: [PATCH RFC 04/12] Documentation: KVM: Turn - into bullet point
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -59,7 +58,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260527-kvm-locking-docs-v1-3-4fe8b602ff47@google.com>
+Message-Id: <20260527-kvm-locking-docs-v1-4-4fe8b602ff47@google.com>
 References: <20260527-kvm-locking-docs-v1-0-4fe8b602ff47@google.com>
 In-Reply-To: <20260527-kvm-locking-docs-v1-0-4fe8b602ff47@google.com>
 To: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
@@ -74,11 +73,11 @@ Cc: kvm@vger.kernel.org, linux-doc@vger.kernel.org,
  linux-kernel@vger.kernel.org, loongarch@lists.linux.dev, 
  Ackerley Tng <ackerleytng@google.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1779896001; l=1205;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1779896001; l=909;
  i=ackerleytng@google.com; s=20260225; h=from:subject:message-id;
- bh=5xqYuflg/lHRaHVhIbofzsJqCQI4L326JDxGJuO8b0U=;
- b=/bIlnjfndGdNS+ll2dxYYvqLLoNppW84HDwXhvbpWFF04ZPlHUMWp75WsSLCcKYSYWt61B5P7
- mXli/FQOdC4BvZ0ynYtyfQjBM8Q6lsysXNUKDjZXn5ui6jUMED+c4jb
+ bh=CVJlxPT0bvHHOwHsW6J5heOXwU/ZjkdVD+6fUMJnWDE=;
+ b=KkPJHF+eM7NDmHDSEhDOiOBWhwesjg7rIQXxnzpWgTB9I02vfYnNi5BaXX0a183XJ1mq7TDDx
+ YhG5/AGb4N7Df+nmEUADJYfEvIEoR/I+w01Jm8766xS2x9bSTAeKxa+
 X-Developer-Key: i=ackerleytng@google.com; a=ed25519;
  pk=sAZDYXdm6Iz8FHitpHeFlCMXwabodTm7p8/3/8xUxuU=
 X-Endpoint-Received: by B4 Relay for ackerleytng@google.com/20260225 with
@@ -89,11 +88,11 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-89758-lists,linux-doc=lfdr.de,ackerleytng.google.com];
+	TAGGED_FROM(0.00)[bounces-89754-lists,linux-doc=lfdr.de,ackerleytng.google.com];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -112,39 +111,34 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc];
 	HAS_REPLYTO(0.00)[ackerleytng@google.com];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: 6DBF55E6F8E
+X-Rspamd-Queue-Id: ED8835E6F87
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 From: Ackerley Tng <ackerleytng@google.com>
 
-Move the detail about ordering between kvm->slots_lock and kvm->irq_lock to
-where the two locks are first mentioned.
+For the :Protects: section of kvm->mmu_lock, a missing space causes the -
+to render as a literal - instead of a bullet point. Add space to make it
+render as a bullet point.
 
 Signed-off-by: Ackerley Tng <ackerleytng@google.com>
 ---
- Documentation/virt/kvm/locking.rst | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ Documentation/virt/kvm/locking.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/Documentation/virt/kvm/locking.rst b/Documentation/virt/kvm/locking.rst
-index 1e8cbbe3ba706..67dd2066f6d98 100644
+index 67dd2066f6d98..e349c2cb94943 100644
 --- a/Documentation/virt/kvm/locking.rst
 +++ b/Documentation/virt/kvm/locking.rst
-@@ -21,12 +21,11 @@ The acquisition orders for mutexes are as follows:
- - kvm->lock is taken outside vcpu->mutex
+@@ -283,7 +283,7 @@ time it will be set using the Dirty tracking mechanism described above.
+ ^^^^^^^^^^^^^^^^^
+ :Type:		spinlock_t or rwlock_t
+ :Arch:		any
+-:Protects:	-shadow page/shadow tlb entry
++:Protects:	- shadow page/shadow tlb entry
+ :Comment:	it is a spinlock since it is used in mmu notifier.
  
- - kvm->lock is taken outside kvm->slots_lock and kvm->irq_lock
-+    - kvm->slots_lock is taken outside kvm->irq_lock, though acquiring
-+      them together is quite rare.
- 
- - vcpu->mutex is taken outside kvm->slots_lock and kvm->slots_arch_lock
- 
--- kvm->slots_lock is taken outside kvm->irq_lock, though acquiring
--  them together is quite rare.
--
- - kvm->mn_active_invalidate_count ensures that pairs of
-   invalidate_range_start() and invalidate_range_end() callbacks
-   use the same memslots array.  kvm->slots_lock and kvm->slots_arch_lock
+ ``kvm->srcu``
 
 -- 
 2.54.0.823.g6e5bcc1fc9-goog
