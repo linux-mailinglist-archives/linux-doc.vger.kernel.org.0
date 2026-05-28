@@ -1,143 +1,125 @@
-Return-Path: <linux-doc+bounces-89798-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89800-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id IFFOJ2Z9F2qqGggAu9opvQ
-	(envelope-from <linux-doc+bounces-89798-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 01:25:26 +0200
+	id EOYLJriMF2o5IwgAu9opvQ
+	(envelope-from <linux-doc+bounces-89800-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 02:30:48 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A16045EAEB8
-	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 01:25:25 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 201C15EB411
+	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 02:30:48 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 87D453005334
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2026 23:25:22 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 9766B3127750
+	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 00:28:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 80EAD3C09FA;
-	Wed, 27 May 2026 23:25:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6E35F1A304A;
+	Thu, 28 May 2026 00:28:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="A40xT658"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="cuQWPBa7"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6729B17A30A;
-	Wed, 27 May 2026 23:25:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E34A1940B0;
+	Thu, 28 May 2026 00:28:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779924319; cv=none; b=oJ8pfsuJb3DhmK/6WPmNMs2q1ESuZay7yKFLfDsmiYFLGajlIXRvZQW/WkUKpUXw5f+z8cqWF9JtPHI/B9MgM/LQP1RuoQermNzdpSTBlCWDpC2C+JI/IZ35ojlGuW6TrajtwT5I2+f/N2qEaEpbUGVo1Jxdy3G7ilqhal3tgXM=
+	t=1779928089; cv=none; b=FQsD0FRhgxJBa+zzSEDWfm35DNI+GsvJt5AXfdCTINS6HZv7ZA5jSSeWDNHXwTYqaiGvtAv+8Y8gUaSjb13lQpOs/WEDIgnvahnzKIMKr2J+vBeGAyXq5AJyYqqNYrf7GenIHkZQM8TiB9LHgmKMuWLYzLnX0os26QlCvlM3lG4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779924319; c=relaxed/simple;
-	bh=2hJqmrjVo1Ub22tHWHUamoVv4hSTnD73CY/DjVaQx2k=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=n2MKxGSeNyDFeSLxFQ+bJj9dC+NAGThbXuFZNDV+6/csFQx4BsDI6dEkDY0MMd7R1tZBLcFhyDyZkAXShpK5Crp0WwqdIUfd/X/SDG07QCFf3coB4pLA0cBV7EavF4wVzn/axIgZ/eiz2mkJfR5NNGStpbKPIHtTb3wl8NnBVUo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=A40xT658; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4BD681F000E9;
-	Wed, 27 May 2026 23:25:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1779924318;
-	bh=7tGhATUL6W+mywwi5EEt8P/hkJmuKfnUYR+T0g5mgtQ=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=A40xT658D+du0rL7Zyxf3j/wzr2fsYZTku3GAuwu2fKJKMYAcHomlquLpizZOamYw
-	 yB5WM0GnnF/wVh+uYteNsF+vLW6wFdWvUTfL2KP1hv48Cbd63G41PGOAx9GveSFgbz
-	 EOSQQWIBKz0MWYshv1fVfB8klWmhIaFvHGzW6dsq+C1e4Pcm1rOMeaJNgTPcM6LT/7
-	 5bZeJy4qkn0JzGj47GYoR0Ph5y0kUui0SdMCvUlpBWC6UqrOUT5Et5MV3O1qt/ZwC2
-	 Q7b3BYHhL2+c+CQy9lqZaq6IDbX/wJ58/vWIEpEuWS2GD+7qtQqYH4L8bz+b2tOkvr
-	 Ldq8pQVBCbJrw==
-Date: Wed, 27 May 2026 16:25:16 -0700
-From: Jakub Kicinski <kuba@kernel.org>
-To: Andrew Lunn <andrew@lunn.ch>
-Cc: "Maxime Chevallier (Netdev Foundation)" <maxime.chevallier@bootlin.com>,
- davem@davemloft.net, Eric Dumazet <edumazet@google.com>, Paolo Abeni
- <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, Russell King
- <linux@armlinux.org.uk>, Heiner Kallweit <hkallweit1@gmail.com>, Jonathan
- Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Oleksij
- Rempel <o.rempel@pengutronix.de>, Vladimir Oltean
- <vladimir.oltean@nxp.com>, Florian Fainelli <f.fainelli@gmail.com>,
- thomas.petazzoni@bootlin.com, netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH net-next] Documentation: networking: Add a test plan for
- ethtool pause validation
-Message-ID: <20260527162516.0d012503@kernel.org>
-In-Reply-To: <5cb8e2b4-8eb6-4446-9b90-1cd4c7964cd9@lunn.ch>
-References: <20260522175109.198059-1-maxime.chevallier@bootlin.com>
-	<20260526172447.10ca4b9e@kernel.org>
-	<5cb8e2b4-8eb6-4446-9b90-1cd4c7964cd9@lunn.ch>
+	s=arc-20240116; t=1779928089; c=relaxed/simple;
+	bh=iqIw4BmPF+2dDsjia4xazKYD/RIRJRAVFefpSJScL9U=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=rfTtcBGSE7xTSbBMGSVebMXNxH7vtDZUWH3kKEg8VDClA8gchNSqZD2ryycHRDFCM7r0h/XKKHzX5FNOz/CUDcwY/ROPAx2U4pWH2XGFxkh3TJAMHRZfxzffJe7xgNNsiU8nz5wZ1dkWJP4eb5rupDqun0Tu1FdVTAIUY8xmfY0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=cuQWPBa7; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+	Content-ID:Content-Description:In-Reply-To:References;
+	bh=J22xHJRmlZv6cVds2IeEilTP32/Q2JkES+c6kVoqSYg=; b=cuQWPBa7rh60yPE2xFaxQrz2bw
+	Uit4QtsmtVGbLx+FGUxUuAhu81QgBK4WOl3viDf0HSJkIJz3XoJmztvfClbPdSIY9q+O/aX52vd9+
+	R18bf5KSk73aiehT4Etk53GXInA0OQx7P9ux5S3bVi2+4OvpJFuB/5tIwP8XhaoGGJPhLWobfOnGk
+	YsXgIgjCu/2c6ZqENyaVk2nYTNK4N68A3m+0mRxI2iyNwJev5NI6A2ari8/gdN141qtffnW8xcPXv
+	gYvZa6YqPWtG3OnE1Ag28KhPfEpI/UiZdWueRFROw70H/cc2n/qIFpRQKJFBBjamDM5Lc5EVUBBe7
+	KpVN1Nbw==;
+Received: from [50.53.43.113] (helo=bombadil.infradead.org)
+	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+	id 1wSObV-00000004rZ7-0SgW;
+	Thu, 28 May 2026 00:28:05 +0000
+From: Randy Dunlap <rdunlap@infradead.org>
+To: linux-kernel@vger.kernel.org
+Cc: Randy Dunlap <rdunlap@infradead.org>,
+	Wim Van Sebroeck <wim@linux-watchdog.org>,
+	Guenter Roeck <linux@roeck-us.net>,
+	linux-watchdog@vger.kernel.org,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	linux-doc@vger.kernel.org
+Subject: [PATCH 0/5] watchdog: improve comments & Documentation
+Date: Wed, 27 May 2026 17:27:58 -0700
+Message-ID: <20260528002803.1260126-1-rdunlap@infradead.org>
+X-Mailer: git-send-email 2.54.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-89798-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-89800-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[bootlin.com,davemloft.net,google.com,redhat.com,kernel.org,armlinux.org.uk,gmail.com,lwn.net,linuxfoundation.org,pengutronix.de,nxp.com,vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[17];
-	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[kuba@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[8];
+	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_TRACE(0.00)[infradead.org:+];
 	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: A16045EAEB8
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:mid,infradead.org:dkim,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,linuxfoundation.org:email,linux-watchdog.org:email,lwn.net:email]
+X-Rspamd-Queue-Id: 201C15EB411
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Wed, 27 May 2026 04:47:47 +0200 Andrew Lunn wrote:
-> > It'd be great to hear from others but IMHO in the current form this is
-> > not suitable for Documentation/networking/ We can commit the "knowledge"
-> > part but enumerating the test cases seems odd for Documentation/.  
-> 
-> Sorry, not looked too deeply at the actual content yet.
-> 
-> What i was thinking was a python file, which sphinx can ingest to
-> produce documentation, and place holders were code would be added to
-> implement the actual test during the next phase.
-> 
-> This is how i've done testing in the past. I would be the evil one who
-> thought up the tests and described them in detail using sphinx markup
-> in a python test template file. After some review they got passed off
-> to a python developer for implementation. And when they got run and
-> failed, sometimes the feature developer, the test developer and myself
-> got together to figure who made the error.
-> 
-> I'm not sure we even need sphinx. What i find important is that the
-> test is documented. What kAPI calls should be made with what
-> parameters. What results we are expected and why? So that when a test
-> fails, a developer has the information they need to fix their
-> code. The Why? is important, and often missing from the kernel tests.
+Add the missing devm_watchdog_register_device() to watchdog-kernel-api.rst.
+Convert some struct and function comments to kernel-doc format.
+Add some UAPI comments for quick reference.
+Correct some grammar and bulleted list format.
 
-All makes sense. The question is primarily how we fit that into 
-the existing project layout we have in the kernel :(
+[PATCH 1/5] watchdog: add devm_watchdog_register_device() to watchdog-kernel-api
+[PATCH 2/5] watchdog: linux/watchdog.h: repair kernel-doc comments
+[PATCH 3/5] watchdog: uapi: add comments for what bit masks apply to
+[PATCH 4/5] watchdog: core: clean up some comments
+[PATCH 5/5] watchdog: dev: convert to kernel-doc comments
 
-The python tests can be hacked up to print the test case docstring
-before the failure.
+ Documentation/watchdog/watchdog-kernel-api.rst |    8 ++++
+ drivers/watchdog/watchdog_core.c               |   12 +++---
+ drivers/watchdog/watchdog_dev.c                |   30 +++++++--------
+ include/linux/watchdog.h                       |    8 +++-
+ include/uapi/linux/watchdog.h                  |    2 +
+ 5 files changed, 37 insertions(+), 23 deletions(-)
 
-But I think for human and AI reviewer consumption it may be nice
-to keep the condensed knowledge / common mistakes in Documentation/
-If we had the ability to exercise the submissions it'd be a different
-story test output would be a sufficient signal and/or could be fed into
-the review. But for AI making a guess at whether the submitted driver is
-correct purely from the driver source - knowledge is useful.
+Cc: Wim Van Sebroeck <wim@linux-watchdog.org>
+Cc: Guenter Roeck <linux@roeck-us.net>
+Cc: linux-watchdog@vger.kernel.org
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: Shuah Khan <skhan@linuxfoundation.org>
+Cc: linux-doc@vger.kernel.org
 
