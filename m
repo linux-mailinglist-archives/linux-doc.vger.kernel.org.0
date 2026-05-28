@@ -1,166 +1,186 @@
-Return-Path: <linux-doc+bounces-89901-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89903-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 9HFQOsOQGGr8lAgAu9opvQ
-	(envelope-from <linux-doc+bounces-89901-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 21:00:19 +0200
+	id gNF4HKidGGpRlggAu9opvQ
+	(envelope-from <linux-doc+bounces-89903-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 21:55:20 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DCC425F6CA8
-	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 21:00:18 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 00F225F7706
+	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 21:55:19 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 5BB3D3064A3A
-	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 18:40:52 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 37DAF3055889
+	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 19:54:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DFF24425CF7;
-	Thu, 28 May 2026 18:39:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0B275409632;
+	Thu, 28 May 2026 19:54:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b="mm7wiFpK"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="sq+0j8Cf"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com [136.143.188.15])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9136C41C308;
-	Thu, 28 May 2026 18:39:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.15
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779993553; cv=pass; b=bTibKwP7IbvPylBdSbX+ZZ4Z84cBXzLoV32o6mq93O2v/3T63h2AINnGR+GStJ2r/byokWoD1eA0i+wp1rfuZ5/z1B32Ftz28R62xAjnRctPmQUSu3zzvljy8inqqwQ9FxMv+sRNrZ5RxahrMRJceqMnnDsT6PyEioJVGL0S5fM=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779993553; c=relaxed/simple;
-	bh=dPsqvFMUthronaDNPsO9Nf2AfzZZGos2VFwXOO1haoQ=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=CBKA0G694QHGkNiZOuLwWkOorHvwzFLwLDCRDpoe/84Tlwh5kC8qsfkT55V/zCZJKtPLhb9la8JwDw6wM7FC5tlyop1+AcoO8B56KLFEJxXm6tHBCdZQA1tiHYKFS3x9OrEcakgvHEzSwYiQctS2HgWDJe+a633mVre1Hh2ND4g=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rong.moe; spf=pass smtp.mailfrom=rong.moe; dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b=mm7wiFpK; arc=pass smtp.client-ip=136.143.188.15
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rong.moe
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rong.moe
-ARC-Seal: i=1; a=rsa-sha256; t=1779993548; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=NiwS1tX5SPU6QAD1sWcau8ryA0rUVkruGWwrcY+bQRXkzN1qpYRZ+FoCNlgwP5oR+SnkcS9d8Vo4X6+8/Vl/0GJd7rP2F5//8109RRjJx+S6jXOO4diiZBaWTOJnsUaFJSq05RCz534oUNzZHUiqmH/WeAAcU18+XvLvEcGbEKU=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1779993548; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=1BN6G/rgB9O80LfDMRyXKYCm7YGnt9QXu63DWzyvDnA=; 
-	b=gsPK4hJfVIbFf907QbVPrdYnBMA6PTmSGweNnHBQS8jR/3Ka25X7BCTkuvCMDPtFO1+q/crjftoncfjtx02FDOZQuuNs2jZyMAKB8ki93NWbV1auTM9O/HViWrdLpaEKwyZ1wQuxfmIV4IIJms0fgcyWDxKYWjemKn131UfRSY8=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=rong.moe;
-	spf=pass  smtp.mailfrom=i@rong.moe;
-	dmarc=pass header.from=<i@rong.moe>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1779993548;
-	s=zmail2048; d=rong.moe; i=i@rong.moe;
-	h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:References:In-Reply-To:To:To:Cc:Cc:Reply-To;
-	bh=1BN6G/rgB9O80LfDMRyXKYCm7YGnt9QXu63DWzyvDnA=;
-	b=mm7wiFpKeewwaioEPbFQF7Ua6SrD4FD8LTRLdBnG9uRgXDR0c8uKbohbH///1H27
-	jOAgtZAIkjVU2FDavyWpU8oY/7THc/i9JjevxojVn+DS8EUubOGNvEspkRK0VLkxuKR
-	dXXiUorHFnkU21HGfDhylRGAy6WI9H5BU9qqa6OnE15j8pnIb9s/5SXNWos+lla/fG5
-	E5QBDG7gvtPHVIISv6j+55ApWdXUpySqFWBKDy545xHhPF/GliHnO8jyhtHx8aI1aAz
-	tHkMaA4U+zmTzYrq+j6ml5wpRmO6rroYbqwKbsSRWEWWA93+0OvsZgGf5kacWK7Kh38
-	9+EB90oJHg==
-Received: by mx.zohomail.com with SMTPS id 1779993546036502.82666565770455;
-	Thu, 28 May 2026 11:39:06 -0700 (PDT)
-From: Rong Zhang <i@rong.moe>
-Date: Fri, 29 May 2026 02:38:56 +0800
-Subject: [PATCH v3 2/2] ALSA: usb-audio: Add quirk flag for Sennheiser
- MOMENTUM 3
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 02250409613
+	for <linux-doc@vger.kernel.org>; Thu, 28 May 2026 19:54:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.45
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1779998046; cv=none; b=tX1YpLlQwTw4WMFgUNX5FQ/eBw7Uv68EweUaIC+212KoPg+dJMb3Vmus2XIPJIUHErJxPMyccJp8AuNQs9Z/8EjBgQsj7IdtGF/EHm2beoVie6fdd3DYetFA1c3ciET8RHHaCmqw8ZWH07FXsSSyxKoknMwzEnTrzHPlr7xVOAo=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1779998046; c=relaxed/simple;
+	bh=tkYwiPexmCFy1xVdThNBUraltDvdQA2A6n5FvjBLCio=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=gwE+CMaiSJFtnnUZJRG7aLt22aKXNT9VDqyXRNposo2bQsxD28SBwmM4gOS2BeEJRHEOhwqpqCRRiXMR74VXtDnQABXd7n1jKhGJM2aNBURG9mfzVGC8cLbXfSAdy/1EP6o12qsXjwTrVspUIhQMnGCB9+UbsaS3HS97Gwb5Uuo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=sq+0j8Cf; arc=none smtp.client-ip=209.85.216.45
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pj1-f45.google.com with SMTP id 98e67ed59e1d1-36b95eb4bb4so451883a91.3
+        for <linux-doc@vger.kernel.org>; Thu, 28 May 2026 12:54:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1779998043; x=1780602843; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=r+YVYuHV31+YDueuv90j7QJ3IHdmFzFimV+6UaJiJI8=;
+        b=sq+0j8CfzfjHjxIfOSwDU3al73qMU7o1+qxw/1FQS3xMc8N0OwMPqpxORX7GoNimYE
+         gRgDmchpo9hlGQwK+f3yWXJl5ePj/L3MZqw3RgE2tAxZ/kEcm8KDw+xbjICnuS9/zHJR
+         KytU9c66hEpxUtClUCKlrQ2xLrOzb0LH+7E1Tn3D/0jDo68uY6V13Id7hh8oByLVzudq
+         lW24f8tBKJQpKQPZKngrIkfubxFctaUnNAUkZlSRjRkU8OTunCBMPIoAA1958le0Iv5M
+         J81FZit9vJ+4LrCKNKH3kdwUzQueD3/gZkLulu5xF3mB2AlyBKaJOuB++WRpq3hGCaWC
+         UeLg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1779998043; x=1780602843;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=r+YVYuHV31+YDueuv90j7QJ3IHdmFzFimV+6UaJiJI8=;
+        b=UmIqHm8NzfP1WQyq1qc2DMq/9Pd4+h/gSD0t56NZdjEjeCQoajrXk5r7vFRiWrdc77
+         6BQhrH3SVii1slxJBzpxSM7P0T1Qu9GvI5R09k2lkZrKxheXmTc0iPWNJhIZbUicPk22
+         kAQaq7l6OrNV0c57BGY2487kh4KRrDzs4jkX4WMvGFy6v9EAud0GyAqZ4StQILWgWzbu
+         R7PIlJ4xhC9oL03Mnz3wB6FDT0uuYo66Kggb7ByRSQcE0gG6qOJuWMJfAW6tCwy5kM85
+         GRN1q3q0iVFKU/IzI1fSAIvg0cRtU0DrvR5simwA86DelpPHegyt1lvYsB74fkf/7cAC
+         f78Q==
+X-Forwarded-Encrypted: i=1; AFNElJ/W36P4woN0yZkNLcHtRm3PThYxv8Za2zJtrltF4FWQkqYJM3b6qfS84vdfpSpsa6Wz9trZQinyqi4=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzZijBhFPLVnw6zIx4ZTiElu6bissUXBOIKuBZ0gMfN2+/rPfOF
+	fI+OfNx+Qr5g51pmp7UBBi+WWXRd4DF2A+K63gDLmrFmQRdxymSvrGFk
+X-Gm-Gg: Acq92OHwfzhLX9jk8gavnUZnJNiiFTlz9eK4oaNWbYtKNBk2GRZGYw3sQVy6zRlfvNn
+	91Y7pvDvfJCShI8akWXcB87m0SD0mUz85614S8KHumvWVSEbUtB95zQ804ZC6s3oagGFmdk4UI/
+	CDOWcv7u1Xbks+Ee5vJsYINQxOZ3d+2W3VoSddi4uDj5TE7jPETzmbWMa3oWKjTvUyrkujPmcJD
+	l4T50gcU+RBiiCqycVmB7GBo0SGKLv1dTLTQ2k8lMCf64eH5oyZCj7ozt5aol3ZHncrSQBfNwfT
+	xaxQrVTAImqzBkN7UlsbZPmafJnA9SMRmEpN05K1AYV3R8eHUl+yO5VP8c/EuVl7XUUHe1tr5Ss
+	RMf6OPX27sGQ1Ef/XDwUeUquOMmNrjhxAADu8vhCxTZVFYS60ZdABy4TkPkd5CCNoKJ39W6CrIv
+	f6nMMxfj23WTSCgc7YYSOw/4hxNk9Ha4IpOUwLvmstSGAS08m3UXXROPEKaqg+JHrWtdPNex0EA
+	D5I
+X-Received: by 2002:a17:90b:2682:b0:36b:ba9b:7efb with SMTP id 98e67ed59e1d1-36bbcc14892mr34605a91.5.1779998042998;
+        Thu, 28 May 2026 12:54:02 -0700 (PDT)
+Received: from skinsburskii (c-98-225-44-182.hsd1.wa.comcast.net. [98.225.44.182])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-36bb616d646sm398548a91.11.2026.05.28.12.54.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 28 May 2026 12:54:02 -0700 (PDT)
+Date: Thu, 28 May 2026 12:53:59 -0700
+From: Stanislav Kinsburskii <skinsburskii@gmail.com>
+To: Andrew Morton <akpm@linux-foundation.org>
+Cc: Liam.Howlett@oracle.com, david@kernel.org, jgg@ziepe.ca, corbet@lwn.net,
+	leon@kernel.org, ljs@kernel.org, mhocko@suse.com, rppt@kernel.org,
+	shuah@kernel.org, skhan@linuxfoundation.org, surenb@google.com,
+	vbabka@kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
+	linux-mm@kvack.org
+Subject: Re: [PATCH v3 0/3] mm/hmm: Add mmap lock-drop support for
+ userfaultfd-backed mappings
+Message-ID: <ahidV_iSq3E-FtMI@skinsburskii>
+References: <177928604779.589431.14703161356676674288.stgit@skinsburskii>
+ <20260521163309.c5cc5d3f6cf16bac212cf90b@linux-foundation.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260529-uac-quirk-get-cur-vol-v3-2-bde363188ca4@rong.moe>
-References: <20260529-uac-quirk-get-cur-vol-v3-0-bde363188ca4@rong.moe>
-In-Reply-To: <20260529-uac-quirk-get-cur-vol-v3-0-bde363188ca4@rong.moe>
-To: Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>
-Cc: linux-sound@vger.kernel.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Rong Zhang <i@rong.moe>
-X-Mailer: b4 0.16-dev-d5d98
-X-ZohoMailClient: External
-X-Spamd-Result: default: False [7.34 / 15.00];
-	URIBL_BLACK(7.50)[rong.moe:email,rong.moe:mid,rong.moe:dkim];
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260521163309.c5cc5d3f6cf16bac212cf90b@linux-foundation.org>
+X-Spamd-Result: default: False [2.34 / 15.00];
+	MID_END_EQ_FROM_USER_PART(4.00)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
-	BAD_REP_POLICIES(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-89901-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-89903-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	R_DKIM_ALLOW(0.00)[rong.moe:s=zmail2048];
 	FROM_HAS_DN(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[rong.moe,none];
-	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	GREYLIST(0.00)[pass,body];
-	DKIM_TRACE(0.00)[rong.moe:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	RCPT_COUNT_TWELVE(0.00)[17];
 	MIME_TRACE(0.00)[0:+];
-	NEURAL_HAM(-0.00)[-0.996];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[i@rong.moe,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[skinsburskii@gmail.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-0.999];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	ARC_ALLOW(0.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	R_SPF_ALLOW(0.00)[+ip6:2600:3c15:e001:75::/64:c];
-	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: DCC425F6CA8
-X-Rspamd-Action: add header
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,sashiko.dev:url]
+X-Rspamd-Queue-Id: 00F225F7706
+X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spam: Yes
 
-The Sennheiser MOMENTUM 3 is a wireless around-ear headphones featuring
-ANC, which can be connected via Bluetooth or USB-C.
+On Thu, May 21, 2026 at 04:33:09PM -0700, Andrew Morton wrote:
+> On Wed, 20 May 2026 07:09:19 -0700 Stanislav Kinsburskii <skinsburskii@gmail.com> wrote:
+> 
+> > This series extends the HMM framework to support userfaultfd-backed memory
+> > by allowing the mmap read lock to be dropped during hmm_range_fault().
+> > 
+> > Some page fault handlers — most notably userfaultfd — require the mmap lock
+> > to be released so that userspace can resolve the fault. The current HMM
+> > interface never sets FAULT_FLAG_ALLOW_RETRY, making it impossible to fault
+> > in pages from userfaultfd-registered regions.
+> > 
+> > This series follows the established int *locked pattern from
+> > get_user_pages_remote() in mm/gup.c. A new entry point,
+> > hmm_range_fault_unlockable(), accepts an int *locked parameter. When the
+> > mmap lock is dropped during fault resolution (VM_FAULT_RETRY or
+> > VM_FAULT_COMPLETED), the function returns 0 with *locked = 0, signalling
+> > the caller to restart its walk. The existing hmm_range_fault() is
+> > refactored into a thin wrapper that passes NULL, preserving current
+> > behavior for all existing callers.
+> > 
+> > Faulting hugetlb pages on the unlockable path is not supported because
+> > walk_hugetlb_range() unconditionally holds and releases
+> > hugetlb_vma_lock_read across the callback; if the mmap lock is dropped
+> > inside the callback, the VMA may be freed before the walk framework's
+> > unlock. Hugetlb pages already present in page tables are handled normally.
+> > Possible approaches to lift this limitation are documented in
+> > Documentation/mm/hmm.rst.
+> 
+> Thanks.  AI review identified one possible issue, possibly a duplicate
+> from the v2 series?
+> 
+> 	https://sashiko.dev/#/patchset/177928604779.589431.14703161356676674288.stgit@skinsburskii
+> 
+> I'll take no action at this stage, shall await reviewer input.  Please
+> poke me in a week or so if nothing has happened.
+> 
 
-When connecting via USB-C, its UAC mixer works fine and precisely
-corresponds to the reported dB range. However, the mixer's volume
-GET_CUR method is somehow stubbed and returns a constant value (15dB).
-Since commit 86aa1ea1f15c ("ALSA: usb-audio: Do not expose sticky
-mixers"), the sticky check considers the mixer to be sticky and
-unnecessarily disables the mixer.
+Hi Andrew,
 
-Add a quirk table entry matching VID/PID=0x1377/0x6004 and applying
-the MIXER_GET_CUR_BROKEN quirk flag, so that the mixer is usable again.
+A gentle reminder as requested: do you think this change could be taken into
+the mm tree?
+It's beneficial not only for the MSHV driver, but can be used for
+post-copy live migration of GPU states in future.
 
-Quirky device sample:
+Thanks,
+Stanislav
 
-  usb 7-1.4.4.1.1.1: new full-speed USB device number 30 using xhci_hcd
-  usb 7-1.4.4.1.1.1: New USB device found, idVendor=1377, idProduct=6004, bcdDevice=38.85
-  usb 7-1.4.4.1.1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
-  usb 7-1.4.4.1.1.1: Product: MOMENTUM 3
-  usb 7-1.4.4.1.1.1: Manufacturer: Sennheiser electronic GmbH & Co. KG
-  usb 7-1.4.4.1.1.1: SerialNumber: <REDACTED>
-  usb 7-1.4.4.1.1.1: Found last interface = 0
-  usb 7-1.4.4.1.1.1: 1:1: add audio endpoint 0x3
-  usb 7-1.4.4.1.1.1: Creating new data endpoint #3
-  usb 7-1.4.4.1.1.1: 1:1 Set sample rate 48000, clock 0
-  usb 7-1.4.4.1.1.1: 6:0: sticky mixer values (0/11520/768 => 3840), disabling
-  usb 7-1.4.4.1.1.1: [6] FU [PCM Playback Volume] skipped due to invalid volume
-  input: Sennheiser electronic GmbH & Co. KG MOMENTUM 3 as /devices/pci0000:00/0000:00:08.3/0000:67:00.4/usb7/7-1/7-1.4/7-1.4.4/7-1.4.4.1/7-1.4.4.1.1/7-1.4.4.1.1.1/7-1.4.4.1.1.1:1.2/0003:1377:6004.002B/input/input208
-  input: Sennheiser electronic GmbH & Co. KG MOMENTUM 3 Consumer Control as /devices/pci0000:00/0000:00:08.3/0000:67:00.4/usb7/7-1/7-1.4/7-1.4.4/7-1.4.4.1/7-1.4.4.1.1/7-1.4.4.1.1.1/7-1.4.4.1.1.1:1.2/0003:1377:6004.002B/input/input209
-  hid-generic 0003:1377:6004.002B: input,hiddev99,hidraw12: USB HID v1.11 Device [Sennheiser electronic GmbH & Co. KG MOMENTUM 3] on usb-0000:67:00.4-1.4.4.1.1.1/input2
-
-Signed-off-by: Rong Zhang <i@rong.moe>
----
- sound/usb/quirks.c | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/sound/usb/quirks.c b/sound/usb/quirks.c
-index ac2f0f6039be..149f2009df12 100644
---- a/sound/usb/quirks.c
-+++ b/sound/usb/quirks.c
-@@ -2357,6 +2357,8 @@ static const struct usb_audio_quirk_flags_table quirk_flags_table[] = {
- 		   QUIRK_FLAG_FORCE_IFACE_RESET | QUIRK_FLAG_IFACE_DELAY),
- 	DEVICE_FLG(0x1224, 0x2a25, /* Jieli Technology USB PHY 2.0 */
- 		   QUIRK_FLAG_GET_SAMPLE_RATE | QUIRK_FLAG_MIC_RES_16),
-+	DEVICE_FLG(0x1377, 0x6004, /* Sennheiser MOMENTUM 3 */
-+		   QUIRK_FLAG_MIXER_GET_CUR_BROKEN),
- 	DEVICE_FLG(0x1395, 0x740a, /* Sennheiser DECT */
- 		   QUIRK_FLAG_GET_SAMPLE_RATE),
- 	DEVICE_FLG(0x1397, 0x0507, /* Behringer UMC202HD */
-
--- 
-2.53.0
-
+> Which is quite possible - things seem rather hectic at this time and
+> we're almost at -rc5!
 
