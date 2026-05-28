@@ -1,51 +1,52 @@
-Return-Path: <linux-doc+bounces-89800-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89801-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id EOYLJriMF2o5IwgAu9opvQ
-	(envelope-from <linux-doc+bounces-89800-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 02:30:48 +0200
+	id +ICSCNCMF2o5IwgAu9opvQ
+	(envelope-from <linux-doc+bounces-89801-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 02:31:12 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 201C15EB411
-	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 02:30:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A324A5EB431
+	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 02:31:11 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 9766B3127750
-	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 00:28:10 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 7322F312FDBD
+	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 00:28:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6E35F1A304A;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E08991B81CA;
 	Thu, 28 May 2026 00:28:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="cuQWPBa7"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="RhdOcE4H"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E34A1940B0;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E29C186284;
 	Thu, 28 May 2026 00:28:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779928089; cv=none; b=FQsD0FRhgxJBa+zzSEDWfm35DNI+GsvJt5AXfdCTINS6HZv7ZA5jSSeWDNHXwTYqaiGvtAv+8Y8gUaSjb13lQpOs/WEDIgnvahnzKIMKr2J+vBeGAyXq5AJyYqqNYrf7GenIHkZQM8TiB9LHgmKMuWLYzLnX0os26QlCvlM3lG4=
+	t=1779928089; cv=none; b=X3wArFp2qlu/aVsF/0Z2u/Hf2nxLrHO9m4qx3sJ4rE5O2oF5rgmsfzeAGQFLvfQaecvME/xIdyw/8pbRGgwQwAsh8QMVN1qx9WJaKsJ5DV94knNG6hliAOIsH3jBORKyB/TqIwqHWUjOsItvAFgE5QDtYxE5Nn6ZvsQEQZy8z94=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1779928089; c=relaxed/simple;
-	bh=iqIw4BmPF+2dDsjia4xazKYD/RIRJRAVFefpSJScL9U=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=rfTtcBGSE7xTSbBMGSVebMXNxH7vtDZUWH3kKEg8VDClA8gchNSqZD2ryycHRDFCM7r0h/XKKHzX5FNOz/CUDcwY/ROPAx2U4pWH2XGFxkh3TJAMHRZfxzffJe7xgNNsiU8nz5wZ1dkWJP4eb5rupDqun0Tu1FdVTAIUY8xmfY0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=cuQWPBa7; arc=none smtp.client-ip=198.137.202.133
+	bh=VzCCG2WY9lp/Ig+ftT7XCOYa3KAVTvV+8yWaQKuCg24=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=EpT96OAYCYU3iX7IzyOoShVNW6UgStD4w8DNhAU+zYjeKFKjM8t7RK7HXmroBpBpRIjuG/h6lu36YK1iyzwauvixeoskdaIFEVW0GdanmWsov+EG2NvvlyWSLxgNhyvJyAl6y9Ml1jlWCttTwHkQurM0Kl+q74k5CXB4LP1YQZg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=RhdOcE4H; arc=none smtp.client-ip=198.137.202.133
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
 Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
-	Content-ID:Content-Description:In-Reply-To:References;
-	bh=J22xHJRmlZv6cVds2IeEilTP32/Q2JkES+c6kVoqSYg=; b=cuQWPBa7rh60yPE2xFaxQrz2bw
-	Uit4QtsmtVGbLx+FGUxUuAhu81QgBK4WOl3viDf0HSJkIJz3XoJmztvfClbPdSIY9q+O/aX52vd9+
-	R18bf5KSk73aiehT4Etk53GXInA0OQx7P9ux5S3bVi2+4OvpJFuB/5tIwP8XhaoGGJPhLWobfOnGk
-	YsXgIgjCu/2c6ZqENyaVk2nYTNK4N68A3m+0mRxI2iyNwJev5NI6A2ari8/gdN141qtffnW8xcPXv
-	gYvZa6YqPWtG3OnE1Ag28KhPfEpI/UiZdWueRFROw70H/cc2n/qIFpRQKJFBBjamDM5Lc5EVUBBe7
-	KpVN1Nbw==;
+	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
+	:Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=NpxOKjsfnDebULmYkiyGcMGkmFp7bR2xF1D+86616qg=; b=RhdOcE4HedAwdTo8jgjOUGNqod
+	N/MfIwhs2SmXkFxo6tudlchN0aZl7TSiqbMid4OZRUndqaKLR5Av147tX8LoE2ykz/F2ML7X16vtW
+	MK0d8wbLF8/YcgtoWk6hGZM6kDX79rNHoSjcTNJV3qFsRPvRkKcH5gaXEgx781a6oJ8DrEpGYvRKg
+	dcT+GiUnBT09H02E+HCg7i02+5RwuGutrljvxrOM59eNf7DuM/EdAVRLFHi5Uejqjrf7Fkg7UhrKn
+	U1k5Qyj6DCqf2yNDiLYx/UYlpyh9YJZDwWT5UGQyuHFEHyjIn/yIYGSG2uSrs76dQ30emdyjiPtBR
+	q8rdpdzw==;
 Received: from [50.53.43.113] (helo=bombadil.infradead.org)
 	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wSObV-00000004rZ7-0SgW;
+	id 1wSObV-00000004rZ7-1qPG;
 	Thu, 28 May 2026 00:28:05 +0000
 From: Randy Dunlap <rdunlap@infradead.org>
 To: linux-kernel@vger.kernel.org
@@ -56,10 +57,12 @@ Cc: Randy Dunlap <rdunlap@infradead.org>,
 	Jonathan Corbet <corbet@lwn.net>,
 	Shuah Khan <skhan@linuxfoundation.org>,
 	linux-doc@vger.kernel.org
-Subject: [PATCH 0/5] watchdog: improve comments & Documentation
-Date: Wed, 27 May 2026 17:27:58 -0700
-Message-ID: <20260528002803.1260126-1-rdunlap@infradead.org>
+Subject: [PATCH 1/5] watchdog: add devm_watchdog_register_device() to watchdog-kernel-api
+Date: Wed, 27 May 2026 17:27:59 -0700
+Message-ID: <20260528002803.1260126-2-rdunlap@infradead.org>
 X-Mailer: git-send-email 2.54.0
+In-Reply-To: <20260528002803.1260126-1-rdunlap@infradead.org>
+References: <20260528002803.1260126-1-rdunlap@infradead.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -78,7 +81,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-89800-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-89801-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
@@ -93,33 +96,41 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	TO_DN_SOME(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:mid,infradead.org:dkim,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,linuxfoundation.org:email,linux-watchdog.org:email,lwn.net:email]
-X-Rspamd-Queue-Id: 201C15EB411
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linuxfoundation.org:email,infradead.org:email,infradead.org:mid,infradead.org:dkim,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,linux-watchdog.org:email,lwn.net:email]
+X-Rspamd-Queue-Id: A324A5EB431
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Add the missing devm_watchdog_register_device() to watchdog-kernel-api.rst.
-Convert some struct and function comments to kernel-doc format.
-Add some UAPI comments for quick reference.
-Correct some grammar and bulleted list format.
+devm_watchdog_register_device() is not documented. Add it to the current
+kernel API documentation.
 
-[PATCH 1/5] watchdog: add devm_watchdog_register_device() to watchdog-kernel-api
-[PATCH 2/5] watchdog: linux/watchdog.h: repair kernel-doc comments
-[PATCH 3/5] watchdog: uapi: add comments for what bit masks apply to
-[PATCH 4/5] watchdog: core: clean up some comments
-[PATCH 5/5] watchdog: dev: convert to kernel-doc comments
-
- Documentation/watchdog/watchdog-kernel-api.rst |    8 ++++
- drivers/watchdog/watchdog_core.c               |   12 +++---
- drivers/watchdog/watchdog_dev.c                |   30 +++++++--------
- include/linux/watchdog.h                       |    8 +++-
- include/uapi/linux/watchdog.h                  |    2 +
- 5 files changed, 37 insertions(+), 23 deletions(-)
-
+Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+---
 Cc: Wim Van Sebroeck <wim@linux-watchdog.org>
 Cc: Guenter Roeck <linux@roeck-us.net>
 Cc: linux-watchdog@vger.kernel.org
 Cc: Jonathan Corbet <corbet@lwn.net>
 Cc: Shuah Khan <skhan@linuxfoundation.org>
 Cc: linux-doc@vger.kernel.org
+
+ Documentation/watchdog/watchdog-kernel-api.rst |    8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+--- linux-next-20260525.orig/Documentation/watchdog/watchdog-kernel-api.rst
++++ linux-next-20260525/Documentation/watchdog/watchdog-kernel-api.rst
+@@ -42,6 +42,14 @@ The watchdog subsystem includes a regist
+ which allows you to register a watchdog as early as you wish during
+ the boot process.
+ 
++There is also a resource-managed watchdog_register_device(),
++devm_watchdog_register_device(). If you use this to register a watchdog
++device, watchdog_unregister_device() is called automatically on driver
++detach::
++
++        int devm_watchdog_register_device(struct device *dev,
++				struct watchdog_device *wdd);
++
+ The watchdog device structure looks like this::
+ 
+   struct watchdog_device {
 
