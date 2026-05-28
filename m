@@ -1,126 +1,208 @@
-Return-Path: <linux-doc+bounces-89815-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89863-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qFaeISOyF2p+NggAu9opvQ
-	(envelope-from <linux-doc+bounces-89815-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 05:10:27 +0200
+	id aJXWHLkeGGocdggAu9opvQ
+	(envelope-from <linux-doc+bounces-89863-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 12:53:45 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id F35B15EC186
-	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 05:10:26 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E1DD5F0ED9
+	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 12:53:43 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 017D93018582
-	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 03:10:26 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 1D880300728C
+	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 10:50:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3E1F12EA172;
-	Thu, 28 May 2026 03:10:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 40FE13D0937;
+	Thu, 28 May 2026 10:50:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="ZQrKHCc1"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="HuqAh1/r"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DC1FA7E0FF;
-	Thu, 28 May 2026 03:10:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D104A3BB9ED
+	for <linux-doc@vger.kernel.org>; Thu, 28 May 2026 10:50:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.169
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779937825; cv=none; b=CjDhcy9bBj/oivl5eRRgWWBh3vQa12CPyeMG1mP85Qy9McptM/l6/zvmndXTZeRVoLzcpAqLULG1RDOKxWZqobbz3Ka0Nvc2aVnvUu2SNJkgymB9/PWP8dT5kPLR1DVot6S5/B9onwPAm8AHRjPrsVKH2qdowluzt5qYFVDAOwM=
+	t=1779965410; cv=none; b=HwLFuqfPCDOuUU9VeWkHuJ2WYAl5oE4r+ZwZC2+IPJYkNe5+Qk20fcsB7ZKjsCQ1knx0PO81gRlMldwgsrQGmfwtsFEXidnDFiaKBQtPjjNyZ+Z8KBz5ymH4DVTJ+yV00KyxcKo7MpFffnmBMRXgzhwoDuok7HjRpvPj8b9UwvQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779937825; c=relaxed/simple;
-	bh=JKPT2uOitDGMc9hKsCeI1Ib7wNX2r4iiEK8ueiYERgA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=sNlFo1aKcUPFWPtXrnuqjE656vecp7llqu8S0n0cfEDdqBK8yYKc+sb2OgfemM39Q2OF9hasxl4Y4A1ARPN7On0rO7sQIYfSf0Os9OHG2sLLbjbUFXdrYCtzZYGVlOf79SANBJMQngjD6HVfhVmRSzz19oGfIVygUzHa+1Bu99g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=ZQrKHCc1; arc=none smtp.client-ip=156.67.10.101
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
-	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
-	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
-	bh=b/EifuVIGghQo+9boHyYh61kG7BnRjT0tZEcVKkgI5c=; b=ZQrKHCc1mUHR3viQts8Dk7qHU1
-	esGBTSsJijbExowQrmjQI4oIFgayx2ry9r7O9vWZXYQ+wkPqaWVt8QIwIdIQN/nBd19IXHeNod/Jh
-	U7/pDewdZhggcCg462mjJkvWzk/EYgCw52NGdSSe52MoOHMOUdZQhEH0+n29l+i0SU08=;
-Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
-	(envelope-from <andrew@lunn.ch>)
-	id 1wSR8N-004qh5-4w; Thu, 28 May 2026 05:10:11 +0200
-Date: Thu, 28 May 2026 05:10:11 +0200
-From: Andrew Lunn <andrew@lunn.ch>
-To: ciprian.regus@analog.com
-Cc: Parthiban Veerasooran <parthiban.veerasooran@microchip.com>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Simon Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Russell King <linux@armlinux.org.uk>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, netdev@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-	devicetree@vger.kernel.org
-Subject: Re: [PATCH net-next v2 10/10] net: ethernet: adi: Add a driver for
- the ADIN1140 MACPHY
-Message-ID: <0aaa9a58-fac1-4de7-90f0-443db37228c8@lunn.ch>
-References: <20260527-adin1140-driver-v2-0-37e5c8d4e0a0@analog.com>
- <20260527-adin1140-driver-v2-10-37e5c8d4e0a0@analog.com>
+	s=arc-20240116; t=1779965410; c=relaxed/simple;
+	bh=eCJWbK5m+tNvzAyjDy46Navw29cBVreFmRG2Woa1MAw=;
+	h=From:To:Cc:Subject:In-Reply-To:Date:Message-ID:References; b=DUtSaNzD+d/ZnVa4V0VL/5zQ1yiJDX3E6iAZqK19IzyC7Md2Y0EU27wMTMttdOVojxs1lIRePC8ERapcRIQMdqH/PD9qSGXowGJoFJsdBRBR9SC+PPSAuXLx5WUjbx4cJXFFVf7RnRqyGjo1pcAIe0guLKLbE2P44oQZF+EyWgk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=HuqAh1/r; arc=none smtp.client-ip=209.85.214.169
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-2bea7176c72so57134275ad.0
+        for <linux-doc@vger.kernel.org>; Thu, 28 May 2026 03:50:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1779965407; x=1780570207; darn=vger.kernel.org;
+        h=references:message-id:date:in-reply-to:subject:cc:to:from:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=46bMWh+gCQYzpY1dEMifCzkdbqK+/RCfas0dsX6v9EQ=;
+        b=HuqAh1/roKoG0hIctEWFdBb2sH5x3sG2/KhuwkiE/htE7DObP/e0nm/OoTr1AuHstG
+         ZE1djmIQWj0O8yMOmrZskKqt72gfx4cqqad7Wru2eTIN9iP6XtUnF3nx/I2Afqdyv5Nr
+         aiZWZMU5dlll+8A6ztSaMyxo31dMWxI89v1r1w7QJsa//Ib1dFhdz7+sZOHepzbzITAT
+         3eK/KcG9au19qgI0xrojwTeDJArN1MMu/mTEX3ZcRLBoPkznIOpYyaWi9ZPN5xFluz5t
+         ITu9hC4Bv5EasiDfhr8zuuuV1odUJ4kSiPhy2iJE6NAUbfLYNtA1x5DBm2umglUA0Y3M
+         Kr7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1779965407; x=1780570207;
+        h=references:message-id:date:in-reply-to:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=46bMWh+gCQYzpY1dEMifCzkdbqK+/RCfas0dsX6v9EQ=;
+        b=e5t+kjddorRvvBVVGDO8bR8uBYuZNkAjfk6L9A6oOO0KhebwWVWUj1O/ZazlTnwc/o
+         Eq3YZhRnzHJbBxT8V5CJH1RG80uxzWoFC7QaG0y0RJheO4a+BU2n8rHxBzCntnF7Xfc3
+         xXFdKHy9FjM9cA2MlmqUvi/46Gzh5nqa/nDUFZ47sTEHVEK2DNmRPpy9gBFL59Of8y7y
+         laRFnrkVqOG9+mhAlM4D+tyZTZzNSLJK7uB7rMnx8rQIj62o9YzD803zKXJFV5fv+c/K
+         6msEr1IZoP/5DXNWdscHnOiNJXjLbZURKBrr82CWq68BemicvotSsMN6eOIQ6c0pEY7R
+         BQZg==
+X-Forwarded-Encrypted: i=1; AFNElJ/qCxIUmxcdqDJP19bdOLpYvM676I5IkLxVLOFCiCIOA0MBzNhp4ChPw/OmxdB8zelsg4YSl1ViymE=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyH9oUNPPpNOOJ+5ex6z03qgOW3H2ErAVlKIL6AxiuHwCG/UWJ4
+	159PxO+gOokp0WZd12VjWCjyCkcWrAw1l2Fdo+FtoelNJIK7nqO5yiHE
+X-Gm-Gg: Acq92OER+tEz9e/IxqmXda4aoaxAT/E5wgKHzBjQMp77r3nAxTQLJS41iqXBYch3Fam
+	vH1fEthOgvYiCY23e49TCX0rOa2vrDq3S/xob11V6v38GO6lSUjMckbLSAPFXnVlY8m/RQfoCLS
+	SFXHW7FVkb6mlfyZFJ12jZjDAGBgBJHhWYzw9ZUroIkdQ2Zp27w+B0D6fdHNxzfoAVuGDw7oV7A
+	13kFejgl8g4P001nTnohSZ1VGewajOcSu2RCJc1oAKX1Nifms5kQqrA0eskzICJ9Q2tfptkIxZw
+	QwnISqRpHZf1qcqtirSYan0KxPE8KW7B3WbvdP9dgin16V4KXYnqP5fiJEaadxsInQwF8oh2oaE
+	nDyz8gYox6v2xbq0QZ4TM9iXzAItapvamKKYOPwHsaQhACLuHHPZksi954mbknI82IzN5tGc+Mh
+	jw0FG104O11x5Igh4/KeRfZJBsKqKclYXy
+X-Received: by 2002:a17:902:e845:b0:2ba:4f37:d3a7 with SMTP id d9443c01a7336-2beb06a63c6mr311583635ad.27.1779965407101;
+        Thu, 28 May 2026 03:50:07 -0700 (PDT)
+Received: from pve-server ([49.205.216.49])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2beb56bc151sm180571765ad.24.2026.05.28.03.50.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 28 May 2026 03:50:06 -0700 (PDT)
+From: Ritesh Harjani (IBM) <ritesh.list@gmail.com>
+To: Amit Machhiwal <amachhiw@linux.ibm.com>, linuxppc-dev@lists.ozlabs.org, Madhavan Srinivasan <maddy@linux.ibm.com>
+Cc: Vaibhav Jain <vaibhav@linux.ibm.com>, Amit Machhiwal <amachhiw@linux.ibm.com>, Anushree Mathur <anushree.mathur@linux.ibm.com>, Paolo Bonzini <pbonzini@redhat.com>, Nicholas Piggin <npiggin@gmail.com>, Michael Ellerman <mpe@ellerman.id.au>, "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, kvm@vger.kernel.org, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, lkp@intel.com
+Subject: Re: [PATCH v3 1/5] KVM: PPC: Book3S HV: Validate arch_compat against host compatibility mode
+In-Reply-To: <20260522152744.55251-2-amachhiw@linux.ibm.com>
+Date: Thu, 28 May 2026 08:43:04 +0530
+Message-ID: <pl2g6xbz.ritesh.list@gmail.com>
+References: <20260522152744.55251-1-amachhiw@linux.ibm.com> <20260522152744.55251-2-amachhiw@linux.ibm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260527-adin1140-driver-v2-10-37e5c8d4e0a0@analog.com>
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[lunn.ch,none];
-	R_DKIM_ALLOW(-0.20)[lunn.ch:s=20171124];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-89815-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[microchip.com,lunn.ch,davemloft.net,google.com,kernel.org,redhat.com,lwn.net,linuxfoundation.org,gmail.com,armlinux.org.uk,vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[19];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FREEMAIL_CC(0.00)[linux.ibm.com,redhat.com,gmail.com,ellerman.id.au,kernel.org,lwn.net,linuxfoundation.org,vger.kernel.org,intel.com];
 	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
+	TAGGED_FROM(0.00)[bounces-89863-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[andrew@lunn.ch,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[lunn.ch:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc,netdev,dt];
+	FROM_NEQ_ENVFROM(0.00)[riteshlist@gmail.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lunn.ch:mid,lunn.ch:dkim,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: F35B15EC186
+	RCVD_COUNT_FIVE(0.00)[5];
+	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: 7E1DD5F0ED9
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-> +static netdev_tx_t adin1140_start_xmit(struct sk_buff *skb,
-> +				       struct net_device *netdev)
-> +{
-> +	struct adin1140_priv *priv = netdev_priv(netdev);
-> +
-> +	/* Pad frames to minimum Ethernet frame size (60 bytes without FCS).
-> +	 * The MAC will append the FCS, but we need to ensure the frame is
-> +	 * at least ETH_ZLEN bytes.
-> +	 */
-> +	if (skb_put_padto(skb, ETH_ZLEN))
-> +		return NETDEV_TX_OK;
+Amit Machhiwal <amachhiw@linux.ibm.com> writes:
 
-Does the standard say anything about this? It seems like something
-which could be moved into the core.
+> On IBM POWER systems, newer processor generations can operate in
+> compatibility modes corresponding to earlier generations. This becomes
+> relevant for nested virtualization, where nested KVM guests may need to
+> run with a specific processor compatibility level.
+>
+> Currently, when running a nested KVM guest (L2) inside a Power11 pSeries
+> logical partition (L1) booted in Power10 compatibility mode, the guest
+> fails to boot while setting 'arch_compat'. This happens because the CPU
+> class is derived from the hardware PVR (via mfspr()), which reflects the
+> physical processor generation (Power11), rather than the effective
+> compatibility mode (Power10).
+>
+> As a result, userspace may request a Power11 arch_compat for the L2
+> guest. However, the L1 partition, running in Power10 compatibility, has
+> only negotiated support up to Power10 with the Power Hypervisor (L0).
+> When H_SET_STATE is invoked with a Power11 Logical PVR, the hypervisor
 
-	Andrew
+s/H_SET_STATE/H_GUEST_SET_STATE 
+
+> rejects the request, leading to a late guest boot failure:
+>
+>   KVM-NESTEDv2: couldn't set guest wide elements
+>   [..KVM reg dump..]
+>
+
+I think irrespective of the other UAPI changes, we should still get this
+fixed - so that we don't see a late KVM guest boot failure msgs.
+
+So, in this review, I would like to mainly look at fixing this issue
+first and would request if we can defer the UAPI changes as a separate
+patch series please.
+
+
+> This situation should be detected earlier. Rejecting unsupported
+> 'arch_compat' values in 'kvmppc_set_arch_compat()' avoids issuing an
+> invalid H_SET_STATE hcall and provides a clearer failure mode.
+
+s/H_SET_STATE/H_GUEST_SET_STATE
+
+>
+> Add a check to reject Power11 'arch_compat' requests when the host is
+> running in Power10 compatibility mode, returning -EINVAL early instead
+> of deferring the failure to the hypervisor.
+>
+> Suggested-by: Vaibhav Jain <vaibhav@linux.ibm.com>
+> Tested-by: Anushree Mathur <anushree.mathur@linux.ibm.com>
+> Signed-off-by: Amit Machhiwal <amachhiw@linux.ibm.com>
+> ---
+>  arch/powerpc/kvm/book3s_hv.c | 12 ++++++++++++
+>  1 file changed, 12 insertions(+)
+>
+> diff --git a/arch/powerpc/kvm/book3s_hv.c b/arch/powerpc/kvm/book3s_hv.c
+> index 61dbeea317f3..249d1f2e4e2c 100644
+> --- a/arch/powerpc/kvm/book3s_hv.c
+> +++ b/arch/powerpc/kvm/book3s_hv.c
+> @@ -446,7 +446,19 @@ static int kvmppc_set_arch_compat(struct kvm_vcpu *vcpu, u32 arch_compat)
+>  			guest_pcr_bit = PCR_ARCH_300;
+>  			break;
+>  		case PVR_ARCH_31:
+> +			guest_pcr_bit = PCR_ARCH_31;
+> +			break;
+>  		case PVR_ARCH_31_P11:
+> +			/*
+> +			 * Need to check this for ISA 3.1, as Power10 and
+> +			 * Power11 share the same PCR. For any subsequent ISA
+> +			 * versions, this will be taken care of by the guest vs
+> +			 * host PCR comparison below.
+> +			 */
+> +			if ((PVR_ARCH_31 & cur_cpu_spec->pvr_mask) ==
+> +				cur_cpu_spec->pvr_value) {
+> +				return -EINVAL;
+> +			}
+
+Instead of the complicated check can we simply do this?
+			if (!cpu_has_feature(CPU_FTR_P11_PVR))
+				return -EINVAL;
+
+which means that if the Qemu is trying to set the arch_compat with P11
+PVR (arch_compat) and if the host cpu FTR doesn't support P11 PVR, then
+simply return -EINVAL
+
+-ritesh
+
 
