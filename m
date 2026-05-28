@@ -1,252 +1,394 @@
-Return-Path: <linux-doc+bounces-89799-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89805-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id IJVbHLeMF2o5IwgAu9opvQ
-	(envelope-from <linux-doc+bounces-89799-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 02:30:47 +0200
+	id iJeIOVCXF2opKggAu9opvQ
+	(envelope-from <linux-doc+bounces-89805-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 03:16:00 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id CA7EC5EB408
-	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 02:30:46 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E78705EB853
+	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 03:15:59 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 833693126F6C
-	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 00:28:10 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 246593016B33
+	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 01:15:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6C5A91A262A;
-	Thu, 28 May 2026 00:28:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C3E68154425;
+	Thu, 28 May 2026 01:15:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="CtP+oO82"
+	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="tNZnzS+Q"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E1FA34389A;
-	Thu, 28 May 2026 00:28:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1097B233922;
+	Thu, 28 May 2026 01:15:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779928089; cv=none; b=l7L/ZqwgXLyGcFfQYOo3RYq8Dz2fko7no7KMsjn/FJ2AsuYh89UXzylM7BZMEw2liDsx79TFYVpofn51L4chsf0RMkNQvcjTtB9I3fBzX4rihHvgfaNOqgNig7ll+wO5nQVoJZKdTOp2lA0EiL26uG19R7eaOhubRNFutvDIxCE=
+	t=1779930946; cv=none; b=JvC14gTzajU7Z+T/9C2Mus7ASon+mz0zJ5LQiwuYE63YCcrWaq0GISG1fwQdMbGrxfsdU1CcWHXVcu5yWE4Zqzk6x8Yqpmf4U2mJULAJFp6ay78olZBhQJVvFmIk3VHPrSqCdXO7aSEiLW4wYJYqQ2lv6XUmLERhHqhh3lNBHZw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779928089; c=relaxed/simple;
-	bh=GOXMm9quu6x7oDg6Jk1CTz4hx5XZqlwDa61SOPezt2Q=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Rrw6ELP1/o61iXJitQmNhiBW1KTPy76f0yOe2upNrmk9COaDams+ypASe6Kr0Z+PgLOXiFlY+EI2rLAt3JuNYfUUTwaIUp8X3hbr3z2UpniZ79tttXIB1W269oTeyl627i3dQJW9Vt7rqGR1y+QP417E2FhoeXCdHGEHx8smEhg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=CtP+oO82; arc=none smtp.client-ip=198.137.202.133
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
-	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=VkrsBFKQKyxb92yofN7Exvmo5N+YI7gvv8pjiOGMeWw=; b=CtP+oO82xckCMaCkd9qFGXYyif
-	yQgbCFcTENXaouSH8OheNKnKZ7jP5OJ/PvERSB0kYtLH8mp5xHSKsFoxd0cYGW2JYIfoP6Kka9acC
-	kpj4FG7S8arqHIQsnq7W/YTlA9QQn0vlqyzjwnTl/xVg3zgGsr9OCniF9DLXfrcb7xsg1HDhSHoMj
-	DIsThJFw/4FBlmedsfc6KUTmRCGHyykiTtAuZnW4N/vdu27aaM8yjdmBm1uUCIuR/K2L9byc3O4kO
-	h63pHNjsuA/4yq0xoN4ct1Pf6giqOluruQPxVUuDR+Xo6g/55tMxo+Qr3f1re48l8IBPIuSUKyO1U
-	BciDX9GA==;
-Received: from [50.53.43.113] (helo=bombadil.infradead.org)
-	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wSObW-00000004rZ7-3Qbp;
-	Thu, 28 May 2026 00:28:06 +0000
-From: Randy Dunlap <rdunlap@infradead.org>
-To: linux-kernel@vger.kernel.org
-Cc: Randy Dunlap <rdunlap@infradead.org>,
-	Wim Van Sebroeck <wim@linux-watchdog.org>,
-	Guenter Roeck <linux@roeck-us.net>,
-	linux-watchdog@vger.kernel.org,
+	s=arc-20240116; t=1779930946; c=relaxed/simple;
+	bh=CE96iTM7gITR4S3f5JVNJDF/jRwOEjFQInUIDansplA=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=kQerzT6M6PcforJZ1xtZYShfbISoB89ZSGy4O8qAi0HFmhqS+LCftq7Zxjr0qcCYrT2/4IuNz8sY3sadcx8LpXgQ7A3TvSc2+gk0jmcnjWX/K2DRYIo+aXDd6rhGQf7ZcEen2gl398lzWN3sjlBkxLigHB/sbdfZ1aeryHRCG20=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=tNZnzS+Q; arc=none smtp.client-ip=156.67.10.101
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+	bh=6kBS55w8EuZAby4USjIyUN/gnQ2xiZZy0k+CIx/45ME=; b=tNZnzS+QVpXbJWpuxuNevgjKlp
+	6fGyi/i8ieycrgP2nHQZO1VUxE23LY+xJYWaBun8E78UdCxFMGiafIP+foz547t6hHKzff2hQ3heD
+	Ii+5tYvqhbRqAydgiLmtyZ1Ijo0+EUdkyD6prh+Ko7oMhF4FWuTg+Tffk8uqrEOT9rDE=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+	(envelope-from <andrew@lunn.ch>)
+	id 1wSPLH-004puy-PH; Thu, 28 May 2026 03:15:23 +0200
+Date: Thu, 28 May 2026 03:15:23 +0200
+From: Andrew Lunn <andrew@lunn.ch>
+To: "Maxime Chevallier (Netdev Foundation)" <maxime.chevallier@bootlin.com>
+Cc: Jakub Kicinski <kuba@kernel.org>, davem@davemloft.net,
+	Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Russell King <linux@armlinux.org.uk>,
+	Heiner Kallweit <hkallweit1@gmail.com>,
 	Jonathan Corbet <corbet@lwn.net>,
 	Shuah Khan <skhan@linuxfoundation.org>,
-	linux-doc@vger.kernel.org
-Subject: [PATCH 5/5] watchdog: dev: convert to kernel-doc comments
-Date: Wed, 27 May 2026 17:28:03 -0700
-Message-ID: <20260528002803.1260126-6-rdunlap@infradead.org>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260528002803.1260126-1-rdunlap@infradead.org>
-References: <20260528002803.1260126-1-rdunlap@infradead.org>
+	Oleksij Rempel <o.rempel@pengutronix.de>,
+	Vladimir Oltean <vladimir.oltean@nxp.com>,
+	Florian Fainelli <f.fainelli@gmail.com>,
+	thomas.petazzoni@bootlin.com, netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH net-next] Documentation: networking: Add a test plan for
+ ethtool pause validation
+Message-ID: <2293244a-c6a9-4642-a721-dada8a081dbc@lunn.ch>
+References: <20260522175109.198059-1-maxime.chevallier@bootlin.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260522175109.198059-1-maxime.chevallier@bootlin.com>
 X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
+	DMARC_POLICY_ALLOW(-0.50)[lunn.ch,none];
+	R_DKIM_ALLOW(-0.20)[lunn.ch:s=20171124];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-89799-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-89805-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,davemloft.net,google.com,redhat.com,armlinux.org.uk,gmail.com,lwn.net,linuxfoundation.org,pengutronix.de,nxp.com,bootlin.com,vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[17];
 	MIME_TRACE(0.00)[0:+];
-	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,linux-watchdog.org:email,infradead.org:email,infradead.org:mid,infradead.org:dkim]
-X-Rspamd-Queue-Id: CA7EC5EB408
+	NEURAL_HAM(-0.00)[-1.000];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[andrew@lunn.ch,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[lunn.ch:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,lunn.ch:mid,lunn.ch:dkim]
+X-Rspamd-Queue-Id: E78705EB853
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Convert multiple functions to kernel-doc format.
+> +A.1 : Sanity Checks
+> +~~~~~~~~~~~~~~~~~~~
+> +
+> +Pause autoneg is set to off::
+> +
+> +  ethtool -A <iface> autoneg off
+> +
+> +The 'supported' fields retrieved using the ETHTOOL_MSG_LINKMODES_GET includes
+> +a "Pause" bit and an "Asym" bit.
+> +
+> +The ETHTOOL_MSG_PAUSE_GET command returns the currently configured pause modes
+> +in the "tx" and "rx" attributes.
 
-Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
----
-Cc: Wim Van Sebroeck <wim@linux-watchdog.org>
-Cc: Guenter Roeck <linux@roeck-us.net>
-Cc: linux-watchdog@vger.kernel.org
+What you have left unspecified here is the state a link autoneg,
 
- drivers/watchdog/watchdog_dev.c |   30 +++++++++++++++---------------
- 1 file changed, 15 insertions(+), 15 deletions(-)
+ethtool -s <iface> autoneg on|off
 
---- linux-next-20260525.orig/drivers/watchdog/watchdog_dev.c
-+++ linux-next-20260525/drivers/watchdog/watchdog_dev.c
-@@ -176,7 +176,7 @@ static int __watchdog_ping(struct watchd
- 	return err;
- }
- 
--/*
-+/**
-  * watchdog_ping - ping the watchdog
-  * @wdd: The watchdog device to ping
-  *
-@@ -236,7 +236,7 @@ static enum hrtimer_restart watchdog_tim
- 	return HRTIMER_NORESTART;
- }
- 
--/*
-+/**
-  * watchdog_start - wrapper to start the watchdog
-  * @wdd: The watchdog device to start
-  *
-@@ -279,7 +279,7 @@ static int watchdog_start(struct watchdo
- 	return err;
- }
- 
--/*
-+/**
-  * watchdog_stop - wrapper to stop the watchdog
-  * @wdd: The watchdog device to stop
-  *
-@@ -319,7 +319,7 @@ static int watchdog_stop(struct watchdog
- 	return err;
- }
- 
--/*
-+/**
-  * watchdog_get_status - wrapper to get the watchdog status
-  * @wdd: The watchdog device to get the status from
-  *
-@@ -356,7 +356,7 @@ static unsigned int watchdog_get_status(
- 	return status;
- }
- 
--/*
-+/**
-  * watchdog_set_timeout - set the watchdog timer timeout
-  * @wdd:	The watchdog device to set the timeout for
-  * @timeout:	Timeout to set in seconds
-@@ -391,7 +391,7 @@ static int watchdog_set_timeout(struct w
- 	return err;
- }
- 
--/*
-+/**
-  * watchdog_set_pretimeout - set the watchdog timer pretimeout
-  * @wdd:	The watchdog device to set the timeout for
-  * @timeout:	pretimeout to set in seconds
-@@ -417,7 +417,7 @@ static int watchdog_set_pretimeout(struc
- 	return err;
- }
- 
--/*
-+/**
-  * watchdog_get_timeleft - wrapper to get the time left before a reboot
-  * @wdd:	The watchdog device to get the remaining time from
-  * @timeleft:	The time that's left
-@@ -659,7 +659,7 @@ __ATTRIBUTE_GROUPS(wdt);
- #define wdt_groups	NULL
- #endif
- 
--/*
-+/**
-  * watchdog_ioctl_op - call the watchdog drivers ioctl op if defined
-  * @wdd: The watchdog device to do the ioctl on
-  * @cmd: Watchdog command
-@@ -678,7 +678,7 @@ static int watchdog_ioctl_op(struct watc
- 	return wdd->ops->ioctl(wdd, cmd, arg);
- }
- 
--/*
-+/**
-  * watchdog_write - writes to the watchdog
-  * @file:	File from VFS
-  * @data:	User address of data
-@@ -732,7 +732,7 @@ static ssize_t watchdog_write(struct fil
- 	return len;
- }
- 
--/*
-+/**
-  * watchdog_ioctl - handle the different ioctl's for the watchdog device
-  * @file:	File handle to the device
-  * @cmd:	Watchdog command
-@@ -845,7 +845,7 @@ out_ioctl:
- 	return err;
- }
- 
--/*
-+/**
-  * watchdog_open - open the /dev/watchdog* devices
-  * @inode:	Inode of device
-  * @file:	File handle to device
-@@ -923,7 +923,7 @@ static void watchdog_core_data_release(s
- 	kfree(wd_data);
- }
- 
--/*
-+/**
-  * watchdog_release - release the watchdog device
-  * @inode:	Inode of device
-  * @file:	File handle to device
-@@ -932,7 +932,7 @@ static void watchdog_core_data_release(s
-  * stop the watchdog when we have received the magic char (and nowayout
-  * was not set), else the watchdog will keep running.
-  *
-- * Always returns 0.
-+ * Returns: Always 0.
-  */
- static int watchdog_release(struct inode *inode, struct file *file)
- {
-@@ -1004,7 +1004,7 @@ static const struct class watchdog_class
- 	.dev_groups =	wdt_groups,
- };
- 
--/*
-+/**
-  * watchdog_cdev_register - register watchdog character device
-  * @wdd: Watchdog device
-  *
-@@ -1105,7 +1105,7 @@ static int watchdog_cdev_register(struct
- 	return 0;
- }
- 
--/*
-+/**
-  * watchdog_cdev_unregister - unregister watchdog character device
-  * @wdd: Watchdog device
-  *
+At minimum, it should be specified. I've not read the other tests yet,
+but we may also want to run this basic test with both possible
+setting.
+
+One possible bug which we are trying to detect is that pause autoneg
+is off, the values are forced, but -s autoneg is on, it completes, and
+overwrites the forces values with negotiated values.
+
+
+> +A.2 : Half-duplex operation
+> +~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> +
+> +Pause settings as exposed with the ethtool API only concern full-duplex modes.
+> +
+> +Test scenario:
+> +--------------
+> +
+> +Set the interface under test in half-duplex mode with::
+> +
+> +  ethtool -s <iface> duplex half
+> +
+> +Expected behaviour::
+> +
+> + - ethtool <iface>
+> +
+> +shows no Pause settings advertised.
+
+Since we are talking about advertisement of pause, i think you actually want
+
+ethtool -A <iface> autoneg on
+ethtool -s <iface> duplex half autoneg on
+
+If -s autoneg is off, nothing should be advertised. So we need that
+turned on. And if -A autoneg is off, no pause values should be
+advertised, so you need that turned on as well.
+
+Also, since we expect this to trigger an autoneg, we probably want a
+sleep(2) in there before looking at the results, to ensure autoneg has
+completed.
+
+There is also the possibility that the link does not come up, because
+the link peer does not support half duplex. This is quite common for
+1G interfaces. It could also be the local interface does not support
+1G half. So maybe 
+
+ethtool -s <iface> duplex half speed 100 autoneg on
+
+Or let it first autoneg unrestricted, look at both the local and LP
+values, and pick a half duplex link mode both support and set it to do
+that?
+
+The tests defined so far also don't cover all the possible settings of
+-A autoneg and -s autoneg. There are combinations:
+
+Link autoneg with pause autoneg
+Link autoneg with forced pause
+Force link, with forced pause
+
+It would be good to consider what can be tested for these three. Maybe
+nothing can be tested with forced link, because that it likely to
+result in no link, when only the local side can be configured.
+
+> +B : Combined devices testing
+> +============================
+> +
+> +Requirements : The interface under test must be connected to a link-partner that
+> +can be actively configured during the tests. It must at least support full-duplex
+> +modes, and optionally (but ideally) symmetric and asymmetric flow-control, as
+> +well as autonegotiation of the Pause parameters.
+
+and forced link parameters.
+
+> +
+> +B.1 : Autoneg advertising
+> +~~~~~~~~~~~~~~~~~~~~~~~~~
+> +
+> +Goal: Validate that the *advertised* Pause and AsymDir bits match the configured
+> +pausemarams.
+
+typo.
+
+> +
+> +The link-level autonegotiation must be enabled::
+> +
+> +  ethtool <iface> autoneg on
+> +
+> +Pause parameters are set with::
+> +
+> +  ethtool -A <iface> rx <val> tx <val> autoneg on
+> +
+> +Pause advertising is retrieved with::
+> +
+> +  ethtool <iface>
+> +
+> +Case 1
+> +------
+> +
+> +Pause parameters : rx **off** tx **off**
+> +
+> +Expected advertisement : **None** (Pause = 0, AsymDir = 0)
+> +
+> +Case 2
+> +------
+> +
+> +Pause parameters : rx **off** tx **on**
+> +
+> +Expected advertisement : **Transmit-only** (Pause = 0, AsymDir = 1)
+> +
+> +Case 3
+> +------
+> +
+> +Pause parameters : rx **on** tx **off**
+> +
+> +Expected advertisement : **Symmetric receive-only** (Pause = 1, Asymdir = 1)
+> +
+> +Case 4
+> +------
+> +
+> +Pause parameters : rx **on** tx **on**
+> +
+> +Expected advertisement : **Symmetric** (Pause = 1, Asymdir = 0)
+
+We should consider here what happens when the local side only supports
+symmetric pause. We would expect EOPNOTSUPP, or maybe EINVAL. If
+ethtool report:
+
+	Supported pause frame use: Symmetric Receive-only
+
+not getting an error for the asymmetric settings would be a bug.
+
+> +
+> +B.2 : Autoneg resolution
+> +~~~~~~~~~~~~~~~~~~~~~~~~
+> +
+> +Goal: Validate that the Pause and AsymDir negotiation translates to the right
+> +TX and RX pause parameters.
+> +
+> +The following table, from the 802.3 standard, exposes the autoneg resolution
+> +result for the advertised pause parameters by each link partner.
+> +
+> ++-------------+--------------+--------------------------+
+> +|Local device | Link partner | Pause settings resolution|
+> ++------+------+-------+------+-----------+--------------+
+> +|Pause | Asym | Pause | Asym | RX        | TX	        |
+
+There is a tab vs space issue here.
+
+
+> ++======+======+=======+======+===========+==============+
+> +| 0    | 0    | Any   | Any  | No        | No           |
+> ++------+------+-------+------+-----------+--------------+
+> +| 0    | 1    | 0     | Any  | No        | No           |
+> ++------+------+-------+------+-----------+--------------+
+> +| 0    | 1    | 1     | 0    | No        | No           |
+> ++------+------+-------+------+-----------+--------------+
+> +| 0    | 1    | 1     | 1    | No        | Yes          |
+> ++------+------+-------+------+-----------+--------------+
+> +| 1    | 0    | 0     | Any  | No        | No           |
+> ++------+------+-------+------+-----------+--------------+
+> +| 1    | Any  | 1     | Any  | Yes       | Yes          |
+> ++------+------+-------+------+-----------+--------------+
+> +| 1    | 1    | 0     | 0    | No        | No           |
+> ++------+------+-------+------+-----------+--------------+
+> +| 1    | 1    | 0     | 1    | Yes       | No           |
+> ++------+------+-------+------+-----------+--------------+
+> +
+> +The mapping between the configured pause parameters and advertised modes follow
+> +the following truth table :
+> +
+> ++----+----+-------+---------+
+> +| tx | rx | Pause | AsymDir |
+> ++====+====+=======+=========+
+> +| 0  | 0  | 0     | 0       |
+> ++----+----+-------+---------+
+> +| 0  | 1  | 1     | 1       |
+> ++----+----+-------+---------+
+> +| 1  | 0  | 0     | 1       |
+> ++----+----+-------+---------+
+> +| 1  | 1  | 1     | 0       |
+> ++----+----+-------+---------+
+> +
+> +We can boil that down to the following cases to test, keeping the number small
+> +to avoid dealing with the whole combinatory::
+
+Why not do the whole set of combination? There are 16 combinations,
+autoneg takes a little over 1 second, so we are probably talking 32
+seconds in total. That is a reasonable runtime for a test.
+
+> +Case 1
+> +------
+> +
+> +Local device : rx **off**, tx **off**
+> +Remote device : rx **on** tx **on**
+> +
+> +Expected result on local device after autonegotiation completes :
+> +        rx negotiated **off**
+> +        tx negotiated **off**
+> +
+
+...
+
+> +Case 7
+> +------
+> +
+> +Local device : rx **on** tx **on**
+> +Remote device : rx **off** tx **off**
+> +
+> +Expected result on local device after autonegotiation completes :
+> +        rx negotiated **off**
+> +        tx negotiated **off**
+> +
+> +Case 8
+> +------
+> +
+> +Local device : rx **on** tx **on**
+> +Remote device : rx **off** tx **on**
+> +
+> +Expected result on local device after autonegotiation completes :
+> +        rx negotiated **on**
+> +        tx negotiated **off**
+
+what also needs to be considered here is:
+
+What if the local side only supports symmetric pause?
+What if the LP only supports symmetric pause?
+
+The expect results should take this into account, that the
+configuration fails, but that is not a test failure, just a hardware
+limitation.
+
+> +
+> +B.3 : Pause Autoneg
+> +~~~~~~~~~~~~~~~~~~~
+> +
+> +Goal: Validate that the Pause autonegotiation flag correctly toggles the
+> +advertised Pause and AsymDir link parameters.
+> +
+> +Test scenario:
+> +--------------
+> +
+> + - Enable pause autoneg and at least rx or tx pause::
+> +
+> +        ethtool -A <iface> rx on tx on autoneg on
+> +
+> + - Check the Advertised pause frame use::
+> +
+> +        ethtool <iface>
+> +
+> +        ...
+> +        Advertised pause frame use: Symmetric Receive-only
+> +
+> + - Disable pause autoneg::
+> +
+> +        ethtool -A <iface> autoneg off
+> +
+> + - Check the Advertised pause frame use, which must be 'No'::
+> +
+> +        ethtool <iface>
+> +
+> +        ...
+> +        Advertised pause frame use: No
+
+Please describe configuration for both sides. This is needed for all
+the tests when there are two devices involved.
+
+Also, when local pause advertisement is turned off, check what the
+link partner is reporting it received from its link partner.
+
+	Andrew
 
