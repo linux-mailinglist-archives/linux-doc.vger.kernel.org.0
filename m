@@ -1,263 +1,216 @@
-Return-Path: <linux-doc+bounces-89912-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89914-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8P2iCkS0GGr9mAgAu9opvQ
-	(envelope-from <linux-doc+bounces-89912-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 23:31:48 +0200
+	id qPsKAeq1GGqkmQgAu9opvQ
+	(envelope-from <linux-doc+bounces-89914-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 23:38:50 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id D26E15FA726
-	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 23:31:47 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9577F5FA7CF
+	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 23:38:49 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 02EA430B13F7
-	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 21:30:24 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id CC8CC3005982
+	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2026 21:38:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 78AEE3644A4;
-	Thu, 28 May 2026 21:30:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 76F5334887B;
+	Thu, 28 May 2026 21:38:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="LMXGI6YE"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="MT10BH0X"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com [209.85.210.47])
+Received: from mail-dy1-f201.google.com (mail-dy1-f201.google.com [74.125.82.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 63F723624D7
-	for <linux-doc@vger.kernel.org>; Thu, 28 May 2026 21:30:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB04A19E97B
+	for <linux-doc@vger.kernel.org>; Thu, 28 May 2026 21:38:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780003810; cv=none; b=FL/MpN9qorvDqDRlWHC+fB8mwuE5yaMjaDv8GAGRat53m3A/e2CgLFNryUYyBc4/PEIwHNYBFPM+qv3XlkcdTLSapxSXQAWSa+Crt00Fgb76Hu/5JjhkLXCS4Y0gFvh1BP3BnvFjx3xSXqzbb/u9NcX46t8O6eMJ8zoPCLoN8Mc=
+	t=1780004327; cv=none; b=uZlbg7lkgXOZaQwCX6fTb2H05AneVbTRuF2WkorYP/KdYExl9LzMfmdSnlUQJr7svyaSlh6CgI8HvfuhaDsaztTNXXhNtPiqDWOSq9g5WdZZJgef1NES1Bxjgp3ThYSfXcs3c7VMhEaxMyw2R4xmkCIlfcmDz9rGEluHsZiBElI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780003810; c=relaxed/simple;
-	bh=jiqdTPG4am84a711SHTa1ilvl5OD893KyijxO1MvI0o=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=SFTFUV+6a8Wfd/5pxWRCqhbUtE6n5tgrG1Hsy8hvn0SgoHwaIZwZ97HJzy0XaWsYGccKY6kIPD1UZ/v/1CeOZeyj8QpeeXOmB7JWRdS3fvEGV5J9nfHJzQ6EnSkaS/dnKCuY5OvNLF3dMQPPIolE0tjLhz57Vl8/QNV/pZDewDg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=LMXGI6YE; arc=none smtp.client-ip=209.85.210.47
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-ot1-f47.google.com with SMTP id 46e09a7af769-7e61f8d3cbfso2987080a34.0
-        for <linux-doc@vger.kernel.org>; Thu, 28 May 2026 14:30:07 -0700 (PDT)
+	s=arc-20240116; t=1780004327; c=relaxed/simple;
+	bh=Qm0ClVgDR801I+ouZbmXtpJMj50lr1fOBsz4IDlnCjc=;
+	h=Date:Mime-Version:Message-ID:Subject:From:To:Cc:Content-Type; b=pWsmiqWixwm6OBwSeN+LqvajrLexRvgEPDgBQ8uBSvAZaTHX0s+AyL710uTSTjwl/xSebkaS4xyA/9bSR/RlWmQgE67i1AVSHDnCN7kIKDdF15h+mejNv4u2CfBM7Q5URsZOoSdMb8HcoaSGAVUlQbXHapC1Sxct8LCeYQgZFFw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--ndesaulniers.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=MT10BH0X; arc=none smtp.client-ip=74.125.82.201
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--ndesaulniers.bounces.google.com
+Received: by mail-dy1-f201.google.com with SMTP id 5a478bee46e88-304d8613efbso1329760eec.1
+        for <linux-doc@vger.kernel.org>; Thu, 28 May 2026 14:38:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780003806; x=1780608606; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=L4CJlSs8AXl7ZfYRtAD893brHtGG85Zp/rm/ajAW6HQ=;
-        b=LMXGI6YEeF0agqyES1/hpONwDszZp689VQZspTvH3yimMD9MIvK2saNzK4shirMYrW
-         Q9iwtiKkXTG9cctkw2AE0Kt0/1e8lhO6x2g0csSBBVzCxXuA8vhcy6VTQ635WOm33PzS
-         HLd09AuzuypPVkkUbv9ri+KKmgsZXLHJsdNakqfew/PZZBgVlsuX/GAr+LUvHFPuvii3
-         RQh4Fs8lzEYHHsa/F0qS7KFpgBaW6VmRKp4GNndic4Z5qauuNvMfPlslFN7Glv3FHej8
-         /Y9ev4XI0R6EGVX263hL7QGEHgEkg8UPYLkrZTqzvt1mdHFU87P2wk9zJtfB/C/8mobq
-         f1dw==
+        d=google.com; s=20251104; t=1780004325; x=1780609125; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:from:subject:message-id
+         :mime-version:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=RJqAJojaJ8zfnf1d2GA7xSP8FvOiPajlnN1Xf8Iccu8=;
+        b=MT10BH0X02qfO7rAZNtfxzUmLYKbHAvSvyN88q5ggJNPzZpW2qRRTYKxTpu5nsEpqs
+         IbY+FFMz3ZfVUcpS4nug+jvNCXkz4YftyuPPGCa9cKau2ZaIH041ECrTiro1E2vktlb5
+         +NckkkABAut9c7ZHbX8SIAx55/Ik/sJWj5KOPmIH+Hecn0TUu407P0vkS2FBthDQ8Ejf
+         zX6JdL9/hE4EU8WsGyws5pn2Uvh8FwBqPYq0DofIY14PPolm9VPt3vOxaqOaWf9jgsmI
+         wetvTOXy8wiZ9SlSNOCnm/fWzUJa8gBb22Beq5Dmt2yqTOzZsg9rbNB9y4mLlb+bdk4K
+         zuCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780003806; x=1780608606;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=L4CJlSs8AXl7ZfYRtAD893brHtGG85Zp/rm/ajAW6HQ=;
-        b=XbKl23AYOn2ke1xvzuUsI6wc+8na7w5o2H5olqPlhUhywh90X8A4sNKJcQ3m0XXvJc
-         p3+EG4S4+eL0Px/OVu65jy/R11DvbTRQEvwb/lkXYRNiIHtLUFgdNjtMP0i1zFCB/kJ7
-         lEEXmW+k8VOnY2rhFMcvKTDmJFXnS6VON32h37ji2dH8rgt+aVAr6zE2AB8j4kq2FtcZ
-         kZsp/Nbc+8xtvHxMDnSnBiDHNPz/G+vGU245+t9RwilpfleQnQZeUS79lE+vyBmighJI
-         81jjtF6qrbcotTr4CWpybSwx54tt1rFqKBIJunOPV/eJfQbOQSAxAJjz3cx8MDVjecfD
-         2leg==
-X-Forwarded-Encrypted: i=1; AFNElJ+03O+ybTXiETDIxR+TZplypUWef/JE3RSCy7q3MgQAiadhRM5tGTekuuGjgaRUyjuW/hT46DPZW9k=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwKVHvLd5xpbQEXxnrl5Nv8NzvAICPnGGofR8QnQx7wDj0DW2Ud
-	fqLZIFY40NIiW8zTZRC0QlarNsrQMTNIWlgF/yz6jlbYia6EvTJPUI1n
-X-Gm-Gg: Acq92OHS8s2J9n3Db/wEvbS6lIZNkfo+3gAAYJztnuihnxhEL5C6DOP2vdp5tNuVl76
-	O26gs35u+eDaJAkf028Je5kSc41BH/diX2qzrN0biZ/dz5ZACV84XMQVz8IcXsbZLv5YSiHrCUg
-	zktZpc4r2uzbm/L8irL71iLFp+HuGm2JMatm1unVXXEwcbAxFz9eri3OB61gu3fojE5vZQHSOrb
-	c89lLTBbKIp41/prk1Usb2oZlTzaOq9FQPs7ImpJc3OJ61ZbDl2qvrSouO/Na1boYMh7tSpVxLZ
-	CDcrBfpXmJjlfd3pMr8MoGmfAvrpY8a9TloTtmSsXw6/DhPCfi9VnJYhK918SQvYX/zdX+Rk+6T
-	BBUaOwfBDiU3LKr00Zk/3IJmWtYStQ83T/bzCxmKgny8Wnpc7uT13UpdEs5jfThgIuY7cVGnlU3
-	KSbYSieZj3gpG/ZqJI7xCdrxmKrPqYyfsd76Btg4nyvjz+q6/gTqxUpO0/
-X-Received: by 2002:a05:6830:6314:b0:7dc:2f4f:17b4 with SMTP id 46e09a7af769-7e694fbdd5bmr187572a34.21.1780003806180;
-        Thu, 28 May 2026 14:30:06 -0700 (PDT)
-Received: from localhost ([2a03:2880:10ff:53::])
-        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7e6952991c2sm135613a34.26.2026.05.28.14.30.05
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 28 May 2026 14:30:05 -0700 (PDT)
-From: Nhat Pham <nphamcs@gmail.com>
-To: kasong@tencent.com
-Cc: Liam.Howlett@oracle.com,
-	akpm@linux-foundation.org,
-	apopple@nvidia.com,
-	axelrasmussen@google.com,
-	baohua@kernel.org,
-	baolin.wang@linux.alibaba.com,
-	bhe@redhat.com,
-	byungchul@sk.com,
-	cgroups@vger.kernel.org,
-	chengming.zhou@linux.dev,
-	chrisl@kernel.org,
-	corbet@lwn.net,
-	david@kernel.org,
-	dev.jain@arm.com,
-	gourry@gourry.net,
-	hannes@cmpxchg.org,
-	hughd@google.com,
-	jannh@google.com,
-	joshua.hahnjy@gmail.com,
-	lance.yang@linux.dev,
-	lenb@kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-mm@kvack.org,
-	linux-pm@vger.kernel.org,
-	lorenzo.stoakes@oracle.com,
-	matthew.brost@intel.com,
-	mhocko@suse.com,
-	muchun.song@linux.dev,
-	npache@redhat.com,
-	nphamcs@gmail.com,
-	pavel@kernel.org,
-	peterx@redhat.com,
-	peterz@infradead.org,
-	pfalcato@suse.de,
-	rafael@kernel.org,
-	rakie.kim@sk.com,
-	roman.gushchin@linux.dev,
-	rppt@kernel.org,
-	ryan.roberts@arm.com,
-	shakeel.butt@linux.dev,
-	shikemeng@huaweicloud.com,
-	surenb@google.com,
-	tglx@kernel.org,
-	vbabka@suse.cz,
-	weixugc@google.com,
-	ying.huang@linux.alibaba.com,
-	yosry.ahmed@linux.dev,
-	yuanchu@google.com,
-	zhengqi.arch@bytedance.com,
-	ziy@nvidia.com,
-	kernel-team@meta.com,
-	riel@surriel.com,
-	haowenchao22@gmail.com
-Subject: [RFC PATCH 5/5] mm, swap: add debugfs counters for vswap
-Date: Thu, 28 May 2026 14:29:29 -0700
-Message-ID: <20260528212955.1912856-6-nphamcs@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260528212955.1912856-1-nphamcs@gmail.com>
-References: <20260528212955.1912856-1-nphamcs@gmail.com>
+        d=1e100.net; s=20251104; t=1780004325; x=1780609125;
+        h=content-transfer-encoding:cc:to:from:subject:message-id
+         :mime-version:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=RJqAJojaJ8zfnf1d2GA7xSP8FvOiPajlnN1Xf8Iccu8=;
+        b=soZAn+LSYhtyk9+Zux4cOl+bn1VMqPWTqk/sQqjdIAHJd9PTIgttEuTJNlNMnRoopD
+         33JMzQX1L2FVjUqA67K+QOkFBJrWXW9JNCiw5mSCFu0mJh2PJvFz9qz4EjeLFts5ZQ8M
+         I8l0ir05GehJsWk0h/W1rYDfu9TowCc/Zph4mVJU+F/YDhl6JRY5dkS3cywBZtIpfY/G
+         fbucd9huV6DL4VP/RlgCWy/9+k1ViO5GCaq6O7BmGae8pDYhQkCp0CfoRw03O6QsmOWo
+         qB9E4fBFs1dem9GEppUqDbLqJrS3jbhKrwj3iFf7qdISEyyZ7Qx29kXVDGhEK4HuMFqp
+         haCQ==
+X-Forwarded-Encrypted: i=1; AFNElJ/CDtPK3PpTlBYBBa01Qq7mqsOMLLlAWhZi5hxWwX5ago/SqBD/5mGGMiGPnz34dO6jbAEi8qYHZSs=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwKYdbrrH04esD6IVHgn16O9alIAooQjOP7XkOJqr8BKGQ3dw75
+	dac8XoTwa8SdUl1kxuDWFRJqZYa9Y1Y14B6jrFi+LlUJKNF+E9LCC76/eHWm/2Fd4Z/ThRjHc7n
+	9DeGbfc7qbM4XCHfwNEWEz9ga1LDqiA==
+X-Received: from dyjk24.prod.google.com ([2002:a05:7300:2718:b0:303:93ec:5fc5])
+ (user=ndesaulniers job=prod-delivery.src-stubby-dispatcher) by
+ 2002:a05:7301:1008:b0:304:6782:d57c with SMTP id 5a478bee46e88-304eb13916bmr131522eec.15.1780004324464;
+ Thu, 28 May 2026 14:38:44 -0700 (PDT)
+Date: Thu, 28 May 2026 14:38:41 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [0.84 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+Mime-Version: 1.0
+X-B4-Tracking: v=1; b=H4sIAOG1GGoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDUyML3czc+KTE5GwgkVSpa5iYkmpslJJsYGKZqgTUUlCUmpZZATYuOhb CLy5NykpNLgGZoVRbCwD3xNl3cAAAAA==
+X-Change-Id: 20260528-im_back_baby-1ade32dc049e
+X-Developer-Key: i=ndesaulniers@google.com; a=ed25519; pk=G37kqG19J0fT90FIX6gZgD3l/cpQxiU38uBYq55AfXs=
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780004322; l=3204;
+ i=ndesaulniers@google.com; s=20260528; h=from:subject:message-id;
+ bh=e4E1W/ubyy6eoS6wLc7Upd/F0ktRDYTG2gsNUpKQwfA=; b=cgLdoDrxBSrFtk9KK92hKq8JwEIJ+hIp5Vbklh1HyqiQ9lAL6XP9u0Z8FfdNdlgyn0sHyk6R0
+ sCfSeCYxqhqAWQEng533s+jL//Lk87YkR9S41SC4EfByycDV3IF80IP
+X-Mailer: b4 0.15.2
+Message-ID: <20260528-im_back_baby-v1-1-25d355efdbae@google.com>
+Subject: [PATCH] MAINTAINERS: update ndesaulniers
+From: Nick Desaulniers <ndesaulniers@google.com>
+To: Nathan Chancellor <nathan@kernel.org>
+Cc: Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>, 
+	Will Deacon <will@kernel.org>, Kees Cook <kees@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, Carlos Bilbao <carlos.bilbao@kernel.org>, 
+	Avadhut Naik <avadhut.naik@amd.com>, linux-kernel@vger.kernel.org, 
+	workflows@vger.kernel.org, linux-doc@vger.kernel.org, llvm@lists.linux.dev, 
+	gosst-kernel <gosst-kernel@google.com>, 
+	android-kernel-team <android-kernel-team@google.com>, 
+	kernel-dynamic-tools <kernel-dynamic-tools@google.com>, 
+	Nick Desaulniers <ndesaulniers@google.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	MV_CASE(0.50)[];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[oracle.com,linux-foundation.org,nvidia.com,google.com,kernel.org,linux.alibaba.com,redhat.com,sk.com,vger.kernel.org,linux.dev,lwn.net,arm.com,gourry.net,cmpxchg.org,gmail.com,kvack.org,intel.com,suse.com,infradead.org,suse.de,huaweicloud.com,suse.cz,bytedance.com,meta.com,surriel.com];
-	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-89912-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCVD_COUNT_FIVE(0.00)[5];
+	TAGGED_FROM(0.00)[bounces-89914-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[google.com:+];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[nphamcs@gmail.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[ndesaulniers@google.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[55];
-	TO_DN_NONE(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	FROM_HAS_DN(0.00)[]
-X-Rspamd-Queue-Id: D26E15FA726
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	TO_DN_SOME(0.00)[]
+X-Rspamd-Queue-Id: 9577F5FA7CF
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Add /sys/kernel/debug/vswap/ with two counters:
+I'm coming back.  I will return.  I will possess your body, and I'll
+make LKML burn.
 
-- used: number of virtual swap slots currently allocated
-- alloc_reject: cumulative count of failed vswap allocations
-
-Signed-off-by: Nhat Pham <nphamcs@gmail.com>
+Signed-off-by: Nick Desaulniers <ndesaulniers@google.com>
 ---
- mm/swapfile.c | 16 +++++++++++++++-
- 1 file changed, 15 insertions(+), 1 deletion(-)
+ .mailmap                                                               | 1=
+ -
+ Documentation/process/embargoed-hardware-issues.rst                    | 2=
+ +-
+ Documentation/translations/sp_SP/process/embargoed-hardware-issues.rst | 2=
+ +-
+ MAINTAINERS                                                            | 2=
+ +-
+ 4 files changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/mm/swapfile.c b/mm/swapfile.c
-index be901fb741e5..3740ab764405 100644
---- a/mm/swapfile.c
-+++ b/mm/swapfile.c
-@@ -7,6 +7,7 @@
-  */
- 
- #include <linux/blkdev.h>
-+#include <linux/debugfs.h>
- #include <linux/mm.h>
- #include <linux/sched/mm.h>
- #include <linux/sched/task.h>
-@@ -132,6 +133,9 @@ static DEFINE_PER_CPU(struct percpu_swap_cluster, percpu_swap_cluster) = {
- 	.lock = INIT_LOCAL_LOCK(),
- };
- 
-+static atomic_t __maybe_unused vswap_used = ATOMIC_INIT(0);
-+static atomic_t __maybe_unused vswap_alloc_reject = ATOMIC_INIT(0);
-+
- #ifdef CONFIG_VSWAP
- struct percpu_vswap_cluster {
- 	unsigned long offset[SWAP_NR_ORDERS];
-@@ -1993,11 +1997,13 @@ static bool vswap_alloc(struct folio *folio)
- 	if (folio_test_swapcache(folio)) {
- 		/* alloc_swap_scan_cluster updated percpu offset already */
- 		local_unlock(&percpu_vswap_cluster.lock);
-+		atomic_add(folio_nr_pages(folio), &vswap_used);
- 		return true;
- 	}
- 
- 	this_cpu_write(percpu_vswap_cluster.offset[order], SWAP_ENTRY_INVALID);
- 	local_unlock(&percpu_vswap_cluster.lock);
-+	atomic_add(folio_nr_pages(folio), &vswap_alloc_reject);
- 	return false;
- }
- #endif
-@@ -2554,8 +2560,10 @@ void __swap_cluster_free_entries(struct swap_info_struct *si,
- 
- 	VM_WARN_ON(ci->count < nr_pages);
- 
--	if (is_vswap)
-+	if (is_vswap) {
- 		vswap_release_backing(ci, ci_start, nr_pages);
-+		atomic_sub(nr_pages, &vswap_used);
-+	}
- 
- 	ci->count -= nr_pages;
- 	do {
-@@ -4793,6 +4801,7 @@ struct swap_info_struct *vswap_si;
- static int __init vswap_init(void)
- {
- 	struct swap_info_struct *si;
-+	struct dentry *root;
- 	unsigned long maxpages;
- 	int err;
- 
-@@ -4819,6 +4828,11 @@ static int __init vswap_init(void)
- 	mutex_unlock(&swapon_mutex);
- 
- 	vswap_si = si;
-+
-+	root = debugfs_create_dir("vswap", NULL);
-+	debugfs_create_atomic_t("used", 0444, root, &vswap_used);
-+	debugfs_create_atomic_t("alloc_reject", 0444, root, &vswap_alloc_reject);
-+
- 	pr_info("vswap: created virtual swap device (%lu pages)\n", maxpages);
- 	return 0;
- 
--- 
-2.53.0-Meta
+diff --git a/.mailmap b/.mailmap
+index a009f73d7ea5..f863781b0102 100644
+--- a/.mailmap
++++ b/.mailmap
+@@ -634,7 +634,6 @@ Nicholas Piggin <npiggin@gmail.com> <npiggin@kernel.dk>
+ Nicholas Piggin <npiggin@gmail.com> <npiggin@suse.de>
+ Nicholas Piggin <npiggin@gmail.com> <nickpiggin@yahoo.com.au>
+ Nicholas Piggin <npiggin@gmail.com> <piggin@cyberone.com.au>
+-Nick Desaulniers <nick.desaulniers+lkml@gmail.com> <ndesaulniers@google.co=
+m>
+ Nicolas Ferre <nicolas.ferre@microchip.com> <nicolas.ferre@atmel.com>
+ Nicolas Pitre <nico@fluxnic.net> <nicolas.pitre@linaro.org>
+ Nicolas Pitre <nico@fluxnic.net> <nico@linaro.org>
+diff --git a/Documentation/process/embargoed-hardware-issues.rst b/Document=
+ation/process/embargoed-hardware-issues.rst
+index 34e00848e0da..d07f16c3c7b8 100644
+--- a/Documentation/process/embargoed-hardware-issues.rst
++++ b/Documentation/process/embargoed-hardware-issues.rst
+@@ -308,7 +308,7 @@ an involved disclosed party. The current ambassadors li=
+st:
+=20
+   Google	Kees Cook <keescook@chromium.org>
+=20
+-  LLVM		Nick Desaulniers <nick.desaulniers+lkml@gmail.com>
++  LLVM		Nick Desaulniers <ndesaulniers@google.com>
+   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=20
+ If you want your organization to be added to the ambassadors list, please
+diff --git a/Documentation/translations/sp_SP/process/embargoed-hardware-is=
+sues.rst b/Documentation/translations/sp_SP/process/embargoed-hardware-issu=
+es.rst
+index 9d444b9c46d3..7d4d694967c7 100644
+--- a/Documentation/translations/sp_SP/process/embargoed-hardware-issues.rs=
+t
++++ b/Documentation/translations/sp_SP/process/embargoed-hardware-issues.rs=
+t
+@@ -287,7 +287,7 @@ revelada involucrada. La lista de embajadores actuales:
+=20
+   Google	Kees Cook <keescook@chromium.org>
+=20
+-  LLVM		Nick Desaulniers <nick.desaulniers+lkml@gmail.com>
++  LLVM		Nick Desaulniers <ndesaulniers@google.com>
+   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=20
+ Si quiere que su organizaci=C3=B3n se a=C3=B1ada a la lista de embajadores=
+, por
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 461a3eed6129..2f06cc2e463c 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -6259,7 +6259,7 @@ F:	.clang-format
+=20
+ CLANG/LLVM BUILD SUPPORT
+ M:	Nathan Chancellor <nathan@kernel.org>
+-R:	Nick Desaulniers <nick.desaulniers+lkml@gmail.com>
++R:	Nick Desaulniers <ndesaulniers@google.com>
+ R:	Bill Wendling <morbo@google.com>
+ R:	Justin Stitt <justinstitt@google.com>
+ L:	llvm@lists.linux.dev
+
+---
+base-commit: 8fde5d1d47f69db6082dfa34500c27f8485389a5
+change-id: 20260528-im_back_baby-1ade32dc049e
+
+Best regards,
+-- =20
+Nick Desaulniers <ndesaulniers@google.com>
 
 
