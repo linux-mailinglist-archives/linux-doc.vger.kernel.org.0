@@ -1,286 +1,250 @@
-Return-Path: <linux-doc+bounces-89997-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89998-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mMQ0Mg1rGWrGwQgAu9opvQ
-	(envelope-from <linux-doc+bounces-89997-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 12:31:41 +0200
+	id oIDRHGxsGWrGwQgAu9opvQ
+	(envelope-from <linux-doc+bounces-89998-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 12:37:32 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 29A39600DC1
-	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 12:31:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E7C44600EDA
+	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 12:37:31 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 5CF1D301E947
-	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 10:28:50 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 201193043450
+	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 10:31:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BECA93BE650;
-	Fri, 29 May 2026 10:28:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0EA403CC327;
+	Fri, 29 May 2026 10:31:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b="QWigdeIP"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AXfOyCAL"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C79533A9EB;
-	Fri, 29 May 2026 10:28:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.156.1
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6598C3CB2DA;
+	Fri, 29 May 2026 10:31:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780050529; cv=none; b=BRLkhqCffQiTlGaNxeuylC0IMe1SNJb0x7u7s0t5Abos9V3swHeNpWW3XQbdoYP5QGLWWf7QVC6JY2Q+9b6K0s8BLFGfcMrMQHb0mum7LN6J0eWeSKHcXMK6oW/OJJe62BnF6e/bytA+PTx0lek50U7JXiNcpGVSDOhO3jy9I+8=
+	t=1780050708; cv=none; b=GLtTavlGtBpC+3JNYvtTvvEkTSE8ICWyPoUw7TY77HKJDYTjHzvwc6Z2CWuHIQQHMcmLQ8fBmPBjCZ7qww0N87KGrASZWehremVrYECzA30csbqhe5kC87PlFjqeI4nnci0ebXF1iDPstPlKe3RAKU79vyBmYX/s3n6/XgPos6w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780050529; c=relaxed/simple;
-	bh=gWr7pGt6rVdhsV4+G2/yO2oxTWlkexbbWGNCFFcXZS0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=r2hPkXSFqnGWklzLVuVhxRvfX/qWgMHXLcaFX9rwBeioI0vASM6DIUHTabkg0uz941AVq3r37+4s4JNg0GHQGTCyOUZZaSqqZvwGrdQgxyXsj+ArDWaUj3vMrbo3+v+tYFLFwO4LsotqN4XQGeCxqlNS/b5aWIPVa31JPZZ0EC4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=QWigdeIP; arc=none smtp.client-ip=148.163.156.1
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.ibm.com
-Received: from pps.filterd (m0356517.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 64SLlgFJ1467756;
-	Fri, 29 May 2026 10:28:28 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=pp1; bh=73ijo5CtYGwj6cMTdH7VlrUWfPogso
-	7oUWOQmYA0u5s=; b=QWigdeIPcsPtv5E7NFvr7f8irUPJpH1pO2hka3QoCavVnT
-	UeybWBbybbAkDH7xnZ2cLvVmPBUo8/d8P8rnzPpRLuv0MqMlVLA++boaRGxhMgYB
-	Px0J2BROVvd/t/efxgCqYQKu3FPU3pnuN4I9fJZdkJV9YPyFXSzJvmvwoCJdO+FJ
-	sUB4oyn5ANN/tFAx+hVm+viQ2AIEmKEOMulcfmw3VIpqJWuJD8rhplTFGyUKmfBl
-	MV0L3K7IRmRCBlJ8iJIMQndxXV815fVkCsNV0JmBSWz41B2LSHcxhQvTv30rvqYf
-	lQX/+qVBLzJFC7hC8k/gzNyZ9FgjxrJRNyHWAYhQ==
-Received: from ppma13.dal12v.mail.ibm.com (dd.9e.1632.ip4.static.sl-reverse.com [50.22.158.221])
-	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4ee886g3k0-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 29 May 2026 10:28:27 +0000 (GMT)
-Received: from pps.filterd (ppma13.dal12v.mail.ibm.com [127.0.0.1])
-	by ppma13.dal12v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 64TAO95L028519;
-	Fri, 29 May 2026 10:28:26 GMT
-Received: from smtprelay02.fra02v.mail.ibm.com ([9.218.2.226])
-	by ppma13.dal12v.mail.ibm.com (PPS) with ESMTPS id 4edjrbd3f7-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 29 May 2026 10:28:26 +0000 (GMT)
-Received: from smtpav07.fra02v.mail.ibm.com (smtpav07.fra02v.mail.ibm.com [10.20.54.106])
-	by smtprelay02.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 64TASNxS52494676
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Fri, 29 May 2026 10:28:23 GMT
-Received: from smtpav07.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 2C9C520043;
-	Fri, 29 May 2026 10:28:23 +0000 (GMT)
-Received: from smtpav07.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 5BD4C2004D;
-	Fri, 29 May 2026 10:28:20 +0000 (GMT)
-Received: from Amits-MacBook-Pro.local (unknown [9.123.0.51])
-	by smtpav07.fra02v.mail.ibm.com (Postfix) with ESMTPS;
-	Fri, 29 May 2026 10:28:20 +0000 (GMT)
-Date: Fri, 29 May 2026 15:58:15 +0530
-From: Amit Machhiwal <amachhiw@linux.ibm.com>
-To: Ritesh Harjani <ritesh.list@gmail.com>
-Cc: Amit Machhiwal <amachhiw@linux.ibm.com>, linuxppc-dev@lists.ozlabs.org,
-        Madhavan Srinivasan <maddy@linux.ibm.com>,
-        Vaibhav Jain <vaibhav@linux.ibm.com>,
-        Anushree Mathur <anushree.mathur@linux.ibm.com>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Nicholas Piggin <npiggin@gmail.com>,
-        Michael Ellerman <mpe@ellerman.id.au>,
-        "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Shuah Khan <skhan@linuxfoundation.org>, kvm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, lkp@intel.com
-Subject: Re: [PATCH v3 1/5] KVM: PPC: Book3S HV: Validate arch_compat against
- host compatibility mode
-Message-ID: <20260529141530.fc225a67-e9-amachhiw@linux.ibm.com>
-Mail-Followup-To: Ritesh Harjani <ritesh.list@gmail.com>, 
-	linuxppc-dev@lists.ozlabs.org, Madhavan Srinivasan <maddy@linux.ibm.com>, 
-	Vaibhav Jain <vaibhav@linux.ibm.com>, Anushree Mathur <anushree.mathur@linux.ibm.com>, 
-	Paolo Bonzini <pbonzini@redhat.com>, Nicholas Piggin <npiggin@gmail.com>, 
-	Michael Ellerman <mpe@ellerman.id.au>, "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>, 
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, kvm@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, lkp@intel.com
-References: <20260522152744.55251-1-amachhiw@linux.ibm.com>
- <20260522152744.55251-2-amachhiw@linux.ibm.com>
- <pl2g6xbz.ritesh.list@gmail.com>
+	s=arc-20240116; t=1780050708; c=relaxed/simple;
+	bh=Uhk5W8Tuq0902LMgAiqFtam6oLO/82rfu4jgFWKW+a4=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=Umie5tGPG7EAmLknqq79fLA+mRrJ+SrjPI6QjhRLqK8JZC1wFFFPBdLNV0JUm6F0x/li3D3mClmbFnPDQKWnzCBghPSERb7m9AcLiCkXRPdEchKjNsGTtf8kH7P9BfVsBac8ga+RFjmLjd5gVUZFcw030yWr6KvNYqmWtCf414Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AXfOyCAL; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id D102AC2BCB3;
+	Fri, 29 May 2026 10:31:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1780050707;
+	bh=Uhk5W8Tuq0902LMgAiqFtam6oLO/82rfu4jgFWKW+a4=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=AXfOyCALX/3nZQm6Tm38XTkxf2nm/oiUxUNbJ5s0BChero7EYc9JeM4yjTHsT7Mtv
+	 u47StDh5RupXr4H4kYa38JCaiZJ/+g/lU5iweO0RAaK8URc2yoPZrtzFiLaQ9P/Gya
+	 31uJORWUuLMlMUgpYeOUvp0vfdVyQSeywTS28Yfl5iZBAWbtbU5iOgQmkxn8CKlTZJ
+	 fAnC42NBPNlIgZz7XQortiE0DPg2xPScuRxwYr7q9sV73ST6fCLuaZTL7rJYgFuNWR
+	 tYSSwLyBkBoywP3MRAXz8gLpcZFKp2W99NKh1S9dYByWclxEUelHBv3taLy0/XuPPo
+	 RLBXkUc8msZSA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B5542CD6E4A;
+	Fri, 29 May 2026 10:31:47 +0000 (UTC)
+From: Jack Wu via B4 Relay <devnull+jackbb_wu.compal.com@kernel.org>
+Subject: [PATCH 00/11] net: wwan: t9xx: Add MediaTek T9XX WWAN driver
+Date: Fri, 29 May 2026 18:31:39 +0800
+Message-Id: <20260529-t9xx_driver_v1-v1-0-bdbfe2c01e57@compal.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <pl2g6xbz.ritesh.list@gmail.com>
-X-TM-AS-GCONF: 00
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-Proofpoint-GUID: gVM7-xNLxCUksu8_mdoQ5tH8bxrKBAv_
-X-Authority-Analysis: v=2.4 cv=Z8Dc2nRA c=1 sm=1 tr=0 ts=6a196a4c cx=c_pps
- a=AfN7/Ok6k8XGzOShvHwTGQ==:117 a=AfN7/Ok6k8XGzOShvHwTGQ==:17
- a=kj9zAlcOel0A:10 a=NGcC8JguVDcA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=RnoormkPH1_aCDwRdu11:22 a=U7nrCbtTmkRpXpFmAIza:22 a=VnNF1IyMAAAA:8
- a=Y84buafM2nOP-rCehcwA:9 a=CjuIK1q_8ugA:10
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTI5MDEwMCBTYWx0ZWRfX0ryEmmrLboTs
- hZjaZ7bOY3SFtgcn/DMeM94MYunsSq36yorTBcD8RYXIRpOgTR38PntB3PLAdtqLUUtrAaTVo2U
- H34Qeoy9pfJCngb67+cD5Riywg/D8h1PKyQMl4+3MYrARUxZGtL9FsTA9GzIKluy274jKecZNtv
- kFVuc/BSeiTVeW0i0aJVs+0xjGvXn+GZLjDaWiDvgcI/U+PSZsYaiEjW2PxA7EfCcjSRafN7Mr1
- uYB9vHQeDCgLBZbk5aPnZEJCFCELfw2CpBfG4PYHFGRQvJS90w73WGiOaQG7Ct7CbB9vJaG6srh
- AF54gmYgZ20uUBEf0q67AKDIu+lhNa8hdZMwOYfFVMgJB8U+dTG/rbZu+lwYxaVaowLId4wquKJ
- jWymRF/aM3wIvRLlogHe/X4mLEYfTMnFGDz5aIl/Q3M8AN4+mLlmfe9PaN9ZJMFzwYh7mZK3tUX
- hjQoXGOX4nr670HJkXQ==
-X-Proofpoint-ORIG-GUID: fdffp1RQRWBy5kwV0EKgxVQzGLvO9Z7k
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-05-29_03,2026-05-28_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 bulkscore=0 impostorscore=0 priorityscore=1501
- malwarescore=0 phishscore=0 suspectscore=0 adultscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2605210000 definitions=main-2605290100
-X-Spamd-Result: default: False [0.34 / 15.00];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAtrGWoC/yXMzQ5FMBBA4VeRWWui5eqtVxERP1N3LJApTRPx7
+ upafotzTnDIhA6q5ARGT47WJUKmCQy/bplQ0BgNKlNl9lFG7CaEdmTyyK2XQuqisN/Oap0biNH
+ GaCn8h3Xz2h39jMP+XOC6bhLEN+pyAAAA
+X-Change-ID: 20260529-t9xx_driver_v1-1744f8af7739
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>, 
+ Sergey Ryazanov <ryazanov.s.a@gmail.com>, 
+ Johannes Berg <johannes@sipsolutions.net>, 
+ Andrew Lunn <andrew+netdev@lunn.ch>, 
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+ Jack Wu <jackbb_wu@compal.com>, Wen-Zhi Huang <wen-zhi.huang@mediatek.com>, 
+ Shi-Wei Yeh <shi-wei.yeh@mediatek.com>, 
+ Minano Tseng <Minano.tseng@mediatek.com>, 
+ Matthias Brugger <matthias.bgg@gmail.com>, 
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
+ Simon Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>
+Cc: linux-kernel@vger.kernel.org, netdev@vger.kernel.org, 
+ linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, 
+ linux-doc@vger.kernel.org
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780050704; l=5835;
+ i=jackbb_wu@compal.com; s=20260526; h=from:subject:message-id;
+ bh=Uhk5W8Tuq0902LMgAiqFtam6oLO/82rfu4jgFWKW+a4=;
+ b=iqDg+vLGU+X657DStNqZFEAiE7d5rUDTD53nG4CwrDrNfZblbPjZ6fRCVURu6Td8HZy528uDB
+ is4E2j+pLqCCnmsI5MFSEce3CnWGORvwT0Hv25O2YwiwvQQ/YwYYvHj
+X-Developer-Key: i=jackbb_wu@compal.com; a=ed25519;
+ pk=VH1prTWixNl8OEUPPSfII3p46MzJpQN8J3+ecE1tZXg=
+X-Endpoint-Received: by B4 Relay for jackbb_wu@compal.com/20260526 with
+ auth_id=793
+X-Original-From: Jack Wu <jackbb_wu@compal.com>
+Reply-To: jackbb_wu@compal.com
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[ibm.com,none];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[ibm.com:s=pp1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[linux.ibm.com,lists.ozlabs.org,redhat.com,gmail.com,ellerman.id.au,kernel.org,lwn.net,linuxfoundation.org,vger.kernel.org,intel.com];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	TAGGED_FROM(0.00)[bounces-89997-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-89998-lists,linux-doc=lfdr.de,jackbb_wu.compal.com];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[gmail.com];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.ibm.com:mid,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FREEMAIL_TO(0.00)[oss.qualcomm.com,gmail.com,sipsolutions.net,lunn.ch,davemloft.net,google.com,kernel.org,redhat.com,compal.com,mediatek.com,collabora.com,lwn.net,linuxfoundation.org];
 	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[amachhiw@linux.ibm.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[22];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[ibm.com:+];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_SEVEN(0.00)[11]
-X-Rspamd-Queue-Id: 29A39600DC1
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	HAS_REPLYTO(0.00)[jackbb_wu@compal.com];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[compal.com:replyto,compal.com:mid,compal.com:email,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: E7C44600EDA
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Ritesh,
+T9XX is the PCIe host device driver for MediaTek's
+t900 modem. The driver uses the WWAN framework
+infrastructure to create the following control ports
+and network interfaces for data transactions.
+* /dev/wwan0at0 - Interface that supports AT commands.
+* /dev/wwan0mbim0 - Interface conforming to the MBIM
+  protocol.
+* wwan0-X - Primary network interface for IP traffic.
 
-Thanks for taking a look at this patch. Please find my response inline
-below:
+The main blocks in the T9XX driver are:
+* HW layer - Abstracts the hardware bus operations for
+   the device, and provides generic interfaces for the
+   transaction layer to get the device's information and
+   control the device's behavior. It includes:
 
-On 2026/05/28 08:43 AM, Ritesh Harjani wrote:
-> Amit Machhiwal <amachhiw@linux.ibm.com> writes:
-> 
-> > On IBM POWER systems, newer processor generations can operate in
-> > compatibility modes corresponding to earlier generations. This becomes
-> > relevant for nested virtualization, where nested KVM guests may need to
-> > run with a specific processor compatibility level.
-> >
-> > Currently, when running a nested KVM guest (L2) inside a Power11 pSeries
-> > logical partition (L1) booted in Power10 compatibility mode, the guest
-> > fails to boot while setting 'arch_compat'. This happens because the CPU
-> > class is derived from the hardware PVR (via mfspr()), which reflects the
-> > physical processor generation (Power11), rather than the effective
-> > compatibility mode (Power10).
-> >
-> > As a result, userspace may request a Power11 arch_compat for the L2
-> > guest. However, the L1 partition, running in Power10 compatibility, has
-> > only negotiated support up to Power10 with the Power Hypervisor (L0).
-> > When H_SET_STATE is invoked with a Power11 Logical PVR, the hypervisor
-> 
-> s/H_SET_STATE/H_GUEST_SET_STATE 
+   * PCIe - Implements probe, removal and interrupt
+     handling.
+   * MHCCIF (Modem Host Cross-Core Interface) - Provides
+     interrupt channels for bidirectional event
+     notification such as handshake and port enumeration.
 
-Good catch! I'll fix this in the next version.
+* Transaction layer - Implements data transactions for
+   the control plane and the data plane. It includes:
 
-> 
-> > rejects the request, leading to a late guest boot failure:
-> >
-> >   KVM-NESTEDv2: couldn't set guest wide elements
-> >   [..KVM reg dump..]
-> >
-> 
-> I think irrespective of the other UAPI changes, we should still get this
-> fixed - so that we don't see a late KVM guest boot failure msgs.
-> 
-> So, in this review, I would like to mainly look at fixing this issue
-> first and would request if we can defer the UAPI changes as a separate
-> patch series please.
+   * DPMAIF (Data Plane Modem AP Interface) - Controls
+     the hardware that provides uplink and downlink
+     queues for the data path. The data exchange takes
+     place using circular buffers to share data buffer
+     addresses and metadata to describe the packets.
+   * CLDMA (Cross Layer DMA) - Manages the hardware
+     used by the port layer to send control messages to
+     the device using MediaTek's CCCI (Cross-Core
+     Communication Interface) protocol.
+   * TX Services - Dispatch packets from the port layer
+     to the device.
+   * RX Services - Dispatch packets to the port layer
+     when receiving packets from the device.
 
-This patch only enables the guest boot to bail out early instead of going upto
-making an H_GUEST_SET_STATE hcall with a non supported compatibility mode. In
-addition to that, it does not fix the real problem where guest fails to boot on
-Power11 LPAR booted in a Power10 compatibility mode.
+* Port layer - Provides control plane and data plane
+   interfaces to userspace. It includes:
 
-I understand your point and to make the segregation explicitly clear, I shall
-update the cover letter to mention that patch 1 only takes care of failing
-earlier as soon as an invalid compatibility mode is detected and Patch 2-5
-introduce a new uAPI for evaluating the right compatibility mode.
+   * Control Plane - Provides device node interfaces
+     for controlling data transactions.
+   * Data Plane - Provides network link interfaces
+     wwanX (0, 1, 2...) for IP data transactions.
 
-The actual L2 guest boot fix with L1 booted in a compatibility mode is done via
-the next 4 patches which enables correct compatibility mode detection using the
-newly introduced uAPI. So, we would still want to prioritize the whole series
-instead of just this one patch.
+* Core logic - Contains the core logic to keep the
+   device working. It includes:
 
-> 
-> 
-> > This situation should be detected earlier. Rejecting unsupported
-> > 'arch_compat' values in 'kvmppc_set_arch_compat()' avoids issuing an
-> > invalid H_SET_STATE hcall and provides a clearer failure mode.
-> 
-> s/H_SET_STATE/H_GUEST_SET_STATE
+   * FSM (Finite State Machine) - Monitors the state
+     of the device, and notifies each module when the
+     state changes.
 
-Will rectify in the next version.
+The compilation of the T9XX driver is enabled by the
+CONFIG_MTK_T9XX and CONFIG_MTK_T9XX_PCI config option
+which depends on CONFIG_WWAN.
 
-> 
-> >
-> > Add a check to reject Power11 'arch_compat' requests when the host is
-> > running in Power10 compatibility mode, returning -EINVAL early instead
-> > of deferring the failure to the hypervisor.
-> >
-> > Suggested-by: Vaibhav Jain <vaibhav@linux.ibm.com>
-> > Tested-by: Anushree Mathur <anushree.mathur@linux.ibm.com>
-> > Signed-off-by: Amit Machhiwal <amachhiw@linux.ibm.com>
-> > ---
-> >  arch/powerpc/kvm/book3s_hv.c | 12 ++++++++++++
-> >  1 file changed, 12 insertions(+)
-> >
-> > diff --git a/arch/powerpc/kvm/book3s_hv.c b/arch/powerpc/kvm/book3s_hv.c
-> > index 61dbeea317f3..249d1f2e4e2c 100644
-> > --- a/arch/powerpc/kvm/book3s_hv.c
-> > +++ b/arch/powerpc/kvm/book3s_hv.c
-> > @@ -446,7 +446,19 @@ static int kvmppc_set_arch_compat(struct kvm_vcpu *vcpu, u32 arch_compat)
-> >  			guest_pcr_bit = PCR_ARCH_300;
-> >  			break;
-> >  		case PVR_ARCH_31:
-> > +			guest_pcr_bit = PCR_ARCH_31;
-> > +			break;
-> >  		case PVR_ARCH_31_P11:
-> > +			/*
-> > +			 * Need to check this for ISA 3.1, as Power10 and
-> > +			 * Power11 share the same PCR. For any subsequent ISA
-> > +			 * versions, this will be taken care of by the guest vs
-> > +			 * host PCR comparison below.
-> > +			 */
-> > +			if ((PVR_ARCH_31 & cur_cpu_spec->pvr_mask) ==
-> > +				cur_cpu_spec->pvr_value) {
-> > +				return -EINVAL;
-> > +			}
-> 
-> Instead of the complicated check can we simply do this?
-> 			if (!cpu_has_feature(CPU_FTR_P11_PVR))
-> 				return -EINVAL;
+---
+Jack Wu (11):
+      net: wwan: t9xx: Add PCIe core
+      net: wwan: t9xx: Add control plane transaction layer
+      net: wwan: t9xx: Add control DMA interface
+      net: wwan: t9xx: Add control port
+      net: wwan: t9xx: Add FSM thread
+      net: wwan: t9xx: Add AT & MBIM WWAN ports
+      net: wwan: t9xx: Introduce data plane hardware
+      net: wwan: t9xx: Add data plane transaction layer
+      net: wwan: t9xx: Introduce WWAN interface
+      net: wwan: t9xx: Add power management support
+      net: wwan: t9xx: Add maintainers and documentation
 
-Sure, I can base this check on CPU features.
+ .../networking/device_drivers/wwan/t9xx.rst        |   48 +
+ MAINTAINERS                                        |   10 +
+ drivers/net/wwan/Kconfig                           |   17 +
+ drivers/net/wwan/Makefile                          |    1 +
+ drivers/net/wwan/t9xx/Makefile                     |   16 +
+ drivers/net/wwan/t9xx/mtk_ctrl_plane.c             |   95 +
+ drivers/net/wwan/t9xx/mtk_ctrl_plane.h             |   88 +
+ drivers/net/wwan/t9xx/mtk_data_plane.c             |  104 +
+ drivers/net/wwan/t9xx/mtk_data_plane.h             |  105 +
+ drivers/net/wwan/t9xx/mtk_dev.c                    |   55 +
+ drivers/net/wwan/t9xx/mtk_dev.h                    |  114 +
+ drivers/net/wwan/t9xx/mtk_fsm.c                    |  931 +++++++
+ drivers/net/wwan/t9xx/mtk_fsm.h                    |  140 +
+ drivers/net/wwan/t9xx/mtk_port.c                   |  967 +++++++
+ drivers/net/wwan/t9xx/mtk_port.h                   |  176 ++
+ drivers/net/wwan/t9xx/mtk_port_io.c                |  576 +++++
+ drivers/net/wwan/t9xx/mtk_port_io.h                |   41 +
+ drivers/net/wwan/t9xx/mtk_utility.h                |   33 +
+ drivers/net/wwan/t9xx/mtk_wwan.c                   |  475 ++++
+ drivers/net/wwan/t9xx/mtk_wwan.h                   |   17 +
+ drivers/net/wwan/t9xx/pcie/Makefile                |   19 +
+ drivers/net/wwan/t9xx/pcie/mtk_cldma.c             | 1527 +++++++++++
+ drivers/net/wwan/t9xx/pcie/mtk_cldma.h             |  176 ++
+ drivers/net/wwan/t9xx/pcie/mtk_cldma_drv.c         |  373 +++
+ drivers/net/wwan/t9xx/pcie/mtk_cldma_drv.h         |  174 ++
+ drivers/net/wwan/t9xx/pcie/mtk_cldma_drv_m9xx.c    |  177 ++
+ drivers/net/wwan/t9xx/pcie/mtk_cldma_drv_m9xx.h    |  101 +
+ drivers/net/wwan/t9xx/pcie/mtk_ctrl_cfg_m9xx.c     |   55 +
+ drivers/net/wwan/t9xx/pcie/mtk_dpmaif.c            | 2714 ++++++++++++++++++++
+ drivers/net/wwan/t9xx/pcie/mtk_dpmaif.h            |   16 +
+ drivers/net/wwan/t9xx/pcie/mtk_dpmaif_drv.c        | 1586 ++++++++++++
+ drivers/net/wwan/t9xx/pcie/mtk_dpmaif_drv.h        |  268 ++
+ drivers/net/wwan/t9xx/pcie/mtk_dpmaif_drv_m9xx.c   |  687 +++++
+ drivers/net/wwan/t9xx/pcie/mtk_dpmaif_reg.h        |  387 +++
+ drivers/net/wwan/t9xx/pcie/mtk_dpmaif_reg_m9xx.h   |   37 +
+ drivers/net/wwan/t9xx/pcie/mtk_dpmaif_ring.c       |  168 ++
+ drivers/net/wwan/t9xx/pcie/mtk_dpmaif_ring.h       |  161 ++
+ drivers/net/wwan/t9xx/pcie/mtk_pci.c               | 1067 ++++++++
+ drivers/net/wwan/t9xx/pcie/mtk_pci.h               |  219 ++
+ drivers/net/wwan/t9xx/pcie/mtk_pci_drv_m9xx.c      |   70 +
+ drivers/net/wwan/t9xx/pcie/mtk_pci_reg.h           |   72 +
+ drivers/net/wwan/t9xx/pcie/mtk_trans_ctrl.c        |  593 +++++
+ drivers/net/wwan/t9xx/pcie/mtk_trans_ctrl.h        |  105 +
+ 43 files changed, 14761 insertions(+)
+---
+base-commit: eb3f4b7426cfd2b79d65b7d37155480b32259a11
+change-id: 20260529-t9xx_driver_v1-1744f8af7739
 
-Thanks,
-Amit
+Best regards,
+--  
+Jack Wu <jackbb_wu@compal.com>
 
-> 
-> which means that if the Qemu is trying to set the arch_compat with P11
-> PVR (arch_compat) and if the host cpu FTR doesn't support P11 PVR, then
-> simply return -EINVAL
-> 
-> -ritesh
-> 
+
 
