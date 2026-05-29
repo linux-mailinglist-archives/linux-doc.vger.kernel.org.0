@@ -1,50 +1,50 @@
-Return-Path: <linux-doc+bounces-90036-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90037-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SHFfBWW6GWpByggAu9opvQ
-	(envelope-from <linux-doc+bounces-90036-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 18:10:13 +0200
+	id 0OZxIh+7GWpByggAu9opvQ
+	(envelope-from <linux-doc+bounces-90037-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 18:13:19 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 82893605512
-	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 18:10:12 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id D271F6055A9
+	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 18:13:18 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 921F731EDF0E
-	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 15:55:11 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 8ACD43008600
+	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 15:57:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9F00A3FDC04;
-	Fri, 29 May 2026 15:51:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 737FE3E0C5A;
+	Fri, 29 May 2026 15:52:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="aeZ68ouW"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WsdxII/q"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 329A83DDDDD;
-	Fri, 29 May 2026 15:51:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 713722E737C;
+	Fri, 29 May 2026 15:52:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780069917; cv=none; b=NYcyYsbyz5x3hHnzoxgK/i84TXqVE3faSdRDeuSMnNP5w9nVy6mNCflBxklTtJg3oKJRYwKQdra857j39zHuoX1LpT3sYjxZDRbkbAfxM2QRR5E83KGLXn32ZGciowNV0EXk2ezev4xJrFWiUfBbZssiFjmY7LVzKt6slu7IWmc=
+	t=1780069977; cv=none; b=bbE/BApURqDAwP+69V8obm8y0QDTkU6Kebeiwf7vZxkYHxzLTK1VLrKZ1isstTQI0K9VmwbtrqeIrWffiwaWJTX9rkGd95fWQRa3YvCCPa5ChTwdFG92e195dZBxH44FuJJc8m1O6bP/SHAa8zd9fUOX7r7qKVygpEHZjA5RqfY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780069917; c=relaxed/simple;
-	bh=GTk9LYoCxbt8zYoKRFMot45nFI7Q2oAgpJ7vlXNwq5U=;
+	s=arc-20240116; t=1780069977; c=relaxed/simple;
+	bh=P/V8Y9uIXI4AWqNgG7UMS/Pgmk+Co5kVOuPDYeh7Kp8=;
 	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=jIOD9YupA6YfNhnZK7udM+e6gahahD7Qixpe9r+OGZYt8Tq1FuSvZmpJ1tUQftYmcTGcbuUzTBk7EgfBJtZsCWFKZ92jV/7qkctiLgiSxr0AyPUNaOrpBOwbgzNxuIixRyiE66cqpRPeV0yDG7vd0kKL5qiZCVPnFLQjYNQi/PI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=aeZ68ouW; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3021E1F00A05;
-	Fri, 29 May 2026 15:51:41 +0000 (UTC)
+	 MIME-Version:Content-Type; b=cXvYNvRHxej1UzlhUIOxzwZmfdkZfTw54C07pRxixCKeoFKGczBs1X5+5KwrwVHT0Ch286vkfO+kK7ecpD0vaBtn23SDXxIbkO8w4YAM151weSTnUGEdTOE2n1CTl/ceCSB78tr9TEWXh8c5TRY9t260kYF/mN00zb9MzEJxFrU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WsdxII/q; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5CA2F1F00893;
+	Fri, 29 May 2026 15:52:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1780069913;
-	bh=7yqtQVPXwcWR3ybe8ddbUaUI+JYT3+ddN0veNYVOM4w=;
+	s=k20260515; t=1780069976;
+	bh=N/B1s9KhnGd01rwpg2fz4lH2p0wkLzGPo4AluzrGq1U=;
 	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=aeZ68ouWftToQr80mwZCwNLEwvgjKh/e5hfldpXX+R8HdOxIvpgVft23bsbxnxKuR
-	 yq/E494ckkkKm14enuR2mI6eBuwWNlz3u/K0OvrjKhyUOO/K5G9KHJ1L0xmpf2XM4n
-	 dClKZah5qaaZ6KC5lMfldlgbqV2066b0ouUq9PenREfJkyN6+fakrqnf3gpiDJ2lgG
-	 tk6Hmerw6hG9nT539jQV1EYJrPjeEv5Pj9mUtcA17Yz2ktKNEsFJrpcEe2E5gmeQQX
-	 L5IoJ1kRfnsqcYphAEzmFkPzpC/aQuQQ5mj9/16ktW6bYVifGvIPo3xcDe0LJm8a8j
-	 ydD+IuaTxoD1A==
-Date: Fri, 29 May 2026 16:51:37 +0100
+	b=WsdxII/q2zvqNxWCu9klfz79GluHKPdSHwdkuHSAv0hUH4JarglftSySE6k5cbyMM
+	 BqPCmcNHtOf0Wbcf7WePutZtO5a3J27pzUo5lCjR6amgAmK2Kljw3ZHzDQvSgXj8oy
+	 6eoAd3FAA1d/M9VDgPQry4cccHA8vF4X3FaJc6MsUTbiZYc8vX7j9bHVydxWHppBd5
+	 aYajVapdVuY45Wy5vVkNOKKB4VCBIAFFKgwjooxm/W77u10KqU70XA9JlBi683UXIf
+	 H35ULHRV7vYplnGUjdbmo3QWilV11HQT9eMNN/riJBVQW5i1u74hYUX7pkoN2Ot93+
+	 tADG9vjqdg4cQ==
+Date: Fri, 29 May 2026 16:52:39 +0100
 From: Jonathan Cameron <jic23@kernel.org>
 To: Ahmed Tiba <ahmed.tiba@arm.com>
 Cc: will@kernel.org, xueshuai@linux.alibaba.com, saket.dumbre@intel.com,
@@ -59,11 +59,12 @@ Cc: will@kernel.org, xueshuai@linux.alibaba.com, saket.dumbre@intel.com,
  linux-cxl@vger.kernel.org, Dmitry.Lamerov@arm.com,
  devicetree@vger.kernel.org, linux-acpi@vger.kernel.org,
  linux-edac@vger.kernel.org, acpica-devel@lists.linux.dev
-Subject: Re: [PATCH v5 02/10] ACPI: APEI: GHES: move CPER read helpers
-Message-ID: <20260529165137.0cd56e6e@jic23-huawei>
-In-Reply-To: <20260529-topics-ahmtib01-ras_ffh_arm_internal_review-v5-2-2e0500d42642@arm.com>
+Subject: Re: [PATCH v5 01/10] ACPI: APEI: GHES: share macros via a private
+ header
+Message-ID: <20260529165239.25753125@jic23-huawei>
+In-Reply-To: <20260529-topics-ahmtib01-ras_ffh_arm_internal_review-v5-1-2e0500d42642@arm.com>
 References: <20260529-topics-ahmtib01-ras_ffh_arm_internal_review-v5-0-2e0500d42642@arm.com>
-	<20260529-topics-ahmtib01-ras_ffh_arm_internal_review-v5-2-2e0500d42642@arm.com>
+	<20260529-topics-ahmtib01-ras_ffh_arm_internal_review-v5-1-2e0500d42642@arm.com>
 X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -78,12 +79,12 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-90036-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90037-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
@@ -98,98 +99,22 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,arm.com:email]
-X-Rspamd-Queue-Id: 82893605512
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:email,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: D271F6055A9
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Fri, 29 May 2026 10:50:42 +0100
+On Fri, 29 May 2026 10:50:41 +0100
 Ahmed Tiba <ahmed.tiba@arm.com> wrote:
 
-> Relocate the CPER buffer mapping, peek, and clear helpers from ghes.c into
-> ghes_cper.c so they can be shared with other firmware-first providers.
-> This commit only shuffles code; behavior stays the same.
+> Carve the CPER helper macros out of ghes.c and place them in a private
+> header so they can be shared with upcoming helper files. This is a
+> mechanical include change with no functional differences.
 > 
 > Signed-off-by: Ahmed Tiba <ahmed.tiba@arm.com>
+I'm not sure there is a 'right' way to handle the use of ACPI deifned stuff
+outside of ACPI, but this seems reasonable to me.
 
-A couple of things I noticed whilst quickly scan through what was moved inline.
-
-Move itself looks fine to me.
 Reviewed-by: Jonathan Cameron <jic23@kernel.org>
-
-> diff --git a/drivers/acpi/apei/ghes_cper.c b/drivers/acpi/apei/ghes_cper.c
-> new file mode 100644
-> index 000000000000..7bb72fe57838
-> --- /dev/null
-> +++ b/drivers/acpi/apei/ghes_cper.c
-> @@ -0,0 +1,195 @@
-
-> +
-> +/* Check the top-level record header has an appropriate size. */
-> +int __ghes_check_estatus(struct ghes *ghes,
-> +			 struct acpi_hest_generic_status *estatus)
-> +{
-> +	u32 len = cper_estatus_len(estatus);
-> +	u32 max_len = min(ghes->generic->error_block_length,
-> +			  ghes->estatus_length);
-> +
-> +	if (len < sizeof(*estatus)) {
-> +		pr_warn_ratelimited(FW_WARN GHES_PFX "Truncated error status block!\n");
-> +		return -EIO;
-> +	}
-> +
-> +	if (!len || len > max_len) {
-
-Obviously this is just a move, but that if !len is silly given that will have failed
-the previous check as 0 is definitely less than sizeof(*estatus)
-
-Maybe add a trivial patch to tidy this up and any similar oddities.
-
-
-> +		pr_warn_ratelimited(FW_WARN GHES_PFX "Invalid error status block length!\n");
-> +		return -EIO;
-> +	}
-> +
-> +	if (cper_estatus_check_header(estatus)) {
-> +		pr_warn_ratelimited(FW_WARN GHES_PFX "Invalid CPER header!\n");
-> +		return -EIO;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +/* Read the CPER block, returning its address, and header in estatus. */
-> +int __ghes_peek_estatus(struct ghes *ghes,
-> +			struct acpi_hest_generic_status *estatus,
-> +			u64 *buf_paddr, enum fixed_addresses fixmap_idx)
-> +{
-> +	struct acpi_hest_generic *g = ghes->generic;
-> +	int rc;
-> +
-> +	rc = apei_read(buf_paddr, &g->error_status_address);
-> +	if (rc) {
-> +		*buf_paddr = 0;
-> +		pr_warn_ratelimited(FW_WARN GHES_PFX
-> +				    "Failed to read error status block address for hardware error source: %d.\n",
-> +				   g->header.source_id);
-
-Whilst you are here I don't think anyone would mind if you fix the alignment.
-Looks like it's one space short.
-
-> +		return -EIO;
-> +	}
-> +	if (!*buf_paddr)
-> +		return -ENOENT;
-> +
-> +	ghes_copy_tofrom_phys(estatus, *buf_paddr, sizeof(*estatus), 1,
-> +			      fixmap_idx);
-> +	if (!estatus->block_status) {
-> +		*buf_paddr = 0;
-> +		return -ENOENT;
-> +	}
-> +
-> +	return 0;
-> +}
-
 
