@@ -1,543 +1,275 @@
-Return-Path: <linux-doc+bounces-89988-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90011-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6HbWKflhGWrDvwgAu9opvQ
-	(envelope-from <linux-doc+bounces-89988-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 11:52:57 +0200
+	id sH2tOAN3GWqwwwgAu9opvQ
+	(envelope-from <linux-doc+bounces-90011-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 13:22:43 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 526206003C7
-	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 11:52:57 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4A66A6018DE
+	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 13:22:42 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 810B33072FBF
-	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 09:52:37 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 555A43034B23
+	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 11:17:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 934853CA4A3;
-	Fri, 29 May 2026 09:52:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 79F673D0938;
+	Fri, 29 May 2026 11:17:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="C7xg8XMz"
+	dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b="S/NuuInR"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DCAFE3CF661;
-	Fri, 29 May 2026 09:52:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780048324; cv=none; b=ioMsJ5V4rc81JTFggo5vzaow6qTtkJhHqSgUPE7nSrOnkrgdATnijuZabJGvLCc/sb9EhT5s0fqh1KQQ3/HeMQxgWJlqD7XUVrxrbFrPvsM26lCuHaIdnpFsyJQdieOGpgqDhAf+GzZwsx2zk55yWOc2Vm5h9xdTMrB1tm58Lrs=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780048324; c=relaxed/simple;
-	bh=3Vm+nt9+NrRY2BNeT6yqN54lwtE/pTm7P8uhemvSbxw=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=daAm3p4QqSKBW/lVdpbKtE12kfjojy6yjcAPa6FtSOFMC2sBnLkVHRsAxg36VKLz8uW6hiRyKnkQEMjw9gZi7fDuw6+jCLi3zjtRKwrHyj77olM3i4TtorNXp1vM4NcbcflefA8Rg7+ERXXDh26TYFxk5JGAMqvpxfjTi8ezN6s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=C7xg8XMz; arc=none smtp.client-ip=217.140.110.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 75F0532E5;
-	Fri, 29 May 2026 02:51:56 -0700 (PDT)
-Received: from e134710.arm.com (e134710.arm.com [10.33.10.82])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 147B23F905;
-	Fri, 29 May 2026 02:51:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1780048321; bh=3Vm+nt9+NrRY2BNeT6yqN54lwtE/pTm7P8uhemvSbxw=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=C7xg8XMzq5zTtGfFr5s/2WYQYt+gpieTU7iOBQhmMtsGT9GXHigWk02g3JisLNZDg
-	 EfrT3vAxG+K6+BkarPyGHy2JBMBbg5gRsupN9ig5hxDK/Ef7hbUap+i/mB3/6iaxka
-	 U9nGu5xRIHxBLhx7jgQU3+80wTtca/MbrCaWAopA=
-From: Ahmed Tiba <ahmed.tiba@arm.com>
-Date: Fri, 29 May 2026 10:50:50 +0100
-Subject: [PATCH v5 10/10] RAS: add firmware-first CPER provider
+Received: from mx0b-00128a01.pphosted.com (mx0a-00128a01.pphosted.com [148.163.135.77])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 166EF3CFF72;
+	Fri, 29 May 2026 11:17:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=148.163.135.77
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1780053454; cv=fail; b=YGWhI1ujICSY0yWCz3gxPYpvTE1rTvlPAH5doMc9lT9FRJuFU0EVFBSdOkq6jQRr2801SEIMKUAhcWsA/3qTyfwgs7r9tBFmYDtXJEP4hkrFTZzSDUFaxWKkvT2oIAGZ8bRkro6wHA+OluPwRJ5IgA3tYyRek6Lo+i0/5smxVnA=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1780053454; c=relaxed/simple;
+	bh=VDV3DR8RkqtO8qseOoAg0IqWKyI6GUEME0EFA9niYzw=;
+	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
+	 Content-Type:MIME-Version; b=l8pRLWtE987kukU8DIUL05BDKRcW0NT4RTjeCndYNEYP0D60GmfOcqBjEJm13TGk8UXjE6hbnX8gyLRQw4yfGMECoD/YKtVKsWiLj/5SxjbzVxarIL7HeTdqaCZCLJSLNvEassvW0svMTRACc9Sposl1XqMPJ7zl6qJZuv9LjXw=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=analog.com; spf=pass smtp.mailfrom=analog.com; dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b=S/NuuInR; arc=fail smtp.client-ip=148.163.135.77
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=analog.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=analog.com
+Received: from pps.filterd (m0375855.ppops.net [127.0.0.1])
+	by mx0b-00128a01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 64T8tlsD651287;
+	Fri, 29 May 2026 06:06:47 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=analog.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=DKIM; bh=VDV3D
+	R8RkqtO8qseOoAg0IqWKyI6GUEME0EFA9niYzw=; b=S/NuuInRcDlfY4g9o4BVo
+	AGWxNbh0fF0zYB1YxN19119ZeWHOLtoe+MtpmRzxDoqbx8o48CpPrIJYOT5X3nwj
+	vtz0IeOQqcMCrBYPgeeFihpNQXuRdGn+Ly04VjfaxzI1VkbCZLuqVx//L/cGq62I
+	WjT3Ox4AIpxJaJI9ThSgdqEZlvDnVqE8ieDvVcaYR1ScZY+mWl4cTBDbA+BvtUcJ
+	QVRiflj5vpYsJ8NaAool1VVSKxU5ROo4UcZw0/kjBcbcWn2v1V75mCziFmVfFVtS
+	ywFM7Mnvt0XoKJ55Hz/+p9S20uj2iH0+d4hQL+zB1zgamzjmauzhjW4RkyYBIYCZ
+	g==
+Received: from bl2pr02cu003.outbound.protection.outlook.com (mail-eastusazon11011022.outbound.protection.outlook.com [52.101.52.22])
+	by mx0b-00128a01.pphosted.com (PPS) with ESMTPS id 4ee7x46u5j-2
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Fri, 29 May 2026 06:06:47 -0400 (EDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=f8CC8D64BeTkDuD1dZ9yQ6VIBTz4dpCTS453jiGBnB7oKTpnRgmVbj/dOEo7jCsDwcgHXoGV8YXSVtdcsHSlfLWJ+8pk7jvk4B+Jy6zeWZk/jEIChaHeF1fB6ym7JMziqFz2bEROIV/PHhGx1/Jdwkz6uo2A08SiOEMqBGyrqiKrACOISgsASsliMcUhLw/Gi/h5GVSPJrDInniGVLbJY295yu3oINu0Qiu4PQDxPrChLIda9kpRijuJJKh1WDbExJUlmz8ySLrnzQjl/wKh92HPgbDBZHu7JuL1z8mr2mw5J2Qa/3aUZYZ+tvMDBYTCnnDqgFBeR0r8KYgl6MqrXg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=VDV3DR8RkqtO8qseOoAg0IqWKyI6GUEME0EFA9niYzw=;
+ b=pwRkXVk3Xb5BNgA3TvTddE2g5c/n8W9EeBqC+9B2Oi3SjiPhObjo9RDMsBIGPbgtea75zf14H/VsG+gnOkiLTHUDGmQaIxlOxjrtfBP4gc8y5PKbAwk4aOCeM88s2H8j6rLjFQLw+lgzxUcavFn3i9a3f1+7xY6VGISJRrwabcL+cqqwZ1ScmkxK3A2w+OtjpsF2nHU7Z++sZ+7uwKXi1bAlHQEMpPWUBsAkzTobFQ1t+YBv0CXW+Wf50VvXA5slXINrFXztpSKSUtje62Nh6XLhhsIeKCxBxHspMX9Zy5bdFcTt4ZqQeH2dafxxE8ydsKWLQErTdAuwvLUlLV9e3g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=analog.com; dmarc=pass action=none header.from=analog.com;
+ dkim=pass header.d=analog.com; arc=none
+Received: from LV9PR03MB8414.namprd03.prod.outlook.com (2603:10b6:408:367::23)
+ by IA1PR03MB8358.namprd03.prod.outlook.com (2603:10b6:208:59f::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.15; Fri, 29 May
+ 2026 10:06:44 +0000
+Received: from LV9PR03MB8414.namprd03.prod.outlook.com
+ ([fe80::d661:7c16:d052:cc81]) by LV9PR03MB8414.namprd03.prod.outlook.com
+ ([fe80::d661:7c16:d052:cc81%6]) with mapi id 15.21.0071.010; Fri, 29 May 2026
+ 10:06:43 +0000
+From: "Sabau, Radu bogdan" <Radu.Sabau@analog.com>
+To: Jonathan Cameron <jic23@kernel.org>,
+        Radu Sabau via B4 Relay
+	<devnull+radu.sabau.analog.com@kernel.org>
+CC: Lars-Peter Clausen <lars@metafoo.de>,
+        "Hennerich, Michael"
+	<Michael.Hennerich@analog.com>,
+        David Lechner <dlechner@baylibre.com>,
+        "Sa,
+ Nuno" <Nuno.Sa@analog.com>, Andy Shevchenko <andy@kernel.org>,
+        Rob Herring
+	<robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+	<conor+dt@kernel.org>,
+        =?utf-8?B?VXdlIEtsZWluZS1Lw7ZuaWc=?=
+	<ukleinek@kernel.org>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown
+	<broonie@kernel.org>,
+        Linus Walleij <linusw@kernel.org>,
+        Bartosz Golaszewski
+	<brgl@kernel.org>,
+        Philipp Zabel <p.zabel@pengutronix.de>,
+        Jonathan Corbet
+	<corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        "linux-iio@vger.kernel.org" <linux-iio@vger.kernel.org>,
+        "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-pwm@vger.kernel.org" <linux-pwm@vger.kernel.org>,
+        "linux-gpio@vger.kernel.org" <linux-gpio@vger.kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
+Subject: RE: [PATCH v13 2/6] iio: adc: ad4691: add initial driver for AD4691
+ family
+Thread-Topic: [PATCH v13 2/6] iio: adc: ad4691: add initial driver for AD4691
+ family
+Thread-Index: AQHc7C6ynrrMRrFpuUKd6Qi0SnLr+LYiLuyAgAKd49A=
+Date: Fri, 29 May 2026 10:06:43 +0000
+Message-ID:
+ <LV9PR03MB8414155D0BA8AAAD6A66EB71F7162@LV9PR03MB8414.namprd03.prod.outlook.com>
+References:
+ <20260525-ad4692-multichannel-sar-adc-driver-v13-0-1b7626d3b35c@analog.com>
+	<20260525-ad4692-multichannel-sar-adc-driver-v13-2-1b7626d3b35c@analog.com>
+ <20260527190713.1cba1e89@jic23-huawei>
+In-Reply-To: <20260527190713.1cba1e89@jic23-huawei>
+Accept-Language: en-US
+Content-Language: en-GB
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: LV9PR03MB8414:EE_|IA1PR03MB8358:EE_
+x-ms-office365-filtering-correlation-id: 812d74f4-1706-4d63-8b76-08debd69fc86
+x-ld-processed: eaa689b4-8f87-40e0-9c6f-7228de4d754a,ExtAddr
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|1800799024|7416014|376014|366016|4143699003|11063799006|6133799003|56012099006|22082099003|18002099003|38070700021;
+x-microsoft-antispam-message-info:
+ 4z0ZqgBDhg949eCRkCh3ZaGSnAPC/pit1epETLiEKq0cMckUFii3a8fzbLhoHQ/1BC5CAQzVR4T22A7+onZwnh6A/tXSNYgMK6a+2jaMw2ebb0XLLR1tKmjqrbuOE+B3z0I3qFKUxquMAAIN1Z9Gd1Anwuv+9E/+fvqfJxxZeMsTivAOFQO9O5bHkEv1FfgKBr/6XfZjlEinMyf8rB7AzXBLU8NmhKXUhfhlcxjuyWi45OqJDpJUnUTs6e/JWQELnv+vWJhf2sIs7akc5YTY92M0+l/37mQr5sh0YmEsvLJcok7VrZHuijr8JTDAGaI4Cw4YxaycHgPMKXjoQ2wvTuLb9t0xZk/TTK3hibt9Va2/NXBUeXOX8UHFS3y0wrXm1ecoI1FORT5lXwXxS8mJgRnIatjXNTSMaWl6n+lJFJNm2rR369WPejKv3Nrbfd6TEHz9erPhaEcfUqEd2FueeTctnvUJBcPlSXf+RHqrOjfw8QSoymWqOUR5ho7W2S7HMXSjuibkwOfjn4Jjr63OeKxY/truIY/ziE6No3/vrVobdvm91GWkA3YbK0DVELRZMfpnZWVHzBUdzLKCd0hfC9kisKGkIcN4L4p8wXjGcLmjbMgDk8nCCIbZ942AIfWLE9aGP+QKrZI5J5tmU9fyX49kM8NeJB177GaS+bNhWC78Rh7L9VSyIX39t8pC5yO3TG5oElqnkETdHffPG0hQxx0JWYHJHp34bU8cteXIACxr/eOeImVmdZMQrveJke5p
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV9PR03MB8414.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(7416014)(376014)(366016)(4143699003)(11063799006)(6133799003)(56012099006)(22082099003)(18002099003)(38070700021);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?utf-8?B?QkQ4YzFYOUNRZVBiOHk5eG0zT1JLRUtpNEduUC93VkYxTGFmQ0JrRUtYTUhn?=
+ =?utf-8?B?UFFGZnhIVUtWSEkwMmhCaE9mdDJ0UnNkUHFodTJ4d0dacWJzRFliRjB5c2dF?=
+ =?utf-8?B?V1lEV3VpTlk4bEQ0K1hWajROVkw2dmlwbE82UzJ2d3I5VU1rdHVDc1FpbXhn?=
+ =?utf-8?B?M3Z5OW01amFVRjlKdlFtWnNjK1dOR200U0U3UjBxK09WaVhnRTFJWVY1MlhZ?=
+ =?utf-8?B?d0dRRDcrMlZ1dUxzaXNpNm5jRE9Jamx6Ymt5bGgzaDErZk5kNlViYVVRdTkw?=
+ =?utf-8?B?b09Sak8xdmpXc1ZBL0pjRm5ILzN4UFd5K01ycnppN0FVV200OXhMQUw3UzF6?=
+ =?utf-8?B?T29rYUFrQ0pMSWRWL2tqaGJEU01EQ0RYcjh6bWJIRHJ3aW1hNmJkSzE0UWhl?=
+ =?utf-8?B?cHN6YzdtR3FKR09ud0tmT0ZSUS8wMGUzZUV6bWFOL05kUTU0MEozSHhUMTZF?=
+ =?utf-8?B?SytZMXo2NTFKVGFTL1NxSGRXSnpSODBKUGtGUy9EV2MwYXBNVlF1d05BeHVN?=
+ =?utf-8?B?TEliS2NLU0x5STlTWWhGR01iVlpSSmJzaDNZdFp4VElXMllEZEkrSDVmU3Fi?=
+ =?utf-8?B?V2QxTW5YTkE5S3k5MWl5c2FVNU1KTTNmK2JoUDgzNGM4TVlGQy8vc2NGQ2VC?=
+ =?utf-8?B?NTZTYWEwNFNJRHNjV2hDVmVVVEpQTVIvTUZPM1dKcmFzQVIyVEVUcTFiTGNh?=
+ =?utf-8?B?QW0wNVJsSTZFOFBPMkRZbkZYSFliT3E1bFk3WW9jbmJhMHNaVFR4VkhyQTI5?=
+ =?utf-8?B?eWxDRFhxNGd5V0RnVDFuaTZjVGoyMFYvTHdQS0Z1NWhhOVZMWkNuYW5TTFV3?=
+ =?utf-8?B?KzF4VGZwZzRZb01pcERWNkVzLzNibS9yUTVTcFFrOTlaaGptUVR4SklFTUdB?=
+ =?utf-8?B?aDkrUzBWa1BieXduWlJHVVI0NWJsMEl3cXdNRHp0MndQckpqZmdyM2EvTloz?=
+ =?utf-8?B?MWpYZUViVVBzZ2ZNdXFGV3JjUnhYSUc3K054WkV1Z0VRRHZiWDBzNmlzalVO?=
+ =?utf-8?B?V2ZqdEV2VTBXazR0SGFNeUxsNFk1Z3dKK0hpekIzeHVEQ1RxUmxXV3hOUFpO?=
+ =?utf-8?B?dkZIV2E4U2x0RnpvREVXcThyMGhaQTNoWHd3NENpUFNlV3UrSC9nU3pYMk8y?=
+ =?utf-8?B?RVpScnhMNDBVeDliNm51R0lSK3p2bDFnblZuM0JES3ZRL2Y3elN2VHJmc29P?=
+ =?utf-8?B?MUZYWWg2NFBPYTJRWVdjbFJSQ3RLbkRQVzExdTFKZURTTjZoNVNEaXErS0dC?=
+ =?utf-8?B?NTA0ZWRnZ2xjdEpnb1hUVkFqeUZYOUVPNEZUQWtoQnpwOHpXTnZKbmVCb01K?=
+ =?utf-8?B?ZkhIaXN6cWpoeDlBUmVHY2wxUHNYU09QR0NaRmkxOUFGYWxoT2pDWmdnWXFX?=
+ =?utf-8?B?d3ZrWkcxY1ZlUlIwSEtXenJ1MTIzYVphblRtQTNBV2RQNGRWNHFBYlo1UEFB?=
+ =?utf-8?B?c0M1bnFraGJHR2p5Q21iTG5pSnpFeDVqZUJqUjdLbDd5VGF0UEZrWmNaQ1pw?=
+ =?utf-8?B?TmxGWVBaWk14Mmw0SzZqRGZyTFc5U292aFI4RUFKTlJOV3dCUG8rSW1CMFk1?=
+ =?utf-8?B?VVUwNzNERjd2Y01qQi9uY2FsTmY5ZHFNU1FzTU96dzNWeER6RUFwMldodjZS?=
+ =?utf-8?B?QzVQd2MyUEhzWC95WStueUQ4Yi90N0lNcGRJblNzN3VMSlhobVdOZCtyUzha?=
+ =?utf-8?B?dEpETlVvS2dzUGhxRnNreWlQSkh6TUIwSVVGcjN5czZkWmFueW4xUnNzSThs?=
+ =?utf-8?B?K1hhemxYOFdrYmhUdjA1VGtIUTV2aUxjUW85eEM2eU1FRHQzRGNVVzY5WUF1?=
+ =?utf-8?B?TEozV0dDMm9ScG1RQWVqSFNoanNnS0xsMG9RL1R5dEZVZFVMaFQvMXhoSHpI?=
+ =?utf-8?B?STB3SVRNUzNUbWxHRGhSUnhUYnplYUpaMCtlTUF0aC9MeTdkOWQ5SllEY0Zl?=
+ =?utf-8?B?cGNVVnJCc0NCa2ozc2pqRElHM1Q5WlRva0NQMVByZGtINVQzZk9RbnpoSWI2?=
+ =?utf-8?B?YnpuL0JqN1VpcUFSL1I0K0dGZkJPcHZSL0daT0I1NVpyT0JHWml1V0VVMUEr?=
+ =?utf-8?B?MjhnSnRzMUJpSEY0VHllaVU3ME5FNzlWS0FWWURPQlptelNkem16Wm12amc2?=
+ =?utf-8?B?VFFOeGdGVmtGamMwN3B6ZmUvQ3JUZmhjSXhLdXZzTXEvZnFxdVNWYlF3OS82?=
+ =?utf-8?B?MUxBWDh3YVRlUStzM05BeWpzMkh0bEgycmNDOE80Z3BFTXlja0FqdFRkajVJ?=
+ =?utf-8?B?TnZ4Qytrb3dCdWNzcU5adGYyRlRucWx6QWtGSmJSL0JNbjJ6QXZTMUp5emVs?=
+ =?utf-8?B?QmF6VnVmREdudWQ1QkVOUldNL21nQzlhclM0Ni93RWRvSENMaEQ1UT09?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260529-topics-ahmtib01-ras_ffh_arm_internal_review-v5-10-2e0500d42642@arm.com>
-References: <20260529-topics-ahmtib01-ras_ffh_arm_internal_review-v5-0-2e0500d42642@arm.com>
-In-Reply-To: <20260529-topics-ahmtib01-ras_ffh_arm_internal_review-v5-0-2e0500d42642@arm.com>
-To: will@kernel.org, jic23@kernel.org, xueshuai@linux.alibaba.com, 
- saket.dumbre@intel.com, mchehab@kernel.org, dave@stgolabs.net, 
- djbw@kernel.org, bp@alien8.de, tony.luck@intel.com, guohanjun@huawei.com, 
- lenb@kernel.org, skhan@linuxfoundation.org, vishal.l.verma@intel.com, 
- rafael@kernel.org, corbet@lwn.net, ira.weiny@intel.com, 
- dave.jiang@intel.com, krzk+dt@kernel.org, robh@kernel.org, 
- catalin.marinas@arm.com, alison.schofield@intel.com, conor+dt@kernel.org
-Cc: Ahmed Tiba <ahmed.tiba@arm.com>, linux-arm-kernel@lists.infradead.org, 
- Michael.Zhao2@arm.com, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-cxl@vger.kernel.org, 
- Dmitry.Lamerov@arm.com, devicetree@vger.kernel.org, 
- linux-acpi@vger.kernel.org, linux-edac@vger.kernel.org, 
- acpica-devel@lists.linux.dev
-X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780048269; l=12767;
- i=ahmed.tiba@arm.com; s=20260219; h=from:subject:message-id;
- bh=3Vm+nt9+NrRY2BNeT6yqN54lwtE/pTm7P8uhemvSbxw=;
- b=fJuzbuh5gHAUrlcRsuZoAdSAQnVi9D2NMEtR4k8a1eCtv2+bFccnL+0PmDxls6bHh0Ns0V/Ml
- OLwy/sSySYiAqqdGcScJ/ea+VtjIxNA6sBpX7CZX6tgab7fccOmfE7q
-X-Developer-Key: i=ahmed.tiba@arm.com; a=ed25519;
- pk=xVOtd+Qklh/4tuM3tB+BEZD4jj5a6W59C3KCNX6v7OE=
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Exchange-RoutingPolicyChecked:
+	CE/q9x6mTxB0+ftf3tEnE0Z2D2fkiv0UNagWdC40uub0FeiUNWhBbMcy+B/ilSRJlbLkJM2uu0vRM5TP+qR9laRPNIM1W9vhJAKe4fwJsKc3zHWS1tolwKxCZic59lvx/IKC+YANKoCwyh0TeMI2sgkUEfw7YE6SVklmHzMTOzi53oy7FuupYkmtJDWAvMN4nWwPGuHkotJ6vz4FNLz4YdkJU5gC9n5HlJmxv834JjdFf3Uh5tL5SafQm5YE3EGiYGB9xWpZegPFauEeYwTmoVO7lKFJxosgqYZcz9l7HIrlTgYCdUMR2TjueTWuFqF2kCeGiXKA2arnbQWLNPGSuQ==
+X-OriginatorOrg: analog.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: LV9PR03MB8414.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 812d74f4-1706-4d63-8b76-08debd69fc86
+X-MS-Exchange-CrossTenant-originalarrivaltime: 29 May 2026 10:06:43.9038
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: eaa689b4-8f87-40e0-9c6f-7228de4d754a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: NLgADJwh7PCyFi+E7qEHdkkaTmnJyzmT8cXj5pxG9Av4UkgVkCIqg4H+MqeZF4MDRCceobqRsH5ED+eNYqUxNw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR03MB8358
+X-Authority-Analysis: v=2.4 cv=X8pi7mTe c=1 sm=1 tr=0 ts=6a196537 cx=c_pps
+ a=3RjCkzAZQHL7PUncwJf+GQ==:117 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
+ a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=NGcC8JguVDcA:10 a=VkNPw1HP01LnGYTKEx00:22 a=0sLvza09kfJOxVLZPwjg:22
+ a=N--XFCr6TIEc_64PeIT2:22 a=VwQbUJbxAAAA:8 a=p-bT5JZeb4596wWgEYYA:9
+ a=QEXdDO2ut3YA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTI5MDEwMCBTYWx0ZWRfXwplyORUebPvi
+ k5abFE05FU8+HJYQB4Q3CZ9W8BpaX1XFgWFZxrJPsk4jb6nSJmt4iSXn/5Kz6D9RZ+t5SUpRBt3
+ DsGytfeCwEO6pGYIdtul44J5JeZOPliM8vap7NuxOORokG/jGvuRtfDVR2DfFMcvo9PR4ti1A2+
+ myKThZ8VR/XIIXCj65qwcNKdwuNu5TKQ/ej2lJqMl0xuN3FP5GePPJ6EDv0ZhT/VIk0bRd6WAEK
+ 8D3j16nRnHcekK0a5Ghy2y7fXPPAncD3gvMxwbZ9rfMoe6IJL2h62dAIuGKlWYFIXFeh9D64pFn
+ ZcMDVArGD2cHj/l7cXQX5JpRasY0H+6Vv4mHWKsO/mMXOJoLOQ7DHCt+KwG7Po/6/C5pU/FKcZX
+ l/nFTvofnxxeG6fxEDpchnQdomy39b4y6/BdVEgv0CcKqnXV8XzDJv57EABPsdhRPZmPW8rwlJI
+ yHMnPI4iynzFFkUPBjg==
+X-Proofpoint-ORIG-GUID: AA0XYdQQcD8I9AemKPm9P_2v3K6BHwaS
+X-Proofpoint-GUID: AA0XYdQQcD8I9AemKPm9P_2v3K6BHwaS
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-05-29_03,2026-05-28_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 spamscore=0 bulkscore=0 malwarescore=0 clxscore=1015
+ priorityscore=1501 suspectscore=0 impostorscore=0 adultscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2605210000
+ definitions=main-2605290100
+X-Spamd-Result: default: False [2.44 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
-	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	MIME_BASE64_TEXT_BOGUS(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[analog.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[analog.com:s=DKIM];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
+	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	TAGGED_FROM(0.00)[bounces-90011-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[33];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-89988-lists,linux-doc=lfdr.de];
-	DKIM_TRACE(0.00)[arm.com:+];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[analog.com:+];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ahmed.tiba@arm.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,arm.com:email,arm.com:mid,arm.com:dkim,intel.com:email]
-X-Rspamd-Queue-Id: 526206003C7
+	FROM_NEQ_ENVFROM(0.00)[Radu.Sabau@analog.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[metafoo.de,analog.com,baylibre.com,kernel.org,gmail.com,pengutronix.de,lwn.net,linuxfoundation.org,vger.kernel.org];
+	NEURAL_HAM(-0.00)[-0.998];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc,radu.sabau.analog.com,dt];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_SEVEN(0.00)[7]
+X-Rspamd-Queue-Id: 4A66A6018DE
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Add a firmware-first CPER provider that reuses the shared
-GHES helpers, wire it into the RAS Kconfig/Makefile and
-document it in the admin guide.
-
-Update MAINTAINERS now that the driver exists.
-
-Signed-off-by: Ahmed Tiba <ahmed.tiba@arm.com>
----
- Documentation/admin-guide/RAS/main.rst |  18 +++
- MAINTAINERS                            |   1 +
- drivers/acpi/apei/apei-internal.h      |  10 +-
- drivers/acpi/apei/ghes_cper.c          |   2 +
- drivers/ras/Kconfig                    |  11 ++
- drivers/ras/Makefile                   |   1 +
- drivers/ras/cper-esource.c             | 257 +++++++++++++++++++++++++++++++++
- include/acpi/ghes_cper.h               |  10 ++
- 8 files changed, 301 insertions(+), 9 deletions(-)
-
-diff --git a/Documentation/admin-guide/RAS/main.rst b/Documentation/admin-guide/RAS/main.rst
-index 5a45db32c49b..84219d25a072 100644
---- a/Documentation/admin-guide/RAS/main.rst
-+++ b/Documentation/admin-guide/RAS/main.rst
-@@ -205,6 +205,24 @@ Architecture (MCA)\ [#f3]_.
- .. [#f3] For more details about the Machine Check Architecture (MCA),
-   please read Documentation/arch/x86/x86_64/machinecheck.rst at the Kernel tree.
- 
-+Firmware-first CPER providers
-+-----------------------------
-+
-+Some systems expose Common Platform Error Record (CPER) data
-+through platform firmware instead of ACPI HEST tables.
-+Enable ``CONFIG_RAS_CPER_ESOURCE`` to build the ``drivers/ras/cper-esource.c``
-+driver. The current in-tree firmware description uses the
-+``Documentation/devicetree/bindings/firmware/arm,ras-cper.yaml`` binding.
-+The driver reuses the GHES CPER helper object in
-+``drivers/acpi/apei/ghes_cper.c`` so the logging, notifier chains, and
-+memory failure handling match the ACPI GHES behaviour even when
-+ACPI is disabled.
-+
-+Once a platform describes a firmware-first provider, both ACPI GHES and the
-+firmware-described driver reuse the same code paths. This keeps the
-+behaviour consistent regardless of whether the error source is described
-+by ACPI tables or another firmware description.
-+
- EDAC - Error Detection And Correction
- *************************************
- 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 8a9714603a7d..c14638cd97f6 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -22265,6 +22265,7 @@ RAS ERROR STATUS
- M:	Ahmed Tiba <ahmed.tiba@arm.com>
- S:	Maintained
- F:	Documentation/devicetree/bindings/firmware/arm,ras-cper.yaml
-+F:	drivers/ras/cper-esource.c
- 
- RAS INFRASTRUCTURE
- M:	Tony Luck <tony.luck@intel.com>
-diff --git a/drivers/acpi/apei/apei-internal.h b/drivers/acpi/apei/apei-internal.h
-index 77c10a7a7a9f..c16ac541f15b 100644
---- a/drivers/acpi/apei/apei-internal.h
-+++ b/drivers/acpi/apei/apei-internal.h
-@@ -8,6 +8,7 @@
- #define APEI_INTERNAL_H
- 
- #include <linux/acpi.h>
-+#include <acpi/ghes_cper.h>
- 
- struct apei_exec_context;
- 
-@@ -120,15 +121,6 @@ int apei_exec_collect_resources(struct apei_exec_context *ctx,
- struct dentry;
- struct dentry *apei_get_debugfs_dir(void);
- 
--static inline u32 cper_estatus_len(struct acpi_hest_generic_status *estatus)
--{
--	if (estatus->raw_data_length)
--		return estatus->raw_data_offset + \
--			estatus->raw_data_length;
--	else
--		return sizeof(*estatus) + estatus->data_length;
--}
--
- int apei_osc_setup(void);
- 
- int einj_get_available_error_type(u32 *type, int einj_action);
-diff --git a/drivers/acpi/apei/ghes_cper.c b/drivers/acpi/apei/ghes_cper.c
-index 0ff9d06eb78f..a7691aa5011c 100644
---- a/drivers/acpi/apei/ghes_cper.c
-+++ b/drivers/acpi/apei/ghes_cper.c
-@@ -46,7 +46,9 @@
- #include <asm/fixmap.h>
- #include <asm/tlbflush.h>
- 
-+#ifdef CONFIG_ACPI_APEI
- #include "apei-internal.h"
-+#endif
- 
- ATOMIC_NOTIFIER_HEAD(ghes_report_chain);
- 
-diff --git a/drivers/ras/Kconfig b/drivers/ras/Kconfig
-index fc4f4bb94a4c..3c1c63b2fefc 100644
---- a/drivers/ras/Kconfig
-+++ b/drivers/ras/Kconfig
-@@ -34,6 +34,17 @@ if RAS
- source "arch/x86/ras/Kconfig"
- source "drivers/ras/amd/atl/Kconfig"
- 
-+config RAS_CPER_ESOURCE
-+	bool "Firmware-first CPER error source block provider"
-+	select GHES_CPER_HELPERS
-+	help
-+	  Enable support for firmware-first Common Platform Error Record
-+	  (CPER) error source block providers. The current in-tree user is
-+	  described by the arm,ras-cper DeviceTree binding. The driver
-+	  reuses the existing GHES CPER helpers so the error processing
-+	  matches the ACPI code paths, but it can be built even when ACPI is
-+	  disabled.
-+
- config RAS_FMPM
- 	tristate "FRU Memory Poison Manager"
- 	default m
-diff --git a/drivers/ras/Makefile b/drivers/ras/Makefile
-index 11f95d59d397..0de069557f31 100644
---- a/drivers/ras/Makefile
-+++ b/drivers/ras/Makefile
-@@ -2,6 +2,7 @@
- obj-$(CONFIG_RAS)	+= ras.o
- obj-$(CONFIG_DEBUG_FS)	+= debugfs.o
- obj-$(CONFIG_RAS_CEC)	+= cec.o
-+obj-$(CONFIG_RAS_CPER_ESOURCE)	+= cper-esource.o
- 
- obj-$(CONFIG_RAS_FMPM)	+= amd/fmpm.o
- obj-y			+= amd/atl/
-diff --git a/drivers/ras/cper-esource.c b/drivers/ras/cper-esource.c
-new file mode 100644
-index 000000000000..83f7a910e50a
---- /dev/null
-+++ b/drivers/ras/cper-esource.c
-@@ -0,0 +1,257 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Firmware-first CPER error source provider.
-+ *
-+ * This driver shares the GHES CPER helpers so we keep the reporting and
-+ * notifier behaviour identical to ACPI GHES.
-+ *
-+ * Copyright (C) 2026 ARM Ltd.
-+ * Author: Ahmed Tiba <ahmed.tiba@arm.com>
-+ */
-+
-+#include <linux/bitops.h>
-+#include <linux/cleanup.h>
-+#include <linux/idr.h>
-+#include <linux/interrupt.h>
-+#include <linux/io.h>
-+#include <linux/mod_devicetable.h>
-+#include <linux/module.h>
-+#include <linux/panic.h>
-+#include <linux/platform_device.h>
-+#include <linux/property.h>
-+#include <linux/slab.h>
-+#include <linux/spinlock.h>
-+
-+#include <acpi/ghes.h>
-+#include <acpi/ghes_cper.h>
-+
-+static DEFINE_IDA(cper_esource_source_ids);
-+
-+struct cper_esource_ack {
-+	void __iomem *addr;
-+	u64 preserve;
-+	u64 set;
-+	u8 width;
-+	bool present;
-+};
-+
-+struct cper_esource {
-+	struct device *dev;
-+	void __iomem *status;
-+	size_t status_len;
-+
-+	struct cper_esource_ack ack;
-+
-+	struct acpi_hest_generic *generic;
-+	struct acpi_hest_generic_status *estatus;
-+
-+	bool sync;
-+	int irq;
-+
-+	/* Serializes access while firmware and the OS share the status buffer. */
-+	spinlock_t lock;
-+};
-+
-+static void cper_esource_release_source_id(void *data)
-+{
-+	struct acpi_hest_generic *generic = data;
-+
-+	ida_free(&cper_esource_source_ids, generic->header.source_id);
-+}
-+
-+static int cper_esource_init_pool(void)
-+{
-+	if (ghes_estatus_pool)
-+		return 0;
-+
-+	return ghes_estatus_pool_init(1);
-+}
-+
-+static int cper_esource_copy_status(struct cper_esource *ctx)
-+{
-+	memcpy_fromio(ctx->estatus, ctx->status, ctx->status_len);
-+	return 0;
-+}
-+
-+static void cper_esource_ack(struct cper_esource *ctx)
-+{
-+	u64 val;
-+
-+	if (!ctx->ack.present)
-+		return;
-+
-+	if (ctx->ack.width == 64) {
-+		val = readq(ctx->ack.addr);
-+		val &= ctx->ack.preserve;
-+		val |= ctx->ack.set;
-+		writeq(val, ctx->ack.addr);
-+	} else {
-+		val = readl(ctx->ack.addr);
-+		val &= (u32)ctx->ack.preserve;
-+		val |= (u32)ctx->ack.set;
-+		writel(val, ctx->ack.addr);
-+	}
-+}
-+
-+static void cper_esource_fatal(struct cper_esource *ctx)
-+{
-+	__ghes_print_estatus(KERN_EMERG, ctx->generic, ctx->estatus);
-+	add_taint(TAINT_MACHINE_CHECK, LOCKDEP_STILL_OK);
-+	panic("GHES: fatal firmware-first CPER record from %s\n",
-+	      dev_name(ctx->dev));
-+}
-+
-+static void cper_esource_process(struct cper_esource *ctx)
-+{
-+	int sev;
-+
-+	guard(spinlock_irqsave)(&ctx->lock);
-+
-+	if (cper_esource_copy_status(ctx))
-+		return;
-+
-+	sev = ghes_severity(ctx->estatus->error_severity);
-+	if (sev >= GHES_SEV_PANIC)
-+		cper_esource_fatal(ctx);
-+
-+	if (!ghes_estatus_cached(ctx->estatus) &&
-+	    ghes_print_estatus(NULL, ctx->generic, ctx->estatus))
-+		ghes_estatus_cache_add(ctx->generic, ctx->estatus);
-+
-+	ghes_cper_handle_status(ctx->dev, ctx->generic, ctx->estatus, ctx->sync);
-+	cper_esource_ack(ctx);
-+}
-+
-+static irqreturn_t cper_esource_irq(int irq, void *data)
-+{
-+	struct cper_esource *ctx = data;
-+
-+	cper_esource_process(ctx);
-+
-+	return IRQ_HANDLED;
-+}
-+
-+static int cper_esource_init_ack(struct platform_device *pdev,
-+				 struct cper_esource *ctx)
-+{
-+	struct device *dev = &pdev->dev;
-+	struct resource *res;
-+	size_t size;
-+
-+	res = platform_get_resource(pdev, IORESOURCE_MEM, 1);
-+	if (!res)
-+		return 0;
-+
-+	ctx->ack.addr = devm_platform_get_and_ioremap_resource(pdev, 1, &res);
-+	if (IS_ERR(ctx->ack.addr))
-+		return PTR_ERR(ctx->ack.addr);
-+
-+	size = resource_size(res);
-+	switch (size) {
-+	case 4:
-+		ctx->ack.width = 32;
-+		ctx->ack.preserve = ~0U;
-+		break;
-+	case 8:
-+		ctx->ack.width = 64;
-+		ctx->ack.preserve = ~0ULL;
-+		break;
-+	default:
-+		return dev_err_probe(dev, -EINVAL,
-+				     "unsupported ack resource size %zu\n", size);
-+	}
-+
-+	ctx->ack.set = BIT_ULL(0);
-+	ctx->ack.present = true;
-+	return 0;
-+}
-+
-+static int cper_esource_probe(struct platform_device *pdev)
-+{
-+	struct device *dev = &pdev->dev;
-+	struct cper_esource *ctx;
-+	struct resource *res;
-+	int source_id;
-+	int rc;
-+
-+	ctx = devm_kzalloc(dev, sizeof(*ctx), GFP_KERNEL);
-+	if (!ctx)
-+		return -ENOMEM;
-+
-+	spin_lock_init(&ctx->lock);
-+	ctx->dev = dev;
-+	ctx->sync = device_property_read_bool(dev, "arm,sea-notify");
-+
-+	ctx->status = devm_platform_get_and_ioremap_resource(pdev, 0, &res);
-+	if (IS_ERR(ctx->status))
-+		return dev_err_probe(dev, PTR_ERR(ctx->status),
-+				     "failed to map status region\n");
-+
-+	ctx->status_len = resource_size(res);
-+	if (!ctx->status_len)
-+		return dev_err_probe(dev, -EINVAL, "status region has zero length\n");
-+
-+	rc = cper_esource_init_ack(pdev, ctx);
-+	if (rc)
-+		return rc;
-+
-+	rc = cper_esource_init_pool();
-+	if (rc)
-+		return rc;
-+
-+	ctx->estatus = devm_kzalloc(dev, ctx->status_len, GFP_KERNEL);
-+	if (!ctx->estatus)
-+		return -ENOMEM;
-+
-+	ctx->generic = devm_kzalloc(dev, sizeof(*ctx->generic), GFP_KERNEL);
-+	if (!ctx->generic)
-+		return -ENOMEM;
-+
-+	source_id = ida_alloc_min(&cper_esource_source_ids, 1, GFP_KERNEL);
-+	if (source_id < 0)
-+		return source_id;
-+
-+	ctx->generic->header.type = ACPI_HEST_TYPE_GENERIC_ERROR;
-+	ctx->generic->header.source_id = source_id;
-+
-+	rc = devm_add_action_or_reset(dev, cper_esource_release_source_id,
-+				      ctx->generic);
-+	if (rc)
-+		return rc;
-+
-+	ctx->generic->notify.type = ctx->sync ?
-+		ACPI_HEST_NOTIFY_SEA : ACPI_HEST_NOTIFY_EXTERNAL;
-+	ctx->generic->error_block_length = ctx->status_len;
-+
-+	ctx->irq = platform_get_irq(pdev, 0);
-+	if (ctx->irq < 0)
-+		return ctx->irq;
-+
-+	rc = devm_request_threaded_irq(dev, ctx->irq, NULL, cper_esource_irq,
-+				       IRQF_ONESHOT,
-+				       dev_name(dev), ctx);
-+	if (rc)
-+		return dev_err_probe(dev, rc, "failed to request interrupt\n");
-+
-+	return 0;
-+}
-+
-+static const struct of_device_id cper_esource_of_match[] = {
-+	{ .compatible = "arm,ras-cper" },
-+	{ /* sentinel */ }
-+};
-+MODULE_DEVICE_TABLE(of, cper_esource_of_match);
-+
-+static struct platform_driver cper_esource_driver = {
-+	.driver = {
-+		.name = "cper-esource",
-+		.of_match_table = cper_esource_of_match,
-+	},
-+	.probe = cper_esource_probe,
-+};
-+
-+module_platform_driver(cper_esource_driver);
-+
-+MODULE_AUTHOR("Ahmed Tiba <ahmed.tiba@arm.com>");
-+MODULE_DESCRIPTION("Firmware-first CPER provider");
-+MODULE_LICENSE("GPL");
-diff --git a/include/acpi/ghes_cper.h b/include/acpi/ghes_cper.h
-index 511b95b50911..a78d4a773129 100644
---- a/include/acpi/ghes_cper.h
-+++ b/include/acpi/ghes_cper.h
-@@ -80,6 +80,14 @@ static inline bool is_hest_sync_notify(struct ghes *ghes)
- 	return notify_type == ACPI_HEST_NOTIFY_SEA;
- }
- 
-+static inline u32 cper_estatus_len(struct acpi_hest_generic_status *estatus)
-+{
-+	if (estatus->raw_data_length)
-+		return estatus->raw_data_offset + estatus->raw_data_length;
-+	else
-+		return sizeof(*estatus) + estatus->data_length;
-+}
-+
- struct ghes_vendor_record_entry {
- 	struct work_struct work;
- 	int error_severity;
-@@ -108,6 +116,8 @@ int __ghes_read_estatus(struct acpi_hest_generic_status *estatus,
- int ghes_estatus_cached(struct acpi_hest_generic_status *estatus);
- void ghes_estatus_cache_add(struct acpi_hest_generic *generic,
- 			    struct acpi_hest_generic_status *estatus);
-+int ghes_register_vendor_record_notifier(struct notifier_block *nb);
-+void ghes_unregister_vendor_record_notifier(struct notifier_block *nb);
- void ghes_defer_non_standard_event(struct acpi_hest_generic_data *gdata,
- 				   int sev);
- int ghes_severity(int severity);
-
--- 
-2.43.0
-
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBKb25hdGhhbiBDYW1lcm9uIDxq
+aWMyM0BrZXJuZWwub3JnPg0KPiBTZW50OiBXZWRuZXNkYXksIE1heSAyNywgMjAyNiA5OjA3IFBN
+DQoNCi4uLg0KDQo+ID4gK3N0YXRpYyBib29sIGFkNDY5MV92b2xhdGlsZV9yZWcoc3RydWN0IGRl
+dmljZSAqZGV2LCB1bnNpZ25lZCBpbnQgcmVnKQ0KPiA+ICt7DQo+ID4gKwlzd2l0Y2ggKHJlZykg
+ew0KPiA+ICsJY2FzZSBBRDQ2OTFfU1RBVFVTX1JFRzoNCj4gPiArCWNhc2UgQUQ0NjkxX0NMQU1Q
+X1NUQVRVUzFfUkVHOg0KPiA+ICsJY2FzZSBBRDQ2OTFfQ0xBTVBfU1RBVFVTMl9SRUc6DQo+ID4g
+KwljYXNlIEFENDY5MV9HUElPX1JFQUQ6DQo+ID4gKwljYXNlIEFENDY5MV9BQ0NfU1RBVFVTX0ZV
+TEwxX1JFRyAuLi4NCj4gQUQ0NjkxX0FDQ19TVEFUVVNfU0FUMl9SRUc6DQo+ID4gKwljYXNlIEFE
+NDY5MV9BQ0NfU0FUX09WUl9SRUcoMCkgLi4uDQo+IEFENDY5MV9BQ0NfU0FUX09WUl9SRUcoMTUp
+Og0KPiA+ICsJCXJldHVybiB0cnVlOw0KPiA+ICsJZGVmYXVsdDoNCj4gPiArCQlicmVhazsNCj4g
+PiArCX0NCj4gPiArDQo+ID4gKwkvKg0KPiA+ICsJICogTXVsdGktYnl0ZSByZWdpc3RlcnMgaGF2
+ZSBub24tdW5pdCBzdHJpZGVzOyBvbmx5IGFjY2VwdCBiYXNlDQo+ID4gKwkgKiBhZGRyZXNzZXMg
+dG8gcHJldmVudCBkZWJ1Z2ZzIGZyb20gdHJpZ2dlcmluZyByZWFkcyB0aGF0IGNyb3NzDQo+ID4g
+KwkgKiByZWdpc3RlciBib3VuZGFyaWVzLg0KPiBXaGF0IGRvZXMgdGhpcyBoYXZlIHRvIGRvIHdp
+dGggcHJldmVudGluZyBkZWJ1Z2ZzIGZyb20gZG9pbmcgYW55dGhpbmcuDQo+IEl0IHNob3VsZCBh
+bGxvdyByZWFkaW5nIG9mIHZvbGF0aWxlIHJlZ2lzdGVycy4gV2h5IGlzIGl0IG5vdCBlbm91Z2gg
+dG8NCj4gbWFrZSB0aGUgbm9uIGJhc2UgYWxpZ25lZCByZWdpc3RlcnMgbmVpdGhlciByZWFkYWJs
+ZSBub3Igd3JpdGVhYmxlPw0KPiANCg0KWW91J3JlIHJpZ2h0LCB0aGUgY29tbWVudCBpcyB3cm9u
+ZyBhbmQgdGhlIHN0cmlkZSBsb2dpYyBpcyBtaXNwbGFjZWQuDQpyZWFkYWJsZV9yZWcgaXMgd2hh
+dCBnYXRlcyBkZWJ1Z2ZzIGFjY2Vzcywgc28gdGhlIHN0cmlkZSBjaGVja3MgaW4NCnZvbGF0aWxl
+X3JlZyBhcmUgcmVkdW5kYW50IGFuZCB0aGUgY29tbWVudCBpcyBpbmNvcnJlY3QuDQoNCg==
 
