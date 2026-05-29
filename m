@@ -1,120 +1,133 @@
-Return-Path: <linux-doc+bounces-89926-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89927-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uNf7D8f9GGoEpggAu9opvQ
-	(envelope-from <linux-doc+bounces-89926-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 04:45:27 +0200
+	id eKTtBC0AGWpApggAu9opvQ
+	(envelope-from <linux-doc+bounces-89927-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 04:55:41 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE20C5FC772
-	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 04:45:26 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 63A8C5FC8B5
+	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 04:55:40 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id C81D33013488
-	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 02:41:07 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 71D3D301692E
+	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 02:52:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B9CB8366816;
-	Fri, 29 May 2026 02:41:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 85B4735AC17;
+	Fri, 29 May 2026 02:52:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=codewreck.org header.i=@codewreck.org header.b="n2+M5FFu"
+	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="drqCdeB/"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from submarine.notk.org (submarine.notk.org [62.210.214.84])
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3AAB71A682A;
-	Fri, 29 May 2026 02:41:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=62.210.214.84
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 07DA528851F;
+	Fri, 29 May 2026 02:52:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780022466; cv=none; b=d+yB8aKsxROs7tQjNtOWuZZXEW1sp3UUuWMtNpnmFuYEI3yKLujYqy8HiaaQtefRQflkfvao7MzOVY4viF4mk3oBemegM90vR7arzcdKxjnwU02nU5eHm8+174HcC3OpvMxOjQ9eBc9SbCWXQ0HB6xWD5hRVowdvXHN+Aq+jkXs=
+	t=1780023155; cv=none; b=p+xf2mkY5cS+jJvnGvBFgAyLyr6hNyhHLNgDIb5olHoXRG6XgmcPyT+OU5HXBpx8pmMOjT7rl/h+nusoETloka6kUtgsRTz+ca+MFzQ6yAYCNgY/jcL+IM1KN5wcX9Df5w5VpZXM9edWWs+Beq+QzG3wnjTnJMg1uIJ7iuiOfWQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780022466; c=relaxed/simple;
-	bh=Z6XdDhF48S7c2HyeMlf7I0oXXf/MbmepJPQ5KF0ht2o=;
+	s=arc-20240116; t=1780023155; c=relaxed/simple;
+	bh=3WGbppdhHouD7QB+hA+APQACUt/MRfn0Fb/C0LBEjHw=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=LWeU/09zuKULYGtkjP1Bla2e2dWZUIYrPE+NhBvm92CPz9xLHRU9vWNhEVYgPspW7rAL9s5PHns0VWXVDdNlqgMyN07f3w0FEDMbVv3lMoCOHJkKq29ZuqyOkRcBAkHVDg6/4CgCk9fQhsqAaPTsbzi/bN+nppchbF0uBa3T+q8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=codewreck.org; spf=pass smtp.mailfrom=codewreck.org; dkim=pass (2048-bit key) header.d=codewreck.org header.i=@codewreck.org header.b=n2+M5FFu; arc=none smtp.client-ip=62.210.214.84
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=codewreck.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=codewreck.org
-Received: from gaia.codewreck.org (localhost [127.0.0.1])
-	by submarine.notk.org (Postfix) with ESMTPS id 8419114C2D6;
-	Fri, 29 May 2026 04:41:00 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=codewreck.org;
-	s=2; t=1780022463;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=FdBpLbeSF1+PYunOzClPys8cqaeaZJN5U3Td3axJnzs=;
-	b=n2+M5FFu33zteclvxVDDU/lBk3qmXO6hI9LTvkO4fwgSaJHJpDE5xRAXrqi9o0bkmhJdHe
-	+Rustp+69+W71o5S5tfq0A1sE5Gn3a2LwKTOb9D+Q16c21uArzzAejqE4TyRu++UKkEEOc
-	by2msa6QkKvIyaR/55HLDO0sa+AnelA+sjCAWpO+28Qi1Y/LUDcUtRrqz5Z1Zh97QYR2ux
-	AI3W00lBya7FYpDwHuS5b+XyAyTxwuWF6ePnLXwpObb3ZuZxyMqDVeA1U8/Q9Xb1+Wp3pD
-	ZKtt/aFDvtUbmd1heVyo3z6oSP4o1L+MJi0v+LBb0i4pYC81eXSfB7Vg1VcQiQ==
-Received: from localhost (gaia.codewreck.org [local])
-	by gaia.codewreck.org (OpenSMTPD) with ESMTPA id d8b8d90a;
-	Fri, 29 May 2026 02:40:58 +0000 (UTC)
-Date: Fri, 29 May 2026 11:40:43 +0900
-From: Dominique Martinet <asmadeus@codewreck.org>
-To: Aayush Patil <aayushpatilsch@gmail.com>
-Cc: ericvh@kernel.org, lucho@ionkov.net, linux_oss@crudebyte.com,
-	corbet@lwn.net, skhan@linuxfoundation.org, v9fs@lists.linux.dev,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] docs/filesystems/9p: fix broken external links
-Message-ID: <ahj8q3KPuS825WRP@codewreck.org>
-References: <20260510182856.17569-1-aayushpatilsch@gmail.com>
- <agxW8An7fRApCY1r@codewreck.org>
- <CABc3pKGKCLydod2NOgETP-z0T5BHep8hyy7z2UF3o+DrWEh5yw@mail.gmail.com>
- <CABc3pKEY8QvQzWPeU9QGBFG1dtGSdseTRdXF_5MUX1MeNBV5QQ@mail.gmail.com>
+	 Content-Type:Content-Disposition:In-Reply-To; b=XG2FsbOoPHe8Sa3S2VRf4HdV9pvwBoGQBJrGtrp5LtSlb5RmmIXSw55Kg/Yg8iuRndrekCdzWIzG9eovGky5d6U4UtX/pPqPszbKMAJ0W+NUZcjZdo5Hx1XuNNNeV/BPNe0JYqDxikKN/wb/XJFv2wflb41VNFi7lVb6CrWWHiQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=drqCdeB/; arc=none smtp.client-ip=156.67.10.101
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+	bh=QP3Cvy2+WySoayTMbD1DI6BdpYhvxEICeVvCegdqfZo=; b=drqCdeB/cRv91LCxj7It/514M6
+	insA+5NsE8XBcCE8HvGjOh9kayzx1ej75iE/uELItB7B1kB28R85hsKbJ2BbNZ4uQaonIbPInhw0q
+	7IFHr9zgfaD/rzMiXdXSMoA2AjkoJxXL/AIgErDhiQfXcmRnOVb/zW8iK4ovuzrqo4dU=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+	(envelope-from <andrew@lunn.ch>)
+	id 1wSnKU-0050AX-9h; Fri, 29 May 2026 04:52:10 +0200
+Date: Fri, 29 May 2026 04:52:10 +0200
+From: Andrew Lunn <andrew@lunn.ch>
+To: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+Cc: Jakub Kicinski <kuba@kernel.org>, davem@davemloft.net,
+	Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Russell King <linux@armlinux.org.uk>,
+	Heiner Kallweit <hkallweit1@gmail.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Oleksij Rempel <o.rempel@pengutronix.de>,
+	Vladimir Oltean <vladimir.oltean@nxp.com>,
+	Florian Fainelli <f.fainelli@gmail.com>,
+	thomas.petazzoni@bootlin.com, netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+	Maxime Chevallier <maxime.chevallier@bootlin.com>
+Subject: Re: [PATCH net-next] Documentation: networking: Add a test plan for
+ ethtool pause validation
+Message-ID: <b8ecd274-b299-40d1-b3e4-1ec475675f68@lunn.ch>
+References: <20260522175109.198059-1-maxime.chevallier@bootlin.com>
+ <20260526172447.10ca4b9e@kernel.org>
+ <5cb8e2b4-8eb6-4446-9b90-1cd4c7964cd9@lunn.ch>
+ <f9d0b5bf-e285-4694-8147-e7b59164da00@bootlin.com>
+ <81777bc8-b046-4c76-9f53-e33563b6ad62@lunn.ch>
+ <1780018791.8076131-1-xuanzhuo@linux.alibaba.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CABc3pKEY8QvQzWPeU9QGBFG1dtGSdseTRdXF_5MUX1MeNBV5QQ@mail.gmail.com>
-X-Spamd-Result: default: False [-2.16 / 15.00];
+In-Reply-To: <1780018791.8076131-1-xuanzhuo@linux.alibaba.com>
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[codewreck.org,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[codewreck.org:s=2];
+	DMARC_POLICY_ALLOW(-0.50)[lunn.ch,none];
+	R_DKIM_ALLOW(-0.20)[lunn.ch:s=20171124];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[codewreck.org:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
-	TAGGED_FROM(0.00)[bounces-89926-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	TAGGED_FROM(0.00)[bounces-89927-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,davemloft.net,google.com,redhat.com,armlinux.org.uk,gmail.com,lwn.net,linuxfoundation.org,pengutronix.de,nxp.com,bootlin.com,vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[18];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[asmadeus@codewreck.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[9];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[andrew@lunn.ch,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[lunn.ch:+];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: AE20C5FC772
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,lunn.ch:mid,lunn.ch:dkim]
+X-Rspamd-Queue-Id: 63A8C5FC8B5
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Aayush Patil wrote on Tue, May 19, 2026 at 07:23:38PM +0530:
-> Regarding the replacement links, should I include them in v2 or leave
-> those entries removed since you're not sure if they're the same files?
-> Happy to go either way.
+> So I've been thinking lately: should we let AI generate and maintain these tests,
+> including kselftest? This would give us a much richer and more comprehensive
+> set of tests. Plus, each test could come with a complete explanation of its
+> purpose and methodology. In short, much of the work we used to do manually
+> can be offloaded to AI. This way, we can build a massive test suite and
+> achieve much broader coverage.
 
-This is fine as is, if Eric replies or someone wants to add the links
-back we can always update again later
+A test suite only has value if it is correct. It actually has negative
+value if it is wrong, because you are forcing developers to make their
+implementations wrong in order to pass the tests.
 
-(I've also fixed the typo in commit message directly)
+Do you have the knowledge to validate whatever you generate via IA?
+Can you argue it is correct? Do you have a range of hardware to test
+it on?
 
-Thanks,
--- 
-Dominique Martinet | Asmadeus
+It could be an interesting experiment, but i'm sceptical, until proven
+otherwise.
+
+	Andrew
 
