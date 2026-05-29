@@ -1,53 +1,53 @@
-Return-Path: <linux-doc+bounces-90088-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90091-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4CKmOCEDGmq+0ggAu9opvQ
-	(envelope-from <linux-doc+bounces-90088-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 23:20:33 +0200
+	id OIQSLEEDGmrK0ggAu9opvQ
+	(envelope-from <linux-doc+bounces-90091-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 23:21:05 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60685608D13
-	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 23:20:33 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 35488608D4E
+	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 23:21:05 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id DB31C302F42B
-	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 21:20:31 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id B0D8C3030F4C
+	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 21:20:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C1B593B6350;
-	Fri, 29 May 2026 21:20:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6755B43C04B;
+	Fri, 29 May 2026 21:20:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="GYS2mI+e"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="oLAjWzBN"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1BB4037C906;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E5573812CD;
 	Fri, 29 May 2026 21:20:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780089629; cv=none; b=XA2gTtwlts0LrpNi+HvQG5GVUYj6rCR1ppwn6/3ca8S+b+zF6a1nXL2LTnuXUDDqW/m0vcg1PJsl2PDqLdlRrZlDN+xjQ99cW1aIkhsvuHkL1CHCEY5kI+K/bIhKs4SKxURwgA6nM+N4or+zBXMuDYJB+RyBF6s8mYdLId2uDLg=
+	t=1780089631; cv=none; b=NVbFTALPp/e7CgWc1ldBmHFlKWj//gHbK7QgkfpKxOql5gWiRDaQeNHU2aEHpHXQOCvL4QTWCT5lbtDArxGWjDOWMciZ7+fKIysFkNiCGHONaYCAd83RHDHhoux7a145dttZ0AD8JQ6MZNS4xwWv5Dcg6tYzMuirN6nfN3Jq8Qg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780089629; c=relaxed/simple;
-	bh=D056dRNoR9oA7TCTf5YDn2YTnuyKSIACzM6iLg9S7lM=;
+	s=arc-20240116; t=1780089631; c=relaxed/simple;
+	bh=Tf0qU8LB8uYD1kHFNSO8MCcwtZ5dg+gLpqoCHJKo/r0=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=bWs+v8Us+RI0xOBXl0n2NdrAfKwc8hAkIC46GnbrRVeAp7O3Sh0B62vb3TIK/fHee9Pb/ZIqEoPaDKQE0SyVbeeDqFznBwzjdp+UItIsRYxJI2waB+82S2PhXx2BFPwYbO+8tT8fyPUv+pOrAPFsGvJ7xplksMacPMbi6Eh3w9k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=pass smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=GYS2mI+e; arc=none smtp.client-ip=198.137.202.133
+	 MIME-Version; b=dZ9zyBPyWfgPIcZS7gkaAjhSjjOmELIZJVccPHUdQRLLch3ZKcERGMSZVjNFBDX++cBklXwSJvmhDbWKjuiHj7Fa9/S9wKYWp3AKk5Jz4FHCmiHXAtUdJLDZSNuEMlf9k0Tt8csgVuGMAVPJd0HHmZtXRZk9aXHMidIak1Gv9f0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=pass smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=oLAjWzBN; arc=none smtp.client-ip=198.137.202.133
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=infradead.org
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=N7Bca/B5hmAp/fuY2i7qJA/ehRCoNsUB9uBA43cnIqc=; b=GYS2mI+eJ38Ix8cOddsTIip8MO
-	bXE/QYockid7nZNwzCgZmDGkPVrprafdgebLea64wNjt9I/pvpMq12zvoYu5yhB1TWSqd9Caku+Ri
-	z10IK/Nq//mfOOwHAJ7PKFoWwYdhmH/Q2vMjGH6+v0tkMOU+M8n8CC1aIBY9yhZJLSgjt8SHyLOK2
-	gwVjd2Hjy8JRcBsGG2Hi0qsfh4KQUxLszlCt5iwL+zo86YeuW2jvyDpHpDgG+CCQSvLKJHKl+rA+v
-	bZUfWIR9sdXHUl2Cjb5lwlk+KcBolsuWsPjIMGbyLGkdGrX/++nyBkuC+n/Oy2MjgQSnV5sODPW6r
-	/UFXoVYw==;
+	bh=2wa/8Egzxo2dDMSvue2WkdpmvgoFhsomLNolAW13Grs=; b=oLAjWzBNZscOW1KuUyKbuIyS99
+	wXoMriz96y6RQFsk9ihC5jGW+lSQ4PqFL19UjqTcy3OOPYZ+BACiBVL06MB3sx3xYtjH0OF+IKwsM
+	25hMlCoj8urzrXLkibTLLNUxRWhmVz3YG3APMMEA2qyWlqtNjcQDw3gwWta2BOPTlNL18qttv8Rn6
+	9l/ugDwgPVhRrGLyXJWNtzFEYU7tuYSb//9oMVMHhnQ30h+V1imXJ3xoaFoOSL2Wp9Ucj99TzzGCz
+	vQN9LXleOIv/MfUzD50jioVdY/4QAi1aggtoeMOBo/BANp1llTTPmz1JxVGcGDo/1FETV6bgsK3qO
+	f1CDntaQ==;
 Received: from [50.53.43.113] (helo=bombadil.infradead.org)
 	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wT4d1-00000008F6L-3IGe;
-	Fri, 29 May 2026 21:20:27 +0000
+	id 1wT4d2-00000008F6L-0QwB;
+	Fri, 29 May 2026 21:20:28 +0000
 From: Randy Dunlap <rdunlap@infradead.org>
 To: linux-kernel@vger.kernel.org
 Cc: Randy Dunlap <rdunlap@infradead.org>,
@@ -57,9 +57,9 @@ Cc: Randy Dunlap <rdunlap@infradead.org>,
 	Jonathan Corbet <corbet@lwn.net>,
 	Shuah Khan <skhan@linuxfoundation.org>,
 	linux-doc@vger.kernel.org
-Subject: [PATCH v2 4/5] watchdog: core: clean up some comments
-Date: Fri, 29 May 2026 14:20:23 -0700
-Message-ID: <20260529212024.2119204-5-rdunlap@infradead.org>
+Subject: [PATCH v2 5/5] watchdog: dev: convert to kernel-doc comments
+Date: Fri, 29 May 2026 14:20:24 -0700
+Message-ID: <20260529212024.2119204-6-rdunlap@infradead.org>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260529212024.2119204-1-rdunlap@infradead.org>
 References: <20260529212024.2119204-1-rdunlap@infradead.org>
@@ -75,13 +75,13 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-90088-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90091-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
@@ -95,13 +95,13 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[roeck-us.net:email,infradead.org:email,infradead.org:mid,infradead.org:dkim,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: 60685608D13
+X-Rspamd-Queue-Id: 35488608D4E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Fix some grammar typos and bulleted kernel-doc comment format.
+Convert multiple functions to kernel-doc format.
 
 Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
 ---
@@ -111,37 +111,144 @@ Cc: Wim Van Sebroeck <wim@linux-watchdog.org>
 Cc: Guenter Roeck <linux@roeck-us.net>
 Cc: linux-watchdog@vger.kernel.org
 
- drivers/watchdog/watchdog_core.c |   12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ drivers/watchdog/watchdog_dev.c |   30 +++++++++++++++---------------
+ 1 file changed, 15 insertions(+), 15 deletions(-)
 
---- linux-next-20260525.orig/drivers/watchdog/watchdog_core.c
-+++ linux-next-20260525/drivers/watchdog/watchdog_core.c
-@@ -55,9 +55,9 @@ MODULE_PARM_DESC(stop_on_reboot, "Stop w
-  * for example when it's impossible to disable it. To do so,
-  * raising the initcall level of the watchdog driver is a solution.
-  * But in such case, the miscdev is maybe not ready (subsys_initcall), and
-- * watchdog_core need miscdev to register the watchdog as a char device.
-+ * watchdog_core needs miscdev to register the watchdog as a char device.
-  *
-- * The deferred registration infrastructure offer a way for the watchdog
-+ * The deferred registration infrastructure offers a way for the watchdog
-  * subsystem to register a watchdog properly, even before miscdev is ready.
-  */
+--- linux-next-20260525.orig/drivers/watchdog/watchdog_dev.c
++++ linux-next-20260525/drivers/watchdog/watchdog_dev.c
+@@ -176,7 +176,7 @@ static int __watchdog_ping(struct watchd
+ 	return err;
+ }
  
-@@ -222,11 +222,11 @@ static int watchdog_pm_notifier(struct n
-  * watchdog_set_restart_priority - Change priority of restart handler
-  * @wdd: watchdog device
-  * @priority: priority of the restart handler, should follow these guidelines:
-- *   0:   use watchdog's restart function as last resort, has limited restart
-- *        capabilies
-- *   128: default restart handler, use if no other handler is expected to be
-+ * * 0:   use watchdog's restart function as last resort, has limited restart
-+ *        capabilities
-+ * * 128: default restart handler, use if no other handler is expected to be
-  *        available and/or if restart is sufficient to restart the entire system
-- *   255: preempt all other handlers
-+ * * 255: preempt all other handlers
+-/*
++/**
+  * watchdog_ping - ping the watchdog
+  * @wdd: The watchdog device to ping
   *
-  * If a wdd->ops->restart function is provided when watchdog_register_device is
-  * called, it will be registered as a restart handler with the priority given
+@@ -236,7 +236,7 @@ static enum hrtimer_restart watchdog_tim
+ 	return HRTIMER_NORESTART;
+ }
+ 
+-/*
++/**
+  * watchdog_start - wrapper to start the watchdog
+  * @wdd: The watchdog device to start
+  *
+@@ -279,7 +279,7 @@ static int watchdog_start(struct watchdo
+ 	return err;
+ }
+ 
+-/*
++/**
+  * watchdog_stop - wrapper to stop the watchdog
+  * @wdd: The watchdog device to stop
+  *
+@@ -319,7 +319,7 @@ static int watchdog_stop(struct watchdog
+ 	return err;
+ }
+ 
+-/*
++/**
+  * watchdog_get_status - wrapper to get the watchdog status
+  * @wdd: The watchdog device to get the status from
+  *
+@@ -356,7 +356,7 @@ static unsigned int watchdog_get_status(
+ 	return status;
+ }
+ 
+-/*
++/**
+  * watchdog_set_timeout - set the watchdog timer timeout
+  * @wdd:	The watchdog device to set the timeout for
+  * @timeout:	Timeout to set in seconds
+@@ -391,7 +391,7 @@ static int watchdog_set_timeout(struct w
+ 	return err;
+ }
+ 
+-/*
++/**
+  * watchdog_set_pretimeout - set the watchdog timer pretimeout
+  * @wdd:	The watchdog device to set the timeout for
+  * @timeout:	pretimeout to set in seconds
+@@ -417,7 +417,7 @@ static int watchdog_set_pretimeout(struc
+ 	return err;
+ }
+ 
+-/*
++/**
+  * watchdog_get_timeleft - wrapper to get the time left before a reboot
+  * @wdd:	The watchdog device to get the remaining time from
+  * @timeleft:	The time that's left
+@@ -659,7 +659,7 @@ __ATTRIBUTE_GROUPS(wdt);
+ #define wdt_groups	NULL
+ #endif
+ 
+-/*
++/**
+  * watchdog_ioctl_op - call the watchdog drivers ioctl op if defined
+  * @wdd: The watchdog device to do the ioctl on
+  * @cmd: Watchdog command
+@@ -678,7 +678,7 @@ static int watchdog_ioctl_op(struct watc
+ 	return wdd->ops->ioctl(wdd, cmd, arg);
+ }
+ 
+-/*
++/**
+  * watchdog_write - writes to the watchdog
+  * @file:	File from VFS
+  * @data:	User address of data
+@@ -732,7 +732,7 @@ static ssize_t watchdog_write(struct fil
+ 	return len;
+ }
+ 
+-/*
++/**
+  * watchdog_ioctl - handle the different ioctl's for the watchdog device
+  * @file:	File handle to the device
+  * @cmd:	Watchdog command
+@@ -845,7 +845,7 @@ out_ioctl:
+ 	return err;
+ }
+ 
+-/*
++/**
+  * watchdog_open - open the /dev/watchdog* devices
+  * @inode:	Inode of device
+  * @file:	File handle to device
+@@ -923,7 +923,7 @@ static void watchdog_core_data_release(s
+ 	kfree(wd_data);
+ }
+ 
+-/*
++/**
+  * watchdog_release - release the watchdog device
+  * @inode:	Inode of device
+  * @file:	File handle to device
+@@ -932,7 +932,7 @@ static void watchdog_core_data_release(s
+  * stop the watchdog when we have received the magic char (and nowayout
+  * was not set), else the watchdog will keep running.
+  *
+- * Always returns 0.
++ * Returns: Always 0.
+  */
+ static int watchdog_release(struct inode *inode, struct file *file)
+ {
+@@ -1004,7 +1004,7 @@ static const struct class watchdog_class
+ 	.dev_groups =	wdt_groups,
+ };
+ 
+-/*
++/**
+  * watchdog_cdev_register - register watchdog character device
+  * @wdd: Watchdog device
+  *
+@@ -1105,7 +1105,7 @@ static int watchdog_cdev_register(struct
+ 	return 0;
+ }
+ 
+-/*
++/**
+  * watchdog_cdev_unregister - unregister watchdog character device
+  * @wdd: Watchdog device
+  *
 
