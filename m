@@ -1,133 +1,148 @@
-Return-Path: <linux-doc+bounces-89966-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89967-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id EJUuGL1KGWrzuQgAu9opvQ
-	(envelope-from <linux-doc+bounces-89966-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 10:13:49 +0200
+	id 2LAFHOJLGWrzuQgAu9opvQ
+	(envelope-from <linux-doc+bounces-89967-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 10:18:42 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DBCDC5FF09C
-	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 10:13:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C2ED75FF138
+	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 10:18:41 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 9A2A3302BE24
-	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 08:10:18 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 93900300DF52
+	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 08:18:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EFA0833262F;
-	Fri, 29 May 2026 08:10:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LwGB8HVG"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E614C3ACA5C;
+	Fri, 29 May 2026 08:18:21 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ua1-f41.google.com (mail-ua1-f41.google.com [209.85.222.41])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AA6E72E738D;
-	Fri, 29 May 2026 08:10:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8851A3264FF
+	for <linux-doc@vger.kernel.org>; Fri, 29 May 2026 08:18:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.41
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780042217; cv=none; b=ihA744YSvZvNZWh53MgeEO5JuYSLR5s6C+3VgrCBqgyzbeE3TP3v2LapSOUEN0QUmZ+9yQ4zBuowXTu83LW5r2pJrbYRPzyDq+dBmJcrlHuhw3Mv2MTJoZE3GN3ltPQI2Hdh68XdGlwqYkQ7krwt+RCgcKagFc1jRPu4p1kKJbg=
+	t=1780042701; cv=none; b=lQ8wPOG2ZhfLFu44uJIDXgadMOODxi0P6hg1++Vtb0RT6eM+SiW9Fo3VesqUeU3uVw5Cmcs3CHF+eI0oNeLpX2L6vlaIcTwCZ83ZC2Xl9nKC+ujhtcjpUk2a1C1A3M3e6gmgdrdM2jMMNIBootkC9ub8+nE0z0fFlmJ2YuNh9Es=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780042217; c=relaxed/simple;
-	bh=0W72ydZqmI6mxoK1+bSQsOPKaMVOTs3M3FlsTpigygw=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=NKdrq0Jaz/1dm5cQgC3Nmh70yb/QVpON2lTfimUqEeQsmNdTkDd/ibAB/QuvaxZCDcgm0S8JWAgNHvtyvRdTLu/002KExf8ye186qIHLkliWQ9Op04Q3PRks+n4JWnn5mEIRKYeN2H5jn67ugmnsTJKWK/UcrLMWZYeVLwFtUDI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LwGB8HVG; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id B68501F00893;
-	Fri, 29 May 2026 08:10:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1780042216;
-	bh=V5qRgA2ROeHWtOc+ZEDIqpNcjk2nHWKmuZJ6ZxGRCmc=;
-	h=From:To:Cc:Subject:Date;
-	b=LwGB8HVG5+dtrFJR7Zl8nYKLjd+YcQ7vDN6Nh5OopGf3FccvZ2tlc18LqpXLl0XAZ
-	 TYgBU9RmYRIzugsaV/kYtFMvIaQ5KVjP4aeJdvAdCgR7xM8XDl0epi3BcnUfQ6xqyL
-	 Pa0SJltGFSXqMweJcUWa3Qro8nm5htfokcPYHEhFnrfNiQZtAuUWwnrGM3ngO83R2M
-	 eboQmYzTUud+IX6GHtYy0nFPBsUu2BoQPyTsKpkWKLCReCJquqNqobt+ABVG9llua2
-	 JnlSg/LFARE1qW5nSIdI2ziR10uyjHhx0B3moyq4V4icA7wHT3VtBHh9ec6OkvuhKW
-	 CzoA2PT3KCMrQ==
-From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <ukleinek@kernel.org>
-To: Jonathan Corbet <corbet@lwn.net>,
-	Manuel Ebner <manuelebner@mailbox.org>,
-	"Vlastimil Babka (SUSE)" <vbabka@kernel.org>,
-	SeongJae Park <sj@kernel.org>
-Cc: Shuah Khan <skhan@linuxfoundation.org>,
-	workflows@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH] Documentation: Fix syntax of kmalloc_objs example in coding style doc
-Date: Fri, 29 May 2026 10:10:05 +0200
-Message-ID: <20260529081006.2019687-2-ukleinek@kernel.org>
-X-Mailer: git-send-email 2.47.3
+	s=arc-20240116; t=1780042701; c=relaxed/simple;
+	bh=U6STYFc1MSV2t8PYiQhu3Ra9FUPADWa8sNTge/8tcUA=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=f6IGvJiPX38NOR04dAMxMJezOJMiyrqbmHWFLzuxCmbNjPospTD4MaoWpArBF2mgBqv27qw7TNsYxsWr/A53kGd6CA+XfID5ykYmEyyMrg/uCDj3fn6daqyeW7BKqxPijqj7yqgUTZ1DACzeQgTqlDBuo/1uywo2U+B/kLl1N20=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-m68k.org; spf=pass smtp.mailfrom=gmail.com; arc=none smtp.client-ip=209.85.222.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-m68k.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-ua1-f41.google.com with SMTP id a1e0cc1a2514c-95697b46831so8688808241.0
+        for <linux-doc@vger.kernel.org>; Fri, 29 May 2026 01:18:20 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780042699; x=1780647499;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=Y9alDc2PG7AUKpxvXQsiRJG2TJjrrZTsIKTRjeEkVAY=;
+        b=ZeJ6FqJMQLxmutc3YyXz+vQVvwCWEow5xzgIX/Lhw8pT891chjXDgrbGCaHPrDOHxY
+         o+KS/WjA9O+KiWFQsHemPdL9Hs/MsXP8w5fBo+EurNnIkC/+OuHEVIxYhaIQOEq+taer
+         kuCmwIPtuGatgxm23+Grqtd64JCkfR41F3Cxbwrxzn+YeK+SNC/1O2p9gV52qmuGwXBk
+         xhMogvVxHrrBJlS1QPW7+YwU8eYMgFdwjphE+j7OwZaXwOx7kyEZfsfwjtSVEgmgkpBe
+         HX8S+Ob/6KyRRWqoyY3K4nV20zPdmWg0dziBI9LKHJ8QaJFKvBsItvwyElpgRn2QhU6z
+         ksAA==
+X-Forwarded-Encrypted: i=1; AFNElJ9F+T2VX/1BNxlAdmJAzzGjYES4guawLl1c9mHKBxWLOTFLeJ1DVjrF2FfXQDsqlskdSee5qU4yVLQ=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzSz7xXtJiyxTOJMJXzY+PA2zcC4NwzOe351AkD5H4SkES2PaYH
+	zYKyTTnES/dmqVaeOqhfVsdcfU7/eTapXrYsBA/Y4njUzmCf8nGSovPOjrE5Jk1nJM4=
+X-Gm-Gg: Acq92OFZSWlypgxA+S6DWSN9agYkYPZH/eT42Mawv0C27Tddsdm0Ma3p6V8pSRCz10o
+	azkjCR2NVy1q3d1S77B2e/bNhbT59pWg5fUP3AE7q/AnE5S+vy3WyK8gQ5+3akeaC1LNN5DuQK1
+	GgM51EPWPmZ4SWEMEYlqm5v6FGTKRRS8EdZ83i5UIyiaHtk1dR3Y/5Kj4jX3MjnKCcjdMev7Qm4
+	pvvcDvC41bYsrCaMvw7U299dBB1SxuvhVjczihovFoBsFsOHwWUTR4LhV3ugDHG7Jb40WwK5r8V
+	nol5poyvnsoN0bLOilXBM0maI1NFyDKmsyAr6Xkc7lMhFFy94dS59skKgfnGUqu4r8M1Lbu25D6
+	GMl/hbQ3FI17iRt0bL7o281gI1RkIYnaQrBNdvm/ijxqTb/MADfhi7hm6rwrRCv2sp3YzRJ+ToM
+	tMIhHz2dRbAifFDFNOddPTKZXCzkX78eBSIrncSy+kUxHmWF61nYhvqAOJosfz4hDcRyig4Tk=
+X-Received: by 2002:a05:6102:3711:b0:607:95f4:53b5 with SMTP id ada2fe7eead31-6bf2b14b116mr644551137.4.1780042699603;
+        Fri, 29 May 2026 01:18:19 -0700 (PDT)
+Received: from mail-ua1-f45.google.com (mail-ua1-f45.google.com. [209.85.222.45])
+        by smtp.gmail.com with ESMTPSA id ada2fe7eead31-6bfa6da4d7bsm675787137.0.2026.05.29.01.18.18
+        for <linux-doc@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 29 May 2026 01:18:19 -0700 (PDT)
+Received: by mail-ua1-f45.google.com with SMTP id a1e0cc1a2514c-9639d7daff3so842539241.1
+        for <linux-doc@vger.kernel.org>; Fri, 29 May 2026 01:18:18 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AFNElJ9ASzfMb4PBBIk7cb7WXgcWF+cvrl1u5OCUNXsrXHx/94bSZhp8KQROIk9noU4Ig/I+uPsxjXdajzc=@vger.kernel.org
+X-Received: by 2002:a05:6102:3e1e:b0:631:3bbb:f23f with SMTP id
+ ada2fe7eead31-6bf3dd78c59mr540627137.26.1780042698332; Fri, 29 May 2026
+ 01:18:18 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1175; i=ukleinek@kernel.org; h=from:subject; bh=0W72ydZqmI6mxoK1+bSQsOPKaMVOTs3M3FlsTpigygw=; b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBqGUneaKniyMOCFm/99aBv7XGHqSBw9VpaWPFMo pTAmNWjPSiJATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCahlJ3gAKCRCPgPtYfRL+ TgHXB/wI+7j87/JPTHpITBfEu3OAwThBxY7QkYzwhbltecfNAdKWXXMlArgajIrUtgDi9G0Q8H3 1qqa5C35i3Sr4bgbUegKy5bJ4L6FR/Jiynu4SPNO3eerQ5J93nh6AG+HLE0o0mDLftVf34drzVt q2Sm+QPCkxEnOYVSbX4WEV4P6bhfcejgWGKqv+4jNXZfI8ppeVnaeV8d+PZ9jT+7yTP8Dt07rhQ GmemAVlJwF60g1PfILQ59v8hfr8gRovRVoRaso+eSSCaVWzl7mFPp9BdHqjTSm6saik9ly9wUtN u83fyjpA//GoJ/9KUcrl6GIvx6/NzoxqyMS/MP81v0mQhNH7
-X-Developer-Key: i=ukleinek@kernel.org; a=openpgp; fpr=0D2511F322BFAB1C1580266BE2DCDD9132669BD6
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-1.16 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+References: <20260529081006.2019687-2-ukleinek@kernel.org>
+In-Reply-To: <20260529081006.2019687-2-ukleinek@kernel.org>
+From: Geert Uytterhoeven <geert@linux-m68k.org>
+Date: Fri, 29 May 2026 10:18:07 +0200
+X-Gmail-Original-Message-ID: <CAMuHMdVRuOxznAK3HP_GSGGv+RdkTxkWb5-6xwnUs50qQnbnUg@mail.gmail.com>
+X-Gm-Features: AVHnY4JEuppnDpcn_tQwKsOIJi3aBauvsKBhjusGGgi5MxkY-7ZvXd-5Sqe46dE
+Message-ID: <CAMuHMdVRuOxznAK3HP_GSGGv+RdkTxkWb5-6xwnUs50qQnbnUg@mail.gmail.com>
+Subject: Re: [PATCH] Documentation: Fix syntax of kmalloc_objs example in
+ coding style doc
+To: =?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig?= <ukleinek@kernel.org>
+Cc: Jonathan Corbet <corbet@lwn.net>, Manuel Ebner <manuelebner@mailbox.org>, 
+	"Vlastimil Babka (SUSE)" <vbabka@kernel.org>, SeongJae Park <sj@kernel.org>, 
+	Shuah Khan <skhan@linuxfoundation.org>, workflows@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spamd-Result: default: False [-1.46 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-89966-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ukleinek@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[8];
+	TAGGED_FROM(0.00)[bounces-89967-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	MIME_TRACE(0.00)[0:+];
+	DMARC_NA(0.00)[linux-m68k.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: DBCDC5FF09C
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[geert@linux-m68k.org,linux-doc@vger.kernel.org];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	R_DKIM_NA(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,glider.be:email,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,linux-m68k.org:email]
+X-Rspamd-Queue-Id: C2ED75FF138
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-The first parameter should match the variable that the allocated memory
-is assigned to. Fix the example accordingly, the one for kmalloc_obj got
-it right already.
+On Fri, 29 May 2026 at 10:13, Uwe Kleine-K=C3=B6nig <ukleinek@kernel.org> w=
+rote:
+> The first parameter should match the variable that the allocated memory
+> is assigned to. Fix the example accordingly, the one for kmalloc_obj got
+> it right already.
+>
+> Fixes: 7c6d969d5349 ("Documentation: adopt new coding style of type-aware=
+ kmalloc-family")
+> Signed-off-by: Uwe Kleine-K=C3=B6nig <ukleinek@kernel.org>
 
-Fixes: 7c6d969d5349 ("Documentation: adopt new coding style of type-aware kmalloc-family")
-Signed-off-by: Uwe Kleine-König <ukleinek@kernel.org>
----
- Documentation/process/coding-style.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
 
-diff --git a/Documentation/process/coding-style.rst b/Documentation/process/coding-style.rst
-index a3bf75dc7c88..a8336582f60b 100644
---- a/Documentation/process/coding-style.rst
-+++ b/Documentation/process/coding-style.rst
-@@ -959,13 +959,13 @@ The preferred form for allocating an array is the following:
- 
- .. code-block:: c
- 
--	p = kmalloc_objs(*ptr, n, ...);
-+	p = kmalloc_objs(*p, n, ...);
- 
- The preferred form for allocating a zeroed array is the following:
- 
- .. code-block:: c
- 
--	p = kzalloc_objs(*ptr, n, ...);
-+	p = kzalloc_objs(*p, n, ...);
- 
- Both forms check for overflow on the allocation size n * sizeof(...),
- and return NULL if that occurred.
+Gr{oetje,eeting}s,
 
-base-commit: f7af91adc230aa99e23330ecf85bc9badd9780ad
--- 
-2.47.3
+                        Geert
 
+--=20
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k=
+.org
+
+In personal conversations with technical people, I call myself a hacker. Bu=
+t
+when I'm talking to journalists I just say "programmer" or something like t=
+hat.
+                                -- Linus Torvalds
 
