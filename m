@@ -1,53 +1,52 @@
-Return-Path: <linux-doc+bounces-89981-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-89982-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CPf4Gz1iGWrDvwgAu9opvQ
-	(envelope-from <linux-doc+bounces-89981-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 11:54:05 +0200
+	id 8JR6HltiGWrDvwgAu9opvQ
+	(envelope-from <linux-doc+bounces-89982-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 11:54:35 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id DA4D760042C
-	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 11:54:04 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3AA64600473
+	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 11:54:35 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 5C7A530F8425
-	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 09:51:46 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 615D9311BB35
+	for <lists+linux-doc@lfdr.de>; Fri, 29 May 2026 09:51:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B79223C8705;
-	Fri, 29 May 2026 09:51:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E33683C9EF0;
+	Fri, 29 May 2026 09:51:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="B4irZ3Z4"
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="IKIZrNKz"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E120F3BCD10;
-	Fri, 29 May 2026 09:51:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AB3DC3C9891;
+	Fri, 29 May 2026 09:51:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780048291; cv=none; b=IwRahztcKG8z5stbSx8G1nJRtyykkB1Ia0z/kloCUzydqh2NpA/DPeSfY1LPMITbnNBlFqqtYu43wvOYIh7AszANJRUrHtC5ERe7Rw7MZUtpM7/PipIvMpyD7R9IDpfm/emhgWvOwcI8uZ1Nl7HG44j7cBkLAIlBY8Ptf9eEp48=
+	t=1780048297; cv=none; b=SgtQbc5X555c01mCIPEqiV2Bn9pkoNsKixuefR5NZoRUTWcFnqV0HXld+4QbeaP1bjBhNTW1xYqIujAAdWv97ytDKhjVWCsBIWO0DqaA2Br6ZZQ3osRQnk0izsVv0h5g0NxHwCFov6OrMAMDLBqNKJqAndEBOPCA+3EFG3TZnJU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780048291; c=relaxed/simple;
-	bh=VBlXOTXQbKAdsShF6qFXMsgKYyrtlFR0YPM4M0Q4J+4=;
+	s=arc-20240116; t=1780048297; c=relaxed/simple;
+	bh=lFx22FK8BwhqLRtXVDa7n9zPnHQJet90r0IFTaX1i1s=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=StA9XdUDlHnwH6r8z0Zva3LRmu5l7kfbibfBX62689F+KemW7WugoZuJC5SvKmpzOkhWHHEB1X0Gp6SNoiuovlwI7rKnZCipT7mvWPp5bHmNPM9nD/YYdYA0G6OzNCqLyP6x4xzjt8qQX8mre3fckJGlf+xHlh9G0xWCLrGymdQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=B4irZ3Z4; arc=none smtp.client-ip=217.140.110.172
+	 In-Reply-To:To:Cc; b=kyGFsMBmUs6UJKED+t91d+6/jlarsAmuMtWT963acr9zVBqZ8YZ69D3X2PC6CeQyhexIXNrqRbQ2xUwGsshMf1z3T7f2fx8Ht2zXjw93LQAzcF6UTiajLG9ChYRGVNuwKM18Jhs2IwNEsVm1kme6zC1xoZBeqQOzaQRnl6xuExA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=IKIZrNKz; arc=none smtp.client-ip=217.140.110.172
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5438132E5;
-	Fri, 29 May 2026 02:51:23 -0700 (PDT)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0933522D7;
+	Fri, 29 May 2026 02:51:28 -0700 (PDT)
 Received: from e134710.arm.com (e134710.arm.com [10.33.10.82])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E7DE23F905;
-	Fri, 29 May 2026 02:51:23 -0700 (PDT)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A2FC93F905;
+	Fri, 29 May 2026 02:51:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1780048288; bh=VBlXOTXQbKAdsShF6qFXMsgKYyrtlFR0YPM4M0Q4J+4=;
+	t=1780048293; bh=lFx22FK8BwhqLRtXVDa7n9zPnHQJet90r0IFTaX1i1s=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=B4irZ3Z4/zfk0EBeRDsa/WC/W5U5zyLZKeSj8pIUCTaeWyiHuZK2T6hhOsssIzI2J
-	 uKFz1Qg+ZRViPXJzaOaEsHuTeAmrI7BDU5gWnllKWp7PXHp+eoWPQDzCdfHiBsulOQ
-	 L0Q4umz2ph3b22RfxH7/4DA2p2MdCeHitrCVLrzU=
+	b=IKIZrNKz1w5bbzAPhqxgS4wkKjGAwtbT64bmt5iXfcU2V2FonliMgD0QXyZIsz8do
+	 QqhOMjAZUB9HtWcKoOkUS/sOPFDkdMlXHYftEqnx14WG9MQcqD70dkCbfRtsEUWavX
+	 kW1hoH9ygE6OtKkBfOrOsVvX3Rme1CHVYOV/DHyw=
 From: Ahmed Tiba <ahmed.tiba@arm.com>
-Date: Fri, 29 May 2026 10:50:43 +0100
-Subject: [PATCH v5 03/10] ACPI: APEI: GHES: move GHESv2 ack and alloc
- helpers
+Date: Fri, 29 May 2026 10:50:44 +0100
+Subject: [PATCH v5 04/10] ACPI: APEI: GHES: move estatus cache helpers
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -56,7 +55,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260529-topics-ahmtib01-ras_ffh_arm_internal_review-v5-3-2e0500d42642@arm.com>
+Message-Id: <20260529-topics-ahmtib01-ras_ffh_arm_internal_review-v5-4-2e0500d42642@arm.com>
 References: <20260529-topics-ahmtib01-ras_ffh_arm_internal_review-v5-0-2e0500d42642@arm.com>
 In-Reply-To: <20260529-topics-ahmtib01-ras_ffh_arm_internal_review-v5-0-2e0500d42642@arm.com>
 To: will@kernel.org, jic23@kernel.org, xueshuai@linux.alibaba.com, 
@@ -73,18 +72,18 @@ Cc: Ahmed Tiba <ahmed.tiba@arm.com>, linux-arm-kernel@lists.infradead.org,
  linux-acpi@vger.kernel.org, linux-edac@vger.kernel.org, 
  acpica-devel@lists.linux.dev
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780048269; l=4727;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780048269; l=11290;
  i=ahmed.tiba@arm.com; s=20260219; h=from:subject:message-id;
- bh=VBlXOTXQbKAdsShF6qFXMsgKYyrtlFR0YPM4M0Q4J+4=;
- b=UJCFPKdH2IlyS25gSMshUk/Zhz1uXbuPB5ZLh9cN+UWLZeQvUTAEEAolq+bBCezwHYeCELlo/
- Q6TewpzQghHD+7sIOe+8rhHVQDivdsgQYaOslhm18D2QBD5EZw9OEkW
+ bh=lFx22FK8BwhqLRtXVDa7n9zPnHQJet90r0IFTaX1i1s=;
+ b=SRigsCIzuicXgXu6KXQKiOnNICRrcCKoYHTED6AiIpcNs82LTNCJkQbr/QLdCdhy07fMq8gga
+ 7zEfHMZZvW4C75hv9AsedWT8m3s+fwKZAqI3PihoAAdG/ZGR23wBqzA
 X-Developer-Key: i=ahmed.tiba@arm.com; a=ed25519;
  pk=xVOtd+Qklh/4tuM3tB+BEZD4jj5a6W59C3KCNX6v7OE=
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -92,7 +91,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	RCPT_COUNT_TWELVE(0.00)[33];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-89981-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-89982-lists,linux-doc=lfdr.de];
 	DKIM_TRACE(0.00)[arm.com:+];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
@@ -101,178 +100,379 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[ahmed.tiba@arm.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:email,arm.com:mid,arm.com:dkim,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: DA4D760042C
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,arm.com:email,arm.com:mid,arm.com:dkim]
+X-Rspamd-Queue-Id: 3AA64600473
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Move the GHESv2 acknowledgment and error-source allocation helpers from
-ghes.c into ghes_cper.c. This is a mechanical refactor that keeps the
-logic unchanged while making the helpers reusable.
+Relocate the estatus cache allocation and lookup helpers from ghes.c into
+ghes_cper.c. This code move keeps the logic intact while making the cache
+implementation available to forthcoming users.
 
 Signed-off-by: Ahmed Tiba <ahmed.tiba@arm.com>
 ---
- drivers/acpi/apei/ghes.c      | 65 -------------------------------------------
- drivers/acpi/apei/ghes_cper.c | 65 +++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 65 insertions(+), 65 deletions(-)
+ drivers/acpi/apei/ghes.c      | 138 +----------------------------------------
+ drivers/acpi/apei/ghes_cper.c | 140 ++++++++++++++++++++++++++++++++++++++++++
+ include/acpi/ghes_cper.h      |   6 ++
+ 3 files changed, 147 insertions(+), 137 deletions(-)
 
 diff --git a/drivers/acpi/apei/ghes.c b/drivers/acpi/apei/ghes.c
-index 3f35580e8efd..91638ae7e05e 100644
+index 91638ae7e05e..adab7404310e 100644
 --- a/drivers/acpi/apei/ghes.c
 +++ b/drivers/acpi/apei/ghes.c
-@@ -163,71 +163,6 @@ void ghes_estatus_pool_region_free(unsigned long addr, u32 size)
- }
- EXPORT_SYMBOL_GPL(ghes_estatus_pool_region_free);
+@@ -113,10 +113,7 @@ static DEFINE_MUTEX(ghes_devs_mutex);
+  */
+ static DEFINE_SPINLOCK(ghes_notify_lock_irq);
  
--static int map_gen_v2(struct ghes *ghes)
--{
--	return apei_map_generic_address(&ghes->generic_v2->read_ack_register);
--}
+-static struct gen_pool *ghes_estatus_pool;
 -
--static void unmap_gen_v2(struct ghes *ghes)
--{
--	apei_unmap_generic_address(&ghes->generic_v2->read_ack_register);
--}
--
--struct ghes *ghes_new(struct acpi_hest_generic *generic)
--{
--	struct ghes *ghes;
--	unsigned int error_block_length;
--	int rc;
--
--	ghes = kzalloc_obj(*ghes);
--	if (!ghes)
--		return ERR_PTR(-ENOMEM);
--
--	ghes->generic = generic;
--	if (is_hest_type_generic_v2(ghes)) {
--		rc = map_gen_v2(ghes);
--		if (rc)
--			goto err_free;
--	}
--
--	rc = apei_map_generic_address(&generic->error_status_address);
--	if (rc)
--		goto err_unmap_read_ack_addr;
--	error_block_length = generic->error_block_length;
--	if (error_block_length > GHES_ESTATUS_MAX_SIZE) {
--		pr_warn(FW_WARN GHES_PFX
--			"Error status block length is too long: %u for "
--			"generic hardware error source: %d.\n",
--			error_block_length, generic->header.source_id);
--		error_block_length = GHES_ESTATUS_MAX_SIZE;
--	}
--	ghes->estatus = kmalloc(error_block_length, GFP_KERNEL);
--	ghes->estatus_length = error_block_length;
--	if (!ghes->estatus) {
--		rc = -ENOMEM;
--		goto err_unmap_status_addr;
--	}
--
--	return ghes;
--
--err_unmap_status_addr:
--	apei_unmap_generic_address(&generic->error_status_address);
--err_unmap_read_ack_addr:
--	if (is_hest_type_generic_v2(ghes))
--		unmap_gen_v2(ghes);
--err_free:
--	kfree(ghes);
--	return ERR_PTR(rc);
--}
--
--void ghes_fini(struct ghes *ghes)
--{
--	kfree(ghes->estatus);
--	apei_unmap_generic_address(&ghes->generic->error_status_address);
--	if (is_hest_type_generic_v2(ghes))
--		unmap_gen_v2(ghes);
--}
--
- static inline int ghes_severity(int severity)
+-static struct ghes_estatus_cache __rcu *ghes_estatus_caches[GHES_ESTATUS_CACHES_SIZE];
+-static atomic_t ghes_estatus_cache_alloced;
++struct gen_pool *ghes_estatus_pool;
+ 
+ int ghes_estatus_pool_init(unsigned int num_ghes)
  {
- 	switch (severity) {
+@@ -733,139 +730,6 @@ static int ghes_print_estatus(const char *pfx,
+ 	return 0;
+ }
+ 
+-/*
+- * GHES error status reporting throttle, to report more kinds of
+- * errors, instead of just most frequently occurred errors.
+- */
+-static int ghes_estatus_cached(struct acpi_hest_generic_status *estatus)
+-{
+-	u32 len;
+-	int i, cached = 0;
+-	unsigned long long now;
+-	struct ghes_estatus_cache *cache;
+-	struct acpi_hest_generic_status *cache_estatus;
+-
+-	len = cper_estatus_len(estatus);
+-	rcu_read_lock();
+-	for (i = 0; i < GHES_ESTATUS_CACHES_SIZE; i++) {
+-		cache = rcu_dereference(ghes_estatus_caches[i]);
+-		if (cache == NULL)
+-			continue;
+-		if (len != cache->estatus_len)
+-			continue;
+-		cache_estatus = GHES_ESTATUS_FROM_CACHE(cache);
+-		if (memcmp(estatus, cache_estatus, len))
+-			continue;
+-		atomic_inc(&cache->count);
+-		now = sched_clock();
+-		if (now - cache->time_in < GHES_ESTATUS_IN_CACHE_MAX_NSEC)
+-			cached = 1;
+-		break;
+-	}
+-	rcu_read_unlock();
+-	return cached;
+-}
+-
+-static struct ghes_estatus_cache *ghes_estatus_cache_alloc(
+-	struct acpi_hest_generic *generic,
+-	struct acpi_hest_generic_status *estatus)
+-{
+-	int alloced;
+-	u32 len, cache_len;
+-	struct ghes_estatus_cache *cache;
+-	struct acpi_hest_generic_status *cache_estatus;
+-
+-	alloced = atomic_add_return(1, &ghes_estatus_cache_alloced);
+-	if (alloced > GHES_ESTATUS_CACHE_ALLOCED_MAX) {
+-		atomic_dec(&ghes_estatus_cache_alloced);
+-		return NULL;
+-	}
+-	len = cper_estatus_len(estatus);
+-	cache_len = GHES_ESTATUS_CACHE_LEN(len);
+-	cache = (void *)gen_pool_alloc(ghes_estatus_pool, cache_len);
+-	if (!cache) {
+-		atomic_dec(&ghes_estatus_cache_alloced);
+-		return NULL;
+-	}
+-	cache_estatus = GHES_ESTATUS_FROM_CACHE(cache);
+-	memcpy(cache_estatus, estatus, len);
+-	cache->estatus_len = len;
+-	atomic_set(&cache->count, 0);
+-	cache->generic = generic;
+-	cache->time_in = sched_clock();
+-	return cache;
+-}
+-
+-static void ghes_estatus_cache_rcu_free(struct rcu_head *head)
+-{
+-	struct ghes_estatus_cache *cache;
+-	u32 len;
+-
+-	cache = container_of(head, struct ghes_estatus_cache, rcu);
+-	len = cper_estatus_len(GHES_ESTATUS_FROM_CACHE(cache));
+-	len = GHES_ESTATUS_CACHE_LEN(len);
+-	gen_pool_free(ghes_estatus_pool, (unsigned long)cache, len);
+-	atomic_dec(&ghes_estatus_cache_alloced);
+-}
+-
+-static void
+-ghes_estatus_cache_add(struct acpi_hest_generic *generic,
+-		       struct acpi_hest_generic_status *estatus)
+-{
+-	unsigned long long now, duration, period, max_period = 0;
+-	struct ghes_estatus_cache *cache, *new_cache;
+-	struct ghes_estatus_cache __rcu *victim;
+-	int i, slot = -1, count;
+-
+-	new_cache = ghes_estatus_cache_alloc(generic, estatus);
+-	if (!new_cache)
+-		return;
+-
+-	rcu_read_lock();
+-	now = sched_clock();
+-	for (i = 0; i < GHES_ESTATUS_CACHES_SIZE; i++) {
+-		cache = rcu_dereference(ghes_estatus_caches[i]);
+-		if (cache == NULL) {
+-			slot = i;
+-			break;
+-		}
+-		duration = now - cache->time_in;
+-		if (duration >= GHES_ESTATUS_IN_CACHE_MAX_NSEC) {
+-			slot = i;
+-			break;
+-		}
+-		count = atomic_read(&cache->count);
+-		period = duration;
+-		do_div(period, (count + 1));
+-		if (period > max_period) {
+-			max_period = period;
+-			slot = i;
+-		}
+-	}
+-	rcu_read_unlock();
+-
+-	if (slot != -1) {
+-		/*
+-		 * Use release semantics to ensure that ghes_estatus_cached()
+-		 * running on another CPU will see the updated cache fields if
+-		 * it can see the new value of the pointer.
+-		 */
+-		victim = xchg_release(&ghes_estatus_caches[slot],
+-				      RCU_INITIALIZER(new_cache));
+-
+-		/*
+-		 * At this point, victim may point to a cached item different
+-		 * from the one based on which we selected the slot. Instead of
+-		 * going to the loop again to pick another slot, let's just
+-		 * drop the other item anyway: this may cause a false cache
+-		 * miss later on, but that won't cause any problems.
+-		 */
+-		if (victim)
+-			call_rcu(&unrcu_pointer(victim)->rcu,
+-				 ghes_estatus_cache_rcu_free);
+-	}
+-}
+-
+ static void __ghes_panic(struct ghes *ghes,
+ 			 struct acpi_hest_generic_status *estatus,
+ 			 u64 buf_paddr, enum fixed_addresses fixmap_idx)
 diff --git a/drivers/acpi/apei/ghes_cper.c b/drivers/acpi/apei/ghes_cper.c
-index 7bb72fe57838..8080e0f76dac 100644
+index 8080e0f76dac..0a117f478afb 100644
 --- a/drivers/acpi/apei/ghes_cper.c
 +++ b/drivers/acpi/apei/ghes_cper.c
-@@ -62,6 +62,71 @@ static void ghes_ack_error(struct acpi_hest_generic_v2 *gv2)
- 	apei_write(val, &gv2->read_ack_register);
- }
+@@ -13,10 +13,14 @@
+  */
  
-+static int map_gen_v2(struct ghes *ghes)
+ #include <linux/err.h>
++#include <linux/genalloc.h>
+ #include <linux/io.h>
+ #include <linux/kernel.h>
++#include <linux/math64.h>
+ #include <linux/mm.h>
+ #include <linux/ratelimit.h>
++#include <linux/rcupdate.h>
++#include <linux/sched/clock.h>
+ #include <linux/slab.h>
+ 
+ #include <acpi/apei.h>
+@@ -27,6 +31,9 @@
+ 
+ #include "apei-internal.h"
+ 
++static struct ghes_estatus_cache __rcu *ghes_estatus_caches[GHES_ESTATUS_CACHES_SIZE];
++static atomic_t ghes_estatus_cache_alloced;
++
+ static void __iomem *ghes_map(u64 pfn, enum fixed_addresses fixmap_idx)
+ {
+ 	phys_addr_t paddr;
+@@ -258,3 +265,136 @@ void ghes_clear_estatus(struct ghes *ghes,
+ 	if (is_hest_type_generic_v2(ghes))
+ 		ghes_ack_error(ghes->generic_v2);
+ }
++
++/*
++ * GHES error status reporting throttle, to report more kinds of
++ * errors, instead of just most frequently occurred errors.
++ */
++int ghes_estatus_cached(struct acpi_hest_generic_status *estatus)
 +{
-+	return apei_map_generic_address(&ghes->generic_v2->read_ack_register);
-+}
++	u32 len;
++	int i, cached = 0;
++	unsigned long long now;
++	struct ghes_estatus_cache *cache;
++	struct acpi_hest_generic_status *cache_estatus;
 +
-+static void unmap_gen_v2(struct ghes *ghes)
-+{
-+	apei_unmap_generic_address(&ghes->generic_v2->read_ack_register);
-+}
-+
-+struct ghes *ghes_new(struct acpi_hest_generic *generic)
-+{
-+	struct ghes *ghes;
-+	unsigned int error_block_length;
-+	int rc;
-+
-+	ghes = kzalloc_obj(*ghes);
-+	if (!ghes)
-+		return ERR_PTR(-ENOMEM);
-+
-+	ghes->generic = generic;
-+	if (is_hest_type_generic_v2(ghes)) {
-+		rc = map_gen_v2(ghes);
-+		if (rc)
-+			goto err_free;
++	len = cper_estatus_len(estatus);
++	rcu_read_lock();
++	for (i = 0; i < GHES_ESTATUS_CACHES_SIZE; i++) {
++		cache = rcu_dereference(ghes_estatus_caches[i]);
++		if (cache == NULL)
++			continue;
++		if (len != cache->estatus_len)
++			continue;
++		cache_estatus = GHES_ESTATUS_FROM_CACHE(cache);
++		if (memcmp(estatus, cache_estatus, len))
++			continue;
++		atomic_inc(&cache->count);
++		now = sched_clock();
++		if (now - cache->time_in < GHES_ESTATUS_IN_CACHE_MAX_NSEC)
++			cached = 1;
++		break;
 +	}
-+
-+	rc = apei_map_generic_address(&generic->error_status_address);
-+	if (rc)
-+		goto err_unmap_read_ack_addr;
-+	error_block_length = generic->error_block_length;
-+	if (error_block_length > GHES_ESTATUS_MAX_SIZE) {
-+		pr_warn(FW_WARN GHES_PFX
-+			"Error status block length is too long: %u for "
-+			"generic hardware error source: %d.\n",
-+			error_block_length, generic->header.source_id);
-+		error_block_length = GHES_ESTATUS_MAX_SIZE;
-+	}
-+	ghes->estatus = kmalloc(error_block_length, GFP_KERNEL);
-+	ghes->estatus_length = error_block_length;
-+	if (!ghes->estatus) {
-+		rc = -ENOMEM;
-+		goto err_unmap_status_addr;
-+	}
-+
-+	return ghes;
-+
-+err_unmap_status_addr:
-+	apei_unmap_generic_address(&generic->error_status_address);
-+err_unmap_read_ack_addr:
-+	if (is_hest_type_generic_v2(ghes))
-+		unmap_gen_v2(ghes);
-+err_free:
-+	kfree(ghes);
-+	return ERR_PTR(rc);
++	rcu_read_unlock();
++	return cached;
 +}
 +
-+void ghes_fini(struct ghes *ghes)
++static struct ghes_estatus_cache *ghes_estatus_cache_alloc(
++	struct acpi_hest_generic *generic,
++	struct acpi_hest_generic_status *estatus)
 +{
-+	kfree(ghes->estatus);
-+	apei_unmap_generic_address(&ghes->generic->error_status_address);
-+	if (is_hest_type_generic_v2(ghes))
-+		unmap_gen_v2(ghes);
++	int alloced;
++	u32 len, cache_len;
++	struct ghes_estatus_cache *cache;
++	struct acpi_hest_generic_status *cache_estatus;
++
++	alloced = atomic_add_return(1, &ghes_estatus_cache_alloced);
++	if (alloced > GHES_ESTATUS_CACHE_ALLOCED_MAX) {
++		atomic_dec(&ghes_estatus_cache_alloced);
++		return NULL;
++	}
++	len = cper_estatus_len(estatus);
++	cache_len = GHES_ESTATUS_CACHE_LEN(len);
++	cache = (void *)gen_pool_alloc(ghes_estatus_pool, cache_len);
++	if (cache == NULL) {
++		atomic_dec(&ghes_estatus_cache_alloced);
++		return NULL;
++	}
++	cache_estatus = GHES_ESTATUS_FROM_CACHE(cache);
++	memcpy(cache_estatus, estatus, len);
++	cache->estatus_len = len;
++	atomic_set(&cache->count, 0);
++	cache->generic = generic;
++	cache->time_in = sched_clock();
++	return cache;
 +}
 +
- static void ghes_copy_tofrom_phys(void *buffer, u64 paddr, u32 len,
- 				  int from_phys,
- 				  enum fixed_addresses fixmap_idx)
++static void ghes_estatus_cache_rcu_free(struct rcu_head *head)
++{
++	struct ghes_estatus_cache *cache;
++	u32 len;
++
++	cache = container_of(head, struct ghes_estatus_cache, rcu);
++	len = cper_estatus_len(GHES_ESTATUS_FROM_CACHE(cache));
++	len = GHES_ESTATUS_CACHE_LEN(len);
++	gen_pool_free(ghes_estatus_pool, (unsigned long)cache, len);
++	atomic_dec(&ghes_estatus_cache_alloced);
++}
++
++void
++ghes_estatus_cache_add(struct acpi_hest_generic *generic,
++		       struct acpi_hest_generic_status *estatus)
++{
++	unsigned long long now, duration, period, max_period = 0;
++	struct ghes_estatus_cache *cache, *new_cache;
++	struct ghes_estatus_cache __rcu *victim;
++	int i, slot = -1, count;
++
++	new_cache = ghes_estatus_cache_alloc(generic, estatus);
++	if (!new_cache)
++		return;
++
++	rcu_read_lock();
++	now = sched_clock();
++	for (i = 0; i < GHES_ESTATUS_CACHES_SIZE; i++) {
++		cache = rcu_dereference(ghes_estatus_caches[i]);
++		if (cache == NULL) {
++			slot = i;
++			break;
++		}
++		duration = now - cache->time_in;
++		if (duration >= GHES_ESTATUS_IN_CACHE_MAX_NSEC) {
++			slot = i;
++			break;
++		}
++		count = atomic_read(&cache->count);
++		period = duration;
++		do_div(period, (count + 1));
++		if (period > max_period) {
++			max_period = period;
++			slot = i;
++		}
++	}
++	rcu_read_unlock();
++
++	if (slot != -1) {
++		/*
++		 * Use release semantics to ensure that ghes_estatus_cached()
++		 * running on another CPU will see the updated cache fields if
++		 * it can see the new value of the pointer.
++		 */
++		victim = xchg_release(&ghes_estatus_caches[slot],
++				      RCU_INITIALIZER(new_cache));
++
++		/*
++		 * At this point, victim may point to a cached item different
++		 * from the one based on which we selected the slot. Instead of
++		 * going to the loop again to pick another slot, let's just
++		 * drop the other item anyway: this may cause a false cache
++		 * miss later on, but that won't cause any problems.
++		 */
++		if (victim)
++			call_rcu(&unrcu_pointer(victim)->rcu,
++				 ghes_estatus_cache_rcu_free);
++	}
++}
+diff --git a/include/acpi/ghes_cper.h b/include/acpi/ghes_cper.h
+index 6b7632cfaf66..1b5dbeca9bb6 100644
+--- a/include/acpi/ghes_cper.h
++++ b/include/acpi/ghes_cper.h
+@@ -16,6 +16,7 @@
+ #ifndef ACPI_APEI_GHES_CPER_H
+ #define ACPI_APEI_GHES_CPER_H
+ 
++#include <linux/atomic.h>
+ #include <linux/workqueue.h>
+ 
+ #include <acpi/ghes.h>
+@@ -54,6 +55,8 @@
+ 	((struct acpi_hest_generic_data *)                              \
+ 	((struct ghes_vendor_record_entry *)(vendor_entry) + 1))
+ 
++extern struct gen_pool *ghes_estatus_pool;
++
+ static inline bool is_hest_type_generic_v2(struct ghes *ghes)
+ {
+ 	return ghes->generic->header.type == ACPI_HEST_TYPE_GENERIC_ERROR_V2;
+@@ -98,5 +101,8 @@ int __ghes_read_estatus(struct acpi_hest_generic_status *estatus,
+ 			u64 buf_paddr, enum fixed_addresses fixmap_idx,
+ 			size_t buf_len);
+ #endif
++int ghes_estatus_cached(struct acpi_hest_generic_status *estatus);
++void ghes_estatus_cache_add(struct acpi_hest_generic *generic,
++			    struct acpi_hest_generic_status *estatus);
+ 
+ #endif /* ACPI_APEI_GHES_CPER_H */
 
 -- 
 2.43.0
