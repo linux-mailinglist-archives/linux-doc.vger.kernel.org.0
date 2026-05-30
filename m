@@ -1,81 +1,81 @@
-Return-Path: <linux-doc+bounces-90135-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90136-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uC9rAv5iG2psBwkAu9opvQ
-	(envelope-from <linux-doc+bounces-90135-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 31 May 2026 00:21:50 +0200
+	id eO/uIQJjG2psBwkAu9opvQ
+	(envelope-from <linux-doc+bounces-90136-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 31 May 2026 00:21:54 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 20918613A12
-	for <lists+linux-doc@lfdr.de>; Sun, 31 May 2026 00:21:48 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3EF81613A22
+	for <lists+linux-doc@lfdr.de>; Sun, 31 May 2026 00:21:54 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 0676E3016B05
-	for <lists+linux-doc@lfdr.de>; Sat, 30 May 2026 22:20:27 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 337743065C31
+	for <lists+linux-doc@lfdr.de>; Sat, 30 May 2026 22:20:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6497637AA64;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9252037AA8A;
 	Sat, 30 May 2026 22:20:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b="Lp5mv4Oj"
+	dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b="NyZMKQgY"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com [209.85.160.169])
+Received: from mail-qk1-f173.google.com (mail-qk1-f173.google.com [209.85.222.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD0D82C237E
-	for <linux-doc@vger.kernel.org>; Sat, 30 May 2026 22:20:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.169
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 82BE3379996
+	for <linux-doc@vger.kernel.org>; Sat, 30 May 2026 22:20:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.173
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780179608; cv=none; b=O+tmvr7x/I7lasHJ7Qqug4eh8uNSX6CbCKKXoB1grh5/4XY5wERbZVXpF3E2v2nW54fem1YGSzXIguCINXW7jztPfLjiL39jrUkrCg5RaBb1341hpTAaHTiBhswWKZBJM7yIrS9EKGdyfVS7NegCVD5bkrC1JDIgc7dTu4XCAyc=
+	t=1780179608; cv=none; b=BnabJqvTGZzylc/50/DWXpA1o/A11v7mPSQl0y1ocs3/T+n2KiT58GAnXr095TjojmQ6MrSmTlSLyGD/hgSpOMMx+11r7Ph1MKAdIS/XyFmvNzr+FrU9fNXOHLVMTWrrTKCFh1Alv37tnbmDTG1hZELczE1RhQ2IRceh95uRM5A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1780179608; c=relaxed/simple;
-	bh=PwW6M86VtpCYbVanCRu9RC9XepQoEWHm1vY/6gS4fT8=;
+	bh=PI26M0khAE7StCXBHeuwdUicbhLFrZpiZfsokDq9n88=;
 	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=UXVO1YMSpdkZ5yrklJ5fHjH9mYz4Tv8m2B9BcV7ToH28i7z2s4KiMmqAkytnmeTE/GN29cDSqlYK5zk8m5eot5umzHtrBibGhTmwnJELGCUCxe7LlBftA17MUvkrGKrsO95AXSlvQmjfI4TZp57K9k7c4A312ez93dkxpSgJgOc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com; spf=pass smtp.mailfrom=soleen.com; dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b=Lp5mv4Oj; arc=none smtp.client-ip=209.85.160.169
+	 MIME-Version; b=GRFL2+aVy+XSL4yxtJAl4YGaZ2HLxqULXeusH+3+kuHzhUn2JEfpaRmKDHT4mOPlSSscGeKYFnxlcvrgjUYB8lzTX7yR9hWDLA0XKLSMk/unJaFkyJ4Rt/+6W/5E0iufrr0hpPECTamoyVrqn+NemQOUy9PfTcE2pqNu3zPcDlE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com; spf=pass smtp.mailfrom=soleen.com; dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b=NyZMKQgY; arc=none smtp.client-ip=209.85.222.173
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=soleen.com
-Received: by mail-qt1-f169.google.com with SMTP id d75a77b69052e-516d0db9372so79319301cf.2
-        for <linux-doc@vger.kernel.org>; Sat, 30 May 2026 15:20:04 -0700 (PDT)
+Received: by mail-qk1-f173.google.com with SMTP id af79cd13be357-9154ca1aa1dso53052685a.0
+        for <linux-doc@vger.kernel.org>; Sat, 30 May 2026 15:20:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=soleen.com; s=google; t=1780179604; x=1780784404; darn=vger.kernel.org;
+        d=soleen.com; s=google; t=1780179605; x=1780784405; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=zMNVhv3SnOTuZ3xqpMfMs2g7riJHPagItEAHtnUEWTI=;
-        b=Lp5mv4Oj6Qz1Qet2yJKFpTE3zeQyNLOnctYYkLT2kYgsLrEaqal6v7ZUhbnZ0UP6qN
-         Zd14FUOqJCOrSa24A/eJMFrP9ZGrRl8TBgv8xy3h8/FJJzP9UE1TsZvk+VwiAy5AxwWD
-         vteIt4oNnA81O36sARggQ6qwmExvhyhI6rDmz/WdYnmgySNjS4zUCWDR/9VT7p8TS2gV
-         V3Ds2j1QlTh+do06fTuLRG8PDU6hV48U2qHxi9HmNLgkm30/J2rNHPUbWCKlZyZAhGvt
-         8LqsqcOcp8E589KSyEwaJ0wL6U8i0Hb+IMwE2m7A6LqUGYcCOKdztW5+x4gqoIDE/JWa
-         KKRQ==
+        bh=LZ44uuKaEudMkx03Nujcoh6Uuv+6Qpcd4aVYSw8wkq4=;
+        b=NyZMKQgYj9gZS3nJ3TwtHG7VqnqiDZ7KNKoh/6eimpM8dJG4qWT4jinWbbBmjb0PGx
+         3dSk/F5rGoQIor4+8DKMkZHq/U9EY7H7Yrt9RivbCT/Gee0N76YAwhFLRC+LOFl4qV5G
+         rltSGcyOF+OCE8mydvhQLrM1hUhDpgXoXDccXZK3DdBhG/NwSEXt92AR3GHqXeCJ/6VP
+         CaWI+kX00v3SZkCHNaxnGihKX78Og9V5jMk4TRFAIj5ahuTYS7I3oSpQGtXuvL5ETaoe
+         4dPeHjWVJ8g1+JBolFO6uVf4KnPuHu/C5g2+9+oC/kko3rrNwdTnZw51nSAHI5Oqe/co
+         J6Ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780179604; x=1780784404;
+        d=1e100.net; s=20251104; t=1780179605; x=1780784405;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=zMNVhv3SnOTuZ3xqpMfMs2g7riJHPagItEAHtnUEWTI=;
-        b=iia922g9IC+qcIRKE4io6LsUD63Tb/hKBgqLb0nlMwYK6mQzBJI9UIVeoEY2chWkEm
-         6GH98WAx6NmqCCMVcS8CtUT/WujJhWOmTWlq1AMGLDJbk+RBSz1PpHGy0Q5CUrNrbV3u
-         t2G3/Ld1VrncQDSA3v5OwjYM24/ggNz9ugUrLOlX6wu/29ei4FtPPOkth+uaiiLRFM0N
-         ekrtZxcGMjVaPxLZQCi/90fOA9AQZzc1hz2FD6sXtAYl0DxjDsxD9k9rnSB23zzr1Qu/
-         SDcRx19QK9a0crvXbos9rYzgeRQ5GIIYWB0X+LKwJpFO7LC8nwCqGrcQwJWwEJqden+9
-         wx9g==
-X-Forwarded-Encrypted: i=1; AFNElJ/Xqz8nRT5wFQkVpJUbl3BrBZmi0dHywLaVp0ibGp4JBov82yFi2DHUUc3WKB13joSZWwFW7XohdrE=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwOWFo8r+8IXPfXoor23+fTn2Q/Rk2Gml2c09GaaKl/D1/tme8k
-	bu+Ad8o+UzHqPqsGMEu1FuRN28VuOcgpcFJxhhQZkQuNyjSVPNjk76YaQhab/61YvTI=
-X-Gm-Gg: Acq92OF+Et6Tqtq4GQsw9/GmeFznunMZAOIEmKWf3AW4oWGJhQ/g3V4GLFA1wzXRhF5
-	o0KmBiZD6ZgLmBuuPDGnDZPP80Au59Dbc8UJ/ikZBRUl64ztBCpLEheTQYGA4rvgaitgLS1cnLz
-	Vq2cNk25nD0ywkIlEu0NjqLW+oMixptzXc9dPaPkooGmvkk9cQhWub8LTPw8vsZvezIxZWZK38C
-	Ej9/XdkQ0qWH+6BhtXaf6yeaE66fysEBQLsTXUMHqd6DHymW80lEe3geaG6UYGzlgSJJF4PuYoV
-	UtmxprHB0gAwLi3PborOxyF6XNDcj+e+z7MzZSYiUvt3ZLyXzdRe0sq1qJMwWVtwnoPUwWfgl1x
-	uTMg88BDLWsUgSSHL9djrUDzrzJx2x9iEx8REkW8JKjf3/cqCr0xvPqxJmbSb2YccYXeIy3Mhej
-	62jHqRs1FHs/oaH+7N+dsGuUv9eeXgXYPX+sKTGqYhPS5kCq3v64JThCdWhBCAUQ==
-X-Received: by 2002:a05:620a:178e:b0:912:67ca:bac6 with SMTP id af79cd13be357-9153d98adc6mr770549985a.26.1780179603772;
-        Sat, 30 May 2026 15:20:03 -0700 (PDT)
+        bh=LZ44uuKaEudMkx03Nujcoh6Uuv+6Qpcd4aVYSw8wkq4=;
+        b=NoPAqwz+zxTK9iiHQkBzOVHoO08kbxU97dltI3J/4DHYyYZjyDbsRMJE8vk4A+g796
+         +SU/l6aqp4d7PUoEuduQjvo6qF8Fg+dN9XiXeBjE0VeQMDZnkd2Vs5klANpryviJwbMD
+         jeDi9gZBre8A681MsyZu9WQb9Yl2/zjPzmObTKa9mBZLTcxbGnSLkH4dARF2YTmE5MPW
+         IuvzQnoZ6WP/Krx18IavygZKzTCegOSXSRosJmAcwB56qNp9Wfcu84ezKKQwGs4hbGmF
+         RyCZDwYWvE+yaKAZwuPnVAgLctzOe2Fh4Ch81lBQgRNo9dgVWUqbrpuJVOV5UoVWWf0t
+         BsWg==
+X-Forwarded-Encrypted: i=1; AFNElJ+sbKH7xevPjoYGIyVqzWO+HlYF3rTw4IDN+YnxFVXOhhMFCc8MAs9elhmvK/16u4lL8v0vmJuXmNE=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzJ8IXIi2atb5YPn952xhRlrikfmXc6O8GokPasoJP4AwFjmtO2
+	SPBl+oXfMD8d5YhEJVUj32wbmKLZw7sqXRvE1dO0YRXOHha8+j4hLUZFR6HnpjjJoEY=
+X-Gm-Gg: Acq92OGa+Le+daIeUjb3Je0lShBmBl6gO0Rm498PPtMpShDPiHZIHIEDNgL8rC0VNtE
+	L3FPgLu5FLoxZfYenEd6rXKDQRtxjnIfKLnYepTuQyhIz1PWRrmVi3RdQVAbLBaRdo5XovYCZdX
+	H+LCsVerAvJ91M5T2AdALTCc6Ho/slGa7VKeYxyIO1MovuPreD+cZ3WZbZ/kLrFEUIm13LrKnXY
+	KatP8DmWq0bmQHQc5S1GMJcbd6UXCkmVN+reTBa3sUcOKkaJzGZj4YZac68q2IzZqRToLAx7OWQ
+	708IWuZxhGhRCDZZPiYpqZ6/4q3LMKLVBaM+SI0rOjif6uLGItFrnaGR06s1IDt10OpLGUfhGD0
+	tTQmvlGZN4iVktQxrNfjorWIwDI+ObDdeN4YgaVHvgRpVY//91DRFcExj6M8hNOPLQmfw2gL29S
+	NdY7zzQRrjsYabZ0EMklVbaAY9px3EaoM22A7BpZHxdgkiJDuhaTIBgR5oC2eAEg==
+X-Received: by 2002:a05:620a:29d5:b0:90f:786c:4a82 with SMTP id af79cd13be357-9152fa29820mr1006065185a.39.1780179605586;
+        Sat, 30 May 2026 15:20:05 -0700 (PDT)
 Received: from plex ([71.181.43.54])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-915324868a0sm651790085a.18.2026.05.30.15.20.01
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-915324868a0sm651790085a.18.2026.05.30.15.20.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 30 May 2026 15:20:03 -0700 (PDT)
+        Sat, 30 May 2026 15:20:04 -0700 (PDT)
 From: Pasha Tatashin <pasha.tatashin@soleen.com>
 To: linux-kselftest@vger.kernel.org,
 	rppt@kernel.org,
@@ -92,9 +92,9 @@ To: linux-kselftest@vger.kernel.org,
 	pratyush@kernel.org,
 	skhawaja@google.com,
 	graf@amazon.com
-Subject: [PATCH v4 12/13] selftests/liveupdate: Add stress-sessions kexec test
-Date: Sat, 30 May 2026 22:19:37 +0000
-Message-ID: <20260530221938.115978-13-pasha.tatashin@soleen.com>
+Subject: [PATCH v4 13/13] selftests/liveupdate: Add stress-files kexec test
+Date: Sat, 30 May 2026 22:19:38 +0000
+Message-ID: <20260530221938.115978-14-pasha.tatashin@soleen.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260530221938.115978-1-pasha.tatashin@soleen.com>
 References: <20260530221938.115978-1-pasha.tatashin@soleen.com>
@@ -110,13 +110,13 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[soleen.com,reject];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	R_DKIM_ALLOW(-0.20)[soleen.com:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	DKIM_TRACE(0.00)[soleen.com:+];
-	TAGGED_FROM(0.00)[bounces-90135-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90136-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -126,96 +126,88 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[pasha.tatashin@soleen.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	RCVD_COUNT_FIVE(0.00)[5];
 	NEURAL_HAM(-0.00)[-0.992];
 	TO_DN_NONE(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[soleen.com:email,soleen.com:mid,soleen.com:dkim,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,do_kexec.sh:url]
-X-Rspamd-Queue-Id: 20918613A12
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,do_kexec.sh:url,soleen.com:email,soleen.com:mid,soleen.com:dkim]
+X-Rspamd-Queue-Id: 3EF81613A22
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Add a new test that creates 2000 LUO sessions before a kexec
-reboot and verifies their presence after the reboot. This ensures
-that the linked-block serialization mechanism works correctly for
-a large number of sessions.
+Add a new luo_stress_files kexec test that verifies preserving and
+retrieving 500 files across a kexec reboot.
 
+Reviewed-by: Pratyush Yadav (Google) <pratyush@kernel.org>
 Acked-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
 Signed-off-by: Pasha Tatashin <pasha.tatashin@soleen.com>
 ---
- tools/testing/selftests/liveupdate/Makefile   |   1 +
- .../liveupdate/luo_stress_sessions.c          | 102 ++++++++++++++++++
- 2 files changed, 103 insertions(+)
- create mode 100644 tools/testing/selftests/liveupdate/luo_stress_sessions.c
+ tools/testing/selftests/liveupdate/Makefile   |  1 +
+ .../selftests/liveupdate/luo_stress_files.c   | 97 +++++++++++++++++++
+ 2 files changed, 98 insertions(+)
+ create mode 100644 tools/testing/selftests/liveupdate/luo_stress_files.c
 
 diff --git a/tools/testing/selftests/liveupdate/Makefile b/tools/testing/selftests/liveupdate/Makefile
-index 080754787ede..ed7534468386 100644
+index ed7534468386..30689d22cb02 100644
 --- a/tools/testing/selftests/liveupdate/Makefile
 +++ b/tools/testing/selftests/liveupdate/Makefile
-@@ -6,6 +6,7 @@ TEST_GEN_PROGS += liveupdate
- 
+@@ -7,6 +7,7 @@ TEST_GEN_PROGS += liveupdate
  TEST_GEN_PROGS_EXTENDED += luo_kexec_simple
  TEST_GEN_PROGS_EXTENDED += luo_multi_session
-+TEST_GEN_PROGS_EXTENDED += luo_stress_sessions
+ TEST_GEN_PROGS_EXTENDED += luo_stress_sessions
++TEST_GEN_PROGS_EXTENDED += luo_stress_files
  
  TEST_FILES += do_kexec.sh
  
-diff --git a/tools/testing/selftests/liveupdate/luo_stress_sessions.c b/tools/testing/selftests/liveupdate/luo_stress_sessions.c
+diff --git a/tools/testing/selftests/liveupdate/luo_stress_files.c b/tools/testing/selftests/liveupdate/luo_stress_files.c
 new file mode 100644
-index 000000000000..f201b1839d1d
+index 000000000000..0cdf9cd4bac7
 --- /dev/null
-+++ b/tools/testing/selftests/liveupdate/luo_stress_sessions.c
-@@ -0,0 +1,102 @@
++++ b/tools/testing/selftests/liveupdate/luo_stress_files.c
+@@ -0,0 +1,97 @@
 +// SPDX-License-Identifier: GPL-2.0-only
 +
 +/*
 + * Copyright (c) 2026, Google LLC.
 + * Pasha Tatashin <pasha.tatashin@soleen.com>
 + *
-+ * Validate that LUO can handle a large number of sessions across a kexec
-+ * reboot.
++ * Validate that LUO can handle a large number of files per session across
++ * a kexec reboot.
 + */
 +
 +#include <stdio.h>
 +#include <unistd.h>
 +#include "luo_test_utils.h"
 +
-+#define NUM_SESSIONS 2000
-+#define STATE_SESSION_NAME "kexec_many_state"
-+#define STATE_MEMFD_TOKEN 999
++#define NUM_FILES 500
++#define STATE_SESSION_NAME "kexec_many_files_state"
++#define STATE_MEMFD_TOKEN 9999
++#define TEST_SESSION_NAME "many_files_session"
 +
 +/* Stage 1: Executed before the kexec reboot. */
 +static void run_stage_1(int luo_fd)
 +{
-+	int ret, i;
-+
-+	ksft_print_msg("[STAGE 1] Increasing ulimit for open files...\n");
-+	ret = luo_ensure_nofile_limit(NUM_SESSIONS);
-+	if (ret == -EPERM)
-+		ksft_exit_skip("Insufficient privileges to set RLIMIT_NOFILE\n");
-+	if (ret < 0)
-+		ksft_exit_fail_msg("luo_ensure_nofile_limit failed: %s\n", strerror(-ret));
++	int session_fd, i;
 +
 +	ksft_print_msg("[STAGE 1] Creating state file for next stage (2)...\n");
 +	create_state_file(luo_fd, STATE_SESSION_NAME, STATE_MEMFD_TOKEN, 2);
 +
-+	ksft_print_msg("[STAGE 1] Creating %d sessions...\n", NUM_SESSIONS);
++	ksft_print_msg("[STAGE 1] Creating test session '%s'...\n", TEST_SESSION_NAME);
++	session_fd = luo_create_session(luo_fd, TEST_SESSION_NAME);
++	if (session_fd < 0)
++		fail_exit("luo_create_session");
 +
-+	for (i = 0; i < NUM_SESSIONS; i++) {
-+		char name[LIVEUPDATE_SESSION_NAME_LENGTH];
-+		int s_fd;
++	ksft_print_msg("[STAGE 1] Preserving %d files...\n", NUM_FILES);
++	for (i = 0; i < NUM_FILES; i++) {
++		char data[64];
 +
-+		snprintf(name, sizeof(name), "many-test-%d", i);
-+		s_fd = luo_create_session(luo_fd, name);
-+		if (s_fd < 0) {
-+			fail_exit("luo_create_session for '%s' at index %d",
-+				  name, i);
-+		}
++		snprintf(data, sizeof(data), "file-data-%d", i);
++		if (create_and_preserve_memfd(session_fd, i, data) < 0)
++			fail_exit("create_and_preserve_memfd for index %d", i);
 +	}
 +
-+	ksft_print_msg("[STAGE 1] Successfully created %d sessions.\n",
-+		       NUM_SESSIONS);
++	ksft_print_msg("[STAGE 1] Successfully preserved %d files.\n", NUM_FILES);
 +
 +	close(luo_fd);
 +	daemonize_and_wait();
@@ -224,6 +216,7 @@ index 000000000000..f201b1839d1d
 +/* Stage 2: Executed after the kexec reboot. */
 +static void run_stage_2(int luo_fd, int state_session_fd)
 +{
++	int session_fd;
 +	int i, stage;
 +
 +	ksft_print_msg("[STAGE 2] Starting post-kexec verification...\n");
@@ -234,34 +227,35 @@ index 000000000000..f201b1839d1d
 +			  stage);
 +	}
 +
-+	ksft_print_msg("[STAGE 2] Retrieving and finishing %d sessions...\n",
-+		       NUM_SESSIONS);
++	ksft_print_msg("[STAGE 2] Retrieving test session '%s'...\n", TEST_SESSION_NAME);
++	session_fd = luo_retrieve_session(luo_fd, TEST_SESSION_NAME);
++	if (session_fd < 0)
++		fail_exit("luo_retrieve_session");
 +
-+	for (i = 0; i < NUM_SESSIONS; i++) {
-+		char name[LIVEUPDATE_SESSION_NAME_LENGTH];
-+		int s_fd;
++	ksft_print_msg("[STAGE 2] Verifying %d files...\n", NUM_FILES);
++	for (i = 0; i < NUM_FILES; i++) {
++		char data[64];
++		int fd;
 +
-+		snprintf(name, sizeof(name), "many-test-%d", i);
-+		s_fd = luo_retrieve_session(luo_fd, name);
-+		if (s_fd < 0) {
-+			fail_exit("luo_retrieve_session for '%s' at index %d",
-+				  name, i);
-+		}
-+
-+		if (luo_session_finish(s_fd) < 0) {
-+			fail_exit("luo_session_finish for '%s' at index %d",
-+				  name, i);
-+		}
-+		close(s_fd);
++		snprintf(data, sizeof(data), "file-data-%d", i);
++		fd = restore_and_verify_memfd(session_fd, i, data);
++		if (fd < 0)
++			fail_exit("restore_and_verify_memfd for index %d", i);
++		close(fd);
 +	}
++
++	ksft_print_msg("[STAGE 2] Finishing test session...\n");
++	if (luo_session_finish(session_fd) < 0)
++		fail_exit("luo_session_finish for test session");
++	close(session_fd);
 +
 +	ksft_print_msg("[STAGE 2] Finalizing state session...\n");
 +	if (luo_session_finish(state_session_fd) < 0)
 +		fail_exit("luo_session_finish for state session");
 +	close(state_session_fd);
 +
-+	ksft_print_msg("\n--- MANY-SESSIONS KEXEC TEST PASSED (%d sessions) ---\n",
-+		       NUM_SESSIONS);
++	ksft_print_msg("\n--- MANY-FILES KEXEC TEST PASSED (%d files) ---\n",
++		       NUM_FILES);
 +}
 +
 +int main(int argc, char *argv[])
