@@ -1,173 +1,114 @@
-Return-Path: <linux-doc+bounces-90174-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90176-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aKnBGERDHGq0LwkAu9opvQ
-	(envelope-from <linux-doc+bounces-90174-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 31 May 2026 16:18:44 +0200
+	id 4CG2JH5SHGpFMgkAu9opvQ
+	(envelope-from <linux-doc+bounces-90176-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 31 May 2026 17:23:42 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9CD8616A55
-	for <lists+linux-doc@lfdr.de>; Sun, 31 May 2026 16:18:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0FBA9616CE5
+	for <lists+linux-doc@lfdr.de>; Sun, 31 May 2026 17:23:42 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 379353013863
-	for <lists+linux-doc@lfdr.de>; Sun, 31 May 2026 14:18:42 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id E99043014870
+	for <lists+linux-doc@lfdr.de>; Sun, 31 May 2026 15:23:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 002D1339847;
-	Sun, 31 May 2026 14:18:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4B7E739021E;
+	Sun, 31 May 2026 15:23:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="M53XeGOr";
-	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="K/z3KxvN"
+	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="RGgutXqX"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B125D32E72F
-	for <linux-doc@vger.kernel.org>; Sun, 31 May 2026 14:18:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22BD030E0E9;
+	Sun, 31 May 2026 15:23:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780237119; cv=none; b=ci0e7Aq8uFS8bMhcFyA3tN1C0lfLzqvMQHn/NuU1DU5LtvSqsW+Oc+OMlwuDflSPw+J3J6rJrccTtoDqmN9rK4UwasM6d0vHZxEJJ4C0KT7+2XmVKicZRBc/91+KuI1ZzqhDKnKIbmXuz6Scp5CTQPccYaLDzqc5Z08m1sDNsHY=
+	t=1780241017; cv=none; b=ZD6jXdTe1GYW9048leoOVBZFUeCkfid0EwqaRPTB16ncmIrOpOUk+H8ytc/2QWbtvxLxibT4m5cf7SckcqoQawb5/DN6TkALh97vxytqR7QmYNCUqotEEsH8duoiJkuj7PjDV2Jg6mzvPTjzgYyO7DbXNrYJ/pPZ6LGAdPFRnHU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780237119; c=relaxed/simple;
-	bh=zjwsiyM9YIeiHH2wJ8jXDD9l5W0r7o7szymJ9KdY8Bw=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=h87pqJtqXxLvhvrVi+hMLLsz/ZbXO/LPgcfiynu7NXV8kcLHghWu7lsWueT7Cpycz2VOe+Q3cBkN5Srx6ca6MKcqFMwjvjvR4LPQJVLmaakLi6vHgajDWgg2gj5aD2ANeGVkpQO2umOG7sNv5aUC9Zu6eFC+BnYmi4r103vjfpU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=M53XeGOr; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=K/z3KxvN; arc=none smtp.client-ip=170.10.129.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1780237117;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=QtO8FxV0FZvT6jbNOVRIHEka2WnDuWsEO9oX113DzcY=;
-	b=M53XeGOrRaLzlCFjF6g/Bit6g/7TSQHW8C+k5GQO1OZ0goD/TJDFgFAz+DxCPsr9h3sD/9
-	zoMDvDqfxt0h7cOaFVgwqXkQH4u6b/7bdsgYTh52CCiUD0heghVBiDRa0y/7YfL/N+HlHg
-	hgtOMN7D8T+ufWjEPwe02YR+zwkRBBI=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-193-qlimbJqGOeG3fR3cwcfjrg-1; Sun, 31 May 2026 10:18:36 -0400
-X-MC-Unique: qlimbJqGOeG3fR3cwcfjrg-1
-X-Mimecast-MFC-AGG-ID: qlimbJqGOeG3fR3cwcfjrg_1780237115
-Received: by mail-wm1-f70.google.com with SMTP id 5b1f17b1804b1-49050c44bcdso93845165e9.3
-        for <linux-doc@vger.kernel.org>; Sun, 31 May 2026 07:18:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1780237115; x=1780841915; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=QtO8FxV0FZvT6jbNOVRIHEka2WnDuWsEO9oX113DzcY=;
-        b=K/z3KxvNYTmovlaAIE+r3fHrh/S2EZeTh3qx59yJwRiBQNlw3hWBavm4dCfUwX32TV
-         H3jmLCv3llg3YRusRD3MDQRBpQJPsFa7/vqyC2NACiK9NUSeVzYmYte4aQz0zQ9y2G4p
-         e1EA/irZZX+5a2Gc8mZg4e6c8T554ePxBtPQqwqLu6wkeqAVISZdeQtrRuyUWliDui4R
-         kFim6wI0H9q5LfDcxyI0kK8RDdrYR1ibKvE94OAb1hMyl9aFC3WtYmnJZB2anBVBfIbg
-         N6/H8byEWHwrex32vvtkX6MLyZEFf9oleUYzRRPP1NKmM+qx/tyNY9586k6sLKDu+/YB
-         zU+Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780237115; x=1780841915;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=QtO8FxV0FZvT6jbNOVRIHEka2WnDuWsEO9oX113DzcY=;
-        b=SzHJpGhBby/PwNQ4nC8u1K+XcvxMvaNWwHU4kiuQAUVRGizmeTIxHE4w4uSK0UUMgG
-         Wglw5aaFKDdHUinoCXLywmNpuGbaozJeuc29g2vB40Yy31tDUAof/n3juTV+jJJBboDI
-         zCpBloNjxJ0zwms6i6x2+2WjXjqFKsSXHpKTcD89NYSm0u0MYl81iHnP1r+UIKI43xAt
-         WjWhGYWGmZF3V58XUqDdP38ZoZbla73NZsMRf4GneNFlX/G4xkqDubyNmWSj1gYbPupp
-         qs/xSDMr/3hriMmvBiPU6UsLjbDd26i9c5HYodEYKMVH7+w9NV8suw+p9PShpQ7Hjy68
-         GhXw==
-X-Forwarded-Encrypted: i=1; AFNElJ/mbfxXmKfvTqs4nBr4LfLru/dPgO9peF7WjZSLkdqUga8+edlpPD3QTaXEAUJQuk2JgRugbEQvxhI=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwC+aHNZfI+u0YtvPNvs0Dx3sqUhwxb7A3g2U0iHWF6iMuf+Oti
-	KNft+joO1WHLhzF5zTgxwbT7RHP7QjBhIWjQXdVYW2HuPotIl+x2oaVeXni1fjWM12UI5j3/BWD
-	cozmwBX8uFHmgkJ2MwhT+7dDodKWb88V0xBt0yDWlqaqpDEEIWHIsvxEXmnC4VX8yaDDdPTti
-X-Gm-Gg: Acq92OFOLSJkbl5fcVQX3efqPbW7BrOdsICCKkHmw9wU/cFlE8CZRQRTDyW9YyBJgoX
-	f0uh0ShlnepsZLZ6noLNAabvcEYHnLUuN0TSFXL9yQKvSNfYit8AiLlaiyWxAonwICwpggf0QrZ
-	QEFExo0XcFOo7JMPjcH3iluq/SBiwBPFsqkyzkrd3aCJN5Zal9t5n9Pq/a9cXgx2kaBg2U8BZEL
-	VXZg8b1zlY+2MZwLprS99wmIel332fS9K0CwUfyh7xz2T00We1g4Z5D5FdsSckpcZOwvCJ2p7r8
-	tEjIghjSmZc8muo/fGcB2t+sxnhrLK+9vyVwYDrMheEEO9EsfQE+IclMBpBXkWr9LU7J6aqOLh2
-	DZaIZFafizCKhA9ZfyXTwjWUkTtEVhAE2fo9i25JNt7DWHw==
-X-Received: by 2002:a05:600c:46d1:b0:490:a7ab:bbe3 with SMTP id 5b1f17b1804b1-490a7abbd7fmr61900455e9.0.1780237114843;
-        Sun, 31 May 2026 07:18:34 -0700 (PDT)
-X-Received: by 2002:a05:600c:46d1:b0:490:a7ab:bbe3 with SMTP id 5b1f17b1804b1-490a7abbd7fmr61899935e9.0.1780237114475;
-        Sun, 31 May 2026 07:18:34 -0700 (PDT)
-Received: from costa-tp.bos2.lab ([2a00:a041:e223:1b00:fe51:8bb:7986:c897])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4909c0498e0sm76968165e9.0.2026.05.31.07.18.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 31 May 2026 07:18:34 -0700 (PDT)
-From: Costa Shulyupin <costa.shul@redhat.com>
-To: Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-	Clark Williams <clrkwllms@kernel.org>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	linux-rt-devel@lists.linux.dev,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Cc: Costa Shulyupin <costa.shul@redhat.com>
-Subject: [PATCH v1] docs: real-time: Fix duplicated sched(7) text
-Date: Sun, 31 May 2026 17:18:22 +0300
-Message-ID: <20260531141823.4118954-1-costa.shul@redhat.com>
-X-Mailer: git-send-email 2.53.0
+	s=arc-20240116; t=1780241017; c=relaxed/simple;
+	bh=9+GoCLTacqFsxBUI4rXF+9XRsxxKX2H6KWw2m2AdVsI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=jPftBNxTumzC0d6f0iUc9FfoSlvNFr9wXGoeWy96fnrZ7fRvXVgFGpLVIGBb5TsiBHIbgmXtAIEKtmNaSm8sDWDi26GzGvB2vSajSu9f/agfie2YkD5WPIYub2i6HSezi2h35KoI1gZZ0FYJOmsRd7kfvS5JWeGe3aIDmDmcJYc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=RGgutXqX; arc=none smtp.client-ip=156.67.10.101
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+	bh=FVLcp16kWlnIgiT4A2M93BI7rQzuS5B/fT02iYN5hZ4=; b=RGgutXqX4YVefeJ3S1+vO8gyid
+	u8+fpadaehkj+v7PFWJfOaXa7GdkZDSGvvGo4DHsFC8X2qb6Z20+SfD9LuTSElgNbJtIdaGCCmPmT
+	vW+081yMV8rnpOLbh+gS3YGhkkvd56tj07qd//1h/MKa2eru4nF4DMfDciazWCALEM4I=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+	(envelope-from <andrew@lunn.ch>)
+	id 1wTi0a-005N5o-71; Sun, 31 May 2026 17:23:24 +0200
+Date: Sun, 31 May 2026 17:23:24 +0200
+From: Andrew Lunn <andrew@lunn.ch>
+To: Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
+Cc: Piergiorgio Beruto <Pier.Beruto@onsemi.com>,
+	"parthiban.veerasooran@microchip.com" <parthiban.veerasooran@microchip.com>,
+	"davem@davemloft.net" <davem@davemloft.net>,
+	"edumazet@google.com" <edumazet@google.com>,
+	"kuba@kernel.org" <kuba@kernel.org>,
+	"pabeni@redhat.com" <pabeni@redhat.com>,
+	"horms@kernel.org" <horms@kernel.org>,
+	"corbet@lwn.net" <corbet@lwn.net>,
+	"skhan@linuxfoundation.org" <skhan@linuxfoundation.org>,
+	"netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH net-next v3 14/14] Documentation: networking: Add
+ timestamp related APIs to OA TC6 framework
+Message-ID: <53d5f13c-7095-49ce-bfa6-fefee9e0c4fe@lunn.ch>
+References: <CY8PR02MB9249D1ECBA54A1083D404A6D83162@CY8PR02MB9249.namprd02.prod.outlook.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-0.66 / 15.00];
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CY8PR02MB9249D1ECBA54A1083D404A6D83162@CY8PR02MB9249.namprd02.prod.outlook.com>
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
-	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[lunn.ch,none];
 	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
+	R_DKIM_ALLOW(-0.20)[lunn.ch:s=20171124];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[redhat.com:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-90174-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90176-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[costa.shul@redhat.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	DKIM_TRACE(0.00)[lunn.ch:+];
 	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	RCVD_COUNT_FIVE(0.00)[6];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	NEURAL_HAM(-0.00)[-0.992];
+	MISSING_XM_UA(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[andrew@lunn.ch,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: D9CD8616A55
+	MID_RHS_MATCH_FROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lunn.ch:mid,lunn.ch:dkim,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: 0FBA9616CE5
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-The man page reference appeared twice - once as plain text and
-once as a hyperlink. Remove the plain text duplicate.
+> +Register the PTP hardware clock related functions with the kernel. The module
+> +simply registers. Hardware timer related functions are provided by the vendors.
 
-Assisted-by: Claude:claude-opus-4-6
-Signed-off-by: Costa Shulyupin <costa.shul@redhat.com>
----
- Documentation/core-api/real-time/theory.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+This last part should be expanded. Please document what is actually
+needed from the vendor code.
 
-diff --git a/Documentation/core-api/real-time/theory.rst b/Documentation/core-api/real-time/theory.rst
-index 43d0120737f8..92de5654163d 100644
---- a/Documentation/core-api/real-time/theory.rst
-+++ b/Documentation/core-api/real-time/theory.rst
-@@ -25,7 +25,7 @@ Scheduling
- ==========
- 
- The core principles of Linux scheduling and the associated user-space API are
--documented in the man page sched(7)
-+documented in the man page
- `sched(7) <https://man7.org/linux/man-pages/man7/sched.7.html>`_.
- By default, the Linux kernel uses the SCHED_OTHER scheduling policy. Under
- this policy, a task is preempted when the scheduler determines that it has
--- 
-2.53.0
-
+	Andrew
 
