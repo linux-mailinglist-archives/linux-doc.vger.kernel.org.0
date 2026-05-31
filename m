@@ -1,85 +1,85 @@
-Return-Path: <linux-doc+bounces-90200-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90198-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sDYpDrvBHGquSAkAu9opvQ
-	(envelope-from <linux-doc+bounces-90200-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 01:18:19 +0200
+	id kLSsMbnBHGquSAkAu9opvQ
+	(envelope-from <linux-doc+bounces-90198-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 01:18:17 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id D24A0618425
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 01:18:18 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id D5A0861841E
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 01:18:16 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 2E53D3004609
-	for <lists+linux-doc@lfdr.de>; Sun, 31 May 2026 23:18:18 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 0E76030028E7
+	for <lists+linux-doc@lfdr.de>; Sun, 31 May 2026 23:18:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5B35237754C;
-	Sun, 31 May 2026 23:18:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5A0B7368D4A;
+	Sun, 31 May 2026 23:18:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20251104.gappssmtp.com header.i=@thegoodpenguin-co-uk.20251104.gappssmtp.com header.b="D4BBV8uM"
+	dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20251104.gappssmtp.com header.i=@thegoodpenguin-co-uk.20251104.gappssmtp.com header.b="PEqnNnLm"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F4E6376490
-	for <linux-doc@vger.kernel.org>; Sun, 31 May 2026 23:17:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B779376A10
+	for <linux-doc@vger.kernel.org>; Sun, 31 May 2026 23:18:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780269485; cv=none; b=RrSOn1tQpdUE4sySLJOaVDN/SR/FUi/r2ouqzj0G+mqxMVJvkzqNEh0ckq589TTWMm7WryRA25adWnkt+fIDSyr9RE+x/oW35yNG9Ee8P4hvzSb+UGYEC1uFzJtZDJzTVON2L8kZ5tfRZfKXv8CWlGdT45kniu/FuhvQiQ5a+7A=
+	t=1780269484; cv=none; b=IGdolUouzPQiU/QCX4bdf69sE8nn85A5ONzabXZx1o7u9oYZi4SJk2i/RvVqEpeqpxdlUgTApa3ncAHCXjL51jmEKKymasDx/YGCAjKt93/UigwrlNy8RFFQHovBDBnDCdG7PgKyEcswIp3fWusA6JBcMAyR8Dj8GmTPoIZdjUk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780269485; c=relaxed/simple;
-	bh=NzyYbeRmipVDUcVFnXEzhSA5L8Fjv+M/rg5sEJLce8g=;
+	s=arc-20240116; t=1780269484; c=relaxed/simple;
+	bh=iIdrzIpbtLvWz4MDbsc58aNL3F6fTnbJs47tQmnDnOs=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=kXL8M0Z4mf+7cE5akOrfQ+cdbuBTi9KiB3gA//I8tmviyzKUu5ZhEYZIyOvSgFjUo+TBkoCZrLKA+o/KiMzsN0QFvpM0T48T6NbQIrl5RhJA4RLXLIp4yOi7lXChrFCVFrtAY+ARAJ1asnsji/4+jBsE6luFqEk81kIUZAEsnAs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk; spf=pass smtp.mailfrom=thegoodpenguin.co.uk; dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20251104.gappssmtp.com header.i=@thegoodpenguin-co-uk.20251104.gappssmtp.com header.b=D4BBV8uM; arc=none smtp.client-ip=209.85.128.45
+	 In-Reply-To:To:Cc; b=A1X6DmKV+KoBLgZMIPOD9O0V3Q2DiL1SgK3UJIjIElH70EDOnJvxRls4s5mTLb1A+RpMhgEVHEFnV1zVbvMyrUO+9xMopYfs4plqJRBtnP+60Zv8RXDgIkDmHL/gHAUU1obpiSkZdluVcP/EwTCdrdKrlyXNBYbcAemYtOFEfV0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk; spf=pass smtp.mailfrom=thegoodpenguin.co.uk; dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20251104.gappssmtp.com header.i=@thegoodpenguin-co-uk.20251104.gappssmtp.com header.b=PEqnNnLm; arc=none smtp.client-ip=209.85.221.46
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=thegoodpenguin.co.uk
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4906238c62eso74786715e9.3
-        for <linux-doc@vger.kernel.org>; Sun, 31 May 2026 16:17:58 -0700 (PDT)
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-45ef41adbc1so1399983f8f.0
+        for <linux-doc@vger.kernel.org>; Sun, 31 May 2026 16:18:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=thegoodpenguin-co-uk.20251104.gappssmtp.com; s=20251104; t=1780269477; x=1780874277; darn=vger.kernel.org;
+        d=thegoodpenguin-co-uk.20251104.gappssmtp.com; s=20251104; t=1780269479; x=1780874279; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Yw1fhfSYYqzCwDV1bdu9APNnKhaP1vTsxLW0x4AdDkE=;
-        b=D4BBV8uMc4b3pVACkDqxyvtmxKDnEpuWc2//GSZkcpvWFiWSMBEgIwDvxVZTX+odsg
-         gkcvVOSGshOlpnqMm2ocfdKBkAUgpk/F6Ac7xEXJylgFkTPDZCsfNZBrDhMYEZ3cIXyF
-         EA8dMFllT3I1tr+O76ZTZZF1C2sPNqufmT/aQFtIDdzCDpHYQRk5J5glOPaMen+58+B9
-         5ww4YxMzbVmWKHd07qFNR/HZTJjbgUa7tLfnCkJze6ipKDlHlkQtoZ1obygOGcSKL2B4
-         HqLGsAkJTEl7nKgulT7A+Q288xN2PiLeZkcLCx3TyM9U4gACzE8bi/4ik48vayc5DHD1
-         GbRQ==
+        bh=OIFmAzxejQrp6RSd8J5lsgupOjIxf+PM9ArBTVLQHLA=;
+        b=PEqnNnLmHl0S8gvWvHCtfxtMm3OjAg0V0T1ATBEvcb+BDVEu98VuXwp0r7akRVSXrJ
+         MOWsK+3eLO2Dxej0lJPBhOCZTHWx8VQAnqPJezDCJrCdMyLbcsSzNOakdNA3amFtfHMw
+         ttksN8t1YXot/GyjWpvtPKTyjZQ0eQ33a2CivW2BWicx341hqzHaWa/qolrDGL1G2oOR
+         PZybPB2zyx1k+KdDeNuLrCwyRs6Jl2fiiWnv6/N/g362b6NN5SseAKYo3R9iMLhxTqKf
+         Ppi6sbtZXKG4By8GRtl4HCCTatBFT7PbQPSSjDitHcHGWgCipLBPp66qeVMhf91I4apk
+         4w6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780269477; x=1780874277;
+        d=1e100.net; s=20251104; t=1780269479; x=1780874279;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=Yw1fhfSYYqzCwDV1bdu9APNnKhaP1vTsxLW0x4AdDkE=;
-        b=WF1uOQmIVjvLbWWQcIH8/UqLwUq79pNfxzlP+TbQf3k8xCOZcWs9+jZba/l3F+AEZC
-         QPy+5Akx7WRHxoPSN15LsWnzfDr+myk/CTprnH8qVUrlStS1v91zQ33LI0zQOeneWZ0k
-         FioyNKlQz/wryAFtS+cp+ngwBdDQatlgcXs5oo4vwMeZEgzI+jJKT1p2T4v1KFa6qzE6
-         Q+PhYAbLKhyeHHaFSC0bPVEBxZNdtdox118U7rChs1QYMDLhEguooYW3WHlEo9iS8xC4
-         0bT+KO++ZuEVVQFM0TXY1DJX3cY+eNzCOnMuEkuTRwDyrXmScyiHXWnDl0tzomyPMUgS
-         kk/g==
-X-Gm-Message-State: AOJu0Yz4EIeI8VQXt5t7qVtVQ3jDPZKyx0sjx6eMdnph4aHIH75FYRcn
-	i202q6VHY16NSZkmY0LL1xlFBDY5se0jZTaAwj0WRRoQRvwNUuGIn0FhMynUVL1D+B4=
-X-Gm-Gg: Acq92OFS4GvRyiis7TjJuxs+CZYPZMcJsNtK7sNtJ6kazg3Ir8oZ0IZIxpcbjGoAqGl
-	Bvu25NdwrFkWUZHYwMaXmyXCyzX3ruQK6wgJ+KK/s8pov4z0etur/5QYUGVgU9AD7HN22X0MkOo
-	lN32XzTby4Wxoc8HAZ9fTRCCjFvuv6Pd40nxn6msexMK6ifM3xLjPs5QEcR+Nj1cALzmBdDkYWs
-	q8l3EZF0Xdf6rj3TqYW27fqs4E9QsBhGEVJaqXFw5TRh0a8KlIwS9WUKGT53uMPvo3DVtBLdZqF
-	74X3wKNFXq0x3MuhVc4VKpI81+mgg49Tjf3/wXTsmBwIMKqV+fMEjvFjjPBlL9SMEmoiBWwnpBX
-	ivYSiJn9FjyRaalKsFv3ufLhrKbDe1jhT6ze0GozGXjxO3t5cmb16l/OjrrC9Mwk1luvLDnyOeU
-	QTAArKHkb9rVVpstujt13ExPIrV6AmNpJZAzfdrttinG5hPLmYw2SyuURY84rJk8Qb4RpHURy8L
-	kfjyAaxJyjhFYXYDYr2wojo2fpkDx+l1HLw4LIFCSZ2SJX8/g==
-X-Received: by 2002:a05:600c:6558:b0:48f:d5a0:284e with SMTP id 5b1f17b1804b1-490a294b864mr118910765e9.28.1780269476864;
-        Sun, 31 May 2026 16:17:56 -0700 (PDT)
+        bh=OIFmAzxejQrp6RSd8J5lsgupOjIxf+PM9ArBTVLQHLA=;
+        b=pwqQRO/PCElFTk9hXjU1aj07zi+7JrykabnLL5Ygu7NihdRX32rxfKR6Eh4QZe9d2t
+         mc0G+omVUFMrnioO370gqD5t4T7ZWAgcCDo2R5umgyb93yqNtqg02PgogQ1MYOrBVXnC
+         0H2PMqJlmmiaHdlXd7ul0yOIrHQdi6+ugiMWho4/COieRyT0uRI3IwwgEmuYNS9trG3q
+         DQSyCSIFPrarswN0QsCdlvhrwzlWRp58stZidMLDWi7vV1k9ZiXMFQUAnDaxsvulbN2+
+         1SdqGDBwni1x0f/BqljZvgTGCCElo/TVat9JSNQR3Jsncm2w40G8aDpVhOr2DMILBVg+
+         PWqg==
+X-Gm-Message-State: AOJu0YxilO55SYjIDApok9KsUZlEE2kQz6APs76XcZUV/SXVEUxCa+zx
+	CUrLlIK8ijAwQFuPvCDsWOyrzFY31/yLs85BdvDNOpoIGVMurDV3EpRge5ryVYAlwIQ=
+X-Gm-Gg: Acq92OG5s1MvzN9fYWGMnx6oij1kaNZuUjHhnE1wvIlKDkJEPGmofzn5MK8kb/qjCth
+	7ombpdJDQzIR+QTu4boUwKaAgCQSdGJu/wBGedBUoKp4T+V1QQAzukR79JQkGGiOT7OG16GAGvL
+	i+KQTavNUytecPtIVbUrIXc6rtRRfWijDQIausrZkoGyWmqyg7FuOgoWwcCpO8pEllFpRXeYTPg
+	EGIBPTq6hjRC5o/05NF1+2ZJTFoWRVIx8/oZNn/w+u+fPAlwAbbiMc5IPnJhFqpuD6qSPhoL/C5
+	bgIHkWnfv41Ww/ZytBMbbb4QiT79rV8uCZUujAcgoXEOBjTimDd5TT5YZcvroEhvZaVo+iNyEKy
+	l1ESygQKGsrlUgZy8l+nffjeb8LtIUyjYXKGqwk0GlIr+3qU4Uro+3KsAURn7tILboJouljVr7C
+	GAQeTrQF/TXeasw/v2Y6FgXNaD77FXCUW6LlBW0bSPSXaz5LMfPm/Taq6aN37EKT23ldR8nw517
+	r8Wu3Zg7OfiELQrRdATf7gx5jIq8cDqF4nPPza4U8BisZc84Ysqe3D6ul+R
+X-Received: by 2002:a5d:50ce:0:b0:45e:ec18:f207 with SMTP id ffacd0b85a97d-45ef6b58394mr13286575f8f.25.1780269478978;
+        Sun, 31 May 2026 16:17:58 -0700 (PDT)
 Received: from [127.0.1.1] ([2a00:23c5:7815:1301:f27:e3a8:2334:314d])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-45ef34b834esm20496544f8f.11.2026.05.31.16.17.55
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-45ef34b834esm20496544f8f.11.2026.05.31.16.17.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 31 May 2026 16:17:56 -0700 (PDT)
+        Sun, 31 May 2026 16:17:58 -0700 (PDT)
 From: Andrew Murray <amurray@thegoodpenguin.co.uk>
-Date: Mon, 01 Jun 2026 00:17:38 +0100
-Subject: [PATCH RFC 2/4] printk: deprecate boot_delay in favour of
- printk_delay
+Date: Mon, 01 Jun 2026 00:17:39 +0100
+Subject: [PATCH RFC 3/4] printk: nbcon: move printk_delay to console
+ emiting code
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -88,7 +88,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260601-deprecate_boot_delay-v1-2-c34c187142a6@thegoodpenguin.co.uk>
+Message-Id: <20260601-deprecate_boot_delay-v1-3-c34c187142a6@thegoodpenguin.co.uk>
 References: <20260601-deprecate_boot_delay-v1-0-c34c187142a6@thegoodpenguin.co.uk>
 In-Reply-To: <20260601-deprecate_boot_delay-v1-0-c34c187142a6@thegoodpenguin.co.uk>
 To: Jonathan Corbet <corbet@lwn.net>, 
@@ -109,22 +109,22 @@ Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
  linux-rt-devel@lists.linux.dev, 
  Andrew Murray <amurray@thegoodpenguin.co.uk>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780269471; l=4252;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780269471; l=4826;
  i=amurray@thegoodpenguin.co.uk; s=20250914; h=from:subject:message-id;
- bh=NzyYbeRmipVDUcVFnXEzhSA5L8Fjv+M/rg5sEJLce8g=;
- b=i+GDn9CndzdObBjnvYG9EQGVKMlZ7e6Fy6BNLVupTvtxPnVqFEb/bVi2JyX2zv2+YUvaYE0j4
- OueQHamNr33BR1S1U4QUwBadcLGdUbhjHwzvBhiP9fMeOsqdMoVpSvg
+ bh=iIdrzIpbtLvWz4MDbsc58aNL3F6fTnbJs47tQmnDnOs=;
+ b=CxvG+4JeIkfc9bjfcipdZnVZu7SXaVegXQCnK10t1RHUldU1+VRTlLNyK3ajoLsSgkqu8OUZe
+ rJ5HYDCjexuDZ2X4RQnZDoGf2ca1dMBWG5Bdu9Baj3Go2bX8E9BqZbu
 X-Developer-Key: i=amurray@thegoodpenguin.co.uk; a=ed25519;
  pk=0SU0Q8S/uEiCdbXbXS+PvJGUCaBG1nDszD+HPU3Js0Q=
 X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	R_DKIM_ALLOW(-0.20)[thegoodpenguin-co-uk.20251104.gappssmtp.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCPT_COUNT_TWELVE(0.00)[22];
-	TAGGED_FROM(0.00)[bounces-90200-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90198-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	DMARC_NA(0.00)[thegoodpenguin.co.uk];
@@ -136,157 +136,159 @@ X-Spamd-Result: default: False [-1.66 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[amurray@thegoodpenguin.co.uk,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[thegoodpenguin-co-uk.20251104.gappssmtp.com:dkim,thegoodpenguin.co.uk:mid,thegoodpenguin.co.uk:email,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: D24A0618425
+	DBL_BLOCKED_OPENRESOLVER(0.00)[thegoodpenguin-co-uk.20251104.gappssmtp.com:dkim,thegoodpenguin.co.uk:mid,thegoodpenguin.co.uk:email]
+X-Rspamd-Queue-Id: D5A0861841E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-The boot_delay (BOOT_PRINTK_DELAY) kernel parameter and printk_delay sysctl
-are two distinct mechanisms for providing similar functionality which add a
-delay prior to each printed printk message.
+The printk_delay and boot_delay features are helpful for debugging
+as kernel output can be slowed down during boot allowing messages to
+be seen before scrolling off the screen, or to correlate timing between
+some physical event and console output.
 
-boot_delay provides a kernel parameter for delaying printk output from
-kernel start through to boot (SYSTEM_RUNNING), whereas printk_delay is
-configurable only via sysctl and thus is only used post boot.
+However, since the introduction of nbcon and the legacy printer thread
+for PREEMPT_RT kernels, printk records are now emited to the console
+asynchronously to the caller of printk. Thus, any printk delay added by
+boot_delay/printk_delay continues to slow down the calling process but
+may not have any impact to the rate in which records are emited to the
+console.
 
-Let's deprecate the boot_delay feature in favour of printk_delay. In order
-to preserve functionality, we'll also extend printk_delay such that it can
-additionally configured via a kernel parameter.
+Let's address this by moving the printk delay from the calling code
+to the console emiting code instead. Whilst this ensures that delays
+are still observed (especially for slower consoles), it doesn't improve
+the use-case of using boot_delay/printk_delay to correlate timings
+between physical events and console output.
 
 Signed-off-by: Andrew Murray <amurray@thegoodpenguin.co.uk>
 ---
- kernel/printk/printk.c | 75 ++++++++++++++++++++++++++++++++------------------
- 1 file changed, 48 insertions(+), 27 deletions(-)
+ include/linux/printk.h |  4 ++++
+ kernel/printk/nbcon.c  | 13 ++++++++++++-
+ kernel/printk/printk.c | 15 +++++++--------
+ 3 files changed, 23 insertions(+), 9 deletions(-)
 
+diff --git a/include/linux/printk.h b/include/linux/printk.h
+index f594c1266bfd411f2238b45374e8a71222f0407c..8ea3ac8201ad541912547305e241e3661f4d8e05 100644
+--- a/include/linux/printk.h
++++ b/include/linux/printk.h
+@@ -209,6 +209,7 @@ extern bool nbcon_device_try_acquire(struct console *con);
+ extern void nbcon_device_release(struct console *con);
+ void nbcon_atomic_flush_unsafe(void);
+ bool pr_flush(int timeout_ms, bool reset_on_progress);
++void printk_delay(bool use_atomic);
+ #else
+ static inline __printf(1, 0)
+ int vprintk(const char *s, va_list args)
+@@ -326,6 +327,9 @@ static inline bool pr_flush(int timeout_ms, bool reset_on_progress)
+ {
+ 	return true;
+ }
++static inline void printk_delay(bool use_atomic)
++{
++}
+ 
+ #endif
+ 
+diff --git a/kernel/printk/nbcon.c b/kernel/printk/nbcon.c
+index d7044a7a214bdd4537a5e20d876d99bc3ffe8b3a..a507a2fed5bf4366e24330f763b842a698ecf6f7 100644
+--- a/kernel/printk/nbcon.c
++++ b/kernel/printk/nbcon.c
+@@ -1267,11 +1267,16 @@ static int nbcon_kthread_func(void *__console)
+ 
+ 		con_flags = console_srcu_read_flags(con);
+ 
++		wctxt.len = 0;
++
+ 		if (console_is_usable(con, con_flags, false))
+ 			backlog = nbcon_emit_one(&wctxt, false);
+ 
+ 		console_srcu_read_unlock(cookie);
+ 
++		if (backlog && wctxt.len > 0)
++			printk_delay(false);
++
+ 		cond_resched();
+ 
+ 	} while (backlog);
+@@ -1525,6 +1530,8 @@ bool nbcon_legacy_emit_next_record(struct console *con, bool *handover,
+ 	}
+ 
+ 	progress = nbcon_emit_one(&wctxt, use_atomic);
++	if (progress && wctxt.len > 0)
++		printk_delay(use_atomic);
+ 
+ 	if (use_atomic) {
+ 		start_critical_timings();
+@@ -1584,6 +1591,8 @@ static int __nbcon_atomic_flush_pending_con(struct console *con, u64 stop_seq)
+ 			if (!nbcon_context_try_acquire(ctxt, false))
+ 				return -EPERM;
+ 
++			wctxt.len = 0;
++
+ 			/*
+ 			 * nbcon_emit_next_record() returns false when
+ 			 * the console was handed over or taken over.
+@@ -1595,7 +1604,9 @@ static int __nbcon_atomic_flush_pending_con(struct console *con, u64 stop_seq)
+ 			nbcon_context_release(ctxt);
+ 		}
+ 
+-		if (!ctxt->backlog) {
++		if (ctxt->backlog && wctxt.len > 0) {
++			printk_delay(true);
++		} else {
+ 			/* Are there reserved but not yet finalized records? */
+ 			if (nbcon_seq_read(con) < stop_seq)
+ 				err = -ENOENT;
 diff --git a/kernel/printk/printk.c b/kernel/printk/printk.c
-index 822fcdff7b21ac00cfa655c3d9b4de2698fcb7d8..ca510b9c76458f5c1e059200060d9d6be4c859b3 100644
+index ca510b9c76458f5c1e059200060d9d6be4c859b3..5154da85537438905231f829ed8f2ea2550daf77 100644
 --- a/kernel/printk/printk.c
 +++ b/kernel/printk/printk.c
-@@ -1291,40 +1291,28 @@ static bool suppress_message_printing(int level)
- 
- #ifdef CONFIG_GENERIC_CALIBRATE_DELAY
- 
--static int boot_delay; /* msecs delay after each printk during bootup */
- static unsigned long long loops_per_msec;	/* based on boot_delay */
- 
--static int __init boot_delay_setup(char *str)
-+static void __init printk_delay_calculate(void)
- {
- 	unsigned long lpj;
- 
- 	lpj = preset_lpj ? preset_lpj : 1000000;	/* some guess */
- 	loops_per_msec = (unsigned long long)lpj / 1000 * HZ;
- 
--	get_option(&str, &boot_delay);
--	if (boot_delay > 10 * 1000)
--		boot_delay = 0;
--
--	pr_debug("boot_delay: %u, preset_lpj: %ld, lpj: %lu, "
-+	pr_debug("printk_delay: %u, preset_lpj: %ld, lpj: %lu, "
- 		"HZ: %d, loops_per_msec: %llu\n",
--		boot_delay, preset_lpj, lpj, HZ, loops_per_msec);
--	return 0;
-+		printk_delay_msec, preset_lpj, lpj, HZ, loops_per_msec);
+@@ -2140,18 +2140,17 @@ static inline void late_boot_delay_msec(void)
+ 	}
  }
--early_param("boot_delay", boot_delay_setup);
  
--static void boot_delay_msec(int level)
-+static void early_boot_delay_msec(void)
+-static inline void printk_delay(int level)
++void printk_delay(bool use_atomic)
  {
- 	unsigned long long k;
- 	unsigned long timeout;
 -	bool suppress = !is_printk_force_console() &&
 -			suppress_message_printing(level);
 -
--	if ((boot_delay == 0 || system_state >= SYSTEM_RUNNING) || suppress)
--		return;
+-	if (likely(!printk_delay_msec) || suppress)
++	if (likely(!printk_delay_msec))
+ 		return;
  
--	k = (unsigned long long)loops_per_msec * boot_delay;
-+	k = (unsigned long long)loops_per_msec * printk_delay_msec;
- 
--	timeout = jiffies + msecs_to_jiffies(boot_delay);
-+	timeout = jiffies + msecs_to_jiffies(printk_delay_msec);
- 	while (k) {
- 		k--;
- 		cpu_relax();
-@@ -1339,11 +1327,34 @@ static void boot_delay_msec(int level)
- 	}
- }
- #else
--static inline void boot_delay_msec(int level)
-+static inline void __init printk_delay_calculate(void)
-+{
-+}
-+
-+static inline void early_boot_delay_msec(void)
- {
- }
- #endif
- 
-+static int __init printk_delay_setup(char *str)
-+{
-+	get_option(&str, &printk_delay_msec);
-+	if (printk_delay_msec > 10 * 1000)
-+		printk_delay_msec = 0;
-+
-+	printk_delay_calculate();
-+
-+	return 0;
-+}
-+early_param("printk_delay", printk_delay_setup);
-+
-+static int __init boot_delay_setup(char *str)
-+{
-+	pr_warn("boot_delay will soon be deprecated, please use printk_delay instead");
-+	return printk_delay_setup(str);
-+}
-+early_param("boot_delay", boot_delay_setup);
-+
- static bool printk_time = IS_ENABLED(CONFIG_PRINTK_TIME);
- module_param_named(time, printk_time, bool, S_IRUGO | S_IWUSR);
- 
-@@ -2119,18 +2130,28 @@ static u8 *__printk_recursion_counter(void)
- 
- int printk_delay_msec __read_mostly;
- 
-+static inline void late_boot_delay_msec(void)
-+{
-+	int m = printk_delay_msec;
-+
-+	while (m--) {
-+		mdelay(1);
-+		touch_nmi_watchdog();
-+	}
-+}
-+
- static inline void printk_delay(int level)
- {
--	boot_delay_msec(level);
-+	bool suppress = !is_printk_force_console() &&
-+			suppress_message_printing(level);
- 
--	if (unlikely(printk_delay_msec)) {
--		int m = printk_delay_msec;
-+	if (likely(!printk_delay_msec) || suppress)
-+		return;
- 
--		while (m--) {
--			mdelay(1);
--			touch_nmi_watchdog();
--		}
--	}
-+	if (system_state < SYSTEM_RUNNING)
-+		early_boot_delay_msec();
+ 	if (system_state < SYSTEM_RUNNING)
+ 		early_boot_delay_msec();
+-	else
++	else if (use_atomic)
+ 		late_boot_delay_msec();
 +	else
-+		late_boot_delay_msec();
++		msleep(printk_delay_msec);
  }
  
  #define CALLER_ID_MASK 0x80000000
+@@ -2471,8 +2470,6 @@ asmlinkage int vprintk_emit(int facility, int level,
+ 		ft.legacy_direct = false;
+ 	}
+ 
+-	printk_delay(level);
+-
+ 	printed_len = vprintk_store(facility, level, dev_info, fmt, args);
+ 
+ 	if (ft.nbcon_atomic)
+@@ -3171,6 +3168,8 @@ static bool console_emit_next_record(struct console *con, bool *handover, int co
+ 		con->dropped = 0;
+ 	}
+ 
++	printk_delay(true);
++
+ 	/* Write everything out to the hardware. */
+ 
+ 	if (force_legacy_kthread() && !panic_in_progress()) {
 
 -- 
 2.34.1
