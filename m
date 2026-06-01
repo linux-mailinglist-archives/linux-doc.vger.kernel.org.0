@@ -1,150 +1,141 @@
-Return-Path: <linux-doc+bounces-90245-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90247-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wBJQFOVSHWp/YwkAu9opvQ
-	(envelope-from <linux-doc+bounces-90245-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 11:37:41 +0200
+	id yNHsMtNTHWp/YwkAu9opvQ
+	(envelope-from <linux-doc+bounces-90247-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 11:41:39 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E01EB61C913
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 11:37:40 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B42261CA64
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 11:41:39 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 6369F3037F74
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Jun 2026 09:34:56 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 8ECBA3046073
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Jun 2026 09:37:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CAF4F3939A2;
-	Mon,  1 Jun 2026 09:34:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3721E38F65D;
+	Mon,  1 Jun 2026 09:37:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="BI1xqxQG"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="c1PJZNWT"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9495E392C3C
-	for <linux-doc@vger.kernel.org>; Mon,  1 Jun 2026 09:34:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 36287285417;
+	Mon,  1 Jun 2026 09:37:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780306470; cv=none; b=af2ONTO1/piskqKQMlgaUJ9vY4W+BlFXrNBbQuVbLiyFJx+PYIeUELV/2aCy4fsJfQR+bwFoc+HyNPKiQMlRQGl/N2nv/OLxXq7qd2PaPZ++Cg3xTb7ml8J1zQKb7Z26Zym8Rs5N3ZNQIzKmZqCIqNlNwz8rLqP32/aLVnaPq3U=
+	t=1780306659; cv=none; b=E2wUD7FsNR39966H1/7DgMifBl+I8EsnVEWhcInBjqlvBQDU3de8hLzsdpZVHnfNNcRgDAzrXFadBX4JJf8yUBzjMWQ1aXRH8Bkt4o0Eq/DhqpWhs00qQ9G6upoqu7CGlbeFV+kMl4GXkWDgvQroZYDETt0VvdYSAfDIbN9LV1A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780306470; c=relaxed/simple;
-	bh=HoKxu7sdvXYOQg4JuegHpjnjGnSj/skENgH900Vm1GA=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=meSyVE3yKYmKuYCUIFjkkgtnoD1gfy3SiEoOyAvAOhXmxGj2tudv+Ma1tPIocGLIS5JTSB/8FX6qn32nY7LpwqG7W8MkTNpkA/Vi3Gg78rofmKgID1MS5vKNjNBF3dpGajodIrIQ1PIfUHiLKM5Z2GjWnvfLY+Th4MqzeTj6cok=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=BI1xqxQG; arc=none smtp.client-ip=209.85.128.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-49041fb8c23so75155905e9.0
-        for <linux-doc@vger.kernel.org>; Mon, 01 Jun 2026 02:34:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780306465; x=1780911265; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:content-language:from
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=HoKxu7sdvXYOQg4JuegHpjnjGnSj/skENgH900Vm1GA=;
-        b=BI1xqxQG2rCVE4+QKaTAHNJtl6o16XxNDM2+JAeKHEwHbuM/4JZA9MurfHqU2IF99L
-         EUlet3gKOxqSo55XJmBfAOlgWIFvtpbTRvODDLmGT+dD33wsGQWZo0U8Ma6/VCAyOe14
-         KdJAL7QsXAZv4Gcj8DvgXgEQOIUpc5uBpnzeQo+UTdSIEnoJ27Uid4b6lrPr6jikpfsn
-         pl2L8RK8y5AoqdvCGwdJZG4/5qdbVHBLjs3qxIkZs0Z6fjGvh9FROgLIyEr+LMwk2+3C
-         4eoKEDnqe+uHTIxWbRkg43OBHwkJhI729SE91m9xTIl5Pm16MHxwtxpuf9l/l8COhYFg
-         Pkww==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780306465; x=1780911265;
-        h=content-transfer-encoding:in-reply-to:content-language:from
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=HoKxu7sdvXYOQg4JuegHpjnjGnSj/skENgH900Vm1GA=;
-        b=sj51pg/bFlMpJalHjp47xXoV66+9fzahMJGj9Zixh9RGXFzo6RfN3hWBgO1ykj6s/L
-         7f9BZ1iXGI3+TT6qhsJZP14za8wayBedoGlaGvGFdi+dgnlRNqUBKLx2w02bgvFq3xIm
-         B1ik34PftV4DAwp/vLCFS3Z9VJg3vndHJ2y/DVvapQLx9steT39wJAiogy8LQWOCCIWg
-         9JLkh++d0rN67fXf8ppDVJbUMWKnLr0WUlusJn1w0H6hjEANwf5E2paEqfMwV9TqluZ4
-         574buTedCTAsveDrsyLPWvgRNULxaVoaBHKNDmviYOiQbK1qQMz759ANW6rJ0sfQkU/i
-         uyvQ==
-X-Forwarded-Encrypted: i=1; AFNElJ+nPDsHr9jpJQB/iZgXvnAOkJ5UBgmde5aEywWsVCvK4Bp1XKuUDMSNM/I8/sU29oTXhwPaLvoXRk4=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw7VY+yPPPNASf0Kgi7D7+GMVm4bO/sSGxYQNYfKQ4hytFYapAS
-	13MQS5I7Jia3Ir56cSgGn3Lb+qvYRIhEjNIxiMzli5JG69pGWRKY9abR
-X-Gm-Gg: Acq92OFK2OxbzYTdlgLW/AWt10gyW+F1EkhEpwSzzr9F9dqsNuSeBRUOU27T1vkAB0T
-	XXR0jIJnfrmH0ZsrycFXyEzuGZZa6jWxqUp9x8Sd8Q9Hpq8I0jTIYuw6b/LrlrKQwO0ahpUcBUN
-	yM+NnM80+U1XPgXlq9GGverCEPRZd1AJtRaGsZoL/RSo6CZLXSJz/DNNv9qKurGFK0lGPeygmiZ
-	68SRo4EPAtg5kn4CLrOlHTcqVDWPyLfeiakCdwTO9iJ9T4ZMyzpIT9FnXva9+UaNe8yv84Jkdhp
-	TXsXCIzH83aS5u6WkJhoK6Q/i0FGOCH98LcxK5bNFo9My5ie5Ka95o/Rtk0eLgYs+Q7l4bD/oHV
-	TAfKc1tqPlmmXy7HRKcb3245c0BLqetLyL4UhCdBlAfjST8cKscioJHshHuNhdr0bISpOfoig6D
-	7si6ZvcsIaqTXNXHLBYGlrtha5CoQTV9o+//y9mtxV2uxs436fwOo=
-X-Received: by 2002:a05:600c:8a0a:10b0:490:48b7:c1ff with SMTP id 5b1f17b1804b1-490a2941d89mr136512435e9.17.1780306464763;
-        Mon, 01 Jun 2026 02:34:24 -0700 (PDT)
-Received: from ?IPV6:2001:67c:1562:8007::aac:4898? ([2001:67c:1562:8007::aac:4898])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4909c053029sm72992385e9.0.2026.06.01.02.34.19
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 01 Jun 2026 02:34:24 -0700 (PDT)
-Message-ID: <c4ff641a-266b-4115-8beb-993cbb2f09ec@gmail.com>
-Date: Mon, 1 Jun 2026 17:34:10 +0800
+	s=arc-20240116; t=1780306659; c=relaxed/simple;
+	bh=9eE/88fQSqXK3PWBhQXJt59pjMmydVz4iFC/+YtdLa8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=B23/PMkmUcpc7yUOdCxQ5E7PJ74Lz7u55rBP41mrYdQqLIP18xfvQgu0seABKRjEvU75ZTrZDjT7PFRMx6YK699jKckpP35AuzvrvRw06d7oyW35mR4M7ZybehvyLdXvL7s/fpbSteOy4q3EBgYE1YUf2YxAJqj/4+hVMA1wI4Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=c1PJZNWT; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8F2F01F00893;
+	Mon,  1 Jun 2026 09:37:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1780306658;
+	bh=AzbXwY67i7orrJSYLIcDP2MIfpMzq9fPfuSJU14oS7I=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=c1PJZNWT6Jhrtsti0/iLRUjmX2p41TJJfRVGF/3HNXBQB7PyKa2x9bRmyaeFYhkph
+	 S/XYHC6xhKx56Ya51Xak5ZkdEYl7w6jJ5CHtlZipgiVBNEdAMNHH/iRIH0rE/rdUWu
+	 0NcYKv9W6ljVMkX338Av9+n5cEDMlkvl9EyHcrfG4IQCWXZKImq9ht9DNl8Bv5zvtM
+	 ATehWylJaNN+9d/XXQwwW29cYaUrS+pOaBG4dYswLQ5k9wG0aOJ57MhEFaYf6nU2l8
+	 SGi6xk/XJwSfllo85W6VmcGnxePA0rHGqKLm46uy+j9fAJrU+3ZTv7yeI+eHKuE7At
+	 N4eY0MFKY1p+w==
+Date: Mon, 1 Jun 2026 10:37:30 +0100
+From: Lorenzo Stoakes <ljs@kernel.org>
+To: Kiryl Shutsemau <kirill@shutemov.name>
+Cc: akpm@linux-foundation.org, rppt@kernel.org, peterx@redhat.com, 
+	david@kernel.org, surenb@google.com, vbabka@kernel.org, Liam.Howlett@oracle.com, 
+	ziy@nvidia.com, corbet@lwn.net, skhan@linuxfoundation.org, seanjc@google.com, 
+	pbonzini@redhat.com, jthoughton@google.com, aarcange@redhat.com, sj@kernel.org, 
+	usama.arif@linux.dev, linux-mm@kvack.org, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, kvm@vger.kernel.org, 
+	kernel-team@meta.com, stable@vger.kernel.org
+Subject: Re: [PATCH v5 04/18] mm: skip out-of-range bits in mk_vma_flags()
+Message-ID: <ah1Sxn5VHLF6jlcU@lucifer>
+References: <20260526130509.2748441-1-kirill@shutemov.name>
+ <20260526130509.2748441-5-kirill@shutemov.name>
+ <ahmQvfNk7S4F0LBj@lucifer>
+ <ahmoH9v6_DA2i_zn@thinkstation>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] docs/zh_CN: usb: refine translated wording and
- formatting
-To: Kefan Bai <baikefan@leap-io-kernel.com>, linux-usb@vger.kernel.org,
- si.yanteng@linux.dev, gregkh@linuxfoundation.org
-Cc: dzm91@hust.edu.cn, corbet@lwn.net, skhan@linuxfoundation.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- doubled@leap-io-kernel.com, alexs@kernel.org
-References: <20260601033945.555210-1-baikefan@leap-io-kernel.com>
- <20260601082652.650303-1-baikefan@leap-io-kernel.com>
-From: Alex Shi <seakeel@gmail.com>
-Content-Language: en-US
-In-Reply-To: <20260601082652.650303-1-baikefan@leap-io-kernel.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [-2.16 / 15.00];
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ahmoH9v6_DA2i_zn@thinkstation>
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	TAGGED_FROM(0.00)[bounces-90245-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-90247-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[24];
 	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCVD_COUNT_FIVE(0.00)[5];
+	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[seakeel@gmail.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	NEURAL_HAM(-0.00)[-0.999];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[ljs@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: E01EB61C913
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: 7B42261CA64
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-LGTM.
-
-Thanks!
-
-On 2026/6/1 16:26, Kefan Bai wrote:
-> Refine the zh_CN USB translations for clarity and consistency.
+On Fri, May 29, 2026 at 05:09:56PM +0100, Kiryl Shutsemau wrote:
+> On Fri, May 29, 2026 at 03:00:14PM +0100, Lorenzo Stoakes wrote:
+> > > Add VMA_NO_BIT and have DECLARE_VMA_BIT() resolve any bitnum out
+> > > of range to it. vma_flags_set_flag() drops negative bit values.
+> > > The ternary collapses at compile time, the runtime check folds
+> > > away when the bit is in range, and the common path is unchanged.
+> >
+> > Hmm are you sure it does?
 >
-> Improve wording, wrapping, and formatting across the translated
-> USB documents.
+> You were right - I measured it (gcc 15.2, clang 21.1.8, -O2). The
+> DECLARE_VMA_BIT() ternary is fine, but the "if (bit < 0)" guard does not
+> reliably fold: with it, clang stops folding __VMA_UFFD_FLAGS to a constant
+> and gcc keeps a rolled loop; without it, both fold.
 >
-> Link:https://lore.kernel.org/r/2026053149-flaky-shallow-2460@gregkh
-> Suggested-by: Alex Shi<seakeel@gmail.com>
-> Signed-off-by: Kefan Bai<baikefan@leap-io-kernel.com>
-> ---
-> v4:
+> So I've dropped VMA_NO_BIT and gone with your config-gated-mask approach
+> instead: mk_vma_flags_from_masks() plus VMA_UFFD_{MISSING,WP,MINOR,RWP}
+> masks that collapse to EMPTY_VMA_FLAGS when unavailable, so no out-of-range
+> bit ever reaches mk_vma_flags(). __VMA_UFFD_FLAGS now folds to a single
+> constant on both compilers, 32- and 64-bit. Added your Suggested-by.
+>
+> I also took your "use the new API" hint and added a prep patch converting
+> the existing userfaultfd_*() helpers to vma_test_any_mask() (Suggested-by
+> you as well). One deviation: vma_test(vma, VMA_UFFD_RWP_BIT) is itself an
+> out-of-bounds *read* on 32-bit (test_bit(43, &one_long)), so the helpers
+> use vma_test_any_mask() with the masks rather than the bit.
+>
+> > Either way, I think we should break out any fix like this from the series.
+>
+> Agreed - the OOB fix and the other pre-existing fixes will go as a separate
+> series with the RWP work rebased on top.
 
+Ack on all and thanks! :)
+
+>
+> --
+>   Kiryl Shutsemau / Kirill A. Shutemov
+
+Cheers, Lorenzo
 
