@@ -1,45 +1,46 @@
-Return-Path: <linux-doc+bounces-90283-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90281-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8FFpO01rHWrqaAkAu9opvQ
-	(envelope-from <linux-doc+bounces-90283-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 13:21:49 +0200
+	id uDG8LCZrHWrqaAkAu9opvQ
+	(envelope-from <linux-doc+bounces-90281-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 13:21:10 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F93B61E3D3
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 13:21:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3925261E3AF
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 13:21:10 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 7AE0330360AC
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Jun 2026 11:20:40 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 6DF4B300A7D4
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Jun 2026 11:20:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 427113A3E95;
-	Mon,  1 Jun 2026 11:20:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DE3E43A3811;
+	Mon,  1 Jun 2026 11:20:34 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from dggsgout12.his.huawei.com (dggsgout12.his.huawei.com [45.249.212.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6BF3839B947;
-	Mon,  1 Jun 2026 11:20:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8C4623A2E27;
+	Mon,  1 Jun 2026 11:20:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.249.212.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780312836; cv=none; b=JPiGpSUvve/oupoOjVAtzu6z4oDBTsJ43WGQ4w3dLZkpDgqEsqnM1+XtkUnCseVyUjeZX6dWnx1Ut01UBoEMrCOYuiBe6S27aRfry1Lg9TSXneeaX6MgxW1vEm99Eso+pTHRWJKwgjW48z+Qm3ARXFrSCePegvINVc7GBt2KhNw=
+	t=1780312834; cv=none; b=d7IXtYPx15anjIyFnKmgRpU5S3qJ3EXEIElWG4b+YKLnG2LPg5xLNfMHAizL5tdy6ADJFVpPtxZly7bABntanlQJs7r+DSLrIp/AqgD4qjE4LDbd2grzS1IeSwAefDt2I3RSUru6EE1NB7yMiqnwegBUS78689LPAtOdd2YXKs8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780312836; c=relaxed/simple;
-	bh=Gxton/4wo3wXBqeRE9ui8o2fYIJTnYjXq9a+3voQdSY=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=sJetAFV4kG0AOWHfcaGF1XpoNP+UJbUjqsQAm7FvlTBjKQyAppdOGdEgv4mZ13KwxciUcJScD9rDFzIv8Fbkb4zoN/RiPIIMvGmQfDRpV4ouqssDy3KDK+y0qt5puwFECuNzflFKEUjtZ/IiMEJo9LPeO3trBNS9C/K7pw/arPQ=
+	s=arc-20240116; t=1780312834; c=relaxed/simple;
+	bh=dvGSY3uD07SUnDfVvyBA1vXKnZeMwgeMTMvTHVs6uWM=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=uf61kJvOSmtv8zqRGgKrBTkA5ls3EqIxd/o56vCVPKqK8n+uT+kyOWBph73fyIWF8UeX4bp0Dj/7mdsvKMnhX07VxoDb/CZk82H5qxTrxbc83CJRfvEaIYV7JGahRuWr3ZrCG8zXwumhUkhjM7hZwypAdfUpXnpj/MCIIk0ETBc=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com; spf=pass smtp.mailfrom=huaweicloud.com; arc=none smtp.client-ip=45.249.212.56
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huaweicloud.com
 Received: from mail.maildlp.com (unknown [172.19.163.177])
-	by dggsgout12.his.huawei.com (SkyGuard) with ESMTPS id 4gTWhg5c7WzKHN0w;
-	Mon,  1 Jun 2026 19:20:03 +0800 (CST)
+	by dggsgout12.his.huawei.com (SkyGuard) with ESMTPS id 4gTWhj3xvyzKHN15;
+	Mon,  1 Jun 2026 19:20:05 +0800 (CST)
 Received: from mail02.huawei.com (unknown [10.116.40.112])
-	by mail.maildlp.com (Postfix) with ESMTP id 5BB304058C;
-	Mon,  1 Jun 2026 19:20:26 +0800 (CST)
+	by mail.maildlp.com (Postfix) with ESMTP id 1EFB24058C;
+	Mon,  1 Jun 2026 19:20:28 +0800 (CST)
 Received: from huaweicloud.com (unknown [10.50.87.109])
-	by APP1 (Coremail) with SMTP id cCh0CgB3ej_iah1qEvbwAA--.46998S4;
-	Mon, 01 Jun 2026 19:20:24 +0800 (CST)
+	by APP1 (Coremail) with SMTP id cCh0CgB3ej_iah1qEvbwAA--.46998S5;
+	Mon, 01 Jun 2026 19:20:27 +0800 (CST)
 From: Zeng Heng <zengheng@huaweicloud.com>
 To: vladimir.murzin@arm.com,
 	xuwei5@huawei.com,
@@ -68,10 +69,12 @@ Cc: linux-arm-kernel@lists.infradead.org,
 	wangkefeng.wang@huawei.com,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH v3 0/2] arm64: cpufeature: Add WORKAROUND_DISABLE_CNP capability
-Date: Mon,  1 Jun 2026 19:19:58 +0800
-Message-ID: <20260601112000.1145391-1-zengheng@huaweicloud.com>
+Subject: [PATCH v3 1/2] arm64: cpufeature: Add WORKAROUND_DISABLE_CNP capability
+Date: Mon,  1 Jun 2026 19:19:59 +0800
+Message-ID: <20260601112000.1145391-2-zengheng@huaweicloud.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260601112000.1145391-1-zengheng@huaweicloud.com>
+References: <20260601112000.1145391-1-zengheng@huaweicloud.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -79,23 +82,24 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:cCh0CgB3ej_iah1qEvbwAA--.46998S4
-X-Coremail-Antispam: 1UD129KBjvdXoWrtFyDJFyxCr47Aw18ur15Arb_yoWfZFX_tr
-	1xKa4rWryfAFy0qayFya4fAryjkFW8tr98GF1IqrZ8GF9Ivr1xCrWrKFyrCws8Z3WSgrWU
-	Ja4DZr1kArZFqjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
-	9fnUUIcSsGvfJTRUUUbxAYFVCjjxCrM7AC8VAFwI0_Wr0E3s1l1xkIjI8I6I8E6xAIw20E
-	Y4v20xvaj40_JFC_Wr1l1IIY67AEw4v_Jr0_Jr4l8cAvFVAK0II2c7xJM28CjxkF64kEwV
-	A0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVW7JVWDJwA2z4x0Y4vE2Ix0cI8IcVCY1x02
-	67AKxVWxJVW8Jr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxV
-	AFwI0_GcCE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2
-	j2WlYx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7x
-	kEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwACI402YVCY1x02628vn2kIc2xKxwCY1x0262kK
-	e7AKxVW8ZVWrXwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c
-	02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_GFv_
-	WrylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7
-	CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v2
-	6r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x07
-	jxCztUUUUU=
+X-CM-TRANSID:cCh0CgB3ej_iah1qEvbwAA--.46998S5
+X-Coremail-Antispam: 1UD129KBjvJXoWxGw4DGF47Gr13Wr4DZr4xJFb_yoWrGw4Upr
+	yjk3yrJr47uF1UG348X3ZxurWYkan3Gw1Ygryjg34qqr4avrWUCFs5Z3y7ZFs2qF9ruw48
+	KFnFkrn5ZF1jy37anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUP2b4IE77IF4wAFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k2
+	6cxKx2IYs7xG6r1S6rWUM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUGw
+	A2048vs2IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxS
+	w2x7M28EF7xvwVC0I7IYx2IY67AKxVW7JVWDJwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxV
+	WxJVW8Jr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_
+	GcCE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx
+	0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWU
+	JVW8JwACjcxG0xvY0x0EwIxGrwACI402YVCY1x02628vn2kIc2xKxwCY1x0262kKe7AKxV
+	W8ZVWrXwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E
+	14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_GFv_WrylIx
+	kGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAF
+	wI0_Cr0_Gr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJV
+	W8JwCI42IY6I8E87Iv6xkF7I0E14v26r4UJVWxJrUvcSsGvfC2KfnxnUUI43ZEXa7IU04q
+	2tUUUUU==
 X-CM-SenderInfo: p2hqwxhhqjqx5xdzvxpfor3voofrz/
 X-Spamd-Result: default: False [0.04 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
@@ -107,7 +111,7 @@ X-Spamd-Result: default: False [0.04 / 15.00];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	TAGGED_FROM(0.00)[bounces-90283-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90281-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
@@ -120,36 +124,109 @@ X-Spamd-Result: default: False [0.04 / 15.00];
 	PRECEDENCE_BULK(0.00)[];
 	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[6];
-	NEURAL_HAM(-0.00)[-0.833];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[huawei.com:email,huaweicloud.com:mid,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: 6F93B61E3D3
+	NEURAL_HAM(-0.00)[-0.958];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[huaweicloud.com:mid,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,arm.com:email,huawei.com:email]
+X-Rspamd-Queue-Id: 3925261E3AF
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 From: Zeng Heng <zengheng4@huawei.com>
 
-v2: https://lore.kernel.org/all/20260529063132.766491-1-zengheng@huaweicloud.com/
-v1: https://lore.kernel.org/all/20260526015720.206854-1-zengheng@huaweicloud.com/
+The NVIDIA Carmel CNP erratum is not the only case requiring CNP to be
+disabled. Abstract this into a common WORKAROUND_DISABLE_CNP capability
+to facilitate adding errata for future chips and reduce duplicate
+checks in has_useable_cnp().
 
-Changes in v3:
-  - Keep CONFIG_ARM64_WORKAROUND_DISABLE_CNP config and generalise
-    ARM64_WORKAROUND_DISABLE_CNP capability.
+This serves as a prerequisite for the subsequent Hisilicon erratum
+162100125.
 
-Changes in v2:
-  - Unify CNP disable workaround into ARM64_WORKAROUND_DISABLE_CNP
+Suggested-by: Vladimir Murzin <vladimir.murzin@arm.com>
+Signed-off-by: Zeng Heng <zengheng4@huawei.com>
+---
+ arch/arm64/Kconfig               | 4 ++++
+ arch/arm64/include/asm/cpucaps.h | 4 ++--
+ arch/arm64/kernel/cpu_errata.c   | 4 ++--
+ arch/arm64/kernel/cpufeature.c   | 2 +-
+ arch/arm64/tools/cpucaps         | 2 +-
+ 5 files changed, 10 insertions(+), 6 deletions(-)
 
-Zeng Heng (2):
-  arm64: cpufeature: Add WORKAROUND_DISABLE_CNP capability
-  arm64: kernel: Disable CNP on HiSilicon HIP09
+diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
+index fe60738e5943..f297517a83b9 100644
+--- a/arch/arm64/Kconfig
++++ b/arch/arm64/Kconfig
+@@ -1315,9 +1315,13 @@ config QCOM_FALKOR_ERRATUM_E1041
 
- Documentation/arch/arm64/silicon-errata.rst |  2 ++
- arch/arm64/Kconfig                          | 20 ++++++++++++++++++++
- arch/arm64/include/asm/cpucaps.h            |  4 ++--
- arch/arm64/kernel/cpu_errata.c              | 17 ++++++++++++-----
- arch/arm64/kernel/cpufeature.c              |  2 +-
- arch/arm64/tools/cpucaps                    |  2 +-
- 6 files changed, 38 insertions(+), 9 deletions(-)
+ 	  If unsure, say Y.
 
++config ARM64_WORKAROUND_DISABLE_CNP
++	bool
++
+ config NVIDIA_CARMEL_CNP_ERRATUM
+ 	bool "NVIDIA Carmel CNP: CNP on Carmel semantically different than ARM cores"
+ 	default y
++	select ARM64_WORKAROUND_DISABLE_CNP
+ 	help
+ 	  If CNP is enabled on Carmel cores, non-sharable TLBIs on a core will not
+ 	  invalidate shared TLB entries installed by a different core, as it would
+diff --git a/arch/arm64/include/asm/cpucaps.h b/arch/arm64/include/asm/cpucaps.h
+index d0d3cdd5763c..25c61cda901c 100644
+--- a/arch/arm64/include/asm/cpucaps.h
++++ b/arch/arm64/include/asm/cpucaps.h
+@@ -58,8 +58,8 @@ cpucap_is_possible(const unsigned int cap)
+ 		return IS_ENABLED(CONFIG_ARM64_ERRATUM_2658417);
+ 	case ARM64_WORKAROUND_CAVIUM_23154:
+ 		return IS_ENABLED(CONFIG_CAVIUM_ERRATUM_23154);
+-	case ARM64_WORKAROUND_NVIDIA_CARMEL_CNP:
+-		return IS_ENABLED(CONFIG_NVIDIA_CARMEL_CNP_ERRATUM);
++	case ARM64_WORKAROUND_DISABLE_CNP:
++		return IS_ENABLED(CONFIG_ARM64_WORKAROUND_DISABLE_CNP);
+ 	case ARM64_WORKAROUND_REPEAT_TLBI:
+ 		return IS_ENABLED(CONFIG_ARM64_WORKAROUND_REPEAT_TLBI);
+ 	case ARM64_WORKAROUND_SPECULATIVE_SSBS:
+diff --git a/arch/arm64/kernel/cpu_errata.c b/arch/arm64/kernel/cpu_errata.c
+index 5377e4c2eba2..b0db946568b7 100644
+--- a/arch/arm64/kernel/cpu_errata.c
++++ b/arch/arm64/kernel/cpu_errata.c
+@@ -801,11 +801,11 @@ const struct arm64_cpu_capabilities arm64_errata[] = {
+ 				  1, 0),
+ 	},
+ #endif
+-#ifdef CONFIG_NVIDIA_CARMEL_CNP_ERRATUM
++#ifdef CONFIG_ARM64_WORKAROUND_DISABLE_CNP
+ 	{
+ 		/* NVIDIA Carmel */
+ 		.desc = "NVIDIA Carmel CNP erratum",
+-		.capability = ARM64_WORKAROUND_NVIDIA_CARMEL_CNP,
++		.capability = ARM64_WORKAROUND_DISABLE_CNP,
+ 		ERRATA_MIDR_ALL_VERSIONS(MIDR_NVIDIA_CARMEL),
+ 	},
+ #endif
+diff --git a/arch/arm64/kernel/cpufeature.c b/arch/arm64/kernel/cpufeature.c
+index 6d53bb15cf7b..20c5f24f74a9 100644
+--- a/arch/arm64/kernel/cpufeature.c
++++ b/arch/arm64/kernel/cpufeature.c
+@@ -1785,7 +1785,7 @@ has_useable_cnp(const struct arm64_cpu_capabilities *entry, int scope)
+ 	if (is_kdump_kernel())
+ 		return false;
+
+-	if (cpus_have_cap(ARM64_WORKAROUND_NVIDIA_CARMEL_CNP))
++	if (cpus_have_cap(ARM64_WORKAROUND_DISABLE_CNP))
+ 		return false;
+
+ 	return has_cpuid_feature(entry, scope);
+diff --git a/arch/arm64/tools/cpucaps b/arch/arm64/tools/cpucaps
+index 811c2479e82d..9b85a84f6fd4 100644
+--- a/arch/arm64/tools/cpucaps
++++ b/arch/arm64/tools/cpucaps
+@@ -120,7 +120,7 @@ WORKAROUND_CAVIUM_TX2_219_PRFM
+ WORKAROUND_CAVIUM_TX2_219_TVM
+ WORKAROUND_CLEAN_CACHE
+ WORKAROUND_DEVICE_LOAD_ACQUIRE
+-WORKAROUND_NVIDIA_CARMEL_CNP
++WORKAROUND_DISABLE_CNP
+ WORKAROUND_PMUV3_IMPDEF_TRAPS
+ WORKAROUND_QCOM_FALKOR_E1003
+ WORKAROUND_QCOM_ORYON_CNTVOFF
 --
 2.43.0
 
