@@ -1,61 +1,61 @@
-Return-Path: <linux-doc+bounces-90275-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90277-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QK/tE05hHWojZwkAu9opvQ
-	(envelope-from <linux-doc+bounces-90275-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 12:39:10 +0200
+	id AB4QO5FjHWpHaAkAu9opvQ
+	(envelope-from <linux-doc+bounces-90277-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 12:48:49 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A412C61DADA
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 12:39:09 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 022DB61DD72
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 12:48:48 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id BA9DA30416F5
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Jun 2026 10:23:54 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 5F29A300C3B0
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Jun 2026 10:48:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4FD8038D40C;
-	Mon,  1 Jun 2026 10:23:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B4CC0393DF5;
+	Mon,  1 Jun 2026 10:48:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="c833BeYw"
+	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="neaGU8o1"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from out-186.mta0.migadu.com (out-186.mta0.migadu.com [91.218.175.186])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 21D30366042;
-	Mon,  1 Jun 2026 10:23:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD17039A4BA
+	for <linux-doc@vger.kernel.org>; Mon,  1 Jun 2026 10:48:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.186
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780309433; cv=none; b=LS3kccMHUUXORfZsEZz0zUX8gNntjHDeHE9ICqGc0+VOrUZQ9XqFY2kIiPs/6IW+GUhxIcUaqSQRfODFEsCl2BaePLm5958V6sEdmENU533kafALyU4UbiDuMrlVnR1N4RbHao9GsCJbqducTQs/wyQZ+3e6QRd9IKikyzpow+A=
+	t=1780310913; cv=none; b=m1DyTvto2t2x3FzzaEHDgSGlBuDMnrcs5gjNj747AVb7pL4i7SHhvfgU5ZLxqgI2wCbtnvPHJhC4dlW/mUQEglyCYXC/unvedbRw87jkIiS+UzcVDDAb1nzaCBdbFAj0dVx9ivWHZ2fE7Z1Av729AS/qdyYyPsOb1jBXUatUkuA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780309433; c=relaxed/simple;
-	bh=2E883kgTXUL29AKJNWLQ3zzb7tdvdjFLXCJfHhXA4hw=;
+	s=arc-20240116; t=1780310913; c=relaxed/simple;
+	bh=T7HEqqKt/hcYTLG5nwxbWXpj7+Okw4kr4HMN7yBXN3g=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=k7Nrr4TBQ+/ejM2azhm+bH3MFwsWlATO1PUdT7EZO9D5JN49PmYEuBgtSEmmf9Whwmg11g8+bs+ZYx96lG87CIixP1LrcyHKiO6Fevqgd7PETTiADjMwh62FEwYMQEotEBPvQqP14BLU+onDKtfqbTGJeeC9zsoKu+V94sq3VDI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=c833BeYw; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 45F371F00893;
-	Mon,  1 Jun 2026 10:23:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1780309430;
-	bh=i98ewwvptaynRm7UjfKX4kD/Leq2g7oiiApUuPFAV2U=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=c833BeYwgWz0ppp2x5phqCnJSunVgereyjGFUP4VqomH4E1+QpFfXKobIPxqHWZjf
-	 mHsIUimognUz54K96CBjCRux7u5M+O3Fns9wbdjp0/SfXsM5HOfeyQIKeIBQ2+IxQK
-	 VdGUz2DB8VatOJWgXIaufLTsE/5ra+O+5teh72LQe+jWlTOSUmxZtZsSojv2M9Jifd
-	 kicJVxsrzwL2zbz0aLVT4FgrsgN2rKBfx/N+CsNTRqdmNCn6X9BBnbueQgumucs+I+
-	 eHf+Qiz0MgWpWxRaJbOr7V12LUXNhYpe4ePGGEX9K2h7Mg7rr/KZ+q6an5DZThkQhv
-	 gqc+JIOA7PrpA==
-Message-ID: <6b11bf0a-769c-4ef2-ac6f-2af38200a6bc@kernel.org>
-Date: Mon, 1 Jun 2026 12:23:33 +0200
+	 In-Reply-To:Content-Type; b=mEK5LTqIhr5zybHHveObGGIm6IkjYCjG/rS+WXbq4Hf1vk2by9HYbDifCq5abPIYKebp1TJVuDtZeq7O6bveQFZCuUmpPMweiY0bu0SroAjk3L3lUfU9apSWWPmpw8YOHQ405CZkcCDQKmJeYm3I3+cw1aj+nKm7JWG1ZWyqQmM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=neaGU8o1; arc=none smtp.client-ip=91.218.175.186
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
+Message-ID: <baa0a462-46e0-44ab-b583-c722ad253afe@linux.dev>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1780310899;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=CpP3p+OZ5kTTKtnC7lknJ8SUiTBUDhdsLvtMvZmEm/4=;
+	b=neaGU8o1iE3/4nTUTm1ddWoYsE2dfW3eX7wU62CONcntJ79HSV+NHfJSc9y6ThIun4wasJ
+	BP4QDwazz2Xy7sFW7AuQhOUSjEUvavOzPE0+8qTglgU72VGjV5ffSvP3JWtwytKfZnfQwP
+	88YxT/UrKu+ag27omxnIeveYLz889ok=
+Date: Mon, 1 Jun 2026 18:47:46 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH mm-unstable v18 06/14] mm/khugepaged: generalize
  collapse_huge_page for mTHP collapse
-To: Lance Yang <lance.yang@linux.dev>
+Content-Language: en-US
+To: "David Hildenbrand (Arm)" <david@kernel.org>
 Cc: npache@redhat.com, linux-doc@vger.kernel.org,
  linux-kernel@vger.kernel.org, linux-mm@kvack.org,
  linux-trace-kernel@vger.kernel.org, aarcange@redhat.com,
@@ -81,182 +81,145 @@ References: <2024af56-5e99-4799-a586-e9ba756cecb9@kernel.org>
  <20260601032804.96122-1-lance.yang@linux.dev>
  <f5d38f64-ab92-496d-afd3-29ccc17fec2b@kernel.org>
  <616de1a8-1cfd-40b8-b04f-7b324be40bfd@linux.dev>
-From: "David Hildenbrand (Arm)" <david@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=david@kernel.org; keydata=
- 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
- qIws/H2t
-In-Reply-To: <616de1a8-1cfd-40b8-b04f-7b324be40bfd@linux.dev>
-Content-Type: text/plain; charset=UTF-8
+ <6b11bf0a-769c-4ef2-ac6f-2af38200a6bc@kernel.org>
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Lance Yang <lance.yang@linux.dev>
+In-Reply-To: <6b11bf0a-769c-4ef2-ac6f-2af38200a6bc@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Migadu-Flow: FLOW_OUT
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	FREEMAIL_CC(0.00)[redhat.com,vger.kernel.org,kvack.org,linux-foundation.org,arm.com,nvidia.com,kernel.org,linux.alibaba.com,sk.com,gentwo.org,lwn.net,linux.intel.com,gourry.net,cmpxchg.org,google.com,suse.cz,gmail.com,infradead.org,efficios.com,intel.com,suse.com,suse.de,goodmis.org,amd.com,huawei.com,os.amperecomputing.com,linux.dev];
-	TAGGED_FROM(0.00)[bounces-90275-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90277-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	RCVD_COUNT_THREE(0.00)[3];
 	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DKIM_TRACE(0.00)[linux.dev:+];
+	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
 	RCPT_COUNT_GT_50(0.00)[59];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[david@kernel.org,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[lance.yang@linux.dev,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: A412C61DADA
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:mid,linux.dev:dkim,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: 022DB61DD72
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 6/1/26 11:08, Lance Yang wrote:
-> 
-> 
-> On 2026/6/1 14:54, David Hildenbrand (Arm) wrote:
->> On 6/1/26 05:28, Lance Yang wrote:
->>>
->>>
->>> Ah, fair point.
->>>
->>> I was mostly worried about arch hooks that walk vma->vm_mm again, rather
->>> than only using the pte pointer passed in. For example, mips does:
->>
->> Right, a re-walk would be the real problem.
->>
->>>
->>>    update_mmu_cache_range()
->>>      -> __update_tlb()
->>>        -> pgd_offset(vma->vm_mm, address)
->>>        -> pte_offset_map(...)
->>>
->>> and __update_tlb() has this assumption:
->>>
->>>         /*
->>>          * update_mmu_cache() is called between pte_offset_map_lock()
->>>          * and pte_unmap_unlock(), so we can assume that ptep is not
->>>          * NULL here: and what should be done below if it were NULL?
->>>          */
->>>
->>> So if khugepaged happens to run with current->active_mm == vma->vm_mm
->>> here, could __update_tlb() hit the none PMD, get NULL from
->>> pte_offset_map(), and then dereference it?
->>
->> Likely yes -- that MIPS code is horrible. And the comment in MIPS code
->> even spells that out. :(
->>
->> Do you know about other code like that, or is MIPS the only one doing a
->> re-walk and crossing fingers?
->>
->>>
->>> Just wanted to raise it since some arch code may still have assumptions
->>> like this, and the always-enable-mTHP work is getting closer ...
->>
->> Right. I assume set_pte_at() couldn't trigger something similar (re-walk) in
->> arch code,
->> because we simply provide the ptep. update_mmu_cache_range() only consumes the
->> pte.
->>
->>>
->>> Probably very very very hard to hit, though :)
->>
->> Delaying update_mmu_cache_range() is nasty, as we'd have to make sure that
->> nobody can interfere in the meantime ... and the PMD lock will not be sufficient.
->>
->> Maybe we could reinstall the page table with the cleared (none) entries while
->> still holding the PTL?
->>
->> Thinking out loud:
->>
->> diff --git a/mm/khugepaged.c b/mm/khugepaged.c
->> index 5ba298d420b7..e39b750b1e6f 100644
->> --- a/mm/khugepaged.c
->> +++ b/mm/khugepaged.c
->> @@ -1413,13 +1413,17 @@ static enum scan_result collapse_huge_page(struct
->> mm_struct *mm, unsigned long s
->>                  map_anon_folio_pmd_nopf(folio, pmd, vma, pmd_addr);
->>          } else {
->>                  /*
->> -                * set_ptes is called in map_anon_folio_pte_nopf with the
->> -                * pmd_ptl lock still held; this is safe as the PMD is expected
->> -                * to be none. The pmd entry is then repopulated below.
->> +                * Re-insert the page table with the cleared entries, but
->> +                * hold the PTL, such that no one can mess with the re-installed
->> +                * page table until we updated the temporarily-cleared entries
->> +                * through map_anon_folio_pte_nopf().
->>                   */
->> -               map_anon_folio_pte_nopf(folio, pte, vma, start_addr, /
->> *uffd_wp=*/ false);
->> -               smp_wmb(); /* make PTEs visible before PMD. See pmd_install() */
-> 
-> One small thing, I think we should probably keep the smp_wmb(), and just
-> move it before the earlier pmd_populate().
-> 
-> IIUC, the ordering we want is still:
-> 
->   clear old PTEs
->   smp_wmb()
->   pmd_populate()
-> 
-> so another CPU cannot walk through the re-installed PMD and still observe
-> the old PTEs, right?
 
-There is a smp_wmb() in __folio_mark_uptodate(), that should be sufficient?
 
--- 
-Cheers,
+On 2026/6/1 18:23, David Hildenbrand (Arm) wrote:
+> On 6/1/26 11:08, Lance Yang wrote:
+>>
+>>
+>> On 2026/6/1 14:54, David Hildenbrand (Arm) wrote:
+>>> On 6/1/26 05:28, Lance Yang wrote:
+>>>>
+>>>>
+>>>> Ah, fair point.
+>>>>
+>>>> I was mostly worried about arch hooks that walk vma->vm_mm again, rather
+>>>> than only using the pte pointer passed in. For example, mips does:
+>>>
+>>> Right, a re-walk would be the real problem.
+>>>
+>>>>
+>>>>     update_mmu_cache_range()
+>>>>       -> __update_tlb()
+>>>>         -> pgd_offset(vma->vm_mm, address)
+>>>>         -> pte_offset_map(...)
+>>>>
+>>>> and __update_tlb() has this assumption:
+>>>>
+>>>>          /*
+>>>>           * update_mmu_cache() is called between pte_offset_map_lock()
+>>>>           * and pte_unmap_unlock(), so we can assume that ptep is not
+>>>>           * NULL here: and what should be done below if it were NULL?
+>>>>           */
+>>>>
+>>>> So if khugepaged happens to run with current->active_mm == vma->vm_mm
+>>>> here, could __update_tlb() hit the none PMD, get NULL from
+>>>> pte_offset_map(), and then dereference it?
+>>>
+>>> Likely yes -- that MIPS code is horrible. And the comment in MIPS code
+>>> even spells that out. :(
+>>>
+>>> Do you know about other code like that, or is MIPS the only one doing a
+>>> re-walk and crossing fingers?
+>>>
+>>>>
+>>>> Just wanted to raise it since some arch code may still have assumptions
+>>>> like this, and the always-enable-mTHP work is getting closer ...
+>>>
+>>> Right. I assume set_pte_at() couldn't trigger something similar (re-walk) in
+>>> arch code,
+>>> because we simply provide the ptep. update_mmu_cache_range() only consumes the
+>>> pte.
+>>>
+>>>>
+>>>> Probably very very very hard to hit, though :)
+>>>
+>>> Delaying update_mmu_cache_range() is nasty, as we'd have to make sure that
+>>> nobody can interfere in the meantime ... and the PMD lock will not be sufficient.
+>>>
+>>> Maybe we could reinstall the page table with the cleared (none) entries while
+>>> still holding the PTL?
+>>>
+>>> Thinking out loud:
+>>>
+>>> diff --git a/mm/khugepaged.c b/mm/khugepaged.c
+>>> index 5ba298d420b7..e39b750b1e6f 100644
+>>> --- a/mm/khugepaged.c
+>>> +++ b/mm/khugepaged.c
+>>> @@ -1413,13 +1413,17 @@ static enum scan_result collapse_huge_page(struct
+>>> mm_struct *mm, unsigned long s
+>>>                   map_anon_folio_pmd_nopf(folio, pmd, vma, pmd_addr);
+>>>           } else {
+>>>                   /*
+>>> -                * set_ptes is called in map_anon_folio_pte_nopf with the
+>>> -                * pmd_ptl lock still held; this is safe as the PMD is expected
+>>> -                * to be none. The pmd entry is then repopulated below.
+>>> +                * Re-insert the page table with the cleared entries, but
+>>> +                * hold the PTL, such that no one can mess with the re-installed
+>>> +                * page table until we updated the temporarily-cleared entries
+>>> +                * through map_anon_folio_pte_nopf().
+>>>                    */
+>>> -               map_anon_folio_pte_nopf(folio, pte, vma, start_addr, /
+>>> *uffd_wp=*/ false);
+>>> -               smp_wmb(); /* make PTEs visible before PMD. See pmd_install() */
+>>
+>> One small thing, I think we should probably keep the smp_wmb(), and just
+>> move it before the earlier pmd_populate().
+>>
+>> IIUC, the ordering we want is still:
+>>
+>>    clear old PTEs
+>>    smp_wmb()
+>>    pmd_populate()
+>>
+>> so another CPU cannot walk through the re-installed PMD and still observe
+>> the old PTEs, right?
+> 
+> There is a smp_wmb() in __folio_mark_uptodate(), that should be sufficient?
 
-David
+Ah, cool! __folio_mark_uptodate() already does the job :P
+
+So yeah, no extra smp_wmb() needed here!
+
+Cheers, Lance
+
 
