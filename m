@@ -1,56 +1,56 @@
-Return-Path: <linux-doc+bounces-90258-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90260-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YP2aDJVbHWr0ZgkAu9opvQ
-	(envelope-from <linux-doc+bounces-90258-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 12:14:45 +0200
+	id JdqbE15YHWqwZgkAu9opvQ
+	(envelope-from <linux-doc+bounces-90260-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 12:01:02 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7F0EE61D282
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 12:14:44 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id B1A6561CF5C
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 12:01:01 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id BC2DE313B3C7
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Jun 2026 09:53:24 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 68CFC32155A9
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Jun 2026 09:53:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9DF593A59B1;
-	Mon,  1 Jun 2026 09:49:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 28F2D3A6B67;
+	Mon,  1 Jun 2026 09:49:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="CGyYVbD7"
+	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="HGwpKv0O"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from canpmsgout05.his.huawei.com (canpmsgout05.his.huawei.com [113.46.200.220])
+Received: from canpmsgout08.his.huawei.com (canpmsgout08.his.huawei.com [113.46.200.223])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4985238AC99;
-	Mon,  1 Jun 2026 09:49:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.220
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3C693A5989;
+	Mon,  1 Jun 2026 09:49:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.223
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780307361; cv=none; b=UDcR7RWL/KIo3niSrEQkpihLiY+rUEbM5Drj8+YvNUHcKkbkjtdU0tkctka+QGmt1Rvv3hKYoCZsG1uLZMtmMumFs0n43hpIr+9VLtZ6tTeir3uJ008xwrhr/r+wn8UvS6BjKUXSDUnfQMLnBQ43CLczCkSdo17SMg27qnKIA3k=
+	t=1780307369; cv=none; b=ENPXHI+L/Wo1bWDKCeJkGiFsTB3SpPPflg/8WeBFbjjAvoxPN6BFmLF20gYE0MauHvxR0ugVpfu9j2V8h503bl93imlnQy1c3yCr+6YvUuZVpSAfPYVFX46rDsmJmKqv5tGbTph9oMY5K6uGcBYA1xJJbqtPZtp/tLoHwq+J7pE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780307361; c=relaxed/simple;
-	bh=bDBGw+/44lWMAbskVKorFLnBHGTb3IX2ml5xfQQk7n0=;
+	s=arc-20240116; t=1780307369; c=relaxed/simple;
+	bh=fLGjiZzUwqqk2Rjy+lirz48w6trkeGSAfDwg46aO3PQ=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=e5b0FgyKLucD3N83xIDxIElC1jYDqn/EFJoeJNyOq/qZOVUZuZS/M/uq3+asuu6JJvmQLaUwWHUhHQDx4UGTqAn7Pptd4Ei3r6qDF2ZmgI6TF98fY1uYwhKERsz9nemHBI2jROw0ajOadCWny8TU/cnrTnctpdoNbgAXDegUOdc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=CGyYVbD7; arc=none smtp.client-ip=113.46.200.220
+	 MIME-Version:Content-Type; b=Hh+zfW7p2eWDbKY5C7kCP3SluZiWHxRPqwTbACPCJ/cq5uHsO21qoFcWplW2uETXe22Ktza2KIQ7kgdWr+G5LCy/KNlW+2qu7DZww8D0cpdUNIUFVsNvmjtfIVFnwLpf3GOpK5jGPtxJFejTTixwhluXxyH3M2NgNPjeNk5XPgs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=HGwpKv0O; arc=none smtp.client-ip=113.46.200.223
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
 dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
 	c=relaxed/relaxed; q=dns/txt;
 	h=From;
-	bh=KOHJL6mB3QG5vHKM18gpTSqf5pouid7XPpWu+feKDDU=;
-	b=CGyYVbD74f6ojvlQ2RjjD+G63/AYVfLUPyObucsAa1qv1wH5L6x6HyV1k861pqznz+0ZdBfVH
-	cEgjV9n20kMLCmaxIM24r48pPiCMvW1SmTf5FnuwY25bpdgeKC3N+uylR+JeqvJVYmccZSBBmGU
-	tnuZ1w/PVmvl1SLSIysESLM=
-Received: from mail.maildlp.com (unknown [172.19.162.140])
-	by canpmsgout05.his.huawei.com (SkyGuard) with ESMTPS id 4gTTVc4GQwz12LGX;
-	Mon,  1 Jun 2026 17:41:12 +0800 (CST)
+	bh=/EZ2c7x/ajxc2orWikWAwwQyMa5jAYw6SumwsI32OoA=;
+	b=HGwpKv0O7ApKJjaW9gsuJUkkrhmpM/LvH/twujKd6Oaga2aDJrYaqhAKElmgvbL1/f5dvUiQj
+	QuSJuPvXSHv7wARw1n2QwLSueQXjDCFmfk6PeMrwk2F9wSKSFUPtdktFv5z5XXlNLvBvFP5SxwP
+	zMIhcXDosQjj/FFU5cUAqoo=
+Received: from mail.maildlp.com (unknown [172.19.163.15])
+	by canpmsgout08.his.huawei.com (SkyGuard) with ESMTPS id 4gTTVq32VdzmV6x;
+	Mon,  1 Jun 2026 17:41:23 +0800 (CST)
 Received: from dggpemf500011.china.huawei.com (unknown [7.185.36.131])
-	by mail.maildlp.com (Postfix) with ESMTPS id 6B822201E9;
-	Mon,  1 Jun 2026 17:49:09 +0800 (CST)
+	by mail.maildlp.com (Postfix) with ESMTPS id 57E0240539;
+	Mon,  1 Jun 2026 17:49:13 +0800 (CST)
 Received: from huawei.com (10.90.53.73) by dggpemf500011.china.huawei.com
  (7.185.36.131) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Mon, 1 Jun
- 2026 17:49:05 +0800
+ 2026 17:49:09 +0800
 From: Jinjie Ruan <ruanjinjie@huawei.com>
 To: <corbet@lwn.net>, <skhan@linuxfoundation.org>, <catalin.marinas@arm.com>,
 	<will@kernel.org>, <chenhuacai@kernel.org>, <kernel@xen0n.name>,
@@ -85,9 +85,9 @@ To: <corbet@lwn.net>, <skhan@linuxfoundation.org>, <catalin.marinas@arm.com>,
 	<linux-riscv@lists.infradead.org>, <devicetree@vger.kernel.org>,
 	<kexec@lists.infradead.org>
 CC: <ruanjinjie@huawei.com>
-Subject: [PATCH v15 09/23] kexec: Fix UAF and Double Free in crash_load_dm_crypt_keys()
-Date: Mon, 1 Jun 2026 17:47:51 +0800
-Message-ID: <20260601094805.2928614-10-ruanjinjie@huawei.com>
+Subject: [PATCH v15 10/23] crash_core: Introduce CRASH_HOTPLUG_SAFETY_PADDING for memory hotplug safety
+Date: Mon, 1 Jun 2026 17:47:52 +0800
+Message-ID: <20260601094805.2928614-11-ruanjinjie@huawei.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260601094805.2928614-1-ruanjinjie@huawei.com>
 References: <20260601094805.2928614-1-ruanjinjie@huawei.com>
@@ -108,100 +108,58 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
 	R_MISSING_CHARSET(0.50)[];
 	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	FROM_NEQ_ENVFROM(0.00)[ruanjinjie@huawei.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[lwn.net,linuxfoundation.org,arm.com,kernel.org,xen0n.name,linux.ibm.com,ellerman.id.au,gmail.com,dabbelt.com,eecs.berkeley.edu,ghiti.fr,redhat.com,alien8.de,linux.intel.com,zytor.com,linux-foundation.org,soleen.com,linux.dev,infradead.org,linux.alibaba.com,google.com,baidu.com,debian.org,fb.com,suse.cz,kylinos.cn,rivosinc.com,tinylab.org,pigmoral.tech,htecgroup.com,lge.com,linutronix.de,intel.com,easystack.cn,vivo.com,juniper.net,amazon.com,amd.com,huawei.com,linaro.org,vger.kernel.org,lists.infradead.org,lists.linux.dev,lists.ozlabs.org];
-	TAGGED_FROM(0.00)[bounces-90258-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90260-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	NEURAL_HAM(-0.00)[-1.000];
 	RCPT_COUNT_GT_50(0.00)[88];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_TO(0.00)[lwn.net,linuxfoundation.org,arm.com,kernel.org,xen0n.name,linux.ibm.com,ellerman.id.au,gmail.com,dabbelt.com,eecs.berkeley.edu,ghiti.fr,redhat.com,alien8.de,linux.intel.com,zytor.com,linux-foundation.org,soleen.com,linux.dev,infradead.org,linux.alibaba.com,google.com,baidu.com,debian.org,fb.com,suse.cz,kylinos.cn,rivosinc.com,tinylab.org,pigmoral.tech,htecgroup.com,lge.com,linutronix.de,intel.com,easystack.cn,vivo.com,juniper.net,amazon.com,amd.com,huawei.com,linaro.org,vger.kernel.org,lists.infradead.org,lists.linux.dev,lists.ozlabs.org];
+	PRECEDENCE_BULK(0.00)[];
 	DKIM_TRACE(0.00)[huawei.com:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_NONE(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_COUNT_FIVE(0.00)[6];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:email,soleen.com:email,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,huawei.com:email,huawei.com:mid,huawei.com:dkim,linux-foundation.org:email]
-X-Rspamd-Queue-Id: 7F0EE61D282
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[]
+X-Rspamd-Queue-Id: B1A6561CF5C
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-A static memory safety review by Sashiko AI identified a high-severity
-Use-After-Free (UAF) and Double Free vulnerability in the dm-crypt keys
-handling path during arm64 kexec image placement retry loops.
+Introduce CRASH_HOTPLUG_SAFETY_PADDING to allocate extra slots
+for the crash memory ranges array, mitigating potential TOCTOU races
+caused by concurrent memory hotplug events. When CONFIG_MEMORY_HOTPLUG
+is disabled, the padding safely defaults to 0 as the memory
+layout remains static.
 
-In crash_load_dm_crypt_keys(), when the segment allocation fails via
-kexec_add_buffer(), the error path invokes `kvfree((void *)kbuf.buffer)`
-to reclaim the keys buffer. However, the global pointer `keys_header` is
-left dangling with a stale address, creating an insecure memory trap.
-
-When the top-level loader image_load() retries the next available placement
-hole, crash_load_dm_crypt_keys() is re-entered. Since `is_dm_key_reused`
-is a read-only global configuration managed by user-space configfs,
-it cannot be mutated by the kernel. If it remains true, the loader skips
-build_keys_header() and blindly reuses the stale `keys_header` pointer
-for kbuf.buffer, triggering a severe Use-After-Free or a Null pointer
-dereference during kexec_add_buffer(). Alternatively, a new headers build
-can trigger a recursive Double Free inside build_keys_header().
-
-Fix this by setting the global `keys_header` to NULL immediately after
-it is freed in the failure path. Concurrently, upgrade the header
-regeneration check to a composite condition:
-	`if (!is_dm_key_reused || !keys_header)`
-
-This ensures that if a previous retry attempt wiped the buffer, the kernel
-will automatically and safely trigger a fresh header regeneration
-internally without modifying the user-configured `is_dm_key_reused` state
-flag, achieving absolute data consistency and memory safety across all
-retry paths.
-
-Cc: Andrew Morton <akpm@linux-foundation.org>
-Cc: Baoquan He <bhe@redhat.com>
-Cc: Mike Rapoport <rppt@kernel.org>
-Cc: Pasha Tatashin <pasha.tatashin@soleen.com>
-Cc: Pratyush Yadav <pratyush@kernel.org>
-Cc: Dave Young <ruirui.yang@linux.dev>
-Cc: stable@vger.kernel.org
-Fixes: e3a84be1ec2f ("arm64,ppc64le/kdump: pass dm-crypt keys to kdump kernel")
 Signed-off-by: Jinjie Ruan <ruanjinjie@huawei.com>
 ---
- kernel/crash_dump_dm_crypt.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ include/linux/crash_core.h | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/kernel/crash_dump_dm_crypt.c b/kernel/crash_dump_dm_crypt.c
-index cb875ddb6ba6..2c5462876337 100644
---- a/kernel/crash_dump_dm_crypt.c
-+++ b/kernel/crash_dump_dm_crypt.c
-@@ -412,13 +412,12 @@ int crash_load_dm_crypt_keys(struct kimage *image)
- 	};
- 	int r;
+diff --git a/include/linux/crash_core.h b/include/linux/crash_core.h
+index c1dee3f971a9..d4762e000098 100644
+--- a/include/linux/crash_core.h
++++ b/include/linux/crash_core.h
+@@ -14,6 +14,12 @@ struct crash_mem {
+ 	struct range ranges[] __counted_by(max_nr_ranges);
+ };
  
--
- 	if (key_count <= 0) {
- 		kexec_dprintk("No dm-crypt keys\n");
- 		return 0;
- 	}
++#ifdef CONFIG_MEMORY_HOTPLUG
++#define CRASH_HOTPLUG_SAFETY_PADDING 128
++#else
++#define CRASH_HOTPLUG_SAFETY_PADDING 0
++#endif
++
+ #ifdef CONFIG_CRASH_DUMP
  
--	if (!is_dm_key_reused) {
-+	if (!is_dm_key_reused || unlikely(!keys_header)) {
- 		image->dm_crypt_keys_addr = 0;
- 		r = build_keys_header();
- 		if (r) {
-@@ -437,6 +436,7 @@ int crash_load_dm_crypt_keys(struct kimage *image)
- 	if (r) {
- 		pr_err("Failed to call kexec_add_buffer, ret=%d\n", r);
- 		kvfree((void *)kbuf.buffer);
-+		keys_header = NULL;
- 		return r;
- 	}
- 	image->dm_crypt_keys_addr = kbuf.mem;
+ int crash_shrink_memory(unsigned long new_size);
 -- 
 2.34.1
 
