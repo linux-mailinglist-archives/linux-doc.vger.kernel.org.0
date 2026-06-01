@@ -1,50 +1,50 @@
-Return-Path: <linux-doc+bounces-90358-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90359-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uGRRMi6xHWqHdAkAu9opvQ
-	(envelope-from <linux-doc+bounces-90358-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 18:19:58 +0200
+	id uBOYHqOvHWpfdAkAu9opvQ
+	(envelope-from <linux-doc+bounces-90359-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 18:13:23 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0FFF622783
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 18:19:57 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1DD3C622636
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 18:13:22 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id BA98A308A704
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Jun 2026 16:09:30 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 516D6302A42A
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Jun 2026 16:09:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 93C802C21D8;
-	Mon,  1 Jun 2026 16:08:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F1BF22E173B;
+	Mon,  1 Jun 2026 16:08:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="KFCrv1SH"
+	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="YqWRvpfA"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-182.mta0.migadu.com (out-182.mta0.migadu.com [91.218.175.182])
+Received: from out-183.mta0.migadu.com (out-183.mta0.migadu.com [91.218.175.183])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 21C222DC782
-	for <linux-doc@vger.kernel.org>; Mon,  1 Jun 2026 16:07:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.182
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1F742DA76C
+	for <linux-doc@vger.kernel.org>; Mon,  1 Jun 2026 16:08:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.183
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780330082; cv=none; b=mGIugomZp6f6eMexb8xxBQXzoGuJ/vI4V7ngc9G+imLMARk7Ww8rZIKFRWfd3+6LxgVyqWwUmun/9fjX2owSudez5IX44lLb1t6B4KtdEW4Z82YTmVjJulKnCKyQlzEUUvFp3vavM96D8gtp9Pb/PPXKz9DcS+/m/j29ScKiZlM=
+	t=1780330101; cv=none; b=HBeddtGcIKhG7UczMnm65sbsU0hoSxTb4iVGeXhPAA85weI9Ybnx4kb3cI+G+/dBnR8M20wJZMDG46DEjhCGy92V2T7a+SNQaeZROrSQeCm5lzESAXzP3aQ39LLrKC62Y9eX7wNZrCEm4F3YpVIPtpwoqlkGWbke9DIrhTpb4D0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780330082; c=relaxed/simple;
+	s=arc-20240116; t=1780330101; c=relaxed/simple;
 	bh=2Yekb9uLI7AP2TYXVKk8XIvri4BESEZ3tRy6fbBZKOE=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=DPTaOsCKzwmXmywmNpHLwjizndivnrsBpPGEI9c8N/AMiJM66RNWZ/jY1szDI+8wLuPUyfmQhN76tIC/Od89gaTL+6BNNjN8giZX51SZTIN6R0vyjxDh49cSh5ulnIPC9Y3xDV3tKPamnu9LeqH1hwBZd+DNheVlJaVspxvNXZU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=KFCrv1SH; arc=none smtp.client-ip=91.218.175.182
+	 In-Reply-To:Content-Type; b=ErE13rkn1Ue0n7xkb9R8SBi5XE2N5tCAkkoPhuU3MTaPLMqKcIMGBUoi6tjbbIuhwr7LQsBC8vVLgiRkGDjZCnonnSV3MbA3VeSCIBToVqnp306fbYbkMeOmwDR+zgwe6tI6rYokZSb/oDSLkLzII0a8op8vyidL+08qVls11Qw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=YqWRvpfA; arc=none smtp.client-ip=91.218.175.183
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
 Message-ID: <76ff7922-bf54-472c-a628-ee191aeaf149@linux.dev>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1780330077;
+	t=1780330094;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
 	bh=hE1QzaSPeeuEtKpkpB1CtsBNbDEAW/Bexb+NhfT6llo=;
-	b=KFCrv1SHIW6rKf6zXja1OJy3cyn2UvdGKCE3ASX3JWUedBw+K0MFreVvLWyzIJ7q05O895
-	rvnhDuiR+5P9eKG7V9B0yQvbhmbdS8hrfybIXAU8pDudK2wZzqls5tbU4qer7NuOTc/QAp
-	Jg8Y8lhEBuDUt90t+eGNkP5jGSXBzPs=
+	b=YqWRvpfAdwXbefovQ0O62XdJwQX8LFrg0/Hbwn0Ad6X8u9tjBbXyyjT6U3njZ6qNiRyyr2
+	KLEf2hOg1aLB/Q9NfBld4gDYUzT1d2AE5+l2FSyu7/Z7nQ5wx7p3ut3J2a0TbCXeJSJFCh
+	zR7P6S0aifO3EZK1awre2/FIp97secg=
 Date: Tue, 2 Jun 2026 00:07:24 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -96,13 +96,13 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	FREEMAIL_CC(0.00)[vger.kernel.org,kvack.org,redhat.com,linux-foundation.org,arm.com,nvidia.com,kernel.org,linux.alibaba.com,sk.com,gentwo.org,lwn.net,linux.intel.com,gourry.net,cmpxchg.org,google.com,suse.cz,gmail.com,infradead.org,efficios.com,intel.com,suse.com,suse.de,goodmis.org,amd.com,huawei.com,os.amperecomputing.com,linux.dev];
-	TAGGED_FROM(0.00)[bounces-90358-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90359-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	RCVD_COUNT_THREE(0.00)[3];
 	RCVD_TLS_LAST(0.00)[];
@@ -118,9 +118,9 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,linux.dev:mid,linux.dev:dkim]
-X-Rspamd-Queue-Id: E0FFF622783
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:mid,linux.dev:dkim,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: 1DD3C622636
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
