@@ -1,52 +1,53 @@
-Return-Path: <linux-doc+bounces-90399-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90401-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oJW/FIztHWoYgAkAu9opvQ
-	(envelope-from <linux-doc+bounces-90399-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 22:37:32 +0200
+	id aEDmNL3tHWodgAkAu9opvQ
+	(envelope-from <linux-doc+bounces-90401-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 22:38:21 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id AEB0D6252A3
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 22:37:31 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 49C2E6252F6
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 22:38:20 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id BE7343041BAD
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Jun 2026 20:36:43 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 204323020C08
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Jun 2026 20:36:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 690DC3F86FA;
-	Mon,  1 Jun 2026 20:36:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 650333F9281;
+	Mon,  1 Jun 2026 20:36:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="N4EDcD/4"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="m3SVo7zy"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 310033F6C5A;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1922D3F789D;
 	Mon,  1 Jun 2026 20:36:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780346187; cv=none; b=Ir3qjxlGt5NQS8tCTEeHk8R3TWuQxMOIl8VPfl9sPzsiYJKdlIOO6vYXqnaMpssP0cuHwwrAqXt5pjNL48qCj26Tg/LRG9ykz3j0o21KjfA6KFJmJuXsq5DiYWFpuFa8v0vupY2Rm9EH7i8EMoKM6blsSjepOFDoaPdq4QqSYNk=
+	t=1780346188; cv=none; b=r4/aYGknZnfc1daOI0DDsMxu6PH4/EQC59wpZqwWvMMQrg57UgF9NQ6KrOJrkIUFadX/L3AAHpfELJ7Mv3S2EZ2ch2V2aW3NSckX4A6m3jLIaXe+D7ZBjQGzaTWX67vXXkGwNje8ArQw3ByyEeiDDB0gVF+rBSJH7VwMTMOcPfs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780346187; c=relaxed/simple;
-	bh=AWRHihJSBi+LIrOoIsOzoxnsBG0+4NVU5YSaIMOxEs8=;
+	s=arc-20240116; t=1780346188; c=relaxed/simple;
+	bh=5R/JdWFi++9znbUpG3cGFvBtrlKO+JDslGJA+1+iOLc=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=bZaFi0klSDxeCCpZeU6vEtJL5FWFk9ADQroQ9yNwv2XV06HjBZ3529mxaV8WsDG1+4b+LxBRuiFXYwGwdkS4NSyCUKjASGzxnVJG7fPqTYUDU0xy1Gx3qGq09CfjuH1hvJ5jFUqsbTtK+P/rPma21qgW3I+cAy0zyd3sH3Grfqc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=N4EDcD/4; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 509C81F008A2;
-	Mon,  1 Jun 2026 20:36:25 +0000 (UTC)
+	 In-Reply-To:To:Cc; b=B0aq+w2/emwhNNjUIpglO9xAS9vYOmX2F3aoIUPr52qIZW06Xhk9E7C802K386suMFYHzq/QR9i5h7oGHt7WOjVIdtluGvV4olvXhNBdLDXKhJ7mPTg/bISEk89Vcjqxum0tWWE9ipv47wuXGikEkLaERcSdQs6qq1xSdtESacc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=m3SVo7zy; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1BE1E1F008A3;
+	Mon,  1 Jun 2026 20:36:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
 	s=k20260515; t=1780346186;
-	bh=04z5b3ENFFStDILh5daSgPFr7SyjhKEetoj74bl6s2o=;
+	bh=f9ZOFiPohiYSKhbWWzIEk2xjvwSzBQ/tKoIQXjkNAxw=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=N4EDcD/494hQTJe4Z54xn8R31VLX1tGYAWu/wOvCv15H+JZ5j/quW+JmTtNI/6zPT
-	 UIG1axiDwdSzkpAizwBy+WWc+N9OhUdlEKFYmcH+hRh9DaqV7e0cn+j+upHN9dR770
-	 VwkMT4qcD3K2H54TgD2cUCKCl8MajpxOdTilhoxUc0BNMxY0j8QXYLB/l0d5oC/W/f
-	 7skH61tjyhUdzxhXDe2acfesYtrQsEypUb8v+0MOFwXE7wBLWNKx5PGNJ1bZOn3TXp
-	 LpoCOLqr0/l9vfg7qAJWaD/ZHRw7NY9nCd+XOWQmRAkJytXPVmS4YBJWOPiyiQLpO7
-	 vsXa6CsrAHg8g==
+	b=m3SVo7zyq96FMlVQkDyefmhThVvqpBHzYEwM01u/+hQQorVfnMQIJU0Tis2CFRaeC
+	 QIVEkTgLTtss2oupuozZKDtPnAMcNq8zePDPeGvD8ksvBalYIIXHA10w+u8gTam8G4
+	 JAQ3cvFJKmwg0L3vUCUxJwazAZYYaXUroPdGSeN9P84OQFcaQIDtpJ6RQHUMr4Q2xK
+	 uuTEpUWKO7XP3JG/qrJRQlrfQ66drKDKVxQdKFPJseEqBOc5n+RUT97HqctFfL+Bx2
+	 9HBetHTXHlWWgMHgMA72OT0io/s2GByTMz52JjsBQvnzkFuV2sgjrBDmZr7lSa8+El
+	 3pEdX3lSUKNDg==
 From: Drew Fustini <fustini@kernel.org>
-Date: Mon, 01 Jun 2026 13:35:58 -0700
-Subject: [PATCH RFC v6 04/18] fs/resctrl: Add resctrl_is_membw() helper
+Date: Mon, 01 Jun 2026 13:35:59 -0700
+Subject: [PATCH RFC v6 05/18] fs/resctrl: Add RDT_RESOURCE_MB_MIN and
+ RDT_RESOURCE_MB_WGHT
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -55,7 +56,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260601-ssqosid-cbqri-rqsc-v7-0-v6-4-baf00f50028a@kernel.org>
+Message-Id: <20260601-ssqosid-cbqri-rqsc-v7-0-v6-5-baf00f50028a@kernel.org>
 References: <20260601-ssqosid-cbqri-rqsc-v7-0-v6-0-baf00f50028a@kernel.org>
 In-Reply-To: <20260601-ssqosid-cbqri-rqsc-v7-0-v6-0-baf00f50028a@kernel.org>
 To: Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, 
@@ -94,12 +95,12 @@ Cc: linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org,
  Conor Dooley <conor@kernel.org>, linux-rt-devel@lists.linux.dev, 
  linux-doc@vger.kernel.org
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3572; i=fustini@kernel.org;
- h=from:subject:message-id; bh=AWRHihJSBi+LIrOoIsOzoxnsBG0+4NVU5YSaIMOxEs8=;
- b=owGbwMvMwCV2+43O4ZsaG3kYT6slMWTJvnX68MtA7IdD/cyz767HerOHxIhE6sfutTnEfs3oR
- mJ01wHrjlIWBjEuBlkxRZZNH/IuLPEK/bpg/ottMHNYmUCGMHBxCsBEgrYwMvzUmfE49KbQ7Iyv
- 0b+u21xhnyWd9+TlY6mvFv5hHfNnzqxmZDjwJKXw+hqerg8nAy8cKz+07eu6bTGbZyh7i1x3PMk
- 3qYkBAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1643; i=fustini@kernel.org;
+ h=from:subject:message-id; bh=5R/JdWFi++9znbUpG3cGFvBtrlKO+JDslGJA+1+iOLc=;
+ b=owGbwMvMwCV2+43O4ZsaG3kYT6slMWTJvnWam3v/ImetyEH5AsFixXvqZ3++YV6yT2LF/ymfJ
+ p1/2bJ0XUcpC4MYF4OsmCLLpg95F5Z4hX5dMP/FNpg5rEwgQxi4OAVgIr+vMPxmPb4qM2Z59kSF
+ hqP2RsHVp6/P+Ma6wme/VmPcv6pyvg/vGBm2PPA/O+31e86133K6dTclNsue+bbfw+n95idC65k
+ 0ZMRYAA==
 X-Developer-Key: i=fustini@kernel.org; a=openpgp;
  fpr=1B6F948213EA489734F3997035D5CD577C1E6010
 X-Spamd-Result: default: False [-0.66 / 15.00];
@@ -107,11 +108,11 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-90399-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90401-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	FREEMAIL_TO(0.00)[kernel.org,dabbelt.com,eecs.berkeley.edu,ghiti.fr,ventanamicro.com,sifive.com,baylibre.com,semihalf.com,linux.dev,rivosinc.com,microchip.com,bytedance.com,linux.alibaba.com,gmail.com,zte.com.cn,sanechips.com.cn,intel.com,amd.com,google.com,arm.com,redhat.com,alien8.de,linux.intel.com,zytor.com,linutronix.de,goodmis.org,lwn.net];
@@ -119,7 +120,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	TO_DN_SOME(0.00)[];
 	RCPT_COUNT_GT_50(0.00)[57];
 	PRECEDENCE_BULK(0.00)[];
@@ -129,107 +130,59 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: AEB0D6252A3
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: 49C2E6252F6
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Four sites in fs/resctrl distinguish bandwidth resources (MBA, SMBA)
-from cache resources by explicit rid match:
+Introduce bandwidth controls which are semantically different from
+the throttle-based MB resource:
 
-  fs/resctrl/ctrlmondata.c parse_line()
-  fs/resctrl/rdtgroup.c    rdtgroup_mode_test_exclusive()
-  fs/resctrl/rdtgroup.c    rdtgroup_size_show()
-  fs/resctrl/rdtgroup.c    rdtgroup_init_alloc()
-
-Replace the open-coded MBA/SMBA tests with a single resctrl_is_membw()
-helper keyed on schema_fmt (RESCTRL_SCHEMA_RANGE). No functional change:
-every existing RESCTRL_SCHEMA_RANGE resource is MBA or SMBA today.
-
-This isolates fs/resctrl from the addition of further bandwidth resource
-types so the four call sites do not have to be updated for each new rid.
+ - RDT_RESOURCE_MB_MIN: minimum reserved bandwidth
+ - RDT_RESOURCE_MB_WGHT: weighted share of unreserved bandwidth
 
 Assisted-by: Claude:claude-opus-4-7
 Signed-off-by: Drew Fustini <fustini@kernel.org>
 ---
- fs/resctrl/ctrlmondata.c |  3 +--
- fs/resctrl/internal.h    |  2 ++
- fs/resctrl/rdtgroup.c    | 14 +++++++++-----
- 3 files changed, 12 insertions(+), 7 deletions(-)
+ fs/resctrl/rdtgroup.c   | 4 +++-
+ include/linux/resctrl.h | 2 ++
+ 2 files changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/fs/resctrl/ctrlmondata.c b/fs/resctrl/ctrlmondata.c
-index 9a7dfc48cb2e..d9f052700941 100644
---- a/fs/resctrl/ctrlmondata.c
-+++ b/fs/resctrl/ctrlmondata.c
-@@ -245,8 +245,7 @@ static int parse_line(char *line, struct resctrl_schema *s,
- 	if (WARN_ON_ONCE(!parse_ctrlval))
- 		return -EINVAL;
- 
--	if (rdtgrp->mode == RDT_MODE_PSEUDO_LOCKSETUP &&
--	    (r->rid == RDT_RESOURCE_MBA || r->rid == RDT_RESOURCE_SMBA)) {
-+	if (rdtgrp->mode == RDT_MODE_PSEUDO_LOCKSETUP && resctrl_is_membw(r)) {
- 		rdt_last_cmd_puts("Cannot pseudo-lock MBA resource\n");
- 		return -EINVAL;
- 	}
-diff --git a/fs/resctrl/internal.h b/fs/resctrl/internal.h
-index 1a9b29119f88..76187987b2ee 100644
---- a/fs/resctrl/internal.h
-+++ b/fs/resctrl/internal.h
-@@ -397,6 +397,8 @@ void mbm_handle_overflow(struct work_struct *work);
- 
- bool is_mba_sc(struct rdt_resource *r);
- 
-+bool resctrl_is_membw(struct rdt_resource *r);
-+
- void cqm_setup_limbo_handler(struct rdt_l3_mon_domain *dom, unsigned long delay_ms,
- 			     int exclude_cpu);
- 
 diff --git a/fs/resctrl/rdtgroup.c b/fs/resctrl/rdtgroup.c
-index 5dfdaa6f9d8f..0f331bf5ce82 100644
+index 0f331bf5ce82..02733b11e115 100644
 --- a/fs/resctrl/rdtgroup.c
 +++ b/fs/resctrl/rdtgroup.c
-@@ -1412,7 +1412,7 @@ static bool rdtgroup_mode_test_exclusive(struct rdtgroup *rdtgrp)
- 
- 	list_for_each_entry(s, &resctrl_schema_all, list) {
- 		r = s->res;
--		if (r->rid == RDT_RESOURCE_MBA || r->rid == RDT_RESOURCE_SMBA)
-+		if (resctrl_is_membw(r))
- 			continue;
- 		has_cache = true;
- 		list_for_each_entry(d, &r->ctrl_domains, hdr.list) {
-@@ -1555,6 +1555,12 @@ bool is_mba_sc(struct rdt_resource *r)
+@@ -1555,7 +1555,7 @@ bool is_mba_sc(struct rdt_resource *r)
  	return r->membw.mba_sc;
  }
  
-+/* RANGE schema is bandwidth (MBA/SMBA). BITMAP is cache. */
-+bool resctrl_is_membw(struct rdt_resource *r)
-+{
-+	return r->schema_fmt == RESCTRL_SCHEMA_RANGE;
-+}
-+
- /*
-  * rdtgroup_size_show - Display size in bytes of allocated regions
-  *
-@@ -1616,8 +1622,7 @@ static int rdtgroup_size_show(struct kernfs_open_file *of,
- 					ctrl = resctrl_arch_get_config(r, d,
- 								       closid,
- 								       type);
--				if (r->rid == RDT_RESOURCE_MBA ||
--				    r->rid == RDT_RESOURCE_SMBA)
-+				if (resctrl_is_membw(r))
- 					size = ctrl;
- 				else
- 					size = rdtgroup_cbm_to_size(r, d, ctrl);
-@@ -3648,8 +3653,7 @@ static int rdtgroup_init_alloc(struct rdtgroup *rdtgrp)
+-/* RANGE schema is bandwidth (MBA/SMBA). BITMAP is cache. */
++/* RANGE schema is bandwidth (MBA/SMBA/MB_MIN/MB_WGHT). BITMAP is cache. */
+ bool resctrl_is_membw(struct rdt_resource *r)
+ {
+ 	return r->schema_fmt == RESCTRL_SCHEMA_RANGE;
+@@ -2402,6 +2402,8 @@ static unsigned long fflags_from_resource(struct rdt_resource *r)
+ 		return RFTYPE_RES_CACHE;
+ 	case RDT_RESOURCE_MBA:
+ 	case RDT_RESOURCE_SMBA:
++	case RDT_RESOURCE_MB_MIN:
++	case RDT_RESOURCE_MB_WGHT:
+ 		return RFTYPE_RES_MB;
+ 	case RDT_RESOURCE_PERF_PKG:
+ 		return RFTYPE_RES_PERF_PKG;
+diff --git a/include/linux/resctrl.h b/include/linux/resctrl.h
+index 006e57fd7ca5..9529ed0d1fdf 100644
+--- a/include/linux/resctrl.h
++++ b/include/linux/resctrl.h
+@@ -53,6 +53,8 @@ enum resctrl_res_level {
+ 	RDT_RESOURCE_L2,
+ 	RDT_RESOURCE_MBA,
+ 	RDT_RESOURCE_SMBA,
++	RDT_RESOURCE_MB_MIN,
++	RDT_RESOURCE_MB_WGHT,
+ 	RDT_RESOURCE_PERF_PKG,
  
- 	list_for_each_entry(s, &resctrl_schema_all, list) {
- 		r = s->res;
--		if (r->rid == RDT_RESOURCE_MBA ||
--		    r->rid == RDT_RESOURCE_SMBA) {
-+		if (resctrl_is_membw(r)) {
- 			rdtgroup_init_mba(r, rdtgrp->closid);
- 			if (is_mba_sc(r))
- 				continue;
+ 	/* Must be the last */
 
 -- 
 2.43.0
