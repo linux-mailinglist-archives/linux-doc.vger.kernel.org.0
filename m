@@ -1,52 +1,53 @@
-Return-Path: <linux-doc+bounces-90398-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90400-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gFXlMI3tHWoYgAkAu9opvQ
-	(envelope-from <linux-doc+bounces-90398-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 22:37:33 +0200
+	id 0EF5Bq7tHWoYgAkAu9opvQ
+	(envelope-from <linux-doc+bounces-90400-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 22:38:06 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9AA96252AA
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 22:37:32 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D02E6252D1
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 22:38:05 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 6DC3B3019311
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Jun 2026 20:36:34 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 21C4F301E468
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Jun 2026 20:36:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DD2A03F6606;
-	Mon,  1 Jun 2026 20:36:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8810B3F888B;
+	Mon,  1 Jun 2026 20:36:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GXMOM7Sn"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SetxcZgw"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF01D38AC6A;
-	Mon,  1 Jun 2026 20:36:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8EF273F65E0;
+	Mon,  1 Jun 2026 20:36:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780346185; cv=none; b=isnx/5Pb7B1hLId7tBbjsgqSyzkz2N3Z78dEuFhG2x94oBn5ccmvqczxL9VFaXY7w50SRT8l2RFH8IAK5EuB6qtdw4zIcNZpCDRp9BaQ4oNPMfqBDMFTLgunFb5yRo6laz/7Mv4wslvq8+vTXzmpJyX72Zj5CZ+N8CSIw8+RA0A=
+	t=1780346187; cv=none; b=fj1/UhFBNQWHyeTcmDWGolregj4yF7kdH2f5+0/vBgzll+flJQ91OG8qDvItJ4QKIc4HvrQ9RgsbuK7/p9xqHX92jiQfGa63PFVkcKo1uH9hGnKJElaDARQXTIYNZaFp6wrysPDJ3/wNej3Z6YLO1SfUEp/bZ6u2oW1l7DwCgvk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780346185; c=relaxed/simple;
-	bh=58g1568NRL7/SI4d2HoFSQSOKccqgmn0k03hr3pJQEU=;
+	s=arc-20240116; t=1780346187; c=relaxed/simple;
+	bh=Ru8n+b2Nb9I06Iq/XueF55Kvar2HGUuz3aKE1Dt+uzs=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Fzcwff1SuH17pAwJSObigJ7GAejHHe3JtZxF2SuT6lgBfOr4oBL1KUmxCNjUlGok0ORSAbQtS7//9j0vLjTxhpPpV9pzz05o5LZniNqKhyGGBx0jkq+q4SB+Tg4As226akCHXYAScc2jB631+vf63oqcv/hYG4gfWlwVJ3+njUo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GXMOM7Sn; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A21FA1F008A3;
-	Mon,  1 Jun 2026 20:36:23 +0000 (UTC)
+	 In-Reply-To:To:Cc; b=ZRQycB1H48skjCgS2YtyUVkXfN6VEibjQqp/w2PGzaueqWfJt4eMtlHeZvEXHxBXEyUOw9YKqoETp/cNJdOTtlo6svNU+qGrZE/ndE9A6bP1+mqytlDuvBRQGCerLaT7vdwzXWHIO+uOJjdBR+Y41dmDrOup1T/hL+Hkv+3QWLY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SetxcZgw; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7ACD21F008A4;
+	Mon,  1 Jun 2026 20:36:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1780346184;
-	bh=SoMF0NvEK/nHml8RMjqK0ASTpVqLJvBd+3O6LznwQbI=;
+	s=k20260515; t=1780346185;
+	bh=jacBUw3TuL0Ul9vWo6PSgvG0qXFvI3P77dpHaOwM/Oo=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=GXMOM7SnhidoV1UMUeJNclAeD8OoXOwUzUM0FxZsmvCRDTWp4Xsl9JxJSUpQiqj2B
-	 OL+YZDxxgJvujB6PC547tkvruKBnWjXn5N2kvWJpOFSre96R5K8FmRQJMDb27vTVPd
-	 fhMvdvsXx0cezQJWpkjx7i4HunOe+HV38BTi5YyQs4hbx0M9wASblLoWWMzQueFi4f
-	 IlfyNYuJGcV7KUuTtkvNx/nX5bTe9r1CjUvMsO2fB15MdmDbIeBGANzU3UG1C8yK06
-	 /h/sfXS1Zwvn/i3LqHIMCY73aQmmakwdVSwKkxj9WmXOG70kmqAqRuC7M+clEp7dfP
-	 twwVejwSDmvig==
+	b=SetxcZgwBa61Znsw/andtsI/wEL/fwV3kb1y0EtGOJQ8fKWx8xDJ4sbQJdm+oiyS1
+	 31O0U/SyMEX/JOv+o3QXPhkdJzoX2iqjsfILoyyDfj/29hyXwcYdVEDwfIt5b7vrQR
+	 K6bikkb8b8xFgQ69TUzXG5H33QUFjn+RlJWk0h/FKIAjmkBzSRAect4Mx4SlGu8BA7
+	 oAJJa0kk/fbGSdUi4mpE1xQDU1Q2gt/9SxpiO/ExQ3Xv3RKUO1CuyWYob/Z6Qk8H95
+	 y1g8rqVO8Le6phuvtb+AFU8YqSNxzW9Soe4Hvvow64qyOMpwH/6eAcIVKnzahjWXO7
+	 X7P5czQ/Sp8ow==
 From: Drew Fustini <fustini@kernel.org>
-Date: Mon, 01 Jun 2026 13:35:56 -0700
-Subject: [PATCH RFC v6 02/18] riscv: detect the Ssqosid extension
+Date: Mon, 01 Jun 2026 13:35:57 -0700
+Subject: [PATCH RFC v6 03/18] riscv: add support for srmcfg CSR from
+ Ssqosid extension
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -55,7 +56,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20260601-ssqosid-cbqri-rqsc-v7-0-v6-2-baf00f50028a@kernel.org>
+Message-Id: <20260601-ssqosid-cbqri-rqsc-v7-0-v6-3-baf00f50028a@kernel.org>
 References: <20260601-ssqosid-cbqri-rqsc-v7-0-v6-0-baf00f50028a@kernel.org>
 In-Reply-To: <20260601-ssqosid-cbqri-rqsc-v7-0-v6-0-baf00f50028a@kernel.org>
 To: Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, 
@@ -94,12 +95,12 @@ Cc: linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org,
  Conor Dooley <conor@kernel.org>, linux-rt-devel@lists.linux.dev, 
  linux-doc@vger.kernel.org
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1637; i=fustini@kernel.org;
- h=from:subject:message-id; bh=58g1568NRL7/SI4d2HoFSQSOKccqgmn0k03hr3pJQEU=;
- b=owGbwMvMwCV2+43O4ZsaG3kYT6slMWTJvnVimy0sp5b18t78Bc8Vli++r7SgZEbCi1fn81/a3
- w6LnbGyo6OUhUGMi0FWTJFl04e8C0u8Qr8umP9iG8wcViaQIQxcnAIwkfZ/jAwr7OwO8FQWc02T
- +Zb1ceVzyTvMN93PteSIO3CpzRDL7+Fk+B9xQ8RvmvLRLU++icV1Bi2NFPjvIZGanTMvqnhvTNB
- OFg4A
+X-Developer-Signature: v=1; a=openpgp-sha256; l=12220; i=fustini@kernel.org;
+ h=from:subject:message-id; bh=Ru8n+b2Nb9I06Iq/XueF55Kvar2HGUuz3aKE1Dt+uzs=;
+ b=owGbwMvMwCV2+43O4ZsaG3kYT6slMWTJvnWSt55dPK3/TdVB24uTToboBP8X+H5QRf7z1jX7u
+ VWmsBaYdZSyMIhxMciKKbJs+pB3YYlX6NcF819sg5nDygQyhIGLUwAmoqTAyHCZvXbpnqXbZkYd
+ f/sq02nhghW7lv/Uvqv54Eb5A+lNGdbvGBkWOlnKKlc5Nri/0Dl65eCpvOOeG4oE2DtafcMWvK+
+ Q12QBAA==
 X-Developer-Key: i=fustini@kernel.org; a=openpgp;
  fpr=1B6F948213EA489734F3997035D5CD577C1E6010
 X-Spamd-Result: default: False [-0.66 / 15.00];
@@ -107,11 +108,11 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-90398-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90400-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	FREEMAIL_TO(0.00)[kernel.org,dabbelt.com,eecs.berkeley.edu,ghiti.fr,ventanamicro.com,sifive.com,baylibre.com,semihalf.com,linux.dev,rivosinc.com,microchip.com,bytedance.com,linux.alibaba.com,gmail.com,zte.com.cn,sanechips.com.cn,intel.com,amd.com,google.com,arm.com,redhat.com,alien8.de,linux.intel.com,zytor.com,linutronix.de,goodmis.org,lwn.net];
@@ -119,7 +120,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	TO_DN_SOME(0.00)[];
 	RCPT_COUNT_GT_50(0.00)[57];
 	PRECEDENCE_BULK(0.00)[];
@@ -129,48 +130,360 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[semihalf.com:email,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: D9AA96252AA
+	DBL_BLOCKED_OPENRESOLVER(0.00)[bytedance.com:email,brainfault.org:email,infradead.org:email,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,semihalf.com:email,summations.net:email]
+X-Rspamd-Queue-Id: 2D02E6252D1
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Ssqosid is the RISC-V Quality-of-Service (QoS) Identifiers specification
-which defines the Supervisor Resource Management Configuration (srmcfg)
-register.
+Add support for the srmcfg CSR defined in the Ssqosid ISA extension.
+The CSR contains two fields:
+
+  - Resource Control ID (RCID) for resource allocation
+  - Monitoring Counter ID (MCID) for tracking resource usage
+
+Requests from a hart to shared resources are tagged with these IDs,
+allowing resource usage to be associated with the running task.
+
+Add a srmcfg field to thread_struct with the same format as the CSR so
+the scheduler can set the RCID and MCID for each task on context
+switch. A per-cpu cpu_srmcfg variable mirrors the CSR state to avoid
+redundant writes. L1D-hot memory access is faster than a CSR read and
+avoids traps under virtualization.
+
+A per-cpu cpu_srmcfg_default holds the default srmcfg for each CPU as
+set by resctrl CPU group assignment. On context switch, RCID and MCID
+inherit from the CPU default independently: a task whose thread RCID
+field is zero takes the CPU default's RCID, and likewise for MCID.
 
 Link: https://github.com/riscv/riscv-ssqosid/releases/tag/v1.0
+Assisted-by: Claude:claude-opus-4-7
 Co-developed-by: Kornel Dulęba <mindal@semihalf.com>
 Signed-off-by: Kornel Dulęba <mindal@semihalf.com>
 Signed-off-by: Drew Fustini <fustini@kernel.org>
 ---
- arch/riscv/include/asm/hwcap.h | 1 +
- arch/riscv/kernel/cpufeature.c | 1 +
- 2 files changed, 2 insertions(+)
+ MAINTAINERS                        |  8 ++++
+ arch/riscv/Kconfig                 | 18 +++++++
+ arch/riscv/include/asm/csr.h       |  5 ++
+ arch/riscv/include/asm/processor.h |  3 ++
+ arch/riscv/include/asm/qos.h       | 87 +++++++++++++++++++++++++++++++++
+ arch/riscv/include/asm/switch_to.h |  3 ++
+ arch/riscv/kernel/Makefile         |  2 +
+ arch/riscv/kernel/qos.c            | 98 ++++++++++++++++++++++++++++++++++++++
+ 8 files changed, 224 insertions(+)
 
-diff --git a/arch/riscv/include/asm/hwcap.h b/arch/riscv/include/asm/hwcap.h
-index 7ef8e5f55c8d..b83dae5cebb9 100644
---- a/arch/riscv/include/asm/hwcap.h
-+++ b/arch/riscv/include/asm/hwcap.h
-@@ -112,6 +112,7 @@
- #define RISCV_ISA_EXT_ZCLSD		103
- #define RISCV_ISA_EXT_ZICFILP		104
- #define RISCV_ISA_EXT_ZICFISS		105
-+#define RISCV_ISA_EXT_SSQOSID		106
+diff --git a/MAINTAINERS b/MAINTAINERS
+index c2c6d79275c6..e694fb2a22d2 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -23017,6 +23017,14 @@ F:	drivers/perf/riscv_pmu.c
+ F:	drivers/perf/riscv_pmu_legacy.c
+ F:	drivers/perf/riscv_pmu_sbi.c
  
- #define RISCV_ISA_EXT_XLINUXENVCFG	127
++RISC-V QOS RESCTRL SUPPORT
++M:	Drew Fustini <fustini@kernel.org>
++R:	yunhui cui <cuiyunhui@bytedance.com>
++L:	linux-riscv@lists.infradead.org
++S:	Supported
++F:	arch/riscv/include/asm/qos.h
++F:	arch/riscv/kernel/qos.c
++
+ RISC-V RPMI AND MPXY DRIVERS
+ M:	Rahul Pathak <rahul@summations.net>
+ M:	Anup Patel <anup@brainfault.org>
+diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
+index c5754942cf85..6abbb21f3a0d 100644
+--- a/arch/riscv/Kconfig
++++ b/arch/riscv/Kconfig
+@@ -591,6 +591,24 @@ config RISCV_ISA_SVNAPOT
  
-diff --git a/arch/riscv/kernel/cpufeature.c b/arch/riscv/kernel/cpufeature.c
-index f46aa5602d74..668a7e71ff1c 100644
---- a/arch/riscv/kernel/cpufeature.c
-+++ b/arch/riscv/kernel/cpufeature.c
-@@ -582,6 +582,7 @@ const struct riscv_isa_ext_data riscv_isa_ext[] = {
- 	__RISCV_ISA_EXT_DATA(ssaia, RISCV_ISA_EXT_SSAIA),
- 	__RISCV_ISA_EXT_DATA(sscofpmf, RISCV_ISA_EXT_SSCOFPMF),
- 	__RISCV_ISA_EXT_SUPERSET(ssnpm, RISCV_ISA_EXT_SSNPM, riscv_xlinuxenvcfg_exts),
-+	__RISCV_ISA_EXT_DATA(ssqosid, RISCV_ISA_EXT_SSQOSID),
- 	__RISCV_ISA_EXT_DATA(sstc, RISCV_ISA_EXT_SSTC),
- 	__RISCV_ISA_EXT_DATA(svade, RISCV_ISA_EXT_SVADE),
- 	__RISCV_ISA_EXT_DATA_VALIDATE(svadu, RISCV_ISA_EXT_SVADU, riscv_ext_svadu_validate),
+ 	  If you don't know what to do here, say Y.
+ 
++config RISCV_ISA_SSQOSID
++	bool "Ssqosid extension support for supervisor mode Quality of Service ID"
++	depends on 64BIT
++	default n
++	help
++	  Adds support for the Ssqosid ISA extension (Supervisor-mode
++	  Quality of Service ID).
++
++	  Ssqosid defines the srmcfg CSR which allows the system to tag the
++	  running process with an RCID (Resource Control ID) and MCID
++	  (Monitoring Counter ID). The RCID is used to determine resource
++	  allocation. The MCID is used to track resource usage in event
++	  counters.
++
++	  For example, a cache controller may use the RCID to apply a
++	  cache partitioning scheme and use the MCID to track how much
++	  cache a process, or a group of processes, is using.
++
+ config RISCV_ISA_SVPBMT
+ 	bool "Svpbmt extension support for supervisor mode page-based memory types"
+ 	depends on 64BIT && MMU
+diff --git a/arch/riscv/include/asm/csr.h b/arch/riscv/include/asm/csr.h
+index 31b8988f4488..7bce928e5daa 100644
+--- a/arch/riscv/include/asm/csr.h
++++ b/arch/riscv/include/asm/csr.h
+@@ -84,6 +84,10 @@
+ #define SATP_ASID_MASK	_AC(0xFFFF, UL)
+ #endif
+ 
++/* SRMCFG fields */
++#define SRMCFG_RCID_MASK	GENMASK(11, 0)
++#define SRMCFG_MCID_MASK	GENMASK(27, 16)
++
+ /* Exception cause high bit - is an interrupt if set */
+ #define CAUSE_IRQ_FLAG		(_AC(1, UL) << (__riscv_xlen - 1))
+ 
+@@ -328,6 +332,7 @@
+ #define CSR_STVAL		0x143
+ #define CSR_SIP			0x144
+ #define CSR_SATP		0x180
++#define CSR_SRMCFG		0x181
+ 
+ #define CSR_STIMECMP		0x14D
+ #define CSR_STIMECMPH		0x15D
+diff --git a/arch/riscv/include/asm/processor.h b/arch/riscv/include/asm/processor.h
+index 812517b2cec1..49a386d74cd3 100644
+--- a/arch/riscv/include/asm/processor.h
++++ b/arch/riscv/include/asm/processor.h
+@@ -123,6 +123,9 @@ struct thread_struct {
+ 	/* A forced icache flush is not needed if migrating to the previous cpu. */
+ 	unsigned int prev_cpu;
+ #endif
++#ifdef CONFIG_RISCV_ISA_SSQOSID
++	u32 srmcfg;
++#endif
+ };
+ 
+ /* Whitelist the fstate from the task_struct for hardened usercopy */
+diff --git a/arch/riscv/include/asm/qos.h b/arch/riscv/include/asm/qos.h
+new file mode 100644
+index 000000000000..727d438454f3
+--- /dev/null
++++ b/arch/riscv/include/asm/qos.h
+@@ -0,0 +1,87 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++#ifndef _ASM_RISCV_QOS_H
++#define _ASM_RISCV_QOS_H
++
++#include <linux/percpu-defs.h>
++
++#ifdef CONFIG_RISCV_ISA_SSQOSID
++
++#include <linux/bitfield.h>
++#include <linux/cpufeature.h>
++#include <linux/sched.h>
++
++#include <asm/csr.h>
++#include <asm/fence.h>
++#include <asm/hwcap.h>
++
++/* cached value of srmcfg csr for each cpu */
++DECLARE_PER_CPU(u32, cpu_srmcfg);
++
++/* default srmcfg value for each cpu, set via resctrl cpu assignment */
++DECLARE_PER_CPU(u32, cpu_srmcfg_default);
++
++static inline void __switch_to_srmcfg(struct task_struct *next)
++{
++	u32 thread_srmcfg, default_srmcfg;
++
++	thread_srmcfg = READ_ONCE(next->thread.srmcfg);
++	default_srmcfg = __this_cpu_read(cpu_srmcfg_default);
++
++	/*
++	 * RCID and MCID inherit from cpu_srmcfg_default independently.
++	 * RESCTRL_RESERVED_CLOSID and RESCTRL_RESERVED_RMID are both 0,
++	 * so a per-field zero means "no task assignment for this
++	 * dimension" and the CPU default supplies that field. Matches
++	 * x86 RDT's __resctrl_sched_in() per-field logic. The fully
++	 * unassigned (thread.srmcfg == 0) and fully assigned (both
++	 * fields non-zero) cases short-circuit the field math.
++	 */
++	if (thread_srmcfg == 0) {
++		thread_srmcfg = default_srmcfg;
++	} else {
++		u32 rcid = FIELD_GET(SRMCFG_RCID_MASK, thread_srmcfg);
++		u32 mcid = FIELD_GET(SRMCFG_MCID_MASK, thread_srmcfg);
++
++		if (rcid == 0 || mcid == 0) {
++			if (rcid == 0)
++				rcid = FIELD_GET(SRMCFG_RCID_MASK, default_srmcfg);
++			if (mcid == 0)
++				mcid = FIELD_GET(SRMCFG_MCID_MASK, default_srmcfg);
++			thread_srmcfg = FIELD_PREP(SRMCFG_RCID_MASK, rcid) |
++					FIELD_PREP(SRMCFG_MCID_MASK, mcid);
++		}
++	}
++
++	if (thread_srmcfg != __this_cpu_read(cpu_srmcfg)) {
++		/*
++		 * Drain stores from the outgoing task before the CSR write
++		 * so they retain the previous RCID/MCID tag at the cache
++		 * interconnect.
++		 */
++		RISCV_FENCE(rw, o);
++
++		__this_cpu_write(cpu_srmcfg, thread_srmcfg);
++		csr_write(CSR_SRMCFG, thread_srmcfg);
++		/*
++		 * Order the csrw before the new task's loads/stores so they
++		 * pick up the new tag. Zicsr 6.1.1 makes CSR writes weakly
++		 * ordered (device-output) vs memory ops. Ssqosid v1.0 is
++		 * silent so honor the general CSR rule.
++		 */
++		RISCV_FENCE(o, rw);
++	}
++}
++
++static __always_inline bool has_srmcfg(void)
++{
++	return riscv_has_extension_unlikely(RISCV_ISA_EXT_SSQOSID);
++}
++
++#else /* ! CONFIG_RISCV_ISA_SSQOSID  */
++
++struct task_struct;
++static __always_inline bool has_srmcfg(void) { return false; }
++static inline void __switch_to_srmcfg(struct task_struct *next) { }
++
++#endif /* CONFIG_RISCV_ISA_SSQOSID */
++#endif /* _ASM_RISCV_QOS_H */
+diff --git a/arch/riscv/include/asm/switch_to.h b/arch/riscv/include/asm/switch_to.h
+index 0e71eb82f920..1c7ea53ec012 100644
+--- a/arch/riscv/include/asm/switch_to.h
++++ b/arch/riscv/include/asm/switch_to.h
+@@ -14,6 +14,7 @@
+ #include <asm/processor.h>
+ #include <asm/ptrace.h>
+ #include <asm/csr.h>
++#include <asm/qos.h>
+ 
+ #ifdef CONFIG_FPU
+ extern void __fstate_save(struct task_struct *save_to);
+@@ -119,6 +120,8 @@ do {							\
+ 		__switch_to_fpu(__prev, __next);	\
+ 	if (has_vector() || has_xtheadvector())		\
+ 		__switch_to_vector(__prev, __next);	\
++	if (has_srmcfg())				\
++		__switch_to_srmcfg(__next);		\
+ 	if (switch_to_should_flush_icache(__next))	\
+ 		local_flush_icache_all();		\
+ 	__switch_to_envcfg(__next);			\
+diff --git a/arch/riscv/kernel/Makefile b/arch/riscv/kernel/Makefile
+index cabb99cadfb6..ebe1c3588177 100644
+--- a/arch/riscv/kernel/Makefile
++++ b/arch/riscv/kernel/Makefile
+@@ -128,3 +128,5 @@ obj-$(CONFIG_ACPI_NUMA)	+= acpi_numa.o
+ 
+ obj-$(CONFIG_GENERIC_CPU_VULNERABILITIES) += bugs.o
+ obj-$(CONFIG_RISCV_USER_CFI) += usercfi.o
++
++obj-$(CONFIG_RISCV_ISA_SSQOSID) += qos.o
+diff --git a/arch/riscv/kernel/qos.c b/arch/riscv/kernel/qos.c
+new file mode 100644
+index 000000000000..d18b99b195e7
+--- /dev/null
++++ b/arch/riscv/kernel/qos.c
+@@ -0,0 +1,98 @@
++// SPDX-License-Identifier: GPL-2.0-only
++#include <linux/cpu.h>
++#include <linux/cpu_pm.h>
++#include <linux/cpuhotplug.h>
++#include <linux/notifier.h>
++#include <linux/percpu-defs.h>
++#include <linux/types.h>
++
++#include <asm/cpufeature-macros.h>
++#include <asm/hwcap.h>
++#include <asm/qos.h>
++
++/*
++ * Cached value of srmcfg csr for each cpu. Seeded to U32_MAX so the next
++ * __switch_to_srmcfg() unconditionally writes the CSR; the encoding
++ * MCID << 16 | RCID with both fields well under 16 bits can never
++ * produce this sentinel. This covers early-boot context switches that
++ * happen before riscv_srmcfg_init() runs as an arch_initcall.
++ */
++DEFINE_PER_CPU(u32, cpu_srmcfg) = U32_MAX;
++
++/* default srmcfg value for each cpu, set via resctrl cpu assignment */
++DEFINE_PER_CPU(u32, cpu_srmcfg_default);
++
++/*
++ * Seed the per-CPU srmcfg cache to a sentinel that no real srmcfg encoding
++ * can produce (MCID << 16 | RCID, both fields well under 16 bits) so the
++ * next __switch_to_srmcfg() unconditionally writes the CSR. Ssqosid v1.0
++ * leaves CSR state across hart stop/start implementation-defined, so the
++ * cached value cannot be trusted after online.
++ */
++static int riscv_srmcfg_online(unsigned int cpu)
++{
++	per_cpu(cpu_srmcfg, cpu) = U32_MAX;
++	return 0;
++}
++
++/*
++ * Invalidate the cache on offline too. The sentinel persists across the
++ * offline period, so a CPU brought back online finds the cache already
++ * invalidated before it is schedulable. This closes the window where a
++ * task scheduled before riscv_srmcfg_online() runs could match a stale
++ * cache and skip the CSR write while the hardware CSR was reset across
++ * hart stop/start.
++ */
++static int riscv_srmcfg_offline(unsigned int cpu)
++{
++	per_cpu(cpu_srmcfg, cpu) = U32_MAX;
++	return 0;
++}
++
++/*
++ * CPU PM notifier: invalidate the cached srmcfg on resume from a deep
++ * idle / suspend. Ssqosid v1.0 leaves CSR_SRMCFG state across low-power
++ * transitions implementation-defined, and the boot CPU never goes
++ * through the cpuhp online callback during system suspend, so without
++ * this hook __switch_to_srmcfg() would skip the CSR write when the
++ * outgoing task happens to share its srmcfg with the pre-suspend cache.
++ */
++static int riscv_srmcfg_pm_notify(struct notifier_block *nb,
++				  unsigned long action, void *unused)
++{
++	switch (action) {
++	case CPU_PM_EXIT:
++	case CPU_PM_ENTER_FAILED:
++		__this_cpu_write(cpu_srmcfg, U32_MAX);
++		break;
++	}
++	return NOTIFY_OK;
++}
++
++static struct notifier_block riscv_srmcfg_pm_nb = {
++	.notifier_call = riscv_srmcfg_pm_notify,
++};
++
++static int __init riscv_srmcfg_init(void)
++{
++	int err;
++
++	if (!riscv_has_extension_unlikely(RISCV_ISA_EXT_SSQOSID))
++		return 0;
++
++	/*
++	 * cpuhp_setup_state() invokes the startup callback locally on every
++	 * already-online CPU, so no separate seed loop is needed here.
++	 */
++	err = cpuhp_setup_state(CPUHP_AP_ONLINE_DYN, "riscv/srmcfg:online",
++				riscv_srmcfg_online, riscv_srmcfg_offline);
++	if (err < 0) {
++		pr_warn("srmcfg cpuhp registration failed (%d), cpus brought online after boot will not invalidate the CSR_SRMCFG cache\n",
++			err);
++		return err;
++	}
++
++	cpu_pm_register_notifier(&riscv_srmcfg_pm_nb);
++	return 0;
++}
++arch_initcall(riscv_srmcfg_init);
 
 -- 
 2.43.0
