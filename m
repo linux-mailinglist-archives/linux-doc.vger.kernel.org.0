@@ -1,282 +1,247 @@
-Return-Path: <linux-doc+bounces-90295-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90312-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KLcsOhd3HWrGbAkAu9opvQ
-	(envelope-from <linux-doc+bounces-90295-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 14:12:07 +0200
+	id qEjdCZl2HWqnbAkAu9opvQ
+	(envelope-from <linux-doc+bounces-90312-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 14:10:01 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56D9361EFA5
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 14:12:07 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id C559761EEE5
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 14:10:00 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E9A1830A8CD2
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Jun 2026 12:05:58 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 4BA433008D54
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Jun 2026 12:08:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C0184377ED4;
-	Mon,  1 Jun 2026 12:05:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9B32A37CD48;
+	Mon,  1 Jun 2026 12:06:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="mzCZV4e3"
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="W/h2Zymk";
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="W/h2Zymk"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from GVXPR05CU001.outbound.protection.outlook.com (mail-swedencentralazon11013023.outbound.protection.outlook.com [52.101.83.23])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 30FD137C902
-	for <linux-doc@vger.kernel.org>; Mon,  1 Jun 2026 12:05:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.52
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780315522; cv=none; b=SRFraNOJkXHwg8c+uUyVeH2Q3pvVJRMEr+tBf7/67cGU4jK9CadxeMkZpxeu0uEnSl4ZJiTKL2u/HcgtsIp9KtMEuyMnTTylWkhHUFFXtrAnVa27UIJDZDwc8wQeJYL572Vte2YP04lvoYOPuf8598xl2ZO3bTXXlzHNWPG8bV4=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780315522; c=relaxed/simple;
-	bh=ytc0P/UZw6i8hpySK2Au28vrT+KoK4/4tvvmOq28NjE=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=dS3MQI5iS0WEt+bNQ2vHX/iu2fHlwcHmo7fLNUI/+tk7oYbdF/K+drkVizZ1vHUBFCAXtOhET3oahEp3cNRbDc+/tD5LVfxxbl1MXZ1OpJzIzryZEJCU3jhWCBby3xYzKa+mL9S//b53Uxv7/Q38eJkEmTlIAkD88DRG8QCxBg4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=mzCZV4e3; arc=none smtp.client-ip=209.85.128.52
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-49041fb8c23so76550085e9.0
-        for <linux-doc@vger.kernel.org>; Mon, 01 Jun 2026 05:05:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780315520; x=1780920320; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=BdDKIkZQT8kN6q6EUNEFoTcvXlPCpXkuxCaw1ETC1j0=;
-        b=mzCZV4e3m4by+nrNsGuy9P/0wDVHS7bRicxmoQYeo5nSV5OUi0icrh9UlF6JTkR4VL
-         dRiPiypSG/nB10h/UDFkbtd88YOsie7CLbCr3/fSwba9rFsifgOE/c8gpnzytMt5AO09
-         v0eD+zEuWlv61cA2fIKjvkgHDrKaf/jyB4yzn08tBUySdc7nTkdZk9ruG5j4CnF3w87F
-         jDPefr2U3ILOm3ZQO+mD2u/IDoQhIryFXA26TvUr4rCF5ZpOPalq+QVfMsRIjM36bc6U
-         gjrEcdoB3Mb2YfuW8YobhKQ7slgomK0l5fBKA3Biet9G1VA+SC3mdXL3uRJgTUbL8BME
-         A14g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780315520; x=1780920320;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=BdDKIkZQT8kN6q6EUNEFoTcvXlPCpXkuxCaw1ETC1j0=;
-        b=dgMIXzk2T/+8unnU/h+chDiJqpPhLwrfWuhBhCtnNND0IXQn0yJrAnxLBXCFSlHac1
-         yGVagpLAHfLVL/Fu8shqMzGDYxWFvjHK6J9wyqb0uJJYOTBYJyirmN+BJvkSKdQt8AKe
-         wmIJoKiBE+ULN/O3TKl8xjQ1GchZby37pVJWyLT0otvWWf/ZYshf0z2cWNrT11jER13Y
-         yzKrtu/EPJl8LE2a9FF2YzmKdpV18LZpgwWwyl96pw76sn4Xot3tKsB1lIbw7ZeKoXhD
-         EOBIhwX54if+faREzBBIN9yXFibSTjMGNeJdpAZ9QNLxJH3bibERFIqZPPKo7lPHDFRr
-         PhJw==
-X-Gm-Message-State: AOJu0YxAK3L5kjQM1ih/mGRHxXxPtk5AvrJn/vXI21VzFDoQIIAnf8we
-	B5FoSt5UI0IV/gays+R41AVFZ5ccaMnlb1+f0V/Mq3A4ZvoaFzR2R8O5
-X-Gm-Gg: Acq92OEq1OE/FiA7I0dENWPLCNTyZbuBfwO9Jr/i/WZVafGJEJQli5oOVHeeDGwPlDK
-	c0wbzSbLO0vr4nODQT9ZnfFwO0qaWnVl7OydFcW1aCKKB4jbtiHnGTx1Xnc0NIb/jx/8xftlevy
-	g7Dw+fxG0ybbeL5TtIEGzx2HNgxqnJDFl6lmE5daiNbmjNeg7xGiuVuBsi31jY/p/tGH6kMKLn9
-	pF/8cklUcZF6dZhhXVdsaj9uWYvy8pm8/bUbMMB+Tl2+ENmvRkPzqSwQoHTyXEm6rlI6PUP1iUH
-	cFcA0C3ZvetoYqqL1kvSQzBeuCSdblGJXMoZWRWGncGTS/8WToRPfKc0WQ4Z5AW86xHsMydNNvF
-	s0poHaM7kJm0U/WZhOPH+ZpBPxhjYUulfQ+R0F0NKPdlsVNA7L+DKOoK2I839IqQfW5QBPWFyzN
-	L36AjMSCkH6D3hopVZl00zYmFv1TcYvpCOrcvDGB1Ljg==
-X-Received: by 2002:a05:600d:8499:10b0:48a:525b:e148 with SMTP id 5b1f17b1804b1-490a29122d3mr149472665e9.4.1780315519308;
-        Mon, 01 Jun 2026 05:05:19 -0700 (PDT)
-Received: from [172.16.188.153] ([213.181.114.83])
-        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-4909c152570sm103972805e9.9.2026.06.01.05.05.16
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 01 Jun 2026 05:05:18 -0700 (PDT)
-From: Jim Cromie <jim.cromie@gmail.com>
-Date: Mon, 01 Jun 2026 12:04:54 +0000
-Subject: [PATCH v3 08/24] dyndbg: factor ddebug_match_desc out from
- ddebug_change
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F82F377566;
+	Mon,  1 Jun 2026 12:06:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.83.23
+ARC-Seal:i=3; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1780315576; cv=fail; b=SOJEqtBVfu8PGpM0pQnnc5ynn40PxFfXeiicR6aifFwlVS1el1C74Rva0a+KwVEBJtnOR++6SnjiULFOIQfmRzvlnVG+VB0Tzk5v++Jz09SRc7ACoxef7nBIAoRjiciHm2GEJdhvFJxg1OVMdd+wtjwiKrErXw2Yzj5QzXI9M68=
+ARC-Message-Signature:i=3; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1780315576; c=relaxed/simple;
+	bh=+R1pZvYgAujMlaT4UxGutFo+5V9ab06BARqTJy3U6vs=;
+	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=cnhBw5QT1m7AUpVK6al3zJuKppBPkWDWcNa14HF3ME/aXE4hynYLnEjLfRD3EI6hC4hVoc768ZLErlRLMXTtpVA49ru51mbbtDdY+rfBfaoaQ9zrEKa+RyHya+35DSVEw5jdBANCDLVJMhyecLW4l51ILoGdcDh521TNkV7BYuM=
+ARC-Authentication-Results:i=3; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=W/h2Zymk; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=W/h2Zymk; arc=fail smtp.client-ip=52.101.83.23
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=C81Gy5DQKLpSpVpDVIrwqYGiOlDbFZ6kUNC17MJjMd9ErYfQhYyjZxvlBwD47eFUEg7hOn77C+o8Xma7kJQVOSUxk8bVgudMd8rGVBADP8Gyka8YGLpytx2IewMAp+O/wWNgz1czKlKBOXJ+m0qngenMwJIs2bGAiHzDxFp/LEkmZ3qRpG3R3cRoRMich9xAvQxgN0eosMbebsfGwwJdJNVURw8LPfzcpLf6pQnx2S2FXrb6bLlgxSkPkLWUjAGMukU9OxvIij90yUP2oBKOelkcvu6/FAfQgjOV3r5qXA5WH9D8y28Q+Hhs2ME/2OXJ9mt7SswsvnYQpYSM4g0ZhQ==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=YAwtx8iXkBZ35HE+VZNm/0vvO4oCQSSXH+5v98gjC3E=;
+ b=lVDr+D5ppyKgAJsZOSzIVLU1E6yoy17Ed6eQleU1NtHlX4E8WfPja2xtviyArMn0o+pNJISaLx7aOZZEVK4jfnlLdcFpbfUHKs+uGiTaIWp9zlcnq5SomaxdbT0oqJPB3tuheGqYHkdfPmovKzUvEefXwLGwyznrCXCpavkcXP0oeQNQ448XUdOI9mNttzTXaz3LHNjiy7yUAorA8L0Sq/MjB+VoHczFu4Eu+AE8tTDTzMbbTglCWEmy9+RCDcPceZUbd+e80rnweqJ/wecjnblCfSJfRx/el/nPI37Zg++4pSTXCWus9aUvAZ3jKYITDtPF0nMIIUUCXnYilZzbUA==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=nvidia.com smtp.mailfrom=arm.com; dmarc=pass
+ (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
+ (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=YAwtx8iXkBZ35HE+VZNm/0vvO4oCQSSXH+5v98gjC3E=;
+ b=W/h2ZymkgTVFi/r7dSxhibzOg+RVUQuPHBPwmr+v07gJzynNAzhnV6/KrdHXqnGVHvJMOLsLPoyg7XkZyuJ9lKpQXU4AIguc6vAMdo6253t6PSpnHK+2kCEncFVfQCJLM8RenPyvJhgNkVw5Kg/PIc4V83gBV7vWPj+SzTlUP9E=
+Received: from AS4P192CA0031.EURP192.PROD.OUTLOOK.COM (2603:10a6:20b:658::24)
+ by AS2PR08MB9739.eurprd08.prod.outlook.com (2603:10a6:20b:605::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.16; Mon, 1 Jun 2026
+ 12:06:07 +0000
+Received: from AM3PEPF0000A79A.eurprd04.prod.outlook.com
+ (2603:10a6:20b:658:cafe::15) by AS4P192CA0031.outlook.office365.com
+ (2603:10a6:20b:658::24) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.71.16 via Frontend Transport; Mon, 1
+ Jun 2026 12:06:07 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ AM3PEPF0000A79A.mail.protection.outlook.com (10.167.16.105) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.92.5 via
+ Frontend Transport; Mon, 1 Jun 2026 12:06:06 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=VZrcX3xbUjMD/On4sElS7rfjpLgiAlMJ0YD5IRe+zRvQxIk0VoGG4LGvQJEiHlmwFx8fGkBEIBGt4bZhACaokOveW9Z1m/XtUPOpU/vCovwQqkb5bbmqvowr63l/FxeBQ3erGs5sgsNccjQT7AoPHWbx6I9zf938/G24G3WIj8uYNG7jbXX6Acl2dE0/VGAE32q4xIJMPmha9zubmoP9ifR4MT4Ff89K6PEcg7XEeiAP9AjXkiDacnGStkM3vQEJ3445BRNTfY83AJ7aOtQMQaPQo+7H+mQomSfh65R2GoKWrY1+CFvDCEBxMMoA9VMVnzinorPyblVl9CJ4/314qQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=YAwtx8iXkBZ35HE+VZNm/0vvO4oCQSSXH+5v98gjC3E=;
+ b=wt1RiEtoUx4e1+zavwHmqNKFVbKu0gobFq2IQvCYY5XiIaMz+yFXByQ6vpNFeCqKudsMnzEEflUEikuxq7h4CKEWxLn29/BwXojwrjSD/PELTDl5nJjG+eZrb6PqNflknNyYlULT4GL0LI1shu/fgXu2h1fdEo6c6p812Ggd1pictq3IwtaOBSAmjNvW4yLOQY/A+LLTan5wNi/UjpS0/EMAUB4z+etwOSciPIYcsDfpS53951PHWO9/VNrpBvQK38siWfESP3PuGAmINhKL3Cd29UHLcbc42x/Zl3vjhOFQOYV4oPSOHi2MWggpQkqPexzljB6OPztPATSj6gEevg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=YAwtx8iXkBZ35HE+VZNm/0vvO4oCQSSXH+5v98gjC3E=;
+ b=W/h2ZymkgTVFi/r7dSxhibzOg+RVUQuPHBPwmr+v07gJzynNAzhnV6/KrdHXqnGVHvJMOLsLPoyg7XkZyuJ9lKpQXU4AIguc6vAMdo6253t6PSpnHK+2kCEncFVfQCJLM8RenPyvJhgNkVw5Kg/PIc4V83gBV7vWPj+SzTlUP9E=
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+Received: from DU0PR08MB9203.eurprd08.prod.outlook.com (2603:10a6:10:417::12)
+ by PR3PR08MB5644.eurprd08.prod.outlook.com (2603:10a6:102:86::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.16; Mon, 1 Jun 2026
+ 12:05:04 +0000
+Received: from DU0PR08MB9203.eurprd08.prod.outlook.com
+ ([fe80::f1e:73f2:57df:4047]) by DU0PR08MB9203.eurprd08.prod.outlook.com
+ ([fe80::f1e:73f2:57df:4047%5]) with mapi id 15.21.0071.014; Mon, 1 Jun 2026
+ 12:05:04 +0000
+Message-ID: <b2265aeb-fbde-45d4-aa4b-fc08dc4fdd28@arm.com>
+Date: Mon, 1 Jun 2026 17:34:55 +0530
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 0/5] selftests/mm: separate GUP microbenchmarking from
+ functional testing
+To: John Hubbard <jhubbard@nvidia.com>,
+ Andrew Morton <akpm@linux-foundation.org>
+Cc: David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>,
+ "Liam R . Howlett" <Liam.Howlett@oracle.com>,
+ Vlastimil Babka <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>,
+ Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
+ Shuah Khan <shuah@kernel.org>, Zi Yan <ziy@nvidia.com>,
+ Baolin Wang <baolin.wang@linux.alibaba.com>, Nico Pache <npache@redhat.com>,
+ Ryan Roberts <ryan.roberts@arm.com>, Dev Jain <dev.jain@arm.com>,
+ Barry Song <baohua@kernel.org>, Lance Yang <lance.yang@linux.dev>,
+ Jason Gunthorpe <jgg@ziepe.ca>, Peter Xu <peterx@redhat.com>,
+ Leon Romanovsky <leon@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ Shuah Khan <skhan@linuxfoundation.org>, Mark Brown <broonie@kernel.org>,
+ linux-mm@kvack.org, linux-kselftest@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260527142432.230127-1-sarthak.sharma@arm.com>
+ <20260527114752.cf4dd3e1bda93fb8ebab5a76@linux-foundation.org>
+ <3b4176f4-e099-490c-a5e2-6a36d00b1207@arm.com>
+ <13b63b4f-6a4b-4433-93e8-78035ab62b83@nvidia.com>
+From: Sarthak Sharma <sarthak.sharma@arm.com>
+Content-Language: en-US
+In-Reply-To: <13b63b4f-6a4b-4433-93e8-78035ab62b83@nvidia.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: MA5P287CA0009.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:a01:176::13) To DU0PR08MB9203.eurprd08.prod.outlook.com
+ (2603:10a6:10:417::12)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260601-dd-maint-2-v3-8-4a15b241bd3c@gmail.com>
-References: <20260601-dd-maint-2-v3-0-4a15b241bd3c@gmail.com>
-In-Reply-To: <20260601-dd-maint-2-v3-0-4a15b241bd3c@gmail.com>
-To: Jonathan Corbet <corbet@lwn.net>, 
- Shuah Khan <skhan@linuxfoundation.org>, Arnd Bergmann <arnd@arndb.de>, 
- Jason Baron <jbaron@akamai.com>, Luis Chamberlain <mcgrof@kernel.org>, 
- Petr Pavlu <petr.pavlu@suse.com>, Daniel Gomez <da.gomez@kernel.org>, 
- Sami Tolvanen <samitolvanen@google.com>, Aaron Tomlin <atomlin@atomlin.com>, 
- Andrew Morton <akpm@linux-foundation.org>, Shuah Khan <shuah@kernel.org>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-arch@vger.kernel.org, linux-modules@vger.kernel.org, 
- linux-kselftest@vger.kernel.org, dri-devel@lists.freedesktop.org, 
- Jim Cromie <jim.cromie@gmail.com>, 
- Louis Chauvet <louis.chauvet@bootlin.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780315495; l=4346;
- i=jim.cromie@gmail.com; s=20260203; h=from:subject:message-id;
- bh=ytc0P/UZw6i8hpySK2Au28vrT+KoK4/4tvvmOq28NjE=;
- b=+ufThVv6ucRec0InwE1oCIlL6liuHDUePM3lBke3OZ+hQCGp+ZsnENSLAGbcypyjP9YmxLFW1
- VBzb0Ler2QqCfTSkZKIsWBtoCA6TP04CmDZHb1FiMbti/6RhHDWlB/W
-X-Developer-Key: i=jim.cromie@gmail.com; a=ed25519;
- pk=C6E5ODlPQo7ZBynATXH9wg7K6HxP0pIXyf4s38Qw0XE=
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+X-MS-TrafficTypeDiagnostic:
+	DU0PR08MB9203:EE_|PR3PR08MB5644:EE_|AM3PEPF0000A79A:EE_|AS2PR08MB9739:EE_
+X-MS-Office365-Filtering-Correlation-Id: 95c0a2c7-256c-4498-de9d-08debfd6295b
+x-checkrecipientrouted: true
+NoDisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted:
+ BCL:0;ARA:13230040|7416014|376014|366016|1800799024|22082099003|18002099003|56012099006|4143699003|5023799004|11063799006;
+X-Microsoft-Antispam-Message-Info-Original:
+ 0/UCGDkV18pw1rqlCv8/v3c395BjlZi1XIiaKBCfN66Ra7MGSp6D6Q8PsII135EQTkPhTf+mUe31ui+vzK/wX350Wf1VUuG3RdjaoiKdL9T+5Pp7UifYPvKYm7voVLLoZvElkflff6Dnb4fn0Oo06DsjO6tvD9b++Axa2JzcqjDXsCtR5SRgEUUMaVNd05NIcv0zK+AvJz+E7FUG9itLk6WHEb8swToNZWAQ/v9XELV702ykHdRILAFHWFhHU2/DufFwIe+3KnWZhN6WX+uIxx3Tts8fgmAFC4mDcpW69dQtMfGZjG8SiXVWFgf6EUwyWg9DQgy51PwhdxDhXNXjHEQPfejtAMHTRPr/5yeheCG9MKd9Kk/0c1qHDUttMr3w0ZWtjSMmRd0pQ+Rvj1fu+d8ct9VGa7R/z/dYajx7WWXWk07H4/7gFL6dLy8S0JECThwxnhC8eRTr9VD2THaM61hbV1LL8erXzELuNEnXD/WFGiVqvXOoNXSgSQDYn7I9oMFvmKenwI8LEYsq8aJPBROiV3iYtu1ZCvmCFHUSfUfnOlrXXwhgh7qEBzidYgyFMJ0tIXPBPIASAC98hqXDS8XO5mgCWbTtf7uasCZ8aenXmSbdWolhkQ/TY5QCRYcWxZO/Y0+rdlltIoBMsICoA9aka+XCraKF0c5Tj9tCwb8IA+B7E8k4PxYkrDrYJEKLXVpRgIv3EcTnOZiPU/ydUQ==
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU0PR08MB9203.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(366016)(1800799024)(22082099003)(18002099003)(56012099006)(4143699003)(5023799004)(11063799006);DIR:OUT;SFP:1101;
+X-Exchange-RoutingPolicyChecked:
+ oUqGST2JVM/UdGTwr2bnCrwo36HB+Hi3jdVCjcMYGHlGzQ13yS1vMWwGSXIS0E1zKz9maokA28ZOG0GaHIoI95Ahh1EkklHzPHcnv6lkFXydU4roonAB97MumFy+5HBKKamnKp5KTgiHWvyRL+AOsr1YKwrc1DErWK9slGTPOBeixZppFt9D5YeGLHyYJWuXcLGlPptyDQOW6vYBdxuEEhURWxwuRWOJ3DMJaBJmYshfYQR87NjZ+jg3nLPTtdumn5jncVUyfVq1rCy2Uobhm2oyA3BAz8BhulmYGUmXVUk15rM8Atsn//m4lHqQo6NuxqU/EHYqjCRXqaNOexKkfA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR08MB5644
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ AM3PEPF0000A79A.eurprd04.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	c65a5cba-439f-4549-e91d-08debfd6039f
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|14060799003|7416014|376014|1800799024|35042699022|36860700016|82310400026|18002099003|22082099003|56012099006|4143699003|11063799006|5023799004;
+X-Microsoft-Antispam-Message-Info:
+	WzRgc7lnt7gKXubh0BrABrW05+1l/GyzL50WrBfRLErWYYTDsMUtUGFY23Jqj8m2WmHSSzx84ufh4sThG5b+Vka8qYU4RwcL/tRUtTRjCMhkhML+L6OQ0GmNUJz7/I613dHTpmyfzxXolqKvdpt+8l4fNZGOE7EWgt38Qus0uigvtpaK/9UlmidETZIR8G6C4TTPbZcTVVfdAWovVlthqBLrg5cgs2MajIGCgSi0mewOdLrmxtKJnYnak10Xl4VH4Otj7hkJlM37Q762yVzxZey8DbRqyuG/g/rH4u7KaXF75Lk3DU/7l56ViQHkkkJ19ocJCZs2kce8op9rRCW6CBRizH4tR2/f9BuI1w/gY5RKVO4CupHX9cUyupnggz73Y+9aFUAj15eFJ5zhbSxygiAU3VW+GhTUxln9Tl1i7o4ZOitfXnqMoDRSXpfTd1blsLwb03ypegN4EP1kMw2ZPeqC14nREXquTczkAH1Ej87Vs+5/EfR4CJrESdstvRNKwEBqKmgVOG9SdE+GrSaFaxQLADG5mHzfFMQPCdsHxMDwDqNpNpymh7W7JbYsSRS1khc4T36gN/sctjXx9/yaKEmvMpz74aMQgO2I8YpYX4oojrCJZrgTgBcam/r5260O6aPv0gKT+m+TV88UCovi2UOke8oBV6oxGiWEzyd+1xKjptg/xzSERKUm7RYmBflJ0BdWr240+Fz9Lo5ADsvmrg0S86Su4YiQ6nT1P7EKhZg=
+X-Forefront-Antispam-Report:
+	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(14060799003)(7416014)(376014)(1800799024)(35042699022)(36860700016)(82310400026)(18002099003)(22082099003)(56012099006)(4143699003)(11063799006)(5023799004);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	EKTCTmWJHEvcXecrMO1hKdVaYxRttGGs9BP3642dDeaMnWb4fsE6eI+4s9oeJG0H6CmdR+tFFFW2J48mIm4Hwisela8+EsC/jhJYK255VZA0JORRFNbMU5M+yWKiUHSHaolsHAhvhvNboUmiXSJTwO9IRBmldvAz8j1aCyFuN8OD46huxM0xTkUSUX8TrUYLbFY1BvPGAJsKz1RBmL69gQe1aAyOEwWprOnQn1ThkBw/IRC8Di7R84rSgu0G1/6psJwjEMMZMy3gjcoZ0t/G+ljYNdQyhksbDBeoYQpPBWPGnaME6s6Nw5NJL/BagC8CarElzbMokkb0UYvO8JHeN9xcauZMDKpgURkwlnr+huSyoIoyEr17YgUDnUEDuTQ6OIYJKX7aoST2Qwf8O3ExSdN8wc4Wtx5GZxdIZn3KhhWwL5xgtoCuOQ4l/J2fKbs0
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jun 2026 12:06:06.9443
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 95c0a2c7-256c-4498-de9d-08debfd6295b
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	AM3PEPF0000A79A.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR08MB9739
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	ARC_REJECT(1.00)[cv is fail on i=3];
+	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
+	R_DKIM_ALLOW(-0.20)[arm.com:s=selector1];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-90295-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90312-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[lwn.net,linuxfoundation.org,arndb.de,akamai.com,kernel.org,suse.com,google.com,atomlin.com,linux-foundation.org,linux.intel.com,suse.de,gmail.com,ffwll.ch];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FREEMAIL_CC(0.00)[vger.kernel.org,lists.freedesktop.org,gmail.com,bootlin.com];
-	RCPT_COUNT_TWELVE(0.00)[24];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[27];
+	DKIM_TRACE(0.00)[arm.com:+];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sarthak.sharma@arm.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jimcromie@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[bootlin.com:email,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: 56D9361EFA5
+	RCVD_COUNT_SEVEN(0.00)[8]
+X-Rspamd-Queue-Id: C559761EEE5
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-ddebug_change() is a big (~100 lines) function with a nested for loop.
+Hi John!
 
-The outer loop walks the per-module ddebug_tables list, and does
-module stuff: it filters on a query's "module FOO*" and "class BAR",
-failures here skip the entire inner loop.
+On 5/30/26 1:04 AM, John Hubbard wrote:
+> On 5/28/26 10:57 PM, Sarthak Sharma wrote:
+>> On 5/28/26 12:17 AM, Andrew Morton wrote:
+>>> On Wed, 27 May 2026 19:54:27 +0530 Sarthak Sharma <sarthak.sharma@arm.com> wrote:
+> ...
+>> Thanks! I went through Sashiko's review.
+>>
+>> Both the points are valid but look very minor to me: one is a temporary
+>> x86 build issue fixed by the next patch and the other is stricter
+> 
+> This is the sort of claim that an AI will make, in kernel code: "it's
+> just a temporary build issue". I've seen this happen during sessions
+> when I'm interrogating an AI about something.
+> 
+> Don't be misled by AI's evaluations, as unless it is guided very
+> firmly (sashiko for example has fairly firm guidance, although still
+> a work in progress) it will provide routinely terrible advice about
+> how to deal with the kernel.
+> 
+> I'm sure we have something in the "how to contribute" docs that
+> explain that patchsets must be bisectable and that there are no
+> "minor" build "issues"!
+> 
+> I'd request that you study those docs and the surrounding ones,
+> it won't take long and it will help immunize you against the
+> various AI suggestions that seem to be unavoidable problems in
+> 2026.
+> 
+> thanks,
 
-The inner loop (60 lines) scans a module's descriptors.  It starts
-with a long block of filters on function, line, format, and the
-validated "BAR" class (or the legacy/_DPRINTK_CLASS_DFLT).
+Thanks for the guidance. You're right, I shouldn't have called it a
+minor issue just because it was fixed in the next patch.
 
-These filters "continue" past pr_debugs that don't match the query
-criteria, before it falls through the code below that counts matches,
-then adjusts the flags and static-keys.  This is unnecessarily hard to
-think about.
-
-So move the per-descriptor filter-block into a boolean function:
-ddebug_match_desc(desc), and change each "continue" to "return false".
-This puts a clear interface in place, so any future changes are either
-inside, outside, or across this interface.
-
-also fix checkpatch complaints about spaces and braces.
-
-Signed-off-by: Jim Cromie <jim.cromie@gmail.com>
-Reviewed-by: Louis Chauvet <louis.chauvet@bootlin.com>
----
- lib/dynamic_debug.c | 83 ++++++++++++++++++++++++++++++-----------------------
- 1 file changed, 47 insertions(+), 36 deletions(-)
-
-diff --git a/lib/dynamic_debug.c b/lib/dynamic_debug.c
-index 18a71a9108d3..6b1e983cfedc 100644
---- a/lib/dynamic_debug.c
-+++ b/lib/dynamic_debug.c
-@@ -172,6 +172,52 @@ static struct ddebug_class_map *ddebug_find_valid_class(struct ddebug_table cons
-  * callsites, normally the same as number of changes.  If verbose,
-  * logs the changes.  Takes ddebug_lock.
-  */
-+static bool ddebug_match_desc(const struct ddebug_query *query,
-+			      struct _ddebug *dp,
-+			      int valid_class)
-+{
-+	/* match site against query-class */
-+	if (dp->class_id != valid_class)
-+		return false;
-+
-+	/* match against the source filename */
-+	if (query->filename &&
-+	    !match_wildcard(query->filename, dp->filename) &&
-+	    !match_wildcard(query->filename,
-+			    kbasename(dp->filename)) &&
-+	    !match_wildcard(query->filename,
-+			    trim_prefix(dp->filename)))
-+		return false;
-+
-+	/* match against the function */
-+	if (query->function &&
-+	    !match_wildcard(query->function, dp->function))
-+		return false;
-+
-+	/* match against the format */
-+	if (query->format) {
-+		if (*query->format == '^') {
-+			char *p;
-+			/* anchored search. match must be at beginning */
-+			p = strstr(dp->format, query->format + 1);
-+			if (p != dp->format)
-+				return false;
-+		} else if (!strstr(dp->format, query->format)) {
-+			return false;
-+		}
-+	}
-+
-+	/* match against the line number range */
-+	if (query->first_lineno &&
-+	    dp->lineno < query->first_lineno)
-+		return false;
-+	if (query->last_lineno &&
-+	    dp->lineno > query->last_lineno)
-+		return false;
-+
-+	return true;
-+}
-+
- static int ddebug_change(const struct ddebug_query *query,
- 			 struct flag_settings *modifiers)
- {
-@@ -204,42 +250,7 @@ static int ddebug_change(const struct ddebug_query *query,
- 		for (i = 0; i < dt->num_ddebugs; i++) {
- 			struct _ddebug *dp = &dt->ddebugs[i];
- 
--			/* match site against query-class */
--			if (dp->class_id != valid_class)
--				continue;
--
--			/* match against the source filename */
--			if (query->filename &&
--			    !match_wildcard(query->filename, dp->filename) &&
--			    !match_wildcard(query->filename,
--					   kbasename(dp->filename)) &&
--			    !match_wildcard(query->filename,
--					   trim_prefix(dp->filename)))
--				continue;
--
--			/* match against the function */
--			if (query->function &&
--			    !match_wildcard(query->function, dp->function))
--				continue;
--
--			/* match against the format */
--			if (query->format) {
--				if (*query->format == '^') {
--					char *p;
--					/* anchored search. match must be at beginning */
--					p = strstr(dp->format, query->format+1);
--					if (p != dp->format)
--						continue;
--				} else if (!strstr(dp->format, query->format))
--					continue;
--			}
--
--			/* match against the line number range */
--			if (query->first_lineno &&
--			    dp->lineno < query->first_lineno)
--				continue;
--			if (query->last_lineno &&
--			    dp->lineno > query->last_lineno)
-+			if (!ddebug_match_desc(query, dp, valid_class))
- 				continue;
- 
- 			nfound++;
-
--- 
-2.54.0
-
+I have sent a fixup that moves the Makefile hunk from patch 3 to patch
+2, so every patch is buildable on its own. If I need to send a v5 after
+reviewer feedback, I'll fold this fixup into patch 2 directly.
 
