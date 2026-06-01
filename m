@@ -1,217 +1,317 @@
-Return-Path: <linux-doc+bounces-90248-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90250-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id ePZIOf1THWqnYwkAu9opvQ
-	(envelope-from <linux-doc+bounces-90248-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 11:42:21 +0200
+	id uDpYMqJYHWpLZQkAu9opvQ
+	(envelope-from <linux-doc+bounces-90250-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 12:02:10 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8BF3461CA9A
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 11:42:20 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 28EF561CF82
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 12:02:10 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 340FE3007538
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Jun 2026 09:42:20 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id BAC4C30BF94C
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Jun 2026 09:51:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EAC7A2F691D;
-	Mon,  1 Jun 2026 09:42:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F255C389DF0;
+	Mon,  1 Jun 2026 09:48:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Ofa4pL1O"
+	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="jIX1hvdd"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from canpmsgout07.his.huawei.com (canpmsgout07.his.huawei.com [113.46.200.222])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EC6C3403E4
-	for <linux-doc@vger.kernel.org>; Mon,  1 Jun 2026 09:42:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5EDD394EA6;
+	Mon,  1 Jun 2026 09:48:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.222
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780306937; cv=none; b=mv2sCQ5s9Uw/pufGFRCDclXCCiB+vJpzOuOphJx6qI9fiJD5yiDr0z/TQAwNRCqIoi6xWpjIwJhOovEa1x5ywlZXBaZWQSzYAkTl8T/ZjRu+CsQMzPcKRiWARjC+9IY4Wk7iX+YMgyLOB2LNc73eletVYTVaCRKA7zdeDmDTOng=
+	t=1780307334; cv=none; b=UNkXr1BRDIZIGIQLJ3S4n3X467GQ0E74w/zABVSLEp6ELDspWzlmct3cakuEcxp3OF/vr0xv1iE4Hzzg6o7h4xoawfdAZZuF+ZfNKwU6wjUH+696B11lLXwADJzvonAiuVoYrV3xRRvb653SQwWw10DagYL+pLV+uROlPKnljZs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780306937; c=relaxed/simple;
-	bh=M4KJACFzvesHU8ZcNTqZNU2lBZR0p+BUriDvgnQRgKA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=AQJkuui5Hdhyirq3GoksHH2KOjXqO2qCKNt+VfgeHiytfAo3iKSwOvnpKG2lU+vubq4iVu8wYfaU/XGZKD7sQJK1k5sBx1M9OxO3cuffdD3x91FdlMAIu8kWm/o/Jn8EiamrgglB8w8X3yAhJF/9WAU1fNR4sgaxPdfD64O8uuU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Ofa4pL1O; arc=none smtp.client-ip=209.85.128.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-490a765e68eso9614495e9.1
-        for <linux-doc@vger.kernel.org>; Mon, 01 Jun 2026 02:42:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780306934; x=1780911734; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=yej0wnG6WIrmpOSuTlhVpOj2TC3TsG+QHTev2H2YE0M=;
-        b=Ofa4pL1OoOUvRPRqyi5+VclYD2rgWkRgX/TAF4TGLvgpBhTUL1cxiFA2OJqFuwEDTy
-         1OE6qpGBY2BdtNAKBl8GG35OFYjgGnSxwcLTXxOf479Nmxeb47sff9VUc3b9goWt37L4
-         wuQJFSpfoNRPW020fAEvrKILrfK6YIHl9fXNafqRI3MsESArpp+mv3NRzv+5uBI5evU6
-         f/oBPJlPCd7DkdGj7CE6jagHQPKdB3BbkPGtpTYzcdhFJi3lmeWTEfMKHcrEh4ia89aH
-         hSe826dL9jxehElWDqx6gTK6Y8PgenysEXwTJZofUsE2w1jdxLLdpAOP/nH+FiIwSe9+
-         utjw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780306934; x=1780911734;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=yej0wnG6WIrmpOSuTlhVpOj2TC3TsG+QHTev2H2YE0M=;
-        b=Nc3C+opsNUraZ5sJFWQBR1URadszvlCjJqambj0n4snERFDfesGjxKM0hHbCEQ3/oO
-         OmmKzAfdrGyc/hGMefcX2WbBLT+mAWUEuVlArtE7tHD3WXoeZJKXDJz078pVQyPR/PNG
-         jxprIpUiKkADwEbJQN/Onsbyh6QMCSxTYFcs4i2xu2KOwKioQLpidlu0WHf+hdPF19me
-         v2nwiAgwtQ3BSJHzdaLiAxuUV9Csz/jooI0KTVRCw3YxTHKQS92mw5YgXfJAtLA8Oifb
-         iBKhj1HKcwwtF5yuhBjCnHnhf8zYqjaXj66ejSE14veJDb1sKFN4YCSLsnd6GlZ3GMbq
-         hs4Q==
-X-Forwarded-Encrypted: i=1; AFNElJ8lcHML8FnOo6EIAu+1UiixKV58npoBQJdgevAbF044axC32pWDKp8/JNiaHfMXT6Oa/FLVsatN3xg=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxBpXnsoMyvtSVza0A2Y0D7YKSWzH01bCG1IwS31pMGNmaHiCVv
-	xb2p4wVNuOJ/vi0hNO5+FPFjP9Ulin1m2lydKt3727CgW8us6YGvNJnt
-X-Gm-Gg: Acq92OFqP6Lmh1yR1sV3LSWdefbAuWecssFIbKN2cVfAjxNih91LlK9N+0QxFHlZ64m
-	WXJCyPQXgQFW5AWEx17KYkfJ64F5sPw2LBF6Zmfwz+6N7Hfe32fSKp3LZdLgaIhji9PDx5JjnsX
-	oBHy1/WLnhs/L1AgLY+lcZJv89qnzs7gNUUOrd8TTVinV+4+S5lprU/TPmGxQnK7Cx30/G3e/XB
-	rlW2N4QAoV6Bvf1FCzkF7hPu+tp3oBI8kGfZCKeTOlVhXzVr368mrI9+mLgs8vOUKpUewWzplC/
-	KIL/pUrRiftEsCoOI1I71fbWPEVw2YePb8aPH3vpN9LzBCBFl5tMU74uPTA29PHQwybaWITCyeD
-	QWaj9AsYVoqb6bg7vVIU9IWPi8hYdhQiGARtu8WjREUinm0b5iyuQm9KUVvUlC7sENlJgLjtNba
-	4zIvSK7zFoYU7sm7YRdXsew+K7JA==
-X-Received: by 2002:a05:600d:8497:10b0:490:6869:9601 with SMTP id 5b1f17b1804b1-490a292a48fmr129304845e9.6.1780306934316;
-        Mon, 01 Jun 2026 02:42:14 -0700 (PDT)
-Received: from nsa ([148.63.225.166])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4909d6f3612sm241891185e9.12.2026.06.01.02.42.12
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 01 Jun 2026 02:42:13 -0700 (PDT)
-Date: Mon, 1 Jun 2026 10:43:11 +0100
-From: Nuno =?utf-8?B?U8Oh?= <noname.nuno@gmail.com>
-To: rodrigo.alencar@analog.com
-Cc: linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-doc@vger.kernel.org, Jonathan Cameron <jic23@kernel.org>, 
-	David Lechner <dlechner@baylibre.com>, Andy Shevchenko <andy@kernel.org>, 
-	Lars-Peter Clausen <lars@metafoo.de>, Michael Hennerich <Michael.Hennerich@analog.com>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
-	Andrew Morton <akpm@linux-foundation.org>, Petr Mladek <pmladek@suse.com>, 
-	Steven Rostedt <rostedt@goodmis.org>, Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
-	Rasmus Villemoes <linux@rasmusvillemoes.dk>, Sergey Senozhatsky <senozhatsky@chromium.org>, 
-	Shuah Khan <skhan@linuxfoundation.org>
-Subject: Re: [PATCH v15 06/12] iio: core: add decimal value formatting into
- 64-bit value
-Message-ID: <ah1SUD_QpRLD2WGV@nsa>
-References: <20260531-adf41513-iio-driver-v15-0-da09adf1c0dd@analog.com>
- <20260531-adf41513-iio-driver-v15-6-da09adf1c0dd@analog.com>
+	s=arc-20240116; t=1780307334; c=relaxed/simple;
+	bh=vG57aba/H1RZMWl9M0RwVUF1YWtFDbakHZxqzke88FU=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=SIOaWLT9iKjz/uN201NV1wk3Ilm3eOmXkWqJlO4ohKnew4932QgZepg69NlY8aLpY8uDdY+OM2DAkKLXs3oHTZqG+wJcJmZYoTPj4Uq6Ws7hFzbvzfC11NgidoKL9rGIG4Pp5gSIkJDqgXjDBizGnrdCFM10K6ME/mXen62LEDw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=jIX1hvdd; arc=none smtp.client-ip=113.46.200.222
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
+	c=relaxed/relaxed; q=dns/txt;
+	h=From;
+	bh=FnjP1QobxPs/w6p6RHmbGEPXnhvzKB2623I/PNNfmCM=;
+	b=jIX1hvddX9TfsNd66mTq8qZFUoxm/bsn0AEZJbbGskiOnhTbpUeqimLZdzos3fq+SBmq2h185
+	ZofLf+7S2BOjMGjaRCfph+2+kjV0Aj6rIHwyg9ibQgu7fHXx4BUvU/lyNSHfnOvz7TNYuNJh2EF
+	Adv+PapdiIZJZ0vB92OHkK8=
+Received: from mail.maildlp.com (unknown [172.19.163.127])
+	by canpmsgout07.his.huawei.com (SkyGuard) with ESMTPS id 4gTTV56hm4zLlTs;
+	Mon,  1 Jun 2026 17:40:45 +0800 (CST)
+Received: from dggpemf500011.china.huawei.com (unknown [7.185.36.131])
+	by mail.maildlp.com (Postfix) with ESMTPS id 3F964402AB;
+	Mon,  1 Jun 2026 17:48:34 +0800 (CST)
+Received: from huawei.com (10.90.53.73) by dggpemf500011.china.huawei.com
+ (7.185.36.131) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Mon, 1 Jun
+ 2026 17:48:30 +0800
+From: Jinjie Ruan <ruanjinjie@huawei.com>
+To: <corbet@lwn.net>, <skhan@linuxfoundation.org>, <catalin.marinas@arm.com>,
+	<will@kernel.org>, <chenhuacai@kernel.org>, <kernel@xen0n.name>,
+	<maddy@linux.ibm.com>, <mpe@ellerman.id.au>, <npiggin@gmail.com>,
+	<chleroy@kernel.org>, <pjw@kernel.org>, <palmer@dabbelt.com>,
+	<aou@eecs.berkeley.edu>, <alex@ghiti.fr>, <tglx@kernel.org>,
+	<mingo@redhat.com>, <bp@alien8.de>, <dave.hansen@linux.intel.com>,
+	<hpa@zytor.com>, <robh@kernel.org>, <saravanak@kernel.org>,
+	<akpm@linux-foundation.org>, <bhe@redhat.com>, <rppt@kernel.org>,
+	<pasha.tatashin@soleen.com>, <pratyush@kernel.org>, <ruirui.yang@linux.dev>,
+	<rdunlap@infradead.org>, <feng.tang@linux.alibaba.com>,
+	<dapeng1.mi@linux.intel.com>, <kees@kernel.org>, <elver@google.com>,
+	<kuba@kernel.org>, <lirongqing@baidu.com>, <ebiggers@kernel.org>,
+	<paulmck@kernel.org>, <sourabhjain@linux.ibm.com>, <thuth@redhat.com>,
+	<ardb@kernel.org>, <masahiroy@kernel.org>, <gshan@redhat.com>,
+	<james.morse@arm.com>, <maz@kernel.org>, <leitao@debian.org>,
+	<yeoreum.yun@arm.com>, <coxu@redhat.com>, <suzuki.poulose@arm.com>,
+	<cfsworks@gmail.com>, <osandov@fb.com>, <jbohac@suse.cz>,
+	<ryan.roberts@arm.com>, <tangyouling@kylinos.cn>, <ritesh.list@gmail.com>,
+	<adityag@linux.ibm.com>, <hbathini@linux.ibm.com>, <bjorn@rivosinc.com>,
+	<songshuaishuai@tinylab.org>, <vishal.moola@gmail.com>,
+	<junhui.liu@pigmoral.tech>, <djordje.todorovic@htecgroup.com>,
+	<austin.kim@lge.com>, <namcao@linutronix.de>, <djbw@kernel.org>,
+	<chao.gao@intel.com>, <seanjc@google.com>, <fuqiang.wang@easystack.cn>,
+	<liaoyuanhong@vivo.com>, <makb@juniper.net>, <graf@amazon.com>,
+	<piliu@redhat.com>, <rafael.j.wysocki@intel.com>,
+	<mario.limonciello@amd.com>, <jbouron@amazon.com>, <chenjiahao16@huawei.com>,
+	<guoren@kernel.org>, <bauerman@linux.ibm.com>, <bgwin@google.com>,
+	<takahiro.akashi@linaro.org>, <x86@kernel.org>, <linux-doc@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
+	<loongarch@lists.linux.dev>, <linuxppc-dev@lists.ozlabs.org>,
+	<linux-riscv@lists.infradead.org>, <devicetree@vger.kernel.org>,
+	<kexec@lists.infradead.org>
+CC: <ruanjinjie@huawei.com>
+Subject: [PATCH v15 00/23] arm64/riscv: Add support for crashkernel CMA reservation
+Date: Mon, 1 Jun 2026 17:47:42 +0800
+Message-ID: <20260601094805.2928614-1-ruanjinjie@huawei.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260531-adf41513-iio-driver-v15-6-da09adf1c0dd@analog.com>
-X-Spamd-Result: default: False [-0.16 / 15.00];
+X-ClientProxiedBy: kwepems100002.china.huawei.com (7.221.188.206) To
+ dggpemf500011.china.huawei.com (7.185.36.131)
+X-Spamd-Result: default: False [0.34 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-90250-lists,linux-doc=lfdr.de];
+	FREEMAIL_TO(0.00)[lwn.net,linuxfoundation.org,arm.com,kernel.org,xen0n.name,linux.ibm.com,ellerman.id.au,gmail.com,dabbelt.com,eecs.berkeley.edu,ghiti.fr,redhat.com,alien8.de,linux.intel.com,zytor.com,linux-foundation.org,soleen.com,linux.dev,infradead.org,linux.alibaba.com,google.com,baidu.com,debian.org,fb.com,suse.cz,kylinos.cn,rivosinc.com,tinylab.org,pigmoral.tech,htecgroup.com,lge.com,linutronix.de,intel.com,easystack.cn,vivo.com,juniper.net,amazon.com,amd.com,huawei.com,linaro.org,vger.kernel.org,lists.infradead.org,lists.linux.dev,lists.ozlabs.org];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-90248-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[21];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	DKIM_TRACE(0.00)[huawei.com:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[nonamenuno@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	FROM_NEQ_ENVFROM(0.00)[ruanjinjie@huawei.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCPT_COUNT_GT_50(0.00)[88];
+	TO_DN_NONE(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,analog.com:email]
-X-Rspamd-Queue-Id: 8BF3461CA9A
+	TAGGED_RCPT(0.00)[linux-doc];
+	MIME_TRACE(0.00)[0:+]
+X-Rspamd-Queue-Id: 28EF561CF82
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Sun, May 31, 2026 at 09:30:49AM +0100, Rodrigo Alencar via B4 Relay wrote:
-> From: Rodrigo Alencar <rodrigo.alencar@analog.com>
-> 
-> Create new format types for iio values (IIO_VAL_DECIMAL64_*), which
-> defines the representation of fixed decimal point values into a single
-> 64-bit number. This new format increases the range of represented values,
-> allowing for integer parts greater than 2^32, as bits are not "wasted"
-> in the fractional part, which can be seen in IIO_VAL_INT_PLUS_MICRO and
-> IIO_VAL_INT_PLUS_NANO. Helpers are created to compose and decompose 64-bit
-> decimals into integer values used in IIO formatting interfaces, which
-> creates consistency and avoid error-prone manual assignments when using
-> wordpart macros. When doing the parsing, kstrtodec64() is used with the
-> scale defined by the specific decimal format type.
-> 
-> Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
-> ---
->  drivers/iio/industrialio-core.c | 47 +++++++++++++++++++++++++++++++++--------
->  include/linux/iio/types.h       | 30 ++++++++++++++++++++++++++
->  2 files changed, 68 insertions(+), 9 deletions(-)
-> 
-> diff --git a/drivers/iio/industrialio-core.c b/drivers/iio/industrialio-core.c
-> index bd6f4f9f4533..a88088cac641 100644
-> --- a/drivers/iio/industrialio-core.c
-> +++ b/drivers/iio/industrialio-core.c
-> @@ -19,6 +19,7 @@
->  #include <linux/idr.h>
->  #include <linux/kdev_t.h>
->  #include <linux/kernel.h>
-> +#include <linux/math64.h>
->  #include <linux/module.h>
->  #include <linux/mutex.h>
->  #include <linux/poll.h>
-> @@ -26,7 +27,6 @@
->  #include <linux/sched.h>
->  #include <linux/slab.h>
->  #include <linux/wait.h>
-> -#include <linux/wordpart.h>
->  
->  #include <linux/iio/buffer.h>
->  #include <linux/iio/buffer_impl.h>
-> @@ -655,6 +655,7 @@ static ssize_t __iio_format_value(char *buf, size_t offset, unsigned int type,
->  				  int size, const int *vals)
->  {
->  	int tmp0, tmp1;
-> +	int l = 0;
->  	s64 tmp2;
->  	bool scale_db = false;
->  
-> @@ -698,7 +699,6 @@ static ssize_t __iio_format_value(char *buf, size_t offset, unsigned int type,
->  	case IIO_VAL_INT_MULTIPLE:
->  	{
->  		int i;
-> -		int l = 0;
->  
->  		for (i = 0; i < size; ++i)
->  			l += sysfs_emit_at(buf, offset + l, "%d ", vals[i]);
-> @@ -707,8 +707,25 @@ static ssize_t __iio_format_value(char *buf, size_t offset, unsigned int type,
->  	case IIO_VAL_CHAR:
->  		return sysfs_emit_at(buf, offset, "%c", (char)vals[0]);
->  	case IIO_VAL_INT_64:
-> -		tmp2 = (s64)((((u64)vals[1]) << 32) | (u32)vals[0]);
-> +		tmp2 = iio_val_s64_from_s32s(vals);
+The crash memory allocation, and the exclude of crashk_res, crashk_low_res
+and crashk_cma memory are almost identical across different architectures,
+This patch set handle them in crash core in a general way, which eliminate
+a lot of duplication code.
 
-I might be missing something but can't we just call
-iio_val_s64_compose()? Likely even inline in sysfs_emit_at()?
+And add support for crashkernel CMA reservation for arm64 and riscv.
 
-It would match your call to iio_val_s64_decompose() below.
+Also add support for arm64 crash hotplug.
 
-And the above makes me wonder if the compose()/decompose() are not the
-only helpers we need? At least in terms of parameters? I mean, just
-assuming we only have two integers instead of allowing s32* and opening
-the door for misbehave :)?
+This patch set is rebased on v7.1-rc1.
 
-Don't feel too strong about the above anyways!
+Basic second kernel boot test were performed on QEMU platforms for x86,
+ARM64 and RISC-V architectures with the following parameters:
 
-- Nuno Sá
+        "cma=256M crashkernel=4G crashkernel=64M,cma"
+
+For first kernel, there will be such log:
+
+        # dmesg | grep crash
+        [    0.000000] crashkernel low memory reserved: 0xe8000000 - 0xf0000000 (128 MB)
+        [    0.000000] crashkernel reserved: 0x000000023e600000 - 0x000000033e600000 (4096 MB)
+        [    0.000000] crashkernel CMA reserved: 64 MB in 1 ranges
+
+        # dmesg | grep cma
+        [    0.000000] cma: Reserved 256 MiB at 0x00000000f0000000
+        [    0.000000] cma: Reserved 64 MiB at 0x0000000100000000
+
+For second kernel, there will be such log:
+
+        [    0.000000] OF: fdt: Looking for usable-memory-range property...
+        [    0.000000] OF: fdt: cap_mem_regions[0]: base=0x000000023e600000, size=0x0000000100000000
+        [    0.000000] OF: fdt: cap_mem_regions[1]: base=0x00000000e8000000, size=0x0000000008000000
+        [    0.000000] OF: fdt: cap_mem_regions[2]: base=0x0000000100000000, size=0x0000000004000000
+
+Changes in v15:
+- Unify the subject prefix formats as Huacai suggested.
+- Fix powerpc pre-existing NULL pointer dereference [Sashiko [1]]
+- Fix powerpc pre-existing __merge_memory_ranges() memory range
+  truncation [Sashiko [1]].
+- Fix pre-existing arm64 CMA page leaks [Sashiko[2]].
+- Fix pre-existing crash_load_dm_crypt_keys() Use-After-Free and
+  Double Free issue [Sashiko[3]].
+- Fix vfree(headers) and uninitialized variables issue
+  and simplify the fix [Sashiko[2]].
+- As walk_system_ram_res() and for_each_mem_range() use different
+  lock, unify and simplify the fix of TOCTOU buffer overflow via memory
+  region padding [Sashiko[4]].
+- Fix the arm64 crash dump issues in Sashiko[5].
+- Link to v14: https://lore.kernel.org/all/20260525084932.934910-1-ruanjinjie@huawei.com/
+
+[1]: https://lore.kernel.org/all/20260525092207.96B9D1F000E9@smtp.kernel.org/
+[2]: https://lore.kernel.org/all/20260525091149.1A1E01F00A3D@smtp.kernel.org/
+[3]: https://lore.kernel.org/all/20260525105227.3C2421F000E9@smtp.kernel.org/
+[4]: https://lore.kernel.org/all/20260525095447.944E11F000E9@smtp.kernel.org/
+[5]: https://lore.kernel.org/all/20260525101746.9959D1F000E9@smtp.kernel.org/
+
+Changes in v14:
+- Fix image->elf_headers memory leak during retry loop for arm64 as Sashiko
+  AI code review pointed out.
+- Solve the hotplug notifier arch_crash_handle_hotplug_event() AA
+  self-deadlock problem as Sashiko AI code review pointed out.
+- Fix the TOCTOU issue in prepare_elf_headers() by get_online_mems().
+- -ENOMEM -> -EAGAIN as Breno suggested.
+- Add support for arm64 crash hotplug.
+- Link to v13: https://lore.kernel.org/all/20260511030454.1730881-1-ruanjinjie@huawei.com/
+
+Changes in v13:
+- Rebased on v7.1-rc1.
+- Update the commit message.
+- Add Reviewed-by.
+- Link to v12: https://lore.kernel.org/all/20260402072701.628293-1-ruanjinjie@huawei.com/
+
+Changes in v12:
+- Remove the unused "nr_mem_ranges" for x86.
+- Add "Fix crashk_low_res not exclude bug" test log.
+- Provide a separate patch for each architecture for using
+  crash_prepare_headers(), which will make the review more convenient.
+- Add Reviewed-by and Tested-by.
+- Link to v11: https://lore.kernel.org/all/20260328074013.3589544-1-ruanjinjie@huawei.com/
+
+Changes in v11:
+- Avoid silently drop crash memory if the crash kernel is built without
+  CONFIG_CMA.
+- Remove unnecessary "cmem->nr_ranges = 0" for arch_crash_populate_cmem()
+  as we use kvzalloc().
+- Provide a separate patch for each architecture to fix the existing
+  buffer overflow issue.
+- Add Acked-bys for arm64.
+
+Changes in v10:
+- Fix crashk_low_res not excluded bug in the existing
+  RISC-V code.
+- Fix an existing memory leak issue in the existing PowerPC code.
+- Fix the ordering issue of adding CMA ranges to
+  "linux,usable-memory-range".
+- Fix an existing concurrency issue. A Concurrent memory hotplug may occur
+  between reading memblock and attempting to fill cmem during kexec_load()
+  for almost all existing architectures.
+- Link to v9: https://lore.kernel.org/all/20260323072745.2481719-1-ruanjinjie@huawei.com/
+
+Changes in v9:
+- Collect Reviewed-by and Acked-by, and prepare for Sashiko AI review.
+- Link to v8: https://lore.kernel.org/all/20260302035315.3892241-1-ruanjinjie@huawei.com/
+
+Changes in v8:
+- Fix the build issues reported by kernel test robot and Sourabh.
+- Link to v7: https://lore.kernel.org/all/20260226130437.1867658-1-ruanjinjie@huawei.com/
+
+Changes in v7:
+- Correct the inclusion of CMA-reserved ranges for kdump kernel in of/kexec
+  for arm64 and riscv.
+- Add Acked-by.
+- Link to v6: https://lore.kernel.org/all/20260224085342.387996-1-ruanjinjie@huawei.com/
+
+Changes in v6:
+- Update the crash core exclude code as Mike suggested.
+- Rebased on v7.0-rc1.
+- Add acked-by.
+- Link to v5: https://lore.kernel.org/all/20260212101001.343158-1-ruanjinjie@huawei.com/
+
+Jinjie Ruan (22):
+  riscv: kexec_file: Fix crashk_low_res not exclude bug
+  powerpc/crash: Fix possible memory leak in update_crash_elfcorehdr()
+  powerpc/kexec_file: Fix NULL pointer dereference in
+    kexec_extra_fdt_size_ppc64()
+  powerpc/kexec_file: Fix memory range truncation in
+    __merge_memory_ranges()
+  kexec: Extract kexec_free_segment_cma() from kimage_free_cma()
+  arm64: kexec_file: Fix CMA page leaks during segment placement retry
+    loops
+  arm64: kexec_file: Fix image->elf_headers memory leak during retry
+    loop
+  kexec: Fix UAF and Double Free in crash_load_dm_crypt_keys()
+  crash_core: Introduce CRASH_HOTPLUG_SAFETY_PADDING for memory hotplug
+    safety
+  x86: kexec_file: Fix TOCTOU buffer overflow via memory region padding
+  arm64: kexec_file: Fix TOCTOU buffer overflow via memory region
+    padding
+  riscv: kexec_file: Fix TOCTOU buffer overflow via memory region
+    padding
+  LoongArch: kexec_file: Fix TOCTOU buffer overflow via memory region
+    padding
+  crash: Add crash_prepare_headers() to exclude crash kernel memory
+  arm64: kexec_file: Use crash_prepare_headers() helper to simplify code
+  x86: kexec_file: Use crash_prepare_headers() helper to simplify code
+  riscv: kexec_file: Use crash_prepare_headers() helper to simplify code
+  LoongArch: kexec_file: Use crash_prepare_headers() helper to simplify
+    code
+  powerpc/kexec_file: Use crash_exclude_core_ranges() helper
+  arm64: kexec_file: Add support for crashkernel CMA reservation
+  riscv: kexec_file: Add support for crashkernel CMA reservation
+  arm64: crash: Add crash hotplug support
+
+Sourabh Jain (1):
+  powerpc/crash: sort crash memory ranges before preparing elfcorehdr
+
+ .../admin-guide/kernel-parameters.txt         |  16 +-
+ arch/arm64/Kconfig                            |   3 +
+ arch/arm64/include/asm/kexec.h                |  13 ++
+ arch/arm64/kernel/Makefile                    |   2 +-
+ arch/arm64/kernel/crash.c                     | 152 ++++++++++++++++++
+ arch/arm64/kernel/kexec_image.c               |  34 ++++
+ arch/arm64/kernel/machine_kexec_file.c        |  78 ++-------
+ arch/arm64/mm/init.c                          |   5 +-
+ arch/loongarch/kernel/machine_kexec_file.c    |  44 ++---
+ arch/powerpc/include/asm/kexec_ranges.h       |   1 -
+ arch/powerpc/kexec/crash.c                    |   7 +-
+ arch/powerpc/kexec/file_load_64.c             |   3 +
+ arch/powerpc/kexec/ranges.c                   | 113 ++-----------
+ arch/riscv/kernel/machine_kexec_file.c        |  43 ++---
+ arch/riscv/mm/init.c                          |   5 +-
+ arch/x86/kernel/crash.c                       |  92 ++---------
+ drivers/of/fdt.c                              |   9 +-
+ drivers/of/kexec.c                            |   9 ++
+ include/linux/crash_core.h                    |  15 ++
+ include/linux/crash_reserve.h                 |   4 +-
+ include/linux/kexec.h                         |   2 +
+ kernel/crash_core.c                           |  89 +++++++++-
+ kernel/crash_dump_dm_crypt.c                  |   4 +-
+ kernel/kexec_core.c                           |  25 +--
+ 24 files changed, 430 insertions(+), 338 deletions(-)
+ create mode 100644 arch/arm64/kernel/crash.c
+
+-- 
+2.34.1
 
 
