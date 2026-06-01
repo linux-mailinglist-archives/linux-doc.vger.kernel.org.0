@@ -1,56 +1,56 @@
-Return-Path: <linux-doc+bounces-90254-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90256-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id ONe6JmJbHWrnZgkAu9opvQ
-	(envelope-from <linux-doc+bounces-90254-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 12:13:54 +0200
+	id IPQZEzFaHWq/ZgkAu9opvQ
+	(envelope-from <linux-doc+bounces-90256-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 12:08:49 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 32FD461D253
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 12:13:54 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id CF1CE61D12F
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 12:08:48 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 9969430453A9
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Jun 2026 09:52:13 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id DFFAC30B8B3D
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Jun 2026 09:52:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1E81A3845A2;
-	Mon,  1 Jun 2026 09:49:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B678C39DBFD;
+	Mon,  1 Jun 2026 09:49:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="MP/a67Lp"
+	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="K+9Cpzom"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from canpmsgout02.his.huawei.com (canpmsgout02.his.huawei.com [113.46.200.217])
+Received: from canpmsgout06.his.huawei.com (canpmsgout06.his.huawei.com [113.46.200.221])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B00C3988F8;
-	Mon,  1 Jun 2026 09:49:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.217
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E3B323A168E;
+	Mon,  1 Jun 2026 09:49:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.221
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780307347; cv=none; b=iPpMuPGuGBHKIcCouSYxXexHK9gZ2ZXkcr3Dv50HRDo8idqML41K3Tn6uOJjCTGO2GjiNR4SATZTo7wyNs3itgOosroN1tC9S9M7ejqX7Yyl5WwoQ+SrqIGaPt7vF77f9bsMeQ4IsAH4batKf05bJDg4EODmffBLuIv86FkiEeU=
+	t=1780307354; cv=none; b=ep/if9saldtd+ug569MR5xZeLumqsdpM6zsYvfe4FndnyBFhE3eD9jxwdR4w9rJj36U/0NschEleo9ZfizD7lGRoVCxxAi6zIUKoyH2mT7+tHnMYv3D7WdiaLJwUOsVD146u2XgSrdl3cJMRJBUIcZc2mwOnhgRTfoZIFRSI3nc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780307347; c=relaxed/simple;
-	bh=4ajyKOULOx3xqzSlBVev+IgSyIEw3vgjkeUZJEp6aiQ=;
+	s=arc-20240116; t=1780307354; c=relaxed/simple;
+	bh=bIqV+PNc20SuCoalckU2ml8nlwSbZP821FBY2KdPR9E=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=pysa0ky9bv/7YOMkBZ4mZNC6gJDOuV0nCStAtT7LWP5zlnmcWEMXTSHAcEAsXumc9nfW99EaYvSo8OxzqfC/dWiIFhyGjA8CE1HI/ULYZ5GxsmwGII1mAZoHb1xkChVPFu3eFQSRsYkXfGb87UJPCX8cntxbwssCof0mOG5YztU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=MP/a67Lp; arc=none smtp.client-ip=113.46.200.217
+	 MIME-Version:Content-Type; b=dcB9lDuYbu4zrLB2s56UW3Cwdf+m7DlUCi85TDbqrbsVXqzdyxCcdcVd2dmALDAkATtGrv33PDjAHF9wAp8IYGNzpd+27xDYYU4S2vpUhDVQkxXPsxIkh6HwmTM3hcl0sNqsGlXnhhOv7aG491ky+yla8t1srtRmp+uq1FSI3FM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=K+9Cpzom; arc=none smtp.client-ip=113.46.200.221
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
 dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
 	c=relaxed/relaxed; q=dns/txt;
 	h=From;
-	bh=FoTEQM/LHeMQktZIXiOh72cymJcqDmq0T6smro86PHs=;
-	b=MP/a67LplmOvMEmzF3qOent0LLi5OYYNL1s93hEe9QYI7yu5Jz6/lbnpd46Gp8VzrkTtl5xL6
-	vHjF/YT0QhU/knfEZRlmG4hUtG590RYYLpqwIB5HGbsdbiPp/AdeGF+aZYEJpysjcRwsMaYBX8o
-	edIQvxdYlCHGBMJuccpHPJc=
-Received: from mail.maildlp.com (unknown [172.19.162.144])
-	by canpmsgout02.his.huawei.com (SkyGuard) with ESMTPS id 4gTTVQ02Lzzcb1n;
-	Mon,  1 Jun 2026 17:41:02 +0800 (CST)
+	bh=3CM+Au3SXosW29XrHZBLTzStvKPXPYXLJ81pyBZwyQo=;
+	b=K+9Cpzombw+R1hz+4oTY8H0FgupdRElbxcNkGJexiHXFS/yuEYiEV0xUzMPD0jBtDpTNTrOUd
+	5pjSAy+NXj9LNHESyhBYSfroq164Dq/6YwKWnvf9H9/9K0QFK3HcM9jHW3afdFVuVnBCUGVg5Sa
+	pJKFnhLybZVSXQuwmunxwx0=
+Received: from mail.maildlp.com (unknown [172.19.162.140])
+	by canpmsgout06.his.huawei.com (SkyGuard) with ESMTPS id 4gTTVd1hx6zRhQr;
+	Mon,  1 Jun 2026 17:41:13 +0800 (CST)
 Received: from dggpemf500011.china.huawei.com (unknown [7.185.36.131])
-	by mail.maildlp.com (Postfix) with ESMTPS id B0AFE40538;
-	Mon,  1 Jun 2026 17:48:57 +0800 (CST)
+	by mail.maildlp.com (Postfix) with ESMTPS id 98392201E9;
+	Mon,  1 Jun 2026 17:49:01 +0800 (CST)
 Received: from huawei.com (10.90.53.73) by dggpemf500011.china.huawei.com
  (7.185.36.131) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Mon, 1 Jun
- 2026 17:48:53 +0800
+ 2026 17:48:57 +0800
 From: Jinjie Ruan <ruanjinjie@huawei.com>
 To: <corbet@lwn.net>, <skhan@linuxfoundation.org>, <catalin.marinas@arm.com>,
 	<will@kernel.org>, <chenhuacai@kernel.org>, <kernel@xen0n.name>,
@@ -85,9 +85,9 @@ To: <corbet@lwn.net>, <skhan@linuxfoundation.org>, <catalin.marinas@arm.com>,
 	<linux-riscv@lists.infradead.org>, <devicetree@vger.kernel.org>,
 	<kexec@lists.infradead.org>
 CC: <ruanjinjie@huawei.com>
-Subject: [PATCH v15 06/23] kexec: Extract kexec_free_segment_cma() from kimage_free_cma()
-Date: Mon, 1 Jun 2026 17:47:48 +0800
-Message-ID: <20260601094805.2928614-7-ruanjinjie@huawei.com>
+Subject: [PATCH v15 07/23] arm64: kexec_file: Fix CMA page leaks during segment placement retry loops
+Date: Mon, 1 Jun 2026 17:47:49 +0800
+Message-ID: <20260601094805.2928614-8-ruanjinjie@huawei.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260601094805.2928614-1-ruanjinjie@huawei.com>
 References: <20260601094805.2928614-1-ruanjinjie@huawei.com>
@@ -108,14 +108,14 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
 	R_MISSING_CHARSET(0.50)[];
 	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	FROM_NEQ_ENVFROM(0.00)[ruanjinjie@huawei.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	FREEMAIL_TO(0.00)[lwn.net,linuxfoundation.org,arm.com,kernel.org,xen0n.name,linux.ibm.com,ellerman.id.au,gmail.com,dabbelt.com,eecs.berkeley.edu,ghiti.fr,redhat.com,alien8.de,linux.intel.com,zytor.com,linux-foundation.org,soleen.com,linux.dev,infradead.org,linux.alibaba.com,google.com,baidu.com,debian.org,fb.com,suse.cz,kylinos.cn,rivosinc.com,tinylab.org,pigmoral.tech,htecgroup.com,lge.com,linutronix.de,intel.com,easystack.cn,vivo.com,juniper.net,amazon.com,amd.com,huawei.com,linaro.org,vger.kernel.org,lists.infradead.org,lists.linux.dev,lists.ozlabs.org];
-	TAGGED_FROM(0.00)[bounces-90254-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90256-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
@@ -127,95 +127,91 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	TO_DN_NONE(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[huawei.com:email,huawei.com:mid,huawei.com:dkim,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: 32FD461D253
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,arm.com:email,linux-foundation.org:email,huawei.com:email,huawei.com:mid,huawei.com:dkim,soleen.com:email]
+X-Rspamd-Queue-Id: CF1CE61D12F
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-The generic kimage_free_cma() relies on `image->nr_segments` to iterate
-and free allocated CMA pages. However, during architecture-specific
-segment placement retry loops (e.g., arm64's image_load()), a mid-way
-failure will truncate `image->nr_segments` back to its initial value.
-This truncation permanently hides any CMA pages allocated outside the
-new boundary from global cleanup, causing silent background memory leaks.
+Sashiko AI code review pointed out, during arm64 kexec image placement
+retry loops in image_load(), the loader repeatedly attempts to find
+a suitable memory hole for the kernel and its associated segments
+(initrd, dtb, etc.). When a placement attempt fails midway, the core
+framework rolls back `image->nr_segments` to its initial state to purge
+the failed segments logically.
 
-To allow architecture-specific loaders to execute fine-grained memory
-reclamation before truncation occurs, extract the single-pass CMA release
-logic into a dedicated and exported helper:
+However, this truncation causes a severe background memory leak. Any CMA
+pages successfully allocated via kexec_add_buffer() during the failed
+attempt are recorded in the `image->segment_cma` array. Since
+the subsequent global kimage_free_cma() cleanup only iterates up to
+the truncated (smaller) `nr_segments` boundary, these allocated CMA pages
+outside the new boundary become completely orphaned and permanently leaked.
 
-	void kexec_free_segment_cma(struct kimage *image, unsigned long idx);
+Fix this by leverage the newly introduced generic kexec_free_segment_cma()
+helper to execute fine-grained memory reclamation before any truncation
+occurs:
 
-Refactor the main kimage_free_cma() to invoke this helper sequentially
-to maintain backward compatibility while expanding single-slot flexibility.
+1. In image_load(), explicitly invoke kexec_free_segment_cma() to release
+   the CMA buffer allocated for the current failed kernel segment before
+   decrementing `image->nr_segments`.
 
+2. In the error path of load_other_segments(), iterate backward from the
+   failed segment index down to `orig_segments`, sequentially freeing each
+   orphan CMA segment allocation before restoring the initial segment
+   count.
+
+This guarantees that all temporary CMA pages allocated during placement
+failures are cleanly returned to the contiguous memory allocator,
+eliminating silent background memory leaks across all retry paths.
+
+Cc: Catalin Marinas <catalin.marinas@arm.com>
+Cc: Will Deacon <will@kernel.org>
+Cc: Breno Leitao <leitao@debian.org>
+Cc: Pratyush Yadav <pratyush@kernel.org>
+Cc: Andrew Morton <akpm@linux-foundation.org>
+Cc: Yeoreum Yun <yeoreum.yun@arm.com>
+Cc: Kees Cook <kees@kernel.org>
+Cc: "Rob Herring (Arm)" <robh@kernel.org>
+Cc: Baoquan He <bhe@redhat.com>
+Cc: Coiby Xu <coxu@redhat.com>
+Cc: Alexander Graf <graf@amazon.com>
+Cc: Pasha Tatashin <pasha.tatashin@soleen.com>
+Cc: stable@vger.kernel.org
+Fixes: 07d24902977e4 ("kexec: enable CMA based contiguous allocation")
 Signed-off-by: Jinjie Ruan <ruanjinjie@huawei.com>
 ---
- include/linux/kexec.h |  2 ++
- kernel/kexec_core.c   | 25 ++++++++++++++-----------
- 2 files changed, 16 insertions(+), 11 deletions(-)
+ arch/arm64/kernel/kexec_image.c        | 1 +
+ arch/arm64/kernel/machine_kexec_file.c | 5 ++++-
+ 2 files changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/include/linux/kexec.h b/include/linux/kexec.h
-index 8a22bc9b8c6c..6f1eabda0300 100644
---- a/include/linux/kexec.h
-+++ b/include/linux/kexec.h
-@@ -532,6 +532,7 @@ extern bool kexec_file_dbg_print;
+diff --git a/arch/arm64/kernel/kexec_image.c b/arch/arm64/kernel/kexec_image.c
+index b70f4df15a1a..ffcb7f9075e6 100644
+--- a/arch/arm64/kernel/kexec_image.c
++++ b/arch/arm64/kernel/kexec_image.c
+@@ -107,6 +107,7 @@ static void *image_load(struct kimage *image,
+ 		 * We couldn't find space for the other segments; erase the
+ 		 * kernel segment and try the next available hole.
+ 		 */
++		kexec_free_segment_cma(image, kernel_segment_number);
+ 		image->nr_segments -= 1;
+ 		kbuf.buf_min = kernel_segment->mem + kernel_segment->memsz;
+ 		kbuf.mem = KEXEC_BUF_MEM_UNKNOWN;
+diff --git a/arch/arm64/kernel/machine_kexec_file.c b/arch/arm64/kernel/machine_kexec_file.c
+index e31fabed378a..13c247c28866 100644
+--- a/arch/arm64/kernel/machine_kexec_file.c
++++ b/arch/arm64/kernel/machine_kexec_file.c
+@@ -195,7 +195,10 @@ int load_other_segments(struct kimage *image,
+ 	return 0;
  
- extern void *kimage_map_segment(struct kimage *image, int idx);
- extern void kimage_unmap_segment(void *buffer);
-+extern void kexec_free_segment_cma(struct kimage *image, unsigned long idx);
- #else /* !CONFIG_KEXEC_CORE */
- struct pt_regs;
- struct task_struct;
-@@ -543,6 +544,7 @@ static inline int kexec_crash_loaded(void) { return 0; }
- static inline void *kimage_map_segment(struct kimage *image, int idx)
- { return NULL; }
- static inline void kimage_unmap_segment(void *buffer) { }
-+static inline void kexec_free_segment_cma(struct kimage *image, unsigned long idx) { }
- #define kexec_in_progress false
- #endif /* CONFIG_KEXEC_CORE */
- 
-diff --git a/kernel/kexec_core.c b/kernel/kexec_core.c
-index a43d2da0fe3e..9195f81e53c4 100644
---- a/kernel/kexec_core.c
-+++ b/kernel/kexec_core.c
-@@ -554,22 +554,25 @@ static void kimage_free_entry(kimage_entry_t entry)
- 	kimage_free_pages(page);
+ out_err:
+-	image->nr_segments = orig_segments;
++	while (image->nr_segments > orig_segments) {
++		kexec_free_segment_cma(image, image->nr_segments - 1);
++		image->nr_segments--;
++	}
+ 	kvfree(dtb);
+ 	return ret;
  }
- 
--static void kimage_free_cma(struct kimage *image)
-+void kexec_free_segment_cma(struct kimage *image, unsigned long idx)
- {
--	unsigned long i;
-+	u32 nr_pages = image->segment[idx].memsz >> PAGE_SHIFT;
-+	struct page *cma = image->segment_cma[idx];
- 
--	for (i = 0; i < image->nr_segments; i++) {
--		struct page *cma = image->segment_cma[i];
--		u32 nr_pages = image->segment[i].memsz >> PAGE_SHIFT;
-+	if (!cma)
-+		return;
- 
--		if (!cma)
--			continue;
-+	arch_kexec_pre_free_pages(page_address(cma), nr_pages);
-+	dma_release_from_contiguous(NULL, cma, nr_pages);
-+	image->segment_cma[idx] = NULL;
-+}
- 
--		arch_kexec_pre_free_pages(page_address(cma), nr_pages);
--		dma_release_from_contiguous(NULL, cma, nr_pages);
--		image->segment_cma[i] = NULL;
--	}
-+static void kimage_free_cma(struct kimage *image)
-+{
-+	unsigned long i;
- 
-+	for (i = 0; i < image->nr_segments; i++)
-+		kexec_free_segment_cma(image, i);
- }
- 
- void kimage_free(struct kimage *image)
 -- 
 2.34.1
 
