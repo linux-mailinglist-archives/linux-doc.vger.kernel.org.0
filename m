@@ -1,211 +1,261 @@
-Return-Path: <linux-doc+bounces-90199-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90201-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SNjJBULCHGrPSAkAu9opvQ
-	(envelope-from <linux-doc+bounces-90199-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 01:20:34 +0200
+	id uCvbJ4/XHGopTQkAu9opvQ
+	(envelope-from <linux-doc+bounces-90201-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 02:51:27 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6270D61843C
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 01:20:32 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2900861889A
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 02:51:26 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id DF14F3047BC7
-	for <lists+linux-doc@lfdr.de>; Sun, 31 May 2026 23:18:15 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id DD45D302D97A
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Jun 2026 00:50:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 50468377541;
-	Sun, 31 May 2026 23:18:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A2A071A680C;
+	Mon,  1 Jun 2026 00:50:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20251104.gappssmtp.com header.i=@thegoodpenguin-co-uk.20251104.gappssmtp.com header.b="SXy+4G8O"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="EPNpUlRw"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
+Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1BA323769F4
-	for <linux-doc@vger.kernel.org>; Sun, 31 May 2026 23:18:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2576B1946BC
+	for <linux-doc@vger.kernel.org>; Mon,  1 Jun 2026 00:50:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780269484; cv=none; b=jTWEBJ2jFArRA1gKbLU+WM8eN4lL5+y2gKQ/Y7cfpXZbkjEBLgSuH29rYaLub3nx1NORJMH5M54L5WcgTbjm8XjNfjMxtiOPuGM4NP4mdKqCGcSMD1tyWCtHSbkwwJ4LMBbjZ4uWENwXda6uWtMx9gLvRXk73+8ZhOagarc/Qes=
+	t=1780275041; cv=none; b=X68XFIo+pS6hAEFwUDo1dFRvSQHV0//qeh7YfhvhcR09leidzyPEuoVC2QswO/lZIfUtsKkNJpm5wgHviWBRoZcTwfcv1MidCMl5wSWZvcQimF8UICl4SySwIQQ/ffLTcKP6TwX5wlsUHPmIIitN3bFgRoxGvJd8FyoBsFOEQa0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780269484; c=relaxed/simple;
-	bh=J0TSqvvk90SLybR+T1e1sTTGdTS3luxuOAEJPWZwCwc=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=O1QQ6MUKfiO7jn4VksNxF8Vpm0MPzEsbJnvioOScFPQomRlWE2IsTIeFXJQ8WkZ6XtRObu9vNOLvMu7VUMbRcVuvhSH9vsjpQWRGLgWssSguXc42gTX5yl0m4D9K0dzVRPsd+VkDh4KerwX+3x+fWbE9OVhCNshpWjghGQca8SY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk; spf=pass smtp.mailfrom=thegoodpenguin.co.uk; dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20251104.gappssmtp.com header.i=@thegoodpenguin-co-uk.20251104.gappssmtp.com header.b=SXy+4G8O; arc=none smtp.client-ip=209.85.221.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=thegoodpenguin.co.uk
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-45eea3448f2so1919923f8f.2
-        for <linux-doc@vger.kernel.org>; Sun, 31 May 2026 16:18:01 -0700 (PDT)
+	s=arc-20240116; t=1780275041; c=relaxed/simple;
+	bh=NkgDjfStwAVwsufE6vFbU/T9ELXHoUZnhbLlqe0wf2o=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ijn/MqkKWumN+aWozJ3QWoAU1dCpuuUC0JmK+SiOqrq8GBQg0MkJyGxCxR1I3+71mhRd6ox06/6KOe8hxsGG+tqesn3wbh0Iu2wyL+0FKXj7l16vv7hImYVzjqcoNisVT0loqsfJGqt8TBMg9NjLPpxUwdlfp9uqZj1SgH8t9JQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=EPNpUlRw; arc=none smtp.client-ip=209.85.216.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pj1-f46.google.com with SMTP id 98e67ed59e1d1-36b903567fdso3254804a91.1
+        for <linux-doc@vger.kernel.org>; Sun, 31 May 2026 17:50:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=thegoodpenguin-co-uk.20251104.gappssmtp.com; s=20251104; t=1780269480; x=1780874280; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=65QPkXlxoBn1znpFptZPvrSc/q4l7OLH3BDyCKXpuCk=;
-        b=SXy+4G8Ona8neOUIkF6BNfYfnyh+DDXIBUAeD3w4bNSAfKyvtbaMtN96HDErzQfk4z
-         ODyyUWisbfA6vaZKamp7Sy+Nh8TrjakTXUlfZeK88x9F8P4KEjP8efgpventSBIfbUEC
-         lWu7wJ7Yv8l6d7W//IWNPA6ZN88d3Nci9TDv0SKGuQRW080koAgLIGo5FLt8iEgpgyXO
-         VfX7GJAjCJzeb7NUdbzsr/oyN4IVydGQb10dwDPxtd16z6O372kXxijGAZkzfnicwzUp
-         hWoBpOnYuqTQgFpc+5pJG8xSJND+KvYfCPVSYFIQTwGUZBqBcse4msEjmSAr2inqjEXh
-         qRKg==
+        d=gmail.com; s=20251104; t=1780275038; x=1780879838; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=cg6Y3xqfBKjzaemeU2L9Q5dBdOV9FXfEg49CMyYPN/s=;
+        b=EPNpUlRwObo2qWJaaHM096jS+AW2VgYAQ5MCftvnUuPY7ekKVRd26P3IOqORaoH3hg
+         fYUnEdcoRwdOC6b9aLHJJ0sRFewIpWu92/pbxlzHEqv3Q3RswR4P0zXvJpc5Onoej1Pm
+         DAH47Y9Ft1foyWyZVu87btM3dD3xGfuJw5D7apR3hzCYYt/v3IsM6CRWLXgYSykfHy1Q
+         kLzUlZdNOJ04U1Nx3i0L9oE3aj3g1iNAMPD/iHQNDtNjOBV6NwPUb8oIYEM7S4ehJQen
+         2Rq96h65anKTA6PVyFLOAhNg5EHqF3/mIZ5qRs/ZWIDHx0c1DbTImTP9xJrY/ymGyGm6
+         j7VQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780269480; x=1780874280;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=65QPkXlxoBn1znpFptZPvrSc/q4l7OLH3BDyCKXpuCk=;
-        b=PQfIHO/2P/7t+EcO+rU0B4IoPGk4yUsTzd1obYcJVZYuHdogMikO4tJkOBGv78qmTp
-         nkVhxw3u+io2zIA8vEJCBs8jcsN+/gmDXZZtZHRMsfXbwXJ28RXgNyJOj2nDBOUXz0QN
-         No3G/ec8a84u3LLuXlRRZog7LyOhRAtBTr+1b3CkTu5goU9XpxoZ8x0oWzfLZBTLi6yD
-         CILqJ7JKAcvH7KUm1z0av60jKZgu2dK1xymU6gM6KVgmVRFa9+FKVxtH9xHzDmlzNTS3
-         VRuwqmhR5u0lkE9NZK7cpXcY2GQUxTAvsSslb41RMupAAq47qir4KAOHBrrahvqFYEbW
-         P3gw==
-X-Gm-Message-State: AOJu0YzkgrFD3DTnHfwzd4g2cWd70OBR5q4v1TlXHUIJhlwUQDA9weJA
-	WhtXdyxWs6W1xrSDHJXs591gNFX9oV5bcTHJISjGlnrtTx9nbfRW/em75u7nAqTSctE=
-X-Gm-Gg: Acq92OGqmwgWIFpNsjHGr8ckaGKl4SpaEkxYtyPf5fxrAGY92T/AvViJ2+C6WW4AdKr
-	ffgAArklJVtgg2OcTWFckCmHBrys/oe5a6KPSY6tmBecBwHebe/5g7xTn4z6mQ8TusxSWUiYrXb
-	42DppYO2M3pUdUD4OR6qOvtJjV8OQQAqYwjCa785otWbYVpWElVE2b07+2VA+CFQYKFe2tgStjW
-	RmXgwzPHgIkEiAKM9NLN8ZU1kYdkA7ufEE0necWW30+Oz+DuZtO/6Xwd8cAJvYYZkTfL2qFEjhd
-	ZvEypT/jmpUc6E9CL0EdhoPc03Pcii+fAuCoNDoaKg5nEv1RNjTTISCkRY0tEw+31ZM2XRICZto
-	6YQZrBmfVvB8NfjWMUuoiKF3tOHp5dWD8MknuAbwo+l9nSEO8eaZr0WCrGRmlZP4TACzy4l7FEu
-	neLGuBsFeot2kHBYLLj9lqzNF7ouDboowP95ZwHiF4+DjmdVSIarlioWifO/2h/Pomp8dFDbbXr
-	rBsvaadeXaIRbzXEoiYMtGFYezS/OhpGsWNe4x/MdLT0p8k/Q==
-X-Received: by 2002:a05:6000:22c7:b0:44e:d7f8:3945 with SMTP id ffacd0b85a97d-45ef6b0d5f3mr16986293f8f.13.1780269480458;
-        Sun, 31 May 2026 16:18:00 -0700 (PDT)
-Received: from [127.0.1.1] ([2a00:23c5:7815:1301:f27:e3a8:2334:314d])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-45ef34b834esm20496544f8f.11.2026.05.31.16.17.59
+        d=1e100.net; s=20251104; t=1780275038; x=1780879838;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=cg6Y3xqfBKjzaemeU2L9Q5dBdOV9FXfEg49CMyYPN/s=;
+        b=Kb9NAoTRATDxyz8Xftw9eXRbEso5MOlXzD/vbx+xSUVeZRPOtsrvKflgQpKwVmq+BB
+         MHtaoPhUkfXJzOhl8rMdGj6XQncZt8s5ieI+E1u7Y/KBj7gH65taezrSWATt4ZfasL0V
+         nhq5hW1vhGE8d9Jeq5fMQvCJFt6RsrpqzDco1YfJAi66q5OAyF+zppdYVhRdWP1YICyK
+         tdsVpWv9ML7otZQRPFC3/2AcbLOKx+BS00ZZjI9rhv4ynMgKrrU+HxsQ/2U1nWmObXfo
+         5Ec2x4F/8A1NmMGhdEKn3sk0ut+NM6Nm3HB7whnAT8ixOAE+JPBckCitBJiy2V5EMjbT
+         rvpw==
+X-Forwarded-Encrypted: i=1; AFNElJ+rBv/U1uNIJZBxU3Jk90YPLL6kiZ3USp7r0JhrJxg2Z13rIjH/BZ1Q3dQlDQ+yio3rK8KOvo+o3xI=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz7Uk7RbW76E1e/qYH53rdmMXy8QzOa0a+gvLPu55T5LBWak3Zp
+	oJiOEyskdUHnblbUtU/NNHGp0OVWf0luG2RrxIlILDWvX3U9Y/OoHpp8
+X-Gm-Gg: Acq92OEaX9Xnrg89oe7/RMwk+pV9L9mOa7GrQJPfCcQfS0rBGno4T+EBbQNlhSNPH9G
+	+ZD8HyNGarqK5zi74DF6IHY4U+dZMDGZwxgXIKq2VUvjFActOF1EbAGgN3wMxXlEks6ORYctOFk
+	3ap608Ot2hjFm+Ek83J7k2TD6IGIRe7NBIRXnjJOksqfFKD3nrOx+Gd34gOm7BWq6O9wqgfeZmt
+	C5L2VNo9LXAC/hfuVAbeV+XdWIlyyTWgsr16wWoK1ZHB6sPuTlhgsWFQY2bK4fqaWcWD6QKwIpn
+	DqwjfFRBv9NIgM9VR0e4tPn2vLXyzR+4j3ypTWDHtB3atiL1iETaEmANzo1kpTNGVdMg7Krk33w
+	LnQLyTEyYnfy8G/TweMQH7NV+a2WJywvqhVQqNse3+oMAs+sNF4zzQ3O2MSUFK7N3+J/DYno+Qf
+	mqB3/Q9C0lvwRwpgeHCQd59vcsXDHSc4uE7g==
+X-Received: by 2002:a17:90b:2586:b0:36d:b424:4f17 with SMTP id 98e67ed59e1d1-36db4245eb0mr1990613a91.1.1780275038259;
+        Sun, 31 May 2026 17:50:38 -0700 (PDT)
+Received: from localhost ([2001:19f0:8001:1b2d:5400:5ff:fefa:a95d])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-36bbdb5c91bsm5313469a91.1.2026.05.31.17.50.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 31 May 2026 16:17:59 -0700 (PDT)
-From: Andrew Murray <amurray@thegoodpenguin.co.uk>
-Date: Mon, 01 Jun 2026 00:17:40 +0100
-Subject: [PATCH RFC 4/4] Documentation/kernel-parameters: add/update
- printk_delay/boot_delay
+        Sun, 31 May 2026 17:50:37 -0700 (PDT)
+Date: Mon, 1 Jun 2026 08:50:22 +0800
+From: Inochi Amaoto <inochiama@gmail.com>
+To: Tian Zheng <zhengtian10@huawei.com>, maz@kernel.org, oupton@kernel.org, 
+	catalin.marinas@arm.com, corbet@lwn.net, pbonzini@redhat.com, will@kernel.org
+Cc: yuzenghui@huawei.com, wangzhou1@hisilicon.com, liuyonglong@huawei.com, 
+	Jonathan.Cameron@huawei.com, yezhenyu2@huawei.com, linuxarm@huawei.com, joey.gouly@arm.com, 
+	kvmarm@lists.linux.dev, kvm@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, skhan@linuxfoundation.org, 
+	suzuki.poulose@arm.com, leo.bras@arm.com, Inochi Amaoto <inochiama@gmail.com>
+Subject: Re: [PATCH v3 3/5] KVM: arm64: Add support for FEAT_HDBSS
+Message-ID: <ahzUUDAMoHtDFJD3@inochi.infowork>
+References: <20260225040421.2683931-1-zhengtian10@huawei.com>
+ <20260225040421.2683931-4-zhengtian10@huawei.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260601-deprecate_boot_delay-v1-4-c34c187142a6@thegoodpenguin.co.uk>
-References: <20260601-deprecate_boot_delay-v1-0-c34c187142a6@thegoodpenguin.co.uk>
-In-Reply-To: <20260601-deprecate_boot_delay-v1-0-c34c187142a6@thegoodpenguin.co.uk>
-To: Jonathan Corbet <corbet@lwn.net>, 
- Shuah Khan <skhan@linuxfoundation.org>, 
- Russell King <linux@armlinux.org.uk>, 
- Florian Fainelli <florian.fainelli@broadcom.com>, 
- Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
- Ray Jui <rjui@broadcom.com>, Scott Branden <sbranden@broadcom.com>, 
- Petr Mladek <pmladek@suse.com>, Steven Rostedt <rostedt@goodmis.org>, 
- John Ogness <john.ogness@linutronix.de>, 
- Sergey Senozhatsky <senozhatsky@chromium.org>, 
- Andrew Morton <akpm@linux-foundation.org>, 
- Sebastian Andrzej Siewior <bigeasy@linutronix.de>, 
- Clark Williams <clrkwllms@kernel.org>, Randy Dunlap <rdunlap@infradead.org>, 
- Linus Torvalds <torvalds@linux-foundation.org>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-arm-kernel@lists.infradead.org, linux-rpi-kernel@lists.infradead.org, 
- linux-rt-devel@lists.linux.dev, 
- Andrew Murray <amurray@thegoodpenguin.co.uk>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780269471; l=2336;
- i=amurray@thegoodpenguin.co.uk; s=20250914; h=from:subject:message-id;
- bh=J0TSqvvk90SLybR+T1e1sTTGdTS3luxuOAEJPWZwCwc=;
- b=pLwcIzM8QLMrQYFp9ysGPIsBLbpYGr/QADoMsXS4xYve0tkQyYj8MwL5lG38y/JRyr/+m7k7Z
- dt3xNPGzPvaCCrZVvkxNqE0SfFMxQgzlLTNRPTyqg/O1adefKaVGgEH
-X-Developer-Key: i=amurray@thegoodpenguin.co.uk; a=ed25519;
- pk=0SU0Q8S/uEiCdbXbXS+PvJGUCaBG1nDszD+HPU3Js0Q=
-X-Spamd-Result: default: False [-1.66 / 15.00];
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260225040421.2683931-4-zhengtian10@huawei.com>
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[thegoodpenguin-co-uk.20251104.gappssmtp.com:s=20251104];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	TAGGED_FROM(0.00)[bounces-90199-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	DMARC_NA(0.00)[thegoodpenguin.co.uk];
+	TAGGED_FROM(0.00)[bounces-90201-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[thegoodpenguin-co-uk.20251104.gappssmtp.com:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[huawei.com,hisilicon.com,arm.com,lists.linux.dev,vger.kernel.org,lists.infradead.org,linuxfoundation.org,gmail.com];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[amurray@thegoodpenguin.co.uk,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[inochiama@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[thegoodpenguin-co-uk.20251104.gappssmtp.com:dkim,thegoodpenguin.co.uk:mid,thegoodpenguin.co.uk:email,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: 6270D61843C
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[huawei.com:email,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,inochi.infowork:mid]
+X-Rspamd-Queue-Id: 2900861889A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-boot_delay has been deprecated in favour of an extended printk_delay,
-let's update kernel-parameters to reflect the addition of printk_delay
-and the deprecation of boot_delay.
+On Wed, Feb 25, 2026 at 12:04:19PM +0800, Tian Zheng wrote:
+> From: eillon <yezhenyu2@huawei.com>
+> 
+> Armv9.5 introduces the Hardware Dirty Bit State Structure (HDBSS) feature,
+> indicated by ID_AA64MMFR1_EL1.HAFDBS == 0b0100. A CPU capability is added
+> to notify the user of the feature.
+> 
+> Add KVM_CAP_ARM_HW_DIRTY_STATE_TRACK ioctl and basic framework for
+> ARM64 HDBSS support. Since the HDBSS buffer size is configurable and
+> cannot be determined at KVM initialization, an IOCTL interface is
+> required.
+> 
+> Actually exposing the new capability to user space happens in a later
+> patch.
+> 
+> Signed-off-by: eillon <yezhenyu2@huawei.com>
+> Signed-off-by: Tian Zheng <zhengtian10@huawei.com>
+> ---
+>  arch/arm64/include/asm/cpufeature.h |  5 +++++
+>  arch/arm64/kernel/cpufeature.c      | 12 ++++++++++++
+>  arch/arm64/tools/cpucaps            |  1 +
+>  include/uapi/linux/kvm.h            |  1 +
+>  tools/include/uapi/linux/kvm.h      |  1 +
+>  5 files changed, 20 insertions(+)
+> 
+> diff --git a/arch/arm64/include/asm/cpufeature.h b/arch/arm64/include/asm/cpufeature.h
+> index 4de51f8d92cb..dcc2e2cad5ad 100644
+> --- a/arch/arm64/include/asm/cpufeature.h
+> +++ b/arch/arm64/include/asm/cpufeature.h
+> @@ -856,6 +856,11 @@ static inline bool system_supports_haft(void)
+>  	return cpus_have_final_cap(ARM64_HAFT);
+>  }
+> 
+> +static inline bool system_supports_hdbss(void)
+> +{
+> +	return cpus_have_final_cap(ARM64_HAS_HDBSS);
+> +}
+> +
+>  static __always_inline bool system_supports_mpam(void)
+>  {
+>  	return alternative_has_cap_unlikely(ARM64_MPAM);
+> diff --git a/arch/arm64/kernel/cpufeature.c b/arch/arm64/kernel/cpufeature.c
+> index c31f8e17732a..348b0afffc3e 100644
+> --- a/arch/arm64/kernel/cpufeature.c
+> +++ b/arch/arm64/kernel/cpufeature.c
+> @@ -2124,6 +2124,11 @@ static bool hvhe_possible(const struct arm64_cpu_capabilities *entry,
+>  	return arm64_test_sw_feature_override(ARM64_SW_FEATURE_OVERRIDE_HVHE);
+>  }
+> 
+> +static bool has_vhe_hdbss(const struct arm64_cpu_capabilities *entry, int cope)
+> +{
+> +	return is_kernel_in_hyp_mode() && has_cpuid_feature(entry, cope);
+> +}
+> +
+>  bool cpu_supports_bbml2_noabort(void)
+>  {
+>  	/*
+> @@ -2759,6 +2764,13 @@ static const struct arm64_cpu_capabilities arm64_features[] = {
+>  		ARM64_CPUID_FIELDS(ID_AA64MMFR1_EL1, HAFDBS, HAFT)
+>  	},
+>  #endif
+> +	{
+> +		.desc = "Hardware Dirty state tracking structure (HDBSS)",
+> +		.type = ARM64_CPUCAP_SYSTEM_FEATURE,
+> +		.capability = ARM64_HAS_HDBSS,
+> +		.matches = has_vhe_hdbss,
+> +		ARM64_CPUID_FIELDS(ID_AA64MMFR1_EL1, HAFDBS, HDBSS)
+> +	},
+>  	{
+>  		.desc = "CRC32 instructions",
+>  		.capability = ARM64_HAS_CRC32,
+> diff --git a/arch/arm64/tools/cpucaps b/arch/arm64/tools/cpucaps
+> index 7261553b644b..f6ece5b85532 100644
+> --- a/arch/arm64/tools/cpucaps
+> +++ b/arch/arm64/tools/cpucaps
+> @@ -68,6 +68,7 @@ HAS_VA52
+>  HAS_VIRT_HOST_EXTN
+>  HAS_WFXT
+>  HAS_XNX
+> +HAS_HDBSS
+>  HAFT
+>  HW_DBM
+>  KVM_HVHE
 
-Signed-off-by: Andrew Murray <amurray@thegoodpenguin.co.uk>
----
- Documentation/admin-guide/kernel-parameters.txt | 31 +++++++++++++++++++++----
- 1 file changed, 26 insertions(+), 5 deletions(-)
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index 37b618d176f1c499f457f0d8b5679c29ee7ab177..0d6987a54a4f62a952664512fc8ddb18c6e70f5b 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -655,11 +655,19 @@ Kernel parameters
- 			See Documentation/block/cmdline-partition.rst
- 
- 	boot_delay=	[KNL,EARLY]
--			Milliseconds to delay each printk during boot.
--			Only works if GENERIC_CALIBRATE_DELAY is enabled,
--			and you may also have to specify "lpj=".  Boot_delay
--			values larger than 10 seconds (10000) are assumed
--			erroneous and ignored.
-+			Milliseconds to delay each printk during and post boot.
-+			Boot time delays only work if GENERIC_CALIBRATE_DELAY
-+			is enabled.
-+
-+			Once booted the delay can be removed or adjusted via
-+			the printk_delay sysctl.
-+
-+			Please note that you may also have to specify "lpj=".
-+			Boot_delay values larger than 10 seconds (10000) are
-+			assumed erroneous and ignored.
-+
-+			This will soon be deprecated, please use printk_delay
-+			instead.
- 			Format: integer
- 
- 	bootconfig	[KNL,EARLY]
-@@ -5483,6 +5491,19 @@ Kernel parameters
- 	printk.time=	Show timing data prefixed to each printk message line
- 			Format: <bool>  (1/Y/y=enable, 0/N/n=disable)
- 
-+	printk_delay=	[KNL,EARLY]
-+			Milliseconds to delay each printk during and post boot.
-+			Boot time delays only work if GENERIC_CALIBRATE_DELAY
-+			is enabled.
-+
-+			Once booted the delay can be removed or adjusted via
-+			the printk_delay sysctl.
-+
-+			Please note that you may also have to specify "lpj=".
-+			Boot_delay values larger than 10 seconds (10000) are
-+			assumed erroneous and ignored.
-+			Format: integer
-+
- 	proc_mem.force_override= [KNL]
- 			Format: {always | ptrace | never}
- 			Traditionally /proc/pid/mem allows memory permissions to be
+> diff --git a/include/uapi/linux/kvm.h b/include/uapi/linux/kvm.h
+> index 65500f5db379..15ee42cdbd51 100644
+> --- a/include/uapi/linux/kvm.h
+> +++ b/include/uapi/linux/kvm.h
+> @@ -985,6 +985,7 @@ struct kvm_enable_cap {
+>  #define KVM_CAP_ARM_SEA_TO_USER 245
+>  #define KVM_CAP_S390_USER_OPEREXEC 246
+>  #define KVM_CAP_S390_KEYOP 247
+> +#define KVM_CAP_ARM_HW_DIRTY_STATE_TRACK 248
+> 
+>  struct kvm_irq_routing_irqchip {
+>  	__u32 irqchip;
+> diff --git a/tools/include/uapi/linux/kvm.h b/tools/include/uapi/linux/kvm.h
+> index dddb781b0507..93e0a1e14dc7 100644
+> --- a/tools/include/uapi/linux/kvm.h
+> +++ b/tools/include/uapi/linux/kvm.h
+> @@ -974,6 +974,7 @@ struct kvm_enable_cap {
+>  #define KVM_CAP_GUEST_MEMFD_FLAGS 244
+>  #define KVM_CAP_ARM_SEA_TO_USER 245
+>  #define KVM_CAP_S390_USER_OPEREXEC 246
+> +#define KVM_CAP_ARM_HW_DIRTY_STATE_TRACK 248
+> 
+>  struct kvm_irq_routing_irqchip {
+>  	__u32 irqchip;
+> --
+> 2.33.0
+> 
 
--- 
-2.34.1
+Instead of having these architecture specific capability, I wonder if
+we can add a generic capability like "KVM_CAP_HW_DIRTY_STATE", so
+other architecture supports similar things can reuse this capability,
 
+For this generic thing I suggest, the getter returns the max support 
+entry count (or the buffer size) it supports like the dirty ring
+capability. And the setter just let the architecture set the parameters
+based on the user request. 
+
+This should do no harm to this implement, as everything still depends
+on the architecture behavior, and leave room for other architecture
+to reuse this.
+
+Regards,
+Inochi
 
