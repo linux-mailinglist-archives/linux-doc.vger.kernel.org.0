@@ -1,415 +1,214 @@
-Return-Path: <linux-doc+bounces-90311-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90313-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MJN2Kot2HWqnbAkAu9opvQ
-	(envelope-from <linux-doc+bounces-90311-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 14:09:47 +0200
+	id kPksOs54HWrEbAkAu9opvQ
+	(envelope-from <linux-doc+bounces-90313-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 14:19:26 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 425D861EECF
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 14:09:47 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4A50A61F277
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Jun 2026 14:19:26 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 0874F30279F8
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Jun 2026 12:08:20 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 5CC8E3022952
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Jun 2026 12:08:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3612A378824;
-	Mon,  1 Jun 2026 12:06:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 40D9B377015;
+	Mon,  1 Jun 2026 12:06:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="emQ0ufQA"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FRpHjCBQ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F6793A7D9E
-	for <linux-doc@vger.kernel.org>; Mon,  1 Jun 2026 12:06:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3401C3769F4;
+	Mon,  1 Jun 2026 12:06:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780315565; cv=none; b=G68cLQ90YJzyfk+7m61yYhcLdmOVkySx97yhfUJ2Myf9cRh6Y/I6qZgYvMjfU84kvUnr+GGcVgpidaR7jEMpeNSx3aLTuqfB0GMzjaW8WF4SJOaNgVf0vm8pt7i6Nc/lxIBhRLxNfpqN5QQY940YPexWVRdR8flyNpMkR/BwE8k=
+	t=1780315591; cv=none; b=KtAiwzCvSTmL/rK7rNTi+LA5QQPwFnFXLfzs1ZkhBWy4zA7X/KagO0N7BpekYnxWAj/3+QEOPOaEo08lDX6J/dq6NmI9vYJysYS6F/0OEpT75kezGgwu/2uZPHBdclKPLem2w7ufkTzzgkHgNyiWfxXSWxb+XHlG7rZQRylTjB4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780315565; c=relaxed/simple;
-	bh=sEO7u0MUmNyTUFNIPBYBwtZCCgzYuBjfxfoGHbMv0oE=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=i3Y3l20yDOk8wlwOC9hnrci7DUD//NQSsurC5TfXXSIGDTJ3e5RLaHg0LJGFz5H5t2QvS3uoUAT+UdM5y3oRwJoVA8HT62cH6J+t1RiPN+sK9aKCVIeEod0rykbwA5LhfN3NnBU02Rk5VqLAPsbf4bFQrQC6DtLoIyIfTBDW2os=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=emQ0ufQA; arc=none smtp.client-ip=209.85.128.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4905e190c71so92371885e9.3
-        for <linux-doc@vger.kernel.org>; Mon, 01 Jun 2026 05:06:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780315561; x=1780920361; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=vU7EFGuwqCZWgkJhEpDIGpXxPiY17lJwErVDlJ76auc=;
-        b=emQ0ufQAvvX5Yq7G0xvsXQqdAXdECmMQL0fgULqP7x4AbHzbn9FID0sgTxPP1cN+5N
-         phgMCYmxdtEKj9trh4ESlCb4GWV9WlSZPOjg+sWb1vQ150Q2AyPeXlWt4/xNorJnguc4
-         6tIJkXixN7F4N34K/RgU5fzc7Ycek1XnTTd/5A2TEwmHNrXWHIcDLtHcbCuofQtmqUch
-         31a1z8RtBnBX9tWT+BhFT9Rq3n0dcKsme71BAIpP4xl9dpZIzskOfS+xLuRtI4js7Pjp
-         3s5+RVImHEGbVPmvOEXTP+cXj/EMbwqxgbC0wgi0P9ZgwxtYAGVmWQqFIu0rM9hyraEh
-         JaBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780315561; x=1780920361;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=vU7EFGuwqCZWgkJhEpDIGpXxPiY17lJwErVDlJ76auc=;
-        b=LDzzaCQO3Yzc1WiCGNUsuHKyjGlgM9sMOxIlMhPEF+pRAK/FHHkZ4P0jKR9rJgZSvM
-         cePWWyaMBl2bS48PZ2TjUq7pd9PTtBPMqR9H3u2jR285hhT1VrkDIzZ01aXgiGXso5rV
-         GICiHHqFwrVRzxlAIaPAaLxl3YTFVAuhMSkYbELleeqQwYgDcEDWnZfySdgPffa6SnUa
-         TVym5VDy6HENKACaSKV7cOaWCAetcBUn6vdQwm8/3hkrnOtfp4ibq+udlWaTHVUOdrjL
-         y6vcTp3LUTbb1bNQ4OfPSqlaJDXKwc0jczlOY2Da7EXlgF1KFq926WAq9PGqw07bMuQI
-         bHWg==
-X-Gm-Message-State: AOJu0YwaDeMygCNfNaeUMtFVM47sVvROJ1riKg2WlfY/gkOAVZlyIsFL
-	hW6J6M8+PviioWBYqzliyb6RKQVit3XVZymST3VVbEBO97BdKZX1ueEx
-X-Gm-Gg: Acq92OG65ZdL0bC5mlOBQ99gnu6V4I6OJwX105rxpJAmePXK/HoWyovv4FPpebA8i47
-	9rJrHZHLLC/ECPyAjTRt/z3+z9bcMhNpJsqknomu42Ipf6A6EGxFSOWkKz8UxwQYwCSguNhmHrU
-	2i+USCd6C9ntLlbyyrkvXjZ7E3XvMCsPkDx5Tt8nvRm4rs+jIFfuD01czxGRut5d3BaSID/lOFA
-	fD/yRU87VpS1ZbM50KoMHVsC3u+ZE1jrUHCtlAddeXBgq6cJI8OLenkk4F7UHC9L+5gDe3fZ7Fg
-	aE/WcQSuLmEbUYWXg9ygrXmRoNw9dajuqQ+eqtnsoIAsTd9gn/ROUB7im7oSphKAMHGCMdYCjad
-	gqanGJC+8caBiJHPcpFkN6K1wW8Ceq4KpMN2AXnSkhNnG8t8aaFx5f2S27TcJoPuaszprU0TGM8
-	k2HYwjZLsyBr1ZC4iHPqjWYa3Eeuuxv8sp0xohsnDM5w==
-X-Received: by 2002:a05:600c:4e92:b0:490:8fd1:72a with SMTP id 5b1f17b1804b1-490a2900dacmr202132615e9.3.1780315560582;
-        Mon, 01 Jun 2026 05:06:00 -0700 (PDT)
-Received: from [172.16.188.153] ([213.181.114.83])
-        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-4909c152570sm103972805e9.9.2026.06.01.05.05.58
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 01 Jun 2026 05:06:00 -0700 (PDT)
-From: Jim Cromie <jim.cromie@gmail.com>
-Date: Mon, 01 Jun 2026 12:05:10 +0000
-Subject: [PATCH v3 24/24] dynamic_debug: use KBUILD_MODFILE for unique
- builtin module names
+	s=arc-20240116; t=1780315591; c=relaxed/simple;
+	bh=1V/aUBVsGQA0kwjBWuEds8b3HAtK0JeHycZcGTnJFfo=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=QNKp3Y+a9DTtF+WJGs8tCE9a8jhi2Zibct4vJKc9047JgU7qKp9NdkoVXP/qfcWtEL2vWZe5m4SgLeO/inM1wTcvbDQzb+CO84g3kK90z8CBaWGlylKgyxMnqBIbqZGx6/RjO0weFJyL+0JaGocDT6fNh+SoaSax778dspPmyH0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FRpHjCBQ; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 350851F008A1;
+	Mon,  1 Jun 2026 12:06:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1780315589;
+	bh=HkMg3NCB26gAhUUW/DuAMeOpPoMt1oN8LvktWRRL14s=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=FRpHjCBQXQ5Zf6i2+7aYg5ZfVma/l81fehJ3XD4KbjXDpz4wczfktm0xO4dWonVAV
+	 WtQgLSXg5sYF3D1DrcPEmrqNgxpZ+dpU4OUxVXdztvfOP52n59M3Nj6a32q4eUzq9T
+	 JSJhvYkN7CRWeSdRVaB3AlszrzlDAGfH1qIKTlMCD9AYQTNSXcj4g4QjDV6sCZzT0j
+	 /gLx5U70OUcRfv0K0vzM3FFGVC0arv3j6BPFrSSERnMQgnLnkEnyldxeBgFxjQ7Kcp
+	 HSzoqv9sPRasdUglu+TlCu3sjV1QzU3828BqMYOXYWZgblwWfCORmbBgv+CHo4hfuu
+	 c8IilCLHYED6A==
+Message-ID: <3a5eed44-7d4b-488c-8e04-380cd115b6dc@kernel.org>
+Date: Mon, 1 Jun 2026 14:06:12 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260601-dd-maint-2-v3-24-4a15b241bd3c@gmail.com>
-References: <20260601-dd-maint-2-v3-0-4a15b241bd3c@gmail.com>
-In-Reply-To: <20260601-dd-maint-2-v3-0-4a15b241bd3c@gmail.com>
-To: Jonathan Corbet <corbet@lwn.net>, 
- Shuah Khan <skhan@linuxfoundation.org>, Arnd Bergmann <arnd@arndb.de>, 
- Jason Baron <jbaron@akamai.com>, Luis Chamberlain <mcgrof@kernel.org>, 
- Petr Pavlu <petr.pavlu@suse.com>, Daniel Gomez <da.gomez@kernel.org>, 
- Sami Tolvanen <samitolvanen@google.com>, Aaron Tomlin <atomlin@atomlin.com>, 
- Andrew Morton <akpm@linux-foundation.org>, Shuah Khan <shuah@kernel.org>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-arch@vger.kernel.org, linux-modules@vger.kernel.org, 
- linux-kselftest@vger.kernel.org, dri-devel@lists.freedesktop.org, 
- Jim Cromie <jim.cromie@gmail.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780315495; l=11525;
- i=jim.cromie@gmail.com; s=20260203; h=from:subject:message-id;
- bh=sEO7u0MUmNyTUFNIPBYBwtZCCgzYuBjfxfoGHbMv0oE=;
- b=DPwcRKWEUYRhXRmC55DFt4XbR2ofmt1arOnS2i/wN8YubW92I1k8pJhvFDor9/LqQslDrC/N3
- VZ62XvXMhV/CsYupwAafT1pAtBZ/E9i8lMFkaVFl/5C4jYDJWbI3ouy
-X-Developer-Key: i=jim.cromie@gmail.com; a=ed25519;
- pk=C6E5ODlPQo7ZBynATXH9wg7K6HxP0pIXyf4s38Qw0XE=
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH mm-unstable v18 11/14] mm/khugepaged: Introduce mTHP
+ collapse support
+To: Nico Pache <npache@redhat.com>, Lance Yang <lance.yang@linux.dev>
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-mm@kvack.org, linux-trace-kernel@vger.kernel.org, aarcange@redhat.com,
+ akpm@linux-foundation.org, anshuman.khandual@arm.com, apopple@nvidia.com,
+ baohua@kernel.org, baolin.wang@linux.alibaba.com, byungchul@sk.com,
+ catalin.marinas@arm.com, cl@gentwo.org, corbet@lwn.net,
+ dave.hansen@linux.intel.com, dev.jain@arm.com, gourry@gourry.net,
+ hannes@cmpxchg.org, hughd@google.com, jack@suse.cz, jackmanb@google.com,
+ jannh@google.com, jglisse@google.com, joshua.hahnjy@gmail.com,
+ kas@kernel.org, liam@infradead.org, ljs@kernel.org,
+ mathieu.desnoyers@efficios.com, matthew.brost@intel.com,
+ mhiramat@kernel.org, mhocko@suse.com, peterx@redhat.com, pfalcato@suse.de,
+ rakie.kim@sk.com, raquini@redhat.com, rdunlap@infradead.org,
+ richard.weiyang@gmail.com, rientjes@google.com, rostedt@goodmis.org,
+ rppt@kernel.org, ryan.roberts@arm.com, shivankg@amd.com,
+ sunnanyong@huawei.com, surenb@google.com, thomas.hellstrom@linux.intel.com,
+ tiwai@suse.de, usamaarif642@gmail.com, vbabka@suse.cz,
+ vishal.moola@gmail.com, wangkefeng.wang@huawei.com, will@kernel.org,
+ willy@infradead.org, yang@os.amperecomputing.com,
+ ying.huang@linux.alibaba.com, ziy@nvidia.com, zokeefe@google.com
+References: <20260522150009.121603-12-npache@redhat.com>
+ <20260531071845.10875-1-lance.yang@linux.dev>
+ <6a9f062c-8376-4f83-90a9-8b167f925dc6@linux.dev>
+ <CAA1CXcCfww9X-f2Vb=ipz8tY2nMNnMx5_58Ozz63tvZTz_wpOw@mail.gmail.com>
+From: "David Hildenbrand (Arm)" <david@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=david@kernel.org; keydata=
+ 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
+ qIws/H2t
+In-Reply-To: <CAA1CXcCfww9X-f2Vb=ipz8tY2nMNnMx5_58Ozz63tvZTz_wpOw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-90311-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[lwn.net,linuxfoundation.org,arndb.de,akamai.com,kernel.org,suse.com,google.com,atomlin.com,linux-foundation.org,linux.intel.com,suse.de,gmail.com,ffwll.ch];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FREEMAIL_CC(0.00)[vger.kernel.org,lists.freedesktop.org,gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[vger.kernel.org,kvack.org,redhat.com,linux-foundation.org,arm.com,nvidia.com,kernel.org,linux.alibaba.com,sk.com,gentwo.org,lwn.net,linux.intel.com,gourry.net,cmpxchg.org,google.com,suse.cz,gmail.com,infradead.org,efficios.com,intel.com,suse.com,suse.de,goodmis.org,amd.com,huawei.com,os.amperecomputing.com];
+	TAGGED_FROM(0.00)[bounces-90313-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	RCPT_COUNT_GT_50(0.00)[58];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jimcromie@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	FROM_NEQ_ENVFROM(0.00)[david@kernel.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: 425D861EECF
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,linux.dev:email]
+X-Rspamd-Queue-Id: 4A50A61F277
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Historically dynamic-debug gets its module names from KBUILD_MODNAME.
-This works well for loadable modules, as the module loader has always
-required them to have unique names, but for builtins it is basically
-kbasename(srcfile), which sadly gives us many modules named "main".
+On 6/1/26 14:01, Nico Pache wrote:
+> On Sun, May 31, 2026 at 2:48 AM Lance Yang <lance.yang@linux.dev> wrote:
+>>
+>>
+>>
+>> On 2026/5/31 15:18, Lance Yang wrote:
+>>>
+>>> [...]
+>>>
+>>> Hmm ... don't we lose the allocation-failure result here?
+>>>
+>>> Previously collapse_scan_pmd() propagated SCAN_ALLOC_HUGE_PAGE_FAIL from
+>>> collapse_huge_page(), so khugepaged would call khugepaged_alloc_sleep()
+>>> in khugepaged_do_scan().
+>>>
+>>> Now if allocation fails and nr_collapsed stays 0, we just return
+>>> SCAN_FAIL. So we won't back off via khugepaged_alloc_sleep() anymore?
+>>
+>> Looks like this is a more general issue with mthp_collapse() only
+>> returning nr_collapsed.
+>>
+>> For example, SCAN_PMD_MAPPED used to be propagated too, and
+>> madvise_collapse() treats that as success. With the new code, if
+>> nothing was collapsed by this call, that can also become SCAN_FAIL ...
+>>
+>> So I think we should keep both.
+> 
+> Yeah I thought about this before, but more regarding the "incorrect"
+> propagation of errors; I didn't consider that those results were
+> actually being considered.
+> 
+> I actually had a patch to track the last_failure (with some
+> prioritization on certain results). I think that would solve this
+> issue.
+> 
+> Thanks for reminding me to improve this.
+> 
+> Depending on how the rest of the reviews go, I can either send up a
+> follow up series to do some more cleanups and improvements of the
+> current approach or we can send out a v19.
 
-This makes the following ambiguous:
-  bash-5.3# echo module main +m > /proc/dynamic_debug/control
+Let's do a v19.
 
-since it would affect 4 independent modules named main:
-  bash-5.3# ddgrep =m
-  init/main.c:1265 [main]initcall_blacklist =m "blacklisting initcall %s\n"
-  kernel/power/main.c:49 [main]pm_restore_gfp_mask =m "GFP mask restored\n"
-  kernel/module/main.c:2862 [main]move_module =m "\t0x%lx 0x%.8lx %s\n"
-  drivers/base/power/main.c:149 [main]device_pm_add =m "Adding info for %s:%s\n"
+Patch #11 might need a bit of work, we can discuss offline if you want.
 
-We can improve this by using KBUILD_MODFILE for dyndbg's modname in
-builtins, and KBUILD_MODNAME for loadables.
-
-The above control-file entries then become:
-  init/main.c:1265 [init/main]initcall_blacklist ...
-  kernel/power/main.c:49 [kernel/power/main]pm_restore_gfp_mask ...
-  kernel/module/main.c:2862 [kernel/module/main]move_module ...
-  drivers/base/power/main.c:149 [drivers/base/power/main]device_pm_add ...
-
-While this is a user visible change; [params] becomes [kernel/params],
-it is not a behavior change; we now match the query-module against the
-subsystem/module name or its kbasename (the simple-modname), which as
-before, matches all 4 modules.
-
-This allows queries to be specific when desired: "module init/main",
-while preserving the existing meaning of "module main"
-
-The deeper reason for this change is not obvious.  If any builtin
-"main" module were to add a classmap, it would attach to all "main"
-modules.  If 2 "main" modules defined separate classmaps, both modules
-would inadvertently share both classmaps.  Since classmaps map
-classnames to 0..62, and independently defined classmaps are most
-likely to start at 0 (unless author is planning to share the 0..62
-range with other classmaps), we have a setup for later reserved range
-conflicts.  Having unique names prevents future conflicts.
-
-This solution isn't perfect:
-1. it changes displayed [params] to [kernel/params] etc
-2. its mostly redundant with "filename */main.*"
-3. "module power", "module module", "module base/power" might be better
-   but would break old queries.
-
-Adapt dynamic-debug selftest:
-1- Add 'test_subsystem_module_queries' to verify path-based module matching.
-2- Use dynamic counting with precise regexes to determine expectations.
-3- Reorder tests to run slash-query verification immediately after
-   basic tests.
-4- Update basic_tests and comma_terminator_tests to use 'kernel/params'
-   instead of 'params' to match new path-based names for built-ins.
-
-And adjust Documentation
-
-Signed-off-by: Jim Cromie <jim.cromie@gmail.com>
----
-v3: new patch in rev-3
-Signed-off-by: Jim Cromie <jim.cromie@gmail.com>
----
- Documentation/admin-guide/dynamic-debug-howto.rst  | 40 ++++++++++----------
- include/linux/dynamic_debug.h                      | 17 +++++++--
- lib/dynamic_debug.c                                |  3 +-
- .../selftests/dynamic_debug/dyndbg_selftest.sh     | 44 ++++++++++++++++++++--
- 4 files changed, 77 insertions(+), 27 deletions(-)
-
-diff --git a/Documentation/admin-guide/dynamic-debug-howto.rst b/Documentation/admin-guide/dynamic-debug-howto.rst
-index 9c2f096ed1d8..8befb69575b7 100644
---- a/Documentation/admin-guide/dynamic-debug-howto.rst
-+++ b/Documentation/admin-guide/dynamic-debug-howto.rst
-@@ -38,12 +38,12 @@ You can view the currently configured behaviour in the *prdbg* catalog::
- 
-   :#> head -n7 /proc/dynamic_debug/control
-   # filename:lineno [module]function flags format
--  init/main.c:1179 [main]initcall_blacklist =_ "blacklisting initcall %s\n"
--  init/main.c:1218 [main]initcall_blacklisted =_ "initcall %s blacklisted\n"
--  init/main.c:1424 [main]run_init_process =_ "  with arguments:\n"
--  init/main.c:1426 [main]run_init_process =_ "    %s\n"
--  init/main.c:1427 [main]run_init_process =_ "  with environment:\n"
--  init/main.c:1429 [main]run_init_process =_ "    %s\n"
-+  init/main.c:1179 [init/main]initcall_blacklist =_ "blacklisting initcall %s\n"
-+  init/main.c:1218 [init/main]initcall_blacklisted =_ "initcall %s blacklisted\n"
-+  init/main.c:1424 [init/main]run_init_process =_ "  with arguments:\n"
-+  init/main.c:1426 [init/main]run_init_process =_ "    %s\n"
-+  init/main.c:1427 [init/main]run_init_process =_ "  with environment:\n"
-+  init/main.c:1429 [init/main]run_init_process =_ "    %s\n"
- 
- The 3rd space-delimited column shows the current flags, preceded by
- a ``=`` for easy use with grep/cut. ``=p`` shows enabled callsites.
-@@ -59,10 +59,10 @@ query/commands to the control file.  Example::
- 
-   :#> ddcmd '-p; module main func run* +p'
-   :#> grep =p /proc/dynamic_debug/control
--  init/main.c:1424 [main]run_init_process =p "  with arguments:\n"
--  init/main.c:1426 [main]run_init_process =p "    %s\n"
--  init/main.c:1427 [main]run_init_process =p "  with environment:\n"
--  init/main.c:1429 [main]run_init_process =p "    %s\n"
-+  init/main.c:1424 [init/main]run_init_process =p "  with arguments:\n"
-+  init/main.c:1426 [init/main]run_init_process =p "    %s\n"
-+  init/main.c:1427 [init/main]run_init_process =p "  with environment:\n"
-+  init/main.c:1429 [init/main]run_init_process =p "    %s\n"
- 
- Error messages go to console/syslog::
- 
-@@ -161,17 +161,19 @@ file
- 	file kernel/freezer.c	# ie column 1 of control file
- 	file drivers/usb/*	# all callsites under it
- 	file inode.c:start_*	# parse :tail as a func (above)
--	file inode.c:1-100	# parse :tail as a line-range (above)
-+	file inode.c:1-100	# parse :tail as a line-range (below)
- 
- module
--    The given string is compared against the module name
--    of each callsite.  The module name is the string as
--    seen in ``lsmod``, i.e. without the directory or the ``.ko``
--    suffix and with ``-`` changed to ``_``.  Examples::
--
--	module sunrpc
--	module nfsd
--	module drm*	# both drm, drm_kms_helper
-+    The query string is compared against the subsystem module name of
-+    each callsite, as shown in the control file.  The simple module
-+    name is the string as seen in ``lsmod``, i.e. without the
-+    directory or the ``.ko`` suffix and with ``-`` changed to ``_``.
-+
-+    Examples::
-+
-+	module nfsd        # simple modname (as from lsmod)
-+	module init/main   # subsystem modname (as in control file)
-+	module drm*	   # both drm, drm_kms_helper
- 
- format
-     The given string is searched for in the dynamic debug format
-diff --git a/include/linux/dynamic_debug.h b/include/linux/dynamic_debug.h
-index 2d6983186f37..aee6f3d0916f 100644
---- a/include/linux/dynamic_debug.h
-+++ b/include/linux/dynamic_debug.h
-@@ -8,6 +8,17 @@
- 
- #include <linux/build_bug.h>
- 
-+/*
-+ * Pick the best name for the module:
-+ * KBUILD_MODFILE includes the path (e.g., drivers/usb/core/usbcore) for built-ins.
-+ * Fall back to KBUILD_MODNAME for modules (loader requires unique names).
-+ */
-+#ifdef KBUILD_MODFILE
-+# define DDEBUG_MODNAME KBUILD_MODFILE
-+#else
-+# define DDEBUG_MODNAME KBUILD_MODNAME
-+#endif
-+
- /*
-  * An instance of this structure is created in a special
-  * ELF section at every dynamic debug callsite.  At runtime,
-@@ -128,9 +139,9 @@ struct _ddebug_class_param {
- #define DECLARE_DYNDBG_CLASSMAP(_var, _maptype, _base, ...)		\
- 	static const char *_var##_classnames[] = { __VA_ARGS__ };	\
- 	static struct _ddebug_class_map __aligned(8) __used		\
--		__section("__dyndbg_class_maps") _var = {			\
-+	__section("__dyndbg_class_maps") _var = {			\
- 		.mod = THIS_MODULE,					\
--		.mod_name = KBUILD_MODNAME,				\
-+		.mod_name = DDEBUG_MODNAME,				\
- 		.base = _base,						\
- 		.map_type = _maptype,					\
- 		.length = ARRAY_SIZE(_var##_classnames),		\
-@@ -169,7 +180,7 @@ void __dynamic_ibdev_dbg(struct _ddebug *descriptor,
- #define DEFINE_DYNAMIC_DEBUG_METADATA_CLS(name, cls, fmt)	\
- 	static struct _ddebug  __aligned(8)			\
- 	__section("__dyndbg_descs") name = {			\
--		.modname = KBUILD_MODNAME,			\
-+		.modname = DDEBUG_MODNAME,			\
- 		.function = __func__,				\
- 		.filename = __FILE__,				\
- 		.format = (fmt),				\
-diff --git a/lib/dynamic_debug.c b/lib/dynamic_debug.c
-index fdb730db385e..7f78c6b3eeaf 100644
---- a/lib/dynamic_debug.c
-+++ b/lib/dynamic_debug.c
-@@ -248,7 +248,8 @@ static int ddebug_change(const struct ddebug_query *query,
- 
- 		/* match against the module name */
- 		if (query->module &&
--		    !match_wildcard(query->module, di->mod_name))
-+		    !match_wildcard(query->module, di->mod_name) &&
-+		    !match_wildcard(query->module, kbasename(di->mod_name)))
- 			continue;
- 
- 		if (query->class_string) {
-diff --git a/tools/testing/selftests/dynamic_debug/dyndbg_selftest.sh b/tools/testing/selftests/dynamic_debug/dyndbg_selftest.sh
-index 8b2b7388678e..541a2ea7bcb3 100755
---- a/tools/testing/selftests/dynamic_debug/dyndbg_selftest.sh
-+++ b/tools/testing/selftests/dynamic_debug/dyndbg_selftest.sh
-@@ -76,9 +76,9 @@ function handle_exit_code() {
- # $1 - pattern to match, pattern in $1 is enclosed by spaces for a match ""\s$1\s"
- # $2 - number of times the pattern passed in $1 is expected to match
- # $3 - optional can be set either to "-r" or "-v"
--#       "-r" means relaxed matching in this case pattern provided in $1 is passed
--#       as is without enclosing it with spaces
--#       "-v" prints matching lines
-+#       "-r" means relaxed matching in this case pattern provided in
-+#       $1 is passed as is without enclosing it with spaces "-v"
-+#       prints matching lines
- # $4 - optional when $3 is set to "-r" then $4 can be used to pass "-v"
- function check_match_ct {
-     pattern="\s$1\s"
-@@ -223,7 +223,7 @@ function basic_tests {
-     check_match_ct =p 0
- 
-     # module params are builtin to handle boot args
--    check_match_ct '\[params\]' 4 -r
-+    check_match_ct '\[kernel/params\]' 4 -r
-     ddcmd module params +mpf
-     check_match_ct =pmf 4
- 
-@@ -238,8 +238,44 @@ EOF
-     ddcmd =_
- }
- 
-+function test_subsystem_module_queries {
-+    echo -e "${GREEN}# TEST_SUBSYTEM_MODULE_QUERIES ${NC}"
-+    ddcmd =_
-+
-+    # Find how many 'main' modules we have in total (by basename)
-+    # Use a more precise regex to avoid false positives like [irqdomain]
-+    local total_main=$(grep -c "\[\([^]]*/\)\?main\]" /proc/dynamic_debug/control)
-+    echo "# found $total_main total 'main' modules"
-+
-+    if [ $total_main -eq 0 ]; then
-+        echo "SKIP - no 'main' modules found to test slashes"
-+        return
-+    fi
-+
-+    echo "# testing 'module */main'"
-+    ddcmd module "*/main" +p
-+    # This should match modules that HAVE a slash and end in /main
-+    local slash_main=$(grep -c "\[[^]]*/main\]" /proc/dynamic_debug/control)
-+    check_match_ct =p $slash_main -r
-+
-+    echo "# testing 'module init/main' (specific path)"
-+    ddcmd =_
-+    ddcmd module "init/main" +p
-+    local init_main=$(grep -c "\[init/main\]" /proc/dynamic_debug/control)
-+    check_match_ct =p $init_main
-+
-+    echo "# testing 'module main' (basename match)"
-+    ddcmd =_
-+    ddcmd module main +p
-+    # This should match ALL $total_main entries due to kbasename matching
-+    check_match_ct =p $total_main
-+
-+    ddcmd =_
-+}
-+
- tests_list=(
-     basic_tests
-+    test_subsystem_module_queries
- )
- 
- # Run tests
+If we could get a v19 by the end of the week, that would be nice.
 
 -- 
-2.54.0
+Cheers,
 
+David
 
