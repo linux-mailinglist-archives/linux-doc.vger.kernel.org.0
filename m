@@ -1,252 +1,202 @@
-Return-Path: <linux-doc+bounces-90491-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90493-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6Ck6GGG3HmrZJgAAu9opvQ
-	(envelope-from <linux-doc+bounces-90491-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 12:58:41 +0200
+	id 8FbFLxG6HmrZJgAAu9opvQ
+	(envelope-from <linux-doc+bounces-90493-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 13:10:09 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id F3A9A62D0C2
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 12:58:40 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id D808962D293
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 13:10:08 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id D18D63052462
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 10:56:19 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id C634B3006232
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 10:58:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9BE6638B7B1;
-	Tue,  2 Jun 2026 10:56:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=arista.com header.i=@arista.com header.b="Z8VdALqm"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C1DE838944E;
+	Tue,  2 Jun 2026 10:58:49 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dl1-f42.google.com (mail-dl1-f42.google.com [74.125.82.42])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from tpecef22.compal.com (exmail3.compal.com [59.120.207.196])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C03C83803F5
-	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 10:56:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 878CD303CAB;
+	Tue,  2 Jun 2026 10:58:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=59.120.207.196
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780397779; cv=none; b=X6bNLMhMKazupJq/88MrGcpdffwD62LLJ3S+vMdS/NUW9b+pgYhU+VRa9Hd4/3r/z8S6lpR3lCdqBwnZHvGajfZUqCyr7y0t1PMLC+iJ670ZwwWKMQF+gymd6AVWe/lX64NECtsmN4leAAk/UwyINT5pyDL4lao9ONgtfC4kI6Q=
+	t=1780397929; cv=none; b=sz3ZsyNexO/Bxy2ZM+KN6iOfeG/tLTlxcE83tG+W7AZDPFlHrQq5qB88sV4vYTCkcDdzfVOf2oHWE/K38CwvmCXWOS8mJHxyiKj3CoffTJecr+gT59PndihCyGQmU3rFGKkUfzcYeJ6DPp8+CoMsU1YgM4A7mOErSHlylyx3FpM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780397779; c=relaxed/simple;
-	bh=5kgCPvMKVNlkmlG9q2DP0TEUkvLsW+2Hf7nUpTdyoiA=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Dc/bwmuiJqj9fS/FtzCoC0cgOkip2d2blvD3qXiIZJ71vZEhwPrbARDLrgR0l1IBRAxMKZwFggPo9f+gehKUvzQIVdvNUiM+oYofiwAaXKJhehQ3bLtAPBFUWoKo1cu6NUi/2KVmQ++x+HLcqNmHAzNjP+Xh80+DL7W/ILe7tP8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=arista.com; spf=pass smtp.mailfrom=arista.com; dkim=pass (2048-bit key) header.d=arista.com header.i=@arista.com header.b=Z8VdALqm; arc=none smtp.client-ip=74.125.82.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=arista.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arista.com
-Received: by mail-dl1-f42.google.com with SMTP id a92af1059eb24-137f3cb3f46so131228c88.0
-        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 03:56:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=arista.com; s=google; t=1780397777; x=1781002577; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=3vw7pTGbZv180hnfPtEbYCTGSUppqGH0HzAhdLQBYrc=;
-        b=Z8VdALqmHDCN8HRb1ozO0r6HGMaUce/9c+y3zGgGikPUxDezFCmrpBPm1srpf2qmHa
-         6pfsjWGf0W2Ku+uowumMKOlmoZHnA4PODVvGYIjzqXflyOLF8F+ZLgijOJVw7NNSdCRB
-         G+0363fmwLNjegRE5BtGE3lLEVcLP/ouCiVGDl9H6MV0aWPV85FspTteCjtib77qtDdy
-         6RLv/nIVXZEMvBtMAHwjh9G+w8EB/gSE/w8/pDh5BLFXrlU9DZ6yYQsLRA3fwDijuxEo
-         jZ01eySoXQHXOYM2DXJ0xLvUbQlxq5HfoJ5yxlwqfLN1Sd7hPifg8BQhe83SGP2AnV8r
-         gXMw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780397777; x=1781002577;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=3vw7pTGbZv180hnfPtEbYCTGSUppqGH0HzAhdLQBYrc=;
-        b=J37llnOGHDwYutypm5qJhBQ1IGCEuUwt30aemSmZkAoCLsY0IiLhs2XvytRfznMHW+
-         fCco40rQ+7Dasiehcoj/TjDD/eK82fGc5jBgJtNlYs0nm6mwipZsLC7wjN1pjqzIDkKx
-         1GrVz0RL9z0k4YCV2F2PUyrx5W9HA54c0EQEPCUpQ2jJfRFquA9eBXzhAa2RcBvbwV1W
-         9RjHrjpbw7gZffXmnP/T5rm+4kTqBOZa7cmyOfay4QjaOCyHqLidhLj8kkIKf2AcQlCp
-         +U7tLDXtXiK+iv0BJgamQx6vWZprm3zYzbcTm7Nh2/8eOjpQ3V1f/KuXO2SsISfBJPLP
-         bmfw==
-X-Forwarded-Encrypted: i=1; AFNElJ/gKOdz9cLaFA/0ibIiwpMmw9FrUzShRL0tqHOz5LMiPMLKsiBID+Ktyv4/WDkcAkGrGxBbCsCeSoo=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyzAWYvu8kAo4L7JOKTju4RIog6P37IQKV9VeXoENdGtbosnrqI
-	6oj5GOW3N2K5p4RpH49UGLe9qFRxNJVJNn4oW9dMoZdT6tc+DNbpyR442F6fF/uU/g==
-X-Gm-Gg: Acq92OE9d39AzNsPNZBjLXRAHGsvikC6MydOzIBcTrjfWZiMI1g1aaxFlSuw3aXYEN3
-	657r1mKFuhYI9q2IFbVJzjZd9lz32QmeT/SaBy4X0trux1KLCiDFxZCBhY4z4aUelBdEu5UbL7/
-	X3POnTN9UV7tLJCbDPFAgvSmP8WJi68eGLPzQNoDZtVNhIH1LaM6HFa0y/mc9DHe24J0a8kd9Hb
-	SzjRPHO9Ii/EaZrbL1wzhpqRiXFweTkR/voKjTsSr+WwD9X50cBd4/Lvr8IPJ5ZI6KTspWAt5YW
-	bwsHxTmLhruLB8AUK8y3PdwTuiBfsC4G7+3a/znu6nPvVG6MPS15AFB8ailkeQCHdLxAlSosRp4
-	UWaGRUfImPF8IIHU4x7kIFX+SVVuarBpQfeUuAYePGn0UijtOAcqZnOLbKSgVtb1SwZsdejZJPg
-	l+aycRwvVdxyDHGCFN5IGWPzjlgqzj3i+AjV3zBuW4VUURxQiIo9h4pK7aoNWdSXS51A==
-X-Received: by 2002:a05:7022:41a4:b0:136:e639:9c17 with SMTP id a92af1059eb24-137d42615b3mr6583398c88.23.1780397776746;
-        Tue, 02 Jun 2026 03:56:16 -0700 (PDT)
-Received: from yurypm-home-4hjc6.sjc.aristanetworks.com ([74.123.28.19])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-137b36c6700sm8875678c88.6.2026.06.02.03.56.15
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Jun 2026 03:56:15 -0700 (PDT)
-From: Yury Murashka <yurypm@arista.com>
-To: bhelgaas@google.com
-Cc: corbet@lwn.net,
-	skhan@linuxfoundation.org,
-	linux-pci@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Yury Murashka <yurypm@arista.com>
-Subject: [PATCH 2/2] PCI: Add pci=nodpc kernel boot option
-Date: Tue,  2 Jun 2026 10:55:58 +0000
-Message-ID: <20260602105558.1799563-3-yurypm@arista.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20260602105558.1799563-1-yurypm@arista.com>
-References: <20260602105558.1799563-1-yurypm@arista.com>
+	s=arc-20240116; t=1780397929; c=relaxed/simple;
+	bh=MAOU/H4rP3vMD5JkGQ/N6kaHM6Ob1xXG95h7Yn8X/I8=;
+	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
+	 Content-Type:MIME-Version; b=Epi//UQlY7Qxivwy/vJVIVyzjfd1Y6QbxiMDJqEXkir3GdDIS9hyTprkbMox0vnuFVUHEOK+2OWjBQaOQgcIxlLKH9RNUo7bUgOiOSDk/C0hEI3hBGXWoLQiU4vZz2HsgfxMXDlwoW5wH1kxoBGDP3nfxj0xwDSUCnUdFSyR1Tw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=compal.com; spf=pass smtp.mailfrom=compal.com; arc=none smtp.client-ip=59.120.207.196
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=compal.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=compal.com
+X-UUID: 054f0f425e7211f1a87c2323a98e90a4-20260602
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.3.15,REQID:b8fb18fe-69d2-430e-a2d4-b25185e77789,IP:0,U
+	RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
+	release,TS:0
+X-CID-META: VersionHash:e276073,CLOUDID:6129ffd6-0b04-449f-bc4f-a909b8df9b02,B
+	ulkID:nil,BulkQuantity:0,Recheck:0,SF:80|81|82|83|102|110|111|836|865|888|
+	898,TC:-5,Content:-10|0|15|50,EDM:-3,IP:nil,URL:99|1,File:130,RT:0,Bulk:ni
+	l,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE
+	:0,ARC:0
+X-CID-BVR: 2,SSN|SDN
+X-CID-BAS: 2,SSN|SDN,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR,TF_CID_SPAM_ULS
+X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
+X-UUID: 054f0f425e7211f1a87c2323a98e90a4-20260602
+Received: from sdmg11.sdbg.compal.com [(10.113.168.9)] by tpecef22.compal.com
+	(envelope-from <jackbb_wu@compal.com>)
+	(Generic MTA with TLSv1.3 TLS_AES_256_GCM_SHA384 256/256)
+	with ESMTP id 767860867; Tue, 02 Jun 2026 18:58:43 +0800
+X-UUID: 032bf1445e7211f1943831befd1aa4bc-20260602
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.3.15,REQID:b2ed9818-399c-4c40-83a8-13e3fd1ae099,IP:0,U
+	RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
+	release,TS:0
+X-CID-META: VersionHash:e276073,CLOUDID:4429ffd6-0b04-449f-bc4f-a909b8df9b02,B
+	ulkID:nil,BulkQuantity:0,Recheck:0,SF:80|81|82|83|102|110|111|836|865|888|
+	898,TC:-5,Content:-10|0|15|50,EDM:-3,IP:nil,URL:99|1,File:130,RT:0,Bulk:ni
+	l,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE
+	:0,ARC:0
+X-CID-BVR: 2,SSN|SDN
+X-CID-BAS: 2,SSN|SDN,0,_
+X-CID-FACTOR: TF_CID_SPAM_ULS,TF_CID_SPAM_SNR
+X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
+X-UUID: 032bf1445e7211f1943831befd1aa4bc-20260602
+Received: from sdbmbx11.tpe.compalcomm.com [(10.113.2.135)] by sdmg11.sdbg.compal.com
+	(envelope-from <jackbb_wu@compal.com>)
+	(Compal Mail Service with TLSv1.2 ECDHE-RSA-AES128-SHA 128/128)
+	with ESMTP id 1693711392; Tue, 02 Jun 2026 18:58:39 +0800
+Received: from SDBMBX13.tpe.compalcomm.com (10.113.2.137) by
+ SDBMBX11.tpe.compalcomm.com (10.113.2.135) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.29;
+ Tue, 2 Jun 2026 18:58:37 +0800
+Received: from SDBMBX13.tpe.compalcomm.com ([fe80::ea2a:c2b2:8475:8d69]) by
+ SDBMBX13.tpe.compalcomm.com ([fe80::ea2a:c2b2:8475:8d69%11]) with mapi id
+ 15.02.2562.029; Tue, 2 Jun 2026 18:58:37 +0800
+From: "Wu. JackBB (GSM)" <JackBB_Wu@compal.com>
+To: Jakub Kicinski <kuba@kernel.org>, Jack Wu via B4 Relay
+	<devnull+jackbb_wu.compal.com@kernel.org>
+CC: Loic Poulain <loic.poulain@oss.qualcomm.com>, Sergey Ryazanov
+	<ryazanov.s.a@gmail.com>, Johannes Berg <johannes@sipsolutions.net>, "Andrew
+ Lunn" <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>, "Eric
+ Dumazet" <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Wen-Zhi
+ Huang <wen-zhi.huang@mediatek.com>, Shi-Wei Yeh <shi-wei.yeh@mediatek.com>,
+	"Minano Tseng" <Minano.tseng@mediatek.com>, Matthias Brugger
+	<matthias.bgg@gmail.com>, AngeloGioacchino Del Regno
+	<angelogioacchino.delregno@collabora.com>, "Simon Horman" <horms@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+	"linux-arm-kernel@lists.infradead.org"
+	<linux-arm-kernel@lists.infradead.org>, "linux-mediatek@lists.infradead.org"
+	<linux-mediatek@lists.infradead.org>, "linux-doc@vger.kernel.org"
+	<linux-doc@vger.kernel.org>
+Subject: RE: [External Mail] Re: [PATCH 00/11] net: wwan: t9xx: Add MediaTek
+ T9XX WWAN driver
+Thread-Topic: [External Mail] Re: [PATCH 00/11] net: wwan: t9xx: Add MediaTek
+ T9XX WWAN driver
+Thread-Index: AQHc8iePJegWnmu1bUi94DWo9+PN/LYrGJEz
+Date: Tue, 2 Jun 2026 10:58:37 +0000
+Message-ID: <c279aea41ecf41c6aca4314a2f4e306b@compal.com>
+References: <20260529-t9xx_driver_v1-v1-0-bdbfe2c01e57@compal.com>,<20260601173401.2c892526@kernel.org>
+In-Reply-To: <20260601173401.2c892526@kernel.org>
+Accept-Language: zh-TW, en-US
+Content-Language: zh-TW
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-tm-as-product-ver: SMEX-14.0.0.3239-9.1.2019-29982.005
+x-tm-as-result: No-10--20.911500-8.000000
+x-tmase-matchedrid: 13nEecSBt9Euv++HU7VXryRFbfQbCufdN0X64jGy2dbVc/AFNTvLS9XY
+	nKy9ZqbG0wNjG7j2lpfWtteiDVXz7mpW0A+eYNud4WMcbQqR5OFkrVIXZHd52KloHyDFpaEsbxq
+	9W35blN9+M8NObIEDkCLCiAPpH5Zk/7zDDoXJoQ2DhqUecocKp5Wa6EbToghtwd4te8L2vhKVPE
+	hvdlk+CqeenaCmQghS8mtEegHTuKyGtpiI1cumNtTSGjubFor4a3FVQe5d4zvlNADTSrHglS1A/
+	qnDlqGPFpzeGnmPO0/7sEGacnICGo1g3zDt1sv5v9rSd36EgULA931+mNd9sJs7gkGWoKY36QLg
+	e8Tcpn0=
+x-tm-as-user-approved-sender: No
+x-tm-as-user-blocked-sender: No
+x-tmase-result: 10--20.911500-8.000000
+x-tmase-version: SMEX-14.0.0.3239-9.1.2019-29982.005
+x-tm-snts-smtp: 3683968551714F2E1CC524964F4B12B68B09CA53E3CB9515879F16383EF833F72000:8
+Content-Type: text/plain; charset="big5"
+Content-Transfer-Encoding: base64
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: F3A9A62D0C2
+X-Rspamd-Queue-Id: D808962D293
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [3.14 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[compal.com : SPF not aligned (relaxed), No valid DKIM,reject];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MIME_BASE64_TEXT_BOGUS(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[arista.com,reject];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[arista.com:s=google];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-90491-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[yurypm@arista.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-90493-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[compal.com:mid,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FROM_NEQ_ENVFROM(0.00)[JackBB_Wu@compal.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	FREEMAIL_CC(0.00)[oss.qualcomm.com,gmail.com,sipsolutions.net,lunn.ch,davemloft.net,google.com,redhat.com,mediatek.com,collabora.com,kernel.org,lwn.net,linuxfoundation.org,vger.kernel.org,lists.infradead.org];
+	MISSING_XM_UA(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	DKIM_TRACE(0.00)[arista.com:+];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	MID_RHS_MATCH_FROM(0.00)[];
+	R_DKIM_NA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,jackbb_wu.compal.com,netdev];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[osdev.org:url,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,arista.com:mid,arista.com:dkim,arista.com:email]
+	FORGED_SENDER_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	RCVD_COUNT_SEVEN(0.00)[7]
 X-Rspamd-Action: no action
 
-PCI DPC (Downstream Port Containment) support can be advertised by PCIe
-devices, but it might not be fully supported in the firmware. On large
-modular systems with a complex PCIe tree, enabling DPC could cause
-unexpected behavior and side effects. Sometimes it would be nice to have
-the option to keep the system in an unmodified state and be able to
-handle PCIe errors from userspace.
-
-Add pci=nodpc kernel boot option to disable PCI DPC. When this option
-is set, DPC initialization, state save/restore, and recovery are all
-skipped.
-
-Signed-off-by: Yury Murashka <yurypm@arista.com>
----
- Documentation/admin-guide/kernel-parameters.txt |  3 +++
- drivers/pci/pci.c                               |  2 ++
- drivers/pci/pci.h                               |  2 ++
- drivers/pci/pcie/dpc.c                          | 16 +++++++++++++---
- 4 files changed, 20 insertions(+), 3 deletions(-)
-
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index cfec12d37677..46a993c26dc0 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -5065,6 +5065,9 @@ Kernel parameters
- 				through ports 0xC000-0xCFFF).
- 				See http://wiki.osdev.org/PCI for more info
- 				on the configuration access mechanisms.
-+		nodpc		[PCIE] If the PCIE_DPC kernel config parameter is
-+				enabled, this kernel boot option can be used to
-+				disable the use of PCIE DPC.
- 		noaer		[PCIE] If the PCIEAER kernel config parameter is
- 				enabled, this kernel boot option can be used to
- 				disable the use of PCIE advanced error reporting.
-diff --git a/drivers/pci/pci.c b/drivers/pci/pci.c
-index 1f71f9c773c4..2882c7bbb358 100644
---- a/drivers/pci/pci.c
-+++ b/drivers/pci/pci.c
-@@ -6723,6 +6723,8 @@ static int __init pci_setup(char *str)
- 			} else if (!strncmp(str, "noats", 5)) {
- 				pr_info("PCIe: ATS is disabled\n");
- 				pcie_ats_disabled = true;
-+			} else if (!strcmp(str, "nodpc")) {
-+				pci_no_dpc();
- 			} else if (!strcmp(str, "noaer")) {
- 				pci_no_aer();
- 			} else if (!strcmp(str, "noaer_recovery")) {
-diff --git a/drivers/pci/pci.h b/drivers/pci/pci.h
-index 7a79df0ae712..1b6f17dddf21 100644
---- a/drivers/pci/pci.h
-+++ b/drivers/pci/pci.h
-@@ -887,6 +887,7 @@ struct rcec_ea {
- #endif
- 
- #ifdef CONFIG_PCIE_DPC
-+void pci_no_dpc(void);
- void pci_save_dpc_state(struct pci_dev *dev);
- void pci_restore_dpc_state(struct pci_dev *dev);
- void pci_dpc_init(struct pci_dev *pdev);
-@@ -895,6 +896,7 @@ pci_ers_result_t dpc_reset_link(struct pci_dev *pdev);
- bool pci_dpc_recovered(struct pci_dev *pdev);
- unsigned int dpc_tlp_log_len(struct pci_dev *dev);
- #else
-+static inline void pci_no_dpc(void) { }
- static inline void pci_save_dpc_state(struct pci_dev *dev) { }
- static inline void pci_restore_dpc_state(struct pci_dev *dev) { }
- static inline void pci_dpc_init(struct pci_dev *pdev) { }
-diff --git a/drivers/pci/pcie/dpc.c b/drivers/pci/pcie/dpc.c
-index 2b779bd1d861..10d1a0e026d7 100644
---- a/drivers/pci/pcie/dpc.c
-+++ b/drivers/pci/pcie/dpc.c
-@@ -43,12 +43,19 @@ static const char * const rp_pio_error_string[] = {
- 	"Memory Request Completion Timeout",		 /* Bit Position 18 */
- };
- 
-+static int pcie_dpc_disable;
-+
-+void pci_no_dpc(void)
-+{
-+	pcie_dpc_disable = 1;
-+}
-+
- void pci_save_dpc_state(struct pci_dev *dev)
- {
- 	struct pci_cap_saved_state *save_state;
- 	u16 *cap;
- 
--	if (!pci_is_pcie(dev))
-+	if (pcie_dpc_disable || !pci_is_pcie(dev))
- 		return;
- 
- 	save_state = pci_find_saved_ext_cap(dev, PCI_EXT_CAP_ID_DPC);
-@@ -64,7 +71,7 @@ void pci_restore_dpc_state(struct pci_dev *dev)
- 	struct pci_cap_saved_state *save_state;
- 	u16 *cap;
- 
--	if (!pci_is_pcie(dev))
-+	if (pcie_dpc_disable || !pci_is_pcie(dev))
- 		return;
- 
- 	save_state = pci_find_saved_ext_cap(dev, PCI_EXT_CAP_ID_DPC);
-@@ -104,7 +111,7 @@ bool pci_dpc_recovered(struct pci_dev *pdev)
- {
- 	struct pci_host_bridge *host;
- 
--	if (!pdev->dpc_cap)
-+	if (pcie_dpc_disable || !pdev->dpc_cap)
- 		return false;
- 
- 	/*
-@@ -404,6 +411,9 @@ void pci_dpc_init(struct pci_dev *pdev)
- {
- 	u16 cap;
- 
-+	if (pcie_dpc_disable)
-+		return;
-+
- 	pdev->dpc_cap = pci_find_ext_capability(pdev, PCI_EXT_CAP_ID_DPC);
- 	if (!pdev->dpc_cap)
- 		return;
--- 
-2.51.0
-
+SGkgSmFrdWIsDQoNCj4gT24gRnJpLCAyOSBNYXkgMjAyNiAxODozMTozOSArMDgwMCBKYWNrIFd1
+IHZpYSBCNCBSZWxheSB3cm90ZToNCj4gPiA0MyBmaWxlcyBjaGFuZ2VkLCAxNDc2MSBpbnNlcnRp
+b25zKCspDQo+DQo+IFBsZWFzZSB0cnkgdG8gY3V0IHRoaXMgZG93biB0byB+NWtMb0MgZm9yIHRo
+ZSBpbml0aWFsIHN1Ym1pc3Npb24uDQo+IFdoYXRldmVyIHRoZSBhYnNvbHV0ZSBtaW5pbXVtIHNl
+bnNpYmxlIGNodW5rIG9mIGNvZGUgaXMuDQo+DQo+IEVhY2ggcGF0Y2ggbXVzdCBidWlsZCBjbGVh
+bmx5IHdpdGggVz0xDQoNCldlJ3ZlIGFscmVhZHkgcmVkdWNlZCB0aGlzIHNpZ25pZmljYW50bHkg
+ZnJvbSB0aGUgb3JpZ2luYWwgNDFrIExvQw0KZG93biB0byB+MTQuN2sgYnkgc3RyaXBwaW5nIG91
+dCBub24tZXNzZW50aWFsIGZlYXR1cmVzIHN1Y2ggYXMNCmV4Y2VwdGlvbiBoYW5kbGluZywgbWVt
+b3J5IGxvZ2dpbmcsIGRldmxpbmssIHN0YXRpc3RpY3MsIGRlYnVnDQp0cmFjaW5nLCBhbmQgb3Ro
+ZXJzLg0KDQpXZSBldmVuIHJlbW92ZWQgc29tZSBhcmd1YWJseSBuZWNlc3NhcnkgZmVhdHVyZXMg
+KFBNLCBtZGxvZywNCnRocm91Z2hwdXQgb3B0aW1pemF0aW9ucykgdGhhdCB3ZSBwbGFuIHRvIHN1
+Ym1pdCBhcyBmb2xsb3ctdXANCnNlcmllcy4NCg0KTm90ZSB0aGF0IHRoZSBsaW5lIGNvdW50IG1h
+eSBzbGlnaHRseSBpbmNyZWFzZSBpbiB2MiwgYXMgd2UgcGxhbg0KdG8gYWRkIG1pc3Npbmcga2Rv
+YyBjb21tZW50cyBiYXNlZCBvbiByZXZpZXcgZmVlZGJhY2suDQoNCkZvciByZWZlcmVuY2UsIHRo
+ZSB0N3h4IGRyaXZlciAodHdvIGdlbmVyYXRpb25zIG9sZGVyLCBzaW1wbGVyIEhXKQ0KaGFkIGFu
+IGluaXRpYWwgc3VibWlzc2lvbiBvZiB+MTEuM2sgTG9DIFsxXS4gVGhlIHQ5eHggaGFyZHdhcmUg
+aXMNCm1vcmUgY29tcGxleCwgc28gd2UgYmVsaWV2ZSBiZWluZyBpbiBhIHNpbWlsYXIgcmFuZ2Ug
+aXMgcmVhc29uYWJsZS4NCg0KV2UnZCBsaWtlIHRvIGtlZXAgdGhlIGRyaXZlciBmdW5jdGlvbmFs
+IGFuZCByZXZpZXdhYmxlIGluIGl0cw0KY3VycmVudCBzY29wZS4gRG8geW91IGhhdmUgYW55IHN1
+Z2dlc3Rpb25zIG9uIGhvdyB3ZSBjb3VsZCBmdXJ0aGVyDQpyZWR1Y2UgdGhlIHNpemUgd2hpbGUg
+bWFpbnRhaW5pbmcgYSB3b3JraW5nIGluaXRpYWwgc3VibWlzc2lvbj8NCg0KWzFdIGh0dHBzOi8v
+cGF0Y2h3b3JrLmtlcm5lbC5vcmcvcHJvamVjdC9uZXRkZXZicGYvY292ZXIvMjAyMjA1MDYxODEz
+MTAuMjE4MzgyOS0xLXJpY2FyZG8ubWFydGluZXpAbGludXguaW50ZWwuY29tLw0KDQpUaGFua3Mu
+DQoNCg0KPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQ0KVGhp
+cyBtZXNzYWdlIG1heSBjb250YWluIGluZm9ybWF0aW9uIHdoaWNoIGlzIHByaXZhdGUsIHByaXZp
+bGVnZWQgb3IgY29uZmlkZW50aWFsIG9mIENvbXBhbCBFbGVjdHJvbmljcywgSW5jLiBJZiB5b3Ug
+YXJlIG5vdCB0aGUgaW50ZW5kZWQgcmVjaXBpZW50IG9mIHRoaXMgbWVzc2FnZSwgcGxlYXNlIG5v
+dGlmeSB0aGUgc2VuZGVyIGFuZCBkZXN0cm95L2RlbGV0ZSB0aGUgbWVzc2FnZS4gQW55IHJldmll
+dywgcmV0cmFuc21pc3Npb24sIGRpc3NlbWluYXRpb24gb3Igb3RoZXIgdXNlIG9mLCBvciB0YWtp
+bmcgb2YgYW55IGFjdGlvbiBpbiByZWxpYW5jZSB1cG9uIHRoaXMgaW5mb3JtYXRpb24sIGJ5IHBl
+cnNvbnMgb3IgZW50aXRpZXMgb3RoZXIgdGhhbiB0aGUgaW50ZW5kZWQgcmVjaXBpZW50IGlzIHBy
+b2hpYml0ZWQuDQo9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+DQo=
 
