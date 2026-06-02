@@ -1,81 +1,81 @@
-Return-Path: <linux-doc+bounces-90435-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90437-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WDuxLl5LHmrmiQkAu9opvQ
-	(envelope-from <linux-doc+bounces-90435-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 05:17:50 +0200
+	id GFf3OX1LHmrmiQkAu9opvQ
+	(envelope-from <linux-doc+bounces-90437-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 05:18:21 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 806956279F4
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 05:17:50 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 67009627A33
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 05:18:20 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 6E3C53036EA1
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 03:17:25 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 35558305F0AC
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 03:17:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B861C34F497;
-	Tue,  2 Jun 2026 03:17:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D296B36920C;
+	Tue,  2 Jun 2026 03:17:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b="B7dKe+we"
+	dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b="Jc0goBFa"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com [209.85.160.178])
+Received: from mail-qt1-f182.google.com (mail-qt1-f182.google.com [209.85.160.182])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8275E33AD81
-	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 03:17:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.178
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7D53433DEFC
+	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 03:17:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.182
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780370242; cv=none; b=O9ssVBLPhOL+NtXmLW1pXMRn9u8T+bekTDnKqikNkxOLp+zSqKBWnmxkCW1rB2K6WbqEJNYI7RECQKfw8mLFtRAOpqS4nnbglDhg4M/MJgxyPvtZOc6rpKGrXAuBcnILljM/bJmTGU7pI6TeTGewIrFIYinBf7JTPWER1FXCEfI=
+	t=1780370244; cv=none; b=d3mwEPIlz1ZydaFJIv7owU7uHf/TvQsnvbh2oTa5gkusjsl+HjJ76eMOaAe62kmRKyrrVlmYEa2P3o36TvkZ+f/OLZj1Q5zenItt3gBmhIntx6YRcJIkj/Jjcbj5MiIPnDrx0FDwp8q4SrGeUHVvyvIanwfa/R4nQm1CU1UuJ+I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780370242; c=relaxed/simple;
-	bh=iLcdCc0te5fqBZzAelrcWbzlLEUfrhfSCvMibuoqogY=;
+	s=arc-20240116; t=1780370244; c=relaxed/simple;
+	bh=Dt2dFPyPh1ts6XuKsSKJICPZIpbd882zbThrm/OEsps=;
 	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=dAR+OZ3jt/E+qsHJxHyN1MgnTDAWf4hwz1M6jeos67CZMRs/O7qyzaymXq42/c/6z7550ujOgd2L3nQWLADacveTetkkuNmw7eybcq4ulENdaMRwQqRt5qjZ1GMfPHxcQ7JWRhfpZC5TbiPfbA8TxTss/T0/97KzGtCb7vmfTCk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com; spf=pass smtp.mailfrom=soleen.com; dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b=B7dKe+we; arc=none smtp.client-ip=209.85.160.178
+	 MIME-Version; b=BYktN51yFh3pI6DGC2GWXw4BCZ0qNMoQPhFN31RWla060Ih87YlN1Yx5oC00OqHaXMqNfBHxqI/GjuHu+XW80Ezz+1FJuT9f1JT2sKFwNjGDzhTsJl6rmJIaTZEH8tf7mAKKkyzYRMBCFrq2LLA8x4LomUzcIla9pfJn2ASXjiM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com; spf=pass smtp.mailfrom=soleen.com; dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b=Jc0goBFa; arc=none smtp.client-ip=209.85.160.182
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=soleen.com
-Received: by mail-qt1-f178.google.com with SMTP id d75a77b69052e-51749ff0a97so17963501cf.0
-        for <linux-doc@vger.kernel.org>; Mon, 01 Jun 2026 20:17:21 -0700 (PDT)
+Received: by mail-qt1-f182.google.com with SMTP id d75a77b69052e-51720674eb7so52899741cf.1
+        for <linux-doc@vger.kernel.org>; Mon, 01 Jun 2026 20:17:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=soleen.com; s=google; t=1780370240; x=1780975040; darn=vger.kernel.org;
+        d=soleen.com; s=google; t=1780370241; x=1780975041; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=57XHE07VPesg/638uO62i0q1esIWZpU9ZAzOqv5wFOw=;
-        b=B7dKe+wemC9eOcrpQ48Ze1TDlRVjIA8tbs8n/SNsel1eg8SZwWYR6ToQxp7CzhYFGs
-         urR+XeArtQEjq5eXFph/aEMCqELs6Rg9jnO/RkeyPP7ld4pJ/fKHxWXZCJsqnZAOLByz
-         bmshjpimuJYCgjot2OVq+Gbe4s6pOPqPDKwd99cWkLvTWNZ52CPaZDgu4aM+3cTe4DO/
-         Nfhb0FYf1bR4IcV3UzgYgN+wXhm4Gs95B5tgWgoH7faOB5wgyhwrnj5KXxcdRR7K8UvS
-         JkK3JlvMwiCkCKs+HMMmAQok9pq2Md2JLkI5KUlR7zSDdh61IoWk7axZZ6XqTGluxnyl
-         HWhQ==
+        bh=6tW8ZkJFH1s/aeCdAEiQB7eOXHeRrYqV2OpgEHHCsa8=;
+        b=Jc0goBFaHhvMOUNWHpB2OFY1+3Z2ZG2bVrLp14LmjWpFEj1F96fEgV4sx+AfBbDxkf
+         YAL9w4sbxE0n179cV8HIBOXxYZLCn552xtJBnI2r4inWzzDmJAIgZiVPMVTUrmPRPfEt
+         LCsnkIksFMmQspiZ+6wGR7RFgRdezeKLasxtN+XMC3WMOr5HAQP03sRtIpObnjhGRoKp
+         1vrwm2vK/a05QiJrI6PNXrZ9ZXvnbE53j1pTb0zKXr3Ip7FT/x8DdBadERgxeB96KGFF
+         WDAFJYRc246m2lQRdvMR39bvLdXOY24f3DyPwtuH3kW/Q0P3qokC9B6Pb52f9ZN1c8F0
+         WfnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780370240; x=1780975040;
+        d=1e100.net; s=20251104; t=1780370241; x=1780975041;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=57XHE07VPesg/638uO62i0q1esIWZpU9ZAzOqv5wFOw=;
-        b=V2VuwcMWD4En1xXvxB/Y6BRhdyYn5ci/wytPrHa/kNK+mHj739DeBZ9yoO8vEUdRxh
-         NJLok7d24Fi5JeGvC+bQgg+8GvNUOV6oN7WqgNBeDLJM8JhoMHawKkyqJ3QdkCtKCbfa
-         afgJF6+9uLdK5YwOmE4ltKq0OpMjZ0X4ApskZH2+BtnRv9UxGMJrfQy7R0JspYgtLPwR
-         QkyU7+Se2BXLxN+tNBFiC92oVfJFFFEu2+PK9O9F0P2heTtZsarkpbzLLhOIHCXIv+Mm
-         WdeX+aiE8zDjzxT4b0kV2Gr1riwEvx0g9376RxaKEEP5L0j4+YBBO6ptePt9NU/AcR9Z
-         xEvg==
-X-Forwarded-Encrypted: i=1; AFNElJ95hVMsFfax00FxUmM3XIs1MzJDlchdfp+wijoqMffqOAfVgQarTsE2Cj1C06wGYYsyau7KuTxVIb0=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwMJTjomoCli5Etdlu+RiQIdK9gfCf93fsTkcRNIFoqKrTbukV1
-	J1aqebWlRfMoVBVlYvm7QcPdbZPEEdaghqZyvaZZSlw3g17kfs3uUbxMvIkDq8YiG/o=
-X-Gm-Gg: Acq92OFEUlBuCBnS0MqpVosv4Z/07FDxSPJWz94xcT6h4YBK4VWc+Q8toeqrokcQYi6
-	5D/vpzUPYz007EkgnAtBAgfF+0v0uoMtZs6IvmIEOt3Ci4Bg+SnQM8ZK2vG16I6ZaUtH4UxUjMs
-	BFLaK5dyMv2/ndblx8PKxa9l765/NUMQEBztFTuuC0eM9JFo+fiXZHpMKIxtpLPNynwHvnRSx1N
-	2AUylbdDOnJawQZhLpD1+Mvyg+95Fmx6akdGxxxftiEKNsAK4yu4BjN6PuornG7x8NTJvhsN0vo
-	Byl5ej5MYVof2v0M815NTL2Ox8y8mR176uGwBY0Ju4H/Ww17kU4IdYKBIaXi5PSkmY7fT3ok/HL
-	z3jLoe3T82RWsk56cM8xdcma0UsmM1rNRf0G8FVchKPiQfmiqgb0UtI2mqnOuok4h82k42XgcLa
-	aXJQ6/0W/uES6PS3Y3nCLUR2SCbkLbe5ammGxFjqKefJrN0BZ2R6IhzceziFndWg==
-X-Received: by 2002:ac8:5dd1:0:b0:50f:6415:1eb4 with SMTP id d75a77b69052e-5173a97fdd5mr181349891cf.49.1780370240533;
-        Mon, 01 Jun 2026 20:17:20 -0700 (PDT)
+        bh=6tW8ZkJFH1s/aeCdAEiQB7eOXHeRrYqV2OpgEHHCsa8=;
+        b=AC6rxcXFc8pOhyTu8D7i5TI/2rr5R/4msugzT+5P/W94ndt6FOISQ0y3NtGL50Gvhr
+         anyIyD7RRVnmWbW0uNGnP2rGIene/Nou4Xxg8X9vu+ewLTwELhmi51s/xHy55MxJSpij
+         kPgm9ZKQFwu5zR4Btftxe2OLTL/Fi/4Qec/gKFmXBD542VDbaAY72+Up5rXrXmfSjyOJ
+         pxehLys/Owz7+iksfAa3ROAEgyDCoNmtyNJN+TBxUiV/1QhQTzs+SZ+/YF8BNbY33biv
+         d8ER+kENSzw4eKySeyny35Jbo6IS7WyJv3jWi/id6pdZlI53zPGauVbHJEGWFRbck75Q
+         vr8w==
+X-Forwarded-Encrypted: i=1; AFNElJ+7t8hjua9paTpce8e1ghkzotbDNto0BYzFaKLB6uti//lTgE4uv3FEkOtwSYMbaqdv7tF193OtR5o=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyMsw1qmJTljIony3aT5YoN0PcVZoBfLHDjXu32asdgr744teSg
+	fQa54eBhae0KPyRtzPsfOKPY34PWq7Qmg7tZbdSi2miySkm6cjIRv9GAJOFrpIf/xIE=
+X-Gm-Gg: Acq92OEGu/H2FD0p0Htvuyv/ENRZ35x/jXVvyuakU6PohXVeMwuJcmDu+h2Y4oYWqOC
+	InQ9aOj5rBooY4skNqfz6AnFGEOSgMBsYfgAvRUe6Hc93JZUjLjI3sCo3gJXKHn9DhKry5aClO+
+	cTg1CrvCypSZVmgxxmzML8jyr2KirAYgN1pKqjvleehHLtsvqu2bDVApqQHxCpfljfDFujiXAIB
+	OVN5k9FhrKG1UOrGYOVo59eVw4p0zVsb55o3hSz/+T7pIzTsLr9Gcz2Nm3AxFFD7MzLQvmswz2K
+	YX/neOGv+YCI6tS9ZEOPNuVx2ejoX2pcYs8H/fQKb1eQWkLTSG31qQo6js/3rvc3Y8UVtEUm441
+	yxX+EiFqGV2MHUvnfkPSRhDQmUaIXPp+C+XCN1GJ3wZPpOLnDA9d7Oaqz6W1B3sUsQijF/2lNJY
+	FzyXxpJJxnYJVNJoXedER79dQvqpZCZ2bQHoCq4rw34MeAcU2WGuYrxZ6y5ByZoA==
+X-Received: by 2002:a05:622a:4c14:b0:50e:6377:197d with SMTP id d75a77b69052e-5173a6197f2mr192694801cf.8.1780370241637;
+        Mon, 01 Jun 2026 20:17:21 -0700 (PDT)
 Received: from plex ([71.181.43.54])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-51741b29745sm71219081cf.8.2026.06.01.20.17.19
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-51741b29745sm71219081cf.8.2026.06.01.20.17.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 01 Jun 2026 20:17:20 -0700 (PDT)
+        Mon, 01 Jun 2026 20:17:21 -0700 (PDT)
 From: Pasha Tatashin <pasha.tatashin@soleen.com>
 To: linux-kselftest@vger.kernel.org,
 	rppt@kernel.org,
@@ -92,9 +92,9 @@ To: linux-kselftest@vger.kernel.org,
 	pratyush@kernel.org,
 	skhawaja@google.com,
 	graf@amazon.com
-Subject: [PATCH v5 01/13] liveupdate: change file_set->count type to u64 for type safety
-Date: Tue,  2 Jun 2026 03:17:05 +0000
-Message-ID: <20260602031717.197696-2-pasha.tatashin@soleen.com>
+Subject: [PATCH v5 02/13] liveupdate: avoid mixing cleanup guards with goto in luo_session_retrieve_fd
+Date: Tue,  2 Jun 2026 03:17:06 +0000
+Message-ID: <20260602031717.197696-3-pasha.tatashin@soleen.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260602031717.197696-1-pasha.tatashin@soleen.com>
 References: <20260602031717.197696-1-pasha.tatashin@soleen.com>
@@ -110,13 +110,13 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[soleen.com,reject];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	R_DKIM_ALLOW(-0.20)[soleen.com:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	DKIM_TRACE(0.00)[soleen.com:+];
-	TAGGED_FROM(0.00)[bounces-90435-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90437-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -126,39 +126,68 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[pasha.tatashin@soleen.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	RCVD_COUNT_FIVE(0.00)[5];
 	NEURAL_HAM(-0.00)[-1.000];
 	TO_DN_NONE(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: 806956279F4
+	DBL_BLOCKED_OPENRESOLVER(0.00)[soleen.com:email,soleen.com:mid,soleen.com:dkim,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: 67009627A33
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-This improves type safety and aligns the in-memory file_set->count with
-the serialized count type. It avoids potential truncation or sign
-conversion mismatch issues.
+Refactoring luo_session_retrieve_fd() to avoid mixing automated
+cleanup-style guards with goto-based resource release, which is not
+recommended under the Linux kernel coding style.
 
 Reviewed-by: Pratyush Yadav (Google) <pratyush@kernel.org>
 Signed-off-by: Pasha Tatashin <pasha.tatashin@soleen.com>
 ---
- kernel/liveupdate/luo_internal.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ kernel/liveupdate/luo_session.c | 25 ++++++++++++-------------
+ 1 file changed, 12 insertions(+), 13 deletions(-)
 
-diff --git a/kernel/liveupdate/luo_internal.h b/kernel/liveupdate/luo_internal.h
-index dd53d4a7277e..ae58206f14ac 100644
---- a/kernel/liveupdate/luo_internal.h
-+++ b/kernel/liveupdate/luo_internal.h
-@@ -52,7 +52,7 @@ static inline int luo_ucmd_respond(struct luo_ucmd *ucmd,
- struct luo_file_set {
- 	struct list_head files_list;
- 	struct luo_file_ser *files;
--	long count;
-+	u64 count;
- };
+diff --git a/kernel/liveupdate/luo_session.c b/kernel/liveupdate/luo_session.c
+index 5c6cebc6e326..7b2f9cbabb05 100644
+--- a/kernel/liveupdate/luo_session.c
++++ b/kernel/liveupdate/luo_session.c
+@@ -291,25 +291,24 @@ static int luo_session_retrieve_fd(struct luo_session *session,
+ 	if (argp->fd < 0)
+ 		return argp->fd;
  
- /**
+-	guard(mutex)(&session->mutex);
+-	err = luo_retrieve_file(&session->file_set, argp->token, &file);
+-	if (err < 0)
+-		goto  err_put_fd;
++	scoped_guard(mutex, &session->mutex) {
++		err = luo_retrieve_file(&session->file_set, argp->token, &file);
++		if (err < 0) {
++			put_unused_fd(argp->fd);
++			return err;
++		}
++	}
+ 
+ 	err = luo_ucmd_respond(ucmd, sizeof(*argp));
+-	if (err)
+-		goto err_put_file;
++	if (err) {
++		fput(file);
++		put_unused_fd(argp->fd);
++		return err;
++	}
+ 
+ 	fd_install(argp->fd, file);
+ 
+ 	return 0;
+-
+-err_put_file:
+-	fput(file);
+-err_put_fd:
+-	put_unused_fd(argp->fd);
+-
+-	return err;
+ }
+ 
+ static int luo_session_finish(struct luo_session *session,
 -- 
 2.53.0
 
