@@ -1,303 +1,223 @@
-Return-Path: <linux-doc+bounces-90469-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90471-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id IG48A/SQHmodlAkAu9opvQ
-	(envelope-from <linux-doc+bounces-90469-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 10:14:44 +0200
+	id gE8tOpeWHmrPlAkAu9opvQ
+	(envelope-from <linux-doc+bounces-90471-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 10:38:47 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id A592E62A518
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 10:14:43 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 63D4A62AB04
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 10:38:47 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 46BC83021583
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 08:14:11 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 7B8FC301D4D3
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 08:37:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EAD383C415C;
-	Tue,  2 Jun 2026 08:13:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A0E783AD517;
+	Tue,  2 Jun 2026 08:37:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WfMh9fz6"
+	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="jeUbxQvJ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qv1-f53.google.com (mail-qv1-f53.google.com [209.85.219.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A986F3C198A;
-	Tue,  2 Jun 2026 08:13:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F27637CD41
+	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 08:37:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780388034; cv=none; b=PjiLsMg3HS5kKdWqJfzbaxyvRAGhw6h3CbFnptrCBhA+hbR0fhyjd0f3KUN0FwzhA423wk9RZt4e5ArUsqg+t6GXCriylwlFyfppJbcOCyKgWto+ZDFGsq5lNpJxDJfr8kEb+LhfcBL71OalDTaiYDsuMuXPp7yMjiDHVcEpxQI=
+	t=1780389454; cv=none; b=Gm2Ii/V8zyV/pUaSh3PDwlmrZgdPHi8nPTggA0xypu/TYv3aFlbpz8prCBtRefm1uUq2SZRnJ+71Hxk/5yhw+qBCAJbyOsu7gPzPx4peMjy25lEPOFIJ5gKxeiLO2zyYZrgoNcecBqi9UZVAon/7BBlKw/hQPLz63/9P6kvtc5E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780388034; c=relaxed/simple;
-	bh=UAkBV58yNoDjmMieQiWpN8AD023JH0VeV077n5TRxMA=;
-	h=MIME-Version:Content-Type:Subject:From:To:Cc:In-Reply-To:
-	 References:Date:Message-Id; b=l+gP44UKUY1zDPdgLNsNZhUefNgjKazOSzmKD/CfvYHPgSV5ZQJb7QU8YUxkLTjqcd+7r/ZjbFb8qLFEXXI8aKVaeXFAVLrNg8g0xXIUoi2hgalXB64sjY6XmC+pqETIxPwLfSopjLxzElbAd95lKPP2jf7kYlQzWa3/y/x68Io=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WfMh9fz6; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 363D11F00899;
-	Tue,  2 Jun 2026 08:13:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1780388033;
-	bh=8677rqzPwCK7BT2bqGJkDF7s4XcZqoB/M7pK9qZ0mPI=;
-	h=Subject:From:To:Cc:In-Reply-To:References:Date;
-	b=WfMh9fz62CnhrepjlqZLoJaI2CY23PyiNds+OHaCi+8uuAOcT1mIy0T88mUaIDRN7
-	 VEo98JrsdK7inKt4bTisyphkakz1/LUWeVEjGVxnQnzEQh30te7NE/d3u5dUKCU/Sp
-	 wPGEPy5r5+gvz8EDne4kJsLtakhboDBaUh9HH1h/fzo6YBwPyIwDq8hTnkE7Abl/rW
-	 rBRG2hDPLmDXN8AO9LsNJFSIriipy2mQ7gvrB5+sk5Ok3qhVEOZATuI9HYuHoPu0nm
-	 BX4SXyAoytHokJpp16Qsr/aKFFNQWEC6fE2YyxvOYDXV6suIcEVxlYjw3EVHnzoZj8
-	 HqwZWBRf5O/oQ==
+	s=arc-20240116; t=1780389454; c=relaxed/simple;
+	bh=poHSp7k/wRwcxK6tvRyRthUfYkyEmfrgLwiq0NjfV98=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=uurOigBKJffXp76Zzl4owQA2RzWh9j6w/8FSYF1iQEP9RgzpiGov1xJWnS1uu+oOq6Bh4958zH9kRRW5oTKDSuxXn5TNkKZ8J/Pp8EfBd1lFBDLUr+l/mypcYsoH5ZlM1R+vUgA0qOZpJirM53cnTomNkznFN9PiTW9qq4j4X6Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=jeUbxQvJ; arc=none smtp.client-ip=209.85.219.53
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
+Received: by mail-qv1-f53.google.com with SMTP id 6a1803df08f44-8cd45d4b7e2so32751146d6.2
+        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 01:37:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google; t=1780389452; x=1780994252; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=N2pO+fzMv1bHxu8FRKBOMPKrC8LbuYvxk/rUchVdGVI=;
+        b=jeUbxQvJ/56dUDFUH8wUhNrTEc7CXYxx5HkNMydzo8HU1sUAZT0GxYFItawoH0jPps
+         9N0jQHiTr++0/Ah1v8mXBDI1h6cjwKhcUnj2vkEMHwiojLnNA6GgJ0B/T4/AvZ2lKVH9
+         4khr+j35ZhR9ckfqu8JlVCX63q5Ib+Jpkqguo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780389452; x=1780994252;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=N2pO+fzMv1bHxu8FRKBOMPKrC8LbuYvxk/rUchVdGVI=;
+        b=lXBnuUkFDhKFdxglAKUarJMxjlNFLYe5COspOjQ0aazDqDGL3xpsIqo7ogRPVGgr+b
+         /19xbPTdbkcdXYwlid6Q/DiWQ5/pJmgKkWVTPhBKOeHrhyT9CYquaTwe7UJ2LHHmSyPP
+         eYOOaS6Rcw62X7DnQk+kHZQRYBYmt0S0mRYX2ijkWqAwU4/90grb4VXbtyUU2zRFfSIq
+         b/sbI3jo/WHFhvjGiSt+3Z97zPZWP5cbbmEx08sM46LAz3GTifmdHn7yfRLuxIOhvCcc
+         hIk1LIhj4RrqV7OugBPOSPS5478tnYR074rIVerqTCs9idvsb0Y7QBCZkNyIg4KwhTIl
+         hwqg==
+X-Forwarded-Encrypted: i=1; AFNElJ+PiiTLfwQfkreu/7BkAYZClZdY7mnvnXBirUyl8oaQELDlJF5LAl1P6jXIKaOjc9bAiO67mdHd8ng=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyalTbY64QozbfZup/X+UUPWQCBNuhv4DCpIaV9jBEngUNww0L8
+	61SZJmg3hK+S7gIefVTpN+BqlFH8RbDjF6d1YyaZYhONmpsHPhJUL3E0F29LkS9jTxZ9jfYqHpJ
+	6TR0XaA==
+X-Gm-Gg: Acq92OHyRVO1kRyCA5Q9OLMwjNE/HLxcrGpXVMf7ygGs4UphONIaH5GTXtRN0lICPRC
+	7YDRfqiRw0H3C7mvfnAWwYD5QRFoHHvCgiaPK924rk3BGhlJu7pYJuVFNnzllaosG7NSTSY3Jss
+	OUFaXE9mQr98V2UMPqb/QzAkBpUNSknUNtvJ9oYXU+DU5OUno5+5UA2Hup0cBZAq8gMduW6mY2N
+	MhQElXOv85fsf9+hVHX2fmZmx22Sv7AZw6UvrblBydwnIA3Ry7NZEOoJ/eRw3ofQLxityJLvARN
+	R91FdYnhmAYTm9o1t+j2CS48n/Cc7eqMQk2NqORg4oHov4CvtyYffOEg9EPn8l7AXS4FlsETGtV
+	8shwJ9M2sCvjCG1B6uqypyErPCPtBzm0clnvy0aVvGFqBINNJdLK9vey3CWkZAP3PyOT8xhkrxf
+	ouOZ4uqKn/yJzszI5r33On3edYGfx3gB9IKlIQ5M5Wloy63Y1SKpItiZR0CkCL7g0wqZarT4glW
+	Dzk7DwaLYI=
+X-Received: by 2002:a05:6214:3012:b0:8ae:5fcc:8069 with SMTP id 6a1803df08f44-8ccefd8d53amr253818116d6.22.1780389452064;
+        Tue, 02 Jun 2026 01:37:32 -0700 (PDT)
+Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com. [209.85.160.181])
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-8ccea042bb5sm114908786d6.8.2026.06.02.01.37.31
+        for <linux-doc@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 02 Jun 2026 01:37:31 -0700 (PDT)
+Received: by mail-qt1-f181.google.com with SMTP id d75a77b69052e-50e61648f10so2471cf.1
+        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 01:37:31 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AFNElJ9ahQecOUe7ZV6NXNGbNPr/rUW6mytPuhOWDGQZqLvz07y51QT9KIeSVs6MMMxlkMMOU/NB7mYyqDI=@vger.kernel.org
+X-Received: by 2002:ac8:7209:0:b0:516:4f62:85e7 with SMTP id
+ d75a77b69052e-517670f60e6mr7875761cf.18.1780389450588; Tue, 02 Jun 2026
+ 01:37:30 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v4 07/13] kho: add support for linked-block
- serialization
-From: Mike Rapoport <rppt@kernel.org>
-To: Pasha Tatashin <pasha.tatashin@soleen.com>
-Cc: linux-kselftest@vger.kernel.org, rppt@kernel.org, shuah@kernel.org, 
- akpm@linux-foundation.org, linux-mm@kvack.org, skhan@linuxfoundation.org, 
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, corbet@lwn.net, 
- dmatlack@google.com, kexec@lists.infradead.org, pratyush@kernel.org, 
- skhawaja@google.com, graf@amazon.com
-In-Reply-To: <20260530221938.115978-8-pasha.tatashin@soleen.com>
-References: <20260530221938.115978-1-pasha.tatashin@soleen.com>
- <20260530221938.115978-8-pasha.tatashin@soleen.com>
-Date: Tue, 02 Jun 2026 11:13:34 +0300
-Message-Id: <178038801491.119771.18384706761138506132.b4-review@b4>
-X-Mailer: b4 0.15.2
-X-Spamd-Result: default: False [-1.66 / 15.00];
+References: <20260528103215.505795-1-tzungbi@kernel.org> <CAJZ5v0gc7AtOjWd+cg6tFgzPBovu=wmYmavjaRRjTdNNd8q-0g@mail.gmail.com>
+ <ah47N8Ng9zfcASmk@google.com>
+In-Reply-To: <ah47N8Ng9zfcASmk@google.com>
+From: Tomasz Figa <tfiga@chromium.org>
+Date: Tue, 2 Jun 2026 17:37:13 +0900
+X-Gmail-Original-Message-ID: <CAAFQd5Drvq0iPAb2Ly=K7WLOmbRAcLY4TzZxHmhzarK4cvx1xA@mail.gmail.com>
+X-Gm-Features: AVHnY4IK1BCekzEUvFQ7W25XhRgP5hRYDeCrICdpzLPF12YauXFtWy2YZIHikXM
+Message-ID: <CAAFQd5Drvq0iPAb2Ly=K7WLOmbRAcLY4TzZxHmhzarK4cvx1xA@mail.gmail.com>
+Subject: Re: [PATCH] PM: sleep: Allow disabling DPM watchdog by default
+To: Tzung-Bi Shih <tzungbi@kernel.org>
+Cc: "Rafael J. Wysocki" <rafael@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Danilo Krummrich <dakr@kernel.org>, 
+	Shuah Khan <skhan@linuxfoundation.org>, Pavel Machek <pavel@kernel.org>, 
+	Len Brown <lenb@kernel.org>, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-pm@vger.kernel.org, driver-core@lists.linux.dev
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	DMARC_POLICY_ALLOW(-0.50)[chromium.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[chromium.org:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-90471-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-90469-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[chromium.org:+];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rppt@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FROM_NEQ_ENVFROM(0.00)[tfiga@chromium.org,linux-doc@vger.kernel.org];
+	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	TAGGED_RCPT(0.00)[linux-doc];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,soleen.com:email]
-X-Rspamd-Queue-Id: A592E62A518
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,chromium.org:dkim]
+X-Rspamd-Queue-Id: 63D4A62AB04
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Sat, 30 May 2026 22:19:32 +0000, Pasha Tatashin <pasha.tatashin@soleen.com> wrote:
-> diff --git a/include/linux/kho_block.h b/include/linux/kho_block.h
-> new file mode 100644
-> index 000000000000..5e6b87b1befa
-> --- /dev/null
-> +++ b/include/linux/kho_block.h
-> @@ -0,0 +1,79 @@
-> [ ... skip 19 lines ... ]
-> +	struct list_head list;
-> +	struct kho_block_header_ser *ser;
-> +};
-> +
-> +/**
-> + * struct kho_block_set - A set of blocks that belong to the same object.
+On Tue, Jun 2, 2026 at 11:09=E2=80=AFAM Tzung-Bi Shih <tzungbi@kernel.org> =
+wrote:
+>
+> On Mon, Jun 01, 2026 at 08:39:42PM +0200, Rafael J. Wysocki wrote:
+> > On Thu, May 28, 2026 at 12:32=E2=80=AFPM Tzung-Bi Shih <tzungbi@kernel.=
+org> wrote:
+> > > diff --git a/drivers/base/power/main.c b/drivers/base/power/main.c
+> > > index e1b550664bab..4f92905f3edf 100644
+> > > --- a/drivers/base/power/main.c
+> > > +++ b/drivers/base/power/main.c
+> > > @@ -527,6 +527,20 @@ module_param(dpm_watchdog_all_cpu_backtrace, boo=
+l, 0644);
+> > >  MODULE_PARM_DESC(dpm_watchdog_all_cpu_backtrace,
+> > >                  "Backtrace all CPUs on DPM watchdog timeout");
+> > >
+> > > +#ifdef CONFIG_DPM_WATCHDOG_DEFAULT_ENABLED
+> > > +static unsigned int __read_mostly dpm_watchdog_enabled =3D 1;
+> > > +#else
+> > > +static unsigned int __read_mostly dpm_watchdog_enabled;
+> > > +#endif
+> > > +
+> > > +static int __init dpm_watchdog_setup(char *str)
+> > > +{
+> > > +       if (kstrtouint(str, 0, &dpm_watchdog_enabled) =3D=3D 0)
+> > > +               return 1;
+> > > +       return 0;
+> > > +}
+> > > +__setup("dpm_watchdog_enabled=3D", dpm_watchdog_setup);
+> >
+> > You might as well use a module parameter to allow this to be set or
+> > clear at run time.  Is there a particular reason why you only want it
+> > to be enabled or disabled via the kernel command line?
+>
+> Thanks for the suggestion.  Mainly because in our use cases, we only need
+> to set it once at boot time.
+>
+> Also, I was wondering if we need to consider potential races if the flag
+> can be set at runtime.  E.g.:
+> 1) The flag is set.
+> 2) dpm_watchdog_set() is called and the timer is started.
+> 3) The flag is then unset.
+> 4) The subsequent dpm_watchdog_clear() isn't stop the timer.
+>
+> Given this, would you still suggest providing the module parameter for
+> completeness?
 
-"same object" sounds off to me. The blocks belong to the same module?
-user?
+Would that lead to anything bad, though? If I'm remembering correctly,
+would that mean that any already ongoing PM operations would still be
+subject to the timer, but not any new ones.
 
-Thoughts?
+My suggestion would also be to actually make the timeout and warning
+timeout configurable at runtime.
 
-> + * @blocks:          The list of serialization blocks (struct kho_block).
-> + * @nblocks:         The number of allocated serialization blocks.
-> + * @head_pa:         Physical address of the first block header.
-> + * @entry_size:      The size of each entry in the blocks.
-
-I think it's "... entry in a block"
-
-> [ ... skip 42 lines ... ]
-> +
-> +void kho_block_it_init(struct kho_block_it *it, struct kho_block_set *bs);
-> +void *kho_block_it_next(struct kho_block_it *it);
-> +void *kho_block_it_read(struct kho_block_it *it);
-> +void *kho_block_it_prev(struct kho_block_it *it);
-> +void kho_block_it_finalize(struct kho_block_it *it);
-
-These operate on block sets, should be reflected in the names.
-Can be kho_blocks_ to avoid too long names.
+Best,
+Tomasz
 
 >
-> diff --git a/kernel/liveupdate/kho_block.c b/kernel/liveupdate/kho_block.c
-> new file mode 100644
-> index 000000000000..a4e650af946f
-> --- /dev/null
-> +++ b/kernel/liveupdate/kho_block.c
-> @@ -0,0 +1,384 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +
-> +/*
-> + * Copyright (c) 2026, Google LLC.
-> + * Pasha Tatashin <pasha.tatashin@soleen.com>
-> + */
-> +
-> +/**
-> + * DOC: KHO Serialization Blocks
-> + *
-> + * KHO provides a mechanism to preserve stateful data across a kexec handover
-> + * by serializing it into memory blocks. This file provides the common
-
-"This file" does not look good in HTML docs.
-
-> [ ... skip 15 lines ... ]
-> +
-> +/*
-> + * Safeguard limit for the number of serialization blocks. This is used to
-> + * prevent infinite loops and excessive memory allocation in case of memory
-> + * corruption in the preserved state.
-> + */
-
-Can you add how much memory it is and how many entries with, say, 4 u64
-it can accommodate?
-
-> [ ... skip 13 lines ... ]
-> +{
-> +	if (unlikely(!bs->count_per_block)) {
-> +		bs->count_per_block = (KHO_BLOCK_SIZE -
-> +				       sizeof(struct kho_block_header_ser)) /
-> +				      bs->entry_size;
-> +		WARN_ON(!bs->count_per_block);
-
-Don't you want to set count_per_block in _init()?
-
-> [ ... skip 29 lines ... ]
-> +	if (!block)
-> +		return -ENOMEM;
-> +
-> +	block->ser = ser;
-> +	last = list_last_entry_or_null(&bs->blocks, struct kho_block, list);
-> +	list_add_tail(&block->list, &bs->blocks);
-
-No locks?
-
-> [ ... skip 12 lines ... ]
-> + * @bs:    The block set.
-> + * @count: The current number of entries.
-> + *
-> + * This function handles the dynamic expansion of a block set. It allocates
-> + * and links a new serialization block if the provided entry count matches
-> + * the current total capacity of the set.
-
-This is a weird semantics for a generic API. I'd expect _grow() would
-add count - current_count blocks.
-
-> [ ... skip 25 lines ... ]
-> +}
-> +
-> +/**
-> + * kho_block_shrink - Conditionally destroy the last block in a block set.
-> + * @bs:              The block set.
-> + * @count:           The current number of entries across all blocks.
-
-Maybe 
- 	... of valid entries?
-
-> + *
-> + * This function checks if the last block in the set is redundant based on the
-> + * total entry count and the capacity of the preceding blocks. If the entry
-> + * count can be accommodated by the blocks that come before the last one, the
-> + * last block is destroyed and removed from the set.
-
-This should mention that it's the caller responsibility to ensure that
-entries are removed in the right order.
-
-> [ ... skip 49 lines ... ]
-> +
-> +		fast = phys_to_virt(fast->next);
-> +		slow = phys_to_virt(slow->next);
-> +
-> +		if (slow == fast) {
-> +			pr_err("Cyclic list detected\n");
-
-Maybe "block set is corrupted"?
-
-> +			return false;
-> +		}
-> +	}
-> +
-> +	return true;
-> +}
-> +
-> +/**
-> + * kho_block_restore - Restore a block set from a physical address.
-> + * @bs:      The block set to restore.
-> + * @head_pa: Physical address of the first block header.
-
-I'd mention that the block set should be allocated and initialized
-
-> [ ... skip 10 lines ... ]
-> +	bs->incoming = true;
-> +	if (!head_pa)
-> +		return 0;
-> +
-> +	bs->head_pa = head_pa;
-> +	if (!kho_cyclic_blocks_check(bs)) {
-
-if (kho_block_set_cyclic()) 
-
-reads nicer IMO
-
-> [ ... skip 87 lines ... ]
-> +{
-> +	if (!it->block)
-> +		return NULL;
-> +
-> +	if (it->i == kho_block_count_per_block(it->bs)) {
-> +		it->block->ser->count = it->i;
-
-Why iterator updates ser->count?
-
-> +		if (list_is_last(&it->block->list, &it->bs->blocks))
-> +			return NULL;
-> +		it->block = list_next_entry(it->block, list);
-> +		it->i = 0;
-> +	}
-> +
-> +	return (void *)(it->block->ser + 1) + (it->i++ * it->bs->entry_size);
-
-In a month we'll need an LLM's help to understand what it does.
-
-> +}
-> +
-> +/**
-> + * kho_block_it_read - Return the next entry slot for reading.
-> + * @it: The block iterator.
-
-And what is the conceptual difference between this and _it_next()?
-
-> [ ... skip 49 lines ... ]
-> + * @it: The block iterator.
-> + */
-> +void kho_block_it_finalize(struct kho_block_it *it)
-> +{
-> +	if (it->block)
-> +		it->block->ser->count = it->i;
-
-So, it looks like the intention of _it_next is for write, and this ends a
-write iteration.
-
-I think the names should be adjusted to make it clearer.
-
--- 
-Sincerely yours,
-Mike.
-
+> >
+> > > +
+> > >  /**
+> > >   * dpm_watchdog_handler - Driver suspend / resume watchdog handler.
+> > >   * @t: The timer that PM watchdog depends on.
+> > > @@ -570,6 +584,9 @@ static void dpm_watchdog_set(struct dpm_watchdog =
+*wd, struct device *dev)
+> > >  {
+> > >         struct timer_list *timer =3D &wd->timer;
+> > >
+> > > +       if (!dpm_watchdog_enabled)
+> > > +               return;
+> > > +
+> > >         wd->dev =3D dev;
+> > >         wd->tsk =3D current;
+> > >         wd->fatal =3D CONFIG_DPM_WATCHDOG_TIMEOUT =3D=3D CONFIG_DPM_W=
+ATCHDOG_WARNING_TIMEOUT;
+> > > @@ -588,6 +605,9 @@ static void dpm_watchdog_clear(struct dpm_watchdo=
+g *wd)
+> > >  {
+> > >         struct timer_list *timer =3D &wd->timer;
+> > >
+> > > +       if (!dpm_watchdog_enabled)
+> > > +               return;
+> > > +
+> > >         timer_delete_sync(timer);
+> > >         timer_destroy_on_stack(timer);
+> > >  }
 
