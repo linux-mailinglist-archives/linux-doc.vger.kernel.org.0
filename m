@@ -1,84 +1,83 @@
-Return-Path: <linux-doc+bounces-90577-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90580-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id SngFA6peH2rqlAAAu9opvQ
-	(envelope-from <linux-doc+bounces-90577-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 00:52:26 +0200
+	id vffaCgVfH2oOlQAAu9opvQ
+	(envelope-from <linux-doc+bounces-90580-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 00:53:57 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9CC52632A13
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 00:52:25 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9BB2A632A79
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 00:53:56 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b="hytj/eK2";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90577-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-90577-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=gmail.com header.s=20251104 header.b="JJtK/d5E";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90580-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90580-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=gmail.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id DB42830C5A41
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 22:48:33 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id BC9CE30F4958
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 22:48:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 958223CAA31;
-	Tue,  2 Jun 2026 22:48:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5ED753CAE8F;
+	Tue,  2 Jun 2026 22:48:41 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 89A303CA48E
-	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 22:48:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C37533C8737
+	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 22:48:32 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780440513; cv=none; b=jIihHHbkO31dO2BhO/sL+QtasQLWGxqjXX/slxyq7yD2I3XfAW5Gf3LhaCksrcjmsD5Nr8OEll03iDG5yrjS2n77BlzmaDgC9qFLmE5FRJ3WCRTykst36fh2eq41Cco+6Ed2zmij3YG/PgUmXCjcEvPy/JztVeS9ZhHXMDf6QkU=
+	t=1780440521; cv=none; b=F4ayTxwQtSp0Is7aFDHs89ysnN2+bL98dKPp1uoaJxS37cj+IjiunrUnecL+yZ1Np2E4smiOWZp7MEeezobgeOTEMh2dcm7YlXORT/hpeV1ZSWnkCSA/8ZoEgk2hnFHNVQy9Y6Fc0proDeKxJkp6tgjo4sLIr8uxad09EWpIMpM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780440513; c=relaxed/simple;
-	bh=+UeoPcUgk4vgSL6bIOBGSbmEMWJGj+kcMG3jKhNS13E=;
+	s=arc-20240116; t=1780440521; c=relaxed/simple;
+	bh=dHDLAmmZkSEwCrVjFAbC9GSDOGfjrhwtK5sTHYbJuoQ=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=CesTZ+8GsnRPSheWVQK6UeA6niXK0I0iW/nwdjCjww9tvOlmULd6uOuCEuLSsmXb9wceBtIa1ZRjK+SE/H8RNO6WQ+8F71dyInSk5CyeNd6ZjgGBo6ZUEQdrehuot/ZKYrl3avv7J8nTHwBKGQoSAEaUyCFx06dz+1DM69wOSMs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=hytj/eK2; arc=none smtp.client-ip=209.85.221.52
-Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-45eedcdaeaaso4016017f8f.3
-        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 15:48:31 -0700 (PDT)
+	 In-Reply-To:To:Cc; b=VNWvQ28+TUHzzXbtHjtWRsPPigvbBaH8tzMy+VU5vahLWVG+fyL/JvDhK31xgyv5qDUStkxy5euMXT00CxB1ZNHuAxTUkN/2RzPGN0ghDXbEiZk7nUlOlmOe4lcxPjbphPtMmfdNICzosNMuO3WqrMyjmF2WKxdwx0Hz4E3wBHM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=JJtK/d5E; arc=none smtp.client-ip=209.85.128.47
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-490a765d410so34380485e9.1
+        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 15:48:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780440508; x=1781045308; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1780440511; x=1781045311; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=n9btmEwYy4mA0lJ0Eq1DfE2LNHPtUWEmA56rbSRa3u8=;
-        b=hytj/eK2esyu8IhuoWC8R10aNxnYG6uDsOhjwECdEynMeCWdBKb8MvD7Ng+B5VfRS4
-         Zy0IGJlzWG2U8Re6CWbDvkBrdI6hL834RWcWlhQruujjcTNm/hwEummTdE6jyUM11Gqi
-         EVcH5qdfkmDSzjdjW09DpCynsfaaE1UcawCQeQKoTJvPBVPFXMjYc2Drr9IR1pPu7mW1
-         8KM9fkmycrt86aMjqV4X59jhJx1C5lNb1eOiYs8P5YYnNXIQx+Rz0KRX1ay0S5tECUnK
-         b7gYREbYKq0lXcLCDk3EFGdnuk9nQvTaKqopBLb7RErK1YyCRzqRmdm2QA88inZB2MFf
-         ZC6g==
+        bh=Ks10Mou4dS+uM/gF5zD1xC7hoNz/3aUwUMnLMPkjLt0=;
+        b=JJtK/d5EfKNWAwcRClNaXWtnneknh6as8UV7UfZ1nlOt9R4ByRtwrZZbnleZ8OzdvH
+         7RSqDpnwe/AnKVzTg6AczAhrHIzIuZ/sag8gLLXzKVTj6Qf+Vaw1py0CWeS9rZpRsFY3
+         VSIMWOQeOFynsoW3YupToJCPhnzJbnHheHV47DkIEhdARkZLANRaPy13bqiNQt1Acx59
+         yPfhAC+WgYGThLwY8nRa4ixOgiERdy/B6ENABJ61/0uOabs1WqAEvTLIUggFowtW1QsG
+         B5b0fPJ1l/HM6Mp8h+MYQwaeSgGubndc0XwawyUWUm+nnxXpQ7xcoi/n0R54htqcskL5
+         mf3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780440508; x=1781045308;
+        d=1e100.net; s=20251104; t=1780440511; x=1781045311;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=n9btmEwYy4mA0lJ0Eq1DfE2LNHPtUWEmA56rbSRa3u8=;
-        b=AsUdtRViFZBfeW4nGyXoghgeo0IqgOBXK9Iud6OCoqRg83dOZmfWN7DjIP/XReoGwz
-         Xug/MRuX0oy+LvpxZwjZaIsANg4kdkBDBcASzAw7NEeCafxl3y9miykYX/dwTeQujA3+
-         uuRbiZApq/fh80mtuNoJ4V+ctpQvW/DPBtK1GoLOwsG74r65pPKs9fdWeMjh5Ao3PTDg
-         u3HKGOvb4z3GLQLZX3nWLh4KIT+FJ53rV/3z695/ZjI8myebj96ErOpKo6Ma4JYpCSvl
-         BOxOolKwV2m5W+Jci4ArbQbeYuSJ8Obbh1JgFYJ2OUsk0oMvDdqYnVGJoClgU3D27l2m
-         Ggfw==
-X-Gm-Message-State: AOJu0YwXetWxZIxomm3KOKRr+lZipr7uu87K0a5Vn5wn7yV9Y/fqM0ZC
-	CKNVtwcJwqsFHJriDlc2EDObPJe/xPqm894XYvmrJeEJuC8FiFeBQPrn
-X-Gm-Gg: Acq92OGOCCV6jztR1RtU33KhRge5lyGEdNjInh5cRyf47L6RFu5xx91wOfLVeWqRalk
-	UK1Lr3qfZ5y6feykTfdAjrvLVlAH+2GAH4tQYGqrcDqMc1dhC1Y6z1oSOfg3AOh+PKA+gZY1/RV
-	Ek2BmZy2memn7iL+tImLmI3peyXTuTn2vZZGLD9OQEvbZ6BmHQ/QC6nv+ptrlDjybPHrapuEIt5
-	IRj4C/jZ4I7f7y7BEeMFJykQhK4Q99NIlLFmPrYVhC566hjwdOIc6fTFOsLXPMmjsAsM8TvcIKT
-	BEsC9BHYZZyx61tg/cSNJuzPhaQ1TpMb5zSosj8J/Ej4/ilWP74POYXk1WqyJt9VJfH8rk5OvYg
-	CeYwQQPnFp2ArCvEpXOZiXL8czQgwnp87levxMpqo1dQrqrcRgY39P9S88anhlq0WSzr0XWdTBt
-	iilYBp4xwF2gR9byApI2Bb9dohDV5jQAOaYbeArMeaSw==
-X-Received: by 2002:a05:6000:2081:b0:45e:ed7e:f900 with SMTP id ffacd0b85a97d-4602178ae06mr723209f8f.6.1780440508010;
-        Tue, 02 Jun 2026 15:48:28 -0700 (PDT)
+        bh=Ks10Mou4dS+uM/gF5zD1xC7hoNz/3aUwUMnLMPkjLt0=;
+        b=V4B9+456IDzn4EBJHgFsE3zxU2ButoPNSlG1hM1M+2O8HrRer4Vh+ghEd32ccehX3V
+         Fen2pN22/fOnN92vL/NAj+yS5NO+t/ZOIddxIg8bKOcZG2kP0iw/6+PahgNXBugEdg8q
+         C+owwQXrxqhk1hnJReglyR1mss2bKOXME9fUy42oax3sYT2/v/ilRCMRGmNCF64qBdzO
+         zmJw5WHEfGJxE9HgdffTdJSHVV+mg2Q0zrnbPcTOkY2QPY9hkPPJiqqxlFcu/9aJX0fo
+         +bbXSP3uiMlhWx7Xz6HDfFMovuEOHXUuqCo8lPt4jmQW23vxzJ4ZGBbfYSqYk9kciOyU
+         DPDw==
+X-Gm-Message-State: AOJu0YxrDrw1BKET1JX/+HyfU23/3ludgcYpDZrSH3T/kROZsN37PtOO
+	ZgtJrmZh2qzVq7wyCODXgtHQupgLWcKDHxviNPnUDgpkWNzxclc9pwOY
+X-Gm-Gg: Acq92OHr4zLqRtS3HC466UabIdz3B8QYu556iK4sJp7xdgSx0Zy4L6KBXsb1MXzGFSc
+	UTupozJG/Ib0unB8uYPlouA/1a9VBZ9gSdLBFfCMYva9DVadA3s3Q5gLGHZxJyniivXT6MXr6Hs
+	dbY3Cwl06kMV9LuKhYFumDYRxBCb50dRi8yzgAxmhRMnoFcKmN1hxeIFl96+ahUqgbVa278c9kW
+	aje+aA4SNqkFInkRcoV721+9TX7JgA/5BvBuwnoCA2Jt12qaFo6qawT774FZHanDHkpUxsOLm34
+	tPLOzb4+kZMVlxiBa/77dWkMSHz7IuRd1l95Z1FWtJz5eb0WwBqgECo8RFCZCxqm178znufCrKG
+	mkjMrzvpcNsndBuXqaJBmgQisFADgqrkwTyHpMK1DbjndAN+kuCf46fKBdqrssxVmfwCZ3E6uKA
+	MrvfXFvbIYRrNKxf0dDQedHchqHQ/bd2IyO+RhmhRIcQ==
+X-Received: by 2002:a05:600c:1c1e:b0:490:3d62:f5df with SMTP id 5b1f17b1804b1-490b5ed10b4mr12433385e9.30.1780440511256;
+        Tue, 02 Jun 2026 15:48:31 -0700 (PDT)
 Received: from [172.16.188.153] ([213.181.114.83])
-        by smtp.googlemail.com with ESMTPSA id ffacd0b85a97d-4601f2f2710sm1999791f8f.14.2026.06.02.15.48.24
+        by smtp.googlemail.com with ESMTPSA id ffacd0b85a97d-4601f2f2710sm1999791f8f.14.2026.06.02.15.48.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Jun 2026 15:48:27 -0700 (PDT)
+        Tue, 02 Jun 2026 15:48:30 -0700 (PDT)
 From: Jim Cromie <jim.cromie@gmail.com>
-Date: Tue, 02 Jun 2026 22:48:03 +0000
-Subject: [PATCH v4 06/25] vmlinux.lds.h: remove redundant ALIGN(8)
- directives
+Date: Tue, 02 Jun 2026 22:48:04 +0000
+Subject: [PATCH v4 07/25] dyndbg.lds.S: fix lost dyndbg sections in modules
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -87,7 +86,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260602-dd-maint-2-v4-6-19a1445585a8@gmail.com>
+Message-Id: <20260602-dd-maint-2-v4-7-19a1445585a8@gmail.com>
 References: <20260602-dd-maint-2-v4-0-19a1445585a8@gmail.com>
 In-Reply-To: <20260602-dd-maint-2-v4-0-19a1445585a8@gmail.com>
 To: Jonathan Corbet <corbet@lwn.net>, 
@@ -104,11 +103,11 @@ Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
  linux-kselftest@vger.kernel.org, dri-devel@lists.freedesktop.org, 
  Jim Cromie <jim.cromie@gmail.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780440488; l=3579;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780440488; l=5103;
  i=jim.cromie@gmail.com; s=20260203; h=from:subject:message-id;
- bh=+UeoPcUgk4vgSL6bIOBGSbmEMWJGj+kcMG3jKhNS13E=;
- b=8YvEAPoW9Zb0SdA8n29Rq4/x+ymnjVU2aF9GW/hlp7J8X4pImXdIV61FGkChWr4t0qJXiM8yF
- 7JUjhv70j7kA8WQegySLYFgP/s98yMXecJXL4zXvv+/zRUqWaGh7XSD
+ bh=dHDLAmmZkSEwCrVjFAbC9GSDOGfjrhwtK5sTHYbJuoQ=;
+ b=LgE/Ax74P2Yjlnhsm6MH1wa6Hvkqc9ItHp5m4Y2LZojY/pi9asSAVhoGDgkZOORwDx8iHvhdp
+ AwQ4fgRjXD0CyFUu4vc9iMWWwynZddzKwVQI/zAzdr55WpWVsA3sA3a
 X-Developer-Key: i=jim.cromie@gmail.com; a=ed25519;
  pk=C6E5ODlPQo7ZBynATXH9wg7K6HxP0pIXyf4s38Qw0XE=
 X-Rspamd-Action: no action
@@ -116,13 +115,13 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	FROM_HAS_DN(0.00)[];
-	TAGGED_FROM(0.00)[bounces-90577-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90580-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS(0.00)[m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:arnd@arndb.de,m:jbaron@akamai.com,m:mcgrof@kernel.org,m:petr.pavlu@suse.com,m:da.gomez@kernel.org,m:samitolvanen@google.com,m:atomlin@atomlin.com,m:akpm@linux-foundation.org,m:shuah@kernel.org,m:maarten.lankhorst@linux.intel.com,m:mripard@kernel.org,m:tzimmermann@suse.de,m:airlied@gmail.com,m:simona@ffwll.ch,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-arch@vger.kernel.org,m:linux-modules@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:jim.cromie@gmail.com,m:jimcromie@gmail.com,s:lists@lfdr.de];
 	FORGED_SENDER(0.00)[jimcromie@gmail.com,linux-doc@vger.kernel.org];
@@ -142,124 +141,155 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	DKIM_TRACE(0.00)[gmail.com:+];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,arndb.de:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,suse.com:email,akamai.com:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 9CC52632A13
+X-Rspamd-Queue-Id: 9BB2A632A79
 
-The BOUNDED_SECTION_PRE_LABEL and BOUNDED_SECTION_POST_LABEL macros
-were recently updated to inherently enforce an 8-byte alignment. This
-makes the explicit '. = ALIGN(8);' statements preceding 'naked' macro
-calls in vmlinux.lds.h redundant.
+With CONFIG_DRM_USE_DYNAMIC_DEBUG=y, several build configs had
+problems with __dyndbg* sections getting lost in drm drivers.  Fix
+this by following the model demonstrated in codetag.lds.h.
 
-Remove these redundant alignment directives to clean up the file and
-clarify that the macros handle their own alignment padding.
+Introduce include/asm-generic/dyndbg.lds.h, to bundle dynamic-debug's
+multiple sections together, into 2 macros:
 
+vmlinux.lds.h DATA_DATA: move the 2 BOUNDED_SECTION_BY(__dyndbg*)
+calls into dyndbg.lds.h DYNDBG_SECTIONS(). vmlinux.lds.h now includes
+the new file and calls the new macro.
+
+MOD_DYNDBG_SECTIONS keeps the 2 sections by name, aligns them and sets
+the output address to 0 when the sections are empty.
+
+dyndbg.lds.h includes (reuses) bounded-section.lds.h
+
+scripts/module.lds.S: now calls MOD_DYNDBG_SECTIONS right before the
+CODETAG macro (consistent with their placements in vmlinux.lds.h), and
+also includes dyndbg.lds.h
+
+This isolates vmlinux.lds.h from further __dyndbg section additions.
+
+CC: Arnd Bergmann <arnd@arndb.de>
 Signed-off-by: Jim Cromie <jim.cromie@gmail.com>
+Reviewed-by: Petr Pavlu <petr.pavlu@suse.com>
 ---
- include/asm-generic/vmlinux.lds.h | 13 -------------
- 1 file changed, 13 deletions(-)
+v3: move #includes to top, drop extra ALIGN(8) in DYNDBG_SECTIONS, add RvBy
 
+v2: Address linker script review feedback for relocatable modules.
+
+MOD_DYNDBG_SECTIONS() used the BOUNDED_SECTION_BY() macro, which
+proved problematic for kernel modules for two reasons:
+
+1. Unwanted Empty Sections:
+   BOUNDED_SECTION_BY() automatically generates `__start` and `__stop`
+   symbols. When applied to `MOD_DYNDBG_SECTIONS()`, the linker assumes
+   the sections are populated due to the symbol definitions, forcing an
+   empty `__dyndbg` and `__dyndbg_classes` output section in every
+   compiled module, even those without dynamic debug configuration.
+   Since the module loader uses `section_objs()` to locate data via
+   ELF headers instead of relying on `__start`/`__stop` symbols, these
+   assignments are completely unnecessary.
+
+2. Non-zero Output Addresses:
+   During relocatable linking (e.g., `ld.bfd -r`), omitting an explicit
+   base address causes the section to inherit the current location
+   counter. This results in non-zero sh_addr values in `.ko` files,
+   which is confusing, degrades compressibility, and can cause issues
+   with external tools parsing the ELF.
+
+Fix both issues by dropping `BOUNDED_SECTION_BY()` in favor of a simple
+`KEEP(*(...))` constraint and explicitly defining the sections with a `0`
+base address: `__dyndbg 0 : ALIGN(8) { ... }`.
+
+fixup-inc-vml
+---
+ MAINTAINERS                       |  1 +
+ include/asm-generic/dyndbg.lds.h  | 18 ++++++++++++++++++
+ include/asm-generic/vmlinux.lds.h |  6 ++----
+ scripts/module.lds.S              |  2 ++
+ 4 files changed, 23 insertions(+), 4 deletions(-)
+
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 9ec290e38b44..6cf80e7ac039 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -9083,6 +9083,7 @@ DYNAMIC DEBUG
+ M:	Jason Baron <jbaron@akamai.com>
+ M:	Jim Cromie <jim.cromie@gmail.com>
+ S:	Maintained
++F:	include/asm-generic/dyndbg.lds.h
+ F:	include/linux/dynamic_debug.h
+ F:	lib/dynamic_debug.c
+ F:	lib/test_dynamic_debug.c
+diff --git a/include/asm-generic/dyndbg.lds.h b/include/asm-generic/dyndbg.lds.h
+new file mode 100644
+index 000000000000..9d8951bef688
+--- /dev/null
++++ b/include/asm-generic/dyndbg.lds.h
+@@ -0,0 +1,18 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#ifndef __ASM_GENERIC_DYNDBG_LDS_H
++#define __ASM_GENERIC_DYNDBG_LDS_H
++
++#include <asm-generic/bounded_sections.lds.h>
++#define DYNDBG_SECTIONS()					\
++	BOUNDED_SECTION_BY(__dyndbg, ___dyndbg)			\
++	BOUNDED_SECTION_BY(__dyndbg_classes, ___dyndbg_classes)
++
++#define MOD_DYNDBG_SECTIONS()						\
++	__dyndbg 0 : ALIGN(8) {						\
++		KEEP(*(__dyndbg))					\
++	}								\
++	__dyndbg_classes 0 : ALIGN(8) {					\
++		KEEP(*(__dyndbg_classes))				\
++	}
++
++#endif /* __ASM_GENERIC_DYNDBG_LDS_H */
 diff --git a/include/asm-generic/vmlinux.lds.h b/include/asm-generic/vmlinux.lds.h
-index 145beb14b94b..2b1becd809be 100644
+index 2b1becd809be..0a1994bb8793 100644
 --- a/include/asm-generic/vmlinux.lds.h
 +++ b/include/asm-generic/vmlinux.lds.h
-@@ -228,7 +228,6 @@
+@@ -52,6 +52,7 @@
  
- #ifdef CONFIG_KPROBES
- #define KPROBE_BLACKLIST()				\
--	. = ALIGN(8);					\
- 	BOUNDED_SECTION(_kprobe_blacklist)
- #else
- #define KPROBE_BLACKLIST()
-@@ -244,7 +243,6 @@
+ #include <asm-generic/bounded_sections.lds.h>
+ #include <asm-generic/codetag.lds.h>
++#include <asm-generic/dyndbg.lds.h>
  
- #ifdef CONFIG_EVENT_TRACING
- #define FTRACE_EVENTS()							\
+ #ifndef LOAD_OFFSET
+ #define LOAD_OFFSET 0
+@@ -344,10 +345,7 @@
+ 	*(.data..do_once)						\
+ 	STRUCT_ALIGN();							\
+ 	*(__tracepoints)						\
+-	/* implement dynamic printk debug */				\
 -	. = ALIGN(8);							\
- 	BOUNDED_SECTION(_ftrace_events)					\
- 	BOUNDED_SECTION_BY(_ftrace_eval_map, _ftrace_eval_maps)
- #else
-@@ -261,7 +259,6 @@
+-	BOUNDED_SECTION_BY(__dyndbg_classes, ___dyndbg_classes)		\
+-	BOUNDED_SECTION_BY(__dyndbg, ___dyndbg)				\
++	DYNDBG_SECTIONS()						\
+ 	CODETAG_SECTIONS()						\
+ 	LIKELY_PROFILE()		       				\
+ 	BRANCH_PROFILE()						\
+diff --git a/scripts/module.lds.S b/scripts/module.lds.S
+index b62683061d79..2e62dc5bd5d4 100644
+--- a/scripts/module.lds.S
++++ b/scripts/module.lds.S
+@@ -10,6 +10,7 @@
+ #endif
  
- #ifdef CONFIG_FTRACE_SYSCALLS
- #define TRACE_SYSCALLS()			\
--	. = ALIGN(8);				\
- 	BOUNDED_SECTION_BY(__syscalls_metadata, _syscalls_metadata)
- #else
- #define TRACE_SYSCALLS()
-@@ -276,7 +273,6 @@
+ #include <asm-generic/codetag.lds.h>
++#include <asm-generic/dyndbg.lds.h>
  
- #ifdef CONFIG_SERIAL_EARLYCON
- #define EARLYCON_TABLE()						\
--	. = ALIGN(8);							\
- 	BOUNDED_SECTION_POST_LABEL(__earlycon_table, __earlycon_table, , _end)
- #else
- #define EARLYCON_TABLE()
-@@ -284,11 +280,9 @@
+ SECTIONS {
+ 	/DISCARD/ : {
+@@ -61,6 +62,7 @@ SECTIONS {
+ 		*(.rodata..L*)
+ 	}
  
- #ifdef CONFIG_SECURITY
- #define LSM_TABLE()					\
--	. = ALIGN(8);					\
- 	BOUNDED_SECTION_PRE_LABEL(.lsm_info.init, _lsm_info, __start, __end)
- 
- #define EARLY_LSM_TABLE()						\
--	. = ALIGN(8);							\
- 	BOUNDED_SECTION_PRE_LABEL(.early_lsm_info.init, _early_lsm_info, __start, __end)
- #else
- #define LSM_TABLE()
-@@ -314,7 +308,6 @@
- 
- #ifdef CONFIG_ACPI
- #define ACPI_PROBE_TABLE(name)						\
--	. = ALIGN(8);							\
- 	BOUNDED_SECTION_POST_LABEL(__##name##_acpi_probe_table,		\
- 				   __##name##_acpi_probe_table,, _end)
- #else
-@@ -323,7 +316,6 @@
- 
- #ifdef CONFIG_THERMAL
- #define THERMAL_TABLE(name)						\
--	. = ALIGN(8);							\
- 	BOUNDED_SECTION_POST_LABEL(__##name##_thermal_table,		\
- 				   __##name##_thermal_table,, _end)
- #else
-@@ -403,12 +395,10 @@
- 	__end_init_stack = .;
- 
- #define JUMP_TABLE_DATA							\
--	. = ALIGN(8);							\
- 	BOUNDED_SECTION_BY(__jump_table, ___jump_table)
- 
- #ifdef CONFIG_HAVE_STATIC_CALL_INLINE
- #define STATIC_CALL_DATA						\
--	. = ALIGN(8);							\
- 	BOUNDED_SECTION_BY(.static_call_sites, _static_call_sites)	\
- 	BOUNDED_SECTION_BY(.static_call_tramp_key, _static_call_tramp_key)
- #else
-@@ -453,7 +443,6 @@
- 		*(.rodata) *(.rodata.*) *(.data.rel.ro*)		\
- 		SCHED_DATA						\
- 		RO_AFTER_INIT_DATA	/* Read only after init */	\
--		. = ALIGN(8);						\
- 		BOUNDED_SECTION_BY(__tracepoints_ptrs, ___tracepoints_ptrs) \
- 		*(__tracepoints_strings)/* Tracepoints: strings */	\
- 	}								\
-@@ -947,12 +936,10 @@
- 
- /* Alignment must be consistent with (kunit_suite *) in include/kunit/test.h */
- #define KUNIT_TABLE()							\
--		. = ALIGN(8);						\
- 		BOUNDED_SECTION_POST_LABEL(.kunit_test_suites, __kunit_suites, _start, _end)
- 
- /* Alignment must be consistent with (kunit_suite *) in include/kunit/test.h */
- #define KUNIT_INIT_TABLE()						\
--		. = ALIGN(8);						\
- 		BOUNDED_SECTION_POST_LABEL(.kunit_init_test_suites, \
- 				__kunit_init_suites, _start, _end)
++	MOD_DYNDBG_SECTIONS()
+ 	MOD_SEPARATE_CODETAG_SECTIONS()
+ }
  
 
 -- 
