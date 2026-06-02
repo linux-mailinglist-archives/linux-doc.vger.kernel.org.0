@@ -1,474 +1,273 @@
-Return-Path: <linux-doc+bounces-90596-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90613-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id vvkUON1fH2pylQAAu9opvQ
-	(envelope-from <linux-doc+bounces-90596-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 00:57:33 +0200
+	id SYGyD/ZkH2phlgAAu9opvQ
+	(envelope-from <linux-doc+bounces-90613-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 01:19:18 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F314632B68
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 00:57:33 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id CBED6632DCD
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 01:19:17 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=D2TNV4nb;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90596-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90596-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=ftb1Jwi7;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90613-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90613-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 3062F317D0CD
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 22:51:03 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 41F6F302D62D
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 23:19:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3F5263DA5AE;
-	Tue,  2 Jun 2026 22:49:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 369843783A2;
+	Tue,  2 Jun 2026 23:19:15 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 496133DA7F2
-	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 22:49:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 083453A7597;
+	Tue,  2 Jun 2026 23:19:12 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780440566; cv=none; b=qG0O/hV7OkdsuBG06MwQWf3ho2nRNb0LDRIezc/je2fIWWTO0A05RffFY+ADda0OwPgpF08PvZcFRNIqNR0C8OOV1l5NfkW3537XKXmmQq7XHxrcvqlV25SbQ3fx4sIVNS8lrhb0n1qlf/SuN4rpbyTrTyJ3OSNswrcYhKlM9g4=
+	t=1780442355; cv=none; b=IW5XkESjnC1F/y8DxpF9gt27mXUiRHNezTR+1QnN21MoTueUKx7A+3a1S4MDtZiOoNMNU7xxqCEIW0WBnQJxzieWu5F8vcjtXqEvEHwbhsEJqDTUYcbE5LnRwFknImyET4npv31ZHvc4CdQ2+M8cK+GN/VtTJqiDdU/sJ9QpmVU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780440566; c=relaxed/simple;
-	bh=lthlKNyUq5gUtWvLVtrD/SKctmL38wo7iVjBwbNR+uY=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=HIfyDKHaL+1WXhOfc1B95hXKmxo5QAEOkPLX/OtqKMKabUhXREyvd3bEExMA+BXHv64NTZ9FOdx+VPyLEahVqZELcCT9M2z++MZitANS8eiv5FDk2O3B6Gpt3A8vU4IMzzW7wp0XpT0aIo7LiQxxzEKAM/WZgBZZTtZkjg/HyP8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=D2TNV4nb; arc=none smtp.client-ip=209.85.221.54
-Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-45e9f4a3510so6955672f8f.1
-        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 15:49:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780440563; x=1781045363; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=QCgszUrgNi7grQDH6VE2VsdkLUzjuVRFv4kl/ONnNts=;
-        b=D2TNV4nbX1LlPxC3y8ziQylITCeLqO6irzPn1Y3v3tIZ9dZIiuy1AxNs7P+XCO/Da8
-         fmKavKlccct4BkfkUwrpLIHZKCLQcCQ91zYhQk0IX+kjH+HZyDjAW8RkV7fakM3OPKnw
-         Cc61u3wWQPxiQwzL/93MiAY9IT7PT8EfojQINc0RISz4I59N5uPLbiuyP5d4PhWSBgJz
-         LZlVgcgMGRa+ZuzyHbucaD4wmsefVM02MtrmhVVdbclQsIwR2NdVFHJUOAfmQyezmlH9
-         yN7J6uNRaz7hVO0A3LvB9+EgoU2gfp/qMCfp0eP0Bo0Mku7CnxxfANv860FdYgV9BfyL
-         GPWA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780440563; x=1781045363;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=QCgszUrgNi7grQDH6VE2VsdkLUzjuVRFv4kl/ONnNts=;
-        b=j187/3GkVOWpVIGGGdZxN3GIL6otmRBI/IuTLR393bN7vMR7eX+aHlnyj8EMM16Q7g
-         NMnjasqCSv4p0Use0mblVio4VOC3+65D5zwPThUxB7AqSTHU0Lfyjyc7QJ8eSwTh66b4
-         7Ih4LnrT7r5ycuWiPKnBNZ7hT63aCq07RuxgWfeKYgATrbUiQBxLRv9B2AkY0vxdbaAl
-         6Cv414xImdQSPNe+ZUaJGGXGJPOshbPHwAk75JK9uyYcjhlqFd6IhayUUtoFJZdwNNiL
-         7xCNwGRkYaOTgE35oJGnD8cFw4a8fuorooEAw8WVQDc0sliKholNwnKtf0WvJ5or+aaQ
-         ddhg==
-X-Gm-Message-State: AOJu0YwSxy/dLFXJZeIwrt8jAoZ9auiVxg6oJyFP83JYQ/zDVvWU9aQy
-	ywA2cYJCpurzptSUzue+kGdVw4J8XtrCGRPjB7qhgZlgmdFdbOJL8z72
-X-Gm-Gg: Acq92OHSRZOSry81kxn9qKL10PDwYm/+JU1RCavwXd/1z06BZywnO9S7UdEiNcIBmZX
-	xUvWJcP6Ddo8mPIN3ZDnYAIgtxe7/UyiL+o4EFwoBqliWXbsnFqIz510X1db++MztBrzuRQpkPP
-	bI3gPsfEenySr/UvV+kTFAtzIcRKZMf6EoPQS2p9WoZ8qBnZyZDq0FpVsZHPxoxdNFt5mY5+cfd
-	y9zNnVV3+Kd65S0CZg6ZyXirs58eWtI5igeNfQLODK8eHCSFn5l2TJ4zmqRIKNAGQcY2Iho9A09
-	Cx6/Htm64xjaMbdMHg/CyCdB0corRDUbHrws1/K4A4QrDgNLjG9Xls0pAm1Uq1JLOTkNE+Wzo0U
-	lYQf1IoR6cVgUS9Ys38awZ+ZUj7CEYXH3ENvYSygWYWPWf/Oja4XTMNNdI4JaoeYASsGS9WPGht
-	W49hwpONEwg5MwmDoCirTuXoQyMMuF80MCmNZbENTstg==
-X-Received: by 2002:adf:e00e:0:10b0:45e:93b2:37bb with SMTP id ffacd0b85a97d-46021781c20mr451609f8f.6.1780440562462;
-        Tue, 02 Jun 2026 15:49:22 -0700 (PDT)
-Received: from [172.16.188.153] ([213.181.114.83])
-        by smtp.googlemail.com with ESMTPSA id ffacd0b85a97d-4601f2f2710sm1999791f8f.14.2026.06.02.15.49.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Jun 2026 15:49:21 -0700 (PDT)
-From: Jim Cromie <jim.cromie@gmail.com>
-Date: Tue, 02 Jun 2026 22:48:22 +0000
-Subject: [PATCH v4 25/25] dynamic_debug: use KBUILD_MODFILE for unique
- builtin module names
+	s=arc-20240116; t=1780442355; c=relaxed/simple;
+	bh=DrslTSQXT8cfx56wHRiJpsvTA1fviMta4VbTrLg4zTo=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Kcp3kXjMIBs+B/SeqY+bpVG7Y7JhjuOjPv35nCV6QZP0tQI7uKBv5RBXd1wZ+M5Ts/5oOHkDDolovY1YDHceem7pXsSGrZCzzKmsgAj7eFxD5DWHKW4vn6ts49CFiGfslPXLl9SxJYnREk4c4WvioHl0VRQkXSXPgXcI2dep8fs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ftb1Jwi7; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E4F4E1F00893;
+	Tue,  2 Jun 2026 23:19:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1780442352;
+	bh=KCQTKKV4OkG0g4DPTo1dosbbUmHALAtgMMXh353W1do=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=ftb1Jwi7vGUaTZ08YB0sJ8lzivTWYTQb5gxbwHrpsGAczoXYB03Jtxxu4GhdujeF9
+	 4wHP/NTcSz8OqTJBEHWQ70CjZV7BF2NYZWVEag1D0NzIJAzOZ4MhKs90U8W0+ZtXjW
+	 BsNXfsuVYZZlL+feBLoqauAHSiClLSnOL8MWWpo5sb2oCYqo4gCZVaWBejTi+J2oE0
+	 wPY9mvm0bV+o8ktBPSpD2JAw+4gyTqQ+b7tnkLOGkL9lygFoneIRHCByRTbPLrWprB
+	 R+90fhMCKQijvqOyKbidq2BCDM4HR1u1y2/Ym7dvz6hTzmsXNZvtBYY2OuqRPaIR4W
+	 VLxgGAMKtUp4g==
+Date: Tue, 2 Jun 2026 23:19:10 +0000
+From: Yosry Ahmed <yosry@kernel.org>
+To: Hao Jia <jiahao.kernel@gmail.com>
+Cc: akpm@linux-foundation.org, tj@kernel.org, hannes@cmpxchg.org, 
+	shakeel.butt@linux.dev, mhocko@kernel.org, mkoutny@suse.com, nphamcs@gmail.com, 
+	chengming.zhou@linux.dev, muchun.song@linux.dev, roman.gushchin@linux.dev, 
+	cgroups@vger.kernel.org, linux-mm@kvack.org, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, Hao Jia <jiahao1@lixiang.com>
+Subject: Re: [PATCH v3 1/4] mm/zswap: Make shrink_worker writeback cursor
+ per-memcg
+Message-ID: <ah9i3uhh3PFiS0Uk@google.com>
+References: <20260526114601.67041-1-jiahao.kernel@gmail.com>
+ <20260526114601.67041-2-jiahao.kernel@gmail.com>
+ <aho7nepN5jZtKmef@google.com>
+ <8c0e60e1-5713-69f0-a687-088c87e75764@gmail.com>
+ <ah4ZZGl7GYJf54Wz@google.com>
+ <ff344c9f-51da-8b3a-e7a9-c4a7f4702ef8@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260602-dd-maint-2-v4-25-19a1445585a8@gmail.com>
-References: <20260602-dd-maint-2-v4-0-19a1445585a8@gmail.com>
-In-Reply-To: <20260602-dd-maint-2-v4-0-19a1445585a8@gmail.com>
-To: Jonathan Corbet <corbet@lwn.net>, 
- Shuah Khan <skhan@linuxfoundation.org>, Arnd Bergmann <arnd@arndb.de>, 
- Jason Baron <jbaron@akamai.com>, Luis Chamberlain <mcgrof@kernel.org>, 
- Petr Pavlu <petr.pavlu@suse.com>, Daniel Gomez <da.gomez@kernel.org>, 
- Sami Tolvanen <samitolvanen@google.com>, Aaron Tomlin <atomlin@atomlin.com>, 
- Andrew Morton <akpm@linux-foundation.org>, Shuah Khan <shuah@kernel.org>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-arch@vger.kernel.org, linux-modules@vger.kernel.org, 
- linux-kselftest@vger.kernel.org, dri-devel@lists.freedesktop.org, 
- Jim Cromie <jim.cromie@gmail.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780440488; l=13699;
- i=jim.cromie@gmail.com; s=20260203; h=from:subject:message-id;
- bh=lthlKNyUq5gUtWvLVtrD/SKctmL38wo7iVjBwbNR+uY=;
- b=ZR2ERRpc7QxcWHTdurm0228LMQX3bNexpUtw/VCDnnM06DWx133ipZnZNguxNUs9x4RBoiZn0
- 6P6N2XWxty+BxCnjt8MUHPdzE82vXQAACHjyiLkEthIPu1kXpPKwwVo
-X-Developer-Key: i=jim.cromie@gmail.com; a=ed25519;
- pk=C6E5ODlPQo7ZBynATXH9wg7K6HxP0pIXyf4s38Qw0XE=
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <ff344c9f-51da-8b3a-e7a9-c4a7f4702ef8@gmail.com>
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_FROM(0.00)[bounces-90596-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_FROM(0.00)[bounces-90613-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:arnd@arndb.de,m:jbaron@akamai.com,m:mcgrof@kernel.org,m:petr.pavlu@suse.com,m:da.gomez@kernel.org,m:samitolvanen@google.com,m:atomlin@atomlin.com,m:akpm@linux-foundation.org,m:shuah@kernel.org,m:maarten.lankhorst@linux.intel.com,m:mripard@kernel.org,m:tzimmermann@suse.de,m:airlied@gmail.com,m:simona@ffwll.ch,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-arch@vger.kernel.org,m:linux-modules@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:jim.cromie@gmail.com,m:jimcromie@gmail.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[jimcromie@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS(0.00)[m:jiahao.kernel@gmail.com,m:akpm@linux-foundation.org,m:tj@kernel.org,m:hannes@cmpxchg.org,m:shakeel.butt@linux.dev,m:mhocko@kernel.org,m:mkoutny@suse.com,m:nphamcs@gmail.com,m:chengming.zhou@linux.dev,m:muchun.song@linux.dev,m:roman.gushchin@linux.dev,m:cgroups@vger.kernel.org,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jiahao1@lixiang.com,m:jiahaokernel@gmail.com,s:lists@lfdr.de];
+	FREEMAIL_TO(0.00)[gmail.com];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FREEMAIL_TO(0.00)[lwn.net,linuxfoundation.org,arndb.de,akamai.com,kernel.org,suse.com,google.com,atomlin.com,linux-foundation.org,linux.intel.com,suse.de,gmail.com,ffwll.ch];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	FORWARDED(0.00)[lists@lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	FORGED_SENDER(0.00)[yosry@kernel.org,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[vger.kernel.org,lists.freedesktop.org,gmail.com];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jimcromie@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
 	ALIAS_RESOLVED(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[yosry@kernel.org,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[linux-foundation.org,kernel.org,cmpxchg.org,linux.dev,suse.com,gmail.com,vger.kernel.org,kvack.org,lixiang.com];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 4F314632B68
+X-Rspamd-Queue-Id: CBED6632DCD
 
-Historically dynamic-debug gets its module names from KBUILD_MODNAME.
-This works well for loadable modules, as the module loader has always
-required them to have unique names, but for builtins it is basically
-kbasename(srcfile), which sadly gives us many modules named "main".
+> > > > > Proactive writeback also wants a similar per-memcg cursor that is
+> > > > > scoped to the specified memcg, so that repeated invocations against
+> > > > > the same memcg make forward progress across its descendant memcgs
+> > > > > instead of restarting from the first child memcg each time.
+> > > > 
+> > > > Is this a problem in practice?
+> > > > 
+> > > > Is the concern the overhead of scanning memcgs repeatedly, or lack of
+> > > > fairness? I wonder if we should just do writeback in batches from all
+> > > > memcgs, similar to how reclaim does it, then evaluate at the end if we
+> > > > need to start over?
+> > > > 
+> > > 
+> > > Not using a per-cgroup cursor will cause issues for "repeated small-budget
+> > > calls" cases. For example, repeatedly triggering a 2MB writeback might
+> > > result in only writing back pages from the first few child memcgs every
+> > > time. In the worst-case scenario (where the writeback amount is less than
+> > > WB_BATCH), it might only ever write back from the first child memcg.
+> > 
+> > Right, so a fairness concern?
+> > 
+> > I wonder if we should just reclaim a batch from each memcg, then check
+> > if we reached the goal, otherwise start over. If the batch size is small
+> > enough that should work?
+> 
+> Even with a small batch size, for small writeback requests triggered by
+> user-space (e.g., 2MB, which is batch size * N), it might still repeatedly
+> write back from only the first N child memcgs.
 
-This makes the following ambiguous:
-  bash-5.3# echo module main +m > /proc/dynamic_debug/control
+Yes, I understand, I am asking if this is a problem in practice. For
+this to be a problem we'd need to trigger small writeback requests and
+have many memcgs. 
 
-since it would affect 4 independent modules named main:
-  bash-5.3# ddgrep =m
-  init/main.c:1265 [main]initcall_blacklist =m "blacklisting initcall %s\n"
-  kernel/power/main.c:49 [main]pm_restore_gfp_mask =m "GFP mask restored\n"
-  kernel/module/main.c:2862 [main]move_module =m "\t0x%lx 0x%.8lx %s\n"
-  drivers/base/power/main.c:149 [main]device_pm_add =m "Adding info for %s:%s\n"
+> This could cause the user-space agent to prematurely give up on zswap
+> writeback.
 
-We can improve this by using KBUILD_MODFILE for dyndbg's modname in
-builtins, and KBUILD_MODNAME for loadables.
+Why? The kernel should not return before trying to writeback from all
+memcgs. If we scan the first N child memcgs and did not writeback
+enough, we should keep going, right?
 
-The above control-file entries then become:
-  init/main.c:1265 [init/main]initcall_blacklist ...
-  kernel/power/main.c:49 [kernel/power/main]pm_restore_gfp_mask ...
-  kernel/module/main.c:2862 [kernel/module/main]move_module ...
-  drivers/base/power/main.c:149 [drivers/base/power/main]device_pm_add ...
+> > What if we do something like this (for the global cursor):
+> > 
+> > 	do {
+> > 		memcg = xchg(zswap_next_shrink, NULL);
+> > 		memcg = mem_cgroup_iter(NULL, memcg, NULL);
+> > 		/* If the cursor was advanced from under us, try again */
+> > 		if (!try_cmpxchg(zswap_next_shrink, NULL, memcg))
+> > 			continue;
+> > 	} while (..);
+> > 			
+> > 
+> 
+> Regarding the code above, IIRC, both the global and per-cgroup cursors
+> suffer from race conditions. This race can cause mem_cgroup_iter(NULL, NULL,
+> NULL) to return the root memcg or its descendants, leading zswap to write
+> back pages from the wrong memcg.
 
-While this is a user visible change; [params] becomes [kernel/params],
-it is not a behavior change; we now match the query-module against the
-subsystem/module name or its kbasename (the simple-modname), which as
-before, matches all 4 modules.
+Not the wrong memcg, it will just go back to the first memcg again,
+which should be fine as I mentioned below.
 
-This allows queries to be specific when desired: "module init/main",
-while preserving the existing meaning of "module main"
+> 
+> Additionally, since mem_cgroup_iter() puts the prev memcg ref and gets the
+> next memcg ref, a try_cmpxchg() failure on CPU1 might also lead to a ref
+> leak for memcg1.
+> 
+> 
+> 	CPU1                                       CPU2
+> memcg1 = xchg(pos, NULL)
+>                                memcg2 = xchg(pos, NULL) memcg2 = NULL;
+> 
+> memcg1 = mem_cgroup_iter()
+>                        mem_cgroup_iter(NULL, **NULL**, NULL) error memcg
+>                                 try_cmpxchg(pos，NULL，memcg2） succeed
+> try_cmpxchg(pos，NULL，memcg1） **fail**
 
-The deeper reason for this change is not obvious.  If any builtin
-"main" module were to add a classmap, it would attach to all "main"
-modules.  If 2 "main" modules defined separate classmaps, both modules
-would inadvertently share both classmaps.  Since classmaps map
-classnames to 0..62, and independently defined classmaps are most
-likely to start at 0 (unless author is planning to share the 0..62
-range with other classmaps), we have a setup for later reserved range
-conflicts.  Having unique names prevents future conflicts.
+Yes, we can probably just take a ref on the memcg before calling
+mem_cgroup_iter(). That being said, I think we can just keep the lock,
+see below.
 
-This solution isn't perfect:
-1. it changes displayed [params] to [kernel/params] etc
-2. its mostly redundant with "filename */main.*"
-3. "module power", "module module", "module base/power" might be better
-   but would break old queries.
+> 
+> I took a stab at implementing a cmpxchg()-based zswap_mem_cgroup_iter()
+> modeled after mem_cgroup_iter(), and it actually doesn't look that complex
+> after all :)
 
-Adapt dynamic-debug selftest:
-1- Add 'test_subsystem_module_queries' to verify path-based module matching.
-2- Use dynamic counting with precise regexes to determine expectations.
-3- Reorder tests to run slash-query verification immediately after
-   basic tests.
-4- Update basic_tests and comma_terminator_tests to use 'kernel/params'
-   instead of 'params' to match new path-based names for built-ins.
+I don't think we should re-implement mem_cgroup_iter() here.
 
-And adjust Documentation
+[..]
+> > There is a window where a racing shrinker will see the cursor as NULL
+> > and start over, but that should be fine. We can generalize this for the
+> > per-memcg cursor.
+> > 
+> > That being said..
+> > 
+> > > 
+> > > Currently, this lock is only used in shrink_memcg(), proactive writeback,
+> > > and mem_cgroup_css_offline(). Note that shrink_memcg() only acquires the
+> > > lock of the root cgroup, and mem_cgroup_css_offline() is unlikely to be a
+> > > hot path.
+> > 
+> > ..this made me realize it's probably fine to just use a global lock for
+> > now?
+> > 
+> > IIUC the only additional contention to the existing lock will be from
+> > userspace proactive writeback, and that shouldn't be a big deal
+> > especially with the critical section being short?
+> > 
+> 
+> In the current patch implementation, this lock protects the cgroup's own
+> cursor variable. During each writeback, we only acquire the spin_lock of the
+> target cgroup itself; we do not attempt to **spin on any child cgroup's lock
+> while iterating through the descendants**.
 
-Signed-off-by: Jim Cromie <jim.cromie@gmail.com>
----
+Oh, I did not say anything about the current patch adding contention. I
+am suggesting we just keep using the global lock for the per-memcg
+cursors, if we keep them.
 
-v4: use new match_wildcard_hyphen() to allow dash vs underscore
-equivalence in query-modname vs KBUILD_MODFILE string, noted by sashiko.
+Right now, without this series, the global lock protects against
+concurrent changes to the global cursor from concurrent shrinkers. After
+the series, the only added contenders are userspace proactive writeback
+threads. Unless you have 10s or 100s of those, it should be fine to keep
+a single global lock, right?
 
-v3: new patch in rev-3
-use KBUILD_MODFILE to provide modname for builtin modules, giving
-unnique values that KBUILD_MODANME does not provide.
----
- Documentation/admin-guide/dynamic-debug-howto.rst  | 40 +++++-----
- include/linux/dynamic_debug.h                      | 17 +++-
- lib/dynamic_debug.c                                |  3 +-
- .../selftests/dynamic_debug/dyndbg_selftest.sh     | 93 +++++++++++++++++++++-
- 4 files changed, 126 insertions(+), 27 deletions(-)
+Yes, userspace can affect writeback efficiency, but we can split the
+lock when it actually causes a problem.
 
-diff --git a/Documentation/admin-guide/dynamic-debug-howto.rst b/Documentation/admin-guide/dynamic-debug-howto.rst
-index 9c2f096ed1d8..8befb69575b7 100644
---- a/Documentation/admin-guide/dynamic-debug-howto.rst
-+++ b/Documentation/admin-guide/dynamic-debug-howto.rst
-@@ -38,12 +38,12 @@ You can view the currently configured behaviour in the *prdbg* catalog::
- 
-   :#> head -n7 /proc/dynamic_debug/control
-   # filename:lineno [module]function flags format
--  init/main.c:1179 [main]initcall_blacklist =_ "blacklisting initcall %s\n"
--  init/main.c:1218 [main]initcall_blacklisted =_ "initcall %s blacklisted\n"
--  init/main.c:1424 [main]run_init_process =_ "  with arguments:\n"
--  init/main.c:1426 [main]run_init_process =_ "    %s\n"
--  init/main.c:1427 [main]run_init_process =_ "  with environment:\n"
--  init/main.c:1429 [main]run_init_process =_ "    %s\n"
-+  init/main.c:1179 [init/main]initcall_blacklist =_ "blacklisting initcall %s\n"
-+  init/main.c:1218 [init/main]initcall_blacklisted =_ "initcall %s blacklisted\n"
-+  init/main.c:1424 [init/main]run_init_process =_ "  with arguments:\n"
-+  init/main.c:1426 [init/main]run_init_process =_ "    %s\n"
-+  init/main.c:1427 [init/main]run_init_process =_ "  with environment:\n"
-+  init/main.c:1429 [init/main]run_init_process =_ "    %s\n"
- 
- The 3rd space-delimited column shows the current flags, preceded by
- a ``=`` for easy use with grep/cut. ``=p`` shows enabled callsites.
-@@ -59,10 +59,10 @@ query/commands to the control file.  Example::
- 
-   :#> ddcmd '-p; module main func run* +p'
-   :#> grep =p /proc/dynamic_debug/control
--  init/main.c:1424 [main]run_init_process =p "  with arguments:\n"
--  init/main.c:1426 [main]run_init_process =p "    %s\n"
--  init/main.c:1427 [main]run_init_process =p "  with environment:\n"
--  init/main.c:1429 [main]run_init_process =p "    %s\n"
-+  init/main.c:1424 [init/main]run_init_process =p "  with arguments:\n"
-+  init/main.c:1426 [init/main]run_init_process =p "    %s\n"
-+  init/main.c:1427 [init/main]run_init_process =p "  with environment:\n"
-+  init/main.c:1429 [init/main]run_init_process =p "    %s\n"
- 
- Error messages go to console/syslog::
- 
-@@ -161,17 +161,19 @@ file
- 	file kernel/freezer.c	# ie column 1 of control file
- 	file drivers/usb/*	# all callsites under it
- 	file inode.c:start_*	# parse :tail as a func (above)
--	file inode.c:1-100	# parse :tail as a line-range (above)
-+	file inode.c:1-100	# parse :tail as a line-range (below)
- 
- module
--    The given string is compared against the module name
--    of each callsite.  The module name is the string as
--    seen in ``lsmod``, i.e. without the directory or the ``.ko``
--    suffix and with ``-`` changed to ``_``.  Examples::
--
--	module sunrpc
--	module nfsd
--	module drm*	# both drm, drm_kms_helper
-+    The query string is compared against the subsystem module name of
-+    each callsite, as shown in the control file.  The simple module
-+    name is the string as seen in ``lsmod``, i.e. without the
-+    directory or the ``.ko`` suffix and with ``-`` changed to ``_``.
-+
-+    Examples::
-+
-+	module nfsd        # simple modname (as from lsmod)
-+	module init/main   # subsystem modname (as in control file)
-+	module drm*	   # both drm, drm_kms_helper
- 
- format
-     The given string is searched for in the dynamic debug format
-diff --git a/include/linux/dynamic_debug.h b/include/linux/dynamic_debug.h
-index 2d6983186f37..aee6f3d0916f 100644
---- a/include/linux/dynamic_debug.h
-+++ b/include/linux/dynamic_debug.h
-@@ -8,6 +8,17 @@
- 
- #include <linux/build_bug.h>
- 
-+/*
-+ * Pick the best name for the module:
-+ * KBUILD_MODFILE includes the path (e.g., drivers/usb/core/usbcore) for built-ins.
-+ * Fall back to KBUILD_MODNAME for modules (loader requires unique names).
-+ */
-+#ifdef KBUILD_MODFILE
-+# define DDEBUG_MODNAME KBUILD_MODFILE
-+#else
-+# define DDEBUG_MODNAME KBUILD_MODNAME
-+#endif
-+
- /*
-  * An instance of this structure is created in a special
-  * ELF section at every dynamic debug callsite.  At runtime,
-@@ -128,9 +139,9 @@ struct _ddebug_class_param {
- #define DECLARE_DYNDBG_CLASSMAP(_var, _maptype, _base, ...)		\
- 	static const char *_var##_classnames[] = { __VA_ARGS__ };	\
- 	static struct _ddebug_class_map __aligned(8) __used		\
--		__section("__dyndbg_class_maps") _var = {			\
-+	__section("__dyndbg_class_maps") _var = {			\
- 		.mod = THIS_MODULE,					\
--		.mod_name = KBUILD_MODNAME,				\
-+		.mod_name = DDEBUG_MODNAME,				\
- 		.base = _base,						\
- 		.map_type = _maptype,					\
- 		.length = ARRAY_SIZE(_var##_classnames),		\
-@@ -169,7 +180,7 @@ void __dynamic_ibdev_dbg(struct _ddebug *descriptor,
- #define DEFINE_DYNAMIC_DEBUG_METADATA_CLS(name, cls, fmt)	\
- 	static struct _ddebug  __aligned(8)			\
- 	__section("__dyndbg_descs") name = {			\
--		.modname = KBUILD_MODNAME,			\
-+		.modname = DDEBUG_MODNAME,			\
- 		.function = __func__,				\
- 		.filename = __FILE__,				\
- 		.format = (fmt),				\
-diff --git a/lib/dynamic_debug.c b/lib/dynamic_debug.c
-index 996daf0a05b5..b6c5634096fa 100644
---- a/lib/dynamic_debug.c
-+++ b/lib/dynamic_debug.c
-@@ -248,7 +248,8 @@ static int ddebug_change(const struct ddebug_query *query,
- 
- 		/* match against the module name */
- 		if (query->module &&
--		    !match_wildcard(query->module, di->mod_name))
-+		    !match_wildcard_hyphen(query->module, di->mod_name) &&
-+		    !match_wildcard_hyphen(query->module, kbasename(di->mod_name)))
- 			continue;
- 
- 		if (query->class_string) {
-diff --git a/tools/testing/selftests/dynamic_debug/dyndbg_selftest.sh b/tools/testing/selftests/dynamic_debug/dyndbg_selftest.sh
-index 1239f1e10591..26cca9f24799 100755
---- a/tools/testing/selftests/dynamic_debug/dyndbg_selftest.sh
-+++ b/tools/testing/selftests/dynamic_debug/dyndbg_selftest.sh
-@@ -76,9 +76,9 @@ function handle_exit_code() {
- # $1 - pattern to match, pattern in $1 is enclosed by spaces for a match ""\s$1\s"
- # $2 - number of times the pattern passed in $1 is expected to match
- # $3 - optional can be set either to "-r" or "-v"
--#       "-r" means relaxed matching in this case pattern provided in $1 is passed
--#       as is without enclosing it with spaces
--#       "-v" prints matching lines
-+#       "-r" means relaxed matching in this case pattern provided in
-+#       $1 is passed as is without enclosing it with spaces "-v"
-+#       prints matching lines
- # $4 - optional when $3 is set to "-r" then $4 can be used to pass "-v"
- function check_match_ct {
-     pattern="\s$1\s"
-@@ -223,7 +223,7 @@ function basic_tests {
-     check_match_ct =p 0
- 
-     # module params are builtin to handle boot args
--    check_match_ct '\[params\]' 4 -r
-+    check_match_ct '\[kernel/params\]' 4 -r
-     ddcmd module params +mpf
-     check_match_ct =pmf 4
- 
-@@ -238,8 +238,93 @@ EOF
-     ddcmd =_
- }
- 
-+function test_subsystem_module_queries {
-+    echo -e "${GREEN}# TEST_SUBSYTEM_MODULE_QUERIES ${NC}"
-+    ddcmd =_
-+
-+    # Find how many 'main' modules we have in total (by basename)
-+    # Use a more precise regex to avoid false positives like [irqdomain]
-+    local total_main=$(grep -c "\[\([^]]*/\)\?main\]" /proc/dynamic_debug/control)
-+    echo "# found $total_main total 'main' modules"
-+
-+    if [ $total_main -eq 0 ]; then
-+        echo "SKIP - no 'main' modules found to test slashes"
-+        return
-+    fi
-+
-+    echo "# testing 'module */main'"
-+    ddcmd module "*/main" +p
-+    # This should match modules that HAVE a slash and end in /main
-+    local slash_main=$(grep -c "\[[^]]*/main\]" /proc/dynamic_debug/control)
-+    check_match_ct =p $slash_main -r
-+
-+    echo "# testing 'module init/main' (specific path)"
-+    ddcmd =_
-+    ddcmd module "init/main" +p
-+    local init_main=$(grep -c "\[init/main\]" /proc/dynamic_debug/control)
-+    check_match_ct =p $init_main
-+
-+    echo "# testing 'module main' (basename match)"
-+    ddcmd =_
-+    ddcmd module main +p
-+    # This should match ALL $total_main entries due to kbasename matching
-+    check_match_ct =p $total_main
-+
-+    ddcmd =_
-+}
-+
-+function test_hyphen_underscore {
-+    echo -e "${GREEN}# TEST_HYPHEN_UNDERSCORE ${NC}"
-+    ddcmd =_
-+
-+    # Find a module with a hyphen in its name (e.g., from the control file)
-+    local mod_with_hyphen=$(grep -m1 "\[[^]]*-[^]]*\]" /proc/dynamic_debug/control | sed -n 's/.*\[\(.*\)\].*/\1/p')
-+
-+    if [ -z "$mod_with_hyphen" ]; then
-+        echo "SKIP - no module with hyphen found in /proc/dynamic_debug/control"
-+        return
-+    fi
-+
-+    echo "# testing hyphen/underscore equivalence for module: $mod_with_hyphen"
-+    local mod_with_underscore=$(echo "$mod_with_hyphen" | tr '-' '_')
-+
-+    # 1. Enable using literal hyphen name
-+    echo "#   trying hyphen name: $mod_with_hyphen"
-+    ddcmd module "$mod_with_hyphen" +p
-+    local count_hyphen=$(grep -c "\[$mod_with_hyphen\]" /proc/dynamic_debug/control)
-+    check_match_ct =p $count_hyphen -r
-+
-+    # 2. Disable and then enable using underscore name
-+    ddcmd =_
-+    echo "#   trying underscore name: $mod_with_underscore"
-+    ddcmd module "$mod_with_underscore" +p
-+    check_match_ct =p $count_hyphen -r
-+
-+    # 3. Try kbasename with hyphen (if it has a path)
-+    local base_hyphen=$(basename "$mod_with_hyphen")
-+    if [ "$base_hyphen" != "$mod_with_hyphen" ]; then
-+        ddcmd =_
-+        echo "#   trying hyphen kbasename: $base_hyphen"
-+        ddcmd module "$base_hyphen" +p
-+        local count_base=$(grep -c "\[\([^]]*/\)\?$base_hyphen\]" /proc/dynamic_debug/control)
-+        check_match_ct =p $count_base -r
-+    fi
-+
-+    # 4. Try kbasename with underscore
-+    local base_underscore=$(echo "$base_hyphen" | tr '-' '_')
-+    ddcmd =_
-+    echo "#   trying underscore kbasename: $base_underscore"
-+    ddcmd module "$base_underscore" +p
-+    local count_base=$(grep -c "\[\([^]]*/\)\?$base_hyphen\]" /proc/dynamic_debug/control)
-+    check_match_ct =p $count_base -r
-+
-+    ddcmd =_
-+}
-+
- tests_list=(
-     basic_tests
-+    test_subsystem_module_queries
-+    test_hyphen_underscore
- )
- 
- # Run tests
+> 
+> 
+> > > 
+> > > So, should we keep the spin_lock or go with the cmpxchg() approach?
+> > > Yosry and Nhat, what are your thoughts on this?
+> > 
+> > I think we should experiment with the global lock first. See if you
+> > observe any regressions with workloads that put a lot of pressure on the
+> > lock (a lot of threads in reclaim doing writeback + a few userspace
+> > threads doing proactive writeback). See if the userspace threads
+> > actually cause a meaningful regression.
+> 
+> Sorry, it seems there are some implementation issues with the global lock
+> approach.
+> 
+> In practice, our user-space agent mostly operates in the following two
+> scenarios:
+>  - Triggering proactive writeback on the same cgroup at different times
+> (sequentially).
+>  - Triggering proactive writeback on different cgroups at the same time
+> (concurrently).
+> 
+> In both cases, there is no lock contention. So, the current lock works
+> perfectly fine for us.
 
--- 
-2.54.0
+Would using the existing global lock work for your use case? How many
+different cgroups can you end up reclaiming from concurrently?
 
+> 
+> However, if we really hate zswap_wb_iter.lock, I can try replacing it with
+> the cmpxchg() approach.
+> 
+> Thanks,
+> Hao
 
