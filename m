@@ -1,284 +1,177 @@
-Return-Path: <linux-doc+bounces-90547-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90549-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id cj1MFVAKH2q1eAAAu9opvQ
-	(envelope-from <linux-doc+bounces-90547-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 18:52:32 +0200
+	id l22AJdIIH2qvdwAAu9opvQ
+	(envelope-from <linux-doc+bounces-90549-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 18:46:10 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 099F563065E
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 18:52:31 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 05AD5630592
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 18:46:10 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linux.dev header.s=key1 header.b="e99alI/o";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90547-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90547-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=linux.dev;
+	dkim=pass header.d=linaro.org header.s=google header.b=Dhp1RuoM;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90549-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90549-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=linaro.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 9947A307849C
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 16:36:23 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id D76C7305BEA4
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 16:38:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 73D7737DAAE;
-	Tue,  2 Jun 2026 16:35:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B800937186A;
+	Tue,  2 Jun 2026 16:38:40 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-185.mta0.migadu.com (out-185.mta0.migadu.com [91.218.175.185])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 89127371041
-	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 16:34:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5BCDA368D72
+	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 16:38:39 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780418101; cv=none; b=DzEfxtuDJxWld/geVVX8OqWdub+ZfR8JkrUUBpnp+OlLxAeUhBpp3HF8EZGi8TNz49zIia40PJMdqMjceKxLPPsXfJe5RnXAp9yf2pU73asBf/cd2hVt4WzFPJYdxuF+iJ8zgivq+RTlPL7Si+MG9iOUqLuPVc382ZnEm8qVubQ=
+	t=1780418320; cv=none; b=BrTyrtCxzS9W1yuxLSWoqjTH+Ixa7sGRZ2A682eIQJYr/qKFtk1Y3Qe1qD3Vbfe7sQN2AZ0eLAzDYtUjyUznYnRZKr7HAvLp4KeeZW/9l5u1AqOjRe41FR1YVOKdxL/kQipkWnpNYOvU++C/SUo1UNWyabKLttiLV/30sfpquw0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780418101; c=relaxed/simple;
-	bh=e02MIFR4Eh5QfCCofm7+5HoQnYnpURbtiujJHVzOfS8=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=S4OcvTeeJ5oz39SwkOTvmnF1G6oXiKvAz0gbF/rObRU8W2y4KPoH2UDU6PG+zW0RJyAFa8GVqgGnmLxPmBpeIdpDjrvSNnwe4fKj1W9zS+82sSkDrq0AMzO5oFg7NnbJ8IeX15kpgKPKL4Rkt6fv84zrHAj9U/gQZ0zDDQ64awU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=e99alI/o; arc=none smtp.client-ip=91.218.175.185
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1780418093;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Kfv65sDfPDmPDpEO0E3tjxWYqpXB1G5lz0Quc0XLk54=;
-	b=e99alI/oamPJv8ECRvV4dpEn6AtfCTtrQLYfTTiheBxLC0V7F4073yDgp+SJ8btK+1Bls+
-	489j1GGe0TmK1/VotWwJHV1ZBblOz+AnoFF6aywKWaSeg1yk/EUaSnEX8fmav4ytNOvWDs
-	35D+wl50XsMRVVFSKGbug9oWaVNSKEI=
-From: Lance Yang <lance.yang@linux.dev>
-To: npache@redhat.com
-Cc: lance.yang@linux.dev,
-	david@kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-mm@kvack.org,
-	linux-trace-kernel@vger.kernel.org,
-	aarcange@redhat.com,
-	akpm@linux-foundation.org,
-	anshuman.khandual@arm.com,
-	apopple@nvidia.com,
-	baohua@kernel.org,
-	baolin.wang@linux.alibaba.com,
-	byungchul@sk.com,
-	catalin.marinas@arm.com,
-	cl@gentwo.org,
-	corbet@lwn.net,
-	dave.hansen@linux.intel.com,
-	dev.jain@arm.com,
-	gourry@gourry.net,
-	hannes@cmpxchg.org,
-	hughd@google.com,
-	jack@suse.cz,
-	jackmanb@google.com,
-	jannh@google.com,
-	jglisse@google.com,
-	joshua.hahnjy@gmail.com,
-	kas@kernel.org,
-	liam@infradead.org,
-	ljs@kernel.org,
-	mathieu.desnoyers@efficios.com,
-	matthew.brost@intel.com,
-	mhiramat@kernel.org,
-	mhocko@suse.com,
-	peterx@redhat.com,
-	pfalcato@suse.de,
-	rakie.kim@sk.com,
-	raquini@redhat.com,
-	rdunlap@infradead.org,
-	richard.weiyang@gmail.com,
-	rientjes@google.com,
-	rostedt@goodmis.org,
-	rppt@kernel.org,
-	ryan.roberts@arm.com,
-	shivankg@amd.com,
-	sunnanyong@huawei.com,
-	surenb@google.com,
-	thomas.hellstrom@linux.intel.com,
-	tiwai@suse.de,
-	usamaarif642@gmail.com,
-	vbabka@suse.cz,
-	vishal.moola@gmail.com,
-	wangkefeng.wang@huawei.com,
-	will@kernel.org,
-	willy@infradead.org,
-	yang@os.amperecomputing.com,
-	ying.huang@linux.alibaba.com,
-	ziy@nvidia.com,
-	zokeefe@google.com,
-	usama.arif@linux.dev
-Subject: Re: [PATCH mm-unstable v18 06/14] mm/khugepaged: generalize collapse_huge_page for mTHP collapse
-Date: Wed,  3 Jun 2026 00:34:18 +0800
-Message-Id: <20260602163418.93877-1-lance.yang@linux.dev>
-In-Reply-To: <CAA1CXcD7peS3WHueVgAWhhRrjBO_1b19+Xc0CfZBSO8OwJJKQw@mail.gmail.com>
-References: <CAA1CXcD7peS3WHueVgAWhhRrjBO_1b19+Xc0CfZBSO8OwJJKQw@mail.gmail.com>
+	s=arc-20240116; t=1780418320; c=relaxed/simple;
+	bh=SqqoX5qQzGE5eNHSgLyrNrWlqXnwPa/uOKYx/N6zAZQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=deeaQWooMoyifU6zYFnBoaZgTuxuBbk9quFSXuyRJPJrbxCnzvYOkjUgOMhh9bAtU0GNERsC1iseBjqaxUqjVM8E5VqiHUi6Eh9dvgSaLRYzfau75oG05RZRL0SbtDG7+OYWjFjvXosjS76uLO3N8MyGZnX+C+OxR4P28ptWXgc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=Dhp1RuoM; arc=none smtp.client-ip=209.85.128.53
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-490b12270b3so7674165e9.1
+        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 09:38:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1780418318; x=1781023118; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=SqqoX5qQzGE5eNHSgLyrNrWlqXnwPa/uOKYx/N6zAZQ=;
+        b=Dhp1RuoMIgkOz1tIgivCGlzcEfCM/F0TwNwrOlD30SOrPUP9X0pk1jKf45MVZXD2qB
+         Y0U2Vh/tibUVKER8x1Wo8FLqPs+VhIPGR222R58rC2yCrEfGdyQvYBOE+pEfchOdbhkt
+         pU0giNtPmGEguen+ViRMghJUGwIMgKi17GuJksCNJtyfUNChDz/NmidxQjstu3eUEQOs
+         xrFrShXa3Na1mri/KdchGz82zqQrrsxTxWshTVVGcANc39kYo8SSegNQ/J3H84x6x7S4
+         aphwriiQvgNf31lUKqNreRJvIPavKKUfsDPrxRkdD/3WnNff4c7FXxWQCPyX6HXerUQT
+         PGuQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780418318; x=1781023118;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=SqqoX5qQzGE5eNHSgLyrNrWlqXnwPa/uOKYx/N6zAZQ=;
+        b=mCgaxSsQKtgl9aelbzmOqoKe8xzk2YETZ36KOZLcBhQfgql0/dJoFQpCznS+MJ1aMs
+         eCUtxbp5i7u0PKql7OyF5P/YhF3DJIbdsZf8RLAa7dVAIJstkcBNJD++fkg52gWfb6v5
+         zX4qNr2yhPMf0xumL+9jRq+TlaUfZJ9gtzoflmla4/QyzeCelOY0JThbeXgmxmtCKj06
+         gBQhS2iraN1b6zAfGO0LonuS7vXVqpup2f9AwL4vnWOUH9VJsoSyPEiYmNQKA9z40M1p
+         QRqlOgoKrhT3d/FdTuFsMYl/KayvocAmBtIyWeON2FAw7SgDgTVsQHHLXl9r6CO/AHBR
+         U3PA==
+X-Forwarded-Encrypted: i=1; AFNElJ9uYud03bAf+JypCx79RCzN6suB28efXqOZIxjAhNxFcax6dTjT2zJrNZkkCltFkvrr6pNVpfSfdbI=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyVPhpx409wEOFCakhY505KlnyAWVJHuJ9p/m44i9TS3HGeGGHT
+	XIC2phRy5HtUTnB9EAC5op4WXjBNwHCjWG1Ji7cmf8aniN99TuJbGNiekJRDfbvpylA=
+X-Gm-Gg: Acq92OEdoPMV1X24ycEmLKpgrXeCkK6so3AP6036gxBCYnKNWb34PzmH/hBlzf7aQjP
+	xsVM8UXhhbuhPE6p5YYz821F7Efmebwd5z4mwuOB9j032niFL4tCr8nJtNPhK/JWuGAvvitjIs9
+	tNn/4h29XNRDRxZIeE7KD4AxpMwtISDErAC83xdMlA99c5UpYSOm6/6+1n5MTfkMS0u14JwwGIQ
+	V23qZzLS188ohyHg3UtM5xD6wJgJ89VH/wCG35XUUurr672v4d3CKZmVQeftPcvB7opN6HRRj3Q
+	QiX1lGx6ZMygcwVJUhCXSHYrOEDNffLt2qfhNjHd51eIwvqIwcEvvmZyixfTIJQGgwRrR8SQyNd
+	6PUfVh66UxmNU6ZMfdXvuSYy6TUYnjpxZSxX/iJnGHRUd6APC+9v/SWa4qzOFR3pjOcZ3jLdqeh
+	YmCdra81oHOuo4b/xPkPY2H/mjFAyU3/vlpjiisbrKq3AQwg==
+X-Received: by 2002:a05:600c:608e:b0:48f:d1c0:5cd3 with SMTP id 5b1f17b1804b1-490b5065ee5mr8757815e9.13.1780418317804;
+        Tue, 02 Jun 2026 09:38:37 -0700 (PDT)
+Received: from linaro.org ([2a02:2454:ff23:4410:9db1:6daa:c0a7:d3cf])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4601f2e4b18sm407269f8f.10.2026.06.02.09.38.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 02 Jun 2026 09:38:37 -0700 (PDT)
+Date: Tue, 2 Jun 2026 18:38:21 +0200
+From: Stephan Gerhold <stephan.gerhold@linaro.org>
+To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Cc: Vinod Koul <vkoul@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+	Thara Gopinath <thara.gopinath@gmail.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	"David S. Miller" <davem@davemloft.net>,
+	Udit Tiwari <quic_utiwari@quicinc.com>,
+	Md Sadre Alam <mdalam@qti.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Peter Ujfalusi <peter.ujfalusi@gmail.com>,
+	Michal Simek <michal.simek@amd.com>, Frank Li <Frank.Li@kernel.org>,
+	Andy Gross <agross@codeaurora.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	dmaengine@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	linux-crypto@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+	brgl@kernel.org,
+	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: [PATCH v19 00/14] crypto/dmaengine: qce: introduce BAM locking
+ and use DMA for register I/O
+Message-ID: <ah8G_ajPS1KhgPP_@linaro.org>
+References: <20260526-qcom-qce-cmd-descr-v19-0-08472fdcbf4a@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260526-qcom-qce-cmd-descr-v19-0-08472fdcbf4a@oss.qualcomm.com>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.34 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
+	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
+	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:npache@redhat.com,m:lance.yang@linux.dev,m:david@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-trace-kernel@vger.kernel.org,m:aarcange@redhat.com,m:akpm@linux-foundation.org,m:anshuman.khandual@arm.com,m:apopple@nvidia.com,m:baohua@kernel.org,m:baolin.wang@linux.alibaba.com,m:byungchul@sk.com,m:catalin.marinas@arm.com,m:cl@gentwo.org,m:corbet@lwn.net,m:dave.hansen@linux.intel.com,m:dev.jain@arm.com,m:gourry@gourry.net,m:hannes@cmpxchg.org,m:hughd@google.com,m:jack@suse.cz,m:jackmanb@google.com,m:jannh@google.com,m:jglisse@google.com,m:joshua.hahnjy@gmail.com,m:kas@kernel.org,m:liam@infradead.org,m:ljs@kernel.org,m:mathieu.desnoyers@efficios.com,m:matthew.brost@intel.com,m:mhiramat@kernel.org,m:mhocko@suse.com,m:peterx@redhat.com,m:pfalcato@suse.de,m:rakie.kim@sk.com,m:raquini@redhat.com,m:rdunlap@infradead.org,m:richard.weiyang@gmail.com,m:rientjes@google.com,m:rostedt@goodmis.org,m:rppt@kernel.org,m:ryan
- .roberts@arm.com,m:shivankg@amd.com,m:sunnanyong@huawei.com,m:surenb@google.com,m:thomas.hellstrom@linux.intel.com,m:tiwai@suse.de,m:usamaarif642@gmail.com,m:vbabka@suse.cz,m:vishal.moola@gmail.com,m:wangkefeng.wang@huawei.com,m:will@kernel.org,m:willy@infradead.org,m:yang@os.amperecomputing.com,m:ying.huang@linux.alibaba.com,m:ziy@nvidia.com,m:zokeefe@google.com,m:usama.arif@linux.dev,m:joshuahahnjy@gmail.com,s:lists@lfdr.de];
-	FREEMAIL_CC(0.00)[linux.dev,kernel.org,vger.kernel.org,kvack.org,redhat.com,linux-foundation.org,arm.com,nvidia.com,linux.alibaba.com,sk.com,gentwo.org,lwn.net,linux.intel.com,gourry.net,cmpxchg.org,google.com,suse.cz,gmail.com,infradead.org,efficios.com,intel.com,suse.com,suse.de,goodmis.org,amd.com,huawei.com,os.amperecomputing.com];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-90547-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER(0.00)[lance.yang@linux.dev,linux-doc@vger.kernel.org];
-	RCVD_COUNT_THREE(0.00)[3];
 	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	TO_DN_NONE(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[lance.yang@linux.dev,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linux.dev:+];
-	RCPT_COUNT_GT_50(0.00)[60];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,lwn.net,gmail.com,gondor.apana.org.au,davemloft.net,quicinc.com,qti.qualcomm.com,amd.com,codeaurora.org,linaro.org,vger.kernel.org,lists.infradead.org,oss.qualcomm.com];
+	TAGGED_FROM(0.00)[bounces-90549-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:bartosz.golaszewski@oss.qualcomm.com,m:vkoul@kernel.org,m:corbet@lwn.net,m:thara.gopinath@gmail.com,m:herbert@gondor.apana.org.au,m:davem@davemloft.net,m:quic_utiwari@quicinc.com,m:mdalam@qti.qualcomm.com,m:lumag@kernel.org,m:mani@kernel.org,m:andersson@kernel.org,m:peter.ujfalusi@gmail.com,m:michal.simek@amd.com,m:Frank.Li@kernel.org,m:agross@codeaurora.org,m:neil.armstrong@linaro.org,m:dmaengine@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-arm-msm@vger.kernel.org,m:linux-crypto@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:brgl@kernel.org,m:bartosz.golaszewski@linaro.org,m:dmitry.baryshkov@oss.qualcomm.com,m:konrad.dybcio@oss.qualcomm.com,m:tharagopinath@gmail.com,m:peterujfalusi@gmail.com,s:lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[26];
+	FORGED_SENDER(0.00)[stephan.gerhold@linaro.org,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	DKIM_TRACE(0.00)[linaro.org:+];
+	MISSING_XM_UA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[stephan.gerhold@linaro.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,linux.dev:mid,linux.dev:dkim,linux.dev:from_mime,linux.dev:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp,sashiko.dev:url,linaro.org:mid,linaro.org:from_mime,linaro.org:dkim]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 099F563065E
+X-Rspamd-Queue-Id: 05AD5630592
 
+On Tue, May 26, 2026 at 03:10:48PM +0200, Bartosz Golaszewski wrote:
+> I feel like I fell into the trap of trying to address pre-existing
+> issues reported by sashiko and in the process provoking more reports so
+> let this be the last iteration where I do this. Vinod can we get this
+> queued for v7.2 now and iron out any previously existing problems in
+> tree?
 
-On Tue, Jun 02, 2026 at 09:30:06AM -0600, Nico Pache wrote:
->On Mon, Jun 1, 2026 at 4:48 AM Lance Yang <lance.yang@linux.dev> wrote:
->>
->>
->>
->> On 2026/6/1 18:23, David Hildenbrand (Arm) wrote:
->> > On 6/1/26 11:08, Lance Yang wrote:
->> >>
->> >>
->> >> On 2026/6/1 14:54, David Hildenbrand (Arm) wrote:
->> >>> On 6/1/26 05:28, Lance Yang wrote:
->> >>>>
->> >>>>
->> >>>> Ah, fair point.
->> >>>>
->> >>>> I was mostly worried about arch hooks that walk vma->vm_mm again, rather
->> >>>> than only using the pte pointer passed in. For example, mips does:
->> >>>
->> >>> Right, a re-walk would be the real problem.
->> >>>
->> >>>>
->> >>>>     update_mmu_cache_range()
->> >>>>       -> __update_tlb()
->> >>>>         -> pgd_offset(vma->vm_mm, address)
->> >>>>         -> pte_offset_map(...)
->> >>>>
->> >>>> and __update_tlb() has this assumption:
->> >>>>
->> >>>>          /*
->> >>>>           * update_mmu_cache() is called between pte_offset_map_lock()
->> >>>>           * and pte_unmap_unlock(), so we can assume that ptep is not
->> >>>>           * NULL here: and what should be done below if it were NULL?
->> >>>>           */
->> >>>>
->> >>>> So if khugepaged happens to run with current->active_mm == vma->vm_mm
->> >>>> here, could __update_tlb() hit the none PMD, get NULL from
->> >>>> pte_offset_map(), and then dereference it?
->> >>>
->> >>> Likely yes -- that MIPS code is horrible. And the comment in MIPS code
->> >>> even spells that out. :(
->> >>>
->> >>> Do you know about other code like that, or is MIPS the only one doing a
->> >>> re-walk and crossing fingers?
->> >>>
->> >>>>
->> >>>> Just wanted to raise it since some arch code may still have assumptions
->> >>>> like this, and the always-enable-mTHP work is getting closer ...
->> >>>
->> >>> Right. I assume set_pte_at() couldn't trigger something similar (re-walk) in
->> >>> arch code,
->> >>> because we simply provide the ptep. update_mmu_cache_range() only consumes the
->> >>> pte.
->> >>>
->> >>>>
->> >>>> Probably very very very hard to hit, though :)
->> >>>
->> >>> Delaying update_mmu_cache_range() is nasty, as we'd have to make sure that
->> >>> nobody can interfere in the meantime ... and the PMD lock will not be sufficient.
->> >>>
->> >>> Maybe we could reinstall the page table with the cleared (none) entries while
->> >>> still holding the PTL?
->> >>>
->> >>> Thinking out loud:
->> >>>
->> >>> diff --git a/mm/khugepaged.c b/mm/khugepaged.c
->> >>> index 5ba298d420b7..e39b750b1e6f 100644
->> >>> --- a/mm/khugepaged.c
->> >>> +++ b/mm/khugepaged.c
->> >>> @@ -1413,13 +1413,17 @@ static enum scan_result collapse_huge_page(struct
->> >>> mm_struct *mm, unsigned long s
->> >>>                   map_anon_folio_pmd_nopf(folio, pmd, vma, pmd_addr);
->> >>>           } else {
->> >>>                   /*
->> >>> -                * set_ptes is called in map_anon_folio_pte_nopf with the
->> >>> -                * pmd_ptl lock still held; this is safe as the PMD is expected
->> >>> -                * to be none. The pmd entry is then repopulated below.
->> >>> +                * Re-insert the page table with the cleared entries, but
->> >>> +                * hold the PTL, such that no one can mess with the re-installed
->> >>> +                * page table until we updated the temporarily-cleared entries
->> >>> +                * through map_anon_folio_pte_nopf().
->> >>>                    */
->> >>> -               map_anon_folio_pte_nopf(folio, pte, vma, start_addr, /
->> >>> *uffd_wp=*/ false);
->> >>> -               smp_wmb(); /* make PTEs visible before PMD. See pmd_install() */
->> >>
->> >> One small thing, I think we should probably keep the smp_wmb(), and just
->> >> move it before the earlier pmd_populate().
->> >>
->> >> IIUC, the ordering we want is still:
->> >>
->> >>    clear old PTEs
->> >>    smp_wmb()
->> >>    pmd_populate()
->> >>
->> >> so another CPU cannot walk through the re-installed PMD and still observe
->> >> the old PTEs, right?
->> >
->> > There is a smp_wmb() in __folio_mark_uptodate(), that should be sufficient?
->>
->> Ah, cool! __folio_mark_uptodate() already does the job :P
->>
->> So yeah, no extra smp_wmb() needed here!
->
->are we sure? that folio_mark_uptodate is done before the PTEs are
->reinstalled. Then we reinstall the PMD right after. Currently
->separated by the smp_wmb().
+Thanks a lot for working on fixing all these issues!
 
-Reinstalling the PMD first makes the PTE table reachable again, right?
+I agree there is no point addressing all the "pre-existing issues"
+pointed out by Sashiko, but have you looked through the other comments
+for new issues pointed out for your patches?
 
-So before pmd_populate(), we only need to order the old PTE clears before
-the PTE table is reachable again; __folio_mark_uptodate() already has the
-smp_wmb() for that :)
+Out of curiosity, I was looking a bit at the comments for [PATCH v19
+06/14] dmaengine: qcom: bam_dma: add support for BAM locking [1]. There
+are 8 open comments there (Critical: 1, High: 6 and Medium: 1). From a
+quick look I would say most of these could be valid. The critical one
+about the usage of dma_cookie_assign() sounds a bit concerning to me, if
+it is true we would be basically breaking parts of the dmaengine API for
+consumers by inserting the lock descriptor in front of everything else.
 
-The new PTEs are filled later under the PTL.
+[1]: https://sashiko.dev/#/patchset/20260526-qcom-qce-cmd-descr-v19-0-08472fdcbf4a%40oss.qualcomm.com?part=6
 
-Hopefully I didn't miss soemthing :)
-
->I was copying this from other THP code that performs similar PTE/PMD juggling.
->
->I can remove it, but I'd rather air on the side of caution with this.
-
-Cheers, Lance
+Thanks,
+Stephan
 
