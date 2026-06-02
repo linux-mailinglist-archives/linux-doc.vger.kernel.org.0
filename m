@@ -1,207 +1,289 @@
-Return-Path: <linux-doc+bounces-90495-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90487-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8Po6Eam7HmrZJgAAu9opvQ
-	(envelope-from <linux-doc+bounces-90495-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 13:16:57 +0200
+	id SE7pKmuzHmr7JAAAu9opvQ
+	(envelope-from <linux-doc+bounces-90487-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 12:41:47 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id EE4E962D471
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 13:16:56 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2F53262CC68
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 12:41:47 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id B07D8304DE92
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 11:13:04 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E5E8D304B6BB
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 10:25:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 17F943D3D14;
-	Tue,  2 Jun 2026 11:12:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 06E453D5C10;
+	Tue,  2 Jun 2026 10:25:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xmission.com header.i=@xmission.com header.b="PT1nwI4K"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="Qh2SJbMM";
+	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="Tf5e8hGD"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out02.mta.xmission.com (out02.mta.xmission.com [166.70.13.232])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C5D0D3D5C0C;
-	Tue,  2 Jun 2026 11:12:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=166.70.13.232
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780398772; cv=none; b=qgLH/i0NL+XBarjIdlPH26etRAHkrP97UHzrntyNLC5oncKOTQ56u/Hbit3C/yGw9AbsgyVFMGhiI55krm/VUZnxlSpn+XtA1kgPr3Mi4fTcsONTYM5FXCuVeFZAWL0TeyGqQRRos1uey/2Xu3ctT2FX1EqBBx/eTvY28KbbfUQ=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780398772; c=relaxed/simple;
-	bh=vvILlsXaVQShutp1p5WceQi2Eaf3pB4ovG/S15HHsU4=;
-	h=From:To:Cc:In-Reply-To:References:Date:Message-ID:MIME-Version:
-	 Content-Type:Subject; b=cNHkPHmtouJJRpCZK+UhcqWNnVG5Lnj/ejJkkyBb5FzLTOY4+tGJEfbHDPiD/c+8vGwiYeHAUgNjc0CC3//sCAJFkNx0uwE8zfSpNt6jFeXySlJHlHrdViH9FrHGsc9zhd0iiVVL9o91EUAYtQCKiwa1XB3bZ3PFo73l6liDFYc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=xmission.com; spf=pass smtp.mailfrom=xmission.com; dkim=pass (1024-bit key) header.d=xmission.com header.i=@xmission.com header.b=PT1nwI4K; arc=none smtp.client-ip=166.70.13.232
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=xmission.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=xmission.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=simple/simple; d=xmission.com;
-	 s=xmission; h=Subject:Content-Type:MIME-Version:Message-ID:Date:References:
-	In-Reply-To:Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-	List-Post:List-Owner:List-Archive;
-	bh=vvILlsXaVQShutp1p5WceQi2Eaf3pB4ovG/S15HHsU4=; b=PT1nwI4K/LueK0DDSNL+s4C13J
-	wCISW9cQ6Rku1p5e71v6LNcH9E8BpNOErgTq20OxsIi/JohdQWrgMebuwQrMKgen7pJXROs+AsRqv
-	q/PDtUrCrIsMZAHrVRiLpwUsOkpysGxuDIlQz4e1uDX5u9eweqgYZDbb9a8545EZNJqI=;
-Received: from in01.mta.xmission.com ([166.70.13.51]:57296)
-	by out02.mta.xmission.com with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.93)
-	(envelope-from <ebiederm@xmission.com>)
-	id 1wUMHI-00EQUk-Sf; Tue, 02 Jun 2026 04:23:20 -0600
-Received: from ip72-198-198-28.om.om.cox.net ([72.198.198.28]:37600 helo=email.froward.int.ebiederm.org.xmission.com)
-	by in01.mta.xmission.com with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.93)
-	(envelope-from <ebiederm@xmission.com>)
-	id 1wUMHF-002RRp-JI; Tue, 02 Jun 2026 04:23:20 -0600
-From: "Eric W. Biederman" <ebiederm@xmission.com>
-To: Andreas Schwab <schwab@linux-m68k.org>
-Cc: Deepak Gupta <debug@rivosinc.com>,  Deepak Gupta via B4 Relay
- <devnull+debug.rivosinc.com@kernel.org>,  Thomas Gleixner
- <tglx@linutronix.de>,  Ingo Molnar <mingo@redhat.com>,  Borislav Petkov
- <bp@alien8.de>,  Dave Hansen <dave.hansen@linux.intel.com>,
-  x86@kernel.org,  "H. Peter Anvin" <hpa@zytor.com>,  Andrew Morton
- <akpm@linux-foundation.org>,  "Liam R. Howlett" <Liam.Howlett@oracle.com>,
-  Vlastimil Babka <vbabka@suse.cz>,  Lorenzo Stoakes
- <lorenzo.stoakes@oracle.com>,  Paul Walmsley <paul.walmsley@sifive.com>,
-  Palmer Dabbelt <palmer@dabbelt.com>,  Albert Ou <aou@eecs.berkeley.edu>,
-  Conor Dooley <conor@kernel.org>,  Rob Herring <robh@kernel.org>,
-  Krzysztof Kozlowski <krzk+dt@kernel.org>,  Arnd Bergmann <arnd@arndb.de>,
-  Christian Brauner <brauner@kernel.org>,  Peter Zijlstra
- <peterz@infradead.org>,  Oleg Nesterov <oleg@redhat.com>,  Kees Cook
- <kees@kernel.org>,  Jonathan Corbet <corbet@lwn.net>,  Shuah Khan
- <shuah@kernel.org>,  Jann Horn <jannh@google.com>,  Conor Dooley
- <conor+dt@kernel.org>,  Miguel Ojeda <ojeda@kernel.org>,  Alex Gaynor
- <alex.gaynor@gmail.com>,  Boqun Feng <boqun.feng@gmail.com>,  Gary Guo
- <gary@garyguo.net>,  =?utf-8?Q?Bj=C3=B6rn?= Roy Baron
- <bjorn3_gh@protonmail.com>,  Andreas
- Hindborg <a.hindborg@kernel.org>,  Alice Ryhl <aliceryhl@google.com>,
-  Trevor Gross <tmgross@umich.edu>,  Benno Lossin <lossin@kernel.org>,
-  linux-kernel@vger.kernel.org,  linux-fsdevel@vger.kernel.org,
-  linux-mm@kvack.org,  linux-riscv@lists.infradead.org,
-  devicetree@vger.kernel.org,  linux-arch@vger.kernel.org,
-  linux-doc@vger.kernel.org,  linux-kselftest@vger.kernel.org,
-  alistair.francis@wdc.com,  richard.henderson@linaro.org,
-  jim.shu@sifive.com,  andybnac@gmail.com,  kito.cheng@sifive.com,
-  charlie@rivosinc.com,  atishp@rivosinc.com,  evan@rivosinc.com,
-  cleger@rivosinc.com,  alexghiti@rivosinc.com,  samitolvanen@google.com,
-  broonie@kernel.org,  rick.p.edgecombe@intel.com,
-  rust-for-linux@vger.kernel.org,  Zong Li <zong.li@sifive.com>
-In-Reply-To: <87wlwif04z.fsf@igel.home> (Andreas Schwab's message of "Mon, 01
-	Jun 2026 22:58:52 +0200")
-References: <20251112-v5_user_cfi_series-v23-0-b55691eacf4f@rivosinc.com>
-	<20251112-v5_user_cfi_series-v23-6-b55691eacf4f@rivosinc.com>
-	<87jyslndo4.fsf@igel.home>
-	<CAKC1njS=AHu6uHrH4ae8VxcdEbhgiPXYCAoN3F_mnppBd3SwOA@mail.gmail.com>
-	<875x44o9hj.fsf@igel.home>
-	<CAKC1njSn_rtCj8ii876PNQTk0nsCTfWsb4DzdymufHVthh1Rkg@mail.gmail.com>
-	<871peqgp9v.fsf@igel.home>
-	<CAKC1njR+dTdvp+BmLGPtgd8dufiUwBtkQ9a-qinELT_Fmi13sQ@mail.gmail.com>
-	<87wlwif04z.fsf@igel.home>
-Date: Tue, 02 Jun 2026 05:23:10 -0500
-Message-ID: <87tsrli6lt.fsf@email.froward.int.ebiederm.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B3BE3D45E4
+	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 10:25:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=170.10.133.124
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1780395934; cv=pass; b=lKDIwEYe1HfZOqEW8gzB6sf42aEy/t1aI7Ba3OkKv3ieoIQo9hUT9oB3kwLqaaps6tkrQGxAyDeRdIhQ/R6CpWUIj+NX8BZ1SunKfR5tcasdih5B8/fsg7WtIjphgTlnQkKOS66rJovDGjJVaXCPyEtSGv/ZPkyN9V3kb6JtSqw=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1780395934; c=relaxed/simple;
+	bh=v/mNUCzjMW3NuapFIOaBB2YWhUzZvLlhF6p5ViObTzw=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=IrLgmNnb1Ce2KxinPizXNplq1BKw8oCA/f5yZxSjVuwj5VPMHro2yT4VXR+IDz+6O8RUDm6busTN4rVX2MZFnjpaAg/YFH7lldSzcqq233McTfEwd4oBoi5iCCmfRpuG1pIbxBRz8MS46toGBPytwEyfmibLBI/BjlTLOeO4fyI=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=Qh2SJbMM; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=Tf5e8hGD; arc=pass smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1780395932;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=tz/vVgYlWzqjYdT5CgsjAyARbiWMqKQW/JOPkRDARg4=;
+	b=Qh2SJbMMumu/5DJVt4QdFbyS60/DjktMyZ30i/lSOR2oRKvFTws7afyiOaZXy4Woh1b6lW
+	Q6vOhlPMkpwz7MPuu6TRO4bHdX1yd8WyHOYWp1dj3DcDQSxzCDxW+TYuFSoyqv14H/hCHI
+	Ra+SiSq9LEpzvai7KLjpucNPAuJY+WU=
+Received: from mail-yx1-f69.google.com (mail-yx1-f69.google.com
+ [74.125.224.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-156-aEJSGn0XOLem1C2apj3cxQ-1; Tue, 02 Jun 2026 06:25:31 -0400
+X-MC-Unique: aEJSGn0XOLem1C2apj3cxQ-1
+X-Mimecast-MFC-AGG-ID: aEJSGn0XOLem1C2apj3cxQ_1780395931
+Received: by mail-yx1-f69.google.com with SMTP id 956f58d0204a3-660575c74f1so5406663d50.3
+        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 03:25:31 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780395931; cv=none;
+        d=google.com; s=arc-20240605;
+        b=lPBgmkRejJJXzm4KGjWo4WKM5dzInZqepfKmAV7nDD18TnXG4ezJ7d951OIuG+ovYL
+         8N7IZ800bHoHmNc7533kdZ7NWjdRjHoRCfMwePUkmZ22dGjkwVpsS77hKaNdhxpqpD5T
+         VEBHNRKMpeSTTx/ItnvsBk+5zz6qOBwMqtKwhQr+7YMr6Hw/14ciQZdvbml6yHqBm0Fv
+         UFrUgdo20u5Z+9HbX7oAZlnX8ppSG9i5yQ1G0jzIGWplLNOMR1RDi8A7H+n2r+kNHekq
+         DbDk4eKrlMNodOZc/i1oV7kOh2n16LuSQiPztGX04j8l5gbS0B6+5Ci32uNu8vu0v/z8
+         W/DA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=tz/vVgYlWzqjYdT5CgsjAyARbiWMqKQW/JOPkRDARg4=;
+        fh=/Zx+XU+1HHk4Acx7QwlldthIwSJ+IUnl+N2so9LKFX8=;
+        b=SStN4abnioih+iDx5/o1ZQDs6GACZ41akLiGRMv79RLVPim3kSmLEJi4aohU5r7/rU
+         EiM73+YNbtZVbrskrtCWShHhxbGsKgIdwPaHBLbVX8q+xFg6GhmCTB1ND6O06pdEnOwl
+         kHgZVkb6iJwFP9lbSF/p1szNY/QjUc5jPPBJIh/deSBOkWKhLdYDXeBrK/DLesjvhThy
+         /WDSgJm5TThSmorn7H56/Ei+UWMNZQHxq8oY7s0ozcChDvGkBZJhMI1Hdl2z9GUdskJP
+         sINyiqmzJe45EQNqtysSIzDdMdMort4QyujruySLu9hSXwKbjnvkeX67fbBZaWsvUR7u
+         W8DQ==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=redhat.com; s=google; t=1780395931; x=1781000731; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=tz/vVgYlWzqjYdT5CgsjAyARbiWMqKQW/JOPkRDARg4=;
+        b=Tf5e8hGDgT/4k4qtsgkSP2TUakZ79EPVK6qpzpw0PmLX4mCQxYaQ/6oGhHl/nudJFv
+         ZCkahNcNcs9l2w+M0gtDZjBR4icTKJR8KyiYLlN96V4L9KzmtRmnus3rX2WF0VdWXLTs
+         Easwei9R900yJs73JiQL7YKs6CveQWiUiKArZexrp25V3n5vg5MRH4yBg1NBThIglHiw
+         dFlJaKHaxab2fLKT1Ey0I60qdvzKmSlYg6dvUnhWvFsQQpp0gn8ezIP5XDX1Cf/pz3hJ
+         M0r2Y1pgRi7fGEyuCK46MnAgs8/SpBuzuNmzk5DQ7yA3b4XgVh8wOtGZlJwKbMrMNCd0
+         ttTA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780395931; x=1781000731;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=tz/vVgYlWzqjYdT5CgsjAyARbiWMqKQW/JOPkRDARg4=;
+        b=q2AywPdMI6knSlPvo8W86kPSdh5fN3Y0CfUQpiikVJQ/1dLZvJ9TbmQzNq8gGxDZ2S
+         jiFbBvUN8O5CULR2I7vzvrYNfB+x+GSCc5Ki9d7mqgA0YFNEAwdr3Yrw/xPqPR3lDUTZ
+         QAFIqKrIHiVDyCT9opw0e0UnVUvhUDfYHJqdRyX8qI7dRssX8opDr7gFIfewk9JCyMTU
+         FzDo3CFjtzphx8a3zKi8Jxpui4OzF26jj1SyzIVER7lHtNlZZp+NI4xJbfAotvLBpAYb
+         cuu9XwGeyVvjy1qy9V7ZU2KsPpGRx6uLigmj98Z8Dsof3VG9kH9wA0Z/fGOIdZ7YHOyv
+         b2bA==
+X-Gm-Message-State: AOJu0Yyi8dRdSzpOQZUdNFd8dRHch/e1LtdS4ryltHaNDROz4zdkGmw4
+	EQDhL+9PbFI1kpgEifZH9CtWx6iAkyVQMxfTwJdUxrbHO7lA3BuhJsFwHTSfDKLfijDzd8HuSih
+	oKaIW8JUoWz4JDGVcKG4pGvuNdWNLiVXy6pHDbjyPsxwFtraD06++XOIoKdvAqOAI14FUryrGPB
+	Tlpkp5qT4PFjHKudpMs5GBvN3bOd+LWSo4HFx5
+X-Gm-Gg: Acq92OHHczBkJewuOmpuxzimjp+KNgeItAgOE3vCaVnbnxtkn6DhfWl4k9raEBO7iCI
+	cmDAz+tidCe7znlZxMFWOz1pOzH0t4EzsOCvC68KqZsaq4xuJ+R4W7ggQRArs6WQ5CdcwP5ZWH2
+	5nNNxx/ryjkqYWGbLiipvyMLs1skiN2emvD5ftvz2vCjU0jPrbw05HGnAog+htrSicy7EOpYngw
+	ZVZ9reE8ujYWQUbMQ==
+X-Received: by 2002:a05:690e:1595:20b0:660:5e16:f249 with SMTP id 956f58d0204a3-6605edecbf9mr9767414d50.11.1780395930762;
+        Tue, 02 Jun 2026 03:25:30 -0700 (PDT)
+X-Received: by 2002:a05:690e:1595:20b0:660:5e16:f249 with SMTP id
+ 956f58d0204a3-6605edecbf9mr9767365d50.11.1780395930340; Tue, 02 Jun 2026
+ 03:25:30 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-XM-SPF: eid=1wUMHF-002RRp-JI;;;mid=<87tsrli6lt.fsf@email.froward.int.ebiederm.org>;;;hst=in01.mta.xmission.com;;;ip=72.198.198.28;;;frm=ebiederm@xmission.com;;;spf=pass
-X-XM-AID: U2FsdGVkX19J6tpF2AGRJ9xglxGPNzSSZeVg13KZsgY=
-X-Spam-Level: 
-X-Spam-Virus: No
-X-Spam-Report: 
-	* -1.0 ALL_TRUSTED Passed through trusted hosts only via SMTP
-	*  0.1 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-	*      [score: 0.4997]
-	*  0.7 XMSubLong Long Subject
-	*  0.0 T_TM2_M_HEADER_IN_MSG BODY: No description available.
-	* -0.0 DCC_CHECK_NEGATIVE Not listed in DCC
-	*      [sa02 1397; Body=1 Fuz1=1 Fuz2=1]
-	*  0.0 T_TooManySym_01 4+ unique symbols in subject
-	*  0.0 T_TooManySym_02 5+ unique symbols in subject
-X-Spam-DCC: XMission; sa02 1397; Body=1 Fuz1=1 Fuz2=1 
-X-Spam-Combo: ;Andreas Schwab <schwab@linux-m68k.org>
-X-Spam-Relay-Country: 
-X-Spam-Timing: total 2774 ms - load_scoreonly_sql: 0.03 (0.0%),
-	signal_user_changed: 3.6 (0.1%), b_tie_ro: 2.5 (0.1%), parse: 0.84
-	(0.0%), extract_message_metadata: 8 (0.3%), get_uri_detail_list: 0.86
-	(0.0%), tests_pri_-2000: 7 (0.3%), tests_pri_-1000: 8 (0.3%),
-	tests_pri_-950: 1.02 (0.0%), tests_pri_-900: 0.92 (0.0%),
-	tests_pri_-90: 62 (2.2%), check_bayes: 61 (2.2%), b_tokenize: 13
-	(0.5%), b_tok_get_all: 9 (0.3%), b_comp_prob: 1.76 (0.1%),
-	b_tok_touch_all: 35 (1.3%), b_finish: 0.56 (0.0%), tests_pri_0: 297
-	(10.7%), check_dkim_signature: 0.41 (0.0%), check_dkim_adsp: 3.2
-	(0.1%), poll_dns_idle: 2367 (85.3%), tests_pri_10: 2.7 (0.1%),
-	tests_pri_500: 2379 (85.8%), rewrite_mail: 0.00 (0.0%)
-Subject: Re: [PATCH v23 06/28] riscv/mm : ensure PROT_WRITE leads to VM_READ
- | VM_WRITE
-X-SA-Exim-Connect-IP: 166.70.13.51
-X-SA-Exim-Rcpt-To: too long (recipient list exceeded maximum allowed size of 512 bytes)
-X-SA-Exim-Mail-From: ebiederm@xmission.com
-X-SA-Exim-Scanned: No (on out02.mta.xmission.com); SAEximRunCond expanded to false
-X-Rspamd-Queue-Id: EE4E962D471
+References: <20260522150009.121603-1-npache@redhat.com> <20260522150009.121603-6-npache@redhat.com>
+ <ah2Ro54tMDMsPevk@lucifer>
+In-Reply-To: <ah2Ro54tMDMsPevk@lucifer>
+From: Nico Pache <npache@redhat.com>
+Date: Tue, 2 Jun 2026 04:26:09 -0600
+X-Gm-Features: AVHnY4JldSmClM5zWrsLMpr94a96n3CDQXVYIR75HwJ96w-KO0z_Xu55vTpSsPY
+Message-ID: <CAA1CXcAXWWKD64YYGL2ue5iKFUiGsSq-pK2_8qvvgG6EBS079Q@mail.gmail.com>
+Subject: Re: [PATCH mm-unstable v18 05/14] mm/khugepaged: require
+ collapse_huge_page to enter/exit with the lock dropped
+To: Lorenzo Stoakes <ljs@kernel.org>
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-mm@kvack.org, linux-trace-kernel@vger.kernel.org, aarcange@redhat.com, 
+	akpm@linux-foundation.org, anshuman.khandual@arm.com, apopple@nvidia.com, 
+	baohua@kernel.org, baolin.wang@linux.alibaba.com, byungchul@sk.com, 
+	catalin.marinas@arm.com, cl@gentwo.org, corbet@lwn.net, 
+	dave.hansen@linux.intel.com, david@kernel.org, dev.jain@arm.com, 
+	gourry@gourry.net, hannes@cmpxchg.org, hughd@google.com, jack@suse.cz, 
+	jackmanb@google.com, jannh@google.com, jglisse@google.com, 
+	joshua.hahnjy@gmail.com, kas@kernel.org, lance.yang@linux.dev, 
+	liam@infradead.org, mathieu.desnoyers@efficios.com, matthew.brost@intel.com, 
+	mhiramat@kernel.org, mhocko@suse.com, peterx@redhat.com, pfalcato@suse.de, 
+	rakie.kim@sk.com, raquini@redhat.com, rdunlap@infradead.org, 
+	richard.weiyang@gmail.com, rientjes@google.com, rostedt@goodmis.org, 
+	rppt@kernel.org, ryan.roberts@arm.com, shivankg@amd.com, 
+	sunnanyong@huawei.com, surenb@google.com, thomas.hellstrom@linux.intel.com, 
+	tiwai@suse.de, usamaarif642@gmail.com, vbabka@suse.cz, vishal.moola@gmail.com, 
+	wangkefeng.wang@huawei.com, will@kernel.org, willy@infradead.org, 
+	yang@os.amperecomputing.com, ying.huang@linux.alibaba.com, ziy@nvidia.com, 
+	zokeefe@google.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Rspamd-Queue-Id: 2F53262CC68
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [1.64 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_DKIM_REJECT(1.00)[xmission.com:s=xmission];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[xmission.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
+	FREEMAIL_CC(0.00)[vger.kernel.org,kvack.org,redhat.com,linux-foundation.org,arm.com,nvidia.com,kernel.org,linux.alibaba.com,sk.com,gentwo.org,lwn.net,linux.intel.com,gourry.net,cmpxchg.org,google.com,suse.cz,gmail.com,linux.dev,infradead.org,efficios.com,intel.com,suse.com,suse.de,goodmis.org,amd.com,huawei.com,os.amperecomputing.com];
 	FROM_HAS_DN(0.00)[];
-	TAGGED_FROM(0.00)[bounces-90495-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
+	TAGGED_FROM(0.00)[bounces-90487-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[rivosinc.com,kernel.org,linutronix.de,redhat.com,alien8.de,linux.intel.com,zytor.com,linux-foundation.org,oracle.com,suse.cz,sifive.com,dabbelt.com,eecs.berkeley.edu,arndb.de,infradead.org,lwn.net,google.com,gmail.com,garyguo.net,protonmail.com,umich.edu,vger.kernel.org,kvack.org,lists.infradead.org,wdc.com,linaro.org,intel.com];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ebiederm@xmission.com,linux-doc@vger.kernel.org];
-	TAGGED_RCPT(0.00)[linux-doc,debug.rivosinc.com,dt];
-	RCPT_COUNT_GT_50(0.00)[60];
-	DKIM_TRACE(0.00)[xmission.com:-];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[redhat.com:+];
+	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linux-m68k.org:email,email.froward.int.ebiederm.org:mid,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[npache@redhat.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCPT_COUNT_GT_50(0.00)[58];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
 X-Rspamd-Action: no action
 
-Andreas Schwab <schwab@linux-m68k.org> writes:
-
-> On Jun 01 2026, Deepak Gupta wrote:
+On Mon, Jun 1, 2026 at 8:13=E2=80=AFAM Lorenzo Stoakes <ljs@kernel.org> wro=
+te:
 >
->> riscv uses `VM_SHADOW_STACK`. It's just very simple to use `protection_map`
->> with just `VM_WRITE`. On RISC-V, `-W-` is a shadow stack mapping. It's not same
->> on x86 or arm64. So `protection_map[VM_WRITE]` simply picks shadow stack
->> encoding. We just ensure that PROT_WRITE is converted to
->> "VM_READ | VM_WRITE" at vma level.
+> On Fri, May 22, 2026 at 09:00:00AM -0600, Nico Pache wrote:
+> > Currently the collapse_huge_page function requires the mmap_read_lock t=
+o
+> > enter with it held, and exit with it dropped. This function moves the
+> > unlock into its parent caller, and changes this semantic to requiring i=
+t
+> > to enter/exit with it always unlocked.
+> >
+> > In future patches, we need this expectation, as for in mTHP collapse, w=
+e
+> > may have already have dropped the lock, and do not want to conditionall=
+y
+> > check for this by passing through the lock_dropped variable.
+> >
+> > No functional change is expected as one of the first things the
+> > collapse_huge_page function does is drop this lock before allocating th=
+e
+> > hugepage.
+> >
+> > Acked-by: David Hildenbrand (Arm) <david@kernel.org>
+> > Signed-off-by: Nico Pache <npache@redhat.com>
 >
-> That does not explain _why_ you need to make that user visible change,
-> when others can get away without it.
+> One small nit below, otherwise LGTM, so:
+>
+> Reviewed-by: Lorenzo Stoakes <ljs@kernel.org>
 
-Especially since as I recall the decision was made was that the user
-visible protection bits would match the mmap call.  If there is some
-combination an architecture does not support that would simply not be
-reflected in hardware until some future version of the hardware gets
-around to supporting it.
+Thank you for reviewing!
 
-This is what happened with executable page permissions on x86 for
-example.  It used to be that it was not possible to deny execute
-permission on a readable page.  Later that proved sufficiently valuable
-that support for denying execute permission was added to the hardware.
+>
+> > ---
+> >  mm/khugepaged.c | 16 ++++++++--------
+> >  1 file changed, 8 insertions(+), 8 deletions(-)
+> >
+> > diff --git a/mm/khugepaged.c b/mm/khugepaged.c
+> > index e98ba5b15163..fab35d318641 100644
+> > --- a/mm/khugepaged.c
+> > +++ b/mm/khugepaged.c
+> > @@ -1208,6 +1208,12 @@ static enum scan_result alloc_charge_folio(struc=
+t folio **foliop, struct mm_stru
+> >       return SCAN_SUCCEED;
+> >  }
+> >
+> > +/*
+> > + * collapse_huge_page expects the mmap_lock to be unlocked before ente=
+ring and
+> > + * will always return with the lock unlocked, to avoid holding the mma=
+p_lock
+> > + * while allocating a THP, as that could trigger direct reclaim/compac=
+tion.
+> > + * Note that the VMA must be rechecked after grabbing the mmap_lock ag=
+ain.
+> > + */
+> >  static enum scan_result collapse_huge_page(struct mm_struct *mm, unsig=
+ned long address,
+> >               int referenced, int unmapped, struct collapse_control *cc=
+)
+> >  {
+> > @@ -1223,14 +1229,6 @@ static enum scan_result collapse_huge_page(struc=
+t mm_struct *mm, unsigned long a
+> >
+> >       VM_BUG_ON(address & ~HPAGE_PMD_MASK);
+> >
+> > -     /*
+> > -      * Before allocating the hugepage, release the mmap_lock read loc=
+k.
+> > -      * The allocation can take potentially a long time if it involves
+> > -      * sync compaction, and we do not need to hold the mmap_lock duri=
+ng
+> > -      * that. We will recheck the vma after taking it again in write m=
+ode.
+> > -      */
+> > -     mmap_read_unlock(mm);
+> > -
+>
+> NIT: Maybe worth an mmap_assert_locked()?
 
-That all happened quite transparently to userspace, that wasn't trying
-to assuming PROT_READ implied PROT_EXEC.
+But it will already be unlocked here. The contract is that we enter
+unlocked and exit unlocked.
 
-So I am at a complete loss why someone would choose to break userspace
-by confusing hardware limitations with what userspace asks for in mmap.
+Cheers,
+-- Nico
 
-Eric
+>
+> >       result =3D alloc_charge_folio(&folio, mm, cc, HPAGE_PMD_ORDER);
+> >       if (result !=3D SCAN_SUCCEED)
+> >               goto out_nolock;
+> > @@ -1535,6 +1533,8 @@ static enum scan_result collapse_scan_pmd(struct =
+mm_struct *mm,
+> >  out_unmap:
+> >       pte_unmap_unlock(pte, ptl);
+> >       if (result =3D=3D SCAN_SUCCEED) {
+> > +             /* collapse_huge_page expects the lock to be dropped befo=
+re calling */
+> > +             mmap_read_unlock(mm);
+> >               result =3D collapse_huge_page(mm, start_addr, referenced,
+> >                                           unmapped, cc);
+> >               /* collapse_huge_page will return with the mmap_lock rele=
+ased */
+> > --
+> > 2.54.0
+> >
+>
+> Cheers, Lorenzo
+>
 
 
