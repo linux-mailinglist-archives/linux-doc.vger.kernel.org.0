@@ -1,145 +1,227 @@
-Return-Path: <linux-doc+bounces-90434-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90436-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6FDYB3tKHmq+iQkAu9opvQ
-	(envelope-from <linux-doc+bounces-90434-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 05:14:03 +0200
+	id mBjDGGVLHmrmiQkAu9opvQ
+	(envelope-from <linux-doc+bounces-90436-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 05:17:57 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C917627991
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 05:14:02 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0E955627A10
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 05:17:56 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 9D5BA301496F
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 03:12:19 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 925A8304ADE2
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 03:17:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D5BD22C234A;
-	Tue,  2 Jun 2026 03:12:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2BB1233B6F1;
+	Tue,  2 Jun 2026 03:17:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="kWD9rCZs"
+	dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b="CEenTv2r"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com [209.85.160.174])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 949D633BBBD
-	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 03:12:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A873223DC6
+	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 03:17:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.174
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780369938; cv=none; b=T30AgbbTOrm97v8MWiRDP5LsZ/oFvuRTrlTjT9iYacPfjT37olI7NO7PdgBHjikhmDzsy21W8fe6QdyPNCYHc6NL/1fVPAlE134rjKONz/iLzbvEygA9016/A0qspZEZzP1kI0fe1PH6NaD6mo7eYF0PsMWiXXRkRBwJldrb/1M=
+	t=1780370243; cv=none; b=kFDeqqzLWwyDZLm5v1kiQU+qspbzFwzQAeBcglKvZRfOsCws/JEw+/Hj0IQccvZQopkUBc9AD1PiULo5rPWhZBqZRsNHzwI1ZbGgDuC8heQQNjk8AH9iQomq62lJ/FyV2LflB+XAdttBgpfZPkn5z7DmK+jUjjRIVLfd8n1WTBI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780369938; c=relaxed/simple;
-	bh=6MGQSajH/OFnvX+n2HHxrJIuB048d2AdiirGhdfKFtc=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=uunMrJyD4O8v+AjyyEFP4PhZasSxVqrpaoIhjFEyvqwaWUp9UI1BCtF6ZBncMHBdX9GxS5s8Wnen23A+YBAtTMLj01qmm1bToIN7oSy5tdpHUFf6khTUZ6u8+fc7ULBFNbbR2XMYAWBuJhCyHxsFnnuZYs+CDjuAi7yJrmI5qnM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=pass smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=kWD9rCZs; arc=none smtp.client-ip=198.137.202.133
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
-	Content-ID:Content-Description:In-Reply-To:References;
-	bh=I4gGLAdNf52WPFFAYkC6rriPGKuD0scRD8vqOYbdLQc=; b=kWD9rCZsI9ykxKpUQbSM5exlqD
-	c9Is3RG5x/xo6zEVXgsfJdgEAtw4754gR0HOPzyG71eC9E00/HXmVcpW+VxVIL1r3Vm2LkQOEUr90
-	XwI7gASIVM6BHh4+BuYza+GZt8h755WUttSHiXuDAO3c7E48kfoZiKh0m969A7DuF49eV0pner7Zc
-	e+EJ86FpIqeD34Ct4THRPF2UAV3tLZ93dKtHCcU8Moa7P061higGUbuiWOH4gCOARzzh/Y0Z3CEjQ
-	3fB8NT8re6jbXbA1pMnOChw5FTrSkQ1FfcLzIhS510jTHcKO6z0tFu/K9PF4ffIrAyqOMAOb6jKJd
-	cgLkgtOA==;
-Received: from [50.53.43.113] (helo=bombadil.infradead.org)
-	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wUFY8-0000000CD2c-2YA2;
-	Tue, 02 Jun 2026 03:12:16 +0000
-From: Randy Dunlap <rdunlap@infradead.org>
-To: linux-doc@vger.kernel.org
-Cc: Randy Dunlap <rdunlap@infradead.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Harry Wentland <harry.wentland@amd.com>,
-	Alex Hung <alex.hung@amd.com>,
-	Ivan Lipski <ivan.lipski@amd.com>,
-	Dan Wheeler <daniel.wheeler@amd.com>,
-	Alex Deucher <alexander.deucher@amd.com>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
-	amd-gfx@lists.freedesktop.org
-Subject: [PATCH] kdoc: xforms: ignore special static/inline macros
-Date: Mon,  1 Jun 2026 20:12:13 -0700
-Message-ID: <20260602031214.2817411-1-rdunlap@infradead.org>
-X-Mailer: git-send-email 2.54.0
+	s=arc-20240116; t=1780370243; c=relaxed/simple;
+	bh=UFlTWNbUvzwCLymITQWsd2wQWBNsij3IqqVuiYdePpk=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version; b=nCPpRyAo5qJHcBfXTQ+qm4BZECeluVfgnApnIa+Wdaw6emFoLRhIzGcZ8A6aICvlQzTwium1OysOTcj8Yrn+3RDHi2Sm1PpXnnAujiIWxNBMISwA3RY7vGU7qEpTO0FZtbgoarObMkq67X+Xcv7L+EoL8Bu6S3tO0FJGL/V1+xw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com; spf=pass smtp.mailfrom=soleen.com; dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b=CEenTv2r; arc=none smtp.client-ip=209.85.160.174
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=soleen.com
+Received: by mail-qt1-f174.google.com with SMTP id d75a77b69052e-5175cb5946dso9300251cf.0
+        for <linux-doc@vger.kernel.org>; Mon, 01 Jun 2026 20:17:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=soleen.com; s=google; t=1780370239; x=1780975039; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=M1YZ6pkpMukmY0PpCar7lQ0cU7Gg/pAjVgGHiG98i3c=;
+        b=CEenTv2rNnmtcJLtT5AupTwi7SsWz2GJNVhOFuf6rbh9YROnzSmaKeMgRb6luESEBl
+         YXyIAGx/CYXfeKo7AEUbiUMNk8//dYriqPu9KpoaxpM+M9Rrum6aWUny36NZyKvACv5V
+         pX39y1wU2x7K1Dm3lEviZTOioKwBlSYyRF5+Pi5eChVqNjsBMOkcnGRVEtFU2v1h4Gom
+         WKjmYHF/O1QBxI+ZN94tX0RuOtuBHCUpJMnUwbvNfoKtpPDdmgUdh6YTE7GkcxlDZmoi
+         wCMEThwgD2zr/NXu73aDcxcLy3Bb0jGKsl1QXNbRgGKDobSA6ZZV7X7qEjngYbbMbuSq
+         JTSg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780370239; x=1780975039;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=M1YZ6pkpMukmY0PpCar7lQ0cU7Gg/pAjVgGHiG98i3c=;
+        b=YRteZ1MNDs1fh9USDb3HMByMtb9ksk/dCqwg5WrFKq61Hp9BEy0jbAy7pE+NVrueL5
+         ZeTyLmYWfq8pmN7ai52z2SXIdsy+PyXCEXFDH/psBFs8epnNrKrBs2+fc+j46BYbTpcd
+         05o8wMt81rc9g3avUfEpV9F4GjWfEJqV8oB4anr4QPswfCeXNKw0aXZd5/KsCrnXhnVn
+         HJI2OUOwXOwL2g7fzZklxLH0kJE/woodpYYag6hZFD6ayLaATFsU0Mf+EdfhMFM5kzTm
+         +2qRGak/0FbJ72qmUERqF2dW3PGSf/JRjVCCdMpsYCPziiry7nngG3wBaUXf4KHskoKE
+         z+uw==
+X-Forwarded-Encrypted: i=1; AFNElJ8Vg0oiqak8zATLD9UhguriRKsGCPn5fNO7B2XqxxSHMoNmUgn/D81TCxWRfU7eBeZz3xdK8SjLVMw=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyOOQIMYovVbsXWO45pDp80cMFcMgQ881PgeT35nC7eonjskr+R
+	pYrOMe2puZpsVjNtk0acUrIzOHyEqQSBM2sgWrhxdxpJdHArLlGnitklCXz8K6dPO/w=
+X-Gm-Gg: Acq92OGDeeaoeruCa/iT3FLAW1jTZlvZgZLfj6Egk9mjeJ3gP72vqq5u5E1RdjYIqE8
+	+9jTLeZwoxnErrFtTrQzO6sPzYC5UT46ksvP6NK4Dr0+2XMWr9kRC5mbf12Ro8O86bnHaYjeXVA
+	J7oTF3Jd8NTJR5jToD2V7IpR2OtdcR26ftc2xHSTHQZZV/dQnJw2NoknL7MnUqTag09ECXCguB0
+	FTESRcD3fFPBCmdlBVloMCUH7EqkXnWiPdt5eoHcCqwwWNXSggPQJ4BmwfrqjFW5otp5669JX4E
+	OWdC5E6eqKtlIs5KBwSFi7lyO8oQrqvaTQ5zD/AMHGLqZVfBG8/0aRpKuYYoHoMFmSIAVcI/P/Q
+	WFbJm5HRT6J8OUo3ff6AAah4E8VXJpdJbE6nXGG6y214A7IntNGwKqRk82CIrrbjiA+Og7tZ/zB
+	Vp7yJnbG0KLaspKWEFYFJGPEYcBI5qOFilX+xZPpVM+7nhJp1EDJNeJ/UXbJJ6RiBTGyLVnRX+
+X-Received: by 2002:a05:622a:a9c9:20b0:50f:f0be:dc7b with SMTP id d75a77b69052e-5173a7fe8aemr158846631cf.39.1780370239332;
+        Mon, 01 Jun 2026 20:17:19 -0700 (PDT)
+Received: from plex ([71.181.43.54])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-51741b29745sm71219081cf.8.2026.06.01.20.17.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 01 Jun 2026 20:17:18 -0700 (PDT)
+From: Pasha Tatashin <pasha.tatashin@soleen.com>
+To: linux-kselftest@vger.kernel.org,
+	rppt@kernel.org,
+	shuah@kernel.org,
+	akpm@linux-foundation.org,
+	linux-mm@kvack.org,
+	skhan@linuxfoundation.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	corbet@lwn.net,
+	pasha.tatashin@soleen.com,
+	dmatlack@google.com,
+	kexec@lists.infradead.org,
+	pratyush@kernel.org,
+	skhawaja@google.com,
+	graf@amazon.com
+Subject: [PATCH v5 00/13] liveupdate: Remove limits on sessions and files
+Date: Tue,  2 Jun 2026 03:17:04 +0000
+Message-ID: <20260602031717.197696-1-pasha.tatashin@soleen.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-1.16 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[soleen.com,reject];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[soleen.com:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-90434-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
+	DKIM_TRACE(0.00)[soleen.com:+];
+	TAGGED_FROM(0.00)[bounces-90436-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[pasha.tatashin@soleen.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	RCVD_COUNT_FIVE(0.00)[5];
+	NEURAL_HAM(-0.00)[-0.994];
+	TO_DN_NONE(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:email,infradead.org:mid,infradead.org:dkim,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: 7C917627991
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: 0E955627A10
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c contains 7 (for
-now) functions that use STATIC_IFN_KUNIT or INLINE_IFN_KUNIT macros for
-function qualifiers (static or not, inline or not).
+Hi all,
 
-These cause parse warnings from kernel-doc:
-Invalid C declaration: Expected identifier in nested name, got keyword:
-  struct [error at 29]
-STATIC_IFN_KUNIT const struct drm_color_lut * __extract_blob_lut (const
-  struct drm_property_blob *blob, uint32_t *size)
+This series removes the fixed limits on the number of files that can
+be preserved within a single session, and the total number of sessions
+managed by the Live Update Orchestrator (LUO).
 
-Handle these in kernel-doc to prevent multiple warnings.
+The core of the change is a transition from single contiguous memory
+blocks for metadata serialization to a chain of linked blocks. This
+allows LUO to scale dynamically.
 
-Fixes: 647d1fd04652 ("drm/amd/display: Add KUnit test for color helpers")
-Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
----
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: Shuah Khan <skhan@linuxfoundation.org>
-Cc: Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: Harry Wentland <harry.wentland@amd.com>
-Cc: Alex Hung <alex.hung@amd.com>
-Cc: Ivan Lipski <ivan.lipski@amd.com>
-Cc: Dan Wheeler <daniel.wheeler@amd.com>
-Cc: Alex Deucher <alexander.deucher@amd.com>
-Cc: Christian König <christian.koenig@amd.com>
-Cc: amd-gfx@lists.freedesktop.org
+1.  ABI Evolution:
+    - Introduced linked-block headers for both file and session
+      serialization.
+    - Bumped session ABI version to v4.
 
- tools/lib/python/kdoc/xforms_lists.py |    2 ++
- 1 file changed, 2 insertions(+)
+2.  Memory Management & Security:
+    - Implemented a dynamic block allocation and reuse strategy. Blocks
+      are allocated only when existing ones are exhausted and are reused
+      during session/file removal cycles.
+    - Introduced KHO_MAX_BLOCKS (10000) as a safeguard against stupid
+      excessive allocations or corrupted cyclic lists during restore.
 
---- linux-next-20260601.orig/tools/lib/python/kdoc/xforms_lists.py
-+++ linux-next-20260601/tools/lib/python/kdoc/xforms_lists.py
-@@ -104,6 +104,8 @@ class CTransforms:
-         (CMatch("__context_unsafe"), ""),
-         (CMatch("__attribute_const__"), ""),
-         (CMatch("__attribute__"), ""),
-+        (CMatch("STATIC_IFN_KUNIT"), ""),
-+        (CMatch("INLINE_IFN_KUNIT"), ""),
- 
-         #
-         # HACK: this is similar to process_export() hack. It is meant to
+3.  Expanded Selftests:
+    - Added new kexec-based tests verifying preservation of
+      2000 sessions and 500 files per session.
+    - Added self-tests for many sessions and many files management.
+
+Tree: git.kernel.org/pub/scm/linux/kernel/git/tatashin/linux.git
+Branch: luo-remove-max-files-sessions-limits/v5
+
+Changes v5:
+- Addressed comments from Pratyush:
+  - Renamed kho_block_restore -> kho_block_set_restore, kho_block_destroy -> kho_block_set_destroy.
+  - Renamed block iterator next/read functions to reserve_entry/read_entry.
+  - Added public helpers kho_block_set_head_pa() and kho_block_set_is_empty().
+  - Added validation to treat zero-count blocks as errors during restoration.
+  - Simplified block iterator reading loop from a while to an if statement.
+  - Changed standard WARN_ON macros to WARN_ON_ONCE on iterator allocation checks, and added warning details.
+  - Simplified session serialization by removing a redundant NULL check on sessions_pa.
+
+Please review.
+
+Thanks,
+Pasha
+
+Pasha Tatashin (13):
+  liveupdate: change file_set->count type to u64 for type safety
+  liveupdate: avoid mixing cleanup guards with goto in
+    luo_session_retrieve_fd
+  liveupdate: centralize state management into struct luo_ser
+  liveupdate: register luo_ser as KHO subtree
+  liveupdate: Extract luo_file_deserialize_one helper
+  liveupdate: Extract luo_session_deserialize_one helper
+  kho: add support for linked-block serialization
+  liveupdate: defer session block allocation and PA setting
+  liveupdate: Remove limit on the number of sessions
+  liveupdate: Remove limit on the number of files per session
+  selftests/liveupdate: Test session and file limit removal
+  selftests/liveupdate: Add stress-sessions kexec test
+  selftests/liveupdate: Add stress-files kexec test
+
+ Documentation/core-api/kho/abi.rst            |   5 +
+ Documentation/core-api/kho/index.rst          |  11 +
+ MAINTAINERS                                   |   1 +
+ include/linux/kho/abi/block.h                 |  56 +++
+ include/linux/kho/abi/luo.h                   | 149 ++-----
+ include/linux/kho_block.h                     | 101 +++++
+ kernel/liveupdate/Makefile                    |   1 +
+ kernel/liveupdate/kho_block.c                 | 390 ++++++++++++++++++
+ kernel/liveupdate/luo_core.c                  |  99 ++---
+ kernel/liveupdate/luo_file.c                  | 206 ++++-----
+ kernel/liveupdate/luo_flb.c                   |  65 +--
+ kernel/liveupdate/luo_internal.h              |  16 +-
+ kernel/liveupdate/luo_session.c               | 241 +++++------
+ tools/testing/selftests/liveupdate/Makefile   |   2 +
+ .../testing/selftests/liveupdate/liveupdate.c |  75 ++++
+ .../selftests/liveupdate/luo_stress_files.c   |  97 +++++
+ .../liveupdate/luo_stress_sessions.c          | 102 +++++
+ .../selftests/liveupdate/luo_test_utils.c     |  24 ++
+ .../selftests/liveupdate/luo_test_utils.h     |   2 +
+ 19 files changed, 1184 insertions(+), 459 deletions(-)
+ create mode 100644 include/linux/kho/abi/block.h
+ create mode 100644 include/linux/kho_block.h
+ create mode 100644 kernel/liveupdate/kho_block.c
+ create mode 100644 tools/testing/selftests/liveupdate/luo_stress_files.c
+ create mode 100644 tools/testing/selftests/liveupdate/luo_stress_sessions.c
+
+
+base-commit: 2935777b418d2bfcbfe96705bb2c0fa6c0d94e18
+-- 
+2.53.0
+
 
