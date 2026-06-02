@@ -1,84 +1,85 @@
-Return-Path: <linux-doc+bounces-90522-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90524-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id qPM0KI/sHmqxZAAAu9opvQ
-	(envelope-from <linux-doc+bounces-90522-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 16:45:35 +0200
+	id C/3oN4vrHmpvZAAAu9opvQ
+	(envelope-from <linux-doc+bounces-90524-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 16:41:15 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 328CF62F6A9
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 16:45:35 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 58FF462F5F0
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 16:41:15 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linaro.org header.s=google header.b=RsODVOfK;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90522-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-90522-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=linaro.org header.s=google header.b=ttVOeSX7;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90524-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90524-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=linaro.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 8077A300B98B
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 14:32:37 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 4407631FA451
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 14:32:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 180514028DC;
-	Tue,  2 Jun 2026 14:27:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 413C0403E8D;
+	Tue,  2 Jun 2026 14:27:29 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 654CF401A1E
-	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 14:27:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 74DD24028C2
+	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 14:27:27 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780410448; cv=none; b=aVcOtKxfGpCn7l0KyY3mBHlkZRaxziRBcOqxdOiHTYUBJOJetZ1LjIgSRp5mNi5PGy7GEphDUHB6cSzjNruEULUBxaPiTn8/CJmDlCJHFTimJrWNGclw0fWV9ZXNNgbf2sjMd+1lR3dPMU+kQu49hwBoSrT4opZtO1gtnv7GtlU=
+	t=1780410449; cv=none; b=Y/BvBNAVFUqqFcXM0qpSi3fwAJGC6XcsqkYDI+e2k1VTO/E5/2szT8rptTSBBL0hk0PDS81m5AewipUbBAIg+aoLF7oCbBDHz7Hw9R/R4K9O9NCSDovTkuo9ETbWABGTvNSOBkNrGu7/tFuwI/lul8Z2w36dcl99SXVIUSksdUw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780410448; c=relaxed/simple;
-	bh=iQVBxA25lW6A4uA0ACC2OMef9MHB9JOIgp6xmgt6rqE=;
+	s=arc-20240116; t=1780410449; c=relaxed/simple;
+	bh=Y3ovDeG6DYqHIOpqufJpffsbkAWawjQU3JUtWwMMc/Q=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=EPH/qrPTnIGCTZc1XA+Nuy4kaP5Kpizyn5HY8H5XTiuFgZJeVx6TgC+AUhQv1EiqvK8XGS295ke3DrcvFGcB52wcZhTC1Vps3h9/alLpdhs3veQ0+fhpT1fAfENB6fi38KbQdBOg29+mYoZKPoxby7GV/HBJcK8lvMofG8eoOZ8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=RsODVOfK; arc=none smtp.client-ip=209.85.128.44
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4903f7a90d1so104337375e9.2
-        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 07:27:26 -0700 (PDT)
+	 In-Reply-To:To:Cc; b=iaTPS89zEaR4Pv/gA4v6UpbE2gJAYrtutO0PQNq8Stmd2HSKR+H0mKLJ4lPOhM+vwwVxuHPx6mlZtOxCVlJzaNgHQnRvR+ZVaOUamjsrHb8FvaSxpbZ3xLl/BF9nefgtZSeSeenfClqXiaNGyfD/HbRWDO1R0l4rQO5uVsiHThA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=ttVOeSX7; arc=none smtp.client-ip=209.85.128.45
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-490a7629380so26087915e9.0
+        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 07:27:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1780410445; x=1781015245; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1780410446; x=1781015246; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=EO8/K9YxgiEJpvhD7v23MJuqc72Imxv7cQ7m/8nhtl0=;
-        b=RsODVOfK7+urt0xrwfplJ6JRMaAK5fT2cft5LMm5P5iBYv3lBdzHp+hbwoet+/sBFk
-         IgBMiKpc6/Eh6BlL/HPjoYIBMsd9WbomeqyNiYPFGaiEFEQHKwEtg7R0QENCjHJV4t4c
-         0zqa45vYMZBPz5rTZAxcQBGIzaJOM/9AEuyVfD1q/Zk2qt1ZzgH3EwR8ONe+yfDLk/87
-         HlqD//9XBhVqXV9df4UBYLKil4ujWanLPxPkgRfepylLCiZr3qBeyZIO4viuH7L3pAlg
-         mj6EM0anjbmENuZ5QtH9BHLCxbgwK/yCNMOjWTGpU5VQ6g14f50akZd9izEiGpkGRaZH
-         GGBA==
+        bh=iP8ZCKyvgePemhrrS7zpcp0nGfW5k/Rg5tcocHv0s7U=;
+        b=ttVOeSX7NyNuPCgOtN4TAiNtd+aVRb5XFUfzYGqEyjlQFcAg7GiOdla5q+EYr7ki+p
+         cboeWxYbuLRueMzuPTElPj2S75sWO/NcpUbqi7pOab8LaBSIMlrGfWKbiDvEzVmDbqE2
+         KEdGaWuFyHHDcN/bjn/8grmPpiWZ5CtZ3Eq7fctj6jdh6c8Du98h9FFIiy4lM58Hng/2
+         +Oa+qIhQvXEYflmfrug/6oRUP+woe9lx6aZWvl1QVWTzqucVtgC4jG0YRobp9AxKU+lw
+         VkZSIGdP4vgmZDlKQzsj1MqnMozov3EIMcuK08qaAazu5V/T2CO2NGbGGRUsUuQVZha0
+         DoNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780410445; x=1781015245;
+        d=1e100.net; s=20251104; t=1780410446; x=1781015246;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=EO8/K9YxgiEJpvhD7v23MJuqc72Imxv7cQ7m/8nhtl0=;
-        b=Tae1FCGutUfI7AV1eMq10LVZiYIE/ngkTa/ph1l0zHEwP8Cr3HaRmp8/qxdSTBsfzV
-         mhZk7oxIbp+pjEDdWnxbMzfHUnI0NT3wt9attaNWvpopOBOmNZFR5mkOEui3J4g7ztRr
-         R4iqOCNsG1WsW+rgnIC5mCXAOewOs5xhXKy2EJCsCZZIpqUfR8k1BsdHcMAAuwKumGTF
-         qWq6DadZQ4/0BPhKutYhLUha5tv5fke5Nj1qH4Y8xdFVheTNQ8XboXjLEauvR/Hr8Pkh
-         xJv/VOItqhKWFNMZy7UYkDSE8Z42Jiun+ihoC1QGjBCNPRBGrBG0Zw/pOusqm/iHBfUg
-         i9mQ==
-X-Forwarded-Encrypted: i=1; AFNElJ+DrMpbdzarqf+pMDCxA8kDTcwthTHU9XRPKl1g/TyR13SZu26fKXpjVQ3vzE0B+huuwMdCp1cVLTQ=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwwI5VouV+UqH2+bSEqamAnt1o48Q8QT+9A4QQK+d4AnYARVyCQ
-	CT6ToCAIHik68BsURLQ0CHEp8Q4UAnNlN9/FEbkHDE/wmaZ0OvoLW9NRPvlVDLtqxIU=
-X-Gm-Gg: Acq92OEQRAdpDfRBFDQbJPog7sBGMvYzRRd9HYEr+isXefH4XndwueFTx/4yf54NwHn
-	RaN1dS9oEODDLugL/IYjZ/jM65bl9gQlm4rnljo6i20+VB4OLERn33jOnz4Xi83uvclk1v9lkRE
-	xu09Y3OH/CK4xyBbzHlEyZLav1gapVdWfvpFThJjRI+r2jMr4zik0d1ViOesstfrFTGzzBMnMEM
-	i+ZPjTtwaz3Ns8ygZiKSJuZMunaGC0XaDg6dlhQLOZJr7aB/FdfoPDje2dRhDEeSTjQhJTxpgrj
-	sIxbJEZnq7lOG7I7Te+xm5328nrxZanFt/R3CrhtOz63oKMwKWnewhqm5WgQ1YsRSEBrafaFPpi
-	ptxCNvlDPG/KXDmUyr/pQvompPnoI92XC7M500zcJd8Mj0ylSzY8kkxGbQXaHd5zbJZLTFysbAM
-	0TgguE7i0o/YT6IqPbE8s8h/3VI2xqMBWI7lBGGm0xOOE=
-X-Received: by 2002:a05:600c:4755:b0:490:3cb4:f1b3 with SMTP id 5b1f17b1804b1-490a293322dmr279955285e9.16.1780410444873;
-        Tue, 02 Jun 2026 07:27:24 -0700 (PDT)
+        bh=iP8ZCKyvgePemhrrS7zpcp0nGfW5k/Rg5tcocHv0s7U=;
+        b=L1/LluD+8lnIUfRWU6DJTBDhMkE4kfVhNFtz0Vs2yVPu0YUKLgXpPc2Z2FiVbRST+N
+         83vJJ/sgvy5lVcFE8kADQawGzRNmpjAW8RhklabejMNM98YcYih6fFlU/CIK3iLSkYr2
+         sZngoAYN3sr3vrL5SdQZ4SyrpKeAtwUNlB35SprXjKGsxHaOAibe/CyeZ9PQ4gz5kSD6
+         GP8FB98ocdTwAbYuavKEEvJSYtBOQS5ZK5/9eyyZy6tqDD9VgBpEuVdCCRT+WLqhZIQd
+         amg/rWMzt0mvcqn+3LVoVeXSycIHm3lTVAPzx7+sOg9m2LzMd7OIYceC0UzUljxz6v14
+         O0tA==
+X-Forwarded-Encrypted: i=1; AFNElJ+Ou0wIiTfIDI7Y7JbU+VtFCqSD6F5iBnc/kj8BHlFuBc4GxFwngmpqXBeHApteQwLji3sHs1RLCNQ=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwDKLoZAzkmcyVDQSC9BKhTzyu0hLctn7QhiSmdBs2NOS6T23W4
+	zBh5opi0DQeQ60Glnm2GmbY/LxB9Lnr7Ucd45R/SY4/Ao7EN7IwHG6aHl//pW68hXDPecsklkXO
+	+qXWS6Zg=
+X-Gm-Gg: Acq92OHxwpRpkaNNhNBlnPYYRTr8CMTgcfQl739vhVTWgESXXAaj+7Kao3CnJ+y3Y4Q
+	dkBzcMs193WEP6PRQksbX1BEKRMRa0UhHyaOpb5nfkGNIysnVqUwZYXeZ6nPjk9nxMNEVm25eju
+	IYbQIFD6p7ZCB0wPAG6Vw1fIlOc8wqszyy3nGB/EJhG3km1k+Dd3CZNQB0FQpw2JhYYzh5Xu41f
+	pnoDvbBPX2mG5ZluaXyxqn3pdNo6ZeS36RNxW3sQghNmoK7zjE8Ih2ofo1NCtz355am/AUYkg+9
+	eMCZ2enjvrG4OjNX5cNT90N1U86dRsv9SNt0f2GrtFzyO6gePphB7lkDww7+C8/Jt8Bur5QJOy7
+	mqiiQ5jWidnheyrxFYaMUWOIdfYoIipCX/OGXcjjaa88RmTv2dviQpqNNFj9qcTV8K9SNcWqHv1
+	kucQcHk1wfs2L4rARpq9hOVPoTMBIfVYVxYH/FvVL2nyGouWFv41RuDg==
+X-Received: by 2002:a05:600c:8a0d:20b0:48a:906b:14ca with SMTP id 5b1f17b1804b1-490a293dcaamr208050385e9.20.1780410445848;
+        Tue, 02 Jun 2026 07:27:25 -0700 (PDT)
 Received: from ho-tower-lan.lan ([185.48.77.170])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-490b0e18e1csm66771965e9.4.2026.06.02.07.27.23
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-490b0e18e1csm66771965e9.4.2026.06.02.07.27.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Jun 2026 07:27:24 -0700 (PDT)
+        Tue, 02 Jun 2026 07:27:25 -0700 (PDT)
 From: James Clark <james.clark@linaro.org>
-Date: Tue, 02 Jun 2026 15:26:46 +0100
-Subject: [PATCH v2 04/18] perf test cs-etm: Test process attribution
+Date: Tue, 02 Jun 2026 15:26:47 +0100
+Subject: [PATCH v2 05/18] perf test: Add deterministic workload
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -87,7 +88,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260602-james-cs-context-tracking-fix-v2-4-85b5ce6f55c6@linaro.org>
+Message-Id: <20260602-james-cs-context-tracking-fix-v2-5-85b5ce6f55c6@linaro.org>
 References: <20260602-james-cs-context-tracking-fix-v2-0-85b5ce6f55c6@linaro.org>
 In-Reply-To: <20260602-james-cs-context-tracking-fix-v2-0-85b5ce6f55c6@linaro.org>
 To: Suzuki K Poulose <suzuki.poulose@arm.com>, 
@@ -105,12 +106,12 @@ X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-90522-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90524-lists,linux-doc=lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[17];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
@@ -126,100 +127,136 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[james.clark@linaro.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:mid,linaro.org:dkim,linaro.org:from_mime,linaro.org:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linaro.org:mid,linaro.org:dkim,linaro.org:from_mime,linaro.org:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 328CF62F6A9
+X-Rspamd-Queue-Id: 58FF462F5F0
 
-Run the context switch workload on one CPU and trace it to test that
-symbols are attributed to the correct process and that the attribution
-changes at the exact point that the context switch happened.
+Add a workload that does the same thing every time for testing CPU trace
+decoding.
 
 Signed-off-by: James Clark <james.clark@linaro.org>
 ---
- .../tests/shell/coresight/context_switch_thread.sh | 69 ++++++++++++++++++++++
- 1 file changed, 69 insertions(+)
+ tools/perf/Documentation/perf-test.txt     |  4 +--
+ tools/perf/tests/builtin-test.c            |  1 +
+ tools/perf/tests/tests.h                   |  1 +
+ tools/perf/tests/workloads/Build           |  2 ++
+ tools/perf/tests/workloads/deterministic.c | 39 ++++++++++++++++++++++++++++++
+ 5 files changed, 45 insertions(+), 2 deletions(-)
 
-diff --git a/tools/perf/tests/shell/coresight/context_switch_thread.sh b/tools/perf/tests/shell/coresight/context_switch_thread.sh
-new file mode 100755
-index 000000000000..0992c35a329d
+diff --git a/tools/perf/Documentation/perf-test.txt b/tools/perf/Documentation/perf-test.txt
+index 9c0d7ac2bc64..7ec70c054cac 100644
+--- a/tools/perf/Documentation/perf-test.txt
++++ b/tools/perf/Documentation/perf-test.txt
+@@ -57,7 +57,7 @@ OPTIONS
+ --workload=::
+ 	Run a built-in workload, to list them use '--list-workloads', current
+ 	ones include: noploop, thloop, leafloop, sqrtloop, brstack, datasym,
+-	context_switch_loop and landlock.
++	context_switch_loop, deterministic and landlock.
+ 
+ 	Used with the shell script regression tests.
+ 
+@@ -66,7 +66,7 @@ OPTIONS
+ 		seconds: leafloop, noploop, sqrtloop, thloop
+ 		nrloops: brstack, context_switch_loop
+ 
+-	The datasym and landlock workloads don't accept any.
++	The datasym, landlock and deterministic workloads don't accept any.
+ 
+ --list-workloads::
+ 	List the available workloads to use with -w/--workload.
+diff --git a/tools/perf/tests/builtin-test.c b/tools/perf/tests/builtin-test.c
+index 1057ee836c30..3c6d3de98be9 100644
+--- a/tools/perf/tests/builtin-test.c
++++ b/tools/perf/tests/builtin-test.c
+@@ -157,6 +157,7 @@ static struct test_workload *workloads[] = {
+ 	&workload__traploop,
+ 	&workload__inlineloop,
+ 	&workload__context_switch_loop,
++	&workload__deterministic,
+ 
+ #ifdef HAVE_RUST_SUPPORT
+ 	&workload__code_with_type,
+diff --git a/tools/perf/tests/tests.h b/tools/perf/tests/tests.h
+index 79f50bacfc94..f8bba2d68769 100644
+--- a/tools/perf/tests/tests.h
++++ b/tools/perf/tests/tests.h
+@@ -243,6 +243,7 @@ DECLARE_WORKLOAD(landlock);
+ DECLARE_WORKLOAD(traploop);
+ DECLARE_WORKLOAD(inlineloop);
+ DECLARE_WORKLOAD(context_switch_loop);
++DECLARE_WORKLOAD(deterministic);
+ 
+ #ifdef HAVE_RUST_SUPPORT
+ DECLARE_WORKLOAD(code_with_type);
+diff --git a/tools/perf/tests/workloads/Build b/tools/perf/tests/workloads/Build
+index 3bda6da04a35..599a37c87878 100644
+--- a/tools/perf/tests/workloads/Build
++++ b/tools/perf/tests/workloads/Build
+@@ -10,6 +10,7 @@ perf-test-y += landlock.o
+ perf-test-y += traploop.o
+ perf-test-y += inlineloop.o
+ perf-test-y += context_switch_loop.o
++perf-test-y += deterministic.o
+ 
+ ifeq ($(CONFIG_RUST_SUPPORT),y)
+     perf-test-y += code_with_type.o
+@@ -22,3 +23,4 @@ CFLAGS_brstack.o          = -g -O0 -fno-inline -U_FORTIFY_SOURCE
+ CFLAGS_datasym.o          = -g -O0 -fno-inline -U_FORTIFY_SOURCE
+ CFLAGS_traploop.o         = -g -O0 -fno-inline -U_FORTIFY_SOURCE
+ CFLAGS_inlineloop.o       = -g -O2
++CFLAGS_deterministic.o    = -g -O0
+diff --git a/tools/perf/tests/workloads/deterministic.c b/tools/perf/tests/workloads/deterministic.c
+new file mode 100644
+index 000000000000..3caea8564043
 --- /dev/null
-+++ b/tools/perf/tests/shell/coresight/context_switch_thread.sh
-@@ -0,0 +1,69 @@
-+#!/bin/bash -e
-+# Coresight context switch thread attribution (exclusive)
++++ b/tools/perf/tests/workloads/deterministic.c
+@@ -0,0 +1,39 @@
++// SPDX-License-Identifier: GPL-2.0
++#include <linux/compiler.h>
++#include "../tests.h"
 +
-+# SPDX-License-Identifier: GPL-2.0
++int dt_work = 1234;
 +
-+# If Coresight is not available, skip the test
-+perf list pmu | grep -q cs_etm || exit 2
-+
-+if [ "$(id -u)" != 0 ]; then
-+	# Requires root for "-C 0" in record command
-+	echo "[Skip] No root permission"
-+	exit 2
-+fi
-+
-+tmpdir=$(mktemp -d /tmp/__perf_test.coresight_context_switch.XXXXX)
-+
-+cleanup() {
-+	rm -rf "${tmpdir}"
-+	trap - EXIT TERM INT
++static noinline void function1(void)
++{
++	dt_work *= 7;
++	dt_work *= 7;
++	dt_work *= 7;
 +}
 +
-+trap_cleanup() {
-+	cleanup
-+	exit 1
-+}
-+trap trap_cleanup EXIT TERM INT
-+
-+check_samples() {
-+	owner_samples=$(grep -c "proc1.*context_switch_loop_proc1" "$tmpdir/script" || true)
-+	next_samples=$(grep -c "proc2.*context_switch_loop_proc2" "$tmpdir/script" || true)
-+
-+	if [ "$owner_samples" -eq 0 ] || [ "$next_samples" -eq 0 ]; then
-+		echo "No samples found"
-+		cleanup
-+		exit 1
-+	fi
-+
-+	if grep "proc2.*context_switch_loop_proc1" "$tmpdir/script"; then
-+		echo "Thread1 symbol was attributed to proc2"
-+		cleanup
-+		exit 1
-+	fi
-+
-+	if grep "proc1.*context_switch_loop_proc2" "$tmpdir/script"; then
-+		echo "Thread2 symbol was attributed to proc1"
-+		cleanup
-+		exit 1
-+	fi
++static noinline void function2(void)
++{
++	dt_work *= 7;
++	dt_work *= 7;
++	dt_work *= 7;
 +}
 +
-+cf="$tmpdir/ctl"
-+af="$tmpdir/ack"
-+mkfifo "$cf" "$af"
++static int deterministic(int argc __maybe_unused,
++			 const char **argv __maybe_unused)
++{
++	dt_work *= 7;
++	dt_work *= 7;
++	dt_work *= 7;
 +
-+# Pin to one CPU so the two threads alternate running but record into the same
-+# trace buffer. Start disabled and use the control FIFO to only record the
-+# workload and not startup.
-+perf record -o "$tmpdir/data" -e cs_etm/timestamp=0/u -C 0 -D -1 --control fifo:"$cf","$af" -- \
-+	taskset --cpu-list 0 perf test --workload-ctl fifo:"$cf","$af" \
-+	-w context_switch_loop > /dev/null 2>&1
++	function1();
 +
-+# Test both instruction and branch sample generation modes.
-+perf script -i "$tmpdir/data" --itrace=i4 -F comm,pid,tid,ip,sym > "$tmpdir/script" 2>/dev/null
-+check_samples
-+perf script -i "$tmpdir/data" --itrace=b -F comm,pid,tid,ip,sym > "$tmpdir/script" 2>/dev/null
-+check_samples
++	dt_work *= 7;
++	dt_work *= 7;
++	dt_work *= 7;
 +
-+cleanup
-+exit 0
++	function2();
++
++	return 0;
++}
++
++DEFINE_WORKLOAD(deterministic);
 
 -- 
 2.34.1
