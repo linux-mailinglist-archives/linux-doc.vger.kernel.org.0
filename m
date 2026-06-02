@@ -1,138 +1,263 @@
-Return-Path: <linux-doc+bounces-90543-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90544-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id RuqhGA7+HmracQAAu9opvQ
-	(envelope-from <linux-doc+bounces-90543-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 18:00:14 +0200
+	id kdlZMmn+HmoOcgAAu9opvQ
+	(envelope-from <linux-doc+bounces-90544-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 18:01:45 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A7F64630097
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 18:00:13 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 85D096300AF
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 18:01:43 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=Eh27Qgfh;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90543-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90543-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=r9C10OTg;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90544-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90544-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=gmail.com;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 93AC2301BF62
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 15:53:54 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 78F0730D1FF0
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 15:54:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F0AB83F1664;
-	Tue,  2 Jun 2026 15:53:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DCBA03F4111;
+	Tue,  2 Jun 2026 15:54:44 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F35A43F0755;
-	Tue,  2 Jun 2026 15:53:52 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780415633; cv=none; b=G8okET0D8a2F7XMG6gi6/vuZGb30kF4TXa+WJFB2ieafucgIKs+0jWt8KlOwqtdjIWWh/7OMAnU6543WTXWYM+xReaI/5VYkzHLytIFE3tRK/RaCg5oR8fPknX58FG4v1GDKQGSeDGvNlheEmoExBbSsD7K/plDaKa4Strchfto=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780415633; c=relaxed/simple;
-	bh=bPplqRqZLwULe4vwQaG/n15wR/fDHQ8TSZqe0vSiBzY=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=McCP5TIL99Mk96tNmr2iJgoNCMW4RcArjDiOJo1MHaBESy9dKk2J7BwnSldLmnBZtp9OxCoMkq7fKQV6jz8ifowEEKHVQX7+gq2rUGSSlQGCy8Yw40rNotC67e20lbMNqfocGPpAqcfCzYslAx5/UN047YU1NXGpmwjzvG8MtAI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Eh27Qgfh; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DE6981F00893;
-	Tue,  2 Jun 2026 15:53:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1780415632;
-	bh=g1gxQOYwgpOrI7CcKQFX0nybbQGoJfcX1gVspJlp6G0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=Eh27QgfhvW7svjtX9XwdHqJ+rCdP7BBSdRVIVnMc1Wg7O9IHCAC5GUR6nIO11Faj1
-	 I/8a+n1vmleEaNXGJ5drcpYTDyxJ8s6fFiNyOt6JtIPlGYCfgsbTAtmqDQf6u2+nSq
-	 79sP/Wt67eSw1KbcYcWyfNiLFqWDyoh264CLTjF+zTjfQ2/2NV0Wv90+AoQIG4t2kP
-	 5cGHX35eJ8FiVRKaiyRLWqdvBk8z6+GryQaamsTO3jPSmIAOZIwUQHZ6MKD6OPhPK6
-	 r18UrNY2Fwh2uPGPorFa9v9L14OQIZkjcwrxsYdTdz1uh3nsa+sfZOytlKVAog+dsq
-	 VSD/fiH4NIzoA==
-Date: Tue, 2 Jun 2026 16:53:44 +0100
-From: Will Deacon <will@kernel.org>
-To: Zeng Heng <zengheng@huaweicloud.com>
-Cc: vladimir.murzin@arm.com, xuwei5@huawei.com, wangyushan12@huawei.com,
-	yangyicong@hisilicon.com, maz@kernel.org, yeoreum.yun@arm.com,
-	miko.lenczewski@arm.com, james.clark@linaro.org, corbet@lwn.net,
-	skhan@linuxfoundation.org, kuninori.morimoto.gx@renesas.com,
-	lucaswei@google.com, catalin.marinas@arm.com, broonie@kernel.org,
-	lpieralisi@kernel.org, thuth@redhat.com, kevin.brodsky@arm.com,
-	tongtiangen@huawei.com, oupton@kernel.org, ryan.roberts@arm.com,
-	mark.rutland@arm.com, Sascha.Bischoff@arm.com,
-	linux-arm-kernel@lists.infradead.org, wangkefeng.wang@huawei.com,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v3 2/2] arm64: kernel: Disable CNP on HiSilicon HIP09
-Message-ID: <ah78iIqAqzfofnIG@willie-the-truck>
-References: <20260601112000.1145391-1-zengheng@huaweicloud.com>
- <20260601112000.1145391-3-zengheng@huaweicloud.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E4A13F1ABA
+	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 15:54:43 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1780415684; cv=pass; b=NGxNc4bjxkcattTyokLUrCtiXZmxW2dGI6Y3jAhDxPn83I5rCMzDMQN95ps6EAh2my5yMlwRqbv1on5wBQuVGgpdshz/lD4AGuLQPRLDaxT/qopzS0VKFRgrxbzAG6ZtW95v3XCgN2XWsATo1Id+Id/WEXqGcu89VDIUI03YSho=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1780415684; c=relaxed/simple;
+	bh=uv9Sy/kwsbhQqkAS4Zhet+9C0cGQwDE+yhgPZ0iyMCg=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=o9quizMEwHcqZc0VJr1cOr4AcGvAnC109PO//SLkjCExrNxpKvRHdUH4lBoLTOS/rRIpEf2cFXA2KSKdyaePSJWZ/077cluHbf+y7Zr1EfqrQNjrNXNOcNad2qcMUR3x/k5YIVDwzgJ/vWtBL0LwqnpuTmNoz1HSeoiauV1WhT8=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=r9C10OTg; arc=pass smtp.client-ip=209.85.128.53
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-4906238c62eso95242035e9.3
+        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 08:54:43 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780415682; cv=none;
+        d=google.com; s=arc-20240605;
+        b=GNK+/lg5kCG8sqrv+6drLVVRdEJ6caN82d9Sse+8/8KVqStEyBigMJsWvr9vVndS0P
+         Qwi7rmHKt6UvdYKHpo4QhQ7TZ6Mp/PUqhnBPey3C472XmqFtfmRxCjRNScEUa0p5suxP
+         8Go5+H6Jwm4O7jZL4qcCirpHcAtnlqsVIIBtS3UFrspVSFLIH+ghS/Iehv1A5IJpGBB/
+         15AvS0uytRGnzhE/t9s3eVmyA6U4TSNOsb/7RQ5l7cwVOyJqhWvU3PiUgOkgT2UwvYlf
+         v61JZUj1JFjOmnIM8huRZYLsDg6Ux/qG39LQov/kxwqUv0eN90FhFmvR0Mc+GoZVEbFz
+         oj9Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=1R1Ix/hNP2c7DmSyPCrvcGynZL8Qs5aPHoY+LWWhkG4=;
+        fh=ZV/HR9eJ3XoRF/V7xahmQflZST8piQim/bXzm1xmuuc=;
+        b=FtVqwTVvLB4vZkP8vA+Kd4hS90ail1dWbEW2tGke7zUxEyIS1KHZ7Uj7La7/ar3qgH
+         9IhgY5o50IMYSpYzqh3Uh2eFqMGoY7+oMtsAv5xnLjTD/AOzRXeLywLuzzlDTcCCt1r5
+         jRPaGto5EPGVkxUzn9DNiVxqTGbFXzjVpNEDAN22lN6dUa91kkU8wcqbumYpLfHAYUS8
+         16nARe18S6BT6akZ/8fDCCORm/6IeXEl0TQSu59rsEtPdct2t5EmOOpFC/jswVdXcx6h
+         maTKE0TgGFjZrwC+QW4tIHmD9MLSsfqwcjkr+tbQQtSnj277f69EREQKXkCPeBt82Wzo
+         /qpA==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1780415682; x=1781020482; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=1R1Ix/hNP2c7DmSyPCrvcGynZL8Qs5aPHoY+LWWhkG4=;
+        b=r9C10OTgSxnKjWCcHjPcC+mNsq0xKy7Ozk1R38OOFbFehZ+8V6iPcdoKkWf7kDf444
+         yJj1/4x36RJHIsqGQw9kaV0ITPluinJ9VgYn/+iJMAuu609iIANZLUS2O8W9qtI7U/19
+         9//meuOMjWYZ4UXDSt73vFRYq7cN50wVkbJrYWBveYCyAnQKEwHhA4o/eXxQKn6p6rur
+         ASEd35m4rMBRC8/YSSoj4bA/Klpt7gGv48iuzP2fcENnIoJLauUwVaVdEzOoCMXfolcO
+         64ujFypgd6zOKXE354ognlSLL7+N5axMy6OH2g4sPdPlI8+pz1qP3Y1hBoewNkuKHmym
+         lEZA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780415682; x=1781020482;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=1R1Ix/hNP2c7DmSyPCrvcGynZL8Qs5aPHoY+LWWhkG4=;
+        b=NHPPzr9on3OnLVCHLWUD8YPTNqgLPXp4LemynJ6WhdhWGwsKvc53YC4Xi5hVhsf5tk
+         NHNQsxfmQjjbnOKyvvWJyyOGg9dO4QwwQC/07jDGVOtfVRqsqGYMUP3aqNiSUJRvS17B
+         0S0WJeArD45iqzGckkmIZwGz0p/MMXHYsdZIvdJE21r6r8a3z0Jod7vlL3/vZD3vEEHn
+         6WCEjcLRu3d6BQC4NrOZ2LwDIDhk5v4slUgv7Xp7xR03EF6TS1yHse2zNvlkXM9rvf+/
+         3tjGUGJOjtUNIY6hiaBfEkpIDH77409FRUUL1J4uGtlFP+XP1SzHh0y22RoDasTPs+ri
+         SwkA==
+X-Forwarded-Encrypted: i=1; AFNElJ8kV7U0bhfbu6vOaDc3aw7Aqqvf11e/hwZjpYLUbSvhKINymrhmjE7WwlbhEYbNe0zi3nlMQaDZJpM=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzbFvGRKQHuXQi3vcbIKTSt0VLHH1PvPQgA/csdN5p81nE3GgSd
+	hd9+IYjsChaGMWJDIFvU4BSf8QhazW1pxdsCpKP3MpG9P7dK0BdvMh0weZQWqMs16v0nLmJR9fn
+	Yq1wU7N4/6FBBX6PFkk6sVI+HgtB0F4U=
+X-Gm-Gg: Acq92OEbe8siRw2+6CHcj6M7X64DdoKgBI0iaPAw6AOEiyG5tzo2A2ddwNTacl5GWlm
+	2GFPhmU5S37uUw71vSrrKpI/cFn9zcZ3mbamtCiQqEFCEP3vjztp+IehQEoUA+Uv0LMadQPvDJf
+	5dceRIrQAxO9G4WJGNMB59Ylde/t/sLmTRQc7kzEWbob2DfYo3j190PkyyCuvL/iAFPhkWB2JVB
+	lelrEXWKKyMV5ku8sQQF5bdUjHQfyskYCQGzLRzO4q+QdmkTYI0GjXHj9Qwj3Lsz2uVi2jxWsfH
+	rFQ5SC3V+LwHc0oEeB3HzQaR1XrvhAsreP50G/4bC5SPKluDsgKDyCcwfodi
+X-Received: by 2002:a05:600c:3f0d:b0:490:6e11:c303 with SMTP id
+ 5b1f17b1804b1-490b50800dcmr5883175e9.13.1780415681566; Tue, 02 Jun 2026
+ 08:54:41 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260601112000.1145391-3-zengheng@huaweicloud.com>
+References: <20260528212955.1912856-1-nphamcs@gmail.com> <ahz_iYG4lqWL4g-J@KASONG-MC4>
+ <CAKEwX=PzMwXXgq=ULAkFD9UqMz+ewLqhKt+xdGxkV7OmA2QG6w@mail.gmail.com>
+ <CAKEwX=NNNf0KCZC0ph7VRW0gjnbXd4W5NKEaHM4XzPdN03Ek3A@mail.gmail.com> <CAMgjq7CT0ccCnzmpRGjTGPnNEn4eK==5A-OFbr3+p465dQMH4A@mail.gmail.com>
+In-Reply-To: <CAMgjq7CT0ccCnzmpRGjTGPnNEn4eK==5A-OFbr3+p465dQMH4A@mail.gmail.com>
+From: Nhat Pham <nphamcs@gmail.com>
+Date: Tue, 2 Jun 2026 08:54:29 -0700
+X-Gm-Features: AVHnY4JuNWTHfiBCJhA05cKPBhtFvToyOb40WTAxv5a1N06Szobh-7Laznmn538
+Message-ID: <CAKEwX=M3WAkSY=Zd35dEuQ6V3ZiNR02bKAN_DnCgVr69w9=0sQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 0/5] mm, swap: Virtual Swap Space (Swap Table Edition)
+To: Kairui Song <ryncsn@gmail.com>
+Cc: Liam.Howlett@oracle.com, akpm@linux-foundation.org, apopple@nvidia.com, 
+	axelrasmussen@google.com, baohua@kernel.org, baolin.wang@linux.alibaba.com, 
+	bhe@redhat.com, byungchul@sk.com, cgroups@vger.kernel.org, 
+	chengming.zhou@linux.dev, chrisl@kernel.org, corbet@lwn.net, david@kernel.org, 
+	dev.jain@arm.com, gourry@gourry.net, hannes@cmpxchg.org, hughd@google.com, 
+	jannh@google.com, joshua.hahnjy@gmail.com, lance.yang@linux.dev, 
+	lenb@kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-mm@kvack.org, linux-pm@vger.kernel.org, lorenzo.stoakes@oracle.com, 
+	matthew.brost@intel.com, mhocko@suse.com, muchun.song@linux.dev, 
+	npache@redhat.com, pavel@kernel.org, peterx@redhat.com, peterz@infradead.org, 
+	pfalcato@suse.de, rafael@kernel.org, rakie.kim@sk.com, 
+	roman.gushchin@linux.dev, rppt@kernel.org, ryan.roberts@arm.com, 
+	shakeel.butt@linux.dev, shikemeng@huaweicloud.com, surenb@google.com, 
+	tglx@kernel.org, vbabka@suse.cz, weixugc@google.com, 
+	ying.huang@linux.alibaba.com, yosry.ahmed@linux.dev, yuanchu@google.com, 
+	zhengqi.arch@bytedance.com, ziy@nvidia.com, kernel-team@meta.com, 
+	riel@surriel.com, haowenchao22@gmail.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.66 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-90544-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:zengheng@huaweicloud.com,m:vladimir.murzin@arm.com,m:xuwei5@huawei.com,m:wangyushan12@huawei.com,m:yangyicong@hisilicon.com,m:maz@kernel.org,m:yeoreum.yun@arm.com,m:miko.lenczewski@arm.com,m:james.clark@linaro.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:kuninori.morimoto.gx@renesas.com,m:lucaswei@google.com,m:catalin.marinas@arm.com,m:broonie@kernel.org,m:lpieralisi@kernel.org,m:thuth@redhat.com,m:kevin.brodsky@arm.com,m:tongtiangen@huawei.com,m:oupton@kernel.org,m:ryan.roberts@arm.com,m:mark.rutland@arm.com,m:Sascha.Bischoff@arm.com,m:linux-arm-kernel@lists.infradead.org,m:wangkefeng.wang@huawei.com,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[will@kernel.org,linux-doc@vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-90543-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[27];
+	FORGED_RECIPIENTS(0.00)[m:ryncsn@gmail.com,m:Liam.Howlett@oracle.com,m:akpm@linux-foundation.org,m:apopple@nvidia.com,m:axelrasmussen@google.com,m:baohua@kernel.org,m:baolin.wang@linux.alibaba.com,m:bhe@redhat.com,m:byungchul@sk.com,m:cgroups@vger.kernel.org,m:chengming.zhou@linux.dev,m:chrisl@kernel.org,m:corbet@lwn.net,m:david@kernel.org,m:dev.jain@arm.com,m:gourry@gourry.net,m:hannes@cmpxchg.org,m:hughd@google.com,m:jannh@google.com,m:joshua.hahnjy@gmail.com,m:lance.yang@linux.dev,m:lenb@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-pm@vger.kernel.org,m:lorenzo.stoakes@oracle.com,m:matthew.brost@intel.com,m:mhocko@suse.com,m:muchun.song@linux.dev,m:npache@redhat.com,m:pavel@kernel.org,m:peterx@redhat.com,m:peterz@infradead.org,m:pfalcato@suse.de,m:rafael@kernel.org,m:rakie.kim@sk.com,m:roman.gushchin@linux.dev,m:rppt@kernel.org,m:ryan.roberts@arm.com,m:shakeel.butt@linux.dev,m:shikemeng@huaweicloud.com,m:surenb@google.com,m:tgl
+ x@kernel.org,m:vbabka@suse.cz,m:weixugc@google.com,m:ying.huang@linux.alibaba.com,m:yosry.ahmed@linux.dev,m:yuanchu@google.com,m:zhengqi.arch@bytedance.com,m:ziy@nvidia.com,m:kernel-team@meta.com,m:riel@surriel.com,m:haowenchao22@gmail.com,m:joshuahahnjy@gmail.com,s:lists@lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FORGED_SENDER(0.00)[nphamcs@gmail.com,linux-doc@vger.kernel.org];
+	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[oracle.com,linux-foundation.org,nvidia.com,google.com,kernel.org,linux.alibaba.com,redhat.com,sk.com,vger.kernel.org,linux.dev,lwn.net,arm.com,gourry.net,cmpxchg.org,gmail.com,kvack.org,intel.com,suse.com,infradead.org,suse.de,huaweicloud.com,suse.cz,bytedance.com,meta.com,surriel.com];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[54];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[will@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[nphamcs@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp,sashiko.dev:url,willie-the-truck:mid]
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: A7F64630097
+X-Rspamd-Queue-Id: 85D096300AF
 
-On Mon, Jun 01, 2026 at 07:20:00PM +0800, Zeng Heng wrote:
-> diff --git a/arch/arm64/kernel/cpu_errata.c b/arch/arm64/kernel/cpu_errata.c
-> index b0db946568b7..02e0ee5c948c 100644
-> --- a/arch/arm64/kernel/cpu_errata.c
-> +++ b/arch/arm64/kernel/cpu_errata.c
-> @@ -608,6 +608,14 @@ static const struct midr_range erratum_ac04_cpu_23_list[] = {
->  };
->  #endif
-> 
-> +#ifdef CONFIG_ARM64_WORKAROUND_DISABLE_CNP
-> +static const struct midr_range cnp_erratum_cpus[] = {
-> +	MIDR_ALL_VERSIONS(MIDR_NVIDIA_CARMEL),
-> +	MIDR_ALL_VERSIONS(MIDR_HISI_HIP09),
-> +	{},
-> +};
-> +#endif
+On Mon, Jun 1, 2026 at 10:49=E2=80=AFAM Kairui Song <ryncsn@gmail.com> wrot=
+e:
+>
+> On Tue, Jun 2, 2026 at 12:22=E2=80=AFAM Nhat Pham <nphamcs@gmail.com> wro=
+te:
+> >
+> > On Mon, Jun 1, 2026 at 8:56=E2=80=AFAM Nhat Pham <nphamcs@gmail.com> wr=
+ote:
+> > >
+> > > On Mon, Jun 1, 2026 at 12:34=E2=80=AFAM Kairui Song <ryncsn@gmail.com=
+> wrote:
+> > > >
+> > > > On Thu, May 28, 2026 at 02:29:24PM +0800, Nhat Pham wrote:
+> > > > > III. Follow-ups:
+> > > > >
+> > > > > In no particular order (and most of which can be done as follow-u=
+p
+> > > > > patch series rather than shoving everything in the initial landin=
+g):
+> > > > >
+> > > > > - More thorough stress testing is very much needed.
+> > > > >
+> > > > > - Performance benchmarks to make sure I don't accidentally regres=
+s
+> > > > >   the vswap-less case, and that the vswap's case performance is
+> > > > >   good. I suspect I will have to port a lot of the
+> > > > >   optimizations I implemented in v6 over here - some of the
+> > > > >   inefficiencies are inherent in any swap virtualization, and
+> > > > >   would require the same fix (for e.g the MRU cluster caching
+> > > > >   for faster cluster lookup - see [8] and [9]).
+> > > >
+> > > > This could be imporved by per-si percpu cluster. Both YoungJun's
+> > > > tiering and Baoquan's previous swap ops mentioned this is needed,
+> > > > and now vswap also need that. If the vswap is also a si, then it wi=
+ll
+> > > > make use of this too.
+> >
+> > Oh and the MRU cluster caching I mentioned here is not the allocation
+> > caching. It's the lookup caching, basically to avoid doing the
+> > xa_load() to look up clusters for consecutive swap operations on the
+> > same vswap cluster (which is the common case with vswap). For v6, it
+> > massively reduces this indirection lookup overhead. Performance-wise
+> > it's an absolute winner, just more complexity (because I need to
+> > handle reference counting carefully).
+>
+> Ah alright, that's interesting. And I think we can keep things simple
+> to start, since sensitive users is stil able tol use plain device this
+> way.
 
-Sashiko [1] points out that this means that
-CONFIG_HISILICON_ERRATUM_162100125 now affects NVIDIA parts and
-vice-versa for CONFIG_NVIDIA_CARMEL_CNP_ERRATUM.
+Of course. I'm hoping vswap-on-zswap will not be too terrible at a
+start. We can then optimize for the swapfile backend case later.
 
-The easiest fix is probably to guard the entries in the array above with
-their respective config options? Otherwise, this all looks good to me.
+>
+> BTW maintaining MRU is also an overhead, I'm not sure if the lookup
+> pattern always follows that?
 
-Will
+Yeah I had to be a bit careful in v6 to make sure the cache (and cache
+invalidation) happens at the right time. I've had this idea for awhile
+- there's a reason why I waited until v6 to implement it :)
 
-[1] https://sashiko.dev/#/patchset/20260601112000.1145391-1-zengheng@huaweicloud.com
+For instance, when physical swap allocator runs out of slot for a
+cluster, we try to reclaim the swap-cache-only slots. That involves
+taking the rmap back to vswap layer, to check swap cache and swap
+count. This is a very random pattern, so it does not benefit from this
+lookup cache, and in fact invalidates the cache :) So I had to add
+some hint to avoid going back to the vswap layer to check for
+swap-cache-only state.
+
+>
+> > I also just realized we'll induce the indirection overhead on
+> > allocation here too, even if the cached cluster still have slots for
+> > allocation, because we look up the cluster (which is basically free
+> > for static swap device, but not free for vswap devices). Might need to
+> > take care of that to maintain vswap performance (but it will then
+> > diverge from your existing code...).
+>
+> That part should be indeed coverable by the si->percpu cluster though, I =
+think.
+
+Yeah agree - we just need to be a bit craftier with it. The
+fundamental problem is in the current model, we're only storing offset
+and si, then look up cluster based on that. But for dynamic vswap,
+that look up takes the xa_load().
+
+Once we move to per-si per-cpu cluster, then I think it becomes ok to
+store the cluster pointer directly, correct?
+
+The reference counting needs to be carefully handled though. I think
+in my old vss design I did something fairly silly - just hold a
+reference to it while it's in cache, then add CPU offlining handler to
+clean up. Not the end of the world I suppose, but maybe there's a
+smarter scheme.
 
