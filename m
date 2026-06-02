@@ -1,332 +1,182 @@
-Return-Path: <linux-doc+bounces-90541-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90542-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id fVAJEsD7HmrRbgAAu9opvQ
-	(envelope-from <linux-doc+bounces-90541-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 17:50:24 +0200
+	id Y84qOmr7HmqEbgAAu9opvQ
+	(envelope-from <linux-doc+bounces-90542-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 17:48:58 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C54162FF84
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 17:50:23 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C72662FF1F
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 17:48:58 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=UvBQGYZR;
-	dkim=pass header.d=redhat.com header.s=google header.b=nMLWNgSo;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90541-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-90541-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=redhat.com;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
+	dkim=pass header.d=linux.dev header.s=key1 header.b=dUPN8UjC;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90542-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-90542-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=linux.dev;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 753A2314B249
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 15:29:34 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id C02BE303CD13
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 15:45:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A5ACE3E5ED8;
-	Tue,  2 Jun 2026 15:29:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 230393F1651;
+	Tue,  2 Jun 2026 15:45:03 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+Received: from out-178.mta1.migadu.com (out-178.mta1.migadu.com [95.215.58.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B8EC233C1B7
-	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 15:29:29 +0000 (UTC)
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780414172; cv=pass; b=g4BjWAJwopaGxq+yYZUcCgvQfQ7mciymlbRPuOa05P6tS1i7zuW0nWhtRauArmGrXjsw7qUbuy6YEN6+mgZxdRMmoPOKuwcm8l1i7oYJUFgQAIiaU+xcKtPQdzh95FdhmEX9J8sdK+ISiMcqjMCpKMzxL8ZqbYuIHVD99P76aVU=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780414172; c=relaxed/simple;
-	bh=a8rzFTRZmTNeGD9TQ3lwEM3tZ9cTaD8C1O4FRKxZ4Tk=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=SaeAPOdLLOx+JfaNBdiwxkPU8Ltl5XnhEXcA5dS8hWItPDA74TncHk2m24iKIzIKiAaa6KUUi03tjOHuAWH/yew+dNmKadp8/q6jL0YKoejioPBPJCPWl2POtk2ytxncE0gG7LOkCRzVwuHdrg18NLB/uU4gXYRNKRL9dNr/Us4=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=UvBQGYZR; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=nMLWNgSo; arc=pass smtp.client-ip=170.10.129.124
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1780414168;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96D033EFD34
+	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 15:45:01 +0000 (UTC)
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1780415103; cv=none; b=m5Qj32kvV9YfoyPYD6fd3FUmU1QGbBD3/lGkLE1c4ip5IsrS84fJ57G6TQe/wg3bgdD7j4ChoojJUrrpunbL/+A6SMBQ3xgSlYMSk8TxOPsgh2PIQSFBjQQx7ieseFqjFkiHPfmXfHVCwrQHuiKTJRT6Sp/7n/yYm5ZsOhwugBw=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1780415103; c=relaxed/simple;
+	bh=jZS53jNYRwftHvcSkUKQ42Zn65dp7rnKvchXLtDd1S0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=ociOXZMqT9knd99tpYJWY+9Pytjfm5rpRwRrNUJstWR2YeTDxu/+FxyqUfyY2pc05RcPiDbldDlOJEjQETlALIps1G65aPJ+ZBMStxhXghtRQ3fIuMUV519W1EKX7jFDb5aTXU/4et6ZeyA1aM1LEo8w1vk6JeppW3/C2Mes4Zc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=dUPN8UjC; arc=none smtp.client-ip=95.215.58.178
+Message-ID: <185f5699-3797-4300-8c54-bb99fc2a45e0@linux.dev>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1780415088;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=zoHOGHc6Dr79Ii3CKFCTRjW9SLXuC6GuIiX+icbDNi0=;
-	b=UvBQGYZR92DCU5YJmrGnaZXVjJXQ/AKOBMTOyg9CdFZZ7dE6o/nNLhHkEPQF9l+R+az/E0
-	7yaWvxTrZDCktKrz6twuPxvroESGPqt4bcalZ12+O5pf2hAVqVEtD+o9jTG4n6+Kmkeziy
-	p6xAmhtotSXcNkoqG+grUJp1JUCGB4s=
-Received: from mail-yx1-f69.google.com (mail-yx1-f69.google.com
- [74.125.224.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-475-qj6BETVLNZqEtq_-3rJR1Q-1; Tue, 02 Jun 2026 11:29:27 -0400
-X-MC-Unique: qj6BETVLNZqEtq_-3rJR1Q-1
-X-Mimecast-MFC-AGG-ID: qj6BETVLNZqEtq_-3rJR1Q_1780414167
-Received: by mail-yx1-f69.google.com with SMTP id 956f58d0204a3-66044a47d6fso8005712d50.2
-        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 08:29:27 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780414167; cv=none;
-        d=google.com; s=arc-20240605;
-        b=KR/F8OSIGVs3hSoINo595/ujS2aIh8rbj6D8TVrP8Jqr/OwD+4sensfK596HE6Folf
-         7fRZkraDaTDzxXMN2ztwn3fOQyYxxzJsoYOP+TOks5mQ59ufvuc+cgJzYXHamGtMYi0N
-         JNtHIoDRWVtPRX7kSMkhYv3nYhNbdA2ZxT1wIb3eXxWJfqG4FF5nYUF5d4lbzh+fLtjf
-         Vpc3N9cPUnKp5AiaQkAob0t22CN9S7FpQev8yrmA+PPT3P7ypVEDa5eHdiFNSm6B6n8f
-         jJD+duIteqOCKP+6Yk9jx5HN9MGpV2/ka1TI8P71v4KYeG25/q1leRZgmn0PMbaE3AEU
-         fwZw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=zoHOGHc6Dr79Ii3CKFCTRjW9SLXuC6GuIiX+icbDNi0=;
-        fh=XDVPYYr0tO7jVkbg3g4C6OQoh08hBKHLtB9LdeLY++Q=;
-        b=Joca1hasBAU8qluuW7XMXdqF1Hd49tCBXyRsw+lwr+KpQnwA588SvwLqV2at6zn777
-         Z6wIO+beZl/w/7Be7OhOaApUy1ixtO+cYlPyskBL6KJdjKxwhITxIv0H1k4LXlzklH9V
-         nEf7gKM3hnQtY4gTzNm3rKM+jaUzSMp1qVnzWC3O/878Dv+4x1fcZxGt1cfZfb1J8d9w
-         5Nh3aozWV/+UOI9wqd65H+Mn1Fttdt4ol158dYXQ9FR/GM5sKAxOjMlxI6MUfNjOV/Od
-         lMIUV7gH7cebwiXGc0HVAQktFP7YF2M6FuRqoc+5V3z6/cF9rDlyFoPJKTGzyj5S2qJP
-         +iHw==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1780414167; x=1781018967; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=zoHOGHc6Dr79Ii3CKFCTRjW9SLXuC6GuIiX+icbDNi0=;
-        b=nMLWNgSoqCrKVCZ/A3iyvgsjTU2MCmVKUj/KL1fZ7Gydjn1jhCPCudPtpSqzIOWiY2
-         D0WaJk7nI/Shs4Ry8oIeT5rK1UXP6BV13Iw6zcH1IlSJXZ5olW6xMjpLbejoyD+eU3M8
-         hwfN89e+vUPtc5fnOe94PtFILAXAUYROA/goQlZRbukTKvaTJNGdNeOs+JkozBhkv0cG
-         wboywymMaqJCGodE2GHTe8NbOzqjL4zh9nPrvf6ULSXyU/cNzoT9bmqcaeXG64wZxwIz
-         RqLPv5R4EQRr1q9aRIMFk4QKffdZn0ogLL5z+mDFCF8BIfPVkLOiDXrDWi5+y96eTrcG
-         JViw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780414167; x=1781018967;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=zoHOGHc6Dr79Ii3CKFCTRjW9SLXuC6GuIiX+icbDNi0=;
-        b=J9sLa1a/AdcFmLtqviTnDJj6d2QCIQ0x6DV+/TsyKCzv7xumKgP217MCyfScaKnGM1
-         vbu1Iva3+Srk1oZJCAaIuiw5pps4sZYTP+9r3ekhutwZojbshKlAA+a3G9rGi+csLv2l
-         zvsYNKm2gIYwRVG10vOhjqB1sNNPr01075Vxbi7+UPHBv6sG1FYvbyEWUA1uMtitwjfJ
-         D+uFh3VCuVMO24QS0zfuzbUY5H8VaHvVVrjiBWbPkjU/pSp+DB7lnBjEfe9vOzHTg+2l
-         YtqF5FmnsdDNYmnFc6yHhIVFCk5WRfiOymm+ApfLdEtWdgH7KI7Tc52qSKVju8+Yj4K2
-         749w==
-X-Forwarded-Encrypted: i=1; AFNElJ+vYaIxIQMFupWUOS15H8r6noJTn0jeuxFnXD/3ICVGimK6BiGEHMH/Hm43jJm6uM5kcVJulAIfeX8=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxLVVfRr8bdoqFkYtVOaNvD524yVr+hDWkywTPPlqCppvOKbP/B
-	Svjqww21GjhWD/HsLYqYA1LDGglRg+bjbPCuAUoCex7sFd6BFO9Qgqml4AbsMfyHo0yVRN8Z2NP
-	VyubftCRbd0cpleqy0oKcecVx7TlF26ilsBWJ90MSNWvNdR/IHDJ9iuJKFtdGQ/ZAm9AwZUKSY+
-	1/7cVg/5TCfREBxd0zYwDgTOFcGMByoTwPVo8k
-X-Gm-Gg: Acq92OEL36F/jVHffb+k1+0dfb6OGNndmpwULvs5Y2OpgXimzAsZyL2JhLcHcfCX7Fw
-	3eOxI3sICRI84tRIy/kZEqOKbuoDyaonVq/1ZhQfHwAQ1Ca3mUypwDX827Ra0YxtLGWJfG8uT/8
-	zI34xaB9atNX87cf3L7vvtqTYjHoc5E+5Dm/WRw2/lSxIlfPUWKpzwhm8MVI8HiuzTao8itHuCM
-	vVRaBWjGgp+xhO99A==
-X-Received: by 2002:a05:690e:4395:b0:651:bf58:446b with SMTP id 956f58d0204a3-660d5e4dcfamr221852d50.10.1780414167111;
-        Tue, 02 Jun 2026 08:29:27 -0700 (PDT)
-X-Received: by 2002:a05:690e:4395:b0:651:bf58:446b with SMTP id
- 956f58d0204a3-660d5e4dcfamr221781d50.10.1780414166617; Tue, 02 Jun 2026
- 08:29:26 -0700 (PDT)
+	bh=f8W9tKC2C6NAekt7xw/i353pEy5xESfITkwO5U4ZKyM=;
+	b=dUPN8UjCk9D//WfVj3ZIPIfxri7y0+DyfDfey/e1A6zAzAK6UEAwk60rmDdQMBMczBTVfQ
+	eYmfVDCyFQ4DgX5Zvih0NOTAT5JeaRkrMW9fNX91jRnKuwjIyKGOWl6TgNiUuKF1OUIs5y
+	itnu61NoSa2Vsg4tbFTDOK/aUcpzzfM=
+Date: Tue, 2 Jun 2026 23:44:17 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <2024af56-5e99-4799-a586-e9ba756cecb9@kernel.org>
- <20260601032804.96122-1-lance.yang@linux.dev> <f5d38f64-ab92-496d-afd3-29ccc17fec2b@kernel.org>
- <616de1a8-1cfd-40b8-b04f-7b324be40bfd@linux.dev> <6b11bf0a-769c-4ef2-ac6f-2af38200a6bc@kernel.org>
- <baa0a462-46e0-44ab-b583-c722ad253afe@linux.dev>
-In-Reply-To: <baa0a462-46e0-44ab-b583-c722ad253afe@linux.dev>
-From: Nico Pache <npache@redhat.com>
-Date: Tue, 2 Jun 2026 09:30:06 -0600
-X-Gm-Features: AVHnY4Kv1G0ugXWOd835wx5jHS-wLy0DPKwsrrM_yqPdHcBhPWzJa9aKptOmpM8
-Message-ID: <CAA1CXcD7peS3WHueVgAWhhRrjBO_1b19+Xc0CfZBSO8OwJJKQw@mail.gmail.com>
-Subject: Re: [PATCH mm-unstable v18 06/14] mm/khugepaged: generalize
- collapse_huge_page for mTHP collapse
-To: Lance Yang <lance.yang@linux.dev>
-Cc: "David Hildenbrand (Arm)" <david@kernel.org>, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-mm@kvack.org, 
-	linux-trace-kernel@vger.kernel.org, aarcange@redhat.com, 
-	akpm@linux-foundation.org, anshuman.khandual@arm.com, apopple@nvidia.com, 
-	baohua@kernel.org, baolin.wang@linux.alibaba.com, byungchul@sk.com, 
-	catalin.marinas@arm.com, cl@gentwo.org, corbet@lwn.net, 
-	dave.hansen@linux.intel.com, dev.jain@arm.com, gourry@gourry.net, 
-	hannes@cmpxchg.org, hughd@google.com, jack@suse.cz, jackmanb@google.com, 
-	jannh@google.com, jglisse@google.com, joshua.hahnjy@gmail.com, kas@kernel.org, 
-	liam@infradead.org, ljs@kernel.org, mathieu.desnoyers@efficios.com, 
-	matthew.brost@intel.com, mhiramat@kernel.org, mhocko@suse.com, 
-	peterx@redhat.com, pfalcato@suse.de, rakie.kim@sk.com, raquini@redhat.com, 
-	rdunlap@infradead.org, richard.weiyang@gmail.com, rientjes@google.com, 
-	rostedt@goodmis.org, rppt@kernel.org, ryan.roberts@arm.com, shivankg@amd.com, 
-	sunnanyong@huawei.com, surenb@google.com, thomas.hellstrom@linux.intel.com, 
-	tiwai@suse.de, usamaarif642@gmail.com, vbabka@suse.cz, vishal.moola@gmail.com, 
-	wangkefeng.wang@huawei.com, will@kernel.org, willy@infradead.org, 
-	yang@os.amperecomputing.com, ying.huang@linux.alibaba.com, ziy@nvidia.com, 
-	zokeefe@google.com, usama.arif@linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH mm-unstable v18 11/14] mm/khugepaged: Introduce mTHP
+ collapse support
+Content-Language: en-US
+To: Nico Pache <npache@redhat.com>
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-mm@kvack.org, linux-trace-kernel@vger.kernel.org, aarcange@redhat.com,
+ akpm@linux-foundation.org, anshuman.khandual@arm.com, apopple@nvidia.com,
+ baohua@kernel.org, baolin.wang@linux.alibaba.com, byungchul@sk.com,
+ catalin.marinas@arm.com, cl@gentwo.org, corbet@lwn.net,
+ dave.hansen@linux.intel.com, david@kernel.org, dev.jain@arm.com,
+ gourry@gourry.net, hannes@cmpxchg.org, hughd@google.com, jack@suse.cz,
+ jackmanb@google.com, jannh@google.com, jglisse@google.com,
+ joshua.hahnjy@gmail.com, kas@kernel.org, liam@infradead.org, ljs@kernel.org,
+ mathieu.desnoyers@efficios.com, matthew.brost@intel.com,
+ mhiramat@kernel.org, mhocko@suse.com, peterx@redhat.com, pfalcato@suse.de,
+ rakie.kim@sk.com, raquini@redhat.com, rdunlap@infradead.org,
+ richard.weiyang@gmail.com, rientjes@google.com, rostedt@goodmis.org,
+ rppt@kernel.org, ryan.roberts@arm.com, shivankg@amd.com,
+ sunnanyong@huawei.com, surenb@google.com, thomas.hellstrom@linux.intel.com,
+ tiwai@suse.de, usamaarif642@gmail.com, vbabka@suse.cz,
+ vishal.moola@gmail.com, wangkefeng.wang@huawei.com, will@kernel.org,
+ willy@infradead.org, yang@os.amperecomputing.com,
+ ying.huang@linux.alibaba.com, ziy@nvidia.com, zokeefe@google.com
+References: <20260522150009.121603-12-npache@redhat.com>
+ <20260531071845.10875-1-lance.yang@linux.dev>
+ <CAA1CXcA+oZmp=cxiC2_EBDxqGX94gAd335d9eFPNv=j_0=og7Q@mail.gmail.com>
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Lance Yang <lance.yang@linux.dev>
+In-Reply-To: <CAA1CXcA+oZmp=cxiC2_EBDxqGX94gAd335d9eFPNv=j_0=og7Q@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Migadu-Flow: FLOW_OUT
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[kernel.org,vger.kernel.org,kvack.org,redhat.com,linux-foundation.org,arm.com,nvidia.com,linux.alibaba.com,sk.com,gentwo.org,lwn.net,linux.intel.com,gourry.net,cmpxchg.org,google.com,suse.cz,gmail.com,infradead.org,efficios.com,intel.com,suse.com,suse.de,goodmis.org,amd.com,huawei.com,os.amperecomputing.com,linux.dev];
-	TAGGED_FROM(0.00)[bounces-90541-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[npache@redhat.com,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:lance.yang@linux.dev,m:david@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-trace-kernel@vger.kernel.org,m:aarcange@redhat.com,m:akpm@linux-foundation.org,m:anshuman.khandual@arm.com,m:apopple@nvidia.com,m:baohua@kernel.org,m:baolin.wang@linux.alibaba.com,m:byungchul@sk.com,m:catalin.marinas@arm.com,m:cl@gentwo.org,m:corbet@lwn.net,m:dave.hansen@linux.intel.com,m:dev.jain@arm.com,m:gourry@gourry.net,m:hannes@cmpxchg.org,m:hughd@google.com,m:jack@suse.cz,m:jackmanb@google.com,m:jannh@google.com,m:jglisse@google.com,m:joshua.hahnjy@gmail.com,m:kas@kernel.org,m:liam@infradead.org,m:ljs@kernel.org,m:mathieu.desnoyers@efficios.com,m:matthew.brost@intel.com,m:mhiramat@kernel.org,m:mhocko@suse.com,m:peterx@redhat.com,m:pfalcato@suse.de,m:rakie.kim@sk.com,m:raquini@redhat.com,m:rdunlap@infradead.org,m:richard.weiyang@gmail.com,m:rientjes@google.com,m:rostedt@goodmis.org,m:rppt@kernel.org,m:ryan.roberts@arm.com,m:s
- hivankg@amd.com,m:sunnanyong@huawei.com,m:surenb@google.com,m:thomas.hellstrom@linux.intel.com,m:tiwai@suse.de,m:usamaarif642@gmail.com,m:vbabka@suse.cz,m:vishal.moola@gmail.com,m:wangkefeng.wang@huawei.com,m:will@kernel.org,m:willy@infradead.org,m:yang@os.amperecomputing.com,m:ying.huang@linux.alibaba.com,m:ziy@nvidia.com,m:zokeefe@google.com,m:usama.arif@linux.dev,m:joshuahahnjy@gmail.com,m:richardweiyang@gmail.com,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90542-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[redhat.com:+];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:npache@redhat.com,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-trace-kernel@vger.kernel.org,m:aarcange@redhat.com,m:akpm@linux-foundation.org,m:anshuman.khandual@arm.com,m:apopple@nvidia.com,m:baohua@kernel.org,m:baolin.wang@linux.alibaba.com,m:byungchul@sk.com,m:catalin.marinas@arm.com,m:cl@gentwo.org,m:corbet@lwn.net,m:dave.hansen@linux.intel.com,m:david@kernel.org,m:dev.jain@arm.com,m:gourry@gourry.net,m:hannes@cmpxchg.org,m:hughd@google.com,m:jack@suse.cz,m:jackmanb@google.com,m:jannh@google.com,m:jglisse@google.com,m:joshua.hahnjy@gmail.com,m:kas@kernel.org,m:liam@infradead.org,m:ljs@kernel.org,m:mathieu.desnoyers@efficios.com,m:matthew.brost@intel.com,m:mhiramat@kernel.org,m:mhocko@suse.com,m:peterx@redhat.com,m:pfalcato@suse.de,m:rakie.kim@sk.com,m:raquini@redhat.com,m:rdunlap@infradead.org,m:richard.weiyang@gmail.com,m:rientjes@google.com,m:rostedt@goodmis.org,m:rppt@kernel.org,m:ryan.roberts@arm.com,m:shiv
+ ankg@amd.com,m:sunnanyong@huawei.com,m:surenb@google.com,m:thomas.hellstrom@linux.intel.com,m:tiwai@suse.de,m:usamaarif642@gmail.com,m:vbabka@suse.cz,m:vishal.moola@gmail.com,m:wangkefeng.wang@huawei.com,m:will@kernel.org,m:willy@infradead.org,m:yang@os.amperecomputing.com,m:ying.huang@linux.alibaba.com,m:ziy@nvidia.com,m:zokeefe@google.com,m:joshuahahnjy@gmail.com,m:richardweiyang@gmail.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[lance.yang@linux.dev,linux-doc@vger.kernel.org];
+	RCVD_COUNT_THREE(0.00)[3];
+	FREEMAIL_CC(0.00)[vger.kernel.org,kvack.org,redhat.com,linux-foundation.org,arm.com,nvidia.com,kernel.org,linux.alibaba.com,sk.com,gentwo.org,lwn.net,linux.intel.com,gourry.net,cmpxchg.org,google.com,suse.cz,gmail.com,infradead.org,efficios.com,intel.com,suse.com,suse.de,goodmis.org,amd.com,huawei.com,os.amperecomputing.com];
+	FROM_HAS_DN(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[npache@redhat.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[59];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[58];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[lance.yang@linux.dev,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[linux.dev:+];
 	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,vger.kernel.org:from_smtp,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,linux.dev:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,linux.dev:mid,linux.dev:dkim,linux.dev:from_mime,linux.dev:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 3C54162FF84
+X-Rspamd-Queue-Id: 8C72662FF1F
 
-On Mon, Jun 1, 2026 at 4:48=E2=80=AFAM Lance Yang <lance.yang@linux.dev> wr=
-ote:
->
->
->
-> On 2026/6/1 18:23, David Hildenbrand (Arm) wrote:
-> > On 6/1/26 11:08, Lance Yang wrote:
-> >>
-> >>
-> >> On 2026/6/1 14:54, David Hildenbrand (Arm) wrote:
-> >>> On 6/1/26 05:28, Lance Yang wrote:
-> >>>>
-> >>>>
-> >>>> Ah, fair point.
-> >>>>
-> >>>> I was mostly worried about arch hooks that walk vma->vm_mm again, ra=
-ther
-> >>>> than only using the pte pointer passed in. For example, mips does:
-> >>>
-> >>> Right, a re-walk would be the real problem.
-> >>>
-> >>>>
-> >>>>     update_mmu_cache_range()
-> >>>>       -> __update_tlb()
-> >>>>         -> pgd_offset(vma->vm_mm, address)
-> >>>>         -> pte_offset_map(...)
-> >>>>
-> >>>> and __update_tlb() has this assumption:
-> >>>>
-> >>>>          /*
-> >>>>           * update_mmu_cache() is called between pte_offset_map_lock=
-()
-> >>>>           * and pte_unmap_unlock(), so we can assume that ptep is no=
-t
-> >>>>           * NULL here: and what should be done below if it were NULL=
-?
-> >>>>           */
-> >>>>
-> >>>> So if khugepaged happens to run with current->active_mm =3D=3D vma->=
-vm_mm
-> >>>> here, could __update_tlb() hit the none PMD, get NULL from
-> >>>> pte_offset_map(), and then dereference it?
-> >>>
-> >>> Likely yes -- that MIPS code is horrible. And the comment in MIPS cod=
-e
-> >>> even spells that out. :(
-> >>>
-> >>> Do you know about other code like that, or is MIPS the only one doing=
- a
-> >>> re-walk and crossing fingers?
-> >>>
-> >>>>
-> >>>> Just wanted to raise it since some arch code may still have assumpti=
-ons
-> >>>> like this, and the always-enable-mTHP work is getting closer ...
-> >>>
-> >>> Right. I assume set_pte_at() couldn't trigger something similar (re-w=
-alk) in
-> >>> arch code,
-> >>> because we simply provide the ptep. update_mmu_cache_range() only con=
-sumes the
-> >>> pte.
-> >>>
-> >>>>
-> >>>> Probably very very very hard to hit, though :)
-> >>>
-> >>> Delaying update_mmu_cache_range() is nasty, as we'd have to make sure=
- that
-> >>> nobody can interfere in the meantime ... and the PMD lock will not be=
- sufficient.
-> >>>
-> >>> Maybe we could reinstall the page table with the cleared (none) entri=
-es while
-> >>> still holding the PTL?
-> >>>
-> >>> Thinking out loud:
-> >>>
-> >>> diff --git a/mm/khugepaged.c b/mm/khugepaged.c
-> >>> index 5ba298d420b7..e39b750b1e6f 100644
-> >>> --- a/mm/khugepaged.c
-> >>> +++ b/mm/khugepaged.c
-> >>> @@ -1413,13 +1413,17 @@ static enum scan_result collapse_huge_page(st=
-ruct
-> >>> mm_struct *mm, unsigned long s
-> >>>                   map_anon_folio_pmd_nopf(folio, pmd, vma, pmd_addr);
-> >>>           } else {
-> >>>                   /*
-> >>> -                * set_ptes is called in map_anon_folio_pte_nopf with=
- the
-> >>> -                * pmd_ptl lock still held; this is safe as the PMD i=
-s expected
-> >>> -                * to be none. The pmd entry is then repopulated belo=
-w.
-> >>> +                * Re-insert the page table with the cleared entries,=
- but
-> >>> +                * hold the PTL, such that no one can mess with the r=
-e-installed
-> >>> +                * page table until we updated the temporarily-cleare=
-d entries
-> >>> +                * through map_anon_folio_pte_nopf().
-> >>>                    */
-> >>> -               map_anon_folio_pte_nopf(folio, pte, vma, start_addr, =
-/
-> >>> *uffd_wp=3D*/ false);
-> >>> -               smp_wmb(); /* make PTEs visible before PMD. See pmd_i=
-nstall() */
-> >>
-> >> One small thing, I think we should probably keep the smp_wmb(), and ju=
-st
-> >> move it before the earlier pmd_populate().
-> >>
-> >> IIUC, the ordering we want is still:
-> >>
-> >>    clear old PTEs
-> >>    smp_wmb()
-> >>    pmd_populate()
-> >>
-> >> so another CPU cannot walk through the re-installed PMD and still obse=
-rve
-> >> the old PTEs, right?
-> >
-> > There is a smp_wmb() in __folio_mark_uptodate(), that should be suffici=
-ent?
->
-> Ah, cool! __folio_mark_uptodate() already does the job :P
->
-> So yeah, no extra smp_wmb() needed here!
 
-are we sure? that folio_mark_uptodate is done before the PTEs are
-reinstalled. Then we reinstall the PMD right after. Currently
-separated by the smp_wmb().
 
-I was copying this from other THP code that performs similar PTE/PMD juggli=
-ng.
+On 2026/6/2 18:58, Nico Pache wrote:
+> On Sun, May 31, 2026 at 1:19 AM Lance Yang <lance.yang@linux.dev> wrote:
+>>
+>>
+>> On Fri, May 22, 2026 at 09:00:06AM -0600, Nico Pache wrote:
+>> [...]
+>>> @@ -1587,10 +1749,11 @@ static enum scan_result collapse_scan_pmd(struct mm_struct *mm,
+>>>        if (result == SCAN_SUCCEED) {
+>>>                /* collapse_huge_page expects the lock to be dropped before calling */
+>>>                mmap_read_unlock(mm);
+>>> -              result = collapse_huge_page(mm, start_addr, referenced,
+>>> -                                          unmapped, cc, HPAGE_PMD_ORDER);
+>>> -              /* collapse_huge_page will return with the mmap_lock released */
+>>> +              nr_collapsed = mthp_collapse(mm, vma, start_addr, referenced,
+>>> +                                           unmapped, cc, enabled_orders);
+>>> +              /* mmap_lock was released above, set lock_dropped */
+>>>                *lock_dropped = true;
+>>> +              result = nr_collapsed ? SCAN_SUCCEED : SCAN_FAIL;
+>>
+>> Hmm ... don't we lose the allocation-failure result here?
+>>
+>> Previously collapse_scan_pmd() propagated SCAN_ALLOC_HUGE_PAGE_FAIL from
+>> collapse_huge_page(), so khugepaged would call khugepaged_alloc_sleep()
+>> in khugepaged_do_scan().
+>>
+>> Now if allocation fails and nr_collapsed stays 0, we just return
+>> SCAN_FAIL. So we won't back off via khugepaged_alloc_sleep() anymore?
+> 
+> Ok I did the error propagation! I think I handled both of these cases
+> you brought up pretty easily.
 
-I can remove it, but I'd rather air on the side of caution with this.
+Thanks.
 
->
-> Cheers, Lance
->
+> However I don't know what to do in the following case: We successfully
+> collapsed some portion of the PMD, but during that process, we also
+> hit an allocation failure. Is it best to back off entirely? or can we
+> treat some forward progress as a sign we can continue trying collapses
+> without sleeping.
+> 
+> Basically, do we prioritize SCAN_ALLOC_HUGE_PAGE_FAIL or the
+> successful collapses as the returned value?
 
+Thinking out loud, forward progress should win here, the allocation
+failure only matter if we made no progress at all?
+
+> This is what I currently have:
+> done:
+>      if (collapsed)
+>          return SCAN_SUCCEED;
+>      if (alloc_failed)
+>          return SCAN_ALLOC_HUGE_PAGE_FAIL;
+
+I'd go with this ordering :)
+
+Cheers, Lance
 
