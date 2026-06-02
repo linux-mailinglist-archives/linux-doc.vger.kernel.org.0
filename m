@@ -1,239 +1,289 @@
-Return-Path: <linux-doc+bounces-90546-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90548-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id FCEKNGEFH2rMdQAAu9opvQ
-	(envelope-from <linux-doc+bounces-90546-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 18:31:29 +0200
+	id wOT1Os8IH2qsdwAAu9opvQ
+	(envelope-from <linux-doc+bounces-90548-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 18:46:07 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id DA4DA63036C
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 18:31:28 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7311D630581
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 18:46:07 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=rivosinc.com header.s=google header.b="c/VE6Dfq";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90546-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-90546-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=rivosinc.com;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
+	dkim=pass header.d=hpe.com header.s=pps0720 header.b=fYwNmpTW;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90548-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-90548-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=hpe.com;
+	arc=reject ("cv is fail on i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 74E933016B35
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 16:20:08 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 7E9E530F536C
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 16:36:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9B598349CDE;
-	Tue,  2 Jun 2026 16:20:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6222B37F8BC;
+	Tue,  2 Jun 2026 16:35:19 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-yx1-f48.google.com (mail-yx1-f48.google.com [74.125.224.48])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-002e3701.pphosted.com (mx0b-002e3701.pphosted.com [148.163.143.35])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E6D0332913
-	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 16:20:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 93FF037E30C;
+	Tue,  2 Jun 2026 16:35:17 +0000 (UTC)
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780417204; cv=pass; b=IMpWU9Z+oFt0rZVh19a7yFx2zIPY6Sn8mamKV6DA92tPrsH+drP8PoPOaxyct3+5cOP7iELxvopssxd7YLUhukj4wHdtzvpOxt4CS9QLGpDe+Fy3Ty8Cr/rVbLS4FdbOe47nCX7c6Bl3EskWK0HgClHSbgkLt0jPfVjFSQXpiEE=
+	t=1780418119; cv=fail; b=svdirn4TQn+lsLiw8kFwkhgWW4EWrYG706uueFDeDYBK7dKv8GAW+UKGr4HgxAIITDrJ1vVOOrKJ4e+tSucfpNVsH9CWHZArQ74HX1Qt79rg7k3P2U1iUAF1YGZF1Nx6+TgM0qpG6IvVSOuto9igluVvM8naNCUO7gQPTcI2X7Y=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780417204; c=relaxed/simple;
-	bh=ydH4/QV/1+IbTAhdeYNLwa8ygu64uWvWhoVur27Jo/0=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=PfchiQnvfiJlKdJASw4wVIr7r8WTWZHviX5XOsI1poROm37ogsKo7N1aX1vWSLjFmvKFdzOowDLL4w9h3ffvy+ASJWmGvBRIQ2iBxtuLFEYLnUwLBOtO2RB757b3yutC7ROA3x4hKylC/pBF6aXLtxJFGhoOkShximH36TREgfY=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rivosinc.com; spf=pass smtp.mailfrom=rivosinc.com; dkim=pass (2048-bit key) header.d=rivosinc.com header.i=@rivosinc.com header.b=c/VE6Dfq; arc=pass smtp.client-ip=74.125.224.48
-Received: by mail-yx1-f48.google.com with SMTP id 956f58d0204a3-660390a8999so6360153d50.3
-        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 09:20:02 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780417202; cv=none;
-        d=google.com; s=arc-20240605;
-        b=RHUu+z/+0hVY/1hss8G+uifGHhcH/u6S2gqBmt1AnRSBNHGDtHdBmnAVaviJiYrg2K
-         bAApDCk2c2wTwNDZoutzJDJNn0v0iNs63Iz0s7C8eh+CyY/tAFBFVkO1Y3EoYoeLSNC5
-         3H9cQWPNOpVFU0oqZv8GTNXDqB7MQev54H0jwBU5E4Klzck+CKQ8HNZk/rHA0PseCdvS
-         uV2bsMICIWs9+alnc4fskiy9M/YP2boGtiqPfs6NlxG2loJ2Ja7Db3nVDh7d/rduezIV
-         5MYtQ0KaoYXPMUyuwxRZCVXat7+aJuzUv1cPFcxc0ZObUISAaM9nF014JkjOlZ6h2EDa
-         9+QA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=qYFMKnZkfNnmRXGo0xQ4eN2VdP8xCoBWS52ZR4ARnJo=;
-        fh=Pv/U/GnAlSJSnqrm9WONkPE0/OLlr+7WsQW8W1n8RiY=;
-        b=IpTSA+gFjkEjbnYjzHgjoQ5rzVOQjyobxfTtj42p1e/fgo/Nj5uZ7BseLxsGFsKBJ8
-         pljlUdITR5nFTeBBFR6RCLGGoEi9oo+wJMfZPgcawkELxRqtlGu2hAy8zE/BAozZSy9p
-         /AyG7NyGoBL2i3xjMD7Bwg9UBaulUI/rwPjm1Zzm6pCBVRk0Mr/4l+Wun13QGqQaWSHw
-         REzRGsN4kh27rgmyNSMN6vP0mLGnGa48UIEJ3KfMPxox5cAAojGTAaXiBMb87oKlf34c
-         zNck5fX7WtRzzEfIL0e0UmjDPJrkLk4ZIaV+x6Tt7lSuR4draF9oxYw/0hVEbqC3xBqw
-         KQ7Q==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=rivosinc.com; s=google; t=1780417202; x=1781022002; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=qYFMKnZkfNnmRXGo0xQ4eN2VdP8xCoBWS52ZR4ARnJo=;
-        b=c/VE6DfqYn4w+HWhelXW5cH3cKDMBvmmPkVsAt1mRpbe/kx0fpJhdpax/nVFBksa/q
-         kWQOQ3TaZTqarShkrrTJKHivLOSIJRlP5ChFQxVgYC5hqdi3Kwy6ThI+1cQiLvakbV5r
-         EN2CKw4yqeAbNirJuDwnGr7HREmnRWw1TVqQR6cWIWIwpsKjofo4YQYGqkv4kX6L0rF1
-         3FeGiu6Xyw+dqrRgyICL5NayCKUBiSvyHv3Mf2Vtla8HNIKYLEAD6fI0S3XIcPnRNC6e
-         U9PgeKeKvgpuY8awo8S5+XjMCS2FR7ESbtR2gvFFaxrelzBcqVhqbvmX5lzxFG3CThxE
-         SolQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780417202; x=1781022002;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=qYFMKnZkfNnmRXGo0xQ4eN2VdP8xCoBWS52ZR4ARnJo=;
-        b=gE10LqQ1vk2wnE1Po3hBftP1zK0lt/Y893NKjIiihRQJ0Up3lBbq6mt/VJJCBaopcc
-         jlRR9Qt5rokijkQYZ7/JxxWxFpYv+V0tKlR+KAoF4NOzju56h/d/E230Rc0o4ONq8uOE
-         EVQcUcGsoRzgml8geRnerf1bym3vjf4WGhaoDGskzdW0k9GYuHPugiyaTc7Iv9ok9wew
-         +ve8pGfjHIB5MxX5iXYgVujMI2n+xTW4q8GzTlWFCFQ4U024CeZvE5kb4ZDkGdf420SI
-         7PdGODWkRWaHPtUBsyhh4wgWTZGPDXEahYVP0SeQQdD9Ze22cyKovjHp8G5ex+lQ7Ngi
-         LYQw==
-X-Forwarded-Encrypted: i=1; AFNElJ//1ILuE86ffHzh9uNC1Vj/fmYg9CT/01YXDK3Y3FX7gChqqx7xqod/0zeVXVE0f8PnvPOVHT3yElw=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yzx5KDew4pg7OKA8b/zw341aT6hIFzYjoWnBvC1E+7tAKWjI4ib
-	Ag2kf83EE4MMwIfqwnNwf7PSS8KjbdJi5r7AS8D5Z9kUAb2cQkS+NU6rfhEMtct/7+hXT/muLXa
-	YMElRTx2JjKLREd16oq+S6fT1YjgG3pTaepTF4D3ryQ==
-X-Gm-Gg: Acq92OFuYwVL152Xa9Uf/XrPnzuGpzI02g7WaEvd1mLTJdItFesopRM6lFJ0yX0exaD
-	x5XY07eaIc0Mmfg0nRyBQR7AxbVCpkVeKlnXXGxE3pJl+FZDTziipauJKJhCaRW4LLCy5jxUAfO
-	xj9wa/+NIh9OQZ/64npgOro8yHsioAzcochw0Uv30ciFWh8j88v94Gsctq736MIdjJtZ/W+WoLK
-	r+KdSTxPsjHLIDGpFhIPQ6I/3YkFcn1kwnlPJIk3JC0RnTiOBSwIRK7H+rHiRS9s6XdSSooMAeb
-	AzdcxJ5x0nxUpkTLDOXnMw9nB0Mqy3cQbQ==
-X-Received: by 2002:a05:690e:23c7:b0:660:367d:539c with SMTP id
- 956f58d0204a3-660d61a5f90mr366583d50.65.1780417201973; Tue, 02 Jun 2026
- 09:20:01 -0700 (PDT)
+	s=arc-20240116; t=1780418119; c=relaxed/simple;
+	bh=5yxaQiPaxH2JEo2IP+eZYjhwR8QYwenWRGFjEasdJbg=;
+	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
+	 Content-Type:MIME-Version; b=S9erKZTwwA0l0T1dIGuoqTTPi+71hW8RpBIctqU8O43Cp2sZCDbTAJqQkQ/TDcqxuiEVHYqmmtBTd+vFmA5FIs5Cuz6pQ33rcdRX9OgGV4XA8ncDNo1bWOge3MdQLCC9MivAgmNRWsPXB4ceEDetWIt1g7a9ebacmLOWXHNuW7A=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=hpe.com; spf=pass smtp.mailfrom=hpe.com; dkim=pass (2048-bit key) header.d=hpe.com header.i=@hpe.com header.b=fYwNmpTW; arc=fail smtp.client-ip=148.163.143.35
+Received: from pps.filterd (m0134424.ppops.net [127.0.0.1])
+	by mx0b-002e3701.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 652E2YlU4094405;
+	Tue, 2 Jun 2026 16:34:43 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hpe.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=pps0720; bh=5y
+	xaQiPaxH2JEo2IP+eZYjhwR8QYwenWRGFjEasdJbg=; b=fYwNmpTW9SiH2hcSVK
+	tSf+2yN9c1NqVNQQT0meM/vOGr6WI5V0eaVcHQQ5PTpAjLi3vNmlMn+5cp5CfMYZ
+	VVuRYU9Tq/k4TgcJmPUZ3TjVkF+r+phCQwwtwDFVZWjJT+PuDg7gKXJMgn1GMMOo
+	jgm3xuLBsKbuwlV6Vgxh1oypmVZnpK0vw0kqjLEd+1zVXCKcB0+pGQQmyDvy+Xdc
+	Jnvq4VqgHu9EfdYfwcRr6MHjwo7J2z7vzpm1p4Viysi1ofr36vxPFm1xC5TSJRqq
+	r6ZGigZCA3i+g+4jn9Q6UKbcCZv/wY/FPH1rkMMsipbYcPg8iHQ5Qnh+KswZ4YlP
+	quAQ==
+Received: from p1lg14878.it.hpe.com (p1lg14878.it.hpe.com [16.230.97.204])
+	by mx0b-002e3701.pphosted.com (PPS) with ESMTPS id 4ehyapb5dw-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Tue, 02 Jun 2026 16:34:42 +0000 (GMT)
+Received: from p1wg14924.americas.hpqcorp.net (unknown [10.119.18.113])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by p1lg14878.it.hpe.com (Postfix) with ESMTPS id 3B562132D6;
+	Tue,  2 Jun 2026 16:34:41 +0000 (UTC)
+Received: from p1wg14928.americas.hpqcorp.net (10.119.18.116) by
+ p1wg14924.americas.hpqcorp.net (10.119.18.113) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.17; Tue, 2 Jun 2026 04:34:41 -1200
+Received: from p1wg14925.americas.hpqcorp.net (10.119.18.114) by
+ p1wg14928.americas.hpqcorp.net (10.119.18.116) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.17; Tue, 2 Jun 2026 04:34:40 -1200
+Received: from p1wg14919.americas.hpqcorp.net (16.230.19.122) by
+ p1wg14925.americas.hpqcorp.net (10.119.18.114) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.17 via Frontend Transport; Tue, 2 Jun 2026 04:34:40 -1200
+Received: from CO1PR08CU001.outbound.protection.outlook.com (192.58.206.38) by
+ edge.it.hpe.com (16.230.19.122) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 2 Jun
+ 2026 04:34:06 -1200
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=x4gNA8tBIfafbzGAAyjjmPS9Qcr04zreescPQIxxyGUJ0Xo2NDC84IcXs0dY4GRxK2Wz3iUWt/SBSjEuVci70wQo1BuaksBQzAbJTkBd5cmY9nh0QpgRe3wxoCUngcvY67P4aCyC8Zb44nNDKeJQQApeAUFRdzaZnfqi5rXmIDEyRXEDjQgVgBEO0ByVyXoLC2DEkamL0hbVBB+6B6+LO/s5fyIkQeNR5OfB6t+tqlnxKCk0meAZa8nSsMt79kbjy2v9xAXSMU4xlov41dw/dp7Z5YoA5L1co1oikhndz0D/rR1nn93HhYFUwK/kjd+++scZARPjiNWBerBJlHcblQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=5yxaQiPaxH2JEo2IP+eZYjhwR8QYwenWRGFjEasdJbg=;
+ b=SeTgDgtVVIkeea9ltQUAsCMMfrrKW5rrUO1xwpDeX2K+MGF+ZSUoSuzbafBan9aWN6wMIURM/+VqADTrEA/RPH+e1O/R/PzOrdGZQzjSd42G2bZCLt40IACTHDvxWtE6+IUo2VHVKh9s4I8CJ9dOoJgf1OJCS611Sf3sbt5LIrQ0NCBV9cckGNJ/kGMRNEyz7Vj7cJT/P9PYlBjh90Ev7FuuVcD8kKzwcoOWpBJXAVaHtCspymOD6V4WZmIgxuhEs5HONGrWRSkASc5DMZdufUGaUdkGXAU56gGwyrJv3kjr5bLMObvnPY9AaBoJNvasRAhQ7ggoLDkuBVDl+qS4lQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=hpe.com; dmarc=pass action=none header.from=hpe.com; dkim=pass
+ header.d=hpe.com; arc=none
+Received: from CH3PR84MB3523.NAMPRD84.PROD.OUTLOOK.COM (2603:10b6:610:1cc::7)
+ by SJ1PR84MB3067.NAMPRD84.PROD.OUTLOOK.COM (2603:10b6:a03:45e::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.17; Tue, 2 Jun 2026
+ 16:34:04 +0000
+Received: from CH3PR84MB3523.NAMPRD84.PROD.OUTLOOK.COM
+ ([fe80::2c54:3534:122f:e74f]) by CH3PR84MB3523.NAMPRD84.PROD.OUTLOOK.COM
+ ([fe80::2c54:3534:122f:e74f%4]) with mapi id 15.21.0071.015; Tue, 2 Jun 2026
+ 16:34:04 +0000
+From: "Pradhan, Sanman" <sanman.pradhan@hpe.com>
+To: "sashiko-bot@kernel.org" <sashiko-bot@kernel.org>
+CC: "linux-hwmon@vger.kernel.org" <linux-hwmon@vger.kernel.org>,
+        "linux@roeck-us.net" <linux@roeck-us.net>,
+        "robh@kernel.org"
+	<robh@kernel.org>,
+        "krzk+dt@kernel.org" <krzk+dt@kernel.org>,
+        "conor+dt@kernel.org" <conor+dt@kernel.org>,
+        "corbet@lwn.net"
+	<corbet@lwn.net>,
+        "skhan@linuxfoundation.org" <skhan@linuxfoundation.org>,
+        "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "noname.nuno@gmail.com" <noname.nuno@gmail.com>,
+        "Syed, Arif"
+	<arif.syed@hpe.com>,
+        Sanman Pradhan <psanman@juniper.net>,
+        "sashiko-reviews@lists.linux.dev" <sashiko-reviews@lists.linux.dev>
+Subject: Re: [PATCH v4 2/2] hwmon: (pmbus/max20860a) Add driver for Analog
+ Devices MAX20860A
+Thread-Topic: [PATCH v4 2/2] hwmon: (pmbus/max20860a) Add driver for Analog
+ Devices MAX20860A
+Thread-Index: AQHc8fbVSQ6G4ERqRE+l021qjWERhg==
+Date: Tue, 2 Jun 2026 16:34:04 +0000
+Message-ID: <20260602163356.1020323-1-sanman.pradhan@hpe.com>
+References: <20260601184516.919488-1-sanman.pradhan@hpe.com>
+ <20260601184516.919488-3-sanman.pradhan@hpe.com>
+ <20260601190606.8BADC1F00893@smtp.kernel.org>
+In-Reply-To: <20260601190606.8BADC1F00893@smtp.kernel.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: CH3PR84MB3523:EE_|SJ1PR84MB3067:EE_
+x-ms-office365-filtering-correlation-id: d7cbbb64-f0ea-4b12-83d6-08dec0c4c273
+x-ld-processed: 105b2061-b669-4b31-92ac-24d304d195dc,ExtAddr
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|366016|376014|7416014|1800799024|22082099003|18002099003|38070700021|56012099006|4143699003|3023799007;
+x-microsoft-antispam-message-info: WoRMy2vMY3bN4ZaUZ6WNwq2A1S13YgWA9w7wagaDl9wV7ZXP98L1/2U+vVccn/jmPhlBzSZpYlznPesXZOogbgoeHH+pGvx80hHzsaKf9lWwdaKTm8iODy0tFlpjO8kVS2kNwUce4swTUMQwbGdtcsxu+TQR1Vq8XRw9Cfuz73N7hwUm2S1AssBf40Aj1i0SQoJxOHDXFe6UTEtS3V726ys80kHY3n7C35ltTBTU2LeJylq2WzE9EyXsOUVAh9NmzkrjfpGvojMsgQyV4YIWH35FtzeLP5Xvwo8mvpLxyVkavZ95GFfWG7BbdJsORmf9Y5wbFZwo9HWAzhFOylbcJYXsA+fk+XHRYjY4TyLr5bmJf9uWl/uAu2LuLnGVOpOuJFTX8gP2AHDCa7gkGMHq0irdivSOBACZ1dQx1J1PY6l/gOpxFPRUzwhUaorf8s5njvg3vf4yiF+Q+fpZUPZgTk/P4d4tfi9z2ykel0jpNxxrrCdkUH7ClTk6+L3KS/ZeMr0bi5TDx1ODPkB5IGD6HtKDjKZHHHGnO1lzwxEz5LHa/nKfmikAeYirWd5er2g6PcI3nGmcUrRRg8Ri5ZHEA1IN0ESNiKEQfCBCCjkwJM8UrbDYnnuiJugM9xrllImxWRBrr0k0ScJglJovsV2zYRhEJH4ntB24jLGU8TmLyZZwOPdJBVTNmyLL47E4lZxZP3HgbpafG7QCM8w1sp0SQBbNwabdJu/mKrVo7laQ+zlVZyAiGK62gQtC3/Sd61sV
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR84MB3523.NAMPRD84.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(7416014)(1800799024)(22082099003)(18002099003)(38070700021)(56012099006)(4143699003)(3023799007);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?oX7pjcYZECHV7YEiQ81xYT/2lntM5BV5DnhEpovP3knlRLJNc+7mPDG+3X?=
+ =?iso-8859-1?Q?B73xouOTAcdwYVJ7etyG3bWnPUmRWBfJ2ky0rTyqb/ZKUGvfh939keDNaI?=
+ =?iso-8859-1?Q?Fte4zpDiXM2Vgoh4psUqMKkkjrXTQiQzzfBICzieMzkfA70KIMK8uObIsv?=
+ =?iso-8859-1?Q?AwK1qCIsJN88PBobvd37gVVkZoXiA0tqG3Y2SjvKBhbsQ6rcHxf2JfTc/B?=
+ =?iso-8859-1?Q?TdRiMhXQLfj6T8llMr9D5U+inpq6kEPcEX/dGVC8OCE8lb0zg2TBl1ScnN?=
+ =?iso-8859-1?Q?npyYYO2O5okhZPTANSDayG33Gc9/Zv+vQR/fPiu4l833nt8ygCnPZ4yU0Z?=
+ =?iso-8859-1?Q?qSIbn6i918Pdi/Cz8xf6AflVRbsht44XKnVM3Ib8JNjKAha1VOBOd52AgI?=
+ =?iso-8859-1?Q?1wxOv7QEDPDoBg575h6SYa8htL3AR4ewZFuHNIF/wCkzc7ELktEC1A5RKF?=
+ =?iso-8859-1?Q?mvO3J8iAb7HNcz1smmsn4aRvnD3UhGKj+rHB6WxeXrzDyECHkyVVPzsavK?=
+ =?iso-8859-1?Q?OhEBgzv6e0qKKR4cU72rTDhTO38UsyEE1KwrfE6ySXaV2UPA9traf/1yhZ?=
+ =?iso-8859-1?Q?qkE+ARf4lDT8BX0G4MpiEPR5dqD2oJkdb+xF5qOz4sY3i4qnopx3WyfFJH?=
+ =?iso-8859-1?Q?8gHbYG1xEvDtkkoQmKMaEtJQuisRGpBsjx2JIV58kbrh0l6+B0ayWWQHZM?=
+ =?iso-8859-1?Q?yo3OPzxeOBrthRenxyGfRq2O/FHXnoKfQsRTIG2ssnvl5pA9SmHwJUPe4I?=
+ =?iso-8859-1?Q?lAxqkFEXOSuSa0kGgUR2CHVn8D15Gc1K9uenDp2CzUT2R6N/LZmDoZVuVU?=
+ =?iso-8859-1?Q?rGbwHEMu3rASyUROU0HsDtgq1o0CFyLH0QPLX7Rwwqnwnw4sMHbhwSD5VR?=
+ =?iso-8859-1?Q?wSAVK4XC1CUjoXrehMfYua9aFKUFSD0Ic9ngZa1XX+ha2Sb8CztO5B0uw6?=
+ =?iso-8859-1?Q?wB76xR+7uezJ1AtgrDLUPpf6evAdTiUvBEFWyMmy2an/7SppSL1v8PzWx/?=
+ =?iso-8859-1?Q?NFqlXQlHp7JyzoJaUkVUHt+SJotvAqKYemW2vvwNYvORrHlkHWgDQdEhxU?=
+ =?iso-8859-1?Q?3r6ZGg6RWAoP+2DKDo+irfjZohQtWxjHw+yMfq2D7QtAvUltCp0/2tHTXO?=
+ =?iso-8859-1?Q?7bwr8dQAj8I25B7GM00bCJLfChgfsPNM2dFsmQuHBI572Y8BIH+UUZFNJq?=
+ =?iso-8859-1?Q?SCE/NIlVLf/KzsV8hlA+zZMEMD3Ywb3jI50/08cGXB1yv36FbiUJbtSxIY?=
+ =?iso-8859-1?Q?VW7mtCH37nqU2rlLXcFk4NJ1BlrhOQZ/WivxAvk/eWuM2mhnzvMlDQeQSB?=
+ =?iso-8859-1?Q?BqbwJQurVyVR1a4brCzdXKsXbGFI1L+HgMhwcKzlcSJHRPdjdAGBdZoPHR?=
+ =?iso-8859-1?Q?yYSa4IO+ONrN5zg/E5BLvucKuUKKjRHuIbPgZ1RhyhzIWJ5MXV956TQJAG?=
+ =?iso-8859-1?Q?LNGEwm07uKJvy4YvIG0cc47jfH8Jur9pdZPJrqUXMHP4myHKj3uxIHhKSr?=
+ =?iso-8859-1?Q?7UUpJRFTGy5L9HE7ie8sS0l7KGW24FyHvQMG8EGFDGbd0nbvyx7v8wJcOF?=
+ =?iso-8859-1?Q?y1TtS1WM2BxgHOFDfkXLno4Y4NkbSIarTZx66GmmK8COg9dLVGo+L/Dyl/?=
+ =?iso-8859-1?Q?3t8wyFkhCXcLSbVqSVlQXaSnIdjReer2PjzzFs3i7f9hLL4r0mYcTvLpB6?=
+ =?iso-8859-1?Q?98pcT3xzgKuVLPeary4+xnVC6RXtFtv6pfViDtG77JBCkf6Vjacd+SCShN?=
+ =?iso-8859-1?Q?/boAEMe+yD38W05gbg1xqdHa2xj/T5Q1tRlhcHotShjoZlhYCKDA2jU4RW?=
+ =?iso-8859-1?Q?9Ndwp6TWcA=3D=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20251112-v5_user_cfi_series-v23-0-b55691eacf4f@rivosinc.com>
- <20251112-v5_user_cfi_series-v23-6-b55691eacf4f@rivosinc.com>
- <87jyslndo4.fsf@igel.home> <CAKC1njS=AHu6uHrH4ae8VxcdEbhgiPXYCAoN3F_mnppBd3SwOA@mail.gmail.com>
- <875x44o9hj.fsf@igel.home> <CAKC1njSn_rtCj8ii876PNQTk0nsCTfWsb4DzdymufHVthh1Rkg@mail.gmail.com>
- <871peqgp9v.fsf@igel.home> <CAKC1njR+dTdvp+BmLGPtgd8dufiUwBtkQ9a-qinELT_Fmi13sQ@mail.gmail.com>
- <87wlwif04z.fsf@igel.home> <87tsrli6lt.fsf@email.froward.int.ebiederm.org>
-In-Reply-To: <87tsrli6lt.fsf@email.froward.int.ebiederm.org>
-From: Deepak Gupta <debug@rivosinc.com>
-Date: Tue, 2 Jun 2026 09:19:50 -0700
-X-Gm-Features: AVHnY4LGzvAggFLA4mHNoi-t9ivcZhZK65HitG7Axu1HWjT50Q9msXqH7dSmtzU
-Message-ID: <CAKC1njRapOxS6ibQdCuES1E3aAjsA+yGz4yZ1xJAZHU2vkAm_A@mail.gmail.com>
-Subject: Re: [PATCH v23 06/28] riscv/mm : ensure PROT_WRITE leads to VM_READ | VM_WRITE
-To: "Eric W. Biederman" <ebiederm@xmission.com>
-Cc: Andreas Schwab <schwab@linux-m68k.org>, 
-	Deepak Gupta via B4 Relay <devnull+debug.rivosinc.com@kernel.org>, 
-	Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
-	"H. Peter Anvin" <hpa@zytor.com>, Andrew Morton <akpm@linux-foundation.org>, 
-	"Liam R. Howlett" <Liam.Howlett@oracle.com>, Vlastimil Babka <vbabka@suse.cz>, 
-	Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, Paul Walmsley <paul.walmsley@sifive.com>, 
-	Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, 
-	Conor Dooley <conor@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
-	Christian Brauner <brauner@kernel.org>, Peter Zijlstra <peterz@infradead.org>, 
-	Oleg Nesterov <oleg@redhat.com>, Kees Cook <kees@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
-	Shuah Khan <shuah@kernel.org>, Jann Horn <jannh@google.com>, Conor Dooley <conor+dt@kernel.org>, 
-	Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
-	Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
-	=?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
-	Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>, 
-	Trevor Gross <tmgross@umich.edu>, Benno Lossin <lossin@kernel.org>, linux-kernel@vger.kernel.org, 
-	linux-fsdevel@vger.kernel.org, linux-mm@kvack.org, 
-	linux-riscv@lists.infradead.org, devicetree@vger.kernel.org, 
-	linux-arch@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kselftest@vger.kernel.org, alistair.francis@wdc.com, 
-	richard.henderson@linaro.org, jim.shu@sifive.com, andybnac@gmail.com, 
-	kito.cheng@sifive.com, charlie@rivosinc.com, atishp@rivosinc.com, 
-	evan@rivosinc.com, cleger@rivosinc.com, alexghiti@rivosinc.com, 
-	samitolvanen@google.com, broonie@kernel.org, rick.p.edgecombe@intel.com, 
-	rust-for-linux@vger.kernel.org, Zong Li <zong.li@sifive.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Exchange-RoutingPolicyChecked: DkZgxxUXIk921NaQBuLOOpc9vesLaD9Be4465D/JJwIcv3o41tp3SFumMULF4sUM9MBAdMpVspQjFC2ZmifUqapmufDrw6HbXQxx8cHtxJer+Fh7rxlrJ9u0rKnCfTmF1sp51X1nLU3RbyJGZHIuWBTsYAy1VYhWAy8BC1ZOjMM3QEzuCNPN2JgDGep9miZOhdVr+1tvP71lQcmo7YFPE2RiqxE/1OV5SBhajkgftNAkuk/KIiSil+m25CN6EW6fXL/M6KDMNudgDGirqgfqhh8tGy6fqqQsmIgbermkyJOQrczFh5ytmxGZqStQ1d+TKNcPFc/0kTCkty4vetQ/cQ==
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: CH3PR84MB3523.NAMPRD84.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: d7cbbb64-f0ea-4b12-83d6-08dec0c4c273
+X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Jun 2026 16:34:04.0907
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 105b2061-b669-4b31-92ac-24d304d195dc
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: XC6IHCYM9+5sNmrjr8N+YIj7GIM3zSP/NqAgJSfqcvRzwGrDvpFrsI8DA4mv1lW6gdEDMtSDdIn/ZLHAVOVtig==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR84MB3067
+X-OriginatorOrg: hpe.com
+X-Proofpoint-ORIG-GUID: TQrVIxXQw0yb8NRi1kL9I8thQhH2CfmV
+X-Authority-Analysis: v=2.4 cv=OuV/DS/t c=1 sm=1 tr=0 ts=6a1f0622 cx=c_pps
+ a=UObrlqRbTUrrdMEdGJ+KZA==:117 a=UObrlqRbTUrrdMEdGJ+KZA==:17
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=xqWC_Br6kY4A:10 a=8nJEP1OIZ-IA:10 a=FelO9ux0wxsA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=gQcMVamqm3wCPoSYhaRC:22 a=3haJ9R1Aw3gUfsUHDaCR:22
+ a=OUXY8nFuAAAA:8 a=VwQbUJbxAAAA:8 a=0M4ECsCm-uZCH7hIDjsA:9 a=wPNLvfGTeEIA:10
+ a=cAcMbU7R10T-QSRYIcO_:22
+X-Proofpoint-GUID: TQrVIxXQw0yb8NRi1kL9I8thQhH2CfmV
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjAyMDE2MCBTYWx0ZWRfX4Xc3GlP9ndxH
+ Omx0riG3pgcqMuKjJI30U+iO5YO3P88UEZV4nSqcJHQPEcjPa6KKmhvFY720iWAee/Y5rGnVo7K
+ AfW3DC0n9oLYxs92EEnragCU52NiziENq6lyNh6iRzUcfc7LLA2npJLn5IT1woFRid9NfJMd0vR
+ Vjv1CABq2frloVrAzrgwL4Rkr0b8jV2KQ8LXFsmeNaJEMBFezfyd9rEPgRyI9vBvaL/rEpRqd9j
+ yOXpqRsLy3qrIA0Ach2hGQ/zTf2IUZ6NqHOazvtnc8vnvOeJB0VpVSiLqp7yLXj+fMj9HGSIKde
+ XQ2HyHaOhoprt5dBomUPVt8nPogdB8R//9PI907RdlpXJi0jjklhNxr6iYXytJCkjRmh5VQVLYJ
+ pKa4ysK8GX95nMMeAvvKxVE61rvHcDZx4cXSrejuzELu0B/8KGMvwbbYzJEYSi9vQ5/ZZ85hASW
+ tYFtAjA0xHxDrucgW/A==
+X-HPE-SCL: -1
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-02_02,2026-05-28_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 clxscore=1011 lowpriorityscore=0 suspectscore=0
+ priorityscore=1501 adultscore=0 bulkscore=0 spamscore=0 malwarescore=0
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2605210000
+ definitions=main-2606020160
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [2.34 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[rivosinc.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[rivosinc.com:s=google];
+	MID_CONTAINS_FROM(1.00)[];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	DMARC_POLICY_ALLOW(-0.50)[hpe.com,reject];
+	R_DKIM_ALLOW(-0.20)[hpe.com:s=pps0720];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-90546-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[vger.kernel.org,roeck-us.net,kernel.org,lwn.net,linuxfoundation.org,gmail.com,hpe.com,juniper.net,lists.linux.dev];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	TAGGED_FROM(0.00)[bounces-90548-lists,linux-doc=lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:sashiko-bot@kernel.org,m:linux-hwmon@vger.kernel.org,m:linux@roeck-us.net,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:devicetree@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:noname.nuno@gmail.com,m:arif.syed@hpe.com,m:psanman@juniper.net,m:sashiko-reviews@lists.linux.dev,m:krzk@kernel.org,m:conor@kernel.org,m:nonamenuno@gmail.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[sanman.pradhan@hpe.com,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:ebiederm@xmission.com,m:schwab@linux-m68k.org,m:devnull+debug.rivosinc.com@kernel.org,m:tglx@linutronix.de,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:akpm@linux-foundation.org,m:Liam.Howlett@oracle.com,m:vbabka@suse.cz,m:lorenzo.stoakes@oracle.com,m:paul.walmsley@sifive.com,m:palmer@dabbelt.com,m:aou@eecs.berkeley.edu,m:conor@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:arnd@arndb.de,m:brauner@kernel.org,m:peterz@infradead.org,m:oleg@redhat.com,m:kees@kernel.org,m:corbet@lwn.net,m:shuah@kernel.org,m:jannh@google.com,m:conor+dt@kernel.org,m:ojeda@kernel.org,m:alex.gaynor@gmail.com,m:boqun.feng@gmail.com,m:gary@garyguo.net,m:bjorn3_gh@protonmail.com,m:a.hindborg@kernel.org,m:aliceryhl@google.com,m:tmgross@umich.edu,m:lossin@kernel.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-riscv@lists.infradead.org,m:devicetree@vger.kernel.org,m:linux-arch@vger.
- kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:alistair.francis@wdc.com,m:richard.henderson@linaro.org,m:jim.shu@sifive.com,m:andybnac@gmail.com,m:kito.cheng@sifive.com,m:charlie@rivosinc.com,m:atishp@rivosinc.com,m:evan@rivosinc.com,m:cleger@rivosinc.com,m:alexghiti@rivosinc.com,m:samitolvanen@google.com,m:broonie@kernel.org,m:rick.p.edgecombe@intel.com,m:rust-for-linux@vger.kernel.org,m:zong.li@sifive.com,m:devnull@kernel.org,m:krzk@kernel.org,m:alexgaynor@gmail.com,m:boqunfeng@gmail.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[debug@rivosinc.com,linux-doc@vger.kernel.org];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_CC(0.00)[linux-m68k.org,kernel.org,linutronix.de,redhat.com,alien8.de,linux.intel.com,zytor.com,linux-foundation.org,oracle.com,suse.cz,sifive.com,dabbelt.com,eecs.berkeley.edu,arndb.de,infradead.org,lwn.net,google.com,gmail.com,garyguo.net,protonmail.com,umich.edu,vger.kernel.org,kvack.org,lists.infradead.org,wdc.com,linaro.org,rivosinc.com,intel.com];
-	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[hpe.com:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[60];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[debug@rivosinc.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[rivosinc.com:+];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,debug.rivosinc.com,dt];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sanman.pradhan@hpe.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_TWELVE(0.00)[12];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[rivosinc.com:from_mime,rivosinc.com:dkim,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,vger.kernel.org:from_smtp,mail.gmail.com:mid,linux-m68k.org:email,xmission.com:email]
+	ALIAS_RESOLVED(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[juniper.net:email,vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,hpe.com:mid,hpe.com:from_mime,hpe.com:dkim]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: DA4DA63036C
+X-Rspamd-Queue-Id: 7311D630581
 
-On Tue, Jun 2, 2026 at 3:23=E2=80=AFAM Eric W. Biederman <ebiederm@xmission=
-.com> wrote:
->
-> Andreas Schwab <schwab@linux-m68k.org> writes:
->
-> > On Jun 01 2026, Deepak Gupta wrote:
-> >
-> >> riscv uses `VM_SHADOW_STACK`. It's just very simple to use `protection=
-_map`
-> >> with just `VM_WRITE`. On RISC-V, `-W-` is a shadow stack mapping. It's=
- not same
-> >> on x86 or arm64. So `protection_map[VM_WRITE]` simply picks shadow sta=
-ck
-> >> encoding. We just ensure that PROT_WRITE is converted to
-> >> "VM_READ | VM_WRITE" at vma level.
-> >
-> > That does not explain _why_ you need to make that user visible change,
-> > when others can get away without it.
->
-> Especially since as I recall the decision was made was that the user
-> visible protection bits would match the mmap call.  If there is some
-> combination an architecture does not support that would simply not be
-> reflected in hardware until some future version of the hardware gets
-> around to supporting it.
->
-> This is what happened with executable page permissions on x86 for
-> example.  It used to be that it was not possible to deny execute
-> permission on a readable page.  Later that proved sufficiently valuable
-> that support for denying execute permission was added to the hardware.
->
-> That all happened quite transparently to userspace, that wasn't trying
-> to assuming PROT_READ implied PROT_EXEC.
->
-> So I am at a complete loss why someone would choose to break userspace
-> by confusing hardware limitations with what userspace asks for in mmap.
-
-Initially my plan was to re-use (only) VM_WRITE as (alias to) VM_SHADOW_STA=
-CK
-on risc-v to match hardware Write-only PTE encoding and I didn't see
-any opposition
-to that initially. Until later when it was suggested to  use distinct
-VM_SHADOW_STACK
-encoding.
-Although there wasn't any oppostion to this patch, seems like it made it in=
-.
-
-Now that I take a look at it, I think it can be made to work. Sorry about t=
-hat.
-
-Now that I have switched my affiliation to meta, I'll have to spend
-some time to set
-up risc-v dev environment.
-
-I'll send a patch. Thanks.
-
->
-> Eric
->
+From: Sanman Pradhan <psanman@juniper.net>=0A=
+=0A=
+On Mon, Jun 01, 2026 at 19:06:06 +0000, sashiko-bot@kernel.org wrote:=0A=
+> [Severity: High]=0A=
+> Will this prevent the regulator core from matching the device tree node?=
+=0A=
+>=0A=
+> The PMBUS_REGULATOR_ONE("vout") macro sets of_match to "vout". During=0A=
+> registration, the regulator core searches for a child node named "vout"=
+=0A=
+> or a parent node with that exact name to associate the of_node.=0A=
+>=0A=
+> If the device tree schema expects regulator properties directly on the=0A=
+> parent node (which is typically named generically, like regulator@xx),=0A=
+> will the regulator core fail to match the node?=0A=
+>=0A=
+> If the match fails, the regulator is registered with of_node =3D NULL,=0A=
+> which silently ignores regulator constraints and prevents consumers=0A=
+> from referencing it as a supply.=0A=
+=0A=
+The Sashiko AI Review is right that with a generic node like regulator@xx=
+=0A=
+and no "vout" child, DT init data is NULL.=0A=
+=0A=
+But that only means no DT constraints were provided; the regulator still=0A=
+registers successfully and the PMBus regulator ops remain functional.=0A=
+=0A=
+Saw a similar single-output PMBus regulator pattern [PMBUS_REGULATOR_ONE("v=
+out")]=0A=
+in drivers/hwmon/pmbus/ir38064.c, just followed that.=0A=
+=0A=
+Thank you.=0A=
+=0A=
+Regards,=0A=
+Sanman Pradhan=0A=
 
