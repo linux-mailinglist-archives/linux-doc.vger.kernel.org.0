@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-90466-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90468-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UJaMHmiTHmqnlAkAu9opvQ
-	(envelope-from <linux-doc+bounces-90466-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 10:25:12 +0200
+	id aK84BeOQHmp/lAkAu9opvQ
+	(envelope-from <linux-doc+bounces-90468-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 10:14:27 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E751062A7DB
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 10:25:11 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id C641D62A500
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 10:14:26 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id AFFDE304B094
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 08:13:50 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 5AB3B3010607
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 08:14:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C04F83C3BE0;
-	Tue,  2 Jun 2026 08:13:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 19A3D3C3C08;
+	Tue,  2 Jun 2026 08:13:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Bpa1KuA5"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BKXzTPVe"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA7FA3C3C1C;
-	Tue,  2 Jun 2026 08:13:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0AD913C2761;
+	Tue,  2 Jun 2026 08:13:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780388023; cv=none; b=evATbd+IvRFN2ROaD6ZCkTRQMGzttMfKjJqogC5l6Yb6F5ijPK+B/92ecAFEEJHRNaJebapke+TZgXu7fQTgyY8HwctM4SlDIj0rFF50fz21tVKPlk4xXM4MMcSoTAHz6CQ+/7gyWtszxmQ0ichFQGC0sk1+UBGxcFZx3IO/6LE=
+	t=1780388031; cv=none; b=fXYyfHz3gZiMEXQDbxCwrOeI6M0SXkKS71runpOt9QDx+ZZ41MPwk6syOeGwNKMrXnTasJr8WC024LDksHhpc6UxtoBdmDM0UMHhN+8oJCaXu1U96CBGmVn436ss0AZPwGBPreG/iRnqmStzD8uV05+JhkgMUkHx6BMJOZE/FoA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780388023; c=relaxed/simple;
-	bh=ai5RgupvCcS37Dih3Cd0dYsObdLaYroWgKOhVltlr7E=;
+	s=arc-20240116; t=1780388031; c=relaxed/simple;
+	bh=PFbs6pHoCpHX3NDqMcTbSVg2XRfbstDsHiva1+jHmsY=;
 	h=MIME-Version:Content-Type:Subject:From:To:Cc:In-Reply-To:
-	 References:Date:Message-Id; b=W6tEirTUyJgWUpw6VRM0at0O+naZtAD9zj7gfvUi7JRjTlJTU5YBfnX4D5IWV4IYTOEqj4cnOcqlMsLXx6/dShhR+zYfT4C/5w8LtDvlUsA8RdIxxaa9HllZWhZoYgRdMhYB9b1trcO0N1Rw43p9EbpLK8cUSjoxOI488kx1ffI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Bpa1KuA5; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2B3AD1F00893;
-	Tue,  2 Jun 2026 08:13:38 +0000 (UTC)
+	 References:Date:Message-Id; b=IHw18MKolGoUqzaquySkTV14THobbVGTE6MBlDoqYkaUoH+GfalD/hw74Zyx4rphXq+OBdUZ9OpV4dt4y75vs4bWzMwOzf2Xs7RE/xLFae2/HPQZcYj08Aj2wl6ny9FKOoFEWDhV4y9ZtI1BOpidiAaSyRYELSXwDaT0q0cT+zQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BKXzTPVe; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 856151F00893;
+	Tue,  2 Jun 2026 08:13:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1780388022;
-	bh=dBkjXMTmjLYTnOUwfnks3EFmZB9pPlPFfyMtmk7cI3U=;
+	s=k20260515; t=1780388029;
+	bh=9masuDvZGRAE5YhO0nxFypjCa/sv5HXBG/vt0WeBSHY=;
 	h=Subject:From:To:Cc:In-Reply-To:References:Date;
-	b=Bpa1KuA5WsCD66AasZ0sl3TPcc1/4v3KFLp4MBWQ3V/DKp9IxKexcZETomuPehqTH
-	 oW7AjhG5pIG0+1zPLNhQr1BDSRpxy0OXJLhEu054Dk67FXWjHvCzfw+yOu7ZSXp9WJ
-	 TTMEJZlPB80bvMNID92SiC2lb+b5+MbERApA9AM+sYZsv/xvWNdPNt0RFDlZv4BH8G
-	 0lubNHY31s9XSrUDOq0nXy9XEegapfFje+0pK4oRel7PqRqFxQ640yWxWQRe5qEHCX
-	 dElzNPk+Fbugx4/pfXDfPeoWC4gg0nTxxb7+/9VvEPJNz0qQnr4IzF0xJ68T7cSaa0
-	 DoWuzoVX7NVSw==
+	b=BKXzTPVeNI3EzsZztLA+Etdw4lE1OGP7XkpvZ37eeDEGaDydQwyq9IugNdZBmAYvs
+	 FnqxLdkt/2eygj2ytRe1nnhKx+iBbgy9pHJ0KDBfSNyODINtGD+F1dpz5xpaS4QY70
+	 dzhesbOX4O+UE04WBYEPnUNMMhUfwjmCBQvOBV++UUSG9fn57/q+2X1iZUv3GtfKzS
+	 Cm7GMdTCvrapPt8AGMxEExKMmU4sl/gawXrebtYxnhRpE/TeHiZ+jxfXv9ny1a3v8S
+	 6nFXBkwl0eHnofOmZYQ64h4A+zO0Mdu8DNmWNYP6M03PUMobTq2oOtcAlkY+j4vc2V
+	 If0s6C+uH6NbQ==
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -52,8 +52,8 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v4 01/13] liveupdate: change file_set->count type to
- u64 for type safety
+Subject: Re: [PATCH v4 03/13] liveupdate: centralize state management into
+ struct luo_ser
 From: Mike Rapoport <rppt@kernel.org>
 To: Pasha Tatashin <pasha.tatashin@soleen.com>
 Cc: linux-kselftest@vger.kernel.org, rppt@kernel.org, shuah@kernel.org, 
@@ -61,25 +61,25 @@ Cc: linux-kselftest@vger.kernel.org, rppt@kernel.org, shuah@kernel.org,
  linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, corbet@lwn.net, 
  dmatlack@google.com, kexec@lists.infradead.org, pratyush@kernel.org, 
  skhawaja@google.com, graf@amazon.com
-In-Reply-To: <20260530221938.115978-2-pasha.tatashin@soleen.com>
+In-Reply-To: <20260530221938.115978-4-pasha.tatashin@soleen.com>
 References: <20260530221938.115978-1-pasha.tatashin@soleen.com>
- <20260530221938.115978-2-pasha.tatashin@soleen.com>
+ <20260530221938.115978-4-pasha.tatashin@soleen.com>
 Date: Tue, 02 Jun 2026 11:13:34 +0300
-Message-Id: <178038801483.119771.5551368813719436713.b4-review@b4>
+Message-Id: <178038801487.119771.6308607614059754603.b4-review@b4>
 X-Mailer: b4 0.15.2
 X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-90466-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90468-lists,linux-doc=lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[15];
 	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
@@ -91,18 +91,48 @@ X-Spamd-Result: default: False [-1.66 / 15.00];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,soleen.com:email]
-X-Rspamd-Queue-Id: E751062A7DB
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,soleen.com:email]
+X-Rspamd-Queue-Id: C641D62A500
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Sat, 30 May 2026 22:19:26 +0000, Pasha Tatashin <pasha.tatashin@soleen.com> wrote:
-> This improves type safety and aligns the in-memory file_set->count with
-> the serialized count type. It avoids potential truncation or sign
-> conversion mismatch issues.
+On Sat, 30 May 2026 22:19:28 +0000, Pasha Tatashin <pasha.tatashin@soleen.com> wrote:
+> diff --git a/kernel/liveupdate/luo_flb.c b/kernel/liveupdate/luo_flb.c
+> index 8f5c5dd01cd0..c8dd30b41238 100644
+> --- a/kernel/liveupdate/luo_flb.c
+> +++ b/kernel/liveupdate/luo_flb.c
+> @@ -579,53 +565,18 @@ int __init luo_flb_setup_outgoing(void *fdt_out)
+> [ ... skip 18 lines ... ]
+> -	offset = fdt_subnode_offset(fdt_in, 0, LUO_FDT_FLB_NODE_NAME);
+> -	if (offset < 0) {
+> -		pr_err("Unable to get FLB node [%s]\n", LUO_FDT_FLB_NODE_NAME);
+> -
+> -		return -ENOENT;
+> +	if (flbs_pa) {
 
-Acked-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
+I like 
+
+	if (!flbs_pa)
+		return;
+
+more
+
+>
+> diff --git a/kernel/liveupdate/luo_session.c b/kernel/liveupdate/luo_session.c
+> index 8d9201c25412..3b760fefa7b9 100644
+> --- a/kernel/liveupdate/luo_session.c
+> +++ b/kernel/liveupdate/luo_session.c
+> @@ -497,75 +494,34 @@ int luo_session_retrieve(const char *name, struct file **filep)
+> [ ... skip 58 lines ... ]
+> +	if (sessions_pa) {
+> +		header_ser = phys_to_virt(sessions_pa);
+> +		luo_session_global.incoming.header_ser = header_ser;
+> +		luo_session_global.incoming.ser = (void *)(header_ser + 1);
+> +		luo_session_global.incoming.active = true;
+>  	}
+
+Ditto
 
 -- 
 Sincerely yours,
