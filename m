@@ -1,189 +1,239 @@
-Return-Path: <linux-doc+bounces-90545-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90546-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id SErMC5wCH2rZcwAAu9opvQ
-	(envelope-from <linux-doc+bounces-90545-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 18:19:40 +0200
+	id FCEKNGEFH2rMdQAAu9opvQ
+	(envelope-from <linux-doc+bounces-90546-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 18:31:29 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 453A763025F
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 18:19:39 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id DA4DA63036C
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 18:31:28 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=ag9KD8bf;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90545-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90545-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=rivosinc.com header.s=google header.b="c/VE6Dfq";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90546-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-90546-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=rivosinc.com;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 34EDA3038A5F
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 16:17:41 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 74E933016B35
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 16:20:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9B586305673;
-	Tue,  2 Jun 2026 16:17:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9B598349CDE;
+	Tue,  2 Jun 2026 16:20:04 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dl1-f66.google.com (mail-dl1-f66.google.com [74.125.82.66])
+Received: from mail-yx1-f48.google.com (mail-yx1-f48.google.com [74.125.224.48])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4B85E32C92D
-	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 16:17:34 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780417055; cv=none; b=q0lIPKmxnuNn/Zgas6TJJSYNuttkWsjbSMHThQbflUv03+aWV0+Mz7CeXZd+t+1Xht0IYH1aZgYYl0a+bb646PL7HYgVic8RYnwtEezGL9HsUYwNzwu7ZmWMLD6cvCnMuiLe+mEteUceZyugkZ5w8braf+sG1GYkjEDFxgNHxu8=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780417055; c=relaxed/simple;
-	bh=Xj+FqJb2WMpKsicxTWR3GcsJJt8XMdowbQUXKH2oD6I=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=I2rHmYXnATYvkzeWQjrU2136zFbYE9tQ6cIv8prtJaNizBxgTGzQAp8lHQ7r6FFH1VafwIooQd2QMlay8F17dgjL4g3dkiJz5umyNztoRzN3+dTJYC15vOlgQnqa2wDs5B2SZHYB8ikRWzdcoUOMWegBjUMpuVUixrr9WL7QP9w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ag9KD8bf; arc=none smtp.client-ip=74.125.82.66
-Received: by mail-dl1-f66.google.com with SMTP id a92af1059eb24-137dd5161feso66056c88.1
-        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 09:17:34 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E6D0332913
+	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 16:20:02 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1780417204; cv=pass; b=IMpWU9Z+oFt0rZVh19a7yFx2zIPY6Sn8mamKV6DA92tPrsH+drP8PoPOaxyct3+5cOP7iELxvopssxd7YLUhukj4wHdtzvpOxt4CS9QLGpDe+Fy3Ty8Cr/rVbLS4FdbOe47nCX7c6Bl3EskWK0HgClHSbgkLt0jPfVjFSQXpiEE=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1780417204; c=relaxed/simple;
+	bh=ydH4/QV/1+IbTAhdeYNLwa8ygu64uWvWhoVur27Jo/0=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=PfchiQnvfiJlKdJASw4wVIr7r8WTWZHviX5XOsI1poROm37ogsKo7N1aX1vWSLjFmvKFdzOowDLL4w9h3ffvy+ASJWmGvBRIQ2iBxtuLFEYLnUwLBOtO2RB757b3yutC7ROA3x4hKylC/pBF6aXLtxJFGhoOkShximH36TREgfY=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rivosinc.com; spf=pass smtp.mailfrom=rivosinc.com; dkim=pass (2048-bit key) header.d=rivosinc.com header.i=@rivosinc.com header.b=c/VE6Dfq; arc=pass smtp.client-ip=74.125.224.48
+Received: by mail-yx1-f48.google.com with SMTP id 956f58d0204a3-660390a8999so6360153d50.3
+        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 09:20:02 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780417202; cv=none;
+        d=google.com; s=arc-20240605;
+        b=RHUu+z/+0hVY/1hss8G+uifGHhcH/u6S2gqBmt1AnRSBNHGDtHdBmnAVaviJiYrg2K
+         bAApDCk2c2wTwNDZoutzJDJNn0v0iNs63Iz0s7C8eh+CyY/tAFBFVkO1Y3EoYoeLSNC5
+         3H9cQWPNOpVFU0oqZv8GTNXDqB7MQev54H0jwBU5E4Klzck+CKQ8HNZk/rHA0PseCdvS
+         uV2bsMICIWs9+alnc4fskiy9M/YP2boGtiqPfs6NlxG2loJ2Ja7Db3nVDh7d/rduezIV
+         5MYtQ0KaoYXPMUyuwxRZCVXat7+aJuzUv1cPFcxc0ZObUISAaM9nF014JkjOlZ6h2EDa
+         9+QA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=qYFMKnZkfNnmRXGo0xQ4eN2VdP8xCoBWS52ZR4ARnJo=;
+        fh=Pv/U/GnAlSJSnqrm9WONkPE0/OLlr+7WsQW8W1n8RiY=;
+        b=IpTSA+gFjkEjbnYjzHgjoQ5rzVOQjyobxfTtj42p1e/fgo/Nj5uZ7BseLxsGFsKBJ8
+         pljlUdITR5nFTeBBFR6RCLGGoEi9oo+wJMfZPgcawkELxRqtlGu2hAy8zE/BAozZSy9p
+         /AyG7NyGoBL2i3xjMD7Bwg9UBaulUI/rwPjm1Zzm6pCBVRk0Mr/4l+Wun13QGqQaWSHw
+         REzRGsN4kh27rgmyNSMN6vP0mLGnGa48UIEJ3KfMPxox5cAAojGTAaXiBMb87oKlf34c
+         zNck5fX7WtRzzEfIL0e0UmjDPJrkLk4ZIaV+x6Tt7lSuR4draF9oxYw/0hVEbqC3xBqw
+         KQ7Q==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780417053; x=1781021853; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=rivosinc.com; s=google; t=1780417202; x=1781022002; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=+ajva4//4bxspriKRwU9VltKASgTH4F65lB5PSd9V+c=;
-        b=ag9KD8bft6llelonnu+TUplIqsTWZNG3qc5QaFxl1F66wVW+5fyXd4PEt+Kw0sxYI4
-         64gCz9oxLKDR4CwRNpHHz9FGg/ZdsZLIOsLt4YbzG1jwXQwUlHVV1I9vPl0l8U0DsyfB
-         jytj3O0P6dGMdoJIhhNTn9OlcvLv4ggBTyH4vAbLgWoO+/HsPx0XO4KnZ0XNPP/EBEFZ
-         gE3LorYA5l8Ilm4OLWcIPTHcqLZvRltrFswd0XfUj/qKWrpOFO570cXIH4Zodpm4/7bT
-         U2GEuxXoWmR8uQhVuSSLNsx03bruQamPM1yfOW7gPhmKksg835ut9zC9QZZvM5hJMtxx
-         utkw==
+        bh=qYFMKnZkfNnmRXGo0xQ4eN2VdP8xCoBWS52ZR4ARnJo=;
+        b=c/VE6DfqYn4w+HWhelXW5cH3cKDMBvmmPkVsAt1mRpbe/kx0fpJhdpax/nVFBksa/q
+         kWQOQ3TaZTqarShkrrTJKHivLOSIJRlP5ChFQxVgYC5hqdi3Kwy6ThI+1cQiLvakbV5r
+         EN2CKw4yqeAbNirJuDwnGr7HREmnRWw1TVqQR6cWIWIwpsKjofo4YQYGqkv4kX6L0rF1
+         3FeGiu6Xyw+dqrRgyICL5NayCKUBiSvyHv3Mf2Vtla8HNIKYLEAD6fI0S3XIcPnRNC6e
+         U9PgeKeKvgpuY8awo8S5+XjMCS2FR7ESbtR2gvFFaxrelzBcqVhqbvmX5lzxFG3CThxE
+         SolQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780417053; x=1781021853;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+        d=1e100.net; s=20251104; t=1780417202; x=1781022002;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=+ajva4//4bxspriKRwU9VltKASgTH4F65lB5PSd9V+c=;
-        b=QQeAeKrOmjWNg6F1Xrwhd9pjSnlCSlwC7Af8ylTmLNEzYAyVh5KdZzggQAiN5r4Rac
-         IciWngKzObTdd+2wpoFrQcxwHdava0ua1Hfxm0MCUXwYIVNNXrqqr6/m+0v91Lqefk97
-         NC6kppgoAccwx1NlWVaqxYMykmwye8yRMBEqKq3VrLgy78qhFX0xyV6ZRqLId04KTW9U
-         Aeh6Cp7ieOHb2JwXpVxydNXjjsnljPhBip/qoc2oEr/ZkjbtfW+m3HcTzSlZ/Ki0m9JF
-         y9iD8sSwkGx/Hs/JT2tNLtJEf0F7ni9Wu2TTSoOcHFm1CfyoE8vPM1KWczG/0eL+Hg0l
-         vG/w==
-X-Forwarded-Encrypted: i=1; AFNElJ+HBTQ5rqwCeLPN5gsBxM8vc2V44Psf1WuR2b05pV1UZ7/gizwvbmSmKRXXzgCitDi/07CY+mnbGHw=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yzyddwps/jsdIrXUGwv9Np5fO13RfK8w9EVJBACloSm8P88jQJ9
-	Ov6pd+J4xRNLoaHnjY5n6BRr4x0LeLw8IyiJZKoLnR8auFEWBXCSjGbd
-X-Gm-Gg: Acq92OEoh4n2ycS1AFJF+YdBwp92iehzxjVyl544usiQgzYZZQMQLIc2un0d7X8VIZB
-	tmMxKQM7N4NdJXNxmhemO9gYt5fEcj6THFC+kSyGq4kL/BCtR5j3CF0K7UAYfoh7VwjS/HpjPmg
-	cn2pf3I1Oi2Vkzl3duI5zXG/VDKLwvbsOpcTwbGCrgCtOxdCjK3deXXxsgoHkI4ZIWS7q6fbK6X
-	nUqnRyvFSLazIlYsNvAFvCLbsA3sPi69UtUgWca3aj8IFaC9oSQPP2cEnR/cyKCphUOlh6yIIl/
-	JzWP347i+9WgBM5+2Vfaxo0KtHAKnm6gLCmodQmaC8bcWKb53+Doh8Y60mwVCKBzSubpF/ca22j
-	CiiAY0YW7GZzCutnr0SVnFnRQzXyIlCKa4Zh7OqQojw58Shd8gI9XXRRFTnC2g7mqOltsZ+82k9
-	0MKYpLb8QbLv4+KpVnwgg9wnfTrIkb2a44
-X-Received: by 2002:a05:7300:6427:b0:304:d75b:f5f4 with SMTP id 5a478bee46e88-304fa67e9c3mr8513884eec.16.1780417053229;
-        Tue, 02 Jun 2026 09:17:33 -0700 (PDT)
-Received: from zhanwei.. ([192.227.223.214])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-304ed5b8fbbsm11976463eec.26.2026.06.02.09.17.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Jun 2026 09:17:32 -0700 (PDT)
-From: Zhan Wei <zhanwei919@gmail.com>
-To: matthew.brost@intel.com,
-	thomas.hellstrom@linux.intel.com,
-	rodrigo.vivi@intel.com
-Cc: raag.jadav@intel.com,
-	corbet@lwn.net,
-	skhan@linuxfoundation.org,
-	intel-xe@lists.freedesktop.org,
-	dri-devel@lists.freedesktop.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Zhan Wei <zhanwei919@gmail.com>
-Subject: [PATCH v4] drm/xe/hwmon: document DG2 fan speed reporting quirk
-Date: Wed,  3 Jun 2026 00:17:07 +0800
-Message-ID: <20260602161707.18922-1-zhanwei919@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <ahqN8Esjz9SmGofH@black.igk.intel.com>
-References: <ahqN8Esjz9SmGofH@black.igk.intel.com>
+        bh=qYFMKnZkfNnmRXGo0xQ4eN2VdP8xCoBWS52ZR4ARnJo=;
+        b=gE10LqQ1vk2wnE1Po3hBftP1zK0lt/Y893NKjIiihRQJ0Up3lBbq6mt/VJJCBaopcc
+         jlRR9Qt5rokijkQYZ7/JxxWxFpYv+V0tKlR+KAoF4NOzju56h/d/E230Rc0o4ONq8uOE
+         EVQcUcGsoRzgml8geRnerf1bym3vjf4WGhaoDGskzdW0k9GYuHPugiyaTc7Iv9ok9wew
+         +ve8pGfjHIB5MxX5iXYgVujMI2n+xTW4q8GzTlWFCFQ4U024CeZvE5kb4ZDkGdf420SI
+         7PdGODWkRWaHPtUBsyhh4wgWTZGPDXEahYVP0SeQQdD9Ze22cyKovjHp8G5ex+lQ7Ngi
+         LYQw==
+X-Forwarded-Encrypted: i=1; AFNElJ//1ILuE86ffHzh9uNC1Vj/fmYg9CT/01YXDK3Y3FX7gChqqx7xqod/0zeVXVE0f8PnvPOVHT3yElw=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzx5KDew4pg7OKA8b/zw341aT6hIFzYjoWnBvC1E+7tAKWjI4ib
+	Ag2kf83EE4MMwIfqwnNwf7PSS8KjbdJi5r7AS8D5Z9kUAb2cQkS+NU6rfhEMtct/7+hXT/muLXa
+	YMElRTx2JjKLREd16oq+S6fT1YjgG3pTaepTF4D3ryQ==
+X-Gm-Gg: Acq92OFuYwVL152Xa9Uf/XrPnzuGpzI02g7WaEvd1mLTJdItFesopRM6lFJ0yX0exaD
+	x5XY07eaIc0Mmfg0nRyBQR7AxbVCpkVeKlnXXGxE3pJl+FZDTziipauJKJhCaRW4LLCy5jxUAfO
+	xj9wa/+NIh9OQZ/64npgOro8yHsioAzcochw0Uv30ciFWh8j88v94Gsctq736MIdjJtZ/W+WoLK
+	r+KdSTxPsjHLIDGpFhIPQ6I/3YkFcn1kwnlPJIk3JC0RnTiOBSwIRK7H+rHiRS9s6XdSSooMAeb
+	AzdcxJ5x0nxUpkTLDOXnMw9nB0Mqy3cQbQ==
+X-Received: by 2002:a05:690e:23c7:b0:660:367d:539c with SMTP id
+ 956f58d0204a3-660d61a5f90mr366583d50.65.1780417201973; Tue, 02 Jun 2026
+ 09:20:01 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20251112-v5_user_cfi_series-v23-0-b55691eacf4f@rivosinc.com>
+ <20251112-v5_user_cfi_series-v23-6-b55691eacf4f@rivosinc.com>
+ <87jyslndo4.fsf@igel.home> <CAKC1njS=AHu6uHrH4ae8VxcdEbhgiPXYCAoN3F_mnppBd3SwOA@mail.gmail.com>
+ <875x44o9hj.fsf@igel.home> <CAKC1njSn_rtCj8ii876PNQTk0nsCTfWsb4DzdymufHVthh1Rkg@mail.gmail.com>
+ <871peqgp9v.fsf@igel.home> <CAKC1njR+dTdvp+BmLGPtgd8dufiUwBtkQ9a-qinELT_Fmi13sQ@mail.gmail.com>
+ <87wlwif04z.fsf@igel.home> <87tsrli6lt.fsf@email.froward.int.ebiederm.org>
+In-Reply-To: <87tsrli6lt.fsf@email.froward.int.ebiederm.org>
+From: Deepak Gupta <debug@rivosinc.com>
+Date: Tue, 2 Jun 2026 09:19:50 -0700
+X-Gm-Features: AVHnY4LGzvAggFLA4mHNoi-t9ivcZhZK65HitG7Axu1HWjT50Q9msXqH7dSmtzU
+Message-ID: <CAKC1njRapOxS6ibQdCuES1E3aAjsA+yGz4yZ1xJAZHU2vkAm_A@mail.gmail.com>
+Subject: Re: [PATCH v23 06/28] riscv/mm : ensure PROT_WRITE leads to VM_READ | VM_WRITE
+To: "Eric W. Biederman" <ebiederm@xmission.com>
+Cc: Andreas Schwab <schwab@linux-m68k.org>, 
+	Deepak Gupta via B4 Relay <devnull+debug.rivosinc.com@kernel.org>, 
+	Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
+	"H. Peter Anvin" <hpa@zytor.com>, Andrew Morton <akpm@linux-foundation.org>, 
+	"Liam R. Howlett" <Liam.Howlett@oracle.com>, Vlastimil Babka <vbabka@suse.cz>, 
+	Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, Paul Walmsley <paul.walmsley@sifive.com>, 
+	Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, 
+	Conor Dooley <conor@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
+	Christian Brauner <brauner@kernel.org>, Peter Zijlstra <peterz@infradead.org>, 
+	Oleg Nesterov <oleg@redhat.com>, Kees Cook <kees@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <shuah@kernel.org>, Jann Horn <jannh@google.com>, Conor Dooley <conor+dt@kernel.org>, 
+	Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
+	Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
+	=?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
+	Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>, 
+	Trevor Gross <tmgross@umich.edu>, Benno Lossin <lossin@kernel.org>, linux-kernel@vger.kernel.org, 
+	linux-fsdevel@vger.kernel.org, linux-mm@kvack.org, 
+	linux-riscv@lists.infradead.org, devicetree@vger.kernel.org, 
+	linux-arch@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kselftest@vger.kernel.org, alistair.francis@wdc.com, 
+	richard.henderson@linaro.org, jim.shu@sifive.com, andybnac@gmail.com, 
+	kito.cheng@sifive.com, charlie@rivosinc.com, atishp@rivosinc.com, 
+	evan@rivosinc.com, cleger@rivosinc.com, alexghiti@rivosinc.com, 
+	samitolvanen@google.com, broonie@kernel.org, rick.p.edgecombe@intel.com, 
+	rust-for-linux@vger.kernel.org, Zong Li <zong.li@sifive.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-0.66 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[rivosinc.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[rivosinc.com:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	TO_DN_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[intel.com,lwn.net,linuxfoundation.org,lists.freedesktop.org,vger.kernel.org,gmail.com];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-90545-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:matthew.brost@intel.com,m:thomas.hellstrom@linux.intel.com,m:rodrigo.vivi@intel.com,m:raag.jadav@intel.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:intel-xe@lists.freedesktop.org,m:dri-devel@lists.freedesktop.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:zhanwei919@gmail.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[zhanwei919@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[zhanwei919@gmail.com,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-90546-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:ebiederm@xmission.com,m:schwab@linux-m68k.org,m:devnull+debug.rivosinc.com@kernel.org,m:tglx@linutronix.de,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:akpm@linux-foundation.org,m:Liam.Howlett@oracle.com,m:vbabka@suse.cz,m:lorenzo.stoakes@oracle.com,m:paul.walmsley@sifive.com,m:palmer@dabbelt.com,m:aou@eecs.berkeley.edu,m:conor@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:arnd@arndb.de,m:brauner@kernel.org,m:peterz@infradead.org,m:oleg@redhat.com,m:kees@kernel.org,m:corbet@lwn.net,m:shuah@kernel.org,m:jannh@google.com,m:conor+dt@kernel.org,m:ojeda@kernel.org,m:alex.gaynor@gmail.com,m:boqun.feng@gmail.com,m:gary@garyguo.net,m:bjorn3_gh@protonmail.com,m:a.hindborg@kernel.org,m:aliceryhl@google.com,m:tmgross@umich.edu,m:lossin@kernel.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-riscv@lists.infradead.org,m:devicetree@vger.kernel.org,m:linux-arch@vger.
+ kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:alistair.francis@wdc.com,m:richard.henderson@linaro.org,m:jim.shu@sifive.com,m:andybnac@gmail.com,m:kito.cheng@sifive.com,m:charlie@rivosinc.com,m:atishp@rivosinc.com,m:evan@rivosinc.com,m:cleger@rivosinc.com,m:alexghiti@rivosinc.com,m:samitolvanen@google.com,m:broonie@kernel.org,m:rick.p.edgecombe@intel.com,m:rust-for-linux@vger.kernel.org,m:zong.li@sifive.com,m:devnull@kernel.org,m:krzk@kernel.org,m:alexgaynor@gmail.com,m:boqunfeng@gmail.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[debug@rivosinc.com,linux-doc@vger.kernel.org];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_CC(0.00)[linux-m68k.org,kernel.org,linutronix.de,redhat.com,alien8.de,linux.intel.com,zytor.com,linux-foundation.org,oracle.com,suse.cz,sifive.com,dabbelt.com,eecs.berkeley.edu,arndb.de,infradead.org,lwn.net,google.com,gmail.com,garyguo.net,protonmail.com,umich.edu,vger.kernel.org,kvack.org,lists.infradead.org,wdc.com,linaro.org,rivosinc.com,intel.com];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[60];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[debug@rivosinc.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[rivosinc.com:+];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	TAGGED_RCPT(0.00)[linux-doc,debug.rivosinc.com,dt];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[rivosinc.com:from_mime,rivosinc.com:dkim,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,vger.kernel.org:from_smtp,mail.gmail.com:mid,linux-m68k.org:email,xmission.com:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 453A763025F
+X-Rspamd-Queue-Id: DA4DA63036C
 
-On DG2 the driver always shows two fan channels, because the
-FSC_READ_NUM_FANS command does not work on some cards. OEMs decide how
-the fans map to tach channels, so two fans can share one tach line.
-When that happens, the second channel reads 0 RPM even though the fan
-is spinning.
+On Tue, Jun 2, 2026 at 3:23=E2=80=AFAM Eric W. Biederman <ebiederm@xmission=
+.com> wrote:
+>
+> Andreas Schwab <schwab@linux-m68k.org> writes:
+>
+> > On Jun 01 2026, Deepak Gupta wrote:
+> >
+> >> riscv uses `VM_SHADOW_STACK`. It's just very simple to use `protection=
+_map`
+> >> with just `VM_WRITE`. On RISC-V, `-W-` is a shadow stack mapping. It's=
+ not same
+> >> on x86 or arm64. So `protection_map[VM_WRITE]` simply picks shadow sta=
+ck
+> >> encoding. We just ensure that PROT_WRITE is converted to
+> >> "VM_READ | VM_WRITE" at vma level.
+> >
+> > That does not explain _why_ you need to make that user visible change,
+> > when others can get away without it.
+>
+> Especially since as I recall the decision was made was that the user
+> visible protection bits would match the mmap call.  If there is some
+> combination an architecture does not support that would simply not be
+> reflected in hardware until some future version of the hardware gets
+> around to supporting it.
+>
+> This is what happened with executable page permissions on x86 for
+> example.  It used to be that it was not possible to deny execute
+> permission on a readable page.  Later that proved sufficiently valuable
+> that support for denying execute permission was added to the hardware.
+>
+> That all happened quite transparently to userspace, that wasn't trying
+> to assuming PROT_READ implied PROT_EXEC.
+>
+> So I am at a complete loss why someone would choose to break userspace
+> by confusing hardware limitations with what userspace asks for in mmap.
 
-Note this on the fan2_input ABI entry so the steady 0 RPM is not
-mistaken for a driver bug.
+Initially my plan was to re-use (only) VM_WRITE as (alias to) VM_SHADOW_STA=
+CK
+on risc-v to match hardware Write-only PTE encoding and I didn't see
+any opposition
+to that initially. Until later when it was suggested to  use distinct
+VM_SHADOW_STACK
+encoding.
+Although there wasn't any oppostion to this patch, seems like it made it in=
+.
 
-Fixes: 28f79ac609de ("drm/xe/hwmon: expose fan speed")
-Signed-off-by: Zhan Wei <zhanwei919@gmail.com>
-Reviewed-by: Raag Jadav <raag.jadav@intel.com>
----
-v4:
-- Add Fixes: tag and collect Reviewed-by from Raag.
-v3: https://lore.kernel.org/intel-xe/20260529172449.41504-1-zhanwei919@gmail.com/
-- Drop the dedicated Documentation/gpu/xe/xe_hwmon.rst doc and the
-  index.rst hunk; add a short note under the fan2_input entry in the
-  existing ABI doc instead, per Raag's feedback.
-v2: https://lore.kernel.org/intel-xe/20260529135028.20763-1-zhanwei919@gmail.com/
-- Drop the code change that reported a single fan on DG2; document the
-  shared-tach behaviour instead, per review feedback on v1.
-v1: https://lore.kernel.org/intel-xe/20260527115311.13398-1-zhanwei919@gmail.com/
- Documentation/ABI/testing/sysfs-driver-intel-xe-hwmon | 7 +++++++
- 1 file changed, 7 insertions(+)
+Now that I take a look at it, I think it can be made to work. Sorry about t=
+hat.
 
-diff --git a/Documentation/ABI/testing/sysfs-driver-intel-xe-hwmon b/Documentation/ABI/testing/sysfs-driver-intel-xe-hwmon
-index 55ab45f669ac..0da739d9a816 100644
---- a/Documentation/ABI/testing/sysfs-driver-intel-xe-hwmon
-+++ b/Documentation/ABI/testing/sysfs-driver-intel-xe-hwmon
-@@ -251,6 +251,13 @@ Description:	RO. Fan 2 speed in RPM.
- 
- 		Only supported for particular Intel Xe graphics platforms.
- 
-+		On DG2 the driver always shows two fan channels, because the
-+		FSC_READ_NUM_FANS command does not work on some cards. OEMs
-+		decide how the fans map to tach channels, so two fans can share
-+		one tach line. When that happens, the second channel
-+		reads 0 RPM even though the fan is spinning. This is normal, not
-+		a bug.
-+
- What:		/sys/bus/pci/drivers/xe/.../hwmon/hwmon<i>/fan3_input
- Date:		March 2025
- KernelVersion:	6.16
--- 
-2.43.0
+Now that I have switched my affiliation to meta, I'll have to spend
+some time to set
+up risc-v dev environment.
 
+I'll send a patch. Thanks.
+
+>
+> Eric
+>
 
