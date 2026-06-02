@@ -1,162 +1,230 @@
-Return-Path: <linux-doc+bounces-90515-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90516-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id lW8fMTfRHmq6VQAAu9opvQ
-	(envelope-from <linux-doc+bounces-90515-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 14:48:55 +0200
+	id Cj74AtHUHmpeVgAAu9opvQ
+	(envelope-from <linux-doc+bounces-90516-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 15:04:17 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D7FF62E260
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 14:48:55 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3C1C462E423
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 15:04:16 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=bmADCqcm;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90515-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-90515-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	dkim=pass header.d=chromium.org header.s=google header.b=FDQP7dW4;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90516-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-90516-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=chromium.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id C6DA930373CD
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 12:47:36 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id B228E301F1AA
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 12:58:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 995333DD87A;
-	Tue,  2 Jun 2026 12:47:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D2E313E0C42;
+	Tue,  2 Jun 2026 12:58:01 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qv1-f53.google.com (mail-qv1-f53.google.com [209.85.219.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8C5E33DD525;
-	Tue,  2 Jun 2026 12:47:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 671483C76A1
+	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 12:58:00 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780404432; cv=none; b=Yf+l9YVBwAT3AaopKtr0fYvJCdihMYJaUUrStTXRbpW9Mm/ANtBEvjEV1HD/zpzmVwVFbTmOAPlaLoVKrUhxEQJ35HnAAbgCTdacAdCo/vt+x2585tAKufnKfNYa4JGRUkLFZ4xziCQ6OSC5sfmkgbauskVqb2GYd8P0Kps8TP4=
+	t=1780405081; cv=none; b=pvMjUUM6j5eYhN+1PT+5pcmrMRbr/LNz7KPPttciJ42uMUYLpDvUo2VVBWqkKUu8SHzL3vjPS227DtFpxHm4p7J5ys7viDbNzR6Q/GVqG1wrv3Q6drU2BAOB7lVWtAhXuN18eWY/tkmYQpxBupOczOkDA6/b9f2yjhEbzY8xGnU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780404432; c=relaxed/simple;
-	bh=oYOzxheVhJ9EgbC/FGP6BeKGVBfUT7lKCVc6Ed1ATZg=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=VBjPGVkFifqCPTkRb8khovsN66FuTXklDiNvnbcs8CGDLeqfUdJQV8708GhWUiEjfUvf2MUe6xzCCCvp345Wb25a5aDim8gMriXX3CXDK5txi9X3hzwENA1EPpkkFon9mNlExO0ePYWReJ0uPhIlytCkgNTm+RVxjzKfdT8uyhE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bmADCqcm; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 28A211F00893;
-	Tue,  2 Jun 2026 12:47:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1780404431;
-	bh=4TjPJ17gEtcnTt4IawZJaVkXbQlEiP6t8vVeLN4N89Q=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=bmADCqcmlTljvi3P17MrJrPZo0FsPvj93FnANV3ryXgXPv9XIVOp0hYwh3MoUrbLD
-	 uPwrfdoYk8yMwg6SCxxGQYPrW8JR1OrN48Pw2vOOJ6LrDJXzLZ6JyqVdZoveV3gilY
-	 pqMlMlxVr0DnAnYpm5MEwr9S9r4yzjaVIJJzN/pm6yq+iyMc5JnePZbEE0oPDdgNBK
-	 2KYaRwUe2rnRAasxp6uDW0F5YF6OqMgJymUZ/63HTKzAp/IZvuheJXqcQgPrAw5rbn
-	 QL2SLtpR4thMxcjkUPoFiyJL2omK9SCN2MKmAyu6LbNRHI3bc/gwz9yKUYF/EZdfvs
-	 WFj+L4XkkisFQ==
-Date: Tue, 2 Jun 2026 13:47:03 +0100
-From: Will Deacon <will@kernel.org>
-To: Jinjie Ruan <ruanjinjie@huawei.com>
-Cc: catalin.marinas@arm.com, corbet@lwn.net, skhan@linuxfoundation.org,
-	punit.agrawal@oss.qualcomm.com, jic23@kernel.org,
-	osama.abdelkader@gmail.com, chenl311@chinatelecom.cn,
-	fengchengwen@huawei.com, suzuki.poulose@arm.com, maz@kernel.org,
-	lpieralisi@kernel.org, timothy.hayes@arm.com,
-	sascha.bischoff@arm.com, arnd@arndb.de, mrigendra.chaubey@gmail.com,
-	pierre.gondois@arm.com, dietmar.eggemann@arm.com,
-	yangyicong@hisilicon.com, sudeep.holla@kernel.org,
-	linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v3] cpu/hotplug: Fix NULL kobject warning in
- cpuhp_smt_enable()
-Message-ID: <ah7Qx6UmfJzlph6F@willie-the-truck>
-References: <20260520022023.126670-1-ruanjinjie@huawei.com>
- <ah65zXlOH6a9geD9@willie-the-truck>
- <37bc3f0c-adeb-41b8-9b26-fabe43f47e6a@huawei.com>
+	s=arc-20240116; t=1780405081; c=relaxed/simple;
+	bh=g3EsPEeclboffoN4RYwwMYX1oGuyBaS6O6dpSTTXey0=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=OIIKHXfuxphmUVJJBWfDKgni3GTWuJDDWMQYtSjRhNmnQ5A7AXz/v3z5QiD3piKIG3W7M7yhlbbLKPPfAXDDnSbAakRrN5zFU6KASZEqyEEBp3nTgxR7WcET9cDfzAbHdypr1UeeUagGD7IaqyddzcG4Jg73sMmdaLmrDmosahE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=FDQP7dW4; arc=none smtp.client-ip=209.85.219.53
+Received: by mail-qv1-f53.google.com with SMTP id 6a1803df08f44-8ccd1f57b32so67307136d6.2
+        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 05:58:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google; t=1780405079; x=1781009879; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=6dnOAmoRyxNthicf1c6w62nXUJx2BXxcSG3avUHO1yI=;
+        b=FDQP7dW478FyUpP3koXGhp+ZsyTKykWSywDABokGdeAQx+wL/iihFrK0ouaMKTaU+L
+         zHSin3ZPD3UEx7DmcIWzitjxKEnZLteIuoCA+rS6I1J8+7nb6TYwijBBvZbLeuGeOhL4
+         PpNFOjwdHllL+SW28qC8DCgAao6B8mvkW2NeM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780405079; x=1781009879;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=6dnOAmoRyxNthicf1c6w62nXUJx2BXxcSG3avUHO1yI=;
+        b=Y836YJfV5F6AR2NKJbpYDQc8VkqK8CWHYm195YIhv5+JwLni0JNF6JB9pPzN85H2+c
+         tYD90Hf6TsGWLRnUFCL0IRUjylC3NF6Wzz/F09xL2Um9vB9jhNc9EXWQAZr8R+CvwvCd
+         u5YHWIe1z7UnBLuUoBosSG+2K1sDHBtsoHzFHdlIxxIVoW8iTt9Jeb4fQNyHFHdEkrRn
+         6FbpmQh/6MYCLu8kDHcPmL7M+yJm3260AGqurmZXDEPatZsfQYFa9H//7W8k4BrfoLOr
+         4+wbJ1MuDgkaJ29+NQ5sS/g7Z0BUCwNA0wSsCOGl8QQjNwuph23KXx3K1op5ufT22zEt
+         rv7Q==
+X-Forwarded-Encrypted: i=1; AFNElJ8p6u5LN9XIbQ29TMwFvZct7b5brSbau5WreABYI1YYS306zEOQm//C/tnJ6fUh4sajXaLysaiPuVM=@vger.kernel.org
+X-Gm-Message-State: AOJu0YykXs5OIs/imNN+2kTdmp6S6v6mdpMM9y+yHFWEVO6oonSmOi+6
+	6hoTBN1+4i3BxNhLBYdvNHUe92OoAKzGgDjGt8cSIPZ93JAZogvUh4Mn7hWK5AbNnXy/+s7832g
+	V7WYjQA==
+X-Gm-Gg: Acq92OEJ+uIduxfK8kHCnV17FhSNCkObri0sx+ymy+AsJnZ6Vozuo4EWT2wCJTPjE4i
+	t3V1xpZDCMdauQdYTdSlB8covZ759hxIZN+68PJlhuSvF47kNaTAY03lHp7cx7RSKqWbgLmS6VZ
+	cBVMH1xZapc7mm4OG1/5sZztd05yEOxvGZUKmehl2giN6QCtT4V6cbAicaOzVmBRfUC9oNusbg4
+	iegc5M7Mc2hqpVLZgMiU8uQfEIfIWO8EqkIflIZLgMqjBBjNKvVIQk7i9epn2KUHnVVEUc4JUwB
+	Im7Dkp/3N/w8xb5oOHqLFJCMEYCMVvkvlKZLGFCRUikdya+FRgpXJHgYQHGt6/QbfOdFtvtKx6a
+	03N07PPdYobkeQ8lvL6NSAzXQLQ+xtwyto2R8BDwA2cacG3u5S0mt0TwrmS09HNJeottG8M6kTz
+	IQ55Dy5d01QtHbg5VOXViCk4xF7Js3Xv/uSWKhKDeoHD14JPicQs95FUg+BYalzIpMTdkRKsbC
+X-Received: by 2002:a0c:e092:0:b0:8cc:f175:3ac4 with SMTP id 6a1803df08f44-8ccf1753c73mr228337926d6.43.1780405079410;
+        Tue, 02 Jun 2026 05:57:59 -0700 (PDT)
+Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com. [209.85.160.180])
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-8cce9e2da3esm117566116d6.0.2026.06.02.05.57.58
+        for <linux-doc@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 02 Jun 2026 05:57:58 -0700 (PDT)
+Received: by mail-qt1-f180.google.com with SMTP id d75a77b69052e-51765531803so4971cf.0
+        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 05:57:58 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AFNElJ+CdvfU5wLEgBkPc4xYBiwmsidJ1Yyd5SuAe092suVaQm9doxoNDJ8ZEtcVLZ7gYucSVp6GKcbp3kY=@vger.kernel.org
+X-Received: by 2002:a05:622a:568d:b0:4ff:bfd9:dd31 with SMTP id
+ d75a77b69052e-5176aa0bfc0mr7185061cf.5.1780405077197; Tue, 02 Jun 2026
+ 05:57:57 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <37bc3f0c-adeb-41b8-9b26-fabe43f47e6a@huawei.com>
+References: <20260528103215.505795-1-tzungbi@kernel.org> <CAJZ5v0gc7AtOjWd+cg6tFgzPBovu=wmYmavjaRRjTdNNd8q-0g@mail.gmail.com>
+ <ah47N8Ng9zfcASmk@google.com> <CAAFQd5Drvq0iPAb2Ly=K7WLOmbRAcLY4TzZxHmhzarK4cvx1xA@mail.gmail.com>
+ <ah607VQjZeVKqOP0@google.com>
+In-Reply-To: <ah607VQjZeVKqOP0@google.com>
+From: Tomasz Figa <tfiga@chromium.org>
+Date: Tue, 2 Jun 2026 21:57:40 +0900
+X-Gmail-Original-Message-ID: <CAAFQd5A-b0_de2RenHER-U8jHB+oX1HCjdwOe97KXrnAvZDaaQ@mail.gmail.com>
+X-Gm-Features: AVHnY4Jg3-atKcicTbx0VLmhOWxiVCwzSMZnJZPxPioqRbNAthQJ4WJBPWSyNbI
+Message-ID: <CAAFQd5A-b0_de2RenHER-U8jHB+oX1HCjdwOe97KXrnAvZDaaQ@mail.gmail.com>
+Subject: Re: [PATCH] PM: sleep: Allow disabling DPM watchdog by default
+To: Tzung-Bi Shih <tzungbi@kernel.org>
+Cc: "Rafael J. Wysocki" <rafael@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Danilo Krummrich <dakr@kernel.org>, 
+	Shuah Khan <skhan@linuxfoundation.org>, Pavel Machek <pavel@kernel.org>, 
+	Len Brown <lenb@kernel.org>, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-pm@vger.kernel.org, driver-core@lists.linux.dev
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	DMARC_POLICY_ALLOW(-0.50)[chromium.org,none];
+	R_DKIM_ALLOW(-0.20)[chromium.org:s=google];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-90515-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:ruanjinjie@huawei.com,m:catalin.marinas@arm.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:punit.agrawal@oss.qualcomm.com,m:jic23@kernel.org,m:osama.abdelkader@gmail.com,m:chenl311@chinatelecom.cn,m:fengchengwen@huawei.com,m:suzuki.poulose@arm.com,m:maz@kernel.org,m:lpieralisi@kernel.org,m:timothy.hayes@arm.com,m:sascha.bischoff@arm.com,m:arnd@arndb.de,m:mrigendra.chaubey@gmail.com,m:pierre.gondois@arm.com,m:dietmar.eggemann@arm.com,m:yangyicong@hisilicon.com,m:sudeep.holla@kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:osamaabdelkader@gmail.com,m:mrigendrachaubey@gmail.com,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90516-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:tzungbi@kernel.org,m:rafael@kernel.org,m:corbet@lwn.net,m:gregkh@linuxfoundation.org,m:dakr@kernel.org,m:skhan@linuxfoundation.org,m:pavel@kernel.org,m:lenb@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-pm@vger.kernel.org,m:driver-core@lists.linux.dev,s:lists@lfdr.de];
+	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	FORGED_SENDER(0.00)[will@kernel.org,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	FORGED_SENDER(0.00)[tfiga@chromium.org,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[will@kernel.org,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[arm.com,lwn.net,linuxfoundation.org,oss.qualcomm.com,kernel.org,gmail.com,chinatelecom.cn,huawei.com,arndb.de,hisilicon.com,lists.infradead.org,vger.kernel.org];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	DKIM_TRACE(0.00)[chromium.org:+];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,sashiko.dev:url]
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[tfiga@chromium.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,mail.gmail.com:mid,chromium.org:from_mime,chromium.org:dkim]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 0D7FF62E260
+X-Rspamd-Queue-Id: 3C1C462E423
 
-On Tue, Jun 02, 2026 at 08:14:26PM +0800, Jinjie Ruan wrote:
-> On 6/2/2026 7:09 PM, Will Deacon wrote:
-> > Please can you check the Sashiko review comment?
-> > 
-> > https://sashiko.dev/#/patchset/20260520022023.126670-1-ruanjinjie@huawei.com
-> 
-> On arm64, arch_unregister_cpu() enforces a safety block against physical
-> CPU hot-removal by aborting early if cpu_present() is true but the
-> device is no longer physically present, thereby skipping
-> unregister_cpu() and leaking the sysfs device node.
-> If acpi_unmap_cpu() blindly clears the present bit while the sysfs
-> device remains registered, a subsequent hot-add attempt will see the
-> valid leaked device pointer, skip acpi_processor_hotadd_init() (and thus
-> skip acpi_map_cpu()), leaving the hot-added CPU permanently absent and
-> deadlocked.
-> 
-> Hi, Will,
-> 
-> what do you think about fix it like this?
-> 
-> --- a/arch/arm64/kernel/acpi.c
-> +++ b/arch/arm64/kernel/acpi.c
-> @@ -455,7 +455,6 @@ EXPORT_SYMBOL(acpi_map_cpu);
-> 
->  int acpi_unmap_cpu(int cpu)
->  {
-> -       set_cpu_present(cpu, false);
->         return 0;
->  }
->  EXPORT_SYMBOL(acpi_unmap_cpu);
-> diff --git a/arch/arm64/kernel/smp.c b/arch/arm64/kernel/smp.c
-> index 5932e5b30b71..507c6d761434 100644
-> --- a/arch/arm64/kernel/smp.c
-> +++ b/arch/arm64/kernel/smp.c
-> @@ -554,6 +554,7 @@ void arch_unregister_cpu(int cpu)
->         }
-> 
->         unregister_cpu(c);
-> +       set_cpu_present(cpu, false);
->  }
->  #endif /* CONFIG_ACPI_HOTPLUG_CPU */
+On Tue, Jun 2, 2026 at 7:48=E2=80=AFPM Tzung-Bi Shih <tzungbi@kernel.org> w=
+rote:
+>
+> On Tue, Jun 02, 2026 at 05:37:13PM +0900, Tomasz Figa wrote:
+> > On Tue, Jun 2, 2026 at 11:09=E2=80=AFAM Tzung-Bi Shih <tzungbi@kernel.o=
+rg> wrote:
+> > >
+> > > On Mon, Jun 01, 2026 at 08:39:42PM +0200, Rafael J. Wysocki wrote:
+> > > > On Thu, May 28, 2026 at 12:32=E2=80=AFPM Tzung-Bi Shih <tzungbi@ker=
+nel.org> wrote:
+> > > > > diff --git a/drivers/base/power/main.c b/drivers/base/power/main.=
+c
+> > > > > index e1b550664bab..4f92905f3edf 100644
+> > > > > --- a/drivers/base/power/main.c
+> > > > > +++ b/drivers/base/power/main.c
+> > > > > @@ -527,6 +527,20 @@ module_param(dpm_watchdog_all_cpu_backtrace,=
+ bool, 0644);
+> > > > >  MODULE_PARM_DESC(dpm_watchdog_all_cpu_backtrace,
+> > > > >                  "Backtrace all CPUs on DPM watchdog timeout");
+> > > > >
+> > > > > +#ifdef CONFIG_DPM_WATCHDOG_DEFAULT_ENABLED
+> > > > > +static unsigned int __read_mostly dpm_watchdog_enabled =3D 1;
+> > > > > +#else
+> > > > > +static unsigned int __read_mostly dpm_watchdog_enabled;
+> > > > > +#endif
+> > > > > +
+> > > > > +static int __init dpm_watchdog_setup(char *str)
+> > > > > +{
+> > > > > +       if (kstrtouint(str, 0, &dpm_watchdog_enabled) =3D=3D 0)
+> > > > > +               return 1;
+> > > > > +       return 0;
+> > > > > +}
+> > > > > +__setup("dpm_watchdog_enabled=3D", dpm_watchdog_setup);
+> > > >
+> > > > You might as well use a module parameter to allow this to be set or
+> > > > clear at run time.  Is there a particular reason why you only want =
+it
+> > > > to be enabled or disabled via the kernel command line?
+> > >
+> > > Thanks for the suggestion.  Mainly because in our use cases, we only =
+need
+> > > to set it once at boot time.
+> > >
+> > > Also, I was wondering if we need to consider potential races if the f=
+lag
+> > > can be set at runtime.  E.g.:
+> > > 1) The flag is set.
+> > > 2) dpm_watchdog_set() is called and the timer is started.
+> > > 3) The flag is then unset.
+> > > 4) The subsequent dpm_watchdog_clear() isn't stop the timer.
+> > >
+> > > Given this, would you still suggest providing the module parameter fo=
+r
+> > > completeness?
+> >
+> > Would that lead to anything bad, though? If I'm remembering correctly,
+> > would that mean that any already ongoing PM operations would still be
+> > subject to the timer, but not any new ones.
+>
+> I was overthinking the race.  All userspace programs should be frozen whe=
+n
+> the DPM watchdog is active.  The race I was concerned about isn't possibl=
+e.
 
-Hmm, not sure. Doesn't that break error handling cleanup paths that
-expect acpi_unmap_cpu() to undo acpi_map_cpu()? See
-acpi_processor_hotadd_init(), for example.
+Right. Somehow I was convinced that the DPM watchdog is also used for
+runtime PM, but after checking the code it doesn't look like so.
 
-Will
+>
+> Would you still suggest providing the module parameter for completeness?
+
+I'd also vote for a module parameter. Being able to toggle this at
+runtime would be useful for troubleshooting problems without needing
+to change the command line arguments (which isn't trivial on some
+systems).
+
+>
+> >
+> > My suggestion would also be to actually make the timeout and warning
+> > timeout configurable at runtime.
+>
+> I'm working on that and I think that should be in a separate patch.
+
+Great, thanks. I'll leave the splitting and other logistics to the maintain=
+ers.
+
+Best,
+Tomasz
 
