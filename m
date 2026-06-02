@@ -1,374 +1,332 @@
-Return-Path: <linux-doc+bounces-90540-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90541-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id uA+6Ek74HmoMbAAAu9opvQ
-	(envelope-from <linux-doc+bounces-90540-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 17:35:42 +0200
+	id fVAJEsD7HmrRbgAAu9opvQ
+	(envelope-from <linux-doc+bounces-90541-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 17:50:24 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9F4962FD3A
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 17:35:41 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3C54162FF84
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Jun 2026 17:50:23 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=mZJisVyW;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90540-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-90540-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=UvBQGYZR;
+	dkim=pass header.d=redhat.com header.s=google header.b=nMLWNgSo;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90541-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-90541-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=redhat.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id ECD223045E7A
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 15:29:18 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 753A2314B249
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 15:29:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BAB21360EFF;
-	Tue,  2 Jun 2026 15:28:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A5ACE3E5ED8;
+	Tue,  2 Jun 2026 15:29:32 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12A763EEACD
-	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 15:28:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B8EC233C1B7
+	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 15:29:29 +0000 (UTC)
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780414104; cv=pass; b=fuMmZq0FMTsfg7Usy2h76zFAJko4yPS6xQr1L5bZ1PNoN2iHSkDP9WyA/ybBfobIfJmAaSZmqaqRY47SNlssikzBC0/oPv+mQS1eXAEptmDFIeeKNQSJ+w53+KpBdHvLOF8hU/NnAN5hARvj8MYo0t3bpIccBWYBQpf/V5wym/U=
+	t=1780414172; cv=pass; b=g4BjWAJwopaGxq+yYZUcCgvQfQ7mciymlbRPuOa05P6tS1i7zuW0nWhtRauArmGrXjsw7qUbuy6YEN6+mgZxdRMmoPOKuwcm8l1i7oYJUFgQAIiaU+xcKtPQdzh95FdhmEX9J8sdK+ISiMcqjMCpKMzxL8ZqbYuIHVD99P76aVU=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780414104; c=relaxed/simple;
-	bh=KioD6muOq73KOuZgXUdfc8mghtZCf5WX4ci2/jt07rE=;
+	s=arc-20240116; t=1780414172; c=relaxed/simple;
+	bh=a8rzFTRZmTNeGD9TQ3lwEM3tZ9cTaD8C1O4FRKxZ4Tk=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=DYTiavYW2eEmKer6RmfL3xLzzJP1RIJ07ToruK1PA+TMPwFRg6k2SruBwVfaXdqTxP9BT+FkYUiKWlmR76YjZAfDIRfeeR52WVRkvcv4T3oMaYf8PNYaR3pFJd3Iq2BFqBDueYBs4MO0273H2fNTalBLZ65fVLdiO61q22JMHAc=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=mZJisVyW; arc=pass smtp.client-ip=209.85.221.49
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-45ee6d32402so2998638f8f.1
-        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 08:28:22 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780414101; cv=none;
+	 To:Cc:Content-Type; b=SaeAPOdLLOx+JfaNBdiwxkPU8Ltl5XnhEXcA5dS8hWItPDA74TncHk2m24iKIzIKiAaa6KUUi03tjOHuAWH/yew+dNmKadp8/q6jL0YKoejioPBPJCPWl2POtk2ytxncE0gG7LOkCRzVwuHdrg18NLB/uU4gXYRNKRL9dNr/Us4=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=UvBQGYZR; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=nMLWNgSo; arc=pass smtp.client-ip=170.10.129.124
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1780414168;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=zoHOGHc6Dr79Ii3CKFCTRjW9SLXuC6GuIiX+icbDNi0=;
+	b=UvBQGYZR92DCU5YJmrGnaZXVjJXQ/AKOBMTOyg9CdFZZ7dE6o/nNLhHkEPQF9l+R+az/E0
+	7yaWvxTrZDCktKrz6twuPxvroESGPqt4bcalZ12+O5pf2hAVqVEtD+o9jTG4n6+Kmkeziy
+	p6xAmhtotSXcNkoqG+grUJp1JUCGB4s=
+Received: from mail-yx1-f69.google.com (mail-yx1-f69.google.com
+ [74.125.224.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-475-qj6BETVLNZqEtq_-3rJR1Q-1; Tue, 02 Jun 2026 11:29:27 -0400
+X-MC-Unique: qj6BETVLNZqEtq_-3rJR1Q-1
+X-Mimecast-MFC-AGG-ID: qj6BETVLNZqEtq_-3rJR1Q_1780414167
+Received: by mail-yx1-f69.google.com with SMTP id 956f58d0204a3-66044a47d6fso8005712d50.2
+        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 08:29:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780414167; cv=none;
         d=google.com; s=arc-20240605;
-        b=MnOO5pJW99CSBcPnEV3wzroIr5M3tdpGwpdyqgSrkO+SrIKWN9QoC66MVJPmJ52xuC
-         U/459VlkrzK3XvSYkg1/BZT3B/b8xvM9kLjVDICPxToUYdGEu3GUR2ReZF6kM/9BY+C+
-         cMkvqyTB9iysNXhiXbfBZ4hU/vsmIVaUcdMiFFnhks2iWDm4iRNpuUfz60rrBfvBD5hN
-         8YPwwYIHe6f7B0LB7LttS8791ApS1W2grnXObk8fAJsq4WiA7bWyU6M6+ugHMzn8NDYD
-         g+8xVX4dBUJipNH7w/u5novgWNzq4FZcrsJlcyhk5fdhdsS8Y0fK8i6FXeSssAqcBDJG
-         Ai8Q==
+        b=KR/F8OSIGVs3hSoINo595/ujS2aIh8rbj6D8TVrP8Jqr/OwD+4sensfK596HE6Folf
+         7fRZkraDaTDzxXMN2ztwn3fOQyYxxzJsoYOP+TOks5mQ59ufvuc+cgJzYXHamGtMYi0N
+         JNtHIoDRWVtPRX7kSMkhYv3nYhNbdA2ZxT1wIb3eXxWJfqG4FF5nYUF5d4lbzh+fLtjf
+         Vpc3N9cPUnKp5AiaQkAob0t22CN9S7FpQev8yrmA+PPT3P7ypVEDa5eHdiFNSm6B6n8f
+         jJD+duIteqOCKP+6Yk9jx5HN9MGpV2/ka1TI8P71v4KYeG25/q1leRZgmn0PMbaE3AEU
+         fwZw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=KioD6muOq73KOuZgXUdfc8mghtZCf5WX4ci2/jt07rE=;
-        fh=wnnfrSH6fDkN7HpdOEOBcpC8oBQp4KDTw0uiEAZ+Dt0=;
-        b=NtfDic6qUiMTH8pTq7r4ejmI2zDMrw8U9JYkEmy7wETr/lsv5UKCQthEZf2oprNUJJ
-         cWdNSpVnmgsWFUJD9DcIZE+mtXXCMXZuOxi7/kGUK85g54OR/tcA02OZMKUj4Krw8dZL
-         dWX8gkS2ptYhggoo3YJbblWyxEmAoNwR3kKOWLbUX9qTZc9yW4TTcZg1bCcS7wePfuvN
-         0aFWuruISi+WgOJYfzlwdokq1PjjMc4K2r6OEU0wO1r+p7M0OYePH+0B3iKIIGwb9k0q
-         VtF4usoLFr9dYZuSI8gSDcWKOzpjdkSKln/C13kkYG7AXusZOnSM0VygoWfjB+DKjL7d
-         yM8Q==;
+        bh=zoHOGHc6Dr79Ii3CKFCTRjW9SLXuC6GuIiX+icbDNi0=;
+        fh=XDVPYYr0tO7jVkbg3g4C6OQoh08hBKHLtB9LdeLY++Q=;
+        b=Joca1hasBAU8qluuW7XMXdqF1Hd49tCBXyRsw+lwr+KpQnwA588SvwLqV2at6zn777
+         Z6wIO+beZl/w/7Be7OhOaApUy1ixtO+cYlPyskBL6KJdjKxwhITxIv0H1k4LXlzklH9V
+         nEf7gKM3hnQtY4gTzNm3rKM+jaUzSMp1qVnzWC3O/878Dv+4x1fcZxGt1cfZfb1J8d9w
+         5Nh3aozWV/+UOI9wqd65H+Mn1Fttdt4ol158dYXQ9FR/GM5sKAxOjMlxI6MUfNjOV/Od
+         lMIUV7gH7cebwiXGc0HVAQktFP7YF2M6FuRqoc+5V3z6/cF9rDlyFoPJKTGzyj5S2qJP
+         +iHw==;
         darn=vger.kernel.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780414101; x=1781018901; darn=vger.kernel.org;
+        d=redhat.com; s=google; t=1780414167; x=1781018967; darn=vger.kernel.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=KioD6muOq73KOuZgXUdfc8mghtZCf5WX4ci2/jt07rE=;
-        b=mZJisVyWXmXPsPq1B+4RWVJXsEAcwnVm2eooLuPaonvGk5UuSz/RcfRnYDtaXFt1jr
-         lrzNhKSFhOKb9M5nvWDdGdBQ/stkgH/VByDF7fSn4tTHpXm3Q6TZvdKjxDpRp9QsqD/c
-         9pEmbNrI2DqujUzI1G22wDd9A22nC6jjZXH9C1yPOX1zafbGpaOZHWKRbLSlCU9IoMDd
-         6h71mvbZ4CFPTGUBAIxyVebOS3WOWDWF626Eozevs+puG3putEyoDLgA8EsCmEsIKC79
-         T99vcQTxJW4cRLJaCVY4NRFVdVFXKErPfy9zR0BTilyp31D0X/rBdl8iyePJNN0Z8Fe6
-         HtQw==
+        bh=zoHOGHc6Dr79Ii3CKFCTRjW9SLXuC6GuIiX+icbDNi0=;
+        b=nMLWNgSoqCrKVCZ/A3iyvgsjTU2MCmVKUj/KL1fZ7Gydjn1jhCPCudPtpSqzIOWiY2
+         D0WaJk7nI/Shs4Ry8oIeT5rK1UXP6BV13Iw6zcH1IlSJXZ5olW6xMjpLbejoyD+eU3M8
+         hwfN89e+vUPtc5fnOe94PtFILAXAUYROA/goQlZRbukTKvaTJNGdNeOs+JkozBhkv0cG
+         wboywymMaqJCGodE2GHTe8NbOzqjL4zh9nPrvf6ULSXyU/cNzoT9bmqcaeXG64wZxwIz
+         RqLPv5R4EQRr1q9aRIMFk4QKffdZn0ogLL5z+mDFCF8BIfPVkLOiDXrDWi5+y96eTrcG
+         JViw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780414101; x=1781018901;
+        d=1e100.net; s=20251104; t=1780414167; x=1781018967;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=KioD6muOq73KOuZgXUdfc8mghtZCf5WX4ci2/jt07rE=;
-        b=mrGmo8qetcwewnl5UgD0H0W9sji4vzFRFQS2Jq8CdDNsOl4E4SaHczWDGnWZkSrvh2
-         AQ5PDN3oTJgggWf9B9zgDvfc0VRfpCCyJLkN9UDnEofHbPEEdPUu7e6fGJPRsrYgmyt/
-         Nz384UDu1JiUZkNyyBoybIOuk8c8Bd/lywPg3ekGM9P5qt1Lj906pXOk1TjcJDcIi9YE
-         DVMVD77BP7c3RJ2aiYldkG2hqKVMIQk7U+5+h4soNBPDpwyGBFy0Qz9wy6qHxVN5eTLa
-         bYTcj+Gegy0YcfmTOYdo9SbwwpnInHxBQG3A3ThIzGwndpovNrIzG0H0nU3OWh7AvjJY
-         fhuA==
-X-Forwarded-Encrypted: i=1; AFNElJ+C/Bd6MHhON8EpXFAOB15cjLotKv5aBMIS9h5jKqpAzV5hFPvHzOzc2WRbyR+tr6cwczb8/fAkkI8=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyWXUjZ0t75ZAr6zL3pe2Z4IVmaavkUGsTcNPx9BP0hXkpeuBXV
-	kXjjYbZMCmFeDpJg1qzeR6e0IkYOufvFTPHz+S7UEOpMvzV34ZSSBU7HdUtk6lmZvHdXZfjTRbm
-	0tq82tYTz1PZa2rMsUGOL0c138N2Co8I=
-X-Gm-Gg: Acq92OGqsUooConh7MGZO717GDyLZ7N3j0w7Bh9w/wb7JfNfk+aRaaM8PvFC70zM6bQ
-	wMXNhjqABF/dEQUCaciKk2rcGHziqBBwlVvQUxV7AVxFtKZMC5CTSweOcy82/k5hszoE2CCQURe
-	di3DHb4liKmECy2YK81huHNHYJvckmjARDqOzUu7mCoq8FB5GGVY1a0BXLMbnCnrRXgZLRIW438
-	0IH72CXTe7Kd7Bp3vhynKVKEJzXeKt1XS3C1jzOCkvWkHBGmQYWDqMT6kMNLXVuJDrpCdwdu25m
-	hRVzTG4kY8tKyGOxBl8m9diI9NDaXr1gXzlt/tdlsVmjNmuyqw==
-X-Received: by 2002:a5d:5401:0:b0:45e:d6b2:e6a5 with SMTP id
- ffacd0b85a97d-45ef6b83764mr21337268f8f.34.1780414101045; Tue, 02 Jun 2026
- 08:28:21 -0700 (PDT)
+        bh=zoHOGHc6Dr79Ii3CKFCTRjW9SLXuC6GuIiX+icbDNi0=;
+        b=J9sLa1a/AdcFmLtqviTnDJj6d2QCIQ0x6DV+/TsyKCzv7xumKgP217MCyfScaKnGM1
+         vbu1Iva3+Srk1oZJCAaIuiw5pps4sZYTP+9r3ekhutwZojbshKlAA+a3G9rGi+csLv2l
+         zvsYNKm2gIYwRVG10vOhjqB1sNNPr01075Vxbi7+UPHBv6sG1FYvbyEWUA1uMtitwjfJ
+         D+uFh3VCuVMO24QS0zfuzbUY5H8VaHvVVrjiBWbPkjU/pSp+DB7lnBjEfe9vOzHTg+2l
+         YtqF5FmnsdDNYmnFc6yHhIVFCk5WRfiOymm+ApfLdEtWdgH7KI7Tc52qSKVju8+Yj4K2
+         749w==
+X-Forwarded-Encrypted: i=1; AFNElJ+vYaIxIQMFupWUOS15H8r6noJTn0jeuxFnXD/3ICVGimK6BiGEHMH/Hm43jJm6uM5kcVJulAIfeX8=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxLVVfRr8bdoqFkYtVOaNvD524yVr+hDWkywTPPlqCppvOKbP/B
+	Svjqww21GjhWD/HsLYqYA1LDGglRg+bjbPCuAUoCex7sFd6BFO9Qgqml4AbsMfyHo0yVRN8Z2NP
+	VyubftCRbd0cpleqy0oKcecVx7TlF26ilsBWJ90MSNWvNdR/IHDJ9iuJKFtdGQ/ZAm9AwZUKSY+
+	1/7cVg/5TCfREBxd0zYwDgTOFcGMByoTwPVo8k
+X-Gm-Gg: Acq92OEL36F/jVHffb+k1+0dfb6OGNndmpwULvs5Y2OpgXimzAsZyL2JhLcHcfCX7Fw
+	3eOxI3sICRI84tRIy/kZEqOKbuoDyaonVq/1ZhQfHwAQ1Ca3mUypwDX827Ra0YxtLGWJfG8uT/8
+	zI34xaB9atNX87cf3L7vvtqTYjHoc5E+5Dm/WRw2/lSxIlfPUWKpzwhm8MVI8HiuzTao8itHuCM
+	vVRaBWjGgp+xhO99A==
+X-Received: by 2002:a05:690e:4395:b0:651:bf58:446b with SMTP id 956f58d0204a3-660d5e4dcfamr221852d50.10.1780414167111;
+        Tue, 02 Jun 2026 08:29:27 -0700 (PDT)
+X-Received: by 2002:a05:690e:4395:b0:651:bf58:446b with SMTP id
+ 956f58d0204a3-660d5e4dcfamr221781d50.10.1780414166617; Tue, 02 Jun 2026
+ 08:29:26 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260528212955.1912856-1-nphamcs@gmail.com> <ahz_iYG4lqWL4g-J@KASONG-MC4>
- <CAKEwX=PzMwXXgq=ULAkFD9UqMz+ewLqhKt+xdGxkV7OmA2QG6w@mail.gmail.com>
- <CAMgjq7BhOn48xEyC=2j837R7qddfjeBVHMiRqdx8no4ZEBpBLg@mail.gmail.com>
- <CAKEwX=PmwzaJhfjBrho3+kQ8HXFUC0WiegQrsguBc-_pmn5bSA@mail.gmail.com> <CAMgjq7D4XsAD4NGDL7FC2kaYAQAP8PDJdn4bpzGZwXYtjEpJ6w@mail.gmail.com>
-In-Reply-To: <CAMgjq7D4XsAD4NGDL7FC2kaYAQAP8PDJdn4bpzGZwXYtjEpJ6w@mail.gmail.com>
-From: Nhat Pham <nphamcs@gmail.com>
-Date: Tue, 2 Jun 2026 08:28:09 -0700
-X-Gm-Features: AVHnY4IWURpsnvI312VbRdsgEkqVndHtTZWSNA7JxRNHqCQ-2eUuyz0lSoO1lo4
-Message-ID: <CAKEwX=OZL+ykwTjZJzUDAEnTOO6B0mibc6dxiYtmnoLReB7TYA@mail.gmail.com>
-Subject: Re: [RFC PATCH 0/5] mm, swap: Virtual Swap Space (Swap Table Edition)
-To: Kairui Song <ryncsn@gmail.com>
-Cc: Liam.Howlett@oracle.com, akpm@linux-foundation.org, apopple@nvidia.com, 
-	axelrasmussen@google.com, baohua@kernel.org, baolin.wang@linux.alibaba.com, 
-	bhe@redhat.com, byungchul@sk.com, cgroups@vger.kernel.org, 
-	chengming.zhou@linux.dev, chrisl@kernel.org, corbet@lwn.net, david@kernel.org, 
-	dev.jain@arm.com, gourry@gourry.net, hannes@cmpxchg.org, hughd@google.com, 
-	jannh@google.com, joshua.hahnjy@gmail.com, lance.yang@linux.dev, 
-	lenb@kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-mm@kvack.org, linux-pm@vger.kernel.org, lorenzo.stoakes@oracle.com, 
-	matthew.brost@intel.com, mhocko@suse.com, muchun.song@linux.dev, 
-	npache@redhat.com, pavel@kernel.org, peterx@redhat.com, peterz@infradead.org, 
-	pfalcato@suse.de, rafael@kernel.org, rakie.kim@sk.com, 
-	roman.gushchin@linux.dev, rppt@kernel.org, ryan.roberts@arm.com, 
-	shakeel.butt@linux.dev, shikemeng@huaweicloud.com, surenb@google.com, 
-	tglx@kernel.org, vbabka@suse.cz, weixugc@google.com, 
-	ying.huang@linux.alibaba.com, yosry.ahmed@linux.dev, yuanchu@google.com, 
-	zhengqi.arch@bytedance.com, ziy@nvidia.com, kernel-team@meta.com, 
-	riel@surriel.com, haowenchao22@gmail.com
+References: <2024af56-5e99-4799-a586-e9ba756cecb9@kernel.org>
+ <20260601032804.96122-1-lance.yang@linux.dev> <f5d38f64-ab92-496d-afd3-29ccc17fec2b@kernel.org>
+ <616de1a8-1cfd-40b8-b04f-7b324be40bfd@linux.dev> <6b11bf0a-769c-4ef2-ac6f-2af38200a6bc@kernel.org>
+ <baa0a462-46e0-44ab-b583-c722ad253afe@linux.dev>
+In-Reply-To: <baa0a462-46e0-44ab-b583-c722ad253afe@linux.dev>
+From: Nico Pache <npache@redhat.com>
+Date: Tue, 2 Jun 2026 09:30:06 -0600
+X-Gm-Features: AVHnY4Kv1G0ugXWOd835wx5jHS-wLy0DPKwsrrM_yqPdHcBhPWzJa9aKptOmpM8
+Message-ID: <CAA1CXcD7peS3WHueVgAWhhRrjBO_1b19+Xc0CfZBSO8OwJJKQw@mail.gmail.com>
+Subject: Re: [PATCH mm-unstable v18 06/14] mm/khugepaged: generalize
+ collapse_huge_page for mTHP collapse
+To: Lance Yang <lance.yang@linux.dev>
+Cc: "David Hildenbrand (Arm)" <david@kernel.org>, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-mm@kvack.org, 
+	linux-trace-kernel@vger.kernel.org, aarcange@redhat.com, 
+	akpm@linux-foundation.org, anshuman.khandual@arm.com, apopple@nvidia.com, 
+	baohua@kernel.org, baolin.wang@linux.alibaba.com, byungchul@sk.com, 
+	catalin.marinas@arm.com, cl@gentwo.org, corbet@lwn.net, 
+	dave.hansen@linux.intel.com, dev.jain@arm.com, gourry@gourry.net, 
+	hannes@cmpxchg.org, hughd@google.com, jack@suse.cz, jackmanb@google.com, 
+	jannh@google.com, jglisse@google.com, joshua.hahnjy@gmail.com, kas@kernel.org, 
+	liam@infradead.org, ljs@kernel.org, mathieu.desnoyers@efficios.com, 
+	matthew.brost@intel.com, mhiramat@kernel.org, mhocko@suse.com, 
+	peterx@redhat.com, pfalcato@suse.de, rakie.kim@sk.com, raquini@redhat.com, 
+	rdunlap@infradead.org, richard.weiyang@gmail.com, rientjes@google.com, 
+	rostedt@goodmis.org, rppt@kernel.org, ryan.roberts@arm.com, shivankg@amd.com, 
+	sunnanyong@huawei.com, surenb@google.com, thomas.hellstrom@linux.intel.com, 
+	tiwai@suse.de, usamaarif642@gmail.com, vbabka@suse.cz, vishal.moola@gmail.com, 
+	wangkefeng.wang@huawei.com, will@kernel.org, willy@infradead.org, 
+	yang@os.amperecomputing.com, ying.huang@linux.alibaba.com, ziy@nvidia.com, 
+	zokeefe@google.com, usama.arif@linux.dev
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-90540-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[kernel.org,vger.kernel.org,kvack.org,redhat.com,linux-foundation.org,arm.com,nvidia.com,linux.alibaba.com,sk.com,gentwo.org,lwn.net,linux.intel.com,gourry.net,cmpxchg.org,google.com,suse.cz,gmail.com,infradead.org,efficios.com,intel.com,suse.com,suse.de,goodmis.org,amd.com,huawei.com,os.amperecomputing.com,linux.dev];
+	TAGGED_FROM(0.00)[bounces-90541-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:ryncsn@gmail.com,m:Liam.Howlett@oracle.com,m:akpm@linux-foundation.org,m:apopple@nvidia.com,m:axelrasmussen@google.com,m:baohua@kernel.org,m:baolin.wang@linux.alibaba.com,m:bhe@redhat.com,m:byungchul@sk.com,m:cgroups@vger.kernel.org,m:chengming.zhou@linux.dev,m:chrisl@kernel.org,m:corbet@lwn.net,m:david@kernel.org,m:dev.jain@arm.com,m:gourry@gourry.net,m:hannes@cmpxchg.org,m:hughd@google.com,m:jannh@google.com,m:joshua.hahnjy@gmail.com,m:lance.yang@linux.dev,m:lenb@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-pm@vger.kernel.org,m:lorenzo.stoakes@oracle.com,m:matthew.brost@intel.com,m:mhocko@suse.com,m:muchun.song@linux.dev,m:npache@redhat.com,m:pavel@kernel.org,m:peterx@redhat.com,m:peterz@infradead.org,m:pfalcato@suse.de,m:rafael@kernel.org,m:rakie.kim@sk.com,m:roman.gushchin@linux.dev,m:rppt@kernel.org,m:ryan.roberts@arm.com,m:shakeel.butt@linux.dev,m:shikemeng@huaweicloud.com,m:surenb@google.com,m:tgl
- x@kernel.org,m:vbabka@suse.cz,m:weixugc@google.com,m:ying.huang@linux.alibaba.com,m:yosry.ahmed@linux.dev,m:yuanchu@google.com,m:zhengqi.arch@bytedance.com,m:ziy@nvidia.com,m:kernel-team@meta.com,m:riel@surriel.com,m:haowenchao22@gmail.com,m:joshuahahnjy@gmail.com,s:lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FORGED_SENDER(0.00)[nphamcs@gmail.com,linux-doc@vger.kernel.org];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER(0.00)[npache@redhat.com,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:lance.yang@linux.dev,m:david@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-trace-kernel@vger.kernel.org,m:aarcange@redhat.com,m:akpm@linux-foundation.org,m:anshuman.khandual@arm.com,m:apopple@nvidia.com,m:baohua@kernel.org,m:baolin.wang@linux.alibaba.com,m:byungchul@sk.com,m:catalin.marinas@arm.com,m:cl@gentwo.org,m:corbet@lwn.net,m:dave.hansen@linux.intel.com,m:dev.jain@arm.com,m:gourry@gourry.net,m:hannes@cmpxchg.org,m:hughd@google.com,m:jack@suse.cz,m:jackmanb@google.com,m:jannh@google.com,m:jglisse@google.com,m:joshua.hahnjy@gmail.com,m:kas@kernel.org,m:liam@infradead.org,m:ljs@kernel.org,m:mathieu.desnoyers@efficios.com,m:matthew.brost@intel.com,m:mhiramat@kernel.org,m:mhocko@suse.com,m:peterx@redhat.com,m:pfalcato@suse.de,m:rakie.kim@sk.com,m:raquini@redhat.com,m:rdunlap@infradead.org,m:richard.weiyang@gmail.com,m:rientjes@google.com,m:rostedt@goodmis.org,m:rppt@kernel.org,m:ryan.roberts@arm.com,m:s
+ hivankg@amd.com,m:sunnanyong@huawei.com,m:surenb@google.com,m:thomas.hellstrom@linux.intel.com,m:tiwai@suse.de,m:usamaarif642@gmail.com,m:vbabka@suse.cz,m:vishal.moola@gmail.com,m:wangkefeng.wang@huawei.com,m:will@kernel.org,m:willy@infradead.org,m:yang@os.amperecomputing.com,m:ying.huang@linux.alibaba.com,m:ziy@nvidia.com,m:zokeefe@google.com,m:usama.arif@linux.dev,m:joshuahahnjy@gmail.com,m:richardweiyang@gmail.com,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[oracle.com,linux-foundation.org,nvidia.com,google.com,kernel.org,linux.alibaba.com,redhat.com,sk.com,vger.kernel.org,linux.dev,lwn.net,arm.com,gourry.net,cmpxchg.org,gmail.com,kvack.org,intel.com,suse.com,infradead.org,suse.de,huaweicloud.com,suse.cz,bytedance.com,meta.com,surriel.com];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[54];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[nphamcs@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[redhat.com:+];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,vger.kernel.org:from_smtp,mail.gmail.com:mid]
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[npache@redhat.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[59];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,vger.kernel.org:from_smtp,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,linux.dev:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: D9F4962FD3A
+X-Rspamd-Queue-Id: 3C54162FF84
 
-On Mon, Jun 1, 2026 at 8:25=E2=80=AFPM Kairui Song <ryncsn@gmail.com> wrote=
-:
+On Mon, Jun 1, 2026 at 4:48=E2=80=AFAM Lance Yang <lance.yang@linux.dev> wr=
+ote:
 >
-> On Tue, Jun 2, 2026 at 2:06=E2=80=AFAM Nhat Pham <nphamcs@gmail.com> wrot=
-e:
-> >
-> > On Mon, Jun 1, 2026 at 10:45=E2=80=AFAM Kairui Song <ryncsn@gmail.com> =
-wrote:
-> > >
-> > > On Mon, Jun 1, 2026 at 11:57=E2=80=AFPM Nhat Pham <nphamcs@gmail.com>=
- wrote:
-> > > >
-> > > > Are you suggesting we merge the virtual table with main swap table?
-> > > >
-> > > > Man, I'd love to do this. There is a problem though - we have a cas=
+>
+>
+> On 2026/6/1 18:23, David Hildenbrand (Arm) wrote:
+> > On 6/1/26 11:08, Lance Yang wrote:
+> >>
+> >>
+> >> On 2026/6/1 14:54, David Hildenbrand (Arm) wrote:
+> >>> On 6/1/26 05:28, Lance Yang wrote:
+> >>>>
+> >>>>
+> >>>> Ah, fair point.
+> >>>>
+> >>>> I was mostly worried about arch hooks that walk vma->vm_mm again, ra=
+ther
+> >>>> than only using the pte pointer passed in. For example, mips does:
+> >>>
+> >>> Right, a re-walk would be the real problem.
+> >>>
+> >>>>
+> >>>>     update_mmu_cache_range()
+> >>>>       -> __update_tlb()
+> >>>>         -> pgd_offset(vma->vm_mm, address)
+> >>>>         -> pte_offset_map(...)
+> >>>>
+> >>>> and __update_tlb() has this assumption:
+> >>>>
+> >>>>          /*
+> >>>>           * update_mmu_cache() is called between pte_offset_map_lock=
+()
+> >>>>           * and pte_unmap_unlock(), so we can assume that ptep is no=
+t
+> >>>>           * NULL here: and what should be done below if it were NULL=
+?
+> >>>>           */
+> >>>>
+> >>>> So if khugepaged happens to run with current->active_mm =3D=3D vma->=
+vm_mm
+> >>>> here, could __update_tlb() hit the none PMD, get NULL from
+> >>>> pte_offset_map(), and then dereference it?
+> >>>
+> >>> Likely yes -- that MIPS code is horrible. And the comment in MIPS cod=
 e
-> > > > where we occupy both backing physical swap AND swap cache. Do you
-> > > > think we can fit both the physical swap slot handle and the swap ca=
-che
-> > > > PFN into the same slot in virtual table? Maybe with some expanding.=
-..?
-> > >
-> > > I don't really get why we would need to do that? If you put the PFN
-> > > info in the virtual / upper layer, then the count info, locking, and
-> > > all swap IO synchronization (via folio lock), dup (current protected
-> > > by ci lock / folio lock), and allocation (folio_alloc_swap), are all
-> > > handled in this layer.
-> > >
-> > > The physical / lower layer will just hold a reverse entry on
-> > > folio_realloc_swap, or no entry at all (no physical layer used, zswap=
-,
-> > > or after swap allocation but before IO) right?
-> > >
-> > > Looking up the actual folio from the physical layer will be a bit
-> > > slower since it needs to resolve the reverse entry, but the only plac=
-e
-> > > we need to do that is things like migrate, compaction (none of them
-> > > exist yet) which seems totally fine?
+> >>> even spells that out. :(
+> >>>
+> >>> Do you know about other code like that, or is MIPS the only one doing=
+ a
+> >>> re-walk and crossing fingers?
+> >>>
+> >>>>
+> >>>> Just wanted to raise it since some arch code may still have assumpti=
+ons
+> >>>> like this, and the always-enable-mTHP work is getting closer ...
+> >>>
+> >>> Right. I assume set_pte_at() couldn't trigger something similar (re-w=
+alk) in
+> >>> arch code,
+> >>> because we simply provide the ptep. update_mmu_cache_range() only con=
+sumes the
+> >>> pte.
+> >>>
+> >>>>
+> >>>> Probably very very very hard to hit, though :)
+> >>>
+> >>> Delaying update_mmu_cache_range() is nasty, as we'd have to make sure=
+ that
+> >>> nobody can interfere in the meantime ... and the PMD lock will not be=
+ sufficient.
+> >>>
+> >>> Maybe we could reinstall the page table with the cleared (none) entri=
+es while
+> >>> still holding the PTL?
+> >>>
+> >>> Thinking out loud:
+> >>>
+> >>> diff --git a/mm/khugepaged.c b/mm/khugepaged.c
+> >>> index 5ba298d420b7..e39b750b1e6f 100644
+> >>> --- a/mm/khugepaged.c
+> >>> +++ b/mm/khugepaged.c
+> >>> @@ -1413,13 +1413,17 @@ static enum scan_result collapse_huge_page(st=
+ruct
+> >>> mm_struct *mm, unsigned long s
+> >>>                   map_anon_folio_pmd_nopf(folio, pmd, vma, pmd_addr);
+> >>>           } else {
+> >>>                   /*
+> >>> -                * set_ptes is called in map_anon_folio_pte_nopf with=
+ the
+> >>> -                * pmd_ptl lock still held; this is safe as the PMD i=
+s expected
+> >>> -                * to be none. The pmd entry is then repopulated belo=
+w.
+> >>> +                * Re-insert the page table with the cleared entries,=
+ but
+> >>> +                * hold the PTL, such that no one can mess with the r=
+e-installed
+> >>> +                * page table until we updated the temporarily-cleare=
+d entries
+> >>> +                * through map_anon_folio_pte_nopf().
+> >>>                    */
+> >>> -               map_anon_folio_pte_nopf(folio, pte, vma, start_addr, =
+/
+> >>> *uffd_wp=3D*/ false);
+> >>> -               smp_wmb(); /* make PTEs visible before PMD. See pmd_i=
+nstall() */
+> >>
+> >> One small thing, I think we should probably keep the smp_wmb(), and ju=
+st
+> >> move it before the earlier pmd_populate().
+> >>
+> >> IIUC, the ordering we want is still:
+> >>
+> >>    clear old PTEs
+> >>    smp_wmb()
+> >>    pmd_populate()
+> >>
+> >> so another CPU cannot walk through the re-installed PMD and still obse=
+rve
+> >> the old PTEs, right?
 > >
-> > All of this is correct, but consider swaping in a vswap entry backed
-> > by pswap. There are cases where you still want to maintain the pswap
-> > slots around backing vswap entry, while having the swap cache folio as
-> > well.
-> >
-> > For e.g, at swap in time, we add the folio into the swap cache. First
-> > of all, we need to hold on to the physical swap slot for IO step. But
-> > even after IO succeeds, there are cases where you would still like to
-> > keep physical swap slots around (for e.g, to avoid swapping out again
-> > if the folio is only speculatively fetched).
+> > There is a smp_wmb() in __folio_mark_uptodate(), that should be suffici=
+ent?
 >
-> A reverse entry is enough to hold the physical swap, just like how the
-> current hibernation works with a fake shadow, you don't need a PFN
-> just for holding that.
+> Ah, cool! __folio_mark_uptodate() already does the job :P
 >
-> >
-> > So you have to make sure we have space for both the physical swap
-> > slot, and the swap cache folio's PFN at the same time for each vswap
-> > entry. So we still need the vtable extension (well maybe the other
-> > approach I mentioned could work, but I'm not 100% sure).
->
-> Right, vtable extension is fine, there is no redundant data. I just
-> mean you don't need to set the PFN twice (for vswap & pswap). So
-> simply reusing the PFN format in the vswap layer and solving
-> everything there should be enough.
+> So yeah, no extra smp_wmb() needed here!
 
-Ah yeah, then I might have misunderstood you here. I thought you were
-proposing a way to remove vtable :)
+are we sure? that folio_mark_uptodate is done before the PTEs are
+reinstalled. Then we reinstall the PMD right after. Currently
+separated by the smp_wmb().
 
-"don't need to set the PFN twice" completely agree. I'm pretty sure I
-did not here, but do let me know if I accidentally set it twice. I'm
-be sure to check this myself for the next version.
+I was copying this from other THP code that performs similar PTE/PMD juggli=
+ng.
+
+I can remove it, but I'd rather air on the side of caution with this.
 
 >
-> > > Thanks. Not too complicated, actually our internal kernel
-> > > implementation still using si->percpu cluster, and use a counter for
-> > > the rotation and each order have a counter :P, it's a bit ugly but
-> > > works fine. It still serves pretty well just like the global percpu
-> > > cluster, YoungJun's previous per ci percpu cluster also still provide=
-s
-> > > the fast path, many ways to do that.
-> >
-> > Sounds like something that should be upstreamed? ;)
+> Cheers, Lance
 >
-> I'd love to :), there is a lot of work going on as you can see and
-> people seem to have many different proposals about this so I didn't
-> prioritize it. I'll try as things settle down.
 
-Yeah understandable. It's a very volatile codebase, with a lot of
-folks trying to improve different aspects.
-
-Hopefully we're close to a unified design :)
-
-I'll keep my dedicated vswap per-cpu alloc caching for now, but I'll
-get rid of it whenever the per-CPU per-si cache is ready.
-
->
-> > > > >
-> > > > > For patch 2, a few routines like vswap_can_swapin_thp seems not
-> > > > > needed or should be moved to __swap_cache_alloc? VSWAP_FOLIO is
-> > > > > same as swap cache folio check, which is already covered. Same fo=
-r
-> > > > > zero checking, and VSWAP_NONE which is same as swap count check
-> > > > > I think. That way we not only save a lot of code, we also no
-> > > > > longer need to treat vswap specially.
-> > > >
-> > > > Unfortunately, I think a lot of this complexity is still needed. Vs=
-wap
-> > > > adds a new layer, which means new complications :)
-> > > >
-> > > > For instance, I think you still need vswap_can_swapin_thp. It
-> > > > basically enforces that the backend must be something
-> > > > swap_read_folio() can handle. That means:
-> > > >
-> > > > 1. No zswap.
-> > > >
-> > > > 2. No mixed backend.
-> > >
-> > > If mixed backend means phys vs zero vs zswap, then we already have
-> > > part of that covered with the current swap cache except for the phys
-> > > part (zswap part seems very doable with fujunjie's work).
-> > > swap_cache_alloc_folio will ensure there is no mixed zerobit, it can
-> > > be easily extended to ensure there is no mixed zswap as well
-> > > (according to what I've learned from fujunjie's code). Similar logic
-> > > for phys detection I think.
-> >
-> > Yeah it's basically generalizing that check, and handle the case where
-> > we can have indirection.
-> >
-> > I mean I can open-code it, but it has to be there :) And I figure it
-> > might be useful to check this opportunistically (at swap_pte_batch,
-> > even if it's not guaranteed to be correct down the line) before we
-> > even attempt to allocate a large folio etc. to avoid large folio
-> > allocation.
->
-> Right, but swap_cache_alloc_folio with orders=3D<large order> won't
-> attempt a large allocation if the batch check fails, so that's fine.
->
-> > > > Basically:
-> > > >
-> > > > 1. For vswap entry, not backed by phys swap: record swap memcg, hol=
-d
-> > > > reference to pin the memcg, but not charging towards swap.current.
-> > >
-> > > Maybe you don't need to record memcg here since folio->memcg already
-> > > have that info?
-> > >
-> > > I previously had a patch:
-> > > https://lore.kernel.org/linux-mm/20260220-swap-table-p4-v1-7-104795d1=
-9815@tencent.com/
-> > >
-> > > The defers the recording of memcg, the behavior is almost identical t=
-o
-> > > before, but charging & recording should be cleaner and you don't need
-> > > to record memcg at allocation time hence maybe reduce the possibility
-> > > of pinning a memcg. I didn't include that in P4 just to reduce LOC,
-> > > maybe can be resent or included.
-> >
-> > That works-ish when the folio is sitll in swap cache, but say if it's
-> > vswap backed by zswap (and the swap cache folio has been reclaimed),
-> > you need a place to store the memcg, no?
->
-> "Backed by zswap" means the actual swapout already happened, which is
-> the case where we always have to record the memcg info because the
-> folio is gone, seems still fit in the model.
-
-Hmmm I might have misunderstood you in my last response here.
-
-So what you are doing in that patch:
-
-1. Charge towards folio->memcg when we allocate swap slots, but do not
-record or take reference yet.
-
-2. Once we reclaimed the folio after swap out, then we record and
-acquire reference to pin.
-
-You know what - this would simplify my usecase. For vswap entries not
-backing by pswap, it *basically* just means I skip step 1 for vswap
-backend. Step 2 is shared for all cases. Donezo.
-
-You're right. This is simpler :) Let me brew on it a bit longer in
-case there might be something we're missing. but it does seem like
-this will reduce complexity (and with the added benefits of me not
-having to come up with names for helpers).
-
->
-> > Just seems cleaner to centralize this info at vswap layer when it is
-> > presented, for now anyway, rather than juggling this on a per-backend
-> > basis.
->
-> Zswap charge could be merged with vswap I think but pswap we just
-> discussed that we might want to charge it differently? And actually
-> vswap charge is still quite different from zswap charge if you want to
-> make vswap infinitely large? I think we can figure out this part as we
-> progress; it's not a major problem at this point.
-
-That was because I misunderstood your suggestions. My bad :)
-
-Anyway, please keep the suggestions and recommendations coming :) I'm
-playing with some of your suggestions right now, and waiting for other
-folks' inputs as well. Will send out the next version at some point.
-If there is no fundamental design flaws, I will un-RFC once I've
-addressed all the main issues.
 
