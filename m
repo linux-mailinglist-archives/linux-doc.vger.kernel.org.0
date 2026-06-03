@@ -1,192 +1,149 @@
-Return-Path: <linux-doc+bounces-90704-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90711-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id cX96CgQDIGoZuAAAu9opvQ
-	(envelope-from <linux-doc+bounces-90704-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 12:33:40 +0200
+	id 9CBSH18GIGoMuQAAu9opvQ
+	(envelope-from <linux-doc+bounces-90711-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 12:47:59 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 714A5636A10
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 12:33:39 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 707C8636B76
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 12:47:58 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=CHA6gZNN;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90704-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-90704-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
+	dkim=pass header.d=intel.com header.s=Intel header.b=M2PlSNwR;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90711-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-90711-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=intel.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id BBFC930B3E28
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 10:27:17 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 34AAB3038AC9
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 10:44:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 17A473A4512;
-	Wed,  3 Jun 2026 10:27:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 581FF3B2FEB;
+	Wed,  3 Jun 2026 10:44:03 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A11D8385515
-	for <linux-doc@vger.kernel.org>; Wed,  3 Jun 2026 10:27:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 111D23AB5DE;
+	Wed,  3 Jun 2026 10:44:02 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780482437; cv=none; b=Dpd0BvH7jHf+x+E4HJnQO3xgEpNgQniNbcmBrhm6VlGufLWlLd4SxEE/4SwpyvpYXkVDxltE0bp0/AxkbNe1ZqdIWfA6JlifjXWXGtJ5yqLTnJEUPHnfTBBbjgFTFa2nd2eWnleL8AwtR3IuQaeojOwrdZcabRysg1G2xv3y3zY=
+	t=1780483443; cv=none; b=k9Vcx8TQM5kaPQrkr18wqGhBoYsFya7xbm8TruDK9yDKjb0pjrkOn7mnz8YinhoX9odVxX+W34q4JOOrxUXmftZH0ijk4bUgimJSszLOW1Alqwa46qYi8ngpPRf1O4COhNhIzVGVPMbHPJhneC3h1qC+7bjObk/PV42349epEoY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780482437; c=relaxed/simple;
-	bh=Ark9em2HE+VudWaYABBUGSqA5V6yzvpN+95Dp7fRXKA=;
-	h=From:Date:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=d9s04EfL0D1JNxFBN+qpwOKodaZWleZW1pO7LhCj7fnKOoCyc+4OiSS9vvQ3CRBKTPoCpWRU73XGVk3vDpoKyFbnX/M4XL+roto0rPaPixQbSO+zonaOhL8n8fXXBPErQ1VaOm2SQrydPEYyDQglKidnvdxPC3+0yB9sjbC/NE0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=CHA6gZNN; arc=none smtp.client-ip=209.85.208.52
-Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-68d23396ed3so6867732a12.1
-        for <linux-doc@vger.kernel.org>; Wed, 03 Jun 2026 03:27:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780482434; x=1781087234; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:date:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=H+8/3rc9t6wT4lr8p2D3TwP0o4yczLstnY4MzI08CwE=;
-        b=CHA6gZNN8ODXOaN2r642vRk7BH81kSPVTL1m0AWIn2AeYvT0cIXJooZ3HF+BdFIzOP
-         nimFmTxoHG7q5b4+pIaJ1u2JNmlmRUP0tIeg+KOjnSSkc/LTy9NL5DlUEUa+tm5j7Srj
-         +cuavPNRl4mbw/SSA+uDRWM/oa8rArc2zP8f5/iimugTA3aAE1hAEOW/JMzNzu97T5ud
-         0lkC3KZ9I7ri/o5Uztl3kZS92WSUOqHSKfvNx/LAIf/+tvdG+hFf3Sbt/MReIjk/d7YR
-         AxD5IdPfTEdcuR5Cn720jnxrFASk4BqaOHcklSgFBSCfnf99an7WnnSJtg0EF7BYbBtn
-         j+zQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780482434; x=1781087234;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:date:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=H+8/3rc9t6wT4lr8p2D3TwP0o4yczLstnY4MzI08CwE=;
-        b=PIDagpyUQBa/bnfzYoyQQvuFoYmXuLE4XR+4cMj109ptMx9niXECJE8JFhqZjlfQ7E
-         Yo+RVvRtxI4dWzt3TENJxihai42CnPkUFXoHL4crhY51GBbc8QiM/WB2/XviiM+MlsQv
-         Y+39Cyh+g35tdAvsxAYu1/Fbhq+Pu+UZc4iJjGXnkQj1KHW/91vEketZf91F8MK+XdBQ
-         CZ0ho1yONrJwIwlSuawXNOmbKRYoFG1h0E/wnkF6wPeKp9rvF6uOBMIBVV60Xhzs5Wnx
-         JO2V3XyjfEClYC3RYBnEEDaH2cAzT88RcNuPjVQoiRY8PCoEZZ8T8xjut4n3wqB1PWKv
-         hVrw==
-X-Forwarded-Encrypted: i=1; AFNElJ/pFFhobbg72wf1vZu5mNEJnvaHUIy9UINtrCrPUDHiqOnnnwyuVpbc6Z4sFHRsNgOva5ecjxfugbo=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwmzawEbWaaPf//DsR6Z3r5UZeUGTsLoPE0P4lJrrAWbuOShpM+
-	JGNyrhoYwVxyrO9vvANaSk3dQIeeGoxUVGXnl4LaRz3H8++ZprTEtNKq
-X-Gm-Gg: Acq92OHs/ddbYHmHSGGhMJB69UwnV28nhdZh17iuEEyu9uqdWb+79lko0rVEvAyxj5k
-	Xj5CUXFWOpqz2vEwtXXNK9n4p0NOY/Zmj9fM0LSAREAqIin6WeJDuniIbIqyx3h94r4olaNPxJE
-	c1hOls7Ownb8gdTjNw/+LEOBRi+vMghclY7pZ+H5VioZHT+pgIBltkge/DOeNOATKRxyXVq931Q
-	JpUyuX1Mk04WS/sT0NP890yDgjPEtwFA+g8zkOGqfhoR0XgTHsfwUF4jDgMSzeAYsTijYNjQxxa
-	O+KZYxvjztcQ3IHSoaHTtK0xxaqehAjMAD5k6ij9TRs3xgm+FhxsTvzWRZ51fYWN+ZDiimO64nS
-	rgzwt4wQj5q3PoJJeGi5WwzRKwakn95uGh/oL8gZ6hgT+P0Cq8Ods+tTyi+r1PCow32sRT1jDYu
-	xpzTo+3vEVd6+5Wjt0R65srXriuHK/o8fVk3QakZjF/e698XmYfWMkr7BHvHhWI+YJi48hB0Rlf
-	KhHo0DjRlFxMDSsHnMtfEQO5w+oym7dQH9YPlzrE2DjNFlyUg==
-X-Received: by 2002:a17:907:3890:b0:bd8:f7f6:92a6 with SMTP id a640c23a62f3a-bf0b32b8a7bmr154755466b.23.1780482433765;
-        Wed, 03 Jun 2026 03:27:13 -0700 (PDT)
-Received: from RDEALENC-L01.ad.analog.com (24.206.116.131.netskope-rdns.com. [24.206.116.131])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-bf0559f1464sm130550366b.55.2026.06.03.03.27.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 03 Jun 2026 03:27:13 -0700 (PDT)
-From: Rodrigo Alencar <455.rodrigo.alencar@gmail.com>
-X-Google-Original-From: Rodrigo Alencar <rdealenc@rdealenc-l01.ad.analog.com>
-Date: Wed, 3 Jun 2026 11:27:11 +0100
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
-	rodrigo.alencar@analog.com
-Cc: linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-doc@vger.kernel.org, Jonathan Cameron <jic23@kernel.org>, 
-	David Lechner <dlechner@baylibre.com>, Andy Shevchenko <andy@kernel.org>, 
-	Lars-Peter Clausen <lars@metafoo.de>, Michael Hennerich <Michael.Hennerich@analog.com>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
-	Andrew Morton <akpm@linux-foundation.org>, Petr Mladek <pmladek@suse.com>, 
-	Steven Rostedt <rostedt@goodmis.org>, Rasmus Villemoes <linux@rasmusvillemoes.dk>, 
-	Sergey Senozhatsky <senozhatsky@chromium.org>, Shuah Khan <skhan@linuxfoundation.org>
-Subject: Re: [PATCH v15 02/12] lib: kstrtox: add local
- _parse_integer_limit_init() helper
-Message-ID: <r54csg73lsafo6rff7gew2eardfag3zmwjbm4jl54pjbqf6w7y@axnfog5wpney>
-References: <20260531-adf41513-iio-driver-v15-0-da09adf1c0dd@analog.com>
- <20260531-adf41513-iio-driver-v15-2-da09adf1c0dd@analog.com>
- <ah8yR3Os8NDNll27@ashevche-desk.local>
+	s=arc-20240116; t=1780483443; c=relaxed/simple;
+	bh=FUqkxg9X9pTDyYgUQHCBQQ+9Gx1j2j9g6vbAYFIzuw0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=ZX71N01z7VN9n1kVEe0XJq/uohF0FDmW03f2PmbjDoJ+Q8kQh7eVccuicwusHaKCCjxxke0lO8lLUD4dVvnohPjiGigirU2KLcuZFehUnsPOmjR85RjumtGdgK7p9m7boZ5W2badZLK5Qf9Nq+ovc6O0YcL7cTPeM/NYxm44Xgw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=M2PlSNwR; arc=none smtp.client-ip=192.198.163.18
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1780483442; x=1812019442;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=FUqkxg9X9pTDyYgUQHCBQQ+9Gx1j2j9g6vbAYFIzuw0=;
+  b=M2PlSNwRsgu80KFdUxT9canR9/IGcJ98w9bk1rofFU2Mv6qKumPu4+5/
+   7zw1eRq/9WO6LmgU+r2t6PxQ2ITPO+1tE24QMtWoRfyttvFWFjclBGyM2
+   hS3+zvL5O1JMLSZICGlLKMvav2LcT9oOeg7x/H7OYEtRRVSLiI7iw8J1i
+   aLZwYtVDxQGh2RgoWmy2WxD6tTisPbB4vtgT7qStiN2xlwaJ6MjngmBk5
+   n0iyZxtSg37rkz5RJI5Bcjumprr/9nnnW3zp01f9hj9QjNm+wNMc1E05e
+   j4sZtfvniKvMEObO7hzsivB9TGWs3T/7ioVWT2/TSuVIhSa1GlXrOPRcV
+   w==;
+X-CSE-ConnectionGUID: d2dOyV/WS0m3hedLFIZi4Q==
+X-CSE-MsgGUID: q5xzDj7BRg2D6boG7S3uLQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11805"; a="80429108"
+X-IronPort-AV: E=Sophos;i="6.24,185,1774335600"; 
+   d="scan'208";a="80429108"
+Received: from fmviesa008.fm.intel.com ([10.60.135.148])
+  by fmvoesa112.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Jun 2026 03:44:00 -0700
+X-CSE-ConnectionGUID: oHEVwuRHRL2kLDFxCKvfYg==
+X-CSE-MsgGUID: sHmtmpHGTdyHOlcIrSIkiA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.24,185,1774335600"; 
+   d="scan'208";a="241695747"
+Received: from black.igk.intel.com ([10.91.253.5])
+  by fmviesa008.fm.intel.com with ESMTP; 03 Jun 2026 03:43:57 -0700
+Received: by black.igk.intel.com (Postfix, from userid 1003)
+	id 2C55995; Wed, 03 Jun 2026 12:43:56 +0200 (CEST)
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Jiri Kosina <jikos@kernel.org>,
+	"Daniel J. Ogorchock" <djogorchock@gmail.com>,
+	Petr Mladek <pmladek@suse.com>,
+	Tamir Duberstein <tamird@kernel.org>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-input@vger.kernel.org
+Cc: Steven Rostedt <rostedt@goodmis.org>,
+	Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+	Sergey Senozhatsky <senozhatsky@chromium.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Benjamin Tissoires <bentiss@kernel.org>,
+	Andrew Morton <akpm@linux-foundation.org>
+Subject: [PATCH v2 0/2] vsprintf: add upper case to %p[mM] et alia
+Date: Wed,  3 Jun 2026 12:34:01 +0200
+Message-ID: <20260603104351.152085-1-andriy.shevchenko@linux.intel.com>
+X-Mailer: git-send-email 2.50.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ah8yR3Os8NDNll27@ashevche-desk.local>
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-90704-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER(0.00)[455rodrigoalencar@gmail.com,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-90711-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FORGED_RECIPIENTS(0.00)[m:andriy.shevchenko@linux.intel.com,m:rodrigo.alencar@analog.com,m:linux-kernel@vger.kernel.org,m:linux-iio@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jic23@kernel.org,m:dlechner@baylibre.com,m:andy@kernel.org,m:lars@metafoo.de,m:Michael.Hennerich@analog.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:akpm@linux-foundation.org,m:pmladek@suse.com,m:rostedt@goodmis.org,m:linux@rasmusvillemoes.dk,m:senozhatsky@chromium.org,m:skhan@linuxfoundation.org,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[21];
-	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:andriy.shevchenko@linux.intel.com,m:jikos@kernel.org,m:djogorchock@gmail.com,m:pmladek@suse.com,m:tamird@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-input@vger.kernel.org,m:rostedt@goodmis.org,m:linux@rasmusvillemoes.dk,m:senozhatsky@chromium.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:bentiss@kernel.org,m:akpm@linux-foundation.org,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[andriy.shevchenko@linux.intel.com,linux-doc@vger.kernel.org];
+	FREEMAIL_TO(0.00)[linux.intel.com,kernel.org,gmail.com,suse.com,vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[455rodrigoalencar@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	MISSING_XM_UA(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[andriy.shevchenko@linux.intel.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+];
+	RCVD_COUNT_FIVE(0.00)[6];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,axnfog5wpney:mid,vger.kernel.org:from_smtp]
+	ALIAS_RESOLVED(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,linux.intel.com:from_mime,linux.intel.com:mid,intel.com:dkim,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 714A5636A10
+X-Rspamd-Queue-Id: 707C8636B76
 
-On 26/06/02 10:43PM, Andy Shevchenko wrote:
-> On Sun, May 31, 2026 at 09:30:45AM +0100, Rodrigo Alencar via B4 Relay wrote:
-> 
-> > Add parsing helper that accepts an initial value for the accumulated
-> > result when parsing an 64-bit integer. It reuses current implementation
-> > for _parse_integer_limit(), which now consumes the new function with
-> > init = 0. The diff algorithm would have the documentation header and
-> > prototype of _parse_integer_limit() moved around so it is adjusted
-> > according to guidelines.
-> 
-> ...
-> 
-> > +static unsigned int _parse_integer_limit_init(const char *s, unsigned int base,
-> > +					      unsigned long long init,
-> 
-> Why not name it res...
+The first patch induced by Sashiko rightfully rises a concern on
+potential ABI breakage. To avoid that and allow the user (patch 2)
+to be converted to use unified output introduce %p[mM][...]U for
+printing in upper case. Tests are included and passed.
 
-"res" is short for result and this is an init value. I suppose the compiler
-can optmize towards that kinda of efficiency. I thought of "p" itself to
-carry the init value, and the function would just accumulate, but that would
-change expectations on the function behavior.
- 
-> > +					      unsigned long long *p,
-> > +					      size_t max_chars)
-> >  {
-> >  	unsigned long long res;
-> 
-> ...and drop this one...
-> 
-> >  	unsigned int rv;
-> >  
-> > -	res = 0;
-> > +	res = init;
-> 
-> ...and this one?
-> 
-> -- 
-> With Best Regards,
-> Andy Shevchenko
-> 
-> 
+Changelog v2:
+- added first patch (Sashiko)
+
+Andy Shevchenko (2):
+  vsprintf: Add upper case flavour to %p[mM]
+  HID: nintendo: Use %pM format specifier for MAC addresses
+
+ Documentation/core-api/printk-formats.rst |  3 +++
+ drivers/hid/hid-nintendo.c                | 10 ++--------
+ lib/tests/printf_kunit.c                  |  2 ++
+ lib/vsprintf.c                            | 22 ++++++++++++++++------
+ 4 files changed, 23 insertions(+), 14 deletions(-)
 
 -- 
-Kind regards,
+2.50.1
 
-Rodrigo Alencar
 
