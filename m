@@ -1,50 +1,50 @@
-Return-Path: <linux-doc+bounces-90792-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90793-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id /dpSEG1gIGqh2AAAu9opvQ
-	(envelope-from <linux-doc+bounces-90792-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 19:12:13 +0200
+	id KorLMUNhIGoj2QAAu9opvQ
+	(envelope-from <linux-doc+bounces-90793-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 19:15:47 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A7D8063A11C
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 19:12:12 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D61363A184
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 19:15:47 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=arm.com header.s=foss header.b=hDQrq35u;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90792-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90792-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=arm.com header.s=foss header.b=DG08E6Fj;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90793-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-90793-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=arm.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id A2FE53013EEC
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 17:08:29 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id C0F16305B2E7
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 17:11:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BEA003E9F61;
-	Wed,  3 Jun 2026 17:08:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7719742314C;
+	Wed,  3 Jun 2026 17:11:35 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DFCF93E1CF0;
-	Wed,  3 Jun 2026 17:08:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5038F3E6DF5;
+	Wed,  3 Jun 2026 17:11:34 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780506508; cv=none; b=Ky9zGxubIemsiKwoMXIFfHZ9sScQlWantjRk3rPA52pMmeDtOPDv2ZiBcSMj0x5qwen/6w1PnGkEOA/z4JpyfAph8eTfZwYI6lGqK24MbVOoZPdPmSunEny8VUXDvA6Lil2rAfM3OHuYWkwEPQk7Isx2K9piL+6WE3xZ7gau7dE=
+	t=1780506695; cv=none; b=JYpCLuy6nhkVT8gKmsSW+H38MY1DiCi9TgvnLaHp7k1aO9JpAls8kqEZcP94lzr1idK4Ue+IMuusti05FVMoaSDV+if+wj3tkJWEFa0HElzQPOFWZOQwUEdDxAaOaKH1E0uJAfpMXdauosdyyF1ZLXDQcD3zUH55y1FmkD66N9E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780506508; c=relaxed/simple;
-	bh=coDF+fPSybGXWIT0PI4La9M9bBJpTiUeLEadqpd9b6M=;
+	s=arc-20240116; t=1780506695; c=relaxed/simple;
+	bh=+yb5rkUKMjMfxiwW6lHFJ5FCCgUjN6cCouV3yLYRbRQ=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=KWDwgXVhuqlHGHiUhYkMmdyiRmp50Tcr9HFlTz7JaOWM0T8h/aEnYi17e5mrWEtpA0MwfPwf6/aFaV9goLbo47zto1LX0BsxJajd4vCUcrk4O4awBlwQIs/aIClCb2TnSz+xGw/dhgcVhG53ZIZ8ezrWJsCeurWfLZdaV897Li0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=hDQrq35u; arc=none smtp.client-ip=217.140.110.172
+	 Content-Type:Content-Disposition:In-Reply-To; b=NU6JVRjggKeHMtA5QKECA3RXzgKZE+Xj8H4CYo/3BG6ai7jo4lLNVzFDzBQaqrEkXYGq/1XojHNXSnzFGKBootCyMKLacSaWw9nBK380roUhQIrKq6F750zAZEJATI6j+6SpYPPNDya2SRE7HCdBVk8Clt1+FBzxNWBMn5RApVA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=DG08E6Fj; arc=none smtp.client-ip=217.140.110.172
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3EDED307A;
-	Wed,  3 Jun 2026 10:08:21 -0700 (PDT)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BF421307A;
+	Wed,  3 Jun 2026 10:11:28 -0700 (PDT)
 Received: from localhost (e132581.arm.com [10.1.196.87])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id AC1203F632;
-	Wed,  3 Jun 2026 10:08:25 -0700 (PDT)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 35CE73F632;
+	Wed,  3 Jun 2026 10:11:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1780506506; bh=coDF+fPSybGXWIT0PI4La9M9bBJpTiUeLEadqpd9b6M=;
+	t=1780506693; bh=+yb5rkUKMjMfxiwW6lHFJ5FCCgUjN6cCouV3yLYRbRQ=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=hDQrq35uqqxbId+KX0z9VeYR9TLqfT7Rd3YOedOki1/uGb3zXnGNmUzR/Nbg4dXmk
-	 X10KT1FydA589o0IhbDBfMWVm90xE6/GvHuMlpEDNZLPbANQySa4y3GEYKcZ0l7Ugm
-	 FMNmsOlkraV3tKyqFVnkFiJ8HKA6ptE8o8zIcfKM=
-Date: Wed, 3 Jun 2026 18:08:23 +0100
+	b=DG08E6Fj8GvCOSVDAoErqocNXxHig4S/G4LyqjfkwNsWi08tsMa8+IfK34IBW6ViH
+	 4e7miqlbQsuiDMY7BxAkkVcRE8rbBXtw/Bfp+qolFTVwxAEc/vEX03/7cLlhzE78H5
+	 xWrJhxqjOFKxtcHvPuYK4dc4M8C5fZ3jGHO2Zng4=
+Date: Wed, 3 Jun 2026 18:11:30 +0100
 From: Leo Yan <leo.yan@arm.com>
 To: James Clark <james.clark@linaro.org>
 Cc: Suzuki K Poulose <suzuki.poulose@arm.com>,
@@ -59,13 +59,10 @@ Cc: Suzuki K Poulose <suzuki.poulose@arm.com>,
 	linux-kernel@vger.kernel.org,
 	Arnaldo Carvalho de Melo <acme@redhat.com>,
 	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v2 06/18] perf test cs-etm: Replace unroll loop thread
- with deterministic decode test
-Message-ID: <20260603170823.GA101133@e132581.arm.com>
+Subject: Re: [PATCH v2 11/18] perf test cs-etm: Remove duplicate branch tests
+Message-ID: <20260603171130.GB101133@e132581.arm.com>
 References: <20260602-james-cs-context-tracking-fix-v2-0-85b5ce6f55c6@linaro.org>
- <20260602-james-cs-context-tracking-fix-v2-6-85b5ce6f55c6@linaro.org>
- <20260603140803.GV101133@e132581.arm.com>
- <2f1db2b3-93e8-4c32-b207-304e3a43ce77@linaro.org>
+ <20260602-james-cs-context-tracking-fix-v2-11-85b5ce6f55c6@linaro.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -74,18 +71,18 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <2f1db2b3-93e8-4c32-b207-304e3a43ce77@linaro.org>
+In-Reply-To: <20260602-james-cs-context-tracking-fix-v2-11-85b5ce6f55c6@linaro.org>
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-90792-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90793-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS(0.00)[m:james.clark@linaro.org,m:suzuki.poulose@arm.com,m:mike.leach@arm.com,m:acme@kernel.org,m:namhyung@kernel.org,m:jolsa@kernel.org,m:irogers@google.com,m:aaupov@meta.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:Paschalis.Mpeis@arm.com,m:coresight@lists.linaro.org,m:linux-perf-users@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:acme@redhat.com,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER(0.00)[leo.yan@arm.com,linux-doc@vger.kernel.org];
@@ -106,64 +103,23 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
 	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp,arm.com:from_mime,arm.com:dkim]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:dkim,arm.com:from_mime,arm.com:email,linaro.org:email,vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,e132581.arm.com:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: A7D8063A11C
+X-Rspamd-Queue-Id: 1D61363A184
 
-On Wed, Jun 03, 2026 at 05:01:02PM +0100, James Clark wrote:
-
-[...]
-
-> > > +# Remove open brace lines as they may not be hit depending on the compiler
-> > > +sed -i \
-> > > +  -e '/deterministic.c:8$/d' \
-> > > +  -e '/deterministic.c:15$/d' \
-> > > +  -e '/deterministic.c:23$/d' \
-> > > +  "$tmpdir/script"
-> > 
-> > Is this related to the function definition?
-> > 
-> > I can see the brace lines with change below. It might be more reliable
-> > if adding unused function argument, which can give chance for hit
-> > function entry.
-> > 
-> >    static int function1(void)
-> >    {
-> >        ...
-> > 
-> >        return 0;
-> >    }
+On Tue, Jun 02, 2026 at 03:26:53PM +0100, James Clark wrote:
+> We already test branch output in perf script mode, but then retest it in
+> Perf report mode. This is more of a test of Perf itself than Coresight
+> because Perf uses the same samples to generate both outputs. Also we're
+> already testing instruction output in Perf report mode.
 > 
-> Originally I included the brace lines in the test and it was working even
-> without function arguments, but Sashiko mentioned that they may not always
-> be hit.
-
-I tried Clang to build the program and can see the brace lines are
-missed for function1() / function2().
-
-Does Sashiko mention any reasons causing the issue?
-
-> I think its point was that there is no hard rule about debug symbols for
-> open braces and the behavior might change from one version of the compiler
-> to the next, or whether there is a function prologue or inlining or not etc.
+> Remove this test for a speedup. On the systemwide test also remove the
+> Perf report test because systemwide mode records a lot more data so
+> running multiple tests on it has a big runtime impact.
 > 
-> I don't think it's important to the test at all though? So to err on the
-> side of caution it makes sense to not test for them. Unless there's a reason
-> you think testing for open braces is important? Surely just testing for
-> actual lines of code appearing in a certain order is enough.
+> Signed-off-by: James Clark <james.clark@linaro.org>
 
-As the test program is named as "deterministic", wouldn't we expect the
-test to hit every code line run in the program?
-
-It is fine for me to skip some checks _if_ we know the reason. I dumped
-the disassembly, it shows function entry is a distinguished position
-from the first calculation sentence (same for both GCC and Clang). And
-there have no difference for a function entry after I tweaked the
-function return type from "void" to "int". I still have no clue why
-brace lines are misses.
-
-Thanks,
-Leo
+Reviewed-by: Leo Yan <leo.yan@arm.com>
 
