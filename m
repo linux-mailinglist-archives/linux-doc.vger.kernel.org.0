@@ -1,85 +1,84 @@
-Return-Path: <linux-doc+bounces-90699-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90701-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Q6OAFesBIGqotwAAu9opvQ
-	(envelope-from <linux-doc+bounces-90699-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 12:28:59 +0200
+	id yOZIK2EAIGpXtwAAu9opvQ
+	(envelope-from <linux-doc+bounces-90701-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 12:22:25 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id A04FD636968
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 12:28:58 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 885CD63689C
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 12:22:25 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linaro.org header.s=google header.b=vQTVNg7z;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90699-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-90699-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=linaro.org header.s=google header.b=VBpeRwd4;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90701-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90701-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=linaro.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 44B1F312F70C
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 10:18:38 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id C70A530A27E2
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 10:18:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CE44A46AED7;
-	Wed,  3 Jun 2026 10:17:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 24F5B46AF27;
+	Wed,  3 Jun 2026 10:17:46 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A47245BD6F
-	for <linux-doc@vger.kernel.org>; Wed,  3 Jun 2026 10:17:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F263537B012
+	for <linux-doc@vger.kernel.org>; Wed,  3 Jun 2026 10:17:42 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780481864; cv=none; b=TPob/vSpJgvsHCBNnu7A2vCE+RHoc7AXrfPkJqj1cceXBRCY1ya0Wm5ph1OMzlO8CMFAa+nBQkLBQyvvLjpoZDCcUlKmvkgpc6zTr95essUB5dOBh7Z4vUCWW9pzU/9Gpj8WrGdX5fggxan9sdKTe58lLSOZ7FJVPs7Yiu79OMM=
+	t=1780481865; cv=none; b=izw/C+wjOrb4I+aROIwZaxZ6rDz4U47zYDmH+wxbwNKLQFBImpJ73UyBYb8ELawDuqNXMPwrCUr5O+W2w4WH2x5UAqMWwndWWrMSiO13czCcf/0lHm5WCmKWz6nZyqHGMaREYsnDLJQEEpxve+XGpz5dH1GHNQfIlAd1rjZ4m6Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780481864; c=relaxed/simple;
-	bh=kiF2OTFMHPFSfKgoJlJ6LUHEtfynLX2Gc37z45ui+yM=;
+	s=arc-20240116; t=1780481865; c=relaxed/simple;
+	bh=8LSDPEyYFg9oEMScO6e3DlP1X0ZKaHJzrU3+/imMTps=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=O+4JrldLFCgKd2Omu9OI5YhDpfw21PfQrphfihqSTPVLFI9RCaewz91D/i2sE+tIfdc12AlApNUCcQVIzi12Uy67tL14CoDzJTwp95IOCP35aWQ/ZX8cbgGh6MFH7z9VOilTCxPoRs9XlrzA0lhjzFgfUDV5SKPAu2jKMP2Z/a8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=vQTVNg7z; arc=none smtp.client-ip=209.85.128.50
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4903f7a90d1so114315525e9.2
-        for <linux-doc@vger.kernel.org>; Wed, 03 Jun 2026 03:17:41 -0700 (PDT)
+	 In-Reply-To:To:Cc; b=lqQ1ALUA8omvjNDxrkuewn2Eng7s3/OKgdp2uqDTh2oqYco2BjgJYDc1SjCL5E4qHYhBYkq8KH+d6hUPfJnkUhuGAmnrp5UCXuBbgO2ymmSJszAsjbxBSbuyMlBNIJOR5+2mrJ0QoCS2SZsjVpZWDGoiQSX/XqjpXrACUBlf4s8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=VBpeRwd4; arc=none smtp.client-ip=209.85.128.44
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-490b64c8311so8742595e9.3
+        for <linux-doc@vger.kernel.org>; Wed, 03 Jun 2026 03:17:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1780481860; x=1781086660; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1780481861; x=1781086661; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=wlDlLwXjKsadrJWN67gG6GxzbQU2KCIjPSaxtLGJjnQ=;
-        b=vQTVNg7zStkvZtjOEzfnPUZbwL4C0rRgvMgi05qRx18yWEItjWOvVZdTqukQfZpgxc
-         K19U0Juqq8GZVBTajnkoFI6VWoTL5kealx5w80UzjG8c5t+pyJEbJZ5m/ijhuSWOc0/s
-         vidD+ViK4kZyhAuHeH+lzYmvGpGxzSkRgFKuO8tHEnnFCZ4K+wQFwbClXBFg/yiMPKhA
-         V3lEvoLoo3gBG8QyTsQkd8LEObYCbvjmVDB2Aa9Z1uMDoHlievme8veeKMpgwj/t22th
-         S9nxDecgQ5oY7JOpxFUP9nHcvHJ3Y8/mZbOJNJKDHHA0JrmjZuURn29aL7FVbmUc0oTv
-         mG9A==
+        bh=3CFsmZwqnn6DMPD7vsYdcccNw39lngm7NfIBTUlMynk=;
+        b=VBpeRwd45cPbckMGAt35t3w4Z4+6esStr2Fw4PW7/puLyiucuKIvGsWUWiVqz8LsKR
+         sf9GBjab7BHwK7FU49oAEm/vlems9TxQ78Ho8QmgAbLZztcvD+7yOZw+1v/ZduXGKuNE
+         0vOj3vkUrmZ30VnuoRXZwWIPnvacO6Qc2Z2wYFLmaY+zIXFN9QyxC29ypuzu30y7V163
+         AE/2G9z0jhXxbI09DULYfJ/VDOhZJIK6cDUtFY7PGi3yRVvs01yjPftj7mFH70+xVE5W
+         Varb3UUnQs0zzJezaCg+6f3bV7yFE79Ngzg2vDOW0pyA0yy2h2PIUvbsNcOaeRKy3/eE
+         mA6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780481860; x=1781086660;
+        d=1e100.net; s=20251104; t=1780481861; x=1781086661;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=wlDlLwXjKsadrJWN67gG6GxzbQU2KCIjPSaxtLGJjnQ=;
-        b=XrVKzkehfId4/kxAJClKtfB5ay/0NoqMErBOtcdkHvY/cMS5kOFqDqQpAWEZx3JGe0
-         Lgg3u8lW/O8LIJZeE8g+pTjt1u+LC0sRD0ZOuVxnDSNc86RVhhHOqtp44Up2H42L4pKx
-         LlIDZHBYpnyiGzRJkep8vNWPJf/Pip+gwLMd0+xzprmnbcgHXNEtmDmG6ITWSlnZNbiD
-         FpcIaZiP5gGSp2Ua6rFxMdm+kk6fYSJJtCBXFsdGKtioK83OeuASVsQ+Mma1BbRwFQkN
-         kKRxBZcQTL44B4jkUnp+SC080eYfy1s6ECi39x2C7gMsvEECn1oU90h2IsJL+Z32bKnt
-         3Mqg==
-X-Forwarded-Encrypted: i=1; AFNElJ8BrMeohhRrpmVumzdSHIxp6a5osYU/cQH1GI1RVH4r3lBciZbp5G+sOrLJQbMY0PzmGSPAUCKdzF0=@vger.kernel.org
-X-Gm-Message-State: AOJu0YywBE8Gz+LrSJYlvhLv7Qgo3UQ66+DCaip6eGhSET3+HuaLkzA7
-	iwziCDlruTiSankW8MAokOWVVKSHIeDPh3qYZMd9vp4y0GR0IYP3X8v/Kky7xGUZhjU=
-X-Gm-Gg: Acq92OH/5nDkWfy6/QMXhxHv7p1Wjwt+skkddrSAWaWdNlIMn09kaBHqmuEbOci7I+G
-	Lq/Q+r0g/XVD+lqdN5lL+JMBFD2Jdm0j7Wml3qbPVm82ZLYfiBaxgT3YZ5IQGlhXAOxQsQiYGP9
-	rdN3DFcqss8vLsmmQpBdmGYmu8qpWnbEyfzOhBCvArQgxIQYBxSvW0JM7C684eMYJgzzE4WNKMk
-	eAZNbVVRJ6V6gKPko33TILxLS1ooxOlLocn35kuxNSJi4MBvLuEKIrzZ8uDJhuh64KWBu8fIws5
-	Wanh+bM8X/YjD4tJx5BUnObn03HUJ3N3MYXwUHT0x2+6SRbo/pwo3eSUfOCLykb4mO0rypsz1Dz
-	QxqIp503sFqTnKt3YcpBbHuWiEtUUk4/Coorq4v6fOnZyV6zu1FDLFu+P7FUMvhA0Etye6l/T4u
-	v863szz0tKFx3ejVlvu+4fJ8Of4zYW6ZaAImyOkhR820k=
-X-Received: by 2002:a05:600c:1c13:b0:490:b642:ce29 with SMTP id 5b1f17b1804b1-490b642cea1mr43638275e9.8.1780481860386;
-        Wed, 03 Jun 2026 03:17:40 -0700 (PDT)
+        bh=3CFsmZwqnn6DMPD7vsYdcccNw39lngm7NfIBTUlMynk=;
+        b=Jique91juLDIktndaKdScH6T8dmDQWFuw0O7a/2sa7KDsEGu16cXTFOPkFDc8+eIY3
+         pgY83jXE05FYsx+JMeWk6I3nqncxhheHUz9I9Kll5Scct9cQeYT7iPyqlKKo75MMAiCo
+         6w20Rx81Mqas0P8yajYZNuusw6x9RltUCay2Kwk5bCWq4QWxGAXeLm2IJqjLWcgit2dF
+         j4CL4VQC0FhlH1wHr2cxs+GIP4hT2sMuzcKQ/9v/mvQEMeT9m0BuOCpoUk5UHhvG8GBg
+         4H2rWUEQfRjW66vRLEcN6JXpWOtuNE+G/D0dxBISJguRCOoioWfKCVk+ZFS9wvaSlJID
+         SIPA==
+X-Forwarded-Encrypted: i=1; AFNElJ8RM+yJkYVbewk02ABMyJdrcMkZrDE2NkSz1nIbtJxIC1h6Di1iNMUML02XhLk0nh9gx30VnVNAK6I=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzK71aMcwfp3MWOr+5zgo0nMLN+vpfsn0eOfxXCXtyZO5+ERDh4
+	UGmSQz9FADw/RWO4SsNqNQtLKrhzEbPgiv7acjmgnpJ1i0awn0RnKrhcbuZQp+OkGmY=
+X-Gm-Gg: Acq92OEOUiDXQkRmMCF/QFh9KLeUZo5JRibK+LTv5kMgr2U9FtFJauqt2y2SrKA7rL2
+	Fw3t8Q+3Y8LwKfrPlO98jzqnY/9IoPsMDyCe9FpZg0lEQOJXnLvGU7VThKXBu//YPGWXJ4Isc0a
+	OZiLwcyVTBaOautW2gKKjgreyGspYtEEpjf6mlqaUG5kAEEnvXyxqvNEsfyoKCHgFJ+r0hOglj2
+	oqNYTeet2KCzE+7JloPWsRbwwi1ieYU04XUTKI9aGuqMSMPZtW3d17Spb2SmerdPF9y9UX8F5X6
+	3rGIk9xJWN+k1eS40hFxTWVAchqxoYfdroIsEloqmwPz5+mIIQEMRF8v3fHl39j0q8QlXcrpLth
+	yNDOE/ohGJ0EwT/aHf7VWOYu5QRVkvdnUMJbYSBLgIYeKYwv21ICmpuh6FvVX4fardN5SCHHkOs
+	KT0056bKD9SV/ExbpxW3sGNmNbL17nnjZoQV8CFK7YKsM=
+X-Received: by 2002:a05:600c:a311:b0:490:b724:dbe3 with SMTP id 5b1f17b1804b1-490b724ddb5mr31187235e9.8.1780481861383;
+        Wed, 03 Jun 2026 03:17:41 -0700 (PDT)
 Received: from ho-tower-lan.lan ([185.48.77.170])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-490b63d8205sm38681875e9.11.2026.06.03.03.17.39
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-490b63d8205sm38681875e9.11.2026.06.03.03.17.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 03 Jun 2026 03:17:40 -0700 (PDT)
+        Wed, 03 Jun 2026 03:17:41 -0700 (PDT)
 From: James Clark <james.clark@linaro.org>
-Date: Wed, 03 Jun 2026 11:17:21 +0100
-Subject: [PATCH v3 17/19] perf test cs-etm: Add all branch instructions to
- test
+Date: Wed, 03 Jun 2026 11:17:22 +0100
+Subject: [PATCH v3 18/19] perf test cs-etm: Speed up disassembly test
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -88,7 +87,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260603-james-cs-context-tracking-fix-v3-17-c392945d9ed5@linaro.org>
+Message-Id: <20260603-james-cs-context-tracking-fix-v3-18-c392945d9ed5@linaro.org>
 References: <20260603-james-cs-context-tracking-fix-v3-0-c392945d9ed5@linaro.org>
 In-Reply-To: <20260603-james-cs-context-tracking-fix-v3-0-c392945d9ed5@linaro.org>
 To: Suzuki K Poulose <suzuki.poulose@arm.com>, 
@@ -106,12 +105,12 @@ X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-90699-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90701-lists,linux-doc=lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[17];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
@@ -127,57 +126,54 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[james.clark@linaro.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:mid,linaro.org:dkim,linaro.org:from_mime,linaro.org:email,vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,linaro.org:mid,linaro.org:dkim,linaro.org:from_mime,linaro.org:email,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: A04FD636968
+X-Rspamd-Queue-Id: 885CD63689C
 
-If we reduce the number of samples searched to speed up the test, then
-there will be less chance of hitting one of these branches. Extend the
-regex to cover all branches so the test will always pass.
+We can use exit snapshot to limit the amount of trace to decode here
+too. Also each call to objdump is quite expensive on kcore so limit it
+to 2 samples instead of 30. We only want to see if there is no data at
+all.
 
 Signed-off-by: James Clark <james.clark@linaro.org>
 ---
- tools/perf/tests/shell/test_arm_coresight_disasm.sh | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+ tools/perf/tests/shell/test_arm_coresight_disasm.sh | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/tools/perf/tests/shell/test_arm_coresight_disasm.sh b/tools/perf/tests/shell/test_arm_coresight_disasm.sh
-index 8b5c60a09012..5ee87eb7973e 100755
+index 5ee87eb7973e..2a400fd38a36 100755
 --- a/tools/perf/tests/shell/test_arm_coresight_disasm.sh
 +++ b/tools/perf/tests/shell/test_arm_coresight_disasm.sh
-@@ -38,8 +38,7 @@ cleanup_files()
- trap cleanup_files EXIT TERM INT
- 
- # Ranges start and end on branches, so check for some likely branch instructions
--sep="\s\|\s"
--branch_search="\sbl${sep}b${sep}b.ne${sep}b.eq${sep}cbz\s"
-+branch_search='[[:space:]](bl|b(\.(eq|ne|cs|cc|mi|pl|vs|vc|hi|ls|ge|lt|gt|le|al))?|br|blr|ret|cbz|cbnz|tbz|tbnz|svc|eret)([[:space:]]|$)'
- 
+@@ -43,9 +43,9 @@ branch_search='[[:space:]](bl|b(\.(eq|ne|cs|cc|mi|pl|vs|vc|hi|ls|ge|lt|gt|le|al)
  ## Test kernel ##
  if [ -e /proc/kcore ]; then
-@@ -47,7 +46,7 @@ if [ -e /proc/kcore ]; then
- 	perf record -o ${perfdata} -e cs_etm//k --kcore -- touch $file > /dev/null 2>&1
+ 	echo "Testing kernel disassembly"
+-	perf record -o ${perfdata} -e cs_etm//k --kcore -- touch $file > /dev/null 2>&1
++	perf record -o ${perfdata} -e cs_etm//k --kcore -Se -m,64K -- touch $file > /dev/null 2>&1
  	perf script -i ${perfdata} -s python:${script_path} -- \
- 		-d --stop-sample=30 -k ${perfdata}/kcore_dir/kcore 2> /dev/null > ${file}
--	grep -q -e ${branch_search} ${file}
-+	grep -q -E ${branch_search} ${file}
+-		-d --stop-sample=30 -k ${perfdata}/kcore_dir/kcore 2> /dev/null > ${file}
++		-d --stop-sample=2 -k ${perfdata}/kcore_dir/kcore 2> /dev/null > ${file}
+ 	grep -q -E ${branch_search} ${file}
  	echo "Found kernel branches"
  else
- 	# kcore is required for correct kernel decode due to runtime code patching
-@@ -59,7 +58,7 @@ echo "Testing userspace disassembly"
- perf record -o ${perfdata} -e cs_etm//u -- touch $file > /dev/null 2>&1
+@@ -55,9 +55,9 @@ fi
+ 
+ ## Test user ##
+ echo "Testing userspace disassembly"
+-perf record -o ${perfdata} -e cs_etm//u -- touch $file > /dev/null 2>&1
++perf record -o ${perfdata} -e cs_etm//u -Se -m,64K -- touch $file > /dev/null 2>&1
  perf script -i ${perfdata} -s python:${script_path} -- \
- 	-d --stop-sample=30 2> /dev/null > ${file}
--grep -q -e ${branch_search} ${file}
-+grep -q -E ${branch_search} ${file}
+-	-d --stop-sample=30 2> /dev/null > ${file}
++	-d --stop-sample=2 2> /dev/null > ${file}
+ grep -q -E ${branch_search} ${file}
  echo "Found userspace branches"
  
- glb_err=0
 
 -- 
 2.34.1
