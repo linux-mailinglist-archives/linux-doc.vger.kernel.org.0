@@ -1,249 +1,154 @@
-Return-Path: <linux-doc+bounces-90815-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90817-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id QH6nJPFvIGrK3QAAu9opvQ
-	(envelope-from <linux-doc+bounces-90815-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 20:18:25 +0200
+	id 8nrlKL5vIGrC3QAAu9opvQ
+	(envelope-from <linux-doc+bounces-90817-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 20:17:34 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E26E363A79B
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 20:18:24 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 43BFC63A781
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 20:17:34 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=gPVDFSoI;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90815-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90815-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=YSLKO+Ut;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90817-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90817-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E6B43301E3F1
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 18:14:44 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 974E73029B14
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 18:17:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 717F338D3F1;
-	Wed,  3 Jun 2026 18:14:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AE24E3EDAD2;
+	Wed,  3 Jun 2026 18:17:03 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA72537F738
-	for <linux-doc@vger.kernel.org>; Wed,  3 Jun 2026 18:14:42 +0000 (UTC)
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780510484; cv=pass; b=a6JxchlV7rjhZx/NOgzoklWrzv6ffc2s23qW2BO5LWWKsl5uP3YzmJLr4BVNbora92dNl4otX5Qjc/VSH/1h75S6me6MLg2mtbQvXB21dPCws7jq3ymRjVLD/YFiE3zWIlQnXBwVWKA4GOKQ1vGDZmLqgWj/K85Xw+V0lSes5Lo=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780510484; c=relaxed/simple;
-	bh=rLBQNq80cbBlFmup3PMClX+lcEA1lBPhCm7/9YNkcH4=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=dh0WFDSkbcMBCO3Pm/kbuvBPIp+XSx9g0XRhWzczccx4yZUH+9GQTEa0Wtf0uyYtk7YlPr780NHMXxOnS/QGqtRBM93Bgm9WzHPLI3uTBUkc/inM3AQUZRZ+EIgSRdVh0Wi3B6ev0iehpsobvUjUYQ9rHGTT5kvlGenix8CV7jI=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=gPVDFSoI; arc=pass smtp.client-ip=209.85.221.53
-Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-45eedcdaeaaso4787304f8f.3
-        for <linux-doc@vger.kernel.org>; Wed, 03 Jun 2026 11:14:42 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780510481; cv=none;
-        d=google.com; s=arc-20240605;
-        b=IwiFiBHTDG3YulITtcQOjnHkE1pCuESTyt/FPiJxRv0h8eMKUDq3aj2jj6T807Usf7
-         rtvYN3EzTc6QnMHkX79+AOFrJncvvWmkbH8z+jPpfI4RdaZZwJ4dpJYG2kRohN5mjebl
-         0gLL1RYfYw8hZK+ra9MwKUZR4C0ZEdrP8sBiFsIJfaF6bQoRnKzALRCOqXI13OrwOS8F
-         gZCTQe4mfjePku4cBsQNvvv6yNjaS+tMFV+P3eimB0eZc+dc2gpZaziZClyh4v3NRRio
-         89je78tjQNcq8PfpbTRa3cSfFLofTbAC0gmYM4nZ2BKF03dZi9vWWLVvhgqDskqr/fmD
-         8aew==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=CWVsqrCr+/hgZzs1LZgrRbIPF4JwXDGlPOi2Fa4T98E=;
-        fh=ntE3wfg1Q/ICdDwLP1C9XoDjnwTzVdadH5Ap3GM2wkE=;
-        b=S0QhYtJqn5M+tWBvl0KVsyg+votVG7r4Znp7KJFbQX95X/w/XkueswogmrMwiN83Hl
-         R2JPJxGA3bfwKFwATzcM9wnII3kRyNiTCivKMiyLYZyBnWffpmCLa4BdnYhWOr5qfYvs
-         ypSDnqHwV8BRrTgiDizCIULtyZNtBb5AMZ9T1C4WnWkBCYtp7m1O+oOm1n5joyFGggNX
-         OogxUhDm/IfjQzw2PAzZCeKKkwhOgXSNwBrCmfpLGQlNW4s1k7PdDYtey12uDMTsCtOG
-         b22YshiZ2Bd+KeRMNXz6ki4sDcs706Xbfc31EfIRkWnIWsxsp7wEfr2Ez1joe8dPpoPH
-         wRYQ==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780510481; x=1781115281; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=CWVsqrCr+/hgZzs1LZgrRbIPF4JwXDGlPOi2Fa4T98E=;
-        b=gPVDFSoIzNsbOUpsWtHPE23zrRNnz+IpeVbWK3igfTKFYQgONdxnkLoTWcSR9wCeH7
-         fbJQWMQrEsjUcACsoyUSAJGGM2vF7D0Ik4wwGvbNFcrpu6fcV5r/c7g8HDTvtQcnxYr7
-         PQ++c8OWLIH+/RXipJGcqEsPPmAaBwlL39jxBRVLvU5j9BFy3ziqogWRSRBfFxqoThXE
-         XtwN8ijBEiZhnqV2MUxJzolDJNVh8U47CYaZOEXv4pGPP5uQWCorZoh/pxhZOx7zy4Zu
-         5e7EOGvW8N48be7DH6npbDx97zfq+kwovKAg+CI3LaLNVcJWLbIvIFuwx6iOxQuaGUyX
-         NnlQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780510481; x=1781115281;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=CWVsqrCr+/hgZzs1LZgrRbIPF4JwXDGlPOi2Fa4T98E=;
-        b=DiDXB7A43Y7JT5sidHXiQg4+UfjAA5FlK2TGXbPCzR3QpO8AF6fuU4FePpJUEP31TM
-         8osktNp7LDrdozywqqjlde98/X72s5Td5GsWyCHHPcXNRyRxobfDVL1qLxVXCXD1VIR+
-         kXAt6DY9qM1ybn40PAr7UeNim6UYgl3DvMHAcw6DNThz+MFMg/rtT86j3Iy7E5uXr6O8
-         DSI/sculLDLlbp3tTnfVMXnq/4N+4/OUaV7Z5DciXRSnN4PDs5pMohAq/xwvqvCppK29
-         Cn6WhisiPUdqtVmKHLSZh3OpWY5WWMOkEPsmqunjl8o7T84pjWdneVJjUSy66R5Rzve5
-         BYWQ==
-X-Forwarded-Encrypted: i=1; AFNElJ92VYLZWZFcujy7DKbU2cCaqOybLM1aaqCDHDrg7Uugk9t+eBx6HfFgAHgNJIJ+CcwdkkGtxG6KYLM=@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywy++lzpSlhiz2dgXFgtXFAsdXkT5bZI0dcWJykjIc1c2VwPrcH
-	2QCrPg/XUPTu/ebXey8K/z5//G2UrmFg1b4XEClXxbuGDzkk6le+n/qkW2Uv+DQaQ41Ni6+U5ve
-	nrG6ySNovo2XG9327NpPu5uPNrqyrFyc=
-X-Gm-Gg: Acq92OHeti8S9Suoyi6TNB79JU3GwBhmH1SyaqJzQ+K6LmMHSFQiZTmxGkalPu7COHN
-	lrqRbpNOvZOOujaomJTEz0fHKOEiHvJ8ovedkECBStf7UmGIDsEdlsEvQE4Xm9MOJNGKtdY8yNT
-	kvtMhEcduZ2REQ+1q8L2moQ6BZtOKnGoM9uZGCMcFt2b4wsxsTQ3Koi29y9Z9cMRf5pUQFf+vTA
-	NCVN7x6HJdUsDijL/DmU4bR3WBLxGMvW/KqbiHh9i74zuGaMndJqnkLNLjavLYvfFEIVz93jwyP
-	OJMSmsGpmw9m9rqx2CC5ynSxm6WBNCwRTCQwVz52Aa0H5r/2KQ==
-X-Received: by 2002:a5d:4989:0:b0:45d:41e0:467b with SMTP id
- ffacd0b85a97d-4602178af87mr5170086f8f.3.1780510481099; Wed, 03 Jun 2026
- 11:14:41 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12A773E4C61;
+	Wed,  3 Jun 2026 18:17:00 +0000 (UTC)
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1780510623; cv=none; b=jUA7S0NgdJIqryKWK2bQGwSyqa5vsvyQ3Yv/ejlJ95cgPCOCw7wUYN44fD9kVfUzSfaiO9rJGwRpn87p77X+ezbgQGKMoxkSZPZGz/aunIkjzdOAVrspOBCLoIG4raiHxL/vfBvRaUSJoHs4Tak3vmZbgGKIAeFi4+iiNINKmYE=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1780510623; c=relaxed/simple;
+	bh=iRiWIraVsGgmw29IifxJAhl8Y674/tWWwsgW74JyFCw=;
+	h=From:To:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=MRdnwhZE4NBW5ZFDxKL7nQFUXKEdpUSFrc3QPxzyeSZWYOd9gaMHs+0yIEq/4ICAPIcrDQrZvGk/SaUgP10Dtg5NmT8R99L2tYIqDdo9WP0DVYnwdW3656/uPrDZhxmW2+n8o7i+5IHmktuSra6x498rZNE5/t3+DDNmjU0u6UQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YSLKO+Ut; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5594A1F00893;
+	Wed,  3 Jun 2026 18:16:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1780510620;
+	bh=nxQ22KcJJP7bVCdFVSScm4T4WK7bH7Ys2cqAdls6sJQ=;
+	h=From:To:In-Reply-To:References:Subject:Date;
+	b=YSLKO+Uty9Cb7gb0+g+YURmGlAfgJDL1bkZ3upC7pCzRW257ES511XK59cObIdiLp
+	 HQLBUG3vDvVuHsHby5F8udil1Anpb1xIEsfKK6txziKZubb3wr6xFoqqDdA6qeIGi+
+	 IlXPtzuptxb2JFv/3bKMtDLvilfFAJF/lDPbXMlmFK3r0ygLOVQbjzEtiVBB0FTZuH
+	 IhdHRNMtb/2RYH0gjiarVrBSivGLVN6SJ5wOArrtGfyPFukeCboLnQBsBtzGIKDjda
+	 SC1r3BaxKQTAvqhGzJ/IlLGkLhuWSL9lCQwPbyV0EZsAaZEv0ok9PIFUHxdq9AFQho
+	 nY/BZsoKlHezw==
+From: Mike Rapoport <rppt@kernel.org>
+To: linux-kselftest@vger.kernel.org, shuah@kernel.org, 
+ akpm@linux-foundation.org, linux-mm@kvack.org, skhan@linuxfoundation.org, 
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, corbet@lwn.net, 
+ dmatlack@google.com, kexec@lists.infradead.org, pratyush@kernel.org, 
+ skhawaja@google.com, graf@amazon.com, 
+ Pasha Tatashin <pasha.tatashin@soleen.com>
+In-Reply-To: <20260603154402.468928-1-pasha.tatashin@soleen.com>
+References: <20260603154402.468928-1-pasha.tatashin@soleen.com>
+Subject: Re: [PATCH v7 00/13] liveupdate: Remove limits on sessions and
+ files
+Message-Id: <178051061274.867224.3632796902576075261.b4-ty@b4>
+Date: Wed, 03 Jun 2026 21:16:52 +0300
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260526114601.67041-1-jiahao.kernel@gmail.com>
- <20260526114601.67041-3-jiahao.kernel@gmail.com> <CAKEwX=MQe_KFZe2vBXQYh0aa-x+E8AzNwmyjJGJk4tDoS9ML3A@mail.gmail.com>
- <aho_VtLCmIRsNyvO@google.com> <6deeaea7-3cd1-4403-29fc-d2dc55c297f8@gmail.com>
- <aiBqzOtEv5iAC_qC@google.com>
-In-Reply-To: <aiBqzOtEv5iAC_qC@google.com>
-From: Nhat Pham <nphamcs@gmail.com>
-Date: Wed, 3 Jun 2026 11:14:29 -0700
-X-Gm-Features: AVHnY4KZKWD3d0SaeD3tNM3fVPW6StZjCUd8WFWR-F3KM2I_lnoM-TIgG8bLJbk
-Message-ID: <CAKEwX=OhxUxRCEfvZMnWzXy=Fa4jgzL3DuP-RmaVzdK65m4bew@mail.gmail.com>
-Subject: Re: [PATCH v3 2/4] mm/zswap: Implement proactive writeback
-To: Yosry Ahmed <yosry@kernel.org>
-Cc: Hao Jia <jiahao.kernel@gmail.com>, Johannes Weiner <hannes@cmpxchg.org>, 
-	akpm@linux-foundation.org, tj@kernel.org, shakeel.butt@linux.dev, 
-	mhocko@kernel.org, mkoutny@suse.com, chengming.zhou@linux.dev, 
-	muchun.song@linux.dev, roman.gushchin@linux.dev, cgroups@vger.kernel.org, 
-	linux-mm@kvack.org, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
-	Hao Jia <jiahao1@lixiang.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.15.2
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+X-Spamd-Result: default: False [-1.66 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:yosry@kernel.org,m:jiahao.kernel@gmail.com,m:hannes@cmpxchg.org,m:akpm@linux-foundation.org,m:tj@kernel.org,m:shakeel.butt@linux.dev,m:mhocko@kernel.org,m:mkoutny@suse.com,m:chengming.zhou@linux.dev,m:muchun.song@linux.dev,m:roman.gushchin@linux.dev,m:cgroups@vger.kernel.org,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jiahao1@lixiang.com,m:jiahaokernel@gmail.com,s:lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-90815-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:linux-kselftest@vger.kernel.org,m:shuah@kernel.org,m:akpm@linux-foundation.org,m:linux-mm@kvack.org,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:corbet@lwn.net,m:dmatlack@google.com,m:kexec@lists.infradead.org,m:pratyush@kernel.org,m:skhawaja@google.com,m:graf@amazon.com,m:pasha.tatashin@soleen.com,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER(0.00)[nphamcs@gmail.com,linux-doc@vger.kernel.org];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	FORGED_SENDER(0.00)[rppt@kernel.org,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90817-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[nphamcs@gmail.com,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[gmail.com,cmpxchg.org,linux-foundation.org,kernel.org,linux.dev,suse.com,vger.kernel.org,kvack.org,lixiang.com];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rppt@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,lixiang.com:email]
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: E26E363A79B
+X-Rspamd-Queue-Id: 43BFC63A781
 
-On Wed, Jun 3, 2026 at 10:58=E2=80=AFAM Yosry Ahmed <yosry@kernel.org> wrot=
-e:
->
-> On Wed, Jun 03, 2026 at 07:22:36PM +0800, Hao Jia wrote:
-> >
-> >
-> > On 2026/5/30 09:40, Yosry Ahmed wrote:
-> > > On Fri, May 29, 2026 at 12:58:09PM -0700, Nhat Pham wrote:
-> > > > On Tue, May 26, 2026 at 4:46=E2=80=AFAM Hao Jia <jiahao.kernel@gmai=
-l.com> wrote:
-> > > > >
-> > > > > From: Hao Jia <jiahao1@lixiang.com>
-> > > > >
-> > > > > Zswap currently writes back pages to backing swap reactively, tri=
-ggered
-> > > > > either by the shrinker or when the pool reaches its size limit. T=
-here is
-> > > > > no mechanism to control the amount of writeback for a specific me=
-mory
-> > > > > cgroup. However, users may want to proactively write back zswap p=
-ages,
-> > > > > e.g., to free up memory for other applications or to prepare for
-> > > > > memory-intensive workloads.
-> > > > >
-> > > > > Introduce a "zswap_writeback_only" key to the memory.reclaim cgro=
-up
-> > > > > interface. When specified, this key bypasses standard memory recl=
-aim
-> > > > > and exclusively performs proactive zswap writeback up to the requ=
-ested
-> > > > > budget. If omitted, the default reclaim behavior remains unchange=
-d.
-> > > > >
-> > > > > Example usage:
-> > > > >    # Write back 100MB of pages from zswap to the backing swap
-> > > > >    echo "100M zswap_writeback_only" > memory.reclaim
-> > > >
-> > > > Hmmm, so this 100MB is the pre-compression size? i.e if this 100 MB
-> > > > compresses to 25 MB, then you're only freeing 25 MB?
-> > > >
-> > > > I'm ok-ish with this, but can you document it?
-> > >
-> > > That's a good point. I think pre-compressed size doesn't make sense t=
-o
-> > > be honest. We should care about how much memory we are actually tryin=
-g
-> > > to save by doing writeback here.
-> > >
-> > > The pre-compressed size is only useful in determining the blast radiu=
-s,
-> > > how many actual pages are going to have slower page faults now. But
-> > > then, I don't think there's a reasonable way for userspace to decide
-> > > that.
-> > >
-> > > I understand passing in the compressed size is tricky because we need=
- to
-> > > keep track of the size of the compressed pages we end up writing back=
-,
-> > > but it should be doable.
-> >
-> > Agreed. Using pre-compressed size is probably easier to implement. IIRC=
-,
-> > interfaces like ZRAM writeback_limit are also calculated using the
-> > pre-compressed size.
-> >
-> > I'll clarify this in the documentation in the next version.
-> >
-> > >
-> > > If we really want pre-compressed size here, then yes we need to make =
-it
-> > > very clear, and I vote that we use a separate interface in this case
-> > > because memory.reclaim having different meanings for the amount of
-> > > memory written to it is extremely counter-intuitive.
-> > >
-> > Agree. This would indeed break the semantics of memory.reclaim. I will =
-use a
-> > separate interface for proactive writeback in the next version.
->
-> But doesn't it make more sense to specify the compressed size, which is
-> ultimately the amount of memory you actually want to reclaim.
->
+On Wed, 03 Jun 2026 15:43:49 +0000, Pasha Tatashin wrote:
+> liveupdate: Remove limits on sessions and files
+> 
+> Hi all,
+> 
+> This series removes the fixed limits on the number of files that can
+> be preserved within a single session, and the total number of sessions
+> managed by the Live Update Orchestrator (LUO).
+> 
+> [...]
 
-I personally prefer compressed size to pre-compressed size. That's
-kinda what user cares about, no?
+Applied to next branch of liveupdate/linux.git tree, thanks!
 
-One thing we can do is let users prescribe a compressed size, but
-internally, we can multiply that by the average compression ratio.
-That gives us a guesstimate of how many pages we need to reclaim, and
-you can follow the rest of your implementation as is (perhaps with
-short-circuit when we reach the goal with fewer pages reclaimed).
+[01/13] liveupdate: change file_set->count type to u64 for type safety
+        commit: 81fbb909ec07868415f6b2269922c8d1cc6a215a
+[02/13] liveupdate: avoid mixing cleanup guards with goto in luo_session_retrieve_fd
+        commit: 6af06e11bd48bdefaf9381f6ff0bd65b1e5d98ab
+[03/13] liveupdate: centralize state management into struct luo_ser
+        commit: d376e4b55c9a0adb3e701c7eaff21d9ba655a1c6
+[04/13] liveupdate: register luo_ser as KHO subtree
+        commit: cf071b3536df76a2a75b83ca1fe8c043824352c3
+[05/13] liveupdate: Extract luo_file_deserialize_one helper
+        commit: 51b71af922a7145e63fdc0cab075d681ecd89e4a
+[06/13] liveupdate: Extract luo_session_deserialize_one helper
+        commit: be9d10d167652e11283cd07c7daf187222808db1
+[07/13] kho: add support for linked-block serialization
+        commit: 0349ff2887059112ce06831ab29aec47a2a7285a
+[08/13] liveupdate: defer session block allocation and physical address setting
+        commit: b5a58a922e6f2f9f40faddd8e0e1fe3ce0ea9c56
+[09/13] liveupdate: Remove limit on the number of sessions
+        commit: 2a441a14c2c03b39d1c89438dd28cef9d8fa57d5
+[10/13] liveupdate: Remove limit on the number of files per session
+        commit: 1d1153097f4dd417e2ea00404edec9fbd1d88f28
+[11/13] selftests/liveupdate: Test session and file limit removal
+        commit: 5ba3f30643cbdd79fb82e525aa1ca55b62fcc7ac
+[12/13] selftests/liveupdate: Add stress-sessions kexec test
+        commit: 3432292fb9130191dca57953941f7ae3888d52d8
+[13/13] selftests/liveupdate: Add stress-files kexec test
+        commit: 46429a15a6dfe522880d5085f1f6999357758872
+
+tree: https://git.kernel.org/pub/scm/linux/kernel/git/liveupdate/linux
+branch: next
+
+--
+Sincerely yours,
+Mike.
+
+
 
