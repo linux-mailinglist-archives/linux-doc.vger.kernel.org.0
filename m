@@ -1,53 +1,53 @@
-Return-Path: <linux-doc+bounces-90740-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90741-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id B+KqNYwpIGocyAAAu9opvQ
-	(envelope-from <linux-doc+bounces-90740-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 15:18:04 +0200
+	id L8nvN+QqIGpeyAAAu9opvQ
+	(envelope-from <linux-doc+bounces-90741-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 15:23:48 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A517637F67
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 15:18:04 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id DDFA3638025
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 15:23:47 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=D8MaenF6;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90740-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90740-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=MQIQPSGp;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90741-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90741-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id B3ACE300D70B
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 13:09:11 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 1489D3049727
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 13:10:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EAFF047ECD7;
-	Wed,  3 Jun 2026 13:09:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6143D480DC4;
+	Wed,  3 Jun 2026 13:10:32 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4E6D376A19;
-	Wed,  3 Jun 2026 13:09:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1F8743E48C;
+	Wed,  3 Jun 2026 13:10:30 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780492150; cv=none; b=WDk7nRtlQ2yojk1MZrpCCckzzDWDMo+5iuWKcfJY4+I8oiok81W+szd9tQ8Fk+ZFG9xZQcDgCBL0th96B1RFYViPT6ry1RVJ4a8H1x/4DxfwFN3FK0euTwI91D9Lp73XkjeS3cUQgrard1Xu3RTLAZ3Lys3E2OiEIYXmVqlkQrM=
+	t=1780492232; cv=none; b=LejtRZBGLn5Gl78wDCLQiL7F0avI7Ad+Yo7mL9K5gJptgMI6lFhIUmHTzXjLVDovhgpGW3XL4gL+0kf0vystXowBYyFUxKwRwDenipL4t3buT9lzJ9dy7Q3Vl03+4JTRN5ju6Fvyup88hmO81Crm9SMuF+E7+HdCrAKinNrhG9g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780492150; c=relaxed/simple;
-	bh=wuL+4kqU6PL2VwrnCobYN6yV8hR6vJ87IyLALivq5Gw=;
+	s=arc-20240116; t=1780492232; c=relaxed/simple;
+	bh=aA+jQZLEe4zTDyHZE+wP2UMZnQvSbK3p1fe1IgcdCzM=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=RSvonsiR/0Al34nsLiRCFt9MrACEdP9spH5+gr4ovbhV/nhWVqM/3of6vJiOOJQG5iZqnjguypAcYe+6N1WUw+hA5rYjUt7D+tS94IALfHWScWH5NJOn7qQW6vQwhLC6kwmF+7rEBXcVRBrjapTmRYgUSRmXLShmnReUjnavTRs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=D8MaenF6; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 13DC31F00893;
-	Wed,  3 Jun 2026 13:09:02 +0000 (UTC)
+	 In-Reply-To:Content-Type; b=OPGpsCOVDTbPJ3y/GM81t+cqaWWXrNYQ7k/uMRws9TeW9qQu9LFGt6XfrXhT2HFzcafETArhk7iB+wpSCWem+UovSByMNzGb0aLdWr9ebfenHfhkONkHJpBQHT7t4UKwexGQ9mdUt6jcDP53aTVetSbAZhodXy+NNgS5fxvWpp8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MQIQPSGp; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 88E711F00898;
+	Wed,  3 Jun 2026 13:10:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1780492149;
-	bh=1iCrnVesN90WLEg/F7QmTL80caigGa4JNAxhwpSDrHg=;
+	s=k20260515; t=1780492230;
+	bh=xfGW+mRFGm8otcTxNVwZMIMPut6TCa61gmVUrx4IZyY=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=D8MaenF6jTRpvWgR1BIHwbjMyumZJD4IBjMjp5MkI/92JV3hT+hKiYtSgDsvV1q9N
-	 hXiM1XVArrDY7yF57C9dA3LiWKvmLVTow9RCfNvpH5bIVTA/+6WkQxDu5fWSbcpRSf
-	 BJ/PRK2SZ8TXx+kiO6aGoUKamOhBkTtOuaG7Xt4YTBCwEZ3SglxwO3+prtnADkL7Zf
-	 Wc12Ml5766LObLu4FD8gsYzJMRt1frHvsO2iSwOvgG3bGDJMsbq+vRoBVgyNABp30k
-	 MYq4csbxm5nEOM78h9nFB+yvHuWTUJenl1Zmf+nImhjL/dgBRSb67zTUPKh7WjszhU
-	 YoFKnlRyVLK9Q==
-Message-ID: <fc0cf75c-5740-4e2e-8b21-ab59c8517ba4@kernel.org>
-Date: Wed, 3 Jun 2026 15:09:01 +0200
+	b=MQIQPSGpw5I9loYGFQLcQY7krurq0Y7ApV7YAwoDGRJoFsVw+6xjNfuxELTSJH5Cj
+	 aG/6mkFsGEqOLHl3wbpTZQpORpa12t6ssxCVueCuAkjqRefy8EmoULjnS6PbDtsPSE
+	 eClL4KWs4bPMDBYnZOcju1cH17iKUPZMFygJY+pCAasLIQLsVc5ChIEYQFSRqAtmyW
+	 JTeiLJ+Uz53GdqGavxHDurOtMvZUMgwVdKpXenWQMH3YkUj7CE7+uBrBYgGr0nDxSk
+	 S3DLl5R/FC6IGUBjIZi6DNeORcBDiM1EeWOEn1dWkGBCBiTByK/qDHfxFIDrA1Svqc
+	 OBE/1RR2+8dqw==
+Message-ID: <8948ca8f-d872-4fe2-8887-568eb0d0e65f@kernel.org>
+Date: Wed, 3 Jun 2026 15:10:21 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -55,7 +55,8 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/3] mm: rename swap.c to folio_lru.c
+Subject: Re: [PATCH v4 1/3] mm/swap: colocate page-cluster sysctl with swap
+ readahead
 To: Jianyue Wu <wujianyue000@gmail.com>,
  Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>,
  Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>,
@@ -73,7 +74,7 @@ To: Jianyue Wu <wujianyue000@gmail.com>,
 Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
  linux-doc@vger.kernel.org
 References: <20260603-ch-swap-series-plus-folio-lru-cleanup-v4-0-ce0219e100d9@gmail.com>
- <20260603-ch-swap-series-plus-folio-lru-cleanup-v4-2-ce0219e100d9@gmail.com>
+ <20260603-ch-swap-series-plus-folio-lru-cleanup-v4-1-ce0219e100d9@gmail.com>
 From: "David Hildenbrand (Arm)" <david@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=david@kernel.org; keydata=
@@ -120,14 +121,14 @@ Autocrypt: addr=david@kernel.org; keydata=
  3iyY2Nsd7JxfKu1PRhCGwXzRw5TlfEsoRI7V9A8isUCoqE2Dzh3FvYHVeX4Us+bRL/oqareJ
  CIFqgYMyvHj7Q06kTKmauOe4Nf0l0qEkIuIzfoLJ3qr5UyXc2hLtWyT9Ir+lYlX9efqh7mOY
  qIws/H2t
-In-Reply-To: <20260603-ch-swap-series-plus-folio-lru-cleanup-v4-2-ce0219e100d9@gmail.com>
+In-Reply-To: <20260603-ch-swap-series-plus-folio-lru-cleanup-v4-1-ce0219e100d9@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -136,7 +137,7 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	FORGED_RECIPIENTS(0.00)[m:wujianyue000@gmail.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencent.com,m:shikemeng@huaweicloud.com,m:nphamcs@gmail.com,m:bhe@redhat.com,m:baohua@kernel.org,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:hannes@cmpxchg.org,m:mhocko@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:hughd@google.com,m:baolin.wang@linux.alibaba.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER(0.00)[david@kernel.org,linux-doc@vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-90740-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90741-lists,linux-doc=lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[29];
 	FREEMAIL_TO(0.00)[gmail.com,linux-foundation.org,kernel.org,tencent.com,huaweicloud.com,redhat.com,lge.com,linux.dev,google.com,cmpxchg.org,infradead.org,suse.com,linux.alibaba.com,lwn.net,linuxfoundation.org];
 	MIME_TRACE(0.00)[0:+];
@@ -153,29 +154,33 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 4A517637F67
+X-Rspamd-Queue-Id: DDFA3638025
 
 On 6/3/26 15:05, Jianyue Wu wrote:
-> Rename mm/swap.c to mm/folio_lru.c so the filename better matches
-> the code's main responsibility.
+> page_cluster and the vm.page-cluster sysctl are only used by swap-in
+> readahead in swap_state.c. Move them out of swap.c together with
+> swap_readahead_setup(), and make page_cluster static to that file.
 > 
-> This keeps the implementation split from swap-specific code without
-> changing the published LRU helper interfaces.
+> Rename swap_setup() while moving it as well. The helper is internal to
+> MM and now only sets up swap readahead defaults and its sysctl hook, so
+> the more specific name matches its reduced scope.
 > 
-> Update MAINTAINERS and the remaining mm/swap.c documentation references
-> after the rename.
+> swap_setup() previously lived in mm/swap.c, which is built
+> unconditionally, so the vm.page-cluster sysctl was registered also on
+> CONFIG_SWAP=n kernels. swap_readahead_setup() is now a no-op stub when
+> CONFIG_SWAP is disabled, so vm.page-cluster is no longer registered
+> there. The knob only tunes swap-in readahead and had no effect without
+> swap.
 > 
 > Suggested-by: Baoquan He <bhe@redhat.com>
-> Suggested-by: David Hildenbrand <david@kernel.org>
+> Suggested-by: Barry Song <baohua@kernel.org>
 > Signed-off-by: Jianyue Wu <wujianyue000@gmail.com>
 > ---
 
-We can later decide to rename it to folio.c But maybe it makes sense to keep
-this LRU batching magic in its own file.
 
 Acked-by: David Hildenbrand (Arm) <david@kernel.org>
 
