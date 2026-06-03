@@ -1,84 +1,84 @@
-Return-Path: <linux-doc+bounces-90691-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90696-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id IVYCA/oAIGp1twAAu9opvQ
-	(envelope-from <linux-doc+bounces-90691-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 12:24:58 +0200
+	id SoHKJQcBIGp6twAAu9opvQ
+	(envelope-from <linux-doc+bounces-90696-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 12:25:11 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6AC9A6368F2
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 12:24:57 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id EDA50636900
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 12:25:10 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linaro.org header.s=google header.b=OcZLfZdW;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90691-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90691-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=linaro.org header.s=google header.b="pij6g+/1";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90696-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-90696-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=linaro.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 9E972311B273
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 10:18:00 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id D48B93127939
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 10:18:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DB96337C935;
-	Wed,  3 Jun 2026 10:17:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 88A604657C0;
+	Wed,  3 Jun 2026 10:17:42 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 71B373A6B6D
-	for <linux-doc@vger.kernel.org>; Wed,  3 Jun 2026 10:17:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8997737B012
+	for <linux-doc@vger.kernel.org>; Wed,  3 Jun 2026 10:17:37 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780481859; cv=none; b=RVfUPXbz1nQ38UV/QMuAfo96cPlyix1ji+iVoCFvuqJB3zFndkWMZClQBL02TvcAdGVQxgL0UU/2qTZ1Y/+0vlYBFORo9UlS6yJrza1nZ9TLe/v5jHU3sn3/x7niPDz3RUcETIYa8wjLnTGMqs82XQGCnAc98FaLExMsLQz1Ii8=
+	t=1780481862; cv=none; b=nD1c4Ghn1mSYuBwHedi9opMO+xeidDf83IO+jOttzkqYPvS9jKKKyw9xu5jj/wg7XdRF9i3r+adcMRaCYvgTBgpBfBzGOFatVvblf/XkNlYt/6HD/KC/J4D/Gvhg9A03kK4IMqb0QCLVWG5dbudzb4FLpM4dni2DweJ2YpNRW0Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780481859; c=relaxed/simple;
-	bh=T/G2GHn/7fUMe7/PnmdOHhquh1KwWwdOujJXllzzUEA=;
+	s=arc-20240116; t=1780481862; c=relaxed/simple;
+	bh=bBCpsHP6pxxOKGXqUqpPdX+SmhYJI6iRxQWCSYCtC/U=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=LHkIG36DOnoNaoKmCisnv3vjJdGvbPeQ1kaRRiM5XrBBHmThkOh3Nc5c+JoNozlbbAXZxKEon1sZghdUSRcETJypSogp+o1rQcOdksCjaZ0MyGwAAg8RELhrSus42IGXp2VKAcs7mkHhp7fU8OnpK9LkHhojnOOGbqauuql0v3Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=OcZLfZdW; arc=none smtp.client-ip=209.85.128.45
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-490a76757e5so27429655e9.2
-        for <linux-doc@vger.kernel.org>; Wed, 03 Jun 2026 03:17:36 -0700 (PDT)
+	 In-Reply-To:To:Cc; b=VhZZ7t4bluXPAY6qZfl5yteJsnvixN3udZH9D9k+kPsvfsb5BiLzv50hcip5OvioosPfJuir8sZmQsXiwI+U40SjpO3iygpOimGP6bvnmW9YEKpzzXxGFXf8yjPMltLZA4Y9SvuJJBJZxjViZz+zl4TEE5Zbkj7UMMifQupFjnI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=pij6g+/1; arc=none smtp.client-ip=209.85.128.49
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-490b12270b3so12542855e9.1
+        for <linux-doc@vger.kernel.org>; Wed, 03 Jun 2026 03:17:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1780481855; x=1781086655; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1780481856; x=1781086656; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=CWgAW+orRpeoFszPA6ybNAPpRullqPhLMJ72GoaGas4=;
-        b=OcZLfZdW3Dkmb4vic1r5a18+QzSWtcl9J9p8eSinsktFZivX2elXBDwUyatrz+eQxD
-         mBwalMpNowGsOTK6jHNDDVkrre42fK4vXHFhoWouuTY5vsl68jbP1J5N3fWm/dKE+YJm
-         aEs7Z3zCbgZayxVCM2TlNNw69qAvJe/ywLqq4f7+z8bj9qxINFQnbIVzUEjMlr2yDk0X
-         GfyeU6aXXENjpatNF+R+CagHCM8DZIqSm2K+UlQg5+C5iCBmkxTokrDXOf1Bvba3vTCF
-         O1YLEt5+RvqkR+srxyOSHGb8LNpBDaVDXJc9HMPCkgN4roeDWV9PEas+GIV8yDQt56XC
-         DuUQ==
+        bh=t/tFhBvkW5lHa9f/mqQAj4otAbWa3BZTThp9kdngA0w=;
+        b=pij6g+/1MGujnNTCknim+cjuFNgO4He/hv4aeOFN5348PZmqBIvc4RojIJadRTNXz8
+         n8loZ3TCZiW2mfD3E7XOJnRRx5maXZ40CnUQPxKYIXyXWQNE9/55AuG5+tnSxE0g2N8Z
+         2xNxhOB0WKKL+KbEG2kluXhgUq/V7XWMbmHWhEvysnwIyFF3UBUjdGIrhD4QpIRpWJY1
+         HjAh70y4+NgXeN50VZt5sGGG88pDnO3vYAQDkHn83Ka6/SKbkzMVC5BvvWZHp3gKF865
+         6i7YI9iNlRgoCo8XTduGjRvvxChFoSas53Wjb+kMblRTuc4euVRPSzVcW9qsRTFKpMSC
+         dIbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780481855; x=1781086655;
+        d=1e100.net; s=20251104; t=1780481856; x=1781086656;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=CWgAW+orRpeoFszPA6ybNAPpRullqPhLMJ72GoaGas4=;
-        b=LmcPaYYBF22yXgEK3hBlxe7K2tBIHOQ849hPVZqVAuGdVVCGteFY/BRiPukuI0pJRz
-         58wSMuPr0vuJCsx4iF+wBWGbMcu34BaJO1AbMbHAHhqvMy+dwk3HO6MyiQ4w/x6PjYkS
-         ZzLDww0SJ0uoS/hJZEcwNWb6ffZT9sqaJdEXJESm0aBzMC87/wtr8VJGjnB9TUYMmigE
-         gxS9puZM7x+pI+2QNkVhUB0Dvr43tG8wJtabB7v96vH9fzxQYXBs/T1nLyAhfsh3+g9V
-         X8T2ffNkunjig+j4PWiBC+SIIheIjy8bIlbbzG1pNi0v61IJRSf5bRoD9OYig2Sshmt+
-         q5DA==
-X-Forwarded-Encrypted: i=1; AFNElJ81dgJi3MDduK8RJzdn/8mpP1Ctz5vTiaT8JLkg4KWObcxw6e4aqddTctPdCqOCttc2gNtF3IKpusQ=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwfMCoEHo5W4imSNbA5VsRc2HG4+Fex9XHlv4VviBBtvFW5RbSy
-	EXKECFCyWHAp95FIhuF5VHca8tgeuLwx4/34/NoWfE1V90WNgafgjOoL3Lp1jSc5XtQ=
-X-Gm-Gg: Acq92OGCWV+o9Uo3bKUKW6EF81A9i/V59PGz3GsIcLIQcSA4wH3Uofc3AMVAh8BzLUq
-	S84x++eIGb63HYvcpCXk5ZpIWyzCVn/8ynozYlPL9FN6pIvy9XNodjFO2xqi6Fg+HDYD4lpOKuz
-	lKbL1IFI/cjIpw6LOcURbWZAJZe4RgTKZX9Sy8a9ZKQG0vheugSj6fB8IQ8EsX3hWZSpovDDxDK
-	WroozEB6OTgiZ91WHeoLHIT7utvPTe4AnnwYKQtfU9vdMj8wgCpXiaxHlbPNG9wDju+Ng3JXO1Q
-	cpSQVvoAqQ1LB+jbnBzliDYfbF4qrIeKH0JXhhib2gJyJjl6XI3kyeyILmeon07HmeygDd3lrZd
-	C7e33dYGbC7ZvXTsafd55P6dZnCa1EqxFXqhtOx25nwjFL3PhMhupFykAM18ceSpQtdD2l4jsFs
-	X6KuwuFxC5SU+dgMm3Puwgf3JNwvRb8FxsDmn0fHrr4Nw=
-X-Received: by 2002:a05:600c:1551:b0:490:5466:8576 with SMTP id 5b1f17b1804b1-490b5e9fca9mr46134395e9.1.1780481855020;
-        Wed, 03 Jun 2026 03:17:35 -0700 (PDT)
+        bh=t/tFhBvkW5lHa9f/mqQAj4otAbWa3BZTThp9kdngA0w=;
+        b=m2nZ4n/28Nm8ENawmKlRS6K+c68FO8JZDX3k7faiJ6+OEqfR9CarF3tgY37zmcrIIJ
+         evN5yN9xQ4+Le30BDKfXWwP9Pv38DCQ1cM61ScFhr9PNQYN6Gt/vrssYebAVpYj7Z6Q9
+         fyYpKQSo/vdS5ItSA30tR4olExa5yVDybADBHfld0ccN4kgjV/u4cId994VeEZeEYmf3
+         MNivw/BJd6N5FQadb+VpHi71eZXIXvtvk9yeK0ZuTbczJGvibxrqgxR4dhr89gfVLXa3
+         +vFJYzsArvxdrcAkE09V54+cNwVmGUV1C+eiKOVV69WVyBY6dkY2kivBBS0/pNTz3+ET
+         ulGQ==
+X-Forwarded-Encrypted: i=1; AFNElJ/ZN/83BHaaIINUS3YyKBFFlQnApESDUNf106fGYvGxk4RLATIcMtZvlZ/OtbKABHjSpyhDpVsAIj0=@vger.kernel.org
+X-Gm-Message-State: AOJu0Ywu0RAv6plwprZdw59aMLYo/3F+cu/1HG9r0otsGoPWdjOb0Ojk
+	PH/Y8fZGWFXwE4rDGJ7A21YdFp3cPhoIoX0E39I6b08rOMu7NR6ppJpyhx/1MlJBw4c=
+X-Gm-Gg: Acq92OFnTCYz1F7kRFN+04hsE2j5s3m9CWEbBp5NRgnB7PcUqxE91yVgC61RFCpzkHz
+	+mGSmOBWQzvnOxzobHgbhfmgVcGG/DSpHXBZVoT4qASF0kGw3NrbWNA+TnxBrdkIHzC+ruM4H2t
+	5uAGmqK6IOTnmvEqTKYMXqXviXSEkQS9TFaP54aAlkFivtdIKP82nohJlGijbYqh1lSoojIizPk
+	GDMGLJ4B36VIRH19oV/oxKiVioDE/WObuwo5yqDkudm9uk+gqoayVfFHTAHxKBKR7xwxJO1WOAG
+	fPpjfJ9nhcP1meYCIPBfUxvz/pn/Rcu2WWsGHnLL0yYEJMeAZ875JV1uKijgdRkifR6Jggl/FzD
+	4mRupga/tNGACjNnLjw1RaNP+BbWi996ZO9MqaSNziWwGi5nPEArvh6mZpWW2ch1hAj2TdkjiX0
+	2vnUS6kZnqGJzQX2UXmuYlENZIRKBhGeAAdhTOPBYM49KqDtQWuYYvAw==
+X-Received: by 2002:a05:600c:859b:b0:490:4b89:535d with SMTP id 5b1f17b1804b1-490b5e96157mr35776485e9.1.1780481856126;
+        Wed, 03 Jun 2026 03:17:36 -0700 (PDT)
 Received: from ho-tower-lan.lan ([185.48.77.170])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-490b63d8205sm38681875e9.11.2026.06.03.03.17.34
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-490b63d8205sm38681875e9.11.2026.06.03.03.17.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 03 Jun 2026 03:17:34 -0700 (PDT)
+        Wed, 03 Jun 2026 03:17:35 -0700 (PDT)
 From: James Clark <james.clark@linaro.org>
-Date: Wed, 03 Jun 2026 11:17:16 +0100
-Subject: [PATCH v3 12/19] perf test cs-etm: Skip if not root
+Date: Wed, 03 Jun 2026 11:17:17 +0100
+Subject: [PATCH v3 13/19] perf test cs-etm: Reduce snapshot size
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -87,7 +87,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260603-james-cs-context-tracking-fix-v3-12-c392945d9ed5@linaro.org>
+Message-Id: <20260603-james-cs-context-tracking-fix-v3-13-c392945d9ed5@linaro.org>
 References: <20260603-james-cs-context-tracking-fix-v3-0-c392945d9ed5@linaro.org>
 In-Reply-To: <20260603-james-cs-context-tracking-fix-v3-0-c392945d9ed5@linaro.org>
 To: Suzuki K Poulose <suzuki.poulose@arm.com>, 
@@ -105,12 +105,12 @@ X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-90691-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90696-lists,linux-doc=lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[17];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
@@ -126,7 +126,7 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[james.clark@linaro.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
@@ -134,32 +134,29 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linaro.org:mid,linaro.org:dkim,linaro.org:from_mime,linaro.org:email,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 6AC9A6368F2
+X-Rspamd-Queue-Id: EDA50636900
 
-Use the common idiom for skipping tests if not running as root, which is
-required for this test.
+The default buffer size for root is 4MB which is very slow to decode. We
+only need a few KB to verify that the dd process is hit so reduce the
+size to 128KB.
 
 Signed-off-by: James Clark <james.clark@linaro.org>
 ---
- tools/perf/tests/shell/test_arm_coresight.sh | 6 ++++++
- 1 file changed, 6 insertions(+)
+ tools/perf/tests/shell/test_arm_coresight.sh | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/tools/perf/tests/shell/test_arm_coresight.sh b/tools/perf/tests/shell/test_arm_coresight.sh
-index 39553702c1f3..8ed2c934c87d 100755
+index 8ed2c934c87d..da2f599393e2 100755
 --- a/tools/perf/tests/shell/test_arm_coresight.sh
 +++ b/tools/perf/tests/shell/test_arm_coresight.sh
-@@ -20,6 +20,12 @@ skip_if_no_cs_etm_event() {
+@@ -156,7 +156,7 @@ arm_cs_etm_system_wide_test() {
  
- skip_if_no_cs_etm_event || exit 2
- 
-+if [ "$(id -u)" != 0 ]; then
-+	# Requires root for -C and system wide tests
-+	echo "[Skip] No root permission"
-+	exit 2
-+fi
-+
- perfdata=$(mktemp /tmp/__perf_test.perf.data.XXXXX)
- file=$(mktemp /tmp/temporary_file.XXXXX)
+ arm_cs_etm_snapshot_test() {
+ 	echo "Recording trace with snapshot mode"
+-	perf record -o ${perfdata} -e cs_etm// -S \
++	perf record -o ${perfdata} -e cs_etm// -S -m,128K \
+ 		-- dd if=/dev/zero of=/dev/null > /dev/null 2>&1 &
+ 	PERFPID=$!
  
 
 -- 
