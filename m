@@ -1,206 +1,182 @@
-Return-Path: <linux-doc+bounces-90722-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90720-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id bdtVJvEOIGrnvAAAu9opvQ
-	(envelope-from <linux-doc+bounces-90722-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 13:24:33 +0200
+	id QYcLJ8cRIGqzvQAAu9opvQ
+	(envelope-from <linux-doc+bounces-90720-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 13:36:39 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2837A637009
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 13:24:33 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1CD866371DB
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 13:36:39 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=BPBVxQ2V;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90722-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-90722-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=reject) header.from=mailbox.org;
+	dkim=pass header.d=linaro.org header.s=google header.b=xyWN6bgA;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90720-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90720-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=linaro.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 3810430A4CB4
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 11:21:52 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E1F4930BF2A0
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 11:17:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F3B5F331203;
-	Wed,  3 Jun 2026 11:21:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 48B0A3CAE9E;
+	Wed,  3 Jun 2026 11:17:17 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77589449EA4;
-	Wed,  3 Jun 2026 11:21:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 406433C13EE
+	for <linux-doc@vger.kernel.org>; Wed,  3 Jun 2026 11:17:13 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780485711; cv=none; b=h0dEMCVkSj5NHTH8585LSeHIAs7ZpHGEmHyY+JubPm/wZN5kYbBt1mOSMzGQk1AizMXhGKGQ3GFc6Clq2BuvtXO3F6+YcEMOcuFu+m+yWW6zFeu2AwnxntsQUAHmZHL6OTpxunJcoQLunBvuRtz0bLg6gaCnyr9PUh9r7Rsh+Js=
+	t=1780485436; cv=none; b=DfvliiK3u3jmBW48j9L2iejnEcuzb3QG56tbkTvQ7zlINTQcyJlIedQQxHhd3/tgzk6Zxb4TFYFkEBRCoPZ3S0+XSR8FJ9kjPPTYUuLgbR/bWYcEPgwN3RtJnDzJ8t/6LOAvpyjg55xix5bz6pwqjMLMg4x0Nt6pSfCCf1r4PqU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780485711; c=relaxed/simple;
-	bh=sfx1tvNRErDF1HTfIALai0SM6G/2WCKioBj6QNPwX3A=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=YOKARQ8wLuMB/YH/iMgjrD/C76IVCvRwTaiw8xhfecv7K99dSxgJftIi39ztlAVTmhj9yeXKpmt9oIVkRTRvhZ/IfwUR2jfx/TDE8Zc+UnOdxYpdDR4yva5cWp7n2rL1gPWBbr92rfFOIhOZ/N9GKnTqrZsu3CzgZqZ5Ci+Sk1w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org; spf=pass smtp.mailfrom=mailbox.org; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=BPBVxQ2V; arc=none smtp.client-ip=80.241.56.171
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [IPv6:2001:67c:2050:b231:465::1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gVlSt62QVz9tyP;
-	Wed,  3 Jun 2026 13:14:06 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1780485246; h=from:from:reply-to:reply-to:subject:subject:date:date:
-	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
-	 content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=sfx1tvNRErDF1HTfIALai0SM6G/2WCKioBj6QNPwX3A=;
-	b=BPBVxQ2VOQAmNjCBS/CsdXEc93Uxz5hNgeSYzCzuxZ4ngIWUoTZNfdBP5vIjzMQj0kBM+P
-	Kdl6ilr9GRoN2ML5piHR18evBZ4FgrFuw0cshQbkRPARaCNVGLWx63IQienE4wVNFKZr9E
-	EFhOtnhzMO1P/jWnKEzI14hcZ5pPvU1vaA0Wu5L//63pm+Lg575BehyMPZfko2WTQ8kzfT
-	Y2z6I6kmx02CeMtQD803CG1O1WrzXFq/xzzzIvpSNWqdL6pfKJD4vmgibezueqg+UnFKGs
-	zh3E1IQay3huth/SSctwXfEigcz3iajI4+bMjYS5xcKmXd3bxpB3NE1atKSRiQ==
-Message-ID: <c6ecda00eb1aa6a88c17354e26d4dd7dc58ae582.camel@mailbox.org>
-Subject: Re: [PATCH] Documentation: drm: Add entry for removing spsc_queue
- to TODO list
-From: Philipp Stanner <phasta@mailbox.org>
-Reply-To: phasta@kernel.org
-To: Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Philipp
- Stanner <phasta@kernel.org>, avid Airlie <airlied@gmail.com>, Simona Vetter
- <simona@ffwll.ch>,  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann	
- <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan	
- <skhan@linuxfoundation.org>, dakr@kernel.org, Tvrtko Ursulin	
- <tvrtko.ursulin@igalia.com>
-Cc: dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org
-Date: Wed, 03 Jun 2026 13:14:01 +0200
-In-Reply-To: <aceb688b-4f65-4539-a4f1-fc5455b60a5f@amd.com>
-References: <20260529215207.115513-2-phasta@kernel.org>
-	 <aceb688b-4f65-4539-a4f1-fc5455b60a5f@amd.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+	s=arc-20240116; t=1780485436; c=relaxed/simple;
+	bh=YH1yDlcQ1Btc01IgTRsUEjs4GCr14HE188gaQM2nQnk=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=DisKWWuQHWoOEZx3mFULg54Ni6l/orbpm3r+Dif4W+aQpgShh02XsAwnj6Y+rD0ngVAPVvCvAH8B3kF9HyrqBujtxjD3vimcw1D+V2ebJUOJsOFaL3Y3HuncYuhjRihhiViZbt0t84Jk1hiqpyNQkdajnWgIjgQN/ja9evoORkQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=xyWN6bgA; arc=none smtp.client-ip=209.85.128.54
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-49068493267so74439405e9.1
+        for <linux-doc@vger.kernel.org>; Wed, 03 Jun 2026 04:17:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1780485432; x=1781090232; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=T+KyrkqrXHlGePKgaipm3bkHOjJ6TJi29svJlMHw/IA=;
+        b=xyWN6bgAa4Ta8P3t/fTKYccMvqp+hFJRnJjzysXxF9frrIoNjXv74Iqg3xPB0pOpzX
+         Xpx6MYQTZFYrifX+4DLkfnF7R3rj5RCdLheFzRuOWvNvzmj+Hlre0tOfXI6S6GeJDwy5
+         tyAGA3oDG5jLAYYv4k2lyCtHlH1im9wYIcpgldaqySc9T/dEFzX5kEmxwhkQ/Dh6WbKJ
+         cZSyStjwhWZNQHNHRZiJaC0BPvoh8un2twBRyUDcZ2gtrsh3Kp390IShz1wUgYDu/21R
+         gJXysm03VAmwu28uST/qa0wecP+dkeTktfNOgbA1NXvT8cxwLQTk4dFNZjts4yLjPdwy
+         ZobQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780485432; x=1781090232;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=T+KyrkqrXHlGePKgaipm3bkHOjJ6TJi29svJlMHw/IA=;
+        b=qrN1TTzXWJfAGttxGq2jF3zEuhIVphcpNJa5MnUDRFKjdoL6DNLSXn41aSl4pUbhvb
+         hrpjI5w5oJnkb9Q5PrnkSSC+tr5OuH2dwnK/05zfT+mCor59tQzBVAHcVUY/HHxnAFHG
+         ptCWEUCvSM3emfXDaaCYYruBh1riAWscFP+HxXmHMg/CCnL8pkx/LCTX8t45wqJS2qID
+         fX+8J1RKawZbmzjGKCvzOl5oJ2wHa/tzOAu3Buvm0oz//8VTRldnYJxPmbaNN/chzuLP
+         zLh3hadDStWQCLXEOz57qeaLtTwc/ygvQSBWXgTtfSBtYTZJK/POGQinqPf7BGzWpfjH
+         GjWA==
+X-Forwarded-Encrypted: i=1; AFNElJ8eMM0nao9mUuhkyCW1saDi+3M9BLI+JMdN0jZgkITaI4FZLI37MYgBEmPTIU3IIPa7NjYddZoA+Wo=@vger.kernel.org
+X-Gm-Message-State: AOJu0Ywlwb7iIjyClMMNZluyi7KcFreIXv1XWBaC4xcN6KA2rOl8uru5
+	twbdGnlPG1hVZKHuHsHGzikNcUr6uUA2ANpr7N6wrPbmpereq3hxpYfZ6MNVgNksiaQ=
+X-Gm-Gg: Acq92OGqEQO2hGOdE8bFpeavHSHDqUZ471WiLoWK6Cq9+g7cj78grHuAuZFr20RTzGs
+	BjIhKbprq9b8NQceaLJcB+emi7ukyrJQ4yIJWa35KHoHznBNYC42nBYiBve3CH6XJriUc3N24pa
+	IvsAmuPU3G5WMPzaDDGXFRkJnB6cmSteb2jW9aMy6i3XOOZpoYAsH1MQwXkBlUKfiUuwAgnueOP
+	ykpip6nR+VN5ihPhh0ufLhaZuB39PLbMmjWFF0QXjPdPw8cDyjdvHgQTxtwCYAu8rFLWDDslJFg
+	u5LlOVt2TZtk86yZt9yoY5cF2FRAkCGdv3bC7Gd40IgQce98n+JJWNVZYahVmPVWAjQJmaZxCDm
+	OXmyb9rBOZ8kTj3dr7ArIlvTfCu8Tq0yKmuOeH+iMcYs0zIwC4bUULGgzMTZu03FuhB7W6P9cCP
+	nIRoO0+/tZ7gJN2qkB0injd3C6W21rkNm/bxOhbIk=
+X-Received: by 2002:a05:600c:c092:b0:490:b724:5085 with SMTP id 5b1f17b1804b1-490b724521cmr29027425e9.33.1780485432205;
+        Wed, 03 Jun 2026 04:17:12 -0700 (PDT)
+Received: from [192.168.1.3] ([185.48.77.170])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-490b7e6c6a4sm20016975e9.2.2026.06.03.04.17.11
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 03 Jun 2026 04:17:11 -0700 (PDT)
+Message-ID: <34b3b085-cb13-47d2-aad4-fac8c7812bd3@linaro.org>
+Date: Wed, 3 Jun 2026 12:17:10 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MBO-RS-META: bihjw5wo6xpk91679khq9hpsnwrfqzps
-X-MBO-RS-ID: 4831e0c02127252da33
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 03/18] perf test: Add a workload that forces context
+ switches
+To: Leo Yan <leo.yan@arm.com>
+Cc: Suzuki K Poulose <suzuki.poulose@arm.com>, Mike Leach
+ <mike.leach@arm.com>, Arnaldo Carvalho de Melo <acme@kernel.org>,
+ Namhyung Kim <namhyung@kernel.org>, Jiri Olsa <jolsa@kernel.org>,
+ Ian Rogers <irogers@google.com>, Amir Ayupov <aaupov@meta.com>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+ Paschalis Mpeis <Paschalis.Mpeis@arm.com>, coresight@lists.linaro.org,
+ linux-perf-users@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Arnaldo Carvalho de Melo <acme@redhat.com>, linux-doc@vger.kernel.org
+References: <20260602-james-cs-context-tracking-fix-v2-0-85b5ce6f55c6@linaro.org>
+ <20260602-james-cs-context-tracking-fix-v2-3-85b5ce6f55c6@linaro.org>
+ <20260603110621.GR101133@e132581.arm.com>
+Content-Language: en-US
+From: James Clark <james.clark@linaro.org>
+In-Reply-To: <20260603110621.GR101133@e132581.arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[mailbox.org,reject];
-	R_DKIM_ALLOW(-0.20)[mailbox.org:s=mail20150812];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:christian.koenig@amd.com,m:phasta@kernel.org,m:airlied@gmail.com,m:simona@ffwll.ch,m:maarten.lankhorst@linux.intel.com,m:mripard@kernel.org,m:tzimmermann@suse.de,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:dakr@kernel.org,m:tvrtko.ursulin@igalia.com,m:dri-devel@lists.freedesktop.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
-	FREEMAIL_TO(0.00)[amd.com,kernel.org,gmail.com,ffwll.ch,linux.intel.com,suse.de,lwn.net,linuxfoundation.org,igalia.com];
-	FORGED_SENDER(0.00)[phasta@mailbox.org,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	TAGGED_FROM(0.00)[bounces-90722-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	FORWARDED(0.00)[lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90720-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[16];
 	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	DKIM_TRACE(0.00)[mailbox.org:+];
-	ALIAS_RESOLVED(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[phasta@mailbox.org,linux-doc@vger.kernel.org];
-	PRECEDENCE_BULK(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	HAS_REPLYTO(0.00)[phasta@kernel.org];
-	TAGGED_RCPT(0.00)[linux-doc];
+	RCVD_TLS_LAST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:leo.yan@arm.com,m:suzuki.poulose@arm.com,m:mike.leach@arm.com,m:acme@kernel.org,m:namhyung@kernel.org,m:jolsa@kernel.org,m:irogers@google.com,m:aaupov@meta.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:Paschalis.Mpeis@arm.com,m:coresight@lists.linaro.org,m:linux-perf-users@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:acme@redhat.com,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[james.clark@linaro.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[linaro.org:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,mailbox.org:mid,mailbox.org:from_mime,mailbox.org:dkim,amd.com:email]
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[james.clark@linaro.org,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ALIAS_RESOLVED(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp,linaro.org:mid,linaro.org:from_mime,linaro.org:dkim]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 2837A637009
+X-Rspamd-Queue-Id: 1CD866371DB
 
-On Mon, 2026-06-01 at 10:30 +0200, Christian K=C3=B6nig wrote:
->=20
->=20
-> On 5/29/26 23:52, Philipp Stanner wrote:
-> > drm_sched contains a lockless queue (spsc_queue) that seems to be
-> > useless and potentially unsound.
-> >=20
-> > Add a TODO list entry for replacing spsc_queue with a locked list.
-> >=20
-> > Signed-off-by: Philipp Stanner <phasta@kernel.org>
->=20
-> Reviewed-by: Christian K=C3=B6nig <christian.koenig@amd.com>
 
-Pushed to drm-misc-next
 
-Thx
-P.
+On 03/06/2026 12:06 pm, Leo Yan wrote:
+> On Tue, Jun 02, 2026 at 03:26:45PM +0100, James Clark wrote:
+> 
+> [...]
+> 
+>> +/* Not static to avoid LTO clobbering the function name */
+>> +void context_switch_loop_proc1(int in_fd, int out_fd);
+>> +noinline void context_switch_loop_proc1(int in_fd, int out_fd)
+>> +{
+>> +	for (int i = 0; i < loops; i++) {
+>> +		read_block(in_fd);
+>> +		context_switch_loop_work += i * 3;
+>> +		write_block(out_fd);
+>> +	}
+>> +}
+> 
+> Rather than struggling with unexpected options, and "noinline" might
+> not work as it is not a standard compiler option (it is defined in
+> kernel header as AI reminded me), wouldn't it is reliable to use a
+> dedicated CFLAG rule same as other programs?
+> 
+> Thanks,
+> Leo
 
->=20
-> > ---
-> > =C2=A0Documentation/gpu/todo.rst | 41 +++++++++++++++++++++++++++++++++=
-+++++
-> > =C2=A01 file changed, 41 insertions(+)
-> >=20
-> > diff --git a/Documentation/gpu/todo.rst b/Documentation/gpu/todo.rst
-> > index cdddf8db35f5..87e082b0eb48 100644
-> > --- a/Documentation/gpu/todo.rst
-> > +++ b/Documentation/gpu/todo.rst
-> > @@ -948,6 +948,47 @@ Contact: Philipp Stanner <phasta@kernel.org>
-> > =C2=A0
-> > =C2=A0Level: Intermediate
-> > =C2=A0
-> > +Replace the lockless queue with a locked list
-> > +---------------------------------------------
-> > +
-> > +drm_sched is the only user in the entire kernel of a special lockless =
-queue, the
-> > +spsc_queue. This queue utilizes:
-> > +
-> > +- preempt_disable()
-> > +- atomic instructions
-> > +- memory barriers
-> > +- ACCESS_ONCE()
-> > +
-> > +whereas a conventional spinlock utilizes:
-> > +
-> > +- preempt_disable()
-> > +- 1 atomic instruction for taking / releasing the lock
-> > +- memory barriers
-> > +
-> > +Moreover, drm_sched_entity_push_job(), the only user of spsc_queue_pus=
-h(), has
-> > +to take a lock in some situations anyways and calls to it are often se=
-rialized
-> > +with a driver lock.
-> > +
-> > +It is, thus, highly questionable whether the lockless queue grants any=
- advantage
-> > +at all. Considering that its internals are not well documented and its=
- correctness
-> > +is not formally proven, it seems desirable to replace the queue with a=
- mere list
-> > +or hlist that is protected by a spinlock.
-> > +
-> > +Tasks:
-> > +
-> > +- Replace the spsc_queue in drm/sched (and those who might access the =
-scheduler's
-> > +=C2=A0 internal queue) with a spinlock + (h)list.
-> > +- Ideally, check with some micro benchmarks and real world tests (pref=
-erably
-> > +=C2=A0 with amdgpu) for relevant performance regressions.
-> > +- Remove the spsc_queue from the kernel altogether.
-> > +
-> > +Contact:
-> > +
-> > +- Philipp Stanner <phasta@kernel.org>
-> > +- Christian K=C3=B6nig <christian.koenig@amd.com>
-> > +
-> > +Level: Beginner
-> > +
-> > =C2=A0Outside DRM
-> > =C2=A0=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > =C2=A0
+noinline seems to be used as standard across the tools codebase, so if 
+it doesn't work there are bigger problems. Perf also only really seems 
+to support GCC and Clang and they both work for this test.
+
+And I don't actually think it matters if this is inlined or not as long 
+as the debug info reports those lines as being in this function. That's 
+what what having it as a global symbol is supposed to achieve, but 
+that's about renaming rather than inlining. Maybe inline is over the 
+top, but its a pattern copied from other similar workloads and tests.
+
+Probably makes sense to wait for an actual failure to appear and then we 
+can decide what to do with it then.
+
 
