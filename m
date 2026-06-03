@@ -1,275 +1,206 @@
-Return-Path: <linux-doc+bounces-90612-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90722-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id QSOzHP9kH2pnlgAAu9opvQ
-	(envelope-from <linux-doc+bounces-90612-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 01:19:27 +0200
+	id bdtVJvEOIGrnvAAAu9opvQ
+	(envelope-from <linux-doc+bounces-90722-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 13:24:33 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 21F79632DDC
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 01:19:27 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2837A637009
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 13:24:33 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=mRC0FYvb;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90612-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90612-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
+	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=BPBVxQ2V;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90722-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-90722-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=mailbox.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 950023013867
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 23:15:36 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 3810430A4CB4
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 11:21:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 994533CD8C5;
-	Tue,  2 Jun 2026 23:15:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F3B5F331203;
+	Wed,  3 Jun 2026 11:21:51 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32D313B894B
-	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 23:15:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77589449EA4;
+	Wed,  3 Jun 2026 11:21:49 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780442133; cv=none; b=M/fEW0K2AMz1wijPyGaJsJaR6MlXhxsdDGGXaUvVE2OBG14gYnE0cxf9vTO9XrKaN8m4knfQBX4zBGEgi4odHHXzgNL1Ya43Ws/HzW0UM+ZijxP7hkBNvLpuIJICq1p4i+yU79JZNEGFGJy2M+sEV3vxVPgx5QIZOWzWqOq7QsY=
+	t=1780485711; cv=none; b=h0dEMCVkSj5NHTH8585LSeHIAs7ZpHGEmHyY+JubPm/wZN5kYbBt1mOSMzGQk1AizMXhGKGQ3GFc6Clq2BuvtXO3F6+YcEMOcuFu+m+yWW6zFeu2AwnxntsQUAHmZHL6OTpxunJcoQLunBvuRtz0bLg6gaCnyr9PUh9r7Rsh+Js=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780442133; c=relaxed/simple;
-	bh=O+m6esE1h2WCRNa4TSXJ8l0GsbEGYg/n4liKpqmrez8=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=YtFnuatJ3Zdw4MXEYV75RvpklcpZOOYbvILOn5fr/izsCU0YJppbiSo0Y3Od86Oiz3aktRSV5CaUSnE2MTiBPzE4BN/1bYAcmbJkRyb2btVKveqate+hgtOgJvzXAf/7Dmv1SqfBAGjD7+BEBZDpaLU8QfeK/k3SH+Z4yGpsJ84=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=mRC0FYvb; arc=none smtp.client-ip=209.85.214.179
-Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2c0c1e0d00bso30240245ad.0
-        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 16:15:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780442131; x=1781046931; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=elAeolCTc2IAaRv5GDeM52BjkVLUXqNe1DIyzckEuoM=;
-        b=mRC0FYvb7xovNewnjKUYev+3ezw89Fc+sIj+CKpcHlTp95tPq7I5GjbzJwP5CI/UDT
-         EOVbiLxQxcFNqfCR5+ILFZ6HGLZMhqu4+Jdm9Ajm9yywZaX4XY8vXh6T1HbgUaj381NE
-         VZCjBaMF5/0CqXvybSwcbhRX9VOo6BA9s3BQM7At6vgO2ydF/pmwoxBnjytIbxhdEiUY
-         w2SfzuZAaTWUZzy8f6wnki1yYx79KxwEAO4TfoNhaSKA0w0Ycw42jVxb2uqrA/oStUff
-         8iao8Yob6pSkzh1sY0yIoIlNi4+crym+HFHHAhevXWRQUKgTe6YN6ZbwRRtabiZUG6yP
-         xuVw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780442131; x=1781046931;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=elAeolCTc2IAaRv5GDeM52BjkVLUXqNe1DIyzckEuoM=;
-        b=FjXSCYcEI9GwSNYCGzMBViMGM4N2ll78J3jM+zStED+dDXFcQnIHIzJqFDPSYai55d
-         Awgj7H2zzxLtEancmFn4MtHQ7pPbuMVXl3fHel3vczAWlR19wbNKxpsJAZZf2gTbqYfp
-         ZPcB2kKere2qGyPYfWv5DHoOe73kXJPyLUlZYkvOi/u3/6LCasPBl2QGJgTWcRyrgTny
-         uGdW/SYtN4GqNvpsAS1HZl3VPj+g4u8kUUG3ViwMKSKzPq5+srVkTjsNvPAFB6PT5pBu
-         KPONq8q4mXLg8v8wWKfz85/xuNKiHRNhtNMrWCspGWxTyJnXqvm+UwaHB8redPAZwcm6
-         rpxw==
-X-Gm-Message-State: AOJu0YxwCOrTMl7hOmx8dsAmgjxVHykuauHif1hWX3EMAbSrzSjnZxXl
-	FIvKdvg34yW3Q3e56p9twrJBlnZTJZzQRne/2uN7BHumftagpIOUwvFU
-X-Gm-Gg: Acq92OGc1+cnSuxvPpj6H4CE0ICKlwPnBkVmyO2/a2Z1TSdq8lBDOf20S1K4EHwJS1z
-	WMD0OMaL8Tg5y46a+h/JH8Bkd666lohh4CbzsJoYSoulPkpsyztPD+YMAuWXR7vfdSow+vYi8DQ
-	/TOYZzZg5cHBhze4liVogT5GTtYcGY9nWgTvhJRWvZEPMDRlciTEmH7go36koxWDiRfOzSGpwoq
-	6SmGXiNf9njTj2N8+ALS5OqjFO4Y8hp+00jfKeXPHtSoQcQdLX2VxBlihA4tA8JMSjJYf4vzPr5
-	ieCujOBCReTVtsjey9lUH4IrYOaODIyrk83UuQQTcpBEnf5gbtcj186kZkdsvYGxobr4j8mJAvQ
-	JQ9bG2VZGDMOyLhhMIQVjWThl7Rmvmp//jWtRiAYz5YPDvFxqtREdJ3lPoHD2HxzLrvk8mDnMLL
-	Q3XvYIvGmNvA==
-X-Received: by 2002:a17:902:f547:b0:2b0:c59f:3b58 with SMTP id d9443c01a7336-2c163a3d1b6mr7203385ad.9.1780442131511;
-        Tue, 02 Jun 2026 16:15:31 -0700 (PDT)
-Received: from [127.0.1.1] ([2a12:a305:4::40e9])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c16649d2dfsm3302965ad.75.2026.06.02.16.15.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Jun 2026 16:15:31 -0700 (PDT)
-From: Guodong Xu <docular.xu@gmail.com>
-Date: Wed, 03 Jun 2026 07:12:10 -0400
-Subject: [PATCH v3 15/15] riscv: hwprobe: Introduce rva23u64 base behavior
+	s=arc-20240116; t=1780485711; c=relaxed/simple;
+	bh=sfx1tvNRErDF1HTfIALai0SM6G/2WCKioBj6QNPwX3A=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=YOKARQ8wLuMB/YH/iMgjrD/C76IVCvRwTaiw8xhfecv7K99dSxgJftIi39ztlAVTmhj9yeXKpmt9oIVkRTRvhZ/IfwUR2jfx/TDE8Zc+UnOdxYpdDR4yva5cWp7n2rL1gPWBbr92rfFOIhOZ/N9GKnTqrZsu3CzgZqZ5Ci+Sk1w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org; spf=pass smtp.mailfrom=mailbox.org; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=BPBVxQ2V; arc=none smtp.client-ip=80.241.56.171
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [IPv6:2001:67c:2050:b231:465::1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gVlSt62QVz9tyP;
+	Wed,  3 Jun 2026 13:14:06 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1780485246; h=from:from:reply-to:reply-to:subject:subject:date:date:
+	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+	 content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=sfx1tvNRErDF1HTfIALai0SM6G/2WCKioBj6QNPwX3A=;
+	b=BPBVxQ2VOQAmNjCBS/CsdXEc93Uxz5hNgeSYzCzuxZ4ngIWUoTZNfdBP5vIjzMQj0kBM+P
+	Kdl6ilr9GRoN2ML5piHR18evBZ4FgrFuw0cshQbkRPARaCNVGLWx63IQienE4wVNFKZr9E
+	EFhOtnhzMO1P/jWnKEzI14hcZ5pPvU1vaA0Wu5L//63pm+Lg575BehyMPZfko2WTQ8kzfT
+	Y2z6I6kmx02CeMtQD803CG1O1WrzXFq/xzzzIvpSNWqdL6pfKJD4vmgibezueqg+UnFKGs
+	zh3E1IQay3huth/SSctwXfEigcz3iajI4+bMjYS5xcKmXd3bxpB3NE1atKSRiQ==
+Message-ID: <c6ecda00eb1aa6a88c17354e26d4dd7dc58ae582.camel@mailbox.org>
+Subject: Re: [PATCH] Documentation: drm: Add entry for removing spsc_queue
+ to TODO list
+From: Philipp Stanner <phasta@mailbox.org>
+Reply-To: phasta@kernel.org
+To: Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Philipp
+ Stanner <phasta@kernel.org>, avid Airlie <airlied@gmail.com>, Simona Vetter
+ <simona@ffwll.ch>,  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann	
+ <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan	
+ <skhan@linuxfoundation.org>, dakr@kernel.org, Tvrtko Ursulin	
+ <tvrtko.ursulin@igalia.com>
+Cc: dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Date: Wed, 03 Jun 2026 13:14:01 +0200
+In-Reply-To: <aceb688b-4f65-4539-a4f1-fc5455b60a5f@amd.com>
+References: <20260529215207.115513-2-phasta@kernel.org>
+	 <aceb688b-4f65-4539-a4f1-fc5455b60a5f@amd.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260603-rva23u64-hwprobe-v2-v3-15-5529a7b28384@gmail.com>
-References: <20260603-rva23u64-hwprobe-v2-v3-0-5529a7b28384@gmail.com>
-In-Reply-To: <20260603-rva23u64-hwprobe-v2-v3-0-5529a7b28384@gmail.com>
-To: Jonathan Corbet <corbet@lwn.net>, 
- Shuah Khan <skhan@linuxfoundation.org>, Paul Walmsley <pjw@kernel.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, 
- Alexandre Ghiti <alex@ghiti.fr>, Zong Li <zong.li@sifive.com>, 
- Deepak Gupta <debug@rivosinc.com>, Anup Patel <anup@brainfault.org>, 
- Atish Patra <atish.patra@linux.dev>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Yixun Lan <dlan@kernel.org>, 
- Chen Wang <unicorn_wang@outlook.com>, Inochi Amaoto <inochiama@gmail.com>, 
- Conor Dooley <conor.dooley@microchip.com>, Shuah Khan <shuah@kernel.org>, 
- Christian Brauner <brauner@kernel.org>
-Cc: linux-doc@vger.kernel.org, linux-riscv@lists.infradead.org, 
- linux-kernel@vger.kernel.org, kvm@vger.kernel.org, 
- kvm-riscv@lists.infradead.org, Paul Walmsley <paul.walmsley@sifive.com>, 
- Palmer Dabbelt <palmer@sifive.com>, Conor Dooley <conor@kernel.org>, 
- devicetree@vger.kernel.org, spacemit@lists.linux.dev, 
- sophgo@lists.linux.dev, linux-kselftest@vger.kernel.org, 
- Andrew Jones <andrew.jones@oss.qualcomm.com>, 
- Charles Jenkins <thecharlesjenkins@gmail.com>, 
- Samuel Holland <samuel.holland@sifive.com>, 
- Guodong Xu <docular.xu@gmail.com>
-X-Mailer: b4 0.15.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4827; i=docular.xu@gmail.com;
- h=from:subject:message-id; bh=O+m6esE1h2WCRNa4TSXJ8l0GsbEGYg/n4liKpqmrez8=;
- b=owGbwMvMwCXWtEl1Z3CGpCDjabUkhiwFHvYP001VTd0EX7Jtz/r1fX1MpPDfafPEZD+aHd25Y
- k/yjFD7jlIWBjEuBlkxRZbDR1uyt77yifZ9zvkDZg4rE8gQBi5OAZiIdQkjQ8cd3dI3NxoXfthj
- fUXAwaAgPdVj8ZIbF5tKmY5ZCLtMvsfIsIYrRmnaLyfmpTIiSa2u0svvnnrlZeYgUrt9jafMDDt
- 1HgA=
-X-Developer-Key: i=docular.xu@gmail.com; a=openpgp;
- fpr=90B1DC3DF0BD10FD1227BD6344F254AF42F143EE
+X-MBO-RS-META: bihjw5wo6xpk91679khq9hpsnwrfqzps
+X-MBO-RS-ID: 4831e0c02127252da33
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [3.34 / 15.00];
-	DATE_IN_FUTURE(4.00)[11];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	DMARC_POLICY_ALLOW(-0.50)[mailbox.org,reject];
+	R_DKIM_ALLOW(-0.20)[mailbox.org:s=mail20150812];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-90612-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:pjw@kernel.org,m:palmer@dabbelt.com,m:aou@eecs.berkeley.edu,m:alex@ghiti.fr,m:zong.li@sifive.com,m:debug@rivosinc.com,m:anup@brainfault.org,m:atish.patra@linux.dev,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:dlan@kernel.org,m:unicorn_wang@outlook.com,m:inochiama@gmail.com,m:conor.dooley@microchip.com,m:shuah@kernel.org,m:brauner@kernel.org,m:linux-doc@vger.kernel.org,m:linux-riscv@lists.infradead.org,m:linux-kernel@vger.kernel.org,m:kvm@vger.kernel.org,m:kvm-riscv@lists.infradead.org,m:paul.walmsley@sifive.com,m:palmer@sifive.com,m:conor@kernel.org,m:devicetree@vger.kernel.org,m:spacemit@lists.linux.dev,m:sophgo@lists.linux.dev,m:linux-kselftest@vger.kernel.org,m:andrew.jones@oss.qualcomm.com,m:thecharlesjenkins@gmail.com,m:samuel.holland@sifive.com,m:docular.xu@gmail.com,m:krzk@kernel.org,m:docularxu@gmail.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[docularxu@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS(0.00)[m:christian.koenig@amd.com,m:phasta@kernel.org,m:airlied@gmail.com,m:simona@ffwll.ch,m:maarten.lankhorst@linux.intel.com,m:mripard@kernel.org,m:tzimmermann@suse.de,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:dakr@kernel.org,m:tvrtko.ursulin@igalia.com,m:dri-devel@lists.freedesktop.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
+	FREEMAIL_TO(0.00)[amd.com,kernel.org,gmail.com,ffwll.ch,linux.intel.com,suse.de,lwn.net,linuxfoundation.org,igalia.com];
+	FORGED_SENDER(0.00)[phasta@mailbox.org,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FREEMAIL_TO(0.00)[lwn.net,linuxfoundation.org,kernel.org,dabbelt.com,eecs.berkeley.edu,ghiti.fr,sifive.com,rivosinc.com,brainfault.org,linux.dev,outlook.com,gmail.com,microchip.com];
-	RCPT_COUNT_TWELVE(0.00)[35];
+	TO_DN_SOME(0.00)[];
+	TAGGED_FROM(0.00)[bounces-90722-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[14];
 	FORWARDED(0.00)[lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	DKIM_TRACE(0.00)[mailbox.org:+];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[docularxu@gmail.com,linux-doc@vger.kernel.org];
-	PRECEDENCE_BULK(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,lists.infradead.org,sifive.com,kernel.org,lists.linux.dev,oss.qualcomm.com,gmail.com];
 	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[phasta@mailbox.org,linux-doc@vger.kernel.org];
+	PRECEDENCE_BULK(0.00)[];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[qualcomm.com:email,vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	HAS_REPLYTO(0.00)[phasta@kernel.org];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,mailbox.org:mid,mailbox.org:from_mime,mailbox.org:dkim,amd.com:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 21F79632DDC
+X-Rspamd-Queue-Id: 2837A637009
 
-Provide a hwprobe base-behavior bit so userspace can check RVA23U64
-support in one call.  Without it, a consumer needs five hwprobe
-calls and four prctl calls, which is error-prone to require of every
-caller.  Most software treats RVA23U64 as a new base anyway, so
-expose it directly.
+On Mon, 2026-06-01 at 10:30 +0200, Christian K=C3=B6nig wrote:
+>=20
+>=20
+> On 5/29/26 23:52, Philipp Stanner wrote:
+> > drm_sched contains a lockless queue (spsc_queue) that seems to be
+> > useless and potentially unsound.
+> >=20
+> > Add a TODO list entry for replacing spsc_queue with a locked list.
+> >=20
+> > Signed-off-by: Philipp Stanner <phasta@kernel.org>
+>=20
+> Reviewed-by: Christian K=C3=B6nig <christian.koenig@amd.com>
 
-Signed-off-by: Andrew Jones <andrew.jones@oss.qualcomm.com>
-Signed-off-by: Guodong Xu <docular.xu@gmail.com>
----
-v3: No change.
-v2:
-- Detect RVA23U64 by reading from the cached hart_isa[].isa_bases
-  bitmap populated by riscv_init_isa_bases() at init time, sharing
-  one source of truth with /proc/cpuinfo.
----
- Documentation/arch/riscv/hwprobe.rst               |  8 ++++++++
- arch/riscv/include/uapi/asm/hwprobe.h              |  3 ++-
- arch/riscv/kernel/sys_hwprobe.c                    | 23 +++++++++++++++-------
- tools/testing/selftests/riscv/hwprobe/which-cpus.c |  2 +-
- 4 files changed, 27 insertions(+), 9 deletions(-)
+Pushed to drm-misc-next
 
-diff --git a/Documentation/arch/riscv/hwprobe.rst b/Documentation/arch/riscv/hwprobe.rst
-index 601e81f561421..d6712259946e9 100644
---- a/Documentation/arch/riscv/hwprobe.rst
-+++ b/Documentation/arch/riscv/hwprobe.rst
-@@ -67,6 +67,14 @@ The following keys are defined:
-       programs (it may still be executed in userspace via a
-       kernel-controlled mechanism such as the vDSO).
- 
-+  * :c:macro:`RISCV_HWPROBE_BASE_BEHAVIOR_RVA23U64`: Support for all mandatory
-+    extensions of RVA23U64, as defined in the RISC-V Profiles specification
-+    starting from commit 0273f3c921b6 ("rva23/rvb23 ratified").
-+
-+    The RVA23U64 base is based upon the IMA base and therefore IMA extension
-+    keys (e.g. :c:macro:`RISCV_HWPROBE_KEY_IMA_EXT_0`:) may be used to probe
-+    optional extensions.
-+
- * :c:macro:`RISCV_HWPROBE_KEY_IMA_EXT_0`: A bitmask containing extensions
-   that are compatible with the :c:macro:`RISCV_HWPROBE_BASE_BEHAVIOR_IMA`:
-   base system behavior.
-diff --git a/arch/riscv/include/uapi/asm/hwprobe.h b/arch/riscv/include/uapi/asm/hwprobe.h
-index 36ec8ab470423..50733d3db7633 100644
---- a/arch/riscv/include/uapi/asm/hwprobe.h
-+++ b/arch/riscv/include/uapi/asm/hwprobe.h
-@@ -21,7 +21,8 @@ struct riscv_hwprobe {
- #define RISCV_HWPROBE_KEY_MARCHID	1
- #define RISCV_HWPROBE_KEY_MIMPID	2
- #define RISCV_HWPROBE_KEY_BASE_BEHAVIOR	3
--#define		RISCV_HWPROBE_BASE_BEHAVIOR_IMA	(1 << 0)
-+#define		RISCV_HWPROBE_BASE_BEHAVIOR_IMA		(1 << 0)
-+#define		RISCV_HWPROBE_BASE_BEHAVIOR_RVA23U64	(1 << 1)
- #define RISCV_HWPROBE_KEY_IMA_EXT_0	4
- #define		RISCV_HWPROBE_IMA_FD		(1 << 0)
- #define		RISCV_HWPROBE_IMA_C		(1 << 1)
-diff --git a/arch/riscv/kernel/sys_hwprobe.c b/arch/riscv/kernel/sys_hwprobe.c
-index 3e80e5551ae0d..3f66f2e99d41a 100644
---- a/arch/riscv/kernel/sys_hwprobe.c
-+++ b/arch/riscv/kernel/sys_hwprobe.c
-@@ -226,6 +226,17 @@ static bool hwprobe_ext0_has(const struct cpumask *cpus, u64 ext)
- 	return (pair.value & ext);
- }
- 
-+static bool hwprobe_has_isa_base(const struct cpumask *cpus, unsigned int base)
-+{
-+	int cpu;
-+
-+	for_each_cpu(cpu, cpus) {
-+		if (!test_bit(base, hart_isa[cpu].isa_bases))
-+			return false;
-+	}
-+	return true;
-+}
-+
- #if defined(CONFIG_RISCV_PROBE_UNALIGNED_ACCESS)
- static u64 hwprobe_misaligned(const struct cpumask *cpus)
- {
-@@ -308,14 +319,12 @@ static void hwprobe_one_pair(struct riscv_hwprobe *pair,
- 	case RISCV_HWPROBE_KEY_MIMPID:
- 		hwprobe_arch_id(pair, cpus);
- 		break;
--	/*
--	 * The kernel already assumes that the base single-letter ISA
--	 * extensions are supported on all harts, and only supports the
--	 * IMA base, so just cheat a bit here and tell that to
--	 * userspace.
--	 */
- 	case RISCV_HWPROBE_KEY_BASE_BEHAVIOR:
--		pair->value = RISCV_HWPROBE_BASE_BEHAVIOR_IMA;
-+		pair->value = 0;
-+		if (hwprobe_has_isa_base(cpus, RISCV_ISA_BASE_IMA))
-+			pair->value |= RISCV_HWPROBE_BASE_BEHAVIOR_IMA;
-+		if (hwprobe_has_isa_base(cpus, RISCV_ISA_BASE_RVA23U64))
-+			pair->value |= RISCV_HWPROBE_BASE_BEHAVIOR_RVA23U64;
- 		break;
- 
- 	case RISCV_HWPROBE_KEY_IMA_EXT_0:
-diff --git a/tools/testing/selftests/riscv/hwprobe/which-cpus.c b/tools/testing/selftests/riscv/hwprobe/which-cpus.c
-index 587feb198c049..f8c797b1d0fd9 100644
---- a/tools/testing/selftests/riscv/hwprobe/which-cpus.c
-+++ b/tools/testing/selftests/riscv/hwprobe/which-cpus.c
-@@ -105,7 +105,7 @@ int main(int argc, char **argv)
- 	pairs[0] = (struct riscv_hwprobe){ .key = RISCV_HWPROBE_KEY_BASE_BEHAVIOR, };
- 	rc = riscv_hwprobe(pairs, 1, 0, NULL, 0);
- 	assert(rc == 0 && pairs[0].key == RISCV_HWPROBE_KEY_BASE_BEHAVIOR &&
--	       pairs[0].value == RISCV_HWPROBE_BASE_BEHAVIOR_IMA);
-+	       (pairs[0].value & RISCV_HWPROBE_BASE_BEHAVIOR_IMA));
- 
- 	pairs[0] = (struct riscv_hwprobe){ .key = RISCV_HWPROBE_KEY_IMA_EXT_0, };
- 	rc = riscv_hwprobe(pairs, 1, 0, NULL, 0);
+Thx
+P.
 
--- 
-2.43.0
-
+>=20
+> > ---
+> > =C2=A0Documentation/gpu/todo.rst | 41 +++++++++++++++++++++++++++++++++=
++++++
+> > =C2=A01 file changed, 41 insertions(+)
+> >=20
+> > diff --git a/Documentation/gpu/todo.rst b/Documentation/gpu/todo.rst
+> > index cdddf8db35f5..87e082b0eb48 100644
+> > --- a/Documentation/gpu/todo.rst
+> > +++ b/Documentation/gpu/todo.rst
+> > @@ -948,6 +948,47 @@ Contact: Philipp Stanner <phasta@kernel.org>
+> > =C2=A0
+> > =C2=A0Level: Intermediate
+> > =C2=A0
+> > +Replace the lockless queue with a locked list
+> > +---------------------------------------------
+> > +
+> > +drm_sched is the only user in the entire kernel of a special lockless =
+queue, the
+> > +spsc_queue. This queue utilizes:
+> > +
+> > +- preempt_disable()
+> > +- atomic instructions
+> > +- memory barriers
+> > +- ACCESS_ONCE()
+> > +
+> > +whereas a conventional spinlock utilizes:
+> > +
+> > +- preempt_disable()
+> > +- 1 atomic instruction for taking / releasing the lock
+> > +- memory barriers
+> > +
+> > +Moreover, drm_sched_entity_push_job(), the only user of spsc_queue_pus=
+h(), has
+> > +to take a lock in some situations anyways and calls to it are often se=
+rialized
+> > +with a driver lock.
+> > +
+> > +It is, thus, highly questionable whether the lockless queue grants any=
+ advantage
+> > +at all. Considering that its internals are not well documented and its=
+ correctness
+> > +is not formally proven, it seems desirable to replace the queue with a=
+ mere list
+> > +or hlist that is protected by a spinlock.
+> > +
+> > +Tasks:
+> > +
+> > +- Replace the spsc_queue in drm/sched (and those who might access the =
+scheduler's
+> > +=C2=A0 internal queue) with a spinlock + (h)list.
+> > +- Ideally, check with some micro benchmarks and real world tests (pref=
+erably
+> > +=C2=A0 with amdgpu) for relevant performance regressions.
+> > +- Remove the spsc_queue from the kernel altogether.
+> > +
+> > +Contact:
+> > +
+> > +- Philipp Stanner <phasta@kernel.org>
+> > +- Christian K=C3=B6nig <christian.koenig@amd.com>
+> > +
+> > +Level: Beginner
+> > +
+> > =C2=A0Outside DRM
+> > =C2=A0=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > =C2=A0
 
