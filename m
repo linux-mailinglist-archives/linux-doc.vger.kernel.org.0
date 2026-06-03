@@ -1,69 +1,108 @@
-Return-Path: <linux-doc+bounces-90766-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90767-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id fNrzKMBEIGplzgAAu9opvQ
-	(envelope-from <linux-doc+bounces-90766-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 17:14:08 +0200
+	id nFMaO+9CIGqkzQAAu9opvQ
+	(envelope-from <linux-doc+bounces-90767-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 17:06:23 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0BD12639008
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 17:14:08 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8D823638EF6
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 17:06:23 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=arm.com header.s=foss header.b="TIu5wIj/";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90766-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90766-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=arm.com;
+	dkim=pass header.d=cmpxchg.org header.s=google header.b=cX6Qzvu6;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90767-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90767-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=cmpxchg.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 7116A302DF84
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 14:57:01 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id DAADF308FA27
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 14:59:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C5A1A386552;
-	Wed,  3 Jun 2026 14:56:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6BB5D3955D5;
+	Wed,  3 Jun 2026 14:59:19 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F3A123812DA;
-	Wed,  3 Jun 2026 14:56:57 +0000 (UTC)
+Received: from mail-ua1-f52.google.com (mail-ua1-f52.google.com [209.85.222.52])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 811C6339719
+	for <linux-doc@vger.kernel.org>; Wed,  3 Jun 2026 14:59:17 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780498619; cv=none; b=Loz2GMM3bSRLrxdrcMmj8TpnyI6GLHz3NpgRanKnizCSPDrECS+mmVu2q72miNkpGrSfYkhdUx+goel0gMuj4IdGSMGPW8A4Njoqsnh4zle7iWHS6TaI+iuwzGPO8sp7ZevHA//6EV87d0btrpVfoVbRXkuR1I+Snk2nWPEpNpQ=
+	t=1780498759; cv=none; b=TJbGoDrcVvbno4bFpNGfpvzFWD8Z4q4xxNGkf4P1M34KlxXKO8tNSOCk4k2Y0ErDXn4xXhFIi9sRLVM4U3MqvYIAKH2LeqLPoRLhQ5YmdDEVQVIma21MpSQFg3OQcqm2AwIFXtWGJP+BxLJYwbdi40U8RL8TQddts9fQUNKrc0I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780498619; c=relaxed/simple;
-	bh=mTreqZLmeIh1IGTzSvo6hYoyP7N06HK5Bl5wUdwkoGI=;
+	s=arc-20240116; t=1780498759; c=relaxed/simple;
+	bh=nBnLoop9a9FofYc3NDCMzbtD0+UGW1YBKEfXXrYohLE=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=NxWbR0vawjO5GuHsyXgdUdiTlGTFmT4wdi95A0xlQIiNMCzjIGOXEFOd17YBhhIIvV94DZkZd9ZXuVu01syM3jsSSnO70HbmiItXLijOfni/U+jgcZ6lExm3bYE1XgUzQxvw0CLV1ctVG38BMZAtmlhPAsdmjuKQ+6gDuTTJzFo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=TIu5wIj/; arc=none smtp.client-ip=217.140.110.172
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7E43632F4;
-	Wed,  3 Jun 2026 07:56:52 -0700 (PDT)
-Received: from localhost (e132581.arm.com [10.1.196.87])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E99DC3F632;
-	Wed,  3 Jun 2026 07:56:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1780498617; bh=mTreqZLmeIh1IGTzSvo6hYoyP7N06HK5Bl5wUdwkoGI=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=TIu5wIj/dPtYD/ElLIxHnHt+p+65aZR1pmL5QPno0UrNq41aF75MHCoSNbX+H2Peu
-	 xVaySCSFrf9QWWFhMJQk84iliaKU9sJglKwkmxpO1kSZSsbIAext+UVCSF1C+4Q4y6
-	 V73xQ0fTBViiR+ZurcmdvDZ4iMv7wZdziSUWijUA=
-Date: Wed, 3 Jun 2026 15:56:54 +0100
-From: Leo Yan <leo.yan@arm.com>
-To: James Clark <james.clark@linaro.org>
-Cc: Suzuki K Poulose <suzuki.poulose@arm.com>,
-	Mike Leach <mike.leach@arm.com>,
-	Arnaldo Carvalho de Melo <acme@kernel.org>,
-	Namhyung Kim <namhyung@kernel.org>, Jiri Olsa <jolsa@kernel.org>,
-	Ian Rogers <irogers@google.com>, Amir Ayupov <aaupov@meta.com>,
+	 Content-Type:Content-Disposition:In-Reply-To; b=CONz75zjB8Zie7o1yAl0GAXFs5EX0Q70CU6qT+gZKlCL7thkrx0SXWG0qLTOqVWHNaSvFcmiqVO/okrYl8kIvjNNIFLZpuNtRGH3AHjB1jCGXcLIsBZ+zhp3QRQBNSGznk/7tJHBtn66ljnjfSNNjWfhMqQADdPa+PINHE0vN5g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=cmpxchg.org; spf=pass smtp.mailfrom=cmpxchg.org; dkim=pass (2048-bit key) header.d=cmpxchg.org header.i=@cmpxchg.org header.b=cX6Qzvu6; arc=none smtp.client-ip=209.85.222.52
+Received: by mail-ua1-f52.google.com with SMTP id a1e0cc1a2514c-96395a59ff6so1987076241.0
+        for <linux-doc@vger.kernel.org>; Wed, 03 Jun 2026 07:59:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=cmpxchg.org; s=google; t=1780498756; x=1781103556; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=8SQNydbT+nEO5+Q1vmeflzQPE43wUdjeoQe0VdYFo68=;
+        b=cX6Qzvu6RA4EYISXv6yGUeLSQTuaU6zj3fX9QgL6uziw/sSGFgForkvMR5DI2UBO7I
+         9ieiPCipW6c6nufSTiXBbW95nNW5N7cW8vmuV3LbX7rjuGQlRNtsbLhQRrJSlMxDk86C
+         K7B5PkhuJChQ2xF19cpa7i/hWF+Zh3CbicaXGvLp0Mtv8CfexBo1NRev2BneodRI1CSM
+         cigghCJ0mo70rKLOp8NmKTuNLxE2+sNka6nOKIAr74vXoYoFJxdV5AhiJUcWvqtx2Cfs
+         IbQzs8NJwnmPtvmHQXACxcIgOlGQMYdojsDBo39RpFnbab5Fyten6tYduc/bQ4su/aZo
+         8rEg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780498756; x=1781103556;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=8SQNydbT+nEO5+Q1vmeflzQPE43wUdjeoQe0VdYFo68=;
+        b=pPVmnVAKIZRJZUckjqLXYUgeQTWob70+3yCllf0oDsv6Y1d9NSHzYu+vwoAEJj1Zpi
+         UKgpflH3xGel6ExrvzmuMbPvKamwqtxrzfL+Iqmi+4LUanzEiF2FQDDUYzdy4uuKp1st
+         V3cxpYilpiVe27IAZZ8fPkQA+ioPv2Qsqm0UUcVYH0Uhy4CT77Z4W6KE5BYDxfa19ATm
+         awCiI3Cz8DkdAXVV9mQZYBr8QbIPJ9MRrfRJ7r+I+y3JE9N7eM5ZqpQBYGjvuGoBGQ17
+         2XzpQ0TfgPvQZNApCbH4I1g6tOKEJ+X8p8YuIVvlkiNINkEgA/YZNZfKVCbW3Jwtu6Ls
+         0Qrg==
+X-Forwarded-Encrypted: i=1; AFNElJ950YC5zx5p5YhfUGJYJUZojc3BJLUNgic0MEOMA88t99GktdSrJREVR6O7lg0WsK25d7suAHPqatc=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzZBi9vssK0bDx9aJmOixXX+Xot7rudsI1gHsegX3B/N0Q9YGZK
+	1QKUexqcUag9yVrJBPv4+uZ2SgrAwPWnD8Saw8i5AxXlri6H+kB8T3/eGBzyG47kQ7Y=
+X-Gm-Gg: Acq92OFlOzP5glJIJzMDC51M/s9wevMWHZxnXqTbaCkVLSSt7d2UAdaBZSET6PPT2pR
+	MuL2XnMEH5SjYrvQgZpIWhfY8r7kRvRg9+E5yvQTfyIp4n3YZcOTU2j6YCOHjo7wX8hS2YgYTAX
+	t3X4DBUe0jA7OCJhcXjXy5mJt2Mzxx/PgtiwiewdaiZVz6kc2718/zQOdPjH4GkOLIvdBfu746B
+	N4tySpjl5QqQPPNniLXVMmTmyMm7GiRmFKj1ryYmfmcMM6I8i7Tc/7hm2k8VlF85/H5SiCYxH9Z
+	xI8KyOD/1OJIlAjvsNzDZFRXZHI5IY63yUOh80pc0bigF6bceSOoZCCv5oxDUQw3KYoYCFX8cCC
+	YIAR1yW53cDH+Pdds97h9ebc94sKwDKv7b48XDnfGNa6YMzr9rRRuexxNO747xv6/XemEbj9Ymg
+	tgyUYcCmx4VZIDjEjxGR9V4Ja3dsofCZwF
+X-Received: by 2002:a05:6102:8027:b0:633:75d3:3545 with SMTP id ada2fe7eead31-6ec4c6a8669mr2031336137.30.1780498756426;
+        Wed, 03 Jun 2026 07:59:16 -0700 (PDT)
+Received: from localhost ([2603:7001:f100:500:365a:60ff:fe62:ff29])
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-8cecd277070sm21553296d6.48.2026.06.03.07.59.15
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 03 Jun 2026 07:59:15 -0700 (PDT)
+Date: Wed, 3 Jun 2026 10:59:15 -0400
+From: Johannes Weiner <hannes@cmpxchg.org>
+To: Jianyue Wu <wujianyue000@gmail.com>
+Cc: Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>,
+	Kairui Song <kasong@tencent.com>,
+	Kemeng Shi <shikemeng@huaweicloud.com>,
+	Nhat Pham <nphamcs@gmail.com>, Baoquan He <bhe@redhat.com>,
+	Barry Song <baohua@kernel.org>,
+	Youngjun Park <youngjun.park@lge.com>,
+	Qi Zheng <qi.zheng@linux.dev>,
+	Shakeel Butt <shakeel.butt@linux.dev>,
+	Axel Rasmussen <axelrasmussen@google.com>,
+	Yuanchu Xie <yuanchu@google.com>, Wei Xu <weixugc@google.com>,
+	David Hildenbrand <david@kernel.org>,
+	Michal Hocko <mhocko@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>,
+	"Liam R. Howlett" <liam@infradead.org>,
+	Vlastimil Babka <vbabka@kernel.org>,
+	Mike Rapoport <rppt@kernel.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Michal Hocko <mhocko@suse.com>, Hugh Dickins <hughd@google.com>,
+	Baolin Wang <baolin.wang@linux.alibaba.com>,
 	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Paschalis Mpeis <Paschalis.Mpeis@arm.com>,
-	coresight@lists.linaro.org, linux-perf-users@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Arnaldo Carvalho de Melo <acme@redhat.com>,
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v2 10/18] perf test cs-etm: Test decoding for concurrent
- threads test
-Message-ID: <20260603145654.GZ101133@e132581.arm.com>
-References: <20260602-james-cs-context-tracking-fix-v2-0-85b5ce6f55c6@linaro.org>
- <20260602-james-cs-context-tracking-fix-v2-10-85b5ce6f55c6@linaro.org>
+	Shuah Khan <skhan@linuxfoundation.org>, linux-mm@kvack.org,
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v4 2/3] mm: rename swap.c to folio_lru.c
+Message-ID: <aiBBQwwbzBxlGelY@cmpxchg.org>
+References: <20260603-ch-swap-series-plus-folio-lru-cleanup-v4-0-ce0219e100d9@gmail.com>
+ <20260603-ch-swap-series-plus-folio-lru-cleanup-v4-2-ce0219e100d9@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -72,57 +111,59 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260602-james-cs-context-tracking-fix-v2-10-85b5ce6f55c6@linaro.org>
+In-Reply-To: <20260603-ch-swap-series-plus-folio-lru-cleanup-v4-2-ce0219e100d9@gmail.com>
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
+	DMARC_POLICY_ALLOW(-0.50)[cmpxchg.org,none];
+	R_DKIM_ALLOW(-0.20)[cmpxchg.org:s=google];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-90766-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:james.clark@linaro.org,m:suzuki.poulose@arm.com,m:mike.leach@arm.com,m:acme@kernel.org,m:namhyung@kernel.org,m:jolsa@kernel.org,m:irogers@google.com,m:aaupov@meta.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:Paschalis.Mpeis@arm.com,m:coresight@lists.linaro.org,m:linux-perf-users@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:acme@redhat.com,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[leo.yan@arm.com,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[16];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-90767-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:wujianyue000@gmail.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencent.com,m:shikemeng@huaweicloud.com,m:nphamcs@gmail.com,m:bhe@redhat.com,m:baohua@kernel.org,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:david@kernel.org,m:mhocko@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:hughd@google.com,m:baolin.wang@linux.alibaba.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FORGED_SENDER(0.00)[hannes@cmpxchg.org,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[29];
+	FREEMAIL_CC(0.00)[linux-foundation.org,kernel.org,tencent.com,huaweicloud.com,gmail.com,redhat.com,lge.com,linux.dev,google.com,infradead.org,suse.com,linux.alibaba.com,lwn.net,linuxfoundation.org,kvack.org,vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	DKIM_TRACE(0.00)[arm.com:+];
+	FROM_HAS_DN(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[leo.yan@arm.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	ALIAS_RESOLVED(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[hannes@cmpxchg.org,linux-doc@vger.kernel.org];
+	PRECEDENCE_BULK(0.00)[];
+	DKIM_TRACE(0.00)[cmpxchg.org:+];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,linaro.org:email,arm.com:dkim,arm.com:from_mime,arm.com:email,e132581.arm.com:mid]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,vger.kernel.org:from_smtp,cmpxchg.org:mid,cmpxchg.org:dkim,cmpxchg.org:from_mime,cmpxchg.org:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 0BD12639008
+X-Rspamd-Queue-Id: 8D823638EF6
 
-On Tue, Jun 02, 2026 at 03:26:52PM +0100, James Clark wrote:
-> The thread_loop test only looks for context IDs in the raw trace.
-> There's a lot more that can go wrong when decoding these, so replace it
-> with a test that looks at the final output for matching thread names and
-> symbols.
+On Wed, Jun 03, 2026 at 09:05:33PM +0800, Jianyue Wu wrote:
+> Rename mm/swap.c to mm/folio_lru.c so the filename better matches
+> the code's main responsibility.
 > 
-> In the future we might use timestamps and context switch events to track
-> threads, so looking at context IDs in the raw trace wouldn't always
-> work.
+> This keeps the implementation split from swap-specific code without
+> changing the published LRU helper interfaces.
 > 
-> Signed-off-by: James Clark <james.clark@linaro.org>
+> Update MAINTAINERS and the remaining mm/swap.c documentation references
+> after the rename.
+> 
+> Suggested-by: Baoquan He <bhe@redhat.com>
+> Suggested-by: David Hildenbrand <david@kernel.org>
+> Signed-off-by: Jianyue Wu <wujianyue000@gmail.com>
 
-LGTM:
-
-Reviewed-by: Leo Yan <leo.yan@arm.com>
+Acked-by: Johannes Weiner <hannes@cmpxchg.org>
 
