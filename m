@@ -1,239 +1,248 @@
-Return-Path: <linux-doc+bounces-90734-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90735-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id MlQjL1wmIGpExgAAu9opvQ
-	(envelope-from <linux-doc+bounces-90734-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 15:04:28 +0200
+	id jp6DDxcqIGo6yAAAu9opvQ
+	(envelope-from <linux-doc+bounces-90735-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 15:20:23 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3585C637D64
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 15:04:28 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 36A15637FAA
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 15:20:22 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=aD9Yx1lL;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90734-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90734-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=RH+3YOuo;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90735-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-90735-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=gmail.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id A30C13016CBA
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 12:57:34 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 36948308B821
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 13:07:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E169147A0D0;
-	Wed,  3 Jun 2026 12:57:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 87931481233;
+	Wed,  3 Jun 2026 13:05:46 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B904B37C90A;
-	Wed,  3 Jun 2026 12:57:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A4CC480DCE
+	for <linux-doc@vger.kernel.org>; Wed,  3 Jun 2026 13:05:45 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780491453; cv=none; b=rREOPFy+93maTeOr8psVHs9qmC0cW9kQhTPdIFIq6jNWJRSXHGfDASKpo7io6r46znmiv0vu+WdQeZT3Vcg70zWf61+adgIQzZNC6+PVU6ApjtC9jfhjLPwREIVXMxav4q+wPagksI+m5xsM1Y79yMFrY4ql4pxhkjcFDOEPhjc=
+	t=1780491946; cv=none; b=RulyNmqwJdE+2lIV78ImX+XPKgl0rrwfi0Qu67Rqjdzv2lO2/N8lT4oVHTu/dCcACCgMFRluxRzuFLJin4zqH1LAF8e/ArqWkDHSvTV3tN23AMZ+v8TGszeyld1XapSYIndW8suNUikNcOf6nviZIdnz1nHhPgb+2pLLveInrSQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780491453; c=relaxed/simple;
-	bh=GFSky3xf5AxPLQZnoZqywkJpcB3vZ/c6/4n8muNhFvY=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=smoFShhZk3f7Co3V1CG/GehEthQCP7KbTKFF6cddWq9I0IgRDScsmCo5cZENRZ49pg9FrjcoYlP2ITfl4CfaC67Sx2LnMlXW4rcB9oGJuMWFd/+wnxXrrg3Wvqnu/hZRtBtlQaGo2wWWCPX49cNYZN2GUd1HyB32E21K24J9Yh4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=aD9Yx1lL; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 37D091F00893;
-	Wed,  3 Jun 2026 12:57:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1780491452;
-	bh=dtMtYIOXYp6nZhFwb/fVgtiIgWg/t0b1ReYJZF7zT/A=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=aD9Yx1lLUyqm2rox24HF4tnMYIhzSk1E+1+H/BF42EIA38d7kdpLTBkAU7QY5yL1z
-	 tSKVJf4LvPTt7nUCMN97oZg6kTtOFe8S3IocaJ+rqGSSMhcBhMhkDF/IfffFLi0FpV
-	 R7hkzKLr5otOxmjNeEZl0ZvHi96o4q8fZYNm6ersWe6APcP71v9Zc0zRYLoz2z6mBN
-	 exvP4Gu3sqUIVutv+UtTIjgdvgm0B2umqZ/3tbzZNHYl+y+1nbrb/u2eHWj9SUzbC6
-	 3P+X+aXbGy7nJpO/pBAbOHKCBVdPoJGFx3Zy+I1BqVrZaF7/bSeC7n35pM2K9wyV1R
-	 aQA/TOxz6IO5w==
-Date: Wed, 3 Jun 2026 13:57:24 +0100
-From: Lorenzo Stoakes <ljs@kernel.org>
-To: "Kiryl Shutsemau (Meta)" <kas@kernel.org>
-Cc: akpm@linux-foundation.org, rppt@kernel.org, peterx@redhat.com, 
-	david@kernel.org, surenb@google.com, vbabka@kernel.org, Liam.Howlett@oracle.com, 
-	ziy@nvidia.com, corbet@lwn.net, skhan@linuxfoundation.org, seanjc@google.com, 
-	pbonzini@redhat.com, jthoughton@google.com, aarcange@redhat.com, sj@kernel.org, 
-	usama.arif@linux.dev, linux-mm@kvack.org, linux-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, kvm@vger.kernel.org, 
-	kernel-team@meta.com
-Subject: Re: [PATCH v6 08/15] mm: handle VM_UFFD_RWP in khugepaged, rmap, and
- GUP
-Message-ID: <aiAkXF-x7374lZff@lucifer>
-References: <20260529172716.357179-1-kas@kernel.org>
- <20260529172716.357179-9-kas@kernel.org>
+	s=arc-20240116; t=1780491946; c=relaxed/simple;
+	bh=5VLnZhSIf0jXUgELog3B8KWjOVsjpryu1D4jbtsrY2U=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=hd0XqGyxMSoPZxhKz9QNOqxehIvz9MRboT8o2QAaohgodgfxINywUx5LrZGKL/eKSTzI6Xx4ZhPBjKbYxXvaJYuT+zTc5DXG7mWQRqliQvs/qa9M5xbMbQhfxudYLC98+l27KbT+n1UkOTykLFJyEtWkIweLoPe4iV13FQUrbI8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=RH+3YOuo; arc=none smtp.client-ip=209.85.210.180
+Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-8424b00710aso2189372b3a.0
+        for <linux-doc@vger.kernel.org>; Wed, 03 Jun 2026 06:05:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1780491944; x=1781096744; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=KUNz2ByJ1uR0lUfiaY2wF4eyBaRncro6lIUctBUODUo=;
+        b=RH+3YOuoRdVV8cqzG3NAp/tCoYd+gqvoqcVr2HapJ1WMbYiWMW/pJNftkZ0B/Stc2+
+         8gqaWnMQzEJeMqm3CtVn3dO8hzIK6KNH2lNY2aC8t/cSrkYoVgIi/t5IRcYJAiORzMNP
+         SnkZl0HJtJwyKdT98GpukTTryi5nXfmrEvUgLmNFIHVnZcG0qBJ0TdO180uaa9cops4j
+         9KtGG1+BMk1e/mJBv2QNT3GT9Wz1HOnOtYbSCUJFQWJNrmRlHSh/YtEPbgh5/RxRUxW8
+         DCmla2R7O/acsh6rZVqq3bilLWAQ5T5bUVyF2Ay/in0H/Y931gj+2ZBq+Ass80xlFEgc
+         Inmw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780491944; x=1781096744;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=KUNz2ByJ1uR0lUfiaY2wF4eyBaRncro6lIUctBUODUo=;
+        b=PPnpU/sD+27guplNv3R4jympruklACwaPIfgyn8b+NlNpq9Bf0WL4bivKYQq5UnsJW
+         jrva0UCWiQVWhVe4+4O0T4mOU+UwhwB6RsUVVhHUQqeYaCB/wKCl8xb9z9u5ilKYJOBK
+         spnPzAnYmild3De2CBrYcUsdMeExFGlFo6p9T0sXS9NXtOIbZCfv3Gyh3ifDcGcawbmQ
+         kGmK8D+qPL915gRWVUFAYPNuYZvPPtF/iULE+O4vJ5S6vOSAfqexSccSY9R/LHxZpxfo
+         5IsZiuWSgngOA7nLec9moKzsJK6B+O+JUAjD5W3LUcU/a/Mq6+bErL+UEBKERE8niGO7
+         go5w==
+X-Forwarded-Encrypted: i=1; AFNElJ/BIOtAW68wrmQ93OQJI5i+NXKdaWOU8MXfYXjCrS5vNNfUc2FGL4EyB5WCSOQqToFBcYR9J3+HA74=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzigyyJnntp3fJ6FaEAiEIgTuGaOuwE4w4OfaZDd0GjXRHgqKVW
+	7fcWCFLrMptENPDIGZLnm4KlriaA9SVK6ZUzkbV9BYslV8R+YogoS/Qt
+X-Gm-Gg: Acq92OHbjamE5lmZFz9LuG7VMBI5ceOZIB4q4rKM4ox8Oa+g631YGL+QFnYGrJL36vY
+	pQCV8o1hI3wYxyPkbLkadiyTBVOa6cyglLGPQGQG5dBdOgyOC+gZt493oRmJeMKuz9GuEHmg3iv
+	6BSZ9cZegviJizR54v54eoe2mSR+Tpyh+3Fqb+WgtVSEYpCG91+AhWMxmGMT64jo1aToIXsZiml
+	+9Qs3X/UJqyLEhuEHLcLeY3hTU0JL38m2DvxGJlcYQosd/zad2iu87ZH7JiTgBb2j08HNThSrFf
+	g8XFpn+6RCCgZLSUosRS/hCfsAB9ojRDIKFZr4gO7Al0740f7SjQeAVN5Lm8idbwcNXjQ1zwYOf
+	7UFtMTvjUZ4jfL8wa8chlEZfuofnx88GS7dQHcG5WjAFU9WMngvUnWG/AgpIYP+opaCJpkuZTPs
+	MiXi2uGmq5Ixa0f9dYHNQ/WkCn78RqjJlI1v6RiQvyiy0GBGTZe4yv/cm7pZ7edTXZxyFDkvij9
+	lJtf7FQIDE=
+X-Received: by 2002:a05:6a00:1d9e:b0:838:a46:ce99 with SMTP id d2e1a72fcca58-84284fada0emr3028039b3a.48.1780491944310;
+        Wed, 03 Jun 2026 06:05:44 -0700 (PDT)
+Received: from NV-J4GCB44.localdomain ([103.74.125.162])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-842828821d0sm3018661b3a.28.2026.06.03.06.05.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 03 Jun 2026 06:05:43 -0700 (PDT)
+From: Jianyue Wu <wujianyue000@gmail.com>
+Subject: [PATCH v4 0/3] mm: clean up folio LRU and swap declarations
+Date: Wed, 03 Jun 2026 21:05:31 +0800
+Message-Id: <20260603-ch-swap-series-plus-folio-lru-cleanup-v4-0-ce0219e100d9@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260529172716.357179-9-kas@kernel.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAJsmIGoC/5WNTQ7CIBgFr9Kw9jMUSn9ceQ/jAihtSWghYFHT9
+ O7SutClLuclb2ZBQXmtAjplC/Iq6qDtlKA4ZEgOfOoV6DYxIpiUmNEc5ADhzh28f+DMHKCzRls
+ wfgZpFJ9mB21T1bmsKSWtRMnlvOr0Y+9crokHHW7WP/dsJNv6byESwJCLhhdcEsZEce5Hrs1R2
+ hFthUg/1hKTX600WZkQgpVVV8um+bau6/oC09MN+TABAAA=
+To: Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>, 
+ Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>, 
+ Nhat Pham <nphamcs@gmail.com>, Baoquan He <bhe@redhat.com>, 
+ Barry Song <baohua@kernel.org>, Youngjun Park <youngjun.park@lge.com>, 
+ Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
+ Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>, 
+ Wei Xu <weixugc@google.com>, Johannes Weiner <hannes@cmpxchg.org>, 
+ David Hildenbrand <david@kernel.org>, Michal Hocko <mhocko@kernel.org>, 
+ Lorenzo Stoakes <ljs@kernel.org>, "Liam R. Howlett" <liam@infradead.org>, 
+ Vlastimil Babka <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>, 
+ Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>, 
+ Hugh Dickins <hughd@google.com>, 
+ Baolin Wang <baolin.wang@linux.alibaba.com>, 
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>
+Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org, 
+ linux-doc@vger.kernel.org, Jianyue Wu <wujianyue000@gmail.com>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=openssh-sha256; t=1780491936; l=3985;
+ i=wujianyue000@gmail.com; s=id_ed25519; h=from:subject:message-id;
+ bh=5VLnZhSIf0jXUgELog3B8KWjOVsjpryu1D4jbtsrY2U=;
+ b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgW51Zh3v9nG0Wlld2Ti8ylp1TnO7yB
+ H+z9CbXty/WEAQAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
+ QCSpdIDNmbNJM5EUpVtFVV9jlxnqM6P2hi0lMTlOMnz2cxEysphPYLNuuvG+Dt4a5TzXOxCrD0x
+ xN4GjzBx2FAw=
+X-Developer-Key: i=wujianyue000@gmail.com; a=openssh;
+ fpr=SHA256:gVWBPJbHGWlCIw+V8F63Ff0k21S7AB5+rZt8+huemvg
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:kas@kernel.org,m:akpm@linux-foundation.org,m:rppt@kernel.org,m:peterx@redhat.com,m:david@kernel.org,m:surenb@google.com,m:vbabka@kernel.org,m:Liam.Howlett@oracle.com,m:ziy@nvidia.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:seanjc@google.com,m:pbonzini@redhat.com,m:jthoughton@google.com,m:aarcange@redhat.com,m:sj@kernel.org,m:usama.arif@linux.dev,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:kvm@vger.kernel.org,m:kernel-team@meta.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[ljs@kernel.org,linux-doc@vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-90734-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencent.com,m:shikemeng@huaweicloud.com,m:nphamcs@gmail.com,m:bhe@redhat.com,m:baohua@kernel.org,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:hannes@cmpxchg.org,m:david@kernel.org,m:mhocko@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:hughd@google.com,m:baolin.wang@linux.alibaba.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:wujianyue000@gmail.com,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90735-lists,linux-doc=lfdr.de];
+	FREEMAIL_TO(0.00)[linux-foundation.org,kernel.org,tencent.com,huaweicloud.com,gmail.com,redhat.com,lge.com,linux.dev,google.com,cmpxchg.org,infradead.org,suse.com,linux.alibaba.com,lwn.net,linuxfoundation.org];
+	FORGED_SENDER(0.00)[wujianyue000@gmail.com,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FREEMAIL_CC(0.00)[kvack.org,vger.kernel.org,gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[30];
 	FORWARDED(0.00)[lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ljs@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FROM_NEQ_ENVFROM(0.00)[wujianyue000@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,lucifer:mid]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 3585C637D64
+X-Rspamd-Queue-Id: 36A15637FAA
 
-On Fri, May 29, 2026 at 06:26:37PM +0100, Kiryl Shutsemau (Meta) wrote:
-> Three mm paths outside the fault handler gate on the uffd PTE bit
-> today: khugepaged (skip collapse on ranges carrying markers), rmap
-> (cap unmap batching), and GUP (force a fault through
-> gup_can_follow_protnone). Extend each to treat VM_UFFD_RWP the same
-> as VM_UFFD_WP; otherwise per-PTE RWP state is silently destroyed or
-> bypassed.
->
-> khugepaged: try_collapse_pte_mapped_thp() and
-> file_backed_vma_is_retractable() already refuse to collapse or
-> retract page tables on ranges carrying the uffd PTE bit. Broaden the
-> VMA predicate from userfaultfd_wp() to userfaultfd_protected() so
-> VM_UFFD_RWP ranges get the same protection. hpage_collapse_scan_pmd()
-> needs no change — its existing pte_uffd() check already catches an
-> RWP PTE because it carries the uffd bit.
->
-> rmap: folio_unmap_pte_batch() caps batching at 1 for VM_UFFD_RWP so
-> the restore path handles each PTE with its own marker.
->
-> GUP: gup_can_follow_protnone() forces a fault on VM_UFFD_RWP VMAs
-> regardless of FOLL_HONOR_NUMA_FAULT. RWP uses protnone as an
-> access-tracking marker, not for NUMA hinting, so any GUP — read or
-> write — must go through the userfaultfd fault path.
->
-> Signed-off-by: Kiryl Shutsemau <kas@kernel.org>
-> Assisted-by: Claude:claude-opus-4-6
-> Acked-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
+The previous version moved the folio LRU helpers out of mm/swap.c in
+one step. Based on review feedback from Johannes, Baoquan and Barry,
+split the cleanup into smaller steps:
 
-Nit below but LGTM, so:
+  - move the page-cluster sysctl next to swap readahead in mm/swap_state.c
+  - rename mm/swap.c to mm/folio_lru.c after the swap-specific bits move out
+  - move MM-internal reclaim declarations out of include/linux/swap.h
 
-Reviewed-by: Lorenzo Stoakes <ljs@kernel.org>
+After this series, swap cache and swap-in readahead stay in mm/swap_state.c,
+folio LRU helpers live in mm/folio_lru.c, and MM-internal reclaim/workingset
+declarations move from include/linux/swap.h to mm/internal.h (public LRU
+helpers used outside mm/ remain in swap.h).
 
-> ---
->  include/linux/mm.h | 16 +++++++++++++++-
->  mm/khugepaged.c    | 18 +++++++++++-------
->  mm/rmap.c          |  2 +-
->  3 files changed, 27 insertions(+), 9 deletions(-)
->
-> diff --git a/include/linux/mm.h b/include/linux/mm.h
-> index 3d4d5f9a6f1b..2b04f690b516 100644
-> --- a/include/linux/mm.h
-> +++ b/include/linux/mm.h
-> @@ -4644,11 +4644,25 @@ static inline int vm_fault_to_errno(vm_fault_t vm_fault, int foll_flags)
->
->  /*
->   * Indicates whether GUP can follow a PROT_NONE mapped page, or whether
-> - * a (NUMA hinting) fault is required.
-> + * a (NUMA hinting or userfaultfd RWP) fault is required.
->   */
->  static inline bool gup_can_follow_protnone(const struct vm_area_struct *vma,
->  					   unsigned int flags)
->  {
-> +	/*
-> +	 * VM_UFFD_RWP uses protnone as an access-tracking marker, not for
-> +	 * NUMA hinting. GUP must always take a fault so the access is
-> +	 * delivered to userfaultfd, regardless of FOLL_HONOR_NUMA_FAULT.
-> +	 *
-> +	 * Only do so while the VMA is accessible. If it has been made
-> +	 * inaccessible (e.g. mprotect(PROT_NONE)), fall through to the guard
-> +	 * below: forcing a fault there would loop, as handle_mm_fault() makes
-> +	 * no progress on protnone in an inaccessible VMA, and the access is
-> +	 * denied regardless of RWP anyway.
-> +	 */
-> +	if ((vma->vm_flags & VM_UFFD_RWP) && vma_is_accessible(vma))
-> +		return false;
+The first patch handles the swap-specific page-cluster state before the
+file rename, so the rename commit only carries folio LRU code. The last
+patch keeps the LRU helpers used outside mm/ in include/linux/swap.h and
+moves the internal reclaim/workingset declarations to mm/internal.h.
 
-Can be:
+This series is based on Christoph Hellwig's swap_ops series, which
+moves swap I/O dispatch behind swap_ops and leaves mm/swap.c with less
+swap-specific state. That makes the folio LRU cleanup more natural to
+split out on top.
 
-	if (vma_test_single_mask(vma, VMA_UFFD_RWP) && vma_is_accessible(vma))
-		return false;
+  https://lore.kernel.org/r/20260528124559.2566481-1-hch@lst.de
 
-> +
->  	/*
->  	 * If callers don't want to honor NUMA hinting faults, no need to
->  	 * determine if we would actually have to trigger a NUMA hinting fault.
-> diff --git a/mm/khugepaged.c b/mm/khugepaged.c
-> index afa218be15de..4f3fedcd75cf 100644
-> --- a/mm/khugepaged.c
-> +++ b/mm/khugepaged.c
-> @@ -1895,8 +1895,11 @@ static enum scan_result try_collapse_pte_mapped_thp(struct mm_struct *mm, unsign
->  	if (!thp_vma_allowable_order(vma, vma->vm_flags, TVA_FORCED_COLLAPSE, PMD_ORDER))
->  		return SCAN_VMA_CHECK;
->
-> -	/* Keep pmd pgtable for uffd-wp; see comment in retract_page_tables() */
-> -	if (userfaultfd_wp(vma))
-> +	/*
-> +	 * Keep pmd pgtable while the uffd bit is in use; see comment in
-> +	 * retract_page_tables().
-> +	 */
-> +	if (userfaultfd_protected(vma))
->  		return SCAN_PTE_UFFD;
->
->  	folio = filemap_lock_folio(vma->vm_file->f_mapping,
-> @@ -2109,13 +2112,14 @@ static bool file_backed_vma_is_retractable(struct vm_area_struct *vma)
->  		return false;
->
->  	/*
-> -	 * When a vma is registered with uffd-wp, we cannot recycle
-> +	 * When a vma is registered with uffd-wp or RWP, we cannot recycle
->  	 * the page table because there may be pte markers installed.
-> -	 * Other vmas can still have the same file mapped hugely, but
-> -	 * skip this one: it will always be mapped in small page size
-> -	 * for uffd-wp registered ranges.
-> +	 * VM_UFFD_RWP ranges similarly rely on per-PTE uffd state
-> +	 * and cannot be recycled to a shared PMD. Other vmas can still
-> +	 * have the same file mapped hugely, but skip this one: it will
-> +	 * always be mapped in small page size for these registrations.
->  	 */
-> -	if (userfaultfd_wp(vma))
-> +	if (userfaultfd_protected(vma))
->  		return false;
->
->  	/*
-> diff --git a/mm/rmap.c b/mm/rmap.c
-> index 546bc1cf9391..9fb733489898 100644
-> --- a/mm/rmap.c
-> +++ b/mm/rmap.c
-> @@ -1965,7 +1965,7 @@ static inline unsigned int folio_unmap_pte_batch(struct folio *folio,
->  	if (pte_unused(pte))
->  		return 1;
->
-> -	if (userfaultfd_wp(vma))
-> +	if (userfaultfd_protected(vma))
->  		return 1;
->
->  	/*
-> --
-> 2.54.0
->
+To: Andrew Morton <akpm@linux-foundation.org>
+To: Chris Li <chrisl@kernel.org>
+To: Kairui Song <kasong@tencent.com>
+To: Kemeng Shi <shikemeng@huaweicloud.com>
+To: Nhat Pham <nphamcs@gmail.com>
+To: Baoquan He <bhe@redhat.com>
+To: Barry Song <baohua@kernel.org>
+To: Youngjun Park <youngjun.park@lge.com>
+To: Qi Zheng <qi.zheng@linux.dev>
+To: Shakeel Butt <shakeel.butt@linux.dev>
+To: Axel Rasmussen <axelrasmussen@google.com>
+To: Yuanchu Xie <yuanchu@google.com>
+To: Wei Xu <weixugc@google.com>
+To: Johannes Weiner <hannes@cmpxchg.org>
+To: David Hildenbrand <david@kernel.org>
+To: Michal Hocko <mhocko@kernel.org>
+To: Lorenzo Stoakes <ljs@kernel.org>
+To: Liam R. Howlett <liam@infradead.org>
+To: Vlastimil Babka <vbabka@kernel.org>
+To: Mike Rapoport <rppt@kernel.org>
+To: Suren Baghdasaryan <surenb@google.com>
+To: Michal Hocko <mhocko@suse.com>
+To: Hugh Dickins <hughd@google.com>
+To: Baolin Wang <baolin.wang@linux.alibaba.com>
+To: Jonathan Corbet <corbet@lwn.net>
+To: Shuah Khan <skhan@linuxfoundation.org>
+Cc: linux-mm@kvack.org
+Cc: linux-kernel@vger.kernel.org
+Cc: linux-doc@vger.kernel.org
+Signed-off-by: Jianyue Wu <wujianyue000@gmail.com>
+
+Changes in v4:
+- Address Baoquan He's review on v3: align patch 2 subject with
+  rename-only scope; fix vm.rst sysctl documentation; refresh file
+  header comments in mm/folio_lru.c and swap.h declaration comments.
+- Expand patch 1 commit message on CONFIG_SWAP=n vm.page-cluster
+  registration (also on CONFIG_SWAP=n kernels).
+- Link to v3: https://lore.kernel.org/all/20260602-ch-swap-series-plus-folio-lru-cleanup-v3-0-5bbb567f8c99@gmail.com
+
+---
+Jianyue Wu (3):
+      mm/swap: colocate page-cluster sysctl with swap readahead
+      mm: rename swap.c to folio_lru.c
+      mm: move reclaim-internal declarations out of swap.h
+
+ Documentation/admin-guide/sysctl/vm.rst |  3 --
+ Documentation/core-api/mm-api.rst       |  2 +-
+ MAINTAINERS                             |  3 +-
+ include/linux/swap.h                    | 75 +++------------------------------
+ mm/Makefile                             |  2 +-
+ mm/{swap.c => folio_lru.c}              | 46 ++------------------
+ mm/internal.h                           | 68 ++++++++++++++++++++++++++++++
+ mm/memfd.c                              |  1 +
+ mm/swap.h                               |  8 +++-
+ mm/swap_state.c                         | 37 ++++++++++++++++
+ mm/vmscan.c                             |  2 +-
+ 11 files changed, 126 insertions(+), 121 deletions(-)
+---
+base-commit: d7be408821acadd7d713d1da16a6742886799114
+change-id: 20260531-ch-swap-series-plus-folio-lru-cleanup-d9781c8332dc
+
+Best regards,
+-- 
+Jianyue Wu <wujianyue000@gmail.com>
+
 
