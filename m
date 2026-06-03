@@ -1,186 +1,139 @@
-Return-Path: <linux-doc+bounces-90714-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90715-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id mOshJgYGIGrruAAAu9opvQ
-	(envelope-from <linux-doc+bounces-90714-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 12:46:30 +0200
+	id CO8iITcHIGpeuQAAu9opvQ
+	(envelope-from <linux-doc+bounces-90715-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 12:51:35 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A71A636B3B
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 12:46:30 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E0FC3636BC3
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 12:51:34 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linaro.org header.s=google header.b=H5e0HreA;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90714-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90714-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=linaro.org;
+	dkim=pass header.d=arm.com header.s=foss header.b=gtHKMp73;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90715-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90715-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=arm.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 4FF9A301E568
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 10:46:29 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 9A5F930A938F
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 10:50:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EC2C23CB8E9;
-	Wed,  3 Jun 2026 10:46:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A1318399001;
+	Wed,  3 Jun 2026 10:50:22 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B0287393DF9
-	for <linux-doc@vger.kernel.org>; Wed,  3 Jun 2026 10:46:24 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4E7EB37C930;
+	Wed,  3 Jun 2026 10:50:21 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780483586; cv=none; b=ryH5vD4TW7i0H1MGqf76P9X9P4DonHuriGFlh6q0DE6L/SUvjmID0nb+M6UXoaiPRKqXrZfNRgOUK4TKkF9IaHLQm4xuU1ogFyw+Hg+8eiBT/wytoapszzykrHLNqUmdPu0t+DGj2dh0WHPikrr3ueEh3MCqGlLhmb8nEEcuhrk=
+	t=1780483822; cv=none; b=gV68djut6s6nk8xz7ckG4q/HfJHO0YCPXLuUiMJH+rmAs39u3bDbsn81rQXYNXfzhLIRNkoihPRMfC47EeTWdp0yaeK1iM9oB1ZtgueJwsvnCFCoIEZcSZnlS4xw4i23+ttxZvhvtj7zYMMQA2b2pp6iOqS9yLuGa4GoEZtBADk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780483586; c=relaxed/simple;
-	bh=+RTtXfxyz/OM4N8LoIdbI0BRF1j9mNTINWXhLlFGt9s=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=NdHykTfRvZ3Mrtq2gNZhjMx+sCOmKI9qPqmZVIcxZDOprLYd/VtYwMXphZwtEihRf6gHupbn9XoiocXXDC9mOAftZa988VY8SgeBdMzOCerEALZGJln38OVNtwuwubhkvCDg2iXK/fGaTfyKluOCjqLcO9Kgc4fgHDglXdn5tww=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=H5e0HreA; arc=none smtp.client-ip=209.85.128.42
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-490b613a17bso7688175e9.3
-        for <linux-doc@vger.kernel.org>; Wed, 03 Jun 2026 03:46:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1780483583; x=1781088383; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=Tl+jgcSk0dHHiZncMXgwXjUu4Qjxd08EiAtrl4yNhBg=;
-        b=H5e0HreAK+v4P9fBa8/js/9yA8o8p1A6Q7ND/ICLnf7uwb/vWBicZBNpnPl/tazKMO
-         fQJL+inhdkXEInYck2WUwwnvAOo2qZgKsygZQzXsdmISUdFxh6QpzlUrDAVseZxGZNEm
-         thomBoYHzBREf8ByMEi+lefGJ/JVkURu9YTHEOvCRkUpGeX0dl0l2v7xkGc9HG0mx/d3
-         gQU53aA3j0f3Oq0lQMCxMV61yQf7oW4f51iepeE4wPFiBiijZt+Q8spBD3pQO2EodbdR
-         fF4gT1k8TOrNoGGaXBHtWg4VSqBU7Z2B2dTsZGXNSUzziALOeN6Yx1yWyVslgjhNFNdw
-         9dgg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780483583; x=1781088383;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Tl+jgcSk0dHHiZncMXgwXjUu4Qjxd08EiAtrl4yNhBg=;
-        b=nFGRETP2xHs8KGz8NjCmSq+i/li+9QjIo9/+Ojqn/dTkaUPIdBGYuRhJjyKPUC/Akg
-         XllgHMxPbrPn0itSjt4kg9OUHBZLS52lAl6EBsM6r7oFRtGTAHxUXUkUdIBjgmqPl2eA
-         STOIoa77BDvCuPnlI4X+eeQ1tExSBuG1x7ad5C1wIFgFP8p98Tx0GjIWPHIrocbK9xK/
-         JYyaGZdcUzazY2vOxC/mxHIrDZmun/Tp/mpmUIh8a7lHmPSz/MBBmVAaFwta0lRfjOXM
-         cV7gzJWN0Wr66ezDP52V0a8n/TIiMwD3BN83IOsjQnmI2J2tOzcA5/gvzroy78H04ozB
-         gBiw==
-X-Forwarded-Encrypted: i=1; AFNElJ8AlLhs7qew8iicF0WWJj/4AUWNlqLBbrv1YJMwSqns5xQ+8TU2NwasbSsRkkgZXbVsr7Xq8JbshnA=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxbKJWfDxZGZW8lMRkmBHLth3TSPBCfucY1ij6cWVqW38W+thEf
-	G6i93I0BjYZAGNZNWQMGPFg/oNZ2+ElRtnbYgdDsfaZ0cS2NfkUtpz/CpvgJxz8/F48=
-X-Gm-Gg: Acq92OEG0XUEQOaPYjAMENAMnculDqX1eVpGSvbekGhZOzN3B0bKqPVLHCIOgPHThoL
-	dVpHQmWOa7UWqdpPEUpHxEenHlliNDxxQsPNnYIAPbvPAuEr95RHr1vmjkkHaYBNwf7eDibUUTT
-	Tg3hjY97LQB4jvi7yLwkebMMlJ2jwOKlBIhiX4fvkFFLigz6S0Yj0FeuaQmVxbrmFopOeshx+mz
-	HgJKAofC/PobLQnf1D2J4/cKEZudKiCNxqFNwn5ir+v+fo1A+bqFs/FDm40+u+lIqxWxZ6Y57VO
-	r8Y1p0Hi0pt/6xsN9pTlk17NSqRYEmLf1GKeUnfzWvrY9M3PBLkLDSyUym9BQC6rF0HQPZ+YN9k
-	ckMChArqCE4EjbEr46s6Gd5pN/rk8wd3aCa6xy9HDjKVL7Yd/jxRlsn+wMRLGPtNVQR0S0CZS06
-	oTk4EVdGE7GLNc7kJASstAZ6vdbSSfoIkBUkWYgXw=
-X-Received: by 2002:a05:600c:4ec9:b0:490:b642:ce32 with SMTP id 5b1f17b1804b1-490b642cebcmr45646065e9.13.1780483583275;
-        Wed, 03 Jun 2026 03:46:23 -0700 (PDT)
-Received: from [192.168.1.3] ([185.48.77.170])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-490b6150bfcsm96449955e9.3.2026.06.03.03.46.22
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 03 Jun 2026 03:46:22 -0700 (PDT)
-Message-ID: <37a3de27-7e86-46d0-b73f-8b9139586387@linaro.org>
-Date: Wed, 3 Jun 2026 11:46:21 +0100
+	s=arc-20240116; t=1780483822; c=relaxed/simple;
+	bh=rGdLobv2crwIaUMkGhzSUMfkwNH0pVONnO2583Iw0vk=;
+	h=Date:From:To:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=aW09PzsQrZixYH40Zihvg1G3ct9J+tRWVPzTul2XBJi2BVGs4JeeWEfCaw9TyF4DeS1d7TGRqE2sdqgud+shvDU5avKSRMvTSWv23nDtS3sAWtHyOhygnFtdXapHrHjyQdDaBpasIJE2eIiFJBp+NAeVJ1LBmJN7WPygfAFTjrw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=gtHKMp73; arc=none smtp.client-ip=217.140.110.172
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CA4D02BCA;
+	Wed,  3 Jun 2026 03:50:15 -0700 (PDT)
+Received: from localhost (e132581.arm.com [10.1.196.87])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 54B9A3F632;
+	Wed,  3 Jun 2026 03:50:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1780483820; bh=rGdLobv2crwIaUMkGhzSUMfkwNH0pVONnO2583Iw0vk=;
+	h=Date:From:To:Subject:References:In-Reply-To:From;
+	b=gtHKMp73q4BSa0h99rIkiNIePRVj4k4jOw1jOnU9y4Ei9hKOUZDruqo0t7rqxkPxv
+	 8qNf4TdQWjVQJ6G60IfbD/LPixZbazGjqJyIOO8GmW8kN4kHhiJIW+GoDQw6Hl3Qnn
+	 vAV63g6ATZuFR/IRYNcNwIvvcEtu+ar30kFlodkM=
+Date: Wed, 3 Jun 2026 11:50:18 +0100
+From: Leo Yan <leo.yan@arm.com>
+To: James Clark <james.clark@linaro.org>, Mike Leach <mike.leach@arm.com>,
+	Arnaldo Carvalho de Melo <acme@kernel.org>,
+	Namhyung Kim <namhyung@kernel.org>, Jiri Olsa <jolsa@kernel.org>,
+	Ian Rogers <irogers@google.com>, Amir Ayupov <aaupov@meta.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Paschalis Mpeis <Paschalis.Mpeis@arm.com>,
+	coresight@lists.linaro.org, linux-perf-users@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Arnaldo Carvalho de Melo <acme@redhat.com>,
+	linux-doc@vger.kernel.org
+Subject: Re: [PATCH v2 02/18] perf test: Add workload-ctl option
+Message-ID: <20260603105018.GQ101133@e132581.arm.com>
+References: <20260602-james-cs-context-tracking-fix-v2-0-85b5ce6f55c6@linaro.org>
+ <20260602-james-cs-context-tracking-fix-v2-2-85b5ce6f55c6@linaro.org>
+ <20260603104001.GP101133@e132581.arm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 02/18] perf test: Add workload-ctl option
-To: Leo Yan <leo.yan@arm.com>
-Cc: Suzuki K Poulose <suzuki.poulose@arm.com>, Mike Leach
- <mike.leach@arm.com>, Arnaldo Carvalho de Melo <acme@kernel.org>,
- Namhyung Kim <namhyung@kernel.org>, Jiri Olsa <jolsa@kernel.org>,
- Ian Rogers <irogers@google.com>, Amir Ayupov <aaupov@meta.com>,
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- Paschalis Mpeis <Paschalis.Mpeis@arm.com>, coresight@lists.linaro.org,
- linux-perf-users@vger.kernel.org, linux-kernel@vger.kernel.org,
- Arnaldo Carvalho de Melo <acme@redhat.com>, linux-doc@vger.kernel.org
-References: <20260602-james-cs-context-tracking-fix-v2-0-85b5ce6f55c6@linaro.org>
- <20260602-james-cs-context-tracking-fix-v2-2-85b5ce6f55c6@linaro.org>
- <20260603104001.GP101133@e132581.arm.com>
-Content-Language: en-US
-From: James Clark <james.clark@linaro.org>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 In-Reply-To: <20260603104001.GP101133@e132581.arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
-	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
+	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-90714-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:leo.yan@arm.com,m:suzuki.poulose@arm.com,m:mike.leach@arm.com,m:acme@kernel.org,m:namhyung@kernel.org,m:jolsa@kernel.org,m:irogers@google.com,m:aaupov@meta.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:Paschalis.Mpeis@arm.com,m:coresight@lists.linaro.org,m:linux-perf-users@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:acme@redhat.com,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[james.clark@linaro.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linaro.org:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-90715-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:james.clark@linaro.org,m:mike.leach@arm.com,m:acme@kernel.org,m:namhyung@kernel.org,m:jolsa@kernel.org,m:irogers@google.com,m:aaupov@meta.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:Paschalis.Mpeis@arm.com,m:coresight@lists.linaro.org,m:linux-perf-users@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:acme@redhat.com,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
+	FORGED_SENDER(0.00)[leo.yan@arm.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	DKIM_TRACE(0.00)[arm.com:+];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[james.clark@linaro.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[leo.yan@arm.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:mid,linaro.org:from_mime,linaro.org:dkim,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
+	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,e132581.arm.com:mid,arm.com:from_mime,arm.com:dkim,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 3A71A636B3B
+X-Rspamd-Queue-Id: E0FC3636BC3
 
-
-
-On 03/06/2026 11:40 am, Leo Yan wrote:
+On Wed, Jun 03, 2026 at 11:40:01AM +0100, Coresight ML wrote:
 > On Tue, Jun 02, 2026 at 03:26:44PM +0100, James Clark wrote:
 > 
 > [...]
 > 
->> --- a/tools/perf/Documentation/perf-test.txt
->> +++ b/tools/perf/Documentation/perf-test.txt
->> @@ -69,3 +69,9 @@ OPTIONS
->>   
->>   --list-workloads::
->>   	List the available workloads to use with -w/--workload.
->> +
->> +--workload-ctl=fifo:ctl-fifo[,ack-fifo]::
->> +	Write 'enable' to ctl-fifo before running the workload and 'disable'
->> +	before returning. If ack-fifo is provided, the workload runner waits for
->> +	an 'ack' response after each command. This scopes the recording to only
->> +	the workload if used with 'perf record -D 1 --control ...'.
+> > --- a/tools/perf/Documentation/perf-test.txt
+> > +++ b/tools/perf/Documentation/perf-test.txt
+> > @@ -69,3 +69,9 @@ OPTIONS
+> >  
+> >  --list-workloads::
+> >  	List the available workloads to use with -w/--workload.
+> > +
+> > +--workload-ctl=fifo:ctl-fifo[,ack-fifo]::
+> > +	Write 'enable' to ctl-fifo before running the workload and 'disable'
+> > +	before returning. If ack-fifo is provided, the workload runner waits for
+> > +	an 'ack' response after each command. This scopes the recording to only
+> > +	the workload if used with 'perf record -D 1 --control ...'.
 > 
 > This new option doesn't work on its own. I would spell out in explicit
 > words that it needs to communicate with perf record session:
 > 
->    "This option is used to communicate with a perf record session in
->    order to control the recording scope. When specifying this option,
->    the same FIFO path must be specified in the record session via:
+>   "This option is used to communicate with a perf record session in
+>   order to control the recording scope. When specifying this option,
+>   the same FIFO path must be specified in the record session via:
 > 
->      perf record -D 1 --control=fifo:ctl-fifo[,ack-fifo] ...
-> 
->    The perf test sends 'enable' and 'disable' commands through ctl-fifo to
->    control event recording. If 'ack-fifo' is provided, the workload runner
->    waits for an 'ack' response after each command."
-> 
-> BTW, I'd say the naming "--record-ctl" might be more close to the
-> purpose.
-> 
+>     perf record -D 1 --control=fifo:ctl-fifo[,ack-fifo] ...
 
-Will do
-
-
-> Thanks,
-> Leo
-
-
+Correct typo: s/-D 1/-D -1/
 
