@@ -1,150 +1,165 @@
-Return-Path: <linux-doc+bounces-90654-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90659-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id RiMfMnrDH2ptpgAAu9opvQ
-	(envelope-from <linux-doc+bounces-90654-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 08:02:34 +0200
+	id e1+RDYnKH2repwAAu9opvQ
+	(envelope-from <linux-doc+bounces-90659-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 08:32:41 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 609746347C2
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 08:02:34 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8AC0C634AD6
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 08:32:40 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=huawei.com header.s=dkim header.b=xZwdt+FK;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90654-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-90654-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=huawei.com;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=G+TFFupz;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90659-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-90659-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=gmail.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id B9B7E3183CBE
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 05:56:44 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 9655E3106C34
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 06:27:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 095053F0A8C;
-	Wed,  3 Jun 2026 05:56:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 36BF4305662;
+	Wed,  3 Jun 2026 06:27:15 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from canpmsgout11.his.huawei.com (canpmsgout11.his.huawei.com [113.46.200.226])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CAF4B314B8F;
-	Wed,  3 Jun 2026 05:56:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F06553F9F51
+	for <linux-doc@vger.kernel.org>; Wed,  3 Jun 2026 06:27:13 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780466203; cv=none; b=s2eN0UxDqiY72hvLE5g6ZmeEecVra9xEcjfoB4fJ6Xk9KuYAe/WZh/FELyFP8riWAExXww/zKoPN5Zuf6ojUPtnqWrS38XCXBXsp3+VPxrdFAE6m2YYBcpL6bIjNvQ9qfwJrDJDt6KGiUpfpKcgiio5efAlbmLkMPeRlZ8u0WQI=
+	t=1780468035; cv=none; b=BUFqkPZy7IsteSL1d3pnMsoaXozH16vCXp2nX8yEzmJ2guo/2QTJ+uIY/bOru1Z5CFJg8Zsoy4XycHVxPtC0xDnGpN40ck0LSA25dRua/5bnoj6NeTxKJ6kk/KcjljGWBBdD/U5YBYpI0N/LJSGAqYy5+RrYyJjCjAeu7A0yVos=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780466203; c=relaxed/simple;
-	bh=ihnBRnuiawMRpx4Ju3/9ELmf1p9Q5arnv8psZ5IrH+w=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=ByG1SskoCEYjqAqhl4yOXV2opi69FWJWISdjjYttbLD1qjib/u9h3deeR8uUqgzOEj+vwPQ3n3gpU9sNO22tZ+H1Y401DYxQsUaqBXrC+BypVV5VjcFDWz96HndQXEMSqL6/2Lhx31lb2igk3hSao8fDj1FCe8Fw6Va5uSCa+FU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=xZwdt+FK; arc=none smtp.client-ip=113.46.200.226
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=Nig0WWbDCgpsFzsv9VKbhr+B9TjEQEZKyFyAJDj3xOI=;
-	b=xZwdt+FKvDQ0pMrZpqJ/rJyyhQcRxtnm+Y7/a+bsJgm00xS2kI5pp0bU4lMg5+p3IK/8qj5pX
-	7kW9sWIUwa5MTDCHnG6iEiNfnPWm7uT4zGcFoEXyzh7stHTw6UvQy16c3/WVkwcukkT6L4+32AQ
-	r3Qno9lBTAiiDgVPPvQJqVw=
-Received: from mail.maildlp.com (unknown [172.19.163.15])
-	by canpmsgout11.his.huawei.com (SkyGuard) with ESMTPS id 4gVcFS1YzYzKmV1;
-	Wed,  3 Jun 2026 13:48:44 +0800 (CST)
-Received: from kwepemr200004.china.huawei.com (unknown [7.202.195.241])
-	by mail.maildlp.com (Postfix) with ESMTPS id 857DB40571;
-	Wed,  3 Jun 2026 13:56:36 +0800 (CST)
-Received: from huawei.com (10.50.163.32) by kwepemr200004.china.huawei.com
- (7.202.195.241) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Wed, 3 Jun
- 2026 13:56:35 +0800
-From: Pengjie Zhang <zhangpengjie2@huawei.com>
-To: <rafael@kernel.org>, <viresh.kumar@linaro.org>, <corbet@lwn.net>,
-	<skhan@linuxfoundation.org>
-CC: <linux-pm@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <linuxarm@huawei.com>,
-	<zhanjie9@hisilicon.com>, <prime.zeng@hisilicon.com>,
-	<wanghuiqiang@huawei.com>, <xuwei5@huawei.com>, <lihuisong@huawei.com>,
-	<zhenglifeng1@huawei.com>, <yubowen8@huawei.com>, <zhangpengjie2@huawei.com>,
-	<wangzhi12@huawei.com>, <zhongqiu.han@oss.qualcomm.com>
-Subject: [PATCH v2] cpufreq: Documentation: fix freq_step description
-Date: Wed, 3 Jun 2026 13:56:35 +0800
-Message-ID: <20260603055635.1549943-1-zhangpengjie2@huawei.com>
-X-Mailer: git-send-email 2.33.0
+	s=arc-20240116; t=1780468035; c=relaxed/simple;
+	bh=br4Q/5Zkdoxf1ZYbzi2zhNKQk/fuGIIMoDVDCqYOvec=;
+	h=From:To:Cc:Subject:In-Reply-To:Date:Message-ID:References; b=BGYE+4HeBmTQQBzLM4l3mvN1LzR4wyLMz6LcLLF5EPYzzBoNpvEhOLsH4SkCev31HkuDPxtdohVUQ7BErtinTSyU8ZXREl1IREafun14gejDie4eRE3cml8Oio2EDeNEEB9NPfzJGPe16Sp4w+fNyHQHyjqwRHaeqRhyTDl3EoI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=G+TFFupz; arc=none smtp.client-ip=209.85.214.170
+Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-2bf18c30bb2so41144515ad.0
+        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 23:27:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1780468033; x=1781072833; darn=vger.kernel.org;
+        h=references:message-id:date:in-reply-to:subject:cc:to:from:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=FsWw+BRaEfTe2BSzSpq066D0ULR8rb3630HXbbNfz04=;
+        b=G+TFFupzCbNdF3i5DbDb6woQdwwrx11zHf//h3dwTPe8HiXAdLqI8L9P/BHw6OQRb+
+         hR3iha1fuQu8ZdJMa/s4PRCm6hh6r5Z1WRP2uoSjC+jSVNSJZq2K7hpcyxgqMouh8w3S
+         eM+6jFl1bYbeM2jcc1X2uyS5hj0Yl0bpPgOO/HLDy3q06PpdC32BzSuLGBYLTOzoxqfu
+         Rec4QVRaKx2mtf0Vx2tbbLzE8vC/iX3bev8xe/ass9k1wpwz5yT6ijX43jdnz8UO2eeN
+         fOubUiE5rUufkGGQIbd8IPBc+H4vHkghDpkXavVFZKfbwUthzno5bWnvepkF8OsjjUam
+         q0qQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780468033; x=1781072833;
+        h=references:message-id:date:in-reply-to:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=FsWw+BRaEfTe2BSzSpq066D0ULR8rb3630HXbbNfz04=;
+        b=DWPQEwHbC80qfIf34RanPcJl++A4FtbB96R+/54lCF3cU7kJMhV37i0dyNOfdlXP2K
+         28wtFBx+YjN+CWockjC4IaFine0tlNKgKMLTkRxEzLR+1pBkkYdSTxjP6iXOSoiqK132
+         +bHFf0f+dyxlAfRt1mf9P+tWC6j8O15fLAr7PSfYiC961uY5HcyDpVeg9pM46A5rOXRZ
+         bwwdzejzykijMZe9lSjANR2RPVWQSnIs2mxBoXB6PcABSaOGWpSkOvp0/kXPsKb+Oj87
+         bI4fTvTOamt7CJTsqI1WQt8qJeSICwUIqIc6O134fmOolxzmXYRq86Relc/qvN+G1wEO
+         yFMA==
+X-Forwarded-Encrypted: i=1; AFNElJ/JaMSGY+gp9nhuGQLZwayCDL/ODL1f5DySS3wf/hIeesgZWy++1bdoIb+TAJtKPxGYFLYZWof18CE=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzFboOQgc+2g3poUmKo6r+v+fuOKgSHZl0zEpeScjpWn9buo/CW
+	Gpw0i1vJFjHgJcAKkGXBebbwqdVZ7XGVslACeXV7XzonJA7Ixw0YkM21
+X-Gm-Gg: Acq92OGRJ03YSHX8eqmuifAxZXeP8KmTmu8kK7OnJzHvWXB+O3EUNMWz5J1XwdB5xde
+	tveaUAYa9kcL7EOGBl9nzeqK3CILkEKWG2nGFtNJ94f0NV+Uso1m1XORXYd3Ln5HwKZt0vErtWJ
+	3Da0sXzGaVHJTEKq3xVjiaYnKoMr+t60syZ8w3Kig9+K/dKOJ7RFyGi+6umeyzp6KYSYttzIFil
+	+zJMVxkND057cTC7vVdo8mQxxaRbS/Bk9qHkddi0VnlwiW9wpWw1GjGgPs+KZvvH9xn8zmFQ7Cu
+	ydwY7qscDjlNRe26OuhMctK2g9cZVoNhO2K8MdoEUnnWeKQidAHNdXN/f83BSF9zoGucFCHvjrD
+	l1ifRhRiUEAFFEiJOvtHWDJSJiBygCJDfgFErY71+ThdV1QRUkLLkKqMzA+f06PPPwMfEIpyGIC
+	zG13HDcMW6x92YdKettzREHVscgAwIVN/i
+X-Received: by 2002:a17:903:3c45:b0:2c0:bb2d:a30b with SMTP id d9443c01a7336-2c1644ae17fmr20198585ad.32.1780468033143;
+        Tue, 02 Jun 2026 23:27:13 -0700 (PDT)
+Received: from pve-server ([49.205.216.49])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c16629cfb4sm12978885ad.59.2026.06.02.23.27.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 02 Jun 2026 23:27:12 -0700 (PDT)
+From: Ritesh Harjani (IBM) <ritesh.list@gmail.com>
+To: Harsh Prateek Bora <harshpb@linux.ibm.com>, Madhavan Srinivasan <maddy@linux.ibm.com>, Vaibhav Jain <vaibhav@linux.ibm.com>, Amit Machhiwal <amachhiw@linux.ibm.com>
+Cc: linuxppc-dev@lists.ozlabs.org, Anushree Mathur <anushree.mathur@linux.ibm.com>, Paolo Bonzini <pbonzini@redhat.com>, Nicholas Piggin <npiggin@gmail.com>, Michael Ellerman <mpe@ellerman.id.au>, "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, kvm@vger.kernel.org, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, lkp@intel.com
+Subject: Re: [PATCH v3 1/5] KVM: PPC: Book3S HV: Validate arch_compat against host compatibility mode
+In-Reply-To: <56c84e26-69ed-433b-baaf-7b53acc60391@linux.ibm.com>
+Date: Wed, 03 Jun 2026 11:35:55 +0530
+Message-ID: <bjdsw43g.ritesh.list@gmail.com>
+References: <20260522152744.55251-1-amachhiw@linux.ibm.com> <20260522152744.55251-2-amachhiw@linux.ibm.com> <pl2g6xbz.ritesh.list@gmail.com> <20260529141530.fc225a67-e9-amachhiw@linux.ibm.com> <cxyewhx8.ritesh.list@gmail.com> <87se74z4a6.fsf@vajain21.in.ibm.com> <72ef4cdb-8d9e-4319-9c94-b9a46a6f6194@linux.ibm.com> <56c84e26-69ed-433b-baaf-7b53acc60391@linux.ibm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: kwepems500001.china.huawei.com (7.221.188.70) To
- kwepemr200004.china.huawei.com (7.202.195.241)
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	TAGGED_FROM(0.00)[bounces-90654-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:rafael@kernel.org,m:viresh.kumar@linaro.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-pm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linuxarm@huawei.com,m:zhanjie9@hisilicon.com,m:prime.zeng@hisilicon.com,m:wanghuiqiang@huawei.com,m:xuwei5@huawei.com,m:lihuisong@huawei.com,m:zhenglifeng1@huawei.com,m:yubowen8@huawei.com,m:zhangpengjie2@huawei.com,m:wangzhi12@huawei.com,m:zhongqiu.han@oss.qualcomm.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[zhangpengjie2@huawei.com,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-90659-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FREEMAIL_CC(0.00)[lists.ozlabs.org,linux.ibm.com,redhat.com,gmail.com,ellerman.id.au,kernel.org,lwn.net,linuxfoundation.org,vger.kernel.org,intel.com];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:harshpb@linux.ibm.com,m:maddy@linux.ibm.com,m:vaibhav@linux.ibm.com,m:amachhiw@linux.ibm.com,m:linuxppc-dev@lists.ozlabs.org,m:anushree.mathur@linux.ibm.com,m:pbonzini@redhat.com,m:npiggin@gmail.com,m:mpe@ellerman.id.au,m:chleroy@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:kvm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:lkp@intel.com,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER(0.00)[riteshlist@gmail.com,linux-doc@vger.kernel.org];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_NEQ_ENVFROM(0.00)[zhangpengjie2@huawei.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	MISSING_XM_UA(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[riteshlist@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	TO_DN_NONE(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	DKIM_TRACE(0.00)[huawei.com:+];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[18];
+	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp,huawei.com:mid,huawei.com:dkim,huawei.com:from_mime,huawei.com:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 609746347C2
+X-Rspamd-Queue-Id: 8AC0C634AD6
 
-The conservative governor documentation incorrectly states that setting
-freq_step to 0 will use the default 5% frequency step. In reality, since
-at least commit 8e677ce83bf4 ("[CPUFREQ] conservative: fixup governor to
-function more like ondemand logic"), freq_step=0 has always caused the
-governor to skip frequency updates entirely.
+Harsh Prateek Bora <harshpb@linux.ibm.com> writes:
 
-Correct the documentation to reflect the actual behavior: freq_step=0
-disables frequency changes by the governor entirely.
+>> amit, can you just post this alone as a separate patch, so that we could
+>> pull it for 7.2 merge?
+>> 
+>
+> FWIW, b4 am -P1 <mbox> should fetch this patch alone (and not the entire 
+> series), See b4 am --help for more options to select a subset of patches.
+>
 
-Fixes: 2a0e49279850 ("cpufreq: User/admin documentation update and consolidation")
-Signed-off-by: Pengjie Zhang <zhangpengjie2@huawei.com>
----
-Changes in v2:
-- Update commit message to reference the correct historical commit
-  8e677ce83bf4 instead of b9170836d1aa, as the original implementation
-  had asymmetric behavior for freq_step=0 (suggested by Zhongqiu Han).
-- Link to v1:https://lore.kernel.org/all/20260529111122.3321645-1-zhangpengjie2@huawei.com/
----
- Documentation/admin-guide/pm/cpufreq.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+I agree, however as an FYI in this case -
+I had few review comments on PATCH-1 here [1] - which along with the
+commit msg changes, also had a code change involved, so IMO, it's still
+a good idea if Amit can test and send an updated patch separately for this -
+to be pulled in for 7.2.
 
-diff --git a/Documentation/admin-guide/pm/cpufreq.rst b/Documentation/admin-guide/pm/cpufreq.rst
-index dbe6d23a5d67..98c724d49047 100644
---- a/Documentation/admin-guide/pm/cpufreq.rst
-+++ b/Documentation/admin-guide/pm/cpufreq.rst
-@@ -586,8 +586,8 @@ This governor exposes the following tunables:
- 	100 (5 by default).
- 
- 	This is how much the frequency is allowed to change in one go.  Setting
--	it to 0 will cause the default frequency step (5 percent) to be used
--	and setting it to 100 effectively causes the governor to periodically
-+	it to 0 disables frequency changes by the governor entirely and setting
-+	it to 100 effectively causes the governor to periodically
- 	switch the frequency between the ``scaling_min_freq`` and
- 	``scaling_max_freq`` policy limits.
- 
--- 
-2.33.0
+[1]: https://lore.kernel.org/linuxppc-dev/pl2g6xbz.ritesh.list@gmail.com/
 
+
+Replying to Vaibhav comment here so that we can reach to the conclusion
+at one place.
+
+> Hence IMHO, this patch can be marked for stable tree and potential
+> candidate for 7.2 merge window. But dont see applicability of a 'fixes'
+> tag to this patch
+
+I agree, we need not use a fixes tag then. So, we shall mark this
+with v6.10 tag then.
+
+Cc: stable@vger.kernel.org # v6.10+
+
+(I calculated this based on when Power11 was added: 
+git tag --contains c2ed087ed35ca    | grep -E "^v" |head -1
+v6.10
+)
+
+-ritesh
 
