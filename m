@@ -1,147 +1,326 @@
-Return-Path: <linux-doc+bounces-90719-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90597-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id JjOnH6MLIGrLuwAAu9opvQ
-	(envelope-from <linux-doc+bounces-90719-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 13:10:27 +0200
+	id bZzaHxNkH2oYlgAAu9opvQ
+	(envelope-from <linux-doc+bounces-90597-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 01:15:31 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6858636DB4
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 13:10:26 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1ED9B632CF1
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 01:15:31 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=arm.com header.s=foss header.b=bTNE+nlI;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90719-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90719-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=arm.com;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=nlkw8srV;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90597-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-90597-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=gmail.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id B04D630316FA
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 11:10:25 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 67B5C304D5EE
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 23:12:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3D6E143E9F4;
-	Wed,  3 Jun 2026 11:10:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id ED7943CDBC0;
+	Tue,  2 Jun 2026 23:12:50 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 13D6843D500;
-	Wed,  3 Jun 2026 11:10:21 +0000 (UTC)
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3034A3CE4BD
+	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 23:12:48 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780485022; cv=none; b=TE7MgFoctOr49j69L9PRFCyIzpbACRGKFFeTH5n/Ur3yrKKFfqkIIMNqx6wmojg9qdDlOoxTH6Og1CcKaD6g7tsgk0NbSKCsmWfa9WzPvrWtOWXHsUaCngY1WSCBDj7TzpoTF7Um4wdPA7KbgsUwz1nDCcISTrEO+JgkN13eDo0=
+	t=1780441970; cv=none; b=CfTzRVvqY++aSSGeucBf+pvU9niEkpU/v4lCZTNWfvE5tTTNXYHv8aT2Qm1xkxPJ3fpXwpdVIOMDawBQ/v5s1ixZCIJrNJFM8g+lIgen0qOQM3z5Syp/wn805dNuNxhS+2Pwq544jgAuS1TnMxJ2e6DPV9kYyJ3uHua/8ocNoN8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780485022; c=relaxed/simple;
-	bh=2keBvbqZ2Vgm/fEN+Vz4ZRoD6fUJNi1ra/DrIcA5a9g=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=fWbzndHDB+v83blWaihMnJuktc18m/DEaUtREoupJxyTZmmKjcHd2i1PG1yCHlQosUBlr1Mcfuqs0KHCH8xoF3Cy/vsY8BJkHN8QaCYf+aYdyU9FTKmU5Pqr56lzX/tcr7WV+zlurHWfqnF3Tn/as3FiPJ9/vlLZ3c9LYL6nsEU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=bTNE+nlI; arc=none smtp.client-ip=217.140.110.172
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A453032E4;
-	Wed,  3 Jun 2026 04:10:15 -0700 (PDT)
-Received: from localhost (e132581.arm.com [10.1.196.87])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2AC9F3F86F;
-	Wed,  3 Jun 2026 04:10:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1780485020; bh=2keBvbqZ2Vgm/fEN+Vz4ZRoD6fUJNi1ra/DrIcA5a9g=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=bTNE+nlIWBpqZieGXftMVl0SrMFpBDH2jzlGkuZKz7ZCrd5of1hw/LFUuCHqPPpfo
-	 WRqmWP7H41Ws68ISRWCkjeuNvINFWtsbUXPAAWZKxnvJT33SYkRo1wterqiHLNl2pZ
-	 hIWj3B5rCiNlGg/RKavlCUvtz8E5c7Z0tYJipXGw=
-Date: Wed, 3 Jun 2026 12:10:18 +0100
-From: Leo Yan <leo.yan@arm.com>
-To: James Clark <james.clark@linaro.org>
-Cc: Suzuki K Poulose <suzuki.poulose@arm.com>,
-	Mike Leach <mike.leach@arm.com>,
-	Arnaldo Carvalho de Melo <acme@kernel.org>,
-	Namhyung Kim <namhyung@kernel.org>, Jiri Olsa <jolsa@kernel.org>,
-	Ian Rogers <irogers@google.com>, Amir Ayupov <aaupov@meta.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Paschalis Mpeis <Paschalis.Mpeis@arm.com>,
-	coresight@lists.linaro.org, linux-perf-users@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Arnaldo Carvalho de Melo <acme@redhat.com>,
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v2 04/18] perf test cs-etm: Test process attribution
-Message-ID: <20260603111018.GS101133@e132581.arm.com>
-References: <20260602-james-cs-context-tracking-fix-v2-0-85b5ce6f55c6@linaro.org>
- <20260602-james-cs-context-tracking-fix-v2-4-85b5ce6f55c6@linaro.org>
+	s=arc-20240116; t=1780441970; c=relaxed/simple;
+	bh=q0l6SoLkv/OD4ArhEhudd5OJ0i0bPlCDCgP82G86E4s=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=lzABaMbv0jEDWM7GhqyBlYUYuVf79APFop9Kb3E5T0bMVQSU513p3WFyGWxshZGxmioktyvX4zN069qG7NEMq9hB9sEAzZ85wnr/YkZnuY/LZMKa9p6TIHt9zNmIntYF/Hw2XQ+EsDEI0B9JvqU1ECO2tDPWcZAWWOheSPFkxj0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=nlkw8srV; arc=none smtp.client-ip=209.85.214.178
+Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-2c168baac83so422875ad.2
+        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 16:12:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1780441968; x=1781046768; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=dVN3EYHVbww+tgJzqqdTHZZxq1gelgNV3Kq1kXyz7N8=;
+        b=nlkw8srVuuYSHi5uUZyGLX3PxEynaMe0gOgQtxltwUgqHvlbFQ6UU8yfPHi32+uY7A
+         H61Gm4xH4xhzQ6GpK3u6g9JmidmlUXKUOb8ODk9mi+lI5sds9QLxFk6D6ijtCRa7+baB
+         g6IqN7vC5ezb/6xif6zZBcAZ5L0UTxAHST+jodze/76+KO9DTuf2KS+GusCnk5JcRsMe
+         AL9BHatsS/XpQad2Ruu58fpwIz/H2iKLYrD78NipdzZsW2yLi0nqM1Bgt8Z5B+AXBPyb
+         3Uo4XIH3IFgghq8STLEpgrBZsAufDMB+M7rjhi00bffBCTogqMwLrjpnG3Y6hihv6Hxk
+         fMyw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780441968; x=1781046768;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=dVN3EYHVbww+tgJzqqdTHZZxq1gelgNV3Kq1kXyz7N8=;
+        b=pOBRotcv3Eq3Wp95M9q790xoRaXN9WQiUYhisPgsy7Atwz1cLwTQ6ut+6Gg+0fpV4P
+         w4vGkkD3UzMnR/B7Sv1HTcwI065h5a1sLFmwonyeK2/nTQvxX5dM07ptTkKxxA3hT34o
+         fzTJ0YKN7FlMHJII5ystYliEU8hR0fRZuFYerpi8Ai8DFavaLVYDV5BFXj8hyFGuD9Vz
+         LV6eDiAhWvSgdLALs4xyzSHiEYcst8iKm1koB4LgfskCrini+xuRETIPXpQ8R/ru281S
+         7XRDKFOCPvA7iVw4ZxMOMrTbp50JnHHklaMGvKbnzOMq2iJLQcP9FjUiIcY5kZ0kAzzJ
+         c4kw==
+X-Gm-Message-State: AOJu0Yxfdb8qw70xHbHNskbk/Ls2ETAM8NEB1zke4rc76sNo0uQaWiIL
+	s9ppjK2vIp+LZjW/5Yz0h85Lbnjxr++YdH4ccZe/kZpfaWupnU2szgNs
+X-Gm-Gg: Acq92OEVo7sQairh3e2KX0uZYwvowds+GlP4v0X+rE1shhpSm431SG7h6yObTI271d5
+	52cqbmS0nqy+B7CG6tEkeSd7g5huy5xV0Qqhihng9MB1YAmm/3Jnukcr1B1sq03UlTEMfGE7FNw
+	LFXr3jnfu2QDnJ3uRvIHp9GG6cYv/gbEQYG3z4+LOWLK5rYS+tzOHsh0do01C3U/iAqgQLl4LNe
+	Ss5YaHsBAueFVgZehM3N7G4GhN/euSp1b9ZiUT7+hIo0XhbU5Fo16HM2iK5PBwV3CgvO5DCDMUU
+	VE5Q4U4E5WH2+hLptRuzgtg0vBKa89z9FZD5+shmWjFZdMNsJahdbAomIXd2fqblrbXJuzcamOt
+	UtNC8Vf9N1vCW05jvGJuZBTrtJrjL/u6dr3+gQiPpdNmiPaHsyNdEQ7qqBgC5tL9trl1cSIifaq
+	uNKKoFG2pIiA==
+X-Received: by 2002:a17:903:2410:b0:2c0:b6c7:2273 with SMTP id d9443c01a7336-2c163a257e8mr7287705ad.3.1780441968266;
+        Tue, 02 Jun 2026 16:12:48 -0700 (PDT)
+Received: from [127.0.1.1] ([2a12:a305:4::40e9])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c16649d2dfsm3302965ad.75.2026.06.02.16.12.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 02 Jun 2026 16:12:47 -0700 (PDT)
+From: Guodong Xu <docular.xu@gmail.com>
+Subject: [PATCH v3 00/15] riscv: hwprobe: Expose RVA23U64 base behavior
+Date: Wed, 03 Jun 2026 07:11:55 -0400
+Message-Id: <20260603-rva23u64-hwprobe-v2-v3-0-5529a7b28384@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260602-james-cs-context-tracking-fix-v2-4-85b5ce6f55c6@linaro.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAPsLIGoC/22NzQ6CMBCEX8Xs2Zp2+RE9+R6GQ1sWqYmUbKFqC
+ O9uQY8mc/mSmflmCMSOApx3MzBFF5zvE2T7HdhO9zcSrkkMKLGUhawER43ZVOaiew7sDYmIQjU
+ oj9nJGlMRpOXA1LrX9nqtvxwmcyc7rldro3Nh9PzetBHX3s+g1F9DihSobKGLPG9VYy/sgg2j5
+ oP1D6iXZfkANr3jGMsAAAA=
+X-Change-ID: 20260508-rva23u64-hwprobe-v2-1d20739cbb8e
+To: Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>, Paul Walmsley <pjw@kernel.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, 
+ Alexandre Ghiti <alex@ghiti.fr>, Zong Li <zong.li@sifive.com>, 
+ Deepak Gupta <debug@rivosinc.com>, Anup Patel <anup@brainfault.org>, 
+ Atish Patra <atish.patra@linux.dev>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Yixun Lan <dlan@kernel.org>, 
+ Chen Wang <unicorn_wang@outlook.com>, Inochi Amaoto <inochiama@gmail.com>, 
+ Conor Dooley <conor.dooley@microchip.com>, Shuah Khan <shuah@kernel.org>, 
+ Christian Brauner <brauner@kernel.org>
+Cc: linux-doc@vger.kernel.org, linux-riscv@lists.infradead.org, 
+ linux-kernel@vger.kernel.org, kvm@vger.kernel.org, 
+ kvm-riscv@lists.infradead.org, Paul Walmsley <paul.walmsley@sifive.com>, 
+ Palmer Dabbelt <palmer@sifive.com>, Conor Dooley <conor@kernel.org>, 
+ devicetree@vger.kernel.org, spacemit@lists.linux.dev, 
+ sophgo@lists.linux.dev, linux-kselftest@vger.kernel.org, 
+ Andrew Jones <andrew.jones@oss.qualcomm.com>, 
+ Charles Jenkins <thecharlesjenkins@gmail.com>, 
+ Samuel Holland <samuel.holland@sifive.com>, 
+ Guodong Xu <docular.xu@gmail.com>, Charlie Jenkins <charlie@rivosinc.com>, 
+ Jesse Taube <jesse@rivosinc.com>, Andy Chiu <andybnac@gmail.com>
+X-Mailer: b4 0.15.1
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7134; i=docular.xu@gmail.com;
+ h=from:subject:message-id; bh=q0l6SoLkv/OD4ArhEhudd5OJ0i0bPlCDCgP82G86E4s=;
+ b=owGbwMvMwCXWtEl1Z3CGpCDjabUkhiwFHiaF06kiMa1Kiy0zbuyNSVT7qqLeOaNk6YykAxei6
+ u9/fbato5SFQYyLQVZMkeXw0Zbsra98on2fc/6AmcPKBDKEgYtTACZy/Ccjw790801hQT1c4sK/
+ Pym/+tP+PHPu5KvHDoWXmPR5P3bMncbwz+hu34eN54tOTEkwuCf9xntq0dXV6aYeZVzmuXPOJHU
+ pMgIA
+X-Developer-Key: i=docular.xu@gmail.com; a=openpgp;
+ fpr=90B1DC3DF0BD10FD1227BD6344F254AF42F143EE
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [3.34 / 15.00];
+	DATE_IN_FUTURE(4.00)[11];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-90597-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-90719-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:james.clark@linaro.org,m:suzuki.poulose@arm.com,m:mike.leach@arm.com,m:acme@kernel.org,m:namhyung@kernel.org,m:jolsa@kernel.org,m:irogers@google.com,m:aaupov@meta.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:Paschalis.Mpeis@arm.com,m:coresight@lists.linaro.org,m:linux-perf-users@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:acme@redhat.com,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[leo.yan@arm.com,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:pjw@kernel.org,m:palmer@dabbelt.com,m:aou@eecs.berkeley.edu,m:alex@ghiti.fr,m:zong.li@sifive.com,m:debug@rivosinc.com,m:anup@brainfault.org,m:atish.patra@linux.dev,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:dlan@kernel.org,m:unicorn_wang@outlook.com,m:inochiama@gmail.com,m:conor.dooley@microchip.com,m:shuah@kernel.org,m:brauner@kernel.org,m:linux-doc@vger.kernel.org,m:linux-riscv@lists.infradead.org,m:linux-kernel@vger.kernel.org,m:kvm@vger.kernel.org,m:kvm-riscv@lists.infradead.org,m:paul.walmsley@sifive.com,m:palmer@sifive.com,m:conor@kernel.org,m:devicetree@vger.kernel.org,m:spacemit@lists.linux.dev,m:sophgo@lists.linux.dev,m:linux-kselftest@vger.kernel.org,m:andrew.jones@oss.qualcomm.com,m:thecharlesjenkins@gmail.com,m:samuel.holland@sifive.com,m:docular.xu@gmail.com,m:charlie@rivosinc.com,m:jesse@rivosinc.com,m:andybnac@gmail.com,m:krzk@kernel.org,m:docularxu@gmail.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[docularxu@gmail.com,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FREEMAIL_TO(0.00)[lwn.net,linuxfoundation.org,kernel.org,dabbelt.com,eecs.berkeley.edu,ghiti.fr,sifive.com,rivosinc.com,brainfault.org,linux.dev,outlook.com,gmail.com,microchip.com];
+	RCPT_COUNT_TWELVE(0.00)[38];
 	FORWARDED(0.00)[lists@lfdr.de];
-	DKIM_TRACE(0.00)[arm.com:+];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[leo.yan@arm.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	RCVD_COUNT_FIVE(0.00)[5];
+	ALIAS_RESOLVED(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[docularxu@gmail.com,linux-doc@vger.kernel.org];
+	PRECEDENCE_BULK(0.00)[];
+	FREEMAIL_CC(0.00)[vger.kernel.org,lists.infradead.org,sifive.com,kernel.org,lists.linux.dev,oss.qualcomm.com,gmail.com,rivosinc.com];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,arm.com:dkim,arm.com:from_mime,arm.com:email,e132581.arm.com:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: A6858636DB4
+X-Rspamd-Queue-Id: 1ED9B632CF1
 
-On Tue, Jun 02, 2026 at 03:26:46PM +0100, James Clark wrote:
+This series builds on Andrew Jones's earlier RFC [1]. It lets
+userspace check for RVA23U64 conformance in one call, instead of
+walking hwprobe + prctl across every mandatory extension.
 
-[...]
+The series adds a small framework that resolves profile-class
+bases (IMA and RVA23U64) from the kernel's ISA extension bitmap at
+init time, and surfaces the result through both /proc/cpuinfo and
+hwprobe. Later patches can add RVA23S64, and backward RVA22 / RVA20
+detection, to riscv_set_isa_bases() without changes to the
+surrounding code.
 
-> +check_samples() {
-> +	owner_samples=$(grep -c "proc1.*context_switch_loop_proc1" "$tmpdir/script" || true)
-> +	next_samples=$(grep -c "proc2.*context_switch_loop_proc2" "$tmpdir/script" || true)
-> +
-> +	if [ "$owner_samples" -eq 0 ] || [ "$next_samples" -eq 0 ]; then
-> +		echo "No samples found"
-> +		cleanup
+Changes in v3 came from these sources:
+1. A rebase from v7.1-rc2 to v7.1-rc6;
+2. hwprobe.rst clean-up is moved to first;
+3. Zic64b is added as a first-class ISA extension (dt-binding,
+   cpufeature parsing, and hwprobe export);
+4. Resolve review comments from v2.
 
-We don't need cleanup explictly here, as trap covers exit case?
+V3 Series outline:
 
-> +		exit 1
-> +	fi
-> +
-> +	if grep "proc2.*context_switch_loop_proc1" "$tmpdir/script"; then
-> +		echo "Thread1 symbol was attributed to proc2"
-> +		cleanup
+  1-3. hwprobe.rst clean-ups: normalize indentation first, then
+       document EXT_ZICFISS / EXT_ZICFILP, and standardize single-letter
+       extension capitalization.
 
-Ditto.
+   4.  Zicclsm: cpufeature parsing + hwprobe export.
+   5.  Ziccamoa, Ziccif, Ziccrse, Za64rs: cpufeature parsing + hwprobe export.
+   6.  B: cpuufeature pasrsing + hwprobe export, as the Zba/Zbb/Zbs set.
 
-> +		exit 1
-> +	fi
-> +
-> +	if grep "proc1.*context_switch_loop_proc2" "$tmpdir/script"; then
-> +		echo "Thread2 symbol was attributed to proc1"
-> +		cleanup
+   7.  Zic64b: dt-bindings, with a schema check.
+   8.  Zic64b: cpufeature parsing + hwprobe export.
+ 9-11. dts: Declare zic64b in the SpacemiT K3, SpacemiT K1, and Sophgo
+       SG2044 device trees.
 
-Ditto.
+  12.  riscv_have_user_pmlen(): arch-level accessor for user
+       pointer-masking PMLEN support, used by RVA23U64 detection.
 
-Otherwise:
+  13.  cpufeature: per-hart and host-wide isa_bases bitmaps,
+       populated at init time. IMA and RVA23U64 detection lives
+       here.
 
-Reviewed-by: Leo Yan <leo.yan@arm.com>
+  14.  /proc/cpuinfo: print "isa bases:" and "hart isa bases:", eg. rva23u64.
+  15.  hwprobe: expose RVA23U64.
+
+Tested on both K3 Pico ITX and Qemu with -cpu rva23s64,sv39=on:
+  - /proc/cpuinfo reports "isa bases : rv64ima rva23u64" on both the
+    aggregated and per-hart lines.
+  - hwprobe RISCV_HWPROBE_KEY_BASE_BEHAVIOR returns
+    BASE_BEHAVIOR_IMA | BASE_BEHAVIOR_RVA23U64.
+
+Based on v7.1-rc6 plus [2]; happy to rebase onto another tree if needed.
+A branch is available for all patches in the series: [3].
+
+Note: [2] is only required in order to save the merge effort for adding
+      'Zic64b' and 'Ziccrse' into the same k3.dtsi.
+
+Link: https://lore.kernel.org/linux-riscv/20260206002349.96740-1-andrew.jones@oss.qualcomm.com/ [1]
+Link: https://lore.kernel.org/all/20260602070257-KYC5031219@kernel.org/ [2]
+Link: https://github.com/docularxu/linux/commits/b4/rva23u64-hwprobe/ [3]
+---
+Changes in v3:
+- Add Zic64b as a first-class ISA extension: dt-binding, cpufeature
+  parsing with a validate check, hwprobe export, and device-tree
+  declarations for K3/K1/SG2044.
+- Patch 1 is now a clean up of hwprobe.rst indentation.
+- Document RISCV_HWPROBE_EXT_ZICFILP alongside ZICFISS.
+- Move the Zicclsm hwprobe.rst entry to the IMA_EXT_1 section to match
+  its bit allocation.
+- Collect Anup Patel's Acked-by/Reviewed-by on Patch 3, the capitalization.
+- In cpufeature.c, set the local ext_mask with __set_bit().
+- Update Guodong Xu's email to docular.xu@gmail.com.
+
+- Link to v2: https://patch.msgid.link/20260511-rva23u64-hwprobe-v2-v2-0-21c5a544f1dc@riscstar.com
+
+Changes in v2 (since Andrew's RFC v1):
+- Rebased onto v7.1-rc2.
+- Reworked rva23u64 detection into per-hart and host isa_bases bitmaps,
+  shared by /proc/cpuinfo and hwprobe.
+- Scoped to IMA and RVA23U64 (RVA23S64, RVA20/RVA22 cpuinfo output deferred).
+
+- Link to v1:  https://lore.kernel.org/linux-riscv/20260206002349.96740-1-andrew.jones@oss.qualcomm.com
+
+BR,
+Guodong Xu
+
+To: Jonathan Corbet <corbet@lwn.net>
+To: Paul Walmsley <pjw@kernel.org>
+To: Palmer Dabbelt <palmer@dabbelt.com>
+To: Conor Dooley <conor.dooley@microchip.com>
+To: Albert Ou <aou@eecs.berkeley.edu>
+To: Alexandre Ghiti <alex@ghiti.fr>
+To: Shuah Khan <shuah@kernel.org>
+To: Anup Patel <anup@brainfault.org>
+To: Atish Patra <atish.patra@linux.dev>
+To: Shuah Khan <skhan@linuxfoundation.org>
+To: Deepak Gupta <debug@rivosinc.com>
+To: Zong Li <zong.li@sifive.com>
+To: Christian Brauner <brauner@kernel.org>
+Cc: Andrew Jones <andrew.jones@oss.qualcomm.com>
+Cc: Charles Jenkins <thecharlesjenkins@gmail.com>
+Cc: Samuel Holland <samuel.holland@sifive.com>
+Cc: linux-doc@vger.kernel.org
+Cc: linux-riscv@lists.infradead.org
+Cc: linux-kernel@vger.kernel.org
+Cc: linux-kselftest@vger.kernel.org
+Cc: kvm@vger.kernel.org
+Cc: kvm-riscv@lists.infradead.org
+Signed-off-by: Guodong Xu <docular.xu@gmail.com>
+
+---
+Andrew Jones (4):
+      riscv: hwprobe.rst: Make indentation consistent
+      riscv: Add Ziccamoa, Ziccif, Ziccrse, and Za64rs to cpufeature and hwprobe
+      riscv: Add B to hwcap and hwprobe
+      riscv: Add a getter for user PMLEN support
+
+Charlie Jenkins (1):
+      riscv: Standardize extension capitalization
+
+Guodong Xu (9):
+      riscv: hwprobe.rst: Document EXT_ZICFISS and EXT_ZICFILP
+      dt-bindings: riscv: Add Zic64b extension description
+      riscv: Add Zic64b to cpufeature and hwprobe
+      riscv: dts: spacemit: k3: Add Zic64b ISA extension
+      riscv: dts: spacemit: k1: Add Zic64b ISA extension
+      riscv: dts: sophgo: sg2044: Add Zic64b ISA extension
+      riscv: cpufeature: Introduce ISA bases bitmap and rva23u64 detection
+      riscv: cpu: Output isa bases lines in cpuinfo
+      riscv: hwprobe: Introduce rva23u64 base behavior
+
+Jesse Taube (1):
+      riscv: Add Zicclsm to cpufeature and hwprobe
+
+ Documentation/arch/riscv/hwprobe.rst               | 239 ++++++++++++---------
+ .../devicetree/bindings/riscv/extensions.yaml      |  20 ++
+ arch/riscv/boot/dts/sophgo/sg2044-cpus.dtsi        | 128 +++++------
+ arch/riscv/boot/dts/spacemit/k1.dtsi               |  80 +++----
+ arch/riscv/boot/dts/spacemit/k3.dtsi               |  48 ++---
+ arch/riscv/include/asm/cpufeature.h                |  14 ++
+ arch/riscv/include/asm/hwcap.h                     |  24 ++-
+ arch/riscv/include/asm/processor.h                 |   4 +
+ arch/riscv/include/asm/switch_to.h                 |   4 +-
+ arch/riscv/include/uapi/asm/hwcap.h                |   1 +
+ arch/riscv/include/uapi/asm/hwprobe.h              |  10 +-
+ arch/riscv/kernel/cpu.c                            |  26 +++
+ arch/riscv/kernel/cpufeature.c                     | 182 ++++++++++++++--
+ arch/riscv/kernel/process.c                        |  12 ++
+ arch/riscv/kernel/sys_hwprobe.c                    |  34 ++-
+ arch/riscv/kvm/isa.c                               |  16 +-
+ arch/riscv/kvm/main.c                              |   2 +-
+ arch/riscv/kvm/vcpu_fp.c                           |  20 +-
+ arch/riscv/kvm/vcpu_onereg.c                       |   6 +-
+ arch/riscv/kvm/vcpu_vector.c                       |  10 +-
+ tools/testing/selftests/riscv/hwprobe/which-cpus.c |   2 +-
+ 21 files changed, 586 insertions(+), 296 deletions(-)
+---
+base-commit: a04586b3d291a349301c2463bc485d05a3968383
+change-id: 20260508-rva23u64-hwprobe-v2-1d20739cbb8e
+
+Best regards,
+--  
+Guodong Xu <docular.xu@gmail.com>
+
 
