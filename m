@@ -1,98 +1,60 @@
-Return-Path: <linux-doc+bounces-90822-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90823-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Hyh4FBN5IGoA4AAAu9opvQ
-	(envelope-from <linux-doc+bounces-90822-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 20:57:23 +0200
+	id ngyPGn14IGrb3wAAu9opvQ
+	(envelope-from <linux-doc+bounces-90823-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 20:54:53 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id B506863AAFD
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 20:57:22 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0DC3163AAC8
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 20:54:53 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=ZMAR7LXF;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90822-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90822-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=jE2ejJpZ;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90823-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90823-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 1C16F30894CF
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 18:52:05 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id F0D0630090BF
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 18:54:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A7C6C47AF42;
-	Wed,  3 Jun 2026 18:52:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DE560480961;
+	Wed,  3 Jun 2026 18:54:46 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40D91480DC3
-	for <linux-doc@vger.kernel.org>; Wed,  3 Jun 2026 18:52:01 +0000 (UTC)
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780512722; cv=pass; b=D3O7wFcv9J8Jgynsuh0o8c8ZAAlgR8yYbFsIpEliHiU/v+aI76ghpEu1hH0ZnwYZEiKw+md31tQgazTAWsrw2s+yGHnWsJgUikisP/QYLjRxxfMV+byUamoh/XSzdhwGKlmTi3jGBNog/Gguql5uwor6+IkLv06WhZpY9fovtO4=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780512722; c=relaxed/simple;
-	bh=jkn/4x7mPiUSlevt03tEoGxtXMPLrS0T6VHBMKvffzU=;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4060477E53
+	for <linux-doc@vger.kernel.org>; Wed,  3 Jun 2026 18:54:45 +0000 (UTC)
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1780512886; cv=none; b=u+3ggdDR3SC6Y9SElT/cPTibu1iXro2/BEDhL1F1hOB3Xa1oy6bc3wKN7XIzJ+wB840JRzeLIgr41Snm/MZqFEdM36icTZDczIT2vGRFuMbYFKSDG6cGu+YTwRMRyFB93XjW2a+fExJVpsYtBycrmaeJGq85zBYsXDUu2fCOPe0=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1780512886; c=relaxed/simple;
+	bh=8x0yf4XZC38ntZDLpAhHG+tDFV6Lcp3kBHWEJyViNVc=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=Rpc/dPz6kRcqaZRaJExygOeCAbQmXCrEtTOUswolc1aV5rXtpi7iXUa3LHRYoKZbpnebSPvqVOOfa3ikm76Dzm8H688wcxrlYyiRpIiLAXneen9SzO4GMf5drZ3AcE73M44KgoueySFW9EdFUy48nBStUKiiB6vPru24bZiDczg=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ZMAR7LXF; arc=pass smtp.client-ip=209.85.128.51
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4903f7a90d1so120623825e9.2
-        for <linux-doc@vger.kernel.org>; Wed, 03 Jun 2026 11:52:01 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780512720; cv=none;
-        d=google.com; s=arc-20240605;
-        b=QJgkqKSv2BrqAOSy7IkCRKfBatHvSd8YRtKt6XwaLIkuY+BkQjSQTvR7nED8DvaxRe
-         ON+hr4wwbrZTN15MsYmX1cMHhZIwox/5JIQj7KVig+EvMhkI69PRCBIwI1rbUCxosMNM
-         aNsxN1jJhXRdq0h3CuKNQ9/7s8mS8OBJeosZ5HIvaPebc3BcKzhKtBFZv6g1OGaa9mrk
-         cNR4EQh8Cr6KknIKwOlgaeUmB2JDYVA12+X50mV5BG+G/dPjIjBKn7tpB/4tjoAyUbvs
-         G7OoSSg/oSjueI8Zv7o4lg0rAqIzREpLjld80TxZJf70VZ0InlqNm902kCahuQRjQ89v
-         Zz5A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=e5vL3r211abayjz91d4jpb2IiE8lVazmF4WtAPu6R18=;
-        fh=q2xEHxsSbUYk9WWd96ib9QC6EIFkIMjNVStnyrXw42g=;
-        b=aoEgujGlJQ/Nhc+FN7Rbxx0EDsOJz+YUvNJ5KR81gld2k+2PPlamIPnIcZtoPTFqk5
-         sUcTngnMzhJRmEaFVqr+qzneP69NM64Dpkc0pmIIjM4qYbNFQN4vrX7TjAs5K5rdD7af
-         MDwoFDGiCRcLJ6/f1OyinfPBHR+T1rGVP4t6Pod9nqjhit5Wk2ZgXg09Meagr0tTu2fX
-         +Somj+SYPf+HWIwA/rNr2URvaht/njhds+GTZQSLCXQff/vXvjE/zLioFIwYhXXlziLh
-         jBOm9KgGiZ4RpX04uLWwa9sziWwVcuUNnclYPJdqt/dlNPgNcOuWZJ/4QmVHd5uEaMuh
-         lTpA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780512720; x=1781117520; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=e5vL3r211abayjz91d4jpb2IiE8lVazmF4WtAPu6R18=;
-        b=ZMAR7LXFTwtK9KxK2QDF+yNmuITR8QjM/E05E5Hxu1qFC7L9At2BtnZIRl+Tuh8xTc
-         mMlmWmdAiXi5FlEsAR6MjSHYCP+Nz8ZfJ2vS25FIZyFmG39lgXQmwMSpob+IIVGmtbkb
-         L9/OXyd1f8lsRO5Jr2ZO50cdJYW8CSXg2RzOZzRUYEAA2BQ/i6HfXCwxLgg9Q0zi1A/p
-         x1SBpDZz6e33kXxx18ksya062Ii8YVZFrWYTAeK+3P95AY/Bh0Y9G73/s++qo5bCrMrM
-         mdYOXRDe/VpNKuRDxSOUrX7/cDduEszNAB3RFx+SsvAgEWkEQJtBfLFtuqB7McyuwMpK
-         +DBQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780512720; x=1781117520;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=e5vL3r211abayjz91d4jpb2IiE8lVazmF4WtAPu6R18=;
-        b=d94yHtwxLdKkgDlzDmsXdUaZWaSMY1jEOPRkuMlgw9X7LJcwp7C3nvGsUXZ/F3J7w4
-         Po+L0MlPTDpOrneGBYnTXHAc8nDfh+5AF9zqaF6ErCmRB2xEp04H/hT9LOSCIVt23Qej
-         TIwYe2BrNPHMzo7EyTuY41Wlt9XNifYxLw+/8GePjJVKJMaT+NyN2Z6f+JHAE0/1ON8s
-         JOXWucUrv4DQk74Z/lz4nwUIXZKwYpSiZRs7rhdL/It+P2WANuvI1/WKc9sV1cfTDrxM
-         JbKCw4S5CSTXjS8FD7geBqdYqNlljH4lQPY3Z4uOMTLI5YMmcwEcakp9NIE8NFPfYSBy
-         hkWw==
-X-Forwarded-Encrypted: i=1; AFNElJ9ABUph5Fb+y8F4Rjl5b2CVJ7oM5qfo/gq4/fqjjc6/AZUC9lZUNVncXjjEraelEmA0K+XKn6sVx1I=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyPKIbF5i1s9C7Oy6ee5KsS04m8cpszQE9N6m1eFaslAfHMhMhC
-	PV7QGzZbDPyIRxHPNo/6GLuk7OtUQvb9f7/HD5QT0Lna02nSKyz05X88EhbOnz4R7Dqeq0oN/0A
-	ducKhXcXET1kYnHU5QWBlyF2Yme7Wbv98OdkL
-X-Gm-Gg: Acq92OGFRQ4Q/m8XsW4piadzEXcl9UM3nE1cfGTaFusV5GRAk0iHTz819iiav6E3fay
-	LJWWcp6MR4GoBuI8y9qtZKDLTt9hID7pOv0gi5CZ6kJTdPFhM6Dhh7dPYi02u1bTKN0+xhuIN3G
-	ubSqHa8eAftFRt131KVMkpIca1gbpR6KhjvwHlkj8X7gAGKTxqX2MOK4lXC1dHsWtCPFgvhs5Sh
-	/ZM+vg6+1JNFIYdjqLmlN01I0pkHuzXe/YFCGIHtdwIdBP3iM5jVxqz8mQqgi3w5GuGza+WFmc2
-	7wGawtP6pPSnMjbtdUI0G42AC1xn9fziGIF7Glbhj8zBlDa31w==
-X-Received: by 2002:adf:f8c4:0:b0:460:e0f:8d19 with SMTP id
- ffacd0b85a97d-4602179121cmr5600969f8f.9.1780512719668; Wed, 03 Jun 2026
- 11:51:59 -0700 (PDT)
+	 To:Cc:Content-Type; b=pFtcrHzPSlQRinCJj5deWn6CCrxRgD5z5mrathrVHHPGODx4EFX7FBfU9mxz7xMQvLzMv2w54mteIzSvxD63ukBabcXNcr03KT2srx2UJJAgOM2V74VzteVY+gzoGkiSZ61WJXu7fLGzxZZA0x/S4l33ltyheC4KecMf49GEbQY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jE2ejJpZ; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B573D1F008A1
+	for <linux-doc@vger.kernel.org>; Wed,  3 Jun 2026 18:54:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1780512885;
+	bh=ZFQ4Bd12+v7JeyJgIXsYlF/gFBeRBKKRjCH/poAPJdk=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=jE2ejJpZq++jtEtDSruv760lUQrefF2Z/UKZAkSHeQttl9hDEmCIXXUlakRX8Bfvp
+	 COMQj+dCumWiiTMy1sKrQUTc2OuS9cxWvCN7GJC1i6Dp5MdoZObOUv7MZkAYxxbQpO
+	 igfC4iBnnt3+42ycHPjlsUVskJIEcx30umf71Z4ORH+DE6C+TNtvOpzeRokA0axedo
+	 Z6Zs3qJO5ta7tNsPZvnvy7vTfRPeGzFUK0hMeKvCirNGhLAuebDYQfhQ6/pyzqLYvO
+	 MnAGq1zykStkfQnFcVUee5L0/1zTkXIbMdDImNp64lgv+2EN2ssk5k09sWvrBNfJ5D
+	 HQq1o8TgDIt+Q==
+Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-becfa735b9aso564420366b.1
+        for <linux-doc@vger.kernel.org>; Wed, 03 Jun 2026 11:54:45 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AFNElJ8rUgg3Ye8q+Gof+vLCXkZcWkkYYAGlV3OuCDovFt3VnMMJNzo414IdBXqkrOB9s1jYVs40KYTySDM=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzlf+FtodvIZ8hBEVGQLYhoGs2l452SDtUg1kGScW89M9qehUfC
+	4EXhmG6ZGPJYbeXo9/SKPG1blmKwcYtpiIbiinzUqkqx1E/ybrQOsd4YJYzXpqMDkPuh0y6Jf44
+	lnucQlCcvqG0+PxC19uq/id8m8CuzbE8=
+X-Received: by 2002:a17:907:3f07:b0:bd3:32ce:8902 with SMTP id
+ a640c23a62f3a-bf0af2039b9mr289938366b.39.1780512884672; Wed, 03 Jun 2026
+ 11:54:44 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -103,14 +65,16 @@ References: <20260526114601.67041-1-jiahao.kernel@gmail.com>
  <20260526114601.67041-3-jiahao.kernel@gmail.com> <aho-Z6wshceTAYd9@google.com>
  <ea2c1323-1440-e927-f14a-0eac54a245bf@gmail.com> <CAKEwX=PoBZ4ci30tKHQXs1o9=NDpPrtbe7RxxZTbnzVJf74ZYQ@mail.gmail.com>
  <CAO9r8zMBUMXy_bkeT8z+M=dXayU=6VGEw+-HmfDWR2fyJy=z+A@mail.gmail.com>
- <CAKEwX=NQUqqrM9vdYE2KhWEZx-YwPc7YPhfz7xaBrGVDf824bA@mail.gmail.com> <CAO9r8zO0GjTeY2+j_AjfTQ8qYOmHezZAV44f=aPgrjJcdtO9rQ@mail.gmail.com>
-In-Reply-To: <CAO9r8zO0GjTeY2+j_AjfTQ8qYOmHezZAV44f=aPgrjJcdtO9rQ@mail.gmail.com>
-From: Nhat Pham <nphamcs@gmail.com>
-Date: Wed, 3 Jun 2026 11:51:48 -0700
-X-Gm-Features: AVHnY4KKCfMou4Ez8iKWPLzU7z8Pcq_wTI6Zo3Ilq6vW5_DwwK6THGlhJPcI_cw
-Message-ID: <CAKEwX=OeFsFPdazWFf0tsKTOi3DneX3fCcreEkzwb=BOR_37hA@mail.gmail.com>
+ <CAKEwX=NQUqqrM9vdYE2KhWEZx-YwPc7YPhfz7xaBrGVDf824bA@mail.gmail.com>
+ <CAO9r8zO0GjTeY2+j_AjfTQ8qYOmHezZAV44f=aPgrjJcdtO9rQ@mail.gmail.com> <CAKEwX=OeFsFPdazWFf0tsKTOi3DneX3fCcreEkzwb=BOR_37hA@mail.gmail.com>
+In-Reply-To: <CAKEwX=OeFsFPdazWFf0tsKTOi3DneX3fCcreEkzwb=BOR_37hA@mail.gmail.com>
+From: Yosry Ahmed <yosry@kernel.org>
+Date: Wed, 3 Jun 2026 11:54:32 -0700
+X-Gmail-Original-Message-ID: <CAO9r8zNMMa6-z3dxX8uktFA2Hb2EXTxCkeSFG=uosyVS6Vnbtg@mail.gmail.com>
+X-Gm-Features: AVHnY4JNisz5_3nlmLGBOhejCJYEaBo7BSD-V-P6mrBpcDy2zK6Jtf82sPe44Ug
+Message-ID: <CAO9r8zNMMa6-z3dxX8uktFA2Hb2EXTxCkeSFG=uosyVS6Vnbtg@mail.gmail.com>
 Subject: Re: [PATCH v3 2/4] mm/zswap: Implement proactive writeback
-To: Yosry Ahmed <yosry@kernel.org>
+To: Nhat Pham <nphamcs@gmail.com>
 Cc: Hao Jia <jiahao.kernel@gmail.com>, akpm@linux-foundation.org, tj@kernel.org, 
 	hannes@cmpxchg.org, shakeel.butt@linux.dev, mhocko@kernel.org, 
 	mkoutny@suse.com, chengming.zhou@linux.dev, muchun.song@linux.dev, 
@@ -118,122 +82,70 @@ Cc: Hao Jia <jiahao.kernel@gmail.com>, akpm@linux-foundation.org, tj@kernel.org,
 	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
 	Hao Jia <jiahao1@lixiang.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:yosry@kernel.org,m:jiahao.kernel@gmail.com,m:akpm@linux-foundation.org,m:tj@kernel.org,m:hannes@cmpxchg.org,m:shakeel.butt@linux.dev,m:mhocko@kernel.org,m:mkoutny@suse.com,m:chengming.zhou@linux.dev,m:muchun.song@linux.dev,m:roman.gushchin@linux.dev,m:cgroups@vger.kernel.org,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jiahao1@lixiang.com,m:jiahaokernel@gmail.com,s:lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-90822-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90823-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER(0.00)[nphamcs@gmail.com,linux-doc@vger.kernel.org];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:nphamcs@gmail.com,m:jiahao.kernel@gmail.com,m:akpm@linux-foundation.org,m:tj@kernel.org,m:hannes@cmpxchg.org,m:shakeel.butt@linux.dev,m:mhocko@kernel.org,m:mkoutny@suse.com,m:chengming.zhou@linux.dev,m:muchun.song@linux.dev,m:roman.gushchin@linux.dev,m:cgroups@vger.kernel.org,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jiahao1@lixiang.com,m:jiahaokernel@gmail.com,s:lists@lfdr.de];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FORGED_SENDER(0.00)[yosry@kernel.org,linux-doc@vger.kernel.org];
 	RCPT_COUNT_TWELVE(0.00)[16];
+	FREEMAIL_CC(0.00)[gmail.com,linux-foundation.org,kernel.org,cmpxchg.org,linux.dev,suse.com,vger.kernel.org,kvack.org,lixiang.com];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[nphamcs@gmail.com,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[gmail.com,linux-foundation.org,kernel.org,cmpxchg.org,linux.dev,suse.com,vger.kernel.org,kvack.org,lixiang.com];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[yosry@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,vger.kernel.org:from_smtp,mail.gmail.com:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: B506863AAFD
+X-Rspamd-Queue-Id: 0DC3163AAC8
 
-On Wed, Jun 3, 2026 at 11:43=E2=80=AFAM Yosry Ahmed <yosry@kernel.org> wrot=
-e:
->
-> On Wed, Jun 3, 2026 at 11:34=E2=80=AFAM Nhat Pham <nphamcs@gmail.com> wro=
-te:
+> > > I suspect not a lot of people invokes the shrink_memcg() synchronous
+> > > path in zswap store though. Setting zswap.max is hard (as it involves
+> > > guessing compression ratio ahead of time) and induces quite a bit of
+> > > overhead (obj_cgroup_may_zswap() does a force flush for every store if
+> > > you set zswap.max to a value other than 0 and max).
 > >
-> > On Wed, Jun 3, 2026 at 11:26=E2=80=AFAM Yosry Ahmed <yosry@kernel.org> =
-wrote:
-> > >
-> > > > > > Is the main difference that we are scanning in batches here? I =
-think we
-> > > > > > can have shrink_memcg() do that too. If anything, it might make=
- the
-> > > > > > shrinker more efficient. Over-reclaim is ofc a concern, and esp=
-ecially
-> > > > > > in the zswap_store() path as the overhead can be noticeable. Ma=
-ybe we
-> > > > > > can parameterize the batch size based on the code path.
-> > > > > >
-> > > > > > Nhat, what do you think?
-> > > > >
-> > > > > Nhat, since we now have the referenced-based second chance algori=
-thm,
-> > > > > should we consider doing batch writeback for shrink_memcg() as we=
-ll?
-> > > >
-> > > > I just take a look at shrink_memcg() and realized it's reclaiming o=
-ne
-> > > > page at a time. Thanks for the reminder - I hated it.
-> > > >
-> > > > Please batchify it if it makes your life easier :) We don't reclaim
-> > > > "just one page/object" anywhere else in the reclaim path, Sure, it
-> > > > adds a bit of latency to zswap_store() if we reached cgroup limit, =
-but
-> > > > IMHO if we hit zswap.max limit at zswap_store() time, that is alrea=
-dy
-> > > > the slowest of slow path that you should have avoided with proactiv=
-e
-> > > > reclaim/zswap shrinker in the first place. And, setting zswap.max d=
-oes
-> > > > not make sense to me in the first place (I can write a whole essay
-> > > > about it).
-> > >
-> > > Should we batchify shrink_memcg() from the shrinker and background
-> > > writeback, but leave the synchronous zswap_store() path to reclaim on=
-e
-> > > page for this series at least to avoid potential regressions?
-> > >
-> > > I think this change specifically needs more intensive testing (vs the
-> > > other code paths).
+> > Yeah I agree, but I just wanna make sure we don't completely kill
+> > performance in case anyone is actually doing that.
 > >
-> > I'm fine with having shrink_memcg() takes a batch_size argument for now=
- :)
-> >
-> > I suspect not a lot of people invokes the shrink_memcg() synchronous
-> > path in zswap store though. Setting zswap.max is hard (as it involves
-> > guessing compression ratio ahead of time) and induces quite a bit of
-> > overhead (obj_cgroup_may_zswap() does a force flush for every store if
-> > you set zswap.max to a value other than 0 and max).
+> > Regarding the force flush, it's unfortunate that we need to rely on a
+> > stat for internal limit checking. It might make sense to use page
+> > counters here, which already support hierarchical charging and
+> > whatnot. We'll need something similar to the objcg approach to charge
+> > sub-pages (or maybe just reuse that somehow?).
 >
-> Yeah I agree, but I just wanna make sure we don't completely kill
-> performance in case anyone is actually doing that.
+> Conceptually, I've moved towards not capping zswap.max, and using it
+> only as a binary knob for enablement/disablement  :)
 >
-> Regarding the force flush, it's unfortunate that we need to rely on a
-> stat for internal limit checking. It might make sense to use page
-> counters here, which already support hierarchical charging and
-> whatnot. We'll need something similar to the objcg approach to charge
-> sub-pages (or maybe just reuse that somehow?).
+> It's consuming the same resources it saves, so if we cap memory.max
+> (and swap.max until we have vswap), then we already have isolation.
+> The split between uncompressed/compressed should then be dynamically
+> determined by workload characteristics (working set size, access
+> pattern, compressibility) and service's SLO, and reclaimers
+> (preferably proactive reclaimers) will drive us towards the optimal
+> split/equilibrium.
 
-Conceptually, I've moved towards not capping zswap.max, and using it
-only as a binary knob for enablement/disablement  :)
-
-It's consuming the same resources it saves, so if we cap memory.max
-(and swap.max until we have vswap), then we already have isolation.
-The split between uncompressed/compressed should then be dynamically
-determined by workload characteristics (working set size, access
-pattern, compressibility) and service's SLO, and reclaimers
-(preferably proactive reclaimers) will drive us towards the optimal
-split/equilibrium.
+Yeah I guess we can wait until someone actually has a use case for a
+non-binary zswap.max and complains about performance.
 
