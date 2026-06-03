@@ -1,293 +1,267 @@
-Return-Path: <linux-doc+bounces-90836-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90839-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id GwKzBIqDIGpA4gAAu9opvQ
-	(envelope-from <linux-doc+bounces-90836-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 21:42:02 +0200
+	id Mh8lBKODIGpI4gAAu9opvQ
+	(envelope-from <linux-doc+bounces-90839-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 21:42:27 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id B1F4463AEFF
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 21:42:01 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 60F0463AF24
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 21:42:26 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=KBVL0vQm;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90836-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-90836-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=OgFHQ493;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90839-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90839-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 12C8630956C7
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 19:34:40 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 70F54301E5B9
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 19:35:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A129448C8C5;
-	Wed,  3 Jun 2026 19:34:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B12D948C3E7;
+	Wed,  3 Jun 2026 19:35:40 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 81E2F48C405
-	for <linux-doc@vger.kernel.org>; Wed,  3 Jun 2026 19:34:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88E473EF0A8
+	for <linux-doc@vger.kernel.org>; Wed,  3 Jun 2026 19:35:39 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780515269; cv=none; b=PynGafSIxIqestGV0AeMUxWxHVZ2uv93jkPoTbrDrYYWFFn5dmZ82or8GaSNSpTKMNfbzhCVYAmbYCW1sjzk3yR1WsySY6jViJh2BvSNDQiDuG5o8aDrpH/4oxNZ/Il+9TwePa0GRckteaJETGKywLNMYusu1/SjB9en1Zq+CpY=
+	t=1780515340; cv=none; b=m52XrayU8/yOvgyLZK4MIy7qgjoEip6kgGID55TEEnr/7ZwWTxkR0aTXZb9tXJyoT3A/2SJ8noHOGOqXQNlnZtgkM0KCWOmWMDoZxe9BauACGo7G0Q7kh6BFsvp/1A07zUamxpQkeeh+M/8h54H0Xd1dMgTkHDiLpkP2Cm8Kr/I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780515269; c=relaxed/simple;
-	bh=4cSzd8MC5Wb456VcUltFlGNqovJDAm1MFOU5USO+n0g=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Type; b=PCBHG+SbzXOFe6TjW6SvwQW2awLTmNBeXlrX71IVh3JzDJq3j2TCQMcResEpHKFiYYxAslmmSSA4rjV3D9et+t1uW5KPoBwVmjZgj3jpU6/gDMX5vzcDFOt/C0SykxQBYzphYNxUbitWJ7CjhsgZqvFgjA1KX0s4J8Y7SYDYL1U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=KBVL0vQm; arc=none smtp.client-ip=209.85.215.176
-Received: by mail-pg1-f176.google.com with SMTP id 41be03b00d2f7-c857fba35cfso2628387a12.1
-        for <linux-doc@vger.kernel.org>; Wed, 03 Jun 2026 12:34:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780515266; x=1781120066; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=SQrrxMnqw6ml9s5gr8YGx8Mot8gr2nhuVfyrrBoCUFI=;
-        b=KBVL0vQmb3w+PpXN75pu5b7e+uBZiMY5WOrbsybGFWwIHxDsisf3bHIbjpzT7E9ZRP
-         SJiWqw06GyWSZoTSq4cZc1o1E27p1mtd64J4JvVeokVIXphlGfoHTF2OCQZKaADgs6V7
-         h91ON4w7Km3GY+laAfJowk2worc+kTaLM15MlG8SAjnimC6FaSYTGzaegW9l7t5Ia28L
-         5OjvKJlivHJg7P94Zxi3KHZ2fd+RFGcKI7NWeDcyrqMfAEPfP3qKLHYcQIMfhtsUCxUC
-         bNJ99/IiTKXAzb9juwSeE1mnAq4ukFzsTJc/Z3wVuRROsUfBUAn42aXBHMns7V/wd8H7
-         U5JQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780515266; x=1781120066;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=SQrrxMnqw6ml9s5gr8YGx8Mot8gr2nhuVfyrrBoCUFI=;
-        b=pig8ewiRzrSJdvaMzi3v7MUEvJYQaFA7KrpKzp+l2MaeZIWWh53JMOMpgK5So4qey2
-         rsMB6xosTHUrObtUMFJAqK44tzNlx9HhvMKZcls+tMls3zcfZbJZe//4JBR8o+xbeLAY
-         AJzpNStejylovsSj59QitwqjKpFDH/YQ8yIYS7VE+R98Yfbf2sLO+sNfR78xmxhVbHje
-         vTSpBezym7XT5ztct9G7awt6cSQ3W8AcMuiOojvHuPjYKTqQInX0K5qLvT/WGLDJFu8M
-         ONsuEmgqMgkBqPWMewUTtlfbUGdsKwZYrbvQ5/q0tjdSyPFd/kngKmzDNT8lfcVWj4R9
-         /FaA==
-X-Forwarded-Encrypted: i=1; AFNElJ9J2a5Rmg31up/7MtiRI4dLCXC5AIT0iLeQTQRG8sZSJoaFEwxS8G91ApBeQe9tXAxrxCxv9roSoD4=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzWi0ZWquBBZmUWyXUZ6D+t7f51C5uNLouK2m5jVKV3YfQbZNZq
-	KJlKmKyS4+3OHcPahswlSkftQWhTkdR0JRoujMUWY7Yyr7pM0I3GcXk=
-X-Gm-Gg: Acq92OGGcSG7EJpzbYpgix6LfBBsmWV5CHMJKkM2v0UsTvEIsawf6kLPRop+AsEN3Mi
-	TIF75BFUkr7k/TknTD5NyAi+LUMm76DWHPcI+eEkCm0RkgcGIkTZ+9Hm340anPKBcEhVaRKHK21
-	7xOiRd3tPtHb7pR3XE0Ot3XX90wFSr7xqeF3j/B9L7AtPoj6Xwi7kbBIiAjWI181l+CUDyJkPyq
-	qMggKo+HuDXShW/v+UBWdufb8vv0UNvkBlKFw/3KLH/rhJ+kW1FiFfjMpcSfCpx/cC6Fjd5RRNb
-	NER4THnYwuuOUKrpu72CHcbZmw9vLmJNuQSFld6trIOkBaoMojpgi5/Q3dBbLirr4heiai/rYS0
-	Vo2XS8jEtJBftVWNFqJfTWMkM0wCSr+WoHszanPPMt+R8BvpanJ56lTtD1uPNeVOR1dV2b8MOO4
-	Ke1gzdFfgrTVemLgMRboLKULsRvQ7ll5rmi/hFG8+zxG1lUvEf1/Nrqn2gaGoTwY2rMcuEkfiTz
-	dkgCCfQsw7hTWvn
-X-Received: by 2002:a05:6300:228c:b0:3b4:780:8fc0 with SMTP id adf61e73a8af0-3b4977b9f67mr5478856637.47.1780515265396;
-        Wed, 03 Jun 2026 12:34:25 -0700 (PDT)
-Received: from panzhi.. ([2001:288:7001:2560:7f36:30bb:5a71:e7aa])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-842829188b9sm3874132b3a.59.2026.06.03.12.34.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 03 Jun 2026 12:34:24 -0700 (PDT)
-From: panzhipop <kipp455187@gmail.com>
-To: Hu Haowen <2023002089@link.tyut.edu.cn>
-Cc: Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	panzhipop <kipp455187@gmail.com>
-Subject: [PATCH] =?UTF-8?q?docs/zh=5FTW:=20replace=20=E6=8E=A5=E5=8F=A3=20?= =?UTF-8?q?with=20=E4=BB=8B=E9=9D=A2=20in=20stable-api-nonsense.rst?=
-Date: Thu,  4 Jun 2026 03:34:08 +0800
-Message-Id: <20260603193408.140445-1-kipp455187@gmail.com>
-X-Mailer: git-send-email 2.34.1
+	s=arc-20240116; t=1780515340; c=relaxed/simple;
+	bh=u07LQCZrZCzeOi68gImmUZITUxsNpQXTkBl3ocL8ckA=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=jKtzkQGkArtI1WxPasDiM52Z2YmEdNP+sTV5mz3GYHEm4eEf+5jnWu7Bplhu8xVKiuRb68LyMAur+F6mX36uJKHNp/vdtTUQIBfFMxRU+ul/PdYXu6mMyjva+PhIGOSzw5yE+u7/abccuvKQqCSzblol3n4bjs0eWrvfUgcEkck=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OgFHQ493; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 518431F00893
+	for <linux-doc@vger.kernel.org>; Wed,  3 Jun 2026 19:35:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1780515339;
+	bh=u07LQCZrZCzeOi68gImmUZITUxsNpQXTkBl3ocL8ckA=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=OgFHQ493hTJ63/qV3zKt0iFy8gG6gnwdqpUoqFL/HL8Ocgwi+S9/T1lbbDR8GnBnw
+	 A7r0O+1PebrP/DXacX+3BZugw8Q29FvXNApWlxLHOWPCpspM5IvbGcS+6kpq+r1WGM
+	 UqZ5lbK4mMRvmVmaBEplCrwgyEq8ZASi94zgXTCBl8VlW3xh0ZGGAiwtUBNVM03qiP
+	 7xBkH4K4jY+nOqf9V8cw8uHmxhKKrINKUvkVaLEScqd0gTyr9PyhGwAW8oBqdI+b0p
+	 jx7yh7GmV1LtqAMma4Jr1ObhZP2xLUH/C5yY+fVzZn/0VRdaY3pIS/Jeomvjl5JWKx
+	 pwv9+JcPBrz+w==
+Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-beb8a08a6c8so688745166b.2
+        for <linux-doc@vger.kernel.org>; Wed, 03 Jun 2026 12:35:39 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AFNElJ/yKxc6/8+4MGLt4Mc96icsGMdW3ZjAZA5Qwba3g9cgSk7f1GttJM62zi26W4BQ81ve7hNxNlkT/ug=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzNYoVCMbxoUgxbJbLHHxO/0Efnead6MgiPTldoQcDggAqYmhZn
+	ChsU00eFz4BQMcnnvIOajVBCMv8CLIlCLUr3HqWO/a7hS0XFAUm0o2QMYE654wqJa0m5fadspTW
+	GLSgYtGWoaKA9xWnOtE9OsmQBP3LSEZI=
+X-Received: by 2002:a17:907:1de8:b0:bee:bcf6:6a22 with SMTP id
+ a640c23a62f3a-bf0b3ab6000mr194330866b.44.1780515337855; Wed, 03 Jun 2026
+ 12:35:37 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20260528212955.1912856-1-nphamcs@gmail.com> <ah-A2gQ0GPgerXop@google.com>
+ <CAKEwX=MWX9KkSFAoN4xEMg3b+gZUN9=yd7rirAWG5NOBf26eAg@mail.gmail.com>
+ <aiB2sHqxcBAJrTkP@google.com> <CAKEwX=P95D7wNpWhEAXQpeNPM6eQa2mEZE8Srzfpct=-=Q40tg@mail.gmail.com>
+In-Reply-To: <CAKEwX=P95D7wNpWhEAXQpeNPM6eQa2mEZE8Srzfpct=-=Q40tg@mail.gmail.com>
+From: Yosry Ahmed <yosry@kernel.org>
+Date: Wed, 3 Jun 2026 12:35:26 -0700
+X-Gmail-Original-Message-ID: <CAO9r8zP+PkgRzXJcFv+3i2pKFQdLt78Ax1s1DY0qNaiUo7ySqA@mail.gmail.com>
+X-Gm-Features: AVHnY4L0m0RhGOnZt-UIR2Jm32pDGFi3b0zgu6vy44XckaL7GIMQMtilhMhRPjY
+Message-ID: <CAO9r8zP+PkgRzXJcFv+3i2pKFQdLt78Ax1s1DY0qNaiUo7ySqA@mail.gmail.com>
+Subject: Re: [RFC PATCH 0/5] mm, swap: Virtual Swap Space (Swap Table Edition)
+To: Nhat Pham <nphamcs@gmail.com>
+Cc: kasong@tencent.com, Liam.Howlett@oracle.com, akpm@linux-foundation.org, 
+	apopple@nvidia.com, axelrasmussen@google.com, baohua@kernel.org, 
+	baolin.wang@linux.alibaba.com, bhe@redhat.com, byungchul@sk.com, 
+	cgroups@vger.kernel.org, chengming.zhou@linux.dev, chrisl@kernel.org, 
+	corbet@lwn.net, david@kernel.org, dev.jain@arm.com, gourry@gourry.net, 
+	hannes@cmpxchg.org, hughd@google.com, jannh@google.com, 
+	joshua.hahnjy@gmail.com, lance.yang@linux.dev, lenb@kernel.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-mm@kvack.org, 
+	linux-pm@vger.kernel.org, lorenzo.stoakes@oracle.com, matthew.brost@intel.com, 
+	mhocko@suse.com, muchun.song@linux.dev, npache@redhat.com, pavel@kernel.org, 
+	peterx@redhat.com, peterz@infradead.org, pfalcato@suse.de, rafael@kernel.org, 
+	rakie.kim@sk.com, roman.gushchin@linux.dev, rppt@kernel.org, 
+	ryan.roberts@arm.com, shakeel.butt@linux.dev, shikemeng@huaweicloud.com, 
+	surenb@google.com, tglx@kernel.org, vbabka@suse.cz, weixugc@google.com, 
+	ying.huang@linux.alibaba.com, yosry.ahmed@linux.dev, yuanchu@google.com, 
+	zhengqi.arch@bytedance.com, ziy@nvidia.com, kernel-team@meta.com, 
+	riel@surriel.com, haowenchao22@gmail.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.16 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[lwn.net,linuxfoundation.org,vger.kernel.org,gmail.com];
+	TAGGED_FROM(0.00)[bounces-90839-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-90836-lists,linux-doc=lfdr.de];
-	FORGED_SENDER(0.00)[kipp455187@gmail.com,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FORGED_RECIPIENTS(0.00)[m:2023002089@link.tyut.edu.cn,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:kipp455187@gmail.com,s:lists@lfdr.de];
-	TO_DN_SOME(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[tencent.com,oracle.com,linux-foundation.org,nvidia.com,google.com,kernel.org,linux.alibaba.com,redhat.com,sk.com,vger.kernel.org,linux.dev,lwn.net,arm.com,gourry.net,cmpxchg.org,gmail.com,kvack.org,intel.com,suse.com,infradead.org,suse.de,huaweicloud.com,suse.cz,bytedance.com,meta.com,surriel.com];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6];
+	FREEMAIL_TO(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:nphamcs@gmail.com,m:kasong@tencent.com,m:Liam.Howlett@oracle.com,m:akpm@linux-foundation.org,m:apopple@nvidia.com,m:axelrasmussen@google.com,m:baohua@kernel.org,m:baolin.wang@linux.alibaba.com,m:bhe@redhat.com,m:byungchul@sk.com,m:cgroups@vger.kernel.org,m:chengming.zhou@linux.dev,m:chrisl@kernel.org,m:corbet@lwn.net,m:david@kernel.org,m:dev.jain@arm.com,m:gourry@gourry.net,m:hannes@cmpxchg.org,m:hughd@google.com,m:jannh@google.com,m:joshua.hahnjy@gmail.com,m:lance.yang@linux.dev,m:lenb@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-pm@vger.kernel.org,m:lorenzo.stoakes@oracle.com,m:matthew.brost@intel.com,m:mhocko@suse.com,m:muchun.song@linux.dev,m:npache@redhat.com,m:pavel@kernel.org,m:peterx@redhat.com,m:peterz@infradead.org,m:pfalcato@suse.de,m:rafael@kernel.org,m:rakie.kim@sk.com,m:roman.gushchin@linux.dev,m:rppt@kernel.org,m:ryan.roberts@arm.com,m:shakeel.butt@linux.dev,m:shikemeng@huaweicloud.com,m:s
+ urenb@google.com,m:tglx@kernel.org,m:vbabka@suse.cz,m:weixugc@google.com,m:ying.huang@linux.alibaba.com,m:yosry.ahmed@linux.dev,m:yuanchu@google.com,m:zhengqi.arch@bytedance.com,m:ziy@nvidia.com,m:kernel-team@meta.com,m:riel@surriel.com,m:haowenchao22@gmail.com,m:joshuahahnjy@gmail.com,s:lists@lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[yosry@kernel.org,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	MISSING_XM_UA(0.00)[];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[kipp455187@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[yosry@kernel.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[55];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ALIAS_RESOLVED(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,tyut.edu.cn:email,vger.kernel.org:from_smtp,nxp.com:email]
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: B1F4463AEFF
+X-Rspamd-Queue-Id: 60F0463AF24
 
-In Taiwan's standard terminology, as defined by the National Academy
-for Educational Research (NAER) term bank (https://terms.naer.edu.tw/),
-the correct Traditional Chinese translation for "interface" is "介面",
-not "接口" (which is used in Simplified Chinese/Mainland China).
+On Wed, Jun 3, 2026 at 12:26=E2=80=AFPM Nhat Pham <nphamcs@gmail.com> wrote=
+:
+>
+> On Wed, Jun 3, 2026 at 11:58=E2=80=AFAM Yosry Ahmed <yosry@kernel.org> wr=
+ote:
+> >
+> > > > I assume the main reason here is to avoid the extra overhead if
+> > > > everything uses vswap, which would mainly be the reverse mapping
+> > > > overhead? I guess there's also some simplicity that comes from reus=
+ing
+> > > > the swap info infra as a whole, including the swap table.
+> > >
+> > > Yeah it helps a lot that we don't have to rewrite the whole allocator
+> > > and swap entry reference counting logic again :)
+> >
+> > I specifically meant using a full swap info thing for the physical swap
+> > device even when it's behind vswap. That seems like an overkill, and we
+> > don't need things like the swap entry reference coutning. We probably
+> > just need a bitmap and a reverse mapping.
+> >
+> > So I am assuming the main reason why we are not doing that (at least fo=
+r
+> > now) is simplicity?
+>
+> Mostly.
+>
+> FWIW, we're pretty close to full deduplication. Right now, physical
+> swap clusters have a couple of fields that are not needed when they're
+> backing a vswap cluster:
+>
+> 1. The main swap table (which houses swap cache, swap shadow, and
+> reference counting): I repurpose it for the rmap :) It's an array of
+> unsigned long, which works for rmap.
+>
+> 2. memcg_table: still duplicated, but I think I can make sure this is
+> not allocated if physical swap clusters only back vswap entries. I
+> have a prototype that I'm testing for this.
+>
+> 3. The zeromap field: this is actually not allocated in 64 bit
+> architecture, IIUC, which is what I'm gating CONFIG_VSWAP on. If we
+> extend vswap to supporting 32 bits, this can also be dynamically
+> allocated.
+>
+> 4. Extend table - this is for the swap count overfills, and already
+> dynamically allocated.
 
-Update the zh_TW translation of stable-api-nonsense.rst to use
-the proper Taiwanese terminology.
+I see.
 
-Signed-off-by: panzhipop <kipp455187@gmail.com>
----
- .../zh_TW/process/stable-api-nonsense.rst     | 62 +++++++++----------
- 1 file changed, 31 insertions(+), 31 deletions(-)
+> > > > All that being said, perhaps I am too out of touch with the code to
+> > > > realize it's simply not possible.
+> > > >
+> > > > Honestly, if the main reason we can't have a single swap table for =
+vswap
+> > > > is saving 8 bytes on the reverse mapping, it sounds like a weak-ish
+> > > > argument, even if we can't optimize the reverse mapping away. But m=
+aybe
+> > > > I am also out of touch with RAM prices :)
+> > >
+> > > In terms of the space overhead I do agree, FWIW :)
+> > >
+> > > I think the other concern is the indirection overhead with going
+> > > through the xarray for every swap operation, hence the per-CPU vswap
+> > > cluster lookup caching idea:
+> > >
+> > > https://lore.kernel.org/all/20260505153854.1612033-23-nphamcs@gmail.c=
+om/
+> >
+> > Right, but we should already avoid the xarray with the swap table
+> > design, right? We just have one swap table pointing to another
+> > essentially?
+>
+> Hmmm, I don't quite follow your suggestion here.
+>
+> For normal swap devices, we organize the space into clusters, and
+> maintain them in various lists (free, nonfull, full etc.). The only
+> difference with a vswap device is we do not have a free list, and have
+> the clusters themselves dynamically allocated.
+>
+> If we're using vswap, we will incur the xarray overhead. There's no
+> avoiding that if we want a dynamic indirection layer. We can of course
+> revisit this data structure design later.
+>
+> So yes, it will be one swap table (vswap cluster) pointing to another
+> swap table (pswap cluster). But to get to the first swap table, you
+> will have to go through xarray still.
 
-diff --git a/Documentation/translations/zh_TW/process/stable-api-nonsense.rst b/Documentation/translations/zh_TW/process/stable-api-nonsense.rst
-index 4b8597fed5ae..a21daf29da10 100644
---- a/Documentation/translations/zh_TW/process/stable-api-nonsense.rst
-+++ b/Documentation/translations/zh_TW/process/stable-api-nonsense.rst
-@@ -14,21 +14,21 @@
-         中文版校譯者： 李陽  Li Yang <leoyang.li@nxp.com>
-                       胡皓文 Hu Haowen <2023002089@link.tyut.edu.cn>
- 
--Linux 內核驅動接口
-+Linux 內核驅動介面
- ==================
- 
--寫作本文檔的目的，是爲了解釋爲什麼Linux既沒有二進制內核接口，也沒有穩定
--的內核接口。這裏所說的內核接口，是指內核裏的接口，而不是內核和用戶空間
--的接口。內核到用戶空間的接口，是提供給應用程序使用的系統調用，系統調用
-+寫作本文檔的目的，是爲了解釋爲什麼Linux既沒有二進制內核介面，也沒有穩定
-+的內核介面。這裏所說的內核介面，是指內核裏的介面，而不是內核和用戶空間
-+的介面。內核到用戶空間的介面，是提供給應用程序使用的系統調用，系統調用
- 在歷史上幾乎沒有過變化，將來也不會有變化。我有一些老應用程序是在0.9版本
- 或者更早版本的內核上編譯的，在使用2.6版本內核的Linux發佈上依然用得很好
--。用戶和應用程序作者可以將這個接口看成是穩定的。
-+。用戶和應用程序作者可以將這個介面看成是穩定的。
- 
- 
- 執行綱要
- --------
- 
--你也許以爲自己想要穩定的內核接口，但是你不清楚你要的實際上不是它。你需
-+你也許以爲自己想要穩定的內核介面，但是你不清楚你要的實際上不是它。你需
- 要的其實是穩定的驅動程序，而你只有將驅動程序放到公版內核的源代碼樹裏，
- 纔有可能達到這個目的。而且這樣做還有很多其它好處，正是因爲這些好處使得
- Linux能成爲強壯，穩定，成熟的操作系統，這也是你最開始選擇Linux的原因。
-@@ -37,8 +37,8 @@ Linux能成爲強壯，穩定，成熟的操作系統，這也是你最開始選
- 入門
- -----
- 
--只有那些寫驅動程序的“怪人”纔會擔心內核接口的改變，對廣大用戶來說，既
--看不到內核接口，也不需要去關心它。
-+只有那些寫驅動程序的“怪人”纔會擔心內核介面的改變，對廣大用戶來說，既
-+看不到內核介面，也不需要去關心它。
- 
- 首先，我不打算討論關於任何非GPL許可的內核驅動的法律問題，這些非GPL許可
- 的驅動程序包括不公開源代碼，隱藏源代碼，二進制或者是用源代碼包裝，或者
-@@ -46,14 +46,14 @@ Linux能成爲強壯，穩定，成熟的操作系統，這也是你最開始選
- 詢律師，我只是一個程序員，所以我只打算探討技術問題（不是小看法律問題，
- 法律問題很實際，並且需要一直關注）。
- 
--既然只談技術問題，我們就有了下面兩個主題：二進制內核接口和穩定的內核源
--代碼接口。這兩個問題是互相關聯的，讓我們先解決掉二進制接口的問題。
-+既然只談技術問題，我們就有了下面兩個主題：二進制內核介面和穩定的內核源
-+代碼介面。這兩個問題是互相關聯的，讓我們先解決掉二進制介面的問題。
- 
- 
--二進制內核接口
-+二進制內核介面
- --------------
--假如我們有一個穩定的內核源代碼接口，那麼自然而然的，我們就擁有了穩定的
--二進制接口，是這樣的嗎？錯。讓我們看看關於Linux內核的幾點事實：
-+假如我們有一個穩定的內核源代碼介面，那麼自然而然的，我們就擁有了穩定的
-+二進制介面，是這樣的嗎？錯。讓我們看看關於Linux內核的幾點事實：
- 
-     - 取決於所用的C編譯器的版本，不同的內核數據結構裏的結構體的對齊方
-       式會有差別，代碼中不同函數的表現形式也不一樣（函數是不是被inline
-@@ -84,18 +84,18 @@ Linux能成爲強壯，穩定，成熟的操作系統，這也是你最開始選
- 深刻的教訓...
- 
- 
--穩定的內核源代碼接口
-+穩定的內核源代碼介面
- --------------------
- 
- 如果有人不將他的內核驅動程序，放入公版內核的源代碼樹，而又想讓驅動程序
- 一直保持在最新的內核中可用，那麼這個話題將會變得沒完沒了。
--內核開發是持續而且快節奏的，從來都不會慢下來。內核開發人員在當前接口中
-+內核開發是持續而且快節奏的，從來都不會慢下來。內核開發人員在當前介面中
- 找到bug，或者找到更好的實現方式。一旦發現這些，他們就很快會去修改當前的
--接口。修改接口意味着，函數名可能會改變，結構體可能被擴充或者刪減，函數
--的參數也可能發生改變。一旦接口被修改，內核中使用這些接口的地方需要同時
-+介面。修改介面意味着，函數名可能會改變，結構體可能被擴充或者刪減，函數
-+的參數也可能發生改變。一旦介面被修改，內核中使用這些介面的地方需要同時
- 修正，這樣才能保證所有的東西繼續工作。
- 
--舉一個例子，內核的USB驅動程序接口在USB子系統的整個生命週期中，至少經歷
-+舉一個例子，內核的USB驅動程序介面在USB子系統的整個生命週期中，至少經歷
- 了三次重寫。這些重寫解決以下問題：
- 
-     - 把數據流從同步模式改成非同步模式，這個改動減少了一些驅動程序的
-@@ -105,22 +105,22 @@ Linux能成爲強壯，穩定，成熟的操作系統，這也是你最開始選
-       需要提供更多的參數給USB核心，以修正了很多已經被記錄在案的死鎖。
- 
- 這和一些封閉源代碼的操作系統形成鮮明的對比，在那些操作系統上，不得不額
--外的維護舊的USB接口。這導致了一個可能性，新的開發者依然會不小心使用舊的
--接口，以不恰當的方式編寫代碼，進而影響到操作系統的穩定性。
-+外的維護舊的USB介面。這導致了一個可能性，新的開發者依然會不小心使用舊的
-+介面，以不恰當的方式編寫代碼，進而影響到操作系統的穩定性。
- 在上面的例子中，所有的開發者都同意這些重要的改動，在這樣的情況下修改代
--價很低。如果Linux保持一個穩定的內核源代碼接口，那麼就得創建一個新的接口
--；舊的，有問題的接口必須一直維護，給Linux USB開發者帶來額外的工作。既然
-+價很低。如果Linux保持一個穩定的內核源代碼介面，那麼就得創建一個新的介面
-+；舊的，有問題的介面必須一直維護，給Linux USB開發者帶來額外的工作。既然
- 所有的Linux USB驅動的作者都是利用自己的時間工作，那麼要求他們去做毫無意
- 義的免費額外工作，是不可能的。
- 安全問題對Linux來說十分重要。一個安全問題被發現，就會在短時間內得到修
--正。在很多情況下，這將導致Linux內核中的一些接口被重寫，以從根本上避免安
--全問題。一旦接口被重寫，所有使用這些接口的驅動程序，必須同時得到修正，
-+正。在很多情況下，這將導致Linux內核中的一些介面被重寫，以從根本上避免安
-+全問題。一旦介面被重寫，所有使用這些介面的驅動程序，必須同時得到修正，
- 以確定安全問題已經得到修復並且不可能在未來還有同樣的安全問題。如果內核
--內部接口不允許改變，那麼就不可能修復這樣的安全問題，也不可能確認這樣的
-+內部介面不允許改變，那麼就不可能修復這樣的安全問題，也不可能確認這樣的
- 安全問題以後不會發生。
--開發者一直在清理內核接口。如果一個接口沒有人在使用了，它就會被刪除。這
--樣可以確保內核儘可能的小，而且所有潛在的接口都會得到儘可能完整的測試
--（沒有人使用的接口是不可能得到良好的測試的）。
-+開發者一直在清理內核介面。如果一個介面沒有人在使用了，它就會被刪除。這
-+樣可以確保內核儘可能的小，而且所有潛在的介面都會得到儘可能完整的測試
-+（沒有人使用的介面是不可能得到良好的測試的）。
- 
- 
- 要做什麼
-@@ -128,11 +128,11 @@ Linux能成爲強壯，穩定，成熟的操作系統，這也是你最開始選
- 
- 如果你寫了一個Linux內核驅動，但是它還不在Linux源代碼樹裏，作爲一個開發
- 者，你應該怎麼做？爲每個發佈的每個版本提供一個二進制驅動，那簡直是一個
--噩夢，要跟上永遠處於變化之中的內核接口，也是一件辛苦活。
-+噩夢，要跟上永遠處於變化之中的內核介面，也是一件辛苦活。
- 很簡單，讓你的驅動進入內核源代碼樹（要記得我們在談論的是以GPL許可發行
- 的驅動，如果你的代碼不符合GPL，那麼祝你好運，你只能自己解決這個問題了，
- 你這個吸血鬼<把Andrew和Linus對吸血鬼的定義鏈接到這裏>）。當你的代碼加入
--公版內核源代碼樹之後，如果一個內核接口改變，你的驅動會直接被修改接口的
-+公版內核源代碼樹之後，如果一個內核介面改變，你的驅動會直接被修改介面的
- 那個人修改。保證你的驅動永遠都可以編譯通過，並且一直工作，你幾乎不需要
- 做什麼事情。
- 
-@@ -142,7 +142,7 @@ Linux能成爲強壯，穩定，成熟的操作系統，這也是你最開始選
-     - 其他人會給驅動添加新特性。
-     - 其他人會找到驅動中的bug並修復。
-     - 其他人會在驅動中找到性能優化的機會。
--    - 當外部的接口的改變需要修改驅動程序的時候，其他人會修改驅動程序
-+    - 當外部的介面的改變需要修改驅動程序的時候，其他人會修改驅動程序
-     - 不需要聯繫任何發行商，這個驅動會自動的隨着所有的Linux發佈一起發
-       布。
- 
--- 
-2.34.1
+Why the xarray? Don't page tables (and shmem page cache) just point
+directly to the vswap entry the same way they point to swap entries
+today?
 
+*looks at the code*
+
+Oh, it's to find the actual cluster because the vswap file can be
+sparse? Hmm yeah I guess we can revisit the data structure here later,
+but IIRC xarrays aren't particularly good for sparse data. Maybe it's
+usually not sprase in practice.
+
+Maybe a maple tree? :)
+
+> > > If folks like it, what I can do is have CONFIG_ZSWAP depends on
+> > > CONFIG_VSWAP, removes all the non-vswap logic, and call it a day? :)
+> > > Then, on the swap allocation side, if vswap allocation fail and zswap
+> > > writeback is disabled, we can error out early.
+> >
+> > Hmm maybe we can keep it around for now and do that after vswap
+> > stabilizes? It ultimately depend on how much complexity we maintain by
+> > allowing both.
+> >
+> > I think another problem is 32-bit, technically zswap can be used on
+> > 32-bit now, right? So vswap not supporitng 32-bit is a problem.
+>
+> Ah shoot I forgot about that. Hmmm.
+>
+> It's not impossible to make vswap support 32-bit. I did that for v6
+> after all. It just needs extra fields because we have fewer bits to
+> leverage in pointers etc., complicating the logic a bit. Follow-up
+> work? :)
+
+Yeah we can do that, but it's a blocker for zswap only using vswap.
+
+> > General question (for both zswap and general swap code), would a boot
+> > param make implementation simpler? Right now we seem to key off the swa=
+p
+> > device having the "vswap" flag, would it help if it was a runtime
+> > constant?
+>
+> Hmmm, even if it's a runtime constant, both branches still have to be
+> there, no? Does the boot param simplify it somehow?
+
+Maybe it doesn't simplify the code, but if the branching causes
+performance overhead we can use static keys. I guess we can still use
+static keys per-swapfile, but it would be more complicated.
+
+Anyway, not super important now.
 
