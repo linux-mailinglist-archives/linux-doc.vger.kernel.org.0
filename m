@@ -1,68 +1,95 @@
-Return-Path: <linux-doc+bounces-90758-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90760-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id gGJSLNA3IGrWygAAu9opvQ
-	(envelope-from <linux-doc+bounces-90758-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 16:18:56 +0200
+	id f+mVFOQ3IGrZygAAu9opvQ
+	(envelope-from <linux-doc+bounces-90760-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 16:19:16 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6780A6387AA
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 16:18:56 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9E6C66387B6
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 16:19:15 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=arm.com header.s=foss header.b=cmFdbF2w;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90758-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-90758-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=arm.com;
+	dkim=pass header.d=soleen.com header.s=google header.b="Jj/gXNQz";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90760-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-90760-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=soleen.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 8F20330CF44F
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 14:11:28 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 61F5A30F44D4
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 14:12:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 14DB248164D;
-	Wed,  3 Jun 2026 14:11:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 84D013AA4EB;
+	Wed,  3 Jun 2026 14:11:35 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 76CB947DD55;
-	Wed,  3 Jun 2026 14:11:00 +0000 (UTC)
+Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com [209.85.222.170])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 417383D301F
+	for <linux-doc@vger.kernel.org>; Wed,  3 Jun 2026 14:11:34 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780495862; cv=none; b=pyXn07+ohGT2LpfCMlaQ+djwFks4SSchYB78wxyPNZ70QNvWRlgYZ2EAsGn9ugeqR1HtBSvJ+Nwf+/3E40L8GD0Aw6mKMh7/2izKYV9Hbv6+zc/6w56qwV6VRJPgv2xepbxvNfRcN/FPn1qcrvPD+M/ZUi97kttsIXLOuSVpMUg=
+	t=1780495895; cv=none; b=YsZQxrgrwSb3rvEvp3IbCtqcvqpHezbDM+DPGFl9BvOcigV9eXitS5X9ywxAx5sgWPsVT7z8MESDcwX7o5de+1sT4yg3vkXGYk3KRTGced+3B6RczBm7nAKefzRSjCJ1cv1sfXv7JzAapEejzFIrzOSgu152aPI7ad0meKtkm7A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780495862; c=relaxed/simple;
-	bh=HFtynj+BbYl9EaWNCP8jiRd+6Ij4Y8cJoB9KXD8A8jI=;
+	s=arc-20240116; t=1780495895; c=relaxed/simple;
+	bh=b/SIUriVsuGQ8+K9ks4Bx6z61f4Zp4N9nO9DkwNZvL8=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=s90PSgIm4KzedCqphWgfYOqhLweQ/wjGcxiDIdZC5iNFspXt8V/zyawjtdQ1uYHDS0f0rQR8fTPdTdUOSuZcXfgCIAriZG/33PEuO/l1jQ4tOVvYfZR2j1rWx6ZLQkL0TrF+g0lWii7LR+zF5LdksPBzxdbeid7pS3axAEn3jsw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=cmFdbF2w; arc=none smtp.client-ip=217.140.110.172
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 68B881477;
-	Wed,  3 Jun 2026 07:10:54 -0700 (PDT)
-Received: from localhost (e132581.arm.com [10.1.196.87])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E4F983F632;
-	Wed,  3 Jun 2026 07:10:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1780495859; bh=HFtynj+BbYl9EaWNCP8jiRd+6Ij4Y8cJoB9KXD8A8jI=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=cmFdbF2woqL+6KIgmrbRN9g/gumoD2awg5aZFzy4iLEBE7Sh3DraP4CAqOlPAffvu
-	 nL//cEUHjdJFh+QpzTZM+1AvfRYGWzH/7glD8B35/69QFKI5Tjt571U/oys2F1pVtw
-	 VeKcU8KSOIIaEu+1ZU7E7TJqVvqqGPP8bo0pnuTE=
-Date: Wed, 3 Jun 2026 15:10:56 +0100
-From: Leo Yan <leo.yan@arm.com>
-To: James Clark <james.clark@linaro.org>
-Cc: Suzuki K Poulose <suzuki.poulose@arm.com>,
-	Mike Leach <mike.leach@arm.com>,
-	Arnaldo Carvalho de Melo <acme@kernel.org>,
-	Namhyung Kim <namhyung@kernel.org>, Jiri Olsa <jolsa@kernel.org>,
-	Ian Rogers <irogers@google.com>, Amir Ayupov <aaupov@meta.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Paschalis Mpeis <Paschalis.Mpeis@arm.com>,
-	coresight@lists.linaro.org, linux-perf-users@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Arnaldo Carvalho de Melo <acme@redhat.com>,
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v2 07/18] perf test cs-etm: Remove asm_pure_loop test
-Message-ID: <20260603141056.GW101133@e132581.arm.com>
-References: <20260602-james-cs-context-tracking-fix-v2-0-85b5ce6f55c6@linaro.org>
- <20260602-james-cs-context-tracking-fix-v2-7-85b5ce6f55c6@linaro.org>
+	 Content-Type:Content-Disposition:In-Reply-To; b=bKRoXPphyN4r58R9SOAEMaoftZdxgk/4mWPKrn/e2E8fTwA3vaGEmKLDyVBmI34BIPAuKCaZK+tvPEcS9FLx4prG4jM2Kpi13dsrhvo9DZh8MEFyhbfWmeLn0zRxAxyQ0qVGz7G7Mow7Rw5E4TrbODpUATD8lZWp5jYUgDi4ut8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com; spf=pass smtp.mailfrom=soleen.com; dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b=Jj/gXNQz; arc=none smtp.client-ip=209.85.222.170
+Received: by mail-qk1-f170.google.com with SMTP id af79cd13be357-9157f7c1c0eso192688885a.1
+        for <linux-doc@vger.kernel.org>; Wed, 03 Jun 2026 07:11:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=soleen.com; s=google; t=1780495893; x=1781100693; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=3JBFLHHchSf6Ugt56GZlS5cZe18tTPuP1JId2xHEinc=;
+        b=Jj/gXNQz9PzMyt/Qlt6Q2M3R245DJFs2mznVy5gaKaJpgI6Fzs3uffqHQTVciPDiON
+         c+gXtmpnbP//2nGpOWRG1DMuK+KCG+q3QbHfdMsZZXdMbqT6KDziuumMr9bKwVcQLtYj
+         nY5fZbjcBpBy4vQmg7riJpMdsd849LjZkUG+7LSsHGj50odIXBLfu3ZC2RQRsjK8NC21
+         BtVbmz/mfj5A9eQvlDuUmtmfAuejT773Z40C6Sxy8s9e+jVFgBdYMiciPrJ0BWapP8c2
+         1+n6edbMVArRWJMh1g1hFb824kkVkjvXDQfVU2j5TAucSqkOiDOgCkcYYZoSShEFAA9B
+         OYoA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780495893; x=1781100693;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=3JBFLHHchSf6Ugt56GZlS5cZe18tTPuP1JId2xHEinc=;
+        b=i7xS2zcfj0vB0ElBaeQ2x/F9ddbNjQiO6G8SgKWLiAUrQQt5S4S+o1ZQWo+bTAkgLl
+         zxE8brs4z7GxgqTtoPFOCyuZ78+E/ReQwVO9cf1yhaGGaAJc+/75yLO63y5C4vEoPZ9m
+         6So/HJ11IzEWUOJsAGQwxxuYnbktxMLgqEKXQ2Sn71zJO4UtDqA5fvt10k9eVIK44Veo
+         zs807PnbVY754wvmvqrb/hU8x6JNYeClyHrzg9Nv3E3GNLY8nYKgDaY2FRPw/tdSB8/Z
+         nAQkq5xaiAW5GJ/EhrCanvWvB4Ir+AcdnlCkwWNw6Pzja3iVefYMGcyv935N35aW+qeA
+         UTNg==
+X-Forwarded-Encrypted: i=1; AFNElJ+ppw8dScHC3R3IXe3r4sEN/YrkoPvOwIZRTvPgEel4ObYWjwfQQVNnvscnKf7PPyIPkAxVEDHYxYw=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yxhpt7R9HxdspTQf2riMsi3bL2Vg0vQhJZal0UEYvzrPYoehf3I
+	7UIgtkCRU3LaD5+gLM+pgiBBDq2R4aUFV8VvABGo+ljeg6k6hSvz759RgbM0pgZzhcs=
+X-Gm-Gg: Acq92OGtENHIatFw+7CEuWsNlp421rnwD62HN+4QWth/JnWJSZJWGYcpZzoXVWHp5qD
+	Y9IGHYVE6Z1oIdh1MCqEhB6R44Y2Q91vpd8JRhmq6ddCm72bt4DNpLH5cpSAKvjveIlqVtzMG4b
+	AWjiCZeFf9YSr/KePj6cIAg4RpcvsFlMo11fj7GkzGSBmO7D0np/oCLZD/fn+7JLQ0yd3N66riK
+	wgqkJjpM381y6k9MYpKkid4sSgna38biKJpRBuib2qoaEHMFDy+S4/sRb/VOoaVk5avDOXIX2j6
+	+cSIXxl5v/gbOilrPxiDp5od8akI44zwSeQsmlCf9pufUZACzTBfHIKPPA1tCA+oYj+IctVTshm
+	nK2G0OH/FOjS8cRAl0R5TKHc3kT3xf1PvxRKWI6vTU3R3v/8rPjyQxUoZeempdz/YokOdBk/W28
+	3EJNWwTIqoQ2fSiqtTJvJgMxLvQx5aHGCUbYY4eZkcU817vuH1VREhTzMdtCT8dQ==
+X-Received: by 2002:a05:620a:4613:b0:915:4ca3:61bd with SMTP id af79cd13be357-9158a83f992mr602997485a.59.1780495893289;
+        Wed, 03 Jun 2026 07:11:33 -0700 (PDT)
+Received: from plex ([71.181.43.54])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-9158a402ff9sm248774285a.45.2026.06.03.07.11.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 03 Jun 2026 07:11:32 -0700 (PDT)
+Date: Wed, 3 Jun 2026 14:11:31 +0000
+From: Pasha Tatashin <pasha.tatashin@soleen.com>
+To: Mike Rapoport <rppt@kernel.org>
+Cc: Pasha Tatashin <pasha.tatashin@soleen.com>, 
+	linux-kselftest@vger.kernel.org, shuah@kernel.org, akpm@linux-foundation.org, linux-mm@kvack.org, 
+	skhan@linuxfoundation.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	corbet@lwn.net, dmatlack@google.com, kexec@lists.infradead.org, 
+	pratyush@kernel.org, skhawaja@google.com, graf@amazon.com
+Subject: Re: [PATCH v6 07/13] kho: add support for linked-block serialization
+Message-ID: <aiA1slnqPnC4_8XY@plex>
+References: <20260603032905.344462-1-pasha.tatashin@soleen.com>
+ <20260603032905.344462-8-pasha.tatashin@soleen.com>
+ <178046937151.468621.13398573538792303093.b4-review@b4>
+ <aiANtYRRDr5iO5QR@plex>
+ <aiAzT9TvGYjITiB8@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -71,58 +98,87 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260602-james-cs-context-tracking-fix-v2-7-85b5ce6f55c6@linaro.org>
+In-Reply-To: <aiAzT9TvGYjITiB8@kernel.org>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
-	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
+	DMARC_POLICY_ALLOW(-0.50)[soleen.com,reject];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[soleen.com:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-90758-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:james.clark@linaro.org,m:suzuki.poulose@arm.com,m:mike.leach@arm.com,m:acme@kernel.org,m:namhyung@kernel.org,m:jolsa@kernel.org,m:irogers@google.com,m:aaupov@meta.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:Paschalis.Mpeis@arm.com,m:coresight@lists.linaro.org,m:linux-perf-users@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:acme@redhat.com,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90760-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[leo.yan@arm.com,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORGED_SENDER(0.00)[pasha.tatashin@soleen.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	FORGED_RECIPIENTS(0.00)[m:rppt@kernel.org,m:pasha.tatashin@soleen.com,m:linux-kselftest@vger.kernel.org,m:shuah@kernel.org,m:akpm@linux-foundation.org,m:linux-mm@kvack.org,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:corbet@lwn.net,m:dmatlack@google.com,m:kexec@lists.infradead.org,m:pratyush@kernel.org,m:skhawaja@google.com,m:graf@amazon.com,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	DKIM_TRACE(0.00)[arm.com:+];
+	DKIM_TRACE(0.00)[soleen.com:+];
 	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[leo.yan@arm.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[pasha.tatashin@soleen.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,arm.com:dkim,arm.com:from_mime,arm.com:email,linaro.org:email,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,plex:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 6780A6387AA
+X-Rspamd-Queue-Id: 9E6C66387B6
 
-On Tue, Jun 02, 2026 at 03:26:49PM +0100, James Clark wrote:
-> It's not obvious what this test is for so remove it. It's not a stress
-> test because it doesn't output lots of data and it's not a functional
-> test because it only looks for raw trace output. It seems to imply that
-> a program written in assembly influences whether trace would be
-> generated by the CPU or not, but the CPU doesn't know what language the
-> program is written in.
+On 06-03 16:59, Mike Rapoport wrote:
+> On Wed, Jun 03, 2026 at 12:05:04PM +0000, Pasha Tatashin wrote:
+> > On 06-03 09:49, Mike Rapoport wrote:
+> > > On Wed, 03 Jun 2026 03:28:58 +0000, Pasha Tatashin <pasha.tatashin@soleen.com> wrote:
+> > > > diff --git a/include/linux/kho/abi/block.h b/include/linux/kho/abi/block.h
+> > > > new file mode 100644
+> > > > index 000000000000..8641c20b379b
+> > > > --- /dev/null
+> > > > +++ b/include/linux/kho/abi/block.h
+> > > > @@ -0,0 +1,56 @@
+> > > > [ ... skip 25 lines ... ]
+> > > > +#define _LINUX_KHO_ABI_BLOCK_H
+> > > > +
+> > > > +#include <asm/page.h>
+> > > > +#include <linux/types.h>
+> > > > +
+> > > > +#define KHO_BLOCK_ABI_COMPATIBLE	"kho-block-v1"
+> > > 
+> > > It's never used by block set and after looking at the following patches I
+> > > found that it's appended to LUO compatible string.
+> > > 
+> > > While this works for LUO, I think it should be kho_block_set_restore()
+> > > responsibility to verify the compatibility.
+> > 
+> > It should work for any component that relies on  kho_block. My proposal 
+> > is to use this method for other common KHO data structures (e.g.,  kho 
+> > vmalloc,  kho radix, future kho xarray). There is no need for them to 
+> > carry the compatibility string in their metadata, as whoever uses them 
+> > will include their compatibility string.
 > 
-> We already have lots of Coresight tests that test the full pipeline
-> including decoding, and in many more modes of operation than this one,
-> so if no trace was collected they will already fail leaving this one
-> redundant.
-> 
-> Signed-off-by: James Clark <james.clark@linaro.org>
+> So if, say, memfd_luo uses kho vmalloc, xarray and blocks it'll have five
+> compatibility strings glued together?
 
-Reviewed-by: Leo Yan <leo.yan@arm.com>
+That is correct, but it will be in only one place: the header of the 
+client's KHO subtree. Since it is dynamically sized and 8-byte aligned, 
+it should be safe to include in any struct.
+
+Pasha
+
+>  
+> > For now, reviewers will have to make sure that if the ABI header content 
+> > is changed, the compatibility string is updated.
+> 
+> -- 
+> Sincerely yours,
+> Mike.
 
