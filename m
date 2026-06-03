@@ -1,83 +1,84 @@
-Return-Path: <linux-doc+bounces-90605-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90606-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id g59aLidkH2odlgAAu9opvQ
-	(envelope-from <linux-doc+bounces-90605-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 01:15:51 +0200
+	id oYC7CO1jH2oNlgAAu9opvQ
+	(envelope-from <linux-doc+bounces-90606-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 01:14:53 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B81F632D04
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 01:15:51 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id B0DC5632CC2
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 01:14:52 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=aN9vUP9w;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90605-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-90605-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=Cy8X6aU0;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90606-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-90606-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=gmail.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id A33F53084BB2
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 23:14:20 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 320773046212
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jun 2026 23:14:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 50D7D3D0903;
-	Tue,  2 Jun 2026 23:14:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 537D13D0905;
+	Tue,  2 Jun 2026 23:14:29 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B727A3CF681
-	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 23:14:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 86D603CE080
+	for <linux-doc@vger.kernel.org>; Tue,  2 Jun 2026 23:14:27 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780442058; cv=none; b=MgaKks9aFu3JJhmx5X6KN7EMeoCzlnNvfHD97B4c0MYbKXNmDqOs/W84zLnHoClaHh3uBOGXrMTIIaVnr8oNPzR9YHIx+Gg0A9jXk8GIpYOULhjPdMQVklvogzijByMIS/VV8bBfp/vRC6vEBRwovcjnfCRBCfZiKqlWbUqch7M=
+	t=1780442069; cv=none; b=naILKQ9jya8Tw7stHbCBvgZOEsmCTe6dM6zzOlJWNRWhdLn89YCESvo0u8FIRFBsaTEVcL7r6LlmmjVG91uLuuLSflKqwWQSbITzkNWaQT0C3qz/LNnP/dKB5w693deVJtFQhJzaRr275oBJlU5VgCjrmGbVAenMyG0xs3our48=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780442058; c=relaxed/simple;
-	bh=ic3wkraCrvoYZ6pSRcfok46YiwVD8eKVuqso6BkVzl4=;
+	s=arc-20240116; t=1780442069; c=relaxed/simple;
+	bh=hn5Y84v6I4GaSTkzERKI8t9IzJT3/S3blS9lduPRHwg=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=uRAkxJSRUprgWHU63kIb0mKmvGiMhblqywMzdZv9n+V8xM0IQ01ztHzzRyuc4l8XBa3INXvUvdfaoKOstTzTDKDSvXG85fh7XO5X95V8/g8YhZaNtfkbfQcBFLTWi1dqVAnA4jfGEijUzrR+hGbb8ZF9r+ysSWzytHc2wEczU+Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=aN9vUP9w; arc=none smtp.client-ip=209.85.214.179
-Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2c0c379e8ffso21705085ad.3
-        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 16:14:16 -0700 (PDT)
+	 In-Reply-To:To:Cc; b=mavEUngQtR4hGQAhhmjvoCDcHXDGquCPKiykVHB943hEw9FAkuHIbwg91EVTMoVFfRTfW3MOryCKtvBLFSuqJDqbXMph7eJwRCoHGSbR+PrCI046AnKcfSSzc40CaJmprgzoyI8BpTxHe64IXWpYuemel9I3BZ511Qdy/iXG78U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Cy8X6aU0; arc=none smtp.client-ip=209.85.214.180
+Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-2c0bb4a94b8so23355665ad.2
+        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 16:14:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780442056; x=1781046856; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1780442067; x=1781046867; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=tnLxbwZwMbkVvB2Zwz0yZiGVjbTNpgk1H8ZchRPW3Lw=;
-        b=aN9vUP9wSxyzxdxsCtSt9EyidsSW8S98gpGWbKVyzSplk08/4rd2mL7zGVXVVWZGJ/
-         5PE3TviOql5UIgxfPcRdIn+trrNcG5Kgqf9myHFSk64ChYqB6sbtsyGk8VQ6oGMfUV0l
-         eWXRkK0fCb35YnAopf/mGeuUAvv0WYHf0nnfOdaiHe7vjRFGZQ/cPnIMRZf22jdh6aR7
-         TLYwSHC6iYfnPsY8bHuCiCG2BSu2QIlS7oMqnCAUdcWAeZwVgzLGv91VwlaU3r13sB3f
-         aI4v9qhzfmP3cTKv5IozPVLVdHgmLTCx68L+BtCaWbkp0UhZtFNK+TF5jrC7tNGOuhp+
-         08tQ==
+        bh=XmtWh5mcf4mzD0yR3n/eyuF9cs7/fUbeD923xQ2EWiI=;
+        b=Cy8X6aU0P0ikr5JggN5h5yPA+sRfEXiVuljbhB6CEf01COlF00RNRcAF7HagSobhJB
+         LrjAgVUNiFsJv/VsqH9bt8VklvBxYlw0EAV/A822qtwyHOQar6C0HKMMu7GJIc3GDKBy
+         l+qtD2XzJY+dHMy1Dwu3Jt/0fHBTKwkXMBe6nO2SI4t1qr7QMxMNixMdp3ALT7ezBOx3
+         ICq0SDjqgLzl36XsUEhjfDqEOljDfAJ10DjFeUfYUpJdVdnUP3jQleniVUn3vkrdNKhC
+         W45/k02BW/ONzSERQoovc38Oy3WAa7AKf3Uaf4J1YvE8fjBLIpFhPRabwnxa3Y10WJnx
+         BG8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780442056; x=1781046856;
+        d=1e100.net; s=20251104; t=1780442067; x=1781046867;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=tnLxbwZwMbkVvB2Zwz0yZiGVjbTNpgk1H8ZchRPW3Lw=;
-        b=sk+B9vzKvV3W82ZsJRHhGWlOIe5y0+A+piB9hYPGIX+R011dYup/PYX547cbj7JayK
-         dqc+1x452s4R6U4VF4XcGeVQdmh4+Ag1q+VVX4QhTQfWW10gkGicIQCdt1FIS4Y+OJ3L
-         b+Je5lqwWmkDpt27oPtS5dIBt6Z2nsFbQjaQ0gIddBzzfr0Be1tmqZ0ZbimynM9WRuYO
-         /4NC6VYXq1uAAR3ZRhI8qmB7k5Rz2ofLC0msdeZY1/VeFKHMfJY+NrJKtjxW8pYFGa7W
-         LwMUzl2sCfQ41s8LqJ3BmBbvG3/wISFoT/SpZn9PBt1Y/DmTp58CsDL550WxmrsR3mbD
-         OiZw==
-X-Gm-Message-State: AOJu0Ywd2AJOw55QAqF1j/ps2R5Ok0eDt9VDpMRck7hlk2RQfe8WY5FT
-	tbXNLOsVin4YKJ7JtqF8MBVgggvc3o5k3V1UeKyHYm9Dk8OTPuAXdNIg
-X-Gm-Gg: Acq92OHa1Aod3tgh65iPboKzc/OTjKV99xXV+k+1+e/bUxZod7+cHaWabqAWkzjjiQT
-	uH1/y0o2w7WIRL7lAg5AWBnSsyw2TAto/iXu0uwVZHFqKY48aMiLdKDkK5CBnJ6zgW1ZDA5bHKB
-	i4x7sH3MERg3Xd1QVQMWn9ndv4XkuVldD4GGPgAJeQCUr+9WOCHgkttoSHOO65nOi8qw53ocQ3/
-	QVL6DZmp4lDu2fIBfP1Gyhq2soA/hBXNG1x4WOlyKXvH1Z2Tbmpp5TuoB/CSipL/cdiCksMaIEQ
-	vQ8Ft+FJKERVtG+LHlupuF/2tm06nvPHMgr1eWd9qaj/BLlMWGk+ZiA0l3HaeJ373I3p24R/zvA
-	fIOwEkHsKzTgv1t6029tU2zimQgImKiEOHpXmMzXuRLcpZaoAwmRgd+m+pwj8HVaXymJ8amqwam
-	vkBRywS45bPA==
-X-Received: by 2002:a17:903:1786:b0:2bf:3309:ecce with SMTP id d9443c01a7336-2c163db0b76mr7281915ad.28.1780442056055;
-        Tue, 02 Jun 2026 16:14:16 -0700 (PDT)
+        bh=XmtWh5mcf4mzD0yR3n/eyuF9cs7/fUbeD923xQ2EWiI=;
+        b=qLvuBxMTFftSSAWpAfHih/jwAzXvoo6wHNhS1t09+JsihrRcd8hy3ITpFXR/ZFINjA
+         QxafnzHrOUov5nMKTxqF8d4x73u9Rw0lCXazdbn7yt9Dut2t/W+mQ8nY+y3Dfk6SD7dl
+         CUnbQQNSUKF8CcqKtS0sD465Wl6gOaNMCrGJjIRLUdqdzRtqP/GVbzfmAyRflkvWIXQ/
+         4LU4HUgTRSgYRA5NntsE97phiRO8ATrdKolWU+rmiwDsxiipAHpx/RUuw4DIZYcdKT4G
+         1xBB2iGV4hzSCyErezygJyWKUg3NYaCGgUWtfwvOyJVFayCZ6UQsiPCYRXkuah9LwPWH
+         7FHQ==
+X-Gm-Message-State: AOJu0YyzDRFvsi6H1gvr92OqVMXEVkZuxSWevu5zqvGQiYHGvaFB3xj3
+	Ts/tsEiJMMlyDZ4qP38HbM8/bpVTeV6KRNoTnJjwYjB2if6b+NIFloG0
+X-Gm-Gg: Acq92OGk0GPeBjm2yhZdVyoQJTn+CUfk/wr8yF4hxIOxVQR6gMXbb4p1eLuHx9oCl3H
+	WZTscp8PMsHbhlrD8LdpKxur/Buo3fIX09vlaH6YEsO+u5FLdF5PYfsHpXF7/LhdGRrfsLZOgpO
+	SpBr/B6CVvL9qJqh0v6eMxt84n2NxyP3HDrzeRuFIYcGSpIL3tpHScBu6t8cprdqd44n5HVoKiB
+	gK4XAAgHMFlnAJJTEXhHsAhMMsJFht9VLO4DgQ9uqGSF18NnqAEBJEfI73zFHBdzM/H9aaY+JiQ
+	MIAANmTRa1ELKvhUKm7CGiUKgyGVAyCrWGLY4NIJia4ChFYb8OVRcSciKJiNQpyLACRvA75/lFk
+	UFsaNtiy9LrBL+aR7ububUsFBYldf8cIdYb9OseqyZMusOYXwtZaNgE/AqLEILZxNj27iycFxG3
+	SJFk8/LtbwTw==
+X-Received: by 2002:a17:903:b8d:b0:2bf:172d:ef7e with SMTP id d9443c01a7336-2c1644b3047mr6913055ad.34.1780442066775;
+        Tue, 02 Jun 2026 16:14:26 -0700 (PDT)
 Received: from [127.0.1.1] ([2a12:a305:4::40e9])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c16649d2dfsm3302965ad.75.2026.06.02.16.14.05
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c16649d2dfsm3302965ad.75.2026.06.02.16.14.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Jun 2026 16:14:15 -0700 (PDT)
+        Tue, 02 Jun 2026 16:14:26 -0700 (PDT)
 From: Guodong Xu <docular.xu@gmail.com>
-Date: Wed, 03 Jun 2026 07:12:03 -0400
-Subject: [PATCH v3 08/15] riscv: Add Zic64b to cpufeature and hwprobe
+Date: Wed, 03 Jun 2026 07:12:04 -0400
+Subject: [PATCH v3 09/15] riscv: dts: spacemit: k3: Add Zic64b ISA
+ extension
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -86,7 +87,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260603-rva23u64-hwprobe-v2-v3-8-5529a7b28384@gmail.com>
+Message-Id: <20260603-rva23u64-hwprobe-v2-v3-9-5529a7b28384@gmail.com>
 References: <20260603-rva23u64-hwprobe-v2-v3-0-5529a7b28384@gmail.com>
 In-Reply-To: <20260603-rva23u64-hwprobe-v2-v3-0-5529a7b28384@gmail.com>
 To: Jonathan Corbet <corbet@lwn.net>, 
@@ -111,12 +112,12 @@ Cc: linux-doc@vger.kernel.org, linux-riscv@lists.infradead.org,
  Samuel Holland <samuel.holland@sifive.com>, 
  Guodong Xu <docular.xu@gmail.com>
 X-Mailer: b4 0.15.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4586; i=docular.xu@gmail.com;
- h=from:subject:message-id; bh=ic3wkraCrvoYZ6pSRcfok46YiwVD8eKVuqso6BkVzl4=;
- b=owGbwMvMwCXWtEl1Z3CGpCDjabUkhiwFHtaYUAuj5udcaV9+3F8kksMfOan5kXhKXtr2cjvVp
- 2nby8Q6SlkYxLgYZMUUWQ4fbcne+son2vc55w+YOaxMIEMYuDgFYCKllYwME25NXvdBIXV1yPlz
- 065MVtg/J8fnxBrLiaLmBjOj9Bc+XM7w3y9bwWLOX9bcybISXpP0V75SEN4vu8JlYdnOpjRnttA
- uBgA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6761; i=docular.xu@gmail.com;
+ h=from:subject:message-id; bh=hn5Y84v6I4GaSTkzERKI8t9IzJT3/S3blS9lduPRHwg=;
+ b=owGbwMvMwCXWtEl1Z3CGpCDjabUkhiwFHtbeyV+9ZDQPSScKpR2ZFqLK13l1zeyJCx4bBshnN
+ TJH/nPoKGVhEONikBVTZDl8tCV76yufaN/nnD9g5rAygQxh4OIUgInsFmT4H1y3R2LXA5HOSecX
+ p1ieO5phIeAonnLw781Fl7WWXTslVMvw3+lp0IRNMvtbTexfvzhdJHby9Ikgw0RevbLttUe/uP3
+ y4gAA
 X-Developer-Key: i=docular.xu@gmail.com; a=openpgp;
  fpr=90B1DC3DF0BD10FD1227BD6344F254AF42F143EE
 X-Rspamd-Action: no action
@@ -125,12 +126,12 @@ X-Spamd-Result: default: False [3.34 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-90605-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90606-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS(0.00)[m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:pjw@kernel.org,m:palmer@dabbelt.com,m:aou@eecs.berkeley.edu,m:alex@ghiti.fr,m:zong.li@sifive.com,m:debug@rivosinc.com,m:anup@brainfault.org,m:atish.patra@linux.dev,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:dlan@kernel.org,m:unicorn_wang@outlook.com,m:inochiama@gmail.com,m:conor.dooley@microchip.com,m:shuah@kernel.org,m:brauner@kernel.org,m:linux-doc@vger.kernel.org,m:linux-riscv@lists.infradead.org,m:linux-kernel@vger.kernel.org,m:kvm@vger.kernel.org,m:kvm-riscv@lists.infradead.org,m:paul.walmsley@sifive.com,m:palmer@sifive.com,m:conor@kernel.org,m:devicetree@vger.kernel.org,m:spacemit@lists.linux.dev,m:sophgo@lists.linux.dev,m:linux-kselftest@vger.kernel.org,m:andrew.jones@oss.qualcomm.com,m:thecharlesjenkins@gmail.com,m:samuel.holland@sifive.com,m:docular.xu@gmail.com,m:krzk@kernel.org,m:docularxu@gmail.com,s:lists@lfdr.de];
 	FORGED_SENDER(0.00)[docularxu@gmail.com,linux-doc@vger.kernel.org];
@@ -153,112 +154,131 @@ X-Spamd-Result: default: False [3.34 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 3B81F632D04
+X-Rspamd-Queue-Id: B0DC5632CC2
 
-Zic64b mandates 64-byte naturally aligned cache blocks and is a
-mandatory extension of the RVA22 and RVA23 profiles.  Allocate a
-RISCV_ISA_EXT_ZIC64B id, parse "zic64b" from the ISA string with a
-validate callback that requires cbom/cbop/cboz cache block sizes of 64
-bytes, and export it through hwprobe.
+The K3 X100 cores have 64-byte cache blocks, already described by their
+cbom/cbop/cboz-block-size of 64, so they implement Zic64b, a mandatory
+RVA23 extension.  Declare it in each core's riscv,isa-extensions.
 
 Signed-off-by: Guodong Xu <docular.xu@gmail.com>
 ---
 v3: New patch.
 ---
- Documentation/arch/riscv/hwprobe.rst  |  3 +++
- arch/riscv/include/asm/hwcap.h        |  1 +
- arch/riscv/include/uapi/asm/hwprobe.h |  1 +
- arch/riscv/kernel/cpufeature.c        | 18 ++++++++++++++++++
- arch/riscv/kernel/sys_hwprobe.c       |  1 +
- 5 files changed, 24 insertions(+)
+ arch/riscv/boot/dts/spacemit/k3.dtsi | 48 ++++++++++++++++++------------------
+ 1 file changed, 24 insertions(+), 24 deletions(-)
 
-diff --git a/Documentation/arch/riscv/hwprobe.rst b/Documentation/arch/riscv/hwprobe.rst
-index 002d5046ab689..601e81f561421 100644
---- a/Documentation/arch/riscv/hwprobe.rst
-+++ b/Documentation/arch/riscv/hwprobe.rst
-@@ -425,3 +425,6 @@ The following keys are defined:
-   * :c:macro:`RISCV_HWPROBE_EXT_B`: The B extension is supported, as defined
-     in version 1.0 of the Bit-Manipulation ISA extensions, and implies the
-     presence of the Zba, Zbb, and Zbs sub-extensions.
-+  * :c:macro:`RISCV_HWPROBE_EXT_ZIC64B`: The Zic64b extension is supported,
-+    as defined in the RISC-V Profiles specification starting from commit
-+    b1d80660 ("Updated to ratified state.")
-diff --git a/arch/riscv/include/asm/hwcap.h b/arch/riscv/include/asm/hwcap.h
-index 58523b3a1998a..36572c1ff438a 100644
---- a/arch/riscv/include/asm/hwcap.h
-+++ b/arch/riscv/include/asm/hwcap.h
-@@ -117,6 +117,7 @@
- #define RISCV_ISA_EXT_ZICCAMOA		107
- #define RISCV_ISA_EXT_ZICCIF		108
- #define RISCV_ISA_EXT_ZA64RS		109
-+#define RISCV_ISA_EXT_ZIC64B		110
- 
- #define RISCV_ISA_EXT_XLINUXENVCFG	127
- 
-diff --git a/arch/riscv/include/uapi/asm/hwprobe.h b/arch/riscv/include/uapi/asm/hwprobe.h
-index 430dc49a82863..36ec8ab470423 100644
---- a/arch/riscv/include/uapi/asm/hwprobe.h
-+++ b/arch/riscv/include/uapi/asm/hwprobe.h
-@@ -122,6 +122,7 @@ struct riscv_hwprobe {
- #define		RISCV_HWPROBE_EXT_ZICCRSE	(1ULL << 4)
- #define		RISCV_HWPROBE_EXT_ZA64RS	(1ULL << 5)
- #define		RISCV_HWPROBE_EXT_B		(1ULL << 6)
-+#define		RISCV_HWPROBE_EXT_ZIC64B	(1ULL << 7)
- 
- /* Increase RISCV_HWPROBE_MAX_KEY when adding items. */
- 
-diff --git a/arch/riscv/kernel/cpufeature.c b/arch/riscv/kernel/cpufeature.c
-index e0197160af6dd..79ff431768139 100644
---- a/arch/riscv/kernel/cpufeature.c
-+++ b/arch/riscv/kernel/cpufeature.c
-@@ -154,6 +154,23 @@ static int riscv_ext_zicbop_validate(const struct riscv_isa_ext_data *data,
- 	return 0;
- }
- 
-+static int riscv_ext_zic64b_validate(const struct riscv_isa_ext_data *data,
-+				     const unsigned long *isa_bitmap)
-+{
-+	/*
-+	 * Zic64b mandates 64-byte naturally aligned cache blocks; cross-check the
-+	 * cbom/cbop/cboz block-size device-tree properties to avoid inconsistency.
-+	 */
-+	if (riscv_cbom_block_size != 64 ||
-+	    riscv_cbop_block_size != 64 ||
-+	    riscv_cboz_block_size != 64) {
-+		pr_err("Zic64b detected in ISA string, disabling as the cache block size is not 64 bytes\n");
-+		return -EINVAL;
-+	}
-+
-+	return 0;
-+}
-+
- static int riscv_ext_f_validate(const struct riscv_isa_ext_data *data,
- 				const unsigned long *isa_bitmap)
- {
-@@ -524,6 +541,7 @@ const struct riscv_isa_ext_data riscv_isa_ext[] = {
- 	__RISCV_ISA_EXT_SUPERSET(b, RISCV_ISA_EXT_B, riscv_b_exts),
- 	__RISCV_ISA_EXT_SUPERSET_VALIDATE(v, RISCV_ISA_EXT_V, riscv_v_exts, riscv_ext_vector_float_validate),
- 	__RISCV_ISA_EXT_DATA(h, RISCV_ISA_EXT_H),
-+	__RISCV_ISA_EXT_DATA_VALIDATE(zic64b, RISCV_ISA_EXT_ZIC64B, riscv_ext_zic64b_validate),
- 	__RISCV_ISA_EXT_SUPERSET_VALIDATE(zicbom, RISCV_ISA_EXT_ZICBOM, riscv_xlinuxenvcfg_exts, riscv_ext_zicbom_validate),
- 	__RISCV_ISA_EXT_DATA_VALIDATE(zicbop, RISCV_ISA_EXT_ZICBOP, riscv_ext_zicbop_validate),
- 	__RISCV_ISA_EXT_SUPERSET_VALIDATE(zicboz, RISCV_ISA_EXT_ZICBOZ, riscv_xlinuxenvcfg_exts, riscv_ext_zicboz_validate),
-diff --git a/arch/riscv/kernel/sys_hwprobe.c b/arch/riscv/kernel/sys_hwprobe.c
-index dcc102bf8f183..3e80e5551ae0d 100644
---- a/arch/riscv/kernel/sys_hwprobe.c
-+++ b/arch/riscv/kernel/sys_hwprobe.c
-@@ -211,6 +211,7 @@ static void hwprobe_isa_ext1(struct riscv_hwprobe *pair,
- 		EXT_KEY(isainfo->isa, ZICCRSE, pair->value, missing);
- 		EXT_KEY(isainfo->isa, ZA64RS, pair->value, missing);
- 		EXT_KEY(isainfo->isa, B, pair->value, missing);
-+		EXT_KEY(isainfo->isa, ZIC64B, pair->value, missing);
- 	}
- 
- 	/* Now turn off reporting features if any CPU is missing it. */
+diff --git a/arch/riscv/boot/dts/spacemit/k3.dtsi b/arch/riscv/boot/dts/spacemit/k3.dtsi
+index 4ac457399b583..b5aa983f0bfa1 100644
+--- a/arch/riscv/boot/dts/spacemit/k3.dtsi
++++ b/arch/riscv/boot/dts/spacemit/k3.dtsi
+@@ -35,9 +35,9 @@ cpu_0: cpu@0 {
+ 					       "svinval", "svnapot", "svpbmt", "za64rs",
+ 					       "zawrs", "zba", "zbb", "zbc", "zbs", "zca",
+ 					       "zcb", "zcd", "zcmop", "zfa", "zfbfmin",
+-					       "zfh", "zfhmin", "zicbom", "zicbop", "zicboz",
+-					       "ziccamoa", "ziccif", "zicclsm", "ziccrse", "zicntr",
+-					       "zicond", "zicsr", "zifencei", "zihintntl",
++					       "zfh", "zfhmin", "zic64b", "zicbom", "zicbop",
++					       "zicboz", "ziccamoa", "ziccif", "zicclsm", "ziccrse",
++					       "zicntr", "zicond", "zicsr", "zifencei", "zihintntl",
+ 					       "zihintpause", "zihpm", "zimop", "zkt", "zvbb",
+ 					       "zvbc", "zvfbfmin", "zvfbfwma", "zvfh",
+ 					       "zvfhmin", "zvkb", "zvkg", "zvkn", "zvknc",
+@@ -76,9 +76,9 @@ cpu_1: cpu@1 {
+ 					       "svinval", "svnapot", "svpbmt", "za64rs",
+ 					       "zawrs", "zba", "zbb", "zbc", "zbs", "zca",
+ 					       "zcb", "zcd", "zcmop", "zfa", "zfbfmin",
+-					       "zfh", "zfhmin", "zicbom", "zicbop", "zicboz",
+-					       "ziccamoa", "ziccif", "zicclsm", "ziccrse", "zicntr",
+-					       "zicond", "zicsr", "zifencei", "zihintntl",
++					       "zfh", "zfhmin", "zic64b", "zicbom", "zicbop",
++					       "zicboz", "ziccamoa", "ziccif", "zicclsm", "ziccrse",
++					       "zicntr", "zicond", "zicsr", "zifencei", "zihintntl",
+ 					       "zihintpause", "zihpm", "zimop", "zkt", "zvbb",
+ 					       "zvbc", "zvfbfmin", "zvfbfwma", "zvfh",
+ 					       "zvfhmin", "zvkb", "zvkg", "zvkn", "zvknc",
+@@ -117,9 +117,9 @@ cpu_2: cpu@2 {
+ 					       "svinval", "svnapot", "svpbmt", "za64rs",
+ 					       "zawrs", "zba", "zbb", "zbc", "zbs", "zca",
+ 					       "zcb", "zcd", "zcmop", "zfa", "zfbfmin",
+-					       "zfh", "zfhmin", "zicbom", "zicbop", "zicboz",
+-					       "ziccamoa", "ziccif", "zicclsm", "ziccrse", "zicntr",
+-					       "zicond", "zicsr", "zifencei", "zihintntl",
++					       "zfh", "zfhmin", "zic64b", "zicbom", "zicbop",
++					       "zicboz", "ziccamoa", "ziccif", "zicclsm", "ziccrse",
++					       "zicntr", "zicond", "zicsr", "zifencei", "zihintntl",
+ 					       "zihintpause", "zihpm", "zimop", "zkt", "zvbb",
+ 					       "zvbc", "zvfbfmin", "zvfbfwma", "zvfh",
+ 					       "zvfhmin", "zvkb", "zvkg", "zvkn", "zvknc",
+@@ -158,9 +158,9 @@ cpu_3: cpu@3 {
+ 					       "svinval", "svnapot", "svpbmt", "za64rs",
+ 					       "zawrs", "zba", "zbb", "zbc", "zbs", "zca",
+ 					       "zcb", "zcd", "zcmop", "zfa", "zfbfmin",
+-					       "zfh", "zfhmin", "zicbom", "zicbop", "zicboz",
+-					       "ziccamoa", "ziccif", "zicclsm", "ziccrse", "zicntr",
+-					       "zicond", "zicsr", "zifencei", "zihintntl",
++					       "zfh", "zfhmin", "zic64b", "zicbom", "zicbop",
++					       "zicboz", "ziccamoa", "ziccif", "zicclsm", "ziccrse",
++					       "zicntr", "zicond", "zicsr", "zifencei", "zihintntl",
+ 					       "zihintpause", "zihpm", "zimop", "zkt", "zvbb",
+ 					       "zvbc", "zvfbfmin", "zvfbfwma", "zvfh",
+ 					       "zvfhmin", "zvkb", "zvkg", "zvkn", "zvknc",
+@@ -199,9 +199,9 @@ cpu_4: cpu@4 {
+ 					       "svinval", "svnapot", "svpbmt", "za64rs",
+ 					       "zawrs", "zba", "zbb", "zbc", "zbs", "zca",
+ 					       "zcb", "zcd", "zcmop", "zfa", "zfbfmin",
+-					       "zfh", "zfhmin", "zicbom", "zicbop", "zicboz",
+-					       "ziccamoa", "ziccif", "zicclsm", "ziccrse", "zicntr",
+-					       "zicond", "zicsr", "zifencei", "zihintntl",
++					       "zfh", "zfhmin", "zic64b", "zicbom", "zicbop",
++					       "zicboz", "ziccamoa", "ziccif", "zicclsm", "ziccrse",
++					       "zicntr", "zicond", "zicsr", "zifencei", "zihintntl",
+ 					       "zihintpause", "zihpm", "zimop", "zkt", "zvbb",
+ 					       "zvbc", "zvfbfmin", "zvfbfwma", "zvfh",
+ 					       "zvfhmin", "zvkb", "zvkg", "zvkn", "zvknc",
+@@ -240,9 +240,9 @@ cpu_5: cpu@5 {
+ 					       "svinval", "svnapot", "svpbmt", "za64rs",
+ 					       "zawrs", "zba", "zbb", "zbc", "zbs", "zca",
+ 					       "zcb", "zcd", "zcmop", "zfa", "zfbfmin",
+-					       "zfh", "zfhmin", "zicbom", "zicbop", "zicboz",
+-					       "ziccamoa", "ziccif", "zicclsm", "ziccrse", "zicntr",
+-					       "zicond", "zicsr", "zifencei", "zihintntl",
++					       "zfh", "zfhmin", "zic64b", "zicbom", "zicbop",
++					       "zicboz", "ziccamoa", "ziccif", "zicclsm", "ziccrse",
++					       "zicntr", "zicond", "zicsr", "zifencei", "zihintntl",
+ 					       "zihintpause", "zihpm", "zimop", "zkt", "zvbb",
+ 					       "zvbc", "zvfbfmin", "zvfbfwma", "zvfh",
+ 					       "zvfhmin", "zvkb", "zvkg", "zvkn", "zvknc",
+@@ -281,9 +281,9 @@ cpu_6: cpu@6 {
+ 					       "svinval", "svnapot", "svpbmt", "za64rs",
+ 					       "zawrs", "zba", "zbb", "zbc", "zbs", "zca",
+ 					       "zcb", "zcd", "zcmop", "zfa", "zfbfmin",
+-					       "zfh", "zfhmin", "zicbom", "zicbop", "zicboz",
+-					       "ziccamoa", "ziccif", "zicclsm", "ziccrse", "zicntr",
+-					       "zicond", "zicsr", "zifencei", "zihintntl",
++					       "zfh", "zfhmin", "zic64b", "zicbom", "zicbop",
++					       "zicboz", "ziccamoa", "ziccif", "zicclsm", "ziccrse",
++					       "zicntr", "zicond", "zicsr", "zifencei", "zihintntl",
+ 					       "zihintpause", "zihpm", "zimop", "zkt", "zvbb",
+ 					       "zvbc", "zvfbfmin", "zvfbfwma", "zvfh",
+ 					       "zvfhmin", "zvkb", "zvkg", "zvkn", "zvknc",
+@@ -322,9 +322,9 @@ cpu_7: cpu@7 {
+ 					       "svinval", "svnapot", "svpbmt", "za64rs",
+ 					       "zawrs", "zba", "zbb", "zbc", "zbs", "zca",
+ 					       "zcb", "zcd", "zcmop", "zfa", "zfbfmin",
+-					       "zfh", "zfhmin", "zicbom", "zicbop", "zicboz",
+-					       "ziccamoa", "ziccif", "zicclsm", "ziccrse", "zicntr",
+-					       "zicond", "zicsr", "zifencei", "zihintntl",
++					       "zfh", "zfhmin", "zic64b", "zicbom", "zicbop",
++					       "zicboz", "ziccamoa", "ziccif", "zicclsm", "ziccrse",
++					       "zicntr", "zicond", "zicsr", "zifencei", "zihintntl",
+ 					       "zihintpause", "zihpm", "zimop", "zkt", "zvbb",
+ 					       "zvbc", "zvfbfmin", "zvfbfwma", "zvfh",
+ 					       "zvfhmin", "zvkb", "zvkg", "zvkn", "zvknc",
 
 -- 
 2.43.0
