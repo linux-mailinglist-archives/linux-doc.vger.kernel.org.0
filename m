@@ -1,190 +1,203 @@
-Return-Path: <linux-doc+bounces-90721-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90723-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id BIbtLZkOIGrXvAAAu9opvQ
-	(envelope-from <linux-doc+bounces-90721-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 13:23:05 +0200
+	id 48amFjoSIGrQvQAAu9opvQ
+	(envelope-from <linux-doc+bounces-90723-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 13:38:34 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2F24C636FE3
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 13:23:05 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id EC392637220
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 13:38:33 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linaro.org header.s=google header.b=QV9v9pp7;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90721-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90721-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=linaro.org;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=ObJVdzjS;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90723-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-90723-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=gmail.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id E4C1A3006F14
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 11:20:58 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id AB5D930CAEEB
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 11:22:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 181193CC320;
-	Wed,  3 Jun 2026 11:20:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E9C683CCA11;
+	Wed,  3 Jun 2026 11:22:48 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD3722E736D
-	for <linux-doc@vger.kernel.org>; Wed,  3 Jun 2026 11:20:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A41913CAA47
+	for <linux-doc@vger.kernel.org>; Wed,  3 Jun 2026 11:22:47 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780485658; cv=none; b=nkAjJAeIXtglg55ArexcfYiMCgisXqisZJP0UJI0otuREAurU+kUgfDrYh9B/CZ4fbk/ZmCov+MSm34kNBfdIryEiX2owlVvzBEW9yLdVbu3yU4iemxGIxTrKMxt1aipFqR8NEd21N3aolelJl+69vFsVxd4YpEMXN2c4jMcJjg=
+	t=1780485768; cv=none; b=r25ieysxuVuU7OdbXFKp/cv/Y9vQPkq+b2V0bRRxBxDkxWI5kTMc8BA1CHad6vXuAQlMpmEO+wllcJbDDYaEXKlJFWyd6+WmICncy6RBWB7yedZbuioyCpQzmRNxzE77G9/m7He30y3b/gm8d/d2sA4lPqmDrz+M/n3/txd0mXU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780485658; c=relaxed/simple;
-	bh=OzFVEqgwCuNxD8i7OS1J8fnss8t7CNHqvfWTQ+y6B3o=;
+	s=arc-20240116; t=1780485768; c=relaxed/simple;
+	bh=PBmzY9Mio4AslOoNANTOa4rcMBhtLC4qWVMb7zbJVnk=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=ONvlfPI2QFEHeP8Hs5Y1hYpsw6OBy7/ESYCQEZAqQYDlJUsl1G62Tlx4g+crY8OSSayKpx0WZqblcJ0Yz2YJHEZdjCImxvzz1UFYXJKJX4OuVP/Mp2RbWMK/4npDg6zlOn8kDJUNUuXpH0TXWtJUHV9CKvFbrRkC7Qq6DnRaggw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=QV9v9pp7; arc=none smtp.client-ip=209.85.221.53
-Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-45ef616daf6so5116577f8f.3
-        for <linux-doc@vger.kernel.org>; Wed, 03 Jun 2026 04:20:56 -0700 (PDT)
+	 In-Reply-To:Content-Type; b=nAvr6dQUrlxkroFjH4GbFQ7SM8N1FZXvlZ13bcf0CXUnL8DTV5G2mEbPltmQ5ekW2/n0Ca+76zG5wHHkNoMFQym/JYoh8FvniXFmnEUTUB6rl6BmPfMXgq2fYYHgjnNTRknl7CjudiFf5F0I/7HW6LpVUY9IZW0LxOzKyxnwa9E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ObJVdzjS; arc=none smtp.client-ip=209.85.216.41
+Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-36d98b9aa9aso3250412a91.3
+        for <linux-doc@vger.kernel.org>; Wed, 03 Jun 2026 04:22:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1780485655; x=1781090455; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=NRFu66k1KJeXKuYTZNicRKot0uoKyyMMCt8VU3OBoJc=;
-        b=QV9v9pp7ISAn6FWyYPEr/3XWBvFUYI/ePGOCZSEZGxjdfNNaHxOcHlikxSbNRSwvpz
-         ls33sWfQ241FnTfK8em0ubfMoHTja/S4G4sHlJFBbiVqOKZXLddJ7hYVd9Z25xxj2/Aw
-         5GgubxwIKWTRXaMleb+rSW67gQ3enMnqugXB2+dF/GN3EUZ4qBuBuBx81HXP3MCBRMsU
-         o/AflMddJVP/pKwg62buVmNW7sUAa1i/B1ehLt8TDXxcfuBe4ofU37q4clHE0f0nAe6Z
-         Nnn2+W9pZ0SEPaB5Im5ueePJK0PeHmydLozOtlVeTBuZT7EBSt5eBl9zQDjhwLu64Xek
-         JGMw==
+        d=gmail.com; s=20251104; t=1780485767; x=1781090567; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=lZSbyRe0Cm9MsW0vFwS1Xzmiqu2z6riqDTx2v5DdObE=;
+        b=ObJVdzjSvhTIWJj7/3c/m8bi+f0C2SYaSqu+iKtGTf3LHbWzpBW9+ojBk6ujAIFmdE
+         mZ/aqeZrFXAH3QeZre45anP8DL3jK7wcSKJoIjORqHQUCX92yNXt7W1KWdCTxePYhGiq
+         k//BKLdn+lHVyvbHVV5kOE4teL7Jx4UPo1Nni8iRi49lUs1zvKTac9Bmb61jMMEwN9Im
+         61aOHtimiy0N7Y92wlR0dzqxZ8oeVAPKuJzmD4/tPD/JeS4dlxHmiIAuqMQddm5SnU0Q
+         5sI3xYDXGjsM7o1syNHw8eKE/2/DHCvxMtcgbfaTF/ZRTmlEpj/mzYx5194ZeAzcJod2
+         2oww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780485655; x=1781090455;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=NRFu66k1KJeXKuYTZNicRKot0uoKyyMMCt8VU3OBoJc=;
-        b=An/q3rm+PKn7vyO0lAiyu9aEVr3SDmNQPuxtlnxH5ZLd7LtMqnmfRx/iA48xdQ691C
-         X8CBhOOr2klCfuCAzevyGRNA3PO3ACD4xet2S+/oh13sxobElYM8ml9UVWWZA0xL10nz
-         lOzxO3WVm9RoKTLO+vhGnF/0kpPcC0+GP4AP1XdElEqYp20x2Nt1tfE3qbTS7Z/qZ5Vo
-         4U7yg+So1I8LKxA8FE7yqJOc02hz7peDst+YP10AClTybzKqLwKKmZbUPUGiRH3jD1kv
-         Cu+jnEIToHJ9IDFl9lleT+l1df+ZAnytvE7OavN+pA83oyy2sj4SNdlrVndj2suCItFQ
-         aVeQ==
-X-Forwarded-Encrypted: i=1; AFNElJ97XCvC5Eka/YEgxwQ+e4YjFxYC6M0WzbwGKQqmUMs9hFiSOmMuzpb/W04/f0nyfKCzuKaEEmsUihE=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy6OcggTOTzOWNGSZcFR9tM5fwTB0lKnh6uo3psFAvF6ikJR7N1
-	wbYrEfDO+juHUAO+hXj1mcs0kFOo6Xbqb2RzzBA2iQF9fidkXFOxLhmcEuUKNLcYME0=
-X-Gm-Gg: Acq92OGO6fpOXgT4Ete81/83YFUqC9zwj7wy57m8AwCUsCguGh49/XVZkUcZsfWaHSY
-	946coykiuRx0DqnkKb59XQh0xSugKFcLu6d1WdeFzDzaf8oOsj69hUCXnaWeX4K9RmiyrWUHZ/0
-	by0Cnj7Jk/oCPu+CQpUxHakHgU2u/dmJLhjwFz6TEMyLgmYKTSvItzdxB0ZQg1tZXdJjAwFDr9g
-	Jiz06mttcsi78YPBqPVQQXkX8zviQ+dYLf7jnc6GF5mkqLCApByKcpxTyuhuo3JDhgFoYYGCFjJ
-	1HVdvAP8ez47bC0MiCdzO6Zp70ngSrU8Ul+P3f2cyVDHIGWlZWH4Hvf4hhI2FIvxKCe7XRPlXcO
-	6Sbgkci+TRWI1j77GHmlOpr3KmD08C+zypUCiDOPDKYcSQEjPTYJHE2DtuiFiIrv7tZnEl11qJe
-	mnJR6lRq5l+B+GKtIT0oJF6/3E9xUjv40HSJBAJSQ=
-X-Received: by 2002:a05:600c:a307:b0:490:b7e6:bd1d with SMTP id 5b1f17b1804b1-490b7e6bfa0mr28113465e9.16.1780485655211;
-        Wed, 03 Jun 2026 04:20:55 -0700 (PDT)
-Received: from [192.168.1.3] ([185.48.77.170])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-490b79d64e8sm46791355e9.0.2026.06.03.04.20.54
+        d=1e100.net; s=20251104; t=1780485767; x=1781090567;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
+         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=lZSbyRe0Cm9MsW0vFwS1Xzmiqu2z6riqDTx2v5DdObE=;
+        b=sBDhHYfeRNEcsXQl92DHGhGwQ6GI63WlhTcuUG6/5XQu+MvsoS+aggo9dR9B+R7aHI
+         2wJ9Mmbwf/1yVcvL5scPkzzOxWrJiQWHFWj9y5ULVSHQCJfzX4sELWZ8s9+JXLINvT0N
+         KikcXTX7YB7pgIahk0GmmMZUTk2dB3Z87O24OZ6Viag4XPcqZN4W/2N/rJ6l9LP1mkei
+         c2HihhP+ePmyYiDBAoFP/Em5nLyY+F3i1TPrwCv1wVfST0Og8Bio6oBIRtGkuc+gMz71
+         OJWOeOYm6cArUzHTFlYMTc8BZE0Bb1wmi0iDEzsReyvNJbTYJ2weP3sKyV47/AgxrOwF
+         aN8Q==
+X-Forwarded-Encrypted: i=1; AFNElJ8UC/V5u43pt25+zG1EPUvBYFNtrDzC5lZJNkuHRxW/aamto8ktf3kHMZ1gY4MXVB79Vu9Of0YtOxc=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yxqy8L/Zf+XlxOeprZfXaVGc5HNISLKolsg2dfb6gDnbgfjF1Hs
+	5gq47UDnCaTUasGPeb7++I7BNYiaMAWbgVvKtvmidE5/6oySVavxxK6W
+X-Gm-Gg: Acq92OETDDn+uAOB5ReZMyNGKzt4i9tqQKs/P9vupbTkkhi26IAnRDqn977Pl53Lnrx
+	WHwROeNBsWT7JJbmoDFmv/nqjUeHaDNkMacyY+hlKz6ayfxe5FDyLFvb72xNo+OUgfTk3H0gKBl
+	zts9haoFmERi0oEXL/Jra9uuU1Oua+gZgqoJWTOFAdDEuKFzXxe0kSbGDlHPpX9q0cQKUchrBRl
+	T64bRii0tlCl2yzYItR+1O5yFmKo+DE36GMUYhf4rReFXdtwt4cUc7+BSV3T7U/tSMG04Fs2aRx
+	dT/uBbsiadFORWv1ltGnxYHFJ+BNdrsIkHM9HHAl/xfrOdVUqmhfTogm0Xg699t8o6i4QKNGuTA
+	hJFubMnLrankh0alpCHKYlO3B6w1c+ArEpj2Vvgh0W7go7g0z51WuqDGciYJ8q81NveTxey4mvD
+	FpFzPNMhg9u+ueDVtmkJ4F/GuOP0twXoj/a3WXv+Z2Nc/9Rb1tlvJfOfGP0NXU08fE
+X-Received: by 2002:a17:90b:4b47:b0:366:5c38:fd61 with SMTP id 98e67ed59e1d1-36e32f1676amr2884302a91.12.1780485766827;
+        Wed, 03 Jun 2026 04:22:46 -0700 (PDT)
+Received: from [10.125.192.75] ([210.184.73.204])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-36e6b904c88sm802459a91.0.2026.06.03.04.22.39
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 03 Jun 2026 04:20:54 -0700 (PDT)
-Message-ID: <c8959843-2358-4305-bbe4-3ad69da949f5@linaro.org>
-Date: Wed, 3 Jun 2026 12:20:53 +0100
+        Wed, 03 Jun 2026 04:22:46 -0700 (PDT)
+Message-ID: <6deeaea7-3cd1-4403-29fc-d2dc55c297f8@gmail.com>
+Date: Wed, 3 Jun 2026 19:22:36 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 04/18] perf test cs-etm: Test process attribution
-To: Leo Yan <leo.yan@arm.com>
-Cc: Suzuki K Poulose <suzuki.poulose@arm.com>, Mike Leach
- <mike.leach@arm.com>, Arnaldo Carvalho de Melo <acme@kernel.org>,
- Namhyung Kim <namhyung@kernel.org>, Jiri Olsa <jolsa@kernel.org>,
- Ian Rogers <irogers@google.com>, Amir Ayupov <aaupov@meta.com>,
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- Paschalis Mpeis <Paschalis.Mpeis@arm.com>, coresight@lists.linaro.org,
- linux-perf-users@vger.kernel.org, linux-kernel@vger.kernel.org,
- Arnaldo Carvalho de Melo <acme@redhat.com>, linux-doc@vger.kernel.org
-References: <20260602-james-cs-context-tracking-fix-v2-0-85b5ce6f55c6@linaro.org>
- <20260602-james-cs-context-tracking-fix-v2-4-85b5ce6f55c6@linaro.org>
- <20260603111018.GS101133@e132581.arm.com>
-Content-Language: en-US
-From: James Clark <james.clark@linaro.org>
-In-Reply-To: <20260603111018.GS101133@e132581.arm.com>
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.15.0
+Subject: Re: [PATCH v3 2/4] mm/zswap: Implement proactive writeback
+To: Yosry Ahmed <yosry@kernel.org>, Nhat Pham <nphamcs@gmail.com>
+Cc: akpm@linux-foundation.org, tj@kernel.org, hannes@cmpxchg.org,
+ shakeel.butt@linux.dev, mhocko@kernel.org, mkoutny@suse.com,
+ chengming.zhou@linux.dev, muchun.song@linux.dev, roman.gushchin@linux.dev,
+ cgroups@vger.kernel.org, linux-mm@kvack.org, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, Hao Jia <jiahao1@lixiang.com>
+References: <20260526114601.67041-1-jiahao.kernel@gmail.com>
+ <20260526114601.67041-3-jiahao.kernel@gmail.com>
+ <CAKEwX=MQe_KFZe2vBXQYh0aa-x+E8AzNwmyjJGJk4tDoS9ML3A@mail.gmail.com>
+ <aho_VtLCmIRsNyvO@google.com>
+From: Hao Jia <jiahao.kernel@gmail.com>
+In-Reply-To: <aho_VtLCmIRsNyvO@google.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-90721-lists,linux-doc=lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[16];
 	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	RCVD_TLS_LAST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:leo.yan@arm.com,m:suzuki.poulose@arm.com,m:mike.leach@arm.com,m:acme@kernel.org,m:namhyung@kernel.org,m:jolsa@kernel.org,m:irogers@google.com,m:aaupov@meta.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:Paschalis.Mpeis@arm.com,m:coresight@lists.linaro.org,m:linux-perf-users@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:acme@redhat.com,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:yosry@kernel.org,m:nphamcs@gmail.com,m:akpm@linux-foundation.org,m:tj@kernel.org,m:hannes@cmpxchg.org,m:shakeel.butt@linux.dev,m:mhocko@kernel.org,m:mkoutny@suse.com,m:chengming.zhou@linux.dev,m:muchun.song@linux.dev,m:roman.gushchin@linux.dev,m:cgroups@vger.kernel.org,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jiahao1@lixiang.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[jiahaokernel@gmail.com,linux-doc@vger.kernel.org];
+	FREEMAIL_TO(0.00)[kernel.org,gmail.com];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[james.clark@linaro.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linaro.org:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-90723-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[james.clark@linaro.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[jiahaokernel@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	TO_DN_SOME(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,arm.com:email,linaro.org:mid,linaro.org:from_mime,linaro.org:dkim,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,lixiang.com:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 2F24C636FE3
+X-Rspamd-Queue-Id: EC392637220
 
 
 
-On 03/06/2026 12:10 pm, Leo Yan wrote:
-> On Tue, Jun 02, 2026 at 03:26:46PM +0100, James Clark wrote:
+On 2026/5/30 09:40, Yosry Ahmed wrote:
+> On Fri, May 29, 2026 at 12:58:09PM -0700, Nhat Pham wrote:
+>> On Tue, May 26, 2026 at 4:46 AM Hao Jia <jiahao.kernel@gmail.com> wrote:
+>>>
+>>> From: Hao Jia <jiahao1@lixiang.com>
+>>>
+>>> Zswap currently writes back pages to backing swap reactively, triggered
+>>> either by the shrinker or when the pool reaches its size limit. There is
+>>> no mechanism to control the amount of writeback for a specific memory
+>>> cgroup. However, users may want to proactively write back zswap pages,
+>>> e.g., to free up memory for other applications or to prepare for
+>>> memory-intensive workloads.
+>>>
+>>> Introduce a "zswap_writeback_only" key to the memory.reclaim cgroup
+>>> interface. When specified, this key bypasses standard memory reclaim
+>>> and exclusively performs proactive zswap writeback up to the requested
+>>> budget. If omitted, the default reclaim behavior remains unchanged.
+>>>
+>>> Example usage:
+>>>    # Write back 100MB of pages from zswap to the backing swap
+>>>    echo "100M zswap_writeback_only" > memory.reclaim
+>>
+>> Hmmm, so this 100MB is the pre-compression size? i.e if this 100 MB
+>> compresses to 25 MB, then you're only freeing 25 MB?
+>>
+>> I'm ok-ish with this, but can you document it?
 > 
-> [...]
+> That's a good point. I think pre-compressed size doesn't make sense to
+> be honest. We should care about how much memory we are actually trying
+> to save by doing writeback here.
 > 
->> +check_samples() {
->> +	owner_samples=$(grep -c "proc1.*context_switch_loop_proc1" "$tmpdir/script" || true)
->> +	next_samples=$(grep -c "proc2.*context_switch_loop_proc2" "$tmpdir/script" || true)
->> +
->> +	if [ "$owner_samples" -eq 0 ] || [ "$next_samples" -eq 0 ]; then
->> +		echo "No samples found"
->> +		cleanup
+> The pre-compressed size is only useful in determining the blast radius,
+> how many actual pages are going to have slower page faults now. But
+> then, I don't think there's a reasonable way for userspace to decide
+> that.
 > 
-> We don't need cleanup explictly here, as trap covers exit case?
-> 
+> I understand passing in the compressed size is tricky because we need to
+> keep track of the size of the compressed pages we end up writing back,
+> but it should be doable.
 
-We need it whenever we call exit because it removes the trap which would 
-trap and return with its own (potentially different) exit value.
+Agreed. Using pre-compressed size is probably easier to implement. IIRC, 
+interfaces like ZRAM writeback_limit are also calculated using the 
+pre-compressed size.
 
-The alternative is a global $err which you set and then call exit 
-without a value and let cleanup() do exit $err. But from searching the 
-existing shell tests calling cleanup before exit seemed to be more 
-common so I did it that way.
+I'll clarify this in the documentation in the next version.
 
->> +		exit 1
->> +	fi
->> +
->> +	if grep "proc2.*context_switch_loop_proc1" "$tmpdir/script"; then
->> +		echo "Thread1 symbol was attributed to proc2"
->> +		cleanup
 > 
-> Ditto.
+> If we really want pre-compressed size here, then yes we need to make it
+> very clear, and I vote that we use a separate interface in this case
+> because memory.reclaim having different meanings for the amount of
+> memory written to it is extremely counter-intuitive.
 > 
->> +		exit 1
->> +	fi
->> +
->> +	if grep "proc1.*context_switch_loop_proc2" "$tmpdir/script"; then
->> +		echo "Thread2 symbol was attributed to proc1"
->> +		cleanup
-> 
-> Ditto.
-> 
-> Otherwise:
-> 
-> Reviewed-by: Leo Yan <leo.yan@arm.com>
+Agree. This would indeed break the semantics of memory.reclaim. I will 
+use a separate interface for proactive writeback in the next version.
 
+Thanks，
+Hao
+>>
+>> The rest seems solid to me, FWIW. I'll defer to Johannes and Yosry for
+>> opinions on zswap-only proactive reclaim.
 
