@@ -1,217 +1,143 @@
-Return-Path: <linux-doc+bounces-90859-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90860-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 03LpFmucIGoK5wAAu9opvQ
-	(envelope-from <linux-doc+bounces-90859-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 23:28:11 +0200
+	id 44q7DfyoIGqo6QAAu9opvQ
+	(envelope-from <linux-doc+bounces-90860-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 00:21:48 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A2E463B618
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 23:28:10 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 78EEB63B8B0
+	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 00:21:47 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=google.com header.s=20251104 header.b=WbpOTiLd;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90859-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-90859-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=reject) header.from=google.com;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b="G5rTgAy/";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90860-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90860-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 50E32301C171
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 21:27:09 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 865F0301F33C
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 22:19:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 63088492192;
-	Wed,  3 Jun 2026 21:27:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 65D4F47DD45;
+	Wed,  3 Jun 2026 22:19:49 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dl1-f44.google.com (mail-dl1-f44.google.com [74.125.82.44])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C7CF4028EE
-	for <linux-doc@vger.kernel.org>; Wed,  3 Jun 2026 21:27:06 +0000 (UTC)
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780522028; cv=pass; b=pqEtO4pYjW3yksl4+t0g63EsnfBGut3qCPvf5nZ2GQAo1RFsrDETlSQaPrGPrjkXPo+eOu4ozcsFlLJFgB9rddh6K1NG5/RMg8KGI6MZJXMck6XK8KBvKQKYQRVDuYv411muD4dzkv72nSagop3r4h0vfqIUXJbSWvsFES+aJu4=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780522028; c=relaxed/simple;
-	bh=R6WSQnJIsA+v35uGQtkq6O8mYZ7zBggzE/oxP9twkYg=;
-	h=From:In-Reply-To:References:MIME-Version:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=JqbNbktL+HkfLOFpFEH9HlCi2vrx+zd/uD2ke65X15vrGOjekPNgSS18Cr4/H1zgmvjNXOlmT1cggNu1Slo8LXu44+P5Mwc+hxHLhxmLdLzn93bCWOB62NoZb1a/tgVIL59p0/+K9Ujl5v1uZyzOXZPw+IWVDXovt1N2wc1gUC4=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=WbpOTiLd; arc=pass smtp.client-ip=74.125.82.44
-Received: by mail-dl1-f44.google.com with SMTP id a92af1059eb24-137f0aa125bso36404c88.0
-        for <linux-doc@vger.kernel.org>; Wed, 03 Jun 2026 14:27:06 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780522026; cv=none;
-        d=google.com; s=arc-20240605;
-        b=AWywyvm5LbkVB4MmNcZ/+diSxXMyVhm34EePaDPReey3wq8aZeQZtj/+zUnQQ+NmCJ
-         qFbOY+DcE7EtjfUXz+JOkjR6yoS9J0Mv/4wsFOqSZTfDiyRTg6kX8YIySEMFF3N82JzM
-         1jyi3haG/AGh8lTB/p+JZBIYMEpwktBdgKQ4wRngykoyp+PgEvzzKTXQr78MkcOHQa7U
-         3wiUk0RmM/qHMs2nAEy+1gOpHu+ATOQBYmNaL4BmL04uVYwH6zlPcUvbTSopShYtBoS9
-         8ZhpqHi/F1yCrvHYzQSMuYZ6IqMOSr8iIvJuaDsHOkH2NI/MLpBxtVyFOcLMWPXyv2IF
-         CF8A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
-         :from:dkim-signature;
-        bh=kXmCClVJ6sffKdNaL7Yv6BlzVuWsmG/JEBjIeBbKKjE=;
-        fh=bQ/4iYZD1GfFZRukENKPolwexAiNT1ZSM7w0y+BSb8M=;
-        b=CNcja5LARotam0D8sKRgIn1wVy3FYZf/Whu0C4f+AacCcVek/86zeUGhdzeuEnj090
-         LFTkNRBx5qvhGXyhxVb+kxoz/vjwN0lubp/Izvm0CvKyo3mSx/uvpSfuPyhloGCk3y2b
-         uTxkCkhdbCUH9Lw9VYqclX/tf8dFaszYCyd4wOBv7rMoWwRsfYaXz0VWS1PlBQ1kSej6
-         7yBw/x33b6O18WWssFd82sDV0vrB8w2M2CklFqsQwA3mRDUUQhi35jtzKOfAlz8Tx43+
-         +luA/QKyDnKVePOsn4+riIgTN7O3X1YouyLckjz3LrR4qTebtIBEPTsZ7i9qTC/Vx2iB
-         WB/w==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1780522026; x=1781126826; darn=vger.kernel.org;
-        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=kXmCClVJ6sffKdNaL7Yv6BlzVuWsmG/JEBjIeBbKKjE=;
-        b=WbpOTiLdHBvzmwiTpMPVgbnII3vNyO3SNsoPLH6VIEBacZOPD4FZRi9ouBmHzGfdyz
-         qQr4UPLmfVX0Mna1x41GMFNRiJ8Tp5lxjh0qK2tOVIkO1Qx2eu5e61n9gM0VwSqQRiXz
-         inzjmgz0zLFYc43ghOoSHDJoDaSuI0qkD/ZgDe543j47DoVn3kqcDvcT2bIpL4xc8VDq
-         CEB7XicOiRBqR7dVAPk+kgjQJYxCxZ93tk/Ljic4NKSKnTRB+EEYoFl6psuEc5NDjHnC
-         B6iSDmEgjThK1D/INgd02VnCj/BaRFqwLruf0W6rr6YaUbM/nHavujSCNm9JhcxARVqE
-         AYlg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780522026; x=1781126826;
-        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=kXmCClVJ6sffKdNaL7Yv6BlzVuWsmG/JEBjIeBbKKjE=;
-        b=hdc5xtI2WgkiOL/fq70Rq9qOu66wSy2PeDDVX6QTWNiUjzV1NfHLdw2Jcf3PWUj8aV
-         WWX/yWACumM9yOHijuH7sNvRMJH18tJn3dwvwcEsbikndxNGfStDrDmqygBhVts7C441
-         CMnwF4fcAPKKIxOc/7pgOpcePXaq2e/dKaMyI1yUSbXbQuJmRyoSJ6JRvKI018V+0adD
-         9y1o6TpkmJzK3m4dtelLqhRxHRMigGHGA9OhaNngsDIx/SbIPhwyBcac8/BiRJrQ/8IP
-         SEYdica9azkZmgLBHW7oCLXHMV1tj+ES8wxwHczaCwN8corZCh26jP6WjIdxuNsMeY/8
-         X0wQ==
-X-Forwarded-Encrypted: i=1; AFNElJ/8TPhgVQbyX6TGzT2ctGGbMWK5CJzR85tyAOEGro2qAaXeb/xC46CPsyVvXwjRyXXRgfHa6okVRI4=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwxntH2M1Z2aodnGW0a+LJDyP4v238UpvzpK1EMNNbwE52nM8Uc
-	TosJ+NnmJ0WH3O9PnfNuQWrPOo0RHeIrSApU8LU4UkLUMVxlWqpqMKK5qMXVnwWVXPXhkAyTfGx
-	2tNYWWUT51+hDeuZOa4+ueMCYRB0hCNKTh50Z80m5
-X-Gm-Gg: Acq92OGmln+V3HiO73JlJbtN80EnFiOO+ms4wAIzLevx7T3V2sdxVAStftJs8QztRkz
-	CGNIvNPdPpifli/tmWLw3aasdLHkXH1VhOgRNmuMuk+RIKl9FFQ8cSN0Xz6tP6LGvl0goLDap6o
-	0He00qugzIpu1I/335ZPmuRDtTh8MAK5GshWwD2f2j8FVkpY7fdDR28ohz2KevgbbpWt0dXJW29
-	jc+92D8Kon5gonT/aK3vD6JkYZuhf/LfrPyjGXF7/EIpGmxi8f9Vv2q/akm8FhIWkyVSaCC+srT
-	raE959vlgo1CSLzGDaF5eNSLvgGbT9pTozyCzZTQ0w0gLHarqHvlwNSo6s7SBuxnX87pUoqfl1y
-	xmhWhHaVhthL0QWo=
-X-Received: by 2002:a05:7022:1285:b0:130:9b78:b17b with SMTP id
- a92af1059eb24-137f6befdaamr2412541c88.38.1780522025275; Wed, 03 Jun 2026
- 14:27:05 -0700 (PDT)
-Received: from 176938342045 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 3 Jun 2026 14:27:04 -0700
-Received: from 176938342045 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 3 Jun 2026 14:27:04 -0700
-From: Ackerley Tng <ackerleytng@google.com>
-In-Reply-To: <20260522-gmem-inplace-conversion-v7-0-2f0fae496530@google.com>
-References: <20260522-gmem-inplace-conversion-v7-0-2f0fae496530@google.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6AAC744102A;
+	Wed,  3 Jun 2026 22:19:48 +0000 (UTC)
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1780525189; cv=none; b=se7mJo2ZI7fT1w1VKW/PGN6z4K6k5exKcRQvGP6cid0ARcdsfHYJuCEjc5NuAo+0wUWD0K/DlMA8XAHkpvdz6eoZXR+9nt4zuAH/0ukSDIx9DMtDdJeGNIJP98iYez5b1SV6HNukMjIDbe19gWYqiciFqiHEFnqif54uRioBaqg=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1780525189; c=relaxed/simple;
+	bh=BR5aeo3iQ0JB7wmfVojceVJfH40c/dFhkFNuU0LfjOI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=sH7Tmksr+RTlx6BBmHP7Z3BmeUIu34+hLYSl2EjulI2aTNB9GF0eYgOE97T8dlin5SEnGL06gWDUxsDzfDY7nH95rGnEst38Uy1/1bRKsXzzbr8l2looV86qVKV0uJFIs40NkxHpwdUwB0GxVPJNkJetcqfTnc87TtXOFzdgQ/o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=G5rTgAy/; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C23691F00893;
+	Wed,  3 Jun 2026 22:19:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1780525188;
+	bh=nCMVhv90Nn2BMuaPqjJMi+G5kJwoeTSNQGM33sLQElU=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=G5rTgAy//7uZaKLPzJtZYJ9/paDknpsfZbE+ns63NecgWCdRiVDPg7O8C/y0lD0+7
+	 +MElp7RFTWuSh4RLRtuIwmQTbvgBddlv2J29IJautoRyCnKpIN4wQ1/ObCMjjTmvRR
+	 P416Nj8EMnbF9R85BnIWJyQ/3nRnrORbCp+YyQemcXcXWni5cVvUi6kdXljmOhxS/X
+	 x6v77QIam2y8zhI6kUD3lAk/q+Yi8MqRzlixk62fpKFCwKndRFDKwVop781yIgDP05
+	 wtZfrgEQHHkhSGi3HJUyGdJU5Tb7bByleViLnGteRiDqzzbp82QQoZnHr5N1fvwpXA
+	 3uQSavVfb2nDQ==
+Date: Wed, 3 Jun 2026 17:19:46 -0500
+From: "Rob Herring (Arm)" <robh@kernel.org>
+To: Akash Sukhavasi <akash.sukhavasi@gmail.com>
+Cc: Heiner Kallweit <hkallweit1@gmail.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	Vladimir Oltean <olteanv@gmail.com>, linux-media@vger.kernel.org,
+	linux-tegra@vger.kernel.org,
+	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+	linux-doc@vger.kernel.org, Conor Dooley <conor+dt@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	linux-kernel@vger.kernel.org,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	devicetree@vger.kernel.org, Simon Horman <horms@kernel.org>,
+	Andrew Lunn <andrew@lunn.ch>, Paolo Abeni <pabeni@redhat.com>,
+	Lee Jones <lee@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, netdev@vger.kernel.org,
+	Eric Dumazet <edumazet@google.com>, linux-input@vger.kernel.org,
+	Russell King <linux@armlinux.org.uk>,
+	Thierry Reding <thierry.reding@kernel.org>,
+	Jonathan Hunter <jonathanh@nvidia.com>,
+	Jakub Kicinski <kuba@kernel.org>
+Subject: Re: [PATCH v2 1/4] dt-bindings: net: remove obsolete mdio.txt
+Message-ID: <178052518477.2276321.5278048214870332622.robh@kernel.org>
+References: <20260603-b4-remove-redirect-stubs-v2-0-c8c19876ab64@gmail.com>
+ <20260603-b4-remove-redirect-stubs-v2-1-c8c19876ab64@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Date: Wed, 3 Jun 2026 14:27:04 -0700
-X-Gm-Features: AVHnY4LsErH-4tZ18bsf2DQ3mNo93pDC9YYwJb_gB-LjwgbEb6k0MtNG-ciXWJs
-Message-ID: <CAEvNRgGpaggjd3=ooyzv7iEbmA-x1mWJHgjLSjPi8=5CPrk-yQ@mail.gmail.com>
-Subject: Re: [PATCH v7 00/42] guest_memfd: In-place conversion support
-To: Ackerley Tng via B4 Relay <devnull+ackerleytng.google.com@kernel.org>, aik@amd.com, 
-	andrew.jones@linux.dev, binbin.wu@linux.intel.com, brauner@kernel.org, 
-	chao.p.peng@linux.intel.com, david@kernel.org, ira.weiny@intel.com, 
-	jmattson@google.com, jthoughton@google.com, michael.roth@amd.com, 
-	oupton@kernel.org, pankaj.gupta@amd.com, qperret@google.com, 
-	rick.p.edgecombe@intel.com, rientjes@google.com, shivankg@amd.com, 
-	steven.price@arm.com, tabba@google.com, willy@infradead.org, 
-	wyihan@google.com, yan.y.zhao@intel.com, forkloop@google.com, 
-	pratyush@kernel.org, suzuki.poulose@arm.com, aneesh.kumar@kernel.org, 
-	liam@infradead.org, Paolo Bonzini <pbonzini@redhat.com>, 
-	Sean Christopherson <seanjc@google.com>, Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
-	Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
-	"H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
-	Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>, 
-	Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>, 
-	Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>, 
-	Nhat Pham <nphamcs@gmail.com>, Baoquan He <bhe@redhat.com>, Barry Song <baohua@kernel.org>, 
-	Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>, 
-	Wei Xu <weixugc@google.com>, Youngjun Park <youngjun.park@lge.com>, 
-	Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
-	Kiryl Shutsemau <kas@kernel.org>, Jason Gunthorpe <jgg@ziepe.ca>, Vlastimil Babka <vbabka@kernel.org>
-Cc: kvm@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kselftest@vger.kernel.org, linux-mm@kvack.org, 
-	linux-coco@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260603-b4-remove-redirect-stubs-v2-1-c8c19876ab64@gmail.com>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [0.34 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+	MID_CONTAINS_FROM(1.00)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-90859-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90860-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:devnull+ackerleytng.google.com@kernel.org,m:aik@amd.com,m:andrew.jones@linux.dev,m:binbin.wu@linux.intel.com,m:brauner@kernel.org,m:chao.p.peng@linux.intel.com,m:david@kernel.org,m:ira.weiny@intel.com,m:jmattson@google.com,m:jthoughton@google.com,m:michael.roth@amd.com,m:oupton@kernel.org,m:pankaj.gupta@amd.com,m:qperret@google.com,m:rick.p.edgecombe@intel.com,m:rientjes@google.com,m:shivankg@amd.com,m:steven.price@arm.com,m:tabba@google.com,m:willy@infradead.org,m:wyihan@google.com,m:yan.y.zhao@intel.com,m:forkloop@google.com,m:pratyush@kernel.org,m:suzuki.poulose@arm.com,m:aneesh.kumar@kernel.org,m:liam@infradead.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:shuah@kernel.org,m:vannapurve@google.com,m:akpm@linux-foundatio
- n.org,m:chrisl@kernel.org,m:kasong@tencent.com,m:shikemeng@huaweicloud.com,m:nphamcs@gmail.com,m:bhe@redhat.com,m:baohua@kernel.org,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:kas@kernel.org,m:jgg@ziepe.ca,m:vbabka@kernel.org,m:kvm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,m:linux-coco@lists.linux.dev,m:devnull@kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[ackerleytng@google.com,linux-doc@vger.kernel.org];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FORGED_SENDER(0.00)[robh@kernel.org,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[26];
+	FORGED_RECIPIENTS(0.00)[m:akash.sukhavasi@gmail.com,m:hkallweit1@gmail.com,m:davem@davemloft.net,m:olteanv@gmail.com,m:linux-media@vger.kernel.org,m:linux-tegra@vger.kernel.org,m:dmitry.torokhov@gmail.com,m:linux-doc@vger.kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-kernel@vger.kernel.org,m:mchehab@kernel.org,m:devicetree@vger.kernel.org,m:horms@kernel.org,m:andrew@lunn.ch,m:pabeni@redhat.com,m:lee@kernel.org,m:krzk+dt@kernel.org,m:netdev@vger.kernel.org,m:edumazet@google.com,m:linux-input@vger.kernel.org,m:linux@armlinux.org.uk,m:thierry.reding@kernel.org,m:jonathanh@nvidia.com,m:kuba@kernel.org,m:akashsukhavasi@gmail.com,m:dmitrytorokhov@gmail.com,m:conor@kernel.org,m:krzk@kernel.org,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[kernel.org,amd.com,linux.dev,linux.intel.com,intel.com,google.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca];
-	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[google.com:+];
-	MISSING_XM_UA(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ackerleytng@google.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[65];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc,ackerleytng.google.com];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,amd.com:email,vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[robh@kernel.org,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[gmail.com,davemloft.net,vger.kernel.org,kernel.org,lwn.net,linuxfoundation.org,lunn.ch,redhat.com,google.com,armlinux.org.uk,nvidia.com];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 6A2E463B618
+X-Rspamd-Queue-Id: 78EEB63B8B0
 
-Ackerley Tng via B4 Relay <devnull+ackerleytng.google.com@kernel.org>
-writes:
 
-> This is v7 of guest_memfd in-place conversion support.
->
+On Wed, 03 Jun 2026 15:42:18 -0500, Akash Sukhavasi wrote:
+> mdio.txt has been a single-line redirect to mdio.yaml since
+> commit 62d77ff7ecbf ("dt-bindings: net: Add a YAML schemas for the
+> generic MDIO options"), which introduced the .yaml schema and reduced
+> the .txt to a stub in the same change. The .yaml has the same filename
+> in the same directory, making this redirect unnecessary for
+> discoverability.
+> 
+> No files in the tree reference mdio.txt and it has not been touched
+> since June 2019. Remove the obsolete stub.
+> 
+> Signed-off-by: Akash Sukhavasi <akash.sukhavasi@gmail.com>
+> ---
+>  Documentation/devicetree/bindings/net/mdio.txt | 1 -
+>  1 file changed, 1 deletion(-)
+> 
 
-Here's the outstanding items after going over everyone's comments
-including Sashiko's:
+Acked-by: Rob Herring (Arm) <robh@kernel.org>
 
-+ KVM: TDX: Make source page optional for KVM_TDX_INIT_MEM_REGION
-    + Need to move page clearing into __kvm_gmem_get_pfn to resolve
-      leak where populate can put initialized kernel memory into TDX
-      guest
-    + See suggested fix at [1]
-+ KVM: guest_memfd: Only prepare folios for private pages,
-    + s/non-CoCo/CoCo in commit message "INIT_SHARED is about to be
-      supported for non-CoCo VMs in a later patch in this series
-    + Use Suggested-by: Michael Roth <michael.roth@amd.com>
-+ KVM: selftests: Test that shared/private status is consistent across
-  processes
-    + Improve test reliability using pthread_mutex
-    + I have a fixup patch offline.
-	
-I would like feedback on these:
-	
-+ KVM: selftests: Test conversion with elevated page refcount
-    + Askar pointed out that soon vmsplice may not pin pages. Should I
-      pin pages through CONFIG_GUP_TEST like in [2]? I prefer not to
-      take a dependency on CONFIG_GUP_TEST.
-+ KVM: selftests: Add script to exercise private_mem_conversions_test
-    + Would like to know what people think of a wrapper script before
-      I address Sashiko's comments.
-
-[1] https://lore.kernel.org/all/CAEvNRgEVC=fFuKVgZYvWyZD7t_zvUZihFG8hrACjvtkD5cwugw@mail.gmail.com/
-[2] https://lore.kernel.org/all/baa8838f623102931e755cf34c86314b305af49c.1747264138.git.ackerleytng@google.com/
-
->
-> [...snip...]
->
 
