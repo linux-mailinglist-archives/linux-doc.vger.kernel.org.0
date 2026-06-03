@@ -1,81 +1,81 @@
-Return-Path: <linux-doc+bounces-90627-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90628-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id ZZzAG/mfH2qhoAAAu9opvQ
-	(envelope-from <linux-doc+bounces-90627-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 05:31:05 +0200
+	id PxA6NhCgH2qqoAAAu9opvQ
+	(envelope-from <linux-doc+bounces-90628-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 05:31:28 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF51B633ED7
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 05:31:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6E696633EFC
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Jun 2026 05:31:28 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=soleen.com header.s=google header.b=aeqRda+x;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90627-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-90627-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=soleen.com header.s=google header.b=lCflXLcv;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90628-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-90628-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=reject) header.from=soleen.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id DE47A30AE483
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 03:29:13 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id A6E1D30E4BB1
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2026 03:29:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F10BA3F39D4;
-	Wed,  3 Jun 2026 03:29:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3A0AE3F44D3;
+	Wed,  3 Jun 2026 03:29:12 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qv1-f44.google.com (mail-qv1-f44.google.com [209.85.219.44])
+Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com [209.85.219.51])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B836A3F20E5
-	for <linux-doc@vger.kernel.org>; Wed,  3 Jun 2026 03:29:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E351B3F39CB
+	for <linux-doc@vger.kernel.org>; Wed,  3 Jun 2026 03:29:10 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780457350; cv=none; b=QLdTUXs/7x0vGirBYmxbfxfSKKqq+KwCDYU+Oz7OetOLvwkKva7/gveYOld2JLGvpQTLw8/NiC732u+DsCWP5oCkYpndu8K7TGeYCyXU/3lqwz8nfxRvcFx6se1NLYaP4K4eB1GIjHztjc6t3lomMDhnn0p/8rmbegHmivhZ4vo=
+	t=1780457352; cv=none; b=jROQf2dpuKBVKvgvcNKdMDDwyNB/CDFuHAzUHZygedvKhgSvbWiDlgwPwagqdvLRdZrT7gkieeFEKM+ul3Sr868eUHcvVGPbWFq2bs/k1sGGwBEpix8Y1tauIpW4K5j8zlBJLSzv5fsE835uuiig0c68k6w+6kFxlr/Ocb22kek=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780457350; c=relaxed/simple;
-	bh=IMbuGTukyT8IG40YTi+316UrswHf2CnDFbSS3RnRmnE=;
+	s=arc-20240116; t=1780457352; c=relaxed/simple;
+	bh=jG2redhEjCAzt/rTfg+v2gYbLiDjnuNP6eco1Upctx0=;
 	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=CjifWGtoLGwcrPeqhZmtK5fOwnC2Wz3xrekJtWbgmQMvPCrzpZz/p0ik8+XfF4QUhELUxAO49qVPVXsx4Oe7xVDfd95/AmC/5JmTHO9T/lyXu2lof2R2t4F5yDfuAVX1YmL1Gb+L+LgLaQoQq0GU8B9O2msnPeUxNn2yuiK9g78=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com; spf=pass smtp.mailfrom=soleen.com; dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b=aeqRda+x; arc=none smtp.client-ip=209.85.219.44
-Received: by mail-qv1-f44.google.com with SMTP id 6a1803df08f44-8ccef25789fso31532496d6.3
-        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 20:29:09 -0700 (PDT)
+	 MIME-Version; b=XrFirPN3raKZKp2AfG24YuF/6lIDKTzXsnJc1l6jsng7z6YYCgQhslx1hfapIlzsVIY0pJP10zEaEJjwPPgOd0J/9FFvoAOT6uFyjQNmEIvTelJiEqxObeqQv03RkFUR3hh3gmmOlg+Q/+X2wfDEJ+D2r3t78f33lu9LjMKrnwY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com; spf=pass smtp.mailfrom=soleen.com; dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b=lCflXLcv; arc=none smtp.client-ip=209.85.219.51
+Received: by mail-qv1-f51.google.com with SMTP id 6a1803df08f44-8ccedaf0b54so27714186d6.0
+        for <linux-doc@vger.kernel.org>; Tue, 02 Jun 2026 20:29:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=soleen.com; s=google; t=1780457349; x=1781062149; darn=vger.kernel.org;
+        d=soleen.com; s=google; t=1780457350; x=1781062150; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=yVlCXZe8SHDSOJUkKVBaYBikNvs5G4Pkl6SfmcOaAr0=;
-        b=aeqRda+xv4SFXFn/xsc3EzBdNw8mmBt2KNugRtDIQflCA3NfN6cJoSd51j63O08nnI
-         0i3ULCo3bA8uNOFTRi03T4lkEQqhxTwbF16EDxYrD7t5tDlmsvtxbG/aKS9l6Jkp92KM
-         4J1J3hQqu9QtJvybdFfTWzc+1fcwjflbb2EZUxmmsoN5VnREeH7/H0yTHhF+hiei7zj5
-         CwSTbhjiN4MkXkAhL/AcoS68VdWsW3QfFknDJ1f7Kzs2dlSiFVDEX9oJ/5WDGa9A6I47
-         wHk5xNIw63gCWOzXzQOJdnumJbAdC75p1cvVW6oYYyWd/gtNQfkejp7x9FOv4nnk4Cf6
-         3LSw==
+        bh=EeknQ7K2aMvDWr+2KhWa4BnSPX1nCQezxpcXmui2530=;
+        b=lCflXLcvhzy3ULEDF2l/7xPcmX9O6D0UVGqZJgDOvrnCbQ6PH18DqXZt2JIL5bxmNx
+         l02ccIVVgglDj1+u91/AAgreclkHHEfYMS735D24zwVQOFUDQlEwnhnOmCUGOw9PufJ8
+         rwFleZViMs1N6rTznEwX8G/MKpHTz/iC60f3nqC+fUozhkBhYzG+A+WD7g3kycFHqE2K
+         /rtSikOYsEj/uUuJ64rmkhCvSDoKqGJle4K9C6lFnzXl9pn8kNjMJurGbXyA4jHdWi1d
+         I2sDiBbmwchzR5w/fvgfEuTOO3/LgbyEzWW73xgQOVuZXev6hmor7frzkiha6m4dmFq0
+         0NSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780457349; x=1781062149;
+        d=1e100.net; s=20251104; t=1780457350; x=1781062150;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=yVlCXZe8SHDSOJUkKVBaYBikNvs5G4Pkl6SfmcOaAr0=;
-        b=lvLW0q0HfGN5Ey8ZAY8f0+PpDgKsY4AmQuipP3MLcGixH+QMKbavfYxrjnDWTHTYG4
-         dSFclFaz+cWFNYipVgqqPkfvrMqcCqV+hhctwZIF7Q/GGOeIt0beWTdBgZaNOobksk0l
-         aeACh+cwgsmbyQZYtmSYqun2pdI1qd4sK/uhFYtPKZY03x4VfxW9xeVJgaYgJmE11lLY
-         MDJLiXW8ozgGRw/O91zniRJbMeQ4ucd2SY5a3U+76Xzvg+20KnP8XoJZrgBDeFXLnzdY
-         pofkH9AYurVSeYjRb0M2pHS9bjml7QwRQJPiauYoJAvu85WXy+uXv4Qyio88G8X4sU9S
-         rMAw==
-X-Forwarded-Encrypted: i=1; AFNElJ/wDpacHD4g3eeMYJCMmOr3Q4AmUEeUP3YIDU89NPc1vNgw8nBsnJ9DhSqR9ce+cjUPnyRm5BXCG5o=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyOxRztCe4cCZqcnvNzkNBI0WtVrmHg4r/BwOuVlKxz2kwdYuHR
-	fmjLyxkIIw+sRHUpKCaARe0VKuzl7MRHV3ZJIdQAoFuz23JX9GcSeZuetaspr1KN3LA=
-X-Gm-Gg: Acq92OHIH3LirhTGD6MfBEK9OVXmUn8Y5kPkmRzYtzYnCwK/P3++QrcX0KSCwxC0sm5
-	h+v1uLZjQGzdgacFKmNSlFckyN2Y+pQncA99lc7f/RkGjtnJ3j5xQym4voQFAQViJwQJsbgEJFL
-	elCqhGAmn5vmmYUW/+4RPrc33RpfSoIbrydXC5o/SXYHYWg1xeNDVz8zR8u0uRcbBZmhsqBo9vR
-	o++hAwaXrTXGjg6OMo8gj1lIhhEbQpGx6Ueqkv4FbeQ9NfXCrf508oBYiTYrzpP9KMJO254lzTX
-	NXBSL4I3ZtFHBRVjl6O63LkS2+7XO1q89P+CvU6fpqlnXUU5nqD7OHO9xcdV9vXVLnAUDNBaR/3
-	DYUibod7dB5wIySWUwE00F7XYaj39ojMYe/hiDS4XNUS75ejHbQT0p3VPTIvJ240xJXNkRbMbwg
-	35Ti85okk9LHnh65riNDB0KYwZ/atBg/NYbOiu0wX7NEfYwlYWPcBvGZ3bWZEP/g==
-X-Received: by 2002:a0c:f09c:0:b0:8cc:dfa6:3333 with SMTP id 6a1803df08f44-8cece028a1amr19783726d6.32.1780457348680;
-        Tue, 02 Jun 2026 20:29:08 -0700 (PDT)
+        bh=EeknQ7K2aMvDWr+2KhWa4BnSPX1nCQezxpcXmui2530=;
+        b=ZBWwg5lXEXemT0noHwpigNXjVFRlU9GlWlCtwYlfyUlAeuCFyfFPbFUZ2/l3ZkvwDD
+         8zv2ooAzNqbdMpP1+QGx8YmXG1NX7WrADQyKP/o0M2AO801psYvZ6/ipsV7ozxgpC6b5
+         OQrDA5D5Az2cW5vJcyo06A0vwNBj2pQDR+XFfRAe7vwlqPZBT0dWkxlSQImwuZ4PAmsQ
+         97dGgu69KMHmtOi5k3XiXlDHebGFT5sPtPSO0oxhxWGVELaPJ6DDbXm45dvNFJze4pYQ
+         s39QoodhjtihrmHEivvRVgAnE6neUjQSgPZ/AfyJu7yLnAUpP5UzqNHuB67d6ziTBa/l
+         7F5w==
+X-Forwarded-Encrypted: i=1; AFNElJ9NqLWVttXJy1Ga/qMUQ7zbluz8dLW+iz6yF8ksCAysjLFx+6c9QROrmQx9h+jAGTaTcexJZEcnrzE=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzCC7u9SYZuH0/r5AUPSdsUK+dkpKBDMZ0qO4YovPXii1cfYkn1
+	JF1ObWH3Y0V6x+WTnil7QJoMXk6SQMoWjAit6xwsmGmbZhdoYuDwMkuinl0xVjTLrnc=
+X-Gm-Gg: Acq92OHsCsfj3HQizAUZ7pyK+Jn00jxfhEguCJK/q6fzrC1yyJbItv/ynWz6oIdgf6f
+	9hzBlHs4Bytxp8gPyC8xiGj6wd+L+sGiOyHFgQk10wRhW+vAJuTHB/DZ2/Nx1ACfBF9uuHH/Kmo
+	tK22z+BAMI6mrIcqOwUrmH/IwajQHBSc8OUrz2j7CP3g0bjjIUM1oI/XMKbPNHhShdR4yAcuxOs
+	WUTQBevaPa7Xa+myROn3JjBMIIi7CWjm2IPFLdP+kYi6KMAn+26eCik93Bc7PgJ4+mAQuF6Dtqj
+	HxMuog6fmySH6UHtcxemDkbZO/YJmzNkMVEW0EiOplxMV+3j+w3jTO2LTdi1+OcSIWbYRnE1Eeo
+	cxvThIcnpdb2yF81OLPcd20xXbzbS2hq7CF4AlK2wWYNfoyv9hyjlwk34RmUlIWQxCaIXlqCHvF
+	EJX7zNKNAyRlRL6Gfvom7XTU+H/kH4Ddix8oSEAe9wKe7/JuEWyKinyv5UnR8hyA==
+X-Received: by 2002:a0c:e086:0:b0:8ce:ade5:e8fd with SMTP id 6a1803df08f44-8cecdf0cdfdmr18753906d6.25.1780457349833;
+        Tue, 02 Jun 2026 20:29:09 -0700 (PDT)
 Received: from plex ([71.181.43.54])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-8cecd26b3b9sm9244566d6.45.2026.06.02.20.29.06
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-8cecd26b3b9sm9244566d6.45.2026.06.02.20.29.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Jun 2026 20:29:08 -0700 (PDT)
+        Tue, 02 Jun 2026 20:29:09 -0700 (PDT)
 From: Pasha Tatashin <pasha.tatashin@soleen.com>
 To: linux-kselftest@vger.kernel.org,
 	rppt@kernel.org,
@@ -92,9 +92,9 @@ To: linux-kselftest@vger.kernel.org,
 	pratyush@kernel.org,
 	skhawaja@google.com,
 	graf@amazon.com
-Subject: [PATCH v6 01/13] liveupdate: change file_set->count type to u64 for type safety
-Date: Wed,  3 Jun 2026 03:28:52 +0000
-Message-ID: <20260603032905.344462-2-pasha.tatashin@soleen.com>
+Subject: [PATCH v6 02/13] liveupdate: avoid mixing cleanup guards with goto in luo_session_retrieve_fd
+Date: Wed,  3 Jun 2026 03:28:53 +0000
+Message-ID: <20260603032905.344462-3-pasha.tatashin@soleen.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260603032905.344462-1-pasha.tatashin@soleen.com>
 References: <20260603032905.344462-1-pasha.tatashin@soleen.com>
@@ -117,7 +117,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	TAGGED_FROM(0.00)[bounces-90627-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90628-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS(0.00)[m:linux-kselftest@vger.kernel.org,m:rppt@kernel.org,m:shuah@kernel.org,m:akpm@linux-foundation.org,m:linux-mm@kvack.org,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:corbet@lwn.net,m:pasha.tatashin@soleen.com,m:dmatlack@google.com,m:kexec@lists.infradead.org,m:pratyush@kernel.org,m:skhawaja@google.com,m:graf@amazon.com,s:lists@lfdr.de];
 	FORGED_SENDER(0.00)[pasha.tatashin@soleen.com,linux-doc@vger.kernel.org];
@@ -137,34 +137,38 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc];
 	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	RCPT_COUNT_TWELVE(0.00)[15];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,soleen.com:mid,soleen.com:dkim,soleen.com:from_mime,soleen.com:email,vger.kernel.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp,soleen.com:mid,soleen.com:dkim,soleen.com:from_mime,soleen.com:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: EF51B633ED7
+X-Rspamd-Queue-Id: 6E696633EFC
 
-This improves type safety and aligns the in-memory file_set->count with
-the serialized count type. It avoids potential truncation or sign
-conversion mismatch issues.
+Refactoring luo_session_retrieve_fd() to avoid mixing automated
+cleanup-style guards with goto-based resource release, which is not
+recommended under the Linux kernel coding style.
 
 Reviewed-by: Pratyush Yadav (Google) <pratyush@kernel.org>
-Acked-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
 Signed-off-by: Pasha Tatashin <pasha.tatashin@soleen.com>
 ---
- kernel/liveupdate/luo_internal.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ kernel/liveupdate/luo_session.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/kernel/liveupdate/luo_internal.h b/kernel/liveupdate/luo_internal.h
-index dd53d4a7277e..ae58206f14ac 100644
---- a/kernel/liveupdate/luo_internal.h
-+++ b/kernel/liveupdate/luo_internal.h
-@@ -52,7 +52,7 @@ static inline int luo_ucmd_respond(struct luo_ucmd *ucmd,
- struct luo_file_set {
- 	struct list_head files_list;
- 	struct luo_file_ser *files;
--	long count;
-+	u64 count;
- };
+diff --git a/kernel/liveupdate/luo_session.c b/kernel/liveupdate/luo_session.c
+index 5c6cebc6e326..47566db64598 100644
+--- a/kernel/liveupdate/luo_session.c
++++ b/kernel/liveupdate/luo_session.c
+@@ -291,10 +291,11 @@ static int luo_session_retrieve_fd(struct luo_session *session,
+ 	if (argp->fd < 0)
+ 		return argp->fd;
  
- /**
+-	guard(mutex)(&session->mutex);
++	mutex_lock(&session->mutex);
+ 	err = luo_retrieve_file(&session->file_set, argp->token, &file);
++	mutex_unlock(&session->mutex);
+ 	if (err < 0)
+-		goto  err_put_fd;
++		goto err_put_fd;
+ 
+ 	err = luo_ucmd_respond(ucmd, sizeof(*argp));
+ 	if (err)
 -- 
 2.53.0
 
