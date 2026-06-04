@@ -1,205 +1,175 @@
-Return-Path: <linux-doc+bounces-90881-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90882-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id dW+QEl8gIWpn/QAAu9opvQ
-	(envelope-from <linux-doc+bounces-90881-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 08:51:11 +0200
+	id AOoEGzwuIWrLAAEAu9opvQ
+	(envelope-from <linux-doc+bounces-90882-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 09:50:20 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96D4163D581
-	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 08:51:10 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id B3F5D63DBCB
+	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 09:50:18 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=none;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90881-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90881-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=compal.com (policy=reject);
+	dkim=pass header.d=huawei.com header.s=dkim header.b=ioFbu4NV;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90882-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90882-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=huawei.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 35051302D515
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Jun 2026 06:43:04 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id DB1AF300622F
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Jun 2026 07:50:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B5DD93D6471;
-	Thu,  4 Jun 2026 06:42:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1837B3CF049;
+	Thu,  4 Jun 2026 07:50:14 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from tpecef22.compal.com (exmail3.compal.com [59.120.207.196])
+Received: from canpmsgout04.his.huawei.com (canpmsgout04.his.huawei.com [113.46.200.219])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B6DF373C0E;
-	Thu,  4 Jun 2026 06:42:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 516BD315D58;
+	Thu,  4 Jun 2026 07:50:09 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780555371; cv=none; b=ukLXEk3xeHILaf3k2y+qSoEo6KNkldEMx48K2CTjDPJ90lI3Uqg+n+AlhqJlNU1zmJrYS3aFno01UdK5zNvniTkZPWn0kMS6OSzMhzG1aZhl8T08Mfqcd4SY6U9ImU5t1gWUYpvBvrvRLdjyu5UcQMCCiG/QETY39MrRVH7Y9G4=
+	t=1780559414; cv=none; b=BVhHD+GI4PSxzEPqLl+cF76s/tZlM9Pw1WIZPCmGYS70EV5HhGWbPM18dZ63riSTy5oS6SWeG20I4SIXO7qIKz94D/8wyC2WhcN2XCKoUywtWkkPIXr7LNHUzkHDpA3XKCh1Tq59CTot0OZPJQ+e3T2aYB9UmsAoHLnPLUwWmW0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780555371; c=relaxed/simple;
-	bh=mI9g6gD5BRy3kD3PF5NSErrg5217vlzsf1ZgKqQ13AA=;
-	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
-	 Content-Type:MIME-Version; b=N6gC8QpFDp5BD3naRABHfKubYbybnNAY7mThFkpmvP4+1c2XQAV6tY5zu2E9RipJe/4Tgp8HByTB2WTSi8T8SHyWomPUhCNXSdqw+82f/mTHjCJbeZV9PK/uXnh3Xg7iZJIucE2B2eY21QE0QAB224LyT5Rtl9p2Oug28UyUH/U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=compal.com; spf=pass smtp.mailfrom=compal.com; arc=none smtp.client-ip=59.120.207.196
-X-UUID: 968afd8a5fe011f1a87c2323a98e90a4-20260604
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.15,REQID:c893f2b7-45cf-41fe-b21c-3a1848270a5d,IP:0,U
-	RL:25,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
-	:release,TS:25
-X-CID-META: VersionHash:e276073,CLOUDID:23cf472a-13d2-4d29-83ea-b8014339a000,B
-	ulkID:nil,BulkQuantity:0,Recheck:0,SF:80|81|82|83|102|110|111|817|836|865|
-	888|898,TC:-5,Content:-10|-8|-5|15|50,EDM:-3,IP:nil,URL:11|94|82|106|1,Fil
-	e:130,RT:0,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR
-	:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 2,SSN|SDN
-X-CID-BAS: 2,SSN|SDN,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR,TF_CID_SPAM_ULN
-X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 968afd8a5fe011f1a87c2323a98e90a4-20260604
-Received: from sdmg12.sdbg.compal.com [(10.113.168.10)] by tpecef22.compal.com
-	(envelope-from <jackbb_wu@compal.com>)
-	(Generic MTA with TLSv1.3 TLS_AES_256_GCM_SHA384 256/256)
-	with ESMTP id 1459051028; Thu, 04 Jun 2026 14:42:42 +0800
-X-UUID: 938fe0325fe011f1a42089d3d1632821-20260604
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.15,REQID:f1996c64-118c-4810-bc2f-8dcf2a3762f9,IP:0,U
-	RL:25,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
-	:release,TS:25
-X-CID-META: VersionHash:e276073,CLOUDID:0fc30542-f53d-456b-bcbe-afd9e5a5b333,B
-	ulkID:nil,BulkQuantity:0,Recheck:0,SF:80|81|82|83|102|110|111|817|836|865|
-	888|898,TC:-5,Content:-10|-8|-5|15|50,EDM:-3,IP:nil,URL:11|94|82|106|1,Fil
-	e:130,RT:0,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR
-	:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 2,SSN|SDN
-X-CID-BAS: 2,SSN|SDN,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR,TF_CID_SPAM_ULN
-X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 938fe0325fe011f1a42089d3d1632821-20260604
-Received: from sdbmbx13.tpe.compalcomm.com [(10.113.2.137)] by sdmg12.sdbg.compal.com
-	(envelope-from <jackbb_wu@compal.com>)
-	(Compal Mail Service with TLSv1.2 ECDHE-RSA-AES128-SHA 128/128)
-	with ESMTP id 1827825207; Thu, 04 Jun 2026 14:42:37 +0800
-Received: from SDBMBX13.tpe.compalcomm.com (10.113.2.137) by
- SDBMBX13.tpe.compalcomm.com (10.113.2.137) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.29;
- Thu, 4 Jun 2026 14:42:33 +0800
-Received: from SDBMBX13.tpe.compalcomm.com ([fe80::ea2a:c2b2:8475:8d69]) by
- SDBMBX13.tpe.compalcomm.com ([fe80::ea2a:c2b2:8475:8d69%11]) with mapi id
- 15.02.2562.029; Thu, 4 Jun 2026 14:42:33 +0800
-From: "Wu. JackBB (GSM)" <JackBB_Wu@compal.com>
-To: "Jagielski, Jedrzej" <jedrzej.jagielski@intel.com>, Loic Poulain
-	<loic.poulain@oss.qualcomm.com>, Sergey Ryazanov <ryazanov.s.a@gmail.com>,
-	Johannes Berg <johannes@sipsolutions.net>, Andrew Lunn
-	<andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>, "Eric
- Dumazet" <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni
-	<pabeni@redhat.com>, Wen-Zhi Huang <wen-zhi.huang@mediatek.com>, Shi-Wei Yeh
-	<shi-wei.yeh@mediatek.com>, Minano Tseng <Minano.tseng@mediatek.com>,
-	Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno
-	<angelogioacchino.delregno@collabora.com>, Simon Horman <horms@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>
-CC: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	"netdev@vger.kernel.org" <netdev@vger.kernel.org>,
-	"linux-arm-kernel@lists.infradead.org"
-	<linux-arm-kernel@lists.infradead.org>, "linux-mediatek@lists.infradead.org"
-	<linux-mediatek@lists.infradead.org>, "linux-doc@vger.kernel.org"
-	<linux-doc@vger.kernel.org>
-Subject: RE: [PATCH 01/11] net: wwan: t9xx: Add PCIe core
-Thread-Topic: [PATCH 01/11] net: wwan: t9xx: Add PCIe core
-Thread-Index: AQHc8bhcdmgibeQV+0mP7OG8OB0FzrYt9Hq3
-Date: Thu, 4 Jun 2026 06:42:33 +0000
-Message-ID: <c9e80369a7ec449a814cd85269f1135e@compal.com>
-References: <20260529-t9xx_driver_v1-v1-0-bdbfe2c01e57@compal.com>
- <20260529-t9xx_driver_v1-v1-1-bdbfe2c01e57@compal.com>,<PH0PR11MB5902127C590230B9FE50F78AF0152@PH0PR11MB5902.namprd11.prod.outlook.com>
-In-Reply-To: <PH0PR11MB5902127C590230B9FE50F78AF0152@PH0PR11MB5902.namprd11.prod.outlook.com>
-Accept-Language: zh-TW, en-US
-Content-Language: zh-TW
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-tm-as-product-ver: SMEX-14.0.0.3239-9.1.2019-29986.005
-x-tm-as-result: No-10--7.938100-8.000000
-x-tmase-matchedrid: EefIVvJ/ke0uv++HU7VXryRFbfQbCufdN0X64jGy2dbVc/AFNTvLSw2J
-	SRqdWmN4dOiVKzG2jpTSPUHhcw+FHAE8OiDrjBOCUirF7gO7fvl0pPFWgq1KNgSjtG4gy/zQk3M
-	PpgxG+BYZ+O+6wWe+rfJ3yfksIbvtUohvb26/VwDIUNmTDb0ad1XyfUSvLyzCwuyxgbj8l3/4mW
-	TdKLNVsJtnQM1dYEpEhP3qugnKLontZDpZlNWg4O3qPLdU3cUZ8kOnQJj3cxKt4Zcwyi58uXaRl
-	uqYn9rmrWwln+vsup2vvs41AhDx9CRoQhMu0UDBJPlTeUnhPwrNWLms91YSA1o7GmCOJYd1O50T
-	9A74HCu2FEUBwKd8ytET2zOm+uW5sIEAo6wFidwno0Idd9TzoxCUQCtauB3Whv30+gdEALI=
-x-tm-as-user-approved-sender: No
-x-tm-as-user-blocked-sender: No
-x-tmase-result: 10--7.938100-8.000000
-x-tmase-version: SMEX-14.0.0.3239-9.1.2019-29986.005
-x-tm-snts-smtp: EA7519F9C438C9B8BD9413C927FD465DE89BEFAF1CB7E18423535D7878401CC42000:8
-Content-Type: text/plain; charset="big5"
-Content-Transfer-Encoding: base64
+	s=arc-20240116; t=1780559414; c=relaxed/simple;
+	bh=xXAo7JA/FCQGU0PydG/CbstStee8P3CnLDdGkdFqfkE=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=U+aMcWNAfrmUdzhh0asljeKW5ff0bYdfDk5J6XfSoQlVWsDvCeq//Iz0mr5Odu0SsfQbJKthzQ8ypP1eLG6NeRI5bsLeDw+hWnE4gbrB2HJDrTslBYx0XrtAzUvhAlUc0bJdF0HEdM0heymh4UyJvIBT9Oqj0H06EkXvvyh7MJE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=ioFbu4NV; arc=none smtp.client-ip=113.46.200.219
+dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
+	c=relaxed/relaxed; q=dns/txt;
+	h=From;
+	bh=iKhnmKKSbhjeNdqT2fB30yYTWXHZcg0QMpTiu5anmd0=;
+	b=ioFbu4NVRgf3LNPhc//0xFgLW/sRh9rqxYVVddoZbjMClBRr/6NDkF7bkGHmFpANOSXBcY9Vk
+	ZaPiu9leZp97LBHEsrw8FVfsuFTOdQdikbm19YHu3yVHJFDpEQkrPpfGeLZvcP9svaIPVA/Q3Cl
+	w1tvAPATCnOb+95EV2ScSfM=
+Received: from mail.maildlp.com (unknown [172.19.163.0])
+	by canpmsgout04.his.huawei.com (SkyGuard) with ESMTPS id 4gWGjy27Cpz1prPH;
+	Thu,  4 Jun 2026 15:42:14 +0800 (CST)
+Received: from dggemv705-chm.china.huawei.com (unknown [10.3.19.32])
+	by mail.maildlp.com (Postfix) with ESMTPS id 54E3D40561;
+	Thu,  4 Jun 2026 15:50:07 +0800 (CST)
+Received: from kwepemn200012.china.huawei.com (7.202.194.135) by
+ dggemv705-chm.china.huawei.com (10.3.19.32) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.11; Thu, 4 Jun 2026 15:50:07 +0800
+Received: from huawei.com (10.50.163.32) by kwepemn200012.china.huawei.com
+ (7.202.194.135) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Thu, 4 Jun
+ 2026 15:50:05 +0800
+From: Sizhe Liu <liusizhe5@huawei.com>
+To: <rostedt@goodmis.org>, <mhiramat@kernel.org>,
+	<mathieu.desnoyers@efficios.com>, <corbet@lwn.net>,
+	<skhan@linuxfoundation.org>, <bhelgaas@google.com>, <yangyccccc@gmail.com>,
+	<jic23@kernel.org>, <john.g.garry@oracle.com>, <will@kernel.org>,
+	<james.clark@linaro.org>, <mike.leach@arm.com>, <leo.yan@linux.dev>,
+	<peterz@infradead.org>, <mingo@redhat.com>, <acme@kernel.org>,
+	<namhyung@kernel.org>, <mark.rutland@arm.com>,
+	<alexander.shishkin@linux.intel.com>, <jolsa@kernel.org>,
+	<irogers@google.com>, <adrian.hunter@intel.com>, <wangyushan12@huawei.com>,
+	<shenyang39@huawei.com>, <gaozhihao6@h-partners.com>,
+	<yuzhichengcheng@h-partners.com>, <liyihang9@h-partners.com>
+CC: <linux-kernel@vger.kernel.org>, <linux-pci@vger.kernel.org>,
+	<linux-perf-users@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
+	<linux-doc@vger.kernel.org>, <linuxarm@huawei.com>,
+	<prime.zeng@hisilicon.com>, <fanghao11@huawei.com>, <wuyifan50@huawei.com>,
+	<liusizhe5@huawei.com>
+Subject: [PATCH 00/10] perf hisi-ptt: Enhance TLP packet decoder with field-level parsing and versioning
+Date: Thu, 4 Jun 2026 15:49:55 +0800
+Message-ID: <20260604075005.2219785-1-liusizhe5@huawei.com>
+X-Mailer: git-send-email 2.33.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: kwepems200001.china.huawei.com (7.221.188.67) To
+ kwepemn200012.china.huawei.com (7.202.194.135)
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [3.14 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[compal.com : SPF not aligned (relaxed), No valid DKIM,reject];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MIME_BASE64_TEXT_BOGUS(1.00)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	TAGGED_FROM(0.00)[bounces-90881-lists,linux-doc=lfdr.de];
-	FREEMAIL_TO(0.00)[intel.com,oss.qualcomm.com,gmail.com,sipsolutions.net,lunn.ch,davemloft.net,google.com,kernel.org,redhat.com,mediatek.com,collabora.com,lwn.net,linuxfoundation.org];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER(0.00)[JackBB_Wu@compal.com,linux-doc@vger.kernel.org];
-	FORWARDED(0.00)[lists@lfdr.de];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:jedrzej.jagielski@intel.com,m:loic.poulain@oss.qualcomm.com,m:ryazanov.s.a@gmail.com,m:johannes@sipsolutions.net,m:andrew+netdev@lunn.ch,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:wen-zhi.huang@mediatek.com,m:shi-wei.yeh@mediatek.com,m:Minano.tseng@mediatek.com,m:matthias.bgg@gmail.com,m:angelogioacchino.delregno@collabora.com,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-kernel@vger.kernel.org,m:netdev@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-mediatek@lists.infradead.org,m:linux-doc@vger.kernel.org,m:ryazanovsa@gmail.com,m:andrew@lunn.ch,m:matthiasbgg@gmail.com,s:lists@lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	MISSING_XM_UA(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sashiko.dev:url,vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[JackBB_Wu@compal.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TO_DN_SOME(0.00)[];
-	R_DKIM_NA(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	FORWARDED(0.00)[lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:bhelgaas@google.com,m:yangyccccc@gmail.com,m:jic23@kernel.org,m:john.g.garry@oracle.com,m:will@kernel.org,m:james.clark@linaro.org,m:mike.leach@arm.com,m:leo.yan@linux.dev,m:peterz@infradead.org,m:mingo@redhat.com,m:acme@kernel.org,m:namhyung@kernel.org,m:mark.rutland@arm.com,m:alexander.shishkin@linux.intel.com,m:jolsa@kernel.org,m:irogers@google.com,m:adrian.hunter@intel.com,m:wangyushan12@huawei.com,m:shenyang39@huawei.com,m:gaozhihao6@h-partners.com,m:yuzhichengcheng@h-partners.com,m:liyihang9@h-partners.com,m:linux-kernel@vger.kernel.org,m:linux-pci@vger.kernel.org,m:linux-perf-users@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-doc@vger.kernel.org,m:linuxarm@huawei.com,m:prime.zeng@hisilicon.com,m:fanghao11@huawei.com,m:wuyifan50@huawei.com,m:liusizhe5@huawei.com,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90882-lists,linux-doc=lfdr.de];
+	FORGED_SENDER(0.00)[liusizhe5@huawei.com,linux-doc@vger.kernel.org];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_TO(0.00)[goodmis.org,kernel.org,efficios.com,lwn.net,linuxfoundation.org,google.com,gmail.com,oracle.com,linaro.org,arm.com,linux.dev,infradead.org,redhat.com,linux.intel.com,intel.com,huawei.com,h-partners.com];
+	DKIM_TRACE(0.00)[huawei.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	RCPT_COUNT_TWELVE(0.00)[37];
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[liusizhe5@huawei.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_NONE(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,vger.kernel.org:from_smtp,huawei.com:mid,huawei.com:from_mime,huawei.com:dkim];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCVD_COUNT_SEVEN(0.00)[7]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 96D4163D581
+X-Rspamd-Queue-Id: B3F5D63DBCB
 
-DQoNCj4gU2VudDogRnJpZGF5LCBNYXkgMjksIDIwMjYgMTI6MzIgUE0NCj4NCj4gPiArDQo+DQo+
-IHBsZWFzZSBhbHNvIHRha2UgYSBsb29rIG9uIHNhc2hpa28gbm90ZXMsIHRoZXJlIGlzIHNvbWUg
-bnVtYmVyIG9mIHRoZW0NCg0KSGkgSmFnaWVsc2tpLA0KDQogIFRoYW5rIHlvdSBmb3IgeW91ciBy
-ZXZpZXcuIFdlIGhhdmUgZml4ZWQgc29tZSBpc3N1ZXMgYW5kIGFyZSBzdGlsbCBkaXNjdXNzaW5n
-IG90aGVycyB3aXRoIE1lZGlhVGVrLiBBbGwgb2YgdGhlbSB3aWxsIGJlIGFkZHJlc3NlZCBpbiBW
-Mi4NCg0KICBSZWdhcmRpbmcgc2FzaGlrbyBub3RlcywgaG93IHNob3VsZCBJIGhhbmRsZSB0aGVt
-IGlmIGRpc2N1c3Npb24gaXMgbmVlZGVkPyBJIGNhbm5vdCBmaW5kIHNhc2hpa28ncyBlbWFpbCBh
-ZGRyZXNzLCBhbmQgaXRzIHdlYnNpdGUgZG9lcyBub3QgaGF2ZSBhIHJlcGx5IG9wdGlvbi4NCg0K
-Rm9yIGV4YW1wbGU6DQogIGh0dHBzOi8vc2FzaGlrby5kZXYvIy9wYXRjaHNldC8yMDI2MDUyOS10
-OXh4X2RyaXZlcl92MS12MS0wLWJkYmZlMmMwMWU1NyU0MGNvbXBhbC5jb20/cGFydD0yDQoNCiAg
-UTE6DQogIFRoZSBjb21taXQgbWVzc2FnZSBtZW50aW9ucyBpbXBsZW1lbnRpbmcgVFggYW5kIFJY
-IHNlcnZpY2VzLCBidXQgdGhlIHBhdGNoIHByaW1hcmlseSBhZGRzIGVtcHR5IHN0cnVjdHVyZXMg
-YW5kIGJvaWxlcnBsYXRlIGNvZGUuIElzIHRoZSBwYXRjaCBtaXNzaW5nIHRoZSBhY3R1YWwgVFgv
-UlggaW1wbGVtZW50YXRpb24gZGVzY3JpYmVkIGhlcmU/DQoNCiAgUmVwbHk6DQogIFdlIHBsYW4g
-dG8gdXBkYXRlIHRoZSBjb21taXQgbWVzc2FnZS4gV291bGQgdGhlIGZvbGxvd2luZyBiZSBhY2Nl
-cHRhYmxlPw0KDQogICAgQWRkIHRoZSBjb250cm9sIHBsYW5lIHRyYW5zYWN0aW9uIGxheWVyIGZy
-YW1ld29yayBmb3IgdGhlIHQ5eHgNCiAgICBXV0FOIGRyaXZlciwgaW5jbHVkaW5nIGNvbmZpZ3Vy
-YXRpb24gb3B0aW9ucywgZGV2aWNlIHN0cnVjdHVyZQ0KICAgIGRlZmluaXRpb25zLCBhbmQgaW5p
-dGlhbGl6YXRpb24vY2xlYW51cCBmdW5jdGlvbnMuDQoNCiAgICBUaGUgYWN0dWFsIFRYL1JYIHNl
-cnZpY2UgaW1wbGVtZW50YXRpb25zIHRoYXQgdXNlIHRoaXMgZnJhbWV3b3JrDQogICAgYXJlIGlu
-dHJvZHVjZWQgaW4gc3Vic2VxdWVudCBwYXRjaGVzLg0KDQoNClRoYW5rcy4NCg0KDQoNCg0KDQo9
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09DQpUaGlzIG1lc3Nh
-Z2UgbWF5IGNvbnRhaW4gaW5mb3JtYXRpb24gd2hpY2ggaXMgcHJpdmF0ZSwgcHJpdmlsZWdlZCBv
-ciBjb25maWRlbnRpYWwgb2YgQ29tcGFsIEVsZWN0cm9uaWNzLCBJbmMuIElmIHlvdSBhcmUgbm90
-IHRoZSBpbnRlbmRlZCByZWNpcGllbnQgb2YgdGhpcyBtZXNzYWdlLCBwbGVhc2Ugbm90aWZ5IHRo
-ZSBzZW5kZXIgYW5kIGRlc3Ryb3kvZGVsZXRlIHRoZSBtZXNzYWdlLiBBbnkgcmV2aWV3LCByZXRy
-YW5zbWlzc2lvbiwgZGlzc2VtaW5hdGlvbiBvciBvdGhlciB1c2Ugb2YsIG9yIHRha2luZyBvZiBh
-bnkgYWN0aW9uIGluIHJlbGlhbmNlIHVwb24gdGhpcyBpbmZvcm1hdGlvbiwgYnkgcGVyc29ucyBv
-ciBlbnRpdGllcyBvdGhlciB0aGFuIHRoZSBpbnRlbmRlZCByZWNpcGllbnQgaXMgcHJvaGliaXRl
-ZC4NCj09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCg==
+This series enhances the HiSilicon PTT (PCIe Trace and Tuning) packet
+decoder in perf to provide detailed field-level parsing of TLP headers
+based on message type, and adds a versioning mechanism for backward
+compatibility.
+The original decoder only prints raw hex values with generic field
+names for each DW, without classifying TLP types or decoding
+DW2/DW3 fields according to the hardware-defined packet format.
+Patch overview:
+  Patches 1-2: Bug fixes
+    - Fix spelling/abbreviation errors (FIELD_LENTH, kpt_desc)
+    - Fix DW0 bit field ordering and DW hex value printing
+  Patches 3-7: Refactoring for field-level parsing
+    - Rename union and add named struct member for multi-DW reuse
+    - Abstract trace buffer/offset into struct hisi_ptt_pkt_buf
+    - Complete missing field name entries in 4DW/8DW tables
+    - Extract raw data printing into function
+    - Unify 4DW/8DW HEAD0 printing into hisi_ptt_print_head0()
+  Patch 8: TLP message type classification
+    - Parse Format/Type from DW0 to classify packets as
+      MWr/Msg/Atomic/IO/Cfg/Cpl
+  Patch 9: Field-level DW2/DW3 parsing
+    - Decode DW2 fields for MWr/Msg/Atomic/IO TLPs
+    - Decode DW3 fields for Completion and Configuration TLPs
+  Patch 10: Version compatibility
+    - Add V1/V2 version in auxtrace info to distinguish old
+      (generic field names) from new (detailed field parsing)
+      trace data, with backward compatibility for V1 files
+
+Sizhe Liu (10):
+  perf hisi-ptt: Fix spelling and abbreviation errors
+  perf hisi-ptt: Fix PTT trace TLP Header parsing
+  perf hisi-ptt: Rename hisi_ptt_4dw union for reuse
+  perf hisi-ptt: Abstract trace data buf and offset
+  perf hisi-ptt: Complete the field names for 4DW and 8DW packets
+  perf hisi-ptt: Extract the raw data printing part
+  perf hisi-ptt: Merge 4DW and 8DW HEAD0 printing
+  perf hisi-ptt: Add parsing of supported message types
+  perf hisi-ptt: Add field-level parsing for header DW2/DW3
+  perf hisi-ptt: Add decoder version compatibility
+
+ Documentation/trace/hisi-ptt.rst              |  28 +-
+ tools/perf/arch/arm64/util/hisi-ptt.c         |   2 +
+ .../hisi-ptt-decoder/hisi-ptt-pkt-decoder.c   | 352 +++++++++++++++---
+ .../hisi-ptt-decoder/hisi-ptt-pkt-decoder.h   |  27 +-
+ tools/perf/util/hisi-ptt.c                    |  46 ++-
+ tools/perf/util/hisi-ptt.h                    |   4 +-
+ 6 files changed, 365 insertions(+), 94 deletions(-)
+
+-- 
+2.33.0
+
 
