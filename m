@@ -1,149 +1,169 @@
-Return-Path: <linux-doc+bounces-90866-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90867-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id pQ2zF4vDIGrF7gAAu9opvQ
-	(envelope-from <linux-doc+bounces-90866-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 02:15:07 +0200
+	id QbFCKT7FIGoL7wAAu9opvQ
+	(envelope-from <linux-doc+bounces-90867-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 02:22:22 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id B8E6663C04F
-	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 02:15:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0882663C09E
+	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 02:22:22 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=GogIS8WD;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90866-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90866-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=YryV1fVn;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90867-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90867-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=gmail.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 9326D303E219
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Jun 2026 00:14:53 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id CFB9B302EA9E
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Jun 2026 00:22:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 403165478D;
-	Thu,  4 Jun 2026 00:14:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 012D81F16B;
+	Thu,  4 Jun 2026 00:22:20 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-vk1-f170.google.com (mail-vk1-f170.google.com [209.85.221.170])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7EF3C45BE3
-	for <linux-doc@vger.kernel.org>; Thu,  4 Jun 2026 00:14:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B14C1322A
+	for <linux-doc@vger.kernel.org>; Thu,  4 Jun 2026 00:22:18 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780532093; cv=none; b=jyKs+IeaiiQEWH16fNams9jLfgNYR3hvAQJZwJ2dnDAVfii9n7gexPwDJTo/ocqyct+bV0gtwfTQontL+Ml3R6FO8djA9s0QlDrMa6DAkRI0ZZzDAa/oIJPQveyPkU9/yUPMhX1hgakMZHimkawBR/KWKBhHiUzkaGT3PKi4nAI=
+	t=1780532539; cv=none; b=N0gIF+KrEnBKXcX82mpr9KqWCcOY81f/GKQ0rkDx18y/5A7d4cbZ0bNIb6Psu6TPNqfKIcnW9Y/XlFZRya97JEK+tf/f7dpyrrphzh6M26H1VmO0BXokbrqPtuk9vvGOn2n4j5OKKt0txAHSW/DMCQyvL6BU6ArOtCprZGP6KSs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780532093; c=relaxed/simple;
-	bh=n4YC7t4GlSKsGsaODNCP0HjzaOKMmCDpq3XlidjCdvk=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=ZZcxjMdPJNGT/CG4JIXz8T/By1jVbPA4rUhLuj6EotaqhBGhRe7beYDYk2xAE/MvfKaZh3iJGFu+HJ54iZa9LdNxbPZjuZTiw+9cR/5zd/hP3jaD0ISSVB3R6E28QOmbtqNs6Fi1J13+7Pge778qZq4SV5RbLgzkxCtWIya6tzk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GogIS8WD; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 28E1D1F00A05
-	for <linux-doc@vger.kernel.org>; Thu,  4 Jun 2026 00:14:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1780532091;
-	bh=n4YC7t4GlSKsGsaODNCP0HjzaOKMmCDpq3XlidjCdvk=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=GogIS8WD2PzsR8if7BjsUpZWNxHr0bw8VZoLPMUXHCAnE+Dlo2DAqxu5JqaRHKVQN
-	 r6suCVGiluHrbzba01BoLLVlJA7aGnW5ft+6hl6+xUDWbYEop9UAblYXFYYrTFYVSm
-	 G5HrvOBO6R+rPucdnSELB8x5QnRcrPZyAVeB+Sr8Q8oW/tpnKSa1Xc8cuJhgZ/fqjk
-	 64W6l9Y3EmnKGn1dGfrHLUYS4OlEn9EU7fS/ZjSC/0EfZQnxUxsOTQ31M8OPzHDtJj
-	 wogwflS/LVG24wWn6w6tsw9ahuAnt2Zcn9wEPi+zAZndAYVPmS0xZ1BqIRyhTvDZSx
-	 Fkwx7YaCqHIJQ==
-Received: by mail-qk1-f175.google.com with SMTP id af79cd13be357-91564c3a968so13615785a.1
-        for <linux-doc@vger.kernel.org>; Wed, 03 Jun 2026 17:14:51 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AFNElJ/FWhlEzBMJGtfg/FbPZJ9YFhCrrliv0b8CHWjk7l2lWkd0GbXASELfs2uJocQltV93At/M/+Pcei8=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyOjx5guIEdzC/lCu1n6R4P1WTHyNsV9wWHLbKimrluICqH9drK
-	Ff2FPrFCAUT03IHlp7t3iwU+wlyYrIod533C0O+WiqSXk1roKGJXcotL8cIQEAGnhvhZf6GXO7t
-	UFcigrVVxR3WW4M/f1WSSiG8mmI12HUQ=
-X-Received: by 2002:a05:620a:2994:b0:915:8e2b:e5de with SMTP id
- af79cd13be357-9159ae6c1bcmr267493985a.7.1780532090478; Wed, 03 Jun 2026
- 17:14:50 -0700 (PDT)
+	s=arc-20240116; t=1780532539; c=relaxed/simple;
+	bh=cbO/wvsOvlB5KDEHFmqYKAppoz23pgUkU43qKmW0yGc=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=Fo0K7rRWnSAog4Enb87mMFX9TC0bESGDN07AyAgBmbjiK3omPCCaHB4ClkJBAVap07fmXuOlef8ezFiBU8TCErzc/BBcTjy+86iq9/nsOTlAWKM6v/D12as4/Vlh5JuRI4tbpQjn1nGfNNxkh9XCdN3ssQ+j6zw7ouHCueckJyI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=YryV1fVn; arc=none smtp.client-ip=209.85.221.170
+Received: by mail-vk1-f170.google.com with SMTP id 71dfb90a1353d-59e2b96e3d3so64438e0c.2
+        for <linux-doc@vger.kernel.org>; Wed, 03 Jun 2026 17:22:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1780532537; x=1781137337; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=9iWWEpPIhNCSlwE6YzFZbuBGAPF0Cpf2zsyVfqvIlVo=;
+        b=YryV1fVn3ihHSgqGglfnMoVQtQSY/z1mTXuxaOoLFWqgO4ypkFKvITCvUjrjGHsUAV
+         DrbLbF67bZALxDER1FLsxY8q4t5LfsSOIpBDXHljmSdtb6SHHltLVylnHd81ppBR+13B
+         c9V146mGN/cV9CQN6grPGihLKiCPsweMbKsCtaUFxodn/KT8k5lO39p6oqN4Bwzu8TmG
+         DATz/PJGZNZsa2pCrxCbCTdU5K6+4zkwZWXndjsa5/3phJbk57fp1h7mw9lX/vmCHUf7
+         Q7soUAlNHZ4QNV7cd7Q7k4VE+LP0M9XB6rAvfTknVgMeLvjfVjXfzFCgYvwIF0r3Xk0m
+         Imig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780532537; x=1781137337;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=9iWWEpPIhNCSlwE6YzFZbuBGAPF0Cpf2zsyVfqvIlVo=;
+        b=nxodQb6uyvyxLSH8N9BlER/vSP/7Nm95FIYQwKPlmcYKyDFLk97GO4zH4B5tvhw5S9
+         evYvmJDoQ5pZuappBOKEG1o0xz3ii9TrzRCoIJals2QbcmnxXVKWVrhRi5H/oXF16DGV
+         MSLUqcyGyWqoC554uoMqZ8ONdDhyFsYBXKCWjt2OB2Z0PfioMEzhNMS8jI6mllgvwoE2
+         9KHbI6D3TvSTwum5JiBKzuQRTgPMMzBFL6DxkRaSWHt5ATqg81+wRUB0P74v6+Hm6niI
+         z7ct6Xj4Eh08Kv+bdKcXTJXmb+Ue8fl3OORGAyy7bUwBY4UVahc44Fww/GJTU57YoYQq
+         oIcA==
+X-Gm-Message-State: AOJu0YxbpHuF7lnPTKD0tWnfjgsKQBYu4c1B/hbFYITcjy/TKTTNC8uQ
+	m5OoXfFCiBvbdw9imtdy+c9i0xvAaVMpkB59NOssdGWJDjNGamnJtRt7TfAN9qklyXc=
+X-Gm-Gg: Acq92OE12+QzX2j+pRgs5E9M/wmZlRr0pfsZZXx0uwof7kJnS0vDbwJl4186LbPEPIO
+	dfAYP6Z0GCjIfvvO43SH357i62A8rzRvQD271BI3VxdDWQqH8gAoTA9RIsFGQFSCycxglfWCOVB
+	l0fNZX/acKnTK9/Q3JA3VgWTBHKHWqQw45aYmHa4AIaECZ8nvZwvI63OQsK7nJCR+L+H+UQPVvq
+	vCLdH1AwrpYin7CIpYU7djxOujrkny6rGFvw97zaKhWNlQrvqzMhlDsH4EIvEFWAOTbyoKq1iSh
+	JCVIKPtH/PPSpnGkj08OLQBJytkfxOAhJlFy3WJV+W4o93cEwKePWa5D0VSVtDKDQwb3o0tzlkD
+	QFoaRWjkZhBGc+N2+19vyxXO6DQ9KD2yq2Tr2IcZ+wraSqAwWogtWURULSnSUGkXMuzmae8Fi4E
+	0Xvt2mQ5KXNkyzFFGuu9sTrN0RmfYNAc56+Lanr1eKHw==
+X-Received: by 2002:a05:6122:4683:b0:5a5:4166:67c5 with SMTP id 71dfb90a1353d-5a6e408f8f6mr3457627e0c.3.1780532537650;
+        Wed, 03 Jun 2026 17:22:17 -0700 (PDT)
+Received: from localhost ([2804:7f0:3d7:5e7:4e93:f426:5c77:c127])
+        by smtp.gmail.com with ESMTPSA id 71dfb90a1353d-5a6dc44d233sm3842406e0c.10.2026.06.03.17.22.16
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 03 Jun 2026 17:22:17 -0700 (PDT)
+From: =?UTF-8?q?Amanda=20Corr=C3=AAa?= <amandacorreasilvax@gmail.com>
+To: Daniel Pereira <danielmaraboo@gmail.com>
+Cc: linux-doc@vger.kernel.org,
+	=?UTF-8?q?Amanda=20Corr=C3=AAa?= <amandacorreasilvax@gmail.com>
+Subject: [PATCH] docs: pt_BR: update "Purpose of Defconfigs" section in maintainer-soc.rst
+Date: Wed,  3 Jun 2026 21:22:11 -0300
+Message-ID: <20260604002212.42092-1-amandacorreasilvax@gmail.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260603-ch-swap-series-plus-folio-lru-cleanup-v4-0-ce0219e100d9@gmail.com>
- <20260603-ch-swap-series-plus-folio-lru-cleanup-v4-1-ce0219e100d9@gmail.com>
-In-Reply-To: <20260603-ch-swap-series-plus-folio-lru-cleanup-v4-1-ce0219e100d9@gmail.com>
-From: Barry Song <baohua@kernel.org>
-Date: Thu, 4 Jun 2026 08:14:39 +0800
-X-Gmail-Original-Message-ID: <CAGsJ_4w-TxtJN=k9zQLYnRkMArTG8R4TVDoOCpjizi-uiASz3Q@mail.gmail.com>
-X-Gm-Features: AVHnY4JapO8_ekxXZ1OEskQ-uXsmOhCdlaQcXY6K-wiwXSYgC-VpzegHnhchd5w
-Message-ID: <CAGsJ_4w-TxtJN=k9zQLYnRkMArTG8R4TVDoOCpjizi-uiASz3Q@mail.gmail.com>
-Subject: Re: [PATCH v4 1/3] mm/swap: colocate page-cluster sysctl with swap readahead
-To: Jianyue Wu <wujianyue000@gmail.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>, 
-	Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>, 
-	Nhat Pham <nphamcs@gmail.com>, Baoquan He <bhe@redhat.com>, 
-	Youngjun Park <youngjun.park@lge.com>, Qi Zheng <qi.zheng@linux.dev>, 
-	Shakeel Butt <shakeel.butt@linux.dev>, Axel Rasmussen <axelrasmussen@google.com>, 
-	Yuanchu Xie <yuanchu@google.com>, Wei Xu <weixugc@google.com>, 
-	Johannes Weiner <hannes@cmpxchg.org>, David Hildenbrand <david@kernel.org>, Michal Hocko <mhocko@kernel.org>, 
-	Lorenzo Stoakes <ljs@kernel.org>, "Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>, 
-	Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>, 
-	Hugh Dickins <hughd@google.com>, Baolin Wang <baolin.wang@linux.alibaba.com>, 
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, linux-mm@kvack.org, 
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-1.16 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[29];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-90866-lists,linux-doc=lfdr.de];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-90867-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FORGED_SENDER(0.00)[amandacorreasilvax@gmail.com,linux-doc@vger.kernel.org];
+	TO_DN_SOME(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:danielmaraboo@gmail.com,m:linux-doc@vger.kernel.org,m:amandacorreasilvax@gmail.com,s:lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FORGED_RECIPIENTS(0.00)[m:wujianyue000@gmail.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencent.com,m:shikemeng@huaweicloud.com,m:nphamcs@gmail.com,m:bhe@redhat.com,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:hannes@cmpxchg.org,m:david@kernel.org,m:mhocko@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:hughd@google.com,m:baolin.wang@linux.alibaba.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[baohua@kernel.org,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[linux-foundation.org,kernel.org,tencent.com,huaweicloud.com,gmail.com,redhat.com,lge.com,linux.dev,google.com,cmpxchg.org,infradead.org,suse.com,linux.alibaba.com,lwn.net,linuxfoundation.org,kvack.org,vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[baohua@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FROM_NEQ_ENVFROM(0.00)[amandacorreasilvax@gmail.com,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com];
 	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_THREE(0.00)[3];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp,mail.gmail.com:mid]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: B8E6663C04F
+X-Rspamd-Queue-Id: 0882663C09E
 
-On Wed, Jun 3, 2026 at 9:05=E2=80=AFPM Jianyue Wu <wujianyue000@gmail.com> =
-wrote:
->
-> page_cluster and the vm.page-cluster sysctl are only used by swap-in
-> readahead in swap_state.c. Move them out of swap.c together with
-> swap_readahead_setup(), and make page_cluster static to that file.
->
-> Rename swap_setup() while moving it as well. The helper is internal to
-> MM and now only sets up swap readahead defaults and its sysctl hook, so
-> the more specific name matches its reduced scope.
->
-> swap_setup() previously lived in mm/swap.c, which is built
-> unconditionally, so the vm.page-cluster sysctl was registered also on
-> CONFIG_SWAP=3Dn kernels. swap_readahead_setup() is now a no-op stub when
-> CONFIG_SWAP is disabled, so vm.page-cluster is no longer registered
-> there. The knob only tunes swap-in readahead and had no effect without
-> swap.
->
-> Suggested-by: Baoquan He <bhe@redhat.com>
-> Suggested-by: Barry Song <baohua@kernel.org>
-> Signed-off-by: Jianyue Wu <wujianyue000@gmail.com>
-> ---
+This update includes the "Purpose of Defconfigs" section translated
+to Brazilian Portuguese.
 
-Reviewed-by: Barry Song <baohua@kernel.org>
+Signed-off-by: Amanda Corrêa <amandacorreasilvax@gmail.com>
+---
+ .../translations/pt_BR/process/maintainer-soc.rst    | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/Documentation/translations/pt_BR/process/maintainer-soc.rst b/Documentation/translations/pt_BR/process/maintainer-soc.rst
+index 5a3ae213e..96dc9a130 100644
+--- a/Documentation/translations/pt_BR/process/maintainer-soc.rst
++++ b/Documentation/translations/pt_BR/process/maintainer-soc.rst
+@@ -8,7 +8,7 @@ Visão Geral
+ -----------
+ 
+ O subsistema SoC é um local de agregação para códigos específicos de SoC
+-System on Chip). Os principais componentes do subsistema são:
++(System on Chip). Os principais componentes do subsistema são:
+ 
+ * Devicetrees (DTS) para ARM de 32 e 64 bits e RISC-V.
+ * Arquivos de placa (board files) ARM de 32 bits (arch/arm/mach*).
+@@ -220,3 +220,13 @@ A linha de assunto de um pull request deve começar com "[GIT PULL]" e ser feita
+ usando uma tag assinada, em vez de um branch. Esta tag deve conter uma breve
+ descrição resumindo as alterações no pull request. Para mais detalhes sobre o
+ envio de pull requests, consulte ``Documentation/maintainer/pull-requests.rst``.
++
++Propósito do Defconfigs
++~~~~~~~~~~~~~~~~~~~~~~~
++
++Defconfigs são usados principalmente pelos desenvolvedores do kernel, porque as
++distribuições têm suas próprias configurações. Uma mudança que adiciona novas
++opções CONFIG a um defconfig deve explicar por que os desenvolvedores do kernel
++em geral gostariam de tal opção, por exemplo, fornecendo o nome de uma máquina/placa
++suportada usando essa nova opção. Isso implica que habilitar opções em defconfig
++para máquinas não upstream não deve ser aceito.
+-- 
+2.43.0
+
 
