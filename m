@@ -1,646 +1,260 @@
-Return-Path: <linux-doc+bounces-90969-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90970-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id CAU4OyqpIWopKwEAu9opvQ
-	(envelope-from <linux-doc+bounces-90969-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 18:34:50 +0200
+	id eM3VBLWqIWqjKwEAu9opvQ
+	(envelope-from <linux-doc+bounces-90970-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 18:41:25 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2BF6F641E04
-	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 18:34:50 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id BFB9A641F31
+	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 18:41:24 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=eLmyQArA;
-	dkim=pass header.d=redhat.com header.s=google header.b=MjGL3umR;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90969-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-90969-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=redhat.com;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=LU3QYlU3;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90970-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90970-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 6250B3071AA9
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Jun 2026 16:28:58 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 20FDF300916F
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Jun 2026 16:33:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6467544B695;
-	Thu,  4 Jun 2026 16:27:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 26FB73B993A;
+	Thu,  4 Jun 2026 16:33:00 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5422B3BFAE8
-	for <linux-doc@vger.kernel.org>; Thu,  4 Jun 2026 16:27:57 +0000 (UTC)
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780590479; cv=pass; b=kFcjqmsdsbi6KPsJwFTkhHaryP7c7ECMXaUTB4dY1A08yVmBd5p9Z5OOE4BtXVWZoTlMad4i5xyL0d9ldIIgRYJB2hDpnlJ8v26Lm6ychCa8KJAZgXgPK0VHfPnZ1MgWQxPsRgx2TZYOqe8WsKnrnVrd7HW3P53BKqUYaoIzT3o=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780590479; c=relaxed/simple;
-	bh=5G47YxpAV56Qp2tW5GOCdQQevw4zG9pd9g1zkjxzvtE=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=Tj1ObyUhjGVVD4YO+Q7+fOSDeSALrz2xwzb7DncInssLpcDCF/J/7cLOXmnf00xVa1+Qt1hQDSc/vuVP6AaDO9oiwgExUsURshDv+g8W4ONxAo9oy0OdSK8A05Ji94K+e2Y+/MAyTJ6LnOumnj5G1tvkKw8MaGqXFAumDTB1mqc=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=eLmyQArA; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=MjGL3umR; arc=pass smtp.client-ip=170.10.133.124
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1780590476;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=BA145V9KjUZKy0xmmK5N0uGNrCBkGuvTTNL7wjmfvAY=;
-	b=eLmyQArACKwY22X/jD09yFUg2AtRH2dOR+Guqt2e9qyoB1vSQf1TQoTUXajJhnmDyX5lKe
-	YmLgeaabSnMBK7S+KOZXybZq/O1M2hBBFg5V7n6oSLfvmyRURYO96oGaPlBClrg9TZh2Re
-	dBurHp16ntFi8iAf5ttJPyWGwgTsoPA=
-Received: from mail-yw1-f199.google.com (mail-yw1-f199.google.com
- [209.85.128.199]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-576-YAzwd1dSMRSSS16HFTp-9w-1; Thu, 04 Jun 2026 12:27:55 -0400
-X-MC-Unique: YAzwd1dSMRSSS16HFTp-9w-1
-X-Mimecast-MFC-AGG-ID: YAzwd1dSMRSSS16HFTp-9w_1780590475
-Received: by mail-yw1-f199.google.com with SMTP id 00721157ae682-7e9234db3bfso15728407b3.2
-        for <linux-doc@vger.kernel.org>; Thu, 04 Jun 2026 09:27:55 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780590474; cv=none;
-        d=google.com; s=arc-20240605;
-        b=Vykfpo6gfbwkx4fsW+yNMkPOw80BZqpLUMU9tfy2LVwesSP85I2IQmQFQl3IpIfF3S
-         eS3bzaFvF1sbNtVJFAnbwkDTOLo8eHg+hwIkwT5a2wDvU9xKRBV6cbOeFUUhemT2oXoE
-         FA2uAThfAwe3UE8Pk1yi0+qfwT58/rGUxf5w3iaIylj0twtusFZ0iTWa91e1D72SYqsP
-         umZwRjvXpVQh0wrmFZ3hOVAmPQ41x/v+HhnoOQK2kyK2c3e+LJo6tFLogQb1NSqv4RjL
-         Z3G4A3kaYnO860DMYUmcG8ySZY6j5rEykaq5VON9FVBEFhgVTaFviX6VwnfeskwERi2P
-         4mGA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=BA145V9KjUZKy0xmmK5N0uGNrCBkGuvTTNL7wjmfvAY=;
-        fh=SN3n3EequSa9DX5CejsKRCFb/ziW0CpiMzfLPVxQdT4=;
-        b=d7o5b3z9lu+MfzEbp4crJMb/z/VuvHDuF4dA11gABPydnPh8Pakk3uR1e99I+g3YSr
-         wnDTWChhGi6Z4cod4v/rmXwoONXf8B4vieZqG4Wn0SzfXXcbsQ4j9fsD8rhrEOlN4nOc
-         ZmxyhrDq5wKSGv7/F+vjst6CqEcpUFH9Y38iiwGuAOPyBbfI4MUcT8vKYKDq8NmZ3DtL
-         1ukVyM+doVzzFqBPbFpE0SwkXpbeKEEuqz2UaXSTwSEUlhm7WaUN6/DQdptThiDSibR+
-         15zLjxQUyE251zua1i8XBaPwSZZBtrLTC4yxwM1sxCf+cbmBcUVx8qzUGLnMglZwuYzM
-         Axog==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1780590474; x=1781195274; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=BA145V9KjUZKy0xmmK5N0uGNrCBkGuvTTNL7wjmfvAY=;
-        b=MjGL3umRaZppVNcc8l9hMpNIyVk5sv5uIbtdrx7bN7/27D14WXTi5qpS7RQBNO3ZYy
-         u7qXg0b4h14Bep1Fu//GptheZ8UgxSFtP84SQXCLWTQcKrhL2c5YZzqPHdgI58vo3DHV
-         e5/QmksEC9/UDyFldc8HwxgQhCayd6Zh5Ah+9y7FENr9DAw+w2yzAmaQDjy5dE0iAwC/
-         BQ/04Z1FreSbeBxBdmaVBHYtlONYpS69Z2bmZ1jZ/CAUACGER6selgVQBbXYZu3xNxUX
-         WXzg1esQN0oZWyWJRbyD6Na26N9x5FN7vxwiLeOcH/ATk11t6zuGl265ACMH5dDxk/Lh
-         ZzgA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780590474; x=1781195274;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=BA145V9KjUZKy0xmmK5N0uGNrCBkGuvTTNL7wjmfvAY=;
-        b=Fm6dMPNxL8lljpOcCAuEdsr4A7J+hXccoTHIc3YFdXVzWfwMtMaX4UxOcDLnT66PWI
-         WPuDllxofOgyku3Ta80sfBt/aHl8Y5baHPT0vNDhhELKm1aPduXf03sksF10QO2++urr
-         Yxp8lw+ZBGguprJTSUBGD2Hal3yvgoElnI2YKhJITL/rEVAQAUFpRqayA+EjxtGlwl+T
-         tyWasSY4fxCJbIFdPf7yQWEz+lEJYctvewfVj9ix23vSExtlGy/GEZC2PB9M/HAt2vP7
-         hoyYwVTs3CpZ/qlxbXuJ+bMVUbvGQFhOkTC7ER2Gi5n2pHcPBdgu4VhX2TmWRHDnmG5/
-         KxCQ==
-X-Gm-Message-State: AOJu0YwsnsxZo22SijbtXn5gPux0JM2amMLMj14pZjfxkldxmyPcYYjq
-	xfqFYbSJ2aC2SJJDFCICam4ruxmM65YmeKcL8xB0zbMVGE7GCJUXUjnSqG3lt9y1VMS/FHzfpkD
-	g+652ZXVPdeJN+ju7O5dY69jicRMXBbeZS3UJdzEBlHGGt8ZnJ+LEIwl0EZxC7ywz7YXdGOJdRK
-	N2eD6Ue2kI+cZZO/2wPy5g/hsmosB54NaCqJU0
-X-Gm-Gg: Acq92OFPTtfqUxrHekiSy0D6D10S27fY4dKzcJDDzis5b7so9muyvOMHKXUOBIonV7f
-	JmfAslXqYWlaeq2l6+hLaEQBgpMXmeFx/8j5IaugSiHqrxn/gTFIfasYKKvrX9GMyzT8QeYtOgN
-	wy2Hb4dRMBIkJ9318eFpYUK35sc6GFC4n8djCPjVVF8X/q6LWoaBW+eGZNWekTNqyukexyj3qo1
-	tZUvXs7VM06srg=
-X-Received: by 2002:a05:690e:d8d:b0:660:5dc3:3fe0 with SMTP id 956f58d0204a3-660dbfbd3a5mr7618436d50.14.1780590474261;
-        Thu, 04 Jun 2026 09:27:54 -0700 (PDT)
-X-Received: by 2002:a05:690e:d8d:b0:660:5dc3:3fe0 with SMTP id
- 956f58d0204a3-660dbfbd3a5mr7618389d50.14.1780590473572; Thu, 04 Jun 2026
- 09:27:53 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE2873AFCE8;
+	Thu,  4 Jun 2026 16:32:59 +0000 (UTC)
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1780590780; cv=none; b=IW5Bxkz3kJ8fXVrJKTyV4KDJ7DG7gRmFfWWZHrkbTaYVi0aVi9FMa5DWx4SFMfmDasdhhpufCJOFuiYBL/GlCPsmSlL8jvjw0RjSdVcdBvE5Z2l8e94QlQ58dt59rOGrrY4bdjYxKWbppNAR6UGcY+yFQuKXkfetiLvD4ivZ0hs=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1780590780; c=relaxed/simple;
+	bh=IF81Z8VRuCuoUPzTWGThdgNpFwJnNJJ/51M/17ZgGWw=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=uq1qDoPoMsv2v5oKE42ImuaEy5x7vs8ZZT/cLJZlJl80//QT5BeUiOvVzyDo0kqG8UYckE/4K+w4p624RLL3iwBeQfTURphP6WWgRrQK9jDmO8781zakCVMY+UoRsQWtFwVqBfE3Wei+0kObSa6JUbGZy0IvP6xloWEuxXMD3PU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LU3QYlU3; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 96936C2BCB8;
+	Thu,  4 Jun 2026 16:32:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1780590779;
+	bh=IF81Z8VRuCuoUPzTWGThdgNpFwJnNJJ/51M/17ZgGWw=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=LU3QYlU3m3l+NQ1G/lMoup1irv9raNzwjtcH0ql10ImTEqPEOSv3cZhBrAF8ODt3V
+	 1fVMaU0Xq5LT6q8SYYAUesAPhgxZVGJn37HjOs+X57TxtVnKoTkvkEQNntI3Lpdcv0
+	 i+Ih/uRH6tIJzpyHVFdN3FIADCmjEtDEhfVvrNqiaUZVN5RlzIisunAOo8hxynSlCe
+	 +3vTw702ML3/maBtWidp64CbhyV/vWvuNC2WFg/QED9VR0n83z+T5fNBoNH/KVioGA
+	 wnTD7YkDPJfY/4qA+ywWmvAzlOmTBygXMg2jLkGWch13ZwdBRVfch6CdEw4uSsvPLq
+	 DUs5hHS6wStTA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 78586CD6E75;
+	Thu,  4 Jun 2026 16:32:59 +0000 (UTC)
+From: Ciprian Regus via B4 Relay <devnull+ciprian.regus.analog.com@kernel.org>
+Subject: [PATCH net-next v3 00/13] net: Add ADIN1140 support
+Date: Thu, 04 Jun 2026 19:32:45 +0300
+Message-Id: <20260604-adin1140-driver-v3-0-5debdb3173c4@analog.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260522150009.121603-1-npache@redhat.com> <20260522150009.121603-7-npache@redhat.com>
- <aiFTSLb0kkTR7I9A@lucifer> <aiFw80oLty6F_-8m@lucifer> <CAA1CXcDxZEmWtmGFiKDKSPSae8pN0at4vYV24FOs+t_GTGkZ6g@mail.gmail.com>
- <aiFz-VSKSQ-zBfN7@lucifer>
-In-Reply-To: <aiFz-VSKSQ-zBfN7@lucifer>
-From: Nico Pache <npache@redhat.com>
-Date: Thu, 4 Jun 2026 10:28:35 -0600
-X-Gm-Features: AVHnY4Le_mcjGdC3DL2MK-mvBxkw7z_nSZsHoQmJnPcOIGLqDyjwHBHEtYP4b4s
-Message-ID: <CAA1CXcCN5NtFUyLA1oSTmX_1csGEAviadKmNHCcnmAa=OmKHbQ@mail.gmail.com>
-Subject: Re: [PATCH mm-unstable v18 06/14] mm/khugepaged: generalize
- collapse_huge_page for mTHP collapse
-To: Lorenzo Stoakes <ljs@kernel.org>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-mm@kvack.org, linux-trace-kernel@vger.kernel.org, aarcange@redhat.com, 
-	akpm@linux-foundation.org, anshuman.khandual@arm.com, apopple@nvidia.com, 
-	baohua@kernel.org, baolin.wang@linux.alibaba.com, byungchul@sk.com, 
-	catalin.marinas@arm.com, cl@gentwo.org, corbet@lwn.net, 
-	dave.hansen@linux.intel.com, david@kernel.org, dev.jain@arm.com, 
-	gourry@gourry.net, hannes@cmpxchg.org, hughd@google.com, jack@suse.cz, 
-	jackmanb@google.com, jannh@google.com, jglisse@google.com, 
-	joshua.hahnjy@gmail.com, kas@kernel.org, lance.yang@linux.dev, 
-	liam@infradead.org, mathieu.desnoyers@efficios.com, matthew.brost@intel.com, 
-	mhiramat@kernel.org, mhocko@suse.com, peterx@redhat.com, pfalcato@suse.de, 
-	rakie.kim@sk.com, raquini@redhat.com, rdunlap@infradead.org, 
-	richard.weiyang@gmail.com, rientjes@google.com, rostedt@goodmis.org, 
-	rppt@kernel.org, ryan.roberts@arm.com, shivankg@amd.com, 
-	sunnanyong@huawei.com, surenb@google.com, thomas.hellstrom@linux.intel.com, 
-	tiwai@suse.de, usamaarif642@gmail.com, vbabka@suse.cz, vishal.moola@gmail.com, 
-	wangkefeng.wang@huawei.com, will@kernel.org, willy@infradead.org, 
-	yang@os.amperecomputing.com, ying.huang@linux.alibaba.com, ziy@nvidia.com, 
-	zokeefe@google.com, Usama Arif <usama.arif@linux.dev>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAK2oIWoC/2XNTQrCMBAF4KuUrI1MftpGV95DXITMtA1oKkkJl
+ dK7G7JSupvH432zsUTRU2LXZmORsk9+DiWoU8PcZMNI3GPJTILsQMsLt+iDEBo4Rp8p8ouyBKj
+ 6TgnDyuodafBrFe8s0MIDrQt7lGbyaZnjp77KovZVbUEd1Cx4uRG0cojGDHCzwT7n8ezmV8Wy/
+ AFkfwRkAVRPrTOoCew/sO/7F7GoX836AAAA
+To: Parthiban Veerasooran <parthiban.veerasooran@microchip.com>, 
+ Andrew Lunn <andrew+netdev@lunn.ch>, 
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+ Simon Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>, Andrew Lunn <andrew@lunn.ch>, 
+ Heiner Kallweit <hkallweit1@gmail.com>, 
+ Russell King <linux@armlinux.org.uk>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-doc@vger.kernel.org, devicetree@vger.kernel.org, 
+ Ciprian Regus <ciprian.regus@analog.com>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780590774; l=6929;
+ i=ciprian.regus@analog.com; s=20260330; h=from:subject:message-id;
+ bh=IF81Z8VRuCuoUPzTWGThdgNpFwJnNJJ/51M/17ZgGWw=;
+ b=aTK6XgPC3Xw7etl3EhtVx6zE31eoXHBE4mIrgcLcFEoSMCogrBo2YC3h/oyfzRURWa2tjuGRL
+ TZwmtnh6RC7C99T3G1/cNcv3LtJb6oB4NlPFXNOFTlZRxmvQ/EBbrQD
+X-Developer-Key: i=ciprian.regus@analog.com; a=ed25519;
+ pk=8WoNhI0kQcQUl8YqJO5ZevROYk9HP8lOIeIgIYgjfbc=
+X-Endpoint-Received: by B4 Relay for ciprian.regus@analog.com/20260330 with
+ auth_id=703
+X-Original-From: Ciprian Regus <ciprian.regus@analog.com>
+Reply-To: ciprian.regus@analog.com
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kvack.org,redhat.com,linux-foundation.org,arm.com,nvidia.com,kernel.org,linux.alibaba.com,sk.com,gentwo.org,lwn.net,linux.intel.com,gourry.net,cmpxchg.org,google.com,suse.cz,gmail.com,linux.dev,infradead.org,efficios.com,intel.com,suse.com,suse.de,goodmis.org,amd.com,huawei.com,os.amperecomputing.com];
-	TAGGED_FROM(0.00)[bounces-90969-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90970-lists,linux-doc=lfdr.de,ciprian.regus.analog.com];
+	FORGED_RECIPIENTS(0.00)[m:parthiban.veerasooran@microchip.com,m:andrew+netdev@lunn.ch,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:andrew@lunn.ch,m:hkallweit1@gmail.com,m:linux@armlinux.org.uk,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:netdev@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:devicetree@vger.kernel.org,m:ciprian.regus@analog.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[npache@redhat.com,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:ljs@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-trace-kernel@vger.kernel.org,m:aarcange@redhat.com,m:akpm@linux-foundation.org,m:anshuman.khandual@arm.com,m:apopple@nvidia.com,m:baohua@kernel.org,m:baolin.wang@linux.alibaba.com,m:byungchul@sk.com,m:catalin.marinas@arm.com,m:cl@gentwo.org,m:corbet@lwn.net,m:dave.hansen@linux.intel.com,m:david@kernel.org,m:dev.jain@arm.com,m:gourry@gourry.net,m:hannes@cmpxchg.org,m:hughd@google.com,m:jack@suse.cz,m:jackmanb@google.com,m:jannh@google.com,m:jglisse@google.com,m:joshua.hahnjy@gmail.com,m:kas@kernel.org,m:lance.yang@linux.dev,m:liam@infradead.org,m:mathieu.desnoyers@efficios.com,m:matthew.brost@intel.com,m:mhiramat@kernel.org,m:mhocko@suse.com,m:peterx@redhat.com,m:pfalcato@suse.de,m:rakie.kim@sk.com,m:raquini@redhat.com,m:rdunlap@infradead.org,m:richard.weiyang@gmail.com,m:rientjes@google.com,m:rostedt@goodmis.org,m:rppt@kernel.org,m:ryan.roberts@arm.com,m:s
- hivankg@amd.com,m:sunnanyong@huawei.com,m:surenb@google.com,m:thomas.hellstrom@linux.intel.com,m:tiwai@suse.de,m:usamaarif642@gmail.com,m:vbabka@suse.cz,m:vishal.moola@gmail.com,m:wangkefeng.wang@huawei.com,m:will@kernel.org,m:willy@infradead.org,m:yang@os.amperecomputing.com,m:ying.huang@linux.alibaba.com,m:ziy@nvidia.com,m:zokeefe@google.com,m:usama.arif@linux.dev,m:joshuahahnjy@gmail.com,m:richardweiyang@gmail.com,s:lists@lfdr.de];
-	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[redhat.com:+];
-	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
+	FREEMAIL_TO(0.00)[microchip.com,lunn.ch,davemloft.net,google.com,kernel.org,redhat.com,lwn.net,linuxfoundation.org,gmail.com,armlinux.org.uk];
+	RCPT_COUNT_TWELVE(0.00)[20];
+	FORWARDED(0.00)[lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	HAS_REPLYTO(0.00)[ciprian.regus@analog.com];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[npache@redhat.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[59];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,vger.kernel.org:from_smtp,linux.dev:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	TAGGED_RCPT(0.00)[linux-doc,netdev,dt];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,analog.com:mid,analog.com:email,analog.com:replyto]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 2BF6F641E04
+X-Rspamd-Queue-Id: BFB9A641F31
 
-On Thu, Jun 4, 2026 at 6:56=E2=80=AFAM Lorenzo Stoakes <ljs@kernel.org> wro=
-te:
->
-> On Thu, Jun 04, 2026 at 06:45:58AM -0600, Nico Pache wrote:
-> > On Thu, Jun 4, 2026 at 6:40=E2=80=AFAM Lorenzo Stoakes <ljs@kernel.org>=
- wrote:
-> > >
-> > > On Thu, Jun 04, 2026 at 12:38:30PM +0100, Lorenzo Stoakes wrote:
-> > > > I will go review the thread about the cache maintenance separately =
-and
-> > > > respond about that.
-> > > >
-> > > > On Fri, May 22, 2026 at 09:00:01AM -0600, Nico Pache wrote:
-> > > > > Pass an order and offset to collapse_huge_page to support collaps=
-ing anon
-> > > > > memory to arbitrary orders within a PMD. order indicates what mTH=
-P size we
-> > > > > are attempting to collapse to, and offset indicates were in the P=
-MD to
-> > > > > start the collapse attempt.
-> > > > >
-> > > > > For non-PMD collapse we must leave the anon VMA write locked unti=
-l after
-> > > > > we collapse the mTHP-- in the PMD case all the pages are isolated=
-, but in
-> > > > > the mTHP case this is not true, and we must keep the lock to prev=
-ent
-> > > > > access/changes to the page tables. This can happen if the rmap wa=
-lkers hit
-> > > > > a pmd_none while the PMD entry is currently unavailable due to be=
-ing
-> > > > > temporarily removed during the collapse phase.
-> > > > >
-> > > > > Acked-by: Usama Arif <usama.arif@linux.dev>
-> > > > > Signed-off-by: Nico Pache <npache@redhat.com>
-> > > >
-> > > > The logic LGTM generally, some questions for understanding below, a=
-nd of
-> > > > course as per above I want to review the Lance/David subthread.
-> > > >
-> > > > Thanks!
-> > > >
-> > > > > ---
-> > > > >  mm/khugepaged.c | 93 +++++++++++++++++++++++++++++--------------=
-------
-> > > > >  1 file changed, 55 insertions(+), 38 deletions(-)
-> > > > >
-> > > > > diff --git a/mm/khugepaged.c b/mm/khugepaged.c
-> > > > > index fab35d318641..d64f42f66236 100644
-> > > > > --- a/mm/khugepaged.c
-> > > > > +++ b/mm/khugepaged.c
-> > > > > @@ -1214,34 +1214,36 @@ static enum scan_result alloc_charge_foli=
-o(struct folio **foliop, struct mm_stru
-> > > > >   * while allocating a THP, as that could trigger direct reclaim/=
-compaction.
-> > > > >   * Note that the VMA must be rechecked after grabbing the mmap_l=
-ock again.
-> > > > >   */
-> > > > > -static enum scan_result collapse_huge_page(struct mm_struct *mm,=
- unsigned long address,
-> > > > > -           int referenced, int unmapped, struct collapse_control=
- *cc)
-> > > > > +static enum scan_result collapse_huge_page(struct mm_struct *mm,=
- unsigned long start_addr,
-> > > > > +           int referenced, int unmapped, struct collapse_control=
- *cc,
-> > > > > +           unsigned int order)
-> > > > >  {
-> > > > > +   const unsigned long pmd_addr =3D start_addr & HPAGE_PMD_MASK;
-> > > > > +   const unsigned long end_addr =3D start_addr + (PAGE_SIZE << o=
-rder);
-> > > > >     LIST_HEAD(compound_pagelist);
-> > > > >     pmd_t *pmd, _pmd;
-> > > > > -   pte_t *pte;
-> > > > > +   pte_t *pte =3D NULL;
-> > > >
-> > > > As mentioned elsewhere for some reason this was dropped in
-> > > > mm-unstable. Maybe a bad conflict resolution?
-> > > >
-> > > > >     pgtable_t pgtable;
-> > > > >     struct folio *folio;
-> > > > >     spinlock_t *pmd_ptl, *pte_ptl;
-> > > > >     enum scan_result result =3D SCAN_FAIL;
-> > > > >     struct vm_area_struct *vma;
-> > > > >     struct mmu_notifier_range range;
-> > > > > +   bool anon_vma_locked =3D false;
-> > > > >
-> > > > > -   VM_BUG_ON(address & ~HPAGE_PMD_MASK);
-> > > > > -
-> > > > > -   result =3D alloc_charge_folio(&folio, mm, cc, HPAGE_PMD_ORDER=
-);
-> > > > > +   result =3D alloc_charge_folio(&folio, mm, cc, order);
-> > > > >     if (result !=3D SCAN_SUCCEED)
-> > > > >             goto out_nolock;
-> > > > >
-> > > > >     mmap_read_lock(mm);
-> > > > > -   result =3D hugepage_vma_revalidate(mm, address, true, &vma, c=
-c,
-> > > > > -                                    HPAGE_PMD_ORDER);
-> > > > > +   result =3D hugepage_vma_revalidate(mm, pmd_addr, /*expect_ano=
-n=3D*/ true,
-> > > > > +                                    &vma, cc, order);
-> > > > >     if (result !=3D SCAN_SUCCEED) {
-> > > > >             mmap_read_unlock(mm);
-> > > > >             goto out_nolock;
-> > > > >     }
-> > > > >
-> > > > > -   result =3D find_pmd_or_thp_or_none(mm, address, &pmd);
-> > > > > +   result =3D find_pmd_or_thp_or_none(mm, pmd_addr, &pmd);
-> > > > >     if (result !=3D SCAN_SUCCEED) {
-> > > > >             mmap_read_unlock(mm);
-> > > > >             goto out_nolock;
-> > > > > @@ -1253,8 +1255,8 @@ static enum scan_result collapse_huge_page(=
-struct mm_struct *mm, unsigned long a
-> > > > >              * released when it fails. So we jump out_nolock dire=
-ctly in
-> > > > >              * that case.  Continuing to collapse causes inconsis=
-tency.
-> > > > >              */
-> > > > > -           result =3D __collapse_huge_page_swapin(mm, vma, addre=
-ss, pmd,
-> > > > > -                                                referenced, HPAG=
-E_PMD_ORDER);
-> > > > > +           result =3D __collapse_huge_page_swapin(mm, vma, start=
-_addr, pmd,
-> > > > > +                                                referenced, orde=
-r);
-> > > > >             if (result !=3D SCAN_SUCCEED)
-> > > > >                     goto out_nolock;
-> > > > >     }
-> > > > > @@ -1269,20 +1271,21 @@ static enum scan_result collapse_huge_pag=
-e(struct mm_struct *mm, unsigned long a
-> > > > >      * mmap_lock.
-> > > > >      */
-> > > > >     mmap_write_lock(mm);
-> > > > > -   result =3D hugepage_vma_revalidate(mm, address, true, &vma, c=
-c,
-> > > > > -                                    HPAGE_PMD_ORDER);
-> > > > > +   result =3D hugepage_vma_revalidate(mm, pmd_addr, /*expect_ano=
-n=3D*/ true,
-> > > > > +                                    &vma, cc, order);
-> > > > >     if (result !=3D SCAN_SUCCEED)
-> > > > >             goto out_up_write;
-> > > > >     /* check if the pmd is still valid */
-> > > > >     vma_start_write(vma);
-> > >
-> > > Hmm actually I think we have another problem here.
-> > >
-> > > For PMD THP this is fine. Only a single VMA can span the range we nee=
-d, and it
-> > > will span the entire PMD.
-> > >
-> > > But for mTHP we have an issue...
-> > >
-> > > See below...
-> > >
-> > > > > -   result =3D check_pmd_still_valid(mm, address, pmd);
-> > > > > +   result =3D check_pmd_still_valid(mm, pmd_addr, pmd);
-> > > > >     if (result !=3D SCAN_SUCCEED)
-> > > > >             goto out_up_write;
-> > > > >
-> > > > >     anon_vma_lock_write(vma->anon_vma);
-> > > > > +   anon_vma_locked =3D true;
-> > > >
-> > > > I worry that we hold this lock a lot longer now? Maybe the algorith=
-mic
-> > > > change alters that, but Claude did suggest on the s390 bug that lon=
-ger lock
-> > > > hold might be an issue.
-> > > >
-> > > > I wonder if we'll observe lock contention as a result?
-> > > >
-> > > > Correct me if I'm wrong and we're not holding longer than previousl=
-y,
-> > > > however. Just appears that we do.
-> > > >
-> > > > >
-> > > > > -   mmu_notifier_range_init(&range, MMU_NOTIFY_CLEAR, 0, mm, addr=
-ess,
-> > > > > -                           address + HPAGE_PMD_SIZE);
-> > > > > +   mmu_notifier_range_init(&range, MMU_NOTIFY_CLEAR, 0, mm, star=
-t_addr,
-> > > > > +                           end_addr);
-> > > > >     mmu_notifier_invalidate_range_start(&range);
-> > > > >
-> > > > >     pmd_ptl =3D pmd_lock(mm, pmd); /* probably unnecessary */
-> > > > > @@ -1294,26 +1297,23 @@ static enum scan_result collapse_huge_pag=
-e(struct mm_struct *mm, unsigned long a
-> > > > >      * Parallel GUP-fast is fine since GUP-fast will back off whe=
-n
-> > > > >      * it detects PMD is changed.
-> > > > >      */
-> > > > > -   _pmd =3D pmdp_collapse_flush(vma, address, pmd);
-> > > > > +   _pmd =3D pmdp_collapse_flush(vma, pmd_addr, pmd);
-> > >
-> > > ...So we exclude VMA locked faults faulting in a new PMD entry for PM=
-D-sized THP
-> > > but for mTHP we might have _another_ VMA that spans another part of t=
-he range
-> > > mapped by the same PMD entry.
-> > >
-> > > So we clear this, but we do not have a write lock on any other VMA, a=
-nd so
-> > > racing VMA read locks can install a new PMD entry.
-> > >
-> > > > >     spin_unlock(pmd_ptl);
-> > >
-> > > Especially since you unlock this :)
-> > >
-> > > And...
-> > >
-> > > > >     mmu_notifier_invalidate_range_end(&range);
-> > > > >     tlb_remove_table_sync_one();
-> > > > >
-> > > > > -   pte =3D pte_offset_map_lock(mm, &_pmd, address, &pte_ptl);
-> > > > > +   pte =3D pte_offset_map_lock(mm, &_pmd, start_addr, &pte_ptl);
-> > > > >     if (pte) {
-> > > > > -           result =3D __collapse_huge_page_isolate(vma, address,=
- pte, cc,
-> > > > > -                                                 HPAGE_PMD_ORDER=
-,
-> > > > > -                                                 &compound_pagel=
-ist);
-> > > > > +           result =3D __collapse_huge_page_isolate(vma, start_ad=
-dr, pte, cc,
-> > > > > +                                                 order, &compoun=
-d_pagelist);
-> > > > >             spin_unlock(pte_ptl);
-> > > > >     } else {
-> > > > >             result =3D SCAN_NO_PTE_TABLE;
-> > > > >     }
-> > > > >
-> > > > >     if (unlikely(result !=3D SCAN_SUCCEED)) {
-> > > > > -           if (pte)
-> > > > > -                   pte_unmap(pte);
-> > > >
-> > > > OK I seem to remember this is because we're holding the anon_vma lo=
-ck
-> > > > longer. That does imply that on e.g. x86-64 the RCU lock is being h=
-eld a
-> > > > bit longer also as well as the anon_vma loc.
-> > > >
-> > > > I guess it's also because we need to hold anon_vma and pte lock bec=
-ause
-> > > > we're fiddling around at PTE level for mTHP not just PMD level as '=
-classic'
-> > > > THP did.
-> > > >
-> > > > (Rememberings going on here :)
-> > > >
-> > > > >             spin_lock(pmd_ptl);
-> > > > > -           BUG_ON(!pmd_none(*pmd));
-> > > > > +           WARN_ON_ONCE(!pmd_none(*pmd));
-> > >
-> > > ...this will get triggered.
-> > >
-> > > I don't know whether we can safely hold the PMD lock across everythin=
-g here for
-> > > mTHP?
-> > >
-> > > Maybe the solution would have to be to scan through VMAs in the range=
- of the PMD
-> > > and VMA write lock each of them?
-> >
-> > I believe we've spoken about this before, but because we always make
->
-> Maybe worth a comment then...? Ah how rewarding review is :)
+This series introduces support for the ADIN1140 (also called AD3306)
+10BASE-T1S single port MACPHY. The device integrates the MAC and PHY in
+the same package. The communication with the host CPU is done through an
+SPI interface, using the Open Alliance TC6 protocol for control and data
+transactions. As a result, the oa_tc6 framework is used to implement
+the communication with the device (register accesses and Ethernet frame
+RX/TX).
 
-I'll expand the commit message and comment in commit 1 of the series! thank=
-s
+The MAC and PHY are connected internally using an MII and MDIO bus.
 
->
-> This is something that somebody else might very well wonder about and
-> forget that it happens to be covered there.
->
-> Also:
->
-> /* Always check the PMD order to ensure its not shared by another VMA */
->
-> Is pretty lightweight there. Something about avoiding racing page faults
-> would be helpful.
+The PHY is a half duplex 10Mbps device, which implements both the PLCA
+RS (IEEE 802.3 clause 148) and CSMA/CD methods of accessing the Ethernet
+medium. The 10BASE-T1S standard allows multiple PHY devices to be
+connected (in parallel) on the same single twisted pair network segment,
+so PLCA can be configured in order to provide a fair access scheme to
+all the nodes and reduce the jitter introduced by the unordered CSMA/CD
+transmits. The PHY's internal register map can be accessed using the
+direct MDIO mode of the OA TC6. The control, status, phy id 1 & 2 C22
+registers are mapped to the 0xFF00 - 0xFF03 range. As for C45
+addressable devices, the PHY has PCS, PMA and PLCA blocks.
 
-yeah fair enough the commit message of patch 1 also doesnt really do
-it justice on the *why*
+The oa_tc6 framework patches are changes that would make the library
+usable by the subsequent ADIN1140 MAC driver.
 
->
-> > sure the VMA spans the full PMD we won't ever hit this issue. If we
-> > wanted to support mTHP collapse on regions smaller than a PMD, the
-> > locking gets tricky (hence the design choice to not do that for now).
-> >
-> > This is handled by the HPAGE_ORDER in hugepage_vma_revalidate().
->
-> The existing code is atrocious, and sticking this on top has added to the
-> pile of assumptions and conventions and having to go check a bunch of
-> functions to 'just know' you're safe for X, Y, Z.
->
-> We really need to see some cleanup series coming after this and I'm going
-> to get pretty grumpy(ier) if we don't.
+The protected mode patch is required because the ADIN1140 only allows
+protected mode OA TC6 control transactions, which the oa_tc6 framework
+doesn't currently implement.
 
-Many more to come :) Improvements too but cleanups first!
+The OA_TC6_BROKEN_PHY quirk patch is required in order to allow the MAC
+driver to have a custom implementation for the mii_bus access methods as a
+workaround for hardware issues:
 
-Cheers,
--- Nico
+1. The OA TC6 standard defines the direct and indirect access modes for
+   MDIO transactions. The ADIN1140 incorrectly advertises indirect mode
+   only (supported capabilities register - 0x2, bit 9), while actually
+   implementing just the direct mode. We cannot rely on the CAP register
+   to choose an access method (which oa_tc6 does by default, even though
+   it only implements the direct mode), so the driver has to use its
+   own.
+2. The ADIN1140 cannot access the C22 register space of the internal
+   PHY, while the PHY is busy receiving frames. If that happens, the
+   CONFIG0 and CONFIG2 registers of the MAC will get corrupted and the
+   data transfer will stop. Those two registers configure settings for
+   the transfer protocol between the MAC and host, so the value for some
+   of their subfields shouldn't be changed while the netdev is up.
+   Since we know the PHY is internal, the MAC driver can implement a
+   custom mii_bus, which can intercept C22 accesses. Most of the
+   registers mapped in the 0x0 - 0x3 range (the only ones the PHY offers)
+   are read only, and their value can be read from somewhere else (e.g
+   the PHYID 1 & 2 have the same value as 0x1 in the MAC memory map).
+   C45 accesses do not cause this issue, so we can properly implement
+   them.
 
->
-> >
-> > /* Always check the PMD order to ensure its not shared by another VMA *=
-/
-> > if (!thp_vma_suitable_order(vma, address, PMD_ORDER))
-> >
-> > -- Nico
-> >
-> > >
-> > > That could cause some 'interesting' lock contention issues though? Th=
-en again,
-> > > we will be releasing the mmap write lock soon enough which will drop =
-the VMA
-> > > write locks.
-> > >
-> > > > >             /*
-> > > > >              * We can only use set_pmd_at when establishing
-> > > > >              * hugepmds and never for establishing regular pmds t=
-hat
-> > > > > @@ -1321,21 +1321,24 @@ static enum scan_result collapse_huge_pag=
-e(struct mm_struct *mm, unsigned long a
-> > > > >              */
-> > > > >             pmd_populate(mm, pmd, pmd_pgtable(_pmd));
-> > > > >             spin_unlock(pmd_ptl);
-> > > > > -           anon_vma_unlock_write(vma->anon_vma);
-> > > > >             goto out_up_write;
-> > > > >     }
-> > > > >
-> > > > >     /*
-> > > > > -    * All pages are isolated and locked so anon_vma rmap
-> > > > > -    * can't run anymore.
-> > > > > +    * For PMD collapse all pages are isolated and locked so anon=
-_vma
-> > > > > +    * rmap can't run anymore. For mTHP collapse the PMD entry ha=
-s been
-> > > > > +    * removed and not all pages are isolated and locked, so we m=
-ust hold
-> > > >
-> > > > Right because some PTE entries be unaffected by the change.
-> > > >
-> > > > > +    * the lock to prevent neighboring folios from attempting to =
-access
-> > > > > +    * this PMD until its reinstalled.
-> > > >
-> > > > OK. This is slightly annoying for my CoW context work as it means t=
-here's
-> > > > another case where we need to explicitly hold an anon_vma lock for
-> > > > correctness :)
-> > > >
-> > > > Anyway I will think about that separately, is what it is. And in fa=
-ct
-> > > > motivates to want this merged earlier so I can work against it :)
-> > > >
-> > > >
-> > > > >      */
-> > > > > -   anon_vma_unlock_write(vma->anon_vma);
-> > > > > +   if (is_pmd_order(order)) {
-> > > > > +           anon_vma_unlock_write(vma->anon_vma);
-> > > > > +           anon_vma_locked =3D false;
-> > > > > +   }
-> > > > >
-> > > > >     result =3D __collapse_huge_page_copy(pte, folio, pmd, _pmd,
-> > > > > -                                      vma, address, pte_ptl,
-> > > > > -                                      HPAGE_PMD_ORDER,
-> > > > > -                                      &compound_pagelist);
-> > > > > -   pte_unmap(pte);
-> > > > > +                                      vma, start_addr, pte_ptl,
-> > > > > +                                      order, &compound_pagelist)=
-;
-> > > > >     if (unlikely(result !=3D SCAN_SUCCEED))
-> > > > >             goto out_up_write;
-> > > > >
-> > > > > @@ -1345,18 +1348,32 @@ static enum scan_result collapse_huge_pag=
-e(struct mm_struct *mm, unsigned long a
-> > > > >      * write.
-> > > > >      */
-> > > > >     __folio_mark_uptodate(folio);
-> > > > > -   pgtable =3D pmd_pgtable(_pmd);
-> > > > > -
-> > > > >     spin_lock(pmd_ptl);
-> > > > > -   BUG_ON(!pmd_none(*pmd));
-> > > > > -   pgtable_trans_huge_deposit(mm, pmd, pgtable);
-> > > > > -   map_anon_folio_pmd_nopf(folio, pmd, vma, address);
-> > > > > +   WARN_ON_ONCE(!pmd_none(*pmd));
-> > > > > +   if (is_pmd_order(order)) {
-> > > > > +           pgtable =3D pmd_pgtable(_pmd);
-> > > > > +           pgtable_trans_huge_deposit(mm, pmd, pgtable);
-> > > > > +           map_anon_folio_pmd_nopf(folio, pmd, vma, pmd_addr);
-> > > > > +   } else {
-> > > > > +           /*
-> > > > > +            * set_ptes is called in map_anon_folio_pte_nopf with=
- the
-> > > > > +            * pmd_ptl lock still held; this is safe as the PMD i=
-s expected
-> > > >
-> > > > PMD entry you mean?
-> > > >
-> > > > > +            * to be none. The pmd entry is then repopulated belo=
-w.
-> > > > > +            */
-> > > > > +           map_anon_folio_pte_nopf(folio, pte, vma, start_addr, =
-/*uffd_wp=3D*/ false);
-> > > >
-> > > > So here we populate entries in the existing PTE _table_ to point at=
- the new
-> > > > order>0 folio? With arm64 of course doing transparent contpte stuff=
-?
-> > > >
-> > > > > +           smp_wmb(); /* make PTEs visible before PMD. See pmd_i=
-nstall() */
-> > > > > +           pmd_populate(mm, pmd, pmd_pgtable(_pmd));
-> > > >
-> > > > And then we reinstall the pre-existing PMD _entry_ from none -> wha=
-t it was
-> > > > before?
-> > > >
-> > > > > +   }
-> > > > >     spin_unlock(pmd_ptl);
-> > > > >
-> > > > >     folio =3D NULL;
-> > > > >
-> > > > >     result =3D SCAN_SUCCEED;
-> > > > >  out_up_write:
-> > > > > +   if (anon_vma_locked)
-> > > > > +           anon_vma_unlock_write(vma->anon_vma);
-> > > > > +   if (pte)
-> > > > > +           pte_unmap(pte);
-> > > > >     mmap_write_unlock(mm);
-> > > > >  out_nolock:
-> > > > >     if (folio)
-> > > > > @@ -1536,7 +1553,7 @@ static enum scan_result collapse_scan_pmd(s=
-truct mm_struct *mm,
-> > > > >             /* collapse_huge_page expects the lock to be dropped =
-before calling */
-> > > > >             mmap_read_unlock(mm);
-> > > > >             result =3D collapse_huge_page(mm, start_addr, referen=
-ced,
-> > > > > -                                       unmapped, cc);
-> > > > > +                                       unmapped, cc, HPAGE_PMD_O=
-RDER);
-> > > > >             /* collapse_huge_page will return with the mmap_lock =
-released */
-> > > > >             *lock_dropped =3D true;
-> > > > >     }
-> > > > > --
-> > > > > 2.54.0
-> > > > >
-> > >
-> > > Thanks, Lorenzo
-> > >
-> >
->
+Even though they have different driver, the MAC one cannot function
+without the PHY driver, since the PHY is not compatible with the generic
+c22 driver. As such CONFIG_ADIN1140 selects CONFIG_ADIN1140_PHY.
+
+Signed-off-by: Ciprian Regus <ciprian.regus@analog.com>
+---
+Changes in v3:
+- Added adi,ad3306 as a fallback compatible in the DT schema.
+- Keep the current spi_device and net_device parameters for
+  oa_tc6_init() and add a new struct parameter for passing the quirk
+  flags, insted of changing the function to take a single config
+  parameter.
+- Add the oa_tc6_write_register_mms() and oa_tc6_read_register_mms()
+  functions instead of defining a new macro for MMS and register address
+  formatting.
+- Split the OA TC6 register address macro exports patch into two
+  different commits (export + rename).
+- Use the devres API for mii_bus and net_device management in the
+  ADIN1140 driver.
+- Fix a bug related to the destination MAC filter mask in the ADIN1140
+  driver.
+- Link to v2: https://lore.kernel.org/r/20260527-adin1140-driver-v2-0-37e5c8d4e0a0@analog.com
+
+Changes in v2:
+- Add the OA_TC6_BROKEN_PHY quirk flag to the oa_tc6 framework in order
+  to allow ethernet drivers to manage their own mii_bus struct and PHY.
+- Move the OA TC6 standard register definitions in the oa_tc6.h header
+  so other drivers can use them. Do the same for the C45 access
+  functions
+- Add the genphy_read_mmd_c45 and genphy_write_mmd_c45 functions to
+  genphy, which allow drivers that have been discovered over C22 to make
+  direct C45 operations, without using the 0xD and 0xE register. The
+  change was implemented based on the suggestion in this thread:
+  https://lore.kernel.org/all/CY8PR02MB9249CDA8F2C560FDD0F662D883382@CY8PR02MB9249.namprd02.prod.outlook.com/
+- Link to v1: https://lore.kernel.org/r/20260503-adin1140-driver-v1-0-dd043cdd88f0@analog.com
+
+---
+Ciprian Regus (13):
+      dt-bindings: net: Add ADIN1140
+      net: ethernet: oa_tc6: Handle the OA TC6 SPI protected mode
+      net: ethernet: oa_tc6: add OA_TC6_BROKEN_PHY quirk flag
+      net: ethernet: oa_tc6: Export the C45 access functions
+      net: ethernet: oa_tc6: Export standard defined registers
+      net: ethernet: oa_tc6: Add the OA_TC6_ prefix to standard registers
+      net: ethernet: oa_tc6: Add read_mms/write_mms register access functions
+      net: ethernet: oa_tc6: Use the read_mms/write_mms functions for C45
+      net: ethernet: oa_tc6: Add new register address defines
+      net: phy: add generic helpers for direct C45 MMD access
+      net: phy: microchip-t1s: use generic C45 MMD access helpers
+      net: phy: Add support for the ADIN1140 PHY
+      net: ethernet: adi: Add a driver for the ADIN1140 MACPHY
+
+ .../devicetree/bindings/net/adi,adin1140.yaml      |  71 ++
+ Documentation/networking/oa-tc6-framework.rst      |   3 +-
+ MAINTAINERS                                        |  15 +
+ drivers/net/ethernet/adi/Kconfig                   |  12 +
+ drivers/net/ethernet/adi/Makefile                  |   1 +
+ drivers/net/ethernet/adi/adin1140.c                | 815 +++++++++++++++++++++
+ drivers/net/ethernet/microchip/lan865x/lan865x.c   |   2 +-
+ drivers/net/ethernet/oa_tc6.c                      | 262 ++++---
+ drivers/net/phy/Kconfig                            |   6 +
+ drivers/net/phy/Makefile                           |   1 +
+ drivers/net/phy/adin1140-phy.c                     |  72 ++
+ drivers/net/phy/microchip_t1s.c                    |  32 +-
+ drivers/net/phy/phy_device.c                       |  25 +
+ include/linux/oa_tc6.h                             |  73 +-
+ include/linux/phy.h                                |   3 +
+ 15 files changed, 1266 insertions(+), 127 deletions(-)
+---
+base-commit: b217a5c25fe4a5fdb63f57d028a88da470601f57
+change-id: 20260429-adin1140-driver-93ae0d376318
+
+Best regards,
+-- 
+Ciprian Regus <ciprian.regus@analog.com>
+
 
 
