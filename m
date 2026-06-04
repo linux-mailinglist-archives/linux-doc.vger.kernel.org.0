@@ -1,179 +1,177 @@
-Return-Path: <linux-doc+bounces-90938-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90939-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id yCdiIlFoIWrWFwEAu9opvQ
-	(envelope-from <linux-doc+bounces-90938-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 13:58:09 +0200
+	id 5m4lNlxuIWpAGQEAu9opvQ
+	(envelope-from <linux-doc+bounces-90939-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 14:23:56 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C42B63FA40
-	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 13:58:09 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 322C363FD22
+	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 14:23:56 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=jPwF9Ksp;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90938-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-90938-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	dkim=pass header.d=linaro.org header.s=google header.b=nI3NJviy;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90939-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-90939-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=linaro.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 68013304F233
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Jun 2026 11:51:05 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 9EAE0303D1FA
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Jun 2026 12:19:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7232D425CC9;
-	Thu,  4 Jun 2026 11:50:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1014343C05B;
+	Thu,  4 Jun 2026 12:19:00 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F762428492
-	for <linux-doc@vger.kernel.org>; Thu,  4 Jun 2026 11:50:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B03933A9014
+	for <linux-doc@vger.kernel.org>; Thu,  4 Jun 2026 12:18:58 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780573852; cv=none; b=q/PNDqSQbvduD4B6bT6zDqAeTTC4wbTs81nEfNmfzsRDeIoepBOgxS0R/Rdfxa91sFqYGYjkYMvzEv5htsIS10mtR9uEoJZTV+752+tyv6mnA1kz1mWiLus1MOQLPxwOqZu+80wyzswfwkr43a8RX/vv0LfIpwTU+V57uPQr1nE=
+	t=1780575540; cv=none; b=p8DVqQYwfvxVX1PIeSnR6jRlaA1UYCfapnAUO+bWYW56RLcSHVxS0u6A7abDr2+EcKiiBu47JHu/jiThzHe64/SdNcuaKHlzGVcH3SMdBm6Yqq+P1fp2nXvq8xK+r0JzHV1OzLXjNxtpunKbAokUCQyerHvGNfKnYX7Xlrlgo1E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780573852; c=relaxed/simple;
-	bh=+AP/U3cPeU0fXOEAiHxHazm6k88v5P4k80O8mHj3UmM=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=YmuQAGYEWOTxBiG+Bhy9rq6cWMM5dtxABeqa/0ot/VGZdCQorBLoQMMEjXCC3XPTDV3yy3KtJXsqyUY2mESVoIxPcxPtZoTpZjbe4e+0sUF7LvPmv6uAgV5stATg+tM8dmRXkRA0tV5m4cx+gmoXEWZG5jlVgzZWxz7K2Lar0x0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jPwF9Ksp; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E78421F0089C
-	for <linux-doc@vger.kernel.org>; Thu,  4 Jun 2026 11:50:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1780573850;
-	bh=+AP/U3cPeU0fXOEAiHxHazm6k88v5P4k80O8mHj3UmM=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=jPwF9KspNjzGCXYyS+GMEFcIEpKsT/7uy/LNtb867JKgkmVPqD+frOr4elp9UnnXt
-	 U3SDuHGBXV+/7PlBxXhBADvh4RlKCmnKEXmqhbUug82hifbtWjVrAf8qMx6nOg6138
-	 QQLlVTEW7dPef0W5MhUajMNQXB+ZD7VpBhHGxCPXMVKJF6CBxIQwXpPwY2i5kRRhz9
-	 5/gniVTJCS4K7rB70m4LCqH7aih1aD/PadqwDHTt/oS7/CrrgSTijgarlfuK6ZWkhV
-	 qA6AaTNxt8Qg0fJGYvzPPqVw17tdzZUNjWKCNamaXNYoaUd74k7KgqfKUYoi9pSiaN
-	 g32hywqnbehLQ==
-Received: by mail-lj1-f174.google.com with SMTP id 38308e7fff4ca-3966388b388so5784851fa.1
-        for <linux-doc@vger.kernel.org>; Thu, 04 Jun 2026 04:50:50 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AFNElJ+wvwi2uEjZBgQXYnFSuELYpV+8xVnr4/ABpaFYyffxd7FJQy9070aHrBp7SAgRRHRpULTU6ezGK38=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxiAxDFyBc8XIpN2gQLGeYVkk5UoYE6CJnwhRmw+HOv0AY0SQtT
-	I2GhzgD+MJhVI08dS0Tf9o6iOmidKnNQ0ZKbyrZJtEu12PSsEBv+vsi7E5J2lbXGBd4sHjjqtIp
-	J0XpI6KvKBc+7TVRQ2f/tqPAc7akZmZ4tO36dleGXUg==
-X-Received: by 2002:a05:651c:242:b0:38b:dd55:b71 with SMTP id
- 38308e7fff4ca-396bbb2b99dmr9083771fa.20.1780573849639; Thu, 04 Jun 2026
- 04:50:49 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 4 Jun 2026 04:50:48 -0700
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 4 Jun 2026 04:50:48 -0700
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <aiFScCW_NEY3CsEf@vaman>
+	s=arc-20240116; t=1780575540; c=relaxed/simple;
+	bh=LlzDXkVW2KDnZvT5WLR716/Dj/N1QHBH52PN2KfgwlM=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=WIX3djFLgnOhj+pNKQK1737JGQFmj1jVDRKNv6XwGM2LFG9b4hCx7GdM7QdAJqVdoY/dTr/FpxACBvhsLY5fLxojjcT1n/lG3sh0cF6yl6ihC0X/k3bjN5vns55iCrhD7+NfEXQAfbpxEkYOU4H+zqI/BsxwoAQKaGLIY2GeU2M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=nI3NJviy; arc=none smtp.client-ip=209.85.128.47
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-490b4e1ade7so7316855e9.0
+        for <linux-doc@vger.kernel.org>; Thu, 04 Jun 2026 05:18:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1780575537; x=1781180337; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=d2bp5jaoGscH7ESVGw52bNDl430Md7PtGyJ0j9xVCNs=;
+        b=nI3NJviyP9o/TqlCEPY69iUG9GC9/2FZxx6YcmB9x7/L51fn6wtudBqfdWjXjKkDZP
+         N0AVj0lIsrK+sgh46TWSKCdpClv0XlQydLrkYAR8bQnled0tJesY7LjF0vocPPDDMJeV
+         wAwMD3t3vxk0A9llvJgwYA5q+0rRa2yYzKYbUr5OtqiB39E49XjJIWdQHQs3VnGv4u4O
+         ySXHjBBeL9eaF+jnr2P/3k8baXfUkLtVl705J+RazEYZk+/577sJgqjZ3YISqO5wInnj
+         92W9KVAc3FPNESBCRO51eAaoanxdGW5s0WCh7juy52NxQhTA7GXyydRDtY6SHw6MOU5Q
+         rUTQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780575537; x=1781180337;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=d2bp5jaoGscH7ESVGw52bNDl430Md7PtGyJ0j9xVCNs=;
+        b=RzVsFlJw+ADjHm+um43eGzxRrzreHuZ3bLxvjO8oEfdg90INpBvJMH8D6WiqFsmoe/
+         VMLqDVqC5oWfl1DLI5LFtEsGaS/8SOqMVy34qMerbbu23R3yKDlDG//qJ4ah0aF+bchS
+         bq1O/fpL1GQjnVbtraFbrT3+sv+GYfeegw5X7iz+Pu4qDoTikp1lflbn8RF+kV3RgCeZ
+         ICSw0BlYJFFyDs2DkFPaB2LE+NAKoPi20vkfNlepNv2OL6ccWKumXAPNYBfeowRRlj7w
+         0EuvinlV23pQOCvF30sCDx3cTXv3JbhkTzoTRnvP5yrFoZTjtYS8C4ykCFlh3V46xtRQ
+         mv3A==
+X-Forwarded-Encrypted: i=1; AFNElJ/OLj/XD6veYwNehWLkQAMKM9t4MUukJ34wqtx6E/EYxtFns+804T4Ha7g5pXC/L9mkg+W8ZiHIssE=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yyx47yaS1Rgx3kaOiiNmbVKNNzRKxARAispT5bZu+13bJrgtuN1
+	Q/0oUZoP6eDMrCw1ZdepkFyleIcoAlgfu88uVfcqABzrzJEOqbnSWdmoe4L38/BpldU=
+X-Gm-Gg: Acq92OGKHdZKKJmrUMuv3hQkQaupCuXBbGNdnyub/YUTBwgqZIgZ5gvrdPbb3VCZ1uE
+	n9A0gA9ZHCXJZaV3Ffl0UUaihRXJbBq81YPbGH0KsX33wS6YDKRxW0Zy03PgIsV0yQtAio28pfD
+	PF6lgtaDHtd73NutaflcGkEx9186X0bgoD99OPlXk/DuDw0FYIcTU1dvGRoJMZj9NiDaqOmjh/b
+	bT4addHzsuatVdKjYm/kSf6iZXkKTLfC3+dtesq4v2DXrQj8TT0a/6mlusFsuPnBZGPqyYYwFDs
+	Dg+ODr7F1kbvtmGuKRWlImXmpX0dRRd8SPnpF6iexL4JtUtxj0xPlYKX2GMV7+i5w9gbvyOS/jV
+	5jFQXwpIP1dR+/FVw1HmIhKZJ8shl6MIN5uHCheJY2Mfk3Fj14uGfcLC2mu5vNYWM4srayFYkcR
+	a7zqYUVJ9GuPZKjJnS0Ob+3DP+K94Sg5zBueFWzeY=
+X-Received: by 2002:a05:600c:1d86:b0:48a:6fd4:d3d3 with SMTP id 5b1f17b1804b1-490b5fe9688mr128262045e9.20.1780575537237;
+        Thu, 04 Jun 2026 05:18:57 -0700 (PDT)
+Received: from [192.168.1.3] ([185.48.77.170])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-490b79d64e8sm165761745e9.0.2026.06.04.05.18.55
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 04 Jun 2026 05:18:56 -0700 (PDT)
+Message-ID: <011bf252-855e-4941-a6ef-8cc53f0bc48c@linaro.org>
+Date: Thu, 4 Jun 2026 13:18:55 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260526-qcom-qce-cmd-descr-v19-0-08472fdcbf4a@oss.qualcomm.com>
- <ah8G_ajPS1KhgPP_@linaro.org> <aiFScCW_NEY3CsEf@vaman>
-Date: Thu, 4 Jun 2026 04:50:48 -0700
-X-Gmail-Original-Message-ID: <CAMRc=McYB+S1LmqRJbWKirMGqwJHZCTWj6KnB6Z8qUsYQWBqkw@mail.gmail.com>
-X-Gm-Features: AVHnY4ItlnHzBWkZf26uoYFprN5coNBr4vZZe2XdpgFnq6HAZyN9LACZLu6Trcg
-Message-ID: <CAMRc=McYB+S1LmqRJbWKirMGqwJHZCTWj6KnB6Z8qUsYQWBqkw@mail.gmail.com>
-Subject: Re: [PATCH v19 00/14] crypto/dmaengine: qce: introduce BAM locking
- and use DMA for register I/O
-To: Vinod Koul <vkoul@kernel.org>
-Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, Jonathan Corbet <corbet@lwn.net>, 
-	Thara Gopinath <thara.gopinath@gmail.com>, Herbert Xu <herbert@gondor.apana.org.au>, 
-	"David S. Miller" <davem@davemloft.net>, Udit Tiwari <quic_utiwari@quicinc.com>, 
-	Md Sadre Alam <mdalam@qti.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
-	Manivannan Sadhasivam <mani@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Peter Ujfalusi <peter.ujfalusi@gmail.com>, Michal Simek <michal.simek@amd.com>, 
-	Frank Li <Frank.Li@kernel.org>, Andy Gross <agross@codeaurora.org>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, dmaengine@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, linux-crypto@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, brgl@kernel.org, 
-	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>, 
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
-	Stephan Gerhold <stephan.gerhold@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 15/18] perf test cs-etm: Make disassembly test use
+ kcore
+To: Leo Yan <leo.yan@arm.com>
+Cc: Suzuki K Poulose <suzuki.poulose@arm.com>, Mike Leach
+ <mike.leach@arm.com>, Arnaldo Carvalho de Melo <acme@kernel.org>,
+ Namhyung Kim <namhyung@kernel.org>, Jiri Olsa <jolsa@kernel.org>,
+ Ian Rogers <irogers@google.com>, Amir Ayupov <aaupov@meta.com>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+ Paschalis Mpeis <Paschalis.Mpeis@arm.com>, coresight@lists.linaro.org,
+ linux-perf-users@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Arnaldo Carvalho de Melo <acme@redhat.com>, linux-doc@vger.kernel.org
+References: <20260602-james-cs-context-tracking-fix-v2-0-85b5ce6f55c6@linaro.org>
+ <20260602-james-cs-context-tracking-fix-v2-15-85b5ce6f55c6@linaro.org>
+ <20260603173203.GF101133@e132581.arm.com>
+Content-Language: en-US
+From: James Clark <james.clark@linaro.org>
+In-Reply-To: <20260603173203.GF101133@e132581.arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[27];
+	TAGGED_FROM(0.00)[bounces-90939-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[16];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-90938-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:vkoul@kernel.org,m:bartosz.golaszewski@oss.qualcomm.com,m:corbet@lwn.net,m:thara.gopinath@gmail.com,m:herbert@gondor.apana.org.au,m:davem@davemloft.net,m:quic_utiwari@quicinc.com,m:mdalam@qti.qualcomm.com,m:lumag@kernel.org,m:mani@kernel.org,m:andersson@kernel.org,m:peter.ujfalusi@gmail.com,m:michal.simek@amd.com,m:Frank.Li@kernel.org,m:agross@codeaurora.org,m:neil.armstrong@linaro.org,m:dmaengine@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-arm-msm@vger.kernel.org,m:linux-crypto@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:brgl@kernel.org,m:bartosz.golaszewski@linaro.org,m:dmitry.baryshkov@oss.qualcomm.com,m:konrad.dybcio@oss.qualcomm.com,m:stephan.gerhold@linaro.org,m:tharagopinath@gmail.com,m:peterujfalusi@gmail.com,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:leo.yan@arm.com,m:suzuki.poulose@arm.com,m:mike.leach@arm.com,m:acme@kernel.org,m:namhyung@kernel.org,m:jolsa@kernel.org,m:irogers@google.com,m:aaupov@meta.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:Paschalis.Mpeis@arm.com,m:coresight@lists.linaro.org,m:linux-perf-users@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:acme@redhat.com,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[brgl@kernel.org,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[oss.qualcomm.com,lwn.net,gmail.com,gondor.apana.org.au,davemloft.net,quicinc.com,qti.qualcomm.com,kernel.org,amd.com,codeaurora.org,linaro.org,vger.kernel.org,lists.infradead.org];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,mail.gmail.com:mid];
-	MISSING_XM_UA(0.00)[];
+	FORGED_SENDER(0.00)[james.clark@linaro.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[linaro.org:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[brgl@kernel.org,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[james.clark@linaro.org,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCVD_COUNT_SEVEN(0.00)[7]
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:mid,linaro.org:from_mime,linaro.org:dkim,vger.kernel.org:from_smtp,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 0C42B63FA40
+X-Rspamd-Queue-Id: 322C363FD22
 
-On Thu, 4 Jun 2026 12:24:48 +0200, Vinod Koul <vkoul@kernel.org> said:
-> On 02-06-26, 18:38, Stephan Gerhold wrote:
->> On Tue, May 26, 2026 at 03:10:48PM +0200, Bartosz Golaszewski wrote:
->> > I feel like I fell into the trap of trying to address pre-existing
->> > issues reported by sashiko and in the process provoking more reports so
->> > let this be the last iteration where I do this. Vinod can we get this
->> > queued for v7.2 now and iron out any previously existing problems in
->> > tree?
->>
->> Thanks a lot for working on fixing all these issues!
->>
->> I agree there is no point addressing all the "pre-existing issues"
->> pointed out by Sashiko, but have you looked through the other comments
->> for new issues pointed out for your patches?
->
-> I hope Bart and Qualcomm can fix these driver issues as well
->>
->> Out of curiosity, I was looking a bit at the comments for [PATCH v19
->> 06/14] dmaengine: qcom: bam_dma: add support for BAM locking [1]. There
->> are 8 open comments there (Critical: 1, High: 6 and Medium: 1). From a
->> quick look I would say most of these could be valid. The critical one
->> about the usage of dma_cookie_assign() sounds a bit concerning to me, if
->> it is true we would be basically breaking parts of the dmaengine API for
->> consumers by inserting the lock descriptor in front of everything else.
->
-> Yes this seems to be a valid one. Attaching another descriptor for lock
-> does not sound right to me, as in this case causes descriptor to be
-> marked 'done' prematurely.
->
 
-Yes, I have a fix for this queued.
 
-> Honestly, I am not quite happy with the way lock is being handled here.
-> I would hope we can have some better suggestions. Adding a descriptor
-> for lock does not look right to me. We are adding odd hardware/firmware
-> behaviour on engine apis.
->
-> I had earlier suggested to lock always or lock only for hw/sw versions
-> supported inside the driver, that might be simplist solution without the
-> complexity added here
->
+On 03/06/2026 6:32 pm, Leo Yan wrote:
+> On Tue, Jun 02, 2026 at 03:26:57PM +0100, James Clark wrote:
+>> Hits in modules return empty disassembly with vmlinux as an input to
+>> objdump. Make the disassembly test more reliable by always using kcore.
+>> And update the comments to say that this is supported by the script.
+> 
+> Even without kcore, .ko files should have been saved into buildid
+> folder. Before switch to kcore, can we firstly fix the issue that why
+> .ko does not work?
+> 
+> Thanks,
+> Leo
 
-I'm not sure what you mean here. Several iterations ago it was deferred to
-consumer drivers. Mani objected and Bjorn and you agreed. I reworked it to move
-the locking logic into the DMA driver as requested.
+I think this description of the problem was wrong, the reason for 
+failures was the alternatives patching mechanism. And the only way to 
+fix that is by using kcore. I'm not sure what you were thinking of as a fix?
 
-Bart
+Sashiko commented on V3 that hits in modules would still open the .ko 
+file and skip kcore anyway. I tried to investigate but I wasn't able to 
+generate any trace or samples with hits in modules. It might be a 
+regression but it might have always been like that. I do remember 
+switching to static when I was tracing Coresight modules before, but 
+that was to make using address filtering easier, and I inadvertently 
+avoided this issue.
+
+Seems like fixing this is outside of the scope of this test though. I 
+didn't see a single failure on N1SDP and the only failures on Orion O6 
+are because of the wrapping/snapshot bug, and we already knew that you 
+have to use kcore to get accurate decode. So I'm not sure of a reason to 
+not do it?
+
+
 
