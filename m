@@ -1,329 +1,305 @@
-Return-Path: <linux-doc+bounces-90910-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90911-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id ZvvZHf9LIWoKCwEAu9opvQ
-	(envelope-from <linux-doc+bounces-90910-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 11:57:19 +0200
+	id wgXfBalQIWqhDAEAu9opvQ
+	(envelope-from <linux-doc+bounces-90911-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 12:17:13 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DAE5663EBC0
-	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 11:57:18 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4047463EEDB
+	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 12:17:12 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=Eg1ZJ53y;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90910-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90910-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=reject) header.from=nvidia.com;
-	arc=reject ("cv is fail on i=2")
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=ncFutbZ8;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90911-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-90911-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 6556B3068FCF
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Jun 2026 09:50:03 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 621033096B4A
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Jun 2026 10:00:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 257383C3445;
-	Thu,  4 Jun 2026 09:50:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5928C3F39EF;
+	Thu,  4 Jun 2026 09:59:43 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from BL2PR02CU003.outbound.protection.outlook.com (mail-eastusazon11011061.outbound.protection.outlook.com [52.101.52.61])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 11E893976AD;
-	Thu,  4 Jun 2026 09:49:57 +0000 (UTC)
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780566600; cv=fail; b=qncMO0hS2OAgq4IFm0X+iLBlWx+H///E4wCnsOJwSptd/XpRhTJTfcXzDgduYV0erUMZ7kmJ/dWFNl2ziq13luYIjm3U/zAaG46in6QPW7ilr3tRasLfqWT2NHunAsmDrfE1Jy0atj3cEgZJANcOv7LdnaxN1HIto0RKcI2+58Y=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780566600; c=relaxed/simple;
-	bh=dTsYFryAEdDrTnQXxLP9BQxJ0syRkpz+aAI0mthz8rE=;
-	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
-	 Content-Type:MIME-Version; b=XuISbLQ3g2iu0UY6MiT7/FDU3ExOJiGpwYfO7qX8wBAO4uomj7836OWTVyeeIZQ9JOerrpuTlBP7l4kZXxw9A2EDmq9sVxCebmjRVsgww9bVany6y7cSm4TJUCCDqzHsrolQ5xyqBM6a3aNrnXNhtrXRDLoZiGNFWHWF9/f1BxI=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=Eg1ZJ53y; arc=fail smtp.client-ip=52.101.52.61
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ys9niReipIyN0EeRhOe8++Ju/7BnB2LHDVAKutkNjX4eYUDYHnO78Cqss+kVUPDgbdn/Sltt1wmS0kH0mzAs7RV4GZlj46/0PWhTiNmfT2f9fsUK6gBS5tKyYtKBTIDmQEB1jwiugIjLSWXP8GfhXM4MgV+U57q6aC+UYrmjO6aXmsanQJzhJzOxydYPrGR7DNOIg3Y+hluiW4fJTJriyCrjGCt/iGFSy5W/bKqJrNi0Z5G2RcAT9IKSkbjeXxlyD0T6ZFpxILQ0fYxnhM+E8VIBWAWcsoy7iSNKAFcRul26BwEJqkJrfq7xyzysTHyHgUWQMsKPJJPo5ks4zeznhg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=lBTh+PzZYLqNYhWHWlcoIYbqM/WUl+Q/NWAeqPw8eLA=;
- b=DAHbVlA7PhsGJhZoCcxNZ1yOqAe4jFJbEwT9T0t09vFy4UtYdgY0pXr6QXLXGeeRzWlyvMTVu8P5flfP3Bh69BeyCOihh6BYD6dafBQgRtQt2l8dZ2HwCplO3Pg6hquteiK3DVEcX5xwKCcawnLu1EwdNYJvz8dAMbAXUC/0k165ewGve8B/zER4xWvViYZFastLyk4FwGaPtsbuNjz0sfCnuo5fiiAoqbfFbPEMTaafge+4kJrTj/TibCI1NWrX0VrRJOXVTDButnHQF2browUMyXjc2H+6/qs5AMgmlKCQwH92QfgOa1neClhEJwvdLChyW4QMAqgWwDZ8zWhJgg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=lBTh+PzZYLqNYhWHWlcoIYbqM/WUl+Q/NWAeqPw8eLA=;
- b=Eg1ZJ53yDQLuhEADCsicR3U8wKza3DKVkRRYrRNuWZNMG6jiKVXXvl8Y+tBlgtbElx4NuVUOFuiUs45/i5D3xW6KrOEgQJ7Sstrg2ZksgQRkbq1QthBdDtLX7v1fuqURozXyNtYtpG2Ch3cY/lK6mILSUstmcJRznDU/xXB8cArJBDK44Mcnxa1UaXmK1Qx8ZtTM8P5ip8Dm+ds1+Wiw0ZLPPDUWK3HrHYLJW9STcBZIHXkuFTOLkkYlPAVuxXvAEc8bBnGsP5CtJQKqZIMcrVwmv8MsuwRqkGfkqIFrQxrcRAKORSGsY3ME54ZGJBmEajBx5VSDDF4hUe5XKLS7sA==
-Received: from CH3PR12MB7548.namprd12.prod.outlook.com (2603:10b6:610:144::12)
- by CH8PR12MB9790.namprd12.prod.outlook.com (2603:10b6:610:274::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.7; Thu, 4 Jun 2026
- 09:49:52 +0000
-Received: from CH3PR12MB7548.namprd12.prod.outlook.com
- ([fe80::b710:d6a1:ab16:76de]) by CH3PR12MB7548.namprd12.prod.outlook.com
- ([fe80::b710:d6a1:ab16:76de%6]) with mapi id 15.21.0092.006; Thu, 4 Jun 2026
- 09:49:51 +0000
-Message-ID: <91d12ffd-6bd9-4951-8351-655262d44874@nvidia.com>
-Date: Thu, 4 Jun 2026 12:49:43 +0300
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net-next V2 7/7] devlink: Add eswitch mode boot defaults
-To: Randy Dunlap <rdunlap@infradead.org>, Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>
-Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- Jiri Pirko <jiri@resnulli.us>, Simon Horman <horms@kernel.org>,
- Sunil Goutham <sgoutham@marvell.com>, Linu Cherian <lcherian@marvell.com>,
- Geetha sowjanya <gakula@marvell.com>, hariprasad <hkelam@marvell.com>,
- Subbaraya Sundeep <sbhatta@marvell.com>,
- Bharat Bhushan <bbhushan2@marvell.com>, Saeed Mahameed <saeedm@nvidia.com>,
- Leon Romanovsky <leon@kernel.org>, Tariq Toukan <tariqt@nvidia.com>,
- "Borislav Petkov (AMD)" <bp@alien8.de>,
- Andrew Morton <akpm@linux-foundation.org>,
- "Peter Zijlstra (Intel)" <peterz@infradead.org>,
- Thomas Gleixner <tglx@kernel.org>, Petr Mladek <pmladek@suse.com>,
- Tejun Heo <tj@kernel.org>, Vlastimil Babka <vbabka@kernel.org>,
- Feng Tang <feng.tang@linux.alibaba.com>,
- Dave Hansen <dave.hansen@linux.intel.com>,
- Christian Brauner <brauner@kernel.org>,
- Dapeng Mi <dapeng1.mi@linux.intel.com>, Kees Cook <kees@kernel.org>,
- Marco Elver <elver@google.com>, Eric Biggers <ebiggers@kernel.org>,
- Li RongQing <lirongqing@baidu.com>, "Paul E. McKenney" <paulmck@kernel.org>,
- Ethan Nelson-Moore <enelsonmoore@gmail.com>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
- linux-rdma@vger.kernel.org
-References: <20260603193259.3412464-1-mbloch@nvidia.com>
- <20260603193259.3412464-8-mbloch@nvidia.com>
- <d276e842-dd8f-40b7-806b-71572503005e@infradead.org>
- <e4aada53-fb80-41a8-9a8e-d19414f6466b@nvidia.com>
- <909ada9a-a398-4e3f-8ed0-596a1e4bdbfd@infradead.org>
-Content-Language: en-US
-From: Mark Bloch <mbloch@nvidia.com>
-In-Reply-To: <909ada9a-a398-4e3f-8ed0-596a1e4bdbfd@infradead.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR2P281CA0141.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:9e::20) To CH3PR12MB7548.namprd12.prod.outlook.com
- (2603:10b6:610:144::12)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 328E33E3C7C;
+	Thu,  4 Jun 2026 09:59:43 +0000 (UTC)
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1780567183; cv=none; b=HiyAn+jgxBnkEsU+H6jwrjmkQu8jwqS/kavW5on99qMphI4QJWBbHS6xFrIIDGyM27Gg2Y/mx7DdUiUDWRrYIFsIFdrkjkWwM29F0COd5E8A37slG9XzQcccfh7fKZf8SpjbJTLgih3Ac2WzWFb4spp6CQ1hkbBeaWbeLDABvSM=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1780567183; c=relaxed/simple;
+	bh=cl6QSceW1HwrYNer0B8awGIlipMSvYacNPQfVA/CHzc=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=PbashzLM3IVvM8LIJl7SfeBaokgTrUHS3GvwhrVabNsAH+ZsJ9If05hnupmwYtFQBCg1IKBtxDDyWjRgM0sVdSaA7fDRVX9uRoioQthlCgx2rrEFPjbNQQ+uNZ9OwtnLZyaXIJqSYvzlgwgG6ocNQJdgl7n2/8chjAwjPDwJtSE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ncFutbZ8; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id C247BC2BCB8;
+	Thu,  4 Jun 2026 09:59:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1780567182;
+	bh=cl6QSceW1HwrYNer0B8awGIlipMSvYacNPQfVA/CHzc=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=ncFutbZ8On/6TaNmfUUxvcXC0pBMDjYVNyqpqy60M3smCelp4mw9mrFL2X1WKsF1g
+	 ZibmnSa/dsfwZ3crSGgn7OqoH8CNk/uWVY+9VxwmzCOuZDUnatJ6S7Jdh2dgSZ4JGI
+	 vKuJk6WAYdIozLk6uFh+hlM1/QeSv3NJiq9hBN5AvNEiFb9+R4B2JhDskZ4W3gylRP
+	 Mrs82n81iDO7b+Tfbh7Bp8UUcPyHsdN7lWq5cGDhtwLQ+Rmrz/km0v7V/eHvo1A1x4
+	 TudR6+nQFNEgNuQvwqlT1BQgckKPj9tVFRNzPZzAp/CwMhAU5ozm0nLKcNJmMgAxMC
+	 gPUigiSgujnWw==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A8765CD6E68;
+	Thu,  4 Jun 2026 09:59:42 +0000 (UTC)
+From: Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>
+Subject: [PATCH v16 00/14] ADF41513/ADF41510 PLL frequency synthesizers
+Date: Thu, 04 Jun 2026 10:58:54 +0100
+Message-Id: <20260604-adf41513-iio-driver-v16-0-1a7d09143bc2@analog.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PR12MB7548:EE_|CH8PR12MB9790:EE_
-X-MS-Office365-Filtering-Correlation-Id: d0c602f4-ff9e-4bb6-e30c-08dec21e9f9f
-X-LD-Processed: 43083d15-7273-40c1-b7db-39efd9ccc17a,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|376014|7416014|1800799024|6133799003|22082099003|18002099003|4143699003|11063799006|56012099006|5023799004|3023799007;
-X-Microsoft-Antispam-Message-Info:
-	5x4HKfC2XS8re4cyW/CGRIyPTE1RghNnhDyENoQF6kbZc7h5cysYxzeVdWNbvSTlklidY0yObB5I1Elo8uDJZGFtu5zp7P6+jdIYs8DRGCutylitMxCiDHFXspGIBZYCELkJAnBg2b1pLloo56DHipLiQEDNu567ALZNw8sfECjuE7ifKaGI8mCm1Hl8P9t0A81zHgrHblFsSpvOXUq4FPh3BLbc76liPCtoo7cd8N5LoPLJMpNib4tqX76GcUzyYJJKB6qQDpLk8niHTDqMmLtnyLoqq89CbpaxXeTL431nC37L/eVSxulgnB3hKcLP7nz3apJUVHo4APKVXV7Lwh1jL01bSsRBdT8sxNP2PQQWUeUfdqFxQSvax3LNlUy7dakiN5/xo6gLMztTVPKsb1mIlfwnVHKTAHecPX/0Qs0GDhyZr4QxcKysqa3R2vDVRG//S6rM42LW82fNwk4AVIqM5kYDs57f0/ngS9hLP7Vb1kqMdgupr9i+ZuW0CwgAHXfX3SYRtYba/TPlUDMqIfn77ng/i8uXh/bj/5QwPVfxY2CVqca0L7ynYCSbzbR+YFfadkCM5d1sk3BBLxBnbqTQIhzWZGRzqVHJmwpb/wt/bogtWi8h9SDUyPMtdph5Otud78+E/PT5QyElHew3KCxcGsJDIjf055viESG/mlCTBg81Dg8SyJLx3tvYIEe5
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR12MB7548.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(7416014)(1800799024)(6133799003)(22082099003)(18002099003)(4143699003)(11063799006)(56012099006)(5023799004)(3023799007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?NHFYLzNoS1ZTbzBubFFrdXpRdDJQdDV6ejFKKzZ4MFF0ODlnL2N0UmpZV1Js?=
- =?utf-8?B?MFlaRmlLeXcwTk9obEJnVVdqc0hrVVJhZ2doMnllb0FVeVU4NUtsemIvR2Rs?=
- =?utf-8?B?d0trL3QyajNub0pHQ1BGSFBzVE5iZDNQRE9xWUVFYjNVQlV4b1BJd0J4U2x3?=
- =?utf-8?B?RDJ1eXp2eVAzZ2NCdTU1bWFyckRWQU03MWIvSVI3TGFQRXVHTzllcEVNaHRP?=
- =?utf-8?B?dkJnMXI0T3Q1blNZMnZlaFhsZG5zK3VXZWs5bzRYRmZKb1d2cnZkWm9VVmhn?=
- =?utf-8?B?cjNqbDlqMlMweEtzaitPTFEwZjY5NG9RY2crd0pRbnY0c0RiZUVKR3NjR255?=
- =?utf-8?B?YzA5TkU0Y0RoT0piQS93dldTYU5STm9oWUtuTTlnb3pTbEg5YnNKbHpLdm00?=
- =?utf-8?B?Um9NOE1zYllpS3h6VmdEVno0eE5rK0Q4Q3BmUVJBWUk3MS9VcHEzTUw3cVgz?=
- =?utf-8?B?RHFMcENoa1k4UjdTdktCb0syb3JIOFNjeGNuUFh0VVZURUErL0JiSzdYTG0z?=
- =?utf-8?B?MnkrUHZRUzlUVDJ4NFVkL2J5M3YwZTFKTFlkdDA1YjJKK29OZFVabHBxczlp?=
- =?utf-8?B?L1MxUExIN3NGRGNqeGZhWE5vVFNtUmNncUlpWnhZWVJqemo2NUdWNjFuTEVR?=
- =?utf-8?B?T2NzdVVpZGNsb3NScHNEQ0ZMUDVydU9nOGRZQlFuRjRZNEx3QlUzNnNGeEZW?=
- =?utf-8?B?aThSSUJ3VFF6VldLa1FCRUtLK0JWZnpFbnNKK0QzMU45YkhpWlltNUp0b1g0?=
- =?utf-8?B?OGVpd3hlQzdzZXo5cWNrOUNuVWxSVXNqbkVvNzlHM0dwS3VhVFBZd3h2ZENP?=
- =?utf-8?B?clRSYzBIanpBeThWZ2d0SExpSHlmSkFxRC9Mb0tlU2hHSE9JZ3FOWDB3L01m?=
- =?utf-8?B?NUJ1WUYvaG5lRG1OSCtvY0lyNVhKell0TC8yU3MveXBGU2dSMnh2VjF2UXJn?=
- =?utf-8?B?aEdIeVdVUGhYSWdxSlNweHNuUFJuRXE3djR2ZHJ4bDFuMVVHY05wRHB3SUdW?=
- =?utf-8?B?UzJZTkZTNlF0c1p0TDlXYkxsRUd5QUc4bFVsbzlINVRDUmNWaEFOTFVMR1Zi?=
- =?utf-8?B?WXlPL2xtd1VDMjZYcDhuTExGTERtdzgxOFdJQWFQZGlnV1A5VVRkOGtiNnNh?=
- =?utf-8?B?MUVxSllsZFJEWG9CaWR2OXdaZmplb1JVdmJrNUFqb2I3NHBJemRKcWk3R1BX?=
- =?utf-8?B?TnJ0WjhsMmd3ZkdJMUxZRk5vckQvZ1RhY3Vac1hyZ1NDdkNyZ1pjZjFqdzAr?=
- =?utf-8?B?NnRCUGo3RGJiVThQQ2w1STF5MFBEMlgrSVZHeHlnb3F4NXI1WS9UMDI3aEZD?=
- =?utf-8?B?V04xVnZHb3NkNTU4UG5jOEc5WGwwNHMyUFh2c0FkeThvQnk3bkJTWlIyVk5l?=
- =?utf-8?B?bFZCQlhVNDJJYTZ4VTl0eCtOSFdOVi9HZlpSR256MGsyd3dlRXZJS1pIYXFl?=
- =?utf-8?B?MjZVZ1VFQVdaeGZWYUZSbVYvU0ErZlpBUzQ1ZE9IZzBuUEowWmZ0OU1NVGow?=
- =?utf-8?B?b0NldXhUcmc2S1JUaFJTeVlRbUFmbUVxOFFzalZ6NDJadmFYQjVVY3VjOTdn?=
- =?utf-8?B?M2g2c3FXbGtyZDh5OFRIL3hUdGhYT2NDcUMwVmFTTi9ZQldrcUdScmwrOEtl?=
- =?utf-8?B?a1ZkOWtQekpmT0JxRmZDYjhUY3JoaTl3ZmFwRnZZT0llRmQ3Nk4vSjEvQ00z?=
- =?utf-8?B?VXZDVkpCOTFNaStHenhwcGMwRDc1THR0ckdHSVhKUGhMTytHc091KzQ1blFK?=
- =?utf-8?B?TnFVdjZ4YVdOc3o3WjdaYUFvdWlTNkdvckdYdjZjNHVQQkZIYy8zQVFuV2Vq?=
- =?utf-8?B?eHpkaHE0WGI1dVdYV1E1RFNNNERXVmMrQno4UVZGOVlyUDhnM2pvN3h1aFdR?=
- =?utf-8?B?aURZMDhzY1BtSmZmQmRwMmRFVGlDREc1eGswTDBpQUMrbGJ3bi8vSEJ4WWM4?=
- =?utf-8?B?OXRUZjN3T3VLdGQxTEFSb3VhUlRkbllnbEpoS2JpbFZVbUpJbk5Kd2ZzdHdz?=
- =?utf-8?B?cGNUMi82TTlRM05FY2VjOFcyUEt5WEVEZUtpcjhhOTZRVWJyMWZBTVNGZ2Y3?=
- =?utf-8?B?N3lCdHJHRGtKa3hxZlRZYUJVbC9aRzFDU2xaTGtmVm12Wk9xanM3VElZMmF0?=
- =?utf-8?B?S3piOURPbXdieEtreCtYa2I5a3l5WUV3VVMwR3RvQ3prMGo4QTBoVG5QWFZ3?=
- =?utf-8?B?Rjd3a21vM3ZPNmVrZmRCL0JTTEpSWTFZMFpzbWNiR0V1Y1RUQ0NMRVhZWFpi?=
- =?utf-8?B?S0NydlRCZEIraWorQlJXL0hVcU80N3hRalZLM3NOd3I1NWRCdHBTZ2Yza0Ji?=
- =?utf-8?B?MkVCOGZNNmpsNnNUQnRvYUFvWkhtdkVhOVRIeGphVVhOdjJOMFp0Zz09?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d0c602f4-ff9e-4bb6-e30c-08dec21e9f9f
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR12MB7548.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jun 2026 09:49:51.8661
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ObTZG40zH1er0KFAl6f1hqm70nYOiNn78xMT4v2tOTzsLMJnsEhFQRbS6SG6ihkwpafXDl08rWV2FyhItkVAcg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH8PR12MB9790
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAF5MIWoC/33Sy47UMBAF0F8ZZU1QPfxkxX8gFrbLnokEHZRGE
+ WjU/47dEkqQY5Z24pPU9X2f7nlb8n369PI+bXlf7st6qws0H16m9BZur3lepG5MBKQREeYgRaF
+ GnpdlnWVb9rzNIaTggi0OXJ7qyR9bLsuvJ/vla12/Lfef6/b7+ZUd2+7/vR1nmEmKixmKJJM/h
+ 1v4tr5+TOv3qYE7HQihv0aoIjGTD45FW88dwn8RAwjuGuH2JyzIFkMuynWIOiForhFVEYnRirG
+ OCG2H6BNCfI3oZyYpO6RAIqFDzAnhQbCmIqkoQ+zrezF1iD0QGo1jW7CQhZ0NUWvfIe5AGAbju
+ Io4EVJoU1JGd4g/ITQYx1cEmQoIWMNWdQjCodTjg7ZBu59iEJQRrXR/P4gHo2EQCz5bG232PpX
+ sCvUMnZhh91tvWYVCWchaX3qGz4wdMK25MZqM1WIDF8ypuprUgGndBeNIiU+oy0XEp/JqxgHT2
+ isBfH2KCUT+YR6Pxx/yYCABigQAAA==
+X-Change-ID: 20251110-adf41513-iio-driver-aaca8a7f808e
+To: linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-doc@vger.kernel.org, linux@analog.com
+Cc: Jonathan Cameron <jic23@kernel.org>, 
+ David Lechner <dlechner@baylibre.com>, Andy Shevchenko <andy@kernel.org>, 
+ Lars-Peter Clausen <lars@metafoo.de>, 
+ Michael Hennerich <Michael.Hennerich@analog.com>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+ Andrew Morton <akpm@linux-foundation.org>, Petr Mladek <pmladek@suse.com>, 
+ Steven Rostedt <rostedt@goodmis.org>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
+ Rasmus Villemoes <linux@rasmusvillemoes.dk>, 
+ Sergey Senozhatsky <senozhatsky@chromium.org>, 
+ Shuah Khan <skhan@linuxfoundation.org>, 
+ Rodrigo Alencar <rodrigo.alencar@analog.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+ Randy Dunlap <rdunlap@infradead.org>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780567181; l=7836;
+ i=rodrigo.alencar@analog.com; s=default; h=from:subject:message-id;
+ bh=cl6QSceW1HwrYNer0B8awGIlipMSvYacNPQfVA/CHzc=;
+ b=6jGlB7IF8IhffCH5jyTH3C6To21RKRnkql5LV12eKkgz/xXSqAUCz2kJd07C77hislrBsVhRM
+ mmMVYuZP1jHCu3uAc9fw1OxjPwBqHgN5/V99mWppFpZTlXRYiPf0cmK
+X-Developer-Key: i=rodrigo.alencar@analog.com; a=ed25519;
+ pk=ULeHbgU/OYh/PG/4anHDfLgldFItQHAhOktYRVLMFRo=
+X-Endpoint-Received: by B4 Relay for rodrigo.alencar@analog.com/default
+ with auth_id=561
+X-Original-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
+Reply-To: rodrigo.alencar@analog.com
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [1.34 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_REJECT(1.00)[cv is fail on i=2];
-	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
-	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-90910-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-90911-lists,linux-doc=lfdr.de,rodrigo.alencar.analog.com];
 	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[mbloch@nvidia.com,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[40];
-	FORGED_RECIPIENTS(0.00)[m:rdunlap@infradead.org,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:andrew+netdev@lunn.ch,m:davem@davemloft.net,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:jiri@resnulli.us,m:horms@kernel.org,m:sgoutham@marvell.com,m:lcherian@marvell.com,m:gakula@marvell.com,m:hkelam@marvell.com,m:sbhatta@marvell.com,m:bbhushan2@marvell.com,m:saeedm@nvidia.com,m:leon@kernel.org,m:tariqt@nvidia.com,m:bp@alien8.de,m:akpm@linux-foundation.org,m:peterz@infradead.org,m:tglx@kernel.org,m:pmladek@suse.com,m:tj@kernel.org,m:vbabka@kernel.org,m:feng.tang@linux.alibaba.com,m:dave.hansen@linux.intel.com,m:brauner@kernel.org,m:dapeng1.mi@linux.intel.com,m:kees@kernel.org,m:elver@google.com,m:ebiggers@kernel.org,m:lirongqing@baidu.com,m:paulmck@kernel.org,m:enelsonmoore@gmail.com,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:netdev@vger.kernel.org,m:linux-rdma@vger.kernel.org,m:andrew@lunn.ch,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	FORGED_RECIPIENTS(0.00)[m:linux-kernel@vger.kernel.org,m:linux-iio@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux@analog.com,m:jic23@kernel.org,m:dlechner@baylibre.com,m:andy@kernel.org,m:lars@metafoo.de,m:Michael.Hennerich@analog.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:akpm@linux-foundation.org,m:pmladek@suse.com,m:rostedt@goodmis.org,m:andriy.shevchenko@linux.intel.com,m:linux@rasmusvillemoes.dk,m:senozhatsky@chromium.org,m:skhan@linuxfoundation.org,m:rodrigo.alencar@analog.com,m:krzysztof.kozlowski@oss.qualcomm.com,m:rdunlap@infradead.org,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[lwn.net,linuxfoundation.org,resnulli.us,kernel.org,marvell.com,nvidia.com,alien8.de,linux-foundation.org,infradead.org,suse.com,linux.alibaba.com,linux.intel.com,google.com,baidu.com,gmail.com,vger.kernel.org];
-	DKIM_TRACE(0.00)[Nvidia.com:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mbloch@nvidia.com,linux-doc@vger.kernel.org];
-	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	ALIAS_RESOLVED(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,Nvidia.com:dkim,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,nvidia.com:from_mime,nvidia.com:mid]
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	HAS_REPLYTO(0.00)[rodrigo.alencar@analog.com]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: DAE5663EBC0
+X-Rspamd-Queue-Id: 4047463EEDB
 
+This patch series adds support for the Analog Devices ADF41513 and ADF41510
+ultralow noise PLL frequency synthesizers. These devices are designed for
+implementing local oscillators (LOs) in high-frequency applications.
+The ADF41513 covers frequencies from 1 GHz to 26.5 GHz, while the ADF41510
+operates from 1 GHz to 10 GHz.
 
+Key features supported by this driver:
+- Integer-N and fractional-N operation modes
+- High maximum PFD frequency (250 MHz integer-N, 125 MHz fractional-N)
+- 25-bit fixed modulus or 49-bit variable modulus fractional modes
+- Digital lock detect functionality
+- Phase resync capability for consistent output phase
+- Load Enable vs Reference signal syncronization
 
-On 04/06/2026 6:53, Randy Dunlap wrote:
-> 
-> 
-> On 6/3/26 6:16 PM, Mark Bloch wrote:
->>
->>
->> On 03/06/2026 23:06, Randy Dunlap wrote:
->>> Hi.
->>>
->>> On 6/3/26 12:32 PM, Mark Bloch wrote:
->>>> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
->>>> index 063c11ca33e5..7af9f2898d92 100644
->>>> --- a/Documentation/admin-guide/kernel-parameters.txt
->>>> +++ b/Documentation/admin-guide/kernel-parameters.txt
->>>> @@ -1264,6 +1264,31 @@ Kernel parameters
->>>>  	dell_smm_hwmon.fan_max=
->>>>  			[HW] Maximum configurable fan speed.
->>>>  
->>>> +	devlink_eswitch_mode=
->>>> +			[NET]
->>>> +			Format:
->>>> +			[<selector>]:<mode>
->>>
->>> It appears (please correct me if I am mistaken) that the '[' and ']'
->>> above don't mean "optional" but instead they are required characters...
->>>
->>>> +
->>>> +			<selector>:
->>>> +			* | <handle>[,<handle>...]
->>>
->>> while here they mean "optional".
->>>
->>> That is confusing (inconsistent). Also, if the square brackets are
->>> always required around the <selector>, what purpose do they serve?
->>
->> Yes, you are right, this is confusing. The outer square brackets are part of
->> the syntax and are required, while the brackets in "[,<handle>...]" mean that
->> additional handles are optional.
->>
->> I couldn't find a better way to describe this. What I want to say is that the
->> selector is always wrapped in square brackets. Inside the brackets it can either
->> be "*" to match all devices, or a comma separated list of handles. If "*" is
->> not used, then at least one handle has to be provided.
->>
->> Maybe it would be clearer to spell it out explicitly, something like:
->>
->> Format:
->>   [<selector>]:<mode>
->>
->> The '[' and ']' characters are literal and required.
->>
->> <selector>:
->>   * | <handle>[,<handle>...]
->>
->> If '*' is not used, <selector> must contain at least one <handle>.
->>
->> Does that sound like a reasonable way to document it?
-> 
-> Yes, that helps a little bit. Better than nothing.
-> 
-> But why are they required at all?
+The series includes:
+1. PLL driver implementation
+2. Device tree bindings documentation
+3. IIO ABI documentation
+4. Parsing utils for 64-bit decimal values
 
-Jiri suggested using the square brackets, and I liked that they made the
-selector look like a grouped argument. But if that is too confusing, I can
-also drop them and use a simpler separator, for example:
+Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
+---
+Changes in v16:
+- Incorporate Andy's series: https://lore.kernel.org/all/20260602203706.103449-1-andriy.shevchenko@linux.intel.com
+- Drop iio_val_s64_to_s32s() and iio_val_s64_from_s32s().
+- Add/change comments and minor changes.
+- Link to v15: https://lore.kernel.org/r/20260531-adf41513-iio-driver-v15-0-da09adf1c0dd@analog.com
 
-	devlink_eswitch_mode=
-			[NET]
-			Format:
-			<selector>=<mode>
+Changes in v15:
+- Set bleed value when chaging mode.
+- Link to v14: https://lore.kernel.org/r/20260524-adf41513-iio-driver-v14-0-06824d9c15f4@analog.com
 
-			<selector>:
-			* | <handle>[,<handle>...]
+Changes in v14:
+- Review include headers.
+- Use named fields in spi device table.
+- Address relevant sashiko's feedback.
+- Minor tweaks to iio core changes.
+- Link to v13: https://lore.kernel.org/r/20260517-adf41513-iio-driver-v13-0-bb6e134a360f@analog.com
 
-			<handle>:
-			<bus-name>/<dev-name>
+Changes in v13:
+- Introduce _parse_integer_limit_init()
+- Better support for 0 and larger scales in kstrtodec64()
+- Increase test scope for kstrtodec64()
+- Fix LSB_P1 check at startup when going for fixed modulus mode.
+- Clear phase adjust when setting phase (It turns out sashiko was correct).
+- Make sure Load Enable is not selected when powering up.
+- Address some minor comments.
+- Link to v12: https://lore.kernel.org/r/20260510-adf41513-iio-driver-v12-0-34af2ed2779f@analog.com
 
-			Configure default devlink eswitch mode for matching
-			devlink instances during device initialization.
+Changes in v12:
+- Contraint charge pump current.
+- Fix division-by-zero issues.
+- Address PM and sysfs powerdown conflicts.
+- Program proper phase resync value in clk divider mode.
+- Link to v11: https://lore.kernel.org/r/20260506-adf41513-iio-driver-v11-0-2b7e99cfe8f2@analog.com
 
-			<mode>:
-			legacy | switchdev | switchdev_inactive
+Changes in v11:
+- Cleanup ext info attribute read/write callbacks.
+- Adjust attribute names in the documentation.
+- Turn s64 compose macros into static inline functions.
+- Link to v10: https://lore.kernel.org/r/20260415-adf41513-iio-driver-v10-0-df61046d5457@analog.com
 
-			Examples:
-			devlink_eswitch_mode=*=switchdev
-			devlink_eswitch_mode=pci/0000:08:00.0=switchdev
-			devlink_eswitch_mode=pci/0000:08:00.0,pci/0000:09:00.1=switchdev_inactive
+Changes in v10:
+- Drop simple_strntoull() changes
+- Create kstrtodec64() and kstrtoudec64() helpers. 
+- Add IIO value format for 64-bit decimal values.
+- PLL driver code implements new decimal format for frequency attr. 
+- Link to v9: https://lore.kernel.org/r/20260320-adf41513-iio-driver-v9-0-132f0d076374@analog.com
 
-Does this look better to you?
+Changes in v9:
+- Expose simple_strntoull() in a safer prototype instead of new kstrntoull()
+- Link to v8: https://lore.kernel.org/r/20260303-adf41513-iio-driver-v8-0-8dd2417cc465@analog.com
 
-Mark
+Changes in v8:
+- Add new function kstrntoull() to lib/kstrtox.c and tests to lib/test-kstrtox.c.
+- Drop custom iio u64 parser, replacing it for kstrntoull().
+- Dedicated MAINTAINERS entry for drivers/iio/test/iio-test-fixpoint-parse.c.
+- Link to v7: https://lore.kernel.org/r/20260216-adf41513-iio-driver-v7-0-b0ed387ab559@analog.com
 
-> 
->>>> +
->>>> +			<handle>:
->>>> +			<bus-name>/<dev-name>
->>>> +
->>>> +			Configure default devlink eswitch mode for matching
->>>> +			devlink instances during device initialization.
->>>> +
->>>> +			<mode>:
->>>> +			legacy | switchdev | switchdev_inactive
->>>> +
->>>> +			Examples:
->>>> +			devlink_eswitch_mode=[*]:switchdev
->>>> +			devlink_eswitch_mode=[pci/0000:08:00.0]:switchdev
->>>> +			devlink_eswitch_mode=[pci/0000:08:00.0,pci/0000:09:00.1]:legacy
->>>> +
->>>> +			See Documentation/networking/devlink/devlink-defaults.rst
->>>> +			for the full syntax.
->>>> +
->>>>  	dfltcc=		[HW,S390]
->>>>  			Format: { on | off | def_only | inf_only | always }
->>>>  			on:       s390 zlib hardware support for compression on
->>>
->>>
->>
-> 
+Changes in v7:
+- Addressed minor suggestions.
+- frequency_resolution ABI for AD4350 removed in favor of generic one.
+- Link to v6: https://lore.kernel.org/r/20260130-adf41513-iio-driver-v6-0-cf46239026bc@analog.com
+
+Changes in v6:
+- Drop usage of simple_strtoull().
+- Implement better overflow checks with iio_safe_strntou64().
+- Link to v5: https://lore.kernel.org/r/20260123-adf41513-iio-driver-v5-0-2dce812a2dda@analog.com
+
+Changes in v5:
+- Drop local parsing of 64-bit plus fractional parts
+- Add iio_str_to_fixpoint64() to iio core with parsing tests
+- Add DT property dependency for adi,charge-pump-resistor-ohms
+- Add local definition for ADF41513_HZ_PER_GHZ and drop units.h patch
+- Link to v4: https://lore.kernel.org/r/20260116-adf41513-iio-driver-v4-0-dbb7d6782217@analog.com
+
+Changes in v4:
+- Proper usage of units.h macros
+- Simplifications to DT property parsing
+- Adjustments to return value handling
+- Drop of simple DT property node example
+- Link to v3: https://lore.kernel.org/r/20260108-adf41513-iio-driver-v3-0-23d1371aef48@analog.com
+
+Changes in v3:
+- Use FIELD_MODIFY macro in driver implementation
+- Drop refin_frequency iio attribute
+- Drop muxout-select property from dt-bindings (and rename logic-level property)
+- Use -mhz suffix in power-up frequency property
+- Address documentation issues
+- Link to v2: https://lore.kernel.org/r/20251219-adf41513-iio-driver-v2-0-be29a83d5793@analog.com
+
+Changes in v2:
+- separate driver implementation from extra features and improve commit messages
+- use macros from units.h
+- explanation of custom parse function: adf41513_parse_uhz
+- reorganize driver data structures
+- drop clock framework support for now
+- reorganize documentation
+- Link to v1: https://lore.kernel.org/r/20251110-adf41513-iio-driver-v1-0-2df8be0fdc6e@analog.com
+
+---
+Andy Shevchenko (2):
+      lib: kstrtox: Make _parse_integer() take variadic arguments
+      lib: vsprintf: use _parse_integer() instead of _parse_integer_limit()
+
+Rodrigo Alencar (12):
+      dt-bindings: iio: frequency: add adf41513
+      lib: kstrtox: add initial value to _parse_integer_limit()
+      lib: kstrtox: add kstrtoudec64() and kstrtodec64()
+      lib: test-kstrtox: tests for kstrtodec64() and kstrtoudec64()
+      lib: math: div64: add div64_s64_rem()
+      iio: core: add decimal value formatting into 64-bit value
+      iio: test: iio-test-format: add test case for decimal format
+      iio: frequency: adf41513: driver implementation
+      iio: frequency: adf41513: handle LE synchronization feature
+      iio: frequency: adf41513: features on frequency change
+      docs: iio: add documentation for adf41513 driver
+      Documentation: ABI: testing: add common ABI file for iio/frequency
+
+ Documentation/ABI/testing/sysfs-bus-iio-frequency  |   11 +
+ .../ABI/testing/sysfs-bus-iio-frequency-adf4350    |   10 -
+ .../bindings/iio/frequency/adi,adf41513.yaml       |  227 ++++
+ Documentation/iio/adf41513.rst                     |  199 ++++
+ Documentation/iio/index.rst                        |    1 +
+ MAINTAINERS                                        |    9 +
+ drivers/iio/frequency/Kconfig                      |   10 +
+ drivers/iio/frequency/Makefile                     |    1 +
+ drivers/iio/frequency/adf41513.c                   | 1246 ++++++++++++++++++++
+ drivers/iio/industrialio-core.c                    |   49 +-
+ drivers/iio/test/iio-test-format.c                 |   97 +-
+ include/linux/iio/types.h                          |   20 +
+ include/linux/kstrtox.h                            |    3 +
+ include/linux/math64.h                             |   18 +
+ lib/kstrtox.c                                      |  114 +-
+ lib/kstrtox.h                                      |   17 +-
+ lib/math/div64.c                                   |   15 +
+ lib/test-kstrtox.c                                 |  182 +++
+ lib/vsprintf.c                                     |    2 +-
+ 19 files changed, 2178 insertions(+), 53 deletions(-)
+---
+base-commit: ae696dfa47c30016cd429b9db5e70b259b8f509e
+change-id: 20251110-adf41513-iio-driver-aaca8a7f808e
+
+Best regards,
+-- 
+Rodrigo Alencar <rodrigo.alencar@analog.com>
+
 
 
