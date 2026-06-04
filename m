@@ -1,475 +1,271 @@
-Return-Path: <linux-doc+bounces-90957-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90959-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 57lGOnmUIWoZJQEAu9opvQ
-	(envelope-from <linux-doc+bounces-90957-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 17:06:33 +0200
+	id EadeN6yfIWq1KAEAu9opvQ
+	(envelope-from <linux-doc+bounces-90959-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 17:54:20 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 358EA641363
-	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 17:06:33 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id B4B046419B7
+	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 17:54:19 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=ZFpgmwNn;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90957-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-90957-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	dkim=pass header.d=arm.com header.s=foss header.b=u5tYSEK0;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90959-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-90959-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=arm.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 233CB310C350
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Jun 2026 14:45:52 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id C656F3135894
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Jun 2026 15:30:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 35DEB2C1788;
-	Thu,  4 Jun 2026 14:45:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C202D350D74;
+	Thu,  4 Jun 2026 15:29:33 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AA64D24728F;
-	Thu,  4 Jun 2026 14:45:45 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3B2D533C1B4;
+	Thu,  4 Jun 2026 15:29:32 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780584347; cv=none; b=mSeQL8evmGfgk846krv4DvqBNbCYnwkarzXKicD83YPge/uPn9dgiZIf5AWeOBg7QRm0JQWMZMWmldaxl5X6XN1O7aYCsTDzFxWH7/pqRgqjDwp3i9LOXlVVDp0BD1SjeZK5RrLDr2WvYEFHQS1pBOpBbJXvtKJqpxITTI9R70g=
+	t=1780586973; cv=none; b=IyUyr7M/098p8/Dkb7MT6Xy6ouoRkpUEXpNFy+DOastyqzrxPUmctU7spjLFvh1YH2b7FKNsqD3yRo7p4/u0+fK9hefWg+hkt9cMuItJsZYG7FsR8sBuSgjHDtroSqIGA3fAF87TrHP09BI1+2Aj0BiDOq69blrLaqcfP7cpWoA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780584347; c=relaxed/simple;
-	bh=+bkGuuNXSVNkDBMttcEwj0VQLaAX5iJmNjc23XYher8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=i4/D6UJhcJeShUGSHHjRRoP4ICZlhqPACMmpFpWmh+W0Afv9t4OMS6nW01eW2QNrA7hIzPhbQHgQ2IPWz++kTBdVp/M5dv7wSCOPX4eL+jkW4y6OXaOVBExtanbZG7x0cSPgzklT2JwS3vsSRAKRPlZyFQLLxk/85XaGsRkwfO4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZFpgmwNn; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 937411F00898;
-	Thu,  4 Jun 2026 14:45:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1780584345;
-	bh=BJYCgZSQTNkh6hxE/kJ6+MhW48xihgOg6aoHCWlS+KE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=ZFpgmwNndGWbwB/VyMmHZmh0HhYvBN95OsGVg6UaRXkVs6q9z36cTa+1OqCx+fEo3
-	 XV/gSux4cXuKvhWvEpOKkGguVK2Qng475SE16iiiRwtnsY+2yl5/LRltjNx//9Ghpi
-	 Pl3jPwD23z7YBKvlCmv5MIE5mDHJVRYlHZjALvre1eQlqQNOdCHRTT09CiFdIkrwi6
-	 W6tSZN494rTjUsCWQaciqDtpdo49bW4T4Tk5xuLOofyWgCasNEc2KMWc1vY9BggWpS
-	 ha8VxHLMxZdWE9xg0ADq8wUvUvJQYKpWHieYUut43LWi15niI7NHj6j7vRJUwxC6os
-	 flYea9MTZmtQQ==
-Date: Thu, 4 Jun 2026 15:45:30 +0100
-From: Lorenzo Stoakes <ljs@kernel.org>
-To: Nico Pache <npache@redhat.com>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-mm@kvack.org, linux-trace-kernel@vger.kernel.org, aarcange@redhat.com, 
-	akpm@linux-foundation.org, anshuman.khandual@arm.com, apopple@nvidia.com, baohua@kernel.org, 
-	baolin.wang@linux.alibaba.com, byungchul@sk.com, catalin.marinas@arm.com, cl@gentwo.org, 
-	corbet@lwn.net, dave.hansen@linux.intel.com, david@kernel.org, dev.jain@arm.com, 
-	gourry@gourry.net, hannes@cmpxchg.org, hughd@google.com, jack@suse.cz, 
-	jackmanb@google.com, jannh@google.com, jglisse@google.com, joshua.hahnjy@gmail.com, 
-	kas@kernel.org, lance.yang@linux.dev, liam@infradead.org, 
-	mathieu.desnoyers@efficios.com, matthew.brost@intel.com, mhiramat@kernel.org, mhocko@suse.com, 
-	peterx@redhat.com, pfalcato@suse.de, rakie.kim@sk.com, raquini@redhat.com, 
-	rdunlap@infradead.org, richard.weiyang@gmail.com, rientjes@google.com, 
-	rostedt@goodmis.org, rppt@kernel.org, ryan.roberts@arm.com, shivankg@amd.com, 
-	sunnanyong@huawei.com, surenb@google.com, thomas.hellstrom@linux.intel.com, 
-	tiwai@suse.de, usamaarif642@gmail.com, vbabka@suse.cz, vishal.moola@gmail.com, 
-	wangkefeng.wang@huawei.com, will@kernel.org, willy@infradead.org, 
-	yang@os.amperecomputing.com, ying.huang@linux.alibaba.com, ziy@nvidia.com, zokeefe@google.com
-Subject: Re: [PATCH mm-unstable v18 11/14] mm/khugepaged: Introduce mTHP
- collapse support
-Message-ID: <aiGOvIR9sfm91cvT@lucifer>
-References: <20260522150009.121603-1-npache@redhat.com>
- <20260522150009.121603-12-npache@redhat.com>
+	s=arc-20240116; t=1780586973; c=relaxed/simple;
+	bh=bsr5b2gpdP7Z02h1Njek9qwNAkWcpQjmCyE6Te0xtUY=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=QfSfb2QN/TQjIYnCGmvvJlZrz5ktf0A7Qj9zps+ug+UG412h5m6a3h6VT0QzXPBz38Ip4uuiGeQ6JTeeeumhImce9pckXbOXBXMTy7oGb1TN3QlBnTvPf+83mg4MoR/ekZYblhwe8z6s4BS2aCr+BRtFgEiR0yxBvk9y16bZqzY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=u5tYSEK0; arc=none smtp.client-ip=217.140.110.172
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C5F644993;
+	Thu,  4 Jun 2026 08:29:26 -0700 (PDT)
+Received: from [10.57.95.39] (unknown [10.57.95.39])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DA02C3F86F;
+	Thu,  4 Jun 2026 08:29:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1780586971; bh=bsr5b2gpdP7Z02h1Njek9qwNAkWcpQjmCyE6Te0xtUY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=u5tYSEK0WD6FzVygVZ2inUsRE7KPNU6aiooHb7WFFytVH7MwdY+o3iH91d3sWJQym
+	 G77ajQTrso6CQR5994wgSjTDCEuz6fiiAdnuNQFgcq6pkYJfcMWf+6whcM46UC6c2z
+	 1s46Od/7JFr/FBCHQRzYdrTjrodXGQYEF9NX3838=
+Message-ID: <9d15479e-e36b-4865-804c-7d93eb339e4e@arm.com>
+Date: Thu, 4 Jun 2026 16:29:19 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260522150009.121603-12-npache@redhat.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 20/42] KVM: SEV: Make 'uaddr' parameter optional for
+ KVM_SEV_SNP_LAUNCH_UPDATE
+Content-Language: en-GB
+To: ackerleytng@google.com, aik@amd.com, andrew.jones@linux.dev,
+ binbin.wu@linux.intel.com, brauner@kernel.org, chao.p.peng@linux.intel.com,
+ david@kernel.org, ira.weiny@intel.com, jmattson@google.com,
+ jthoughton@google.com, michael.roth@amd.com, oupton@kernel.org,
+ pankaj.gupta@amd.com, qperret@google.com, rick.p.edgecombe@intel.com,
+ rientjes@google.com, shivankg@amd.com, steven.price@arm.com,
+ tabba@google.com, willy@infradead.org, wyihan@google.com,
+ yan.y.zhao@intel.com, forkloop@google.com, pratyush@kernel.org,
+ aneesh.kumar@kernel.org, liam@infradead.org,
+ Paolo Bonzini <pbonzini@redhat.com>, Sean Christopherson
+ <seanjc@google.com>, Thomas Gleixner <tglx@kernel.org>,
+ Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+ Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+ "H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>,
+ Masami Hiramatsu <mhiramat@kernel.org>,
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+ Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>,
+ Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>,
+ Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>,
+ Nhat Pham <nphamcs@gmail.com>, Baoquan He <bhe@redhat.com>,
+ Barry Song <baohua@kernel.org>, Axel Rasmussen <axelrasmussen@google.com>,
+ Yuanchu Xie <yuanchu@google.com>, Wei Xu <weixugc@google.com>,
+ Youngjun Park <youngjun.park@lge.com>, Qi Zheng <qi.zheng@linux.dev>,
+ Shakeel Butt <shakeel.butt@linux.dev>, Kiryl Shutsemau <kas@kernel.org>,
+ Jason Gunthorpe <jgg@ziepe.ca>, Vlastimil Babka <vbabka@kernel.org>
+Cc: kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kselftest@vger.kernel.org, linux-mm@kvack.org,
+ linux-coco@lists.linux.dev
+References: <20260522-gmem-inplace-conversion-v7-0-2f0fae496530@google.com>
+ <20260522-gmem-inplace-conversion-v7-20-2f0fae496530@google.com>
+From: Suzuki K Poulose <suzuki.poulose@arm.com>
+In-Reply-To: <20260522-gmem-inplace-conversion-v7-20-2f0fae496530@google.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-90959-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-90957-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:npache@redhat.com,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-trace-kernel@vger.kernel.org,m:aarcange@redhat.com,m:akpm@linux-foundation.org,m:anshuman.khandual@arm.com,m:apopple@nvidia.com,m:baohua@kernel.org,m:baolin.wang@linux.alibaba.com,m:byungchul@sk.com,m:catalin.marinas@arm.com,m:cl@gentwo.org,m:corbet@lwn.net,m:dave.hansen@linux.intel.com,m:david@kernel.org,m:dev.jain@arm.com,m:gourry@gourry.net,m:hannes@cmpxchg.org,m:hughd@google.com,m:jack@suse.cz,m:jackmanb@google.com,m:jannh@google.com,m:jglisse@google.com,m:joshua.hahnjy@gmail.com,m:kas@kernel.org,m:lance.yang@linux.dev,m:liam@infradead.org,m:mathieu.desnoyers@efficios.com,m:matthew.brost@intel.com,m:mhiramat@kernel.org,m:mhocko@suse.com,m:peterx@redhat.com,m:pfalcato@suse.de,m:rakie.kim@sk.com,m:raquini@redhat.com,m:rdunlap@infradead.org,m:richard.weiyang@gmail.com,m:rientjes@google.com,m:rostedt@goodmis.org,m:rppt@kernel.org,m:ryan.roberts@arm.com,
- m:shivankg@amd.com,m:sunnanyong@huawei.com,m:surenb@google.com,m:thomas.hellstrom@linux.intel.com,m:tiwai@suse.de,m:usamaarif642@gmail.com,m:vbabka@suse.cz,m:vishal.moola@gmail.com,m:wangkefeng.wang@huawei.com,m:will@kernel.org,m:willy@infradead.org,m:yang@os.amperecomputing.com,m:ying.huang@linux.alibaba.com,m:ziy@nvidia.com,m:zokeefe@google.com,m:joshuahahnjy@gmail.com,m:richardweiyang@gmail.com,s:lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:ackerleytng@google.com,m:aik@amd.com,m:andrew.jones@linux.dev,m:binbin.wu@linux.intel.com,m:brauner@kernel.org,m:chao.p.peng@linux.intel.com,m:david@kernel.org,m:ira.weiny@intel.com,m:jmattson@google.com,m:jthoughton@google.com,m:michael.roth@amd.com,m:oupton@kernel.org,m:pankaj.gupta@amd.com,m:qperret@google.com,m:rick.p.edgecombe@intel.com,m:rientjes@google.com,m:shivankg@amd.com,m:steven.price@arm.com,m:tabba@google.com,m:willy@infradead.org,m:wyihan@google.com,m:yan.y.zhao@intel.com,m:forkloop@google.com,m:pratyush@kernel.org,m:aneesh.kumar@kernel.org,m:liam@infradead.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:shuah@kernel.org,m:vannapurve@google.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencent.c
+ om,m:shikemeng@huaweicloud.com,m:nphamcs@gmail.com,m:bhe@redhat.com,m:baohua@kernel.org,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:kas@kernel.org,m:jgg@ziepe.ca,m:vbabka@kernel.org,m:kvm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,m:linux-coco@lists.linux.dev,s:lists@lfdr.de];
+	FREEMAIL_TO(0.00)[google.com,amd.com,linux.dev,linux.intel.com,kernel.org,intel.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kvack.org,redhat.com,linux-foundation.org,arm.com,nvidia.com,kernel.org,linux.alibaba.com,sk.com,gentwo.org,lwn.net,linux.intel.com,gourry.net,cmpxchg.org,google.com,suse.cz,gmail.com,linux.dev,infradead.org,efficios.com,intel.com,suse.com,suse.de,goodmis.org,amd.com,huawei.com,os.amperecomputing.com];
+	DKIM_TRACE(0.00)[arm.com:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[ljs@kernel.org,linux-doc@vger.kernel.org];
+	FORGED_SENDER(0.00)[suzuki.poulose@arm.com,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[58];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ljs@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FROM_NEQ_ENVFROM(0.00)[suzuki.poulose@arm.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	RCPT_COUNT_GT_50(0.00)[64];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,lucifer:mid]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,arm.com:mid,arm.com:from_mime,arm.com:dkim,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,amd.com:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 358EA641363
+X-Rspamd-Queue-Id: B4B046419B7
 
-On Fri, May 22, 2026 at 09:00:06AM -0600, Nico Pache wrote:
-> Enable khugepaged to collapse to mTHP orders. This patch implements the
-> main scanning logic using a bitmap to track occupied pages and a stack
-> structure that allows us to find optimal collapse sizes.
->
-> Previous to this patch, PMD collapse had 3 main phases, a light weight
-> scanning phase (mmap_read_lock) that determines a potential PMD
-> collapse, an alloc phase (mmap unlocked), then finally heavier collapse
-> phase (mmap_write_lock).
->
-> To enabled mTHP collapse we make the following changes:
->
-> During PMD scan phase, track occupied pages in a bitmap. When mTHP
-> orders are enabled, we remove the restriction of max_ptes_none during the
-> scan phase to avoid missing potential mTHP collapse candidates. Once we
-> have scanned the full PMD range and updated the bitmap to track occupied
-> pages, we use the bitmap to find the optimal mTHP size.
->
-> Implement collapse_scan_bitmap() to perform binary recursion on the bitmap
-> and determine the best eligible order for the collapse. A stack structure
-> is used instead of traditional recursion to manage the search. This also
-> prevents a traditional recursive approach when the kernel stack struct is
-> limited. The algorithm recursively splits the bitmap into smaller chunks to
-> find the highest order mTHPs that satisfy the collapse criteria. We start
-> by attempting the PMD order, then moved on the consecutively lower orders
-> (mTHP collapse). The stack maintains a pair of variables (offset, order),
-> indicating the number of PTEs from the start of the PMD, and the order of
-> the potential collapse candidate.
->
-> The algorithm for consuming the bitmap works as such:
->     1) push (0, HPAGE_PMD_ORDER) onto the stack
->     2) pop the stack
->     3) check if the number of set bits in that (offset,order) pair
->        statisfy the max_ptes_none threshold for that order
->     4) if yes, attempt collapse
->     5) if no (or collapse fails), push two new stack items representing
->        the left and right halves of the current bitmap range, at the
->        next lower order
->     6) repeat at step (2) until stack is empty.
->
-> Below is a diagram representing the algorithm and stack items:
->
->                             offset   mid_offset
->                             |        |
->                             |        |
->                             v        v
->           ____________________________________
->          |          PTE Page Table            |
->          --------------------------------------
-> 			    <-------><------->
->                              order-1  order-1
->
-> mTHP collapses reject regions containing swapped out or shared pages.
-> This is because adding new entries can lead to new none pages, and these
-> may lead to constant promotion into a higher order mTHP. A similar
-> issue can occur with "max_ptes_none > HPAGE_PMD_NR/2" due to a collapse
-> introducing at least 2x the number of pages, and on a future scan will
-> satisfy the promotion condition once again. This issue is prevented via
-> the collapse_max_ptes_none() function which imposes the max_ptes_none
-> restrictions above.
->
-> We currently only support mTHP collapse for max_ptes_none values of 0
-> and HPAGE_PMD_NR - 1. resulting in the following behavior:
->
->     - max_ptes_none=0: Never introduce new empty pages during collapse
->     - max_ptes_none=HPAGE_PMD_NR-1: Always try collapse to the highest
->       available mTHP order
->
-> Any other max_ptes_none value will emit a warning and default mTHP
-> collapse to max_ptes_none=0. There should be no behavior change for PMD
-> collapse.
->
-> Once we determine what mTHP sizes fits best in that PMD range a collapse
-> is attempted. A minimum collapse order of 2 is used as this is the lowest
-> order supported by anon memory as defined by THP_ORDERS_ALL_ANON.
->
-> Currently madv_collapse is not supported and will only attempt PMD
-> collapse.
->
-> We can also remove the check for is_khugepaged inside the PMD scan as
-> the collapse_max_ptes_none() function handles this logic now.
->
-> Signed-off-by: Nico Pache <npache@redhat.com>
+On 23/05/2026 01:18, Ackerley Tng via B4 Relay wrote:
+> From: Michael Roth <michael.roth@amd.com>
+> 
+> For vm_memory_attributes=1, in-place conversion/population is not
+> supported, so the initial contents necessarily must need to come
+> from a separate src address, which is enforced by the current
+> implementation. However, for vm_memory_attributes=0, it is possible for
+> guest memory to be initialized directly from userspace by mmap()'ing the
+> guest_memfd and writing to it while the corresponding GPA ranges are in
+> a 'shared' state before converting them to the 'private' state expected
+> by KVM_SEV_SNP_LAUNCH_UPDATE.
+> 
+> Update the handling/documentation for KVM_SEV_SNP_LAUNCH_UPDATE to allow
+> for 'uaddr' to be set to NULL when vm_memory_attributes=0, which
+> SNP_LAUNCH_UPDATE will then use to determine when it should/shouldn't
+> copy in data from a separate memory location. Continue to enforce
+> non-NULL for the original vm_memory_attributes=1 case.
+> 
+> Signed-off-by: Michael Roth <michael.roth@amd.com>
+> [Added src_page check in error handling path when the firmware command fails]
+> [Dropped ifdef CONFIG_KVM_VM_MEMORY_ATTRIBUTES]
+> Signed-off-by: Ackerley Tng <ackerleytng@google.com>
+
+
+
+
 > ---
->  mm/khugepaged.c | 181 +++++++++++++++++++++++++++++++++++++++++++++---
->  1 file changed, 172 insertions(+), 9 deletions(-)
->
-> diff --git a/mm/khugepaged.c b/mm/khugepaged.c
-> index 64ceebc9d8a7..d3d7db8be26c 100644
-> --- a/mm/khugepaged.c
-> +++ b/mm/khugepaged.c
-> @@ -99,6 +99,30 @@ static DEFINE_READ_MOSTLY_HASHTABLE(mm_slots_hash, MM_SLOTS_HASH_BITS);
->
->  static struct kmem_cache *mm_slot_cache __ro_after_init;
->
-> +#define KHUGEPAGED_MIN_MTHP_ORDER	2
-> +/*
-> + * mthp_collapse() does an iterative DFS over a binary tree, from
-> + * HPAGE_PMD_ORDER down to KHUGEPAGED_MIN_MTHP_ORDER. The max stack
-> + * size needed for a DFS on a binary tree is height + 1, where
-> + * height = HPAGE_PMD_ORDER - KHUGEPAGED_MIN_MTHP_ORDER.
-> + *
-> + * ilog2 is used in place of HPAGE_PMD_ORDER because some architectures
-> + * (e.g. ppc64le) do not define HPAGE_PMD_ORDER until after build time.
-> + */
-> +#define MTHP_STACK_SIZE	(ilog2(MAX_PTRS_PER_PTE) - KHUGEPAGED_MIN_MTHP_ORDER + 1)
+>   Documentation/virt/kvm/x86/amd-memory-encryption.rst | 15 +++++++++++----
+>   arch/x86/kvm/svm/sev.c                               | 18 +++++++++++++-----
+>   virt/kvm/kvm_main.c                                  |  1 +
+>   3 files changed, 25 insertions(+), 9 deletions(-)
+> 
+> diff --git a/Documentation/virt/kvm/x86/amd-memory-encryption.rst b/Documentation/virt/kvm/x86/amd-memory-encryption.rst
+> index b2395dd4769de..43085f65b2d85 100644
+> --- a/Documentation/virt/kvm/x86/amd-memory-encryption.rst
+> +++ b/Documentation/virt/kvm/x86/amd-memory-encryption.rst
+> @@ -503,7 +503,8 @@ secrets.
+>   
+>   It is required that the GPA ranges initialized by this command have had the
+>   KVM_MEMORY_ATTRIBUTE_PRIVATE attribute set in advance. See the documentation
+> -for KVM_SET_MEMORY_ATTRIBUTES for more details on this aspect.
+> +for KVM_SET_MEMORY_ATTRIBUTES/KVM_SET_MEMORY_ATTRIBUTES2 for more details on
+> +this aspect.
+>   
+>   Upon success, this command is not guaranteed to have processed the entire
+>   range requested. Instead, the ``gfn_start``, ``uaddr``, and ``len`` fields of
+> @@ -511,9 +512,15 @@ range requested. Instead, the ``gfn_start``, ``uaddr``, and ``len`` fields of
+>   remaining range that has yet to be processed. The caller should continue
+>   calling this command until those fields indicate the entire range has been
+>   processed, e.g. ``len`` is 0, ``gfn_start`` is equal to the last GFN in the
+> -range plus 1, and ``uaddr`` is the last byte of the userspace-provided source
+> -buffer address plus 1. In the case where ``type`` is KVM_SEV_SNP_PAGE_TYPE_ZERO,
+> -``uaddr`` will be ignored completely.
+> +range plus 1, and ``uaddr`` (if specified) is the last byte of the
+> +userspace-provided source buffer address plus 1.
 > +
-> +/*
-> + * Defines a range of PTE entries in a PTE page table which are being
-> + * considered for mTHP collapse.
-> + *
-> + * @offset: the offset of the first PTE entry in a PMD range.
-> + * @order: the order of the PTE entries being considered for collapse.
-> + */
-> +struct mthp_range {
-> +	u16 offset;
-> +	u8 order;
-> +};
-> +
->  struct collapse_control {
->  	bool is_khugepaged;
->
-> @@ -110,6 +134,12 @@ struct collapse_control {
->
->  	/* nodemask for allocation fallback */
->  	nodemask_t alloc_nmask;
-> +
-> +	/* Each bit represents a single occupied (!none/zero) page. */
-> +	DECLARE_BITMAP(mthp_bitmap, MAX_PTRS_PER_PTE);
-> +	/* A mask of the current range being considered for mTHP collapse. */
-> +	DECLARE_BITMAP(mthp_bitmap_mask, MAX_PTRS_PER_PTE);
-> +	struct mthp_range mthp_bitmap_stack[MTHP_STACK_SIZE];
->  };
->
->  /**
-> @@ -1411,20 +1441,137 @@ static enum scan_result collapse_huge_page(struct mm_struct *mm, unsigned long s
->  	return result;
->  }
->
-> +static void collapse_mthp_stack_push(struct collapse_control *cc, int *stack_size,
-> +				     u16 offset, u8 order)
-> +{
-> +	const int size = *stack_size;
-> +	struct mthp_range *stack = &cc->mthp_bitmap_stack[size];
-> +
-> +	VM_WARN_ON_ONCE(size >= MTHP_STACK_SIZE);
-> +	stack->order = order;
-> +	stack->offset = offset;
-> +	(*stack_size)++;
-> +}
-> +
-> +static struct mthp_range collapse_mthp_stack_pop(struct collapse_control *cc,
-> +						 int *stack_size)
-> +{
-> +	const int size = *stack_size;
-> +
-> +	VM_WARN_ON_ONCE(size <= 0);
-> +	(*stack_size)--;
-> +	return cc->mthp_bitmap_stack[size - 1];
-> +}
-> +
-> +static unsigned int collapse_mthp_count_present(struct collapse_control *cc,
-> +						u16 offset, unsigned int nr_ptes)
-> +{
-> +	bitmap_zero(cc->mthp_bitmap_mask, MAX_PTRS_PER_PTE);
-> +	bitmap_set(cc->mthp_bitmap_mask, offset, nr_ptes);
-> +	return bitmap_weight_and(cc->mthp_bitmap, cc->mthp_bitmap_mask, MAX_PTRS_PER_PTE);
-> +}
-> +
-> +/*
-> + * mthp_collapse() consumes the bitmap that is generated during
-> + * collapse_scan_pmd() to determine what regions and mTHP orders fit best.
-> + *
-> + * Each bit in cc->mthp_bitmap represents a single occupied (!none/zero) page.
-> + * A stack structure cc->mthp_bitmap_stack is used to check different regions
-> + * of the bitmap for collapse eligibility. The stack maintains a pair of
-> + * variables (offset, order), indicating the number of PTEs from the start of
-> + * the PMD, and the order of the potential collapse candidate respectively. We
-> + * start at the PMD order and check if it is eligible for collapse; if not, we
-> + * add two entries to the stack at a lower order to represent the left and right
-> + * halves of the PTE page table we are examining.
-> + *
-> + *                         offset       mid_offset
-> + *                         |         |
-> + *                         |         |
-> + *                         v         v
-> + *      --------------------------------------
-> + *      |          cc->mthp_bitmap            |
-> + *      --------------------------------------
-> + *                         <-------><------->
-> + *                          order-1  order-1
-> + *
-> + * For each of these, we determine how many PTE entries are occupied in the
-> + * range of PTE entries we propose to collapse, then we compare this to a
-> + * threshold number of PTE entries which would need to be occupied for a
-> + * collapse to be permitted at that order (accounting for max_ptes_none).
-> + *
-> + * If a collapse is permitted, we attempt to collapse the PTE range into a
-> + * mTHP.
-> + */
-> +static int mthp_collapse(struct mm_struct *mm, struct vm_area_struct *vma,
-> +		unsigned long address, int referenced, int unmapped,
-> +		struct collapse_control *cc, unsigned long enabled_orders)
-> +{
-> +	unsigned int nr_occupied_ptes, nr_ptes, max_ptes_none;
-> +	int collapsed = 0, stack_size = 0;
-> +	unsigned long collapse_address;
-> +	struct mthp_range range;
-> +	u16 offset;
-> +	u8 order;
-> +
-> +	collapse_mthp_stack_push(cc, &stack_size, 0, HPAGE_PMD_ORDER);
-> +
-> +	while (stack_size) {
-> +		range = collapse_mthp_stack_pop(cc, &stack_size);
-> +		order = range.order;
-> +		offset = range.offset;
-> +		nr_ptes = 1UL << order;
-> +
-> +		if (!test_bit(order, &enabled_orders))
-> +			goto next_order;
-> +
-> +		max_ptes_none = collapse_max_ptes_none(cc, vma, order);
-> +
-> +		nr_occupied_ptes = collapse_mthp_count_present(cc, offset,
-> +							       nr_ptes);
-> +
-> +		if (nr_occupied_ptes >= nr_ptes - max_ptes_none) {
-> +			int ret;
-> +
-> +			collapse_address = address + offset * PAGE_SIZE;
-> +			ret = collapse_huge_page(mm, collapse_address, referenced,
-> +						 unmapped, cc, order);
-> +			if (ret == SCAN_SUCCEED) {
-> +				collapsed += nr_ptes;
-> +				continue;
-> +			}
-> +		}
-> +
-> +next_order:
-> +		if ((BIT(order) - 1) & enabled_orders) {
-> +			const u8 next_order = order - 1;
-> +			const u16 mid_offset = offset + (nr_ptes / 2);
-> +
-> +			collapse_mthp_stack_push(cc, &stack_size, mid_offset,
-> +						 next_order);
-> +			collapse_mthp_stack_push(cc, &stack_size, offset,
-> +						 next_order);
-> +		}
-> +	}
-> +	return collapsed;
-> +}
-> +
->  static enum scan_result collapse_scan_pmd(struct mm_struct *mm,
->  		struct vm_area_struct *vma, unsigned long start_addr,
->  		bool *lock_dropped, struct collapse_control *cc)
->  {
-> -	const unsigned int max_ptes_none = collapse_max_ptes_none(cc, vma, HPAGE_PMD_ORDER);
->  	const unsigned int max_ptes_shared = collapse_max_ptes_shared(cc, HPAGE_PMD_ORDER);
->  	const unsigned int max_ptes_swap = collapse_max_ptes_swap(cc, HPAGE_PMD_ORDER);
-> +	unsigned int max_ptes_none = collapse_max_ptes_none(cc, vma, HPAGE_PMD_ORDER);
-> +	enum tva_type tva_flags = cc->is_khugepaged ? TVA_KHUGEPAGED : TVA_FORCED_COLLAPSE;
->  	pmd_t *pmd;
-> -	pte_t *pte, *_pte;
-> -	int none_or_zero = 0, shared = 0, referenced = 0;
-> +	pte_t *pte, *_pte, pteval;
-> +	int i;
-> +	int none_or_zero = 0, shared = 0, nr_collapsed = 0, referenced = 0;
->  	enum scan_result result = SCAN_FAIL;
->  	struct page *page = NULL;
->  	struct folio *folio = NULL;
->  	unsigned long addr;
-> +	unsigned long enabled_orders;
->  	spinlock_t *ptl;
->  	int node = NUMA_NO_NODE, unmapped = 0;
->
-> @@ -1436,8 +1583,19 @@ static enum scan_result collapse_scan_pmd(struct mm_struct *mm,
->  		goto out;
->  	}
->
-> +	bitmap_zero(cc->mthp_bitmap, MAX_PTRS_PER_PTE);
->  	memset(cc->node_load, 0, sizeof(cc->node_load));
->  	nodes_clear(cc->alloc_nmask);
-> +
-> +	enabled_orders = collapse_allowable_orders(vma, vma->vm_flags, tva_flags);
-> +
+> +In the case where ``type`` is KVM_SEV_SNP_PAGE_TYPE_ZERO, ``uaddr`` will be
+> +ignored completely. Otherwise, ``uaddr`` is required if
+> +kvm.vm_memory_attributes=1 and optional if kvm.vm_memory_attributes=0, since
+> +in the latter case guest memory can be initialized directly from userspace
+> +prior to converting it to private and passing the GPA range on to this
+> +interface.
+
+Just to confirm, so the sev_gmem_prepare doesn't destroy the contents in 
+the process of making it "private" ? i.e., the contents of a SNP shared
+page are preserved while transitioning to "SNP Private" (via RMP
+update).
+
+Suzuki
+
+
+
+>   
+>   Parameters (in): struct  kvm_sev_snp_launch_update
+>   
+> diff --git a/arch/x86/kvm/svm/sev.c b/arch/x86/kvm/svm/sev.c
+> index 1a361f08c7a3d..e1dbc827c2807 100644
+> --- a/arch/x86/kvm/svm/sev.c
+> +++ b/arch/x86/kvm/svm/sev.c
+> @@ -2343,7 +2343,15 @@ static int sev_gmem_post_populate(struct kvm *kvm, gfn_t gfn, kvm_pfn_t pfn,
+>   	int level;
+>   	int ret;
+>   
+> -	if (WARN_ON_ONCE(sev_populate_args->type != KVM_SEV_SNP_PAGE_TYPE_ZERO && !src_page))
 > +	/*
-> +	 * If PMD is the only enabled order, enforce max_ptes_none, otherwise
-> +	 * scan all pages to populate the bitmap for mTHP collapse.
+> +	 * For vm_memory_attributes=1, in-place conversion/population is not
+> +	 * supported, so the initial contents necessarily need to come from a
+> +	 * separate src address. For vm_memory_attributes=0, this isn't
+> +	 * necessarily the case, since the pages may have been populated
+> +	 * directly from userspace before calling KVM_SEV_SNP_LAUNCH_UPDATE.
 > +	 */
-> +	if (enabled_orders != BIT(HPAGE_PMD_ORDER))
-> +		max_ptes_none = KHUGEPAGED_MAX_PTES_LIMIT;
+> +	if (vm_memory_attributes &&
+> +	    sev_populate_args->type != KVM_SEV_SNP_PAGE_TYPE_ZERO && !src_page)
+>   		return -EINVAL;
+>   
+>   	ret = snp_lookup_rmpentry((u64)pfn, &assigned, &level);
+> @@ -2390,7 +2398,7 @@ static int sev_gmem_post_populate(struct kvm *kvm, gfn_t gfn, kvm_pfn_t pfn,
+>   	 */
+>   	if (ret && !snp_page_reclaim(kvm, pfn) &&
+>   	    sev_populate_args->type == KVM_SEV_SNP_PAGE_TYPE_CPUID &&
+> -	    sev_populate_args->fw_error == SEV_RET_INVALID_PARAM) {
+> +	    sev_populate_args->fw_error == SEV_RET_INVALID_PARAM && src_page) {
+>   		void *src_vaddr = kmap_local_page(src_page);
+>   		void *dst_vaddr = kmap_local_pfn(pfn);
+>   
+> @@ -2423,8 +2431,8 @@ static int snp_launch_update(struct kvm *kvm, struct kvm_sev_cmd *argp)
+>   	if (copy_from_user(&params, u64_to_user_ptr(argp->data), sizeof(params)))
+>   		return -EFAULT;
+>   
+> -	pr_debug("%s: GFN start 0x%llx length 0x%llx type %d flags %d\n", __func__,
+> -		 params.gfn_start, params.len, params.type, params.flags);
+> +	pr_debug("%s: GFN start 0x%llx length 0x%llx type %d flags %d src %llx\n", __func__,
+> +		 params.gfn_start, params.len, params.type, params.flags, params.uaddr);
+>   
+>   	if (!params.len || !PAGE_ALIGNED(params.len) || params.flags ||
+>   	    (params.type != KVM_SEV_SNP_PAGE_TYPE_NORMAL &&
+> @@ -2481,7 +2489,7 @@ static int snp_launch_update(struct kvm *kvm, struct kvm_sev_cmd *argp)
+>   
+>   	params.gfn_start += count;
+>   	params.len -= count * PAGE_SIZE;
+> -	if (params.type != KVM_SEV_SNP_PAGE_TYPE_ZERO)
+> +	if (src && params.type != KVM_SEV_SNP_PAGE_TYPE_ZERO)
+>   		params.uaddr += count * PAGE_SIZE;
+>   
+>   	if (copy_to_user(u64_to_user_ptr(argp->data), &params, sizeof(params)))
+> diff --git a/virt/kvm/kvm_main.c b/virt/kvm/kvm_main.c
+> index ba195bb239aaa..3bf212fd99193 100644
+> --- a/virt/kvm/kvm_main.c
+> +++ b/virt/kvm/kvm_main.c
+> @@ -105,6 +105,7 @@ module_param(allow_unsafe_mappings, bool, 0444);
+>   #ifdef CONFIG_KVM_VM_MEMORY_ATTRIBUTES
+>   bool vm_memory_attributes = true;
+>   module_param(vm_memory_attributes, bool, 0444);
+> +EXPORT_SYMBOL_FOR_KVM_INTERNAL(vm_memory_attributes);
+>   #endif
+>   DEFINE_STATIC_CALL_RET0(__kvm_get_memory_attributes, kvm_get_memory_attributes_t);
+>   EXPORT_SYMBOL_FOR_KVM_INTERNAL(STATIC_CALL_KEY(__kvm_get_memory_attributes));
+> 
 
-Hmm, this is a bit odd, what if the user set max_ptes_none = 0?
-
-I assume we handle the 0/511 thing elsewhere?
-
-> +
->  	pte = pte_offset_map_lock(mm, pmd, start_addr, &ptl);
->  	if (!pte) {
->  		cc->progress++;
-> @@ -1445,11 +1603,13 @@ static enum scan_result collapse_scan_pmd(struct mm_struct *mm,
->  		goto out;
->  	}
->
-> -	for (addr = start_addr, _pte = pte; _pte < pte + HPAGE_PMD_NR;
-> -	     _pte++, addr += PAGE_SIZE) {
-> +	for (i = 0; i < HPAGE_PMD_NR; i++) {
-> +		_pte = pte + i;
-> +		addr = start_addr + i * PAGE_SIZE;
-> +		pteval = ptep_get(_pte);
-> +
->  		cc->progress++;
->
-> -		pte_t pteval = ptep_get(_pte);
->  		if (pte_none_or_zero(pteval)) {
->  			if (++none_or_zero > max_ptes_none) {
->  				result = SCAN_EXCEED_NONE_PTE;
-> @@ -1529,6 +1689,8 @@ static enum scan_result collapse_scan_pmd(struct mm_struct *mm,
->  			}
->  		}
->
-> +		/* Set bit for occupied pages */
-> +		__set_bit(i, cc->mthp_bitmap);
->  		/*
->  		 * Record which node the original page is from and save this
->  		 * information to cc->node_load[].
-> @@ -1587,10 +1749,11 @@ static enum scan_result collapse_scan_pmd(struct mm_struct *mm,
->  	if (result == SCAN_SUCCEED) {
->  		/* collapse_huge_page expects the lock to be dropped before calling */
->  		mmap_read_unlock(mm);
-> -		result = collapse_huge_page(mm, start_addr, referenced,
-> -					    unmapped, cc, HPAGE_PMD_ORDER);
-> -		/* collapse_huge_page will return with the mmap_lock released */
-> +		nr_collapsed = mthp_collapse(mm, vma, start_addr, referenced,
-> +					     unmapped, cc, enabled_orders);
-
-I guess mthp_collapse() also does PMD collapse if only PMD is enabled?
-
-It feels like this name is a bit confusing then :)
-
-But I guess we can do a follow up to think of a better name possibly.
-
-> +		/* mmap_lock was released above, set lock_dropped */
->  		*lock_dropped = true;
-> +		result = nr_collapsed ? SCAN_SUCCEED : SCAN_FAIL;
->  	}
->  out:
->  	trace_mm_khugepaged_scan_pmd(mm, folio, referenced,
-> --
-> 2.54.0
->
-
-Thanks, Lorenzo
 
