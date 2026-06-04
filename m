@@ -1,60 +1,60 @@
-Return-Path: <linux-doc+bounces-90888-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-90884-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id a+tmFB8vIWokAQEAu9opvQ
-	(envelope-from <linux-doc+bounces-90888-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 09:54:07 +0200
+	id 3kmSDBEwIWpYAQEAu9opvQ
+	(envelope-from <linux-doc+bounces-90884-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 09:58:09 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DB0963DC85
-	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 09:54:06 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id C422863DCD3
+	for <lists+linux-doc@lfdr.de>; Thu, 04 Jun 2026 09:58:08 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=huawei.com header.s=dkim header.b="WH/gBSSH";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90888-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-90888-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=huawei.com header.s=dkim header.b=rYmGZPSE;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-90884-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-90884-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=huawei.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 617EE304A3A4
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Jun 2026 07:51:01 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 1C60A304E41D
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Jun 2026 07:50:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 96CEB3E3C5F;
-	Thu,  4 Jun 2026 07:50:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 26EE53DFC7D;
+	Thu,  4 Jun 2026 07:50:16 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from canpmsgout11.his.huawei.com (canpmsgout11.his.huawei.com [113.46.200.226])
+Received: from canpmsgout12.his.huawei.com (canpmsgout12.his.huawei.com [113.46.200.227])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 485B23CF97F;
-	Thu,  4 Jun 2026 07:50:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 356DBCA45;
+	Thu,  4 Jun 2026 07:50:13 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780559420; cv=none; b=JkQo6iX73UlbXH8dbud11tzhsoHDASGxk3OvGzqVkiDAj1CbOOxetImV1ePHwGPz0vr22sPT9sWgtkkTcWBrlxOrnOhpf/eRKqpLeeptfk1y4iLZUB+HKOwOtntCtx6M2S4oqYRoVz85D4nSINulS3l/NK68gtozaEbrorEM76w=
+	t=1780559415; cv=none; b=BdE6hChZtjbtPqoq+NA+CMuAYJDaEcVloZnhlQLYU4Whyj4K6VnrlF/odq0zvOFCMc7K0ZEZkc8hN+/a6ZbS6ok4LOMCpFyTvW0+CvLxJVyUkLx4CGbKGDgzX1xBwMtRdq5pGNVzN9YcCb4srhrtNlWOSMZI9vW//QZ5wMn7ZLQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780559420; c=relaxed/simple;
-	bh=mW4cgkiY+KVchz44fwvtX3z4vBi8nEZVepIbIkTxg5g=;
+	s=arc-20240116; t=1780559415; c=relaxed/simple;
+	bh=Xi6jLInEcETVU5w4SaocDXndF2bqdv5LK+f5Mt49hbc=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=PNuIAYyW+Xh6zGDa2PfCI/vyZFfJWGmXcxOc2n5VnnD+BrTouhmWsxa0HFNUBX6fUvTtIspS5e/1k+hK8c8/t6oorK0qZ1kU1S8UjmJvcDvIBNIX8/BZV4P/M+tzdGO0lhxBOASWIoNh9YVtJeCJVsu4IMhBxswaKHgwTOwic5E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=WH/gBSSH; arc=none smtp.client-ip=113.46.200.226
+	 MIME-Version:Content-Type; b=n1kZLLcQW1NigutFDqr+ynIF9TVt5E37zkjHsj4oEXBWteWIvbDUnqErJNiTnrrXwM5YJ16DTv5elx8yeC8EmPl0P3rGc6lI4BH5Vg8ih9lxkirvnpX6vaokO8GKGZ5DDV/aWK0KowE8ZaCP7P/Mt47Tq/SANpLxYDrYs1PyYMo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=rYmGZPSE; arc=none smtp.client-ip=113.46.200.227
 dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
 	c=relaxed/relaxed; q=dns/txt;
 	h=From;
-	bh=Ts2iYOlNKH3kWFa5rVVu9XfgvOuT/GxiEr87iyKRZdg=;
-	b=WH/gBSSHVf9VXwlXAHa5ElbV+aucjJmYuCIctUTcGAf8dRCwRPe+0aqhiFGvYOb5sLqRWoDNZ
-	zH3Sa/ejc8FEgjZ+77oaweKi8p7oYa+hYUEvROVIctbEXLhdodm7R6/tsJ36ABZJ2gjhHX0GL5F
-	/A0+xVeUx7684OTjwwW+8aA=
+	bh=b539C+AawPNqTUMTRaV+ozcrDgitM+hGFWLgyJ7L8wc=;
+	b=rYmGZPSEvc1o55e0ayzpTaHAV3hJcI8qHt0pXiNu26au/R27FzaE4egOodIf4xP/fpjWAXTAr
+	USf31VnVXyQvuClXD+dFpSFLdgEtX31GohzHk2bxQQORsnKynDljKsAZatZMsWIJ4izGpRa9ZPG
+	d+n0A4aVfZ6Uz86n8yjI1Io=
 Received: from mail.maildlp.com (unknown [172.19.163.200])
-	by canpmsgout11.his.huawei.com (SkyGuard) with ESMTPS id 4gWGk01W7XzKm8N;
-	Thu,  4 Jun 2026 15:42:16 +0800 (CST)
-Received: from dggemv712-chm.china.huawei.com (unknown [10.1.198.32])
-	by mail.maildlp.com (Postfix) with ESMTPS id 348594055B;
-	Thu,  4 Jun 2026 15:50:09 +0800 (CST)
+	by canpmsgout12.his.huawei.com (SkyGuard) with ESMTPS id 4gWGk13jKbznTbR;
+	Thu,  4 Jun 2026 15:42:17 +0800 (CST)
+Received: from dggemv705-chm.china.huawei.com (unknown [10.3.19.32])
+	by mail.maildlp.com (Postfix) with ESMTPS id 1D86B4055B;
+	Thu,  4 Jun 2026 15:50:10 +0800 (CST)
 Received: from kwepemn200012.china.huawei.com (7.202.194.135) by
- dggemv712-chm.china.huawei.com (10.1.198.32) with Microsoft SMTP Server
+ dggemv705-chm.china.huawei.com (10.3.19.32) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.11; Thu, 4 Jun 2026 15:50:08 +0800
+ 15.2.1544.11; Thu, 4 Jun 2026 15:50:09 +0800
 Received: from huawei.com (10.50.163.32) by kwepemn200012.china.huawei.com
  (7.202.194.135) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Thu, 4 Jun
- 2026 15:50:07 +0800
+ 2026 15:50:08 +0800
 From: Sizhe Liu <liusizhe5@huawei.com>
 To: <rostedt@goodmis.org>, <mhiramat@kernel.org>,
 	<mathieu.desnoyers@efficios.com>, <corbet@lwn.net>,
@@ -72,9 +72,9 @@ CC: <linux-kernel@vger.kernel.org>, <linux-pci@vger.kernel.org>,
 	<linux-doc@vger.kernel.org>, <linuxarm@huawei.com>,
 	<prime.zeng@hisilicon.com>, <fanghao11@huawei.com>, <wuyifan50@huawei.com>,
 	<liusizhe5@huawei.com>
-Subject: [PATCH 02/10] perf hisi-ptt: Fix PTT trace TLP Header parsing
-Date: Thu, 4 Jun 2026 15:49:57 +0800
-Message-ID: <20260604075005.2219785-3-liusizhe5@huawei.com>
+Subject: [PATCH 03/10] perf hisi-ptt: Rename hisi_ptt_4dw union for reuse
+Date: Thu, 4 Jun 2026 15:49:58 +0800
+Message-ID: <20260604075005.2219785-4-liusizhe5@huawei.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20260604075005.2219785-1-liusizhe5@huawei.com>
 References: <20260604075005.2219785-1-liusizhe5@huawei.com>
@@ -94,7 +94,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -103,12 +103,12 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FORWARDED(0.00)[lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS(0.00)[m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:bhelgaas@google.com,m:yangyccccc@gmail.com,m:jic23@kernel.org,m:john.g.garry@oracle.com,m:will@kernel.org,m:james.clark@linaro.org,m:mike.leach@arm.com,m:leo.yan@linux.dev,m:peterz@infradead.org,m:mingo@redhat.com,m:acme@kernel.org,m:namhyung@kernel.org,m:mark.rutland@arm.com,m:alexander.shishkin@linux.intel.com,m:jolsa@kernel.org,m:irogers@google.com,m:adrian.hunter@intel.com,m:wangyushan12@huawei.com,m:shenyang39@huawei.com,m:gaozhihao6@h-partners.com,m:yuzhichengcheng@h-partners.com,m:liyihang9@h-partners.com,m:linux-kernel@vger.kernel.org,m:linux-pci@vger.kernel.org,m:linux-perf-users@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-doc@vger.kernel.org,m:linuxarm@huawei.com,m:prime.zeng@hisilicon.com,m:fanghao11@huawei.com,m:wuyifan50@huawei.com,m:liusizhe5@huawei.com,s:lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-90888-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-90884-lists,linux-doc=lfdr.de];
 	FORGED_SENDER(0.00)[liusizhe5@huawei.com,linux-doc@vger.kernel.org];
 	RCVD_TLS_LAST(0.00)[];
 	FREEMAIL_TO(0.00)[goodmis.org,kernel.org,efficios.com,lwn.net,linuxfoundation.org,google.com,gmail.com,oracle.com,linaro.org,arm.com,linux.dev,infradead.org,redhat.com,linux.intel.com,intel.com,huawei.com,h-partners.com];
 	DKIM_TRACE(0.00)[huawei.com:+];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCPT_COUNT_TWELVE(0.00)[37];
 	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
@@ -117,150 +117,78 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_NONE(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,vger.kernel.org:from_smtp,huawei.com:mid,huawei.com:dkim,huawei.com:from_mime,huawei.com:email];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[huawei.com:mid,huawei.com:dkim,huawei.com:from_mime,huawei.com:email,vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCVD_COUNT_SEVEN(0.00)[7]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 5DB0963DC85
+X-Rspamd-Queue-Id: C422863DCD3
 
-The DW0 bit field layout of the hisi_ptt_4dw union does not match the
-actual bit ordering in little-endian memory, causing incorrect field
-extraction. Reorder the struct members from LSB to MSB to match the
-le32_to_cpu() conversion.
+Rename union hisi_ptt_4dw to hisi_ptt_field_data so that it can hold
+bit field layouts for different DW headers. Add the struct member name
+dw0_4dw to indicate that the inner struct is for 4DW format DW0.
 
-Also print all DW hex values in big-endian byte order for readability,
-matching the bit field layout shown in the format diagram.
-
-4DW format is like:
-bits [31:30] [ 29:25 ][24][23][22][21][    20:11   ][    10:0    ]
-     |-----|---------|---|---|---|---|-------------|-------------|
-DW0  [ Fmt ][  Type  ][T9][T8][TH][SO][   Length   ][    Time    ]
-DW1  [                     Header DW1                            ]
-DW2  [                     Header DW2                            ]
-DW3  [                     Header DW3                            ]
-
-Cc: stable@vger.kernel.org
-Fixes: 5e91e57e6809 ("perf auxtrace arm64: Add support for parsing HiSilicon PCIe Trace packet")
 Signed-off-by: Sizhe Liu <liusizhe5@huawei.com>
 ---
- Documentation/trace/hisi-ptt.rst              | 28 ++++++++--------
- .../hisi-ptt-decoder/hisi-ptt-pkt-decoder.c   | 33 ++++++++++++-------
- 2 files changed, 35 insertions(+), 26 deletions(-)
+ .../hisi-ptt-decoder/hisi-ptt-pkt-decoder.c    | 18 ++++++++++--------
+ 1 file changed, 10 insertions(+), 8 deletions(-)
 
-diff --git a/Documentation/trace/hisi-ptt.rst b/Documentation/trace/hisi-ptt.rst
-index 6eef28ebb0c7..f6a2655f99e5 100644
---- a/Documentation/trace/hisi-ptt.rst
-+++ b/Documentation/trace/hisi-ptt.rst
-@@ -285,20 +285,20 @@ according to the format described previously (take 8DW as an example):
-     [...perf headers and other information]
-     . ... HISI PTT data: size 4194304 bytes
-     .  00000000: 00 00 00 00                                 Prefix
--    .  00000004: 01 00 00 60                                 Header DW0
--    .  00000008: 0f 1e 00 01                                 Header DW1
--    .  0000000c: 04 00 00 00                                 Header DW2
--    .  00000010: 40 00 81 02                                 Header DW3
--    .  00000014: 33 c0 04 00                                 Time
-+    .  00000004: 60 00 00 01                                 Header DW0
-+    .  00000008: 01 00 1e 0f                                 Header DW1
-+    .  0000000c: 00 00 00 04                                 Header DW2
-+    .  00000010: 02 81 00 40                                 Header DW3
-+    .  00000014: 00 04 c0 33                                 Time
-     .  00000020: 00 00 00 00                                 Prefix
--    .  00000024: 01 00 00 60                                 Header DW0
--    .  00000028: 0f 1e 00 01                                 Header DW1
--    .  0000002c: 04 00 00 00                                 Header DW2
--    .  00000030: 40 00 81 02                                 Header DW3
--    .  00000034: 02 00 00 00                                 Time
-+    .  00000024: 60 00 00 01                                 Header DW0
-+    .  00000028: 01 00 1e 0f                                 Header DW1
-+    .  0000002c: 00 00 00 04                                 Header DW2
-+    .  00000030: 02 81 00 40                                 Header DW3
-+    .  00000034: 00 00 00 02                                 Time
-     .  00000040: 00 00 00 00                                 Prefix
--    .  00000044: 01 00 00 60                                 Header DW0
--    .  00000048: 0f 1e 00 01                                 Header DW1
--    .  0000004c: 04 00 00 00                                 Header DW2
--    .  00000050: 40 00 81 02                                 Header DW3
-+    .  00000044: 60 00 00 01                                 Header DW0
-+    .  00000048: 01 00 1e 0f                                 Header DW1
-+    .  0000004c: 00 00 00 04                                 Header DW2
-+    .  00000050: 02 81 00 40                                 Header DW3
-     [...]
 diff --git a/tools/perf/util/hisi-ptt-decoder/hisi-ptt-pkt-decoder.c b/tools/perf/util/hisi-ptt-decoder/hisi-ptt-pkt-decoder.c
-index c48b2ce7c4a3..67024f18ebbb 100644
+index 67024f18ebbb..5daae2eaf435 100644
 --- a/tools/perf/util/hisi-ptt-decoder/hisi-ptt-pkt-decoder.c
 +++ b/tools/perf/util/hisi-ptt-decoder/hisi-ptt-pkt-decoder.c
-@@ -11,6 +11,7 @@
- #include <byteswap.h>
- #include <linux/bitops.h>
- #include <stdarg.h>
-+#include <linux/kernel.h>
+@@ -74,7 +74,8 @@ static const char * const hisi_ptt_4dw_pkt_field_name[] = {
+ 	[HISI_PTT_4DW_HEAD3]	= "Header DW3",
+ };
  
- #include "../color.h"
- #include "hisi-ptt-pkt-decoder.h"
-@@ -75,14 +76,14 @@ static const char * const hisi_ptt_4dw_pkt_field_name[] = {
- 
- union hisi_ptt_4dw {
+-union hisi_ptt_4dw {
++union hisi_ptt_field_data {
++	/* Header DW0 for 4DW format */
  	struct {
--		uint32_t format : 2;
--		uint32_t type : 5;
--		uint32_t t9 : 1;
--		uint32_t t8 : 1;
--		uint32_t th : 1;
--		uint32_t so : 1;
--		uint32_t len : 10;
  		uint32_t time : 11;
-+		uint32_t len : 10;
-+		uint32_t so : 1;
-+		uint32_t th : 1;
-+		uint32_t t8 : 1;
-+		uint32_t t9 : 1;
-+		uint32_t type : 5;
-+		uint32_t format : 2;
- 	};
+ 		uint32_t len : 10;
+@@ -84,7 +85,7 @@ union hisi_ptt_4dw {
+ 		uint32_t t9 : 1;
+ 		uint32_t type : 5;
+ 		uint32_t format : 2;
+-	};
++	} dw0_4dw;
  	uint32_t value;
  };
-@@ -90,12 +91,17 @@ union hisi_ptt_4dw {
- static void hisi_ptt_print_pkt(const unsigned char *buf, int pos, const char *desc)
+ 
+@@ -128,15 +129,15 @@ static int hisi_ptt_8dw_pkt_desc(const unsigned char *buf, int pos)
+ static void hisi_ptt_4dw_print_dw0(const unsigned char *buf, int pos)
  {
  	const char *color = PERF_COLOR_BLUE;
-+	uint32_t value;
-+	uint8_t byte;
+-	union hisi_ptt_4dw dw0;
++	union hisi_ptt_field_data dw;
+ 	uint8_t byte;
  	int i;
  
-+	value = le32_to_cpu(*(__le32 *)(buf + pos));
+-	dw0.value = le32_to_cpu(*(__le32 *)(buf + pos));
++	dw.value = le32_to_cpu(*(__le32 *)(buf + pos));
  	printf(".");
  	color_fprintf(stdout, color, "  %08x: ", pos);
--	for (i = 0; i < HISI_PTT_FIELD_LENGTH; i++)
--		color_fprintf(stdout, color, "%02x ", buf[pos + i]);
-+	for (i = 0; i < HISI_PTT_FIELD_LENGTH; i++) {
-+		byte = (value >> (24 - i * 8)) & 0xFF;
-+		color_fprintf(stdout, color, "%02x ", byte);
-+	}
+ 	for (i = 0; i < HISI_PTT_FIELD_LENGTH; i++) {
+-		byte = (dw0.value >> (24 - i * 8)) & 0xFF;
++		byte = (dw.value >> (24 - i * 8)) & 0xFF;
+ 		color_fprintf(stdout, color, "%02x ", byte);
+ 	}
  	for (i = 0; i < HISI_PTT_MAX_SPACE_LEN; i++)
- 		color_fprintf(stdout, color, "   ");
- 	color_fprintf(stdout, color, "  %s\n", desc);
-@@ -123,13 +129,16 @@ static void hisi_ptt_4dw_print_dw0(const unsigned char *buf, int pos)
- {
- 	const char *color = PERF_COLOR_BLUE;
- 	union hisi_ptt_4dw dw0;
-+	uint8_t byte;
- 	int i;
+@@ -144,9 +145,10 @@ static void hisi_ptt_4dw_print_dw0(const unsigned char *buf, int pos)
  
--	dw0.value = *(uint32_t *)(buf + pos);
-+	dw0.value = le32_to_cpu(*(__le32 *)(buf + pos));
- 	printf(".");
- 	color_fprintf(stdout, color, "  %08x: ", pos);
--	for (i = 0; i < HISI_PTT_FIELD_LENGTH; i++)
--		color_fprintf(stdout, color, "%02x ", buf[pos + i]);
-+	for (i = 0; i < HISI_PTT_FIELD_LENGTH; i++) {
-+		byte = (dw0.value >> (24 - i * 8)) & 0xFF;
-+		color_fprintf(stdout, color, "%02x ", byte);
-+	}
- 	for (i = 0; i < HISI_PTT_MAX_SPACE_LEN; i++)
- 		color_fprintf(stdout, color, "   ");
+ 	color_fprintf(stdout, color,
+ 		      "  %s %x %s %x %s %x %s %x %s %x %s %x %s %x %s %x\n",
+-		      "Format", dw0.format, "Type", dw0.type, "T9", dw0.t9,
+-		      "T8", dw0.t8, "TH", dw0.th, "SO", dw0.so, "Length",
+-		      dw0.len, "Time", dw0.time);
++		      "Format", dw.dw0_4dw.format, "Type", dw.dw0_4dw.type,
++		      "T9", dw.dw0_4dw.t9, "T8", dw.dw0_4dw.t8,
++		      "TH", dw.dw0_4dw.th, "SO", dw.dw0_4dw.so,
++		      "Length", dw.dw0_4dw.len, "Time", dw.dw0_4dw.time);
+ }
  
+ static int hisi_ptt_4dw_pkt_desc(const unsigned char *buf, int pos)
 -- 
 2.33.0
 
