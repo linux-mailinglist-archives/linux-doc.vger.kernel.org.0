@@ -1,66 +1,102 @@
-Return-Path: <linux-doc+bounces-91016-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91019-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id chCnNCAvImpdTgEAu9opvQ
-	(envelope-from <linux-doc+bounces-91016-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 05 Jun 2026 04:06:24 +0200
+	id 7UzwICU+ImrZUAEAu9opvQ
+	(envelope-from <linux-doc+bounces-91019-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 05 Jun 2026 05:10:29 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C29A644983
-	for <lists+linux-doc@lfdr.de>; Fri, 05 Jun 2026 04:06:24 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id C9387644CDF
+	for <lists+linux-doc@lfdr.de>; Fri, 05 Jun 2026 05:10:28 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=163.com header.s=s110527 header.b=GjMWQdsM;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91016-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91016-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=163.com;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=bZMC6khA;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91019-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91019-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=gmail.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 9784D302F6B0
-	for <lists+linux-doc@lfdr.de>; Fri,  5 Jun 2026 02:06:02 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 7228D301BA51
+	for <lists+linux-doc@lfdr.de>; Fri,  5 Jun 2026 03:10:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4267F3D79FF;
-	Fri,  5 Jun 2026 02:05:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8A440284B25;
+	Fri,  5 Jun 2026 03:10:26 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.2])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f67.google.com (mail-pj1-f67.google.com [209.85.216.67])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7D97B3932EE;
-	Fri,  5 Jun 2026 02:05:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22856282F19
+	for <linux-doc@vger.kernel.org>; Fri,  5 Jun 2026 03:10:22 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780625155; cv=none; b=mrlTgIWGe3izuK+FeK/rzaywvkJ7G6lFLPqC+ks9ZPSduI+HsnuWSGlQrRnJHcKSULVGtwveuPdbYrvPxUnJaHajvUv/lEK1B05ZNGmGsPqK+twU7shI72u7JN7vH9jTqDCKJStHRCX7tRo0opA570SOuUycS56TX+X0zV9hTLI=
+	t=1780629026; cv=none; b=LXMkKiBDqAHUzWeSlw3JodlKUncYbUUDwlKQCrnXfw1RrWR8a1seRG6kfNqSGvPSKly0LqDYqmQpWepbXnyzHionTUnW1aKKVcM4c2f8fKJVxOrzC5R9z47pIDbtQatf1iOpRcxfndDOkdJujDieHn9JOQADFM/10wxOerCxvnU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780625155; c=relaxed/simple;
-	bh=ncAsXFcYB9+tI8BWusAz1SdAtp4v42J/790HGF41wik=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=pH2ektN4josYh/Nz1VVHjg0JbgqVaRS8W1HGZLot26VO5doKjA5rMaPLvsO2w9hWOs377YYUulKko5yvemPpsNRoEpHO3F+9BZbPhlhOEXf0WOI/uLA5Z6q57cq3JkTICNVvAcXXNNmWYWrX67Dc7IUFV/GwpWAmYlImpY4S0Bk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=GjMWQdsM; arc=none smtp.client-ip=117.135.210.2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=X9
-	/TiF/Qz6KbmWNEuOOERR0ARs9jh9FBZxL+cbHl9U4=; b=GjMWQdsMwjMg1Rm+82
-	+BvRxCskvX+IzNA24SYHKbQh8x1uB7PicsgjynBkGfW7qhludKKHQRk00WGUHeHa
-	XSm+rLzwJTJeakFAlon4nslWSsFRi+T6jTb1+OJ3aCHxNVs1HTpqGsGdenuJl67d
-	npJMObgiOveiNkzhUfn3aPXD8=
-Received: from ZM.localdomain (unknown [])
-	by gzga-smtp-mtada-g1-0 (Coremail) with SMTP id _____wAXVW_FLiJq4ffOBQ--.62174S5;
-	Fri, 05 Jun 2026 10:05:06 +0800 (CST)
-From: Ziming Zhu <zmzhu0630@163.com>
-To: Guenter Roeck <linux@roeck-us.net>
-Cc: Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	linux-hwmon@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
+	s=arc-20240116; t=1780629026; c=relaxed/simple;
+	bh=t1mLICHhnLO6Jky0VScBSiBvl0tHQMm8najzZsWVzQM=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=ODNDn/2Z6J2OOpEJUcgCSxmQR6ZbF3jSouqgcWY2d2T1I88A4zDWLfO+7as66nNmZTITDyRRdJ3nm1bewGpbMRPkfcuD8tBePu1Oh/Cy9qg0U2PvcCFhAkkkl4kzMNk5iNJdfYyJCnYxSju/YQQ7N92Ou34NqdFcc0ogKmYkFjE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=bZMC6khA; arc=none smtp.client-ip=209.85.216.67
+Received: by mail-pj1-f67.google.com with SMTP id 98e67ed59e1d1-36b8d414666so901616a91.3
+        for <linux-doc@vger.kernel.org>; Thu, 04 Jun 2026 20:10:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1780629022; x=1781233822; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=1ZEmz9CjR/k1fq+15RyyqofRsMPk5Kd3zOMwojBu/vU=;
+        b=bZMC6khAH9383EEsSLZQWxJNKeAIderYC6rSNpZKaaS3tQia09QMDGpuru9CzJ8grM
+         X6qL16H7ha98TzJrdt4Iq2fProetQIv6cFjRePBzWI9Tp7LW8sldtbbyENsckC3aRYe9
+         I7/B3cTWE2CJOCho6lx4mYmrY6UN7oxgGO8bjyMeKn3ejFQ5evtAPOHP2dwb/FTjXHWX
+         M0Ei0SM3gr44aXrhsz8wBSBJ0FV5N7jYCaLY7vBXxFmCj5nUPQnpHjf0KEHU48Nec7Fj
+         TYNKITtMyoyV//uaJwmGh11GI60dC5sQPuiyRdDwtUNs2/t2zCG8qNF8RuYMZmwgIfQQ
+         ifcw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780629022; x=1781233822;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=1ZEmz9CjR/k1fq+15RyyqofRsMPk5Kd3zOMwojBu/vU=;
+        b=FYHnqQ8mUjXMR/eh6NjFE6z8hwqT21LqopAUvlhdMoOee9STM9C1xuz23RY1rF2MEC
+         O5egaxnhVYgyfcFjIA8iBEaOPsIjzWlNyCXNetnIVVhu/SFlI7vInZgGb5huKSK/mDeV
+         s7kxJHpNi7LdhcC+SbD8BdQMISjmYuyszIium2qk6B3heHVFrT9WhYcNXRmbgJ/wx3NX
+         LPiP5KOHrZdQo62/QNWwixD25Ips3b165pGCA80x5h6NTUYcqzjTmF31tXeM+SIpd6+H
+         9LO8+qk7sfJwEn1DBqutbqH5GjEJmwEBA9TEVORpgY0ddrAbiixQ9keVTnqTTLKGESHj
+         gjLQ==
+X-Forwarded-Encrypted: i=1; AFNElJ9KPJmz/hy55C5dfvjuC9RF6c3F7d1KgfgwURVsYtOjbzyCDBuyn+xNKOrpe9dnDVuu8/cvi5+eZBs=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyDvHcHBy5dUrerDaZJK77BzVa7CkYwfSczlya+kmPYFh0QdQ7e
+	F7cxaJ7Z8GNb8Svb2sNaTw+BGbUKixlVMeDsB+vbRPVufCPbcmxeb/Av
+X-Gm-Gg: Acq92OH0AbHC2gXHWftedcZPO6pqoOdqiL/GaU19X4Y7g5JzBJoJT2TQI5aRzlhCSla
+	zrwny+4sxOgXzAcxztbW2ZReSkpzbQgZUj6EuosAorwf5rp1USkf2WJjjF6AFyDKnhpnLRObLzw
+	CR4s2jKtyT57s0MthLNeLBzyYCYWfsN40yuEqNceXCme8bS6Ys5eSRU38ChEKnHgejoZ3EFEs7o
+	nh2SuF7KMl7MQcfz2qP5P0HqjCkQcndXTEMJhTDJDgAlBByXTlRrmY8olTJM8cI+Ik0TwzS7GMY
+	0KrSnY/wppIs2ZWaDhIxK6bbptGllciQS4HZRKssWMJTyvGmK2/ctwnhocr6iD3rzCSN6VFVRP4
+	r1GNyC/mE/SZbe6BgYoANe9TOXhJsRR8j9zKqGhmIQaUMT+y41iwPsks7Iv6IVvOs/0nlEooznQ
+	2DoEChpKwCLHzpzD1ZYZ838LZjraymetU=
+X-Received: by 2002:a17:90a:fc45:b0:36d:a510:f8eb with SMTP id 98e67ed59e1d1-370eeff1e46mr1595157a91.3.1780629022034;
+        Thu, 04 Jun 2026 20:10:22 -0700 (PDT)
+Received: from kernel.. ([116.128.244.169])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-37133082519sm295006a91.1.2026.06.04.20.10.15
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 04 Jun 2026 20:10:21 -0700 (PDT)
+From: Kunwu Chan <kunwu.chan@gmail.com>
+X-Google-Original-From: Kunwu Chan <kunwu.chan@linux.dev>
+To: sj@kernel.org,
+	akpm@linux-foundation.org,
+	david@kernel.org,
+	ljs@kernel.org,
+	liam@infradead.org,
+	vbabka@kernel.org,
+	rppt@kernel.org,
+	surenb@google.com,
+	mhocko@suse.com,
+	corbet@lwn.net,
+	skhan@linuxfoundation.org
+Cc: damon@lists.linux.dev,
+	linux-mm@kvack.org,
 	linux-doc@vger.kernel.org,
-	Ziming Zhu <ziming.zhu@silergycorp.com>
-Subject: [PATCH 3/3] hwmon: Add documentation for SQ24860
-Date: Fri,  5 Jun 2026 10:04:50 +0800
-Message-Id: <20260605020450.89638-4-zmzhu0630@163.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20260605020450.89638-1-zmzhu0630@163.com>
-References: <20260605020450.89638-1-zmzhu0630@163.com>
+	linux-kernel@vger.kernel.org,
+	Kunwu Chan <kunwu.chan@gmail.com>,
+	Wang Lian <lianux.mm@gmail.com>
+Subject: [PATCH] Docs/damon: add TLB flush policy document
+Date: Fri,  5 Jun 2026 11:10:08 +0800
+Message-ID: <20260605031008.397328-1-kunwu.chan@linux.dev>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -68,176 +104,222 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:_____wAXVW_FLiJq4ffOBQ--.62174S5
-X-Coremail-Antispam: 1Uf129KBjvJXoWxJF1DXry3Kw47urW5KFW8Crg_yoWruw4UpF
-	93GrySkw1UXrW7WFW3tw18Zr45Gay8Ar43AF1kJryrZFn8Ar1vkrnrKF13Ja4DKrn5AFWr
-	KF4UtrWUJw4jkFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07Ud9N-UUUUU=
-X-CM-SenderInfo: x2p2x3aqwtiqqrwthudrp/xtbC6BLi22oiLtIJbwAA3R
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.84 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[163.com,none];
 	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[163.com:s=s110527];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	TAGGED_FROM(0.00)[bounces-91016-lists,linux-doc=lfdr.de];
-	TO_DN_SOME(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER(0.00)[zmzhu0630@163.com,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	TAGGED_FROM(0.00)[bounces-91019-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:linux@roeck-us.net,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-hwmon@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:ziming.zhu@silergycorp.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:sj@kernel.org,m:akpm@linux-foundation.org,m:david@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:damon@lists.linux.dev,m:linux-mm@kvack.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:kunwu.chan@gmail.com,m:lianux.mm@gmail.com,m:kunwuchan@gmail.com,m:lianuxmm@gmail.com,s:lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER(0.00)[kunwuchan@gmail.com,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[lists.linux.dev,kvack.org,vger.kernel.org,gmail.com];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[163.com];
+	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[zmzhu0630@163.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[kunwuchan@gmail.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[163.com:+];
-	ALIAS_RESOLVED(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	RCVD_COUNT_FIVE(0.00)[5];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,silergycorp.com:email]
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ALIAS_RESOLVED(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 6C29A644983
+X-Rspamd-Queue-Id: C9387644CDF
 
-From: Ziming Zhu <ziming.zhu@silergycorp.com>
+From: Kunwu Chan <kunwu.chan@gmail.com>
 
-Document the supported sysfs attributes for the Silergy SQ24860 PMBus
-hwmon driver.
+DAMON avoids TLB flushes after clearing PTE Accessed bits for sampling.
+The overhead was measured and found significant [1].  Production
+workloads with large working sets flush TLB buffers naturally, so
+accuracy impact is negligible.
 
-Signed-off-by: Ziming Zhu <ziming.zhu@silergycorp.com>
+On systems with large TLB buffers and small test workloads, stale TLB
+entries persist across sampling intervals and produce false negatives.
+This comes up repeatedly on the mailing list and in private inquiries
+[2][3].
+
+Add a document on the design decision, trade-offs, test environment
+problems, and recommendations.
+
+Link: https://lore.kernel.org/20200403103059.12762-1-sjpark@amazon.com [1]
+Link: https://lore.kernel.org/20260117020731.226785-3-sj@kernel.org [2]
+Link: https://lore.kernel.org/all/20260526145034.91594-1-sj@kernel.org [3]
+
+Co-developed-by: Wang Lian <lianux.mm@gmail.com>
+Signed-off-by: Wang Lian <lianux.mm@gmail.com>
+Signed-off-by: Kunwu Chan <kunwu.chan@gmail.com>
 ---
- Documentation/hwmon/index.rst   |  1 +
- Documentation/hwmon/sq24860.rst | 96 +++++++++++++++++++++++++++++++++
- 2 files changed, 97 insertions(+)
- create mode 100644 Documentation/hwmon/sq24860.rst
+ Documentation/mm/damon/index.rst     |   1 +
+ Documentation/mm/damon/tlb_flush.rst | 131 +++++++++++++++++++++++++++
+ 2 files changed, 132 insertions(+)
+ create mode 100644 Documentation/mm/damon/tlb_flush.rst
 
-diff --git a/Documentation/hwmon/index.rst b/Documentation/hwmon/index.rst
-index 8b655e5d6b68..1888905cd234 100644
---- a/Documentation/hwmon/index.rst
-+++ b/Documentation/hwmon/index.rst
-@@ -242,6 +242,7 @@ Hardware Monitoring Kernel Drivers
-    smsc47m192
-    smsc47m1
-    sparx5-temp
-+   sq24860
-    spd5118
-    stpddc60
-    surface_fan
-diff --git a/Documentation/hwmon/sq24860.rst b/Documentation/hwmon/sq24860.rst
+diff --git a/Documentation/mm/damon/index.rst b/Documentation/mm/damon/index.rst
+index 318f6a7bfea4..5e239437dab3 100644
+--- a/Documentation/mm/damon/index.rst
++++ b/Documentation/mm/damon/index.rst
+@@ -19,6 +19,7 @@ DAMON is a Linux kernel subsystem for efficient :ref:`data access monitoring
+ 
+    faq
+    design
++   tlb_flush
+    api
+    maintainer-profile
+ 
+diff --git a/Documentation/mm/damon/tlb_flush.rst b/Documentation/mm/damon/tlb_flush.rst
 new file mode 100644
-index 000000000000..7029f612e1b9
+index 000000000000..394f7b86102a
 --- /dev/null
-+++ b/Documentation/hwmon/sq24860.rst
-@@ -0,0 +1,96 @@
++++ b/Documentation/mm/damon/tlb_flush.rst
+@@ -0,0 +1,131 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +
-+Kernel driver sq24860
-+=====================
++==========================================
++DAMON TLB Flush Policy
++==========================================
 +
-+Supported chips:
++:Author: Kunwu Chan <kunwu.chan@gmail.com>
++:Author: Wang Lian <lianux.mm@gmail.com>
 +
-+  * Silergy SQ24860
++Overview
++========
 +
-+    Prefix: 'sq24860'
++DAMON monitors data access by sampling PTE (Page Table Entry) Accessed bits
++using ``ptep_test_and_clear_young()`` and ``pmdp_test_and_clear_young()``.
++These functions clear the Accessed bit but do **not** flush the TLB
++(Translation Lookaside Buffer).  This is an intentional design choice.
 +
-+Author:
++Questions about this behavior come up repeatedly, both on the mailing list
++and in private inquiries.  This document describes the reasoning, the
++trade-offs, and recommendations for users and testers.
 +
-+	Ziming Zhu <ziming.zhu@silergycorp.com>
++Background
++==========
 +
-+Description
-+------------
++DAMON's access check works as follows:
 +
-+This driver implements support for the Silergy SQ24860 eFuse. The device is an
-+integrated circuit protection and power management device with a PMBus
-+interface.
++1. Clear the PTE Accessed bit for a sampled page.
++2. Wait for one ``sampling interval``.
++3. Check if the Accessed bit has been set again by the hardware.
 +
-+The device supports direct format for reading input voltage, output voltage,
-+auxiliary voltage, input current, input power, and temperature.
++If the bit was set again, the page was accessed during the sampling interval.
 +
-+The current and power measurement scale depends on the resistor connected
-+between the IMON pin and ground. The resistor value can be configured with the
-+``sy,rimon-micro-ohms`` device tree property. See
-+``Documentation/devicetree/bindings/hwmon/pmbus/silergy,sq24860.yaml`` for details.
++On architectures with hardware-managed TLB (e.g., x86, arm64), the CPU may
++cache the Accessed bit state in the TLB.  After DAMON clears the Accessed bit
++in the page table, a stale TLB entry with the old Accessed bit remains in the
++TLB.  When the workload accesses the page, the access hits the stale TLB
++entry and does not trigger a page table walk, so the Accessed bit in the page
++table is not set again.  DAMON therefore fails to detect real accesses on its
++next check, reporting false negatives.
 +
-+Due to the specificities of the chip, all history reset attributes are tied
-+together. Resetting the history of one sensor resets the history of all sensors.
++Flushing the TLB after clearing the Accessed bit prevents stale TLB entries
++and eliminates this problem.  Functions such as ``ptep_clear_flush_young()`` and
++``pmdp_clear_flush_young()`` provide this behavior.  However, TLB flushes come
++at a performance cost.
 +
-+Sysfs entries
-+-------------
++Why DAMON Does Not Flush TLB
++============================
 +
-+The following attributes are supported. Limits are read-write; all other
-+attributes are read-only.
++DAMON intentionally avoids TLB flushes to keep monitoring overhead low.
++The decision was made after measuring the performance impact of adding TLB
++flushes to the sampling path.  The measurement showed the overhead is
++significant enough to matter for production use [1]_.
 +
-+======================= ======================================================
-+in1_label               "vin"
-+in1_input               Measured input voltage.
-+in1_average             Average measured input voltage.
-+in1_min                 Minimum input voltage limit.
-+in1_lcrit               Critical low input voltage limit.
-+in1_max                 Maximum input voltage limit.
-+in1_crit                Critical high input voltage limit.
-+in1_min_alarm           Input voltage low warning alarm.
-+in1_lcrit_alarm         Input voltage low fault alarm.
-+in1_max_alarm           Input voltage high warning alarm.
-+in1_crit_alarm          Input voltage high fault alarm.
-+in1_highest             Historical maximum input voltage.
-+in1_lowest              Historical minimum input voltage.
-+in1_reset_history       Write any value to reset history.
++Production workloads typically have large working sets that flush TLB buffers
++anyway through normal memory access patterns.  Stale TLB entries that could
++cause monitoring inaccuracies are evicted by the workload's own memory activity
++before the next sampling interval.  The accuracy impact is therefore negligible in
++production.
 +
-+in2_label               "vmon"
-+in2_input               Measured auxiliary input voltage.
++The following table summarizes the trade-off:
 +
-+in3_label               "vout1"
-+in3_input               Measured output voltage.
-+in3_average             Average measured output voltage.
-+in3_min                 Minimum output voltage limit.
-+in3_min_alarm           Output voltage low alarm.
-+in3_lowest              Historical minimum output voltage.
-+in3_reset_history       Write any value to reset history.
+++---------------------+-----------------------------+---------------------------+
++|                     | Without TLB Flush (current) | With TLB Flush            |
+++---------------------+-----------------------------+---------------------------+
++| Monitoring Overhead | Low                         | Higher (flush cost)       |
+++---------------------+-----------------------------+---------------------------+
++| Accuracy (prod)     | Good                        | Good                      |
+++---------------------+-----------------------------+---------------------------+
++| Accuracy (test)     | May degrade                 | Good                      |
+++---------------------+-----------------------------+---------------------------+
 +
-+curr1_label             "iin"
-+curr1_input             Measured input current.
-+curr1_average           Average measured input current.
-+curr1_max               Maximum input current warning limit.
-+curr1_crit              Critical input over-current fault limit.
-+curr1_max_alarm         Input current warning alarm.
-+curr1_crit_alarm        Input over-current fault alarm.
-+curr1_highest           Historical maximum input current.
-+curr1_reset_history     Write any value to reset history.
++Impact on Testing and Small Workloads
++=====================================
 +
-+power1_label            "pin"
-+power1_input            Measured input power.
-+power1_average          Average measured input power.
-+power1_max              Maximum input power warning limit.
-+power1_alarm            Input power warning alarm.
-+power1_input_highest    Historical maximum input power.
-+power1_reset_history    Write any value to reset history.
++The lack of TLB flush becomes problematic when the working set is small enough
++to fit entirely within the TLB reach.  This is common in test environments
++and synthetic benchmarks.  In such cases, stale TLB entries persist across
++sampling intervals, so DAMON reports false accesses and monitoring results
++become incorrect.
 +
-+temp1_input             Measured temperature.
-+temp1_average           Average measured temperature.
-+temp1_max               Maximum temperature warning limit.
-+temp1_crit              Critical temperature fault limit.
-+temp1_max_alarm         Temperature warning alarm.
-+temp1_crit_alarm        Temperature fault alarm.
-+temp1_highest           Historical maximum temperature.
-+temp1_reset_history     Write any value to reset history.
++For example, on a machine with a large TLB buffer, a test workload of a few
++tens of megabytes may never experience TLB eviction.  DAMON's WSS (Working Set
++Size) estimation can report 100% error (all regions reported as accessed,
++or none reported as accessed depending on timing), and DAMOS schemes may never
++trigger correctly.
 +
-+samples                 Number of samples used for average values.
-+======================= ======================================================
++This issue was observed in DAMON selftests and was addressed by increasing the
++test working set size to simulate production-like conditions, rather than
++changing DAMON's TLB flush behavior [2]_.  The selftest working set size was
++increased up to 160 MiB for this reason.
 +
++Recommendations
++===============
++
++For Users
++---------
++
++If you observe unexpected ``nr_accesses`` values or inaccurate working
++set size estimates, the cause is likely stale TLB entries from DAMON's
++sampling without TLB flushes.  This happens when the working set fits
++within the TLB reach, which is uncommon for production workloads but can
++occur with small workloads.  See the For Testers section below for
++how to verify this.
++
++For Testers and Developers
++--------------------------
++
++When writing DAMON tests, ensure the test workload's working set is large
++enough to trigger natural TLB eviction on the target test machine.  The
++exact size depends on the CPU's TLB configuration.  The DAMON selftest for
++WSS estimation uses 160 MiB per region after finding smaller sizes
++unreliable on systems with large TLB buffers [2]_.
++
++For out-of-tree tests, gradually increase the working set size until DAMON
++reports stable and accurate results, then use that size as the baseline for
++subsequent tests on the same hardware.
++
++If DAMON reports unexpectedly high ``nr_accesses`` or empty
++``tried_regions``, the ``diagnose_empty_tried_regions.py`` script from
++DAMON selftests can help determine whether stale TLB entries are the cause.
++
++The existing DAMON selftests follow this approach [2]_.
++
++References
++==========
++
++.. [1] `DAMON TLB flush overhead measurement
++   <https://lore.kernel.org/20200403103059.12762-1-sjpark@amazon.com/>`_
++
++.. [2] `DAMON selftest: increase working set size for reliable results
++   <https://lore.kernel.org/20260117020731.226785-3-sj@kernel.org/>`_
 -- 
-2.25.1
+2.43.0
 
 
