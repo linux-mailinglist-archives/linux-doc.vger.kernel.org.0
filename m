@@ -1,53 +1,53 @@
-Return-Path: <linux-doc+bounces-91138-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91139-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id ZdudJPEOI2p7hQEAu9opvQ
-	(envelope-from <linux-doc+bounces-91138-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 05 Jun 2026 20:01:21 +0200
+	id NjYJIHUPI2qzhQEAu9opvQ
+	(envelope-from <linux-doc+bounces-91139-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 05 Jun 2026 20:03:33 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8DC6964A64B
-	for <lists+linux-doc@lfdr.de>; Fri, 05 Jun 2026 20:01:20 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2CA1764A6AD
+	for <lists+linux-doc@lfdr.de>; Fri, 05 Jun 2026 20:03:33 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=XvoZr4Uk;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91138-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91138-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=Z+e1iPjf;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91139-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-91139-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id E846B3025651
-	for <lists+linux-doc@lfdr.de>; Fri,  5 Jun 2026 17:52:55 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 42CD2301C940
+	for <lists+linux-doc@lfdr.de>; Fri,  5 Jun 2026 18:03:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 897EA39A4B9;
-	Fri,  5 Jun 2026 17:52:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6BB29383339;
+	Fri,  5 Jun 2026 18:03:23 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E8952397E8A;
-	Fri,  5 Jun 2026 17:52:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E9F8428643C;
+	Fri,  5 Jun 2026 18:03:20 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780681974; cv=none; b=LSkk5kd0vFRa2qxG5SrbKaLZCzk+DS8VkyAs2NieyNwytWs98Xs3HYwuM/TF8q/0RN1AzOmJvZ/Q0bZkIgeBaP1pcfsnOk8k/9/Xq0YzZ5sDSUxTSrdbYkX0IZrM4a1wkpM45LdANUjdEtDDCIGuDvYg6QFAJMx3buQbVD+dy1o=
+	t=1780682603; cv=none; b=m2jbwarKUfs/IbxP16y3dXC+MMQ8ECMivyFYX4dqGOUyhERURFPAW1pwoAszJebuGN3QdebtoIeLa7a7F26X36oR1DokZFTU7yDhUJvB+Numi8cOu3Q2SlzCAmpcuftrmOtD6nofaNhu9oPUaAtLk8+WyoTKMGGLgax7k6soEu4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780681974; c=relaxed/simple;
-	bh=St7wtNtQ0jc6x43uE2tX/pGDLiyJMKrS9/f+/H35xIM=;
+	s=arc-20240116; t=1780682603; c=relaxed/simple;
+	bh=iLUIFagN6XfRq77k6IUTip1085kPQXst1NkQQ75aMUs=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=SPC8ZNlgIngd69UKeOvjd5k0D+ajPuzC2lq0zJ2y9v1UPCPw7KY3xwKlw6aP0ZJhKOurDGoIirJ9kB1aeTvSJiShHokOoTil0NUiLyBUErJ4sSASVRsDEgFXaRhryg3OzfBootp0EvW1j7xtCA4wRUUNhbGyimCQufc+pWruE+g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XvoZr4Uk; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D549D1F00893;
-	Fri,  5 Jun 2026 17:52:35 +0000 (UTC)
+	 In-Reply-To:Content-Type; b=QqYZGBNUg2YxnvuFltfAUr6rwnUWUZiB8q0IjdPyUw82ifFHl2fuDT1MmQAB5F2D4hSRsTV0VyT/nw48zqwkd7y0cZ9pTBQ9dnuSt2ZKMK7MD+1mDfQ+ZG5TITvvuE03qjgujwlFIrLbPLBw+ns9mFkptf3Qsx7Im2Yi9ACV+mA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Z+e1iPjf; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BEDA81F00893;
+	Fri,  5 Jun 2026 18:03:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1780681968;
-	bh=L4zIeQlvQf78FCoQzZFvkcKsrBnu4s0OZArTXsfT7tk=;
+	s=k20260515; t=1780682600;
+	bh=PGzu0aXe6HFW26JonkhpJzsdo5T0zMBSmF+3OrFmmlw=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=XvoZr4UkuCFmy2Kh9C/g83cu3QpLQwjl1vpA4ZGtxKdPuCvStDsSjnA7H7Af0W7ON
-	 KkuUi6zj2VK6mIf+QgXu2hZearnFIFEjHM/hArCZuGvwCoz1oJ1Mh3qJ6yDl1tOvCz
-	 muYwWJwzR91ZlsRB1cz5q+5FyX9tgtL6J+vcPEQLET7j1hiTiLDOsHqo9HD+oyQTwh
-	 9OPkyaLpG7Hv6s2gKZI9e6B+0srPLbcdkI/knDsdifekQfRPev2j7Tpo5DwW4uVBc7
-	 N+A5GKOXb9i7mTIzDE5oTmfGA8LzmZoUGWpzyxy5NxsolIHRRsuVH6RDneMkmNvSdl
-	 Wg+Slyqu7eLoQ==
-Message-ID: <031f6304-a145-486b-b2b9-569cea4102a7@kernel.org>
-Date: Fri, 5 Jun 2026 19:52:32 +0200
+	b=Z+e1iPjfg+9HqlR3h8DHfBgPQRE68RxUVv8D1XNuenBu9ZF2YKFA1VjR+VhNGmsjH
+	 GFEsnohYRLoqPHInWHvAv+Y1P65hv1c/MMrxJSbBN+yOfJqPCciWJB5eDfz41GF86T
+	 qMqtn3TPL6lAtshubXlzylKeK/mZnTMTuJ8OreQfyscHUNmR0JCN2NxoetsjDP9SNX
+	 z6t2qhgbRR6iVRlYl5H6U92DpJ60wb1xEgXi0Mh5HIK/ZHtPmOapC6wlHz+l+codie
+	 TgFnFCzdg4BQYDwbENybXouCX/1iPohb/lA5DoazHpV+yJs7xg5DN0jxXw7ub4HMGJ
+	 C0hR8pP7Fim6A==
+Message-ID: <d1f8ce4d-d4d8-4776-a9e2-de394dc81f63@kernel.org>
+Date: Fri, 5 Jun 2026 20:03:05 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -55,8 +55,8 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH mm-unstable v19 14/14] Documentation: mm: update the admin
- guide for mTHP collapse
+Subject: Re: [PATCH mm-unstable v19 11/14] mm/khugepaged: Introduce mTHP
+ collapse support
 To: Nico Pache <npache@redhat.com>, linux-doc@vger.kernel.org,
  linux-kernel@vger.kernel.org, linux-mm@kvack.org,
  linux-trace-kernel@vger.kernel.org
@@ -76,10 +76,9 @@ Cc: aarcange@redhat.com, akpm@linux-foundation.org,
  thomas.hellstrom@linux.intel.com, tiwai@suse.de, usamaarif642@gmail.com,
  vbabka@suse.cz, vishal.moola@gmail.com, wangkefeng.wang@huawei.com,
  will@kernel.org, willy@infradead.org, yang@os.amperecomputing.com,
- ying.huang@linux.alibaba.com, ziy@nvidia.com, zokeefe@google.com,
- Bagas Sanjaya <bagasdotme@gmail.com>
+ ying.huang@linux.alibaba.com, ziy@nvidia.com, zokeefe@google.com
 References: <20260605161422.213817-1-npache@redhat.com>
- <20260605161422.213817-15-npache@redhat.com>
+ <20260605161422.213817-12-npache@redhat.com>
 From: "David Hildenbrand (Arm)" <david@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=david@kernel.org; keydata=
@@ -126,7 +125,7 @@ Autocrypt: addr=david@kernel.org; keydata=
  3iyY2Nsd7JxfKu1PRhCGwXzRw5TlfEsoRI7V9A8isUCoqE2Dzh3FvYHVeX4Us+bRL/oqareJ
  CIFqgYMyvHj7Q06kTKmauOe4Nf0l0qEkIuIzfoLJ3qr5UyXc2hLtWyT9Ir+lYlX9efqh7mOY
  qIws/H2t
-In-Reply-To: <20260605161422.213817-15-npache@redhat.com>
+In-Reply-To: <20260605161422.213817-12-npache@redhat.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
@@ -134,26 +133,26 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-91138-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-91139-lists,linux-doc=lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS(0.00)[m:npache@redhat.com,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-trace-kernel@vger.kernel.org,m:aarcange@redhat.com,m:akpm@linux-foundation.org,m:anshuman.khandual@arm.com,m:apopple@nvidia.com,m:baohua@kernel.org,m:baolin.wang@linux.alibaba.com,m:byungchul@sk.com,m:catalin.marinas@arm.com,m:cl@gentwo.org,m:corbet@lwn.net,m:dave.hansen@linux.intel.com,m:dev.jain@arm.com,m:gourry@gourry.net,m:hannes@cmpxchg.org,m:hughd@google.com,m:jack@suse.cz,m:jackmanb@google.com,m:jannh@google.com,m:jglisse@google.com,m:joshua.hahnjy@gmail.com,m:kas@kernel.org,m:lance.yang@linux.dev,m:liam@infradead.org,m:ljs@kernel.org,m:mathieu.desnoyers@efficios.com,m:matthew.brost@intel.com,m:mhiramat@kernel.org,m:mhocko@suse.com,m:peterx@redhat.com,m:pfalcato@suse.de,m:rakie.kim@sk.com,m:raquini@redhat.com,m:rdunlap@infradead.org,m:richard.weiyang@gmail.com,m:rientjes@google.com,m:rostedt@goodmis.org,m:rppt@kernel.org,m:ryan.roberts@arm.com,m:
- shivankg@amd.com,m:sunnanyong@huawei.com,m:surenb@google.com,m:thomas.hellstrom@linux.intel.com,m:tiwai@suse.de,m:usamaarif642@gmail.com,m:vbabka@suse.cz,m:vishal.moola@gmail.com,m:wangkefeng.wang@huawei.com,m:will@kernel.org,m:willy@infradead.org,m:yang@os.amperecomputing.com,m:ying.huang@linux.alibaba.com,m:ziy@nvidia.com,m:zokeefe@google.com,m:bagasdotme@gmail.com,m:joshuahahnjy@gmail.com,m:richardweiyang@gmail.com,s:lists@lfdr.de];
+ shivankg@amd.com,m:sunnanyong@huawei.com,m:surenb@google.com,m:thomas.hellstrom@linux.intel.com,m:tiwai@suse.de,m:usamaarif642@gmail.com,m:vbabka@suse.cz,m:vishal.moola@gmail.com,m:wangkefeng.wang@huawei.com,m:will@kernel.org,m:willy@infradead.org,m:yang@os.amperecomputing.com,m:ying.huang@linux.alibaba.com,m:ziy@nvidia.com,m:zokeefe@google.com,m:joshuahahnjy@gmail.com,m:richardweiyang@gmail.com,s:lists@lfdr.de];
 	FORGED_SENDER(0.00)[david@kernel.org,linux-doc@vger.kernel.org];
 	RCVD_COUNT_THREE(0.00)[4];
 	FREEMAIL_CC(0.00)[redhat.com,linux-foundation.org,arm.com,nvidia.com,kernel.org,linux.alibaba.com,sk.com,gentwo.org,lwn.net,linux.intel.com,gourry.net,cmpxchg.org,google.com,suse.cz,gmail.com,linux.dev,infradead.org,efficios.com,intel.com,suse.com,suse.de,goodmis.org,amd.com,huawei.com,os.amperecomputing.com];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[59];
+	RCPT_COUNT_GT_50(0.00)[58];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[david@kernel.org,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[kernel.org:+];
@@ -163,18 +162,104 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 8DC6964A64B
+X-Rspamd-Queue-Id: 2CA1764A6AD
 
 On 6/5/26 18:14, Nico Pache wrote:
-> Now that we can collapse to mTHPs lets update the admin guide to
-> reflect these changes and provide proper guidance on how to utilize it.
+> Enable khugepaged to collapse to mTHP orders. This patch implements the
+> main scanning logic using a bitmap to track occupied pages and the
+> algorithm to find optimal collapse sizes.
 > 
-> Reviewed-by: Lorenzo Stoakes <ljs@kernel.org>
-> Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
+> Previous to this patch, PMD collapse had 3 main phases, a light weight
+> scanning phase (mmap_read_lock) that determines a potential PMD
+> collapse, an alloc phase (mmap unlocked), then finally heavier collapse
+> phase (mmap_write_lock).
+> 
+> To enabled mTHP collapse we make the following changes:
+> 
+> During PMD scan phase, track occupied pages in a bitmap. When mTHP
+> orders are enabled, we remove the restriction of max_ptes_none during the
+> scan phase to avoid missing potential mTHP collapse candidates. Once we
+> have scanned the full PMD range and updated the bitmap to track occupied
+> pages, we use the bitmap to find the optimal mTHP size.
+> 
+> Implement mthp_collapse() to walk forward through the bitmap and
+> determine the best eligible order for each naturally-aligned region. The
+> algorithm starts at the beginning of the PMD range and, for each offset,
+> tries the highest order that fits the alignment. If the number of
+> occupied PTEs in that region satisfies the max_ptes_none threshold for
+> that order, a collapse is attempted. On failure, the order is
+> decremented and the same offset is retried at the next smaller size. Once
+> the smallest enabled order is exhausted (or a collapse succeeds), the
+> offset advances past the region just processed, and the next attempt
+> starts at the highest order permitted by the new offset's natural
+> alignment.
+> 
+> The algorithm works as follows:
+>     1) set offset=0 and order=HPAGE_PMD_ORDER
+>     2) if the order is not enabled, go to step (5)
+>     3) count occupied PTEs in the (offset, order) range using
+>        bitmap_weight_from()
+>     4) if the count satisfies the max_ptes_none threshold, attempt
+>        collapse; on success, advance to step (6)
+>     5) if a smaller enabled order exists, decrement order and retry
+>        from step (2) at the same offset
+>     6) advance offset past the current region and compute the next
+>        order from the new offset's natural alignment via __ffs(offset),
+>        capped at HPAGE_PMD_ORDER
+>     7) repeat from step (2) until the full PMD range is covered
+> 
+> mTHP collapses reject regions containing swapped out or shared pages.
+> This is because adding new entries can lead to new none pages, and these
+> may lead to constant promotion into a higher order mTHP. A similar
+> issue can occur with "max_ptes_none > HPAGE_PMD_NR/2" due to a collapse
+> introducing at least 2x the number of pages, and on a future scan will
+> satisfy the promotion condition once again. This issue is prevented via
+> the collapse_max_ptes_none() function which imposes the max_ptes_none
+> restrictions above.
+> 
+> We currently only support mTHP collapse for max_ptes_none values of 0
+> and HPAGE_PMD_NR - 1. resulting in the following behavior:
+> 
+>     - max_ptes_none=0: Never introduce new empty pages during collapse
+>     - max_ptes_none=HPAGE_PMD_NR-1: Always try collapse to the highest
+>       available mTHP order
+> 
+> Any other max_ptes_none value will emit a warning and default mTHP
+> collapse to max_ptes_none=0. There should be no behavior change for PMD
+> collapse.
+> 
+> Once we determine what mTHP sizes fits best in that PMD range a collapse
+> is attempted. A minimum collapse order of 2 is used as this is the lowest
+> order supported by anon memory as defined by THP_ORDERS_ALL_ANON.
+> 
+> Currently madv_collapse is not supported and will only attempt PMD
+> collapse.
+> 
+> We can also remove the check for is_khugepaged inside the PMD scan as
+> the collapse_max_ptes_none() function handles this logic now.
+> 
 > Signed-off-by: Nico Pache <npache@redhat.com>
 > ---
+
+Yeah, overall much simpler and much easier to get. As discussed, we can optimize
+this later to traverse enabled orders more efficiently.
+
+> +	bitmap_zero(cc->mthp_present_ptes, MAX_PTRS_PER_PTE);
+>  	memset(cc->node_load, 0, sizeof(cc->node_load));
+>  	nodes_clear(cc->alloc_nmask);
+> +
+> +	enabled_orders = collapse_possible_orders(vma, vma->vm_flags, tva_flags);
+> +
+> +	/*
+> +	 * If PMD is the only enabled order, enforce max_ptes_none, otherwise
+> +	 * scan all pages to populate the bitmap for mTHP collapse.
+> +	 */
+
+I think it would have been good to mention where the check is performed for mTHP
+collapse. Can be added later.
+
 
 Acked-by: David Hildenbrand (Arm) <david@kernel.org>
 
