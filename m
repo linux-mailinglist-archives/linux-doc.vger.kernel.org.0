@@ -1,149 +1,133 @@
-Return-Path: <linux-doc+bounces-91013-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91014-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id AKZCAQIqImpyTQEAu9opvQ
-	(envelope-from <linux-doc+bounces-91013-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 05 Jun 2026 03:44:34 +0200
+	id oofsJ+wtImonTgEAu9opvQ
+	(envelope-from <linux-doc+bounces-91014-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 05 Jun 2026 04:01:16 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8DE416447DB
-	for <lists+linux-doc@lfdr.de>; Fri, 05 Jun 2026 03:44:33 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 70A9964491F
+	for <lists+linux-doc@lfdr.de>; Fri, 05 Jun 2026 04:01:15 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=c2XccfvB;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91013-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-91013-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	dkim=none;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91014-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91014-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=none;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id CD0243118F19
-	for <lists+linux-doc@lfdr.de>; Fri,  5 Jun 2026 01:30:26 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 3F2A330074C3
+	for <lists+linux-doc@lfdr.de>; Fri,  5 Jun 2026 02:01:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 816BD3C5535;
-	Fri,  5 Jun 2026 01:30:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8B7F134EF1C;
+	Fri,  5 Jun 2026 02:01:10 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from out28-74.mail.aliyun.com (out28-74.mail.aliyun.com [115.124.28.74])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9398339099E;
-	Fri,  5 Jun 2026 01:30:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2DF9C23D7E6;
+	Fri,  5 Jun 2026 02:00:57 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780623016; cv=none; b=iUhf6qSmimVD0jgqFsSXCqYwN6hX5r5fAJYqDO903FhjwFN7PioK6hEYuy/HgFVBLi453bNkjCXH3DN5L3sGa302DLNpKmQfExi8V0I6281jpl+IXSM8qLc/RoCQdkoxSzSZPYoazXTusp5peL5+oxQr98xkwiP9vvF9zBdiQ+k=
+	t=1780624870; cv=none; b=ROvkfpvIMKU22jTnwFzWgdehmFIwO0gP+Xo+Y+xQ7LD8IbXZ2+1/0YgkSQdfo43EduQ+6c5YM8TtTwwfFwDqtDAfxJepN5Y8Yz9pO/Tg5cSETxhL9SShB2/stE9+a4H7poRPZDNYY8yrq7eZS1lQvtjkhRuWJxiAcaFMirEATRg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780623016; c=relaxed/simple;
-	bh=KXlwYjqKVSUou60rpLkA1iL5cirORHeMbS0KbckVvy8=;
-	h=Content-Type:MIME-Version:Subject:From:Message-Id:Date:References:
-	 In-Reply-To:To:Cc; b=nLFBIZXWVkcgLShWDnU/Y3jxBGfciZ5hrwPHys/EIi9UlGA0/gb3Kga8Qaf7q+7p0RHZOORmgII+zWeCVByHdNQcd7yo5LgUiA8KxlQ8g7ahvaMMAivjAlS2x3JiORVxSP0u6hUPPOAfZJUH4cia5y/p/ZVCBtOl0WQM0sBSsEQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=c2XccfvB; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ED8AB1F00893;
-	Fri,  5 Jun 2026 01:30:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1780623011;
-	bh=ehZCtSynk3bTn44G6PMr36RiMYbFetcFDvaiFCTYQUo=;
-	h=Subject:From:Date:References:In-Reply-To:To:Cc;
-	b=c2XccfvBptzHz55v6NBJeU76o0cvge5jJdtMPa9/lePBC2+4eSf9Ck+7nHbj1/idL
-	 SkZB4ajriFpKhqucuZJZsrTGzz/W8T4GAmJ3g809fg+SwkDHRT0ERPQ71H3DyhivHK
-	 ahBzevah02Devlifsi/Ixo1HOPZ4n6DsKSAmebn9EbA6JbjCY01uDFOSQ/Em2n7ei3
-	 oTtu+6r2F1VcwiHfitR147yOw+9dtBPA8uCZ8SAzCVUWi2Lmq+vWZwtzYU5CWPmVSb
-	 FPivH01aaoMCVgbpjeyqvWa4EEFgac6RiFaG4WZw/hqaiZDgDdzVf/tY48Ulc3z82f
-	 6pwMmyTrmmzMQ==
-Received: from [10.30.226.235] (localhost [IPv6:::1])
-	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id D0B243930A8A;
-	Fri,  5 Jun 2026 01:30:12 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+	s=arc-20240116; t=1780624870; c=relaxed/simple;
+	bh=J779dFSCQWOm4dQwHstZyjULyKJinK2MiVqgv94EKK8=;
+	h=Date:From:To:Cc:Message-ID:Subject:MIME-Version:References:
+	 In-Reply-To:Content-Type; b=B2Chgpbew8jruSibxHoaFXzG4o5g+i/9PtDPOkpqksjr3XCvdhtPfYNhipEex0ZqXPL6bNdecbN67u+9CI4t7QvBopYhw+t+j3ry8yKJlitjpaEFrgyoTCA6C3gUxEGW3/LoOFZlq+ldjDsBHJ1G/Wl3GSJSLGlIVHbdAFRMFJ0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=nebula-matrix.com; spf=pass smtp.mailfrom=nebula-matrix.com; arc=none smtp.client-ip=115.124.28.74
+X-Alimail-AntiSpam:AC=CONTINUE;BC=0.09781785|-1;CH=green;DM=|CONTINUE|false|;DS=CONTINUE|ham_regular_dialog|0.0171234-0.00200289-0.980874;FP=12461754946603209801|0|0|0|0|-1|-1|-1;HT=maildocker-contentspam033037022039;MF=illusion.wang@nebula-matrix.com;NM=1;PH=DW;RN=17;RT=17;SR=0;TI=W4_0.2.3_212D3FFB_1780624731439_o7001c596;
+Received: from WS-web (Illusion.Wang@nebula-matrix.com[W4_0.2.3_212D3FFB_1780624731439_o7001c596] cluster:ay29) at Fri, 05 Jun 2026 10:00:43 +0800
+Date: Fri, 05 Jun 2026 10:00:43 +0800
+From: "Illusion Wang" <Illusion.Wang@nebula-matrix.com>
+To: "Paolo Abeni" <pabeni@redhat.com>,
+  "Dimon" <dimon.zhao@nebula-matrix.com>,
+  "Alvin" <alvin.wang@nebula-matrix.com>,
+  "Sam" <sam.chen@nebula-matrix.com>,
+  "netdev" <netdev@vger.kernel.org>
+Cc: "andrew+netdev" <andrew+netdev@lunn.ch>,
+  "corbet" <corbet@lwn.net>,
+  "kuba" <kuba@kernel.org>,
+  "horms" <horms@kernel.org>,
+  "linux-doc" <linux-doc@vger.kernel.org>,
+  "vadim.fedorenko" <vadim.fedorenko@linux.dev>,
+  "lukas.bulwahn" <lukas.bulwahn@redhat.com>,
+  "edumazet" <edumazet@google.com>,
+  "enelsonmoore" <enelsonmoore@gmail.com>,
+  "skhan" <skhan@linuxfoundation.org>,
+  "hkallweit1" <hkallweit1@gmail.com>,
+  "open list" <linux-kernel@vger.kernel.org>
+Reply-To: "Illusion Wang" <Illusion.Wang@nebula-matrix.com>
+Message-ID: <1ba81af4-2051-41fc-902d-cb66217c855a.Illusion.Wang@nebula-matrix.com>
+Subject: =?UTF-8?B?5Zue5aSN77yaW1BBVENIIHYxNyBuZXQtbmV4dCAwNS8xMV0gbmV0L25lYnVsYS1tYXRyaXg6?=
+  =?UTF-8?B?IGFkZCBjaGFubmVsIGxheWVy?=
+X-Mailer: [Alimail-Mailagent revision 446][W4_0.2.3][null][Chrome]
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH v2 0/4] dt-bindings: remove redundant .txt redirect stubs
-From: patchwork-bot+netdevbpf@kernel.org
-Message-Id: 
- <178062301139.3093327.8247260042998931357.git-patchwork-notify@kernel.org>
-Date: Fri, 05 Jun 2026 01:30:11 +0000
-References: <20260603-b4-remove-redirect-stubs-v2-0-c8c19876ab64@gmail.com>
-In-Reply-To: <20260603-b4-remove-redirect-stubs-v2-0-c8c19876ab64@gmail.com>
-To: Akash Sukhavasi <akash.sukhavasi@gmail.com>
-Cc: andrew@lunn.ch, hkallweit1@gmail.com, linux@armlinux.org.uk,
- davem@davemloft.net, edumazet@google.com, kuba@kernel.org, pabeni@redhat.com,
- robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, mchehab@kernel.org,
- olteanv@gmail.com, horms@kernel.org, corbet@lwn.net,
- skhan@linuxfoundation.org, dmitry.torokhov@gmail.com,
- thierry.reding@kernel.org, jonathanh@nvidia.com, lee@kernel.org,
- netdev@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-input@vger.kernel.org,
- linux-tegra@vger.kernel.org
+x-aliyun-im-through: {"version":"v1.0"}
+References: <20260601093149.25905-1-illusion.wang@nebula-matrix.com> <20260601093149.25905-6-illusion.wang@nebula-matrix.com>,<c5750d8a-5b37-4269-819b-1c3c04be0ddf@redhat.com>
+x-aliyun-mail-creator: W4_0.2.3_null_EuMTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEzMy4wLjY5NDMuMTQyIFNhZmFyaS81MzcuMzYgZGluZ3RhbGstd2luLzEuMC4wIG53KDAuMTQuNykgRGluZ1RhbGsoOC4zLjIwLVJlbGVhc2UuMjYwNTE0MDAyKSBNb2pvLzEuMC4wIE5hdGl2ZSBBcHBUeXBlKHJlbGVhc2UpIENoYW5uZWwvMjAxMjAwIEFyY2hpdGVjdHVyZS94ODZfNjQgd2ViRHQvUEM=uL
+In-Reply-To: <c5750d8a-5b37-4269-819b-1c3c04be0ddf@redhat.com>
+x-aliyun-mailtrack: {"foreign-track":"0"}
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: base64
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [2.14 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
+	MIME_BASE64_TEXT_BOGUS(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	MID_CONTAINS_FROM(1.00)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
+	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
+	TO_DN_ALL(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-91013-lists,linux-doc=lfdr.de,netdevbpf];
-	FORGED_RECIPIENTS(0.00)[m:akash.sukhavasi@gmail.com,m:andrew@lunn.ch,m:hkallweit1@gmail.com,m:linux@armlinux.org.uk,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:mchehab@kernel.org,m:olteanv@gmail.com,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:dmitry.torokhov@gmail.com,m:thierry.reding@kernel.org,m:jonathanh@nvidia.com,m:lee@kernel.org,m:netdev@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-input@vger.kernel.org,m:linux-tegra@vger.kernel.org,m:akashsukhavasi@gmail.com,m:krzk@kernel.org,m:conor@kernel.org,m:dmitrytorokhov@gmail.com,s:lists@lfdr.de];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FORGED_SENDER(0.00)[patchwork-bot@kernel.org,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[27];
-	FREEMAIL_CC(0.00)[lunn.ch,gmail.com,armlinux.org.uk,davemloft.net,google.com,kernel.org,redhat.com,lwn.net,linuxfoundation.org,nvidia.com,vger.kernel.org];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[17];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	DMARC_NA(0.00)[nebula-matrix.com];
+	FORGED_SENDER(0.00)[Illusion.Wang@nebula-matrix.com,linux-doc@vger.kernel.org];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_NEQ_ENVFROM(0.00)[patchwork-bot@kernel.org,linux-doc@vger.kernel.org];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	FORGED_RECIPIENTS(0.00)[m:pabeni@redhat.com,m:dimon.zhao@nebula-matrix.com,m:alvin.wang@nebula-matrix.com,m:sam.chen@nebula-matrix.com,m:netdev@vger.kernel.org,m:andrew+netdev@lunn.ch,m:corbet@lwn.net,m:kuba@kernel.org,m:horms@kernel.org,m:linux-doc@vger.kernel.org,m:vadim.fedorenko@linux.dev,m:lukas.bulwahn@redhat.com,m:edumazet@google.com,m:enelsonmoore@gmail.com,m:skhan@linuxfoundation.org,m:hkallweit1@gmail.com,m:linux-kernel@vger.kernel.org,m:andrew@lunn.ch,s:lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-91014-lists,linux-doc=lfdr.de];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,linux.dev:url,vger.kernel.org:from_smtp,nebula-matrix.com:mid,nebula-matrix.com:from_mime,nebula-matrix.com:replyto];
+	HAS_REPLYTO(0.00)[Illusion.Wang@nebula-matrix.com];
 	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FROM_NEQ_ENVFROM(0.00)[Illusion.Wang@nebula-matrix.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[lunn.ch,lwn.net,kernel.org,vger.kernel.org,linux.dev,redhat.com,google.com,gmail.com,linuxfoundation.org];
+	ALIAS_RESOLVED(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	R_DKIM_NA(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	FROM_NO_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	REPLYTO_EQ_FROM(0.00)[]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 8DE416447DB
+X-Rspamd-Queue-Id: 70A9964491F
 
-Hello:
-
-This series was applied to netdev/net-next.git (main)
-by Jakub Kicinski <kuba@kernel.org>:
-
-On Wed, 03 Jun 2026 15:42:17 -0500 you wrote:
-> Several .txt files under Documentation/devicetree/bindings/ contain
-> only a redirect notice pointing to a .yaml schema with the same base
-> filename in the same directory. These stubs were useful during the
-> .txt to .yaml transition but are now redundant, since the .yaml is
-> discoverable by name. Meanwhile, other documentation still references
-> some of these stubs, forcing readers through an unnecessary extra hop
-> to reach the actual schema.
-> 
-> [...]
-
-Here is the summary with links:
-  - [v2,1/4] dt-bindings: net: remove obsolete mdio.txt
-    https://git.kernel.org/netdev/net-next/c/ed2b921b542b
-  - [v2,2/4] dt-bindings: media: remove obsolete rc.txt
-    (no matching commit)
-  - [v2,3/4] dt-bindings: net: dsa: remove obsolete dsa.txt
-    https://git.kernel.org/netdev/net-next/c/0fbbc19482bd
-  - [v2,4/4] dt-bindings: input: remove obsolete matrix-keymap.txt
-    (no matching commit)
-
-You are awesome, thank you!
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
-
-
+PiBTYXNoaWtvIHJlcG9ydHMgYSBudW1iZXIgb2YgaXNzdWVzIFdSVCB0aGUgYXRvbWljIHN0YXR1
+cyB1cGRhdGVzOgo+IAo+IGh0dHBzOi8vbmV0ZGV2LWFpLmJvdHMubGludXguZGV2L3Nhc2hpa28v
+Iy9wYXRjaHNldC8yMDI2MDYwMTA5MzE0OS4yNTkwNS0xLWlsbHVzaW9uLndhbmclNDBuZWJ1bGEt
+bWF0cml4LmNvbQoKPiBJdCdzIGluZGVlZCBxdWl0ZSBjb21wbGV4IHRvIGdldCB0aGluZ3Mgcmln
+aHQgdGhpcyB3YXkuIEknbSB3b25kZXJpbmcgaWYKPiB5b3Ugc2hvdWxkIHVzZSBhIHNwaW5fbG9j
+ayBpbnN0ZWFkIHRvIHByb3RlY3QgdGhlIHJlbGV2YW50IHN0YXRlPwoKPiBBbHNvIGEgZmV3IHBy
+b2Nlc3MgcmVsYXRlZCBub3RlczoKPiAtIHRvIG1ha2UgZWZmZWN0aXZlIHByb2dyZXNzZXMgeW91
+IHNob3VsZCBwcm9hY3RpdmVseSByZXBseSBvbiB0aGUgTUwgV1JUCj4gdGhlIHNhc2hpa28gY29t
+bWVudHMgZGlzY3Vzc2lvbiBpZiBhbmQgd2h5IHRoZXkgYXJlIChub3QpIHJlbGV2YW50Lgo+IC0g
+aXMgJ2lsbHVzaW9uIHdhbmcnIChhbGwgbG93ZXIgY2FzZSkgeW91ciByZWFsIG5hbWU/IHdlIGNh
+bid0IGFjY2VwdAo+IHBzZXVkb25pbXMgYXMgU29CIHRhZy4KClRoYW5rIHlvdSBmb3IgeW91ciBm
+ZWVkYmFjay4KWWVzLCBJJ3ZlIHJldmlld2VkIHRoZSBTYXNoaWtvIHJlcG9ydC4gVGhlIGF0b21p
+YyBzdGF0dXMgdXBkYXRlIHJhY2UgaXMgcmVhbDoKbmJsX2NoYW5fcmVjdl9hY2tfbXNnIHdyaXRl
+cyBzdGF0dXMgYW5kIG5lZWRfd2FrZWQgd2hpbGUgbmJsX2NoYW5fc2VuZF9tc2cKbWF5IHJlYWQv
+Y2xlYXIgdGhlbSwgd2l0aCBubyBvcmRlcmluZyBndWFyYW50ZWUgYmV0d2VlbiB0aGUgdHdvIGF0
+b21pY3MuClRoZSBzcGlubG9jayBmaXggYWRkcmVzc2VzIGV4YWN0bHkgd2hhdCBTYXNoaWtvIGZs
+YWdnZWQuCkknbGwgdXBkYXRlIHRoZSBwYXRjaHNldCBhY2NvcmRpbmdseS4KcHM6ICJpbGx1c2lv
+biB3YW5nIiBpcyBpbmRlZWQgbXkgcmVhbCBuYW1lLg==
 
