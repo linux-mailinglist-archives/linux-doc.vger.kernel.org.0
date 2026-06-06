@@ -1,58 +1,58 @@
-Return-Path: <linux-doc+bounces-91190-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91194-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id /ldhI2CzI2rvxAEAu9opvQ
-	(envelope-from <linux-doc+bounces-91190-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 06 Jun 2026 07:42:56 +0200
+	id naqtDZmzI2oGxQEAu9opvQ
+	(envelope-from <linux-doc+bounces-91194-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 06 Jun 2026 07:43:53 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5EE8464C961
-	for <lists+linux-doc@lfdr.de>; Sat, 06 Jun 2026 07:42:56 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 89E7464C9B3
+	for <lists+linux-doc@lfdr.de>; Sat, 06 Jun 2026 07:43:52 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=I29lxOed;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91190-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-91190-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=EG3OfGT7;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91194-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91194-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 4F2003029720
-	for <lists+linux-doc@lfdr.de>; Sat,  6 Jun 2026 05:42:55 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id A6FFF3035D7E
+	for <lists+linux-doc@lfdr.de>; Sat,  6 Jun 2026 05:42:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1BA7830C167;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3068A30D3F3;
 	Sat,  6 Jun 2026 05:42:50 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8294305676;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E8BEC309DDF;
 	Sat,  6 Jun 2026 05:42:49 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780724569; cv=none; b=TqYe2HZnMrfUfTWLDFzWI9ly0FlmpIIF5ykBhwxjTtHpDecKSmGHojQ4gQQTjS+h1cxn1Waf8TLmvZFs1KNjUtI0jZp08xyuKAzWFlHt/XNetK5E6GDcOOfdTeztSDlmqAsIscUfNGZJx3UZ9TqPv+OS6aDmOORGuS5oK2AtfZs=
+	t=1780724570; cv=none; b=ArQ/WJGTAcLXVENkP6bVb3oe9aGqvk3KZvuIaNdG2B+XaSaUB2UM5y37M2j4vs5E4f1WpBTpczZxYfGzQm5D6I+rCsYMJQJawPnipQSdSwKn9023t36DwL6DaGfa+tTOeKdFr5SYsz4ruinGt7Gp7oEo5ioJjkDpOttQCQHRj30=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780724569; c=relaxed/simple;
-	bh=pZvTlPEHnVoq7eY/dHY7MDK1DnQZ3Ydm8xyowN1LaiU=;
+	s=arc-20240116; t=1780724570; c=relaxed/simple;
+	bh=VKo/KdBMt3l77WXwQ+vYFe76M/n/dMN4jksF6CUquSM=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=hK78hi6cf7aEOQXD7oH+cnTOCwCzicZihcxfaoqTRgEkaQOYEoPFpQh5+4STuYTwsew9+JeoQbUffBfT1XqXL6tKahkhH3FLkqY5NsFkMCANMNlL0ZwGArCGYcDy3WoVV6GB1lt7fJhr7sfLp0UbngsZZOWyEjthtQyzm+HHUn0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=I29lxOed; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 9EEDDC2BCFD;
+	 In-Reply-To:To:Cc; b=pO2FEe8FTAtUej+gJtKhBzp/Vi9ZwM44Go8TBgmmS0mm/fjAFutTnaTISRXzlzFNt7Xs3IEj9Iv+ceqSoU3iZkIdM5yGh0cULCrxlp2XAeyqdD0SHjRwnE4MpjYLVcEK3Z7EM0mxkHUmCvdgC+j+bwIl7/Cueom1wex6glzTycI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EG3OfGT7; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id B02D6C2BD00;
 	Sat,  6 Jun 2026 05:42:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1780724569;
-	bh=pZvTlPEHnVoq7eY/dHY7MDK1DnQZ3Ydm8xyowN1LaiU=;
+	bh=VKo/KdBMt3l77WXwQ+vYFe76M/n/dMN4jksF6CUquSM=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=I29lxOedxsboQnhEI0SONS1bEEYZBrkNjQ90YqRMstupDQE5n3OgIN+2LpQmMKwBJ
-	 OrXvj9ASj2AkNi1oQzASF46bF6VWnm7pl16m+QkwvZoFOjOZKkiFKvFGBN7yQjlK6E
-	 iTRnZp0fxSCP7uaVUz8jMFAjqOmmoIowC5IBtPDCKTL4bzMe+UIX/2RKrkIZqjM0Qc
-	 n+ktvTeOmO2Nj5k3y38E4CispczWJOSHTzmAOyTBhEZ8qSN3rnfgOOKqs47yK9NK4i
-	 CiGl7ryykkGOQm6fylxlKmPsu889zcxs4VjnR6/QQrOLITg4j+GzowOfhJA3aj3hze
-	 gdbPVBRwtzzKg==
+	b=EG3OfGT7L5GVBx+hOmFT/wh8cM+e8HchWFyB0BfiuwAj1/JXEHGud8quUC+fEOeeM
+	 BPgfanvSbpyhvp8PWTsGy+8o5JWdz8FIpw2fuJ8xztpHcpyb2y9s+CmPHOs21NMDj0
+	 09K907wLDLjVQqCIFQqIMmxLUhRr07irkqctdMpHiv5YHduAFJaGtcNx8xGDhikdhi
+	 kXiGekZQ5r0gUVzA23MrwDDWu7CPNpLKLslAFbyi6KGYFWCFOSnOtJ78qHa9mdKN9n
+	 uHvCpqqP2jjfCWaffLhw3nMdMHHMBCj4jtvtqFE8vV7MPDTKcqmws2jwPlFjY/XzJc
+	 R25zjGxn7d+Kw==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 982E6CD8C90;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A92E2CD8C85;
 	Sat,  6 Jun 2026 05:42:49 +0000 (UTC)
 From: Selvamani Rajagopal via B4 Relay <devnull+Selvamani.Rajagopal.onsemi.com@kernel.org>
-Date: Fri, 05 Jun 2026 22:42:39 -0700
-Subject: [PATCH net-next v4 08/16] net: ethernet: oa_tc6: Remove FCS size
- in RX frame
+Date: Fri, 05 Jun 2026 22:42:40 -0700
+Subject: [PATCH net-next v4 09/16] net: ethernet: oa_tc6: read, write
+ interface with MMS option
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -61,7 +61,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260605-s2500-mac-phy-support-v4-8-de0fbc13c6d8@onsemi.com>
+Message-Id: <20260605-s2500-mac-phy-support-v4-9-de0fbc13c6d8@onsemi.com>
 References: <20260605-s2500-mac-phy-support-v4-0-de0fbc13c6d8@onsemi.com>
 In-Reply-To: <20260605-s2500-mac-phy-support-v4-0-de0fbc13c6d8@onsemi.com>
 To: Andrew Lunn <andrew@lunn.ch>, 
@@ -82,11 +82,11 @@ Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
  Jerry Ray <jerry.ray@microchip.com>, 
  Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780724562; l=1396;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780724562; l=13151;
  i=Selvamani.Rajagopal@onsemi.com; s=20260531; h=from:subject:message-id;
- bh=Nwz8ph63R7fgKGIZDndf/9epwjHtj0F853lNYFbk53o=;
- b=EkPoE0N561Rn6mpFwlh2B8OkMCBA4T9JKP5di9atN9IusrrG4l799ud9ZyAEVXZYpc5C9VJS3
- +mSc/YXu2pyAT0kjQIiCQ85m8Tqggx1D5x6K486h+gwMsU2u0b79nSm
+ bh=6gf7mflhJ8D0twLwo1deSPFhe13HotYFkXHHYzefZ0o=;
+ b=oSZjfjamdqshA0QzFunE54jeYkKdbPtS7XZDcanl4CKrFswgce2GpAL967Cofo3/6f9SifWpp
+ KVdIiYolTwABTk3QLT0bxZKv+2R9GwWzV15W+zBvSkwLZ0a0TUcbuLX
 X-Developer-Key: i=Selvamani.Rajagopal@onsemi.com; a=ed25519;
  pk=5QRdM0HS/LGWWcUZZ9hVfZ+qbPQGZCumcTXOiN7Fyug=
 X-Endpoint-Received: by B4 Relay for
@@ -99,12 +99,12 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-91190-lists,linux-doc=lfdr.de,Selvamani.Rajagopal.onsemi.com];
+	TAGGED_FROM(0.00)[bounces-91194-lists,linux-doc=lfdr.de,Selvamani.Rajagopal.onsemi.com];
 	RCPT_COUNT_TWELVE(0.00)[24];
 	RCVD_TLS_LAST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
@@ -125,49 +125,353 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	TO_DN_SOME(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	HAS_REPLYTO(0.00)[Selvamani.Rajagopal@onsemi.com]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 5EE8464C961
+X-Rspamd-Queue-Id: 89E7464C9B3
 
 From: Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
 
-OA TC6 MAC-PHY appends FCS to the incoming frame.
-It is removed from the frame before being passed to the stack.
+Vendors are allowed to use any memory map selector that
+is between 10 and 15.
+
+Current read/write API interface expects register address with
+the value of MMS (memory map selector) embedded in it.
+
+This requires vendors to encoding the address whenever the call
+to read/write register is made. To avoid this extra step, and
+to bring consistency in usage of the API by different vendors,
+new APIs have been added to write and read registers with
+MMS as one of the parameters.
 
 Signed-off-by: Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
 ---
- drivers/net/ethernet/oa_tc6/oa_tc6.c | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
+ drivers/net/ethernet/microchip/lan865x/lan865x.c | 61 +++++++++------
+ drivers/net/ethernet/oa_tc6/oa_tc6.c             | 97 +++++++++++++++++++++---
+ include/linux/oa_tc6.h                           |  8 ++
+ 3 files changed, 131 insertions(+), 35 deletions(-)
 
-diff --git a/drivers/net/ethernet/oa_tc6/oa_tc6.c b/drivers/net/ethernet/oa_tc6/oa_tc6.c
-index 2f9ace655e81..26033373f16f 100644
---- a/drivers/net/ethernet/oa_tc6/oa_tc6.c
-+++ b/drivers/net/ethernet/oa_tc6/oa_tc6.c
-@@ -782,12 +782,22 @@ static void oa_tc6_submit_rx_skb(struct oa_tc6 *tc6)
- {
- 	oa_tc6_update_ts_in_rx_skb(tc6);
+diff --git a/drivers/net/ethernet/microchip/lan865x/lan865x.c b/drivers/net/ethernet/microchip/lan865x/lan865x.c
+index 0277d9737369..3b555ee69804 100644
+--- a/drivers/net/ethernet/microchip/lan865x/lan865x.c
++++ b/drivers/net/ethernet/microchip/lan865x/lan865x.c
+@@ -13,27 +13,27 @@
+ #define DRV_NAME			"lan8650"
  
-+	/* MAC-PHY delivers each frame with its Ethernet FCS attached.
-+	 * Strip it before handing over to the stack, unless the user
-+	 * has asked to keep it via NETIF_F_RXFCS. Keeping the FCS
-+	 * in the frame is harmless for IP traffic, but is parsed as
-+	 * a (malformed) suffix TLV by PTP, which makes ptp4l reject
-+	 * every message with "bad message" error.
-+	 */
-+	if (!(tc6->netdev->features & NETIF_F_RXFCS) &&
-+			tc6->rx_skb->len > ETH_FCS_LEN)
-+		skb_trim(tc6->rx_skb, tc6->rx_skb->len - ETH_FCS_LEN);
-+
- 	tc6->rx_skb->protocol = eth_type_trans(tc6->rx_skb, tc6->netdev);
- 	tc6->netdev->stats.rx_packets++;
- 	tc6->netdev->stats.rx_bytes += tc6->rx_skb->len;
+ /* MAC Network Control Register */
+-#define LAN865X_REG_MAC_NET_CTL		0x00010000
++#define LAN865X_REG_MAC_NET_CTL		0x0
+ #define MAC_NET_CTL_TXEN		BIT(3) /* Transmit Enable */
+ #define MAC_NET_CTL_RXEN		BIT(2) /* Receive Enable */
  
- 	netif_rx(tc6->rx_skb);
--
- 	tc6->rx_skb = NULL;
+ /* MAC Network Configuration Reg */
+-#define LAN865X_REG_MAC_NET_CFG		0x00010001
++#define LAN865X_REG_MAC_NET_CFG		0x1
+ #define MAC_NET_CFG_PROMISCUOUS_MODE	BIT(4)
+ #define MAC_NET_CFG_MULTICAST_MODE	BIT(6)
+ #define MAC_NET_CFG_UNICAST_MODE	BIT(7)
+ 
+ /* MAC Hash Register Bottom */
+-#define LAN865X_REG_MAC_L_HASH		0x00010020
++#define LAN865X_REG_MAC_L_HASH		0x20
+ /* MAC Hash Register Top */
+-#define LAN865X_REG_MAC_H_HASH		0x00010021
++#define LAN865X_REG_MAC_H_HASH		0x21
+ /* MAC Specific Addr 1 Bottom Reg */
+-#define LAN865X_REG_MAC_L_SADDR1	0x00010022
++#define LAN865X_REG_MAC_L_SADDR1	0x22
+ /* MAC Specific Addr 1 Top Reg */
+-#define LAN865X_REG_MAC_H_SADDR1	0x00010023
++#define LAN865X_REG_MAC_H_SADDR1	0x23
+ 
+ /* MAC TSU Timer Increment Register */
+-#define LAN865X_REG_MAC_TSU_TIMER_INCR		0x00010077
++#define LAN865X_REG_MAC_TSU_TIMER_INCR		0x77
+ #define MAC_TSU_TIMER_INCR_COUNT_NANOSECONDS	0x0028
+ 
+ struct lan865x_priv {
+@@ -49,7 +49,8 @@ static int lan865x_set_hw_macaddr_low_bytes(struct oa_tc6 *tc6, const u8 *mac)
+ 
+ 	regval = (mac[3] << 24) | (mac[2] << 16) | (mac[1] << 8) | mac[0];
+ 
+-	return oa_tc6_write_register(tc6, LAN865X_REG_MAC_L_SADDR1, regval);
++	return oa_tc6_write_register_mms(tc6, LAN865X_REG_MAC_L_SADDR1,
++					 OA_TC6_PHY_C45_MAC_MMS1, regval);
  }
  
+ static int lan865x_set_hw_macaddr(struct lan865x_priv *priv, const u8 *mac)
+@@ -65,8 +66,8 @@ static int lan865x_set_hw_macaddr(struct lan865x_priv *priv, const u8 *mac)
+ 
+ 	/* Prepare and configure MAC address high bytes */
+ 	regval = (mac[5] << 8) | mac[4];
+-	ret = oa_tc6_write_register(priv->tc6, LAN865X_REG_MAC_H_SADDR1,
+-				    regval);
++	ret = oa_tc6_write_register_mms(priv->tc6, LAN865X_REG_MAC_H_SADDR1,
++					OA_TC6_PHY_C45_MAC_MMS1, regval);
+ 	if (!ret)
+ 		return 0;
+ 
+@@ -146,14 +147,16 @@ static int lan865x_set_specific_multicast_addr(struct lan865x_priv *priv)
+ 	}
+ 
+ 	/* Enabling specific multicast addresses */
+-	ret = oa_tc6_write_register(priv->tc6, LAN865X_REG_MAC_H_HASH, hash_hi);
++	ret = oa_tc6_write_register_mms(priv->tc6, LAN865X_REG_MAC_H_HASH,
++					OA_TC6_PHY_C45_MAC_MMS1, hash_hi);
+ 	if (ret) {
+ 		netdev_err(priv->netdev, "Failed to write reg_hashh: %d\n",
+ 			   ret);
+ 		return ret;
+ 	}
+ 
+-	ret = oa_tc6_write_register(priv->tc6, LAN865X_REG_MAC_L_HASH, hash_lo);
++	ret = oa_tc6_write_register_mms(priv->tc6, LAN865X_REG_MAC_L_HASH,
++					OA_TC6_PHY_C45_MAC_MMS1, hash_lo);
+ 	if (ret)
+ 		netdev_err(priv->netdev, "Failed to write reg_hashl: %d\n",
+ 			   ret);
+@@ -166,16 +169,16 @@ static int lan865x_set_all_multicast_addr(struct lan865x_priv *priv)
+ 	int ret;
+ 
+ 	/* Enabling all multicast addresses */
+-	ret = oa_tc6_write_register(priv->tc6, LAN865X_REG_MAC_H_HASH,
+-				    0xffffffff);
++	ret = oa_tc6_write_register_mms(priv->tc6, LAN865X_REG_MAC_H_HASH,
++					OA_TC6_PHY_C45_MAC_MMS1, 0xffffffff);
+ 	if (ret) {
+ 		netdev_err(priv->netdev, "Failed to write reg_hashh: %d\n",
+ 			   ret);
+ 		return ret;
+ 	}
+ 
+-	ret = oa_tc6_write_register(priv->tc6, LAN865X_REG_MAC_L_HASH,
+-				    0xffffffff);
++	ret = oa_tc6_write_register_mms(priv->tc6, LAN865X_REG_MAC_L_HASH,
++					OA_TC6_PHY_C45_MAC_MMS1, 0xffffffff);
+ 	if (ret)
+ 		netdev_err(priv->netdev, "Failed to write reg_hashl: %d\n",
+ 			   ret);
+@@ -187,14 +190,16 @@ static int lan865x_clear_all_multicast_addr(struct lan865x_priv *priv)
+ {
+ 	int ret;
+ 
+-	ret = oa_tc6_write_register(priv->tc6, LAN865X_REG_MAC_H_HASH, 0);
++	ret = oa_tc6_write_register_mms(priv->tc6, LAN865X_REG_MAC_H_HASH,
++					OA_TC6_PHY_C45_MAC_MMS1, 0);
+ 	if (ret) {
+ 		netdev_err(priv->netdev, "Failed to write reg_hashh: %d\n",
+ 			   ret);
+ 		return ret;
+ 	}
+ 
+-	ret = oa_tc6_write_register(priv->tc6, LAN865X_REG_MAC_L_HASH, 0);
++	ret = oa_tc6_write_register_mms(priv->tc6, LAN865X_REG_MAC_L_HASH,
++					OA_TC6_PHY_C45_MAC_MMS1, 0);
+ 	if (ret)
+ 		netdev_err(priv->netdev, "Failed to write reg_hashl: %d\n",
+ 			   ret);
+@@ -235,7 +240,8 @@ static void lan865x_multicast_work_handler(struct work_struct *work)
+ 		if (lan865x_clear_all_multicast_addr(priv))
+ 			return;
+ 	}
+-	ret = oa_tc6_write_register(priv->tc6, LAN865X_REG_MAC_NET_CFG, regval);
++	ret = oa_tc6_write_register_mms(priv->tc6, LAN865X_REG_MAC_NET_CFG,
++					OA_TC6_PHY_C45_MAC_MMS1, regval);
+ 	if (ret)
+ 		netdev_err(priv->netdev, "Failed to enable promiscuous/multicast/normal mode: %d\n",
+ 			   ret);
+@@ -260,12 +266,14 @@ static int lan865x_hw_disable(struct lan865x_priv *priv)
+ {
+ 	u32 regval;
+ 
+-	if (oa_tc6_read_register(priv->tc6, LAN865X_REG_MAC_NET_CTL, &regval))
++	if (oa_tc6_read_register_mms(priv->tc6, LAN865X_REG_MAC_NET_CTL,
++				     OA_TC6_PHY_C45_MAC_MMS1, &regval))
+ 		return -ENODEV;
+ 
+ 	regval &= ~(MAC_NET_CTL_TXEN | MAC_NET_CTL_RXEN);
+ 
+-	if (oa_tc6_write_register(priv->tc6, LAN865X_REG_MAC_NET_CTL, regval))
++	if (oa_tc6_write_register_mms(priv->tc6, LAN865X_REG_MAC_NET_CTL,
++				      OA_TC6_PHY_C45_MAC_MMS1, regval))
+ 		return -ENODEV;
+ 
+ 	return 0;
+@@ -291,12 +299,14 @@ static int lan865x_hw_enable(struct lan865x_priv *priv)
+ {
+ 	u32 regval;
+ 
+-	if (oa_tc6_read_register(priv->tc6, LAN865X_REG_MAC_NET_CTL, &regval))
++	if (oa_tc6_read_register_mms(priv->tc6, LAN865X_REG_MAC_NET_CTL,
++				     OA_TC6_PHY_C45_MAC_MMS1, &regval))
+ 		return -ENODEV;
+ 
+ 	regval |= MAC_NET_CTL_TXEN | MAC_NET_CTL_RXEN;
+ 
+-	if (oa_tc6_write_register(priv->tc6, LAN865X_REG_MAC_NET_CTL, regval))
++	if (oa_tc6_write_register_mms(priv->tc6, LAN865X_REG_MAC_NET_CTL,
++				      OA_TC6_PHY_C45_MAC_MMS1, regval))
+ 		return -ENODEV;
+ 
+ 	return 0;
+@@ -359,8 +369,9 @@ static int lan865x_probe(struct spi_device *spi)
+ 	 * stamping at the end of the Start of Frame Delimiter (SFD) and set the
+ 	 * Timer Increment reg to 40 ns to be used as a 25 MHz internal clock.
+ 	 */
+-	ret = oa_tc6_write_register(priv->tc6, LAN865X_REG_MAC_TSU_TIMER_INCR,
+-				    MAC_TSU_TIMER_INCR_COUNT_NANOSECONDS);
++	ret = oa_tc6_write_register_mms(priv->tc6, LAN865X_REG_MAC_TSU_TIMER_INCR,
++					OA_TC6_PHY_C45_MAC_MMS1,
++					MAC_TSU_TIMER_INCR_COUNT_NANOSECONDS);
+ 	if (ret) {
+ 		dev_err(&spi->dev, "Failed to config TSU Timer Incr reg: %d\n",
+ 			ret);
+diff --git a/drivers/net/ethernet/oa_tc6/oa_tc6.c b/drivers/net/ethernet/oa_tc6/oa_tc6.c
+index 26033373f16f..a7d8c9bb1f28 100644
+--- a/drivers/net/ethernet/oa_tc6/oa_tc6.c
++++ b/drivers/net/ethernet/oa_tc6/oa_tc6.c
+@@ -377,6 +377,83 @@ int oa_tc6_read_register(struct oa_tc6 *tc6, u32 address, u32 *value)
+ }
+ EXPORT_SYMBOL_GPL(oa_tc6_read_register);
+ 
++/**
++ * oa_tc6_read_registers_mms - function for reading multiple consecutive
++ * registers for the given address, memory map selector pair.
++ * @tc6: oa_tc6 struct.
++ * @address: address of the first register to be read in the MAC-PHY.
++ * @mms: Memory map selector for the registers to be read.
++ * @value: values to be read from the starting register address @address.
++ * @length: number of consecutive registers to be read from @address.
++ *
++ * Return: 0 on success otherwise failed.
++ */
++int oa_tc6_read_registers_mms(struct oa_tc6 *tc6, u16 address, u16 mms,
++			      u32 value[], u8 length)
++{
++	u32 mms_addr = (u32)mms << 16 | (u32)address;
++
++	return oa_tc6_read_registers(tc6, mms_addr, value, length);
++}
++EXPORT_SYMBOL_GPL(oa_tc6_read_registers_mms);
++
++/**
++ * oa_tc6_read_register_mms - function for reading a MAC-PHY register
++ * for the given address, memory map selector pair.
++ * @tc6: oa_tc6 struct.
++ * @address: register address of the MAC-PHY to be read.
++ * @mms: Memory Map Selector for the given address
++ * @value: value read from the @address register address of the MAC-PHY.
++ *
++ * Return: 0 on success otherwise failed.
++ */
++int oa_tc6_read_register_mms(struct oa_tc6 *tc6, u16 address, u16 mms,
++			     u32 *value)
++{
++	return oa_tc6_read_registers_mms(tc6, address, mms, value, 1);
++}
++EXPORT_SYMBOL_GPL(oa_tc6_read_register_mms);
++
++/**
++ * oa_tc6_write_registers_mms - function for writing multiple consecutive
++ * registers for the given address, memory map selector pair.
++ * @tc6: oa_tc6 struct.
++ * @address: address of the first register to be written in the MAC-PHY.
++ * @mms: memory map Selector for the given register.
++ * @value: values to be written from the starting register address @address.
++ * @length: number of consecutive registers to be written from @address.
++ *
++ * Maximum of 128 consecutive registers can be written starting at @address.
++ *
++ * Return: 0 on success otherwise failed.
++ */
++int oa_tc6_write_registers_mms(struct oa_tc6 *tc6, u16 address, u16 mms,
++			       u32 value[], u8 length)
++{
++	u32 mms_addr = (u32)mms << 16 | (u32)address;
++
++	return oa_tc6_write_registers(tc6, mms_addr, value, length);
++}
++EXPORT_SYMBOL_GPL(oa_tc6_write_registers_mms);
++
++/**
++ * oa_tc6_write_register_mms - function for writing a MAC-PHY register
++ * associated with the given memory map selector.
++ * @tc6: oa_tc6 struct.
++ * @address: register address of the MAC-PHY to be written.
++ * @mms: memory map selector for the given register.
++ * @value: value to be written in the @address register address of
++ * the MAC-PHY.
++ *
++ * Return: 0 on success otherwise failed.
++ */
++int oa_tc6_write_register_mms(struct oa_tc6 *tc6, u16 address, u16 mms,
++			      u32 value)
++{
++	return oa_tc6_write_registers_mms(tc6, address, mms, &value, 1);
++}
++EXPORT_SYMBOL_GPL(oa_tc6_write_register_mms);
++
+ /**
+  * oa_tc6_write_registers - function for writing multiple consecutive registers.
+  * @tc6: oa_tc6 struct.
+@@ -490,14 +567,14 @@ static int oa_tc6_mdiobus_read_c45(struct mii_bus *bus, int addr, int devnum,
+ 				   int regnum)
+ {
+ 	struct oa_tc6 *tc6 = bus->priv;
++	int mms, ret;
+ 	u32 regval;
+-	int ret;
+ 
+-	ret = oa_tc6_get_phy_c45_mms(tc6, devnum);
+-	if (ret < 0)
+-		return ret;
++	mms = oa_tc6_get_phy_c45_mms(tc6, devnum);
++	if (mms < 0)
++		return mms;
+ 
+-	ret = oa_tc6_read_register(tc6, (ret << 16) | regnum, &regval);
++	ret = oa_tc6_read_register_mms(tc6, (u16)regnum, (u16)mms, &regval);
+ 	if (ret)
+ 		return ret;
+ 
+@@ -508,13 +585,13 @@ static int oa_tc6_mdiobus_write_c45(struct mii_bus *bus, int addr, int devnum,
+ 				    int regnum, u16 val)
+ {
+ 	struct oa_tc6 *tc6 = bus->priv;
+-	int ret;
++	int mms;
+ 
+-	ret = oa_tc6_get_phy_c45_mms(tc6, devnum);
+-	if (ret < 0)
+-		return ret;
++	mms = oa_tc6_get_phy_c45_mms(tc6, devnum);
++	if (mms < 0)
++		return mms;
+ 
+-	return oa_tc6_write_register(tc6, (ret << 16) | regnum, val);
++	return oa_tc6_write_register_mms(tc6, (u16)regnum, (u16)mms, val);
+ }
+ 
+ static int oa_tc6_mdiobus_register(struct oa_tc6 *tc6)
+diff --git a/include/linux/oa_tc6.h b/include/linux/oa_tc6.h
+index a89151267713..3d50971f0f5b 100644
+--- a/include/linux/oa_tc6.h
++++ b/include/linux/oa_tc6.h
+@@ -37,6 +37,14 @@ int oa_tc6_read_registers(struct oa_tc6 *tc6, u32 address, u32 value[],
+ 			  u8 length);
+ netdev_tx_t oa_tc6_start_xmit(struct oa_tc6 *tc6, struct sk_buff *skb);
+ int oa_tc6_zero_align_receive_frame_enable(struct oa_tc6 *tc6);
++int oa_tc6_write_registers_mms(struct oa_tc6 *tc6, u16 address, u16 mms,
++			       u32 value[], u8 length);
++int oa_tc6_write_register_mms(struct oa_tc6 *tc6, u16 address, u16 mms,
++			      u32 value);
++int oa_tc6_read_registers_mms(struct oa_tc6 *tc6, u16 address, u16 mms,
++			      u32 value[], u8 length);
++int oa_tc6_read_register_mms(struct oa_tc6 *tc6, u16 address, u16 mms,
++			     u32 *value);
+ int oa_tc6_ptp_register(struct oa_tc6 *tc6, struct ptp_clock_info *info);
+ int oa_tc6_ioctl(struct oa_tc6 *tc6, struct ifreq *rq, int cmd);
+ int oa_tc6_get_ts_info(struct oa_tc6 *tc6,
 
 -- 
 2.43.0
