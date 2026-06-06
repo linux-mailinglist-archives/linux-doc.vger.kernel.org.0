@@ -1,53 +1,53 @@
-Return-Path: <linux-doc+bounces-91202-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91203-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id vb60OfTII2pbyQEAu9opvQ
-	(envelope-from <linux-doc+bounces-91202-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 06 Jun 2026 09:15:00 +0200
+	id JwxqEULKI2oPygEAu9opvQ
+	(envelope-from <linux-doc+bounces-91203-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 06 Jun 2026 09:20:34 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5FDFB64CCC8
-	for <lists+linux-doc@lfdr.de>; Sat, 06 Jun 2026 09:15:00 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 160D964CD16
+	for <lists+linux-doc@lfdr.de>; Sat, 06 Jun 2026 09:20:34 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b="kB/Qipoz";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91202-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-91202-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=Z6nlRls5;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91203-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-91203-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id DD4EF3016C97
-	for <lists+linux-doc@lfdr.de>; Sat,  6 Jun 2026 07:14:58 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id CE5F6301A142
+	for <lists+linux-doc@lfdr.de>; Sat,  6 Jun 2026 07:20:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7D06A305E1F;
-	Sat,  6 Jun 2026 07:14:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A9EC625B2FA;
+	Sat,  6 Jun 2026 07:20:29 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 82B5126B755;
-	Sat,  6 Jun 2026 07:14:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B57822253B0;
+	Sat,  6 Jun 2026 07:20:28 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780730097; cv=none; b=iltDsTlIYWyL6W5nnAn6IALZIqaxawBeCLVaKgABBP9jQZYSqUH2ZPkxnidFxYkkGIy1Bo61uqg84ZqJ7U1zctDD8HQL9wk0I3qXJwJmG/q5i6e74agj2txx0cSGO93kWGSXJls5uwUsKu9la85jlHx5j9zgCzHqU9Hd3t+QhOU=
+	t=1780730429; cv=none; b=sxCOhh8dGT2njCeoxh8fwYf0rAVFgxFg/o8vO/Ed5lnf8HkEu6TVDLLyIr+DCTXmlIwm8k26XfH1LfJoTgjselHn6Tsh4ZP9+YTIO4RIAFbQhlDoR8109T49DfEAzX1tHZz6k+vxX91eFzXMwv4mXPR1pJ5ScF+4Rw4W0oPZvJY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780730097; c=relaxed/simple;
-	bh=TnS7422DmVPb160bVG826GnKnvow1WQ19aspgIRgDNM=;
+	s=arc-20240116; t=1780730429; c=relaxed/simple;
+	bh=YB2cR5AVk4YpTzDnqiM5TTTglr81HrF/neI0EmnMzKM=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=JiicLJfKyOQ784ei2iBPZokzhHr02T1X0VCfqrJt+BT5HoMa5cSklDjTg7EVDfj5Xy5HZbIsRvfB1o7gCMIFp3n3NGe49x8hNchfsycT8pMyFSdtny1Jrur6ytUhAox3Tccp/V6NeEWRLPEYi+z0DfxPYqXAZQeKo3fIcpHUx0s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kB/Qipoz; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 359B41F00893;
-	Sat,  6 Jun 2026 07:14:53 +0000 (UTC)
+	 In-Reply-To:Content-Type; b=CI68BxEicyqh80vymD/fb826RrGRvtZmIgEx5A7TMHZeEj7stf/wb+b6uTb/zTllQbaUat73d3bk92KUuF3J6JIq7gjLojxIYAlo+R3NaHd+7mtFvlBVMXFrGIfnyaX1gZ4ZfNLRHrzITDBeVfOm0dPH8CwYkZq+3Hg3yMiHRvM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Z6nlRls5; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3C65A1F00893;
+	Sat,  6 Jun 2026 07:20:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1780730096;
-	bh=S9TKnr0jUrpLPiALjIbDdTwl2faU9LAlnTbHQCYW5bk=;
+	s=k20260515; t=1780730428;
+	bh=RP3mn0kdgyvLGaS9ImYD6iXJDSRSS3hCrPGPXerPjko=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=kB/QipozwDVXw6hNWbkOsv/JUMU3PcKvLNTq6YiETvCxqJN/izQHExAtDj9A71oFn
-	 1XgU7VJuh7fzzNbRwqdP0kEMaCV4huZGZ9ojMS3T87nHwFRvUd3ACytUVvWjssxVEc
-	 jWgy3A+bDtOK1aagwRpHmcL66Udgg2UQBFrK7yN6kpvdD8UJz+JooZZy8dgV2rhTJD
-	 jz+SfVO2ZQ6F6QDIJtTII7k7rV+NWJvBoorlHx949UxJqSk8nZ23Ty9qL6x2TF1Q8+
-	 cZrtUgZ0kaJHkAinK/T0rd0iyMx2Zc7/xN7Iu3FDfGdpzzT3tWRH7+IW6nUMrA2KwH
-	 3Ei0TtcxJ5kiw==
-Message-ID: <83b4e64f-4f86-4bc3-8c8b-855e05192312@kernel.org>
-Date: Sat, 6 Jun 2026 15:14:48 +0800
+	b=Z6nlRls5EWvkEnt5P7sFbdZUGqVMF5ofUJ89h2vRgsZs1050GzD4+NBqgoEuBVFy+
+	 sKJUa6UqjhsPIqgodXA8owCazflcz91Ss3o/JGqsWJo4bF4sYIueEYwkkcXu3csbDZ
+	 FH4CEvaRn9iDt0UhX3YmzhAMWVmu9poWxC/6IdIuCT3/qO0JbTO/jivjYTmgcUGg8A
+	 xWH8srU2sATgK/Ykp+eQ2wx4WtODbCJWt7LcEYT5mwkueoWZmedx70RxadfKEkF2A5
+	 UAnaNCNybUBjsRWptdqxlR697m4QQzspAJJk9FTMBI+55yR0bGt/1eJzxMEX4Zq/uT
+	 m10VyBQ8yM4qA==
+Message-ID: <df293644-78ff-499b-bdfd-105b4e030c00@kernel.org>
+Date: Sat, 6 Jun 2026 15:20:21 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -55,23 +55,23 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] block: add a macro to initialize the status table
+Subject: Re: [PATCH 2/4] block: add a "tag" for block status codes
 To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
 Cc: Jonathan Corbet <corbet@lwn.net>, linux-block@vger.kernel.org,
  linux-doc@vger.kernel.org, Keith Busch <kbusch@kernel.org>
 References: <20260605184441.590927-1-hch@lst.de>
- <20260605184441.590927-2-hch@lst.de>
+ <20260605184441.590927-3-hch@lst.de>
 Content-Language: en-US
 From: Damien Le Moal <dlemoal@kernel.org>
 Organization: Western Digital Research
-In-Reply-To: <20260605184441.590927-2-hch@lst.de>
+In-Reply-To: <20260605184441.590927-3-hch@lst.de>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -80,7 +80,7 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	FORGED_RECIPIENTS(0.00)[m:hch@lst.de,m:axboe@kernel.dk,m:corbet@lwn.net,m:linux-block@vger.kernel.org,m:linux-doc@vger.kernel.org,m:kbusch@kernel.org,s:lists@lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
 	HAS_ORG_HEADER(0.00)[];
-	TAGGED_FROM(0.00)[bounces-91202-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-91203-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_SENDER(0.00)[dlemoal@kernel.org,linux-doc@vger.kernel.org];
 	TO_DN_SOME(0.00)[];
@@ -97,15 +97,16 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp,lst.de:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 5FDFB64CCC8
+X-Rspamd-Queue-Id: 160D964CD16
 
 On 2026/06/06 2:44, Christoph Hellwig wrote:
-> Prepare for adding a new value to the error table by adding a macro
-> to fill it.
+> The full name of the status codes is not good for user interfaces as it
+> can contain white spaces.  Add the name of the status code without the
+> BLK_STS_ prefix as a tag so that it can be used for user interfaces.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 > Reviewed-by: Keith Busch <kbusch@kernel.org>
