@@ -1,58 +1,58 @@
-Return-Path: <linux-doc+bounces-91186-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91185-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id pLSPHGCzI2rsxAEAu9opvQ
-	(envelope-from <linux-doc+bounces-91186-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 06 Jun 2026 07:42:56 +0200
+	id K29IAF2zI2rpxAEAu9opvQ
+	(envelope-from <linux-doc+bounces-91185-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 06 Jun 2026 07:42:53 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E7A3164C95F
-	for <lists+linux-doc@lfdr.de>; Sat, 06 Jun 2026 07:42:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 690EA64C955
+	for <lists+linux-doc@lfdr.de>; Sat, 06 Jun 2026 07:42:52 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=Pk03GiUb;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91186-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91186-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=f8QJ5Ej2;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91185-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91185-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 69BE13024A14
-	for <lists+linux-doc@lfdr.de>; Sat,  6 Jun 2026 05:42:52 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 428BA301F78D
+	for <lists+linux-doc@lfdr.de>; Sat,  6 Jun 2026 05:42:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CEEED305E1F;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C5AAC3054EF;
 	Sat,  6 Jun 2026 05:42:49 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D8621D5CFB;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D8001A6813;
 	Sat,  6 Jun 2026 05:42:49 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780724569; cv=none; b=j2XboKYmJKYnQ2ldAnINHg4/iRryzbNcL2/6COhus7g+mbHGkaF9dfzzjh4dXVqyv+cbomBgTgyFuCOYbF23mFBlvijYKGyS/qYd/1zxM3SmELWyqiSBR3g8Dft6UJYn9c3QDy7djeW22RnMLhglSxP0WnUUMWh5gHEF04cPudk=
+	t=1780724569; cv=none; b=IJFkrtBst58rYJO/z7BqmsM/+doKEEBYezXsmyx2lTSP6R7q8SoVx6+OUpSl8Ghf5N6d46JmA+2pKwRQptrZq+UPi4mOhyYMRJ01ceBTYppN5c8RRMyP83SHXQOH+OaMoJRkXy4Kr4tndvDWw4VdGXfASbtSowIwNk8aft38uIA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1780724569; c=relaxed/simple;
-	bh=ZC9Iv73sePAEW9EIbEE/P0wqIfCOcMGUzI/pjgcrFRM=;
+	bh=+H+1R9OZ+SESM1gdy+ACCMkcS6fHa2p+8fepjhlqHBE=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=GaaDIxaQRFfKqay9BWBKDANnCqRTFsW2Rvo4UA85EoQfEYV/OvpWvLVxKdpWcZEIZKKURRmvW1RQ5ZwP+6nrsizPf4DqaRQkYNkXaDrFzSAqdZGDre/ZvE7FFppiP4sFM8ZYivOaxVu5HPxM8G5RuDvZEKzLhZ8ixdizKu4UAl4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Pk03GiUb; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 370B2C2BCC9;
+	 In-Reply-To:To:Cc; b=ov1mXrMweQ8o4Zsb6//cKh2feg/X/PQ+Mxc+/qA1U1hDdchDbG0QMZyflMIja734yrhmoTz6PxL7r0Af+pkdXbPsUQTQwYnlJY4TvKfAqrD9MF3kfivC5O9YX9viI8uM7211kqZnt1ROJ8zzCaEc2DkWtD1lVzur1tWGzKPb7wo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=f8QJ5Ej2; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 4912DC2BCC4;
 	Sat,  6 Jun 2026 05:42:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1780724569;
-	bh=ZC9Iv73sePAEW9EIbEE/P0wqIfCOcMGUzI/pjgcrFRM=;
+	bh=+H+1R9OZ+SESM1gdy+ACCMkcS6fHa2p+8fepjhlqHBE=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=Pk03GiUbeX73nfqmkPO0zCCt+ibvZbE2OOjkL5pYMDFHQQ0CkxLVHeSaAmBpl3YGr
-	 zxnuMIiPVz7bjMgaH4/4HKED7BV2Rwlz5gBf1YuscbNuaDI1JwnuBBEmie14p8G3hm
-	 McvlJGjDIrUPyp1AOI6mFz/I/UvaxcIvkWH9XyQADm0ATU5bK+bDThH6RCNdf854u4
-	 wvk4a38wpOZAu0bAsA/WdfyBn43I/WJ0LP2/w2ZlnlJuVn0VTrZD92Py1KqSQ4tBZm
-	 is2CdGmicFcfr+Ek4uYLa7/tQ2qlWgt8Y3i9DY9YMCvGGBiYYxJ4hxuerRry/M6kxm
-	 lvxeJpTLca8AA==
+	b=f8QJ5Ej2pe2J5YRucmvvfC93qyQyHNvEa3LBf+Z/cOSmxY0dPlBheolB2428dfjPH
+	 kxjmuofUmM5uUPz84tlpEPCbXXXCVE/s8ONRD1KSGQhwqf4EPQTtsF/kefvVcenKYL
+	 4jU13zxvUVmGdLdTGnt0Df41hEsuABTdopiPH3GGstQj7PXFGpsZOp74MwQRz9SoPR
+	 rsCpeV5trOiLikNYSuElnO0nJtFJfHndw7HJUVAsg7Fi0fKCBfpkyMQpw0flPGTfP7
+	 vwMSDb1HEBouzWU0+sHkj/JMbVZzvm+2Wmrn+046GZ0Q7B89jZ0Za3d4LquREV2irH
+	 gl0gq5c7akiaw==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 23B05CD6E55;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F71DCD8C8F;
 	Sat,  6 Jun 2026 05:42:49 +0000 (UTC)
 From: Selvamani Rajagopal via B4 Relay <devnull+Selvamani.Rajagopal.onsemi.com@kernel.org>
-Date: Fri, 05 Jun 2026 22:42:33 -0700
-Subject: [PATCH net-next v4 02/16] net: phy: Helper to modify PHY loopback
- mode only.
+Date: Fri, 05 Jun 2026 22:42:34 -0700
+Subject: [PATCH net-next v4 03/16] net: ethernet: oa_tc6: Move oa_tc6.c to
+ its own directory
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -61,7 +61,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260605-s2500-mac-phy-support-v4-2-de0fbc13c6d8@onsemi.com>
+Message-Id: <20260605-s2500-mac-phy-support-v4-3-de0fbc13c6d8@onsemi.com>
 References: <20260605-s2500-mac-phy-support-v4-0-de0fbc13c6d8@onsemi.com>
 In-Reply-To: <20260605-s2500-mac-phy-support-v4-0-de0fbc13c6d8@onsemi.com>
 To: Andrew Lunn <andrew@lunn.ch>, 
@@ -82,11 +82,11 @@ Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
  Jerry Ray <jerry.ray@microchip.com>, 
  Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780724562; l=3209;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780724562; l=4480;
  i=Selvamani.Rajagopal@onsemi.com; s=20260531; h=from:subject:message-id;
- bh=QFlNGDq2qBU9Dz3lBBmjbo5FS53f0zd8GFs5ucZ/t5o=;
- b=cBCxfDAUn3mw+TZzZG7myc4Jw3MgR+2ppDD/Nb3CmgKcYxqPID8t1piZxnZdC+ukdgJ3fNB1J
- hesWwabsixjC1YY1UeHyvF0bEFR190Z+SJfiyI6FBOfXtu8njBhCD8Z
+ bh=TddEWdaAcBzTr+dxkU5ER4ZrAEWHz31C6KRwvs3G1ro=;
+ b=CGhyURyY5vFb4OqomOoRzHes+kH4uojl1unGce3AG6BllfuWvM2jeUreK8N5KQWtiKQTt2/Lb
+ gXERlWouw+lAu4HCkbEGkBCjOt5uZdab2OhQS8tA7MFH4fOoNKBEdK5
 X-Developer-Key: i=Selvamani.Rajagopal@onsemi.com; a=ed25519;
  pk=5QRdM0HS/LGWWcUZZ9hVfZ+qbPQGZCumcTXOiN7Fyug=
 X-Endpoint-Received: by B4 Relay for
@@ -104,7 +104,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-91186-lists,linux-doc=lfdr.de,Selvamani.Rajagopal.onsemi.com];
+	TAGGED_FROM(0.00)[bounces-91185-lists,linux-doc=lfdr.de,Selvamani.Rajagopal.onsemi.com];
 	RCPT_COUNT_TWELVE(0.00)[24];
 	RCVD_TLS_LAST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
@@ -113,8 +113,8 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FORGED_SENDER(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
@@ -128,95 +128,126 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	HAS_REPLYTO(0.00)[Selvamani.Rajagopal@onsemi.com]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: E7A3164C95F
+X-Rspamd-Queue-Id: 690EA64C955
 
 From: Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
 
-Generic helper function to modify loopback bit of the PHY without
-modifying any other bit. This will help the PHYs that may have fixed
-speed, like 10Base-T1S or PHYs that don't need any other settings
-to set them in loopback mode.
+Moving oa_tc6.c to its own directory, drivers/net/ethernet/oa_tc6. This
+will facilitate adding more files to support other features
+defined by OPEN Alliance 10BASE-T1x Serial Interface specification
+
+This patch series is adding two files, one for hardware
+timestamp related functions and one for PTP related APIs.
 
 Signed-off-by: Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
 ---
- drivers/net/phy/dp83867.c    | 11 +----------
- drivers/net/phy/phy_device.c | 20 ++++++++++++++++++++
- include/linux/phy.h          |  2 ++
- 3 files changed, 23 insertions(+), 10 deletions(-)
+ MAINTAINERS                                |  2 +-
+ drivers/net/ethernet/Kconfig               | 12 +-----------
+ drivers/net/ethernet/Makefile              |  2 +-
+ drivers/net/ethernet/oa_tc6/Kconfig        | 16 ++++++++++++++++
+ drivers/net/ethernet/oa_tc6/Makefile       |  7 +++++++
+ drivers/net/ethernet/{ => oa_tc6}/oa_tc6.c |  0
+ 6 files changed, 26 insertions(+), 13 deletions(-)
 
-diff --git a/drivers/net/phy/dp83867.c b/drivers/net/phy/dp83867.c
-index 88255e92b4cd..01ea2e8dd253 100644
---- a/drivers/net/phy/dp83867.c
-+++ b/drivers/net/phy/dp83867.c
-@@ -991,15 +991,6 @@ static void dp83867_link_change_notify(struct phy_device *phydev)
- 	}
- }
+diff --git a/MAINTAINERS b/MAINTAINERS
+index eb8cdcc76324..7e6b28202e88 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -20001,7 +20001,7 @@ M:	Parthiban Veerasooran <parthiban.veerasooran@microchip.com>
+ L:	netdev@vger.kernel.org
+ S:	Maintained
+ F:	Documentation/networking/oa-tc6-framework.rst
+-F:	drivers/net/ethernet/oa_tc6.c
++F:	drivers/net/ethernet/oa_tc6/oa_tc6*
+ F:	include/linux/oa_tc6.h
  
--static int dp83867_loopback(struct phy_device *phydev, bool enable, int speed)
--{
--	if (enable && speed)
--		return -EOPNOTSUPP;
+ OPEN FIRMWARE AND FLATTENED DEVICE TREE
+diff --git a/drivers/net/ethernet/Kconfig b/drivers/net/ethernet/Kconfig
+index 78c79ad7bba5..49d93488ba52 100644
+--- a/drivers/net/ethernet/Kconfig
++++ b/drivers/net/ethernet/Kconfig
+@@ -134,6 +134,7 @@ source "drivers/net/ethernet/netronome/Kconfig"
+ source "drivers/net/ethernet/8390/Kconfig"
+ source "drivers/net/ethernet/nvidia/Kconfig"
+ source "drivers/net/ethernet/nxp/Kconfig"
++source "drivers/net/ethernet/oa_tc6/Kconfig"
+ source "drivers/net/ethernet/oki-semi/Kconfig"
+ 
+ config ETHOC
+@@ -146,17 +147,6 @@ config ETHOC
+ 	help
+ 	  Say Y here if you want to use the OpenCores 10/100 Mbps Ethernet MAC.
+ 
+-config OA_TC6
+-	tristate "OPEN Alliance TC6 10BASE-T1x MAC-PHY support" if COMPILE_TEST
+-	depends on SPI
+-	select PHYLIB
+-	help
+-	  This library implements OPEN Alliance TC6 10BASE-T1x MAC-PHY
+-	  Serial Interface protocol for supporting 10BASE-T1x MAC-PHYs.
 -
--	return phy_modify(phydev, MII_BMCR, BMCR_LOOPBACK,
--			  enable ? BMCR_LOOPBACK : 0);
--}
+-	  To know the implementation details, refer documentation in
+-	  <file:Documentation/networking/oa-tc6-framework.rst>.
 -
- static int
- dp83867_led_brightness_set(struct phy_device *phydev,
- 			   u8 index, enum led_brightness brightness)
-@@ -1204,7 +1195,7 @@ static struct phy_driver dp83867_driver[] = {
- 		.resume		= dp83867_resume,
- 
- 		.link_change_notify = dp83867_link_change_notify,
--		.set_loopback	= dp83867_loopback,
-+		.set_loopback	= genphy_loopback_fixed_speed,
- 
- 		.led_brightness_set = dp83867_led_brightness_set,
- 		.led_hw_is_supported = dp83867_led_hw_is_supported,
-diff --git a/drivers/net/phy/phy_device.c b/drivers/net/phy/phy_device.c
-index 20c92fde4fbb..738c995e11d2 100644
---- a/drivers/net/phy/phy_device.c
-+++ b/drivers/net/phy/phy_device.c
-@@ -2836,6 +2836,26 @@ int genphy_phy_write_mmd(struct phy_device *phydev, int devnum,
- }
- EXPORT_SYMBOL(genphy_phy_write_mmd);
- 
-+/**
-+ * genphy_loopback_fixed_speed - Helper to modify the PHY loopback mode
-+ * without affecting any other settings.
-+ * @phydev: The phy_device struct
-+ * @enable: Flag to enable or disable the PHY level loopback.
-+ * @speed: Speed setting. Not expected to be set. Error if it is set.
-+ *
-+ * Returns: 0 if successful, negative error code on failure.
-+ */
-+int genphy_loopback_fixed_speed(struct phy_device *phydev, bool enable,
-+				int speed)
-+{
-+	if (enable && speed)
-+		return -EOPNOTSUPP;
+ source "drivers/net/ethernet/pasemi/Kconfig"
+ source "drivers/net/ethernet/pensando/Kconfig"
+ source "drivers/net/ethernet/qlogic/Kconfig"
+diff --git a/drivers/net/ethernet/Makefile b/drivers/net/ethernet/Makefile
+index bba55d9af387..77b11d5a7abf 100644
+--- a/drivers/net/ethernet/Makefile
++++ b/drivers/net/ethernet/Makefile
+@@ -71,6 +71,7 @@ obj-$(CONFIG_NET_VENDOR_NETRONOME) += netronome/
+ obj-$(CONFIG_NET_VENDOR_NI) += ni/
+ obj-$(CONFIG_NET_VENDOR_NVIDIA) += nvidia/
+ obj-$(CONFIG_LPC_ENET) += nxp/
++obj-$(CONFIG_OA_TC6) += oa_tc6/
+ obj-$(CONFIG_NET_VENDOR_OKI) += oki-semi/
+ obj-$(CONFIG_ETHOC) += ethoc.o
+ obj-$(CONFIG_NET_VENDOR_PASEMI) += pasemi/
+@@ -104,4 +105,3 @@ obj-$(CONFIG_NET_VENDOR_XILINX) += xilinx/
+ obj-$(CONFIG_NET_VENDOR_XIRCOM) += xircom/
+ obj-$(CONFIG_NET_VENDOR_SYNOPSYS) += synopsys/
+ obj-$(CONFIG_NET_VENDOR_PENSANDO) += pensando/
+-obj-$(CONFIG_OA_TC6) += oa_tc6.o
+diff --git a/drivers/net/ethernet/oa_tc6/Kconfig b/drivers/net/ethernet/oa_tc6/Kconfig
+new file mode 100644
+index 000000000000..97345f345fb9
+--- /dev/null
++++ b/drivers/net/ethernet/oa_tc6/Kconfig
+@@ -0,0 +1,16 @@
++# SPDX-License-Identifier: GPL-2.0-only
++#
++# OA TC6 10BASE-T1x MAC-PHY configuration
++#
 +
-+	return phy_modify(phydev, MII_BMCR, BMCR_LOOPBACK,
-+			  enable ? BMCR_LOOPBACK : 0);
-+}
-+EXPORT_SYMBOL(genphy_loopback_fixed_speed);
++config OA_TC6
++	tristate "OPEN Alliance TC6 10BASE-T1x MAC-PHY support"
++	depends on SPI
++	select PHYLIB
++	help
++	  This library implements OPEN Alliance TC6 10BASE-T1x MAC-PHY
++	  Serial Interface protocol for supporting 10BASE-T1x MAC-PHYs.
 +
- int genphy_suspend(struct phy_device *phydev)
- {
- 	return phy_set_bits(phydev, MII_BMCR, BMCR_PDOWN);
-diff --git a/include/linux/phy.h b/include/linux/phy.h
-index 8266dd4a8dbe..61bcd71a3143 100644
---- a/include/linux/phy.h
-+++ b/include/linux/phy.h
-@@ -2301,6 +2301,8 @@ int genphy_read_mmd_unsupported(struct phy_device *phdev, int devad,
- 				u16 regnum);
- int genphy_write_mmd_unsupported(struct phy_device *phdev, int devnum,
- 				 u16 regnum, u16 val);
-+int genphy_loopback_fixed_speed(struct phy_device *phydev, bool enable,
-+				int speed);
- int genphy_phy_write_mmd(struct phy_device *phydev, int devnum,
- 			 u16 regnum, u16 val);
- int genphy_phy_read_mmd(struct phy_device *phydev, int devnum,
++	  To know the implementation details, refer documentation in
++	  <file:Documentation/networking/oa-tc6-framework.rst>.
++
+diff --git a/drivers/net/ethernet/oa_tc6/Makefile b/drivers/net/ethernet/oa_tc6/Makefile
+new file mode 100644
+index 000000000000..f24aae852ef2
+--- /dev/null
++++ b/drivers/net/ethernet/oa_tc6/Makefile
+@@ -0,0 +1,7 @@
++# SPDX-License-Identifier: GPL-2.0-only
++#
++# Makefile for OA TC6 10BASE-T1x MAC-PHY
++#
++
++obj-$(CONFIG_OA_TC6) := oa_tc6_mod.o
++oa_tc6_mod-objs := oa_tc6.o
+diff --git a/drivers/net/ethernet/oa_tc6.c b/drivers/net/ethernet/oa_tc6/oa_tc6.c
+similarity index 100%
+rename from drivers/net/ethernet/oa_tc6.c
+rename to drivers/net/ethernet/oa_tc6/oa_tc6.c
 
 -- 
 2.43.0
