@@ -1,258 +1,214 @@
-Return-Path: <linux-doc+bounces-91184-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91187-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id eFeMNaudI2rkvwEAu9opvQ
-	(envelope-from <linux-doc+bounces-91184-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 06 Jun 2026 06:10:19 +0200
+	id 7B0jKmqzI2r4xAEAu9opvQ
+	(envelope-from <linux-doc+bounces-91187-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 06 Jun 2026 07:43:06 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB88264C587
-	for <lists+linux-doc@lfdr.de>; Sat, 06 Jun 2026 06:10:17 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id F0ECB64C97D
+	for <lists+linux-doc@lfdr.de>; Sat, 06 Jun 2026 07:43:05 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=redadmin.org header.s=20231208space header.b="fSglB/z9";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91184-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91184-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=redadmin.org;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=Jh1Eu6S5;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91187-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91187-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id D8BFC30136C9
-	for <lists+linux-doc@lfdr.de>; Sat,  6 Jun 2026 04:10:14 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 1DAC5302AE1F
+	for <lists+linux-doc@lfdr.de>; Sat,  6 Jun 2026 05:42:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 783612F745C;
-	Sat,  6 Jun 2026 04:10:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D8C85308F0A;
+	Sat,  6 Jun 2026 05:42:49 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from www.redadmin.org (bc043154.ppp.asahi-net.or.jp [222.228.43.154])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91E772F746D;
-	Sat,  6 Jun 2026 04:10:05 +0000 (UTC)
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780719014; cv=pass; b=Hv1RZKrYmiZUqvTmZUMARbcofUkMXg78CsGTCJR0TgrMZeNFpraESuFtRKKGZo49yZjCCQuuPsBjSaHXe3as3m82o7vxP3Fbacz8fHL5sQZXG8VMVAi9QwJWAoGt/Y7SOInDMAv1fKmhX44R5OzU1W0Jtw1jJ4QYUWyTf4cSvQg=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780719014; c=relaxed/simple;
-	bh=jMj9c3IfP+tyqlgRZi1huwQY320WIuSY+aJDNsp9xgI=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=ODDRF46osIJIEOV5KYCZqFOtk33LFRGhdbntfvAm+/H93NQC7N49MC1VSQsGDP6EKFCHa9IuMitOJzzkQOM12b5i496kDfbOqlK0tkcsbeeQPvAfxmUCL4IJS7WfU4p02mNJqLmRIkt42dmkKyS5NdkUzvSpLIEFuLoM6JipSQA=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redadmin.org; spf=pass smtp.mailfrom=redadmin.org; dkim=pass (1024-bit key) header.d=redadmin.org header.i=@redadmin.org header.b=fSglB/z9; arc=pass smtp.client-ip=222.228.43.154
-Received: from localhost (localhost [127.0.0.1])
-	by www.redadmin.org (Postfix) with ESMTP id AE0C411973336;
-	Sat,  6 Jun 2026 13:00:04 +0900 (JST)
-X-Virus-Scanned: amavis at redadmin.org
-Received: from www.redadmin.org ([127.0.0.1])
- by localhost (redadmin.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id GZefMSO6J9hN; Sat,  6 Jun 2026 12:59:57 +0900 (JST)
-ARC-Seal: i=1; d=redadmin.org; s=20231208space; a=rsa-sha256; cv=none;
-	t=1780718397;
-	b=CekU9abfAJQ23sScd+XT1hgAZUs2FKK8yLta374jATkIf21pUQuo4qZ6N6HOqNU8xe0k
-	 wdaBr4TFk1FYmVTe3eNCUBCW2XndpoXcQ2BBOeQWAFsiFZnyPR81qDBU4Fv1xBHW24pSx
-	 vGr62uKxueIh0g5o2VK10hmkizsHJi8DVk=
-ARC-Message-Signature: i=1; d=redadmin.org; s=20231208space; a=rsa-sha256;
-	c=relaxed/relaxed; t=1780718397;
-	h=DKIM-Filter:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:
-	 X-Mailer:MIME-Version:Content-Type:Content-Transfer-Encoding;
-	bh=y/wlgbokZzSMKCzQxd2CIBaPnIU1aD6YGe/tQNOoeks=;
-	b=waYzNfpdpIysYGAoGZ1gf9juwq7P/TuYYHBeYSWmt7PZJKypdIdq8V8YpfwhOsu7Wlcd
-	 RcJMEsWkox33y3G2lH8q2gHfM7YIyXd3NzbStPyR9WG1nR8d4cgdr+Zv5lv/yR0xmS7en
-	 3qCcBTuNsiiHddHV7xciNqHnCVPcgnkuvY=
-ARC-Authentication-Results: i=1; www.redadmin.org; arc=none smtp.remote-ip=127.0.0.1
-Received: by www.redadmin.org (Postfix, from userid 1000)
-	id C1847102D0638; Sat,  6 Jun 2026 12:59:57 +0900 (JST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 www.redadmin.org C1847102D0638
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redadmin.org;
-	s=20231208space; t=1780718397;
-	bh=y/wlgbokZzSMKCzQxd2CIBaPnIU1aD6YGe/tQNOoeks=;
-	h=From:To:Cc:Subject:Date:From;
-	b=fSglB/z9LjCdqSuZr52nPe4v3R3hpy1FULpp6G33yxTfi3RLQgO8cWo+sgXoH5Gac
-	 ZRXULpwl8c2Wxs1Cs8FEK7fzleD4QhlCHiwkI6IGDi1cfh4t+yItRAXwLnVg4Bg6WA
-	 1bS4ha70l1JAENwleufZaf9WosWGP2utYXCSZERs=
-From: Akiyoshi Kurita <weibu@redadmin.org>
-To: linux-doc@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org,
-	corbet@lwn.net,
-	akiyks@gmail.com,
-	Akiyoshi Kurita <weibu@redadmin.org>
-Subject: [PATCH v1] docs/ja_JP: translate submitting-patches.rst (interleaved-replies)
-Date: Sat,  6 Jun 2026 12:59:54 +0900
-Message-ID: <20260606035954.27605-1-weibu@redadmin.org>
-X-Mailer: git-send-email 2.52.0
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9DE1B284B3B;
+	Sat,  6 Jun 2026 05:42:49 +0000 (UTC)
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1780724569; cv=none; b=QogECi80gwhInHyC60kf1/0sktOtl0my2/LyI/oLbWXd7AFjCyAcwCIfjMsz1gkz2Ua3xuXXyHRdv5FyCXr2GM3on3Tg2Wq2ZvmGzvwvD/FTam8ef2uTYursDqugfclUwhs1HkCasaGlUxmg2uYWZacQApbDVMhVDcPuqgKJJeI=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1780724569; c=relaxed/simple;
+	bh=dAOA6SjpWMVvSYsnDvoLrQBjwg5fA4k8JH4p1r9yoy4=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=h8aw8WRrPpU3CUV0N+objTuyw6LQ/GYMBwk/0yzVjaER2iaOXA4Bl3s+LhwBm0MxPyXIBAh4r/UT9OwyPf6vBotMafaRmgZZwblUFCT+Uf34i+1DefxIONSw0teBhthucA+Jrg69MmY74cqjiyPFJoUlLVxihsEigmI0aL4R2Ds=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Jh1Eu6S5; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 1CF19C2BCB0;
+	Sat,  6 Jun 2026 05:42:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1780724569;
+	bh=dAOA6SjpWMVvSYsnDvoLrQBjwg5fA4k8JH4p1r9yoy4=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=Jh1Eu6S5d0SZlSh+Q4zYhH4/gU3VPe+2CvEmGCg+qM50WU8jfNQZQyGYjkMgoYo/N
+	 1kMq5AYD3KdDbHMpkXFNPrGWJxPBIDIjkq+l9eiL+5BKdqtoTwJpczbBCMtSY2xlMr
+	 0KOoXQS7yo2LCSCrLIygHJMvkLx6qNLAMXIXGIGJV8iKOFFkWPJSf8WQ6PSX0c4duY
+	 tBLU+AaEDf74N9Zr0XDCbgaFG8JTI5uwJzo70e1cYWMn0pqfWwNbTN4gweVZ4C9F3Q
+	 SYabbP4rYKKL+nFncbobBIyqE3mvEzBWfNapKoHELSURqWAWf3Ujsv2BSro9lCmO+D
+	 bmSNOXfuplmfA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F179CCD8C8D;
+	Sat,  6 Jun 2026 05:42:48 +0000 (UTC)
+From: Selvamani Rajagopal via B4 Relay <devnull+Selvamani.Rajagopal.onsemi.com@kernel.org>
+Subject: [PATCH net-next v4 00/16] Support for onsemi's S2500 10Base-T1S
+ MAC-PHY
+Date: Fri, 05 Jun 2026 22:42:31 -0700
+Message-Id: <20260605-s2500-mac-phy-support-v4-0-de0fbc13c6d8@onsemi.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAEizI2oC/yWMQQrCMBAAv1L27MKa1Ip+RXpI48auYBqyaamU/
+ t2ox2GY2UA5Cytcmw0yL6IyxQrtoQE/uvhglHtlMGQ66uiIak5E+HIe0/hGnVOacsE2WMcXQ2E
+ 4W6htyhxk/X1vELlg5LVA/zc6D0/25buFff8AyBajKoMAAAA=
+To: Andrew Lunn <andrew@lunn.ch>, 
+ Piergiorgio Beruto <pier.beruto@onsemi.com>, 
+ Heiner Kallweit <hkallweit1@gmail.com>, 
+ Russell King <linux@armlinux.org.uk>, 
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+ Andrew Lunn <andrew+netdev@lunn.ch>, 
+ Parthiban Veerasooran <parthiban.veerasooran@microchip.com>, 
+ Selva Rajagopal <selvamani.rajagopal@onsemi.com>, 
+ Richard Cochran <richardcochran@gmail.com>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Simon Horman <horms@kernel.org>, 
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>
+Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-doc@vger.kernel.org, 
+ Jerry Ray <jerry.ray@microchip.com>, 
+ Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780724562; l=4265;
+ i=Selvamani.Rajagopal@onsemi.com; s=20260531; h=from:subject:message-id;
+ bh=dAOA6SjpWMVvSYsnDvoLrQBjwg5fA4k8JH4p1r9yoy4=;
+ b=qx2oYI5fXg+6Xkpr6RmdC6IHzvzkJPrcyap4R79wuSo6V2yTXvPJ7/Ft/+2ho1SzwEcSVoylQ
+ 4NggIhtkOj1AxKzm+y5nlfHKs3s3PmqGrYVbuJoEKBzhZ4U/B0IcuO4
+X-Developer-Key: i=Selvamani.Rajagopal@onsemi.com; a=ed25519;
+ pk=5QRdM0HS/LGWWcUZZ9hVfZ+qbPQGZCumcTXOiN7Fyug=
+X-Endpoint-Received: by B4 Relay for
+ Selvamani.Rajagopal@onsemi.com/20260531 with auth_id=803
+X-Original-From: Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
+Reply-To: Selvamani.Rajagopal@onsemi.com
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.16 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[redadmin.org,none];
-	R_DKIM_ALLOW(-0.20)[redadmin.org:s=20231208space];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[vger.kernel.org,lwn.net,gmail.com,redadmin.org];
+	TAGGED_FROM(0.00)[bounces-91187-lists,linux-doc=lfdr.de,Selvamani.Rajagopal.onsemi.com];
+	RCPT_COUNT_TWELVE(0.00)[24];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-91184-lists,linux-doc=lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
+	FREEMAIL_TO(0.00)[lunn.ch,onsemi.com,gmail.com,armlinux.org.uk,davemloft.net,google.com,kernel.org,redhat.com,microchip.com,lwn.net,linuxfoundation.org];
+	FORGED_RECIPIENTS(0.00)[m:andrew@lunn.ch,m:pier.beruto@onsemi.com,m:hkallweit1@gmail.com,m:linux@armlinux.org.uk,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:andrew+netdev@lunn.ch,m:parthiban.veerasooran@microchip.com,m:selvamani.rajagopal@onsemi.com,m:richardcochran@gmail.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:netdev@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jerry.ray@microchip.com,m:Selvamani.Rajagopal@onsemi.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:corbet@lwn.net,m:akiyks@gmail.com,m:weibu@redadmin.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[weibu@redadmin.org,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[weibu@redadmin.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[redadmin.org:+];
-	RCVD_COUNT_FIVE(0.00)[6];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_FIVE(0.00)[5]
+	TAGGED_RCPT(0.00)[linux-doc,netdev,dt];
+	TO_DN_SOME(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	HAS_REPLYTO(0.00)[Selvamani.Rajagopal@onsemi.com]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: DB88264C587
+X-Rspamd-Queue-Id: F0ECB64C97D
 
-Translate the "Use trimmed interleaved replies in email discussions"
-and "Don't get discouraged - or impatient" sections in
-Documentation/translations/ja_JP/process/submitting-patches.rst.
+This patch series brings support for onsemi's S2500 that is IEEE 802.3cg
+compliant Ethernet transceiver with an integrated Media Access
+Controller (MAC-PHY)
 
-Keep the wording close to the English text and wrap lines to match
-the style used in the surrounding Japanese translation.
+Previous versions were submitted unthreaded, without coverletter
+and changelog.
 
-Signed-off-by: Akiyoshi Kurita <weibu@redadmin.org>
+Changes in v4:
+ - Added return value comment for genphy_read/write_phy_mmd functions
+ - Added genphy_loopback_fixed_speed helper function to be used in
+   set_loopback callbacks
+ - Updated networking documentation for OA TC6 framework to elaborate
+   on what is expected in the ptp_clock_info structure for registration.
+ - added spi-max-frequency in YAML file based on alert from sashiko-bot
+ - Removed model/version from the onsemi driver's private structure as
+   they were useful as "information-only" data.
+ - Replaced the non-standard selftest with Linux's standard selftest
+   and made it as a separate patch
+ - Changed bit manipulation, shift operations to use macros so that
+   it is clean and readable.
+ - added new read_register and write_register apis with _mms postfix
+   so that MMS (memory map selector) can be given as a parameter.
+ - Fixed the wrong condition check with NETIF_F_RXFCS to subtract
+   FCS size from the length of the frame.
+
+Signed-off-by: Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
 ---
- .../ja_JP/process/submitting-patches.rst      | 47 +++++++++++++++++++
- 1 file changed, 47 insertions(+)
+Selvamani Rajagopal (16):
+      net: phy: Helper to read and write through C45 without lock
+      net: phy: Helper to modify PHY loopback mode only.
+      net: ethernet: oa_tc6: Move oa_tc6.c to its own directory
+      net: phy: microchip_t1s: Use generic APIs for C45 read and write
+      net: ethernet: oa_tc6: Move constant definitions to header file
+      net: ethernet: oa_tc6: Support for hardware timestamp
+      net: ethernet: oa_tc6: Support for vendor specific MMS
+      net: ethernet: oa_tc6: Remove FCS size in RX frame
+      net: ethernet: oa_tc6: read, write interface with MMS option
+      net: phy: ncn26000: Support for onsemi's S2500 internal phy
+      net: phy: ncn26000: Enable enhanced noise immunity
+      net: phy: ncn26000: Support for loopback support
+      onsemi: s2500: Add driver support for TS2500 MAC-PHY
+      onsemi: s2500: Added selftest support to onsemi's S2500 driver
+      dt-bindings: net: add onsemi's S2500
+      Documentation: networking: Add timestamp related APIs to OA TC6 framework
 
-diff --git a/Documentation/translations/ja_JP/process/submitting-patches.rs=
-t b/Documentation/translations/ja_JP/process/submitting-patches.rst
-index 165cb3ed94ec..d31d469909e4 100644
---- a/Documentation/translations/ja_JP/process/submitting-patches.rst
-+++ b/Documentation/translations/ja_JP/process/submitting-patches.rst
-@@ -355,3 +355,50 @@ cover letter =E3=81=BE=E3=81=9F=E3=81=AF=E5=80=8B=E3=
-=80=85=E3=81=AE=E3=83=91=E3=83=83=E3=83=81=E3=81=AB ``patch changelog`` =E3=
-=82=92=E8=BF=BD=E5=8A=A0=E3=81=97=E3=80=81
-=20
- =E3=83=A1=E3=83=BC=E3=83=AB=E3=82=AF=E3=83=A9=E3=82=A4=E3=82=A2=E3=83=B3=
-=E3=83=88=E3=81=A8=E3=83=A1=E3=83=BC=E3=83=AA=E3=83=B3=E3=82=B0=E3=83=AA=E3=
-=82=B9=E3=83=88=E3=81=A7=E3=81=AE=E4=BD=9C=E6=B3=95=E3=81=AB=E3=81=A4=E3=81=
-=84=E3=81=A6=E3=81=AE=E6=8E=A8=E5=A5=A8=E4=BA=8B=E9=A0=85=E3=81=AF=E3=80=81
- Documentation/process/email-clients.rst =E3=82=92=E5=8F=82=E7=85=A7=E3=81=
-=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82
-+
-+=E3=83=A1=E3=83=BC=E3=83=AB=E8=AD=B0=E8=AB=96=E3=81=A7=E3=81=AF=E4=B8=8D=
-=E8=A6=81=E3=81=AA=E5=BC=95=E7=94=A8=E3=82=92=E5=89=8A=E3=81=A3=E3=81=9F in=
-terleaved replies =E3=82=92=E4=BD=BF=E3=81=86
-+------------------------------------------------------------
-+
-+Linux =E3=82=AB=E3=83=BC=E3=83=8D=E3=83=AB=E9=96=8B=E7=99=BA=E3=81=AE=E8=
-=AD=B0=E8=AB=96=E3=81=A7=E3=81=AF=E3=80=81top-posting =E3=81=AF=E5=BC=B7=E3=
-=81=8F=E9=9D=9E=E6=8E=A8=E5=A5=A8=E3=81=A8=E3=81=95=E3=82=8C=E3=81=A6=E3=81=
-=84=E3=81=BE=E3=81=99=E3=80=82
-+Interleaved replies=E3=80=81=E3=81=BE=E3=81=9F=E3=81=AF ``inline`` replies=
- =E3=82=92=E4=BD=BF=E3=81=86=E3=81=A8=E3=80=81=E4=BC=9A=E8=A9=B1=E3=81=AE=
-=E6=B5=81=E3=82=8C=E3=82=92
-+=E3=81=9A=E3=81=A3=E3=81=A8=E8=BF=BD=E3=81=84=E3=82=84=E3=81=99=E3=81=8F=
-=E3=81=AA=E3=82=8A=E3=81=BE=E3=81=99=E3=80=82=E8=A9=B3=E7=B4=B0=E3=81=AF=E6=
-=AC=A1=E3=82=92=E5=8F=82=E7=85=A7=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=
-=95=E3=81=84:
-+https://en.wikipedia.org/wiki/Posting_style#Interleaved_style
-+
-+=E3=83=A1=E3=83=BC=E3=83=AA=E3=83=B3=E3=82=B0=E3=83=AA=E3=82=B9=E3=83=88=
-=E3=81=A7=E3=81=AF=E3=80=81=E3=82=88=E3=81=8F=E6=AC=A1=E3=81=AE=E3=82=88=E3=
-=81=86=E3=81=AB=E5=BC=95=E7=94=A8=E3=81=95=E3=82=8C=E3=81=BE=E3=81=99::
-+
-+  A: http://en.wikipedia.org/wiki/Top_post
-+  Q: Where do I find info about this thing called top-posting?
-+  A: Because it messes up the order in which people normally read text.
-+  Q: Why is top-posting such a bad thing?
-+  A: Top-posting.
-+  Q: What is the most annoying thing in e-mail?
-+
-+=E5=90=8C=E6=A7=98=E3=81=AB=E3=80=81=E8=BF=94=E4=BF=A1=E3=81=AB=E9=96=A2=
-=E4=BF=82=E3=81=AE=E3=81=AA=E3=81=84=E4=B8=8D=E8=A6=81=E3=81=AA=E5=BC=95=E7=
-=94=A8=E3=81=AF=E3=81=99=E3=81=B9=E3=81=A6=E5=89=8A=E3=81=A3=E3=81=A6=E3=81=
-=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82
-+=E3=81=9D=E3=81=86=E3=81=99=E3=82=8B=E3=81=93=E3=81=A8=E3=81=A7=E3=80=81=
-=E8=BF=94=E7=AD=94=E3=82=92=E8=A6=8B=E3=81=A4=E3=81=91=E3=82=84=E3=81=99=E3=
-=81=8F=E3=81=AA=E3=82=8A=E3=80=81=E6=99=82=E9=96=93=E3=81=A8=E5=AE=B9=E9=87=
-=8F=E3=82=92=E7=AF=80=E7=B4=84=E3=81=A7=E3=81=8D=E3=81=BE=E3=81=99=E3=80=82
-+=E8=A9=B3=E7=B4=B0=E3=81=AF=E6=AC=A1=E3=82=92=E5=8F=82=E7=85=A7=E3=81=97=
-=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84: http://daringfireball.net/20=
-07/07/on_top ::
-+
-+  A: No.
-+  Q: Should I include quotations after my reply?
-+
-+
-+=E8=90=BD=E8=83=86=E3=81=97=E3=81=AA=E3=81=84=E3=80=81=E3=81=9D=E3=81=97=
-=E3=81=A6=E6=80=A5=E3=81=8C=E3=81=AA=E3=81=84
-+--------------------------
-+
-+=E5=A4=89=E6=9B=B4=E3=82=92=E6=8A=95=E7=A8=BF=E3=81=97=E3=81=9F=E5=BE=8C=
-=E3=81=AF=E3=80=81=E8=BE=9B=E6=8A=B1=E5=BC=B7=E3=81=8F=E5=BE=85=E3=81=A3=E3=
-=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82=E3=83=AC=E3=83=93=E3=83=
-=A5=E3=83=BC=E3=82=A2=E3=81=AF=E5=BF=99=E3=81=97=E3=81=84=E4=BA=BA=E3=81=9F=
-=E3=81=A1=E3=81=A7=E3=81=82=E3=82=8A=E3=80=81
-+=E3=81=82=E3=81=AA=E3=81=9F=E3=81=AE=E3=83=91=E3=83=83=E3=83=81=E3=82=92=
-=E3=81=99=E3=81=90=E3=81=AB=E8=A6=8B=E3=82=89=E3=82=8C=E3=82=8B=E3=81=A8=E3=
-=81=AF=E9=99=90=E3=82=8A=E3=81=BE=E3=81=9B=E3=82=93=E3=80=82
-+
-+=E3=81=8B=E3=81=A4=E3=81=A6=E3=81=AF=E3=80=81=E3=83=91=E3=83=83=E3=83=81=
-=E3=81=8C=E4=BD=95=E3=81=AE=E3=82=B3=E3=83=A1=E3=83=B3=E3=83=88=E3=82=82=E3=
-=81=AA=E3=81=8F=E8=99=9A=E7=A9=BA=E3=81=B8=E6=B6=88=E3=81=88=E3=81=A6=E3=81=
-=84=E3=81=8F=E3=81=93=E3=81=A8=E3=82=82=E3=81=82=E3=82=8A=E3=81=BE=E3=81=97=
-=E3=81=9F=E3=81=8C=E3=80=81
-+=E7=8F=BE=E5=9C=A8=E3=81=AE=E9=96=8B=E7=99=BA=E3=83=97=E3=83=AD=E3=82=BB=
-=E3=82=B9=E3=81=AF=E3=81=9D=E3=82=8C=E3=82=88=E3=82=8A=E3=82=82=E5=86=86=E6=
-=BB=91=E3=81=AB=E6=A9=9F=E8=83=BD=E3=81=97=E3=81=A6=E3=81=84=E3=81=BE=E3=81=
-=99=E3=80=82=E6=95=B0=E9=80=B1=E9=96=93=E4=BB=A5=E5=86=85=E3=80=81
-+=E9=80=9A=E5=B8=B8=E3=81=AF 2=E3=80=9C3 =E9=80=B1=E9=96=93=E4=BB=A5=E5=86=
-=85=E3=81=AB=E3=82=B3=E3=83=A1=E3=83=B3=E3=83=88=E3=82=92=E5=8F=97=E3=81=91=
-=E5=8F=96=E3=82=8B=E3=81=AF=E3=81=9A=E3=81=A7=E3=81=99=E3=80=82=E3=81=9D=E3=
-=81=86=E3=81=AA=E3=82=89=E3=81=AA=E3=81=84=E5=A0=B4=E5=90=88=E3=81=AF=E3=80=
-=81
-+=E3=83=91=E3=83=83=E3=83=81=E3=82=92=E6=AD=A3=E3=81=97=E3=81=84=E5=A0=B4=
-=E6=89=80=E3=81=B8=E9=80=81=E3=81=A3=E3=81=9F=E3=81=8B=E7=A2=BA=E8=AA=8D=E3=
-=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82=E5=86=8D=E6=8A=
-=95=E7=A8=BF=E3=81=97=E3=81=9F=E3=82=8A=E3=83=AC=E3=83=93=E3=83=A5=E3=83=BC=
-=E3=82=A2=E3=81=AB
-+ping =E3=81=97=E3=81=9F=E3=82=8A=E3=81=99=E3=82=8B=E5=89=8D=E3=81=AB=E3=80=
-=81=E5=B0=91=E3=81=AA=E3=81=8F=E3=81=A8=E3=82=82 1 =E9=80=B1=E9=96=93=E3=81=
-=AF=E5=BE=85=E3=81=A3=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82=
-merge window =E3=81=AE
-+=E3=82=88=E3=81=86=E3=81=AA=E5=BF=99=E3=81=97=E3=81=84=E6=99=82=E6=9C=9F=
-=E3=81=AB=E3=81=AF=E3=80=81=E3=81=95=E3=82=89=E3=81=AB=E9=95=B7=E3=81=8F=E5=
-=BE=85=E3=81=A4=E6=96=B9=E3=81=8C=E3=82=88=E3=81=84=E5=A0=B4=E5=90=88=E3=82=
-=82=E3=81=82=E3=82=8A=E3=81=BE=E3=81=99=E3=80=82
-+
-+=E6=95=B0=E9=80=B1=E9=96=93=E5=BE=8C=E3=81=AB=E3=80=81subject line =E3=81=
-=AB "RESEND" =E3=82=92=E8=BF=BD=E5=8A=A0=E3=81=97=E3=81=A6=E3=80=81=E3=83=
-=91=E3=83=83=E3=83=81=E3=81=BE=E3=81=9F=E3=81=AF
-+=E3=83=91=E3=83=83=E3=83=81=E3=82=B7=E3=83=AA=E3=83=BC=E3=82=BA=E3=82=92=
-=E5=86=8D=E9=80=81=E3=81=97=E3=81=A6=E3=82=82=E6=A7=8B=E3=81=84=E3=81=BE=E3=
-=81=9B=E3=82=93::
-+
-+   [PATCH Vx RESEND] sub/sys: Condensed patch summary
-+
-+=E3=83=91=E3=83=83=E3=83=81=E3=81=BE=E3=81=9F=E3=81=AF=E3=83=91=E3=83=83=
-=E3=83=81=E3=82=B7=E3=83=AA=E3=83=BC=E3=82=BA=E3=81=AE=E4=BF=AE=E6=AD=A3=E7=
-=89=88=E3=82=92=E6=8A=95=E7=A8=BF=E3=81=99=E3=82=8B=E5=A0=B4=E5=90=88=E3=81=
-=AF=E3=80=81"RESEND" =E3=82=92
-+=E8=BF=BD=E5=8A=A0=E3=81=97=E3=81=AA=E3=81=84=E3=81=A7=E3=81=8F=E3=81=A0=
-=E3=81=95=E3=81=84=E3=80=82"RESEND" =E3=81=AF=E3=80=81=E5=89=8D=E5=9B=9E=E3=
-=81=AE=E6=8A=95=E7=A8=BF=E3=81=8B=E3=82=89=E4=B8=80=E5=88=87=E5=A4=89=E6=9B=
-=B4=E3=81=97=E3=81=A6=E3=81=84=E3=81=AA=E3=81=84
-+=E3=83=91=E3=83=83=E3=83=81=E3=81=BE=E3=81=9F=E3=81=AF=E3=83=91=E3=83=83=
-=E3=83=81=E3=82=B7=E3=83=AA=E3=83=BC=E3=82=BA=E3=82=92=E5=86=8D=E9=80=81=E3=
-=81=99=E3=82=8B=E5=A0=B4=E5=90=88=E3=81=AB=E3=81=AE=E3=81=BF=E4=BD=BF=E3=81=
-=84=E3=81=BE=E3=81=99=E3=80=82
---=20
-2.52.0
+ .../devicetree/bindings/net/onnn,s2500.yaml        |  67 +++
+ Documentation/networking/oa-tc6-framework.rst      |  76 +++
+ MAINTAINERS                                        |  13 +-
+ drivers/net/ethernet/Kconfig                       |  12 +-
+ drivers/net/ethernet/Makefile                      |   2 +-
+ drivers/net/ethernet/microchip/lan865x/lan865x.c   |  61 +-
+ drivers/net/ethernet/oa_tc6/Kconfig                |  16 +
+ drivers/net/ethernet/oa_tc6/Makefile               |   7 +
+ drivers/net/ethernet/{ => oa_tc6}/oa_tc6.c         | 476 ++++++++++------
+ drivers/net/ethernet/oa_tc6/oa_tc6_ptp.c           |  67 +++
+ drivers/net/ethernet/oa_tc6/oa_tc6_std_def.h       | 190 +++++++
+ drivers/net/ethernet/oa_tc6/oa_tc6_tstamp.c        | 202 +++++++
+ drivers/net/ethernet/onsemi/Kconfig                |  21 +
+ drivers/net/ethernet/onsemi/Makefile               |   7 +
+ drivers/net/ethernet/onsemi/s2500/Kconfig          |  22 +
+ drivers/net/ethernet/onsemi/s2500/Makefile         |   7 +
+ drivers/net/ethernet/onsemi/s2500/s2500_ethtool.c  | 354 ++++++++++++
+ drivers/net/ethernet/onsemi/s2500/s2500_hw_def.h   | 225 ++++++++
+ drivers/net/ethernet/onsemi/s2500/s2500_main.c     | 632 +++++++++++++++++++++
+ drivers/net/ethernet/onsemi/s2500/s2500_ptp.c      | 233 ++++++++
+ drivers/net/phy/dp83867.c                          |  11 +-
+ drivers/net/phy/microchip_t1s.c                    |  32 +-
+ drivers/net/phy/ncn26000.c                         |  63 +-
+ drivers/net/phy/phy_device.c                       |  75 +++
+ include/linux/oa_tc6.h                             |  36 ++
+ include/linux/phy.h                                |   6 +
+ 26 files changed, 2662 insertions(+), 251 deletions(-)
+---
+base-commit: 903db046d5579bef0ea699eae4b279dd6455fc9f
+change-id: 20260601-s2500-mac-phy-support-4f3ae920fb73
+
+Best regards,
+-- 
+Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
+
 
 
