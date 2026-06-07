@@ -1,153 +1,217 @@
-Return-Path: <linux-doc+bounces-91252-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91253-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 3zV6NpqxJWpIKgIAu9opvQ
-	(envelope-from <linux-doc+bounces-91252-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 07 Jun 2026 19:59:54 +0200
+	id PK5jEj/AJWp6LQIAu9opvQ
+	(envelope-from <linux-doc+bounces-91253-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 07 Jun 2026 21:02:23 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 69F1C651255
-	for <lists+linux-doc@lfdr.de>; Sun, 07 Jun 2026 19:59:54 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9622E651563
+	for <lists+linux-doc@lfdr.de>; Sun, 07 Jun 2026 21:02:22 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=Id3zNGSu;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91252-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91252-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	dkim=pass header.d=google.com header.s=20251104 header.b="pgRydl7/";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91253-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-91253-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=google.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id B02E53002B15
-	for <lists+linux-doc@lfdr.de>; Sun,  7 Jun 2026 17:59:53 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 30BF93011F1F
+	for <lists+linux-doc@lfdr.de>; Sun,  7 Jun 2026 19:01:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C756F31E83B;
-	Sun,  7 Jun 2026 17:59:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1BDC331815D;
+	Sun,  7 Jun 2026 19:01:40 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-dl1-f42.google.com (mail-dl1-f42.google.com [74.125.82.42])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C18A318139;
-	Sun,  7 Jun 2026 17:59:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 991031E7C12
+	for <linux-doc@vger.kernel.org>; Sun,  7 Jun 2026 19:01:37 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780855189; cv=none; b=rsSzPxkY3920P+yoRs00pfqOlEV01wEX1YK+zDuq2QeMdb//UBlsCAW31S3ZWoAYOBo4tAWbMPeSFm5i0fawQVTJum2QN8tdb7FvLdj1sab9snuErnlYZTXPhP70amMDiVW/gmo79viZc6UeDrY/QdrSb1mbn33H+nTQEq0MaSw=
+	t=1780858900; cv=none; b=DVo+R3fvVFZmGSHxJ3cQwvx3Oz3+5Wj/TXjghVf399KeVET4+5oHYrUY5hUvoML1RMKmdrp1aS9lg9r5ham8rZBEJhisvlSTprUepf30nBWEAaANi6Ng8g3uRmOz1rBTuSYKxPJPl+ckQ17gOw0/bj70FUCODXwxfDKKQTIEBkI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780855189; c=relaxed/simple;
-	bh=XoYLj0Ks5Cbq7GCMZ+I0nLEg0Pf+1xnLk/UL5A3R9EM=;
-	h=MIME-Version:Content-Type:Subject:From:To:Cc:In-Reply-To:
-	 References:Date:Message-Id; b=h+eBWHHg/vcF/oP7WHRWjc/ZJWWiZK3RBoI1AVPbh/KUuqIR8BzpCRIjWPqRw1hEQHF2hzTMWq+ZEAxWdFL8/nW29ahCR5kHZSToWom7hQBlqTCfBgjPo0P7iRshCDG7vE7Y3PA63l1NLoby0iyarA3w0XC5yPdevi0wVzBgOg4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Id3zNGSu; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A78311F00893;
-	Sun,  7 Jun 2026 17:59:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1780855186;
-	bh=p13qmOJLATrPkWrp+bXLKA89GU/CFXpglcWbzZhweFA=;
-	h=Subject:From:To:Cc:In-Reply-To:References:Date;
-	b=Id3zNGSuQQrCyIBS1HT+yPq9MzOB1URA4ipc2w9gwWuXsYJn+RSzuj+IRWSYArMz/
-	 r2bAdENTeVv0i296ZT9xYlRvUGSy/MYOg6/1g60IR+s+L+Z+6wjl3Wlv27sFTA+ZHa
-	 g+ku3trRQZyP9yzZcg0Vuyx4YrhE77Uy3qJ55T6Hv3trt2dCAmenIsRF5fwiIv5biq
-	 iRzVn6CToE8JnrsJWUN9g0yy2GhPrzhWdQIknmaM8x+miwJ8IiaZm8ScgYlklx3qpF
-	 ysbiSHI8rHT/3stcctQKFTJKJtX9u/iaa+55KrYHvQ9k1KsqRNPGZym/EjN5c38y0t
-	 HQeZuTcMbavag==
+	s=arc-20240116; t=1780858900; c=relaxed/simple;
+	bh=8TXfEMMV2uWnmskY16B5og0NVW5Rz797jmeczmEHw4s=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=DeC+rO0MB8tuoy7n3QCsmpfwuXQUdndlsEe6w9zLnTiqDv1Gjc7jFsxFnpy1SUd5287PY1iAQijpchNgmK2KJf99jrF0QE5ujFS2sNxq15gkM1L3ITwZ5hgAhfSHWEEgH3YH9SUG3jk/QmyKO75dCCCFkR6DnZQtUU+7W45FWzE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=pgRydl7/; arc=none smtp.client-ip=74.125.82.42
+Received: by mail-dl1-f42.google.com with SMTP id a92af1059eb24-1380104f31eso19924c88.0
+        for <linux-doc@vger.kernel.org>; Sun, 07 Jun 2026 12:01:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20251104; t=1780858897; x=1781463697; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=7bxnEjA/C3zuxdR051u14W5wOLjOO10IAKaN4C2htfQ=;
+        b=pgRydl7/v6qxi4kfAI8pxM8jtQMkltAiCed1YgfNGv5z3zqCKVVezTcwFJasClqhFZ
+         8SgYwMwaszwJ/Ef+zfADWDwRw7HsKqjHXwbN53uisDybAJFZ4YE/glzBOqj0yZ61DbFd
+         ypIXfiFAogGl6i8PiLet9Ij5NGwK7q6D0rxupldOrqbYtNsFChFydkCq2XARxM+kiZnT
+         8vvGdx5XlRh/Npilx+iVocF4cf97R9kUoSyYAvOXJrIopREX0JCq/SWk/qZFa5hbbCoe
+         FkX8ThHU+FaIOqALNzYvHAaeOp030QdN8H+D5GuxEHsq0mtyOQxvYpoi6pNFTGnSWxbv
+         mERQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780858897; x=1781463697;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=7bxnEjA/C3zuxdR051u14W5wOLjOO10IAKaN4C2htfQ=;
+        b=Za6On6e7XDsahuj67BarVo189pwsFzlZzpwdrFJivpA0DOzZhnkqwyk/7LFn69XeVS
+         GOyacasRNIg44BAja8fVHFMzVT4nb8+VyV4mvEBzO4w8D/Hs9RHIRU9ZgnbAnmnSJTdX
+         jtGS+jTRIpLYOVeM7GUi4DCKbskbJ2gNYRP8hs+lu4W7d9Yf9QBcy3uso2nCde22w0UH
+         AomAy12EktII6i0amAomUOAEl7Zr40iIxqpmEHV2vLKJD5QNXg7Xu8eCGDpOVvIcpQnm
+         4RHo/S7EM63r/obXimCNu9hEbthPuGe652zsZYZFu2K/iR3sW0C9mYD/1ctKdhiSXcgz
+         o2lg==
+X-Forwarded-Encrypted: i=1; AFNElJ/25Plu7cPXOOdxO5tyAb7yTxdJ2fk0yGqZ/h909KdY/xYou1s6vROjUMY0w6vti6VSI7bTPVQB/C0=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx/BQpGmq1Aevx+nv71A/UnHVmv/rkZcjQa3e/PGSzOkZ5SqiRG
+	qXXG62ZZ1aUb6XL4wK0J2JXJDsjVrvXsYAvKRDUblOP6737713UmhemcDy70BoLMnQ==
+X-Gm-Gg: Acq92OEPD1mp5f0dqDgE+yIJdY7fNDbp7q/etT8Eh9eRbpCy+mcB0j2uw7m34xCd6/j
+	qxWTw8eL3/i+1TJMUvM1nKOSN3m4knyLcSjFHWIVRTzaixpOm7tMdZg/8KeWmQdtR+iRgNYRSBX
+	ilHHu0juke82lWj9EpIkUN1qL7hvGrQ/wDtZzUxRy6VlEPPAPw62wc/DepSdprOlnLysprGK2Sz
+	N9VUagVn68WBhMg4lALMvCC/dh3LisarG3awWj/l3eVPW9BQI/yEvwTpTT9wEwT/QMJ7E3YYLmR
+	g94gN37veuOLv/Log9ZJuDCbfeNhYdc8WvNrI4rXQa5zXnCBbcmXlcTFRiyZD19SkVk7XYmN3sA
+	b7c/wO5ZSm0JlQnozdcCPK3tigMrPCE4hSazENgCJbAsw6rlWlmZlxT/K6eLkOuKrRutv6NLp94
+	ZbkvYwtVGvyFHC2HY/onZKyf8ZvbbrRH8TNvuR+OTRcBvNdY7f45kYBS8xhZ0cM43/6x0zpTk=
+X-Received: by 2002:a05:7022:23a2:b0:138:888:32de with SMTP id a92af1059eb24-13808883386mr174298c88.30.1780858894965;
+        Sun, 07 Jun 2026 12:01:34 -0700 (PDT)
+Received: from google.com (199.255.142.34.bc.googleusercontent.com. [34.142.255.199])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3074dea8e76sm13773740eec.18.2026.06.07.12.01.29
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 07 Jun 2026 12:01:34 -0700 (PDT)
+Date: Sun, 7 Jun 2026 19:01:25 +0000
+From: Pranjal Shrivastava <praan@google.com>
+To: David Matlack <dmatlack@google.com>
+Cc: kexec@lists.infradead.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+	linux-pci@vger.kernel.org,
+	Adithya Jayachandran <ajayachandra@nvidia.com>,
+	Alexander Graf <graf@amazon.com>,
+	Alex Williamson <alex@shazbot.org>,
+	Bjorn Helgaas <bhelgaas@google.com>, Chris Li <chrisl@kernel.org>,
+	David Rientjes <rientjes@google.com>,
+	Jacob Pan <jacob.pan@linux.microsoft.com>,
+	Jason Gunthorpe <jgg@nvidia.com>, Jonathan Corbet <corbet@lwn.net>,
+	Josh Hilke <jrhilke@google.com>,
+	Leon Romanovsky <leonro@nvidia.com>, Lukas Wunner <lukas@wunner.de>,
+	Mike Rapoport <rppt@kernel.org>, Parav Pandit <parav@nvidia.com>,
+	Pasha Tatashin <pasha.tatashin@soleen.com>,
+	Pratyush Yadav <pratyush@kernel.org>,
+	Saeed Mahameed <saeedm@nvidia.com>,
+	Samiullah Khawaja <skhawaja@google.com>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Vipin Sharma <vipinsh@google.com>, William Tu <witu@nvidia.com>,
+	Yi Liu <yi.l.liu@intel.com>
+Subject: Re: [PATCH v6 07/12] PCI: Refactor matching logic for pci_dev_acs_ops
+Message-ID: <aiW_M7y0fFwLN84G@google.com>
+References: <20260522202410.3104264-1-dmatlack@google.com>
+ <20260522202410.3104264-8-dmatlack@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [RFC v1 1/9] kho: split out radix tree tracker into
- kho_radix.c
-From: Mike Rapoport <rppt@kernel.org>
-To: Pasha Tatashin <pasha.tatashin@soleen.com>
-Cc: Mike Rapoport <rppt@kernel.org>, linux-kselftest@vger.kernel.org, 
- shuah@kernel.org, akpm@linux-foundation.org, linux-mm@kvack.org, 
- skhan@linuxfoundation.org, linux-doc@vger.kernel.org, jasonmiu@google.com, 
- linux-kernel@vger.kernel.org, corbet@lwn.net, ran.xiaokai@zte.com.cn, 
- kexec@lists.infradead.org, pratyush@kernel.org, graf@amazon.com
-In-Reply-To: <aiWYZhoSOAruIIM3@plex>
-References: <20260605033235.717351-1-pasha.tatashin@soleen.com>
- <20260605033235.717351-2-pasha.tatashin@soleen.com>
- <178083348873.1648214.11020626647820932506.b4-review@b4>
- <aiWYZhoSOAruIIM3@plex>
-Date: Sun, 07 Jun 2026 20:59:40 +0300
-Message-Id: <178085518028.1648214.13339471022594901667.b4-reply@b4>
-X-Mailer: b4 0.15.2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260522202410.3104264-8-dmatlack@google.com>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_FROM(0.00)[bounces-91253-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:dmatlack@google.com,m:kexec@lists.infradead.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-pci@vger.kernel.org,m:ajayachandra@nvidia.com,m:graf@amazon.com,m:alex@shazbot.org,m:bhelgaas@google.com,m:chrisl@kernel.org,m:rientjes@google.com,m:jacob.pan@linux.microsoft.com,m:jgg@nvidia.com,m:corbet@lwn.net,m:jrhilke@google.com,m:leonro@nvidia.com,m:lukas@wunner.de,m:rppt@kernel.org,m:parav@nvidia.com,m:pasha.tatashin@soleen.com,m:pratyush@kernel.org,m:saeedm@nvidia.com,m:skhawaja@google.com,m:skhan@linuxfoundation.org,m:vipinsh@google.com,m:witu@nvidia.com,m:yi.l.liu@intel.com,s:lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[rppt@kernel.org,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	FORGED_RECIPIENTS(0.00)[m:pasha.tatashin@soleen.com,m:rppt@kernel.org,m:linux-kselftest@vger.kernel.org,m:shuah@kernel.org,m:akpm@linux-foundation.org,m:linux-mm@kvack.org,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:jasonmiu@google.com,m:linux-kernel@vger.kernel.org,m:corbet@lwn.net,m:ran.xiaokai@zte.com.cn,m:kexec@lists.infradead.org,m:pratyush@kernel.org,m:graf@amazon.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[praan@google.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[28];
+	DKIM_TRACE(0.00)[google.com:+];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-91252-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rppt@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FROM_NEQ_ENVFROM(0.00)[praan@google.com,linux-doc@vger.kernel.org];
+	MISSING_XM_UA(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 69F1C651255
+X-Rspamd-Queue-Id: 9622E651563
 
-On 2026-06-07 16:20:50+00:00, Pasha Tatashin wrote:
-> On 06-07 14:58, Mike Rapoport wrote:
+On Fri, May 22, 2026 at 08:24:05PM +0000, David Matlack wrote:
+> Refactor the logic to match devices to pci_dev_acs_ops by factoring out
+> the loop and device matching into its own routine. This eliminates some
+> duplicate code between pci_dev_specific_enable_acs() and
+> pci_dev_specific_disable_acs_redir(), and will also be used in a
+> subsequent commit to check if a device requires device-specific
+> enable_acs() during a Live Update.
 > 
-> > On Fri, 05 Jun 2026 03:32:27 +0000, Pasha Tatashin <pasha.tatashin@soleen.com> wrote:
-> > 
-> > It's radix tree data structure implementation, kho memory tracker is it's
-> > user. Please rephrase to keep the semantics clear.
+> No functional change intended.
 > 
-> Yeap, I will update it.
+> Signed-off-by: David Matlack <dmatlack@google.com>
+> ---
+>  drivers/pci/quirks.c | 50 ++++++++++++++++++--------------------------
+>  1 file changed, 20 insertions(+), 30 deletions(-)
 > 
-> > I don't see much value in moving kexec_handover.o to a separate line,
-> > btw, the same is true for luo_core.o, but it's not important enough to
-> > change.
-> 
-> This is purely for consistency. I wanted to use the exact same style in 
-> the Makefile instead of having two different ways of declaring the 
-> object lists.
-> 
-> This:
->     luo-y :=                                \
->             luo_core.o                      \
->             luo_file.o                      \
->             luo_flb.o                       \
->             luo_session.o
-> 
->     kho-y :=                                \
->             kexec_handover.o                \
->             kho_radix.o                     \
->             kho_block.o                     \
->             kho_vmalloc.o
- 
-I mean this:
 
-luo-y := luo_core.o		\
-	luo_file.o		\
-	luo_flb.o		\
-	luo_session.o
- 
-kho-y := kexec_handover.o	\
-	kho_radix.o		\
-	kho_block.o		\
-	kho_vmalloc.o
+[...]
 
+>  } pci_dev_acs_ops[] = {
+>  	{ PCI_VENDOR_ID_INTEL, PCI_ANY_ID,
+> +	    .match = pci_quirk_intel_pch_acs_match,
+>  	    .enable_acs = pci_quirk_enable_intel_pch_acs,
+>  	},
+>  	{ PCI_VENDOR_ID_INTEL, PCI_ANY_ID,
+> +	    .match = pci_quirk_intel_spt_pch_acs_match,
+>  	    .enable_acs = pci_quirk_enable_intel_spt_pch_acs,
+>  	    .disable_acs_redir = pci_quirk_disable_intel_spt_pch_acs_redir,
+>  	},
+>  };
+>  
+> -int pci_dev_specific_enable_acs(struct pci_dev *dev)
+> +static const struct pci_dev_acs_ops *pci_dev_acs_ops_get(struct pci_dev *dev)
+>  {
+>  	const struct pci_dev_acs_ops *p;
+> -	int i, ret;
+> +	int i;
+>  
+>  	for (i = 0; i < ARRAY_SIZE(pci_dev_acs_ops); i++) {
+>  		p = &pci_dev_acs_ops[i];
+> @@ -5481,33 +5475,29 @@ int pci_dev_specific_enable_acs(struct pci_dev *dev)
+>  		     p->vendor == (u16)PCI_ANY_ID) &&
+>  		    (p->device == dev->device ||
+>  		     p->device == (u16)PCI_ANY_ID) &&
+> -		    p->enable_acs) {
+> -			ret = p->enable_acs(dev);
+> -			if (ret >= 0)
+> -				return ret;
+> -		}
+> +		    p->match(dev))
+> +			return p;
 
+Nit:
+Should we check if (p->match != NULL) like we check for p->enable_acs &
+p->disable_acs_redir(). 
+
+Otherwise, it seems like we're mandating the existence of a match op in
+the pci_dev_acs_ops here? Today, we just have two Intel entries in that
+array, both of which need the match op. However, AFAICT, it shouldn't be
+mandatory for future SoCs that might only need a simple vid + devid match
+
+[...]
+
+with that nit:
+Reviewed-by: Pranjal Shrivastava <praan@google.com>
+
+Thanks,
+Praan
 
