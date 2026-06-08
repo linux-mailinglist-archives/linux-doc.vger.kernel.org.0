@@ -1,325 +1,123 @@
-Return-Path: <linux-doc+bounces-91351-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91353-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id +FtIFY2aJmpNZgIAu9opvQ
-	(envelope-from <linux-doc+bounces-91351-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 12:33:49 +0200
+	id CgIlJ3yjJmpTaQIAu9opvQ
+	(envelope-from <linux-doc+bounces-91353-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 13:11:56 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56BE7655220
-	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 12:33:48 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id EA9E765587B
+	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 13:11:55 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=kgVwy8zh;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91351-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-91351-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=dzoGf9cw;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91353-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91353-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id B46163005333
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Jun 2026 10:26:21 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 6FB0E3075139
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Jun 2026 10:47:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 530EB383326;
-	Mon,  8 Jun 2026 10:26:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AEB862701DC;
+	Mon,  8 Jun 2026 10:47:27 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0333F336891;
-	Mon,  8 Jun 2026 10:26:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A96BB23BD17;
+	Mon,  8 Jun 2026 10:47:26 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780914380; cv=none; b=FL40He6v4O30I82OkdLYUPvMSUvmpMIBhq5SPgVXtufV2E1vXkFqnAtQGCWLv84EHD2aN0u5SBD+F3lTi0kLPzWAL5n13nJZDXKRvcM2qSUhs2Wtou21pns+Dsf3wZ9AD4x4UYMQu+SeLJkacleoVPaphitE+3ze7RNoATOXM3U=
+	t=1780915647; cv=none; b=IM/A4GJI6TcGjNFAEZ90DjelQguRt/uwXLDPrjEedReXNxBPmw+litzE1Ihs/OoPWAzLZ/b8JUYfbBcW8EVpTl+YbExYx4YcNTgnfxN+obQQ9Yr6ikS4UzM7XCLyde/fQvTfQ0uZZEwMqY/DwGgElAEpUNoA0TH/S44qbFQkaFs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780914380; c=relaxed/simple;
-	bh=CkWGaUYG20dc9W69h9S8TH3b+CnKcai89evnLGg19Kg=;
-	h=MIME-Version:Content-Type:Subject:From:To:Cc:In-Reply-To:
-	 References:Date:Message-Id; b=uQtHINUXnV0CW4dTlnrWgn+Nkz3vKJUHn+nyYMwzRU/tX4XpgpAze9RQt7g+/UkjJc7nk8FA1ef+FP+7iwHEUfthCFYu4gOX1hWKp2ly4GRCYJGdbZBd/Yz8q0/bj1It8DksK9HBnnk4FAMuWUwq2Fe18Yv/1aJC612ZauEOwtE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kgVwy8zh; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 817231F00893;
-	Mon,  8 Jun 2026 10:26:15 +0000 (UTC)
+	s=arc-20240116; t=1780915647; c=relaxed/simple;
+	bh=3LJI14/oTGPdDbY/+l/drcqvf5x9dKCf/iw9hnDp/P0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ev+2STtUIstcjDT9bncMLnS9fHi28KFCP59G9zFls6LhqDoNXol9NSQh8s/7eu4msxaY8LTa5Alba72aakVqwpnftH7c+ntYZbGPlXQEkQt3PX8raPqoanKUh6cVI+CSyBmJdc5LSJ3HmH6NxyKQTqhwTkkb3xUd/Cs/t6JvnaA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dzoGf9cw; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 581D61F00893;
+	Mon,  8 Jun 2026 10:47:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1780914378;
-	bh=i1lroZnoIaLu1CMzf9kEVvvwG+CcQpGu2by6hNtmkow=;
-	h=Subject:From:To:Cc:In-Reply-To:References:Date;
-	b=kgVwy8zhdyQca1BKeV6lxRurKUs5PF/8H4Yr4L5huRfNMVNH0YwhhuUCzuYXd8mv5
-	 CbdlFVXFX6I/7m+gL8+0kNcyQcQjvwKtuHMu0mLoOg/WCDyzS4FP4eofmRSfoYr26E
-	 5G70YuumsWXfdUFXHkyLauQKAYGEHDz7k8EFeRkSVnjLRYqBBk4c0116AjVCJbRlhw
-	 yJwqLAndgemOL8eT8gkYVqdzaqyWgZkUFJylihyfv9UNkEh9SyU3HKx8xGdLGn7Sfs
-	 4cowKgJmxIYsghmlUWcKOhA5iubapbStqLCBKdl/M0Iblw6O6f1fOi+PNSk9wK6Wd9
-	 T17EaljA2Rt0w==
+	s=k20260515; t=1780915646;
+	bh=fSxp9tsKBtq0Ur2KMS40JrgZVEMuE+V13M00qcZGgDQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=dzoGf9cwSnGlvLzqm4lLQZbmkl/r7xoTtz8Me/aHRsMbKbb64zliXhkbHgnhQhSSo
+	 3MYZy1Dg8l3t06xZQQNYZcZjvSwiM8ISdvHsLuDjjEw9o8XUftOAjnMzQwsHL4o/m9
+	 9HW29iaiQNLSXa6pNAKlPIC81M4o3DREjILo1E8CEwj3rnH+25/QGYNZ2Zlf9a+XVg
+	 NllC2rCUnzWFJKT8vPXusl4SCJLuL0HbJeJDh5IiOt77R+uDStL+1oGvayaMMJh94P
+	 MMBodhCG6xa3sbzH7K380jBh/OWLCa63CBTi9bD/dKVj0DU1gOo4WielDmENgQG76W
+	 6wou5g8FD/ucQ==
+Date: Mon, 8 Jun 2026 12:47:22 +0200
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Ziming Zhu <zmzhu0630@163.com>
+Cc: Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+	linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, Ziming Zhu <ziming.zhu@silergycorp.com>
+Subject: Re: [PATCH 1/3] dt-bindings: hwmon: pmbus: Add bindings for Silergy
+ SQ24860
+Message-ID: <20260608-sensible-cyber-shark-6fffd0@quoll>
+References: <20260605020450.89638-1-zmzhu0630@163.com>
+ <20260605020450.89638-2-zmzhu0630@163.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [RFC v1 0/9] kho: granular compatibility and header decoupling
-From: Mike Rapoport <rppt@kernel.org>
-To: Pasha Tatashin <pasha.tatashin@soleen.com>
-Cc: Mike Rapoport <rppt@kernel.org>, linux-kselftest@vger.kernel.org, 
- shuah@kernel.org, akpm@linux-foundation.org, linux-mm@kvack.org, 
- skhan@linuxfoundation.org, linux-doc@vger.kernel.org, jasonmiu@google.com, 
- linux-kernel@vger.kernel.org, corbet@lwn.net, ran.xiaokai@zte.com.cn, 
- kexec@lists.infradead.org, pratyush@kernel.org, graf@amazon.com
-In-Reply-To: <aiVp5RlbWRz5VnPB@plex>
-References: <20260605033235.717351-1-pasha.tatashin@soleen.com>
- <178083348872.1648214.17778188633648887952.b4-review@b4>
- <aiVp5RlbWRz5VnPB@plex>
-Date: Mon, 08 Jun 2026 13:26:12 +0300
-Message-Id: <178091437240.1648214.10761111570005003901.b4-reply@b4>
-X-Mailer: b4 0.15.2
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260605020450.89638-2-zmzhu0630@163.com>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:pasha.tatashin@soleen.com,m:rppt@kernel.org,m:linux-kselftest@vger.kernel.org,m:shuah@kernel.org,m:akpm@linux-foundation.org,m:linux-mm@kvack.org,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:jasonmiu@google.com,m:linux-kernel@vger.kernel.org,m:corbet@lwn.net,m:ran.xiaokai@zte.com.cn,m:kexec@lists.infradead.org,m:pratyush@kernel.org,m:graf@amazon.com,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:zmzhu0630@163.com,m:linux@roeck-us.net,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-hwmon@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:ziming.zhu@silergycorp.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[rppt@kernel.org,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
+	FREEMAIL_TO(0.00)[163.com];
+	FORGED_SENDER(0.00)[krzk@kernel.org,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[12];
 	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-91351-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rppt@kernel.org,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-91353-lists,linux-doc=lfdr.de];
 	DKIM_TRACE(0.00)[kernel.org:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[krzk@kernel.org,linux-doc@vger.kernel.org];
+	TO_DN_SOME(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,soleen.com:email]
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,quoll:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 56BE7655220
+X-Rspamd-Queue-Id: EA9E765587B
 
-On 2026-06-07 13:43:09+00:00, Pasha Tatashin wrote:
-> On 06-07 14:58, Mike Rapoport wrote:
+On Fri, Jun 05, 2026 at 10:04:48AM +0800, Ziming Zhu wrote:
+> From: Ziming Zhu <ziming.zhu@silergycorp.com>
 > 
-> > On Fri, 05 Jun 2026 03:32:26 +0000, Pasha Tatashin <pasha.tatashin@soleen.com> wrote:
-> > 
-> > Hi,
-> > 
-> > 
-> > I'd keep vmalloc where it is, it's more of a memory preservation primitive
-> > rather than a data structure of it's own. The data structure it uses is an
-> > implementation detail.
+> Add devicetree binding documentation for the Silergy SQ24860 eFuse.
 > 
-> kho vmalloc is absolutely a data structure. KHO core only provides the
-> basic handover mechanism (FDT nodes, physical memory ranges). vmalloc
-> is a structured representation on top of KHO, and should provide its own
-> versioned ABI.
+> The device is a PMBus hardware monitoring device which reports voltage,
+> current, power, and temperature telemetry. The board-specific IMON
+> resistor value is described with silergy,rimon-micro-ohms.
 
-kho_preserve_vmalloc() has the same semantics as kho_preserve_folio().
-It's not intended to be used as a data structure. The data structure is
-an implementation detail unlike with kho_block and kho_radix_tree that
-are intended to be used as data structures and expose clear data
-structure APIs.
+How many versions are you planning to send on the same day?
 
-Yes, vmalloc should have versioning, but that does not mean it must move
-to different files.
-
-And, btw, moving KHOSER_PTR() infra along with vmalloc is wrong. It was
-my oversight that I didn't insist on using it for most of the
-serializeable pointers instead of open coded
-virt_to_phys()/phys_to_virt(). We need to fix it.
-
-> If we change any of the vmalloc serialized structures (like kho_vmalloc,
-> kho_vmalloc_chunk, or kho_vmalloc_hdr), then vmalloc won't work and
-> compatibility will break.
-> 
-> Core KHO does not need vmalloc; nothing in kexec_handover.c uses it.
-> 
-> Instead, vmalloc has external customers:
-> - memfd (uses it to preserve serialized folio metadata)
-> - KHO test suite in lib/test_kho.c (uses it to preserve physical address arrays)
-
-Following this logic, kho_presrve_folio() should be moved out because
-it's not used by KHO but has external customers. And radix tree should
-forever remain in kexec_handover.c because KHO uses it ;-)
-
-> > Let's minimize the churn where possible for the sake of git blame and
-> > backports.
-> 
-> It is much better to do the right cleanups now while KHO is young. Once more
-> subsystems are added, this refactoring will be twice as hard. Modularizing the
-> code now guarantees a simpler, safer, and scalable design. Placing each data
-> structure in its own file gives us code that is easier to maintain, review, and
-> less prone to bugs.
-
-dependencies
-> > that justify small headers for each two functions and netiher
-> > linux/kexec_handover.h nor linux/kho/abi/kexec_handover.h are that long
-> > to start splitting them.
-> 
-> External users only need to include the headers they actually use. For
-> example, LUO shouldn't have to pull vmalloc or radix tree KHO
-> declarations, and memfd does not need block.
-> 
-> From a maintenance point of view, it is much easier to catch ABI
-> changes when the file with the appropriate version has been changed,
-> and most likely the version of that file should be updated. If a single
-> header contains compatibility versions for several different data
-> structures, it is easier to miss the correct version update.
-
-No matter in what files the definition lives, someone can forget to
-update version and we may miss it during review.
-
-Would be better to spend this time and energy to add kho-specific prompt
-to LLM review to catch such issues ;-)
- 
-> Since we are splitting the source files (like kho_radix.c and
-> kho_vmalloc.c), the headers should logically follow the same
-> modularity.
- 
-They could. Doesn't mean they have to.
-
-> > I agree that we should decouple versioning of these components from the
-> > global KHO versioning.
-> > Can't say I agree with the way you propose to do it.
-> > 
-> > I don't like that each user of a KHO component should include that
-> > component version in its own version string (or whatever it may become
-> > later).
-> > 
-> > It requires ABI headers update each time a user decides to add a new
-> > data structure and worse when there is a change to that data structure.
-> > It creates coupling of the data structure user with its particular
-> > version and just looks ugly IMHO.
-> 
-> It is actually the opposite.
-> 
-> If a user adds a new data structure, that new data structure will have
-> its own compatibility version. Instead of the current approach where
-> the global version string needs to be updated, only the new version
-> string would be added.
-> 
-> Also, if someone updates their code to use the new data structure, their
-> compatibility string is going to be updated anyway, as part of using
-> the data structure requires including the dependency in their
-> compatibility.
-
-Sorry I wasn't clear. I agree that kho_vmalloc, block and radix tree
-should have their own versioning rather than rely on global KHO version.
-
-What I don't like in your proposal is mixing versioning of a component
-with its dependencies.
-
-I think that versioning should be completely local to each component.
-LUO should not care about kho_block "on wire" layout. This should be
-encapsulated in kho_block.
-
-> Backward compatibility is not in scope at the moment, but we can make
-> the version parsing more granular in the future.
-> 
-> Instead of a simple strncmp(), we can introduce a standard callback
-> interface for data structures. Each data structure implementation would
-> implement this interface, and we would pass the parsed version string
-> to the data-structure-specific version check.
-
-Backward compatibility will be in scope sooner or later and string
-parsing is surely not the way to deal with multiple versions.
-
-How do you suggest to represent support for multiple versions?
-"luo-v2;luo-v3;block-v2;block-v3;block-v4"?
-
-> > Or, say, we add support to kmalloc() and use it in kho_block.
-> > Then we'd have to add kmalloc() versioning to all kho_block users, right?
-> 
-> I was thinking about this. Since we don't have examples of data
-> structures depending on each other right now, I simply made sure
-> there are no duplicates in the compatibility strings.
-> 
-> If data structures have interdependencies in the future, we can easily
-> remove this uniqueness restriction. The users of block will still
-> include the block compatibility string (which automatically includes
-> kmalloc), and if user also depends on kmalloc, they will include it
-> as well.
-> 
-> > I think the versioning of each component should be handled by ->restore()
-> > of that component. If it sees an incompatible version in the preserved
-> > data, it returns an error. The versions can be stored e.g. in the base KHO
-> > fdt.
-> 
-> Hm, I think, checking compatibility inside ->restore() of each component may be
-> too late in the boot sequence.
->
-> By checking the composite compatibility strings upfront (before invoking
-> the actual restore/retrieve callbacks), we can guarantee that the entire
-> state configuration is fully compatible. If any mismatch is found, we
-> can cleanly abort the live update.
-
-If a ->restore() returned an error (for any reason) we anyway need to
-reboot, don't we? 
-
-What do we do if memfd discovered incompatibility, but, say hugetlb
-global state was already restored?
-
-If you really want to run the compatibility check upfront, we need a
-mechanism for that. And that should probably happen even before
-kho_mem_init().
-
-> Additionally, keeping the versioning managed via composite strings on the
-> serialized data and registered handlers keeps the KHO core completely
-> decoupled from individual component ABIs, avoiding the need to bloat the
-> base KHO FDT with subsystem-specific versions.
-
-Actually FDT "compatible" handles versioning nicer than composite strings
-You can have
-
-	compatible="kho-v4", "vmalloc-v1", "radix-v1", "block-v2";
-
-and check fdt_node_check_compatible("vmalloc-v1") for vmalloc and
-fdt_node_check_compatible("block-v2") for block.
-
-And we wouldn't need to reimplement string parsing ;-)
-
-But yeah, I do see value of making components versioning and KHO global
-versioning independent. I just don't like composite strings and I don't
-like mixing versioning with dependencies.
-
-Since we are moving from FDT for the most things, version should become
-a number rather than a string and version compatibility should be
-independently verified by each component.
-Then dependencies between components will remain at API level rather
-than brought into the ABI.
-
-If you think ->restore() is too late for compatibility check, we should
-work on a mechanism for upfront compatibility verification.
-
-> > > 5. Adds a KUnit test suite to verify that the composite compatibility
-> > 
-> > Without "composite compatibility strings" we don't need to care about
-> > them "remaining unique and sorted in alphabetical order".
-> 
-> These are not strict runtime requirements; they are simply there to enforce
-> code cleanliness and prevent human errors like accidental duplicates or
-> mismatched orders.
-> 
-> Even with a simple strncmp(), it works perfectly fine as long as the
-> strings match exactly. If the uniqueness or sorting constraints are too
-> strict, they can easily be removed.
-> 
-> In the future, we can transition to a more sophisticated version checker
-> that parses the composite string into individual subsystem version tokens
-> and verifies them one-by-one, rather than relying on a strict literal
-> strcmp() string comparison.
-> 
-> > The need for this test alone is already a red flag ;-)
-> 
-> I will remove test ;-)
-
-It will not remove the red flags ;-)
+Best regards,
+Krzysztof
 
 
