@@ -1,178 +1,274 @@
-Return-Path: <linux-doc+bounces-91316-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91317-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id qmrAEhtvJmrbWQIAu9opvQ
-	(envelope-from <linux-doc+bounces-91316-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 09:28:27 +0200
+	id 0XbIKwhwJmr8WQIAu9opvQ
+	(envelope-from <linux-doc+bounces-91317-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 09:32:24 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 553F7653891
-	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 09:28:25 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0FAA26538F0
+	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 09:32:24 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linux.dev header.s=key1 header.b=JpHaj0hz;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91316-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-91316-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=linux.dev;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b="iWU1n/1v";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91317-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91317-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id BECB630013B6
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Jun 2026 07:28:16 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id A412F301ECC3
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Jun 2026 07:29:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 19BCC38F938;
-	Mon,  8 Jun 2026 07:28:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6D73638E8D4;
+	Mon,  8 Jun 2026 07:29:46 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-185.mta0.migadu.com (out-185.mta0.migadu.com [91.218.175.185])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4337C318EFF;
-	Mon,  8 Jun 2026 07:28:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 45F443358DA;
+	Mon,  8 Jun 2026 07:29:45 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780903694; cv=none; b=q8z8N1tEZ6xITJ6yGFNEMoyCLR3X2W8HjkO/Nlg5gbzkMuvwALYAKpqQVEuzc0GXIldWuSNqEU/XgIF3hM7BMpA1+80DEAkbLhYomVcyIcFD13jl/kpqaSwnjFCwSzsI2mp9c2i4VYWsrBQNNv5y36z9/JApT8TM+cSt/05KYM8=
+	t=1780903786; cv=none; b=UWTxRO1LBER2CFYpvp4PHJBRZAMVRgTJZwwmHRBnvzW21yJ3mIjQPDT+RAvE+b1mj/Ooeogkf87K0+qjZXAKDVMLEswk2BIxS+3wBGqPTCr17IrHK249FumAKaJKXS0UTaCwo2+enUsYonhWqop/LcZyNj9T2NQi7IQQScNPBuI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780903694; c=relaxed/simple;
-	bh=o+UEQbg6AU+TfmK805SP5EpbQqdODkwRVAGdZoxB4k0=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=gkgzy6RFJ8hL7ghbvhVfG/PVQHOYNPG2vvql1yrgrgjFNsjEwGmGqE2qv7/hqYauUxUN39H5zzkx0zM/JONfk+GBuCt32SLJr3yKihud1SFLnQUbD+5rsGTx+NdVsgjaj8DCCGdsZk/KpUNkrXxfCNFUiJSikYc69OZ4KrOj+wY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=JpHaj0hz; arc=none smtp.client-ip=91.218.175.185
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1780903686;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=o+UEQbg6AU+TfmK805SP5EpbQqdODkwRVAGdZoxB4k0=;
-	b=JpHaj0hzUy6GWQsoTGmReTbCiT4mzU8p/9whZkTeag+RVJS1KqdqB4P11lEZ5gdN3qeXnk
-	Sc4Wh0u1hgK7ingH1qu7mkNb3ZzFeUCmIzLy5JbnPQinOCngV6DG7j0F77wzzvoaUgYYG9
-	aNWKbMFCupxYA3dOUJp1SES55xPBXCk=
-From: Lance Yang <lance.yang@linux.dev>
-To: npache@redhat.com
-Cc: linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-mm@kvack.org,
-	linux-trace-kernel@vger.kernel.org,
-	aarcange@redhat.com,
-	akpm@linux-foundation.org,
-	anshuman.khandual@arm.com,
-	apopple@nvidia.com,
-	baohua@kernel.org,
-	baolin.wang@linux.alibaba.com,
-	byungchul@sk.com,
-	catalin.marinas@arm.com,
-	cl@gentwo.org,
-	corbet@lwn.net,
-	dave.hansen@linux.intel.com,
-	david@kernel.org,
-	dev.jain@arm.com,
-	gourry@gourry.net,
-	hannes@cmpxchg.org,
-	hughd@google.com,
-	jack@suse.cz,
-	jackmanb@google.com,
-	jannh@google.com,
-	jglisse@google.com,
-	joshua.hahnjy@gmail.com,
-	kas@kernel.org,
-	lance.yang@linux.dev,
-	liam@infradead.org,
-	ljs@kernel.org,
-	mathieu.desnoyers@efficios.com,
-	matthew.brost@intel.com,
-	mhiramat@kernel.org,
-	mhocko@suse.com,
-	peterx@redhat.com,
-	pfalcato@suse.de,
-	rakie.kim@sk.com,
-	raquini@redhat.com,
-	rdunlap@infradead.org,
-	richard.weiyang@gmail.com,
-	rientjes@google.com,
-	rostedt@goodmis.org,
-	rppt@kernel.org,
-	ryan.roberts@arm.com,
-	shivankg@amd.com,
-	sunnanyong@huawei.com,
-	surenb@google.com,
-	thomas.hellstrom@linux.intel.com,
-	tiwai@suse.de,
-	usamaarif642@gmail.com,
-	vbabka@suse.cz,
-	vishal.moola@gmail.com,
-	wangkefeng.wang@huawei.com,
-	will@kernel.org,
-	willy@infradead.org,
-	yang@os.amperecomputing.com,
-	ying.huang@linux.alibaba.com,
-	ziy@nvidia.com,
-	zokeefe@google.com
-Subject: Re: [PATCH mm-unstable v19 10/14] mm/khugepaged: introduce collapse_possible_orders helper functions
-Date: Mon,  8 Jun 2026 15:27:47 +0800
-Message-Id: <20260608072747.88417-1-lance.yang@linux.dev>
-In-Reply-To: <20260605161422.213817-11-npache@redhat.com>
-References: <20260605161422.213817-11-npache@redhat.com>
+	s=arc-20240116; t=1780903786; c=relaxed/simple;
+	bh=/bfH0TPZGxm/8vE3q8ekiOvB5tCVXHW1AH3iE72Mheo=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=OU49Ob8ZB+iBQrWH53PlxmIkN6J/lp0ARd9DgyDADY9GZ84xArTT4kRkmD7W5cUFx+cjbd1uzDbuP1qk8RH4ZXvfB7eCATxTeeOFe5mpyluOtxhYw4oE2KrmHEDA1KPuAv7Cg6PjTGVzxqOBvMRjMfZCRYqTiD9Jrnl1B3eBysI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iWU1n/1v; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9AD191F00893;
+	Mon,  8 Jun 2026 07:29:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1780903784;
+	bh=ix+o2luyIJ8fd3BbrUCJ3EpMfGnVYFgPUPESUwRjcmc=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=iWU1n/1vrRmqh0JmZv+whbB9usIHKqW+/tkhtI8O4Vvcky4fbEdPce/pVD4COljJ9
+	 UlhJkcklaMEAZyZ/qSw1yU4urpML0ZbGz7pNJPzqLMQiVklbQfgFhNsRkDu7cNuPYo
+	 OVj44jVRxTIU5XSN7WmLPpsFCZ+q6yYtLPPUwkE0WFiGTTlxepAboKhUxARrhe39PP
+	 DAVtlWRaArnowXpIGKwUS3rtDhijwbluhFNHry2Lc1XqE46KeWUlb01DoBTsS0PxCw
+	 77J+lo7gPWbX7RT0uT5LqpJ918wMDRiDoUmMG96gPNyu9CJwY5nqm94nbxMsGeT+s7
+	 pgjc3j/AlqGOg==
+Message-ID: <31ba1950-8d08-44b3-8183-58f1e179f0e1@kernel.org>
+Date: Mon, 8 Jun 2026 09:29:41 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] docs/mm: document slab cache isolation with SLAB_NO_MERGE
+Content-Language: en-US
+To: Matthew Wilcox <willy@infradead.org>,
+ Mohammed EL Kadiri <med08elkadiri@gmail.com>
+Cc: Andrew Morton <akpm@linux-foundation.org>,
+ Vlastimil Babka <vbabka@suse.cz>, David Hildenbrand <david@redhat.com>,
+ Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+ Jonathan Corbet <corbet@lwn.net>, Kees Cook <kees@kernel.org>,
+ linux-mm@kvack.org, linux-doc@vger.kernel.org,
+ linux-hardening@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260606155856.15548-1-med08elkadiri@gmail.com>
+ <aiSAuP-qEhH_RoCn@casper.infradead.org>
+From: "Vlastimil Babka (SUSE)" <vbabka@kernel.org>
+Autocrypt: addr=vbabka@kernel.org; keydata=
+ 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
+In-Reply-To: <aiSAuP-qEhH_RoCn@casper.infradead.org>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.34 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:npache@redhat.com,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-trace-kernel@vger.kernel.org,m:aarcange@redhat.com,m:akpm@linux-foundation.org,m:anshuman.khandual@arm.com,m:apopple@nvidia.com,m:baohua@kernel.org,m:baolin.wang@linux.alibaba.com,m:byungchul@sk.com,m:catalin.marinas@arm.com,m:cl@gentwo.org,m:corbet@lwn.net,m:dave.hansen@linux.intel.com,m:david@kernel.org,m:dev.jain@arm.com,m:gourry@gourry.net,m:hannes@cmpxchg.org,m:hughd@google.com,m:jack@suse.cz,m:jackmanb@google.com,m:jannh@google.com,m:jglisse@google.com,m:joshua.hahnjy@gmail.com,m:kas@kernel.org,m:lance.yang@linux.dev,m:liam@infradead.org,m:ljs@kernel.org,m:mathieu.desnoyers@efficios.com,m:matthew.brost@intel.com,m:mhiramat@kernel.org,m:mhocko@suse.com,m:peterx@redhat.com,m:pfalcato@suse.de,m:rakie.kim@sk.com,m:raquini@redhat.com,m:rdunlap@infradead.org,m:richard.weiyang@gmail.com,m:rientjes@google.com,m:rostedt@goodmis.org,m:rppt@kernel.org,m:ryan
- .roberts@arm.com,m:shivankg@amd.com,m:sunnanyong@huawei.com,m:surenb@google.com,m:thomas.hellstrom@linux.intel.com,m:tiwai@suse.de,m:usamaarif642@gmail.com,m:vbabka@suse.cz,m:vishal.moola@gmail.com,m:wangkefeng.wang@huawei.com,m:will@kernel.org,m:willy@infradead.org,m:yang@os.amperecomputing.com,m:ying.huang@linux.alibaba.com,m:ziy@nvidia.com,m:zokeefe@google.com,m:joshuahahnjy@gmail.com,m:richardweiyang@gmail.com,s:lists@lfdr.de];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kvack.org,redhat.com,linux-foundation.org,arm.com,nvidia.com,kernel.org,linux.alibaba.com,sk.com,gentwo.org,lwn.net,linux.intel.com,gourry.net,cmpxchg.org,google.com,suse.cz,gmail.com,linux.dev,infradead.org,efficios.com,intel.com,suse.com,suse.de,goodmis.org,amd.com,huawei.com,os.amperecomputing.com];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-91316-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER(0.00)[lance.yang@linux.dev,linux-doc@vger.kernel.org];
-	RCVD_COUNT_THREE(0.00)[3];
+	FORGED_RECIPIENTS(0.00)[m:willy@infradead.org,m:med08elkadiri@gmail.com,m:akpm@linux-foundation.org,m:vbabka@suse.cz,m:david@redhat.com,m:lorenzo.stoakes@oracle.com,m:corbet@lwn.net,m:kees@kernel.org,m:linux-mm@kvack.org,m:linux-doc@vger.kernel.org,m:linux-hardening@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_TO(0.00)[infradead.org,gmail.com];
+	FORGED_SENDER(0.00)[vbabka@kernel.org,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-91317-lists,linux-doc=lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	TO_DN_NONE(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[lance.yang@linux.dev,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linux.dev:+];
-	RCPT_COUNT_GT_50(0.00)[59];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MIME_TRACE(0.00)[0:+];
 	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[vbabka@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,vger.kernel.org:from_smtp,alibaba.com:email,linux.dev:mid,linux.dev:dkim,linux.dev:from_mime,linux.dev:email]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 553F7653891
+X-Rspamd-Queue-Id: 0FAA26538F0
 
+On 6/6/26 22:19, Matthew Wilcox wrote:
+> On Sat, Jun 06, 2026 at 04:58:55PM +0100, Mohammed EL Kadiri wrote:
+>> +The SLUB allocator merges slab caches with compatible size, alignment, and
+> 
+> More of a question for Vlastimil ... do we want to continue to
+> distinguish between slab (the API) and SLUB (the implementation)?
+> I don't think we ever want to go back to a situation where we have
+> multiple competing implementations of the slab API in the kernel.
+> So shouldn't we deprecate uses of SLUB, particularly in the
+> documentation?
 
-On Fri, Jun 05, 2026 at 10:14:17AM -0600, Nico Pache wrote:
->Add collapse_possible_orders() to generalize THP order eligibility. The
->function determines which THP orders are permitted based on collapse
->context (khugepaged vs madv_collapse). We also add collapse_possible()
->as a thin wrapper around collapse_possible_orders() that returns a bool
->rather than the whole bitmap.
->
->This consolidates collapse configuration logic and provides a clean
->interface for future mTHP collapse support where the orders may be
->different.
->
->Acked-by: David Hildenbrand (Arm) <david@kernel.org>
->Reviewed-by: Baolin Wang <baolin.wang@linux.alibaba.com>
->Signed-off-by: Nico Pache <npache@redhat.com>
->---
+Indeed, any new stuff should talk about the slab allocator, with old stuff
+can be converted if touched for other reasons.
 
-Reviewed-by: Lance Yang <lance.yang@linux.dev>
+>> +flags to reduce memory fragmentation. While this improves memory efficiency,
+>> +it allows objects of different types to share the same slab pages. This
+> 
+> s/ pages//
+> 
+>> +enables cross-cache heap exploitation, where a use-after-free in one object
+>> +type can be leveraged to corrupt an unrelated type.
+>> +
+>> +The `SLAB_NO_MERGE` flag prevents a cache from being merged, ensuring it
+>> +receives dedicated slab pages.
+> 
+> s/slab pages/a dedicated slab/
+> 
+>> +2. *Actually mergeable*: The cache must not already be unmergeable.
+>> +   A cache is already unmergeable if any of the following is true:
+>> +
+>> +   - It has a constructor (`ctor` argument is non-NULL).
+>> +   - It has a non-zero `usersize` (with `CONFIG_HARDENED_USERCOPY`).
+>> +   - It already has `SLAB_NO_MERGE` or another `SLAB_NEVER_MERGE` flag.
+> 
+> I don't know if this is good advice for users of the API.  It's true
+> that the slab will already be unmergable for these other reasons, but
+> it's harmless to specify SLAB_NO_MERGE in that case.  And it
+> communicates intent.  And in case somebody removes the ctor in the
+> future, or we decide to change which flags are in SLAB_NEVER_MERGE,
+> the slab will still be unmergable.
+
+Agreed.
+
+>> +3. *Bounded allocation volume*: The cache has a predictable number of
+>> +   active objects, so the memory cost of dedicated slab pages is
+>> +   acceptable.
+> 
+> I don't understand why this is a criteria.
+
++1
+
+>> +How merging works
+>> +=================
+>> +
+>> +When `kmem_cache_create()` is called:
+>> +
+>> +1. If `usersize` is non-zero, the merge path is skipped entirely.
+>> +
+>> +2. Otherwise, `find_mergeable()` in `mm/slab_common.c` searches for a
+>> +   compatible existing cache. A merge is prevented if:
+>> +
+>> +   - The `slab_nomerge` boot parameter is set
+>> +   - The new cache has a constructor
+>> +   - The new cache's flags include `SLAB_NO_MERGE`
+>> +   - No existing cache has compatible size and flags
+>> +
+>> +3. If a compatible cache is found, the new cache becomes an alias. Both
+>> +   share the same slab pages.
+> 
+> This feels like documenting internals rather than documenting how to use
+> the flag.  I'd drop it entirely.
+
++1
+
+>> +The cross-cache attack class
+>> +=============================
+>> +
+>> +Cross-cache attacks exploit slab merging to achieve type confusion:
+>> +
+>> +1. Attacker triggers a use-after-free in object type A.
+>> +2. Type A's cache is merged with type B (they share slab pages).
+>> +3. The freed type A slot is reallocated as type B.
+>> +4. Attacker uses the dangling pointer to corrupt type B.
+>> +5. Privilege escalation.
+>> +
+>> +CVE-2022-29582 demonstrates this technique: an io_uring use-after-free is
+>> +exploited via cross-cache page-level reallocation to achieve root.
+>> +
+>> +`SLAB_NO_MERGE` prevents step 2: dedicated pages mean a freed slot of
+>> +one type cannot be reallocated as a different type.
+> 
+> Not sure this section adds anything to what was already described.
+> 
+>> +Tradeoffs
+>> +=========
+>> +
+>> +*Memory*: Isolated caches may have partially-filled slab pages that
+>> +cannot be used by other types. For caches with bounded allocation counts,
+>> +this is typically a few extra pages.
+>> +
+>> +*Performance*: Zero impact on `kmem_cache_alloc()` and
+>> +`kmem_cache_free()`. The only effect is at boot when the cache is
+>> +created.
+>> +
+>> +Relationship to other mitigations
+>> +==================================
+>> +
+>> +`CONFIG_RANDOM_KMALLOC_CACHES`
+>> +    Creates 16 copies of each `kmalloc` size class and randomly assigns
+>> +    allocations among them. Only affects `kmalloc()` users. Does not
+>> +    affect named caches created with `kmem_cache_create()`.
+>> +
+>> +`SLAB_TYPESAFE_BY_RCU`
+>> +    Delays freeing the slab page by an RCU grace period. Does not delay
+>> +    object slot reuse. Does not prevent cross-cache merging. Solves a
+>> +    different problem: safe lockless access to freed-and-reallocated
+>> +    objects of the same type.
+>> +
+>> +`slab_nomerge` boot parameter
+>> +    Disables merging for all caches globally. `SLAB_NO_MERGE` provides
+>> +    the same protection selectively for individual caches without the
+>> +    global memory cost.
+> 
+> These two sections also feel unnecessary.
+
+Many "product of LLM" hallmarks, sigh.
 
