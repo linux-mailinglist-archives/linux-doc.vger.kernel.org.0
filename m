@@ -1,337 +1,198 @@
-Return-Path: <linux-doc+bounces-91342-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91343-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 9M+VHEp9JmpVXQIAu9opvQ
-	(envelope-from <linux-doc+bounces-91342-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 10:28:58 +0200
+	id cufPEAuEJmqJXwIAu9opvQ
+	(envelope-from <linux-doc+bounces-91343-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 10:57:47 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id F31056540AD
-	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 10:28:57 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id CF3D2654485
+	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 10:57:46 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linux.dev header.s=key1 header.b=xXdr2MqU;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91342-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91342-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=linux.dev;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=Rg+0H1P6;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91343-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-91343-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 8D1453036702
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Jun 2026 08:25:51 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 919083076B35
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Jun 2026 08:46:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1091D3AE1B8;
-	Mon,  8 Jun 2026 08:25:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C6C6F3B14BE;
+	Mon,  8 Jun 2026 08:45:56 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-180.mta0.migadu.com (out-180.mta0.migadu.com [91.218.175.180])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 518103AFAE4
-	for <linux-doc@vger.kernel.org>; Mon,  8 Jun 2026 08:25:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B16672E739C;
+	Mon,  8 Jun 2026 08:45:55 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780907137; cv=none; b=hYfIxaXQUFXkrQXOmGCXtjdQwua6q8UV6Oz9z4CumyjlV8kZ+oV9hwlgXHcLz/0OvNAoKEadROlg02eLc5KBMNq9BjaER99oGeNspMchxaS/yqj1C/Fpq3dwgzJUt8hzvip/joQgyOFOta0coz5rw9g6LdLyJdfXQomnBY+sOi0=
+	t=1780908356; cv=none; b=krC5457nDZsED6TPg9x+4Uj6BU4WHCnP0JCN116Hr2PPLxzxHQMtUXeS07YZZrQ/FbDBByUdqOGn0kIpy17JUnfnlqOGQP4bN83bYXv7Eh8GEmDYftVqvoexewyhKDcQLEjsqRnj3c56mvZg7Crgz9K48Oe7+5dKuilxoGfx3/s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780907137; c=relaxed/simple;
-	bh=ajvNFQRszeTPdN8XlHWWoiibBsW1/sKsa1xidqso6yg=;
-	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
-	 In-Reply-To:Content-Type; b=Xp9j7J/2pWnfndFbjs6PEDqAcf7WYv3TUfdS2UskJxcm/rE/Gc6wuo4htPanc+ukoxbWVLwDOiPFU9FINBPfoGiW5XDVPMjWQlmkTAqGKcuJHOKiSKY4E8ljbffMCo/Uk/GUWLs6s3+1zksLt0ZWYDM6XWNcrZWq8BO+PFs/BKQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=xXdr2MqU; arc=none smtp.client-ip=91.218.175.180
-Message-ID: <a58e659e-5f54-4511-9a29-dc921002d102@linux.dev>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1780907123;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=g/cl94r2sn+iv8ffB105PChTgE1EOVBWGfW9oWrFA4E=;
-	b=xXdr2MqUm4ZO5i3k+RxHcUjI4HpIhji3s70NJnUCFzQ1RESXVF1DKKPCbLWyRtNO1MLOHL
-	RuI/3Yb+fiy5ZTTGzVhl/1ILrYag9MVjYJDIRSMkikfpV8kef9FWbLzkDtlKcDq2neBBzU
-	xB/FcZW1UKV4zGpe09dq4VzJX+EHLJA=
-Date: Mon, 8 Jun 2026 16:24:50 +0800
+	s=arc-20240116; t=1780908356; c=relaxed/simple;
+	bh=HKFycMw8SADc7AzCbdnusE7SU1MMyYsdtx2WKJd0lHA=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=pPdCmBtPVkn3Ycl94lA3kWrIQf2M61N+mKwrH1ZtSOVO4QPr1wguFIGGTalfOMhXIGlzjIr/tVhpClhGdjQtYlCQIbJZf4rkAHi1AG318Vo4Y9mk7yZsPO9E2dJsLvAPiiY4rDioBsLWgx4qUffJ6eEzbviYGPWJv2+oIhIdoXs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Rg+0H1P6; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 53E7C1F00893;
+	Mon,  8 Jun 2026 08:45:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1780908355;
+	bh=XuarSeLN78HVSV2cIgbzTlP+3ajrwTiQFsYhkjJgQjU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=Rg+0H1P6GbsUsqwBUMQLth91KISm3oK8bATyCyasCZ/lmHFNBI0q13Ke0sOQFDI35
+	 uCyrOY5QpDByDZ7XOw/08kVwZyMLV2/n7kD7vOn7Dd+jl8hIUY2bRSXup0b0XQa1x2
+	 0qzfuUd1axp3VTbjdNYpCqbl8rCndYHH8DGFMdQ5eFYLv8x00yBet47bXPorw32JCR
+	 U05aqtV92bpp9yMrU7MI6TW2BYmGPrXRlfwBAJyw4ksSUGbJfG9c+CYLGXowfelT5+
+	 LZ1/eGbk7Iu0NtPpClo0paZxEAH8x8uFX39on25mRqArScVJLus674PVsQnqA1RALC
+	 zxypmzn5TlWwg==
+Message-ID: <79a8abe4-ea1c-456b-b438-44213b042287@kernel.org>
+Date: Mon, 8 Jun 2026 10:45:41 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH v3 4/6] alloc_tag: add accuracy based filtering to ioctl
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Hao Ge <hao.ge@linux.dev>
-To: Abhishek Bapat <abhishekbapat@google.com>
-Cc: Shuah Khan <skhan@linuxfoundation.org>, Jonathan Corbet <corbet@lwn.net>,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-mm@kvack.org,
- Sourav Panda <souravpanda@google.com>, Suren Baghdasaryan
- <surenb@google.com>, Andrew Morton <akpm@linux-foundation.org>,
- Kent Overstreet <kent.overstreet@linux.dev>
-References: <cover.1780701922.git.abhishekbapat@google.com>
- <b608a6f7d71e3b728f766dbc6dfa1d1753ddcff5.1780701922.git.abhishekbapat@google.com>
- <1ec17313-cd2b-4389-a05d-998757af30b3@linux.dev>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 14/42] KVM: guest_memfd: Handle lru_add fbatch
+ refcounts during conversion safety check
 Content-Language: en-US
-In-Reply-To: <1ec17313-cd2b-4389-a05d-998757af30b3@linux.dev>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
+To: ackerleytng@google.com, aik@amd.com, andrew.jones@linux.dev,
+ binbin.wu@linux.intel.com, brauner@kernel.org, chao.p.peng@linux.intel.com,
+ david@kernel.org, ira.weiny@intel.com, jmattson@google.com,
+ jthoughton@google.com, michael.roth@amd.com, oupton@kernel.org,
+ pankaj.gupta@amd.com, qperret@google.com, rick.p.edgecombe@intel.com,
+ rientjes@google.com, shivankg@amd.com, steven.price@arm.com,
+ tabba@google.com, willy@infradead.org, wyihan@google.com,
+ yan.y.zhao@intel.com, forkloop@google.com, pratyush@kernel.org,
+ suzuki.poulose@arm.com, aneesh.kumar@kernel.org, liam@infradead.org,
+ Paolo Bonzini <pbonzini@redhat.com>, Sean Christopherson
+ <seanjc@google.com>, Thomas Gleixner <tglx@kernel.org>,
+ Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+ Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+ "H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>,
+ Masami Hiramatsu <mhiramat@kernel.org>,
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+ Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>,
+ Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>,
+ Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>,
+ Nhat Pham <nphamcs@gmail.com>, Baoquan He <bhe@redhat.com>,
+ Barry Song <baohua@kernel.org>, Axel Rasmussen <axelrasmussen@google.com>,
+ Yuanchu Xie <yuanchu@google.com>, Wei Xu <weixugc@google.com>,
+ Youngjun Park <youngjun.park@lge.com>, Qi Zheng <qi.zheng@linux.dev>,
+ Shakeel Butt <shakeel.butt@linux.dev>, Kiryl Shutsemau <kas@kernel.org>,
+ Jason Gunthorpe <jgg@ziepe.ca>
+Cc: kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kselftest@vger.kernel.org, linux-mm@kvack.org,
+ linux-coco@lists.linux.dev
+References: <20260522-gmem-inplace-conversion-v7-0-2f0fae496530@google.com>
+ <20260522-gmem-inplace-conversion-v7-14-2f0fae496530@google.com>
+From: "Vlastimil Babka (SUSE)" <vbabka@kernel.org>
+Autocrypt: addr=vbabka@kernel.org; keydata=
+ xsFNBFZdmxYBEADsw/SiUSjB0dM+vSh95UkgcHjzEVBlby/Fg+g42O7LAEkCYXi/vvq31JTB
+ KxRWDHX0R2tgpFDXHnzZcQywawu8eSq0LxzxFNYMvtB7sV1pxYwej2qx9B75qW2plBs+7+YB
+ 87tMFA+u+L4Z5xAzIimfLD5EKC56kJ1CsXlM8S/LHcmdD9Ctkn3trYDNnat0eoAcfPIP2OZ+
+ 9oe9IF/R28zmh0ifLXyJQQz5ofdj4bPf8ecEW0rhcqHfTD8k4yK0xxt3xW+6Exqp9n9bydiy
+ tcSAw/TahjW6yrA+6JhSBv1v2tIm+itQc073zjSX8OFL51qQVzRFr7H2UQG33lw2QrvHRXqD
+ Ot7ViKam7v0Ho9wEWiQOOZlHItOOXFphWb2yq3nzrKe45oWoSgkxKb97MVsQ+q2SYjJRBBH4
+ 8qKhphADYxkIP6yut/eaj9ImvRUZZRi0DTc8xfnvHGTjKbJzC2xpFcY0DQbZzuwsIZ8OPJCc
+ LM4S7mT25NE5kUTG/TKQCk922vRdGVMoLA7dIQrgXnRXtyT61sg8PG4wcfOnuWf8577aXP1x
+ 6mzw3/jh3F+oSBHb/GcLC7mvWreJifUL2gEdssGfXhGWBo6zLS3qhgtwjay0Jl+kza1lo+Cv
+ BB2T79D4WGdDuVa4eOrQ02TxqGN7G0Biz5ZLRSFzQSQwLn8fbwARAQABzSNWbGFzdGltaWwg
+ QmFia2EgPHZiYWJrYUBrZXJuZWwub3JnPsLBsAQTAQoAWhYhBKlA1DSZLC6OmRA9UCJPp+fM
+ gqZkBQJqFFy6GxSAAAAAAAQADm1hbnUyLDIuNSsxLjEyLDIsMgIbAwUJGtCBUAULCQgHAwUV
+ CgkICwUWAgMBAAIeBQIXgAAKCRAiT6fnzIKmZJIUEADFx/tREzUImHrEwVHeSvDFmA7tJysI
+ UVrlvrM09E7GIuzphzv7jYmo8n3ANpCczLEVr4G0syYQdTigaZgv3+FQDIIzhKih1IHhu1Ei
+ XHlywNWKnQxxQEUNi5Mwx43wQz5XVw9F1A7gtKBKNtfogO511hAbrzagrYajyQacEJ/+sfhZ
+ 9Da8ltHIXD8pcYaHUfQgEusCgmEd9+KrUwrTbckFKmYq5chuE6yJ4J0EmWknL096jIE6CnzF
+ FRslQ3B1UKDjxVsm1ZHfir5NeWszLkTvGFsddFaWTgh8UycESG6VQzKXjjewXu2pG7YQYRpj
+ QKm1W5X2TkwWkXRBZTmfmbhxIUMh3+zf5wQ463rSmDN/8v81tdqBtAW6rH/kzg1GvkaTHXn0
+ 507yEHFzBksk2viAuIxxr7km8+/KARYLIdGtx30EG8cKzAUZOK6WqxtNCsXUJNrVE8CWrCaD
+ icoNu7Fs1c5hmPHdSTnU48ce67449DdnO4neLSNhRiGlMHJgfJUmgrxu/hcYeOZ3haWmEQ2w
+ uW1Mh01OHi8QZHCEyAbABrPs9GUgccc/4eYXX9hIgxfSkYzn8f+8NuIFPWl/0uTvjgqU29FQ
+ SbzOLxHq9439Ox40G5mS5eZXRGxITYR+6TXvRGI6P/264jvflnr/pDGUttaikU+0W+1uxgKH
+ cmYbEc7ATQRbGTU1AQgAn0H6UrFiWcovkh6EXVcl+SeqyO6JHOPm+e9Wu0Vw+VIUvXZVUVVQ
+ La1PQDUi6j00ChlcR66g9/V0sPIcSutacPKfdKYOBvzd4rlhL8rfrdEsQw5ApZxrA8kYZVMh
+ FmBRKAa6wos25moTlMKpCWzTH84+WO5+ziCTsTUZASAToz3RdunTD+vQcHj0GqNTPAHK63sf
+ bAB2I0BslZkXkY1RLb/YhuA6E7JyEd2pilZOrIuBGl/5q2qSakgnAVFWFBR/DO27JuAksYnq
+ +aH8vI0xGvwn75KqSk4UzAkDzWSmO4ZHuahKtQgZNsMYV+PGayRBX9b9zbldzopoLBdqHc4n
+ jQARAQABwsF8BBgBCgAmAhsMFiEEqUDUNJksLo6ZED1QIk+n58yCpmQFAmfIHFQFCRYU6J8A
+ CgkQIk+n58yCpmS2PA//bqN1LfcotmArgElsa+0EGZSQlYgK48pm8WAeTXTngudP9IJ4SuKY
+ HR5RNjHcBeqN+Me0zxRqYzRb8nGanHEkDyf4Im8DQM8d6vbyU+FcPmG4skud4kgS1zMHnlVd
+ SXfSIwKC/hKgdHG8aBV7545Lz9X6Iohea+94wneD0aw/hqF+QWewGZhWJriWAZtvEkzNjQOi
+ 4U9F/trLten/x7bpphDSnDMKJtITbtzATT1Dq7o7VpIUK1nCTQALMuMjKCdi8OdU/+V+R3O4
+ 0PXWvX8qrvqYapVbZ+9KqT74FsuB0Ya9uXwgBF2Q6cRuETZk5vqaqKxzqoQZCO8AOz/58j6O
+ 2RHNy/mZEN+7tJ5Tsq42zVJ4jxsT8b9YplavCMsnBgDeRWhcbYhCyttoL7nYISyWg4kQYZ/P
+ wIV3OuNv2f8iKYsxNsRuClOAF82+gvqOy1/1pprFjy8uo2pkoOrb63aOP3vO5VHnRKgra6dq
+ NcaZ+c6J4H+nEJGi2SkHAUJz5oBzuThvPudLvPA/SK8sKoM01IRxSihev/S/5WLazXB1PGem
+ OCbvzC1IjWJJraxiDJ5IygokapUa2RP7+WBR22skQ3SSl6G107QgWKSyTOGWEaRmV53vxQLV
+ jXuCmzSSasTL60zq5yGrT4/DYQVSNEUiUbG4pYekxJujNeEDkUlky0Y=
+In-Reply-To: <20260522-gmem-inplace-conversion-v7-14-2f0fae496530@google.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-91342-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-91343-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:ackerleytng@google.com,m:aik@amd.com,m:andrew.jones@linux.dev,m:binbin.wu@linux.intel.com,m:brauner@kernel.org,m:chao.p.peng@linux.intel.com,m:david@kernel.org,m:ira.weiny@intel.com,m:jmattson@google.com,m:jthoughton@google.com,m:michael.roth@amd.com,m:oupton@kernel.org,m:pankaj.gupta@amd.com,m:qperret@google.com,m:rick.p.edgecombe@intel.com,m:rientjes@google.com,m:shivankg@amd.com,m:steven.price@arm.com,m:tabba@google.com,m:willy@infradead.org,m:wyihan@google.com,m:yan.y.zhao@intel.com,m:forkloop@google.com,m:pratyush@kernel.org,m:suzuki.poulose@arm.com,m:aneesh.kumar@kernel.org,m:liam@infradead.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:shuah@kernel.org,m:vannapurve@google.com,m:akpm@linux-foundation.org,m:chrisl@kern
+ el.org,m:kasong@tencent.com,m:shikemeng@huaweicloud.com,m:nphamcs@gmail.com,m:bhe@redhat.com,m:baohua@kernel.org,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:kas@kernel.org,m:jgg@ziepe.ca,m:kvm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,m:linux-coco@lists.linux.dev,s:lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:abhishekbapat@google.com,m:skhan@linuxfoundation.org,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:souravpanda@google.com,m:surenb@google.com,m:akpm@linux-foundation.org,m:kent.overstreet@linux.dev,s:lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[3];
-	FORWARDED(0.00)[lists@lfdr.de];
-	DKIM_TRACE(0.00)[linux.dev:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[hao.ge@linux.dev,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	FREEMAIL_TO(0.00)[google.com,amd.com,linux.dev,linux.intel.com,kernel.org,intel.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca];
 	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[vbabka@kernel.org,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[64];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[hao.ge@linux.dev,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[vbabka@kernel.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: F31056540AD
+X-Rspamd-Queue-Id: CF3D2654485
 
+On 5/23/26 02:17, Ackerley Tng via B4 Relay wrote:
+> From: Ackerley Tng <ackerleytng@google.com>
+> 
+> When checking if a guest_memfd folio is safe for conversion, its refcount
+> is examined. A folio may be present in a per-CPU lru_add fbatch, which
+> temporarily increases its refcount. This can lead to a false positive,
+> incorrectly indicating that the folio is in use and preventing the
+> conversion, even if it is otherwise safe. The conversion process might not
+> be on the same CPU that holds the folio in its fbatch, making a simple
+> per-CPU check insufficient.
+> 
+> To address this, drain all CPUs' lru_add fbatches if an unexpectedly high
+> refcount is encountered during the safety check. This is performed at most
+> once per conversion request. Draining only if the folio in question may be
+> lru cached.
+> 
+> guest_memfd folios are unevictable, so they can only reside in the lru_add
+> fbatch. If the folio's refcount is still unsafe after draining, then the
+> conversion is truly deemed unsafe.
+> 
+> Reviewed-by: Fuad Tabba <tabba@google.com>
+> Signed-off-by: Ackerley Tng <ackerleytng@google.com>
 
-On 2026/6/8 14:22, Hao Ge wrote:
-> Hi Abhishek
->
->
-> On 2026/6/6 07:36, Abhishek Bapat wrote:
->> Extend the allocinfo filtering mechanism to allow users to filter tags
->> based on their accuracy.
->>
->> Signed-off-by: Abhishek Bapat <abhishekbapat@google.com>
->> ---
->>   include/uapi/linux/alloc_tag.h | 3 +++
->>   lib/alloc_tag.c                | 8 ++++++++
->>   2 files changed, 11 insertions(+)
->>
->> diff --git a/include/uapi/linux/alloc_tag.h 
->> b/include/uapi/linux/alloc_tag.h
->> index 0e648192df4d..42445bdb11c5 100644
->> --- a/include/uapi/linux/alloc_tag.h
->> +++ b/include/uapi/linux/alloc_tag.h
->> @@ -20,6 +20,7 @@ struct allocinfo_tag {
->>       char function[ALLOCINFO_STR_SIZE];
->>       char filename[ALLOCINFO_STR_SIZE];
->>       __u64 lineno;
->> +    __u64 inaccurate;
->
->
-> I was wondering if it would make sense to define inaccurate as a flags 
-> field
->
-> (e.g. __u64 flags with ALLOCINFO_TAG_F_INACCURATE (1 <<0)),
->
-> so that only bit 0 is used today and the upper bits are reserved for 
-> future use,
->
-> aligning with current kernel codebase.
->
-> This design also allows for better extensibility if we need to
->
-> add new flags for any reason in the future.
->
-> We also need to add flag validity checks if we go this route.
->
-And I've reviewed the issue reported by Sashiko, and I think it's valid.
+Acked-by: Vlastimil Babka (SUSE) <vbabka@kernel.org>
 
-When we expand the allocinfo_tag_data structure
-
-struct allocinfo_tag_data{
-
-     char modname[64];
-
-     char function[64];
-
-     char filename[64];
-
-     __u64 lineno;
-
-     __u64 inaccurate;
-
-     __u64 bytes;
-
-     __u64 calls;
-
-     __u8 accurate;
-   /* padding */
-
-}
-
-I think user space may see two fields related to inaccuracy.
-
-How do you like these modifications?
-
-
-diff --git a/include/uapi/linux/alloc_tag.h b/include/uapi/linux/alloc_tag.h
---- a/include/uapi/linux/alloc_tag.h
-+++ b/include/uapi/linux/alloc_tag.h
-@@ -20,7 +20,6 @@ struct allocinfo_tag {
-      char function[ALLOCINFO_STR_SIZE];
-      char filename[ALLOCINFO_STR_SIZE];
-      __u64 lineno;
--    __u64 inaccurate;
-  };
-
-  /* The alignment ensures 32-bit compatible interfaces are not broken */
-@@ -40,7 +39,7 @@ enum {
-      ALLOCINFO_FILTER_FUNCTION,
-      ALLOCINFO_FILTER_FILENAME,
-      ALLOCINFO_FILTER_LINENO,
--    ALLOCINFO_FILTER_INACCURATE,
-+    ALLOCINFO_FILTER_FLAGS,
-      ALLOCINFO_FILTER_MIN_SIZE,
-      ALLOCINFO_FILTER_MAX_SIZE,
-      __ALLOCINFO_FILTER_LAST = ALLOCINFO_FILTER_MAX_SIZE
-@@ -50,16 +49,20 @@ enum {
-  #define ALLOCINFO_FILTER_MASK_FUNCTION        (1 << 
-ALLOCINFO_FILTER_FUNCTION)
-  #define ALLOCINFO_FILTER_MASK_FILENAME        (1 << 
-ALLOCINFO_FILTER_FILENAME)
-  #define ALLOCINFO_FILTER_MASK_LINENO        (1 << ALLOCINFO_FILTER_LINENO)
--#define ALLOCINFO_FILTER_MASK_INACCURATE    (1 << 
-ALLOCINFO_FILTER_INACCURATE)
-+#define ALLOCINFO_FILTER_MASK_FLAGS        (1 << ALLOCINFO_FILTER_FLAGS)
-  #define ALLOCINFO_FILTER_MASK_MIN_SIZE        (1 << 
-ALLOCINFO_FILTER_MIN_SIZE)
-  #define ALLOCINFO_FILTER_MASK_MAX_SIZE        (1 << 
-ALLOCINFO_FILTER_MAX_SIZE)
-
-  #define ALLOCINFO_FILTER_MASKS \
-      ((1 << (__ALLOCINFO_FILTER_LAST + 1)) - 1)
-
-+#define ALLOCINFO_FILTER_F_INACCURATE    (1ULL << 0)
-+#define ALLOCINFO_FILTER_FLAGS_ALL ALLOCINFO_FILTER_F_INACCURATE
-+
-  struct allocinfo_filter {
-      __u64 mask; /* bitmask of the filter fields used */
-      struct allocinfo_tag fields;
-+    __u64 flags; /* bitmask of ALLOCINFO_FILTER_F_* */
-      __u64 min_size;
-      __u64 max_size;
-  };
-diff --git a/lib/alloc_tag.c b/lib/alloc_tag.c
---- a/lib/alloc_tag.c
-+++ b/lib/alloc_tag.c
-@@ -249,8 +249,6 @@ static bool matches_filter(struct codetag *ct, 
-struct allocinfo_filter *filter,
-                 struct alloc_tag_counters *counters,
-                 bool *fetched_counters)
-  {
--    bool inaccurate;
--
-      if (!filter || !filter->mask)
-          return true;
-
-@@ -277,10 +275,11 @@ static bool matches_filter(struct codetag *ct, 
-struct allocinfo_filter *filter,
-          ct->lineno != filter->fields.lineno)
-          return false;
-
--    if (filter->mask & ALLOCINFO_FILTER_MASK_INACCURATE) {
--        inaccurate = !!(ct->flags & CODETAG_FLAG_INACCURATE);
--        if (inaccurate != !!(filter->fields.inaccurate))
--            return false;
-+    if (filter->mask & ALLOCINFO_FILTER_MASK_FLAGS) {
-+        if (filter->flags & ALLOCINFO_FILTER_F_INACCURATE) {
-+            if (!(ct->flags & CODETAG_FLAG_INACCURATE))
-+                return false;
-+        }
-      }
-
-      if (filter->mask & (ALLOCINFO_FILTER_MASK_MIN_SIZE | 
-ALLOCINFO_FILTER_MASK_MAX_SIZE)) {
-@@ -318,6 +317,10 @@ static int allocinfo_ioctl_get_at(struct seq_file 
-*m, void __user *arg)
-      if (params.filter.mask & ~ALLOCINFO_FILTER_MASKS)
-          return -EINVAL;
-
-+    if ((params.filter.mask & ALLOCINFO_FILTER_MASK_FLAGS) &&
-+        (params.filter.flags & ~ALLOCINFO_FILTER_FLAGS_ALL))
-+        return -EINVAL;
-+
-      if ((params.filter.mask & ALLOCINFO_FILTER_MASK_MIN_SIZE) &&
-          (params.filter.mask & ALLOCINFO_FILTER_MASK_MAX_SIZE) &&
-          params.filter.min_size > params.filter.max_size)
-
-
-Thanks
-
-Best Regards
-
-Hao
-
-
->
-> Thanks
->
-> Best Regards
->
-> Hao
->
->
->>   };
->>     /* The alignment ensures 32-bit compatible interfaces are not 
->> broken */
->> @@ -39,6 +40,7 @@ enum {
->>       ALLOCINFO_FILTER_FUNCTION,
->>       ALLOCINFO_FILTER_FILENAME,
->>       ALLOCINFO_FILTER_LINENO,
->> +    ALLOCINFO_FILTER_INACCURATE,
->>       ALLOCINFO_FILTER_MIN_SIZE,
->>       ALLOCINFO_FILTER_MAX_SIZE,
->>       __ALLOCINFO_FILTER_LAST = ALLOCINFO_FILTER_MAX_SIZE
->> @@ -48,6 +50,7 @@ enum {
->>   #define ALLOCINFO_FILTER_MASK_FUNCTION        (1 << 
->> ALLOCINFO_FILTER_FUNCTION)
->>   #define ALLOCINFO_FILTER_MASK_FILENAME        (1 << 
->> ALLOCINFO_FILTER_FILENAME)
->>   #define ALLOCINFO_FILTER_MASK_LINENO        (1 << 
->> ALLOCINFO_FILTER_LINENO)
->> +#define ALLOCINFO_FILTER_MASK_INACCURATE    (1 << 
->> ALLOCINFO_FILTER_INACCURATE)
->>   #define ALLOCINFO_FILTER_MASK_MIN_SIZE        (1 << 
->> ALLOCINFO_FILTER_MIN_SIZE)
->>   #define ALLOCINFO_FILTER_MASK_MAX_SIZE        (1 << 
->> ALLOCINFO_FILTER_MAX_SIZE)
->>   diff --git a/lib/alloc_tag.c b/lib/alloc_tag.c
->> index ddc6946f56ab..cbcd12c4ef9c 100644
->> --- a/lib/alloc_tag.c
->> +++ b/lib/alloc_tag.c
->> @@ -249,6 +249,8 @@ static bool matches_filter(struct codetag *ct, 
->> struct allocinfo_filter *filter,
->>                  struct alloc_tag_counters *counters,
->>                  bool *fetched_counters)
->>   {
->> +    bool inaccurate;
->> +
->>       if (!filter || !filter->mask)
->>           return true;
->>   @@ -275,6 +277,12 @@ static bool matches_filter(struct codetag *ct, 
->> struct allocinfo_filter *filter,
->>           ct->lineno != filter->fields.lineno)
->>           return false;
->>   +    if (filter->mask & ALLOCINFO_FILTER_MASK_INACCURATE) {
->> +        inaccurate = !!(ct->flags & CODETAG_FLAG_INACCURATE);
->> +        if (inaccurate != !!(filter->fields.inaccurate))
->> +            return false;
->> +    }
->> +
->>       if (filter->mask & (ALLOCINFO_FILTER_MASK_MIN_SIZE | 
->> ALLOCINFO_FILTER_MASK_MAX_SIZE)) {
->>           if (!*fetched_counters) {
->>               *counters = allocinfo_prefetch_counters(ct);
 
