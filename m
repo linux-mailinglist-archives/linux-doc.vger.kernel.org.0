@@ -1,420 +1,170 @@
-Return-Path: <linux-doc+bounces-91414-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91405-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id o6LcBpLgJmrxmAIAu9opvQ
-	(envelope-from <linux-doc+bounces-91414-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 17:32:34 +0200
+	id 1WTNBZjhJmpDmQIAu9opvQ
+	(envelope-from <linux-doc+bounces-91405-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 17:36:56 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 812A66581C2
-	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 17:32:33 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 13B0D6582AE
+	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 17:36:55 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=infradead.org header.s=casper.20170209 header.b=MSZfuWqi;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91414-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91414-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=infradead.org;
+	dkim=pass header.d=kernel-dk.20251104.gappssmtp.com header.s=20251104 header.b=LS5ktwsI;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91405-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-91405-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=none;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E4EA430CB302
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Jun 2026 15:13:34 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 6C16D30665E5
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Jun 2026 15:11:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 267903F54AE;
-	Mon,  8 Jun 2026 14:55:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C9D303ED105;
+	Mon,  8 Jun 2026 14:53:28 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-oa1-f50.google.com (mail-oa1-f50.google.com [209.85.160.50])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 604743F0A87;
-	Mon,  8 Jun 2026 14:55:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CCF33EC2F6
+	for <linux-doc@vger.kernel.org>; Mon,  8 Jun 2026 14:53:25 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780930519; cv=none; b=UCGBZbzoe8Oao+vO8z8kdmwmsgcO67AcYfIAg03oeaf4ItP8uuYmvtrP29gqqkBVAFVf3WWHvrJbxrrAlLArP2YT8KUd5vqEYPX03gz69D+a8zBX6pkoN2W2V19GBC3nXcXlazpVOOfpepmJcXco7nECplvQmQhfDPB8WMUsvX4=
+	t=1780930408; cv=none; b=Q2Rb+y5mZ/0Jp0EaplK0RpOgohOiALzRgFj7BotpzkinY+VpCzjDg9/5jmEwtNO/6h8J64Te2HhYMTUl88+qISGzDb06ol/Rp68lrynbPqPuazVFashqUC66h2CXkeipANrFNmt3EvhcuAOI/eRBD04rnMwR6RG26lsHKPoTK3U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780930519; c=relaxed/simple;
-	bh=2UbQVwoYRa8SaEUxm1COfihoMV5CVkoKRu5CIMM/Qxs=;
-	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=tl/d24mg3KMCbJPN1MeWUekwC06sFEbRmCpGY1k/qsbamoSGPLj6h0acAKXbvlaCDG+JkIOPG+FOAEyfPH631PRdzTSygBLH1wCoqRG3u+2uCcSdBeZkavuam8SjBn1YoOaWjoIebW3F8mx4Gqfyn7Pvp4eqRwGrRATSwuJ7UyU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=casper.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=MSZfuWqi; arc=none smtp.client-ip=90.155.50.34
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
-	Cc:Content-Type:Content-ID:Content-Description;
-	bh=6Oiy0XgmrdblbNNhRhh9uvWEqZS/fcG3BHbMB9gqe6c=; b=MSZfuWqiZiqALtY1MLC6v0WbvH
-	cpxENKVttZkGvUcUnfH3cmXTyHF3n/98pkcgu7CvfrdZYKiuL6WuWY0AZcqinMnfKB+/Rg9Yt95g3
-	yaATLRg4awYZ0QThmGe6xgS2YzYF+UYyqEwCEPwExEhXVXmzZmBTD3aFHGyMiygVIGd7INsNPIXZB
-	HodVYABRpzYthI/nQjlXg9LBoL4JsE/P04Lx7m0sGPt/WKsEAFrYugZyax7C14LGzIuV9ltqZ0Co5
-	htE40im31t6H9LcfAt3wwZLgv0lDLBGf6rVZiWaAiQ0wEjqbxzkg4SJ9PTo72VNEt8wbX4RaIDYD9
-	4qnXWU6Q==;
-Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
-	by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wWbNS-0000000Dtxp-3tSE;
-	Mon, 08 Jun 2026 14:54:59 +0000
-Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.2 #2 (Red Hat Linux))
-	id 1wWbNT-00000000NGv-0Yy9;
-	Mon, 08 Jun 2026 15:54:59 +0100
-From: David Woodhouse <dwmw2@infradead.org>
-To: Paolo Bonzini <pbonzini@redhat.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Sean Christopherson <seanjc@google.com>,
-	Thomas Gleixner <tglx@kernel.org>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	x86@kernel.org,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Vitaly Kuznetsov <vkuznets@redhat.com>,
-	Juergen Gross <jgross@suse.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	David Woodhouse <dwmw2@infradead.org>,
-	Paul Durrant <paul@xen.org>,
-	Jonathan Cameron <jic23@kernel.org>,
-	Sascha Bischoff <Sascha.Bischoff@arm.com>,
-	Marc Zyngier <maz@kernel.org>,
-	Joey Gouly <joey.gouly@arm.com>,
-	Jack Allister <jalliste@amazon.com>,
-	Dongli Zhang <dongli.zhang@oracle.com>,
-	joe.jin@oracle.com,
-	kvm@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	xen-devel@lists.xenproject.org,
-	linux-kselftest@vger.kernel.org
-Subject: [PATCH v5 34/34] KVM: x86: Remove pvclock_gtod_data and private timekeeping code
-Date: Mon,  8 Jun 2026 15:48:15 +0100
-Message-ID: <20260608145455.89187-35-dwmw2@infradead.org>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260608145455.89187-1-dwmw2@infradead.org>
-References: <20260608145455.89187-1-dwmw2@infradead.org>
+	s=arc-20240116; t=1780930408; c=relaxed/simple;
+	bh=aXBtlEnjwFrQKovFyPfzhs9uZjhW40u8HNLp3IKF/LM=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=fmp7vBtOZI0o/FE6gHeHONW7QNbv3hsvYnICf24EsZXgBxQoH1sUTXZy4Hw46S22zfqKbUNZq95bxduvSZgDWIeOd6kZDJ8B8AAONVl9FsT+ACtr8DoIEuxM26WuOUTl7e4FcK8AwcoGk6gkcByPuCiy8+CuqVl9DqH6XiVVddY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=kernel.dk; spf=pass smtp.mailfrom=kernel.dk; dkim=pass (2048-bit key) header.d=kernel-dk.20251104.gappssmtp.com header.i=@kernel-dk.20251104.gappssmtp.com header.b=LS5ktwsI; arc=none smtp.client-ip=209.85.160.50
+Received: by mail-oa1-f50.google.com with SMTP id 586e51a60fabf-43f1f2b82c6so3030989fac.3
+        for <linux-doc@vger.kernel.org>; Mon, 08 Jun 2026 07:53:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=kernel-dk.20251104.gappssmtp.com; s=20251104; t=1780930404; x=1781535204; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=ezWnP2UXKohE5V9tSBhtiAoUtofNw0gKy3ylNXOeXQI=;
+        b=LS5ktwsIwbjkuocNDMmWDEv1Z6U6lJrwQZYoHn3DL+Eo+8EoSe4T50cB0QolIqp9TS
+         QZL2OgNadtSRW1TOtDdPLV7J51fsemuITyBVXJgjja8YiAKpoIw3Evp54AccxHs68Lhu
+         yCcp3oP691G4PbnhOl4awTKooEtEmwKcxKy8FuO4a+ktKNLG+k333K7N9UFPeogR9LWE
+         kKiuR/Z8DDWC31YFJ5B09CPeNFfEQ8ah6QvAb5Sjbs0mhIqpPUXNUA9Wn//LhkyEVE8T
+         Z9thToSn+EiiRT+4ru1NlDn6j+II4OECjNkm+bTtrY8esbxWxJODb2ysQ1w6i5kCW5iv
+         bnXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780930404; x=1781535204;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ezWnP2UXKohE5V9tSBhtiAoUtofNw0gKy3ylNXOeXQI=;
+        b=nNzlZAVJls1YtBEOZEzdYMUXf5euxjWPi5H9zgL/N9fz4/MUsBLKAXh3rLiX+wPJNx
+         6+6hog1uaCIQ2BBNtT5IWqCIuldCvYkTqONKheyqEH2LZ4oYK99bE5yTRAgu5tCAu6pg
+         8tRjorc7Y08fgHX7fVqDySqdv0qnJtJABWhTE0teWzMqcYdKUgnl3KlcyfzM5bQ1mARV
+         ec/+tqPqPnwsf1nByF0+8RZ1K2/yKqIoNZMdID/GSkACsREAqlc1wZgTbCo6iPVil/7Y
+         jkiBp06X/RpDYQPMVrb8+bcFejAR+6peKpNt/oqcJ0YYf65m/ZhKZPy1i1nFsUoves8K
+         7ZFg==
+X-Forwarded-Encrypted: i=1; AFNElJ/hNOvuGq9ntIOnrqgGrdJPmiAiZXFDie94vQG2Xz6TzQpKr5ozRpL/Odh0pK0t/bUsW6hEzUJvFaI=@vger.kernel.org
+X-Gm-Message-State: AOJu0YygL/52kHcpg+uWtDFufgMfU6ZJvfBW8tUqCmVNjjucUHnkdvUo
+	zMrzeNo/o4NSUZfQqjcTCBJTMvBt8DRyssRxsVt3UVxamGFplGgXvx6orikjEAV+RZo=
+X-Gm-Gg: Acq92OHSSCCh4i4Nv919GGyc7+YwtnaiB2kOCXIjT0XHNuaKiBOpwPA/J+UEZU4A8Z9
+	zlLNrrjHV0ZKib+ExW1sP7jieXuN/k9z0cfkdCajRTmumJM/SCBxIGPZvBEMCWwWmHpkcaonIOG
+	9UVifpL39qoLXHTwDghcGJyBm5ugTPqUKZgeR97iGpiBqbZQr0B9Ob1wKZR+HSZ06ob/LXmatx4
+	BbDYh2DF3AF3gYUS2H2wKoTuunbYTBHeNaIZ4gYg5DPh6W0NbdfcgVN/Dj4FfQkJzYiFYc0kO3p
+	T0XM19ZMlYTVt3us/45l1iktKXfUROowNhch7dx8r7OFVJidCiZv5uee08bk4VOP23Qbo4D1Stn
+	KsX+bwYCLvUg1Qq6agmoCPNBcUzdjB3p3wBAL1DBryFqZX1gHDevcgCfG2R9I0o7Go+WXVptQzt
+	20LbhGpjse2zRsF6yOtNiYEoikNDUx+xlsTqeoJeVodmA2XhJ/wWsGVbwgwxbDhW2XpwNdMXGbL
+	amTpWmONgUIrmXRmgJ1
+X-Received: by 2002:a05:6870:d6a7:b0:409:5ef5:be0c with SMTP id 586e51a60fabf-4413d3b4b67mr9871451fac.12.1780930404545;
+        Mon, 08 Jun 2026 07:53:24 -0700 (PDT)
+Received: from [192.168.1.150] ([198.8.77.157])
+        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-440d8295aaasm16163044fac.9.2026.06.08.07.53.22
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 08 Jun 2026 07:53:23 -0700 (PDT)
+Message-ID: <bac50400-dd86-4c7f-bab3-481c1306877b@kernel.dk>
+Date: Mon, 8 Jun 2026 08:53:22 -0600
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/4] block: add configurable error injection
+To: Christoph Hellwig <hch@lst.de>
+Cc: Jonathan Corbet <corbet@lwn.net>, Damien Le Moal <dlemoal@kernel.org>,
+ Hannes Reinecke <hare@suse.de>, Keith Busch <kbusch@kernel.org>,
+ linux-block@vger.kernel.org, linux-doc@vger.kernel.org,
+ Hannes Reinecke <hare@kernel.org>
+References: <20260608051416.1205282-1-hch@lst.de>
+ <20260608051416.1205282-5-hch@lst.de>
+Content-Language: en-US
+From: Jens Axboe <axboe@kernel.dk>
+In-Reply-To: <20260608051416.1205282-5-hch@lst.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=casper.20170209];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[kernel-dk.20251104.gappssmtp.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-91414-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:pbonzini@redhat.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:vkuznets@redhat.com,m:jgross@suse.com,m:boris.ostrovsky@oracle.com,m:dwmw2@infradead.org,m:paul@xen.org,m:jic23@kernel.org,m:Sascha.Bischoff@arm.com,m:maz@kernel.org,m:joey.gouly@arm.com,m:jalliste@amazon.com,m:dongli.zhang@oracle.com,m:joe.jin@oracle.com,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:xen-devel@lists.xenproject.org,m:linux-kselftest@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[27];
-	FORGED_SENDER(0.00)[dwmw2@infradead.org,linux-doc@vger.kernel.org];
+	FORGED_SENDER(0.00)[axboe@kernel.dk,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-91405-lists,linux-doc=lfdr.de];
+	DKIM_TRACE(0.00)[kernel-dk.20251104.gappssmtp.com:+];
 	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[dwmw2@infradead.org,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
+	DMARC_NA(0.00)[kernel.dk];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:hch@lst.de,m:corbet@lwn.net,m:dlemoal@kernel.org,m:hare@suse.de,m:kbusch@kernel.org,m:linux-block@vger.kernel.org,m:linux-doc@vger.kernel.org,m:hare@kernel.org,s:lists@lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[axboe@kernel.dk,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	ALIAS_RESOLVED(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[8];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,infradead.org:dkim,infradead.org:mid,infradead.org:from_mime,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,amazon.co.uk:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,vger.kernel.org:from_smtp,kernel.dk:mid,kernel.dk:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 812A66581C2
+X-Rspamd-Queue-Id: 13B0D6582AE
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+On 6/7/26 11:14 PM, Christoph Hellwig wrote:
+> diff --git a/block/blk.h b/block/blk.h
+> index e8b7d5517086..10df23b2cb90 100644
+> --- a/block/blk.h
+> +++ b/block/blk.h
+> @@ -660,6 +660,18 @@ static inline bool should_fail_request(struct block_device *part,
+>  }
+>  #endif /* CONFIG_FAIL_MAKE_REQUEST */
+>  
+> +void blk_error_injection_init(struct gendisk *disk);
+> +void blk_error_injection_exit(struct gendisk *disk);
+> +bool __blk_error_inject(struct bio *bio);
+> +static inline bool blk_error_inject(struct bio *bio)
+> +{
+> +	if (!IS_ENABLED(CONFIG_BLK_ERROR_INJECTION))
+> +		return false;
+> +	if (!test_bit(GD_ERROR_INJECT, &bio->bi_bdev->bd_disk->state))
+> +		return false;
+> +	return __blk_error_inject(bio);
+> +}
 
-Remove the now-unused KVM-private timekeeping infrastructure:
+I really hate this part, that's a pretty deep set of pointer chasings to
+figure out if injection is enabled or not, when in practice error
+injection is only ever enabled for specific test cases and distros
+invariably will set CONFIG_BLK_ERROR_INJECTION because they turn on
+every damn thing under the sun.
 
- - struct pvclock_clock and struct pvclock_gtod_data
- - update_pvclock_gtod() and its seqcount-protected state copy
- - read_tsc() (KVM's private TSC reader with cycle_last clamping)
- - vgettsc() (KVM's private clocksource interpolation)
- - do_kvmclock_base(), do_monotonic(), do_realtime()
+IOW, that won't fly for the hot path. Maybe a static key would be useful
+here?
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Assisted-by: Kiro:claude-opus-4.6-1m
----
- Documentation/virt/kvm/devices/vcpu.rst       |   4 +-
- arch/x86/kvm/vmx/vmx.c                        |   2 +
- arch/x86/kvm/x86.c                            | 177 +-----------------
- .../testing/selftests/kvm/x86/pvclock_test.c  |   7 +-
- 4 files changed, 9 insertions(+), 181 deletions(-)
-
-diff --git a/Documentation/virt/kvm/devices/vcpu.rst b/Documentation/virt/kvm/devices/vcpu.rst
-index 167aa4140d30..3d1a89c2b4f7 100644
---- a/Documentation/virt/kvm/devices/vcpu.rst
-+++ b/Documentation/virt/kvm/devices/vcpu.rst
-@@ -243,9 +243,9 @@ Returns:
- Specifies the guest's TSC offset relative to the host's TSC. The guest's
- TSC is then derived by the following equation:
- 
--  guest_tsc = ((host_tsc * tsc_scale_ratio) >> tsc_scale_bits) + KVM_VCPU_TSC_OFFSET
-+  guest_tsc = ((host_tsc * tsc_ratio) >> tsc_frac_bits) + KVM_VCPU_TSC_OFFSET
- 
--The values of tsc_scale_ratio and tsc_scale_bits can be obtained using
-+The values of tsc_ratio and tsc_frac_bits can be obtained using
- the KVM_VCPU_TSC_SCALE attribute.
- 
- This attribute is useful to adjust the guest's TSC on live migration,
-diff --git a/arch/x86/kvm/vmx/vmx.c b/arch/x86/kvm/vmx/vmx.c
-index ed207cc7692d..1aaf3924a799 100644
---- a/arch/x86/kvm/vmx/vmx.c
-+++ b/arch/x86/kvm/vmx/vmx.c
-@@ -8674,6 +8674,8 @@ __init int vmx_hardware_setup(void)
- 
- 	if (cpu_has_vmx_tsc_scaling() && boot_cpu_has(X86_FEATURE_CONSTANT_TSC))
- 		kvm_caps.has_tsc_control = true;
-+	else
-+		vmcs_config.cpu_based_2nd_exec_ctrl &= ~SECONDARY_EXEC_TSC_SCALING;
- 
- 	kvm_caps.max_tsc_scaling_ratio = KVM_VMX_TSC_MULTIPLIER_MAX;
- 	kvm_caps.tsc_scaling_ratio_frac_bits = 48;
-diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index 93a428c37847..966057913366 100644
---- a/arch/x86/kvm/x86.c
-+++ b/arch/x86/kvm/x86.c
-@@ -2347,58 +2347,6 @@ static int do_set_msr(struct kvm_vcpu *vcpu, unsigned index, u64 *data)
- 	return kvm_set_msr_ignored_check(vcpu, index, *data, true);
- }
- 
--struct pvclock_clock {
--	int vclock_mode;
--	u64 cycle_last;
--	u64 mask;
--	u32 mult;
--	u32 shift;
--	u64 base_cycles;
--	u64 offset;
--};
--
--struct pvclock_gtod_data {
--	seqcount_t	seq;
--
--	struct pvclock_clock clock; /* extract of a clocksource struct */
--	struct pvclock_clock raw_clock; /* extract of a clocksource struct */
--
--	ktime_t		offs_boot;
--	u64		wall_time_sec;
--};
--
--static struct pvclock_gtod_data pvclock_gtod_data;
--
--static void update_pvclock_gtod(struct timekeeper *tk)
--{
--	struct pvclock_gtod_data *vdata = &pvclock_gtod_data;
--
--	write_seqcount_begin(&vdata->seq);
--
--	/* copy pvclock gtod data */
--	vdata->clock.vclock_mode	= tk->tkr_mono.clock->vdso_clock_mode;
--	vdata->clock.cycle_last		= tk->tkr_mono.cycle_last;
--	vdata->clock.mask		= tk->tkr_mono.mask;
--	vdata->clock.mult		= tk->tkr_mono.mult;
--	vdata->clock.shift		= tk->tkr_mono.shift;
--	vdata->clock.base_cycles	= tk->tkr_mono.xtime_nsec;
--	vdata->clock.offset		= tk->tkr_mono.base;
--
--	vdata->raw_clock.vclock_mode	= tk->tkr_raw.clock->vdso_clock_mode;
--	vdata->raw_clock.cycle_last	= tk->tkr_raw.cycle_last;
--	vdata->raw_clock.mask		= tk->tkr_raw.mask;
--	vdata->raw_clock.mult		= tk->tkr_raw.mult;
--	vdata->raw_clock.shift		= tk->tkr_raw.shift;
--	vdata->raw_clock.base_cycles	= tk->tkr_raw.xtime_nsec;
--	vdata->raw_clock.offset		= tk->tkr_raw.base;
--
--	vdata->wall_time_sec            = tk->xtime_sec;
--
--	vdata->offs_boot		= tk->offs_boot;
--
--	write_seqcount_end(&vdata->seq);
--}
--
- static s64 get_kvmclock_base_ns(void)
- {
- 	/* Count up from boot time, but with the frequency of the raw clock.  */
-@@ -3037,128 +2985,6 @@ static inline void adjust_tsc_offset_host(struct kvm_vcpu *vcpu, s64 adjustment)
- 
- #ifdef CONFIG_X86_64
- 
--static u64 read_tsc(void)
--{
--	u64 ret = (u64)rdtsc_ordered();
--	u64 last = pvclock_gtod_data.clock.cycle_last;
--
--	if (likely(ret >= last))
--		return ret;
--
--	/*
--	 * GCC likes to generate cmov here, but this branch is extremely
--	 * predictable (it's just a function of time and the likely is
--	 * very likely) and there's a data dependence, so force GCC
--	 * to generate a branch instead.  I don't barrier() because
--	 * we don't actually need a barrier, and if this function
--	 * ever gets inlined it will generate worse code.
--	 */
--	asm volatile ("");
--	return last;
--}
--
--static inline u64 vgettsc(struct pvclock_clock *clock, u64 *tsc_timestamp,
--			  int *mode)
--{
--	u64 tsc_pg_val;
--	long v;
--
--	switch (clock->vclock_mode) {
--	case VDSO_CLOCKMODE_HVCLOCK:
--		if (hv_read_tsc_page_tsc(hv_get_tsc_page(),
--					 tsc_timestamp, &tsc_pg_val)) {
--			/* TSC page valid */
--			*mode = VDSO_CLOCKMODE_HVCLOCK;
--			v = (tsc_pg_val - clock->cycle_last) &
--				clock->mask;
--		} else {
--			/* TSC page invalid */
--			*mode = VDSO_CLOCKMODE_NONE;
--		}
--		break;
--	case VDSO_CLOCKMODE_TSC:
--		*mode = VDSO_CLOCKMODE_TSC;
--		*tsc_timestamp = read_tsc();
--		v = (*tsc_timestamp - clock->cycle_last) &
--			clock->mask;
--		break;
--	default:
--		*mode = VDSO_CLOCKMODE_NONE;
--	}
--
--	if (*mode == VDSO_CLOCKMODE_NONE)
--		*tsc_timestamp = v = 0;
--
--	return v * clock->mult;
--}
--
--/*
-- * As with get_kvmclock_base_ns(), this counts from boot time, at the
-- * frequency of CLOCK_MONOTONIC_RAW (hence adding gtos->offs_boot).
-- */
--static int do_kvmclock_base(s64 *t, u64 *tsc_timestamp)
--{
--	struct pvclock_gtod_data *gtod = &pvclock_gtod_data;
--	unsigned long seq;
--	int mode;
--	u64 ns;
--
--	do {
--		seq = read_seqcount_begin(&gtod->seq);
--		ns = gtod->raw_clock.base_cycles;
--		ns += vgettsc(&gtod->raw_clock, tsc_timestamp, &mode);
--		ns >>= gtod->raw_clock.shift;
--		ns += ktime_to_ns(ktime_add(gtod->raw_clock.offset, gtod->offs_boot));
--	} while (unlikely(read_seqcount_retry(&gtod->seq, seq)));
--	*t = ns;
--
--	return mode;
--}
--
--/*
-- * This calculates CLOCK_MONOTONIC at the time of the TSC snapshot, with
-- * no boot time offset.
-- */
--static int do_monotonic(s64 *t, u64 *tsc_timestamp)
--{
--	struct pvclock_gtod_data *gtod = &pvclock_gtod_data;
--	unsigned long seq;
--	int mode;
--	u64 ns;
--
--	do {
--		seq = read_seqcount_begin(&gtod->seq);
--		ns = gtod->clock.base_cycles;
--		ns += vgettsc(&gtod->clock, tsc_timestamp, &mode);
--		ns >>= gtod->clock.shift;
--		ns += ktime_to_ns(gtod->clock.offset);
--	} while (unlikely(read_seqcount_retry(&gtod->seq, seq)));
--	*t = ns;
--
--	return mode;
--}
--
--static int do_realtime(struct timespec64 *ts, u64 *tsc_timestamp)
--{
--	struct pvclock_gtod_data *gtod = &pvclock_gtod_data;
--	unsigned long seq;
--	int mode;
--	u64 ns;
--
--	do {
--		seq = read_seqcount_begin(&gtod->seq);
--		ts->tv_sec = gtod->wall_time_sec;
--		ns = gtod->clock.base_cycles;
--		ns += vgettsc(&gtod->clock, tsc_timestamp, &mode);
--		ns >>= gtod->clock.shift;
--	} while (unlikely(read_seqcount_retry(&gtod->seq, seq)));
--
--	ts->tv_sec += __iter_div_u64_rem(ns, NSEC_PER_SEC, &ns);
--	ts->tv_nsec = ns;
--
--	return mode;
--}
--
- /*
-  * Calculates the kvmclock_base_ns (CLOCK_MONOTONIC_RAW + boot time) and
-  * reports the TSC value from which it do so. Returns true if host is
-@@ -6231,7 +6057,7 @@ static int kvm_arch_tsc_set_attr(struct kvm_vcpu *vcpu,
- 		break;
- 	}
- 	case KVM_VCPU_TSC_SCALE:
--		r = -EINVAL; /* Read only */
-+		r = kvm_caps.has_tsc_control ? -EINVAL : -ENXIO;
- 		break;
- 	default:
- 		r = -ENXIO;
-@@ -10405,7 +10231,6 @@ static int pvclock_gtod_notify(struct notifier_block *nb, unsigned long unused,
- {
- 	struct timekeeper *tk = priv;
- 
--	update_pvclock_gtod(tk);
- 
- #ifdef CONFIG_X86_64
- 	kvm_host_has_tsc_clocksource =
-diff --git a/tools/testing/selftests/kvm/x86/pvclock_test.c b/tools/testing/selftests/kvm/x86/pvclock_test.c
-index aecd62fc8a93..4c1869fa482e 100644
---- a/tools/testing/selftests/kvm/x86/pvclock_test.c
-+++ b/tools/testing/selftests/kvm/x86/pvclock_test.c
-@@ -14,7 +14,6 @@
- #include "test_util.h"
- #include "kvm_util.h"
- #include "processor.h"
--#include "apic.h"
- 
- #include <asm/pvclock-abi.h>
- 
-@@ -262,10 +261,12 @@ int main(int argc, char *argv[])
- 	return 0;
- }
- 
-+static volatile uint32_t vcpu_counter;
-+
- static void guest_code_stable_bit(void)
- {
--	uint32_t apic_id = GET_APIC_ID_FIELD(xapic_read_reg(APIC_ID));
--	uint64_t gpa = KVMCLOCK_GPA + apic_id * sizeof(struct pvclock_vcpu_time_info);
-+	uint32_t idx = __atomic_fetch_add(&vcpu_counter, 1, __ATOMIC_SEQ_CST);
-+	uint64_t gpa = KVMCLOCK_GPA + idx * sizeof(struct pvclock_vcpu_time_info);
- 
- 	wrmsr(MSR_KVM_SYSTEM_TIME_NEW, gpa | KVM_MSR_ENABLED);
- 	GUEST_SYNC(0);
 -- 
-2.54.0
-
+Jens Axboe
 
