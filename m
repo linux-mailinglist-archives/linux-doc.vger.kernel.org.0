@@ -1,274 +1,286 @@
-Return-Path: <linux-doc+bounces-91317-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91320-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 0XbIKwhwJmr8WQIAu9opvQ
-	(envelope-from <linux-doc+bounces-91317-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 09:32:24 +0200
+	id sR8CEtJxJmptWgIAu9opvQ
+	(envelope-from <linux-doc+bounces-91320-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 09:40:02 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0FAA26538F0
-	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 09:32:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B52DE6539FB
+	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 09:40:01 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b="iWU1n/1v";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91317-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91317-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	dkim=pass header.d=huawei.com header.s=dkim header.b="K/bf340R";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91320-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91320-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=huawei.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id A412F301ECC3
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Jun 2026 07:29:47 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id C569F303D2FF
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Jun 2026 07:36:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6D73638E8D4;
-	Mon,  8 Jun 2026 07:29:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0A7643932D8;
+	Mon,  8 Jun 2026 07:36:26 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from canpmsgout04.his.huawei.com (canpmsgout04.his.huawei.com [113.46.200.219])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 45F443358DA;
-	Mon,  8 Jun 2026 07:29:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 959F4313E17;
+	Mon,  8 Jun 2026 07:36:22 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780903786; cv=none; b=UWTxRO1LBER2CFYpvp4PHJBRZAMVRgTJZwwmHRBnvzW21yJ3mIjQPDT+RAvE+b1mj/Ooeogkf87K0+qjZXAKDVMLEswk2BIxS+3wBGqPTCr17IrHK249FumAKaJKXS0UTaCwo2+enUsYonhWqop/LcZyNj9T2NQi7IQQScNPBuI=
+	t=1780904185; cv=none; b=alps2uByRjwXmWVDvAjg8eL+Gtcng45izmhor8nzpGONiGCBRgItdp0Enle1hWuKJh0Q8T1XTEcuQiv68T3nghYC0uSji36FgNo5FmbRozEB4tW32Lu/2OawjZ8TaK9i+0rnsNxe7aqVdLfGMw0Qd7gfQL255mXQgj8BTjCcLqg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780903786; c=relaxed/simple;
-	bh=/bfH0TPZGxm/8vE3q8ekiOvB5tCVXHW1AH3iE72Mheo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=OU49Ob8ZB+iBQrWH53PlxmIkN6J/lp0ARd9DgyDADY9GZ84xArTT4kRkmD7W5cUFx+cjbd1uzDbuP1qk8RH4ZXvfB7eCATxTeeOFe5mpyluOtxhYw4oE2KrmHEDA1KPuAv7Cg6PjTGVzxqOBvMRjMfZCRYqTiD9Jrnl1B3eBysI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iWU1n/1v; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9AD191F00893;
-	Mon,  8 Jun 2026 07:29:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1780903784;
-	bh=ix+o2luyIJ8fd3BbrUCJ3EpMfGnVYFgPUPESUwRjcmc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=iWU1n/1vrRmqh0JmZv+whbB9usIHKqW+/tkhtI8O4Vvcky4fbEdPce/pVD4COljJ9
-	 UlhJkcklaMEAZyZ/qSw1yU4urpML0ZbGz7pNJPzqLMQiVklbQfgFhNsRkDu7cNuPYo
-	 OVj44jVRxTIU5XSN7WmLPpsFCZ+q6yYtLPPUwkE0WFiGTTlxepAboKhUxARrhe39PP
-	 DAVtlWRaArnowXpIGKwUS3rtDhijwbluhFNHry2Lc1XqE46KeWUlb01DoBTsS0PxCw
-	 77J+lo7gPWbX7RT0uT5LqpJ918wMDRiDoUmMG96gPNyu9CJwY5nqm94nbxMsGeT+s7
-	 pgjc3j/AlqGOg==
-Message-ID: <31ba1950-8d08-44b3-8183-58f1e179f0e1@kernel.org>
-Date: Mon, 8 Jun 2026 09:29:41 +0200
+	s=arc-20240116; t=1780904185; c=relaxed/simple;
+	bh=fkMRN8Ivg/s2KJzgRCu7IkWeahsrhtkd9+C/DlR1AhI=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type; b=RByY9T/04kW2ENZrJ7kgZwMbaZW+I/3yogK8Hz2xei8yLFc5DjePk67uNdltQsGybaje36xkEK89sQTUIevm30nbE7Mze/MmjrUjZgEQ8Hs93dSbqBWMiXL2tSKR6f+KnpNvyECozd25OAv1DRwFcrtqLOf1MT2pQ15OB6fy3gU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=K/bf340R; arc=none smtp.client-ip=113.46.200.219
+dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
+	c=relaxed/relaxed; q=dns/txt;
+	h=From;
+	bh=JQ0401oUV/1VolfOdUzchAEXjFGIOJpHTf71w/0/c2s=;
+	b=K/bf340RepdaAwqyvuC/ivSJbK5nA1/Kq2pryuhSJV0+RUx87NdxQ+fWV1GT3V23F7mOYBU2b
+	WCvr38J+zXUe8SuITkiQ4ubN30GOIoMzx7RJGDq4CmEgDODibWEDkAQhblICyT8XmypuVH9gOod
+	vbG/nCNFU5/bBWd3K/0XOtU=
+Received: from mail.maildlp.com (unknown [172.19.162.140])
+	by canpmsgout04.his.huawei.com (SkyGuard) with ESMTPS id 4gYkD355lDz1prLy;
+	Mon,  8 Jun 2026 15:28:19 +0800 (CST)
+Received: from dggpemf500011.china.huawei.com (unknown [7.185.36.131])
+	by mail.maildlp.com (Postfix) with ESMTPS id 319D4202E6;
+	Mon,  8 Jun 2026 15:36:15 +0800 (CST)
+Received: from huawei.com (10.90.53.73) by dggpemf500011.china.huawei.com
+ (7.185.36.131) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Mon, 8 Jun
+ 2026 15:36:11 +0800
+From: Jinjie Ruan <ruanjinjie@huawei.com>
+To: <corbet@lwn.net>, <skhan@linuxfoundation.org>, <catalin.marinas@arm.com>,
+	<will@kernel.org>, <chenhuacai@kernel.org>, <kernel@xen0n.name>,
+	<maddy@linux.ibm.com>, <mpe@ellerman.id.au>, <npiggin@gmail.com>,
+	<chleroy@kernel.org>, <pjw@kernel.org>, <palmer@dabbelt.com>,
+	<aou@eecs.berkeley.edu>, <alex@ghiti.fr>, <tglx@kernel.org>,
+	<mingo@redhat.com>, <bp@alien8.de>, <dave.hansen@linux.intel.com>,
+	<hpa@zytor.com>, <robh@kernel.org>, <saravanak@kernel.org>,
+	<akpm@linux-foundation.org>, <bhe@redhat.com>, <rppt@kernel.org>,
+	<pasha.tatashin@soleen.com>, <pratyush@kernel.org>, <ruirui.yang@linux.dev>,
+	<rdunlap@infradead.org>, <peterz@infradead.org>,
+	<feng.tang@linux.alibaba.com>, <dapeng1.mi@linux.intel.com>,
+	<kees@kernel.org>, <elver@google.com>, <kuba@kernel.org>,
+	<lirongqing@baidu.com>, <ebiggers@kernel.org>, <paulmck@kernel.org>,
+	<ruanjinjie@huawei.com>, <leitao@debian.org>, <coxu@redhat.com>,
+	<Liam.Howlett@oracle.com>, <ryan.roberts@arm.com>, <osandov@fb.com>,
+	<jbohac@suse.cz>, <cfsworks@gmail.com>, <tangyouling@kylinos.cn>,
+	<sourabhjain@linux.ibm.com>, <ritesh.list@gmail.com>,
+	<adityag@linux.ibm.com>, <liaoyuanhong@vivo.com>, <seanjc@google.com>,
+	<fuqiang.wang@easystack.cn>, <ardb@kernel.org>, <chenjiahao16@huawei.com>,
+	<guoren@kernel.org>, <x86@kernel.org>, <linux-doc@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
+	<loongarch@lists.linux.dev>, <linuxppc-dev@lists.ozlabs.org>,
+	<linux-riscv@lists.infradead.org>, <devicetree@vger.kernel.org>,
+	<kexec@lists.infradead.org>
+Subject: [PATCH v16 00/10] arm64/riscv: Add support for crashkernel CMA reservation
+Date: Mon, 8 Jun 2026 15:34:49 +0800
+Message-ID: <20260608073459.3119290-1-ruanjinjie@huawei.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] docs/mm: document slab cache isolation with SLAB_NO_MERGE
-Content-Language: en-US
-To: Matthew Wilcox <willy@infradead.org>,
- Mohammed EL Kadiri <med08elkadiri@gmail.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>,
- Vlastimil Babka <vbabka@suse.cz>, David Hildenbrand <david@redhat.com>,
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- Jonathan Corbet <corbet@lwn.net>, Kees Cook <kees@kernel.org>,
- linux-mm@kvack.org, linux-doc@vger.kernel.org,
- linux-hardening@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260606155856.15548-1-med08elkadiri@gmail.com>
- <aiSAuP-qEhH_RoCn@casper.infradead.org>
-From: "Vlastimil Babka (SUSE)" <vbabka@kernel.org>
-Autocrypt: addr=vbabka@kernel.org; keydata=
- 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
-In-Reply-To: <aiSAuP-qEhH_RoCn@casper.infradead.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: kwepems200002.china.huawei.com (7.221.188.68) To
+ dggpemf500011.china.huawei.com (7.185.36.131)
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [0.34 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64];
+	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-91320-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:willy@infradead.org,m:med08elkadiri@gmail.com,m:akpm@linux-foundation.org,m:vbabka@suse.cz,m:david@redhat.com,m:lorenzo.stoakes@oracle.com,m:corbet@lwn.net,m:kees@kernel.org,m:linux-mm@kvack.org,m:linux-doc@vger.kernel.org,m:linux-hardening@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[infradead.org,gmail.com];
-	FORGED_SENDER(0.00)[vbabka@kernel.org,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-91317-lists,linux-doc=lfdr.de];
-	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:catalin.marinas@arm.com,m:will@kernel.org,m:chenhuacai@kernel.org,m:kernel@xen0n.name,m:maddy@linux.ibm.com,m:mpe@ellerman.id.au,m:npiggin@gmail.com,m:chleroy@kernel.org,m:pjw@kernel.org,m:palmer@dabbelt.com,m:aou@eecs.berkeley.edu,m:alex@ghiti.fr,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:hpa@zytor.com,m:robh@kernel.org,m:saravanak@kernel.org,m:akpm@linux-foundation.org,m:bhe@redhat.com,m:rppt@kernel.org,m:pasha.tatashin@soleen.com,m:pratyush@kernel.org,m:ruirui.yang@linux.dev,m:rdunlap@infradead.org,m:peterz@infradead.org,m:feng.tang@linux.alibaba.com,m:dapeng1.mi@linux.intel.com,m:kees@kernel.org,m:elver@google.com,m:kuba@kernel.org,m:lirongqing@baidu.com,m:ebiggers@kernel.org,m:paulmck@kernel.org,m:ruanjinjie@huawei.com,m:leitao@debian.org,m:coxu@redhat.com,m:Liam.Howlett@oracle.com,m:ryan.roberts@arm.com,m:osandov@fb.com,m:jbohac@suse.cz,m:cfsworks@gmail.com,m:tangyou
+ ling@kylinos.cn,m:sourabhjain@linux.ibm.com,m:ritesh.list@gmail.com,m:adityag@linux.ibm.com,m:liaoyuanhong@vivo.com,m:seanjc@google.com,m:fuqiang.wang@easystack.cn,m:ardb@kernel.org,m:chenjiahao16@huawei.com,m:guoren@kernel.org,m:x86@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:loongarch@lists.linux.dev,m:linuxppc-dev@lists.ozlabs.org,m:linux-riscv@lists.infradead.org,m:devicetree@vger.kernel.org,m:kexec@lists.infradead.org,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DKIM_TRACE(0.00)[huawei.com:+];
+	FORGED_SENDER(0.00)[ruanjinjie@huawei.com,linux-doc@vger.kernel.org];
+	FREEMAIL_TO(0.00)[lwn.net,linuxfoundation.org,arm.com,kernel.org,xen0n.name,linux.ibm.com,ellerman.id.au,gmail.com,dabbelt.com,eecs.berkeley.edu,ghiti.fr,redhat.com,alien8.de,linux.intel.com,zytor.com,linux-foundation.org,soleen.com,linux.dev,infradead.org,linux.alibaba.com,google.com,baidu.com,huawei.com,debian.org,oracle.com,fb.com,suse.cz,kylinos.cn,vivo.com,easystack.cn,vger.kernel.org,lists.infradead.org,lists.linux.dev,lists.ozlabs.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[vbabka@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[ruanjinjie@huawei.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	RCPT_COUNT_GT_50(0.00)[64];
+	TO_DN_NONE(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[]
+	MIME_TRACE(0.00)[0:+]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 0FAA26538F0
+X-Rspamd-Queue-Id: B52DE6539FB
 
-On 6/6/26 22:19, Matthew Wilcox wrote:
-> On Sat, Jun 06, 2026 at 04:58:55PM +0100, Mohammed EL Kadiri wrote:
->> +The SLUB allocator merges slab caches with compatible size, alignment, and
-> 
-> More of a question for Vlastimil ... do we want to continue to
-> distinguish between slab (the API) and SLUB (the implementation)?
-> I don't think we ever want to go back to a situation where we have
-> multiple competing implementations of the slab API in the kernel.
-> So shouldn't we deprecate uses of SLUB, particularly in the
-> documentation?
+The crash memory allocation, and the exclude of crashk_res, crashk_low_res
+and crashk_cma memory are almost identical across different architectures,
+This patch set handle them in crash core in a general way, which eliminate
+a lot of duplication code.
 
-Indeed, any new stuff should talk about the slab allocator, with old stuff
-can be converted if touched for other reasons.
+And add support for crashkernel CMA reservation for arm64 and riscv.
 
->> +flags to reduce memory fragmentation. While this improves memory efficiency,
->> +it allows objects of different types to share the same slab pages. This
-> 
-> s/ pages//
-> 
->> +enables cross-cache heap exploitation, where a use-after-free in one object
->> +type can be leveraged to corrupt an unrelated type.
->> +
->> +The `SLAB_NO_MERGE` flag prevents a cache from being merged, ensuring it
->> +receives dedicated slab pages.
-> 
-> s/slab pages/a dedicated slab/
-> 
->> +2. *Actually mergeable*: The cache must not already be unmergeable.
->> +   A cache is already unmergeable if any of the following is true:
->> +
->> +   - It has a constructor (`ctor` argument is non-NULL).
->> +   - It has a non-zero `usersize` (with `CONFIG_HARDENED_USERCOPY`).
->> +   - It already has `SLAB_NO_MERGE` or another `SLAB_NEVER_MERGE` flag.
-> 
-> I don't know if this is good advice for users of the API.  It's true
-> that the slab will already be unmergable for these other reasons, but
-> it's harmless to specify SLAB_NO_MERGE in that case.  And it
-> communicates intent.  And in case somebody removes the ctor in the
-> future, or we decide to change which flags are in SLAB_NEVER_MERGE,
-> the slab will still be unmergable.
+This patch set is rebased on v7.1-rc1.
 
-Agreed.
+Basic second kernel boot test were performed on QEMU platforms for x86,
+ARM64 and RISC-V architectures with the following parameters:
 
->> +3. *Bounded allocation volume*: The cache has a predictable number of
->> +   active objects, so the memory cost of dedicated slab pages is
->> +   acceptable.
-> 
-> I don't understand why this is a criteria.
+        "cma=256M crashkernel=4G crashkernel=64M,cma"
 
-+1
+For first kernel, there will be such log:
 
->> +How merging works
->> +=================
->> +
->> +When `kmem_cache_create()` is called:
->> +
->> +1. If `usersize` is non-zero, the merge path is skipped entirely.
->> +
->> +2. Otherwise, `find_mergeable()` in `mm/slab_common.c` searches for a
->> +   compatible existing cache. A merge is prevented if:
->> +
->> +   - The `slab_nomerge` boot parameter is set
->> +   - The new cache has a constructor
->> +   - The new cache's flags include `SLAB_NO_MERGE`
->> +   - No existing cache has compatible size and flags
->> +
->> +3. If a compatible cache is found, the new cache becomes an alias. Both
->> +   share the same slab pages.
-> 
-> This feels like documenting internals rather than documenting how to use
-> the flag.  I'd drop it entirely.
+        # dmesg | grep crash
+        [    0.000000] crashkernel low memory reserved: 0xe8000000 - 0xf0000000 (128 MB)
+        [    0.000000] crashkernel reserved: 0x000000023e600000 - 0x000000033e600000 (4096 MB)
+        [    0.000000] crashkernel CMA reserved: 64 MB in 1 ranges
 
-+1
+        # dmesg | grep cma
+        [    0.000000] cma: Reserved 256 MiB at 0x00000000f0000000
+        [    0.000000] cma: Reserved 64 MiB at 0x0000000100000000
 
->> +The cross-cache attack class
->> +=============================
->> +
->> +Cross-cache attacks exploit slab merging to achieve type confusion:
->> +
->> +1. Attacker triggers a use-after-free in object type A.
->> +2. Type A's cache is merged with type B (they share slab pages).
->> +3. The freed type A slot is reallocated as type B.
->> +4. Attacker uses the dangling pointer to corrupt type B.
->> +5. Privilege escalation.
->> +
->> +CVE-2022-29582 demonstrates this technique: an io_uring use-after-free is
->> +exploited via cross-cache page-level reallocation to achieve root.
->> +
->> +`SLAB_NO_MERGE` prevents step 2: dedicated pages mean a freed slot of
->> +one type cannot be reallocated as a different type.
-> 
-> Not sure this section adds anything to what was already described.
-> 
->> +Tradeoffs
->> +=========
->> +
->> +*Memory*: Isolated caches may have partially-filled slab pages that
->> +cannot be used by other types. For caches with bounded allocation counts,
->> +this is typically a few extra pages.
->> +
->> +*Performance*: Zero impact on `kmem_cache_alloc()` and
->> +`kmem_cache_free()`. The only effect is at boot when the cache is
->> +created.
->> +
->> +Relationship to other mitigations
->> +==================================
->> +
->> +`CONFIG_RANDOM_KMALLOC_CACHES`
->> +    Creates 16 copies of each `kmalloc` size class and randomly assigns
->> +    allocations among them. Only affects `kmalloc()` users. Does not
->> +    affect named caches created with `kmem_cache_create()`.
->> +
->> +`SLAB_TYPESAFE_BY_RCU`
->> +    Delays freeing the slab page by an RCU grace period. Does not delay
->> +    object slot reuse. Does not prevent cross-cache merging. Solves a
->> +    different problem: safe lockless access to freed-and-reallocated
->> +    objects of the same type.
->> +
->> +`slab_nomerge` boot parameter
->> +    Disables merging for all caches globally. `SLAB_NO_MERGE` provides
->> +    the same protection selectively for individual caches without the
->> +    global memory cost.
-> 
-> These two sections also feel unnecessary.
+For second kernel, there will be such log:
 
-Many "product of LLM" hallmarks, sigh.
+        [    0.000000] OF: fdt: Looking for usable-memory-range property...
+        [    0.000000] OF: fdt: cap_mem_regions[0]: base=0x000000023e600000, size=0x0000000100000000
+        [    0.000000] OF: fdt: cap_mem_regions[1]: base=0x00000000e8000000, size=0x0000000008000000
+        [    0.000000] OF: fdt: cap_mem_regions[2]: base=0x0000000100000000, size=0x0000000004000000
+
+Changes in v16:
+- Split out the unrelated bugfixes as Baoquan suggested, which will
+  be a separate patch set later.
+- Link to v15: https://lore.kernel.org/all/20260601094805.2928614-1-ruanjinjie@huawei.com/
+
+Changes in v15:
+- Unify the subject prefix formats as Huacai suggested.
+- Fix powerpc pre-existing NULL pointer dereference [Sashiko [1]]
+- Fix powerpc pre-existing __merge_memory_ranges() memory range
+  truncation [Sashiko [1]].
+- Fix pre-existing arm64 CMA page leaks [Sashiko[2]].
+- Fix pre-existing crash_load_dm_crypt_keys() Use-After-Free and
+  Double Free issue [Sashiko[3]].
+- Fix vfree(headers) and uninitialized variables issue
+  and simplify the fix [Sashiko[2]].
+- As walk_system_ram_res() and for_each_mem_range() use different
+  lock, unify and simplify the fix of TOCTOU buffer overflow via memory
+  region padding [Sashiko[4]].
+- Fix the arm64 crash dump issues in Sashiko[5].
+- Link to v14: https://lore.kernel.org/all/20260525084932.934910-1-ruanjinjie@huawei.com/
+
+[1]: https://lore.kernel.org/all/20260525092207.96B9D1F000E9@smtp.kernel.org/
+[2]: https://lore.kernel.org/all/20260525091149.1A1E01F00A3D@smtp.kernel.org/
+[3]: https://lore.kernel.org/all/20260525105227.3C2421F000E9@smtp.kernel.org/
+[4]: https://lore.kernel.org/all/20260525095447.944E11F000E9@smtp.kernel.org/
+[5]: https://lore.kernel.org/all/20260525101746.9959D1F000E9@smtp.kernel.org/
+
+Changes in v14:
+- Fix image->elf_headers memory leak during retry loop for arm64 as Sashiko
+  AI code review pointed out.
+- Solve the hotplug notifier arch_crash_handle_hotplug_event() AA
+  self-deadlock problem as Sashiko AI code review pointed out.
+- Fix the TOCTOU issue in prepare_elf_headers() by get_online_mems().
+- -ENOMEM -> -EAGAIN as Breno suggested.
+- Add support for arm64 crash hotplug.
+- Link to v13: https://lore.kernel.org/all/20260511030454.1730881-1-ruanjinjie@huawei.com/
+
+Changes in v13:
+- Rebased on v7.1-rc1.
+- Update the commit message.
+- Add Reviewed-by.
+- Link to v12: https://lore.kernel.org/all/20260402072701.628293-1-ruanjinjie@huawei.com/
+
+Changes in v12:
+- Remove the unused "nr_mem_ranges" for x86.
+- Add "Fix crashk_low_res not exclude bug" test log.
+- Provide a separate patch for each architecture for using
+  crash_prepare_headers(), which will make the review more convenient.
+- Add Reviewed-by and Tested-by.
+- Link to v11: https://lore.kernel.org/all/20260328074013.3589544-1-ruanjinjie@huawei.com/
+
+Changes in v11:
+- Avoid silently drop crash memory if the crash kernel is built without
+  CONFIG_CMA.
+- Remove unnecessary "cmem->nr_ranges = 0" for arch_crash_populate_cmem()
+  as we use kvzalloc().
+- Provide a separate patch for each architecture to fix the existing
+  buffer overflow issue.
+- Add Acked-bys for arm64.
+
+Changes in v10:
+- Fix crashk_low_res not excluded bug in the existing
+  RISC-V code.
+- Fix an existing memory leak issue in the existing PowerPC code.
+- Fix the ordering issue of adding CMA ranges to
+  "linux,usable-memory-range".
+- Fix an existing concurrency issue. A Concurrent memory hotplug may occur
+  between reading memblock and attempting to fill cmem during kexec_load()
+  for almost all existing architectures.
+- Link to v9: https://lore.kernel.org/all/20260323072745.2481719-1-ruanjinjie@huawei.com/
+
+Changes in v9:
+- Collect Reviewed-by and Acked-by, and prepare for Sashiko AI review.
+- Link to v8: https://lore.kernel.org/all/20260302035315.3892241-1-ruanjinjie@huawei.com/
+
+Changes in v8:
+- Fix the build issues reported by kernel test robot and Sourabh.
+- Link to v7: https://lore.kernel.org/all/20260226130437.1867658-1-ruanjinjie@huawei.com/
+
+Changes in v7:
+- Correct the inclusion of CMA-reserved ranges for kdump kernel in of/kexec
+  for arm64 and riscv.
+- Add Acked-by.
+- Link to v6: https://lore.kernel.org/all/20260224085342.387996-1-ruanjinjie@huawei.com/
+
+Changes in v6:
+- Update the crash core exclude code as Mike suggested.
+- Rebased on v7.0-rc1.
+- Add acked-by.
+- Link to v5: https://lore.kernel.org/all/20260212101001.343158-1-ruanjinjie@huawei.com/
+
+Jinjie Ruan (9):
+  riscv: kexec_file: Fix crashk_low_res not exclude bug
+  crash: Add crash_prepare_headers() to exclude crash kernel memory
+  arm64: kexec_file: Use crash_prepare_headers() helper to simplify code
+  x86: kexec_file: Use crash_prepare_headers() helper to simplify code
+  riscv: kexec_file: Use crash_prepare_headers() helper to simplify code
+  LoongArch: kexec_file: Use crash_prepare_headers() helper to simplify
+    code
+  powerpc/kexec_file: Use crash_exclude_core_ranges() helper
+  arm64: kexec_file: Add support for crashkernel CMA reservation
+  riscv: kexec_file: Add support for crashkernel CMA reservation
+
+Sourabh Jain (1):
+  powerpc/crash: sort crash memory ranges before preparing elfcorehdr
+
+ .../admin-guide/kernel-parameters.txt         |  16 +--
+ arch/arm64/kernel/machine_kexec_file.c        |  40 +++----
+ arch/arm64/mm/init.c                          |   5 +-
+ arch/loongarch/kernel/machine_kexec_file.c    |  40 +++----
+ arch/powerpc/include/asm/kexec_ranges.h       |   1 -
+ arch/powerpc/kexec/crash.c                    |   5 +-
+ arch/powerpc/kexec/ranges.c                   | 101 +-----------------
+ arch/riscv/kernel/machine_kexec_file.c        |  39 +++----
+ arch/riscv/mm/init.c                          |   5 +-
+ arch/x86/kernel/crash.c                       |  89 ++-------------
+ drivers/of/fdt.c                              |   9 +-
+ drivers/of/kexec.c                            |   9 ++
+ include/linux/crash_core.h                    |   9 ++
+ include/linux/crash_reserve.h                 |   4 +-
+ kernel/crash_core.c                           |  89 ++++++++++++++-
+ 15 files changed, 180 insertions(+), 281 deletions(-)
+
+-- 
+2.34.1
+
 
