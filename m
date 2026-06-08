@@ -1,513 +1,257 @@
-Return-Path: <linux-doc+bounces-91403-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91440-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id NQxlG5DaJmqElwIAu9opvQ
-	(envelope-from <linux-doc+bounces-91403-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 17:06:56 +0200
+	id j5/JOAHhJmoQmQIAu9opvQ
+	(envelope-from <linux-doc+bounces-91440-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 17:34:25 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id C7339657D1A
-	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 17:06:55 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 671F7658236
+	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 17:34:25 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=intel.com header.s=Intel header.b=Vt6nSzLw;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91403-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91403-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=intel.com;
+	dkim=pass header.d=infradead.org header.s=desiato.20200630 header.b=P9MXUoXj;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91440-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-91440-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=infradead.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 199D530A9B29
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Jun 2026 14:48:39 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 18F223155CA1
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Jun 2026 15:20:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D392A3EDAA6;
-	Mon,  8 Jun 2026 14:42:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E93FB404BDA;
+	Mon,  8 Jun 2026 14:55:51 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
+Received: from desiato.infradead.org (desiato.infradead.org [90.155.92.199])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08F053ED3D1;
-	Mon,  8 Jun 2026 14:42:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A49147AF5C;
+	Mon,  8 Jun 2026 14:55:43 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780929726; cv=none; b=twci+Qzm5YLyXjl4H2vHSUcSpg+qWEqEMamlC9dcRCB6IeiX1m1McmSxgz5W1t8650WarfJ28opSsP/F8HXYZ+Nham7Z+2GHoQLT5dWUNaxYfk735/FBdUKT6Dn7E1aSaL4uf8gRclAVzrDGBM6pDJokehlutf+SREcJvfCrAzA=
+	t=1780930551; cv=none; b=XZy2QJq2FRAMZPLSlWQizG4GdVbsPXmRBLbqaY0R5QeRlUp4jcHwH5yp43GyShkJuuXG9cJ121AWARtAnJYQ4N0M9rTg6QkafD3yEpLdsgqwPe+vWsedrrqohSmOomaLmuXBCsQk1jhriSUxHJaTpSMC0pEPGbPO3FZyJ62+ItY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780929726; c=relaxed/simple;
-	bh=bQnjw8Hx1IqtoHLpCnJcbj+gWfTkk+uI5LpD51OhvKg=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=UWzL3J6wNJIMjD1U4OJ8r/xJS7GouGjW7Qs+c9DVw/puj1KW1JNhk9i2mfwShXTM+3rMx9wlWAprDIKfEx+PDfS37aE6NOAij62HPKu30uZD9EzUgpQYj2EIj+kw5sXasS9RBMfr/SP/5ARHxrOeQaI15N5zlpxNNbv+oW0a2OI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Vt6nSzLw; arc=none smtp.client-ip=198.175.65.19
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1780929725; x=1812465725;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=bQnjw8Hx1IqtoHLpCnJcbj+gWfTkk+uI5LpD51OhvKg=;
-  b=Vt6nSzLwSnJjpV8LSfDPXFOf4OZirw/mf+gAuYain7CEf9LuOc/jQlKa
-   ig9tcOfygrd/NgEE+KN34LiPFT7J8+Hxn4R1a0V3RWE/PyRbBkb8jkMDu
-   Kk1inyh2iXx/LY5WfBZmlt7EWFXVwi6h7y4TNhgmLjDLMZ2mGDgVu9ioB
-   qW6pgWFcePG6TFv9oIpGky4c2SrDdJvLafgiBVIH+uhgCYos87wKIf74z
-   6veo/w30jnCpQ/fQqXsdR5pixuilzJPhLn1lejlH7eNZ6XtwnbeCfVLGC
-   fPNNGLcEdsIYbJ/5tcitJtYR7hFUeNwFtHANwjSdpAa2GKNOLkoAeKLeN
-   A==;
-X-CSE-ConnectionGUID: oMFFQ6mYQ4KhBWqM+CqK/w==
-X-CSE-MsgGUID: tiPjM1lbTVWUbckVhp+gHg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11811"; a="81642066"
-X-IronPort-AV: E=Sophos;i="6.24,194,1774335600"; 
-   d="scan'208";a="81642066"
-Received: from orviesa003.jf.intel.com ([10.64.159.143])
-  by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Jun 2026 07:42:04 -0700
-X-CSE-ConnectionGUID: fzklD/8mQrqP0gU1ci+x/g==
-X-CSE-MsgGUID: 5szjxRaERC23iJE9btjSEQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.24,194,1774335600"; 
-   d="scan'208";a="249489781"
-Received: from irvmail002.ir.intel.com ([10.43.11.120])
-  by orviesa003.jf.intel.com with ESMTP; 08 Jun 2026 07:41:58 -0700
-Received: from mglak.igk.intel.com (mglak.igk.intel.com [10.237.112.146])
-	by irvmail002.ir.intel.com (Postfix) with ESMTP id 059BB28791;
-	Mon,  8 Jun 2026 15:41:55 +0100 (IST)
-From: Larysa Zaremba <larysa.zaremba@intel.com>
-To: intel-wired-lan@lists.osuosl.org,
-	Tony Nguyen <anthony.l.nguyen@intel.com>
-Cc: aleksander.lobakin@intel.com,
-	sridhar.samudrala@intel.com,
-	Michal Swiatkowski <michal.swiatkowski@linux.intel.com>,
-	Larysa Zaremba <larysa.zaremba@intel.com>,
-	"Fijalkowski, Maciej" <maciej.fijalkowski@intel.com>,
-	Emil Tantilov <emil.s.tantilov@intel.com>,
-	Madhu Chittim <madhu.chittim@intel.com>,
-	Josh Hay <joshua.a.hay@intel.com>,
-	"Keller, Jacob E" <jacob.e.keller@intel.com>,
-	jayaprakash.shanmugam@intel.com,
-	Jiri Pirko <jiri@resnulli.us>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Simon Horman <horms@kernel.org>,
+	s=arc-20240116; t=1780930551; c=relaxed/simple;
+	bh=U0Off8Gt4aUWFvtQ+Z2BLcCThTzMu2R19NdWYIh4/bg=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type; b=FQAHJwIqrh4IvqxVdJLZ7f5YIVggfts7E2VSAesa6oHni/33/tCK3fvie68FXM0dIJ9pt2W2Zm67sMVAIiGg6qsC1lip3AV3hZmJxV4QvK8bAv2NryF/+MqA1K1MMWL6t2RmQR0lAj9rsp1RlfYOvVX0fOaylFIccnUdq4/WtRs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=desiato.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=P9MXUoXj; arc=none smtp.client-ip=90.155.92.199
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:Message-ID:Date:Subject:To:From:Reply-To:Cc:
+	Content-ID:Content-Description:In-Reply-To:References;
+	bh=TgKl1KOO3MJY6Y2LA+lrNOwCy2WWSJSUW1q+Go58VwI=; b=P9MXUoXj7e3DhrM2y3IHOHq84j
+	Dep6NROhhD5T6eCTvYbJKAS+eTglb9s+jKSn6uVmst9s5JTyCVQV9f14aN3sUIGo79+gzb2WHc7YU
+	E/8Zq1W/ZqewrUv9ui/cszWJWLCs6e2QqNUl7nvYGE9dtX/H7iRVy930wxbzjbHuzIfv0YVWsdSey
+	iZDAnFMYmwzQ3frOMg9RCyIqvH8dapfKqWvZL6LU/mPacHRped/qRnvVQbUDpKDMTuzG2/7idCnTT
+	wdfpfALh8+kMdn0kKQZPa5Ce4FWQMNt14NCd8ogagcqSIYCifP5t8FEZENqDYEFTlW4j9MeiChGsp
+	mPromYJw==;
+Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
+	by desiato.infradead.org with esmtpsa (Exim 4.99.2 #2 (Red Hat Linux))
+	id 1wWbNU-00000001Afw-2M3l;
+	Mon, 08 Jun 2026 14:55:00 +0000
+Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.2 #2 (Red Hat Linux))
+	id 1wWbNR-00000000NEV-1CLO;
+	Mon, 08 Jun 2026 15:54:57 +0100
+From: David Woodhouse <dwmw2@infradead.org>
+To: Paolo Bonzini <pbonzini@redhat.com>,
 	Jonathan Corbet <corbet@lwn.net>,
-	Richard Cochran <richardcochran@gmail.com>,
-	Przemek Kitszel <przemyslaw.kitszel@intel.com>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	netdev@vger.kernel.org,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Sean Christopherson <seanjc@google.com>,
+	Thomas Gleixner <tglx@kernel.org>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Vitaly Kuznetsov <vkuznets@redhat.com>,
+	Juergen Gross <jgross@suse.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	David Woodhouse <dwmw2@infradead.org>,
+	Paul Durrant <paul@xen.org>,
+	Jonathan Cameron <jic23@kernel.org>,
+	Sascha Bischoff <Sascha.Bischoff@arm.com>,
+	Marc Zyngier <maz@kernel.org>,
+	Joey Gouly <joey.gouly@arm.com>,
+	Jack Allister <jalliste@amazon.com>,
+	Dongli Zhang <dongli.zhang@oracle.com>,
+	joe.jin@oracle.com,
+	kvm@vger.kernel.org,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Bharath R <Bharath.r@intel.com>
-Subject: [PATCH iwl-next v8 15/15] ixd: add devlink support
-Date: Mon,  8 Jun 2026 16:41:20 +0200
-Message-ID: <20260608144127.2751230-16-larysa.zaremba@intel.com>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20260608144127.2751230-1-larysa.zaremba@intel.com>
-References: <20260608144127.2751230-1-larysa.zaremba@intel.com>
+	xen-devel@lists.xenproject.org,
+	linux-kselftest@vger.kernel.org
+Subject: [PATCH v5 00/34] Cleaning up the KVM clock mess
+Date: Mon,  8 Jun 2026 15:47:41 +0100
+Message-ID: <20260608145455.89187-1-dwmw2@infradead.org>
+X-Mailer: git-send-email 2.54.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Sender: David Woodhouse <dwmw2@infradead.org>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.84 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+X-Spamd-Result: default: False [-1.16 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=desiato.20200630];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-91403-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[26];
-	FREEMAIL_CC(0.00)[intel.com,linux.intel.com,resnulli.us,davemloft.net,google.com,kernel.org,redhat.com,lwn.net,gmail.com,lunn.ch,vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-91440-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[27];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:pbonzini@redhat.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:vkuznets@redhat.com,m:jgross@suse.com,m:boris.ostrovsky@oracle.com,m:dwmw2@infradead.org,m:paul@xen.org,m:jic23@kernel.org,m:Sascha.Bischoff@arm.com,m:maz@kernel.org,m:joey.gouly@arm.com,m:jalliste@amazon.com,m:dongli.zhang@oracle.com,m:joe.jin@oracle.com,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:xen-devel@lists.xenproject.org,m:linux-kselftest@vger.kernel.org,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[dwmw2@infradead.org,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:intel-wired-lan@lists.osuosl.org,m:anthony.l.nguyen@intel.com,m:aleksander.lobakin@intel.com,m:sridhar.samudrala@intel.com,m:michal.swiatkowski@linux.intel.com,m:larysa.zaremba@intel.com,m:maciej.fijalkowski@intel.com,m:emil.s.tantilov@intel.com,m:madhu.chittim@intel.com,m:joshua.a.hay@intel.com,m:jacob.e.keller@intel.com,m:jayaprakash.shanmugam@intel.com,m:jiri@resnulli.us,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:horms@kernel.org,m:corbet@lwn.net,m:richardcochran@gmail.com,m:przemyslaw.kitszel@intel.com,m:andrew+netdev@lunn.ch,m:netdev@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:Bharath.r@intel.com,m:andrew@lunn.ch,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[larysa.zaremba@intel.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[larysa.zaremba@intel.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+];
-	RCVD_COUNT_FIVE(0.00)[6];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[dwmw2@infradead.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[infradead.org:+];
 	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:dkim,intel.com:email,intel.com:mid,intel.com:from_mime,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp]
+	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,infradead.org:dkim,infradead.org:mid,infradead.org:from_mime,xen-hypercalls.sh:url]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: C7339657D1A
+X-Rspamd-Queue-Id: 671F7658236
 
-From: Amritha Nambiar <amritha.nambiar@intel.com>
+This is v5 of the series to clean up the KVM clock, rebased onto
+tip/timers/ptp (which now includes Thomas's ktime snapshot series and
+the read_snapshot patches for hyperv, kvmclock, and vmclock).
 
-Enable initial support for the devlink interface with the ixd driver. The
-ixd hardware is a single function PCIe device. So, the PCIe adapter gets
-its own devlink instance to manage device-wide resources or configuration.
+The KVM clock has historically suffered from three problems:
 
-$ devlink dev show
-pci/0000:83:00.6
+ 1. Imprecision: get_kvmclock_ns() computed the clock from the *host*
+    TSC without applying guest TSC scaling, causing systemic drift from
+    the values the guest computes from its own TSC.
 
-$ devlink dev info pci/0000:83:00.6
-pci/0000:83:00.6:
-  driver ixd
-  serial_number 00-a0-c9-ff-ff-23-45-67
-  versions:
-      fixed:
-        device.type MEV
-      running:
-        virtchnl 2.0
+ 2. Unnecessary discontinuities: gratuitous KVM_REQ_MASTERCLOCK_UPDATE
+    requests caused the master clock reference point to be re-snapshotted,
+    yanking the guest's clock due to arithmetic precision differences.
 
-Signed-off-by: Amritha Nambiar <amritha.nambiar@intel.com>
-Reviewed-by: Michal Swiatkowski <michal.swiatkowski@linux.intel.com>
-Reviewed-by: Maciej Fijalkowski <maciej.fijalkowski@intel.com>
-Reviewed-by: Przemek Kitszel <przemyslaw.kitszel@intel.com>
-Tested-by: Bharath R <Bharath.r@intel.com>
-Signed-off-by: Larysa Zaremba <larysa.zaremba@intel.com>
----
- Documentation/networking/devlink/index.rst   |  1 +
- Documentation/networking/devlink/ixd.rst     | 30 ++++++
- drivers/net/ethernet/intel/ixd/Kconfig       |  1 +
- drivers/net/ethernet/intel/ixd/Makefile      |  1 +
- drivers/net/ethernet/intel/ixd/ixd.h         |  1 +
- drivers/net/ethernet/intel/ixd/ixd_devlink.c | 97 ++++++++++++++++++++
- drivers/net/ethernet/intel/ixd/ixd_devlink.h | 50 ++++++++++
- drivers/net/ethernet/intel/ixd/ixd_lib.c     |  3 +
- drivers/net/ethernet/intel/ixd/ixd_main.c    | 14 ++-
- 9 files changed, 195 insertions(+), 3 deletions(-)
- create mode 100644 Documentation/networking/devlink/ixd.rst
- create mode 100644 drivers/net/ethernet/intel/ixd/ixd_devlink.c
- create mode 100644 drivers/net/ethernet/intel/ixd/ixd_devlink.h
+ 3. No precise migration API: the existing KVM_[GS]ET_CLOCK only allows
+    setting the clock at a given UTC reference time, which is necessarily
+    imprecise. There was no way to preserve the exact arithmetic
+    relationship between guest TSC and KVM clock across live migration.
 
-diff --git a/Documentation/networking/devlink/index.rst b/Documentation/networking/devlink/index.rst
-index f7ba7dcf477d..f0c077843fa7 100644
---- a/Documentation/networking/devlink/index.rst
-+++ b/Documentation/networking/devlink/index.rst
-@@ -88,6 +88,7 @@ parameters, info versions, and other features it supports.
-    ionic
-    iosm
-    ixgbe
-+   ixd
-    kvaser_pciefd
-    kvaser_usb
-    mlx4
-diff --git a/Documentation/networking/devlink/ixd.rst b/Documentation/networking/devlink/ixd.rst
-new file mode 100644
-index 000000000000..17b63c8425aa
---- /dev/null
-+++ b/Documentation/networking/devlink/ixd.rst
-@@ -0,0 +1,30 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+===================
-+ixd devlink support
-+===================
-+
-+This document describes the devlink features implemented by the ``ixd``
-+device driver.
-+
-+Info versions
-+=============
-+
-+The ``ixd`` driver reports the following versions
-+
-+.. list-table:: devlink info versions implemented
-+    :widths: 5 5 5 90
-+
-+    * - Name
-+      - Type
-+      - Example
-+      - Description
-+    * - ``device.type``
-+      - fixed
-+      - MEV
-+      - The hardware type for this device
-+    * - ``virtchnl``
-+      - running
-+      - 2.0
-+      - 2-digit version number (major.minor) of the communication channel
-+        (virtchnl) used by the device.
-diff --git a/drivers/net/ethernet/intel/ixd/Kconfig b/drivers/net/ethernet/intel/ixd/Kconfig
-index 24510c50070e..34181c59dcdc 100644
---- a/drivers/net/ethernet/intel/ixd/Kconfig
-+++ b/drivers/net/ethernet/intel/ixd/Kconfig
-@@ -7,6 +7,7 @@ config IXD
- 	select LIBETH
- 	select LIBIE_CP
- 	select LIBIE_PCI
-+	select NET_DEVLINK
- 	help
- 	  This driver supports Intel(R) Control Plane PCI Function
- 	  of Intel E2100 and later IPUs and FNICs.
-diff --git a/drivers/net/ethernet/intel/ixd/Makefile b/drivers/net/ethernet/intel/ixd/Makefile
-index 90abf231fb16..03760a2580b9 100644
---- a/drivers/net/ethernet/intel/ixd/Makefile
-+++ b/drivers/net/ethernet/intel/ixd/Makefile
-@@ -8,5 +8,6 @@ obj-$(CONFIG_IXD) += ixd.o
- ixd-y := ixd_main.o
- ixd-y += ixd_ctlq.o
- ixd-y += ixd_dev.o
-+ixd-y += ixd_devlink.o
- ixd-y += ixd_lib.o
- ixd-y += ixd_virtchnl.o
-diff --git a/drivers/net/ethernet/intel/ixd/ixd.h b/drivers/net/ethernet/intel/ixd/ixd.h
-index 8e3cd5bc5a84..343c5053045f 100644
---- a/drivers/net/ethernet/intel/ixd/ixd.h
-+++ b/drivers/net/ethernet/intel/ixd/ixd.h
-@@ -23,6 +23,7 @@ struct ixd_adapter {
- 		struct delayed_work init_work;
- 		u8 reset_retries;
- 		u8 vc_retries;
-+		bool success;
- 	} init_task;
- 	struct delayed_work mbx_task;
- 	struct libie_ctlq_xn_manager *xnm;
-diff --git a/drivers/net/ethernet/intel/ixd/ixd_devlink.c b/drivers/net/ethernet/intel/ixd/ixd_devlink.c
-new file mode 100644
-index 000000000000..23ab11226978
---- /dev/null
-+++ b/drivers/net/ethernet/intel/ixd/ixd_devlink.c
-@@ -0,0 +1,97 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/* Copyright (c) 2025, Intel Corporation. */
-+
-+#include "ixd.h"
-+#include "ixd_devlink.h"
-+
-+#define IXD_DEVLINK_INFO_LEN	128
-+
-+/**
-+ * ixd_fill_dsn - Get the serial number for the ixd device
-+ * @adapter: adapter to query
-+ * @buf: storage buffer for the info request
-+ */
-+static void ixd_fill_dsn(struct ixd_adapter *adapter, char *buf)
-+{
-+	u8 dsn[8];
-+
-+	/* Copy the DSN into an array in Big Endian format */
-+	put_unaligned_be64(pci_get_dsn(adapter->cp_ctx.mmio_info.pdev), dsn);
-+
-+	snprintf(buf, IXD_DEVLINK_INFO_LEN, "%8phD", dsn);
-+}
-+
-+/**
-+ * ixd_fill_device_name - Get the name of the underlying hardware
-+ * @adapter: adapter to query
-+ * @buf: storage buffer for the info request
-+ * @buf_size: size of the storage buffer
-+ */
-+static void ixd_fill_device_name(struct ixd_adapter *adapter, char *buf,
-+				 size_t buf_size)
-+{
-+	if (adapter->caps.device_type == cpu_to_le32(VIRTCHNL2_MEV_DEVICE))
-+		snprintf(buf, buf_size, "%s", "MEV");
-+	else
-+		snprintf(buf, buf_size, "%s", "UNKNOWN");
-+}
-+
-+/**
-+ * ixd_devlink_info_get - .info_get devlink handler
-+ * @devlink: devlink instance structure
-+ * @req: the devlink info request
-+ * @extack: extended netdev ack structure
-+ *
-+ * Callback for the devlink .info_get operation. Reports information about the
-+ * device.
-+ *
-+ * Return: zero on success or an error code on failure.
-+ */
-+static int ixd_devlink_info_get(struct devlink *devlink,
-+				struct devlink_info_req *req,
-+				struct netlink_ext_ack *extack)
-+{
-+	struct ixd_adapter *adapter = devlink_priv(devlink);
-+	char buf[IXD_DEVLINK_INFO_LEN];
-+	int err;
-+
-+	ixd_fill_dsn(adapter, buf);
-+	err = devlink_info_serial_number_put(req, buf);
-+	if (err)
-+		return err;
-+
-+	ixd_fill_device_name(adapter, buf, IXD_DEVLINK_INFO_LEN);
-+	err = devlink_info_version_fixed_put(req, "device.type", buf);
-+	if (err)
-+		return err;
-+
-+	snprintf(buf, sizeof(buf), "%u.%u",
-+		 adapter->vc_ver.major, adapter->vc_ver.minor);
-+
-+	return devlink_info_version_running_put(req, "virtchnl", buf);
-+}
-+
-+static const struct devlink_ops ixd_devlink_ops = {
-+	.info_get = ixd_devlink_info_get,
-+};
-+
-+/**
-+ * ixd_adapter_alloc - Allocate devlink and return adapter pointer
-+ * @dev: the device to allocate for
-+ *
-+ * Allocate a devlink instance for this device and return the private area as
-+ * the adapter structure.
-+ *
-+ * Return: adapter structure on success, NULL on failure
-+ */
-+struct ixd_adapter *ixd_adapter_alloc(struct device *dev)
-+{
-+	struct devlink *devlink;
-+
-+	devlink = devlink_alloc(&ixd_devlink_ops, sizeof(struct ixd_adapter),
-+				dev);
-+	if (!devlink)
-+		return NULL;
-+
-+	return devlink_priv(devlink);
-+}
-diff --git a/drivers/net/ethernet/intel/ixd/ixd_devlink.h b/drivers/net/ethernet/intel/ixd/ixd_devlink.h
-new file mode 100644
-index 000000000000..b23a1b37aebc
---- /dev/null
-+++ b/drivers/net/ethernet/intel/ixd/ixd_devlink.h
-@@ -0,0 +1,50 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/* Copyright (c) 2025, Intel Corporation. */
-+
-+#ifndef _IXD_DEVLINK_H_
-+#define _IXD_DEVLINK_H_
-+
-+#include <net/devlink.h>
-+
-+#include "ixd.h"
-+
-+struct ixd_adapter *ixd_adapter_alloc(struct device *dev);
-+
-+/**
-+ * ixd_devlink_free - teardown the devlink
-+ * @adapter: the adapter structure to free
-+ *
-+ */
-+static inline void ixd_devlink_free(struct ixd_adapter *adapter)
-+{
-+	struct devlink *devlink = priv_to_devlink(adapter);
-+
-+	devlink_free(devlink);
-+}
-+
-+/**
-+ * ixd_devlink_unregister - Unregister devlink for this adapter.
-+ * @adapter: the adapter structure to cleanup
-+ *
-+ * Init task must be completed or cancelled beforehand.
-+ */
-+static inline void ixd_devlink_unregister(struct ixd_adapter *adapter)
-+{
-+	if (!adapter->init_task.success)
-+		return;
-+
-+	devlink_unregister(priv_to_devlink(adapter));
-+}
-+
-+/**
-+ * ixd_devlink_register - Register devlink interface for this adapter
-+ * @adapter: pointer to ixd adapter structure to be associated with devlink
-+ *
-+ * Register the devlink instance associated with this adapter
-+ */
-+static inline void ixd_devlink_register(struct ixd_adapter *adapter)
-+{
-+	devlink_register(priv_to_devlink(adapter));
-+}
-+
-+#endif /* _IXD_DEVLINK_H_ */
-diff --git a/drivers/net/ethernet/intel/ixd/ixd_lib.c b/drivers/net/ethernet/intel/ixd/ixd_lib.c
-index 17f4aae594ca..23927b0471d7 100644
---- a/drivers/net/ethernet/intel/ixd/ixd_lib.c
-+++ b/drivers/net/ethernet/intel/ixd/ixd_lib.c
-@@ -3,6 +3,7 @@
- 
- #include "ixd.h"
- #include "ixd_ctlq.h"
-+#include "ixd_devlink.h"
- #include "ixd_virtchnl.h"
- 
- #define IXD_DFLT_MBX_Q_LEN 64
-@@ -154,6 +155,8 @@ void ixd_init_task(struct work_struct *work)
- 
- 	if (!ixd_vc_dev_init(adapter)) {
- 		adapter->init_task.vc_retries = 0;
-+		adapter->init_task.success = true;
-+		ixd_devlink_register(adapter);
- 		return;
- 	}
- 
-diff --git a/drivers/net/ethernet/intel/ixd/ixd_main.c b/drivers/net/ethernet/intel/ixd/ixd_main.c
-index 6d5e6aca77df..50d9a13c851f 100644
---- a/drivers/net/ethernet/intel/ixd/ixd_main.c
-+++ b/drivers/net/ethernet/intel/ixd/ixd_main.c
-@@ -4,6 +4,7 @@
- #include "ixd.h"
- #include "ixd_ctlq.h"
- #include "ixd_lan_regs.h"
-+#include "ixd_devlink.h"
- 
- MODULE_DESCRIPTION("Intel(R) Control Plane Function Device Driver");
- MODULE_IMPORT_NS("LIBIE_CP");
-@@ -21,11 +22,14 @@ static void ixd_remove(struct pci_dev *pdev)
- 	/* Do not mix removal with (re)initialization */
- 	cancel_delayed_work_sync(&adapter->init_task.init_work);
- 
-+	ixd_devlink_unregister(adapter);
-+
- 	/* Leave the device clean on exit */
- 	ixd_trigger_reset(adapter);
- 	ixd_deinit_dflt_mbx(adapter);
- 
- 	libie_pci_unmap_all_mmio_regions(&adapter->cp_ctx.mmio_info);
-+	ixd_devlink_free(adapter);
- }
- 
- /**
-@@ -93,7 +97,7 @@ static int ixd_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
- 	if (WARN_ON(ent->device != IXD_DEV_ID_CPF))
- 		return -EINVAL;
- 
--	adapter = devm_kzalloc(&pdev->dev, sizeof(*adapter), GFP_KERNEL);
-+	adapter = ixd_adapter_alloc(&pdev->dev);
- 	if (!adapter)
- 		return -ENOMEM;
- 
-@@ -102,13 +106,13 @@ static int ixd_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
- 
- 	err = libie_pci_init_dev(pdev);
- 	if (err)
--		return err;
-+		goto free_adapter;
- 
- 	pci_set_drvdata(pdev, adapter);
- 
- 	err = ixd_iomap_regions(adapter);
- 	if (err)
--		return err;
-+		goto free_adapter;
- 
- 	INIT_DELAYED_WORK(&adapter->init_task.init_work,
- 			  ixd_init_task);
-@@ -119,6 +123,10 @@ static int ixd_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
- 			   msecs_to_jiffies(500));
- 
- 	return 0;
-+
-+free_adapter:
-+	ixd_devlink_free(adapter);
-+	return err;
- }
- 
- static const struct pci_device_id ixd_pci_tbl[] = {
--- 
-2.47.0
+This series addresses all three, and adds new APIs for precise clock 
+migration and TSC frequency reporting. As an added bonus, it now rips 
+out the whole pvclock_gtod_data hack which was shadowing the kernel's 
+timekeeping, and uses ktime snapshots as $DEITY (well, Thomas) intended.
+
+Changes since v4:
+ - Rebased onto tip/timers/ptp (includes ktime snapshot infrastructure)
+ - Dropped "WARN if kvm_get_walltime_and_clockread() fails" — the WARN
+   was spurious during clocksource transitions
+ - Dropped guest-side "Obtain TSC frequency from CPUID" patches (adopted
+   by Sean for a separate series)
+ - Dropped KVM_VCPU_TSC_EFFECTIVE_FREQ
+ - Fixed false re-enabling of master clock when a single vCPU syncs
+   multiple times at a mismatched frequency: introduced per-vCPU
+   cur_tsc_freq_generation counter so each vCPU is counted exactly once
+ - Unified nr_vcpus_matched_tsc and nr_vcpus_matched_freq to use the
+   same counting convention (1-based, >= online_vcpus threshold)
+ - "Avoid gratuitous global clock updates": kept global update in
+   non-master-clock mode on vCPU load (CLOCK_MONOTONIC_RAW means no NTP
+   drift but preserving the existing safety); only optimize master clock
+ - "Xen runstate negative time": refined to update state but not account
+   time on backwards clock, always update last_steal and guest shared page
+ - Added "Activate master clock immediately on vCPU creation" to avoid
+   unnecessary non-master-clock window during VM setup
+ - New final patches: use ktime_get_snapshot_id() for master clock
+   reference, then remove pvclock_gtod_data entirely (replaced by direct
+   ktime_get_raw() + offs_boot computation)
+ - Added masterclock_offset_test selftest (verifies kvmclock consistency
+   across vCPUs with different TSC offsets)
+ - Added xen_cpuid_timing_test selftest
+ - Added pvclock_migration_test selftest
+ - Addressed AI reviewer (Sashiko) feedback throughout:
+   - get_kvmclock(): goto fallback on clock read failure instead of
+     using uninitialized data; single #ifdef CONFIG_X86_64 block
+   - kvm_synchronize_tsc(): changed ns to s64 to match function
+     signature; moved time reads inside tsc_write_lock
+   - Kill last_tsc fields: use kvm_scale_tsc() subtraction for
+     backwards TSC instead of zeroing cur_tsc_write
+   - KVM_[GS]ET_CLOCK_GUEST: validate padding fields, bounds-check
+     tsc_shift
+   - pvclock selftest: seqcount loop for torn-read safety, per-vCPU
+     pvclock addresses, graceful skip when caps unavailable
+   - KVM_VCPU_TSC_SCALE: return -ENXIO when !has_tsc_control
+   - UAPI pvclock-abi: added -D__KERNEL__ to xen-hypercalls.sh
+   - VMX: also clear SECONDARY_EXEC_TSC_SCALING from vmcs_config
+
+David Woodhouse (31):
+  KVM: x86/xen: Do not corrupt KVM clock in kvm_xen_shared_info_init()
+  KVM: x86: Improve accuracy of KVM clock when TSC scaling is in force
+  KVM: x86: Explicitly disable TSC scaling without CONSTANT_TSC
+  KVM: x86: Activate master clock immediately on vCPU creation
+  KVM: x86: Add KVM_VCPU_TSC_SCALE and fix the documentation on TSC migration
+  KVM: x86: Avoid NTP frequency skew for KVM clock on 32-bit host
+  KVM: x86: Fold __get_kvmclock() into get_kvmclock()
+  KVM: x86: Restructure get_kvmclock()
+  KVM: x86: Fix KVM clock precision in get_kvmclock() with TSC scaling
+  KVM: x86: Use get_kvmclock() in kvm_get_wall_clock_epoch()
+  KVM: x86: Fix compute_guest_tsc() to handle negative time deltas
+  KVM: x86: Restructure kvm_guest_time_update() for TSC upscaling
+  KVM: x86: Simplify and comment kvm_get_time_scale()
+  KVM: x86: Remove implicit rdtsc() from kvm_compute_l1_tsc_offset()
+  KVM: x86: Improve synchronization in kvm_synchronize_tsc()
+  KVM: x86: Kill last_tsc_{nsec,write,offset} fields
+  KVM: x86: Replace nr_vcpus_matched_tsc count with all_vcpus_matched_tsc bool
+  KVM: x86: Allow KVM master clock mode when TSCs are offset from each other
+  KVM: x86: Factor out kvm_use_master_clock()
+  KVM: x86: Avoid gratuitous global clock updates
+  KVM: x86/xen: Prevent runstate times from becoming negative
+  KVM: x86: Avoid redundant masterclock updates from multiple vCPUs
+  KVM: x86: Remove runtime Xen TSC frequency CPUID update
+  KVM: x86: Re-synchronize TSC after KVM_SET_TSC_KHZ
+  KVM: x86: Use ktime_get_snapshot_id() for master clock
+  KVM: x86: Compute kvmclock base without pvclock_gtod_data
+  KVM: x86: Replace pvclock_gtod_data vclock_mode with boolean
+  KVM: x86: Remove pvclock_gtod_data and private timekeeping code
+  KVM: selftests: Add master clock offset test
+  KVM: selftests: Add Xen/generic CPUID timing leaf test
+  KVM: selftests: Add Xen runstate migration test
+
+Jack Allister (3):
+  UAPI: x86: Move pvclock-abi to UAPI for x86 platforms
+  KVM: x86: Add KVM_[GS]ET_CLOCK_GUEST for accurate KVM clock migration
+  KVM: selftests: Add KVM/PV clock selftest to prove timer correction
+
+ Documentation/virt/kvm/api.rst                     |   37 +
+ Documentation/virt/kvm/devices/vcpu.rst            |  119 ++-
+ MAINTAINERS                                        |    4 +-
+ arch/x86/include/asm/kvm_host.h                    |   16 +-
+ arch/x86/include/uapi/asm/kvm.h                    |    6 +
+ arch/x86/include/{ => uapi}/asm/pvclock-abi.h      |   27 +-
+ arch/x86/kvm/cpuid.c                               |   16 -
+ arch/x86/kvm/svm/svm.c                             |    3 +-
+ arch/x86/kvm/vmx/vmx.c                             |    4 +-
+ arch/x86/kvm/x86.c                                 | 1039 ++++++++++++--------
+ arch/x86/kvm/xen.c                                 |   30 +-
+ arch/x86/kvm/xen.h                                 |   13 -
+ include/uapi/linux/kvm.h                           |    3 +
+ scripts/xen-hypercalls.sh                          |    2 +-
+ tools/testing/selftests/kvm/Makefile.kvm           |    4 +
+ .../selftests/kvm/x86/masterclock_offset_test.c    |  180 ++++
+ .../selftests/kvm/x86/pvclock_migration_test.c     |  382 +++++++
+ tools/testing/selftests/kvm/x86/pvclock_test.c     |  441 +++++++++
+ .../selftests/kvm/x86/xen_cpuid_timing_test.c      |  230 +++++
+ .../testing/selftests/kvm/x86/xen_migration_test.c |  194 ++++
+ 20 files changed, 2263 insertions(+), 487 deletions(-)
+
+base-commit: bc484a5096732cd858771cccd3164ec985bdc03d
 
 
