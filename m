@@ -1,161 +1,147 @@
-Return-Path: <linux-doc+bounces-91495-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91496-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id v6ccBjFCJ2oxuAIAu9opvQ
-	(envelope-from <linux-doc+bounces-91495-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 00:29:05 +0200
+	id xgJ9McRCJ2pNuAIAu9opvQ
+	(envelope-from <linux-doc+bounces-91496-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 00:31:32 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 65E2665AF74
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 00:29:04 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2202665AF91
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 00:31:32 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=X+Ecnwjk;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91495-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91495-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=MvpMmVGo;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91496-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-91496-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 1F3163038AF5
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Jun 2026 22:25:01 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 2CC9E30137B9
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Jun 2026 22:27:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6090F3B27CF;
-	Mon,  8 Jun 2026 22:25:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8F61E3563D4;
+	Mon,  8 Jun 2026 22:27:21 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A0613B14D0;
-	Mon,  8 Jun 2026 22:24:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 957BE3B0ADB
+	for <linux-doc@vger.kernel.org>; Mon,  8 Jun 2026 22:27:20 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780957500; cv=none; b=Kee2+kAsglSzTl8lUMAX7EFW+x686+iQcISCl0Tc4b6UX7hENtB1gzthFCb85nkQhWuCoSLhNETdCo5ImOZdeBj5mnxTgIQmZ8sWpB5yhFKXE1Frna6lm/mKd13TELrZyC6Kope8WfNAdww4Df5cF46YK2YVuIjRdHrafY+zhkk=
+	t=1780957641; cv=none; b=uIuCw52HDwk+j/o6CmX8hnCTMvjQppP+kyEzkbJ0orsfboQvj3hUdRmcgCoqkveQEXZR/c7C5ur9QScnhefkylivxx3cNoxy3Vq4AULN7RklngXov1p3O4h1iANRJCimc+pAMxOCWYxOW1rRsIkUq8BPAePXu/ef31VZUP9IlMI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780957500; c=relaxed/simple;
-	bh=RujqqrWbjkdAFsXFMnqINKyZg8ETbccdJ4rLk6oLWHc=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=e15znWMSPUjvt1s9nSNmQLtQ06QIKJXS6UDb0dEw6UwrRSgM7CpMeKWS5n5Ie1leLV3F4975kNcbju1zQJfmm22OudUJaucDlItI81HW7Not0wwRAhckDXNqvWR6mu8Nj8wivRXowIuyuzdmUCHyga+jEbaSyGWWkzcZAsN7Efw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=X+Ecnwjk; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3DEA41F00893;
-	Mon,  8 Jun 2026 22:24:52 +0000 (UTC)
+	s=arc-20240116; t=1780957641; c=relaxed/simple;
+	bh=ZnzXMKmNNQcMAsK3GQJoXlxxelkBmMuFNwdAjWqeeDg=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=WRLbUG1htP6td4LFk37AKlOLrmlIHOhSnt5V5elvI4VrnGJ8V2OMWolyFmgSY7npPF2jXVtqC/1O0lID6vxGii5Rgks0H0F9zrVgX4nuGGO9vFEJtQqXc+/h9zHHUh/202XvQ6VF9MVRt0jWrKxH0RDyakkybdgSrk0dYubKfuM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MvpMmVGo; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 56EA91F0089A
+	for <linux-doc@vger.kernel.org>; Mon,  8 Jun 2026 22:27:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1780957499;
-	bh=KvXp+1P6AtbDNcD1+SpBwuR8V5/iTedBIFhFKp1j9iI=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=X+EcnwjkPuRJ8wtgQyMIykB9IZbqA3iyPCCGBQlQIS6jFuRkpYm1AcZ+R6NMq8nVV
-	 O+TXEs38C6ZO+x/YIvyDXyDm5EjVpaJ34k1+ijO7lbKpTogVyRkAzG0GkQCGVl+7Ze
-	 eT3esN8W5BINCMiqg4VvIkNH/yGURLwUoJbo+lPzAvPHu52dctsA4lIbTRAQFcTSAK
-	 c9uG9/eAZ5gcjQnzkhkqshtX4gp11jVeiKAC56wKE3M7sa/LehiexW20KrXcNOVehB
-	 byueeGgPgynrOIvreLU9v9XHwn0nwFmnK/N/AO5kqtkK9/NeR5aZ1nXL6JBoq6lU9h
-	 Tn0QeCn7l1Xbg==
-From: Danilo Krummrich <dakr@kernel.org>
-To: Shashank Balaji <shashank.mahadasyam@sony.com>
-Cc: Suzuki K Poulose <suzuki.poulose@arm.com>,
-	James Clark <james.clark@linaro.org>,
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	"Rafael J . Wysocki" <rafael@kernel.org>,
-	Danilo Krummrich <dakr@kernel.org>,
-	Miguel Ojeda <ojeda@kernel.org>,
-	Boqun Feng <boqun@kernel.org>,
-	Gary Guo <gary@garyguo.net>,
-	=?UTF-8?q?Bj=C3=B6rn=20Roy=20Baron?= <bjorn3_gh@protonmail.com>,
-	Benno Lossin <lossin@kernel.org>,
-	Andreas Hindborg <a.hindborg@kernel.org>,
-	Alice Ryhl <aliceryhl@google.com>,
-	Trevor Gross <tmgross@umich.edu>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Luis Chamberlain <mcgrof@kernel.org>,
-	Petr Pavlu <petr.pavlu@suse.com>,
-	Daniel Gomez <da.gomez@kernel.org>,
-	Sami Tolvanen <samitolvanen@google.com>,
-	Aaron Tomlin <atomlin@atomlin.com>,
-	Mike Leach <mike.leach@arm.com>,
-	Leo Yan <leo.yan@arm.com>,
-	Thierry Reding <thierry.reding@kernel.org>,
-	Jonathan Hunter <jonathanh@nvidia.com>,
-	Rahul Bukte <rahul.bukte@sony.com>,
-	linux-kernel@vger.kernel.org,
-	coresight@lists.linaro.org,
-	linux-arm-kernel@lists.infradead.org,
-	driver-core@lists.linux.dev,
-	rust-for-linux@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	Daniel Palmer <daniel.palmer@sony.com>,
-	Tim Bird <tim.bird@sony.com>,
-	linux-modules@vger.kernel.org,
-	linux-tegra@vger.kernel.org,
-	Sumit Gupta <sumitg@nvidia.com>
-Subject: Re: [PATCH v5 0/4] Enable sysfs module symlink for more built-in drivers
-Date: Tue,  9 Jun 2026 00:24:48 +0200
-Message-ID: <20260608222448.1353773-1-dakr@kernel.org>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260518-acpi_mod_name-v5-0-705ccc430885@sony.com>
-References: <20260518-acpi_mod_name-v5-0-705ccc430885@sony.com>
-X-Patch-Reply: applied
+	s=k20260515; t=1780957640;
+	bh=ZnzXMKmNNQcMAsK3GQJoXlxxelkBmMuFNwdAjWqeeDg=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=MvpMmVGoRMm3zfigrF0uV+iRgX42h36CoAm4KPvTx70waksQrU19h5rGcqgk1CPug
+	 Bopifo2qojt34FmwIkzh2ghSJjAiUNaqXroRBUWNx0Hs93HFkIbvjjV51NNzVV5KLc
+	 2y/MuzC032dWidywn7akmnTutYBP7iqrA0pBW+dffg9t7jLYMQr+dDRwCTzc7Jgyr1
+	 Ibxb+R8UVC3j3qzBqej09gIOZB11mgKUZIt0wUawHHLZ824KQ1h3aHhKsn+QVGClm8
+	 R5nAuFpmgu1ZN93yc5fFyliPwzqwrskQX1rHU7SCOklp3a8k0KKF/AAE7PeSkd5FFw
+	 mondi24qgGMxw==
+Received: by mail-ed1-f49.google.com with SMTP id 4fb4d7f45d1cf-691c5776f35so1934411a12.3
+        for <linux-doc@vger.kernel.org>; Mon, 08 Jun 2026 15:27:20 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AFNElJ+kaH28j4W1pCzfPLZ0XLDZahfKdaw+iYJ/+2LEQV5rgWxjrXBVHOWImy/TLiDCbm9w2AebrOuTQqU=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxssCwVXJft4SzRw3gEn9LZrw91VcFt+REkpKtK2Tte5sKue+H3
+	XUVqNDf+Ev67aFeGx2UXjbjwDcABjsWqMX9Jiga7rFbUmsYvDQvmch0mZ4SJkB2UgIq17LiZEPd
+	2T2z+Sl9Ww44xjBvfvr5hj4m21WDy6S0=
+X-Received: by 2002:a17:906:d552:b0:bf1:1d19:cf95 with SMTP id
+ a640c23a62f3a-bf37077232cmr900655166b.12.1780957639295; Mon, 08 Jun 2026
+ 15:27:19 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <CAKEwX=MQe_KFZe2vBXQYh0aa-x+E8AzNwmyjJGJk4tDoS9ML3A@mail.gmail.com>
+ <aho_VtLCmIRsNyvO@google.com> <6deeaea7-3cd1-4403-29fc-d2dc55c297f8@gmail.com>
+ <aiBqzOtEv5iAC_qC@google.com> <CAKEwX=OhxUxRCEfvZMnWzXy=Fa4jgzL3DuP-RmaVzdK65m4bew@mail.gmail.com>
+ <6db27a22-cc7a-9a94-db3f-c912fd39aa32@gmail.com> <CAO9r8zM4SDdTgz9L2s1VfXL8K2VBjMD9ej2BTDxaGge1t2+quA@mail.gmail.com>
+ <aicJBVT4pBvmyooT@linux.dev> <aicZ-5GX9De3MAU7@linux.dev> <CAO9r8zNBJ-BsXyKFveA92jbwMu63uFVTY5CuT4fRHTBVcOjhPw@mail.gmail.com>
+ <aictKA0XWMWbxFdN@linux.dev>
+In-Reply-To: <aictKA0XWMWbxFdN@linux.dev>
+From: Yosry Ahmed <yosry@kernel.org>
+Date: Mon, 8 Jun 2026 15:27:07 -0700
+X-Gmail-Original-Message-ID: <CAO9r8zPvCaCqvoUhPdAN5Oi_Sj0mK-t7DJhOOz3Xf1DT-Wrgcw@mail.gmail.com>
+X-Gm-Features: AVVi8CcbjjP-avdNaGSAeiW9slgw-LB5QMjLbgQUyQtJGqfa4iRAJG4WdDe98uo
+Message-ID: <CAO9r8zPvCaCqvoUhPdAN5Oi_Sj0mK-t7DJhOOz3Xf1DT-Wrgcw@mail.gmail.com>
+Subject: Re: [PATCH v3 2/4] mm/zswap: Implement proactive writeback
+To: Shakeel Butt <shakeel.butt@linux.dev>
+Cc: Hao Jia <jiahao.kernel@gmail.com>, Johannes Weiner <hannes@cmpxchg.org>, mhocko@kernel.org, 
+	tj@kernel.org, mkoutny@suse.com, roman.gushchin@linux.dev, 
+	Nhat Pham <nphamcs@gmail.com>, akpm@linux-foundation.org, chengming.zhou@linux.dev, 
+	muchun.song@linux.dev, cgroups@vger.kernel.org, linux-mm@kvack.org, 
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+	Hao Jia <jiahao1@lixiang.com>, youngjun.park@lge.com
+Content-Type: text/plain; charset="UTF-8"
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_FROM(0.00)[bounces-91495-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:shashank.mahadasyam@sony.com,m:suzuki.poulose@arm.com,m:james.clark@linaro.org,m:alexander.shishkin@linux.intel.com,m:gregkh@linuxfoundation.org,m:rafael@kernel.org,m:dakr@kernel.org,m:ojeda@kernel.org,m:boqun@kernel.org,m:gary@garyguo.net,m:bjorn3_gh@protonmail.com,m:lossin@kernel.org,m:a.hindborg@kernel.org,m:aliceryhl@google.com,m:tmgross@umich.edu,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:mcgrof@kernel.org,m:petr.pavlu@suse.com,m:da.gomez@kernel.org,m:samitolvanen@google.com,m:atomlin@atomlin.com,m:mike.leach@arm.com,m:leo.yan@arm.com,m:thierry.reding@kernel.org,m:jonathanh@nvidia.com,m:rahul.bukte@sony.com,m:linux-kernel@vger.kernel.org,m:coresight@lists.linaro.org,m:linux-arm-kernel@lists.infradead.org,m:driver-core@lists.linux.dev,m:rust-for-linux@vger.kernel.org,m:linux-doc@vger.kernel.org,m:daniel.palmer@sony.com,m:tim.bird@sony.com,m:linux-modules@vger.kernel.org,m:linux-tegra@vger.kernel.org,m:sumitg@nvidia.com,s:lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[38];
-	FORGED_SENDER(0.00)[dakr@kernel.org,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[17];
 	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-91496-lists,linux-doc=lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[arm.com,linaro.org,linux.intel.com,linuxfoundation.org,kernel.org,garyguo.net,protonmail.com,google.com,umich.edu,lwn.net,suse.com,atomlin.com,nvidia.com,sony.com,vger.kernel.org,lists.linaro.org,lists.infradead.org,lists.linux.dev];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FORGED_RECIPIENTS(0.00)[m:shakeel.butt@linux.dev,m:jiahao.kernel@gmail.com,m:hannes@cmpxchg.org,m:mhocko@kernel.org,m:tj@kernel.org,m:mkoutny@suse.com,m:roman.gushchin@linux.dev,m:nphamcs@gmail.com,m:akpm@linux-foundation.org,m:chengming.zhou@linux.dev,m:muchun.song@linux.dev,m:cgroups@vger.kernel.org,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jiahao1@lixiang.com,m:youngjun.park@lge.com,m:jiahaokernel@gmail.com,s:lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[yosry@kernel.org,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[gmail.com,cmpxchg.org,kernel.org,suse.com,linux.dev,linux-foundation.org,vger.kernel.org,kvack.org,lixiang.com,lge.com];
+	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[dakr@kernel.org,linux-doc@vger.kernel.org];
-	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[yosry@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,mail.gmail.com:mid,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 65E2665AF74
+X-Rspamd-Queue-Id: 2202665AF91
 
-On Mon, 18 May 2026 19:19:56 +0900, Shashank Balaji wrote:
-> [PATCH v5 0/4] Enable sysfs module symlink for more built-in drivers
+> > > Youngjun is working on swap tiers. At the moment he is more interested in
+> > > allowing a specific swap device to a memcg or not. I can imagine in future there
+> > > will be use-cases where there will be a need to demote data on higher tier swap
+> > > to lower tier swap. What would be the appropriate interface?
+> > >
+> > > BTW does zswap folks think of zswap as a top swap tier or something different?
+> >
+> > I haven't been following the swap tiers work closely, but personally I
+> > do think of zswap as a top swap tier.
+>
+> Same for me though I imagine swap tiers would introduce some duplication i.e.
+> different way (interface) to set limits for swap tiers for a given memcg.
+>
+> > Things will probably get more
+> > blurry with memory tiers and compressed memory nodes though.
+>
+> I think there will still be distinction between byte addressable and fault on
+> access devices.
 
-Applied, thanks!
-
-  Branch: driver-core-testing
-  Tree:   git://git.kernel.org/pub/scm/linux/kernel/git/driver-core/driver-core.git
-
-[1/4] soc/tegra: cbb: Move driver registration from pure_initcall to core_initcall
-      commit: cd6e95e7ab29
-[2/4] kernel: param: initialize module_kset in a pure_initcall
-      commit: c82dfce47833
-[3/4] coresight: pass THIS_MODULE implicitly through a macro
-      commit: efc22b3f89a3
-[4/4] driver core: platform: set mod_name in driver registration
-      commit: a7a7dc5c46a0
-
-The patches will appear in the next linux-next integration (typically within 24
-hours on weekdays).
-
-The patches are in the driver-core-testing branch and will be promoted to
-driver-core-next after validation.
+Yeah, I think it makes sense to define "swap" as fault on access
+(zswap, SSD, etc), and memory tiers as byte-addressable (even if you
+put an SSD behind CXL and make it byte-addressable). But I also
+remember seeing discussions about unifying memory tiers and swap in a
+way, and it makes sense from a reclaim perspective (swap or demote
+first?).
 
