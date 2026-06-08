@@ -1,297 +1,162 @@
-Return-Path: <linux-doc+bounces-91283-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91285-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 19TeFZMrJmonTAIAu9opvQ
-	(envelope-from <linux-doc+bounces-91283-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 04:40:19 +0200
+	id lgUXBj8yJmpUTQIAu9opvQ
+	(envelope-from <linux-doc+bounces-91285-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 05:08:47 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A567652491
-	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 04:40:18 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9437B652621
+	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 05:08:46 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linux.dev header.s=key1 header.b=PZONv3Sx;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91283-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-91283-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=linux.dev;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=n74Cnow2;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91285-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91285-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=none;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 9D1053006530
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Jun 2026 02:40:17 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id CE92C300B9FC
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Jun 2026 03:08:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0910B2772D;
-	Mon,  8 Jun 2026 02:40:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 32ADC31E85A;
+	Mon,  8 Jun 2026 03:08:44 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-186.mta0.migadu.com (out-186.mta0.migadu.com [91.218.175.186])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5884026E165
-	for <linux-doc@vger.kernel.org>; Mon,  8 Jun 2026 02:40:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C353D145B27
+	for <linux-doc@vger.kernel.org>; Mon,  8 Jun 2026 03:08:42 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780886416; cv=none; b=ZaSk2/m1lMxuFfXFeBKh9qntWxJqFWiPA6sYoOAJXJVSqxLQVj+/CNCJV/ZVCrZAfoGri6Xdxo+apQallXLbmRVkK1iwgCXjBxi8NiQ+YbcMiHFdnmL+WHP6szJYD0w45skOtvtsFMsiSB4AJ1v3OBoWYRfV8wQ+BK1Tgr9zIjs=
+	t=1780888124; cv=none; b=JM1u2vPHKz0VAsi290YeHbis3TrUArQg1fT6eGR+mf4dYyneDfKFExsReMkt5HkppHqo6j1iuA/QSOYzlExHiYWnTPXKZemQkjPZ78teGbfQSUMpndPMTQsy1pxD6sxTAMmf8nTz9jnZfl43iUfsyDKagypccTcQ50yW3PsODlY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780886416; c=relaxed/simple;
-	bh=OWf9u89WWdQ28sTozWzL/FWm30ukRbSCunUQvKzJlGM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Bh28B+EkPCSXkN2hVtN2Qt9V1nCTd5fsFhpMU19PlaXE+vcS8M1Ds1DW8jqmpSZwylcZbX9pkS+4imXl4tiTDQMsjMCaeAFipJ+LROFaCWQ/LIJw5XftaKED5IPKJfbPgjUztJJtv7ZYoDXaRGQShSR/J5mpHearVkYcgiKcXfA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=PZONv3Sx; arc=none smtp.client-ip=91.218.175.186
-Message-ID: <d22d73ab-c519-4a50-b564-5d7299a3c3bd@linux.dev>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1780886412;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=v0gpJDAKgCFuGUDHr03K+7t/mGqVQAiRsAIfHMMh5/E=;
-	b=PZONv3SxcPf4VhOuIPPWT8godfsZtgOX655I5MPm5mRsFV81qLuS1wFRBcyCPtuM4ERIRn
-	zC5CBIPlWDFgzHMu0CYUhE8UnXXghr+CPuSlDSHsagHJZZ1eRA9/oquoUQf+sOGeJnnmxC
-	HtLjhmWlWIitWCYcQ3n4O/gwECegJQM=
-Date: Mon, 8 Jun 2026 10:39:29 +0800
+	s=arc-20240116; t=1780888124; c=relaxed/simple;
+	bh=eO7yVSb+ongNWkKbPuJJgDwNs5WTX9mm5C62KLUvoRY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Y1RvOOFhLaGwg3qA1sWVsKnVOX9Cy1/pVWbdLiiZU74VlxnUcvfiqh53VXbKV9/te70RHBIHKrQgpbSQqBL+f2uPghrc3LGewuHFd967MQOH0GnCF2+cfwogjwXwC1NxBttlMvAPTz0AbZ0Bf70IJixrBJiXcJrZ/s61FizhtE8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=n74Cnow2; arc=none smtp.client-ip=209.85.216.49
+Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-36d5fd50d20so2398845a91.1
+        for <linux-doc@vger.kernel.org>; Sun, 07 Jun 2026 20:08:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1780888122; x=1781492922; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=jZmjdnA6Z/FpveiHy+bpkM+wI1acYPmFvyA9Nr3I4wg=;
+        b=n74Cnow2jipnsiaIWCh4pBIYOzgyXgaymlAUYlsV27kmSMo3v53jIgxgmIScVQGLux
+         MlVn2NxVrCtGjziqIIEr8DMuZYbigavfi2D1ewnZLbmzXZVPNe9M/G+70G9b7v/4xAZX
+         IgjN3zipjZuudD1YPvcowIru3TzgzBOHqJBpbketCB2lYNtkaKpDIIDJYRSH0gDmJWcC
+         0gWCFHyZUspVPmUKV4QwzuDvreFUTfUqHM1OwWGjXirAOJFCi4qr5IslAG6X/e5V/20T
+         mhwAQwUxoBDKShHweTygYYxutfh0krmI1MHKDQlF3FfNIRnauevZ+RmQLwuKbPTeqwwi
+         R/rw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780888122; x=1781492922;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:sender:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=jZmjdnA6Z/FpveiHy+bpkM+wI1acYPmFvyA9Nr3I4wg=;
+        b=VnDMC2hTNHTYLUkJ7Ro3bHpiEt1EN/xyrJo0bXj2+rnCjcfnlSP5wgFAtDRXyROKHU
+         mtPRwpx3JzXjkzhucaOfGSUF9qLCHDRQRRjmTDEQqJCske3vNx+A3LgE52ZQGYGleLeP
+         nyTyfzTbUfqa8S9OZzomcwbzsHn5BCpmz8m2Hdn4EzaSGFgZ+dxkroPWEXePbBvLBiZo
+         ujDwarl1+08n5DbQOLv54by+eSN57oYd7wW/IlHUaHJBNfIXvxSt0vgvtnen+6A9/2xI
+         oVmS/TlUEccmb1yELLMKnv3YCCuZMYXIm4j+x2tJs82v2iSUqwODW2TqpsD3S5J6lva4
+         Jhew==
+X-Forwarded-Encrypted: i=1; AFNElJ9TSyeWp56rUaHWKRLdYtj1vvLjGo3WtyxHlqehRmVJq7XLa8QOkf028vJ8VuYprY2RjZm7Ao24bdA=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyMRUez4WCUePFdKX3375IAU9lSoP1AZnxVBW8DBj3rftTiK0qu
+	SHzDjtME1MRy89+KCJJ796pr3amp4GnBZP1O5GiFEWR2TZW2bI8tv31d
+X-Gm-Gg: Acq92OEXpqMlM3/TxF3fVuS2IjFyitsjn44eluCkIOZi2gcwM8OT5ynjGjITFlGRePc
+	Tnwy9rsf/kGetT8J1iSRNMG1F2NiKVSXyrHDPnCbEr9W1th2SrXJ5+4cOBncfVok95tSpm5ckpi
+	Ws3dmycJacpHNFgHRK9wA1beBN8PVnKRv0/KlqfEmhCzbklp7jycrOTu4j74pBI5H+Z7sr3Ol98
+	XrJOotkEJQNIT6yPJ0480o7318clctPeRYjW/f9qmXErKs75PkvZemGA4cDbzTTtd1tP983C/as
+	mcYEH1kfh6/6NC1HVxogvsa1l0ifKAPYUC4vMQbdnOa/63Vtm+mdUQ7COqBYwOsjnZK5imiEz94
+	S5udXjYXQAJPBrPOl0YkOpHhKUP0dzBvXVKy2X6Z2fIWkMiIvawq4kB3fS0FS/P49CcVLYVXSbY
+	0TJ2WbDHdryu81Ug4zCkdYTPCm80qarLqdOyKLL/8Si3tqSL7c2cokYGmbpA==
+X-Received: by 2002:a17:90b:4a0a:b0:36a:fcf5:64bd with SMTP id 98e67ed59e1d1-370eec10e38mr15237248a91.2.1780888122204;
+        Sun, 07 Jun 2026 20:08:42 -0700 (PDT)
+Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-36f710ee4f3sm14702020a91.13.2026.06.07.20.08.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 07 Jun 2026 20:08:41 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Date: Sun, 7 Jun 2026 20:08:41 -0700
+From: Guenter Roeck <linux@roeck-us.net>
+To: "Pradhan, Sanman" <sanman.pradhan@hpe.com>
+Cc: "linux-hwmon@vger.kernel.org" <linux-hwmon@vger.kernel.org>,
+	"robh@kernel.org" <robh@kernel.org>,
+	"krzk+dt@kernel.org" <krzk+dt@kernel.org>,
+	"conor+dt@kernel.org" <conor+dt@kernel.org>,
+	"corbet@lwn.net" <corbet@lwn.net>,
+	"skhan@linuxfoundation.org" <skhan@linuxfoundation.org>,
+	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"noname.nuno@gmail.com" <noname.nuno@gmail.com>,
+	"Syed, Arif" <arif.syed@hpe.com>,
+	Sanman Pradhan <psanman@juniper.net>,
+	Conor Dooley <conor.dooley@microchip.com>
+Subject: Re: [PATCH v4 1/2] dt-bindings: hwmon: pmbus: Add Analog Devices
+ MAX20860A
+Message-ID: <6cbc0058-5471-4199-902f-5dbd574df886@roeck-us.net>
+References: <20260601184516.919488-1-sanman.pradhan@hpe.com>
+ <20260601184516.919488-2-sanman.pradhan@hpe.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH v3 2/6] alloc_tag: add ioctl filters to /proc/allocinfo
-To: Abhishek Bapat <abhishekbapat@google.com>,
- Suren Baghdasaryan <surenb@google.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- Kent Overstreet <kent.overstreet@linux.dev>
-Cc: Shuah Khan <skhan@linuxfoundation.org>, Jonathan Corbet <corbet@lwn.net>,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-mm@kvack.org,
- Sourav Panda <souravpanda@google.com>
-References: <cover.1780701922.git.abhishekbapat@google.com>
- <6f3b4aa0aa294cd56a73854c631de3ab7c0c5e01.1780701922.git.abhishekbapat@google.com>
-Content-Language: en-US
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Hao Ge <hao.ge@linux.dev>
-In-Reply-To: <6f3b4aa0aa294cd56a73854c631de3ab7c0c5e01.1780701922.git.abhishekbapat@google.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Migadu-Flow: FLOW_OUT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260601184516.919488-2-sanman.pradhan@hpe.com>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-91283-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-91285-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:abhishekbapat@google.com,m:surenb@google.com,m:akpm@linux-foundation.org,m:kent.overstreet@linux.dev,m:skhan@linuxfoundation.org,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:souravpanda@google.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[hao.ge@linux.dev,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[3];
-	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:sanman.pradhan@hpe.com,m:linux-hwmon@vger.kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:devicetree@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:noname.nuno@gmail.com,m:arif.syed@hpe.com,m:psanman@juniper.net,m:conor.dooley@microchip.com,m:krzk@kernel.org,m:conor@kernel.org,m:nonamenuno@gmail.com,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[linux.dev:+];
+	DMARC_NA(0.00)[roeck-us.net];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,lwn.net,linuxfoundation.org,gmail.com,hpe.com,juniper.net,microchip.com];
+	FORWARDED(0.00)[lists@lfdr.de];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	FORGED_SENDER(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[hao.ge@linux.dev,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,linux.dev:mid,linux.dev:dkim,linux.dev:from_mime,linux.dev:email]
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[microchip.com:email,roeck-us.net:from_mime,roeck-us.net:mid,vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 9A567652491
+X-Rspamd-Queue-Id: 9437B652621
 
-Hi Abhishek
+On Mon, Jun 01, 2026 at 06:45:30PM +0000, Pradhan, Sanman wrote:
+> From: Sanman Pradhan <psanman@juniper.net>
+> 
+> Add devicetree binding documentation for the Analog Devices MAX20860A
+> step-down DC-DC switching regulator with PMBus interface.
+> 
+> Signed-off-by: Sanman Pradhan <psanman@juniper.net>
+> Acked-by: Conor Dooley <conor.dooley@microchip.com>
 
+Applied.
 
-Thanks for the new version.
-
-
-On 2026/6/6 07:36, Abhishek Bapat wrote:
-> Extend the capability of the IOCTL mechanism to filter allocations based
-> on tag's module name, function name, file name and line number.
->
-> Signed-off-by: Abhishek Bapat <abhishekbapat@google.com>
-
-
-Acked-by: Hao Ge <hao.ge@linux.dev>
-
-
-> ---
->   include/uapi/linux/alloc_tag.h | 26 ++++++++++++-
->   lib/alloc_tag.c                | 68 ++++++++++++++++++++++++++++++++--
->   2 files changed, 89 insertions(+), 5 deletions(-)
->
-> diff --git a/include/uapi/linux/alloc_tag.h b/include/uapi/linux/alloc_tag.h
-> index 901199bad514..cffb0c46e0b1 100644
-> --- a/include/uapi/linux/alloc_tag.h
-> +++ b/include/uapi/linux/alloc_tag.h
-> @@ -34,8 +34,32 @@ struct allocinfo_tag_data {
->   	struct allocinfo_counter counter;
->   };
->   
-> +enum {
-> +	ALLOCINFO_FILTER_MODNAME,
-> +	ALLOCINFO_FILTER_FUNCTION,
-> +	ALLOCINFO_FILTER_FILENAME,
-> +	ALLOCINFO_FILTER_LINENO,
-> +	__ALLOCINFO_FILTER_LAST = ALLOCINFO_FILTER_LINENO
-> +};
-> +
-> +#define ALLOCINFO_FILTER_MASK_MODNAME		(1 << ALLOCINFO_FILTER_MODNAME)
-> +#define ALLOCINFO_FILTER_MASK_FUNCTION		(1 << ALLOCINFO_FILTER_FUNCTION)
-> +#define ALLOCINFO_FILTER_MASK_FILENAME		(1 << ALLOCINFO_FILTER_FILENAME)
-> +#define ALLOCINFO_FILTER_MASK_LINENO		(1 << ALLOCINFO_FILTER_LINENO)
-> +
-> +#define ALLOCINFO_FILTER_MASKS \
-> +	((1 << (__ALLOCINFO_FILTER_LAST + 1)) - 1)
-> +
-> +struct allocinfo_filter {
-> +	__u64 mask; /* bitmask of the filter fields used */
-> +	struct allocinfo_tag fields;
-> +};
-> +
->   struct allocinfo_get_at {
-> -	__u64 pos;	/* input */
-> +	/* inputs */
-> +	__u64 pos;
-> +	struct allocinfo_filter filter;
-> +	/* output */
->   	struct allocinfo_tag_data data;
->   };
->   
-> diff --git a/lib/alloc_tag.c b/lib/alloc_tag.c
-> index a0577215eb3d..93bc976ac505 100644
-> --- a/lib/alloc_tag.c
-> +++ b/lib/alloc_tag.c
-> @@ -49,6 +49,7 @@ struct allocinfo_private {
->   	struct codetag_iterator iter;
->   	struct codetag_iterator reported_iter;
->   	bool print_header;
-> +	struct allocinfo_filter filter;
->   	/* ioctl uses a separate iterator not to interfere with reads */
->   	struct codetag_iterator ioctl_iter;
->   	bool positioned; /* seq_open_private() sets to 0 */
-> @@ -184,6 +185,12 @@ static void allocinfo_copy_str(char *dest, const char *src)
->   	strscpy_pad(dest, allocinfo_str(src), ALLOCINFO_STR_SIZE);
->   }
->   
-> +/* Compare two strings and only consider the trimmed suffix if s1 is too long */
-> +static int allocinfo_cmp_str(const char *str, const char *template)
-> +{
-> +	return strncmp(allocinfo_str(str), template, ALLOCINFO_STR_SIZE);
-> +}
-> +
->   /*
->    * Populates the UAPI allocinfo_tag_data structure with active runtime
->    * profiling counters extracted from the given kernel codetag.
-> @@ -223,6 +230,40 @@ static int allocinfo_ioctl_get_content_id(struct seq_file *m, void __user *arg)
->   	return 0;
->   }
->   
-> +/*
-> + * Verifies whether a given codetag satisfies the active filtering criteria by
-> + * matching it's characteristics against the specified filter.
-
-
-nit: s/it's/its/
-
-
-> + */
-> +static bool matches_filter(struct codetag *ct, struct allocinfo_filter *filter)
-> +{
-> +	if (!filter || !filter->mask)
-> +		return true;
-> +
-> +	if (filter->mask & ALLOCINFO_FILTER_MASK_MODNAME) {
-> +		/* user wants to filter by modname but ct->modname is NULL */
-> +		if (!ct->modname) {
-> +			/* validate if user was attempting to filter for built-in allocations */
-> +			if (filter->fields.modname[0] != '\0')
-> +				return false;
-> +		} else if (allocinfo_cmp_str(ct->modname, filter->fields.modname))
-> +			return false;
-> +	}
-> +
-> +	if ((filter->mask & ALLOCINFO_FILTER_MASK_FUNCTION) &&
-> +	    ct->function && (allocinfo_cmp_str(ct->function, filter->fields.function)))
-> +		return false;
-> +
-> +	if ((filter->mask & ALLOCINFO_FILTER_MASK_FILENAME) &&
-> +	    ct->filename && (allocinfo_cmp_str(ct->filename, filter->fields.filename)))
-> +		return false;
-> +
-> +	if ((filter->mask & ALLOCINFO_FILTER_MASK_LINENO) &&
-> +	    ct->lineno != filter->fields.lineno)
-> +		return false;
-> +
-> +	return true;
-> +}
-> +
->   /*
->    * Seeks the ioctl iterator to the specified 0-indexed tag position, reads its
->    * profiling data and returns it to userspace.
-> @@ -231,29 +272,46 @@ static int allocinfo_ioctl_get_at(struct seq_file *m, void __user *arg)
->   {
->   	struct allocinfo_private *priv;
->   	struct codetag *ct;
-> -	__u64 pos;
->   	struct allocinfo_get_at params = {0};
-> +	__u64 skip_count;
->   
->   	if (copy_from_user(&params, arg, sizeof(params)))
->   		return -EFAULT;
->   
-> +	if (params.filter.mask & ~ALLOCINFO_FILTER_MASKS)
-> +		return -EINVAL;
-> +
->   	priv = m->private;
-> -	pos = params.pos;
->   
->   	mutex_lock(&priv->ioctl_lock);
->   	codetag_lock_module_list(alloc_tag_cttype);
->   
-> -	if (pos >= codetag_get_count(alloc_tag_cttype)) {
-> +	if (params.pos >= codetag_get_count(alloc_tag_cttype)) {
->   		codetag_unlock_module_list(alloc_tag_cttype);
->   		mutex_unlock(&priv->ioctl_lock);
->   		return -ENOENT;
->   	}
->   
-> +	skip_count = params.pos;
-> +
-> +	if (params.filter.mask)
-> +		priv->filter = params.filter;
-> +	else
-> +		priv->filter.mask = 0;
-> +
->   	/* Find the codetag */
->   	priv->ioctl_iter = codetag_get_ct_iter(alloc_tag_cttype);
->   	ct = codetag_next_ct(&priv->ioctl_iter);
-> -	while (ct && pos--)
-> +
-> +	while (ct) {
-> +		if (matches_filter(ct, &priv->filter)) {
-> +			if (skip_count == 0)
-> +				break;
-> +			skip_count--;
-> +		}
->   		ct = codetag_next_ct(&priv->ioctl_iter);
-> +	}
-> +
->   	if (ct) {
->   		allocinfo_to_params(ct, &params.data);
->   		priv->positioned = true;
-> @@ -294,6 +352,8 @@ static int allocinfo_ioctl_get_next(struct seq_file *m, void __user *arg)
->   	}
->   
->   	ct = codetag_next_ct(&priv->ioctl_iter);
-> +	while (ct && !matches_filter(ct, &priv->filter))
-> +		ct = codetag_next_ct(&priv->ioctl_iter);
->   	if (ct)
->   		allocinfo_to_params(ct, &params);
->   
+Thanks,
+Guenter
 
