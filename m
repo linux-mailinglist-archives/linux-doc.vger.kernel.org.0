@@ -1,55 +1,55 @@
-Return-Path: <linux-doc+bounces-91432-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91428-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 06afC77iJmqamQIAu9opvQ
-	(envelope-from <linux-doc+bounces-91432-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 17:41:50 +0200
+	id hnYLBDbjJmq5mQIAu9opvQ
+	(envelope-from <linux-doc+bounces-91428-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 17:43:50 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D036658399
-	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 17:41:49 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9CB2D6583F2
+	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 17:43:49 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=infradead.org header.s=casper.20170209 header.b=wRwgQ5ZG;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91432-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91432-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=infradead.org header.s=casper.20170209 header.b=N9+adQEb;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91428-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91428-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=infradead.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 367BA30B448E
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Jun 2026 15:18:39 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 13B29319EC54
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Jun 2026 15:17:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D9BF94534A2;
-	Mon,  8 Jun 2026 14:55:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2199A43D502;
+	Mon,  8 Jun 2026 14:55:35 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B508F43E9F6;
-	Mon,  8 Jun 2026 14:55:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 14E9D43C078;
+	Mon,  8 Jun 2026 14:55:32 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780930539; cv=none; b=YjvCUK9Rd2xmxke7bLp3jb0Y+PdZJD7DvmsqcE2Shp6eID0MFT+Qby4D5ov4i/rdXakwtWCI5XLMqmeJl/aKiGy2S/+wCblExJRi3XFW95mG5Htn1WahbmCihx4Cm75vb+Zopa9LuuRz5QtBpaIc/FHNpAJJxt1/w/YX6rGV0m0=
+	t=1780930535; cv=none; b=FwDvs3GlGC82s7VRU5SIyYDf7YW5GyOvPw51/Ymv82aKFKh1BWkmW7ZvmExVWGG/NT7J4qrIYbT2fpY8iYAm6Z+Ony8HP96bWpZRySC9mPdvCSbFGZ+xhj6dzmlBR/9Z+gxjxpm/vaTuyq/iwz75PHIYmw6x1TS3bGJQpuPTopw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780930539; c=relaxed/simple;
-	bh=Hf8VHEZ8O2Jy3Wzguw0b7iQtLmsQiNi/OCpzE1HUF6M=;
+	s=arc-20240116; t=1780930535; c=relaxed/simple;
+	bh=71gV0mDZxAEjllWxf1uNy29m6gSw/przYwtIy9HLqNU=;
 	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=nUfxeZ/vJfceiJbu6DggAzkc+vVkZlS1T8pDYmfTm03Chuy9jJZ50rxB7b8QoBLT2XUlFTv2z3GVC+Irln8+je1Ccjwg0N1Fbpi5uMDxBesQSGbmM0U6QJPpDkAoULqdVbWHCVsdpHoSHYfkuH8o/6ojsM7Dm9oFHBUSxl/i8MA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=casper.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=wRwgQ5ZG; arc=none smtp.client-ip=90.155.50.34
+	 MIME-Version:Content-Type; b=Lc03t1jM/YkhxDOqy6/Hji1IuSVUmgobbcRAs1Slfi+ZnMDT8SskYroh9SV8UlWkH2CKiuFYsY68cXnRRH8eAsYsX2Ya1NuicAIdv+Rhujrp/lDzJ5HeVj5qgH9N4/ykCOCr9x69zbBTMM0dJXo4+8SGXze9khQAzhac7NvF9v8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=casper.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=N9+adQEb; arc=none smtp.client-ip=90.155.50.34
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
-	Cc:Content-Type:Content-ID:Content-Description;
-	bh=lqNX+TXIvKbp1pjqN/ugyzGv3kWdP4RiL9hc1KXGPRI=; b=wRwgQ5ZGbWhFRFS/ILi+ryrW8z
-	RCJJgbqOfBEBjgKSKCcCoDW2seCAXJOVkJsIUjpsZTFf3ZwwW/r/LBoRg3GcTDegI9Om9buMxnXSm
-	ol4oIqjGlb4+UjznpTA/wrrDb9iKy8EBM/hG8vEG7tlKR+JP/4yLfX9N3NkyF9T370tZRJwZjGk+d
-	HgwTljMZ5/hOowc/g8+thNhKsZ2enCaTJi9CEaWb230kQ4ycqvj9pOEWkLhZEyZr0PfWYT9G+NitC
-	bu20HsuDZZ1x7G+uKKJk8yolRz05c/6kBD7WH2e58bwup4UlWMqcQw5MeXhriW5XlTXpV6fs8IKUT
-	sbgyowbQ==;
+	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:
+	From:Reply-To:Cc:Content-ID:Content-Description;
+	bh=aHV9lck9iJ7HfeFHLwY/x8/L76vGmBWhEjbD8RUPDnI=; b=N9+adQEbHGyBhmT81pe1mmYYck
+	LjW/bk4JiQDQVfbGbb3rZrQkZSu2DFaWqWwtmJ4aYta+6mUnOrqpsfIou57Twpu7e3mpdtOR6IaS/
+	PR30FjJPheq3HC07+oHZIvW0QagIsGBCO4FGmfBYHGTO6L32PDV0Gau8jWk4WqHWk2LxHqr7BBkeg
+	InjZCCPr2gDsciyXM/r+vac1yWl6d0xWHTwRNSxvzqdCOnylWOjVvDEBHh/ul2i4PBO8o+YQL6ivG
+	9Y+C1B3FJ8v/gGK94o+RhO5HmgPf9ZaXmgM9mMzuTK+aM+zaoXaQmTWHqMhV9AhnL2ZQbnsjqcGaA
+	wWHDSRaQ==;
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
 	by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wWbNS-0000000Dtxf-2ZjW;
+	id 1wWbNS-0000000Dtxj-2vXt;
 	Mon, 08 Jun 2026 14:54:59 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.2 #2 (Red Hat Linux))
-	id 1wWbNS-00000000NGR-3GbY;
+	id 1wWbNS-00000000NGX-3X6a;
 	Mon, 08 Jun 2026 15:54:58 +0100
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
@@ -79,9 +79,9 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v5 29/34] KVM: x86: Re-synchronize TSC after KVM_SET_TSC_KHZ
-Date: Mon,  8 Jun 2026 15:48:10 +0100
-Message-ID: <20260608145455.89187-30-dwmw2@infradead.org>
+Subject: [PATCH v5 30/34] KVM: selftests: Add Xen runstate migration test
+Date: Mon,  8 Jun 2026 15:48:11 +0100
+Message-ID: <20260608145455.89187-31-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260608145455.89187-1-dwmw2@infradead.org>
 References: <20260608145455.89187-1-dwmw2@infradead.org>
@@ -91,99 +91,271 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+X-Spamd-Result: default: False [-1.16 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	R_DKIM_ALLOW(-0.20)[infradead.org:s=casper.20170209];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-91432-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:pbonzini@redhat.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:vkuznets@redhat.com,m:jgross@suse.com,m:boris.ostrovsky@oracle.com,m:dwmw2@infradead.org,m:paul@xen.org,m:jic23@kernel.org,m:Sascha.Bischoff@arm.com,m:maz@kernel.org,m:joey.gouly@arm.com,m:jalliste@amazon.com,m:dongli.zhang@oracle.com,m:joe.jin@oracle.com,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:xen-devel@lists.xenproject.org,m:linux-kselftest@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-91428-lists,linux-doc=lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[27];
-	FORGED_SENDER(0.00)[dwmw2@infradead.org,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:pbonzini@redhat.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:vkuznets@redhat.com,m:jgross@suse.com,m:boris.ostrovsky@oracle.com,m:dwmw2@infradead.org,m:paul@xen.org,m:jic23@kernel.org,m:Sascha.Bischoff@arm.com,m:maz@kernel.org,m:joey.gouly@arm.com,m:jalliste@amazon.com,m:dongli.zhang@oracle.com,m:joe.jin@oracle.com,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:xen-devel@lists.xenproject.org,m:linux-kselftest@vger.kernel.org,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[dwmw2@infradead.org,linux-doc@vger.kernel.org];
+	FORGED_SENDER(0.00)[dwmw2@infradead.org,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[dwmw2@infradead.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[infradead.org:+];
 	ALIAS_RESOLVED(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,amazon.co.uk:email,infradead.org:dkim,infradead.org:mid,infradead.org:from_mime,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,amazon.co.uk:email,infradead.org:dkim,infradead.org:mid,infradead.org:from_mime,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 5D036658399
+X-Rspamd-Queue-Id: 9CB2D6583F2
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-KVM_SET_TSC_KHZ changes the vCPU's TSC scaling ratio but does not
-update the VM-wide cur_tsc_scaling_ratio used by get_kvmclock().
-This causes get_kvmclock() to use a stale (default 1:1) ratio when
-computing the KVM clock, leading to drift between the host-side
-kvmclock and what the guest observes.
+Test that Xen runstate (steal time) is correctly accounted across a
+simulated live migration using KVM_XEN_VCPU_ATTR and KVM_[GS]ET_CLOCK_GUEST.
 
-Fix this by calling kvm_synchronize_tsc() after changing the TSC
-frequency. This:
- - Updates cur_tsc_scaling_ratio (consumed by pvclock_update_vm_gtod_copy)
- - Ensures the TSC value is continuous across the frequency change
- - Triggers kvm_track_tsc_matching() for proper masterclock handling
- - Allows subsequent vCPUs to synchronize via the 1-second slop hack
+The test simulates what a real VMM does during migration:
+1. Creates a VM with Xen HVM config and runstate tracking
+2. Runs the guest to accumulate some kvmclock time
+3. Saves clock (KVM_GET_CLOCK_GUEST), TSC offset, and runstate
+4. Marks the saved state as RUNSTATE_runnable (vCPU not running)
+5. Destroys the source VM
+6. Sleeps 10ms (simulating migration network transfer time)
+7. Creates a new VM and restores all state precisely as saved
+8. Runs the guest and verifies the migration gap appears as steal
+
+The kernel accounts the gap because: on vcpu_load, it transitions from
+RUNSTATE_runnable to RUNSTATE_running, computing delta = kvmclock_now -
+state_entry_time. Since kvmclock has advanced past the saved entry time
+(real time elapsed during migration), the delta is added to time_runnable.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- arch/x86/kvm/x86.c | 16 +++++++++++++++-
- 1 file changed, 15 insertions(+), 1 deletion(-)
+ .../selftests/kvm/x86/xen_migration_test.c    | 194 ++++++++++++++++++
+ 1 file changed, 194 insertions(+)
+ create mode 100644 tools/testing/selftests/kvm/x86/xen_migration_test.c
 
-diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index 54d4b1b3cfe4..96250264d403 100644
---- a/arch/x86/kvm/x86.c
-+++ b/arch/x86/kvm/x86.c
-@@ -206,6 +206,7 @@ module_param(mitigate_smt_rsb, bool, 0444);
- #ifdef CONFIG_X86_64
- static bool kvm_get_time_and_clockread(s64 *kernel_ns, u64 *tsc_timestamp);
- #endif
-+static void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *user_value);
- #define KVM_MAX_NR_USER_RETURN_MSRS 16
- 
- struct kvm_user_return_msrs {
-@@ -2611,7 +2612,20 @@ static int kvm_set_tsc_khz(struct kvm_vcpu *vcpu, u32 user_tsc_khz)
- 			 user_tsc_khz, thresh_lo, thresh_hi);
- 		use_scaling = 1;
- 	}
--	return set_tsc_khz(vcpu, user_tsc_khz, use_scaling);
-+	if (set_tsc_khz(vcpu, user_tsc_khz, use_scaling))
-+		return -1;
+diff --git a/tools/testing/selftests/kvm/x86/xen_migration_test.c b/tools/testing/selftests/kvm/x86/xen_migration_test.c
+new file mode 100644
+index 000000000000..37e8ace00611
+--- /dev/null
++++ b/tools/testing/selftests/kvm/x86/xen_migration_test.c
+@@ -0,0 +1,194 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Test Xen runstate (steal time) preservation across simulated migration.
++ *
++ * Verifies that the kernel correctly accounts the migration gap as
++ * steal time (runnable) when runstate data is saved and restored
++ * precisely, but real time elapses during the migration.
++ *
++ * The key insight: userspace saves the runstate with state=RUNSTATE_runnable
++ * (the vCPU is not running during migration). On restore, the kernel sees
++ * that kvmclock has advanced past state_entry_time, and accounts the
++ * difference as time spent in the runnable state.
++ */
++#include <inttypes.h>
++#include <stdint.h>
++#include <stdio.h>
++#include <string.h>
++#include <unistd.h>
++
++#include "test_util.h"
++#include "kvm_util.h"
++#include "processor.h"
++
++#include <asm/pvclock-abi.h>
++
++#define SHINFO_GPA	0xc0000000ULL
++#define RUNSTATE_GPA	(SHINFO_GPA + 0x1000)
++
++#define RUNSTATE_running  0
++#define RUNSTATE_runnable 1
++#define RUNSTATE_blocked  2
++#define RUNSTATE_offline  3
++
++struct vcpu_runstate_info {
++	uint32_t state;
++	uint64_t state_entry_time;
++	uint64_t time[4];
++} __attribute__((packed));
++
++static void guest_code(void)
++{
++	volatile struct vcpu_runstate_info *rs =
++		(void *)(unsigned long)RUNSTATE_GPA;
++
++	/* Report runstate times — no need to enable kvmclock MSR,
++	 * the kernel writes runstate using its internal kvmclock. */
++	GUEST_SYNC_ARGS(0, rs->time[RUNSTATE_runnable],
++			rs->time[RUNSTATE_running], 0, 0);
++}
++
++static struct kvm_vm *create_xen_vm(struct kvm_vcpu **vcpu)
++{
++	struct kvm_vm *vm;
++	int xen_caps;
++
++	vm = vm_create_with_one_vcpu(vcpu, guest_code);
++
++	xen_caps = kvm_check_cap(KVM_CAP_XEN_HVM);
++	TEST_REQUIRE(xen_caps & KVM_XEN_HVM_CONFIG_SHARED_INFO);
++	TEST_REQUIRE(xen_caps & KVM_XEN_HVM_CONFIG_RUNSTATE);
++
++	/* Map pages */
++	vm_userspace_mem_region_add(vm, VM_MEM_SRC_ANONYMOUS,
++				    SHINFO_GPA, 1, 2, 0);
++	virt_map(vm, SHINFO_GPA, SHINFO_GPA, 2);
++
++	/* Enable Xen HVM with MSR interception (enables runstate tracking) */
++	struct kvm_xen_hvm_config cfg = {
++		.flags = KVM_XEN_HVM_CONFIG_INTERCEPT_HCALL,
++		.msr = 0x40000000,
++	};
++	vm_ioctl(vm, KVM_XEN_HVM_CONFIG, &cfg);
++
++	/* Set shared_info */
++	struct kvm_xen_hvm_attr ha = {
++		.type = KVM_XEN_ATTR_TYPE_SHARED_INFO,
++		.u.shared_info.gfn = SHINFO_GPA >> 12,
++	};
++	vm_ioctl(vm, KVM_XEN_HVM_SET_ATTR, &ha);
++
++	/* Set runstate address */
++	struct kvm_xen_vcpu_attr rs_addr = {
++		.type = KVM_XEN_VCPU_ATTR_TYPE_RUNSTATE_ADDR,
++		.u.gpa = RUNSTATE_GPA,
++	};
++	vcpu_ioctl(*vcpu, KVM_XEN_VCPU_SET_ATTR, &rs_addr);
++
++	return vm;
++}
++
++int main(void)
++{
++	struct pvclock_vcpu_time_info pvti;
++	struct kvm_xen_vcpu_attr runstate_save;
++	struct kvm_vcpu *vcpu;
++	struct kvm_vm *vm;
++	struct ucall uc;
++	uint64_t tsc_offset;
++	int ret;
++
++	/* === SOURCE SIDE === */
++	pr_info("=== Source: create VM and run guest ===\n");
++	vm = create_xen_vm(&vcpu);
++
++	/* Run guest once to accumulate some runstate time */
++	vcpu_run(vcpu);
++	TEST_ASSERT_KVM_EXIT_REASON(vcpu, KVM_EXIT_IO);
++	TEST_ASSERT_EQ(get_ucall(vcpu, &uc), UCALL_SYNC);
++
++	pr_info("  Guest sees: runnable=%" PRIu64 " running=%" PRIu64 "\n",
++		uc.args[2], uc.args[3]);
++
++	/* Save clock state */
++	ret = __vcpu_ioctl(vcpu, KVM_GET_CLOCK_GUEST, &pvti);
++	TEST_ASSERT(!ret, "KVM_GET_CLOCK_GUEST failed");
++
++	/* Save TSC offset */
++	tsc_offset = vcpu_get_msr(vcpu, MSR_IA32_TSC_ADJUST);
++
++	/* Save runstate — the vCPU is now "runnable" (not running) */
++	runstate_save.type = KVM_XEN_VCPU_ATTR_TYPE_RUNSTATE_DATA;
++	vcpu_ioctl(vcpu, KVM_XEN_VCPU_GET_ATTR, &runstate_save);
 +
 +	/*
-+	 * Re-synchronize the TSC after changing frequency. This ensures
-+	 * cur_tsc_scaling_ratio is updated (used by get_kvmclock) and
-+	 * the TSC value is continuous across the frequency change.
++	 * Transition to runnable state before saving — the vCPU is
++	 * not running during migration.
 +	 */
-+	{
-+		u64 tsc = kvm_read_l1_tsc(vcpu, rdtsc());
++	runstate_save.u.runstate.state = RUNSTATE_runnable;
 +
-+		kvm_synchronize_tsc(vcpu, &tsc);
-+	}
++	pr_info("  Saved runstate: running=%" PRIu64 " runnable=%" PRIu64
++		" entry=%" PRIu64 "\n",
++		(uint64_t)runstate_save.u.runstate.time_running,
++		(uint64_t)runstate_save.u.runstate.time_runnable,
++		(uint64_t)runstate_save.u.runstate.state_entry_time);
++
++	uint64_t saved_runnable = runstate_save.u.runstate.time_runnable;
++
++	kvm_vm_release(vm);
++
++	/* === MIGRATION GAP === */
++	pr_info("=== Simulating migration (sleeping 10ms) ===\n");
++	usleep(10000);
++
++	/* === DESTINATION SIDE === */
++	pr_info("=== Destination: create new VM and restore ===\n");
++	vm = create_xen_vm(&vcpu);
++
++	/* Restore TSC offset */
++	vcpu_set_msr(vcpu, MSR_IA32_TSC_ADJUST, tsc_offset);
++
++	/* Restore clock — kvmclock will now be ~10ms ahead of the snapshot */
++	vcpu_ioctl(vcpu, KVM_SET_CLOCK_GUEST, &pvti);
++
++	/* Restore runstate exactly as saved (state=runnable) */
++	runstate_save.type = KVM_XEN_VCPU_ATTR_TYPE_RUNSTATE_DATA;
++	ret = __vcpu_ioctl(vcpu, KVM_XEN_VCPU_SET_ATTR, &runstate_save);
++	TEST_ASSERT(!ret, "Restore runstate failed: errno %d", errno);
++
++	/*
++	 * Run the guest. When the vCPU enters vcpu_run, the kernel
++	 * transitions from RUNSTATE_runnable to RUNSTATE_running.
++	 * It computes: delta = kvmclock_now - state_entry_time
++	 * This delta (which includes the migration gap) is added to
++	 * time_runnable (steal time).
++	 */
++	vcpu_run(vcpu);
++	TEST_ASSERT_KVM_EXIT_REASON(vcpu, KVM_EXIT_IO);
++	TEST_ASSERT_EQ(get_ucall(vcpu, &uc), UCALL_SYNC);
++
++	uint64_t guest_runnable = uc.args[2];
++	uint64_t guest_running = uc.args[3];
++
++	pr_info("  Guest sees: runnable=%" PRIu64 " running=%" PRIu64 "\n",
++		guest_runnable, guest_running);
++
++	uint64_t steal_increase = guest_runnable - saved_runnable;
++	pr_info("  Steal time increase: %" PRIu64 " ns (migration gap)\n",
++		steal_increase);
++
++	/*
++	 * The steal time increase should be at least 10ms (the sleep)
++	 * but not more than 5s (allowing for VM creation overhead).
++	 * The actual gap is from the source's state_entry_time to the
++	 * destination's kvmclock "now" at vcpu_load time.
++	 */
++	TEST_ASSERT(steal_increase >= 10000000ULL &&
++		    steal_increase < 5000000000ULL,
++		    "Steal time increase %" PRIu64 " ns not in expected range "
++		    "[10ms, 5s]", steal_increase);
++
++	kvm_vm_release(vm);
++	pr_info("PASS: Migration gap correctly accounted as steal time\n");
 +	return 0;
- }
- 
- static u64 compute_guest_tsc(struct kvm_vcpu *vcpu, s64 kernel_ns)
++}
 -- 
 2.54.0
 
