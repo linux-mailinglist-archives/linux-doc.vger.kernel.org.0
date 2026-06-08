@@ -1,167 +1,296 @@
-Return-Path: <linux-doc+bounces-91367-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91369-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id pyX4Jjq4JmodbwIAu9opvQ
-	(envelope-from <linux-doc+bounces-91367-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 14:40:26 +0200
+	id cMrvFYe7JmrNbwIAu9opvQ
+	(envelope-from <linux-doc+bounces-91369-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 14:54:31 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F05365644E
-	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 14:40:26 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id E914C656583
+	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 14:54:30 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=huawei.com header.s=dkim header.b=PCJCwmPh;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91367-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-91367-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=huawei.com;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=TDEEEbcw;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91369-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-91369-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=gmail.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 75E053038558
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Jun 2026 12:37:38 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 6083E30205C9
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Jun 2026 12:50:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 16856386C3B;
-	Mon,  8 Jun 2026 12:36:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A9544282F25;
+	Mon,  8 Jun 2026 12:50:31 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from canpmsgout01.his.huawei.com (canpmsgout01.his.huawei.com [113.46.200.216])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 012C838D3F0;
-	Mon,  8 Jun 2026 12:36:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4147827E05E
+	for <linux-doc@vger.kernel.org>; Mon,  8 Jun 2026 12:50:30 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780922216; cv=none; b=JJLRcaYcaIa7ftzyCA0C4wUAR0iPNPriuOmNiyXvzsUBsazbFsZpusufxI4/MsoPHK0vTLoxZlZ+AWffwlw870je3AMmrFjPAeH3u7+E+DPIasqYJIDXdcfLm8uHNpoAnZlq3LDvYk/qdLF7ACf2Gc51FptH94ftsAYlW/L5tr4=
+	t=1780923031; cv=none; b=ATjkdfLpSzOt8NTclP3eUEbXOfpskXXv9r1pgahiq/j1otDtLvImMsHR4bAM9B1Tv2VDXanxVpu7juQj024BwoTxfT8IgwR4QfWSxH24vxoO9XfDpHrYkdor70UjY0zcTdkVEa/ZLIJK6+hO1JbJHyVXSKipXnvOvutt7snUCIE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780922216; c=relaxed/simple;
-	bh=nCW3PTk02EJryD+Z5xmHX/T0/by2aL/MowN8+TO5ukc=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=kAb/Kdkl7Mziqa+0vJdEq2XZLz2ujLfoBobz61PWzMx8kE6/iya1s3BugqARiMu+978U38HueexKe9OGIUVD7R94yqE3lPL1mlt5xXq4qK50QeIgC5F+A/4BKcor/7O7vbfAhWtye3LY0vzo439svnHuDkBlsHgU6erBq9rWuxQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=PCJCwmPh; arc=none smtp.client-ip=113.46.200.216
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=bKXK5d64EjLE5JGdNU14oQFWm8sReOeR2IEcr/vSq/E=;
-	b=PCJCwmPhOVT3o4YsBwCtp4EyblDYlzQpfLhWO/TKcFx7To9NeahSsOqk7n7EcXGIAgEjoky5s
-	NsL2r/rjPC2M0Y0wVxJpCwWxOG+MDUmZzs1Q/tqVwsFKSISJj+NfcZtexyrjAzKtKuHsFrdNQPw
-	XdexgT+oXIRld5Kwr60eLbQ=
-Received: from mail.maildlp.com (unknown [172.19.163.104])
-	by canpmsgout01.his.huawei.com (SkyGuard) with ESMTPS id 4gYrtS58jPz1T4HJ;
-	Mon,  8 Jun 2026 20:28:32 +0800 (CST)
-Received: from kwepemf100013.china.huawei.com (unknown [7.202.181.12])
-	by mail.maildlp.com (Postfix) with ESMTPS id 1536A4048F;
-	Mon,  8 Jun 2026 20:36:51 +0800 (CST)
-Received: from DESKTOP-62GVMTR.china.huawei.com (10.174.189.124) by
- kwepemf100013.china.huawei.com (7.202.181.12) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.36; Mon, 8 Jun 2026 20:36:49 +0800
-From: Fan Gong <gongfan1@huawei.com>
-To: Fan Gong <gongfan1@huawei.com>, Wu Di <wudi234@huawei.com>, Teng Peisen
-	<tengpeisen@huawei.com>, <netdev@vger.kernel.org>, "David S. Miller"
-	<davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski
-	<kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Simon Horman
-	<horms@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>, Ioana Ciornei
-	<ioana.ciornei@nxp.com>, Mohsin Bashir <mohsin.bashr@gmail.com>
-CC: <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>, luosifu
-	<luosifu@huawei.com>, Xin Guo <guoxin09@huawei.com>, Zhou Shuai
-	<zhoushuai28@huawei.com>, Wu Like <wulike1@huawei.com>, Shi Jing
-	<shijing34@huawei.com>, Zheng Jiezhen <zhengjiezhen@h-partners.com>, Maxime
- Chevallier <maxime.chevallier@bootlin.com>
-Subject: [PATCH net-next v08 5/5] hinic3: Remove unneeded coalesce parameters
-Date: Mon, 8 Jun 2026 20:36:34 +0800
-Message-ID: <c514ecfdc7ded55ccdadec85141ce5c8e3d818ac.1780907605.git.wudi234@huawei.com>
-X-Mailer: git-send-email 2.50.1.windows.1
-In-Reply-To: <cover.1780907605.git.wudi234@huawei.com>
-References: <cover.1780907605.git.wudi234@huawei.com>
+	s=arc-20240116; t=1780923031; c=relaxed/simple;
+	bh=TG6r/3Lp+ODfq+/oUWl3Qo2qwI2yFx1wavbyGgxzkRg=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=DYh9OZGhAmVVhLhI617yCsnK/8HqF0DTENwbvsO1HFi/8amcZrjyZflNuicCrmNNWC7pX8GmTmWQbvXMH6v5RgLvKjIaK4cRVYvt3NMLK1fuohAYtVhp+qC2FXrrDyFBMM4/F6PRZ+zZ4/EFwFY51cv6MaILOWF9ekNd95KZDrI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=TDEEEbcw; arc=none smtp.client-ip=209.85.216.46
+Received: by mail-pj1-f46.google.com with SMTP id 98e67ed59e1d1-36bb3551f6eso3665629a91.1
+        for <linux-doc@vger.kernel.org>; Mon, 08 Jun 2026 05:50:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1780923030; x=1781527830; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=DiIdK82JBJK4ZmshrTXuh1DETm09pI5fnq4TS+v0gOw=;
+        b=TDEEEbcw5RoeiTZWI0FoBMax+eR8C2tcdBXsoC+PVkb2kta9/b0PKb+Cryf5bxVHk9
+         EXPPksQj/YtwtXgbDHTY3JQOJ2Nv6FluWu5JO5iPqok0/j/Ha3g8Kwnio4Qkf6wqdZoH
+         F3Z+eqfxbLHS9xrmNQ6pM1dy8aSKtU4csj1lrP29ZHYowwpqmQnYnMYH0G2stf+oH2Ub
+         RZ2uPCmsfX6MKtKxwBmj9eFS7ESqVI5Jk6eldnDE1yu+/W+Tkwv1nCqTl7Zsoa0yq9pQ
+         6L0dacSQlLRGULqGdfFEKRBg9atT7bR5DArD2+zguLh+IVU9a01pvi+daWLHuCxHX+vp
+         io7g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780923030; x=1781527830;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
+         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=DiIdK82JBJK4ZmshrTXuh1DETm09pI5fnq4TS+v0gOw=;
+        b=ivbKs4pXl1gchBMZ+Xkrf0+F9phV/liHIkQKEOxbVS81q6HkOC+n98EakB/N8JXMy3
+         Sap5NpKFaF4pd0w8DUVH2u0UYu8cL4YMCz6mMSF7J9AkBlhjiQBpTDtkkLFQjiY3w0RW
+         cWa7CnRRSBmqJ3NxrFkLlnwd2TIor6jwnxk8oU/ySckNLv6P2O/ciI0RtHCuBzCD2LZ8
+         8VSJaxJFTeIqdsL6cNzUbqLC2VLLDhDP+KOQNoBMeuiZ6rdMJ4QpvTJJdECDP/x1haXX
+         rsaK3xNthtHgaVNeFnPhrVzFCyeRqXKDJB/b0wYprHOPK162+P1Ij9HJUDbftprEUmiy
+         BQfw==
+X-Forwarded-Encrypted: i=1; AFNElJ+GWD795q7X/EKVegofM0yJqe4A2byUvWrT5gyFqR1naDLcibjrtUTIDKKkyYpr5gVKo35opzNJHLM=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy7MhQSALqmxgLn/+LiBKaZ3TvWIHNSQQJ7UG9pjFdeJu0HDrL+
+	DZTNGiCRL2TsjTAiQ3/gCIZWcFOjEH6vdZzJCeWSKjSQAMnwCXAssUHi
+X-Gm-Gg: Acq92OGzRzOnI2DTWErhxd/k3u9/T3T9QNWNkYH8KQ0TPSh1m87TpuvpQ3Vop8l34fl
+	M3L882DaO7vFeqPSx+kAXpUuqGOeJ0/lmqWeulQLJSeNa9O06KFgNAQtSLjUQ2ahgjkfXiPjnfF
+	Aux+kMAlTxY7U9m8xfuvNuW7lA2DQ9G+XOI/MTJ/R3BttdUmI+1hWb2wP5Ht9D++H9bSiiaHdbj
+	rKfPt7CyYxrjTUuRm4plHdtYeGSNR2WQ5GrwhLyEQg1a18Cs9GAx+eoP/MwgLAm80E88sqC7dtt
+	T6fq61b7/QP6xe9uRx/0VVEjw9Rm1E7wve3YTSvQ5oFqSHOLNHJZJRGn5abDRBDsU8b8W9Wl55W
+	S8pnT67f64jkHcaCaRI7sVUd7gPnMfFIZB9oESYNiJiRKEQisb27avvb/V12HHmcsoek2vE6yJT
+	BnbeCGSRQ9h6wwqDdrwZfRm0418aIGWRmoo/cjuJCNnCxI1kYdC+L8uQ==
+X-Received: by 2002:a17:90b:5345:b0:35c:30a8:330 with SMTP id 98e67ed59e1d1-370ebff342fmr15636109a91.0.1780923029551;
+        Mon, 08 Jun 2026 05:50:29 -0700 (PDT)
+Received: from [10.125.192.72] ([210.184.73.204])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c1663981basm179520225ad.67.2026.06.08.05.50.22
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 08 Jun 2026 05:50:29 -0700 (PDT)
+Message-ID: <90730fa7-62e7-d5f4-b638-23b22a8509f2@gmail.com>
+Date: Mon, 8 Jun 2026 20:50:19 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.15.0
+Subject: Re: [PATCH v3 1/4] mm/zswap: Make shrink_worker writeback cursor
+ per-memcg
+To: Nhat Pham <nphamcs@gmail.com>
+Cc: Yosry Ahmed <yosry@kernel.org>, akpm@linux-foundation.org, tj@kernel.org,
+ hannes@cmpxchg.org, shakeel.butt@linux.dev, mhocko@kernel.org,
+ mkoutny@suse.com, chengming.zhou@linux.dev, muchun.song@linux.dev,
+ roman.gushchin@linux.dev, cgroups@vger.kernel.org, linux-mm@kvack.org,
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ Hao Jia <jiahao1@lixiang.com>
+References: <20260526114601.67041-1-jiahao.kernel@gmail.com>
+ <20260526114601.67041-2-jiahao.kernel@gmail.com>
+ <aho7nepN5jZtKmef@google.com>
+ <8c0e60e1-5713-69f0-a687-088c87e75764@gmail.com>
+ <ah4ZZGl7GYJf54Wz@google.com>
+ <ff344c9f-51da-8b3a-e7a9-c4a7f4702ef8@gmail.com>
+ <ah9i3uhh3PFiS0Uk@google.com>
+ <c7870fe2-3588-79db-cbfb-bd6a2b78f594@gmail.com>
+ <aiBpibRNi0BcM1Zu@google.com>
+ <9898f83d-fae9-e284-6b85-c7f4089840a0@gmail.com>
+ <CAO9r8zPBH6-0SQ6-_ZOhTQeyu=rz4F=ugikCrU-JR_skm6fEWA@mail.gmail.com>
+ <a60eedb6-f3fd-4092-b726-04a17a695ace@gmail.com>
+ <CAKEwX=MQ3xXBAY-2H8vA+XSX5GHNBubJ2GCYAXGD+Hra++ZM7A@mail.gmail.com>
+From: Hao Jia <jiahao.kernel@gmail.com>
+In-Reply-To: <CAKEwX=MQ3xXBAY-2H8vA+XSX5GHNBubJ2GCYAXGD+Hra++ZM7A@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: kwepems200002.china.huawei.com (7.221.188.68) To
- kwepemf100013.china.huawei.com (7.202.181.12)
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
-	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[21];
-	TAGGED_FROM(0.00)[bounces-91367-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:gongfan1@huawei.com,m:wudi234@huawei.com,m:tengpeisen@huawei.com,m:netdev@vger.kernel.org,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:horms@kernel.org,m:andrew+netdev@lunn.ch,m:ioana.ciornei@nxp.com,m:mohsin.bashr@gmail.com,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:luosifu@huawei.com,m:guoxin09@huawei.com,m:zhoushuai28@huawei.com,m:wulike1@huawei.com,m:shijing34@huawei.com,m:zhengjiezhen@h-partners.com,m:maxime.chevallier@bootlin.com,m:andrew@lunn.ch,m:mohsinbashr@gmail.com,s:lists@lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[16];
 	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCVD_TLS_LAST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[gongfan1@huawei.com,linux-doc@vger.kernel.org];
-	FREEMAIL_TO(0.00)[huawei.com,vger.kernel.org,davemloft.net,google.com,kernel.org,redhat.com,lunn.ch,nxp.com,gmail.com];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[gongfan1@huawei.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS(0.00)[m:nphamcs@gmail.com,m:yosry@kernel.org,m:akpm@linux-foundation.org,m:tj@kernel.org,m:hannes@cmpxchg.org,m:shakeel.butt@linux.dev,m:mhocko@kernel.org,m:mkoutny@suse.com,m:chengming.zhou@linux.dev,m:muchun.song@linux.dev,m:roman.gushchin@linux.dev,m:cgroups@vger.kernel.org,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jiahao1@lixiang.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[jiahaokernel@gmail.com,linux-doc@vger.kernel.org];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-91369-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[huawei.com:+];
-	RCVD_COUNT_FIVE(0.00)[6];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[jiahaokernel@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,huawei.com:mid,huawei.com:dkim,huawei.com:from_mime,huawei.com:email,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 3F05365644E
+X-Rspamd-Queue-Id: E914C656583
 
-  Remove unneeded coalesce parameters in irq handling.
 
-Co-developed-by: Wu Di <wudi234@huawei.com>
-Signed-off-by: Wu Di <wudi234@huawei.com>
-Co-developed-by: Teng Peisen <tengpeisen@huawei.com>
-Signed-off-by: Teng Peisen <tengpeisen@huawei.com>
-Signed-off-by: Fan Gong <gongfan1@huawei.com>
----
- drivers/net/ethernet/huawei/hinic3/hinic3_irq.c | 6 +-----
- drivers/net/ethernet/huawei/hinic3/hinic3_rx.h  | 3 ---
- 2 files changed, 1 insertion(+), 8 deletions(-)
 
-diff --git a/drivers/net/ethernet/huawei/hinic3/hinic3_irq.c b/drivers/net/ethernet/huawei/hinic3/hinic3_irq.c
-index b7cd5f2f53a7..6a8695e0a69a 100644
---- a/drivers/net/ethernet/huawei/hinic3/hinic3_irq.c
-+++ b/drivers/net/ethernet/huawei/hinic3/hinic3_irq.c
-@@ -149,13 +149,9 @@ static int hinic3_set_interrupt_moder(struct net_device *netdev, u16 q_id,
- 		nic_dev->intr_coalesce[q_id].resend_timer_cfg;
- 
- 	err = hinic3_set_interrupt_cfg(nic_dev->hwdev, info);
--	if (err) {
-+	if (err)
- 		netdev_err(netdev,
- 			   "Failed to modify moderation for Queue: %u\n", q_id);
--	} else {
--		nic_dev->rxqs[q_id].last_coalesc_timer_cfg = coalesc_timer_cfg;
--		nic_dev->rxqs[q_id].last_pending_limit = pending_limit;
--	}
- 
- 	mutex_unlock(&nic_dev->change_res_mutex);
- 
-diff --git a/drivers/net/ethernet/huawei/hinic3/hinic3_rx.h b/drivers/net/ethernet/huawei/hinic3/hinic3_rx.h
-index c11d080408a7..2ab691ed11a9 100644
---- a/drivers/net/ethernet/huawei/hinic3/hinic3_rx.h
-+++ b/drivers/net/ethernet/huawei/hinic3/hinic3_rx.h
-@@ -111,9 +111,6 @@ struct hinic3_rxq {
- 	dma_addr_t             cqe_start_paddr;
- 
- 	struct dim             dim;
--
--	u8                     last_coalesc_timer_cfg;
--	u8                     last_pending_limit;
- } ____cacheline_aligned;
- 
- struct hinic3_dyna_rxq_res {
--- 
-2.43.0
+On 2026/6/5 01:23, Nhat Pham wrote:
+> On Thu, Jun 4, 2026 at 6:06 AM Hao Jia <jiahao.kernel@gmail.com> wrote:
+>>
+>>
+>>
+>> On 2026/6/4 13:34, Yosry Ahmed wrote:
+>>>>>> For instance, suppose a parent memcg has two children, memcg1 and memcg2,
+>>>>>> each with 200MB of zswap (100MB inactive). Triggering proactive writeback on
+>>>>>> the parent memcg will exhaust memcg1's inactive zswap pages. After that,
+>>>>>> even though memcg2 still has plenty of inactive zswap pages, it will
+>>>>>> continue to write back memcg1's active zswap pages. Writing back active
+>>>>>> zswap pages causes the user-space agent to prematurely abort the writeback
+>>>>>> because it detects that certain memcg metrics have exceeded predefined
+>>>>>> thresholds.
+>>>>>
+>>>>> This will only happen if the reclaim size is smaller than the batch
+>>>>> size, right? Otherwise the kernel should reclaim more or less equally
+>>>>> from both memcgs?
+>>>>>
+>>>>
+>>>> I gave it some thought. Not using a cursor could lead to unfairness
+>>>> issues with certain writeback sizes:
+>>>>
+>>>>     - If the writeback size is an odd multiple of WB_BATCH (e.g.,
+>>>> triggering a writeback of 3 * WB_BATCH), with 2 child cgroups, the
+>>>> writeback ratio might end up being 2:1.
+>>>>     - If a memcg has 5 child cgroups and a writeback of 2 * WB_BATCH is
+>>>> triggered, it might repeatedly write back from only the first 2 child
+>>>> cgroups.
+>>>>
+>>>> Although setting a smaller WB_BATCH might mitigate this unfairness, it
+>>>> could hurt writeback efficiency. Let's just use per-memcg cursors to
+>>>> completely fix these corner cases.
+>>>
+>>> Exactly, the batch size should be small enough that any unfairness is
+>>> not a problem. I would honestly just do batching without a per-memcg
+>>> cursor, unless we have numbers to prove that the efficiency is
+>>> affected when we use a small batch size. Let's only introduce
+>>> complexity when needed please.
+> 
+> I'm impartial towards the complexity of per-memcg cursor. I don't
+> think it's that big of a deal, but only if it's warranted.
+> 
+> Hao, if you're convinced that doing small batch is not efficient,
+> could you run some experiments to show the improvement bigger batchign
+> and fairness? Maybe implement a small batch, no-memcg cursor first.
+> Then implement a patch on top of it to add per-memcg cursor, and show
+> how much performance win we can get from that patch on top of the
+> patch series?
+> 
 
+Thanks for the suggestion!
+
+I ran some tests and found that neither the per-memcg cursor nor 
+different batch sizes have a significant impact on proactive writeback 
+performance. However, exactly as we suspected, without the per-memcg 
+cursor, the writeback distribution among child memcgs is highly unfair.
+
+Test Setup:
+
+   zswap config: 18G capacity, LZ4 compression.
+   cgroup hierarchy: 1 parent test memcg with 10 child memcgs.
+   Allocation: Allocated 1600MB of anonymous pages in each child memcg. 
+To ensure compressibility, the first half of each page was filled with 
+random data and the second half with zeros.
+   Force to zswap: Ran echo "1600M" > memory.reclaim on each child memcg 
+to squeeze all their memory into zswap.
+   Trigger writeback: Ran echo "<size> zswap_writeback_only" > 
+memory.reclaim on the parent cgroup 200 times, with a 2-second interval 
+between each run.
+   Metric: Monitored the zswpwb_proactive metric in memory.stat to 
+observe the writeback volume.
+   **Note**: The size here refers to the uncompressed memory size. Also, 
+since the second-chance algorithm would cause many writebacks to fall 
+short of the target size, I **bypassed** it during these tests to avoid 
+interference.
+
+Without cursor (size: 1M, batch: 32)
+   child        wb_pages        wb_MB     share%
+   child0           6368        24.88      12.50
+   child1           6368        24.88      12.50
+   child2           6368        24.88      12.50
+   child3           6368        24.88      12.50
+   child4           6368        24.88      12.50
+   child5           6368        24.88      12.50
+   child6           6368        24.88      12.50
+   child7           6368        24.88      12.50
+   child8              0         0.00       0.00
+   child9              0         0.00       0.00
+Without cursor (size: 1M, batch: 128)
+   child        wb_pages        wb_MB     share%
+   child0          25472        99.50      50.00
+   child1          25472        99.50      50.00
+   child2              0         0.00       0.00
+   child3              0         0.00       0.00
+   child4              0         0.00       0.00
+   child5              0         0.00       0.00
+   child6              0         0.00       0.00
+   child7              0         0.00       0.00
+   child8              0         0.00       0.00
+   child9              0         0.00       0.00
+Without cursor (size: 6M, batch: 128)
+   child        wb_pages        wb_MB     share%
+   child0          51200       200.00      16.67
+   child1          51200       200.00      16.67
+   child2          25600       100.00       8.33
+   child3          25600       100.00       8.33
+   child4          25600       100.00       8.33
+   child5          25600       100.00       8.33
+   child6          25600       100.00       8.33
+   child7          25600       100.00       8.33
+   child8          25600       100.00       8.33
+   child9          25600       100.00       8.33
+
+
+With cursor (size: 1M, batch: 32)
+   child        wb_pages        wb_MB     share%
+   child0           5120        20.00      10.00
+   child1           5120        20.00      10.00
+   child2           5120        20.00      10.00
+   child3           5120        20.00      10.00
+   child4           5120        20.00      10.00
+   child5           5120        20.00      10.00
+   child6           5120        20.00      10.00
+   child7           5120        20.00      10.00
+   child8           5120        20.00      10.00
+   child9           5120        20.00      10.00
+With cursor (size: 1M, batch: 128)
+   child        wb_pages        wb_MB     share%
+   child0           5120        20.00      10.00
+   child1           5120        20.00      10.00
+   child2           5120        20.00      10.00
+   child3           5120        20.00      10.00
+   child4           5120        20.00      10.00
+   child5           5120        20.00      10.00
+   child6           5120        20.00      10.00
+   child7           5120        20.00      10.00
+   child8           5120        20.00      10.00
+   child9           5120        20.00      10.00
+
+Thakns,
+Hao
 
