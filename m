@@ -1,170 +1,186 @@
-Return-Path: <linux-doc+bounces-91405-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91441-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 1WTNBZjhJmpDmQIAu9opvQ
-	(envelope-from <linux-doc+bounces-91405-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 17:36:56 +0200
+	id EJcSBnjhJmo4mQIAu9opvQ
+	(envelope-from <linux-doc+bounces-91441-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 17:36:24 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13B0D6582AE
-	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 17:36:55 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D6AE65828C
+	for <lists+linux-doc@lfdr.de>; Mon, 08 Jun 2026 17:36:23 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel-dk.20251104.gappssmtp.com header.s=20251104 header.b=LS5ktwsI;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91405-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-91405-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=none;
+	dkim=pass header.d=soleen.com header.s=google header.b=Vz+OvLtn;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91441-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91441-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=soleen.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 6C16D30665E5
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Jun 2026 15:11:31 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 67374316C2B4
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Jun 2026 15:23:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C9D303ED105;
-	Mon,  8 Jun 2026 14:53:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 09BDB492529;
+	Mon,  8 Jun 2026 14:56:41 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oa1-f50.google.com (mail-oa1-f50.google.com [209.85.160.50])
+Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com [209.85.160.169])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CCF33EC2F6
-	for <linux-doc@vger.kernel.org>; Mon,  8 Jun 2026 14:53:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3BDD548C419
+	for <linux-doc@vger.kernel.org>; Mon,  8 Jun 2026 14:56:32 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780930408; cv=none; b=Q2Rb+y5mZ/0Jp0EaplK0RpOgohOiALzRgFj7BotpzkinY+VpCzjDg9/5jmEwtNO/6h8J64Te2HhYMTUl88+qISGzDb06ol/Rp68lrynbPqPuazVFashqUC66h2CXkeipANrFNmt3EvhcuAOI/eRBD04rnMwR6RG26lsHKPoTK3U=
+	t=1780930600; cv=none; b=PzO5IsvdIRAmlITiMvJY/8S17B0+JvJwytFREy18HO5ROzPkkczFk4+QVfPjquYuAx0Lj81+aHM3oNe0Pa/PZLVfGt18AdhicNwEgVvc23zcSiYqq0t0q7Oa0AuoOVX9ZaTEJOaroBVHoMDEn5XkrG8ta9RzxyyzoDmrBHoOmAU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780930408; c=relaxed/simple;
-	bh=aXBtlEnjwFrQKovFyPfzhs9uZjhW40u8HNLp3IKF/LM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=fmp7vBtOZI0o/FE6gHeHONW7QNbv3hsvYnICf24EsZXgBxQoH1sUTXZy4Hw46S22zfqKbUNZq95bxduvSZgDWIeOd6kZDJ8B8AAONVl9FsT+ACtr8DoIEuxM26WuOUTl7e4FcK8AwcoGk6gkcByPuCiy8+CuqVl9DqH6XiVVddY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=kernel.dk; spf=pass smtp.mailfrom=kernel.dk; dkim=pass (2048-bit key) header.d=kernel-dk.20251104.gappssmtp.com header.i=@kernel-dk.20251104.gappssmtp.com header.b=LS5ktwsI; arc=none smtp.client-ip=209.85.160.50
-Received: by mail-oa1-f50.google.com with SMTP id 586e51a60fabf-43f1f2b82c6so3030989fac.3
-        for <linux-doc@vger.kernel.org>; Mon, 08 Jun 2026 07:53:25 -0700 (PDT)
+	s=arc-20240116; t=1780930600; c=relaxed/simple;
+	bh=OLvBvUjkzfMn1Cidy+KbhXvOT4PjxRs8Fx8SkFfpgFc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=WxeJYJlycW1/rEnsOmk6NGT7FvIzwT/JaE0qLvRcjBMpagywpjpnv008fs/jm5KeNXiwO7DJOtvunQ9c4vZP1uh652f8peUv9hVs1PA6LUV86rc3BvBCa/Unh8Lf8fEGZZx1J7nIHKl2YJEsoVO0rX1z78mJ8yMZSueb0jjdJuw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com; spf=pass smtp.mailfrom=soleen.com; dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b=Vz+OvLtn; arc=none smtp.client-ip=209.85.160.169
+Received: by mail-qt1-f169.google.com with SMTP id d75a77b69052e-51761d27612so52510491cf.3
+        for <linux-doc@vger.kernel.org>; Mon, 08 Jun 2026 07:56:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=kernel-dk.20251104.gappssmtp.com; s=20251104; t=1780930404; x=1781535204; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=ezWnP2UXKohE5V9tSBhtiAoUtofNw0gKy3ylNXOeXQI=;
-        b=LS5ktwsIwbjkuocNDMmWDEv1Z6U6lJrwQZYoHn3DL+Eo+8EoSe4T50cB0QolIqp9TS
-         QZL2OgNadtSRW1TOtDdPLV7J51fsemuITyBVXJgjja8YiAKpoIw3Evp54AccxHs68Lhu
-         yCcp3oP691G4PbnhOl4awTKooEtEmwKcxKy8FuO4a+ktKNLG+k333K7N9UFPeogR9LWE
-         kKiuR/Z8DDWC31YFJ5B09CPeNFfEQ8ah6QvAb5Sjbs0mhIqpPUXNUA9Wn//LhkyEVE8T
-         Z9thToSn+EiiRT+4ru1NlDn6j+II4OECjNkm+bTtrY8esbxWxJODb2ysQ1w6i5kCW5iv
-         bnXw==
+        d=soleen.com; s=google; t=1780930591; x=1781535391; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=5XaEoBFZ0wQN7RayZ7ZGkzrqQNmFAZboLFpyYk5DAFk=;
+        b=Vz+OvLtnDLdBCYdORDQbcTs2rusiLhkpjeqFPNwcEwNYhHyk8d3HB1v6zbUMCJ5XRX
+         OdLmxiemRs9Nq3Ze9ymf0puQVhplsbuC79pY9rYuwI+Z9phnw+j3hy/zJFBtxB13xRbv
+         1rTtisvq6/5U5/IICAE/yCjNhCrY8TyiBsEm05EZw1xHhkrCYMzYiI+za5pcgONY9njS
+         KToSzx3NHOQPJT0JfAgkXtwsWAqttV4Uz+plFbKfMtxysrFHaBAld+Z+Bgk9ZeY6YUfA
+         8tZgX4ceZ8Mhhqm2h63FvUkzJDK7ePx9yr4qg73vB2smkNtwtJFiVO+UkFQUcTBqzJHI
+         Y5bw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780930404; x=1781535204;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ezWnP2UXKohE5V9tSBhtiAoUtofNw0gKy3ylNXOeXQI=;
-        b=nNzlZAVJls1YtBEOZEzdYMUXf5euxjWPi5H9zgL/N9fz4/MUsBLKAXh3rLiX+wPJNx
-         6+6hog1uaCIQ2BBNtT5IWqCIuldCvYkTqONKheyqEH2LZ4oYK99bE5yTRAgu5tCAu6pg
-         8tRjorc7Y08fgHX7fVqDySqdv0qnJtJABWhTE0teWzMqcYdKUgnl3KlcyfzM5bQ1mARV
-         ec/+tqPqPnwsf1nByF0+8RZ1K2/yKqIoNZMdID/GSkACsREAqlc1wZgTbCo6iPVil/7Y
-         jkiBp06X/RpDYQPMVrb8+bcFejAR+6peKpNt/oqcJ0YYf65m/ZhKZPy1i1nFsUoves8K
-         7ZFg==
-X-Forwarded-Encrypted: i=1; AFNElJ/hNOvuGq9ntIOnrqgGrdJPmiAiZXFDie94vQG2Xz6TzQpKr5ozRpL/Odh0pK0t/bUsW6hEzUJvFaI=@vger.kernel.org
-X-Gm-Message-State: AOJu0YygL/52kHcpg+uWtDFufgMfU6ZJvfBW8tUqCmVNjjucUHnkdvUo
-	zMrzeNo/o4NSUZfQqjcTCBJTMvBt8DRyssRxsVt3UVxamGFplGgXvx6orikjEAV+RZo=
-X-Gm-Gg: Acq92OHSSCCh4i4Nv919GGyc7+YwtnaiB2kOCXIjT0XHNuaKiBOpwPA/J+UEZU4A8Z9
-	zlLNrrjHV0ZKib+ExW1sP7jieXuN/k9z0cfkdCajRTmumJM/SCBxIGPZvBEMCWwWmHpkcaonIOG
-	9UVifpL39qoLXHTwDghcGJyBm5ugTPqUKZgeR97iGpiBqbZQr0B9Ob1wKZR+HSZ06ob/LXmatx4
-	BbDYh2DF3AF3gYUS2H2wKoTuunbYTBHeNaIZ4gYg5DPh6W0NbdfcgVN/Dj4FfQkJzYiFYc0kO3p
-	T0XM19ZMlYTVt3us/45l1iktKXfUROowNhch7dx8r7OFVJidCiZv5uee08bk4VOP23Qbo4D1Stn
-	KsX+bwYCLvUg1Qq6agmoCPNBcUzdjB3p3wBAL1DBryFqZX1gHDevcgCfG2R9I0o7Go+WXVptQzt
-	20LbhGpjse2zRsF6yOtNiYEoikNDUx+xlsTqeoJeVodmA2XhJ/wWsGVbwgwxbDhW2XpwNdMXGbL
-	amTpWmONgUIrmXRmgJ1
-X-Received: by 2002:a05:6870:d6a7:b0:409:5ef5:be0c with SMTP id 586e51a60fabf-4413d3b4b67mr9871451fac.12.1780930404545;
-        Mon, 08 Jun 2026 07:53:24 -0700 (PDT)
-Received: from [192.168.1.150] ([198.8.77.157])
-        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-440d8295aaasm16163044fac.9.2026.06.08.07.53.22
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 08 Jun 2026 07:53:23 -0700 (PDT)
-Message-ID: <bac50400-dd86-4c7f-bab3-481c1306877b@kernel.dk>
-Date: Mon, 8 Jun 2026 08:53:22 -0600
+        d=1e100.net; s=20251104; t=1780930591; x=1781535391;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=5XaEoBFZ0wQN7RayZ7ZGkzrqQNmFAZboLFpyYk5DAFk=;
+        b=jv+P3QtQCU9CyhCs1LO2bJEqqCl+GHj9Qr/XVyBPLJawn+7QiVqgQdXo6qh3HkjGSp
+         WiNwJHxxAXt7w3kOQa3gNzfsTNXixmLBZ3FHoPsbYdL5LOEcx/z7tEddy9kme6ON1WVz
+         2sfHwc500TPQGif4Vho7fuwY7SjXbL6hYPh3/8ZmF888/7mS6i4WwZmOXDBPy7lZPM7J
+         fZ1hcn7UgP0I1Mgc+qVxtfPH0uZpD8ZKgYtwnumhSBdx/B/DL1F4aJHm+gVAE2sFIZuD
+         um96LkcnbVCqcv+3pooSdGVQWWiTushz7R47/WTM9AaB5KVztOxjvaf0fI3MJZLBEXez
+         NPow==
+X-Forwarded-Encrypted: i=1; AFNElJ+f0mr5h0/t0TcjobUuP6G5JVEqvWkb/dypeyfjMekejh40qXNYBl6n1hC9wisFQSz8Fw+TKDwdpMA=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzHjERTM/RtVXkGmgfyPUmavpeC7CBQXgFi+Q8NkMalrYSAGSxj
+	eLpfWNzU4qRiJzEoBrdH3SNI0rAMxXP+UZr3TYWIZEsBK8v6G4pLomQ1DBlXZ8wIhVI=
+X-Gm-Gg: Acq92OE+8bZrJe7iz89WXCZPvQVmyXrRTtsVtXJebltTCDUivbxBNM3PwecflJRBYW6
+	C62BBF/iK33KvVjHs3ntO7oLkrh4D40RIMyBMkhQL8IwxZDVloxFy7On6e+S3ca84vRUS8GtdcQ
+	J+m6cz9fWfhq8XvILcRGpNcF787EeRTHw9LT2GAOJU5hJ0DwCz8jpOeMw8IX4zTs+AkO5+Ncdur
+	JXmO4dQGOaRQh5fSgyh81DQSafzt2eqL6pOUOgJqLz/cJD4DYF427MhwOa8L1Lsqzqzrr17g4Ru
+	skRAkoIaE7SpBmelsM7zRhws1hmex2QI8jbkHyq37AoxQCPdnj+P3v9YzhrCKXKOou/pNIN//Uv
+	cLJp8M6Y8r0zygm8nrQUfYYVl6h+qS6zXm4oCRipFJb6YO9XNUEx+Wg/zaTYmsuwpQoHHREtrTT
+	XGJ+YZSOYXaNspbZxvIrtuNkbg8Rn9gSXPjlG9hzOkDx29CsYeqHPiPdZ9krj/ug==
+X-Received: by 2002:a05:622a:1648:b0:517:6d75:a2cf with SMTP id d75a77b69052e-51795c5a18fmr245549391cf.43.1780930590664;
+        Mon, 08 Jun 2026 07:56:30 -0700 (PDT)
+Received: from plex ([71.181.43.54])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-51775dbd2c9sm158664971cf.23.2026.06.08.07.56.29
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 08 Jun 2026 07:56:30 -0700 (PDT)
+Date: Mon, 8 Jun 2026 14:56:28 +0000
+From: Pasha Tatashin <pasha.tatashin@soleen.com>
+To: Mike Rapoport <rppt@kernel.org>
+Cc: Pasha Tatashin <pasha.tatashin@soleen.com>, 
+	linux-kselftest@vger.kernel.org, shuah@kernel.org, akpm@linux-foundation.org, linux-mm@kvack.org, 
+	skhan@linuxfoundation.org, linux-doc@vger.kernel.org, jasonmiu@google.com, 
+	linux-kernel@vger.kernel.org, corbet@lwn.net, ran.xiaokai@zte.com.cn, 
+	kexec@lists.infradead.org, pratyush@kernel.org, graf@amazon.com
+Subject: Re: [RFC v1 1/9] kho: split out radix tree tracker into kho_radix.c
+Message-ID: <aibX8oS4toOVaCqm@plex>
+References: <20260605033235.717351-1-pasha.tatashin@soleen.com>
+ <20260605033235.717351-2-pasha.tatashin@soleen.com>
+ <178083348873.1648214.11020626647820932506.b4-review@b4>
+ <aiWYZhoSOAruIIM3@plex>
+ <178085518028.1648214.13339471022594901667.b4-reply@b4>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] block: add configurable error injection
-To: Christoph Hellwig <hch@lst.de>
-Cc: Jonathan Corbet <corbet@lwn.net>, Damien Le Moal <dlemoal@kernel.org>,
- Hannes Reinecke <hare@suse.de>, Keith Busch <kbusch@kernel.org>,
- linux-block@vger.kernel.org, linux-doc@vger.kernel.org,
- Hannes Reinecke <hare@kernel.org>
-References: <20260608051416.1205282-1-hch@lst.de>
- <20260608051416.1205282-5-hch@lst.de>
-Content-Language: en-US
-From: Jens Axboe <axboe@kernel.dk>
-In-Reply-To: <20260608051416.1205282-5-hch@lst.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <178085518028.1648214.13339471022594901667.b4-reply@b4>
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[kernel-dk.20251104.gappssmtp.com:s=20251104];
+	DMARC_POLICY_ALLOW(-0.50)[soleen.com,reject];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[soleen.com:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER(0.00)[axboe@kernel.dk,linux-doc@vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-91405-lists,linux-doc=lfdr.de];
-	DKIM_TRACE(0.00)[kernel-dk.20251104.gappssmtp.com:+];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	DMARC_NA(0.00)[kernel.dk];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:hch@lst.de,m:corbet@lwn.net,m:dlemoal@kernel.org,m:hare@suse.de,m:kbusch@kernel.org,m:linux-block@vger.kernel.org,m:linux-doc@vger.kernel.org,m:hare@kernel.org,s:lists@lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	TAGGED_FROM(0.00)[bounces-91441-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER(0.00)[pasha.tatashin@soleen.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	FORGED_RECIPIENTS(0.00)[m:rppt@kernel.org,m:pasha.tatashin@soleen.com,m:linux-kselftest@vger.kernel.org,m:shuah@kernel.org,m:akpm@linux-foundation.org,m:linux-mm@kvack.org,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:jasonmiu@google.com,m:linux-kernel@vger.kernel.org,m:corbet@lwn.net,m:ran.xiaokai@zte.com.cn,m:kexec@lists.infradead.org,m:pratyush@kernel.org,m:graf@amazon.com,s:lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	DKIM_TRACE(0.00)[soleen.com:+];
+	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[axboe@kernel.dk,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[pasha.tatashin@soleen.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,vger.kernel.org:from_smtp,kernel.dk:mid,kernel.dk:from_mime]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp,plex:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 13B0D6582AE
+X-Rspamd-Queue-Id: 6D6AE65828C
 
-On 6/7/26 11:14 PM, Christoph Hellwig wrote:
-> diff --git a/block/blk.h b/block/blk.h
-> index e8b7d5517086..10df23b2cb90 100644
-> --- a/block/blk.h
-> +++ b/block/blk.h
-> @@ -660,6 +660,18 @@ static inline bool should_fail_request(struct block_device *part,
->  }
->  #endif /* CONFIG_FAIL_MAKE_REQUEST */
+On 06-07 20:59, Mike Rapoport wrote:
+> On 2026-06-07 16:20:50+00:00, Pasha Tatashin wrote:
+> > On 06-07 14:58, Mike Rapoport wrote:
+> > 
+> > > On Fri, 05 Jun 2026 03:32:27 +0000, Pasha Tatashin <pasha.tatashin@soleen.com> wrote:
+> > > 
+> > > It's radix tree data structure implementation, kho memory tracker is it's
+> > > user. Please rephrase to keep the semantics clear.
+> > 
+> > Yeap, I will update it.
+> > 
+> > > I don't see much value in moving kexec_handover.o to a separate line,
+> > > btw, the same is true for luo_core.o, but it's not important enough to
+> > > change.
+> > 
+> > This is purely for consistency. I wanted to use the exact same style in 
+> > the Makefile instead of having two different ways of declaring the 
+> > object lists.
+> > 
+> > This:
+> >     luo-y :=                                \
+> >             luo_core.o                      \
+> >             luo_file.o                      \
+> >             luo_flb.o                       \
+> >             luo_session.o
+> > 
+> >     kho-y :=                                \
+> >             kexec_handover.o                \
+> >             kho_radix.o                     \
+> >             kho_block.o                     \
+> >             kho_vmalloc.o
 >  
-> +void blk_error_injection_init(struct gendisk *disk);
-> +void blk_error_injection_exit(struct gendisk *disk);
-> +bool __blk_error_inject(struct bio *bio);
-> +static inline bool blk_error_inject(struct bio *bio)
-> +{
-> +	if (!IS_ENABLED(CONFIG_BLK_ERROR_INJECTION))
-> +		return false;
-> +	if (!test_bit(GD_ERROR_INJECT, &bio->bi_bdev->bd_disk->state))
-> +		return false;
-> +	return __blk_error_inject(bio);
-> +}
+> I mean this:
+> 
+> luo-y := luo_core.o		\
+> 	luo_file.o		\
+> 	luo_flb.o		\
+> 	luo_session.o
+>  
+> kho-y := kexec_handover.o	\
+> 	kho_radix.o		\
+> 	kho_block.o		\
+> 	kho_vmalloc.o
 
-I really hate this part, that's a pretty deep set of pointer chasings to
-figure out if injection is enabled or not, when in practice error
-injection is only ever enabled for specific test cases and distros
-invariably will set CONFIG_BLK_ERROR_INJECTION because they turn on
-every damn thing under the sun.
+Got it, I thought you were against making the consistent :-)
 
-IOW, that won't fly for the hot path. Maybe a static key would be useful
-here?
-
--- 
-Jens Axboe
+> 
+> 
 
