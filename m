@@ -1,179 +1,187 @@
-Return-Path: <linux-doc+bounces-91641-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91642-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id sgwVLBUpKGoz/QIAu9opvQ
-	(envelope-from <linux-doc+bounces-91641-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 16:54:13 +0200
+	id WH19A+EmKGqf/AIAu9opvQ
+	(envelope-from <linux-doc+bounces-91642-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 16:44:49 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3EFA8661622
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 16:54:13 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9E40866149F
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 16:44:48 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=jR6h5cLR;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91641-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-91641-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b="I4zWO/R1";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91642-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-91642-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=gmail.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id C7D4B30945E8
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2026 14:36:06 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 8411631A9110
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2026 14:36:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 11D603537F6;
-	Tue,  9 Jun 2026 14:33:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 36799352014;
+	Tue,  9 Jun 2026 14:34:44 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1017351C3D;
-	Tue,  9 Jun 2026 14:33:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B79872DC357
+	for <linux-doc@vger.kernel.org>; Tue,  9 Jun 2026 14:34:42 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781015614; cv=none; b=VvPN4CcNGNEq2xDxqMGVtCMFihMdQXNGjBB2tAUrzA7oc7gEWztAVCdprJNaWYzW/T6RqZPCmUg8Q66ujXBE/vW93P4fuMCyDUuNjWT1S5dPgZTArvXaDIrQCB4qvF3mGDgajJPQYaYX8oRtVQlmrTZMamdtyXG4IcLOYT7sYLw=
+	t=1781015684; cv=none; b=DndF2bnR5+bNA8HrMFj5DNs0X/lpIBqSt11Qv9mWhDenrHlX4rHXC0j5zj2RSfIlUMLpdBd8VGDJg+7UsJElEKqngeVUnnoeyh1nDDnfIMgnqDSdiDnXRvqSnhQQ/XotzI6A64XzLJKz095UFjoqjTFPZZyqTPtkv62xplvAWsA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781015614; c=relaxed/simple;
-	bh=ORW/2GpIPRkAHzBFyJq9/xzqQrVB0ifakLjJK8Gpntg=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=JJEfGcxTae52pDrtMcrDafA+DkwQF4izJjUWj2z0iMYnmxlMEXF66hju57Vvq60/JWfWKu+K9q+8m7A3ca/oXaysEdY5oFbrMKymrai7mpBVyJNf9+lHmvRL0I6KUXFknIkcLy40cbOI2vLc8ZyIHXYu3N/bcyD+uxfR0mrIbco=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jR6h5cLR; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4439C1F00893;
-	Tue,  9 Jun 2026 14:33:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1781015612;
-	bh=yAwQzCcKV6xIGEtBzqxQ3COTqDOfT90qmmiQBuBzWZU=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date;
-	b=jR6h5cLRTujiltPSm689nN920+3X6yo5OD4R884+TkTANE/D6veFgcNFK8J9g6K2Z
-	 OK4at4p99jOAG8zdRm8aWzewXlItlUeUEUh4JkkNSplo/jRskZZ7h9b8BE80utgoTy
-	 bLGqLeqXxHFzP92wW/MtMiSWEXdUaJPdXhHOz2+E+Ay4Hm8rGEzjykfbW2yqIX1ItT
-	 DXJ1F54Fyvux8kMJiS9ZauKV9V5vnjHC4ZC7fKP1PnC/Ht0w1fWeGT4xRMewWcwo5e
-	 xK4sOtVyJOp8m4bnjyXthx/HCjrBBH6toZ87zTvyau3Fy/kYJFCwBdBOKl2G/rEO9B
-	 +BP2y6GDEmaMA==
-From: Pratyush Yadav <pratyush@kernel.org>
-To: Pasha Tatashin <pasha.tatashin@soleen.com>
-Cc: Mike Rapoport <rppt@kernel.org>,  linux-kselftest@vger.kernel.org,
-  shuah@kernel.org,  akpm@linux-foundation.org,  linux-mm@kvack.org,
-  skhan@linuxfoundation.org,  linux-doc@vger.kernel.org,
-  jasonmiu@google.com,  linux-kernel@vger.kernel.org,  corbet@lwn.net,
-  ran.xiaokai@zte.com.cn,  kexec@lists.infradead.org,  pratyush@kernel.org,
-  graf@amazon.com
-Subject: Re: [RFC v1 0/9] kho: granular compatibility and header decoupling
-In-Reply-To: <aidnjw5pH_z45gJT@plex> (Pasha Tatashin's message of "Tue, 9 Jun
-	2026 01:14:53 +0000")
-References: <20260605033235.717351-1-pasha.tatashin@soleen.com>
-	<178083348872.1648214.17778188633648887952.b4-review@b4>
-	<aiVp5RlbWRz5VnPB@plex>
-	<178091437240.1648214.10761111570005003901.b4-reply@b4>
-	<aibYJvzQQnpoN6YW@plex> <aicF5Sa11B4ujfSa@kernel.org>
-	<aidnjw5pH_z45gJT@plex>
-Date: Tue, 09 Jun 2026 16:33:28 +0200
-Message-ID: <2vxzjys7ss07.fsf@kernel.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+	s=arc-20240116; t=1781015684; c=relaxed/simple;
+	bh=OsTW4W33/dOPYebmwIgRMD90tqv9rvMiSMFARTYGp+E=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=Iw5kmaWeTvAhY3GQkGeIOTksgl6D7rySO//4wCTHi7UK+Vkyqjd/PZyutX1RPLQzR75FU2kateuFHTDYWU6d27x6L9yMLfroFde5e71iBD4eWLiRN6sD+32AZn+YH33dpYC5rBS9EJensbdu7ALlDe7PAaTChJGE3ADuciEGBsI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=I4zWO/R1; arc=none smtp.client-ip=209.85.128.43
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-490a767521dso6215945e9.1
+        for <linux-doc@vger.kernel.org>; Tue, 09 Jun 2026 07:34:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1781015681; x=1781620481; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=T+p2KLWGB60/y0hWSjB13j8Ag8QaYpZolde8d8AEva4=;
+        b=I4zWO/R19u8ZptccQCijl0uTmvLYjb11nzUxg0yoK+nL8NODjLV4/TafKo3TFCPPdF
+         m4vvlNXiZSPJhkbnK+PjYIhFeXxlWiIKNAq26sJCOiNHkUpfw0cUsRrwBm/Sj7egZ5f5
+         7AqLxCAsHmd6ogSi39eoqeqriuIZRJCqH5Hh+KQsz/ft+B4adfXs8Jsy7Gif0TOhlAp4
+         9BXNlJb9MBspfnuPMRlbeLH3o1j32yLuEVlsMro9JXdTafHMOcp3n3KDGGY4U/RLdFjB
+         QwUxUWdItv2rPBcTxvNBpZkbCy2xYcJn4zDoOv/DpVtpSkFyvFUwGir3nXPi2y/xsgiK
+         6o0g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1781015681; x=1781620481;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=T+p2KLWGB60/y0hWSjB13j8Ag8QaYpZolde8d8AEva4=;
+        b=HIsqVV066O6Q50x3M3lqiEZyo7REarIM1gJ4wBh+h85jkY/xg48n8+5RXwNhgnVsaq
+         JmPo6K1YpZ2LKy4dC2XZMI0dtAaS/gWlQ/+1pWQmNo7YBQ5816oBK1r3+RPMoVns9Zya
+         rDxrOta4zTXETXE4tiu+Jhs4uTazhjcF5gwTAmje4dKjo/qODY8/NX9CN25bEAIpCCeT
+         MKJxbT0prJUVjj96sf1RBKWDxnWy9+BPAioCxnWZV5HRyCuuTOsLxFf1ehzCsYE1//RP
+         Wzx8qX9e3IoofbatRi3UEVk6C67m0YyBebQHDEN2I36+dH39KRcpnWikDgQd2SkJzwnw
+         jgOA==
+X-Forwarded-Encrypted: i=1; AFNElJ9wwNkZORlOTIqiDAEtFwvWD1dcownlteNrvwVT5P9AcAW0StZy8c+pBNcPWEbUFN3ss9FWVBy7BFE=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwAI6u8itQjy4qjENkZCX8to+K20tfbU0d0eHsi0j62S5ilsR87
+	N4XuNdwGOo2HTG2j4j8OXMtYnB0ewYmWlbE3ztId565hFfWXab4e3Auc
+X-Gm-Gg: Acq92OGlcjLUrDgkc8tB/82Fx2iRs9kZCT8Jd4HlPqCFKqu79Mz01oPQJx8mqpYGjPI
+	tkRIStmeJUt7DPzT0r4Mc0pqZiEy7HubJe8/jQf6jv4Q75FFeMApDwWw9L3cU3FduOgnQujFaoL
+	HSX54jLG4bFuVFXf+JehCKBZiVcDY6g7PTxNDg9KMxdidITz6cLnSPz5MsVT8+RJLxN4BVTol0v
+	JwoP47W5ad8fITDfD1z4+9ci4aVFtpEdDCfPujbRm2yon/QeLk8/ONgX9rtbF0eraGQ6qliIGpd
+	jNt7JVs29OHbgFmX5gWNUEIBSQ7bL4GGUbXNtEd5WYIyxexzRTm8PpQd9IUhgs65yPRdnhdjL9O
+	DXpl7R4OfHIKiTCR8FBWgmemqGfCpzB/RvxFshlAfO477xupF1KPUzYtGtsNhDbHXWkQnnRWcnr
+	7Z1wOQi3nVgMGhty1Dh8z8A4E0mTwamg356qgPFU6XI7DJGoJIqr9+6VnsMiYX520sKG5as3bWQ
+	Q7ChMNERDpG+PZVyigeD+taK+v6ONe5H/V6tA==
+X-Received: by 2002:a05:600c:45d1:b0:490:6e0f:2a10 with SMTP id 5b1f17b1804b1-490c260ffafmr146105085e9.7.1781015681040;
+        Tue, 09 Jun 2026 07:34:41 -0700 (PDT)
+Received: from doehyun-dev.pradel.rg.cispa.de (x06.xlate.fw.cispa.de. [195.37.157.6])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4601f2dcad5sm68670615f8f.5.2026.06.09.07.34.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 09 Jun 2026 07:34:40 -0700 (PDT)
+From: Doehyun Baek <doehyunbaek@gmail.com>
+To: Dongliang Mu <dzm91@hust.edu.cn>
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	SeongJae Park <sj@kernel.org>,
+	Alex Shi <alexs@kernel.org>,
+	Yanteng Si <si.yanteng@linux.dev>,
+	Hu Haowen <2023002089@link.tyut.edu.cn>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	damon@lists.linux.dev,
+	Doehyun Baek <doehyunbaek@gmail.com>
+Subject: [PATCH v4 0/2] docs/mm/damon: fix docs and update zh_CN
+Date: Tue,  9 Jun 2026 14:34:24 +0000
+Message-ID: <cover.1781015560.git.doehyunbaek@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260523094420.741003-1-doehyunbaek@gmail.com>
+References: <20260523094420.741003-1-doehyunbaek@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-91641-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
 	FORWARDED(0.00)[lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:pasha.tatashin@soleen.com,m:rppt@kernel.org,m:linux-kselftest@vger.kernel.org,m:shuah@kernel.org,m:akpm@linux-foundation.org,m:linux-mm@kvack.org,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:jasonmiu@google.com,m:linux-kernel@vger.kernel.org,m:corbet@lwn.net,m:ran.xiaokai@zte.com.cn,m:kexec@lists.infradead.org,m:pratyush@kernel.org,m:graf@amazon.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[pratyush@kernel.org,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TO_DN_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[lwn.net,linuxfoundation.org,kernel.org,linux.dev,link.tyut.edu.cn,vger.kernel.org,lists.linux.dev,gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-91642-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:dzm91@hust.edu.cn,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:sj@kernel.org,m:alexs@kernel.org,m:si.yanteng@linux.dev,m:2023002089@link.tyut.edu.cn,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:damon@lists.linux.dev,m:doehyunbaek@gmail.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[doehyunbaek@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[pratyush@kernel.org,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[doehyunbaek@gmail.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	RCPT_COUNT_SEVEN(0.00)[11];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 3EFA8661622
+X-Rspamd-Queue-Id: 9E40866149F
 
-On Tue, Jun 09 2026, Pasha Tatashin wrote:
+First of all, thank you very much, Dongliang, for your time and
+dedication in reviewing the previous versions.
 
-> On 06-08 21:11, Mike Rapoport wrote:
->> On Mon, Jun 08, 2026 at 04:12:56PM +0000, Pasha Tatashin wrote:
->> > On 06-08 13:26, Mike Rapoport wrote:
->> > > On 2026-06-07 13:43:09+00:00, Pasha Tatashin wrote:
->> >
->> > Keeping all of that in a single KHO file is the wrong approach and goes 
->> > against how other logically separated subsystems in Linux are organized 
->> > (e.g., mm/vmap.c, mm/vmalloc.c, etc.). Yes, there are some messier 
->> > places in the kernel as well, but keeping this in its own dedicated 
->> > kho_vmalloc.c file makes complete sense to me.
->> 
->> Either I hallucinated or b4 ate a paragraph from my reply ;)
->> 
->> Regarding the code movement
->> - splitting radix tree makes perfect sense to me, just the documentation
->>   part needs more care than mechanical move
+This v4 sends the original English DAMON documentation fixes as the
+first patch, and the Simplified Chinese translation update as the
+second patch.
 
-+1, separating radix and KHO block makes sense.
+For zh_CN, I translated the current DAMON usage.rst paragraph by
+paragraph, and added missing pieces such as stat.rst and the related
+index/design references.  The zh_TW changes from earlier versions are
+dropped from this series.
 
->
-> Agreed. I'll also pay closer attention to the documentation.
->
->> - I'm fine with abi/vmalloc.h, presuming KHOSER_PTR() is not part of it
->
-> Yes, I will move KHOSER_PTR() to the shared compat.h in v2 so it's not 
-> tied to vmalloc.
->
->> - I can live with kho_vmalloc.c although I still consider it unnecessary
->>   churn
->
-> Appreciate it.
->
->> - I'm against moving vmalloc APIs from kexec_handover.h because they are
->>   very close in nature to folio and pages. I don't see core KHO as
->>   responsible for preserving physically contiguous ranges but rather as
->>   preserving allocations. Not sure we'll ever support kmalloc(), but still.
+The translation text is paragraph-by-paragraph.  Some references cannot
+point to the exact zh_CN design sections because zh_CN design.rst is still
+behind the English design document.  I added selected translated design
+sections/anchors needed by this series.  If requested, I will also update
+the Chinese design.rst further.
 
-FWIW, I agree with Mike here. I also see kho_preserve_vmalloc() as a
-memory preservation primitive, same as kho_preserve_folio() or
-kho_preserve_pages(). So I think it belongs in the main KHO header.
+Changes from v3:
+- Split English documentation fixes into the first patch.
+- Reworked zh_CN usage.rst as a paragraph-by-paragraph translation of
+  the current English document.
+- Added zh_CN stat.rst and related index/design references.
+- Dropped the zh_TW translation patch from this series.
 
-I also think it would also be nice to have vmalloc in kexec_handover.c,
-but I can live with either way.
+Tested with:
+- make SPHINXDIRS='translations/zh_CN' htmldocs
 
->
-> That is a very reasonable compromise. I am fine with keeping the 
-> consumer-facing function declarations in kexec_handover.h so they remain 
-> grouped  with folios and pages.
->
->> > However, overall enforcing the use of KHOSER is unrelated to this work. 
->> > I have my own thoughts on this, and perhaps with proper versioning, 
->> > using KHOSER_PTR everywhere would be appropriate, but let's keep that as 
->> > a separate work.
->> 
->> This is a separate work, indeed. But regardless of the versioning it's
->> already better than plain u64 because it provides type safety.
+Doehyun Baek (2):
+  docs/mm/damon: fix DAMON documentation details
+  docs/zh_CN: update DAMON documentation translation
 
-It would be even nicer to have some sort of type safety for KHO vmalloc.
-On preservation and restore, you lose the the type of the array, and it
-is very easy to make mistakes. I gave it a try some time ago but
-unfortunately couldn't come up with anything good.
+ Documentation/admin-guide/mm/damon/usage.rst  |  12 +-
+ Documentation/mm/damon/design.rst             |  12 +-
+ .../zh_CN/admin-guide/mm/damon/index.rst      |   1 +
+ .../zh_CN/admin-guide/mm/damon/stat.rst       |  80 +++
+ .../zh_CN/admin-guide/mm/damon/usage.rst      | 541 ++++++++++++------
+ .../translations/zh_CN/mm/damon/design.rst    | 145 ++++-
+ 6 files changed, 615 insertions(+), 176 deletions(-)
+ create mode 100644 Documentation/translations/zh_CN/admin-guide/mm/damon/stat.rst
 
 -- 
-Regards,
-Pratyush Yadav
+2.43.0
+
 
