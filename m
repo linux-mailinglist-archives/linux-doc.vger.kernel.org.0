@@ -1,162 +1,238 @@
-Return-Path: <linux-doc+bounces-91749-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91751-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id NpUyFSSjKGoIHAMAu9opvQ
-	(envelope-from <linux-doc+bounces-91749-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 01:35:00 +0200
+	id aAqNEwSlKGo3HAMAu9opvQ
+	(envelope-from <linux-doc+bounces-91751-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 01:43:00 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 55FA1664CF7
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 01:34:59 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id B6F34664D52
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 01:42:59 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b=FysMfxkl;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91749-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-91749-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=infradead.org;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=RoAJShWH;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91751-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91751-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=nvidia.com;
+	arc=reject ("cv is fail on i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 768263011549
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2026 23:34:56 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id F1D403014766
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2026 23:42:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3CB063F0ABA;
-	Tue,  9 Jun 2026 23:34:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1A2243E4507;
+	Tue,  9 Jun 2026 23:42:45 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+Received: from BN8PR05CU002.outbound.protection.outlook.com (mail-eastus2azon11011014.outbound.protection.outlook.com [52.101.57.14])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 218B840D575;
-	Tue,  9 Jun 2026 23:34:51 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781048093; cv=none; b=hlJRHzkGuRXqOzto0wyVey+qxnskgFR2vs4H3ES6txbyVMtnBaDG0ji3mL0ZhJVR4UaBNAEbvULMXNy/rK+wRTN0on/Gm0oqIlnqZpUep4rj0+Mtj1kBD28vn5p9fn7WlX4CgY59qaBmpwdHf5nTxjMBZT0XwbY8d/Z3PWgYR0w=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781048093; c=relaxed/simple;
-	bh=k6eBCDmxmDQAncavUpQqOPSqSk1YtXqB+bRLrSnD700=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=LchTeXURyKMCUgQyP7KSdpYXVAnQhLCaHG6HFh3sZYJEUcukkNFe2noDvswvxGIblK8rIFC22uXQKnt01vhUZ8Wwrfe/UZCBovm+CWavlY1cgVyJKKC07ujNnJdnke86bhYf/VbbJVMpLJQ9M4lnpFEcVScPQiimvMEznXnvHd4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=pass smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=FysMfxkl; arc=none smtp.client-ip=198.137.202.133
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=aGbkLzHaLk+xN8bG59z9ybcOFnLUGrRlxyY5MOGLRjc=; b=FysMfxklQ5Fiwtbv5PBTr4zsOP
-	YUsa9rd7d99eLDD3jtFZGrGFEmHABBKgO278R/W3KA/FZPDhZgf9wJqWYVM0wsU0nnTYJChAN41I4
-	vuQH+S62SBEJ+RLkEQnSe+szaYaEOxI+Vb165DjeZpNYEck2gQghaz4dIrS8sW1nxCMCWwROGxkRu
-	eknsOY++R92d/b53OjoTRGhm1lZVssoNziWjYlSHpF6kz2dRmJxXusW1FDmxte+orDqoWAxEwPxDh
-	/8nhSaIgFdXkGsS7vFs07obEDuwFSCqWUuzyUG+tHJEciKmac798vflTY76sXymw8CYzzS9t309Ga
-	EPU1MW3w==;
-Received: from [50.53.43.113] (helo=[192.168.254.34])
-	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wX5y6-00000006Vqg-0CsW;
-	Tue, 09 Jun 2026 23:34:50 +0000
-Message-ID: <6efbb21f-b072-4538-85cf-f7db0c30f677@infradead.org>
-Date: Tue, 9 Jun 2026 16:34:49 -0700
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B8B4320CAD;
+	Tue,  9 Jun 2026 23:42:43 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1781048565; cv=fail; b=Hcc1iZCY+52pRS9IH7wiV7QCG0luA+u5CYPtmoidyWZw4nb9iRn2yf+V+Wjvz+MT2D4ATPM3x3+kXhuVuMYzlNx9HW+V31d978X5jctDdFEv/JHI1fb/7O5gwEEGkotRN/ieE5rlV0gBfWqCFcOdPHXd17QRRqPJ/IBvWWBvK9s=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1781048565; c=relaxed/simple;
+	bh=43btWodr7p+mAGMPwiO2pHk+hgtdU6G8SOWnaPCFiQU=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=H89gvSD+0BiOhiAffvP44roSzZI78DW6eZX2b8QnVMl/eIV4Vz2DfRVZK64cQOX767QarTE3bCstvNefHB4Wd7WetbyrT7pJ2f4Kd/ASYWWf8wJQ0JvBbjwnILB6FZaQ+CZgLU+QfCDDKk+MjBk7SO10Om5wDuOZWsVYLfcOtdU=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=RoAJShWH; arc=fail smtp.client-ip=52.101.57.14
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=qHQqpZOaKwX3WSwWBUQwhwrzfe2ulnOMYbQNzhFxIETxP1SaIp5R6nly88RpL1q0bZ5UTQQey+ENzh9U7kg7TOwlIXmWgDULWaSdZZ3vMPO9bvb46dSiUbKNwc3o2hXTAGhSWxByqu22KBzdKGK3GtfQnByJw94rpr8d1f1+J8ESzhjaqrBHWWOWdnhwhGJJPWTmzSaQ0/JYP83dZao67py7hC/c8s+6Mabbn4W58uM7qALuvpi80Ha/jezxL1j9W4DJucYVrGfwlGywFivIRtVJL4NLxsUR7qssyjM2Y8csat7cHcht8eZTO1qzbETsa5/hMifPjSEWufRA7OcKTw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=zofyvuanNtU7rvhrOWQ/U6Dpwf7zRWxjdAcD9akXNkM=;
+ b=avLQJbDlg12eO+V+teymozGlq93sITkFyTTCWG6cTw8wtzeM+0H98FTqr4joRwFbXWFjBDapdWx1zgQx32jeM0c3ZO4klgIwgFzhJc0jHkd6isa0ePQ8c1eMg+xpcp2q5ieKslm33LvFTHcyWfrx6rUZ0FM4INm0BTDLGhmSda+2YlCOgzovczp2G3hta9HbF0quKChakhfbcg+8q9ECxAlwSvKk7RMsOwg2yledoqi67OPwCZSA6VxNQXcBhXdfGKxBFPt1dkoMtWWYIsxd/2bTPLw2p98hjyDouTR7cwGFsaU6p9cAtViQ5wU1TENvwTbrQxCdDtfHWE7s8JvhEA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.160) smtp.rcpttodomain=arm.com smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=zofyvuanNtU7rvhrOWQ/U6Dpwf7zRWxjdAcD9akXNkM=;
+ b=RoAJShWHheA7uGlGSrRJqmjdwq+p+sru90wwc7pJPXvjwjW46elXw2Cf14IdX9188TDw9bn3kkjXcaIq9xmhkqaW3Ouc8aPTjTooRpdlQvjCdVgVWYNquuTJMbkIO+1/XQpyyiKGGJcIhQfb/lOocH4y45R41EKerssAA58j29rnne7zIXsrFNDc/si01HBjv62+A7lHXgVvAv0sAH86XwDY+Svge2V1OO0XvX/14RfGnCHnyPxK5WLj9tk7iq7iJ7LmV+pDSZPUreZztQoN3GvIhBJ7nUSDWpxGeg61Tkfy7nDxkJRcW8mME7yk76l1SvvVTjSjWEGKiM9JSLrplA==
+Received: from CH2PR16CA0027.namprd16.prod.outlook.com (2603:10b6:610:50::37)
+ by SN7PR12MB6713.namprd12.prod.outlook.com (2603:10b6:806:273::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.14; Tue, 9 Jun 2026
+ 23:42:37 +0000
+Received: from DS2PEPF000061C2.namprd02.prod.outlook.com
+ (2603:10b6:610:50:cafe::65) by CH2PR16CA0027.outlook.office365.com
+ (2603:10b6:610:50::37) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.11 via Frontend Transport; Tue, 9
+ Jun 2026 23:42:37 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
+ smtp.mailfrom=nvidia.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.160) by
+ DS2PEPF000061C2.mail.protection.outlook.com (10.167.23.69) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.113.7 via Frontend Transport; Tue, 9 Jun 2026 23:42:37 +0000
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
+ (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 9 Jun
+ 2026 16:42:20 -0700
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by rnnvmail201.nvidia.com
+ (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 9 Jun
+ 2026 16:42:20 -0700
+Received: from sdonthineni01.nvidia.com (10.127.8.9) by mail.nvidia.com
+ (10.129.68.8) with Microsoft SMTP Server id 15.2.2562.20 via Frontend
+ Transport; Tue, 9 Jun 2026 16:42:19 -0700
+From: Shanker Donthineni <sdonthineni@nvidia.com>
+To: Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
+	<linux-arm-kernel@lists.infradead.org>, Mark Rutland <mark.rutland@arm.com>
+CC: <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>, "Shanker
+ Donthineni" <sdonthineni@nvidia.com>, Vikram Sethi <vsethi@nvidia.com>,
+	"Jason Sequeira" <jsequeira@nvidia.com>, Alok Mooley <amooley@nvidia.com>,
+	Rich Wiley <rwiley@nvidia.com>
+Subject: [PATCH v1] arm64: errata: Mitigate TLBI errata on NVIDIA Olympus CPU
+Date: Tue, 9 Jun 2026 18:40:44 -0500
+Message-ID: <20260609234044.3945938-1-sdonthineni@nvidia.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net-next] docs: networking: add guidance on what to push
- via extack
-To: Jakub Kicinski <kuba@kernel.org>, davem@davemloft.net
-Cc: netdev@vger.kernel.org, edumazet@google.com, pabeni@redhat.com,
- andrew+netdev@lunn.ch, horms@kernel.org, corbet@lwn.net,
- skhan@linuxfoundation.org, linux-doc@vger.kernel.org
-References: <20260609190919.1139517-1-kuba@kernel.org>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20260609190919.1139517-1-kuba@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-NVConfidentiality: public
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-NV-OnPremToCloud: ExternallySecured
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS2PEPF000061C2:EE_|SN7PR12MB6713:EE_
+X-MS-Office365-Filtering-Correlation-Id: 30ba13fe-6f9e-4adb-dd8d-08dec680c98d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|82310400026|376014|23010399003|36860700016|6133799003|13003099007|18002099003|11063799006|56012099006;
+X-Microsoft-Antispam-Message-Info:
+	fGpgwPY891hDbpCH4UEiXQ5dDcIuLpiadmdJTtRf9yjwxoHPyi2NrCti4ydVIEbO0fN12zCFE423nmlxZ+x0tsmZYQD6JsscnG/P/BJrrpglc6nB7q8GG3u6uPDvkM5mIKWZcXQRnAiWk8/FiMcI6bvMh5hSaM85lvztt0YrrLESvV5NF4GfnWi6rmLrXgtR9dwNxyOyPGOVVm/ChItcRRK/je1DHbWR2Eri4lqRK8EEGSz13oyOKZqjkfZSe942ClE4SQHo+CGfbOOn0cgT+jNgK10k21dMqxfSJDu69eyezgqMWo0LVlACQi32g3bzofsxSwp7sA/1iLvHHBnlPDawgM7W0hrO5gxju8k1fSY27SGyTPfN5EqR/4SdfSHViB7J65II8KKofOfE5z5XzCXUS2Uv1Hov7pqkbwe9URu4t6wTVIQNM9WrGu+gV+JJo+k93kcxto0U/PztyXmVJmuZCX/FswSyh9f11Ri8OmxTnrNCvDmd0Gqy3uT99By2fk5LnuI5nA9Us0CjMcOtEo2blHyFLvzEnLWBOFpXzvJa3YOu1/HZvimRJPxGST0q0CL+or2v3BEqEjgjIKrpgGNsGfAIwUSIKHuVX7khrENGy+qce4M1OpZbnzXoKxsUlJyKJZ1z9HpQAxszn2r1hWf3I1efc0+bieRPUfCnCxT2f86GCxIMjhoxh2y2gavF7on8lbgFpTll6M6h9t2bLzMZNsj5GpeCS+eEfDHV+zxRFf4m7HaM3Ruo8Oud87un
+X-Forefront-Antispam-Report:
+	CIP:216.228.117.160;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge1.nvidia.com;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(376014)(23010399003)(36860700016)(6133799003)(13003099007)(18002099003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	lHQtqpUu8t8eEO7gOr8Y6QQ9IETcyaEwqfLWkVFHbte9m1Aovuik+EO8X7DizyQP44Z02HcUZjHM2dFDF1LCQXrnk1jHDY7/LR6S+oL9XTYDcaccaiEJk1HESJikdVjVGpM34otLuAs5HwaFArwlSChEBkIM0FTXlcNwBNSRylr9Vp9xfsbc0EZWd/vMMp3bwQAa6RGPFmrE74V+BT7XwVvdSNPKQixwX6N7Csax343QsdYZAVhNEMWcd+AL3Bqj4oXCrVL617kGa2q82cWeO3gC4KFax49bV48vKiYaS5Wue/vlANdOpl077I+8Nr5I5Fa/nw1p0V/sq38gHRNs921GO9ck4nR2IVnhywZWKA6vXTpmbLQ3onqnf4oKLu6I7W7jyEA3NkmEWXYy+d4OKEHA0Nsxxh6kIvsgppsdpmqOg8hYZpEbYzka9gFWPHiE
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2026 23:42:37.1536
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 30ba13fe-6f9e-4adb-dd8d-08dec680c98d
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.160];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DS2PEPF000061C2.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB6713
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+X-Spamd-Result: default: False [-5.66 / 15.00];
+	WHITELIST_DMARC(-7.00)[nvidia.com:D:+];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-91749-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:kuba@kernel.org,m:davem@davemloft.net,m:netdev@vger.kernel.org,m:edumazet@google.com,m:pabeni@redhat.com,m:andrew+netdev@lunn.ch,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:andrew@lunn.ch,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORGED_SENDER(0.00)[sdonthineni@nvidia.com,linux-doc@vger.kernel.org];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-91751-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:catalin.marinas@arm.com,m:will@kernel.org,m:linux-arm-kernel@lists.infradead.org,m:mark.rutland@arm.com,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:sdonthineni@nvidia.com,m:vsethi@nvidia.com,m:jsequeira@nvidia.com,m:amooley@nvidia.com,m:rwiley@nvidia.com,s:lists@lfdr.de];
+	DKIM_TRACE(0.00)[Nvidia.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sdonthineni@nvidia.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,infradead.org:dkim,infradead.org:mid,infradead.org:from_mime,vger.kernel.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,nvidia.com:mid,nvidia.com:from_mime,vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,Nvidia.com:dkim];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	ALIAS_RESOLVED(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCVD_COUNT_SEVEN(0.00)[9]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 55FA1664CF7
+X-Rspamd-Queue-Id: B6F34664D52
 
+NVIDIA Olympus cores are affected by the TLBI completion issue tracked as
+CVE-2025-10263. The existing ARM64_ERRATUM_4118414 handling already uses
+ARM64_WORKAROUND_REPEAT_TLBI to issue an additional broadcast TLBI;DSB
+sequence and ensure affected memory write effects are globally observed.
 
+Add MIDR_NVIDIA_OLYMPUS to the repeat-TLBI match list so the same
+mitigation is enabled on affected Olympus systems. Also document the
+NVIDIA Olympus erratum in the arm64 silicon errata table and list it in
+the Kconfig help text.
 
-On 6/9/26 12:09 PM, Jakub Kicinski wrote:
-> Every now and then someone tries to duplicated extack
+Signed-off-by: Shanker Donthineni <sdonthineni@nvidia.com>
+Cc: Catalin Marinas <catalin.marinas@arm.com>
+Cc: Will Deacon <will@kernel.org>
+Cc: Mark Rutland <mark.rutland@arm.com>
+---
+Note: This patch depends on the following series as a prerequisite:
+https://lore.kernel.org/all/20260609101203.1512409-1-mark.rutland@arm.com/
 
-                                      duplicate
+ Documentation/arch/arm64/silicon-errata.rst | 2 ++
+ arch/arm64/Kconfig                          | 3 ++-
+ arch/arm64/kernel/cpu_errata.c              | 1 +
+ 3 files changed, 5 insertions(+), 1 deletion(-)
 
-> messages to dmesg. Document our guidance against this.
-> Also indicate that system level faults should continue
-> to go to system logs. The high level thinking is to try
-> to distinguish between what's important to the user vs
-> system admin.
-> 
-> Signed-off-by: Jakub Kicinski <kuba@kernel.org>
-> ---
-> CC: corbet@lwn.net
-> CC: skhan@linuxfoundation.org
-> CC: linux-doc@vger.kernel.org
-> ---
->  Documentation/networking/driver.rst | 13 +++++++++++++
->  1 file changed, 13 insertions(+)
-> 
-> diff --git a/Documentation/networking/driver.rst b/Documentation/networking/driver.rst
-> index 195a916dc0de..abd366dd5e43 100644
-> --- a/Documentation/networking/driver.rst
-> +++ b/Documentation/networking/driver.rst
-> @@ -128,3 +128,16 @@ to be freed up.
->  If you return NETDEV_TX_BUSY from the ndo_start_xmit method, you
->  must not keep any reference to that SKB and you must not attempt
->  to free it up.
-> +
-> +Error message reporting
-> +=======================
-> +
-> +Number of driver configuration interfaces pass a Netlink extended ACK
-
-   A number of ...
-(agreeing with Joe)
-
-> +(``extack``) object to the driver (either directly as an argument or
-> +as a member of a parameter struct). The drivers should try to report
-> +most errors via the ``extack`` object. System level exceptions,
-> +indicating that system or device is misbehaving or is in bad state
-
-                                                            bad state,
-
-> +should continue to be reported to system logs.
-> +
-> +Messages should be passed **either** via ``extack`` **or** to system logs.
-> +Drivers should not try to report the same information to both.
-
+diff --git a/Documentation/arch/arm64/silicon-errata.rst b/Documentation/arch/arm64/silicon-errata.rst
+index a01e916ede17..ad09bbb10da8 100644
+--- a/Documentation/arch/arm64/silicon-errata.rst
++++ b/Documentation/arch/arm64/silicon-errata.rst
+@@ -298,6 +298,8 @@ stable kernels.
+ +----------------+-----------------+-----------------+-----------------------------+
+ | NVIDIA         | Carmel Core     | N/A             | NVIDIA_CARMEL_CNP_ERRATUM   |
+ +----------------+-----------------+-----------------+-----------------------------+
++| NVIDIA         | Olympus core    | T410-OLY-1029   | ARM64_ERRATUM_4118414       |
+++----------------+-----------------+-----------------+-----------------------------+
+ | NVIDIA         | T241 GICv3/4.x  | T241-FABRIC-4   | N/A                         |
+ +----------------+-----------------+-----------------+-----------------------------+
+ | NVIDIA         | T241 MPAM       | T241-MPAM-1     | N/A                         |
+diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
+index 48233b54c482..c65cef81be86 100644
+--- a/arch/arm64/Kconfig
++++ b/arch/arm64/Kconfig
+@@ -1155,7 +1155,7 @@ config ARM64_ERRATUM_4193714
+ 	  If unsure, say Y.
+ 
+ config ARM64_ERRATUM_4118414
+-	bool "Cortex-*/Neoverse-*/C1-*: Completion of affected memory accesses might not be guaranteed by completion of a TLBI"
++	bool "Cortex-*/Neoverse-*/C1-*/Olympus: Completion of affected memory accesses might not be guaranteed by completion of a TLBI"
+ 	default y
+ 	select ARM64_WORKAROUND_REPEAT_TLBI
+ 	help
+@@ -1182,6 +1182,7 @@ config ARM64_ERRATUM_4118414
+ 	  * ARM Neoverse-V2 erratum 4193787
+ 	  * ARM Neoverse-V3 erratum 4193784
+ 	  * ARM Neoverse-V3AE erratum 4193784
++	  * NVIDIA Olympus erratum T410-OLY-1029
+ 
+ 	  On affected cores, some memory accesses might not be completed by
+ 	  broadcast TLB invalidation.
+diff --git a/arch/arm64/kernel/cpu_errata.c b/arch/arm64/kernel/cpu_errata.c
+index fe6fe5de495b..d597896b0f7f 100644
+--- a/arch/arm64/kernel/cpu_errata.c
++++ b/arch/arm64/kernel/cpu_errata.c
+@@ -364,6 +364,7 @@ static const struct arm64_cpu_capabilities arm64_repeat_tlbi_list[] = {
+ 			MIDR_ALL_VERSIONS(MIDR_NEOVERSE_V2),
+ 			MIDR_ALL_VERSIONS(MIDR_NEOVERSE_V3),
+ 			MIDR_ALL_VERSIONS(MIDR_NEOVERSE_V3AE),
++			MIDR_ALL_VERSIONS(MIDR_NVIDIA_OLYMPUS),
+ 			{}
+ 		})),
+ 	},
 -- 
-~Randy
+2.43.0
 
 
