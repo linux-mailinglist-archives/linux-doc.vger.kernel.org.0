@@ -1,86 +1,85 @@
-Return-Path: <linux-doc+bounces-91628-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91630-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Ue5JOnYoKGoL/QIAu9opvQ
-	(envelope-from <linux-doc+bounces-91628-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 16:51:34 +0200
+	id /ZG/BV8mKGp6/AIAu9opvQ
+	(envelope-from <linux-doc+bounces-91630-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 16:42:39 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 51D8B66158F
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 16:51:34 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9341E66143F
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 16:42:38 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linaro.org header.s=google header.b=lM0tb1B3;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91628-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-91628-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=linaro.org header.s=google header.b="XzF/63Nc";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91630-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-91630-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=linaro.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id BB1D03153EA8
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2026 14:33:01 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 3A691315EAA9
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2026 14:33:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 632E033F390;
-	Tue,  9 Jun 2026 14:31:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1E92B3A48C5;
+	Tue,  9 Jun 2026 14:31:34 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2E8235DA79
-	for <linux-doc@vger.kernel.org>; Tue,  9 Jun 2026 14:31:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 80C6135E1CC
+	for <linux-doc@vger.kernel.org>; Tue,  9 Jun 2026 14:31:31 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781015491; cv=none; b=tog6k5uZEViNihKPYUCdaHnhFnHvaJxhTWkgbpPoILXsDHOKBaNP8JxXHV8cHvHfb4JwkL04xBzRIBjAhtTQMqqhu8ffTNrdtaBHddFSvAmgLfs++yLvm6PCla4IqQBdobksH8qnK6kaCbTpoW7bbpsSYFVbjb2F60LaVjfjIws=
+	t=1781015494; cv=none; b=q/3l87duxovCF3wfKQN1HvP+NxvidC/mXb4pYbYXu9fmrQ2Dd0GvlhsFo/Z+Zwh9dOizND7eXOD1XryQPLm1luUTmHmD67EvfQ7vNYCU1hMXhynlWH/7eKmZN/Bk4wqnLHu+1uF1D2KGdnOuzDKRFjagSOzRA+PsRtGhgFnddJA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781015491; c=relaxed/simple;
-	bh=z/CK3SgmlZ9m2fa4g/8u8Ev0tF8YBHx5+5672AAbTpI=;
+	s=arc-20240116; t=1781015494; c=relaxed/simple;
+	bh=WCF37Je8MxyyOE4gwzCHUUj3VQznGEyT8txE/wxHMAU=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=tdVRu6rWXDbtiWSAz3osTS4hJEKOrlKCtnM4a5rUTdr3vyZVM9xYO3ywqHZmeL2R1ILZceiBQ9M0a+mzgq/UQGi9EzbvXaRNysgLEMQyg+nUPAwYZLP2+HUePuLgCFMV8DibAC+Av3gz92HVZNXkTauWUJv10y5pmaY8EsbkbN4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=lM0tb1B3; arc=none smtp.client-ip=209.85.221.44
-Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-45ef41adbc1so4138794f8f.0
-        for <linux-doc@vger.kernel.org>; Tue, 09 Jun 2026 07:31:29 -0700 (PDT)
+	 In-Reply-To:To:Cc; b=gLCodNATWWeXk7sMmkyML97nICe6mQVffT/6s7KwEH4YyyRzj0DLDxenYmMZA6k7jyXhB02GZkiuKiyNogqiZQgwfKwvrvEb5asixvqlqgzc1Ry3lx8p4DHuIBacAj3YnNhbSojBz0Ap1LY8IRJ4MM2oPSWcYb3SxSLw+WGLpuY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=XzF/63Nc; arc=none smtp.client-ip=209.85.221.54
+Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-45ef1198766so3235560f8f.0
+        for <linux-doc@vger.kernel.org>; Tue, 09 Jun 2026 07:31:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1781015488; x=1781620288; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1781015490; x=1781620290; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=26hfOEeOS0Wp3zVqiYKicdVNnt8eBmuZdvoqTuUrIFc=;
-        b=lM0tb1B3qTslKooVKv2zQ/miywEtBFXTS/3TBPOofF6uYTYJixd9caB4Gkv7HKMHNb
-         1uU9LFwZwQ8VV7N1bQOmZu2fZdUJ+BNe4pkLVCuHqgERgQLKsm0MK03BIzJXj3gOxvvp
-         pPb9pfRmJN1H6wsvgX92tCDMroVixShtp5cNUfDKlKn+8/nRAjRcS81m8bP7Uq0hSq6I
-         ykq0UwsH27zvVh01BcGTi26Vs72Nb2gN1FFbv/c74qgUxyFlpcoVujm4QmIM2WSKZGTg
-         dimsfmPA4Rd4m1XRQHkOdMJdeL6akhMzBr6smUZPcHG2qN/tHQlhbKAJPVU+Hbsl1DjE
-         Turw==
+        bh=4f1wgMP8HKBDMVa7qiKIEB8ImxwlPbZld8s+b9RAewo=;
+        b=XzF/63NcocMMEUupzZxvJEPcJ5QT6DdVLjhufmGDbtlrUYxYX32GmermMzAyDfim3c
+         5dypaYvoiEkloMGx5ijlT9+wbOg2MC1i+e/Tus+WJJ0c3SzpmjzehHCL+K6wVqDsn8nf
+         e5zWY8DFD5TCcSQj5DDi+TI1rViKAWKrgcLdo9kdZ5+tf622mBoQK/EoKnWDZDawiKru
+         MMGzi5Cd0y6uvxe1k+ujf8wjBC+T7HstXLIpelVLaN7xiIh6sAZB3ejQt2aJ0e35bHIE
+         ROTvpZsWgnPi0ELhh0jv/FSsGjUNNRheJUreW7TkoozGKdRhowJ1Ujac3feCufJngg5n
+         ixMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781015488; x=1781620288;
+        d=1e100.net; s=20251104; t=1781015490; x=1781620290;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=26hfOEeOS0Wp3zVqiYKicdVNnt8eBmuZdvoqTuUrIFc=;
-        b=UfGUlpz2/wb8cQL1L7crrx994VmWbhuCNDk51bHgpN1TpirZU5PWgVMAMX5oUmJcTF
-         r0G/VW7bfSxNIHB+9YWOpXx5AX3tUQ8zImNJUtuQCd4nwzGNEWGO2fWLw4d/G4SVJ9ad
-         zEdo8iE430OzfTv+dSotzfhhxf8l3P0a+hCSYrMI2Ip81llBCPkI7zIieVXQR6VW7Vga
-         XsICYWnnMNU9RRosBfOq195T4Cmy21hke5w5pPpZg+YpfZvuLwi5o76x/tqBa23QOd9f
-         G1r23u+8EwTLtMukrH/UYR+JwXmX8hRyeMcUpHybUe5Thi/Dahwgr3wCVnlk3OnyFfND
-         hohQ==
-X-Forwarded-Encrypted: i=1; AFNElJ/x/FpnNiqJLkSurDQAOqkATxqoaum3Rjs79O1LQk/VsgK0yTU+nPaxoUL5znLbeySefgJ0Hz9SgWY=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxyPOgjIsFEUzfMdW5GaV+jRvcG+39FRQahjVPe8tkot2joRAPz
-	7aQJwFxNeDCl9eC4OvSR5Ert0lGLAwsUPzkf+tYxswi7YxlSbHE6qdZDAdmu8AA+XOg1HfdeXSm
-	OzzQMznw=
-X-Gm-Gg: Acq92OH/AVJZuJhYGNpLw3/Tv5DcJJsjjjJ1xErE/AyvjZ3vMwiiKB4B/2qDEK8S5ni
-	xl6OWT3T7hLwKPtJ4X00frXaJSZw8iI9ft0M4VEtGI47RUHW+NVpSoMTzT34QzqcAT3WqNRGKG1
-	ChsYXTCzZg0/R3rmz6DwYAztHkCpVdvXrCmp0WGv/DNPMkcf5VCTVBvoWBmXR0ZoaIAAz5taP2D
-	MBJga6qfp1TNxqGRU9LfoFKF5ybbI1W0gs2yyOo8j/7tyWtYtREMnxD4eR6+teZlXhAoM4Yrgwj
-	8pVodQp7WewF3BdJl9Qu0t7gYG1OoAmDbNg8HsdklEjdGPZlJIJjlMPCGrx/S2jjXO3pJNP4d/s
-	anXdkMIhML+fctmm6VDz9XGL+k/Z3BkJqCOPhpFubahcH7XqePborPVgchFNP/76ChA7l//ntrO
-	KbFU9dMBu+kp2+CqzwpLPf875flSQ5c7KCAFwty+tv8CQ=
-X-Received: by 2002:adf:fe01:0:b0:45e:ec18:f207 with SMTP id ffacd0b85a97d-460305061ecmr22846190f8f.25.1781015488377;
-        Tue, 09 Jun 2026 07:31:28 -0700 (PDT)
+        bh=4f1wgMP8HKBDMVa7qiKIEB8ImxwlPbZld8s+b9RAewo=;
+        b=PXYBSkvLvbCmQ7YLSyddRNDqeM+8soeGhFO+xjs8ZiWfFTYhXXHckQIncVJM2saOJI
+         HOj2Xao3Q6nRumiVjNfBa1e5VzPtcVwnCD0zCdOYU7wyUGIIcljCk+q22ccdel9OMrXl
+         fpwwovjRt3Yr9k6Rd4bHryKhZ33CpeDdKXua5igH2wIjdemINqobk9WU1P9hxUu5e8Tk
+         k6k2drpr3ZfHhKOMG2trTGIGviK35KiObJYqCsunj2r6pfL6dKkKUS7olWGuMexdg9pm
+         0Fd0/waJa5o3Vpk3mC8CT069Ja4Q62GNiBXoUyjAt/NAVSkmCvOHemBkybn8uOucCYfC
+         j1og==
+X-Forwarded-Encrypted: i=1; AFNElJ8Om0dPlBTUNoxKK98CWKFzIrg3EaDuQ1BiZgNOflhLda/7ceuT5Y/bt+E4/kmDNuXZ7/m9QrvR878=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyRU1wfPD3BqFumhoUrSr2TcpAAOpWJaxGxF7fNUcGr3m4Gm67Q
+	9kqIUfgltvgt3afSxeiBRoQo8AhD9eVLfmRoDQL9vo60vJHlD0vjvIjIiDU/iZ+PwuNipD+0nkL
+	2bi3DrYE=
+X-Gm-Gg: Acq92OGhXqXaIz3f51RO/G/WjgjhXZb0APVFsjgqxt1srDqbaCgn3w5PrVnbRmiMZhi
+	jraAnnB+LN/DEkMFn4Ow5ryMdQJkAfyXs1v3YUNfrDT3CuZrJS7tf92Sy9NdvAwcUrEs0tJmS2L
+	+imVwAlh30ZLV8UcC09se++FT45ZVrxcsJsnED0STD5Dn+Hzcj7oSZLsQITz8fdlMRsAWCIU5JG
+	zq/eVu3uMcq1SeAjDFwtdTZ0hMobiOJfnWQYZwwNz/glrJ6iBTVcbd9OxdVh4Be9Dgn8tenNWCm
+	nzf8WovhIJoxMp4cifXiN/VLP/9dYPO557oF6ru9CzTtcEa8706LBmi2GkRrXUJJMR9dExqWUCs
+	rK7bT+mGevfF8RYqWHIj30HlTQTqind4hUMQ+JF5951Fn+gYPGL7O8qS3R/I8YwjcX7go30XBbi
+	laxeCoKyZDV+ql9XeDsp2HYH/3NTsFp+lgqqNN2EFne6Y=
+X-Received: by 2002:adf:ee81:0:b0:45e:9304:a4c3 with SMTP id ffacd0b85a97d-46032dced69mr19907159f8f.19.1781015489867;
+        Tue, 09 Jun 2026 07:31:29 -0700 (PDT)
 Received: from ho-tower-lan.lan ([185.48.77.170])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4601f3444fesm62738388f8f.20.2026.06.09.07.31.26
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4601f3444fesm62738388f8f.20.2026.06.09.07.31.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 09 Jun 2026 07:31:27 -0700 (PDT)
+        Tue, 09 Jun 2026 07:31:29 -0700 (PDT)
 From: James Clark <james.clark@linaro.org>
-Date: Tue, 09 Jun 2026 15:31:01 +0100
-Subject: [PATCH v4 08/19] perf test cs-etm: Replace memcpy test with raw
- dump stress test
+Date: Tue, 09 Jun 2026 15:31:02 +0100
+Subject: [PATCH v4 09/19] perf test: Add named_threads workload
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -89,7 +88,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260609-james-cs-context-tracking-fix-v4-8-44f9fb9e5c42@linaro.org>
+Message-Id: <20260609-james-cs-context-tracking-fix-v4-9-44f9fb9e5c42@linaro.org>
 References: <20260609-james-cs-context-tracking-fix-v4-0-44f9fb9e5c42@linaro.org>
 In-Reply-To: <20260609-james-cs-context-tracking-fix-v4-0-44f9fb9e5c42@linaro.org>
 To: Suzuki K Poulose <suzuki.poulose@arm.com>, 
@@ -107,12 +106,12 @@ X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-91628-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-91630-lists,linux-doc=lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[17];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
@@ -128,114 +127,207 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[james.clark@linaro.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,linaro.org:dkim,linaro.org:email,linaro.org:mid,linaro.org:from_mime,arm.com:email,vger.kernel.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp,linaro.org:dkim,linaro.org:email,linaro.org:mid,linaro.org:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 51D8B66158F
+X-Rspamd-Queue-Id: 9341E66143F
 
-Like asm_pure_loop, this memcpy test only checks that 10 of each of a
-few trace packet types occur after recording a lot of trace, which isn't
-more specific than other existing Coresight tests.
+Add a workload that runs X threads that run a unique function named
+"named_threads_thread[x]" which performs a multiplication in a loop for
+Y loops. Each thread sets its name to "thread[x]".
 
-Assume it was supposed to be a stress test for dumping and replace it
-with one that doesn't require a custom binary and checks for a specific
-amount of raw output. Don't bother checking for packets because the
-other tests that test decoding will catch issues with malformed data.
-
-This also adds coverage for exit snapshot mode which was missing.
+This can be used to test that processor trace decoding handles
+concurrent threads correctly and the correct symbols and thread names
+are assigned to samples.
 
 Signed-off-by: James Clark <james.clark@linaro.org>
 ---
- .../tests/shell/coresight/memcpy_thread_16k_10.sh  | 22 ----------
- .../perf/tests/shell/coresight/raw_dump_stress.sh  | 47 ++++++++++++++++++++++
- 2 files changed, 47 insertions(+), 22 deletions(-)
+ tools/perf/Documentation/perf-test.txt     |   5 +-
+ tools/perf/tests/builtin-test.c            |   1 +
+ tools/perf/tests/tests.h                   |   1 +
+ tools/perf/tests/workloads/Build           |   1 +
+ tools/perf/tests/workloads/named_threads.c | 109 +++++++++++++++++++++++++++++
+ 5 files changed, 116 insertions(+), 1 deletion(-)
 
-diff --git a/tools/perf/tests/shell/coresight/memcpy_thread_16k_10.sh b/tools/perf/tests/shell/coresight/memcpy_thread_16k_10.sh
-deleted file mode 100755
-index 1f765d69acc3..000000000000
---- a/tools/perf/tests/shell/coresight/memcpy_thread_16k_10.sh
-+++ /dev/null
-@@ -1,22 +0,0 @@
--#!/bin/bash -e
--# CoreSight / Memcpy 16k 10 Threads (exclusive)
--
--# SPDX-License-Identifier: GPL-2.0
--# Carsten Haitzler <carsten.haitzler@arm.com>, 2021
--
--TEST="memcpy_thread"
--
--# shellcheck source=../lib/coresight.sh
--. "$(dirname $0)"/../lib/coresight.sh
--
--ARGS="16 10 1"
--DATV="16k_10"
--# shellcheck disable=SC2153
--DATA="$DATD/perf-$TEST-$DATV.data"
--
--perf record $PERFRECOPT -o "$DATA" "$BIN" $ARGS
--
--perf_dump_aux_verify "$DATA" 10 10 10
--
--err=$?
--exit $err
-diff --git a/tools/perf/tests/shell/coresight/raw_dump_stress.sh b/tools/perf/tests/shell/coresight/raw_dump_stress.sh
-new file mode 100755
-index 000000000000..b4b4f2503fee
+diff --git a/tools/perf/Documentation/perf-test.txt b/tools/perf/Documentation/perf-test.txt
+index c50a4b2d2d29..81c8525f5946 100644
+--- a/tools/perf/Documentation/perf-test.txt
++++ b/tools/perf/Documentation/perf-test.txt
+@@ -57,7 +57,7 @@ OPTIONS
+ --workload=::
+ 	Run a built-in workload, to list them use '--list-workloads', current
+ 	ones include: noploop, thloop, leafloop, sqrtloop, brstack, datasym,
+-	context_switch_loop, deterministic and landlock.
++	context_switch_loop, deterministic, named_threads and landlock.
+ 
+ 	Used with the shell script regression tests.
+ 
+@@ -66,6 +66,9 @@ OPTIONS
+ 		seconds: leafloop, noploop, sqrtloop, thloop
+ 		nrloops: brstack, context_switch_loop
+ 
++	'named_threads' accepts the number of threads and the number of loops to
++	do in each thread.
++
+ 	The datasym, landlock and deterministic workloads don't accept any.
+ 
+ --list-workloads::
+diff --git a/tools/perf/tests/builtin-test.c b/tools/perf/tests/builtin-test.c
+index ef7e3f52a383..afc06cec4954 100644
+--- a/tools/perf/tests/builtin-test.c
++++ b/tools/perf/tests/builtin-test.c
+@@ -155,6 +155,7 @@ static struct test_suite *generic_tests[] = {
+ static struct test_workload *workloads[] = {
+ 	&workload__noploop,
+ 	&workload__thloop,
++	&workload__named_threads,
+ 	&workload__leafloop,
+ 	&workload__sqrtloop,
+ 	&workload__brstack,
+diff --git a/tools/perf/tests/tests.h b/tools/perf/tests/tests.h
+index bcfe9c33fc66..7cedf05be544 100644
+--- a/tools/perf/tests/tests.h
++++ b/tools/perf/tests/tests.h
+@@ -237,6 +237,7 @@ struct test_workload workload__##work = {	\
+ /* The list of test workloads */
+ DECLARE_WORKLOAD(noploop);
+ DECLARE_WORKLOAD(thloop);
++DECLARE_WORKLOAD(named_threads);
+ DECLARE_WORKLOAD(leafloop);
+ DECLARE_WORKLOAD(sqrtloop);
+ DECLARE_WORKLOAD(brstack);
+diff --git a/tools/perf/tests/workloads/Build b/tools/perf/tests/workloads/Build
+index 90f2d8aa4941..75b377934a0e 100644
+--- a/tools/perf/tests/workloads/Build
++++ b/tools/perf/tests/workloads/Build
+@@ -2,6 +2,7 @@
+ 
+ perf-test-y += noploop.o
+ perf-test-y += thloop.o
++perf-test-y += named_threads.o
+ perf-test-y += leafloop.o
+ perf-test-y += sqrtloop.o
+ perf-test-y += brstack.o
+diff --git a/tools/perf/tests/workloads/named_threads.c b/tools/perf/tests/workloads/named_threads.c
+new file mode 100644
+index 000000000000..d051d41a3cfe
 --- /dev/null
-+++ b/tools/perf/tests/shell/coresight/raw_dump_stress.sh
-@@ -0,0 +1,47 @@
-+#!/bin/bash -e
-+# CoreSight raw dump stress (exclusive)
++++ b/tools/perf/tests/workloads/named_threads.c
+@@ -0,0 +1,109 @@
++// SPDX-License-Identifier: GPL-2.0
++#include <errno.h>
++#include <limits.h>
++#include <pthread.h>
++#include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++#include <linux/compiler.h>
++#include "../tests.h"
 +
-+# SPDX-License-Identifier: GPL-2.0
++#define MAX_THREADS 25
 +
-+if [ "$(id -u)" != 0 ]; then
-+	# Requires root for larger buffer size
-+	echo "[Skip] No root permission"
-+	exit 2
-+fi
++static int iterations = 500;
++int named_threads_work = 1234;
 +
-+# If CoreSight is not available, skip the test
-+perf list pmu | grep -q cs_etm || exit 2
++typedef void *(*thread_fn_t)(void *);
 +
-+tmpdir=$(mktemp -d /tmp/__perf_test.coresight_raw_dump_stress.XXXXX)
-+
-+cleanup() {
-+	rm -r "${tmpdir}"
-+	trap - EXIT TERM INT
++#define DEFINE_THREAD(n)						\
++noinline void *named_threads_thread##n(void *arg __maybe_unused)	\
++{									\
++	pthread_setname_np(pthread_self(), "thread" #n);		\
++	for (int i = 0; i < iterations; i++)				\
++		named_threads_work += 3;				\
++									\
++	return NULL;							\
 +}
 +
-+trap_cleanup() {
-+	cleanup
-+	exit 1
++#define THREAD_LIST(macro)	\
++	macro(1)		\
++	macro(2)		\
++	macro(3)		\
++	macro(4)		\
++	macro(5)		\
++	macro(6)		\
++	macro(7)		\
++	macro(8)		\
++	macro(9)		\
++	macro(10)		\
++	macro(11)		\
++	macro(12)		\
++	macro(13)		\
++	macro(14)		\
++	macro(15)		\
++	macro(16)		\
++	macro(17)		\
++	macro(18)		\
++	macro(19)		\
++	macro(20)		\
++	macro(21)		\
++	macro(22)		\
++	macro(23)		\
++	macro(24)		\
++	macro(25)
++
++#define DECLARE_THREAD(n) void *named_threads_thread##n(void *arg);
++
++THREAD_LIST(DECLARE_THREAD)
++THREAD_LIST(DEFINE_THREAD)
++
++#define THREAD_ENTRY(n) named_threads_thread##n,
++
++static thread_fn_t thread_fns[MAX_THREADS] = {
++	THREAD_LIST(THREAD_ENTRY)
++};
++
++/*
++ * Creates argv[0] threads that run a unique function named "thread[x]" which performs
++ * a multiplication in a loop for argv[1] loops.
++ */
++static int named_threads(int argc, const char **argv)
++{
++	pthread_t threads[MAX_THREADS];
++	int nr_threads = 1;
++	int err = 0;
++
++	if (argc > 0)
++		nr_threads = atoi(argv[0]);
++
++	if (nr_threads <= 0 || nr_threads > MAX_THREADS) {
++		fprintf(stderr, "Error: num threads must be 1 - %d\n", MAX_THREADS);
++		return 1;
++	}
++
++	if (argc > 1)
++		iterations = atoi(argv[1]);
++
++	if (iterations < 0) {
++		fprintf(stderr, "Error: iterations must be non-negative\n");
++		return 1;
++	}
++
++	for (int i = 0; i < nr_threads; i++) {
++		int ret;
++
++		ret = pthread_create(&threads[i], NULL, thread_fns[i], NULL);
++		if (ret) {
++			fprintf(stderr, "Error: failed to create thread%d: %s\n",
++				i + 1, strerror(ret));
++			return 1;
++		}
++	}
++
++	for (int i = 0; i < nr_threads; i++)
++		pthread_join(threads[i], NULL);
++
++	return err;
 +}
-+trap trap_cleanup EXIT TERM INT
 +
-+# Use exit snapshot to record 2M of trace to make about 80MB of raw dump data.
-+echo "Recording..."
-+perf record -e cs_etm/timestamp=0/u -m,2M -Se -o "$tmpdir/data" -- \
-+	perf test -w brstack 20000 > /dev/null 2>&1
-+
-+# Test raw dump runs to completion but don't decode because that's too slow for
-+# a test
-+echo "Dumping raw trace..."
-+perf report --dump-raw-trace -i "$tmpdir/data" 2>/dev/null > "$tmpdir/rawdump"
-+
-+size=$(stat -c%s "$tmpdir/rawdump")
-+if [ $size -gt $((50 * 1024 * 1024)) ]; then
-+	echo "PASS: Raw dump file is larger than 50MB"
-+	cleanup
-+	exit 0
-+fi
-+
-+echo "FAIL: Got less than 50MB (${size} bytes)"
-+cleanup
-+exit 1
++DEFINE_WORKLOAD(named_threads);
 
 -- 
 2.34.1
