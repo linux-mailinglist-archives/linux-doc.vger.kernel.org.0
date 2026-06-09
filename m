@@ -1,86 +1,85 @@
-Return-Path: <linux-doc+bounces-91627-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91629-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 6Oq1JlQoKGoF/QIAu9opvQ
-	(envelope-from <linux-doc+bounces-91627-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 16:51:00 +0200
+	id irzUGy0mKGpo/AIAu9opvQ
+	(envelope-from <linux-doc+bounces-91629-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 16:41:49 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12765661582
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 16:51:00 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 081CC661417
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 16:41:49 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linaro.org header.s=google header.b=USz6GKc2;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91627-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91627-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=linaro.org header.s=google header.b=AWbAHH2V;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91629-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91629-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=linaro.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 9A92D3045E07
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2026 14:32:47 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 7746B3158F56
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2026 14:33:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E02C735C1B5;
-	Tue,  9 Jun 2026 14:31:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CDE69379ED5;
+	Tue,  9 Jun 2026 14:31:32 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C88EE355F28
-	for <linux-doc@vger.kernel.org>; Tue,  9 Jun 2026 14:31:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 723A7359A66
+	for <linux-doc@vger.kernel.org>; Tue,  9 Jun 2026 14:31:28 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781015488; cv=none; b=sUJArRwmnBp3j+kQAvz3IVCONO4u+8AbFfA5iu8Epliq8kE8SVzBhZbJmCNpRimznPRaB9db4dVsTO/0uxPdNkPDzfaJ396uEbHCgR3446IG55yIbx/UPu4YfJzh3VIAYsY+cgX0jPVnS0YynC6e0pmJsDDdU7cT7JZtPJtNFbc=
+	t=1781015492; cv=none; b=Z7G3u8KCUew5aCLb8ZYIBw8v2DxBEyC6SD5XADUCpR5ouWWtCkaqfOcPwcJ1/qzgv7KM32m2jp9jZ87Wotos3opv6f7Vlt6IbeGkeoNPFZwJj/CM9QQpNK71eqsGo6+TE4lHdS20904qCgVRBp9rWwYU8MEoNiCXECyAK1ndLSg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781015488; c=relaxed/simple;
-	bh=2n7NJ22D4CS+P0i5+qEOUx8FKIjlEa2CLZ8182tHs0s=;
+	s=arc-20240116; t=1781015492; c=relaxed/simple;
+	bh=eCuV3FuofxqoEQPMj2FadVdPVNUg7XcieFIZyThEq0o=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=eEoHdBF8Xd4AtI6ghFdRYpIdlINtL2f5A33iH1DbaO96CWkSmmJIXLw+NDP6JLzRJsKggehImWpKzdDdHQy0VJKgEPm2fPPMFWzO60vsKjSUR7tb4m8xes97AvdUsw7ODIbGqXy8smm2o9l6j5Fz0e5FriM1XP36ulO+QXwY/hg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=USz6GKc2; arc=none smtp.client-ip=209.85.128.50
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-490cf3000f0so28075085e9.1
-        for <linux-doc@vger.kernel.org>; Tue, 09 Jun 2026 07:31:26 -0700 (PDT)
+	 In-Reply-To:To:Cc; b=KOXYXg5tgBIk9IiFO3DxowAJwwH0TA2jN+L/Axx8A90ChHaBVjy8WOtdk6C7TbX+7j8EWezZ96OoIn5+PWiwzVKyW2FySPHrQQpZBpUojaXL35KOczGseHeCE8OqtOwT2b9yMFS+2ze/ocR4LuWimJi5JZmYnkUwa7oi77f7/oU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=AWbAHH2V; arc=none smtp.client-ip=209.85.208.47
+Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-6914a658115so4527254a12.0
+        for <linux-doc@vger.kernel.org>; Tue, 09 Jun 2026 07:31:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1781015485; x=1781620285; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1781015487; x=1781620287; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=K+VAHnkL1slPIQmaFlO30PHwtm50BBgiqOE4SfSQTuk=;
-        b=USz6GKc2BoZU+8xDN8mR1heECcY+zpmoT4KZafOB2RqHYqHy+5L/6BkQcIHF8T3VQe
-         h0q6VD7KO6CsQYA/UTgYeOza5H67nevOTpDFZRt1ebf6hNODzBtJgSVGvKUuqbfZI6/B
-         2svktL+X1+hLf0rKKX58Mp8lLS6p/wsRqrjj5cxhUn0mNfcZcAYiqLS9n9kF6BdbtWeS
-         399ionh0NrtjjXkuMS0C0m2gUBauzdESQA5X4OMNLMiA2ogo8p7gWlscCJU+OoixblYi
-         j6g90ZDXVCSnYjidtA0zixLfAuyJRW7dB8qFaLMy2WR6ZoYZym0S7V1efDqfhwPI0TDc
-         aVPg==
+        bh=bSy6i0DRlOr9w5Y09gyckl4fi8MxME+0ZH/anot9Owo=;
+        b=AWbAHH2VX1MYTL+0G9ic8LszXaydbRcUoWM78FAJqc4MLIlBxg+yqpuk7/xvNy2KDt
+         6C4DgOReeJZW/oFptV1DSOGgJtlzegihjfrOa5QDjipHtffNpcz/7Uuy0KJCnDfELmyR
+         IEh7oqMvDK7DiPjwcMs5EoC2mDgbBur4czhxNDm7lxFfI1RMHrM6iOHgvQBqkcX6YbYT
+         0ffj+xX+CVaMXGihzcqP/0fNJrz+DqoPeCKCRtSKUbiA6pe8vS+2m+Diig0roezTt6Hi
+         W1pJ7SFieg8v9Jvp7tCTsx09hT5NquvHus3YRACoTV+uuR+DyX5cYsyBNp83bWqh33HB
+         7RcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781015485; x=1781620285;
+        d=1e100.net; s=20251104; t=1781015487; x=1781620287;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=K+VAHnkL1slPIQmaFlO30PHwtm50BBgiqOE4SfSQTuk=;
-        b=kaVtxrV4vqx270DusWd7eWeObfi7KP7L3ZRzYH7C2Xy4rIPI/73W4+2YNhJtq8vgrp
-         JI+7i/20TlAy+Vlm7vC9ku65pgluQZ42IdIK+aE8i+a3qByFeGs+PJdwkhnN6/iRTwEp
-         gp34HLGymWa9PbCqR+Tuw79cx/WoZ0QsSnC24q3QV3/n/VKsOosUm1d7AejHgGjBkLr1
-         tQzZ9x6JxHNDwWNwI9ry3cD3+KciYCci5AlZ0Dfng7XvKR8cPuN4c4KCVUc0akyAzYxP
-         gK10Icn+5kbCvJuqaLm+35Oznko+QsFRnnX9E/iusEXzRu4XVcsGnMVYPrsc5+7zKdPU
-         9hDQ==
-X-Forwarded-Encrypted: i=1; AFNElJ/zWrnkJcdUWLdnHB5IKoZRl0BBn1p9eswoptjw2t/sIKqOAn74iveSdTzQDShk7X8PB6cRAmrK6tc=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxvKvBcDeBIFu0qd6S4Hw4+XKJTy/THi++V27Y6qqjwwFjvOYb3
-	IZfHzXi1g+t+wctbXq55MapJOiu56sJ85Exw1iVC6K8hrqTJHoNAfyk2NFc5XcjyQrK1TBqZNpf
-	w2H17DrA=
-X-Gm-Gg: Acq92OGbf6Ji1q6wfWIRBS+YWiiXclAXgJoRwKcgtRMv5dNtek+9CbBMB4IhNZTEvV8
-	bKXIORA5xlc/pRCSfRTGMtytickGmDyr2oct01djszsZk6sGQsrWTjY64YS/G9XjjdyiA1CIhA8
-	UaSspAFN1X9nV8r53iBX/XwOAIBGUVq6FcA7vaMstH0Ui6AF0R5QD4Ud4NDpfMVv+ykG5920xs8
-	CXP3RvMiLSXqKEOaS/EDJuVwIHHljHF6GZ5ExtpP/rhu5Vc2nqXOhDS4GUCy7BwM0/EnkcgGsKR
-	5807J4OS4dhJTLameQvjIr1TNT0NcI8k8ySArmbZWnOyq3bwBp6JugA+CQQepPv1wVSVEBHNlF5
-	eNRiOurEDCrR5cJmfzsKESGXe1UmABPjRRVYIHJKUI2VzJzdxZuvWfaDk1HPXSK5VSfpmjvVk8X
-	7U5P/alV8MlYtj2kCYGxioqJ/sORwKU1LJIAB9hgoLtU4=
-X-Received: by 2002:a05:600c:818c:b0:490:b0e1:2161 with SMTP id 5b1f17b1804b1-490c25b39fdmr371063965e9.2.1781015485062;
-        Tue, 09 Jun 2026 07:31:25 -0700 (PDT)
+        bh=bSy6i0DRlOr9w5Y09gyckl4fi8MxME+0ZH/anot9Owo=;
+        b=c9H4iIXO+R1pvo3Yq9ViJeVBgZdWQeZeLVP3k2YvSFAICe3OyHjKaGMndyHbMaR4cs
+         XiKjlFzni+L+eoDgu1rIPaz14iafAd80+l/JwkEG6u4FT6d7ADM+tF9LylngWlwZpIRr
+         Dfzy4vh8g0ukupHWoYZmKw9gQeeqINi23sicbOP8Vln9LN5t/4K7s9Q66UUfEdrK90QU
+         bc3LrG5R31EluZZHKWpEXLnqdZRusCjH4vWs3VYw60/d7RxvycQOdTGghbBvqc7GuRzd
+         fiIcHuHZdabXU2gM30v8l20Shciy0EOOh+K1LuBRpZLNRh0bG3XuL1VAzpOpN7pZt6qv
+         WYWA==
+X-Forwarded-Encrypted: i=1; AFNElJ+MUjAqeteGEBkvNHfRQ2xlC4ULc7sAm+iDN3TWowLhg882pybgaYafATP0LW4b1y84v+KJ4JN21Xo=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzOfID+3J8+AagQommh2H2RY7djO+pT5jv+yhWCDmh026oEiw48
+	ShYxmk5J8xgDfNC1qVPR7DwIvJd1SAeLcMi9qGHTqWIC26uLLj8L7T1ocj5iscL6JeDprq/ivZw
+	L8zEhwt0=
+X-Gm-Gg: Acq92OE/aySFlX8RFALw1tEaoK+ZIux3zu4m/pWahkLWPre0V+ZT7Ji6Vousj90GrZ1
+	U9MxQYrlPpmI63SJZ1oZ6EpCh9zHWc2IdeAUJKSxqh8/TnPQFTEJ8OeW3XAw2c+HK2b3O/ES9Ki
+	eTVRbtLuNB44Q2eZus8KrPEwffH0C3+fNRfcE5fcFhZE5x+KdC6aH0f3JSVCRbBOBF1fKLoLtYk
+	jLsxp35t289H9kRRGryF1eQCTN2CSW5xBZ4dKX064ckJKPXR1bamq1EgwDLC4DMabNFUUqhj4LB
+	kqRfk7ajpPvc5R1Usfbj5zGg9VC5/Lwtf+wGPL8QG6krnXByP9iLJr1ggOymM5PPWEK6cj5DGC/
+	ilGMh5WI3RAftEh6uqyAhremdyS+/RZAIh20y1cGFyCzzzv3crwCUtzjo9x+SPXpwf+GXAK5sqe
+	dMGHnLgNAwIJn55uxAEc36WRDN0pgfiOMPeJvMb71iNyd29nsEuUERZA==
+X-Received: by 2002:a05:6402:845:b0:68d:4450:d21 with SMTP id 4fb4d7f45d1cf-68fa4e1bc89mr9424533a12.8.1781015486790;
+        Tue, 09 Jun 2026 07:31:26 -0700 (PDT)
 Received: from ho-tower-lan.lan ([185.48.77.170])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4601f3444fesm62738388f8f.20.2026.06.09.07.31.23
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4601f3444fesm62738388f8f.20.2026.06.09.07.31.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 09 Jun 2026 07:31:24 -0700 (PDT)
+        Tue, 09 Jun 2026 07:31:25 -0700 (PDT)
 From: James Clark <james.clark@linaro.org>
-Date: Tue, 09 Jun 2026 15:30:59 +0100
-Subject: [PATCH v4 06/19] perf test cs-etm: Replace unroll loop thread with
- deterministic decode test
+Date: Tue, 09 Jun 2026 15:31:00 +0100
+Subject: [PATCH v4 07/19] perf test cs-etm: Remove asm_pure_loop test
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -89,7 +88,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260609-james-cs-context-tracking-fix-v4-6-44f9fb9e5c42@linaro.org>
+Message-Id: <20260609-james-cs-context-tracking-fix-v4-7-44f9fb9e5c42@linaro.org>
 References: <20260609-james-cs-context-tracking-fix-v4-0-44f9fb9e5c42@linaro.org>
 In-Reply-To: <20260609-james-cs-context-tracking-fix-v4-0-44f9fb9e5c42@linaro.org>
 To: Suzuki K Poulose <suzuki.poulose@arm.com>, 
@@ -107,12 +106,12 @@ X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-91627-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-91629-lists,linux-doc=lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[17];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
@@ -128,128 +127,53 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[james.clark@linaro.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,linaro.org:dkim,linaro.org:email,linaro.org:mid,linaro.org:from_mime,arm.com:email,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,linaro.org:dkim,linaro.org:email,linaro.org:mid,linaro.org:from_mime,arm.com:email,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 12765661582
+X-Rspamd-Queue-Id: 081CC661417
 
-Testing a long sequence without branches seems like it would be better
-as a decoder unit test, and this test doesn't test decoding either, so
-it's not clear what bugs this is trying to catch.
+It's not obvious what this test is for so remove it. It's not a stress
+test because it doesn't output lots of data and it's not a functional
+test because it only looks for raw trace output. It seems to imply that
+a program written in assembly influences whether trace would be
+generated by the CPU or not, but the CPU doesn't know what language the
+program is written in.
 
-The new deterministic workload has somewhat long sequences when built
-unoptimized, and we can always increase them later if we want to. But
-now we test that decoding always gives the same result for the same
-sequence of code which we've never had before.
+We already have lots of Coresight tests that test the full pipeline
+including decoding, and in many more modes of operation than this one,
+so if no trace was collected they will already fail leaving this one
+redundant.
 
+Reviewed-by: Leo Yan <leo.yan@arm.com>
 Signed-off-by: James Clark <james.clark@linaro.org>
 ---
- tools/perf/tests/shell/coresight/deterministic.sh  | 72 ++++++++++++++++++++++
- .../tests/shell/coresight/unroll_loop_thread_10.sh | 22 -------
- 2 files changed, 72 insertions(+), 22 deletions(-)
+ tools/perf/tests/shell/coresight/asm_pure_loop.sh | 22 ----------------------
+ 1 file changed, 22 deletions(-)
 
-diff --git a/tools/perf/tests/shell/coresight/deterministic.sh b/tools/perf/tests/shell/coresight/deterministic.sh
-new file mode 100755
-index 000000000000..75d4973056f0
---- /dev/null
-+++ b/tools/perf/tests/shell/coresight/deterministic.sh
-@@ -0,0 +1,72 @@
-+#!/bin/bash -e
-+# CoreSight deterministic workload decode (exclusive)
-+
-+# SPDX-License-Identifier: GPL-2.0
-+
-+# If CoreSight is not available, skip the test
-+perf list pmu | grep -q cs_etm || exit 2
-+
-+tmpdir=$(mktemp -d /tmp/__perf_test.coresight_deterministic.XXXXX)
-+
-+cleanup() {
-+	rm -rf "${tmpdir}"
-+	trap - EXIT TERM INT
-+}
-+
-+trap_cleanup() {
-+	cleanup
-+	exit 1
-+}
-+trap trap_cleanup EXIT TERM INT
-+
-+cf="$tmpdir/ctl"
-+af="$tmpdir/ack"
-+mkfifo "$cf" "$af"
-+
-+# Start disabled and use the control FIFO to only record the workload and not
-+# startup.
-+perf record -o "$tmpdir/data" -e cs_etm//u -D -1 --control fifo:"$cf","$af" -- \
-+	perf test --record-ctl fifo:"$cf","$af" -w deterministic > /dev/null 2>&1
-+
-+perf script -i "$tmpdir/data" --itrace=i1i -F ip,srcline | \
-+	grep "deterministic.c" | uniq > "$tmpdir/script" 2>/dev/null
-+
-+
-+# Remove brace lines and call sites as they may not be hit or may have
-+# extra hits after returning, depending on the compiler.
-+sed -i \
-+  -e '/deterministic.c:8$/d' \
-+  -e '/deterministic.c:12$/d' \
-+  -e '/deterministic.c:15$/d' \
-+  -e '/deterministic.c:19$/d' \
-+  -e '/deterministic.c:23$/d' \
-+  -e '/deterministic.c:28$/d' \
-+  -e '/deterministic.c:34$/d' \
-+  -e '/deterministic.c:36$/d' \
-+  -e '/deterministic.c:37$/d' \
-+  "$tmpdir/script"
-+
-+cat > "$tmpdir/expected" << EOF
-+  deterministic.c:24
-+  deterministic.c:25
-+  deterministic.c:26
-+  deterministic.c:9
-+  deterministic.c:10
-+  deterministic.c:11
-+  deterministic.c:30
-+  deterministic.c:31
-+  deterministic.c:32
-+  deterministic.c:16
-+  deterministic.c:17
-+  deterministic.c:18
-+EOF
-+
-+if ! diff -q "$tmpdir/script" "$tmpdir/expected"; then
-+	echo "FAIL: line numbers don't match expected: "
-+	head -n 100 "$tmpdir/script"
-+	cleanup
-+	exit 1
-+fi
-+
-+cleanup
-+exit 0
-diff --git a/tools/perf/tests/shell/coresight/unroll_loop_thread_10.sh b/tools/perf/tests/shell/coresight/unroll_loop_thread_10.sh
+diff --git a/tools/perf/tests/shell/coresight/asm_pure_loop.sh b/tools/perf/tests/shell/coresight/asm_pure_loop.sh
 deleted file mode 100755
-index cb3e97a0a89f..000000000000
---- a/tools/perf/tests/shell/coresight/unroll_loop_thread_10.sh
+index 0301904b9637..000000000000
+--- a/tools/perf/tests/shell/coresight/asm_pure_loop.sh
 +++ /dev/null
 @@ -1,22 +0,0 @@
 -#!/bin/bash -e
--# CoreSight / Unroll Loop Thread 10 (exclusive)
+-# CoreSight / ASM Pure Loop (exclusive)
 -
 -# SPDX-License-Identifier: GPL-2.0
 -# Carsten Haitzler <carsten.haitzler@arm.com>, 2021
 -
--TEST="unroll_loop_thread"
+-TEST="asm_pure_loop"
 -
 -# shellcheck source=../lib/coresight.sh
 -. "$(dirname $0)"/../lib/coresight.sh
 -
--ARGS="10"
--DATV="10"
+-ARGS=""
+-DATV="out"
 -# shellcheck disable=SC2153
 -DATA="$DATD/perf-$TEST-$DATV.data"
 -
