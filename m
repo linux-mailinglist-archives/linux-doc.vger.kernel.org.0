@@ -1,449 +1,173 @@
-Return-Path: <linux-doc+bounces-91687-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91675-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id jVM2MT00KGpyAAMAu9opvQ
-	(envelope-from <linux-doc+bounces-91687-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 17:41:49 +0200
+	id ZvQdGuovKGor/wIAu9opvQ
+	(envelope-from <linux-doc+bounces-91675-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 17:23:22 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id C1E76661E71
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 17:41:48 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 08D78661B1B
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 17:23:22 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=izfXoU30;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91687-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91687-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
+	dkim=pass header.d=google.com header.s=20251104 header.b=B48lUTGb;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91675-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-91675-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=google.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 3ADB132100FB
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2026 15:18:16 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id B26C0301DBB3
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2026 15:13:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AE4A0480336;
-	Tue,  9 Jun 2026 15:13:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D055537B011;
+	Tue,  9 Jun 2026 15:12:39 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com [209.85.160.174])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C37E4A1397
-	for <linux-doc@vger.kernel.org>; Tue,  9 Jun 2026 15:13:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5A7734D3B2
+	for <linux-doc@vger.kernel.org>; Tue,  9 Jun 2026 15:12:32 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781018034; cv=none; b=GmKhRACc2dSqgY60Zmj4Co9oGZuGfaJtsaapBZXfrvO5WRCl7xL5AolwYoj60outA9DzMK5ikUsbhL95gOKmrkKIGajNltty/Dj3vYzoN4QeOAROmIivE67EbPiNrCzPppvpWZNLL/Auo/B3QxaKR95457jW6YChNC9qie+xFF8=
+	t=1781017959; cv=none; b=K5W7Ivykd3MZHOw5nQkdLpD2pzK9LuV15PNwuGGuhkQsMmLwv6D82nlqTwqowjaNHMV8G4A8fOsW1c0DfDREcQc88kYmXA8EId07PlHcZD5on0KwCgvAxf82S7AKLlWm9XqGsQAKAV/YfAACjbohYG5DaZaMk4PC8SdBcwqrY18=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781018034; c=relaxed/simple;
-	bh=8O2w84sf3k9UsdHFrkiTPC0ZIKeE7XAkdAh1ZSc348c=;
-	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=hzQFWghWTeaKMRfWIipqQAWCr9N6CsqH4ZB5/kTjOecoKs0n3rNadhDDByhyaBSQltjPPybfdc5WFGMeIF8ookVJutA7LlQY0JpHYp9BavjUJXTBAN8gBzkB3d7KK/Irx1VS7jitPgJON/o1Fq833MIRHH70zR6xNM6SJgm1omM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=izfXoU30; arc=none smtp.client-ip=209.85.218.48
-Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-beb8a08a6c8so813057066b.2
-        for <linux-doc@vger.kernel.org>; Tue, 09 Jun 2026 08:13:40 -0700 (PDT)
+	s=arc-20240116; t=1781017959; c=relaxed/simple;
+	bh=MOv3SenVOIJ+2PjxGXILrvwas4FLe9X40rnIUrUcvII=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Kc3hGSQsHGGcVubv/XqMnalZnEpOowH0QQBBj7mpbEpkHQT3lV2pb7o+NieR670U4wjb+0mXdhtFBq4b0WMDFXSxYySBIxLYJOADem3mF6wcTMUBAbNI2m/6d8HFWCWffIG6z+gk5fADe+T8gXpNcOJiMawqWg7px13gRuVAI10=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=B48lUTGb; arc=none smtp.client-ip=209.85.160.174
+Received: by mail-qt1-f174.google.com with SMTP id d75a77b69052e-5177d1ff061so2328711cf.1
+        for <linux-doc@vger.kernel.org>; Tue, 09 Jun 2026 08:12:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781018019; x=1781622819; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=BKAHZBj8Q4+vRNpcM7hRX5sDNhQM8RLIVJoZZt90zy8=;
-        b=izfXoU30DNugtjq4M9qUnyFD9GtmWlPvt5Jt8YHZQhr41CAPbHUrWI9IfIQCSe5Awn
-         kxnvHG93imUohZoo2ExJHod2gmLhq19A2n3W4qrTlqrNxjfrCCxAaCRzlO9s+9GiII7u
-         GZZCZilICYr46YlJC40DqdhxATAJx3T8SApwAkvAkvjTG5OQ9OhgAjeGXOoD5LlNiQx0
-         CNj2Amn0Teb5Yl2etVgMabc5PdRvR6nZl1FjIL+QMjNVOt0/qaf+vAW/unKc3KgAxij7
-         YYmAi5DIiap1DPhbj3TqE8KUnmo7fyjPv0GrfRNoXhYkgeiLkWFKME8FF+6aMPzu6n90
-         2W1Q==
+        d=google.com; s=20251104; t=1781017951; x=1781622751; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=w6VKUC1VUaetCGs5JJDLFKtb8dO63YSohjJ7JwyYLsY=;
+        b=B48lUTGbF/PPdNoQgIo/7L/EmIEbRpJUb5JyswQLrZrpjkTkSAOTzDqjo7n4tW0ftT
+         RwOpRT5rCK16aEuS3rmINv4X/zQzQG34Ra+qfBI2QoOPuU0JRUjj1pjuwNK4RuJHjpzw
+         YXKsiIMzIO+n5Sz5J+IWOnH3RtAiWYCQLpgzDA6c+zvQXhRqFT9+nTk1GG3yEZyUaAKC
+         GddaFp/hMHUzu8atXszbAbEQ3QT1Ek6kZ0ySGW8K0cdqDBgNarcj6fYhkaCLBfezIPOL
+         1X+o6iYPd9kZhvQOoxzPPBbp0mjOOMxHnkaeAin8V5Z1jDtBC5z+BSmLvc5hGVx5Wucs
+         Tgcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781018019; x=1781622819;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=BKAHZBj8Q4+vRNpcM7hRX5sDNhQM8RLIVJoZZt90zy8=;
-        b=DtSrpoy7iWi7/IxcmiPWpbbk9w/apzQYQeU03wiaf4WESxZfQy9aOrL9SBsH6E+EHw
-         c2J2/e6x+fuUk8oE3KsXcv5Qym2bacl2UtOzBCxmHNPDGz384bke1YSJ/SL9ZoXgzkpB
-         AczQ0vKOg4gE/LEEbsW8ZHTgpphiPNtUSPcmnMIiy2goYt26dS2hm9Em2UsmuhF9c0zk
-         P2d56+67I9XgcXzy5Qplc6IRPKNYn8IEpQrS1f/XYqG2345n3sJIUVEpQ3O1JhZMUTYN
-         nmowLvWs2V2hTphrWM4u5xtwvHeJJwJXfPaN3XboQ0CdiVWOixWaOUVoFrv4Zl1+VYQ3
-         Z2xA==
-X-Forwarded-Encrypted: i=1; AFNElJ/O8yb/ZbXjqIInkPad7DJ7qP8a/RYsm33kFa130Z5W0Y3u7N2kDeWedjbFGpEFk68ref3dpVziZdk=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzTwoyGbSv0GgVo2Ip7gSBsVPU7tE23l+g51qRDVeFgFfR83Y3w
-	GoRNcI7hCjrbM/CDHTx2DUGWazuD8alhisEjzh5voRPCTnKG6oNJkNKa
-X-Gm-Gg: Acq92OELwzHeWydPH5jjYZ7PIBr4gwdunFEFEpCVqKUvITV1oogNg6AJuitEmNGL0Ec
-	ptc/if9sX7NFdcmkkx1qzTviic+dioYFlbuB/6WGu0umW3nGgBsn+EdcN5R00VLNeD2CZALv1SP
-	gXVj7RD63c9o92rXVk62WUXH9vQZ6CqM2yCoCzlw4gFQWM+DtZjhF8Wrgf2Q44IwWWBuh1fckP3
-	DFRp++1nxiJmvlEPGz/BLOYxaX6l4td5f6pN7kRDQoBIfKG3SnaYPEpU78yFyZwpkeceN5aA4SM
-	vmWSGRxzmvBy9wV7PB+vcEPEJim971zUMVuVWCLFCCaWIgDQTDGMUxGv7z5G/7dUXO5hybOt45Q
-	o+QtXbKkmuUwKA2FarlxByVzG3suX24OIZK20VCfIPuueZbFi/1HqiPN8WnHOmaIxQ9U8Tkh1LD
-	poUMmdYOAOgvOIVdYcePQHW5n0WsQc3DN6
-X-Received: by 2002:a17:907:7289:b0:bf3:230c:4c64 with SMTP id a640c23a62f3a-bf371f52a44mr1059828766b.16.1781018018452;
-        Tue, 09 Jun 2026 08:13:38 -0700 (PDT)
-Received: from Ansuel-XPS24 ([2.195.136.12])
-        by smtp.googlemail.com with ESMTPSA id a640c23a62f3a-bf0517721e5sm1073637866b.9.2026.06.09.08.13.36
+        d=1e100.net; s=20251104; t=1781017951; x=1781622751;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=w6VKUC1VUaetCGs5JJDLFKtb8dO63YSohjJ7JwyYLsY=;
+        b=fMMabFnYsYmyOBXMY3KFl6bnIhwwCFGLg47RmGR3Zarx1PhlIQB2BoCx32U1AyEIEi
+         QPrHMCFC0RylsBPiE+ncuKXmpbQu5+SPaaye34N9Zcm8lGJEzUZaa6DJ4T1evefy0rxz
+         qyLJxyhkGTECGMKdaRLqn5ufKOhk6Yr/41SF/JuYO4OPNpcT02Wtmv1TZWHDSeWH5REp
+         wNj3Q5uek9HhUqxCr4T25MZOMuddM57hm19m9sQpxNmcUKDMgzA/I4iSrHYuofq/DVqU
+         QFYpx/D1JdYbP8hoNdKDYVFoiUbluDruqTCqQmsPJzxqnTe2JoT/B+nRrCb8a2S0pyq6
+         65Dw==
+X-Forwarded-Encrypted: i=1; AFNElJ9Df4AezqZSo5NrhKP7hBrJWDJNP1FdGDj/cwoy1QkFOThN251i55AGV+Md+Xn7NgeF5V+M1vAuPL8=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwBeMkgSoB4fksovGmt1OUHgZ96CBy8Cft7B2mSjabiTGpK7PBs
+	AcbFH4dR67HEXStaTJUNIgtK/PJT4KkKy47Q6LPsSw1fSqzoDrgoRCjuG0De0cEdUqPol6RVnYn
+	52xGZM7wq
+X-Gm-Gg: Acq92OHTsY7ERy6y7XBAA8KoktDzHqCUtR3Qa2jrpE2tOVpKVmgvmqxdsJuCjsiw9ZL
+	YA5gzdVGtPC5hn4qtBc828oRH8EF+VfrBqVXIiCrPQlHntRZugoVTMieJPoj/OTw1zfeBBcpCfK
+	QRE2pOPtwnQx+z2oKsdGcxdX5cY+yl6HlN4C//Ac7A0PnGAxyKHCLGM6XETGKAnfsyoghOkXT4p
+	SyWxbK8cTJTn8TylMosCMKAeDNXlEa4unKikXUMet/itW4f9iMB6B6ly5JC+gBzV5HpQKk/tkY5
+	gc1PM3CKFccxI1V9tv7CT+4ADz+aUoWxptWWzp5jWw9K7ZziUvLziKeBWr8R9W6Y9BGOgTf089B
+	dG2QunJAs1Pucm3vJSanOQa0uJ1A/AkhnAYLlA2IShFiRcNTD6TRj0/6Eo8r0Z4RtCv7tExtiyL
+	cnmifUzTdvgIhoKCxGcAbw5YXe47iYgv13ezA+ULdFcoX8qYvLwdvtBKQkSwsaYini7xkC4Mg=
+X-Received: by 2002:a17:903:19ed:b0:2bf:3579:cdaa with SMTP id d9443c01a7336-2c1eb942782mr7408845ad.10.1781017940616;
+        Tue, 09 Jun 2026 08:12:20 -0700 (PDT)
+Received: from google.com (199.255.142.34.bc.googleusercontent.com. [34.142.255.199])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c16629d40asm208599735ad.64.2026.06.09.08.12.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 09 Jun 2026 08:13:37 -0700 (PDT)
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Andrew Lunn <andrew+netdev@lunn.ch>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Simon Horman <horms@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>,
+        Tue, 09 Jun 2026 08:12:20 -0700 (PDT)
+Date: Tue, 9 Jun 2026 15:12:11 +0000
+From: Pranjal Shrivastava <praan@google.com>
+To: Jason Gunthorpe <jgg@nvidia.com>
+Cc: David Matlack <dmatlack@google.com>, kexec@lists.infradead.org,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org, linux-pci@vger.kernel.org,
+	Adithya Jayachandran <ajayachandra@nvidia.com>,
+	Alexander Graf <graf@amazon.com>,
+	Alex Williamson <alex@shazbot.org>,
+	Bjorn Helgaas <bhelgaas@google.com>, Chris Li <chrisl@kernel.org>,
+	David Rientjes <rientjes@google.com>,
+	Jacob Pan <jacob.pan@linux.microsoft.com>,
+	Jonathan Corbet <corbet@lwn.net>, Josh Hilke <jrhilke@google.com>,
+	Leon Romanovsky <leonro@nvidia.com>, Lukas Wunner <lukas@wunner.de>,
+	Mike Rapoport <rppt@kernel.org>, Parav Pandit <parav@nvidia.com>,
+	Pasha Tatashin <pasha.tatashin@soleen.com>,
+	Pratyush Yadav <pratyush@kernel.org>,
+	Saeed Mahameed <saeedm@nvidia.com>,
+	Samiullah Khawaja <skhawaja@google.com>,
 	Shuah Khan <skhan@linuxfoundation.org>,
-	Christian Marangi <ansuelsmth@gmail.com>,
-	Lorenzo Bianconi <lorenzo@kernel.org>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Saravana Kannan <saravanak@kernel.org>,
-	Philipp Zabel <p.zabel@pengutronix.de>,
-	Nathan Chancellor <nathan@kernel.org>,
-	Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
-	Bill Wendling <morbo@google.com>,
-	Justin Stitt <justinstitt@google.com>,
-	netdev@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-mediatek@lists.infradead.org,
-	llvm@lists.linux.dev
-Subject: [PATCH net-next v6 12/12] net: airoha: add phylink support
-Date: Tue,  9 Jun 2026 17:12:08 +0200
-Message-ID: <20260609151212.29469-13-ansuelsmth@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260609151212.29469-1-ansuelsmth@gmail.com>
-References: <20260609151212.29469-1-ansuelsmth@gmail.com>
+	Vipin Sharma <vipinsh@google.com>, William Tu <witu@nvidia.com>,
+	Yi Liu <yi.l.liu@intel.com>
+Subject: Re: [PATCH v6 08/12] PCI: liveupdate: Inherit ACS flags in incoming
+ preserved devices
+Message-ID: <aigtS3UDdhUGp3m0@google.com>
+References: <20260522202410.3104264-1-dmatlack@google.com>
+ <20260522202410.3104264-9-dmatlack@google.com>
+ <aiXWmR-ettxin4LC@google.com>
+ <aiaeOVomxQZhoM3K@google.com>
+ <20260608181640.GO1962447@nvidia.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260608181640.GO1962447@nvidia.com>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.84 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[28];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	TAGGED_FROM(0.00)[bounces-91675-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-91687-lists,linux-doc=lfdr.de];
-	FORGED_SENDER(0.00)[ansuelsmth@gmail.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS(0.00)[m:andrew+netdev@lunn.ch,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:ansuelsmth@gmail.com,m:lorenzo@kernel.org,m:hkallweit1@gmail.com,m:linux@armlinux.org.uk,m:saravanak@kernel.org,m:p.zabel@pengutronix.de,m:nathan@kernel.org,m:nick.desaulniers+lkml@gmail.com,m:morbo@google.com,m:justinstitt@google.com,m:netdev@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-mediatek@lists.infradead.org,m:llvm@lists.linux.dev,m:andrew@lunn.ch,m:krzk@kernel.org,m:conor@kernel.org,m:nickdesaulniers@gmail.com,s:lists@lfdr.de];
-	FORWARDED(0.00)[lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[lunn.ch,davemloft.net,google.com,kernel.org,redhat.com,lwn.net,linuxfoundation.org,gmail.com,armlinux.org.uk,pengutronix.de,vger.kernel.org,lists.infradead.org,lists.linux.dev];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ansuelsmth@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS(0.00)[m:jgg@nvidia.com,m:dmatlack@google.com,m:kexec@lists.infradead.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-pci@vger.kernel.org,m:ajayachandra@nvidia.com,m:graf@amazon.com,m:alex@shazbot.org,m:bhelgaas@google.com,m:chrisl@kernel.org,m:rientjes@google.com,m:jacob.pan@linux.microsoft.com,m:corbet@lwn.net,m:jrhilke@google.com,m:leonro@nvidia.com,m:lukas@wunner.de,m:rppt@kernel.org,m:parav@nvidia.com,m:pasha.tatashin@soleen.com,m:pratyush@kernel.org,m:saeedm@nvidia.com,m:skhawaja@google.com,m:skhan@linuxfoundation.org,m:vipinsh@google.com,m:witu@nvidia.com,m:yi.l.liu@intel.com,s:lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	FORGED_SENDER(0.00)[praan@google.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[28];
+	DKIM_TRACE(0.00)[google.com:+];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[praan@google.com,linux-doc@vger.kernel.org];
+	MISSING_XM_UA(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,netdev,dt,lkml];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,vger.kernel.org:from_smtp]
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: C1E76661E71
+X-Rspamd-Queue-Id: 08D78661B1B
 
-Add phylink support for each GDM port. For GDM1 add the internal interface
-mode as the only supported mode. For GDM2/3/4 add the required
-configuration of the PCS to make the external PHY or attached SFP cage
-work.
+On Mon, Jun 08, 2026 at 03:16:40PM -0300, Jason Gunthorpe wrote:
+> On Mon, Jun 08, 2026 at 10:49:29AM +0000, Pranjal Shrivastava wrote:
+> 
+> > My point was that a FW exploit can meddle with the bitfields of the
+> > ACS_CTRL to spoof and mis-report the ACS flags.
+> 
+> Devices can also ignore the ACS flags. I don't think this is an area
+> where we should be worrying about devices being actively hostile.
 
-These needs to be defined in the GDM port node using the pcs-handle
-property.
+I'm wondering what happens if we preserve IOMMU groups across a kexec,
+but a switch's ACS capability is dropped or the ACS_RR bit gets cleared?
+The incoming kernel assumes that it's the same ACS cap from the old one
 
-Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
----
- drivers/net/ethernet/airoha/Kconfig       |   1 +
- drivers/net/ethernet/airoha/airoha_eth.c  | 167 +++++++++++++++++++++-
- drivers/net/ethernet/airoha/airoha_eth.h  |   3 +
- drivers/net/ethernet/airoha/airoha_regs.h |  12 ++
- 4 files changed, 181 insertions(+), 2 deletions(-)
+Now, the incoming kernel restores the groups assuming they're still 
+isolated, but the hardware no longer enforces it, silently allowing DMAs
+& breaking isolation? 
 
-diff --git a/drivers/net/ethernet/airoha/Kconfig b/drivers/net/ethernet/airoha/Kconfig
-index ad3ce501e7a5..38dcc76e5998 100644
---- a/drivers/net/ethernet/airoha/Kconfig
-+++ b/drivers/net/ethernet/airoha/Kconfig
-@@ -20,6 +20,7 @@ config NET_AIROHA
- 	depends on NET_DSA || !NET_DSA
- 	select NET_AIROHA_NPU
- 	select PAGE_POOL
-+	select PHYLINK
- 	help
- 	  This driver supports the gigabit ethernet MACs in the
- 	  Airoha SoC family.
-diff --git a/drivers/net/ethernet/airoha/airoha_eth.c b/drivers/net/ethernet/airoha/airoha_eth.c
-index 5a8e84fa9918..eabd7b058f82 100644
---- a/drivers/net/ethernet/airoha/airoha_eth.c
-+++ b/drivers/net/ethernet/airoha/airoha_eth.c
-@@ -8,6 +8,7 @@
- #include <linux/of_reserved_mem.h>
- #include <linux/platform_device.h>
- #include <linux/tcp.h>
-+#include <linux/pcs/pcs.h>
- #include <linux/u64_stats_sync.h>
- #include <net/dst_metadata.h>
- #include <net/page_pool/helpers.h>
-@@ -1779,6 +1780,15 @@ static int airoha_dev_open(struct net_device *netdev)
- 	u32 cur_len, pse_port = FE_PSE_PORT_PPE1;
- 	struct airoha_qdma *qdma = dev->qdma;
- 
-+	err = phylink_of_phy_connect(dev->phylink, netdev->dev.of_node, 0);
-+	if (err) {
-+		netdev_err(netdev, "%s: could not attach PHY: %d\n", __func__,
-+			   err);
-+		return err;
-+	}
-+
-+	phylink_start(dev->phylink);
-+
- 	netif_tx_start_all_queues(netdev);
- 	err = airoha_set_vip_for_gdm_port(dev, true);
- 	if (err)
-@@ -1876,6 +1886,9 @@ static int airoha_dev_stop(struct net_device *netdev)
- 		}
- 	}
- 
-+	phylink_stop(dev->phylink);
-+	phylink_disconnect_phy(dev->phylink);
-+
- 	return 0;
- }
- 
-@@ -3148,6 +3161,153 @@ bool airoha_is_valid_gdm_dev(struct airoha_eth *eth,
- 	return false;
- }
- 
-+/* Nothing to do in MAC, everything is handled in PCS */
-+static void airoha_mac_config(struct phylink_config *config, unsigned int mode,
-+			      const struct phylink_link_state *state)
-+{
-+}
-+
-+static void airoha_mac_link_up(struct phylink_config *config, struct phy_device *phy,
-+			       unsigned int mode, phy_interface_t interface,
-+			       int speed, int duplex, bool tx_pause, bool rx_pause)
-+{
-+	struct airoha_gdm_dev *dev = container_of(config, struct airoha_gdm_dev,
-+						  phylink_config);
-+	struct airoha_gdm_port *port = dev->port;
-+	struct airoha_eth *eth = dev->eth;
-+	u32 frag_size_tx, frag_size_rx;
-+	u32 mask, val;
-+
-+	/* TX/RX frag is configured only for GDM4 */
-+	if (port->id != 4)
-+		return;
-+
-+	switch (speed) {
-+	case SPEED_10000:
-+	case SPEED_5000:
-+		frag_size_tx = 8;
-+		frag_size_rx = 8;
-+		break;
-+	case SPEED_2500:
-+		frag_size_tx = 2;
-+		frag_size_rx = 1;
-+		break;
-+	default:
-+		frag_size_tx = 1;
-+		frag_size_rx = 0;
-+	}
-+
-+	/* Configure TX/RX frag based on speed */
-+	if (dev->nbq == 1) {
-+		mask = GDMA4_SGMII1_TX_FRAG_SIZE_MASK;
-+		val = FIELD_PREP(GDMA4_SGMII1_TX_FRAG_SIZE_MASK,
-+				 frag_size_tx);
-+	}  else {
-+		mask = GDMA4_SGMII0_TX_FRAG_SIZE_MASK;
-+		val = FIELD_PREP(GDMA4_SGMII0_TX_FRAG_SIZE_MASK,
-+				 frag_size_tx);
-+	}
-+	airoha_fe_rmw(eth, REG_GDMA4_TMBI_FRAG, mask, val);
-+
-+	if (dev->nbq == 1) {
-+		mask = GDMA4_SGMII1_RX_FRAG_SIZE_MASK;
-+		val = FIELD_PREP(GDMA4_SGMII1_RX_FRAG_SIZE_MASK,
-+				 frag_size_tx);
-+	} else {
-+		mask = GDMA4_SGMII0_RX_FRAG_SIZE_MASK;
-+		val = FIELD_PREP(GDMA4_SGMII0_RX_FRAG_SIZE_MASK,
-+				 frag_size_tx);
-+	}
-+	airoha_fe_rmw(eth, REG_GDMA4_RMBI_FRAG, mask, val);
-+}
-+
-+/* Nothing to do in MAC, everything is handled in PCS */
-+static void airoha_mac_link_down(struct phylink_config *config, unsigned int mode,
-+				 phy_interface_t interface)
-+{
-+}
-+
-+static const struct phylink_mac_ops airoha_phylink_ops = {
-+	.mac_config = airoha_mac_config,
-+	.mac_link_up = airoha_mac_link_up,
-+	.mac_link_down = airoha_mac_link_down,
-+};
-+
-+static int airoha_fill_available_pcs(struct phylink_config *config,
-+				     struct phylink_pcs **available_pcs,
-+				     unsigned int num_available_pcs)
-+{
-+	struct device *dev = config->dev;
-+
-+	return fwnode_phylink_pcs_parse(dev_fwnode(dev), available_pcs,
-+					&num_available_pcs);
-+}
-+
-+static int airoha_setup_phylink(struct net_device *netdev)
-+{
-+	struct airoha_gdm_dev *dev = netdev_priv(netdev);
-+	struct device_node *np = netdev->dev.of_node;
-+	struct airoha_gdm_port *port = dev->port;
-+	struct phylink_config *config;
-+	phy_interface_t phy_mode;
-+	struct phylink *phylink;
-+	int err;
-+
-+	err = of_get_phy_mode(np, &phy_mode);
-+	if (err) {
-+		dev_err(&netdev->dev, "incorrect phy-mode\n");
-+		return err;
-+	}
-+
-+	config = &dev->phylink_config;
-+
-+	config->dev = &netdev->dev;
-+	config->type = PHYLINK_NETDEV;
-+	config->mac_capabilities = MAC_ASYM_PAUSE | MAC_SYM_PAUSE |  MAC_10000FD;
-+	if (port->id > AIROHA_GDM1_IDX)
-+		config->mac_capabilities |= MAC_10 | MAC_100 | MAC_1000 |
-+					    MAC_2500FD | MAC_5000FD;
-+
-+	err = fwnode_phylink_pcs_parse(dev_fwnode(&netdev->dev), NULL,
-+				       &config->num_available_pcs);
-+	if (err)
-+		return err;
-+
-+	config->fill_available_pcs = airoha_fill_available_pcs;
-+
-+	/*
-+	 * GDM1 only supports internal for Embedded Switch
-+	 * and doesn't require a PCS.
-+	 */
-+	if (port->id == AIROHA_GDM1_IDX) {
-+		__set_bit(PHY_INTERFACE_MODE_INTERNAL,
-+			  config->supported_interfaces);
-+	} else {
-+		__set_bit(PHY_INTERFACE_MODE_SGMII,
-+			  config->supported_interfaces);
-+		__set_bit(PHY_INTERFACE_MODE_1000BASEX,
-+			  config->supported_interfaces);
-+		__set_bit(PHY_INTERFACE_MODE_2500BASEX,
-+			  config->supported_interfaces);
-+		__set_bit(PHY_INTERFACE_MODE_10GBASER,
-+			  config->supported_interfaces);
-+		__set_bit(PHY_INTERFACE_MODE_USXGMII,
-+			  config->supported_interfaces);
-+
-+		phy_interface_copy(config->pcs_interfaces,
-+				   config->supported_interfaces);
-+	}
-+
-+	phylink = phylink_create(config, of_fwnode_handle(np),
-+				 phy_mode, &airoha_phylink_ops);
-+	if (IS_ERR(phylink))
-+		return PTR_ERR(phylink);
-+
-+	dev->phylink = phylink;
-+
-+	return 0;
-+}
-+
- static int airoha_alloc_gdm_device(struct airoha_eth *eth,
- 				   struct airoha_gdm_port *port,
- 				   int nbq, struct device_node *np)
-@@ -3210,7 +3370,7 @@ static int airoha_alloc_gdm_device(struct airoha_eth *eth,
- 	dev->nbq = nbq;
- 	port->devs[index] = dev;
- 
--	return 0;
-+	return airoha_setup_phylink(netdev);
- }
- 
- static int airoha_alloc_gdm_port(struct airoha_eth *eth,
-@@ -3435,8 +3595,10 @@ static int airoha_probe(struct platform_device *pdev)
- 				continue;
- 
- 			netdev = netdev_from_priv(dev);
--			if (netdev->reg_state == NETREG_REGISTERED)
-+			if (netdev->reg_state == NETREG_REGISTERED) {
-+				phylink_destroy(dev->phylink);
- 				unregister_netdev(netdev);
-+			}
- 			of_node_put(netdev->dev.of_node);
- 		}
- 		airoha_metadata_dst_free(port);
-@@ -3472,6 +3634,7 @@ static void airoha_remove(struct platform_device *pdev)
- 				continue;
- 
- 			netdev = netdev_from_priv(dev);
-+			phylink_destroy(dev->phylink);
- 			unregister_netdev(netdev);
- 			of_node_put(netdev->dev.of_node);
- 		}
-diff --git a/drivers/net/ethernet/airoha/airoha_eth.h b/drivers/net/ethernet/airoha/airoha_eth.h
-index 8f42973f9cf5..1b25603dc64d 100644
---- a/drivers/net/ethernet/airoha/airoha_eth.h
-+++ b/drivers/net/ethernet/airoha/airoha_eth.h
-@@ -554,6 +554,9 @@ struct airoha_gdm_dev {
- 
- 	u32 flags;
- 	int nbq;
-+
-+	struct phylink *phylink;
-+	struct phylink_config phylink_config;
- };
- 
- struct airoha_gdm_port {
-diff --git a/drivers/net/ethernet/airoha/airoha_regs.h b/drivers/net/ethernet/airoha/airoha_regs.h
-index 436f3c8779c1..27f2583e143a 100644
---- a/drivers/net/ethernet/airoha/airoha_regs.h
-+++ b/drivers/net/ethernet/airoha/airoha_regs.h
-@@ -358,6 +358,18 @@
- #define IP_FRAGMENT_PORT_MASK		GENMASK(8, 5)
- #define IP_FRAGMENT_NBQ_MASK		GENMASK(4, 0)
- 
-+#define REG_GDMA4_TMBI_FRAG		0x2028
-+#define GDMA4_SGMII1_TX_WEIGHT_MASK	GENMASK(31, 26)
-+#define GDMA4_SGMII1_TX_FRAG_SIZE_MASK	GENMASK(25, 16)
-+#define GDMA4_SGMII0_TX_WEIGHT_MASK	GENMASK(15, 10)
-+#define GDMA4_SGMII0_TX_FRAG_SIZE_MASK	GENMASK(9, 0)
-+
-+#define REG_GDMA4_RMBI_FRAG		0x202c
-+#define GDMA4_SGMII1_RX_WEIGHT_MASK	GENMASK(31, 26)
-+#define GDMA4_SGMII1_RX_FRAG_SIZE_MASK	GENMASK(25, 16)
-+#define GDMA4_SGMII0_RX_WEIGHT_MASK	GENMASK(15, 10)
-+#define GDMA4_SGMII0_RX_FRAG_SIZE_MASK	GENMASK(9, 0)
-+
- #define REG_MC_VLAN_EN			0x2100
- #define MC_VLAN_EN_MASK			BIT(0)
- 
--- 
-2.53.0
-
+Thanks,
+Praan
 
