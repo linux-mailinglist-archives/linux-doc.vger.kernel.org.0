@@ -1,147 +1,126 @@
-Return-Path: <linux-doc+bounces-91714-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91715-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 9DDGH6dHKGomBgMAu9opvQ
-	(envelope-from <linux-doc+bounces-91714-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 19:04:39 +0200
+	id yQmBFPNLKGohBwMAu9opvQ
+	(envelope-from <linux-doc+bounces-91715-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 19:22:59 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E734B662BE7
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 19:04:38 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id D79E5662E60
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 19:22:58 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b=Bj+wqivD;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91714-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91714-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=infradead.org;
+	dkim=pass header.d=arm.com header.s=foss header.b=LOqyjgl3;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91715-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-91715-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=arm.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id A11453016271
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2026 16:56:57 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 4F7D630DB739
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2026 17:05:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D474E4A2E06;
-	Tue,  9 Jun 2026 16:56:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A29124ADDA9;
+	Tue,  9 Jun 2026 17:04:43 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D8469402427;
-	Tue,  9 Jun 2026 16:56:51 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F35784ADDAC;
+	Tue,  9 Jun 2026 17:04:41 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781024214; cv=none; b=RwAP/zHPOKQ9GIcLijyiImUneaqdebZF1ApTt+a8floJUlOe9wSsmh0TxebcoX4fm1gZBREeUO67t2eCME3p0SmDuLP+xP/C/rkNJ0kk/+rbAQ016te2isUSqeY6csftMH17NTZrPn+h3FGPhejif8GpTkmgXSwL1puFOfIcjeY=
+	t=1781024683; cv=none; b=NgqIdWnDN3ohvoG1WCb9pRKcCotveC+mh1nWudtdWKw/dcLsS3/LGcH7PxnteM1/HpccoRZzoOZGSP4ilTxboHlSCACyqs4XaykIdXv9sKPYgNnpnxKARK3YrfjnaPBBFXwMS5bf4+vAOw2xyYZGqyexab16er0HSE9xxgi37N0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781024214; c=relaxed/simple;
-	bh=yVSgqA1YRqHOPUZzRZRDiGjbH7YpDugPsDgNSCyNE18=;
-	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
-	 In-Reply-To:Content-Type; b=YR00n2fVOQDxZjN6FmKagOp6qw63t1EmQAMi5pTC+hAldobiiu/bMRTdndIazIL00iaprYdfNNa9E5bRHCfBisX0FMUkEqV/WJTwV68sS+tC1xRQdFgFPQqtQ6+P/IRTfqUL/YBfW+kqL9MlFFWLibwYoNEUg5LEifP7Jn/Ur+E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=pass smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=Bj+wqivD; arc=none smtp.client-ip=198.137.202.133
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:From:References:To:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Cc:Content-ID:Content-Description;
-	bh=5nClrPMG+OpAu8aP+72MzAHYsBT4h/EZHiaG3Bb1jtU=; b=Bj+wqivDZg3cNXZcVQvduoRLN7
-	8wlCoQrxzyjlo0QI3yIgbnGE27ZoDASLk4NczHzAGjWHr5BS9ZcIXqbUCuA0Kv5IZp9Nw0Ny/z8qI
-	Z6y2LMswOgQQ51KLM4bqNQ1fSLN2ynViLQKqLamBuAh/fWWPLQEKYDJHup+ACw53UbLPzM3ngey/P
-	XWG4tKAkCugd8lr3VGnl0hlQRcJ4lHEQTh4stA41+2TFNfD79dhdmzokyeCJVJMgFVO354f7rrIKa
-	oOJjpdKInJFI5SvL0rP1eiGFEs1oORR0MPsdmIgHYeWhOadFx/4X7CGRe0trw2nQewnQ4mTlyNqFu
-	MVgFNqsg==;
-Received: from [50.53.43.113] (helo=[192.168.254.34])
-	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wWzkw-000000065uL-1Y2T;
-	Tue, 09 Jun 2026 16:56:50 +0000
-Message-ID: <cbb6b92f-815d-46b1-8ba6-8e25c35f3450@infradead.org>
-Date: Tue, 9 Jun 2026 09:56:49 -0700
+	s=arc-20240116; t=1781024683; c=relaxed/simple;
+	bh=jnKL74vtEEl5TEsaGZturjU6Ty1Crwee9CNWBBSOBzw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=AEf5HKkI0nwmK+Sn10Xq4Qq9ETekKdvI4CYxFgkZQ/rldL7UwHtBWREOVLIbVZGlBP2L+bTmBC1WE7DU17t2FVeKuMSQQoiQRuZ6GeF25iLOI7cuFRIlUMrJzVSCGw1rSYCdGqruE2EuPQnRAdjEXAgS7CZvoUqi6cZ7SVVUPlA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=LOqyjgl3; arc=none smtp.client-ip=217.140.110.172
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9B2C83D48;
+	Tue,  9 Jun 2026 10:04:36 -0700 (PDT)
+Received: from localhost (e132581.arm.com [10.1.196.87])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0CCFB3FD88;
+	Tue,  9 Jun 2026 10:04:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1781024681; bh=jnKL74vtEEl5TEsaGZturjU6Ty1Crwee9CNWBBSOBzw=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=LOqyjgl3lbndJMFYmoAmPoNqTWBrYGQf/WeheT5JhGkhKD36cDcv4be9UUnCffRXt
+	 Vl+9xg+hPGiBCs6DWPSpi3vmNYKJElixy+MLkobaZEiTG9eF/YWNAWDl+tH3v37fLy
+	 q/1PLMGinPKw/fCMwcwcBxRNkMYaDLG7x4gHG8QA=
+Date: Tue, 9 Jun 2026 18:04:38 +0100
+From: Leo Yan <leo.yan@arm.com>
+To: James Clark <james.clark@linaro.org>
+Cc: Suzuki K Poulose <suzuki.poulose@arm.com>,
+	Mike Leach <mike.leach@arm.com>,
+	Arnaldo Carvalho de Melo <acme@kernel.org>,
+	Namhyung Kim <namhyung@kernel.org>, Jiri Olsa <jolsa@kernel.org>,
+	Ian Rogers <irogers@google.com>, Amir Ayupov <aaupov@meta.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Paschalis Mpeis <Paschalis.Mpeis@arm.com>,
+	coresight@lists.linaro.org, linux-perf-users@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Arnaldo Carvalho de Melo <acme@redhat.com>,
+	linux-doc@vger.kernel.org
+Subject: Re: [PATCH v5 06/19] perf test cs-etm: Replace unroll loop thread
+ with deterministic decode test
+Message-ID: <20260609170438.GP101133@e132581.arm.com>
+References: <20260609-james-cs-context-tracking-fix-v5-0-d53a7d096a19@linaro.org>
+ <20260609-james-cs-context-tracking-fix-v5-6-d53a7d096a19@linaro.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] docs: Fix minor grammatical error
-To: Brigham Campbell <me@brighamcampbell.com>,
- Thorsten Leemhuis <linux@leemhuis.info>, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>,
- "open list:DOCUMENTATION REPORTING ISSUES" <linux-doc@vger.kernel.org>,
- open list <linux-kernel@vger.kernel.org>
-References: <20260609070618.12566-1-me@brighamcampbell.com>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20260609070618.12566-1-me@brighamcampbell.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260609-james-cs-context-tracking-fix-v5-6-d53a7d096a19@linaro.org>
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TO_DN_ALL(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:me@brighamcampbell.com,m:linux@leemhuis.info,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-91714-lists,linux-doc=lfdr.de];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-91715-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:james.clark@linaro.org,m:suzuki.poulose@arm.com,m:mike.leach@arm.com,m:acme@kernel.org,m:namhyung@kernel.org,m:jolsa@kernel.org,m:irogers@google.com,m:aaupov@meta.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:Paschalis.Mpeis@arm.com,m:coresight@lists.linaro.org,m:linux-perf-users@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:acme@redhat.com,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_SENDER(0.00)[leo.yan@arm.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	DKIM_TRACE(0.00)[arm.com:+];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[leo.yan@arm.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,infradead.org:dkim,infradead.org:email,infradead.org:mid,infradead.org:from_mime,brighamcampbell.com:email,vger.kernel.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,arm.com:dkim,arm.com:email,arm.com:from_mime,linaro.org:email,vger.kernel.org:from_smtp,e132581.arm.com:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: E734B662BE7
+X-Rspamd-Queue-Id: D79E5662E60
 
+On Tue, Jun 09, 2026 at 03:40:11PM +0100, James Clark wrote:
+> Testing a long sequence without branches seems like it would be better
+> as a decoder unit test, and this test doesn't test decoding either, so
+> it's not clear what bugs this is trying to catch.
+> 
+> The new deterministic workload has somewhat long sequences when built
+> unoptimized, and we can always increase them later if we want to. But
+> now we test that decoding always gives the same result for the same
+> sequence of code which we've never had before.
+> 
+> Signed-off-by: James Clark <james.clark@linaro.org>
 
-
-On 6/9/26 12:06 AM, Brigham Campbell wrote:
-> Fix minor grammatical error in the administration guide.
-> 
-> Signed-off-by: Brigham Campbell <me@brighamcampbell.com>
-
-Acked-by: Randy Dunlap <rdunlap@infradead.org>
-Thanks.
-
-> ---
-> 
-> Since v1:
-> * Drop pedantic line re-wrapping.
-> 
-> In hindsight, I should have guessed that reflowing the paragraph was
-> overzealous. Thanks for the guidance, Randy, Thorsten. I'll remember it
-> if I make minor doc fixes in the future.
-> 
->  Documentation/admin-guide/quickly-build-trimmed-linux.rst | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/Documentation/admin-guide/quickly-build-trimmed-linux.rst b/Documentation/admin-guide/quickly-build-trimmed-linux.rst
-> index cb178e0a6208..3432dc8e1a85 100644
-> --- a/Documentation/admin-guide/quickly-build-trimmed-linux.rst
-> +++ b/Documentation/admin-guide/quickly-build-trimmed-linux.rst
-> @@ -217,7 +217,7 @@ again.
->  
->     There is a catch: 'localmodconfig' is likely to disable kernel features you
->     did not use since you booted your Linux -- like drivers for currently
-> -   disconnected peripherals or a virtualization software not haven't used yet.
-> +   disconnected peripherals or virtualization software not currently in use.
->     You can reduce or nearly eliminate that risk with tricks the reference
->     section outlines; but when building a kernel just for quick testing purposes
->     it is often negligible if such features are missing. But you should keep that
-> 
-> base-commit: 738bb6e6c8d992f33335b3cbcce051ab118a33dc
-
--- 
-~Randy
+Tested-by: Leo Yan <leo.yan@arm.com>
 
