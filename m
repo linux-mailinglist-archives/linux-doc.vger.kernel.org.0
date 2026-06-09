@@ -1,209 +1,224 @@
-Return-Path: <linux-doc+bounces-91721-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91722-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 4sqsLWlWKGqdCQMAu9opvQ
-	(envelope-from <linux-doc+bounces-91721-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 20:07:37 +0200
+	id d51mDUxUKGohCQMAu9opvQ
+	(envelope-from <linux-doc+bounces-91722-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 19:58:36 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id AFD946632E2
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 20:07:36 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id B45CB66320A
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 19:58:35 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=google.com header.s=20251104 header.b=iZfBKXHF;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91721-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91721-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=reject) header.from=google.com;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
+	dkim=pass header.d=arm.com header.s=foss header.b=Z6Z5Snih;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91722-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91722-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=arm.com;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 0813230C4DD3
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2026 17:54:32 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 2CA81301AFC9
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2026 17:58:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B90A9331EDD;
-	Tue,  9 Jun 2026 17:54:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E8E8B3C10AD;
+	Tue,  9 Jun 2026 17:58:32 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5AB4D331EB1
-	for <linux-doc@vger.kernel.org>; Tue,  9 Jun 2026 17:54:09 +0000 (UTC)
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781027650; cv=pass; b=oGVrkPnWRTnjNFNdd7ZY6QiXM2jRzO1dxA9MFCZjM9oy4XvBbCOSnU2vjqTa88oGOCw8wmtjcycIE8cWYky9sjeFnXIRCUpi1Zc/ubjM33tGRAvjqlaLpkLJbAgJ83yLthL/G9GYMVxFYB2BQAYQMQe/kupLu3Rd32i/jEYKLQY=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781027650; c=relaxed/simple;
-	bh=Hq4A7JGxJMTkiPV3o4Xs1UnKUenCIEORnYI3PIpLLJo=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=FYhP171aeWmv0Rpmq623EBBvKkWx2q3L9KAZYQJ98j8/Fx93vpGRosuZaUfO0niFKdA/wb40/jINu3dEBC4ZTsQ49VhYieigxam17gCNdbF+iPY5+rIpMwdKbpCbrz/2iutn7dMq5DyptzhQvUVOJrAjkKWjjTjhG5bERvZC0Kc=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=iZfBKXHF; arc=pass smtp.client-ip=209.85.208.51
-Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-68ced08613aso47185a12.0
-        for <linux-doc@vger.kernel.org>; Tue, 09 Jun 2026 10:54:09 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781027648; cv=none;
-        d=google.com; s=arc-20240605;
-        b=EjkYuwl2YPUqiXCCJq5DK5bgJe81/DIUYk7rdnTb2+fZH3OIB34hmn57lEFIK5ZXvj
-         3ltdHweoptvdNyPaXs9DH61zZb/hHxL8+po7AAbg+Or0aFWnqOwM1/p+8PEPXrjdbP17
-         qioj8wglphafdmFmnJIY66biA0bR+1dHl7RITYLgL/koIX/3BXcgEkvS2a0gmg1kKlUn
-         OMF0AkHu2TsuvOoOBvelkLi6yytdPWOBSVzyAjbRQucnsSn3POXNUZ0apckNu0N5nmfa
-         6br0M1emMNZ2NPFfhGjeC6pkDei19v6EOnwQ7Anv8uISCf7kwIfGIQGL1zZb1EdEe+hU
-         344Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=iPo/rNEwfs0tGz+mQjgisI/ZCW4vs/mt/EjG+vliJIU=;
-        fh=07w84MMdk3kBt9Kp0S0T62K0i1Xc99yxf/Hug6QzZFs=;
-        b=SUzUj4CQkySEpU7J1LADzWUXVGi/JrlLrSvN2bzGmHGdWrRIUPKxHl9LUWo3EBioez
-         w3CYZ4z1PoYv3RzP58z6B2tXFyAuzHnLOFrVC6rlVvInIkzaN+j5JxaIJFQx0mfoCFk8
-         49iepmFQmWvzsN45EK1BQMnCVqGVy6c/YrGfBTYzUj0kErfPLhPYNbvgPBxOUvHSO2xL
-         a4mJD9fUyxEaI6NT9FoxNScTG31OXw6aJ02gH1BE95jDm6w3KUEc0G9s0YYPLRa6gU8h
-         uuLNDhlKhVSA0SBiH63nxeAoUxpxKicu21R6biuChV003SioOryJQExnh576fgePXiCs
-         9pLA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1781027648; x=1781632448; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=iPo/rNEwfs0tGz+mQjgisI/ZCW4vs/mt/EjG+vliJIU=;
-        b=iZfBKXHFAby34uHGpYi2VbZP+Pazod5Qc+pxnkwolhQruv5pTqedVLudlVv+YX3wSY
-         Uvs1bWsokvHd9EcxespPGitXQUjQ02oG0JGpJMnsFiMTnvIw0gyWIUX/SB6RMjsEv+2r
-         rhxt01z2rd5I/RDkyxkfpr3Oe8Hodptu2WuaiHnsd3DEDQ/nKhUoOSbttVz68dwtuT/j
-         b+0OdPmoDhTN+E9jd6VE4rPpwar+vQttOWkEP8TTSpQQLlYx1hjyQJ7qHhos34m8vrKX
-         mnbEnNErlEybTK8zbZ55NtPOVouI00Ayg/Ef+ogwn4FfwQIx5o5Ut5OR/Z/VmEkyhfB4
-         7qlw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781027648; x=1781632448;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=iPo/rNEwfs0tGz+mQjgisI/ZCW4vs/mt/EjG+vliJIU=;
-        b=UAkD/XLkCWKmD4hIucMsEvJbYtFpHnitt252sinGu/73DZOObFl55FOFyHRN0y7jDh
-         AD7RZds6niQHTaFP5VOwumRSYZae1mSIcFnr6TOirSHZVVdtVIzSL2fiM/CbfyKUL6vj
-         vWeWBvw5aqT90355WpVkbC8BnE0Zbef9kx2dEiDuMfdr98nosCMikQoqMayJctz5+9jj
-         38MfV82Cibbht5wwZRN2t466OO+M9iOmtyGzFEke91XEkQw/6/0KS1bJ/5oK0Ak9a9xz
-         Q4zbwco2dIeaf4sf4PNtGmJ5GFWRKE/i9CnAonqK0aeIWnQ61ESfOoI2NB+96kazbdrj
-         hdTw==
-X-Forwarded-Encrypted: i=1; AFNElJ8u0hs0qHOSs4MlSHJvNN0eGGcRYcdYnqFKV/0/aydkZt+CIG3I0UBL1yqGqoAbA0UHpSrXnYZ77C0=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw4zN9eWQ5R6nwSc/SUpLbl5kdPD8yW/x29GCTXYNC0krmjuT5U
-	jMGjX4LoekUVFqTKfU3wovJol0hpvSUSzohCYgI8UwKcVUFN3WZYrZGpSeukece4QM0vPZ29Hho
-	BzBuI2FOfREZbmOOvrJy7waBxEcStEJPbwCy5jvDO
-X-Gm-Gg: Acq92OHfwsAY2j50PMjpOT2uieDALbJsvtvqojcteLB3IvHfuMKat/dI40JObDt3k+x
-	h0HUYLOLtPuAGnKlouN1+L13i/BBFFg750Orco+LMwL0FJGob1ogEcAF1rbnZ7wwhId+a61FCbu
-	NJJ6mlQ2SjMrJgl8kx9v9WOk/mODRH4OUq3t4X3JvOgInChVdf8c4KsxKAzImq7Y/3FzYJ0kRI0
-	9cDt71TZglqkuA1JIRFNwrPKgMh9YD9mb/4q7OASkgBgrfoWTYOCmI52Ok4lESf+9CLN2rigKjv
-	vkN2ZmruGK2q4YdYxqwDWGTQNLHnDoDOLQMthlVcNw2hJANv
-X-Received: by 2002:a05:6402:708:b0:68f:d45f:e497 with SMTP id
- 4fb4d7f45d1cf-68ff191f2f4mr222363a12.14.1781027647308; Tue, 09 Jun 2026
- 10:54:07 -0700 (PDT)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B979536F91F;
+	Tue,  9 Jun 2026 17:58:29 +0000 (UTC)
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1781027912; cv=none; b=Q1GPiHkr00D9gboE/jjOBCgsk4YqomUVKlWC6FzL+OwTKELaSNp1L5FAMGaGJuhwTMvHPvqvRhLS0dRTjnFKOBPNARDDE6fOTHa5CKrH6I8YeXOb+MeuwbfjAOZhiMLbezlFZLmiDmAESDTxcW35dyaTz+GXuCYIOzYI0Qz6yhk=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1781027912; c=relaxed/simple;
+	bh=17UlZdz2nMdyTrEUz5ek0AIVuii3F4B4SW4ls8GDlUA=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=AdKoCUtFXtDwSYK5AZVCPPyB9A749sgbxq3Lyrv1+Mh3aiqQn1szh7o6K77IL7HpbFbUMytX9kDIXPSaEsk2Vvlj3HiJBeuJJ22mtiUVGp0kTOpggkd3xNMxzgNQJ16UOVsx6bFp22tW1R8Rg7u2hGNevVxcb54/ScdFw0F4ILE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=Z6Z5Snih; arc=none smtp.client-ip=217.140.110.172
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 318813D6A;
+	Tue,  9 Jun 2026 10:58:24 -0700 (PDT)
+Received: from arm.com (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D051A3FD88;
+	Tue,  9 Jun 2026 10:58:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1781027909; bh=17UlZdz2nMdyTrEUz5ek0AIVuii3F4B4SW4ls8GDlUA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Z6Z5SnihxPnVvw5f2YFVpT+cXdhZQ3cGlZ9ugH8oZDKRKqqlFvR4Ixvr32QCZgoaZ
+	 By/APjldmxiBEx8OxV20fU3AnRHw7W3UvPLWXY+AATEGfZsa998kCI25uXWKj3SIn6
+	 xRS1CtMTLn0G9Dd+gfe+E1qeHn7iV/STrgzcZbfs=
+Date: Tue, 9 Jun 2026 18:58:22 +0100
+From: Catalin Marinas <catalin.marinas@arm.com>
+To: Jinjie Ruan <ruanjinjie@huawei.com>
+Cc: Will Deacon <will@kernel.org>, corbet@lwn.net,
+	skhan@linuxfoundation.org, punit.agrawal@oss.qualcomm.com,
+	jic23@kernel.org, osama.abdelkader@gmail.com,
+	chenl311@chinatelecom.cn, fengchengwen@huawei.com,
+	suzuki.poulose@arm.com, maz@kernel.org, lpieralisi@kernel.org,
+	timothy.hayes@arm.com, sascha.bischoff@arm.com, arnd@arndb.de,
+	mrigendra.chaubey@gmail.com, pierre.gondois@arm.com,
+	dietmar.eggemann@arm.com, yangyicong@hisilicon.com,
+	sudeep.holla@kernel.org, linux-arm-kernel@lists.infradead.org,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v3] cpu/hotplug: Fix NULL kobject warning in
+ cpuhp_smt_enable()
+Message-ID: <aihUPsuEytsM6Dly@arm.com>
+References: <20260520022023.126670-1-ruanjinjie@huawei.com>
+ <ah65zXlOH6a9geD9@willie-the-truck>
+ <02932ef7-5819-4cf5-8e78-8fd3fd40274f@huawei.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260528095235.2491226-1-me@linux.beauty> <vealb52tv5suireenkke4lul2l3wbnaul2rp3ea545ly5wa5ty@yk3aksvp7skt>
- <CAG48ez38OEE8ZPLyU6nr9=cYx-hMsdoh5WRrv-GMZGMDKyyOTA@mail.gmail.com> <lhubjdk1c1m.fsf@oldenburg.str.redhat.com>
-In-Reply-To: <lhubjdk1c1m.fsf@oldenburg.str.redhat.com>
-From: Jann Horn <jannh@google.com>
-Date: Tue, 9 Jun 2026 19:53:30 +0200
-X-Gm-Features: AVVi8CdbotQb6TdiuBRRRFJLKPXdrZXdsDiaDY2tYNXV6Fkhva6G6BZKR3tezyY
-Message-ID: <CAG48ez0FCqMaEgosy4K59pKan6Wn5RMbJeOuNWAc_m_56nDVYg@mail.gmail.com>
-Subject: Re: [RFC PATCH v1 00/13] exec: add spawn templates for repeated
- executable startup
-To: Florian Weimer <fweimer@redhat.com>
-Cc: Mateusz Guzik <mjguzik@gmail.com>, Christian Brauner <brauner@kernel.org>, Li Chen <me@linux.beauty>, 
-	Kees Cook <kees@kernel.org>, Alexander Viro <viro@zeniv.linux.org.uk>, linux-fsdevel@vger.kernel.org, 
-	linux-api@vger.kernel.org, linux-kernel@vger.kernel.org, linux-mm@kvack.org, 
-	linux-arch@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kselftest@vger.kernel.org, x86@kernel.org, 
-	Arnd Bergmann <arnd@arndb.de>, Andy Lutomirski <luto@kernel.org>, Thomas Gleixner <tglx@kernel.org>, 
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
-	Dave Hansen <dave.hansen@linux.intel.com>, "H. Peter Anvin" <hpa@zytor.com>, Jan Kara <jack@suse.cz>, 
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <02932ef7-5819-4cf5-8e78-8fd3fd40274f@huawei.com>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
+	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:fweimer@redhat.com,m:mjguzik@gmail.com,m:brauner@kernel.org,m:me@linux.beauty,m:kees@kernel.org,m:viro@zeniv.linux.org.uk,m:linux-fsdevel@vger.kernel.org,m:linux-api@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-arch@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:x86@kernel.org,m:arnd@arndb.de,m:luto@kernel.org,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:hpa@zytor.com,m:jack@suse.cz,m:corbet@lwn.net,m:skhan@linuxfoundation.org,s:lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-91721-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[jannh@google.com,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[kernel.org,lwn.net,linuxfoundation.org,oss.qualcomm.com,gmail.com,chinatelecom.cn,huawei.com,arm.com,arndb.de,hisilicon.com,lists.infradead.org,vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-91722-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:ruanjinjie@huawei.com,m:will@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:punit.agrawal@oss.qualcomm.com,m:jic23@kernel.org,m:osama.abdelkader@gmail.com,m:chenl311@chinatelecom.cn,m:fengchengwen@huawei.com,m:suzuki.poulose@arm.com,m:maz@kernel.org,m:lpieralisi@kernel.org,m:timothy.hayes@arm.com,m:sascha.bischoff@arm.com,m:arnd@arndb.de,m:mrigendra.chaubey@gmail.com,m:pierre.gondois@arm.com,m:dietmar.eggemann@arm.com,m:yangyicong@hisilicon.com,m:sudeep.holla@kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:osamaabdelkader@gmail.com,m:mrigendrachaubey@gmail.com,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[24];
-	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	FORGED_SENDER(0.00)[catalin.marinas@arm.com,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[gmail.com,kernel.org,linux.beauty,zeniv.linux.org.uk,vger.kernel.org,kvack.org,arndb.de,redhat.com,alien8.de,linux.intel.com,zytor.com,suse.cz,lwn.net,linuxfoundation.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[arm.com:+];
+	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jannh@google.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[google.com:+];
+	FROM_NEQ_ENVFROM(0.00)[catalin.marinas@arm.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sourceware.org:url,vger.kernel.org:from_smtp,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,mail.gmail.com:mid]
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sashiko.dev:url,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,arm.com:dkim,arm.com:mid,arm.com:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: AFD946632E2
+X-Rspamd-Queue-Id: B45CB66320A
 
-On Tue, Jun 9, 2026 at 8:08=E2=80=AFAM Florian Weimer <fweimer@redhat.com> =
-wrote:
->
-> * Jann Horn:
->
-> >> Per the above, the primary win would stem from *NOT* messing with mm.
-> >
-> > As you write below, I think we have that with CLONE_MM? The C function
-> > vfork() is kind of a terrible API because of its returns-twice
-> > behavior, but I think if process cloning with CLONE_VM|CLONE_VFORK was
-> > wrapped by libc in a way similar to clone() (with the child executing
-> > a separate handler function), or if it was used in the implementation
-> > of some higher-level process-spawning API, it would be a perfectly
-> > fine API?
->
-> No, there is still a problem with SIGTSTP handling because we cannot
-> atomically unmask the signal during execve.  We need to unblock SIGTSTP
-> before execve in the new process, but this means that it can get
-> suspended by SIGTSTP.  Consequently, the execve never happens and the
-> original process is stuck in vfork:
->
->   posix_spawn: parent can get stuck in uninterruptible sleep if child
->   receives SIGTSTP early enough
->   <https://inbox.sourceware.org/libc-help/2921668c-773e-465d-9480-0abb6f9=
-79bf9@www.fastmail.com/>
->
-> More on the low-level side, it's difficult to make sure that execve gets
-> a consistent snapshot of the environ vector.  Both vfork and execve need
-> to be async-signal-safe.  Any locking or memory allocation (except for
-> the stack =E2=80=A6) persists in the original process after vfork returns=
-.  The
+Hi Jinjie,
 
-I think that's not entirely accurate; if you call set_robust_list() on
-a futex list, then call execve(), the futexes should be released once
-the process switches to a new MM, in
-begin_new_exec -> exec_mmap -> exec_mm_release -> futex_exec_release
--> futex_cleanup -> exit_robust_list.
+On Wed, Jun 03, 2026 at 02:38:11PM +0800, Jinjie Ruan wrote:
+> On 6/2/2026 7:09 PM, Will Deacon wrote:
+> > On Wed, May 20, 2026 at 10:20:23AM +0800, Jinjie Ruan wrote:
+> >> When booting with ACPI, arm64 smp_prepare_cpus() currently sets all
+> >> enumerated CPUs as "present" regardless of their status in the MADT. This
+> >> causes issues with SMT hotplug control. For instance, with QEMU's
+> >> "-smp 4,maxcpus=8" configuration, the MADT GICC entries are populated as
+> >> follows: the first four CPUs are marked Enabled while the remaining four
+> >> are marked Online Capable to support potential hot-plugging.
+> >>
+> >> Fix this by:
+> >>
+> >> 1. When booting with ACPI, checking the ACPI_MADT_ENABLED flag in the GICC
+> >>    entry before calling set_cpu_present() during SMP initialization.
+> >>
+> >> 2. Properly managing the present mask in acpi_map_cpu() and
+> >>    acpi_unmap_cpu() to support actual CPU hotplug events, This aligns with
+> >>    other architectures like x86 and LoongArch.
+> >>
+> >> 3. Update the arm64 CPU hotplug documentation to no longer state that all
+> >>    online-capable vCPUs are marked as present by the kernel at boot time.
+> >>
+> >> This ensures that only physically available or explicitly enabled CPUs
+> >> are in the present mask, keeping the SMT control logic consistent with
+> >> the actual hardware state.
+> > 
+> > Please can you check the Sashiko review comment?
+> > 
+> > https://sashiko.dev/#/patchset/20260520022023.126670-1-ruanjinjie@huawei.com
+> 
+> I think commit eba4675008a6 ("arm64: arch_register_cpu() variant to
+> check if an ACPI handle is now available.") introduced this bug.
+> 
+> It introduced an architectural safety block inside
+> arch_unregister_cpu(). If a hot-unplug operation is determined to be a
+> physical hardware removal (where _STA evaluates to
+> !ACPI_STA_DEVICE_PRESENT), it aborts the unregistration transaction
+> early to protect unreadied arm64 infrastructure, thereby skipping
+> unregister_cpu().
+> 
+> However, the generic ACPI processor driver path in
+> acpi_processor_post_eject() currently treats arch_unregister_cpu() as
+> an unconditional void operation. When arch_unregister_cpu() bails out
+> early, the subsequent cleanup flow blindly proceeds to call
+> acpi_unmap_cpu(), clears global per-cpu processor arrays, and
+> unconditionally free the 'struct acpi_processor' object.
+> 
+> I think we can fix this by:
+> 
+>     1. Refactoring arch_unregister_cpu() to return an integer
+> transaction status. It returns -EOPNOTSUPP when aborting due to physical
+> hot-remove blocking, -EINVAL/-EIO on firmware failures, and 0 only upon
+> successful unregistration.
+> 
+>     2. Guarding the downstream execution flow in
+> acpi_processor_post_eject(). If arch_unregister_cpu() returns a error
+> code, the hot-unplug transaction is considered aborted.
 
-So in theory you could use clone() with CLONE_VM and without
-CLONE_VFORK, and let the parent either wait for a futex that is
-released on exec, or somehow asynchronously check later whether the
-futex is still held... probably not the nicest building block but
-maybe workable? Though I guess it would fit more nicely if there was a
-"munmap() this range on exec" API...
+I wonder whether we need all this guarding. In the worst case, we could
+rewrite the function, something like below, to always unregister and
+only warn:
 
-> environ vector can be large, so making a copy on the stack is not ideal.
-> It's even harder for getenv/setenv/unsetenv implementations that use
-> locking instead of software transactional memory.
+void arch_unregister_cpu(int cpu)
+{
+	acpi_handle acpi_handle = acpi_get_processor_handle(cpu);
+	struct cpu *c = &per_cpu(cpu_devices, cpu);
+	acpi_status status;
+	unsigned long long sta;
 
-Makes sense, that kind of sounds like a pain inherent in being able to
-execute from signal handler context...
+	if (!acpi_handle) {
+		pr_err_once("Removing a CPU without associated ACPI handle\n");
+	} else {
+		status = acpi_evaluate_integer(acpi_handle, "_STA", NULL, &sta);
+		if (!ACPI_FAILURE(status) &&
+		    cpu_present(cpu) && !(sta & ACPI_STA_DEVICE_PRESENT))
+			pr_err_once("Changing CPU present bit is not supported\n");
+	}
+
+	unregister_cpu(c);
+}
+
+However, on the first condition, can we actually trigger !acpi_handle?
+If not, we could just drop it. I tried to look up the paths and I don't
+think we'd ever end up in this function with !acpi_handle. So this
+leaves us with the next checks.
+
+On the second/third conditions, it's more about preventing physical CPU
+hotplug as we haven't properly defined it for arm yet but we could just
+add a WARN_ONCE() to make it more visible and still proceed with the
+unregistering. I think with your proposal, we don't fully unroll the
+state anyway just by returning an error in arch_unregister_cpu(), so I'd
+rather continue here.
+
+What does firmware do for virtual CPU hotplug w.r.t. _STA? I noticed a
+slight change in wording in the cpu-hotplug.rst doc with your patch from
+
+  On virtual systems the _STA method must always report the CPU as
+  ``present``
+
+to
+
+  On virtual systems the _STA method must report the CPU as ``present``
+  when it is activated by the firmware
+
+Was your intention that _STA.PRESENT can become 0 when hot-unplugging
+virtual CPUs?
+
+-- 
+Catalin
 
