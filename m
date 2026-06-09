@@ -1,188 +1,450 @@
-Return-Path: <linux-doc+bounces-91664-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91666-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id VUvBFZgqKGqb/QIAu9opvQ
-	(envelope-from <linux-doc+bounces-91664-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 17:00:40 +0200
+	id 1YAkMr0qKGqo/QIAu9opvQ
+	(envelope-from <linux-doc+bounces-91666-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 17:01:17 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10CC366172F
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 17:00:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8160166174F
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 17:01:17 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linaro.org header.s=google header.b=q+i3rnkq;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91664-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91664-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=linaro.org;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=google.com header.s=20251104 header.b=Yx8SDW2Z;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91666-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91666-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=google.com;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 22B9632B4830
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2026 14:44:32 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 363CC31B79D5
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2026 14:45:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A70C343DA27;
-	Tue,  9 Jun 2026 14:40:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E919B3546EB;
+	Tue,  9 Jun 2026 14:41:18 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com [209.85.160.171])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B5B1843CEE4
-	for <linux-doc@vger.kernel.org>; Tue,  9 Jun 2026 14:40:51 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781016053; cv=none; b=da728N9gktOqYTs4nhC6hfoax9erN4neIPkcIJ0TMtCnE62Q7Z93xuwRT5zs74H+d0E3vNjBfgRQzzqcr6rrCe4XQPwlKFoP+rKn850Rb7/Qg5Hv+Mm/l2Vt8nlW0+K2QMKWMBCSEZqZ0hlXEfi5vn7cNRTVhRe/W8LFyZvVETM=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781016053; c=relaxed/simple;
-	bh=6om1sNi+g28w6gz9Rvlzv8I2HBpgV5uEGqJP16w3z5E=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=H3/zuYkluxHKCdBdzf5Q6+Fd/REVO0LTpN6A8QMtggWr+2rBhnD3Sw6Uodpnawu3a482A4+PCxBlI3KLi0hf+k7kFNiZnInYDoh0pj1aj/2TLQW+OsnZ8OkKFxztk7PXrhs5z3BsgnqngVtmT95VdLxhXRMplPPtHF1OMgdl9oU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=q+i3rnkq; arc=none smtp.client-ip=209.85.128.54
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-490c0c92cffso39970295e9.2
-        for <linux-doc@vger.kernel.org>; Tue, 09 Jun 2026 07:40:51 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D29E2352017
+	for <linux-doc@vger.kernel.org>; Tue,  9 Jun 2026 14:41:15 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1781016078; cv=pass; b=RzA279H8iAyIfFePiHlJfME3zElxzmlqLBsTuivEbW4RRs+pbJzG8f88S3PZxpkx1Ep59t/7wjw2D3q4UwrllHSU+iLuTId02Whob6odGzqAWjtjk7yH1xt1CZIVbpdgA4Kr3i6xSe+BFi7eRKCZxb0gasvNQd4o6AQG8Jqr6nY=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1781016078; c=relaxed/simple;
+	bh=vkYMiT15IDgP+UyvD48tHe2RSv3IfqAlFEWxzpklv7o=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=WjnzkyEB8ztKxbdYiddLjDN97R1K7IaudtMcdK/cHNYtmdPc723mZa1ZocAj+QXhPj3zEmCvKHPsiexoaUbpo3qJSN8C2AQaHbgL8tdyZEknDisRbF8Brjo6cJ1ffS5HZswXT1aJFMc8ZeRic9t0kJiPU/D6IDqiIRE+WCpe9mY=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=Yx8SDW2Z; arc=pass smtp.client-ip=209.85.160.171
+Received: by mail-qt1-f171.google.com with SMTP id d75a77b69052e-5177d1ff061so2300871cf.1
+        for <linux-doc@vger.kernel.org>; Tue, 09 Jun 2026 07:41:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781016075; cv=none;
+        d=google.com; s=arc-20240605;
+        b=FfXSPtzN+tDTFS921n8YkUDVRu12YGDyPmqv8EgkK9cG0fW8BedxPHsSOi1IKLfWWX
+         ftFq1D9Co0sINrWRsUEQOkfZsPEk0SRCQActTAttX2XKaF0/e3hxRoqhBp48keZQEvwJ
+         1Jb0TwRRdKxNh7Yy1dCZ0MKZDx+umqMmLk4pZ6gaNCJLqLaSRKFPE5hTaA/zxbFAOpas
+         edKvzey9/XCHptrrQvzPSH95trdDpiWJ9xR01uStT6QZhC9jdbb3njKKFOQSBubdik5n
+         FllwkAI6JCECnVOVe8XW/2JB27iNka348dAOxJ8sqJLNy1JPNv3byhDeT2DP8n8AcwDw
+         waHg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=Cs6tgEzoVHYpv7k21ybqH49sF46z7hX0J0ePiR98zrw=;
+        fh=oCn0eNBkV2YHDfwN8dP3BUyKrCupMJSbLX90oLdKxcg=;
+        b=W09gkH373BVoRgijh6xS3Y86lu1heBx94UlcDgGHjj0sPRp/pm7BA70TpnkQC+BuCk
+         MZAIrmN8yriLJKXDHFTHXNZsO5nsLt7nUS1iXCg+njDOxupI2S+uaGSHxaL6gvpGA5Cx
+         fnBi+1YSDPkpdREXGEC7Y7N7YFxvEWbcjKZHyeU63ZPFAGVkt02fFEwwnoDp9W9tVWqa
+         twKTH+W/86SxIdh0yRN30jg0rp7L5+nCxv2bB3G2rrEOBPUy9eZnkGzM/ejMk4bkdHdX
+         eCMGiBT616xdailPD0oIIvftQXI2PaNuxLLfjKZyMBY1EgyIpih1OncT15nvZEI0gud/
+         tkxw==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1781016050; x=1781620850; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=gf9ynHBKvgH06k0u+j7iXyYQLRwSGMTUy1wnSW+2ToM=;
-        b=q+i3rnkqFX/4WNNtPGpAIRkLpGxkb/2/A52lm8rPaqFVKMMa/9z8clybplomH4As3R
-         5rbMMnRCtr9ta/CnbFxBnhRMu2sh8eINFEmONmLmTtPciaDGnzQ65NcDldQA8LGcySLY
-         25G4zv0ONEeTEqPKNN3m3zl7R4Igo8n1G2hlRYauQYBN7OB3aXZL8Bg9EB/kskoIiM1M
-         slMBfmkA7SkDVHGy7EzXqr0hS+Cr/uGgfkzIlIM/vU05RFBd2jf3Q1YGNBnLawsL1bVl
-         jIqDEJDfaJwhC5j6XhrhZzuwGVSq/6mZLrqVea/mC44f+nCmvmeFUeW6ju8lIX1Q8IZM
-         L5SQ==
+        d=google.com; s=20251104; t=1781016075; x=1781620875; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Cs6tgEzoVHYpv7k21ybqH49sF46z7hX0J0ePiR98zrw=;
+        b=Yx8SDW2Z6utMLswVPGCnmTS6LZk8w5ASde6KP2N1gdUxn0c1hdhgfra9nRXklnziFn
+         A7pmU1TCRz0wJawW9cOYa7lYOlsyU/WV/TWL2jqAUu2H3Vu6hl9sJ7lfgaGJ6IKjoy0x
+         aEuBWbz/06K5RfW6W5hiD5bj7uD2kghsbnaeJjlAhVIXtqPNbg1gUPch3Y58/RfgDyCr
+         x0SxtyNWu0j5Ah2kL7XiJKjUwpR/egTKQawKLpbmZAMEafmkTiQ4NxxMv5eYH81+xEFb
+         tTNWTFS5Wym0zjndlZD7PxwniaVffs/Mjst3Bp5smJoZflA55XWpz92IU6fwFWdQOIi9
+         iFXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781016050; x=1781620850;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=gf9ynHBKvgH06k0u+j7iXyYQLRwSGMTUy1wnSW+2ToM=;
-        b=IkEobtH/4CRUe29apg8J7Qhd3coKrYGQCgPLrdr1+q3VrBbNn2/wVmWFU+5J8jyBs8
-         7umJS20WOVabE+Kvfl/pTYhoIop2zf0HfX6ROXYcy0RJbJmive79Xk2SIelWuwaw2YX+
-         ZM83ljY70iePBdSsl1OgDRw7AxUoyejrVp4SF4qWCTCkO71NdOo/o1t8FzZP+/2Zgb2d
-         GDF7I0r3Z8P4sChZbyopPArzQ2SeUSuXdWkDZ9BNJIlxpQcpaitOLJKNP31Wqb6j1372
-         YZFX6oQatBkRajAhU4L2gVo8/Kf6VwHWA0K8mti1o+WmUbTcU14RQRK5IrFBz0nly5bd
-         RTKA==
-X-Forwarded-Encrypted: i=1; AFNElJ9RrZnBN2PmVwICN8T9VROcFd97j5de2M3K7n7h/V/bJ320sQwg5Y0CCBKs3nAoa2DkRCjapd8XSTI=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxQ+8AkEuRDeUEybr4K6zpZEBhIlRCUxS/JxGJwOjuYxZ1BGn8+
-	4Bwww7jLYxi2tEObKggYlIc78zlmPVoOZGFu5NgiODsIS1GzYYBy3xJBbzxN/VQDHEM=
-X-Gm-Gg: Acq92OFI4Yvr7keev8E7DDMtsIoDkUV9L4hRpMcWF3YKjvJrNX4Cj7yYfESL7AUeA3m
-	JZDqUP65UtduC98EBc+gLSIFEntp8p0Osju1oqh2Y7EjANVmytLJFS5NPPNpfpwMYOoTv4yby1p
-	p6hU2fH1lMc+7Ozy4yWdRN4JGEmu6WHrmGe2R45G6saeVXFhXrt/afo0FjbuZ3+Q1JpVB4dLIMT
-	wqGCwr8mPSx1wwXWrC5cJxNrYgmr4EeEGm7RSJRAK4RXRd+FR5Zc1rlM4AEBnEL5Sh39+163IC+
-	PXtpaqFp5cqllElKCKE4JqcWY8yZM4aZSsc0CWG7VzYZpbmWWlyHrlzf+APgFHq5QnxsSdClb8r
-	gFb8NWWSCOB/OZGkC/q7whM5t0Y2+tjfXrsIrzZtkzB9LHdM2ZnfpMRUb8TWy/gp4pmqmSqradS
-	3tzvLqoAjIHobJTCeDAIUrT3p41JrIF8fnvoSCchzxZmJxYTb/PI2Yjw==
-X-Received: by 2002:a05:600c:354a:b0:490:44eb:c1e5 with SMTP id 5b1f17b1804b1-490c2607c39mr343398935e9.31.1781016050068;
-        Tue, 09 Jun 2026 07:40:50 -0700 (PDT)
-Received: from ho-tower-lan.lan ([185.48.77.170])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-490bc3c1149sm428411935e9.4.2026.06.09.07.40.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 09 Jun 2026 07:40:49 -0700 (PDT)
-From: James Clark <james.clark@linaro.org>
-Date: Tue, 09 Jun 2026 15:40:24 +0100
-Subject: [PATCH v5 19/19] perf test cs-etm: Move existing tests to
- coresight folder
+        d=1e100.net; s=20251104; t=1781016075; x=1781620875;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=Cs6tgEzoVHYpv7k21ybqH49sF46z7hX0J0ePiR98zrw=;
+        b=A4v3A/zmW1Yl6PLNg1x4ccbO9nsU/ZyzY1zSjwapMaT754+UnY2/tZezIMHmae4hpi
+         sqtoF5Yrkdp9Lnr+X60eW+KE4BkNDcgE/xUs+WZD+eIOWLPp4WGu0GZ5Z5nRd1tx5nPB
+         nxy+3/j3ECefZqSC4ZCKhb4CVZmZAtI+8AxRQxtdP3ye6tb6C6vqhXTONHyJ7zUGqW8y
+         BylhHjElS6GPhCfKj2ikpAz4hjZW23c/4aI+WEkiF3ZdcJEzWE/kvWb8aYXOsIpoldMj
+         t2UuqMBdClRQILK0a/amL6wVpflYXaKNICVacKMf7vfJfqXAcY5/a2S7N4OfnUAHY9IX
+         zDNA==
+X-Forwarded-Encrypted: i=1; AFNElJ8FhmhCJ/JvgrrbASGqnFZY0CrBNMJt61ELaa0DpypOvxS8XColwaJuNSJhGlSWz3V4G1CFIpXY/BI=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxPoT4o85qZVRYr116fDCAPXK4bLZ14t5gSEmrI/AuG9UE/CNwm
+	g5Sryt760ELz3P6t65xiI4Ovgt7VHQseauGKMMHG4AJ2yqwmMrLJ+/QWAA7CZWnOUVWD6qfU/Wi
+	QqpCPv9pwAQZ7I7CTNNTgSyMTnYUQmQLtPXACCWLe
+X-Gm-Gg: Acq92OHODBkDHGyu8vSewl5eRngbVMOh7o60JHARBv449K3gqr7G4OKJgt/tJK/Po50
+	1DZ+Eb9/hROkxh+l4XkGghqleoOA5uGUUvbB5YOVxIf4zuVRwuFQI2V1t8mknoph009OX47Qbke
+	xXtUjQbKA3l6rMzPOWC3jR+akF7P13sxWdLbiXVl3TT1QmA84kfz/4MGdYdVazjfnOgNfE3FoIG
+	7jLGESPFHJ5COOpGSO4x9GrPGfwfjiv2O7h96oThE2kaXonypbIKG8SxgVQUd8uxV4VA6wvtFEA
+	5uk2PlGKEZwWxsw/pRdirs2vlwgR+yvBwPcfvrWVDR3dFX3h
+X-Received: by 2002:a05:622a:aa4a:20b0:517:5ec3:b59c with SMTP id
+ d75a77b69052e-51798027065mr33863531cf.2.1781016074112; Tue, 09 Jun 2026
+ 07:41:14 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260609-james-cs-context-tracking-fix-v5-19-d53a7d096a19@linaro.org>
-References: <20260609-james-cs-context-tracking-fix-v5-0-d53a7d096a19@linaro.org>
-In-Reply-To: <20260609-james-cs-context-tracking-fix-v5-0-d53a7d096a19@linaro.org>
-To: Suzuki K Poulose <suzuki.poulose@arm.com>, 
- Mike Leach <mike.leach@arm.com>, Leo Yan <leo.yan@arm.com>, 
- Arnaldo Carvalho de Melo <acme@kernel.org>, 
- Namhyung Kim <namhyung@kernel.org>, Jiri Olsa <jolsa@kernel.org>, 
- Ian Rogers <irogers@google.com>, Amir Ayupov <aaupov@meta.com>, 
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
- Paschalis Mpeis <Paschalis.Mpeis@arm.com>
-Cc: coresight@lists.linaro.org, linux-perf-users@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Arnaldo Carvalho de Melo <acme@redhat.com>, 
- linux-doc@vger.kernel.org, James Clark <james.clark@linaro.org>
-X-Mailer: b4 0.14.0
+References: <cover.1780701922.git.abhishekbapat@google.com>
+ <b608a6f7d71e3b728f766dbc6dfa1d1753ddcff5.1780701922.git.abhishekbapat@google.com>
+ <1ec17313-cd2b-4389-a05d-998757af30b3@linux.dev> <a58e659e-5f54-4511-9a29-dc921002d102@linux.dev>
+ <CAJuCfpHtdd=9D68cfRp4HDHHHCZdzTNP_RH9i2D-f9tJXht56A@mail.gmail.com> <ebcbe4a8-127b-4d12-83f1-dec93f0a9c61@linux.dev>
+In-Reply-To: <ebcbe4a8-127b-4d12-83f1-dec93f0a9c61@linux.dev>
+From: Suren Baghdasaryan <surenb@google.com>
+Date: Tue, 9 Jun 2026 07:41:01 -0700
+X-Gm-Features: AVVi8Cd8Mw9UFnLHYjZB_VFyvF_jL4KOSZdNa8eQSyaG7dF5Q3xsZiPC-kanxu4
+Message-ID: <CAJuCfpGbxO0zu_UAWCYNNv8RHgT=E4AF0tgG-kWoLXECOL3byA@mail.gmail.com>
+Subject: Re: [PATCH v3 4/6] alloc_tag: add accuracy based filtering to ioctl
+To: Hao Ge <hao.ge@linux.dev>
+Cc: Abhishek Bapat <abhishekbapat@google.com>, Shuah Khan <skhan@linuxfoundation.org>, 
+	Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-mm@kvack.org, Sourav Panda <souravpanda@google.com>, 
+	Andrew Morton <akpm@linux-foundation.org>, Kent Overstreet <kent.overstreet@linux.dev>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-91664-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-91666-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:suzuki.poulose@arm.com,m:mike.leach@arm.com,m:leo.yan@arm.com,m:acme@kernel.org,m:namhyung@kernel.org,m:jolsa@kernel.org,m:irogers@google.com,m:aaupov@meta.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:Paschalis.Mpeis@arm.com,m:coresight@lists.linaro.org,m:linux-perf-users@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:acme@redhat.com,m:linux-doc@vger.kernel.org,m:james.clark@linaro.org,s:lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[james.clark@linaro.org,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[17];
-	DKIM_TRACE(0.00)[linaro.org:+];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER(0.00)[surenb@google.com,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:hao.ge@linux.dev,m:abhishekbapat@google.com,m:skhan@linuxfoundation.org,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:souravpanda@google.com,m:akpm@linux-foundation.org,m:kent.overstreet@linux.dev,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[google.com:+];
+	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[james.clark@linaro.org,linux-doc@vger.kernel.org];
-	RSPAMD_EMAILBL_FAIL(0.00)[james.clark@linaro.org:query timed out];
+	FROM_NEQ_ENVFROM(0.00)[surenb@google.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,linaro.org:dkim,linaro.org:email,linaro.org:mid,linaro.org:from_mime,arm.com:email,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,linux.dev:email,mail.gmail.com:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 10CC366172F
+X-Rspamd-Queue-Id: 8160166174F
 
-There is a subfolder for Coresight tests so might as well keep them all
-in here.
+On Mon, Jun 8, 2026 at 6:26=E2=80=AFPM Hao Ge <hao.ge@linux.dev> wrote:
+>
+> Hi Suren
+>
+>
+> On 2026/6/9 04:55, Suren Baghdasaryan wrote:
+> > On Mon, Jun 8, 2026 at 1:25=E2=80=AFAM Hao Ge <hao.ge@linux.dev> wrote:
+> >>
+> >> On 2026/6/8 14:22, Hao Ge wrote:
+> >>> Hi Abhishek
+> >>>
+> >>>
+> >>> On 2026/6/6 07:36, Abhishek Bapat wrote:
+> >>>> Extend the allocinfo filtering mechanism to allow users to filter ta=
+gs
+> >>>> based on their accuracy.
+> >>>>
+> >>>> Signed-off-by: Abhishek Bapat <abhishekbapat@google.com>
+> >>>> ---
+> >>>>    include/uapi/linux/alloc_tag.h | 3 +++
+> >>>>    lib/alloc_tag.c                | 8 ++++++++
+> >>>>    2 files changed, 11 insertions(+)
+> >>>>
+> >>>> diff --git a/include/uapi/linux/alloc_tag.h
+> >>>> b/include/uapi/linux/alloc_tag.h
+> >>>> index 0e648192df4d..42445bdb11c5 100644
+> >>>> --- a/include/uapi/linux/alloc_tag.h
+> >>>> +++ b/include/uapi/linux/alloc_tag.h
+> >>>> @@ -20,6 +20,7 @@ struct allocinfo_tag {
+> >>>>        char function[ALLOCINFO_STR_SIZE];
+> >>>>        char filename[ALLOCINFO_STR_SIZE];
+> >>>>        __u64 lineno;
+> >>>> +    __u64 inaccurate;
+> >>>
+> >>> I was wondering if it would make sense to define inaccurate as a flag=
+s
+> >>> field
+> >>>
+> >>> (e.g. __u64 flags with ALLOCINFO_TAG_F_INACCURATE (1 <<0)),
+> >>>
+> >>> so that only bit 0 is used today and the upper bits are reserved for
+> >>> future use,
+> >>>
+> >>> aligning with current kernel codebase.
+> >>>
+> >>> This design also allows for better extensibility if we need to
+> >>>
+> >>> add new flags for any reason in the future.
+> >>>
+> >>> We also need to add flag validity checks if we go this route.
+> >>>
+> >> And I've reviewed the issue reported by Sashiko, and I think it's vali=
+d.
+> >>
+> >> When we expand the allocinfo_tag_data structure
+> >>
+> >> struct allocinfo_tag_data{
+> >>
+> >>       char modname[64];
+> >>
+> >>       char function[64];
+> >>
+> >>       char filename[64];
+> >>
+> >>       __u64 lineno;
+> >>
+> >>       __u64 inaccurate;
+> >>
+> >>       __u64 bytes;
+> >>
+> >>       __u64 calls;
+> >>
+> >>       __u8 accurate;
+> >>     /* padding */
+> >>
+> >> }
+> >>
+> >> I think user space may see two fields related to inaccuracy.
+> > Yes but one field (inside allocinfo_tag) is the input parameter which
+> > user provides to specify the filtering criteria and the other is the
+> > returned tag information. It's similar to any other tag attribute
+> > which you can be included in the filters.
+> >
+> >> How do you like these modifications?
+> >>
+> >>
+> >> diff --git a/include/uapi/linux/alloc_tag.h b/include/uapi/linux/alloc=
+_tag.h
+> >> --- a/include/uapi/linux/alloc_tag.h
+> >> +++ b/include/uapi/linux/alloc_tag.h
+> >> @@ -20,7 +20,6 @@ struct allocinfo_tag {
+> >>        char function[ALLOCINFO_STR_SIZE];
+> >>        char filename[ALLOCINFO_STR_SIZE];
+> >>        __u64 lineno;
+> >> -    __u64 inaccurate;
+> >>    };
+> >>
+> >>    /* The alignment ensures 32-bit compatible interfaces are not broke=
+n */
+> >> @@ -40,7 +39,7 @@ enum {
+> >>        ALLOCINFO_FILTER_FUNCTION,
+> >>        ALLOCINFO_FILTER_FILENAME,
+> >>        ALLOCINFO_FILTER_LINENO,
+> >> -    ALLOCINFO_FILTER_INACCURATE,
+> >> +    ALLOCINFO_FILTER_FLAGS,
+> >>        ALLOCINFO_FILTER_MIN_SIZE,
+> >>        ALLOCINFO_FILTER_MAX_SIZE,
+> >>        __ALLOCINFO_FILTER_LAST =3D ALLOCINFO_FILTER_MAX_SIZE
+> >> @@ -50,16 +49,20 @@ enum {
+> >>    #define ALLOCINFO_FILTER_MASK_FUNCTION        (1 <<
+> >> ALLOCINFO_FILTER_FUNCTION)
+> >>    #define ALLOCINFO_FILTER_MASK_FILENAME        (1 <<
+> >> ALLOCINFO_FILTER_FILENAME)
+> >>    #define ALLOCINFO_FILTER_MASK_LINENO        (1 << ALLOCINFO_FILTER_=
+LINENO)
+> >> -#define ALLOCINFO_FILTER_MASK_INACCURATE    (1 <<
+> >> ALLOCINFO_FILTER_INACCURATE)
+> >> +#define ALLOCINFO_FILTER_MASK_FLAGS        (1 << ALLOCINFO_FILTER_FLA=
+GS)
+> >>    #define ALLOCINFO_FILTER_MASK_MIN_SIZE        (1 <<
+> >> ALLOCINFO_FILTER_MIN_SIZE)
+> >>    #define ALLOCINFO_FILTER_MASK_MAX_SIZE        (1 <<
+> >> ALLOCINFO_FILTER_MAX_SIZE)
+> >>
+> >>    #define ALLOCINFO_FILTER_MASKS \
+> >>        ((1 << (__ALLOCINFO_FILTER_LAST + 1)) - 1)
+> >>
+> >> +#define ALLOCINFO_FILTER_F_INACCURATE    (1ULL << 0)
+> >> +#define ALLOCINFO_FILTER_FLAGS_ALL ALLOCINFO_FILTER_F_INACCURATE
+> >> +
+> >>    struct allocinfo_filter {
+> >>        __u64 mask; /* bitmask of the filter fields used */
+> >>        struct allocinfo_tag fields;
+> >> +    __u64 flags; /* bitmask of ALLOCINFO_FILTER_F_* */
+> >>        __u64 min_size;
+> >>        __u64 max_size;
+> >>    };
+> >> diff --git a/lib/alloc_tag.c b/lib/alloc_tag.c
+> >> --- a/lib/alloc_tag.c
+> >> +++ b/lib/alloc_tag.c
+> >> @@ -249,8 +249,6 @@ static bool matches_filter(struct codetag *ct,
+> >> struct allocinfo_filter *filter,
+> >>                   struct alloc_tag_counters *counters,
+> >>                   bool *fetched_counters)
+> >>    {
+> >> -    bool inaccurate;
+> >> -
+> >>        if (!filter || !filter->mask)
+> >>            return true;
+> >>
+> >> @@ -277,10 +275,11 @@ static bool matches_filter(struct codetag *ct,
+> >> struct allocinfo_filter *filter,
+> >>            ct->lineno !=3D filter->fields.lineno)
+> >>            return false;
+> >>
+> >> -    if (filter->mask & ALLOCINFO_FILTER_MASK_INACCURATE) {
+> >> -        inaccurate =3D !!(ct->flags & CODETAG_FLAG_INACCURATE);
+> >> -        if (inaccurate !=3D !!(filter->fields.inaccurate))
+> >> -            return false;
+> >> +    if (filter->mask & ALLOCINFO_FILTER_MASK_FLAGS) {
+> >> +        if (filter->flags & ALLOCINFO_FILTER_F_INACCURATE) {
+> >> +            if (!(ct->flags & CODETAG_FLAG_INACCURATE))
+> > How would you filter records which have only accurate data?
+>
+>
+> Sorry, I overlooked this case.
+>
+> Since allocinfo_tag_data exposes both inaccurate (from allocinfo_tag) and
+>
+> accurate (from allocinfo_counter), userspace developers might mistakenly
+> read
+>
+> inaccurate instead of accurate when checking accuracy.
+>
+> How about we add a comment to clarify?
+>
+> struct allocinfo_tag {
+>
+>      /* ... */
+>
+>      __u64 lineno;
+>
+>      /* filter criteria only; see allocinfo_counter.accurate for actual
+> accuracy */
+>
+>      __u64 inaccurate;
 
-Reviewed-by: Leo Yan <leo.yan@arm.com>
-Signed-off-by: James Clark <james.clark@linaro.org>
----
- MAINTAINERS                                                         | 1 -
- tools/perf/tests/shell/{ => coresight}/test_arm_coresight.sh        | 0
- tools/perf/tests/shell/{ => coresight}/test_arm_coresight_disasm.sh | 2 +-
- 3 files changed, 1 insertion(+), 2 deletions(-)
+I think we had comments showing which block of parameters are inputs
+and which ones are outputs but I'm not opposed to an additional
+reminder here.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 7efb893edcbb..ff8935b459ea 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -2749,7 +2749,6 @@ F:	tools/perf/arch/arm/util/auxtrace.c
- F:	tools/perf/arch/arm/util/cs-etm.c
- F:	tools/perf/arch/arm/util/cs-etm.h
- F:	tools/perf/arch/arm/util/pmu.c
--F:	tools/perf/tests/shell/*coresight*
- F:	tools/perf/tests/shell/coresight/*
- F:	tools/perf/util/cs-etm-decoder/*
- F:	tools/perf/util/cs-etm.*
-diff --git a/tools/perf/tests/shell/test_arm_coresight.sh b/tools/perf/tests/shell/coresight/test_arm_coresight.sh
-similarity index 100%
-rename from tools/perf/tests/shell/test_arm_coresight.sh
-rename to tools/perf/tests/shell/coresight/test_arm_coresight.sh
-diff --git a/tools/perf/tests/shell/test_arm_coresight_disasm.sh b/tools/perf/tests/shell/coresight/test_arm_coresight_disasm.sh
-similarity index 96%
-rename from tools/perf/tests/shell/test_arm_coresight_disasm.sh
-rename to tools/perf/tests/shell/coresight/test_arm_coresight_disasm.sh
-index f2fb1aa92252..ccb90dda2475 100755
---- a/tools/perf/tests/shell/test_arm_coresight_disasm.sh
-+++ b/tools/perf/tests/shell/coresight/test_arm_coresight_disasm.sh
-@@ -24,7 +24,7 @@ perfdata_dir=$(mktemp -d /tmp/__perf_test.perf.data.XXXXX)
- perfdata=${perfdata_dir}/perf.data
- file=$(mktemp /tmp/temporary_file.XXXXX)
- # Relative path works whether it's installed or running from repo
--script_path=$(dirname "$0")/../../scripts/python/arm-cs-trace-disasm.py
-+script_path=$(dirname "$0")/../../../scripts/python/arm-cs-trace-disasm.py
- 
- cleanup_files()
- {
-
--- 
-2.34.1
-
+>
+> };
+>
+>
+> LGTM for the rest.
+>
+>
+> Thanks
+>
+> Best Regards
+>
+> Hao
+>
+> > Overall I would prefer ALLOCINFO_FILTER_MASK_INACCURATE rather than
+> > ALLOCINFO_FILTER_MASK_FLAGS. The fact that this attribute is a
+> > single-bit flag is a technical detail. It's still a tag attribuite
+> > like file and module names and IMO deserves its own filter.
+> >
+> >
+> >
+> >> +                return false;
+> >> +        }
+> >>        }
+> >>
+> >>        if (filter->mask & (ALLOCINFO_FILTER_MASK_MIN_SIZE |
+> >> ALLOCINFO_FILTER_MASK_MAX_SIZE)) {
+> >> @@ -318,6 +317,10 @@ static int allocinfo_ioctl_get_at(struct seq_file
+> >> *m, void __user *arg)
+> >>        if (params.filter.mask & ~ALLOCINFO_FILTER_MASKS)
+> >>            return -EINVAL;
+> >>
+> >> +    if ((params.filter.mask & ALLOCINFO_FILTER_MASK_FLAGS) &&
+> >> +        (params.filter.flags & ~ALLOCINFO_FILTER_FLAGS_ALL))
+> >> +        return -EINVAL;
+> >> +
+> >>        if ((params.filter.mask & ALLOCINFO_FILTER_MASK_MIN_SIZE) &&
+> >>            (params.filter.mask & ALLOCINFO_FILTER_MASK_MAX_SIZE) &&
+> >>            params.filter.min_size > params.filter.max_size)
+> >>
+> >>
+> >> Thanks
+> >>
+> >> Best Regards
+> >>
+> >> Hao
+> >>
+> >>
+> >>> Thanks
+> >>>
+> >>> Best Regards
+> >>>
+> >>> Hao
+> >>>
+> >>>
+> >>>>    };
+> >>>>      /* The alignment ensures 32-bit compatible interfaces are not
+> >>>> broken */
+> >>>> @@ -39,6 +40,7 @@ enum {
+> >>>>        ALLOCINFO_FILTER_FUNCTION,
+> >>>>        ALLOCINFO_FILTER_FILENAME,
+> >>>>        ALLOCINFO_FILTER_LINENO,
+> >>>> +    ALLOCINFO_FILTER_INACCURATE,
+> >>>>        ALLOCINFO_FILTER_MIN_SIZE,
+> >>>>        ALLOCINFO_FILTER_MAX_SIZE,
+> >>>>        __ALLOCINFO_FILTER_LAST =3D ALLOCINFO_FILTER_MAX_SIZE
+> >>>> @@ -48,6 +50,7 @@ enum {
+> >>>>    #define ALLOCINFO_FILTER_MASK_FUNCTION        (1 <<
+> >>>> ALLOCINFO_FILTER_FUNCTION)
+> >>>>    #define ALLOCINFO_FILTER_MASK_FILENAME        (1 <<
+> >>>> ALLOCINFO_FILTER_FILENAME)
+> >>>>    #define ALLOCINFO_FILTER_MASK_LINENO        (1 <<
+> >>>> ALLOCINFO_FILTER_LINENO)
+> >>>> +#define ALLOCINFO_FILTER_MASK_INACCURATE    (1 <<
+> >>>> ALLOCINFO_FILTER_INACCURATE)
+> >>>>    #define ALLOCINFO_FILTER_MASK_MIN_SIZE        (1 <<
+> >>>> ALLOCINFO_FILTER_MIN_SIZE)
+> >>>>    #define ALLOCINFO_FILTER_MASK_MAX_SIZE        (1 <<
+> >>>> ALLOCINFO_FILTER_MAX_SIZE)
+> >>>>    diff --git a/lib/alloc_tag.c b/lib/alloc_tag.c
+> >>>> index ddc6946f56ab..cbcd12c4ef9c 100644
+> >>>> --- a/lib/alloc_tag.c
+> >>>> +++ b/lib/alloc_tag.c
+> >>>> @@ -249,6 +249,8 @@ static bool matches_filter(struct codetag *ct,
+> >>>> struct allocinfo_filter *filter,
+> >>>>                   struct alloc_tag_counters *counters,
+> >>>>                   bool *fetched_counters)
+> >>>>    {
+> >>>> +    bool inaccurate;
+> >>>> +
+> >>>>        if (!filter || !filter->mask)
+> >>>>            return true;
+> >>>>    @@ -275,6 +277,12 @@ static bool matches_filter(struct codetag *c=
+t,
+> >>>> struct allocinfo_filter *filter,
+> >>>>            ct->lineno !=3D filter->fields.lineno)
+> >>>>            return false;
+> >>>>    +    if (filter->mask & ALLOCINFO_FILTER_MASK_INACCURATE) {
+> >>>> +        inaccurate =3D !!(ct->flags & CODETAG_FLAG_INACCURATE);
+> >>>> +        if (inaccurate !=3D !!(filter->fields.inaccurate))
+> >>>> +            return false;
+> >>>> +    }
+> >>>> +
+> >>>>        if (filter->mask & (ALLOCINFO_FILTER_MASK_MIN_SIZE |
+> >>>> ALLOCINFO_FILTER_MASK_MAX_SIZE)) {
+> >>>>            if (!*fetched_counters) {
+> >>>>                *counters =3D allocinfo_prefetch_counters(ct);
 
