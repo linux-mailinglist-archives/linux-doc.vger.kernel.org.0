@@ -1,85 +1,86 @@
-Return-Path: <linux-doc+bounces-91622-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91624-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 6WHpG+UlKGpa/AIAu9opvQ
-	(envelope-from <linux-doc+bounces-91622-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 16:40:37 +0200
+	id kjpIHk0oKGoD/QIAu9opvQ
+	(envelope-from <linux-doc+bounces-91624-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 16:50:53 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 47A2C6613E7
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 16:40:37 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id CD99466157A
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 16:50:52 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linaro.org header.s=google header.b=kFZ0jSap;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91622-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91622-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=linaro.org header.s=google header.b="ZP/NePNW";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91624-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91624-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=linaro.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id A4111306707E
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2026 14:32:03 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 13C343079FD3
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2026 14:32:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D6EE234D4F9;
-	Tue,  9 Jun 2026 14:31:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1E224351C1C;
+	Tue,  9 Jun 2026 14:31:24 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 861F53491E1
-	for <linux-doc@vger.kernel.org>; Tue,  9 Jun 2026 14:31:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 29A3720299B
+	for <linux-doc@vger.kernel.org>; Tue,  9 Jun 2026 14:31:21 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781015482; cv=none; b=dSmE5iqiSWiPpDiJCCMDB9dWex6YuMmbo8pib+bli2DfLsQWwvn90wSx0G+Hs1aNBydL4p9pCmAbaGKm4T6KQe2KcO7jM/iOurrQG/8ullrkbxCWITa/pbmsbjUXxNFGS9njE5n8uJEVauhBK3PXyKrxwQRuSDri3ijyx7jIbzA=
+	t=1781015484; cv=none; b=RVNodVSIXPQ5sC5ILHBmfVXY4h4jTFioMLsq1IEXR0ccWzggM7ByA9MZWNTV76kDDsAwxKDeBOrFALIqrEJjyHgKYChPuv8VdcYqFq8SMeO4LxJGgodOKoB7nYTAqLqgMk6GniDym661ag0KOJOeWsL+Z8I+MdeBT+5/4xSBxpc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781015482; c=relaxed/simple;
-	bh=/b18pfGcYG5J49852Uf/xpNRcW6fiySK2y+B7W3dtrc=;
+	s=arc-20240116; t=1781015484; c=relaxed/simple;
+	bh=MpqHY1226EZDlsL7AYrF9I24rCLFkLMgGMHa7jjWFqY=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=F6rGEeqUHOQlzNpfbBt/qxLS4Xp2QKR4rHjLgYhIlYQYKidgbCDqPjXL33s9Eb6YBdO3uiNA7BGE3tuFHNjI3YJ6fA6fR13u78WV7Jp/IU+v7jVBWq931iyg2JFzd6O3Fabu2qAHRwgvUIr7uoqaFG5553ZDeCPt12QTUMa/i4Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=kFZ0jSap; arc=none smtp.client-ip=209.85.221.45
-Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-45ef4223be7so3026285f8f.2
-        for <linux-doc@vger.kernel.org>; Tue, 09 Jun 2026 07:31:20 -0700 (PDT)
+	 In-Reply-To:To:Cc; b=N9HTCTRxpyEY2vrinQZ0LZdYCEM7WnRbCMHVKu1IsaamjXk1wWKFnm5Ey9Qar2OsOvhELNhSUNA/G59lSn2zeA1vgkFi4xAe/46Tx1UXpw74D1ZEf90ZCaZ0aUfATwKj0rQL6u8TiRl7bQJF51UxR+NJMjVDKnx8gc5Aci6tWfw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=ZP/NePNW; arc=none smtp.client-ip=209.85.221.46
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-45ef616daf6so5147816f8f.3
+        for <linux-doc@vger.kernel.org>; Tue, 09 Jun 2026 07:31:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1781015479; x=1781620279; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1781015480; x=1781620280; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=XAiQptcYOlXy/icTduKx1v/eUqigIfQCIUFTgmuIVAI=;
-        b=kFZ0jSapWdBGEQrsb+bsOa+LRoRBOmlN2c9Dmwsdi6XeDdAuWnLcfX+HnBjzd0GuV5
-         Djvn9H9YS431GNNBRX17kUY+sMfEgpl36zfXZkCMLHJWDMdH3f6FjzlRAGHozgXhl0uA
-         Ud6IY9BikGZWJqks717J2ZFBGgLrEgvyM39ewW264PXHrXcs9xjvRk8Yx1kAMk5bQLUM
-         mVEvQ6CmogQEnyP6i4yhkAM1b22719ozQQjMYwh3MdnsK3/lnhuOzD12MumceSQUH1xw
-         XGxXTSs99N2zatahMBlsaYoLHqsvSFZpam8Sc4hs9H4IkEHPc3fNxOG6jXs1CfxgI/K4
-         fJlg==
+        bh=9nUZrv+uXShy5oUjVbWJnHpZlIUPoN1ZejbvjYmlEBM=;
+        b=ZP/NePNWLMRI/JPOMSuM6zmRGaAVXu+Z2MAJlyCzQbeD8x8YOeM2tO1kZaT8iCNBi9
+         GfmD/1dG5zYsMCFTk4n+MoCiIPezZKoajOFmxu53311PQeqYLQgpvlPKVw27gsLE0plE
+         DQM4dQLsZQeREo76JnWlmhRDL2rUXkFau+WN9/TpD//YyWOBDrKgR7sdgIgBDlktUVoN
+         gE7hxlwaK0gngXqNFc2u6v7z6Od42B9TaajfTuXtf2aejbbSPdIj4rNe2F4VdZg+fX19
+         4/HBROThrhabT/eUD0vMRD/QMvZtGGA9JvPmOzFUTrYSCKan7C23XAuJm5HYTy6OjwAq
+         93Xg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781015479; x=1781620279;
+        d=1e100.net; s=20251104; t=1781015480; x=1781620280;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=XAiQptcYOlXy/icTduKx1v/eUqigIfQCIUFTgmuIVAI=;
-        b=RwTLAeQrYl7SypsT8t/mhWVHHyYUv1ySvKZoVdY+fgKjvcc717c+FDSq5VfZ9YjRnZ
-         a9bxUxOF/i1b2hlvN4G4vOdYs0H9o0kEG6x5FNsDl5IvSE0uJPZ6UCFehZ0xa86gwr9M
-         iu+cKNrj+31ya7UsF/yTOjmkLjv0t8Hq5TkOPbp2Tg4u+p3aFvfRUedrlPfxe/zrrPBX
-         DD/kC9Ld4av01900NlgLNQ7JNvjrq0d2gU8rqKedfBC0VI2X4k/ltQH6g8DDfxnVKEAh
-         rlBo6vTWjj0b5lrgI/A+SAMBVCDkJK0EBsvcGVGL2DqybuVjlOfyzQdog59YtrKmq9sL
-         FKQg==
-X-Forwarded-Encrypted: i=1; AFNElJ8jPGoXoYe23ATyyBXg6uJc1xiT3mDp2/pNTdsehhbKW+ohV5+TkO4A6txdplGTwqB/6v8ckWgNb4A=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwvuXF+6jQJNQwgVhHqnlviZ966gCV3l20UeJrKsQOId9MPdXmp
-	IttfOWPeZORQ37rk0387T2hgC1zvqZVn5XaJ5fWrf2GbEEmbQhfQ51C/yx3BMB8XZ4tE+s1hivt
-	ras9MbLY=
-X-Gm-Gg: Acq92OFusN2v2UtUBHV4BN+gwvY/ngrg5w/R8ZGmqMDX8qyAugSCWTkVKJqmuCBOHlm
-	MufYDFsO/HxesjGfWyjr/9easjEDkL/8LIx+QQq0JaORXJe7Ob7sxQZYXeoqGL8g5IpV/K26KKE
-	Kk7gys5gsUmd1Y+hKOM+87/H6DNPl8TU2r1J9CA5RtOmugJelY92pU/a8mHHU9bjKlasPlssL0X
-	FdSEFQhOQ+cgtgCCW7rwPdQqKrHrSBSaXW7cwucWpIaIiG3g5clozXY0QCPeT8vxmrlm5WbWmWb
-	26zalusCDJKihuySCZYeN3c9+ZRb+TxV6WWddETQrgPRic8XZaq8LIgLa9r9uj/JExtZDT5wq6x
-	IUtkCEDrusdeYfBiU5u1lan+lekwllOk3twI8k0sHICwKXD2w47P89ChHoWWbdCnTsJdG2DDA9u
-	O6MjheC2dxJ0JASokcxDGJi63zCNpo05v1693ehv7uV88=
-X-Received: by 2002:a05:6000:2888:b0:460:3233:beec with SMTP id ffacd0b85a97d-460566db54fmr4205631f8f.40.1781015478791;
-        Tue, 09 Jun 2026 07:31:18 -0700 (PDT)
+        bh=9nUZrv+uXShy5oUjVbWJnHpZlIUPoN1ZejbvjYmlEBM=;
+        b=mAjGaojgkZwypK152JV330m9BlVvrr8JscDlSXe5N2ahOwdJ1MNYFRKEcJcAH8IUPs
+         KucMdK1hLIs1n+XyKsQfqvnYRwocsQfh3pizyavoCA9XSuTp6JamVgtT0xkkbxIKbo1v
+         Aj+WK+5yxIvWXdZp5d5DN+SNs1U4GHC18o6JyAIWzzaN8Cl3mBs0WEg1fR+GhJ9Aq7vS
+         DzHyAVGUp3P7m8J7DDVUYDkNcr2nHAHPTRpzxqJV/pDp/PgyvNZJQYNhQPTxd7tha7gF
+         6MBfuGxCxqkJZ3YOWK1eYknFQ0bsnp7LgE5GLOWWLtsRWb00NJiZlQ0WmA4K/HcZgp0d
+         DIew==
+X-Forwarded-Encrypted: i=1; AFNElJ+fTzKTua53yoiU9LKWoE6cB/dNfJjtbFWj9+EW9hCYQDubOHPwuoUMt+Wyocces9khIw7HBxkoazk=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy78wMibGdE81lOeAYm8n2sMtzGC2vNNvgWdLDAyTmEiZtsoAsS
+	PPm92Zwm02nynpVA1Y756AWZIZHF5OljgoRvy7e6mHCEn/qaVl7GdviXSXprAYCD2sj+diK7nwP
+	xUp3LY2w=
+X-Gm-Gg: Acq92OGPxEReJ3+oBaX/uo7LPEgJneFJptAycGiyo5hqoeFdOgqskx7nQLLNXh5fKeg
+	l4/kmN1cRCob37YBlbvEOmBnR9UnwVZX7QxUU1IExq4B32puszi9xDMIEUCXOlcAk8bUJGinfpM
+	k6hVv3XNcVheW+3eeuj1lFh1WgMcNR/9uQjGUWKv6uKkXyx1Ipc4eiu8+B2r3rXE0DRpwxMSbgo
+	pZpYmvML0tQfvc7c+SqfPGIC4BlT2PdGxfCzWlQ2/W+WtYBpGt0p9EJ4r/j3WgHX5O4lrJ39SL6
+	BoMvKpD0HVai3NZgRiWdIyFvZx0fLbrbKzgrinTb07ve9A6TV729RErMnuUUZ2lTXHBR8JUXP+t
+	1CBFiSQsYjHiXKnY/2vbBb/SDri7ogrn5HcZG8/xkI48I/yfkPVQ9hZBDDXDpNpPR/hJTfiLSHn
+	WwdiIbUFq01CxQLlN1BZvHqaoRunEqkMCjsP1dIBTmvWY=
+X-Received: by 2002:adf:e30e:0:b0:460:1233:ecf2 with SMTP id ffacd0b85a97d-46030609798mr24080728f8f.30.1781015480385;
+        Tue, 09 Jun 2026 07:31:20 -0700 (PDT)
 Received: from ho-tower-lan.lan ([185.48.77.170])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4601f3444fesm62738388f8f.20.2026.06.09.07.31.17
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4601f3444fesm62738388f8f.20.2026.06.09.07.31.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 09 Jun 2026 07:31:18 -0700 (PDT)
+        Tue, 09 Jun 2026 07:31:19 -0700 (PDT)
 From: James Clark <james.clark@linaro.org>
-Date: Tue, 09 Jun 2026 15:30:55 +0100
-Subject: [PATCH v4 02/19] perf test: Add workload-ctl option
+Date: Tue, 09 Jun 2026 15:30:56 +0100
+Subject: [PATCH v4 03/19] perf test: Add a workload that forces context
+ switches
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -88,7 +89,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260609-james-cs-context-tracking-fix-v4-2-44f9fb9e5c42@linaro.org>
+Message-Id: <20260609-james-cs-context-tracking-fix-v4-3-44f9fb9e5c42@linaro.org>
 References: <20260609-james-cs-context-tracking-fix-v4-0-44f9fb9e5c42@linaro.org>
 In-Reply-To: <20260609-james-cs-context-tracking-fix-v4-0-44f9fb9e5c42@linaro.org>
 To: Suzuki K Poulose <suzuki.poulose@arm.com>, 
@@ -106,12 +107,12 @@ X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-91622-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-91624-lists,linux-doc=lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[17];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
@@ -127,274 +128,205 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[james.clark@linaro.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,vger.kernel.org:from_smtp,linaro.org:dkim,linaro.org:email,linaro.org:mid,linaro.org:from_mime]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,linaro.org:dkim,linaro.org:email,linaro.org:mid,linaro.org:from_mime,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 47A2C6613E7
+X-Rspamd-Queue-Id: CD99466157A
 
-Add a --workload-ctl=fifo:ctl-fifo[,ack-fifo] option for 'perf test
--w'. When set, run_workload() opens the named FIFO, writes enable before
-invoking the builtin workload, writes disable before returning, and
-waits for ack responses when an ack FIFO is provided to ensure that the
-workload doesn't run until the events are enabled.
+This workload launches two processes that block when reading and writing
+to each other forcing the other process to be scheduled for each
+read/write pair.
 
-This can be used to limit the scope of the recording to only the
-workload execution and avoid recording Perf setup and teardown code if
-Perf record is started with events disabled (-D 1).
-
-Assisted-by: Codex:GPT-5.5
 Signed-off-by: James Clark <james.clark@linaro.org>
 ---
- tools/perf/Documentation/perf-test.txt |  12 +++
- tools/perf/tests/builtin-test.c        | 184 ++++++++++++++++++++++++++++++++-
- 2 files changed, 194 insertions(+), 2 deletions(-)
+ tools/perf/Documentation/perf-test.txt           |   7 +-
+ tools/perf/tests/builtin-test.c                  |   1 +
+ tools/perf/tests/tests.h                         |   1 +
+ tools/perf/tests/workloads/Build                 |   1 +
+ tools/perf/tests/workloads/context_switch_loop.c | 110 +++++++++++++++++++++++
+ 5 files changed, 117 insertions(+), 3 deletions(-)
 
 diff --git a/tools/perf/Documentation/perf-test.txt b/tools/perf/Documentation/perf-test.txt
-index 32da0d1fa86a..2f4a91f5b9dc 100644
+index 2f4a91f5b9dc..213eb62603eb 100644
 --- a/tools/perf/Documentation/perf-test.txt
 +++ b/tools/perf/Documentation/perf-test.txt
-@@ -69,3 +69,15 @@ OPTIONS
+@@ -55,15 +55,16 @@ OPTIONS
  
- --list-workloads::
- 	List the available workloads to use with -w/--workload.
-+
-+--record-ctl=fifo:ctl-fifo[,ack-fifo]::
-+	This option is used to communicate with a perf record session in order
-+	to control the recording scope to only the workload and avoid recording
-+	setup and teardown code. When specifying this option, the same FIFO path
-+	must be specified in the record session via:
-+
-+	  perf record -D -1 --control=fifo:ctl-fifo[,ack-fifo] ...
-+
-+	Perf test sends 'enable' and 'disable' commands through ctl-fifo to
-+	control event recording. If 'ack-fifo' is provided, the workload runner
-+	waits for an 'ack' response after each command.
+ -w::
+ --workload=::
+-	Run a built-in workload, to list them use '--list-workloads', current ones include:
+-	noploop, thloop, leafloop, sqrtloop, brstack, datasym and landlock.
++	Run a built-in workload, to list them use '--list-workloads', current
++	ones include: noploop, thloop, leafloop, sqrtloop, brstack, datasym,
++	context_switch_loop and landlock.
+ 
+ 	Used with the shell script regression tests.
+ 
+ 	Some accept an extra parameter:
+ 
+ 		seconds: leafloop, noploop, sqrtloop, thloop
+-		nrloops: brstack
++		nrloops: brstack, context_switch_loop
+ 
+ 	The datasym and landlock workloads don't accept any.
+ 
 diff --git a/tools/perf/tests/builtin-test.c b/tools/perf/tests/builtin-test.c
-index b64fc2204f22..86ea427eb0aa 100644
+index 86ea427eb0aa..9284f897de3c 100644
 --- a/tools/perf/tests/builtin-test.c
 +++ b/tools/perf/tests/builtin-test.c
-@@ -56,6 +56,7 @@ static unsigned int runs_per_test = 1;
- static unsigned int failure_snippet_lines = 10;
- const char *dso_to_test;
- const char *test_objdump_path = "objdump";
-+static const char *workload_control;
+@@ -163,6 +163,7 @@ static struct test_workload *workloads[] = {
+ 	&workload__traploop,
+ 	&workload__inlineloop,
+ 	&workload__jitdump,
++	&workload__context_switch_loop,
  
- /*
-  * List of architecture specific tests. Not a weak symbol as the array length is
-@@ -168,6 +169,11 @@ static struct test_workload *workloads[] = {
- #endif
- };
+ #ifdef HAVE_RUST_SUPPORT
+ 	&workload__code_with_type,
+diff --git a/tools/perf/tests/tests.h b/tools/perf/tests/tests.h
+index bf8ff7d54727..7cd4da4e96d3 100644
+--- a/tools/perf/tests/tests.h
++++ b/tools/perf/tests/tests.h
+@@ -245,6 +245,7 @@ DECLARE_WORKLOAD(landlock);
+ DECLARE_WORKLOAD(traploop);
+ DECLARE_WORKLOAD(inlineloop);
+ DECLARE_WORKLOAD(jitdump);
++DECLARE_WORKLOAD(context_switch_loop);
  
-+struct workload_control {
-+	int ctl_fd;
-+	int ack_fd;
-+};
+ #ifdef HAVE_RUST_SUPPORT
+ DECLARE_WORKLOAD(code_with_type);
+diff --git a/tools/perf/tests/workloads/Build b/tools/perf/tests/workloads/Build
+index 0eb6d99528eb..7134a031cb7c 100644
+--- a/tools/perf/tests/workloads/Build
++++ b/tools/perf/tests/workloads/Build
+@@ -10,6 +10,7 @@ perf-test-y += landlock.o
+ perf-test-y += traploop.o
+ perf-test-y += inlineloop.o
+ perf-test-y += jitdump.o
++perf-test-y += context_switch_loop.o
+ 
+ ifeq ($(CONFIG_RUST_SUPPORT),y)
+     perf-test-y += code_with_type.o
+diff --git a/tools/perf/tests/workloads/context_switch_loop.c b/tools/perf/tests/workloads/context_switch_loop.c
+new file mode 100644
+index 000000000000..5431af6147e6
+--- /dev/null
++++ b/tools/perf/tests/workloads/context_switch_loop.c
+@@ -0,0 +1,110 @@
 +
- #define workloads__for_each(workload) \
- 	for (unsigned i = 0; i < ARRAY_SIZE(workloads) && ({ workload = workloads[i]; 1; }); i++)
- 
-@@ -1387,13 +1393,185 @@ static int workloads__fprintf_list(FILE *fp)
- 	return printed;
- }
- 
-+static int perf_control_open_fifo(struct workload_control *ctl, const char *str)
++// SPDX-License-Identifier: GPL-2.0
++
++#include <linux/compiler.h>
++#include <stdio.h>
++#include <stdlib.h>
++#include <sys/prctl.h>
++#include <sys/wait.h>
++#include <unistd.h>
++
++#include "../tests.h"
++
++static int loops = 100;
++static char buf;
++int context_switch_loop_work = 1234;
++
++#define write_block(fd) \
++	do { \
++		if (write(fd, &buf, 1) <= 0) \
++			return 1; \
++	} while (0)
++
++#define read_block(fd) \
++	do { \
++		if (read(fd, &buf, 1) <= 0) \
++			return 1; \
++	} while (0)
++
++/* Not static to avoid LTO clobbering the function name */
++int context_switch_loop_proc1(int in_fd, int out_fd);
++int context_switch_loop_proc1(int in_fd, int out_fd)
 +{
-+	char *s, *p;
++	for (int i = 0; i < loops; i++) {
++		read_block(in_fd);
++		context_switch_loop_work += i * 3;
++		write_block(out_fd);
++	}
++	return 0;
++}
++
++int context_switch_loop_proc2(int in_fd, int out_fd);
++int context_switch_loop_proc2(int in_fd, int out_fd)
++{
++	for (int i = 0; i < loops; i++) {
++		write_block(out_fd);
++		context_switch_loop_work += i * 7;
++		read_block(in_fd);
++	}
++	return 0;
++}
++
++/*
++ * Launches two processes that take turns to execute a multiplication N times
++ */
++static int context_switch_loop(int argc, const char **argv)
++{
++	int a_to_b[2], b_to_a[2];
++	pid_t proc1_pid;
++	int status;
 +	int ret;
 +
-+	if (strncmp(str, "fifo:", 5))
-+		return -EINVAL;
++	if (argc > 0) {
++		loops = atoi(argv[0]);
++		if (loops < 0) {
++			fprintf(stderr, "Invalid number of loops: %s\n", argv[0]);
++			return 1;
++		}
++	}
 +
-+	str += 5;
-+	if (!*str || *str == ',')
-+		return -EINVAL;
++	if (pipe(a_to_b) || pipe(b_to_a)) {
++		perror("Pipe error");
++		return 1;
++	}
 +
-+	s = strdup(str);
-+	if (!s)
-+		return -ENOMEM;
++	proc1_pid = fork();
++	if (proc1_pid < 0) {
++		perror("Fork error");
++		return 1;
++	}
 +
-+	p = strchr(s, ',');
-+	if (p)
-+		*p = '\0';
++	if (!proc1_pid) {
++		close(a_to_b[0]);
++		close(b_to_a[1]);
++		prctl(PR_SET_NAME, "proc1", 0, 0, 0);
++		ret = context_switch_loop_proc1(b_to_a[0], a_to_b[1]);
++		close(a_to_b[1]);
++		close(b_to_a[0]);
++		exit(ret);
++	}
 +
-+	ctl->ctl_fd = open(s, O_WRONLY | O_CLOEXEC);
-+	if (ctl->ctl_fd < 0) {
-+		ret = -errno;
-+		pr_err("Failed to open workload control FIFO '%s': %m\n", s);
-+		free(s);
++	close(a_to_b[1]);
++	close(b_to_a[0]);
++	prctl(PR_SET_NAME, "proc2", 0, 0, 0);
++	ret = context_switch_loop_proc2(a_to_b[0], b_to_a[1]);
++	close(a_to_b[0]);
++	close(b_to_a[1]);
++
++	if (ret) {
++		kill(proc1_pid, SIGKILL);
 +		return ret;
 +	}
 +
-+	if (p && *++p) {
-+		ctl->ack_fd = open(p, O_RDONLY | O_CLOEXEC);
-+		if (ctl->ack_fd < 0) {
-+			ret = -errno;
-+			pr_err("Failed to open workload control ack FIFO '%s': %m\n", p);
-+			close(ctl->ctl_fd);
-+			ctl->ctl_fd = -1;
-+			free(s);
-+			return ret;
-+		}
-+	}
-+
-+	free(s);
-+	return 0;
-+}
-+
-+static int perf_control_open(struct workload_control *ctl)
-+{
-+	int ret;
-+
-+	if (!workload_control)
-+		return 0;
-+
-+	ret = perf_control_open_fifo(ctl, workload_control);
-+
-+	if (ret == -EINVAL) {
-+		pr_err("Unsupported workload control spec '%s', expected fifo:ctl-fifo[,ack-fifo]\n",
-+			workload_control);
-+	}
-+
-+	return ret;
-+}
-+
-+static void perf_control_close(struct workload_control *ctl)
-+{
-+	if (ctl->ctl_fd >= 0) {
-+		close(ctl->ctl_fd);
-+		ctl->ctl_fd = -1;
-+	}
-+	if (ctl->ack_fd >= 0) {
-+		close(ctl->ack_fd);
-+		ctl->ack_fd = -1;
-+	}
-+}
-+
-+static int perf_control_write_cmd(int fd, const char *cmd)
-+{
-+	size_t len = strlen(cmd);
-+	ssize_t ret;
-+
-+	while (len) {
-+		ret = write(fd, cmd, len);
-+		if (ret < 0) {
-+			if (errno == EINTR)
-+				continue;
-+			pr_err("Failed to write perf control command: %m\n");
-+			return -1;
-+		}
-+
-+		if (!ret) {
-+			pr_err("Failed to write perf control command: short write\n");
-+			return -1;
-+		}
-+
-+		cmd += ret;
-+		len -= ret;
-+	}
++	if (waitpid(proc1_pid, &status, 0) != proc1_pid || !WIFEXITED(status) ||
++	    WEXITSTATUS(status))
++		return 1;
 +
 +	return 0;
 +}
 +
-+static int perf_control_read_ack(int fd)
-+{
-+	char buf[16];
-+	ssize_t ret;
-+
-+	do {
-+		ret = read(fd, buf, sizeof(buf) - 1);
-+	} while (ret < 0 && errno == EINTR);
-+
-+	if (ret < 0) {
-+		pr_err("Failed to read perf control ack: %m\n");
-+		return -1;
-+	}
-+
-+	if (!ret) {
-+		pr_err("Unexpected EOF while reading perf control ack\n");
-+		return -1;
-+	}
-+
-+	buf[ret] = '\0';
-+	for (ssize_t i = 0; i < ret; i++) {
-+		if (buf[i] == '\n' || buf[i] == '\0') {
-+			buf[i] = '\0';
-+			break;
-+		}
-+	}
-+
-+	if (strcmp(buf, "ack")) {
-+		pr_err("Unexpected perf control ack: %s\n", buf);
-+		return -1;
-+	}
-+
-+	return 0;
-+}
-+
-+static int perf_control_send(struct workload_control *ctl, const char *cmd)
-+{
-+	if (ctl->ctl_fd < 0)
-+		return 0;
-+
-+	if (perf_control_write_cmd(ctl->ctl_fd, cmd))
-+		return -1;
-+
-+	if (ctl->ack_fd >= 0 && perf_control_read_ack(ctl->ack_fd))
-+		return -1;
-+
-+	return 0;
-+}
-+
- static int run_workload(const char *work, int argc, const char **argv)
- {
- 	struct test_workload *twl;
- 
- 	workloads__for_each(twl) {
--		if (!strcmp(twl->name, work))
--			return twl->func(argc, argv);
-+		struct workload_control ctl = {
-+			.ctl_fd = -1,
-+			.ack_fd = -1,
-+		};
-+		int control_ret, ret;
-+
-+		if (strcmp(twl->name, work))
-+			continue;
-+
-+		ret = perf_control_open(&ctl);
-+		if (ret)
-+			return ret;
-+
-+		if (perf_control_send(&ctl, "enable\n")) {
-+			perf_control_close(&ctl);
-+			return -1;
-+		}
-+
-+		ret = twl->func(argc, argv);
-+
-+		control_ret = perf_control_send(&ctl, "disable\n");
-+		perf_control_close(&ctl);
-+		if (control_ret)
-+			return -1;
-+
-+		return ret;
- 	}
- 
- 	pr_info("No workload found: %s\n", work);
-@@ -1486,6 +1664,8 @@ int cmd_test(int argc, const char **argv)
- 	OPT_UINTEGER('r', "runs-per-test", &runs_per_test,
- 		     "Run each test the given number of times, default 1"),
- 	OPT_STRING('w', "workload", &workload, "work", "workload to run for testing, use '--list-workloads' to list the available ones."),
-+	OPT_STRING(0, "record-ctl", &workload_control, "fifo:ctl-fifo[,ack-fifo]",
-+		   "Write enable to the fifo just before running the workload and disable after, with optional ack from ack-fifo"),
- 	OPT_BOOLEAN(0, "list-workloads", &list_workloads, "List the available builtin workloads to use with -w/--workload"),
- 	OPT_STRING(0, "dso", &dso_to_test, "dso", "dso to test"),
- 	OPT_STRING(0, "objdump", &test_objdump_path, "path",
++DEFINE_WORKLOAD(context_switch_loop);
 
 -- 
 2.34.1
