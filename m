@@ -1,221 +1,208 @@
-Return-Path: <linux-doc+bounces-91566-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91567-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id TnDSFGrtJ2rW5QIAu9opvQ
-	(envelope-from <linux-doc+bounces-91566-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 12:39:38 +0200
+	id v+QSF/3uJ2rv5gIAu9opvQ
+	(envelope-from <linux-doc+bounces-91567-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 12:46:21 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id A2AD365F0B5
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 12:39:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A7F2D65F17B
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 12:46:20 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linux.dev header.s=key1 header.b=OxFA9un9;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91566-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-91566-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=linux.dev;
+	dkim=pass header.d=google.com header.s=20251104 header.b=VVrRvQZ4;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91567-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-91567-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=google.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id C91AB304D268
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2026 10:37:06 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 4D0083022059
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2026 10:45:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 587723CEBA6;
-	Tue,  9 Jun 2026 10:37:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D66B7348C56;
+	Tue,  9 Jun 2026 10:45:50 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-176.mta1.migadu.com (out-176.mta1.migadu.com [95.215.58.176])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 54E2A3E6DD0
-	for <linux-doc@vger.kernel.org>; Tue,  9 Jun 2026 10:37:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AAE233AEB2D
+	for <linux-doc@vger.kernel.org>; Tue,  9 Jun 2026 10:45:49 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781001426; cv=none; b=NumZmuZhfH61oFhyUAPfNp2EhqWv6ZiHZSelvdnIBEhcQyJT8aU6foqcV0ZCfe+pG0hCOAXwCUvSp+JkI34lSPabu0iIK74a8Vqo6AIBCyTbiS04kPdXSJWdlhqI3TVMXjXhWssgocNbptwiOAnJ4WP6DJRNJApoZWye/EtsWos=
+	t=1781001950; cv=none; b=gmlznqc6FA24cZX4wKJ77qFY50clzyjBxPHGyVPo3vl1YL2T5uhzCOetOuMJxx4pxxPTG7PtsU7XkyUcZ49Ui7+3vSjG98R/EdrbgN25dA/Ziqzr1Et/aX4Q4swaNgYikN4G0M1NSxTUSUYXYUmcqmKUmksPnJaEkrp0CtWiPaY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781001426; c=relaxed/simple;
-	bh=6SUKSJTLXATU6iPS+hpKhJ7YFA9CUvj9MoM3hqwlMW0=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=aCOs4ws9+fmRhQz0vqRX66mT5tSN36u+mFurHQLKWJ/6dkGAXekq0CgyJ8fo1vXeM+QtnP78/3UC3/kA99KSaGhFrybkXvDruyGfyM1/UQ3LBujnMl4H+NVdQ7pLyrq+IBXMXhbF3pkm5CTZy6Pr5IWthYFUnAyq1047nZBjog8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=OxFA9un9; arc=none smtp.client-ip=95.215.58.176
-Message-ID: <7e36f7f0-b4d5-41c9-b399-9e0079907d33@linux.dev>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1781001411;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=k/rAkLlXIlXwRgQb+cLefFBf2z5QC1/Z0DCE0BETG/c=;
-	b=OxFA9un9vu0GW542DvVoiEKSZvKgU8m+pFneJhMgeukhwmrYt4Cnz+zD/9qEHska0Zm+it
-	w02Mufbjx8vAI7xkfWKQ6k/fxd+dKq5O+h1nA+/pRzFEhofRlBQPjXC2b9LO+W1mqNpYo6
-	Ly/xyxg1oW+1zQouZxts70DutOiLlr4=
-Date: Tue, 9 Jun 2026 18:36:20 +0800
+	s=arc-20240116; t=1781001950; c=relaxed/simple;
+	bh=inxauirSdSBtUq285TjdHRaUOR7xwNsC6MkSXARnYKY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=PGLeqcU7CcpVS2bNBT3AVYvG+ynO9yZxOpr4qFdH5oW6xEMhdfY+uAyPJn3Hc0ULfHy9ruADOxBTuPHP8LeDC2TDhEfSt9G2Hio/ySRj+Fde2ZP0o0Ozrk54tiY4NTabsL1qVGXIg0tEaceHhanjTi1TVMQgjg7Vbuf5xP/DvzI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=VVrRvQZ4; arc=none smtp.client-ip=209.85.214.180
+Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-2bf2911f93cso418565ad.1
+        for <linux-doc@vger.kernel.org>; Tue, 09 Jun 2026 03:45:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20251104; t=1781001949; x=1781606749; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=No+49IMmQGsjPk0qMclq8vTdt88psTr6uq6iD4QVA2E=;
+        b=VVrRvQZ441Tn5SAsCO0q5dhRuqPc8o3fxKL+T4oL79bkTHDFpwDskSSH7mWAdfXM3c
+         yQk8diufRbgYN3IoX5Ol/aRRXB6X5rG38N8sDb1GH4Eg00iwuM/bEkMdmSvK8Yrn/Cli
+         WvtoO4gt5kAej7avzE4ebJBK7E0/JXKntOmnvj3fERsziSCzV3M95H5rafE7yVCpWFv/
+         nbqV0QXgKGzLAecEa5U0VgnR/j0L6oGNQJDrjRyH1Hny8ZOXXA15JQTPDvZaOSNZU6Du
+         FQyGCkIZ5wrVnEE7dNsPvUxoQ+i8WO0RY0cz+9rvSkK2YfnWLGBwh1v9nFNC+Ms0gGj7
+         2djQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1781001949; x=1781606749;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=No+49IMmQGsjPk0qMclq8vTdt88psTr6uq6iD4QVA2E=;
+        b=Ru32RIn5qTma4I9AQz7bn879pwsWC2RQyGUKOTBeeP0FwbzyBjrNAAdXh4xSFoFwBO
+         hV5rZqkVmO3YyfYF7mcNAbhaIXdLHDxkYWtQcJKJTI2cgxdg8AoRK+j/6aCHJ51R6Ez+
+         otrTA/Hux1XD5dM+A1NU7mfshBgGpkGxX+r02o2AHFKM5gx+GghuK9TEsX6Ra4+8t1hb
+         aq6mzyWW9ISIRP0OxW+mc4EdRu6sQFKUa+1F068Y0Uct8x7KrQDnbGrjAldIOW19xVye
+         J+UE1mpT8h9R4K/RMKCWGvc+bnMuv2efBRqF08ie5YRnUCKP/9h+vu/510UFzN5wTevG
+         Hvtg==
+X-Forwarded-Encrypted: i=1; AFNElJ8py8/HIdnJsCZTHQS/c2YKlM4lqDkpLdv+r6QE7BLsj5/fG+j6OVMd4HfBmmdY+aKz3oqtDhFriFo=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwhBXocCrnUKSa9jwUkyKre7L36cUaHkR+awLHxOEyvBE+zrnIA
+	MEvSUwL0z5UCwmfNmRx8ICZ0qgs+V+NuaRocqT2XbPCmp1c86ZRJRcJ8vKoPWzk9qw==
+X-Gm-Gg: Acq92OHv89yEjLfoJAvtRvvMMH+7VaLQzzu2cbFWo3bTwmba0EYOPOt3vRsSD58uLFP
+	gef45yPKDguGnUNs4c0xeZd44ik73G7+o0Cu0eRRQffn0Y8uzV8J7B9rjRaaABoudLDImtJ2aNF
+	naKw0sg1Do0PRjEHH3RCV5dROTylnJDUMZOUYJ6zNH1gKo2Q8/D0WRH85tSuqAxpz9hnRR4gqt4
+	LqRbZ7i1uWhozIUiUOtM2WgpMfZc9OCXvtEkUmi3sCi73YLqvpE2C9ujYg6ZQjWHOIV5TwDg1QQ
+	X0RmVVO1EJIwy5DSvC5kz3SOSONwK82wMD4BSn/E9WTzWNe0WJx/AHzYqbDKOMfUg6gw9nnc1AI
+	uDXhadXrjoVnPdAElCayyYnzQu8KrKJyLxpkC1qfWZtn++ShF+qCDTyzFPQXnIVgRXMS5QCp6Zi
+	EoqCoRpIrJHk4a6wC1u89SDx8kpdewIYqoCiLBdjg+zefUplGqhk1v71/L7SmANicde/Ix4Bg=
+X-Received: by 2002:a17:903:fa5:b0:2c1:ee6e:4e4c with SMTP id d9443c01a7336-2c1ee6e51e8mr7663135ad.29.1781001948407;
+        Tue, 09 Jun 2026 03:45:48 -0700 (PDT)
+Received: from google.com (199.255.142.34.bc.googleusercontent.com. [34.142.255.199])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-842828e228asm22864909b3a.47.2026.06.09.03.45.42
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 09 Jun 2026 03:45:47 -0700 (PDT)
+Date: Tue, 9 Jun 2026 10:45:39 +0000
+From: Pranjal Shrivastava <praan@google.com>
+To: David Matlack <dmatlack@google.com>
+Cc: kexec@lists.infradead.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+	linux-pci@vger.kernel.org,
+	Adithya Jayachandran <ajayachandra@nvidia.com>,
+	Alexander Graf <graf@amazon.com>,
+	Alex Williamson <alex@shazbot.org>,
+	Bjorn Helgaas <bhelgaas@google.com>, Chris Li <chrisl@kernel.org>,
+	David Rientjes <rientjes@google.com>,
+	Jacob Pan <jacob.pan@linux.microsoft.com>,
+	Jason Gunthorpe <jgg@nvidia.com>, Jonathan Corbet <corbet@lwn.net>,
+	Josh Hilke <jrhilke@google.com>,
+	Leon Romanovsky <leonro@nvidia.com>, Lukas Wunner <lukas@wunner.de>,
+	Mike Rapoport <rppt@kernel.org>, Parav Pandit <parav@nvidia.com>,
+	Pasha Tatashin <pasha.tatashin@soleen.com>,
+	Pratyush Yadav <pratyush@kernel.org>,
+	Saeed Mahameed <saeedm@nvidia.com>,
+	Samiullah Khawaja <skhawaja@google.com>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Vipin Sharma <vipinsh@google.com>, William Tu <witu@nvidia.com>,
+	Yi Liu <yi.l.liu@intel.com>
+Subject: Re: [PATCH v6 01/12] PCI: liveupdate: Set up FLB handler for the PCI
+ core
+Message-ID: <aifu0wys8IENAK1C@google.com>
+References: <20260522202410.3104264-1-dmatlack@google.com>
+ <20260522202410.3104264-2-dmatlack@google.com>
+ <aiJhoq_Yj6-1Hl5r@google.com>
+ <aicrNNVrMBtJD2iZ@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH mm-unstable v19 11/14] mm/khugepaged: Introduce mTHP
- collapse support
-Content-Language: en-US
-To: Nico Pache <npache@redhat.com>, "David Hildenbrand (Arm)"
- <david@kernel.org>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-mm@kvack.org, linux-trace-kernel@vger.kernel.org, aarcange@redhat.com,
- akpm@linux-foundation.org, anshuman.khandual@arm.com, apopple@nvidia.com,
- baohua@kernel.org, baolin.wang@linux.alibaba.com, byungchul@sk.com,
- catalin.marinas@arm.com, cl@gentwo.org, corbet@lwn.net,
- dave.hansen@linux.intel.com, dev.jain@arm.com, gourry@gourry.net,
- hannes@cmpxchg.org, hughd@google.com, jack@suse.cz, jackmanb@google.com,
- jannh@google.com, jglisse@google.com, joshua.hahnjy@gmail.com,
- kas@kernel.org, liam@infradead.org, ljs@kernel.org,
- mathieu.desnoyers@efficios.com, matthew.brost@intel.com,
- mhiramat@kernel.org, mhocko@suse.com, peterx@redhat.com, pfalcato@suse.de,
- rakie.kim@sk.com, raquini@redhat.com, rdunlap@infradead.org,
- richard.weiyang@gmail.com, rientjes@google.com, rostedt@goodmis.org,
- rppt@kernel.org, ryan.roberts@arm.com, shivankg@amd.com,
- sunnanyong@huawei.com, surenb@google.com, thomas.hellstrom@linux.intel.com,
- tiwai@suse.de, usamaarif642@gmail.com, vbabka@suse.cz,
- vishal.moola@gmail.com, wangkefeng.wang@huawei.com, will@kernel.org,
- willy@infradead.org, yang@os.amperecomputing.com,
- ying.huang@linux.alibaba.com, ziy@nvidia.com, zokeefe@google.com
-References: <20260605161422.213817-12-npache@redhat.com>
- <20260606102800.26940-1-lance.yang@linux.dev>
- <2553caae-9e0e-42a7-8b61-d1216f1e81fa@kernel.org>
- <CAA1CXcBY_2372eJru8VoCq90rUMxn7w23hHou68MmXRv48NRXg@mail.gmail.com>
- <b7fb4184-7a99-42c7-8ee2-4c7fa20827c4@kernel.org>
- <CAA1CXcAhw8V+_dYcrqmtZ9ht4Pqz5PPB8EOcDrVCp4DA4y7pLg@mail.gmail.com>
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Lance Yang <lance.yang@linux.dev>
-In-Reply-To: <CAA1CXcAhw8V+_dYcrqmtZ9ht4Pqz5PPB8EOcDrVCp4DA4y7pLg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <aicrNNVrMBtJD2iZ@google.com>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-91566-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-91567-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:dmatlack@google.com,m:kexec@lists.infradead.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-pci@vger.kernel.org,m:ajayachandra@nvidia.com,m:graf@amazon.com,m:alex@shazbot.org,m:bhelgaas@google.com,m:chrisl@kernel.org,m:rientjes@google.com,m:jacob.pan@linux.microsoft.com,m:jgg@nvidia.com,m:corbet@lwn.net,m:jrhilke@google.com,m:leonro@nvidia.com,m:lukas@wunner.de,m:rppt@kernel.org,m:parav@nvidia.com,m:pasha.tatashin@soleen.com,m:pratyush@kernel.org,m:saeedm@nvidia.com,m:skhawaja@google.com,m:skhan@linuxfoundation.org,m:vipinsh@google.com,m:witu@nvidia.com,m:yi.l.liu@intel.com,s:lists@lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER(0.00)[praan@google.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[28];
+	DKIM_TRACE(0.00)[google.com:+];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:npache@redhat.com,m:david@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-trace-kernel@vger.kernel.org,m:aarcange@redhat.com,m:akpm@linux-foundation.org,m:anshuman.khandual@arm.com,m:apopple@nvidia.com,m:baohua@kernel.org,m:baolin.wang@linux.alibaba.com,m:byungchul@sk.com,m:catalin.marinas@arm.com,m:cl@gentwo.org,m:corbet@lwn.net,m:dave.hansen@linux.intel.com,m:dev.jain@arm.com,m:gourry@gourry.net,m:hannes@cmpxchg.org,m:hughd@google.com,m:jack@suse.cz,m:jackmanb@google.com,m:jannh@google.com,m:jglisse@google.com,m:joshua.hahnjy@gmail.com,m:kas@kernel.org,m:liam@infradead.org,m:ljs@kernel.org,m:mathieu.desnoyers@efficios.com,m:matthew.brost@intel.com,m:mhiramat@kernel.org,m:mhocko@suse.com,m:peterx@redhat.com,m:pfalcato@suse.de,m:rakie.kim@sk.com,m:raquini@redhat.com,m:rdunlap@infradead.org,m:richard.weiyang@gmail.com,m:rientjes@google.com,m:rostedt@goodmis.org,m:rppt@kernel.org,m:ryan.roberts@arm.com,m:shiv
- ankg@amd.com,m:sunnanyong@huawei.com,m:surenb@google.com,m:thomas.hellstrom@linux.intel.com,m:tiwai@suse.de,m:usamaarif642@gmail.com,m:vbabka@suse.cz,m:vishal.moola@gmail.com,m:wangkefeng.wang@huawei.com,m:will@kernel.org,m:willy@infradead.org,m:yang@os.amperecomputing.com,m:ying.huang@linux.alibaba.com,m:ziy@nvidia.com,m:zokeefe@google.com,m:joshuahahnjy@gmail.com,m:richardweiyang@gmail.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[lance.yang@linux.dev,linux-doc@vger.kernel.org];
-	RCVD_COUNT_THREE(0.00)[3];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kvack.org,redhat.com,linux-foundation.org,arm.com,nvidia.com,kernel.org,linux.alibaba.com,sk.com,gentwo.org,lwn.net,linux.intel.com,gourry.net,cmpxchg.org,google.com,suse.cz,gmail.com,infradead.org,efficios.com,intel.com,suse.com,suse.de,goodmis.org,amd.com,huawei.com,os.amperecomputing.com];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[58];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[lance.yang@linux.dev,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linux.dev:+];
+	FROM_NEQ_ENVFROM(0.00)[praan@google.com,linux-doc@vger.kernel.org];
+	MISSING_XM_UA(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TO_DN_SOME(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,linux.dev:dkim,linux.dev:mid,linux.dev:from_mime,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: A2AD365F0B5
+X-Rspamd-Queue-Id: A7F2D65F17B
 
+On Mon, Jun 08, 2026 at 08:51:00PM +0000, David Matlack wrote:
+> On 2026-06-05 05:41 AM, Pranjal Shrivastava wrote:
+> > On Fri, May 22, 2026 at 08:23:59PM +0000, David Matlack wrote:
+> > > Set up a File-Lifecycle-Bound (FLB) handler for the PCI core to enable
+> > > it to participate in the preservation of PCI devices across Live Update.
+> > > Essentially, this commit enables the PCI core to allocate a struct
+> > > (struct pci_ser) and preserve it across a Live Update whenever at least
+> > > one device is preserved.
+> > > 
+> > > Preserving PCI devices across Live Update is built on top of the Live
+> > > Update Orchestrator's (LUO) support for file preservation. Drivers are
+> > > expected to expose a file to userspace to represent a single PCI device
+> > > and support preservation of that file. This is intended primarily to
+> > > support preservation of PCI devices bound to VFIO drivers.
+> > > 
 
+[...]
 
-On 2026/6/9 17:32, Nico Pache wrote:
-> On Tue, Jun 9, 2026 at 3:26 AM David Hildenbrand (Arm) <david@kernel.org> wrote:
->>
->> On 6/9/26 11:06, Nico Pache wrote:
->>> On Mon, Jun 8, 2026 at 8:57 AM David Hildenbrand (Arm) <david@kernel.org> wrote:
->>>>
->>>> On 6/6/26 12:28, Lance Yang wrote:
->>>>>
->>>>>
->>>>> Looks broken for swap PTEs in PMD collapse ...
->>>>>
->>>>> collapse_scan_pmd() allows them up to max_ptes_swap and record them in
->>>>> unmapped, but they don't get a bit in mthp_present_ptes. And then
->>>>> mthp_collapse() does the check above:
->>>>
->>>> Right. I assumed this is implicitly handled by the optimization in collapse_scan_pmd:
->>>>
->>>>          if (enabled_orders != BIT(HPAGE_PMD_ORDER))
->>>>                  max_ptes_none = KHUGEPAGED_MAX_PTES_LIMIT;
->>>>
->>>> But we perform the check a second time.
->>>>
->>>>>
->>>>> nr_occupied_ptes >= nr_ptes - max_ptes_none
->>>>>
->>>>> So max_ptes_none=0 + 511 present PTEs + one allowed swap PTE won't even
->>>>> call collapse_huge_page() for PMD order.
->>>>>
->>>>> Shouldn't we account for them in the PMD-order check? Something like:
->>>>>
->>>>> if (is_pmd_order(order))
->>>>>        nr_occupied_ptes += unmapped;
->>>
->>> This solution seems good for a temporary fixup. but longterm we may
->>> want something else. I'm still not sure how we plan on supporting
->>> swapin without causing creep. So I'd be ok with adding a fix for
->>> legacy PMD behavior until we know how to handle mTHP creep correctly.
->>>
->>>> As an alternative, we could either 1) skip the check there for
->>>> pmd order (as the check was already done); or 2) introduce+maintain
->>>> a bitmap that tracks non-present PTEs.
->>>>
->>>> @@ -1475,7 +1477,9 @@ static enum scan_result mthp_collapse(struct mm_struct *mm,
->>>>                  nr_occupied_ptes = bitmap_weight_from(cc->mthp_present_ptes, offset,
->>>>                                                        offset + nr_ptes);
->>>>
->>>> -               if (nr_occupied_ptes >= nr_ptes - max_ptes_none) {
->>>> +               /* Check was already done in the caller. */
->>>> +               if (is_pmd_order(order) ||
->>>> +                   nr_occupied_ptes >= nr_ptes - max_ptes_none) {
->>>>                          enum scan_result ret;
->>>>
->>>>                          collapse_address = address + offset * PAGE_SIZE;
->>>>
->>>> 2) would probably be cleanest long-term.
->>>
->>> That would be best for future swapin support in mTHP, but I still
->>> don't think it solves the creep issue.
->>
->> It wouldn't, we'd simply maintain the state we collect + rely on in separate
->> bitmaps. On swapin, we'd have to update/refresh bitmaps I guess.
+> > > + * struct pci_ser - PCI Subsystem Live Update State
+> > > + *
+> > > + * This struct tracks state about all devices that are being preserved across
+> > > + * a Live Update for the next kernel.
+> > > + *
+> > > + * @max_nr_devices: The length of the devices[] flexible array.
+> > > + * @nr_devices: The number of devices that were preserved.
+> > > + * @devices: Flexible array of pci_dev_ser structs for each device.
+> > > + */
+> > > +struct pci_ser {
+> > > +	u32 max_nr_devices;
+> > > +	u32 nr_devices;
+> > > +	struct pci_dev_ser devices[];
+> > > +} __packed;
+> > > +
+> > > +/* Ensure all elements of devices[] are naturally aligned. */
+> > > +static_assert(offsetof(struct pci_ser, devices) % sizeof(unsigned long) == 0);
+> > > +static_assert(sizeof(struct pci_dev_ser) % sizeof(unsigned long) == 0);
+> > 
+> > Minor Nit: Shall we consider using specific bitwidth types here?
+> > I'm wondering if down the line another u32 field is added to 
+> > struct pci_dev_ser.. in that case on a 32-bit machine 12 % 4 == 0 but on
+> > a 64-bit machine 12 % 8 != 0..
 > 
-> Yeah, I'm saying for the future, it obviously solves this issue here
-> as well, but if we have positional tracking of the swapout, shared,
-> and none PTEs, I think we can use this to determine whether the
-> collapse would lead to creep. If we detect creep would happen it may
-> be best to automatically collapse to the N+1 (or greater) candidate.
-> Just thinking outloud here.
+> I think natural alignment is what matters for efficient access of the
+> array elements. So failing the assert only on 64-bit architectures seems
+> like the correct behavior.
 > 
->>
->>> Perhaps we could combine the
->>> two bitmaps to determine if it would make the future collapse eligible
->>> again? Not sure but ill start thinking about it.
->>>
->>> Should I send a fixup for this using Lance's solution? Or does Lance
->>> want to send a patch out with the fixes tag?
->>
->> If Lance could send a fixup, explaining the situation, that would be nice.
 
-Sure, happy to send a fixup :P
+Ack. I guess what I was trying to say was we'd anyway need to keep both
+architectures in mind, i.e. adding members should be 64-bit aligned
+(which implicitly also handles 32-bit) as with the current assert
+any new addition would have to be both 32 & 64-bit aligned. I guess we
+can keep this as is.
 
-Should I send it as a fixup to be folded into this patch, or as a
-separate patch with a Fixes: tag?
-
-Will get one out soon :)
-
-> OK, I'd appreciate that :)
-
-Cheers!
-
+Thanks,
+Praan
 
