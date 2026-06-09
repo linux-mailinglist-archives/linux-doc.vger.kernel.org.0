@@ -1,248 +1,315 @@
-Return-Path: <linux-doc+bounces-91570-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91572-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id O5rhK3nxJ2oq6AIAu9opvQ
-	(envelope-from <linux-doc+bounces-91570-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 12:56:57 +0200
+	id 1VOaK/7zJ2r36AIAu9opvQ
+	(envelope-from <linux-doc+bounces-91572-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 13:07:42 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1172E65F2FA
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 12:56:57 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A17465F4C9
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Jun 2026 13:07:41 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=google.com header.s=20251104 header.b=cQ6vg1Gz;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91570-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-91570-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=reject) header.from=google.com;
+	dkim=pass header.d=debian.org header.s=smtpauto.stravinsky header.b=M+Wh8aO7;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91572-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91572-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=debian.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id CA752303CD15
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2026 10:56:14 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id EBD3C303BB38
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2026 10:57:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 915563F9F3D;
-	Tue,  9 Jun 2026 10:56:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DAA533FAE10;
+	Tue,  9 Jun 2026 10:57:21 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E6F32BEC3F
-	for <linux-doc@vger.kernel.org>; Tue,  9 Jun 2026 10:56:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F273A3F8881;
+	Tue,  9 Jun 2026 10:57:19 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781002574; cv=none; b=f67fQKahPzhKWADhMnlvSQbVhldZJRHiYmnOcOTZt3xt9o1irCuTlDv74yyCufYgJf+lHqvIa6rD0xDPCAF1SU/BSOgbJ2BeQQFuTC/R/PHGeWo2lxD5gpU1ZoEDY+z9O7ewSVCuNxICwJ3U0jUfUzddGCp5Z3M95e5gi3IZWV4=
+	t=1781002641; cv=none; b=MMON/1Aqr1XJMMmbN+1b+VdwDKOfJzL1jAlFZX20OAmlud+Hbw2MZ61jokx59n4msgFicQO0Ah66KHPSl5P8UwbSTheMtgXrGUoRq/pzLduDwn6uWcvbO7yqW+WLVDxAidfv5AEAzK6NCP+MDuRIHWTnIol22h4k2vjbC0pLVMY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781002574; c=relaxed/simple;
-	bh=pVQ8NOIWiqEzwBktd16L0HeYTmPDW7Os+iLDh6FPSSA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=JU1Uyp7YitN+CVDT1d7Zt+BEKObbHsSfbqemjfzrO31UmzzKES82LFrFEfU5hNNsU0V3jUSo3b89eGoSIyco/4coisPod3VOQJmtCFh543LeWdSj28jDRUOBVt52KAcFx6Cb7oAzlk62VWyj3mLicrwstl47aknGcSEHtjElIzQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=cQ6vg1Gz; arc=none smtp.client-ip=209.85.214.178
-Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-2bf2d865383so435025ad.1
-        for <linux-doc@vger.kernel.org>; Tue, 09 Jun 2026 03:56:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1781002571; x=1781607371; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=zdMxQIDs+l/KSPJFUNCwvqWbxtsN9baWYoGyb/P1vPg=;
-        b=cQ6vg1GzVVdc3mcOeEPOPzVSfX4jZ6CZM2ya9wYX7qPg7kxQ8qK7EdAXDCJ3n4R/GX
-         U7s7heGkFJJYDqOSpMP21+e6EAyucI7J3rDOTfjKdP84Z+cV+YV349HRsViR1FFMM3yf
-         ZIKEci//OejBFAv/bUoHxaTOtJ8BJK+xnNS5anXuKRIZ1e0zK2jDPwEI+UNQDmPYT32J
-         gNBZ5s69GRxpY3gsN9W1o5jPQa5U52cBnYkp0fYMsgohcexwn+NQGC6nQBLD+cBmiFYR
-         Ua+NIsITyAaYAf7RbNzTRnuubzadI6Savqv7SAhSBpNuIYuPXdZBHDv1KiG/vvVEvnzF
-         w59A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781002571; x=1781607371;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=zdMxQIDs+l/KSPJFUNCwvqWbxtsN9baWYoGyb/P1vPg=;
-        b=R5MW/MytLwE4vMJLh8HYXJ/x4nLvd6EZTW/4z5R1TbvCIHauGArB24oC2ymo45A5XJ
-         44BZTni8R4gQUjNkWi41pVz79A/joLLkAIaSesC9B0CI53eDBPKWLsg7j5PDL2y4NuoL
-         eiBR6SX/YuJuE//4Mf5QfPP8ddVjotANH7875c7eFQ0k/SFS7xoWwgcHBherIUMl0o6H
-         f4m1kj9GVOIqJizRlpKSbfeyMJxozGFJKYFplJqRj3UDmFYc+3GO3R5rkOEt68sTYKZf
-         G1jIJmMbr6LEl3FdkLjmUJfOhc2F9yxr28fsa9RdNy+74FS/8NqjOOexkHEO5UUMC462
-         gh/Q==
-X-Forwarded-Encrypted: i=1; AFNElJ/9bKMYTm45xPG6foOVtket/FqYB/a68yTFBNP9qEezLlVZcbmr4yiBYdK32fMK9dl4drUBiBa1RHU=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw5WfVYauDGko3+FwHwnxi7qCMJeMXZw7cbfdDl8LAHiQyCC9RF
-	VOSpQZhY/s0MQyZ3ZDtUyxOT0tNonmFpyQaILK6JZ3Tt4kvDSasrbOFDe34cTsaokQ==
-X-Gm-Gg: Acq92OEha1XqGCch/Gyz7WcvTQbWer14EgJOJKObn4a9irNQAQPWook8q9Ryu6nyzpF
-	TUPmD9yDs0+8QsX1aJlAGSUYQ/ETS3q1CUFqRyV+NRq6nIDiEhnKwcAHpPU9yzkACkgiRlgMV8w
-	/IRU2Xud/VLy1YuAwNrVBOCL1dmLiTFYwihdhM7z/r6GE4Mht60aSNT8DdN5ocQcrJFIxHHyd8s
-	6jhOFtPax0voVbQGgHNIMcLVxRZM4bwwyB5KQZvmz9N5nh6dtBvW+AzPpuLHQgymIugUJZ3JL/V
-	W02v1D827ZQ2VRiHy9OYc6TFNNLWtgjn4O7meM+HbxAt/oZgVW+hEUAefIP8NKGvQULY7+B0gU+
-	1cHdt/sz0Y6jRSeFhSpN1q3TupytEuA0Sf77+Ue2o9p/O0C/UBXoPO6yPuyPEr5LF1MHujE2I2n
-	k/1CMJzzM5+lyeCEQ92Ez334uDYieyYiLO8yckz+pck+NnzgRmyYbs+lfenNfuNztXkGbojBs=
-X-Received: by 2002:a17:902:f708:b0:2c1:ee6e:be23 with SMTP id d9443c01a7336-2c1ee6ec5ebmr6732565ad.33.1781002570788;
-        Tue, 09 Jun 2026 03:56:10 -0700 (PDT)
-Received: from google.com (199.255.142.34.bc.googleusercontent.com. [34.142.255.199])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-36f711e52b0sm19480623a91.15.2026.06.09.03.56.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 09 Jun 2026 03:56:10 -0700 (PDT)
-Date: Tue, 9 Jun 2026 10:56:01 +0000
-From: Pranjal Shrivastava <praan@google.com>
-To: David Matlack <dmatlack@google.com>
-Cc: kexec@lists.infradead.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-mm@kvack.org,
-	linux-pci@vger.kernel.org,
-	Adithya Jayachandran <ajayachandra@nvidia.com>,
-	Alexander Graf <graf@amazon.com>,
-	Alex Williamson <alex@shazbot.org>,
-	Bjorn Helgaas <bhelgaas@google.com>, Chris Li <chrisl@kernel.org>,
-	David Rientjes <rientjes@google.com>,
-	Jacob Pan <jacob.pan@linux.microsoft.com>,
-	Jason Gunthorpe <jgg@nvidia.com>, Jonathan Corbet <corbet@lwn.net>,
-	Josh Hilke <jrhilke@google.com>,
-	Leon Romanovsky <leonro@nvidia.com>, Lukas Wunner <lukas@wunner.de>,
-	Mike Rapoport <rppt@kernel.org>, Parav Pandit <parav@nvidia.com>,
-	Pasha Tatashin <pasha.tatashin@soleen.com>,
-	Pratyush Yadav <pratyush@kernel.org>,
-	Saeed Mahameed <saeedm@nvidia.com>,
-	Samiullah Khawaja <skhawaja@google.com>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Vipin Sharma <vipinsh@google.com>, William Tu <witu@nvidia.com>,
-	Yi Liu <yi.l.liu@intel.com>
-Subject: Re: [PATCH v6 07/12] PCI: Refactor matching logic for pci_dev_acs_ops
-Message-ID: <aifxQalxwM_hic6F@google.com>
-References: <20260522202410.3104264-1-dmatlack@google.com>
- <20260522202410.3104264-8-dmatlack@google.com>
- <aiW_M7y0fFwLN84G@google.com>
- <aic46OtIKfLhdoKy@google.com>
+	s=arc-20240116; t=1781002641; c=relaxed/simple;
+	bh=4q+m/q/9D0qk1AYIowkmaI4NFqQWTn3bCYXkUMG87eg=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=skY6QrQSvw4qn/E2DReK13IumJZ44vtzd1YmsnejOt0vusWwHefY2U6jP0UQcHcI2BRHBaZthRarpGQEiE4BMp2l7SypuBg04yVDBxLtOMyQXvWvm7u4hBX6ML6rSWpWvizPBOp+dYPA+oxIQ4dwy4/OLTfwgjTnL5vLXIDHsYU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org; spf=pass smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=M+Wh8aO7; arc=none smtp.client-ip=82.195.75.108
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
+	s=smtpauto.stravinsky; h=X-Debian-User:Cc:To:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:Message-Id:Date:Subject:From:Reply-To:Content-ID:
+	Content-Description:In-Reply-To:References;
+	bh=NUw1no3vQFX9EOgXz+vtElmwkxf14VIbO+M2GscH20c=; b=M+Wh8aO7KjNIpVrFdfYe2R+Q5+
+	8pqjwVB/Lbnlj1UbRqsrjN1o45LzWlzPhkQ+E8pg+YzOBWYqa87cxCw38kdhKJmWkpapKAwjcMmt4
+	osg2G+PTi9g4m0LC9epOd77n8V8QF5nGxF8wkRv5pWVrsfeckeIS1x1ggkwxLodMqJMlKMecrDfbt
+	2F5FNCAPDTuriAdt6uZ2rG1u09UlDOxe3Vp7Vd4UcquVdzADCPLD0za1FQ0yLCUtfJDkaGD3oZDLI
+	fm9n1w3EjdEz/hSLaznulIbgX+6pD614atkoaahOxuFiYDI6ptnN86NOEXsn1tE0OJqzLZCjQTO0N
+	VlARR/Vg==;
+Received: from authenticated-user
+	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
+	(Exim 4.96)
+	(envelope-from <leitao@debian.org>)
+	id 1wWu8q-008Lt8-2S;
+	Tue, 09 Jun 2026 10:57:09 +0000
+From: Breno Leitao <leitao@debian.org>
+Subject: [PATCH v9 0/6] mm/memory-failure: add panic option for
+ unrecoverable pages
+Date: Tue, 09 Jun 2026 03:56:54 -0700
+Message-Id: <20260609-ecc_panic-v9-0-432a74002e74@debian.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <aic46OtIKfLhdoKy@google.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIAHbxJ2oC/23QyWrDQAwG4Fcxc46KpFmTU9+jlDJrMj04wU5NS
+ /C7F7uHjHGPAn2/locY81DzKE7dQwx5qmO99uLUHQ+diBffnzPUJE6dYGSDkiXkGD9uvq8RVFZ
+ WBifR2SgOnbgNudTvNevt/a8ev8JnjvclYOm41PF+HX7WYRMtff/lTgQIlj0dmSybqF9TDtX3L
+ 9fhLJbgiRsqqaUMCMesMGExqli/o/JJFW2mSkCgFEPgQhyi2lHVUt1SBQickK0trhikHdUNZdV
+ SDQhe6qKCRsU67qh5Uk2bW82ysJNIHLxNKuyobenmVgsIIXPW1mVDaf8m11C2LXXrhz3G4smEg
+ Bs6z/MvOdJnXFICAAA=
+X-Change-ID: 20260323-ecc_panic-4e473b83087c
+To: Miaohe Lin <linmiaohe@huawei.com>, 
+ Andrew Morton <akpm@linux-foundation.org>, 
+ David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>, 
+ Vlastimil Babka <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>, 
+ Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>, 
+ Shuah Khan <shuah@kernel.org>, Naoya Horiguchi <nao.horiguchi@gmail.com>, 
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+ "Liam R. Howlett" <liam@infradead.org>, lance.yang@linux.dev, 
+ Steven Rostedt <rostedt@goodmis.org>, 
+ Masami Hiramatsu <mhiramat@kernel.org>, 
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
+ "Liam R. Howlett" <liam@infradead.org>
+Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org, 
+ linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
+ Breno Leitao <leitao@debian.org>, linux-trace-kernel@vger.kernel.org, 
+ kernel-team@meta.com
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=9278; i=leitao@debian.org;
+ h=from:subject:message-id; bh=4q+m/q/9D0qk1AYIowkmaI4NFqQWTn3bCYXkUMG87eg=;
+ b=owEBbQKS/ZANAwAIATWjk5/8eHdtAcsmYgBqJ/F+do7Ut+FBaddOPG1+2qVEDpcVf8ikfWZbA
+ 7qewc7PmmaJAjMEAAEIAB0WIQSshTmm6PRnAspKQ5s1o5Of/Hh3bQUCaifxfgAKCRA1o5Of/Hh3
+ ba/ZD/0YWvdiczpAWmvI6ykiRuMzvIr3wTG4PKKiC1VMAplKfaIlQwVeuLVjJssclzNO9cgITHe
+ 1D3Kgtla/irdCqhN7/1vywoUHyxD5Kmq+ViPyJpckeeQA2vck4NeXMakolv6hYLuHBew+yUsV4V
+ 0aqliEXX0aKG0CYTiJSNrOMhyaCBB2B0pZ4UtyjCrmKDbx7U5C3q65HIBfkdUGmxxSGHL+xrkpq
+ XZcshhtNTOOnQmMIjuP3jUM9bvz0a8nb2LwDC1lhg+/eHoSuDZIdEOUWtK9T6EVuqyl4s8X1zsr
+ H6dfb+nafbXc6vDu9u0BC4aky6EXIufdkoVcIOfmBu/X4wSivucoWrIA6nU/XwTREHO2DqywUct
+ qYlLVrPC4LqNyil8bJ7jXeV7AgGElF0adr+td/2lIKP5T9BsNZfS7Px3dyb5qXFe2cnCFlHr5mn
+ tQUvvWKcPmVw700SiPYKNB1JeHR42j3293/qof5+TPD0qIXumNMZwMzOx1p/i/zYg7kA5Sp5r7U
+ y1KW2vQGJKE7s0Bn+RHMJivnHyKv2jZci1P4mZuvLySNzlP2HcgaJWj5xSiY1xXlyUnT68LmoDa
+ ppk1wkudwX7t9s4SFbBPd2zcFmf1LL9iIpNfKBYWj/0c2LoAUPTTLJxHFjizxjzZe+KIZQOqxu/
+ uAECt8H4sHQyxhw==
+X-Developer-Key: i=leitao@debian.org; a=openpgp;
+ fpr=AC8539A6E8F46702CA4A439B35A3939FFC78776D
+X-Debian-User: leitao
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+	DMARC_POLICY_ALLOW(-0.50)[debian.org,none];
+	R_DKIM_ALLOW(-0.20)[debian.org:s=smtpauto.stravinsky];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-91570-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-91572-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:dmatlack@google.com,m:kexec@lists.infradead.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-pci@vger.kernel.org,m:ajayachandra@nvidia.com,m:graf@amazon.com,m:alex@shazbot.org,m:bhelgaas@google.com,m:chrisl@kernel.org,m:rientjes@google.com,m:jacob.pan@linux.microsoft.com,m:jgg@nvidia.com,m:corbet@lwn.net,m:jrhilke@google.com,m:leonro@nvidia.com,m:lukas@wunner.de,m:rppt@kernel.org,m:parav@nvidia.com,m:pasha.tatashin@soleen.com,m:pratyush@kernel.org,m:saeedm@nvidia.com,m:skhawaja@google.com,m:skhan@linuxfoundation.org,m:vipinsh@google.com,m:witu@nvidia.com,m:yi.l.liu@intel.com,s:lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[praan@google.com,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[28];
-	DKIM_TRACE(0.00)[google.com:+];
+	FREEMAIL_TO(0.00)[huawei.com,linux-foundation.org,kernel.org,google.com,suse.com,gmail.com,lwn.net,linuxfoundation.org,infradead.org,linux.dev,goodmis.org,efficios.com];
+	FORGED_SENDER(0.00)[leitao@debian.org,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	FORGED_RECIPIENTS(0.00)[m:linmiaohe@huawei.com,m:akpm@linux-foundation.org,m:david@kernel.org,m:ljs@kernel.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:shuah@kernel.org,m:nao.horiguchi@gmail.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:liam@infradead.org,m:lance.yang@linux.dev,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:leitao@debian.org,m:linux-trace-kernel@vger.kernel.org,m:kernel-team@meta.com,m:naohoriguchi@gmail.com,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[praan@google.com,linux-doc@vger.kernel.org];
-	MISSING_XM_UA(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[leitao@debian.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[debian.org:+];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 1172E65F2FA
+X-Rspamd-Queue-Id: 8A17465F4C9
 
-On Mon, Jun 08, 2026 at 09:49:28PM +0000, David Matlack wrote:
-> On 2026-06-07 07:01 PM, Pranjal Shrivastava wrote:
-> > On Fri, May 22, 2026 at 08:24:05PM +0000, David Matlack wrote:
-> > > Refactor the logic to match devices to pci_dev_acs_ops by factoring out
-> > > the loop and device matching into its own routine. This eliminates some
-> > > duplicate code between pci_dev_specific_enable_acs() and
-> > > pci_dev_specific_disable_acs_redir(), and will also be used in a
-> > > subsequent commit to check if a device requires device-specific
-> > > enable_acs() during a Live Update.
-> > > 
-> > > No functional change intended.
-> > > 
-> > > Signed-off-by: David Matlack <dmatlack@google.com>
-> > > ---
-> > >  drivers/pci/quirks.c | 50 ++++++++++++++++++--------------------------
-> > >  1 file changed, 20 insertions(+), 30 deletions(-)
-> > > 
-> > 
-> > [...]
-> > 
-> > >  } pci_dev_acs_ops[] = {
-> > >  	{ PCI_VENDOR_ID_INTEL, PCI_ANY_ID,
-> > > +	    .match = pci_quirk_intel_pch_acs_match,
-> > >  	    .enable_acs = pci_quirk_enable_intel_pch_acs,
-> > >  	},
-> > >  	{ PCI_VENDOR_ID_INTEL, PCI_ANY_ID,
-> > > +	    .match = pci_quirk_intel_spt_pch_acs_match,
-> > >  	    .enable_acs = pci_quirk_enable_intel_spt_pch_acs,
-> > >  	    .disable_acs_redir = pci_quirk_disable_intel_spt_pch_acs_redir,
-> > >  	},
-> > >  };
-> > >  
-> > > -int pci_dev_specific_enable_acs(struct pci_dev *dev)
-> > > +static const struct pci_dev_acs_ops *pci_dev_acs_ops_get(struct pci_dev *dev)
-> > >  {
-> > >  	const struct pci_dev_acs_ops *p;
-> > > -	int i, ret;
-> > > +	int i;
-> > >  
-> > >  	for (i = 0; i < ARRAY_SIZE(pci_dev_acs_ops); i++) {
-> > >  		p = &pci_dev_acs_ops[i];
-> > > @@ -5481,33 +5475,29 @@ int pci_dev_specific_enable_acs(struct pci_dev *dev)
-> > >  		     p->vendor == (u16)PCI_ANY_ID) &&
-> > >  		    (p->device == dev->device ||
-> > >  		     p->device == (u16)PCI_ANY_ID) &&
-> > > -		    p->enable_acs) {
-> > > -			ret = p->enable_acs(dev);
-> > > -			if (ret >= 0)
-> > > -				return ret;
-> > > -		}
-> > > +		    p->match(dev))
-> > > +			return p;
-> > 
-> > Nit:
-> > Should we check if (p->match != NULL) like we check for p->enable_acs &
-> > p->disable_acs_redir(). 
-> > 
-> > Otherwise, it seems like we're mandating the existence of a match op in
-> > the pci_dev_acs_ops here? Today, we just have two Intel entries in that
-> > array, both of which need the match op. However, AFAICT, it shouldn't be
-> > mandatory for future SoCs that might only need a simple vid + devid match
-> 
-> *shrug*
-> 
-> I would usually say those future SoCs should be the ones to make it
-> optional if and when they need to.
+A multi-bit ECC error on a kernel-owned page that the memory failure
+handler cannot recover is currently swallowed: PG_hwpoison is set, the
+event is logged, and the kernel keeps running.  The corrupted memory
+remains accessible to the kernel and either drives silent data
+corruption or surfaces seconds-to-minutes later as an apparently
+unrelated crash.  In a large fleet that delayed, unattributable crash
+turns into significant engineering effort to root-cause; in a kdump
+configuration, by the time the crash happens the original error
+context (faulting PFN, MCE/GHES record, page state) is long gone.
 
-Well.. that's fair I guess.
+This series adds an opt-in sysctl,
+vm.panic_on_unrecoverable_memory_failure, that converts an
+unrecoverable kernel-page hwpoison event into an immediate panic with
+a clean dmesg/vmcore that still contains the original failure
+context.  The default is disabled so existing workloads see no
+change.
 
-> 
-> But making p->matc optional now isn't so bad:
-> 
->         for (i = 0; i < ARRAY_SIZE(pci_dev_acs_ops); i++) {
->                 p = &pci_dev_acs_ops[i];
->                 if ((p->vendor == dev->vendor ||
->                      p->vendor == (u16)PCI_ANY_ID) &&
->                     (p->device == dev->device ||
-> -                    p->device == (u16)PCI_ANY_ID) &&
-> -                   p->enable_acs) {
-> -                       ret = p->enable_acs(dev);
-> -                       if (ret >= 0)
-> -                               return ret;
-> +                    p->device == (u16)PCI_ANY_ID)) {
-> +                       if (!p->match || p->match(dev))
-> +                               return p;
->                 }
->         }
-> 
-> I can include this in v7 if you would like.
+There is a selftest that test different cases, and I tested it using
+the following variants:
 
-I don't have a strong opinion here, this should be fine.
-It's just that we have NULL checks for p->enable_acs and 
-disable_acs_redir too. It'd be nice to keep the same pattern.
+  ┌─────────┬──────────┬───────────────────────────────────────────────────────────┐
+  │ Variant │   PFN    │                          Result                           │
+  ├─────────┼──────────┼───────────────────────────────────────────────────────────┤
+  │ rodata  │ 0x2600   │ Panic with "Memory failure: 0x2600: unrecoverable page"   │
+  ├─────────┼──────────┼───────────────────────────────────────────────────────────┤
+  │ slab    │ 0x100032 │ Panic with "Memory failure: 0x100032: unrecoverable page" │
+  ├─────────┼──────────┼───────────────────────────────────────────────────────────┤
+  │ pgtable │ 0x100000 │ Panic with "Memory failure: 0x100000: unrecoverable page" │
+  └─────────┴──────────┴───────────────────────────────────────────────────────────┘
 
-Thanks,
-Praan
+Each one shows the same call trace, exactly the path the series builds:
+
+  hard_offline_page_store
+    → memory_failure
+      → action_result
+        → panic("Memory failure: %#lx: unrecoverable page")
+
+Signed-off-by: Breno Leitao <leitao@debian.org>
+---
+Changes in v9:
+- HWPoisonKernelOwned(): wrap the head-page checks in a
+  compound_head() recheck loop so a concurrent split or compound free
+  cannot leave us trusting a stale view (Miaohe, Lance, David).
+- selftest: drop the gawk-only strtonum() in hwpoison-panic.sh; do the
+  hex parsing with a small index()-based helper so the test no longer
+  spuriously skips itself on mawk-based distros (Sashiko).
+- selftest: move hwpoison-panic.sh from TEST_FILES to
+  TEST_PROGS_EXTENDED so the script is installed executable rather
+  than as a non-executable data file (Sashiko).
+- Link to v8: https://patch.msgid.link/20260527-ecc_panic-v8-0-9ea0cfa16bb0@debian.org
+
+Changes in v8:
+- Commit message rewording (David)
+- Add HWPoisonKernelOwned() helper (Lance)
+- Removed patch "mm/memory-failure: short-circuit PG_reserved before get_hwpoison_page()"
+- Broaden the selftest (Lance)
+- Link to v7: https://patch.msgid.link/20260513-ecc_panic-v7-0-be2e578e61da@debian.org
+
+Changes in v7:
+- Move the PG_reserved / unhandlable-kernel-page classification into
+  get_any_page() and surface it via -ENOTRECOVERABLE, per David
+  Hildenbrand's and Lance Yang's review of v6.  This drops the
+  is_reserved snapshot in memory_failure() and the mf_get_page_status
+  enum / out-parameter introduced in v6.
+- Restructure the post-call branch in memory_failure() as a switch
+  over the get_hwpoison_page() return code (David).
+- Drop the "reserved" qualifier from the MF_MSG_KERNEL label and the
+  matching tracepoint string; the enum now covers both PG_reserved
+  pages and other unhandlable kernel pages.
+- Squash the former patches 1/4 ("MF_MSG_KERNEL for reserved pages")
+  and 2/4 ("classify get_any_page() failures by reason") into a
+  single classification patch; the series is now 3 patches.
+- Simplify panic_on_unrecoverable_mf() to a single return statement
+  (David).
+- Link to v6: https://patch.msgid.link/20260511-ecc_panic-v6-0-183012ba7d4b@debian.org
+
+Changes in v6:
+- Dropped the selftest given the value was not clear
+- Get the status of the failure from get_any_page()
+- Small nits from different people/AIs.
+- Link to v5: https://patch.msgid.link/20260424-ecc_panic-v5-0-a35f4b50425c@debian.org
+
+Changes in v5:
+- Add vm.panic_on_unrecoverable_memory_failure sysctl to panic on
+  unrecoverable kernel page hwpoison events (reserved pages, refcount-0
+  non-buddy pages, unknown state), with a recheck to avoid racing with
+  concurrent buddy allocations. (Miaohe)
+- Distinguish reserved pages as MF_MSG_KERNEL in memory_failure(),
+  document the new sysctl in Documentation/admin-guide/sysctl/vm.rst,
+  and add a selftest verifying SIGBUS recovery on userspace pages still
+  works when the sysctl is enabled. (Miaohe)
+- Added a selftest
+- Link to v4:
+  https://patch.msgid.link/20260415-ecc_panic-v4-0-2d0277f8f601@debian.org
+
+Changes in v4:
+- Drop CONFIG_BOOTPARAM_MEMORY_FAILURE_PANIC kernel configuration option.
+- Split the reserved page classification (MF_MSG_KERNEL) into its own
+  patch, separate from the panic mechanism.
+- Document why the buddy allocator TOCTOU race (between
+  get_hwpoison_page() and is_free_buddy_page()) cannot cause false
+  positives: PG_hwpoison is set beforehand and check_new_page() in the
+  page allocator rejects hwpoisoned pages.
+- Document the narrow LRU isolation race window for MF_MSG_UNKNOWN and
+  its mitigation via identify_page_state()'s two-pass design.
+- Explicitly document why MF_MSG_GET_HWPOISON is excluded from the
+  panic conditions (shared path with transient races and non-reserved
+  kernel memory).
+- Link to v3: https://patch.msgid.link/20260413-ecc_panic-v3-0-1dcbb2f12bc4@debian.org
+
+Changes in v3:
+- Rename is_unrecoverable_memory_failure() to panic_on_unrecoverable_mf()
+  as suggested by maintainer.
+- Add CONFIG_BOOTPARAM_MEMORY_FAILURE_PANIC kernel configuration option,
+  similar to CONFIG_BOOTPARAM_HARDLOCKUP_PANIC.
+- Add documentation for the sysctl and CONFIG option.
+- Add code comments documenting the panic condition design rationale and
+  how the retry mechanism mitigates false positives from buddy allocator
+  races.
+- Link to v2: https://patch.msgid.link/20260331-ecc_panic-v2-0-9e40d0f64f7a@debian.org
+
+Changes in v2:
+- Panic on MF_MSG_KERNEL, MF_MSG_KERNEL_HIGH_ORDER and MF_MSG_UNKNOWN
+  instead of MF_MSG_GET_HWPOISON.
+- Report MF_MSG_KERNEL for reserved pages when get_hwpoison_page() fails
+  instead of MF_MSG_GET_HWPOISON.
+- Link to v1: https://patch.msgid.link/20260323-ecc_panic-v1-0-72a1921726c5@debian.org
+
+To: Miaohe Lin <linmiaohe@huawei.com>
+To: Naoya Horiguchi <nao.horiguchi@gmail.com>
+To: Andrew Morton <akpm@linux-foundation.org>
+To: Steven Rostedt <rostedt@goodmis.org>
+To: Masami Hiramatsu <mhiramat@kernel.org>
+To: Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
+To: Jonathan Corbet <corbet@lwn.net>
+To: Shuah Khan <skhan@linuxfoundation.org>
+To: David Hildenbrand <david@kernel.org>
+To: Lorenzo Stoakes <ljs@kernel.org>
+To: "Liam R. Howlett" <liam@infradead.org>
+To: Vlastimil Babka <vbabka@kernel.org>
+To: Mike Rapoport <rppt@kernel.org>
+To: Suren Baghdasaryan <surenb@google.com>
+To: Michal Hocko <mhocko@suse.com>
+To: Shuah Khan <shuah@kernel.org>
+Cc: linux-mm@kvack.org
+Cc: linux-kernel@vger.kernel.org
+Cc: linux-trace-kernel@vger.kernel.org
+Cc: linux-doc@vger.kernel.org
+Cc: linux-kselftest@vger.kernel.org
+
+---
+Breno Leitao (6):
+      mm/memory-failure: drop dead error_states[] entry for reserved pages
+      mm/memory-failure: surface unhandlable kernel pages as -ENOTRECOVERABLE
+      mm/memory-failure: report MF_MSG_KERNEL for unrecoverable kernel pages
+      mm/memory-failure: add panic option for unrecoverable pages
+      Documentation: document panic_on_unrecoverable_memory_failure sysctl
+      selftests/mm: add hwpoison-panic destructive test
+
+ Documentation/admin-guide/sysctl/vm.rst      |  85 +++++++++++
+ mm/memory-failure.c                          | 114 ++++++++++++---
+ tools/testing/selftests/mm/Makefile          |   4 +
+ tools/testing/selftests/mm/hwpoison-panic.sh | 208 +++++++++++++++++++++++++++
+ 4 files changed, 393 insertions(+), 18 deletions(-)
+---
+base-commit: e7e28506af98ce4e1059e5ec59334b335c00a246
+change-id: 20260323-ecc_panic-4e473b83087c
+
+Best regards,
+-- 
+Breno Leitao <leitao@debian.org>
+
 
