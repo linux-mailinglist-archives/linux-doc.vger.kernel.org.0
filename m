@@ -1,168 +1,146 @@
-Return-Path: <linux-doc+bounces-91802-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91806-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id j/JlKnILKWoyPQMAu9opvQ
-	(envelope-from <linux-doc+bounces-91802-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 09:00:02 +0200
+	id QZD9JKwSKWrTPwMAu9opvQ
+	(envelope-from <linux-doc+bounces-91806-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 09:30:52 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0EDFB6666DE
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 09:00:02 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2EFE0666A6B
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 09:30:52 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=huawei.com header.s=dkim header.b=PCJCwmPh;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91802-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-91802-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=huawei.com;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=fgvSiRD0;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91806-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91806-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 5246530621D8
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 06:59:39 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E8696302297F
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 07:28:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 87DA0382F0F;
-	Wed, 10 Jun 2026 06:59:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D523038E12B;
+	Wed, 10 Jun 2026 07:28:42 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from canpmsgout09.his.huawei.com (canpmsgout09.his.huawei.com [113.46.200.224])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 266A6379990;
-	Wed, 10 Jun 2026 06:59:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D7AD9233921;
+	Wed, 10 Jun 2026 07:28:41 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781074778; cv=none; b=LkzF7BAoDH08R/y9FwbnFwJgBCrsonCInRyYaRzLRWVzQPVxLKBBSppkb+E7sZ/YsqCMTuwmaYXy7qQonexeaI7j+BFNrUWl64pboQJnB2zu9PJgDvZ/3x2X3ZWLoYnB+MVu3XNs2JIZTlhx+ER7Asv2ws7maALzgpjbfC9vEAA=
+	t=1781076522; cv=none; b=M3TGiIwef/3Ifr4Bt7VrMucSnDkBnG8ckcnNSj5OSvgP0+Apxu5ah329zKfhBMBM52v1eWyhVPLYrKzqS+iGHMvOxyoY4hjvRVz28Xi26qw1zbeufHBZlzqLoi4C+dZh05BLZfDjzSwzLz7qRzukWsSPS3nFmaqYBAoHybHj9YE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781074778; c=relaxed/simple;
-	bh=nCW3PTk02EJryD+Z5xmHX/T0/by2aL/MowN8+TO5ukc=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=odIV5Ly6Wyyct3a/jdk9wvo7VHWOBEmMQnlbh5xyyfS2hKrsaynp+iV1a30x3HKXfunmqD1WLDG8xh6X/y/VPSSPao74P8WQgeIk8iejuQ3XKWMb4t+AtGu/raPo/Aum0ZZ49CC2xQFzNo3l7n+w2bxs9Y1U7bywU8Ky+HFz7Jk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=PCJCwmPh; arc=none smtp.client-ip=113.46.200.224
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=bKXK5d64EjLE5JGdNU14oQFWm8sReOeR2IEcr/vSq/E=;
-	b=PCJCwmPhOVT3o4YsBwCtp4EyblDYlzQpfLhWO/TKcFx7To9NeahSsOqk7n7EcXGIAgEjoky5s
-	NsL2r/rjPC2M0Y0wVxJpCwWxOG+MDUmZzs1Q/tqVwsFKSISJj+NfcZtexyrjAzKtKuHsFrdNQPw
-	XdexgT+oXIRld5Kwr60eLbQ=
-Received: from mail.maildlp.com (unknown [172.19.163.15])
-	by canpmsgout09.his.huawei.com (SkyGuard) with ESMTPS id 4gZxJs2p23z1cyTb;
-	Wed, 10 Jun 2026 14:51:41 +0800 (CST)
-Received: from kwepemf100013.china.huawei.com (unknown [7.202.181.12])
-	by mail.maildlp.com (Postfix) with ESMTPS id 510F440571;
-	Wed, 10 Jun 2026 14:59:34 +0800 (CST)
-Received: from DESKTOP-62GVMTR.china.huawei.com (10.174.189.124) by
- kwepemf100013.china.huawei.com (7.202.181.12) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.36; Wed, 10 Jun 2026 14:59:33 +0800
-From: Fan Gong <gongfan1@huawei.com>
-To: Fan Gong <gongfan1@huawei.com>, Wu Di <wudi234@huawei.com>, Teng Peisen
-	<tengpeisen@huawei.com>, <netdev@vger.kernel.org>, "David S. Miller"
-	<davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski
-	<kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Simon Horman
-	<horms@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>, Ioana Ciornei
-	<ioana.ciornei@nxp.com>, Mohsin Bashir <mohsin.bashr@gmail.com>
-CC: <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>, luosifu
-	<luosifu@huawei.com>, Xin Guo <guoxin09@huawei.com>, Zhou Shuai
-	<zhoushuai28@huawei.com>, Wu Like <wulike1@huawei.com>, Shi Jing
-	<shijing34@huawei.com>, Zheng Jiezhen <zhengjiezhen@h-partners.com>, Maxime
- Chevallier <maxime.chevallier@bootlin.com>
-Subject: [PATCH net-next v09 5/5] hinic3: Remove unneeded coalesce parameters
-Date: Wed, 10 Jun 2026 14:59:15 +0800
-Message-ID: <1d43c31f737f6c1ad56f9a3e7e5ad739ac3ce8c7.1781062575.git.wudi234@huawei.com>
-X-Mailer: git-send-email 2.50.1.windows.1
-In-Reply-To: <cover.1781062575.git.wudi234@huawei.com>
-References: <cover.1781062575.git.wudi234@huawei.com>
+	s=arc-20240116; t=1781076522; c=relaxed/simple;
+	bh=XVzT4dC9J9FFpWrYJ1jidUjuN9wz2V7gqq0wjB+r38s=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=LUOSeJBZUSZxnvYfJVR0HYtlj7W4K9l17CB18hf3XuzPRkCegJjsLWSb8QiKvmawcaUNXrlO65syW+kzLYOMyQ1Js6229GRgaQJaMRNdp1e3tCTuY7+WWavbHY5cM7Wz9C72PysN3deF80x9KQHCQtEfSreJY6zceU23sFr46ZI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fgvSiRD0; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9D40D1F00893;
+	Wed, 10 Jun 2026 07:28:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1781076521;
+	bh=Ujw8//AhBz2ofNEZXVOO0whE9ziRkQU7WuP9Q2n1nw4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=fgvSiRD0nlrWeKZ00ARxxj8+SIeSOssxKo/IteKl5SNNXShxIV9RzZYZjW2fJDF4Y
+	 BRLJiLnad8I+/cgypVTOTIn/c5oxyEme4EK0poeNVEmG9QKE7i/U92Q7yjVt2JPZoo
+	 KKab8o9SdIM2XvpGoVICIQ4XwdgAVtaPGhU54ayQfCnfLlEaW3lPQVBllb9BkmzECO
+	 nE7j1CjEqBtnt3cNbOS7Erz0xZkaANJGk+ly24VtiJa0PCDT3qoW/N+IRr4nTvwqZd
+	 Z5PKSNrIQl7+mm2qzkxCg4AIGhgZkp5e7n9mKFUe2JXKDXK2WgGk0nXZXZ5u3/BshM
+	 PjG2C1OvGIzpg==
+Date: Wed, 10 Jun 2026 09:28:32 +0200
+From: Christian Brauner <brauner@kernel.org>
+To: Andy Lutomirski <luto@kernel.org>
+Cc: Li Chen <me@linux.beauty>, Kees Cook <kees@kernel.org>, 
+	Alexander Viro <viro@zeniv.linux.org.uk>, linux-fsdevel@vger.kernel.org, linux-api@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-mm@kvack.org, linux-arch@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, x86@kernel.org, 
+	Arnd Bergmann <arnd@arndb.de>, Thomas Gleixner <tglx@kernel.org>, 
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
+	Dave Hansen <dave.hansen@linux.intel.com>, "H. Peter Anvin" <hpa@zytor.com>, Jan Kara <jack@suse.cz>, 
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>
+Subject: Re: [RFC PATCH v1 00/13] exec: add spawn templates for repeated
+ executable startup
+Message-ID: <20260610-saufen-zerfallen-uncool-5608105e0d8e@brauner>
+References: <20260528095235.2491226-1-me@linux.beauty>
+ <20260528-madig-fachrichtung-fehlinformation-61117ba640da@brauner>
+ <CALCETrWJQpLR4n1cpichBk8=uExSKLWTMGU3BufGdk_WE_p5UA@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: kwepems200002.china.huawei.com (7.221.188.68) To
- kwepemf100013.china.huawei.com (7.202.181.12)
+In-Reply-To: <CALCETrWJQpLR4n1cpichBk8=uExSKLWTMGU3BufGdk_WE_p5UA@mail.gmail.com>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-7.16 / 15.00];
-	WHITELIST_DMARC(-7.00)[huawei.com:D:+];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	MID_END_EQ_FROM_USER_PART(4.00)[];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[21];
-	TAGGED_FROM(0.00)[bounces-91802-lists,linux-doc=lfdr.de];
-	FREEMAIL_TO(0.00)[huawei.com,vger.kernel.org,davemloft.net,google.com,kernel.org,redhat.com,lunn.ch,nxp.com,gmail.com];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:gongfan1@huawei.com,m:wudi234@huawei.com,m:tengpeisen@huawei.com,m:netdev@vger.kernel.org,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:horms@kernel.org,m:andrew+netdev@lunn.ch,m:ioana.ciornei@nxp.com,m:mohsin.bashr@gmail.com,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:luosifu@huawei.com,m:guoxin09@huawei.com,m:zhoushuai28@huawei.com,m:wulike1@huawei.com,m:shijing34@huawei.com,m:zhengjiezhen@h-partners.com,m:maxime.chevallier@bootlin.com,m:andrew@lunn.ch,m:mohsinbashr@gmail.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[gongfan1@huawei.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[gongfan1@huawei.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[huawei.com:+];
-	RCVD_COUNT_FIVE(0.00)[6];
-	MID_RHS_MATCH_FROM(0.00)[];
+	FORGED_SENDER(0.00)[brauner@kernel.org,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[21];
+	FORGED_RECIPIENTS(0.00)[m:luto@kernel.org,m:me@linux.beauty,m:kees@kernel.org,m:viro@zeniv.linux.org.uk,m:linux-fsdevel@vger.kernel.org,m:linux-api@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-arch@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:x86@kernel.org,m:arnd@arndb.de,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:hpa@zytor.com,m:jack@suse.cz,m:corbet@lwn.net,m:skhan@linuxfoundation.org,s:lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-91806-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[brauner@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[brauner:mid,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 0EDFB6666DE
+X-Rspamd-Queue-Id: 2EFE0666A6B
 
-  Remove unneeded coalesce parameters in irq handling.
+On Mon, Jun 08, 2026 at 05:01:57PM -0700, Andy Lutomirski wrote:
+> On Thu, May 28, 2026 at 4:05 AM Christian Brauner <brauner@kernel.org> wrote:
+> >
+> > On Thu, May 28, 2026 at 05:52:21PM +0800, Li Chen wrote:
+> > > Hi,
+> > >
+> > > This is an early RFC for an idea that is probably still rough in both the
+> > > UAPI and implementation details. Sorry for the rough edges; I am sending
+> > > it now to check whether this direction is worth pursuing and to get
+> > > feedback on the kernel/userspace boundary.
+> >
+> > The idea of having a builder api for exec isn't all that crazy. But it
+> > should simply be built on top of pidfds and thus pidfs itself instead.
+> > It has all the basic infrastructure in place already. Any implementation
+> > should also allow userspace to implement posix_spawn() on top of it.
+> >
+> > fd = pidfd_open(0, PIDFD_EMPTY /* or better name */)
+> >
+> > pidfd_config(fd, ...) // modeled similar to fsconfig()
+> >
+> 
+> After contemplating this for a bit... why pidfd?  Doesn't a pidfd
+> refer to an actual process that is, or at least was, running?  This
+> new thing is a process that we are contemplating spawning.  I can
+> imagine that basically all pidfd APIs would be a bit confused by the
+> nonexistence of the process in question.
 
-Co-developed-by: Wu Di <wudi234@huawei.com>
-Signed-off-by: Wu Di <wudi234@huawei.com>
-Co-developed-by: Teng Peisen <tengpeisen@huawei.com>
-Signed-off-by: Teng Peisen <tengpeisen@huawei.com>
-Signed-off-by: Fan Gong <gongfan1@huawei.com>
----
- drivers/net/ethernet/huawei/hinic3/hinic3_irq.c | 6 +-----
- drivers/net/ethernet/huawei/hinic3/hinic3_rx.h  | 3 ---
- 2 files changed, 1 insertion(+), 8 deletions(-)
-
-diff --git a/drivers/net/ethernet/huawei/hinic3/hinic3_irq.c b/drivers/net/ethernet/huawei/hinic3/hinic3_irq.c
-index b7cd5f2f53a7..6a8695e0a69a 100644
---- a/drivers/net/ethernet/huawei/hinic3/hinic3_irq.c
-+++ b/drivers/net/ethernet/huawei/hinic3/hinic3_irq.c
-@@ -149,13 +149,9 @@ static int hinic3_set_interrupt_moder(struct net_device *netdev, u16 q_id,
- 		nic_dev->intr_coalesce[q_id].resend_timer_cfg;
- 
- 	err = hinic3_set_interrupt_cfg(nic_dev->hwdev, info);
--	if (err) {
-+	if (err)
- 		netdev_err(netdev,
- 			   "Failed to modify moderation for Queue: %u\n", q_id);
--	} else {
--		nic_dev->rxqs[q_id].last_coalesc_timer_cfg = coalesc_timer_cfg;
--		nic_dev->rxqs[q_id].last_pending_limit = pending_limit;
--	}
- 
- 	mutex_unlock(&nic_dev->change_res_mutex);
- 
-diff --git a/drivers/net/ethernet/huawei/hinic3/hinic3_rx.h b/drivers/net/ethernet/huawei/hinic3/hinic3_rx.h
-index c11d080408a7..2ab691ed11a9 100644
---- a/drivers/net/ethernet/huawei/hinic3/hinic3_rx.h
-+++ b/drivers/net/ethernet/huawei/hinic3/hinic3_rx.h
-@@ -111,9 +111,6 @@ struct hinic3_rxq {
- 	dma_addr_t             cqe_start_paddr;
- 
- 	struct dim             dim;
--
--	u8                     last_coalesc_timer_cfg;
--	u8                     last_pending_limit;
- } ____cacheline_aligned;
- 
- struct hinic3_dyna_rxq_res {
--- 
-2.43.0
-
+I don't think that would be a problem because every api just needs to
+handle ESRCH. Ignoring that for a second: the mount api has a builder fd
+that is later transformed into a pidfd. Which is easily doable here as
+well. My point is that all the infrastructure building blocks already
+exist in pidfs.
 
