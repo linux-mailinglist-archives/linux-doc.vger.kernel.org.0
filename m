@@ -1,143 +1,272 @@
-Return-Path: <linux-doc+bounces-91840-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91841-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 4rDVHmVNKWqUUQMAu9opvQ
-	(envelope-from <linux-doc+bounces-91840-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 13:41:25 +0200
+	id bQVsMVNPKWqEUgMAu9opvQ
+	(envelope-from <linux-doc+bounces-91841-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 13:49:39 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7636C668E23
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 13:41:24 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 290B9668F56
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 13:49:39 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=arm.com header.s=foss header.b=VXTfeNQq;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91840-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-91840-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=arm.com;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=collabora.com header.s=zohomail header.b="jyo/yFGO";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91841-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91841-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=collabora.com;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 494143004CA3
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 11:38:34 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 9610830E6732
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 11:44:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 922153E450A;
-	Wed, 10 Jun 2026 11:38:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E51023E275C;
+	Wed, 10 Jun 2026 11:44:01 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4BAB23A782B;
-	Wed, 10 Jun 2026 11:38:31 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781091512; cv=none; b=QiHFcxXzJzt1pjZtm9oq/+Az2ejVUQl6HQD0rGBYtQNsMPWVvO36lwYUvzKRKQr1mM1IKytgSyOSmQhKt0wSS+Ulu+SewkFs5JmD4dM17Mq6zTP/p885gBXicDrum5OSTe/xBNMzBTwCqmx4iy398ZnnnIDCTJzZ/akW8RYbBbc=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781091512; c=relaxed/simple;
-	bh=IX6LtUMmsf2vlnGeHD/63983rh0Y9HBJ2QJ31uk5kmU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=eu61PtznKTrS1Xz0D6I4J10R2KQaXKoK9okHT1puRZ9Ij5TuhMYPDZEy7txz7tdOwpWxT8FrL53MfxG8R1nBcSuxcOnnXG6Rvk/pWp4C4HdrM1KeQzi97l9KWOJKal2/ZJyk6Vjxz0RgJ9pVvQFjpIXdy9AHjcwUHXBJAJDnFus=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=VXTfeNQq; arc=none smtp.client-ip=217.140.110.172
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7480125E3;
-	Wed, 10 Jun 2026 04:38:25 -0700 (PDT)
-Received: from arm.com (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2F0923FD88;
-	Wed, 10 Jun 2026 04:38:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1781091510; bh=IX6LtUMmsf2vlnGeHD/63983rh0Y9HBJ2QJ31uk5kmU=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=VXTfeNQqSRNFjUTSHZpgYIIQlFGsLLyXII67TjUaJHzh4VW0XA+pPOcbymtdDCuac
-	 1emh1qFB4U3M7OLirkhEwwYRU44hhKygV7pU4bGjbJ741RO//JZBdAV7ktUlxQU8rL
-	 4jjw9yOmmm9i/AHV5QjmSCCz8pUbsZJIN28z2B/M=
-Date: Wed, 10 Jun 2026 12:38:20 +0100
-From: Catalin Marinas <catalin.marinas@arm.com>
-To: Jinjie Ruan <ruanjinjie@huawei.com>
-Cc: will@kernel.org, corbet@lwn.net, skhan@linuxfoundation.org,
-	punit.agrawal@oss.qualcomm.com, mrigendra.chaubey@gmail.com,
-	suzuki.poulose@arm.com, chenl311@chinatelecom.cn,
-	fengchengwen@huawei.com, maz@kernel.org, timothy.hayes@arm.com,
-	lpieralisi@kernel.org, arnd@arndb.de, gshan@redhat.com,
-	jic23@kernel.org, dietmar.eggemann@arm.com, sudeep.holla@kernel.org,
-	pierre.gondois@arm.com, linux-arm-kernel@lists.infradead.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4 1/2] arm64: smp: Fix hot-unplug tearing by forcing
- unregistration
-Message-ID: <ailMrGQv1LQ0xmXe@arm.com>
-References: <20260610075202.3597031-1-ruanjinjie@huawei.com>
- <20260610075202.3597031-2-ruanjinjie@huawei.com>
+Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F4B6400DE8;
+	Wed, 10 Jun 2026 11:43:56 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1781091841; cv=pass; b=D+qPpnlQ3Wv2OKKlssmaxS+a5cyQI4Ha2YIM404PAHPQzLdqN+T3hGS4smfjMmtfCOqbG2lnroAkYxnPJLX4tERJh9HNUuqM+V97ojJ1IJ19XJHBS5BTc2dlxHzMRXJU+1BCtGRsVpxEwoeNaRXW4Gof7iOSZypfPEwt+dpqLjo=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1781091841; c=relaxed/simple;
+	bh=HCopYV98thzp9y3DmBOctLD2hx9W/WGWv0HyuiXXMNU=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=OfRPxXn/z5nf7o4b88do5DW+vDIcEUM8QZ3QBqkxzLhuAr5UgoFJjiMtuZ28q2Gju7vNrKblgME7yn4Yu8OzPB8+l9AmxlyzeruBNPJ5++Zf/JdCWGg2VKQ1whoTep1AXXoxh3w6BlvDjCOQq5kM1s6cN0oL0jEMz2Wb6o6+4Uo=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b=jyo/yFGO; arc=pass smtp.client-ip=136.143.188.112
+ARC-Seal: i=1; a=rsa-sha256; t=1781091768; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=gzlZb4bSFV52eLdMUMh9PyeGOrd9EAvWXGBw2jHcFBez9EqYAjtGB/rBytbYZIUK6a12QL1SlCxeqoIPXF+WzqlsBu4n/yAbJwi+RR3V7M43DIuKsOYChbJdSZvXFNf59VpSiTkU1K1NG9Qnao5wVDw+LS7peRgWb4eELJ9H3pw=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1781091768; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=KzcKfN/o2MeODUvVqRl2cwiGf5DJAZJN2X6vhvr6p0k=; 
+	b=dJ1XCpFp3xrtGi+Xng/mVdtES2/WZzNzmFiiNSAVW0WLpjerZ5mPw4hJmgDxaiCDx2oY1WcDhdhgiDSBwTe+WCe6yc8iMLFSTotK51j39yI5I+WTHP8RqpoOw9PtS+AKiFxdXij/Cb/hasI2G+Nm6IpwGas9uD6xF7iz9dG0lZI=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=collabora.com;
+	spf=pass  smtp.mailfrom=nicolas.frattaroli@collabora.com;
+	dmarc=pass header.from=<nicolas.frattaroli@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1781091768;
+	s=zohomail; d=collabora.com; i=nicolas.frattaroli@collabora.com;
+	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Content-Type:Message-Id:Reply-To;
+	bh=KzcKfN/o2MeODUvVqRl2cwiGf5DJAZJN2X6vhvr6p0k=;
+	b=jyo/yFGOjDLNt4JhkO14FnSIQsSy+FTdAqSukJAOK58KWAD816pk2Arn9Z7jNWXm
+	WdMv4NJl+kvtBgFV37FFKH7qdVcXN7tUe3ggtGdVIHrpwK/bUoTr4UnAzKE2nvbl0G4
+	jX7HgyRw1kEauHhxa6WUd4d+hzfrSqQKD9xSKqgk=
+Received: by mx.zohomail.com with SMTPS id 1781091766388431.86406877104446;
+	Wed, 10 Jun 2026 04:42:46 -0700 (PDT)
+From: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
+To: Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>,
+ Rodrigo Siqueira <siqueira@igalia.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Andrzej Hajda <andrzej.hajda@intel.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>,
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Sandy Huang <hjc@rock-chips.com>,
+ Heiko =?UTF-8?B?U3TDvGJuZXI=?= <heiko@sntech.de>,
+ Andy Yan <andy.yan@rock-chips.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Tvrtko Ursulin <tursulin@ursulin.net>, Dmitry Baryshkov <lumag@kernel.org>,
+ Sascha Hauer <s.hauer@pengutronix.de>, Rob Herring <robh@kernel.org>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+ Daniel Stone <daniel@fooishbar.org>,
+ Jani Nikula <jani.nikula@linux.intel.com>
+Cc: kernel@collabora.com, amd-gfx@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org,
+ intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
+ linux-doc@vger.kernel.org, wayland-devel@lists.freedesktop.org
+Subject:
+ Re: [PATCH v17 21/28] drm/tests: bridge: Add KUnit tests for bridge chain
+ format selection
+Date: Wed, 10 Jun 2026 13:42:35 +0200
+Message-ID: <gnicb4WkT1S4aQIC2G_naw@collabora.com>
+In-Reply-To: <04ff70850213ae0f75486b1a27a7edb6fb4e71c3@intel.com>
+References:
+ <20260609-color-format-v17-0-35739b5782cc@collabora.com>
+ <20260609-color-format-v17-21-35739b5782cc@collabora.com>
+ <04ff70850213ae0f75486b1a27a7edb6fb4e71c3@intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260610075202.3597031-2-ruanjinjie@huawei.com>
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
-	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[collabora.com,none];
+	R_DKIM_ALLOW(-0.20)[collabora.com:s=zohomail];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[kernel.org,lwn.net,linuxfoundation.org,oss.qualcomm.com,gmail.com,arm.com,chinatelecom.cn,huawei.com,arndb.de,redhat.com,lists.infradead.org,vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-91840-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:harry.wentland@amd.com,m:sunpeng.li@amd.com,m:siqueira@igalia.com,m:alexander.deucher@amd.com,m:christian.koenig@amd.com,m:airlied@gmail.com,m:simona@ffwll.ch,m:maarten.lankhorst@linux.intel.com,m:mripard@kernel.org,m:tzimmermann@suse.de,m:andrzej.hajda@intel.com,m:neil.armstrong@linaro.org,m:rfoss@kernel.org,m:Laurent.pinchart@ideasonboard.com,m:jonas@kwiboo.se,m:jernej.skrabec@gmail.com,m:hjc@rock-chips.com,m:heiko@sntech.de,m:andy.yan@rock-chips.com,m:rodrigo.vivi@intel.com,m:joonas.lahtinen@linux.intel.com,m:tursulin@ursulin.net,m:lumag@kernel.org,m:s.hauer@pengutronix.de,m:robh@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:daniel@fooishbar.org,m:jani.nikula@linux.intel.com,m:kernel@collabora.com,m:amd-gfx@lists.freedesktop.org,m:dri-devel@lists.freedesktop.org,m:linux-kernel@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-rockchip@lists.infradead.org,m:intel-gfx@lists.freedesktop.org,m:intel-xe@lists.freedesktop.org,m:linux-d
+ oc@vger.kernel.org,m:wayland-devel@lists.freedesktop.org,m:jernejskrabec@gmail.com,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-91841-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:ruanjinjie@huawei.com,m:will@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:punit.agrawal@oss.qualcomm.com,m:mrigendra.chaubey@gmail.com,m:suzuki.poulose@arm.com,m:chenl311@chinatelecom.cn,m:fengchengwen@huawei.com,m:maz@kernel.org,m:timothy.hayes@arm.com,m:lpieralisi@kernel.org,m:arnd@arndb.de,m:gshan@redhat.com,m:jic23@kernel.org,m:dietmar.eggemann@arm.com,m:sudeep.holla@kernel.org,m:pierre.gondois@arm.com,m:linux-arm-kernel@lists.infradead.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:mrigendrachaubey@gmail.com,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[21];
-	FORGED_SENDER(0.00)[catalin.marinas@arm.com,linux-doc@vger.kernel.org];
+	FREEMAIL_TO(0.00)[amd.com,igalia.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,intel.com,linaro.org,ideasonboard.com,kwiboo.se,rock-chips.com,sntech.de,ursulin.net,pengutronix.de,lwn.net,linuxfoundation.org,fooishbar.org];
+	FORGED_SENDER(0.00)[nicolas.frattaroli@collabora.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[39];
+	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	DKIM_TRACE(0.00)[arm.com:+];
-	MISSING_XM_UA(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[catalin.marinas@arm.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[nicolas.frattaroli@collabora.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[collabora.com:+];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:dkim,arm.com:email,arm.com:mid,arm.com:from_mime,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,sashiko.dev:url,vger.kernel.org:from_smtp,huawei.com:email]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp,collabora.com:dkim,collabora.com:email,collabora.com:mid,collabora.com:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 7636C668E23
+X-Rspamd-Queue-Id: 290B9668F56
 
-On Wed, Jun 10, 2026 at 03:52:01PM +0800, Jinjie Ruan wrote:
-> Sashiko review pointed out the following issue[1].
-> 
-> Commit eba4675008a6 ("arm64: arch_register_cpu() variant to check if
-> an ACPI handle is now available.") introduced architectural safety
-> blocks inside arch_unregister_cpu(). If a hot-unplug operation is
-> determined to be a physical hardware removal (where _STA evaluates to
-> !ACPI_STA_DEVICE_PRESENT), or if firmware evaluation fails, it aborts
-> the unregistration transaction early to protect unreadied arm64
-> infrastructure.
-> 
-> However, returning early from arch_unregister_cpu() causes a catastrophic
-> state tearing because the generic ACPI layer (acpi_processor_post_eject())
-> unconditionally continues its cleanup flow. This leaves the stale sysfs
-> device leaked in the memory, deadlocking any subsequent hot-add attempts
-> on the same CPU.
-> 
-> Fix it by simplifying arch_unregister_cpu() to always proceed with
-> the unregistration, as a pr_err_once() warning is sufficient to make
-> it more visible for currently not supported physical CPU removal.
-> Also remove the redundant NULL check on acpi_handle as it cannot be
-> NULL when calling arch_unregister_cpu().
-> 
-> [1]: https://sashiko.dev/#/patchset/20260520022023.126670-1-ruanjinjie@huawei.com
-> Cc: Catalin Marinas <catalin.marinas@arm.com>
-> Cc: Jonathan Cameron <jic23@kernel.org>
-> Cc: James Morse <james.morse@arm.com>
-> Cc: stable@vger.kernel.org
-> Fixes: eba4675008a6e ("arm64: arch_register_cpu() variant to check if an ACPI handle is now available.")
-> Suggested-by: Catalin Marinas <catalin.marinas@arm.com>
-> Signed-off-by: Jinjie Ruan <ruanjinjie@huawei.com>
+On Wednesday, 10 June 2026 12:32:29 Central European Summer Time Jani Nikul=
+a wrote:
+> On Tue, 09 Jun 2026, Nicolas Frattaroli <nicolas.frattaroli@collabora.com=
+> wrote:
+> > diff --git a/drivers/gpu/drm/tests/drm_bridge_test.c b/drivers/gpu/drm/=
+tests/drm_bridge_test.c
+> > index 64b665580a88..92f142ca6695 100644
+> > --- a/drivers/gpu/drm/tests/drm_bridge_test.c
+> > +++ b/drivers/gpu/drm/tests/drm_bridge_test.c
+> > @@ -2,15 +2,23 @@
+> >  /*
+> >   * Kunit test for drm_bridge functions
+> >   */
+> > +#include <linux/cleanup.h>
+> > +#include <linux/media-bus-format.h>
+> > +
+> >  #include <drm/drm_atomic_state_helper.h>
+> > +#include <drm/drm_atomic_uapi.h>
+> >  #include <drm/drm_bridge.h>
+> >  #include <drm/drm_bridge_connector.h>
+> >  #include <drm/drm_bridge_helper.h>
+> > +#include <drm/drm_edid.h>
+> >  #include <drm/drm_kunit_helpers.h>
+> > +#include <drm/drm_managed.h>
+> > =20
+> >  #include <kunit/device.h>
+> >  #include <kunit/test.h>
+> > =20
+> > +#include "drm_kunit_edid.h"
+>=20
+> So here's the problem with adding *any* arrays into headers: every
+> compilation unit that includes them duplicates all the arrays. It's only
+> really okay for single use.
+>=20
+> And, in this case, most of the included arrays are unused, leading to
+> build failures:
+>=20
+>   CC [M]  drivers/gpu/drm/tests/drm_bridge_test.o
+> In file included from ../drivers/gpu/drm/tests/drm_bridge_test.c:21:
+> ../drivers/gpu/drm/tests/drm_kunit_edid.h:958:28: error: =E2=80=98test_ed=
+id_hdmi_4k_rgb_yuv420_dc_max_340mhz=E2=80=99 defined but not used [-Werror=
+=3Dunused-const-variable=3D]
+>   958 | static const unsigned char test_edid_hdmi_4k_rgb_yuv420_dc_max_34=
+0mhz[] =3D {
+>       |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~=
+~~~~
+> ../drivers/gpu/drm/tests/drm_kunit_edid.h:726:28: error: =E2=80=98test_ed=
+id_hdmi_1080p_rgb_yuv_dc_max_340mhz=E2=80=99 defined but not used [-Werror=
+=3Dunused-const-variable=3D]
+>   726 | static const unsigned char test_edid_hdmi_1080p_rgb_yuv_dc_max_34=
+0mhz[] =3D {
+>       |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~=
+~~~~
+> ../drivers/gpu/drm/tests/drm_kunit_edid.h:612:28: error: =E2=80=98test_ed=
+id_hdmi_1080p_rgb_yuv_dc_max_200mhz=E2=80=99 defined but not used [-Werror=
+=3Dunused-const-variable=3D]
+>   612 | static const unsigned char test_edid_hdmi_1080p_rgb_yuv_dc_max_20=
+0mhz[] =3D {
+>       |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~=
+~~~~
+> ../drivers/gpu/drm/tests/drm_kunit_edid.h:498:28: error: =E2=80=98test_ed=
+id_hdmi_1080p_rgb_max_340mhz=E2=80=99 defined but not used [-Werror=3Dunuse=
+d-const-variable=3D]
+>   498 | static const unsigned char test_edid_hdmi_1080p_rgb_max_340mhz[] =
+=3D {
+>       |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> ../drivers/gpu/drm/tests/drm_kunit_edid.h:390:28: error: =E2=80=98test_ed=
+id_hdmi_1080p_rgb_max_200mhz_hdr=E2=80=99 defined but not used [-Werror=3Du=
+nused-const-variable=3D]
+>   390 | static const unsigned char test_edid_hdmi_1080p_rgb_max_200mhz_hd=
+r[] =3D {
+>       |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> ../drivers/gpu/drm/tests/drm_kunit_edid.h:271:28: error: =E2=80=98test_ed=
+id_hdmi_1080p_rgb_max_200mhz=E2=80=99 defined but not used [-Werror=3Dunuse=
+d-const-variable=3D]
+>   271 | static const unsigned char test_edid_hdmi_1080p_rgb_max_200mhz[] =
+=3D {
+>       |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> ../drivers/gpu/drm/tests/drm_kunit_edid.h:163:28: error: =E2=80=98test_ed=
+id_hdmi_1080p_rgb_max_100mhz=E2=80=99 defined but not used [-Werror=3Dunuse=
+d-const-variable=3D]
+>   163 | static const unsigned char test_edid_hdmi_1080p_rgb_max_100mhz[] =
+=3D {
+>       |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> ../drivers/gpu/drm/tests/drm_kunit_edid.h:57:28: error: =E2=80=98test_edi=
+d_dvi_1080p=E2=80=99 defined but not used [-Werror=3Dunused-const-variable=
+=3D]
+>    57 | static const unsigned char test_edid_dvi_1080p[] =3D {
+>       |                            ^~~~~~~~~~~~~~~~~~~
+> cc1: all warnings being treated as errors
+>=20
+> This breaks the build for me, I don't know how it didn't for any of you.
 
-Reviewed-by: Catalin Marinas <catalin.marinas@arm.com>
+It broke the build for me in the past[1], but then I couldn't repro
+it anymore when challenged on my fix[2].
+
+>=20
+> Reverting these two fixes it:
+>=20
+> ce1d0139adac ("drm/tests: bridge: Add test for HDMI output bus formats he=
+lper")
+> 082fbc179c01 ("drm/tests: bridge: Add KUnit tests for bridge chain format=
+ selection")
+>=20
+> I think the proper fix would be to move the arrays into a .c file, and
+> only have declarations in the headers. But that needs to happen real
+> soon or the commits need to be reverted.
+
+If you don't want __maybe_unused, then sure, I'll move them into a new
+=2Ec file. Though I think the two are roughly equivalent in that I don't
+think anyone is really trying to minimise the size of their KUnit
+binaries.
+
+I'll send a patch to move them to a .c
+
+[1]: https://lore.kernel.org/dri-devel/20260121-color-format-v7-20-ef790dae=
+780c@collabora.com/
+[2]: https://lore.kernel.org/dri-devel/20260210-didactic-okapi-of-modernism=
+=2Dff00d9@houat/
+
+Kind regards,
+Nicolas Frattaroli
+
+>=20
+> BR,
+> Jani.
+>=20
+>=20
+>=20
+
+
+
+
 
