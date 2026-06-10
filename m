@@ -1,48 +1,49 @@
-Return-Path: <linux-doc+bounces-91790-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91792-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id xGvBEb3pKGrrNQMAu9opvQ
-	(envelope-from <linux-doc+bounces-91790-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 06:36:13 +0200
+	id JwBMMEfqKGpbNgMAu9opvQ
+	(envelope-from <linux-doc+bounces-91792-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 06:38:31 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 94855665C4D
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 06:36:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C8C0665C72
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 06:38:31 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=arm.com header.s=foss header.b="Hve/LHH2";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91790-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-91790-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=arm.com header.s=foss header.b=B0+i+p9L;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91792-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-91792-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=arm.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 461A530C2AE9
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 04:36:11 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id C8DFA300D316
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 04:36:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7A003370AF6;
-	Wed, 10 Jun 2026 04:36:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E722F371D0F;
+	Wed, 10 Jun 2026 04:36:12 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 72BDB257824;
-	Wed, 10 Jun 2026 04:36:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4F20F371072;
+	Wed, 10 Jun 2026 04:36:11 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781066170; cv=none; b=JSi0ndy7qxfmRltXHZpmus4igBQ/2jfQbNl9K+qo/6IOGBvbIvNw2tSQaZ/NDXS7ZJCwr8RUzA2ZhGKHTDzyvqGdiLakBQ1Qw6wYbQQqiKiMnNelgdenHonRZrOmacd1bqaJh2xzzjEUngbelMkrNamtYn3XxFGypYmI5rA3+f8=
+	t=1781066172; cv=none; b=mgpDAmJ0AVf1NFvV4VFXRaGubfx3cnq8retAlCTGtzYq2vPvyckII5WD+F3yHdlgYnfN/Bu7k8KDYlmA23L6nmTFz+ndRH4U9xrYlsjR1eQyWAyvMSkZqnomlk/abT2wx59K4fEorGI1E3kkxph6zenhoVAOB+ILU3Wu7e7p+3c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781066170; c=relaxed/simple;
-	bh=3GXiGY517xe/UadGb37rObRReqoIjBTBisS6jBAfnwI=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=D3qUiB+ELzCCbkUGiAs/SY5RjKecfc/yOaz6D1/WCwY0Temyn9ZsDQQyNdcWbkfbYFwwZJona/6p+2KBoPWqI0w80MAGQDtWQYK50B/w4GhDrWXRr7kAA77UqlufGFs3I1LZe6HNxWf4q5JQiChcWul3LlCrWPZRFlCu1wjOtXc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=Hve/LHH2; arc=none smtp.client-ip=217.140.110.172
+	s=arc-20240116; t=1781066172; c=relaxed/simple;
+	bh=OEb8s8uIWUkzmmIYC/yFpsUxXtXVEWIhB0oWagSx5ow=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version; b=hXw6zisWdwM59Hn2YH+Khq5pHXrUEPO62ox14niclYtdyQGFJSGqA3WRmMmKhuCuwwTfJ696iwFxWyqsrg84OIKM4vxJgONijZRpumWgXvnHX5gNyXOZIyG+2rvMJ/p8d+u8S/EohUbZLS9h0jXoGWKD8n0+Fefar1AFew1ir2c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=B0+i+p9L; arc=none smtp.client-ip=217.140.110.172
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9C98025E3;
-	Tue,  9 Jun 2026 21:35:57 -0700 (PDT)
-Received: from ergosum.cambridge.arm.com (ergosum.cambridge.arm.com [10.1.196.45])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 649AB3FD88;
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 75E904593;
 	Tue,  9 Jun 2026 21:36:00 -0700 (PDT)
+Received: from ergosum.cambridge.arm.com (ergosum.cambridge.arm.com [10.1.196.45])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id C8D8A3FD88;
+	Tue,  9 Jun 2026 21:36:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1781066162; bh=3GXiGY517xe/UadGb37rObRReqoIjBTBisS6jBAfnwI=;
-	h=From:To:Cc:Subject:Date:From;
-	b=Hve/LHH2Etq+3KMCwxsq4ZEOskp1J2Nr8Z9uojcgE70CS6uPIvW1k9fRwrY2FGboV
-	 aCO2Afv0S7Bp3/bYEB3PLcRyhZ7PiPFYJSRRhT7gZG3whe+uQKwJKE2SXxNBuKmIkM
-	 ceqpLlWypcrtSf3RU+anYjwe5QHflJRBijB7520w=
+	t=1781066165; bh=OEb8s8uIWUkzmmIYC/yFpsUxXtXVEWIhB0oWagSx5ow=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=B0+i+p9L4YG+tmGIPZTd2fOVybIZ3ZnBqOTW3ea6KWDuo4bNuKKqSNmXb4uuhPRbB
+	 r+iGoR7xm1QpMKiHj6KctxPoBIjGeevTyE2dBEPuMzV0+O91dXWyyXDLrAImwS7A+Q
+	 1ayt01l8Hjo8DW600V2mzqvdcMDDVTAc1ltsPKU4=
 From: Anshuman Khandual <anshuman.khandual@arm.com>
 To: linux-mm@kvack.org
 Cc: Anshuman Khandual <anshuman.khandual@arm.com>,
@@ -55,11 +56,16 @@ Cc: Anshuman Khandual <anshuman.khandual@arm.com>,
 	Andrew Morton <akpm@linux-foundation.org>,
 	David Hildenbrand <david@redhat.com>,
 	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Subject: [RFC V2 0/3] lib/vsprintf: Add support for pgtable entries
-Date: Wed, 10 Jun 2026 05:35:42 +0100
-Message-Id: <20260610043545.3725735-1-anshuman.khandual@arm.com>
+	linux-doc@vger.kernel.org,
+	David Hildenbrand <david@kernel.org>,
+	Lorenzo Stoakes <ljs@kernel.org>,
+	Andy Whitcroft <apw@canonical.com>
+Subject: [RFC V2 1/3] lib/vsprintf: Add support for pgtable entries
+Date: Wed, 10 Jun 2026 05:35:43 +0100
+Message-Id: <20260610043545.3725735-2-anshuman.khandual@arm.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20260610043545.3725735-1-anshuman.khandual@arm.com>
+References: <20260610043545.3725735-1-anshuman.khandual@arm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -78,11 +84,11 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-91790-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-91792-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:linux-mm@kvack.org,m:anshuman.khandual@arm.com,m:andriy.shevchenko@linux.intel.com,m:linux@rasmusvillemoes.dk,m:senozhatsky@chromium.org,m:pmladek@suse.com,m:rostedt@goodmis.org,m:corbet@lwn.net,m:akpm@linux-foundation.org,m:david@redhat.com,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:linux-mm@kvack.org,m:anshuman.khandual@arm.com,m:andriy.shevchenko@linux.intel.com,m:linux@rasmusvillemoes.dk,m:senozhatsky@chromium.org,m:pmladek@suse.com,m:rostedt@goodmis.org,m:corbet@lwn.net,m:akpm@linux-foundation.org,m:david@redhat.com,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:david@kernel.org,m:ljs@kernel.org,m:apw@canonical.com,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[12];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	FORGED_SENDER(0.00)[anshuman.khandual@arm.com,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
@@ -99,64 +105,159 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ALIAS_RESOLVED(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[chromium.org:email,arm.com:dkim,arm.com:mid,arm.com:from_mime,suse.com:email,vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,linux-foundation.org:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:dkim,arm.com:email,arm.com:mid,arm.com:from_mime,linux-foundation.org:email,suse.com:email,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,kvack.org:email,canonical.com:email,vger.kernel.org:from_smtp,lwn.net:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 94855665C4D
+X-Rspamd-Queue-Id: 1C8C0665C72
 
-Printing page table entries has been a common requirement both in generic
-and platform memory management for various purposes. Hence let's create a
-dedicated printk format for such entries which will also help standardize
-pgtable printing across different platforms.
+Add some print formats for pgtable entries at any pgtable level. These new
+formats are %pp[g|4|u|m|t][d|e] i.e %ppgd, %pp4d, %ppud, %ppmd, and %ppte.
+These currently support both 32 bit and 64 bit pgtable entries that can be
+extended up to 128 bit when required.
 
-Also add a test for this new print format in lib/tests/printf_kunit.c via
-existing CONFIG_PRINTF_KUNIT_TEST.
-
-This series applies on v7.1-rc7
-
-This series has been tested on arm64 but built tested on several others
-including x86, powerpc, s390, riscv, and mips etc. Although it does not
-build on arm32 platform due to existing pgdp_get() concerns.
-
-Changes in V2:
-
-Accommodated most suggestions from Petr Mladek and others
-
-- Moved __print_bad_page_map_pgtable() changes into a separate patch
-- Added helper pxd_pointer() for pgtable print format
-- Added buffer check via check_pointer()
-- Added special_hex_number() for base case printing
-- Added static_assert() to ensure acceptable pxd_t size
-- Avoided direct dereferences and used pxdp_get() helpers instead
-- Improved printf KUNIT tests for all level page table entries
-
-Changes in V1:
-
-https://lore.kernel.org/all/20250618041235.1716143-1-anshuman.khandual@arm.com/
-
-Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: Rasmus Villemoes <linux@rasmusvillemoes.dk>
-Cc: Sergey Senozhatsky <senozhatsky@chromium.org>
+Signed-off-by: Anshuman Khandual <anshuman.khandual@arm.com>
+---
+Cc: Andrew Morton <akpm@linux-foundation.org>
+Cc: David Hildenbrand <david@kernel.org>
+Cc: Lorenzo Stoakes <ljs@kernel.org>
 Cc: Petr Mladek <pmladek@suse.com>
 Cc: Steven Rostedt <rostedt@goodmis.org>
 Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: Andrew Morton <akpm@linux-foundation.org>
-Cc: David Hildenbrand <david@redhat.com>
+Cc: Andy Whitcroft <apw@canonical.com>
+Cc: linux-mm@kvack.org
 Cc: linux-kernel@vger.kernel.org
 Cc: linux-doc@vger.kernel.org
-Cc: linux-mm@kvack.org
-
-Anshuman Khandual (3):
-  lib/vsprintf: Add support for pgtable entries
-  kunit: printf: Add test for pgtable entries
-  mm: Replace pgtable entry prints with new format
 
  Documentation/core-api/printk-formats.rst | 19 ++++++++
- lib/tests/printf_kunit.c                  | 57 ++++++++++++++++++++++
  lib/vsprintf.c                            | 58 +++++++++++++++++++++++
- mm/memory.c                               | 15 ++----
  scripts/checkpatch.pl                     |  2 +-
- 5 files changed, 140 insertions(+), 11 deletions(-)
+ 3 files changed, 78 insertions(+), 1 deletion(-)
 
+diff --git a/Documentation/core-api/printk-formats.rst b/Documentation/core-api/printk-formats.rst
+index c0b1b6089307..e69f91a9dd9d 100644
+--- a/Documentation/core-api/printk-formats.rst
++++ b/Documentation/core-api/printk-formats.rst
+@@ -696,6 +696,25 @@ Rust
+ Only intended to be used from Rust code to format ``core::fmt::Arguments``.
+ Do *not* use it from C.
+ 
++Page Table Entry
++----------------
++
++::
++
++        %p[pgd|p4dp|pud|pmd|pte]
++
++Print page table entry at any level.
++
++Passed by reference.
++
++Examples for a 64 bit page table entry, given &(u64)0xc0ffee::
++
++        %ppte   0x0000000000c0ffee
++        %ppmd   0x0000000000c0ffee
++        %ppud   0x0000000000c0ffee
++        %pp4d   0x0000000000c0ffee
++        %ppgd   0x0000000000c0ffee
++
+ Thanks
+ ======
+ 
+diff --git a/lib/vsprintf.c b/lib/vsprintf.c
+index 9f359b31c8d1..d4ad3048a4db 100644
+--- a/lib/vsprintf.c
++++ b/lib/vsprintf.c
+@@ -856,6 +856,59 @@ static char *default_pointer(char *buf, char *end, const void *ptr,
+ 	return ptr_to_id(buf, end, ptr, spec);
+ }
+ 
++static char *pxd_pointer(char *buf, char *end, const void *ptr,
++			 struct printf_spec spec, const char *fmt)
++{
++	if (check_pointer(&buf, end, ptr, spec))
++		return buf;
++
++	if (fmt[1] == 't' && fmt[2] == 'e') {
++		pte_t *pte = (pte_t *)ptr;
++
++		static_assert(sizeof(pte_t) == 4 ||
++			      sizeof(pte_t) == 8,
++			      "pte_t size must be 4 or 8 bytes");
++		return special_hex_number(buf, end, pte_val(ptep_get(pte)), sizeof(pte_t));
++	}
++
++	if (fmt[1] == 'm' && fmt[2] == 'd') {
++		pmd_t *pmd = (pmd_t *)ptr;
++
++		static_assert(sizeof(pmd_t) == 4 ||
++			      sizeof(pmd_t) == 8,
++			      "pmd_t size must be 4 or 8 bytes");
++		return special_hex_number(buf, end, pmd_val(pmdp_get(pmd)), sizeof(pmd_t));
++	}
++
++	if (fmt[1] == 'u' && fmt[2] == 'd') {
++		pud_t *pud = (pud_t *)ptr;
++
++		static_assert(sizeof(pud_t) == 4 ||
++			      sizeof(pud_t) == 8,
++			      "pud_t size must be 4 or 8 bytes");
++		return special_hex_number(buf, end, pud_val(pudp_get(pud)), sizeof(pud_t));
++	}
++
++	if (fmt[1] == '4' && fmt[2] == 'd') {
++		p4d_t *p4d = (p4d_t *)ptr;
++
++		static_assert(sizeof(p4d_t) == 4 ||
++			      sizeof(p4d_t) == 8,
++			      "p4d_t size must be 4 or 8 bytes");
++		return special_hex_number(buf, end, p4d_val(p4dp_get(p4d)), sizeof(p4d_t));
++	}
++
++	if (fmt[1] == 'g' && fmt[2] == 'd') {
++		pgd_t *pgd = (pgd_t *)ptr;
++
++		static_assert(sizeof(pgd_t) == 4 ||
++			      sizeof(pgd_t) == 8,
++			      "pgd_t size must be 4 or 8 bytes");
++		return special_hex_number(buf, end, pgd_val(pgdp_get(pgd)), sizeof(pgd_t));
++	}
++	return default_pointer(buf, end, ptr, spec);
++}
++
+ int kptr_restrict __read_mostly;
+ 
+ static noinline_for_stack
+@@ -2506,6 +2559,9 @@ early_param("no_hash_pointers", no_hash_pointers_enable);
+  *		Without an option prints the full name of the node
+  *		f full name
+  *		P node name, including a possible unit address
++ * - 'p[g|4|u|m|t|][d|e]' For a page table entry, this prints its
++ *			  contents in a hexadecimal format
++ *
+  * - 'x' For printing the address unmodified. Equivalent to "%lx".
+  *       Please read the documentation (path below) before using!
+  * - '[ku]s' For a BPF/tracing related format specifier, e.g. used out of
+@@ -2615,6 +2671,8 @@ char *pointer(const char *fmt, char *buf, char *end, void *ptr,
+ 		default:
+ 			return error_string(buf, end, "(einval)", spec);
+ 		}
++	case 'p':
++		return pxd_pointer(buf, end, ptr, spec, fmt);
+ 	default:
+ 		return default_pointer(buf, end, ptr, spec);
+ 	}
+diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
+index 0492d6afc9a1..f68955858e29 100755
+--- a/scripts/checkpatch.pl
++++ b/scripts/checkpatch.pl
+@@ -6975,7 +6975,7 @@ sub process {
+ 				my $fmt = get_quoted_string($lines[$count - 1], raw_line($count, 0));
+ 				$fmt =~ s/%%//g;
+ 
+-				while ($fmt =~ /(\%[\*\d\.]*p(\w)(\w*))/g) {
++				while ($fmt =~ /(\%[\*\d\.]*p(\w)(\w*)(pte|pmd|pud|p4d|pgd))/g) {
+ 					$specifier = $1;
+ 					$extension = $2;
+ 					$qualifier = $3;
 -- 
 2.30.2
 
