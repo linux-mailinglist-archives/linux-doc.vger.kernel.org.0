@@ -1,200 +1,369 @@
-Return-Path: <linux-doc+bounces-91816-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91818-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id CLXxGX03KWoFSgMAu9opvQ
-	(envelope-from <linux-doc+bounces-91816-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 12:07:57 +0200
+	id tjpwIzs4KWo8SgMAu9opvQ
+	(envelope-from <linux-doc+bounces-91818-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 12:11:07 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 06307668209
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 12:07:57 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id D2F2466824C
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 12:11:06 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=arm.com header.s=foss header.b="awfoF/IU";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91816-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-91816-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=arm.com;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=ti.com header.s=selector1 header.b="B4cm70d/";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91818-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91818-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=ti.com;
+	arc=reject ("cv is fail on i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 2B1DA30ACA1F
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 10:00:21 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 6FC7C32EC0EF
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 10:03:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 84B543E6397;
-	Wed, 10 Jun 2026 10:00:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7D10E3E63AC;
+	Wed, 10 Jun 2026 10:03:35 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 55BCC3E5EE7;
-	Wed, 10 Jun 2026 10:00:18 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781085620; cv=none; b=C9XY7pRX4Xlj8zKbsf5js8trt8Co6+ocTl9WkBAbO2kMBLsUkzh1zAU26WHTtuqDepAfc7uVEw6RD3o0SyrHGkKVt7QVilosz+zu649kzhP0blwIheAm2lHovr36/jhGcNb3hZ/JuzUKzc6npzZQSwCHSoTOk4y6+SwiGhGh57c=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781085620; c=relaxed/simple;
-	bh=U2i/BzqvOeDZaVsXMtMz/mBhJTdVMdg3yMk1ZEcMUKs=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Fg7j4/DivoxQLvR44cYTDkK9Zl2mQtdTL/uLhIh13CJAjPnSbMkEx8DeuCVVk+tKxOMAlXID92sBFlyunyRrY9z9ONfRT3mide0YGGhjS5G9lrJb5kASQ8ujakQrbTcVRJSMzqKZSASTpBFCIPIMlmxrujxk3eJLXxFxeK0i7iQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=awfoF/IU; arc=none smtp.client-ip=217.140.110.172
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 56D9625E3;
-	Wed, 10 Jun 2026 03:00:12 -0700 (PDT)
-Received: from J2N7QTR9R3 (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 28C9E3FDE2;
-	Wed, 10 Jun 2026 03:00:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1781085617; bh=U2i/BzqvOeDZaVsXMtMz/mBhJTdVMdg3yMk1ZEcMUKs=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=awfoF/IUr5HdAybfH+nRjakt4TUakG4zQraI/8G05d6OVdbsA1VRTQG6tMuk1mmbW
-	 rpMLhnpNYDG1vDF1h7K/9B60q6xKXfeaUZOMRBUfOWByxCBwQWkddeqNnm7LB73Vnq
-	 igCUjDizuohrFWBWhFUgkpf14BaCN7n59D8OENOU=
-Date: Wed, 10 Jun 2026 11:00:03 +0100
-From: Mark Rutland <mark.rutland@arm.com>
-To: Shanker Donthineni <sdonthineni@nvidia.com>
-Cc: Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>, linux-arm-kernel@lists.infradead.org,
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-	Vikram Sethi <vsethi@nvidia.com>,
-	Jason Sequeira <jsequeira@nvidia.com>,
-	Alok Mooley <amooley@nvidia.com>, Rich Wiley <rwiley@nvidia.com>
-Subject: Re: [PATCH v1] arm64: errata: Mitigate TLBI errata on NVIDIA Olympus
- CPU
-Message-ID: <aik1owW9Rz8B7rEz@J2N7QTR9R3>
-References: <20260609234044.3945938-1-sdonthineni@nvidia.com>
+Received: from BL0PR03CU003.outbound.protection.outlook.com (mail-eastusazon11012061.outbound.protection.outlook.com [52.101.53.61])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 512153E3160;
+	Wed, 10 Jun 2026 10:03:33 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1781085815; cv=fail; b=Nv/3ACIKOV4qRNRNodd4N57j7Sw0riSFJrsook0Fc4edYBwp2gRfptYDpXn8fA3kVXgzCG1ZOfGkKC3wAPnmjF19ACEd7h3cRx0iKQLAEpANSVL5e1rhCJJF+syioojrewmIbumzHrZMsgbmU/Qh/175uFHKOoN+qgJwGAFVSm8=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1781085815; c=relaxed/simple;
+	bh=7OzAq23nSdPmQeKXCdaFZyEGGkRv8hw1BLvTQiVM+us=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=IPqOhetOCW1oOzhIdvH5edQ7JYj2Kldc+PJVGclNzJCFZqz5GC0y44vYilPmL+6wsOqQ5Lr9S/xijkArWw8yg+r3X12at0XNdPn3oXqJjUc2902h6MM2RwOWRg8eSkIEycxpXCaixkgxJI/yO/VHwwuclNmTxQaN5eJ3Z8c8n/E=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com; spf=pass smtp.mailfrom=ti.com; dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b=B4cm70d/; arc=fail smtp.client-ip=52.101.53.61
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=fiOXi5HL/AUPDBf2UhGpYRxGGU1w8SdbTPtJ96RQqOk6rV8BIjH3bZgmmBsvXvmQHpMJOv60Y55YiVEtRraz1Rgo+oOF7v5VztvuQl1BPwo7ZelUGWcQXXVe382V9YOlsBCEXf1/wFpU9eKf2JUKex711KxNcmtiH4E3yQ1N8kLNT03JGwiJNoVTq5aqq2xJUbp63ZS4zbCUaIYnsgSagMLCcTxeB16j82zTh6ka6YPkHZXQ9PAurq+0H0F8OsMKgGxR8Tcj9PxhSorVebcP99CR+zuJR+9IJVJhDJ4vgeoO8I+G3k5x0SkRtD0B0fGD5nYsraRHxA06RUYH/2cNHA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=9Ncw9Rul5OuhTdncVfuy85kUSOEPsy64A/byN++d+2s=;
+ b=MRgv4v8OcIiMmfLtpnAsBB/hGut6RqoBw5skMsLOKcuHcMAOyWdaCMcmrW/yhJtTuPc7jz1pufhgMvjo/O5DDVBXtv3OF61OkCnkVFYhx2+s9IGq4iv68NN6/Ap4Xr+4B1RyFwbfPNDHKeO6SOusEN5nRi+bS+EDkEyGrepMcUSjjyMRFiG6EcqQUYKmJZgfdKlOxFOStq/6JLVFOBIQZ4OAJWvcBKhB3rwFzxuQsViUl9c0Udp1og/sJwpIWPi7xsnVXQwoBuqWjIFickzKla8E7JkjsAOgN4AlXAKxu2vGxB9+oLFpulcIlSjlZT0zrzFI8IRe+9tponxPYdNzXA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=vger.kernel.org smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=9Ncw9Rul5OuhTdncVfuy85kUSOEPsy64A/byN++d+2s=;
+ b=B4cm70d/VRuiqbCMN7wVFOcu5ar3vG+XUt29hqQbHS41ncum2dJ2G3CjgmLHlRMGzWkJOXOXi+khbymQhBeubbVD2vCrQw+CaLjqIyiLg0UiBcB2m0OQZ8Myk0qzZF+JcgdOWLQJ/N2vQxpM/xpFIJ1Pl948drXls/Y0qKV9TG4=
+Received: from SJ0PR05CA0128.namprd05.prod.outlook.com (2603:10b6:a03:33d::13)
+ by PH0PR10MB6959.namprd10.prod.outlook.com (2603:10b6:510:28f::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.12; Wed, 10 Jun
+ 2026 10:03:28 +0000
+Received: from CO1PEPF00012E64.namprd05.prod.outlook.com
+ (2603:10b6:a03:33d:cafe::86) by SJ0PR05CA0128.outlook.office365.com
+ (2603:10b6:a03:33d::13) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.10 via Frontend Transport; Wed,
+ 10 Jun 2026 10:03:28 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ CO1PEPF00012E64.mail.protection.outlook.com (10.167.249.73) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.113.7 via Frontend Transport; Wed, 10 Jun 2026 10:03:27 +0000
+Received: from DFLE203.ent.ti.com (10.64.6.61) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 10 Jun
+ 2026 05:03:02 -0500
+Received: from DFLE209.ent.ti.com (10.64.6.67) by DFLE203.ent.ti.com
+ (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 10 Jun
+ 2026 05:03:02 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE209.ent.ti.com
+ (10.64.6.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Wed, 10 Jun 2026 05:03:02 -0500
+Received: from a0507033-hp.dhcp.ti.com (a0507033-hp.dhcp.ti.com [10.24.68.129])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 65AA2u8u3620198;
+	Wed, 10 Jun 2026 05:02:57 -0500
+From: Aksh Garg <a-garg7@ti.com>
+To: <linux-pci@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+	<mani@kernel.org>, <kwilczynski@kernel.org>, <bhelgaas@google.com>,
+	<corbet@lwn.net>, <kishon@kernel.org>, <skhan@linuxfoundation.org>,
+	<lukas@wunner.de>, <cassel@kernel.org>, <alistair@alistair23.me>
+CC: <linux-arm-kernel@lists.infradead.org>, <linux-kernel@vger.kernel.org>,
+	<s-vadapalli@ti.com>, <danishanwar@ti.com>, <srk@ti.com>, <a-garg7@ti.com>
+Subject: [PATCH v5 0/4] PCI: Add DOE support for endpoint
+Date: Wed, 10 Jun 2026 15:32:52 +0530
+Message-ID: <20260610100256.1889111-1-a-garg7@ti.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260609234044.3945938-1-sdonthineni@nvidia.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF00012E64:EE_|PH0PR10MB6959:EE_
+X-MS-Office365-Filtering-Correlation-Id: 27c82312-d5c0-4656-2849-08dec6d78443
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|23010399003|376014|7416014|1800799024|36860700016|82310400026|6133799003|921020|5023799004|18002099003|56012099006;
+X-Microsoft-Antispam-Message-Info:
+	MaSduyizkIIyJ6coP437696SsHUwTNadgmsyFohy7NQOv1gffCtHRIq8EmZHdonrGqZ5vzI0yFOtUUOIhQwGms0CryGDDllsdYvJVb+aiE1FZrsOcns6CIKkE8+NuiKYJp702JlzZ+kUPB5XQ72pHM7NILLUrCU0immvIVjNXaVSpg45YJp6bgLGt53YRN17sg3NzyCqzzdO5kXgbjLqdMdmauZGK2msRYqMvXdxEXvtDRpIQjyqDRmx46ukl02z6yCJQHrViilkf5Qq2g6X/th/qOsDWOuAXPqLAvVrpZkpJOZjoCK+/VeMP+vkb+n7nYZmfeRyoFr5f6LAo8wyjYMKSKemFxk2OfoxZgeGcBzM+H0Mix35L1MIzhgytd72z21aiCiYs/HThCnWq48ll7KdfE1rNMfUm1MYWRZ5ts08+Fgqx8XOib89ayv8tAZf9Wh9ZW1T2zHWfbM+n+SCHKjU1UpLU3BXLwCj6V58LEpcSI0mV55hXF1S4BV+h4QBEjPnnKOsaLjtrJo9b6kzMPsnoCy/C29lrgKE667rIBqF8s7J++70gZ2bZqg0H2sY0xh8sRNRUSbx0caAxH10SrFQYrNx0MMwJ7qlgGE9DHFvGmHROKtwLkjaxW84C/fjh1oPZazU6xJWbyh+FoIQ11i/0sYQXGuvSUBkvohp0D6fm4LSVeG9LWJ3E+QHsa5YfNBdKf9AsghGXfpejy1jX73M1C3AGa7O07TBGh6tu/zAJle3YshsJMNClW8QhCnsQQVUwE/Pdk9/qeEOvQr2mwpZrEu/EIooD9qvgyLxSYs=
+X-Forefront-Antispam-Report:
+	CIP:198.47.21.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet200.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(23010399003)(376014)(7416014)(1800799024)(36860700016)(82310400026)(6133799003)(921020)(5023799004)(18002099003)(56012099006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	titbil0RSc1xYjy1rOlC1U7EO4c6jhGgUS17qkVe1ZioTMsfK6BT+kXgpUQF8L9ljFLycNmv3ZXaQR8CpEYf6BoOpj+PJzPEX5/+vQv/1ZPMKuLCEgt4qfP81saOMtO2RTWL//rkjHzhcMjZGu+b6ZYQVZJaZgRFF9USxBq55fP5B6r0IDtd5/zymMggUQL9rPvsloGRF6kvjWHQzOdNT8ze3mFAEzmR7kET72ClofclKAW4jpFunQWjj/bKtMWy+P4K3MYBKA3Bu2uemw1M+1vFIKtGUxBAZp5mBa6ESWUgq9tfXdtn9XOr7x4yfYc2fOIYlvEf1H/a9ZlX1/p4iw59ab8ozgw0TCmrjIBlC2qvTEx9QJNfqQqBD7VGKvEO9cs12TpWDydZwPP2KbWRNO79qd924keRWg+Gn/M+umbEV7GobZkxS1KVHx5fGjrM
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 10:03:27.1643
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 27c82312-d5c0-4656-2849-08dec6d78443
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.194];Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CO1PEPF00012E64.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR10MB6959
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.66 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
-	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+X-Spamd-Result: default: False [1.34 / 15.00];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[ti.com,quarantine];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[ti.com:s=selector1];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-91816-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:sdonthineni@nvidia.com,m:catalin.marinas@arm.com,m:will@kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:vsethi@nvidia.com,m:jsequeira@nvidia.com,m:amooley@nvidia.com,m:rwiley@nvidia.com,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[arm.com:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[mark.rutland@arm.com,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:linux-pci@vger.kernel.org,m:linux-doc@vger.kernel.org,m:mani@kernel.org,m:kwilczynski@kernel.org,m:bhelgaas@google.com,m:corbet@lwn.net,m:kishon@kernel.org,m:skhan@linuxfoundation.org,m:lukas@wunner.de,m:cassel@kernel.org,m:alistair@alistair23.me,m:linux-arm-kernel@lists.infradead.org,m:linux-kernel@vger.kernel.org,m:s-vadapalli@ti.com,m:danishanwar@ti.com,m:srk@ti.com,m:a-garg7@ti.com,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	FORGED_SENDER(0.00)[a-garg7@ti.com,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-91818-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[ti.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	RCPT_COUNT_TWELVE(0.00)[17];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mark.rutland@arm.com,linux-doc@vger.kernel.org];
-	MISSING_XM_UA(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[a-garg7@ti.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_NONE(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,ti.com:dkim,ti.com:mid,ti.com:from_mime,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,J2N7QTR9R3:mid,arm.com:dkim,arm.com:email,arm.com:from_mime,vger.kernel.org:from_smtp]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCVD_COUNT_SEVEN(0.00)[10]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 06307668209
+X-Rspamd-Queue-Id: D2F2466824C
 
-On Tue, Jun 09, 2026 at 06:40:44PM -0500, Shanker Donthineni wrote:
-> NVIDIA Olympus cores are affected by the TLBI completion issue tracked as
-> CVE-2025-10263. The existing ARM64_ERRATUM_4118414 handling already uses
-> ARM64_WORKAROUND_REPEAT_TLBI to issue an additional broadcast TLBI;DSB
-> sequence and ensure affected memory write effects are globally observed.
-> 
-> Add MIDR_NVIDIA_OLYMPUS to the repeat-TLBI match list so the same
-> mitigation is enabled on affected Olympus systems. Also document the
-> NVIDIA Olympus erratum in the arm64 silicon errata table and list it in
-> the Kconfig help text.
-> 
-> Signed-off-by: Shanker Donthineni <sdonthineni@nvidia.com>
-> Cc: Catalin Marinas <catalin.marinas@arm.com>
-> Cc: Will Deacon <will@kernel.org>
-> Cc: Mark Rutland <mark.rutland@arm.com>
-> ---
-> Note: This patch depends on the following series as a prerequisite:
-> https://lore.kernel.org/all/20260609101203.1512409-1-mark.rutland@arm.com/
+This patch series introduces the framework for supporting the Data
+Object Exchange (DOE) feature for PCIe endpoint devices. Please refer
+to the documentation added in patch 4 for details on the feature and
+implementation architecture.
 
-FWIW:
+The implementation provides a common framework for all PCIe endpoint
+controllers, not specific to any particular SoC vendor.
 
-Acked-by: Mark Rutland <mark.rutland@arm.com>
+The changes since v1 are documented in the respective patch descriptions.
 
-I'll keep note of this when backporting the other patches; as a
-prerequisite we'll also need to pick commit
+v4: https://lore.kernel.org/all/20260522052434.802034-1-a-garg7@ti.com/
+v3: https://lore.kernel.org/all/20260427051725.223704-1-a-garg7@ti.com/
+v2: https://lore.kernel.org/all/20260401073022.215805-1-a-garg7@ti.com/
+v1 (RFC): https://lore.kernel.org/all/20260213123603.420941-1-a-garg7@ti.com/
 
-  e185c8a0d842 ("arm64: cputype: Add NVIDIA Olympus definitions")
+Below is a code demonstration showing the integration of DOE-EP APIs with
+EPC drivers.
 
-I have one minor comment below, but that's more for Catalin/Will, and
-doesn't require a respin.
+Note: The provided code is just to show how an EPC driver is expected to
+      utilize the pci_ep_doe_process_request() and pci_ep_doe_abort() APIs,
+      and might not cover all the corner cases. The below implementation
+      also expects the EPC hardware to have some memory buffer to store the
+      data from(for) write_mailbox(read_mailbox) DOE capability registers.
 
->  Documentation/arch/arm64/silicon-errata.rst | 2 ++
->  arch/arm64/Kconfig                          | 3 ++-
->  arch/arm64/kernel/cpu_errata.c              | 1 +
->  3 files changed, 5 insertions(+), 1 deletion(-)
-> 
-> diff --git a/Documentation/arch/arm64/silicon-errata.rst b/Documentation/arch/arm64/silicon-errata.rst
-> index a01e916ede17..ad09bbb10da8 100644
-> --- a/Documentation/arch/arm64/silicon-errata.rst
-> +++ b/Documentation/arch/arm64/silicon-errata.rst
-> @@ -298,6 +298,8 @@ stable kernels.
->  +----------------+-----------------+-----------------+-----------------------------+
->  | NVIDIA         | Carmel Core     | N/A             | NVIDIA_CARMEL_CNP_ERRATUM   |
->  +----------------+-----------------+-----------------+-----------------------------+
-> +| NVIDIA         | Olympus core    | T410-OLY-1029   | ARM64_ERRATUM_4118414       |
-> ++----------------+-----------------+-----------------+-----------------------------+
->  | NVIDIA         | T241 GICv3/4.x  | T241-FABRIC-4   | N/A                         |
->  +----------------+-----------------+-----------------+-----------------------------+
->  | NVIDIA         | T241 MPAM       | T241-MPAM-1     | N/A                         |
-> diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
-> index 48233b54c482..c65cef81be86 100644
-> --- a/arch/arm64/Kconfig
-> +++ b/arch/arm64/Kconfig
-> @@ -1155,7 +1155,7 @@ config ARM64_ERRATUM_4193714
->  	  If unsure, say Y.
->  
->  config ARM64_ERRATUM_4118414
-> -	bool "Cortex-*/Neoverse-*/C1-*: Completion of affected memory accesses might not be guaranteed by completion of a TLBI"
-> +	bool "Cortex-*/Neoverse-*/C1-*/Olympus: Completion of affected memory accesses might not be guaranteed by completion of a TLBI"
+============================================================================
 
-As this is getting increasingly long, maybe it's worth reducing this to
-"Various" in the title, i.e.
+/* ========== DOE Completion Callback (invoked by DOE-EP core) ========== */
 
-	bool "Cortex-*/Neoverse: Completion of affected memory accesses might not be guaranteed by completion of a TLBI"
+static void doe_completion_cb(struct pci_epc *epc, u8 func_no, u16 cap_offset,
+			       int status, u16 vendor, u8 type,
+			       void *response_pl, size_t response_pl_sz)
+{
+	struct epc_driver *drv = epc_get_drvdata(epc);
+	u32 *response = (u32 *)response_pl;
+	u32 header1, header2;
+	int payload_dw, i;
+	
+	if (readl(drv->base + PF_DOE_CTRL_REG(func_no, cap_offset)) & DOE_CTRL_ABORT) {
+		/* Aborted: do not send response */
+		goto free;
+	}
 
-... but as above, no need to respin for that.
+	if (status < 0) {
+		/* Error: set ERROR bit in DOE Status register */
+		writel(1 << DOE_STATUS_ERROR,
+		       drv->base + PF_DOE_STATUS_REG(func_no, cap_offset));
+		goto free;
+	}
 
-Mark.
+	/* Success: write DOE headers first, then response to the read memory */
 
->  	default y
->  	select ARM64_WORKAROUND_REPEAT_TLBI
->  	help
-> @@ -1182,6 +1182,7 @@ config ARM64_ERRATUM_4118414
->  	  * ARM Neoverse-V2 erratum 4193787
->  	  * ARM Neoverse-V3 erratum 4193784
->  	  * ARM Neoverse-V3AE erratum 4193784
-> +	  * NVIDIA Olympus erratum T410-OLY-1029
->  
->  	  On affected cores, some memory accesses might not be completed by
->  	  broadcast TLB invalidation.
-> diff --git a/arch/arm64/kernel/cpu_errata.c b/arch/arm64/kernel/cpu_errata.c
-> index fe6fe5de495b..d597896b0f7f 100644
-> --- a/arch/arm64/kernel/cpu_errata.c
-> +++ b/arch/arm64/kernel/cpu_errata.c
-> @@ -364,6 +364,7 @@ static const struct arm64_cpu_capabilities arm64_repeat_tlbi_list[] = {
->  			MIDR_ALL_VERSIONS(MIDR_NEOVERSE_V2),
->  			MIDR_ALL_VERSIONS(MIDR_NEOVERSE_V3),
->  			MIDR_ALL_VERSIONS(MIDR_NEOVERSE_V3AE),
-> +			MIDR_ALL_VERSIONS(MIDR_NVIDIA_OLYMPUS),
->  			{}
->  		})),
->  	},
-> -- 
-> 2.43.0
-> 
+	/* Header 1: Vendor ID (bits 15:0) | Type (bits 23:16) */
+	header1 = (type << 16) | vendor;
+	writel(header1, drv->base + PF_DOE_RD_MEMORY_WR_REG(func_no, cap_offset));
+
+	/* Header 2: Length in DW (including 2 DW of headers + payload) */
+	payload_dw = DIV_ROUND_UP(response_pl_sz, sizeof(u32));
+	header2 = 2 + payload_dw;  /* 2 header DWs + payload */
+	writel(header2, drv->base + PF_DOE_RD_MEMORY_WR_REG(func_no, cap_offset));
+	
+	/* Set READY bit to signal response ready */
+	writel(1 << DOE_STATUS_READY,
+	       drv->base + PF_DOE_STATUS_REG(func_no, cap_offset));
+
+	/* Write response payload DWORDs to Read memory */
+	for (i = 0; i < payload_dw; i++)
+		writel(response[i],
+		       drv->base + PF_DOE_RD_MEMORY_WR_REG(func_no, cap_offset));
+
+	/* Wait for the memory to empty before clearing the READY bit */
+	while (!RD_MEMORY_EMPTY()) {/* wait */}
+
+	writel(0 << DOE_STATUS_READY,
+	       drv->base + PF_DOE_STATUS_REG(func_no, cap_offset));
+
+free:
+	/* unset BUSY bit */
+	writel(0 << DOE_STATUS_BUSY,
+	       drv->base + PF_DOE_STATUS_REG(func_no, cap_offset));
+
+	kfree(response_pl);
+}
+
+/* ========== DOE Interrupt Handler (triggered on GO bit from root complex) ========== */
+
+static irqreturn_t doe_interrupt_handler(int irq, void *priv)
+{
+	struct epc_driver *drv = priv;
+	u16 cap_offset = extract_cap_offset_from_irq(irq);
+	u8 func_no = extract_func_from_irq(irq);
+	u32 header1, header2, length_dw, *request;
+	u16 vendor;
+	u8 type;
+	int i, ret;
+
+	/* Read first header DWORD: Vendor ID (bits 15:0) | Type (bits 23:16) */
+	header1 = readl(drv->base + PF_DOE_WR_MEMORY_RD_REG(func_no, cap_offset));
+	vendor = header1 & 0xFFFF;
+	type = (header1 >> 16) & 0xFF;
+
+	/* Read second header DWORD: Length in DW (includes 2 DW of headers) */
+	header2 = readl(drv->base + PF_DOE_WR_MEMORY_RD_REG(func_no, cap_offset));
+	length_dw = header2 & 0x3FFFF;  /* Bits 17:0 */
+
+	if (!length_dw)
+		length_dw = PCI_DOE_MAX_LENGTH;
+
+	length_dw -= 2;  /* Subtract 2 DW of headers to get payload length */
+	/* Allocate buffer for complete request (headers + payload) */
+	request = kzalloc(length_dw * sizeof(u32), GFP_ATOMIC);
+	if (!request) {
+		writel(1 << DOE_STATUS_ERROR,
+		       drv->base + PF_DOE_STATUS_REG(func_no, cap_offset));
+		return IRQ_HANDLED;
+	}
+
+	/* Read remaining payload DWORDs from Write memory */
+	for (i = 0; i < length_dw; i++) {
+		while (WR_MEMORY_EMPTY()) { /* wait */ }
+		request[i] = readl(drv->base + PF_DOE_WR_MEMORY_RD_REG(func_no, cap_offset));
+	}
+	
+	mutex_lock(&lock);
+	/* Check the ABORT bit, if set then return */
+	if (readl(drv->base + PF_DOE_CTRL_REG(func_no, cap_offset)) & DOE_CTRL_ABORT) {
+		kfree(request);
+		mutex_unlock(&lock);
+		return IRQ_HANDLED;
+	}
+
+	/* Set BUSY bit */
+	writel(1 << DOE_STATUS_BUSY,
+	       drv->base + PF_DOE_STATUS_REG(func_no, cap_offset));
+	mutex_unlock(&lock);
+
+	/* Hand off to DOE-EP core for asynchronous processing */
+	ret = pci_ep_doe_process_request(drv->epc, func_no, cap_offset,
+					 vendor, type, (void *)request,
+					 length_dw * sizeof(u32),
+					 doe_completion_cb);
+	if (ret) {
+		writel(1 << DOE_STATUS_ERROR,
+		       drv->base + PF_DOE_STATUS_REG(func_no, cap_offset));
+		kfree(request);
+	}
+
+	return IRQ_HANDLED;
+}
+
+/* ========== Abort Handler (triggered on ABORT bit from root complex) ========== */
+
+static irqreturn_t doe_abort_handler(int irq, void *priv)
+{
+	struct epc_driver *drv = priv;
+	u16 cap_offset = extract_cap_offset_from_irq(irq);
+	u8 func_no = extract_func_from_irq(irq);
+	
+	mutex_lock(&lock);
+	
+	/* call abort API only if BUSY bit set (pci_ep_doe_process_request() called) */
+	if (readl(drv->base + PF_DOE_STATUS_REG(func_no, cap_offset)) & DOE_STATUS_BUSY)
+		pci_ep_doe_abort(drv->epc, func_no, cap_offset);
+	
+	mutex_unlock(&lock);
+
+	/* Discard Write memory contents */
+	writel(DOE_WR_MEMORY_CTRL_DISCARD,
+	       drv->base + PF_DOE_WR_MEMORY_CTRL_REG(func_no, cap_offset));
+
+	/* Clear status bits */
+	writel((0 << DOE_STATUS_ERROR) | (0 << DOE_STATUS_READY),
+	       drv->base + PF_DOE_STATUS_REG(func_no, cap_offset));
+
+	return IRQ_HANDLED;
+}
+
+====================================================================================
+
+Aksh Garg (4):
+  PCI/DOE: Move common definitions to the header file
+  PCI: endpoint: Add DOE mailbox support for endpoint functions
+  PCI: endpoint: Add support for DOE initialization and setup in EPC
+    core
+  Documentation: PCI: Add documentation for DOE endpoint support
+
+ Documentation/PCI/endpoint/index.rst          |   1 +
+ .../PCI/endpoint/pci-endpoint-doe.rst         | 333 ++++++++++
+ drivers/pci/doe.c                             |  11 -
+ drivers/pci/endpoint/Kconfig                  |  14 +
+ drivers/pci/endpoint/Makefile                 |   1 +
+ drivers/pci/endpoint/pci-ep-doe.c             | 594 ++++++++++++++++++
+ drivers/pci/endpoint/pci-epc-core.c           | 104 +++
+ drivers/pci/pci.h                             |  48 ++
+ include/linux/pci-doe.h                       |   8 +
+ include/linux/pci-epc.h                       |   9 +
+ 10 files changed, 1112 insertions(+), 11 deletions(-)
+ create mode 100644 Documentation/PCI/endpoint/pci-endpoint-doe.rst
+ create mode 100644 drivers/pci/endpoint/pci-ep-doe.c
+
+-- 
+2.34.1
+
 
