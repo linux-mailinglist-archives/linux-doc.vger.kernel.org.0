@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-91789-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91791-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id PhehCL3pKGrqNQMAu9opvQ
-	(envelope-from <linux-doc+bounces-91789-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 06:36:13 +0200
+	id pD1WJzDqKGpWNgMAu9opvQ
+	(envelope-from <linux-doc+bounces-91791-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 06:38:08 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C7C2665C4C
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 06:36:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DB3E2665C6A
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 06:38:03 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=arm.com header.s=foss header.b=p0XMTQr6;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91789-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91789-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=arm.com header.s=foss header.b=QJTDO5S3;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91791-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91791-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=arm.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 33F9330BFDB4
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 04:36:11 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id BF1C831053EF
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 04:36:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 788DA370AF0;
-	Wed, 10 Jun 2026 04:36:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8D682370D61;
+	Wed, 10 Jun 2026 04:36:12 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 72C83370ADE;
-	Wed, 10 Jun 2026 04:36:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0A008370D6F;
+	Wed, 10 Jun 2026 04:36:10 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781066170; cv=none; b=BPUFvXR7UsPfExSUwDkE8pcNyF+yMCESH4kgNBsGGjGxRC7TYUMojVGeYRTPp5bGZL6n9IRwUWFWJ9i0+ucj4eRoe/rKgSZouZmMjT3Cujy5cUMxOiHU4/MtgqOj5ktyi0W9xPkWQMxA8CuohLjvdGreNWRjes12U4MzWMjpypw=
+	t=1781066172; cv=none; b=d9YunrI2a2oZUXbHKGvSq+CVPgZOM+2EtA8454wTLIJuRR9yIBz62gHcZ7QQV7alRc2w7fgtRWPYRR0pNzUXXW9CcjCRmDiOVTgub3azMw9923BrYTKxLqtBhNDqx+NwWwFT8SBJGNEMC+UzroTce53x/Usy6MWOWTPXUmhWeQ4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781066170; c=relaxed/simple;
-	bh=EQ0kWJg0soLbAjU5hu5xaNnvVzvbJHppGej5Gc7U2sU=;
+	s=arc-20240116; t=1781066172; c=relaxed/simple;
+	bh=Adf3UUubAzeI6nT0ruRbYrEdRb+IDFoKB/5Y4BllNRU=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=YngXfZhrnaPdJRc3g/Ren/hZJCyvZaPjLPSwxXO5wFQBNwdQtL8+ObwORbEdp/5sO1JOJ4lTk/VrY9Yh3VxCdytCfLD04QXCMjm1SccAwI77otYf8FpKnnr7RS6GXLdq2jgSTr93MoVrI09eEWMjRnvCVz/cdwd080PAD/nSHb0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=p0XMTQr6; arc=none smtp.client-ip=217.140.110.172
+	 MIME-Version; b=EeRSmHeRn+61Qkj5WRJhfOXGvOkB1RSXmQhfAJJRHxzVXPwLBAEZ1hn6zUoM1TZy4HMHfs6+rBmO9F2C3x0jwfC+nKt1IB2IsyZ8sd4iX7E4KpuQP5t5Lj5/XotJIxMQWUDOlnzxMOWhiPynw4nQShG+CvRuao3FTB2Vn7ZFn54=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=QJTDO5S3; arc=none smtp.client-ip=217.140.110.172
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D9A0D471B;
-	Tue,  9 Jun 2026 21:36:02 -0700 (PDT)
-Received: from ergosum.cambridge.arm.com (ergosum.cambridge.arm.com [10.1.196.45])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id A1FEC3FD88;
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 92AC84723;
 	Tue,  9 Jun 2026 21:36:05 -0700 (PDT)
+Received: from ergosum.cambridge.arm.com (ergosum.cambridge.arm.com [10.1.196.45])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 0F52C3FD88;
+	Tue,  9 Jun 2026 21:36:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1781066167; bh=EQ0kWJg0soLbAjU5hu5xaNnvVzvbJHppGej5Gc7U2sU=;
+	t=1781066170; bh=Adf3UUubAzeI6nT0ruRbYrEdRb+IDFoKB/5Y4BllNRU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=p0XMTQr6CwEoVcot48UChEGP9uQKE7daiKe/47nvZuQwoV8U6mrO/xYx2BZr2LdXv
-	 BI/Ivkn+7cTvWByYt+ww8TM1i/S107v8sdqUtHwkARvgDfNHf+qZ8mNOFtqm8g8VNJ
-	 AdwSsj67tRPGavtpY9I5neVLn1YzLK8K7nllVqok=
+	b=QJTDO5S39rsz+D7aX+2P7dXYCwOJ1lARvf3pcBiWVpOu7oWro/1B+TRRFQ7T77Vfu
+	 lenwi66r82vEP0f8KxHBHgrR546fRcMendj+3T1SW+OUTSps1MdwB6otBlnhSYrutB
+	 NRx5xHfCsgElhQP6pKoujBnPnEMznXbCcJqOmKMI=
 From: Anshuman Khandual <anshuman.khandual@arm.com>
 To: linux-mm@kvack.org
 Cc: Anshuman Khandual <anshuman.khandual@arm.com>,
@@ -56,10 +56,12 @@ Cc: Anshuman Khandual <anshuman.khandual@arm.com>,
 	Andrew Morton <akpm@linux-foundation.org>,
 	David Hildenbrand <david@redhat.com>,
 	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Subject: [RFC V2 2/3] kunit: printf: Add test for pgtable entries
-Date: Wed, 10 Jun 2026 05:35:44 +0100
-Message-Id: <20260610043545.3725735-3-anshuman.khandual@arm.com>
+	linux-doc@vger.kernel.org,
+	David Hildenbrand <david@kernel.org>,
+	Lorenzo Stoakes <ljs@kernel.org>
+Subject: [RFC V2 3/3] mm: Replace pgtable entry prints with new format
+Date: Wed, 10 Jun 2026 05:35:45 +0100
+Message-Id: <20260610043545.3725735-4-anshuman.khandual@arm.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20260610043545.3725735-1-anshuman.khandual@arm.com>
 References: <20260610043545.3725735-1-anshuman.khandual@arm.com>
@@ -81,11 +83,11 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-91789-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-91791-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:linux-mm@kvack.org,m:anshuman.khandual@arm.com,m:andriy.shevchenko@linux.intel.com,m:linux@rasmusvillemoes.dk,m:senozhatsky@chromium.org,m:pmladek@suse.com,m:rostedt@goodmis.org,m:corbet@lwn.net,m:akpm@linux-foundation.org,m:david@redhat.com,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:linux-mm@kvack.org,m:anshuman.khandual@arm.com,m:andriy.shevchenko@linux.intel.com,m:linux@rasmusvillemoes.dk,m:senozhatsky@chromium.org,m:pmladek@suse.com,m:rostedt@goodmis.org,m:corbet@lwn.net,m:akpm@linux-foundation.org,m:david@redhat.com,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:david@kernel.org,m:ljs@kernel.org,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[12];
+	RCPT_COUNT_TWELVE(0.00)[14];
 	FORGED_SENDER(0.00)[anshuman.khandual@arm.com,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
@@ -102,99 +104,85 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ALIAS_RESOLVED(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp,suse.com:email,chromium.org:email,arm.com:dkim,arm.com:email,arm.com:mid,arm.com:from_mime]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:dkim,arm.com:email,arm.com:mid,arm.com:from_mime,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,kvack.org:email,vger.kernel.org:from_smtp,linux-foundation.org:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 6C7C2665C4C
+X-Rspamd-Queue-Id: DB3E2665C6A
 
-Add test for new pgtable entry print formats with entry size being 64 bits.
+Replace all existing pgtable entry prints with recently added new format in
+__print_bad_page_map_pgtable().
 
 Signed-off-by: Anshuman Khandual <anshuman.khandual@arm.com>
 ---
-Cc: Petr Mladek <pmladek@suse.com>
-Cc: Steven Rostedt <rostedt@goodmis.org>
-Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: Rasmus Villemoes <linux@rasmusvillemoes.dk>
-Cc: Sergey Senozhatsky <senozhatsky@chromium.org>
+Cc: Andrew Morton <akpm@linux-foundation.org>
+Cc: David Hildenbrand <david@kernel.org>
+Cc: Lorenzo Stoakes <ljs@kernel.org>
+Cc: linux-mm@kvack.org
 Cc: linux-kernel@vger.kernel.org
 
- lib/tests/printf_kunit.c | 57 ++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 57 insertions(+)
+ mm/memory.c | 15 +++++----------
+ 1 file changed, 5 insertions(+), 10 deletions(-)
 
-diff --git a/lib/tests/printf_kunit.c b/lib/tests/printf_kunit.c
-index bb70b9cddadd..850bfc0e3409 100644
---- a/lib/tests/printf_kunit.c
-+++ b/lib/tests/printf_kunit.c
-@@ -791,6 +791,62 @@ errptr(struct kunit *kunittest)
- #endif
+diff --git a/mm/memory.c b/mm/memory.c
+index 86a973119bd4..8a25790f7c24 100644
+--- a/mm/memory.c
++++ b/mm/memory.c
+@@ -521,7 +521,6 @@ static bool is_bad_page_map_ratelimited(void)
+ 
+ static void __print_bad_page_map_pgtable(struct mm_struct *mm, unsigned long addr)
+ {
+-	unsigned long long pgdv, p4dv, pudv, pmdv;
+ 	p4d_t p4d, *p4dp;
+ 	pud_t pud, *pudp;
+ 	pmd_t pmd, *pmdp;
+@@ -532,34 +531,30 @@ static void __print_bad_page_map_pgtable(struct mm_struct *mm, unsigned long add
+ 	 * see locking requirements for print_bad_page_map().
+ 	 */
+ 	pgdp = pgd_offset(mm, addr);
+-	pgdv = pgd_val(*pgdp);
+ 
+ 	if (!pgd_present(*pgdp) || pgd_leaf(*pgdp)) {
+-		pr_alert("pgd:%08llx\n", pgdv);
++		pr_alert("pgd:%ppgd\n", pgdp);
+ 		return;
+ 	}
+ 
+ 	p4dp = p4d_offset(pgdp, addr);
+ 	p4d = p4dp_get(p4dp);
+-	p4dv = p4d_val(p4d);
+ 
+ 	if (!p4d_present(p4d) || p4d_leaf(p4d)) {
+-		pr_alert("pgd:%08llx p4d:%08llx\n", pgdv, p4dv);
++		pr_alert("pgd:%ppgd p4d:%pp4d\n", pgdp, p4dp);
+ 		return;
+ 	}
+ 
+ 	pudp = pud_offset(p4dp, addr);
+ 	pud = pudp_get(pudp);
+-	pudv = pud_val(pud);
+ 
+ 	if (!pud_present(pud) || pud_leaf(pud)) {
+-		pr_alert("pgd:%08llx p4d:%08llx pud:%08llx\n", pgdv, p4dv, pudv);
++		pr_alert("pgd:%ppgd p4d:%pp4d pud:%ppud\n", pgdp, p4dp, pudp);
+ 		return;
+ 	}
+ 
+ 	pmdp = pmd_offset(pudp, addr);
+ 	pmd = pmdp_get(pmdp);
+-	pmdv = pmd_val(pmd);
+ 
+ 	/*
+ 	 * Dumping the PTE would be nice, but it's tricky with CONFIG_HIGHPTE,
+@@ -567,8 +562,8 @@ static void __print_bad_page_map_pgtable(struct mm_struct *mm, unsigned long add
+ 	 * doing another map would be bad. print_bad_page_map() should
+ 	 * already take care of printing the PTE.
+ 	 */
+-	pr_alert("pgd:%08llx p4d:%08llx pud:%08llx pmd:%08llx\n", pgdv,
+-		 p4dv, pudv, pmdv);
++	pr_alert("pgd:%ppgd p4d:%pp4d pud:%ppud pmd:%ppmd\n", pgdp,
++		 p4dp, pudp, pmdp);
  }
  
-+struct pgtable_test {
-+	u64 val;
-+	const char *name;
-+};
-+
-+static struct pgtable_test pgtable_test_cases[] = {
-+	{ .val = 0xc0ffee,		.name = "0x0000000000c0ffee"},
-+	{ .val = 0xdeadbeef,		.name = "0x00000000deadbeef"},
-+	{ .val = 0xaabbcc,		.name = "0x0000000000aabbcc"},
-+	{ .val = 0xcc,			.name = "0x00000000000000cc"},
-+	{ .val = 0x1,			.name = "0x0000000000000001"},
-+	{ .val = 0x11,			.name = "0x0000000000000011"},
-+	{ .val = 0x111,			.name = "0x0000000000000111"},
-+	{ .val = 0x10000010001,		.name = "0x0000010000010001"},
-+	{ .val = 0xc0ffeec0ffee,	.name = "0x0000c0ffeec0ffee"},
-+	{ .val = 0x10000000000,		.name = "0x0000010000000000"},
-+	{ .val = 0x11000000000,		.name = "0x0000011000000000"},
-+	{ .val = 0x1000000000000001,	.name = "0x1000000000000001"},
-+	{ .val = 0x1100000000000010,	.name = "0x1100000000000010"},
-+	{ .val = 0x1110000000000100,	.name = "0x1110000000000100"},
-+	{ .val = 0xfff000000000ff00,	.name = "0xfff000000000ff00"},
-+};
-+
-+static void
-+pgtable_ptr(struct kunit *kunittest)
-+{
-+	char buf[64];
-+	int i;
-+
-+	if (sizeof(pte_t) != 8)
-+		kunit_skip(kunittest, "pte_t size is not 64 bits");
-+
-+	for (i = 0; i < ARRAY_SIZE(pgtable_test_cases); i++) {
-+		pte_t pte = __pte(pgtable_test_cases[i].val);
-+		pmd_t pmd = __pmd(pgtable_test_cases[i].val);
-+		pud_t pud = __pud(pgtable_test_cases[i].val);
-+		p4d_t p4d = __p4d(pgtable_test_cases[i].val);
-+		pgd_t pgd = __pgd(pgtable_test_cases[i].val);
-+
-+		snprintf(buf, sizeof(buf), "%ppte", &pte);
-+		KUNIT_EXPECT_STREQ(kunittest, buf, pgtable_test_cases[i].name);
-+
-+		snprintf(buf, sizeof(buf), "%ppmd", &pmd);
-+		KUNIT_EXPECT_STREQ(kunittest, buf, pgtable_test_cases[i].name);
-+
-+		snprintf(buf, sizeof(buf), "%ppud", &pud);
-+		KUNIT_EXPECT_STREQ(kunittest, buf, pgtable_test_cases[i].name);
-+
-+		snprintf(buf, sizeof(buf), "%pp4d", &p4d);
-+		KUNIT_EXPECT_STREQ(kunittest, buf, pgtable_test_cases[i].name);
-+
-+		snprintf(buf, sizeof(buf), "%ppgd", &pgd);
-+		KUNIT_EXPECT_STREQ(kunittest, buf, pgtable_test_cases[i].name);
-+	}
-+}
-+
- static int printf_suite_init(struct kunit_suite *suite)
- {
- 	total_tests = 0;
-@@ -839,6 +895,7 @@ static struct kunit_case printf_test_cases[] = {
- 	KUNIT_CASE(errptr),
- 	KUNIT_CASE(fwnode_pointer),
- 	KUNIT_CASE(fourcc_pointer),
-+	KUNIT_CASE(pgtable_ptr),
- 	{}
- };
- 
+ /*
 -- 
 2.30.2
 
