@@ -1,94 +1,68 @@
-Return-Path: <linux-doc+bounces-91874-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91876-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 0bPtCijAKWrkcgMAu9opvQ
-	(envelope-from <linux-doc+bounces-91874-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 21:51:04 +0200
+	id 6PO8Br/FKWpPdAMAu9opvQ
+	(envelope-from <linux-doc+bounces-91876-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 22:14:55 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 898FA66C96D
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 21:51:03 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D99A66CB80
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 22:14:54 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=TquLqj9a;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91874-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-91874-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=none;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=GLVJ6puA;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91876-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91876-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id A0599315CC33
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 19:50:33 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id AFFF1303FF0D
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 20:14:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F24FE3563EB;
-	Wed, 10 Jun 2026 19:50:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 174AF351C06;
+	Wed, 10 Jun 2026 20:14:43 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dy1-f171.google.com (mail-dy1-f171.google.com [74.125.82.171])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C72E7346E44
-	for <linux-doc@vger.kernel.org>; Wed, 10 Jun 2026 19:50:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA336224B15;
+	Wed, 10 Jun 2026 20:14:39 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781121032; cv=none; b=DXYdv0spSE5CKytUA/cDv4MKjdxWAfR7PkuEQjHtS7Ce+G1qi/7O1FUGkEfqCCSN1CL7FmwuaVSioqF+gWrNMS1MX6WcWC75NfLOeotKY3kK9PUFbDl0KKjTTgYIXdLcDqiJqiX2Ryt06kuv5x1k+k2EGLrzCHY9iBk3gCjbt/I=
+	t=1781122483; cv=none; b=B194U+9SvZEYUc6jFXEinLXoeLNItHW4S4qBYs+bi3INATy1EuPnkZXaDM8BhpDqmWRJd/jlgmwC+aqtujsK3xaD58kq5BjusaVlwR3Xf09PBwhoieRCw/+Gd04MBbNuQAoEGiKchjHid4+0xxgvYmB1jTsREfzyNl8zKWsGW4I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781121032; c=relaxed/simple;
-	bh=NdoR2dUOz+cvRTVp6dzp5eO0K7yE82vTXhrdPrgb+7s=;
+	s=arc-20240116; t=1781122483; c=relaxed/simple;
+	bh=3RxX2FyRQQa8heoLj42OYaT9uLCGSZnUpQe4qmTNQqs=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Y0tVGtQdUSumjsu1kajSr78/gKTIb2kNw2P9VbeNWYHSSzuMhIHc/nGlcx+eu1+PxkEG0IGCoumqn3cvs2mg52eWxsmBs/ymz+/RCEZeLvbsJDz3gWEHQ/WjCqQvG+yvT0dt9hamRRlpyLE4nG6lb9TBGNWngkzaTBh3r5VNQLs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=TquLqj9a; arc=none smtp.client-ip=74.125.82.171
-Received: by mail-dy1-f171.google.com with SMTP id 5a478bee46e88-3042a388168so120998eec.1
-        for <linux-doc@vger.kernel.org>; Wed, 10 Jun 2026 12:50:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781121031; x=1781725831; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=AE+2DETC16XLEWZxUW4XVA4+dACVsOVOfwIUzPMRy7Q=;
-        b=TquLqj9a3Y8qCGW+oxPw2IUauU6GdiR+/BPbr7wSa9q18MaQL0XoM0NQCVP6KcU1W2
-         GqthVJz299q23fApFLZGeLXpgl+e6oO/dWpo5j4LE4HbQaXkN0dp40I4RYSHbbZmDpwK
-         GlP+BPCuEjG5rTOt0iAt/nz9PKy3bEGTLQVfNALxqYB8YrBaqyhW97H1mCE1TdILEXbN
-         /Y4lhOoG0eZn25sR8iIexmP+xHDfgjoXTmNYanDsnNEQUzHT0dBjMUfgfOOHPtcMmVcI
-         lnnsQTJAALFxqyaDGbpUf7wSz2/KOM0z/jnsoeRapHA/XU/j+/9NtkAccMBiP8fvN/iF
-         MOwA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781121031; x=1781725831;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:sender:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=AE+2DETC16XLEWZxUW4XVA4+dACVsOVOfwIUzPMRy7Q=;
-        b=C/D1Niyi3wUYi81gXD3gp2k58BdQYoIQOnzFyTL+/1naMq4a+ESvtwNqVNk30RwlZl
-         uVL6zdzpMZmDTJgqQRvMcCW9ci30P+lVc34qrKc0EKx1PW6EVdRKQYlPjFj+fZyH0e8I
-         8Wm6U6dGj2eAdteam7nSiB7Uz6jYND6m+SOT8rglnw66dxF6VPiwnyLuTmue1vhhVRJv
-         tCHoI2RDgne9sioyU7okOw2pvCUmSP4R+OiDIKpy7BO41iZhy2fGVmp2/epzjNts7aYe
-         uLI9uiwJOnzoC6ncZghex5+C+MzmI/xhcW65bLfj3ttaSospMtfuVoRdU7nDeGU4SmSN
-         9bmw==
-X-Forwarded-Encrypted: i=1; AFNElJ8lmdPz59CsSh7BKzcUtwXvXkjjXbBp9oc10AvGrNmPMvQ2U2+QihdW1ZzMsIzHWifcvJ/2rPx+1QY=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxcwKrMiMBswE5Mk05nJpxJT3+4R+7LCAoFlxj+kllammWsHOvP
-	pHV8lpStTPbSCdtEtGrNbPgtRl5LEMV0uyRbQRJY+PzqfPJggdGJcKIu
-X-Gm-Gg: Acq92OHLyZy9fQLsStCVUKRP+bCzqNohg4vIG7FMdCU+P+wcfgqQ0xq7ZiNGrc5JXhY
-	tnCILbsZsDglcdEpZXXJYtGulMSokj7zl0g63NSYSfkHq5u0rcWRcQJkN30m//IGhoJSS4zUi1F
-	UE4e+qvNej7p1QAUwPlumLhB9Z0d+9o3HOUlB/k4dJ5I8zrf98H3Au5X8RE171mq62yHGvB5s4W
-	g1HkoqB+0IuoK7E8rDHcXTIyBx0cTD36uVurjwzWQQxI6Vz+3A8QfBkj1as17ISiPclOwNa2Wgp
-	9wRd58R9Z2qfE7jnfi+Pm4k1OS06Swptu814q9GmnBV5e5K9QTGwXum5c05W6a1nYMQ3ntw3P8R
-	soLcB9Tap7aJTSSBmPKQTyA56KnQpTaYSbM9YN54+o/iZBFOmG+GC+RGtbK5BJ0+1UK4lP7geXX
-	g3ISsOPv3iIzatzhG+1q2gD3oEurlagD6kUvkDPsUCi/IbrR4=
-X-Received: by 2002:a05:7301:e0c1:b0:2d2:d5a3:e97c with SMTP id 5a478bee46e88-308015d8c77mr47705eec.12.1781121030827;
-        Wed, 10 Jun 2026 12:50:30 -0700 (PDT)
-Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3074dea8e76sm25662344eec.18.2026.06.10.12.50.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 10 Jun 2026 12:50:30 -0700 (PDT)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Date: Wed, 10 Jun 2026 12:50:29 -0700
-From: Guenter Roeck <linux@roeck-us.net>
-To: Marius Cristea <marius.cristea@microchip.com>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	 Content-Type:Content-Disposition:In-Reply-To; b=InxugSxYkfQrvsc8mbTZ1Kc+isNgnEN2QiOq3diAUhbOoleoNH8l0aaoUSHw/3rwDeDXc79X2kSDnQmL55yVrf0AMJniZZjjFcMFRv8T4p+958q5rlcbnHtchEUdjY/0KvgL6mpzwteutFn2Qq0u4X1p/zjvsJBr809rpupxhKA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GLVJ6puA; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E78E51F00893;
+	Wed, 10 Jun 2026 20:14:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1781122479;
+	bh=QBHhgJ5rPR8+Lum7+XyXvPm6/Ckn6DZvX5YcfbbqSOc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=GLVJ6puA8GbUE50OTKt6onOc5YYaFlPgTEbtkhKO1Y0tZ37RMU5lA83A9fqG7zA8f
+	 R1M0N/1QVuVKHmwzmKS7AXlOIUKylSvRR3UJZuyJU+xQomBXC+tQS9WyBX6wZOheE6
+	 bPydwUQ1k9PmGPWcMtfU0m5ARO+cGTgTJ022HVrj2bKTErfAoVSspUY1uQTfuVT8Px
+	 iIsvxV9whlCHfGa7VUOYEAC6Q5JTcGy48v2ZeMesc0nxpnyBAj0LxArXczuoP5c2Zg
+	 5JFI8FJc1CitXdtdrrjFNQ47GUY4pwCKbn0k3xO1aPotn7fyxiLpYVMNnsuxjHvlD4
+	 RgRDlhDQEc00w==
+Date: Wed, 10 Jun 2026 17:14:34 -0300
+From: Arnaldo Carvalho de Melo <acme@kernel.org>
+To: James Clark <james.clark@linaro.org>
+Cc: Suzuki K Poulose <suzuki.poulose@arm.com>,
+	Mike Leach <mike.leach@arm.com>, Leo Yan <leo.yan@arm.com>,
+	Namhyung Kim <namhyung@kernel.org>, Jiri Olsa <jolsa@kernel.org>,
+	Ian Rogers <irogers@google.com>, Amir Ayupov <aaupov@meta.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Paschalis Mpeis <Paschalis.Mpeis@arm.com>,
+	coresight@lists.linaro.org, linux-perf-users@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Arnaldo Carvalho de Melo <acme@redhat.com>,
 	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v11 2/2] hwmon: temperature: add support for EMC1812
-Message-ID: <2cc27856-725b-492e-bce9-f1208a89fd4c@roeck-us.net>
-References: <20260610-hw_mon-emc1812-v11-0-cef809af5c19@microchip.com>
- <20260610-hw_mon-emc1812-v11-2-cef809af5c19@microchip.com>
+Subject: Re: [PATCH v5 00/19] perf cs-etm: Queue context packets for frontend
+Message-ID: <ainFqtxdLwhbRqrI@x1>
+References: <20260609-james-cs-context-tracking-fix-v5-0-d53a7d096a19@linaro.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -97,62 +71,185 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260610-hw_mon-emc1812-v11-2-cef809af5c19@microchip.com>
+In-Reply-To: <20260609-james-cs-context-tracking-fix-v5-0-d53a7d096a19@linaro.org>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-4.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-91874-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:james.clark@linaro.org,m:suzuki.poulose@arm.com,m:mike.leach@arm.com,m:leo.yan@arm.com,m:namhyung@kernel.org,m:jolsa@kernel.org,m:irogers@google.com,m:aaupov@meta.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:Paschalis.Mpeis@arm.com,m:coresight@lists.linaro.org,m:linux-perf-users@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:acme@redhat.com,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:marius.cristea@microchip.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:linux-hwmon@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	FROM_HAS_DN(0.00)[];
-	DMARC_NA(0.00)[roeck-us.net];
-	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	FORGED_SENDER(0.00)[acme@kernel.org,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-91876-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	MISSING_XM_UA(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[9];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[acme@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,microchip.com:email,vger.kernel.org:from_smtp,roeck-us.net:mid,roeck-us.net:from_mime]
+	TAGGED_RCPT(0.00)[linux-doc];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 898FA66C96D
+X-Rspamd-Queue-Id: 6D99A66CB80
 
-On Wed, Jun 10, 2026 at 06:19:47PM +0300, Marius Cristea wrote:
-> This is the hwmon driver for Microchip EMC1812/13/14/15/33
-> Multichannel Low-Voltage Remote Diode Sensor Family.
+On Tue, Jun 09, 2026 at 03:40:05PM +0100, James Clark wrote:
+> Fix thread tracking when decoding Coresight trace and add a new test for
+> it.
+
+The issues found by sashiko seem mild and you can address them in follow
+up patches, I think.
+
+So for the benefit of having perf-tools-next available for linux-next
+testing and the window is closing soon, so I've merged this, ok?
+
+- Arnaldo
+ 
+> The new test is added as a Perf test workload instead of a custom binary
+> with its own build system, but this requires a new feature in Perf test
+> to pass in control pipes which can enable and disable events. This
+> scopes the recording to just the workload and helps to reduce the amount
+> of data recorded in tracing tests.
 > 
-> EMC1812 has one external remote temperature monitoring channel.
-> EMC1813 has two external remote temperature monitoring channels.
-> EMC1814 has three external remote temperature monitoring channels,
-> channels 2 and 3 support anti parallel diode.
-> EMC1815 has four external remote temperature monitoring channels and
-> channels 1/2  and 3/4 support anti parallel diode.
-> EMC1833 has two external remote temperature monitoring channels and
-> channels 1 and 2 support anti parallel diode.
-> Resistance Error Correction is supported on channels 1/2 and 3/4.
+> With this new feature we can re-write all of the Coresight tests to make
+> use of it and remove the remaining binaries which fixes the following
+> issues:
 > 
-> Signed-off-by: Marius Cristea <marius.cristea@microchip.com>
-
-Applied.
-
-Thanks,
-Guenter
+>  * They didn't work in out of source builds
+>  * A lot of the tests unnecessarily required root and didn't skip
+>    without it
+>  * They were mainly qualitative tests which didn't look for specific
+>    behavior
+> 
+> Most importantly, the long build and runtime has been reduced. On a
+> Radxa Orion O6, unroll_loop_thread.c took 37s to compile which is longer
+> than the entire Perf build. Now the build time is negligible and the
+> before and after test runtimes for all the Coresight tests are:
+> 
+>           |   N1SDP   |   Orion O6
+>   -----------------------------------
+>   Before  |   4m  0s  |    14m 49s
+>   After   |      26s  |        56s
+>   -----------------------------------
+> 
+> Signed-off-by: James Clark <james.clark@linaro.org>
+> ---
+> Changes in v5:
+> - Forgot to include this change:
+>   - Test for actual length of expected raw dump (Leo)
+> - Link to v4: https://lore.kernel.org/r/20260609-james-cs-context-tracking-fix-v4-0-44f9fb9e5c42@linaro.org
+> 
+> Changes in v4:
+> - Rename workload-ctl to record-ctl and improve docs (Leo)
+> - Use new packet argument everywhere in
+>   cs_etm__synth_instruction_sample() (Sashiko)
+> - Test for actual length of expected raw dump (Leo)
+> - Use -fno-inline instead of keyword (Leo)
+> - Don't test any brace or call lines in deterministic test
+> - Make sure context switch loop test does cleanup on failure (Sashiko)
+> - Remove undef int overflows in workloads (Sashiko)
+> - Link to v3: https://lore.kernel.org/r/20260603-james-cs-context-tracking-fix-v3-0-c392945d9ed5@linaro.org
+> 
+> Changes in v3:
+> - Minor sashiko comments
+>   - Close some more pipes
+>   - Fix warning messages
+>   - Error handling improvements
+> - Pass packet into cs_etm__synth_instruction_sample()
+> - Fixup stale comment (Leo)
+> - Link to v2: https://lore.kernel.org/r/20260602-james-cs-context-tracking-fix-v2-0-85b5ce6f55c6@linaro.org
+> 
+> Changes in v2:
+> - Add --workload-ctl option to Perf test
+> - Re-write all the Coresight tests and speed them up
+> - Pass packet to memory access function so frontend can use either the
+>   previous or current packet's EL
+> - Link to v1: https://lore.kernel.org/r/20260526-james-cs-context-tracking-fix-v1-0-ebd602e18287@linaro.org
+> 
+> ---
+> James Clark (19):
+>       perf cs-etm: Queue context packets for frontend
+>       perf test: Add workload-ctl option
+>       perf test: Add a workload that forces context switches
+>       perf test cs-etm: Test process attribution
+>       perf test: Add deterministic workload
+>       perf test cs-etm: Replace unroll loop thread with deterministic decode test
+>       perf test cs-etm: Remove asm_pure_loop test
+>       perf test cs-etm: Replace memcpy test with raw dump stress test
+>       perf test: Add named_threads workload
+>       perf test cs-etm: Test decoding for concurrent threads test
+>       perf test cs-etm: Remove duplicate branch tests
+>       perf test cs-etm: Skip if not root
+>       perf test cs-etm: Reduce snapshot size
+>       perf test cs-etm: Speed up basic test
+>       perf test cs-etm: Remove unused Coresight workloads
+>       perf test cs-etm: Make disassembly test use kcore
+>       perf test cs-etm: Add all branch instructions to test
+>       perf test cs-etm: Speed up disassembly test
+>       perf test cs-etm: Move existing tests to coresight folder
+> 
+>  Documentation/trace/coresight/coresight-perf.rst   |  78 +------
+>  MAINTAINERS                                        |   2 -
+>  tools/perf/Documentation/perf-test.txt             |  24 ++-
+>  tools/perf/Makefile.perf                           |  14 +-
+>  tools/perf/scripts/python/arm-cs-trace-disasm.py   |  20 +-
+>  tools/perf/tests/builtin-test.c                    | 187 +++++++++++++++-
+>  tools/perf/tests/shell/coresight/Makefile          |  29 ---
+>  .../perf/tests/shell/coresight/Makefile.miniconfig |  14 --
+>  tools/perf/tests/shell/coresight/asm_pure_loop.sh  |  22 --
+>  .../tests/shell/coresight/asm_pure_loop/.gitignore |   1 -
+>  .../tests/shell/coresight/asm_pure_loop/Makefile   |  34 ---
+>  .../shell/coresight/asm_pure_loop/asm_pure_loop.S  |  30 ---
+>  .../tests/shell/coresight/concurrent_threads.sh    |  45 ++++
+>  .../tests/shell/coresight/context_switch_thread.sh |  69 ++++++
+>  tools/perf/tests/shell/coresight/deterministic.sh  |  72 +++++++
+>  .../tests/shell/coresight/memcpy_thread/.gitignore |   1 -
+>  .../tests/shell/coresight/memcpy_thread/Makefile   |  33 ---
+>  .../shell/coresight/memcpy_thread/memcpy_thread.c  |  80 -------
+>  .../tests/shell/coresight/memcpy_thread_16k_10.sh  |  22 --
+>  .../perf/tests/shell/coresight/raw_dump_stress.sh  |  65 ++++++
+>  .../shell/{ => coresight}/test_arm_coresight.sh    |  43 ++--
+>  .../{ => coresight}/test_arm_coresight_disasm.sh   |  23 +-
+>  .../tests/shell/coresight/thread_loop/.gitignore   |   1 -
+>  .../tests/shell/coresight/thread_loop/Makefile     |  33 ---
+>  .../shell/coresight/thread_loop/thread_loop.c      |  85 --------
+>  .../shell/coresight/thread_loop_check_tid_10.sh    |  23 --
+>  .../shell/coresight/thread_loop_check_tid_2.sh     |  23 --
+>  .../shell/coresight/unroll_loop_thread/.gitignore  |   1 -
+>  .../shell/coresight/unroll_loop_thread/Makefile    |  33 ---
+>  .../unroll_loop_thread/unroll_loop_thread.c        |  75 -------
+>  .../tests/shell/coresight/unroll_loop_thread_10.sh |  22 --
+>  tools/perf/tests/shell/lib/coresight.sh            | 134 ------------
+>  tools/perf/tests/tests.h                           |   3 +
+>  tools/perf/tests/workloads/Build                   |   4 +
+>  tools/perf/tests/workloads/context_switch_loop.c   | 110 ++++++++++
+>  tools/perf/tests/workloads/deterministic.c         |  39 ++++
+>  tools/perf/tests/workloads/named_threads.c         | 109 ++++++++++
+>  tools/perf/util/cs-etm-decoder/cs-etm-decoder.c    |  21 +-
+>  tools/perf/util/cs-etm.c                           | 236 ++++++++++++---------
+>  tools/perf/util/cs-etm.h                           |   8 +-
+>  40 files changed, 926 insertions(+), 942 deletions(-)
+> ---
+> base-commit: 351a37f2fda4db668cff8ba12f2992d73dccdaea
+> change-id: 20260515-james-cs-context-tracking-fix-754998bae7ed
+> 
+> Best regards,
+> -- 
+> James Clark <james.clark@linaro.org>
 
