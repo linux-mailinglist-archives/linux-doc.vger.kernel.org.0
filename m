@@ -1,347 +1,359 @@
-Return-Path: <linux-doc+bounces-91807-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91810-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id R3/HN+IYKWpOQgMAu9opvQ
-	(envelope-from <linux-doc+bounces-91807-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 09:57:22 +0200
+	id 1k3oOsogKWqDRAMAu9opvQ
+	(envelope-from <linux-doc+bounces-91810-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 10:31:06 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 32AF9666D64
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 09:57:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 47C356672EA
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 10:31:06 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=huawei.com header.s=dkim header.b="A/v2BYzT";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91807-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91807-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=huawei.com;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b="aipd9aq/";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91810-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91810-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=gmail.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E549A3011865
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 07:52:27 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 0FEB332D3986
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 08:22:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 76546374A09;
-	Wed, 10 Jun 2026 07:52:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E03443446C4;
+	Wed, 10 Jun 2026 08:22:29 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from canpmsgout03.his.huawei.com (canpmsgout03.his.huawei.com [113.46.200.218])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 842D5306D26;
-	Wed, 10 Jun 2026 07:52:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 374393A3E73
+	for <linux-doc@vger.kernel.org>; Wed, 10 Jun 2026 08:22:28 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781077946; cv=none; b=Kr6u5i/YXHGO7SZUcZpB6Y2d2uu/iBizm2E5uZPyfMp8ar9NVklEsKW0OV8h12iiqSegxLXNcDy3X2yrCGZQF8PEiQKhYhDA3Dc/eTD8rl3l+mAVHX4OIghDs2juE23ZHE0MWsOt8ZMgpOxTlcnNiJlJJged6HX7eveRp5lkV+w=
+	t=1781079749; cv=none; b=mza5VNRgb0VQNnJcb1Yt1RLoXR01hv42bArcWwjDTOrrheFXBj55oXsrSKSzmjY/sJi4LJ0u6cvwCkMK9KpuZMNOrLyiM9jfBYs+BAc9Jh3Rrd6z/U/upKx+PoDpRA1/TvBecm61T+pe8wdBfx+WDv5EevsC9b7zTh7pCZEPTlc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781077946; c=relaxed/simple;
-	bh=+M1r0B/Qd5s2mtRlIjAPImhUHhEU6UIPFSUde1z+4xA=;
-	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=S8iSwzfvu6TCmP0Oc/mqMtqvLyeNZ8RwYY0FErkg4g744pVIjvGk1dCowH0X2glKr0sQ6NbXrk5PPC2tG0DQwDsg6b3/IUWGItCdh+43fks8y8+4O1GkyREvaGQwa/bSA2L+WHkBRKWR7NpSVbWB/kibG1z71E/cfhEINSPa8sc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=A/v2BYzT; arc=none smtp.client-ip=113.46.200.218
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=JMP2CJp2EuScYDqToPazhag3VfcxgYdXa9VHzhs4Iyo=;
-	b=A/v2BYzTj0SAKrMJ5/XL7Hdt53X5WYNN9vJi93vge8Lxmdtb26HA3cdNtB+bsFCwxOQHcHDyO
-	aJ52QWAvB0sBPFkWmwbWvZd5PuX3TIUunTNHf1Mb91mFyT/Uwa5BB0n4MtsXogCPbWW6rnaUSak
-	Zcir+fJshs9BjO07VEsLY+0=
-Received: from mail.maildlp.com (unknown [172.19.162.223])
-	by canpmsgout03.his.huawei.com (SkyGuard) with ESMTPS id 4gZyTn0XVczpSx2;
-	Wed, 10 Jun 2026 15:44:29 +0800 (CST)
-Received: from dggpemf500011.china.huawei.com (unknown [7.185.36.131])
-	by mail.maildlp.com (Postfix) with ESMTPS id AB81340670;
-	Wed, 10 Jun 2026 15:52:19 +0800 (CST)
-Received: from huawei.com (10.90.53.73) by dggpemf500011.china.huawei.com
- (7.185.36.131) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Wed, 10 Jun
- 2026 15:52:18 +0800
-From: Jinjie Ruan <ruanjinjie@huawei.com>
-To: <catalin.marinas@arm.com>, <will@kernel.org>, <corbet@lwn.net>,
-	<skhan@linuxfoundation.org>, <punit.agrawal@oss.qualcomm.com>,
-	<ruanjinjie@huawei.com>, <mrigendra.chaubey@gmail.com>,
-	<suzuki.poulose@arm.com>, <chenl311@chinatelecom.cn>,
-	<fengchengwen@huawei.com>, <maz@kernel.org>, <timothy.hayes@arm.com>,
-	<lpieralisi@kernel.org>, <arnd@arndb.de>, <gshan@redhat.com>,
-	<jic23@kernel.org>, <dietmar.eggemann@arm.com>, <sudeep.holla@kernel.org>,
-	<pierre.gondois@arm.com>, <linux-arm-kernel@lists.infradead.org>,
-	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>
-Subject: [PATCH v4 2/2] cpu/hotplug: Fix NULL kobject warning in cpuhp_smt_enable()
-Date: Wed, 10 Jun 2026 15:52:02 +0800
-Message-ID: <20260610075202.3597031-3-ruanjinjie@huawei.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260610075202.3597031-1-ruanjinjie@huawei.com>
-References: <20260610075202.3597031-1-ruanjinjie@huawei.com>
+	s=arc-20240116; t=1781079749; c=relaxed/simple;
+	bh=vvXwFej9lj1lAXWCrG5lZjXXoPyaHSlpldTcl2itE9A=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=QpWhRZrjwr1rluIu0rxFBcQkGf2VVgABcJTniQiMXdkaw2A0MZznRuQFrINuoTW/JPoJ1S0Dqp6gMAEMObYZuN/HPqEHpdA30fmmoHUWS2TZXHCLGxCWGXr4zIHexvxAhe5SpWSXSR58CswnmnC3Qw7MiDOX1TvuTuvMRg7ZAiE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=aipd9aq/; arc=none smtp.client-ip=209.85.128.52
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4903d730b1fso74053535e9.2
+        for <linux-doc@vger.kernel.org>; Wed, 10 Jun 2026 01:22:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1781079747; x=1781684547; darn=vger.kernel.org;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=XxoZFC5RwuU1AtzTTwLIZclxEbkhraC7dqE6/SFyZN8=;
+        b=aipd9aq/H7OWGOBhXhCu+dbd5jMq03pRY4SJnPMdt85vnVmIrSzgoaVoubUceYZG7H
+         tZ6qUW9PC7V0ML05yCYY12ZcuDKHQ46qfFVD7b54I5cssyYnscprStZL/4R+woQckgfx
+         r1szP2qn/edEnXacEImkz5uD8kDkxs1mQBQ53n7Uw4twYRpBh/Sij1y7gcI3r1f3N6xX
+         6C8H2a+Z1XEaRYUq54J10esIwc3U2Du4s7vzqLn7BqTurYzXOeKb+Qs1ARu1Gb5prE+B
+         wXkzeXJGpZxDHunzvHB/GbZQr81Mf3bt77EpKoGKxFVIogMRPgAMPgDSWhHzz8Q/bXuN
+         x3nA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1781079747; x=1781684547;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=XxoZFC5RwuU1AtzTTwLIZclxEbkhraC7dqE6/SFyZN8=;
+        b=f0P0+xdMxUlw9oBHRNMsNeM+bdWh4jY/xIIlyp5RE3QdVjVTvHYN8WJFI9J6BDvsIa
+         FBmQ6y0GpJ30KH8tccq9G8bYxSkssWLokvGYo26vmdAgq24YsOoESvgq2HNxhRnh7RmP
+         iZkLAFQUw5qSuUpj6KaacPeXPTynWW/8syaJqnDQNTAsp6m82JgW52kth8ZgvoXm0ub3
+         Pu6r2AhuI997JA1A4tKtpCkbLDzC0wyBPcRpUHPOQCSZXU/Ccr1psjVtCW0HPUxGM6ls
+         hghAb+7yopRcjWQx1j/VgzdrTEo29bwOSvU4LlE+FayQLXA2B1XygTqUUDaU0id+vidQ
+         1hrw==
+X-Forwarded-Encrypted: i=1; AFNElJ81VXHoywRMgEm3hzB3+wPut8MMq+fkByxGcZJOpThNvwH5nX3t6eBasOQTVloaRq4h+38D7kDgCo4=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy2U4M9xSe6WoB967xFIEjXN4sOPf729AQr1qbok5RUxrZeOu8L
+	FuzaBTCApGHzm4VJcg3xcGHA43cTuuqnDIJdaNiCo7n474LWA6I2BT9f
+X-Gm-Gg: Acq92OFkDL06BWxJrGENE78RbGoFcJxGaQxcDitnEsb83jIAaRVoo8Tm7TNEHBsD1yj
+	5g0pJLA0HwjfPi4/dXJUjz41nkZ8VDo7/gDe6tqASg8frAGv9x1TihgczcV7RZ+A3EX5td/WbaH
+	GvCJlclUUeRI4l2r/bc9HqBe7qkO4880MMsckgb37cJcd3xt1oeBD1rbQun1/K6LjuEfxQOMZZf
+	C7pTjAN0EEn7/YTSK4T4m0chtpTrF7Jfj7a1dkeADb8wuAR8nO49dURCj1L7AZXKcR94lrzFIN3
+	HZ594ulNu1aYvxdcD27KHRD4+aMBFfrPIhpIg1shgn9a014cph19AES9M/P+K/DUPJMm2BdDF3c
+	EHsdwI+Q0E1sdkuX2mv9vWTo3wJYkqV+UQONlXBEoZbxadgkemYRknqCwVF7AOJLMkDSgOVTaOi
+	gddc1w/Gg+YJIM3RsizqZA+uP3/fCC2rm+QRe/5AGX3w2eYuFJOLIb+vUv3ehnM034vPSkBDA9m
+	SpDWo5Tm6VilvtXGAZxjfA=
+X-Received: by 2002:a05:600c:1d27:b0:490:add9:7f88 with SMTP id 5b1f17b1804b1-490c25dd709mr412096945e9.21.1781079746405;
+        Wed, 10 Jun 2026 01:22:26 -0700 (PDT)
+Received: from ?IPv6:2001:818:ea56:d000:56e0:ceba:7da4:6673? ([2001:818:ea56:d000:56e0:ceba:7da4:6673])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-490dca8fcfbsm31123815e9.1.2026.06.10.01.22.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 10 Jun 2026 01:22:26 -0700 (PDT)
+Message-ID: <22d2d0733485cb904eb3f53c9bb891d64435def7.camel@gmail.com>
+Subject: Re: [PATCH] hwmon: (pmbus/max34440): add support adpm12250
+From: Nuno =?ISO-8859-1?Q?S=E1?= <noname.nuno@gmail.com>
+To: Alexis Czezar Torreno <alexisczezar.torreno@analog.com>, Guenter Roeck
+	 <linux@roeck-us.net>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan
+	 <skhan@linuxfoundation.org>
+Cc: linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Date: Wed, 10 Jun 2026 09:23:32 +0100
+In-Reply-To: <20260610-dev-adpm12250-v1-1-422760bb80da@analog.com>
+References: <20260610-dev-adpm12250-v1-1-422760bb80da@analog.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.56.2 (3.56.2-2.fc42) 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: kwepems100001.china.huawei.com (7.221.188.238) To
- dggpemf500011.china.huawei.com (7.185.36.131)
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-6.16 / 15.00];
-	WHITELIST_DMARC(-7.00)[huawei.com:D:+];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORWARDED(0.00)[lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-91810-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:alexisczezar.torreno@analog.com,m:linux@roeck-us.net,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-hwmon@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER(0.00)[nonamenuno@gmail.com,linux-doc@vger.kernel.org];
+	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-91807-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[arm.com,kernel.org,lwn.net,linuxfoundation.org,oss.qualcomm.com,huawei.com,gmail.com,chinatelecom.cn,arndb.de,redhat.com,lists.infradead.org,vger.kernel.org];
-	FORGED_SENDER(0.00)[ruanjinjie@huawei.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS(0.00)[m:catalin.marinas@arm.com,m:will@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:punit.agrawal@oss.qualcomm.com,m:ruanjinjie@huawei.com,m:mrigendra.chaubey@gmail.com,m:suzuki.poulose@arm.com,m:chenl311@chinatelecom.cn,m:fengchengwen@huawei.com,m:maz@kernel.org,m:timothy.hayes@arm.com,m:lpieralisi@kernel.org,m:arnd@arndb.de,m:gshan@redhat.com,m:jic23@kernel.org,m:dietmar.eggemann@arm.com,m:sudeep.holla@kernel.org,m:pierre.gondois@arm.com,m:linux-arm-kernel@lists.infradead.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:mrigendrachaubey@gmail.com,s:lists@lfdr.de];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ruanjinjie@huawei.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[huawei.com:+];
-	RCVD_COUNT_FIVE(0.00)[6];
-	ALIAS_RESOLVED(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	TO_DN_NONE(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[nonamenuno@gmail.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,arm.com:email,huawei.com:dkim,huawei.com:email,huawei.com:mid,huawei.com:from_mime,hisilicon.com:email,vger.kernel.org:from_smtp,uefi.org:url]
+	ALIAS_RESOLVED(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[7];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,analog.com:email,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 32AF9666D64
+X-Rspamd-Queue-Id: 47C356672EA
 
-On arm64, when booting with `maxcpus` greater than the number of present
-CPUs (e.g., QEMU -smp cpus=4,maxcpus=8), some CPUs are marked as 'present'
-but have not yet been registered via register_cpu(). Consequently,
-the per-cpu device objects for these CPUs are not yet initialized.
+On Wed, 2026-06-10 at 09:12 +0800, Alexis Czezar Torreno wrote:
+> ADPM12250 is a quarter brick DC/DC Power Module. It is a high power
+> non-isolated converter capable of delivering regulated 12V with
+> continuous power level of 2500W. Uses PMBus.
+>=20
+> Signed-off-by: Alexis Czezar Torreno <alexisczezar.torreno@analog.com>
+> ---
+> ADPM12250 is a quarter brick DC/DC Power Module. It is a high power
+> non-isolated converter capable of delivering regulated 12V with continuou=
+s
+> power level of 2500W. Uses PMBus.
+> ---
 
-In cpuhp_smt_enable(), the code iterates over all present CPUs. Calling
-_cpu_up() for these unregistered CPUs eventually leads to
-sysfs_create_group() being called with a NULL kobject (or a kobject
-without a directory), triggering the following warning in
-fs/sysfs/group.c:
+Reviewed-by: Nuno S=C3=A1 <nuno.sa@analog.com>
 
-	if (WARN_ON(!kobj || (!update && !kobj->sd)))
-		return -EINVAL;
-
-When booting with ACPI, arm64 smp_prepare_cpus() currently sets all
-enumerated CPUs as "present" regardless of their status in the MADT. This
-causes issues with SMT hotplug control. For instance, with QEMU's
-"-smp 4,maxcpus=8" configuration, the MADT GICC entries are populated as
-follows:
-
-1. The first four CPUs: `Enabled` set but `Online Capable` not set.
-
-2. The remaining four CPUs: `Online Capable` set but `Enabled` not set
-   to support potential hot-plugging.
-
-Fix this by:
-
-1. When booting with ACPI, checking the ACPI_MADT_ENABLED flag in the GICC
-   entry before calling set_cpu_present() during SMP initialization.
-
-2. Properly managing the present mask in acpi_map_cpu() and
-   acpi_unmap_cpu() to support actual CPU hotplug events, This aligns with
-   other architectures like x86 and LoongArch.
-
-3. Update the arm64 CPU hotplug documentation to no longer state that all
-   online-capable vCPUs are marked as present by the kernel at boot time.
-
-This ensures that only physically available or explicitly enabled CPUs
-are in the present mask, keeping the SMT control logic consistent with
-the actual hardware state.
-
-How to reproduce:
-
-	1. echo off > /sys/devices/system/cpu/smt/control
-		psci: CPU1 killed (polled 0 ms)
-		psci: CPU3 killed (polled 0 ms)
-
-	2. echo 2 > /sys/devices/system/cpu/smt/control
-
-	Detected PIPT I-cache on CPU1
-	GICv3: CPU1: found redistributor 1 region 0:0x00000000080c0000
-	CPU1: Booted secondary processor 0x0000000001 [0x410fd082]
-	Detected PIPT I-cache on CPU3
-	GICv3: CPU3: found redistributor 3 region 0:0x0000000008100000
-	CPU3: Booted secondary processor 0x0000000003 [0x410fd082]
-	------------[ cut here ]------------
-	WARNING: fs/sysfs/group.c:137 at internal_create_group+0x41c/0x4bc, CPU#2: sh/181
-	Modules linked in:
-	CPU: 2 UID: 0 PID: 181 Comm: sh Not tainted 7.0.0-rc1-00010-g8d13386c7624 #142 PREEMPT
-	Hardware name: QEMU KVM Virtual Machine, BIOS 0.0.0 02/06/2015
-	pstate: 20000005 (nzCv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
-	pc : internal_create_group+0x41c/0x4bc
-	lr : sysfs_create_group+0x18/0x24
-	sp : ffff80008078ba40
-	x29: ffff80008078ba40 x28: ffff296c980ad000 x27: ffff00007fb94128
-	x26: 0000000000000054 x25: ffffd693e845f3f0 x24: 0000000000000001
-	x23: 0000000000000001 x22: 0000000000000004 x21: 0000000000000000
-	x20: ffffd693e845fc10 x19: 0000000000000004 x18: 00000000ffffffff
-	x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
-	x14: 0000000000000358 x13: 0000000000000007 x12: 0000000000000350
-	x11: 0000000000000008 x10: 0000000000000407 x9 : 0000000000000400
-	x8 : ffff00007fbf3b60 x7 : 0000000000000000 x6 : ffffd693e845f3f0
-	x5 : ffff00007fb94128 x4 : 0000000000000000 x3 : ffff000000f4eac0
-	x2 : ffffd693e7095a08 x1 : 0000000000000000 x0 : 0000000000000000
-	Call trace:
-	 internal_create_group+0x41c/0x4bc (P)
-	 sysfs_create_group+0x18/0x24
-	 topology_add_dev+0x1c/0x28
-	 cpuhp_invoke_callback+0x104/0x20c
-	 __cpuhp_invoke_callback_range+0x94/0x11c
-	 _cpu_up+0x200/0x37c
-	 cpuhp_smt_enable+0xbc/0x114
-	 control_store+0xe8/0x1d4
-	 dev_attr_store+0x18/0x2c
-	 sysfs_kf_write+0x7c/0x94
-	 kernfs_fop_write_iter+0x128/0x1b8
-	 vfs_write+0x2b0/0x354
-	 ksys_write+0x68/0xfc
-	 __arm64_sys_write+0x1c/0x28
-	 invoke_syscall+0x48/0x10c
-	 el0_svc_common.constprop.0+0x40/0xe8
-	 do_el0_svc+0x20/0x2c
-	 el0_svc+0x34/0x124
-	 el0t_64_sync_handler+0xa0/0xe4
-	 el0t_64_sync+0x198/0x19c
-	---[ end trace 0000000000000000 ]---
-
-Cc: Catalin Marinas <catalin.marinas@arm.com>
-Cc: Jonathan Cameron <jic23@kernel.org>
-Cc: James Morse <james.morse@arm.com>
-Cc: Yicong Yang <yangyicong@hisilicon.com>
-Cc: stable@vger.kernel.org
-Link: https://uefi.org/specs/ACPI/6.5/05_ACPI_Software_Programming_Model.html#gic-cpu-interface-gicc-structure
-Fixes: eed4583bcf9a6 ("arm64: Kconfig: Enable HOTPLUG_SMT")
-Reviewed-by: Catalin Marinas <catalin.marinas@arm.com>
-Suggested-by: Catalin Marinas <catalin.marinas@arm.com>
-Signed-off-by: Jinjie Ruan <ruanjinjie@huawei.com>
----
-v4:
-- Udpate the arm64 cpu-hotplug documentation to make it more clear.
-v3:
-- Update the arm64 cpu-hotplug documentation as Catalin suggested.
-- Update the commit message.
-v2:
-- Update the fix way.
----
- Documentation/arch/arm64/cpu-hotplug.rst | 28 ++++++++++++++----------
- arch/arm64/kernel/acpi.c                 |  2 ++
- arch/arm64/kernel/smp.c                  | 12 +++++++++-
- 3 files changed, 29 insertions(+), 13 deletions(-)
-
-diff --git a/Documentation/arch/arm64/cpu-hotplug.rst b/Documentation/arch/arm64/cpu-hotplug.rst
-index 8fb438bf7781..7c3379b704aa 100644
---- a/Documentation/arch/arm64/cpu-hotplug.rst
-+++ b/Documentation/arch/arm64/cpu-hotplug.rst
-@@ -47,11 +47,12 @@ ever have can be described at boot. There are no power-domain considerations
- as such devices are emulated.
- 
- CPU Hotplug on virtual systems is supported. It is distinct from physical
--CPU Hotplug as all resources are described as ``present``, but CPUs may be
--marked as disabled by firmware. Only the CPU's online/offline behaviour is
--influenced by firmware. An example is where a virtual machine boots with a
--single CPU, and additional CPUs are added once a cloud orchestrator deploys
--the workload.
-+CPU Hotplug as all vCPU resources are statically described in the firmware
-+configuration tables (e.g. MADT), meaning their maximum possible count is
-+known at boot. However, vCPUs that are not enabled at boot are not marked
-+as ``present`` by the kernel until they are hotplugged. An example is where
-+a virtual machine boots with a single CPU, and additional CPUs are added
-+once a cloud orchestrator deploys the workload.
- 
- For a virtual machine, the VMM (e.g. Qemu) plays the part of firmware.
- 
-@@ -60,16 +61,19 @@ brought online. Firmware can enforce its policy via PSCI's return codes. e.g.
- ``DENIED``.
- 
- The ACPI tables must describe all the resources of the virtual machine. CPUs
--that firmware wishes to disable either from boot (or later) should not be
--``enabled`` in the MADT GICC structures, but should have the ``online capable``
--bit set, to indicate they can be enabled later. The boot CPU must be marked as
--``enabled``.  The 'always on' GICR structure must be used to describe the
--redistributors.
-+that are hot-pluggable must have the ``online capable`` bit set and the
-+``enabled`` bit cleared in the MADT GICC structures to indicate they can be
-+enabled later. The boot CPU must be marked as ``enabled`` with its
-+``online capable`` bit cleared. The 'always on' GICR structure must be used
-+to describe the redistributors.
- 
- CPUs described as ``online capable`` but not ``enabled`` can be set to enabled
- by the DSDT's Processor object's _STA method. On virtual systems the _STA method
--must always report the CPU as ``present``. Changes to the firmware policy can
--be notified to the OS via device-check or eject-request.
-+must always set the ``ACPI_STA_DEVICE_PRESENT`` bit, while toggling the
-+``ACPI_STA_DEVICE_ENABLED`` bit to reflect its plug status. The kernel will
-+then dynamically mark the vCPU as ``present`` within the OS when the
-+``ACPI_STA_DEVICE_ENABLED`` bit becomes set during hot-add. Changes to the
-+firmware policy can be notified to the OS via device-check or eject-request.
- 
- CPUs described as ``enabled`` in the static table, should not have their _STA
- modified dynamically by firmware. Soft-restart features such as kexec will
-diff --git a/arch/arm64/kernel/acpi.c b/arch/arm64/kernel/acpi.c
-index 5891f92c2035..681aa2bbc399 100644
---- a/arch/arm64/kernel/acpi.c
-+++ b/arch/arm64/kernel/acpi.c
-@@ -448,12 +448,14 @@ int acpi_map_cpu(acpi_handle handle, phys_cpuid_t physid, u32 apci_id,
- 		return *pcpu;
- 	}
- 
-+	set_cpu_present(*pcpu, true);
- 	return 0;
- }
- EXPORT_SYMBOL(acpi_map_cpu);
- 
- int acpi_unmap_cpu(int cpu)
- {
-+	set_cpu_present(cpu, false);
- 	return 0;
- }
- EXPORT_SYMBOL(acpi_unmap_cpu);
-diff --git a/arch/arm64/kernel/smp.c b/arch/arm64/kernel/smp.c
-index 543d3459f6e3..24f8448e1fbb 100644
---- a/arch/arm64/kernel/smp.c
-+++ b/arch/arm64/kernel/smp.c
-@@ -556,6 +556,11 @@ struct acpi_madt_generic_interrupt *acpi_cpu_get_madt_gicc(int cpu)
- }
- EXPORT_SYMBOL_GPL(acpi_cpu_get_madt_gicc);
- 
-+static bool acpi_cpu_is_present(int cpu)
-+{
-+	return acpi_cpu_get_madt_gicc(cpu)->flags & ACPI_MADT_ENABLED;
-+}
-+
- /*
-  * acpi_map_gic_cpu_interface - parse processor MADT entry
-  *
-@@ -660,6 +665,10 @@ static void __init acpi_parse_and_init_cpus(void)
- 		early_map_cpu_to_node(i, acpi_numa_get_nid(i));
- }
- #else
-+static bool acpi_cpu_is_present(int cpu)
-+{
-+	return false;
-+}
- #define acpi_parse_and_init_cpus(...)	do { } while (0)
- #endif
- 
-@@ -798,7 +807,8 @@ void __init smp_prepare_cpus(unsigned int max_cpus)
- 		if (err)
- 			continue;
- 
--		set_cpu_present(cpu, true);
-+		if (acpi_disabled || acpi_cpu_is_present(cpu))
-+			set_cpu_present(cpu, true);
- 		numa_store_cpu_info(cpu);
- 	}
- }
--- 
-2.34.1
-
+> =C2=A0Documentation/hwmon/max34440.rst | 27 ++++++++++++++++--------
+> =C2=A0drivers/hwmon/pmbus/max34440.c=C2=A0=C2=A0 | 45 +++++++++++++++++++=
+++++++++++++++++++---
+> =C2=A02 files changed, 60 insertions(+), 12 deletions(-)
+>=20
+> diff --git a/Documentation/hwmon/max34440.rst b/Documentation/hwmon/max34=
+440.rst
+> index
+> d6d4fbc863d96c1008a1971d3e3245d9ce1ef688..e7421f4dbf38fc1436bbaeba71d4461=
+a00f8cefb
+> 100644
+> --- a/Documentation/hwmon/max34440.rst
+> +++ b/Documentation/hwmon/max34440.rst
+> @@ -19,6 +19,14 @@ Supported chips:
+> =C2=A0
+> =C2=A0=C2=A0=C2=A0=C2=A0 Datasheet: -
+> =C2=A0
+> +=C2=A0 * ADI ADPM12250
+> +
+> +=C2=A0=C2=A0=C2=A0 Prefixes: 'adpm12250'
+> +
+> +=C2=A0=C2=A0=C2=A0 Addresses scanned: -
+> +
+> +=C2=A0=C2=A0=C2=A0 Datasheet: -
+> +
+> =C2=A0=C2=A0 * Maxim MAX34440
+> =C2=A0
+> =C2=A0=C2=A0=C2=A0=C2=A0 Prefixes: 'max34440'
+> @@ -87,11 +95,11 @@ This driver supports multiple devices: hardware monit=
+oring for
+> Maxim MAX34440
+> =C2=A0PMBus 6-Channel Power-Supply Manager, MAX34441 PMBus 5-Channel Powe=
+r-Supply
+> =C2=A0Manager and Intelligent Fan Controller, and MAX34446 PMBus Power-Su=
+pply Data
+> =C2=A0Logger; PMBus Voltage Monitor and Sequencers for MAX34451, MAX34460=
+, and
+> -MAX34461; PMBus DC/DC Power Module ADPM12160, and ADPM12200. The MAX3445=
+1
+> -supports monitoring voltage or current of 12 channels based on GIN pins.=
+ The
+> -MAX34460 supports 12 voltage channels, and the MAX34461 supports 16 volt=
+age
+> -channels. The ADPM12160, and ADPM12200 also monitors both input and outp=
+ut
+> -of voltage and current.
+> +MAX34461; PMBus DC/DC Power Module ADPM12160, ADPM12200, and ADPM12250. =
+The
+> +MAX34451 supports monitoring voltage or current of 12 channels based on =
+GIN
+> +pins. The MAX34460 supports 12 voltage channels, and the MAX34461 suppor=
+ts 16
+> +voltage channels. The ADPM12160, ADPM12200, and ADPM12250 also monitors =
+both
+> +input and output of voltage and current.
+> =C2=A0
+> =C2=A0The driver is a client driver to the core PMBus driver. Please see
+> =C2=A0Documentation/hwmon/pmbus.rst for details on PMBus client drivers.
+> @@ -149,7 +157,7 @@ in[1-6]_reset_history	Write any value to reset histor=
+y.
+> =C2=A0.. note::
+> =C2=A0
+> =C2=A0=C2=A0=C2=A0=C2=A0 - MAX34446 only supports in[1-4].
+> -=C2=A0=C2=A0=C2=A0 - ADPM12160, and ADPM12200 only supports in[1-2]. Lab=
+el is "vin1"
+> +=C2=A0=C2=A0=C2=A0 - ADPM12160, ADPM12200, and ADPM12250 only supports i=
+n[1-2]. Label is "vin1"
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 and "vout1" respectively.
+> =C2=A0
+> =C2=A0Curr
+> @@ -172,8 +180,9 @@ curr[1-6]_reset_history	Write any value to reset hist=
+ory.
+> =C2=A0
+> =C2=A0=C2=A0=C2=A0=C2=A0 - in6 and curr6 attributes only exist for MAX344=
+40.
+> =C2=A0=C2=A0=C2=A0=C2=A0 - MAX34446 only supports curr[1-4].
+> -=C2=A0=C2=A0=C2=A0 - For ADPM12160, and ADPM12200, curr[1] is "iin1" and=
+ curr[2-6]
+> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 are "iout[1-5]".
+> +=C2=A0=C2=A0=C2=A0 - For ADPM12160, ADPM12200, and ADPM12250, curr[1] is=
+ "iin1"
+> +=C2=A0=C2=A0=C2=A0 - For ADPM12160, and ADPM12200 curr[2-6] are "iout[1-=
+5]".
+> +=C2=A0=C2=A0=C2=A0 - For ADPM12250, curr[2-4] are "iout[1-3]".
+> =C2=A0
+> =C2=A0Power
+> =C2=A0~~~~~
+> @@ -209,7 +218,7 @@ temp[1-8]_reset_history	Write any value to reset hist=
+ory.
+> =C2=A0.. note::
+> =C2=A0=C2=A0=C2=A0 - temp7 and temp8 attributes only exist for MAX34440.
+> =C2=A0=C2=A0=C2=A0 - MAX34446 only supports temp[1-3].
+> -=C2=A0=C2=A0 - ADPM12160, and ADPM12200 only supports temp[1].
+> +=C2=A0=C2=A0 - ADPM12160, ADPM12200, and ADPM12250 only supports temp[1]=
+.
+> =C2=A0
+> =C2=A0
+> =C2=A0.. note::
+> diff --git a/drivers/hwmon/pmbus/max34440.c b/drivers/hwmon/pmbus/max3444=
+0.c
+> index
+> 4525b9fc56267479534251a1444aa09181615ac6..74876d2207fbe4014b8b54a9fd96823=
+70fc3bbed
+> 100644
+> --- a/drivers/hwmon/pmbus/max34440.c
+> +++ b/drivers/hwmon/pmbus/max34440.c
+> @@ -18,6 +18,7 @@
+> =C2=A0enum chips {
+> =C2=A0	adpm12160,
+> =C2=A0	adpm12200,
+> +	adpm12250,
+> =C2=A0	max34440,
+> =C2=A0	max34441,
+> =C2=A0	max34446,
+> @@ -97,7 +98,8 @@ static int max34440_read_word_data(struct i2c_client *c=
+lient, int
+> page,
+> =C2=A0		break;
+> =C2=A0	case PMBUS_VIRT_READ_IOUT_AVG:
+> =C2=A0		if (data->id !=3D max34446 && data->id !=3D max34451 &&
+> -		=C2=A0=C2=A0=C2=A0 data->id !=3D adpm12160 && data->id !=3D adpm12200)
+> +		=C2=A0=C2=A0=C2=A0 data->id !=3D adpm12160 && data->id !=3D adpm12200 =
+&&
+> +		=C2=A0=C2=A0=C2=A0 data->id !=3D adpm12250)
+> =C2=A0			return -ENXIO;
+> =C2=A0		ret =3D pmbus_read_word_data(client, page, phase,
+> =C2=A0					=C2=A0=C2=A0 MAX34446_MFR_IOUT_AVG);
+> @@ -182,7 +184,8 @@ static int max34440_write_word_data(struct i2c_client=
+ *client,
+> int page,
+> =C2=A0		ret =3D pmbus_write_word_data(client, page,
+> =C2=A0					=C2=A0=C2=A0=C2=A0 MAX34440_MFR_IOUT_PEAK, 0);
+> =C2=A0		if (!ret && (data->id =3D=3D max34446 || data->id =3D=3D max34451=
+ ||
+> -			=C2=A0=C2=A0=C2=A0=C2=A0 data->id =3D=3D adpm12160 || data->id =3D=3D=
+ adpm12200))
+> +			=C2=A0=C2=A0=C2=A0=C2=A0 data->id =3D=3D adpm12160 || data->id =3D=3D=
+ adpm12200 ||
+> +			=C2=A0=C2=A0=C2=A0=C2=A0 data->id =3D=3D adpm12250))
+> =C2=A0			ret =3D pmbus_write_word_data(client, page,
+> =C2=A0					MAX34446_MFR_IOUT_AVG, 0);
+> =C2=A0
+> @@ -399,6 +402,40 @@ static struct pmbus_driver_info max34440_info[] =3D =
+{
+> =C2=A0		.read_word_data =3D max34440_read_word_data,
+> =C2=A0		.write_word_data =3D max34440_write_word_data,
+> =C2=A0	},
+> +	[adpm12250] =3D {
+> +		.pages =3D 19,
+> +		.format[PSC_VOLTAGE_IN] =3D direct,
+> +		.format[PSC_VOLTAGE_OUT] =3D direct,
+> +		.format[PSC_CURRENT_IN] =3D direct,
+> +		.format[PSC_CURRENT_OUT] =3D direct,
+> +		.format[PSC_TEMPERATURE] =3D direct,
+> +		.m[PSC_VOLTAGE_IN] =3D 125,
+> +		.b[PSC_VOLTAGE_IN] =3D 0,
+> +		.R[PSC_VOLTAGE_IN] =3D 0,
+> +		.m[PSC_VOLTAGE_OUT] =3D 125,
+> +		.b[PSC_VOLTAGE_OUT] =3D 0,
+> +		.R[PSC_VOLTAGE_OUT] =3D 0,
+> +		.m[PSC_CURRENT_IN] =3D 250,
+> +		.b[PSC_CURRENT_IN] =3D 0,
+> +		.R[PSC_CURRENT_IN] =3D -1,
+> +		.m[PSC_CURRENT_OUT] =3D 250,
+> +		.b[PSC_CURRENT_OUT] =3D 0,
+> +		.R[PSC_CURRENT_OUT] =3D -1,
+> +		.m[PSC_TEMPERATURE] =3D 1,
+> +		.b[PSC_TEMPERATURE] =3D 0,
+> +		.R[PSC_TEMPERATURE] =3D 2,
+> +		/* absent func below [18] are not for monitoring */
+> +		.func[2] =3D PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+> +		.func[4] =3D PMBUS_HAVE_STATUS_IOUT,
+> +		.func[5] =3D PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+> +		.func[6] =3D PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+> +		.func[9] =3D PMBUS_HAVE_VIN | PMBUS_HAVE_STATUS_INPUT,
+> +		.func[10] =3D PMBUS_HAVE_IIN | PMBUS_HAVE_STATUS_INPUT,
+> +		.func[14] =3D PMBUS_HAVE_IOUT,
+> +		.func[18] =3D PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+> +		.read_word_data =3D max34440_read_word_data,
+> +		.write_word_data =3D max34440_write_word_data,
+> +	},
+> =C2=A0	[max34440] =3D {
+> =C2=A0		.pages =3D 14,
+> =C2=A0		.format[PSC_VOLTAGE_IN] =3D direct,
+> @@ -635,7 +672,8 @@ static int max34440_probe(struct i2c_client *client)
+> =C2=A0		rv =3D max34451_set_supported_funcs(client, data);
+> =C2=A0		if (rv)
+> =C2=A0			return rv;
+> -	} else if (data->id =3D=3D adpm12160 || data->id =3D=3D adpm12200) {
+> +	} else if (data->id =3D=3D adpm12160 || data->id =3D=3D adpm12200 ||
+> +		=C2=A0=C2=A0 data->id =3D=3D adpm12250) {
+> =C2=A0		data->iout_oc_fault_limit =3D PMBUS_IOUT_OC_FAULT_LIMIT;
+> =C2=A0		data->iout_oc_warn_limit =3D PMBUS_IOUT_OC_WARN_LIMIT;
+> =C2=A0	}
+> @@ -646,6 +684,7 @@ static int max34440_probe(struct i2c_client *client)
+> =C2=A0static const struct i2c_device_id max34440_id[] =3D {
+> =C2=A0	{ .name =3D "adpm12160", .driver_data =3D adpm12160 },
+> =C2=A0	{ .name =3D "adpm12200", .driver_data =3D adpm12200 },
+> +	{ .name =3D "adpm12250", .driver_data =3D adpm12250 },
+> =C2=A0	{ .name =3D "max34440", .driver_data =3D max34440 },
+> =C2=A0	{ .name =3D "max34441", .driver_data =3D max34441 },
+> =C2=A0	{ .name =3D "max34446", .driver_data =3D max34446 },
+>=20
+> ---
+> base-commit: 1723bc01ecc7ca2f30272685121314379ba5eb18
+> change-id: 20260610-dev-adpm12250-4ce6fc8c82ac
+>=20
+> Best regards,
 
