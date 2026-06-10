@@ -1,775 +1,375 @@
-Return-Path: <linux-doc+bounces-91811-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91813-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id rF5YBlQoKWrURgMAu9opvQ
-	(envelope-from <linux-doc+bounces-91811-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 11:03:16 +0200
+	id N+hEGEcyKWrmSAMAu9opvQ
+	(envelope-from <linux-doc+bounces-91813-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 11:45:43 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id D87F866793A
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 11:03:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 572C1667F67
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 11:45:42 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=a1Ys3kQl;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91811-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91811-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
+	dkim=pass header.d=linux.dev header.s=key1 header.b=cjbT4HkY;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91813-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91813-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=linux.dev;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id D76883011F58
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 08:47:21 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 12F91306EADB
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 09:34:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3713340D567;
-	Wed, 10 Jun 2026 08:46:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BDDD43CFF56;
+	Wed, 10 Jun 2026 09:34:12 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from out-189.mta1.migadu.com (out-189.mta1.migadu.com [95.215.58.189])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DBB5753E0B
-	for <linux-doc@vger.kernel.org>; Wed, 10 Jun 2026 08:46:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 105EC2264B0
+	for <linux-doc@vger.kernel.org>; Wed, 10 Jun 2026 09:34:10 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781081199; cv=none; b=M9mzkU6yjWh4dSejyKcJfQFA6LwFzg4j0uI3auyZBCodiNmAZOXeNnnhFPaoqupoeRY/ODeb42XZtVvmpfVq6zHTCboTJuTpMhpEaU6ujXLfemZF5RlEIq4FKOICfaWEQEOOTCzENfBE15SYjszqNFZgW+C13Bsw/r3zXLMDaCA=
+	t=1781084052; cv=none; b=A5PJN3ImpJhLIHdbxMy+kaoumNFMjQ+nQ0UQkWDIp4iiNhtGqVx++RVxFpeuQWDWQBpAVDOeHlzit+7ocEVZYVP4vPm1HQ5fvCszAGozZNtajiSW+dXnelkIWHd7aADdAwVfnfKqa0716r1fGR+YXdSkg3AlSIXI+Coy23LyKNs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781081199; c=relaxed/simple;
-	bh=NeSx24dxZtQ9sy+qG7O9bCT4VY81zbpqh04/+x5duE0=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=oqoQidETzdeyzIu/Zx9CG+8VKy+4w/McVaaB82NOtuiIqnPAS1W+XajRpQKRXqXgBT8S3K1r41PsFjRLZxpLfvaxBy4vz8vOworqZErjOInz8pZpyaeEBeI6fVS1UOsrn27vClziHPWwu+MrhfyDrkbAHOQsSm4bo03Pbyi/E+o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=a1Ys3kQl; arc=none smtp.client-ip=209.85.128.42
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-490b9318997so47492795e9.2
-        for <linux-doc@vger.kernel.org>; Wed, 10 Jun 2026 01:46:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781081195; x=1781685995; darn=vger.kernel.org;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=vGs0I+e0AtbncbbLJ8DSGgGvhYB2wML/1SYfsR+hrvs=;
-        b=a1Ys3kQl94Lv87Dzd1OpebprmA+jOlKGu2a/A4mqW7BToYQe8/B5ajmJKP9c/h+2pi
-         Nz5sRj8BoRYl5GSZR3apw+NedklHos2AJ5GllAn2q5PkfzvyHS0Yl9Y2UMXESevLgLlf
-         TveVcYVjcTLTTa2Yj8nKQ8cVpeROCyfAZ3AzZ9ouPyZuHs72olFPbdJyQSVHYevNCjfs
-         k71d9bBTclfULXpN0fA4YchJo2C9b91cSjCS+fIfrYI4NZ13x5hfpACcDPQnU2enXA0W
-         Znvwr+Rq4NGlIcXxkOJQjIwmHZg6R6RPPJ+5mrbMiVIgqjv7gA9b+572bd/TM/j496jC
-         lxWg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781081195; x=1781685995;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=vGs0I+e0AtbncbbLJ8DSGgGvhYB2wML/1SYfsR+hrvs=;
-        b=W1J62SJVKr3ZeCRqZPS2XxI1/d39BwxC0JHqjafGbKyJtUFbLjQudiWgsiV2YLCQsn
-         tWe3jFbCcp/jjnRI2EtfMFnATCcLWnOOFwdIl6T73mhsno6xDPYuLIiH4glhRt5/GbHE
-         eRuk8MFU6xwh6vSIsCu0vDPnszqDx9ungUq0BFaH3RXBjaLMs4lQ+W9meudlTYX5XzzB
-         Ua3BvivD2VWvvsuH44c5lZpt2duspXPQazAKRNY2k5Vz5URCWi7KUzAzzXvDBDDsaG6i
-         2bp4dOD54Q5BxPGa6sBztmKGxd+O6uquLNiwM9JyFD3Dr1pN6ZpzujKcE3cDsWLesCOz
-         fETw==
-X-Forwarded-Encrypted: i=1; AFNElJ98o1T/gq5Cm7V9vy8WSVTDbXRkQu1XPQ+uYPjzAE7lMSu8o/S8ShXJET82A+J28YhiG2z/mLo8Hjc=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyfhM1KFh3Vx7tDhlPGYSXF4ZKvOxD5NSdgUMp0yRYLQKH01WW5
-	hAESVbNY2wHhdpwHaoRoVzFQz0/gxr1Y11bMsLK3FvCLSKEtp3VzWy7Tl0UaAw==
-X-Gm-Gg: Acq92OGBvXRg7uCtP2Nn8gSgF2A7BoxdkTb6kMAmNfEJmyhrarOcXvUBHVjREHkVQEx
-	isZaKpG5ZnBlVhWVpY+7rhmS9RbKMqE2HBylsnH6+ckEjbEClW8qnCZVwtGoaWqKp1feT7+84lp
-	FtnZDjsPFiyZ3ICSUVMzIECsFfs4Y6TeFal0QwGQV2cR1OvqFn3of+Zo5GvbC83mlKJTmxOy644
-	PmCof+6UgguND2Bzjv2bWZNPqUxmuTkXk8LFgs0IRqBQ3pQqR8lpI1LhJbWM8GwWWv1MsbOocZu
-	dgcbe1EjwzeI8E+8K4M5Eju2fqqudCdHDzfLhcRj3edqHZC6fXL4/lIes5eK780b4zR6EX+MrpM
-	9Ye0Cz+r4xw4AIHeFIE7puQYXQw+oruKKg5DMTgigeXEN/l2tGJdF39NHLhd/BWv/qddCoFzRQK
-	uYshLYW6PdDXMACovTF86FFBqyHgr+GfjJbVO7Vq3Ajox0WaB10kCsDUgoxxfhBTEV3kaacMFt5
-	4pbfbt4m/Q8
-X-Received: by 2002:a05:600c:529b:b0:48e:6db3:ff2e with SMTP id 5b1f17b1804b1-490c4e0219emr333241345e9.15.1781081195038;
-        Wed, 10 Jun 2026 01:46:35 -0700 (PDT)
-Received: from ?IPv6:2001:818:ea56:d000:56e0:ceba:7da4:6673? ([2001:818:ea56:d000:56e0:ceba:7da4:6673])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-490bc3c1149sm482668185e9.4.2026.06.10.01.46.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 10 Jun 2026 01:46:34 -0700 (PDT)
-Message-ID: <cd335556e16408bb8d3fa42cd30650b94ca1f28b.camel@gmail.com>
-Subject: Re: [PATCH v4 2/2] iio: dac: Add AD5529R DAC driver support
-From: Nuno =?ISO-8859-1?Q?S=E1?= <noname.nuno@gmail.com>
-To: Janani Sunil <janani.sunil@analog.com>, Lars-Peter Clausen
- <lars@metafoo.de>,  Michael Hennerich <Michael.Hennerich@analog.com>,
- Jonathan Cameron <jic23@kernel.org>, David Lechner	
- <dlechner@baylibre.com>, Nuno =?ISO-8859-1?Q?S=E1?= <nuno.sa@analog.com>, 
- Andy Shevchenko	 <andy@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski	 <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Philipp Zabel	 <p.zabel@pengutronix.de>, Jonathan
- Corbet <corbet@lwn.net>, Shuah Khan	 <skhan@linuxfoundation.org>
-Cc: linux-iio@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, Janani Sunil
-	 <jan.sun97@gmail.com>
-Date: Wed, 10 Jun 2026 09:47:40 +0100
-In-Reply-To: <20260609-ad5529r-driver-v4-2-2e4c02234a1a@analog.com>
-References: <20260609-ad5529r-driver-v4-0-2e4c02234a1a@analog.com>
-	 <20260609-ad5529r-driver-v4-2-2e4c02234a1a@analog.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.56.2 (3.56.2-2.fc42) 
+	s=arc-20240116; t=1781084052; c=relaxed/simple;
+	bh=Id5kyt0HYFzEBaUldnOGPcoepFFTBoZ+Cr1YGFJAWE0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=YzxXzG6zi0fUHzXUSz1UGzq4yv9ceTUSAdXWxpuWWLF6w2E+l+tDkAs72NKERPbj61rl+XEreTb4cuu2Q6Pa5lVGJ9f30Pbx2kzwXuvz9iyBRe+OCiL6tQOogGhKkerC2A+DFvym6nH+zjZ9tv0liXqH+oBKMXOx7B8/PPtOCuc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=cjbT4HkY; arc=none smtp.client-ip=95.215.58.189
+Message-ID: <c7ae2aa9-a1fb-4965-a213-f9cfb2aa101e@linux.dev>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1781084049;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=dk7BqETwt1DrvYbxUKuqhVVwlZI00/HTv1khPS2seEc=;
+	b=cjbT4HkYBQVsl+bCiuvR2WfEUswGc3O0wL7S3NyuhEiVMtplPo4vtl1IuBW1YId1HFRhkQ
+	vklsXeFT8lAWzpM/j3nl/JgjhJ4AYbEcRGmCqUUcXOTaTdBn2DVgQz+Mr1E/N2VfY5Q9Rk
+	sPhTmFzZFQGCYRjtwjyaXNb5cmh+6oM=
+Date: Wed, 10 Jun 2026 17:33:33 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Subject: Re: [PATCH v4 6/6] kselftest: alloc_tag: extend the allocinfo ioctl
+ kselftest
+To: Abhishek Bapat <abhishekbapat@google.com>
+Cc: Shuah Khan <skhan@linuxfoundation.org>, Jonathan Corbet <corbet@lwn.net>,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+ Sourav Panda <souravpanda@google.com>, Suren Baghdasaryan
+ <surenb@google.com>, Andrew Morton <akpm@linux-foundation.org>,
+ Kent Overstreet <kent.overstreet@linux.dev>
+References: <cover.1781042698.git.abhishekbapat@google.com>
+ <d0a8308b4d0799876d24461a8ed9b5a71d3e1e89.1781042698.git.abhishekbapat@google.com>
+Content-Language: en-US
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Hao Ge <hao.ge@linux.dev>
+In-Reply-To: <d0a8308b4d0799876d24461a8ed9b5a71d3e1e89.1781042698.git.abhishekbapat@google.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Migadu-Flow: FLOW_OUT
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
+	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-91811-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-91813-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:janani.sunil@analog.com,m:lars@metafoo.de,m:Michael.Hennerich@analog.com,m:jic23@kernel.org,m:dlechner@baylibre.com,m:nuno.sa@analog.com,m:andy@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:p.zabel@pengutronix.de,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-iio@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jan.sun97@gmail.com,m:krzk@kernel.org,m:conor@kernel.org,m:jansun97@gmail.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[nonamenuno@gmail.com,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	FORWARDED(0.00)[lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[nonamenuno@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ALIAS_RESOLVED(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	FORGED_SENDER(0.00)[hao.ge@linux.dev,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:abhishekbapat@google.com,m:skhan@linuxfoundation.org,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:souravpanda@google.com,m:surenb@google.com,m:akpm@linux-foundation.org,m:kent.overstreet@linux.dev,s:lists@lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[linux.dev:+];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[hao.ge@linux.dev,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,vger.kernel.org:from_smtp,analog.com:url,analog.com:email]
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,linux.dev:dkim,linux.dev:mid,linux.dev:from_mime,vger.kernel.org:from_smtp,end_cont_id.id:url,start_cont_id.id:url]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: D87F866793A
+X-Rspamd-Queue-Id: 572C1667F67
 
-On Tue, 2026-06-09 at 17:00 +0200, Janani Sunil wrote:
-> Add support for AD5529R 16-channel, 12/16 bit Digital to Analog Converter
->=20
-> Signed-off-by: Janani Sunil <janani.sunil@analog.com>
+Hi Abhishek
+
+
+On 2026/6/10 08:12, Abhishek Bapat wrote:
+> Add the following 2 scenarios to the allocinfo ioctl kselftest:
+> 1. Validate size based filtering
+> 2. Validate lineno based filtering
+>
+> The first test uses "do_init_module" as the candidate function for the
+> test. This is because the associated site will only allocate memory when
+> a kernel module is loaded. The return value of get_content_id() changes
+> every time modules are loaded or unloaded. Hence, as long as
+> get_content_id() values at the start and the end of the test are the
+> same, the memory allocated by the do_init_module call site should also
+> remain the same. Consequently, the test can assume consistency between
+> the value returned by the ioctl and the procfs resulting in less
+> flakiness.
+>
+> Signed-off-by: Abhishek Bapat <abhishekbapat@google.com>
 > ---
-
-Nothing to add in addition to Andy's comment. With:
-
-* Sashiko point fixed
-* And the excess of parenthesis that Andy pointed out
-
-Reviewed-by: Nuno S=C3=A1 <nuno.sa@analog.com>
-
-(The rest is up to you and Andy :))
-
-> =C2=A0MAINTAINERS=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 1 +
-> =C2=A0drivers/iio/dac/Kconfig=C2=A0=C2=A0 |=C2=A0 17 ++
-> =C2=A0drivers/iio/dac/Makefile=C2=A0 |=C2=A0=C2=A0 1 +
-> =C2=A0drivers/iio/dac/ad5529r.c | 517 +++++++++++++++++++++++++++++++++++=
-+++++++++++
-> =C2=A04 files changed, 536 insertions(+)
->=20
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 320e84765ce6..143714e27d51 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -1513,6 +1513,7 @@ L:	linux-iio@vger.kernel.org
-> =C2=A0S:	Supported
-> =C2=A0W:	https://ez.analog.com/linux-software-drivers
-> =C2=A0F:	Documentation/devicetree/bindings/iio/dac/adi,ad5529r.yaml
-> +F:	drivers/iio/dac/ad5529r.c
-> =C2=A0
-> =C2=A0ANALOG DEVICES INC AD5706R DRIVER
-> =C2=A0M:	Alexis Czezar Torreno <alexisczezar.torreno@analog.com>
-> diff --git a/drivers/iio/dac/Kconfig b/drivers/iio/dac/Kconfig
-> index 657c68e75542..bb1d59889a2a 100644
-> --- a/drivers/iio/dac/Kconfig
-> +++ b/drivers/iio/dac/Kconfig
-> @@ -134,6 +134,23 @@ config AD5449
-> =C2=A0	=C2=A0 To compile this driver as a module, choose M here: the
-> =C2=A0	=C2=A0 module will be called ad5449.
-> =C2=A0
-> +config AD5529R
-> +	tristate "Analog Devices AD5529R High Voltage DAC driver"
-> +	depends on SPI_MASTER
-> +	select REGMAP_SPI
-> +	help
-> +	=C2=A0 Say yes here to build support for Analog Devices AD5529R
-> +	=C2=A0 16-Channel, 12-Bit/16-Bit, 40V High Voltage Precision Digital to=
- Analog
-> +	=C2=A0 Converter.
-> +
-> +	=C2=A0 The device features multiple output voltage ranges from -20V to =
-+20V,
-> +	=C2=A0 built-in 4.096V voltage reference, and digital functions includi=
-ng
-> +	=C2=A0 toggle, dither, and ramp modes. Supports both 12-bit and 16-bit
-> +	=C2=A0 resolution variants.
-> +
-> +	=C2=A0 To compile this driver as a module, choose M here: the
-> +	=C2=A0 module will be called ad5529r.
-> +
-> =C2=A0config AD5592R_BASE
-> =C2=A0	tristate
-> =C2=A0
-> diff --git a/drivers/iio/dac/Makefile b/drivers/iio/dac/Makefile
-> index 003431798498..f35e060b3643 100644
-> --- a/drivers/iio/dac/Makefile
-> +++ b/drivers/iio/dac/Makefile
-> @@ -18,6 +18,7 @@ obj-$(CONFIG_AD5446) +=3D ad5446.o
-> =C2=A0obj-$(CONFIG_AD5446_SPI) +=3D ad5446-spi.o
-> =C2=A0obj-$(CONFIG_AD5446_I2C) +=3D ad5446-i2c.o
-> =C2=A0obj-$(CONFIG_AD5449) +=3D ad5449.o
-> +obj-$(CONFIG_AD5529R) +=3D ad5529r.o
-> =C2=A0obj-$(CONFIG_AD5592R_BASE) +=3D ad5592r-base.o
-> =C2=A0obj-$(CONFIG_AD5592R) +=3D ad5592r.o
-> =C2=A0obj-$(CONFIG_AD5593R) +=3D ad5593r.o
-> diff --git a/drivers/iio/dac/ad5529r.c b/drivers/iio/dac/ad5529r.c
-> new file mode 100644
-> index 000000000000..d2d0287d0f95
-> --- /dev/null
-> +++ b/drivers/iio/dac/ad5529r.c
-> @@ -0,0 +1,517 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * AD5529R Digital-to-Analog Converter Driver
-> + * 16-Channel, 12/16-Bit, 40V High Voltage Precision DAC
-> + *
-> + * Copyright 2026 Analog Devices Inc.
-> + * Author: Janani Sunil <janani.sunil@analog.com>
-> + */
-> +
-> +#include <linux/array_size.h>
-> +#include <linux/bits.h>
-> +#include <linux/delay.h>
-> +#include <linux/dev_printk.h>
-> +#include <linux/err.h>
-> +#include <linux/errno.h>
-> +#include <linux/iio/iio.h>
-> +#include <linux/mod_devicetable.h>
-> +#include <linux/module.h>
-> +#include <linux/property.h>
-> +#include <linux/regmap.h>
-> +#include <linux/regulator/consumer.h>
-> +#include <linux/reset.h>
-> +#include <linux/spi/spi.h>
-> +
-> +#define AD5529R_REG_INTERFACE_CONFIG_A		0x00
-> +#define AD5529R_REG_DEVICE_CONFIG		0x02
-> +#define AD5529R_REG_CHIP_GRADE			0x06
-> +#define AD5529R_REG_SCRATCH_PAD			0x0A
-> +#define AD5529R_REG_SPI_REVISION		0x0B
-> +#define AD5529R_REG_VENDOR_H			0x0D
-> +#define AD5529R_REG_STREAM_MODE			0x0E
-> +#define AD5529R_REG_INTERFACE_STATUS_A		0x11
-> +#define AD5529R_REG_MULTI_DAC_CH_SEL		0x14
-> +#define AD5529R_REG_OUT_RANGE_BASE		0x3C
-> +#define AD5529R_REG_OUT_RANGE(ch)		(AD5529R_REG_OUT_RANGE_BASE + (ch)
-> * 2)
-> +#define AD5529R_REG_DAC_INPUT_A_BASE		0x148
-> +#define AD5529R_REG_DAC_INPUT_A(ch)		(AD5529R_REG_DAC_INPUT_A_BASE +
-> (ch) * 2)
-> +#define AD5529R_REG_DAC_DATA_READBACK_BASE	0x16A
-> +#define AD5529R_REG_TSENS_ALERT_FLAG		0x18C
-> +#define AD5529R_REG_TSENS_SHTD_FLAG		0x18E
-> +#define AD5529R_REG_FUNC_BUSY			0x1A0
-> +#define AD5529R_REG_REF_SEL			0x1A2
-> +#define AD5529R_REG_INIT_CRC_ERR_STAT		0x1A4
-> +#define AD5529R_REG_MULTI_DAC_HOTPATH_SW_LDAC	0x1A8
-> +
-> +#define=C2=A0=C2=A0 AD5529R_INTERFACE_CONFIG_A_SW_RESET	(BIT(7) | BIT(0)=
-)
-> +#define=C2=A0=C2=A0 AD5529R_INTERFACE_CONFIG_A_ADDR_ASCENSION	BIT(5)
-> +#define=C2=A0=C2=A0 AD5529R_INTERFACE_CONFIG_A_SDO_ENABLE	BIT(4)
-> +#define=C2=A0=C2=A0 AD5529R_REF_SEL_INTERNAL_REF		BIT(0)
-> +#define=C2=A0=C2=A0 AD5529R_MAX_REGISTER			0x232
-> +#define=C2=A0=C2=A0 AD5529R_8BIT_REG_MAX			0x13
-> +#define=C2=A0=C2=A0 AD5529R_SPI_READ_FLAG			0x80
-> +
-> +struct ad5529r_model_data {
-> +	const char *model_name;
-> +	unsigned int resolution;
-> +	const struct iio_chan_spec *channels;
-> +	unsigned int num_channels;
-> +};
-> +
-> +#define AD5529R_DAC_CHANNEL(chan, bits) {			\
-> +	.type =3D IIO_VOLTAGE,					\
-> +	.indexed =3D 1,						\
-> +	.output =3D 1,						\
-> +	.channel =3D (chan),					\
-> +	.info_mask_separate =3D BIT(IIO_CHAN_INFO_RAW) |		\
-> +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 BIT(IIO_CHAN_INFO_SCALE) |	\
-> +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 BIT(IIO_CHAN_INFO_OFFSET),	\
-> +	.scan_type =3D {						\
-> +		.format =3D 'u',					\
-> +		.realbits =3D (bits),				\
-> +		.storagebits =3D 16,				\
-> +	},							\
-> +}
-> +
-> +static const char * const ad5529r_supply_names[] =3D {
-> +	"vdd",
-> +	"avdd",
-> +	"hvdd",
-> +};
-> +
-> +static const struct iio_chan_spec ad5529r_channels_16bit[] =3D {
-> +	AD5529R_DAC_CHANNEL(0, 16),
-> +	AD5529R_DAC_CHANNEL(1, 16),
-> +	AD5529R_DAC_CHANNEL(2, 16),
-> +	AD5529R_DAC_CHANNEL(3, 16),
-> +	AD5529R_DAC_CHANNEL(4, 16),
-> +	AD5529R_DAC_CHANNEL(5, 16),
-> +	AD5529R_DAC_CHANNEL(6, 16),
-> +	AD5529R_DAC_CHANNEL(7, 16),
-> +	AD5529R_DAC_CHANNEL(8, 16),
-> +	AD5529R_DAC_CHANNEL(9, 16),
-> +	AD5529R_DAC_CHANNEL(10, 16),
-> +	AD5529R_DAC_CHANNEL(11, 16),
-> +	AD5529R_DAC_CHANNEL(12, 16),
-> +	AD5529R_DAC_CHANNEL(13, 16),
-> +	AD5529R_DAC_CHANNEL(14, 16),
-> +	AD5529R_DAC_CHANNEL(15, 16),
-> +};
-> +
-> +static const struct iio_chan_spec ad5529r_channels_12bit[] =3D {
-> +	AD5529R_DAC_CHANNEL(0, 12),
-> +	AD5529R_DAC_CHANNEL(1, 12),
-> +	AD5529R_DAC_CHANNEL(2, 12),
-> +	AD5529R_DAC_CHANNEL(3, 12),
-> +	AD5529R_DAC_CHANNEL(4, 12),
-> +	AD5529R_DAC_CHANNEL(5, 12),
-> +	AD5529R_DAC_CHANNEL(6, 12),
-> +	AD5529R_DAC_CHANNEL(7, 12),
-> +	AD5529R_DAC_CHANNEL(8, 12),
-> +	AD5529R_DAC_CHANNEL(9, 12),
-> +	AD5529R_DAC_CHANNEL(10, 12),
-> +	AD5529R_DAC_CHANNEL(11, 12),
-> +	AD5529R_DAC_CHANNEL(12, 12),
-> +	AD5529R_DAC_CHANNEL(13, 12),
-> +	AD5529R_DAC_CHANNEL(14, 12),
-> +	AD5529R_DAC_CHANNEL(15, 12),
-> +};
-> +
-> +static const struct ad5529r_model_data ad5529r_16bit_model_data =3D {
-> +	.model_name =3D "ad5529r-16",
-> +	.resolution =3D 16,
-> +	.channels =3D ad5529r_channels_16bit,
-> +	.num_channels =3D ARRAY_SIZE(ad5529r_channels_16bit),
-> +};
-> +
-> +static const struct ad5529r_model_data ad5529r_12bit_model_data =3D {
-> +	.model_name =3D "ad5529r-12",
-> +	.resolution =3D 12,
-> +	.channels =3D ad5529r_channels_12bit,
-> +	.num_channels =3D ARRAY_SIZE(ad5529r_channels_12bit),
-> +};
-> +
-> +enum ad5529r_output_range {
-> +	AD5529R_RANGE_0V_5V,
-> +	AD5529R_RANGE_0V_10V,
-> +	AD5529R_RANGE_0V_20V,
-> +	AD5529R_RANGE_0V_40V,
-> +	AD5529R_RANGE_NEG5V_5V,
-> +	AD5529R_RANGE_NEG10V_10V,
-> +	AD5529R_RANGE_NEG15V_15V,
-> +	AD5529R_RANGE_NEG20V_20V,
-> +};
-> +
-> +static const s32 ad5529r_output_ranges_mv[8][2] =3D {
-> +	[AD5529R_RANGE_0V_5V] =3D { 0, 5000 },
-> +	[AD5529R_RANGE_0V_10V] =3D { 0, 10000 },
-> +	[AD5529R_RANGE_0V_20V] =3D { 0, 20000 },
-> +	[AD5529R_RANGE_0V_40V] =3D { 0, 40000 },
-> +	[AD5529R_RANGE_NEG5V_5V] =3D { -5000, 5000 },
-> +	[AD5529R_RANGE_NEG10V_10V] =3D { -10000, 10000 },
-> +	[AD5529R_RANGE_NEG15V_15V] =3D { -15000, 15000 },
-> +	[AD5529R_RANGE_NEG20V_20V] =3D { -20000, 20000 },
-> +};
-> +
-> +struct ad5529r_state {
-> +	struct spi_device *spi;
-> +	const struct ad5529r_model_data *model_data;
-> +	struct regmap *regmap_8bit;
-> +	struct regmap *regmap_16bit;
-> +	enum ad5529r_output_range output_range_idx[16];
-> +};
-> +
-> +static const struct regmap_range ad5529r_8bit_readable_ranges[] =3D {
-> +	regmap_reg_range(AD5529R_REG_INTERFACE_CONFIG_A, AD5529R_REG_CHIP_GRADE=
-),
-> +	regmap_reg_range(AD5529R_REG_SCRATCH_PAD, AD5529R_REG_VENDOR_H),
-> +	regmap_reg_range(AD5529R_REG_STREAM_MODE, AD5529R_REG_INTERFACE_STATUS_=
-A),
-> +};
-> +
-> +static const struct regmap_range ad5529r_16bit_readable_ranges[] =3D {
-> +	regmap_reg_range(AD5529R_REG_MULTI_DAC_CH_SEL,
-> AD5529R_REG_INIT_CRC_ERR_STAT),
-> +	regmap_reg_range(AD5529R_REG_MULTI_DAC_HOTPATH_SW_LDAC,
-> AD5529R_MAX_REGISTER),
-> +};
-> +
-> +static const struct regmap_access_table ad5529r_8bit_readable_table =3D =
-{
-> +	.yes_ranges =3D ad5529r_8bit_readable_ranges,
-> +	.n_yes_ranges =3D ARRAY_SIZE(ad5529r_8bit_readable_ranges),
-> +};
-> +
-> +static const struct regmap_access_table ad5529r_16bit_readable_table =3D=
- {
-> +	.yes_ranges =3D ad5529r_16bit_readable_ranges,
-> +	.n_yes_ranges =3D ARRAY_SIZE(ad5529r_16bit_readable_ranges),
-> +};
-> +
-> +static const struct regmap_range ad5529r_8bit_read_only_ranges[] =3D {
-> +	regmap_reg_range(AD5529R_REG_DEVICE_CONFIG, AD5529R_REG_CHIP_GRADE),
-> +	regmap_reg_range(AD5529R_REG_SPI_REVISION, AD5529R_REG_VENDOR_H),
-> +};
-> +
-> +static const struct regmap_range ad5529r_16bit_read_only_ranges[] =3D {
-> +	regmap_reg_range(AD5529R_REG_DAC_DATA_READBACK_BASE,
-> +			 (AD5529R_REG_DAC_DATA_READBACK_BASE + 15 * 2)),
-> +	regmap_reg_range(AD5529R_REG_TSENS_ALERT_FLAG,
-> AD5529R_REG_TSENS_SHTD_FLAG),
-> +	regmap_reg_range(AD5529R_REG_FUNC_BUSY, AD5529R_REG_FUNC_BUSY),
-> +	regmap_reg_range(AD5529R_REG_INIT_CRC_ERR_STAT,
-> AD5529R_REG_INIT_CRC_ERR_STAT),
-> +};
-> +
-> +static const struct regmap_access_table ad5529r_8bit_writeable_table =3D=
- {
-> +	.no_ranges =3D ad5529r_8bit_read_only_ranges,
-> +	.n_no_ranges =3D ARRAY_SIZE(ad5529r_8bit_read_only_ranges),
-> +};
-> +
-> +static const struct regmap_access_table ad5529r_16bit_writeable_table =
-=3D {
-> +	.no_ranges =3D ad5529r_16bit_read_only_ranges,
-> +	.n_no_ranges =3D ARRAY_SIZE(ad5529r_16bit_read_only_ranges),
-> +};
-> +
-> +static const struct regmap_config ad5529r_regmap_8bit_config =3D {
-> +	.name =3D "ad5529r-8bit",
-> +	.reg_bits =3D 16,
-> +	.val_bits =3D 8,
-> +	.max_register =3D AD5529R_8BIT_REG_MAX,
-> +	.read_flag_mask =3D AD5529R_SPI_READ_FLAG,
-> +	.rd_table =3D &ad5529r_8bit_readable_table,
-> +	.wr_table =3D &ad5529r_8bit_writeable_table,
-> +};
-> +
-> +static const struct regmap_config ad5529r_regmap_16bit_config =3D {
-> +	.name =3D "ad5529r-16bit",
-> +	.reg_bits =3D 16,
-> +	.val_bits =3D 16,
-> +	.max_register =3D AD5529R_MAX_REGISTER,
-> +	.read_flag_mask =3D AD5529R_SPI_READ_FLAG,
-> +	.val_format_endian =3D REGMAP_ENDIAN_LITTLE,
-> +	.rd_table =3D &ad5529r_16bit_readable_table,
-> +	.wr_table =3D &ad5529r_16bit_writeable_table,
-> +	.reg_stride =3D 2,
-> +};
-> +
-> +static struct regmap *ad5529r_get_regmap(struct ad5529r_state *st,
-> +					 unsigned int reg)
+>   .../alloc_tag/allocinfo_ioctl_test.c          | 204 +++++++++++++++++-
+>   1 file changed, 203 insertions(+), 1 deletion(-)
+>
+> diff --git a/tools/testing/selftests/alloc_tag/allocinfo_ioctl_test.c b/tools/testing/selftests/alloc_tag/allocinfo_ioctl_test.c
+> index cd9cf229ae1f..5d2f13900a47 100644
+> --- a/tools/testing/selftests/alloc_tag/allocinfo_ioctl_test.c
+> +++ b/tools/testing/selftests/alloc_tag/allocinfo_ioctl_test.c
+> @@ -311,11 +311,201 @@ static int test_function_filter(void)
+>   	return run_filter_test(&filter);
+>   }
+>   
+> +static int test_size_filter(void)
 > +{
-> +	if (reg <=3D AD5529R_8BIT_REG_MAX)
-> +		return st->regmap_8bit;
+> +	int fd;
+> +	struct allocinfo_tag_data_vec *tags = malloc(sizeof(*tags));
+> +	struct allocinfo_tag_data_vec *procfs_entries = malloc(sizeof(*procfs_entries));
+> +	struct allocinfo_filter filter;
+> +	int ret = KSFT_PASS;
+> +	__u64 target_size, i, pos;
+> +	bool found;
+> +	const char *target_function = "do_init_module";
+> +	struct allocinfo_content_id start_cont_id, end_cont_id;
+> +	int retry = 0;
+> +	const int max_retries = 10;
 > +
-> +	return st->regmap_16bit;
-> +}
-> +
-> +static int ad5529r_reset(struct ad5529r_state *st)
-> +{
-> +	struct reset_control *rst;
-> +	int ret;
-> +
-> +	rst =3D devm_reset_control_get_optional_exclusive(&st->spi->dev, NULL);
-> +	if (IS_ERR(rst))
-> +		return PTR_ERR(rst);
-> +
-> +	if (rst) {
-> +		ret =3D reset_control_deassert(rst);
-> +		if (ret)
-> +			return ret;
-> +	} else {
-> +		ret =3D regmap_write(st->regmap_8bit,
-> AD5529R_REG_INTERFACE_CONFIG_A,
-> +				=C2=A0=C2=A0 AD5529R_INTERFACE_CONFIG_A_SW_RESET);
-> +		if (ret)
-> +			return ret;
+> +	if (!tags || !procfs_entries) {
+> +		ksft_print_msg("Memory allocation failed.\n");
+> +		ret = KSFT_FAIL;
+> +		goto freemem;
 > +	}
 > +
-> +	/*
-> +	 * Wait 10 ms for digital initialization to complete.
-> +	 * Per datasheet, Interface Status A register NOT_READY_ERR bit is
-> +	 * set if SPI transactions are attempted before digital initialization
-> +	 * completes.
-> +	 */
-> +	fsleep(10000);
-> +
-> +	return regmap_write(st->regmap_8bit, AD5529R_REG_INTERFACE_CONFIG_A,
-> +			=C2=A0=C2=A0=C2=A0 AD5529R_INTERFACE_CONFIG_A_SDO_ENABLE |
-> +			=C2=A0=C2=A0=C2=A0 AD5529R_INTERFACE_CONFIG_A_ADDR_ASCENSION);
-> +}
-> +
-> +static int ad5529r_read_raw(struct iio_dev *indio_dev,
-> +			=C2=A0=C2=A0=C2=A0 struct iio_chan_spec const *chan,
-> +			=C2=A0=C2=A0=C2=A0 int *val, int *val2, long mask)
-> +{
-> +	struct ad5529r_state *st =3D iio_priv(indio_dev);
-> +	unsigned int reg_addr, reg_val_h;
-> +	int ret, range_idx, span_mv;
-> +
-> +	switch (mask) {
-> +	case IIO_CHAN_INFO_RAW:
-> +		/*
-> +		 * Read from DAC_INPUT_A register rather than DAC_DATA_READBACK.
-> +		 * The DAC operates in transparent mode and directly reflects
-> +		 * whatever value is written to the INPUT_A register.
-> +		 */
-> +		reg_addr =3D AD5529R_REG_DAC_INPUT_A(chan->channel);
-> +		ret =3D regmap_read(st->regmap_16bit, reg_addr, &reg_val_h);
-> +		if (ret)
-> +			return ret;
-> +
-> +		*val =3D reg_val_h;
-> +
-> +		return IIO_VAL_INT;
-> +	case IIO_CHAN_INFO_SCALE:
-> +		range_idx =3D st->output_range_idx[chan->channel];
-> +
-> +		span_mv =3D ad5529r_output_ranges_mv[range_idx][1] -
-> +			=C2=A0 ad5529r_output_ranges_mv[range_idx][0];
-> +		*val =3D span_mv;
-> +		*val2 =3D st->model_data->resolution;
-> +
-> +		return IIO_VAL_FRACTIONAL_LOG2;
-> +	case IIO_CHAN_INFO_OFFSET:
-> +		range_idx =3D st->output_range_idx[chan->channel];
-> +
-> +		if (ad5529r_output_ranges_mv[range_idx][0] < 0)
-> +			*val =3D -(1 << (st->model_data->resolution - 1));
-> +		else
-> +			*val =3D 0;
-> +
-> +		return IIO_VAL_INT;
-> +	default:
-> +		return -EINVAL;
-> +	}
-> +}
-> +
-> +static int ad5529r_write_raw(struct iio_dev *indio_dev,
-> +			=C2=A0=C2=A0=C2=A0=C2=A0 struct iio_chan_spec const *chan,
-> +			=C2=A0=C2=A0=C2=A0=C2=A0 int val, int val2, long mask)
-> +{
-> +	struct ad5529r_state *st =3D iio_priv(indio_dev);
-> +	unsigned int reg_addr;
-> +
-> +	switch (mask) {
-> +	case IIO_CHAN_INFO_RAW:
-> +		if (val < 0 || val > GENMASK(st->model_data->resolution - 1, 0))
-> +			return -EINVAL;
-> +
-> +		reg_addr =3D AD5529R_REG_DAC_INPUT_A(chan->channel);
-> +
-> +		return regmap_write(st->regmap_16bit, reg_addr, val);
-> +	default:
-> +		return -EINVAL;
-> +	}
-> +}
-> +
-> +static int ad5529r_find_output_range(const s32 *vals)
-> +{
-> +	for (unsigned int i =3D 0; i < ARRAY_SIZE(ad5529r_output_ranges_mv); i+=
-+) {
-> +		if (vals[0] =3D=3D ad5529r_output_ranges_mv[i][0] * 1000 &&
-> +		=C2=A0=C2=A0=C2=A0 vals[1] =3D=3D ad5529r_output_ranges_mv[i][1] * 100=
-0)
-> +			return i;
+> +	fd = open(ALLOCINFO_PROC, O_RDONLY);
+> +	if (fd < 0) {
+> +		ksft_exit_skip("Failed to open " ALLOCINFO_PROC ": %s\n", strerror(errno));
+> +		ret = KSFT_FAIL;
+> +		goto freemem;
 > +	}
 > +
-> +	return -EINVAL;
-> +}
+> +	do {
+> +		found = false;
+> +		pos = 0;
 > +
-> +static int ad5529r_parse_channel_ranges(struct device *dev,
-> +					struct ad5529r_state *st)
-> +{
-> +	int ret, range_idx;
-> +	u32 ch;
-> +	s32 vals[2];
-> +
-> +	device_for_each_child_node_scoped(dev, child) {
-> +		range_idx =3D AD5529R_RANGE_0V_5V;
-> +
-> +		ret =3D fwnode_property_read_u32(child, "reg", &ch);
-> +		if (ret)
-> +			return dev_err_probe(dev, ret,
-> +					=C2=A0=C2=A0=C2=A0=C2=A0 "Missing reg property in channel
-> node\n");
-> +
-> +		if (ch >=3D 16)
-> +			return dev_err_probe(dev, -EINVAL,
-> +					=C2=A0=C2=A0=C2=A0=C2=A0 "Invalid channel number: %u\n", ch);
-> +
-> +		/* Read u32 property into s32 to handle negative voltage ranges */
-> +		if (!fwnode_property_read_u32_array(child,
-> +						=C2=A0=C2=A0=C2=A0 "adi,output-range-microvolt",
-> +						=C2=A0=C2=A0=C2=A0 (u32 *)vals,
-> ARRAY_SIZE(vals))) {
-> +			range_idx =3D ad5529r_find_output_range(vals);
-> +			if (range_idx < 0)
-> +				return dev_err_probe(dev, range_idx,
-> +						=C2=A0=C2=A0=C2=A0=C2=A0 "Invalid range [%d %d] for ch
-> %u\n",
-> +						=C2=A0=C2=A0=C2=A0=C2=A0 vals[0], vals[1], ch);
+> +		if (__allocinfo_get_content_id(fd, &start_cont_id)) {
+> +			ksft_print_msg("allocinfo_get_content_id failed\n");
+> +			ret = KSFT_FAIL;
+> +			goto exit;
 > +		}
 > +
-> +		st->output_range_idx[ch] =3D range_idx;
-> +		ret =3D regmap_write(st->regmap_16bit,
-> +				=C2=A0=C2=A0 AD5529R_REG_OUT_RANGE(ch), range_idx);
-> +		if (ret)
-> +			return dev_err_probe(dev, ret,
-> +					=C2=A0=C2=A0=C2=A0=C2=A0 "Failed to configure range for ch
-> %u\n",
-> +					=C2=A0=C2=A0=C2=A0=C2=A0 ch);
+> +		memset(&filter, 0, sizeof(filter));
+> +		filter.mask |= ALLOCINFO_FILTER_MASK_FUNCTION;
+> +		strncpy(filter.fields.function, target_function, ALLOCINFO_STR_SIZE);
+> +
+> +		if (get_filtered_procfs_entries(procfs_entries, &filter, fd)) {
+> +			ksft_print_msg("Error retrieving entries from " ALLOCINFO_PROC "\n");
+> +			ret = KSFT_FAIL;
+> +			goto exit;
+> +		}
+> +
+
+
+As I mentioned for patch 5, the retry loop in test_size_filter calls
+
+get_filtered_procfs_entries() which reads fd to EOF via fdopen/fgets.
+
+If a module load triggers a retry, the second call to 
+get_filtered_procfs_entries() gets EOF
+
+immediately.
+
+And Sashiko has also reported several minor issues.
+
+
+Thanks
+
+Best Regards
+
+Hao
+
+> +		if (procfs_entries->count == 0) {
+> +			ksft_print_msg("Function %s not found in procfs\n", target_function);
+> +			ret = KSFT_SKIP;
+> +			goto exit;
+> +		}
+> +
+> +		target_size = procfs_entries->tag[0].counter.bytes;
+> +
+> +		memset(&filter, 0, sizeof(filter));
+> +		filter.mask |= ALLOCINFO_FILTER_MASK_MIN_SIZE | ALLOCINFO_FILTER_MASK_MAX_SIZE;
+> +		filter.min_size = target_size;
+> +		filter.max_size = target_size;
+> +
+> +		while (1) {
+> +			struct allocinfo_get_at get_at_params;
+> +
+> +			memset(&get_at_params, 0, sizeof(get_at_params));
+> +			memcpy(&get_at_params.filter, &filter, sizeof(filter));
+> +			get_at_params.pos = pos;
+> +
+> +			if (__allocinfo_get_at(fd, &get_at_params))
+> +				break;
+> +
+> +			tags->count = 0;
+> +			memcpy(&tags->tag[tags->count++], &get_at_params.data,
+> +			       sizeof(get_at_params.data));
+> +
+> +			while (tags->count < VEC_MAX_ENTRIES &&
+> +			       __allocinfo_get_next(fd, &tags->tag[tags->count]) == 0)
+> +				tags->count++;
+> +
+> +			for (i = 0; i < tags->count; i++) {
+> +				if (strcmp(tags->tag[i].tag.function, target_function) == 0) {
+> +					found = true;
+> +					break;
+> +				}
+> +			}
+> +
+> +			if (found || tags->count < VEC_MAX_ENTRIES)
+> +				break;
+> +
+> +			pos += tags->count;
+> +		}
+> +
+> +		if (__allocinfo_get_content_id(fd, &end_cont_id)) {
+> +			ksft_print_msg("allocinfo_get_content_id failed\n");
+> +			ret = KSFT_FAIL;
+> +			goto exit;
+> +		}
+> +
+> +		if (start_cont_id.id == end_cont_id.id)
+> +			break;
+> +
+> +		ksft_print_msg("Module load detected during size verification, retrying...\n");
+> +	} while (retry++ < max_retries);
+> +
+> +	if (start_cont_id.id == end_cont_id.id && !found) {
+> +		ksft_print_msg("Entry with function %s not found in IOCTL results\n",
+> +			       target_function);
+> +		ret = KSFT_FAIL;
 > +	}
 > +
-> +	return 0;
+> +exit:
+> +	close(fd);
+> +freemem:
+> +	free(tags);
+> +	free(procfs_entries);
+> +	return ret;
 > +}
 > +
-> +static int ad5529r_reg_access(struct iio_dev *indio_dev,
-> +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 unsigned int reg,
-> +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 unsigned int writeval,
-> +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 unsigned int *readval)
+> +static int test_lineno_filter(void)
 > +{
-> +	struct ad5529r_state *st =3D iio_priv(indio_dev);
+> +	int fd;
+> +	struct allocinfo_tag_data_vec *tags = malloc(sizeof(*tags));
+> +	struct allocinfo_tag_data_vec *procfs_entries = malloc(sizeof(*procfs_entries));
+> +	struct allocinfo_filter filter;
+> +	enum ioctl_ret ioctl_status;
+> +	int ret = KSFT_PASS;
+> +	__u64 target_lineno, i;
 > +
-> +	if (readval)
-> +		return regmap_read(ad5529r_get_regmap(st, reg), reg, readval);
+> +	if (!tags || !procfs_entries) {
+> +		ksft_print_msg("Memory allocation failed.\n");
+> +		ret = KSFT_FAIL;
+> +		goto freemem;
+> +	}
 > +
-> +	return regmap_write(ad5529r_get_regmap(st, reg), reg, writeval);
-> +}
+> +	fd = open(ALLOCINFO_PROC, O_RDONLY);
+> +	if (fd < 0) {
+> +		ksft_exit_skip("Failed to open " ALLOCINFO_PROC ": %s\n", strerror(errno));
+> +		ret = KSFT_FAIL;
+> +		goto freemem;
+> +	}
 > +
-> +static const struct iio_info ad5529r_info =3D {
-> +	.read_raw =3D ad5529r_read_raw,
-> +	.write_raw =3D ad5529r_write_raw,
-> +	.debugfs_reg_access =3D ad5529r_reg_access,
-> +};
+> +	memset(&filter, 0, sizeof(filter));
 > +
-> +static int ad5529r_probe(struct spi_device *spi)
-> +{
-> +	struct device *dev =3D &spi->dev;
-> +	struct iio_dev *indio_dev;
-> +	struct ad5529r_state *st;
-> +	bool external_vref;
-> +	int ret;
-> +
-> +	indio_dev =3D devm_iio_device_alloc(dev, sizeof(*st));
-> +	if (!indio_dev)
-> +		return -ENOMEM;
-> +
-> +	st =3D iio_priv(indio_dev);
-> +
-> +	st->spi =3D spi;
-> +
-> +	st->model_data =3D spi_get_device_match_data(spi);
-> +	if (!st->model_data)
-> +		return dev_err_probe(dev, -EINVAL, "Failed to identify device
-> variant\n");
-> +
-> +	ret =3D devm_regulator_bulk_get_enable(dev,
-> ARRAY_SIZE(ad5529r_supply_names),
-> +					=C2=A0=C2=A0=C2=A0=C2=A0 ad5529r_supply_names);
-> +	if (ret)
-> +		return dev_err_probe(dev, ret,
-> +				=C2=A0=C2=A0=C2=A0=C2=A0 "Failed to get and enable regulators\n");
-> +
-> +	ret =3D devm_regulator_get_enable_optional(dev, "hvss");
-> +	if (ret && ret !=3D -ENODEV)
-> +		return dev_err_probe(dev, ret,
-> +				=C2=A0=C2=A0=C2=A0=C2=A0 "Failed to get and enable hvss regulator\n"=
-);
-> +
+> +	if (get_filtered_procfs_entries(procfs_entries, &filter, fd)) {
+> +		ksft_print_msg("Error retrieving entries from " ALLOCINFO_PROC "\n");
+> +		ret = KSFT_FAIL;
+> +		goto exit;
+> +	}
+> +	if (procfs_entries->count == 0) {
+> +		ksft_print_msg("Could not retrieve procfs entries\n");
+> +		ret = KSFT_SKIP;
+> +		goto exit;
+> +	}
 > +	/*
-> +	 * The datasheet mentions a 4.096V external reference for correct
-> +	 * operation.
+> +	 * We depend on the result of procfs entries to create the ioctl_filter. Hence we
+> +	 * cannot recycle the run_filter_test function here.
 > +	 */
-> +	ret =3D devm_regulator_get_enable_optional(dev, "vref");
-> +	if (ret && ret !=3D -ENODEV)
-> +		return dev_err_probe(dev, ret,
-> +				=C2=A0=C2=A0=C2=A0=C2=A0 "Failed to get and enable vref regulator\n"=
-);
+> +	target_lineno = procfs_entries->tag[0].tag.lineno;
 > +
-> +	external_vref =3D ret !=3D -ENODEV;
+> +	filter.mask |= ALLOCINFO_FILTER_MASK_LINENO;
+> +	filter.fields.lineno = target_lineno;
 > +
-> +	st->regmap_8bit =3D devm_regmap_init_spi(spi, &ad5529r_regmap_8bit_conf=
-ig);
-> +	if (IS_ERR(st->regmap_8bit))
-> +		return dev_err_probe(dev, PTR_ERR(st->regmap_8bit),
-> +				=C2=A0=C2=A0=C2=A0=C2=A0 "Failed to initialize 8-bit regmap\n");
+> +	ioctl_status = get_filtered_ioctl_entries(tags, &filter, fd, 0);
+> +	if (ioctl_status == IOCTL_INVALID_DATA) {
+> +		ksft_print_msg("Trouble retrieving valid IOCTL entries, skipping.\n");
+> +		ret = KSFT_SKIP;
+> +		goto exit;
+> +	}
+> +	if (ioctl_status == IOCTL_FAILURE) {
+> +		ksft_print_msg("Error retrieving IOCTL entries.\n");
+> +		ret = KSFT_FAIL;
+> +		goto exit;
+> +	}
 > +
-> +	st->regmap_16bit =3D devm_regmap_init_spi(spi,
-> &ad5529r_regmap_16bit_config);
-> +	if (IS_ERR(st->regmap_16bit))
-> +		return dev_err_probe(dev, PTR_ERR(st->regmap_16bit),
-> +				=C2=A0=C2=A0=C2=A0=C2=A0 "Failed to initialize 16-bit regmap\n");
+> +	for (i = 0; i < tags->count; i++) {
+> +		if (tags->tag[i].tag.lineno != target_lineno) {
+> +			ksft_print_msg("IOCTL entry %llu has incorrect lineno %llu.\n",
+> +				       i, tags->tag[i].tag.lineno);
+> +			ret = KSFT_FAIL;
+> +			goto exit;
+> +		}
+> +	}
 > +
-> +	ret =3D ad5529r_reset(st);
-> +	if (ret)
-> +		return dev_err_probe(dev, ret, "Failed to reset device\n");
-> +
-> +	ret =3D regmap_assign_bits(st->regmap_16bit, AD5529R_REG_REF_SEL,
-> +				 AD5529R_REF_SEL_INTERNAL_REF,
-> +				 external_vref ? 0 :
-> AD5529R_REF_SEL_INTERNAL_REF);
-> +	if (ret)
-> +		return dev_err_probe(dev, ret, "Failed to configure reference\n");
-> +
-> +	ret =3D ad5529r_parse_channel_ranges(dev, st);
-> +	if (ret)
-> +		return ret;
-> +
-> +	indio_dev->name =3D st->model_data->model_name;
-> +	indio_dev->info =3D &ad5529r_info;
-> +	indio_dev->modes =3D INDIO_DIRECT_MODE;
-> +	indio_dev->channels =3D st->model_data->channels;
-> +	indio_dev->num_channels =3D st->model_data->num_channels;
-> +
-> +	return devm_iio_device_register(dev, indio_dev);
+> +exit:
+> +	close(fd);
+> +freemem:
+> +	free(tags);
+> +	free(procfs_entries);
+> +	return ret;
 > +}
 > +
-> +static const struct of_device_id ad5529r_of_match[] =3D {
-> +	{ .compatible =3D "adi,ad5529r-16", .data =3D &ad5529r_16bit_model_data=
- },
-> +	{ .compatible =3D "adi,ad5529r-12", .data =3D &ad5529r_12bit_model_data=
- },
-> +	{ }
-> +};
-> +MODULE_DEVICE_TABLE(of, ad5529r_of_match);
+>   int main(int argc, char *argv[])
+>   {
+>   	int ret;
+>   
+> -	ksft_set_plan(2);
+> +	ksft_set_plan(4);
+>   
+>   	ret = test_filename_filter();
+>   	if (ret == KSFT_SKIP)
+> @@ -329,5 +519,17 @@ int main(int argc, char *argv[])
+>   	else
+>   		ksft_test_result(ret == KSFT_PASS, "test_function_filter\n");
+>   
+> +	ret = test_size_filter();
+> +	if (ret == KSFT_SKIP)
+> +		ksft_test_result_skip("Skipping test_size_filter\n");
+> +	else
+> +		ksft_test_result(ret == KSFT_PASS, "test_size_filter\n");
 > +
-> +static const struct spi_device_id ad5529r_id[] =3D {
-> +	{
-> +		.name =3D "ad5529r-16",
-> +		.driver_data =3D (kernel_ulong_t)&ad5529r_16bit_model_data,
-> +	},
-> +	{
-> +		.name =3D "ad5529r-12",
-> +		.driver_data =3D (kernel_ulong_t)&ad5529r_12bit_model_data,
-> +	},
-> +	{ }
-> +};
-> +MODULE_DEVICE_TABLE(spi, ad5529r_id);
+> +	ret = test_lineno_filter();
+> +	if (ret == KSFT_SKIP)
+> +		ksft_test_result_skip("Skipping test_lineno_filter\n");
+> +	else
+> +		ksft_test_result(ret == KSFT_PASS, "test_lineno_filter\n");
 > +
-> +static struct spi_driver ad5529r_driver =3D {
-> +	.driver =3D {
-> +		.name =3D "ad5529r",
-> +		.of_match_table =3D ad5529r_of_match,
-> +	},
-> +	.probe =3D ad5529r_probe,
-> +	.id_table =3D ad5529r_id,
-> +};
-> +module_spi_driver(ad5529r_driver);
-> +
-> +MODULE_AUTHOR("Janani Sunil <janani.sunil@analog.com>");
-> +MODULE_DESCRIPTION("Analog Devices AD5529R 12/16-bit DAC driver");
-> +MODULE_LICENSE("GPL");
+>   	ksft_finished();
+>   }
 
