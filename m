@@ -1,243 +1,533 @@
-Return-Path: <linux-doc+bounces-91812-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91814-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id T3GsAZQvKWpwSAMAu9opvQ
-	(envelope-from <linux-doc+bounces-91812-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 11:34:12 +0200
+	id MhsTIJ0wKWqgSAMAu9opvQ
+	(envelope-from <linux-doc+bounces-91814-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 11:38:37 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B0A8667E26
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 11:34:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 399E0667E98
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 11:38:37 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=O48KkhDw;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91812-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-91812-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
+	dkim=pass header.d=qualcomm.com header.s=qcppdkim1 header.b="G0B0/CSr";
+	dkim=pass header.d=oss.qualcomm.com header.s=google header.b="Qebo7x/J";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91814-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-91814-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=qualcomm.com;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id D62623027C5A
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 09:34:09 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id D94A93047350
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 09:38:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BB1BD3CFF61;
-	Wed, 10 Jun 2026 09:34:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4F3DE3BB665;
+	Wed, 10 Jun 2026 09:38:35 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dy1-f180.google.com (mail-dy1-f180.google.com [74.125.82.180])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 54BCB3CF205
-	for <linux-doc@vger.kernel.org>; Wed, 10 Jun 2026 09:34:06 +0000 (UTC)
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781084047; cv=pass; b=U9Qm82ceEMLIYJWMBMGpqv7U+COiK6T6rOWp9Dij86uJJFkdFtxwZW4Uvy5H4z/GIbqvGQDmQGsx6+VCM1YKzJdtxo9GMa3COqzIInJy4m8JE3xJRev+WvQE9QYAz4kA4v6oHHelBoyqbK/rkNQGb7/uOv0ovoKu2CDxndBQTBs=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781084047; c=relaxed/simple;
-	bh=TEdCx4Ul4BPkVidIQLKMS6KkTXZps8JZ9GJQJ87hLI8=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=E7F+Olm6fEsbWSY/RBeoqqzgHhmZZjq+HGPw6G52Dnk4NBq7Qz/4MTx02EQlx1J1n5iFZ8BnYTU/x0/cw/swClpFcHnyBt1FAh6Q0dFP+UNaUPsB2HNKz59yQZLXn9mmkV3Wx9QdtqWYZysaZrOIhSa7adCYn8jtscapeiMN26c=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=O48KkhDw; arc=pass smtp.client-ip=74.125.82.180
-Received: by mail-dy1-f180.google.com with SMTP id 5a478bee46e88-304cf518c9dso8086590eec.1
-        for <linux-doc@vger.kernel.org>; Wed, 10 Jun 2026 02:34:06 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781084045; cv=none;
-        d=google.com; s=arc-20240605;
-        b=M3gf2J7LmN8CPHdwPAIdHN7UXlPOFvuRYauHJBbglwwK7DxVCqdvPxVqBBxjEaMPNm
-         /BbfgdFn6YszGWTBtANGDhKxmcooh4TAR/DW6MqFRBPA1wRH9PUeiAu7oAajANS+i4YC
-         X4DXBFsUgrqwWosyprYuJPgKMczR4kyXeg+KOaUDcsMn80gKVqZbzkBLoi8v5mZ/Soqg
-         QVJKgpN8zt+/R3NlUdCMFFQyuPNVj+jBfkFAX57II8JpnhScyWVDHKhg0ZKnryEY0DNc
-         YF9+hcb6beK3x/TEFo/oBEZU4a/TJJyuzvQnpj9g55h1o8daRflUeFlC8EK6qY2UO04K
-         Gs1Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=I/WBNx7vmi5VT9dRS7lbKabVM89kwH/AFfI7EJS7Ghw=;
-        fh=JzHFvlqP+3gh9gDvt6b/IHCvQfbldANl6s8YLaZWbYY=;
-        b=ZeTPLaJITcCemVg4n28pIAyPU944Pq5OtlUf5eTAiS+BRuL/Qz+fymJ8EO7684RTeM
-         vW+my0itwcdR9DyPgttwoFzmKI3ajxFvGNRXv+RF0pb/TN9Kf27AcveFc9XkIK8+561M
-         8mJlSEYtjAxGOapCM5yLMfKP6k2nslbbun1LuNgATiQ9YLWzKh7NEto1kODigxxXutQt
-         ixPQWcSvZzKEup61HUZILSvmi2H/w6gGBw7ZyEJFOfu2aq7FFX9HIRD+khJHZUKK59Fm
-         JuuoB2EWyZ3Bvyb8Ja2fmtSE7m4qzXKZswRYZkXiFwSRDi74qHV6WAOhVEVUwnzC0+mS
-         03NQ==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F18333BADB1
+	for <linux-doc@vger.kernel.org>; Wed, 10 Jun 2026 09:38:30 +0000 (UTC)
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1781084314; cv=none; b=PvxdvV43HrBsoyfFfhtFwFiiiPvfk7f0av/M9XkHDo/jhtvdFAHkVnXJgaYAfznsi3HNSThuYOvlGgFfrvntJaT7RIA6+R4tiXPd8qKPogI8M33846CXYc8AFeiZvbxpHxuImIK/8DtnJth5Hmbb7Jwh7j1vRcC5xcE8EJ4a9sI=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1781084314; c=relaxed/simple;
+	bh=0WkxGCYcSYMAjpBAU3KfnACwHskqbBEptIR+MsEt90g=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Y0l4JEDdsQjqMHIMpo8FIQvHy+tN9UVIbLik/rZ4P5YHBr8gOddS+r/eEvs8HRDS+Vr6CxjL6bwg/OZ0ZqUc0FaCOQ2xwTU5GPH7dXUhepKlsdS4pJZmgY/addQO0rsoWBH2lHcFRPj4zlaCevcIKH4w3jV8OTvug6jcZqzD3hU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=G0B0/CSr; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Qebo7x/J; arc=none smtp.client-ip=205.220.180.131
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 65A7iWev904043
+	for <linux-doc@vger.kernel.org>; Wed, 10 Jun 2026 09:38:29 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	fLahizlXX21JZl8j3A8UCWqbtcmXHv2dftjEyU0Kt2U=; b=G0B0/CSrpQkuFS4s
+	a7qfxcN0hGzlTeeLtQn7ZxFbd7BJ44iouWigMU3FyRBO5CvV1leqGfgXIUANKPfB
+	H4xA2PZ6Ph27nOAOBeI6Gp0IJQTBNxPiETVcGtpyuajkdnaPDkDI/F2KfuGeibzF
+	SA3afuC617MKr6lpneo8IA/cbIktCcR/Sf1Na5b0GXr4K7ZbQs9oIg9sO40UmLDx
+	FF3AJHxPjixGeBZEh2wAe9m1gp0j0KWoi2HI3JHFnwjAgccj9onPjDHJ9sZ4Tem/
+	9GeJ3U5d7ipAXOZRQf33GQ5yVUTaCTtNJTZybBwguakynoj35oJn2vN8xSIficxU
+	bcOB6w==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4epuketb2v-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-doc@vger.kernel.org>; Wed, 10 Jun 2026 09:38:29 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-36d98b74447so5172102a91.2
+        for <linux-doc@vger.kernel.org>; Wed, 10 Jun 2026 02:38:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781084045; x=1781688845; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=I/WBNx7vmi5VT9dRS7lbKabVM89kwH/AFfI7EJS7Ghw=;
-        b=O48KkhDw4b9ie38dSOwhENbOhrKFtAC9GMzhH5sNlNAUv7HMI2IlSijZhcpI98us/o
-         DYdZ0rxjcBsXb48g/PYWEZ78JaefrT0mzytZlBBabznYv6VC9LJYZL4t5ZuvqJWh1xE6
-         by0Lyhk2R18ojiBi/MX2XC9Jm0RDJ8H3OelBW9ua1Xrq84tuw0iKurPciNNQMczRMaNZ
-         1afo/wQ6fr43ySzDaYqgVmqIDV1XV1rkVLScsWilGGN17NOq44srPbMf7f/6RU1K9Vot
-         jL/Jmcxqj44P/p21JKikTJhAvy458fhkpNGaX6w5RaqtdPwRXTtVutkueUmgWbGc/QxU
-         BotA==
+        d=oss.qualcomm.com; s=google; t=1781084308; x=1781689108; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=fLahizlXX21JZl8j3A8UCWqbtcmXHv2dftjEyU0Kt2U=;
+        b=Qebo7x/JNPhHxWWXrHDknLpE4+4OdcAdGnlGP97wKdWCdawkXprrrAkRVn9mBT0x7P
+         0nP32xbOPkqQsb6xH75S4oDOxPXyAlYcFDOjZy8Pie4JYH2UiiRoWiqhliUunxLQiGSR
+         owPzy87OQ0ZJu5xkfkqP5d6uRLEJu+zUmc6VpnKeJSqSF6GexPsrm+1Old6x8RMk/JGZ
+         BTjPqolvcmjdql+Ztidhpgeag/88Q23nNG6dWQLranq5usIAiAcw3x/Knhd2Jgm/yZld
+         VNcD8omqIKk+EXgO9rZr6dVn2v2kGyoULcCNiMHNzVppx4n7KX202Bv63gIByZ0JLSg2
+         U+eQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781084045; x=1781688845;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=I/WBNx7vmi5VT9dRS7lbKabVM89kwH/AFfI7EJS7Ghw=;
-        b=QmqTASW1i3/QU55gHwdrnN+jLlBv90mIeua2zZM/sJxYD8PqHz6IO8cAyuqgOxvjOI
-         9s0zzNEKpIBdlu8wmJ9Kl7ZNMrr/8QI7M2yr6/su5LqAWesebg0ngRF0Tz1DlSxm8lJO
-         NwQyN/wWkgfFQxSi2+nOVSxP0ygvotSW8wi6C7XmK/W06/m/AeP97Di/AaVyxv/kIyd5
-         5U1UGHrsEbhRyG3/FtTE00jk3149JFezYl1U1A0qc2Bc/0ZXGiRN0wluWMeDLDmoHnCV
-         CD2qTZpXt7Kt99Jk5iD/xvBFYGt/FDpZk5t987z4FJDB7w8644Ov9SDNNBZgPx17Jym/
-         jbrg==
-X-Forwarded-Encrypted: i=1; AFNElJ8yCIT3m9C3/oEelqucsBQUd+K3r0Mt45kHJOFFVpd/5VvHQrJeLxJjg/yxR3dkzK5lUrrXH22Cn6o=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx2R+ChHo/lg5BUObVDzaPUsBGbHIPpU38EF5kyCplvjzrStunv
-	XQhGmZZNxa/E1aCYDSXU+B6iiEb1CbO8qCLEH1tGfO7Y8+2Om6GSvRbrtU6Tu9UTC7wb6RgTVx/
-	bTBydM0mlN/FcQLEqNOS8WYXE6+QlhYA=
-X-Gm-Gg: Acq92OHA8ASBthJm9ZLd/meUGLHZOlVsvgKqnE9b/E1QywlpmRXrf5YNs2agfz1dqAT
-	uKbW8sXVWnodq+7LQ3AQavda76qtWYgzLNjGSB0ogI2wwajvUYX3GpM2mcRNI+Fo0kpbmT12iJJ
-	mUdU4zeejUVma5kWzSHFmYeGt4Ubv+VMLiyRsD9sYF+88Wr/EM/Z3YCMcnmTmQei1/pDkjw0UwA
-	NFHulfBwh46wW3lQZdy+z0/BSUvakgkFVqX8IWEfbPUQLmfTGjIMEEhidtAXxgOO8LHTUleKn62
-	aNnLBABxIDhDKTVZwqdXT3tGnh/nsyBjyKvJY1FJvxqP0HCAxJJpOTvRURGSrqqDG5T3UB4U4DP
-	y49Q=
-X-Received: by 2002:a05:7301:22a3:b0:2c1:7793:7bbb with SMTP id
- 5a478bee46e88-3077b2615bamr15346976eec.27.1781084045265; Wed, 10 Jun 2026
- 02:34:05 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1781084308; x=1781689108;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=fLahizlXX21JZl8j3A8UCWqbtcmXHv2dftjEyU0Kt2U=;
+        b=WWdWTalH7z9fAHUoqNNY7/4bma6K6VQJqahIKm55Pee0KoaipVtPmqY2Bn8kHe+s/f
+         4AiH03H1H+BNRP56R0QKlUMGRJqgQJtYrE2nuo2GXoqzGwmaPgWDVHVU98xxZfaAyW2+
+         tyLfi9tj/rNU0qmY+nGis9nusuSk4GUJ7VL/skMpsL+MdPLaZ+fFGRzU6kfLrbijyNDK
+         IhUWcyHAa5RB04PnKk3Ma7uoIvhDwArVfCFWnha7m1aenX6A5i6RvrJY2YoJXA1ZIBgV
+         hxtx7PVgtyJUJwLhrPy7uPg7+1PTvN7Z+XaN5lIJTYutS1nm4k1f4/vybHQkVaHMqq6D
+         pXJQ==
+X-Forwarded-Encrypted: i=1; AFNElJ8rt7GitMwlhs2uRWeWanOYTzTLw/Mz0emzVILqM1QqKZXd9ZxVIw3OD80z0NYG60sOzF2U/2jlJKE=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz4MXaO7du28zGfMvRuJuLVgnBTvgE7DXKXm1WFuMdIgg8DQhZT
+	KSOzz+KALye6GoEmcd6gcu8a89IaDHGNJcbg8Vcx0Ozd2MdA6BzA1zrRVXgNRTS7YLwfU3cl9m3
+	S6xKM43tupGqZXio/Y26TBbnrNuIUwAqY/U+0+0gJ69JeLFUapcN1jDH9W7bg6ac=
+X-Gm-Gg: Acq92OGxPDy28GdLKkbiPiSyoZ12Se5zwfc5YXRhVM1cqvGJAzV2qZfpHdbIL/nx/2E
+	vjHx6WTiw3BpfOE01/YaFtDd+VObunVr8jB1NOPQJJUfTHKnQtKVGKq3C3B3kY5ZywO6Z6JIgGK
+	quBvIuTZgUCFr/eP7SQ+1viq9r1KcZZxE67tyUhhbO3J8zz0MPMlrQ+WT9R161NRSqlf4QWwMxl
+	ijaVUMxpOX3EDdIW/3WCkMcIrHzYkf4TDgbYCAIocuiHWxSVv241OW1jer4g/1jdVA1er1nSV0z
+	g9modwSJ2imv5OnrTpz2TkPOkjRpajjyoNkz7H/t3T945CVBIRPdKcSpD9VFy8Whh5iyov7iMkd
+	8ZXaxdN0n/G5n92MiYS2Tx8G3FzXnF8i7EPL8csjL5o+eWNUgNBnpkJv02JEJtg==
+X-Received: by 2002:a17:90b:5145:b0:36d:81b3:61a1 with SMTP id 98e67ed59e1d1-370eed0b63bmr26327693a91.7.1781084308243;
+        Wed, 10 Jun 2026 02:38:28 -0700 (PDT)
+X-Received: by 2002:a17:90b:5145:b0:36d:81b3:61a1 with SMTP id 98e67ed59e1d1-370eed0b63bmr26327640a91.7.1781084307708;
+        Wed, 10 Jun 2026 02:38:27 -0700 (PDT)
+Received: from [10.204.78.173] ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-37624a8e76csm2773910a91.15.2026.06.10.02.38.19
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 10 Jun 2026 02:38:26 -0700 (PDT)
+Message-ID: <b22703d3-03f2-4835-9eee-c3d1fa50a5ce@oss.qualcomm.com>
+Date: Wed, 10 Jun 2026 15:08:17 +0530
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260607234343.22109-1-kimjinseob88@gmail.com>
- <20260607234343.22109-2-kimjinseob88@gmail.com> <20260609-glacial-colossal-38b4937ec620@spud>
-In-Reply-To: <20260609-glacial-colossal-38b4937ec620@spud>
-From: Kim Jinseob <kimjinseob88@gmail.com>
-Date: Wed, 10 Jun 2026 18:33:54 +0900
-X-Gm-Features: AVVi8CeIpvFBux1wEAZY6Bff68TrrIEZ3OnIKWyWrYDouz-MKRCStpTldHFDGGg
-Message-ID: <CALMSew+cL0_kG6W15RapxLtE+Fw2_DYdrYoRFSjENQktWw2H4Q@mail.gmail.com>
-Subject: Re: [PATCH RFC v4 1/6] dt-bindings: iio: add Open Sensor Fusion device
-To: Conor Dooley <conor@kernel.org>
-Cc: Jonathan Cameron <jic23@kernel.org>, linux-iio@vger.kernel.org, 
-	David Lechner <dlechner@baylibre.com>, =?UTF-8?B?TnVubyBTw6E=?= <nuno.sa@analog.com>, 
-	Andy Shevchenko <andriy.shevchenko@intel.com>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 12/15] accel/qda: Add FastRPC invocation support
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>, Joerg Roedel <joro@8bytes.org>,
+        Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Sumit Semwal <sumit.semwal@linaro.org>,
+        =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+        Bharath Kumar <quic_bkumar@quicinc.com>,
+        Chenna Kesava Raju <quic_chennak@quicinc.com>, srini@kernel.org,
+        andersson@kernel.org, konradybcio@kernel.org,
+        robin.clark@oss.qualcomm.com, linux-kernel@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, iommu@lists.linux.dev,
+        linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+References: <20260519-qda-series-v1-0-b2d984c297f8@oss.qualcomm.com>
+ <20260519-qda-series-v1-12-b2d984c297f8@oss.qualcomm.com>
+ <43a7laqb7mnrvleunnmbxwhvzr6w3au4ofjri4r4ap7clsx6mc@jxqlr4a2lw56>
+ <ba003d7d-03f5-4572-8321-3d1f666c8c27@oss.qualcomm.com>
+ <q2q6tfnas3kikapwehbp6q7mykvk2wbuvn6ypbzc5ta7azh65w@wdwphde7gcxc>
+Content-Language: en-US
+From: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+In-Reply-To: <q2q6tfnas3kikapwehbp6q7mykvk2wbuvn6ypbzc5ta7azh65w@wdwphde7gcxc>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjEwMDA5MSBTYWx0ZWRfXxxIaeMyAm1Ur
+ mYa9vURcTa32/VtiPC8aYGuSkXvUFdCwsk0yQ9OO9M00hqng6Bq5AK0p7DAXY4qZPjQoEECjh84
+ jOvD3fyxByhTKkYoGKAebdMGFueix+BDxw59uv1cK6kcmOmx58durQn2UX1+LA48c2SnrDaORsQ
+ +Zwh8UkNIT/7/+JYtwjaAeIertWP0MHn21lwQAT61vWtw8TPglGbBzBcuSexUbL4xGQVI1yuBQ8
+ 46a/VVYcQEiV5kuzcyItzZ5lt50KJsJk/pccv7Ikl6apHxc36TnOEy/US3Jz9tLvJlmj7WQBoZD
+ VS472ajMeLx4v3ZoRII+TDQDLpR/oAHrrBZNgnfTDC6Zj3K3u9QX2WdabLTwW/Eq3IypUsXB1eX
+ 4qI3gduil4bliSLEZvnBmhmS8x+PsGwvzSwA5nTbfqfkFRn0lzJt4nRb0SrMSNRC1fYZh0NKTCx
+ +Zl4P9bbRMo1ABSGZjQ==
+X-Proofpoint-ORIG-GUID: OsdZ2_9Z4PWvz7GnQKYCQwEvKx8M5-4j
+X-Proofpoint-GUID: OsdZ2_9Z4PWvz7GnQKYCQwEvKx8M5-4j
+X-Authority-Analysis: v=2.4 cv=DNG/JSNb c=1 sm=1 tr=0 ts=6a293095 cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=0tHIOXy_Vfvaqy0H-swA:9 a=QEXdDO2ut3YA:10
+ a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-10_02,2026-06-09_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 malwarescore=0 spamscore=0 impostorscore=0
+ priorityscore=1501 adultscore=0 phishscore=0 clxscore=1015 suspectscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2605210000
+ definitions=main-2606100091
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[qualcomm.com,reject];
+	R_DKIM_ALLOW(-0.20)[qualcomm.com:s=qcppdkim1,oss.qualcomm.com:s=google];
 	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:conor@kernel.org,m:jic23@kernel.org,m:linux-iio@vger.kernel.org,m:dlechner@baylibre.com,m:nuno.sa@analog.com,m:andriy.shevchenko@intel.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:krzk@kernel.org,s:lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-91812-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-91814-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER(0.00)[kimjinseob88@gmail.com,linux-doc@vger.kernel.org];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[14];
+	FREEMAIL_CC(0.00)[kernel.org,lwn.net,linuxfoundation.org,8bytes.org,arm.com,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,quicinc.com,oss.qualcomm.com,vger.kernel.org,lists.freedesktop.org,lists.linux.dev,lists.linaro.org];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,qualcomm.com:dkim,qualcomm.com:email,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,oss.qualcomm.com:dkim,oss.qualcomm.com:mid,oss.qualcomm.com:from_mime];
+	FORGED_SENDER(0.00)[ekansh.gupta@oss.qualcomm.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[27];
+	FORGED_RECIPIENTS(0.00)[m:dmitry.baryshkov@oss.qualcomm.com,m:ogabbay@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:joro@8bytes.org,m:will@kernel.org,m:robin.murphy@arm.com,m:maarten.lankhorst@linux.intel.com,m:mripard@kernel.org,m:tzimmermann@suse.de,m:airlied@gmail.com,m:simona@ffwll.ch,m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:quic_bkumar@quicinc.com,m:quic_chennak@quicinc.com,m:srini@kernel.org,m:andersson@kernel.org,m:konradybcio@kernel.org,m:robin.clark@oss.qualcomm.com,m:linux-kernel@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-doc@vger.kernel.org,m:linux-arm-msm@vger.kernel.org,m:iommu@lists.linux.dev,m:linux-media@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	DKIM_TRACE(0.00)[qualcomm.com:+,oss.qualcomm.com:+];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[ekansh.gupta@oss.qualcomm.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[kimjinseob88@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[devicetree.org:url,vger.kernel.org:from_smtp,mail.gmail.com:mid,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo]
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCVD_COUNT_SEVEN(0.00)[7]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 9B0A8667E26
+X-Rspamd-Queue-Id: 399E0667E98
 
-> Do you think it makes sense to permit a regulator here, so that the
-> "host" OS can power on/off the board running the osf stack?
+On 08-06-2026 02:44, Dmitry Baryshkov wrote:
+> On Thu, Jun 04, 2026 at 10:39:14AM +0530, Ekansh Gupta wrote:
+>> On 20-05-2026 19:26, Dmitry Baryshkov wrote:
+>>> On Tue, May 19, 2026 at 11:46:02AM +0530, Ekansh Gupta via B4 Relay wrote:
+>>>> From: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+>>>>
+>>>> Implement the FastRPC remote procedure call path, allowing user-space
+>>>> to invoke methods on the DSP via DRM_IOCTL_QDA_REMOTE_INVOKE.
+>>>>
+>>>> qda_fastrpc.c / qda_fastrpc.h
+>>>>   Implements the FastRPC protocol layer: argument marshalling
+>>>>   (qda_fastrpc_invoke_pack), response unmarshalling
+>>>>   (qda_fastrpc_invoke_unpack), and invocation context lifecycle
+>>>>   management. Each invocation allocates a fastrpc_invoke_context
+>>>>   which tracks buffer descriptors, GEM objects, and the completion
+>>>>   used to synchronise with the DSP response.
+>>>>
+>>>>   Buffer arguments are handled in three ways:
+>>>>   - DMA-BUF fd: imported via PRIME, IOMMU-mapped dma_addr used
+>>>>   - Direct (inline): copied into the GEM-backed message buffer
+>>>>   - DMA handle: fd forwarded to DSP, physical page descriptor computed
+>>>
+>>> No. This needs to go away. The QDA should support only one way to pass
+>>> data - via the GEM buffers. Everything else should be handled by the
+>>> shim layer, etc.
+>> each FD passed here is a GEM buffer. The reason to pass fd is that there
+>> are some APIs on DSP side which takes fd as an argument and the user
+>> might use the same on their skel implementation. So in this case the
+>> remote call will take fd to DSP and the skel implementation will use the
+>> FD.>
+> 
+> Then handle it all on the userspace side. In the end, bad library API is
+> not a reason to complicate kernel API and kernel driver.
+The problem is that the user passes the fd as an argument to the remote
+call which the fastrpc library cannot decrypt. So basically the user can
+allocate some fd buffer(say with FD1) and then call some remote method
+passing FD1 as an int argument to call HAP_mmap on the same at DSP side,
+this int argument cannot be differentiated by fastrpc library as
+FD/non-FD argument.
+> 
+>>>> +#define FASTRPC_SCALARS(method, in, out) \
+>>>> +		FASTRPC_BUILD_SCALARS(0, method, in, out, 0, 0)
+>>>> +
+>>>> +/**
+>>>> + * struct fastrpc_buf_overlap - Buffer overlap tracking structure
+>>>> + *
+>>>> + * Tracks overlapping buffer regions to optimise memory mapping and avoid
+>>>> + * redundant mappings of the same physical memory.
+>>>
+>>> WHat for? Even if this is a valid optimization, implement it as a
+>>> subsequent patch. The first goal should be very simple - get GEM buffers
+>>> from the app, pass them to the DSP, read the results.
+>> yes, this implementation is mimicking the existing fastrpc design where
+>> non-FD buffers are also supported. I am currently evaluating the
+>> maintainance of such buffers from userspace side and trying to
+>> understand the impacts of the same. I am planning to bring it as a
+>> future enhancement if there is no regression.>
+> 
+> Other way around. Drop it for now and bring it back if it has any
+> positive impact.
+We did evaluation and don't see userspace side handling being feasible
+for non-FD buffers, I'll try to summarize the current design and the
+problem:
 
-From the OSF hardware side, yes, that makes sense.
+Currently a remote call can take up to 255 arguments and in many cases
+the user passes the buffers as non-FD arguments which is then copied to
+meta data and sent to DSP. Before copy there is an operation to identify
+if the buffers are overlapped so that it can be maintained efficiently.
 
-The current prototype used for testing is powered independently, but an OSF
-device may also be integrated as a host-powered UART peripheral. In that ca=
-se
-allowing the host to control the board supply through an optional regulator
-would be useful.
+DSP understands this based on offset and maps it accordingly, so for
+multiple small sized arguments, there is a possibility that a single
+page is used. Now if we allocate GEM buffers for each of these small
+arguments, it would lead to creation of multiple pages(can go up to 255)
+and all these pages then are required to be mapped onto DSP which could
+also lead to DSP address space exhaustion. So the limitation is too many
+pages and that DSP cannot handling this as efficiently as overlapped
+copy buffers.>
+>>>> + */
+>>>> +struct fastrpc_buf_overlap {
+>>>
+>>> Stop clashing the names with the existing fastrpc driver.
+>> ack.>
+>>>> +	/** @start: Start address of the buffer in user virtual address space */
+>>>> +	u64 start;
+>>>> +	/** @end: End address of the buffer in user virtual address space */
+>>>> +	u64 end;
+>>>> +	/** @raix: Remote argument index associated with this overlap */
+>>>> +	int raix;
+>>>> +	/** @mstart: Start address of the mapped region */
+>>>> +	u64 mstart;
+>>>> +	/** @mend: End address of the mapped region */
+>>>> +	u64 mend;
+>>>> +	/** @offset: Offset within the mapped region */
+>>>> +	u64 offset;
+>>>> +};
+>>>> +
+>>>> +/**
+>>>> + * struct fastrpc_remote_dmahandle - Remote DMA handle descriptor
+>>>> + */
+>>>> +struct fastrpc_remote_dmahandle {
+>>>> +	/** @fd: DMA-BUF file descriptor */
+>>>> +	s32 fd;
+>>>> +	/** @offset: Byte offset within the DMA-BUF */
+>>>> +	u32 offset;
+>>>> +	/** @len: Length of the region in bytes */
+>>>> +	u32 len;
+>>>> +};
+>>>> +
+>>>> +/**
+>>>> + * struct fastrpc_remote_buf - Remote buffer descriptor
+>>>> + */
+>>>> +struct fastrpc_remote_buf {
+>>>> +	/** @pv: Buffer pointer (user virtual address) */
+>>>> +	u64 pv;
+>>>> +	/** @len: Length of the buffer in bytes */
+>>>> +	u64 len;
+>>>> +};
+>>>> +
+>>>> +/**
+>>>> + * union fastrpc_remote_arg - Remote argument (buffer or DMA handle)
+>>>> + */
+>>>> +union fastrpc_remote_arg {
+>>>> +	/** @buf: Inline buffer descriptor */
+>>>> +	struct fastrpc_remote_buf buf;
+>>>> +	/** @dma: DMA-BUF handle descriptor */
+>>>> +	struct fastrpc_remote_dmahandle dma;
+>>>> +};
+>>>> +
+>>>> +/**
+>>>> + * struct fastrpc_phy_page - Physical page descriptor
+>>>> + */
+>>>> +struct fastrpc_phy_page {
+>>>> +	/** @addr: Physical (IOMMU) address of the page */
+>>>> +	u64 addr;
+>>>> +	/** @size: Size of the contiguous region in bytes */
+>>>> +	u64 size;
+>>>> +};
+>>>> +
+>>>> +/**
+>>>> + * struct fastrpc_invoke_buf - Invoke buffer descriptor
+>>>> + */
+>>>> +struct fastrpc_invoke_buf {
+>>>> +	/** @num: Number of contiguous physical regions */
+>>>> +	u32 num;
+>>>> +	/** @pgidx: Index into the physical page array */
+>>>> +	u32 pgidx;
+>>>> +};
+>>>> +
+>>>> +/**
+>>>> + * struct fastrpc_msg - FastRPC wire message for remote invocations
+>>>> + *
+>>>> + * Sent to the remote processor via RPMsg. This is the exact layout
+>>>> + * the DSP expects; do not reorder or add fields without DSP firmware
+>>>> + * coordination.
+>>>> + */
+>>>> +struct fastrpc_msg {
+>>>> +	/** @remote_session_id: Session identifier on the remote processor */
+>>>> +	int remote_session_id;
+>>>> +	/** @tid: Thread ID of the invoking thread */
+>>>> +	int tid;
+>>>> +	/** @ctx: Context identifier for matching request/response */
+>>>> +	u64 ctx;
+>>>> +	/** @handle: Handle of the remote method to invoke */
+>>>> +	u32 handle;
+>>>> +	/** @sc: Scalars value encoding in/out buffer counts */
+>>>> +	u32 sc;
+>>>> +	/** @addr: Physical address of the message payload buffer */
+>>>> +	u64 addr;
+>>>> +	/** @size: Size of the message payload in bytes */
+>>>> +	u64 size;
+>>>> +};
+>>>> +
+>>>> +/**
+>>>> + * struct qda_msg - FastRPC message with kernel-internal bookkeeping
+>>>> + *
+>>>> + * The wire-format portion is kept in the embedded @fastrpc member (must
+>>>> + * be first) so that &qda_msg->fastrpc can be passed directly to
+>>>> + * rpmsg_send() without a copy.
+>>>> + */
+>>>> +struct qda_msg {
+>>>> +	/**
+>>>> +	 * @fastrpc: Wire-format message sent to the DSP via RPMsg.
+>>>> +	 * Must be the first member.
+>>>> +	 */
+>>>> +	struct fastrpc_msg fastrpc;
+>>>> +	/** @buf: Kernel virtual address of the payload buffer */
+>>>> +	void *buf;
+>>>> +	/** @phys: Physical/DMA address of the payload buffer */
+>>>> +	u64 phys;
+>>>> +	/** @ret: Return value from the remote processor */
+>>>> +	int ret;
+>>>> +	/** @fastrpc_ctx: Back-pointer to the owning invocation context */
+>>>> +	struct fastrpc_invoke_context *fastrpc_ctx;
+>>>> +	/** @file_priv: DRM file private data for GEM object lookup */
+>>>> +	struct drm_file *file_priv;
+>>>> +};
+>>>> +
+>>>> +/**
+>>>> + * struct fastrpc_invoke_context - Remote procedure call invocation context
+>>>> + *
+>>>> + * Maintains all state for a single remote procedure call, including buffer
+>>>> + * management, synchronisation, and result handling.
+>>>> + */
+>>>> +struct fastrpc_invoke_context {
+>>>> +	/** @node: List node for linking contexts in a queue */
+>>>> +	struct list_head node;
+>>>> +	/** @ctxid: Unique context identifier (XArray key shifted left by 4) */
+>>>> +	u64 ctxid;
+>>>> +	/** @inbufs: Number of input buffers */
+>>>> +	int inbufs;
+>>>> +	/** @outbufs: Number of output buffers */
+>>>> +	int outbufs;
+>>>> +	/** @handles: Number of DMA-BUF handle arguments */
+>>>> +	int handles;
+>>>> +	/** @nscalars: Total number of scalar arguments */
+>>>> +	int nscalars;
+>>>> +	/** @nbufs: Total number of buffer arguments (inbufs + outbufs) */
+>>>> +	int nbufs;
+>>>
+>>> If it is inbufs + outbufs, why do you need it here?
+>>>
+>>>> +	/** @pid: Process ID of the calling process */
+>>>> +	int pid;
+>>>> +	/** @retval: Return value from the remote invocation */
+>>>> +	int retval;
+>>>> +	/** @metalen: Length of the FastRPC metadata header in bytes */
+>>>> +	int metalen;
+>>>
+>>> size_t, also why do you need it?
+>>>
+>>>> +	/** @remote_session_id: Session identifier on the remote processor */
+>>>> +	int remote_session_id;
+>>>> +	/** @pd: Protection domain identifier encoded into the context ID */
+>>>> +	int pd;
+>>>> +	/** @type: Invocation type (e.g. FASTRPC_RMID_INVOKE_DYNAMIC) */
+>>>> +	int type;
+>>>> +	/** @sc: Scalars value encoding in/out buffer counts */
+>>>> +	u32 sc;
+>>>
+>>> How is this different from the counts above?
+>> sc carries the method id and handle counts. The reason to maintain count
+>> separately is to avoid calculating it again and again.>
+> 
+> Is it just a sum of several values or something more complicated?
+just the sum, I'll drop it if it's not really useful.>
+>>>> +	/** @handle: Handle of the remote method being invoked */
+>>>> +	u32 handle;
+>>>> +	/** @crc: Pointer to CRC values for data integrity checking */
+>>>> +	u32 *crc;
+>>>
+>>> Add it later. It's unused. Drop all unused fields.
+>> ack.>
+>>>> +	/** @fdlist: Pointer to array of DMA-BUF file descriptors */
+>>>> +	u64 *fdlist;
+>>>
+>>> Why do you need DMA-BUFs in the invocation context? They all should be
+>>> GEM buffers.
+>> the reason is that the users are dependent on FDs as they can import
+>> buffers allocated from anywhere and there are DSP APIs which takes fd as
+>> an argument, so they might end up using the same in there skel
+>> implementation.>
+> 
+> No, DSP API can't take FD, they don't quite cross the OS and IOMMU
+> boundary. It's the userspace library API. Which might be improved,
+> rewritten, implemented underneath, etc. For the kernel side please,
+> pass _only_ GEM handles + offsets.
+Yes, but with the current DSP design, DSP APIs take FD just because of
+client/user design. On fastrpc, users could bring FD from any source,
+register it with fastrpc and pass it on to DSP. The major problem is
+what I mentioned above, where the user application passes the FD as an
+integer argument and the fastrpc library not able to identify if that
+int is an fd or some other data.>
+>>>> +	/** @pkt_size: Total payload size in bytes */
+>>>> +	u64 pkt_size;
+>>>> +	/** @aligned_pkt_size: Page-aligned payload size for GEM allocation */
+>>>> +	u64 aligned_pkt_size;
+>>>> +	/** @list: Array of invoke buffer descriptors */
+>>>> +	struct fastrpc_invoke_buf *list;
+>>>> +	/** @pages: Array of physical page descriptors for all arguments */
+>>>> +	struct fastrpc_phy_page *pages;
+>>>> +	/** @input_pages: Array of physical page descriptors for input buffers */
+>>>> +	struct fastrpc_phy_page *input_pages;
+>>>
+>>> I think you are trying to bring all the complexity from the old driver
+>>> with no added benefit. Please don't. Use the existing memory manager.
+>>> Let it handle all the gory details. If someting is not there, we should
+>>> consider extending GEM instead.
+>> I'm not changing the metadata format as the DSP might not understand the
+>> messages if we modify it.
+> 
+> Well, it's up to you to know if DSP will understand the message or not.
+> The probability ("might not") is not suitable here. Anyway, let's get
+> rid of the various data formats first, then maybe some of the items will
+> go away on their own.
+ack>
+>> Also, the fd is still being used because of
+>> the client dependency on it. I'll check if there is any other logic that
+>> needs alteration here.>
+> 
+> If the client keeps on passing FD to the library calls, you can map
+> FD to GEM handles in the library code.
+I hope the int argument part mentioned above answers this.>
+>>>> +
+>>>> +static int fastrpc_context_get_id(struct fastrpc_invoke_context *ctx, struct qda_dev *qdev)
+>>>> +{
+>>>> +	int ret;
+>>>> +	u32 id;
+>>>> +
+>>>> +	if (!qdev)
+>>>> +		return -EINVAL;
+>>>> +
+>>>> +	ret = xa_alloc(&qdev->ctx_xa, &id, ctx, xa_limit_32b, GFP_KERNEL);
+>>>> +	if (ret)
+>>>> +		return ret;
+>>>> +
+>>>> +	ctx->ctxid = id << 4;
+>>>
+>>> Why is it being shifted?
+>> this is to accomodate PD type>
+> 
+> Not really an answer.
+Okay, let me bring the ctxid layout that DSP expects:
 
-Unless the IIO side prefers otherwise, I will add an optional supply proper=
-ty
-to the binding and matching optional regulator handling in the driver in th=
-e
-next revision.
+[11:4] = CCCCCCCC (context ID)
+[3:0]  = PPPP (PD type)
 
-Jinseob
+Based on this PD type, DSP will decide where to queue the message.
+> 
+>>>> +	return 0;
+>>>> +}
+>>>> +
+>>>
+>>
+> 
 
-
-2026=EB=85=84 6=EC=9B=94 10=EC=9D=BC (=EC=88=98) =EC=98=A4=EC=A0=84 1:19, C=
-onor Dooley <conor@kernel.org>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
->
-> Jonathan/IIO folks,
->
-> On Mon, Jun 08, 2026 at 08:43:38AM +0900, Jinseob Kim wrote:
->
-> > diff --git a/Documentation/devicetree/bindings/iio/opensensorfusion,osf=
-.yaml b/Documentation/devicetree/bindings/iio/opensensorfusion,osf.yaml
-> > new file mode 100644
-> > index 000000000..a4049715a
-> > --- /dev/null
-> > +++ b/Documentation/devicetree/bindings/iio/opensensorfusion,osf.yaml
-> > @@ -0,0 +1,43 @@
-> > +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> > +%YAML 1.2
-> > +---
-> > +$id: http://devicetree.org/schemas/iio/opensensorfusion,osf.yaml#
-> > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > +
-> > +title: Open Sensor Fusion Sensor Aggregation Hub
-> > +
-> > +maintainers:
-> > +  - Jinseob Kim <kimjinseob88@gmail.com>
-> > +
-> > +description: |
-> > +  Open Sensor Fusion is a sensor aggregation hub. The hub exposes an O=
-SF
-> > +  protocol data stream over its host interface and may report capabili=
-ties and
-> > +  samples for multiple sensor classes. The Linux driver discovers the =
-actual
-> > +  sensor channels from OSF capability reports instead of describing th=
-ose
-> > +  sensors in Device Tree.
-> > +
-> > +  Open Sensor Fusion is not a generic industry standard. Public projec=
-t
-> > +  documentation is available at:
-> > +
-> > +    https://github.com/opensensorfusion
-> > +
-> > +allOf:
-> > +  - $ref: /schemas/serial/serial-peripheral-props.yaml#
-> > +
-> > +properties:
-> > +  compatible:
-> > +    const: opensensorfusion,osf
-> > +
-> > +required:
-> > +  - compatible
->
-> Do you think it makes sense to permit a regulator here, so that the
-> "host" OS can power on/off the board running the osf stack?
->
-> > +
-> > +unevaluatedProperties: false
-> > +
-> > +examples:
-> > +  - |
-> > +    serial {
-> > +        sensor {
-> > +            compatible =3D "opensensorfusion,osf";
-> > +        };
-> > +    };
-> > +...
 
