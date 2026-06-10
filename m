@@ -1,87 +1,95 @@
-Return-Path: <linux-doc+bounces-91872-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91873-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id YFv8IkG+KWqBcgMAu9opvQ
-	(envelope-from <linux-doc+bounces-91872-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 21:42:57 +0200
+	id WX5/EkO/KWqucgMAu9opvQ
+	(envelope-from <linux-doc+bounces-91873-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 21:47:15 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2917566C8E5
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 21:42:57 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E338366C921
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 21:47:14 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=intel.com header.s=Intel header.b=dsgeVa7B;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91872-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91872-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=intel.com;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b="nLA/Tegg";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91873-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91873-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=none;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 6F30F300B468
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 19:42:56 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 90EC4312E6C0
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 19:46:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EB23F3750D6;
-	Wed, 10 Jun 2026 19:42:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E642C3438A2;
+	Wed, 10 Jun 2026 19:46:41 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.11])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-dy1-f182.google.com (mail-dy1-f182.google.com [74.125.82.182])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF62B37AA63;
-	Wed, 10 Jun 2026 19:42:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A0C1529D27A
+	for <linux-doc@vger.kernel.org>; Wed, 10 Jun 2026 19:46:40 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781120572; cv=none; b=R3arl2WNJvHIH/66TVIsRVS0cT8uBJtpsH6n7QlAZ4kMYqcg6jWRdvIXn9MPf4+rVNeDSAsKIDBthN4QeVr8zA/so2tfmlCpYV+G9GNSGNi+ZAJiTGaJkfOp+VhtWBFOiDelEleAM26zswgx7KnmIE4dT85/BBwbxYxsEkNXrsY=
+	t=1781120801; cv=none; b=ZrCdtESTv2YFcCtxhhrUdzYOGoz4M1+W/RLP98+TJNx98mTkWbuHWuajlqXFCxw13CqsfVloNmXwlBScwsWiMubk/Vru1VzMmu/dlQ0MBMC3WlO4n2nbXvJKhs8WnQWKuli0Tp6SdiBDElJfYpFDTcCCGVodkO2xHOGB1zQgdsU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781120572; c=relaxed/simple;
-	bh=dP4HXRIDYUSR15Nwgds/5wXJm0luZvRegrcYrhnfNy4=;
+	s=arc-20240116; t=1781120801; c=relaxed/simple;
+	bh=m/D3kjV4WCE7YLF5e+ZTCyvD2jFMdM1MgU0t8CDjh9M=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=GQJI0LpCrbxOle+9y/vFprujbp243yRF/zoHtad6bACAqabW7rO3L7JA3YrGRHC1YL1FzlzUWGnbZ4v4QBOF0DcWiDyTQC6prbnog3LHCE37zrAy8SJs+K0kYLuqSTKbK0LzdYtBWcZoDGXj7B0gw94PPiph47Jt9DZMZkY31y0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=dsgeVa7B; arc=none smtp.client-ip=198.175.65.11
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1781120572; x=1812656572;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=dP4HXRIDYUSR15Nwgds/5wXJm0luZvRegrcYrhnfNy4=;
-  b=dsgeVa7Bkc0R/SJuoEpX7xkdwwIvOupnbyYT+Wi/AohkLjQLg+wb7Dfm
-   /RghFr2p3GPDgzVVCYkZ/T+ZjAN2MDi+veStU5o//qHcGgxwrQIWjfqIS
-   CUlxag0gdlCxsjfA1o8Uxh/mROv9hkZ2iCy1M/Mn44d0lXNkNSczyS7SE
-   7lJMmnGml6feyXJ+jAp1zLXsUcDzcXEtj3hiGfZmLMjaYqvdjv/DNpi3A
-   E/28KmTd1VV7BJ5V8M2RQxSR3D1h+7pnZBwzqg0ny5ULavjgizD8hesAJ
-   sRbxJ6vuHtvlObmfsCvoK+E/3Ah+ZBmz223r+9CovfRv4XXjO2f3DW0Fk
-   Q==;
-X-CSE-ConnectionGUID: zwmn+M41Rf+MFVgh7xXd1A==
-X-CSE-MsgGUID: bUjZ8fNQREWHooOo0dro6w==
-X-IronPort-AV: E=McAfee;i="6800,10657,11813"; a="92243801"
-X-IronPort-AV: E=Sophos;i="6.24,197,1774335600"; 
-   d="scan'208";a="92243801"
-Received: from fmviesa006.fm.intel.com ([10.60.135.146])
-  by orvoesa103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Jun 2026 12:42:51 -0700
-X-CSE-ConnectionGUID: 3jQBOfo8Styw2yrTc2+UuA==
-X-CSE-MsgGUID: h4L2fMvHR8umsHN+MGctDw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.24,197,1774335600"; 
-   d="scan'208";a="241847089"
-Received: from lkp-server01.sh.intel.com (HELO f0d55cb201f0) ([10.239.97.150])
-  by fmviesa006.fm.intel.com with ESMTP; 10 Jun 2026 12:42:48 -0700
-Received: from kbuild by f0d55cb201f0 with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1wXOp3-00000000Lq2-2zVn;
-	Wed, 10 Jun 2026 19:42:45 +0000
-Date: Thu, 11 Jun 2026 03:42:24 +0800
-From: kernel test robot <lkp@intel.com>
-To: Abhishek Bapat <abhishekbapat@google.com>,
-	Suren Baghdasaryan <surenb@google.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Kent Overstreet <kent.overstreet@linux.dev>,
-	Hao Ge <hao.ge@linux.dev>
-Cc: oe-kbuild-all@lists.linux.dev,
-	Linux Memory Management List <linux-mm@kvack.org>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, Sourav Panda <souravpanda@google.com>,
-	Abhishek Bapat <abhishekbapat@google.com>
-Subject: Re: [PATCH v4 6/6] kselftest: alloc_tag: extend the allocinfo ioctl
- kselftest
-Message-ID: <202606110300.R4LPBVBO-lkp@intel.com>
-References: <d0a8308b4d0799876d24461a8ed9b5a71d3e1e89.1781042698.git.abhishekbapat@google.com>
+	 Content-Type:Content-Disposition:In-Reply-To; b=QMOXbOzIclmWXVJEyNZ6dRYABey727ww505h/j3An3HuzegAfgiqjCIyAIrNiXZ+bIO/7Jclnsy+LxlpFDxzssHYouI+hfclJOYeiXsEPaCxV/T470qkbaSBO8DpCehsQfqPHQStSnEJsoIFEkMYBYAErRM+hRUE+Oh0qbxnxU0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=nLA/Tegg; arc=none smtp.client-ip=74.125.82.182
+Received: by mail-dy1-f182.google.com with SMTP id 5a478bee46e88-30749947917so3819846eec.1
+        for <linux-doc@vger.kernel.org>; Wed, 10 Jun 2026 12:46:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1781120800; x=1781725600; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=VMJUWqbBGFmtLXG0IOfebCL3RCb5topHpC868EHhG7A=;
+        b=nLA/TeggiAU9eKzYh8N51z+wK4JRJ/H3UTj6GR2U3x/Bh8iqhqxQfKMXPj/1Qk2OsG
+         7EkfzDSTgQWLW5G2if4pU8eWbjJieyscB2FcEHmuoNy1IIAJjEOJQKGTzAZUSKQFupJa
+         vnMi9qJmqb/owTp4UtuSlD1ygdC2k2R6DvBtSCkk0k5Ke0dmMS7aFo2Erqv7nTcME8Gd
+         SvZmiSKspEq/o2W/J2Wr1mqyTMAdWBSvHVpgL9Bg0DvSGsnR6SswCVE9Pm0lInKgbxdK
+         fNPGpZZrRsHTEOvqO+jPE/yo+DnZX9apnvkyD2Q8LmNPBMmmAer6ogCzAoT35IXB9Tq+
+         nyBA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1781120800; x=1781725600;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:sender:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=VMJUWqbBGFmtLXG0IOfebCL3RCb5topHpC868EHhG7A=;
+        b=Wc2E3umWTTEYfz+0zDxLlrK3HJNggjI4sXu9l9nwGt2AZ18u8PwHKryWnAKnDZB4P6
+         vyseUvhdcAiVUutjOP7vCjpourlg6W3ce/PEiClWL3d5UjdmS9+oB8UKrrcWIfeth1V/
+         flMeN9ZneLdpDEuaY8DnjWe64tAaz0MNgMGSyUxCxv/rZJRSUlVgl+d6HfPLm2e/m8Pb
+         h9s9uZ4p79i1d0xaJ4Xpaky9q2I4LkkmpMu9urqz7PSzCuHv6iOdsG2p6LtvP5+GS+77
+         /Uhhx0rPf7K9cA9wqUeDl8RffBFMix5JrJV5zBqA64q1lelhyGylZ2xdSxj0CIz4giCI
+         tD8A==
+X-Forwarded-Encrypted: i=1; AFNElJ917k5XJk80UYm2pOcB/wOZJAMtILyvO6xP4LsnmQMb93dCzChjNEMwafSEO+xCHKWyISakh8Waqtw=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxF3qdW8kw9LreZtSFiviNTxDxBLeeZ0Yr8zVGERDz6UFtIbPxz
+	pfNj0aY/Yq/K8V4LszTwzGv6cxwWV5LXbi6M7uFTSB8Eq2msTMKVAq8C
+X-Gm-Gg: Acq92OELkFb2XcXveJdFrGaTR8USjLcbo6hy5wEFFeg5cmu/aSCxeXeuqCnS5EHSh95
+	qp9K7XCIPKgge7J0Q2q/cVBAoZy89vNhx+2kqyQ4a0bDNNgPmF1R//ZVaOkoSxxREyRE18XAe5l
+	hUj9WaFm/g5hVAQmXMC5xW+f5zXJECHIijTEfFNFu5s7vjxn+4PdlLhqXVQHhSMpdJO4r/aeBad
+	U92f2XnhRvx8o0CSCF6oSZXNBJEXgjNCIlQuBj5QfkCrndhMBOs9VHu9aTGPzevJ8J4z1v2bXX9
+	eg17ExOAMOXiHSe6x1lCAFnkBgIMNk4OiksCpZMRtbVDeBt21Lx+8cB3yCU5kDKOFlfRPsgL8hK
+	g4ir+qqQZm2D8fye0AjwUEO1T6dXZ4BTOLznlLlhDHZYdtqyI7JpfoaZUw6S9iZxFaEyBxdEp6q
+	QIljxt25vykaW4Tkdh01Kv1FmydR7I17C/JpZ/7y50TR16L88=
+X-Received: by 2002:a05:7300:534f:b0:304:b15:17d6 with SMTP id 5a478bee46e88-3077b357e93mr17911170eec.6.1781120799634;
+        Wed, 10 Jun 2026 12:46:39 -0700 (PDT)
+Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3074db85f60sm33615378eec.8.2026.06.10.12.46.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 10 Jun 2026 12:46:39 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Date: Wed, 10 Jun 2026 12:46:37 -0700
+From: Guenter Roeck <linux@roeck-us.net>
+To: Marius Cristea <marius.cristea@microchip.com>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Subject: Re: [PATCH v11 1/2] dt-bindings: hwmon: temperature: add support for
+ EMC1812
+Message-ID: <88645a7f-94b1-4c78-a7da-f644c4f3d84f@roeck-us.net>
+References: <20260610-hw_mon-emc1812-v11-0-cef809af5c19@microchip.com>
+ <20260610-hw_mon-emc1812-v11-1-cef809af5c19@microchip.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -90,88 +98,64 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <d0a8308b4d0799876d24461a8ed9b5a71d3e1e89.1781042698.git.abhishekbapat@google.com>
+In-Reply-To: <20260610-hw_mon-emc1812-v11-1-cef809af5c19@microchip.com>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-4.16 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,kernel.org:s:+];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-91873-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-91872-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	FORGED_SENDER(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:abhishekbapat@google.com,m:surenb@google.com,m:akpm@linux-foundation.org,m:kent.overstreet@linux.dev,m:hao.ge@linux.dev,m:oe-kbuild-all@lists.linux.dev,m:linux-mm@kvack.org,m:skhan@linuxfoundation.org,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:souravpanda@google.com,s:lists@lfdr.de];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:marius.cristea@microchip.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:linux-hwmon@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	DMARC_NA(0.00)[roeck-us.net];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[intel.com:+];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:dkim,intel.com:email,intel.com:mid,intel.com:from_mime,vger.kernel.org:from_smtp,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,git-scm.com:url]
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp,microchip.com:email,roeck-us.net:mid,roeck-us.net:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 2917566C8E5
+X-Rspamd-Queue-Id: E338366C921
 
-Hi Suren,
+On Wed, Jun 10, 2026 at 06:19:46PM +0300, Marius Cristea wrote:
+> This is the devicetree schema for Microchip EMC1812/13/14/15/33
+> Multichannel Low-Voltage Remote Diode Sensor Family. It also
+> updates the MAINTAINERS file to include the new driver.
+> 
+> EMC1812 has one external remote temperature monitoring channel.
+> EMC1813 has two external remote temperature monitoring channels.
+> EMC1814 has three external remote temperature monitoring channels and
+> channels 2 and 3 support anti parallel diode.
+> EMC1815 has four external remote temperature monitoring channels and
+> channels 1/2  and 3/4 support anti parallel diode.
+> EMC1833 has two external remote temperature monitoring channels and
+> channels 1 and 2 support anti parallel diode.
+> Resistance Error Correction is supported on channels 1/2 and 3/4.
+> 
+> Signed-off-by: Marius Cristea <marius.cristea@microchip.com>
+> Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
 
-kernel test robot noticed the following build errors:
+Applied.
 
-[auto build test ERROR on akpm-mm/mm-everything]
-[also build test ERROR on next-20260609]
-[cannot apply to akpm-mm/mm-nonmm-unstable shuah-kselftest/next shuah-kselftest/fixes linus/master v7.1-rc7]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Abhishek-Bapat/alloc_tag-add-ioctl-to-proc-allocinfo/20260610-081508
-base:   https://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm.git mm-everything
-patch link:    https://lore.kernel.org/r/d0a8308b4d0799876d24461a8ed9b5a71d3e1e89.1781042698.git.abhishekbapat%40google.com
-patch subject: [PATCH v4 6/6] kselftest: alloc_tag: extend the allocinfo ioctl kselftest
-config: sparc64-randconfig-r061-20260610 (https://download.01.org/0day-ci/archive/20260611/202606110300.R4LPBVBO-lkp@intel.com/config)
-compiler: sparc64-linux-gcc (GCC) 15.2.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260611/202606110300.R4LPBVBO-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202606110300.R4LPBVBO-lkp@intel.com/
-
-All errors (new ones prefixed by >>):
-
-   lib/alloc_tag.c: In function 'allocinfo_compat_ioctl':
->> lib/alloc_tag.c:346:58: error: implicit declaration of function 'compat_ptr' [-Wimplicit-function-declaration]
-     346 |         return allocinfo_ioctl(file, cmd, (unsigned long)compat_ptr(arg));
-         |                                                          ^~~~~~~~~~
-
-
-vim +/compat_ptr +346 lib/alloc_tag.c
-
-   341	
-   342	#ifdef CONFIG_COMPAT
-   343	static long allocinfo_compat_ioctl(struct file *file, unsigned int cmd,
-   344					   unsigned long arg)
-   345	{
- > 346		return allocinfo_ioctl(file, cmd, (unsigned long)compat_ptr(arg));
-   347	}
-   348	#endif
-   349	
-
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+Thanks,
+Guenter
 
