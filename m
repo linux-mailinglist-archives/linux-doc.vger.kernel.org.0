@@ -1,161 +1,149 @@
-Return-Path: <linux-doc+bounces-91873-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91875-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id WX5/EkO/KWqucgMAu9opvQ
-	(envelope-from <linux-doc+bounces-91873-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 21:47:15 +0200
+	id 9lQsJBXAKWrccgMAu9opvQ
+	(envelope-from <linux-doc+bounces-91875-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 21:50:45 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E338366C921
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 21:47:14 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 322A866C95B
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 21:50:45 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b="nLA/Tegg";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91873-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91873-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=none;
+	dkim=pass header.d=intel.com header.s=Intel header.b=FAMt5I8W;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91875-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91875-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=intel.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 90EC4312E6C0
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 19:46:42 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 76B63300E29C
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2026 19:50:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E642C3438A2;
-	Wed, 10 Jun 2026 19:46:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2C87930C629;
+	Wed, 10 Jun 2026 19:50:43 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dy1-f182.google.com (mail-dy1-f182.google.com [74.125.82.182])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A0C1529D27A
-	for <linux-doc@vger.kernel.org>; Wed, 10 Jun 2026 19:46:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B805D31F9A5
+	for <linux-doc@vger.kernel.org>; Wed, 10 Jun 2026 19:50:41 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781120801; cv=none; b=ZrCdtESTv2YFcCtxhhrUdzYOGoz4M1+W/RLP98+TJNx98mTkWbuHWuajlqXFCxw13CqsfVloNmXwlBScwsWiMubk/Vru1VzMmu/dlQ0MBMC3WlO4n2nbXvJKhs8WnQWKuli0Tp6SdiBDElJfYpFDTcCCGVodkO2xHOGB1zQgdsU=
+	t=1781121043; cv=none; b=fua5naUHHWOoMReSVECcG7k0Vnu/HNSTDPRy2nSenwDlkf0qYEkZvkXqDA2XADRLsa2tyK0lQu+ezMONiSuUzOF1XZHocGpCVYK5Fj15AQ8dzzKMVVAGzm+t6g6WbGASFa3IipqtcA4K7/uo5+tCpHLjU2zBDbvHCuinZdNKvN8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781120801; c=relaxed/simple;
-	bh=m/D3kjV4WCE7YLF5e+ZTCyvD2jFMdM1MgU0t8CDjh9M=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=QMOXbOzIclmWXVJEyNZ6dRYABey727ww505h/j3An3HuzegAfgiqjCIyAIrNiXZ+bIO/7Jclnsy+LxlpFDxzssHYouI+hfclJOYeiXsEPaCxV/T470qkbaSBO8DpCehsQfqPHQStSnEJsoIFEkMYBYAErRM+hRUE+Oh0qbxnxU0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=nLA/Tegg; arc=none smtp.client-ip=74.125.82.182
-Received: by mail-dy1-f182.google.com with SMTP id 5a478bee46e88-30749947917so3819846eec.1
-        for <linux-doc@vger.kernel.org>; Wed, 10 Jun 2026 12:46:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781120800; x=1781725600; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=VMJUWqbBGFmtLXG0IOfebCL3RCb5topHpC868EHhG7A=;
-        b=nLA/TeggiAU9eKzYh8N51z+wK4JRJ/H3UTj6GR2U3x/Bh8iqhqxQfKMXPj/1Qk2OsG
-         7EkfzDSTgQWLW5G2if4pU8eWbjJieyscB2FcEHmuoNy1IIAJjEOJQKGTzAZUSKQFupJa
-         vnMi9qJmqb/owTp4UtuSlD1ygdC2k2R6DvBtSCkk0k5Ke0dmMS7aFo2Erqv7nTcME8Gd
-         SvZmiSKspEq/o2W/J2Wr1mqyTMAdWBSvHVpgL9Bg0DvSGsnR6SswCVE9Pm0lInKgbxdK
-         fNPGpZZrRsHTEOvqO+jPE/yo+DnZX9apnvkyD2Q8LmNPBMmmAer6ogCzAoT35IXB9Tq+
-         nyBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781120800; x=1781725600;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:sender:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=VMJUWqbBGFmtLXG0IOfebCL3RCb5topHpC868EHhG7A=;
-        b=Wc2E3umWTTEYfz+0zDxLlrK3HJNggjI4sXu9l9nwGt2AZ18u8PwHKryWnAKnDZB4P6
-         vyseUvhdcAiVUutjOP7vCjpourlg6W3ce/PEiClWL3d5UjdmS9+oB8UKrrcWIfeth1V/
-         flMeN9ZneLdpDEuaY8DnjWe64tAaz0MNgMGSyUxCxv/rZJRSUlVgl+d6HfPLm2e/m8Pb
-         h9s9uZ4p79i1d0xaJ4Xpaky9q2I4LkkmpMu9urqz7PSzCuHv6iOdsG2p6LtvP5+GS+77
-         /Uhhx0rPf7K9cA9wqUeDl8RffBFMix5JrJV5zBqA64q1lelhyGylZ2xdSxj0CIz4giCI
-         tD8A==
-X-Forwarded-Encrypted: i=1; AFNElJ917k5XJk80UYm2pOcB/wOZJAMtILyvO6xP4LsnmQMb93dCzChjNEMwafSEO+xCHKWyISakh8Waqtw=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxF3qdW8kw9LreZtSFiviNTxDxBLeeZ0Yr8zVGERDz6UFtIbPxz
-	pfNj0aY/Yq/K8V4LszTwzGv6cxwWV5LXbi6M7uFTSB8Eq2msTMKVAq8C
-X-Gm-Gg: Acq92OELkFb2XcXveJdFrGaTR8USjLcbo6hy5wEFFeg5cmu/aSCxeXeuqCnS5EHSh95
-	qp9K7XCIPKgge7J0Q2q/cVBAoZy89vNhx+2kqyQ4a0bDNNgPmF1R//ZVaOkoSxxREyRE18XAe5l
-	hUj9WaFm/g5hVAQmXMC5xW+f5zXJECHIijTEfFNFu5s7vjxn+4PdlLhqXVQHhSMpdJO4r/aeBad
-	U92f2XnhRvx8o0CSCF6oSZXNBJEXgjNCIlQuBj5QfkCrndhMBOs9VHu9aTGPzevJ8J4z1v2bXX9
-	eg17ExOAMOXiHSe6x1lCAFnkBgIMNk4OiksCpZMRtbVDeBt21Lx+8cB3yCU5kDKOFlfRPsgL8hK
-	g4ir+qqQZm2D8fye0AjwUEO1T6dXZ4BTOLznlLlhDHZYdtqyI7JpfoaZUw6S9iZxFaEyBxdEp6q
-	QIljxt25vykaW4Tkdh01Kv1FmydR7I17C/JpZ/7y50TR16L88=
-X-Received: by 2002:a05:7300:534f:b0:304:b15:17d6 with SMTP id 5a478bee46e88-3077b357e93mr17911170eec.6.1781120799634;
-        Wed, 10 Jun 2026 12:46:39 -0700 (PDT)
-Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3074db85f60sm33615378eec.8.2026.06.10.12.46.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 10 Jun 2026 12:46:39 -0700 (PDT)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Date: Wed, 10 Jun 2026 12:46:37 -0700
-From: Guenter Roeck <linux@roeck-us.net>
-To: Marius Cristea <marius.cristea@microchip.com>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v11 1/2] dt-bindings: hwmon: temperature: add support for
- EMC1812
-Message-ID: <88645a7f-94b1-4c78-a7da-f644c4f3d84f@roeck-us.net>
-References: <20260610-hw_mon-emc1812-v11-0-cef809af5c19@microchip.com>
- <20260610-hw_mon-emc1812-v11-1-cef809af5c19@microchip.com>
+	s=arc-20240116; t=1781121043; c=relaxed/simple;
+	bh=+wjy6D3TwWyaJRktI7l1nYayo5eOexSl21UxkKHCaK0=;
+	h=Date:From:To:Cc:Subject:Message-ID; b=Th+uKbTjZrZSe6pgOSN3zuGjNg/cj4T6vtM0TBrVyfkw7e9JAIqEKT8NkKbQjNtpK6N0haCBF8xaGlvpnl+yCC0Fg/oRwNQrB62O/n9VeqvAFNz+FwssdqZkI1OEakClHTiuNeRkQggSCNXxFrXFYuEHtc+e65ZhoARywfHOQUU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=FAMt5I8W; arc=none smtp.client-ip=192.198.163.7
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1781121041; x=1812657041;
+  h=date:from:to:cc:subject:message-id;
+  bh=+wjy6D3TwWyaJRktI7l1nYayo5eOexSl21UxkKHCaK0=;
+  b=FAMt5I8W1M8eoYoub+cZQ+nOF2jxPetVZBXiVa63JeMHfW+UOUt1me5P
+   2UBrcg5dzCvZrCSsMULKanvCvpGkmdPuiXikKg4plMWAXfQFbafeTjlZr
+   43C4BDwaZHAnox9lYS41OrKoC+FQulTT30h58Vb78DWgCwNcUIfJSpvRm
+   6vHUZBhVAxHH9hllgY5P1aZL5Jazq2azTnNDTCgxdyQvbSXvGqD9rhHP+
+   MyhdXA8v1GjQA78vd3wBTdrx8brcHH8YY/Zpgg29HCFVAzvJ8XbeJPRtH
+   Q/iea3N8ohQ508VX52E3qjTFDtYdghQRMwd2nRq1rLhGLBH6PMeODv4h8
+   w==;
+X-CSE-ConnectionGUID: Sk2X6ZVgTM6SpuuxvLS2HQ==
+X-CSE-MsgGUID: 0RIAwBwMTmeQ42v8GomZ6Q==
+X-IronPort-AV: E=McAfee;i="6800,10657,11813"; a="107364026"
+X-IronPort-AV: E=Sophos;i="6.24,197,1774335600"; 
+   d="scan'208";a="107364026"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+  by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Jun 2026 12:50:41 -0700
+X-CSE-ConnectionGUID: +LZjT86QRFOjlLSWHaFrLg==
+X-CSE-MsgGUID: EYycuIIoTraJOSDIKyOiYA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.24,197,1774335600"; 
+   d="scan'208";a="248134767"
+Received: from igk-lkp-server01.igk.intel.com (HELO 892db79562d4) ([10.211.93.152])
+  by fmviesa004.fm.intel.com with ESMTP; 10 Jun 2026 12:50:40 -0700
+Received: from kbuild by 892db79562d4 with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1wXOwg-000000003oR-09H4;
+	Wed, 10 Jun 2026 19:50:38 +0000
+Date: Wed, 10 Jun 2026 21:50:05 +0200
+From: kernel test robot <lkp@intel.com>
+To: Jason Li <jason.lee651024@gmail.com>
+Cc: oe-kbuild-all@lists.linux.dev, 0day robot <lkp@intel.com>,
+ linux-doc@vger.kernel.org
+Subject: htmldocs: Warning:
+ drivers/tty/serial/serial_cortina-access.c references a file that doesn't
+ exist: Documentation/serial/driver
+Message-ID: <202606102102.JsRIO7Np-lkp@intel.com>
+User-Agent: s-nail v14.9.25
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260610-hw_mon-emc1812-v11-1-cef809af5c19@microchip.com>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.16 / 15.00];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,kernel.org:s:+];
 	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-91873-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:marius.cristea@microchip.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:linux-hwmon@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	DMARC_NA(0.00)[roeck-us.net];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-91875-lists,linux-doc=lfdr.de];
+	FREEMAIL_TO(0.00)[gmail.com];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	MISSING_XM_UA(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	FORGED_SENDER(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:jason.lee651024@gmail.com,m:oe-kbuild-all@lists.linux.dev,m:lkp@intel.com,m:linux-doc@vger.kernel.org,m:jasonlee651024@gmail.com,s:lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+];
+	RCPT_COUNT_THREE(0.00)[4];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp,microchip.com:email,roeck-us.net:mid,roeck-us.net:from_mime]
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,vger.kernel.org:from_smtp,intel.com:dkim,intel.com:email,intel.com:mid,intel.com:from_mime,01.org:url]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: E338366C921
+X-Rspamd-Queue-Id: 322A866C95B
 
-On Wed, Jun 10, 2026 at 06:19:46PM +0300, Marius Cristea wrote:
-> This is the devicetree schema for Microchip EMC1812/13/14/15/33
-> Multichannel Low-Voltage Remote Diode Sensor Family. It also
-> updates the MAINTAINERS file to include the new driver.
-> 
-> EMC1812 has one external remote temperature monitoring channel.
-> EMC1813 has two external remote temperature monitoring channels.
-> EMC1814 has three external remote temperature monitoring channels and
-> channels 2 and 3 support anti parallel diode.
-> EMC1815 has four external remote temperature monitoring channels and
-> channels 1/2  and 3/4 support anti parallel diode.
-> EMC1833 has two external remote temperature monitoring channels and
-> channels 1 and 2 support anti parallel diode.
-> Resistance Error Correction is supported on channels 1/2 and 3/4.
-> 
-> Signed-off-by: Marius Cristea <marius.cristea@microchip.com>
-> Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
+tree:   https://github.com/intel-lab-lkp/linux/commits/Jason-Li/dt-bindings-serial-Add-binding-for-Cortina-Access-UART/20260610-193842
+head:   e97c7dd14b20885c9b9f27daf2c6e0cd9e99d82a
+commit: 2b08fdba152665eca1c8194820608a3f284143b6 tty: serial: Add UART driver for Cortina-Access platform
+date:   8 hours ago
+compiler: clang version 22.0.0git (https://github.com/llvm/llvm-project f43d6834093b19baf79beda8c0337ab020ac5f17)
+docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
+reproduce: (https://download.01.org/0day-ci/archive/20260610/202606102102.JsRIO7Np-lkp@intel.com/reproduce)
 
-Applied.
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202606102102.JsRIO7Np-lkp@intel.com/
 
-Thanks,
-Guenter
+All warnings (new ones prefixed by >>):
+
+   Warning: Documentation/translations/zh_CN/scsi/scsi_mid_low_api.rst references a file that doesn't exist: Documentation/Configure.help
+   Warning: MAINTAINERS references a file that doesn't exist: Documentation/ABI/testing/sysfs-platform-ayaneo
+   Warning: MAINTAINERS references a file that doesn't exist: Documentation/devicetree/bindings/display/bridge/megachips-stdpxxxx-ge-b850v3-fw.txt
+   Warning: arch/powerpc/sysdev/mpic.c references a file that doesn't exist: Documentation/devicetree/bindings/powerpc/fsl/mpic.txt
+   Warning: drivers/net/ethernet/smsc/Kconfig references a file that doesn't exist: file:Documentation/networking/device_drivers/ethernet/smsc/smc9.rst
+>> Warning: drivers/tty/serial/serial_cortina-access.c references a file that doesn't exist: Documentation/serial/driver
+   Warning: rust/kernel/sync/atomic/ordering.rs references a file that doesn't exist: srctree/tools/memory-model/Documentation/explanation.txt
+   Warning: tools/docs/documentation-file-ref-check references a file that doesn't exist: Documentation/virtual/lguest/lguest.c
+   Warning: tools/docs/documentation-file-ref-check references a file that doesn't exist: m,\b(\S*)(Documentation/[A-Za-z0-9
+   Warning: tools/docs/documentation-file-ref-check references a file that doesn't exist: Documentation/devicetree/dt-object-internal.txt
+   Warning: tools/docs/documentation-file-ref-check references a file that doesn't exist: m,^Documentation/scheduler/sched-pelt
+
+--
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
