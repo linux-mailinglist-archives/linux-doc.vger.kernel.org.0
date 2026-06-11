@@ -1,181 +1,166 @@
-Return-Path: <linux-doc+bounces-91954-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91955-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Ta41OtDAKmrwwAMAu9opvQ
-	(envelope-from <linux-doc+bounces-91954-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 16:06:08 +0200
+	id xCsiAmTBKmoxwQMAu9opvQ
+	(envelope-from <linux-doc+bounces-91955-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 16:08:36 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F0526728FD
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 16:06:08 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 99903672988
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 16:08:35 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gourry.net header.s=google header.b=fesk3KIa;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91954-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91954-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=none;
+	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b=1NS+8VZd;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91955-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-91955-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=fail reason="SPF not aligned (relaxed), DKIM not aligned (relaxed)" header.from=lst.de (policy=none);
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 9DE1931672E9
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 14:04:08 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 18356308AAF9
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 14:07:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0073C4028E2;
-	Thu, 11 Jun 2026 14:04:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EF3773F9F58;
+	Thu, 11 Jun 2026 14:07:11 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com [209.85.222.179])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 90BB43BE63F
-	for <linux-doc@vger.kernel.org>; Thu, 11 Jun 2026 14:04:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F262B40861F;
+	Thu, 11 Jun 2026 14:07:09 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781186646; cv=none; b=ba4+uG/83ZYQ5OOp1Ly5SZOR9XFWyqUSXqjjEKF5wedSFJbCknJSb7AfaQYAkQWtVgpXB0TsGDpabOUVFHu0OHAfae8EeHSVv4rr0cQCwScQzOFyAyRXk24kgo0A2QfSiNUu/oT2kozwWbROznWwmHk4Qk26JigYJYUSuTJRO/U=
+	t=1781186831; cv=none; b=mx3Sw6lZRuS3BOb4vyOoYv0+omk8SPArR73IHH2r+0GrLwqGzVKPxIXV5KJmBqRQH7Auwz95E/WFej5xbrrfjw3hX3jXIk8/vYcRR1qHXAjgAxnokJOwDfK/4e/kV6uJydHZuD3Oev7xDjv/rjQ6dUaP9hd1KgiCyz3u+YpH350=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781186646; c=relaxed/simple;
-	bh=t6vDzwAQf6m71cw7ZAaMH7giGD8b6mi1NLg41KRjFFs=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=tnq9ej2HazVszYeojYmQ2U32TTPc+qIRPXQfhmJcU9/WN62MudH7KXypT87AIuNgJNqndzxooExYL7nwBIbnMWfOv+CYolSHasOii/fSfSa9DwlpRAEJLKLa2Cf6WdeG07qbwuB883TqDG9rvObRSWdOSG+cxkzMq3gHdCckCM4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net; spf=pass smtp.mailfrom=gourry.net; dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b=fesk3KIa; arc=none smtp.client-ip=209.85.222.179
-Received: by mail-qk1-f179.google.com with SMTP id af79cd13be357-9155183b42cso145720885a.0
-        for <linux-doc@vger.kernel.org>; Thu, 11 Jun 2026 07:04:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gourry.net; s=google; t=1781186644; x=1781791444; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=ENvnRZyJjnEps3yiVgsX7HBb3e0UX6vr9hqD2coNcvo=;
-        b=fesk3KIa2WZaCF+S33hAhBQlzcwgCxoS72qeS4zMaDv1u8hLG2+dxR+gahznY+1fk6
-         DdxjwFARz8yW5Ys721g364lxZLjkhn6xTd6ikbmtvEiJBmWJoTRWhSN5AJ6r0KX1QV+b
-         9nUwHhJ75yfxTKwMb0WCC6TNjkN4iYr5RLiy3c9Akgaldc+OKrH3bIohcOWiui0OEAML
-         NrA6Z9JidbKHkAOQGGXGBujsPYodSd+xmp2K22NFQBCc/R3uYeSQyTeqBUndoWVTRpMi
-         jnz1vMzfj+9asJSZuj/UjynhNATlXabH9DaZ3zXsXXDedUucxRS5U5RCtc0UQZSJLtnm
-         /Njg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781186644; x=1781791444;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ENvnRZyJjnEps3yiVgsX7HBb3e0UX6vr9hqD2coNcvo=;
-        b=L2uATufkVsLdOEpQsvS7J4c9D6KoSnV5ooUjShMGc+hz35ZoLj60k378dOleHeiz3T
-         ZyrBLhhZwbi2v7pOWUGGpipQ8oL7c8qn3j9e0ydG17k2h70uXwuKZ7ScO9CCcfqdx6m0
-         cuH5/44FTW6/UMhNCJk//PATcj+S2vOtLeg/GFYRkeyLAEhVdnUJ/AMTYTzb4gEw/den
-         b1wq8eJ/hEK983/8HKhoEugd6teSa4nYVDy5Sk9NTz+mDP1tHJb6+fa8InuPfR8xRV0W
-         MFQxxwk6LlHABHeJbNCN6BVGVMiy9MSiHW28Z28WQV+T9uEdlQCAEI5xGSStJIZlBbzv
-         KcaQ==
-X-Forwarded-Encrypted: i=1; AFNElJ/HPsbFq4fVVsxRiJmKTrtGt2z3fOsN+NHJqzCsfbkQKDTTTqeDuL2HkpCb565LooU8bBnfFfer+2U=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yzh71yjdtGLwnZ0aV9yn3EOFkxk+yK3UpAqTYNoihGCVw763mmc
-	ZNIEc8TWPMxxoR1tUN5lX2GGKoG/E897sdxCby6PNUNgDsJYl2RWICr0R39fPdTaCqw=
-X-Gm-Gg: Acq92OEa0VdI4qMfqz3K93BUePN+3LCez46G5aVkIL+YwUyHn0shoPCilE3q/yiM42w
-	2XYhnueHGfCVjfRLFbCGt6AQ22E+9DG74JrCujM7DTk+GqCTNplgyi4eMlTtzRlJeRq2Jx20m8D
-	+eQClYNjoqJPWc+a7ih6rAv/p/vjlNJMsN8SN32cj3e4C6MXHMCm7FmxMWreaYZNI94cq39maBR
-	4KqVO4gtrV93yKdCA/lBLjppgWhAL8AVZa4RzigYMav3ivY/Qmuh7s1BbcOKHItX2gxiBhNynfD
-	hcndbQyERegcx4yV8hMtdWUJM2nMrGGtCq1uoGH7salUQxxsBcY5Fm7yfUvr0OW8zkmin1c2bc1
-	SUBHnhKLpmBMm8VffrWDMcl2ObRKpKReky+JhxhAmJYy1u2qmZzVJh5RFROPy6qgAbyeaVsTpjL
-	6ltgUjeQf/QaqDj2039R0s5D3wHVQhd12jtjl+ox+ZwbGzAcZXsIGF920q1CvSg6WFFA+urAKXW
-	ffAxUhwLc52UCGFcA==
-X-Received: by 2002:a05:620a:2728:b0:915:9fde:9da3 with SMTP id af79cd13be357-9160ade2a98mr334272485a.27.1781186644129;
-        Thu, 11 Jun 2026 07:04:04 -0700 (PDT)
-Received: from gourry-fedora-PF4VCD3F (pool-173-79-60-52.washdc.fios.verizon.net. [173.79.60.52])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-9160aca4293sm196905585a.14.2026.06.11.07.04.02
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 11 Jun 2026 07:04:03 -0700 (PDT)
-Date: Thu, 11 Jun 2026 10:04:01 -0400
-From: Gregory Price <gourry@gourry.net>
-To: Mike Rapoport <rppt@kernel.org>
-Cc: linux-mm@kvack.org, x86@kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-acpi@vger.kernel.org,
-	driver-core@lists.linux.dev, kernel-team@meta.com, corbet@lwn.net,
-	skhan@linuxfoundation.org, dave.hansen@linux.intel.com,
-	luto@kernel.org, peterz@infradead.org, tglx@kernel.org,
-	mingo@redhat.com, bp@alien8.de, hpa@zytor.com, rafael@kernel.org,
-	lenb@kernel.org, gregkh@linuxfoundation.org, dakr@kernel.org,
-	akpm@linux-foundation.org, rdunlap@infradead.org,
-	feng.tang@linux.alibaba.com, dapeng1.mi@linux.intel.com,
-	elver@google.com, kuba@kernel.org, ebiggers@kernel.org,
-	lirongqing@baidu.com, paulmck@kernel.org, dave.jiang@intel.com,
-	jic23@kernel.org, xueshuai@linux.alibaba.com, kai.huang@intel.com
-Subject: Re: [RFC PATCH 1/3] mm/numa: add exclusive node pool and
- numa=standby boot parameter
-Message-ID: <airAUSrNjbSEwuti@gourry-fedora-PF4VCD3F>
-References: <20260610014517.253609-1-gourry@gourry.net>
- <20260610014517.253609-2-gourry@gourry.net>
- <aip5IWmxg9CWg8hQ@kernel.org>
+	s=arc-20240116; t=1781186831; c=relaxed/simple;
+	bh=a2WBTqoUIIvn4Xa5LiibHEJAjYFhZrUn7vnSweSdeQs=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=j14eQwbpY9T5Dn2FXL7yeClwMgCTzI01e1dGF73o1/7rV9+w9s/5OVsBqGCBDQE2CG9+ChI1R7c59yUHJdGX5edtPv8PcQCufCYAVBbSiLBfQcV3jwcRK/qEJGQFIgx+u7P5U0ozvNqDWLmnFrEJE5m31v2kGYztV/BQFK92qUI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=lst.de; spf=none smtp.mailfrom=bombadil.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=1NS+8VZd; arc=none smtp.client-ip=198.137.202.133
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+	Content-ID:Content-Description:In-Reply-To:References;
+	bh=9VtyOjaZ0Hskv/gtSPJhdSSJlDhoOI/Y4g/ssy8U7Zw=; b=1NS+8VZdIfQK8/+aqQzh/ffpuo
+	w0pNHvlh+GG9vUpovZlYcs67QB4U2iYHIige9SG+mgLvVbPXLOKF/r13iT4sIu5aCzclz8s82iz4i
+	GbPb0DadkcpPEyKKLsk4Mee0IBoCdb3ukN76dUQwhsCjlrY7T0d7dxTemWk22ay9em7J5c1vBwISH
+	nW8oq4Ekvqd+nnts7s3rtzJNqdD1zQXoqF76V5sZ3X0WZELdaBofCD92S/UzIxVEQl4RzFXH7oHvW
+	xiZu9Wrbo0iISeF2abKhsL9IbMR+P1fE41gp8tGUCJJtdL42wW1A3JBYDXkahRKZ4YGifbTLlLmMI
+	WubetdRw==;
+Received: from 2a02-8389-2341-5b80-decc-1a96-daaa-a2cc.cable.dynamic.v6.surfer.at ([2a02:8389:2341:5b80:decc:1a96:daaa:a2cc] helo=localhost)
+	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+	id 1wXg3o-00000009ZXf-1Roz;
+	Thu, 11 Jun 2026 14:07:08 +0000
+From: Christoph Hellwig <hch@lst.de>
+To: Jens Axboe <axboe@kernel.dk>
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	Damien Le Moal <dlemoal@kernel.org>,
+	Hannes Reinecke <hare@suse.de>,
+	Keith Busch <kbusch@kernel.org>,
+	linux-block@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Subject: configurable block error injection v5
+Date: Thu, 11 Jun 2026 16:06:43 +0200
+Message-ID: <20260611140703.2401204-1-hch@lst.de>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <aip5IWmxg9CWg8hQ@kernel.org>
+Content-Transfer-Encoding: 8bit
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.16 / 15.00];
+X-Spamd-Result: default: False [-0.06 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[gourry.net:s=google];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[lst.de : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:rppt@kernel.org,m:linux-mm@kvack.org,m:x86@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-acpi@vger.kernel.org,m:driver-core@lists.linux.dev,m:kernel-team@meta.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:dave.hansen@linux.intel.com,m:luto@kernel.org,m:peterz@infradead.org,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:hpa@zytor.com,m:rafael@kernel.org,m:lenb@kernel.org,m:gregkh@linuxfoundation.org,m:dakr@kernel.org,m:akpm@linux-foundation.org,m:rdunlap@infradead.org,m:feng.tang@linux.alibaba.com,m:dapeng1.mi@linux.intel.com,m:elver@google.com,m:kuba@kernel.org,m:ebiggers@kernel.org,m:lirongqing@baidu.com,m:paulmck@kernel.org,m:dave.jiang@intel.com,m:jic23@kernel.org,m:xueshuai@linux.alibaba.com,m:kai.huang@intel.com,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	DMARC_NA(0.00)[gourry.net];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[gourry@gourry.net,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[34];
-	TAGGED_FROM(0.00)[bounces-91954-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-91955-lists,linux-doc=lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
-	DKIM_TRACE(0.00)[gourry.net:+];
-	MISSING_XM_UA(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:axboe@kernel.dk,m:corbet@lwn.net,m:dlemoal@kernel.org,m:hare@suse.de,m:kbusch@kernel.org,m:linux-block@vger.kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[hch@lst.de,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[infradead.org:+];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[gourry@gourry.net,linux-doc@vger.kernel.org];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[hch@lst.de,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	RCPT_COUNT_SEVEN(0.00)[7];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[gourry.net:dkim,gourry.net:from_mime,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp,gourry-fedora-PF4VCD3F:mid]
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:mid,lst.de:from_mime,infradead.org:dkim,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 1F0526728FD
+X-Rspamd-Queue-Id: 99903672988
 
-On Thu, Jun 11, 2026 at 12:00:17PM +0300, Mike Rapoport wrote:
-> > 1) Can we do dynamic addition of nodes?
-> > 
-> >    Not Trivially
-> > 
-> >    Some services utilize num_possible_nodes() as a static value to
-> >    calculate the amount of resources to use at runtime (bpf, md/raid5).
-> > 
-> >    Example: futex_init uses num_possible_nodes() as part of its
-> >             hashsize calculation during __init.
-> 
-> AFAIU, we don't add the additional nodes for generic hotplug memory but
-> rather for exclusive use of by drivers/applications that are aware of these
-> nodes.
+Hi all,
 
-The intent is to use for "non-generic" hotplug (see the whole private
-node series [1]), which would eventually still use the hotplug mechanism
-just not for generic memory.
+this series adds a new configurable block error injection facility.
+We already have a few to inject block errors, but unfortunately most
+of them are either not very useful or hard to use, or both:
 
-[1] https://lore.kernel.org/linux-mm/20260222084842.1824063-1-gourry@gourry.net/
+ - The fail_make_request failure injection point can't distinguish
+   different commands, different ranges in the file and can only injection
+   plain I/O errors.
+ - the should_fail_bio 'dynamic' failure injection has all the same issues
+   as fail_make_request
+ - dm-error can only fail all command in the table using BLK_STS_IOERR
+   and requires setting up a new block device
+ - dm-flakey and dm-dust allow all kinds of configurability, but still
+   don't have good error selection, no good support for non-read/write
+   commands and are limited to the dm table alignment requirements,
+   which for zoned devices enforces setting them up for an entire zone.
+   They also once again require setting up a stacked block device,
+   which is really annoying in harnesses like xfstests
 
-> Wouldn't adding them to possible nodes actually skew the calculation of the
-> resources by the services utilizing num_possible_nodes()?
-> 
-> With the futex_init() example, won't be hashsize scaled down two much
-> because we've added these special nodes to the possible mask?
->
+This series adds a new debugfs-based block layer error injection
+that allows to configure what operations and ranges the injection
+applied to, and what status to return.  It also allows to configure a
+failure ratio similar to the xfs errortag injection.
 
-The result is the same as BIOS reserving nodes with PXM entries that
-don't get used.  The CXL ACPI Tables do this for CXL Fixed Memory
-Windows that may never be hotplugged.
+Changes since v4:
+ - don't unlock in removeall to avoid a race between removeall and setup
+ - document why we can't match 0-sized bios
 
-So really i think you're pointing out that futex_init() here probably
-shouldn't be using num_possible_nodes?
+Changes since v3:
+ - use a static branch to guard the new condition
+ - split out a new header so that jump_label.h doesn't get pulled into
+   blk.h
+ - more checking for impossible conditions in blk_status_to_tag
+ - more spelling fixes
 
-~Gregory
+Changes since v2:
+ - improve the documentation a bit
+ - fix a spelling mistake in a comment
+
+Changes since v1:
+ - drop the should_fail_bio removal and cleanup depending on it, as it's
+   used by eBPF programs and thus a hidden UABI.
+ - as a result split the code out to it's own Kconfig symbol
+ - various error handling fixed pointed out by Keith
+ - documentation spelling fixes pointed out by Randy
+
+Diffstat:
+ Documentation/block/error-injection.rst |   59 +++++
+ Documentation/block/index.rst           |    1 
+ block/Kconfig                           |    8 
+ block/Makefile                          |    1 
+ block/blk-core.c                        |   87 ++++++--
+ block/blk-sysfs.c                       |    5 
+ block/blk.h                             |    3 
+ block/error-injection.c                 |  315 ++++++++++++++++++++++++++++++++
+ block/error-injection.h                 |   21 ++
+ block/genhd.c                           |    4 
+ include/linux/blkdev.h                  |    6 
+ 11 files changed, 490 insertions(+), 20 deletions(-)
 
