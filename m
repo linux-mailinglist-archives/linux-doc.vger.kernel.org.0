@@ -1,192 +1,150 @@
-Return-Path: <linux-doc+bounces-91927-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91930-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id A7VTJpdhKmr1oQMAu9opvQ
-	(envelope-from <linux-doc+bounces-91927-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 09:19:51 +0200
+	id /JNkDc9oKmqbowMAu9opvQ
+	(envelope-from <linux-doc+bounces-91930-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 09:50:39 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 95E0166F547
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 09:19:50 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E95E66F8F0
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 09:50:38 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=V8lcB+cy;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91927-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-91927-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	dkim=pass header.d=163.com header.s=s110527 header.b=mvJqFNJB;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91930-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91930-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=163.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id A0FEE3008620
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 07:19:47 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 48DCB302D81C
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 07:44:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 95F9E34B410;
-	Thu, 11 Jun 2026 07:19:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 800453AFD18;
+	Thu, 11 Jun 2026 07:44:28 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D21A35C1B2;
-	Thu, 11 Jun 2026 07:19:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2C43369217;
+	Thu, 11 Jun 2026 07:44:25 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781162386; cv=none; b=eBrveEbJv75f1dTQJq5Q3duKFhoaTL9AnUwQ6ESV6xLmwIofIQITbk6ew6qgwg4n7aAzA9ycN89Av5EQHBFyBgxsb7nnsuh90VjpQKNlz1SPCLQPX8B2vDFYR50UV9qTDsF9gTXWxHg0yF0ZRF5mLXtVbKHJmYNmrrs+EtauhN8=
+	t=1781163868; cv=none; b=Ouw94ri0OTW04m7/1MB+GxebwHeATeDI4WWD9o6kRNRYJkuht44jt7k3XW4xAb3nUnd2JzJq1YMZpYl3einW4GktVUaj7JSoWTj27QnLiUJJQDI6Xe4W9UnXM/jvrc8LbF/suV5+k8/mA6tge3qy7I8E99o4BpPx9nFk98IeliQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781162386; c=relaxed/simple;
-	bh=ztIz45hab0AvLP/gnjehgcjg/V46iqjqRkXzJ26PE+c=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=b2C6G6kGEH+eBW0WKczUvj0YWc2BdflpBXJMzIFOa2AhHthLmgJSu5p9OuNdfEnqJisw/Ac62I7Sd7Zrk7CjChNMcX5yqv5UMSVoWv44drN04a4MO3IU0z/M1y9/prkczMj9yKLwP5BzeVMfGcK2XvMlFdNZmMwtAJCyfTQbCik=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=V8lcB+cy; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 34CD01F00893;
-	Thu, 11 Jun 2026 07:19:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1781162385;
-	bh=ztIz45hab0AvLP/gnjehgcjg/V46iqjqRkXzJ26PE+c=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=V8lcB+cykIyGjOy2dxrUzVV/Q3lA3bzfQKE0EKEaizxsQXtCLMAczPlwLgp7xGqQt
-	 u+Tv9KNbobe9s7mJxUh7I484+2aw3LoRmftl+hLQBDqVe9Lcuk7KCvhbIFHDowJaTU
-	 5qoD06COfhUXCd3IxkyNNS+lamaR0DJC1PLgzvRDaDCs4U/HKd2UExROWuQ94ik22t
-	 dbG6cloH+VyTLbJyHTBOkIpew5Q+MQD9qkDen+aLF+6OpvtJeuCjrdmvOqPChWH2sp
-	 FllECbyKhd6qro9ysbxGFJZYXs260Qxg9YO/M385HIqqKf0UuVpdCBmE7TvPRobA2f
-	 9gr5N/WB/0Fhg==
-Message-ID: <2b5577b0-d81a-4dee-b4e2-acadcf7f7db2@kernel.org>
-Date: Thu, 11 Jun 2026 16:19:40 +0900
+	s=arc-20240116; t=1781163868; c=relaxed/simple;
+	bh=jdtZgwe7NYlJ+5fp6xjdH+kqGQa2JnRPx0F7n9kTkdA=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=TFSYPP/MIehyMBIsPxOsKZojQH8LEC4yDecUeVt4PtKo3xahYNuEhfdrJn3gxfEZGLn8Y9rZddKxyQlcDCSD979grmJ7MYbUtYKiNQN3ZqVqmUC5uo3pfSKyJCgB15FHvWUIXBIsdQO9QWHcGPymo4u+fmgrKuqlmjC2SlU34VY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=mvJqFNJB; arc=none smtp.client-ip=117.135.210.4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=42
+	LYPuJsnjlkHJxHjNhe9RhRHJyyVgPC83eS53Wa25k=; b=mvJqFNJBipt77zo2LL
+	ZrrXV+znfQ5MgLVtBlvVy587l0AGsW8VWr9E4hBn2pB6N/mrsYkzPsYlWn0QB65Q
+	KjZQ374CGJwntmfVzYbR4Q3coqhRD+dZiwGCKbckdZP9DEhCI2ezr/V88NFNA3PM
+	SSnzvKQY7xIoU7lZIa6cz3s7k=
+Received: from ZM.localdomain (unknown [])
+	by gzga-smtp-mtada-g0-2 (Coremail) with SMTP id _____wD3PvcqZypqI94RCw--.19273S2;
+	Thu, 11 Jun 2026 15:43:38 +0800 (CST)
+From: Ziming Zhu <zmzhu0630@163.com>
+To: Guenter Roeck <linux@roeck-us.net>
+Cc: Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	linux-hwmon@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	Ziming Zhu <ziming.zhu@silergycorp.com>
+Subject: [PATCH v3 0/3] Add Silergy SQ24860 support
+Date: Thu, 11 Jun 2026 15:43:32 +0800
+Message-Id: <20260611074335.4415-1-zmzhu0630@163.com>
+X-Mailer: git-send-email 2.25.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 0/5] mm/slub: preserve previous object lifetime
-To: Pengpeng Hou <pengpeng@iscas.ac.cn>, Vlastimil Babka <vbabka@kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>, linux-mm@kvack.org
-Cc: Hao Li <hao.li@linux.dev>, Christoph Lameter <cl@gentwo.org>,
- David Rientjes <rientjes@google.com>,
- Roman Gushchin <roman.gushchin@linux.dev>,
- David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>,
- liam@infradead.org, Mike Rapoport <rppt@kernel.org>,
- Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260611063926.38111-1-pengpeng@iscas.ac.cn>
-Content-Language: en-US
-From: Harry Yoo <harry@kernel.org>
-In-Reply-To: <20260611063926.38111-1-pengpeng@iscas.ac.cn>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------63UUg0QDpUJ3o0cdIUnrfdpH"
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:_____wD3PvcqZypqI94RCw--.19273S2
+X-Coremail-Antispam: 1Uf129KBjvJXoWxJr18KrW7Xr4xAw1UXw13urg_yoW8WFWfpa
+	ykurZ3ta4DJr17Xwsayw48WFW5Ar18Xw4YkFyDJ3WSvFn5ZFyIvrW3KF98Z3srCr1fJF12
+	vF95KrnY93Z7AFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UNtxDUUUUU=
+X-CM-SenderInfo: x2p2x3aqwtiqqrwthudrp/xtbCvwsJAmoqZytHpgAA3S
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-7.26 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
-	SIGNED_PGP(-2.00)[];
+X-Spamd-Result: default: False [0.84 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	MIME_GOOD(-0.20)[multipart/signed,multipart/mixed,text/plain];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[163.com,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_DKIM_ALLOW(-0.20)[163.com:s=s110527];
 	MAILLIST(-0.15)[generic];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:pengpeng@iscas.ac.cn,m:vbabka@kernel.org,m:akpm@linux-foundation.org,m:linux-mm@kvack.org,m:hao.li@linux.dev,m:cl@gentwo.org,m:rientjes@google.com,m:roman.gushchin@linux.dev,m:david@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[harry@kernel.org,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	TAGGED_FROM(0.00)[bounces-91927-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~];
+	TAGGED_FROM(0.00)[bounces-91930-lists,linux-doc=lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	HAS_ATTACHMENT(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[harry@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER(0.00)[zmzhu0630@163.com,linux-doc@vger.kernel.org];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:linux@roeck-us.net,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-hwmon@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:ziming.zhu@silergycorp.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
+	DKIM_TRACE(0.00)[163.com:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[zmzhu0630@163.com,linux-doc@vger.kernel.org];
+	FREEMAIL_FROM(0.00)[163.com];
+	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,vger.kernel.org:from_smtp]
+	RCPT_COUNT_SEVEN(0.00)[11];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	FROM_HAS_DN(0.00)[]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 95E0166F547
+X-Rspamd-Queue-Id: 4E95E66F8F0
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------63UUg0QDpUJ3o0cdIUnrfdpH
-Content-Type: multipart/mixed; boundary="------------RjLOUOXpcNn5GjJVTPq8Q6Ve";
- protected-headers="v1"
-From: Harry Yoo <harry@kernel.org>
-To: Pengpeng Hou <pengpeng@iscas.ac.cn>, Vlastimil Babka <vbabka@kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>, linux-mm@kvack.org
-Cc: Hao Li <hao.li@linux.dev>, Christoph Lameter <cl@gentwo.org>,
- David Rientjes <rientjes@google.com>,
- Roman Gushchin <roman.gushchin@linux.dev>,
- David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>,
- liam@infradead.org, Mike Rapoport <rppt@kernel.org>,
- Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Message-ID: <2b5577b0-d81a-4dee-b4e2-acadcf7f7db2@kernel.org>
-Subject: Re: [RFC PATCH 0/5] mm/slub: preserve previous object lifetime
-References: <20260611063926.38111-1-pengpeng@iscas.ac.cn>
-In-Reply-To: <20260611063926.38111-1-pengpeng@iscas.ac.cn>
+From: Ziming Zhu <ziming.zhu@silergycorp.com>
 
---------------RjLOUOXpcNn5GjJVTPq8Q6Ve
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Add devicetree bindings, PMBus hwmon driver support, and documentation
+for the Silergy SQ24860 eFuse.
 
-Hi Pengpeng,
+The device provides voltage, current, power, and temperature telemetry.
+The driver also supports peak, average, and minimum history reporting,
+sample count configuration, and maps the manufacturer-specific VIREF
+register to the generic input over-current fault limit attribute.
 
-On 6/11/26 3:39 PM, Pengpeng Hou wrote:
-> SLAB_STORE_USER currently stores one allocation track and one free trac=
-k
-> for an object. This is useful, but it loses part of the previous lifeti=
-me
-> when the object is reused: the new allocation overwrites the allocation=
+Changes in v3:
+- fix remaining checkpatch issues in the SQ24860 driver
+- use C comments consistently in the driver
+- drop unused header files
+- make GIMON a constant in the gain calculation helper
+- use proper 64-bit division for the calibration gain calculation
+- return -EINVAL when the calculated gain does not fit
+- reject PMBUS_IIN_OC_FAULT_LIMIT values outside the hardware range
+- treat malformed silergy,rimon-micro-ohms as an error
+- sort sq24860 correctly in Documentation/hwmon/index.rst
 
-> track, and a later stale free can overwrite the free track.
+Ziming Zhu (3):
+  dt-bindings: hwmon: pmbus: Add bindings for Silergy SQ24860
+  hwmon: pmbus: Add support for Silergy SQ24860
+  hwmon: Add documentation for SQ24860
 
-I'm not sure what you meant by "stale free", UAF is accessing object
-that are freed. What makes the free "stale"?
+ .../bindings/hwmon/pmbus/silergy,sq24860.yaml |  74 +++
+ Documentation/hwmon/index.rst                 |   1 +
+ Documentation/hwmon/sq24860.rst               |  96 ++++
+ drivers/hwmon/pmbus/Kconfig                   |  19 +
+ drivers/hwmon/pmbus/Makefile                  |   1 +
+ drivers/hwmon/pmbus/sq24860.c                 | 430 ++++++++++++++++++
+ 6 files changed, 621 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/hwmon/pmbus/silergy,sq24860.yaml
+ create mode 100644 Documentation/hwmon/sq24860.rst
+ create mode 100644 drivers/hwmon/pmbus/sq24860.c
 
-In general, I don't think slab_debug=3DUP is the right tool to debug
-use-after-frees, because slab will never know _when_ the object was
-overwritten. It can only tell that somebody has overwritten freed
-objects by checking if the object content is POISON_FREE or POISON_END.
+-- 
+2.25.1
 
-KASAN is a better tool to debug use-after-frees, because it can
-tell you which kernel code is accessing memory it shouldn't. (It also
-quarantines slab objects to avoid immediately reusing the object for
-better coverage).
-
-So I have to ask, "Why not use KASAN instead?" before enhancing
-slab_debug (neither is intended for production anyway).
-
-> For free-after-reuse bugs, the report can therefore contain the victim
-> allocation and the stale free, while the earlier alloc/free pair that
-> explains where the stale pointer came from is no longer available.
-
-Again, I'm confused. I have no idea what "free-after-reuse" means.
-Objects cannot be reused until they are not freed, no?
-
---=20
-Cheers,
-Harry / Hyeonggon
-
---------------RjLOUOXpcNn5GjJVTPq8Q6Ve--
-
---------------63UUg0QDpUJ3o0cdIUnrfdpH
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEARYKAB0WIQQQ1ub6gR5ogjaKRmOGXBN6rc5S1gUCaiphjAAKCRCGXBN6rc5S
-1gaOAQChyWUETqFeUG2gvr9ZMZ3Il7reXckMo4X8MOCt7Rc7AAD/Qfkcf8YbQo18
-ItCpaSmOiByXdnbuV93+suelFfGbgQg=
-=kmYS
------END PGP SIGNATURE-----
-
---------------63UUg0QDpUJ3o0cdIUnrfdpH--
 
