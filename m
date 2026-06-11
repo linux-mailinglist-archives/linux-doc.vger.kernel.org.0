@@ -1,190 +1,177 @@
-Return-Path: <linux-doc+bounces-91968-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91969-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id SktZFO/ZKmpyyAMAu9opvQ
-	(envelope-from <linux-doc+bounces-91968-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 17:53:19 +0200
+	id 6ZTlLUfaKmqUyAMAu9opvQ
+	(envelope-from <linux-doc+bounces-91969-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 17:54:47 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id C0297673387
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 17:53:18 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3AB876733C0
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 17:54:47 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=iRtpZ5ki;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91968-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-91968-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=SnwA76P4;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91969-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-91969-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 1665D3018C35
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 15:53:17 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id BD6F83021B33
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 15:54:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E4048347BB5;
-	Thu, 11 Jun 2026 15:53:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CE6643AE6F3;
+	Thu, 11 Jun 2026 15:54:44 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F96A329E79;
-	Thu, 11 Jun 2026 15:53:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6E5AE3B3BFC;
+	Thu, 11 Jun 2026 15:54:42 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781193193; cv=none; b=Y/KW82Xv9RqqH1cO6KHexDCzUoIVvsElQ/DjWYxgEuixDl+a34fAX0uEcFEYYI37X6B+dq4kmMSXDXgs2bgoTIddB9rdb6dO9OAupRWtUSzt/ogU6tSZiV0XcV70yUaZkEPGbS/fRKPv7sqlscyJpV+1sJMdLsY6dHLktSRojEU=
+	t=1781193284; cv=none; b=FWdmUTDNQHhu0T3yAFTN/kzlD1JEMl8M9WsWA0is1GX9PIqpGlEtKIp0tOvYH+AarK4zsOaofMwolJ+u6+sYMVglfpkhuKgw88isNkNV6RYQ+Ak6XyI4T0fIceIZR6T7/e467OrF9mVwAiCDoBx/FtfqFS4IeQbgby47ZfTTofE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781193193; c=relaxed/simple;
-	bh=3tf8tVVdzCC9tsUBWHR2BG9ZmTnZKe5b69Q+i1FQsqE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=t2ErlIgVclMD35+dztDLUSHX9cbWHyi7Y4vx6LPVLAXYpuxCuEOMWuqFAPwqVgHS4cw/HFoEDtwqreQj72Z5kxtI2p0kaTlKEwbfOI5S6ZZKMvHlbGVLN6+98gj5WPmjbKFevsM6TQbw4TKq+fAREfVl66Y9dIY3et1NP7uN3FM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iRtpZ5ki; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 472281F00893;
-	Thu, 11 Jun 2026 15:52:58 +0000 (UTC)
+	s=arc-20240116; t=1781193284; c=relaxed/simple;
+	bh=0d6ab74yd5kEzFzfTr1wPyxvkvewk0FCwPFPD3Na4h4=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=kCetR5WyhtDA9HpjNjxYbQ1lEwL2Yiw/tuSpusowMpwl5V5jmA+A+F6GIZxmCN3Wl8xX8qlM2eCuVlx43yJucnUMmFH8AJtyC+SloxHLY8bZ2eDgeyEyAMS+BJnPjN+oMWhD/azEqY5J+PiFzmrBN9u4fx4RYn6YGWhsJb4jcD8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SnwA76P4; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3F8B71F00893;
+	Thu, 11 Jun 2026 15:54:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1781193191;
-	bh=nWWQcnr5s3ZKYSOjuOdhQYovdi3ZfrWWs+mggmJcT0A=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=iRtpZ5kieFw5S9ITnjIH6j0aWcKNh5JeuF+zK4u3Gb5BHGjXDX+63qYpICXZOqKKf
-	 FMpn/eSPdZ3uUDY2hsCqbr+TZrG/QR3UZsXMiEpeUFOJx1TvgaWPpU2Sve9CrFxXl+
-	 FPqFy7tIGDmG52exo9PstHq6ST6VxUMQd8EOxUjVYsICVz7IejXX1Gsp7Nm89bi+jK
-	 mGw7lODaN60ngB2FLEwNaIgnCWslUjDqMZ+ZD+N8Eh+psAFgBJrySRm3icp1ZA6RjP
-	 0zyMAq/g3K9uC6d61CATLKH+E8nSZtrkkgmOOG/Fc7JJu4bfrSi9nkah1Wa+lwiqQ1
-	 d8kGPcHyRzcdA==
-Date: Thu, 11 Jun 2026 16:52:54 +0100
-From: Lorenzo Stoakes <ljs@kernel.org>
-To: Huang Shijie <huangsj@hygon.cn>
-Cc: akpm@linux-foundation.org, viro@zeniv.linux.org.uk, brauner@kernel.org, 
-	jack@suse.cz, muchun.song@linux.dev, osalvador@suse.de, david@kernel.org, 
-	surenb@google.com, mjguzik@gmail.com, liam@infradead.org, vbabka@kernel.org, 
-	shakeel.butt@linux.dev, rppt@kernel.org, mhocko@suse.com, corbet@lwn.net, 
-	skhan@linuxfoundation.org, linux@armlinux.org.uk, dinguyen@kernel.org, 
-	schuster.simon@siemens-energy.com, James.Bottomley@hansenpartnership.com, deller@gmx.de, 
-	djbw@kernel.org, willy@infradead.org, peterz@infradead.org, mingo@redhat.com, 
-	acme@kernel.org, namhyung@kernel.org, mark.rutland@arm.com, 
-	alexander.shishkin@linux.intel.com, jolsa@kernel.org, irogers@google.com, adrian.hunter@intel.com, 
-	james.clark@linaro.org, mhiramat@kernel.org, oleg@redhat.com, ziy@nvidia.com, 
-	baolin.wang@linux.alibaba.com, npache@redhat.com, ryan.roberts@arm.com, dev.jain@arm.com, 
-	baohua@kernel.org, lance.yang@linux.dev, linmiaohe@huawei.com, 
-	nao.horiguchi@gmail.com, jannh@google.com, pfalcato@suse.de, riel@surriel.com, 
-	harry@kernel.org, will@kernel.org, brian.ruley@gehealthcare.com, 
-	rmk+kernel@armlinux.org.uk, dave.anglin@bell.net, linux-mm@kvack.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, linux-parisc@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
-	nvdimm@lists.linux.dev, linux-perf-users@vger.kernel.org, 
-	linux-trace-kernel@vger.kernel.org, zhongyuan@hygon.cn, fangbaoshun@hygon.cn, yingzhiwei@hygon.cn
-Subject: Re: [PATCH v2 1/4] mm: use mapping_mapped to simplify the code
-Message-ID: <airZn524Ip8VsWra@lucifer>
-References: <20260611061915.2354307-1-huangsj@hygon.cn>
- <20260611061915.2354307-2-huangsj@hygon.cn>
+	s=k20260515; t=1781193282;
+	bh=4TQhWa4URtxn6HrzLpdqS4kgU4581lhO4yl/qFTymkc=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=SnwA76P4YZBcMd0y+S6MCgLpL3brG1sTKA34JB15OSIS6LCb1xEyXCNV0rSksVBmw
+	 0DHxvZ9dGH4p9JXJJFmATayu40QWvAPiaX+cq44LnT4dqyEtFDO5QMjIfUHiVMu2OK
+	 76xiQFVia85GAv+hDVXk3h5Fi2r9oT/LDzCAIBeDXZOycd70P36uD9YnUNTLDoCzd1
+	 vIOxHZJHiEsPbQ+2l3bc4A7fzBW7gUubR7jBiX23LHJSROmYZK3vPjS4hBMFXSYMyV
+	 5zUp/6lGmdwGeJ3WhRHLkEoQKg0ptvhaJsXJYuvr28sg2KetnREhKbwKNfMMJFpfOn
+	 CaUaM5qwlEgmw==
+Date: Thu, 11 Jun 2026 08:54:40 -0700
+From: Jakub Kicinski <kuba@kernel.org>
+To: Mark Bloch <mbloch@nvidia.com>
+Cc: Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>,
+ Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller"
+ <davem@davemloft.net>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan
+ <skhan@linuxfoundation.org>, Jiri Pirko <jiri@resnulli.us>, Simon Horman
+ <horms@kernel.org>, Sunil Goutham <sgoutham@marvell.com>, Linu Cherian
+ <lcherian@marvell.com>, Geetha sowjanya <gakula@marvell.com>, hariprasad
+ <hkelam@marvell.com>, Subbaraya Sundeep <sbhatta@marvell.com>, Bharat
+ Bhushan <bbhushan2@marvell.com>, Saeed Mahameed <saeedm@nvidia.com>, Leon
+ Romanovsky <leon@kernel.org>, Tariq Toukan <tariqt@nvidia.com>, Ethan
+ Nelson-Moore <enelsonmoore@gmail.com>, linux-doc@vger.kernel.org,
+ netdev@vger.kernel.org, linux-rdma@vger.kernel.org
+Subject: Re: [PATCH net-next V3 2/7] netdevsim: Register devlink after
+ device init
+Message-ID: <20260611085440.4fe36bf2@kernel.org>
+In-Reply-To: <eb525345-da07-414c-9d05-7e00e3eb472f@nvidia.com>
+References: <20260605181030.3486619-1-mbloch@nvidia.com>
+	<20260605181030.3486619-3-mbloch@nvidia.com>
+	<20260610165053.7c91f331@kernel.org>
+	<eb525345-da07-414c-9d05-7e00e3eb472f@nvidia.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260611061915.2354307-2-huangsj@hygon.cn>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.16 / 15.00];
+X-Spamd-Result: default: False [-3.66 / 15.00];
 	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-91968-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:huangsj@hygon.cn,m:akpm@linux-foundation.org,m:viro@zeniv.linux.org.uk,m:brauner@kernel.org,m:jack@suse.cz,m:muchun.song@linux.dev,m:osalvador@suse.de,m:david@kernel.org,m:surenb@google.com,m:mjguzik@gmail.com,m:liam@infradead.org,m:vbabka@kernel.org,m:shakeel.butt@linux.dev,m:rppt@kernel.org,m:mhocko@suse.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux@armlinux.org.uk,m:dinguyen@kernel.org,m:schuster.simon@siemens-energy.com,m:James.Bottomley@hansenpartnership.com,m:deller@gmx.de,m:djbw@kernel.org,m:willy@infradead.org,m:peterz@infradead.org,m:mingo@redhat.com,m:acme@kernel.org,m:namhyung@kernel.org,m:mark.rutland@arm.com,m:alexander.shishkin@linux.intel.com,m:jolsa@kernel.org,m:irogers@google.com,m:adrian.hunter@intel.com,m:james.clark@linaro.org,m:mhiramat@kernel.org,m:oleg@redhat.com,m:ziy@nvidia.com,m:baolin.wang@linux.alibaba.com,m:npache@redhat.com,m:ryan.roberts@arm.com,m:dev.jain@arm.com,m:baohua@kernel.org,m:lance.yang@linux.dev,m:linmiao
- he@huawei.com,m:nao.horiguchi@gmail.com,m:jannh@google.com,m:pfalcato@suse.de,m:riel@surriel.com,m:harry@kernel.org,m:will@kernel.org,m:brian.ruley@gehealthcare.com,m:rmk+kernel@armlinux.org.uk,m:dave.anglin@bell.net,m:linux-mm@kvack.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-parisc@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:nvdimm@lists.linux.dev,m:linux-perf-users@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:zhongyuan@hygon.cn,m:fangbaoshun@hygon.cn,m:yingzhiwei@hygon.cn,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[ljs@kernel.org,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-91969-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORWARDED(0.00)[lists@lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER(0.00)[kuba@kernel.org,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	FORGED_RECIPIENTS(0.00)[m:mbloch@nvidia.com,m:edumazet@google.com,m:pabeni@redhat.com,m:andrew+netdev@lunn.ch,m:davem@davemloft.net,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:jiri@resnulli.us,m:horms@kernel.org,m:sgoutham@marvell.com,m:lcherian@marvell.com,m:gakula@marvell.com,m:hkelam@marvell.com,m:sbhatta@marvell.com,m:bbhushan2@marvell.com,m:saeedm@nvidia.com,m:leon@kernel.org,m:tariqt@nvidia.com,m:enelsonmoore@gmail.com,m:linux-doc@vger.kernel.org,m:netdev@vger.kernel.org,m:linux-rdma@vger.kernel.org,m:andrew@lunn.ch,s:lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[linux-foundation.org,zeniv.linux.org.uk,kernel.org,suse.cz,linux.dev,suse.de,google.com,gmail.com,infradead.org,suse.com,lwn.net,linuxfoundation.org,armlinux.org.uk,siemens-energy.com,hansenpartnership.com,gmx.de,redhat.com,arm.com,linux.intel.com,intel.com,linaro.org,nvidia.com,linux.alibaba.com,huawei.com,surriel.com,gehealthcare.com,bell.net,kvack.org,vger.kernel.org,lists.infradead.org,lists.linux.dev,hygon.cn];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FREEMAIL_CC(0.00)[google.com,redhat.com,lunn.ch,davemloft.net,lwn.net,linuxfoundation.org,resnulli.us,kernel.org,marvell.com,nvidia.com,gmail.com,vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[65];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ljs@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,kernel];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[kuba@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
 	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,hygon.cn:email,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,lucifer:mid]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: C0297673387
+X-Rspamd-Queue-Id: 3AB876733C0
 
-On Thu, Jun 11, 2026 at 02:18:57PM +0800, Huang Shijie wrote:
-> Use mapping_mapped() to simplify the code, make
-> the code tidy and clean.
->
-> Signed-off-by: Huang Shijie <huangsj@hygon.cn>
+On Thu, 11 Jun 2026 09:02:03 +0300 Mark Bloch wrote:
+> On 11/06/2026 2:50, Jakub Kicinski wrote:
+> > On Fri, 5 Jun 2026 21:10:25 +0300 Mark Bloch wrote:  
+> >> devl_register() makes the devlink instance visible to userspace. A later
+> >> patch also makes registration the point where devlink core may call
+> >> eswitch_mode_set() to apply a boot-time default eswitch mode.
+> >>
+> >> Move netdevsim registration after all objects (resources, params, regions,
+> >> traps, debugfs etc) are initialized, and after the initial eswitch mode is
+> >> set to legacy.
+> >>
+> >> Move devl_unregister() to the beginning of nsim_drv_remove(), before those
+> >> devlink objects are torn down. This keeps devlink register/unregister as
+> >> the notification barrier and makes the later object teardown paths run
+> >> after devlink is no longer registered, so they do not emit their own
+> >> netlink DEL notifications.  
+> > 
+> > This is going backwards. At some point someone from nVidia thought that
+> > we can order our way out of locking, so mlx5 is likely ordered this way,
+> > but this must not be required, or in any way normalized.
+> > We (syzbot) quickly discovered that it doesn't cover all corner cases.
+> > devl_lock() is exposed specifically to allow the driver to finish
+> > whatever init it needs without letting user space invoke callbacks, yet.
+> > Almost (?) all driver callbacks hold devl_lock(), so maybe the devlink
+> > instance is "visible" to user space but that should not matter.  
+> 
+> Let me clarify.
+> 
+> No locking is changed here, and I don't want to make register/unregister
+> ordering a substitute for devl_lock().
+> 
+> The only requirement I have for this series is that devl_register() is called
+> only once the driver is ready for devlink core to call eswitch_mode_set().
+> That follows from the earlier direction to have the core apply the default
+> mode from devl_register() instead of adding an explicit driver call.
 
-Yeah as Pedro said this one could just be sent separately, and I in fact
-suggest you do that :) So:
+This is exactly what I'm objecting to. AFAIU we are trading off
+explicit call to get the default value for an implicit behavior
+depending on order of calls. We want to optimize for how easy it
+is to get the API wrong, not for LoC.
 
-Reviewed-by: Lorenzo Stoakes <ljs@kernel.org>
+If we don't have a clean way to implement this without driver
+changes let's add the explicit API to get the default value.
+If driver doesn't call it schedule a work to go via the callback
+once devl_lock() is dropped. That way drivers which care can optimize
+themselves by reading the default value upfront. Drivers which don't 
+care will work correctly, and there's no API call order trap.
 
-Cheers, Lorenzo
+Not ideal, but isn't that best we can do here?
+I still have flashbacks of the fallout from the call ordering games, 
+we have too many drivers to keep this straight...
 
-> ---
->  fs/hugetlbfs/inode.c | 4 ++--
->  mm/memory.c          | 4 ++--
->  2 files changed, 4 insertions(+), 4 deletions(-)
->
-> diff --git a/fs/hugetlbfs/inode.c b/fs/hugetlbfs/inode.c
-> index 78d61bf2bd9b..216e1a0dd0b2 100644
-> --- a/fs/hugetlbfs/inode.c
-> +++ b/fs/hugetlbfs/inode.c
-> @@ -614,7 +614,7 @@ static void hugetlb_vmtruncate(struct inode *inode, loff_t offset)
->
->  	i_size_write(inode, offset);
->  	i_mmap_lock_write(mapping);
-> -	if (!RB_EMPTY_ROOT(&mapping->i_mmap.rb_root))
-> +	if (mapping_mapped(mapping))
->  		hugetlb_vmdelete_list(&mapping->i_mmap, pgoff, 0,
->  				      ZAP_FLAG_DROP_MARKER);
->  	i_mmap_unlock_write(mapping);
-> @@ -675,7 +675,7 @@ static long hugetlbfs_punch_hole(struct inode *inode, loff_t offset, loff_t len)
->
->  	/* Unmap users of full pages in the hole. */
->  	if (hole_end > hole_start) {
-> -		if (!RB_EMPTY_ROOT(&mapping->i_mmap.rb_root))
-> +		if (mapping_mapped(mapping))
->  			hugetlb_vmdelete_list(&mapping->i_mmap,
->  					      hole_start >> PAGE_SHIFT,
->  					      hole_end >> PAGE_SHIFT, 0);
-> diff --git a/mm/memory.c b/mm/memory.c
-> index 86a973119bd4..5335077765e2 100644
-> --- a/mm/memory.c
-> +++ b/mm/memory.c
-> @@ -4386,7 +4386,7 @@ void unmap_mapping_folio(struct folio *folio)
->  	details.zap_flags = ZAP_FLAG_DROP_MARKER;
->
->  	i_mmap_lock_read(mapping);
-> -	if (unlikely(!RB_EMPTY_ROOT(&mapping->i_mmap.rb_root)))
-> +	if (unlikely(mapping_mapped(mapping)))
->  		unmap_mapping_range_tree(&mapping->i_mmap, first_index,
->  					 last_index, &details);
->  	i_mmap_unlock_read(mapping);
-> @@ -4416,7 +4416,7 @@ void unmap_mapping_pages(struct address_space *mapping, pgoff_t start,
->  		last_index = ULONG_MAX;
->
->  	i_mmap_lock_read(mapping);
-> -	if (unlikely(!RB_EMPTY_ROOT(&mapping->i_mmap.rb_root)))
-> +	if (unlikely(mapping_mapped(mapping)))
->  		unmap_mapping_range_tree(&mapping->i_mmap, first_index,
->  					 last_index, &details);
->  	i_mmap_unlock_read(mapping);
-> --
-> 2.53.0
->
->
+> So if the objection is to the commit message wording, I can fix that and drop
+> the "notification barrier" language.
+> 
+> For unregister, I can probably leave the old ordering as-is. I moved it only
+> to mirror the register path, which felt cleaner, but it is not required for
+> the default-mode change and as the lock is held I see no issue with doing
+> that.
 
