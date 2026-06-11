@@ -1,66 +1,78 @@
-Return-Path: <linux-doc+bounces-91929-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91932-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id AjXmOmNnKmo6owMAu9opvQ
-	(envelope-from <linux-doc+bounces-91929-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 09:44:35 +0200
+	id 9LZOAPpqKmovpAMAu9opvQ
+	(envelope-from <linux-doc+bounces-91932-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 09:59:54 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id B4BA166F7E1
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 09:44:35 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4844C66FA3D
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 09:59:53 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=163.com header.s=s110527 header.b=JKgQyOc4;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91929-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91929-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=163.com;
+	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b="puZ/sOua";
+	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=ewz0UhNi;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91932-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-91932-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=mailbox.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 03DD430074BE
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 07:44:33 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id C029E30731D1
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 07:55:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3D2E936A379;
-	Thu, 11 Jun 2026 07:44:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0EDA936F90A;
+	Thu, 11 Jun 2026 07:55:58 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.5])
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8951367B9A;
-	Thu, 11 Jun 2026 07:44:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E119636F8EB;
+	Thu, 11 Jun 2026 07:55:55 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781163867; cv=none; b=hWPRr4WqrNRn3mj+eAehW1XRCT8UKeP2Tx9Wl1GPXrnPc6qL8WYolkTNGN/5au86zfeNUXvWpVeO8Z1Q7UKfOhXGzJGb8V1/y69M9O6+a4b600qRd7CF8mQRq0twbCF+f+tTr+v5X933Qgd3W+bCT/m+kuDUT/lpaUuF07RNUFc=
+	t=1781164557; cv=none; b=hLdgCV9fs49w0d/Y7/ERnycdBqlqJe4JKXStDqkvDjtoUgHfJxr6r1w5zgDT+ZzDNyUTkXs3wyBRI/gSaRSU0ZRW6VqZCXhuOcwka8AihpcwpSaPHQ38pXPyniqBYdCGeLyHupEzYdEEo3r68lMRTV8Wdf8O24R+3LCD+3UrFuE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781163867; c=relaxed/simple;
-	bh=NumEs+92TayyxRbnZN8gnUdUNWhwmg8H4g+xgcWb0ws=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=r+rUahOLah8ZIkAXhaLkUpTwT8S/yGyso6rcSLEOt6W06RXX/MBSuoDp01ngBLOIrTvtDeGIGxgA2/gqRrx9P5hNTiiXiKjraQlNvGeHKNmrpNCUtf94sphbsgbTBY1ZOwADWbIBQeDaZ+jmzIbp2fpuvcr9xJyGXjttxvp64/E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=JKgQyOc4; arc=none smtp.client-ip=117.135.210.5
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=8c
-	/s81jJ8XfUFj1XX+nPJWWR3FWC7S9JSVsCchKpsKQ=; b=JKgQyOc4akzrt0bj9G
-	w2YKp9xFtyrjakSuobdwxLC5biQ6NneFEWQykQ7XmXf2vn1nHgDm1flB3kdH7gAt
-	SC9RrMcfmDpzzLHaufd0ExK5rWk+34KjpLO8RlaqIaaSlVYYzfPLz5aAAYq71wSY
-	rv9MbJmLGVPCGyODkx0VNKGgE=
-Received: from ZM.localdomain (unknown [])
-	by gzga-smtp-mtada-g0-2 (Coremail) with SMTP id _____wD3PvcqZypqI94RCw--.19273S5;
-	Thu, 11 Jun 2026 15:43:43 +0800 (CST)
-From: Ziming Zhu <zmzhu0630@163.com>
-To: Guenter Roeck <linux@roeck-us.net>
-Cc: Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>,
+	s=arc-20240116; t=1781164557; c=relaxed/simple;
+	bh=tYiFxavXausdnzeNk9fIDaCPQba67WTZfVllk2Ur48E=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=RcVPy64NjRAnpYBUqjyaz6ES2aUGhI5pxeY/FE37VTFCqj2Pa+yC4LS8ShWrPBXDTjke2mosK5oNL+q1/pNMPMNseb+IcfVqw6V6wHuOZEAMO9be4jWn4nmLBPBcA2QBfGCrMMD/gd9dPub5PW2jT2Mqr0LpLJRaQI3cct8qUe8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org; spf=pass smtp.mailfrom=mailbox.org; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=puZ/sOua; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=ewz0UhNi; arc=none smtp.client-ip=80.241.56.151
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [IPv6:2001:67c:2050:b231:465::2])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gbZhT5Fjhz9v3j;
+	Thu, 11 Jun 2026 09:55:53 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1781164553;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=pAV1UJ1no9WK2q1zB1twcHH/8NnwCGBjRhicKU7e0vA=;
+	b=puZ/sOua+HmFqhOVGBagYqGiMhvW8PyeLudvB3i6fAlAVjArxlL3LzQj69ZXFyV1a/Ygpg
+	jHRRWLqB4uuPO8pC6DS3Q8r3vb2NkKIn8sqNPmQBuvVYbAhAcg6Ct4piT+8MExzw9NOxCq
+	eqR2zI0ayYNwfT5/ug7gRxlUSSxHSn5Ec6d8yoi3pwYtzyCo8AdED5BhO7S42+/0ONmcur
+	bOhG/LR+IhtKFZGd9Z/SLs4W71vwMXZQGe/Xaiy/WOuUqy3Ht/sl2mgm+aemrmR27awGFt
+	1k1z78AdeqSPIQPTuPRwluH9h8A/SlcIntlsaNXNInXXe/p+HW0ydG1epRnoTQ==
+From: Manuel Ebner <manuelebner@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1781164552;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=pAV1UJ1no9WK2q1zB1twcHH/8NnwCGBjRhicKU7e0vA=;
+	b=ewz0UhNiI12koaJNchIgEkpzdMn8j3hdQUXel82ibazfssS7eVxJVgmL7kkW4jrkwp4dCP
+	GAXw0g3Ww/nGe2XhhzP+Ny8yvNMZ8GelbsIY7VUVA5fdR3Vj3C5QqlQ2svQX2MiXk3xC8W
+	OGqWgpKsnd9sXxUH4rQ0xlaw3wmmS7O5GsD11hG+ILqKRh+gjnOUtSdbU5TXP2umECJVlb
+	iy1fdvK3JqE7+kfQkYWup+nHh2BUwPDa7Lf+SeFk901GAV+WQGd8wq3aAZBINuz3tctyCj
+	3BlYwI8co0z6T6S/kzQuUdLHJ2nqo+tTWx9InF0g1e9INgpykIfwPLxuBObqNA==
+To: Jonathan Corbet <corbet@lwn.net>,
 	Shuah Khan <skhan@linuxfoundation.org>,
-	linux-hwmon@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	Ziming Zhu <ziming.zhu@silergycorp.com>
-Subject: [PATCH v3 3/3] hwmon: Add documentation for SQ24860
-Date: Thu, 11 Jun 2026 15:43:35 +0800
-Message-Id: <20260611074335.4415-4-zmzhu0630@163.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20260611074335.4415-1-zmzhu0630@163.com>
-References: <20260611074335.4415-1-zmzhu0630@163.com>
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	linux-media@vger.kernel.org,
+	linux-doc@vger.kernel.org (open list:DOCUMENTATION),
+	linux-kernel@vger.kernel.org (open list)
+Cc: Manuel Ebner <manuelebner@mailbox.org>
+Subject: [PATCH] Documentation: admin-guide: fix bracelets and translation issue
+Date: Thu, 11 Jun 2026 09:55:14 +0200
+Message-ID: <20260611075513.124994-2-manuelebner@mailbox.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -68,176 +80,90 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:_____wD3PvcqZypqI94RCw--.19273S5
-X-Coremail-Antispam: 1Uf129KBjvJXoWxJF1DXry3Kw47Zw13Kry7trb_yoWruw4DpF
-	93GrySkw1UXrW7WFW3tw18Zrs8Gay8Ar43AF1kJryrZ3Z8Ar1v9rnrKr13Ja4DKrn5AFWr
-	KF4UtrWUJw4jkFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07U_b1nUUUUU=
-X-CM-SenderInfo: x2p2x3aqwtiqqrwthudrp/xtbC6BALBGoqZzAGAgAA3k
+X-MBO-RS-META: 1dpimzm3zsfohwpso9nx3srzqjqkp49i
+X-MBO-RS-ID: a1bc5a2f346bd7c1d65
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.84 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[163.com,none];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[163.com:s=s110527];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[mailbox.org,reject];
+	R_DKIM_ALLOW(-0.20)[mailbox.org:s=mail20150812];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	TAGGED_FROM(0.00)[bounces-91929-lists,linux-doc=lfdr.de];
-	TO_DN_SOME(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:mchehab@kernel.org,m:linux-media@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:manuelebner@mailbox.org,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER(0.00)[zmzhu0630@163.com,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-91932-lists,linux-doc=lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:linux@roeck-us.net,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-hwmon@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:ziming.zhu@silergycorp.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[manuelebner@mailbox.org,linux-doc@vger.kernel.org];
+	RCVD_COUNT_THREE(0.00)[4];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[163.com];
-	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[zmzhu0630@163.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[163.com:+];
 	ALIAS_RESOLVED(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[manuelebner@mailbox.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[mailbox.org:+];
+	RCPT_COUNT_SEVEN(0.00)[7];
+	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,vger.kernel.org:from_smtp,silergycorp.com:email]
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FROM_HAS_DN(0.00)[]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: B4BA166F7E1
+X-Rspamd-Queue-Id: 4844C66FA3D
 
-From: Ziming Zhu <ziming.zhu@silergycorp.com>
+Add missing ] and replace 'neuer Name' with 'new Name'.
 
-Document the supported sysfs attributes for the Silergy SQ24860 PMBus
-hwmon driver.
-
-Signed-off-by: Ziming Zhu <ziming.zhu@silergycorp.com>
+Signed-off-by: Manuel Ebner <manuelebner@mailbox.org>
 ---
- Documentation/hwmon/index.rst   |  1 +
- Documentation/hwmon/sq24860.rst | 96 +++++++++++++++++++++++++++++++++
- 2 files changed, 97 insertions(+)
- create mode 100644 Documentation/hwmon/sq24860.rst
+ Documentation/admin-guide/kernel-parameters.txt | 6 +++---
+ Documentation/admin-guide/media/bttv.rst        | 2 +-
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/Documentation/hwmon/index.rst b/Documentation/hwmon/index.rst
-index 8b655e5d6b68..6184b88e2095 100644
---- a/Documentation/hwmon/index.rst
-+++ b/Documentation/hwmon/index.rst
-@@ -243,6 +243,7 @@ Hardware Monitoring Kernel Drivers
-    smsc47m1
-    sparx5-temp
-    spd5118
-+   sq24860
-    stpddc60
-    surface_fan
-    sy7636a-hwmon
-diff --git a/Documentation/hwmon/sq24860.rst b/Documentation/hwmon/sq24860.rst
-new file mode 100644
-index 000000000000..f0182b955d8a
---- /dev/null
-+++ b/Documentation/hwmon/sq24860.rst
-@@ -0,0 +1,96 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+Kernel driver sq24860
-+=====================
-+
-+Supported chips:
-+
-+  * Silergy SQ24860
-+
-+    Prefix: 'sq24860'
-+
-+Author:
-+
-+	Ziming Zhu <ziming.zhu@silergycorp.com>
-+
-+Description
-+------------
-+
-+This driver implements support for the Silergy SQ24860 eFuse. The device is an
-+integrated circuit protection and power management device with a PMBus
-+interface.
-+
-+The device supports direct format for reading input voltage, output voltage,
-+auxiliary voltage, input current, input power, and temperature.
-+
-+The current and power measurement scale depends on the resistor connected
-+between the IMON pin and ground. The resistor value can be configured with the
-+``silergy,rimon-micro-ohms`` device tree property. See
-+``Documentation/devicetree/bindings/hwmon/pmbus/silergy,sq24860.yaml`` for details.
-+
-+Due to the specificities of the chip, all history reset attributes are tied
-+together. Resetting the history of one sensor resets the history of all sensors.
-+
-+Sysfs entries
-+-------------
-+
-+The following attributes are supported. Limits are read-write; all other
-+attributes are read-only.
-+
-+======================= ======================================================
-+in1_label               "vin"
-+in1_input               Measured input voltage.
-+in1_average             Average measured input voltage.
-+in1_min                 Minimum input voltage limit.
-+in1_lcrit               Critical low input voltage limit.
-+in1_max                 Maximum input voltage limit.
-+in1_crit                Critical high input voltage limit.
-+in1_min_alarm           Input voltage low warning alarm.
-+in1_lcrit_alarm         Input voltage low fault alarm.
-+in1_max_alarm           Input voltage high warning alarm.
-+in1_crit_alarm          Input voltage high fault alarm.
-+in1_highest             Historical maximum input voltage.
-+in1_lowest              Historical minimum input voltage.
-+in1_reset_history       Write any value to reset history.
-+
-+in2_label               "vmon"
-+in2_input               Measured auxiliary input voltage.
-+
-+in3_label               "vout1"
-+in3_input               Measured output voltage.
-+in3_average             Average measured output voltage.
-+in3_min                 Minimum output voltage limit.
-+in3_min_alarm           Output voltage low alarm.
-+in3_lowest              Historical minimum output voltage.
-+in3_reset_history       Write any value to reset history.
-+
-+curr1_label             "iin"
-+curr1_input             Measured input current.
-+curr1_average           Average measured input current.
-+curr1_max               Maximum input current warning limit.
-+curr1_crit              Critical input over-current fault limit.
-+curr1_max_alarm         Input current warning alarm.
-+curr1_crit_alarm        Input over-current fault alarm.
-+curr1_highest           Historical maximum input current.
-+curr1_reset_history     Write any value to reset history.
-+
-+power1_label            "pin"
-+power1_input            Measured input power.
-+power1_average          Average measured input power.
-+power1_max              Maximum input power warning limit.
-+power1_alarm            Input power warning alarm.
-+power1_input_highest    Historical maximum input power.
-+power1_reset_history    Write any value to reset history.
-+
-+temp1_input             Measured temperature.
-+temp1_average           Average measured temperature.
-+temp1_max               Maximum temperature warning limit.
-+temp1_crit              Critical temperature fault limit.
-+temp1_max_alarm         Temperature warning alarm.
-+temp1_crit_alarm        Temperature fault alarm.
-+temp1_highest           Historical maximum temperature.
-+temp1_reset_history     Write any value to reset history.
-+
-+samples                 Number of samples used for average values.
-+======================= ======================================================
-+
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+index 00375193bd26..17363d525ae3 100644
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -6414,9 +6414,9 @@ Kernel parameters
+ 	reboot=		[KNL]
+ 			Format (x86 or x86_64):
+ 				[w[arm] | c[old] | h[ard] | s[oft] | g[pio]] | d[efault] \
+-				[[,]s[mp]#### \
++				[[,]s[mp]####] \
+ 				[[,]b[ios] | a[cpi] | k[bd] | t[riple] | e[fi] | p[ci]] \
+-				[[,]f[orce]
++				[[,]f[orce]]
+ 			Where reboot_mode is one of warm (soft) or cold (hard) or gpio
+ 					(prefix with 'panic_' to set mode for panic
+ 					reboot only),
+@@ -6917,7 +6917,7 @@ Kernel parameters
+ 			apic=verbose is specified.
+ 			Example: apic=debug show_lapic=all
+ 
+-	slab_debug[=options[,slabs][;[options[,slabs]]...]	[MM]
++	slab_debug[=options[,slabs][;[options[,slabs]]...]]	[MM]
+ 			Enabling slab_debug allows one to determine the
+ 			culprit if slab objects become corrupted. Enabling
+ 			slab_debug can create guard zones around objects and
+diff --git a/Documentation/admin-guide/media/bttv.rst b/Documentation/admin-guide/media/bttv.rst
+index 58cbaf6df694..78c3e560b806 100644
+--- a/Documentation/admin-guide/media/bttv.rst
++++ b/Documentation/admin-guide/media/bttv.rst
+@@ -1239,7 +1239,7 @@ Models:
+ - Galaxis DVB Card C CI
+ - Galaxis DVB Card S
+ - Galaxis DVB Card C
+-- Galaxis plug.in S [neuer Name: Galaxis DVB Card S CI
++- Galaxis plug.in S [new Name: Galaxis DVB Card S CI]
+ 
+ Hauppauge
+ ~~~~~~~~~
 -- 
-2.25.1
+2.54.0
 
 
