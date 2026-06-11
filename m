@@ -1,262 +1,175 @@
-Return-Path: <linux-doc+bounces-91915-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91921-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id l1aTC3JUKmrznQMAu9opvQ
-	(envelope-from <linux-doc+bounces-91915-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 08:23:46 +0200
+	id Ds5RG8dYKmpTnwMAu9opvQ
+	(envelope-from <linux-doc+bounces-91921-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 08:42:15 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 98D3F66EFF3
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 08:23:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B1E7F66F1A7
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 08:42:14 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
 	dkim=none;
-	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=hygon.cn (policy=none);
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91915-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-91915-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=none;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91921-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-91921-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 2A2C2314F0FC
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 06:22:22 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id BEA2531E55F9
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 06:39:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EA09635E1B6;
-	Thu, 11 Jun 2026 06:22:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5FF7F361DD2;
+	Thu, 11 Jun 2026 06:39:58 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mailgw1.hygon.cn (unknown [101.204.27.37])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EA7E32BD58A;
-	Thu, 11 Jun 2026 06:22:02 +0000 (UTC)
+Received: from cstnet.cn (smtp21.cstnet.cn [159.226.251.21])
+	(using TLSv1.2 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 888963612E9;
+	Thu, 11 Jun 2026 06:39:52 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781158941; cv=none; b=ucU+pqEWz54sbhNTY6rE559Jv6mydt2BYDqQ9Gglmg07DPOoe58YkxWuK9xPwbl/QdY9Y6YbhJbN4qmAnzag1MkTCWzMFQywrONRWXxDyJeOrAQvkrac2bguJcuZp9Q0L/Ik/94oDiVjkraLAWZYo+2aqT8lPZmGcVcOTsaMMPo=
+	t=1781159998; cv=none; b=gHax5XnwVCCU6KQ2a4v6yKdQVX60hz//wlx+RuR0upcoBdfmNd2THA27SPEdSAc23APAFac6t/hGQutybOmS9PfPMUfbmDXwBaeEFeoPXUZH11NBh02ckcWMGkTLFDTYI9LmKYxsC3rJtJJA8vRXVv12/tF4zSyF3BLe7+H2dZ8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781158941; c=relaxed/simple;
-	bh=HpKx7iNOoNn/W9ykpZyJTUq/2x/av0MA7ffeHEjPGko=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=RmKGS8aHTmNFo5kwQH0CKxTzHTB4hCEF5AMehAMO7cWI4sj+PPIo/AxM1q/9y/HDf0u5uFmntdAfcCbswJvaQxT3WhO0Leywo+2gxrBlAmaeXlLdeaAbrd4yyAENbKlF5CV913nhVBL0qjosaHKUiYXIi4LTrZX6vdhq7tw1sEo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=hygon.cn; spf=pass smtp.mailfrom=hygon.cn; arc=none smtp.client-ip=101.204.27.37
-Received: from maildlp2.hygon.cn (unknown [127.0.0.1])
-	by mailgw1.hygon.cn (Postfix) with ESMTP id 4gbXc774mMz1dd8x;
-	Thu, 11 Jun 2026 14:21:59 +0800 (CST)
-Received: from maildlp2.hygon.cn (unknown [172.23.18.61])
-	by mailgw1.hygon.cn (Postfix) with ESMTP id 4gbXc66yN9z1dd8p;
-	Thu, 11 Jun 2026 14:21:58 +0800 (CST)
-Received: from cncheex04.Hygon.cn (unknown [172.23.18.114])
-	by maildlp2.hygon.cn (Postfix) with ESMTPS id A4BFA30004DB;
-	Thu, 11 Jun 2026 14:20:33 +0800 (CST)
-Received: from hsj-2U-Workstation.hygon.cn (172.19.20.61) by
- cncheex04.Hygon.cn (172.23.18.114) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.36; Thu, 11 Jun 2026 14:21:53 +0800
-From: Huang Shijie <huangsj@hygon.cn>
-To: <akpm@linux-foundation.org>, <viro@zeniv.linux.org.uk>,
-	<brauner@kernel.org>, <jack@suse.cz>, <muchun.song@linux.dev>,
-	<osalvador@suse.de>, <david@kernel.org>
-CC: <surenb@google.com>, <mjguzik@gmail.com>, <liam@infradead.org>,
-	<ljs@kernel.org>, <vbabka@kernel.org>, <shakeel.butt@linux.dev>,
-	<rppt@kernel.org>, <mhocko@suse.com>, <corbet@lwn.net>,
-	<skhan@linuxfoundation.org>, <linux@armlinux.org.uk>, <dinguyen@kernel.org>,
-	<schuster.simon@siemens-energy.com>, <James.Bottomley@HansenPartnership.com>,
-	<deller@gmx.de>, <djbw@kernel.org>, <willy@infradead.org>,
-	<peterz@infradead.org>, <mingo@redhat.com>, <acme@kernel.org>,
-	<namhyung@kernel.org>, <mark.rutland@arm.com>,
-	<alexander.shishkin@linux.intel.com>, <jolsa@kernel.org>,
-	<irogers@google.com>, <adrian.hunter@intel.com>, <james.clark@linaro.org>,
-	<mhiramat@kernel.org>, <oleg@redhat.com>, <ziy@nvidia.com>,
-	<baolin.wang@linux.alibaba.com>, <npache@redhat.com>, <ryan.roberts@arm.com>,
-	<dev.jain@arm.com>, <baohua@kernel.org>, <lance.yang@linux.dev>,
-	<linmiaohe@huawei.com>, <nao.horiguchi@gmail.com>, <jannh@google.com>,
-	<pfalcato@suse.de>, <riel@surriel.com>, <harry@kernel.org>,
-	<will@kernel.org>, <brian.ruley@gehealthcare.com>,
-	<rmk+kernel@armlinux.org.uk>, <dave.anglin@bell.net>, <linux-mm@kvack.org>,
-	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-	<linux-arm-kernel@lists.infradead.org>, <linux-parisc@vger.kernel.org>,
-	<linux-fsdevel@vger.kernel.org>, <nvdimm@lists.linux.dev>,
-	<linux-perf-users@vger.kernel.org>, <linux-trace-kernel@vger.kernel.org>,
-	<zhongyuan@hygon.cn>, <fangbaoshun@hygon.cn>, <yingzhiwei@hygon.cn>, Huang
- Shijie <huangsj@hygon.cn>
-Subject: [PATCH v2 4/4] docs/mm: update document for split i_mmap tree
-Date: Thu, 11 Jun 2026 14:19:00 +0800
-Message-ID: <20260611061915.2354307-5-huangsj@hygon.cn>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260611061915.2354307-1-huangsj@hygon.cn>
-References: <20260611061915.2354307-1-huangsj@hygon.cn>
+	s=arc-20240116; t=1781159998; c=relaxed/simple;
+	bh=54vBGeTdxA5doM24U7VWmpi0FaeDHI+XNnvNwaJMOcA=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=EYFIuEEq881OBPiQa94NB/W//5iFkX+QxiiYryK78nldSRIzJ7oKx69VuciMlk/gVNGGIUvgtGRJvBjfmCaQ1xaiTkmb6PafmopoCW7OB+oxdfbywR1MFU99i+3RkCO4DxURBTH6Sue73d5Ulwvbls6TEgWUl5aNR3NpZcwA/bk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn; spf=pass smtp.mailfrom=iscas.ac.cn; arc=none smtp.client-ip=159.226.251.21
+Received: from localhost.localdomain (unknown [111.196.245.140])
+	by APP-01 (Coremail) with SMTP id qwCowADHbdYgWCpqYOJFAQ--.1790S2;
+	Thu, 11 Jun 2026 14:39:28 +0800 (CST)
+From: Pengpeng Hou <pengpeng@iscas.ac.cn>
+To: Vlastimil Babka <vbabka@kernel.org>,
+	Harry Yoo <harry@kernel.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	linux-mm@kvack.org
+Cc: Hao Li <hao.li@linux.dev>,
+	Christoph Lameter <cl@gentwo.org>,
+	David Rientjes <rientjes@google.com>,
+	Roman Gushchin <roman.gushchin@linux.dev>,
+	David Hildenbrand <david@kernel.org>,
+	Lorenzo Stoakes <ljs@kernel.org>,
+	liam@infradead.org,
+	Mike Rapoport <rppt@kernel.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Michal Hocko <mhocko@suse.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Pengpeng Hou <pengpeng@iscas.ac.cn>
+Subject: [RFC PATCH 0/5] mm/slub: preserve previous object lifetime
+Date: Thu, 11 Jun 2026 14:39:21 +0800
+Message-ID: <20260611063926.38111-1-pengpeng@iscas.ac.cn>
+X-Mailer: git-send-email 2.50.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: cncheex05.Hygon.cn (172.23.18.115) To cncheex04.Hygon.cn
- (172.23.18.114)
+X-CM-TRANSID:qwCowADHbdYgWCpqYOJFAQ--.1790S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7tFy3WFWxuFy8ZF4rGFW3Wrg_yoW8tr13pr
+	43Kr4ftFnrJrWSkwsxC34kXrn5Zw4rW3y8WFyagr4Uur4rWr1FyFn7KFWYv3Wxury7CFy2
+	vrZYgasxCryDZFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUU9Y14x267AKxVW5JVWrJwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+	1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+	6r4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
+	CE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
+	2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
+	W8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2
+	Y2ka0xkIwI1lc7CjxVAaw2AFwI0_GFv_Wryl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x
+	0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2
+	zVAF1VAY17CE14v26r4a6rW5MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF
+	4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWU
+	CwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCT
+	nIWIevJa73UjIFyTuYvjTRNJ5oDUUUU
+X-CM-SenderInfo: pshqw1xhqjqxpvfd2hldfou0/
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [1.14 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [0.04 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	R_MISSING_CHARSET(0.50)[];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[hygon.cn : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:akpm@linux-foundation.org,m:viro@zeniv.linux.org.uk,m:brauner@kernel.org,m:jack@suse.cz,m:muchun.song@linux.dev,m:osalvador@suse.de,m:david@kernel.org,m:surenb@google.com,m:mjguzik@gmail.com,m:liam@infradead.org,m:ljs@kernel.org,m:vbabka@kernel.org,m:shakeel.butt@linux.dev,m:rppt@kernel.org,m:mhocko@suse.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux@armlinux.org.uk,m:dinguyen@kernel.org,m:schuster.simon@siemens-energy.com,m:James.Bottomley@HansenPartnership.com,m:deller@gmx.de,m:djbw@kernel.org,m:willy@infradead.org,m:peterz@infradead.org,m:mingo@redhat.com,m:acme@kernel.org,m:namhyung@kernel.org,m:mark.rutland@arm.com,m:alexander.shishkin@linux.intel.com,m:jolsa@kernel.org,m:irogers@google.com,m:adrian.hunter@intel.com,m:james.clark@linaro.org,m:mhiramat@kernel.org,m:oleg@redhat.com,m:ziy@nvidia.com,m:baolin.wang@linux.alibaba.com,m:npache@redhat.com,m:ryan.roberts@arm.com,m:dev.jain@arm.com,m:baohua@kernel.org,m:lance.yang@linux.dev,m:linmiaohe
- @huawei.com,m:nao.horiguchi@gmail.com,m:jannh@google.com,m:pfalcato@suse.de,m:riel@surriel.com,m:harry@kernel.org,m:will@kernel.org,m:brian.ruley@gehealthcare.com,m:rmk+kernel@armlinux.org.uk,m:dave.anglin@bell.net,m:linux-mm@kvack.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-parisc@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:nvdimm@lists.linux.dev,m:linux-perf-users@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:zhongyuan@hygon.cn,m:fangbaoshun@hygon.cn,m:yingzhiwei@hygon.cn,m:huangsj@hygon.cn,s:lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-91915-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER(0.00)[huangsj@hygon.cn,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[google.com,gmail.com,infradead.org,kernel.org,linux.dev,suse.com,lwn.net,linuxfoundation.org,armlinux.org.uk,siemens-energy.com,HansenPartnership.com,gmx.de,redhat.com,arm.com,linux.intel.com,intel.com,linaro.org,nvidia.com,linux.alibaba.com,huawei.com,suse.de,surriel.com,gehealthcare.com,bell.net,kvack.org,vger.kernel.org,lists.infradead.org,lists.linux.dev,hygon.cn];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,hygon.cn:email,hygon.cn:mid,hygon.cn:from_mime,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	DMARC_NA(0.00)[iscas.ac.cn];
+	FORGED_RECIPIENTS(0.00)[m:vbabka@kernel.org,m:harry@kernel.org,m:akpm@linux-foundation.org,m:linux-mm@kvack.org,m:hao.li@linux.dev,m:cl@gentwo.org,m:rientjes@google.com,m:roman.gushchin@linux.dev,m:david@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:pengpeng@iscas.ac.cn,s:lists@lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-91921-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[pengpeng@iscas.ac.cn,linux-doc@vger.kernel.org];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[huangsj@hygon.cn,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[pengpeng@iscas.ac.cn,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[66];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	R_DKIM_NA(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,kernel];
-	RCVD_COUNT_SEVEN(0.00)[7]
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,iscas.ac.cn:mid,iscas.ac.cn:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 98D3F66EFF3
+X-Rspamd-Queue-Id: B1E7F66F1A7
 
-Document the i_mmap locking changes introduced by the following patches:
-- Use mapping_mapped() to simplify the code
-- Use get_i_mmap_root() to access the file's i_mmap
-- Split the file's i_mmap tree (CONFIG_SPLIT_I_MMAP)
+SLAB_STORE_USER currently stores one allocation track and one free track
+for an object. This is useful, but it loses part of the previous lifetime
+when the object is reused: the new allocation overwrites the allocation
+track, and a later stale free can overwrite the free track.
 
-Add documentation for:
-- CONFIG_SPLIT_I_MMAP split i_mmap tree architecture with per-tree locks
-- New per-tree lock helpers: i_mmap_tree_lock_write/unlock_write
-- New vm_area_struct.tree_idx field for sibling tree selection
-- Updated i_mmap_lock_read/write semantics acquiring all per-tree locks
-- Updated lock ordering notes for split tree configuration
-- Updated page table freeing section for split tree scenario
+For free-after-reuse bugs, the report can therefore contain the victim
+allocation and the stale free, while the earlier alloc/free pair that
+explains where the stale pointer came from is no longer available.
 
-Signed-off-by: Huang Shijie <huangsj@hygon.cn>
----
- Documentation/mm/process_addrs.rst | 63 +++++++++++++++++++++++-------
- 1 file changed, 49 insertions(+), 14 deletions(-)
+This RFC adds an opt-in SLUB debug option to keep one previous completed
+object lifetime. The option is disabled by default, is not part of the
+default debug flags, and only takes effect when user tracking is already
+enabled:
 
-diff --git a/Documentation/mm/process_addrs.rst b/Documentation/mm/process_addrs.rst
-index 851680ead45f..4aed3100b249 100644
---- a/Documentation/mm/process_addrs.rst
-+++ b/Documentation/mm/process_addrs.rst
-@@ -60,6 +60,15 @@ Terminology
-   :c:func:`!i_mmap_[try]lock_write` for file-backed memory. We refer to these
-   locks as the reverse mapping locks, or 'rmap locks' for brevity.
- 
-+  When :c:macro:`!CONFIG_SPLIT_I_MMAP` is enabled, the file-backed i_mmap tree
-+  is split into multiple sibling trees (one per NUMA node or a number based on
-+  CPU count), each with its own :c:type:`!struct i_mmap_tree` containing a
-+  red/black interval tree and a :c:type:`!struct rw_semaphore`. In this
-+  configuration, :c:func:`!i_mmap_lock_read` and :c:func:`!i_mmap_lock_write`
-+  acquire all per-tree locks, while VMA insert/remove operations use the
-+  per-tree granularity :c:func:`!i_mmap_tree_lock_write` to lock only the
-+  relevant sibling tree, significantly reducing lock contention.
-+
- We discuss page table locks separately in the dedicated section below.
- 
- The first thing **any** of these locks achieve is to **stabilise** the VMA
-@@ -230,12 +239,16 @@ These are the core fields which describe the MM the VMA belongs to and its attri
-                                                            Updated under mmap read lock by
-                                                            :c:func:`!task_numa_work`.
-    :c:member:`!vm_userfaultfd_ctx`   CONFIG_USERFAULTFD    Userfaultfd context wrapper object of    mmap write,
--                                                           type :c:type:`!vm_userfaultfd_ctx`,      VMA write.
--                                                           either of zero size if userfaultfd is
--                                                           disabled, or containing a pointer
--                                                           to an underlying
--                                                           :c:type:`!userfaultfd_ctx` object which
--                                                           describes userfaultfd metadata.
-+                                                            type :c:type:`!vm_userfaultfd_ctx`,      VMA write.
-+                                                            either of zero size if userfaultfd is
-+                                                            disabled, or containing a pointer
-+                                                            to an underlying
-+                                                            :c:type:`!userfaultfd_ctx` object which
-+                                                            describes userfaultfd metadata.
-+   :c:member:`!tree_idx`             CONFIG_SPLIT_I_MMAP   The index of the sibling i_mmap tree     Written once on
-+                                                            that this VMA belongs to, set at         initial map.
-+                                                            VMA creation time based on the NUMA
-+                                                            node or the smallest sibling tree.
-    ================================= ===================== ======================================== ===============
- 
- These fields are present or not depending on whether the relevant kernel
-@@ -247,12 +260,18 @@ configuration option is set.
-    Field                               Description                               Write lock
-    =================================== ========================================= ============================
-    :c:member:`!shared.rb`              A red/black tree node used, if the        mmap write, VMA write,
--                                       mapping is file-backed, to place the VMA  i_mmap write.
--                                       in the
--                                       :c:member:`!struct address_space->i_mmap`
--                                       red/black interval tree.
-+                                        mapping is file-backed, to place the VMA  i_mmap write (or per-tree
-+                                        in the                                    i_mmap write when
-+                                        :c:member:`!struct address_space->i_mmap` :c:macro:`!CONFIG_SPLIT_I_MMAP`
-+                                        red/black interval tree (or one of the    is set).
-+                                        sibling trees when
-+                                        :c:macro:`!CONFIG_SPLIT_I_MMAP`
-+                                        is enabled).
-    :c:member:`!shared.rb_subtree_last` Metadata used for management of the       mmap write, VMA write,
--                                       interval tree if the VMA is file-backed.  i_mmap write.
-+                                        interval tree if the VMA is file-backed.  i_mmap write (or per-tree
-+                                                                                  i_mmap write when
-+                                                                                  :c:macro:`!CONFIG_SPLIT_I_MMAP`
-+                                                                                  is set).
-    :c:member:`!anon_vma_chain`         List of pointers to both forked/CoW’d     mmap read, anon_vma write.
-                                        :c:type:`!anon_vma` objects and
-                                        :c:member:`!vma->anon_vma` if it is
-@@ -490,6 +509,16 @@ There is also a file-system specific lock ordering comment located at the top of
- Please check the current state of these comments which may have changed since
- the time of writing of this document.
- 
-+.. note:: When :c:macro:`!CONFIG_SPLIT_I_MMAP` is enabled, the single
-+   ``mapping->i_mmap_rwsem`` is replaced by an array of per-tree locks
-+   ``mapping->i_mmap[i]->rwsem``. The lock ordering positions of
-+   ``mapping->i_mmap_rwsem`` above apply to each per-tree lock
-+   equivalently. VMA insert/remove operations acquire only the relevant
-+   per-tree lock via :c:func:`!i_mmap_tree_lock_write`, while operations
-+   that require all trees to be locked (such as
-+   :c:func:`!unmap_mapping_range`) acquire all per-tree locks via
-+   :c:func:`!i_mmap_lock_write` or :c:func:`!i_mmap_lock_read`.
-+
- ------------------------------
- Locking Implementation Details
- ------------------------------
-@@ -704,11 +733,15 @@ traversed or referenced by concurrent tasks.
- 
- It is insufficient to simply hold an mmap write lock and VMA lock (which will
- prevent racing faults, and rmap operations), as a file-backed mapping can be
--truncated under the :c:struct:`!struct address_space->i_mmap_rwsem` alone.
-+truncated under the :c:struct:`!struct address_space->i_mmap_rwsem` alone
-+(or, when :c:macro:`!CONFIG_SPLIT_I_MMAP` is enabled, under all per-tree
-+``mapping->i_mmap[i]->rwsem`` locks acquired via
-+:c:func:`!i_mmap_lock_write`).
- 
- As a result, no VMA which can be accessed via the reverse mapping (either
- through the :c:struct:`!struct anon_vma->rb_root` or the :c:member:`!struct
--address_space->i_mmap` interval trees) can have its page tables torn down.
-+address_space->i_mmap` interval trees, or the sibling trees when
-+:c:macro:`!CONFIG_SPLIT_I_MMAP` is enabled) can have its page tables torn down.
- 
- The operation is typically performed via :c:func:`!free_pgtables`, which assumes
- either the mmap write lock has been taken (as specified by its
-@@ -729,7 +762,9 @@ cleared without page table locks (in the :c:func:`!pgd_clear`, :c:func:`!p4d_cle
- .. note:: It is possible for leaf page tables to be torn down independent of
-           the page tables above it as is done by
-           :c:func:`!retract_page_tables`, which is performed under the i_mmap
--          read lock, PMD, and PTE page table locks, without this level of care.
-+          read lock (or all per-tree ``mapping->i_mmap[i]->rwsem`` locks in
-+          read mode when :c:macro:`!CONFIG_SPLIT_I_MMAP` is enabled), PMD, and
-+          PTE page table locks, without this level of care.
- 
- Page table moving
- ^^^^^^^^^^^^^^^^^
+  slab_debug=UH,kmalloc-128
+
+The series intentionally does not attempt to infer semantic ownership or
+identify the root cause of a use-after-free. It only preserves and prints
+additional track records that SLUB already knows how to collect.
+
+This is sent as RFC because the user-visible interface and the cost/benefit
+tradeoff should be agreed on before this becomes a normal patch series.
+In particular, feedback would be useful on:
+
+- whether a separate H option is preferable to extending U directly
+- whether H should require U, as implemented here, or imply U
+- whether the extra per-object metadata is useful enough for this debug path
+
+Not included yet:
+
+- KUnit coverage or a standalone reproducer
+- object-size/order comparison data for representative caches
+- runtime benchmark data for slab_debug=U vs slab_debug=UH
+
+Those should be added before a non-RFC submission if the direction looks
+acceptable.
+
+Pengpeng Hou (5):
+  mm/slub: factor user tracking metadata size calculation
+  mm/slub: add optional previous lifetime user tracking
+  mm/slub: print previous object lifetime in debug reports
+  Documentation/mm: document SLUB previous lifetime tracking
+  mm/slub: sanitize previous lifetime tracking flags
+
+ Documentation/admin-guide/mm/slab.rst |  22 ++++-
+ include/linux/slab.h                  |   3 +
+ mm/slab.h                             |   3 +-
+ mm/slub.c                             | 118 ++++++++++++++++++++++----
+ 4 files changed, 128 insertions(+), 18 deletions(-)
+
 -- 
-2.53.0
-
+2.50.1 (Apple Git-155)
 
 
