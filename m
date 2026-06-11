@@ -1,68 +1,77 @@
-Return-Path: <linux-doc+bounces-91916-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91922-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id smk3KDlYKmobnwMAu9opvQ
-	(envelope-from <linux-doc+bounces-91916-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 08:39:53 +0200
+	id OSc3FSVZKmpynwMAu9opvQ
+	(envelope-from <linux-doc+bounces-91922-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 08:43:49 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8801C66F15D
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 08:39:52 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E5B8866F1D6
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 08:43:48 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=none;
-	dmarc=none;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91916-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-91916-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=RkUlCj6m;
+	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=fzxd0ba2;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91922-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-91922-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=mailbox.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 879333025896
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 06:39:51 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 38CD030089B3
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 06:43:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4ED2F357CE1;
-	Thu, 11 Jun 2026 06:39:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9D3B2331EAF;
+	Thu, 11 Jun 2026 06:43:44 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from cstnet.cn (smtp21.cstnet.cn [159.226.251.21])
-	(using TLSv1.2 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32FB324DFF9;
-	Thu, 11 Jun 2026 06:39:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 568F42F0C74;
+	Thu, 11 Jun 2026 06:43:42 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781159990; cv=none; b=rfahfM6Z+OxzFIVFyXyCoR33WNh5z9y7YavKXTslEkmTUYO7aHPn9fZHq/gheZiVcqVHXE97s7UdRjRRgH8/yclJ8J2IkjVEzaSzI8fRAyuoQvSw11F6vke3uK/Tvdty6AftDk5aHE6UcQ+JPUb2tnvGr8w7sgXcpMsfUvAW1Us=
+	t=1781160224; cv=none; b=MPBxblgUIFOs9icX8khdwEIVtX3TgDqI5xXtti6WGuUFhRUN5jts5YD/EntD5KCQfGushccaqSPAKFje9Rn/dbnGuDJRchVNdNI2i0DKBsWW2HkvkR5JSlLP29IqFXXVey4DfJPxz+4MRArN1hAGFdBVF3XDwyr8qe39p7XLI2s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781159990; c=relaxed/simple;
-	bh=4/ys4fFWTlhjrY0yRGYBF4Yos0uKlELZPEjWEnLjI1Q=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=saHLBfceeVBoD9mqSXJoSkpKoiI+pwz8HZcfuMfDanaMHAz37s9JFYekLaK9dhZxqHilJ5bwTsrwhivt2az627Yjx9tfCQOCMwI/F3OQnQYRzZcPPaHWD5FsqBeLVhYo8rbGLpCFPaLnq/miBbBLdLMwQzNC0a8nfYGougyHdsQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn; spf=pass smtp.mailfrom=iscas.ac.cn; arc=none smtp.client-ip=159.226.251.21
-Received: from localhost.localdomain (unknown [111.196.245.140])
-	by APP-01 (Coremail) with SMTP id qwCowADHbdYgWCpqYOJFAQ--.1790S7;
-	Thu, 11 Jun 2026 14:39:29 +0800 (CST)
-From: Pengpeng Hou <pengpeng@iscas.ac.cn>
-To: Vlastimil Babka <vbabka@kernel.org>,
-	Harry Yoo <harry@kernel.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	linux-mm@kvack.org
-Cc: Hao Li <hao.li@linux.dev>,
-	Christoph Lameter <cl@gentwo.org>,
-	David Rientjes <rientjes@google.com>,
-	Roman Gushchin <roman.gushchin@linux.dev>,
-	David Hildenbrand <david@kernel.org>,
-	Lorenzo Stoakes <ljs@kernel.org>,
-	liam@infradead.org,
-	Mike Rapoport <rppt@kernel.org>,
-	Suren Baghdasaryan <surenb@google.com>,
-	Michal Hocko <mhocko@suse.com>,
-	Jonathan Corbet <corbet@lwn.net>,
+	s=arc-20240116; t=1781160224; c=relaxed/simple;
+	bh=Cxeo3yD8bQ4mghSwFEOqV7gQtN9YyWv36fuIIJbO480=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=apaFhNbZ6imX0TC1bnorrF8KG56ayl2FI7KNQ1+kG/qDqFli3fP5hHzeJhkWuYg3QMdW/cdzVlFcxmqA+4J3DEg+XFW22fK6ISFCLsyOp056oQ/f+mkgJWVvYbV4mQBbDSTqi8bxcnN0QPzk2KC2XdFL8emByWPaq6OGwzaQz+g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org; spf=pass smtp.mailfrom=mailbox.org; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=RkUlCj6m; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=fzxd0ba2; arc=none smtp.client-ip=80.241.56.161
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4gbY576zfPz9tnc;
+	Thu, 11 Jun 2026 08:43:39 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1781160220;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=KNOwnOoY59EO9KXyS6k+CkrGuIfKkYnDyF0oqjN2CzM=;
+	b=RkUlCj6mDCnAJzv0MZvezZZh0SA+0N2j2rXIiQiGjQcbQ6tGBNV4gBPOj3r8PaUTBC9ntY
+	7iTdNR7thm8Iryzg5ejcVkW8CVXkO4Gsq9T3k/u76FmASYUnGaMAMalzxFXhz9+rxvEDsk
+	5SZVAKCeOFeARDaXJzcTvtnGqh3OPhhi90UxDTWUAt75uy+i1JmdEnQZjObwR+3hqfiEa6
+	SKb8lzPCua5gfeu+z2cczTkxH/ctpmzohK3+Hcixs9Iy/r3fWAPLDzGkw2YhyKlbT8xg4t
+	sSevTxGb29VPUkaIRi+7EHgI33Xk2YhO+2RweMVtc8+OK3Scm6OHGfiX7roXzg==
+From: Manuel Ebner <manuelebner@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1781160218;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=KNOwnOoY59EO9KXyS6k+CkrGuIfKkYnDyF0oqjN2CzM=;
+	b=fzxd0ba2URYj9nf9wX0g6kBDOtR3GxytxHYvxydLPtu+rb6gsZeSnnxKEUX/b9pTEbDBLd
+	dPyb60uzIuxlhhmmGFW8sgSVnH8PMtklhf3QHh53xvQUIXidAuniQBqcz0n7EoF/kNkXoH
+	ijKVLYse5rdURS6JuG1RuPgn5ud9DIdF4qmtVRmHdCZin7waCdCCcona1OHI2TnBzbU5Od
+	TPMHjPbPD2H56Apvb8/LSTyAocvc8ywTljO0p1Q51O1zXx7SjCL8InOsjQWiNSbvjeHBkv
+	emeuUrbeOcDaBGfZRxc5zQb8dG0FFIL3Vb2Eknbmwo3bLwVTK/XcY6HVFmk6TA==
+To: Jonathan Corbet <corbet@lwn.net>,
 	Shuah Khan <skhan@linuxfoundation.org>,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Pengpeng Hou <pengpeng@iscas.ac.cn>
-Subject: [RFC PATCH 5/5] mm/slub: sanitize previous lifetime tracking flags
-Date: Thu, 11 Jun 2026 14:39:26 +0800
-Message-ID: <20260611063926.38111-6-pengpeng@iscas.ac.cn>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20260611063926.38111-1-pengpeng@iscas.ac.cn>
-References: <20260611063926.38111-1-pengpeng@iscas.ac.cn>
+	workflows@vger.kernel.org (open list:DOCUMENTATION PROCESS),
+	linux-doc@vger.kernel.org (open list:DOCUMENTATION),
+	linux-kernel@vger.kernel.org (open list)
+Cc: Manuel Ebner <manuelebner@mailbox.org>
+Subject: [PATCH] Documentation: process: fix brackets
+Date: Thu, 11 Jun 2026 08:43:12 +0200
+Message-ID: <20260611064311.117023-2-manuelebner@mailbox.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -70,119 +79,81 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:qwCowADHbdYgWCpqYOJFAQ--.1790S7
-X-Coremail-Antispam: 1UD129KBjvJXoW7Cr43KFWUCw13Cr15uw13CFg_yoW8uF15pa
-	y8GFn8tF48tr1fA3y7ArW8Wws3ZayrKFW2yFy5Ww1Svry5J3W5AFsakFyYvFyrJFyjya4D
-	AFWFya4FgFWUAr7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUmq14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
-	kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
-	z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
-	4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE
-	3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2I
-	x0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8
-	JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2
-	ka0xkIwI1lc7CjxVAaw2AFwI0_GFv_Wryl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Y
-	z7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zV
-	AF1VAY17CE14v26r4a6rW5MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_JFI_Gr1l
-	IxAIcVC0I7IYx2IY6xkF7I0E14v26r4UJVWxJr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r
-	1xMIIF0xvEx4A2jsIE14v26r4j6F4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJbIY
-	CTnIWIevJa73UjIFyTuYvjTRNdb1DUUUU
-X-CM-SenderInfo: pshqw1xhqjqxpvfd2hldfou0/
+X-MBO-RS-ID: 378feb314aa5abd288d
+X-MBO-RS-META: ehysenq7k1f4mcbxfnym6dje5hcmcs1b
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.04 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	DMARC_POLICY_ALLOW(-0.50)[mailbox.org,reject];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64];
+	R_DKIM_ALLOW(-0.20)[mailbox.org:s=mail20150812];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TO_DN_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
-	DMARC_NA(0.00)[iscas.ac.cn];
-	FORGED_RECIPIENTS(0.00)[m:vbabka@kernel.org,m:harry@kernel.org,m:akpm@linux-foundation.org,m:linux-mm@kvack.org,m:hao.li@linux.dev,m:cl@gentwo.org,m:rientjes@google.com,m:roman.gushchin@linux.dev,m:david@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:pengpeng@iscas.ac.cn,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-91922-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:manuelebner@mailbox.org,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-91916-lists,linux-doc=lfdr.de];
+	FORGED_SENDER(0.00)[manuelebner@mailbox.org,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[pengpeng@iscas.ac.cn,linux-doc@vger.kernel.org];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[pengpeng@iscas.ac.cn,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	R_DKIM_NA(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[manuelebner@mailbox.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[mailbox.org:+];
 	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp,iscas.ac.cn:email,iscas.ac.cn:mid,iscas.ac.cn:from_mime]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,mailbox.org:dkim,mailbox.org:email,mailbox.org:mid,mailbox.org:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 8801C66F15D
+X-Rspamd-Queue-Id: E5B8866F1D6
 
-SLAB_STORE_HISTORY only has meaning together with SLAB_STORE_USER because
-the previous lifetime records live in the user tracking metadata area.
+Fix missing ')' and needless ')'
 
-The slab_debug parser rejects H without U, but kmem_cache_create()
-callers may also pass debug flags directly. Clear SLAB_STORE_HISTORY
-whenever SLAB_STORE_USER is not present so caches cannot end up
-reporting store_history without any user tracking storage.
-
-Signed-off-by: Pengpeng Hou <pengpeng@iscas.ac.cn>
+Signed-off-by: Manuel Ebner <manuelebner@mailbox.org>
 ---
- mm/slub.c | 14 +++++++++++---
- 1 file changed, 11 insertions(+), 3 deletions(-)
+This is the first patch of a 'series', but I won't send them together
+because I'm still producing the patches and it will take me a couple weeks.
+ Documentation/process/deprecated.rst     | 2 +-
+ Documentation/process/maintainer-soc.rst | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/mm/slub.c b/mm/slub.c
-index 2dfa8af00a49..931e6d04ba2b 100644
---- a/mm/slub.c
-+++ b/mm/slub.c
-@@ -341,6 +341,14 @@ static inline unsigned int user_tracking_size(struct kmem_cache *s)
- 	return nr_user_tracks(s) * sizeof(struct track);
- }
+diff --git a/Documentation/process/deprecated.rst b/Documentation/process/deprecated.rst
+index ac75b7ecac47..03de71f654c7 100644
+--- a/Documentation/process/deprecated.rst
++++ b/Documentation/process/deprecated.rst
+@@ -388,7 +388,7 @@ allocations. For example, these open coded assignments::
+ 	ptr = kmalloc_array(count, sizeof(*ptr), gfp);
+ 	ptr = kcalloc(count, sizeof(*ptr), gfp);
+ 	ptr = kmalloc(struct_size(ptr, flex_member, count), gfp);
+-	ptr = kmalloc(sizeof(struct foo, gfp);
++	ptr = kmalloc(sizeof(struct foo), gfp);
  
-+static inline slab_flags_t sanitize_user_tracking_flags(slab_flags_t flags)
-+{
-+	if ((flags & SLAB_STORE_HISTORY) && !(flags & SLAB_STORE_USER))
-+		flags &= ~SLAB_STORE_HISTORY;
-+
-+	return flags;
-+}
-+
- #ifdef SLAB_SUPPORTS_SYSFS
- static int sysfs_slab_add(struct kmem_cache *);
- #else
-@@ -1910,7 +1918,7 @@ parse_slub_debug_flags(const char *str, slab_flags_t *flags, const char **slabs,
- 	if ((*flags & SLAB_STORE_HISTORY) && !(*flags & SLAB_STORE_USER)) {
- 		if (init)
- 			pr_err("slab_debug option 'H' requires 'U'. skipped\n");
--		*flags &= ~SLAB_STORE_HISTORY;
-+		*flags = sanitize_user_tracking_flags(*flags);
- 	}
- check_slabs:
- 	if (*str == ',')
-@@ -2052,7 +2060,7 @@ slab_flags_t kmem_cache_flags(slab_flags_t flags, const char *name)
+ become, respectively::
  
- 			if (!strncmp(name, iter, cmplen)) {
- 				flags |= block_flags;
--				return flags;
-+				return sanitize_user_tracking_flags(flags);
- 			}
+diff --git a/Documentation/process/maintainer-soc.rst b/Documentation/process/maintainer-soc.rst
+index a3a90a7d4c68..fa91dfc53783 100644
+--- a/Documentation/process/maintainer-soc.rst
++++ b/Documentation/process/maintainer-soc.rst
+@@ -60,7 +60,7 @@ All typical platform related patches should be sent via SoC submaintainers
+ shared defconfigs. Note that scripts/get_maintainer.pl might not provide
+ correct addresses for the shared defconfig, so ignore its output and manually
+ create CC-list based on MAINTAINERS file or use something like
+-``scripts/get_maintainer.pl -f drivers/soc/FOO/``).
++``scripts/get_maintainer.pl -f drivers/soc/FOO/``.
  
- 			if (!*end || *end == ';')
-@@ -2061,7 +2069,7 @@ slab_flags_t kmem_cache_flags(slab_flags_t flags, const char *name)
- 		}
- 	}
- 
--	return flags | slub_debug_local;
-+	return sanitize_user_tracking_flags(flags | slub_debug_local);
- }
- #else /* !CONFIG_SLUB_DEBUG */
- static inline void setup_object_debug(struct kmem_cache *s, void *object) {}
+ Submitting Patches to the Main SoC Maintainers
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- 
-2.50.1 (Apple Git-155)
+2.54.0
 
 
