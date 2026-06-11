@@ -1,42 +1,42 @@
-Return-Path: <linux-doc+bounces-91920-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-91919-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id fertLGdYKmoxnwMAu9opvQ
-	(envelope-from <linux-doc+bounces-91920-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 08:40:39 +0200
+	id CMOCLVtYKmornwMAu9opvQ
+	(envelope-from <linux-doc+bounces-91919-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 08:40:27 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 195E066F184
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 08:40:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4DC1466F17C
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 08:40:27 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
 	dkim=none;
 	dmarc=none;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91920-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-91920-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-91919-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-91919-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 1520C314B363
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 06:39:54 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 6C2313134080
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 06:39:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 322903655D4;
-	Thu, 11 Jun 2026 06:39:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 00198364935;
+	Thu, 11 Jun 2026 06:39:50 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from cstnet.cn (smtp21.cstnet.cn [159.226.251.21])
 	(using TLSv1.2 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 330A72D73A6;
-	Thu, 11 Jun 2026 06:39:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D01AD349CFD;
+	Thu, 11 Jun 2026 06:39:48 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781159991; cv=none; b=dGbMW+94K599BoB+4QofL3BEsGi6ZxFV7hlT9ZdahPxM7FAdZzCjwBSFp6YJs7wa9DgEDaYjMqiIY63LD4Iv9s0JuLzEeDyfIEUZ824XOflDNwVRuZTUr5GqHL5YN66if3emP8DF/yIr/DTU2N1nZi+/vVrSaxSADPZNKzhxXTA=
+	t=1781159990; cv=none; b=etLAZl8Anz7SxV0dXvbFG7txqsSPakrDuk4m1KKseWyJt7VmZV9/jfXydDda4JFX8ba0BfwTlFJnDbaoqr4sCgyuawEs42iMJ8ViI7izlNTVdBSXtZZZQ3tch3dMVlaTytiM2ZSS+UC1ZwmuhjuY4zcx3Dyz9+pFyvOKsiS40RI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781159991; c=relaxed/simple;
-	bh=GZeac2Q3yKN9bpQRwNtMJSguUt0rwpeBG3vba9+olmI=;
+	s=arc-20240116; t=1781159990; c=relaxed/simple;
+	bh=lz2HoZMBF8FNvI2A3QZXSeiccmu1krLrN+SYAnviS6k=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=lWYj1UWlEzmvkaKW7Md2UAxCfWMoBMFXHCotTqQNlGTT2jji2w8v9VTyBuWe26qR05KfOD1JDHZ4TM4dBzg5cNHpuesSbc9FrcIs8z4/gWSArRRPKbE1DLWCTpCFWDkf22UPOIe1jpRuUkPK/qpUIOw824BQyHVaoGDJDGNq2Io=
+	 MIME-Version; b=u/1ngpkFWaL+KIu9sf5dIlmka5zMpK7H+Aq1LcHVDfaW06gWYiPyF3JWAKiWEoO+bz6Xigax32l+2YqGYArbt1pvDA9FP42Nc/MJkroGkKE70ODJH/mzA95JdhXVO64Ci8io4qR2Z19z3hkEtC5N5A0lVK04MPnbVoYJxqw1juQ=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn; spf=pass smtp.mailfrom=iscas.ac.cn; arc=none smtp.client-ip=159.226.251.21
 Received: from localhost.localdomain (unknown [111.196.245.140])
-	by APP-01 (Coremail) with SMTP id qwCowADHbdYgWCpqYOJFAQ--.1790S3;
-	Thu, 11 Jun 2026 14:39:28 +0800 (CST)
+	by APP-01 (Coremail) with SMTP id qwCowADHbdYgWCpqYOJFAQ--.1790S4;
+	Thu, 11 Jun 2026 14:39:29 +0800 (CST)
 From: Pengpeng Hou <pengpeng@iscas.ac.cn>
 To: Vlastimil Babka <vbabka@kernel.org>,
 	Harry Yoo <harry@kernel.org>,
@@ -57,9 +57,9 @@ Cc: Hao Li <hao.li@linux.dev>,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Pengpeng Hou <pengpeng@iscas.ac.cn>
-Subject: [RFC PATCH 1/5] mm/slub: factor user tracking metadata size calculation
-Date: Thu, 11 Jun 2026 14:39:22 +0800
-Message-ID: <20260611063926.38111-2-pengpeng@iscas.ac.cn>
+Subject: [RFC PATCH 2/5] mm/slub: add optional previous lifetime user tracking
+Date: Thu, 11 Jun 2026 14:39:23 +0800
+Message-ID: <20260611063926.38111-3-pengpeng@iscas.ac.cn>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20260611063926.38111-1-pengpeng@iscas.ac.cn>
 References: <20260611063926.38111-1-pengpeng@iscas.ac.cn>
@@ -70,24 +70,24 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:qwCowADHbdYgWCpqYOJFAQ--.1790S3
-X-Coremail-Antispam: 1UD129KBjvJXoWxZFWxXr15CryDKFWrWF1UGFg_yoW5urWfpF
-	W7K3W7AF4UJrW2kw4rJ348uryfZrZayryxXFW3Ka4FvF98tF15ZFWIyFyjvFW8Ar97u34a
-	yrZ0kF15WrsFyw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUQYb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI
-	8067AKxVWUGwA2048vs2IY020Ec7CjxVAFwI0_Gr0_Xr1l8cAvFVAK0II2c7xJM28CjxkF
-	64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVW5JVW7JwA2z4x0Y4vE2Ix0cI8IcV
-	CY1x0267AKxVWxJVW8Jr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv
-	6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c
-	02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE
-	4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4
-	IIrI8v6xkF7I0E8cxan2IY04v7MxkF7I0En4kS14v26r4a6rW5MxAIw28IcxkI7VAKI48J
-	MxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwV
-	AFwI0_JrI_JrWlx4CE17CEb7AF67AKxVW8ZVWrXwCIc40Y0x0EwIxGrwCI42IY6xIIjxv2
-	0xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4
-	v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AK
-	xVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU8aiiDUUUUU==
+X-CM-TRANSID:qwCowADHbdYgWCpqYOJFAQ--.1790S4
+X-Coremail-Antispam: 1UD129KBjvJXoWxtFy7Gr4fWr4kZw4DGF1UGFg_yoW7XF4Dp3
+	y8GF1Dtr4Iqr1xC397Jr4UC393Xa1v9r4jk398Xw1S9a48Jw1Yvry0kFyjqryrGFyjk34U
+	ZrnYv34Y9FWUZrDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUmF14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jryl82xGYIkIc2
+	x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+	Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F4UJw
+	A2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1l
+	e2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI
+	8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwAC
+	jcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2ka0x
+	kIwI1lc7CjxVAaw2AFwI0_GFv_Wryl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_
+	Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1V
+	AY17CE14v26r4a6rW5MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAI
+	cVC0I7IYx2IY6xkF7I0E14v26F4j6r4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIx
+	AIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2
+	KfnxnUUI43ZEXa7sRipB-tUUUUU==
 X-CM-SenderInfo: pshqw1xhqjqxpvfd2hldfou0/
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [0.04 / 15.00];
@@ -103,7 +103,7 @@ X-Spamd-Result: default: False [0.04 / 15.00];
 	DMARC_NA(0.00)[iscas.ac.cn];
 	FORGED_RECIPIENTS(0.00)[m:vbabka@kernel.org,m:harry@kernel.org,m:akpm@linux-foundation.org,m:linux-mm@kvack.org,m:hao.li@linux.dev,m:cl@gentwo.org,m:rientjes@google.com,m:roman.gushchin@linux.dev,m:david@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:pengpeng@iscas.ac.cn,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-91920-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-91919-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_SENDER(0.00)[pengpeng@iscas.ac.cn,linux-doc@vger.kernel.org];
@@ -121,113 +121,165 @@ X-Spamd-Result: default: False [0.04 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[iscas.ac.cn:email,iscas.ac.cn:mid,iscas.ac.cn:from_mime,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 195E066F184
+X-Rspamd-Queue-Id: 4DC1466F17C
 
-SLAB_STORE_USER stores one allocation track and one free track after the
-object. Several offset and size calculations open-code that as
-2 * sizeof(struct track).
+SLAB_STORE_USER currently reserves two per-object tracks, one for the
+allocation and one for the free. Add an opt-in SLAB_STORE_HISTORY flag
+that extends the user tracking area to hold one previous completed
+lifetime.
 
-Introduce helpers for the number and size of user tracking records, and
-use them for the existing metadata layout calculations. This is a
-preparatory cleanup for adding optional extra user tracking records
-without changing the current layout or behavior.
+Expose the option as slab_debug=H, but require it to be used together
+with U. This avoids silently enabling user tracking and its stack depot
+cost when a user only requested H. The option is not part of the default
+debug flags.
+
+No history is recorded or printed yet; this only adds the flag, the
+object metadata layout, and the sysfs state file.
 
 Signed-off-by: Pengpeng Hou <pengpeng@iscas.ac.cn>
 ---
- mm/slub.c | 31 +++++++++++++++++++++----------
- 1 file changed, 21 insertions(+), 10 deletions(-)
+ include/linux/slab.h |  3 +++
+ mm/slab.h            |  3 ++-
+ mm/slub.c            | 36 +++++++++++++++++++++++++++++++-----
+ 3 files changed, 36 insertions(+), 6 deletions(-)
 
+diff --git a/include/linux/slab.h b/include/linux/slab.h
+index 2b5ab488e96b..78b9ec5bc17a 100644
+--- a/include/linux/slab.h
++++ b/include/linux/slab.h
+@@ -32,6 +32,7 @@ enum _slab_flag_bits {
+ 	_SLAB_CACHE_DMA,
+ 	_SLAB_CACHE_DMA32,
+ 	_SLAB_STORE_USER,
++	_SLAB_STORE_HISTORY,
+ 	_SLAB_PANIC,
+ 	_SLAB_TYPESAFE_BY_RCU,
+ 	_SLAB_TRACE,
+@@ -98,6 +99,8 @@ enum _slab_flag_bits {
+ #define SLAB_CACHE_DMA32	__SLAB_FLAG_BIT(_SLAB_CACHE_DMA32)
+ /* DEBUG: Store the last owner for bug hunting */
+ #define SLAB_STORE_USER		__SLAB_FLAG_BIT(_SLAB_STORE_USER)
++/* DEBUG: Store the previous object lifetime for bug hunting */
++#define SLAB_STORE_HISTORY	__SLAB_FLAG_BIT(_SLAB_STORE_HISTORY)
+ /* Panic if kmem_cache_create() fails */
+ #define SLAB_PANIC		__SLAB_FLAG_BIT(_SLAB_PANIC)
+ /**
+diff --git a/mm/slab.h b/mm/slab.h
+index bf2f87acf5e3..a6af35829f79 100644
+--- a/mm/slab.h
++++ b/mm/slab.h
+@@ -417,7 +417,8 @@ void flush_rcu_sheaves_on_cache(struct kmem_cache *s);
+ 			 SLAB_NO_USER_FLAGS | SLAB_KMALLOC | SLAB_NO_MERGE)
+ 
+ #define SLAB_DEBUG_FLAGS (SLAB_RED_ZONE | SLAB_POISON | SLAB_STORE_USER | \
+-			  SLAB_TRACE | SLAB_CONSISTENCY_CHECKS)
++			  SLAB_STORE_HISTORY | SLAB_TRACE | \
++			  SLAB_CONSISTENCY_CHECKS)
+ 
+ #define SLAB_FLAGS_PERMITTED (SLAB_CORE_FLAGS | SLAB_DEBUG_FLAGS)
+ 
 diff --git a/mm/slub.c b/mm/slub.c
-index a2bf3756ca7d..a9114dddc976 100644
+index a9114dddc976..803c597351ce 100644
 --- a/mm/slub.c
 +++ b/mm/slub.c
-@@ -316,7 +316,20 @@ struct track {
+@@ -277,7 +277,7 @@ void *fixup_red_left(struct kmem_cache *s, void *p)
+  * issues when checking or reading debug information
+  */
+ #define SLAB_NO_CMPXCHG (SLAB_CONSISTENCY_CHECKS | SLAB_STORE_USER | \
+-				SLAB_TRACE)
++				SLAB_STORE_HISTORY | SLAB_TRACE)
+ 
+ 
+ /*
+@@ -285,7 +285,8 @@ void *fixup_red_left(struct kmem_cache *s, void *p)
+  * disabled when slab_debug=O is used and a cache's min order increases with
+  * metadata.
+  */
+-#define DEBUG_METADATA_FLAGS (SLAB_RED_ZONE | SLAB_POISON | SLAB_STORE_USER)
++#define DEBUG_METADATA_FLAGS (SLAB_RED_ZONE | SLAB_POISON | \
++			      SLAB_STORE_USER | SLAB_STORE_HISTORY)
+ 
+ #define OO_SHIFT	16
+ #define OO_MASK		((1 << OO_SHIFT) - 1)
+@@ -316,14 +317,23 @@ struct track {
  	unsigned long when;	/* When did the operation occur */
  };
  
--enum track_item { TRACK_ALLOC, TRACK_FREE };
-+enum track_item { TRACK_ALLOC, TRACK_FREE, TRACK_NR };
-+
-+static inline unsigned int nr_user_tracks(struct kmem_cache *s)
-+{
-+	if (!(s->flags & SLAB_STORE_USER))
-+		return 0;
-+
-+	return TRACK_NR;
-+}
-+
-+static inline unsigned int user_tracking_size(struct kmem_cache *s)
-+{
-+	return nr_user_tracks(s) * sizeof(struct track);
-+}
+-enum track_item { TRACK_ALLOC, TRACK_FREE, TRACK_NR };
++enum track_item {
++	TRACK_ALLOC,
++	TRACK_FREE,
++	TRACK_PREV_ALLOC,
++	TRACK_PREV_FREE,
++	TRACK_NR,
++};
  
- #ifdef SLAB_SUPPORTS_SYSFS
- static int sysfs_slab_add(struct kmem_cache *);
-@@ -740,7 +753,7 @@ static inline void set_orig_size(struct kmem_cache *s,
- 		return;
- 
- 	p += get_info_end(s);
--	p += sizeof(struct track) * 2;
-+	p += user_tracking_size(s);
- 
- 	*(unsigned long *)p = orig_size;
- }
-@@ -756,7 +769,7 @@ static inline unsigned long get_orig_size(struct kmem_cache *s, void *object)
- 		return s->object_size;
- 
- 	p += get_info_end(s);
--	p += sizeof(struct track) * 2;
-+	p += user_tracking_size(s);
- 
- 	return *(unsigned long *)p;
- }
-@@ -873,8 +886,7 @@ static unsigned int obj_exts_offset_in_object(struct kmem_cache *s)
+ static inline unsigned int nr_user_tracks(struct kmem_cache *s)
  {
- 	unsigned int offset = get_info_end(s);
+ 	if (!(s->flags & SLAB_STORE_USER))
+ 		return 0;
  
--	if (kmem_cache_debug_flags(s, SLAB_STORE_USER))
--		offset += sizeof(struct track) * 2;
-+	offset += user_tracking_size(s);
- 
- 	if (slub_debug_orig_size(s))
- 		offset += sizeof(unsigned long);
-@@ -1077,7 +1089,7 @@ static void init_tracking(struct kmem_cache *s, void *object)
- 		return;
- 
- 	p = get_track(s, object, TRACK_ALLOC);
--	memset(p, 0, 2*sizeof(struct track));
-+	memset(p, 0, user_tracking_size(s));
+-	return TRACK_NR;
++	if (s->flags & SLAB_STORE_HISTORY)
++		return TRACK_NR;
++
++	return TRACK_PREV_ALLOC;
  }
  
- static void print_track(const char *s, struct track *t, unsigned long pr_time)
-@@ -1185,8 +1197,7 @@ static void print_trailer(struct kmem_cache *s, struct slab *slab, u8 *p)
+ static inline unsigned int user_tracking_size(struct kmem_cache *s)
+@@ -1837,6 +1847,9 @@ parse_slub_debug_flags(const char *str, slab_flags_t *flags, const char **slabs,
+ 		case 'u':
+ 			*flags |= SLAB_STORE_USER;
+ 			break;
++		case 'h':
++			*flags |= SLAB_STORE_HISTORY;
++			break;
+ 		case 't':
+ 			*flags |= SLAB_TRACE;
+ 			break;
+@@ -1855,6 +1868,11 @@ parse_slub_debug_flags(const char *str, slab_flags_t *flags, const char **slabs,
+ 				pr_err("slab_debug option '%c' unknown. skipped\n", *str);
+ 		}
+ 	}
++	if ((*flags & SLAB_STORE_HISTORY) && !(*flags & SLAB_STORE_USER)) {
++		if (init)
++			pr_err("slab_debug option 'H' requires 'U'. skipped\n");
++		*flags &= ~SLAB_STORE_HISTORY;
++	}
+ check_slabs:
+ 	if (*str == ',')
+ 		*slabs = ++str;
+@@ -1969,7 +1987,7 @@ slab_flags_t kmem_cache_flags(slab_flags_t flags, const char *name)
+ 	 * but let the user enable it via the command line below.
+ 	 */
+ 	if (flags & SLAB_NOLEAKTRACE)
+-		slub_debug_local &= ~SLAB_STORE_USER;
++		slub_debug_local &= ~(SLAB_STORE_USER | SLAB_STORE_HISTORY);
  
- 	off = get_info_end(s);
+ 	len = strlen(name);
+ 	next_block = slub_debug_string;
+@@ -9223,6 +9241,13 @@ static ssize_t store_user_show(struct kmem_cache *s, char *buf)
  
--	if (s->flags & SLAB_STORE_USER)
--		off += 2 * sizeof(struct track);
-+	off += user_tracking_size(s);
+ SLAB_ATTR_RO(store_user);
  
- 	if (slub_debug_orig_size(s))
- 		off += sizeof(unsigned long);
-@@ -1390,7 +1401,7 @@ static int check_pad_bytes(struct kmem_cache *s, struct slab *slab, u8 *p)
- 
- 	if (s->flags & SLAB_STORE_USER) {
- 		/* We also have user information there */
--		off += 2 * sizeof(struct track);
-+		off += user_tracking_size(s);
- 
- 		if (s->flags & SLAB_KMALLOC)
- 			off += sizeof(unsigned long);
-@@ -7845,7 +7856,7 @@ static int calculate_sizes(struct kmem_cache_args *args, struct kmem_cache *s)
- 		 * Need to store information about allocs and frees after
- 		 * the object.
- 		 */
--		size += 2 * sizeof(struct track);
-+		size += user_tracking_size(s);
- 
- 		/* Save the original kmalloc request size */
- 		if (flags & SLAB_KMALLOC)
++static ssize_t store_history_show(struct kmem_cache *s, char *buf)
++{
++	return sysfs_emit(buf, "%d\n", !!(s->flags & SLAB_STORE_HISTORY));
++}
++
++SLAB_ATTR_RO(store_history);
++
+ static ssize_t validate_show(struct kmem_cache *s, char *buf)
+ {
+ 	return 0;
+@@ -9442,6 +9467,7 @@ static const struct attribute *const slab_attrs[] = {
+ 	&red_zone_attr.attr,
+ 	&poison_attr.attr,
+ 	&store_user_attr.attr,
++	&store_history_attr.attr,
+ 	&validate_attr.attr,
+ #endif
+ #ifdef CONFIG_ZONE_DMA
 -- 
 2.50.1 (Apple Git-155)
 
