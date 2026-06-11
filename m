@@ -1,205 +1,293 @@
-Return-Path: <linux-doc+bounces-92021-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92023-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id gRUWJtwDK2oe1QMAu9opvQ
-	(envelope-from <linux-doc+bounces-92021-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 20:52:12 +0200
+	id a85oOf4EK2qF1QMAu9opvQ
+	(envelope-from <linux-doc+bounces-92023-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 20:57:02 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 06A73674944
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 20:52:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D71D6749D0
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 20:57:02 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=google.com header.s=20251104 header.b=GlOyrWWX;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92021-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92021-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=reject) header.from=google.com;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
+	dkim=pass header.d=johnericson.me header.s=fm3 header.b="lqoDUw/k";
+	dkim=pass header.d=messagingengine.com header.s=fm1 header.b="S xhnnWM";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92023-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92023-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=johnericson.me;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 52E7231C93BD
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 18:47:25 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 071713213521
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2026 18:55:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D32AE4B8DFB;
-	Thu, 11 Jun 2026 18:47:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0A423477E51;
+	Thu, 11 Jun 2026 18:55:32 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com [209.85.160.180])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from flow-a6-smtp.messagingengine.com (flow-a6-smtp.messagingengine.com [103.168.172.141])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 634D54C956C
-	for <linux-doc@vger.kernel.org>; Thu, 11 Jun 2026 18:47:23 +0000 (UTC)
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781203644; cv=pass; b=AnKRoHKnM9nQltzU9u+L6q0nqZD5HhbmflVLdeWf/f95Ytl9qwqeTc22L3HtC26LSzFbtB47D93dGmqa8JTkyyinGhMdZglGqzzxSp9r6mtmxZri84APEQ9dhFSRaaak9Yv2NCaNA7BIuf/xzP3Xpq5Si6m/Y3bsu1SUt1NcTk8=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781203644; c=relaxed/simple;
-	bh=MrFHJAtiz3l/SoMxwQsRd+iR3vzlfSRyOn6rVwZE7gw=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=l/0QFCOgAWWg6Pz38oaGWEBXyNqr6d+s/4RnAGLs2XAEiupSPty8tZxnivemQq/d+UZ/L61jzeD1Eq5PEldVCdiR0OTApSTIqFyfbFsC/+mTGA+0Hfi8J4hO/oAbOaLJqiOjIvvPHRpNbc39uRbzEqVxMzHiyNeeMYZHqAZaIFQ=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=GlOyrWWX; arc=pass smtp.client-ip=209.85.160.180
-Received: by mail-qt1-f180.google.com with SMTP id d75a77b69052e-51765531803so106011cf.0
-        for <linux-doc@vger.kernel.org>; Thu, 11 Jun 2026 11:47:23 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781203642; cv=none;
-        d=google.com; s=arc-20240605;
-        b=Si0ct6uFS7P0n+jQBPl+kgdAEIxuKwHKxkZmtM+l+MSyCAhoeZrlKT2GPuDdmtazWW
-         Hg4LP6DuZZe2rWcdRex0+cYpqyKq3uhxupehRSmQdoMC3VvQ8cyMwKUkGjaXwCWR86/X
-         AG9TB1gz30kM5DjM0Bumg8oDn7PKKQVfm/7NxZFmfLpE4kAXuAUE4ycJIS686+XQXB6Q
-         BMAgYowTMnpRTz616E65E01EM0uvCq+Nz8zdNotrewKjHVXSByQDJ9XNWn2NXvUl/dYQ
-         CV1VHe5U2Xozk4kzeCmgZt/buygqi1ipW2GpOj8rKezd9lBY1NQijata4bxC0PiryIKN
-         jTnA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=MrFHJAtiz3l/SoMxwQsRd+iR3vzlfSRyOn6rVwZE7gw=;
-        fh=O/dO05ADQ+lFiv7tZ5dHx5rnt5P/dNXvLUm5J7pTC7I=;
-        b=fy8q0aa8MjbobKulKqo/twgWzUXse7pYGEt0wHqUXbOK78qZZx0+BgEPCuuVYn9sm6
-         XwjAhxpfVHELHTfAbplE56QBgMIuHcI7xOoT5cB0dVG7xkAp/XQKqajMbDkjCbDLJ6p2
-         8qr+Kr4Dci4rPOvfLY02/P4AJ8Brtsxp/+LtK5xCJXZ0GKlO3pKgdKdgHMrtYfSduf1F
-         fdJKcvCM3u8EGsvp3sDWhm+LpQm6O9MZl9rveQHWMh4JPGXwILinavlS4yG8xo3y6+4/
-         XfLlte7Ouh6KKw4H0OKhONQLrCYGud6bnozVUH5FkU+T49XPEqrAVN9J3b4lj7W2zF/z
-         TDEg==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1781203642; x=1781808442; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=MrFHJAtiz3l/SoMxwQsRd+iR3vzlfSRyOn6rVwZE7gw=;
-        b=GlOyrWWXyljN57w0qcrCOHSnEEGulh0DSdQKHSXkgJMO18VmFRkrb33ghtMLuUR6h4
-         KaaR//NRqeu1LIQWvgvTFx76WEHDAXx50Dp74g0WlagMa1KG0TOd3ZnvohTemqpTQnky
-         X2WuLNAUN/WnMlaxn+DdQBUU0PpYoD1T85N40ObuQih5PIhPJL0e0RgrG51TBYS+fPi0
-         rBeRa4cEUQy2rw9CwjehyYGysbvN3jNeK7yZaRR16J5UqIynngIpS7v+WhXhhvNMT2kL
-         ZRFomvexRap8ulrCfL6u8ZZKSXXVH4GeL1ZiV79lv7n/t9KtzEvHpzPPkOKMQIkjcX+7
-         I2Sw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781203642; x=1781808442;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=MrFHJAtiz3l/SoMxwQsRd+iR3vzlfSRyOn6rVwZE7gw=;
-        b=sfnNwnHDxdUkw7gabUO1b8Z8RjtW4+SszAidC3/n3epCk6PgnVXKSqPXvF4ycV0EFc
-         PgeyskOM2a6XGhDj7oqyWEDZEPpUY1G8vpUkw4QQkMkC/V5gyKyCjASt1tYdNdfs9vGc
-         FFyP4bwKNIZ4LtWkp0bzA0/y1YTOYPsH3J0EzT9ufgLoa/Js0v9I7B598Lhn0dxh1WiG
-         /1JtzOJEad/WIa8XEV2a3kl5wQDHDCgKY4O/GP4H41yUblsDaM/bKC0xzDkGDuj3vEvX
-         x4I8Ko6ndAVeV7ggf1sCbvhtda6Z790ab1zedqj/BQr1yJ28N2D0fFhFlTwM4NNVRie6
-         0CJA==
-X-Forwarded-Encrypted: i=1; AFNElJ/BJUt19SC59ipRTSta6WIJ1DO2VZjQymGiJT/CqBH3l7KBeiaSoGq+8u7v+jxCLBKeDj6dOXya6U4=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzAqGupFiq2cx8h/52cyjPmjBn9hqYuNdBenSHrl/scC/5JCBbC
-	+IPM+sx/ShZz7D/A2IILOPPM4+FzlqzlHpzOeFDY3dSs1K4SeIKAQEIZ1BzsBnLAmBxpsK3hwik
-	8XSHSY9oIygL0SZuVsfJNQLjvx84yklXuYnsTugKh
-X-Gm-Gg: Acq92OEzm4PMN8+cjhx62Xr5IkZ6yieQOJriYJhZZ517rTatU955F00J/QfVHPYIcvy
-	7VlIsp9VzFbzX07co8ImidZ3KHJfHoMbz20qTvcSgHksVCrHkIcG34CWlNGWJ/X+UGl4BG3LLwc
-	171CyvmF8XBToaQtIWiMk3M0o1gY1zwHKOxUpTA2cihK+DbS//HAhhD+tX0ny1QJ7AA1keU8DHx
-	2lN76uyeYqrfPN1LOfQBFdsh7GB8rLbb4Gp4Dljhxzst0hvToEtaxCR//7Ws7OIIoW2EL88XFOR
-	v1h6fyYdu2ukwk9PfvA/XKh2nXTSlgVlZSP1dhvr
-X-Received: by 2002:ac8:7f96:0:b0:517:38aa:c2b3 with SMTP id
- d75a77b69052e-517fb07577dmr1124901cf.14.1781203641487; Thu, 11 Jun 2026
- 11:47:21 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF53638333B;
+	Thu, 11 Jun 2026 18:55:29 +0000 (UTC)
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1781204131; cv=none; b=NYPArHM7xJjC3wZ5DeoZdKc7KCnOZu2WYdQ9fEqdTIN1NRYYqIwcShxO6EQlKRg5WSVs5dTjzdXfGYmK9f/08ZjWrB+BVY0ASDYe2dqeGDbCeEbcWyMy7Rlw5FradKUWsQ9lJWBmg+rB/Xigojx8GCwFx86G9Wj2oBrnaQzm9Qs=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1781204131; c=relaxed/simple;
+	bh=hPOHqYG+iRF3Ic0VkRMBbLpS+z9IKrHddDy3pi2hdIc=;
+	h=MIME-Version:Date:From:To:Cc:Message-Id:In-Reply-To:References:
+	 Subject:Content-Type; b=oyLWxKrD8K3xv2yOeJcMIQzsqZZtGfak581TXN5XCmX8y05DmfX0DDOb09WBbrOZxRJ2WFufJ6cj7XUom3BLhTz9zSjHGUf20hledZqs2nhN056p4a9DyNszzMsEaBWaCVKIae01iXo05DYRAcPwAVOn6yoHkFSIGn7ltehsdcM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=johnericson.me; spf=pass smtp.mailfrom=johnericson.me; dkim=pass (2048-bit key) header.d=johnericson.me header.i=@johnericson.me header.b=lqoDUw/k; dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b=SxhnnWMs; arc=none smtp.client-ip=103.168.172.141
+Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
+	by mailflow.phl.internal (Postfix) with ESMTP id 1652F1380100;
+	Thu, 11 Jun 2026 14:55:29 -0400 (EDT)
+Received: from phl-imap-16 ([10.202.2.88])
+  by phl-compute-05.internal (MEProxy); Thu, 11 Jun 2026 14:55:29 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=johnericson.me;
+	 h=cc:cc:content-transfer-encoding:content-type:content-type
+	:date:date:from:from:in-reply-to:in-reply-to:message-id
+	:mime-version:references:reply-to:subject:subject:to:to; s=fm3;
+	 t=1781204129; x=1781211329; bh=hPOHqYG+iRF3Ic0VkRMBbLpS+z9IKrHd
+	dDy3pi2hdIc=; b=lqoDUw/kVA743bATY9h3WK1dphY3DTGWmWqfS7rSB5GSVn1J
+	as9WBsb+A9PKES5gRpl1K43ImpkJByEQ+OAGA8jgvTajebY1O93d+Ltmq8xdbZmr
+	UpjrbAZH15xpPstw++7hFOY+AQmRLZsb2gRNFyC6VpRAlni/E62ZfUjR+2Y7ilDV
+	5dalJkSjuO6iJHSs2PFitbvp8GbWY+Y4zFxsBDVzhzH13FnV4hN4gX3XoXsGEpU5
+	VX6YHz30fcubjL8dS4nRv3IXpnfilOnuPUp8p3r0TTr6X+SeYW3CB5Ye/Y8JCFpK
+	jE+5fg0CFoxi4Y/BBElq4gToBlMwJqp/uqu9MA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1781204129; x=
+	1781211329; bh=hPOHqYG+iRF3Ic0VkRMBbLpS+z9IKrHddDy3pi2hdIc=; b=S
+	xhnnWMsEUraepm0he9orZCyxPfx/X2RF4T9x70S85+8jra4FIRU9EW5non7HfVsM
+	Ci2TSpRE8DCnorJZZDCFAJnPbE74cU40UqUFdxQG06Ca0gf4YOU1CcSzAl7STslr
+	hkiKH7TApmoVk+z9PZs+yoayKHgiTZtULPsVqW6Rrfak38XDnPycDho5FKzQBef1
+	CY6QNcMEThwJpZ3k8dCfdqYEOgLqhPFyaSw/8plKCDA4ADs1atRjXiHektoDVGfc
+	fFn8T2+BwlXB/s0NPeOq0qQ16jw7OASdZDZeHmvZZ39x54Pz2OrB2tDyBB1+NgYc
+	5/H2msE/XBzMbGzzvKNHA==
+X-ME-Sender: <xms:oAQralqwuh0eouA59R3_QIwyLFBttjzOXYhOIDERLdIbdk93hF5puA>
+    <xme:oAQraifGdN2-ZAHIe6oNEDRfSEnR6WUhOwyGtPPn4ubpqD8tEdnDMeWgLTUy6Ii6x
+    5vzuFyYmFZ2RIu87ORhcAz6vnLAsYx-tpUTNEZVfRt127tc0NsvnK0>
+X-ME-Proxy-Cause: dmFkZTFYpPOn7LI4ucgrxMRuvUt0Pp7TpsmWzC1UMf5Uv3HNtfQ/V0DF7oE2QhImNcQ7/n
+    hX3+SBSdsUULValjF705kUffDlbULeLEuQLe9sEh2MjAhjTTmycdP5MBvhnGe8dzZvyNon
+    El9MmMNYiTmjnLQ2tcVKntlKTVipyiBsZrqxOGT4HbGXTm+q5nJv2ou/btyVBYEM9hCWwC
+    5GGP97dtjAoQTfqjBznaZdB0rggqqROmubcwr/kzdeAmz621tqJGsS7RdmLEwmGJYTNNOO
+    USKMjLfMmFc65L14V1RzajGF3g6WHSe5i+BYmpu3hA0CfgzgP+VZ8oTuBT+38JRx/yxzgs
+    umnpTqvcNAd1NFNCHjofpW8OHDuMUHWjxpEVBjSNmRctxv64ki/DUB9+G7ogl7t9K3QVjK
+    Ow2Y0fYcjWb7JTEpo/PoDYWzEvTk9XEek3xh+BpzUH00rvEY2PWP7ywJRQTdPoMcVAn7Gn
+    r7cDKLJ65+s64x2Q942+XWGD/zOI1+7LvCGFjOH2uWfyZd0Fv7Ymr+gzCBsMoAv2xkL3T0
+    CqD6YGWIlZSwWzrToYEFEdrCnD2xjZeUFFAtwMMKqgh8H1xdIFhWYk77oCQivDvMMOaL+9
+    Tq0tCHKmG0ElxEfp2Q75UzEXsV7cS5F72NZyHP1i3LMypy67FGfWMnYliP7A
+X-ME-Proxy: <xmx:oAQraroOprWSkLgJ-7djeMHTInI52a640Gjt5LslcKa87iD22lOadQ>
+    <xmx:oAQraoatsZC0BtBctCPgAsy7fxQT3f9fqffQoMXyvPniBkKKuuh1bA>
+    <xmx:oAQralHhcfx828vfIPwoTAB7RPq0-Rlkt4Jh2VvoK2hJ4cYJKq3hrQ>
+    <xmx:oAQramZmlr4zGPtWbXjA0WPzKylSB7mfQzF7M44bZW6o1b9B_bhaGA>
+    <xmx:oQQrarNSduaBJQ-qynqxxgQ-ZwyRh49OZambtOBojf-3vpyXdpA0tC_O>
+Feedback-ID: ieb4144f1:Fastmail
+Received: by mailuser.phl.internal (Postfix, from userid 501)
+	id 0C7D62CC0086; Thu, 11 Jun 2026 14:55:28 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260526023515.288829-1-rick.p.edgecombe@intel.com> <20260526023515.288829-3-rick.p.edgecombe@intel.com>
-In-Reply-To: <20260526023515.288829-3-rick.p.edgecombe@intel.com>
-From: Vishal Annapurve <vannapurve@google.com>
-Date: Thu, 11 Jun 2026 11:47:09 -0700
-X-Gm-Features: AVVi8CfMS_qzgZKmmT0RbAyGSJmggudRfRKARlOu3o-uoZD12JuItpxRuWOmlpo
-Message-ID: <CAGtprH-TzqYbwp0_8ah0VJcccOwHnUz11Ve2Fk8Y-zwqqGFMsA@mail.gmail.com>
-Subject: Re: [PATCH v6 02/11] x86/virt/tdx: Allocate page bitmap for Dynamic PAMT
-To: Rick Edgecombe <rick.p.edgecombe@intel.com>
-Cc: bp@alien8.de, dave.hansen@intel.com, hpa@zytor.com, kas@kernel.org, 
-	kvm@vger.kernel.org, linux-coco@lists.linux.dev, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, mingo@redhat.com, nik.borisov@suse.com, 
-	pbonzini@redhat.com, seanjc@google.com, tglx@kernel.org, x86@kernel.org, 
-	chao.gao@intel.com, yan.y.zhao@intel.com, kai.huang@intel.com, 
-	"Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>, Binbin Wu <binbin.wu@linux.intel.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-ThreadId: AtGJywdvvpER
+Date: Thu, 11 Jun 2026 14:53:10 -0400
+From: "John Ericson" <mail@johnericson.me>
+To: "Mateusz Guzik" <mjguzik@gmail.com>, "Li Chen" <me@linux.beauty>
+Cc: "Andy Lutomirski" <luto@kernel.org>,
+ "Christian Brauner" <brauner@kernel.org>, "Kees Cook" <kees@kernel.org>,
+ "Al Viro" <viro@zeniv.linux.org.uk>,
+ linux-fsdevel <linux-fsdevel@vger.kernel.org>,
+ linux-api <linux-api@vger.kernel.org>, LKML <linux-kernel@vger.kernel.org>,
+ linux-mm <linux-mm@kvack.org>, linux-arch <linux-arch@vger.kernel.org>,
+ linux-doc <linux-doc@vger.kernel.org>,
+ linux-kselftest <linux-kselftest@vger.kernel.org>, x86 <x86@kernel.org>,
+ "Arnd Bergmann" <arnd@arndb.de>, "Thomas Gleixner" <tglx@kernel.org>,
+ "Ingo Molnar" <mingo@redhat.com>, "Borislav Petkov" <bp@alien8.de>,
+ "Dave Hansen" <dave.hansen@linux.intel.com>,
+ "H. Peter Anvin" <hpa@zytor.com>, "Jan Kara" <jack@suse.cz>,
+ "Jonathan Corbet" <corbet@lwn.net>, "Shuah Khan" <skhan@linuxfoundation.org>
+Message-Id: <9033ff42-9ee7-4b93-9570-a5adcd16e826@app.fastmail.com>
+In-Reply-To: 
+ <hd3i6pxxohsjesyid7nhuic6ppp6nyoxxpwa4mny6riqvpyqec@mylfprni2yaw>
+References: <20260528095235.2491226-1-me@linux.beauty>
+ <20260528-madig-fachrichtung-fehlinformation-61117ba640da@brauner>
+ <CALCETrWJQpLR4n1cpichBk8=uExSKLWTMGU3BufGdk_WE_p5UA@mail.gmail.com>
+ <19eacd64508.26b92c022125848.262962729296162879@linux.beauty>
+ <4e049396-377d-48a7-a34c-91318413a876@app.fastmail.com>
+ <19eb181fdd4.6d028f442844776.3737831021032223216@linux.beauty>
+ <hd3i6pxxohsjesyid7nhuic6ppp6nyoxxpwa4mny6riqvpyqec@mylfprni2yaw>
+Subject: Re: [RFC PATCH v1 00/13] exec: add spawn templates for repeated executable
+ startup
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+X-Spamd-Result: default: False [-2.15 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[johnericson.me,none];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+	R_DKIM_ALLOW(-0.20)[johnericson.me:s=fm3,messagingengine.com:s=fm1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	XM_UA_NO_VERSION(0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:rick.p.edgecombe@intel.com,m:bp@alien8.de,m:dave.hansen@intel.com,m:hpa@zytor.com,m:kas@kernel.org,m:kvm@vger.kernel.org,m:linux-coco@lists.linux.dev,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:mingo@redhat.com,m:nik.borisov@suse.com,m:pbonzini@redhat.com,m:seanjc@google.com,m:tglx@kernel.org,m:x86@kernel.org,m:chao.gao@intel.com,m:yan.y.zhao@intel.com,m:kai.huang@intel.com,m:kirill.shutemov@linux.intel.com,m:binbin.wu@linux.intel.com,s:lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER(0.00)[vannapurve@google.com,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	TAGGED_FROM(0.00)[bounces-92021-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[lists@lfdr.de];
+	TO_DN_ALL(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:mjguzik@gmail.com,m:me@linux.beauty,m:luto@kernel.org,m:brauner@kernel.org,m:kees@kernel.org,m:viro@zeniv.linux.org.uk,m:linux-fsdevel@vger.kernel.org,m:linux-api@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-arch@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:x86@kernel.org,m:arnd@arndb.de,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:hpa@zytor.com,m:jack@suse.cz,m:corbet@lwn.net,m:skhan@linuxfoundation.org,s:lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER(0.00)[mail@johnericson.me,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[gmail.com,linux.beauty];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-92023-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[23];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[vannapurve@google.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[google.com:+];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[mail@johnericson.me,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[johnericson.me:+,messagingengine.com:+];
+	RCVD_COUNT_FIVE(0.00)[6];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,intel.com:email,mail.gmail.com:mid]
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,messagingengine.com:dkim,johnericson.me:dkim,johnericson.me:from_mime,vger.kernel.org:from_smtp,app.fastmail.com:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 06A73674944
+X-Rspamd-Queue-Id: 4D71D6749D0
 
-On Mon, May 25, 2026 at 7:35=E2=80=AFPM Rick Edgecombe
-<rick.p.edgecombe@intel.com> wrote:
+On Wed, Jun 10, 2026, at 7:40 PM, Mateusz Guzik wrote:
+> [...]
 >
-> From: "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>
+> As I tried to explain in my previous e-mail this approach does not cut
+> it because of NUMA.
 >
-> The TDX Physical Address Metadata Table (PAMT) holds data about the
-> physical memory used by TDX, and must be allocated by the kernel during
-> TDX module initialization.
+> Suppose you have a machine with 2 nodes. The parent-to-be is running
+> on node 0 and the child is intended to exec something on node 1.
 >
-> The exact size of the required PAMT memory is determined by the TDX modul=
-e
-> and may vary between TDX module versions. Currently it is approximately
-> 0.4% of the system memory. This is a significant commitment, especially i=
-f
-> it is not known upfront whether the machine will run any TDX guests.
+> When the parent-to-be allocates and populates stuff, it takes place with
+> memory backed by node 0. If you allocate task_struct, the file table and
+> other frequently used (and modified!) objs in this way, you are
+> guaranteeing performance loss due to interconnect traffic to access it.
 >
-> Each memory region that the TDX module might use needs three separate PAM=
-T
-> allocations. One for each supported page size (1GB, 2MB, 4KB). The
-> TDX module supports a new feature designed to reduce PAMT overhead called
-> Dynamic PAMT. At a high level, Dynamic PAMT still has the 1GB and 2MB
-> levels allocated on TDX module initialization, but the 4KB level is
-> allocated dynamically during runtime.
->
-> However, in the details, Dynamic PAMT still needs some smaller per 4KB
-> page scoped data (currently it is 1 bit per page). The TDX module exposes
-> the number of bits as a separate piece of metadata than the 4KB static
-> allocation for regular PAMT. Although the size is enumerated differently,
-> it is handed to the TDX module in the same way the 4KB page size PAMT
-> allocation is for regular, non-dynamic PAMT.
->
-> Begin to implement Dynamic PAMT in the kernel by reading the bits-per-pag=
-e
-> needed for Dynamic PAMT. Calculate the size needed for the bitmap,
-> and use it instead of the 4KB size determined for normal PAMT, in the cas=
-e
-> of Dynamic PAMT.
->
-> Unlike the existing metadata reading code, this code is not generated by =
-a
-> script. So adjust the comment to be more generic. Also, start to adopt a
-> more normal kernel code style without the tenary statements and if
-> conditionals assignments that the auto generated code has.
->
-> Assisted-by: Sashiko:claude-opus-4-6
-> Reviewed-by: Binbin Wu <binbin.wu@linux.intel.com>
-> Signed-off-by: Kirill A. Shutemov <kirill.shutemov@linux.intel.com>
-> Co-developed-by: Rick Edgecombe <rick.p.edgecombe@intel.com>
-> Signed-off-by: Rick Edgecombe <rick.p.edgecombe@intel.com>
+> Trying to add plumbing so that all allocations respect numa placement is
+> probably too cumbersome.
 
-Kirill's comment make sense to me.
+Are we sure that last part is true?
 
-Reviewed-by: Vishal Annapurve <vannapurve@google.com>
+Let's also assume when this stuff was initially implemented, we didn't
+have it. If the basic thrust of this work is to replace functions that
+previously only worked on the current thread with those that worked on
+either arbitrary (not yet started) threads or the current thread, would
+that not prepare us for slowly migrating the allocation choice to
+reflect the node of the target task (new parameter) rather than the node
+of the current task over time?
+
+(This assumes the task is pre-placed on a node before it is actually run
+there, and that pre-placement happens as early in the allocation process
+as possible, so subsequent allocations can read off the
+partially-initialized task's node.)
+
+"Slowly migrating" is good here! It doesn't need to be the fastest thing
+out of the gate, but if this new proper spawning API gets popular as I
+think it would, and there is a clear path to optimizing it per the
+above, then I am confident that over the years it will happen.
+
+> The primary example for that is looking up the binary to exec in the
+> first place.
+>
+> userspace likes to pass paths which don't exist, meaning checking for
+> the binary before any hard work is a useful optimization. Suppose the
+> binary to be executed is in a container bound with a taskset using
+> node 1 and the content of the fs part of the container is currently
+> fully uncached.
+>
+> When you perform the lookup on node 0, you are populating a bunch of
+> metadata (inode, dentry) using memory from that domain. But the intended
+> user will only execute on node 1, again resulting in a performance loss.
+>
+> In order to not do it you would need to convince VFS to allocate memory
+> elsewhere.
+
+One thing I don't get about this is that isn't the cost doing a bunch of
+work searching the PATH for the directories where the executable
+*doesn't* exist? In the case of something like a shell that is going to
+spawn a lot of processes, I would think it is *good* to keep all that
+PATH crawling VFS filling to be on the shell's node, rather than the
+child processes' nodes.
+
+It is only the executable itself, the final step of the VFS crawl, that
+should be loaded into the other NUMA nodes. Insofar as (unless I am
+missing something) creating the process means finding the inode for the
+executable but not loading those pages, aren't we OK here? Only when the
+new process is actually scheduled and run must the ELF be paged into
+memory, and then that will happen on the correct node.
+
+> So I stand by my previous claim that ultimately a pristine child has to
+> be created (like in this patch), but which also has to do the work on
+> its own.
+
+I have not been a kernel dev, so my apologies if I am missing things.
+But in conclusion for me, the FS and other resource access patterns of
+*creating a process* vs *that process itself running* do not seem
+necessarily coincident to me. What you are describing as for sure a
+problem might possibly be a *good thing*, if they are in fact quite
+different.
+
+> Suppose there is no explicit placement requested anywhere. Even in that
+> case there are legitimate workloads which will eventually be forced to
+> exec stuff on another node. Even these have a better chance retaining
+> full locality if the child process does all the work.
+>
+> Per my previous message I don't see a clean interface to do it.
+> something quasi-posix_spawn is probably the least bad way out, it will
+> also allow userspace to easily wrap the new thing with posix_spawn
+> itself.
+>
+> Also note there is another issue with the fd-based approach: the fd will
+> get inherited on fork and will hang out in the child afterwards unless
+> explicitly closed. Suppose you have a multithreaded program which likes
+> to both fork(+no exec) and fork+exec. With the fd-based approach you
+> have no means of stopping another thread from grabbing your state thanks
+> to unix defaulting to copying everything. There was an attempt to fix
+> this aspect with O_CLOFORK, but this got rejected.
+
+I would think we don't need to worry about clone/fork very much, right?
+I think the premise of your emails, and just about everyone else's in
+this thread too, is that we agree fork+exec is bad, and the problem of
+unnecessarily sharing resources is inherent to fork. Furthermore, I
+think we all agree that while `O_CLOEXEC` and `O_CLOFORK` may help, both
+are unsatisfying solutions because they are opt-out not opt-in, and
+global to the parent process / preexec state (respectively) rather than
+local to the specific fork / exec in question.
+
+pidfds encounter these problems no more than any other
+file-descriptor-based UAPI, right? And I don't think it is good to blame
+any such file-descriptor-based UAPI when fork/exec are at fault.
+
+Maybe during the transition, when some things use fork and some things
+use this new API, stuff will be awkward, but I would rather that just be
+an incentive to complete the transition away from fork, not a reason to
+second-guess the plan.
+
+Once the transition is complete, and everyone is diligently assembling
+their child processes from scratch as is proposed, `O_CLOEXEC` and
+`O_CLOFORK` are both unneeded, and oversharing privileges will be much
+less common simply because "lazy coding"/"minimal typing" will only
+share what is needed --- anything else is more code/keystrokes!
+
+> Whatever exactly happens, NUMA is a sad fact of computing and needs to
+> be accounted for. The approach as proposed not only does not do it, but
+> it actively hinders such deployments.
+
+Despite everything I said, I want to be clear that I do agree that NUMA
+performance should be accounted for. Even if the first version isn't as
+great as it could be on that metric, there should be a clear plan for
+how future work can conclusively address it.
+
+Cheers,
+
+John
 
