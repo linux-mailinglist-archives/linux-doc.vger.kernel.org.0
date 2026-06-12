@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-92218-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92219-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id cPZYLj6LLGpeSQQAu9opvQ
-	(envelope-from <linux-doc+bounces-92218-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 13 Jun 2026 00:42:06 +0200
+	id pvaIDWKLLGptSQQAu9opvQ
+	(envelope-from <linux-doc+bounces-92219-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 13 Jun 2026 00:42:42 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1233B67CD43
-	for <lists+linux-doc@lfdr.de>; Sat, 13 Jun 2026 00:42:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B85B67CD60
+	for <lists+linux-doc@lfdr.de>; Sat, 13 Jun 2026 00:42:41 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=arm.com header.s=foss header.b=XoBBA4gb;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92218-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-92218-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=arm.com header.s=foss header.b=auPPCZec;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92219-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-92219-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=arm.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 17D5A3455350
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 22:39:04 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id CDC3132742E1
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 22:39:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B4C3F3D5672;
-	Fri, 12 Jun 2026 22:39:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1DF353D3D09;
+	Fri, 12 Jun 2026 22:39:11 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 566943D3D02;
-	Fri, 12 Jun 2026 22:39:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 53B1B3D5643;
+	Fri, 12 Jun 2026 22:39:05 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781303942; cv=none; b=bvhjYXvY625qsCB1JQcQlWLSxsSti0zLMoV2Ax7NBfb/CHOvLhjjhEYaBQOSA+j2dLYLsCythHDsiFFnsTe4LPM34hpkzX0RxODwgfh2AwdWR+Tt7nDFXAsj71djGYQuaXBuek8GofXWrSNsVOay6WE325qrC9O5NvefjyzarRM=
+	t=1781303951; cv=none; b=rg0Y2lDQ2+Z8QXQXHEUnvDtcAMIv8/3+pTpPHtLn58xby6H1ZDF4FmFohkpuKYRQogVm2Drl7DeD7cYUwWyMI3/fkQqt6E/7LcX4Gefn1Q6sVAzwu77DPUhaspLQPJu0QEHxpWNI+66UVwINiAreqxqwa+x0YU4KR9nyUBLqpwI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781303942; c=relaxed/simple;
-	bh=cVc2hy2A9f/wwW+jo28hnzjxf9i6e0XD+OrMlXPpgB0=;
+	s=arc-20240116; t=1781303951; c=relaxed/simple;
+	bh=CwJGWGgRXKnupukDLWD6QwCAt4HaM/Pbt3pAL9OqFfU=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=DAG2VZScYKfpBiBPLsk1DQ7tXxfRTvrEI+x4VnRby3rvFJa0Qls8kN6XKRyUJCY/Uvivn4CjPm/uzp6Q4tU/KtCU0JKbfCsB5XI+Gj8hgxhCCI46bIaZh80YTIiG78dOKBQLl+0hpabJ8rZ5Euh6buitzyq67QplzS4WQn1ObFA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=XoBBA4gb; arc=none smtp.client-ip=217.140.110.172
+	 MIME-Version; b=h3u1wSblWRRoaJpM/LPun3DwLANpcYEYvWyNSyWlN//emI4LbAvX6Yl9xk9EhjCsKAESuThjH20HuPAfbn9KjST8v/UbSvoLf9Q9Db8YikjTuGtlzBUR/JOuRdaK1DTdUxncVsdgsYy+bdxyp+ORcc7te1W4WIeLdDlqzTUK+1w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=auPPCZec; arc=none smtp.client-ip=217.140.110.172
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E20BD4A0B;
-	Fri, 12 Jun 2026 15:38:55 -0700 (PDT)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 060764A0F;
+	Fri, 12 Jun 2026 15:39:00 -0700 (PDT)
 Received: from pluto.fritz.box (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 52F3F3FB7F;
-	Fri, 12 Jun 2026 15:38:56 -0700 (PDT)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0650E3FB7F;
+	Fri, 12 Jun 2026 15:39:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1781303940; bh=cVc2hy2A9f/wwW+jo28hnzjxf9i6e0XD+OrMlXPpgB0=;
+	t=1781303944; bh=CwJGWGgRXKnupukDLWD6QwCAt4HaM/Pbt3pAL9OqFfU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=XoBBA4gb22woOFFqLugh1xWe71wO756b3n6XJsSeVBj5nr9j2yAQhxQ+fkXToDYEf
-	 rJ6rloMQgVvX28cWGXYylpznfDzmpCMquNoCNR2UjMo3m2MLHkFgJAIAG3LzqhZHUN
-	 knUudm2Wwa2c9flcD4XLVizl45ex+CrwVbr5+be0=
+	b=auPPCZecewgJr+2ducSACADmnu+7gt/brDhetXzFXAm/mwLjqycDDoSS0lv22KKTQ
+	 6e1Tsm4Zd4U+80vzK7FZTpSt7c1rVvtVHbtl7yvdDXzCN2qgH3F9c4ejty4T09L7on
+	 3L1RXhxpIk2IyRuKvIkGTecq45k/rewXSArILvNo=
 From: Cristian Marussi <cristian.marussi@arm.com>
 To: linux-kernel@vger.kernel.org,
 	linux-arm-kernel@lists.infradead.org,
@@ -69,14 +69,10 @@ Cc: sudeep.holla@kernel.org,
 	puranjay@kernel.org,
 	usama.arif@linux.dev,
 	kernel-team@meta.com,
-	Cristian Marussi <cristian.marussi@arm.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	devicetree@vger.kernel.org
-Subject: [PATCH v4 06/31] dt-bindings: firmware: arm,scmi: Add support for telemetry protocol
-Date: Fri, 12 Jun 2026 23:37:36 +0100
-Message-ID: <20260612223802.1337232-7-cristian.marussi@arm.com>
+	Cristian Marussi <cristian.marussi@arm.com>
+Subject: [PATCH v4 07/31] include: trace: Add Telemetry trace events
+Date: Fri, 12 Jun 2026 23:37:37 +0100
+Message-ID: <20260612223802.1337232-8-cristian.marussi@arm.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260612223802.1337232-1-cristian.marussi@arm.com>
 References: <20260612223802.1337232-1-cristian.marussi@arm.com>
@@ -100,13 +96,13 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[29];
-	FREEMAIL_CC(0.00)[kernel.org,broadcom.com,gmail.com,linaro.org,st.com,oss.nxp.com,amd.com,ti.com,arm.com,linux.dev,meta.com,vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-92218-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	FREEMAIL_CC(0.00)[kernel.org,broadcom.com,gmail.com,linaro.org,st.com,oss.nxp.com,amd.com,ti.com,arm.com,linux.dev,meta.com];
+	TAGGED_FROM(0.00)[bounces-92219-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:linux-kernel@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:arm-scmi@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:sudeep.holla@kernel.org,m:james.quinlan@broadcom.com,m:f.fainelli@gmail.com,m:vincent.guittot@linaro.org,m:etienne.carriere@st.com,m:peng.fan@oss.nxp.com,m:michal.simek@amd.com,m:d-gole@ti.com,m:jic23@kernel.org,m:elif.topuz@arm.com,m:lukasz.luba@arm.com,m:philip.radford@arm.com,m:brauner@kernel.org,m:souvik.chakravarty@arm.com,m:leitao@kernel.org,m:kas@kernel.org,m:puranjay@kernel.org,m:usama.arif@linux.dev,m:kernel-team@meta.com,m:cristian.marussi@arm.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:devicetree@vger.kernel.org,m:ffainelli@gmail.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:linux-kernel@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:arm-scmi@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:sudeep.holla@kernel.org,m:james.quinlan@broadcom.com,m:f.fainelli@gmail.com,m:vincent.guittot@linaro.org,m:etienne.carriere@st.com,m:peng.fan@oss.nxp.com,m:michal.simek@amd.com,m:d-gole@ti.com,m:jic23@kernel.org,m:elif.topuz@arm.com,m:lukasz.luba@arm.com,m:philip.radford@arm.com,m:brauner@kernel.org,m:souvik.chakravarty@arm.com,m:leitao@kernel.org,m:kas@kernel.org,m:puranjay@kernel.org,m:usama.arif@linux.dev,m:kernel-team@meta.com,m:cristian.marussi@arm.com,m:ffainelli@gmail.com,s:lists@lfdr.de];
 	FORGED_SENDER(0.00)[cristian.marussi@arm.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
@@ -120,46 +116,85 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	ALIAS_RESOLVED(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,arm.com:dkim,arm.com:email,arm.com:mid,arm.com:from_mime,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:dkim,arm.com:email,arm.com:mid,arm.com:from_mime,vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 1233B67CD43
+X-Rspamd-Queue-Id: 8B85B67CD60
 
-Add new SCMI v4.0 Telemetry protocol bindings definitions.
+Add custom traces to report Telemetry failed accesses and to report when DE
+values are updated internally after a notification is processed.
 
 Signed-off-by: Cristian Marussi <cristian.marussi@arm.com>
 ---
-v3 --> v4
- - changed protocol number to lowercase 1b
- - fixed misplaced block for protocol 0x1b
+ include/trace/events/scmi.h | 48 ++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 47 insertions(+), 1 deletion(-)
 
-Cc: Rob Herring <robh@kernel.org>
-Cc: Krzysztof Kozlowski <krzk+dt@kernel.org>
-Cc: Conor Dooley <conor+dt@kernel.org>
-Cc: devicetree@vger.kernel.org
----
- Documentation/devicetree/bindings/firmware/arm,scmi.yaml | 8 ++++++++
- 1 file changed, 8 insertions(+)
-
-diff --git a/Documentation/devicetree/bindings/firmware/arm,scmi.yaml b/Documentation/devicetree/bindings/firmware/arm,scmi.yaml
-index d06cca9273c4..be733f8d60a0 100644
---- a/Documentation/devicetree/bindings/firmware/arm,scmi.yaml
-+++ b/Documentation/devicetree/bindings/firmware/arm,scmi.yaml
-@@ -324,6 +324,14 @@ properties:
-     required:
-       - reg
+diff --git a/include/trace/events/scmi.h b/include/trace/events/scmi.h
+index 703b7bb68e44..b70b26e467b8 100644
+--- a/include/trace/events/scmi.h
++++ b/include/trace/events/scmi.h
+@@ -7,7 +7,8 @@
  
-+  protocol@1b:
-+    $ref: '#/$defs/protocol-node'
-+    unevaluatedProperties: false
-+
-+    properties:
-+      reg:
-+        const: 0x1b
-+
- unevaluatedProperties: false
+ #include <linux/tracepoint.h>
  
- $defs:
+-#define TRACE_SCMI_MAX_TAG_LEN	6
++#define TRACE_SCMI_MAX_TAG_LEN		6
++#define TRACE_SCMI_TLM_MAX_TAG_LEN	16
+ 
+ TRACE_EVENT(scmi_fc_call,
+ 	TP_PROTO(u8 protocol_id, u8 msg_id, u32 res_id, u32 val1, u32 val2),
+@@ -180,6 +181,51 @@ TRACE_EVENT(scmi_msg_dump,
+ 		  __entry->tag, __entry->msg_id, __entry->seq, __entry->status,
+ 		__print_hex_str(__get_dynamic_array(cmd), __entry->len))
+ );
++
++TRACE_EVENT(scmi_tlm_access,
++	TP_PROTO(u64 de_id, unsigned char *tag, u64 startm, u64 endm),
++	TP_ARGS(de_id, tag, startm, endm),
++
++	TP_STRUCT__entry(
++		__field(u64, de_id)
++		__array(char, tag, TRACE_SCMI_TLM_MAX_TAG_LEN)
++		__field(u64, startm)
++		__field(u64, endm)
++	),
++
++	TP_fast_assign(
++		__entry->de_id = de_id;
++		strscpy(__entry->tag, tag, TRACE_SCMI_TLM_MAX_TAG_LEN);
++		__entry->startm = startm;
++		__entry->endm = endm;
++	),
++
++	TP_printk("de_id=0x%llX [%s] - startm=%016llX endm=%016llX",
++		  __entry->de_id, __entry->tag, __entry->startm, __entry->endm)
++);
++
++TRACE_EVENT(scmi_tlm_collect,
++	TP_PROTO(u64 ts, u64 de_id, u64 value, unsigned char *tag),
++	TP_ARGS(ts, de_id, value, tag),
++
++	TP_STRUCT__entry(
++		__field(u64, ts)
++		__field(u64, de_id)
++		__field(u64, value)
++		__array(char, tag, TRACE_SCMI_TLM_MAX_TAG_LEN)
++	),
++
++	TP_fast_assign(
++		__entry->ts = ts;
++		__entry->de_id = de_id;
++		__entry->value = value;
++		strscpy(__entry->tag, tag, TRACE_SCMI_TLM_MAX_TAG_LEN);
++	),
++
++	TP_printk("ts=%llu  de_id=0x%04llX  value=%016llu [%s]",
++		  __entry->ts, __entry->de_id, __entry->value, __entry->tag)
++);
++
+ #endif /* _TRACE_SCMI_H */
+ 
+ /* This part must be outside protection */
 -- 
 2.54.0
 
