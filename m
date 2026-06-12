@@ -1,111 +1,111 @@
-Return-Path: <linux-doc+bounces-92078-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92080-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id LOiBA7y1K2rOCQQAu9opvQ
-	(envelope-from <linux-doc+bounces-92078-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 09:31:08 +0200
+	id WamsN8i2K2qbCgQAu9opvQ
+	(envelope-from <linux-doc+bounces-92080-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 09:35:36 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56DDE6773C1
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 09:31:07 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3D62D67746E
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 09:35:36 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=google.com header.s=20251104 header.b=L58aOBc1;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92078-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-92078-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=google.com header.s=20251104 header.b=tutk9yub;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92080-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92080-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=reject) header.from=google.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 11A1530D68D2
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 07:31:06 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 761F533E8C1D
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 07:33:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D48D03630AE;
-	Fri, 12 Jun 2026 07:31:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D6B7D3D903E;
+	Fri, 12 Jun 2026 07:33:26 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com [209.85.208.45])
+Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DBD43242CA
-	for <linux-doc@vger.kernel.org>; Fri, 12 Jun 2026 07:31:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 440933D8103
+	for <linux-doc@vger.kernel.org>; Fri, 12 Jun 2026 07:33:24 +0000 (UTC)
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781249464; cv=pass; b=XziM9h0/N3C0IG/R4OwYVP1N6NZ4AcgS7ppEl/nqCwOB3fcnWwhVD02nnkTm7CMtJv9IP/W598Smrhv1eV/ddeNFi8pUa3359YsUz+dTKm/39NuSGV6Al0dnenAqEWmVB/bhvi7NyaiVLi+X+qAJEO49ot34IBsH3+suDnXBhFw=
+	t=1781249606; cv=pass; b=kj34KgtyGOTIvqV6NHKZFdBmStJGGItrKVQwURmGLFwJGROUdittw35ryFbnKPymhnY8UGpub+SEWnN+3CAA6/+eQ61ieFYMug+6GVcAQdMSLK/YDAXwPzeWWp4QEa7pJr6eC9fa/z2HfCE/aD1JxixRCKqUQ3Edyp+AZmDcKjM=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781249464; c=relaxed/simple;
-	bh=TJhwC0TjtETgO7UDDcPQsbkdSGcQTc0ybmTI+jD//dA=;
+	s=arc-20240116; t=1781249606; c=relaxed/simple;
+	bh=+CK+tt771npQ32DrjHpsZa5xuUy11BpcBUH4eDrxn4c=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=Xec5gRO8t+48/PTZjilkSzjyLvucWHo7BSymRV/Z1VjPWJVaV6kve8EleFX5OJcC/NZArEkns+tjjidoatey/I5fTjH98ge9T4GyOIyS+ZLUwLz8hSEC5mqZXXrxEovfh3YnQQWTZJP2FO8rvRh7tqNl5o5qgT+KZ9ngedOioe0=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=L58aOBc1; arc=pass smtp.client-ip=209.85.208.45
-Received: by mail-ed1-f45.google.com with SMTP id 4fb4d7f45d1cf-68bfcf11050so1199540a12.0
-        for <linux-doc@vger.kernel.org>; Fri, 12 Jun 2026 00:31:03 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781249462; cv=none;
+	 To:Cc:Content-Type; b=uJl2noxgLv/zi0+8ywFpHTmAGU4cDwcBJTqMTASKF8NTYF+PsYZZ9HZUc2lOr2uu1P/uocdoHOiVLo6pt5nJreT+O7/s4acfkSCvZrj3kDiuGUz3MGi4PdPo7yT9XLzCAvltw24MswH9Z+CurOPMAcaZj3/jb+5JbdbQ+tnACcs=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=tutk9yub; arc=pass smtp.client-ip=209.85.128.178
+Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-7de68222e96so5154677b3.2
+        for <linux-doc@vger.kernel.org>; Fri, 12 Jun 2026 00:33:24 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781249603; cv=none;
         d=google.com; s=arc-20240605;
-        b=DeQwdHz7ALu6neS0U18rdeUc6q8jqzFzZ4j/oGUJ4UieTTv9W1WKlES+9i6iygcOXY
-         FK5IkjrA23UxFEFLe6NEf8OFlDoK104VbDBj9sb5fC9sspbYKt9Pagakz/LNieGyD0T7
-         vuktiCtMhEfICb51xC5fg8gNrM5T0Z3W84DVUf/jLatAbHB1N3zyCEq8TE8PFsM7klFy
-         3SQwou+k7GToLc9yRzewgM4TiS+xphc2xVMKUYcpSKUJ5tQ9ZGI9CNKW+u4/bUNYVMwC
-         JBMx9zkmo3fdBRYia9svfR/de5jv2BZBUMZxJmyzRwPvp0d3TJXSjo3rQNmuhKHvErDj
-         03kQ==
+        b=kmKsjH1KsW3qlYzjpk9iEsy1im+B37ARTGvsZj5kOV0mAcr0lJlBayNT85z03DvQOB
+         xoXVUX111MV8l6iypKjQ3Wz6sdChKZq5kwDeYkGcvSJwnjztS8Awl0LJiCjkYR/6EwoF
+         z3dcirlPMa2qdInv6KLSPz0hvvbVqLZlWDrHQOuZR1EbCyCaen34KKP3WiZHTamc2OUj
+         uWJ5243yDiumSYc07zapkZMGqhtthSrwM098rx9P7Q6ncGQI7ais5B9pZYLeTxCS4uye
+         ur5RmkKXADHJ8q0jx31SOuumVZSrcJlc//wpF+yAgkLEy0JTPCcZkRk5YK/QGyxqLxZF
+         n+lg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=SbYOYDefhLvBGJQzilDjssSWO2zIKceTdBiGnToKxU0=;
-        fh=7aZWi63kXy9YsusoO6XbvImfTNH6vnVR9oys6VLecPY=;
-        b=NkzivXfKPRacaWaR8LQPg6YPt3vNhKjlVYUauXwu2rOvvwNxEbkAcyJCZFm2mD7yQU
-         pPdDIsu6X/12Lu/ICK2MIp5XcdWTQ8DH1vzd8gREguUNi0EpbEfRf42MjwndakQP+bA8
-         MG5wGpCLDENlHmbS3AsrtZkf7rdHLRqwhY0OAj0BPZUGfjkW5OhihUDDiUSrji+iahkK
-         2ERsN3wBlAUW9/x3Hfwsu7iek4XE2BHUl2iHGhS+zwLPBs9ZRdt6pJn/IQYVrR9+dIQc
-         tMpQ+ota1MfJYMZEzCVmTYD0fRFp4dARgjefZTSyr319rQ6T0D3XGnUvTCjwuf2SU+rP
-         NF7g==;
+        bh=37yHv6yFdGH61lIGAgzgwqwgl+igTLCwlH4B//p5pEE=;
+        fh=IcwfTehrmRwp+wM3i4l/sQH3BUsC/AoR5jEkdsJTLvo=;
+        b=PZbolcmyurSLwpOZu+0OgiUDO3P0uop7DQUbU0BlReBeM53ZsH83izBq1RTE7uZ3is
+         4Vf7whQC2PqQ4FOXGpvDoHIZAcpm7h82IK4s3r1ZQeiUMvl2rjgkdhuvJcibdkDJz6il
+         Yjv1338IiSFjR+BlRN0cFsPQiKFoG3ZmREqPtvy+MfbkmdPyw94Fg1v3ZbBaUloCje5D
+         oOp8BcpoSFCK24WERscMRshgT9fQIk9n6JWUnOJSdFyQlt8doU4R/EWZpcwLt9EZ4y1a
+         kfvMMSNsfTGPdjsFZTt4Yg4bqq54n8m6MVxRjNG7ua0p3R/WIf/zT8I+tfC/PqmbmKuH
+         7ELg==;
         darn=vger.kernel.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1781249462; x=1781854262; darn=vger.kernel.org;
+        d=google.com; s=20251104; t=1781249603; x=1781854403; darn=vger.kernel.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=SbYOYDefhLvBGJQzilDjssSWO2zIKceTdBiGnToKxU0=;
-        b=L58aOBc1t+GGEQcW9ZUCClwQvWRVSfh0l0dwUX8RnHUPdAiHfoAgoY/hLcJF5PqmDz
-         wD8Dm+3RibTWmuGetriZAkwjyoP2m+Q4jWl7sqx5+R0KFi0niCRZuAdEfb7uJHjaLBIs
-         buBnyvjXmSXIzid5o7u60MGJ5+6TJrjvLQfTIaiUjxT7msImLvAEluy5rwmU3flVIOmT
-         6gWjbSPp4E9eYP8MuxGF+1HB8FU2Rwrdd5LhA+49UXBs0si3uKubqA6+S+ONUEfSN359
-         OEJcXHBCDuoFF8wcGR8XNKobiWWA3Bo0w18RacL+2ijuRLf/mOQ6KqaZNYaAj0u6AMh5
-         5/vQ==
+        bh=37yHv6yFdGH61lIGAgzgwqwgl+igTLCwlH4B//p5pEE=;
+        b=tutk9yubKt7rHGQInrqHwM30HuPbjoAYyeaA/DlyS9ulVx7Xam6hQFFnFX0Mntw92w
+         FP29nQouQzxm7wsKMLZY9u7LhPVrwxPgreKyPQz+S+b1V9tFNgpbFHN2YWIMM0RIMHcr
+         zjt2S4JuWLGXVZYA3yuWEPE/YdiePv9l1bm1gYpu0qFrN2+JVUvGRAWCLC/ID3UaDJzJ
+         fJwS58v324aOEln5ZKPwjAIJ1a4KXwF0TgrBZ8fzjZo6bgxDwdDdbqNfcCRbmwpHVJO/
+         g2b2lpak3J2s9Dxyk6EQrBvA9Hail/tGrtjlGeqQbgRdwbiFAyEv1Ls+u9aS+jjcRX5E
+         O/Vw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781249462; x=1781854262;
+        d=1e100.net; s=20251104; t=1781249603; x=1781854403;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=SbYOYDefhLvBGJQzilDjssSWO2zIKceTdBiGnToKxU0=;
-        b=AbAwU6ch+T5IY20J+VnQAgg+2qQlx64GjsWkdrOgY3f8hwjsWb6fNujpQpeLjtZf+V
-         iwYNk7nYA4anw8Mt19hFBRqMplgtDP64dSdaau0wxX1RGhxyeDqruocBrW4PgYXwJhNB
-         bjdBVt1xhKcPvsmp+t7uKyodTEiQ8C+iIw2HDhAXbm/Fn3O8b20CcXzzLjbNOilSOxMY
-         TR3EiRvgODYHMpepl+MnwV594j3nWFWAehJQvYgmatP34z+dA3TdshpYeuVR8x7C1tJy
-         nTM6ejmRxPkb6qATEgl40Pnx+0zA80PbHwFSW9eiQnbAJhZbM4XB218UhHe5QplCAg5h
-         hjkQ==
-X-Forwarded-Encrypted: i=1; AFNElJ+FVAqI+tgujAXEWebS9FrBSL9XCBfTO86A63L13pUrmY6dMV5/M/6WAhdWJxB3YPJl+2Sl6xdrS0c=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzvKC7i1G8LtC9S3QOEqJ8PyjR/BpHbPHw0mlh5JYv1e/Gs0jsx
-	G42YWcRogBYhW3LS9uwpV1wmgu93ISN0kamSFsvuzFLGBuDOYA7FglgmLexwTztTPruLlQiBsuq
-	PSZrhD9vrzpKOuVMPI75eQlSR9di8EfbqcL13x6hv
-X-Gm-Gg: Acq92OHI23wzxr/YUjWI4CCTvz8cICW9azM1HAlrzcLOtJTaz64AbYR1dS9YIaZiS56
-	jV+QCfodV4wKGUG1bbbw3noH9qeeNPbM7sOv1NI+9ilMOPRDjuvYGHdbQkmurmQ3OL75nqhOFpC
-	hPjy6DwOvqC5KpCfj/0AmTM02pAVFXUzYcKcufk8tsoukihFIjGzMp9X5UskQ+NiUPocW1S6vyb
-	SZU+ad7mJ7NQ/dXoqFA0qppk+yoJt8aEKogFrZQroOAe7Q/M1EDKAGQ61r/xIYe+fUWxxddfCdN
-	d/U0843EBh+Kop+gqteM1OuFYIKrygukYcD3fw==
-X-Received: by 2002:a05:6402:360e:b0:691:ad29:ea33 with SMTP id
- 4fb4d7f45d1cf-693779d1edfmr692502a12.12.1781249461160; Fri, 12 Jun 2026
- 00:31:01 -0700 (PDT)
+        bh=37yHv6yFdGH61lIGAgzgwqwgl+igTLCwlH4B//p5pEE=;
+        b=fLGmXksVgEiVIn5EJFY2tahgcA56sGzKhZzvjdfxmv4Y57VHHVQWcTRSd4HqM1Dbln
+         MYII7yqt2YLQPNlax4GhDO0PjtTWNfJpkJI1M/I/EiuKO+5buMedJEy3vOCHCLqw5SyV
+         cqTfbaagJUTRiP6QWO3oycI8DBYpTOA05Q8IDsCeAPxOYhVuGqnRO2t5P9xZDJU9e+2z
+         nmRizipshFplG9l07BP77Z4xdefIpayWPTnIAnL0AtfDh/o3lUb6GJX5O3F1HiKGcNvJ
+         /XYicmcyOI7GPDicw2jm4+ENpix883tsKGRf13SyA4f9K86PZE2VDhDHZZCMmRAZaG1j
+         E8og==
+X-Forwarded-Encrypted: i=1; AFNElJ9w8Mlzasdg1EiAEx11vxYW4pyGXPTDqJx2+UHlo327RrhkwZE3ntKWXRkBqyx6qjSL2DPDIXr/17M=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx+3IgrdPXA4kBeUZjEJ/SmAkqhVRAUeGQBChJyRqfvLhZnebTE
+	Hb6oMvQcQynt/vZmEqazuZ6il9P3AYmtHox8xL9scssxzGSaXKQU+NGoFhRqiOcmDrsKCgqOOnJ
+	2iYU89ICn45ARUUxdz/H9k1woFWKevKmGttXquepv
+X-Gm-Gg: Acq92OGWk/By1a5E/85YqrgwJ5zCE9ZERbBWREmhuCfEtvQZPAqRBtQWm6QAUPFo+xF
+	k1ElUuYOTYm7l2kmvCnOjDojUk6gNkehBR6pWYpZiwx8XJ8oX1g14adLKL5JuTUs6S8Y6P2YWUj
+	fOhmHMTfbS9dNMHWfidmpMNObosIJQM268m+LXEKAj8mzrbwsCOUNQyY4Ky8o1rGPhYJqVXnw7o
+	v3UNQGkwvJ9a5RCubweZ4xvXNCVPbd+3qonNY/Pgd1OvKpQ4o3kDf3KGGwKekXgchCaMGXtwLL+
+	noQkUAYi8ayEh0dMsMOxaPFYY9w1uX6xTWO6Nw==
+X-Received: by 2002:a05:690c:c502:b0:7bd:8752:cdbd with SMTP id
+ 00721157ae682-7f7bdb01a78mr15009497b3.41.1781249602660; Fri, 12 Jun 2026
+ 00:33:22 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260611-b4-kcov-dataflow-v2-v2-0-0a261da3987c@est.tech> <20260611-b4-kcov-dataflow-v2-v2-3-0a261da3987c@est.tech>
-In-Reply-To: <20260611-b4-kcov-dataflow-v2-v2-3-0a261da3987c@est.tech>
+References: <20260611-b4-kcov-dataflow-v2-v2-0-0a261da3987c@est.tech> <20260611-b4-kcov-dataflow-v2-v2-4-0a261da3987c@est.tech>
+In-Reply-To: <20260611-b4-kcov-dataflow-v2-v2-4-0a261da3987c@est.tech>
 From: Alexander Potapenko <glider@google.com>
-Date: Fri, 12 Jun 2026 09:30:22 +0200
-X-Gm-Features: AVVi8CevQ1ha7IS1m5wrojNeqF7AokFDz6V9vLKSYwmszS5cFjeqHBoSGHAAq9c
-Message-ID: <CAG_fn=XRzSuFrxtFbz2t9jjY8HPUUhhnU3iWJiSV-X4+hg66cw@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 03/14] kcov: add barriers to recursion guard in kcov_df_write
+Date: Fri, 12 Jun 2026 09:32:43 +0200
+X-Gm-Features: AVVi8CfstzQNbiRE_Nzp0e98G9-7hbopDZWc7hVRExeHcpnRY99AeT5FguWPzQ8
+Message-ID: <CAG_fn=UJTVm+XVjq-wq1GsfFLvQuET7N1A6ZF_BWtYwmDab_TQ@mail.gmail.com>
+Subject: Re: [RFC PATCH v2 04/14] kcov: reject enable on multiple dataflow fds simultaneously
 To: Yunseong Kim <yunseong.kim@est.tech>
 Cc: Ingo Molnar <mingo@redhat.com>, Peter Zijlstra <peterz@infradead.org>, 
 	Juri Lelli <juri.lelli@redhat.com>, Vincent Guittot <vincent.guittot@linaro.org>, 
@@ -128,7 +128,8 @@ Cc: Ingo Molnar <mingo@redhat.com>, Peter Zijlstra <peterz@infradead.org>,
 	kasan-dev@googlegroups.com, rust-for-linux@vger.kernel.org, 
 	linux-kbuild@vger.kernel.org, llvm@lists.linux.dev, linux-mm@kvack.org, 
 	linux-kselftest@vger.kernel.org, workflows@vger.kernel.org, 
-	linux-doc@vger.kernel.org, Yeoreum Yun <yeoreum.yun@arm.com>
+	linux-doc@vger.kernel.org, Yeoreum Yun <yeoreum.yun@arm.com>, 
+	sashiko-bot <sashiko-bot@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Action: no action
@@ -136,72 +137,59 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
 	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	TAGGED_FROM(0.00)[bounces-92078-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER(0.00)[glider@google.com,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[49];
-	FORGED_RECIPIENTS(0.00)[m:yunseong.kim@est.tech,m:mingo@redhat.com,m:peterz@infradead.org,m:juri.lelli@redhat.com,m:vincent.guittot@linaro.org,m:dietmar.eggemann@arm.com,m:rostedt@goodmis.org,m:bsegall@google.com,m:mgorman@suse.de,m:vschneid@redhat.com,m:kprateek.nayak@amd.com,m:andreyknvl@gmail.com,m:dvyukov@google.com,m:akpm@linux-foundation.org,m:ojeda@kernel.org,m:boqun@kernel.org,m:gary@garyguo.net,m:bjorn3_gh@protonmail.com,m:lossin@kernel.org,m:a.hindborg@kernel.org,m:aliceryhl@google.com,m:tmgross@umich.edu,m:dakr@kernel.org,m:nathan@kernel.org,m:nsc@kernel.org,m:nick.desaulniers+lkml@gmail.com,m:morbo@google.com,m:justinstitt@google.com,m:kees@kernel.org,m:david@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:shuah@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-kernel@vger.kernel.org,m:kasan-dev@googlegroups.com,m:rust-for-linux@vger.kernel.org,m:linux-kbuild@vger.kernel.org,m:ll
- vm@lists.linux.dev,m:linux-mm@kvack.org,m:linux-kselftest@vger.kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:yeoreum.yun@arm.com,m:nickdesaulniers@gmail.com,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-92080-lists,linux-doc=lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER(0.00)[glider@google.com,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[redhat.com,infradead.org,linaro.org,arm.com,goodmis.org,google.com,suse.de,amd.com,gmail.com,linux-foundation.org,kernel.org,garyguo.net,protonmail.com,umich.edu,suse.com,lwn.net,linuxfoundation.org,vger.kernel.org,googlegroups.com,lists.linux.dev,kvack.org];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:yunseong.kim@est.tech,m:mingo@redhat.com,m:peterz@infradead.org,m:juri.lelli@redhat.com,m:vincent.guittot@linaro.org,m:dietmar.eggemann@arm.com,m:rostedt@goodmis.org,m:bsegall@google.com,m:mgorman@suse.de,m:vschneid@redhat.com,m:kprateek.nayak@amd.com,m:andreyknvl@gmail.com,m:dvyukov@google.com,m:akpm@linux-foundation.org,m:ojeda@kernel.org,m:boqun@kernel.org,m:gary@garyguo.net,m:bjorn3_gh@protonmail.com,m:lossin@kernel.org,m:a.hindborg@kernel.org,m:aliceryhl@google.com,m:tmgross@umich.edu,m:dakr@kernel.org,m:nathan@kernel.org,m:nsc@kernel.org,m:nick.desaulniers+lkml@gmail.com,m:morbo@google.com,m:justinstitt@google.com,m:kees@kernel.org,m:david@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:shuah@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-kernel@vger.kernel.org,m:kasan-dev@googlegroups.com,m:rust-for-linux@vger.kernel.org,m:linux-kbuild@vger.kernel.org,m:ll
+ vm@lists.linux.dev,m:linux-mm@kvack.org,m:linux-kselftest@vger.kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:yeoreum.yun@arm.com,m:sashiko-bot@kernel.org,m:nickdesaulniers@gmail.com,s:lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[google.com:+];
-	TO_DN_SOME(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[50];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[glider@google.com,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[redhat.com,infradead.org,linaro.org,arm.com,goodmis.org,google.com,suse.de,amd.com,gmail.com,linux-foundation.org,kernel.org,garyguo.net,protonmail.com,umich.edu,suse.com,lwn.net,linuxfoundation.org,vger.kernel.org,googlegroups.com,lists.linux.dev,kvack.org];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DKIM_TRACE(0.00)[google.com:+];
+	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,lkml];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,vger.kernel.org:from_smtp,infradead.org:email,est.tech:email,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 56DDE6773C1
+X-Rspamd-Queue-Id: 3D62D67746E
 
 On Thu, Jun 11, 2026 at 6:21=E2=80=AFPM Yunseong Kim <yunseong.kim@est.tech=
 > wrote:
 >
-> The recursion guard (bit-31 of kcov_df_seq) prevents reentry when
-> copy_from_kernel_nofault() or other called functions are instrumented
-> with INSTRUMENT_ALL. Without compiler barriers, the guard set/clear
-> can be reordered relative to the function body, making the protection
-> ineffective under optimization.
+> A task could enable tracing on multiple kcov_dataflow file descriptors,
+> corrupting the internal tracking state when one is subsequently closed.
 >
-> Add barrier() after setting the guard and before clearing it, ensuring
-> the compiler does not move instrumented operations outside the guarded
-> region.
+> Check current->kcov_df_enabled before allowing KCOV_DF_ENABLE and
+> return -EBUSY if already active. This matches kcov's check of
+> t->kcov !=3D NULL in the KCOV_ENABLE path.
 >
-> Cc: Peter Zijlstra <peterz@infradead.org>
+> Reported-by: sashiko-bot <sashiko-bot@kernel.org>
+> Closes: https://sashiko.dev/#/patchset/20260603-kcov-dataflow-next-202606=
+03-v2-0-fee0939de2c4%40est.tech
 > Signed-off-by: Yunseong Kim <yunseong.kim@est.tech>
 > ---
->  kernel/kcov_dataflow.c | 2 ++
-
-Please merge this patch into the one introducing kcov_dataflow.c
-
-
->  1 file changed, 2 insertions(+)
+>  kernel/kcov_dataflow.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
 > diff --git a/kernel/kcov_dataflow.c b/kernel/kcov_dataflow.c
-> index df7e8bf70bfa..5248293280d5 100644
+> index 5248293280d5..27587b8ceeab 100644
 > --- a/kernel/kcov_dataflow.c
 > +++ b/kernel/kcov_dataflow.c
-> @@ -86,6 +86,7 @@ kcov_df_write(u64 type_marker, u64 pc, u64 meta, void *=
-ptr,
->         if (t->kcov_df_seq & (1U << 31))
->                 return;
->         t->kcov_df_seq |=3D (1U << 31);
-> +       barrier();
 
-Please make sure barriers have comments explaining which barriers they
-pair with (see kernel/kcov.c)
+Please merge this patch into the one introducing kcov_dataflow.c
 
