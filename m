@@ -1,99 +1,80 @@
-Return-Path: <linux-doc+bounces-92126-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92131-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id XXULLhgpLGoDMgQAu9opvQ
-	(envelope-from <linux-doc+bounces-92126-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 17:43:20 +0200
+	id Z1UGKPQsLGqAMwQAu9opvQ
+	(envelope-from <linux-doc+bounces-92131-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 17:59:48 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 144F967A95A
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 17:43:20 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C90867AAA5
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 17:59:48 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=OlFMvHRd;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92126-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-92126-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
+	dkim=pass header.d=qq.com header.s=s201512 header.b=mKY0APvw;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92131-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-92131-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=qq.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 3034530C6C32
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 15:41:46 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 33619300D1D7
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 15:59:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F3F6D390981;
-	Fri, 12 Jun 2026 15:41:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D9E07349CE9;
+	Fri, 12 Jun 2026 15:59:44 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from out162-62-58-216.mail.qq.com (out162-62-58-216.mail.qq.com [162.62.58.216])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A9464386543
-	for <linux-doc@vger.kernel.org>; Fri, 12 Jun 2026 15:41:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 052C833D4EE;
+	Fri, 12 Jun 2026 15:59:41 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781278905; cv=none; b=eZ8mCsRDSemK0X2g9kniE4AlOmHKCAdR91InTWsIC53btUmHInxqjzLDRo060SJ/ek+3I4a+nCdxfFaImPaELjC6ft4+W8pgzCxxWUzZQmxIahmlliDYPQGEikjgNX0P+XbOE7Tt9xW86MgEqVvjmPxWT1keQBARq//CvQNoPZg=
+	t=1781279984; cv=none; b=SWyxULIn0a8CQFf9wZPm/iXegkhiZbtwG35H22+AMnq48N9zaApOBvDr89hRKPLjOVGuImJLx7r11CnoU8tKRroCoDM/evGmHB9pEvxgG1w/Ru6+XcgNLDhZLublCSaldOxGHGp4Qv3i2hvUW45NDWxVlegOVWbAcgRAu8f1b6s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781278905; c=relaxed/simple;
-	bh=XSbiX35MYt88wNRA9jDtXoTuBV9O4gzqI0rmqMUENh4=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version; b=bLX8BNaxJzLNIZF0uV51mhy93HXzWuC7G4lCilJgNRMG0PhiVFvgrTdLm2kTDd2veVbTwH220qEs6GPftbv2874O7GyPx0sL6XDx8gnPiKkA5pxjCrMQHa8Z6B3iuBKgJMFJC6+gGVHT06TkZ3Yw9QwaaXCowjtKeVG+i5aHjhk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=OlFMvHRd; arc=none smtp.client-ip=209.85.214.176
-Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-2bf2247e38eso10848205ad.3
-        for <linux-doc@vger.kernel.org>; Fri, 12 Jun 2026 08:41:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781278903; x=1781883703; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=lMSNFcJBymbDQ1FfS4jB1HE+wy0VFeTfT8KyQHMfM+0=;
-        b=OlFMvHRd2nHn4pXboAm4JWdrjunnpY3X5tnn3aOs+BhcureGIn51EiHsXYf6RVxw4P
-         fqD63Wry05TLH6Z05ZErieP7hJLoUFuA5XQJEpctvFv4ssrZEyF9eRFTJe66bswn8dZH
-         3Wxcox6czeJe3aBp/h8IMtC08exIeJ/fQq4GRtt27eaDRtYbdwmSiXr2sEyZZj2eAueB
-         JFNiPTbmFRRSEt7AFVR+rgXO6voN7y11nDRPChKH1JUPfyrZPZa/QorgzO4Qofk61zME
-         ijD7GuxY74NaAKbV9Oy5yONmB2/kbcqCmNR7bL1zCOKEyaLKvRcyuj4cSe8h3Z7Tc2LI
-         NhRQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781278903; x=1781883703;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=lMSNFcJBymbDQ1FfS4jB1HE+wy0VFeTfT8KyQHMfM+0=;
-        b=kX/AIeWoAuKXX1di+25k0YL4cG+NwoJSSX4qJXkoCYrqkylOOhR+tKMTsW6aFgGBGu
-         6iSDnpNG2lTcGdoEUvjyaZNoq0VB3GbVL7kLodDTBRxrZMarLrIpp+dwJyW3hO0yyJ3N
-         rzc3b6YRInCI1Md/tWndTfvgNVLrxgr/X7ZIEbIFM4CCmpqdEDlVAvvVPxv6pV4XIKRS
-         7GTI0cEY6zJbp0SP4g7SMuMl8yiIWdARmVhuH7OsK0hb9OXyO1NpiGFW69R44DoSOun/
-         Zn9qRwa61Z4XvjTyy5YpNQ0stxFe0PiUv4Cajf7tBqIKh22pJzWBrsIv8L0yfWDsSnmp
-         4axQ==
-X-Forwarded-Encrypted: i=1; AFNElJ9effA0t2/8+fuC81UdPuGsJFjDaQ9kqGOxIeGeM8vz1+3xkX8CFCzmlsX+YRpVoD2iZWKECxsuNzU=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxTSD6NNnzvV7PADXSGFCMQx2+FuVny03wHVZcZPsa5/MtddTeQ
-	PfnS7qSZlpZpDs8Jrd3E78x2e7BjcFkK3R/dz90n2VIeD6dFUtHH507P
-X-Gm-Gg: Acq92OGys+wL7ZJG11m9eeZK273plrbBqw9OWZ9SR5dyGIv6zc52ji+hGIAELW2hdat
-	iTYhvIky6RyT7MdL8B7nUNLZg417lxJBVJoTamWjRwcevptzb5ppRwhkPVT1GlVVVjqdTEsxFNU
-	845nDocjYqlJvBcdMtffYvz5F6S8Bk2effQoBFShyz11yXmZY/oHIIzgOpooZxPjltpSK7ry0Bu
-	o+CPU4UMCTXI/fV2sTMbk4+tDQDmG6voswnDkaUYHu1Mntyc/dMG1QJCP52s6afDwWijlgKzpjd
-	ngmxuw5RCJ5KUZxc/SOeZcwc5TBT6/EkFJm/yPE5yJlSgkGQFREFa6SmCa6cm2pglGgtipUjgvj
-	SaALRDMgEyPjCo05myTduHKjkXp1jc4P89ibittx1fcftPiFy5f0r4QMQOkS6GNv7YqlJ56IOuT
-	1O3jZ332Yz8yz8ZqelO9DqN264EQvYe+lxdGfmbV8IqeyMwga772Z1VmOvICgEWrmDMVyxtwf1O
-	Gwij7A=
-X-Received: by 2002:a17:903:2985:b0:2c1:564b:4f47 with SMTP id d9443c01a7336-2c412840ae4mr41665205ad.26.1781278902981;
-        Fri, 12 Jun 2026 08:41:42 -0700 (PDT)
-Received: from shardul-ThinkPad-P16s-Gen-4-AMD.tail792e28.ts.net ([2401:4900:1c17:d4b4:80cb:f14b:59ec:7cab])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c42f2e52b5sm24559555ad.7.2026.06.12.08.41.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 12 Jun 2026 08:41:42 -0700 (PDT)
-From: Shardul Deshpande <iamsharduld@gmail.com>
-To: SeongJae Park <sj@kernel.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	David Hildenbrand <david@kernel.org>,
-	Lorenzo Stoakes <ljs@kernel.org>,
-	"Liam R. Howlett" <liam@infradead.org>,
-	Vlastimil Babka <vbabka@kernel.org>,
-	Mike Rapoport <rppt@kernel.org>,
-	Suren Baghdasaryan <surenb@google.com>,
-	Michal Hocko <mhocko@suse.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	damon@lists.linux.dev,
-	linux-mm@kvack.org,
+	s=arc-20240116; t=1781279984; c=relaxed/simple;
+	bh=8fd54BbzUf1140gNwkaPK+5v0L3fIU88JElzw/g48Mk=;
+	h=Message-ID:From:To:Cc:Subject:Date:MIME-Version; b=L+ozVRy/LxQ8Sj4W1yf28B7GIZH+z7iIK0hmZjIPb1jU0A/g0nkwzreoKMWt5wseshVz0Zgb9w2WGTm7KYX70otACpzqSlqave5fFZWi133VbEBqZuMpZMDPYAxIHzqDbgv4BbceekvfjlqBMhsDPDc+iyl2EO4EnKFwNMF7Kao=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=qq.com; spf=pass smtp.mailfrom=qq.com; dkim=pass (1024-bit key) header.d=qq.com header.i=@qq.com header.b=mKY0APvw; arc=none smtp.client-ip=162.62.58.216
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+	t=1781279972; bh=ai8EBrIICvkd1TZSYYlXYZrQb4Tl1iyP+eNEDVZe44Y=;
+	h=From:To:Cc:Subject:Date;
+	b=mKY0APvwOakM1feAX7LGGFU9l4XaBBd7FB2nvZPeh32TaHlOVusWZ7JFmatwoROpR
+	 0ax8Sxv5Oq0he5Wc2QDWWsUJeUqby8t8Emls9aZKAhSPLbSEWlgDJZRYAQUUKLQX4R
+	 TbP5hinBx/Jipohv/Ow9xx946KR4ZJK0+euXdKS4=
+Received: from 172-1-1-128.lightspeed.hstntx.sbcglobal.net.localdomain ([27.38.179.189])
+	by newxmesmtplogicsvrszc43-0.qq.com (NewEsmtp) with SMTP
+	id EDDB30C4; Fri, 12 Jun 2026 23:59:29 +0800
+X-QQ-mid: xmsmtpt1781279969ta6ifr0a2
+Message-ID: <tencent_001080DF135CEE2CD1B260EFA08E3CC71A09@qq.com>
+X-QQ-XMAILINFO: OVFdYp27KdlJTnArvpH5PN3wElsjW4SMQFv99zuzjsvasCRUcyKqVGX+43H9WG
+	 WmOJkzDxI6JPBgAlPUR5+AoDRYGbmb6Ay7+zg7OQaWPQWMwvTEh85MrSKto1gKjYlQNhuRDhs7sb
+	 6yd290sqAWzkDSlmpqQxFDM3oFQy8WyF/8diucuNkvYOJZeYiQXGOkQGBvBL5HxzrBl4QygYk6rC
+	 smv1bsJBni75erXUivFJEIHEmynlm1BlfSg3wvRb2Cx2fMsPadVudCpVskR9fgaLdu6O1LB24LL9
+	 SAWpkZgNmI3IdLKSYAXOS9VJaTlVbgTztOiSyuTwJrsSWdhurI/O9e4OiwlOP8u/yiTECagp8vFd
+	 Dl8ZNZ15yo/Xhf2hRYwDU7JqJ7zHSavGq20ZrSwJOfDIu8fcwLwaJ4XwO2Q8AfoSN+l7+rCz585K
+	 y7RCOTuL9v0PDStcXsYSH3Mn28DGoDQv4ugwZhED5RvgW9wBhi0+eqS1rKyLj5CS29zy1uCGIR5+
+	 hGAISixFxwhfJhy4SOyIKYWdubmSl2pFjn4NnIFPEFQHL3ISCPE8kG7nHt7X4yKAJHlSQbsyUvIR
+	 u/CmVJMUG2qrjKwhvPkURcgpZQe2Z44Z/Gucyca1S6NEj30bxmC9VpXAvTHCiY4Pb7bcNjLPvN2S
+	 +2e/Lbfx7zU//cxQH8gLd/mAmtT/rgObe0DCzeyvolNFeo3K1ZuXuKro2OxxWTfdjo68CqxqLmJG
+	 FCtlT+Y1UNNA5cOtmNKPWblJPoWACqPT5LJE+u1uRc6Tj2TTDjDiHL4yCPa/SApzGNu/HFLjQvjF
+	 VtOM9J1ub+h6vCb0B3xlZ8VmYFnDBYtfyuYf1H/snHI6XDbdQ5GyrOmszjAdT+JypI4J0DJp2Tii
+	 C/gcdcnTJtzaiQSiH/jCEVziElr3Xepcg8NFSqSSdusHvIrbAb1JAyVxxe8G7OVNMVSJ/FBSGx5d
+	 vpTvlL+qLkLyveVYEREjq77epqva0zjbyviwjqGNj0AsTKOpXL/4dpUwXNAq2jYKD5q1WIY7T/xZ
+	 BhryVHECwwQECnxG+vkP6lz9q+f7sebHshzn8M4GEHYMUA/qHJ6K5zxvDbFIvkd+p+3hb2BUc6u+
+	 7nd3LhQJp2iD7kVmrsy2Aercvf5g==
+X-QQ-XMRINFO: Nq+8W0+stu50tPAe92KXseR0ZZmBTk3gLg==
+From: Yan Zhu <zhuyan2015@qq.com>
+To: alexs@kernel.org,
+	si.yanteng@linux.dev,
+	corbet@lwn.net,
+	mic@digikod.net
+Cc: dzm91@hust.edu.cn,
+	skhan@linuxfoundation.org,
+	gnoack@google.com,
+	zhuyan2015@qq.com,
 	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH] Docs/mm/damon/design: fix a typo in the Address Unit section
-Date: Fri, 12 Jun 2026 21:10:54 +0530
-Message-ID: <20260612154054.720363-1-iamsharduld@gmail.com>
+	linux-security-module@vger.kernel.org
+Subject: [PATCH 00/10] docs/zh_CN: add LSM admin-guide Chinese translation
+Date: Fri, 12 Jun 2026 23:58:19 +0800
+X-OQ-MSGID: <cover.1781105672.git.zhuyan2015@qq.com>
 X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -103,64 +84,92 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	DMARC_POLICY_ALLOW(-0.50)[qq.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_DKIM_ALLOW(-0.20)[qq.com:s=s201512];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-92131-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[hust.edu.cn,linuxfoundation.org,google.com,qq.com,vger.kernel.org];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TAGGED_FROM(0.00)[bounces-92126-lists,linux-doc=lfdr.de];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:sj@kernel.org,m:akpm@linux-foundation.org,m:david@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:damon@lists.linux.dev,m:linux-mm@kvack.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[15];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER(0.00)[zhuyan2015@qq.com,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:alexs@kernel.org,m:si.yanteng@linux.dev,m:corbet@lwn.net,m:mic@digikod.net,m:dzm91@hust.edu.cn,m:skhan@linuxfoundation.org,m:gnoack@google.com,m:zhuyan2015@qq.com,m:linux-doc@vger.kernel.org,m:linux-security-module@vger.kernel.org,s:lists@lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[iamsharduld@gmail.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[qq.com:+];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[iamsharduld@gmail.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[zhuyan2015@qq.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TO_DN_SOME(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_NONE(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	FREEMAIL_FROM(0.00)[qq.com];
 	ALIAS_RESOLVED(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp]
+	MID_RHS_MATCH_FROM(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 144F967A95A
+X-Rspamd-Queue-Id: 7C90867AAA5
 
-The "Address Unit" section misspelled the C type that the DAMON core
-layer uses for monitoring target address ranges.  Correct it to read
-"unsigned long".
+This patch series adds the Chinese translation for the Linux Security Module
+(LSM) admin-guide documentation, including the main index and all ten
+sub-pages: apparmor, LoadPin, SELinux, Smack, tomoyo, Yama, SafeSetID,
+ipe, and landlock.  The admin-guide toctree is also updated to list the
+newly translated LSM/index.
 
-Signed-off-by: Shardul Deshpande <iamsharduld@gmail.com>
----
- Documentation/mm/damon/design.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+The original English documentation was restructured into reStructuredText
+by Kees Cook in commit 504f231cda56 ("doc: ReSTify and split LSM.txt"),
+and each sub-page has been kept up-to-date with subsequent mainline changes.
 
-diff --git a/Documentation/mm/damon/design.rst b/Documentation/mm/damon/design.rst
-index afc7d52bd..899ac9c69 100644
---- a/Documentation/mm/damon/design.rst
-+++ b/Documentation/mm/damon/design.rst
-@@ -140,7 +140,7 @@ as Idle page tracking does.
- Address Unit
- ------------
- 
--DAMON core layer uses ``unsinged long`` type for monitoring target address
-+DAMON core layer uses ``unsigned long`` type for monitoring target address
- ranges.  In some cases, the address space for a given operations set could be
- too large to be handled with the type.  ARM (32-bit) with large physical
- address extension is an example.  For such cases, a per-operations set
+
+base: https://git.kernel.org/pub/scm/linux/kernel/git/alexs/linux.git docs-next
+
+
+
+Yan Zhu (10):
+  docs/zh_CN: add LSM/index Chinese translation
+  docs/zh_CN: add LSM/apparmor Chinese translation
+  docs/zh_CN: add LSM/LoadPin Chinese translation
+  docs/zh_CN: add LSM/SELinux Chinese translation
+  docs/zh_CN: add LSM/Smack Chinese translation
+  docs/zh_CN: add LSM/tomoyo Chinese translation
+  docs/zh_CN: add LSM/Yama Chinese translation
+  docs/zh_CN: add LSM/SafeSetID Chinese translation
+  docs/zh_CN: add LSM/ipe Chinese translation
+  docs/zh_CN: add LSM/landlock Chinese translation
+
+ .../zh_CN/admin-guide/LSM/LoadPin.rst         |  33 +
+ .../zh_CN/admin-guide/LSM/SELinux.rst         |  45 ++
+ .../zh_CN/admin-guide/LSM/SafeSetID.rst       |  82 ++
+ .../zh_CN/admin-guide/LSM/Smack.rst           | 722 +++++++++++++++++
+ .../zh_CN/admin-guide/LSM/Yama.rst            |  71 ++
+ .../zh_CN/admin-guide/LSM/apparmor.rst        |  59 ++
+ .../zh_CN/admin-guide/LSM/index.rst           |  46 ++
+ .../zh_CN/admin-guide/LSM/ipe.rst             | 723 ++++++++++++++++++
+ .../zh_CN/admin-guide/LSM/landlock.rst        | 169 ++++
+ .../zh_CN/admin-guide/LSM/tomoyo.rst          |  63 ++
+ .../translations/zh_CN/admin-guide/index.rst  |   3 +-
+ 11 files changed, 2015 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/translations/zh_CN/admin-guide/LSM/LoadPin.rst
+ create mode 100644 Documentation/translations/zh_CN/admin-guide/LSM/SELinux.rst
+ create mode 100644 Documentation/translations/zh_CN/admin-guide/LSM/SafeSetID.rst
+ create mode 100644 Documentation/translations/zh_CN/admin-guide/LSM/Smack.rst
+ create mode 100644 Documentation/translations/zh_CN/admin-guide/LSM/Yama.rst
+ create mode 100644 Documentation/translations/zh_CN/admin-guide/LSM/apparmor.rst
+ create mode 100644 Documentation/translations/zh_CN/admin-guide/LSM/index.rst
+ create mode 100644 Documentation/translations/zh_CN/admin-guide/LSM/ipe.rst
+ create mode 100644 Documentation/translations/zh_CN/admin-guide/LSM/landlock.rst
+ create mode 100644 Documentation/translations/zh_CN/admin-guide/LSM/tomoyo.rst
+
 -- 
 2.43.0
 
