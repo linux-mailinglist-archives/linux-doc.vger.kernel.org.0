@@ -1,159 +1,166 @@
-Return-Path: <linux-doc+bounces-92122-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92123-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id n9qJO3ocLGpnLgQAu9opvQ
-	(envelope-from <linux-doc+bounces-92122-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 16:49:31 +0200
+	id lasMIH8nLGp2MQQAu9opvQ
+	(envelope-from <linux-doc+bounces-92123-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 17:36:31 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8FA9767A524
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 16:49:30 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id E1AA967A8CD
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 17:36:29 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=KqQ3m+ji;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92122-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-92122-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b=V1ya2k5I;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92123-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-92123-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=infradead.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 624E031A6C78
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 14:49:15 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 75EAE3017AE4
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 15:36:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 92D8A36C9D5;
-	Fri, 12 Jun 2026 14:49:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C5B0F395D9F;
+	Fri, 12 Jun 2026 15:36:11 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 73C5924886E;
-	Fri, 12 Jun 2026 14:49:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E346394EB7;
+	Fri, 12 Jun 2026 15:36:06 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781275752; cv=none; b=obDdfYmmv18HRn4PiO6Lp832JxM2LSWIzoNG76IGF5pFXxXmi7DGooWWEFUYsK9dnGCmgowcPjq592ptXtyYI9uOP9layRpYPA0IlgMzCXakmSCgqdcd/gJUW7O1GlABSH7B7SUEhUZSb2c6iaD1v5fLTDa+tZOT4Hlk/ziVGE4=
+	t=1781278571; cv=none; b=AqGcBF6X+HKEa5k7cMHxDlvLj0oY6w0i2FKpxxDRuQlVxhm0wC8KYKleaHQEJeMPERXn974ggo4WE71o/z/XpPvaUyy3wiff/OXbQ+r9fDeTFfq9UK3/RDvw+dYLrjrWFM9ZC0fK01EHpqIqX0iEPpXPXBepEstafb5WmAhq/eI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781275752; c=relaxed/simple;
-	bh=BJFzGzOnd+wP2T3OXbmcSnUl6hlCrHcAS6mwQMT6zrM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ZPE2YdBVMcS9MLX8rgH8LdOvVPHY+xqdTfzS65Jf8TAWx5n1R2S9CdOZDnQx7NkWDu697q7ndEZTeFW4/MQF5aNFtiYf+MR94enFAakbmsnqy1UCRFbv6Rg0iLBmHf8O9+DukgeBwUpbT36w5T8UC+W0kP+LaiW/ZnWve6X/Xy8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KqQ3m+ji; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DDC861F000E9;
-	Fri, 12 Jun 2026 14:49:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1781275751;
-	bh=qhPHLYbQyUfvef9/xCIIY8vt5USpJP7O50ve0Xr9Fco=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=KqQ3m+jibMcuY8vurw+rG7VdytA6Y6cMHo3roJQ8ImJswxu7g5OQsf6U9DmgKL9Ok
-	 tMoVfnttQQhbTRLujJvFm4Z3bZ7gZzKPvuegSKFNGFlYLiavZptALOMGNFohVAJBsU
-	 S2cf3GfT9s6pAt3G7PxxKl9WEcH0ikXnznL9+1kH7Dm5xiZa7amZAbjMwEevZ45B4a
-	 vJr8GleYk5liMgzbxAkB3mPRM5aQevk6Yqrzi9aFtqJTDnvJHo9OtiT8zww01quWWU
-	 JZFWZqvYd6+3/nlD+3b8S1gml9lQE6KMYyGi9pVigyovlwi1JcYwRC3L4eQz6SwZW2
-	 qxF4lWtteSQaQ==
-Date: Fri, 12 Jun 2026 09:49:10 -0500
-From: Rob Herring <robh@kernel.org>
-To: Ahmed Tiba <ahmed.tiba@arm.com>
-Cc: Jonathan Cameron <jic23@kernel.org>, will@kernel.org,
-	xueshuai@linux.alibaba.com, saket.dumbre@intel.com,
-	mchehab@kernel.org, dave@stgolabs.net, djbw@kernel.org,
-	bp@alien8.de, tony.luck@intel.com, guohanjun@huawei.com,
-	lenb@kernel.org, skhan@linuxfoundation.org,
-	vishal.l.verma@intel.com, rafael@kernel.org, corbet@lwn.net,
-	ira.weiny@intel.com, dave.jiang@intel.com, krzk+dt@kernel.org,
-	catalin.marinas@arm.com, alison.schofield@intel.com,
-	conor+dt@kernel.org, linux-arm-kernel@lists.infradead.org,
-	Michael.Zhao2@arm.com, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-cxl@vger.kernel.org,
-	Dmitry.Lamerov@arm.com, devicetree@vger.kernel.org,
-	linux-acpi@vger.kernel.org, linux-edac@vger.kernel.org,
-	acpica-devel@lists.linux.dev
-Subject: Re: [PATCH v5 09/10] dt-bindings: firmware: add arm,ras-cper
-Message-ID: <20260612144910.GA989816-robh@kernel.org>
-References: <20260529-topics-ahmtib01-ras_ffh_arm_internal_review-v5-0-2e0500d42642@arm.com>
- <20260529-topics-ahmtib01-ras_ffh_arm_internal_review-v5-9-2e0500d42642@arm.com>
- <20260529174407.7081ad0b@jic23-huawei>
- <ceb19cb6-7083-44ad-a262-a8198f489257@arm.com>
+	s=arc-20240116; t=1781278571; c=relaxed/simple;
+	bh=IOg3E+hyKIUM+CoxiRenGgZ1IDKdduqBVHjLUGSUi/4=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=T36G1G+ixxbzR+indc9+U2rMfOens4gp9PqSwjsYEpZBEv5S9KuNKLfTf4dldGCAJx9HEqyVI6gvPKGWOk6X8+uDz6+H+KHqOzxXLXPTocNdLUneKyzRouPbeGP04c2ItvoNkSG9q7U9XTOWE14ykFYKoUSFhlFJhe8FOw+G8F0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=pass smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=V1ya2k5I; arc=none smtp.client-ip=198.137.202.133
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+	bh=JeM9QXcvea1gcZCvDd51X5bSRLrcGHqydUaRYAFryGs=; b=V1ya2k5IUz5mf2ulYb4tGg4PrG
+	p0TcUgNb0AcIZYXGi7AtZjiy8ZbuWIFW/kNrdkdwZMY6OzO484sZc0YqlnRknf1rpPfpzWl33Tn5p
+	MSryqqEZp3LEKk1nFCGRvWx5hYsLeJRCi/RsOJIZ87ZtOAdx2npvI46L6a9MiqWS7jrNQtTaf2kmE
+	FhdnDUqiiBBbFazsrD6p8kmm1V7ay35dFRiy2L8o++HwkZ+hydDB7zdNdkTPoQ8uvlqa/KE+MVt8T
+	Ratt5pS7ZBy0GTfUVpx+iJyBlJrCg/fVpbtmlv+TvcCNIzwW1riUflujVrhWS1MYEbxoMJqf8Ocxm
+	iuuqHIrQ==;
+Received: from [50.53.43.113] (helo=[192.168.254.34])
+	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+	id 1wY3vL-0000000BAQm-0FaC;
+	Fri, 12 Jun 2026 15:35:59 +0000
+Message-ID: <1cc99145-0316-44f5-b134-2b4f90b326c4@infradead.org>
+Date: Fri, 12 Jun 2026 08:35:57 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ceb19cb6-7083-44ad-a262-a8198f489257@arm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [mic:next 15/15] htmldocs:
+ Documentation/userspace-api/landlock.rst:768: WARNING: Inline interpreted
+ text or phrase reference start-string without end-string. [docutils]
+To: kernel test robot <lkp@intel.com>, Matthieu Buffet <matthieu@buffet.re>
+Cc: oe-kbuild-all@lists.linux.dev, =?UTF-8?Q?Micka=C3=ABl_Sala=C3=BCn?=
+ <mic@digikod.net>, linux-doc@vger.kernel.org
+References: <202606120923.1nYYlfdb-lkp@intel.com>
+Content-Language: en-US
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <202606120923.1nYYlfdb-lkp@intel.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.66 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-92122-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:ahmed.tiba@arm.com,m:jic23@kernel.org,m:will@kernel.org,m:xueshuai@linux.alibaba.com,m:saket.dumbre@intel.com,m:mchehab@kernel.org,m:dave@stgolabs.net,m:djbw@kernel.org,m:bp@alien8.de,m:tony.luck@intel.com,m:guohanjun@huawei.com,m:lenb@kernel.org,m:skhan@linuxfoundation.org,m:vishal.l.verma@intel.com,m:rafael@kernel.org,m:corbet@lwn.net,m:ira.weiny@intel.com,m:dave.jiang@intel.com,m:krzk+dt@kernel.org,m:catalin.marinas@arm.com,m:alison.schofield@intel.com,m:conor+dt@kernel.org,m:linux-arm-kernel@lists.infradead.org,m:Michael.Zhao2@arm.com,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-cxl@vger.kernel.org,m:Dmitry.Lamerov@arm.com,m:devicetree@vger.kernel.org,m:linux-acpi@vger.kernel.org,m:linux-edac@vger.kernel.org,m:acpica-devel@lists.linux.dev,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[robh@kernel.org,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:lkp@intel.com,m:matthieu@buffet.re,m:oe-kbuild-all@lists.linux.dev,m:mic@digikod.net,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	TAGGED_FROM(0.00)[bounces-92123-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[32];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[robh@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[infradead.org:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[5];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	TO_DN_SOME(0.00)[]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,vger.kernel.org:from_smtp,infradead.org:dkim,infradead.org:mid,infradead.org:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 8FA9767A524
+X-Rspamd-Queue-Id: E1AA967A8CD
 
-On Thu, Jun 11, 2026 at 03:22:21PM +0100, Ahmed Tiba wrote:
-> On 29/05/2026 17:44, Jonathan Cameron wrote:
-> > On Fri, 29 May 2026 10:50:49 +0100
-> > Ahmed Tiba<ahmed.tiba@arm.com> wrote:
-> > >   .../devicetree/bindings/firmware/arm,ras-cper.yaml | 54 ++++++++++++++++++++++
-> > >   MAINTAINERS                                        |  5 ++
-> > >   2 files changed, 59 insertions(+)
-> > > 
-> > > diff --git a/Documentation/devicetree/bindings/firmware/arm,ras-cper.yaml b/Documentation/devicetree/bindings/firmware/arm,ras-cper.yaml
-> > > new file mode 100644
-> > > index 000000000000..3d4de096093f
-> > > --- /dev/null
-> > > +++ b/Documentation/devicetree/bindings/firmware/arm,ras-cper.yaml
-> > > @@ -0,0 +1,54 @@
-> > > +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> > > +%YAML 1.2
-> > > +---
-> > > +$id:http://devicetree.org/schemas/firmware/arm,ras-cper.yaml#
-> > > +$schema:http://devicetree.org/meta-schemas/core.yaml#
-> > > +
-> > > +title: Arm RAS CPER provider
-> > > +
-> > > +maintainers:
-> > > +  - Ahmed Tiba<ahmed.tiba@arm.com>
-> > > +
-> > > +description:
-> > > +  Arm Reliability, Availability and Serviceability (RAS) firmware can expose
-> > > +  a firmware-first CPER error source directly via DeviceTree. Firmware
-> > > +  provides the CPER Generic Error Status block and notifies the OS through
-> > > +  an interrupt.
-> > I'd like some spec references in here if possible.
-> I can add a reference to the UEFI CPER specification for the Generic
-> Error Status record format.
+
+
+On 6/12/26 12:52 AM, kernel test robot wrote:
+> tree:   https://git.kernel.org/pub/scm/linux/kernel/git/mic/linux.git next
+> head:   a6f0a6f5377fae42a8028f63c89d544c68f24b60
+> commit: a6f0a6f5377fae42a8028f63c89d544c68f24b60 [15/15] landlock: Add documentation for UDP support
+> compiler: clang version 22.0.0git (https://github.com/llvm/llvm-project f43d6834093b19baf79beda8c0337ab020ac5f17)
+> docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
+> reproduce: (https://download.01.org/0day-ci/archive/20260612/202606120923.1nYYlfdb-lkp@intel.com/reproduce)
 > 
-> For the firmware-first DT description itself I do not have a more specific
-> public reference to cite.
+> If you fix the issue in a separate patch/commit (i.e. not just a new version of
+> the same patch/commit), kindly add following tags
+> | Reported-by: kernel test robot <lkp@intel.com>
+> | Closes: https://lore.kernel.org/oe-kbuild-all/202606120923.1nYYlfdb-lkp@intel.com/
+> 
+> All warnings (new ones prefixed by >>):
+> 
+>    Scope flags
+>    ~~~~~~~~~~~ [docutils]
+>>> Documentation/userspace-api/landlock.rst:768: WARNING: Inline interpreted text or phrase reference start-string without end-string. [docutils]
+>>> Documentation/userspace-api/landlock.rst:768: WARNING: Inline interpreted text or phrase reference start-string without end-string. [docutils]
+>    Documentation/userspace-api/landlock:596: ./include/uapi/linux/landlock.h:40: ERROR: Unknown target name: "filesystem flags". [docutils]
+>    Documentation/userspace-api/landlock:596: ./include/uapi/linux/landlock.h:45: ERROR: Unknown target name: "network flags". [docutils]
+>    Documentation/userspace-api/landlock:596: ./include/uapi/linux/landlock.h:50: ERROR: Unknown target name: "scope flags". [docutils]
+>    Documentation/userspace-api/landlock:596: ./include/uapi/linux/landlock.h:24: ERROR: Unknown target name: "filesystem flags". [docutils]
+>    Documentation/userspace-api/landlock:605: ./include/uapi/linux/landlock.h:168: ERROR: Unknown target name: "filesystem flags". [docutils]
+> 
+> 
 
-Is there a platform actually using this with DT (FVP doesn't really 
-count)?
+In case it's not obvious:
 
-Rob
+> vim +768 Documentation/userspace-api/landlock.rst
+> 
+>    767	
+>  > 768	Starting with the Landlock ABI version 10, it is possible to restrict
+>    769	setting the local port of UDP sockets with the
+>    770	``LANDLOCK_ACCESS_NET_BIND_UDP`` right. This includes restricting the
+>    771	ability to trigger autobind of an ephemeral port by the kernel by e.g.
+>    772	sending a first datagram or setting the remote peer of a socket.
+>    773	The ``LANDLOCK_ACCESS_NET_CONNECT_SEND_UDP`` right controls setting the
+>    774	remote port of UDP sockets (via :manpage:`connect(2)), and sending
+
+                                            missing ending           `
+
+>    775	datagrams to an explicit remote port (ignoring any destination set on
+>    776	UDP sockets, via e.g. :manpage:`sendto(2)).
+
+                                       same here
+
+>    777	
+> 
+> --
+> 0-DAY CI Kernel Test Service
+> https://github.com/intel/lkp-tests/wiki
+> 
+
+-- 
+~Randy
+
 
