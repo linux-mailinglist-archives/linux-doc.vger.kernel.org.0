@@ -1,72 +1,72 @@
-Return-Path: <linux-doc+bounces-92200-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92201-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id FQVxDC9fLGpJQAQAu9opvQ
-	(envelope-from <linux-doc+bounces-92200-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 21:34:07 +0200
+	id MFfYLTdfLGpMQAQAu9opvQ
+	(envelope-from <linux-doc+bounces-92201-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 21:34:15 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9AFDD67C0D9
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 21:34:06 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 328DC67C0E6
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 21:34:15 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=google.com header.s=20251104 header.b=tE7f40Jj;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92200-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-92200-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=google.com header.s=20251104 header.b="pr/aGln3";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92201-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92201-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=reject) header.from=google.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 76FF2326056C
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 19:30:27 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 1853C3264EC7
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 19:30:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 08E2C3F7A84;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6CE2A3BA249;
 	Fri, 12 Jun 2026 19:29:35 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ot1-f74.google.com (mail-ot1-f74.google.com [209.85.210.74])
+Received: from mail-oi1-f201.google.com (mail-oi1-f201.google.com [209.85.167.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE5183AB5B2
-	for <linux-doc@vger.kernel.org>; Fri, 12 Jun 2026 19:29:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3EA783D1CC3
+	for <linux-doc@vger.kernel.org>; Fri, 12 Jun 2026 19:29:29 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781292574; cv=none; b=YfC+2m+gy2qgeX/tCZchSYrcaHF4hOyZg3q7m3AR5X76MYlrFPh1H4BA1cV/bT9yr0L+Yr/odd/0RQ3UtNu8czPCznGlo4hVTKY6SSuKY7v2Q6+gxd0nRvjLlQn2Tojt/L9XnDhuuuzO5JpQ6sY0ILQtCqqmsEtCW3oeh48I8j0=
+	t=1781292574; cv=none; b=sJf1D3NFxF4VcAodn4r+VYmARUb/QVCCV84aozQnoCCy3QxRjU3M8XU8ISHytxN2mdlyJ0hBQNXUPtivTtX9/ksf3ln+i2iw5tJfS40s1eI5pdO9oTB1Cv+ghEl0tAQxCA7X5uZ2xXfuvN5MyYL6WX64Fy8DoYVbGx7WsaPHeu8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1781292574; c=relaxed/simple;
-	bh=Z169fBUkCIg9BiMlDMCUBmqUN7mLkV31cpse2h+VzWs=;
+	bh=HBuFwboneQNMp7qglhgXk7alnCfDwtLSxYiguum4PxI=;
 	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=oJ6Edv/i8dxchopx36WATECtqvc/1FMjyfhou2AaiJJ/Pi3JHuPGqsuIq4NDv+LYcdq0wH2HtUsJJa47KXN4OWoVfgjiEqvUJX6bXoq1a61neScP/YCW7HnWz9lesbepfqs7cjZXDzBd7RQHDcYlUzvYV871YGnDgbmnaruTzcA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--coltonlewis.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=tE7f40Jj; arc=none smtp.client-ip=209.85.210.74
-Received: by mail-ot1-f74.google.com with SMTP id 46e09a7af769-7e6b550a521so1448395a34.0
-        for <linux-doc@vger.kernel.org>; Fri, 12 Jun 2026 12:29:28 -0700 (PDT)
+	 To:Cc:Content-Type; b=ezhvBNHG/nNXliVvdUKP2u0g4sQuvhdzhS6wkzUjfzM7U01Mkm0lEctCkfjd8hj4l8DsBJzEa3lU2Z6qI/XmBdNgAtcDctDXnp3ol4zr/qFvSIiudJqlHgKZOXPuQiYC11s49dWjvw0q4ILINvUPsQe7I1UcYBgB5UINEWcSYrw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--coltonlewis.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=pr/aGln3; arc=none smtp.client-ip=209.85.167.201
+Received: by mail-oi1-f201.google.com with SMTP id 5614622812f47-486660d2abaso1646016b6e.2
+        for <linux-doc@vger.kernel.org>; Fri, 12 Jun 2026 12:29:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1781292567; x=1781897367; darn=vger.kernel.org;
+        d=google.com; s=20251104; t=1781292568; x=1781897368; darn=vger.kernel.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=xMUfkA0Qvrb7iW5rl1K95T0ct8KyLE0h2lxpS+ugXRA=;
-        b=tE7f40JjN40RurEeRB6Kit/fgsxYPmcAUSJG60ZkNuqgEOsCNPjeyxz0a6mpAL4g8T
-         ivIvSnh5fM+XLNjojUcRKAsJuGtqEnz8+fr2599fiiFYmiZ4nPMeoXtnKgJXepKX0qfy
-         l9SbHVzRysBCok7K1zi6yTAEqfaUfCiKeY2HiOx1te+VB5RmcRGizd3qYw44DNrl+4Ey
-         4lyvT3xuMfB3ehL783PM1BCaT014eyWm1L9CMp+RrW6A9jqcNyIQbDmrywfDyMxMofPL
-         jxLntPNGJkj/wSllkCdXgkwXXwLTc155IWLXdMXDVRmbstBB3xBbrgSwXTPsSMS96OhJ
-         v6RA==
+        bh=lI2FhZeVSW/rDbtlOOBPVMTchx/8Z69t0suel1yDoGI=;
+        b=pr/aGln3J9K7mB7pFQ7vKNt9N+5/LTescX762MEq40KZ1XOAC30WqI5a0vJXHE+DfU
+         xdB68KTUPAAMR7uVW+JgMPpz4ZP0yWKhC16N/HYehe20mq+vfcZTRjBsF+KTONi4LKZZ
+         B8vcrXsCdI8im2fICAcFWli0usmHnyg8/ELYuxJnfo8pzpDpqD24ebc27fd/sDxC2D7x
+         oEZerZ33KuqZQxkDPXJXf8esM4OTDSuq2aHsX3pN0aKd2hUFdtpY1h5u9m3yJrUknuUL
+         8J6PU323xrNVo/dZz0xLqm8RbjzHFrD3P3xBh9iE086T1kjX37MiZXPaaliDY/Cd6+kK
+         u2+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781292567; x=1781897367;
+        d=1e100.net; s=20251104; t=1781292568; x=1781897368;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=xMUfkA0Qvrb7iW5rl1K95T0ct8KyLE0h2lxpS+ugXRA=;
-        b=AoMjDU2DxSYr2eh835iPim4ws6HrHBgvvgYHodahfz7uv8ypsVTk63Eou/EUj5xhMU
-         MaNWHHF1d1xx/pfFhaVJDQTD547fcnWoZnnBNCCvVI8Mak4hf5Yc5XNfw6SagbCZd0rF
-         FIvtfhdTf//wlvRuY2vUiLmohwsPvwh+olDW69I2ro6ri7OfeshUC07FbAkxR6aH2kdm
-         WSxtXrzn5rQd2tnJLbH+4/1mRPdeyWgVDWMEAS+QjldAvvaf3UINo5bYqOYgiJSulR41
-         45bZ3Krvm/G6nf9uR3SgRhJX4dCBbTZt2EacQfUM9DuuQXB7yrCvQGziu0k4ol7eDqas
-         e4+w==
-X-Forwarded-Encrypted: i=1; AFNElJ/9/2lzvcuMx6mM8TzDw/3DOppTT1pzzyb+d3/GtzS/njM37PlR7eHCZBld85u43V0IW3x4jUlxIGw=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx4pSvVuG+JSBAFwI4L1WAmwmwwRYC0/1LEeSiDJly7uAbtkg9E
-	kQ333Veo/ZdZW/ttRrdGmd65dtySJYsdR6Uc5e0gkkCd5Yhd/ptQWHzYGiDX1TjH1EDC6bHvvJr
-	NubtIWzWlcH9h9aX+Ku4Kmu0IMg==
-X-Received: from ilbdx1-n1.prod.google.com ([2002:a05:6e02:4201:10b0:4fa:1e84:4047])
+        bh=lI2FhZeVSW/rDbtlOOBPVMTchx/8Z69t0suel1yDoGI=;
+        b=Pdtwe1qYrU4e31q1+qQU+hwgRt8cZVXRmDMptv0WVj8u6oq6U02rQXRjsFzxLt25/o
+         fWDmtZYRfV7Mk3ckU/v9Hdns8u5KjLDMaeWkr64YQ+dEHgkpiRd0L9kO/YxDpoz19vDY
+         ufzW3tUd1BwKrVbcppug1+ioY1so4pfeBtRAxQaO/zJPI0oMglDlEnbUtD27KimgnbPe
+         bROkKpzSJFvEb+g6Ck6TugwkvnUfzVJuJggB+anSg6QAhmTXU20V62m0mHU1RqGh/0KI
+         wXzEgDDW7AtL2r94iY7sNjSsaDr1hT9jeXa3zV4Rog2Bq0g9rtGif1XYODpMdsfnda2A
+         opUQ==
+X-Forwarded-Encrypted: i=1; AFNElJ9gmPcMyLHafdV+SJJ99dMLbn6k045nsHhU17aY9stM1eyXj2zx1OOZE7OkM8YzIJR2+o8CYde/7cE=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzXM8YoUjpz+CqMlWLkRPIUSuw5mAyPF1/MCFzVtFRNu5LPqgvi
+	02FLcYAJn8vzdFWbGTpWOhPpBG5nNodFMBEVP0Momu4FFIaXXGAwZn8A902y3ZW74ptxEJK917F
+	Met6tAmbh3BjxAsnhzKwkxSDeiA==
+X-Received: from iljq18.prod.google.com ([2002:a05:6e02:1072:b0:500:26db:d9ff])
  (user=coltonlewis job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:6808:170f:b0:485:15bd:60e8 with SMTP id 5614622812f47-48741b51368mr655188b6e.35.1781292567145;
+ 2002:a05:6808:1b2a:b0:485:467f:a306 with SMTP id 5614622812f47-4872f352d35mr2615199b6e.4.1781292567951;
  Fri, 12 Jun 2026 12:29:27 -0700 (PDT)
-Date: Fri, 12 Jun 2026 19:29:06 +0000
+Date: Fri, 12 Jun 2026 19:29:07 +0000
 In-Reply-To: <20260612192909.1153907-1-coltonlewis@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -76,8 +76,8 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 Mime-Version: 1.0
 References: <20260612192909.1153907-1-coltonlewis@google.com>
 X-Mailer: git-send-email 2.54.0.1136.gdb2ca164c4-goog
-Message-ID: <20260612192909.1153907-19-coltonlewis@google.com>
-Subject: [PATCH 18/21] KVM: arm64: Add vCPU device attr to partition the PMU
+Message-ID: <20260612192909.1153907-20-coltonlewis@google.com>
+Subject: [PATCH 19/21] KVM: selftests: Add find_bit to KVM library
 From: Colton Lewis <coltonlewis@google.com>
 To: kvm@vger.kernel.org
 Cc: Alexandru Elisei <alexandru.elisei@arm.com>, Paolo Bonzini <pbonzini@redhat.com>, 
@@ -99,7 +99,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
 	MV_CASE(0.50)[];
 	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
@@ -112,7 +112,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-92200-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-92201-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
@@ -122,150 +122,42 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 9AFDD67C0D9
+X-Rspamd-Queue-Id: 328DC67C0E6
 
-Add a new PMU device attr to enable the partitioned PMU for a given
-VM. This capability can be set when the PMU is initially configured
-before the vCPU starts running and is allowed where PMUv3 and VHE are
-supported and the host driver was configured with
-arm_pmuv3.reserved_host_counters.
-
-The enabled capability is tracked by the new flag
-KVM_ARCH_FLAG_PARTITION_PMU_ENABLED.
+Some selftests have a dependency on find_bit and weren't compiling
+separately without it, so I've added it to the KVM library here using
+the same method as files like rbtree.c.
 
 Signed-off-by: Colton Lewis <coltonlewis@google.com>
 ---
- arch/arm64/include/uapi/asm/kvm.h |  2 ++
- arch/arm64/kvm/pmu-direct.c       | 30 ++++++++++++++++++++++++++++++
- arch/arm64/kvm/pmu.c              | 23 +++++++++++++++++++++++
- include/kvm/arm_pmu.h             |  9 +++++++++
- 4 files changed, 64 insertions(+)
+ tools/testing/selftests/kvm/Makefile.kvm   | 1 +
+ tools/testing/selftests/kvm/lib/find_bit.c | 2 ++
+ 2 files changed, 3 insertions(+)
+ create mode 100644 tools/testing/selftests/kvm/lib/find_bit.c
 
-diff --git a/arch/arm64/include/uapi/asm/kvm.h b/arch/arm64/include/uapi/asm/kvm.h
-index 1c13bfa2d38aa..7f57b8c132925 100644
---- a/arch/arm64/include/uapi/asm/kvm.h
-+++ b/arch/arm64/include/uapi/asm/kvm.h
-@@ -437,6 +437,8 @@ enum {
- #define   KVM_ARM_VCPU_PMU_V3_FILTER		2
- #define   KVM_ARM_VCPU_PMU_V3_SET_PMU		3
- #define   KVM_ARM_VCPU_PMU_V3_SET_NR_COUNTERS	4
-+#define   KVM_ARM_VCPU_PMU_V3_ENABLE_PARTITION	5
-+
- #define KVM_ARM_VCPU_TIMER_CTRL		1
- #define   KVM_ARM_VCPU_TIMER_IRQ_VTIMER		0
- #define   KVM_ARM_VCPU_TIMER_IRQ_PTIMER		1
-diff --git a/arch/arm64/kvm/pmu-direct.c b/arch/arm64/kvm/pmu-direct.c
-index 0062d1d8e1999..2d2294b78ebe0 100644
---- a/arch/arm64/kvm/pmu-direct.c
-+++ b/arch/arm64/kvm/pmu-direct.c
-@@ -24,6 +24,36 @@ bool has_host_pmu_partition_support(void)
- 		system_supports_pmuv3();
- }
+diff --git a/tools/testing/selftests/kvm/Makefile.kvm b/tools/testing/selftests/kvm/Makefile.kvm
+index 9118a5a51b89f..fa7a2746b1c13 100644
+--- a/tools/testing/selftests/kvm/Makefile.kvm
++++ b/tools/testing/selftests/kvm/Makefile.kvm
+@@ -5,6 +5,7 @@ all:
  
-+
-+/**
-+ * has_kvm_pmu_partition_support() - If we can enable/disable partition
-+ *
-+ * Return: true if allowed, false otherwise.
-+ */
-+bool has_kvm_pmu_partition_support(void)
-+{
-+	return has_host_pmu_partition_support() &&
-+		kvm_supports_guest_pmuv3() &&
-+		armv8pmu_is_partitioned;
-+}
-+
-+/**
-+ * kvm_pmu_partition_enable() - Enable/disable partition flag
-+ * @kvm: Pointer to vcpu
-+ * @enable: Whether to enable or disable
-+ *
-+ * If we want to enable the partition, the guest is free to grab
-+ * hardware by accessing PMU registers. Otherwise, the host maintains
-+ * control.
-+ */
-+void kvm_pmu_partition_enable(struct kvm *kvm, bool enable)
-+{
-+	if (enable)
-+		set_bit(KVM_ARCH_FLAG_PARTITION_PMU_ENABLED, &kvm->arch.flags);
-+	else
-+		clear_bit(KVM_ARCH_FLAG_PARTITION_PMU_ENABLED, &kvm->arch.flags);
-+}
-+
- /**
-  * pmu_is_partitioned() - Determine if given PMU is partitioned
-  * @pmu: Pointer to arm_pmu struct
-diff --git a/arch/arm64/kvm/pmu.c b/arch/arm64/kvm/pmu.c
-index f5ee18b4dfae7..4e15948ac2565 100644
---- a/arch/arm64/kvm/pmu.c
-+++ b/arch/arm64/kvm/pmu.c
-@@ -769,6 +769,28 @@ int kvm_arm_pmu_v3_set_attr(struct kvm_vcpu *vcpu, struct kvm_device_attr *attr)
- 
- 		return kvm_arm_pmu_v3_set_nr_counters(vcpu, n);
- 	}
-+	case KVM_ARM_VCPU_PMU_V3_ENABLE_PARTITION: {
-+		unsigned int __user *uaddr = (unsigned int __user *)(long)attr->addr;
-+		u32 val;
-+
-+		if (get_user(val, uaddr))
-+			return -EFAULT;
-+
-+		if (!has_kvm_pmu_partition_support())
-+			return -EPERM;
-+
-+		if (kvm_vm_has_ran_once(kvm))
-+			return -EBUSY;
-+
-+		kvm_pmu_partition_enable(kvm, val);
-+		if (val) {
-+			unsigned int max_counters = kvm_arm_pmu_get_max_counters(kvm);
-+
-+			if (kvm->arch.nr_pmu_counters > max_counters)
-+				kvm_arm_set_nr_counters(kvm, max_counters);
-+		}
-+		return 0;
-+	}
- 	case KVM_ARM_VCPU_PMU_V3_INIT:
- 		return kvm_arm_pmu_v3_init(vcpu);
- 	}
-@@ -808,6 +830,7 @@ int kvm_arm_pmu_v3_has_attr(struct kvm_vcpu *vcpu, struct kvm_device_attr *attr)
- 	case KVM_ARM_VCPU_PMU_V3_FILTER:
- 	case KVM_ARM_VCPU_PMU_V3_SET_PMU:
- 	case KVM_ARM_VCPU_PMU_V3_SET_NR_COUNTERS:
-+	case KVM_ARM_VCPU_PMU_V3_ENABLE_PARTITION:
- 		if (kvm_vcpu_has_pmu(vcpu))
- 			return 0;
- 	}
-diff --git a/include/kvm/arm_pmu.h b/include/kvm/arm_pmu.h
-index f72d080ee7ba2..6a5572994b7fa 100644
---- a/include/kvm/arm_pmu.h
-+++ b/include/kvm/arm_pmu.h
-@@ -99,6 +99,8 @@ bool kvm_pmu_part_overflow_status(struct kvm_vcpu *vcpu);
- #define kvm_vcpu_has_pmu(vcpu)					\
- 	(vcpu_has_feature(vcpu, KVM_ARM_VCPU_PMU_V3))
- 
-+bool has_kvm_pmu_partition_support(void);
-+void kvm_pmu_partition_enable(struct kvm *kvm, bool enable);
- bool pmu_is_partitioned(struct arm_pmu *pmu);
- bool kvm_pmu_is_partitioned(struct kvm *kvm);
- void kvm_pmu_direct_pmcr_write(struct kvm_vcpu *vcpu, u64 val);
-@@ -279,6 +281,13 @@ static inline u64 kvm_pmu_guest_counter_mask(void *kvm)
- 
- static inline void kvm_pmu_handle_guest_irq(struct arm_pmu *pmu, u64 pmovsr) {}
- 
-+static inline bool has_kvm_pmu_partition_support(void)
-+{
-+	return false;
-+}
-+
-+static inline void kvm_pmu_partition_enable(struct kvm *kvm, bool enable) {}
-+
- #endif
- 
- #endif
+ LIBKVM += lib/assert.c
+ LIBKVM += lib/elf.c
++LIBKVM += lib/find_bit.c
+ LIBKVM += lib/guest_modes.c
+ LIBKVM += lib/io.c
+ LIBKVM += lib/kvm_util.c
+diff --git a/tools/testing/selftests/kvm/lib/find_bit.c b/tools/testing/selftests/kvm/lib/find_bit.c
+new file mode 100644
+index 0000000000000..5534248c663f7
+--- /dev/null
++++ b/tools/testing/selftests/kvm/lib/find_bit.c
+@@ -0,0 +1,2 @@
++// SPDX-License-Identifier: GPL-2.0
++#include "../../../../lib/find_bit.c"
 -- 
 2.54.0.1136.gdb2ca164c4-goog
 
