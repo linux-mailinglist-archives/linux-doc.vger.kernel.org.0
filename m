@@ -1,67 +1,67 @@
-Return-Path: <linux-doc+bounces-92127-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92136-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id ccpnMO8sLGp5MwQAu9opvQ
-	(envelope-from <linux-doc+bounces-92127-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 17:59:43 +0200
+	id 0vZhGectLGr5MwQAu9opvQ
+	(envelope-from <linux-doc+bounces-92136-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 18:03:51 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3AE7E67AA93
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 17:59:43 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id D7F3B67AB1D
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 18:03:50 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=qq.com header.s=s201512 header.b=BA92haYo;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92127-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-92127-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=qq.com header.s=s201512 header.b=DMq4xzMb;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92136-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-92136-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=qq.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 461173127026
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 15:59:42 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 6796D3080F9B
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 16:03:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7A5B1312819;
-	Fri, 12 Jun 2026 15:59:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 313053033C0;
+	Fri, 12 Jun 2026 16:03:01 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out203-205-221-209.mail.qq.com (out203-205-221-209.mail.qq.com [203.205.221.209])
+Received: from out203-205-221-205.mail.qq.com (out203-205-221-205.mail.qq.com [203.205.221.205])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 505B933D4EE;
-	Fri, 12 Jun 2026 15:59:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB5402F28FC;
+	Fri, 12 Jun 2026 16:02:58 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781279979; cv=none; b=Fr+PXGT8+DVWs1Dj7YgSNTosLhvwOrioc4lQ3AmNCXnWCd2x3w4Eum+yEsIUQnKIxWPnhr9Cds9P45lWkB9DRJD8JzpKjJGPTLAyFqXXNINpe07/7wyvVGSKuxa2OcuvfEsjNBavciQ9k0Eb0ZF19uEeT2hXuqxalIhkv5ddOVg=
+	t=1781280181; cv=none; b=Y3baLYxR98tl6qYkoIht96aXMcS8hhZErjyaK4XpKPLNOmIV9unigvB9O+sj45r6gum40FAt+OfVCTOZJwImGTtcut24Xv0GVcIuifDTJI5gq/RtQrFlu/0SCDIXNRVuN+nT48Upwfh5ugu+cU5vfPToNxa9lJdJRgDJuCkx09g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781279979; c=relaxed/simple;
-	bh=Q+ANZXSOm/DZJP1jNI3nH8wxdIEcS2BoPF7hnwAchBY=;
+	s=arc-20240116; t=1781280181; c=relaxed/simple;
+	bh=C4yDMJ/YOtLv28/s4/Pf+JBqBSSwrKjndXwButUTlqo=;
 	h=Message-ID:From:To:Cc:Subject:Date:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=jx1lNEmgBdoWzK6BMfDqzdqdjsvQYBqHoorEDQyxjEXaLF+GLde46CgvuSrEeNAvVTFS2uw66NOL8NRyXMmguWXfbpXU+foLHXsEveJt3W6Pu6qYWQNUcwpG9+w4XsEPkxc7paWgZkzEggVZnBWC1LI+9CDAII+xYsyWJEZTR5s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=qq.com; spf=pass smtp.mailfrom=qq.com; dkim=pass (1024-bit key) header.d=qq.com header.i=@qq.com header.b=BA92haYo; arc=none smtp.client-ip=203.205.221.209
+	 MIME-Version:Content-Type; b=HZcSS/Mz+gzTxlKrZolFBKovbBJNX/fFytT5enUKuz6iVHCMvTls31WNLBz3+WMJzZAqikcWdEU7hWPOCsj4MQo6zvXgSRy2DFpO+mwwIDorTrCvdxZ5a8xFLf67AN0KqVb9jTYOO1R6W+3ZzPclAhz0J2ADNSJIxb7ZO4aUp1o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=qq.com; spf=pass smtp.mailfrom=qq.com; dkim=pass (1024-bit key) header.d=qq.com header.i=@qq.com header.b=DMq4xzMb; arc=none smtp.client-ip=203.205.221.205
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
-	t=1781279974; bh=gnXYqDOPnoHixd3+zglNjsCbuKCRPQbq/Mhkt4+mJdg=;
+	t=1781280176; bh=UQp8VX9JypZ6E6O1OqUQjFmFxUx8YP9qAGPt+56zDhY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=BA92haYogqRDmj7J6f/+ET5rAFErYGhLM+eapw1eQ1LA51ghlZiH7K3AxSMwghgU2
-	 TpfO0iPqUEEXArZMUj4939C94sDdbsReA4gGKqJDK+kdYRGNn83ZOvBCOyMBwLN6l/
-	 7U20l2z8JBIY6eCoISbfujiggjrX1MzZuTWM7x8c=
+	b=DMq4xzMbalvjobZH2yTOHgpfpZm8O9fb3sADGFndiOt8Cmqb3ltww+5NwRR0AKq6Y
+	 5p3RwyRb1JfUsGt8/oi5BUcz6kTJ9wCryEMqKf5/306xT/BJYwoLxe40ufvan8sCRD
+	 vQFX/J5yfco1rSrKbmXEBFfbLisjdOQw4Ny2CanM=
 Received: from 172-1-1-128.lightspeed.hstntx.sbcglobal.net.localdomain ([27.38.179.189])
 	by newxmesmtplogicsvrszc43-0.qq.com (NewEsmtp) with SMTP
 	id EDDB30C4; Fri, 12 Jun 2026 23:59:29 +0800
-X-QQ-mid: xmsmtpt1781279972tf9kxqqm2
-Message-ID: <tencent_F3D55D1A2C8FB266EE628EF8C68C10DEDF09@qq.com>
-X-QQ-XMAILINFO: Od8VqZhFMB3NK9jNUI+6TH09d4hkjGfskg+Z8iQ+mJrEhtaK4j8XshKzi4B30v
-	 DnNwKVi+RI+HuJIebPB172J4YkPo2oyyKdZQ7sMJQxJFvmd1zIN23D6N3tBOzXRvpV0oig+6ITWo
-	 0d8aQE28wjgew/5b/r/8tEDljp6NqNrgKpgtS1ZcJ2GN4P/cmeQh4VlX85bYWsyvmih8P6T39mn3
-	 p6o+BjOnzlSCErw1nBIp8QknEyVNTFyQ6xKqAureK1aAjLXLIoGF3iTv7Io8xWbw3cQx7w4W7Zyd
-	 q678uZBWCUOTCbTtGgYyQyIg7PhPLQpv96se/8C/cpcuLNHtw06o8UZ81R25mlX6YZguo8UoQlYV
-	 qTDwqhEdqixU2nOhEt/S63xxKnCJbma0MKXAtP7ac8hWJT4gwemxau13tEon2PgJztFPXLRiRhfe
-	 35r1jLy1vfp2OUQojbU54SwIy8X/Ivbsa4c3K5gSHsAPqut8RGmp0lrkaOmULBtkb95jUw6PMrNa
-	 sm42ne/bTG97dIu0vADM5DtZGexydIFeKRljm8wincX6xSPCj9HsSMaxPGjp5beQJNC2REefiaHm
-	 q7SQdjZ9QnnCBaBmnGImAS3TRbloBMAJCxzv7c1kBMXZdN3nCTTHgCRaWBmAfCpxdihsGyou8hp0
-	 DBqLUBGCIMC1xuqfH+vQya7wvOyx1WhDba4KT9DuefbU1XwW1JjYiL1cuGlWVM+LPk0hhpV8hyL3
-	 HBKh1jJD3548sxiAZDZB9X6EO1OPwBM5bacvFdeQJojxZnNtH6hPrIIX5HpHLlyWjHA3XR14ebkr
-	 v3lwCQ7MM1Pd6Z/0uszP4uZwjrR7eiSZ6SMdRcsPrd1jiyoK5rcXDoQcKrpk2gLu1qAZA4ENGCn8
-	 6+TptJOqxGIcjo2RMBqJ4lE6y+6ILqL4eMX4ZtThqUsrxykd4zQnUPyGIIMzKl6wcVKRZO8p/t4D
-	 thfpAfoh9V6tDHcpl3EDANA+/NKz9oGsQIS+1Jl9stDDoqf5j2ztIJ5vi8I9vwVmhZKYfFAkMh6K
-	 4VJ5UbmAmCYyVo0viUbg7TEzoeadQksdJBGyItqMquT9+PnGxX5GQ4a5VB4Y7tva+z3T9VFhUfGK
-	 s5WTGx/5tGINrMcfJi4QeRVZJOoTN8yoBQ2yp4
-X-QQ-XMRINFO: NS+P29fieYNwqS3WCnRCOn9D1NpZuCnCRA==
+X-QQ-mid: xmsmtpt1781279973tb3jvefd7
+Message-ID: <tencent_4D8EDAC71A10FADF8B5C682C57B266EE1A09@qq.com>
+X-QQ-XMAILINFO: NmRjDopJZVxO5pna6SIxMkGCCpAdL8Cu5y/WA9ySV3lEwneQLJXGx5y9iTewyb
+	 gGGNVXUYAoqerYx/P8HEeSI7ZMoPBCeOIpCzDapRal/2IQeGyFe47722tf5FNDM+4zvigetfUNaf
+	 P1oJNB7q52vnXagrmULSuzaxzCgRUwLWNdXFBZWDQC+A3283OdovR6oceUCslDmn1HKmgWAnh75z
+	 04BuwAQfh49bz8GCm2haRJJNWTZ0S2wO7QGZpzh4o0tlcSfzRVRaiR4b0/6ixzljWcMGi0jgLPcj
+	 YktNozGQvSO1ROAyfYvkPObiB6XYyzpwDiEaQuyGEMe9l0+fCLOF46i6WSmhTltetoDLY0P1wAF/
+	 AzXVJF2MZBSLSoqGITYzhfBVicLYOLXLBuQKuyJ1jjb6Cj14mgegt8R3LCaFxOKiKpvK0Io0auc6
+	 zouzTBsaGEyw6ZXgVVcpyJXWnTHsF0rmvHEIDjKJHJgtTUOCYaUnu6MEERSC39dnLIQjutt7lRhE
+	 BcFDstp+f61F73f84G52yEcMZ7Mh9y/YZOVC3tOtZHlNWq+fxGJBe93wWqsRisZbQru5dw+EhuJq
+	 r0HJFz6Gk6ZoyHIPdOIfj4WHdgo1fJ674FNpfEsMuCjjHReW3J60WX2ghEaaLO0pc6Tu552pBFc3
+	 Z2l4ZRtjRklAhCwHOTcuBlRO6hLcrNT2UGmzQoyVa3CHUcU01nt57NQ+QYSGWutFljiJXg4fVczn
+	 3nvooIkKZALX/HqaduUoqfK+lQ8dXxTW6h4v0eN7xJqFuD0nO80hcb8TDRgo71qm3eOxEbm7OCHV
+	 HCckFH6UdXZFkrXv9is7oD2XVxuRDReU5e02yXlapcy2KUDNnkjFfodvsHt10Nxhp6hQC3cGZGJY
+	 XlQ7Q4qODxj8K0PGDSqGmKpzN5nn7KIuf05KytLwuneNLDCpMMwbzv88N3XtIExz5h2a7A9tp8ji
+	 iVRjz0MxJeAKCFM69l9QlMadF1FhBMUNLeyj/eM9yc4K/pGmSK02sV1PmHXs9BbIToLB/wTu6USx
+	 ngmmSLqcAIBRLo4+L49MouQjiuPJo53gtHpPWff5T6w6rbwnTDeG+oWYijWO+EP8TrVCI401LNpa
+	 pI2fJWIn89TkNX9FdjZKaQ1H90SNnK2caUT0WX
+X-QQ-XMRINFO: MSVp+SPm3vtSI1QTLgDHQqIV1w2oNKDqfg==
 From: Yan Zhu <zhuyan2015@qq.com>
 To: alexs@kernel.org,
 	si.yanteng@linux.dev,
@@ -73,9 +73,9 @@ Cc: dzm91@hust.edu.cn,
 	zhuyan2015@qq.com,
 	linux-doc@vger.kernel.org,
 	linux-security-module@vger.kernel.org
-Subject: [PATCH 02/10] docs/zh_CN: add LSM/apparmor Chinese translation
-Date: Fri, 12 Jun 2026 23:58:21 +0800
-X-OQ-MSGID: <f875040e30fac487c8d539a9b4cb40544da5841f.1781105672.git.zhuyan2015@qq.com>
+Subject: [PATCH 03/10] docs/zh_CN: add LSM/LoadPin Chinese translation
+Date: Fri, 12 Jun 2026 23:58:22 +0800
+X-OQ-MSGID: <3c91369ba21c1bfab48f8dd49f04629128d97057.1781105672.git.zhuyan2015@qq.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1781105672.git.zhuyan2015@qq.com>
 References: <cover.1781105672.git.zhuyan2015@qq.com>
@@ -88,122 +88,92 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [3.34 / 15.00];
-	SEM_URIBL(3.50)[ubuntu.com:email];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[qq.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[qq.com:s=s201512];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	BAD_REP_POLICIES(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	R_DKIM_ALLOW(0.00)[qq.com:s=s201512];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-92127-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:alexs@kernel.org,m:si.yanteng@linux.dev,m:corbet@lwn.net,m:mic@digikod.net,m:dzm91@hust.edu.cn,m:skhan@linuxfoundation.org,m:gnoack@google.com,m:zhuyan2015@qq.com,m:linux-doc@vger.kernel.org,m:linux-security-module@vger.kernel.org,s:lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MIME_TRACE(0.00)[0:+];
 	FREEMAIL_CC(0.00)[hust.edu.cn,linuxfoundation.org,google.com,qq.com,vger.kernel.org];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-92136-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:alexs@kernel.org,m:si.yanteng@linux.dev,m:corbet@lwn.net,m:mic@digikod.net,m:dzm91@hust.edu.cn,m:skhan@linuxfoundation.org,m:gnoack@google.com,m:zhuyan2015@qq.com,m:linux-doc@vger.kernel.org,m:linux-security-module@vger.kernel.org,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[zhuyan2015@qq.com,linux-doc@vger.kernel.org];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[qq.com,quarantine];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[qq.com];
-	TO_DN_NONE(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[zhuyan2015@qq.com,linux-doc@vger.kernel.org];
-	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER(0.00)[zhuyan2015@qq.com,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[qq.com:+];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	TO_DN_NONE(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[zhuyan2015@qq.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ARC_ALLOW(0.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(0.00)[+ip4:172.105.105.114:c];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ubuntu.com:email,vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
+	RCPT_COUNT_SEVEN(0.00)[10];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FREEMAIL_FROM(0.00)[qq.com]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 3AE7E67AA93
+X-Rspamd-Queue-Id: D7F3B67AB1D
 
-Translate Documentation/admin-guide/LSM/apparmor.rst into Chinese.
+Translate Documentation/admin-guide/LSM/LoadPin.rst into Chinese.
 
-Update the translation through commit d00c2359fc18
-("Docs: Update LSM/apparmor.rst")
+Update the translation through commit 0860b72d535f
+("security/loadpin: Update the changing interface in the source code.")
 
 Assisted-by: Claude:deepseek-4-pro
 Signed-off-by: Yan Zhu <zhuyan2015@qq.com>
 ---
- .../zh_CN/admin-guide/LSM/apparmor.rst        | 59 +++++++++++++++++++
- 1 file changed, 59 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/admin-guide/LSM/apparmor.rst
+ .../zh_CN/admin-guide/LSM/LoadPin.rst         | 33 +++++++++++++++++++
+ 1 file changed, 33 insertions(+)
+ create mode 100644 Documentation/translations/zh_CN/admin-guide/LSM/LoadPin.rst
 
-diff --git a/Documentation/translations/zh_CN/admin-guide/LSM/apparmor.rst b/Documentation/translations/zh_CN/admin-guide/LSM/apparmor.rst
+diff --git a/Documentation/translations/zh_CN/admin-guide/LSM/LoadPin.rst b/Documentation/translations/zh_CN/admin-guide/LSM/LoadPin.rst
 new file mode 100644
-index 000000000000..6b0638aedacb
+index 000000000000..d75a06f515f6
 --- /dev/null
-+++ b/Documentation/translations/zh_CN/admin-guide/LSM/apparmor.rst
-@@ -0,0 +1,59 @@
++++ b/Documentation/translations/zh_CN/admin-guide/LSM/LoadPin.rst
+@@ -0,0 +1,33 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +.. include:: ../../disclaimer-zh_CN.rst
 +
-+:Original: Documentation/admin-guide/LSM/apparmor.rst
++:Original: Documentation/admin-guide/LSM/LoadPin.rst
 +:翻译:
 + 朱岩 Yan Zhu <zhuyan2015@qq.com>
 +
 +
-+========
-+AppArmor
-+========
++=======
++LoadPin
++=======
 +
-+AppArmor 是什么?
-+================
++LoadPin 是一种 Linux 安全模块（LSM），保证所有内核加载的文件（模块、固件等）
++均来自同一文件系统，并且该文件系统应当以只读设备（如 dm-verity 或 CDROM）为后
++端存储。这使得在拥有经过验证和/或不可更改的文件系统的系统上，能够在不对每个文
++件单独签名的前提下，强制模块和固件的加载限制。
 +
-+AppArmor 是 Linux 内核的 MAC（强制访问控制）安全扩展。它实现了一个基于任务
-+（profile）的策略，即从用户空间创建并加载任务的配置文件。系统中未为任务定义
-+profile 的进程将在 unconfined（未限制）状态下运行，这相当于标准的 Linux DAC
-+权限。
++该 LSM 在编译时通过 ``CONFIG_SECURITY_LOADPIN`` 进行选择，并且可以在启动时通
++过内核命令行参数 ``loadpin.enforce`` 进行控制。默认情况下该功能是启用的，亦可
++在启动时通过 ``loadpin.enforce=0`` 将其关闭。
 +
-+如何启用和禁用
-+==============
++LoadPin 会在检测到首个文件被加载时开始生效。如果承载该文件系统的块设备不是只
++读的，系统会创建一个 sysctl 条目 ``/proc/sys/kernel/loadpin/enabled`` 用于切
++换锁定功能。可写的文件系统意味着锁定功能亦可被修改，但通过 sysctl 可以在可
++写文件系统上便捷地进行测试。
 +
-+设置 ``CONFIG_SECURITY_APPARMOR=y``
-+
-+如果希望将 AppArmor 设为默认的安全模块，请使用以下配置::
-+
-+   CONFIG_DEFAULT_SECURITY_APPARMOR=y
-+
-+``CONFIG_LSM`` 参数用于管理 LSM（Linux Security Module）的顺序和选择。请在列
-+表中将 apparmor 指定为第一个 “主要” 模块（例如 AppArmor、SELinux、Smack）。
-+
-+构建内核
-+--------
-+
-+如果 AppArmor 不是默认的安全模块，可以在内核命令行上添加
-+``security=apparmor`` 来启用。
-+
-+如果 AppArmor 是默认的安全模块，则可以在内核命令行上添加
-+``apparmor=0, security=XXXX``（其中 ``XXXX`` 为有效的安全模块）来禁用它。
-+
-+要让 AppArmor 在标准的 Linux DAC 权限之外施加任何限制，必须从用户空间向内核
-+加载策略，具体请参阅文档和工具链接。
-+
-+文档
-+====
-+
-+文档可在 wiki 上找到，链接如下。
-+
-+链接
-+====
-+
-+Mailing List - apparmor@lists.ubuntu.com
-+
-+Wiki - http://wiki.apparmor.net
-+
-+User space tools - https://gitlab.com/apparmor
-+
-+Kernel module - git://git.kernel.org/pub/scm/linux/kernel/git/jj/linux-apparmor
++也可以使用内核命令行参数 ``loadpin.exclude`` 将特定文件类型从 LoadPin 中排除。
++默认情况下所有文件均被包含，但可以通过
++``loadpin.exclude=kernel-module,kexec-image`` 等方式排除相应类型。这允许在使
++用 ``CONFIG_MODULE_SIG``、``CONFIG_KEXEC_VERIFY_SIG`` 等机制对内核模块和内核
++镜像进行校验的同时，仍然利用 LoadPin 保护其他内核加载文件的完整性。有效文件类
++型的完整列表可在 ``include/linux/kernel_read_file.h`` 中的
++``kernel_read_file_str`` 找到。
 -- 
 2.43.0
-
 
 
