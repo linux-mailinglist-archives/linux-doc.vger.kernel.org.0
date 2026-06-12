@@ -1,48 +1,49 @@
-Return-Path: <linux-doc+bounces-92067-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92068-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id ISCoF86OK2rU/gMAu9opvQ
-	(envelope-from <linux-doc+bounces-92067-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 06:45:02 +0200
+	id kousKPGOK2rd/gMAu9opvQ
+	(envelope-from <linux-doc+bounces-92068-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 06:45:37 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id ADB1F676A5E
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 06:45:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 02647676A70
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 06:45:37 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=arm.com header.s=foss header.b="C5jJ/wIW";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92067-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-92067-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=arm.com header.s=foss header.b=Q+ywobdJ;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92068-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-92068-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=arm.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id AF32F30E3FB1
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 04:44:58 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 684B5311612C
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 04:45:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9F931390230;
-	Fri, 12 Jun 2026 04:44:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 277623955CB;
+	Fri, 12 Jun 2026 04:45:02 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 89257343D86;
-	Fri, 12 Jun 2026 04:44:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7D996343D86;
+	Fri, 12 Jun 2026 04:45:00 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781239497; cv=none; b=bcN4kP9CWjY7zYq6yGtbwtIEpNR39CTH+6171M/B1x5CDqGRorISVH1xFlGigakW/lm1SDRcF8ghKty2xVftlIelM18KkUXOX4rA8zhUK8ZeHhT37HPufH46dVykyohtC4Noosrj3ilvRAPN6GDRkdCB5yfjl2V6ik1ARmbqKsU=
+	t=1781239502; cv=none; b=rVCjOB+cLA7drmnhCr28xP83yE+lvIksy69hhxfClygw0Cs+0LWLD+4yCKoBvA5gUzeRqVP9QueinbtB1NMmP07Det+icrOxFokWsbTW7VuYikkjdbhaj9D6l3y+sj8SGibn9SnDXSeuBWe3BMKl/YRCmHSz5D4n4dHhWjmAq3E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781239497; c=relaxed/simple;
-	bh=SQA3Q3+/82oh45oJTME91UR/PdPgdrsuA9Fdpn4kolY=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=TEtGFDt1JWh3m7RoTnYBy3lIKFfKwkxdDcx20SVdpf2995aQN6SItiQ8GU+oAoB2pKay6JsOFBtuCcIyavR+ppH4+KTiiCa4uzCWsOLmxCK9QTo/k3qWC1Q6iPGIb80/Jz4BsDgHTp0o+3+fSqNqySANoldZxNF9BJHVuVEQUpo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=C5jJ/wIW; arc=none smtp.client-ip=217.140.110.172
+	s=arc-20240116; t=1781239502; c=relaxed/simple;
+	bh=b00TklBGecqQHLra7PJTRi5mE5kXZpjh3sOy2Gf7YPQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=PLR7Qih1TCw8vo3/FKeC0jCRcqhBpr03B/PoQGbFJFZvc7252kvMyRC59Dui2QY3EcnJ1XCKwcSj39Let1SOK3KGZx2WPEk9kPUBKVbSt/FwA/uPZ46iesGEUAhiJmV2FXeGGDBUlti+gIne528IMnC4JQBs4R/cyRZwXH8548Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=Q+ywobdJ; arc=none smtp.client-ip=217.140.110.172
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D3C722E91;
-	Thu, 11 Jun 2026 21:44:48 -0700 (PDT)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1C26E2E91;
+	Thu, 11 Jun 2026 21:44:55 -0700 (PDT)
 Received: from cesw-amp-gbt-1s-m12830-01.blr.arm.com (cesw-amp-gbt-1s-m12830-01.blr.arm.com [10.164.195.31])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id E073D3FAF5;
-	Thu, 11 Jun 2026 21:44:47 -0700 (PDT)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 2BAF13FAF5;
+	Thu, 11 Jun 2026 21:44:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1781239493; bh=SQA3Q3+/82oh45oJTME91UR/PdPgdrsuA9Fdpn4kolY=;
-	h=From:To:Cc:Subject:Date:From;
-	b=C5jJ/wIWZzhIUGdGO9T1hGV6rroAbSN3pDV9MfJilf8tLHrAckiL0S/LKO41BXhZH
-	 TcYl95kWuiBGL2H9XMsb2TGyjHPdch3DNT1yTG9y+K52Dm55IzVzSy+Ru4qjMsWBbB
-	 MevnQMAJu19h7w8r6XSGIR3dzkoJ3W1yPt0WeTnE=
+	t=1781239499; bh=b00TklBGecqQHLra7PJTRi5mE5kXZpjh3sOy2Gf7YPQ=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=Q+ywobdJtIBtiIj1Lm87NJAvMg5U5ZyPO3GOiZE5j7oUMWa2LPjn5dzWP/UcvIfsR
+	 eAIppw1XHah98pdVj9WRrylHYixsfy899jM7BhUXauI0syxEiAplt27uUuk/UZ4Tct
+	 1rn0H7QLZBrriUcOjns9J7XKs7UrCuhBG1BRs4Wk=
 From: Dev Jain <dev.jain@arm.com>
 To: ryabinin.a.a@gmail.com,
 	akpm@linux-foundation.org,
@@ -66,10 +67,12 @@ Cc: Dev Jain <dev.jain@arm.com>,
 	david@kernel.org,
 	will@kernel.org,
 	catalin.marinas@arm.com
-Subject: [RFC PATCH 0/2] kasan: hw_tags: Add option to tag only at allocation time
-Date: Fri, 12 Jun 2026 04:44:22 +0000
-Message-ID: <20260612044425.763060-1-dev.jain@arm.com>
+Subject: [RFC PATCH 1/2] kasan: hw_tags: Use KASAN_PAGE_REDZONE for vmalloc redzoning
+Date: Fri, 12 Jun 2026 04:44:23 +0000
+Message-ID: <20260612044425.763060-2-dev.jain@arm.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260612044425.763060-1-dev.jain@arm.com>
+References: <20260612044425.763060-1-dev.jain@arm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -89,7 +92,7 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-92067-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-92068-lists,linux-doc=lfdr.de];
 	FREEMAIL_TO(0.00)[gmail.com,linux-foundation.org,lwn.net];
 	FREEMAIL_CC(0.00)[arm.com,google.com,gmail.com,googlegroups.com,kvack.org,vger.kernel.org,linuxfoundation.org,lists.infradead.org,kernel.org];
 	RCPT_COUNT_TWELVE(0.00)[22];
@@ -112,38 +115,36 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	ALIAS_RESOLVED(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,arm.com:dkim,arm.com:email,arm.com:mid,arm.com:from_mime,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: ADB1F676A5E
+X-Rspamd-Queue-Id: 02647676A70
 
-Introduce a boot option to tag only at allocation time of the objects. This
-reduces KASAN MTE overhead, the tradeoff being reduced ability of
-catching bugs.
+In preparation for adding "tag only on alloc" boot time option, use
+KASAN_PAGE_REDZONE instead of KASAN_TAG_INVALID for poisoning the tail end
+of the vmalloc allocation.
 
-Now, when a memory object will be freed, it will retain the random tag it
-had at allocation time. This compromises on catching UAF bugs, till the
-time the object is not reallocated, at which point it will have a new
-random tag.
+Although both values are the same for hw tags, KASAN_SLAB_REDZONE is used
+for poisoning the tail end of a kmalloc object allocation, so maintain
+the pattern.
 
-Hence, not catching "use-after-free-before-reallocation" and not catching
-"double-free" will be the compromise for reduced KASAN overhead.
-
-This is an RFC because we are not clear about the performance benefit.
-
-Android folks, please help with testing!
-
+Signed-off-by: Dev Jain <dev.jain@arm.com>
 ---
-Applies on Linus master (9716c086c8e8).
+ mm/kasan/hw_tags.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Dev Jain (2):
-  kasan: hw_tags: Use KASAN_PAGE_REDZONE for vmalloc redzoning
-  kasan: hw_tags: Add boot option to elide free time poisoning
-
- Documentation/dev-tools/kasan.rst |  4 +++
- mm/kasan/hw_tags.c                | 45 +++++++++++++++++++++++++++++--
- mm/kasan/kasan.h                  | 23 +++++++++++++++-
- 3 files changed, 69 insertions(+), 3 deletions(-)
-
+diff --git a/mm/kasan/hw_tags.c b/mm/kasan/hw_tags.c
+index cbef5e450954e..c1a2b48808ed7 100644
+--- a/mm/kasan/hw_tags.c
++++ b/mm/kasan/hw_tags.c
+@@ -375,7 +375,7 @@ void *__kasan_unpoison_vmalloc(const void *start, unsigned long size,
+ 	redzone_start = round_up((unsigned long)start + size,
+ 				 KASAN_GRANULE_SIZE);
+ 	redzone_size = round_up(redzone_start, PAGE_SIZE) - redzone_start;
+-	kasan_poison((void *)redzone_start, redzone_size, KASAN_TAG_INVALID,
++	kasan_poison((void *)redzone_start, redzone_size, KASAN_PAGE_REDZONE,
+ 		     flags & KASAN_VMALLOC_INIT);
+ 
+ 	/*
 -- 
 2.43.0
 
