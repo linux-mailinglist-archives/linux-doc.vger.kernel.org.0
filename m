@@ -1,181 +1,306 @@
-Return-Path: <linux-doc+bounces-92141-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92138-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id YkylKJ8vLGq5NAQAu9opvQ
-	(envelope-from <linux-doc+bounces-92141-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 18:11:11 +0200
+	id FieFKuMuLGphNAQAu9opvQ
+	(envelope-from <linux-doc+bounces-92138-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 18:08:03 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 877EB67AC08
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 18:11:11 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0E00067AB8A
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 18:08:03 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=qq.com header.s=s201512 header.b=An2VG86X;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92141-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-92141-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=qq.com;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=GoFSUE26;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92138-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-92138-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 94B9C303DAF0
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 16:08:26 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id B85953016527
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 16:07:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 338C23815D0;
-	Fri, 12 Jun 2026 16:08:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D440839150D;
+	Fri, 12 Jun 2026 16:07:50 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out203-205-221-242.mail.qq.com (out203-205-221-242.mail.qq.com [203.205.221.242])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A695282F06;
-	Fri, 12 Jun 2026 16:08:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1B84135CBC3;
+	Fri, 12 Jun 2026 16:07:47 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781280498; cv=none; b=Bqz/ZMyv8+srTckm4dKr6Xr9Y1BMQJwMeieoIuNJZo6htuTp+3CM7TWIg1Qw/peVYVMtQbzec6iBjXwA0cyDflhEr7YCvt5+dgF4xDqLy5yP+L4aKZawydOVZ01pGJjdvQyCuUsxAmCw5yy0tqwKN2uZTp5vZ0hEDAYxKwa7x9A=
+	t=1781280470; cv=none; b=s0CXXekvVv9hSIU0eIgJ9SV1cqe++MgUSxREllz7jkgv4UVEfGtAr3YB4YLnprq8PnUtq94a9Uzo1MWjen834mZPmQaQdnHhJTT5dLPnbINoqIM5vC5b66emZcCgQjPsWJRL/ObjpP3yPfwb1ILp51AfHGV4lvh/R8ZZKtIgRIg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781280498; c=relaxed/simple;
-	bh=C4yDMJ/YOtLv28/s4/Pf+JBqBSSwrKjndXwButUTlqo=;
-	h=Message-ID:From:To:Cc:Subject:Date:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=NTJzFYQIoGj7Dg3i4fRHXxGYsHtyAtS7mNFJQxb5JKP62dVJ71WUxQvoTLiFhBd42aECnb3lkS54ypGqs7QZWQ53EHJeKPsxcbfAWSgdwYfnaOJUx+f4zNWN4Q0Qu2AaFnpMFqUT0n41nn6pi960njpbRHHzkDZEZC3U79AnRV4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=qq.com; spf=pass smtp.mailfrom=qq.com; dkim=pass (1024-bit key) header.d=qq.com header.i=@qq.com header.b=An2VG86X; arc=none smtp.client-ip=203.205.221.242
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
-	t=1781280486; bh=UQp8VX9JypZ6E6O1OqUQjFmFxUx8YP9qAGPt+56zDhY=;
+	s=arc-20240116; t=1781280470; c=relaxed/simple;
+	bh=PM7ZGiMgqzvDevJ43e24iFiCX3mlYcDvWstcDsODdT0=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=lqK/0y5SCM9LX7zFT1tKlhKcKhlIjd4x5vWizKwD+HeFob+BmQSoeWOKg9v5x8ydyxH2AGb/AIZekz7slR/Rg6MocUAChvcU9fZI24e8/lizaPVs4FJOtD+NIUvnK5Yo/XruTQVgGm+iwI9rHYUzgK0yJcZUwKuLGvbBe/fDzHQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GoFSUE26; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D28621F000E9;
+	Fri, 12 Jun 2026 16:07:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1781280467;
+	bh=F8HKmkgMfnWSpRy+B4aGMkwUWIdFXIhB0ADkhsPsHow=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=An2VG86X3EQ90g20+bcqcsw39Es0lz4u1b9mCgDUyA7XWZF+I28sxwT7xs9oU5B4B
-	 dvXhA6VUdAdJ5x9i8IAi3+wE6Z5Gv8iYOnB+dNn28HfSCR1QYZCdBocCZEEzU8c0bS
-	 Gf6Yf/TGMceF9yIjuR6gnD/xrg/TAejuquZI51+4=
-Received: from 172-1-1-128.lightspeed.hstntx.sbcglobal.net.localdomain ([27.38.179.189])
-	by newxmesmtplogicsvrszb51-1.qq.com (NewEsmtp) with SMTP
-	id F4B72B6; Sat, 13 Jun 2026 00:03:52 +0800
-X-QQ-mid: xmsmtpt1781280232taf7h5xff
-Message-ID: <tencent_F5C99221ABE8EEE4A8610C0DE1E1BDD8E505@qq.com>
-X-QQ-XMAILINFO: N6IfSeM/PG+tR7SiFRbKESHf2jgLdxAzdRFrx5jg1EiRiDaePdyaG45GBeNKva
-	 FP5tl7hGSmBMkLESnZHMOrT5T6ICpM+bGy7m/HnIkA6JzZf9sdVZhkAlvwT1J8k/T+VK1gxYZlha
-	 mRpL7uPmBVCSy0PBMrO7Hp/quvx/M08WopCTppfxmb1SsEUP8J7BiGrqc6sAbSKvL/UNXTGjyGdD
-	 Fu78OwC4BdaPbrUagnhL1Lyj0X6SSST6e2BnIC37nTWU8ymGqlvdgZYr4FYy6T3hUptDJdO2bWna
-	 DAh1iQBzwS1TtoYTjtDAITV78Aj+kasq5GdbR9bmWM7AQdOckd6bbcQ65DyZFR+kUwQMwUNKoO9k
-	 n4Wy6vekCgrKn37IrYHoKZuJz76NWLTZQul/zmc7pWcszCEL+b2GfcBD2qATNWJ4ilF3jbIxvr3p
-	 KyHyORqixr1RYAnYN5YaJjHQd5YQbV/qKXzJVQZh8iypF/zF1iP59HBcLFRNbxKMyO1DQZ6PXyTP
-	 iQGJL5jCSkyKfsRGyyq08H7bvEEMizevDAwW2KiYo/d8GWL+y34Fk0K2SSY854nVokp+AEAigeYz
-	 FhvL876IxNs/yz52/8C5CqfoGdaowYkuaWWHYWYHPbsnbn02cEI+w3CzIVuZGgUe66Pe/rK6a1xP
-	 nZ48FnXgj+3iazYtSnwILSIKe1ujd4TZ/MECIrpvbhzuDuBs/6FnY2R8fEhNYxE/RzKeHCsdaeQf
-	 gmQ6UaYlj1PCNb5rqfvQJ1x1UZpxTfRu2r6r6Xme3GFtATcFXRacdAUEpv2BdRzH+m/odPOmxNtF
-	 nMnS2SEqkedrCbi/DWMsESkuoRbh1y5cv5ZybODpntUeX/lUYz725BnE4yljk/etW9pSap8+Hjxs
-	 Wet+HHaj4qkDTWarlBP7sEfL2e11EaQ0LtQqZJTbClmtM+Gy7rcbrQGiZB8n+WnEe/HiG3Nv0eEW
-	 +AuY1kFgFnFxvlduW5ek6cocwY+klh1YNW1NVDG/mcBRenR4Jex36fxhtmLpn7Kbm19DimY75Qr/
-	 vbIfYylXMhdGFDBjshqXK+NU43bsP/m9ejBskOP12tsmFkQ1S8f5IBviwhCKwKMpoYOzAgNbZPyb
-	 DuEVftjlelVUf5X+sKz9BM8bL/rW4GnDQgGoydlwEuh+wu5reJ+GobfcNY8vu4pyb6DqsBZRKCGS
-	 wJKnA=
-X-QQ-XMRINFO: OWPUhxQsoeAVwkVaQIEGSKwwgKCxK/fD5g==
-From: Yan Zhu <zhuyan2015@qq.com>
-To: alexs@kernel.org,
-	si.yanteng@linux.dev,
-	corbet@lwn.net,
-	mic@digikod.net
-Cc: dzm91@hust.edu.cn,
-	skhan@linuxfoundation.org,
-	gnoack@google.com,
-	zhuyan2015@qq.com,
+	b=GoFSUE26dIRsAC/9P56FPrymI4gJRC+ATFFDJnH89jw4DVDJVylmCR3i0mQjYJQJ/
+	 SfxVNnDYPCD68SP/yhS5qOr76wrbyPr9weSDd2qxznCS45UkYtnC+udKLstQ/Z+NdA
+	 SZIdP+Yu2R/s/kT6NxDVOvAxHaNxTg89vJ8vzTlte48tUhkCzYsvIgpZEDtffKE3wq
+	 nQo/4XWW7KUWxPUW/wVu4LVHtyRlkPLWeVONcWfW/374nVQHbfy24VjrbBO7QANUMK
+	 5Bdf5vuA/VG5cT/vra0El0LlW3KqoVksdARH513TFCB3nQ75/+O7sAizXjUGL8kpKa
+	 LGufhvmrjEIeQ==
+From: Simon Horman <horms@kernel.org>
+To: gongfan1@huawei.com
+Cc: Simon Horman <horms@kernel.org>,
+	wudi234@huawei.com,
+	tengpeisen@huawei.com,
+	netdev@vger.kernel.org,
+	davem@davemloft.net,
+	edumazet@google.com,
+	kuba@kernel.org,
+	pabeni@redhat.com,
+	andrew+netdev@lunn.ch,
+	ioana.ciornei@nxp.com,
+	mohsin.bashr@gmail.com,
+	linux-kernel@vger.kernel.org,
 	linux-doc@vger.kernel.org,
-	linux-security-module@vger.kernel.org
-Subject: [PATCH 03/10] docs/zh_CN: add LSM/LoadPin Chinese translation
-Date: Sat, 13 Jun 2026 00:03:39 +0800
-X-OQ-MSGID: <3c91369ba21c1bfab48f8dd49f04629128d97057.1781105672.git.zhuyan2015@qq.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1781105672.git.zhuyan2015@qq.com>
-References: <cover.1781105672.git.zhuyan2015@qq.com>
+	luosifu@huawei.com,
+	guoxin09@huawei.com,
+	zhoushuai28@huawei.com,
+	wulike1@huawei.com,
+	shijing34@huawei.com,
+	zhengjiezhen@h-partners.com,
+	maxime.chevallier@bootlin.com
+Subject: Re: [PATCH net-next v09 1/5] hinic3: Add ethtool queue ops
+Date: Fri, 12 Jun 2026 17:06:53 +0100
+Message-ID: <20260612160653.690379-1-horms@kernel.org>
+X-Mailer: git-send-email 2.54.0
+In-Reply-To: <02e87952a65aa268526ade2f03de6c76fbc1fe9d.1781062575.git.wudi234@huawei.com>
+References: <02e87952a65aa268526ade2f03de6c76fbc1fe9d.1781062575.git.wudi234@huawei.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-2.16 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[qq.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[qq.com:s=s201512];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-92141-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-92138-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[hust.edu.cn,linuxfoundation.org,google.com,qq.com,vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:alexs@kernel.org,m:si.yanteng@linux.dev,m:corbet@lwn.net,m:mic@digikod.net,m:dzm91@hust.edu.cn,m:skhan@linuxfoundation.org,m:gnoack@google.com,m:zhuyan2015@qq.com,m:linux-doc@vger.kernel.org,m:linux-security-module@vger.kernel.org,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:gongfan1@huawei.com,m:horms@kernel.org,m:wudi234@huawei.com,m:tengpeisen@huawei.com,m:netdev@vger.kernel.org,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:andrew+netdev@lunn.ch,m:ioana.ciornei@nxp.com,m:mohsin.bashr@gmail.com,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:luosifu@huawei.com,m:guoxin09@huawei.com,m:zhoushuai28@huawei.com,m:wulike1@huawei.com,m:shijing34@huawei.com,m:zhengjiezhen@h-partners.com,m:maxime.chevallier@bootlin.com,m:andrew@lunn.ch,m:mohsinbashr@gmail.com,s:lists@lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[21];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[zhuyan2015@qq.com,linux-doc@vger.kernel.org];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[qq.com:+];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FREEMAIL_FROM(0.00)[qq.com];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	TO_DN_NONE(0.00)[];
+	FORGED_SENDER(0.00)[horms@kernel.org,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[zhuyan2015@qq.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[horms@kernel.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,huawei.com,vger.kernel.org,davemloft.net,google.com,redhat.com,lunn.ch,nxp.com,gmail.com,h-partners.com,bootlin.com];
 	ALIAS_RESOLVED(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,qq.com:dkim,qq.com:email,qq.com:mid,qq.com:from_mime,vger.kernel.org:from_smtp]
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,sashiko.dev:url,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 877EB67AC08
+X-Rspamd-Queue-Id: 0E00067AB8A
 
-Translate Documentation/admin-guide/LSM/LoadPin.rst into Chinese.
-
-Update the translation through commit 0860b72d535f
-("security/loadpin: Update the changing interface in the source code.")
-
-Assisted-by: Claude:deepseek-4-pro
-Signed-off-by: Yan Zhu <zhuyan2015@qq.com>
+This is an AI-generated review of your patch. The human sending this
+email has considered the AI review valid, or at least plausible.
+Full review at: https://sashiko.dev
 ---
- .../zh_CN/admin-guide/LSM/LoadPin.rst         | 33 +++++++++++++++++++
- 1 file changed, 33 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/admin-guide/LSM/LoadPin.rst
+hinic3: Add ethtool queue ops
 
-diff --git a/Documentation/translations/zh_CN/admin-guide/LSM/LoadPin.rst b/Documentation/translations/zh_CN/admin-guide/LSM/LoadPin.rst
-new file mode 100644
-index 000000000000..d75a06f515f6
---- /dev/null
-+++ b/Documentation/translations/zh_CN/admin-guide/LSM/LoadPin.rst
-@@ -0,0 +1,33 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. include:: ../../disclaimer-zh_CN.rst
-+
-+:Original: Documentation/admin-guide/LSM/LoadPin.rst
-+:翻译:
-+ 朱岩 Yan Zhu <zhuyan2015@qq.com>
-+
-+
-+=======
-+LoadPin
-+=======
-+
-+LoadPin 是一种 Linux 安全模块（LSM），保证所有内核加载的文件（模块、固件等）
-+均来自同一文件系统，并且该文件系统应当以只读设备（如 dm-verity 或 CDROM）为后
-+端存储。这使得在拥有经过验证和/或不可更改的文件系统的系统上，能够在不对每个文
-+件单独签名的前提下，强制模块和固件的加载限制。
-+
-+该 LSM 在编译时通过 ``CONFIG_SECURITY_LOADPIN`` 进行选择，并且可以在启动时通
-+过内核命令行参数 ``loadpin.enforce`` 进行控制。默认情况下该功能是启用的，亦可
-+在启动时通过 ``loadpin.enforce=0`` 将其关闭。
-+
-+LoadPin 会在检测到首个文件被加载时开始生效。如果承载该文件系统的块设备不是只
-+读的，系统会创建一个 sysctl 条目 ``/proc/sys/kernel/loadpin/enabled`` 用于切
-+换锁定功能。可写的文件系统意味着锁定功能亦可被修改，但通过 sysctl 可以在可
-+写文件系统上便捷地进行测试。
-+
-+也可以使用内核命令行参数 ``loadpin.exclude`` 将特定文件类型从 LoadPin 中排除。
-+默认情况下所有文件均被包含，但可以通过
-+``loadpin.exclude=kernel-module,kexec-image`` 等方式排除相应类型。这允许在使
-+用 ``CONFIG_MODULE_SIG``、``CONFIG_KEXEC_VERIFY_SIG`` 等机制对内核模块和内核
-+镜像进行校验的同时，仍然利用 LoadPin 保护其他内核加载文件的完整性。有效文件类
-+型的完整列表可在 ``include/linux/kernel_read_file.h`` 中的
-+``kernel_read_file_str`` 找到。
--- 
-2.43.0
+This commit implements ethtool callback functions .get_ringparam and
+.set_ringparam. These callbacks allow users to utilize ethtool for detailed
+queue depth configuration and monitoring.
 
+> diff --git a/drivers/net/ethernet/huawei/hinic3/hinic3_ethtool.c b/drivers/net/ethernet/huawei/hinic3/hinic3_ethtool.c
+> index 90fc16288de95..be9992a235f7b 100644
+> --- a/drivers/net/ethernet/huawei/hinic3/hinic3_ethtool.c
+> +++ b/drivers/net/ethernet/huawei/hinic3/hinic3_ethtool.c
+[ ... ]
+> @@ -409,6 +410,96 @@ hinic3_get_link_ksettings(struct net_device *netdev,
+>  	return 0;
+>  }
+>  
+> +static void hinic3_get_ringparam(struct net_device *netdev,
+> +				 struct ethtool_ringparam *ring,
+> +				 struct kernel_ethtool_ringparam *kernel_ring,
+> +				 struct netlink_ext_ack *extack)
+> +{
+> +	struct hinic3_nic_dev *nic_dev = netdev_priv(netdev);
+> +
+> +	ring->rx_max_pending = HINIC3_MAX_RX_QUEUE_DEPTH;
+> +	ring->tx_max_pending = HINIC3_MAX_TX_QUEUE_DEPTH;
+> +	ring->rx_pending = nic_dev->q_params.rq_depth;
+> +	ring->rx_pending = nic_dev->q_params.sq_depth;
+
+[Severity: High]
+Does this code accidentally assign rx_pending twice and omit tx_pending?
+Querying the interface will return 0 for the Tx queue depth and an
+incorrect value for the Rx queue depth, which also breaks partial
+ring updates.
+
+> +}
+> +
+[ ... ]
+> diff --git a/drivers/net/ethernet/huawei/hinic3/hinic3_irq.c b/drivers/net/ethernet/huawei/hinic3/hinic3_irq.c
+> index e7d6c2033b451..bc4d879f9be4e 100644
+> --- a/drivers/net/ethernet/huawei/hinic3/hinic3_irq.c
+> +++ b/drivers/net/ethernet/huawei/hinic3/hinic3_irq.c
+> @@ -137,7 +137,8 @@ static int hinic3_set_interrupt_moder(struct net_device *netdev, u16 q_id,
+>  	struct hinic3_interrupt_info info = {};
+>  	int err;
+>  
+> -	if (q_id >= nic_dev->q_params.num_qps)
+> +	if (q_id >= nic_dev->q_params.num_qps ||
+> +	    !mutex_trylock(&nic_dev->change_res_mutex))
+>  		return 0;
+
+[Severity: High]
+Is it safe to silently return 0 (success) without applying the interrupt
+moderation if the mutex is contended? This appears to drop hardware
+configuration updates without informing the caller.
+
+>  
+>  	info.interrupt_coalesc_set = 1;
+[ ... ]
+> diff --git a/drivers/net/ethernet/huawei/hinic3/hinic3_main.c b/drivers/net/ethernet/huawei/hinic3/hinic3_main.c
+> index 0a888fe4c975b..c87624a5e5dcd 100644
+> --- a/drivers/net/ethernet/huawei/hinic3/hinic3_main.c
+> +++ b/drivers/net/ethernet/huawei/hinic3/hinic3_main.c
+[ ... ]
+> @@ -315,6 +316,9 @@ static void hinic3_link_status_change(struct net_device *netdev,
+>  {
+>  	struct hinic3_nic_dev *nic_dev = netdev_priv(netdev);
+>  
+> +	if (!mutex_trylock(&nic_dev->change_res_mutex))
+> +		return;
+> +
+
+[Severity: High]
+Can this usage of mutex_trylock cause physical link status events to be
+discarded? If the lock is held (e.g., during an ethtool ring size change),
+the OS link state could permanently diverge from the physical link state.
+
+>  	if (link_status_up) {
+>  		if (netif_carrier_ok(netdev))
+>  			return;
+
+[Severity: Critical]
+Does this early return path leak the mutex? We acquired change_res_mutex
+earlier, but it looks like we exit without unlocking it, which would
+cause subsequent deadlocks.
+
+> @@ -330,6 +334,8 @@ static void hinic3_link_status_change(struct net_device *netdev,
+>  		netif_carrier_off(netdev);
+>  		netdev_dbg(netdev, "Link is down\n");
+>  	}
+> +
+> +	mutex_unlock(&nic_dev->change_res_mutex);
+>  }
+
+[Severity: Critical]
+There is another early return just above this code:
+        if (!netif_carrier_ok(netdev))
+                return;
+Similarly, does this early return also forget to call mutex_unlock()?
+
+>  
+>  static void hinic3_port_module_event_handler(struct net_device *netdev,
+> diff --git a/drivers/net/ethernet/huawei/hinic3/hinic3_netdev_ops.c b/drivers/net/ethernet/huawei/hinic3/hinic3_netdev_ops.c
+> index da73811641a9d..047214cfc7532 100644
+> --- a/drivers/net/ethernet/huawei/hinic3/hinic3_netdev_ops.c
+> +++ b/drivers/net/ethernet/huawei/hinic3/hinic3_netdev_ops.c
+[ ... ]
+> @@ -428,6 +439,74 @@ static void hinic3_vport_down(struct net_device *netdev)
+>  	}
+>  }
+>  
+> +int
+> +hinic3_change_channel_settings(struct net_device *netdev,
+> +			       struct hinic3_dyna_txrxq_params *trxq_params)
+> +{
+[ ... ]
+> +	err = hinic3_vport_up(netdev);
+> +	if (err)
+> +		goto err_close_channel;
+> +
+> +	hinic3_free_channel_resources(netdev, &cur_qp_params, &cur_trxq_params);
+> +
+> +	mutex_unlock(&nic_dev->change_res_mutex);
+> +
+> +	return 0;
+> +
+> +err_close_channel:
+> +	hinic3_close_channel(netdev);
+> +err_qp_irq_reset:
+> +	nic_dev->q_params = cur_trxq_params;
+> +
+> +	if (trxq_params->num_qps > cur_trxq_params.num_qps)
+> +		hinic3_qp_irq_change(netdev, cur_trxq_params.num_qps);
+> +	hinic3_free_qp_ctxts(nic_dev);
+
+[Severity: High]
+Is hinic3_free_qp_ctxts() called twice sequentially in this error path?
+The err_close_channel block calls hinic3_close_channel(), which internally
+invokes hinic3_free_qp_ctxts(). The flow then falls through to
+err_qp_irq_reset which explicitly calls hinic3_free_qp_ctxts() again.
+
+> +err_uninit_qps:
+> +	hinic3_get_cur_qps(nic_dev, &new_qp_params);
+> +	hinic3_free_channel_resources(netdev, &new_qp_params, trxq_params);
+> +	hinic3_free_channel_resources(netdev, &cur_qp_params, &cur_trxq_params);
+
+[Severity: Critical]
+Does this error path destroy both the new and the old working channel
+resources? By calling hinic3_free_channel_resources() on cur_qp_params,
+we leave dangling pointers in nic_dev->q_params and nic_io. It seems
+subsequent packet transmissions would trigger a use-after-free, and
+closing the interface later would trigger a double-free.
+
+> +	mutex_unlock(&nic_dev->change_res_mutex);
+> +
+> +	return err;
+> +}
+> +
+>  static int hinic3_open(struct net_device *netdev)
+>  {
+>  	struct hinic3_nic_dev *nic_dev = netdev_priv(netdev);
+> @@ -458,6 +537,10 @@ static int hinic3_open(struct net_device *netdev)
+>  
+>  	hinic3_init_qps(nic_dev, &qp_params);
+>  
+> +	err = hinic3_prepare_channel(netdev, &nic_dev->q_params);
+> +	if (err)
+> +		goto err_uninit_qps;
+> +
+>  	err = hinic3_open_channel(netdev);
+>  	if (err)
+>  		goto err_uninit_qps;
+
+[Severity: High]
+Does jumping to err_uninit_qps leak the QP contexts allocated by
+hinic3_prepare_channel()?
+
+Since hinic3_prepare_channel() calls hinic3_init_qp_ctxts(), it looks like
+we bypass the cleanup that happens inside hinic3_close_channel(), which
+would permanently leak the root context configuration and associated DMA
+memory.
 
