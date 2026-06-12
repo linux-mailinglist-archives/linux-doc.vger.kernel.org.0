@@ -1,162 +1,200 @@
-Return-Path: <linux-doc+bounces-92102-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92103-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id pNJYGkTbK2oNGgQAu9opvQ
-	(envelope-from <linux-doc+bounces-92102-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 12:11:16 +0200
+	id zwE1NNrbK2o7GgQAu9opvQ
+	(envelope-from <linux-doc+bounces-92103-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 12:13:46 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id CD9926789B3
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 12:11:15 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 20E376789FF
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 12:13:46 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linux.dev header.s=key1 header.b=guKyFSl+;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92102-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92102-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=linux.dev;
+	dkim=pass header.d=baidu.com header.s=selector1 header.b="oiGErC/k";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92103-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92103-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=baidu.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id D5281303C7EA
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 10:11:14 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id D31C83011133
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 10:13:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AA0D23A7F4C;
-	Fri, 12 Jun 2026 10:11:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7FD06360EF2;
+	Fri, 12 Jun 2026 10:13:13 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-178.mta0.migadu.com (out-178.mta0.migadu.com [91.218.175.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B006374E62
-	for <linux-doc@vger.kernel.org>; Fri, 12 Jun 2026 10:11:09 +0000 (UTC)
+Received: from outbound.baidu.com (mx15.baidu.com [111.202.115.100])
+	by smtp.subspace.kernel.org (Postfix) with SMTP id 6C7D31C2324;
+	Fri, 12 Jun 2026 10:13:04 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781259071; cv=none; b=C9RWMmt8S/fEVLGKrZFdsP220eWCPtFD2RD/ZsxebIgeoo3FavReEpdzaouLVN/wcvsPL6VfnGurx/Mpx4uXdsNG4HIvUSNN/9qFQQv5L+YWUWblD4biSseeG0aQqGfLvKWZA14hTzY8rSDB0wBnqToeQjm7oxEjHJFsg0ILlec=
+	t=1781259193; cv=none; b=HLPAP7IIFJgMT2ITia1OQAs06IpuIWzO1Q6wmWCfyYgK/elMWdEv+uFC6YxV2bln8Z7ISZSqqWqP9g4hgFYcQW1VhRbnbTi6jkzKBoZlRdE4U7Xy56iupeCnm0QYJApymzrJerBY0eStWrbySRCstRiSFCzC7uxsNKdDo0+Bq0k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781259071; c=relaxed/simple;
-	bh=BbsZrou20noZ1eCteTU+al1EUZ4Kgg/aMc/ruF0xQ9E=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=KlNKKm/sFL59pO+5I0CCLt2FhCIlOxQsft3mYGYlTCsqiLT5mU8GUKhgHYtBKB60lrJhSHKgnejKR6ToaL2Wj4ZMI9nbia9Y5RCIrtOZRWMo/Qa7wfd6+OO1hPmfpku71TVXHBt8Itr9eT7XpeWAbXJYzF41Hn+a05QtoO5izz0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=guKyFSl+; arc=none smtp.client-ip=91.218.175.178
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1781259067;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=RzS/kGsf92jGqEw0Cpbkdc2ZLCTfp0DBUP+QupYpFLE=;
-	b=guKyFSl+UfdPsiPAbmsBFksClDnPER66iuQB/0VZpZJUYxSrmZUSvQkFzz3h2a3Lx8j05t
-	Mg/rTo7oVaCNm32etcLTuHF0fUxBA0+XD/Wkq8RGVtxTCIO1nMAbACU0bzNJoxSQ93GPca
-	qOT4RlCNTcqwnOuHkVESEpSONHkhYO0=
-From: Usama Arif <usama.arif@linux.dev>
-To: Cristian Marussi <cristian.marussi@arm.com>
-Cc: Usama Arif <usama.arif@linux.dev>,
-	linux-kernel@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	arm-scmi@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	sudeep.holla@kernel.org,
-	james.quinlan@broadcom.com,
-	f.fainelli@gmail.com,
-	vincent.guittot@linaro.org,
-	etienne.carriere@st.com,
-	peng.fan@oss.nxp.com,
-	michal.simek@amd.com,
-	dan.carpenter@linaro.org,
-	d-gole@ti.com,
-	jonathan.cameron@huawei.com,
-	elif.topuz@arm.com,
-	lukasz.luba@arm.com,
-	philip.radford@arm.com,
-	brauner@kernel.org,
-	souvik.chakravarty@arm.com
-Subject: Re: [PATCH v3 01/24] firmware: arm_scmi: Add new SCMIv4.0 error codes definitions
-Date: Fri, 12 Jun 2026 03:10:59 -0700
-Message-ID: <20260612101100.186627-1-usama.arif@linux.dev>
-In-Reply-To: <20260329163337.637393-2-cristian.marussi@arm.com>
-References: 
+	s=arc-20240116; t=1781259193; c=relaxed/simple;
+	bh=mE+veDDMTMJrWdkPgKGphSSzhcwJNzcc72PnTMcQdA4=;
+	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
+	 Content-Type:MIME-Version; b=mX1UJFX3M6dMryaFkeV5V8iRnRPCeuNAuWF30AFscvjba4/AWY8SU0YZyUorrmjlkMAFI+0jfYBGaz4HlMyT+emFWB0xTxeHaSwc7oi1tLOPai2N0IGjFsEcwYeoy3e+ks/ZinTaGePR5Hz6bASiiUmYPgWPjql7mOu/GBUzg0I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=baidu.com; spf=pass smtp.mailfrom=baidu.com; dkim=pass (2048-bit key) header.d=baidu.com header.i=@baidu.com header.b=oiGErC/k; arc=none smtp.client-ip=111.202.115.100
+X-MD-Sfrom: lirongqing@baidu.com
+X-MD-SrcIP: 172.31.50.45
+From: "Li,Rongqing" <lirongqing@baidu.com>
+To: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+	Vlastimil Babka <vbabka@kernel.org>, Harry Yoo <harry@kernel.org>, "Andrew
+ Morton" <akpm@linux-foundation.org>, Hao Li <hao.li@linux.dev>, "Christoph
+ Lameter" <cl@gentwo.org>, David Rientjes <rientjes@google.com>, Roman
+ Gushchin <roman.gushchin@linux.dev>, "linux-doc@vger.kernel.org"
+	<linux-doc@vger.kernel.org>, "linux-kernel@vger.kernel.org"
+	<linux-kernel@vger.kernel.org>, "linux-mm@kvack.org" <linux-mm@kvack.org>
+CC: Matthew Wilcox <willy@infradead.org>, Usama Arif <usama.arif@linux.dev>
+Subject: =?gb2312?B?tPC4tDogW1BBVENIIHYzXSBtbS9tZW1wb29sOiBVbnRhbmdsZSBDT05GSUdf?=
+ =?gb2312?B?U0xVQl9ERUJVR19PTiBhYnVzZSBhbmQgc3dpdGNoIHRvIHN0YXRpYyBrZXk=?=
+Thread-Topic: [PATCH v3] mm/mempool: Untangle CONFIG_SLUB_DEBUG_ON abuse and
+ switch to static key
+Thread-Index: AQHc9BHF11Lem2QgY0queNaRduhYGLY6v8sw
+Date: Fri, 12 Jun 2026 10:12:44 +0000
+Message-ID: <d06d13c4aebe44a2abca4aee0083644f@baidu.com>
+References: <20260604110318.2089-1-lirongqing@baidu.com>
+In-Reply-To: <20260604110318.2089-1-lirongqing@baidu.com>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+Content-Type: text/plain; charset="gb2312"
+Content-Transfer-Encoding: base64
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=baidu.com;
+	s=selector1; t=1781259183;
+	bh=mE+veDDMTMJrWdkPgKGphSSzhcwJNzcc72PnTMcQdA4=;
+	h=From:To:CC:Subject:Date:Message-ID:Content-Type;
+	b=oiGErC/k2ghGsTtaER4IsR3JRj5ouVOmsN9WzYAAI/BjIvBzaoGEQfTysg3mIBgoL
+	 g/x9rfWz+3i+G4DIuqaZiwfVhX6MU5CqRC5XVEACeHMgXpOb4U7KKaCg8DOmKCj1lo
+	 +xyLGvVvFfJZIGJtwsSFpFTU3wWXiRVzpT8uqdCR9splycS33WLKGgaw+Fe9/6hesv
+	 OlBto1ohMN9y9O7aZO1zaNNZh07+5/F9SWaXs1x8e8SSPoBHY/+LFk/WFRdwWtrJdz
+	 cLGqokz37cFmxpP42Tdvoln2/wnoQyLzafwoa64qD2ixb2fEeHXysRec8JdNN4/eBq
+	 Ja773PxKO8+cw==
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.84 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-2.06 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[baidu.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[baidu.com:s=selector1];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64];
 	MAILLIST(-0.15)[generic];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-92102-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	FORGED_SENDER(0.00)[usama.arif@linux.dev,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	FORGED_RECIPIENTS(0.00)[m:cristian.marussi@arm.com,m:usama.arif@linux.dev,m:linux-kernel@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:arm-scmi@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:sudeep.holla@kernel.org,m:james.quinlan@broadcom.com,m:f.fainelli@gmail.com,m:vincent.guittot@linaro.org,m:etienne.carriere@st.com,m:peng.fan@oss.nxp.com,m:michal.simek@amd.com,m:dan.carpenter@linaro.org,m:d-gole@ti.com,m:jonathan.cameron@huawei.com,m:elif.topuz@arm.com,m:lukasz.luba@arm.com,m:philip.radford@arm.com,m:brauner@kernel.org,m:souvik.chakravarty@arm.com,m:ffainelli@gmail.com,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	RCVD_TLS_LAST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[linux.dev,vger.kernel.org,lists.infradead.org,kernel.org,broadcom.com,gmail.com,linaro.org,st.com,oss.nxp.com,amd.com,ti.com,huawei.com,arm.com];
-	DKIM_TRACE(0.00)[linux.dev:+];
+	RCVD_COUNT_THREE(0.00)[3];
+	FORGED_RECIPIENTS(0.00)[m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:vbabka@kernel.org,m:harry@kernel.org,m:akpm@linux-foundation.org,m:hao.li@linux.dev,m:cl@gentwo.org,m:rientjes@google.com,m:roman.gushchin@linux.dev,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:willy@infradead.org,m:usama.arif@linux.dev,s:lists@lfdr.de];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	FORGED_SENDER(0.00)[lirongqing@baidu.com,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-92103-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[usama.arif@linux.dev,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[lirongqing@baidu.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[baidu.com:+];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,linux.dev:dkim,linux.dev:mid,linux.dev:from_mime]
+	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:email,infradead.org:email,vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,gentwo.org:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: CD9926789B3
+X-Rspamd-Queue-Id: 20E376789FF
 
-On Sun, 29 Mar 2026 17:33:12 +0100 Cristian Marussi <cristian.marussi@arm.com> wrote:
-
-> SCMIv4.0 introduces a couple of new possible protocol error codes: add
-> the needed definitions and mappings to Linux error values.
-> 
-> Signed-off-by: Cristian Marussi <cristian.marussi@arm.com>
-> ---
->  drivers/firmware/arm_scmi/common.h | 4 ++++
->  1 file changed, 4 insertions(+)
-> 
-> diff --git a/drivers/firmware/arm_scmi/common.h b/drivers/firmware/arm_scmi/common.h
-> index 7c35c95fddba..44af2018e21d 100644
-> --- a/drivers/firmware/arm_scmi/common.h
-> +++ b/drivers/firmware/arm_scmi/common.h
-> @@ -45,6 +45,8 @@ enum scmi_error_codes {
->  	SCMI_ERR_GENERIC = -8,	/* Generic Error */
->  	SCMI_ERR_HARDWARE = -9,	/* Hardware Error */
->  	SCMI_ERR_PROTOCOL = -10,/* Protocol Error */
-> +	SCMI_ERR_IN_USE = -11,  /* In Use Error */
-> +	SCMI_ERR_PARTIAL = -12, /* Partial Error */
->  };
->  
->  static const int scmi_linux_errmap[] = {
-> @@ -60,6 +62,8 @@ static const int scmi_linux_errmap[] = {
->  	-EIO,			/* SCMI_ERR_GENERIC */
->  	-EREMOTEIO,		/* SCMI_ERR_HARDWARE */
->  	-EPROTO,		/* SCMI_ERR_PROTOCOL */
-> +	-EPERM,			/* SCMI_ERR_IN_USE */
-
-"In use" reads like a resource-state failure, where -EBUSY would normally be expected.
--EPERM suggests an authorization failure,  which is already represented by SCMI_ERR_ACCESS.
-
-> +	-EINVAL,		/* SCMI_ERR_PARTIAL */
->  };
->  
->  static inline int scmi_to_linux_errno(int errno)
-> -- 
-> 2.53.0
-> 
-> 
+PiDW98ziOiBbUEFUQ0ggdjNdIG1tL21lbXBvb2w6IFVudGFuZ2xlIENPTkZJR19TTFVCX0RFQlVH
+X09OIGFidXNlDQo+IGFuZCBzd2l0Y2ggdG8gc3RhdGljIGtleQ0KPiANCj4gRnJvbTogTGkgUm9u
+Z1FpbmcgPGxpcm9uZ3FpbmdAYmFpZHUuY29tPg0KPiANCj4gVGhlIG1lbXBvb2wgc3Vic3lzdGVt
+IGhpc3RvcmljYWxseSB3cmFwcGVkIGl0cyBkZWJ1Z2dpbmcgbG9naWMgaW5zaWRlIGFuDQo+IG1l
+cmVseSBkZWZpbmVzIGNvbXBpbGUtdGltZSBkZWZhdWx0cyBmb3IgU0xVQiBhbmQgY2F1c2VkIHR3
+byBmbGF3czoNCj4gDQo+IDEuIE9uIHByb2R1Y3Rpb24ga2VybmVscyB3aGVyZSBDT05GSUdfU0xV
+Ql9ERUJVRz15IGJ1dA0KPiAgICBDT05GSUdfU0xVQl9ERUJVR19PTj1uLCBtZW1wb29sIGRlYnVn
+Z2luZyB3YXMgY29tcGxldGVseQ0KPiBjb21waWxlZCBvdXQNCj4gICAgYXQgY29tcGlsZSB0aW1l
+Lg0KPiAyLiBPbiBrZXJuZWxzIHdpdGggQ09ORklHX1NMVUJfREVCVUdfT049eSwgbWVtcG9vbCBk
+ZWJ1Z2dpbmcgc3RheWVkDQo+IGFjdGl2ZQ0KPiAgICBldmVuIGlmIGEgdXNlciBleHBsaWNpdGx5
+IGRpc2FibGVkIHNsdWIgZGVidWdnaW5nIGF0IGJvb3QgdGltZS4NCj4gDQo+IENsZWFuIHVwIHRo
+aXMgbWVzcyBieSByZW1vdmluZyB0aGUgI2lmZGVmIGFuZCBzd2l0Y2hpbmcgdG8gYSBydW50aW1l
+IHN0YXRpYw0KPiBrZXkgKG1lbXBvb2xfZGVidWdfZW5hYmxlZCksIGFsbG93aW5nIG1lbXBvb2wg
+ZGVidWdnaW5nIHRvIGJlIHRvZ2dsZWQNCj4gY2xlYW5seSB2aWEgaXRzIG93biBib290IHBhcmFt
+ZXRlci4NCj4gDQpQaW5nIA0KDQpUaGFua3MNCiANCg0KDQpbTGksUm9uZ3FpbmddIA0KDQoNCg0K
+PiBTdWdnZXN0ZWQtYnk6IFZsYXN0aW1pbCBCYWJrYSAoU1VTRSkgPHZiYWJrYUBrZXJuZWwub3Jn
+Pg0KPiBTaWduZWQtb2ZmLWJ5OiBMaSBSb25nUWluZyA8bGlyb25ncWluZ0BiYWlkdS5jb20+DQo+
+IENjOiBWbGFzdGltaWwgQmFia2EgPHZiYWJrYUBrZXJuZWwub3JnPg0KPiBDYzogSGFycnkgWW9v
+IDxoYXJyeUBrZXJuZWwub3JnPg0KPiBDYzogQW5kcmV3IE1vcnRvbiA8YWtwbUBsaW51eC1mb3Vu
+ZGF0aW9uLm9yZz4NCj4gQ2M6IEhhbyBMaSA8aGFvLmxpQGxpbnV4LmRldj4NCj4gQ2M6IENocmlz
+dG9waCBMYW1ldGVyIDxjbEBnZW50d28ub3JnPg0KPiBDYzogRGF2aWQgUmllbnRqZXMgPHJpZW50
+amVzQGdvb2dsZS5jb20+DQo+IENjOiBSb21hbiBHdXNoY2hpbiA8cm9tYW4uZ3VzaGNoaW5AbGlu
+dXguZGV2Pg0KPiBDYzogTWF0dGhldyBXaWxjb3ggPHdpbGx5QGluZnJhZGVhZC5vcmc+DQo+IENj
+OiBVc2FtYSBBcmlmIDx1c2FtYS5hcmlmQGxpbnV4LmRldj4NCj4gLS0tDQo+IERpZmYgd2l0aCB2
+MjogTW92ZSB0aGUgY2hlY2sgb3V0IG9mIGNoZWNrX2VsZW1lbnQvcG9pc29uX2VsZW1lbnQgRGlm
+ZiB3aXRoDQo+IHYxOiBSZXdyaXRlIGNvbW1pdCBtZXNzYWdlLCBjaGFuZ2UgZWFybHlfcGFyYW0g
+dG8gX19zZXR1cA0KPiANCj4gIERvY3VtZW50YXRpb24vYWRtaW4tZ3VpZGUva2VybmVsLXBhcmFt
+ZXRlcnMudHh0IHwgIDUgKysrKw0KPiAgbW0vbWVtcG9vbC5jICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgfCAzNQ0KPiArKysrKysrKysrKysrKysrKy0tLS0tLS0tDQo+ICAyIGZp
+bGVzIGNoYW5nZWQsIDI5IGluc2VydGlvbnMoKyksIDExIGRlbGV0aW9ucygtKQ0KPiANCj4gZGlm
+ZiAtLWdpdCBhL0RvY3VtZW50YXRpb24vYWRtaW4tZ3VpZGUva2VybmVsLXBhcmFtZXRlcnMudHh0
+DQo+IGIvRG9jdW1lbnRhdGlvbi9hZG1pbi1ndWlkZS9rZXJuZWwtcGFyYW1ldGVycy50eHQNCj4g
+aW5kZXggNjQyNjU5Yi4uODliNTk5NCAxMDA2NDQNCj4gLS0tIGEvRG9jdW1lbnRhdGlvbi9hZG1p
+bi1ndWlkZS9rZXJuZWwtcGFyYW1ldGVycy50eHQNCj4gKysrIGIvRG9jdW1lbnRhdGlvbi9hZG1p
+bi1ndWlkZS9rZXJuZWwtcGFyYW1ldGVycy50eHQNCj4gQEAgLTM5ODAsNiArMzk4MCwxMSBAQCBL
+ZXJuZWwgcGFyYW1ldGVycw0KPiAgCQkJTm90ZSB0aGF0IGV2ZW4gd2hlbiBlbmFibGVkLCB0aGVy
+ZSBhcmUgYSBmZXcgY2FzZXMgd2hlcmUNCj4gIAkJCXRoZSBmZWF0dXJlIGlzIG5vdCBlZmZlY3Rp
+dmUuDQo+IA0KPiArCW1lbXBvb2xfZGVidWcJW01NXQ0KPiArCQkJRW5hYmxlIG1lbXBvb2wgZGVi
+dWdnaW5nLiBUaGlzIGVuYWJsZXMgZWxlbWVudA0KPiArCQkJcG9pc29uIGNoZWNraW5nIHdoZW4g
+ZnJlZWluZyBlbGVtZW50cyBiYWNrIHRvIHRoZQ0KPiArCQkJcG9vbC4gVXNlZnVsIGZvciBkZWJ1
+Z2dpbmcgbWVtcG9vbCBjb3JydXB0aW9uLg0KPiArDQo+ICAJbWVtdGVzdD0JW0tOTCxYODYsQVJN
+LE02OEssUFBDLFJJU0NWLEVBUkxZXSBFbmFibGUgbWVtdGVzdA0KPiAgCQkJRm9ybWF0OiA8aW50
+ZWdlcj4NCj4gIAkJCWRlZmF1bHQgOiAwIDxkaXNhYmxlPg0KPiBkaWZmIC0tZ2l0IGEvbW0vbWVt
+cG9vbC5jIGIvbW0vbWVtcG9vbC5jIGluZGV4IGRiMjNlMGUuLmRhYmUwNWMNCj4gMTAwNjQ0DQo+
+IC0tLSBhL21tL21lbXBvb2wuYw0KPiArKysgYi9tbS9tZW1wb29sLmMNCj4gQEAgLTE2LDExICsx
+NiwyOCBAQA0KPiAgI2luY2x1ZGUgPGxpbnV4L2V4cG9ydC5oPg0KPiAgI2luY2x1ZGUgPGxpbnV4
+L21lbXBvb2wuaD4NCj4gICNpbmNsdWRlIDxsaW51eC93cml0ZWJhY2suaD4NCj4gKyNpbmNsdWRl
+IDxsaW51eC9zdGF0aWNfa2V5Lmg+DQo+ICsjaW5jbHVkZSA8bGludXgvaW5pdC5oPg0KPiAgI2lu
+Y2x1ZGUgInNsYWIuaCINCj4gDQo+ICBzdGF0aWMgREVDTEFSRV9GQVVMVF9BVFRSKGZhaWxfbWVt
+cG9vbF9hbGxvYyk7DQo+ICBzdGF0aWMgREVDTEFSRV9GQVVMVF9BVFRSKGZhaWxfbWVtcG9vbF9h
+bGxvY19idWxrKTsNCj4gDQo+ICsvKg0KPiArICogRGVidWdnaW5nIHN1cHBvcnQgZm9yIG1lbXBv
+b2wgdXNpbmcgc3RhdGljIGtleS4NCj4gKyAqDQo+ICsgKiBUaGlzIGFsbG93cyBlbmFibGluZyBt
+ZW1wb29sIGRlYnVnIGF0IGJvb3QgdGltZSB2aWE6DQo+ICsgKiAgIG1lbXBvb2xfZGVidWcNCj4g
+KyAqLw0KPiArc3RhdGljIERFRklORV9TVEFUSUNfS0VZX0ZBTFNFKG1lbXBvb2xfZGVidWdfZW5h
+YmxlZCk7DQo+ICsNCj4gK3N0YXRpYyBpbnQgX19pbml0IG1lbXBvb2xfZGVidWdfc2V0dXAoY2hh
+ciAqc3RyKSB7DQo+ICsJc3RhdGljX2JyYW5jaF9lbmFibGUoJm1lbXBvb2xfZGVidWdfZW5hYmxl
+ZCk7DQo+ICsJcmV0dXJuIDE7DQo+ICt9DQo+ICtfX3NldHVwKCJtZW1wb29sX2RlYnVnIiwgbWVt
+cG9vbF9kZWJ1Z19zZXR1cCk7DQo+ICsNCj4gIHN0YXRpYyBpbnQgX19pbml0IG1lbXBvb2xfZmF1
+bF9pbmplY3RfaW5pdCh2b2lkKSAgew0KPiAgCWludCBlcnJvcjsNCj4gQEAgLTM3LDcgKzU0LDYg
+QEAgc3RhdGljIGludCBfX2luaXQgbWVtcG9vbF9mYXVsX2luamVjdF9pbml0KHZvaWQpICB9DQo+
+IGxhdGVfaW5pdGNhbGwobWVtcG9vbF9mYXVsX2luamVjdF9pbml0KTsNCj4gDQo+IC0jaWZkZWYg
+Q09ORklHX1NMVUJfREVCVUdfT04NCj4gIHN0YXRpYyB2b2lkIHBvaXNvbl9lcnJvcihzdHJ1Y3Qg
+bWVtcG9vbCAqcG9vbCwgdm9pZCAqZWxlbWVudCwgc2l6ZV90IHNpemUsDQo+ICAJCQkgc2l6ZV90
+IGJ5dGUpDQo+ICB7DQo+IEBAIC0xNDAsMTQgKzE1Niw2IEBAIHN0YXRpYyB2b2lkIHBvaXNvbl9l
+bGVtZW50KHN0cnVjdCBtZW1wb29sICpwb29sLA0KPiB2b2lkICplbGVtZW50KSAgI2VuZGlmDQo+
+ICAJfQ0KPiAgfQ0KPiAtI2Vsc2UgLyogQ09ORklHX1NMVUJfREVCVUdfT04gKi8NCj4gLXN0YXRp
+YyBpbmxpbmUgdm9pZCBjaGVja19lbGVtZW50KHN0cnVjdCBtZW1wb29sICpwb29sLCB2b2lkICpl
+bGVtZW50KSAteyAtfQ0KPiAtc3RhdGljIGlubGluZSB2b2lkIHBvaXNvbl9lbGVtZW50KHN0cnVj
+dCBtZW1wb29sICpwb29sLCB2b2lkICplbGVtZW50KSAteyAtfQ0KPiAtI2VuZGlmIC8qIENPTkZJ
+R19TTFVCX0RFQlVHX09OICovDQo+IA0KPiAgc3RhdGljIF9fYWx3YXlzX2lubGluZSBib29sIGth
+c2FuX3BvaXNvbl9lbGVtZW50KHN0cnVjdCBtZW1wb29sICpwb29sLA0KPiAgCQl2b2lkICplbGVt
+ZW50KQ0KPiBAQCAtMTc1LDcgKzE4MywxMCBAQCBzdGF0aWMgdm9pZCBrYXNhbl91bnBvaXNvbl9l
+bGVtZW50KHN0cnVjdA0KPiBtZW1wb29sICpwb29sLCB2b2lkICplbGVtZW50KSAgc3RhdGljIF9f
+YWx3YXlzX2lubGluZSB2b2lkDQo+IGFkZF9lbGVtZW50KHN0cnVjdCBtZW1wb29sICpwb29sLCB2
+b2lkICplbGVtZW50KSAgew0KPiAgCUJVR19PTihwb29sLT5taW5fbnIgIT0gMCAmJiBwb29sLT5j
+dXJyX25yID49IHBvb2wtPm1pbl9ucik7DQo+IC0JcG9pc29uX2VsZW1lbnQocG9vbCwgZWxlbWVu
+dCk7DQo+ICsNCj4gKwlpZiAoc3RhdGljX2JyYW5jaF91bmxpa2VseSgmbWVtcG9vbF9kZWJ1Z19l
+bmFibGVkKSkNCj4gKwkJcG9pc29uX2VsZW1lbnQocG9vbCwgZWxlbWVudCk7DQo+ICsNCj4gIAlp
+ZiAoa2FzYW5fcG9pc29uX2VsZW1lbnQocG9vbCwgZWxlbWVudCkpDQo+ICAJCXBvb2wtPmVsZW1l
+bnRzW3Bvb2wtPmN1cnJfbnIrK10gPSBlbGVtZW50OyAgfSBAQCAtMTg2LDcgKzE5Nyw5DQo+IEBA
+IHN0YXRpYyB2b2lkICpyZW1vdmVfZWxlbWVudChzdHJ1Y3QgbWVtcG9vbCAqcG9vbCkNCj4gDQo+
+ICAJQlVHX09OKHBvb2wtPmN1cnJfbnIgPCAwKTsNCj4gIAlrYXNhbl91bnBvaXNvbl9lbGVtZW50
+KHBvb2wsIGVsZW1lbnQpOw0KPiAtCWNoZWNrX2VsZW1lbnQocG9vbCwgZWxlbWVudCk7DQo+ICsN
+Cj4gKwlpZiAoc3RhdGljX2JyYW5jaF91bmxpa2VseSgmbWVtcG9vbF9kZWJ1Z19lbmFibGVkKSkN
+Cj4gKwkJY2hlY2tfZWxlbWVudChwb29sLCBlbGVtZW50KTsNCj4gIAlyZXR1cm4gZWxlbWVudDsN
+Cj4gIH0NCj4gDQo+IC0tDQo+IDIuOS40DQoNCg==
 
