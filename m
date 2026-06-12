@@ -1,166 +1,338 @@
-Return-Path: <linux-doc+bounces-92123-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92124-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id lasMIH8nLGp2MQQAu9opvQ
-	(envelope-from <linux-doc+bounces-92123-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 17:36:31 +0200
+	id XksyBMgnLGqVMQQAu9opvQ
+	(envelope-from <linux-doc+bounces-92124-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 17:37:44 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id E1AA967A8CD
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 17:36:29 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id A0D8767A8E9
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 17:37:43 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b=V1ya2k5I;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92123-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-92123-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=infradead.org;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=amd.com header.s=selector1 header.b="G0oPf/Jr";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92124-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92124-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=amd.com;
+	arc=reject ("cv is fail on i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 75EAE3017AE4
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 15:36:19 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 0382830074AD
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2026 15:37:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C5B0F395D9F;
-	Fri, 12 Jun 2026 15:36:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F1BC337E2ED;
+	Fri, 12 Jun 2026 15:37:39 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+Received: from DM1PR04CU001.outbound.protection.outlook.com (mail-centralusazon11010007.outbound.protection.outlook.com [52.101.61.7])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E346394EB7;
-	Fri, 12 Jun 2026 15:36:06 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781278571; cv=none; b=AqGcBF6X+HKEa5k7cMHxDlvLj0oY6w0i2FKpxxDRuQlVxhm0wC8KYKleaHQEJeMPERXn974ggo4WE71o/z/XpPvaUyy3wiff/OXbQ+r9fDeTFfq9UK3/RDvw+dYLrjrWFM9ZC0fK01EHpqIqX0iEPpXPXBepEstafb5WmAhq/eI=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781278571; c=relaxed/simple;
-	bh=IOg3E+hyKIUM+CoxiRenGgZ1IDKdduqBVHjLUGSUi/4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=T36G1G+ixxbzR+indc9+U2rMfOens4gp9PqSwjsYEpZBEv5S9KuNKLfTf4dldGCAJx9HEqyVI6gvPKGWOk6X8+uDz6+H+KHqOzxXLXPTocNdLUneKyzRouPbeGP04c2ItvoNkSG9q7U9XTOWE14ykFYKoUSFhlFJhe8FOw+G8F0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=pass smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=V1ya2k5I; arc=none smtp.client-ip=198.137.202.133
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=JeM9QXcvea1gcZCvDd51X5bSRLrcGHqydUaRYAFryGs=; b=V1ya2k5IUz5mf2ulYb4tGg4PrG
-	p0TcUgNb0AcIZYXGi7AtZjiy8ZbuWIFW/kNrdkdwZMY6OzO484sZc0YqlnRknf1rpPfpzWl33Tn5p
-	MSryqqEZp3LEKk1nFCGRvWx5hYsLeJRCi/RsOJIZ87ZtOAdx2npvI46L6a9MiqWS7jrNQtTaf2kmE
-	FhdnDUqiiBBbFazsrD6p8kmm1V7ay35dFRiy2L8o++HwkZ+hydDB7zdNdkTPoQ8uvlqa/KE+MVt8T
-	Ratt5pS7ZBy0GTfUVpx+iJyBlJrCg/fVpbtmlv+TvcCNIzwW1riUflujVrhWS1MYEbxoMJqf8Ocxm
-	iuuqHIrQ==;
-Received: from [50.53.43.113] (helo=[192.168.254.34])
-	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wY3vL-0000000BAQm-0FaC;
-	Fri, 12 Jun 2026 15:35:59 +0000
-Message-ID: <1cc99145-0316-44f5-b134-2b4f90b326c4@infradead.org>
-Date: Fri, 12 Jun 2026 08:35:57 -0700
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 711252773C3;
+	Fri, 12 Jun 2026 15:37:38 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1781278659; cv=fail; b=A/2fBSxxUBJR1wR5hueUrF0u/QGlLZ7y1iKBJnCdu1kZ9wQ+2bXzVWttaUKJwR5jQAQQVZ2Zo9nC+x6UQ7EaMSOY6s05xIZQ0EVasS5DJAy773lrC5m1rmqcqM8j8TAe/UlI/DQZpuA5M/V9awmI+tmIiRUbYRdX3seBkIS5DyY=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1781278659; c=relaxed/simple;
+	bh=zV63jbQeTGtvC3VyaNgr7uTZqL3YICKneT3r6x4BisE=;
+	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=RZIBVnpH+kFaRLw+Kt2Sfdjg7H2pBLN1WNP6H+svxP6ifISzpQ672zetZ2uJwxWLkZTRVfwYcXNT/gxm+wpsI3aVrNxrfCAZyKhKNIAouvlgbiB8DUc8lYAdy5YNb3bfNKlDXU1IclLzF3Uo7BRFqoFRG4vOjnhyw/LHc6eFZu0=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=G0oPf/Jr; arc=fail smtp.client-ip=52.101.61.7
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=DsiIUGj0DrJ+mI9wFLNcIASC5x4LTeYn5di+z8ls3f46AyT4B5HF/7c724Nh0KSBXzxWbsnUkWseG1HQBPmk/cNRDViaGFTteN1DLk5G7p+l1jQdXViirYHGpKa+Y4RoL3HNOxTMQkP4B/M3Ia1avq7UvHFycTnEIZgWzNmkirjrpaC39wdr955MURojlIBmKu3M56UOTbNnJhZ90POvny4oMzmlsumvGslMGEDDICtM27aLYkM+lOGXIaiihRL8XWup7f6L5060umKkID4S/7cLH/tfCnG3ydGnsofwN8sloqwqUtAN94IwR2iANQrKKkRbJk4fKIEcf8UaUM31sQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=MvUUO1eBO2wO09AERZr2xy3p9sJVea+6JG6rYqmStcA=;
+ b=RQJEWxmX2LzEE1oW96jHm7Ojda6AuUhC2ULWmMe5ug6+2PilYEzb5W8vV65kb+3SuE+UGHyLvNcrpP4J+Tw7bAqTezXDuMD2d5lnp5fkX9xERdj0zmWH9zUBO5hSHatm7/AdO801zg4qV43XZKI6ttJeWml9iKPmhzS7Abbe9iJNUWtiZ40DmRotsiq7zhPhHUO0yIV0njZZ6c9yFusbgUe06aGKVt7sp59kCZceX/d0LjUdnmVuLWFbtv9KCKJjzJyQ9GeuZq5H+FsprJSMmIEnRj+KYAQY1tg1aafeFmwOnq+HxXS2K2Ov9HfofBVO28Yn2mbm/IiNWxNLx0EaEQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=MvUUO1eBO2wO09AERZr2xy3p9sJVea+6JG6rYqmStcA=;
+ b=G0oPf/JrhE+cBdbDPIeDdw89fK/WFXto1/0GSbnQKI3Oes+5wBUokqY0ecxmRzLEPraDCDl0yj15dRIrKkbubl11w9BTsfQ57YzBgQU+xddBYVm0QdMiLV2Uy7nNc4B9+CZ7mkVkDkLJ2J4z0Cr8u4kz6+TfvUpzvsBx7da68oQ=
+Received: from BL1PR12MB5320.namprd12.prod.outlook.com (2603:10b6:208:314::17)
+ by DS7PR12MB6213.namprd12.prod.outlook.com (2603:10b6:8:97::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.14; Fri, 12 Jun
+ 2026 15:37:34 +0000
+Received: from BL1PR12MB5320.namprd12.prod.outlook.com
+ ([fe80::1876:4a6d:2cf5:b8d1]) by BL1PR12MB5320.namprd12.prod.outlook.com
+ ([fe80::1876:4a6d:2cf5:b8d1%5]) with mapi id 15.21.0113.014; Fri, 12 Jun 2026
+ 15:37:34 +0000
+Message-ID: <4abf97e7-5ef7-4640-b182-83e8bd5bb418@amd.com>
+Date: Fri, 12 Jun 2026 10:37:28 -0500
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 00/12] [PATCH v3 00/12] x86/resctrl: Add kernel-mode
+ (e.g., PLZA) support to the resctrl subsystem
+To: Reinette Chatre <reinette.chatre@intel.com>,
+ Babu Moger <babu.moger@amd.com>, corbet@lwn.net, tony.luck@intel.com,
+ Dave.Martin@arm.com, james.morse@arm.com, tglx@kernel.org, bp@alien8.de,
+ dave.hansen@linux.intel.com
+Cc: skhan@linuxfoundation.org, x86@kernel.org, mingo@redhat.com,
+ hpa@zytor.com, akpm@linux-foundation.org, rdunlap@infradead.org,
+ pawan.kumar.gupta@linux.intel.com, feng.tang@linux.alibaba.com,
+ dapeng1.mi@linux.intel.com, kees@kernel.org, elver@google.com,
+ lirongqing@baidu.com, paulmck@kernel.org, bhelgaas@google.com,
+ seanjc@google.com, alexandre.chartre@oracle.com, yazen.ghannam@amd.com,
+ peterz@infradead.org, chang.seok.bae@intel.com, kim.phillips@amd.com,
+ xin@zytor.com, naveen@kernel.org, thomas.lendacky@amd.com,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, eranian@google.com,
+ peternewman@google.com
+References: <cover.1777591496.git.babu.moger@amd.com>
+ <a1dbbb1a-ef78-468a-a80c-572a85220bbe@intel.com>
+Content-Language: en-US
+From: "Moger, Babu" <bmoger@amd.com>
+In-Reply-To: <a1dbbb1a-ef78-468a-a80c-572a85220bbe@intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: CH0P221CA0028.NAMP221.PROD.OUTLOOK.COM
+ (2603:10b6:610:11d::10) To BL1PR12MB5320.namprd12.prod.outlook.com
+ (2603:10b6:208:314::17)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [mic:next 15/15] htmldocs:
- Documentation/userspace-api/landlock.rst:768: WARNING: Inline interpreted
- text or phrase reference start-string without end-string. [docutils]
-To: kernel test robot <lkp@intel.com>, Matthieu Buffet <matthieu@buffet.re>
-Cc: oe-kbuild-all@lists.linux.dev, =?UTF-8?Q?Micka=C3=ABl_Sala=C3=BCn?=
- <mic@digikod.net>, linux-doc@vger.kernel.org
-References: <202606120923.1nYYlfdb-lkp@intel.com>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <202606120923.1nYYlfdb-lkp@intel.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL1PR12MB5320:EE_|DS7PR12MB6213:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3e1414b5-ab45-4657-20dc-08dec89885b2
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|7416014|376014|23010399003|366016|22082099003|18002099003|18092099006|4143699003|56012099006|5023799004|11063799006;
+X-Microsoft-Antispam-Message-Info:
+	D7s1ovOiuyW9E/520Gdv39pQy3tvwBbWZCv3cury61S7k7aJteAK9dt9ul2VK3zEXz+xnr75Hmffk1JPFCbISgLd18FIQjEpGchktXNp9XKrcjcMP/DQeIwQi5U/BQH3c5Q5a7XwDQdiqYwQyTNY7388+csTh2sMfek+VYYRhmi3X8tZYl750yAF5dh/pWTzFQB7sUCNZbZC/tnoZaYPBV6PnsycHQixDkEVkyg2VlwzUv+yaiZNr9RoLizS9/Ukt+F7Np8gdLyhhWwnBErCJgaLeuV1nYA8fFkVtxK2cJ8aV40fJBAdhFVhFrsIjkBgwl258mvvABsmncNABzgQSFvKwxyr5u+7SRa8sJcDlqdy7Mj+WuLFURTYjLDHeIay4F0a0dlrQnKmyTb7BsRspzWyXxqhjtkr1aTsW4aipDxql676bLxKs1DsYHfe3CzTgYUMnWN4nmj0MfMY3vowq6QbC57gwLvTETHyaigCbqavwkVkXy+qRGSzCxlyVQhL8ovfrNEFW4cEABxwo1UnPYKvIze+/UccLp2B9j0eHqlaxTfS8Smj7dUuienxnkWgzd6tM14sy2upX1gfSK0mw6pCPqtyV/DpFXAk9vhCd5dy8IHr33tB0DtS5/gi18r6xJ3D5p/s7T9AgTSvVvzO6ASRJAcGPMj2pqZKMQ2i20f1sJ4j8lkzxbn1VjKogzANfI4em8CEodSg/J2pSnfWxQ==
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BL1PR12MB5320.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(7416014)(376014)(23010399003)(366016)(22082099003)(18002099003)(18092099006)(4143699003)(56012099006)(5023799004)(11063799006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?d0h5cHYyMk1YWUpza1ZnN0hRcnhNRFczWTZkYmVEMTd0Y0lnNWRuYjZKcXFw?=
+ =?utf-8?B?Ri9YdUFNVUlJRmpkWks1bWlTRGxRMkt1UXZUTDQ3NjFkenlEWm96b3dPakhp?=
+ =?utf-8?B?VjBDZHFydXJid05KeUo1OHp4NVFFM1dlU1MxSjFNejJIUDBMbkt0T2plMnk5?=
+ =?utf-8?B?anpST2liRDZVNkJac1lwOHRNeWowOHFhWHBnNEU3WmhGa2p3YitJOEE0ZW16?=
+ =?utf-8?B?em1IOEM2bWk2K2FUc1ZxQy81dnIraENJVkNZWUJ4K1ZHNFo3bGJPd01XSXdY?=
+ =?utf-8?B?L1Bad2phYnY5ZmRnSC9OeERoUDlWOFdqelg1ZTBFRVlzY0xrYXM5T1RBTGha?=
+ =?utf-8?B?UER3UVdoaWZZMnZJY2NqdDdPeUJLbDJUcUlWN2xVQ3B0MmNleUROQ2JYZm0r?=
+ =?utf-8?B?cU9Db2pZNzg3dDAwRFpTckV2ZVR0V3QrV3pQeDZEbmJFbCs0ODhORmpxY01n?=
+ =?utf-8?B?b0hnNVJNN212djdUNVBJQzFubXgyQTY1Mk1SQll3djRJQk94dHY4SlRzbjhU?=
+ =?utf-8?B?MHhNUUJCS25JRlJRekMyY2p4WittS3lGY2FjeG80ZEFFbDkxRzdZR0x5SEpD?=
+ =?utf-8?B?czNIQ1d2ZXYxS0NFeVZGNzVLdzJQbGI5MU1XOU1WWTRSV1A1bVd3S0hsOWxY?=
+ =?utf-8?B?OG5SbUh2bHN3RVZ6SkFSMmtKVEJuSXJLbmdpajBvYTVvc3Q1RmpVd0xKSk9Q?=
+ =?utf-8?B?V29ZSzBVYi9TbFhCREhZTU1FcGhGWU5UbjZuUlhlTmI0RkViNkpaK3U0enlT?=
+ =?utf-8?B?cEI3NEt2WHJ2ZEhacU9relR4MDkvM3cyeGQyZTgvalI1QUgyVldzRDg2dnlB?=
+ =?utf-8?B?cUY2NWtHUnBtVm9aTHZweXBPKzJPZjVqR1lmNG05OTlJby9peTB2YjFSN1R5?=
+ =?utf-8?B?RlFyaDhpeEdlRlJmSjc3RkVtZ2JaU2RPVzRsVS9uc1QrQlZDbDRha2lUZFlP?=
+ =?utf-8?B?am1ZNlcrQnJCZkhDZUwvRzFYRUR5M08wK1dzTFZUdGcvRFlXbVhpdGV1OFho?=
+ =?utf-8?B?ZnRvNVR3dkNTcUFwWjMyY3NMR2RZL1VOWDRtdkQ3aXJGazZKaHJXdS9PMmxz?=
+ =?utf-8?B?OVlNL054R0VEVWNLNVZueUtmMFM5U3o4ZVEvTjgyWXZDUnlrcXd4OUFQbUdo?=
+ =?utf-8?B?NnVoSmluYTdhSmhIYTd1WjcwaTlLbGJxNWFtc0xGTVR6eitkNHh2aktldXE4?=
+ =?utf-8?B?d1RyNjlkellzWnY3MkZuNmdpSmpZd2IzZFNwaDA2MUtmdFlkTU1lRFJRdDVX?=
+ =?utf-8?B?L1hYSkNhV0VVLzRCVGRFMHZwYkQzWnF6SGloZE9Ia2dQY0F1N05MQjdVQjhS?=
+ =?utf-8?B?ek8yWCtzS3BNb00zY1BJOVF4MS82eFdta0hyL3JHY3hqNnVyU29aQmhtNVha?=
+ =?utf-8?B?MXZRVG1WK2w3QlcreDltRHJySlBkOFJ4eEtwVS9YdnJ5V0dITUF2d3lhWU9W?=
+ =?utf-8?B?THplbjc5MEtRR3FYSjlXb0FPdUZycEdhKzdPNHFKYlNOSkhNbnpXWEtRUTlw?=
+ =?utf-8?B?am94NTBJeGw2Q2hkVjNvT3NhTzJ4SWQ2d3BCWTNwTytKRnVpL2x3Z0U3eTR5?=
+ =?utf-8?B?bjhtTWJJdE1PSHQ0YkN1YVlDUHI4ckozY1Z3YUhJY2FXYXNMa3krMGVVZUlN?=
+ =?utf-8?B?Nmxmb3hWUllCYnJ5d2QvT0V2dDZQWm5vdmU1Z3BxRFAwWXg3MlczeXRjRjJ1?=
+ =?utf-8?B?RFIzNk1KVTBTNHFCaGJKTHlNeXVvVDBtOTkwbVVpMkdJTWhlN0VvL2JPRlhl?=
+ =?utf-8?B?dCtBTVg5V0FPY0lDbE01YnBZeHZFczRHQURtSWxTYjlPN0N2a3pnbUxSb2Zm?=
+ =?utf-8?B?Y3Z1MkJGd1RZQzJPNkxmSXMra2xRbW81akxOR1lTMEd4ZU1tMDVxOWM2MzRm?=
+ =?utf-8?B?VS9BK0JlVCt2R0h2TVR6aGdCQnBoSkd1bDJOSjJKRFg1dWtQK3o3WkZxTnpS?=
+ =?utf-8?B?Wll4QURreXNVM3hXWWU0dktGYVRCN0dzQ2JQaitabHJjVjY3YlNVcWNRWVAy?=
+ =?utf-8?B?T0NtV3FVSDBqOWlIODFsMlgwaGk2cDdxVWtXb2JRbis4YUJEcXFmWDNQZGJw?=
+ =?utf-8?B?Rm9sUFhnQWhKSDN3Ky94RDEvUEx0cFJvNUM5WmtCd3YvMHhlSnUxalNDQmdo?=
+ =?utf-8?B?ZTRKdGNhd3RyTXc5aThGTmlyeis5Rm00OFgrdHpYUHd5WFJaNVF4VTIvRG1u?=
+ =?utf-8?B?cnkvMXJqN0ZCTEwwV0w0TnVNaXQyZmZvTC9NcEpnM2t4cEJEUE10TlN6d3Jx?=
+ =?utf-8?B?Z0pYQ3N3Ym44MWM2aTlUL0FBd29yQUlHR2diRHkxNXVFWUdLYUhrUCtHaHBS?=
+ =?utf-8?Q?h0LOE/Tz4MFe6qPykd?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3e1414b5-ab45-4657-20dc-08dec89885b2
+X-MS-Exchange-CrossTenant-AuthSource: BL1PR12MB5320.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jun 2026 15:37:34.2548
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: lo4mPVLTMgWU13wt3mRTWqgZE0mAmbUAS5t1vCMtCohALQ/KGzGUqiHc1aS1OG3k
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB6213
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64];
+	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:lkp@intel.com,m:matthieu@buffet.re,m:oe-kbuild-all@lists.linux.dev,m:mic@digikod.net,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	TAGGED_FROM(0.00)[bounces-92123-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-92124-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:reinette.chatre@intel.com,m:babu.moger@amd.com,m:corbet@lwn.net,m:tony.luck@intel.com,m:Dave.Martin@arm.com,m:james.morse@arm.com,m:tglx@kernel.org,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:skhan@linuxfoundation.org,m:x86@kernel.org,m:mingo@redhat.com,m:hpa@zytor.com,m:akpm@linux-foundation.org,m:rdunlap@infradead.org,m:pawan.kumar.gupta@linux.intel.com,m:feng.tang@linux.alibaba.com,m:dapeng1.mi@linux.intel.com,m:kees@kernel.org,m:elver@google.com,m:lirongqing@baidu.com,m:paulmck@kernel.org,m:bhelgaas@google.com,m:seanjc@google.com,m:alexandre.chartre@oracle.com,m:yazen.ghannam@amd.com,m:peterz@infradead.org,m:chang.seok.bae@intel.com,m:kim.phillips@amd.com,m:xin@zytor.com,m:naveen@kernel.org,m:thomas.lendacky@amd.com,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:eranian@google.com,m:peternewman@google.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[bmoger@amd.com,linux-doc@vger.kernel.org];
 	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[36];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[bmoger@amd.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[amd.com:+];
+	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,vger.kernel.org:from_smtp,infradead.org:dkim,infradead.org:mid,infradead.org:from_mime]
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: E1AA967A8CD
+X-Rspamd-Queue-Id: A0D8767A8E9
 
 
 
-On 6/12/26 12:52 AM, kernel test robot wrote:
-> tree:   https://git.kernel.org/pub/scm/linux/kernel/git/mic/linux.git next
-> head:   a6f0a6f5377fae42a8028f63c89d544c68f24b60
-> commit: a6f0a6f5377fae42a8028f63c89d544c68f24b60 [15/15] landlock: Add documentation for UDP support
-> compiler: clang version 22.0.0git (https://github.com/llvm/llvm-project f43d6834093b19baf79beda8c0337ab020ac5f17)
-> docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
-> reproduce: (https://download.01.org/0day-ci/archive/20260612/202606120923.1nYYlfdb-lkp@intel.com/reproduce)
+On 6/11/2026 4:53 PM, Reinette Chatre wrote:
+> Hi Babu,
 > 
-> If you fix the issue in a separate patch/commit (i.e. not just a new version of
-> the same patch/commit), kindly add following tags
-> | Reported-by: kernel test robot <lkp@intel.com>
-> | Closes: https://lore.kernel.org/oe-kbuild-all/202606120923.1nYYlfdb-lkp@intel.com/
+> On 4/30/26 4:24 PM, Babu Moger wrote:
+>> Design
+>> ======
+>>
+>> A new sysfs file, info/kernel_mode, holds a single global policy that
+>> selects what kernel work is steered and which rdtgroup it is steered
 > 
-> All warnings (new ones prefixed by >>):
+> How should "selects *what* kernel work is steered" be interpreted? Do these
+> modes not all apply to *all* kernel work?
+
+How about?
+
+A new sysfs file, info/kernel_mode, holds a single global policy for 
+kernel contexts and the rdtgroup associated with the policy.
+
 > 
->    Scope flags
->    ~~~~~~~~~~~ [docutils]
->>> Documentation/userspace-api/landlock.rst:768: WARNING: Inline interpreted text or phrase reference start-string without end-string. [docutils]
->>> Documentation/userspace-api/landlock.rst:768: WARNING: Inline interpreted text or phrase reference start-string without end-string. [docutils]
->    Documentation/userspace-api/landlock:596: ./include/uapi/linux/landlock.h:40: ERROR: Unknown target name: "filesystem flags". [docutils]
->    Documentation/userspace-api/landlock:596: ./include/uapi/linux/landlock.h:45: ERROR: Unknown target name: "network flags". [docutils]
->    Documentation/userspace-api/landlock:596: ./include/uapi/linux/landlock.h:50: ERROR: Unknown target name: "scope flags". [docutils]
->    Documentation/userspace-api/landlock:596: ./include/uapi/linux/landlock.h:24: ERROR: Unknown target name: "filesystem flags". [docutils]
->    Documentation/userspace-api/landlock:605: ./include/uapi/linux/landlock.h:168: ERROR: Unknown target name: "filesystem flags". [docutils]
+>> to.  Reads describe the supported modes and the currently-active
+>> binding; writes change the policy or rebind to a different group.
+>> Look at the thread below for design discussion.
+>> https://lore.kernel.org/lkml/14a8ad0a-e842-4268-871a-0762f1169e03@intel.com/
+>>
 > 
+> ...
 > 
-
-In case it's not obvious:
-
-> vim +768 Documentation/userspace-api/landlock.rst
+>> Examples
+>> ========
+>>
+>> (See Documentation/filesystems/resctrl.rst, "kernel_mode" and
+>> "kmode_cpus" sections, for the full UAPI.)
+>>
+>>    # Mount resctrl
+>>    # mount -t resctrl resctrl /sys/fs/resctrl
+>>    # cd /sys/fs/resctrl
+>>
+>>    # Read the supported modes.  The active mode is bracketed and reports
+>>    # the bound "<ctrl>/<mon>/" group; other supported modes report
+>>    # ":group=none" because nothing is bound to them.
+>>    # cat info/kernel_mode
+>>    [inherit_ctrl_and_mon:group=//]
 > 
->    767	
->  > 768	Starting with the Landlock ABI version 10, it is possible to restrict
->    769	setting the local port of UDP sockets with the
->    770	``LANDLOCK_ACCESS_NET_BIND_UDP`` right. This includes restricting the
->    771	ability to trigger autobind of an ephemeral port by the kernel by e.g.
->    772	sending a first datagram or setting the remote peer of a socket.
->    773	The ``LANDLOCK_ACCESS_NET_CONNECT_SEND_UDP`` right controls setting the
->    774	remote port of UDP sockets (via :manpage:`connect(2)), and sending
+> This is unexpected since associating a group to this mode implies that this
+> group is used to manage allocations and monitoring of kernel work but this
+> is not true, right? From what I understand there should be no group associated with
+> this default "inherit_ctrl_and_mon" mode.
 
-                                            missing ending           `
+The default mode is "inherit_ctrl_and_mon", where both user mode and 
+kernel mode share the same CLOSID and RMID. This is current mode 
+(without this series).
 
->    775	datagrams to an explicit remote port (ignoring any destination set on
->    776	UDP sockets, via e.g. :manpage:`sendto(2)).
+I thought we are going to set the default mode with the default group 
+when system boots up. No?
 
-                                       same here
 
->    777	
 > 
-> --
-> 0-DAY CI Kernel Test Service
-> https://github.com/intel/lkp-tests/wiki
+>>    global_assign_ctrl_inherit_mon_per_cpu:group=none
+>>    global_assign_ctrl_assign_mon_per_cpu:group=none
 > 
+> nit: "none" does not reflect state as clearly as "unset"/"uninitialized"/"NA"
 
--- 
-~Randy
+Lets go with "uninitialized".
+
+> 
+>>
+>>    # Create a CTRL_MON group plus a MON child and bind both the kernel
+>>    # CLOSID and RMID to them.
+>>    # mkdir ctrl1
+>>    # mkdir ctrl1/mon_groups/mon1
+>>    # echo "global_assign_ctrl_assign_mon_per_cpu:group=ctrl1/mon1/" \
+>>            > info/kernel_mode
+>>    # cat info/kernel_mode
+>>    inherit_ctrl_and_mon:group=none
+>>    global_assign_ctrl_inherit_mon_per_cpu:group=none
+>>    [global_assign_ctrl_assign_mon_per_cpu:group=ctrl1/mon1/]
+>>
+>>    # kmode_cpus and kmode_cpus_list are visible only on the bound group.
+>>    # ls ctrl1/kmode_cpus*
+>>    ctrl1/kmode_cpus  ctrl1/kmode_cpus_list
+> 
+> Since it is ctrl1/mon1 that was bound, should these CPU files not appear
+> in ctrl1/mon_groups/mon1 ?
+
+Correct. Will fix it.
+
+
+>>
+>>    # Restrict the binding to a CPU subset; the write is incremental.
+> 
+> Does "incremental" mean that if the file contains CPUs 0-3 then writing
+> "4" would set the CPUs to 0-4? This does not sound right since it is
+> expected that user space can remove CPUs also?
+
+Will remove incremental. Writing "4" will remove 0-3 and keep only 4.
+
+
+> 
+>>    # echo 0-3 > ctrl1/kmode_cpus_list
+>>    # cat ctrl1/kmode_cpus
+>>    f
+>>    # cat ctrl1/kmode_cpus_list
+>>    0-3
+>>
+>>    # Empty masks are rejected; use info/kernel_mode to reset to
+>>    # "every online CPU".
+>>    # echo "" > ctrl1/kmode_cpus_list
+>>    bash: echo: write error: Invalid argument
+>>    # cat info/last_cmd_status
+>>    Empty mask not allowed; use info/kernel_mode to unbind
+> 
+> Why are empty masks rejected/not allowed?
+
+No specific reason.
+
+When the mode is switched, we discussed earlier to globally apply the 
+mode to all the online CPUs.
+
+At this point reading "kmode_cpus_list" will still report empty.
+
+Users can change it to selectively apply the mode by writing to 
+"kmode_cpus_list".
+
+I was not sure what was the action when empty masks are written.
+
+Should the empty mask apply the mode to all the online CPUs?
+
+
+> 
+>>
+>>    # Disable kernel-mode steering (back to inherit, default group).
+> 
+> This sounds like kernel work is steered to default group which I
+> do not think is accurate for the "inherit_ctrl_and_mon" mode.
+
+How about ?
+
+Drop the kernel-mode binding and restore inherit_ctrl_and_mon on the 
+default group.
+
+thanks
+Babu
+
 
 
