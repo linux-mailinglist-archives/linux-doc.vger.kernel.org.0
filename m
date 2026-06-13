@@ -1,144 +1,142 @@
-Return-Path: <linux-doc+bounces-92260-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92261-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Q0ecF67zLGrHXwQAu9opvQ
-	(envelope-from <linux-doc+bounces-92260-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 13 Jun 2026 08:07:42 +0200
+	id ASQWOkoZLWoGbgQAu9opvQ
+	(envelope-from <linux-doc+bounces-92261-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 13 Jun 2026 10:48:10 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A407467DD47
-	for <lists+linux-doc@lfdr.de>; Sat, 13 Jun 2026 08:07:41 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 376A567E2AB
+	for <lists+linux-doc@lfdr.de>; Sat, 13 Jun 2026 10:48:10 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linux.dev header.s=key1 header.b=M880zC7u;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92260-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92260-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=linux.dev;
+	dkim=pass header.d=intel.com header.s=Intel header.b=eA85ulGo;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92261-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-92261-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=intel.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 0D95F311F45F
-	for <lists+linux-doc@lfdr.de>; Sat, 13 Jun 2026 06:07:07 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 5D6A03022AAD
+	for <lists+linux-doc@lfdr.de>; Sat, 13 Jun 2026 08:47:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B6F823CF68A;
-	Sat, 13 Jun 2026 06:07:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 19287377EDD;
+	Sat, 13 Jun 2026 08:47:26 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-179.mta1.migadu.com (out-179.mta1.migadu.com [95.215.58.179])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.13])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B5A5221ABD7;
-	Sat, 13 Jun 2026 06:07:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D5D0733DEE6
+	for <linux-doc@vger.kernel.org>; Sat, 13 Jun 2026 08:47:20 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781330824; cv=none; b=SwWdR+IbNfn00VdyyV+y4DTKdSp+kX4GnrB1mjTuc9J+ibTCfj5KHLeUTri/+Es0GfxDVuYkKhBSTC429lwOsiboyXLvEpsYCPJywCb5E/bd5/O8aQsXxKK9hq/VWqbzx5u4sgDSzLC4KrzaKjho6CO+V8Pr/V0l9hEayVpAGSk=
+	t=1781340445; cv=none; b=IlbCR1wVXjVtOV6QZkAm9GKKoYmcLKKKt8HE31Ux+jo/0jtIMueRqMicPi5U4TB3pEJ5UgjsQop/VJ20vGMS+R9moeWtfnoCBfA1O0DF0j4FXQhFu14ohND9sr5QutyMYREYmspnF8EHVulpzKv5IPVM3bWBBPt/WMH8ZHXdleU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781330824; c=relaxed/simple;
-	bh=Syw7ULXdB5dW8ZcIfM7qGgtXBrTWdNGVXAYsbJq7l1s=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Msx0Ylv8PbiL0ejvsauNdmxEvSCvu4e87KmAo0+bJ0GO+KhcPmd051fLVaXpdn9vsVMDpxBPFf2o+2Ap5rV/zQ4bbM7P+7+CmKYigxEFBJUg+zBZZbGAsf+iO/5CVtbe2VU2dDezrQjjiv//Gx6DqcMxtPkUP9wiQE7UZQLxsmA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=M880zC7u; arc=none smtp.client-ip=95.215.58.179
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1781330818;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Syw7ULXdB5dW8ZcIfM7qGgtXBrTWdNGVXAYsbJq7l1s=;
-	b=M880zC7u2byTFN+N4Gq3ygEGJV6uJ/y323l98Uq2VwiDsDKwwbe3KSZIsE6fswnZXAIDQM
-	ncME5PeWmLbP9V5sIdSHUE8XEIhJI9+8OEhIAu5FhcUJagvyZNVQOVT5s3ZSRIrP6Q0Swr
-	Ebk61m5Zsus12EN++gCjPlzL6R/lrYY=
-From: Lance Yang <lance.yang@linux.dev>
-To: dev.jain@arm.com
-Cc: ryabinin.a.a@gmail.com,
-	akpm@linux-foundation.org,
-	corbet@lwn.net,
-	glider@google.com,
-	andreyknvl@gmail.com,
-	dvyukov@google.com,
-	vincenzo.frascino@arm.com,
-	kasan-dev@googlegroups.com,
-	linux-mm@kvack.org,
-	linux-kernel@vger.kernel.org,
-	skhan@linuxfoundation.org,
-	workflows@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	ryan.roberts@arm.com,
-	anshuman.khandual@arm.com,
-	kaleshsingh@google.com,
-	21cnbao@gmail.com,
-	david@kernel.org,
-	will@kernel.org,
-	catalin.marinas@arm.com,
-	Lance Yang <lance.yang@linux.dev>
-Subject: Re: [RFC PATCH 0/2] kasan: hw_tags: Add option to tag only at allocation time
-Date: Sat, 13 Jun 2026 14:06:37 +0800
-Message-Id: <20260613060637.40039-1-lance.yang@linux.dev>
-In-Reply-To: <20260612044425.763060-1-dev.jain@arm.com>
-References: <20260612044425.763060-1-dev.jain@arm.com>
+	s=arc-20240116; t=1781340445; c=relaxed/simple;
+	bh=Kgzsl0tncuHZeTuBwNzv6yFl+GswrXYwmaXTRoqwsag=;
+	h=Date:From:To:Cc:Subject:Message-ID; b=ZPcnVKc8+Kn0nZQLw9mpppORBmCtwgdyceU9jome150XU57T6ci0NsjL5AbnkkhSrFfCQEmWvLE8dWIs6F0tR7BeGqr8SVFe2lRv9NNkluam8uGn1m1gHpmpspIK70ZGGOEwiRSoEnNx4nJz2sCfbwwdllnzIw39ozrp5y75xlk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=eA85ulGo; arc=none smtp.client-ip=192.198.163.13
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1781340441; x=1812876441;
+  h=date:from:to:cc:subject:message-id;
+  bh=Kgzsl0tncuHZeTuBwNzv6yFl+GswrXYwmaXTRoqwsag=;
+  b=eA85ulGov1kIGaZCkvVUWXOMnU0na7FNfQZckCmjxwceJkhcBVtq4CUd
+   AibJef1npLvKywOyRGdfw0QzYSZ+fgjgJpSKIF5OrFdJBxWB2K/CPIIsn
+   vW3a37hjzmGJEBIz45x+1UBdNasA5677nTdeghlZQsTE/YUQkCsy3j6JK
+   MX73pCdoS8BMfJfnJEXSYiko2CPmrIt1sfO/TozHUWRI0x6NnrC+9hNxN
+   74gZ9wT0H0tF0ZfyRqyh/yUOp8Ssoem9prp4E/kvLnR9A7Itv9ZF+L8mO
+   /WlDFWf+etk7ufkNpWg1dmg2HsVXLeD4k0hsLQrxziAVoDhBh1bhoUDNq
+   w==;
+X-CSE-ConnectionGUID: PERxIc/uQ3u4Ql9NVX/exQ==
+X-CSE-MsgGUID: OFCDeDVnQPGnzxWEyg3lFA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11815"; a="84731366"
+X-IronPort-AV: E=Sophos;i="6.24,202,1774335600"; 
+   d="scan'208";a="84731366"
+Received: from orviesa007.jf.intel.com ([10.64.159.147])
+  by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jun 2026 01:47:20 -0700
+X-CSE-ConnectionGUID: imk3Wj0iTzeRjOpt91OhAg==
+X-CSE-MsgGUID: MD902VapTHyW2Hg3j5ozjg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.24,202,1774335600"; 
+   d="scan'208";a="247088685"
+Received: from igk-lkp-server01.igk.intel.com (HELO 892db79562d4) ([10.211.93.152])
+  by orviesa007.jf.intel.com with ESMTP; 13 Jun 2026 01:47:19 -0700
+Received: from kbuild by 892db79562d4 with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1wYK1M-000000004T1-2gmb;
+	Sat, 13 Jun 2026 08:47:16 +0000
+Date: Sat, 13 Jun 2026 10:46:51 +0200
+From: kernel test robot <lkp@intel.com>
+To: Cristian Marussi <cristian.marussi@arm.com>
+Cc: oe-kbuild-all@lists.linux.dev, linux-doc@vger.kernel.org
+Subject: [cris:scmi_telemetry_unified_fs_V4 23/34] htmldocs:
+ Documentation/filesystems/stlmfs.rst: WARNING: document isn't included in any
+ toctree [toc.not_included]
+Message-ID: <202606131001.iJbU6AyB-lkp@intel.com>
+User-Agent: s-nail v14.9.25
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.34 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-3.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,kernel.org:s:+];
 	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-92260-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:dev.jain@arm.com,m:ryabinin.a.a@gmail.com,m:akpm@linux-foundation.org,m:corbet@lwn.net,m:glider@google.com,m:andreyknvl@gmail.com,m:dvyukov@google.com,m:vincenzo.frascino@arm.com,m:kasan-dev@googlegroups.com,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:skhan@linuxfoundation.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:ryan.roberts@arm.com,m:anshuman.khandual@arm.com,m:kaleshsingh@google.com,m:21cnbao@gmail.com,m:david@kernel.org,m:will@kernel.org,m:catalin.marinas@arm.com,m:lance.yang@linux.dev,m:ryabininaa@gmail.com,s:lists@lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
+	TAGGED_FROM(0.00)[bounces-92261-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	FORGED_SENDER(0.00)[lance.yang@linux.dev,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[linux.dev:+];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[lance.yang@linux.dev,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[gmail.com,linux-foundation.org,lwn.net,google.com,arm.com,googlegroups.com,kvack.org,vger.kernel.org,linuxfoundation.org,lists.infradead.org,kernel.org,linux.dev];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:dkim,linux.dev:mid,linux.dev:from_mime,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp]
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS(0.00)[m:cristian.marussi@arm.com,m:oe-kbuild-all@lists.linux.dev,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	RCPT_COUNT_THREE(0.00)[3];
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+];
+	RCVD_COUNT_FIVE(0.00)[6];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,intel.com:dkim,intel.com:email,intel.com:mid,intel.com:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: A407467DD47
+X-Rspamd-Queue-Id: 376A567E2AB
 
+tree:   https://git.kernel.org/pub/scm/linux/kernel/git/cris/linux.git scmi_telemetry_unified_fs_V4
+head:   ed28087005811783e972fe7a788446936878932f
+commit: a4696bbff34cf8e311ab878fc616567844b576ee [23/34] fs/stlmfs: Document ARM SCMI Telemetry filesystem
+compiler: clang version 22.0.0git (https://github.com/llvm/llvm-project f43d6834093b19baf79beda8c0337ab020ac5f17)
+docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
+reproduce: (https://download.01.org/0day-ci/archive/20260613/202606131001.iJbU6AyB-lkp@intel.com/reproduce)
 
-On Fri, Jun 12, 2026 at 04:44:22AM +0000, Dev Jain wrote:
->Introduce a boot option to tag only at allocation time of the objects. This
->reduces KASAN MTE overhead, the tradeoff being reduced ability of
->catching bugs.
->
->Now, when a memory object will be freed, it will retain the random tag it
->had at allocation time. This compromises on catching UAF bugs, till the
->time the object is not reallocated, at which point it will have a new
->random tag.
->
->Hence, not catching "use-after-free-before-reallocation" and not catching
->"double-free" will be the compromise for reduced KASAN overhead.
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202606131001.iJbU6AyB-lkp@intel.com/
 
-Hmm ... do we also need to teach the KASAN KUnit tests about this mode?
+All warnings (new ones prefixed by >>):
 
-With kasan.tag_only_on_alloc=on, free-time poisoning is skipped, so
-some UAF and double-free reports are skipped on purpose, but the tests
-still expect them :)
+   Documentation/userspace-api/landlock:550: ./include/uapi/linux/landlock.h:45: ERROR: Unknown target name: "network flags". [docutils]
+   Documentation/userspace-api/landlock:550: ./include/uapi/linux/landlock.h:50: ERROR: Unknown target name: "scope flags". [docutils]
+   Documentation/userspace-api/landlock:550: ./include/uapi/linux/landlock.h:24: ERROR: Unknown target name: "filesystem flags". [docutils]
+   Documentation/userspace-api/landlock:559: ./include/uapi/linux/landlock.h:168: ERROR: Unknown target name: "filesystem flags". [docutils]
+   Documentation/userspace-api/landlock:559: ./include/uapi/linux/landlock.h:191: ERROR: Unknown target name: "network flags". [docutils]
+>> Documentation/filesystems/stlmfs.rst: WARNING: document isn't included in any toctree [toc.not_included]
+   WARNING: Documentation/ABI/testing/stlmfs not found
+   Documentation/networking/skbuff:36: ./include/linux/skbuff.h:181: WARNING: Failed to create a cross reference. A title or caption not found: 'crc' [ref.ref]
 
-Cheers, Lance
+--
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
