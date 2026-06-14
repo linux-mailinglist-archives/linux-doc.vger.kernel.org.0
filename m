@@ -1,135 +1,134 @@
-Return-Path: <linux-doc+bounces-92277-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92278-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id uGsDJyP2LWozngQAu9opvQ
-	(envelope-from <linux-doc+bounces-92277-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 14 Jun 2026 02:30:27 +0200
+	id 37WFK/P2LWqPngQAu9opvQ
+	(envelope-from <linux-doc+bounces-92278-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 14 Jun 2026 02:33:55 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id E83556801BA
-	for <lists+linux-doc@lfdr.de>; Sun, 14 Jun 2026 02:30:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 61E736801F3
+	for <lists+linux-doc@lfdr.de>; Sun, 14 Jun 2026 02:33:54 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=EcBer6RI;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92277-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-92277-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	dkim=pass header.d=linux.dev header.s=key1 header.b=m96K0j+L;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92278-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-92278-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=linux.dev;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 3178C300AEDD
-	for <lists+linux-doc@lfdr.de>; Sun, 14 Jun 2026 00:30:25 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 50D4930027EA
+	for <lists+linux-doc@lfdr.de>; Sun, 14 Jun 2026 00:33:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E92431F3B85;
-	Sun, 14 Jun 2026 00:30:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 73DB119D8A8;
+	Sun, 14 Jun 2026 00:33:51 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from out-183.mta0.migadu.com (out-183.mta0.migadu.com [91.218.175.183])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CC9E2264C7;
-	Sun, 14 Jun 2026 00:30:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3581C2030A
+	for <linux-doc@vger.kernel.org>; Sun, 14 Jun 2026 00:33:47 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781397021; cv=none; b=YzRBIe1aL6dLHbco4iPTaOgbQOuTyjUTVxPji1xfmj4gzeGYjJQsz+50Pqyfks0eMWqI/YiqwVsCivWun/T+M8UcxH/TTsmzl4CLtjqkwe6eHbS25IgTgwshr/RqMVRsAmM2IiwcHE9keCSRDjQY+iIyDB7HqH2YBbTz/5YVf5Q=
+	t=1781397231; cv=none; b=Cy4+kSkzBj0lj4n+AuzJbfjS9S1RSIROiC9IsdpxnvRhtQuh6HkCae0sxf2erG4ISRxQ7S/QKcflp07YLsj5YioZ0AkvQoiQQJadJT1yXgny3JKT5miSVrYBPqtfgdUlSvHLKsXDMae1j4DY+CnJU78e7UnAzQr+DXS3Ik9ThG8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781397021; c=relaxed/simple;
-	bh=0L0Zy3ZnKFfqwXJgmHweu/NlR3Tv8hruLpIGR5oggfI=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=FNX9GicckcM/HqVP1NL8Lp5ftYvrd6z58nxz16a4kOL8bnVbbIg1Ob1mmZu6zjpVMdjId7cgi96CNyCe9n2iFGW+gPW5Dz06GBMQCoE4yr0vo4O0KP+h7ZASq45sB/BSg3srYYDOonsLudingHYhIfmXA9KV2G0Vk3b31BUzkQ4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EcBer6RI; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 366EF1F000E9;
-	Sun, 14 Jun 2026 00:30:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1781397020;
-	bh=ZMdBuFq+Egdpf4xXaVRlDiUSnmhKuXX5amo2pNZUkl4=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=EcBer6RItrC/+oVd2Kax1LWzKvX0vH4X3tM0z0tnln1N3DLGFMKoWYR6a5/toDx7j
-	 PqKUHlaRmKC3H77fwIQP9zSaaEPkocTEk3DZ9UijYzkkAwXcBGnfUtGGwJUwOZ9+gn
-	 xwXGnxn4mOjkl0tQSvMh/hq5KSBweQvHmb1yp8NYS/fH1dz5Xsv6uHoERtHmIyb5h5
-	 N+/aB/ElIyEUZJTpIObPWuYDZFpX71nofGT0gt94yJ67TueuTj8CIKoqptC96vuEE2
-	 wUEZ9ktrZLSvyERFy8Yo6O1DI85bWRaLfmtVQvmmwUazcxAnZCJzCovLrJV/tKnPSi
-	 XuVbHfaK/B/3w==
-Date: Sat, 13 Jun 2026 17:30:18 -0700
-From: Jakub Kicinski <kuba@kernel.org>
-To: Jack Wu via B4 Relay <devnull+jackbb_wu.compal.com@kernel.org>
-Cc: jackbb_wu@compal.com, Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Sergey Ryazanov <ryazanov.s.a@gmail.com>, Johannes Berg
- <johannes@sipsolutions.net>, Andrew Lunn <andrew+netdev@lunn.ch>, "David S.
- Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Paolo
- Abeni <pabeni@redhat.com>, Wen-Zhi Huang <wen-zhi.huang@mediatek.com>,
- Shi-Wei Yeh <shi-wei.yeh@mediatek.com>, Minano Tseng
- <Minano.tseng@mediatek.com>, Matthias Brugger <matthias.bgg@gmail.com>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Simon
- Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan
- <skhan@linuxfoundation.org>, linux-kernel@vger.kernel.org,
- netdev@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-mediatek@lists.infradead.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH v2 3/7] net: wwan: t9xx: Add control DMA interface
-Message-ID: <20260613173018.7a0581f1@kernel.org>
-In-Reply-To: <20260610-t9xx_driver_v1-v2-3-c65addf23b3f@compal.com>
-References: <20260610-t9xx_driver_v1-v2-0-c65addf23b3f@compal.com>
-	<20260610-t9xx_driver_v1-v2-3-c65addf23b3f@compal.com>
+	s=arc-20240116; t=1781397231; c=relaxed/simple;
+	bh=H3qdW1OASO7EGbsJ6intxG6VFZhKlcf04Q6uXf5HD20=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=UUWCQbv8Kpyu4grlD0SrRuSVrugJ1RXz4op0RLP5bMpcovDKfdE0ZbIAuIChqpQCfptW7I+QuAa83j7j9c/hhJ8JP5SlEupgMi9aMdO3BR4PNggkUWrLlCqzGIwIQ5zreqAbPNaAysLovQvm7TzepYQWTLmoJgbafJCcjtRaQYw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=m96K0j+L; arc=none smtp.client-ip=91.218.175.183
+Message-ID: <f80eae9d-cf80-4a03-8007-195f50bfdafd@linux.dev>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1781397225;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=YVhYyEYulu2vZ8tBAz5TY40Ul8ZS2iko/Y1lbY+Stl0=;
+	b=m96K0j+LuSBewTbVZqun0kdPCcA2xjZgJO3vvGS8MXsKjYXjSH2Us17AHasHTc4eoaACRU
+	PW/P4w7PBUl+aTPs8T6tpt+v0XJlIUoQHxphAVVcWwtU7ZB6LctQ3468nwifpCaLhuTzc2
+	jm8P8nwO6+lf7l9oXk8L4Jg8e+kAeYM=
+Date: Sun, 14 Jun 2026 08:33:36 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v2] docs/zh_CN: fix CONFIG_CONPAT typo for CONFIG_COMPAT
+To: Ethan Nelson-Moore <enelsonmoore@gmail.com>
+Cc: Dongliang Mu <dzm91@hust.edu.cn>, Shuah Khan <skhan@linuxfoundation.org>,
+ Kees Cook <kees@kernel.org>, linux-doc@vger.kernel.org,
+ Alex Shi <alexs@kernel.org>, Yanteng Si <si.yanteng@linux.dev>,
+ Jonathan Corbet <corbet@lwn.net>
+References: <20260613183737.11434-1-enelsonmoore@gmail.com>
+Content-Language: en-US
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Zenghui Yu <zenghui.yu@linux.dev>
+In-Reply-To: <20260613183737.11434-1-enelsonmoore@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Migadu-Flow: FLOW_OUT
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.66 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
 	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-92277-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[kuba@kernel.org,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	FORGED_RECIPIENTS(0.00)[m:devnull+jackbb_wu.compal.com@kernel.org,m:jackbb_wu@compal.com,m:loic.poulain@oss.qualcomm.com,m:ryazanov.s.a@gmail.com,m:johannes@sipsolutions.net,m:andrew+netdev@lunn.ch,m:davem@davemloft.net,m:edumazet@google.com,m:pabeni@redhat.com,m:wen-zhi.huang@mediatek.com,m:shi-wei.yeh@mediatek.com,m:Minano.tseng@mediatek.com,m:matthias.bgg@gmail.com,m:angelogioacchino.delregno@collabora.com,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-kernel@vger.kernel.org,m:netdev@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-mediatek@lists.infradead.org,m:linux-doc@vger.kernel.org,m:devnull@kernel.org,m:ryazanovsa@gmail.com,m:andrew@lunn.ch,m:matthiasbgg@gmail.com,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-92278-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:enelsonmoore@gmail.com,m:dzm91@hust.edu.cn,m:skhan@linuxfoundation.org,m:kees@kernel.org,m:linux-doc@vger.kernel.org,m:alexs@kernel.org,m:si.yanteng@linux.dev,m:corbet@lwn.net,s:lists@lfdr.de];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FORGED_SENDER(0.00)[zenghui.yu@linux.dev,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[compal.com,oss.qualcomm.com,gmail.com,sipsolutions.net,lunn.ch,davemloft.net,google.com,redhat.com,mediatek.com,collabora.com,kernel.org,lwn.net,linuxfoundation.org,vger.kernel.org,lists.infradead.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[linux.dev:+];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[kuba@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FROM_NEQ_ENVFROM(0.00)[zenghui.yu@linux.dev,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[8];
+	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,jackbb_wu.compal.com,netdev];
 	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,sashiko.dev:url,compal.com:email,vger.kernel.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,linux.dev:dkim,linux.dev:email,linux.dev:mid,linux.dev:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: E83556801BA
+X-Rspamd-Queue-Id: 61E736801F3
 
-On Wed, 10 Jun 2026 18:41:06 +0800 Jack Wu via B4 Relay wrote:
-> From: Jack Wu <jackbb_wu@compal.com>
+On 6/14/26 2:37 AM, Ethan Nelson-Moore wrote:
+> The Simplified Chinese translation of security/self-protection.rst
+> contains a typo CONFIG_CONPAT for CONFIG_COMPAT. Fix it.
 > 
-> Cross Layer Direct Memory Access(CLDMA) is the hardware
-> interface used by the control plane and designated to
-> translate data between the host and the device. It supports
-> 8 hardware queues for the device AP and modem respectively.
+> Signed-off-by: Ethan Nelson-Moore <enelsonmoore@gmail.com>
+> ---
+> Changes in v2: remove unnecessary information from commit message
+> 
+>  Documentation/translations/zh_CN/security/self-protection.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/translations/zh_CN/security/self-protection.rst b/Documentation/translations/zh_CN/security/self-protection.rst
+> index 93de9cee5c1a..ad96bb4a4995 100644
+> --- a/Documentation/translations/zh_CN/security/self-protection.rst
+> +++ b/Documentation/translations/zh_CN/security/self-protection.rst
+> @@ -97,7 +97,7 @@ ARCH_OPTIONAL_KERNEL_RWX时的默认设置。
+>  --------------------
+>  
+>  对于64位系统，一种消除许多系统调用最简单的方法是构建时不启用
+> -CONFIG_CONPAT。然而，这种情况通常不可行。
+> +CONFIG_COMPAT。然而，这种情况通常不可行。
+>  
+>  “seccomp”系统为用户空间提供了一种可选功能，提供了一种减少可供
+>  运行中进程使用内核入口点数量的方法。这限制了可以访问内核代码
 
-Transient build warnings:
+Reviewed-by: Zenghui Yu <zenghui.yu@linux.dev>
 
-+../drivers/net/wwan/t9xx/pcie/mtk_pci_drv_m9xx.c:52:30: warning: symbol 'mtk_dev_cfg_0900' was not declared. Should it be static?
-+../drivers/net/wwan/t9xx/pcie/mtk_ctrl_cfg_m9xx.c:19:22: warning: symbol 'mtk_ctrl_info_m9xx' was not declared. Should it be static?
-+../drivers/net/wwan/t9xx/pcie/mtk_cldma_drv_m9xx.c:33:22: warning: symbol 'mtk_cldma_regs_m9xx' was not declared. Should it be static?
-+../drivers/net/wwan/t9xx/pcie/mtk_cldma_drv_m9xx.c:166:22: warning: symbol 'cldma_drv_ops_m9xx' was not declared. Should it be static?
-
-please also see all the AI code comments at:
-https://sashiko.dev/#/patchset/20260610-t9xx_driver_v1-v2-3-c65addf23b3f@compal.com
--- 
-pw-bot: cr
+Thanks,
+Zenghui
 
