@@ -1,225 +1,192 @@
-Return-Path: <linux-doc+bounces-92285-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92286-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 2bjRCQlzLmqHwAQAu9opvQ
-	(envelope-from <linux-doc+bounces-92285-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 14 Jun 2026 11:23:21 +0200
+	id MyR0LIOTLmqlzwQAu9opvQ
+	(envelope-from <linux-doc+bounces-92286-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 14 Jun 2026 13:41:55 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F83E680BBE
-	for <lists+linux-doc@lfdr.de>; Sun, 14 Jun 2026 11:23:20 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 01F5C680EC4
+	for <lists+linux-doc@lfdr.de>; Sun, 14 Jun 2026 13:41:54 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=none;
-	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=lge.com (policy=none);
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92285-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-92285-lists+linux-doc=lfdr.de@vger.kernel.org";
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=thegoodpenguin-co-uk.20251104.gappssmtp.com header.s=20251104 header.b=dls+IeA2;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92286-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-92286-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=none;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 61E633011105
-	for <lists+linux-doc@lfdr.de>; Sun, 14 Jun 2026 09:23:18 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id D026230068D8
+	for <lists+linux-doc@lfdr.de>; Sun, 14 Jun 2026 11:41:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8EACC39936E;
-	Sun, 14 Jun 2026 09:23:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9BF6739A4B9;
+	Sun, 14 Jun 2026 11:41:51 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from lgeamrelo03.lge.com (lgeamrelo03.lge.com [156.147.51.102])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-oi1-f172.google.com (mail-oi1-f172.google.com [209.85.167.172])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92F9E347C7
-	for <linux-doc@vger.kernel.org>; Sun, 14 Jun 2026 09:23:11 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781428996; cv=none; b=Q8X/9kaSwvhHAYLItg6dUU2Z2HeK4W8jV13EXx0dlA1JTz+Ydl3JKcqUI9R/oHVnHDt5KY/gwPZ0WRG1bRQjHqUEIFCb1YkpIfR8+xr/NA/fVl+KLTBpkPPSMjG8WoA+/zG3j/S35PY38S3yxz5A6CgYurjyL56CQhPEHNTEwBQ=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781428996; c=relaxed/simple;
-	bh=ld+wVFU2oJQmVv/sNSfBsHnWdT8YxnJkps1+6Uwbkzo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=N0yGPl4IuKM+geVWHlcjpJf+Kd7WJQjq9IeLMmK97jDApZBYhueBTgFlXh6Q5kfuzkcpYIjy/KH+suerRtatNVHE4AGCJgf9fJgiRWKBob7PUpGJFe2Ob71atRbeE8RLZl3/sE5YJO1VUrC8uzknJrYOV1LELqEjECypzgY3DQ8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lge.com; spf=pass smtp.mailfrom=lge.com; arc=none smtp.client-ip=156.147.51.102
-Received: from unknown (HELO yjaykim-PowerEdge-T330) (10.177.112.156)
-	by 156.147.51.102 with ESMTP; 14 Jun 2026 18:23:03 +0900
-X-Original-SENDERIP: 10.177.112.156
-X-Original-MAILFROM: youngjun.park@lge.com
-Date: Sun, 14 Jun 2026 18:23:03 +0900
-From: YoungJun Park <youngjun.park@lge.com>
-To: Shakeel Butt <shakeel.butt@linux.dev>
-Cc: Yosry Ahmed <yosry@kernel.org>, Hao Jia <jiahao.kernel@gmail.com>,
-	Johannes Weiner <hannes@cmpxchg.org>, mhocko@kernel.org,
-	tj@kernel.org, mkoutny@suse.com, roman.gushchin@linux.dev,
-	Nhat Pham <nphamcs@gmail.com>, akpm@linux-foundation.org,
-	chengming.zhou@linux.dev, muchun.song@linux.dev,
-	cgroups@vger.kernel.org, linux-mm@kvack.org,
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-	Hao Jia <jiahao1@lixiang.com>, chrisl@kernel.org,
-	kasong@tencent.com, baoquan.he@linux.dev, joshua.hahnjy@gmail.com
-Subject: Re: [swap tier discussion] Re: [PATCH v3 2/4] mm/zswap: Implement
- proactive writeback
-Message-ID: <ai5y923elCSZp41j@yjaykim-PowerEdge-T330>
-References: <aicJBVT4pBvmyooT@linux.dev>
- <aicZ-5GX9De3MAU7@linux.dev>
- <CAO9r8zNBJ-BsXyKFveA92jbwMu63uFVTY5CuT4fRHTBVcOjhPw@mail.gmail.com>
- <aictKA0XWMWbxFdN@linux.dev>
- <CAO9r8zPvCaCqvoUhPdAN5Oi_Sj0mK-t7DJhOOz3Xf1DT-Wrgcw@mail.gmail.com>
- <aieUQUBHI+E3uNPW@yjaykim-PowerEdge-T330>
- <airzE7jD9UtyR17J@google.com>
- <aisEWnb3pzmVC4dl@linux.dev>
- <aiu06fbV7rWqY0Bm@yjaykim-PowerEdge-T330>
- <aiw2p5ANjsQUCIHA@linux.dev>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BEC5439DBDB
+	for <linux-doc@vger.kernel.org>; Sun, 14 Jun 2026 11:41:48 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1781437311; cv=pass; b=UAAcrfKoRgBUMRQauQuoXFkwmHrjqPniecHRLdMjwZPsj+mjmeTIrsfx0s+l4hjwmOBebmsWqT9LmNxxAXDKv9fqEosQNwa8PWugC6o99ga42PZBHegMV2xe7fFOe4y3BJYMqLgwDTnSqKWcAs4X88f/CScSsaoYOMX+FC5S9lI=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1781437311; c=relaxed/simple;
+	bh=+QYGK68tYn6kO+42tzFsfF/PI7vOCoxlnLOyNd19xSA=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=rti9K76O32thvp/Zr/Z6fli1k9pCT6mVVp+6es8OA/5ruIYRHfF6JBua0ykNeUptmX1g0SWIydgQWiAdGJIDeIPRM0FXniWTpmWcDY4vnUCMGiTmymD7PGbNtmUWpViqBP/09P29uSnUHYEnXB1PzQ8Rp8tdunxD+KiMOllkDpY=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk; spf=pass smtp.mailfrom=thegoodpenguin.co.uk; dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20251104.gappssmtp.com header.i=@thegoodpenguin-co-uk.20251104.gappssmtp.com header.b=dls+IeA2; arc=pass smtp.client-ip=209.85.167.172
+Received: by mail-oi1-f172.google.com with SMTP id 5614622812f47-48670d35a87so2319366b6e.1
+        for <linux-doc@vger.kernel.org>; Sun, 14 Jun 2026 04:41:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781437307; cv=none;
+        d=google.com; s=arc-20240605;
+        b=cuR/EI7FKUNXuALaQ76Dz+vm/2eB+u9Ea2t7axVgGQpdTj2sQ5XBO+cEpkAbMv44H7
+         MlVj7dylSmtPugxYCViFYSrOqDiHisegGa0fhEiWc/4+978221V5KanuJwRLkTQzN/ia
+         IET2VGYxCOCq87gcZpPy6Upag3IWt7XmaKYImlfTBkHzY1i9dx917WlecBAhsrbGpBdJ
+         5wRfTncr8MSTd1A1cvf+Gh2cCLlSKmzWqXg+GEKKI/+VLIVDIpD6CNh6Xoz1ecTaS5FS
+         vwm7AFrXRCWI64tY0dZbcMo4EnPIufkxChdY/gK59NFDIJZhlG2l7pZ5ZakZL4KMHCni
+         e50A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=+QYGK68tYn6kO+42tzFsfF/PI7vOCoxlnLOyNd19xSA=;
+        fh=KKhonNp9mTKyjXHtRJKQaEZVPoOEkdT00jmkrVFegt4=;
+        b=f8v+3RV4x1vN7xzOSZ1v0STeYBxjM61EDml9KyzEX+q17rQexXhcLDnKTgooUjEy1K
+         wVtuWF3YergvvdIPtoQS0noP15dtWwTCYPQ0sDfj/dV2tmqHfAekQsePRirDwn4Q5e47
+         ZVxcCnq17FNxT9uA8290tR3HPuN5hOgymDld4bksWSd2CDYBhPHybYaFciMNiYfp/Q4T
+         gBSXzjiFsn+KN9tB9xDXNlYmCopPM152imBPTRhhJyf5n217vY3fzKmYa/+TCkKd9Mt7
+         tyAsq6uTWbC7LwaeRQ0mtvhcxyUGFKtAcyaiRq/7OORWdUryTUhAmoTnyQbui1sCW5Bt
+         Wu1Q==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=thegoodpenguin-co-uk.20251104.gappssmtp.com; s=20251104; t=1781437307; x=1782042107; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=+QYGK68tYn6kO+42tzFsfF/PI7vOCoxlnLOyNd19xSA=;
+        b=dls+IeA20DL49MlA2/4T10A3XJqXucdWJ4tkSp7/UYsqFmZDbdVrMpherr+3bCdOjX
+         sf+fDGD0+IEGRQatXR4d1XzQIBQyvEbEUzQxAi4RYi5P/wD2bze5K6/TjhEI6Nbf3vFR
+         Irdh0yUd4el7ZKDVuVs2etYgyCR4wGf7bXYyfqqrC8VbzaXbL5QqPVWGulWQGFQTSqPi
+         TtlIST3pTsqhHIJnk0Zp1pe19lB2/2Zf1DP3iIjdt8fjphmZbhvpxsYIg/JKALzfwyH8
+         i3hHnnq9z3LdEo8bRwuwVxMKE0VUi0yct8FkTB9L7L+eHqvGPBObUAW3Mzuz8nLGIGSe
+         unMw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1781437307; x=1782042107;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=+QYGK68tYn6kO+42tzFsfF/PI7vOCoxlnLOyNd19xSA=;
+        b=jOzXgd6S/tZ6QSFUe95UAU4qoYPxeQ/TPSoZPXxkKakYNSSEIccipORDD4uhumceDs
+         LvpY+NWID+nuF/AvwV8Ttax73Va5QDZHTTiFhyiWXnIwFItno1vu/JTIINONBa4I+lPZ
+         1QGltcuBMjivryRf30XjrlhR8YyT5tLDJOEbikee5M6SWDo0M6nXLB6toc9dFJUru4W2
+         rEit/T36aXgez3EZGrb5BA+Dwlf/EMVqHuMFz/kvd+ocG6k9sLdnrLAymMhRM1s+nxQJ
+         pJrunWEP4rojhEzc9FVmtNlseVkFETrGUfm9cwef2RhW8qGDmip5a4jCjb4m15otPG/k
+         Te9w==
+X-Forwarded-Encrypted: i=1; AFNElJ/8AqNxmv1vtP5U/qVaK6og4GewMDl4zBfI5cPOJvuP6PXEv0CnlWNRD5MEaPxhKEEYot/TtIqlHas=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzMzFM+R/AM13K7S3qfABNzv8FbHRfweHRK1w6KO97jQ1xGTs+R
+	bIrOHsLrMMscmC77o7hqaqGP3h85av7XH9qdL8sdEf41x6QTnUg4770t453xxocpJ/XCFk5fmP1
+	w9+gUfnU1VPFVMt0aEtJXNxwQiZL30rInk3MmXbkF0Q==
+X-Gm-Gg: Acq92OHTewQBo9UuTe9VGj1zEKyAW0LwPtSs9zPFi/Z2nCYwf2G5eviv1trKMcn5XVX
+	PUD37xkBUGY95lNcq71rkyZ5KwqBDt39V8zL5AqLCvNa1KgayFJZ4EPy1xcV3r2uufDxxdm/CFq
+	QGRb9lBHA0iQ9w/WaCK8unbtyPEoZ9pCDKb9z58BLtJ1OhXT6rvNUECC4FxtEPVVncQoS96SRJ7
+	oBvJd2dj4uUJ5wrWJ5s97STd/sWeOdZfRtGmma2ERjluC3DXEGBt4VL9zw/5Y3xjEUkKCpi7S48
+	rLgyLAI06aUYyQgm3FVsZSMCvtLf5ehf5nD77pdWNcZTrLzPbx/qK5GDp1LTYUKEJzdaaeVaKgm
+	4cJBSK0mLj7+gqocdXnEuund+ahacTaR7yNDvaPol1HMImKDtng==
+X-Received: by 2002:a05:6808:5146:b0:485:4f07:eefc with SMTP id
+ 5614622812f47-4872de6bf08mr6368667b6e.15.1781437307489; Sun, 14 Jun 2026
+ 04:41:47 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <aiw2p5ANjsQUCIHA@linux.dev>
+References: <20260601-deprecate_boot_delay-v1-0-c34c187142a6@thegoodpenguin.co.uk>
+ <20260601-deprecate_boot_delay-v1-1-c34c187142a6@thegoodpenguin.co.uk> <aibCBGjVk4yqtYyT@pathway.suse.cz>
+In-Reply-To: <aibCBGjVk4yqtYyT@pathway.suse.cz>
+From: Andrew Murray <amurray@thegoodpenguin.co.uk>
+Date: Sun, 14 Jun 2026 12:41:36 +0100
+X-Gm-Features: AVVi8CeTwM4IEIAOmwN1jpA0UXhc3pxjWDCeUhdF0IP9jBqM1u8l5Way85027k8
+Message-ID: <CALqELGy7nET5bRhq-0tf2pWgK7h_f0uyrsj9BAwGMH-tmf8AAg@mail.gmail.com>
+Subject: Re: [PATCH RFC 1/4] printk: remove BOOT_PRINTK_DELAY config option
+To: Petr Mladek <pmladek@suse.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+	Russell King <linux@armlinux.org.uk>, Florian Fainelli <florian.fainelli@broadcom.com>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Ray Jui <rjui@broadcom.com>, 
+	Scott Branden <sbranden@broadcom.com>, Steven Rostedt <rostedt@goodmis.org>, 
+	John Ogness <john.ogness@linutronix.de>, Sergey Senozhatsky <senozhatsky@chromium.org>, 
+	Andrew Morton <akpm@linux-foundation.org>, 
+	Sebastian Andrzej Siewior <bigeasy@linutronix.de>, Clark Williams <clrkwllms@kernel.org>, 
+	Randy Dunlap <rdunlap@infradead.org>, Linus Torvalds <torvalds@linux-foundation.org>, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-arm-kernel@lists.infradead.org, linux-rpi-kernel@lists.infradead.org, 
+	linux-rt-devel@lists.linux.dev
+Content-Type: text/plain; charset="UTF-8"
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.64 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+X-Spamd-Result: default: False [-1.66 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114];
+	R_DKIM_ALLOW(-0.20)[thegoodpenguin-co-uk.20251104.gappssmtp.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[lge.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:shakeel.butt@linux.dev,m:yosry@kernel.org,m:jiahao.kernel@gmail.com,m:hannes@cmpxchg.org,m:mhocko@kernel.org,m:tj@kernel.org,m:mkoutny@suse.com,m:roman.gushchin@linux.dev,m:nphamcs@gmail.com,m:akpm@linux-foundation.org,m:chengming.zhou@linux.dev,m:muchun.song@linux.dev,m:cgroups@vger.kernel.org,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jiahao1@lixiang.com,m:chrisl@kernel.org,m:kasong@tencent.com,m:baoquan.he@linux.dev,m:joshua.hahnjy@gmail.com,m:jiahaokernel@gmail.com,m:joshuahahnjy@gmail.com,s:lists@lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[21];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[youngjun.park@lge.com,linux-doc@vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-92285-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	DMARC_NA(0.00)[thegoodpenguin.co.uk];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:pmladek@suse.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux@armlinux.org.uk,m:florian.fainelli@broadcom.com,m:bcm-kernel-feedback-list@broadcom.com,m:rjui@broadcom.com,m:sbranden@broadcom.com,m:rostedt@goodmis.org,m:john.ogness@linutronix.de,m:senozhatsky@chromium.org,m:akpm@linux-foundation.org,m:bigeasy@linutronix.de,m:clrkwllms@kernel.org,m:rdunlap@infradead.org,m:torvalds@linux-foundation.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-rpi-kernel@lists.infradead.org,m:linux-rt-devel@lists.linux.dev,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[amurray@thegoodpenguin.co.uk,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[21];
+	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-92286-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[youngjun.park@lge.com,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[kernel.org,gmail.com,cmpxchg.org,suse.com,linux.dev,linux-foundation.org,vger.kernel.org,kvack.org,lixiang.com,tencent.com];
-	R_DKIM_NA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[amurray@thegoodpenguin.co.uk,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[thegoodpenguin-co-uk.20251104.gappssmtp.com:+];
+	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,mail.gmail.com:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 1F83E680BBE
+X-Rspamd-Queue-Id: 01F5C680EC4
 
-....
-> >Based on the memcg interface currently proposed in swap_tier
-> > (memory.swap.tiers, memory.swap.tiers.effective), I think it aligns well
-> > with the current direction. It provides a foundation for selectively
-> > targeting devices in tier order.
-> 
-> Here instead of cpuset like interface, we may want more zswap like interface
-> where you can put limit on the usage i.e. memory.swap.tier*.max. We can start
-> with allowing only two values i.e. 0 and max which effectively will be the
-> same as what you need.
+On Mon, 8 Jun 2026 at 14:22, Petr Mladek <pmladek@suse.com> wrote:
 >
+> On Mon 2026-06-01 00:17:37, Andrew Murray wrote:
+> > The boot_delay (BOOT_PRINTK_DELAY) kernel parameter and printk_delay sysctl
+> > are two distinct mechanisms for providing similar functionality which add a
+> > delay prior to each printed printk message.
+> >
+> > In preparation of combining them into a single configurable feature, let's
+> > first remove the kconfig option BOOT_PRINTK_DELAY.
+> >
+> > Signed-off-by: Andrew Murray <amurray@thegoodpenguin.co.uk>
+>
+> The option allowed to reduce a bit the vmlinux size when people were
+> not interested into the functionality. I am not sure if it is worth
+> it though. I am personally fine with this change.
 
-Good idea, and it's certainly feasible. When I considered this a while
-ago, the reasons I didn't take this direction were:
+I hadn't considered that need.
 
-1. There's no real-world usage for adjusting the swap tier amount (it's
-   either 0 or MAX). That said, your suggestion to initially allow only
-   0 and max is the killing point, and it's making me reconsider.
+I'm happy to add this back in, but it would only make sense if this
+option covered both boot_delay and printk_delay. That would change the
+meaning of this existing Kconfig option, and would also allow the
+removal of the printk_delay sysctl, I'm not sure if userspace assumes
+this will always be there (probably not).
 
-2. The implementation cost seems high. The current implementation
-   handles this at runtime via simple masking.
-
-3. Relationship with swap.max:
-   - If we tie it to the current interface, wouldn't limiting the swap
-     amount within a selected tier already be possible? I wonder if
-     that alone is enough.
-   - If we add tier.max, it would need to be a subset of swap.max.
-     (Any other complexities here?)
-
-4. vswap enable/disable: vswap doesn't seem to have an amount-control
-   aspect, so an on/off semantic would be clearer.
-   https://lore.kernel.org/linux-mm/ai5kOOmR1LPTWs1J@yjaykim-PowerEdge-T330/T/#m8831ec057bf9387978d3bd698f51920600e09a04
-
-In that case, the internal logic could stay roughly the same rather
-than counting via a page counter. Something like:
-
-1. Change the interface shell: tier.*.max — allow only 0 ~ max.
-2. Keep the internal logic as is: 0 disables the mask (child memcgs
-   off too), max enables it (child memcgs on too).
-3. memory.zswap.max integrates naturally (it's memory."tier_name".max).
-4. Extend later if use cases arise.
-
-On balance I still lean toward the current interface, but if a per-tier
-max is the better fit for memcg's direction and others feel the same,
-I'm happy to switch. I'd like to hear Shakeel's thoughts again, and I'm
-curious about others' opinions too.
-
-A few more perspectives on the points below.
-
-> I will respond to your other points later when I have time.
-
-> > 
-> > To summarize the discussions so far, the following points align well.
-> > 
-> > - Per-cgroup swap control, as I suggested.
-> > - Proactive zswap writeback (Hao's usecase)
-> > - Swap device target demotion(if it wants selective, then it is more better), as you mentioned:
-> >   https://lore.kernel.org/linux-mm/aicZ-5GX9De3MAU7@linux.dev/
-> > - Virtual Swap on/off in the future, as Nhat mentioned:
-> >   https://lore.kernel.org/linux-mm/20260528212955.1912856-1-nphamcs@gmail.com/
-> > - The memory.zswap.writeback alternative (no hierarchy model conflict)
-> > - zswap is first swap tier.
-> > - Promotion. (Also better for selectve usage)
-> > - tier based swap policy (e.g round-robin...)
-> > 
-> > To accelerate this work, I believe we should reach a consensus and
-> > merge the currently proposed swap_tier interface :)
-> > 
-> > If the above approach is difficult, I would like to suggest an
-> > alternative for progress with the memcg interfaces removed:
-> > 
-> > 1) We could make zswap the first tier and create
-> > a use case where memory.zswap.writeback internally is handled by tier logic.
-> > 
-> > 2) Or simply merge the swap_tier infrastructure itself first.
-> > 
-> > This would allow the swap_tier infrastructure to be merged and discussed
-> > more easily.
-> > 
-> > If it takes longer to adopt swap_tier anyway, by doing so we progress next step
-> > as a experimental feature.
-> > 
-> > - Apply per-cgroup swap as an experimental (debugfs) feature.
-> > - Apply Hao's use case experimentally or as it is as Yosry suggested.
-> > (future migration to swap tier)
-> > 
-> > How do you think?
-> > 
-> > (FYI: My emails to kernel.org are failing due to internal server issues.)
-> > 
-> > Thank you 
-> > Youngjun Park
-
-Let me clarify a part I wrote confusingly. Handling
-memory.zswap.writeback via tiers is possible, but I don't think the
-interface itself would be replaced even if memory.swap.tiers is adopted.
-
-Selecting only zswap in memory.swap.tiers would not just disable
-writeback.it would also block regular swap entirely, which differs
-slightly from the current semantic. (... "Per the cgroup v2 docs: a
-zswap-only tier setting is subtly different from setting
-memory.swap.max to 0, since it still allows pages to be written to the
-zswap pool; this has no effect if zswap is disabled, and swapping is
-allowed unless memory.swap.max is set to 0.")
-
-So the interface itself needs to be retained, and it could be extended
-toward selective writeback — e.g., passing a desired tier into
-memory.zswap.writeback so writeback targets only that tier. Currently
-it only controls on/off. Other tiers probably don't need this. demotion
-based on the selected tier should be enough.
+I'll leave this as is, unless there are objections.
 
 Thanks,
-Youngjun Park
+
+Andrew Murray
+
+>
+> Reviewed-by: Petr Mladek <pmladek@suse.com>
+>
+> Best Regards,
+> Petr
 
