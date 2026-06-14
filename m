@@ -1,339 +1,135 @@
-Return-Path: <linux-doc+bounces-92279-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92277-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id gHatBUT3LWq8ngQAu9opvQ
-	(envelope-from <linux-doc+bounces-92279-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 14 Jun 2026 02:35:16 +0200
+	id uGsDJyP2LWozngQAu9opvQ
+	(envelope-from <linux-doc+bounces-92277-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 14 Jun 2026 02:30:27 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6CF026801F8
-	for <lists+linux-doc@lfdr.de>; Sun, 14 Jun 2026 02:35:14 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id E83556801BA
+	for <lists+linux-doc@lfdr.de>; Sun, 14 Jun 2026 02:30:26 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=redadmin.org header.s=20231208space header.b="C/JdjfEE";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92279-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92279-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=redadmin.org;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=EcBer6RI;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92277-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-92277-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 376FB30087BB
-	for <lists+linux-doc@lfdr.de>; Sun, 14 Jun 2026 00:35:13 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 3178C300AEDD
+	for <lists+linux-doc@lfdr.de>; Sun, 14 Jun 2026 00:30:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BCD0B1EB5E3;
-	Sun, 14 Jun 2026 00:35:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E92431F3B85;
+	Sun, 14 Jun 2026 00:30:21 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from www.redadmin.org (bc043154.ppp.asahi-net.or.jp [222.228.43.154])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C42AA2030A;
-	Sun, 14 Jun 2026 00:35:06 +0000 (UTC)
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781397311; cv=pass; b=WgDG/2a/dvqtDauDOEAXsA1Ja5Fp8ghan+MgeqfqhrFNTcveL6YGwy3g+4TChy4EN4bVX+MhWNEvWwXnJ62ldS/7WLAqh1dwcNFPKwvA0uYU2ZJe4Q63hhx2Jx8A61uq4Vw0TGOP/0ibrK8Od8rPFHrMUQ3D/GRhabQJiHTw3oc=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781397311; c=relaxed/simple;
-	bh=YjVpIxzyiQrbm8Jzq+1Ld1jYz6WzYfrVKQmg/uOAktA=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=KdeZp3apTxfnIcQIidnZL5otPXObb8C649EEVN6NTZ0kgRoqv+DcjwuTI0s1zGPn+Qo7LtlJqgoUtkEx1BWyN1lyoopLs59OmqWdAUp1ddROx6ZUmgLgtsHgD7Rv66ZmQba6Z8luNGX4T2YLcAiZOSfjGedQZuR3wwzn0Q6dCgQ=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redadmin.org; spf=pass smtp.mailfrom=redadmin.org; dkim=pass (1024-bit key) header.d=redadmin.org header.i=@redadmin.org header.b=C/JdjfEE; arc=pass smtp.client-ip=222.228.43.154
-Received: from localhost (localhost [127.0.0.1])
-	by www.redadmin.org (Postfix) with ESMTP id 87DD8109F28A1;
-	Sun, 14 Jun 2026 08:35:49 +0900 (JST)
-X-Virus-Scanned: amavis at redadmin.org
-Received: from www.redadmin.org ([127.0.0.1])
- by localhost (redadmin.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8a0ORiEm0qIm; Sun, 14 Jun 2026 08:35:45 +0900 (JST)
-ARC-Seal: i=1; d=redadmin.org; s=20231208space; a=rsa-sha256; cv=none;
-	t=1781393745;
-	b=HDhcLfKWrKInQcfVarwvuxC7H/6LnYk5ZtyMcDTxjoKU0LugcsxalK7tC3gNs/JjrTKt
-	 X1CC51tJGDq9h8AkEIT9uDSDrV/R+rh6PFEVdBbFqjYVc4etb+k+xYoqR/MYuHUYeiCtx
-	 jTv+DdQRgAOlC08DwVu04+3uS2G3IkXXj8=
-ARC-Message-Signature: i=1; d=redadmin.org; s=20231208space; a=rsa-sha256;
-	c=relaxed/relaxed; t=1781393745;
-	h=DKIM-Filter:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:
-	 X-Mailer:MIME-Version:Content-Type:Content-Transfer-Encoding;
-	bh=zXhxedaFFt2JKLKaI3a2a3R6ptPJb2J6fZ0nli9H4AQ=;
-	b=Gir9i97ygNa123o1/E7XhLk6q4SnUJhr5/CvTleHYQI8d5F1qaTL8gMMiskVxC0q0CLG
-	 syVttK2O7DZVFs3K3HvTuEVWHkf7GE5UyZrHH8Ow9gl1idhIg7Vu9u++k+tH26tuSF67B
-	 bmEguUQXOIVwAgA3GXWmnlpqRq8ykszUCM=
-ARC-Authentication-Results: i=1; www.redadmin.org; arc=none smtp.remote-ip=127.0.0.1
-Received: by www.redadmin.org (Postfix, from userid 1000)
-	id 07BC7109F289C; Sun, 14 Jun 2026 08:35:45 +0900 (JST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 www.redadmin.org 07BC7109F289C
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redadmin.org;
-	s=20231208space; t=1781393745;
-	bh=zXhxedaFFt2JKLKaI3a2a3R6ptPJb2J6fZ0nli9H4AQ=;
-	h=From:To:Cc:Subject:Date:From;
-	b=C/JdjfEEqb89NM8FKauWPeOk/ZuuvjUCCvOLtFJdEOWwjvn6+66Fqd8SyB2zhPZnO
-	 dMeCDJ8PnzmSrB/DO7qUTkMmTqo04gCvl2yJ5cFGsODPpVev76NzPs+KHYFU1n6J1M
-	 /hWbFuqa8yOD3mR67U/LTKjRSSV1T7Yp8ynbenfk=
-From: Akiyoshi Kurita <weibu@redadmin.org>
-To: linux-doc@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org,
-	corbet@lwn.net,
-	akiyks@gmail.com,
-	Akiyoshi Kurita <weibu@redadmin.org>
-Subject: [PATCH v1] docs/ja_JP: translate submitting-patches.rst (sign-off)
-Date: Sun, 14 Jun 2026 08:35:41 +0900
-Message-ID: <20260613233541.50732-1-weibu@redadmin.org>
-X-Mailer: git-send-email 2.52.0
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CC9E2264C7;
+	Sun, 14 Jun 2026 00:30:20 +0000 (UTC)
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1781397021; cv=none; b=YzRBIe1aL6dLHbco4iPTaOgbQOuTyjUTVxPji1xfmj4gzeGYjJQsz+50Pqyfks0eMWqI/YiqwVsCivWun/T+M8UcxH/TTsmzl4CLtjqkwe6eHbS25IgTgwshr/RqMVRsAmM2IiwcHE9keCSRDjQY+iIyDB7HqH2YBbTz/5YVf5Q=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1781397021; c=relaxed/simple;
+	bh=0L0Zy3ZnKFfqwXJgmHweu/NlR3Tv8hruLpIGR5oggfI=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=FNX9GicckcM/HqVP1NL8Lp5ftYvrd6z58nxz16a4kOL8bnVbbIg1Ob1mmZu6zjpVMdjId7cgi96CNyCe9n2iFGW+gPW5Dz06GBMQCoE4yr0vo4O0KP+h7ZASq45sB/BSg3srYYDOonsLudingHYhIfmXA9KV2G0Vk3b31BUzkQ4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EcBer6RI; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 366EF1F000E9;
+	Sun, 14 Jun 2026 00:30:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1781397020;
+	bh=ZMdBuFq+Egdpf4xXaVRlDiUSnmhKuXX5amo2pNZUkl4=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=EcBer6RItrC/+oVd2Kax1LWzKvX0vH4X3tM0z0tnln1N3DLGFMKoWYR6a5/toDx7j
+	 PqKUHlaRmKC3H77fwIQP9zSaaEPkocTEk3DZ9UijYzkkAwXcBGnfUtGGwJUwOZ9+gn
+	 xwXGnxn4mOjkl0tQSvMh/hq5KSBweQvHmb1yp8NYS/fH1dz5Xsv6uHoERtHmIyb5h5
+	 N+/aB/ElIyEUZJTpIObPWuYDZFpX71nofGT0gt94yJ67TueuTj8CIKoqptC96vuEE2
+	 wUEZ9ktrZLSvyERFy8Yo6O1DI85bWRaLfmtVQvmmwUazcxAnZCJzCovLrJV/tKnPSi
+	 XuVbHfaK/B/3w==
+Date: Sat, 13 Jun 2026 17:30:18 -0700
+From: Jakub Kicinski <kuba@kernel.org>
+To: Jack Wu via B4 Relay <devnull+jackbb_wu.compal.com@kernel.org>
+Cc: jackbb_wu@compal.com, Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Sergey Ryazanov <ryazanov.s.a@gmail.com>, Johannes Berg
+ <johannes@sipsolutions.net>, Andrew Lunn <andrew+netdev@lunn.ch>, "David S.
+ Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Paolo
+ Abeni <pabeni@redhat.com>, Wen-Zhi Huang <wen-zhi.huang@mediatek.com>,
+ Shi-Wei Yeh <shi-wei.yeh@mediatek.com>, Minano Tseng
+ <Minano.tseng@mediatek.com>, Matthias Brugger <matthias.bgg@gmail.com>,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Simon
+ Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan
+ <skhan@linuxfoundation.org>, linux-kernel@vger.kernel.org,
+ netdev@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-mediatek@lists.infradead.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v2 3/7] net: wwan: t9xx: Add control DMA interface
+Message-ID: <20260613173018.7a0581f1@kernel.org>
+In-Reply-To: <20260610-t9xx_driver_v1-v2-3-c65addf23b3f@compal.com>
+References: <20260610-t9xx_driver_v1-v2-0-c65addf23b3f@compal.com>
+	<20260610-t9xx_driver_v1-v2-3-c65addf23b3f@compal.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[redadmin.org,none];
-	R_DKIM_ALLOW(-0.20)[redadmin.org:s=20231208space];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+X-Spamd-Result: default: False [-3.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-92277-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-92279-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:corbet@lwn.net,m:akiyks@gmail.com,m:weibu@redadmin.org,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER(0.00)[weibu@redadmin.org,linux-doc@vger.kernel.org];
+	FORGED_SENDER(0.00)[kuba@kernel.org,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	FORGED_RECIPIENTS(0.00)[m:devnull+jackbb_wu.compal.com@kernel.org,m:jackbb_wu@compal.com,m:loic.poulain@oss.qualcomm.com,m:ryazanov.s.a@gmail.com,m:johannes@sipsolutions.net,m:andrew+netdev@lunn.ch,m:davem@davemloft.net,m:edumazet@google.com,m:pabeni@redhat.com,m:wen-zhi.huang@mediatek.com,m:shi-wei.yeh@mediatek.com,m:Minano.tseng@mediatek.com,m:matthias.bgg@gmail.com,m:angelogioacchino.delregno@collabora.com,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-kernel@vger.kernel.org,m:netdev@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-mediatek@lists.infradead.org,m:linux-doc@vger.kernel.org,m:devnull@kernel.org,m:ryazanovsa@gmail.com,m:andrew@lunn.ch,m:matthiasbgg@gmail.com,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[vger.kernel.org,lwn.net,gmail.com,redadmin.org];
-	DKIM_TRACE(0.00)[redadmin.org:+];
+	FREEMAIL_CC(0.00)[compal.com,oss.qualcomm.com,gmail.com,sipsolutions.net,lunn.ch,davemloft.net,google.com,redhat.com,mediatek.com,collabora.com,kernel.org,lwn.net,linuxfoundation.org,vger.kernel.org,lists.infradead.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[weibu@redadmin.org,linux-doc@vger.kernel.org];
-	RCPT_COUNT_FIVE(0.00)[5];
-	RCVD_COUNT_FIVE(0.00)[6];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[kuba@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,jackbb_wu.compal.com,netdev];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,sashiko.dev:url,compal.com:email,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 6CF026801F8
+X-Rspamd-Queue-Id: E83556801BA
 
-Translate the "Include PATCH in the subject" and "Sign your work -
-the Developer's Certificate of Origin" sections in
-Documentation/translations/ja_JP/process/submitting-patches.rst.
+On Wed, 10 Jun 2026 18:41:06 +0800 Jack Wu via B4 Relay wrote:
+> From: Jack Wu <jackbb_wu@compal.com>
+> 
+> Cross Layer Direct Memory Access(CLDMA) is the hardware
+> interface used by the control plane and designated to
+> translate data between the host and the device. It supports
+> 8 hardware queues for the device AP and modem respectively.
 
-Keep the wording close to the English text and wrap lines to match
-the style used in the surrounding Japanese translation.
+Transient build warnings:
 
-Signed-off-by: Akiyoshi Kurita <weibu@redadmin.org>
----
- .../ja_JP/process/submitting-patches.rst      | 70 +++++++++++++++++++
- 1 file changed, 70 insertions(+)
++../drivers/net/wwan/t9xx/pcie/mtk_pci_drv_m9xx.c:52:30: warning: symbol 'mtk_dev_cfg_0900' was not declared. Should it be static?
++../drivers/net/wwan/t9xx/pcie/mtk_ctrl_cfg_m9xx.c:19:22: warning: symbol 'mtk_ctrl_info_m9xx' was not declared. Should it be static?
++../drivers/net/wwan/t9xx/pcie/mtk_cldma_drv_m9xx.c:33:22: warning: symbol 'mtk_cldma_regs_m9xx' was not declared. Should it be static?
++../drivers/net/wwan/t9xx/pcie/mtk_cldma_drv_m9xx.c:166:22: warning: symbol 'cldma_drv_ops_m9xx' was not declared. Should it be static?
 
-diff --git a/Documentation/translations/ja_JP/process/submitting-patches.rs=
-t b/Documentation/translations/ja_JP/process/submitting-patches.rst
-index d31d469909e4..56494bac169c 100644
---- a/Documentation/translations/ja_JP/process/submitting-patches.rst
-+++ b/Documentation/translations/ja_JP/process/submitting-patches.rst
-@@ -402,3 +402,73 @@ ping =E3=81=97=E3=81=9F=E3=82=8A=E3=81=99=E3=82=8B=E5=
-=89=8D=E3=81=AB=E3=80=81=E5=B0=91=E3=81=AA=E3=81=8F=E3=81=A8=E3=82=82 1 =E9=
-=80=B1=E9=96=93=E3=81=AF=E5=BE=85=E3=81=A3=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=
-=95=E3=81=84=E3=80=82
- =E3=83=91=E3=83=83=E3=83=81=E3=81=BE=E3=81=9F=E3=81=AF=E3=83=91=E3=83=83=
-=E3=83=81=E3=82=B7=E3=83=AA=E3=83=BC=E3=82=BA=E3=81=AE=E4=BF=AE=E6=AD=A3=E7=
-=89=88=E3=82=92=E6=8A=95=E7=A8=BF=E3=81=99=E3=82=8B=E5=A0=B4=E5=90=88=E3=81=
-=AF=E3=80=81"RESEND" =E3=82=92
- =E8=BF=BD=E5=8A=A0=E3=81=97=E3=81=AA=E3=81=84=E3=81=A7=E3=81=8F=E3=81=A0=
-=E3=81=95=E3=81=84=E3=80=82"RESEND" =E3=81=AF=E3=80=81=E5=89=8D=E5=9B=9E=E3=
-=81=AE=E6=8A=95=E7=A8=BF=E3=81=8B=E3=82=89=E4=B8=80=E5=88=87=E5=A4=89=E6=9B=
-=B4=E3=81=97=E3=81=A6=E3=81=84=E3=81=AA=E3=81=84
- =E3=83=91=E3=83=83=E3=83=81=E3=81=BE=E3=81=9F=E3=81=AF=E3=83=91=E3=83=83=
-=E3=83=81=E3=82=B7=E3=83=AA=E3=83=BC=E3=82=BA=E3=82=92=E5=86=8D=E9=80=81=E3=
-=81=99=E3=82=8B=E5=A0=B4=E5=90=88=E3=81=AB=E3=81=AE=E3=81=BF=E4=BD=BF=E3=81=
-=84=E3=81=BE=E3=81=99=E3=80=82
-+
-+
-+=E4=BB=B6=E5=90=8D=E3=81=AB PATCH =E3=82=92=E5=90=AB=E3=82=81=E3=82=8B
-+----------------------
-+
-+Linus =E3=81=A8 linux-kernel =E3=81=AB=E3=81=AF=E5=A4=A7=E9=87=8F=E3=81=AE=
-=E3=83=A1=E3=83=BC=E3=83=AB=E3=81=8C=E5=B1=8A=E3=81=8F=E3=81=9F=E3=82=81=E3=
-=80=81=E3=83=A1=E3=83=BC=E3=83=AB=E3=81=AE=E4=BB=B6=E5=90=8D=E3=81=AE
-+=E5=85=88=E9=A0=AD=E3=81=AB ``[PATCH]`` =E3=82=92=E4=BB=98=E3=81=91=E3=82=
-=8B=E3=81=AE=E3=81=8C=E4=B8=80=E8=88=AC=E7=9A=84=E3=81=AA=E6=85=A3=E4=BE=8B=
-=E3=81=A7=E3=81=99=E3=80=82=E3=81=93=E3=82=8C=E3=81=AB=E3=82=88=E3=82=8A=E3=
-=80=81
-+Linus =E3=82=84=E4=BB=96=E3=81=AE=E3=82=AB=E3=83=BC=E3=83=8D=E3=83=AB=E9=
-=96=8B=E7=99=BA=E8=80=85=E3=81=AF=E3=80=81=E3=83=91=E3=83=83=E3=83=81=E3=82=
-=92=E4=BB=96=E3=81=AE=E3=83=A1=E3=83=BC=E3=83=AB=E8=AD=B0=E8=AB=96=E3=81=8B=
-=E3=82=89=E3=82=88=E3=82=8A
-+=E7=B0=A1=E5=8D=98=E3=81=AB=E5=8C=BA=E5=88=A5=E3=81=A7=E3=81=8D=E3=82=8B=
-=E3=82=88=E3=81=86=E3=81=AB=E3=81=AA=E3=82=8A=E3=81=BE=E3=81=99=E3=80=82
-+
-+``git send-email`` =E3=81=AF=E3=80=81=E3=81=93=E3=82=8C=E3=82=92=E8=87=AA=
-=E5=8B=95=E7=9A=84=E3=81=AB=E8=A1=8C=E3=81=A3=E3=81=A6=E3=81=8F=E3=82=8C=E3=
-=81=BE=E3=81=99=E3=80=82
-+
-+
-+=E8=87=AA=E5=88=86=E3=81=AE=E4=BD=9C=E6=A5=AD=E3=81=AB=E7=BD=B2=E5=90=8D=
-=E3=81=99=E3=82=8B - Developer's Certificate of Origin
-+---------------------------------------------------------
-+
-+=E8=AA=B0=E3=81=8C=E4=BD=95=E3=82=92=E8=A1=8C=E3=81=A3=E3=81=9F=E3=81=AE=
-=E3=81=8B=E3=82=92=E8=BF=BD=E8=B7=A1=E3=81=97=E3=82=84=E3=81=99=E3=81=8F=E3=
-=81=99=E3=82=8B=E3=81=9F=E3=82=81=E3=80=81=E7=89=B9=E3=81=AB=E3=80=81=E8=A4=
-=87=E6=95=B0=E9=9A=8E=E5=B1=A4=E3=81=AE
-+=E3=83=A1=E3=83=B3=E3=83=86=E3=83=8A=E3=82=92=E7=B5=8C=E7=94=B1=E3=81=97=
-=E3=81=A6=E3=80=81=E6=9C=80=E7=B5=82=E7=9A=84=E3=81=AB=E3=82=AB=E3=83=BC=E3=
-=83=8D=E3=83=AB=E5=86=85=E3=81=AE=E3=81=82=E3=82=8B=E3=81=B9=E3=81=8D=E5=A0=
-=B4=E6=89=80=E3=81=B8=E3=81=9F=E3=81=A9=E3=82=8A=E7=9D=80=E3=81=8F
-+=E5=8F=AF=E8=83=BD=E6=80=A7=E3=81=8C=E3=81=82=E3=82=8B=E3=83=91=E3=83=83=
-=E3=83=81=E3=81=AB=E3=81=A4=E3=81=84=E3=81=A6=E3=80=81=E3=83=A1=E3=83=BC=E3=
-=83=AB=E3=81=A7=E3=82=84=E3=82=8A=E5=8F=96=E3=82=8A=E3=81=95=E3=82=8C=E3=82=
-=8B=E3=83=91=E3=83=83=E3=83=81=E3=81=AB
-+``sign-off`` =E6=89=8B=E7=B6=9A=E3=81=8D=E3=82=92=E5=B0=8E=E5=85=A5=E3=81=
-=97=E3=81=A6=E3=81=84=E3=81=BE=E3=81=99=E3=80=82
-+
-+``sign-off`` =E3=81=AF=E3=80=81=E3=83=91=E3=83=83=E3=83=81=E8=AA=AC=E6=98=
-=8E=E3=81=AE=E6=9C=AB=E5=B0=BE=E3=81=AB=E7=BD=AE=E3=81=8F=E5=8D=98=E7=B4=94=
-=E3=81=AA 1 =E8=A1=8C=E3=81=A7=E3=81=99=E3=80=82=E3=81=93=E3=82=8C=E3=81=AF=
-=E3=80=81
-+=E3=81=82=E3=81=AA=E3=81=9F=E3=81=8C=E3=81=9D=E3=81=AE=E3=83=91=E3=83=83=
-=E3=83=81=E3=82=92=E6=9B=B8=E3=81=84=E3=81=9F=E3=81=93=E3=81=A8=E3=80=81=E3=
-=81=BE=E3=81=9F=E3=81=AF=E3=82=AA=E3=83=BC=E3=83=97=E3=83=B3=E3=82=BD=E3=83=
-=BC=E3=82=B9=E3=81=AE=E3=83=91=E3=83=83=E3=83=81=E3=81=A8=E3=81=97=E3=81=A6
-+=E6=B8=A1=E3=81=99=E6=A8=A9=E5=88=A9=E3=82=92=E6=8C=81=E3=81=A3=E3=81=A6=
-=E3=81=84=E3=82=8B=E3=81=93=E3=81=A8=E3=82=92=E8=A8=BC=E6=98=8E=E3=81=99=E3=
-=82=8B=E3=82=82=E3=81=AE=E3=81=A7=E3=81=99=E3=80=82=E3=83=AB=E3=83=BC=E3=83=
-=AB=E3=81=AF=E9=9D=9E=E5=B8=B8=E3=81=AB=E5=8D=98=E7=B4=94=E3=81=A7=E3=81=99=
-=E3=80=82
-+=E4=BB=A5=E4=B8=8B=E3=82=92=E8=A8=BC=E6=98=8E=E3=81=A7=E3=81=8D=E3=82=8B=
-=E3=81=AA=E3=82=89:
-+
-+Developer's Certificate of Origin 1.1
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+=E3=81=93=E3=81=AE=E3=83=97=E3=83=AD=E3=82=B8=E3=82=A7=E3=82=AF=E3=83=88=
-=E3=81=B8=E8=B2=A2=E7=8C=AE=E3=81=99=E3=82=8B=E3=81=93=E3=81=A8=E3=81=AB=E3=
-=82=88=E3=82=8A=E3=80=81=E7=A7=81=E3=81=AF=E4=BB=A5=E4=B8=8B=E3=82=92=E8=A8=
-=BC=E6=98=8E=E3=81=97=E3=81=BE=E3=81=99:
-+
-+        (a) =E3=81=93=E3=81=AE=E8=B2=A2=E7=8C=AE=E3=81=AF=E3=80=81=E5=85=
-=A8=E9=83=A8=E3=81=BE=E3=81=9F=E3=81=AF=E4=B8=80=E9=83=A8=E3=82=92=E7=A7=81=
-=E3=81=8C=E4=BD=9C=E6=88=90=E3=81=97=E3=81=9F=E3=82=82=E3=81=AE=E3=81=A7=E3=
-=81=82=E3=82=8A=E3=80=81
-+            =E3=83=95=E3=82=A1=E3=82=A4=E3=83=AB=E3=81=AB=E7=A4=BA=E3=81=
-=95=E3=82=8C=E3=81=A6=E3=81=84=E3=82=8B=E3=82=AA=E3=83=BC=E3=83=97=E3=83=B3=
-=E3=82=BD=E3=83=BC=E3=82=B9=E3=83=A9=E3=82=A4=E3=82=BB=E3=83=B3=E3=82=B9=E3=
-=81=AE=E4=B8=8B=E3=81=A7
-+            =E6=8F=90=E5=87=BA=E3=81=99=E3=82=8B=E6=A8=A9=E5=88=A9=E3=82=
-=92=E7=A7=81=E3=81=8C=E6=8C=81=E3=81=A3=E3=81=A6=E3=81=84=E3=82=8B=E3=81=93=
-=E3=81=A8=E3=80=82=E3=81=BE=E3=81=9F=E3=81=AF=E3=80=81
-+
-+        (b) =E3=81=93=E3=81=AE=E8=B2=A2=E7=8C=AE=E3=81=AF=E3=80=81=E7=A7=
-=81=E3=81=AE=E7=9F=A5=E3=82=8B=E9=99=90=E3=82=8A=E3=80=81=E9=81=A9=E5=88=87=
-=E3=81=AA=E3=82=AA=E3=83=BC=E3=83=97=E3=83=B3=E3=82=BD=E3=83=BC=E3=82=B9
-+            =E3=83=A9=E3=82=A4=E3=82=BB=E3=83=B3=E3=82=B9=E3=81=AE=E4=B8=
-=8B=E3=81=AB=E3=81=82=E3=82=8B=E9=81=8E=E5=8E=BB=E3=81=AE=E6=88=90=E6=9E=9C=
-=E7=89=A9=E3=81=AB=E5=9F=BA=E3=81=A5=E3=81=8F=E3=82=82=E3=81=AE=E3=81=A7=E3=
-=81=82=E3=82=8A=E3=80=81
-+            =E3=81=9D=E3=81=AE=E3=83=A9=E3=82=A4=E3=82=BB=E3=83=B3=E3=82=
-=B9=E3=81=AE=E4=B8=8B=E3=81=A7=E3=80=81=E3=81=9D=E3=81=AE=E6=88=90=E6=9E=9C=
-=E7=89=A9=E3=82=92=E3=80=81=E5=85=A8=E9=83=A8=E3=81=BE=E3=81=9F=E3=81=AF=E4=
-=B8=80=E9=83=A8=E3=82=92
-+            =E7=A7=81=E3=81=8C=E4=BD=9C=E6=88=90=E3=81=97=E3=81=9F=E4=BF=
-=AE=E6=AD=A3=E3=81=A8=E3=81=A8=E3=82=82=E3=81=AB=E3=80=81=E5=90=8C=E3=81=98=
-=E3=82=AA=E3=83=BC=E3=83=97=E3=83=B3=E3=82=BD=E3=83=BC=E3=82=B9=E3=83=A9=E3=
-=82=A4=E3=82=BB=E3=83=B3=E3=82=B9=E3=81=AE
-+            =E4=B8=8B=E3=81=A7=E6=8F=90=E5=87=BA=E3=81=99=E3=82=8B=E6=A8=
-=A9=E5=88=A9=E3=82=92=E7=A7=81=E3=81=8C=E6=8C=81=E3=81=A3=E3=81=A6=E3=81=84=
-=E3=82=8B=E3=81=93=E3=81=A8=E3=80=82=E3=81=9F=E3=81=A0=E3=81=97=E3=80=81
-+            =E3=83=95=E3=82=A1=E3=82=A4=E3=83=AB=E3=81=AB=E7=A4=BA=E3=81=
-=95=E3=82=8C=E3=81=A6=E3=81=84=E3=82=8B=E3=82=88=E3=81=86=E3=81=AB=E3=80=81=
-=E7=95=B0=E3=81=AA=E3=82=8B=E3=83=A9=E3=82=A4=E3=82=BB=E3=83=B3=E3=82=B9=E3=
-=81=A7=E3=81=AE=E6=8F=90=E5=87=BA=E3=81=8C
-+            =E8=A8=B1=E5=8F=AF=E3=81=95=E3=82=8C=E3=81=A6=E3=81=84=E3=82=
-=8B=E5=A0=B4=E5=90=88=E3=82=92=E9=99=A4=E3=81=8D=E3=81=BE=E3=81=99=E3=80=82=
-=E3=81=BE=E3=81=9F=E3=81=AF=E3=80=81
-+
-+        (c) =E3=81=93=E3=81=AE=E8=B2=A2=E7=8C=AE=E3=81=AF=E3=80=81(a)=E3=
-=80=81(b)=E3=80=81=E3=81=BE=E3=81=9F=E3=81=AF (c) =E3=82=92=E8=A8=BC=E6=98=
-=8E=E3=81=97=E3=81=9F=E5=88=A5=E3=81=AE=E4=BA=BA=E7=89=A9=E3=81=8B=E3=82=89
-+            =E7=9B=B4=E6=8E=A5=E7=A7=81=E3=81=AB=E6=8F=90=E4=BE=9B=E3=81=
-=95=E3=82=8C=E3=81=9F=E3=82=82=E3=81=AE=E3=81=A7=E3=81=82=E3=82=8A=E3=80=81=
-=E7=A7=81=E3=81=AF=E3=81=9D=E3=82=8C=E3=82=92=E5=A4=89=E6=9B=B4=E3=81=97=E3=
-=81=A6=E3=81=84=E3=81=AA=E3=81=84=E3=81=93=E3=81=A8=E3=80=82
-+
-+        (d) =E3=81=93=E3=81=AE=E3=83=97=E3=83=AD=E3=82=B8=E3=82=A7=E3=82=
-=AF=E3=83=88=E3=81=A8=E8=B2=A2=E7=8C=AE=E3=81=8C=E5=85=AC=E9=96=8B=E3=81=95=
-=E3=82=8C=E3=82=8B=E3=81=93=E3=81=A8=E3=80=81=E3=81=AA=E3=82=89=E3=81=B3=E3=
-=81=AB=E3=80=81
-+            =E8=B2=A2=E7=8C=AE=E3=81=AE=E8=A8=98=E9=8C=B2=EF=BC=88=E7=A7=
-=81=E3=81=8C=E6=8F=90=E5=87=BA=E3=81=97=E3=81=9F=E3=81=99=E3=81=B9=E3=81=A6=
-=E3=81=AE=E5=80=8B=E4=BA=BA=E6=83=85=E5=A0=B1=E3=80=81=E7=A7=81=E3=81=AE si=
-gn-off =E3=82=92
-+            =E5=90=AB=E3=82=80=EF=BC=89=E3=81=8C=E7=84=A1=E6=9C=9F=E9=99=
-=90=E3=81=AB=E7=B6=AD=E6=8C=81=E3=81=95=E3=82=8C=E3=80=81=E3=81=93=E3=81=AE=
-=E3=83=97=E3=83=AD=E3=82=B8=E3=82=A7=E3=82=AF=E3=83=88=E3=81=BE=E3=81=9F=E3=
-=81=AF=E9=96=A2=E4=BF=82=E3=81=99=E3=82=8B
-+            =E3=82=AA=E3=83=BC=E3=83=97=E3=83=B3=E3=82=BD=E3=83=BC=E3=82=
-=B9=E3=83=A9=E3=82=A4=E3=82=BB=E3=83=B3=E3=82=B9=E3=81=AB=E5=BE=93=E3=81=A3=
-=E3=81=A6=E5=86=8D=E9=85=8D=E5=B8=83=E3=81=95=E3=82=8C=E3=82=8B=E5=8F=AF=E8=
-=83=BD=E6=80=A7=E3=81=8C=E3=81=82=E3=82=8B
-+            =E3=81=93=E3=81=A8=E3=82=92=E3=80=81=E7=A7=81=E3=81=AF=E7=90=
-=86=E8=A7=A3=E3=81=97=E5=90=8C=E6=84=8F=E3=81=97=E3=81=BE=E3=81=99=E3=80=82
-+
-+=E3=81=9D=E3=81=AE=E5=A0=B4=E5=90=88=E3=81=AF=E3=80=81=E6=AC=A1=E3=81=AE=
-=E3=82=88=E3=81=86=E3=81=AA=E8=A1=8C=E3=82=92=E8=BF=BD=E5=8A=A0=E3=81=99=E3=
-=82=8B=E3=81=A0=E3=81=91=E3=81=A7=E3=81=99::
-+
-+        Signed-off-by: Random J Developer <random@developer.example.org>
-+
-+=E7=A2=BA=E8=AA=8D=E5=8F=AF=E8=83=BD=E3=81=AA=E8=BA=AB=E5=85=83=E6=83=85=
-=E5=A0=B1=E3=82=92=E4=BD=BF=E3=81=A3=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=
-=81=84=EF=BC=88=E6=AE=8B=E5=BF=B5=E3=81=AA=E3=81=8C=E3=82=89=E3=80=81=E5=8C=
-=BF=E5=90=8D=E3=81=A7=E3=81=AE=E8=B2=A2=E7=8C=AE=E3=81=AF
-+=E5=8F=97=E3=81=91=E4=BB=98=E3=81=91=E3=82=89=E3=82=8C=E3=81=BE=E3=81=9B=
-=E3=82=93=EF=BC=89=E3=80=82=E3=81=93=E3=82=8C=E3=81=AF ``git commit -s`` =
-=E3=82=92=E4=BD=BF=E3=81=88=E3=81=B0=E8=87=AA=E5=8B=95=E7=9A=84=E3=81=AB
-+=E8=A1=8C=E3=82=8F=E3=82=8C=E3=81=BE=E3=81=99=E3=80=82Revert =E3=83=91=E3=
-=83=83=E3=83=81=E3=81=AB=E3=82=82 ``Signed-off-by`` =E3=82=92=E5=90=AB=E3=
-=82=81=E3=82=8B=E3=81=B9=E3=81=8D=E3=81=A7=E3=81=99=E3=80=82
-+``git revert -s`` =E3=81=AF=E3=81=93=E3=82=8C=E3=82=92=E8=87=AA=E5=8B=95=
-=E7=9A=84=E3=81=AB=E8=A1=8C=E3=81=A3=E3=81=A6=E3=81=8F=E3=82=8C=E3=81=BE=E3=
-=81=99=E3=80=82
-+
-+=E3=83=91=E3=83=83=E3=83=81=E6=9C=AB=E5=B0=BE=E3=81=AB=E8=BF=BD=E5=8A=A0=
-=E3=81=AE=E3=82=BF=E3=82=B0=E3=82=92=E4=BB=98=E3=81=91=E3=82=8B=E4=BA=BA=E3=
-=82=82=E3=81=84=E3=81=BE=E3=81=99=E3=80=82=E3=81=9D=E3=82=8C=E3=82=89=E3=81=
-=AF=E4=BB=8A=E3=81=AE=E3=81=A8=E3=81=93=E3=82=8D=E5=8D=98=E3=81=AB
-+=E7=84=A1=E8=A6=96=E3=81=95=E3=82=8C=E3=81=BE=E3=81=99=E3=81=8C=E3=80=81=
-=E7=A4=BE=E5=86=85=E6=89=8B=E7=B6=9A=E3=81=8D=E3=82=92=E7=A4=BA=E3=81=97=E3=
-=81=9F=E3=82=8A=E3=80=81sign-off =E3=81=AB=E9=96=A2=E3=81=99=E3=82=8B=E7=89=
-=B9=E5=88=A5=E3=81=AA
-+=E8=A9=B3=E7=B4=B0=E3=82=92=E7=A4=BA=E3=81=97=E3=81=9F=E3=82=8A=E3=81=99=
-=E3=82=8B=E3=81=9F=E3=82=81=E3=81=AB=E4=BD=BF=E3=81=86=E3=81=93=E3=81=A8=E3=
-=81=AF=E3=81=A7=E3=81=8D=E3=81=BE=E3=81=99=E3=80=82
-+
-+=E4=BD=9C=E8=80=85=E3=81=AE SoB =E3=81=AB=E7=B6=9A=E3=81=8F=E3=81=9D=E3=82=
-=8C=E4=BB=A5=E9=99=8D=E3=81=AE SoB (Signed-off-by:) =E3=81=AF=E3=80=81=E3=
-=83=91=E3=83=83=E3=83=81=E3=82=92
-+=E5=8F=96=E3=82=8A=E6=89=B1=E3=81=84=E3=80=81=E6=AC=A1=E3=81=B8=E5=8F=97=
-=E3=81=91=E6=B8=A1=E3=81=97=E3=81=9F=E4=BA=BA=E3=80=85=E3=81=AB=E3=82=88=E3=
-=82=8B=E3=82=82=E3=81=AE=E3=81=A7=E3=81=99=E3=81=8C=E3=80=81=E3=81=9D=E3=81=
-=AE=E9=96=8B=E7=99=BA=E3=81=AB=E9=96=A2=E4=B8=8E=E3=81=97=E3=81=9F
-+=E3=81=93=E3=81=A8=E3=82=92=E6=84=8F=E5=91=B3=E3=81=97=E3=81=BE=E3=81=9B=
-=E3=82=93=E3=80=82SoB =E3=81=AE=E9=80=A3=E9=8E=96=E3=81=AF=E3=80=81=E3=83=
-=91=E3=83=83=E3=83=81=E3=81=8C=E3=83=A1=E3=83=B3=E3=83=86=E3=83=8A=E3=81=B8=
-=E4=BC=9D=E3=82=8F=E3=82=8A=E3=80=81
-+=E6=9C=80=E7=B5=82=E7=9A=84=E3=81=AB Linus =E3=81=B8=E5=B1=8A=E3=81=8F=E3=
-=81=BE=E3=81=A7=E3=81=AB=E5=AE=9F=E9=9A=9B=E3=81=AB=E3=81=9F=E3=81=A9=E3=81=
-=A3=E3=81=9F **=E6=9C=AC=E5=BD=93=E3=81=AE** =E7=B5=8C=E8=B7=AF=E3=82=92
-+=E5=8F=8D=E6=98=A0=E3=81=99=E3=81=B9=E3=81=8D=E3=81=A7=E3=81=99=E3=80=82=
-=E5=85=88=E9=A0=AD=E3=81=AE SoB =E3=82=A8=E3=83=B3=E3=83=88=E3=83=AA=E3=81=
-=AF=E3=80=81=E5=8D=98=E7=8B=AC=E3=81=AE=E4=B8=BB=E3=81=9F=E3=82=8B=E4=BD=9C=
-=E8=80=85=E3=82=92=E7=A4=BA=E3=81=97=E3=81=BE=E3=81=99=E3=80=82
---=20
-2.52.0
-
+please also see all the AI code comments at:
+https://sashiko.dev/#/patchset/20260610-t9xx_driver_v1-v2-3-c65addf23b3f@compal.com
+-- 
+pw-bot: cr
 
