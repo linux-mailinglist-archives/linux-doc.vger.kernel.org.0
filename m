@@ -1,81 +1,81 @@
-Return-Path: <linux-doc+bounces-92380-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92381-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 3OQQMybyL2rqJQUAu9opvQ
-	(envelope-from <linux-doc+bounces-92380-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 14:37:58 +0200
+	id rDDiGMnxL2q3JQUAu9opvQ
+	(envelope-from <linux-doc+bounces-92381-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 14:36:25 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2EBE868647D
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 14:37:58 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F1F5686441
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 14:36:24 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=b1r6gmqr;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92380-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92380-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=RLj9FNF9;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92381-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-92381-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=gmail.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 64DCC30DF6F0
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 12:32:23 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 09D68301E59F
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 12:32:57 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B9B9B3F39CF;
-	Mon, 15 Jun 2026 12:30:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5598F3F23B1;
+	Mon, 15 Jun 2026 12:31:03 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 206EA3F39EC
-	for <linux-doc@vger.kernel.org>; Mon, 15 Jun 2026 12:30:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF84E3F411B
+	for <linux-doc@vger.kernel.org>; Mon, 15 Jun 2026 12:30:50 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781526659; cv=none; b=We/PAki8XYZnvfyLiYWuvHpnrcC02JzvhKpU+TJr2zu85AUHlZtLsq7aBPPliWuQlEGqHOUoFxneKgQi9UbRttNPXs9OKdklCb1/NgLmPP7+0nvY5JhT+9BaXrdt5y5cBEwpP8Ui9xjbf/+9+E0O7F1EcoREOfMVcyjDF5msrGA=
+	t=1781526662; cv=none; b=ApNxtp0U28WH1j/wNBvMjGhyrKtTcKqdMuV9cqP8urkDcZ6v5vBm9dRa9dBGTTc4U/SVicF1vJdrj7HmhrAJYctkkYpD9yamfDgycpq4qMWppihAY4o24mEgccSjCwr0RnccE/meKgxEh+vMc9XSAlpDlw8jeZEVbWxRrTaTGxs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781526659; c=relaxed/simple;
-	bh=AtNohlQ0WYu7yAy0ZDcPtcuY1C2JeuynsMtDfbhK1Oc=;
+	s=arc-20240116; t=1781526662; c=relaxed/simple;
+	bh=s24y9GPV7y+NJAKmvwvAX1cER3c+JYcl/Cz6+DphJa0=;
 	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=M5sPGtll8JpwRab8brdwQYjVFEKNpgOsa6vKCgze/V7YCffbj6r1LlKDwUBl1wjS7LdbjEBtR4aq530MWXy1q/qtxahH9uOziBzPBIilvwQ5TcHVnuim9URw5qTHNO8thM20HIJ5a5C1k5dz6F2JZ3cDSWuZI0QDVCH45jsNE0E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=b1r6gmqr; arc=none smtp.client-ip=209.85.128.42
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-490cf322ed0so22469075e9.1
-        for <linux-doc@vger.kernel.org>; Mon, 15 Jun 2026 05:30:48 -0700 (PDT)
+	 MIME-Version; b=o0Pds4kKMc0KAD6UbyiGoLto/mlp/8dGKeLaC+qmHq2ARUgkddMpcI6PzzdHXYAgJqhFzsSymXxai6wYJbHt0bnikx0/uhomCvTop81+9uF/x2D5I04UmgRlxFQL8Bc1IpyauJDurvqT7U2PIqrOMJJpJvlNiMh6lwCnuWi1gVU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=RLj9FNF9; arc=none smtp.client-ip=209.85.221.44
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-45fe59255beso1707827f8f.1
+        for <linux-doc@vger.kernel.org>; Mon, 15 Jun 2026 05:30:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781526647; x=1782131447; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1781526649; x=1782131449; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Z7ibR1uk6j3yRvHUeSG7+Ts5vUBpNZwTn1NirzFE3FA=;
-        b=b1r6gmqrfjrAl4VunJk5vfjQlwQzDRrQxiFD6ZjrtNXk9oQdXhYufu2nwL7S2hknPW
-         zVqUs6Vp9xCUTd3wzRy4YGDWCh9R1+3pvdlqvZJC8QER9RqvNroGkkldP8sQSx8HuQ3x
-         m4wE12LY9iGWK8BAaO3XVAiOsRt7OLrSQ1+L8NS7MNOcVrtCzI4Q7pO2WRsVFoog1Ygc
-         NaMCc8eUEvzUkdR+kEgcwks/J+qp/xPEiDXyXfqRo8lkfQOnz87386+8Dt4Qh/DdZQ0v
-         B8xpp7cJYaXeVV9YjBfUvGqnsBh/v8370D8rgCFz1fa9PF3KLJFg4cvPxj3gBOLof2wO
-         SqvQ==
+        bh=3neVONgdAVcEZX3f1l1KWGoYXB46SXm/tOXseRIlMNM=;
+        b=RLj9FNF9kCa9JCJgII2lEK20OgFXJIkgwmHHFV/g4ofnX1cRRStGQ4lF0s3KNBCB/d
+         P+NJHCYne6EdbHZid8DaxC10V5C1fobEjjlXWPU2u1P8gX++Vb6nl4TivkfTrAClYpdN
+         YYYIKmxEa/pHTQ4zf7rX2sr1naB2MNdilGTKIDaqarsZYObQ6dAEFm0CClEKBIwrZKW2
+         Uhj069wO8cDjGKJ5xVIXQH2AmsjdY9dCfSTgGlI8/AYvs2ZducVXG5h+CY1x1vOFiy8z
+         OYkRTE6shBZyviB2H3t72IS0pea7rvSFLFceXCqP9kb4zgCjpdE5JwHv+78Va8djtRKo
+         iFfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781526647; x=1782131447;
+        d=1e100.net; s=20251104; t=1781526649; x=1782131449;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=Z7ibR1uk6j3yRvHUeSG7+Ts5vUBpNZwTn1NirzFE3FA=;
-        b=GNbawDiPUNxckTYcH4+F2IFSzNnwNvmuihUIKCKKrc1He7cR3uJ/mMpjpLhA3UG7xV
-         fQIdbKjUEOyCBgdi2+f1irzPSBdglzX+Bg7RmOEvcQ0QOx7nzBeu1kwganVyXeth9csq
-         LntQGDb1gyRNzqsB+rzQI8usRrH6EtTXcRb9LfWe3OPULAMKn/FBH3SZ5SQwVmRwaFzu
-         RusPSMIDpLtKz1z/A0EtJvMXFbtWsC8vKvC9tRfvRih+0CcwX/yRVWsTsmnojPTvEOPD
-         xeMvGhypDjV26zRb6578d5P0t0Od2ZFU7NHrZu95kVDgvqL/e1NBca5Eyi5LEDb5bWjO
-         Yx3A==
-X-Forwarded-Encrypted: i=1; AFNElJ/bXyoHJuy4UdZinx4ZYSZC+aWlt8OzXBRzqzfDIgcEgwtoiK05n2MWTYwGPeLNEDxs9zygeLv5RIQ=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxxizMwxYklnKqBem5mWpmjMuGhlzDSaEEgv/rjpSSbltVrPb35
-	6CrLkDazBs/2c+qqjAjpV3UF9h3hqQIrDk5ZNLMA8dwcWUTsD15F9hmf
-X-Gm-Gg: Acq92OGSO9/Txoe3xufxYXIjOf+9Lzq1U9g4CvnhH6+NLgjbjnhClG5eeR8vx8zlzFP
-	75ony1My85f84LAx1IWJSxUkuM6s1X0zd8d9ok1FwvPK/hS3ogfuF2W0x6wCMxEv1AtWVH6CYOt
-	VLebeM/YKfeYyGD1On2LrFZbnRXmugSRYuheADxfyzIi0POxF9IrinsjP00BXqYwGvIYvpe9mdg
-	V8H8DkrvuZz4YmF9VVF4hih4n1j4h3OcL22NXOdPZxc2cuhsCnD8HNZ+zNp72Esv9H0dAklxmxr
-	u8rf7bQqjNIjw//NvF59vKdoZxpmqZlIRzk0QHlez6yT5wcuQ3qMo6QRL3zMS+xMYW+rjbMTbnw
-	2OzKj9bTe3RKKCNDsFIoFAbtpw5yzyH64Q5ExN6GIcxtEJk5NOg70V9nxJGHnS+AEeUlyj/O1wl
-	AJF9iWBW9TbjTO67xRHGEkCyFGtfC+qPbj94ClQm6kaQJoNz5FXZUVIP8=
-X-Received: by 2002:a05:600c:800f:b0:490:b06a:649e with SMTP id 5b1f17b1804b1-492201436f9mr121572525e9.25.1781526646890;
-        Mon, 15 Jun 2026 05:30:46 -0700 (PDT)
+        bh=3neVONgdAVcEZX3f1l1KWGoYXB46SXm/tOXseRIlMNM=;
+        b=RqqZfP89T026ZHeicy6tyTRgNSZc+TAPaSKLUWTKEDH2COHWpPwW3/mK6hxqJ/yDFF
+         U/s2copzrYdcbbJVzXCbq19MdPzTfEF5Uh+/c6/SzPJCFOI8j7tt9yz+c9kN4PCxkpAs
+         w1jHGbTlAZWkXL8J7JncaGhlmvz85SZxzR52pNhnWL6sIOxhEkZ6QCwrRnon5aOqObGw
+         P3pNWP4wz/P/LgEjrB/IW+cdjgBgToADBilWH4Qyib8eziJSGtDQInxDAxz4GuGfL9un
+         gQOrwVVbRv65IcmOaByp18LEa/5VfyEthQyPKtrBoH1CSxfLa3QYbWnZ3Oox9zeBuXtz
+         uOiw==
+X-Forwarded-Encrypted: i=1; AFNElJ/X/i3peHbhvHCJpqxWk+q24p/wFKzNBqPgksLlDxuxucZdm1+mjb6mnWQvQ7f/a/7nUfZ/21j4aqM=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyYD9csoCeTkAlh+6/ovBIrbMVy75vEK2c07Ui4Neg0FrM4Xq9a
+	SW8qpJYEn9ANSV+zF7cWR8YYzcC3DK0Uk37FsrE7kuNEC5fK0apR+TbT
+X-Gm-Gg: Acq92OFYrz3T17TaaNhUqd3DlCbZkx1vdorNnSrcQQq6EVPDVKQ4mAbOVjpCaAMwt8J
+	QOsfE1tgyn+A3V8L49eNtu2MUD8ZDf0dIYru+Etbd2hxRArsow79k8AgsD17aCVwAPOnaZeVAw8
+	FmYMAEd1/99rQqyTy2S/P2AOV7Dw2z5nLVfcVf4OE1vCRDOK7Rc8xnJVC53znLqZ0th+LW95Kj1
+	4X2wNx60UmYIv2RAT0HAk3RTXMhZbHdNvaQ70b22fi9lPgtNEHJvZQ6Gx8wAazAxjAbizDUs5vM
+	S9WzfXAxAbG9+SlelRL8B7D7uodgjZeWKgu3tsxUkBWK7/t0NNGaCqiqTgfwslOvnNK6SIDWoO4
+	3cPrCwG8QDsQUBfW0rU6AzAAaOJN037SCzTaGs4H8RGsFBTCApdIPsJkkpwjMRN5L/8G6qfD+DJ
+	HH848Nq3gOrJPX8/2nmt3Kwli1ddpNvorjXMa8L+xqLl0gv8xsqdgJ0j7BJajQOORZ8A==
+X-Received: by 2002:a05:600c:3585:b0:490:b642:ce29 with SMTP id 5b1f17b1804b1-490ec4d4f71mr195103365e9.8.1781526648835;
+        Mon, 15 Jun 2026 05:30:48 -0700 (PDT)
 Received: from Ansuel-XPS24 (93-34-88-103.ip49.fastwebnet.it. [93.34.88.103])
-        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-490ea95c512sm191426435e9.2.2026.06.15.05.30.44
+        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-490ea95c512sm191426435e9.2.2026.06.15.05.30.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 Jun 2026 05:30:46 -0700 (PDT)
+        Mon, 15 Jun 2026 05:30:48 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Andrew Lunn <andrew+netdev@lunn.ch>,
 	"David S. Miller" <davem@davemloft.net>,
@@ -105,9 +105,9 @@ To: Andrew Lunn <andrew+netdev@lunn.ch>,
 	linux-arm-kernel@lists.infradead.org,
 	linux-mediatek@lists.infradead.org,
 	llvm@lists.linux.dev
-Subject: [PATCH net-next v7 07/12] MAINTAINERS: add myself as PCS subsystem maintainer
-Date: Mon, 15 Jun 2026 14:29:43 +0200
-Message-ID: <20260615122950.22281-8-ansuelsmth@gmail.com>
+Subject: [PATCH net-next v7 08/12] of: property: fw_devlink: Add support for "pcs-handle"
+Date: Mon, 15 Jun 2026 14:29:44 +0200
+Message-ID: <20260615122950.22281-9-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260615122950.22281-1-ansuelsmth@gmail.com>
 References: <20260615122950.22281-1-ansuelsmth@gmail.com>
@@ -125,7 +125,7 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -133,7 +133,7 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	RCPT_COUNT_TWELVE(0.00)[28];
 	FREEMAIL_FROM(0.00)[gmail.com];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-92380-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-92381-lists,linux-doc=lfdr.de];
 	FORGED_SENDER(0.00)[ansuelsmth@gmail.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS(0.00)[m:andrew+netdev@lunn.ch,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:ansuelsmth@gmail.com,m:lorenzo@kernel.org,m:hkallweit1@gmail.com,m:linux@armlinux.org.uk,m:saravanak@kernel.org,m:p.zabel@pengutronix.de,m:nathan@kernel.org,m:nick.desaulniers+lkml@gmail.com,m:morbo@google.com,m:justinstitt@google.com,m:netdev@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-mediatek@lists.infradead.org,m:llvm@lists.linux.dev,m:andrew@lunn.ch,m:krzk@kernel.org,m:conor@kernel.org,m:nickdesaulniers@gmail.com,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
@@ -149,42 +149,42 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	DKIM_TRACE(0.00)[gmail.com:+];
 	RCVD_COUNT_FIVE(0.00)[5];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	ALIAS_RESOLVED(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,netdev,dt,lkml];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lunn.ch:email,vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 2EBE868647D
+X-Rspamd-Queue-Id: 5F1F5686441
 
-List all the files of the Ethernet PCS subsystem and add myself as
-maintainer.
+Add support for parsing PCS binding so that fw_devlink can
+enforce the dependency with Ethernet port.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- MAINTAINERS | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ drivers/of/property.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index cc1dde0c9067..ef3ef5096d08 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -9593,6 +9593,15 @@ F:	include/uapi/linux/if_bridge.h
- F:	include/linux/netfilter_bridge/
- F:	net/bridge/
+diff --git a/drivers/of/property.c b/drivers/of/property.c
+index 136946f8b746..e6584a2f705d 100644
+--- a/drivers/of/property.c
++++ b/drivers/of/property.c
+@@ -1392,6 +1392,7 @@ DEFINE_SIMPLE_PROP(access_controllers, "access-controllers", "#access-controller
+ DEFINE_SIMPLE_PROP(pses, "pses", "#pse-cells")
+ DEFINE_SIMPLE_PROP(power_supplies, "power-supplies", NULL)
+ DEFINE_SIMPLE_PROP(mmc_pwrseq, "mmc-pwrseq", NULL)
++DEFINE_SIMPLE_PROP(pcs_handle, "pcs-handle", "#pcs-cells")
+ DEFINE_SUFFIX_PROP(regulators, "-supply", NULL)
+ DEFINE_SUFFIX_PROP(gpio, "-gpio", "#gpio-cells")
  
-+ETHERNET PCS SUBSYSTEM
-+M:	Christian Marangi <ansuelsmth@gmail.com>
-+L:	netdev@vger.kernel.org
-+S:	Maintained
-+F:	Documentation/networking/pcs.rst
-+F:	drivers/net/pcs/pcs.c
-+F:	include/linux/pcs/pcs-provider.h
-+F:	include/linux/pcs/pcs.h
-+
- ETHERNET PHY LIBRARY
- M:	Andrew Lunn <andrew@lunn.ch>
- M:	Heiner Kallweit <hkallweit1@gmail.com>
+@@ -1548,6 +1549,7 @@ static const struct supplier_bindings of_supplier_bindings[] = {
+ 	{ .parse_prop = parse_interrupts, },
+ 	{ .parse_prop = parse_interrupt_map, },
+ 	{ .parse_prop = parse_access_controllers, },
++	{ .parse_prop = parse_pcs_handle, },
+ 	{ .parse_prop = parse_regulators, },
+ 	{ .parse_prop = parse_gpio, },
+ 	{ .parse_prop = parse_gpios, },
 -- 
 2.53.0
 
