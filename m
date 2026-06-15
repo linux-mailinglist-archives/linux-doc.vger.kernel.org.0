@@ -1,174 +1,190 @@
-Return-Path: <linux-doc+bounces-92346-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92347-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id W3JDF5VNL2r6+AQAu9opvQ
-	(envelope-from <linux-doc+bounces-92346-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 02:55:49 +0200
+	id bG68N9xRL2qn+QQAu9opvQ
+	(envelope-from <linux-doc+bounces-92347-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 03:14:04 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 534A2682AB7
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 02:55:48 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 71028682B0A
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 03:14:04 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=a5nHX3BF;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92346-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-92346-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=ILZEs0zt;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92347-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92347-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 7D600300119D
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 00:55:45 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id CFC8D30010DC
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 01:14:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 60DED175A9B;
-	Mon, 15 Jun 2026 00:55:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4E270221723;
+	Mon, 15 Jun 2026 01:14:02 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qv1-f52.google.com (mail-qv1-f52.google.com [209.85.219.52])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 183523B18A
-	for <linux-doc@vger.kernel.org>; Mon, 15 Jun 2026 00:55:42 +0000 (UTC)
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781484944; cv=pass; b=l3Z0Svl3amKmCy7RL8ok7KLHhoAGRLQxGNJj/bXReN4JPmSysW2mPVdmceBgTRwD6SUlLwPPxWkAx3vS6RVRK23beKd42iPQBQp0Vw2Dowvbl+xanFjkcMofeyGac9B7gj1vYpY8DLeGgmBmwchl5WN72D4h4w/S202pYj7z//k=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781484944; c=relaxed/simple;
-	bh=B38+V2PeG8lhCVJY7RDcnmbnHoDWtBCLg6m3yTZY9Gs=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=AdNqHzdnsZ1unlV7sIZQFWn33E8Vx2UjxTsB604FYLnvbukJ1rAa9RYQt+KxzMSpyDVi/69Bos9cDxmr6Q1+PUTzPWcXjfhdrtCkYJRQCPnRaS2wrVNBii255g5OOOXEGb992apvBRX4RHn8FCRA8Z8+Sh19CBrScmvMep0WKak=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=a5nHX3BF; arc=pass smtp.client-ip=209.85.219.52
-Received: by mail-qv1-f52.google.com with SMTP id 6a1803df08f44-8ccd1f57b32so36428186d6.2
-        for <linux-doc@vger.kernel.org>; Sun, 14 Jun 2026 17:55:42 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781484942; cv=none;
-        d=google.com; s=arc-20240605;
-        b=MSXW2vuv0xGMP0cM5V3APKDZQ3wquLJMSHmLUcWUxekHlHD5Rgme/pONhtcBQG0i/Z
-         R3wU6eDSUGlnalGBn1M9Dgykx3r1FIM3eIBxReQl+jB9xsZu+pRv5aOiYIj3oxCWMQjG
-         FtNxrK2V20MqwmKhJ0gHiPvXak+b3DUDGC8Fvj/Y7EjCniVpBHLC8/BbrNPS/HGDMwdM
-         6apZkUFTvUAdwVJObQnAhP56vRCoAaEWpJsZvhPH/3CoB9H5eZqDuBKdydTwHPNsQH5C
-         /FwmsD4zHeHmrOtndmONP/zWrKhTy8ViwDeQ/UyyNzxG9XgNsXxK9s0E5PmmaLuzeS8M
-         PJag==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=kVCU7mycdXVDj7GL7PlUyRlirWgnwEZPy2L0MrpGPT8=;
-        fh=nUu4CGi9zlJ2wICgSoLCa8fVfp0D8oR8s1oBXTt5U6Q=;
-        b=f5b5QhhQKPj+f3aVkG74b3hBRZj+Ga2j/hr4fheCmoRBFPlpLCbYBkrTF99zs7e0dJ
-         ofnEhtT1J8TXiePjO58AqYUNLV9cfZ4MuDEDZ7ZN190NRxyVKQSDolvHrtrVpEdRaEXc
-         GvaSpoN4ll53SxevthZk9U8VzxzH5wuMRzxs2CrHBcohkC+I2sKSEVdjGciMAXSuOIdp
-         vfy2gYjAQj8Qvm7Bn6bFiczfbpk0V4zIdQ/R6DigavVNZybSekdhOKw3sfjtjjwpeaLW
-         PsbPRJqQtPb78jdBzu43Ex9VpI/kZlP7W5F/yNgEdwEq5qN1+ZPndV+SVHtrm04Vj3Xu
-         3lKQ==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781484942; x=1782089742; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=kVCU7mycdXVDj7GL7PlUyRlirWgnwEZPy2L0MrpGPT8=;
-        b=a5nHX3BFfpQtwW+1V47TxSYFGrHR1ykVH9XbevdbAf17KSMMNsfBG81VPK3AdcOixB
-         JWQb+roFr5lQ9FCLa7pziX26J1IhjugSVWRmN8mBkgAXsP4YFGrV0orNru8ahtldZf/B
-         Fw4YGw0KfIH7XjSYTLuxqe4td9w4i1iwAgt3CXAku7jOK4+cdJE3Bw6ChSNVufH53M9k
-         ad08N0O5hpiiur5ofPBfuIkycF8xZqlxFnYir+EbljwVKn5Uz2vtEGJIX/Q/FAJXVx8j
-         f8pjBaMcA/EMoMuv8nrOnyoD4GsKkMaCvfroV57Budh2+jp+sa+LezlEbnlYCWvhVNx4
-         Ihpg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781484942; x=1782089742;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=kVCU7mycdXVDj7GL7PlUyRlirWgnwEZPy2L0MrpGPT8=;
-        b=HIKp5tbjz2zBljV6ZJ9LIQQgyIsAmBspn79OooP7wZjfIswg05Kv8+p7GrbSWE6mNN
-         Dyy28mPtKuSYiOrTgIEQWABNQEH8PyzEqsgPrEcWvgUvU3K3nimvHaPZlA7917r0AYId
-         dM/QM8EnbxTej82vNfscYmg5Mvn0zAODPYwYo6q8RTtpfqGqYVql4LL3ZM9AFQteHqaU
-         CZ+e1013DORbErIIM7PCrOOD6oiW/nBItDAVi2WRp8Ra6f3UxdQ1KuoKONWHQ10gQahe
-         PX+5Lt1hWZOlPS90ns5QF3EN9oHRPEaBgCe26l3Te5sDi31vEYSjMkDzfv8ZmmWnEKyX
-         zjmg==
-X-Forwarded-Encrypted: i=1; AFNElJ/C5ncEheb1Mqh2IVJcAtf+uP1f5Bc6DzFGg38k9UX9PxoGAhva3MU1RmMSdK/O2PpN/+W0586S1wI=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz39vsiCxq3OpwXk6DHmVAnPRIfISyKgAdPSYTr//2Bn4fJX79t
-	0PwisZChShtYC4vhkt5Sx6UUrNF8mIe/club/wlChucM87WOU3YycDxO2twtmKsoPzqW13//3x/
-	TodlqyBnxaHbkz1PkDjMIttiOnhXfB5k=
-X-Gm-Gg: Acq92OGcdnStS1YPK9bYpf8B6mCLKcNhRVVctU1O57i2n1nAo6pY7O7XNO+9hsbXFax
-	KPEjbWI+OXU4Et1GaJJy2lXB8ucsocFj+1lpr7Kh2OSF9sl7peU+HV0UFoI7xOAhJ/654cs+LYL
-	N+3kzX39DgV6YueaJTVXQamGeljXYPyWZlqdxIXv7yKWtTRzQqelXP3NNtLbIz29RjjRM/WYEWn
-	o9nCWUvU5guhc/0Q4nYYXnFik0RykCv3TaDW1t+zG/AsOO7EGTLvL9LcLcIgwbH8p7uCMb+6gA7
-	xC69AUyn1QUs91bMG49lMLVvFvz9lq+tI4xueLVc6E/5kfKu
-X-Received: by 2002:ad4:5c67:0:b0:8b8:726a:74d4 with SMTP id
- 6a1803df08f44-8d32c010d01mr225123406d6.16.1781484941998; Sun, 14 Jun 2026
- 17:55:41 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E9401D416C;
+	Mon, 15 Jun 2026 01:14:00 +0000 (UTC)
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1781486042; cv=none; b=m8A/ldO4olczOQOS2m6+TW1D7eHX3QN2M+oI4HLmRyrjRj/x7Qua5lgVOrc+LZb7XOwvP6GB99hd2m8DcvdNNbSEXGQIDtiBFzPguUeJ4r/jRhr99mLmsrfXHLwy3xHPpSl9qRjsDqabxYkUYBRy338z8aLFddeK+MtqXbukS5k=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1781486042; c=relaxed/simple;
+	bh=srTHieG9QuuExlHEw5TlKCwlwwWNy6V4euxanIlNlkE=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=maCQ1CCPagyqbtoYRjuPbtxelOrCf+m5E8tPwR7ZGS0coTCxq5SQDS4k82XzDGudxUscIuCwcevJ5CVl1/YjdtgFztxZZeTh/ZoyRr02i0iKXONTOmo3sZZ7y/HzlQBM5jSZ/t+9e5R6YACZGbLOrCrnPrjNPx3McQlyT8qlpgw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ILZEs0zt; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 76FEF1F000E9;
+	Mon, 15 Jun 2026 01:13:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1781486040;
+	bh=IMLryOOflPIA2MeylTVQIkAq8ZoOodmRc9G5qh/vtSo=;
+	h=From:To:Cc:Subject:Date;
+	b=ILZEs0ztlHZvIev2SkNLzROJupEOQeOpmRE5zgaZhj81x8M6nm8VN6gmNnEf7j5W0
+	 dSGRJ/fMvustrl81F3W+mNPPMrV19A7u+3oaQIpRZr14L/0ewWbi4fgKvcjaqfjQ73
+	 4pRMnYVoUtyRwRgLDGiaWuqM+Iyg9CQ277pss3bTKRAIr5YnEd+y7EGerb5rw2wWUO
+	 5gysc0JgfKesW4e+cL8wReBkJ2+IGojgnKx7TD653lJ51cD+HEwq2qSAJfzfpDyUez
+	 rh9I3lC6W4JRntDcoe55KgeKKpw+KzTGb8bMFyVRvQxstv/cuJX8z7tWujbTraQMRz
+	 Y1c9zxfjK+h2A==
+From: "Masami Hiramatsu (Google)" <mhiramat@kernel.org>
+To: Steven Rostedt <rostedt@goodmis.org>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	linux-kernel@vger.kernel.org,
+	linux-trace-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kselftest@vger.kernel.org
+Subject: [PATCH v4 0/7] tracing/probes: Add more typecast features
+Date: Mon, 15 Jun 2026 10:13:55 +0900
+Message-ID: <178148603548.185520.3389196102475741865.stgit@devnote2>
+X-Mailer: git-send-email 2.43.0
+User-Agent: StGit/0.19
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260614234320.8199-1-amandacorreasilvax@gmail.com>
-In-Reply-To: <20260614234320.8199-1-amandacorreasilvax@gmail.com>
-From: Daniel Pereira <danielmaraboo@gmail.com>
-Date: Sun, 14 Jun 2026 21:55:31 -0300
-X-Gm-Features: AVVi8Cc3uSPRIaX8r62s4W-khrIaNACzt6qM1w4gZfB22VXXYctSn67lFkoYWZc
-Message-ID: <CAMAsx6f7G=m3ee1Ep-NJSEnTA-7jQexJs=wGTEaXsknWXrq13A@mail.gmail.com>
-Subject: Re: [PATCH] docs: pt_BR: update minimal software requirement for
- pahole in changes.rst
-To: =?UTF-8?Q?Amanda_Corr=C3=AAa?= <amandacorreasilvax@gmail.com>
-Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4];
+X-Spamd-Result: default: False [-4.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FORGED_RECIPIENTS(0.00)[m:amandacorreasilvax@gmail.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[danielmaraboo@gmail.com,linux-doc@vger.kernel.org];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-92346-lists,linux-doc=lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:rostedt@goodmis.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:mhiramat@kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[mhiramat@kernel.org,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-92347-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[danielmaraboo@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[mhiramat@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,vger.kernel.org:from_smtp,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 534A2682AB7
+X-Rspamd-Queue-Id: 71028682B0A
 
-Em dom., 14 de jun. de 2026 =C3=A0s 20:44, Amanda Corr=C3=AAa
-<amandacorreasilvax@gmail.com> escreveu:
->
-> Update the Brazilian Portuguese translation of changes.rst to align with
-> the latest English version.
->
->     Key changes include:
->     - Updated minimum version for pahole (1.26)
->     - Added note about kfuncs annotated with KF_IMPLICIT_ARGS
->     requiring pahole v1.26 or later
->     - Changed "optional" to "opcional" in the software requirements
->     table
->
-> Signed-off-by: Amanda Corr=C3=AAa <amandacorreasilvax@gmail.com>
+Hi,
 
-Hi Amanda,
+Here is the 4th version of series to introduce more typecast features
+to probe events. The previous version is here:
 
-The grammar for Brazilian Portuguese is okay.
+ https://lore.kernel.org/all/178144880282.159464.16882854283219530040.stgit@devnote2/
 
-Thanks,
+In this version, I fixed some issues found by Sashiko reviews.
 
-Acked-by: Daniel Pereira <danielmaraboo@gmail.com>
+Steve introduced BTF typecast feature for eprobe[1].
+This series extends it and add more options:
+
+1. Expanding BTF typecast to kprobe and fprobe.
+   (currently only function entry/exit)
+
+2. Introduce container_of like typecast. This adds a "assigned
+   member" option to the typecast.
+
+   (STRUCT,MEMBER)VAR->ANOTHER_MEMBER
+
+   This casts VAR to STRUCT type but the VAR is as the address
+   of STRUCT.MEMBER. In C, it is:
+
+   container_of(VAR, STRUCT, MEMBER)->ANOTHER_MEMBER
+
+3. Support nested typecast, e.g.
+
+   (STRUCT)((STRUCT2)VAR->MEMBER2)->MEMBER
+
+   the nest level must be smaller than 3.
+
+4. Add $current variable to point "current" task_struct.
+   This is useful with typecast, e.g.
+
+   (task_struct)$current->pid
+
+5. per-cpu dereference support.
+
+   Intrdouce this_cpu_read(VAR) and this_cpu_ptr(VAR) to
+   access per-cpu data on the current CPU (accessing other CPU
+   data is not stable, because it can be changed.)
+
+   You can access the member of per-cpu data structure using
+   typecast like:
+
+   (STRUCT)this_cpu_ptr(VAR)->MEMBER
+
+
+And added a test script to test part of them.
+
+[1] https://lore.kernel.org/all/20260601130746.2139d926@gandalf.local.home/
+
+
+---
+
+Masami Hiramatsu (Google) (7):
+      tracing/events: Fix to check the simple_tsk_fn creation
+      tracing/probes: Support typecast for various probe events
+      tracing/probes: Support nested typecast
+      tracing/probes: Support field specifier option for typecast
+      tracing/probes: Add $current variable support
+      tracing/probes: Add this_cpu_read() and this_cpu_ptr() dereference method to fetcharg
+      tracing/probes: Add a new testcase for BTF typecasts
+
+
+ Documentation/trace/eprobetrace.rst                |    9 
+ Documentation/trace/fprobetrace.rst                |   10 
+ Documentation/trace/kprobetrace.rst                |   11 +
+ kernel/trace/trace.c                               |    8 
+ kernel/trace/trace_probe.c                         |  413 +++++++++++++++-----
+ kernel/trace/trace_probe.h                         |   19 +
+ kernel/trace/trace_probe_tmpl.h                    |   33 +-
+ samples/trace_events/trace-events-sample.c         |   44 ++
+ samples/trace_events/trace-events-sample.h         |   34 ++
+ .../ftrace/test.d/dynevent/btf_probe_event.tc      |   51 ++
+ .../ftrace/test.d/dynevent/fprobe_syntax_errors.tc |    9 
+ .../ftrace/test.d/kprobe/kprobe_syntax_errors.tc   |    9 
+ .../ftrace/test.d/kprobe/uprobe_syntax_errors.tc   |    5 
+ 13 files changed, 540 insertions(+), 115 deletions(-)
+ create mode 100644 tools/testing/selftests/ftrace/test.d/dynevent/btf_probe_event.tc
+
+--
+Masami Hiramatsu (Google) <mhiramat@kernel.org>
 
