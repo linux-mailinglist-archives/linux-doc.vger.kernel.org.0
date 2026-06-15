@@ -1,157 +1,184 @@
-Return-Path: <linux-doc+bounces-92393-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92394-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id NvDSH7ECMGr0LgUAu9opvQ
-	(envelope-from <linux-doc+bounces-92393-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 15:48:33 +0200
+	id HUDIFxwIMGp9MAUAu9opvQ
+	(envelope-from <linux-doc+bounces-92394-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 16:11:40 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DCDA0686DC4
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 15:48:32 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id ACDD9686F88
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 16:11:39 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=intel.com header.s=Intel header.b=CLH5h3hn;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92393-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92393-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=intel.com;
+	dkim=pass header.d=bootlin.com header.s=dkim header.b=zdj55i0X;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92394-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-92394-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=bootlin.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id E9C8F3014503
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 13:48:31 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 476E43035827
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 14:07:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CDD9F3F5BCB;
-	Mon, 15 Jun 2026 13:48:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C06D43F65FB;
+	Mon, 15 Jun 2026 14:07:18 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.13])
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E3043F5BF9;
-	Mon, 15 Jun 2026 13:48:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C7A9F3F4DC6;
+	Mon, 15 Jun 2026 14:07:16 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781531310; cv=none; b=ZIPBR11V6h6TpYBN1m5t8F7Cp+v1qj+5dctzPjcOco7W/mAoKY6qTQ2TAa81m7BAkCWll2iOU8J7HYMRYA3zGxJtnPCkEWa7Rw/BcY0sfANgUQWNsAUMPThl1VxYCcV0t3gUrI7PRCez7oQoboKMK5Rxa5/b3ryvTzuViimK6mU=
+	t=1781532438; cv=none; b=WrwWPUIHPR9dzRcFXPQUicNEZhu5dHZw8CkYbxhl2486+tha5Z7MbQZ+zeugVZxi0mtj/o1zoBMNCKFs7HQ9l7dYg8agMakJYZP0siKaIhqvxmGz6vtuN+53hOPO4Tut6kc0VhRCCGOMG+pHYGEw2sevYsWdH04SOibyV5I0vCY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781531310; c=relaxed/simple;
-	bh=inx8KrsbS4vy/PkUHx9LLJha1RMq1uYeun2BM1UGKW8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Ohy1VxDXpSYnpNCg0L/d+RaXofgFMz+6L2lbdp53U/1WqN3WA/wZj5zPLhBEhjQe+dlCjXt1Nj+wsWtyCbXGTk+U0xcup4+AHNsTgn6+W8AtEtTUAmUX4EJYu3U0Sbrwy1fJrauEyWZiRfP797wS/z5TvpBmGTql13pcjkmv4U0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=CLH5h3hn; arc=none smtp.client-ip=192.198.163.13
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1781531308; x=1813067308;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=inx8KrsbS4vy/PkUHx9LLJha1RMq1uYeun2BM1UGKW8=;
-  b=CLH5h3hnwaLI6zgqcdTQ+V0fdfC9T6CQChkspXtOTU/bN9Mh5YHqcIHp
-   Hd2wC5EsJdlF6lF2525ApNI01Dk3/u8JbdKtp4JmHd5zLB6+ClmMrXaJy
-   EnJwZbtp7eGGu0xFEhWI0NhvDrRwshvoItW2nj68i9Ntry8XUDJmqkMPu
-   5W98q/UlaEzJdLPBs7l1yMy2q1QxzyuKzIwfCKckhGAcBEuZ3fFFV9g1I
-   Bh8047SNDty50Br9F4iqVwDO/T3tXjqian3JMqVCwzNlAgRB1WOHQsNS7
-   0UWIxGGiKkEV6jr4EQbM7kfSNAp5H+1xIjL1bunsvbGAdwcPs7hTgBWAa
-   w==;
-X-CSE-ConnectionGUID: IuVy3KfqSlukzvNkeFP6YA==
-X-CSE-MsgGUID: PGku37lNRTGt2/Z1El3DrQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11818"; a="84835607"
-X-IronPort-AV: E=Sophos;i="6.24,206,1774335600"; 
-   d="scan'208";a="84835607"
-Received: from fmviesa002.fm.intel.com ([10.60.135.142])
-  by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Jun 2026 06:48:27 -0700
-X-CSE-ConnectionGUID: 2IMCQWYHQWOwZ3MoS8fvGg==
-X-CSE-MsgGUID: 1xiKOP3KQWKcsralxbv5SQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.24,206,1774335600"; 
-   d="scan'208";a="271176304"
-Received: from black.igk.intel.com ([10.91.253.5])
-  by fmviesa002.fm.intel.com with ESMTP; 15 Jun 2026 06:48:23 -0700
-Received: by black.igk.intel.com (Postfix, from userid 1003)
-	id CA93C95; Mon, 15 Jun 2026 15:48:22 +0200 (CEST)
-Date: Mon, 15 Jun 2026 15:48:22 +0200
-From: Andy Shevchenko <andriy.shevchenko@intel.com>
-To: Dan Carpenter <error27@gmail.com>
-Cc: Kees Cook <keescook@chromium.org>, Jonathan Corbet <corbet@lwn.net>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Stefano Zacchiroli <zack@upsilon.cc>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Laura Abbott <labbott@kernel.org>,
-	Julia Lawall <julia.lawall@inria.fr>,
-	Wenwen Wang <wenwen@cs.uga.edu>,
-	"Gustavo A . R . Silva" <gustavoars@kernel.org>,
-	Thorsten Leemhuis <linux@leemhuis.info>,
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-hardening@vger.kernel.org, Dawei Feng <dawei.feng@seu.edu.cn>
-Subject: Re: [PATCH v3] Documentation/process: Add Researcher Guidelines
-Message-ID: <ajACprp9UJp2JSJM@black.igk.intel.com>
-References: <20220304181418.1692016-1-keescook@chromium.org>
- <ahgaOigklcDCYvRp@stanley.mountain>
+	s=arc-20240116; t=1781532438; c=relaxed/simple;
+	bh=iunEIKNm11CTXyLswfX8qxc5Ol986Egd0t8gsHMmhrs=;
+	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
+	 In-Reply-To:Content-Type; b=AKVRdFYElhnkM6cK17eACzqPNlIoiiP4DWBxAqp+xYswdprVZrTAJz9l+J9ox6hmb6aWyyuowHTamVenjEOfPBSXy+c1ryzllg64ma9nTlCmmFYlzK6ReckOqguaD0rALSlbvt24/Hz4ABML0IE2MMyA9hQiqzvoRE3ItEWpoRI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=zdj55i0X; arc=none smtp.client-ip=185.171.202.116
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-04.galae.net (Postfix) with ESMTPS id 54432C5146A;
+	Mon, 15 Jun 2026 14:07:19 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 20E3360015;
+	Mon, 15 Jun 2026 14:07:15 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id AF69D106C96A5;
+	Mon, 15 Jun 2026 16:07:04 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1781532433; h=from:subject:date:message-id:to:mime-version:content-type:
+	 content-transfer-encoding:content-language:in-reply-to:references;
+	bh=12cJkgmNpZePALEcCCii3OEhCzXZc//+4qAWWEONSCc=;
+	b=zdj55i0XH3giozHt1HpWm9UfrnYusBZsrgy8BIRAXrB12gRGFYttdKWdel5vEcrpKgU3pO
+	kBhdbrbf9QdwQ+fPiu2opW/5t31ghiReeLTz6M8Y8J0kWp7gICiIuQG7YVavMSQEiI06nh
+	XvF3aocbyXTK/ga1gpylQ0kuKXc0Um1owXiC90x7Ys+HJLXRgCbneEwZiDpMT/vI957D7Q
+	/Mj+jd+MV5kLA+KI0SHns+JUCPL7eeozwOQqR9YDjvnN/Pc7ZtsNkSm9VnBjFNVavlxozq
+	mJ5t9Eg7cg97pu12QnsGmSdYOCU/VEFxF7+986tvH4yr+YZ/rUitb7n14j6Eew==
+Message-ID: <867a39de-ccc2-4dcf-be24-ab2542d20ab6@bootlin.com>
+Date: Mon, 15 Jun 2026 16:07:03 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ahgaOigklcDCYvRp@stanley.mountain>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH net-next v7 05/12] net: phylink: support late PCS provider
+ attach
+To: Christian Marangi <ansuelsmth@gmail.com>,
+ Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller"
+ <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Simon Horman <horms@kernel.org>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+ Lorenzo Bianconi <lorenzo@kernel.org>, Heiner Kallweit
+ <hkallweit1@gmail.com>, Russell King <linux@armlinux.org.uk>,
+ Saravana Kannan <saravanak@kernel.org>,
+ Philipp Zabel <p.zabel@pengutronix.de>, Nathan Chancellor
+ <nathan@kernel.org>, Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
+ Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
+ netdev@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org,
+ llvm@lists.linux.dev
+References: <20260615122950.22281-1-ansuelsmth@gmail.com>
+ <20260615122950.22281-6-ansuelsmth@gmail.com>
+Content-Language: en-US
+From: Maxime Chevallier <maxime.chevallier@bootlin.com>
+In-Reply-To: <20260615122950.22281-6-ansuelsmth@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-5.16 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[bootlin.com,reject];
+	R_DKIM_ALLOW(-0.20)[bootlin.com:s=dkim];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-92394-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-92393-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:error27@gmail.com,m:keescook@chromium.org,m:corbet@lwn.net,m:gregkh@linuxfoundation.org,m:zack@upsilon.cc,m:rostedt@goodmis.org,m:labbott@kernel.org,m:julia.lawall@inria.fr,m:wenwen@cs.uga.edu,m:gustavoars@kernel.org,m:linux@leemhuis.info,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-hardening@vger.kernel.org,m:dawei.feng@seu.edu.cn,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[andriy.shevchenko@intel.com,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	FREEMAIL_TO(0.00)[gmail.com];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com,lunn.ch,davemloft.net,google.com,kernel.org,redhat.com,lwn.net,linuxfoundation.org,armlinux.org.uk,pengutronix.de,vger.kernel.org,lists.infradead.org,lists.linux.dev];
+	FORGED_SENDER(0.00)[maxime.chevallier@bootlin.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[28];
+	FORGED_RECIPIENTS(0.00)[m:ansuelsmth@gmail.com,m:andrew+netdev@lunn.ch,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:lorenzo@kernel.org,m:hkallweit1@gmail.com,m:linux@armlinux.org.uk,m:saravanak@kernel.org,m:p.zabel@pengutronix.de,m:nathan@kernel.org,m:nick.desaulniers+lkml@gmail.com,m:morbo@google.com,m:justinstitt@google.com,m:netdev@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-mediatek@lists.infradead.org,m:llvm@lists.linux.dev,m:andrew@lunn.ch,m:krzk@kernel.org,m:conor@kernel.org,m:nickdesaulniers@gmail.com,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	HAS_ORG_HEADER(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	DKIM_TRACE(0.00)[intel.com:+];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[andriy.shevchenko@intel.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[6];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[maxime.chevallier@bootlin.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[bootlin.com:+];
 	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,intel.com:dkim,intel.com:from_mime,black.igk.intel.com:mid]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,netdev,dt,lkml];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,bootlin.com:dkim,bootlin.com:mid,bootlin.com:from_mime,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: DCDA0686DC4
+X-Rspamd-Queue-Id: ACDD9686F88
 
-On Thu, May 28, 2026 at 01:34:34PM +0300, Dan Carpenter wrote:
-> On Fri, Mar 04, 2022 at 10:14:18AM -0800, Kees Cook wrote:
+Hi Christian,
 
-...
-
-> > +  x86_64 and arm64 defconfig builds with CONFIG_FOO_BAR=y using GCC
-> > +  11.2 show no new warnings, and LeakMagic no longer warns about this
-> > +  code path. As we don't have a FooBar device to test with, no runtime
-> > +  testing was able to be performed.
+On 6/15/26 14:29, Christian Marangi wrote:
+> Add support for late PCS provider attachment to a phylink instance.
+> This works by creating a global notifier for the PCS provider and
+> making each phylink instance that makes use of fwnode subscribe to
+> this notifier.
 > 
-> People have started sending commit messages in this exact template and
-> normally I would ask them resend with the meta commentary from this
-> paragraph below the --- cut off line.
+> The PCS notifier will emit the event FWNODE_PCS_PROVIDER_ADD every time
+> a new PCS provider is added.
 > 
-> Do we really want this "Compile tested only" stuff in the permanent git
-> log?
+> phylink will then react to this event and will call the new function
+> fwnode_phylink_pcs_get_from_fwnode() that will check if the PCS fwnode
+> provided by the event is present in the pcs-handle property of the
+> phylink instance.
+> 
+> If a related PCS is found, then such PCS is added to the phylink
+> instance PCS list.
+> 
+> Then we link the PCS to the phylink instance and we refresh the supported
+> interfaces of the phylink instance.
+> 
+> Finally we check if we are in a major_config_failed scenario and trigger
+> an interface reconfiguration in the next phylink resolve.
+> 
+> In the example scenario where the link was previously torn down due to
+> removal of PCS, the link will be established again as the PCS came back
+> and is now available to phylink.
+> 
+> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+> ---
 
-+1 here, can we rather avoid flooding commit messages with the meta, that
-anyways is available in lore.kernel.org archives?
+[...]
 
--- 
-With Best Regards,
-Andy Shevchenko
+> @@ -2151,6 +2204,10 @@ void phylink_destroy(struct phylink *pl)
+>  	if (pl->link_gpio)
+>  		gpiod_put(pl->link_gpio);
+>  
+> +	/* Unregister notifier for late PCS attach */
+> +	if (pl->fwnode_pcs_nb.notifier_call)
+> +		unregister_fwnode_pcs_notifier(&pl->fwnode_pcs_nb);
+
+I wanted to try this out, but I get :
+
+drivers/net/phy/phylink.c:2218:17: error: implicit declaration of function ‘unregister_fwnode_pcs_notifier’; did you mean ‘register_fwnode_pcs_notifier’? [-Werror=implicit-function-declaration]
+ 2218 |                 unregister_fwnode_pcs_notifier(&pl->fwnode_pcs_nb);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                 register_fwnode_pcs_notifier
+
+I guess you either need to stub this, or there's a missing Kconfig
+dependency somewhere
+
+Maxime
+
 
 
 
