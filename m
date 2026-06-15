@@ -1,61 +1,62 @@
-Return-Path: <linux-doc+bounces-92423-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92420-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Km09FPJeMGr4SAUAu9opvQ
-	(envelope-from <linux-doc+bounces-92423-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 22:22:10 +0200
+	id lgAJFoteMGrkSAUAu9opvQ
+	(envelope-from <linux-doc+bounces-92420-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 22:20:27 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id CCD7D689CE1
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 22:22:09 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id E759E689C93
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 22:20:26 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=J6MYpqbA;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92423-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-92423-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=amd.com header.s=selector1 header.b=XLf5jQiS;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92420-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-92420-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=amd.com;
 	arc=reject ("cv is fail on i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id AF17A30EC656
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 20:20:28 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 5EF99300FA9A
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 20:20:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E1AC23B6C15;
-	Mon, 15 Jun 2026 20:20:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 387EF2D0C8F;
+	Mon, 15 Jun 2026 20:20:25 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from CH5PR02CU005.outbound.protection.outlook.com (mail-northcentralusazon11012048.outbound.protection.outlook.com [40.107.200.48])
+Received: from DM5PR21CU001.outbound.protection.outlook.com (mail-centralusazon11011008.outbound.protection.outlook.com [52.101.62.8])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5AFF23B6378;
-	Mon, 15 Jun 2026 20:20:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA5EA3AD53F;
+	Mon, 15 Jun 2026 20:20:23 +0000 (UTC)
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781554827; cv=fail; b=YGeF+/enu2jdhBL2z+gRSx1AJ1HNAqUrL/ixcWW3hFl56DqgiUDLuPx7po19IMVTXKECStmW+VPhaafdbiQESQ4EGi8/3CamIzi/VDlzuKn2TgbQLMds4tPGTJ2k8J7ZjPhSrbY2LuV1AmqjG/kyYdZWKRQJn7LRn0V2TMfb5ws=
+	t=1781554825; cv=fail; b=aLJ7EM4L2TsMdwMRXUOn9sJTXb8f0lDlRjFBrM0MGaH44Y5lLUSgUyp8DNZ8oNJTna7wyTr0DV0dkhFManKrNqNTTTj1Edmr/nUs9gPoxAfOEhKco6riIzFmwdl5HXp1c/6ofpDTjT+Ei0iLTt7ZN7h5w+4iYEiiA7noO89n954=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781554827; c=relaxed/simple;
-	bh=mqKUQPjZu5yzapkTIvhPdhJYa0LrHTBScTEuqC2zUyc=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=F582f8uB2AG875H9V4l9KxpWId4JNBZPi7WnHwbh0KgxScowTEUmajwNw3V7/ddwGTK1VDCAe3H3LZ6iL2dmTNxq+1UxTFHOuadezQn7B5XNKEQ7HXp6jaTClsxDhSdH6XlqW+hp7c7d7GsaOXLcEw3/cwqyN618jX0WBsXKbCo=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=J6MYpqbA; arc=fail smtp.client-ip=40.107.200.48
+	s=arc-20240116; t=1781554825; c=relaxed/simple;
+	bh=VjDnRfiI2UYHvAXt8BWnFUE5/gkyINHqdGsxy+8aANw=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=HStldSC19hnQEc91hF56lyenTRXwEE5bNI9Q6HlIiiy18+tJPJeEPq5loZ1h15YSwyiIxvxm20JqxwkoFaY0+73Hw7QCmV+FXDsSMdy3tGKbyG/rU1cvDTw8a7syQHxWjTpAAiHfbshICVkozTXDleXhdxbkCrcP3mVJTPMt0lY=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=XLf5jQiS; arc=fail smtp.client-ip=52.101.62.8
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wrj1mH1pqeaGgOUXnUDiHTdtXNQgEpQxADCrtdjVQ185pcXVWtH2aTZ3LTDWN6jkqYCWNGD0mxFX3HjPP8JDGw+5Hq4ewuMaHaX1CbKZcN9ou1qWuzmiLI56sGvYgdh3K4TjKxuPJA8sDntGSXG5DZmkOTV+klTKpBZq5hdAmI7QPRHetCVcAqaQv5gs5EBqUk+bTZieq0sxd+YIAqfi4WPTraBQn1utqhHq/1PRUwa5kG0XvJvc4qedh+KyiuD6nJeVyK91uEJc80vYzaxKnz7A1p2tO4LvFrFGeNMSOjCaMTnZ5SDPsNWTgtl+h355kChkF4To2O2a6mXdcy678g==
+ b=Ik4W+6Jb1I9OjAGcR5ilQwA3eM/tPAYWpq7t7IlnQZAi035fszEJyKV+MnWGpTtuDQ4LZl8X33BlHu/k8V3TIddSSwVQqZMqSFw4z8F/Ph3ao0oAANIjFxvms53VIJlExDj+5ksEPFOm17GsOF9/ZpONniI9dmxKLJxN3vBKsEetrja8BgJMvONlWXYNArvn1wW4W1yCvkjq2QesExlUf7ptk0jTGdx1LdyQV4Lbz+NbG+IAc4rAjhNFGDxYjpH1zc6kkcWUq1Hjfpt3QxiDwVWCsnMU87YRkqmVXO/2H5xJBwC4hPY25Yb5g7WSVCQ+V3MpaX9ssVPDMeAod41zyw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uqtMHMOrgnEG8l+IWDoW4p0aMU3RrYXeq6vGdvIVEFc=;
- b=qNXtce88075XAModoPclzjJYAiU4J+6DQHV6gDmpEMAQGkL+yc4VLQqgQzJg9ujNVqM9hvbchs0pqjTZK95Aq93sRnDZAKzrhyDHHSTouDTvwnzvPNkMExezkPcD2mjUojkHsmBG/lRCED4RQWhvlfvRfL2CW6WIR8uyZRgLrPVKO8bf3B4OBuIepO6f1WAbFY1TyuKVKqfCwCu3nnOeGq7OeJ0OvumI1OURUB/Kshv9lOBjtu6dKZjUOg7Z8aWcm+/GB8xLbVeMasvBZ5KvMD88BodArp0rcXPoT913KXGDvMNxVeQi/vm7F/dyf//SaGRjaKHkIHhrrJjIegnZsA==
+ bh=/7qzu014ra39MD5fSByTQzBE9+aQ8RuCcIcrlABdHT4=;
+ b=yIgg6FLvC/oDi2Zn+aAb130EwalDdtIdnU5VOs9o+GcCvHhGju3nc/k6DT6rEwgF0d1fVid/ta0UCT2dcNnDZMiZUDqZKSlb4xLJH9rW/67SwirzegLQ26i2dqAyK/90hB5mzPQZbwNPK8DvWvCsKMFavQ9sLikhmGZR+JVpoDwi/RENxqyWejxGcNI2PioiEMoWPvq8GmCbaEsquWHKwJ9nRoFmiEHMibZeWmePKBfzOERspAq/Hz8r/FOh97j5bcNnSwGE9HcjWbiT25TUHSntzZui8WpxcIrLENXMPLJKJSr0eES54d9OV7gzHTlLXfp/u/tbv6WQ2gwdlBoCDA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=kernel.org smtp.mailfrom=amd.com; dmarc=pass
  (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uqtMHMOrgnEG8l+IWDoW4p0aMU3RrYXeq6vGdvIVEFc=;
- b=J6MYpqbA4Y5IF3AzQzGaUIbzg2G1jOG3yPKzsvREXzDr3IhRWIn3NVgQpnwohI4DQidHGnzq49UQXBPXWeNn2aHJbuORcdAcnlD59tVzkSgVEcpXmn24Nkx2MlzanYmjeNsKcq7YT6+JqTQXSPkxeFyxjJz2h+9ZiInhVU5xaxQ=
-Received: from DS1PR04CA0021.namprd04.prod.outlook.com (2603:10b6:8:243::16)
- by CH0PR12MB8505.namprd12.prod.outlook.com (2603:10b6:610:193::21) with
+ bh=/7qzu014ra39MD5fSByTQzBE9+aQ8RuCcIcrlABdHT4=;
+ b=XLf5jQiSqpuoNmS4eoE++jk6+YHO9iS//RYyuuEzyy9+fU9d8xKyHnHjlOpo5ROlasZojZ5bnYp8EqkpoIxbkvzIsOohDdx1bJfx1Vnrmu66qaqoZHFmCFgyAOhNRypgg4ADDwMaGAKb1OMf1RuKg/dHe4elOArLQIJPAoMTUZA=
+Received: from DS1PR04CA0023.namprd04.prod.outlook.com (2603:10b6:8:243::17)
+ by MN0PR12MB6125.namprd12.prod.outlook.com (2603:10b6:208:3c7::15) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.18; Mon, 15 Jun
- 2026 20:20:18 +0000
+ 2026 20:20:19 +0000
 Received: from DS2PEPF000061C6.namprd02.prod.outlook.com
- (2603:10b6:8:243:cafe::2a) by DS1PR04CA0021.outlook.office365.com
- (2603:10b6:8:243::16) with Microsoft SMTP Server (version=TLS1_3,
+ (2603:10b6:8:243:cafe::af) by DS1PR04CA0023.outlook.office365.com
+ (2603:10b6:8:243::17) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.18 via Frontend Transport; Mon,
  15 Jun 2026 20:20:18 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
@@ -67,27 +68,29 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 Received: from satlexmb08.amd.com (165.204.84.17) by
  DS2PEPF000061C6.mail.protection.outlook.com (10.167.23.73) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.139.8 via Frontend Transport; Mon, 15 Jun 2026 20:20:17 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb08.amd.com
+ 15.21.139.8 via Frontend Transport; Mon, 15 Jun 2026 20:20:18 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Mon, 15 Jun
- 2026 15:20:17 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
- (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 15:20:18 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Mon, 15 Jun
- 2026 13:20:17 -0700
+ 2026 15:20:18 -0500
 Received: from xsjtanmays50.xilinx.com (10.180.168.240) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.41 via Frontend
- Transport; Mon, 15 Jun 2026 15:20:16 -0500
+ Transport; Mon, 15 Jun 2026 15:20:17 -0500
 From: Tanmay Shah <tanmay.shah@amd.com>
 To: <andersson@kernel.org>, <mathieu.poirier@linaro.org>, <corbet@lwn.net>,
 	<skhan@linuxfoundation.org>, <arnaud.pouliquen@foss.st.com>
 CC: <linux-remoteproc@vger.kernel.org>, <linux-doc@vger.kernel.org>,
 	<linux-kernel@vger.kernel.org>, Tanmay Shah <tanmay.shah@amd.com>
-Subject: [PATCH v4 0/5] Enhance RPMsg buffer management
-Date: Mon, 15 Jun 2026 13:20:02 -0700
-Message-ID: <20260615202007.3484668-1-tanmay.shah@amd.com>
+Subject: [PATCH v4 1/5] rpmsg: virtio_rpmsg_bus: rename rbufs and sbufs
+Date: Mon, 15 Jun 2026 13:20:03 -0700
+Message-ID: <20260615202007.3484668-2-tanmay.shah@amd.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260615202007.3484668-1-tanmay.shah@amd.com>
+References: <20260615202007.3484668-1-tanmay.shah@amd.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -98,37 +101,37 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS2PEPF000061C6:EE_|CH0PR12MB8505:EE_
-X-MS-Office365-Filtering-Correlation-Id: 453a70a1-c87f-4b2c-4e35-08decb1b8477
+X-MS-TrafficTypeDiagnostic: DS2PEPF000061C6:EE_|MN0PR12MB6125:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8643f35d-ace2-43a1-d719-08decb1b84e5
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700016|82310400026|1800799024|376014|23010399003|18002099003|11063799006|56012099006;
+	BCL:0;ARA:13230040|23010399003|376014|82310400026|36860700016|1800799024|6133799003|56012099006|11063799006|22082099003|18002099003;
 X-Microsoft-Antispam-Message-Info:
-	HcqxansaNttTHH46+D9JaCJgnPAJbqZHtK5mQ4KaVD1ASR8iw9FqLvqI+t/jvB66gbDIgT75AyCR7AhWIiTS4CgoEITPLO5RHVXEjGh1MMbTjjugKaMN/lptlVrP6jU7jG4w7VSQxONaxrt56P8AgcBm7Jc9Y8fndGX3bRHFQVGNcWN2nwqjwnUJPUAnk14hxCAJ9osDIaMpWQbIHvBe0RGid4O4sNBaucOU1CJRn/8ybx85AvvNJfO7hnzLbMPlQCRqJFrCuaC6bzi+BmUCwmQznV/eX8FyhXn4DO9MM6F8BlyNDp8yvhMf8p20RHSTc2fpcnFQ6IeFuZHdqV7QSg8NfMFEn4B1HquxhDypve/2+hUrBRlGnMtCei2a2YCQz86uyaqqG9TRi1mY7ESD9QrEKHK8IxVk/EUcymvOj5rP43cbvYB/oIAfXlxOMC8ViBV5nkm40OqIy8FnJre2Qzfw0J5Ox45tfmB8OqEXpM/GiPPgWHM3F2XzrchpstDEjnSb6FtUwfypiSFM9+E293L482fx6b5ixBXVgkFQdCcaBiSZIW4bkDB+tlvBDcx8j3sy0OH+JIpXm6THkzSVOjBz7BzYH9T4+DNcecuPOXg7PhBCTzPfU9bQ3pEbYra6Y9E9Ee6dVSchSIvbCTMYrVwP905dJgvnpFNCsf7eIc2WHB06LjjFl0lU2bY+rsxgTvqfjyZusx1oXY55eXzxOPVfyEHfWiwBhoSgi8dkVlE=
+	SgQcyehud/Tll/UkAZbyUVOVYRBk8evHb7gzRdocRQjNvrx9XOsnrf5IVPsF7iZdp57MNx5YcquNHLIleyVXGz5T1nWziIuZMpkmbtqLvNwFKr40sfZmM68x8b54rwLxfgIWxTiIbvkMyh5h0/38IlVtxueaDBzaIGTStSX7cHq6ma7ArUo+boAj4HXjak6RfPMuCOE0klECrM3/PLTxMjOjueVxC6+O/3mC6+y2UYD5cgV+bhemqihWdnRnVGw//vOlH2+oByC+7AAwhwu6OmyGlptthY3Rk0k6LVKN4SmLkg4kto6nzKLSb1Divae0Bn6onHmWmmiPukXK/GbSBJLIj0qEBz8K5QGEdTk1au872r2kwr3wt5x+c4aujAquWrlZ8DyJXWRZOGQ+8jUyFcts1muAQn7J5rtsaxjB9tlVwvXtpwXLQQFC+hmrusyk3tN3nXfHep7SXLF+ZOOaj+pDV6AU+nGuMabl7lnUyoPw/E/BPiLEgwIQlVgqHcpA8rHzqO/g2So0gEo+NlTFSc95L05YeJ74IFQaKmNW5IaWFMajVAkbAK4lcCWjJ/Zts6rYngHiDec5rQgXLbJitWzt7mZrTnZDIW+3JVXbh9R2+v4UEXzhZFhvQzxyt7XV+myYt87+BDjsVKR2u5TuIW7bCCDZVaKHIx23HpstdLJMw5oMJS6wjwhKrPEZpNzNSL3SlmDmpddjog5H4u5/cA8b7SjPSbQXxvxof8z2aCA=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(82310400026)(1800799024)(376014)(23010399003)(18002099003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(376014)(82310400026)(36860700016)(1800799024)(6133799003)(56012099006)(11063799006)(22082099003)(18002099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	efuHvd9aLWTKp/JO6Zw+57RoycejyH8UzuOYnrj+xJ0RDmfM6s69TjGUPQ4Janyy314pGERObZyTi+BzlmlW2yzBD6uJlT7ZOwRSrsVjRZDGb/ltbOvVLoXXr4KqvexxLQhg8rJDB8B/CwwGC311E+NCrpqK/78vItiNfQdeqlXBMGdAeiPB1Wj9gsC40CxS9ALot5lPrXygkBRb8XyWR+4DYt4kOTwzLzu5TIsxdmK6u5vV4mW1+9izsSUu4k+4jObfS+KdOXux9+K0pdJIx6i3z/2a/AKNih8zs8N3bSSmNSeb85rgAzMPHgX0wdaR+/Uu9t/TB+dlAXbJUK3hsu2Ln1M7YAyDwZjkc76RpsaQbVgO92docWATVk4cb6JniaOM1o4+kAwWpjhxBCRZ9yPnckgMbsofh7sOgLgdpLO/plhw+hCoP8Yh+i55yJIh
+	uplIBS4FMVYKL0R4rH8vixS/VxmIukhI8IQIuP5VVTUAtx3KfcRXe3+NEdVafNkuvJ+zImrfwnAycOgRS9CNJ2D39nSWlbBbQSisP5L4tjFG/crg6mP23fNEToBpTSOkCr+Ql+Oo4Wf0yY60BChYeHZyYXkMenECAWw/Xn0OOtLcb3GxNr1TRU38t0EHijFUrx/aJ39YHDq20oO/YBc6bXuPWEEVA1MfsF2mphYKGbZWq+14nkbxW2f1qQ4gAilkqODthb5zI6pjOuc14GVRq4XZ2TZBUlkJUOSPNe+JU7IhkmBVn2ZAo/diP41qlasiDT9b9pnsqhqgMtA07yHq1Z2IVtlHo29PJdA9c9FBmT1uekc4d/m/DKDjn95MkHcREwo1JkXZAp/alMwvvdQfmANv3wJ7+qG9Di1hTt03o1fi2Azr8BQG4MR9CR/AO1jQ
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jun 2026 20:20:17.9310
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jun 2026 20:20:18.6648
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 453a70a1-c87f-4b2c-4e35-08decb1b8477
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8643f35d-ace2-43a1-d719-08decb1b84e5
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
 	DS2PEPF000061C6.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR12MB8505
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6125
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [1.34 / 15.00];
 	ARC_REJECT(1.00)[cv is fail on i=2];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -136,93 +139,121 @@ X-Spamd-Result: default: False [1.34 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-92423-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-92420-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS(0.00)[m:andersson@kernel.org,m:mathieu.poirier@linaro.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:arnaud.pouliquen@foss.st.com,m:linux-remoteproc@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:tanmay.shah@amd.com,s:lists@lfdr.de];
 	FORGED_SENDER(0.00)[tanmay.shah@amd.com,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[amd.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[tanmay.shah@amd.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp,amd.com:dkim,amd.com:mid,amd.com:from_mime];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,amd.com:dkim,amd.com:email,amd.com:mid,amd.com:from_mime,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo];
 	RCPT_COUNT_SEVEN(0.00)[9];
 	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCVD_COUNT_SEVEN(0.00)[9]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: CCD7D689CE1
+X-Rspamd-Queue-Id: E759E689C93
 
-Current design uses fixed (512 bytes) rpmsg buffer size in both rx and
-tx directions. This design is not suitable if the payload is larger than
-512 bytes or the payload is very small and doesn't need that much
-memory. Instead introduce new virtio feature to retrieve rpmsg tx buf
-size and rx buf size from the virtio config space in the resource table.
+rename variables with clear names.
+%s/rbufs/rx_bufs/
+%s/sbufs/tx_bufs/
+%s/last_sbuf/last_tx_buf/
 
-Changes in v4:
-  - Introduce new patch to modify rpmsg.rst documentation
-  - check version is always 1.
-  - check size field is same as size of struct virtio_rpmsg_config
-  - introduce alignment field
-  - check alignment field is power of 2
-  - check tx and rx buf size is aligned with alignment passed in the
-    structure
-  - check msg size is < MTU size
+Signed-off-by: Tanmay Shah <tanmay.shah@amd.com>
+---
+ drivers/rpmsg/virtio_rpmsg_bus.c | 28 ++++++++++++++--------------
+ 1 file changed, 14 insertions(+), 14 deletions(-)
 
-Changes in v3:
-  - new patch [1/4] that renames variables with clear names.
-  - %s/rbufs/rx_bufs/
-  - %s/sbufs/tx_bufs/
-  - %s/last_sbuf/last_tx_buf/
-  - add num_rx_buf and num_tx_buf in the documentation
-  - change version field from u16 to u8
-  - introduce size field in the rpmsg_virtio_config structure
-  - check version field is set to any non-zero value.
-  - check size field is not 0.
-  - Remove field for private config, as not needed for now.
-  - add documentation of rpmsg_virtio_config structure
-  - Check for error when retrieving MTU size in the sample driver
-  - %s/mtu/MTU/
-
-Changes in v2:
-  - Change author
-  - fix commit message with better explanation
-  - %s/sbuf/tx_buf
-  - %s/rbuf/rx_buf
-  - %s/num_rbuf/num_rx_buf/
-  - %s/num_sbuf/num_tx_buf/
-  - %s/sbuf_size/tx_buf_size/
-  - %s/rbuf_size/rx_buf_size/
-  - fix typo
-  - do not use ALIGN on buf size, rely on allocator
-  - make err msg more explicit, %s/vdev config:/bad vdev config/
-  - fix license and add AMD copyrights in the header virtio_rpmsg.h
-  - Assign bit 1 to VIRTIO_RPMSG_F_BUFSZ feature
-  - use __virtio32 over __u32
-  - add version field to virtio rpmsg config structure
-  - Introduce new patch to print rpmsg mtu size in the sample rpmsg driver
-  - move linux/virtio_rpmsg.h to linux/rpmsg/virtio_rpmsg.h
-
-Tanmay Shah (5):
-  rpmsg: virtio_rpmsg_bus: rename rbufs and sbufs
-  rpmsg: virtio_rpmsg_bus: allow different size of tx and rx bufs
-  rpmsg: virtio_rpmsg_bus: get buffer size from config space
-  docs: rpmsg: add virtio config space details
-  samples: rpmsg: add MTU size info
-
- Documentation/staging/rpmsg.rst     |  19 +++
- drivers/rpmsg/virtio_rpmsg_bus.c    | 185 +++++++++++++++++++++-------
- include/linux/rpmsg/virtio_rpmsg.h  |  50 ++++++++
- samples/rpmsg/rpmsg_client_sample.c |  20 ++-
- 4 files changed, 226 insertions(+), 48 deletions(-)
- create mode 100644 include/linux/rpmsg/virtio_rpmsg.h
-
-
-base-commit: 85842b61f64cac93d28e129d35193e329d463fd1
+diff --git a/drivers/rpmsg/virtio_rpmsg_bus.c b/drivers/rpmsg/virtio_rpmsg_bus.c
+index 5ae15111fb4f..773547479d15 100644
+--- a/drivers/rpmsg/virtio_rpmsg_bus.c
++++ b/drivers/rpmsg/virtio_rpmsg_bus.c
+@@ -35,13 +35,13 @@
+  * @vdev:	the virtio device
+  * @rvq:	rx virtqueue
+  * @svq:	tx virtqueue
+- * @rbufs:	kernel address of rx buffers
+- * @sbufs:	kernel address of tx buffers
+- * @num_bufs:	total number of buffers for rx and tx
++ * @rx_bufs:	kernel address of rx buffers
++ * @tx_bufs:	kernel address of tx buffers
++ * @num_bufs:   total number of buffers for rx and tx
+  * @buf_size:   size of one rx or tx buffer
+- * @last_sbuf:	index of last tx buffer used
++ * @last_tx_buf: index of last tx buffer used
+  * @bufs_dma:	dma base addr of the buffers
+- * @tx_lock:	protects svq and sbufs, to allow concurrent senders.
++ * @tx_lock:	protects svq and tx_bufs, to allow concurrent senders.
+  *		sending a message might require waking up a dozing remote
+  *		processor, which involves sleeping, hence the mutex.
+  * @endpoints:	idr of local endpoints, allows fast retrieval
+@@ -55,10 +55,10 @@
+ struct virtproc_info {
+ 	struct virtio_device *vdev;
+ 	struct virtqueue *rvq, *svq;
+-	void *rbufs, *sbufs;
++	void *rx_bufs, *tx_bufs;
+ 	unsigned int num_bufs;
+ 	unsigned int buf_size;
+-	int last_sbuf;
++	int last_tx_buf;
+ 	dma_addr_t bufs_dma;
+ 	struct mutex tx_lock;
+ 	struct idr endpoints;
+@@ -444,8 +444,8 @@ static void *get_a_tx_buf(struct virtproc_info *vrp)
+ 	 * either pick the next unused tx buffer
+ 	 * (half of our buffers are used for sending messages)
+ 	 */
+-	if (vrp->last_sbuf < vrp->num_bufs / 2)
+-		ret = vrp->sbufs + vrp->buf_size * vrp->last_sbuf++;
++	if (vrp->last_tx_buf < vrp->num_bufs / 2)
++		ret = vrp->tx_bufs + vrp->buf_size * vrp->last_tx_buf++;
+ 	/* or recycle a used one */
+ 	else
+ 		ret = virtqueue_get_buf(vrp->svq, &len);
+@@ -635,7 +635,7 @@ static __poll_t virtio_rpmsg_poll(struct rpmsg_endpoint *ept, struct file *filp,
+ 	 *   allocated buffers are used for transmit, hence num_bufs / 2), or,
+ 	 * - we ask the virtqueue if there's a buffer available
+ 	 */
+-	if (vrp->last_sbuf < vrp->num_bufs / 2 ||
++	if (vrp->last_tx_buf < vrp->num_bufs / 2 ||
+ 	    !virtqueue_enable_cb(vrp->svq))
+ 		mask |= EPOLLOUT;
+ 
+@@ -873,15 +873,15 @@ static int rpmsg_probe(struct virtio_device *vdev)
+ 		bufs_va, &vrp->bufs_dma);
+ 
+ 	/* half of the buffers is dedicated for RX */
+-	vrp->rbufs = bufs_va;
++	vrp->rx_bufs = bufs_va;
+ 
+ 	/* and half is dedicated for TX */
+-	vrp->sbufs = bufs_va + total_buf_space / 2;
++	vrp->tx_bufs = bufs_va + total_buf_space / 2;
+ 
+ 	/* set up the receive buffers */
+ 	for (i = 0; i < vrp->num_bufs / 2; i++) {
+ 		struct scatterlist sg;
+-		void *cpu_addr = vrp->rbufs + i * vrp->buf_size;
++		void *cpu_addr = vrp->rx_bufs + i * vrp->buf_size;
+ 
+ 		rpmsg_sg_init(&sg, cpu_addr, vrp->buf_size);
+ 
+@@ -980,7 +980,7 @@ static void rpmsg_remove(struct virtio_device *vdev)
+ 	vdev->config->del_vqs(vrp->vdev);
+ 
+ 	dma_free_coherent(vdev->dev.parent, total_buf_space,
+-			  vrp->rbufs, vrp->bufs_dma);
++			  vrp->rx_bufs, vrp->bufs_dma);
+ 
+ 	kfree(vrp);
+ }
 -- 
 2.34.1
 
