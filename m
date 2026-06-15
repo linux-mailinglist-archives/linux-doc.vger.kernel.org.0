@@ -1,55 +1,55 @@
-Return-Path: <linux-doc+bounces-92407-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92408-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id htXLKgoiMGpyOgUAu9opvQ
-	(envelope-from <linux-doc+bounces-92407-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 18:02:18 +0200
+	id 93ClImwiMGqZOgUAu9opvQ
+	(envelope-from <linux-doc+bounces-92408-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 18:03:56 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 69C966880BC
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 18:02:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F3372688139
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 18:03:55 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b=umzFcqov;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92407-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-92407-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b=J3kpCxug;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92408-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-92408-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=infradead.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 9E8B43061D69
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 15:52:53 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 10222304DE95
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 15:56:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1A9BD4071E9;
-	Mon, 15 Jun 2026 15:52:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6D685406287;
+	Mon, 15 Jun 2026 15:56:08 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F6DC4071C5
-	for <linux-doc@vger.kernel.org>; Mon, 15 Jun 2026 15:52:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5150C21ABD7
+	for <linux-doc@vger.kernel.org>; Mon, 15 Jun 2026 15:56:07 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781538754; cv=none; b=RokoTddZqyisu92JrzvdQ9I/6p/xKF9FIUsS1E0hRuK2Lbp5jeGKmGuWMZHXkpp7opWlNuCRp44lMjyWca/vA0hIVZsNVfgUsv3x+YY59yyBHdHpnNIs4d4u7nmOgtQVfO1nODXbZff+7QqZpuxTbfSEsZmnoylm6NHiERIt310=
+	t=1781538968; cv=none; b=Mvjg5lCM/+I+jfVFrU22CxETf9UfIq42CjHA93wjnWxYV3lKU7UgelS3ER7N3GtZg+3X3jDrr9ehblDEz2FObkj4JbpzlyaEVV8X9zrOBHbHlXN+o9vdpaA6lSY+dqRXVPyk/QQt/iptPOpHrBMHPWrAq5elAYayaE+3KXlUmJg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781538754; c=relaxed/simple;
-	bh=9zvR7d2bxGBv+6jx2yOWEKLbgx5o/0Xfw3q2VZIx1hg=;
+	s=arc-20240116; t=1781538968; c=relaxed/simple;
+	bh=rtmzt0Bo4UAjPWgd+rMqGOO1/v8DFoqmyLB/UYaScSY=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=gdNMWXRqX+gsJH7X3xF1kGa/UkPii5LjEIFKImbxHl+TSu70/oKP0R+be0vTh1fblASvK/BxOYV0Y1Vnf2Q2RYwqvHb+eOYyRk0REFr63RdWkJMIw8Lx5winjcapHTc2qV2YNbbRxdo3HDetteihrqm+cRoVMPf6wiDrLIH+s1Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=pass smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=umzFcqov; arc=none smtp.client-ip=198.137.202.133
+	 In-Reply-To:Content-Type; b=FshRCfDyHM0opXTdTlZ3SBbdVatOnRmu0Tv1eztGuJWQrhzHwOXP+SJmlAgGIMgM3+DszIBzFU+sYw67QH+bD4FVyIRQR6MnPAb5bb78vnUCy+22eBFJKqHpEXEwajwM54dLyQK9XEHUrMXMGNupg8y48oIScS2OOXSTrGBaLDc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=pass smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=J3kpCxug; arc=none smtp.client-ip=198.137.202.133
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
 	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=jYaV5WCXzBUAdoXR+h71EK4mIBc5FZDr4Uq9Fy4JLYA=; b=umzFcqovUxlfNwPfAhBF703Kh3
-	aW3la5uuEFqbzcmlrD1+g1ePSmRbsCUGGwLHETDELn0Bll0s4QlIlxoQLlU/3CG9dbFcRv4z9i6d/
-	qs/xywBJdJU8YyVAEZ8aMDamAZb3dXLWdAmfi4WWSs0PmjhcSvYGw7NTqeS3zVrvUza7LaVfdKGAT
-	wG/MjQ8s9ddfGKlypZEiqb+djCim0xERl4HVHJoDO2LbaeGvOOJ82orgXJHrEpSzcssvJnBTYMoLB
-	QuQUTuSrABcF/PDixkUY6VZEvvL6CWg+nMb+L+q6smrqWWzWXtGDVIUlIsf/eWU1BKifhwhlu6jnh
-	RLqktzPA==;
+	bh=iOACIpXJ++eOjLmCAoWdV1eL4i8X3VvemiOL2C7UM7I=; b=J3kpCxugR8s1sHli3OhscbtcKx
+	WO4EtfK1yf8Smic5vKUSG83sip1IR5Lt7pQH0lJVycYabO8BPxSyqkXusJeg5HFlqYCw7fL1aMyK2
+	GRW/utR4yB4b+zljvS0/5aYIV08ecNPcIWxIFqsLzH1VSlVySXQfIW+WWHQiu+6Igkbq0KS5jvPKW
+	6ibgxJvElOG+PLrvHORhHXlB8WKaIgB3VqU3vO3FBjfM5RNa+y722UTsS0k5TF9UgtMiQ2ifEb2zf
+	nhqF6mGlBl3XugRXsIcd4P1UYBBIL/lLzNo6iS0cGedL9Lew1rHcy29fuPUH7042k8HcHL/Red36I
+	NoUdBq/g==;
 Received: from [50.53.43.113] (helo=[192.168.254.34])
 	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wZ9by-0000000EWhY-3Gk3;
-	Mon, 15 Jun 2026 15:52:30 +0000
-Message-ID: <a0979be3-60ab-42f5-b0c5-20bbf1dec1f2@infradead.org>
-Date: Mon, 15 Jun 2026 08:52:28 -0700
+	id 1wZ9fS-0000000EX4y-1b9e;
+	Mon, 15 Jun 2026 15:56:06 +0000
+Message-ID: <2dd5b94c-0cd0-406f-9402-a26250b3c6b9@infradead.org>
+Date: Mon, 15 Jun 2026 08:56:05 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -57,16 +57,15 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] kdoc_parser: Move __acquires and friends to
- function_xforms
+Subject: Re: [PATCH] MAINTAINERS: Fix regex for kdoc
 To: "Matthew Wilcox (Oracle)" <willy@infradead.org>,
  Jonathan Corbet <corbet@lwn.net>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
  Shuah Khan <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org
-References: <20260615153340.2154110-1-willy@infradead.org>
+References: <20260615154057.2156589-1-willy@infradead.org>
 Content-Language: en-US
 From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20260615153340.2154110-1-willy@infradead.org>
+In-Reply-To: <20260615154057.2156589-1-willy@infradead.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
@@ -80,12 +79,12 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-92407-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_FROM(0.00)[bounces-92408-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:willy@infradead.org,m:corbet@lwn.net,m:mchehab+huawei@kernel.org,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:mchehab@kernel.org,s:lists@lfdr.de];
 	FORGED_SENDER(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:willy@infradead.org,m:corbet@lwn.net,m:mchehab+huawei@kernel.org,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:mchehab@kernel.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
@@ -101,76 +100,39 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 69C966880BC
+X-Rspamd-Queue-Id: F3372688139
 
 
 
-On 6/15/26 8:33 AM, Matthew Wilcox (Oracle) wrote:
-> These were originally added to "Transforms for structs and unions"
-> which led to warnings like:
+On 6/15/26 8:40 AM, Matthew Wilcox (Oracle) wrote:
+> The trailing '*' means "all files in this directory, but not
+> subdirectories" which excluded tools/lib/python/kdoc/.  This is surely
+> not intended.
 > 
-> ./include/linux/kref.h:94: WARNING: Invalid C declaration: Expected end of definition. [error at 92]
->   int kref_put_lock (struct kref *kref, void (*release)(struct kref *kref), spinlock_t *lock) __cond_acquires(true# lock)
-> 
-> and the documentation was a little messed up as a result.  They should
-> have been added to "Transforms for function prototypes" since they are
-> not valid decorations for unions or structs.
-> 
-> Fixes: 85c2a51357f7 ("docs: kdoc_parser: move nested match transforms to xforms_lists.py")
 > Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
-
-I hope that this same patch is in docs-next:
-  https://lore.kernel.org/all/20260505221548.163751-1-rdunlap@infradead.org/
-
-Jon replied with "Applied".
-
 > ---
->  tools/lib/python/kdoc/xforms_lists.py | 20 ++++++++++----------
->  1 file changed, 10 insertions(+), 10 deletions(-)
+>  MAINTAINERS | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/tools/lib/python/kdoc/xforms_lists.py b/tools/lib/python/kdoc/xforms_lists.py
-> index f6ea9efb11ae..150fbc90f085 100644
-> --- a/tools/lib/python/kdoc/xforms_lists.py
-> +++ b/tools/lib/python/kdoc/xforms_lists.py
-> @@ -48,16 +48,6 @@ class CTransforms:
->          (CMatch("DEFINE_DMA_UNMAP_ADDR"), r"dma_addr_t \1"),
->          (CMatch("DEFINE_DMA_UNMAP_LEN"), r"__u32 \1"),
->          (CMatch("VIRTIO_DECLARE_FEATURES"), r"union { u64 \1; u64 \1_array[VIRTIO_FEATURES_U64S]; }"),
-> -        (CMatch("__cond_acquires"), ""),
-> -        (CMatch("__cond_releases"), ""),
-> -        (CMatch("__acquires"), ""),
-> -        (CMatch("__releases"), ""),
-> -        (CMatch("__must_hold"), ""),
-> -        (CMatch("__must_not_hold"), ""),
-> -        (CMatch("__must_hold_shared"), ""),
-> -        (CMatch("__cond_acquires_shared"), ""),
-> -        (CMatch("__acquires_shared"), ""),
-> -        (CMatch("__releases_shared"), ""),
->          (CMatch("__attribute__"), ""),
->  
->          #
-> @@ -98,6 +88,16 @@ class CTransforms:
->          (CMatch("__diagnose_as"), ""),
->          (CMatch("DECL_BUCKET_PARAMS"), r"\1, \2"),
->          (CMatch("__no_context_analysis"), ""),
-> +        (CMatch("__cond_acquires"), ""),
-> +        (CMatch("__cond_releases"), ""),
-> +        (CMatch("__acquires"), ""),
-> +        (CMatch("__releases"), ""),
-> +        (CMatch("__must_hold"), ""),
-> +        (CMatch("__must_not_hold"), ""),
-> +        (CMatch("__must_hold_shared"), ""),
-> +        (CMatch("__cond_acquires_shared"), ""),
-> +        (CMatch("__acquires_shared"), ""),
-> +        (CMatch("__releases_shared"), ""),
->          (CMatch("__attribute_const__"), ""),
->          (CMatch("__attribute__"), ""),
->  
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 0d94420eae3d..999957a3e0ca 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -7653,7 +7653,7 @@ S:	Maintained
+>  P:	Documentation/doc-guide/maintainer-profile.rst
+>  T:	git git://git.lwn.net/linux.git docs-next
+>  F:	Documentation/
+> -F:	tools/lib/python/*
+> +F:	tools/lib/python/
+>  F:	tools/docs/
+>  F:	tools/net/ynl/pyynl/lib/doc_generator.py
+>  X:	Documentation/ABI/
 
+Acked-by: Randy Dunlap <rdunlap@infradead.org>
+Thanks.
 
 -- 
 ~Randy
-
 
