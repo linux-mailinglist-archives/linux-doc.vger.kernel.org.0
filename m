@@ -1,155 +1,229 @@
-Return-Path: <linux-doc+bounces-92419-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92423-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id asqeEoleMGrjSAUAu9opvQ
-	(envelope-from <linux-doc+bounces-92419-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 22:20:25 +0200
+	id Km09FPJeMGr4SAUAu9opvQ
+	(envelope-from <linux-doc+bounces-92423-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 22:22:10 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 972D7689C8E
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 22:20:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CCD7D689CE1
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 22:22:09 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=google.com header.s=20251104 header.b=OlBfhli9;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92419-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-92419-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=reject) header.from=google.com;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=amd.com header.s=selector1 header.b=J6MYpqbA;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92423-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-92423-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=amd.com;
+	arc=reject ("cv is fail on i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 03D043094CAB
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 20:19:46 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id AF17A30EC656
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 20:20:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4A5FA3B530A;
-	Mon, 15 Jun 2026 20:19:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E1AC23B6C15;
+	Mon, 15 Jun 2026 20:20:27 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oo1-f54.google.com (mail-oo1-f54.google.com [209.85.161.54])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from CH5PR02CU005.outbound.protection.outlook.com (mail-northcentralusazon11012048.outbound.protection.outlook.com [40.107.200.48])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2F473AFAF1
-	for <linux-doc@vger.kernel.org>; Mon, 15 Jun 2026 20:19:43 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781554785; cv=none; b=UxHtTXIWLZxlbO949xMSwCYSJW8Jqm6IrBtRQSb85DtQIL19Lo5XwcsQ/HBd+PDAipEQlZ60ipe8/tOWUP7rG7SuS+9aCn1rUylIhxA8fmqhBo9dNjneG/pEsROmR6cz8gbi1Eo+z/PcbP9HRVAlTG/X2j13VvWBH+RhPFUho2k=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781554785; c=relaxed/simple;
-	bh=061ZRpXOvpEUBfQoZbaaLWrq4ZyrfP7xZUXohlU6zt0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=k0ufrvBAuTLIVxG406P9TzhjDIctYky5CLKmdZy2kd0Ei2gnbpefiwjTRN61Nby36mW47jsSH3XCQbQKZk7wOsleStS+RWW1Ncnh0TMEaNj4ZTL5zLDIXKWJxs3Fz+tnyq+ukRa4lqOX9D799FOcSv6nI4RrhCEa+6C0PPrM8tM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=OlBfhli9; arc=none smtp.client-ip=209.85.161.54
-Received: by mail-oo1-f54.google.com with SMTP id 006d021491bc7-69de16f5f79so2069293eaf.0
-        for <linux-doc@vger.kernel.org>; Mon, 15 Jun 2026 13:19:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1781554783; x=1782159583; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=62CFI3r/uqAq54jIdUJdPm0vilsCjqWfRG5bIQ6BFms=;
-        b=OlBfhli9HS/irnPOvqtCmZMwLE/1QFPVrzjc0fcCNOtgDfmZV7sZr1daVDzSC3I5Dh
-         MkWvlB+kzGyP38OBJEWpgmMqSq5mFoqkRb/Nugu6FdzmC1ijk1PL6Tlfg+uYYzn4FVcm
-         3OemZpSypRr72VX/jxAgftjMmJ0ykQqaQnreopTNVAjuifY8rJWqj/u6sov/ko/BN5j/
-         FBTkbQFc9Qex/pQQKR4AtQXDLr5C4lz6u/3XMo43hIxhTZ3FnQd2dwgT28oByr5zQW0o
-         zlxDG+rg8Qw5MsMMwGVtV6+z/BeVFsDTBwwTv9Du0dObieJMP4degkMB3T3AWUa5lHhw
-         drRA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781554783; x=1782159583;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=62CFI3r/uqAq54jIdUJdPm0vilsCjqWfRG5bIQ6BFms=;
-        b=An/Nd2KysI3h7d3aznv1AeoVFzqeD6epQ+bCnmoM7mrrHl2rBeGSIwFpuZXkKiy7qA
-         3zh/AmspNUKgzUJi2XUN2QvKTeBXlJ8cWHtv8/3Qgu7LghejczI8qbJQAh6zdujlRRuq
-         i+h5QX3HmzvY6v6CXegmS4xVlf6r2zm02s2TT03QWF1SysUmywLJQ0inWaVgjUmW+uxG
-         pg4eTxN+M4OY8ENcgsVO2XQCHmdcwE3uIiPZDxGGixtoYaF3O8nalE5HyL/b2Z7l2THX
-         lIsodGFa3SjvJBz/R/obJ6qJcTiW/il6WFozVXsmM6Pjkahhk1hzz7wxtQcFexv4BkP/
-         m1Xg==
-X-Forwarded-Encrypted: i=1; AFNElJ8IAT6sRRyCHYFJOw8B+/Ed2ZE1DvcNhUMACOQJjOa4YAA8VNiM6e9KW/uGIxBCFcTVzRd9es1bdDQ=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy6riZ4lFa0Fh4Hlsaq9cZ2xz0HHcdKjCt0geFtwPPA9iCzfNvt
-	gNZtpqitFagAPzdC7i+LpQVB3Ld2MSKL7UlrdQB+F1KV0j7CCp0VOvRs3AEYgwGofQ==
-X-Gm-Gg: Acq92OE1M+jMzhQirIxP98IUMAS9+XxmWCi0ZUojvC2qGlFTWdYwwWt5JTYuIaMHx+n
-	wiOWzsGeFWDOZi+HmJgkROB1qxWeWWF/VIGLMQrNbACMFQt+I0scKD+Ipd4TqRzpk3pjMpL6FF7
-	HTg3x+uqwfN4Fj+KRq3jbvvuU37/m4pNdJi6K4OCdhkSvw9PiQWnVV+1zBhsB9PWBhOynAsruMS
-	iOgiF6HDYoybWORT7MFzF5eb437pOFSpNK4qScC6QdUvcEDtr08Fr3GBk2X+X5pqBefoT95nx5m
-	LXpGIjo+6S2Pp5C0Pw1geeNf/gy2ifUftBJAuAVgAo4PRORg5tnVd0qu5kYNQWRmmxK/caRonqr
-	N9fhW4PfcOZKBcsWiD/YCgTh/7AK1kHMHcXqX86iYV2fRz/zzjbXp7X4dnvh1TR3PQhsZiGJlox
-	ikIpxEPWid3OrHcWk1EfLPnplXyhOObJ9VHdlnpvc6+arqM43V2hLuqh1r8B4pUie50lHd
-X-Received: by 2002:a05:6820:8187:b0:696:1a25:fdc9 with SMTP id 006d021491bc7-69edc6d452dmr9662928eaf.28.1781554782286;
-        Mon, 15 Jun 2026 13:19:42 -0700 (PDT)
-Received: from google.com (57.221.30.34.bc.googleusercontent.com. [34.30.221.57])
-        by smtp.gmail.com with ESMTPSA id 006d021491bc7-69f00f50340sm3679813eaf.13.2026.06.15.13.19.41
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 Jun 2026 13:19:41 -0700 (PDT)
-Date: Mon, 15 Jun 2026 20:19:39 +0000
-From: Neill Kapron <nkapron@google.com>
-To: Greg KH <gregkh@linuxfoundation.org>
-Cc: corbet@lwn.net, skhan@linuxfoundation.org,
-	Paul Cercueil <paul@crapouillou.net>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
-	Simona Vetter <simona.vetter@ffwll.ch>, linux-usb@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	kernel-team@android.com
-Subject: Re: [PATCH 1/3] usb: gadget: f_fs: Initialize epfile->in early to
- fix endpoint direction checks
-Message-ID: <ajBeWzttjurOKGV0@google.com>
-References: <20260614181006.3648010-1-nkapron@google.com>
- <20260614181006.3648010-2-nkapron@google.com>
- <2026061533-oval-buckle-b90e@gregkh>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5AFF23B6378;
+	Mon, 15 Jun 2026 20:20:26 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1781554827; cv=fail; b=YGeF+/enu2jdhBL2z+gRSx1AJ1HNAqUrL/ixcWW3hFl56DqgiUDLuPx7po19IMVTXKECStmW+VPhaafdbiQESQ4EGi8/3CamIzi/VDlzuKn2TgbQLMds4tPGTJ2k8J7ZjPhSrbY2LuV1AmqjG/kyYdZWKRQJn7LRn0V2TMfb5ws=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1781554827; c=relaxed/simple;
+	bh=mqKUQPjZu5yzapkTIvhPdhJYa0LrHTBScTEuqC2zUyc=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=F582f8uB2AG875H9V4l9KxpWId4JNBZPi7WnHwbh0KgxScowTEUmajwNw3V7/ddwGTK1VDCAe3H3LZ6iL2dmTNxq+1UxTFHOuadezQn7B5XNKEQ7HXp6jaTClsxDhSdH6XlqW+hp7c7d7GsaOXLcEw3/cwqyN618jX0WBsXKbCo=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=J6MYpqbA; arc=fail smtp.client-ip=40.107.200.48
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=wrj1mH1pqeaGgOUXnUDiHTdtXNQgEpQxADCrtdjVQ185pcXVWtH2aTZ3LTDWN6jkqYCWNGD0mxFX3HjPP8JDGw+5Hq4ewuMaHaX1CbKZcN9ou1qWuzmiLI56sGvYgdh3K4TjKxuPJA8sDntGSXG5DZmkOTV+klTKpBZq5hdAmI7QPRHetCVcAqaQv5gs5EBqUk+bTZieq0sxd+YIAqfi4WPTraBQn1utqhHq/1PRUwa5kG0XvJvc4qedh+KyiuD6nJeVyK91uEJc80vYzaxKnz7A1p2tO4LvFrFGeNMSOjCaMTnZ5SDPsNWTgtl+h355kChkF4To2O2a6mXdcy678g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=uqtMHMOrgnEG8l+IWDoW4p0aMU3RrYXeq6vGdvIVEFc=;
+ b=qNXtce88075XAModoPclzjJYAiU4J+6DQHV6gDmpEMAQGkL+yc4VLQqgQzJg9ujNVqM9hvbchs0pqjTZK95Aq93sRnDZAKzrhyDHHSTouDTvwnzvPNkMExezkPcD2mjUojkHsmBG/lRCED4RQWhvlfvRfL2CW6WIR8uyZRgLrPVKO8bf3B4OBuIepO6f1WAbFY1TyuKVKqfCwCu3nnOeGq7OeJ0OvumI1OURUB/Kshv9lOBjtu6dKZjUOg7Z8aWcm+/GB8xLbVeMasvBZ5KvMD88BodArp0rcXPoT913KXGDvMNxVeQi/vm7F/dyf//SaGRjaKHkIHhrrJjIegnZsA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=kernel.org smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=uqtMHMOrgnEG8l+IWDoW4p0aMU3RrYXeq6vGdvIVEFc=;
+ b=J6MYpqbA4Y5IF3AzQzGaUIbzg2G1jOG3yPKzsvREXzDr3IhRWIn3NVgQpnwohI4DQidHGnzq49UQXBPXWeNn2aHJbuORcdAcnlD59tVzkSgVEcpXmn24Nkx2MlzanYmjeNsKcq7YT6+JqTQXSPkxeFyxjJz2h+9ZiInhVU5xaxQ=
+Received: from DS1PR04CA0021.namprd04.prod.outlook.com (2603:10b6:8:243::16)
+ by CH0PR12MB8505.namprd12.prod.outlook.com (2603:10b6:610:193::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.18; Mon, 15 Jun
+ 2026 20:20:18 +0000
+Received: from DS2PEPF000061C6.namprd02.prod.outlook.com
+ (2603:10b6:8:243:cafe::2a) by DS1PR04CA0021.outlook.office365.com
+ (2603:10b6:8:243::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.18 via Frontend Transport; Mon,
+ 15 Jun 2026 20:20:18 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ DS2PEPF000061C6.mail.protection.outlook.com (10.167.23.73) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.139.8 via Frontend Transport; Mon, 15 Jun 2026 20:20:17 +0000
+Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Mon, 15 Jun
+ 2026 15:20:17 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
+ (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Mon, 15 Jun
+ 2026 13:20:17 -0700
+Received: from xsjtanmays50.xilinx.com (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.41 via Frontend
+ Transport; Mon, 15 Jun 2026 15:20:16 -0500
+From: Tanmay Shah <tanmay.shah@amd.com>
+To: <andersson@kernel.org>, <mathieu.poirier@linaro.org>, <corbet@lwn.net>,
+	<skhan@linuxfoundation.org>, <arnaud.pouliquen@foss.st.com>
+CC: <linux-remoteproc@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, Tanmay Shah <tanmay.shah@amd.com>
+Subject: [PATCH v4 0/5] Enhance RPMsg buffer management
+Date: Mon, 15 Jun 2026 13:20:02 -0700
+Message-ID: <20260615202007.3484668-1-tanmay.shah@amd.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <2026061533-oval-buckle-b90e@gregkh>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS2PEPF000061C6:EE_|CH0PR12MB8505:EE_
+X-MS-Office365-Filtering-Correlation-Id: 453a70a1-c87f-4b2c-4e35-08decb1b8477
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700016|82310400026|1800799024|376014|23010399003|18002099003|11063799006|56012099006;
+X-Microsoft-Antispam-Message-Info:
+	HcqxansaNttTHH46+D9JaCJgnPAJbqZHtK5mQ4KaVD1ASR8iw9FqLvqI+t/jvB66gbDIgT75AyCR7AhWIiTS4CgoEITPLO5RHVXEjGh1MMbTjjugKaMN/lptlVrP6jU7jG4w7VSQxONaxrt56P8AgcBm7Jc9Y8fndGX3bRHFQVGNcWN2nwqjwnUJPUAnk14hxCAJ9osDIaMpWQbIHvBe0RGid4O4sNBaucOU1CJRn/8ybx85AvvNJfO7hnzLbMPlQCRqJFrCuaC6bzi+BmUCwmQznV/eX8FyhXn4DO9MM6F8BlyNDp8yvhMf8p20RHSTc2fpcnFQ6IeFuZHdqV7QSg8NfMFEn4B1HquxhDypve/2+hUrBRlGnMtCei2a2YCQz86uyaqqG9TRi1mY7ESD9QrEKHK8IxVk/EUcymvOj5rP43cbvYB/oIAfXlxOMC8ViBV5nkm40OqIy8FnJre2Qzfw0J5Ox45tfmB8OqEXpM/GiPPgWHM3F2XzrchpstDEjnSb6FtUwfypiSFM9+E293L482fx6b5ixBXVgkFQdCcaBiSZIW4bkDB+tlvBDcx8j3sy0OH+JIpXm6THkzSVOjBz7BzYH9T4+DNcecuPOXg7PhBCTzPfU9bQ3pEbYra6Y9E9Ee6dVSchSIvbCTMYrVwP905dJgvnpFNCsf7eIc2WHB06LjjFl0lU2bY+rsxgTvqfjyZusx1oXY55eXzxOPVfyEHfWiwBhoSgi8dkVlE=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(82310400026)(1800799024)(376014)(23010399003)(18002099003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	efuHvd9aLWTKp/JO6Zw+57RoycejyH8UzuOYnrj+xJ0RDmfM6s69TjGUPQ4Janyy314pGERObZyTi+BzlmlW2yzBD6uJlT7ZOwRSrsVjRZDGb/ltbOvVLoXXr4KqvexxLQhg8rJDB8B/CwwGC311E+NCrpqK/78vItiNfQdeqlXBMGdAeiPB1Wj9gsC40CxS9ALot5lPrXygkBRb8XyWR+4DYt4kOTwzLzu5TIsxdmK6u5vV4mW1+9izsSUu4k+4jObfS+KdOXux9+K0pdJIx6i3z/2a/AKNih8zs8N3bSSmNSeb85rgAzMPHgX0wdaR+/Uu9t/TB+dlAXbJUK3hsu2Ln1M7YAyDwZjkc76RpsaQbVgO92docWATVk4cb6JniaOM1o4+kAwWpjhxBCRZ9yPnckgMbsofh7sOgLgdpLO/plhw+hCoP8Yh+i55yJIh
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jun 2026 20:20:17.9310
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 453a70a1-c87f-4b2c-4e35-08decb1b8477
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DS2PEPF000061C6.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR12MB8505
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+X-Spamd-Result: default: False [1.34 / 15.00];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[google.com:+];
-	TAGGED_FROM(0.00)[bounces-92419-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:gregkh@linuxfoundation.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:paul@crapouillou.net,m:christian.koenig@amd.com,m:simona.vetter@ffwll.ch,m:linux-usb@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:kernel-team@android.com,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[nkapron@google.com,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	TAGGED_FROM(0.00)[bounces-92423-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:andersson@kernel.org,m:mathieu.poirier@linaro.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:arnaud.pouliquen@foss.st.com,m:linux-remoteproc@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:tanmay.shah@amd.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[tanmay.shah@amd.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[amd.com:+];
 	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[nkapron@google.com,linux-doc@vger.kernel.org];
-	MISSING_XM_UA(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[tanmay.shah@amd.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp,amd.com:dkim,amd.com:mid,amd.com:from_mime];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	ALIAS_RESOLVED(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCVD_COUNT_SEVEN(0.00)[9]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 972D7689C8E
+X-Rspamd-Queue-Id: CCD7D689CE1
 
-On Mon, Jun 15, 2026 at 04:30:49AM +0200, Greg KH wrote:
-> On Sun, Jun 14, 2026 at 06:10:00PM +0000, Neill Kapron wrote:
-> > 
-> > Fixes: 7b07a2a7ca02 ("usb: gadget: functionfs: Add DMABUF import interface")
-> > Assisted-by: Antigravity:gemini-3.1-pro
-> > Signed-off-by: Neill Kapron <nkapron@google.com>
-> > ---
-> >  drivers/usb/gadget/function/f_fs.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> This should also go to stable, right?
+Current design uses fixed (512 bytes) rpmsg buffer size in both rx and
+tx directions. This design is not suitable if the payload is larger than
+512 bytes or the payload is very small and doesn't need that much
+memory. Instead introduce new virtio feature to retrieve rpmsg tx buf
+size and rx buf size from the virtio config space in the resource table.
 
-Yes, I will update v2 with the Cc: stable@vger.kernel.org tag.
+Changes in v4:
+  - Introduce new patch to modify rpmsg.rst documentation
+  - check version is always 1.
+  - check size field is same as size of struct virtio_rpmsg_config
+  - introduce alignment field
+  - check alignment field is power of 2
+  - check tx and rx buf size is aligned with alignment passed in the
+    structure
+  - check msg size is < MTU size
 
-Thanks,
-Neill
+Changes in v3:
+  - new patch [1/4] that renames variables with clear names.
+  - %s/rbufs/rx_bufs/
+  - %s/sbufs/tx_bufs/
+  - %s/last_sbuf/last_tx_buf/
+  - add num_rx_buf and num_tx_buf in the documentation
+  - change version field from u16 to u8
+  - introduce size field in the rpmsg_virtio_config structure
+  - check version field is set to any non-zero value.
+  - check size field is not 0.
+  - Remove field for private config, as not needed for now.
+  - add documentation of rpmsg_virtio_config structure
+  - Check for error when retrieving MTU size in the sample driver
+  - %s/mtu/MTU/
+
+Changes in v2:
+  - Change author
+  - fix commit message with better explanation
+  - %s/sbuf/tx_buf
+  - %s/rbuf/rx_buf
+  - %s/num_rbuf/num_rx_buf/
+  - %s/num_sbuf/num_tx_buf/
+  - %s/sbuf_size/tx_buf_size/
+  - %s/rbuf_size/rx_buf_size/
+  - fix typo
+  - do not use ALIGN on buf size, rely on allocator
+  - make err msg more explicit, %s/vdev config:/bad vdev config/
+  - fix license and add AMD copyrights in the header virtio_rpmsg.h
+  - Assign bit 1 to VIRTIO_RPMSG_F_BUFSZ feature
+  - use __virtio32 over __u32
+  - add version field to virtio rpmsg config structure
+  - Introduce new patch to print rpmsg mtu size in the sample rpmsg driver
+  - move linux/virtio_rpmsg.h to linux/rpmsg/virtio_rpmsg.h
+
+Tanmay Shah (5):
+  rpmsg: virtio_rpmsg_bus: rename rbufs and sbufs
+  rpmsg: virtio_rpmsg_bus: allow different size of tx and rx bufs
+  rpmsg: virtio_rpmsg_bus: get buffer size from config space
+  docs: rpmsg: add virtio config space details
+  samples: rpmsg: add MTU size info
+
+ Documentation/staging/rpmsg.rst     |  19 +++
+ drivers/rpmsg/virtio_rpmsg_bus.c    | 185 +++++++++++++++++++++-------
+ include/linux/rpmsg/virtio_rpmsg.h  |  50 ++++++++
+ samples/rpmsg/rpmsg_client_sample.c |  20 ++-
+ 4 files changed, 226 insertions(+), 48 deletions(-)
+ create mode 100644 include/linux/rpmsg/virtio_rpmsg.h
+
+
+base-commit: 85842b61f64cac93d28e129d35193e329d463fd1
+-- 
+2.34.1
 
 
