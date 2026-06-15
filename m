@@ -1,142 +1,165 @@
-Return-Path: <linux-doc+bounces-92356-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92357-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 0Nw0MpNaL2qC+wQAu9opvQ
-	(envelope-from <linux-doc+bounces-92356-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 03:51:15 +0200
+	id NDmKAAhkL2qC/gQAu9opvQ
+	(envelope-from <linux-doc+bounces-92357-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 04:31:36 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1B42682CB2
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 03:51:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4B6DD682DFF
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 04:31:35 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=none;
-	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=lge.com (policy=none);
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92356-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-92356-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=linuxfoundation.org header.s=korg header.b=c4AsWxVo;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92357-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-92357-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=linuxfoundation.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 00B20300DE0A
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 01:50:45 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 9A1BC3006B7D
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 02:31:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1E1261FC7C5;
-	Mon, 15 Jun 2026 01:50:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 12812238C0A;
+	Mon, 15 Jun 2026 02:31:27 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from lgeamrelo03.lge.com (lgeamrelo03.lge.com [156.147.51.102])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E18481F1534
-	for <linux-doc@vger.kernel.org>; Mon, 15 Jun 2026 01:50:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0163E405F7;
+	Mon, 15 Jun 2026 02:31:25 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781488245; cv=none; b=t/Vu5FvEHfpQ1hNRZbGOWtYyGepvxiZZrVmSFHKgqeZojhcNKLFeQNhTKsidS+bsVm3y2Md4ePEibpOQKK8iA3J14ix5urYmoYh/9/Z8O/HdwMFa4aprbh0YR56u4cKsuoHZ+R5pUyqP/sXAk1UKSaE44OCCmml5m7bYcquz2iE=
+	t=1781490687; cv=none; b=VNarHdKcb9UHMmiw0I+KCSyB+sjWE/uJHf88c7yr+1ZBE6Gb8+NFcNZMvRLIm0+kJiJGvfrxuA81huy6YO25YBmaUnRfqSh5Bgy0Z3VIGHVaTnpDbAMZoREeYWAv8SB9TTHUPLp5KanCBTCvoEM0hm5ms9EAI1sFBqsXAyVDYXA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781488245; c=relaxed/simple;
-	bh=iwPaf5O1p8Bozvyw6mAQYTVebmpFDgP8zVaHzs8U/ik=;
+	s=arc-20240116; t=1781490687; c=relaxed/simple;
+	bh=3JVxYVotMtVZqNJmKlpbZOp2o8JCRWwfZ3gt/Rwo2m0=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=k4plPozHRaEEEp2uuZVrwrLZqAL//OhFoxAYP4QsaKAUKTTtfgqu/1NKYpdvD/WLRjyxuuWX3RPX95dUrkkQzd2d/IweGFK2fK8Q3n19xpY9+sTdHIYV1JqdaLUyJiOGW+CfnbOnVtLLBGJIgL/dqsJpoV0uonlIRsRSaoaWyHc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lge.com; spf=pass smtp.mailfrom=lge.com; arc=none smtp.client-ip=156.147.51.102
-Received: from unknown (HELO yjaykim-PowerEdge-T330) (10.177.112.156)
-	by 156.147.51.102 with ESMTP; 15 Jun 2026 10:50:38 +0900
-X-Original-SENDERIP: 10.177.112.156
-X-Original-MAILFROM: youngjun.park@lge.com
-Date: Mon, 15 Jun 2026 10:50:38 +0900
-From: YoungJun Park <youngjun.park@lge.com>
-To: Jianyue Wu <wujianyue000@gmail.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>,
-	Christoph Hellwig <hch@lst.de>, Chris Li <chrisl@kernel.org>,
-	Baoquan He <bhe@redhat.com>, Nhat Pham <nphamcs@gmail.com>,
-	Barry Song <baohua@kernel.org>, Kairui Song <kasong@tencent.com>,
-	Kemeng Shi <shikemeng@huaweicloud.com>,
-	Minchan Kim <minchan@kernel.org>,
-	Sergey Senozhatsky <senozhatsky@chromium.org>,
-	Jens Axboe <axboe@kernel.dk>,
-	"Matthew Wilcox (Oracle)" <willy@infradead.org>,
-	Jan Kara <jack@suse.cz>, linux-mm@kvack.org,
-	linux-kernel@vger.kernel.org, linux-block@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH 1/3] mm/page_io: let block drivers register custom swap
- I/O ops
-Message-ID: <ai9abo7GwMl+g43G@yjaykim-PowerEdge-T330>
-References: <20260614-zram-swap-ops-block-register-v1-0-6c1a6639c222@gmail.com>
- <20260614-zram-swap-ops-block-register-v1-1-6c1a6639c222@gmail.com>
+	 Content-Type:Content-Disposition:In-Reply-To; b=QEOcu7u0ml9OPH3Y1SLZffcfyawdTwsPlf8LECfNfE0vxr8pxFDiAwMchbcDCjAf+eU8uedmvGOo1vgcXgBymwLZpOjA+XZ6JOXV1T0I+PMDwkVoXBW6jkHzyNgFAlo4Q3q976BgODW6c3yS9XuFdk1HGdsZrTx7ugtS3KRT/tM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=c4AsWxVo; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0F1491F000E9;
+	Mon, 15 Jun 2026 02:31:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linuxfoundation.org;
+	s=korg; t=1781490685;
+	bh=q3rNy/qzKWFFjxxKHLJ8BF5GUf+dbl3dIN9WXeo3Ufs=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=c4AsWxVoSRuf4eB7cCfd4iLxw4aBONiRgNeNWMuqtfEZTurqcMGUV31nVhZae/hCZ
+	 a7HUoJvuqk8FiJWGh0WcwR1GB17GOEhrokzTbiH35gilxwd0fSR0wcu+si1vL5t1wE
+	 FL/JZ6F9D/IdJhp+J5rgm3LBHeMB+XUQsKdWRgYE=
+Date: Mon, 15 Jun 2026 04:30:24 +0200
+From: Greg KH <gregkh@linuxfoundation.org>
+To: Neill Kapron <nkapron@google.com>
+Cc: corbet@lwn.net, skhan@linuxfoundation.org, linux-usb@vger.kernel.org,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	kernel-team@android.com
+Subject: Re: [PATCH 0/3] usb: gadget: f_fs: Add R/W proxy EPs and ZLP support
+Message-ID: <2026061557-another-enduring-493d@gregkh>
+References: <20260614181006.3648010-1-nkapron@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260614-zram-swap-ops-block-register-v1-1-6c1a6639c222@gmail.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260614181006.3648010-1-nkapron@google.com>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.86 / 15.00];
+X-Spamd-Result: default: False [2.34 / 15.00];
+	MID_END_EQ_FROM_USER_PART(4.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[linuxfoundation.org,none];
+	R_DKIM_ALLOW(-0.20)[linuxfoundation.org:s=korg];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
-	DMARC_POLICY_SOFTFAIL(0.10)[lge.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:wujianyue000@gmail.com,m:akpm@linux-foundation.org,m:hch@lst.de,m:chrisl@kernel.org,m:bhe@redhat.com,m:nphamcs@gmail.com,m:baohua@kernel.org,m:kasong@tencent.com,m:shikemeng@huaweicloud.com,m:minchan@kernel.org,m:senozhatsky@chromium.org,m:axboe@kernel.dk,m:willy@infradead.org,m:jack@suse.cz,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-block@vger.kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[youngjun.park@lge.com,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[18];
+	TAGGED_FROM(0.00)[bounces-92357-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER(0.00)[gregkh@linuxfoundation.org,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:nkapron@google.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-usb@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:kernel-team@android.com,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-92356-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[linuxfoundation.org:+];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	MISSING_XM_UA(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[youngjun.park@lge.com,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[linux-foundation.org,lst.de,kernel.org,redhat.com,gmail.com,tencent.com,huaweicloud.com,chromium.org,kernel.dk,infradead.org,suse.cz,kvack.org,vger.kernel.org];
-	R_DKIM_NA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[gregkh@linuxfoundation.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[7];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp,lge.com:from_mime,yjaykim-PowerEdge-T330:mid]
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,linuxfoundation.org:dkim,linuxfoundation.org:from_mime,gregkh:mid,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: F1B42682CB2
+X-Rspamd-Queue-Id: 4B6DD682DFF
 
-On Sun, Jun 14, 2026 at 11:35:29PM +0800, Jianyue Wu wrote:
+On Sun, Jun 14, 2026 at 06:09:59PM +0000, Neill Kapron wrote:
+> We are working to deprecate a widely used, out of tree gadget driver by
+> moving the functionality to userspace via functionfs. To do so, we have to
+> maintain strict compatibility with the legacy driver, as there are many
+> third party applications which can’t be modified and are reliant on this
+> interface. Specifically, the following requirements must be met:
+> 
+> - The function must expose a single file descriptor to userspace for both
+>   reads and writes,
+> - It must block on writes when it can not handle more data, 
+> - It must handle arbitrary write transaction sizes,
+> - It must automatically append a zero length packet (ZLP) when the write
+>   transaction ends on a boundary of a multiple of the max packet size.
+> 
+> Initially, we pursued a compatibility layer in userspace which implemented
+> a socket pair to combine the OUT and IN endpoint files. This approach
+> proved problematic for several reasons.
+> 
+> To preserve the write transaction boundary for ZLP calculation, we
+> attempted to use SOCK_SEQPACKET. This created problems as larger
+> transactions required contiguous buffers to be allocated, and, even if we
+> ignore the constraint to the arbitrary write size and limited it to 1MB,
+> the socket would occasionally return -ENOBUFS to the end user if a write
+> operation was attempted when other sockets on the system were consuming
+> more than 7MB of the 8MB wmem_max limit.
+> 
+> After significant investigation including switching to SOCK_STREAM and
+> attempting a heuristic timeout approach, we decided the best path forward
+> was to pursue a native proxy endpoint approach in the functionfs driver
+> itself.
+> 
+> This patchset introduces the `FUNCTIONFS_RW_PROXY_EPS` flag to functionfs
+> which, when set, creates an additional proxy file for reading or writing
+> to a pair of endpoints. In an attempt to limit the change to the UAPI
+> surface, we added several constraints to this proxy file. We chose not to
+> handle ioctls on this proxy file, as the current ioctls do not have a
+> directionality associated with them, and would require essentially
+> creating duplicate ioctls with a direction argument. To use this flag, an
+> even number of in/out endpoints must be created, and a proxy ep is created
+> for each pair of endpoints in the descriptors.
+> 
+> With this new r/w proxy ep, we are able to transparently hand it to the
+> end application. However, to match the legacy driver’s ZLP functionality,
+> a new ioctl is added, `FUNCTIONFS_ENDPOINT_ENABLE_ZLP`. This allows the
+> userspace functionfs daemon to write the necessary descriptors, configure
+> the auto ZLP functionality on the IN EP, then handoff the proxy ep to the
+> application. When enabled, functionfs sets the req->zero flag. The UDC
+> driver then automatically adds the ZLP if the transaction length % max
+> packet size is 0.
+> 
+> An addition, a patch is included which fixes an issue if certain ioctls
+> (like the new `FUNCTIONFS_ENDPOINT_ENABLE_ZLP` or
+> `FUNCTIONFS_DMABUF_ATTACH`) are called prior to the host being connected.
+> 
+> This patchset has been tested on a kernel based on 7.1-rc7, as well as a
+> backported version tested on 6.1. Existing functionfs implementations
+> continue to work without modification, and the new functionality passes
+> tests designed for our legacy kernel driver implementation.
 
-...
+Very cool, thanks for these changes.  I'll look at them after -rc1 is
+out!
 
-Hello Jianyue.
-
-Currently, the patch commit log indicates only a single custom swap
-registration is supported. Shouldn't we allow multiple block drivers to
-register their custom ops simultaneously from the beginning?
-
->  int shmem_writeout(struct swap_io_ctx *ctx, struct folio *folio,
->  		struct list_head *folio_list);
-> diff --git a/mm/swapfile.c b/mm/swapfile.c
-> index 284eebc40a70..ebdc96092961 100644
-> --- a/mm/swapfile.c
-> +++ b/mm/swapfile.c
-> @@ -2849,6 +2849,10 @@ static int setup_swap_extents(struct swap_info_struct *sis,
->  	sis->ops = &swap_bdev_ops;
->
->  	if (S_ISBLK(inode->i_mode)) {
-> +		const struct swap_ops *block_ops = lookup_swap_block_ops(sis);
-
-Also, just a personal thought on this part.
-
-Instead of using `block_device_fops` as a lookup key, what if we handle
-this similarly to how filesystems use the `a_ops->swap_activate` callback?
-
-We could add a `swap_activate` callback directly into
-struct block_device_operations (zram's zram_devops). This way, the
-block device itself can set up and replace the swap `ops` directly without
-needing a separate registration/lookup mechanism.
-
-What are your thoughts on this approach?
-
-Thanks,
-Youngjun Park
+greg k-h
 
