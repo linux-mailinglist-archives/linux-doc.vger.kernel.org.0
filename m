@@ -1,40 +1,41 @@
-Return-Path: <linux-doc+bounces-92533-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92536-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id w6prHOxcMWpfiAUAu9opvQ
-	(envelope-from <linux-doc+bounces-92533-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Jun 2026 16:25:48 +0200
+	id 7oTaBSZeMWqtiAUAu9opvQ
+	(envelope-from <linux-doc+bounces-92536-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Jun 2026 16:31:02 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD89869073A
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Jun 2026 16:25:47 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1FBBC690827
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Jun 2026 16:31:00 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
 	dkim=none;
 	dmarc=none;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92533-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92533-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92536-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-92536-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 21BEF30EECFC
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Jun 2026 14:15:02 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 3C37531E668F
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Jun 2026 14:15:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0E5DA36AB77;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4F29B36F42B;
 	Tue, 16 Jun 2026 14:14:55 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from cstnet.cn (smtp81.cstnet.cn [159.226.251.81])
 	(using TLSv1.2 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E01D936403D;
-	Tue, 16 Jun 2026 14:14:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 75BE036A364;
+	Tue, 16 Jun 2026 14:14:53 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781619294; cv=none; b=pWifPK106i8VscMFSBBhKUHoZ+CA1ONdBrKkX/4mxXxHxC+Q+ernvYTwmu59YkdpwgC4pHWZgyxIHhqjeSE+r4G9F66r/Ni+v2Dmiy52oaiftamEhjHXEDwmpa38x2PdPJvJPfMVhqjGuDpJUdTaGiWJc/MVttKn+u+vJRVqu9A=
+	t=1781619295; cv=none; b=nYME/jmm/J+gNtyh+L50R341DDeiuifx68gpvyFw/qALGejmhYtN0ZoiR93qbVEuQnZBMEHCfv8od29JSw8LEPwuvEyaLbOnsrdVoD2dzD/vVycTREXry8vhKUsyu9Sj6Ub92geekyz+0JogTs5NOKrUKNT8vLqkxgS6SKgIslA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781619294; c=relaxed/simple;
-	bh=rAxGQz0JOO8vdB5NtKRpIZ3BB/8GwOhQXU7tPhNgZjE=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=msxGxEXhU+p7K1W+zB3Tq2dFKH0Fvda9g5ZjyDk/cG2UhJiwREtOVf7skHoTBe+LCqZnkagH0pI9mpzjFtU2iyK23LBszdnfOIS2Sh8odr+ACMjlld6cewccTCzwu8zvU7UUziR6UbF/HHbfypH+YOs1csrL38mU0vuwBQFuUz0=
+	s=arc-20240116; t=1781619295; c=relaxed/simple;
+	bh=Q74tAZhuMAWvWa4If6nmkQFLd+OB4LUkdCHcqVD3O9g=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=VCQMDzvwX4nFqm6Ju/ERMBBPB6rScOuS96dk0vlZ4LMzvTCQ8HFi6okW3Gfh1irgMvqYZVBW+f8v3pxY2KvZjahygozfGClXqUy8aYUKFlVS6AJVVnh0jLI1JZhYdYr8C1jnxw4nrzUSQjFJ/vMqUrHdMIbqhrUEhxD8Vt8uu/Y=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn; spf=pass smtp.mailfrom=iscas.ac.cn; arc=none smtp.client-ip=159.226.251.81
 Received: from localhost.localdomain (unknown [111.196.245.140])
-	by APP-03 (Coremail) with SMTP id rQCowABHZNtDWjFq5sHvFA--.10727S2;
+	by APP-03 (Coremail) with SMTP id rQCowABHZNtDWjFq5sHvFA--.10727S3;
 	Tue, 16 Jun 2026 22:14:28 +0800 (CST)
 From: Pengpeng Hou <pengpeng@iscas.ac.cn>
 To: Vlastimil Babka <vbabka@kernel.org>,
@@ -56,10 +57,12 @@ Cc: Harry Yoo <harry@kernel.org>,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Pengpeng Hou <pengpeng@iscas.ac.cn>
-Subject: [PATCH 0/4] mm/slub: preserve previous object lifetime
-Date: Tue, 16 Jun 2026 22:14:06 +0800
-Message-ID: <20260616141410.52117-1-pengpeng@iscas.ac.cn>
+Subject: [PATCH 1/4] mm/slub: factor user tracking metadata size calculation
+Date: Tue, 16 Jun 2026 22:14:07 +0800
+Message-ID: <20260616141410.52117-2-pengpeng@iscas.ac.cn>
 X-Mailer: git-send-email 2.50.1
+In-Reply-To: <20260616141410.52117-1-pengpeng@iscas.ac.cn>
+References: <20260616141410.52117-1-pengpeng@iscas.ac.cn>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -67,43 +70,44 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:rQCowABHZNtDWjFq5sHvFA--.10727S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7tFyxCw17XryfCFyUJrWUurg_yoW8WF1xpr
-	WfKws3tasFqryxCwn3Cr12gr93uayrG397JFsrKw40vrs8G3W0yF4xKrn0qFy7AF9rZ3Wa
-	vrWFv3W3Gr1qy3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUU9j14x267AKxVW5JVWrJwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
-	1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
-	6F4UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s
-	0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xII
-	jxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVW8JVWxJwAm72CE4IkC6x0Yz7v_Jr0_Gr
-	1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxa
-	n2IY04v7MxkF7I0En4kS14v26r4a6rW5MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4
-	AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE
-	17CEb7AF67AKxVW8ZVWrXwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMI
-	IF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4l
-	IxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvf
-	C2KfnxnUUI43ZEXa7sRE2Q6tUUUUU==
+X-CM-TRANSID:rQCowABHZNtDWjFq5sHvFA--.10727S3
+X-Coremail-Antispam: 1UD129KBjvJXoWxJFyrWF4kGF4UXw1rAr1fWFg_yoW5ZF48pF
+	W8K3W8JF4DJrW7Kr4rA34kZryfZrZayryxJFWaga4rZF98t3WFgFZ2yFyYvFyrAr97uw1S
+	yFs0k3W09rnFyw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUQYb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I2
+	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI
+	8067AKxVWUGwA2048vs2IY020Ec7CjxVAFwI0_Gr0_Xr1l8cAvFVAK0II2c7xJM28CjxkF
+	64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVW8JVW5JwA2z4x0Y4vE2Ix0cI8IcV
+	CY1x0267AKxVWxJVW8Jr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIE
+	c7CjxVAFwI0_GcCE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I
+	8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r4j6F4UMcvjeVCF
+	s4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFI
+	xGxcIEc7CjxVA2Y2ka0xkIwI1lc7CjxVAaw2AFwI0_GFv_Wryl42xK82IYc2Ij64vIr41l
+	4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67
+	AKxVWUGVWUWwC2zVAF1VAY17CE14v26r4a6rW5MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8I
+	cVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI
+	8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I8E87Iv6xkF7I0E14v2
+	6r4UJVWxJrUvcSsGvfC2KfnxnUUI43ZEXa7IU8Jku7UUUUU==
 X-CM-SenderInfo: pshqw1xhqjqxpvfd2hldfou0/
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [0.04 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[19];
 	DMARC_NA(0.00)[iscas.ac.cn];
-	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:vbabka@kernel.org,m:akpm@linux-foundation.org,m:linux-mm@kvack.org,m:harry@kernel.org,m:hao.li@linux.dev,m:cl@gentwo.org,m:rientjes@google.com,m:roman.gushchin@linux.dev,m:david@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:pengpeng@iscas.ac.cn,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-92533-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-92536-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_SENDER(0.00)[pengpeng@iscas.ac.cn,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS(0.00)[m:vbabka@kernel.org,m:akpm@linux-foundation.org,m:linux-mm@kvack.org,m:harry@kernel.org,m:hao.li@linux.dev,m:cl@gentwo.org,m:rientjes@google.com,m:roman.gushchin@linux.dev,m:david@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:pengpeng@iscas.ac.cn,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
@@ -113,46 +117,112 @@ X-Spamd-Result: default: False [0.04 / 15.00];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	R_DKIM_NA(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,iscas.ac.cn:mid,iscas.ac.cn:from_mime]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[iscas.ac.cn:email,iscas.ac.cn:mid,iscas.ac.cn:from_mime,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: BD89869073A
+X-Rspamd-Queue-Id: 1FBBC690827
 
-SLAB_STORE_USER currently stores one allocation track and one free track
-for an object.  Once the object is reused, the next allocation overwrites
-the allocation track.  If a stale pointer from the previous lifetime is
-later freed or otherwise reported, the report can show the victim
-allocation and the stale operation while the previous completed lifetime
-has already been lost.
+SLAB_STORE_USER currently stores two struct track records in the per-object
+debug metadata.  The size is open-coded as 2 * sizeof(struct track) in
+several layout and offset calculations.
 
-This series keeps one previous completed lifetime in the existing
-SLAB_STORE_USER metadata and prints it when available.  It is intended as
-diagnostic information for reuse cases only; it does not infer semantic
-ownership or identify the root cause of a use-after-free.
+Add TRACK_NR and a small helper for the user-tracking metadata size.  This
+keeps all offset calculations tied to the number of track records and makes
+the following extension less error-prone.
 
-This is the non-RFC version of the earlier RFC.  Based on the feedback,
-this version does not add a separate slab_debug=H option.  If a user
-enables U, the user tracking metadata records the current allocation/free
-tracks and one previous completed allocation/free pair.
+No functional change.
 
-Changes since RFC:
-- extend the existing U option directly instead of adding H/UH
-- add KUnit coverage for the previous-lifetime state transition
-- document the extra report lines and the diagnostic-only semantics
+Signed-off-by: Pengpeng Hou <pengpeng@iscas.ac.cn>
+---
+ mm/slub.c | 25 ++++++++++++++++---------
+ 1 file changed, 16 insertions(+), 9 deletions(-)
 
-Pengpeng Hou (4):
-  mm/slub: factor user tracking metadata size calculation
-  mm/slub: preserve previous object lifetime in user tracking
-  mm/slub: test previous lifetime tracking
-  Documentation/mm: document SLUB previous lifetime tracking
-
- Documentation/admin-guide/mm/slab.rst |  12 ++-
- lib/tests/slub_kunit.c                |  33 +++++++++
- mm/slab.h                             |  10 +++
- mm/slub.c                             | 102 +++++++++++++++++++++-----
- 4 files changed, 136 insertions(+), 21 deletions(-)
-
+diff --git a/mm/slub.c b/mm/slub.c
+index f87e693aca5d..43d4febd5bf2 100644
+--- a/mm/slub.c
++++ b/mm/slub.c
+@@ -327,7 +327,15 @@ struct track {
+ 	unsigned long when;	/* When did the operation occur */
+ };
+ 
+-enum track_item { TRACK_ALLOC, TRACK_FREE };
++enum track_item { TRACK_ALLOC, TRACK_FREE, TRACK_NR };
++
++static inline unsigned int user_tracking_size(slab_flags_t flags)
++{
++	if (flags & SLAB_STORE_USER)
++		return TRACK_NR * sizeof(struct track);
++
++	return 0;
++}
+ 
+ #ifdef SLAB_SUPPORTS_SYSFS
+ static int sysfs_slab_add(struct kmem_cache *);
+@@ -751,7 +759,7 @@ static inline void set_orig_size(struct kmem_cache *s,
+ 		return;
+ 
+ 	p += get_info_end(s);
+-	p += sizeof(struct track) * 2;
++	p += user_tracking_size(s->flags);
+ 
+ 	*(unsigned long *)p = orig_size;
+ }
+@@ -767,7 +775,7 @@ static inline unsigned long get_orig_size(struct kmem_cache *s, void *object)
+ 		return s->object_size;
+ 
+ 	p += get_info_end(s);
+-	p += sizeof(struct track) * 2;
++	p += user_tracking_size(s->flags);
+ 
+ 	return *(unsigned long *)p;
+ }
+@@ -885,7 +893,7 @@ static unsigned int obj_exts_offset_in_object(struct kmem_cache *s)
+ 	unsigned int offset = get_info_end(s);
+ 
+ 	if (kmem_cache_debug_flags(s, SLAB_STORE_USER))
+-		offset += sizeof(struct track) * 2;
++		offset += user_tracking_size(s->flags);
+ 
+ 	if (slub_debug_orig_size(s))
+ 		offset += sizeof(unsigned long);
+@@ -1088,7 +1096,7 @@ static void init_tracking(struct kmem_cache *s, void *object)
+ 		return;
+ 
+ 	p = get_track(s, object, TRACK_ALLOC);
+-	memset(p, 0, 2*sizeof(struct track));
++	memset(p, 0, user_tracking_size(s->flags));
+ }
+ 
+ static void print_track(const char *s, struct track *t, unsigned long pr_time)
+@@ -1196,8 +1204,7 @@ static void print_trailer(struct kmem_cache *s, struct slab *slab, u8 *p)
+ 
+ 	off = get_info_end(s);
+ 
+-	if (s->flags & SLAB_STORE_USER)
+-		off += 2 * sizeof(struct track);
++	off += user_tracking_size(s->flags);
+ 
+ 	if (slub_debug_orig_size(s))
+ 		off += sizeof(unsigned long);
+@@ -1401,7 +1408,7 @@ static int check_pad_bytes(struct kmem_cache *s, struct slab *slab, u8 *p)
+ 
+ 	if (s->flags & SLAB_STORE_USER) {
+ 		/* We also have user information there */
+-		off += 2 * sizeof(struct track);
++		off += user_tracking_size(s->flags);
+ 
+ 		if (s->flags & SLAB_KMALLOC)
+ 			off += sizeof(unsigned long);
+@@ -7820,7 +7827,7 @@ static int calculate_sizes(struct kmem_cache_args *args, struct kmem_cache *s)
+ 		 * Need to store information about allocs and frees after
+ 		 * the object.
+ 		 */
+-		size += 2 * sizeof(struct track);
++		size += user_tracking_size(flags);
+ 
+ 		/* Save the original kmalloc request size */
+ 		if (flags & SLAB_KMALLOC)
 -- 
 2.43.0
 
