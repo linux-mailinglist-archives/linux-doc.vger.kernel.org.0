@@ -1,171 +1,264 @@
-Return-Path: <linux-doc+bounces-92535-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92538-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Ya31BKpdMWqWiAUAu9opvQ
-	(envelope-from <linux-doc+bounces-92535-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Jun 2026 16:28:58 +0200
+	id bZgDKRldMWpxiAUAu9opvQ
+	(envelope-from <linux-doc+bounces-92538-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Jun 2026 16:26:33 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D2466907E4
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Jun 2026 16:28:57 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 18676690773
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Jun 2026 16:26:33 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=none;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=f9YbMax9;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92538-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-92538-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=none;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92535-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92535-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id C262830F15F4
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Jun 2026 14:15:04 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id AF37231054DC
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Jun 2026 14:15:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 42ED936EA8A;
-	Tue, 16 Jun 2026 14:14:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 869C0369211;
+	Tue, 16 Jun 2026 14:15:15 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from cstnet.cn (smtp81.cstnet.cn [159.226.251.81])
-	(using TLSv1.2 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 720773672AB;
-	Tue, 16 Jun 2026 14:14:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 30C71371893
+	for <linux-doc@vger.kernel.org>; Tue, 16 Jun 2026 14:15:14 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781619295; cv=none; b=aTSJgfUeg04VER6pR06d9YTZY79Y3T+Dt4fIbrScVUKWsVbUJ3+OHrjrPqExKRxDnMoToWS5iDkUildVYJB/L/zMpcejJKEGJfkhQ+OTh8auA4Op2NWKAoyXRoGf75M49+nH0dBXRGlrANrHigW3mKWXuzl/mm8CSWmc4sAm63Q=
+	t=1781619315; cv=none; b=afYJ36ESY2UCCS2QPUV7p9+Lr5bGR4PV4VaeDzIZWdav/BiSL4w1PIufuimv2Q0AhCLBbCjelrcof/DVLEbrf4xdN1g2zZFW4UQClUdkEoYiXtfLmcHxrGbBC+PMLoUQpYGDscR/INf/bXEsnLBKNxywBuD+j3bZt3mk9Ti4VZc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781619295; c=relaxed/simple;
-	bh=fe1dfAZuVOxEHpIjVvaBdTrELmXdSOObui1bwAEKQOE=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Y2KjVK5gYEnOpbZ/tzzYWoKPg3YgTNXjkJbVFe3feZqnPomH20OqXbD/PAiBtMyZrski7K89p+PpMTr1/PwXCHOON2yDGHFs1etIZfifvXgQuPFGO2274fjbOADl0FEEM8aS9bsGhgzeqADCIVJ4N93W5BhCqHFyOXyw9wXKwRo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn; spf=pass smtp.mailfrom=iscas.ac.cn; arc=none smtp.client-ip=159.226.251.81
-Received: from localhost.localdomain (unknown [111.196.245.140])
-	by APP-03 (Coremail) with SMTP id rQCowABHZNtDWjFq5sHvFA--.10727S6;
-	Tue, 16 Jun 2026 22:14:29 +0800 (CST)
-From: Pengpeng Hou <pengpeng@iscas.ac.cn>
-To: Vlastimil Babka <vbabka@kernel.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	linux-mm@kvack.org
-Cc: Harry Yoo <harry@kernel.org>,
-	Hao Li <hao.li@linux.dev>,
-	Christoph Lameter <cl@gentwo.org>,
-	David Rientjes <rientjes@google.com>,
-	Roman Gushchin <roman.gushchin@linux.dev>,
-	David Hildenbrand <david@kernel.org>,
-	Lorenzo Stoakes <ljs@kernel.org>,
-	liam@infradead.org,
-	Mike Rapoport <rppt@kernel.org>,
-	Suren Baghdasaryan <surenb@google.com>,
-	Michal Hocko <mhocko@suse.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Pengpeng Hou <pengpeng@iscas.ac.cn>
-Subject: [PATCH 4/4] Documentation/mm: document SLUB previous lifetime tracking
-Date: Tue, 16 Jun 2026 22:14:10 +0800
-Message-ID: <20260616141410.52117-5-pengpeng@iscas.ac.cn>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20260616141410.52117-1-pengpeng@iscas.ac.cn>
-References: <20260616141410.52117-1-pengpeng@iscas.ac.cn>
+	s=arc-20240116; t=1781619315; c=relaxed/simple;
+	bh=nDJmMRWkeOLbn2goHXAjdy5C4LSHSDrkIV++R3Eijtc=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=hDPdrJS3rHf9T0n3z7F+K5i+U9BNfvgpHxBA+aG8meIj0uHqDASTMWgiqJ11kg5cja/P3HAUIflR9blvBto1uDmAewSCIdCizdcZijW3cKk/RfqguhYKcgIrgOsMaxbZdn0nXTI7jgTLX+pY+rUuHQMIed4ynqkZka6Qg3ix9Bg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=f9YbMax9; arc=none smtp.client-ip=209.85.214.179
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2c132ac5ec2so46050915ad.1
+        for <linux-doc@vger.kernel.org>; Tue, 16 Jun 2026 07:15:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1781619313; x=1782224113; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to;
+        bh=27t8qhcnA1Ic/MPJoY1rquIFKqlth0zmgwRxjvyFCMA=;
+        b=f9YbMax986SsEtGo5/hhRgq8niTpEqSRkK/7mvJ8a28MIDTlnzSc1pcjKvVXwZEvph
+         2GR1eB9DDEGKcEchygrxRkwPS2ugBr4ChW3/Keq/BWWxRDnGFsQjDLk+rlBD4j43MHbg
+         8TNN35H7HEs4SBd3JHzVVTBL6zt1C26djUkAlCdReu/sXvcGvD0V7veyU4nH1y43wTkM
+         DNhRlmCwwV4Dzj9Ra4kxdenLAwiRbTszUULrhH5LQx5uIy7xPcZ1frBeStLqEhWQKVv0
+         RxTtiBGHMcZPJtehWOq1mBpXXy5/SP4SpcDstgw8DvKwaqqzzzwhBu7SYvv2N+xjRlV7
+         yHXA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1781619313; x=1782224113;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=27t8qhcnA1Ic/MPJoY1rquIFKqlth0zmgwRxjvyFCMA=;
+        b=H87uRFo2GA1Vyt74AH/BVc1r45yA0Ia3XpdxlNrc0V8E/nAAvFexH+MqR6EALw4B/C
+         2tC5Hbt5KNBgLo9JO4G27OjDm7OCb860noqlUZhY6jyVX99tQcoTZ8wYcV/Ehda46EAb
+         JwUgLZCUAv1VfM0Acd3He6nRaLcGl0zFW74aU0ZSuzPAJwu6CXmVUUaMv4oNJM45ejGA
+         1PC5hnW9MIrKDi1/rM0OvvFkCNRRj5qGo1fx/ec8SD1cL8IrKvyR0s0FbREKlp/5cItt
+         yYm4fnsYOgIdvqzxWv5DhlUvKA/qrncFGAAO7TLfa/wV97MFKPBuSLZt9m1IixFZJ4x1
+         Ln7A==
+X-Forwarded-Encrypted: i=1; AFNElJ+obr1Kbm2DdCIPLts4r95JK6TIlVMVwZNZX0Mz1DGDRAwinqN767WPBJtPVi6E4GsxhxfzXWNy9Bg=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwVKtZ46lutK0wuSesGnrtTEh0Yl2roaMlCKDOdo/Hm5+85JRES
+	as6WCkQb9xy28OBrVXtt2nICC32dBjKTmtTdtKxYsP4KrqJRRu16gXJj
+X-Gm-Gg: Acq92OHeCMoC1dmc5DZLtVA+jtiUA0874o5r6bEwCg9Jgqp7xr3o0FouBqhpiAe50nr
+	GIRRyUHAjdERkeOZr7w/HqbRwzyFhGjvI1C1O5hza0oM5RKky1OPLh2PTxXSb6MvXhgoFdrS+Ce
+	d7ahJUBTZu08ljIgi0d8mHwBdAVYIpda4VoluTLZgnjOWWJEbLf+28+DK3+4p0DrB9feSbh8w0i
+	WVJKnV6/ZcId9VYUcz49QSrMltoQ1ZKmHFjfo82KDECFUeR0yGj4Z0EtLMJLFP+NPHP3w8D/Z37
+	I/jKDoBGVLnkRtXzfj30aoq2pU/ML/P0S9h70lCOV7MHsSzFZa6liVwslgRp478KqTPHG1QYiLR
+	Ch87nF9z9pFivfMNr4RjIfQc5CMrrGuJlwviBOH5RWm/yzc7yimI7QrGz8zEpj2EsufehgOtoVC
+	jcFexHDJet9VhIw4agpNXOn/WrrzCGHalbnkqQlkOwEcemdXESKSsWSSQQ0ffPE3Oa35TT41T2
+X-Received: by 2002:a17:903:1246:b0:2c2:be43:39bc with SMTP id d9443c01a7336-2c664243254mr168453485ad.22.1781619313300;
+        Tue, 16 Jun 2026 07:15:13 -0700 (PDT)
+Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5? ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c432d86501sm127308945ad.61.2026.06.16.07.15.11
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 16 Jun 2026 07:15:12 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Message-ID: <d66b9de3-db06-4f83-9c2a-b45e341bfc9c@roeck-us.net>
+Date: Tue, 16 Jun 2026 07:15:11 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:rQCowABHZNtDWjFq5sHvFA--.10727S6
-X-Coremail-Antispam: 1UD129KBjvJXoW7ZF47WF18XrWrAw4DAF1kKrg_yoW8Cw15pa
-	nrK3WIqa47Jwn7Cwn7Aw1rKF1Sq395uFW7GF9F9w48uwn8AwnFyF4rKrs8ZF1kAFWxuFZI
-	vrykZ3WYvw1qy3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUma14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
-	kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
-	z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
-	4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq
-	3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7
-	IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r1j6r4U
-	M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2
-	kIc2xKxwCY1x0262kKe7AKxVW8ZVWrXwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkE
-	bVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67
-	AF67kF1VAFwI0_GFv_WrylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI
-	42IY6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCw
-	CI42IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I8E87Iv6xkF7I0E14v26r4UJVWxJrUvcSsG
-	vfC2KfnxnUUI43ZEXa7sRE7PEtUUUUU==
-X-CM-SenderInfo: pshqw1xhqjqxpvfd2hldfou0/
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 6/7] hwmon: adm1275: Support ROHM BD12790
+To: Matti Vaittinen <mazziesaccount@gmail.com>,
+ Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>,
+ Matti Vaittinen <matti.vaittinen@linux.dev>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ Shuah Khan <skhan@linuxfoundation.org>, Wensheng Wang <wenswang@yeah.net>,
+ Ashish Yadav <ashish.yadav@infineon.com>,
+ Kim Seer Paller <kimseer.paller@analog.com>,
+ Cedric Encarnacion <cedricjustine.encarnacion@analog.com>,
+ Chris Packham <chris.packham@alliedtelesis.co.nz>,
+ Yuxi Wang <Yuxi.Wang@monolithicpower.com>,
+ Charles Hsu <hsu.yungteng@gmail.com>, ChiShih Tsai <tomtsai764@gmail.com>,
+ linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+References: <cover.1781591132.git.mazziesaccount@gmail.com>
+ <8ca875d21f2d9a4d53a87b47a5e6efab48266178.1781591132.git.mazziesaccount@gmail.com>
+Content-Language: en-US
+From: Guenter Roeck <linux@roeck-us.net>
+Autocrypt: addr=linux@roeck-us.net; keydata=
+ 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
+ np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
+In-Reply-To: <8ca875d21f2d9a4d53a87b47a5e6efab48266178.1781591132.git.mazziesaccount@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.04 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	FROM_HAS_DN(0.00)[];
+	TAGGED_FROM(0.00)[bounces-92538-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
-	DMARC_NA(0.00)[iscas.ac.cn];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-92535-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:mazziesaccount@gmail.com,m:matti.vaittinen@fi.rohmeurope.com,m:matti.vaittinen@linux.dev,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:wenswang@yeah.net,m:ashish.yadav@infineon.com,m:kimseer.paller@analog.com,m:cedricjustine.encarnacion@analog.com,m:chris.packham@alliedtelesis.co.nz,m:Yuxi.Wang@monolithicpower.com,m:hsu.yungteng@gmail.com,m:tomtsai764@gmail.com,m:linux-hwmon@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:krzk@kernel.org,m:conor@kernel.org,m:hsuyungteng@gmail.com,s:lists@lfdr.de];
+	FREEMAIL_TO(0.00)[gmail.com,fi.rohmeurope.com,linux.dev];
+	FORGED_SENDER(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[20];
+	DMARC_NA(0.00)[roeck-us.net];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[pengpeng@iscas.ac.cn,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS(0.00)[m:vbabka@kernel.org,m:akpm@linux-foundation.org,m:linux-mm@kvack.org,m:harry@kernel.org,m:hao.li@linux.dev,m:cl@gentwo.org,m:rientjes@google.com,m:roman.gushchin@linux.dev,m:david@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:pengpeng@iscas.ac.cn,s:lists@lfdr.de];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[pengpeng@iscas.ac.cn,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FREEMAIL_CC(0.00)[kernel.org,lwn.net,linuxfoundation.org,yeah.net,infineon.com,analog.com,alliedtelesis.co.nz,monolithicpower.com,gmail.com,vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	R_DKIM_NA(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,iscas.ac.cn:email,iscas.ac.cn:mid,iscas.ac.cn:from_mime]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp,roeck-us.net:mid,roeck-us.net:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 7D2466907E4
+X-Rspamd-Queue-Id: 18676690773
 
-Document that the U debug option also records one previous completed object
-lifetime.  Also document the extra report lines and explicitly state that
-the previous lifetime is diagnostic information, not semantic ownership or
-root-cause attribution.
+On 6/15/26 23:44, Matti Vaittinen wrote:
+> From: Matti Vaittinen <mazziesaccount@gmail.com>
+> 
+> Add support for ROHM BD12790 hot-swap controller which is largely
+> similar to Analog Devices adm1272.
+> 
+> The BD12790 uses the same selectable 60V/100V voltage ranges and
+> 15mV/30mV current-sense ranges as the ADM1272, and the same VRANGE
+> (bit 5) and IRANGE (bit 0) layout in PMON_CONFIG. It therefore uses
+> a dedicated coefficient table that mirrors adm1272_coefficients, with
+> the following differences derived from BD12790 datasheet Table 1 (p.18):
+> - power 60V/30mV: m=17560 (vs. 17561)
+> - power 100V/30mV: m=10536 (vs. 10535)
+> - temperature: b=31880 (vs. 31871, reflecting T[11:0] = 4.2*T + 3188)
+> 
+> Signed-off-by: Matti Vaittinen <mazziesaccount@gmail.com>
+> Assisted-by: GitHub Copilot:claude-sonnet-4.6
+> 
+> ---
+> Originally this patch was AI-generated. I did pretty much re-write the
+> probe changes by hand, and also fixed some of the coefficient math
+> afterwards :/ But yeah, this one was AI "assisted". :)
+> 
+>   drivers/hwmon/pmbus/Kconfig   |  4 +--
+>   drivers/hwmon/pmbus/adm1275.c | 53 +++++++++++++++++++++++++++++------
+>   2 files changed, 47 insertions(+), 10 deletions(-)
+> 
+> diff --git a/drivers/hwmon/pmbus/Kconfig b/drivers/hwmon/pmbus/Kconfig
+> index b3c27f3b2712..6ebc01e26db3 100644
+> --- a/drivers/hwmon/pmbus/Kconfig
+> +++ b/drivers/hwmon/pmbus/Kconfig
+> @@ -52,8 +52,8 @@ config SENSORS_ADM1275
+>   	help
+>   	  If you say yes here you get hardware monitoring support for Analog
+>   	  Devices ADM1075, ADM1272, ADM1273, ADM1275, ADM1276, ADM1278, ADM1281,
+> -	  ADM1293, ADM1294, ROHM BD12780, and SQ24905C Hot-Swap Controller and
+> -	  Digital Power Monitors.
+> +	  ADM1293, ADM1294, ROHM BD12780, ROHM BD12790, and SQ24905C
+> +	  Hot-Swap Controller and Digital Power Monitors.
+>   
+>   	  This driver can also be built as a module. If so, the module will
+>   	  be called adm1275.
+> diff --git a/drivers/hwmon/pmbus/adm1275.c b/drivers/hwmon/pmbus/adm1275.c
+> index 838b8827eb76..9e21dd4083e9 100644
+> --- a/drivers/hwmon/pmbus/adm1275.c
+> +++ b/drivers/hwmon/pmbus/adm1275.c
+> @@ -19,7 +19,7 @@
+>   #include "pmbus.h"
+>   
+>   enum chips { adm1075, adm1272, adm1273, adm1275, adm1276, adm1278, adm1281,
+> -	 adm1293, adm1294, bd12780, sq24905c };
+> +	 adm1293, adm1294, bd12780, bd12790, sq24905c };
+>   
+>   #define ADM1275_MFR_STATUS_IOUT_WARN2	BIT(0)
+>   #define ADM1293_MFR_STATUS_VAUX_UV_WARN	BIT(5)
+> @@ -47,8 +47,8 @@ enum chips { adm1075, adm1272, adm1273, adm1275, adm1276, adm1278, adm1281,
+>   #define ADM1278_VOUT_EN			BIT(1)
+>   
+>   #define ADM1278_PMON_DEFCONFIG		(ADM1278_VOUT_EN | ADM1278_TEMP1_EN | ADM1278_TSFILT)
+> -/* The BD12780 data sheets mark TSFILT bit as reserved. */
+> -#define BD12780_PMON_DEFCONFIG		(ADM1278_VOUT_EN | ADM1278_TEMP1_EN)
+> +/* The BD127x0 data sheets mark TSFILT bit as reserved. */
+> +#define BD127X0_PMON_DEFCONFIG		(ADM1278_VOUT_EN | ADM1278_TEMP1_EN)
 
-Signed-off-by: Pengpeng Hou <pengpeng@iscas.ac.cn>
----
- Documentation/admin-guide/mm/slab.rst | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
+Please don't use such placeholders. Just use BD12780_PMON_DEFCONFIG
+for both chips, similar to how the defines for all other chips
+are handled.
 
-diff --git a/Documentation/admin-guide/mm/slab.rst b/Documentation/admin-guide/mm/slab.rst
-index 14429ab90611..324edf328c34 100644
---- a/Documentation/admin-guide/mm/slab.rst
-+++ b/Documentation/admin-guide/mm/slab.rst
-@@ -49,7 +49,8 @@ Possible debug options are::
- 			Sorry SLAB legacy issues)
- 	Z		Red zoning
- 	P		Poisoning (object and padding)
--	U		User tracking (free and alloc)
-+	U		User tracking (free and alloc, including one previous
-+			completed object lifetime)
- 	T		Trace (please only use on single slabs)
- 	A		Enable failslab filter mark for the cache
- 	O		Switch debugging off for caches that would have
-@@ -245,9 +246,16 @@ into the syslog:
- 	cpu> pid=<pid of the process>
-      INFO: Freed in <kernel function> age=<jiffies since free> cpu=<freed by cpu>
- 	pid=<pid of the process>
-+     INFO: Previous object lifetime:
-+     INFO: Previously allocated in <kernel function> age=<jiffies since alloc>
-+	cpu=<allocated by cpu> pid=<pid of the process>
-+     INFO: Previously freed in <kernel function> age=<jiffies since free>
-+	cpu=<freed by cpu> pid=<pid of the process>
- 
-    (Object allocation / free information is only available if SLAB_STORE_USER is
--   set for the slab. slab_debug sets that option)
-+   set for the slab. slab_debug sets that option. The previous object lifetime
-+   is diagnostic information for reuse cases and does not identify semantic
-+   ownership or the root cause of a use-after-free.)
- 
- 2. The object contents if an object was involved.
- 
--- 
-2.43.0
+Thanks,
+Guenter
 
 
