@@ -1,363 +1,180 @@
-Return-Path: <linux-doc+bounces-92449-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92451-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id AW1jDhaFMGpKUAUAu9opvQ
-	(envelope-from <linux-doc+bounces-92449-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Jun 2026 01:04:54 +0200
+	id xOw+O+eWMGorUwUAu9opvQ
+	(envelope-from <linux-doc+bounces-92451-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Jun 2026 02:20:55 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC5D268A859
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Jun 2026 01:04:53 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9441A68AE50
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Jun 2026 02:20:55 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=google.com header.s=20251104 header.b=t6OsMbuN;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92449-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-92449-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=reject) header.from=google.com;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b="qlZbl/aF";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92451-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92451-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=gmail.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 59D673013852
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2026 23:04:48 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 9F3D7301D334
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Jun 2026 00:20:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 021403A8739;
-	Mon, 15 Jun 2026 23:04:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 85B671D7995;
+	Tue, 16 Jun 2026 00:20:36 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dl1-f74.google.com (mail-dl1-f74.google.com [74.125.82.74])
+Received: from mail-dl1-f65.google.com (mail-dl1-f65.google.com [74.125.82.65])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7687E3BED7F
-	for <linux-doc@vger.kernel.org>; Mon, 15 Jun 2026 23:04:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8CD1620E702
+	for <linux-doc@vger.kernel.org>; Tue, 16 Jun 2026 00:20:34 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781564687; cv=none; b=QyaQl9MCyjW80bLqVSN08s8KVB5UHgqhsAXn+5tjh4aGthKPo6IJSOIXelqXWEP16NqbSaZZdbKWBIIU2M9/V+qiBPkSdnvZnE51Z3t3IhRFS8xAvSahrAXbXrW1ynvL2iplsIsH+/lfidkOEI86guSyCja6Mg5zPgYxQiCZwe0=
+	t=1781569236; cv=none; b=S5rLzY4012KGnG/8afEi5QcEHvgaw2XF+Zzy1hT3XFtKaEbaeJ0Q3S6WvS5vE/2Jqj5V97X9HwNIaLFqJE5iBZow2joVRWHxHordL0yNz1RoOeKBwgJBgm5D9PTax8Of7RC4331zNOkDf32Vli00OQgcWnLkGNYWDtkGySXPLOY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781564687; c=relaxed/simple;
-	bh=WG2iknUXIXfXnabDYeOKj3jFUn8Ns8a9PablUCHoUls=;
-	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=SmrGUcKDr29Fhj/S+AYAM94hUb7bH7mdaYz3Fm1nbwCZt9ENa9NX4VTAHtP1enkKVLEPbF0HCKYkxEEqBEDkVaDhOdq7TKX2yYOK3omz+CCU7QN2qVkxx3N2YC4BPHialvEJa+qz+M7n0VAaMLfe/ive0MQkir1ltcID63z2qHg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--abhishekbapat.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=t6OsMbuN; arc=none smtp.client-ip=74.125.82.74
-Received: by mail-dl1-f74.google.com with SMTP id a92af1059eb24-1394c3ee7f2so8980270c88.1
-        for <linux-doc@vger.kernel.org>; Mon, 15 Jun 2026 16:04:42 -0700 (PDT)
+	s=arc-20240116; t=1781569236; c=relaxed/simple;
+	bh=9O8H+XbMNAvS0v8jx+Btb6gpaFePeTzU8+bTKnqo+90=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=uoDibA26xleXifIby+IHBnm50Zqq+Rl64jx3LIBErr92ON8YBsH7AiKJ1tXg26N0QjIAeMShoaBRz3ivYj4Jwe9VSN9DnnyMME/Zk4FfK/iLmtE9A15cRN7vyHQNxP5BL4yD3CgWXSaqxDh2VSli2KxD4nt+1yaEeIHB7ZmIkcw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=qlZbl/aF; arc=none smtp.client-ip=74.125.82.65
+Received: by mail-dl1-f65.google.com with SMTP id a92af1059eb24-1370417c01cso5171028c88.1
+        for <linux-doc@vger.kernel.org>; Mon, 15 Jun 2026 17:20:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1781564682; x=1782169482; darn=vger.kernel.org;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=FeItXqTRSsd8a3mh0BbwLUsEpRnHJQ/3Kv211NGnNd0=;
-        b=t6OsMbuNDUKrp22KNh6sc9DQ3CTziNOmtXhrjcqzTHLJgKMr3ZpwMRkKCA3xTzODmo
-         /S8u571e316WQFsQQ//RMPCHEKhi2iyc01DFQZDs+rMcNrie/m4PL/uChOhfrotAgchL
-         WAzVLfyzVYQeYqWc+gCx26+uNjPtXCav9LVHoSVxAqMMXSxjvAokYSymKmVQSEzDpDvb
-         XO22V5IBxtPWKsH0YxeF/n7OISeSjOzPxcRyOgHGDs2bk5nBN1ZyC2gNkytP966HJXYB
-         /PsK59GePas1aDUq9YkfzygX6qgkzqsWO9qXFoU949ZLTWEfioYMyIQSEmEG+Ug/kmpU
-         NUwg==
+        d=gmail.com; s=20251104; t=1781569234; x=1782174034; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=qMcLxKso4b2k5fy5qxZ4EymeOosh6CwCvDbgFOT0gso=;
+        b=qlZbl/aF8AvrpScOyoFkDU0BNEPYrs/sUjc9Yw8v+b7WULPh5+LSy9F8MfDCXMDcc7
+         za1kAR8zwkTVSKa3euLgiT5SSn8I6mOyAqHI1YpUSGKuCHPNQ3jiigNrb0ozqvgPoFcE
+         KrnpQl2vYzzJPXW+/1cTjfIg2TE2Kyy2jL/cVNTPsBuS33M9sY48kOTIXTzside/EDC8
+         OQOu3d7A2WCQK98PcCtQVbrmhNPHct5AQs47XR/9wTYXwbUYQ6dabT8F5/u545gQCK/4
+         Y3Heo/SuZZqC0DVMr9lqDVqEX4kGkdFCd3eNki01gamwg5tNyozVcofrh124lja2CMYv
+         LyiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781564682; x=1782169482;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=FeItXqTRSsd8a3mh0BbwLUsEpRnHJQ/3Kv211NGnNd0=;
-        b=hW9yoYw7i/Q+kpOvJ2Fd5jLRgs3rHyXJopbWFB0Pb5EMUjAJou40GnrqVTP9TPYQ/Q
-         WJw/7IgEk3RN/Xa8jqjG5V1Z7HbhBigKy1vFs1RSfNp4/6Y4EVNjZRoChjdUWPfhc7BT
-         U+o66u7PrbYkPq9tHerqRCPxX9dXWvn1uWgbkl2WXOPhWCWoZ7DtfjyYMBO3IVbUkW0i
-         gsvhYV42pjBuir9n4yAieNRYLnW2BbqjeRO1nh89PfSaIJdaymqT2/Je+0+D1hTBYQre
-         lmz5ypkLIE7JrebIq6dqrMc+hTUVUES+TDV3OQ5pV4HrM8pYGH5cmLp6ARa0KjY3mCVC
-         QYGA==
-X-Forwarded-Encrypted: i=1; AFNElJ/8UbzmcRjqqZEgxz0Gi1bN7VjZRbo47ewDEJ6IfQcUPIujIeewlZHMDIY1VLXjQB4+WO1br9us3/s=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyVfIXidQWxDYGn/eb72XLjkMckjx72qtmMOxtd+DxQ/TRy1Zm5
-	/ycMKt7Avy4Cbyk1DMR+Co3mqjlxFmOPc+cWu87/4xtfVfgSPoxAn/mbsifSDhOoZSqkjG0341K
-	3YACuXnCh55cnZJlVVoj0wPQr4ODdGTcu6Q==
-X-Received: from dlbrn1.prod.google.com ([2002:a05:7022:1501:b0:138:3d1:7932])
- (user=abhishekbapat job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:7022:1b05:b0:12d:b66f:35d7 with SMTP id a92af1059eb24-1386f245655mr5972156c88.10.1781564681156;
- Mon, 15 Jun 2026 16:04:41 -0700 (PDT)
-Date: Mon, 15 Jun 2026 23:04:31 +0000
-In-Reply-To: <cover.1781564384.git.abhishekbapat@google.com>
+        d=1e100.net; s=20251104; t=1781569234; x=1782174034;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=qMcLxKso4b2k5fy5qxZ4EymeOosh6CwCvDbgFOT0gso=;
+        b=XmzgNpjiUuJDFjhrGzyDe2YeWQpBAUupgSsArs2Blnws7LZhT4jPAoUuEDaB7t4THk
+         7W1F8vEYS/uyt9cPRpY30w7dPjtol5AnhnGqBITf0aY9jBiHjRSMMgIEX3qCd49dbQVh
+         Zx1zhObFRBYLjo2H/Hs5Z4kVo7aRqXREgaHsJxe4OkktK9szoe4c3oE99q15JCBFTbJs
+         TTPyGBeXh0iiMjbACe7jsqiw+XbrfsLWbdGwJiWszGDCZMur8UZ+WiQxeA1EmD0Yukia
+         y847ctEXRP/gCfD0rtJlzWQDEbUkdmbxLYuu59u1JCVSyQQRTY2lHy0l4PcfE0xo1amQ
+         Fn8w==
+X-Forwarded-Encrypted: i=1; AFNElJ8PLpczyCX25gfY1ywCYq8oSf5pACSMyNdF1O5to2M85sXaQR+NoUOEulJdcvjjEiSFU9q88aNTA3c=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxkD1cLBtC3ERXMNvC6FGbVCPw6q5ZBA05XS9KKhPpedIcx4gBb
+	ez6tfheZi3DNhi2CqApSxJMlENmbNnaTVZo1+BJk4WCxNdJa16Yib6tl
+X-Gm-Gg: Acq92OHOb0BjrZomtbO/4lNA5Jq5SgGEZ6sgm7zJqV3iaqK5tM6Bq9pCXW4IkADIzCq
+	orwL6HjKduHxfOCeDAl582GjLR8xzn6k7CPjNC3rtbqFir1ec4nup5wllKwKX53sV+KlB4iXKNz
+	N5Z5gOlncK2db9jvklKgeMlnkiIJUF1D4FBf57TPa0c19boRpNTDVxs2H+vmQ9aVf2ajjUs4q4d
+	kwlAd4QM5CuMQnUGk/r/fLegPoLU4QZYSeRo//Nl78gZszykx8GiQzrI51wlfMgj2Kh7W/iiiIO
+	ESaBsNkeClnzrj9bxJt36cArb7OBgezvoNm+hbU7+22JMnw1/UVp6aRH9b9OQEvDh0LZIl+rG3M
+	xHG9fOmH06+f/zgCkQ05pMZSjX3Dt+6vxkHNJ9hgsY4KoDetexCb5u/MuaFQxcc3wCF7vEHcUs3
+	znQeTRgh6udQs7jU2tmw5Tl/5WKuIatnTA8d00YJ4TmHT7u/1D0kTGgDi36c6AexAggfs+PNfx4
+	55v89tDXy+qiXNS4AuOaWct0sQi3NeFi6WaWkaNGuuONm1N6X92OwgnDb3F3Ug0lPoNHpQfRmgI
+	13LwO45I6UGDXV37IQ==
+X-Received: by 2002:a05:7022:108:b0:138:508b:93ca with SMTP id a92af1059eb24-13985f23377mr563572c88.18.1781569233498;
+        Mon, 15 Jun 2026 17:20:33 -0700 (PDT)
+Received: from ethan-latitude5420.. (host-127-24.cafrjco.fresno.ca.us.clients.pavlovmedia.net. [68.180.127.24])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1386f20ad25sm10026045c88.0.2026.06.15.17.20.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 15 Jun 2026 17:20:33 -0700 (PDT)
+From: Ethan Nelson-Moore <enelsonmoore@gmail.com>
+To: Shuah Khan <skhan@linuxfoundation.org>,
+	Dongliang Mu <dzm91@hust.edu.cn>,
+	linux-rdma@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Cc: Ethan Nelson-Moore <enelsonmoore@gmail.com>,
+	Jason Gunthorpe <jgg@ziepe.ca>,
+	Leon Romanovsky <leon@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Alex Shi <alexs@kernel.org>,
+	Yanteng Si <si.yanteng@linux.dev>
+Subject: [PATCH] docs: infiniband: correct name of option to enable the ib_uverbs module
+Date: Mon, 15 Jun 2026 17:20:23 -0700
+Message-ID: <20260616002027.67925-1-enelsonmoore@gmail.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-References: <cover.1781564384.git.abhishekbapat@google.com>
-X-Mailer: git-send-email 2.54.0.1136.gdb2ca164c4-goog
-Message-ID: <1a68864b1493528abed0e9e3489688fc6287c37e.1781564384.git.abhishekbapat@google.com>
-Subject: [PATCH v5 6/6] kselftest: alloc_tag: extend the allocinfo ioctl kselftest
-From: Abhishek Bapat <abhishekbapat@google.com>
-To: Suren Baghdasaryan <surenb@google.com>, Andrew Morton <akpm@linux-foundation.org>, 
-	Kent Overstreet <kent.overstreet@linux.dev>, Hao Ge <hao.ge@linux.dev>
-Cc: Shuah Khan <skhan@linuxfoundation.org>, Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-mm@kvack.org, 
-	Sourav Panda <souravpanda@google.com>, Abhishek Bapat <abhishekbapat@google.com>
-Content-Type: text/plain; charset="UTF-8"
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-1.16 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	MV_CASE(0.50)[];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-92449-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[abhishekbapat@google.com,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[gmail.com,ziepe.ca,kernel.org,lwn.net,linux.dev];
+	TAGGED_FROM(0.00)[bounces-92451-lists,linux-doc=lfdr.de];
+	TO_DN_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:skhan@linuxfoundation.org,m:dzm91@hust.edu.cn,m:linux-rdma@vger.kernel.org,m:linux-doc@vger.kernel.org,m:enelsonmoore@gmail.com,m:jgg@ziepe.ca,m:leon@kernel.org,m:corbet@lwn.net,m:alexs@kernel.org,m:si.yanteng@linux.dev,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:surenb@google.com,m:akpm@linux-foundation.org,m:kent.overstreet@linux.dev,m:hao.ge@linux.dev,m:skhan@linuxfoundation.org,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:souravpanda@google.com,m:abhishekbapat@google.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[enelsonmoore@gmail.com,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[abhishekbapat@google.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[google.com:+];
+	FROM_NEQ_ENVFROM(0.00)[enelsonmoore@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	TO_DN_SOME(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,vger.kernel.org:from_smtp,get_at_params.data:url,start_cont_id.id:url]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: BC5D268A859
+X-Rspamd-Queue-Id: 9441A68AE50
 
-Add the following 2 scenarios to the allocinfo ioctl kselftest:
-1. Validate size based filtering
-2. Validate lineno based filtering
+The Infiniband documentation states that CONFIG_INFINIBAND_USER_VERBS
+should be used to enable the ib_uverbs module. However, this option was
+renamed to CONFIG_INFINIBAND_USER_ACCESS in commit 17781cd6186c
+("[PATCH] IB: clean up user access config options"). Update the
+documentation to reflect this.
 
-The first test uses "do_init_module" as the candidate function for the
-test. This is because the associated site will only allocate memory when
-a kernel module is loaded. The return value of get_content_id() changes
-every time modules are loaded or unloaded. Hence, as long as
-get_content_id() values at the start and the end of the test are the
-same, the memory allocated by the do_init_module call site should also
-remain the same. Consequently, the test can assume consistency between
-the value returned by the ioctl and the procfs resulting in less
-flakiness.
-
-Signed-off-by: Abhishek Bapat <abhishekbapat@google.com>
+Signed-off-by: Ethan Nelson-Moore <enelsonmoore@gmail.com>
 ---
- .../alloc_tag/allocinfo_ioctl_test.c          | 197 +++++++++++++++++-
- 1 file changed, 196 insertions(+), 1 deletion(-)
+ Documentation/infiniband/user_verbs.rst                    | 2 +-
+ Documentation/translations/zh_CN/infiniband/user_verbs.rst | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/tools/testing/selftests/alloc_tag/allocinfo_ioctl_test.c b/tools/testing/selftests/alloc_tag/allocinfo_ioctl_test.c
-index 62d5a488a04d..041fee1a3d74 100644
---- a/tools/testing/selftests/alloc_tag/allocinfo_ioctl_test.c
-+++ b/tools/testing/selftests/alloc_tag/allocinfo_ioctl_test.c
-@@ -309,11 +309,194 @@ static int test_function_filter(void)
- 	return run_filter_test(&filter);
- }
+diff --git a/Documentation/infiniband/user_verbs.rst b/Documentation/infiniband/user_verbs.rst
+index 8ddc4b1cfef2..96bcd1bd37ad 100644
+--- a/Documentation/infiniband/user_verbs.rst
++++ b/Documentation/infiniband/user_verbs.rst
+@@ -2,7 +2,7 @@
+ Userspace verbs access
+ ======================
  
-+static int test_size_filter(void)
-+{
-+	int fd;
-+	struct allocinfo_tag_data_vec *tags = malloc(sizeof(*tags));
-+	struct allocinfo_tag_data_vec *procfs_entries = malloc(sizeof(*procfs_entries));
-+	struct allocinfo_filter filter;
-+	int ret = KSFT_PASS;
-+	__u64 target_size, i, pos;
-+	bool found;
-+	const char *target_function = "do_init_module";
-+	struct allocinfo_content_id start_cont_id, end_cont_id;
-+	int retry = 0;
-+	const int max_retries = 10;
-+
-+	if (!tags || !procfs_entries) {
-+		ksft_print_msg("Memory allocation failed.\n");
-+		ret = KSFT_FAIL;
-+		goto freemem;
-+	}
-+
-+	fd = open(ALLOCINFO_PROC, O_RDONLY);
-+	if (fd < 0) {
-+		ksft_print_msg("Failed to open " ALLOCINFO_PROC ": %s\n", strerror(errno));
-+		ret = KSFT_FAIL;
-+		goto freemem;
-+	}
-+
-+	do {
-+		found = false;
-+		pos = 0;
-+
-+		if (__allocinfo_get_content_id(fd, &start_cont_id)) {
-+			ksft_print_msg("allocinfo_get_content_id failed\n");
-+			ret = KSFT_FAIL;
-+			goto exit;
-+		}
-+
-+		memset(&filter, 0, sizeof(filter));
-+		filter.mask |= ALLOCINFO_FILTER_MASK_FUNCTION;
-+		strncpy(filter.fields.function, target_function, ALLOCINFO_STR_SIZE);
-+
-+		if (get_filtered_procfs_entries(procfs_entries, &filter)) {
-+			ksft_print_msg("Error retrieving entries from " ALLOCINFO_PROC "\n");
-+			ret = KSFT_FAIL;
-+			goto exit;
-+		}
-+
-+		if (procfs_entries->count == 0) {
-+			ksft_print_msg("Function %s not found in procfs\n", target_function);
-+			ret = KSFT_SKIP;
-+			goto exit;
-+		}
-+
-+		target_size = procfs_entries->tag[0].counter.bytes;
-+
-+		memset(&filter, 0, sizeof(filter));
-+		filter.mask |= ALLOCINFO_FILTER_MASK_MIN_SIZE | ALLOCINFO_FILTER_MASK_MAX_SIZE;
-+		filter.min_size = target_size;
-+		filter.max_size = target_size;
-+
-+		while (1) {
-+			struct allocinfo_get_at get_at_params;
-+
-+			memset(&get_at_params, 0, sizeof(get_at_params));
-+			memcpy(&get_at_params.filter, &filter, sizeof(filter));
-+			get_at_params.pos = pos;
-+
-+			if (__allocinfo_get_at(fd, &get_at_params))
-+				break;
-+
-+			tags->count = 0;
-+			memcpy(&tags->tag[tags->count++], &get_at_params.data,
-+			       sizeof(get_at_params.data));
-+
-+			while (tags->count < VEC_MAX_ENTRIES &&
-+			       __allocinfo_get_next(fd, &tags->tag[tags->count]) == 0)
-+				tags->count++;
-+
-+			for (i = 0; i < tags->count; i++) {
-+				if (strcmp(tags->tag[i].tag.function, target_function) == 0) {
-+					found = true;
-+					break;
-+				}
-+			}
-+
-+			if (found || tags->count < VEC_MAX_ENTRIES)
-+				break;
-+
-+			pos += tags->count;
-+		}
-+
-+		if (__allocinfo_get_content_id(fd, &end_cont_id)) {
-+			ksft_print_msg("allocinfo_get_content_id failed\n");
-+			ret = KSFT_FAIL;
-+			goto exit;
-+		}
-+
-+		if (start_cont_id.id == end_cont_id.id)
-+			break;
-+
-+		ksft_print_msg("Module load detected during size verification, retrying...\n");
-+	} while (retry++ < max_retries);
-+
-+	if (start_cont_id.id == end_cont_id.id && !found) {
-+		ksft_print_msg("Entry with function %s not found in IOCTL results\n",
-+			       target_function);
-+		ret = KSFT_FAIL;
-+	} else if (start_cont_id.id != end_cont_id.id) {
-+		ksft_print_msg("Failed to match content_ids for procfs and IOCTL, skipping...\n");
-+		ret = KSFT_SKIP;
-+	}
-+
-+exit:
-+	close(fd);
-+freemem:
-+	free(tags);
-+	free(procfs_entries);
-+	return ret;
-+}
-+
-+static int test_lineno_filter(void)
-+{
-+	struct allocinfo_tag_data_vec *tags = malloc(sizeof(*tags));
-+	struct allocinfo_tag_data_vec *procfs_entries = malloc(sizeof(*procfs_entries));
-+	struct allocinfo_filter filter;
-+	enum ioctl_ret ioctl_status;
-+	int ret = KSFT_PASS;
-+	__u64 target_lineno, i;
-+
-+	if (!tags || !procfs_entries) {
-+		ksft_print_msg("Memory allocation failed.\n");
-+		ret = KSFT_FAIL;
-+		goto exit;
-+	}
-+
-+	memset(&filter, 0, sizeof(filter));
-+
-+	if (get_filtered_procfs_entries(procfs_entries, &filter)) {
-+		ksft_print_msg("Error retrieving entries from " ALLOCINFO_PROC "\n");
-+		ret = KSFT_FAIL;
-+		goto exit;
-+	}
-+	if (procfs_entries->count == 0) {
-+		ksft_print_msg("Could not retrieve procfs entries\n");
-+		ret = KSFT_SKIP;
-+		goto exit;
-+	}
-+	/*
-+	 * We depend on the result of procfs entries to create the ioctl_filter. Hence we
-+	 * cannot recycle the run_filter_test function here.
-+	 */
-+	target_lineno = procfs_entries->tag[0].tag.lineno;
-+
-+	filter.mask |= ALLOCINFO_FILTER_MASK_LINENO;
-+	filter.fields.lineno = target_lineno;
-+
-+	ioctl_status = get_filtered_ioctl_entries(tags, &filter, 0);
-+	if (ioctl_status == IOCTL_INVALID_DATA) {
-+		ksft_print_msg("Trouble retrieving valid IOCTL entries, skipping.\n");
-+		ret = KSFT_SKIP;
-+		goto exit;
-+	}
-+	if (ioctl_status == IOCTL_FAILURE) {
-+		ksft_print_msg("Error retrieving IOCTL entries.\n");
-+		ret = KSFT_FAIL;
-+		goto exit;
-+	}
-+
-+	for (i = 0; i < tags->count; i++) {
-+		if (tags->tag[i].tag.lineno != target_lineno) {
-+			ksft_print_msg("IOCTL entry %llu has incorrect lineno %llu.\n",
-+				       i, tags->tag[i].tag.lineno);
-+			ret = KSFT_FAIL;
-+			goto exit;
-+		}
-+	}
-+
-+exit:
-+	free(tags);
-+	free(procfs_entries);
-+	return ret;
-+}
-+
- int main(int argc, char *argv[])
- {
- 	int ret;
+-  The ib_uverbs module, built by enabling CONFIG_INFINIBAND_USER_VERBS,
++  The ib_uverbs module, built by enabling CONFIG_INFINIBAND_USER_ACCESS,
+   enables direct userspace access to IB hardware via "verbs," as
+   described in chapter 11 of the InfiniBand Architecture Specification.
  
--	ksft_set_plan(2);
-+	ksft_set_plan(4);
+diff --git a/Documentation/translations/zh_CN/infiniband/user_verbs.rst b/Documentation/translations/zh_CN/infiniband/user_verbs.rst
+index 970bc1a4e396..31534681654b 100644
+--- a/Documentation/translations/zh_CN/infiniband/user_verbs.rst
++++ b/Documentation/translations/zh_CN/infiniband/user_verbs.rst
+@@ -17,7 +17,7 @@
+ 用户空间verbs访问
+ =================
  
- 	ret = test_filename_filter();
- 	if (ret == KSFT_SKIP)
-@@ -327,5 +510,17 @@ int main(int argc, char *argv[])
- 	else
- 		ksft_test_result(ret == KSFT_PASS, "test_function_filter\n");
+-  ib_uverbs模块，通过启用CONFIG_INFINIBAND_USER_VERBS构建，使用户空间
++  ib_uverbs模块，通过启用CONFIG_INFINIBAND_USER_ACCESS构建，使用户空间
+   通过“verbs”直接访问IB硬件，如InfiniBand架构规范第11章所述。
  
-+	ret = test_size_filter();
-+	if (ret == KSFT_SKIP)
-+		ksft_test_result_skip("Skipping test_size_filter\n");
-+	else
-+		ksft_test_result(ret == KSFT_PASS, "test_size_filter\n");
-+
-+	ret = test_lineno_filter();
-+	if (ret == KSFT_SKIP)
-+		ksft_test_result_skip("Skipping test_lineno_filter\n");
-+	else
-+		ksft_test_result(ret == KSFT_PASS, "test_lineno_filter\n");
-+
- 	ksft_finished();
- }
+   要使用verbs，需要libibverbs库，可从https://github.com/linux-rdma/rdma-core。
 -- 
-2.54.0.1136.gdb2ca164c4-goog
+2.43.0
 
 
