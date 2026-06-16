@@ -1,207 +1,167 @@
-Return-Path: <linux-doc+bounces-92477-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92479-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 3JduJbTxMGqAZAUAu9opvQ
-	(envelope-from <linux-doc+bounces-92477-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Jun 2026 08:48:20 +0200
+	id 0GIUOpD3MGqBZgUAu9opvQ
+	(envelope-from <linux-doc+bounces-92479-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Jun 2026 09:13:20 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id E5B6F68CA29
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Jun 2026 08:48:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 482C568CBE5
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Jun 2026 09:13:20 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linux.dev header.s=key1 header.b=A9C2MXo6;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92477-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-92477-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=linux.dev;
+	dkim=pass header.d=intel.com header.s=Intel header.b=nkqcYEA1;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92479-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-92479-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=intel.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id B04DA3058775
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Jun 2026 06:48:18 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 8F6A3304A869
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Jun 2026 07:09:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 40DFF30D3F1;
-	Tue, 16 Jun 2026 06:48:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 29CC93438AA;
+	Tue, 16 Jun 2026 07:09:48 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-183.mta1.migadu.com (out-183.mta1.migadu.com [95.215.58.183])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.13])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0567C2E6116
-	for <linux-doc@vger.kernel.org>; Tue, 16 Jun 2026 06:48:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4C1BA34B1A3;
+	Tue, 16 Jun 2026 07:09:45 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781592498; cv=none; b=kLqf7g8WDY7mcrXY2pgjsT8Kn9FoZ1f/fad/mX9OvkGt/c9sVLUUB8m2f/qoCWz9CR6S2E1hEJsbP240G5BGwdn1+YRbAdobWxPjRd3TLAAWvOiKMGMOeacMwg7AZN7p2hDzCKwYWBzaDbSRJbth+dfgiAFPfWTGZSyhQISpcKw=
+	t=1781593788; cv=none; b=uc0S6/3BLx9HCMVwyAon0uzv9qKnkwirXiCyLVyFGSB+fHz/bbJl2kX4MKZdW6TfpqkwrbNgYlm2M3lowYPwTOC9of2Aa+i7P2JxZk9ZCdt1E20esk032cGr78DJyXaQJ+HUupk1OzJY3DDewBe3EjHh1kartNoT7LJZ7G4Xxpg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781592498; c=relaxed/simple;
-	bh=MeXaezTbO2/SM4Y3Lfxs549fInkNvDNsxlmuLBiqFdE=;
+	s=arc-20240116; t=1781593788; c=relaxed/simple;
+	bh=ultoLLjmUkQztBNzH2dBjoS6Eym1jmW9Ik8DQCM1z8o=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=nrRRBs6XYfQbaEX7hSquVKovdrZhzVQS6v6wuWOkCtQ30YvC2nuTX2pc7vSGLfzCk8kyHHsaeFjEzjJ7vTbpz3VXlUHYOuuTXYZyN/EnQ8k/RhygVU5b0RpYAOnsE5sKzLNHzr+XvMvH0CJq4TvGg4QLmKgTk8ivJpjZWrIV/gg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=A9C2MXo6; arc=none smtp.client-ip=95.215.58.183
-Date: Tue, 16 Jun 2026 09:47:52 +0300
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1781592484; h=from:from:reply-to:reply-to:subject:subject:date:date:
-	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
-	 content-type:content-type:in-reply-to:in-reply-to:  references:references;
-	bh=A76gUiZ4aDyThGOGiHzqul9bR8XwEqccp8Tjwxep0U8=;
-	b=A9C2MXo6BlCTjqJNoxD2x3Qs/v51eDZQNuZuYL8a4uclv1EEEP5N/vohkSCdVnD52mN31a
-	7qsoKdvNAlWF59P0/A9c1+31r+Rp868Kecyo4Path2l8Q71xXAqpPj7cLVIkghCkhR7h+E
-	A4ZOO9Rn8iPbIUKOmRAgWAyfSHYE9qY=
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Matti Vaittinen <matti.vaittinen@linux.dev>
-To: Matti Vaittinen <mazziesaccount@gmail.com>,
-	Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>,
-	Matti Vaittinen <matti.vaittinen@linux.dev>
-Cc: Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Wensheng Wang <wenswang@yeah.net>,
-	Ashish Yadav <ashish.yadav@infineon.com>,
-	Matti Vaittinen <mazziesaccount@gmail.com>,
-	Kim Seer Paller <kimseer.paller@analog.com>,
-	Cedric Encarnacion <cedricjustine.encarnacion@analog.com>,
-	Chris Packham <chris.packham@alliedtelesis.co.nz>,
-	Yuxi Wang <Yuxi.Wang@monolithicpower.com>,
-	Charles Hsu <hsu.yungteng@gmail.com>,
-	ChiShih Tsai <tomtsai764@gmail.com>, linux-hwmon@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Subject: [PATCH 7/7] hwmon: adm1275: Support module auto-loading
-Message-ID: <634e76680ed93e58ebeb35db080138b791cb6c27.1781591132.git.mazziesaccount@gmail.com>
-Reply-To: Matti Vaittinen <mazziesaccount@gmail.com>
-References: <cover.1781591132.git.mazziesaccount@gmail.com>
+	 Content-Type:Content-Disposition:In-Reply-To; b=nArisfg9QYxgz3+HuQBBJ9drREzFZwLLLIm6bsRHbw3r3nLLm7IzmJQ7DARs5upaTE0qmF7qPhjw3mxRJWjPasiSd9JsBSPES/eVUYuvpojeyfUAJbtse2tfTgGmC9jV6uh7Q7hE6WL6T2yFJMazlfHV+fXzbYiWHPwjTCZaXWw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=nkqcYEA1; arc=none smtp.client-ip=192.198.163.13
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1781593785; x=1813129785;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=ultoLLjmUkQztBNzH2dBjoS6Eym1jmW9Ik8DQCM1z8o=;
+  b=nkqcYEA1DvGnCjAF40GS8zlW5rb+EVvh+isYCxB6kOkAykYHupwgyd4E
+   38+RvzjMIh9AdAjD6dioUa70oUbK42KuWQlnX8dLOG2BNATiTCdaMOYC7
+   CG+71Le14PrMvlz439LWkgmMNKfsOx9myyJBA28TPtTeBlJKgC583Z6dK
+   XyK5E7Ux31AkO/WS4od7xY45YI8rvcFpGmefXyGrILP/if42QPBa33p3s
+   uYhHx2bmGTMX3GwCVXP2rp0QMdpmP4Q+lntfdV6NrLnxB9z9nYm+PuNZo
+   A3sc/hnfhIJk1oYEqzaqpSHsolAdC8a1ACMkgyKg7NC9wOKjghpDf/sj5
+   A==;
+X-CSE-ConnectionGUID: IgwsPiptR7m6p9uvBntPbw==
+X-CSE-MsgGUID: BWEyOx0NSdmTx6GXaD8jrw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11818"; a="84913696"
+X-IronPort-AV: E=Sophos;i="6.24,207,1774335600"; 
+   d="scan'208";a="84913696"
+Received: from fmviesa005.fm.intel.com ([10.60.135.145])
+  by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jun 2026 00:09:44 -0700
+X-CSE-ConnectionGUID: YY77ryvqRmOeDU9DrFCQ1w==
+X-CSE-MsgGUID: DHlVHzP2S1aasQOHCrq+kg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.24,207,1774335600"; 
+   d="scan'208";a="252813771"
+Received: from amilburn-desk.amilburn-desk (HELO localhost) ([10.245.244.153])
+  by fmviesa005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jun 2026 00:09:41 -0700
+Date: Tue, 16 Jun 2026 10:09:39 +0300
+From: Andy Shevchenko <andriy.shevchenko@intel.com>
+To: Kees Cook <kees@kernel.org>
+Cc: Dan Carpenter <error27@gmail.com>, Jonathan Corbet <corbet@lwn.net>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Stefano Zacchiroli <zack@upsilon.cc>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Laura Abbott <labbott@kernel.org>,
+	Julia Lawall <julia.lawall@inria.fr>,
+	Wenwen Wang <wenwen@cs.uga.edu>,
+	"Gustavo A . R . Silva" <gustavoars@kernel.org>,
+	Thorsten Leemhuis <linux@leemhuis.info>,
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-hardening@vger.kernel.org, Dawei Feng <dawei.feng@seu.edu.cn>
+Subject: Re: [PATCH v3] Documentation/process: Add Researcher Guidelines
+Message-ID: <ajD2s5Q0sP679Mbh@ashevche-desk.local>
+References: <20220304181418.1692016-1-keescook@chromium.org>
+ <ahgaOigklcDCYvRp@stanley.mountain>
+ <ajACprp9UJp2JSJM@black.igk.intel.com>
+ <202606151547.DB4095584@keescook>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="1or0uwXb5QXqKjCD"
-Content-Disposition: inline
-In-Reply-To: <cover.1781591132.git.mazziesaccount@gmail.com>
-X-Migadu-Flow: FLOW_OUT
-X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.24 / 15.00];
-	SIGNED_PGP(-2.00)[];
-	FREEMAIL_REPLYTO_NEQ_FROM(2.00)[];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_TO(1.00)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	MAILLIST(-0.15)[generic];
-	HAS_LIST_UNSUB(-0.01)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,linux.dev:dkim,linux.dev:from_mime,vger.kernel.org:from_smtp];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	TAGGED_FROM(0.00)[bounces-92477-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:mazziesaccount@gmail.com,m:matti.vaittinen@fi.rohmeurope.com,m:matti.vaittinen@linux.dev,m:linux@roeck-us.net,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:wenswang@yeah.net,m:ashish.yadav@infineon.com,m:kimseer.paller@analog.com,m:cedricjustine.encarnacion@analog.com,m:chris.packham@alliedtelesis.co.nz,m:Yuxi.Wang@monolithicpower.com,m:hsu.yungteng@gmail.com,m:tomtsai764@gmail.com,m:linux-hwmon@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:krzk@kernel.org,m:conor@kernel.org,m:hsuyungteng@gmail.com,s:lists@lfdr.de];
-	FREEMAIL_TO(0.00)[gmail.com,fi.rohmeurope.com,linux.dev];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_REPLYTO(0.00)[gmail.com];
-	FORGED_SENDER(0.00)[matti.vaittinen@linux.dev,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	FORWARDED(0.00)[lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	REPLYTO_DN_EQ_FROM_DN(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	HAS_REPLYTO(0.00)[mazziesaccount@gmail.com];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[matti.vaittinen@linux.dev,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[roeck-us.net,kernel.org,lwn.net,linuxfoundation.org,yeah.net,infineon.com,gmail.com,analog.com,alliedtelesis.co.nz,monolithicpower.com,vger.kernel.org];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DKIM_TRACE(0.00)[linux.dev:+];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[]
-X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: E5B6F68CA29
-
-
---1or0uwXb5QXqKjCD
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <202606151547.DB4095584@keescook>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
+X-Rspamd-Action: no action
+X-Spamd-Result: default: False [-5.16 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,kernel.org:s:+];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	MAILLIST(-0.15)[generic];
+	MIME_GOOD(-0.10)[text/plain];
+	HAS_LIST_UNSUB(-0.01)[];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-92479-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:kees@kernel.org,m:error27@gmail.com,m:corbet@lwn.net,m:gregkh@linuxfoundation.org,m:zack@upsilon.cc,m:rostedt@goodmis.org,m:labbott@kernel.org,m:julia.lawall@inria.fr,m:wenwen@cs.uga.edu,m:gustavoars@kernel.org,m:linux@leemhuis.info,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-hardening@vger.kernel.org,m:dawei.feng@seu.edu.cn,s:lists@lfdr.de];
+	FREEMAIL_CC(0.00)[gmail.com,lwn.net,linuxfoundation.org,upsilon.cc,goodmis.org,kernel.org,inria.fr,cs.uga.edu,leemhuis.info,vger.kernel.org,seu.edu.cn];
+	MIME_TRACE(0.00)[0:+];
+	HAS_ORG_HEADER(0.00)[];
+	FORGED_SENDER(0.00)[andriy.shevchenko@intel.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[andriy.shevchenko@intel.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	TO_DN_SOME(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,intel.com:dkim,intel.com:from_mime,vger.kernel.org:from_smtp]
+X-Rspamd-Server: lfdr
+X-Rspamd-Queue-Id: 482C568CBE5
 
-=46rom: Matti Vaittinen <mazziesaccount@gmail.com>
+On Mon, Jun 15, 2026 at 03:48:02PM -0700, Kees Cook wrote:
+> On Mon, Jun 15, 2026 at 03:48:22PM +0200, Andy Shevchenko wrote:
+> > On Thu, May 28, 2026 at 01:34:34PM +0300, Dan Carpenter wrote:
+> > > On Fri, Mar 04, 2022 at 10:14:18AM -0800, Kees Cook wrote:
 
-Populating the spi_device_id -table is not enough to make the
-driver module automatically load when device-tree node for the bd12780
-is parsed at boot.
+...
 
-Adding the of_device_id tables causes the driver module to be
-automatically load at boot. Testing has been done with rather old Debian
-system.
+> > > > +  x86_64 and arm64 defconfig builds with CONFIG_FOO_BAR=y using GCC
+> > > > +  11.2 show no new warnings, and LeakMagic no longer warns about this
+> > > > +  code path. As we don't have a FooBar device to test with, no runtime
+> > > > +  testing was able to be performed.
+> > > 
+> > > People have started sending commit messages in this exact template and
+> > > normally I would ask them resend with the meta commentary from this
+> > > paragraph below the --- cut off line.
+> > > 
+> > > Do we really want this "Compile tested only" stuff in the permanent git
+> > > log?
+> > 
+> > +1 here, can we rather avoid flooding commit messages with the meta, that
+> > anyways is available in lore.kernel.org archives?
+> 
+> Hm, I have gotten a lot of push-back from maintainers (reasonablly)
+> wanting to know the specific level of testing patches get. In the case
+> of lacking hardware, this seems like useful information still.
 
-When inspecting the generated module-aliases with the insmod, following
-entries seem to be the difference:
+I am *not* against providing this information (actually I on the same page),
+I'm just against putting it into the commit message! We have a comment block
+put it there, please.
 
-alias:          of:N*T*Crohm,bd12780C*
-alias:          of:N*T*Crohm,bd12780
-
-I suspect these are required for the module loading to work.
-
-Signed-off-by: Matti Vaittinen <mazziesaccount@gmail.com>
-
----
-
-I did not add of_device_ids for other supported ICs as I can't verify it
-doesn't cause side-effects. Please let me know if you think those IDs
-should be added as well. I would be glad if I got more educated opinion
-on adding the of-IDs :) (I can squash this to 3/7 and 6/7 in next
-revision, and add own patch for adding of-IDs for other ICs if
-required).
-
----
- drivers/hwmon/pmbus/adm1275.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
-
-diff --git a/drivers/hwmon/pmbus/adm1275.c b/drivers/hwmon/pmbus/adm1275.c
-index 9e21dd4083e9..c27bb0e49354 100644
---- a/drivers/hwmon/pmbus/adm1275.c
-+++ b/drivers/hwmon/pmbus/adm1275.c
-@@ -927,9 +927,17 @@ static int adm1275_probe(struct i2c_client *client)
- 	return pmbus_do_probe(client, info);
- }
-=20
-+static const struct of_device_id adm1275_of_match[] =3D {
-+	{ .compatible =3D "rohm,bd12780", },
-+	{ .compatible =3D "rohm,bd12790", },
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(of, adm1275_of_match);
-+
- static struct i2c_driver adm1275_driver =3D {
- 	.driver =3D {
- 		   .name =3D "adm1275",
-+		   .of_match_table =3D adm1275_of_match,
- 		   },
- 	.probe =3D adm1275_probe,
- 	.id_table =3D adm1275_id,
---=20
-2.54.0
+-- 
+With Best Regards,
+Andy Shevchenko
 
 
---1or0uwXb5QXqKjCD
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCgAdFiEEIx+f8wZb28fLKEhTeFA3/03aocUFAmow8ZgACgkQeFA3/03a
-ocWU6AgAoT82nT1EGSpddrWfMks6Zk3mySD9Bdxz7pFfZrRN0JduV3ls/X16kvgI
-qS3X6EnFyg7Gq1xjB7X8rZ45RODCcYnnQR3O3aw0HuTrsIubC4Q/AN4zhXkDYJNv
-kgHO9RvYt4aS7ZZmKWHw4YIY3zIC3KEvC2MHyOzzhcQODy+5OIffHWLpkrvnuyM9
-6CLBwOwzyEAhlfpTiA9xa4GpgLENoRh7DBcjdO4CFMl3UoKn20uJpXixeJvfZ+w7
-Sj+aE6ow8JPjenAp6tf3bgAXHhh4yfN5hgy6/8dZaKiy0IQgmbq2vUuMPUUSWhZY
-eDJovX0KLywjiTrriZN4XACxZuvWOQ==
-=TKTs
------END PGP SIGNATURE-----
-
---1or0uwXb5QXqKjCD--
 
