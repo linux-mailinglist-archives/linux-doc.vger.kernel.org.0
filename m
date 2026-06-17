@@ -1,383 +1,262 @@
-Return-Path: <linux-doc+bounces-92676-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92678-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 9KGpKOHZMmq06AUAu9opvQ
-	(envelope-from <linux-doc+bounces-92676-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 19:31:13 +0200
+	id DrLwLYHaMmrH6AUAu9opvQ
+	(envelope-from <linux-doc+bounces-92678-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 19:33:53 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 16D5B69BB5A
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 19:31:13 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5360C69BB87
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 19:33:53 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=oracle.com header.s=corp-2025-04-25 header.b=CjW8FCxN;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92676-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92676-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=reject) header.from=oracle.com;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=intel.com header.s=Intel header.b=TFmsyYcv;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92678-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92678-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=intel.com;
+	arc=reject ("cv is fail on i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 33AC030E48F6
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 17:27:22 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id CBC0F3024568
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 17:33:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 26F443624CC;
-	Wed, 17 Jun 2026 17:26:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 753FA374183;
+	Wed, 17 Jun 2026 17:33:48 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com [205.220.165.32])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.20])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 686AA35E1B9;
-	Wed, 17 Jun 2026 17:26:51 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781717213; cv=none; b=F7AJ21zYmenRV3hshTyOTZHmV95ARFX2IecpS/hO9ZmxBjihRg7tLXYtePgMkV3akRbJJ86EUw4lQ99lm/MCM5Qku4VE19DuJDwbwwfHOsc7a9O9Dea2Th5kxEADaJ3Mv9xKPbGlzsK/Df+UqiKYvlUt0EwzznmKVaRtEMPn0+M=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781717213; c=relaxed/simple;
-	bh=bZa7lSVKz4G+YmRZFTct53jsdKilmdaoAmNnmw7txuY=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=GsIOuYVpvKPzltpuPBrb9hoEjS4Cd74RqkKunWXHY1aMzQt4EcQiz+yTb7pG/TqH/NAitEEDEOH344V8leXVKDD2K3HFKg3XNNJNykJmrLVMvLp7u4DPfCdUxsZxLt+AKO2Jw4O5yyO2lYc5A863SaWuQr34hmkjLnt28avfSGY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=CjW8FCxN; arc=none smtp.client-ip=205.220.165.32
-Received: from pps.filterd (m0246617.ppops.net [127.0.0.1])
-	by mx0b-00069f02.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 65HEsR4i2367895;
-	Wed, 17 Jun 2026 17:26:27 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
-	:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=corp-2025-04-25; bh=JzJMA
-	wxI8MaOV9KoH9x2XioBUzWPQ1np5ZRUV6yK6M8=; b=CjW8FCxNvxjqS+g9ojf60
-	qZ2DFDVCcJlQw8s6XONlTJo7TQ6chdL9QQvJN7ixtNLMlI/ybDA/pYCFFvoAbI76
-	P9kq1mdKse6vpN0YtTahv375t95SeF+CgF3OyabRnpW68L7+PsipusScKP7jpTOW
-	kim0QQ2iUBX9npyGp71GG7wKkiaYWt+xMfgwEXHkK2d3nLLJwqJ9PH8DzQIqZRM+
-	djGyRR8ECKlm1Jpc3j4w/HIEyE71rPf7pHDsEz/ehT4IIknp6cEURHs7qw0+/T/u
-	liCG9TxbfInyWlWdz1DfvFkK2+myuCh+WSoEbhQPvfVrtrROEJAmj3dnowb0Vbco
-	g==
-Received: from iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta01.appoci.oracle.com [130.35.100.223])
-	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4eueg31c4h-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Wed, 17 Jun 2026 17:26:27 +0000 (GMT)
-Received: from pps.filterd (iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
-	by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.7/8.18.1.7) with ESMTP id 65HHNVP9003778;
-	Wed, 17 Jun 2026 17:26:26 GMT
-Received: from brm-x62-16.us.oracle.com (brm-x62-16.us.oracle.com [10.80.150.37])
-	by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTP id 4eudvc0wgy-12;
-	Wed, 17 Jun 2026 17:26:26 +0000 (GMT)
-From: Jane Chu <jane.chu@oracle.com>
-To: akpm@linux-foundation.org
-Cc: willy@infradead.org, jack@suse.cz, viro@zeniv.linux.org.uk,
-        brauner@kernel.org, muchun.song@linux.dev, osalvador@suse.de,
-        david@kernel.org, hughd@google.com, baolin.wang@linux.alibaba.com,
-        linmiaohe@huawei.com, nao.horiguchi@gmail.com, lorenzo@kernel.org,
-        rppt@kernel.org, peterx@redhat.com, corbet@lwn.net,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org
-Subject: [PATCH v2 11/11] hugetlb: make hugetlb_[un]reserve_pages() to take PAGE granularity index
-Date: Wed, 17 Jun 2026 11:25:32 -0600
-Message-ID: <20260617172534.1740152-12-jane.chu@oracle.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20260617172534.1740152-1-jane.chu@oracle.com>
-References: <20260617172534.1740152-1-jane.chu@oracle.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1EF833FE02;
+	Wed, 17 Jun 2026 17:33:46 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1781717628; cv=fail; b=mavVIBdukORZ0pU69ZVuX2Jd6r4RQF7kDy0oMAzc3m3AnmqsIqT1joVn1wAYBxQBmFY/rpjfiYndb+7uQiSps9qk0iQXnqwVFoAjTxSRyg86xJ9aMvzFAziy34UnlhdzLaPqoGc7iEFWCrSH7SToYXOBCt+p1UdETAu/HSwcF4o=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1781717628; c=relaxed/simple;
+	bh=EtTvsgfXrkTiipa9uZ78laulssYvW4u4+EjXAKaBlm4=;
+	h=Message-ID:Date:Subject:To:CC:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=EdJaJNZqkOJW/CUNjhzdegty9RO82Dv+sF97Q64Yfjd37unRr522oazLX9ZWqbVzeiM0G9por1Ql4aV03Wbabiqd1z/qSGzvPCh3QpjlTV5tRwRSZKrOjwbVmbxulnNFyHpUaG9e5kHU0WYZrKZwUouLKjwscW+G0KZznWefoGg=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=TFmsyYcv; arc=fail smtp.client-ip=198.175.65.20
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1781717627; x=1813253627;
+  h=message-id:date:subject:to:cc:references:from:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=EtTvsgfXrkTiipa9uZ78laulssYvW4u4+EjXAKaBlm4=;
+  b=TFmsyYcvwjT4dOska1UYV32CSSG08CBvNsQfNUfZV8gEW2zuoeXYwwlD
+   o0kbsjw7hsi7w4ixb23BEs5915VSnGNHTfTgr7K7144gcu11qY23pfR5W
+   Zqxt+fa32thvoKmsMo3OTvztxRP62RxIzxXxXXe/l6T5kBAF3jWluSsD+
+   toGsW2VsaSx5MxZ/ixSJQ4bv9upewjdmEoCwhfCsdZWzvTlhMXW3kNRz0
+   3Vm8kxSVUB5ifmHtH72sr+/yQk7ThcwKfXGV7rSGzFH9Jwe14fTAElqPC
+   bGIK5eNJ5D8TIY/vO/zA1JL1RC1fCYfiJprK4ggbB5dfLa2oeIztBwvgw
+   w==;
+X-CSE-ConnectionGUID: nWUzvvGtQUeKTwEI4kJeRQ==
+X-CSE-MsgGUID: 6MZChhLSSc2k05aQCLrgjA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11820"; a="82303930"
+X-IronPort-AV: E=Sophos;i="6.24,210,1774335600"; 
+   d="scan'208";a="82303930"
+Received: from orviesa009.jf.intel.com ([10.64.159.149])
+  by orvoesa112.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Jun 2026 10:33:47 -0700
+X-CSE-ConnectionGUID: r7309kLaR6Cc1uy8lSXjFg==
+X-CSE-MsgGUID: dSpO+affSle3BXFJQA2fPg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.24,210,1774335600"; 
+   d="scan'208";a="248204936"
+Received: from orsmsx901.amr.corp.intel.com ([10.22.229.23])
+  by orviesa009.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Jun 2026 10:33:47 -0700
+Received: from ORSMSX901.amr.corp.intel.com (10.22.229.23) by
+ ORSMSX901.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.37; Wed, 17 Jun 2026 10:33:45 -0700
+Received: from ORSEDG902.ED.cps.intel.com (10.7.248.12) by
+ ORSMSX901.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.37 via Frontend Transport; Wed, 17 Jun 2026 10:33:45 -0700
+Received: from SN4PR0501CU005.outbound.protection.outlook.com (40.93.194.20)
+ by edgegateway.intel.com (134.134.137.112) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.37; Wed, 17 Jun 2026 10:33:45 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=qKGelqpvgeNvUR6CKhkUUYcLWQe83hdF1BIzsYVJvt9WwXH7/VnHQZZpwFH59Qpi7YxQaXcWFPJGdnnp1H3E4EZ/OtE6/i67fdVIsctT1nWrTxX2qIo9L8hfhGXWd6MgadWZn+YUyh/0ZFYufuUyk1i3QrKqckjX/DP9aJEP609GMHzItOGgaHjYz3ho5fR4nkGU+ZgrdI8AbKEQZoUm5PM8u8xqdF1Hv7/+98TfKO7Y4ulGulwZ2yFvZus0Im2nZAMIu4ZrszZvwxFUUoiR2axcv1FPbwJVUMvb//96YiZMvcPqD/sQMN1c5cmJk4RqD5Onnamkxzn7+fAveRCE0A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=s/VxWxHHXm/CHX17ONjs0/+VU56rTPtY20K/yKHX5Uo=;
+ b=eI1nc/cg7bdF1mUp6Q5H4oefqXhuU7E1u+UhLbZBM5Wuzx8GKA/5CsMvL4MxjTLs3JMg7ZkTI5039fkrRW8yuek5VCXqX9+aPb1KFcTTH45zUUXzwXuxyoZ5051r6Aaaqjh0eMGKbZEFD6/cs7nwPC7KKQszqNJqgbVRVl6LtXtLDfBkQ10ZxRbezFjwFN2BRNvgCaMFIpTJ5cXMNHPadUkluHJYVBenlQ22Tl00jG3dYpg9OaZHHkf065Qp7h+g2QzNN5R9vNwWESySjQJM9rLXVunkzl/sCQa2dzXYTKZ/iwyo3x5/JHmQeyqCPc9IfZ637l8ePonQk50zGeyKAQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Received: from SJ2PR11MB8370.namprd11.prod.outlook.com (2603:10b6:a03:540::20)
+ by PH7PR11MB6859.namprd11.prod.outlook.com (2603:10b6:510:1ef::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.11; Wed, 17 Jun
+ 2026 17:33:38 +0000
+Received: from SJ2PR11MB8370.namprd11.prod.outlook.com
+ ([fe80::b6cf:ce77:3cdf:7cc]) by SJ2PR11MB8370.namprd11.prod.outlook.com
+ ([fe80::b6cf:ce77:3cdf:7cc%4]) with mapi id 15.21.0092.017; Wed, 17 Jun 2026
+ 17:33:38 +0000
+Message-ID: <413ac3d1-0377-4762-a88f-3d7bfc3a9dff@intel.com>
+Date: Wed, 17 Jun 2026 10:33:34 -0700
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 00/12] [PATCH v3 00/12] x86/resctrl: Add kernel-mode
+ (e.g., PLZA) support to the resctrl subsystem
+To: Babu Moger <babu.moger@amd.com>, "Moger, Babu" <bmoger@amd.com>,
+	<corbet@lwn.net>, <tony.luck@intel.com>, <Dave.Martin@arm.com>,
+	<james.morse@arm.com>, <tglx@kernel.org>, <bp@alien8.de>,
+	<dave.hansen@linux.intel.com>
+CC: <skhan@linuxfoundation.org>, <x86@kernel.org>, <mingo@redhat.com>,
+	<hpa@zytor.com>, <akpm@linux-foundation.org>, <rdunlap@infradead.org>,
+	<pawan.kumar.gupta@linux.intel.com>, <feng.tang@linux.alibaba.com>,
+	<dapeng1.mi@linux.intel.com>, <kees@kernel.org>, <elver@google.com>,
+	<lirongqing@baidu.com>, <paulmck@kernel.org>, <bhelgaas@google.com>,
+	<seanjc@google.com>, <alexandre.chartre@oracle.com>, <yazen.ghannam@amd.com>,
+	<peterz@infradead.org>, <chang.seok.bae@intel.com>, <kim.phillips@amd.com>,
+	<xin@zytor.com>, <naveen@kernel.org>, <thomas.lendacky@amd.com>,
+	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<eranian@google.com>, <peternewman@google.com>
+References: <cover.1777591496.git.babu.moger@amd.com>
+ <a1dbbb1a-ef78-468a-a80c-572a85220bbe@intel.com>
+ <4abf97e7-5ef7-4640-b182-83e8bd5bb418@amd.com>
+ <2ba92dec-47ea-404e-8dc9-197a846bdb2d@intel.com>
+ <572cb801-c52c-4e36-8365-a309e2db6106@amd.com>
+From: Reinette Chatre <reinette.chatre@intel.com>
+Content-Language: en-US
+In-Reply-To: <572cb801-c52c-4e36-8365-a309e2db6106@amd.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: MW4P220CA0029.NAMP220.PROD.OUTLOOK.COM
+ (2603:10b6:303:115::34) To SJ2PR11MB8370.namprd11.prod.outlook.com
+ (2603:10b6:a03:540::20)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-17_02,2026-06-17_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
- phishscore=0 bulkscore=0 mlxlogscore=999 malwarescore=0 mlxscore=0
- lowpriorityscore=0 adultscore=0 spamscore=0 classifier=spam adjust=0
- reason=mlx scancount=1 engine=8.19.0-2606150000 definitions=main-2606170167
-X-Authority-Analysis: v=2.4 cv=I8VVgtgg c=1 sm=1 tr=0 ts=6a32d8c3 b=1 cx=c_pps
- a=zPCbziy225d3KhSqZt3L1A==:117 a=zPCbziy225d3KhSqZt3L1A==:17
- a=FelO9ux0wxsA:10 a=VkNPw1HP01LnGYTKEx00:22 a=jiCTI4zE5U7BLdzWsZGv:22
- a=7Gl3-_t3PgB9XO-mQDs3:22 a=yPCof4ZbAAAA:8 a=yHGXro-o_ZvKznPa7vkA:9
- a=5yU3S35YU4bGjq-dph-N:22 a=Bho9c0fBagfJEIQBS7DQ:22 cc=ntf awl=host:12312
-X-Proofpoint-GUID: 4z_6LYTeuHgG3mJtU6XoEPj8BQDDRmP0
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE3MDE2OCBTYWx0ZWRfX59p4of+bEfsl
- mRXJ2w0HfKklFcyPuMsVA5JYitMs9UjXzmqRWyAkcovsCtba4Na7Uq4dz7NI3VTA0A8M843oE+z
- Nd6tZJYYKZ/NBlwrE6CfXU4moCkYCL8Hjh94QGc5KbiFh5xeMTus1tZrGuTFArKGzcFm7tl+SdL
- RP6wEO/v/3Tf/TvIL7SkvHHi82mNdfwdk4x6B9unA+J9hXtihNNFKBJ7HfrGyYaW0+JB4N2tN+m
- VY2X4rV0MObqr3mAjrXNyssJnY2ZkVvV8meRy56kpasOIXKS5Boo9G39qL+WrwsraP915yXEngA
- pChLyeCZQYCSgNQuXKK1PaY7stl9vp0LpfCVZsqCpCgEb+x6IYdfR08eo1iwk7zBTVT+91dyBeD
- GuzfyXcecJ+G58Mqqz2EOA7CPjJLXs8dpg3j+C1yRSRZswjgN/kTtFktD+VDgOr2ApQN4dHjmdP
- Y2CcoHrH2qmR0fTbycG1AhqKRCINuy6qeSklrmy4=
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE3MDE2OCBTYWx0ZWRfX7IakPwS9wq+H
- UguJV3pMlw68ZSF0Xa9EmSsYd15kciF0sCORFcpSdOfFfbq63zPVBRxTnLhUq7rShOBoVwJ0/0c
- B14vcDI6xTaP2HmPXUEXVmVfYg0jhgIzJysqhvaWr5gD4G2UYsL2
-X-Proofpoint-ORIG-GUID: 4z_6LYTeuHgG3mJtU6XoEPj8BQDDRmP0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ2PR11MB8370:EE_|PH7PR11MB6859:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2049d42c-efc8-4a81-8fb6-08decc9690c3
+X-LD-Processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|23010399003|7416014|921020|22082099003|18002099003|11063799006|56012099006|4143699003;
+X-Microsoft-Antispam-Message-Info: o0X0GJD5h0hzUmjIh+NJ6Ob79RuxPrqJRnjfu7oN44F2V8reBfnJvp2ykyZnCYdafyNgK//87JFVEAdflBf0jahEIMcJHyA17wqAAGb0yc+SMH4U3XWirZF41cwu3JHTwIX7MrnuV602zDlm/PYUpYJA05tWDbj7Z4KsGDqOv/EpGHZ/Y/0VfZhywk80vOEgZEd/84QxIwLt6xP5L7r9s+hezK3jqEnKt4zP8ZmloGZO8um7DCiaA/VsQtKk/R7HKd6J6bn7zrd3uV89/pZ6ycqkfasae80kaCnH3TNLLPdxwsYp8Sh/BJa0Qz40KFOk+Qn1f6wSO10Ac1sN+pMXp+HemmOi4NQzpwZoDVpE6SiBrTVXEBZK6jTfGYDdhgXRN/nmaeBCWzszdgJ6Uq/u2lOcjVoMg7wYz3iFy1DhVUTii104bdYQSzo1n1rJL5WKkjijqjqIZpa1VgQUd1L9SlUl5gsP39fjo2P1p6AeZWRa/Kbn8IPK1OzdqFYXImVxxDX2s10pqe7LXrRxnAz+s3KkiQ5Z5tCO31wMx8livCB7IdLnw7LtyaTa2uR/vvDvzs9ujPz49ruXCSDoCyIprrztQIFRAlfTuqguPsY5FCePNoVO3jivi3cmBvvdpUIbn8rjzOiGz7+MNOmg8HVxob8cxuWuTjY9a0rpFMtiJK6h8DgZY4p2SATzkYLZmphGZkUSg7ykJ6lZ7L5cnVrSAF5Ap3WYZE5z4w1M0SAW2LI=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ2PR11MB8370.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(23010399003)(7416014)(921020)(22082099003)(18002099003)(11063799006)(56012099006)(4143699003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Z3d0STZJMW0rZ3pvQ3BGWjByUGVUVUNsTXprTGs2eGM2Ulp6SElhYndyMTRo?=
+ =?utf-8?B?Z0Uya09HczYyUjZDNUpDd3BsWkhFdzdvTEpzanN4KzdpaGFPd3AwU2xWV1lt?=
+ =?utf-8?B?Z0VRbmVuSlJ3cmtrazJFbG9Nay9keDJpVXdnaitFQ1AvV2o0UDExZHJQRDZw?=
+ =?utf-8?B?M1F4RTltaFZ2MCtNR0h6Y0Z6QWpYREFyS2MzeFJvVVR0eTlqMm9yd2Zpd0RM?=
+ =?utf-8?B?aWRTZDYyWWdYcDZ6c1hXeHF4SHRYaXQvejJ5ZHFmN05nZXY0dmRYaXYzb2kw?=
+ =?utf-8?B?VDNpVWIxQ1dLcVJtQ1Zsa3dJeFIxdjM4aDhaZFU0ZlZGenJjK3NpajloV3FD?=
+ =?utf-8?B?WFBpSXc5TUdtaTl5VUZJM1poUEEvbzY2aWQ4SUt3NlY1OTBZTWJvTVFTaTh2?=
+ =?utf-8?B?a0FjRU93QmFWK0hqUUNjeUM0WXU4aDlCdzJ4Q0xpcUl0OWFRMjJLb2lwcFhT?=
+ =?utf-8?B?SkgwT0NUUnoyVEhEQ1VwSTZZM0p1bGRON2UveFJuemFFUXFxVllnS1hFQVJO?=
+ =?utf-8?B?d1VxakU1Wkd0aWhCYWV1bEtaZXlUM3pDcmhFQTdwbUg2Ly9kcTlVSnRsSUxh?=
+ =?utf-8?B?b20xU1F0OEZyR2Z6eklVNUFXdXBpYXNMRHk3QWRhR0RiNW9yaE80enRmcTd4?=
+ =?utf-8?B?cE0zK2NiS2t3SnZEazZ4L282MWlKZHhRV3FRdlFqelNSL0d0MmhXUGVRSjRw?=
+ =?utf-8?B?V09XZ1J1dUpYWXhYcitPT010ODUzaFFKSUV4dFU0a0E3T3dhQk8wSW4wU1ZP?=
+ =?utf-8?B?YmxLdWlteUpoQjRSOUxJZlVpaHNlSXp2di9XbW9Ld1dvVk9QTXZHekNsOUtH?=
+ =?utf-8?B?TU95SGI2c2NoRlc3dS8xQW0wMStwbXR4VG9LcURWbWVDcHkxWWFsU3ZYY0dS?=
+ =?utf-8?B?Q3d4d3haOEZ0WkV6RE9EajVTcmNPWFdYei9LSTN2alkzMldLYkVDano2RUdT?=
+ =?utf-8?B?aUh1Qkh3V1NDbWlRL2crOXhnR29UTnQ0SW1LdWs0OXg2VlhOeFNleGdaY1FK?=
+ =?utf-8?B?dW9SUEx1N3ByUTJua1NBQ0JYNExjQ0hHOU5SeVd5K0lKYmxQWEpKbVM3NGUx?=
+ =?utf-8?B?Y1lXcjE4SXRVMktwOFQ2eXRxY3N4eGFwUGc2d3pKUDV0d29CVnR0RGlxMS9F?=
+ =?utf-8?B?MFRrVC94YTQ5Y3M2VnBndDdVcTFOU0lyT29VRHB2WEhDdUVJZjgybmduSXJu?=
+ =?utf-8?B?aG1GMUN4ZzVDZHpGOGNDQllnQ2IxejFVWnorVFp6dEVRcXppTGttL0NBeXdH?=
+ =?utf-8?B?dXhkSnJQRFR0a01rR2FVZHRWZTZZTVJVbEl1aHovT3dUTXg4a0hjRjludjBU?=
+ =?utf-8?B?VHhLWC9hb2o0akJVT3hXWGk0eHRDRUZiME41UDVYc3pVclpybGdZWmR5eVd0?=
+ =?utf-8?B?NGErL1dzODZHSWZxOFlUSTlGVDVjM3oxSnRaRVI2WUE0NzRxayszbTR2Yk5R?=
+ =?utf-8?B?bjZ6d0lSVUxOdXVBbEJZV1hvSEdha2N4dmpNdlV0aGhsSkN3aUdsRmdHMU0w?=
+ =?utf-8?B?OGJJenV5c25QTnB0dVpSOC83QnlpZ3FVcXJDMFdmWE5WMUJsaWxSME81elNG?=
+ =?utf-8?B?amVNMG5oeTFUSFdPcXlHM1VoemVsWW94TnNOczY0YllTOGphRktwTXQ0OUFB?=
+ =?utf-8?B?eWs1MVU4Ym1XTXEyUjEvazY0endsejJtbVNULzJEK2MwTjQ2MjByanNWaklY?=
+ =?utf-8?B?K01DdHRkZW1Zb05BOXI2RVNJMGM4UXVQUUJiRmptSm8rWDVLTlp2SUhscHlY?=
+ =?utf-8?B?MzN3YlFRWnd2b29FMnV3V09aVHgvV21MOUJWOTRROTFOTzVyV2tLTTM1b0Qy?=
+ =?utf-8?B?S2NsRlo1QTdFcE8wVk4vSzBWUi9EaDR4cm5vTXhlR25wRkFwTHUxbFVLMDhT?=
+ =?utf-8?B?aWxUa2Q1U2h1OHhnbVBGSG15V0E4TDJBNHQ3WC9IVnBGeVBqUlgvY1lDTTRE?=
+ =?utf-8?B?MXNTNGppUjVDNDBNSDhOS2xubzN3cTBKR2lMbWQxVFM4ZFl6L0hIbDVtbUZ2?=
+ =?utf-8?B?N2xtRUNPMjM0VktQM3VqK3o2VlN0VEo2Tjg2OWdCTDBpem9Cck1CS2VaM2RY?=
+ =?utf-8?B?RVd5QXAvZkxTYXFvUUlUVkUvS0krckU0OWk4SHRXaUk2ZVc3akNvM2psSGR1?=
+ =?utf-8?B?NnN5SnRHb0Ruc0R2WTZ4b2RYakt5eTQvNVF2ZURubmlDK1ljWnVVOHNpV1I0?=
+ =?utf-8?B?RmxVNWNTbFFtcWlYakozRXkrWGdvUzZDV1h5NW5qYWZPT1VkaEhOZ0FuSWZk?=
+ =?utf-8?B?TEhlblRFQnR2OFRqVk83eWhLaUo5SVVPUCtjMW5MMkJuWHJyK0kvZk00NFha?=
+ =?utf-8?B?S1BnQ2ozZ3d0RldINmhlejdpbEJjUmZ0U0oxMFM3bGt4SzljaW1tQVR4VnZB?=
+ =?utf-8?Q?Gr1NdAzbCMTU0I4A=3D?=
+X-Exchange-RoutingPolicyChecked: W6p7wXmr2VTBfLeYdcR1uNHhLGEkn4YPXDu23SbzINvCSfOMIHLjGsH0AMbgeHvPGj/xuapDrfVQte8u3TenYcA3gwhT23K03ipE4bijiAYTcTwPAy/cwV00yWqQGUkQuP2vZbAAvZOhLpdAplcj26PDtT0je512RqxE0foTcDgc+Ta7dcgBjY+Il6nZBDM5W0RlyC5oqX5Mtic+tzTU9hZEjx1jLHJnD8ezSZO9uZc5RfponUjpYE9K81iAWMB3ezaRp9Bq6QGmebWuEfN4W/SPqRHvtMuUyU2jFTJfsRoiEtAfcC+/ln/iLsEnUUObbC/HPgs9gsO555hZBXUkfA==
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2049d42c-efc8-4a81-8fb6-08decc9690c3
+X-MS-Exchange-CrossTenant-AuthSource: SJ2PR11MB8370.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2026 17:33:38.0703
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: IZkxdYXKkSpYEiJ3FeN3ktPAGRj1W+MR52sW+K7Kq6ApYm+8vN6jtFuCzl2f2XXbX4aH34zInu+TfE0BTzvRcIsrhN5Fs6IQdDxOkKabaH4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR11MB6859
+X-OriginatorOrg: intel.com
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-6.16 / 15.00];
-	WHITELIST_DMARC(-7.00)[oracle.com:D:+];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[oracle.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[oracle.com:s=corp-2025-04-25];
+X-Spamd-Result: default: False [-3.16 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,kernel.org:s:+];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[infradead.org,suse.cz,zeniv.linux.org.uk,kernel.org,linux.dev,suse.de,google.com,linux.alibaba.com,huawei.com,gmail.com,redhat.com,lwn.net,vger.kernel.org,kvack.org];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-92676-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:akpm@linux-foundation.org,m:willy@infradead.org,m:jack@suse.cz,m:viro@zeniv.linux.org.uk,m:brauner@kernel.org,m:muchun.song@linux.dev,m:osalvador@suse.de,m:david@kernel.org,m:hughd@google.com,m:baolin.wang@linux.alibaba.com,m:linmiaohe@huawei.com,m:nao.horiguchi@gmail.com,m:lorenzo@kernel.org,m:rppt@kernel.org,m:peterx@redhat.com,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:naohoriguchi@gmail.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[jane.chu@oracle.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[36];
+	TAGGED_FROM(0.00)[bounces-92678-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:babu.moger@amd.com,m:bmoger@amd.com,m:corbet@lwn.net,m:tony.luck@intel.com,m:Dave.Martin@arm.com,m:james.morse@arm.com,m:tglx@kernel.org,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:skhan@linuxfoundation.org,m:x86@kernel.org,m:mingo@redhat.com,m:hpa@zytor.com,m:akpm@linux-foundation.org,m:rdunlap@infradead.org,m:pawan.kumar.gupta@linux.intel.com,m:feng.tang@linux.alibaba.com,m:dapeng1.mi@linux.intel.com,m:kees@kernel.org,m:elver@google.com,m:lirongqing@baidu.com,m:paulmck@kernel.org,m:bhelgaas@google.com,m:seanjc@google.com,m:alexandre.chartre@oracle.com,m:yazen.ghannam@amd.com,m:peterz@infradead.org,m:chang.seok.bae@intel.com,m:kim.phillips@amd.com,m:xin@zytor.com,m:naveen@kernel.org,m:thomas.lendacky@amd.com,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:eranian@google.com,m:peternewman@google.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[reinette.chatre@intel.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,intel.com:dkim,intel.com:mid,intel.com:from_mime,vger.kernel.org:from_smtp];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jane.chu@oracle.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[reinette.chatre@intel.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[oracle.com:+];
-	TO_DN_NONE(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+];
 	ALIAS_RESOLVED(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp,oracle.com:dkim,oracle.com:email,oracle.com:mid,oracle.com:from_mime];
-	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_COUNT_SEVEN(0.00)[7]
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCVD_COUNT_SEVEN(0.00)[10]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 16D5B69BB5A
+X-Rspamd-Queue-Id: 5360C69BB87
 
-hugetlb_reserve_pages / hugetlb_unreserve_pages have two callers and
-one of them is outside hugetlb. Make both functions to take PAGE granularity
-index to be consistent with the rest of MM.
+Hi Babu,
 
-Signed-off-by: Jane Chu <jane.chu@oracle.com>
----
- Documentation/mm/hugetlbfs_reserv.rst | 19 ++++++++++---------
- fs/hugetlbfs/inode.c                  | 25 +++++++++++--------------
- mm/hugetlb.c                          | 23 ++++++++++++++++++-----
- mm/memfd.c                            | 20 ++++++--------------
- 4 files changed, 45 insertions(+), 42 deletions(-)
+On 6/17/26 8:56 AM, Babu Moger wrote:
+> 
+> The display will look like this when the system boots up.
+> 
+> # cat info/kernel_mode
+>   inherit_ctrl_and_mon:
+>   global_assign_ctrl_assign_mon_per_cpu:group=uninitialized
+>   global_assign_ctrl_assign_mon_per_cpu:group=uninitialized
+> 
+> There will not be any group associated with "inherit_ctrl_and_mon".
+> It is only used to switch from other two modes.
 
-diff --git a/Documentation/mm/hugetlbfs_reserv.rst b/Documentation/mm/hugetlbfs_reserv.rst
-index a49115db18c7..880e9ccd5b57 100644
---- a/Documentation/mm/hugetlbfs_reserv.rst
-+++ b/Documentation/mm/hugetlbfs_reserv.rst
-@@ -112,11 +112,12 @@ flag was specified in either the shmget() or mmap() call.  If NORESERVE
- was specified, then this routine returns immediately as no reservations
- are desired.
- 
--The arguments 'from' and 'to' are huge page indices into the mapping or
--underlying file.  For shmget(), 'from' is always 0 and 'to' corresponds to
--the length of the segment/mapping.  For mmap(), the offset argument could
--be used to specify the offset into the underlying file.  In such a case,
--the 'from' and 'to' arguments have been adjusted by this offset.
-+The arguments 'from' and 'to' are base page indices into the mapping or
-+underlying file that must be huge page aligned.  For shmget(),
-+'from' is always 0 and 'to' corresponds to the length of the segment/mapping.
-+For mmap(), the offset argument could be used to specify the offset into
-+the underlying file.  In such a case, the 'from' and 'to' arguments have been
-+adjusted by this offset.
- 
- One of the big differences between PRIVATE and SHARED mappings is the way
- in which reservations are represented in the reservation map.
-@@ -136,10 +137,10 @@ to indicate this VMA owns the reservations.
- 
- The reservation map is consulted to determine how many huge page reservations
- are needed for the current mapping/segment.  For private mappings, this is
--always the value (to - from).  However, for shared mappings it is possible that
--some reservations may already exist within the range (to - from).  See the
--section :ref:`Reservation Map Modifications <resv_map_modifications>`
--for details on how this is accomplished.
-+always the number of huge pages covered by the range [from, to).
-+However, for shared mappings it is possible that some reservations may already
-+exist within the range [from, to).  See the section :ref:`Reservation Map
-+Modifications <resv_map_modifications>` for details on how this is accomplished.
- 
- The mapping may be associated with a subpool.  If so, the subpool is consulted
- to ensure there is sufficient space for the mapping.  It is possible that the
-diff --git a/fs/hugetlbfs/inode.c b/fs/hugetlbfs/inode.c
-index 0b49a79efb08..fe1ebfd604dc 100644
---- a/fs/hugetlbfs/inode.c
-+++ b/fs/hugetlbfs/inode.c
-@@ -150,10 +150,8 @@ static int hugetlbfs_file_mmap(struct file *file, struct vm_area_struct *vma)
- 	if (inode->i_flags & S_PRIVATE)
- 		vma_flags_set(&vma_flags, VMA_NORESERVE_BIT);
- 
--	if (hugetlb_reserve_pages(inode,
--				vma->vm_pgoff >> huge_page_order(h),
--				len >> huge_page_shift(h), vma,
--				vma_flags) < 0)
-+	if (hugetlb_reserve_pages(inode, vma->vm_pgoff, len >> PAGE_SHIFT,
-+				  vma, vma_flags) < 0)
- 		goto out;
- 
- 	ret = 0;
-@@ -389,7 +387,7 @@ hugetlb_vmdelete_list(struct rb_root_cached *root, pgoff_t start, pgoff_t end,
-  */
- static void remove_inode_single_folio(struct hstate *h, struct inode *inode,
- 		struct address_space *mapping, struct folio *folio,
--		pgoff_t index, bool truncate_op)
-+		pgoff_t idx, bool truncate_op)
- {
- 	/*
- 	 * If folio is mapped, it was faulted in after being
-@@ -401,7 +399,7 @@ static void remove_inode_single_folio(struct hstate *h, struct inode *inode,
- 	 */
- 	folio_lock(folio);
- 	if (unlikely(folio_mapped(folio)))
--		hugetlb_unmap_file_folio(h, mapping, folio, index);
-+		hugetlb_unmap_file_folio(h, mapping, folio, idx);
- 
- 	/*
- 	 * We must remove the folio from page cache before removing
-@@ -413,8 +411,10 @@ static void remove_inode_single_folio(struct hstate *h, struct inode *inode,
- 	VM_BUG_ON_FOLIO(folio_test_hugetlb_restore_reserve(folio), folio);
- 	hugetlb_delete_from_page_cache(folio);
- 	if (!truncate_op) {
--		if (unlikely(hugetlb_unreserve_pages(inode, index,
--							index + 1, 1)))
-+		pgoff_t index = idx << huge_page_order(h);
-+		pgoff_t next = index + pages_per_huge_page(h);
-+
-+		if (unlikely(hugetlb_unreserve_pages(inode, index, next, 1)))
- 			hugetlb_fix_reserve_counts(inode);
- 	}
- 
-@@ -476,9 +476,8 @@ static void remove_inode_hugepages(struct inode *inode, loff_t lstart,
- 	}
- 
- 	if (truncate_op)
--		(void)hugetlb_unreserve_pages(inode,
--				lstart >> huge_page_shift(h),
--				LONG_MAX, freed);
-+		(void)hugetlb_unreserve_pages(inode, lstart >> PAGE_SHIFT,
-+					      LONG_MAX, freed);
- }
- 
- static void hugetlbfs_evict_inode(struct inode *inode)
-@@ -1429,9 +1428,7 @@ struct file *hugetlb_file_setup(const char *name, size_t size,
- 	inode->i_size = size;
- 	clear_nlink(inode);
- 
--	if (hugetlb_reserve_pages(inode, 0,
--			size >> huge_page_shift(hstate_inode(inode)), NULL,
--			acctflag) < 0)
-+	if (hugetlb_reserve_pages(inode, 0, size >> PAGE_SHIFT, NULL, acctflag) < 0)
- 		file = ERR_PTR(-ENOMEM);
- 	else
- 		file = alloc_file_pseudo(inode, mnt, name, O_RDWR,
-diff --git a/mm/hugetlb.c b/mm/hugetlb.c
-index a677ea774143..302f9cf9ef6b 100644
---- a/mm/hugetlb.c
-+++ b/mm/hugetlb.c
-@@ -6528,7 +6528,7 @@ long hugetlb_change_protection(struct vm_area_struct *vma,
-  */
- 
- long hugetlb_reserve_pages(struct inode *inode,
--		long from, long to,
-+		long from_idx, long to_idx,
- 		struct vm_area_struct *vma,
- 		vma_flags_t vma_flags)
- {
-@@ -6538,14 +6538,21 @@ long hugetlb_reserve_pages(struct inode *inode,
- 	struct resv_map *resv_map;
- 	struct hugetlb_cgroup *h_cg = NULL;
- 	long gbl_reserve, regions_needed = 0;
-+	long from, to;
- 	int err;
- 
-+	VM_WARN_ON(!IS_ALIGNED(from_idx, 1UL << huge_page_order(h)));
-+	VM_WARN_ON(!IS_ALIGNED(to_idx,   1UL << huge_page_order(h)));
-+
- 	/* This should never happen */
--	if (from > to) {
-+	if (from_idx > to_idx) {
- 		VM_WARN(1, "%s called with a negative range\n", __func__);
- 		return -EINVAL;
- 	}
- 
-+	from = from_idx >> huge_page_order(h);
-+	to = to_idx >> huge_page_order(h);
-+
- 	/*
- 	 * vma specific semaphore used for pmd sharing and fault/truncation
- 	 * synchronization
-@@ -6715,14 +6722,20 @@ long hugetlb_reserve_pages(struct inode *inode,
- 	return err;
- }
- 
--long hugetlb_unreserve_pages(struct inode *inode, long start, long end,
--								long freed)
-+long hugetlb_unreserve_pages(struct inode *inode, long start_idx,
-+			     long end_idx, long freed)
- {
- 	struct hstate *h = hstate_inode(inode);
- 	struct resv_map *resv_map = inode_resv_map(inode);
- 	long chg = 0;
- 	struct hugepage_subpool *spool = subpool_inode(inode);
--	long gbl_reserve;
-+	long gbl_reserve, start, end;
-+
-+	VM_WARN_ON(!IS_ALIGNED(start_idx, 1UL << huge_page_order(h)));
-+	VM_WARN_ON(!IS_ALIGNED(end_idx,   1UL << huge_page_order(h)));
-+
-+	start = start_idx >> huge_page_order(h);
-+	end = end_idx >> huge_page_order(h);
- 
- 	/*
- 	 * Since this routine can be called in the evict inode path for all
-diff --git a/mm/memfd.c b/mm/memfd.c
-index 0b5e8f111b39..24fefb1d2761 100644
---- a/mm/memfd.c
-+++ b/mm/memfd.c
-@@ -79,22 +79,19 @@ struct folio *memfd_alloc_folio(struct file *memfd, pgoff_t index)
- 		 */
- 		struct inode *inode = file_inode(memfd);
- 		struct hstate *h = hstate_file(memfd);
--		pgoff_t idx;
-+		pgoff_t next;
- 		int err = -ENOMEM;
- 		long nr_resv;
- 
- 		gfp_mask = htlb_alloc_mask(h);
- 		gfp_mask &= ~(__GFP_HIGHMEM | __GFP_MOVABLE);
--		idx = index >> huge_page_order(h);
-+		next = index + pages_per_huge_page(h);
- 
--		nr_resv = hugetlb_reserve_pages(inode, idx, idx + 1, NULL, EMPTY_VMA_FLAGS);
-+		nr_resv = hugetlb_reserve_pages(inode, index, next, NULL, EMPTY_VMA_FLAGS);
- 		if (nr_resv < 0)
- 			return ERR_PTR(nr_resv);
- 
--		folio = alloc_hugetlb_folio_reserve(h,
--						    numa_node_id(),
--						    NULL,
--						    gfp_mask);
-+		folio = alloc_hugetlb_folio_reserve(h, numa_node_id(), NULL, gfp_mask);
- 		if (folio) {
- 			u32 hash;
- 
-@@ -119,13 +116,8 @@ struct folio *memfd_alloc_folio(struct file *memfd, pgoff_t index)
- 			 */
- 			hash = hugetlb_fault_mutex_hash(memfd->f_mapping, index);
- 			mutex_lock(&hugetlb_fault_mutex_table[hash]);
--
--			err = hugetlb_add_to_page_cache(folio,
--							memfd->f_mapping,
--							index);
--
-+			err = hugetlb_add_to_page_cache(folio, memfd->f_mapping, index);
- 			mutex_unlock(&hugetlb_fault_mutex_table[hash]);
--
- 			if (err) {
- 				folio_put(folio);
- 				goto err_unresv;
-@@ -137,7 +129,7 @@ struct folio *memfd_alloc_folio(struct file *memfd, pgoff_t index)
- 		}
- err_unresv:
- 		if (nr_resv > 0)
--			hugetlb_unreserve_pages(inode, idx, idx + 1, 0);
-+			hugetlb_unreserve_pages(inode, index, next, 0);
- 		return ERR_PTR(err);
- 	}
- #endif
--- 
-2.43.5
+Just two nitpicks (adding the "[]" to indicate effective mode and fixing the
+copy&paste duplicate mode names) to confirm that I think you actually intended to
+write:
+
+# cat info/kernel_mode
+  [inherit_ctrl_and_mon:]
+  global_assign_ctrl_inherit_mon_per_cpu:group=uninitialized
+  global_assign_ctrl_assign_mon_per_cpu:group=uninitialized
+
+I would like to propose that the user documentation contains something like
+"the kernel mode is followed by a semi-colon separated list of properties"
+This implementation does not require more than one property associated with a mode
+so this does not need any code changes but adding that flexibility to the user
+interface should help if some future kernel mode needs more than one property.
+What do you think?
+
+Reinette
 
 
