@@ -1,497 +1,300 @@
-Return-Path: <linux-doc+bounces-92591-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92594-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id mv41JiIoMmpyvwUAu9opvQ
-	(envelope-from <linux-doc+bounces-92591-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 06:52:50 +0200
+	id qTucMEonMmolvwUAu9opvQ
+	(envelope-from <linux-doc+bounces-92594-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 06:49:14 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3CA1069684B
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 06:52:50 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D8186967DD
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 06:49:14 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=none;
-	dmarc=none;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92591-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92591-lists+linux-doc=lfdr.de@vger.kernel.org";
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=ti.com header.s=proofpoint-05-2026 header.b=ljhF4PF3;
+	dkim=pass header.d=ti.com header.s=selector1 header.b=GCXhFQIQ;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92594-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92594-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=ti.com;
+	arc=reject ("cv is fail on i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 891C831BA1BA
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 04:47:37 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id BA7F7302D935
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 04:48:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5104831ED80;
-	Wed, 17 Jun 2026 04:47:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 77274318140;
+	Wed, 17 Jun 2026 04:48:26 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out28-147.mail.aliyun.com (out28-147.mail.aliyun.com [115.124.28.147])
+Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com [148.163.150.75])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9572D31E820;
-	Wed, 17 Jun 2026 04:47:22 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781671651; cv=none; b=gEwXppDFfQIHr/AC3Mfw6e8e0aUoqpt3uTunFXX+UxoWHD2csviI0NNLbtSZeRkkfOgpdmaFqunNGqMJoilCUSfD3nisZTDD7nm0CieWQDvPnkIrwu5cVdNthvHOieQoLUsvL+7veLdfaiOFKbj6lTFqPXYPd/ePbEYssRIIUr8=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781671651; c=relaxed/simple;
-	bh=nu1930EOKkfKEV5IgzbRPUmEsTmLuOdD8zjqeSHvQA0=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=iiW11WI0hMG/6H0J5X6ZUiVSXidysEqY9F5H8EgGpRNZYZRrRxElWoS3bMQhz51TF3eZpswWariV+2Yb49REvB/fOlTuLk4fntyUW50uCcvAgqntCua628XzQwYjV73qhOtjIUc6EgzP0nZC062K/jFETNEBHL9d1U2hdR2mQgA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=nebula-matrix.com; spf=pass smtp.mailfrom=nebula-matrix.com; arc=none smtp.client-ip=115.124.28.147
-X-Alimail-AntiSpam:AC=CONTINUE;BC=0.06712908|-1;CH=green;DM=|CONTINUE|false|;DS=CONTINUE|ham_alarm|0.00773398-0.00247946-0.989787;FP=16885116632770956458|1|1|1|0|-1|-1|-1;HT=maildocker-contentspam033037022039;MF=illusion.wang@nebula-matrix.com;NM=1;PH=DS;RN=18;RT=18;SR=0;TI=SMTPD_---.i-FkBHn_1781671638;
-Received: from localhost.localdomain(mailfrom:illusion.wang@nebula-matrix.com fp:SMTPD_---.i-FkBHn_1781671638 cluster:ay29)
-          by smtp.aliyun-inc.com;
-          Wed, 17 Jun 2026 12:47:19 +0800
-From: "illusion.wang" <illusion.wang@nebula-matrix.com>
-To: dimon.zhao@nebula-matrix.com,
-	illusion.wang@nebula-matrix.com,
-	alvin.wang@nebula-matrix.com,
-	sam.chen@nebula-matrix.com,
-	netdev@vger.kernel.org
-Cc: andrew+netdev@lunn.ch,
-	corbet@lwn.net,
-	kuba@kernel.org,
-	horms@kernel.org,
-	linux-doc@vger.kernel.org,
-	pabeni@redhat.com,
-	vadim.fedorenko@linux.dev,
-	lukas.bulwahn@redhat.com,
-	edumazet@google.com,
-	enelsonmoore@gmail.com,
-	skhan@linuxfoundation.org,
-	hkallweit1@gmail.com,
-	linux-kernel@vger.kernel.org (open list)
-Subject: [PATCH v19 net-next 11/11] net/nebula-matrix: add common dev start/stop operation
-Date: Wed, 17 Jun 2026 12:46:56 +0800
-Message-ID: <20260617044702.2439-12-illusion.wang@nebula-matrix.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260617044702.2439-1-illusion.wang@nebula-matrix.com>
-References: <20260617044702.2439-1-illusion.wang@nebula-matrix.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 62B4530C343;
+	Wed, 17 Jun 2026 04:48:24 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1781671706; cv=fail; b=ONlKuw66vXEbFNN2zO/gzUIMUBrKGvAwuB49GZhREj22xmBRZfYZWxa2pzA/qwKoGM/JkyI7i51zfri4fQGv8HtJlbXZArsdwDMRo9UBcESlMjfctNrAycNTi63JZSaxVzQHS0/BIANhYNnnpiUR27oG/pxJ6SRsn3+wANe5ALw=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1781671706; c=relaxed/simple;
+	bh=Ab6++Cor80KZ02TRw895q6wTL9/GJVGCCZYskZWAAOI=;
+	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
+	 In-Reply-To:Content-Type; b=u1mTMSSNdcVdNgoGj6Y75p2/TA2blz9FCQvd/6xUvtJoPwFSeo+ywXiYyf7C+Gwdnv4J5ZmqPm1/ja6ysZHpqo+sZ6G3MqjJAoMm3tYzjpcL2A79SeU+Q3oChF4Dx/kMZnexsJPvBugWr8Qnqxsuc/ryJvWob7YkImWUpfxRPlo=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com; spf=pass smtp.mailfrom=ti.com; dkim=pass (2048-bit key) header.d=ti.com header.i=@ti.com header.b=ljhF4PF3; dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b=GCXhFQIQ; arc=fail smtp.client-ip=148.163.150.75
+Received: from pps.filterd (m0384305.ppops.net [127.0.0.1])
+	by m0384305.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 65GLVEq23164744;
+	Tue, 16 Jun 2026 23:48:08 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=
+	proofpoint-05-2026; bh=DNA51HucHCozThPLPcmYwHq01P/1wtYSKuZorFRV/
+	3E=; b=ljhF4PF3zeB6vDH8qbBr/mBP49XAoY5xa1r447eIWgS0D5veHgZRee8RA
+	T8AnynhAr+xq8q3C7H2Dg4GeXOMFcZLKKTlfXYaznUgUrY3wdG8GrAu55h0qmH3/
+	Vx5QA8gdyZEF3GDvMBrNaMaeXHg/YbadjhrmhwepxgDKliQreGHkBVp1uq91Du63
+	V3iQ6V4KjHB8UKfSZB0w5PTslqKzemBlxGK+phgEAysR8MU3ZDMAdCtydA1rb14r
+	BVNw5CZD3ZANaaOlIRUhI8J197ERhDl9Ce4zzshdXOK0CvMiWm8KVz0ybA0xukN6
+	qcIatZT2myjrTR8wGhtDeEL7IotLQ==
+Received: from dm1pr04cu001.outbound.protection.outlook.com (mail-centralusazon11010070.outbound.protection.outlook.com [52.101.61.70])
+	by m0384305.ppops.net (PPS) with ESMTPS id 4eueffa8u6-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Tue, 16 Jun 2026 23:48:08 -0500 (CDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=foaXfn3+5OVgF6L5TJ280byg88T5lyl5BFWN6kKCXAAIMNcgXEkGW4iY2UNiSbGaEGk6ovwI76+ruERY3ewPEO7XdEBFhQJvI6B1Lv3CltAzCfdolekxxjqxtSJ9CNQpdQBWqzO0wygPAvki+C7yS0nL6jgYL5Fw5WQGK4LLkuZpjFeW8/cCAauNhwy2sO0e3ImwvPtjtbgrv2DEjR35X0omc6XtprRlqsm1cF+cWXH30EfTS2KWGMDZLZCk6nrSX1Yk5QPHKDdWMG+An/26w4hVBZ23LV1A4561/eW9UACrDHZhg+1XqzuafVtWSzCS/GQRKNFT5Wv9lB5UnWKrIg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=DNA51HucHCozThPLPcmYwHq01P/1wtYSKuZorFRV/3E=;
+ b=PqI2iyqQV4NlHkXEGkxJUBvVtjZ51M4i/JQ5zR1WGivlqMXTTtxCdkxX3K7TPz1X38mg5kxYouPOAoyCmsEX7i3UxQsUHIEPzai15fvoqrl7Qenifw/dH918wDrt7VFEwKB4Mztr3zUOQ6prLdznKEPiZ05P5+e0AqTQMdRUf0Bn6ZuOJHx6QXYqKoAd3Sq2GxfxFB0FFs8qDodemuMtxTvUTS7zS8tPM5UH2iwTAwXi5f1eg7cZQV0oTNrTAiXipe60nNy+a7Wb1BFW8K/+hS85yX9Y3JNnXWGrLe4M2OuZ8K27M+dYnF+p2uL5rda3FIn6OodEROhd907VVTzO/A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=vger.kernel.org smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=DNA51HucHCozThPLPcmYwHq01P/1wtYSKuZorFRV/3E=;
+ b=GCXhFQIQda/PxKw5a3PdAAFoImYE8PvCS6ieV5HDBj5Hj44IA7QDYXvZ7EtwWl3SzdXISK9tYKDengZf3+VqPI+zTAUMBww7F4To6dSvfFahn4T7m6Drh1Wfj5w4ZPzecseRY+9vQMh+y5GvA9VAPRAYJP0kbsPlatLJc4sM400=
+Received: from CY5PR14CA0028.namprd14.prod.outlook.com (2603:10b6:930:2::29)
+ by SA1PR10MB5866.namprd10.prod.outlook.com (2603:10b6:806:22b::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.18; Wed, 17 Jun
+ 2026 04:48:04 +0000
+Received: from CY4PEPF0000EE3E.namprd03.prod.outlook.com
+ (2603:10b6:930:2:cafe::1) by CY5PR14CA0028.outlook.office365.com
+ (2603:10b6:930:2::29) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.139.11 via Frontend Transport; Wed,
+ 17 Jun 2026 04:48:04 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ CY4PEPF0000EE3E.mail.protection.outlook.com (10.167.242.16) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.139.8 via Frontend Transport; Wed, 17 Jun 2026 04:48:04 +0000
+Received: from DLEE207.ent.ti.com (157.170.170.95) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 16 Jun
+ 2026 23:48:04 -0500
+Received: from DLEE215.ent.ti.com (157.170.170.118) by DLEE207.ent.ti.com
+ (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 16 Jun
+ 2026 23:48:03 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE215.ent.ti.com
+ (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Tue, 16 Jun 2026 23:48:03 -0500
+Received: from [10.24.68.129] (a0507033-hp.dhcp.ti.com [10.24.68.129])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 65H4lw0L1535168;
+	Tue, 16 Jun 2026 23:47:59 -0500
+Message-ID: <fa3c59fa-cfa0-49ed-b656-2e9aaf45e440@ti.com>
+Date: Wed, 17 Jun 2026 10:17:58 +0530
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 3/4] PCI: endpoint: Add support for DOE initialization
+ and setup in EPC core
+To: Manivannan Sadhasivam <mani@kernel.org>
+CC: Bjorn Helgaas <helgaas@kernel.org>, <linux-pci@vger.kernel.org>,
+        <linux-doc@vger.kernel.org>, <kwilczynski@kernel.org>,
+        <bhelgaas@google.com>, <corbet@lwn.net>, <kishon@kernel.org>,
+        <skhan@linuxfoundation.org>, <lukas@wunner.de>, <cassel@kernel.org>,
+        <alistair@alistair23.me>, <linux-arm-kernel@lists.infradead.org>,
+        <linux-kernel@vger.kernel.org>, <s-vadapalli@ti.com>,
+        <danishanwar@ti.com>, <srk@ti.com>
+References: <20260611191252.GA499821@bhelgaas>
+ <0216a528-3737-4714-b9d1-5d28008e0ec8@ti.com>
+ <grfjlghqd3k3i3uxll2jksrh7pgi2mtxifbq2vymsdgbzijsnq@dvgu2qp2hza3>
+Content-Language: en-US
+From: Aksh Garg <a-garg7@ti.com>
+In-Reply-To: <grfjlghqd3k3i3uxll2jksrh7pgi2mtxifbq2vymsdgbzijsnq@dvgu2qp2hza3>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE3E:EE_|SA1PR10MB5866:EE_
+X-MS-Office365-Filtering-Correlation-Id: f2eac8d5-42ef-454b-6ccc-08decc2b9e65
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|1800799024|36860700016|7416014|82310400026|23010399003|6133799003|22082099003|18002099003|4143699003|56012099006;
+X-Microsoft-Antispam-Message-Info:
+	Tim3ppKXli+dt4pYmERZl6Onzb3OaWSznvtDcehbWgNZayuRDPq2Ewg+yC+nKcb8/c8d7fGd13J5kH3UYZ0v98G/z/dcE2eFQ0u+gmza0kTLumqbwCERzB4VpGUJOG348m9msQMm5gXq9W9NBtP0VmP1EimxHpYO3BuOfdN/JLmG4fyzEqRcngycOmG7yttoNnPCoSOiZNPP/zRPy8j/mREp0rrv3pVNG3XZsm1BLOuSBRF6PjiMoCFJyGdPa6dt76m4bk/nrqU0VGb840+R0h4scQoGeWVYCX1klmmcHmNKtUdCCSvX8NLcOi3VXtZF+SsrCrmA5Q7VtkwtLglEQqi/SyjMvI1mI4M0MTZnebUCSNPmzoNPHrYq2BjIAcgiFuA+Dc9sXL6RwpRfmx6HBjwc3AgAU4Wy+AzDauBR2vaCfBjKlCOeM0qb+Z3QY0vtjVYjI05jdpSFDoM4Mz+U0g9tet4xhF1d3WODlSTc7LtzHeHY00cV+Wlg312U1Luvx57DOhha9AUlpV6IB2DCVoReSzxji4HOcV1NbPli7k8td1a2rohbcZaZy+u/u/4fmIY44hGv9dX4RrSHg5wJeW1pmT087Ojm6xUdieDnzZ0sdx6JkgTvVnlKANXwd6QIUzojDh7Cj5OhYYxfJct53j2AMavMuTl5WS3hqoRondrNQkIRdTKro3NzBmbO7WYqc2GlChzevNWYj5A2mDjAfLnwg2/ozORNtB7K3ZCi968=
+X-Forefront-Antispam-Report:
+	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(36860700016)(7416014)(82310400026)(23010399003)(6133799003)(22082099003)(18002099003)(4143699003)(56012099006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	7kqspf8GDoc1tmpCvjABRfolhzujN0T4IbnX8rkrmA2PjmCueG9elQpV2rdQmVLGf7vL7NJbZN9uyI3cVqrfphpJNBhx0I2Qgn+wZJFIOE9kGJY/UDCaZhx2lE4JhUf5BpWcQ7q+vaLVBYCDjMpa2Zh221uJCm5jltIh61kxlDmh32prsRGUGNG7v4JYLHQkU4Dvx3HjmMjKl4g5hv8mJgvm8v8HHkQslFSbCSdNkLoSoX1oVDF4DOZIbR9+5wg9jpOQbOOdpqgLYDVCVFDxXt0+ptYAmumhWPK33/6378E1yk7JNsb4t5BCQtnyURaCICumbAoA5LVIh3RZPapHXYhXnsILP1VsIUoxY3HUnVk+RpZR+yOwdncgbWaGJxkRCDGOtIDn+jBkeXFYX1cwMzigIsg2AqS8MKgRieU5euBPj6/ftEPqqMl/0FmDLNp9
+X-Exchange-RoutingPolicyChecked:
+	qOjb4EM/nLP6cBY0WC+F4+ZkIkJp2QmLblA1tthnLELD9kDU+FwoKg3uaY1OO+2P6rWry8unLyQxLUFNvb+DjqbjOJBl1Hbrk2sJPYJdb3TdxA8KmeY3sA0riRhGY9mayytNDLu+2Q0m3ycFV8JEfWC9PQ4SEbHNUSHAx1W/F3nBGbhmQtKOM/ieJtWK0Vei13KOu8VoUsgzxSzKl518KMspSQRUGb5H0V2cj02k80w2gtaB2BLvuQFALd1QvFsZBZz6eW5eb0tS+iVrt/kov4+QjHF/mPuF1gL1rMaVtiJJIFn4agTFk0lwlBvZi2g35IG35GnUl04Xgc354Cj6Wg==
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2026 04:48:04.5451
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f2eac8d5-42ef-454b-6ccc-08decc2b9e65
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.195];Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CY4PEPF0000EE3E.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR10MB5866
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE3MDA0MSBTYWx0ZWRfX4sJ/SS7y2HSi
+ 7+mZiPolWfPb7MHepvaGdOGPnNMvSR6GwJ5liMED8okGGI0SmBBa71qQqURA0ERNlVryCbCe6eC
+ mzwkIPZ4/PvQUMhIkgJgWsaWmghFtUc=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE3MDA0MSBTYWx0ZWRfXzoBCdm+UXJan
+ kMTauHAHz4w78Si16v4tFIFDHRH61gwufvFt0AlHCH01E1pGIDXX33FimCvK/0sGJjA8QNfW6Sb
+ BuOZSxEVPh+F7yC3fXZhuRQ9M2b2RTZlGBRQDBURsPDbd6BGKp2UoJpKOxa13JZTvWY79Gp3+U5
+ o3xhUrOZds0GaxxKldwDwVGaZpq1f0lce0m/RJd/++xvucJChZsEhPxxi4SwrDZtawcIVPbUu0i
+ zJCPcMFi7cZj1fFHWa3MLWjfKhryMkQNEYEu/f+g5O2mpa6Fi5EpkHGctuTjITLj7gXPQD+j43g
+ 0ejK4wfS3JcC2J/IaDbuY7NfX/6CadyRurhlYYOo/1OMK2hmskR9xbhzCXbhSGVuRJe3iE+JFv1
+ 6wenIa7nPmvbIOgCXBBPMxraXPEnJ2hZ1b/uF/Bz2lGzMt/djFNYxol0HqQGbdmBmyleGPiVze+
+ e62TS8n5QqWGONulwIg==
+X-Proofpoint-ORIG-GUID: 6iLRwXEwE3OVb1QBvEqU9bh83zz-kkQp
+X-Proofpoint-GUID: 6iLRwXEwE3OVb1QBvEqU9bh83zz-kkQp
+X-Authority-Analysis: v=2.4 cv=KKdqylFo c=1 sm=1 tr=0 ts=6a322708 cx=c_pps
+ a=xHwt0NLWInP9jDJIu2hPAg==:117 a=f+v6EHfkeJbVwR46tk4DMg==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10
+ a=s63m1ICgrNkA:10 a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=Z8NIEmU8O1QQgoT56wFK:22 a=taLDd7a_hP9WKsMzeGRc:22 a=sozttTNsAAAA:8
+ a=5fRpags1hDoxmymHdesA:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-16_05,2026-06-16_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1011 priorityscore=1501 bulkscore=0 impostorscore=0
+ lowpriorityscore=0 suspectscore=0 spamscore=0 phishscore=0 malwarescore=0
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2606170041
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [1.54 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	DMARC_POLICY_ALLOW(-0.50)[ti.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_DKIM_ALLOW(-0.20)[ti.com:s=proofpoint-05-2026,ti.com:s=selector1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-92591-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-92594-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER(0.00)[illusion.wang@nebula-matrix.com,linux-doc@vger.kernel.org];
-	DMARC_NA(0.00)[nebula-matrix.com];
+	FORGED_RECIPIENTS(0.00)[m:mani@kernel.org,m:helgaas@kernel.org,m:linux-pci@vger.kernel.org,m:linux-doc@vger.kernel.org,m:kwilczynski@kernel.org,m:bhelgaas@google.com,m:corbet@lwn.net,m:kishon@kernel.org,m:skhan@linuxfoundation.org,m:lukas@wunner.de,m:cassel@kernel.org,m:alistair@alistair23.me,m:linux-arm-kernel@lists.infradead.org,m:linux-kernel@vger.kernel.org,m:s-vadapalli@ti.com,m:danishanwar@ti.com,m:srk@ti.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[a-garg7@ti.com,linux-doc@vger.kernel.org];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_CC(0.00)[lunn.ch,lwn.net,kernel.org,vger.kernel.org,redhat.com,linux.dev,google.com,gmail.com,linuxfoundation.org];
-	FORGED_RECIPIENTS(0.00)[m:dimon.zhao@nebula-matrix.com,m:illusion.wang@nebula-matrix.com,m:alvin.wang@nebula-matrix.com,m:sam.chen@nebula-matrix.com,m:netdev@vger.kernel.org,m:andrew+netdev@lunn.ch,m:corbet@lwn.net,m:kuba@kernel.org,m:horms@kernel.org,m:linux-doc@vger.kernel.org,m:pabeni@redhat.com,m:vadim.fedorenko@linux.dev,m:lukas.bulwahn@redhat.com,m:edumazet@google.com,m:enelsonmoore@gmail.com,m:skhan@linuxfoundation.org,m:hkallweit1@gmail.com,m:linux-kernel@vger.kernel.org,m:andrew@lunn.ch,s:lists@lfdr.de];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[illusion.wang@nebula-matrix.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_NONE(0.00)[];
-	R_DKIM_NA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_TWELVE(0.00)[12];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[a-garg7@ti.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[ti.com:+];
 	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[illusion.wang:url,nebula-matrix.com:email,nebula-matrix.com:mid,nebula-matrix.com:from_mime,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,ti.com:dkim,ti.com:email,ti.com:mid,ti.com:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 3CA1069684B
+X-Rspamd-Queue-Id: 0D8186967DD
 
-This patch wires up nbl_dev_start() and nbl_dev_stop() to configure
-the MSI-X map, allocate vectors, and request/enable the mailbox IRQ.
-It also replaces module_pci_driver() with explicit init/exit functions
-that additionally create and destroy the driver's workqueue via
-nbl_common_create_wq() / nbl_common_destroy_wq(), which is needed
-because the new IRQ handler schedules work through
-nbl_common_queue_work().
 
-Signed-off-by: illusion.wang <illusion.wang@nebula-matrix.com>
----
- .../nebula-matrix/nbl/nbl_common/nbl_common.c |  24 ++
- .../nebula-matrix/nbl/nbl_core/nbl_dev.c      | 250 +++++++++++++++++-
- .../nebula-matrix/nbl/nbl_hw/nbl_resource.c   |   2 +-
- .../nbl/nbl_include/nbl_def_common.h          |   6 +
- 4 files changed, 280 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/net/ethernet/nebula-matrix/nbl/nbl_common/nbl_common.c b/drivers/net/ethernet/nebula-matrix/nbl/nbl_common/nbl_common.c
-index 2954cbbe0f95..bae1a7e401ce 100644
---- a/drivers/net/ethernet/nebula-matrix/nbl/nbl_common/nbl_common.c
-+++ b/drivers/net/ethernet/nebula-matrix/nbl/nbl_common/nbl_common.c
-@@ -6,6 +6,30 @@
- #include <linux/device.h>
- #include "nbl_common.h"
- 
-+void nbl_common_queue_work(struct nbl_common_info *common,
-+			   struct work_struct *task)
-+{
-+	queue_work(common->wq, task);
-+}
-+
-+void nbl_common_destroy_wq(struct nbl_common_info *common)
-+{
-+	destroy_workqueue(common->wq);
-+}
-+
-+int nbl_common_create_wq(struct nbl_common_info *common)
-+{
-+	common->wq = alloc_workqueue("nbl_wq", WQ_UNBOUND, 0);
-+	if (!common->wq) {
-+		pr_err("Failed to create workqueue nbl_wq\n");
-+		goto alloc_wq_failed;
-+	}
-+
-+	return 0;
-+alloc_wq_failed:
-+	return -ENOMEM;
-+}
-+
- u32 nbl_common_pf_id_subtraction_mgtpf_id(struct nbl_common_info *common,
- 					  u32 pf_id)
- {
-diff --git a/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c b/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c
-index 8feae561d0f1..288b2dae8681 100644
---- a/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c
-+++ b/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c
-@@ -6,6 +6,17 @@
- #include <linux/pci.h>
- #include "nbl_dev.h"
- 
-+static void nbl_dev_clean_mailbox_schedule(struct nbl_dev_mgt *dev_mgt);
-+
-+/* ----------  Interrupt config  ---------- */
-+static irqreturn_t nbl_dev_clean_mailbox(int __always_unused irq, void *data)
-+{
-+	struct nbl_dev_mgt *dev_mgt = (struct nbl_dev_mgt *)data;
-+
-+	nbl_dev_clean_mailbox_schedule(dev_mgt);
-+	return IRQ_HANDLED;
-+}
-+
- static void nbl_dev_init_msix_cnt(struct nbl_dev_mgt *dev_mgt)
- {
- 	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-@@ -14,6 +25,182 @@ static void nbl_dev_init_msix_cnt(struct nbl_dev_mgt *dev_mgt)
- 	msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num = 1;
- }
- 
-+static int nbl_dev_request_mailbox_irq(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	struct nbl_common_info *common = dev_mgt->common;
-+	u16 local_vec_id;
-+	int irq_num;
-+	int err;
-+
-+	if (!msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num)
-+		return 0;
-+
-+	local_vec_id =
-+		msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].base_vector_id;
-+	irq_num = pci_irq_vector(common->pdev, local_vec_id);
-+	if (irq_num < 0) {
-+		dev_err(common->dev, "Failed to get mailbox IRQ vector: %d\n",
-+			irq_num);
-+		return irq_num;
-+	}
-+
-+	snprintf(dev_common->mailbox_name, sizeof(dev_common->mailbox_name),
-+		 "nbl_mailbox@pci:%s", pci_name(common->pdev));
-+	err = request_irq(irq_num, nbl_dev_clean_mailbox, 0,
-+			  dev_common->mailbox_name, dev_mgt);
-+	if (err)
-+		return err;
-+
-+	return 0;
-+}
-+
-+static void nbl_dev_free_mailbox_irq(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	struct nbl_common_info *common = dev_mgt->common;
-+	u16 local_vec_id;
-+	int irq_num;
-+
-+	if (!msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num)
-+		return;
-+
-+	local_vec_id =
-+		msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].base_vector_id;
-+	irq_num = pci_irq_vector(common->pdev, local_vec_id);
-+	if (irq_num >= 0)
-+		free_irq(irq_num, dev_mgt);
-+}
-+
-+static int nbl_dev_enable_mailbox_irq(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dispatch_ops *disp_ops = dev_mgt->disp_ops_tbl->ops;
-+	struct nbl_channel_ops *chan_ops = dev_mgt->chan_ops_tbl->ops;
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	u16 local_vec_id;
-+
-+	if (!msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num)
-+		return 0;
-+
-+	local_vec_id =
-+		msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].base_vector_id;
-+	chan_ops->set_queue_state(dev_mgt->chan_ops_tbl->priv,
-+				  NBL_CHAN_INTERRUPT_READY,
-+				  NBL_CHAN_TYPE_MAILBOX, true);
-+
-+	return disp_ops->set_mailbox_irq(dev_mgt->disp_ops_tbl->priv,
-+					    local_vec_id, true);
-+}
-+
-+static int nbl_dev_disable_mailbox_irq(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dispatch_ops *disp_ops = dev_mgt->disp_ops_tbl->ops;
-+	struct nbl_channel_ops *chan_ops = dev_mgt->chan_ops_tbl->ops;
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	u16 local_vec_id;
-+
-+	if (!msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num)
-+		return 0;
-+
-+	local_vec_id =
-+		msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].base_vector_id;
-+	/*
-+	 * Disable order: software state first, then hardware.
-+	 *
-+	 * Review suggested HW-then-state for symmetry with enable, but that
-+	 * causes "Channel waiting ack failed" errors. The reason: after
-+	 * set_mailbox_irq(..., false) disables the hardware, the device may
-+	 * still be sending ACKs for in-flight messages. If we then switch to
-+	 * polling mode (clear INTERRUPT_READY), the ACK handler won't process
-+	 * those pending ACKs, leading to "waiting ack failed" and "Skip ack
-+	 * with invalid status" errors.
-+	 *
-+	 * The original state-then-HW order avoids this: we switch to polling
-+	 * first, so any late interrupts are silently ignored (no ACK expected),
-+	 * then we disable the hardware. The theoretical window where an
-+	 * interrupt could fire and be ignored is harmless here because this
-+	 * function is only called on the error path of nbl_dev_start(),
-+	 * immediately followed by nbl_dev_free_mailbox_irq() and
-+	 * cancel_work_sync(&clean_mbx_task). The channel is torn down right
-+	 * after, so no descriptors can be left stuck.
-+	 *
-+	 * Do NOT change to HW-then-state.
-+	 */
-+	chan_ops->set_queue_state(dev_mgt->chan_ops_tbl->priv,
-+				  NBL_CHAN_INTERRUPT_READY,
-+				  NBL_CHAN_TYPE_MAILBOX, false);
-+
-+	return disp_ops->set_mailbox_irq(dev_mgt->disp_ops_tbl->priv,
-+					    local_vec_id, false);
-+}
-+
-+static int nbl_dev_configure_msix_map(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dispatch_ops *disp_ops = dev_mgt->disp_ops_tbl->ops;
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	bool mask_en = msix_info->serv_info[NBL_MSIX_NET_TYPE].hw_self_mask_en;
-+	u16 msix_net_num = msix_info->serv_info[NBL_MSIX_NET_TYPE].num;
-+	u16 msix_not_net_num = 0;
-+	int err, i;
-+
-+	msix_info->serv_info[NBL_MSIX_VIRTIO_TYPE].base_vector_id = 0;
-+	for (i = NBL_MSIX_NET_TYPE; i < NBL_MSIX_TYPE_MAX; i++)
-+		msix_info->serv_info[i].base_vector_id =
-+			msix_info->serv_info[i - 1].base_vector_id +
-+			msix_info->serv_info[i - 1].num;
-+
-+	for (i = NBL_MSIX_MAILBOX_TYPE; i < NBL_MSIX_TYPE_MAX; i++)
-+		msix_not_net_num += msix_info->serv_info[i].num;
-+
-+	err = disp_ops->configure_msix_map(dev_mgt->disp_ops_tbl->priv,
-+					   msix_net_num, msix_not_net_num,
-+					   mask_en);
-+
-+	return err;
-+}
-+
-+static int nbl_dev_destroy_msix_map(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dispatch_ops *disp_ops = dev_mgt->disp_ops_tbl->ops;
-+
-+	return disp_ops->destroy_msix_map(dev_mgt->disp_ops_tbl->priv);
-+}
-+
-+static int nbl_dev_init_interrupt_scheme(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	struct nbl_common_info *common = dev_mgt->common;
-+	int needed = 0;
-+	int err;
-+	int i;
-+
-+	for (i = 0; i < NBL_MSIX_TYPE_MAX; i++)
-+		needed += msix_info->serv_info[i].num;
-+
-+	err = pci_alloc_irq_vectors(common->pdev, needed, needed,
-+				    PCI_IRQ_MSIX | PCI_IRQ_AFFINITY);
-+	if (err < 0) {
-+		dev_err(common->dev,
-+			"pci_alloc_irq_vectors failed, err = %d\n", err);
-+		return err;
-+	}
-+
-+	return 0;
-+}
-+
-+static void nbl_dev_clear_interrupt_scheme(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_common_info *common = dev_mgt->common;
-+
-+	pci_free_irq_vectors(common->pdev);
-+}
-+
- /* ----------  Channel config  ---------- */
- static void nbl_dev_setup_chan_qinfo(struct nbl_dev_mgt *dev_mgt, u8 chan_type)
- {
-@@ -72,6 +259,14 @@ static void nbl_dev_clean_mailbox_task(struct work_struct *work)
- 				      NBL_CHAN_TYPE_MAILBOX);
- }
- 
-+static void nbl_dev_clean_mailbox_schedule(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dev_common *common_dev = dev_mgt->common_dev;
-+	struct nbl_common_info *common = dev_mgt->common;
-+
-+	nbl_common_queue_work(common, &common_dev->clean_mbx_task);
-+}
-+
- /* ----------  Dev init process  ---------- */
- static int nbl_dev_setup_common_dev(struct nbl_adapter *adapter)
- {
-@@ -189,7 +384,7 @@ int nbl_dev_init(struct nbl_adapter *adapter)
- 	dev_mgt->disp_ops_tbl = disp_ops_tbl;
- 	dev_mgt->chan_ops_tbl = chan_ops_tbl;
- 	adapter->core.dev_mgt = dev_mgt;
--
-+	ret = nbl_common_create_wq(common);
- 	ret = nbl_dev_setup_common_dev(adapter);
- 	if (ret)
- 		return ret;
-@@ -213,14 +408,67 @@ void nbl_dev_remove(struct nbl_adapter *adapter)
- 	if (common->has_ctrl)
- 		nbl_dev_remove_ctrl_dev(adapter);
- 	nbl_dev_remove_common_dev(adapter);
-+	nbl_common_destroy_wq(common);
- }
- 
- /* ----------  Dev start process  ---------- */
- int nbl_dev_start(struct nbl_adapter *adapter)
- {
-+	struct nbl_dev_mgt *dev_mgt = adapter->core.dev_mgt;
-+	struct nbl_dev_common *common_dev = dev_mgt->common_dev;
-+	int cleanup_ret;
-+	int ret;
-+
-+	ret = nbl_dev_configure_msix_map(dev_mgt);
-+	if (ret)
-+		return ret;
-+
-+	ret = nbl_dev_init_interrupt_scheme(dev_mgt);
-+	if (ret)
-+		goto init_interrupt_scheme_err;
-+	ret = nbl_dev_request_mailbox_irq(dev_mgt);
-+	if (ret)
-+		goto mailbox_request_irq_err;
-+	ret = nbl_dev_enable_mailbox_irq(dev_mgt);
-+	if (ret)
-+		goto enable_mailbox_irq_err;
-+
- 	return 0;
-+enable_mailbox_irq_err:
-+	cleanup_ret = nbl_dev_disable_mailbox_irq(dev_mgt);
-+	/* just log err*/
-+	if (cleanup_ret)
-+		dev_err(dev_mgt->common->dev,
-+			"Failed to disable mailbox IRQ: %d\n", cleanup_ret);
-+	nbl_dev_free_mailbox_irq(dev_mgt);
-+	cancel_work_sync(&common_dev->clean_mbx_task);
-+mailbox_request_irq_err:
-+	nbl_dev_clear_interrupt_scheme(dev_mgt);
-+init_interrupt_scheme_err:
-+	cleanup_ret =  nbl_dev_destroy_msix_map(dev_mgt);
-+	/* just log err*/
-+	if (cleanup_ret)
-+		dev_err(dev_mgt->common->dev,
-+			"Failed to destroy MSI-X map: %d\n", cleanup_ret);
-+	return ret;
- }
- 
- void nbl_dev_stop(struct nbl_adapter *adapter)
- {
-+	struct nbl_dev_mgt *dev_mgt = adapter->core.dev_mgt;
-+	struct nbl_dev_common *common_dev = dev_mgt->common_dev;
-+	int ret;
-+
-+	/* just log err*/
-+	ret = nbl_dev_disable_mailbox_irq(dev_mgt);
-+	if (ret)
-+		dev_err(dev_mgt->common->dev,
-+			"Failed to disable mailbox IRQ: %d\n", ret);
-+	nbl_dev_free_mailbox_irq(dev_mgt);
-+	cancel_work_sync(&common_dev->clean_mbx_task);
-+	nbl_dev_clear_interrupt_scheme(dev_mgt);
-+	ret = nbl_dev_destroy_msix_map(dev_mgt);
-+	if (ret)
-+		dev_err(dev_mgt->common->dev,
-+			"Failed to destroy MSI-X map: %d\n", ret);
- }
-diff --git a/drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_resource.c b/drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_resource.c
-index 6742da7c6637..e8d43bef8687 100644
---- a/drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_resource.c
-+++ b/drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_resource.c
-@@ -112,7 +112,7 @@ int nbl_res_get_eth_id(struct nbl_resource_mgt *res_mgt, u16 func_id,
- 		return -EINVAL;
- 	}
- 	if (abs_pf_id != pfid) {
--		dev_err(dev, "invalid pf id %u\n", pfid);
-+		dev_err(dev, "invalid pf id %u vsi %u\n", pfid, vsi_id);
- 		return -EINVAL;
- 	}
- 	rel_pf_id = abs_pf_id - common->mgt_pf;
-diff --git a/drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_def_common.h b/drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_def_common.h
-index bc741b7df7b9..4621b3ce5856 100644
---- a/drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_def_common.h
-+++ b/drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_def_common.h
-@@ -29,6 +29,7 @@ struct nbl_hash_tbl_mgt;
- 	})
- 
- struct nbl_common_info {
-+	struct workqueue_struct *wq;
- 	struct pci_dev *pdev;
- 	struct device *dev;
- 	u32 msg_enable;
-@@ -61,6 +62,11 @@ struct nbl_hash_tbl_del_key {
- 	void (*action_func)(void *priv, void *key, void *data);
- };
- 
-+void nbl_common_queue_work(struct nbl_common_info *common,
-+			   struct work_struct *task);
-+
-+void nbl_common_destroy_wq(struct nbl_common_info *common);
-+int nbl_common_create_wq(struct nbl_common_info *common);
- u32 nbl_common_pf_id_subtraction_mgtpf_id(struct nbl_common_info *common,
- 					  u32 pf_id);
- 
--- 
-2.47.3
+On 16/06/26 11:52, Manivannan Sadhasivam wrote:
+> On Fri, Jun 12, 2026 at 01:54:13PM +0530, Aksh Garg wrote:
+>>
+>>
+>> On 12/06/26 00:42, Bjorn Helgaas wrote:
+>>> On Wed, Jun 10, 2026 at 03:32:55PM +0530, Aksh Garg wrote:
+>>>> Add pci_epc_init_capabilities() in EPC core driver to initialize and
+>>>> setup the capabilities supported by the EPC driver. This calls
+>>>> pci_epc_doe_setup() to setup the DOE framework for an endpoint controller,
+>>>> which discovers the DOE capabilities (extended capability ID 0x2E), and
+>>>> registers each discovered DOE mailbox for all the functions in the
+>>>> endpoint controller.
+>>>>
+>>>> Add pci_epc_deinit_capabilities() in EPC core driver for cleanup of the
+>>>> resources used by the capabilities of the EPC driver. This calls
+>>>> pci_ep_doe_destroy() to destroy all DOE mailboxes and free associated
+>>>> resources.
+>>>>
+>>>> Co-developed-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+>>>> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+>>>> Signed-off-by: Aksh Garg <a-garg7@ti.com>
+>>>> ---
+>>>> +/**
+>>>> + * pci_epc_doe_setup() - Discover and setup DOE mailboxes for all functions
+>>>> + * @epc: the EPC device on which DOE mailboxes has to be setup
+>>>> + *
+>>>> + * Discover DOE (Data Object Exchange) capabilities for all physical functions
+>>>> + * in the endpoint controller and register DOE mailboxes.
+>>>> + *
+>>>> + * Returns: 0 on success, -errno on failure
+>>>> + */
+>>>> +static int pci_epc_doe_setup(struct pci_epc *epc)
+>>>> +{
+>>>> +	u8 func_no, vfunc_no = 0;
+>>>> +	u16 cap_offset;
+>>>> +	int ret;
+>>>> +
+>>>> +	if (!epc->ops || !epc->ops->find_ext_capability)
+>>>> +		return -EINVAL;
+>>>
+>>
+>> Hi Bjorn,
+>>
+>> Thank you for your feedback comments. I will work on them and post v6
+>> series incorporating the changes.
+>>
+>>> I don't see anything that sets pci_epc_ops.find_ext_capability in this
+>>> series, so this looks currently unused and untestable, so likely not
+>>> mergeable as-is.  What's the plan for users of this?
+>>>
+>>
+>> Currently there is no EPC driver upstream which supports DOE yet. However, I
+>> am working on a platform which supports DOE (support for
+>> which would be added soon). Mani pointed out that if EPC driver support
+>> for the same is guaranteed to be added soon, the APIs can be merged
+>> first.
+>>
+>> For the demonstration purpose, he asked to show how an EPC driver is
+>> expected to use the API as a snippet in the cover letter itself.
+>>
+> 
+> I retract my previous comment here. Let's not introduce dead code in the kernel.
+> We can review the series now, but cannot merge it until the EPC driver gets
+> submitted.
+
+Hi Mani,
+
+Sure, I would prefer the series to be reviewed and gather Reviewed-by
+tags by the time the EPC driver gets submitted, which would help
+expedite the merge of this series later.
+
+> 
+> - Mani
+> 
 
 
