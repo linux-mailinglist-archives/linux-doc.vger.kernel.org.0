@@ -1,62 +1,62 @@
-Return-Path: <linux-doc+bounces-92675-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92677-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 9hjsN7/ZMmqm6AUAu9opvQ
-	(envelope-from <linux-doc+bounces-92675-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 19:30:39 +0200
+	id VTbKGVrZMmqR6AUAu9opvQ
+	(envelope-from <linux-doc+bounces-92677-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 19:28:58 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5666469BB4E
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 19:30:39 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0725B69BB17
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 19:28:58 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=oracle.com header.s=corp-2025-04-25 header.b=ZEmUIIVT;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92675-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-92675-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=oracle.com header.s=corp-2025-04-25 header.b=TkfPSTuX;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92677-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92677-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=reject) header.from=oracle.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 41F35314FFD2
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 17:27:16 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 655DC3030170
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 17:27:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 55B6535AC0C;
-	Wed, 17 Jun 2026 17:26:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AD7D033A6E9;
+	Wed, 17 Jun 2026 17:27:42 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com [205.220.165.32])
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D19CB35202A;
-	Wed, 17 Jun 2026 17:26:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 27C683033DE;
+	Wed, 17 Jun 2026 17:27:40 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781717206; cv=none; b=aG1chZuwHkevOIjaQsHaAdj1F5o5TxTSaQSzwOghB2mGUf69nNfNXj6gRO/w1u34eyouDeLz5USnzTvt8l9iyMs2H9MKBIztaB7lcS5NzTBZfovK5LAIX91aZ5ulkPKijGyFj1pMWgVV73gM8M1LIPcaD9JoNEkT7HJB98m+qTw=
+	t=1781717262; cv=none; b=fs0hLGh+EJXSEz4YffUwFEQItjHy5vo7R23K9IOIe0Rw3PAdJ0G6B9Ks7UU/l0uhIos0P8V0xeigBNEdJbdx+2C6DIBmwgjIzrH6goQb58050AVnDdCaJxJ9bNE7HW4VEe9YlKBy3oDVP9Z6jzIAQ9ZHlX9K22bCW0gGfiNKm+k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781717206; c=relaxed/simple;
-	bh=eGWKu6ok+iG8t6txJrdCRJZxJsGr7fhxyNsECdEmbJw=;
+	s=arc-20240116; t=1781717262; c=relaxed/simple;
+	bh=Yy95E/nFvLqIM411F3AtlmedWwmD46czselFYjCS0Vc=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=J/mMhEkgOf/gCNycFuzF0YUArQNmb0LQNpJ+1zrFZO7rCpyAfcA+b+6kwjdHtU+95cV/msMzbIPPKQfgH233pKAusBG9+Ml6DUwy4m71mQO2VrGUsqrYXVn4Ca+Y8cohuSIS9PMee/Ih4zZtuUQwqC1OuX5YKD4kJN3bMrgNLT4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=ZEmUIIVT; arc=none smtp.client-ip=205.220.165.32
-Received: from pps.filterd (m0333521.ppops.net [127.0.0.1])
-	by mx0b-00069f02.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 65HEsKB22481211;
-	Wed, 17 Jun 2026 17:26:20 GMT
+	 MIME-Version; b=kST9AfltwKXTn3eQUqL0dtTZowqfq27d/NpIWJzz/YQDZ9bAaKUjcLA+QbwN9+HlR6fLuLO3tlAJzBbAYOuFMirEc/jaJgRJacToQLoU4JOjxyeykAWO3MikR3O6QsZ9PhC8Fpb95wjhYXGcOhBiWEu+lWfhFOyvqepJ81nV36Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=TkfPSTuX; arc=none smtp.client-ip=205.220.177.32
+Received: from pps.filterd (m0246631.ppops.net [127.0.0.1])
+	by mx0b-00069f02.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 65HEpTrX2364580;
+	Wed, 17 Jun 2026 17:26:23 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
 	:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=corp-2025-04-25; bh=AADwJ
-	EegnLaSovYbQ21oISFVKWqrD8KXOckyXaDfEOI=; b=ZEmUIIVT/S/GZgA7jY+hI
-	EuwVglcwDgO3Z3gNfSvU/oaZoPPRRaKbWLqnFdObcuocmLXvRrvJYMMSEh/5ts4v
-	ix4TVehP4ewZH7GnreIFVWyryBO9ubidmDSLA/MBD3FOoBpWZec9KWF1WbRD/7Fi
-	NZXoPe3DTt//FTkDLtP+wv3en3eX21IxxZbE/SAJ/mrotYHE5jLsYUgt05WISY4d
-	nFVJXhWO+D+ZkxiGk9Nk81BB1JdPcPITyi15Dh5d49sGu7zNKO7JZdgGoBxExtxf
-	CRCRDg2DNSh1gjOVhC3aEBzc8MX2h7PucX9yLIPvrOunKx5HVElRpmK3EleW+62I
-	w==
+	:mime-version:references:subject:to; s=corp-2025-04-25; bh=QzgVr
+	wBLp8IJXktshUBMWJeuGythVYw1ADhUnzQfp+I=; b=TkfPSTuXbDp6jHJr3ZM8V
+	V2T5jmX/NTroedg/cWYptuRyE+mWJvMwHoMx+0Xal1CN4jiNcX+X1obw+tlFNk0s
+	t/xDAC2HpqotcnJpq69rA6O86iQl9w2YE0XZxHjNIA5bNlIgGppGZ25J+p9bmBsy
+	9TQA3n1qbObwqr1HKmpm4bzEsCShuEvCYRnh8QMrA1wvNzsVxqj+lu5jL5sU3/Ag
+	pOIi6S/PmJpydRA8VxYdHp/6gCGFrMBuBlAOPLGRQBICAl5/UEldFh83vFxZ1bTR
+	NTAsneqjfttwwDZ0mz80PD3nq9ZfgaPaVf1aq+f/WE2/rpltd4GOUjngnHKQFPSC
+	g==
 Received: from iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta01.appoci.oracle.com [130.35.100.223])
-	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4eueg2hch8-1
+	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4euegm1bbd-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Wed, 17 Jun 2026 17:26:20 +0000 (GMT)
+	Wed, 17 Jun 2026 17:26:23 +0000 (GMT)
 Received: from pps.filterd (iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
-	by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.7/8.18.1.7) with ESMTP id 65HHNVP4003778;
-	Wed, 17 Jun 2026 17:26:18 GMT
+	by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.7/8.18.1.7) with ESMTP id 65HHNVP7003778;
+	Wed, 17 Jun 2026 17:26:22 GMT
 Received: from brm-x62-16.us.oracle.com (brm-x62-16.us.oracle.com [10.80.150.37])
-	by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTP id 4eudvc0wgy-10;
-	Wed, 17 Jun 2026 17:26:18 +0000 (GMT)
+	by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTP id 4eudvc0wgy-11;
+	Wed, 17 Jun 2026 17:26:22 +0000 (GMT)
 From: Jane Chu <jane.chu@oracle.com>
 To: akpm@linux-foundation.org
 Cc: willy@infradead.org, jack@suse.cz, viro@zeniv.linux.org.uk,
@@ -66,9 +66,9 @@ Cc: willy@infradead.org, jack@suse.cz, viro@zeniv.linux.org.uk,
         rppt@kernel.org, peterx@redhat.com, corbet@lwn.net,
         linux-doc@vger.kernel.org, linux-mm@kvack.org,
         linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org
-Subject: [PATCH v2 09/11] hugetlb: remove the hugetlb_linear_page_index() helper
-Date: Wed, 17 Jun 2026 11:25:30 -0600
-Message-ID: <20260617172534.1740152-10-jane.chu@oracle.com>
+Subject: [PATCH v2 10/11] hugetlb: drop vma_hugecache_offset() in favor of linear_page_index()
+Date: Wed, 17 Jun 2026 11:25:31 -0600
+Message-ID: <20260617172534.1740152-11-jane.chu@oracle.com>
 X-Mailer: git-send-email 2.43.5
 In-Reply-To: <20260617172534.1740152-1-jane.chu@oracle.com>
 References: <20260617172534.1740152-1-jane.chu@oracle.com>
@@ -86,23 +86,23 @@ X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
  phishscore=0 bulkscore=0 mlxlogscore=999 malwarescore=0 mlxscore=0
  lowpriorityscore=0 adultscore=0 spamscore=0 classifier=spam adjust=0
  reason=mlx scancount=1 engine=8.19.0-2606150000 definitions=main-2606170167
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE3MDE2OCBTYWx0ZWRfX1YxMXz1sh4ji
- 3Xmx9wIW7m+FRpxr32JpNRN2sSCTr4KEd8D5RSRo2I26uuKZFrgPbG2kcP/UU0UXoCTX5tLwp+u
- yIQi0z+txBiJsfnSngGnnVD+AlWDHhKRWgPaRDliERXpbMAvEAuVQViQuYMDxkUtNGILT8afaJv
- m1j85294NvI+HvgLPhnlfavtJk/9crcafupPtuoAfDSuvdCoc2HYFvuhnxS1uBRcyB5f9rWgsy+
- EABiJhGLisyBPyAEDbONV1EodH78xSmNMk+N8X38oWxzvOeBMHNs5KOQUJcfX0YnDPomM+ZvT1Y
- k1g3vV9Z+WMQap85ds0x0EvzWvTzwiu7BH9sJDVJg71KQH3CoU28zLq266PyDCLxtpPkLaFoKe2
- 0h7w76PLEHS1EEfPFSI7oWFnNdWj/vZ9DcrVZRRpFQZMxR/TJFBKJPRiy8scjiN4iHZJzTHRvVg
- UBgqkcNote9Thuu6UEmSt89fC/smvgvkdRF1Crz4=
-X-Proofpoint-GUID: LPAL_NDFZwyz429ZSGzojPt7Rvb_VSAr
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE3MDE2OCBTYWx0ZWRfX3qoKo5Cefkw5
- SbMTTphCCkTl+lUxOl7aEUBIU89GtsYLpHGZVUuZAcyZXX1RmyU2ye5FWi8iT3hNHiHQAtpZXC9
- d8UQ0afqYabqzzHQkq4sVuvfYCU2cSaXYdCW5J/5qZRNrlaVxCvu
-X-Proofpoint-ORIG-GUID: LPAL_NDFZwyz429ZSGzojPt7Rvb_VSAr
-X-Authority-Analysis: v=2.4 cv=UY1hjqSN c=1 sm=1 tr=0 ts=6a32d8bc b=1 cx=c_pps
+X-Proofpoint-GUID: _2XpTPAb0pPOlVVX2vqjml7rVmYBfAkf
+X-Proofpoint-ORIG-GUID: _2XpTPAb0pPOlVVX2vqjml7rVmYBfAkf
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE3MDE2OCBTYWx0ZWRfXwYhGeHbVeG0J
+ ViHY/88UQDIzz9RfW+U/aJSDz6gNMoMp6kgvt+KTfVfpZVTtW8zHWVbr4fwnSXhBkShiaKOhT0u
+ es5prhNVrNdGTeRlwgDlaNp9PcJ6XfrYN3Za+ucQWk8wCbbK7iCpVw2IilHPB83fBck3P2lxeur
+ JCMaOb0vc0wEW+GgWSRTMdPcZjpl4BQNCd2YLO0w3uvmI+tS3ss+GzS+y1H/wDxh4FM+NHaZRxY
+ rlL/No4TG/lq1cTzcnHCX0WaTbizkMJS1VcwPcRKXVkbzWY23Pam7AQA2qpNOfxPPyNc6k2fUvA
+ yPwZ44mc6kvntLrguE3OX4nff/1sDk9KmdPD1hAF89Tg7hVYBupf8aFEt4M9MXht7XghpRAussc
+ Hp4z33GTV4UPPUWd1SfCF2eq1FD5dxiuSlT+g8SZ3UN5099gRoyRT2ui7i7g6gToVtlg20lvZ/E
+ W4/BrahvJNTFbtv2Hz8eRUzQjdSnuYYR8bxrGa3A=
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE3MDE2OCBTYWx0ZWRfXwxKHnVXHdZyI
+ tLYXcyjS+uOD1UgGTcVjmKSlmowo4S+P9wtPWWJ61zn5rKya4e1EEVSxM15hbdgI+oBoyJdih8Q
+ pYANUuF9FbcDeGmluYe1kxhbbd9+pxYP4lnHaCRDopPp2jLvPlDH
+X-Authority-Analysis: v=2.4 cv=G4Ys1dk5 c=1 sm=1 tr=0 ts=6a32d8bf b=1 cx=c_pps
  a=zPCbziy225d3KhSqZt3L1A==:117 a=zPCbziy225d3KhSqZt3L1A==:17
  a=FelO9ux0wxsA:10 a=VkNPw1HP01LnGYTKEx00:22 a=jiCTI4zE5U7BLdzWsZGv:22
- a=x0eKOSpe3m1H3M0S9YoZ:22 a=yPCof4ZbAAAA:8 a=lddk_7-pFbXPVCeMFioA:9
+ a=o5oIOnhZENCTenyL_yNV:22 a=yPCof4ZbAAAA:8 a=g8M0rzeWxNo8AqK0pVkA:9
  a=5yU3S35YU4bGjq-dph-N:22 a=Bho9c0fBagfJEIQBS7DQ:22 cc=ntf awl=host:12312
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-6.16 / 15.00];
@@ -112,7 +112,7 @@ X-Spamd-Result: default: False [-6.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[oracle.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	R_DKIM_ALLOW(-0.20)[oracle.com:s=corp-2025-04-25];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -121,11 +121,11 @@ X-Spamd-Result: default: False [-6.16 / 15.00];
 	FREEMAIL_CC(0.00)[infradead.org,suse.cz,zeniv.linux.org.uk,kernel.org,linux.dev,suse.de,google.com,linux.alibaba.com,huawei.com,gmail.com,redhat.com,lwn.net,vger.kernel.org,kvack.org];
 	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-92675-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-92677-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS(0.00)[m:akpm@linux-foundation.org,m:willy@infradead.org,m:jack@suse.cz,m:viro@zeniv.linux.org.uk,m:brauner@kernel.org,m:muchun.song@linux.dev,m:osalvador@suse.de,m:david@kernel.org,m:hughd@google.com,m:baolin.wang@linux.alibaba.com,m:linmiaohe@huawei.com,m:nao.horiguchi@gmail.com,m:lorenzo@kernel.org,m:rppt@kernel.org,m:peterx@redhat.com,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:naohoriguchi@gmail.com,s:lists@lfdr.de];
 	FORGED_SENDER(0.00)[jane.chu@oracle.com,linux-doc@vger.kernel.org];
 	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
@@ -135,48 +135,73 @@ X-Spamd-Result: default: False [-6.16 / 15.00];
 	TO_DN_NONE(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[20];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp,oracle.com:dkim,oracle.com:email,oracle.com:mid,oracle.com:from_mime];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,oracle.com:dkim,oracle.com:email,oracle.com:mid,oracle.com:from_mime];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCVD_COUNT_SEVEN(0.00)[7]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 5666469BB4E
+X-Rspamd-Queue-Id: 0725B69BB17
 
-No one is calling hugetlb_linear_page_index(), so remove it.
+vma_hugecache_offset() converts a hugetlb VMA address into a mapping
+offset in hugepage units. While the helper is small, its name is not very
+clear, and the resulting code is harder to follow than using the common MM
+helper directly.
+
+Use linear_page_index() instead, with an explicit conversion from
+PAGE_SIZE units to hugepage units at each call site, and remove
+vma_hugecache_offset().
 
 Signed-off-by: Jane Chu <jane.chu@oracle.com>
 ---
- include/linux/hugetlb.h | 17 -----------------
- 1 file changed, 17 deletions(-)
+ mm/hugetlb.c | 21 +++++++--------------
+ 1 file changed, 7 insertions(+), 14 deletions(-)
 
-diff --git a/include/linux/hugetlb.h b/include/linux/hugetlb.h
-index e78d0f706681..e5a459a6e4b2 100644
---- a/include/linux/hugetlb.h
-+++ b/include/linux/hugetlb.h
-@@ -787,23 +787,6 @@ static inline unsigned huge_page_shift(struct hstate *h)
- 	return h->order + PAGE_SHIFT;
+diff --git a/mm/hugetlb.c b/mm/hugetlb.c
+index b41e7b8df094..a677ea774143 100644
+--- a/mm/hugetlb.c
++++ b/mm/hugetlb.c
+@@ -1001,17 +1001,6 @@ static long region_count(struct resv_map *resv, long f, long t)
+ 	return chg;
  }
  
--/**
-- * hugetlb_linear_page_index() - linear_page_index() but in hugetlb
-- *				 page size granularity.
-- * @vma: the hugetlb VMA
-- * @address: the virtual address within the VMA
-- *
-- * Return: the page offset within the mapping in huge page units.
+-/*
+- * Convert the address within this vma to the page offset within
+- * the mapping, huge page units here.
 - */
--static inline pgoff_t hugetlb_linear_page_index(struct vm_area_struct *vma,
--		unsigned long address)
+-static pgoff_t vma_hugecache_offset(struct hstate *h,
+-			struct vm_area_struct *vma, unsigned long address)
 -{
--	struct hstate *h = hstate_vma(vma);
--
 -	return ((address - vma->vm_start) >> huge_page_shift(h)) +
--		(vma->vm_pgoff >> huge_page_order(h));
+-			(vma->vm_pgoff >> huge_page_order(h));
 -}
 -
- static inline bool order_is_gigantic(unsigned int order)
- {
- 	return order > MAX_PAGE_ORDER;
+ /*
+  * Flags for MAP_PRIVATE reservations.  These are stored in the bottom
+  * bits of the reservation map pointer, which are always clear due to
+@@ -2437,7 +2426,9 @@ static long __vma_reservation_common(struct hstate *h,
+ 	if (!resv)
+ 		return 1;
+ 
+-	idx = vma_hugecache_offset(h, vma, addr);
++	idx = linear_page_index(vma, addr);
++	idx >>= huge_page_order(h);
++
+ 	switch (mode) {
+ 	case VMA_NEEDS_RESV:
+ 		ret = region_chg(resv, idx, idx + 1, &dummy_out_regions_needed);
+@@ -4693,8 +4684,10 @@ static void hugetlb_vm_op_close(struct vm_area_struct *vma)
+ 	if (!resv || !is_vma_resv_set(vma, HPAGE_RESV_OWNER))
+ 		return;
+ 
+-	start = vma_hugecache_offset(h, vma, vma->vm_start);
+-	end = vma_hugecache_offset(h, vma, vma->vm_end);
++	start = linear_page_index(vma, vma->vm_start);
++	start >>= huge_page_order(h);
++	end = linear_page_index(vma, vma->vm_end);
++	end >>= huge_page_order(h);
+ 
+ 	reserve = (end - start) - region_count(resv, start, end);
+ 	hugetlb_cgroup_uncharge_counter(resv, start, end);
 -- 
 2.43.5
 
