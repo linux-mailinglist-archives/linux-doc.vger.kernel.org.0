@@ -1,60 +1,62 @@
-Return-Path: <linux-doc+bounces-92668-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92666-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id vD9CO8rYMmp96AUAu9opvQ
-	(envelope-from <linux-doc+bounces-92668-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 19:26:34 +0200
+	id sHIhMMLYMmp76AUAu9opvQ
+	(envelope-from <linux-doc+bounces-92666-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 19:26:26 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 606A969BAC4
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 19:26:34 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id BEBEC69BABE
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 19:26:25 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=oracle.com header.s=corp-2025-04-25 header.b=DXsuAiRq;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92668-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92668-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=oracle.com header.s=corp-2025-04-25 header.b=E45PcdJT;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92666-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-92666-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=reject) header.from=oracle.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 88CF9309E776
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 17:26:25 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id D7252300BD6E
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 17:26:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D5B2A3546D6;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 87C8033D4FB;
 	Wed, 17 Jun 2026 17:26:19 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com [205.220.165.32])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 357603368A5;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 356F3330B30;
 	Wed, 17 Jun 2026 17:26:18 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781717179; cv=none; b=HQ95GBjQdFAB9nHD+LzzeXYdsy1einQ2Qjxi0KeHidJHnhhL/vhor2ChZ2E09zgmD9JKHqi2hHa95yrCMDVB8+Ajjydsv26UX2+M7fPojupTCvp3XqIxJNmvef49fcPymb7OBtQZY4FExPkIQS2d29amVfTat0TE8XnPufbu+wc=
+	t=1781717179; cv=none; b=FMDMc7HLcaZCZfQpbp4gidsYRowEsavF444k/8aqVEP0ZJeqXBFnGnXzPiIJ7GPjj6f+syssLz3OJN7HKWTul4W9t5tZ1sinG+Lp80Xy5dN91stAGcbSIAxU3LsuWHRfUsb4cCINL5XD0y1O5ZoWM2uAh+6gS3aM58LSs0he8OE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1781717179; c=relaxed/simple;
-	bh=ZxHR7xw8ivfDnCNNmc+szVCeyYYv0koGPg+XXC6IprE=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=SXY/efxLeExaUlxX6VmvM9z90OZtnf9vNMxfSVQM7XF7zTIHh7ycKD4aXXObmvyZ9lD7GQj8HI5OPUHI5PgNj2668YdKxtkXt3CI2SfxAMF7AvVlsOiOCgQR+/s+rTf1agroh7XA8FuEVngFcLtkHeqpOTkWVE06Gfsxz1bU8G4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=DXsuAiRq; arc=none smtp.client-ip=205.220.165.32
-Received: from pps.filterd (m0246629.ppops.net [127.0.0.1])
-	by mx0b-00069f02.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 65HErd3H2382316;
-	Wed, 17 Jun 2026 17:25:45 GMT
+	bh=7jCbGveGidbqtNPotdr/ZBopdaWETxlaiqeM8CnQ1Rk=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=JUkm7+/XUXXHgK58J3hb8i+VSJHs3zo5CHqN8ZH0/+TkJ6bkqyw7CgU0X03EllipONJH70omk8mTBb9oC5c4rweR3oJmkjZe4L4dTJQ+Br8u1ORVP5v8tJ6CPENgyUTHi5l5sr0AyQKvNAsWEltQYXC9xXyLj4J8M0AHqYRSKxw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=E45PcdJT; arc=none smtp.client-ip=205.220.165.32
+Received: from pps.filterd (m0246617.ppops.net [127.0.0.1])
+	by mx0b-00069f02.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 65HEsR4f2367895;
+	Wed, 17 Jun 2026 17:25:50 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
-	:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=corp-2025-04-25; bh=WSC/S/1eh03bECJM3bYZpz5IHDiPQ
-	T1yEFjxIIMxjqs=; b=DXsuAiRq0liddmwivN7pcDHYwuQu5v5gU5BGoJW95pvbw
-	KVyGaO4T1BDL84X2ehQ30o3Sy70pd4y6T48/kogBJwmxdGhFLv1qULGANxzufKgx
-	A+77IYbpZ04VLlrhU2Z/tjJjYyPx6ajwT5/dDKJk9MOnYFi02QwtNWrg///TMOov
-	WAsp5sz6TBxI9GP9bpD5wG7nUf9MQPaRzJ3VRlYUJ6/ZIRobZR9IEo6vV8iLBaoi
-	NTIzYHEAb9sXwRpxfQVrkMso/3ppkAFw7HqA28qaawTzoZkefcqZ7wAwCQ7mBu6c
-	KKThHZlIKjxs7XB1adZMNg4H4NTc/WKCeICjU8uVA==
+	:content-transfer-encoding:date:from:in-reply-to:message-id
+	:mime-version:references:subject:to; s=corp-2025-04-25; bh=zDEdJ
+	auVMqtcYMksWd/HaiAwhAj1eYV9erFp/52IWEw=; b=E45PcdJT1xJEOVCzXExoo
+	sJ95a+kw7K3Qd/2mdalW8S5fs/SVwqmJrOHljFAhxUR8xy/9rE5BO8t/PpMWpgcM
+	Jk9wTrZ4c3lu/+EwHGtoFwC9nPDmMmd0uTEi9igdobk0IdxY3ZJzGohCxBwbF5Ag
+	sm/D9mwI4MVgLuRfNb//df7WxH0f9uej3f3D4z54Y11BOoio1juUNRCquE8BT13M
+	zNqc33foT9huQWVqeso82RfsmEV6aZXSiBMaIKO+6vBj7YwDiPJLnlgmTRedhWwZ
+	zOfrrKbG8pJ88thH6anZBJ5QYsVzCpbGw2lGsCvi30beo7LcEfcPI3IGSg+zhlTf
+	A==
 Received: from iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta01.appoci.oracle.com [130.35.100.223])
-	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4euege1c1y-1
+	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4eueg31c32-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Wed, 17 Jun 2026 17:25:44 +0000 (GMT)
+	Wed, 17 Jun 2026 17:25:50 +0000 (GMT)
 Received: from pps.filterd (iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
-	by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.7/8.18.1.7) with ESMTP id 65HHNVOi003778;
-	Wed, 17 Jun 2026 17:25:43 GMT
+	by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.7/8.18.1.7) with ESMTP id 65HHNVOj003778;
+	Wed, 17 Jun 2026 17:25:49 GMT
 Received: from brm-x62-16.us.oracle.com (brm-x62-16.us.oracle.com [10.80.150.37])
-	by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTP id 4eudvc0wgy-1;
-	Wed, 17 Jun 2026 17:25:43 +0000 (GMT)
+	by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTP id 4eudvc0wgy-2;
+	Wed, 17 Jun 2026 17:25:48 +0000 (GMT)
 From: Jane Chu <jane.chu@oracle.com>
 To: akpm@linux-foundation.org
 Cc: willy@infradead.org, jack@suse.cz, viro@zeniv.linux.org.uk,
@@ -64,10 +66,12 @@ Cc: willy@infradead.org, jack@suse.cz, viro@zeniv.linux.org.uk,
         rppt@kernel.org, peterx@redhat.com, corbet@lwn.net,
         linux-doc@vger.kernel.org, linux-mm@kvack.org,
         linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org
-Subject: [PATCH v2 00/11] hugetlb: Use PAGE granularity index in exported i/f and adopt the common read_iter 
-Date: Wed, 17 Jun 2026 11:25:21 -0600
-Message-ID: <20260617172534.1740152-1-jane.chu@oracle.com>
+Subject: [PATCH v2 01/11] mm/memory-failure: make is_raw_hwpoison_page_in_hugepage() general purpose
+Date: Wed, 17 Jun 2026 11:25:22 -0600
+Message-ID: <20260617172534.1740152-2-jane.chu@oracle.com>
 X-Mailer: git-send-email 2.43.5
+In-Reply-To: <20260617172534.1740152-1-jane.chu@oracle.com>
+References: <20260617172534.1740152-1-jane.chu@oracle.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -79,119 +83,151 @@ X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-17_02,2026-06-17_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
- phishscore=0 bulkscore=0 mlxlogscore=655 malwarescore=0 mlxscore=0
+ phishscore=0 bulkscore=0 mlxlogscore=999 malwarescore=0 mlxscore=0
  lowpriorityscore=0 adultscore=0 spamscore=0 classifier=spam adjust=0
  reason=mlx scancount=1 engine=8.19.0-2606150000 definitions=main-2606170167
-X-Proofpoint-ORIG-GUID: 7GPwT-0Ew2andlyZJYf8MJINAhbPzD_Q
-X-Authority-Analysis: v=2.4 cv=d7jFDxjE c=1 sm=1 tr=0 ts=6a32d898 b=1 cx=c_pps
+X-Authority-Analysis: v=2.4 cv=I8VVgtgg c=1 sm=1 tr=0 ts=6a32d89e b=1 cx=c_pps
  a=zPCbziy225d3KhSqZt3L1A==:117 a=zPCbziy225d3KhSqZt3L1A==:17
  a=FelO9ux0wxsA:10 a=VkNPw1HP01LnGYTKEx00:22 a=jiCTI4zE5U7BLdzWsZGv:22
- a=EIcjfB9IiI4px24ztqRk:22 a=VwQbUJbxAAAA:8 a=JfrnYn6hAAAA:8
- a=9UlV6ym-Jy44mWKTLegA:9 a=1CNFftbPRP8L7MoqJWF3:22 a=5yU3S35YU4bGjq-dph-N:22
- a=Bho9c0fBagfJEIQBS7DQ:22 cc=ntf awl=host:12312
-X-Proofpoint-GUID: 7GPwT-0Ew2andlyZJYf8MJINAhbPzD_Q
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE3MDE2NyBTYWx0ZWRfX/8AzIDRH1q8H
- sJRSnAZbxXI7cHA5FW0E+MoZ5QZV/+biwdnJKrHVNK5Wvzu/zqJnjS08mX2WHwp/zBsVGGQUt1S
- etmWAZeFxVZtMGYWzcZ8UFplWyiQgkqkHfWOrIOg5FfrgIudQ27aBIgCXboKAot2AToWx1GSkUW
- FMHEPQtw4f/nUeYmMWRzKIxSeNk1GGyajfUuPoeYK7sD7MYjHvCDa1TLjeu4pvHeouWv8m4INzZ
- hAuDsWgfhwo6To2d2QKAtHnEragFg/rFERxf6CyJJWrDZnZBeOlEQa2heSK6kc45fcJSB3EWMDr
- o88GXlJiMOXDnbrfhNDwRT+IF0JKvvOUYtFHAty9m/mOwBs+UQY5khP2Apas2eHGghuv78KNy+x
- y+E5O2wG7Z8n12OfTvp6k3yTm3jWx2SbYKrBL4ezXhUPGCj35hroPEh2v+W151dWRxkqJQtpxpF
- 6LrAOOZ2eKAf8kiBRWsVL5N6yRtPHmpVaqjVlb/E=
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE3MDE2NyBTYWx0ZWRfXwBL8ZJ1g2Uyn
- /DGqmdYV3qiIiHbBCXHylPg8GG+cO6GKUl7moKVd8YL/eYvlMYh0qmj6g1dikFwgzhyQzApRV5B
- k8fVJIfKh560KadelgZgJEwS9sJjQnjYEKCCggWGatwNwOkL99eu
+ a=7Gl3-_t3PgB9XO-mQDs3:22 a=yPCof4ZbAAAA:8 a=Mb7NiH9OEEZ03nqYuncA:9
+ a=5yU3S35YU4bGjq-dph-N:22 a=Bho9c0fBagfJEIQBS7DQ:22 cc=ntf awl=host:12312
+X-Proofpoint-GUID: 592cje2o6CRkX_6JHYwFOwZa5T7CjXZw
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE3MDE2NyBTYWx0ZWRfX1YtkOhEQgCUq
+ GcdoVQJTP+BKkLEGPlkd0LncsiyH7jmj0W7JobTH6WmS8E1Oskl33n64G8nqHGrMw2ddPWQjS/2
+ 1hvmaGruGdeJIfFlGKghi4accZgdugeDL0MYokaXTH+hU5LcvUyN+6bgK97Ap7ouCDaPwSLbB9H
+ qXgubHTVYYZ0bMWqtZBNEiHbnMt3iTj5lsXUBlZb9+O8BM6JfkKVXzoJf9QfTmHPxj70kN4p8hQ
+ 7cCcnsCa/yMcA8HBMYQzvf3ixLtaYtHGc56VyBjYqlhGw4Kaq+4ipZsruAs/8NwwLmZEvEjmffB
+ Jrbarf+aP1Tfjj3T9Va+g+/TGl+9zE6WrQQ6uD5zlZEYbkHTqsQfDT4ctoBXCgc+GqYEluNPJEH
+ AvnW0+H0OD+xSCsrnFFO0RRFHUy/vKLFWoJs/BGOE0+P1YPgPuctcBvFAcX9b74fbfFZlaQ4iUc
+ UPvH35w2rbtyTZt2rTwfqLOpC7IiPHwNyXJhpo5Y=
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE3MDE2NyBTYWx0ZWRfXzZOd+Jkjz6C7
+ j2nmXzltI73PPbg9vJ/2Z5EUP8lHyDrVA7O+jXmnrM/Tz/5NPZdt/FsMi47dXLkNdHq2K7ZW/zq
+ 74c/p43HUlTqk2MjuW/b+NhJzOX5g/TRp9W+XZfiSvhAxKt+jAlS
+X-Proofpoint-ORIG-GUID: 592cje2o6CRkX_6JHYwFOwZa5T7CjXZw
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-5.66 / 15.00];
+X-Spamd-Result: default: False [-6.16 / 15.00];
 	WHITELIST_DMARC(-7.00)[oracle.com:D:+];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[oracle.com,reject];
-	SUBJECT_ENDS_SPACES(0.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[oracle.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	R_DKIM_ALLOW(-0.20)[oracle.com:s=corp-2025-04-25];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-92668-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	TO_DN_NONE(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:akpm@linux-foundation.org,m:willy@infradead.org,m:jack@suse.cz,m:viro@zeniv.linux.org.uk,m:brauner@kernel.org,m:muchun.song@linux.dev,m:osalvador@suse.de,m:david@kernel.org,m:hughd@google.com,m:baolin.wang@linux.alibaba.com,m:linmiaohe@huawei.com,m:nao.horiguchi@gmail.com,m:lorenzo@kernel.org,m:rppt@kernel.org,m:peterx@redhat.com,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:naohoriguchi@gmail.com,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[jane.chu@oracle.com,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[lists@lfdr.de];
 	FREEMAIL_CC(0.00)[infradead.org,suse.cz,zeniv.linux.org.uk,kernel.org,linux.dev,suse.de,google.com,linux.alibaba.com,huawei.com,gmail.com,redhat.com,lwn.net,vger.kernel.org,kvack.org];
-	PRECEDENCE_BULK(0.00)[];
-	DKIM_TRACE(0.00)[oracle.com:+];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo];
-	FROM_NEQ_ENVFROM(0.00)[jane.chu@oracle.com,linux-doc@vger.kernel.org];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	FORGED_SENDER_FORWARDING(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-92666-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:akpm@linux-foundation.org,m:willy@infradead.org,m:jack@suse.cz,m:viro@zeniv.linux.org.uk,m:brauner@kernel.org,m:muchun.song@linux.dev,m:osalvador@suse.de,m:david@kernel.org,m:hughd@google.com,m:baolin.wang@linux.alibaba.com,m:linmiaohe@huawei.com,m:nao.horiguchi@gmail.com,m:lorenzo@kernel.org,m:rppt@kernel.org,m:peterx@redhat.com,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:naohoriguchi@gmail.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[jane.chu@oracle.com,linux-doc@vger.kernel.org];
+	RCVD_TLS_LAST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[jane.chu@oracle.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[oracle.com:+];
+	TO_DN_NONE(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[20];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCVD_COUNT_SEVEN(0.00)[7]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 606A969BAC4
+X-Rspamd-Queue-Id: BEBEC69BABE
 
-changes in v2:
- - new patches 1-4: add hwpoison handling to filemap_read(),
-   thus replace hugetlbfs_read_iter() with generic_file_read_iter(),
-   suggested by Matthew [2];
- - new patch 5: convert hugetlb fault handler's vmf->pgoff to PAGE_SIZE
-   granularity like the rest of mm fault handling convention, suggested
-   by Matthew [2];
- - patch 6: fixed a bug in v1 pointed out by Usama Arif, also by syzbot;
- - patch 8: did not pick the Acked-by from Oscar (for 5/6 in v1) due to
-   updates to the patch;
- - patch 11: add VM_WARN_ON in hugetlb_unreserve_pages(), per Oscar;
-  
-v1:
-This series stems from a discussion with David. [1]
-The series makes a small cleanup to a few hugetlb interfaces used
-outside the subsystem by standardizing them on base-page indices.
-Hopefully this makes the interface semantics a bit more coherent with
-the rest of mm, while the internal hugetlb code continue to use hugepage
-indices where that remains the more natural fit.
+Make is_raw_hwpoison_page_in_hugepage() general for checking whether
+a given raw page within any kind of folio is HW poisoned. Thus,
+replace folio_test_hwpoison() with folio_contain_hwpoisoned_page().
+Also rename to is_raw_hwpoison_page_in_folio().
 
-[1] https://lore.kernel.org/linux-mm/9ec9edd1-0f4c-4da2-ae78-0e7b251a9e25@kernel.org/
-[2] https://lore.kernel.org/linux-mm/aeZwAz6PcdlqSnJ2@casper.infradead.org/
+Signed-off-by: Jane Chu <jane.chu@oracle.com>
+---
+ fs/hugetlbfs/inode.c    |  4 ++--
+ include/linux/hugetlb.h |  4 ++--
+ mm/memory-failure.c     | 12 ++++++++++--
+ 3 files changed, 14 insertions(+), 6 deletions(-)
 
-
-Jane Chu (11):
-  mm/memory-failure: make is_raw_hwpoison_page_in_hugepage() general
-    purpose
-  mm: factor out adjust_range_hwpoison() from hugetlbfs
-  mm/filemap: add hwpoison handling to filemap_read()
-  hugetlbfs,filemap: replace hugetlbfs_read_iter() with
-    generic_file_read_iter()
-  hugetlb: Convert the vmf->pgoff to PAGE_SIZE granularity
-  hugetlb: make hugetlb_fault_mutex_hash() to take PAGE_SIZE index
-  hugetlb: replace filemap_lock_hugetlb_folio with filemap_lock_folio
-  hugetlb: make hugetlb_add_to_page_cache() to take PAGE_SIZE
-    granularity index
-  hugetlb: remove the hugetlb_linear_page_index() helper
-  hugetlb: drop vma_hugecache_offset() in favor of linear_page_index()
-  hugetlb: make hugetlb_[un]reserve_pages() to take PAGE granularity
-    index
-
- Documentation/mm/hugetlbfs_reserv.rst |  19 ++--
- fs/hugetlbfs/inode.c                  | 155 ++++----------------------
- include/linux/fs.h                    |   2 +
- include/linux/hugetlb.h               |  36 +-----
- mm/filemap.c                          |  62 ++++++++++-
- mm/hugetlb.c                          |  87 ++++++++-------
- mm/memfd.c                            |  25 ++---
- mm/memory-failure.c                   |  12 +-
- mm/userfaultfd.c                      |   6 +-
- 9 files changed, 164 insertions(+), 240 deletions(-)
-
+diff --git a/fs/hugetlbfs/inode.c b/fs/hugetlbfs/inode.c
+index 78d61bf2bd9b..66520f7c53c6 100644
+--- a/fs/hugetlbfs/inode.c
++++ b/fs/hugetlbfs/inode.c
+@@ -198,7 +198,7 @@ static size_t adjust_range_hwpoison(struct folio *folio, size_t offset,
+ 	struct page *page = folio_page(folio, offset / PAGE_SIZE);
+ 	size_t safe_bytes;
+ 
+-	if (is_raw_hwpoison_page_in_hugepage(page))
++	if (is_raw_hwpoison_page_in_folio(page))
+ 		return 0;
+ 	/* Safe to read the remaining bytes in this page. */
+ 	safe_bytes = PAGE_SIZE - (offset % PAGE_SIZE);
+@@ -206,7 +206,7 @@ static size_t adjust_range_hwpoison(struct folio *folio, size_t offset,
+ 
+ 	/* Check each remaining page as long as we are not done yet. */
+ 	for (; safe_bytes < bytes; safe_bytes += PAGE_SIZE, page++)
+-		if (is_raw_hwpoison_page_in_hugepage(page))
++		if (is_raw_hwpoison_page_in_folio(page))
+ 			break;
+ 
+ 	return min(safe_bytes, bytes);
+diff --git a/include/linux/hugetlb.h b/include/linux/hugetlb.h
+index 5957bc25efa8..a9846f043712 100644
+--- a/include/linux/hugetlb.h
++++ b/include/linux/hugetlb.h
+@@ -1079,9 +1079,9 @@ void hugetlb_unregister_node(struct node *node);
+ #endif
+ 
+ /*
+- * Check if a given raw @page in a hugepage is HWPOISON.
++ * Check if a given raw @page is HWPOISON in a folio of any kind
+  */
+-bool is_raw_hwpoison_page_in_hugepage(struct page *page);
++bool is_raw_hwpoison_page_in_folio(struct page *page);
+ 
+ static inline unsigned long huge_page_mask_align(struct file *file)
+ {
+diff --git a/mm/memory-failure.c b/mm/memory-failure.c
+index ee42d4361309..40129e0b8213 100644
+--- a/mm/memory-failure.c
++++ b/mm/memory-failure.c
+@@ -1834,14 +1834,21 @@ static inline struct llist_head *raw_hwp_list_head(struct folio *folio)
+ 	return (struct llist_head *)&folio->_hugetlb_hwpoison;
+ }
+ 
+-bool is_raw_hwpoison_page_in_hugepage(struct page *page)
++/**
++ * is_raw_hwpoison_page_in_folio - answers the question whether a given
++ * page is indeed hwpoisoned.
++ * @page: given page, maybe base page, part of a large folio or hugetlb.
++ *
++ * Return: true if @page is the raw hwpoisoned page; else, false.
++ */
++bool is_raw_hwpoison_page_in_folio(struct page *page)
+ {
+ 	struct llist_head *raw_hwp_head;
+ 	struct raw_hwp_page *p;
+ 	struct folio *folio = page_folio(page);
+ 	bool ret = false;
+ 
+-	if (!folio_test_hwpoison(folio))
++	if (!folio_contain_hwpoisoned_page(folio))
+ 		return false;
+ 
+ 	if (!folio_test_hugetlb(folio))
+@@ -1868,6 +1875,7 @@ bool is_raw_hwpoison_page_in_hugepage(struct page *page)
+ 
+ 	return ret;
+ }
++EXPORT_SYMBOL_GPL(is_raw_hwpoison_page_in_folio);
+ 
+ static unsigned long __folio_free_raw_hwp(struct folio *folio, bool move_flag)
+ {
 -- 
 2.43.5
 
