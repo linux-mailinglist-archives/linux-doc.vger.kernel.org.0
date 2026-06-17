@@ -1,148 +1,130 @@
-Return-Path: <linux-doc+bounces-92685-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92686-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Nkv8GaT+MmqJ8QUAu9opvQ
-	(envelope-from <linux-doc+bounces-92685-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 22:08:04 +0200
+	id lBPTJLIHM2q+8gUAu9opvQ
+	(envelope-from <linux-doc+bounces-92686-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 22:46:42 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF64169C4BF
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 22:08:03 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C00469C697
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 22:46:41 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=infradead.org header.s=casper.20170209 header.b=FWZohVnf;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92685-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-92685-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=infradead.org;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=FA1De8wo;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92686-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-92686-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 6C6643014DB8
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 20:08:00 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id C176A300A582
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2026 20:46:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9C4E039D6CC;
-	Wed, 17 Jun 2026 20:07:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E642A38F957;
+	Wed, 17 Jun 2026 20:46:35 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 772CE328B5E;
-	Wed, 17 Jun 2026 20:07:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F10AF376497;
+	Wed, 17 Jun 2026 20:46:34 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781726879; cv=none; b=fLUt3gV7oHqCIDiXUdUERKMog8WxmMAiRah6FKwxOM4vhsdYOdPs1gE/c7XZV2FVWOCE1W1zcaZOBa0UwYrpT6oClNjb1XqfupRbmLmVtyGDtXITwGrUuDsFMBQYCWF38aTuBUmk7Lkmf5v50YYLQ0Rv5TKPvPRSAWBTnNdaqMI=
+	t=1781729195; cv=none; b=cryHNV7X+BEJXVrQpNTYZLayoe587ZwQU0mLZyiMiokHF3GWzvVfmD85Tkm+/l64JlKha3O/AfawROQ1K/1EyQkr7E+bfAreZMscA8PMOnIF2LW7j35JQVfOR3aP9j4IoOyl4HzG59ZcQ7o70wCguaqSgmO6uBIfhAzOY9sf/J8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781726879; c=relaxed/simple;
-	bh=I0+mT4CPAoUbWeJX0dZDSIerItMoVelyxQMnvUz8FVw=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=bihHCsnHpskHJIMFi2tX8oL1uWHko/oP/V1RJdEEsYfAQTvHV8K112WKJlwWSWlAX+d2tdRUlDGBcNAnJM/T0Tt/j9JkayGeSeEJYa0O+HI6UZwC6w+r98t0Gg5I15xkWrnBMcWUXDBjcQXJKk1oojH8rOUNsxBYMykUSlAVpOI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=pass smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=FWZohVnf; arc=none smtp.client-ip=90.155.50.34
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=xkc/cwFVPTo6PfiKk5XSU4N+7uAosbnedDKdwgjJAs4=; b=FWZohVnfjGzWlfq0c6Jx8HhCkE
-	uHSI+UsVJtrzf0zrp6i9dUqecmh8INz9icR8j1wxFgkF5Y/2z1rpGYcIWo2XI//nGKTuoWbZrzy8I
-	pj5c+PE1kJtho72bNCBEASb3GO05NK1OT59UjkqgmeHPzHUzT5fcZ1zRDwKRoVP+GQ7VE0e+2+K/i
-	ki7eZcQbRWaBpBDmCH4vXhtFyX1XADU8yfNmFGwVqTTNtxj8rtyKvzHbRA+nv5U/IAOGG+jTgDZRw
-	WDk2Ye6HPjDzgc46m/BTkwX1LTOKK3L4RvUAYzUtPjHI9F0iPqntolPyYH2zHlsV7UJ26i9iXhUYd
-	cKw5xM9w==;
-Received: from willy by casper.infradead.org with local (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wZwY2-0000000DDQk-3y3d;
-	Wed, 17 Jun 2026 20:07:43 +0000
-Date: Wed, 17 Jun 2026 21:07:42 +0100
-From: Matthew Wilcox <willy@infradead.org>
-To: Jane Chu <jane.chu@oracle.com>
-Cc: akpm@linux-foundation.org, jack@suse.cz, viro@zeniv.linux.org.uk,
-	brauner@kernel.org, muchun.song@linux.dev, osalvador@suse.de,
-	david@kernel.org, hughd@google.com, baolin.wang@linux.alibaba.com,
-	linmiaohe@huawei.com, nao.horiguchi@gmail.com, lorenzo@kernel.org,
-	rppt@kernel.org, peterx@redhat.com, corbet@lwn.net,
-	linux-doc@vger.kernel.org, linux-mm@kvack.org,
-	linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org
-Subject: Re: [PATCH v2 04/11] hugetlbfs,filemap: replace
- hugetlbfs_read_iter() with generic_file_read_iter()
-Message-ID: <ajL-jsMdL0u1wGo2@casper.infradead.org>
-References: <20260617172534.1740152-1-jane.chu@oracle.com>
- <20260617172534.1740152-5-jane.chu@oracle.com>
+	s=arc-20240116; t=1781729195; c=relaxed/simple;
+	bh=cIiNwSHcoDTzPIvAZfDPFdKYxhr1S+VS5uMkVd+Pq5A=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=sMoODgf3XpSUHxe5oymmoga0LSQJWRScvBInbAzlrwxPcvSRAB3d1JMAmCNcojXtBh0MsNceFu9bVdLr6UQSukHfgoeZJPnSCoCxGwR2sr/Rg6JobN+PIYr0Jz0BNgYdS528EntPuQ7sn1mZDuOqEVGD2TJHhBnXbtjSQ0ThALs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FA1De8wo; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C53101F000E9;
+	Wed, 17 Jun 2026 20:46:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1781729194;
+	bh=vVNWFmfjwqdxt2e6ldVvF0gW8p2zShG7ToMPkGF8Hf0=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=FA1De8woQbexsuMpG6HT4QyiZy6gY3yqhU5WhmcMOwI+rMiMCtY83dGw8rxermli0
+	 GsB+BCOugSzjBqm36kyEB/q7OAdlUjDYXfqtVUfpaavLzN0OJ7o/GmK9cxbA6j/GD/
+	 NoEMUCW0nxyOicFCsazxZmHJtaVc+NkBgG6sYM0uFBumqcobWHEzZd9vJwBXmT8byv
+	 hMdcaWgQFQCdcZVWjUnEmpdlt5RNGhraifJ2+jhriy4HbjUUhLkJ70CCkCdGqWY3rq
+	 HcVOHd36HoqIRiYUhr5EH/lHoZcISyVeP0hylFbJC2CN1ncutuG0/xiVUeecnwjpfr
+	 TpUsqvgE4tVxQ==
+Date: Wed, 17 Jun 2026 13:46:33 -0700
+From: Jakub Kicinski <kuba@kernel.org>
+To: "illusion.wang" <illusion.wang@nebula-matrix.com>
+Cc: dimon.zhao@nebula-matrix.com, alvin.wang@nebula-matrix.com,
+ sam.chen@nebula-matrix.com, netdev@vger.kernel.org, andrew+netdev@lunn.ch,
+ corbet@lwn.net, horms@kernel.org, linux-doc@vger.kernel.org,
+ pabeni@redhat.com, vadim.fedorenko@linux.dev, lukas.bulwahn@redhat.com,
+ edumazet@google.com, enelsonmoore@gmail.com, skhan@linuxfoundation.org,
+ hkallweit1@gmail.com, linux-kernel@vger.kernel.org (open list)
+Subject: Re: [PATCH v19 net-next 00/11] nbl driver for Nebulamatrix NICs
+Message-ID: <20260617134633.658a8c8e@kernel.org>
+In-Reply-To: <20260617044702.2439-1-illusion.wang@nebula-matrix.com>
+References: <20260617044702.2439-1-illusion.wang@nebula-matrix.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260617172534.1740152-5-jane.chu@oracle.com>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-3.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=casper.20170209];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-92685-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:jane.chu@oracle.com,m:akpm@linux-foundation.org,m:jack@suse.cz,m:viro@zeniv.linux.org.uk,m:brauner@kernel.org,m:muchun.song@linux.dev,m:osalvador@suse.de,m:david@kernel.org,m:hughd@google.com,m:baolin.wang@linux.alibaba.com,m:linmiaohe@huawei.com,m:nao.horiguchi@gmail.com,m:lorenzo@kernel.org,m:rppt@kernel.org,m:peterx@redhat.com,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:naohoriguchi@gmail.com,s:lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
+	TAGGED_FROM(0.00)[bounces-92686-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	FORGED_SENDER(0.00)[willy@infradead.org,linux-doc@vger.kernel.org];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER(0.00)[kuba@kernel.org,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	FORGED_RECIPIENTS(0.00)[m:illusion.wang@nebula-matrix.com,m:dimon.zhao@nebula-matrix.com,m:alvin.wang@nebula-matrix.com,m:sam.chen@nebula-matrix.com,m:netdev@vger.kernel.org,m:andrew+netdev@lunn.ch,m:corbet@lwn.net,m:horms@kernel.org,m:linux-doc@vger.kernel.org,m:pabeni@redhat.com,m:vadim.fedorenko@linux.dev,m:lukas.bulwahn@redhat.com,m:edumazet@google.com,m:enelsonmoore@gmail.com,m:skhan@linuxfoundation.org,m:hkallweit1@gmail.com,m:linux-kernel@vger.kernel.org,m:andrew@lunn.ch,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[linux-foundation.org,suse.cz,zeniv.linux.org.uk,kernel.org,linux.dev,suse.de,google.com,linux.alibaba.com,huawei.com,gmail.com,redhat.com,lwn.net,vger.kernel.org,kvack.org];
+	FREEMAIL_CC(0.00)[nebula-matrix.com,vger.kernel.org,lunn.ch,lwn.net,kernel.org,redhat.com,linux.dev,google.com,gmail.com,linuxfoundation.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[willy@infradead.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[kuba@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp,casper.infradead.org:mid,infradead.org:dkim,infradead.org:from_mime]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: BF64169C4BF
+X-Rspamd-Queue-Id: 8C00469C697
 
-On Wed, Jun 17, 2026 at 11:25:25AM -0600, Jane Chu wrote:
-> +++ b/mm/filemap.c
-> @@ -2672,20 +2672,30 @@ static int filemap_get_pages(struct kiocb *iocb, size_t count,
->  {
->  	struct file *filp = iocb->ki_filp;
->  	struct address_space *mapping = filp->f_mapping;
-> +	bool is_hugetlbfs = is_file_hugepages(filp);
->  	pgoff_t index = iocb->ki_pos >> PAGE_SHIFT;
->  	pgoff_t last_index;
->  	struct folio *folio;
->  	unsigned int flags;
-> +	size_t min_folio_bytes;
->  	int err = 0;
->  
->  	/* "last_index" is the index of the folio beyond the end of the read */
-> -	last_index = round_up(iocb->ki_pos + count,
-> -			mapping_min_folio_nrbytes(mapping)) >> PAGE_SHIFT;
-> +	if (is_hugetlbfs)
-> +		min_folio_bytes = huge_page_size(hstate_file(filp));
-> +	else
-> +		min_folio_bytes = mapping_min_folio_nrbytes(mapping);
-> +	last_index = round_up(iocb->ki_pos + count, min_folio_bytes) >> PAGE_SHIFT;
+On Wed, 17 Jun 2026 12:46:45 +0800 illusion.wang wrote:
+> This patch series represents the first phase. We plan to integrate it in
+> two phases: the first phase covers mailbox and chip configuration,
+> while the second phase involves net dev configuration.
+> Together, they will provide basic PF-based Ethernet port transmission and
+> reception capabilities.
 
-I don't love this.  Is there a way we can get mapping_min_folio_nrbytes()
-to give us the right number for hugetlbfs?  I don't see why it wouldn't
-be possible ...
+## Form letter - net-next-closed
 
->  	filemap_get_read_batch(mapping, index, last_index - 1, fbatch);
-> +
-> +	if (is_hugetlbfs)
-> +		goto done;
+We have already submitted our pull request with net-next material for v7.2,
+and therefore net-next is closed for new drivers, features, code refactoring
+and optimizations. We are currently accepting bug fixes only.
 
-We don't actually need this, do we?  For hugetlbfs, I don't think we
-can get 0 folios in the batch, and then we won't find a folio with
-readahead set, and they're always uptodate ... so we're just skipping a
-few tests with this?
+Please repost when net-next reopens after June 29th.
 
+RFC patches sent for review only are obviously welcome at any time.
+
+See: https://www.kernel.org/doc/html/next/process/maintainer-netdev.html#development-cycle
+-- 
+pw-bot: defer
+pv-bot: closed
 
