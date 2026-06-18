@@ -1,173 +1,118 @@
-Return-Path: <linux-doc+bounces-92733-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92734-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 0W7xD1KlM2qNEgYAu9opvQ
-	(envelope-from <linux-doc+bounces-92733-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 18 Jun 2026 09:59:14 +0200
+	id mwbXAiWmM2q3EgYAu9opvQ
+	(envelope-from <linux-doc+bounces-92734-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 18 Jun 2026 10:02:45 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A61B669E492
-	for <lists+linux-doc@lfdr.de>; Thu, 18 Jun 2026 09:59:13 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 455E669E4F4
+	for <lists+linux-doc@lfdr.de>; Thu, 18 Jun 2026 10:02:44 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=nYzSGJqs;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92733-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92733-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	dkim=pass header.d=rasmusvillemoes.dk header.s=protonmail header.b=FV+rwnEo;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92734-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92734-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=rasmusvillemoes.dk;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 3C26B300794D
-	for <lists+linux-doc@lfdr.de>; Thu, 18 Jun 2026 07:58:54 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 0F9E2301BEEA
+	for <lists+linux-doc@lfdr.de>; Thu, 18 Jun 2026 08:02:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 333B43D7D83;
-	Thu, 18 Jun 2026 07:58:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 63411379C32;
+	Thu, 18 Jun 2026 08:02:21 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mail-43170.protonmail.ch (mail-43170.protonmail.ch [185.70.43.170])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 42739361DBC;
-	Thu, 18 Jun 2026 07:58:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C719E31F9AB
+	for <linux-doc@vger.kernel.org>; Thu, 18 Jun 2026 08:02:17 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781769530; cv=none; b=umF9qadI/4UOH472IuFmGev6xB3YztRBDJ5D3aqwVnIA9gxxmvPAWxvvbg1VE14U2I9waHWTE92owSeGyPJWevYnicWweFxfn2uMe9A267++Og4Tg7Q1neb2yInIyimjH7hOGuqQV7Yr4e/7z7k/ixLml0T6U4rAh4OWGZ8rBtk=
+	t=1781769741; cv=none; b=DQmuXnE/rV3dxYOQK3O2G1gHbuP+Pw+UIznErFzWV1QCwM3Xd9/kfl4wbioAn0dpeT4FLmmUUQkc3hmch+3nk2IKyQELjFT+erYH3gpi4qC9rocWk9wIYumtiA2DcwqZZk0NL9C/DQ9eWEpKIAWuPk6qUUj/Q9AJLKUfrLoiZW4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781769530; c=relaxed/simple;
-	bh=S69YZ36fCkdXH9m/lRRO0+E2+PwWzYTDjvt7nzgq8fo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=dZGfiQJGq2CJjgMyAk8TD30+VC/ISR2+rMDityP2rgnmLk5qaG7iTySUg+v977FF5mmPlDqvHeH3mVYUkNieiMx/gggzvavhb4q0ol90UbkbSnsrrhgnp4QAvbDBvu/O3c1FbzE/mcTDVSgGOjuvAm4APLOpv1B/o5WhKvxD+SM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nYzSGJqs; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id 1E5761F000E9;
-	Thu, 18 Jun 2026 07:58:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1781769528;
-	bh=X9Re2AjJqpI+lz0lftbe6X0S5NaELGK5zHozVWXucgU=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=nYzSGJqsmsBs2ICNyrz2bquyXFnUGesv0uH33wwjm2njmNn8mQOpHFDXu/XB4kCSk
-	 rVYROPUZFV0iBIUkyqaB0wgVl3Z+CSr0wpPPfn9/9kEBjHZfuOIA0nHXcHVjM6bmG9
-	 YkX/UGYKIYKQTZte91T0PU8irLc4Yl/d6Ln6TvX+02VAnb2q4awgkYXGocqxioJLJS
-	 /zwzHafe1aAL9eprQTCzEDhteaOB7wuAIN2j13gg05h8OL2LZ8srow3BG20g1jcUpG
-	 tlAUvhFZQTG82Ke7fDt9AbnQaUpsXffWXLBZpwipIlYIijwtxAQDXS3t/n19AfZWsb
-	 rbZV8bt4Su0tg==
-Date: Thu, 18 Jun 2026 09:57:52 +0200
-From: Nicolas Schier <nsc@kernel.org>
-To: Nathan Chancellor <nathan@kernel.org>
-Cc: Ethan Nelson-Moore <enelsonmoore@gmail.com>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Chen Pei <cp0613@linux.alibaba.com>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Jonathan Corbet <corbet@lwn.net>, linux-kbuild@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH] docs: kbuild: remove ISDN references in Makefile examples
-Message-ID: <ajOlANn6mkCNiz-C@levanger>
-Mail-Followup-To: Nathan Chancellor <nathan@kernel.org>,
-	Ethan Nelson-Moore <enelsonmoore@gmail.com>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Chen Pei <cp0613@linux.alibaba.com>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Jonathan Corbet <corbet@lwn.net>, linux-kbuild@vger.kernel.org,
-	linux-doc@vger.kernel.org
-References: <20260613232830.147116-1-enelsonmoore@gmail.com>
- <178175273131.3916864.13607634190318049114.b4-review@b4>
+	s=arc-20240116; t=1781769741; c=relaxed/simple;
+	bh=2t+RkjBFL1lZxO64xK2l79qUSt5JM3y5CAjnWbpJF2s=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=j38pD0akLblfibJJUe9QrAL7oiFsPuKj5V2eiSDpRiFixmG2fn8UArtOnplu8PIIoUFQqbSFpYkm8FWJ9rX204oEiQYErCCEzJcwWBYCALvojggrOtkBtn9UhNfi/r2+u0LKoFc5vYo4M1rC0GGhPPj0Kd40pzTEPJZDiM39h7s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=rasmusvillemoes.dk; spf=pass smtp.mailfrom=rasmusvillemoes.dk; dkim=pass (2048-bit key) header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk header.b=FV+rwnEo; arc=none smtp.client-ip=185.70.43.170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rasmusvillemoes.dk;
+	s=protonmail; t=1781769735; x=1782028935;
+	bh=2t+RkjBFL1lZxO64xK2l79qUSt5JM3y5CAjnWbpJF2s=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:From:To:
+	 Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=FV+rwnEoy5qvX19DmBCoPvVnyMzrAOtumwXoUfetPoSZlM72lcpIPhets9nZKC3Y9
+	 ++MWFO6w/2CpYjIVoma//uy0OnNJGwT12Sol+YUoI7or3hFNqtcvR+UrNFlI+EVT8P
+	 //TsbPhdKNHsC/JbE48Ta6ianX0G0dpgVUKcNGiKlbf7C+dlgGbm198XVihAm2KZSw
+	 DqKfz4PzpR2d1piZFDHpkjVT6HJagz/4B1QXv2qVEjih2bRcNXAiratjBQcAwyJFJY
+	 2w7p84ewLIAYJk7u+yO5DfeD+7mrUo9zm2JF9x8JedS8VHp1DF5JtHwjB3unNkYYxR
+	 Jhi9BcpTilPUg==
+X-Pm-Submission-Id: 4ggtVZ1FRpz2Scmx
+From: Rasmus Villemoes <linux@rasmusvillemoes.dk>
+To: <linux-arm-kernel@lists.infradead.org>
+Cc: "Ard Biesheuvel" <ardb@kernel.org>,  "Will Deacon" <will@kernel.org>,
+  "Jonathan Corbet" <corbet@lwn.net>,  <linux-doc@vger.kernel.org>,
+  <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH] docs: arm64: Document that text_offset is always 0
+In-Reply-To: <20260604140839.1930847-1-linux@rasmusvillemoes.dk> (Rasmus
+	Villemoes's message of "Thu, 04 Jun 2026 14:08:45 +0000")
+References: <rWEeI8VTs9ivADjblsACv--YW_WrirJXCPkBOYE-az7ys6mFKCBWMAkGvsTwYpJrObRYWS_hgRXyiSqiZSb46Q==@protonmail.internalid>
+	<20260604140839.1930847-1-linux@rasmusvillemoes.dk>
+Date: Thu, 18 Jun 2026 10:02:12 +0200
+Message-ID: <87cxxonunv.fsf@rasmusvillemoes.dk>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <178175273131.3916864.13607634190318049114.b4-review@b4>
+Content-Type: text/plain
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-4.66 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[rasmusvillemoes.dk,quarantine];
+	R_DKIM_ALLOW(-0.20)[rasmusvillemoes.dk:s=protonmail];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-92733-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER(0.00)[nsc@kernel.org,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:nathan@kernel.org,m:enelsonmoore@gmail.com,m:skhan@linuxfoundation.org,m:cp0613@linux.alibaba.com,m:rdunlap@infradead.org,m:corbet@lwn.net,m:linux-kbuild@vger.kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[gmail.com,linuxfoundation.org,linux.alibaba.com,infradead.org,lwn.net,vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:linux-arm-kernel@lists.infradead.org,m:ardb@kernel.org,m:will@kernel.org,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[3];
+	TAGGED_FROM(0.00)[bounces-92734-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[linux@rasmusvillemoes.dk,linux-doc@vger.kernel.org];
+	FORWARDED(0.00)[lists@lfdr.de];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[nsc@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[linux@rasmusvillemoes.dk,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[rasmusvillemoes.dk:+];
+	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[6];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: A61B669E492
+X-Rspamd-Queue-Id: 455E669E4F4
 
-On Wed, Jun 17, 2026 at 08:18:51PM -0700, Nathan Chancellor wrote:
-> On Sat, 13 Jun 2026 16:28:27 -0700, Ethan Nelson-Moore <enelsonmoore@gmail.com> wrote:
-> > Documentation/kbuild/makefiles.rst uses some extracts from now-removed
-> > ISDN code as examples. While they are harmless, they appeared in my
-> > checks for CONFIG_* symbols referenced but not defined in the kernel.
-> > Replace them with generic examples.
-> 
-> While I am fine with adjusting these examples to make it easier on tools
-> such as yours, how does this solve your problem? CONFIG_FOO and
-> CONFIG_BAR are still not defined anywhere. Are you adding exceptions for
-> these symbols? I ask because I would like these to be a little more
-> "kernel specific" if that makes sense.
-> 
-> Maybe it is not worth even checking Documentation/ for dead
-> configurations at all since that is probably not going to be a bug very
-> often but I guess it helps with cleaning up dead documentation?
-> 
-> >
-> >
-> > diff --git a/Documentation/kbuild/makefiles.rst b/Documentation/kbuild/makefiles.rst
-> > index 7521cae7d56f..ec8de1c20834 100644
-> > --- a/Documentation/kbuild/makefiles.rst
-> > +++ b/Documentation/kbuild/makefiles.rst
-> > @@ -127,11 +127,8 @@ controllers are detected, and thus your disks are renumbered.
-> >  
-> >  Example::
-> >  
-> > -  #drivers/isdn/i4l/Makefile
-> > -  # Makefile for the kernel ISDN subsystem and device drivers.
-> > -  # Each configuration option enables a list of files.
-> 
-> I think I would keep these comment, it is still relevant (at least to
-> me).
-> 
-> > -  obj-$(CONFIG_ISDN_I4L)         += isdn.o
-> > -  obj-$(CONFIG_ISDN_PPP_BSDCOMP) += isdn_bsdcomp.o
-> > +  obj-$(CONFIG_FOO) += foo.o
-> > +  obj-$(CONFIG_BAR) += bar.o
-> 
-> For instance, I think using a more descriptive symbol illustrates the
-> example a little better.
-> 
->   obj-$(CONFIG_DRIVER_ONE) += driver_one.o
->   obj-$(CONFIG_DRIVER_TWO) += driver_two.o
-> 
-> Same thing for the other examples. I just don't find these variable
-> names to be particularly good when illustrating actual real world
-> examples as opposed to conceptual ones. Not sure if others feel the same
-> way.
+On Thu, Jun 04 2026, "Rasmus Villemoes" <linux@rasmusvillemoes.dk> wrote:
 
-+1
+> When trying to figure out where to place and call an arm64 Image in
+> memory, reading booting.rst should provide the answer. However, it
+> requires quite some digging to figure out that text_offset is set via
+> ".quad 0" in head.S and is thus actually always 0 since v5.10.
+>
+> Update the documentation and make that explicit. Reword the 2MB
+> requirement accordingly, and remove the paragraphs that only apply to
+> the ancient versions where text_offset could be non-zero, as they only
+> confuse a current reader.
+>
 
-I liked that the examples were taken from actual Linux kconfigs, so it
-was possible to look them up and check the context as well.  So, yes, I
-think updating these is a good idea!
-
-Kind regards,
-Nicolas
+ping
 
