@@ -1,122 +1,169 @@
-Return-Path: <linux-doc+bounces-92721-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92722-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id woStGGBjM2pJAAYAu9opvQ
-	(envelope-from <linux-doc+bounces-92721-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 18 Jun 2026 05:17:52 +0200
+	id GJtxNqxjM2pUAAYAu9opvQ
+	(envelope-from <linux-doc+bounces-92722-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 18 Jun 2026 05:19:08 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0038569D49C
-	for <lists+linux-doc@lfdr.de>; Thu, 18 Jun 2026 05:17:50 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 302B369D4BA
+	for <lists+linux-doc@lfdr.de>; Thu, 18 Jun 2026 05:19:08 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=infradead.org header.s=casper.20170209 header.b=pSTOXZBP;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92721-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92721-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=infradead.org;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=Z0gSZnmB;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92722-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92722-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id B832C307DE2E
-	for <lists+linux-doc@lfdr.de>; Thu, 18 Jun 2026 03:17:49 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 54E4A301A07F
+	for <lists+linux-doc@lfdr.de>; Thu, 18 Jun 2026 03:19:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6E0C734404F;
-	Thu, 18 Jun 2026 03:17:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 016EE2E7378;
+	Thu, 18 Jun 2026 03:19:02 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A71140D58F;
-	Thu, 18 Jun 2026 03:17:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E8DE43C2D;
+	Thu, 18 Jun 2026 03:19:00 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781752666; cv=none; b=utvAnJYBAywwIpGe+wh707gSK8gVK32k8qbFZSuvHuhBFSb2zv6TYGSmU9xp7jrW92WZu+T03t/JF9/qyhcJE7Kf7lmOTAezGEvE3Eqmi2LaYRSrQtKNgJsvzoDi82nymhxQodKrDTfHSTvJYbFFmrCrV6W5RojmXZu0HX/7xzM=
+	t=1781752741; cv=none; b=GpSueORrdegeZuYnGbHojqPtQILo8/reWrj7WK5ZscqlYEYEy9RFD/DuEv8t8WPHgrUUNW2IlWx/9bksqMt1TccKG5qhovHaiBB6OCC1hS6Bx9UzpZW0DMM4g3vZT7eWG/gImd7lWEOlZOJBafeITBSHR/McQnRmxh5hukSKQPo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781752666; c=relaxed/simple;
-	bh=sMXFaKzUyenltIoT8ArJjM2uETAE3ZMFKGkNcCf5SaE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=OrBnb2d1K7r0HdlJAJeUAZR8FU+gPv82IwyTV3wyOOBgtohHY1VjR0aOGQ4CPxkNcFDYqDTvPfT+e+jvO9tUTbcruIjQYaLbB3pZ5ls/h7ZhN+hHhVcSTUFWauNGIv6aJWrtzUObux7SmXtV+1qLA6LrF5ouD1QctSr5H/s0VFc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=pass smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=pSTOXZBP; arc=none smtp.client-ip=90.155.50.34
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=ZMErdMn4fM5ebZdMPM1RRaXcObZkMc91TS7uIUs86cY=; b=pSTOXZBPNn47f5sa0hrU86rnZZ
-	dhO0ExGNZNCcgFdmDVYq1xaXOcGno63AyHMYTRIN3XEMcbZwfgYmE9SUBZgi+Q/yljvqAqe+PMU9X
-	+1amRFqyojYA6GUe1unKeDjAZSXt3sfLs510o66SCVYAMdZ8IAqGY39lqSaqOOVnN2qvw+xTe3cs6
-	5bhdQ2TNoKKIgV+hLGWccWF9JMfr5As7bCjSDmOiFb9xq/6TLOjNEFfv9sPiFGSxonUrLMTwvofqm
-	5Yw9dHPf3IZZhPOvEAa0pEgALjLo0+FiWvJn3hXYC4Ne07j5KZaOvMRP5qWNz10EV5yBm9MjbU47X
-	EjjmDasA==;
-Received: from willy by casper.infradead.org with local (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wa3Fl-0000000DjIP-2orJ;
-	Thu, 18 Jun 2026 03:17:17 +0000
-Date: Thu, 18 Jun 2026 04:17:17 +0100
-From: Matthew Wilcox <willy@infradead.org>
-To: Jane Chu <jane.chu@oracle.com>
-Cc: akpm@linux-foundation.org, jack@suse.cz, viro@zeniv.linux.org.uk,
-	brauner@kernel.org, muchun.song@linux.dev, osalvador@suse.de,
-	david@kernel.org, hughd@google.com, baolin.wang@linux.alibaba.com,
-	linmiaohe@huawei.com, nao.horiguchi@gmail.com, lorenzo@kernel.org,
-	rppt@kernel.org, peterx@redhat.com, corbet@lwn.net,
-	linux-doc@vger.kernel.org, linux-mm@kvack.org,
-	linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org
-Subject: Re: [PATCH v2 06/11] hugetlb: make hugetlb_fault_mutex_hash() to
- take PAGE_SIZE index
-Message-ID: <ajNjPblkO9Ka_4FT@casper.infradead.org>
-References: <20260617172534.1740152-1-jane.chu@oracle.com>
- <20260617172534.1740152-7-jane.chu@oracle.com>
+	s=arc-20240116; t=1781752741; c=relaxed/simple;
+	bh=d/D782fDRDYUo/1S4v0XuxcyY52XXUtzkCyKAvlmtzA=;
+	h=MIME-Version:Content-Type:Subject:From:To:Cc:In-Reply-To:
+	 References:Date:Message-Id; b=g235bmv5+/pX4ePmzy9RmO7zhjuOpdAk2DK2I592FzFlIy4Qs/vjuIuHHHdKuuXlRzRlr/7kANPSR/D77lL5axnVvxPdhgLlp1dYz2eYB4/HBZGNwoY200Jo3H1tG/sWncQIzvmaN0Diuw5d+Wxk2dMAxK1653rcOkBdq7pQurc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Z0gSZnmB; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9E0401F000E9;
+	Thu, 18 Jun 2026 03:18:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1781752740;
+	bh=2KkI0Ei440DQkIVJC1lKBXdMbKhbYMxA+p5UpCwhwOQ=;
+	h=Subject:From:To:Cc:In-Reply-To:References:Date;
+	b=Z0gSZnmBth1iY+9KHw9FtTAyhTU8/8tQgCjdUtwgR2AciaHM5RSxf+MOpJLcBqVU1
+	 x5CJKDfK6qk47e9FFAJyWv+zRBkdh/UP0QyCAqb1SYr+916o/YXDPVHkF0WlC6B1+A
+	 wxDBCEwsr2XuNA196ebQXp+lLt5xMNlLffDZEcTb29EGRsCTXcNZSGijvumg8rGcvI
+	 wlH8j59+/RmNNrEGtD2Gk+bAR1PKI3TWpSLiXPAn27I31KtQElXbLRAjK9P5VEa8TM
+	 a15im1lp9nHICqRurJimn8JtiNhadsMcxkX5OKLE/WDfONMp9lQfhHMjtrJoOzuxQo
+	 eChGv7NFQe0bg==
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260617172534.1740152-7-jane.chu@oracle.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH] docs: kbuild: remove ISDN references in Makefile
+ examples
+From: Nathan Chancellor <nathan@kernel.org>
+To: Ethan Nelson-Moore <enelsonmoore@gmail.com>
+Cc: Shuah Khan <skhan@linuxfoundation.org>, 
+ Chen Pei <cp0613@linux.alibaba.com>, Randy Dunlap <rdunlap@infradead.org>, 
+ Jonathan Corbet <corbet@lwn.net>, linux-kbuild@vger.kernel.org, 
+ linux-doc@vger.kernel.org, Nathan Chancellor <nathan@kernel.org>, 
+ Nicolas Schier <nsc@kernel.org>
+In-Reply-To: <20260613232830.147116-1-enelsonmoore@gmail.com>
+References: <20260613232830.147116-1-enelsonmoore@gmail.com>
+Date: Wed, 17 Jun 2026 20:18:51 -0700
+Message-Id: <178175273131.3916864.13607634190318049114.b4-review@b4>
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2046; i=nathan@kernel.org;
+ h=from:subject:message-id; bh=d/D782fDRDYUo/1S4v0XuxcyY52XXUtzkCyKAvlmtzA=;
+ b=owGbwMvMwCUmm602sfCA1DTG02pJDFnGyYsm+k28qubjwG334fntVWWv/j7e11O9aMaGxRtXZ
+ ScbTQ052FHKwiDGxSArpshS/Vj1uKHhnLOMN05NgpnDygQyhIGLUwAm4nOQkeFskb/D456a5kmd
+ G1I3/FAMTHquOHX1znenbVN9orRPZygxMnyXCxc6eXiirXqBccqTL+sN+SuNKm9HWBne/tnJXaD
+ JxQMA
+X-Developer-Key: i=nathan@kernel.org; a=openpgp;
+ fpr=2437CB76E544CB6AB3D9DFD399739260CB6CB716
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-4.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=casper.20170209];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-92721-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER(0.00)[willy@infradead.org,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	FORGED_RECIPIENTS(0.00)[m:jane.chu@oracle.com,m:akpm@linux-foundation.org,m:jack@suse.cz,m:viro@zeniv.linux.org.uk,m:brauner@kernel.org,m:muchun.song@linux.dev,m:osalvador@suse.de,m:david@kernel.org,m:hughd@google.com,m:baolin.wang@linux.alibaba.com,m:linmiaohe@huawei.com,m:nao.horiguchi@gmail.com,m:lorenzo@kernel.org,m:rppt@kernel.org,m:peterx@redhat.com,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:naohoriguchi@gmail.com,s:lists@lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FORGED_SENDER(0.00)[nathan@kernel.org,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:enelsonmoore@gmail.com,m:skhan@linuxfoundation.org,m:cp0613@linux.alibaba.com,m:rdunlap@infradead.org,m:corbet@lwn.net,m:linux-kbuild@vger.kernel.org,m:linux-doc@vger.kernel.org,m:nathan@kernel.org,m:nsc@kernel.org,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[linux-foundation.org,suse.cz,zeniv.linux.org.uk,kernel.org,linux.dev,suse.de,google.com,linux.alibaba.com,huawei.com,gmail.com,redhat.com,lwn.net,vger.kernel.org,kvack.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-92722-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[willy@infradead.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[infradead.org:+];
 	ALIAS_RESOLVED(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[nathan@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp,infradead.org:dkim,infradead.org:from_mime]
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 0038569D49C
+X-Rspamd-Queue-Id: 302B369D4BA
 
-On Wed, Jun 17, 2026 at 11:25:27AM -0600, Jane Chu wrote:
-> Make hugetlb_fault_mutex_hash() to take a PAGE_SIZE-based index.
-> This makes the helper interface consistent with filemap_get_folio(),
-> and linear_page_index(), while preserving the same lock selection for
-> a given hugetlb file offset.
+On Sat, 13 Jun 2026 16:28:27 -0700, Ethan Nelson-Moore <enelsonmoore@gmail.com> wrote:
+> Documentation/kbuild/makefiles.rst uses some extracts from now-removed
+> ISDN code as examples. While they are harmless, they appeared in my
+> checks for CONFIG_* symbols referenced but not defined in the kernel.
+> Replace them with generic examples.
 
-Oh, hah.
+While I am fine with adjusting these examples to make it easier on tools
+such as yours, how does this solve your problem? CONFIG_FOO and
+CONFIG_BAR are still not defined anywhere. Are you adding exceptions for
+these symbols? I ask because I would like these to be a little more
+"kernel specific" if that makes sense.
 
-I don't know that there's a better way to do this than the way you've
-done it.  Unless we can just remove the fault mutex hash and use the
-invalidate_lock instead.
+Maybe it is not worth even checking Documentation/ for dead
+configurations at all since that is probably not going to be a bug very
+often but I guess it helps with cleaning up dead documentation?
+
+>
+>
+> diff --git a/Documentation/kbuild/makefiles.rst b/Documentation/kbuild/makefiles.rst
+> index 7521cae7d56f..ec8de1c20834 100644
+> --- a/Documentation/kbuild/makefiles.rst
+> +++ b/Documentation/kbuild/makefiles.rst
+> @@ -127,11 +127,8 @@ controllers are detected, and thus your disks are renumbered.
+>  
+>  Example::
+>  
+> -  #drivers/isdn/i4l/Makefile
+> -  # Makefile for the kernel ISDN subsystem and device drivers.
+> -  # Each configuration option enables a list of files.
+
+I think I would keep these comment, it is still relevant (at least to
+me).
+
+> -  obj-$(CONFIG_ISDN_I4L)         += isdn.o
+> -  obj-$(CONFIG_ISDN_PPP_BSDCOMP) += isdn_bsdcomp.o
+> +  obj-$(CONFIG_FOO) += foo.o
+> +  obj-$(CONFIG_BAR) += bar.o
+
+For instance, I think using a more descriptive symbol illustrates the
+example a little better.
+
+  obj-$(CONFIG_DRIVER_ONE) += driver_one.o
+  obj-$(CONFIG_DRIVER_TWO) += driver_two.o
+
+Same thing for the other examples. I just don't find these variable
+names to be particularly good when illustrating actual real world
+examples as opposed to conceptual ones. Not sure if others feel the same
+way.
+
+-- 
+Cheers,
+Nathan
+
 
