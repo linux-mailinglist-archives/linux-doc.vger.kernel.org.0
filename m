@@ -1,58 +1,58 @@
-Return-Path: <linux-doc+bounces-92847-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92853-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 9Rl1MEmPNGqWbQYAu9opvQ
-	(envelope-from <linux-doc+bounces-92847-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 02:37:29 +0200
+	id PdmpE3iPNGq3bQYAu9opvQ
+	(envelope-from <linux-doc+bounces-92853-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 02:38:16 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3EBD66A353B
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 02:37:29 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9B9E16A3574
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 02:38:15 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=TPlGqjqD;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92847-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92847-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=DBHKb5w7;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92853-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-92853-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 897CE30E9A11
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 00:33:01 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id A33ED3104493
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 00:33:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 131A42D2486;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 951E32E889C;
 	Fri, 19 Jun 2026 00:31:50 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 52A6427B4F7;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 915BE286881;
 	Fri, 19 Jun 2026 00:31:49 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781829109; cv=none; b=L0/zlsaXgh+L3UoyhKc3Fk8SmlB4l4NLOegixL/Tm55PnlayLTxZIpQsF3apS0oh3o5U9GugUxdqV8JtaLxP0ICbR2g15Vm0t2FKtpZEldNGVB/8RQWxeRj5DJsvNjivMZIt8ESf1iZ55le2p2VAjgUXMFRhu9iGQwsRpy/EOWo=
+	t=1781829109; cv=none; b=eA+L4WYIimja5i3RLNpbe/0Ae2uz/9TB0ixWLQbwX9du8+FIMN3dv+dXzBRrUX9CUECH+XrndJ979PfRx+XU80eNM6Hmx5o61WORhvurLBt5ZOJ3KcXfxdukBiDSNztQsyVSAvGGYOfJhO1Z6WfuP+KkC3sqOG163B7Rj4niJXQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1781829109; c=relaxed/simple;
-	bh=fyOOtYfClGp09cjDKzYjVc3evf/urOJQVD3GzH69oRM=;
+	bh=06Cmm6ZSLGzEQ2JoFTbuetSxgKF6eUVAuIaVVaESzyY=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=eLAkouAKirtQ6oogfshfimNfQMkArzAaJ7GV9N5H9Uw0G7885hrj0/tw6hxzVmVCIvhSf2suDMypEAe6UQpRncrCwZ7hXWD7LRM2hwPtOLz7Zjs+5vnIZIZq9yitHuYH+d4fzzMSaWkmK1uW4Y923AwSzbmrtG7Hg0SEXALlPTg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TPlGqjqD; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 36DB5C2BCC7;
+	 In-Reply-To:To:Cc; b=LqT8wkVo6EYcowPJvkLZM7AVV5UV3y1VUVRFNfnNEGAARAqsinP9eXeRP6+pxm75Xt/qij0248wShGyL35TbJofxZtZ+CbbyNf9o7BAtCH7/F7YvTG9g9Mhy741woVXh5TLnkLCV8Ku0CmRFA2FnMjPZ1bUnKRnNHaKeUjLUzMs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DBHKb5w7; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 649BBC2BCF6;
 	Fri, 19 Jun 2026 00:31:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1781829109;
-	bh=fyOOtYfClGp09cjDKzYjVc3evf/urOJQVD3GzH69oRM=;
+	bh=06Cmm6ZSLGzEQ2JoFTbuetSxgKF6eUVAuIaVVaESzyY=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=TPlGqjqDI/PMYxZn5xjOYwF7kCayjYwZzXjWtCvfQBBsR+o5aBUNHa8P0RtkelR5T
-	 njG+iVbj5faKb06+4r5OgWAOaejxWytg8snWVAne03bxp+tLpRNRbCkYcBO6+JsB4b
-	 sx7FYlXH22R/CcVl5HD0FQgB+iOmSfzyAri9iokTLLktlf53uFwjduL5zrqwUFQGHZ
-	 DKf+tLgO0pNo/7Ef7mzlJu/YwiGdvp0ZdPac4shTpWs6ZrelZeV5MOqOcum8XHGTio
-	 tX4UAG/oOSaEcDt409fdpNxFbxRA8VISikCTBNlkcyQEta3GyXkaMr5wuWQTEe7vrv
-	 /1UoZpXReqNmQ==
+	b=DBHKb5w7mAb6WxW4rdHhJJopk9XYnPIsm7bvyJ/MocVumyEj+R0XblO9jzhP4+Czn
+	 G+tXrezlavb9AeFH2TGtdk0mrdX4aIgoJIKzwYqIVBBwx5pc2jnUwR22YyCRLmZdb0
+	 5cFSZrmh109Ih/tp+IbLP9s7/spJ/f7CKrLdiMZbctNsz2SSk822U0fwVhXDest0lj
+	 9nf6QWlXBCSh/qhf5Npp+T7849kiEFMg7PZqryRs259ZIf9+LH1O+DvvqlmOscN479
+	 LuK5Rfslxpi7/GTDVZbxBJcs+vBR+4fH8EDUaVpaT4Bvm3kQLZSn9rW8ggldnCAbKh
+	 uo74MKjEK/6MQ==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D1FDCD98FE;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 56C49CD98FA;
 	Fri, 19 Jun 2026 00:31:49 +0000 (UTC)
 From: Ackerley Tng via B4 Relay <devnull+ackerleytng.google.com@kernel.org>
-Date: Thu, 18 Jun 2026 17:32:01 -0700
-Subject: [PATCH v8 24/46] KVM: guest_memfd: Make in-place conversion the
- default
+Date: Thu, 18 Jun 2026 17:32:02 -0700
+Subject: [PATCH v8 25/46] KVM: guest_memfd: Enable INIT_SHARED on
+ guest_memfd for x86 Coco VMs
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -61,7 +61,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260618-gmem-inplace-conversion-v8-24-9d2959357853@google.com>
+Message-Id: <20260618-gmem-inplace-conversion-v8-25-9d2959357853@google.com>
 References: <20260618-gmem-inplace-conversion-v8-0-9d2959357853@google.com>
 In-Reply-To: <20260618-gmem-inplace-conversion-v8-0-9d2959357853@google.com>
 To: aik@amd.com, andrew.jones@linux.dev, binbin.wu@linux.intel.com, 
@@ -95,11 +95,11 @@ Cc: kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
  linux-kselftest@vger.kernel.org, linux-mm@kvack.org, 
  linux-coco@lists.linux.dev, Ackerley Tng <ackerleytng@google.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1781829104; l=3290;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1781829104; l=1553;
  i=ackerleytng@google.com; s=20260225; h=from:subject:message-id;
- bh=PRIZz/MUEDcYpJgxuI5DJhHZ5hfaG9jP2sr46JVINBY=;
- b=RxWU2Nn3vTjbe31iLWemaFC4u3fW67LS6mTsCASZGW43syFeZcJruijQ/SaPumweB4lztWXkR
- KKo4Y/vgPRQCh4wCRuGDPhwjndAdVzR8opSq/5IR4MMrz5c5YObQXT4
+ bh=jzuj9zrl4qNuPFG8VNS4kO3hGida658cbqNcxlJaaaI=;
+ b=pZ4fcSOhZu72mBX5CyHFKeu02FSiqennFh2LxM3kmpKV0MfpFcGGE0hZqpIFXdLwsMB3qy+P5
+ IMDWN8ve9rUBaMz64S0aMs25PfZyWw3I5wDY3CCgG+CuQGOPU5+pPjE
 X-Developer-Key: i=ackerleytng@google.com; a=ed25519;
  pk=sAZDYXdm6Iz8FHitpHeFlCMXwabodTm7p8/3/8xUxuU=
 X-Endpoint-Received: by B4 Relay for ackerleytng@google.com/20260225 with
@@ -111,12 +111,12 @@ X-Spamd-Result: default: False [-5.16 / 15.00];
 	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-92847-lists,linux-doc=lfdr.de,ackerleytng.google.com];
+	TAGGED_FROM(0.00)[bounces-92853-lists,linux-doc=lfdr.de,ackerleytng.google.com];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS(0.00)[m:aik@amd.com,m:andrew.jones@linux.dev,m:binbin.wu@linux.intel.com,m:brauner@kernel.org,m:chao.p.peng@linux.intel.com,m:david@kernel.org,m:jmattson@google.com,m:jthoughton@google.com,m:michael.roth@amd.com,m:oupton@kernel.org,m:pankaj.gupta@amd.com,m:qperret@google.com,m:rick.p.edgecombe@intel.com,m:rientjes@google.com,m:shivankg@amd.com,m:steven.price@arm.com,m:tabba@google.com,m:willy@infradead.org,m:wyihan@google.com,m:yan.y.zhao@intel.com,m:forkloop@google.com,m:pratyush@kernel.org,m:suzuki.poulose@arm.com,m:aneesh.kumar@kernel.org,m:liam@infradead.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:shuah@kernel.org,m:vannapurve@google.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencent.com,m:shikemeng@huaweic
  loud.com,m:nphamcs@gmail.com,m:baohua@kernel.org,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:kas@kernel.org,m:baoquan.he@linux.dev,m:jgg@ziepe.ca,m:vbabka@kernel.org,m:kvm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,m:linux-coco@lists.linux.dev,m:ackerleytng@google.com,s:lists@lfdr.de];
@@ -139,94 +139,53 @@ X-Spamd-Result: default: False [-5.16 / 15.00];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 3EBD66A353B
+X-Rspamd-Queue-Id: 9B9E16A3574
 
-From: Ackerley Tng <ackerleytng@google.com>
+From: Sean Christopherson <seanjc@google.com>
 
-Make in-place conversion the default if the arch has private mem.
-
-The default can be overridden at compile type by enabling
-CONFIG_KVM_VM_MEMORY_ATTRIBUTES, or at KVM load time through a module
-parameter.
-
-In-place conversion also implies tracking a guest's private/shared state in
-guest_memfd. To avoid inconsistencies in the way memory attributes are
-tracked between the per-VM or by guest_memfd, make the module_param
-read-only (0444).
-
-Document that using per-VM attributes for tracking private/shared state of
-guest memory is deprecated in favor of tracking in guest_memfd.
-
-Warn if the admin sets gmem_in_place_conversion as false when
-CONFIG_KVM_VM_MEMORY_ATTRIBUTES is not enabled. Add warning in the code
-path where guest memory is populated for a CoCo VM, since that's the
-earliest point in a CoCo VM's lifecycle where memory attributes are
-queried. Unlike other query sites, this site is exclusively used by CoCo
-VMs.
+Now that guest_memfd supports tracking private vs. shared within gmem
+itself, allow userspace to specify INIT_SHARED on a guest_memfd instance
+for x86 Confidential Computing (CoCo) VMs, so long as in-place conversion
+is enabled, i.e. when it's actually possible for a guest_memfd instance to
+contain shared memory.
 
 Signed-off-by: Sean Christopherson <seanjc@google.com>
+Reviewed-by: Fuad Tabba <tabba@google.com>
+Signed-off-by: Ackerley Tng <ackerleytng@google.com>
 ---
- arch/x86/kvm/Kconfig   | 7 ++++++-
- virt/kvm/guest_memfd.c | 5 +++++
- virt/kvm/kvm_main.c    | 3 ++-
- 3 files changed, 13 insertions(+), 2 deletions(-)
+ arch/x86/kvm/x86.c | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
 
-diff --git a/arch/x86/kvm/Kconfig b/arch/x86/kvm/Kconfig
-index c28393dc664eb..a3c189d765150 100644
---- a/arch/x86/kvm/Kconfig
-+++ b/arch/x86/kvm/Kconfig
-@@ -85,7 +85,12 @@ config KVM_VM_MEMORY_ATTRIBUTES
- 	bool "Enable per-VM PRIVATE vs. SHARED attributes (for CoCo VMs)"
- 	help
- 	  Enable support for tracking PRIVATE vs. SHARED memory using per-VM
--	  memory attributes.
-+	  memory attributes.  Using per-VM attributes are deprecated in favor
-+	  of tracking PRIVATE state in guest_memfd.  Select this if you need
-+	  to run CoCo VMs using a VMM that doesn't support guest_memfd memory
-+	  attributes.
-+
-+	  If unsure, say N.
+diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
+index 2fde594e86d72..57a543dadb851 100644
+--- a/arch/x86/kvm/x86.c
++++ b/arch/x86/kvm/x86.c
+@@ -14116,14 +14116,15 @@ bool kvm_arch_no_poll(struct kvm_vcpu *vcpu)
+ }
  
- config KVM_SW_PROTECTED_VM
- 	bool "Enable support for KVM software-protected VMs"
-diff --git a/virt/kvm/guest_memfd.c b/virt/kvm/guest_memfd.c
-index 86c9f5b0863cb..5cb73543c03c8 100644
---- a/virt/kvm/guest_memfd.c
-+++ b/virt/kvm/guest_memfd.c
-@@ -1193,10 +1193,15 @@ static bool kvm_gmem_range_is_private(struct file *file, pgoff_t index,
+ #ifdef CONFIG_KVM_GUEST_MEMFD
+-/*
+- * KVM doesn't yet support initializing guest_memfd memory as shared for VMs
+- * with private memory (the private vs. shared tracking needs to be moved into
+- * guest_memfd).
+- */
+ bool kvm_arch_supports_gmem_init_shared(struct kvm *kvm)
  {
- 	struct maple_tree *mt = &GMEM_I(file_inode(file))->attributes;
+-	return !kvm_arch_has_private_mem(kvm);
++	/*
++	 * INIT_SHARED is supported if in-place conversion is enabled, or if
++	 * the VM doesn't support private memory.  If the VM has private memory
++	 * and in-place conversion is disabled, then guest_memfd can _only_ be
++	 * used for private memory.
++	 */
++	return gmem_in_place_conversion || !kvm_arch_has_private_mem(kvm);
+ }
  
-+#ifdef CONFIG_KVM_VM_MEMORY_ATTRIBUTES
- 	if (!gmem_in_place_conversion)
- 		return kvm_range_has_vm_memory_attributes(kvm, gfn, gfn + nr_pages,
- 							  KVM_MEMORY_ATTRIBUTE_PRIVATE,
- 							  KVM_MEMORY_ATTRIBUTE_PRIVATE);
-+#else
-+	if (WARN_ON_ONCE(!gmem_in_place_conversion))
-+		return false;
-+#endif
- 
- 	return kvm_gmem_range_has_attributes(mt, index, nr_pages,
- 					     KVM_MEMORY_ATTRIBUTE_PRIVATE);
-diff --git a/virt/kvm/kvm_main.c b/virt/kvm/kvm_main.c
-index dd1d18a1d2f68..46e92b5dc3804 100644
---- a/virt/kvm/kvm_main.c
-+++ b/virt/kvm/kvm_main.c
-@@ -102,7 +102,8 @@ static bool __ro_after_init allow_unsafe_mappings;
- module_param(allow_unsafe_mappings, bool, 0444);
- 
- #ifdef kvm_arch_has_private_mem
--bool __ro_after_init gmem_in_place_conversion = false;
-+bool __ro_after_init gmem_in_place_conversion = !IS_ENABLED(CONFIG_KVM_VM_MEMORY_ATTRIBUTES);
-+module_param(gmem_in_place_conversion, bool, 0444);
- EXPORT_SYMBOL_FOR_KVM_INTERNAL(gmem_in_place_conversion);
- #endif
- 
+ #ifdef CONFIG_HAVE_KVM_ARCH_GMEM_PREPARE
 
 -- 
 2.55.0.rc0.738.g0c8ab3ebcc-goog
