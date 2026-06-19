@@ -1,142 +1,184 @@
-Return-Path: <linux-doc+bounces-92879-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92880-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 9hY2LbLJNGoIhAYAu9opvQ
-	(envelope-from <linux-doc+bounces-92879-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 06:46:42 +0200
+	id oB3kIvDQNGqwhgYAu9opvQ
+	(envelope-from <linux-doc+bounces-92880-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 07:17:36 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 176EF6A3D42
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 06:46:42 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 820776A3EE2
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 07:17:35 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=arm.com header.s=foss header.b=UFR0Hsfm;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92879-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-92879-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=arm.com;
+	dkim=pass header.d=intel.com header.s=Intel header.b=TZdegbDk;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92880-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-92880-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=intel.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 20C1630500E3
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 04:46:41 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id F193A301E992
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 05:17:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6B8EB314D37;
-	Fri, 19 Jun 2026 04:46:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1DCC14369A;
+	Fri, 19 Jun 2026 05:17:34 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 527A34AEEF;
-	Fri, 19 Jun 2026 04:46:38 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8C80640D598
+	for <linux-doc@vger.kernel.org>; Fri, 19 Jun 2026 05:17:30 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781844400; cv=none; b=igB7G3/wGct9S3jqfMKFJMGD6N0O6BX80rvIk7AkfWj4JfxKj74M6KNjnltKG2mEsxV2rI+fGIh4NTDtwNZbO+qFRXbFYHQo+x0KcN77P8GB8pPTedJuYmxlb9WW2+qBzhLaNFChk34E5fe/qutdB2ZHiK8j16iD5CgMrvsWdfU=
+	t=1781846254; cv=none; b=hqogtyN0d7VDqRmM4LcVzj20+aQ2CSqY0vc+8BcpvRhkX1/1q0Fwr3dLxCuRWahFcuJNZeP+sSczoDpmeR1hemnUhb3/mBRHZ3pzvr5ANdab2k5siwk/dtl8lP7aykoT499nHRp+oS/vCCx0WYeobLNAFVW/8Rg/bnrPbAGu0eg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781844400; c=relaxed/simple;
-	bh=zo7L85WEMQspgr+Xxc8ITBFT//tY1Z8VCvuSv/cXyLE=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=dVgy+6baLAVYE9SFKIfS1O6UHueX2JqH/iGSIeJMEtwiXMDPfbcoNKWVmQRTsxYqa7UilhTIyYmI/cQVUumT1SSI63voYq+OygJSiaKWucRRjHvFuT7Z8N//4zPw6QMFoRSl/NgnJ9OyoCcj51yUZj5MhTs8dLHnskXbeuqhADI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=UFR0Hsfm; arc=none smtp.client-ip=217.140.110.172
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 86A24293F;
-	Thu, 18 Jun 2026 21:46:32 -0700 (PDT)
-Received: from [10.164.148.42] (D3H2TH2F54.blr.arm.com [10.164.148.42])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DF6433F632;
-	Thu, 18 Jun 2026 21:46:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1781844397; bh=zo7L85WEMQspgr+Xxc8ITBFT//tY1Z8VCvuSv/cXyLE=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=UFR0HsfmIgbVnXQm+nqkHxhtgz5uJsi6PxQu6nA5ExDABz7YYRT7NN2ntqyfACtfc
-	 YYTLIoQYxo0u00Td35Ce4bhkgZmFJh0u8l1EU5h2mEcWWIy16lRJl/KwhmY7mFTxOW
-	 hsefNn6008dILDD8tAKp+MmYZbEaeZK3tVneAAno=
-Message-ID: <9abb0da8-e29a-46ce-af11-55c49b30b1b2@arm.com>
-Date: Fri, 19 Jun 2026 10:16:27 +0530
+	s=arc-20240116; t=1781846254; c=relaxed/simple;
+	bh=kJbUi83wmC5H9tkkUrITIOScWYwAB3AD8Pok0867ssU=;
+	h=Date:From:To:Cc:Subject:Message-ID; b=OC5YcQWGcFHjfVqdvzmIDWQzSTCcK0NvSZKtZQJE/r2mUZt/p02lURPZpDixhv+kfLYhv5SMOQym/JQbz2Fjqs0bnX9FfERpBxXUfpWVhBVs7+xNqenZcaQ8MeMoTiHydIfk+CkaY1azGvV2ooq9xsBnyk3piXs84uRUKCaC4Ww=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=TZdegbDk; arc=none smtp.client-ip=198.175.65.21
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1781846250; x=1813382250;
+  h=date:from:to:cc:subject:message-id;
+  bh=kJbUi83wmC5H9tkkUrITIOScWYwAB3AD8Pok0867ssU=;
+  b=TZdegbDkQHvKoz7uu2XQdizIOskzcLhZwVaG4iLbxJyetPHEiM8iXTai
+   7PqMVipXriwm6yzo+SB+V46DsBRHSYJpefXJSU0o2feJXORSRh3MhfgfJ
+   qjA4a55BNfdR37EtCBUQAmxZyLMw/C41XwT1FL+ehXO62ipHovmKHJCyZ
+   kqtpftMxR3Gi6J5L0alV9JDppC8O/u/w2bt6vITbLfPgclHFjea9umI3X
+   564t7yEXJUa2CnJkBO5a1paswEU2H0voEY6OObLrERz7rgDri5wfMbyrF
+   /PiFZYGyYXrvrHK+jmPIxUJAtEcOLF7enaJmkajrZVfaj1OA7AfOdt3Ql
+   A==;
+X-CSE-ConnectionGUID: NiPpTjHkT42S4DgfZRXexQ==
+X-CSE-MsgGUID: IMncCXX5SPuP8D7YT+3N9g==
+X-IronPort-AV: E=McAfee;i="6800,10657,11821"; a="82586090"
+X-IronPort-AV: E=Sophos;i="6.24,212,1774335600"; 
+   d="scan'208";a="82586090"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jun 2026 22:17:30 -0700
+X-CSE-ConnectionGUID: iA50ZsOfTmeKr0wVqSxxsQ==
+X-CSE-MsgGUID: Y7BauSJrSIajuHXantQhBA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.24,212,1774335600"; 
+   d="scan'208";a="244200555"
+Received: from igk-lkp-server01.igk.intel.com (HELO 892db79562d4) ([10.211.93.152])
+  by fmviesa006.fm.intel.com with ESMTP; 18 Jun 2026 22:17:28 -0700
+Received: from kbuild by 892db79562d4 with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1waRba-000000005eT-207m;
+	Fri, 19 Jun 2026 05:17:26 +0000
+Date: Fri, 19 Jun 2026 07:16:28 +0200
+From: kernel test robot <lkp@intel.com>
+To: Gregory Price <gourry@gourry.net>
+Cc: oe-kbuild-all@lists.linux.dev, linux-doc@vger.kernel.org
+Subject: [gourryinverse:scratch/gourry/managed_nodes/rfc5 52/55]
+ htmldocs: Documentation/ABI/testing/sysfs-bus-dax:184: WARNING: Definition
+ list ends without a blank line; unexpected unindent. [docutils]
+Message-ID: <202606190744.9fwTmXa8-lkp@intel.com>
+User-Agent: s-nail v14.9.25
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 0/2] kasan: hw_tags: Add option to tag only at
- allocation time
-To: Lance Yang <lance.yang@linux.dev>
-Cc: ryabinin.a.a@gmail.com, akpm@linux-foundation.org, corbet@lwn.net,
- glider@google.com, andreyknvl@gmail.com, dvyukov@google.com,
- vincenzo.frascino@arm.com, kasan-dev@googlegroups.com, linux-mm@kvack.org,
- linux-kernel@vger.kernel.org, skhan@linuxfoundation.org,
- workflows@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, ryan.roberts@arm.com,
- anshuman.khandual@arm.com, kaleshsingh@google.com, 21cnbao@gmail.com,
- david@kernel.org, will@kernel.org, catalin.marinas@arm.com
-References: <20260612044425.763060-1-dev.jain@arm.com>
- <20260613060637.40039-1-lance.yang@linux.dev>
-Content-Language: en-US
-From: Dev Jain <dev.jain@arm.com>
-In-Reply-To: <20260613060637.40039-1-lance.yang@linux.dev>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-3.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,kernel.org:s:+];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	TAGGED_FROM(0.00)[bounces-92879-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-92880-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:lance.yang@linux.dev,m:ryabinin.a.a@gmail.com,m:akpm@linux-foundation.org,m:corbet@lwn.net,m:glider@google.com,m:andreyknvl@gmail.com,m:dvyukov@google.com,m:vincenzo.frascino@arm.com,m:kasan-dev@googlegroups.com,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:skhan@linuxfoundation.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:ryan.roberts@arm.com,m:anshuman.khandual@arm.com,m:kaleshsingh@google.com,m:21cnbao@gmail.com,m:david@kernel.org,m:will@kernel.org,m:catalin.marinas@arm.com,m:ryabininaa@gmail.com,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[dev.jain@arm.com,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[gmail.com,linux-foundation.org,lwn.net,google.com,arm.com,googlegroups.com,kvack.org,vger.kernel.org,linuxfoundation.org,lists.infradead.org,kernel.org];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[dev.jain@arm.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[arm.com:+];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS(0.00)[m:gourry@gourry.net,m:oe-kbuild-all@lists.linux.dev,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	RCPT_COUNT_THREE(0.00)[3];
 	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+];
+	RCVD_COUNT_FIVE(0.00)[6];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp,arm.com:dkim,arm.com:mid,arm.com:from_mime]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,linux.dev:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 176EF6A3D42
+X-Rspamd-Queue-Id: 820776A3EE2
+
+tree:   https://github.com/gourryinverse/linux scratch/gourry/managed_nodes/rfc5
+head:   b20d77118eedcaee86ecfc4a7ecd4285c2762231
+commit: e9dd3c30fc0be8eda22f834894fcfe47c5cab4fc [52/55] Documentation/ABI: document anondax private-node sysfs interface
+compiler: clang version 22.1.8 (https://github.com/llvm/llvm-project ca7933e47d3a3451d81e72ac174dcb5aa28b59d1)
+docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
+reproduce: (https://download.01.org/0day-ci/archive/20260619/202606190744.9fwTmXa8-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202606190744.9fwTmXa8-lkp@intel.com/
+
+All warnings (new ones prefixed by >>):
+
+   WARNING: Documentation/ABI/testing/sysfs-class-reboot-mode-reboot_modes:36: abi_sys_class_reboot_mode_driver_reboot_modes doesn't have a description
+   WARNING: /sys/bus/usb/devices/<busnum>-<devnum>:<config num>.<interface num>/<hid-bus>:<vendor-id>:<product-id>.<num>/os_mode is defined 2 times: Documentation/ABI/testing/sysfs-driver-hid-lenovo-go:364; Documentation/ABI/testing/sysfs-driver-hid-lenovo-go-s:234
+   WARNING: /sys/bus/usb/devices/<busnum>-<devnum>:<config num>.<interface num>/<hid-bus>:<vendor-id>:<product-id>.<num>/os_mode_index is defined 2 times: Documentation/ABI/testing/sysfs-driver-hid-lenovo-go:373; Documentation/ABI/testing/sysfs-driver-hid-lenovo-go-s:243
+   WARNING: /sys/bus/usb/devices/<busnum>-<devnum>:<config num>.<interface num>/<hid-bus>:<vendor-id>:<product-id>.<num>/touchpad/enabled is defined 2 times: Documentation/ABI/testing/sysfs-driver-hid-lenovo-go:636; Documentation/ABI/testing/sysfs-driver-hid-lenovo-go-s:252
+   WARNING: /sys/bus/usb/devices/<busnum>-<devnum>:<config num>.<interface num>/<hid-bus>:<vendor-id>:<product-id>.<num>/touchpad/enabled_index is defined 2 times: Documentation/ABI/testing/sysfs-driver-hid-lenovo-go:645; Documentation/ABI/testing/sysfs-driver-hid-lenovo-go-s:261
+>> Documentation/ABI/testing/sysfs-bus-dax:184: WARNING: Definition list ends without a blank line; unexpected unindent. [docutils]
+   Documentation/ABI/testing/sysfs-bus-dax:184: ERROR: Unexpected indentation. [docutils]
+>> Documentation/ABI/testing/sysfs-bus-dax:184: WARNING: Block quote ends without a blank line; unexpected unindent. [docutils]
+   Documentation/core-api/kref:328: ./include/linux/kref.h:72: WARNING: Invalid C declaration: Expected end of definition. [error at 96]
+   int kref_put_mutex (struct kref *kref, void (*release)(struct kref *kref), struct mutex *mutex) __cond_acquires(true# mutex)
+   ------------------------------------------------------------------------------------------------^
+   Documentation/core-api/kref:328: ./include/linux/kref.h:94: WARNING: Invalid C declaration: Expected end of definition. [error at 92]
+   int kref_put_lock (struct kref *kref, void (*release)(struct kref *kref), spinlock_t *lock) __cond_acquires(true# lock)
 
 
+vim +184 Documentation/ABI/testing/sysfs-bus-dax
 
-On 13/06/26 11:36 am, Lance Yang wrote:
-> 
-> On Fri, Jun 12, 2026 at 04:44:22AM +0000, Dev Jain wrote:
->> Introduce a boot option to tag only at allocation time of the objects. This
->> reduces KASAN MTE overhead, the tradeoff being reduced ability of
->> catching bugs.
->>
->> Now, when a memory object will be freed, it will retain the random tag it
->> had at allocation time. This compromises on catching UAF bugs, till the
->> time the object is not reallocated, at which point it will have a new
->> random tag.
->>
->> Hence, not catching "use-after-free-before-reallocation" and not catching
->> "double-free" will be the compromise for reduced KASAN overhead.
-> 
-> Hmm ... do we also need to teach the KASAN KUnit tests about this mode?
-> 
-> With kasan.tag_only_on_alloc=on, free-time poisoning is skipped, so
-> some UAF and double-free reports are skipped on purpose, but the tests
-> still expect them :)
+ > 184	What:		/sys/bus/dax/devices/daxX.Y/reclaim
+   185	What:		/sys/bus/dax/devices/daxX.Y/mempolicy
+   186	What:		/sys/bus/dax/devices/daxX.Y/hotunplug
+   187	What:		/sys/bus/dax/devices/daxX.Y/tiering
+   188	What:		/sys/bus/dax/devices/daxX.Y/ltpin
+   189	What:		/sys/bus/dax/devices/daxX.Y/user_migrate
+   190	Date:		January, 2026
+   191	KernelVersion:	v6.21
+   192	Contact:	nvdimm@lists.linux.dev
+   193	Description:
+   194			(RW) anondax only.  Per-service opt-ins (booleans) recorded on
+   195			the device and applied to its private node at hotplug, selecting
+   196			which mm services may act on the node's memory.  A private node
+   197			opts out of everything by default; each toggle relaxes one
+   198			service:
+   199	
+   200			  reclaim		allow reclaim of the node's folios, by the mm
+   201						and by userspace MADV_COLD/PAGEOUT/FREE
+   202			  mempolicy		allow userspace placement policy
+   203						(mbind()/set_mempolicy()/home_node) onto the node
+   204			  hotunplug		allow hot-unplug via migration
+   205			  tiering		allow kernel access-aware migration: demotion
+   206						target, NUMA balancing, and DAMON migration
+   207			  ltpin			allow FOLL_LONGTERM GUP pins
+   208			  user_migrate		allow userspace move_pages() to/from the node
+   209	
+   210			Writable only while the device is "unplugged" (-EBUSY otherwise).
+   211			Dependencies between opt-ins (tiering requires reclaim) are
+   212			validated when the device is hotplugged, not
+   213			at write time: an inconsistent combination is accepted by the
+   214			write but the subsequent hotplug then fails.
+   215			See Documentation/mm/numa_private_nodes.rst.
+   216	
 
-Yeah my opinion is that we shouldn't bother - but if we go ahead with this
-patch in some shape or form then I'll see how to make kasan_test work with
-this.
-
-> 
-> Cheers, Lance
-> 
-
+--
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
