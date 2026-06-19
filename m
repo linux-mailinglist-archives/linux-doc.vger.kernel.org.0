@@ -1,372 +1,421 @@
-Return-Path: <linux-doc+bounces-92928-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92930-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id r+A1EAM2NWqyowYAu9opvQ
-	(envelope-from <linux-doc+bounces-92928-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 14:28:51 +0200
+	id g8m7JoE7NWrHpQYAu9opvQ
+	(envelope-from <linux-doc+bounces-92930-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 14:52:17 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E27E6A5C41
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 14:28:50 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id C9D9A6A5DB1
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 14:52:16 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=amd.com header.s=selector1 header.b="rBGmarN/";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92928-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92928-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=amd.com;
-	arc=reject ("cv is fail on i=2")
+	dkim=pass header.d=arm.com header.s=foss header.b=uhHiavHi;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92930-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92930-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=arm.com;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id ADC2030164A7
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 12:28:48 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 44B65302BE1D
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 12:52:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1932E383C84;
-	Fri, 19 Jun 2026 12:28:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BF67C388E55;
+	Fri, 19 Jun 2026 12:52:08 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from SN4PR2101CU001.outbound.protection.outlook.com (mail-southcentralusazon11012060.outbound.protection.outlook.com [40.93.195.60])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8FDCC37C0EB;
-	Fri, 19 Jun 2026 12:28:44 +0000 (UTC)
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781872127; cv=fail; b=XWNkq5Jqc6+GMopqY6UqKb/7EUdob2YZ0DnR+CVUDM2gH3c9KMX3NyCIFmUp/WeFboRngjqfknZ20ttkML+00retrO/NlY8UCI0yRfjBpmJV/4PPZzOZHCn7Q9XnrhyDv0iLfiSCkRY+r2J4Xoeptut5xgbkpsFLbTfqDlDI0DE=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781872127; c=relaxed/simple;
-	bh=nJ9SXX/XqEA6odIdnx8Pez0EeASgbcxp5gk0fRLbvcI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
-	 In-Reply-To:Content-Type; b=D2D8A1zsyFNjyuNUZeAJCTfhT+7NF3dd6lyHH+tinRCOtNySBg5eN99A+ID3wJam/eMpE8hcc6HmfOPO25FbL7g1u6lEzzKaZnRQTvuWB3dpc0abfFrLe3xYWakO3Tb7ItM0yc7f4USsz4ZON1odAw3iMgrr3XOGrlleB6ROFSg=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=rBGmarN/; arc=fail smtp.client-ip=40.93.195.60
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HD9iWBPdKxb+1fAZ+ybj8FnSVW46NXf/LGgYnDzOBg5f4AUyjOBD5/QFAFE7fGnTO7MJHu++B9vvpTogWWRdf/CI31URBBCLGg45Zh0AbftEFCqDYMdQdQojcwEdACfzWYVT86RWEjMKGtfCnOOa5D/2DdAuQ9APJAnJ1h+4v820QGsn3MM1uCd2HLWjpK1dLHXa6YTGrQqNKMGsAvYrTcOyzSubmAMY2A0Oo9jQRrUqYVmYAptagfn+QWTiHeWM56pZ4ZvIm3TYiIpPE5iBgOVdEzBPQ0nwimdIHRVxkAB+8kooV5OO5wrQaoLRSA1gQ9Tc8Oe7lV++jyIkQtzc5g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=sf4FqwlcijwPGq7fC2/hHTWvNyP18M4EUm8vq3o4lzI=;
- b=mIHJ6RRIZbLSR6TiE4N78aX7HnfDiwkGWuTJCikOSop+tpvkGq/XZC/sPvAinUhpnG5apDYtpYa3vdZThKNwBSfHMX4s1pxUmF5KoTPWB2vdbQSAHz+hb6eeOTtEIggaGUZTnDch13mLh2yuFTaWxUzDK7mcDtCkGLLxOZXzwIpdu0GLfwGS/6HsBhLoxIX96bH/SeiQyXLG8dM72GlE371OjZQoJxrtdBJf55Qgg+VyqpUkq/9F+RpS5yd72XTveICsOVYHNU7iosW4vMihaeJVoFg8MRuHt+GRiHs1tAP99xVpneMbUd7nCEdULWlCW8+HSHCyut/pKt9aIg4BIg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=google.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sf4FqwlcijwPGq7fC2/hHTWvNyP18M4EUm8vq3o4lzI=;
- b=rBGmarN/ENMU7QFN8jCF80eMlgww+4yxbR+YhkOlhgymFAkPMRIdgdC4Qm06ppY1Hdghnhgi3BYIukT9e6re7YXAR4W6qN4r2zikbEfbRs4qb4avchQZ2pUsMIjbaoyom/2omx2ks9Ra7I0mwcguh1Hnr1PLiViOCBEg89BQvSE=
-Received: from MN2PR07CA0003.namprd07.prod.outlook.com (2603:10b6:208:1a0::13)
- by SA1PR12MB7442.namprd12.prod.outlook.com (2603:10b6:806:2b5::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.18; Fri, 19 Jun
- 2026 12:28:37 +0000
-Received: from BL02EPF0002992C.namprd02.prod.outlook.com
- (2603:10b6:208:1a0:cafe::10) by MN2PR07CA0003.outlook.office365.com
- (2603:10b6:208:1a0::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.139.13 via Frontend Transport; Fri,
- 19 Jun 2026 12:28:36 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- BL02EPF0002992C.mail.protection.outlook.com (10.167.249.57) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.139.8 via Frontend Transport; Fri, 19 Jun 2026 12:28:36 +0000
-Received: from [10.128.112.233] (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Fri, 19 Jun
- 2026 07:28:22 -0500
-Message-ID: <a6373206-60b6-454c-9aa9-9d52f9d84de3@amd.com>
-Date: Fri, 19 Jun 2026 17:58:19 +0530
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BB0E53803E1;
+	Fri, 19 Jun 2026 12:52:05 +0000 (UTC)
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1781873528; cv=none; b=EK//517sV/t0OtQA0A7kKoWgvRjvaX/sbmjubtEReOmmpzPbKAwpY//YswJHtmXz8UXGfbF1f9MRXKZVbSgrn2Db1g50V06VzWmPjDZ+sG4UyRpierkEgoPoGpiEq8aJ8naZd4jozVZSQktqJFv2QlPkKm8x9id+hWUBBJHzfPI=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1781873528; c=relaxed/simple;
+	bh=vlt508OngfcR+AlEOvkl8S0fVWYMg2eEN/6ShAE1moI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=eBAMlwkMVQ31oL95dKCPKU5tcPEXdt1mxYrLV+MK1Z/CNwkLWJkKO0iL4ll18ahEN3SsQE8ST/g0QLM1sgKCpAHkgcczeS2NVTppprnnjkyKkG4aLbVVyyV336UbSH8P+B/GMfp/qgVOIY9EN8ueIXxdE4arH7F1la25cUfxuYA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=uhHiavHi; arc=none smtp.client-ip=217.140.110.172
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BC8392936;
+	Fri, 19 Jun 2026 05:51:54 -0700 (PDT)
+Received: from pluto (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B22F83F62B;
+	Fri, 19 Jun 2026 05:51:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1781873519; bh=vlt508OngfcR+AlEOvkl8S0fVWYMg2eEN/6ShAE1moI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=uhHiavHilkR8OcTBOY0TJKSGBxaoW08/UAVe/N1KNPtWhvkzKJ3SCBoM1/2SAFR0C
+	 0oLzkmazgQ3yCc4ZqSRcH/ZceO+kPRQDgRPvK7UThLUBZssa4yyyDdNRxtsgUYjOD0
+	 Pk3KPfkIqVDUSzfuWuVUbgGdAnDj83b4q7uQ8Uzs=
+Date: Fri, 19 Jun 2026 13:51:43 +0100
+From: Cristian Marussi <cristian.marussi@arm.com>
+To: "David Hildenbrand (Arm)" <david@kernel.org>
+Cc: Cristian Marussi <cristian.marussi@arm.com>,
+	Christian Brauner <brauner@kernel.org>,
+	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+	arm-scmi@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+	linux-doc@vger.kernel.org, sudeep.holla@kernel.org,
+	james.quinlan@broadcom.com, f.fainelli@gmail.com,
+	vincent.guittot@linaro.org, etienne.carriere@st.com,
+	peng.fan@oss.nxp.com, michal.simek@amd.com, d-gole@ti.com,
+	jic23@kernel.org, elif.topuz@arm.com, lukasz.luba@arm.com,
+	philip.radford@arm.com, souvik.chakravarty@arm.com,
+	leitao@kernel.org, kas@kernel.org, puranjay@kernel.org,
+	usama.arif@linux.dev, kernel-team@meta.com
+Subject: Re: [PATCH v4 00/31] Introduce SCMI Telemetry FS support
+Message-ID: <ajU7UqwPZBlwRGkf@pluto>
+References: <20260612223802.1337232-1-cristian.marussi@arm.com>
+ <20260617-waten-allabendlich-zueinander-93d4b1367b8c@brauner>
+ <ajLVW1eHzbGDm4yn@pluto>
+ <29a304f0-1e62-418a-b84f-aabdc4c0de8d@kernel.org>
+ <ajR_FBWOoXJKSeoH@pluto>
+ <0025b907-27b9-4a51-b78f-f8ad413644d0@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 00/46] guest_memfd: In-place conversion support
-To: <ackerleytng@google.com>, <aik@amd.com>, <andrew.jones@linux.dev>,
-	<binbin.wu@linux.intel.com>, <brauner@kernel.org>,
-	<chao.p.peng@linux.intel.com>, <david@kernel.org>, <jmattson@google.com>,
-	<jthoughton@google.com>, <michael.roth@amd.com>, <oupton@kernel.org>,
-	<pankaj.gupta@amd.com>, <qperret@google.com>, <rick.p.edgecombe@intel.com>,
-	<rientjes@google.com>, <steven.price@arm.com>, <tabba@google.com>,
-	<willy@infradead.org>, <wyihan@google.com>, <yan.y.zhao@intel.com>,
-	<forkloop@google.com>, <pratyush@kernel.org>, <suzuki.poulose@arm.com>,
-	<aneesh.kumar@kernel.org>, <liam@infradead.org>, Paolo Bonzini
-	<pbonzini@redhat.com>, Sean Christopherson <seanjc@google.com>, "Thomas
- Gleixner" <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov
-	<bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, <x86@kernel.org>,
-	"H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>,
-	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers
-	<mathieu.desnoyers@efficios.com>, Jonathan Corbet <corbet@lwn.net>, "Shuah
- Khan" <skhan@linuxfoundation.org>, Shuah Khan <shuah@kernel.org>, "Vishal
- Annapurve" <vannapurve@google.com>, Andrew Morton
-	<akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>, Kairui Song
-	<kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>, Nhat Pham
-	<nphamcs@gmail.com>, Barry Song <baohua@kernel.org>, Axel Rasmussen
-	<axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>, Wei Xu
-	<weixugc@google.com>, Youngjun Park <youngjun.park@lge.com>, Qi Zheng
-	<qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, Kiryl Shutsemau
-	<kas@kernel.org>, Baoquan He <baoquan.he@linux.dev>, Jason Gunthorpe
-	<jgg@ziepe.ca>, Vlastimil Babka <vbabka@kernel.org>
-CC: <kvm@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-	<linux-trace-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-	<linux-kselftest@vger.kernel.org>, <linux-mm@kvack.org>,
-	<linux-coco@lists.linux.dev>
-References: <20260618-gmem-inplace-conversion-v8-0-9d2959357853@google.com>
-Content-Language: en-US
-From: "Garg, Shivank" <shivankg@amd.com>
-In-Reply-To: <20260618-gmem-inplace-conversion-v8-0-9d2959357853@google.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
- (10.181.42.216)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0002992C:EE_|SA1PR12MB7442:EE_
-X-MS-Office365-Filtering-Correlation-Id: ec2866c2-1d07-4e9a-730d-08decdfe493b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|23010399003|376014|7416014|82310400026|36860700016|13003099007|22082099003|18002099003|921020|11063799006|3023799007|6133799003|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	jOWGJb30pE2KbyriwilkFoCGJllUemD+QC4E91CEbqnn0sHvbseiyTTafmMEVcK5Hpvp3JO9YoL+o9aOcT3W7meeTu6udm/gLzLh7PvP1vRtMTceK8GNgK9paPCHnkZcWTOPTK0PM8xQSfeRY1mc0CdbyZJIb8sv8osO64HpGoQvthjUKy2Cn2eSa4NiJjK4Vtn9maum1sVu6YMQi3FaiQfF8JTIcN0f7J+RFlhsMtBD+j2t0bsmMWwWCPXxqgzlf8I2XLPqYg0ODoyWvlo9NhKAuXZMNi25bRX+/1zxjTuZIKS4D31RF27mCAfhM5n5QaXkeDVBOtperdRLWipQ1igGTg0n5EEHRW1cIvseCNoPYdHU9ODQTdRftu0Cp6L+6HmqwtA7Gg0952Szp8i9X8x2JffMlU+IJjIltu/sjlqUVmUDKfX5gK34Zs+UotN8xTkE6TSUdGiHubrdyrAeV1Ds4sosuGS4ApxHrNJ5yuOhr7IqNHqbRsaiVcZDh7duYTmD3avMvlUtzM538eoJHdlIPYHqY/pfW8Gyu0PHs7e+PgWyfYoGimybB38LiDzgQDJoDVLito4XxUmtCZ8NIGHGHykugpis9ep1hYtUDc8voXd8D+5ol68g6cQpI0pc0xu+4aXIU/siDcQuOzcWT15KeuAkByuy/qNfzHQBJlqyuO8pQ2CMLsW3OAuQZMDIS9KwGyCFMVYyjgfV9BiM3A==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(23010399003)(376014)(7416014)(82310400026)(36860700016)(13003099007)(22082099003)(18002099003)(921020)(11063799006)(3023799007)(6133799003)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	jTAbi/Np9VYwZiygxUapcrPx7ngDG5oan0qBlEZsSedn0LOPo8Hz/fKDXCTlue6froZU3hHN/1m1yqDoLFs4Zm9RfPtaFYyj/zPkY6VTMkvOJFi5D/7pearTmzRKBCOgggj/nmkfGrcja79L13JLpyZaPduQM4XNBJz3muDP7AVOEZHUqN65q4dDCrhtCAuP1Qtua//x4gNqZcd4xQZCPPYB/coPEQQnCpUeUILuo+4olNDUCA245vCsfsj2jQKv3ufu1SC2triolR4BHzm/wM4e0nDs6yiIqguvXdoSPMfELmTwXG1NnPHfEHA5wN8ss3vAFSALlw79DZ8V6RBZcxRFK1aWyelrZSvJMMEuZHD66SkdHRA6AKN8VCYXfjCdVUhyy3GWxFOYUi2xhznywArYo9iQtaPAw+Tco9g2a2hCDv0MIGPRZBhVgJJwEcT0
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jun 2026 12:28:36.6780
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ec2866c2-1d07-4e9a-730d-08decdfe493b
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BL02EPF0002992C.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB7442
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <0025b907-27b9-4a51-b78f-f8ad413644d0@kernel.org>
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-0.16 / 15.00];
-	ARC_REJECT(1.00)[cv is fail on i=2];
-	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-92928-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-92930-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:ackerleytng@google.com,m:aik@amd.com,m:andrew.jones@linux.dev,m:binbin.wu@linux.intel.com,m:brauner@kernel.org,m:chao.p.peng@linux.intel.com,m:david@kernel.org,m:jmattson@google.com,m:jthoughton@google.com,m:michael.roth@amd.com,m:oupton@kernel.org,m:pankaj.gupta@amd.com,m:qperret@google.com,m:rick.p.edgecombe@intel.com,m:rientjes@google.com,m:steven.price@arm.com,m:tabba@google.com,m:willy@infradead.org,m:wyihan@google.com,m:yan.y.zhao@intel.com,m:forkloop@google.com,m:pratyush@kernel.org,m:suzuki.poulose@arm.com,m:aneesh.kumar@kernel.org,m:liam@infradead.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:shuah@kernel.org,m:vannapurve@google.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencent.com,m:shikemeng@h
- uaweicloud.com,m:nphamcs@gmail.com,m:baohua@kernel.org,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:kas@kernel.org,m:baoquan.he@linux.dev,m:jgg@ziepe.ca,m:vbabka@kernel.org,m:kvm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,m:linux-coco@lists.linux.dev,s:lists@lfdr.de];
-	FREEMAIL_TO(0.00)[google.com,amd.com,linux.dev,linux.intel.com,kernel.org,intel.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[shivankg@amd.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS(0.00)[m:david@kernel.org,m:cristian.marussi@arm.com,m:brauner@kernel.org,m:linux-kernel@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:arm-scmi@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:sudeep.holla@kernel.org,m:james.quinlan@broadcom.com,m:f.fainelli@gmail.com,m:vincent.guittot@linaro.org,m:etienne.carriere@st.com,m:peng.fan@oss.nxp.com,m:michal.simek@amd.com,m:d-gole@ti.com,m:jic23@kernel.org,m:elif.topuz@arm.com,m:lukasz.luba@arm.com,m:philip.radford@arm.com,m:souvik.chakravarty@arm.com,m:leitao@kernel.org,m:kas@kernel.org,m:puranjay@kernel.org,m:usama.arif@linux.dev,m:kernel-team@meta.com,m:ffainelli@gmail.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[cristian.marussi@arm.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[26];
+	FREEMAIL_CC(0.00)[arm.com,kernel.org,vger.kernel.org,lists.infradead.org,broadcom.com,gmail.com,linaro.org,st.com,oss.nxp.com,amd.com,ti.com,linux.dev,meta.com];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[63];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[shivankg@amd.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[amd.com:+];
+	FROM_NEQ_ENVFROM(0.00)[cristian.marussi@arm.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[arm.com:+];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCVD_COUNT_SEVEN(0.00)[7]
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp,arm.com:dkim,arm.com:from_mime,pluto:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 9E27E6A5C41
+X-Rspamd-Queue-Id: C9D9A6A5DB1
 
-
-
-On 6/19/2026 6:01 AM, Ackerley Tng via B4 Relay wrote:
-> This is v8 of guest_memfd in-place conversion support.
+On Fri, Jun 19, 2026 at 12:16:58PM +0200, David Hildenbrand (Arm) wrote:
 > 
-> Up till now, guest_memfd supports the entire inode worth of memory being
-> used as all-shared, or all-private. CoCo VMs may request guest memory to be
-> converted between private and shared states, and the only way to support
-> that currently would be to have the userspace VMM provide two sources of
-> backing memory from completely different areas of physical memory.
-> 
-> pKVM has a use case for in-place sharing: the guest and host may be
-> cooperating on given data, and pKVM doesn't protect data through
-> encryption, so copying that given data between different areas of physical
-> memory as part of conversions would be unnecessary work.
-> 
-> This series also serves as a foundation for guest_memfd huge page
-> support. Now, guest_memfd only supports PAGE_SIZE pages, so if two sources
-> of backing memory are used, the userspace VMM could maintain a steady total
-> memory utilized by punching out the pages that are not used. When huge
-> pages are available in guest_memfd, even if the backing memory source
-> supports hole punching within a huge page, punching out pages to maintain
-> the total memory utilized by a VM would be introducing lots of
-> fragmentation.
-> 
-> In-place conversion avoids fragmentation by allowing the same physical
-> memory to be used for both shared and private memory, with guest_memfd
-> tracks the shared/private status of all the pages at a per-page
-> granularity.
-> 
-> The central principle, which guest_memfd continues to uphold, is that any
-> guest-private page will not be mappable to host userspace. All pages will
-> be mmap()-able in host userspace, but accesses to guest-private pages (as
-> tracked by guest_memfd) will result in a SIGBUS.
-> 
-> This series introduces a guest_memfd ioctl (not kvm, vm or vcpu, but
-> guest_memfd ioctl) that allows userspace to set memory
-> attributes (shared/private) directly through the guest_memfd. This is the
-> appropriate interface because shared/private-ness is a property of memory
-> and hence the request should be sent directly to the memory provider -
-> guest_memfd.
-> 
-> Tested with both CONFIG_KVM_VM_MEMORY_ATTRIBUTES enabled and disabled:
-> 
-> + tools/testing/selftests/kvm/guest_memfd_test.c
-> + tools/testing/selftests/kvm/pre_fault_memory_test.c
-> + tools/testing/selftests/kvm/x86/guest_memfd_conversions_test.c
-> + tools/testing/selftests/kvm/x86/private_mem_conversions_test.c
-> + tools/testing/selftests/kvm/x86/private_mem_kvm_exits_test.c
-> 
-> Updates for this revision:
-> 
-> + Updated the series to _not_ deprecate all of VM memory attributes, but
->   only deprecate tracking of the PRIVATE attributes in VM memory
->   attributes. This takes into account upcoming RWX attributes support,
->   which will be tracked at the VM level.
-> + Reshuffled the earlier commits that deal with preparing KVM to stop
->   seeing VM memory attributes as the only source of attributes.
-> + Addressed comments from v7
-> 
-> TODOs
-> 
-> + Retest with TDX selftests. v7 was tested with TDX [12], but the setup there was
->   wrong. Conversions were successful (no errors), but the shared memory being
->   tested is actually in a completely different host physical page.
-> + Retest with SNP selftests. v6 was tested with SNP, I ported that to v7
->   and those ran fine too. Just need to double-check for v8.
-> 
-> This series is based on kvm-x86/next, and here's the tree for your convenience:
-> 
-> https://github.com/googleprodkernel/linux-cc/commits/guest_memfd-inplace-conversion-v8
-> 
-> Older series:
-> 
-> + RFCv7 is at [11]
-> + RFCv6 is at [10]
-> + RFCv5 is at [8]
-> + RFCv4 is at [7]
-> + RFCv3 is at [6]
-> + RFCv2 is at [5]
-> + RFCv1 is at [4]
-> + Previous versions of this feature, part of other series, are available at
->   [1][2][3].
-> 
-> [1] https://lore.kernel.org/all/bd163de3118b626d1005aa88e71ef2fb72f0be0f.1726009989.git.ackerleytng@google.com/
-> [2] https://lore.kernel.org/all/20250117163001.2326672-6-tabba@google.com/
-> [3] https://lore.kernel.org/all/b784326e9ccae6a08388f1bf39db70a2204bdc51.1747264138.git.ackerleytng@google.com/
-> [4] https://lore.kernel.org/all/cover.1760731772.git.ackerleytng@google.com/T/
-> [5] https://lore.kernel.org/all/cover.1770071243.git.ackerleytng@google.com/T/
-> [6] https://lore.kernel.org/r/20260313-gmem-inplace-conversion-v3-0-5fc12a70ec89@google.com/T/
-> [7] https://lore.kernel.org/all/20260326-gmem-inplace-conversion-v4-0-e202fe950ffd@google.com/T/
-> [8] https://lore.kernel.org/r/20260428-gmem-inplace-conversion-v5-0-d8608ccfca22@google.com
-> [9] https://lore.kernel.org/all/20260414-selftest-global-metadata-v1-0-fd223922bc57@google.com/T/
-> [10] https://lore.kernel.org/r/20260507-gmem-inplace-conversion-v6-0-91ab5a8b19a4@google.com
-> [11] https://lore.kernel.org/r/20260522-gmem-inplace-conversion-v7-0-2f0fae496530@google.com
-> [12] https://lore.kernel.org/all/20260605134153.204152-1-ackerleytng@google.com/
-> 
-> Signed-off-by: Ackerley Tng <ackerleytng@google.com>
-> ---
-> Ackerley Tng (27):
->       KVM: Make CONFIG_KVM_VM_MEMORY_ATTRIBUTES selectable
->       KVM: Enumerate support for PRIVATE memory iff kvm_arch_has_private_mem is defined
->       KVM: guest_memfd: Introduce function to check GFN private/shared status
->       KVM: guest_memfd: Only prepare folios for private pages
->       KVM: guest_memfd: Add base support for KVM_SET_MEMORY_ATTRIBUTES2
->       KVM: guest_memfd: Ensure pages are not in use before conversion
->       KVM: guest_memfd: Call arch invalidate hooks on conversion
->       KVM: guest_memfd: Return early if range already has requested attributes
->       KVM: guest_memfd: Advertise KVM_SET_MEMORY_ATTRIBUTES2 ioctl
->       KVM: guest_memfd: Handle lru_add fbatch refcounts during conversion safety check
->       KVM: guest_memfd: Use actual size for invalidation in kvm_gmem_release()
->       KVM: guest_memfd: Determine invalidation filter from memory attributes
->       KVM: guest_memfd: Zero page while getting pfn
->       KVM: TDX: Make source page optional for KVM_TDX_INIT_MEM_REGION
->       KVM: guest_memfd: Make in-place conversion the default
->       KVM: selftests: Test basic single-page conversion flow
->       KVM: selftests: Test conversion flow when INIT_SHARED
->       KVM: selftests: Test conversion precision in guest_memfd
->       KVM: selftests: Test conversion before allocation
->       KVM: selftests: Convert with allocated folios in different layouts
->       KVM: selftests: Test that truncation does not change shared/private status
->       KVM: selftests: Add helpers to pin pages with CONFIG_GUP_TEST
->       KVM: selftests: Test conversion with elevated page refcount
->       KVM: selftests: Reset shared memory after hole-punching
->       KVM: selftests: Provide function to look up guest_memfd details from gpa
->       KVM: selftests: Make TEST_EXPECT_SIGBUS thread-safe
->       KVM: selftests: Update private_mem_conversions_test to mmap() guest_memfd
-> 
-> Michael Roth (1):
->       KVM: SEV: Make 'uaddr' parameter optional for KVM_SEV_SNP_LAUNCH_UPDATE
-> 
-> Sean Christopherson (18):
->       KVM: guest_memfd: Introduce per-gmem attributes, use to guard user mappings
->       KVM: Rename KVM_GENERIC_MEMORY_ATTRIBUTES to KVM_VM_MEMORY_ATTRIBUTES
->       KVM: Move KVM_VM_MEMORY_ATTRIBUTES config definition to x86
->       KVM: Decouple kvm_has_arch_private_mem from CONFIG_KVM_VM_MEMORY_ATTRIBUTES
->       KVM: Rename memory attribute APIs to prepare for in-place gmem conversion
->       KVM: Provide generic interface for checking memory private/shared status
->       KVM: guest_memfd: Wire up core private/shared attribute interfaces
->       KVM: Consolidate private memory and guest_memfd ifdeffery in kvm_host.h
->       KVM: guest_memfd: Enable INIT_SHARED on guest_memfd for x86 Coco VMs
->       KVM: selftests: Create gmem fd before "regular" fd when adding memslot
->       KVM: selftests: Rename guest_memfd{,_offset} to gmem_{fd,offset}
->       KVM: selftests: Add support for mmap() on guest_memfd in core library
->       KVM: selftests: Add selftests global for guest memory attributes capability
->       KVM: selftests: Add helpers for calling ioctls on guest_memfd
->       KVM: selftests: Test that shared/private status is consistent across processes
->       KVM: selftests: Provide common function to set memory attributes
->       KVM: selftests: Check fd/flags provided to mmap() when setting up memslot
->       KVM: selftests: Update private memory exits test to work with per-gmem attributes
-> 
+> >> Is the configuration aspect limited to enabling selected events, or is there
+> >> more that can be configured?
 
 Hi,
 
-Thanks for this series.
-This works well for me on AMD EPYC 7713 (SEV-SNP enabled). I tested:
-1. KVM selftests: all tests pass.
-2. Using in-place conversion QEMU branch [1]:
-qemu-system-x86_64 \
-  -machine q35,confidential-guest-support=sev0 \
-  -enable-kvm -cpu EPYC-v4 -smp 8,maxcpus=8 -m 120G -no-reboot \
-  -object memory-backend-guest-memfd,id=ram0,size=60G,share=on,host-nodes=0-1,policy=interleave \
-  -object memory-backend-guest-memfd,id=ram1,size=60G,share=on,host-nodes=0,policy=bind \
-  -numa node,nodeid=0,memdev=ram0,cpus=0-3 \
-  -numa node,nodeid=1,memdev=ram1,cpus=4-7 \
-  -object sev-snp-guest,id=sev0,policy=0x30000,cbitpos=51,reduced-phys-bits=1,convert-in-place=on \
-  -bios "$OVMF" \
-  -drive file="$DISK",if=none,id=disk0,format=qcow2 \
-  -device virtio-scsi-pci,id=scsi0,disable-legacy=on,iommu_platform=true -device scsi-hd,drive=disk0 \
-  -netdev user,id=net0,hostfwd=tcp::8000-:22 -device virtio-net-pci,netdev=net0 \
-  -kernel "$KERNEL" -initrd "$INITRD" \
-  -append "$ROOT ro console=ttyS0,115200" \
-  -trace enable=kvm_convert_memory,file=/tmp/convert.log \
-  -nographic -serial mon:stdio
+> >>
+> > 
+> > The needed configuration is:
+> > 
+> >  - global Telemetry enable (tlm_enable)
+> >  - global common update_interval (current_update_interval)
+> 
+> Okay, so simple global properties.
+> 
+> >  - per-DE enable/disable (des/0x<NNNN>/enable)
+> >  - per-DE timestamping enable/disable (des/0x<NNNN>/tstamp_enable)
+> > 
+> >  ... then there are a couple of handy catch-all entries:
+> > 	all_des_enable, all_des_tstamp_enable
+> 
+> Okay, so fairly trivial configs.
 
-   The guest boots successfully and run memory hogger. With this, I verified the
-   shared <-> private conversion logs (trace_kvm_convert_memory).
+Yes mostly on/off switches or single values config.
 
-3. Additionally, verified the NUMA placement for SEV-SNP. With this series,
-   NUMA mempolicy support for guest_memfd [2] now works for SEV-SNP as well.
+> > 
+> > Note that all the existent DEs are discovered at runtime dynamically via
+> > SCMI in the background at init/probe and then never change: i.e.
+> > the tree is statically created upon discovery, user cannot
+> > create/destroy or symlink files at will, nor the backend platform FW
+> > running the SCMI server can pop-up new DataEvents after the initial
+> > enumeration.
+> 
+> That makes sense.
+> 
+> > 
+> > All the above configs can also be pre-defined in the FW (at built time)
+> > as being default boot-on with predefined values, like a specific
+> > boot-on update interval, so that you could have a system in which really
+> > you dont need to configure anything...everything is on and you just
+> > read data. (unless you want to change config of course...)
+> 
+> Okay, so the initial value of some parameters might not be "disabled" etc.
 
-[1] https://github.com/amdese/qemu/commits/snp-inplace-rfc1
-[2] https://lore.kernel.org/kvm/20251016172853.52451-1-seanjc@google.com
+Yes at the protocol layer I take care to lookup all of this states at
+init so that the initial states are consistent with what exposed...
 
-Tested-by: Shivank Garg <shivankg@amd.com>
+> 
+> I guess, from a user space perspective, reading should be allowed by everyone
+> but writing should be limited to root?
+>
 
-Best regards,
-Shivank
+Yes it is currently world readable and only root has write access by default,
+BUT in this latest V4 I added (as asked by some internal team) handling of the
+usual uid/gid/umask mount options so that a privileged user can change the ownership
+policy at mount time. (not supporting anyway FS_USERNS_MOUNT since it does not
+make sense to support containers for SCMI Telemetry)
+
+> > 
+> > There is more stuff that indeed is configurable per the SCMI spec
+> > but these additional params are hidden into the SCMI Telemetry protocol
+> > layer (the initial patches in this series) and NOT made available to
+> > the driver/users of the protocol (like the SCMI FS driver that sits on
+> > top)
+> 
+> Do you assume that there will get significantly more config options added in the
+> future for user space to configure?
+
+No, I dont think so...the only planned extensions were to support more
+performant read access mechanisms, i.e. direct mmap'ability of FW/Kernel
+SCMI Telemetry shared memory areas...BUT that will immediately dump all
+the bulk of the lower layer protocol work into the tools domain...and
+we're not ready to do so...beside having one more thing, the tool, to keep
+in sync with possible future spec changes (unless exposing even more stuff
+like tlm mem-areas accessors to the UAPI...that would be painful kernel
+side and not desired AFAIU...)
+
+> 
+> > 
+> > IOW, this humonguos series (~8k lines) is only partially composed by
+> > the Filesystem driver (~3k): the bulk of the Telemetry logic and SCMI
+> > message exchanges are contained in the SCMI Protocol stack which has
+> > been extended to support the Telemerty protocol at first
+> > (the 'firmware: arm_scmi:' initial patches).
+> > 
+> > This latter common support is exposed by the SCMI stack for the SCMI
+> > drivers to use via custom per-protocol operations (not an orginal name :P)
+> > exposed in include/linux/scmi_protocol.h
+> > 
+> > So when you write into FS to configure smth, you end up calling an internal
+> > tlm_proto_ops that in turn will cause an SCMI message to be sent
+> > (in some cases say to enable a DE or set the update interval)
+> 
+> Makes sense.
+> 
+> > 
+> > When you read something, you end up calling another Telemetry operation
+> > that in turn returns you the DataEvent value you were looking for...how
+> > this is retrieved via SCMI in the background is transparent to the
+> > FS driver because, again, these details are buried into the protocol
+> > layer. Talking about reads, you can:
+> > 
+> >  - read a single value from des/0x<NNNN>/value
+> >  - read ALL the currently enabled DE in a bulk read via des_bulk_read
+> > 
+> > ...most of the other entries in the tree are simply RO properties of the DEs
+> > that have been discovered at enumeration time.
+> 
+> Is this bulk-reading relevant for performance or just a "nice to have" ?
+> 
+
+I suppose depends on your usage pattern: it is definitely relevant
+because the main collection mechanism are shared memory areas (SHMTIs)
+between the platform firmware and the Kernel: such areas being accessed
+from 2 differnt worlds concurrently come with a SCMI-specified
+synchro/consistency mechanism based simply on a pair of sequence numbers
+placed at the start and at the end of the SHMTI, so that the FW increases
+such magic numbers in a well-known way before and after updating the SHMTI
+values, so that the kernel can detect (without any interlocking mechanism)
+if a platform write happened in the middle of its reads...
+
+...so if you read one single DE 64bit value, under the hood the kernel
+would have had to really perform at leats 3 reads from the SHMTI to check
+the consistecy of that single read...
+
+... while if you do a bulk_read the overhead due to the consistecy
+checks gets 'spread' across a number of DEs because the kernel will snapshot
+the whole SHMTIs (potentially KBytes) between the 2 consistency reads
+
+...the good side effect of all of this is that I can leverage such
+sequence number to optimize reads..i.e. do NOT even try to read anything
+if the new sequnce number is unchanged from the last one I cached on the
+last successfull read of this value...
+
+So at the end I would say it is NOT simply a nice to have BUT it is
+certainly only the first step towards a more performant alternative access
+(like with mmaps)...it depends on the usage pattern...I am not sure what
+mechanism is used by our tools more...
+
+> 
+> > 
+> > Given that walking a FS tree and issuing configuration as writes is NOT
+> > performant really (nor handy if you are not a human), currently, even
+> > in this FS-based series you can really perform all of the discovery AND
+> > the configuration tasks WITHOUT walking the filesystem tree, but instead
+> > issuing a bunch of IOCTLs issued on a special 'control' file that I
+> > embedded in the FS. Such UAPI IOCTLs described at:
+> 
+> Makes sense.
+> 
+> > 
+> > https://lore.kernel.org/arm-scmi/20260612223802.1337232-6-cristian.marussi@arm.com/T/#u
+> >  
+> > So my plan of action in order to get rid of the FS in-kenel implementation
+> > would be to drop this Filesystem in favour of simple character devices
+> > and move the existent IOCTLs interface (revisited where needed) on top of
+> > these devices: that way you will be able to use IOCTLs to enumerate the
+> > Telemetry sources and then configure them.
+> > 
+> > Read will then happen (probably) leveraging a number of chardev fops like:
+> > IOCTLs, .read and .mmap...up to the tool decide what to use.
+> > 
+> > After this porting to chardev is done, I would start optionally exposing
+> > again all of this in a human-readable alternative way by adding a layer
+> > of FUSE on top of this chardev interface.
+> 
+> Yes. How high-priority is the fs side? Or would a tool using a library to access
+> this information also work in the first step?
+> 
+
+I have to sync with tools on this...because they are stiil probably
+using currently the FS, but it was already planned for the future to move to
+a more low level access (ioctl/mmap)...
+
+...my aim would be, at this point, to favour this transition without sudden
+breaking their current world (and have to expatriate :P)
+
+..from my personal point of view, I would certainly like to still have the
+FUSE layer for ease of testing and verification on my side...but it is just
+a nice to have... 
+
+> > 
+> > Basically my aim is to drop the FS implementation from the kernel, as
+> > advised, while trying to optionally make it still available via a userspace
+> > FUSE implementation...IOW the intention would be for the next V5 to expose
+> > the same interfaces as V4 but with the help of a tool instead that builds,
+> > if wanted, a FUSE mount built on top of the chardev interface.
+
+[snip]
+
+> >>
+> >> It's a good question how that could be done, if you need more information about
+> >> these events from user space.
+> > 
+> > I have NOT really delved into that, so as of know we do NOT fed any data
+> > to existing Kernel subsystems, not there is any available in-kernel
+> > interface to consume DE data (nobody asked), but, I can imagine 2 solution:
+> > 
+> >  - our beloved architects decide to 'architect' more DataEvents in the
+> >    next version of the spec.. i.e. they reserve some specific DE IDs to
+> >    represent some well defined entity (like it is done already in the spec
+> >    for a dozen IDs)...this avoids the needs of any new interface all
+> >    together
+> 
+> That would be the cleanest solution :)
+> 
+
+Definitely agree.
+
+> > 
+> > OR
+> > 
+> > - we open some sort of user-->kernel ABI channel 'somewhere' where the
+> >   userspace tool, interpreting the JSON description, can communicate something
+> >   like " on this platform ID 1,2,3,4 should be fed to the IIO sensors frmwk
+> >   too, while ID 39,8,76 can be fed to HWMON..." etc
+> > 
+> >>
+> >> [...]
+> >>
+> >>
+> >> That sounds reasonable.
+> >>
+> >> [...]
+> >>
+
+[snip]
+
+> > Regarding the user concurrency, I have already explicitly pushed back on
+> > this, our own tools team: any concurrent read or configuration write is
+> > allowed and properly handled in a consistent way, BUT on the configuration
+> > side the last write/ioctl wins: there is NO in-kernel OR userspace
+> > co-ordination provided out of the box: IOW if you use multiple tools
+> > concurrently to apply conflicting configurations, it is none of our problem
+> 
+> Would concurrent reading work? I assume so, right?
+> 
+
+Yes concurrent reading is not a problem, and concurrent writes are
+properly handled at the write/message level (i.e. no corruption) BUT
+no co-ordination is provided from the kernel on those config writes,
+last write wins.
+
+> > 
+> > ...similarly as if you have an actively running network configuration daemon
+> > and you try to set your IP manually...nobody will prevent you from doing this,
+> > the same netlink will be used freely by you on the shell and the daemon (if you
+> > have enough privilege), but you will gonna have unexpected result...
+> > 
+> > I dont either see the case to enforce exclusive access for Telemetry resources:
+> > co-ordination is up to the user in my view...I mean if you have 2 tools
+> > configuring concurrently SCMI telemetry in a conflicting way something has been
+> > misconfigured somewhere
+> > 
+> > .....having said that, I understand that the concurrency co-ordination
+> > issue can be particularly tricky to spot and solve in userspace, so I DO
+> > expose a generation counter entry that is updated on any configuration
+> > change, so that a userspace app using Telemetry can monitor (poll) this
+> > counter to spot if someone else on the system is quietly suddenly applying
+> > configuration changes...
+> 
+> Okay, so a single writer (admin) changing stuff could get picked up my possibly
+> many concurrent readers?
+
+Mmm...not sure what you mean here...
+
+If you configure your Telemetry as you desire and start collecting data via
+readers, BUT then some other process changes configs under your belt, that is
+allowed as said, and so your analisys could be impacted...(something turned off
+as an example, or update interval changed)...
+
+...so while this is NOT regulated/co-ordinated by the Kernel, in order to
+ease the detection of such events by your reading process, I provide a pollable
+entry that returns an integer and then blocks until such counter is next updated
+by an intervening under-the-hood configuration change...so you can configure,
+monitor the generatin counter and then starts reading you data, sure that you
+will detect any conflicting re-config issued by a rougue process...
+(and I have to still extend this event polling mechanism to use a user
+provided eventfd...since it was NOT strictly needed...but now with
+IOCTLs interface I will add that too...)
+
+> 
+> > 
+> >>>
+> >>> Should/could such a tool live in the kernel tree (tools/) at least for
+> >>> ease of development/deployment ?
+> >>
+> >> I think OOT.
+> >>
+> > 
+> > Ok.
+> > 
+> > Sorry for the long email..I hope I have clarified the situation, anyway
+> > I am already moving to get rid of the in-kernel interface as advised in
+> > favour of a chardev kernel interface and an optional FUSE based FS...
+> 
+> Yes, thank you a lot, I hope it also helps Christian to help push this into the
+> right direction!
+>
+
+Thanks a lot, David !
+Cristian
+
 
