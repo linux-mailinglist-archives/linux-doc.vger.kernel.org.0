@@ -1,163 +1,205 @@
-Return-Path: <linux-doc+bounces-92958-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92963-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id yOFWE1WBNWpRyAYAu9opvQ
-	(envelope-from <linux-doc+bounces-92958-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 19:50:13 +0200
+	id l0/KN6uKNWrYzAYAu9opvQ
+	(envelope-from <linux-doc+bounces-92963-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 20:30:03 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5D1A6A74F3
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 19:50:12 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 73F8F6A75FB
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 20:30:03 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b="R/eQFjIG";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92958-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92958-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=B1YKyMtc;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92963-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-92963-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id EE33D3092390
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 17:46:39 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id E31BA304E43E
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 18:29:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5DDC03C1994;
-	Fri, 19 Jun 2026 17:46:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9C0E933E360;
+	Fri, 19 Jun 2026 18:29:52 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 107B13C10AB
-	for <linux-doc@vger.kernel.org>; Fri, 19 Jun 2026 17:46:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E29B331ECA;
+	Fri, 19 Jun 2026 18:29:47 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781891199; cv=none; b=BdBkxMCrFHGEfW2VFeeIM/sOlpWbZWknwRPTEJChiyRlv+YJykuiOVdOyKgTlbBKJB8qLn64N9lbPfrZf1ZBT1lfgussL2EfzfH35kM3P/1XM9x+sMdCWZvxTxaVQjzB2X1Wj7qi46IVTxOphgifPWBfr0WUJ8GmDhUep7H9+b0=
+	t=1781893792; cv=none; b=TmgNZoLj4auALG3OKkN9kfWet/Rpz3LLHoH7T6FOaPst9qM7gx5f4AEq12ZNHyLgxrzdTnq+GIT3vOcrv/aVtVDxL75KWiF1n67OAGG60VLPxlBOZETxIbfcCVXPdbyS0wBdhluZn/GHQ/ryxjaruril9+0eBxnEMvfXZ9THI38=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781891199; c=relaxed/simple;
-	bh=H7f14CYwNP46ECpdeY80MJ+vB0wytZ/WUeIVEgw1f+A=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=i03CR3On5I/ZkA6/3i2SAz9R3o4ucFB7SoDG9zMnrlrLILXZ4ABhHp6tjTEddVY0rPqEwMc8ryQywODt1aRmK34/UIwSi5jr4FkC0VE889PyRYlRIO6kCP0i3141ax2RQQtjbOBRXH8csdR14/t6pYTOr0hEXZ8xdfhCp0GSFD8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=R/eQFjIG; arc=none smtp.client-ip=209.85.128.50
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4923139e940so14114785e9.3
-        for <linux-doc@vger.kernel.org>; Fri, 19 Jun 2026 10:46:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781891196; x=1782495996; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :sender:from:to:cc:subject:date:message-id:reply-to;
-        bh=H7f14CYwNP46ECpdeY80MJ+vB0wytZ/WUeIVEgw1f+A=;
-        b=R/eQFjIGJOmwIPpGAgwCpcPD7gX90JNhp63BcLpbxsSmEfYWhC23L8ze/2dfcH9zMN
-         KJIGipk/2pZUHiSDNn6As+WfrOIekJ+SNEGKEK6+YnM6mX47b5wMXv77XGvIN1zaqIWw
-         WGUekG7wyIg7AfKUrV/HQ+VswK4gC7W4UgCknjghxhb12acvDOKqh1Ffi8QHWyUMbCnw
-         mPg6vw/nkHpOJLF1wurbV8ZZPiOmTu3Stw0F5Rlyf4fUFBZ9e5RULvZG9K0yzI3mlkSA
-         57owJPUssf1JYAjTUpI8kqH+VJ+GYZbxgzEgDoQWenMso/gtj/Kbh6nISmYtAn3pGASU
-         WqZQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781891196; x=1782495996;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :sender:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=H7f14CYwNP46ECpdeY80MJ+vB0wytZ/WUeIVEgw1f+A=;
-        b=TtpjzmSTOT3sUs7LqvmGyF8wZibsHuRrzbiI1BlKvZlhBkSgU16E6eDYv2p/65/Am8
-         ufdOg2F9fWZDX5RHh6OxUpreEd3SXWIC9Kn6FqgG6o6ULIzSpxV/RuTCsuPRAUFfw+Hm
-         XmfwbSK8o41yeNFZqhlSOF0sV6x2Ulo4z/5ItRIIOtG33P3tRMKKkaITiD2LkbNXG3BZ
-         HLBzQ5HcSNlF3uH21pmi+6kWoGMkvN6MuLdSk6JWaRgk0kkIecJ4Z6IQ9Sea1K+DOC9G
-         2y9QD/oTZORYnD/mNSPxzqeIca+ezbuCYuOlLmF+tQWNvMIwE/nyDb9WXvHdmbMWTkZc
-         8/VQ==
-X-Forwarded-Encrypted: i=1; AFNElJ/CvIjLfXyIEfRoANiYBtHIuyBtkTMxibbUniceh+gYLmTnFkUBhQuCK10Hi/G6iRVaflQP5f1GkII=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxXJEMQ2Z1ZdRHhJG5S2oHHV3OV7QrBGOlKsytx0ucRIM/dO0TB
-	njB7OyQlySr7+u9KUBmcbaaojOYf6Z+ydlXs5oUx0jMChmmWfoj22ZP6
-X-Gm-Gg: AfdE7cmL6smxKeBSYLHa4ViXRT1nVHTXmwmzofO3vn3W515xBVGZgKBX+XunlxoDgcU
-	8hqH7mTABv6ucTUkvW6ES2Y/wCuefPClCURxUef/hP1xTi6PcgEzT302HcT0cvOiBQGgXSYm15T
-	u0se2PcAQk5y/P/3aya+8gwycb4Zr2mR76OEz4m1zkK6aNHJXDSK5jgc6II496MolbnxU2Y5EZi
-	toZOBZbH454hK9R/sUlFKH80KOGlgy+pzPPuqICI6AoBxFrVnFQGpCbcfld2p3qcQw0rNFekw7s
-	xQefJ+UO1COph7F3K5G9bYTgUUMKERMuDNGcKAK5bLjBrIqnChmIdRY0P4NMmwecO8diRlKQi3q
-	vNR42ciMP49Tm4sZYSzR+Q1cyh7QYCugADyelq0UfWmwaGV0nbdYM+cgTJuiKG84KbAZIEiSSSj
-	/fzLO/FE816jjWRDUpnd931YF2vZcId5nqtjBjd2rffoRplFFj/HMTNn9z7YbdlYavxIqUCmm/o
-	MApwck=
-X-Received: by 2002:a05:600c:a15:b0:492:39b6:5a30 with SMTP id 5b1f17b1804b1-49242591d5dmr53790795e9.35.1781891196410;
-        Fri, 19 Jun 2026 10:46:36 -0700 (PDT)
-Received: from [10.128.11.42] (195-23-151-163.net.novis.pt. [195.23.151.163])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49249238bfbsm1569755e9.5.2026.06.19.10.46.34
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 19 Jun 2026 10:46:36 -0700 (PDT)
-Sender: Julian Braha <julian.braha@gmail.com>
-Message-ID: <84dabe49-8405-4213-8b73-433cf736ded9@gmail.com>
-Date: Fri, 19 Jun 2026 18:46:34 +0100
+	s=arc-20240116; t=1781893792; c=relaxed/simple;
+	bh=Il21aTORLEmMcb+bqZtjLfUVNnbLhe3aUQEf7IOrJ3o=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=oJfv6ejp6ujR+uUMOpUyRgioDvg8cPeUuqulLnd6taZBoouF22eo1CwTlgIFDizipEPXZrHHYOpIbjcgJtT/81lE7nZf63AzFbhN2e7ze4izGNo6kXhx07gNDJuX+OFm0Ur/Tu5DzW5MzYh1gmqz6bg9wqwYC7GY2WlofDUU7Gg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=B1YKyMtc; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DF4361F000E9;
+	Fri, 19 Jun 2026 18:29:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1781893787;
+	bh=7krNnge6CqDFpXfWCA2S/6g3TXm4KR3ObMbF3c3qLxw=;
+	h=From:Subject:Date:To:Cc;
+	b=B1YKyMtcV1TBG0oE6SZ1Qm89ffWi9qe7LEUSGLaeganJTMFzREb8GxXRwDHIRiF0o
+	 WF2VOBw5MVFmSqcTbouT4GwXH8ISqZ8c594e0CPhIZZGKAdaNcubzEu6BcRMXJVhjh
+	 wW8E9D10pcx4sIXbZyDr3QuePv8iTeT9KsIfelCoYE4LV0j7lyd5mCIe6ge5CW3yvm
+	 O6n2yzuD6x8CnwmLA6OF5rE/ItBPXmRVdE/SfqmndF7SZZZWZiYdL+uOZbQIx6x5oS
+	 c4zKL3dlS7WncPh+adneJmfexcD5I9Epged0SBO1kenvU2Le87KXpukqER98a/wwaZ
+	 QDo7Fu5vGBP/A==
+From: Drew Fustini <fustini@kernel.org>
+Subject: [PATCH 0/8] riscv: Add Ssqosid and initial CBQRI resctrl support
+Date: Fri, 19 Jun 2026 11:29:35 -0700
+Message-Id: <20260619-dfustini-atl-sc-cbqri-dt-v1-0-e79a7723fab0@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 07/10] ACPI: APEI: introduce GHES helper
-To: Ahmed Tiba <ahmed.tiba@arm.com>, "Rafael J. Wysocki" <rafael@kernel.org>,
- Tony Luck <tony.luck@intel.com>, Borislav Petkov <bp@alien8.de>,
- Hanjun Guo <guohanjun@huawei.com>, Mauro Carvalho Chehab
- <mchehab@kernel.org>, Shuai Xue <xueshuai@linux.alibaba.com>,
- Len Brown <lenb@kernel.org>, Saket Dumbre <saket.dumbre@intel.com>,
- Davidlohr Bueso <dave@stgolabs.net>, Jonathan Cameron <jic23@kernel.org>,
- Dave Jiang <dave.jiang@intel.com>,
- Alison Schofield <alison.schofield@intel.com>,
- Vishal Verma <vishal.l.verma@intel.com>, Ira Weiny <ira.weiny@intel.com>,
- Dan Williams <djbw@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>
-Cc: linux-kernel@vger.kernel.org, linux-acpi@vger.kernel.org,
- acpica-devel@lists.linux.dev, linux-cxl@vger.kernel.org,
- devicetree@vger.kernel.org, linux-edac@vger.kernel.org,
- linux-doc@vger.kernel.org, Dmitry.Lamerov@arm.com
-References: <20260617-topics-ahmtib01-ras_ffh_arm_internal_review-v6-0-91f725174aa0@arm.com>
- <20260617-topics-ahmtib01-ras_ffh_arm_internal_review-v6-7-91f725174aa0@arm.com>
- <58f7163f-2fce-41e9-bc35-d1d8e6f4a298@gmail.com>
- <81dd6d0d-427f-49ae-9573-fbe84dc2185a@arm.com>
-Content-Language: en-US
-From: Julian Braha <julianbraha@gmail.com>
-In-Reply-To: <81dd6d0d-427f-49ae-9573-fbe84dc2185a@arm.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAI+KNWoC/yXMQQrCQAxA0auUrA1MBmmLVxEXbZLaFBl1MhWh9
+ O6OunyL/zdwzaYOp2aDrC9zu6cKOjTA85CuiibVEENsQ0sBZVq9WDIcyg2dkcdnNpSCRwrca+y
+ IRKDmj6yTvX/r8+VvX8dFuXx/sO8fECGvBnwAAAA=
+X-Change-ID: 20260610-dfustini-atl-sc-cbqri-dt-410c8e2711dd
+To: Adrien Ricciardi <aricciardi@baylibre.com>, 
+ Alexandre Ghiti <alex@ghiti.fr>, Atish Kumar Patra <atishp@rivosinc.com>, 
+ Atish Patra <atish.patra@linux.dev>, Babu Moger <babu.moger@amd.com>, 
+ Ben Horgan <ben.horgan@arm.com>, Borislav Petkov <bp@alien8.de>, 
+ Chen Pei <cp0613@linux.alibaba.com>, 
+ Conor Dooley <conor.dooley@microchip.com>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Dave Hansen <dave.hansen@linux.intel.com>, 
+ Dave Martin <Dave.Martin@arm.com>, Fenghua Yu <fenghua.yu@intel.com>, 
+ Gong Shuai <gong.shuai@sanechips.com.cn>, Gong Shuai <gsh517@gmail.com>, 
+ guo.wenjia23@zte.com.cn, James Morse <james.morse@arm.com>, 
+ =?utf-8?q?Kornel_Dul=C4=99ba?= <mindal@semihalf.com>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, liu.qingtao2@zte.com.cn, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Paul Walmsley <pjw@kernel.org>, 
+ Peter Newman <peternewman@google.com>, 
+ =?utf-8?q?Radim_Kr=C4=8Dm=C3=A1=C5=99?= <rkrcmar@ventanamicro.com>, 
+ Reinette Chatre <reinette.chatre@intel.com>, Rob Herring <robh@kernel.org>, 
+ Samuel Holland <samuel.holland@sifive.com>, 
+ Sebastian Andrzej Siewior <bigeasy@linutronix.de>, 
+ Tony Luck <tony.luck@intel.com>, Vasudevan Srinivasan <vasu@rivosinc.com>, 
+ Ved Shanbhogue <ved@rivosinc.com>, Weiwei Li <liwei1518@gmail.com>, 
+ yunhui cui <cuiyunhui@bytedance.com>, Drew Fustini <fustini@kernel.org>
+Cc: linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org, 
+ x86@kernel.org, devicetree@vger.kernel.org, linux-rt-devel@lists.linux.dev, 
+ linux-doc@vger.kernel.org
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3589; i=fustini@kernel.org;
+ h=from:subject:message-id; bh=Il21aTORLEmMcb+bqZtjLfUVNnbLhe3aUQEf7IOrJ3o=;
+ b=owGbwMvMwCV2+43O4ZsaG3kYT6slMWSZdk2pEubjOXIi+9PGjyelEtOa2p0KTQ6ca8ziV+i4f
+ IfJUcOio5SFQYyLQVZMkWXTh7wLS7xCvy6Y/2IbzBxWJpAhDFycAjCRwsMM/1N/Zsa5n2z2/aaU
+ djUnJa5qisxy9SrRgvLr/lqmEqz1exj+SpQFqTxc9ytwkTrXkSf2zndWtC9onx4gY8915nN6z3M
+ XdgA=
+X-Developer-Key: i=fustini@kernel.org; a=openpgp;
+ fpr=1B6F948213EA489734F3997035D5CD577C1E6010
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-3.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[29];
-	TAGGED_FROM(0.00)[bounces-92958-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:aricciardi@baylibre.com,m:alex@ghiti.fr,m:atishp@rivosinc.com,m:atish.patra@linux.dev,m:babu.moger@amd.com,m:ben.horgan@arm.com,m:bp@alien8.de,m:cp0613@linux.alibaba.com,m:conor.dooley@microchip.com,m:conor+dt@kernel.org,m:dave.hansen@linux.intel.com,m:Dave.Martin@arm.com,m:fenghua.yu@intel.com,m:gong.shuai@sanechips.com.cn,m:gsh517@gmail.com,m:guo.wenjia23@zte.com.cn,m:james.morse@arm.com,m:mindal@semihalf.com,m:krzk+dt@kernel.org,m:liu.qingtao2@zte.com.cn,m:zhiwei_liu@linux.alibaba.com,m:palmer@dabbelt.com,m:pjw@kernel.org,m:peternewman@google.com,m:rkrcmar@ventanamicro.com,m:reinette.chatre@intel.com,m:robh@kernel.org,m:samuel.holland@sifive.com,m:bigeasy@linutronix.de,m:tony.luck@intel.com,m:vasu@rivosinc.com,m:ved@rivosinc.com,m:liwei1518@gmail.com,m:cuiyunhui@bytedance.com,m:fustini@kernel.org,m:linux-kernel@vger.kernel.org,m:linux-riscv@lists.infradead.org,m:x86@kernel.org,m:devicetree@vger.kernel.org,m:linux-rt-devel@lists.linux.dev,m:linux-doc@vger
+ .kernel.org,m:conor@kernel.org,m:krzk@kernel.org,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	RCVD_COUNT_THREE(0.00)[4];
+	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER(0.00)[fustini@kernel.org,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[41];
+	FREEMAIL_TO(0.00)[baylibre.com,ghiti.fr,rivosinc.com,linux.dev,amd.com,arm.com,alien8.de,linux.alibaba.com,microchip.com,kernel.org,linux.intel.com,intel.com,sanechips.com.cn,gmail.com,zte.com.cn,semihalf.com,dabbelt.com,google.com,ventanamicro.com,sifive.com,linutronix.de,bytedance.com];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[julianbraha@gmail.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS(0.00)[m:ahmed.tiba@arm.com,m:rafael@kernel.org,m:tony.luck@intel.com,m:bp@alien8.de,m:guohanjun@huawei.com,m:mchehab@kernel.org,m:xueshuai@linux.alibaba.com,m:lenb@kernel.org,m:saket.dumbre@intel.com,m:dave@stgolabs.net,m:jic23@kernel.org,m:dave.jiang@intel.com,m:alison.schofield@intel.com,m:vishal.l.verma@intel.com,m:ira.weiny@intel.com,m:djbw@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-kernel@vger.kernel.org,m:linux-acpi@vger.kernel.org,m:acpica-devel@lists.linux.dev,m:linux-cxl@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-edac@vger.kernel.org,m:linux-doc@vger.kernel.org,m:Dmitry.Lamerov@arm.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	TAGGED_FROM(0.00)[bounces-92963-lists,linux-doc=lfdr.de];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[julianbraha@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[fustini@kernel.org,linux-doc@vger.kernel.org];
 	TO_DN_SOME(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: A5D1A6A74F3
+X-Rspamd-Queue-Id: 73F8F6A75FB
 
-On 6/19/26 16:45, Ahmed Tiba wrote:
-> GHES_CPER_HELPERS is intended for both the ACPI GHES path and the DT
-> firmware-first provider, so I do not want to tie it to ACPI.
+This series adds initial RISC-V QoS support: the Ssqosid extension [1]
+(srmcfg CSR), the CBQRI controller interface [2] integrated with resctrl
+[3], and DT-based platform driver for cache controllers. It has been
+tested both on the Tenstorrent Ascalon Shared Cache controller as well
+as a Qemu implementation [4].
 
-So what's the plan to fix the build error when ACPI is disabled:
-https://lore.kernel.org/all/0f131ee4-d335-45d2-b6ae-49c18df1353b@gmail.com/
+Note that this series only implements support for resctrl CAT using
+CBQRI capacity allocation control. cc_block_mask maps onto resctrl's
+existing cbm schema. However, cc_cunits is not supported as there is no
+existing equivalent for capacity units in the resctrl schemata.
 
-- Julian Braha
+I had previously been iterating on an RFC series [5] that did a full
+implementation of CBQRI including capacity monitoring, bandwidth
+allocation and monitoring, as well as a parser for the ACPI RQSC table.
+The bandwidth controls for CBQRI do not fit well into resctrl's existing
+throttle based MB schemata. I believe that the path forward is
+Reinette's generic schema description proof of concept [6] but that will
+take time to mature. My plan is to rebase the full support of CBQRI on
+to the generic schema once it is ready.
+
+[1] https://github.com/riscv/riscv-ssqosid/releases/tag/v1.0
+[2] https://github.com/riscv-non-isa/riscv-cbqri/releases/tag/v1.0
+[3] https://docs.kernel.org/filesystems/resctrl.html
+[4] https://github.com/riscv-non-isa/riscv-rqsc/blob/main/src/
+[5] https://lore.kernel.org/linux-riscv/20260601-ssqosid-cbqri-rqsc-v7-0-v6-16-baf00f50028a@kernel.org/
+[6] https://lore.kernel.org/all/aab804b9-e8b5-40ad-a85b-af7033391243@intel.com/
+
+---
+Drew Fustini (8):
+      dt-bindings: riscv: Add Ssqosid extension description
+      riscv: Detect the Ssqosid extension
+      riscv: Add support for srmcfg CSR from Ssqosid extension
+      riscv_cbqri: Add capacity controller probe and allocation device ops
+      riscv_cbqri: resctrl: Add cache allocation via capacity block mask
+      riscv: Enable resctrl filesystem for Ssqosid
+      dt-bindings: riscv: Add generic CBQRI controller binding
+      riscv_cbqri: Add CBQRI cache capacity-allocation platform driver
+
+ .../devicetree/bindings/riscv/extensions.yaml      |   6 +
+ .../devicetree/bindings/riscv/riscv,cbqri.yaml     | 109 +++
+ MAINTAINERS                                        |  15 +
+ arch/riscv/Kconfig                                 |  20 +
+ arch/riscv/include/asm/csr.h                       |   5 +
+ arch/riscv/include/asm/hwcap.h                     |   1 +
+ arch/riscv/include/asm/processor.h                 |   3 +
+ arch/riscv/include/asm/qos.h                       |  86 +++
+ arch/riscv/include/asm/resctrl.h                   | 152 ++++
+ arch/riscv/include/asm/switch_to.h                 |   3 +
+ arch/riscv/kernel/Makefile                         |   2 +
+ arch/riscv/kernel/cpufeature.c                     |   1 +
+ arch/riscv/kernel/qos.c                            |  91 +++
+ drivers/resctrl/Kconfig                            |  44 ++
+ drivers/resctrl/Makefile                           |   7 +
+ drivers/resctrl/cbqri_capacity.c                   | 132 ++++
+ drivers/resctrl/cbqri_devices.c                    | 511 ++++++++++++++
+ drivers/resctrl/cbqri_internal.h                   | 110 +++
+ drivers/resctrl/cbqri_resctrl.c                    | 774 +++++++++++++++++++++
+ include/linux/riscv_cbqri.h                        |  47 ++
+ 20 files changed, 2119 insertions(+)
+---
+base-commit: 4fa3f5fabb30bf00d7475d5a33459ea83d639bf9
+change-id: 20260610-dfustini-atl-sc-cbqri-dt-410c8e2711dd
+
+Best regards,
+--  
+Drew Fustini <fustini@kernel.org>
+
 
