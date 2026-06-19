@@ -1,53 +1,53 @@
-Return-Path: <linux-doc+bounces-92945-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92946-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id JTQBMPhWNWq3tQYAu9opvQ
-	(envelope-from <linux-doc+bounces-92945-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 16:49:28 +0200
+	id Rq/fFK1XNWr9tQYAu9opvQ
+	(envelope-from <linux-doc+bounces-92946-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 16:52:29 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 311066A67FF
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 16:49:28 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id B2D306A6839
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 16:52:28 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=h8j1vJZY;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92945-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-92945-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=mQv4j3Vb;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92946-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92946-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id BB9AE301106A
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 14:49:26 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id BC2B53010B84
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 14:52:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 158633B19A9;
-	Fri, 19 Jun 2026 14:49:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 39C4E3932E3;
+	Fri, 19 Jun 2026 14:52:25 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA28530DD2A;
-	Fri, 19 Jun 2026 14:49:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32B6C399011;
+	Fri, 19 Jun 2026 14:52:24 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781880565; cv=none; b=ZLzKTmHaKPn7kR7zDBVZbMOPXMYnwHGQQlfd35FMZEhAV759tOlqle+MsIAR7f2mLbkyRr3l+MznP6YB+Iv5i6afxIuEDaWAY5kUVPCvufdNat0jottkfL4qY6MqMze3TNASBZhI+Fs+OzaorTvI8i+dJmEyi9hLWg5LZD7nj10=
+	t=1781880745; cv=none; b=KJbYL9aEcxCjqGYkrmPCOCIMFAuNcfhgeC7SKeDCVmKUuwr+DPDfCwzV/4g6t8IZ7EDQa8qGTG3SvdGOiLioHgemEpFWlUqcE4E0gWs6aZZvwY14fuZCRUuLs+kNhRJ0KZWw1yGUMoRMYlMfUmmYnOuEZrQCBwTqdf1Yy0TbjaQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781880565; c=relaxed/simple;
-	bh=Nk2Xc0e6R17K+qz1lFZ/xKTD4DSBL8YEI+yJ21wHvHo=;
+	s=arc-20240116; t=1781880745; c=relaxed/simple;
+	bh=1NxF9OEqzZjV9HpuOoEMDHMtFk29U8UuSY2cSTFY0hU=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=BRzgA1pinvU8RIrvSf2y0M2mrjwBGu98cFcl/mPJs+hHS8A9j1qNGf4u0hqV0oft4+h/Yy6KsJEGJ/ugKy31IqJGFHMdCvuZtHte653tRNKyz5zaL7z49l2gDFJdY/Wm/kgauva18CIFcXZzawVAC3sivRcvuCyHMar3GYdr2gE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=h8j1vJZY; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4C60B1F00A3A;
-	Fri, 19 Jun 2026 14:49:19 +0000 (UTC)
+	 In-Reply-To:Content-Type; b=bri0CN9Va4Acb4RO+ZARLb5oEQjE+Ijo6iMEhttsLUsi3KxJ8rvinH4RGlYdJzGZlECZ0vj2KQq1ACWIzOthNXSAwBq8XJgPlptARNu9AQTQdo4NJEwP+F5DOvISqYbucsO+vKGMKYKvkVSId/TAJGdh/1t6lM2HhLlprlsI6y8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mQv4j3Vb; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9B2E61F000E9;
+	Fri, 19 Jun 2026 14:52:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1781880563;
-	bh=JZzQor3YTBuoFfOZOMq4FcC3N6lSMdH+407qik7C3ug=;
+	s=k20260515; t=1781880744;
+	bh=MMrfiUsFirA1Wml6QpEyIkRNWkxL+MwzDwXxle/2vjY=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=h8j1vJZYLLp2o2sJ2qneko+6a3NTR6mns+g6mZ8TqdGXK/bfgHLvCi+uhmhgH/Plf
-	 ZYK9YRyriKZ0sUZgqJiseRMoXBXc4mGlcPv3h/KFg4R7j1iL8siRSvR7uQKhnLRauY
-	 qbq6z24CY9A2H0GgclU7+wuy7dynqmmqLRetzSXTj+onlU5xlKMamuOt75lKEDoxjS
-	 Mkdy4d90EYgRubuTRMsU7GTDID4lxzq1NFCrjVl5biH+oXzLNWb4g3Yzc99Lr/0otH
-	 iYXNRFHdHn43sKMDbID2/j/Ctrdsa4YykBN5usZVmSnpcu6IGi6Vj1k6bogsHsRs/3
-	 sBnwdnbD7F9JA==
-Message-ID: <92b18f50-b35d-43f7-9e7e-377b498fcd9c@kernel.org>
-Date: Fri, 19 Jun 2026 16:49:17 +0200
+	b=mQv4j3VbDWg8O5taJ9piUSfRU3AjvQi66hID3ksm16xst6HHiz9IzYOBf5fZ8yj/i
+	 px+Tj1KSP09VAvZe6u1uozEvCw0ov85LXVNQvLcJ4X+V6M7WnaDyck3iAzq8dVql8D
+	 gw6+gfB4QzFixuXHlUdJQaz47pQ98pXI/Hp/WTJNY6ZmsS+H9/Q/ujgmEI09i36r5M
+	 PwMCR4zVuD1ws+erSTfQ5nrM/ziXF5Kc6/9xR8UDmYAesiKIRst9hkOn+vvC5WHgfq
+	 jcUN5tenI8D+3Z3Z0I85Y/yQc9qJbyHmHUVhCiyd5QpsKFSG+sfAqwwK0XEx8UMNy0
+	 +gEgu4+0Nz3wQ==
+Message-ID: <92c3a198-98ad-47c3-a5aa-24db52109b06@kernel.org>
+Date: Fri, 19 Jun 2026 16:52:18 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -55,8 +55,8 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 01/11] mm/memory-failure: make
- is_raw_hwpoison_page_in_hugepage() general purpose
+Subject: Re: [PATCH v2 02/11] mm: factor out adjust_range_hwpoison() from
+ hugetlbfs
 To: Jane Chu <jane.chu@oracle.com>, akpm@linux-foundation.org
 Cc: willy@infradead.org, jack@suse.cz, viro@zeniv.linux.org.uk,
  brauner@kernel.org, muchun.song@linux.dev, osalvador@suse.de,
@@ -66,7 +66,7 @@ Cc: willy@infradead.org, jack@suse.cz, viro@zeniv.linux.org.uk,
  linux-mm@kvack.org, linux-kernel@vger.kernel.org,
  linux-fsdevel@vger.kernel.org
 References: <20260617172534.1740152-1-jane.chu@oracle.com>
- <20260617172534.1740152-2-jane.chu@oracle.com>
+ <20260617172534.1740152-3-jane.chu@oracle.com>
 From: "David Hildenbrand (Arm)" <david@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=david@kernel.org; keydata=
@@ -113,7 +113,7 @@ Autocrypt: addr=david@kernel.org; keydata=
  3iyY2Nsd7JxfKu1PRhCGwXzRw5TlfEsoRI7V9A8isUCoqE2Dzh3FvYHVeX4Us+bRL/oqareJ
  CIFqgYMyvHj7Q06kTKmauOe4Nf0l0qEkIuIzfoLJ3qr5UyXc2hLtWyT9Ir+lYlX9efqh7mOY
  qIws/H2t
-In-Reply-To: <20260617172534.1740152-2-jane.chu@oracle.com>
+In-Reply-To: <20260617172534.1740152-3-jane.chu@oracle.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
@@ -123,12 +123,12 @@ X-Spamd-Result: default: False [-3.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-92945-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-92946-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS(0.00)[m:jane.chu@oracle.com,m:akpm@linux-foundation.org,m:willy@infradead.org,m:jack@suse.cz,m:viro@zeniv.linux.org.uk,m:brauner@kernel.org,m:muchun.song@linux.dev,m:osalvador@suse.de,m:hughd@google.com,m:baolin.wang@linux.alibaba.com,m:linmiaohe@huawei.com,m:nao.horiguchi@gmail.com,m:lorenzo@kernel.org,m:rppt@kernel.org,m:peterx@redhat.com,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:naohoriguchi@gmail.com,s:lists@lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
@@ -148,115 +148,52 @@ X-Spamd-Result: default: False [-3.66 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp,oracle.com:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[oracle.com:email,vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 311066A67FF
+X-Rspamd-Queue-Id: B2D306A6839
 
 On 6/17/26 19:25, Jane Chu wrote:
-> Make is_raw_hwpoison_page_in_hugepage() general for checking whether
-> a given raw page within any kind of folio is HW poisoned. Thus,
-> replace folio_test_hwpoison() with folio_contain_hwpoisoned_page().
-> Also rename to is_raw_hwpoison_page_in_folio().
+> The functionality and implementation of adjust_range_hwpoison() is
+> generic, so factor it out and make it ready for generic use.
 > 
+> [1] https://lore.kernel.org/linux-mm/aeZwAz6PcdlqSnJ2@casper.infradead.org/
+> 
+> Suggested-by: Matthew Wilcox <willy@infradead.org>
 > Signed-off-by: Jane Chu <jane.chu@oracle.com>
 > ---
->  fs/hugetlbfs/inode.c    |  4 ++--
->  include/linux/hugetlb.h |  4 ++--
->  mm/memory-failure.c     | 12 ++++++++++--
->  3 files changed, 14 insertions(+), 6 deletions(-)
-> 
-> diff --git a/fs/hugetlbfs/inode.c b/fs/hugetlbfs/inode.c
-> index 78d61bf2bd9b..66520f7c53c6 100644
-> --- a/fs/hugetlbfs/inode.c
-> +++ b/fs/hugetlbfs/inode.c
-> @@ -198,7 +198,7 @@ static size_t adjust_range_hwpoison(struct folio *folio, size_t offset,
->  	struct page *page = folio_page(folio, offset / PAGE_SIZE);
->  	size_t safe_bytes;
->  
-> -	if (is_raw_hwpoison_page_in_hugepage(page))
-> +	if (is_raw_hwpoison_page_in_folio(page))
->  		return 0;
->  	/* Safe to read the remaining bytes in this page. */
->  	safe_bytes = PAGE_SIZE - (offset % PAGE_SIZE);
-> @@ -206,7 +206,7 @@ static size_t adjust_range_hwpoison(struct folio *folio, size_t offset,
->  
->  	/* Check each remaining page as long as we are not done yet. */
->  	for (; safe_bytes < bytes; safe_bytes += PAGE_SIZE, page++)
-> -		if (is_raw_hwpoison_page_in_hugepage(page))
-> +		if (is_raw_hwpoison_page_in_folio(page))
->  			break;
->  
->  	return min(safe_bytes, bytes);
-> diff --git a/include/linux/hugetlb.h b/include/linux/hugetlb.h
-> index 5957bc25efa8..a9846f043712 100644
-> --- a/include/linux/hugetlb.h
-> +++ b/include/linux/hugetlb.h
-> @@ -1079,9 +1079,9 @@ void hugetlb_unregister_node(struct node *node);
->  #endif
->  
->  /*
-> - * Check if a given raw @page in a hugepage is HWPOISON.
-> + * Check if a given raw @page is HWPOISON in a folio of any kind
->   */
-> -bool is_raw_hwpoison_page_in_hugepage(struct page *page);
-> +bool is_raw_hwpoison_page_in_folio(struct page *page);
->  
+
+[...]
+
+> -/*
+> - * Check if a given raw @page is HWPOISON in a folio of any kind
+> - */
+> -bool is_raw_hwpoison_page_in_folio(struct page *page);
+> -
 >  static inline unsigned long huge_page_mask_align(struct file *file)
 >  {
-> diff --git a/mm/memory-failure.c b/mm/memory-failure.c
-> index ee42d4361309..40129e0b8213 100644
-> --- a/mm/memory-failure.c
-> +++ b/mm/memory-failure.c
-> @@ -1834,14 +1834,21 @@ static inline struct llist_head *raw_hwp_list_head(struct folio *folio)
->  	return (struct llist_head *)&folio->_hugetlb_hwpoison;
+>  	return PAGE_MASK & ~huge_page_mask(hstate_file(file));
+> diff --git a/mm/filemap.c b/mm/filemap.c
+> index 4e636647100c..a27ce4ad6247 100644
+> --- a/mm/filemap.c
+> +++ b/mm/filemap.c
+> @@ -2753,6 +2753,37 @@ static void filemap_end_dropbehind_read(struct folio *folio)
+>  	}
 >  }
 >  
-> -bool is_raw_hwpoison_page_in_hugepage(struct page *page)
 > +/**
-> + * is_raw_hwpoison_page_in_folio - answers the question whether a given
-> + * page is indeed hwpoisoned.
-> + * @page: given page, maybe base page, part of a large folio or hugetlb.
+> + * adjust_range_hwpoison - adjust clean readable range to avoid hwpoison.
+> + * @folio: folio that contains hwpoison(s).
+> + * @offset: bytes into the folio where subsequent read starts.
+> + * @bytes: number of bytes wish to read.
 > + *
-> + * Return: true if @page is the raw hwpoisoned page; else, false.
-> + */
+> + * Return: adjusted total number of bytes starting off @offset that can be
 
-Why do we need the "in_folio" part at all?
+s/off/at/ ?
 
-> +bool is_raw_hwpoison_page_in_folio(struct page *page)
->  {
->  	struct llist_head *raw_hwp_head;
->  	struct raw_hwp_page *p;
->  	struct folio *folio = page_folio(page);
->  	bool ret = false;
->  
-> -	if (!folio_test_hwpoison(folio))
-> +	if (!folio_contain_hwpoisoned_page(folio))
 
-I wonder if we should just not call that function for hugetlb, it doesn't make
-sense as hugetlb doesn't set _has_hwpoisoned.
-
-But then, I wonder if we really need folio_contain_hwpoisoned_page() at all?
-
-Why not a simple:
-
-if (!folio_test_hugetlb(folio))
-	return PageHWPoison(page);
-
-And now I am confused which scenario you are worried about (it's warm here ...)
-can you explain which scenario you want to change?
-
->  		return false;
->  
->  	if (!folio_test_hugetlb(folio))
-> @@ -1868,6 +1875,7 @@ bool is_raw_hwpoison_page_in_hugepage(struct page *page)
->  
->  	return ret;
->  }
-> +EXPORT_SYMBOL_GPL(is_raw_hwpoison_page_in_folio);
-
-You should spell out why you export that function in the patch description.
+Apart from that, lgtm
 
 -- 
 Cheers,
