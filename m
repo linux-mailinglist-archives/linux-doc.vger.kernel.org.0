@@ -1,182 +1,418 @@
-Return-Path: <linux-doc+bounces-92929-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92931-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 86mOHHA7NWq6pQYAu9opvQ
-	(envelope-from <linux-doc+bounces-92929-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 14:52:00 +0200
+	id HFPWLW49NWq0pgYAu9opvQ
+	(envelope-from <linux-doc+bounces-92931-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 15:00:30 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id D52F16A5DA2
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 14:51:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 264486A5E58
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 15:00:30 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=M6G6hYoQ;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92929-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-92929-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=gmail.com header.s=20251104 header.b="eJsy/YgJ";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92931-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-92931-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=gmail.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id DFF04301C92C
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 12:51:56 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 3D005301CC7B
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 13:00:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5292D3890EA;
-	Fri, 19 Jun 2026 12:51:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F1E3E3845CD;
+	Fri, 19 Jun 2026 13:00:11 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DC8EA372EDB
-	for <linux-doc@vger.kernel.org>; Fri, 19 Jun 2026 12:51:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 23DFA38E8D8
+	for <linux-doc@vger.kernel.org>; Fri, 19 Jun 2026 13:00:10 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781873513; cv=none; b=gVSyc9u8s6a0VmA4ABjy7CJUPe7T0cJxDQzoUziD/vsHV88PjQQITc4j1Q1fs7BZa6io6Up6PHvTVa2gexdDoIODR2og8+3nX3WF0WjK/k1HBuO/H73J3J8PpnmwVF+RBqZb6nHoKe4QbR1x3vGdZkZjW+YsHMZ0mqoBCK28eB4=
+	t=1781874011; cv=none; b=ud4gERRb87RTrPPoVKetFesbulSX00xjIpv1/WSpx36y4kRFuNkQfRXFZ8cp8v6XYGzqd89hJWergZsUad2oRQQun1TO//EbqYPT9JYvpymJyyA1RYzjOgWuv6I7WK6QW/LuU4kv2kcR4qYH+xwJcYm+pEWb/7NDRE6IubzfnTQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781873513; c=relaxed/simple;
-	bh=AoSchuXJGAayDzDPFIuHozNVcqm/iWheUa1nSVya5uQ=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=N+Lh1OJ1w3d2uJRZgbeT64Us0FzEzs/IBGIQGCfIyCqNZY1RG6YfDQr9NgGwZZU1G3mm7N5Pa3R+aDH880DNJWoqPSDy5D9OtS7cNhmIP9v2rJGb0Aom75cORYVBEMLcsuCkDvsjnTUCq77ZiRI3IsyHe9G/Opd76Z7VFSDfIvo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=M6G6hYoQ; arc=none smtp.client-ip=209.85.128.52
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-490aaeabdb4so12312025e9.1
-        for <linux-doc@vger.kernel.org>; Fri, 19 Jun 2026 05:51:51 -0700 (PDT)
+	s=arc-20240116; t=1781874011; c=relaxed/simple;
+	bh=VnzYMuGGOZOFQ0lkAErjhznaopoAsL3miQ4uX60fQMA=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=T1wBV9GBj+kdpyYmQU70IFewQXwLaoVpmTvweSJWUOQpTqsJdBc6Lmklqkthonsbz9a4FloZA6rNJPjhWzP9qsLipVpBXNgfnx9ZhXVLlC2UkAr9bgZNzlGFWQGdG+89tIN+PbzpgNbVYYAF2jtEwqlRdCFDlG5zWTMUsAqyAAs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=eJsy/YgJ; arc=none smtp.client-ip=209.85.221.53
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-4629051c946so1666559f8f.1
+        for <linux-doc@vger.kernel.org>; Fri, 19 Jun 2026 06:00:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781873510; x=1782478310; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :sender:from:to:cc:subject:date:message-id:reply-to;
-        bh=laROZbWnzE0hCDsDDd6yA+mJoystSAqNpvIVq0sPclE=;
-        b=M6G6hYoQGyEFSHNFdRWBdU4G7ykRDxlAROTSMAlGePNeLH6fwR2d2KwGFBeEjya4rC
-         BRr787JIbVdi566ccw22qNGtfsdczdqKskU/r6th6LF/XO1W4RTPjDvJOEFwDwcX8tWN
-         RBnFtBY6AuYGPkhzKAQrGFCtaLpIxcRVixGOH4fegOPJ5UowVOqCf5cAIeNCNJZ8hDup
-         qz5s3dFSMMomrLxtqxUvwyl/SBfZTK1ylwbeLWnXudrPTqQQbXpRViclUOlHlmy9AP4w
-         NFz5R1imyhysVzPS3PZmBxVKnDZWwqB8qgCxNP4yX1s8Xs6rgA9q4gryRQbXbqd88BBI
-         Mk8A==
+        d=gmail.com; s=20251104; t=1781874008; x=1782478808; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=qiZU2ur+yus0frcrsmwpHi+cHkIfW6hKIYxrtn8YRlk=;
+        b=eJsy/YgJO8yOtf7gg8rfx16lJcDo/XV/V8kKM6w6CAptkr8JVCqnYtkp+wrocw5Tdh
+         OiHZCocnHMGGP51+gSlK7UlvpjDfU4xFhYEFakcmZwHMchbak54dEkW+ItlME47WIc1F
+         IFtBS/BDfh3jlVZ+n7xgF2gysunXXAyR4WiWNZz7yC5jzm0FROfZrp/tHZ4VuA3M5KuF
+         y2RMp1joeArpSs3C1GZ29a/PLuDHlIO9nXazbvb8RjVH1Cbtw9RzcW3tZWaK6wZzS/UD
+         wJbGjELKKpDCDeshL2QOnvLiLCRa9PEpr7yXpIP0sjfTGrIYwXlps/yVS+qpocihVkZq
+         wX3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781873510; x=1782478310;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :sender:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=laROZbWnzE0hCDsDDd6yA+mJoystSAqNpvIVq0sPclE=;
-        b=Ut8vC3gn3KIhH6loRfuQqUzLGxhBJgz/hlD8dALDRs8JygILxtb50jqr80lZCzJvxu
-         RG8DVxofOH6BVTH7umx0M2CUXrnn23H65YZEKkglMTpyA1yt5ctpYp75WcEeV6OWtaUM
-         8sjYFLcPjBfQHq6sgW7D/cI1784HxUHHrdlsrJleAlpt6k96182pBKHpdAy1NOUoSR/h
-         KQ2Qe10emJHL7F57PVSb2y2p0T30Ot6b1lP3XUN1WALVPjYvEll70GzeY7+QafPAV3jU
-         mS5hSaGZofPM+qJzD4oZPwaWBAHllAMvkEm/3itmGWNUWsrdN6V8VegdfGOiWstWnEVV
-         m0sA==
-X-Forwarded-Encrypted: i=1; AFNElJ+zAEA0cJZHwMJ+omvw1aktDEdIDc9mtt9TkNrmzSo0wShQ4aiCXc0ZujQxIz76Wx0kytuiZ8A2uQg=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzyhNag/bUu0af8Ypi8L6CKQdPbht9RopyB8SLnNvunyIPvgHF8
-	A0tKZj5wHseOdy+TQOSND4AtLCKGsFerhfUpy8zT18OCHui8aUVo6nuI
-X-Gm-Gg: AfdE7cmuCXe6UduyoWwz1zO5i58tZVlufMnWnVi7Fdv60FwFeu17GXxJGwu7TsslKE7
-	bKIhlHW5CrdTBs+xYz51+HabTIOMXU04812Rx1GvHl218RKQWk00Ua1x1sp4SO3ySm2NTMCpxe/
-	FNMQ9lM1nu8zkyCg2Iq9C+NyVmSjAfkDNYRItgNna+xaUnOcK4vn4A3NPDI0J0tjFzocWk/ZJJu
-	bfytuA/JKnH9HsjdP+VoXBUCpTkhNWHp7AsIS22G8ezeoXidaJz9+WwOARDiyjwv7wH5yrL5X9J
-	Eq15LDtVjXQY/rlGnOcK4kXHq9kh5zYly4qQJzcFjZLuhti+yNvHdbm5GyQnk/zyZMC3RiWH6Z1
-	y/ybjxyAZlaWw4xAVDjg45WcnrhChSS3lqL82ELJtGJz+E3u2IU9+H77jG7iz61F6wdXhtjZMNl
-	YK2wnnPjAcFp4e+fslGh0auC+vfJSrYnTBMGWjyhjIoS/CB110vAuUqRpuVgEsFJUCRg6nV7VTb
-	i9/JHc=
-X-Received: by 2002:a05:600c:8b10:b0:490:b00c:8e6a with SMTP id 5b1f17b1804b1-4923f58988dmr65892965e9.28.1781873510164;
-        Fri, 19 Jun 2026 05:51:50 -0700 (PDT)
-Received: from [10.128.11.42] (195-23-151-163.net.novis.pt. [195.23.151.163])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4650c115fd8sm7984157f8f.35.2026.06.19.05.51.46
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 19 Jun 2026 05:51:48 -0700 (PDT)
-Sender: Julian Braha <julian.braha@gmail.com>
-Message-ID: <8e53844c-f2f8-4a4b-bf72-f3140c170d43@gmail.com>
-Date: Fri, 19 Jun 2026 13:51:45 +0100
+        d=1e100.net; s=20251104; t=1781874008; x=1782478808;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=qiZU2ur+yus0frcrsmwpHi+cHkIfW6hKIYxrtn8YRlk=;
+        b=ZrDqcdb8bkWQvrLRTnhm7HTRJQocfbeBHFnRt4fl42rletGceiaMHmXkakyNcGh6g4
+         AzwF0pfHlqg8zwWQuT1TsDLB9AtlL7tssYciln7Tn4zUFR1+5GuOMMCMtHEPqWtLX0di
+         8hR6xePoJQtzsVsJ8w2Hqsb6Ot9cYihmQyk1DksgFTM5eo7+HGdHiUMPyGz8NqFBYT4q
+         RRahx9lvpQ5flXFYkc7/2QRx5EbmMLK1C1BbwTlzMf81mnIRABHNQyfOkdOk7LyA7i82
+         XchFNTFeqpBHi0sL9vnIwp1/v0DAurGYUm9ONV61CP7ea+fPW0HGkfqjN+LE+VngOJZP
+         PRxg==
+X-Forwarded-Encrypted: i=1; AFNElJ/5ePxI1lcBEYmDHzN72RgQ3c2Fq5Ot4L3Z2jQdyWSxj+GVB2YKI/69yAMbnY8sy7QbjhR4lGD++XQ=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz738Vgzwp7fwDcj/7OIc7b4sEiX5rCia8zUyHTBBgxFb6ki1kX
+	etBusUvAlne6tNT2pBydg17zmjjeNEiBQh2xHPMzHHOUSrb0xELOsST0
+X-Gm-Gg: AfdE7cnl+eWmvVIjXo3uYSomC8O+LEdiPiRedv3EDORGaSLy/eRM+lIwshlqEcKnOEu
+	xRn9+h1T9VEf4+mmMqMo4GYRl1hh3g6fitRpbKUhVhgjNbLJrJ27dA0zqv+V6jiapIUNzzQEK2K
+	2b3I3rblkmb8GEzu5BnBnVGew0/2r5hPAVR/wdk6MqLvZr0p+otiyS8eZX4DY47tMtq4eiK9bR3
+	cFkIALygHGffImxGy/pncTjkKl3vas/Bx+UCYfPdrD0cGu10hUYzI1xcRfIf21T3qWhBdEUHpgz
+	blCwBY+XcxUjd5GHWfRLiq5Nyqe7HTzNZX3xz96n7KNtrkXNBem/wgGTM0WJon9vEYGcOFVNID3
+	CxIgROXLvEsbK/Cp9TozfBHJXPkibLptI0xYXWh0SMJ+Ue7SRLRb7x2H3DfhTLg8HFomSHqW0Ap
+	/DJuA=
+X-Received: by 2002:a05:6000:611:b0:463:3184:6310 with SMTP id ffacd0b85a97d-4651e7b3b26mr5222838f8f.28.1781874007796;
+        Fri, 19 Jun 2026 06:00:07 -0700 (PDT)
+Received: from nsa ([185.128.9.171])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4650b67a253sm8027816f8f.23.2026.06.19.06.00.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 19 Jun 2026 06:00:07 -0700 (PDT)
+Date: Fri, 19 Jun 2026 14:01:08 +0100
+From: Nuno =?utf-8?B?U8Oh?= <noname.nuno@gmail.com>
+To: Conor Dooley <conor@kernel.org>
+Cc: Janani Sunil <jan.sun97@gmail.com>, 
+	Jonathan Cameron <jic23@kernel.org>, Rodrigo Alencar <455.rodrigo.alencar@gmail.com>, 
+	Janani Sunil <janani.sunil@analog.com>, Lars-Peter Clausen <lars@metafoo.de>, 
+	Michael Hennerich <Michael.Hennerich@analog.com>, David Lechner <dlechner@baylibre.com>, 
+	Nuno =?utf-8?B?U8Oh?= <nuno.sa@analog.com>, Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Philipp Zabel <p.zabel@pengutronix.de>, Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, linux-iio@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, Mark Brown <broonie@kernel.org>
+Subject: Re: [PATCH v3 1/2] dt-bindings: iio: dac: Add AD5529R
+Message-ID: <ajU73_TkKrSbqD4f@nsa>
+References: <20260519-ad5529r-driver-v3-0-267c0731aa68@analog.com>
+ <20260519-ad5529r-driver-v3-1-267c0731aa68@analog.com>
+ <25mh6grzh7zh3b4uytcqnusyv5zjuf6ia4if3ce3oqzqz56ehi@le72iqv7ye3d>
+ <603473ac-30e6-45e5-8a3b-c9902715cc9e@gmail.com>
+ <20260614204455.408c4d40@jic23-huawei>
+ <076d7d2d-81a0-49c2-af94-bd65ead66c09@gmail.com>
+ <20260619-obstinate-polo-a230bef97fda@spud>
+ <20260619-bunch-diocese-dd7805cc17ff@spud>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 05/46] KVM: Make CONFIG_KVM_VM_MEMORY_ATTRIBUTES
- selectable
-To: ackerleytng@google.com, aik@amd.com, andrew.jones@linux.dev,
- binbin.wu@linux.intel.com, brauner@kernel.org, chao.p.peng@linux.intel.com,
- david@kernel.org, jmattson@google.com, jthoughton@google.com,
- michael.roth@amd.com, oupton@kernel.org, pankaj.gupta@amd.com,
- qperret@google.com, rick.p.edgecombe@intel.com, rientjes@google.com,
- shivankg@amd.com, steven.price@arm.com, tabba@google.com,
- willy@infradead.org, wyihan@google.com, yan.y.zhao@intel.com,
- forkloop@google.com, pratyush@kernel.org, suzuki.poulose@arm.com,
- aneesh.kumar@kernel.org, liam@infradead.org,
- Paolo Bonzini <pbonzini@redhat.com>, Sean Christopherson
- <seanjc@google.com>, Thomas Gleixner <tglx@kernel.org>,
- Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
- Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
- "H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>,
- Masami Hiramatsu <mhiramat@kernel.org>,
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>,
- Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>,
- Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>,
- Nhat Pham <nphamcs@gmail.com>, Barry Song <baohua@kernel.org>,
- Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>,
- Wei Xu <weixugc@google.com>, Youngjun Park <youngjun.park@lge.com>,
- Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>,
- Kiryl Shutsemau <kas@kernel.org>, Baoquan He <baoquan.he@linux.dev>,
- Jason Gunthorpe <jgg@ziepe.ca>, Vlastimil Babka <vbabka@kernel.org>
-Cc: kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kselftest@vger.kernel.org, linux-mm@kvack.org,
- linux-coco@lists.linux.dev
-References: <20260618-gmem-inplace-conversion-v8-0-9d2959357853@google.com>
- <20260618-gmem-inplace-conversion-v8-5-9d2959357853@google.com>
-Content-Language: en-US
-From: Julian Braha <julianbraha@gmail.com>
-In-Reply-To: <20260618-gmem-inplace-conversion-v8-5-9d2959357853@google.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260619-bunch-diocese-dd7805cc17ff@spud>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	MID_RHS_NOT_FQDN(0.50)[];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:ackerleytng@google.com,m:aik@amd.com,m:andrew.jones@linux.dev,m:binbin.wu@linux.intel.com,m:brauner@kernel.org,m:chao.p.peng@linux.intel.com,m:david@kernel.org,m:jmattson@google.com,m:jthoughton@google.com,m:michael.roth@amd.com,m:oupton@kernel.org,m:pankaj.gupta@amd.com,m:qperret@google.com,m:rick.p.edgecombe@intel.com,m:rientjes@google.com,m:shivankg@amd.com,m:steven.price@arm.com,m:tabba@google.com,m:willy@infradead.org,m:wyihan@google.com,m:yan.y.zhao@intel.com,m:forkloop@google.com,m:pratyush@kernel.org,m:suzuki.poulose@arm.com,m:aneesh.kumar@kernel.org,m:liam@infradead.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:shuah@kernel.org,m:vannapurve@google.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencen
- t.com,m:shikemeng@huaweicloud.com,m:nphamcs@gmail.com,m:baohua@kernel.org,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:kas@kernel.org,m:baoquan.he@linux.dev,m:jgg@ziepe.ca,m:vbabka@kernel.org,m:kvm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,m:linux-coco@lists.linux.dev,s:lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-92929-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-92931-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[google.com,amd.com,linux.dev,linux.intel.com,kernel.org,intel.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca];
-	FORGED_SENDER(0.00)[julianbraha@gmail.com,linux-doc@vger.kernel.org];
-	TO_DN_SOME(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER(0.00)[nonamenuno@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FREEMAIL_FROM(0.00)[gmail.com];
+	FORGED_RECIPIENTS(0.00)[m:conor@kernel.org,m:jan.sun97@gmail.com,m:jic23@kernel.org,m:455.rodrigo.alencar@gmail.com,m:janani.sunil@analog.com,m:lars@metafoo.de,m:Michael.Hennerich@analog.com,m:dlechner@baylibre.com,m:nuno.sa@analog.com,m:andy@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:p.zabel@pengutronix.de,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-iio@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:broonie@kernel.org,m:jansun97@gmail.com,m:455rodrigoalencar@gmail.com,m:krzk@kernel.org,s:lists@lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[21];
+	FORWARDED(0.00)[lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[gmail.com,kernel.org,analog.com,metafoo.de,baylibre.com,pengutronix.de,lwn.net,linuxfoundation.org,vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[julianbraha@gmail.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	RCPT_COUNT_GT_50(0.00)[64];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[nonamenuno@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: D52F16A5DA2
+X-Rspamd-Queue-Id: 264486A5E58
 
-Hi Ackerley,
+On Fri, Jun 19, 2026 at 12:40:54PM +0100, Conor Dooley wrote:
+> On Fri, Jun 19, 2026 at 12:36:55PM +0100, Conor Dooley wrote:
+> > On Fri, Jun 19, 2026 at 12:33:11PM +0200, Janani Sunil wrote:
+> > > 
+> > > On 6/14/26 21:44, Jonathan Cameron wrote:
+> > > > On Tue, 9 Jun 2026 16:47:23 +0200
+> > > > Janani Sunil <jan.sun97@gmail.com> wrote:
+> > > > 
+> > > > > On 5/26/26 15:11, Rodrigo Alencar wrote:
+> > > > > > On 26/05/19 05:42PM, Janani Sunil wrote:
+> > > > > > > Devicetree bindings for AD5529R 16 channel 12/16 bit high voltage,
+> > > > > > > buffered voltage output digital-to-analog converter (DAC) with an
+> > > > > > > integrated precision reference.
+> > > > > > ...
+> > > > > > Probably others may comment on that, but...
+> > > > > > 
+> > > > > > This parent node may support device addressing for multi-device support through
+> > > > > > those ID pins. I suppose that each device may have its own power supplies or
+> > > > > > other resources like the toggle pins or reset and enable.
+> > > > > > 
+> > > > > > That way I suppose that an example would look like...
+> > > > > > > +
+> > > > > > > +patternProperties:
+> > > > > > > +  "^channel@([0-9]|1[0-5])$":
+> > > > > > > +    type: object
+> > > > > > > +    description: Child nodes for individual channel configuration
+> > > > > > > +
+> > > > > > > +    properties:
+> > > > > > > +      reg:
+> > > > > > > +        description: Channel number.
+> > > > > > > +        minimum: 0
+> > > > > > > +        maximum: 15
+> > > > > > > +
+> > > > > > > +      adi,output-range-microvolt:
+> > > > > > > +        description: |
+> > > > > > > +          Output voltage range for this channel as [min, max] in microvolts.
+> > > > > > > +          If not specified, defaults to 0V to 5V range.
+> > > > > > > +        oneOf:
+> > > > > > > +          - items:
+> > > > > > > +              - const: 0
+> > > > > > > +              - enum: [5000000, 10000000, 20000000, 40000000]
+> > > > > > > +          - items:
+> > > > > > > +              - const: -5000000
+> > > > > > > +              - const: 5000000
+> > > > > > > +          - items:
+> > > > > > > +              - const: -10000000
+> > > > > > > +              - const: 10000000
+> > > > > > > +          - items:
+> > > > > > > +              - const: -15000000
+> > > > > > > +              - const: 15000000
+> > > > > > > +          - items:
+> > > > > > > +              - const: -20000000
+> > > > > > > +              - const: 20000000
+> > > > > > > +
+> > > > > > > +    required:
+> > > > > > > +      - reg
+> > > > > > > +
+> > > > > > > +    additionalProperties: false
+> > > > > > > +
+> > > > > > > +required:
+> > > > > > > +  - compatible
+> > > > > > > +  - reg
+> > > > > > > +  - vdd-supply
+> > > > > > > +  - avdd-supply
+> > > > > > > +  - hvdd-supply
+> > > > > > > +
+> > > > > > > +dependencies:
+> > > > > > > +  spi-cpha: [ spi-cpol ]
+> > > > > > > +  spi-cpol: [ spi-cpha ]
+> > > > > > > +
+> > > > > > > +allOf:
+> > > > > > > +  - $ref: /schemas/spi/spi-peripheral-props.yaml#
+> > > > > > > +
+> > > > > > > +unevaluatedProperties: false
+> > > > > > > +
+> > > > > > > +examples:
+> > > > > > > +  - |
+> > > > > > > +    #include <dt-bindings/gpio/gpio.h>
+> > > > > > > +
+> > > > > > > +    spi {
+> > > > > > > +        #address-cells = <1>;
+> > > > > > > +        #size-cells = <0>;
+> > > > > > > +
+> > > > > > > +        dac@0 {
+> > > > > > > +            compatible = "adi,ad5529r-16";
+> > > > > > > +            reg = <0>;
+> > > > > > > +            spi-max-frequency = <25000000>;
+> > > > > > > +
+> > > > > > > +            vdd-supply = <&vdd_regulator>;
+> > > > > > > +            avdd-supply = <&avdd_regulator>;
+> > > > > > > +            hvdd-supply = <&hvdd_regulator>;
+> > > > > > > +            hvss-supply = <&hvss_regulator>;
+> > > > > > > +
+> > > > > > > +            reset-gpios = <&gpio0 87 GPIO_ACTIVE_LOW>;
+> > > > > > > +
+> > > > > > > +            #address-cells = <1>;
+> > > > > > > +            #size-cells = <0>;
+> > > > > > > +
+> > > > > > > +            channel@0 {
+> > > > > > > +                reg = <0>;
+> > > > > > > +                adi,output-range-microvolt = <0 5000000>;
+> > > > > > > +            };
+> > > > > > > +
+> > > > > > > +            channel@1 {
+> > > > > > > +                reg = <1>;
+> > > > > > > +                adi,output-range-microvolt = <(-10000000) 10000000>;
+> > > > > > > +            };
+> > > > > > > +
+> > > > > > > +            channel@2 {
+> > > > > > > +                reg = <2>;
+> > > > > > > +                adi,output-range-microvolt = <0 40000000>;
+> > > > > > > +            };
+> > > > > > > +        };
+> > > > > > > +    };
+> > > > > > ...
+> > > > > > 
+> > > > > > 	spi {
+> > > > > > 		#address-cells = <1>;
+> > > > > > 		#size-cells = <0>;
+> > > > > > 
+> > > > > > 		multi-dac@0 {
+> > > > > > 			compatible = "adi,ad5529r-16";
+> > > > > > 			reg = <0>;
+> > > > > > 			spi-max-frequency = <25000000>;
+> > > > > > 
+> > > > > > 			#address-cells = <1>;
+> > > > > > 			#size-cells = <0>;
+> > > > > > 
+> > > > > > 			dac@0 {
+> > > > > > 				reg = <0>;
+> > > > > > 				vdd-supply = <&vdd_regulator>;
+> > > > > > 				avdd-supply = <&avdd_regulator>;
+> > > > > > 				hvdd-supply = <&hvdd_regulator>;
+> > > > > > 				hvss-supply = <&hvss_regulator>;
+> > > > > > 
+> > > > > > 				reset-gpios = <&gpio0 87 GPIO_ACTIVE_LOW>;
+> > > > > > 
+> > > > > > 				#address-cells = <1>;
+> > > > > > 				#size-cells = <0>;
+> > > > > > 
+> > > > > > 				channel@0 {
+> > > > > > 					reg = <0>;
+> > > > > > 					adi,output-range-microvolt = <0 5000000>;
+> > > > > > 				};
+> > > > > > 
+> > > > > > 				channel@1 {
+> > > > > > 					reg = <1>;
+> > > > > > 					adi,output-range-microvolt = <(-10000000) 10000000>;
+> > > > > > 				};
+> > > > > > 
+> > > > > > 				channel@2 {
+> > > > > > 					reg = <2>;
+> > > > > > 					adi,output-range-microvolt = <0 40000000>;
+> > > > > > 				};
+> > > > > > 			}
+> > > > > > 
+> > > > > > 			dac@1 {
+> > > > > > 				reg = <1>;
+> > > > > > 				vdd-supply = <&vdd_regulator>;
+> > > > > > 				avdd-supply = <&avdd_regulator>;
+> > > > > > 				hvdd-supply = <&hvdd_regulator>;
+> > > > > > 				hvss-supply = <&hvss_regulator>;
+> > > > > > 
+> > > > > > 				reset-gpios = <&gpio0 88 GPIO_ACTIVE_LOW>;
+> > > > > > 
+> > > > > > 				#address-cells = <1>;
+> > > > > > 				#size-cells = <0>;
+> > > > > > 
+> > > > > > 				channel@0 {
+> > > > > > 					reg = <0>;
+> > > > > > 					adi,output-range-microvolt = <0 5000000>;
+> > > > > > 				};
+> > > > > > 
+> > > > > > 				channel@1 {
+> > > > > > 					reg = <1>;
+> > > > > > 					adi,output-range-microvolt = <(-10000000) 10000000>;
+> > > > > > 				};
+> > > > > > 			}
+> > > > > > 		};
+> > > > > > 	};
+> > > > > > 
+> > > > > > then you might need something like:
+> > > > > > 
+> > > > > > 	patternProperties:
+> > > > > > 		"^dac@[0-3]$":
+> > > > > > 
+> > > > > > and put most of the things under this node pattern.
+> > > > > > 
+> > > > > > So the main driver that you're putting together might need to handle up to four instances.
+> > > > > > Even if your current driver cannot handle this, the dt-bindings might need cover that.
+> > > > > > 
+> > > > > > Need to double check if each dac node needs a separate compatible, so you would maybe populate
+> > > > > > a platform data to be shared with the child nodes, which would be a separate driver.
+> > > > > > (not sure if it would make sense to mix and match ad5529r-16 and ad5529r-12).
+> > > > > Hi Rodrigo,
+> > > > > 
+> > > > > Thank you for looking at this.
+> > > > > 
+> > > > > For now, I would prefer to keep the binding scoped to a single AD5529R device instance. The current
+> > > > > hardware/use case we have only needs one device node and the driver is written around that model as well.
+> > > > > While the device addressing pins could allow multi-device topology, we do not have an actual platform using
+> > > > > that configuration at the moment, so I would prefer not to introduce an extra parent/child binding structure
+> > > > > speculatively without a validating use case.
+> > > > Interesting feature - kind of similar to address control on a typical i2c bus device, or
+> > > > looking at it another way a kind of distributed SPI mux.
+> > > > 
+> > > > Challenge of a binding is we need to anticipate the future.  So I think we do need something
+> > > > like Rodrigo is suggesting even if we only (for now) support a single instance in the driver.
+> > > > That would leave the path open to supporting the addressing at a later date.
+> > > > An alternative might be to look at it like a chained device setup. In those we pretend there
+> > > > is just one device with a lot of channels etc.  The snag is that here things are more loosely
+> > > > coupled whereas for those devices it tends to be you have to read / write the same register
+> > > > in all devices in the chain as one big SPI message.
+> > > > 
+> > > > +CC Mark Brown as he may know of some precedence for this feature. For his reference..
+> > > > - Each of these device has 2 ID pins.  The SPI transfers have to contain the 2 bit
+> > > > value that matches that or they are ignored.  Thus a single bus + 1 chip select can
+> > > > be used to talk to 4 devices.  Question is what that looks like in device tree + I guess
+> > > > longer term how to support it cleanly in SPI.
+> > 
+> > I'd swear I have seen this before, from some Microchip devices. Let me
+> > see if I can find what I am thinking of...
+> 
+> 
+> microchip,mcp3911 and microchip,mcp3564 both seem to do this with
+> slightly different properties.
+> 
+>   microchip,device-addr:
+>     description: Device address when multiple MCP3911 chips are present on the same SPI bus.
+>     $ref: /schemas/types.yaml#/definitions/uint32
+>     enum: [0, 1, 2, 3]
+>     default: 0
+> 
+> and
+> 
+> 
+>   microchip,hw-device-address:
+>     $ref: /schemas/types.yaml#/definitions/uint32
+>     minimum: 0
+>     maximum: 3
+>     description:
+>       The address is set on a per-device basis by fuses in the factory,
+>       configured on request. If not requested, the fuses are set for 0x1.
+>       The device address is part of the device markings to avoid
+>       potential confusion. This address is coded on two bits, so four possible
+>       addresses are available when multiple devices are present on the same
+>       SPI bus with only one Chip Select line for all devices.
+>       Each device communication starts by a CS falling edge, followed by the
+>       clocking of the device address (BITS[7:6] - top two bits of COMMAND BYTE
+>       which is first one on the wire).
+> 
+> This sounds exactly like the sort of feature that you're dealing with
+> here?
+> 
 
-On 6/19/26 01:31, Ackerley Tng via B4 Relay wrote:
+The core idea yes but for this chip, things are a bit more annoying (but
+Janani can correct me if I'm wrong). Here, each device can, in theory,
+have it's own supplies, pins and at the very least, channels with maybe
+different scales. That is why Janani is proposing dac nodes. Given I
+honestly don't like much of that "adi,ad5529r-bus" compatible I wondered
+about solving this at the spi level.
 
->  config KVM_VM_MEMORY_ATTRIBUTES
-> -	bool
-> +	depends on KVM_SW_PROTECTED_VM || KVM_INTEL_TDX || KVM_AMD_SEV
-> +	bool "Enable per-VM PRIVATE vs. SHARED attributes (for CoCo VMs)"
+Ah and to make it more annoying, we can also mix 12 and 16 bits variants
+together in the same bus.
 
-Sorry for the style nitpick, but could you keep the type and prompt as
-the first attribute in the Kconfig option definition (like the other
-options do)?
+- Nuno Sá
 
-- Julian Braha
+
 
