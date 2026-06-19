@@ -1,58 +1,58 @@
-Return-Path: <linux-doc+bounces-92850-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92851-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id bLVjNXaONGoWbQYAu9opvQ
-	(envelope-from <linux-doc+bounces-92850-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 02:33:58 +0200
+	id LId0NWqPNGqybQYAu9opvQ
+	(envelope-from <linux-doc+bounces-92851-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 02:38:02 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id BDAD76A3445
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 02:33:58 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 70FDF6A3567
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 02:38:02 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=Pl855Gqk;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92850-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-92850-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=s2xqz28G;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92851-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-92851-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id AACFB3059557
+	by sea.lore.kernel.org (Postfix) with ESMTP id E106030FB66C
 	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 00:33:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 67AE72DF126;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6F1AD2DECA3;
 	Fri, 19 Jun 2026 00:31:50 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CBE8D29B8E1;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5E262C11CA;
 	Fri, 19 Jun 2026 00:31:49 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781829109; cv=none; b=UA0ImeaxVqlwX0dulbZLyivdyM5eziSGs52XlVhxrVLhu7sJmTEuVBcXuOHwoTJwwzl556zsyORMox9OvvJmTHxIgbKkf3ihzWtK7c/c+Jf8fj1fkErMwpFRc6oa90obmqeJresXGzZM3MZ3i++V3FZUoyYs13wDxRsCF3cZw00=
+	t=1781829110; cv=none; b=pK+8dz8/byVM79omxvSuZZs3RBEseaWshFsTn+kDbr692H9CxE013VlfZh+wl7G1tiw9lzEyy1nbIC/Eom3Q05ivkR0zdqE/i06u1mtc+msJB26Vrt6QhHbTqHxve5qQaf8c2A9xPEomhFbvBLUzl9/i91/s0JAN6+ocFxBBvqU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781829109; c=relaxed/simple;
-	bh=Ll+43sSYqY2OH2Jli1Ltcc2BbQuBgtKf9K8AI194+eI=;
+	s=arc-20240116; t=1781829110; c=relaxed/simple;
+	bh=bJN+UFjKUl2OzBiITskwOW0VMnIK8KJ0ShzIAlJgpf8=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Lo/iDjmMwdgzemSaBPzyOlaad7bcOh5xfb64+ZXsn4H9BH5jzf+/RhlpXIuVtOC0LghPRZ/nPeYqVgN3ccKLRQedgkROrI4OKoyv4kEAr6FX8cWpajVxrSqVcDrY7WxFaGI41l5HTLplMu3a/1C9verQ78qgGYIKviPFlnjccdI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Pl855Gqk; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id AE591C2BCFC;
+	 In-Reply-To:To:Cc; b=ULaIxtcqfkBFT4vgCTX+tgf0FTjHHsIfQo5qMKT0f3DO6WebBftVpchAiVbsQeD0ooG1CNmru8brWHLHsGZxMMVq8xhshGlCRcO7ltjHLa2iZnP075mlOPre72m6itvzKv6nWjClRLj0RTkPj/163J37J1frHUUdw5E4E+0znnw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=s2xqz28G; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id C9782C2BCF6;
 	Fri, 19 Jun 2026 00:31:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1781829109;
-	bh=Ll+43sSYqY2OH2Jli1Ltcc2BbQuBgtKf9K8AI194+eI=;
+	bh=bJN+UFjKUl2OzBiITskwOW0VMnIK8KJ0ShzIAlJgpf8=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=Pl855Gqk6TkFZ/Vl1UbG+exuM/n5/20p+kIAOoCUhYvoYskbWXjqQehVGhapcelZg
-	 S95sMa8Yw5qTY0gITleVadTpzM6+nbGJ2hKXHuX3ZX4POF7Oj3lnRJTntE/3qtKqJ+
-	 QNPlZpEYVimUS31tdlr2a9iHg+PnGd030pAra1S/J45zSszH5r5IR+cH/zFWEFfEJp
-	 XOaaZuLeh276iCbYp5Ml5GNM7+OY8N272kN1mwaq6UkkJzzxRo8/Zv6XCFudoX29wR
-	 qq0XlIR5GV9l53cJrJNTY94Oty77FcwZYBOF/0zkyK7Fzdd+5N4PnxcpxT17QI7Y6p
-	 VWOyD+cNtbOJA==
+	b=s2xqz28GPf+TMs+8Yl1fiMhRim2bWQwzdjvCNl3cqtQfFBzDK+7BRaB13e9k3IqOS
+	 apcxNllsAY49m5ttigxFq13JtvbsrNuFbBGZOa3siWyA/F9dIgmnSFZQPOqQQ1gANC
+	 lVC1VVnEAjxP8v+MmQh7JA4+0JBajCxVO47tSDK+z1qxNEQJ4nDs/sd8vSDtcyEp46
+	 iu2R68od+1+DDKwxAfVoXTiCc8ZE6lYj5+T8C9oEDxIu0wfhAmTPb+p3aklgTJki1L
+	 vhJusqOUf/whynokfLbApR/GWxWC7UAZ/SDVDdz+AuAXXaclwEOGwPVYLsHyvupMNL
+	 prfJVZ2tzkdQw==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A2458CDB461;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BEAE9CDB463;
 	Fri, 19 Jun 2026 00:31:49 +0000 (UTC)
 From: Ackerley Tng via B4 Relay <devnull+ackerleytng.google.com@kernel.org>
-Date: Thu, 18 Jun 2026 17:32:05 -0700
-Subject: [PATCH v8 28/46] KVM: selftests: Add support for mmap() on
- guest_memfd in core library
+Date: Thu, 18 Jun 2026 17:32:06 -0700
+Subject: [PATCH v8 29/46] KVM: selftests: Add selftests global for guest
+ memory attributes capability
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -61,7 +61,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260618-gmem-inplace-conversion-v8-28-9d2959357853@google.com>
+Message-Id: <20260618-gmem-inplace-conversion-v8-29-9d2959357853@google.com>
 References: <20260618-gmem-inplace-conversion-v8-0-9d2959357853@google.com>
 In-Reply-To: <20260618-gmem-inplace-conversion-v8-0-9d2959357853@google.com>
 To: aik@amd.com, andrew.jones@linux.dev, binbin.wu@linux.intel.com, 
@@ -95,11 +95,11 @@ Cc: kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
  linux-kselftest@vger.kernel.org, linux-mm@kvack.org, 
  linux-coco@lists.linux.dev, Ackerley Tng <ackerleytng@google.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1781829104; l=6068;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1781829104; l=2397;
  i=ackerleytng@google.com; s=20260225; h=from:subject:message-id;
- bh=GtPDg23FPq5+sXEXdDPAincXRNuGxgcmzYFSpCwE45E=;
- b=afYmzD1q5pAaSyHEvvF02XdvzZCM+1lCDTZto3YGiuC82Gg6H6VRA8WpVYoUK+sibEVYjKF3Q
- L9Oii+ZVeTdAQimoGjjC/RPLHZ8Hm/GKmqTdE/AmkKNg36HrTf199Z7
+ bh=7MS/3FsSTySm4s1PTqsvFp4qWJmf6Xu6PkzEjOtQzj8=;
+ b=ERn7HZA9xYQyS0VygeCX8gsanAs6LdjljkhsA0uKfLDRgCVI8T2Ml9hiekN8jTDPj2CYq1YdL
+ fD5G93Gx9FgBbnu3HPZ5vAUj/4wod/OSNkouTLTdHKasIwPx9LZ8WHm
 X-Developer-Key: i=ackerleytng@google.com; a=ed25519;
  pk=sAZDYXdm6Iz8FHitpHeFlCMXwabodTm7p8/3/8xUxuU=
 X-Endpoint-Received: by B4 Relay for ackerleytng@google.com/20260225 with
@@ -111,12 +111,12 @@ X-Spamd-Result: default: False [-5.16 / 15.00];
 	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-92850-lists,linux-doc=lfdr.de,ackerleytng.google.com];
+	TAGGED_FROM(0.00)[bounces-92851-lists,linux-doc=lfdr.de,ackerleytng.google.com];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS(0.00)[m:aik@amd.com,m:andrew.jones@linux.dev,m:binbin.wu@linux.intel.com,m:brauner@kernel.org,m:chao.p.peng@linux.intel.com,m:david@kernel.org,m:jmattson@google.com,m:jthoughton@google.com,m:michael.roth@amd.com,m:oupton@kernel.org,m:pankaj.gupta@amd.com,m:qperret@google.com,m:rick.p.edgecombe@intel.com,m:rientjes@google.com,m:shivankg@amd.com,m:steven.price@arm.com,m:tabba@google.com,m:willy@infradead.org,m:wyihan@google.com,m:yan.y.zhao@intel.com,m:forkloop@google.com,m:pratyush@kernel.org,m:suzuki.poulose@arm.com,m:aneesh.kumar@kernel.org,m:liam@infradead.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:shuah@kernel.org,m:vannapurve@google.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencent.com,m:shikemeng@huaweic
  loud.com,m:nphamcs@gmail.com,m:baohua@kernel.org,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:kas@kernel.org,m:baoquan.he@linux.dev,m:jgg@ziepe.ca,m:vbabka@kernel.org,m:kvm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,m:linux-coco@lists.linux.dev,m:ackerleytng@google.com,s:lists@lfdr.de];
@@ -139,150 +139,73 @@ X-Spamd-Result: default: False [-5.16 / 15.00];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,vger.kernel.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: BDAD76A3445
+X-Rspamd-Queue-Id: 70FDF6A3567
 
 From: Sean Christopherson <seanjc@google.com>
 
-Accept gmem_flags in vm_mem_add() to be able to create a guest_memfd within
-vm_mem_add().
+Add a global variable, kvm_has_gmem_attributes, to make the result of
+checking for KVM_CAP_GUEST_MEMFD_MEMORY_ATTRIBUTES available to all tests.
 
-When vm_mem_add() is used to set up a guest_memfd for a memslot, set up the
-provided (or created) gmem_fd as the fd for the user memory region. This
-makes it available to be mmap()-ed from just like fds from other memory
-sources. mmap() from guest_memfd using the provided gmem_flags and
-gmem_offset.
+kvm_has_gmem_attributes is true if guest_memfd tracks memory attributes, as
+opposed to VM-level tracking.
 
-Add a kvm_slot_to_fd() helper to provide convenient access to the file
-descriptor of a memslot.
-
-Update existing callers of vm_mem_add() to pass 0 for gmem_flags to
-preserve existing behavior.
+This global variable is synced to the guest for testing convenience, to
+avoid introducing subtle bugs when host/guest state is desynced.
 
 Signed-off-by: Sean Christopherson <seanjc@google.com>
-[For guest_memfds, mmap() using gmem_offset instead of 0 all the time.]
 Signed-off-by: Ackerley Tng <ackerleytng@google.com>
 ---
- tools/testing/selftests/kvm/include/kvm_util.h     |  7 +++++-
- tools/testing/selftests/kvm/lib/kvm_util.c         | 27 ++++++++++++----------
- .../kvm/x86/private_mem_conversions_test.c         |  2 +-
- 3 files changed, 22 insertions(+), 14 deletions(-)
+ tools/testing/selftests/kvm/include/test_util.h | 2 ++
+ tools/testing/selftests/kvm/lib/kvm_util.c      | 5 +++++
+ 2 files changed, 7 insertions(+)
 
-diff --git a/tools/testing/selftests/kvm/include/kvm_util.h b/tools/testing/selftests/kvm/include/kvm_util.h
-index d4c104cb0418f..0cacf3698b259 100644
---- a/tools/testing/selftests/kvm/include/kvm_util.h
-+++ b/tools/testing/selftests/kvm/include/kvm_util.h
-@@ -700,7 +700,7 @@ void vm_userspace_mem_region_add(struct kvm_vm *vm,
- 				 gpa_t gpa, u32 slot, u64 npages, u32 flags);
- void vm_mem_add(struct kvm_vm *vm, enum vm_mem_backing_src_type src_type,
- 		gpa_t gpa, u32 slot, u64 npages, u32 flags,
--		int gmem_fd, u64 gmem_offset);
-+		int gmem_fd, u64 gmem_offset, u64 gmem_flags);
+diff --git a/tools/testing/selftests/kvm/include/test_util.h b/tools/testing/selftests/kvm/include/test_util.h
+index a56271c237ae9..51287fac8138a 100644
+--- a/tools/testing/selftests/kvm/include/test_util.h
++++ b/tools/testing/selftests/kvm/include/test_util.h
+@@ -115,6 +115,8 @@ struct guest_random_state {
+ extern u32 guest_random_seed;
+ extern struct guest_random_state guest_rng;
  
- #ifndef vm_arch_has_protected_memory
- static inline bool vm_arch_has_protected_memory(struct kvm_vm *vm)
-@@ -732,6 +732,11 @@ void *addr_gva2hva(struct kvm_vm *vm, gva_t gva);
- gpa_t addr_hva2gpa(struct kvm_vm *vm, void *hva);
- void *addr_gpa2alias(struct kvm_vm *vm, gpa_t gpa);
- 
-+static inline int kvm_slot_to_fd(struct kvm_vm *vm, u32 slot)
-+{
-+	return memslot2region(vm, slot)->fd;
-+}
++extern bool kvm_has_gmem_attributes;
 +
- #ifndef vcpu_arch_put_guest
- #define vcpu_arch_put_guest(mem, val) do { (mem) = (val); } while (0)
- #endif
+ struct guest_random_state new_guest_random_state(u32 seed);
+ u32 guest_random_u32(struct guest_random_state *state);
+ 
 diff --git a/tools/testing/selftests/kvm/lib/kvm_util.c b/tools/testing/selftests/kvm/lib/kvm_util.c
-index 9b482778f7379..d5bbc80b2bf1c 100644
+index d5bbc80b2bf1c..b73817f7bc803 100644
 --- a/tools/testing/selftests/kvm/lib/kvm_util.c
 +++ b/tools/testing/selftests/kvm/lib/kvm_util.c
-@@ -978,12 +978,13 @@ void vm_set_user_memory_region2(struct kvm_vm *vm, u32 slot, u32 flags,
- /* FIXME: This thing needs to be ripped apart and rewritten. */
- void vm_mem_add(struct kvm_vm *vm, enum vm_mem_backing_src_type src_type,
- 		gpa_t gpa, u32 slot, u64 npages, u32 flags,
--		int gmem_fd, u64 gmem_offset)
-+		int gmem_fd, u64 gmem_offset, u64 gmem_flags)
- {
- 	int ret;
- 	struct userspace_mem_region *region;
- 	size_t backing_src_pagesz = get_backing_src_pagesz(src_type);
- 	size_t mem_size = npages * vm->page_size;
-+	off_t mmap_offset = 0;
- 	size_t alignment = 1;
+@@ -24,6 +24,8 @@ u32 guest_random_seed;
+ struct guest_random_state guest_rng;
+ static u32 last_guest_seed;
  
- 	TEST_REQUIRE_SET_USER_MEMORY_REGION2();
-@@ -1055,8 +1056,6 @@ void vm_mem_add(struct kvm_vm *vm, enum vm_mem_backing_src_type src_type,
++bool kvm_has_gmem_attributes;
++
+ static size_t vcpu_mmap_sz(void);
  
- 	if (flags & KVM_MEM_GUEST_MEMFD) {
- 		if (gmem_fd < 0) {
--			u32 gmem_flags = 0;
--
- 			TEST_ASSERT(!gmem_offset,
- 				    "Offset must be zero when creating new guest_memfd");
- 			gmem_fd = vm_create_guest_memfd(vm, mem_size, gmem_flags);
-@@ -1077,13 +1076,17 @@ void vm_mem_add(struct kvm_vm *vm, enum vm_mem_backing_src_type src_type,
+ int __open_path_or_exit(const char *path, int flags, const char *enoent_help)
+@@ -521,6 +523,7 @@ struct kvm_vm *__vm_create(struct vm_shape shape, u32 nr_runnable_vcpus,
  	}
+ 	guest_rng = new_guest_random_state(guest_random_seed);
+ 	sync_global_to_guest(vm, guest_rng);
++	sync_global_to_guest(vm, kvm_has_gmem_attributes);
  
- 	region->fd = -1;
--	if (backing_src_is_shared(src_type))
-+	if (flags & KVM_MEM_GUEST_MEMFD && gmem_flags & GUEST_MEMFD_FLAG_MMAP) {
-+		region->fd = kvm_dup(gmem_fd);
-+		mmap_offset = gmem_offset;
-+	} else if (backing_src_is_shared(src_type)) {
- 		region->fd = kvm_memfd_alloc(region->mmap_size,
- 					     src_type == VM_MEM_SRC_SHARED_HUGETLB);
-+	}
+ 	kvm_arch_vm_post_create(vm, nr_runnable_vcpus);
  
--	region->mmap_start = kvm_mmap(region->mmap_size, PROT_READ | PROT_WRITE,
--				      vm_mem_backing_src_alias(src_type)->flag,
--				      region->fd);
-+	region->mmap_start = __kvm_mmap(region->mmap_size, PROT_READ | PROT_WRITE,
-+					vm_mem_backing_src_alias(src_type)->flag,
-+					region->fd, mmap_offset);
+@@ -2286,6 +2289,8 @@ void __attribute((constructor)) kvm_selftest_init(void)
+ 	guest_random_seed = last_guest_seed = random();
+ 	pr_info("Random seed: 0x%x\n", guest_random_seed);
  
- 	TEST_ASSERT(!is_backing_src_hugetlb(src_type) ||
- 		    region->mmap_start == align_ptr_up(region->mmap_start, backing_src_pagesz),
-@@ -1129,10 +1132,10 @@ void vm_mem_add(struct kvm_vm *vm, enum vm_mem_backing_src_type src_type,
- 
- 	/* If shared memory, create an alias. */
- 	if (region->fd >= 0) {
--		region->mmap_alias = kvm_mmap(region->mmap_size,
--					      PROT_READ | PROT_WRITE,
--					      vm_mem_backing_src_alias(src_type)->flag,
--					      region->fd);
-+		region->mmap_alias = __kvm_mmap(region->mmap_size,
-+						PROT_READ | PROT_WRITE,
-+						vm_mem_backing_src_alias(src_type)->flag,
-+						region->fd, mmap_offset);
- 
- 		/* Align host alias address */
- 		region->host_alias = align_ptr_up(region->mmap_alias, alignment);
-@@ -1143,7 +1146,7 @@ void vm_userspace_mem_region_add(struct kvm_vm *vm,
- 				 enum vm_mem_backing_src_type src_type,
- 				 gpa_t gpa, u32 slot, u64 npages, u32 flags)
- {
--	vm_mem_add(vm, src_type, gpa, slot, npages, flags, -1, 0);
-+	vm_mem_add(vm, src_type, gpa, slot, npages, flags, -1, 0, 0);
++	kvm_has_gmem_attributes = kvm_has_cap(KVM_CAP_GUEST_MEMFD_MEMORY_ATTRIBUTES);
++
+ 	kvm_selftest_arch_init();
  }
  
- /*
-diff --git a/tools/testing/selftests/kvm/x86/private_mem_conversions_test.c b/tools/testing/selftests/kvm/x86/private_mem_conversions_test.c
-index 1d2f5d4fd45d7..861baff201e78 100644
---- a/tools/testing/selftests/kvm/x86/private_mem_conversions_test.c
-+++ b/tools/testing/selftests/kvm/x86/private_mem_conversions_test.c
-@@ -399,7 +399,7 @@ static void test_mem_conversions(enum vm_mem_backing_src_type src_type, u32 nr_v
- 	for (i = 0; i < nr_memslots; i++)
- 		vm_mem_add(vm, src_type, BASE_DATA_GPA + slot_size * i,
- 			   BASE_DATA_SLOT + i, slot_size / vm->page_size,
--			   KVM_MEM_GUEST_MEMFD, memfd, slot_size * i);
-+			   KVM_MEM_GUEST_MEMFD, memfd, slot_size * i, 0);
- 
- 	for (i = 0; i < nr_vcpus; i++) {
- 		gpa_t gpa =  BASE_DATA_GPA + i * per_cpu_size;
 
 -- 
 2.55.0.rc0.738.g0c8ab3ebcc-goog
