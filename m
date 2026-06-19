@@ -1,54 +1,54 @@
-Return-Path: <linux-doc+bounces-92963-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92959-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id l0/KN6uKNWrYzAYAu9opvQ
-	(envelope-from <linux-doc+bounces-92963-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 20:30:03 +0200
+	id C4VSL5+KNWrIzAYAu9opvQ
+	(envelope-from <linux-doc+bounces-92959-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 20:29:51 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 73F8F6A75FB
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 20:30:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3739A6A75D5
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 20:29:51 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=B1YKyMtc;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92963-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-92963-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=KyiRCf6K;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92959-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-92959-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id E31BA304E43E
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 18:29:54 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 44A733042C70
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2026 18:29:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9C0E933E360;
-	Fri, 19 Jun 2026 18:29:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 59466336885;
+	Fri, 19 Jun 2026 18:29:49 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E29B331ECA;
-	Fri, 19 Jun 2026 18:29:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E31B331EDD;
+	Fri, 19 Jun 2026 18:29:48 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781893792; cv=none; b=TmgNZoLj4auALG3OKkN9kfWet/Rpz3LLHoH7T6FOaPst9qM7gx5f4AEq12ZNHyLgxrzdTnq+GIT3vOcrv/aVtVDxL75KWiF1n67OAGG60VLPxlBOZETxIbfcCVXPdbyS0wBdhluZn/GHQ/ryxjaruril9+0eBxnEMvfXZ9THI38=
+	t=1781893789; cv=none; b=ZDuFNYBYCqOgUHLgGNyO91G1DHrtXUWaAeyDA4GeffOaouwWpObDndGiFWiBFdhx14voF7J0T/7T+Wc+Sc9/OP+hUFiXojDbXAllKyhR/bvITtzVqPVoYsu3zF/YWME8uxAk8yls/P9x+KuT0AVWHXVbx3xn9xZHbjzyOGZwE9Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781893792; c=relaxed/simple;
-	bh=Il21aTORLEmMcb+bqZtjLfUVNnbLhe3aUQEf7IOrJ3o=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=oJfv6ejp6ujR+uUMOpUyRgioDvg8cPeUuqulLnd6taZBoouF22eo1CwTlgIFDizipEPXZrHHYOpIbjcgJtT/81lE7nZf63AzFbhN2e7ze4izGNo6kXhx07gNDJuX+OFm0Ur/Tu5DzW5MzYh1gmqz6bg9wqwYC7GY2WlofDUU7Gg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=B1YKyMtc; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DF4361F000E9;
-	Fri, 19 Jun 2026 18:29:46 +0000 (UTC)
+	s=arc-20240116; t=1781893789; c=relaxed/simple;
+	bh=oVWQwUJrVLgt2ds0hOtdw/u3HLWC21FLWSsgjsdIJHo=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=dJZX4Z44NhCcFNzOxbK+vMFcgmLlm4IXcGCuCuj+jE/Onc+0U29l58urihLgqmlPmrDX4tsIvTqJtTqzLweKu03Dbpci+6pvVSCaSOinx7hWnGWkX4s/aiBp8vz7I0NcClpjVbQDSnmR6guC8serPgzv33YSakKInKE/5PoPfWM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KyiRCf6K; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 85A891F00AC4;
+	Fri, 19 Jun 2026 18:29:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1781893787;
-	bh=7krNnge6CqDFpXfWCA2S/6g3TXm4KR3ObMbF3c3qLxw=;
-	h=From:Subject:Date:To:Cc;
-	b=B1YKyMtcV1TBG0oE6SZ1Qm89ffWi9qe7LEUSGLaeganJTMFzREb8GxXRwDHIRiF0o
-	 WF2VOBw5MVFmSqcTbouT4GwXH8ISqZ8c594e0CPhIZZGKAdaNcubzEu6BcRMXJVhjh
-	 wW8E9D10pcx4sIXbZyDr3QuePv8iTeT9KsIfelCoYE4LV0j7lyd5mCIe6ge5CW3yvm
-	 O6n2yzuD6x8CnwmLA6OF5rE/ItBPXmRVdE/SfqmndF7SZZZWZiYdL+uOZbQIx6x5oS
-	 c4zKL3dlS7WncPh+adneJmfexcD5I9Epged0SBO1kenvU2Le87KXpukqER98a/wwaZ
-	 QDo7Fu5vGBP/A==
+	s=k20260515; t=1781893788;
+	bh=srvdFyNcKWrG6UhIb2zhEmit0iT5/TwfHnN+QzKDIL4=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc;
+	b=KyiRCf6KsIhPG2xFPiZCyWlpRPffTl0tOYbWi8XJUoH66MwV2RqGM/6cKIb2mGT6Q
+	 2KFH1OQYGmcZ0TjBJxRX1pSh2sGf/aNUsEbfDd7YUzCHBwyczld0ikE4heZcew2DDH
+	 14ZYpHxAocj0C7fT+PmDn2KG4odcGd4Cs1+l0BZC8bTYeUwPEoqB9HL5GPJFbE955v
+	 M9Cp/GvJSkgcG36rplTZ18LcHdevMClpkETjAudzkXHPVVIo4tUtgc9FwIw56gQM/m
+	 1Ohxh0dM5ArvbLIazKrmFsoJH3xwkhpdiRnQrDS3kV0N2EolUGsvXvNNluEPLP6wxo
+	 s8iMq6dbI5eoA==
 From: Drew Fustini <fustini@kernel.org>
-Subject: [PATCH 0/8] riscv: Add Ssqosid and initial CBQRI resctrl support
-Date: Fri, 19 Jun 2026 11:29:35 -0700
-Message-Id: <20260619-dfustini-atl-sc-cbqri-dt-v1-0-e79a7723fab0@kernel.org>
+Date: Fri, 19 Jun 2026 11:29:36 -0700
+Subject: [PATCH 1/8] dt-bindings: riscv: Add Ssqosid extension description
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -57,10 +57,9 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAI+KNWoC/yXMQQrCQAxA0auUrA1MBmmLVxEXbZLaFBl1MhWh9
- O6OunyL/zdwzaYOp2aDrC9zu6cKOjTA85CuiibVEENsQ0sBZVq9WDIcyg2dkcdnNpSCRwrca+y
- IRKDmj6yTvX/r8+VvX8dFuXx/sO8fECGvBnwAAAA=
-X-Change-ID: 20260610-dfustini-atl-sc-cbqri-dt-410c8e2711dd
+Message-Id: <20260619-dfustini-atl-sc-cbqri-dt-v1-1-e79a7723fab0@kernel.org>
+References: <20260619-dfustini-atl-sc-cbqri-dt-v1-0-e79a7723fab0@kernel.org>
+In-Reply-To: <20260619-dfustini-atl-sc-cbqri-dt-v1-0-e79a7723fab0@kernel.org>
 To: Adrien Ricciardi <aricciardi@baylibre.com>, 
  Alexandre Ghiti <alex@ghiti.fr>, Atish Kumar Patra <atishp@rivosinc.com>, 
  Atish Patra <atish.patra@linux.dev>, Babu Moger <babu.moger@amd.com>, 
@@ -88,12 +87,12 @@ Cc: linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org,
  x86@kernel.org, devicetree@vger.kernel.org, linux-rt-devel@lists.linux.dev, 
  linux-doc@vger.kernel.org
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3589; i=fustini@kernel.org;
- h=from:subject:message-id; bh=Il21aTORLEmMcb+bqZtjLfUVNnbLhe3aUQEf7IOrJ3o=;
- b=owGbwMvMwCV2+43O4ZsaG3kYT6slMWSZdk2pEubjOXIi+9PGjyelEtOa2p0KTQ6ca8ziV+i4f
- IfJUcOio5SFQYyLQVZMkWXTh7wLS7xCvy6Y/2IbzBxWJpAhDFycAjCRwsMM/1N/Zsa5n2z2/aaU
- djUnJa5qisxy9SrRgvLr/lqmEqz1exj+SpQFqTxc9ytwkTrXkSf2zndWtC9onx4gY8915nN6z3M
- XdgA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1227; i=fustini@kernel.org;
+ h=from:subject:message-id; bh=oVWQwUJrVLgt2ds0hOtdw/u3HLWC21FLWSsgjsdIJHo=;
+ b=owGbwMvMwCV2+43O4ZsaG3kYT6slMWSZds20ma0f9iOYNeVGvOmNdYbF8eIvOPzapjNYib/ME
+ nqfKf+3o5SFQYyLQVZMkWXTh7wLS7xCvy6Y/2IbzBxWJpAhDFycAjCRmRcZ/qfP2z6nhiXzW4uc
+ 3GNN8fmq00uXngx8ZPcxs8FySiTDV3mGv6LKZ+87nAuryjOPe+RhmCM/cb/RxTVPvz41yH0XJnr
+ 8CSsA
 X-Developer-Key: i=fustini@kernel.org; a=openpgp;
  fpr=1B6F948213EA489734F3997035D5CD577C1E6010
 X-Rspamd-Action: no action
@@ -118,7 +117,7 @@ X-Spamd-Result: default: False [-3.66 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-92963-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-92959-lists,linux-doc=lfdr.de];
 	DKIM_TRACE(0.00)[kernel.org:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
@@ -131,75 +130,39 @@ X-Spamd-Result: default: False [-3.66 / 15.00];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 73F8F6A75FB
+X-Rspamd-Queue-Id: 3739A6A75D5
 
-This series adds initial RISC-V QoS support: the Ssqosid extension [1]
-(srmcfg CSR), the CBQRI controller interface [2] integrated with resctrl
-[3], and DT-based platform driver for cache controllers. It has been
-tested both on the Tenstorrent Ascalon Shared Cache controller as well
-as a Qemu implementation [4].
+Document the ratified Supervisor-mode Quality of Service ID (Ssqosid)
+extension v1.0.
 
-Note that this series only implements support for resctrl CAT using
-CBQRI capacity allocation control. cc_block_mask maps onto resctrl's
-existing cbm schema. However, cc_cunits is not supported as there is no
-existing equivalent for capacity units in the resctrl schemata.
-
-I had previously been iterating on an RFC series [5] that did a full
-implementation of CBQRI including capacity monitoring, bandwidth
-allocation and monitoring, as well as a parser for the ACPI RQSC table.
-The bandwidth controls for CBQRI do not fit well into resctrl's existing
-throttle based MB schemata. I believe that the path forward is
-Reinette's generic schema description proof of concept [6] but that will
-take time to mature. My plan is to rebase the full support of CBQRI on
-to the generic schema once it is ready.
-
-[1] https://github.com/riscv/riscv-ssqosid/releases/tag/v1.0
-[2] https://github.com/riscv-non-isa/riscv-cbqri/releases/tag/v1.0
-[3] https://docs.kernel.org/filesystems/resctrl.html
-[4] https://github.com/riscv-non-isa/riscv-rqsc/blob/main/src/
-[5] https://lore.kernel.org/linux-riscv/20260601-ssqosid-cbqri-rqsc-v7-0-v6-16-baf00f50028a@kernel.org/
-[6] https://lore.kernel.org/all/aab804b9-e8b5-40ad-a85b-af7033391243@intel.com/
-
+Link: https://github.com/riscv/riscv-ssqosid/releases/tag/v1.0
+Acked-by: Conor Dooley <conor.dooley@microchip.com>
+Signed-off-by: Drew Fustini <fustini@kernel.org>
 ---
-Drew Fustini (8):
-      dt-bindings: riscv: Add Ssqosid extension description
-      riscv: Detect the Ssqosid extension
-      riscv: Add support for srmcfg CSR from Ssqosid extension
-      riscv_cbqri: Add capacity controller probe and allocation device ops
-      riscv_cbqri: resctrl: Add cache allocation via capacity block mask
-      riscv: Enable resctrl filesystem for Ssqosid
-      dt-bindings: riscv: Add generic CBQRI controller binding
-      riscv_cbqri: Add CBQRI cache capacity-allocation platform driver
+ Documentation/devicetree/bindings/riscv/extensions.yaml | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
- .../devicetree/bindings/riscv/extensions.yaml      |   6 +
- .../devicetree/bindings/riscv/riscv,cbqri.yaml     | 109 +++
- MAINTAINERS                                        |  15 +
- arch/riscv/Kconfig                                 |  20 +
- arch/riscv/include/asm/csr.h                       |   5 +
- arch/riscv/include/asm/hwcap.h                     |   1 +
- arch/riscv/include/asm/processor.h                 |   3 +
- arch/riscv/include/asm/qos.h                       |  86 +++
- arch/riscv/include/asm/resctrl.h                   | 152 ++++
- arch/riscv/include/asm/switch_to.h                 |   3 +
- arch/riscv/kernel/Makefile                         |   2 +
- arch/riscv/kernel/cpufeature.c                     |   1 +
- arch/riscv/kernel/qos.c                            |  91 +++
- drivers/resctrl/Kconfig                            |  44 ++
- drivers/resctrl/Makefile                           |   7 +
- drivers/resctrl/cbqri_capacity.c                   | 132 ++++
- drivers/resctrl/cbqri_devices.c                    | 511 ++++++++++++++
- drivers/resctrl/cbqri_internal.h                   | 110 +++
- drivers/resctrl/cbqri_resctrl.c                    | 774 +++++++++++++++++++++
- include/linux/riscv_cbqri.h                        |  47 ++
- 20 files changed, 2119 insertions(+)
----
-base-commit: 4fa3f5fabb30bf00d7475d5a33459ea83d639bf9
-change-id: 20260610-dfustini-atl-sc-cbqri-dt-410c8e2711dd
+diff --git a/Documentation/devicetree/bindings/riscv/extensions.yaml b/Documentation/devicetree/bindings/riscv/extensions.yaml
+index 2b0a8a93bb21..1c6f091518d4 100644
+--- a/Documentation/devicetree/bindings/riscv/extensions.yaml
++++ b/Documentation/devicetree/bindings/riscv/extensions.yaml
+@@ -232,6 +232,12 @@ properties:
+             ratified at commit d70011dde6c2 ("Update to ratified state")
+             of riscv-j-extension.
+ 
++        - const: ssqosid
++          description: |
++            The standard Ssqosid extension for Quality of Service ID is
++            ratified as v1.0 in commit d9c616497fde ("Merge pull
++            request #7 from ved-rivos/Ratified") of riscv-ssqosid.
++
+         - const: ssstateen
+           description: |
+             The standard Ssstateen extension for supervisor-mode view of the
 
-Best regards,
---  
-Drew Fustini <fustini@kernel.org>
+-- 
+2.43.0
 
 
