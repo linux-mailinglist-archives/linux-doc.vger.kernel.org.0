@@ -1,147 +1,126 @@
-Return-Path: <linux-doc+bounces-92988-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92989-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id YpBBFU7VNmqPFQcAu9opvQ
-	(envelope-from <linux-doc+bounces-92988-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2026 20:00:46 +0200
+	id i6iiM6/eNmoMFwcAu9opvQ
+	(envelope-from <linux-doc+bounces-92989-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2026 20:40:47 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id D42B16A9711
-	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2026 20:00:44 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 265F46A97C0
+	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2026 20:40:42 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=intel.com header.s=Intel header.b=BD5t3mqb;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92988-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-92988-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=intel.com;
+	dkim=temperror ("DNS error when getting key") header.d=infradead.org header.s=bombadil.20210309 header.b=yOYjAXtM;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92989-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92989-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=temperror reason="SPF/DKIM temp error" header.from=infradead.org (policy=temperror);
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 109163003BC8
-	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2026 18:00:42 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 8D79D3017248
+	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2026 18:40:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1F7622EC571;
-	Sat, 20 Jun 2026 18:00:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B82F5356756;
+	Sat, 20 Jun 2026 18:40:38 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.19])
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 09CDC23392B
-	for <linux-doc@vger.kernel.org>; Sat, 20 Jun 2026 18:00:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A4F4270EC1;
+	Sat, 20 Jun 2026 18:40:35 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781978441; cv=none; b=k1EONnvecRIiEpjkUDIg/aXALnQqYsOQZdN87tDb1JUnTSeCQX/sLmUJBT9VCD/BPEzjjPgjW4d7ae+ub1wjY6TucyaM4ieP30sQMmfQkYqjiRs5klviXN9pDTuOFwfBQy2yw7I9MVqM37LWmzc2wQvxtOiNlc2007ec168ttmo=
+	t=1781980838; cv=none; b=eHCedIKnVR03gR6RONuSC/IBbQ2dH5hCm0dxWEmGyGgaF6yyMvjxJmv1JW3g0IG+rMrtSf8IhnpNH9eLk/eMl1TqgDPd6/gL+4N8YS9uB8XtT1jPbnM7J7Nz1O7mpV8XNnpo0/w+B3FTnjWrteVY7a1JZC4qY2W/Jci2zs4LktQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781978441; c=relaxed/simple;
-	bh=vufYTHg5KbZsl2Z1Y7JLC29LOL/oWg0GcpcgNuxRnuI=;
-	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=r7bHijz3i1EzpYWmiVl1KeiEAW/wq+gsFj2bkytV9dqZkh5NKalO0RNMiPLeze/wtA5E7p0VkAjIyvwLb+4JnWdr57jiWunVLygsb1bFWbyxhi7ULjmCTuLUyIrZDmFmZ238HBPGZ3jXyrJarzxuuFv1+j+oc5I9ojx04Cqzc0Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=BD5t3mqb; arc=none smtp.client-ip=192.198.163.19
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1781978437; x=1813514437;
-  h=date:from:to:cc:subject:message-id:mime-version;
-  bh=vufYTHg5KbZsl2Z1Y7JLC29LOL/oWg0GcpcgNuxRnuI=;
-  b=BD5t3mqbejQh6z/LpbLsT/z2nd/LTA0kKlM8m07DZq078iG4TGJHrWgX
-   YRPVrwMfywx5PdO616Lc4T9WEZ2F6vx9fXxqgy8ziEONXO4bs6xO95i4K
-   FwIXlMjR0dvuQkgMy+7pOYEXE8rR78K+h2ycj9VyKRdJiUGBsyBU+5hJz
-   8TVjB+h3WoK2waSGvr29yIiBb1z8MU1xRYGrv432aqz8wwpd8/gIAWK0V
-   +uCVi+4mdG6+qAOW18vnZP/sL8oFf5DabLUshuZZy651A9BVLP01cI7g3
-   cVl2aqpbCPTHa4nXIRj+vFLGsdZs1VjcLcGXqUEJY9WHtObCK347xU5B0
-   w==;
-X-CSE-ConnectionGUID: uTTfn1YsSeuB8wd94rlX2A==
-X-CSE-MsgGUID: b0WBmIsKTF+3z2bGol7yNA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11823"; a="81751914"
-X-IronPort-AV: E=Sophos;i="6.24,215,1774335600"; 
-   d="scan'208";a="81751914"
-Received: from orviesa007.jf.intel.com ([10.64.159.147])
-  by fmvoesa113.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Jun 2026 11:00:37 -0700
-X-CSE-ConnectionGUID: nzFAam2GTR6D61ouAbIsJw==
-X-CSE-MsgGUID: zqHMjKGzSayrrHBJ/TCD4g==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.24,215,1774335600"; 
-   d="scan'208";a="248899306"
-Received: from igk-lkp-server01.igk.intel.com (HELO 892db79562d4) ([10.211.93.152])
-  by orviesa007.jf.intel.com with ESMTP; 20 Jun 2026 11:00:35 -0700
-Received: from kbuild by 892db79562d4 with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1wazzc-000000005k1-2xLg;
-	Sat, 20 Jun 2026 18:00:32 +0000
-Date: Sat, 20 Jun 2026 19:59:39 +0200
-From: kernel test robot <lkp@intel.com>
-To: "Stefan =?utf-8?Q?D=C3=B6singer"?= <stefandoesinger@gmail.com>
-Cc: oe-kbuild-all@lists.linux.dev, linux-doc@vger.kernel.org
-Subject: [stefandoesinger-zx297520:mfd 2/124] htmldocs: Warning:
- MAINTAINERS references a file that doesn't exist:
- Documentation/devicetree/zte,zx297520v3-*
-Message-ID: <202606201944.Xa050xUX-lkp@intel.com>
-User-Agent: s-nail v14.9.25
+	s=arc-20240116; t=1781980838; c=relaxed/simple;
+	bh=Q3Xiyt4t3Ff3Sfqm5NWLG7I25RL/Sxz6X59u3CHU7Qs=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=kQB8Uaue/peWl2CCAhoNjw96dv3J8AJhNF5Zgg4wG3A3L1tn2VQ73cZhWirktYMy8TaPZ+eADGzXDczhz6LNFydYb9x2846lZYjGfMRbm6rvvCewjJr/D6NwEre6B43EsQQ+m+/dVrNtGIitZ/Q/IFfigXHCiiQbcVLRrngH0D8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=pass smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=yOYjAXtM; arc=none smtp.client-ip=198.137.202.133
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+	bh=lF91LOryZhh9Xbnlao0wR5FYAQfbHc7j4pr9N+nyMk8=; b=yOYjAXtMGYVQWk4we9CyvduKi2
+	oed/dqL5xd+1AI/uU5hz6klED6dWMSLYh6AaKGeM25jLsMF7LtVD9PraB2Z6+xPdMTiGcrdms43I1
+	1FJRh5s/Jov8kkAzdrD3FVLhTJmctvCbKDOMWZzoOPs8NPmbOMUEaHY/8MS6Lq1Fkwa1g8jU81ia5
+	UY6YRIV5Z/w+TuUGocFORYNXc0YxWyeUeO6qRU2OkSvMhjYY3hKTz8l+dVuVYYF1M7FJ2F4tKQobY
+	i0pUlVnywo+zG5x2CVrLs1aOjr9dv3Xda3ervxJpvKfTHAiPCnfgmndOx8F4gXwkDojfF8JUFmvCj
+	O77u0nqA==;
+Received: from [50.53.43.113] (helo=[192.168.254.34])
+	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+	id 1wb0cL-00000003VFx-3del;
+	Sat, 20 Jun 2026 18:40:33 +0000
+Message-ID: <626477f6-8bda-4cac-8341-c720fd279ba3@infradead.org>
+Date: Sat, 20 Jun 2026 11:40:32 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] docs: ipmi: Fix path of the "hotmod" module parameter
+To: Zenghui Yu <zenghui.yu@linux.dev>,
+ openipmi-developer@lists.sourceforge.net, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Cc: corey@minyard.net, corbet@lwn.net, skhan@linuxfoundation.org
+References: <20260620122747.7902-1-zenghui.yu@linux.dev>
+Content-Language: en-US
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <20260620122747.7902-1-zenghui.yu@linux.dev>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-4.16 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [-1.46 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-92988-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[infradead.org:?];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-92989-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:zenghui.yu@linux.dev,m:openipmi-developer@lists.sourceforge.net,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:corey@minyard.net,m:corbet@lwn.net,m:skhan@linuxfoundation.org,s:lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FORGED_SENDER(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:stefandoesinger@gmail.com,m:oe-kbuild-all@lists.linux.dev,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+];
-	RCPT_COUNT_THREE(0.00)[3];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DMARC_DNSFAIL(0.00)[infradead.org : SPF/DKIM temp error,none];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[7];
+	R_DKIM_TEMPFAIL(0.00)[infradead.org:s=bombadil.20210309];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,gitlab.com:url]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,linux.dev:email,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: D42B16A9711
+X-Rspamd-Queue-Id: 265F46A97C0
 
-tree:   https://gitlab.com/stefandoesinger/zx297520-kernel mfd
-head:   c94d760b3ed42a18ecbae9e63d7010c770a8c042
-commit: 1e6a3951315be7aa7acb8380b0bb39dde1507e4b [2/124] dt-bindings: clk: zte: Add zx297520v3 top clock and reset bindings
-compiler: clang version 22.1.8 (https://github.com/llvm/llvm-project ca7933e47d3a3451d81e72ac174dcb5aa28b59d1)
-docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
-reproduce: (https://download.01.org/0day-ci/archive/20260620/202606201944.Xa050xUX-lkp@intel.com/reproduce)
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202606201944.Xa050xUX-lkp@intel.com/
 
-All warnings (new ones prefixed by >>):
+On 6/20/26 5:27 AM, Zenghui Yu wrote:
+> The correct path of the "hotmod" module parameter should be
+> /sys/module/ipmi_si/parameters/hotmod. Fix it.
+> 
+> Signed-off-by: Zenghui Yu <zenghui.yu@linux.dev>
+> ---
+>  Documentation/driver-api/ipmi.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-   Warning: Documentation/translations/zh_CN/filesystems/gfs2-uevents.rst references a file that doesn't exist: Documentation/filesystems/gfs2-uevents.rst
-   Warning: Documentation/translations/zh_CN/filesystems/gfs2.rst references a file that doesn't exist: Documentation/filesystems/gfs2.rst
-   Warning: Documentation/translations/zh_CN/how-to.rst references a file that doesn't exist: Documentation/xxx/xxx.rst
-   Warning: Documentation/translations/zh_CN/networking/xfrm_proc.rst references a file that doesn't exist: Documentation/networking/xfrm_proc.rst
-   Warning: Documentation/translations/zh_CN/scsi/scsi_mid_low_api.rst references a file that doesn't exist: Documentation/Configure.help
->> Warning: MAINTAINERS references a file that doesn't exist: Documentation/devicetree/zte,zx297520v3-*
-   Warning: MAINTAINERS references a file that doesn't exist: Documentation/ABI/testing/sysfs-platform-ayaneo
-   Warning: MAINTAINERS references a file that doesn't exist: Documentation/devicetree/bindings/display/bridge/megachips-stdpxxxx-ge-b850v3-fw.txt
-   Warning: MAINTAINERS references a file that doesn't exist: Documentation/devicetree/bindings/embedded-controller/qcom,hamoa-crd-ec.yaml
-   Warning: arch/powerpc/sysdev/mpic.c references a file that doesn't exist: Documentation/devicetree/bindings/powerpc/fsl/mpic.txt
-   Warning: drivers/net/ethernet/smsc/Kconfig references a file that doesn't exist: file:Documentation/networking/device_drivers/ethernet/smsc/smc9.rst
+There are several other places that use /sys/modules/ instead of
+/sys/module/.
 
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+Would you care to fix those also?
+
+thanks.
+-- 
+~Randy
+
 
