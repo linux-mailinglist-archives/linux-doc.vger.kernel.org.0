@@ -1,62 +1,61 @@
-Return-Path: <linux-doc+bounces-92970-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92971-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id OZA+HGvqNWpJ6AYAu9opvQ
-	(envelope-from <linux-doc+bounces-92970-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2026 03:18:35 +0200
+	id 42oYIXLqNWpO6AYAu9opvQ
+	(envelope-from <linux-doc+bounces-92971-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2026 03:18:42 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A70BF6A825C
-	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2026 03:18:34 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id C87C76A8266
+	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2026 03:18:41 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b=CNnfEP1b;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92970-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92970-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b=C3SiW+s5;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92971-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-92971-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=infradead.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 1FB7F3033FAD
-	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2026 01:18:33 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 14BF2303C3DD
+	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2026 01:18:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7E86523741;
-	Sat, 20 Jun 2026 01:18:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A754C7E792;
+	Sat, 20 Jun 2026 01:18:36 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D4232B640;
-	Sat, 20 Jun 2026 01:18:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B77A8B640;
+	Sat, 20 Jun 2026 01:18:34 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781918312; cv=none; b=XD3eo5kztCd5RdZm/zpUUA+LI+9eqMHWvbPPw93mi6z2i0F2QveLUTab41E/a7KjFvQVgy0y9yrjXrWMoSxBK4ufBWPg6awGTw979qxS9T7NADt8YhLJrM+usJHv0zCAE8FpRhjig9jRRI9yD7R60uPG3+cor61KKPVdJhoyU3k=
+	t=1781918316; cv=none; b=opAxz2T4JotV3ylbiwFkQlRhxDIcQTnxwMNOhyAICmnteSnyjU396K2Uy8dosMhCk7vDj4CZRrgwUyN7FA4X1qNnwS1JFAspHC2yyG2P5IQd0Xyw98JPo7I1P+n0UY+dGSzR7k3yGbInaQyh3pZ7jj61BvZPNFXsGJ2w3iSkJFs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781918312; c=relaxed/simple;
-	bh=2DQwFU2T+j2hBUyM27HnhXeI08Va+FlH34kCcEhyuh0=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=KFEIatYXpgGq/6KH2CjYIa3FDMwJW9y9OVv6Hzi61VUuyPL9z6qu5/XJzgHUPtd9r/GWKx4WoKCC0hkVhCrwQVDcMVmaII15YfgthN04KZepDaM28rx/31y3hoVByg5yArgbXmOmtNQQeOcTFS0yovIiQQGq/VqiwVYvDxnhW4s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=pass smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=CNnfEP1b; arc=none smtp.client-ip=198.137.202.133
+	s=arc-20240116; t=1781918316; c=relaxed/simple;
+	bh=VS9ZBMz5EOWgb9lvQv+a+SsnLfs+Evzrr4S4/qAPDR8=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=LrL2ktrIZi0Cx6lqe2WXMeveHZMk1JntjYtZ2Fn1HJtQ14c2diYWQq9o9ObwNd9zi4sl61sBQMFMPbTa/dofszBFsDeHNzqn3NXp8ardkb5YId4eZQfs30mGu/zJxSg0OJP9FZ0GgQ3/kYw4H1oubkutSwBvGKNT2J/yz6J3vtA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=pass smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=C3SiW+s5; arc=none smtp.client-ip=198.137.202.133
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+	Content-Type:MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-ID:Content-Description:In-Reply-To:References;
-	bh=NkgO355oxHbx52T9daCiiOCcvbGcEwWSKsS2xnP61k0=; b=CNnfEP1bIESlW7FQE+dMhMy7o+
-	/jqchWG/e45KcBM5SHmzTbv8U7CRVttTIAOMcPuLa5mzTuCka80UPaCkZkZcfwnjzYvBZFqJNp6AB
-	MtntCOKOoke2wzKYQ8acP/gZFg99OH/l42JjS/I6KMW/R9f1XqmIIk7u4tkVIrXpeHEQojGBlVWKP
-	kI4N6hc5cJRVffWZkNmSBMwNFNitZ04wyBwnqjbZDpYRUKz/ixFQf4A08pR/U8+yfo3YUnMfCPwAk
-	UxK1hH8AQ3Z2V5lHuNc+c9v7pcHDfttVhVjmkcdWixxiAVtGphfcUInURMUIdQZU+R5Lr3XIf+G7q
-	P7Temlzg==;
+	bh=AZK905ohyaY3kNqreNidFLu7yEOQOFl2JdDuTg2xTOo=; b=C3SiW+s5sxihMaeNW+2qCITEac
+	Y1vC0TReGJDnyo65T2Ht0pQa5i7GKrcYVkZ12pu8Bf0m0734Cws8Dnclq6oUNvKeGsPF8ntNzauON
+	OXmHgIIE3D5+EEBOeo5frV1K3ZNrutu7WE0NF5fPXrDypVzZQxYdQoW7vO3Zg/ehT5SLIhMKrrUO/
+	oDmWSGiaWsW0INKPOF5tNxnqPmhSm1EeHdtjOZOEq6gcEtRNwf865+YY0tkL88WYPGV5XERwDbRvZ
+	0g0kYf+BMMDNGPOmsbBTCvhIpHMZj3snFEbDmsrmZUYmJKpKwCFCDqrJ4v3j8nO0+0MAlguB4wDrD
+	pGA7S5VQ==;
 Received: from [50.53.43.113] (helo=bombadil.infradead.org)
 	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wakLl-0000000375C-3btx;
-	Sat, 20 Jun 2026 01:18:21 +0000
+	id 1wakLy-0000000375O-0OMG;
+	Sat, 20 Jun 2026 01:18:34 +0000
 From: Randy Dunlap <rdunlap@infradead.org>
 To: linux-doc@vger.kernel.org
 Cc: Randy Dunlap <rdunlap@infradead.org>,
-	Andreas Kemnade <andreas@kemnade.info>,
-	Matti Vaittinen <mazziesaccount@gmail.com>,
-	Sebastian Reichel <sebastian.reichel@collabora.com>,
-	linux-pm@vger.kernel.org
-Subject: [PATCH] power: supply: bd71828: add a terminating table border
-Date: Fri, 19 Jun 2026 18:18:21 -0700
-Message-ID: <20260620011821.3568674-1-rdunlap@infradead.org>
+	=?UTF-8?q?Nuno=20S=C3=A1?= <nuno.sa@analog.com>,
+	Guenter Roeck <linux@roeck-us.net>,
+	linux-hwmon@vger.kernel.org
+Subject: [PATCH] hwmon: ltc4283: fix malformed table docs build error
+Date: Fri, 19 Jun 2026 18:18:30 -0700
+Message-ID: <20260620011833.3568693-1-rdunlap@infradead.org>
 X-Mailer: git-send-email 2.54.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -64,70 +63,77 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-1.16 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64];
 	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TO_DN_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[infradead.org,kemnade.info,gmail.com,collabora.com,vger.kernel.org];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-92970-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORWARDED(0.00)[lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-92971-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:linux-doc@vger.kernel.org,m:rdunlap@infradead.org,m:nuno.sa@analog.com,m:linux@roeck-us.net,m:linux-hwmon@vger.kernel.org,s:lists@lfdr.de];
 	FORGED_SENDER(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:linux-doc@vger.kernel.org,m:rdunlap@infradead.org,m:andreas@kemnade.info,m:mazziesaccount@gmail.com,m:sebastian.reichel@collabora.com,m:linux-pm@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[5];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[infradead.org:+];
 	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,infradead.org:dkim,infradead.org:email,infradead.org:mid,infradead.org:from_mime,kemnade.info:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,infradead.org:dkim,infradead.org:email,infradead.org:mid,infradead.org:from_mime,roeck-us.net:email,analog.com:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: A70BF6A825C
+X-Rspamd-Queue-Id: C87C76A8266
 
-Fix a documentation build error by adding a bottom table border:
+Expand the table borders (upper & lower) to prevent a documentation
+build error:
 
-Documentation/ABI/testing/sysfs-class-power-bd71828:1: ERROR: Malformed table.
-No bottom table border found.
-============  ===========================================
-1             automatic adjustment of input current limit
-0             no adjustment of input current limit. This
-              helps for more unusual power sources like
-              solar modules. [docutils]
+Documentation/hwmon/ltc4283.rst:261: ERROR: Malformed table.
+Text in column margin in table line 3.
+=======================         ==========================================
+power1_failed_fault_log         Set to 1 by a power1 fault occurring.
+power1_good_input_fault_log     Set to 1 by a power1 good input fault occurring at PGIO3.
 
-Fixes: e92786dd86a2 ("power: supply: bd71828: sysfs for auto input current limitation")
+Fixes: dd63353a0b5e ("hwmon: ltc4283: Add support for the LTC4283 Swap Controller")
 Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
 ---
-Cc: Andreas Kemnade <andreas@kemnade.info>
-Cc: Matti Vaittinen <mazziesaccount@gmail.com>
-Cc: Sebastian Reichel <sebastian.reichel@collabora.com>
-Cc: linux-pm@vger.kernel.org
+Cc: Nuno Sá <nuno.sa@analog.com>
+Cc: Guenter Roeck <linux@roeck-us.net>
+Cc: linux-hwmon@vger.kernel.org
 
- Documentation/ABI/testing/sysfs-class-power-bd71828 |    1 +
- 1 file changed, 1 insertion(+)
+ Documentation/hwmon/ltc4283.rst |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
---- linux-next-20260619.orig/Documentation/ABI/testing/sysfs-class-power-bd71828
-+++ linux-next-20260619/Documentation/ABI/testing/sysfs-class-power-bd71828
-@@ -10,3 +10,4 @@ Description:
- 		0             no adjustment of input current limit. This
- 		              helps for more unusual power sources like
- 			      solar modules.
-+		============  ===========================================
+--- linux-next-20260619.orig/Documentation/hwmon/ltc4283.rst
++++ linux-next-20260619/Documentation/hwmon/ltc4283.rst
+@@ -256,7 +256,7 @@ these logs can be cleared by writing in
+ ``/sys/kernel/debug/i2c/i2c-[X]/[X]-addr/``
+ contains the following attributes:
+ 
+-=======================		==========================================
++==============================  ==========================================================
+ power1_failed_fault_log		Set to 1 by a power1 fault occurring.
+ power1_good_input_fault_log	Set to 1 by a power1 good input fault occurring at PGIO3.
+ in11_fet_short_fault_log	Set to 1 when a FET-short fault occurs.
+@@ -264,4 +264,4 @@ in11_fet_bad_fault_log		Set to 1 when a
+ in0_lcrit_fault_log		Set to 1 by a VIN undervoltage fault occurring.
+ in0_crit_fault_log		Set to 1 by a VIN overvoltage fault occurring.
+ curr1_crit_fault_log		Set to 1 by an overcurrent fault occurring.
+-======================= 	==========================================
++==============================  ==========================================================
 
