@@ -1,180 +1,199 @@
-Return-Path: <linux-doc+bounces-92972-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92974-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id uQ8AB2OHNmrBAwcAu9opvQ
-	(envelope-from <linux-doc+bounces-92972-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2026 14:28:19 +0200
+	id TuC7I/yuNmoZDQcAu9opvQ
+	(envelope-from <linux-doc+bounces-92974-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2026 17:17:16 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7BD796A8E3C
-	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2026 14:28:18 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8FCA96A912B
+	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2026 17:17:15 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=YeIX3trQ;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92972-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92972-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=e1HvPZUn;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92974-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92974-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 399A5300F184
-	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2026 12:28:17 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 7F927300404D
+	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2026 15:17:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 08CA3391842;
-	Sat, 20 Jun 2026 12:28:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 67F733911AF;
+	Sat, 20 Jun 2026 15:17:09 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 915E82C21C5
-	for <linux-doc@vger.kernel.org>; Sat, 20 Jun 2026 12:28:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 229941C8603;
+	Sat, 20 Jun 2026 15:17:07 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781958495; cv=none; b=NUst4SrKzCvVwjAb78CQv74FbQyst4leB0btzkMJaK0AxKl3gmJymCYJ1/KnT4mfkCazLgb7MC+eMstaNv6yd1sj7t83NdRtdGCAjYV5vDhlIxPDsX/PqHtj8VLRiqaL6WnVBnD432LIqN+Lhq+NeAoLgEeYAJ9tUNIOkEZXpRI=
+	t=1781968629; cv=none; b=cyiP7ye3mqk5GOepsToKfK5b4G7B4siHETxDpo99tPwgN3a4QWReCD5uxTUOWtz1K9mOXwBuKasiDldBST+8oZX4yxCvyIY+Fa/y/bnELM8iKPuh1vJYBYJlRJwDHCdARqfzCLnuCE0MesxaVn95HY8vL7i79xZqW7g8wP2Gp14=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781958495; c=relaxed/simple;
-	bh=J+q2tm0dpONzieAzxCQJ2z9vwqaC+mViTCZ8c5SfpM8=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=ublpJNxvW/yy5X8cogSs+3E++E+eeFDY1bMVf9n2MmOfpyf6/QthtgwjOk9bk3w9W4H6Zm5Ag6KDEAMkDUwyLKJdeKBU0/wr7PIzHTcB1S8TsohFcy61uCK9l54YK0tyH6sCRhX3jZ8Is0uQzwktii+owJRio5r0y908b33Pf8s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=YeIX3trQ; arc=none smtp.client-ip=209.85.128.51
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-490b8adf7efso5252705e9.1
-        for <linux-doc@vger.kernel.org>; Sat, 20 Jun 2026 05:28:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781958493; x=1782563293; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Im+iZLIRK/53fqygAoYA6+h4HUl3WPCXC1dHO2ua9IA=;
-        b=YeIX3trQt8JrXRqVbjPreShbEPIHIvv1dZ+WWLh/gfSaVp0Jen2WsFUD6/BbxWJ2Kq
-         ytU+eGD3EDS7kMvdTTR2Y9VBYLY7KguuKxrrS9VO+n4vUQC82LLImTHaEL5gM0orbhxu
-         8WBEiXfwdoHv8EKl/FvJc9lwjph4vU4G8HZ+7ytrSij36VFmRodydc7N2lxNwxrgr4sc
-         ERPsrGD1jslOQKyX9Snz6cb1M4HvtsZCYD8+PWGg5HaEf63idi36QKPjE4AnFk1RwRBn
-         LmvtHDyIA6ohKgL6KnLlbN4AIg7ElRFTJ6/x9wkuieGeGzfvW68fhgtiAS4tprM5wh+6
-         vpoA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781958493; x=1782563293;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Im+iZLIRK/53fqygAoYA6+h4HUl3WPCXC1dHO2ua9IA=;
-        b=CdQKJaNqgPdwI+J5w6fYAM2LEf1pqtIfC+Uh5LUKnYwYAujdHk8G1eFJ3TWCEvl3lb
-         iSUg9WA9cc46dl/KUWxfgf6V8D1DaGy/cKYr/iAqmQwzvv+lmj/tmKq0xWM4VO11Z6kM
-         OLTWHe2tiIzGOrGwRZNTNwuLJ+Vd40wZyAQG5hoFGxGCjjfEFnURzmzD+wQk6fh7KhLa
-         WT6DkGWZTkaN5dh/ITMNEtq0XIvbFJgpKMntm0ZKRcx/GxEL07pJ+JEwddmqBNDixn2h
-         Uq7M9VkQefwWUp9d4bMvtqU+jJhnXXrwSNyHBV85qKHqjPV09Y276IuM8s4CcZc98ooz
-         IZSg==
-X-Forwarded-Encrypted: i=1; AFNElJ8pp/whrIdWqVmQVGy7VuQueK05Tk9RIzXPW03Mru/iRznBKqbk7SqMQb/E0//gdbmyc6R/cJ4S6sk=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yzc6E0xRDsA5tQiU6YOde1dRjgWXu3fvq8giISrG9O919RZBSru
-	R3uy15yR5yV87SsiYULY6Hi4/ICCpqC5fu+n+oTbESa3WfVSC1QVSBMc
-X-Gm-Gg: AfdE7ck+QQbupqMx28f2MiZxxjHniwIfPXWKbjOOHBQKcK5nixEqL55Lz6ARI4cWMT9
-	1DU9Es34H9wc7cbfBGs3R1ucH8w9+H8pxcHEbbf+K+1HSbdXj/AmWZl2Po2WcXa9Iw/FcFkr9uV
-	LZSpByo3+CqkF5ZNuSU8Otpyt+m4Z8xR1Yb6mM/WBo9VB3wlzUn5VPz0vVgdnRaNOj5Lsd4ztmc
-	aetzFuEvsy80AFmT5RzcpN4RmSQqgHEmThJeLmDffPYel6Z5sGfVaBRBptavN+CShnoSyQgV6UP
-	jDLWWPKiq3HYePPmKry2UTfsTVznzQlwu0n40trgPjplfDeMassXAYYi+aMquUw0dRWfk7ecqj2
-	5hbKu8zokeAeAP0DBw7cETTjYdnSQNLpDVhkgQcUNMdDyrexChsdsAOsABxZYmQ9Q2qY+KHLRlC
-	a4G9zgXyUNjEpeUG25PkXtm1nR5oLvcSDAtNpBW+4uLedZaFhQ+SLOKNYwFHwkSDrVYWnGwzwVw
-	EX1b/TYuKSCoxDs
-X-Received: by 2002:a05:600c:630e:b0:492:38cb:a7ff with SMTP id 5b1f17b1804b1-49246e60fc7mr31082325e9.7.1781958492836;
-        Sat, 20 Jun 2026 05:28:12 -0700 (PDT)
-Received: from doehyun-dev.pradel.rg.cispa.de (x06.xlate.fw.cispa.de. [195.37.157.6])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49249207dabsm101338325e9.0.2026.06.20.05.28.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 20 Jun 2026 05:28:12 -0700 (PDT)
-From: Doehyun Baek <doehyunbaek@gmail.com>
-To: Tejun Heo <tj@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>
-Cc: Johannes Weiner <hannes@cmpxchg.org>,
-	=?UTF-8?q?Michal=20Koutn=C3=BD?= <mkoutny@suse.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Shakeel Butt <shakeel.butt@linux.dev>,
-	Roman Gushchin <roman.gushchin@linux.dev>,
-	Yosry Ahmed <yosry@kernel.org>,
-	Nhat Pham <nphamcs@gmail.com>,
-	cgroups@vger.kernel.org,
-	linux-doc@vger.kernel.org,
+	s=arc-20240116; t=1781968629; c=relaxed/simple;
+	bh=jeJsoZHHjsHCB1QaVDspMd45ZNErBfh+X4RXxFkMx0A=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=j0JlQ48Ds/2s2ZdENPA35FOqvjbxZh2wfcS8iCc+v+sTrNE6lhL4uEuJjKv55txtMmYGmRZ4o79BL2kF8j5f5ocUaTSoeTdOe4sb3LSn7cCPn8FjNcRb4PRBZSQp93HDS8ustut8Sn/85O7+f0wPDPofmroOAu8ePvLS6C+PodU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=e1HvPZUn; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 851181F000E9;
+	Sat, 20 Jun 2026 15:17:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1781968627;
+	bh=eyiRJczF7wbhF8VDuUywOe9gqRXCgnMSHEuOuFReqC4=;
+	h=From:To:Cc:Subject:Date;
+	b=e1HvPZUnit82bOtHf4Nsw/c5vzf2zO9M5MoLqZGJ9PD1PiaEonJR7AZu5sY1LDaDe
+	 vtvr6TgurTH6InKTuoS7E/TkrlUbESkOA+lRz/r5RVs/7plmB2xG5j5x60V/O1rESb
+	 hnuq+RTjiT2/Y9Hd22X41CPlvhkKzDwpERD7nas9TO1AXCMuuVpv6bA+3zJPVxakzk
+	 usSIBbDNdFMM7GfeF/8g58fhn1xDPQj584m8h44G1jnCo3nPnlQrsb0l4C8x+FaOwK
+	 FqRmqdoPKUX5/Suh/41tky1V9QCuCiZI+silB6HI1RPuzjtESxOryuNfXx2lej76c1
+	 KPslwesEaL8Gg==
+From: "Masami Hiramatsu (Google)" <mhiramat@kernel.org>
+To: Steven Rostedt <rostedt@goodmis.org>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
 	linux-kernel@vger.kernel.org,
-	Doehyun Baek <doehyunbaek@gmail.com>
-Subject: [PATCH] Docs/admin-guide/cgroup-v2: fix memory.stat doc details
-Date: Sat, 20 Jun 2026 12:27:51 +0000
-Message-ID: <20260620122751.388770-1-doehyunbaek@gmail.com>
+	linux-trace-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kselftest@vger.kernel.org
+Subject: [PATCH v6 0/8] tracing/probes: Add more typecast features
+Date: Sun, 21 Jun 2026 00:17:02 +0900
+Message-ID: <178196862271.560995.5255615288323003663.stgit@devnote2>
 X-Mailer: git-send-email 2.43.0
+User-Agent: StGit/0.19
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-4.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[cmpxchg.org,suse.com,linux-foundation.org,linux.dev,kernel.org,gmail.com,vger.kernel.org];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TAGGED_FROM(0.00)[bounces-92972-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:tj@kernel.org,m:corbet@lwn.net,m:hannes@cmpxchg.org,m:mkoutny@suse.com,m:akpm@linux-foundation.org,m:shakeel.butt@linux.dev,m:roman.gushchin@linux.dev,m:yosry@kernel.org,m:nphamcs@gmail.com,m:cgroups@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:doehyunbaek@gmail.com,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[doehyunbaek@gmail.com,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[13];
 	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:rostedt@goodmis.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:mhiramat@kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[mhiramat@kernel.org,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-92974-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[doehyunbaek@gmail.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	ALIAS_RESOLVED(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[mhiramat@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[devnote2:mid,vger.kernel.org:from_smtp,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 7BD796A8E3C
+X-Rspamd-Queue-Id: 8FCA96A912B
 
-Fix minor cgroup v2 memory.stat documentation issues.  Correct the
-vmalloc per-node marker now that vmalloc uses the native NR_VMALLOC node
-stat, and document zswap_incomp as a byte-valued memory amount instead
-of as a page counter.
+Hi,
 
-Fixes: c466412c73c3 ("mm: memcontrol: switch to native NR_VMALLOC vmstat counter")
-Fixes: 5ad41a38c364 ("mm: zswap: add per-memcg stat for incompressible pages")
-Signed-off-by: Doehyun Baek <doehyunbaek@gmail.com>
+Here is the 6th version of series to introduce more typecast features
+to probe events. The previous version is here:
+
+ 
+
+In this version, I fixed some issues found by Sashiko reviews (again),
+drop the first bugfix which is merged to probes/core, add new fetcharg
+dump patch[1/8] and make typecast always nested[3/8]. This version also
+allows all probe events to use $current.
+
+Steve introduced BTF typecast feature for eprobe[1].
+This series extends it and add more options:
+
+1. Expanding BTF typecast to kprobe and fprobe.
+   (currently only function entry/exit)
+
+2. Introduce container_of like typecast. This adds a "assigned
+   member" option to the typecast.
+
+   (STRUCT,MEMBER)VAR->ANOTHER_MEMBER
+
+   This casts VAR to STRUCT type but the VAR is as the address
+   of STRUCT.MEMBER. In C, it is:
+
+   container_of(VAR, STRUCT, MEMBER)->ANOTHER_MEMBER
+
+3. Support nested typecast, e.g.
+
+   (STRUCT)((STRUCT2)VAR->MEMBER2)->MEMBER
+
+   the nest level must be smaller than 3.
+
+4. Add $current variable to point "current" task_struct.
+   This is useful with typecast, e.g.
+
+   (task_struct)$current->pid
+
+5. per-cpu dereference support.
+
+   Intrdouce this_cpu_read(VAR) and this_cpu_ptr(VAR) to
+   access per-cpu data on the current CPU (accessing other CPU
+   data is not stable, because it can be changed.)
+
+   You can access the member of per-cpu data structure using
+   typecast like:
+
+   (STRUCT)this_cpu_ptr(VAR)->MEMBER
+
+And added fetcharg dump feature (for debug) and updated test scripts
+to test part of them.
+
+Thanks,
+
 ---
- Documentation/admin-guide/cgroup-v2.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+base-id: cfae4cb90fc8113d52fea1f0a62cd6a36d9df149
 
-diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
-index 993446ab66d0..ce6741f78f4f 100644
---- a/Documentation/admin-guide/cgroup-v2.rst
-+++ b/Documentation/admin-guide/cgroup-v2.rst
-@@ -1570,7 +1570,7 @@ The following nested keys are defined.
- 	  sock (npn)
- 		Amount of memory used in network transmission buffers
- 
--	  vmalloc (npn)
-+	  vmalloc
- 		Amount of memory used for vmap backed memory.
- 
- 	  shmem
-@@ -1735,7 +1735,7 @@ The following nested keys are defined.
- 		Number of pages written from zswap to swap.
- 
- 	  zswap_incomp
--		Number of incompressible pages currently stored in zswap
-+		Amount of memory used by incompressible pages currently stored in zswap
- 		without compression. These pages could not be compressed to
- 		a size smaller than PAGE_SIZE, so they are stored as-is.
- 
+Masami Hiramatsu (Google) (8):
+      tracing/probes: Support dumping fetcharg program for debugging dynamic events
+      tracing/probes: Support typecast for various probe events
+      tracing/probes: Support nested typecast
+      tracing/probes: Type casting always involves nested calls
+      tracing/probes: Support field specifier option for typecast
+      tracing/probes: Add $current variable support
+      tracing/probes: Add this_cpu_read() and this_cpu_ptr() dereference method to fetcharg
+      tracing/probes: Add a new testcase for BTF typecasts
 
-base-commit: 1a3746ccbb0a97bed3c06ccde6b880013b1dddc1
--- 
-2.43.0
 
+ Documentation/trace/eprobetrace.rst                |    9 
+ Documentation/trace/fprobetrace.rst                |   10 
+ Documentation/trace/kprobetrace.rst                |   11 
+ kernel/trace/Kconfig                               |   11 
+ kernel/trace/trace.c                               |    8 
+ kernel/trace/trace_eprobe.c                        |    2 
+ kernel/trace/trace_fprobe.c                        |    2 
+ kernel/trace/trace_kprobe.c                        |    2 
+ kernel/trace/trace_probe.c                         |  571 ++++++++++++++++----
+ kernel/trace/trace_probe.h                         |   95 ++-
+ kernel/trace/trace_probe_tmpl.h                    |   25 +
+ kernel/trace/trace_uprobe.c                        |    3 
+ samples/trace_events/trace-events-sample.c         |   40 +
+ samples/trace_events/trace-events-sample.h         |   34 +
+ .../ftrace/test.d/dynevent/btf_probe_event.tc      |   51 ++
+ .../ftrace/test.d/dynevent/fprobe_syntax_errors.tc |   11 
+ .../ftrace/test.d/kprobe/kprobe_syntax_errors.tc   |   11 
+ .../ftrace/test.d/kprobe/uprobe_syntax_errors.tc   |    5 
+ 18 files changed, 747 insertions(+), 154 deletions(-)
+ create mode 100644 tools/testing/selftests/ftrace/test.d/dynevent/btf_probe_event.tc
+
+--
+Masami Hiramatsu (Google) <mhiramat@kernel.org>
 
