@@ -1,54 +1,54 @@
-Return-Path: <linux-doc+bounces-92991-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-92992-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 8zHqKl71Nmo8HAcAu9opvQ
-	(envelope-from <linux-doc+bounces-92991-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2026 22:17:34 +0200
+	id Gcn5EV/1Nmo9HAcAu9opvQ
+	(envelope-from <linux-doc+bounces-92992-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2026 22:17:35 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 229B76A9ADC
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id A8FA26A9ADD
 	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2026 22:17:34 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=rcpassos.me header.s=purelymail1 header.b=QsxOb2md;
-	dkim=pass header.d=purelymail.com header.s=purelymail1 header.b=bIhbsO1T;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92991-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-92991-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=rcpassos.me header.s=purelymail1 header.b=CIt57S4X;
+	dkim=pass header.d=purelymail.com header.s=purelymail1 header.b=gtq0B14m;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-92992-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-92992-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=reject) header.from=rcpassos.me;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id D63FB30179D1
-	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2026 20:17:32 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id A8CB2300F16F
+	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2026 20:17:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6BEFF1BBBFC;
-	Sat, 20 Jun 2026 20:17:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5E2681F12E0;
+	Sat, 20 Jun 2026 20:17:33 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from sendmail.purelymail.com (sendmail.purelymail.com [34.202.193.197])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 11ADD1F12E0
-	for <linux-doc@vger.kernel.org>; Sat, 20 Jun 2026 20:17:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F258322D7B9
+	for <linux-doc@vger.kernel.org>; Sat, 20 Jun 2026 20:17:31 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781986652; cv=none; b=SQyRg8c8T5tTOIw84hkhitAKYtb3pSJWwOo7tmzXJ/uwK2Fiu4m6VWdaplzrIWo2yHpaH3jaUgbiJ9nVVvjoPuTnYCVNhR37cu+wtEWRoTPSr5ezGW4MSw+dQiKlLE/it3nRILTSgQ3IyAPee8ifHtdM0nwFGupaaABicCdebyY=
+	t=1781986653; cv=none; b=OqAoOl7UFGHGBsdvwazm3macG+vqUS5z9W3tA2c7/6Qo4vh3oChC0OpClsSqswDbn0EB0x/gWcLjnwajFUEoAFjvEMlqMD94+dAmS2Ot2cEXrtSm57RPjEJbXtlp0jKTYGoBFwm51ExOySZFOOJkj2f6c7w6LBizJIzgi8L7phc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781986652; c=relaxed/simple;
-	bh=67sqZVOmL2hmCHdypHied2CwQjDDthN3QlDNw2wH4C4=;
+	s=arc-20240116; t=1781986653; c=relaxed/simple;
+	bh=fDCFrf3ey1Tb10UufhoMb9Qf+gcO8zU8+mdg8cYOTjQ=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=ZMFQnKhyjw6Ft6bH+y2D/IHfDaIwTF/dKXglVxQnz0ZTe5nmP2Fp6gnajVniXmcRbe+Nd2UGQwrXFFYSCP7x/rIF2NvymDCtIix/PU9+tjVA7vKN0K7PAsm9zchEUNP1AM1GeAiIbYOAAaCeXXb9hwfEtWgIqOorIfJ4PaTlwpU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=rcpassos.me; spf=pass smtp.mailfrom=rcpassos.me; dkim=pass (2048-bit key) header.d=rcpassos.me header.i=@rcpassos.me header.b=QsxOb2md; dkim=pass (2048-bit key) header.d=purelymail.com header.i=@purelymail.com header.b=bIhbsO1T; arc=none smtp.client-ip=34.202.193.197
-DKIM-Signature: a=rsa-sha256; b=QsxOb2mdPOHFjvaqVyr/Qi/6X8nR9In730yONRFvWCmrW7eXB8NoXfw097/Y3qoFtuuIr/6brUKdBLXOvxcVUK1V5wnrrYny1hQvBqOq9WA7+Wzb3yhtbso3AgnZWMofDmJcavnMUW72nwQKr5kZyuDLKEUcgEBTAuABso+JaoDgU71Rkes0DUUGHJmAUqc9go7sNXBBgWU/A0xAFSu5tHFZMcP5sG4O4Sb6ozFLHPl1Cenz7hhB85yfuBNopi/jFGKLTz1AzS4ltxDTaMdj3fJHtOYjsxKVjpz4HojhYTT1TnDHCmAW56QsgOnPce7oiiGPfm7ss6DlIM7NQYnl0g==; s=purelymail1; d=rcpassos.me; v=1; bh=67sqZVOmL2hmCHdypHied2CwQjDDthN3QlDNw2wH4C4=; h=Received:From:To:Subject:Date;
-DKIM-Signature: a=rsa-sha256; b=bIhbsO1TGguqq1g8Uiv53GrgJjOHLsaaXaIMVgt/WkXJvuSDZlEoF9eRNGlHbEkzcO9KhyeqJQpfwn8HZeOFPRAnsP6hTyLAquBPSxWZD1Wc/CCwl8oI2zrZp2xoEZ++HZ4rBwpIsxM7UR7qNxFMULq5EX5UUChVX4s0C20LAKAAOThzuYqI+wbyEcbawikimRnpnUfGJ1zLvKi4va0XFP9m560QYPJTHw/fbZ/pPo+k8hAqkajRpGiWMxBI185QJ731VwJ2eS3SEmd/3GNu6BJgu8Rmkko6OEgJxXYUdtIIQaqnK0bOjbtieq8xmjYGo0PCFOSvJ2ainRIdx5vQ8Q==; s=purelymail1; d=purelymail.com; v=1; bh=67sqZVOmL2hmCHdypHied2CwQjDDthN3QlDNw2wH4C4=; h=Feedback-ID:Received:From:To:Subject:Date;
+	 MIME-Version:Content-Type; b=fCmxvd4xjrsHsQ2tBWnurZe245/Q0FKiBtuBHNk4zlLNOxgNIyt5lnNKb2CWz+ZsLT/akFhi2tdTJYQ/Ai740AubNfD0K6VgD/7gyTdmL4FZLksIZZIdPU/x/h3zy/FXMjyQJ8SLeM38DQaxUt5yNPgT8XOkJXG6aCmP43fY5Bk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=rcpassos.me; spf=pass smtp.mailfrom=rcpassos.me; dkim=pass (2048-bit key) header.d=rcpassos.me header.i=@rcpassos.me header.b=CIt57S4X; dkim=pass (2048-bit key) header.d=purelymail.com header.i=@purelymail.com header.b=gtq0B14m; arc=none smtp.client-ip=34.202.193.197
+DKIM-Signature: a=rsa-sha256; b=CIt57S4XcAT/O14mvE4u5STcUroQdpaT0+h5543wUpIOMFgdb+/1kIZunGoEmBiqoJW46G5OD7Oww7UXsC/HGNpkyO+4Uyn5rkI1aIOD8pWtbw6GFUodZK5ttDL3qJ/nyIoZbstOalGkd483xEurYrTwIriE/PPCR3Yeb3SzKMV+RdRVZd3hS/qWrMSje2LARkPGOUHvemqS79shtGir4+VIj7Za+YS4Fh9L9p8wrqDiLqDNY086J1eA1x8I8uNdpXH9qs28JHnOn7mEgtgK9zkXVNvr7PPjVGkWC6lAsGGTI6C09yVnTOs1TCRGIWIYrzx6uChu+UeHtiZW+TaBEg==; s=purelymail1; d=rcpassos.me; v=1; bh=fDCFrf3ey1Tb10UufhoMb9Qf+gcO8zU8+mdg8cYOTjQ=; h=Received:From:To:Subject:Date;
+DKIM-Signature: a=rsa-sha256; b=gtq0B14mucXuvbZh0hvZsHdh2UleqhBRP5YyNQ/Clq7bY7fjokrcVaj6yD5YBcqYJCgLJA4RMOG2p/9LE3YaedNRiJ/g5H0QzB4UA52kmSB15FpxodwQDU4IR9hH/DalCSueiKh0SIs87TV3FB7fXz44LDsX34GAp2u7FoVWHw816vZase9C2CHAgdL4DrHHnkojmNzmsg5NQJAOk93kNswVzpWbBXHlIuZQtQKHzyktd91OupStfRagwVhr7tqU+Qev6Agr7m8I+MXy1WNMdMaKi6OLFgBJc1K6pXtJ8NozA9xxyVAdxguXAd2zVc0pddJs+aBPpfXrOuXA6G9z1A==; s=purelymail1; d=purelymail.com; v=1; bh=fDCFrf3ey1Tb10UufhoMb9Qf+gcO8zU8+mdg8cYOTjQ=; h=Feedback-ID:Received:From:To:Subject:Date;
 Feedback-ID: 45355:7809:null:purelymail
 X-Pm-Original-To: linux-doc@vger.kernel.org
 Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id -1982731664;
           (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
-          Sat, 20 Jun 2026 20:17:29 +0000 (UTC)
+          Sat, 20 Jun 2026 20:17:30 +0000 (UTC)
 From: Rafael Passos <rafael@rcpassos.me>
 To: linux-doc@vger.kernel.org
 Cc: corbet@lwn.net,
 	skhan@linuxfoundation.org
-Subject: [PATCH 1/3] Documentation: iio: fix Malformed table for ltc4283
-Date: Sat, 20 Jun 2026 17:16:33 -0300
-Message-ID: <20260620201732.94141-2-rafael@rcpassos.me>
+Subject: [PATCH 2/3] Documentation: xe_drm: fix chars used for subsection
+Date: Sat, 20 Jun 2026 17:16:34 -0300
+Message-ID: <20260620201732.94141-3-rafael@rcpassos.me>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260620201732.94141-1-rafael@rcpassos.me>
 References: <20260620201732.94141-1-rafael@rcpassos.me>
@@ -67,20 +67,20 @@ X-Spamd-Result: default: False [-1.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[rcpassos.me,reject];
 	R_DKIM_ALLOW(-0.20)[rcpassos.me:s=purelymail1,purelymail.com:s=purelymail1];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-92991-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-92992-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_SENDER(0.00)[rafael@rcpassos.me,linux-doc@vger.kernel.org];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_RECIPIENTS(0.00)[m:linux-doc@vger.kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	RCPT_COUNT_THREE(0.00)[3];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	TO_DN_NONE(0.00)[];
@@ -92,50 +92,53 @@ X-Spamd-Result: default: False [-1.16 / 15.00];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[purelymail.com:dkim,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp,rcpassos.me:dkim,rcpassos.me:email,rcpassos.me:mid,rcpassos.me:from_mime]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,purelymail.com:dkim,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,rcpassos.me:dkim,rcpassos.me:email,rcpassos.me:mid,rcpassos.me:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 229B76A9ADC
+X-Rspamd-Queue-Id: A8FA26A9ADD
 
-Longest line in the first column is 27 chars
+Equal signs are reserved for document tiles"=3D"
+this file docs gets imported by driver-uapi.rst,
+and the page title is defined there.
 
 Signed-off-by: Rafael Passos <rafael@rcpassos.me>
 ---
- Documentation/hwmon/ltc4283.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ include/uapi/drm/xe_drm.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/Documentation/hwmon/ltc4283.rst b/Documentation/hwmon/ltc4283.=
-rst
-index a650c595bc8f..44a58ac6ee81 100644
---- a/Documentation/hwmon/ltc4283.rst
-+++ b/Documentation/hwmon/ltc4283.rst
-@@ -256,7 +256,7 @@ these logs can be cleared by writing in the proper rese=
-t_history attribute.
- ``/sys/kernel/debug/i2c/i2c-[X]/[X]-addr/``
- contains the following attributes:
-=20
--=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=09=
-=09=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
- power1_failed_fault_log=09=09Set to 1 by a power1 fault occurring.
- power1_good_input_fault_log=09Set to 1 by a power1 good input fault occurr=
-ing at PGIO3.
- in11_fet_short_fault_log=09Set to 1 when a FET-short fault occurs.
-@@ -264,4 +264,4 @@ in11_fet_bad_fault_log=09=09Set to 1 when a FET-BAD fau=
-lt occurs.
- in0_lcrit_fault_log=09=09Set to 1 by a VIN undervoltage fault occurring.
- in0_crit_fault_log=09=09Set to 1 by a VIN overvoltage fault occurring.
- curr1_crit_fault_log=09=09Set to 1 by an overcurrent fault occurring.
--=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =09=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+diff --git a/include/uapi/drm/xe_drm.h b/include/uapi/drm/xe_drm.h
+index 48e9f1fdb78d..4dfb30e6c8a8 100644
+--- a/include/uapi/drm/xe_drm.h
++++ b/include/uapi/drm/xe_drm.h
+@@ -2537,21 +2537,21 @@ struct drm_xe_exec_queue_set_property {
+  * Refer to Documentation/netlink/specs/drm_ras.yaml for complete interfac=
+e specification.
+  *
+  * Node Registration
+- * =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++ * -----------------
+  *
+  * The driver registers DRM RAS nodes for each error severity level.
+  * enum drm_xe_ras_error_severity defines the node-id, while DRM_XE_RAS_ER=
+ROR_SEVERITY_NAMES maps
+  * node-id to node-name.
+  *
+  * Error Classification
+- * =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++ * --------------------
+  *
+  * Each node contains a list of error counters. Each error is identified b=
+y a error-id and
+  * an error-name. enum drm_xe_ras_error_component defines the error-id, wh=
+ile
+  * DRM_XE_RAS_ERROR_COMPONENT_NAMES maps error-id to error-name.
+  *
+  * User Interface
+- * =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++ * --------------
+  *
+  * To retrieve error values of a error counter, userspace applications sho=
+uld
+  * follow the below steps:
 --=20
 2.53.0
 
