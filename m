@@ -1,202 +1,488 @@
-Return-Path: <linux-doc+bounces-93035-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93037-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id zc+IJbrtN2rjVgcAu9opvQ
-	(envelope-from <linux-doc+bounces-93035-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 21 Jun 2026 15:57:14 +0200
+	id bORNH1r2N2rCWAcAu9opvQ
+	(envelope-from <linux-doc+bounces-93037-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 21 Jun 2026 16:34:02 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF5DD6AB003
-	for <lists+linux-doc@lfdr.de>; Sun, 21 Jun 2026 15:57:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EB9F46AB148
+	for <lists+linux-doc@lfdr.de>; Sun, 21 Jun 2026 16:34:01 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=IDsgn9Lb;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93035-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93035-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=MdEHEMfw;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93037-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93037-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 7CC743009FAF
-	for <lists+linux-doc@lfdr.de>; Sun, 21 Jun 2026 13:57:09 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 5CCC0300D47F
+	for <lists+linux-doc@lfdr.de>; Sun, 21 Jun 2026 14:33:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C31E7369208;
-	Sun, 21 Jun 2026 13:57:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DDC5136AB53;
+	Sun, 21 Jun 2026 14:33:54 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-yw1-f176.google.com (mail-yw1-f176.google.com [209.85.128.176])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5CCF4368D50
-	for <linux-doc@vger.kernel.org>; Sun, 21 Jun 2026 13:57:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B529368D68;
+	Sun, 21 Jun 2026 14:33:53 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782050228; cv=none; b=ENFSwfQfpq9LwofPboCy3/vq0Fzx5sMZFmnlGVINDSCJEJ03Pvy4A2bSHypOErhsvuqoIc4p7o9UbM6t5FUxq/wcfM/inFqIvVocoj+B+9DmyTvV2yvikktjylzJLRJvBSgErY6kX+L26H4lIC+w281m/hneEkjfIppjVyFAhF4=
+	t=1782052434; cv=none; b=pJiwlsVcXonH89nxH3KCZd2m428xcVNbvdIt8rvrilaDqcPcI15397bTq5nyLiQPBtwUve5t7bXPIKUo7lYGs4akEcHcxJhfauCn18DurtKLbqYWpBQjulOO/UU8iXO615oRHLyVe+V8McQfYv4JhdU+OLhcZCiE7H3dANXIBYY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782050228; c=relaxed/simple;
-	bh=fvPxhb+XWNbU46fPY8gMPSLeWrRsc2z5sSGUBkotAr0=;
-	h=From:Date:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=MwkDkRQ06RZAterPvPgX5IGt75HgeX7hTkzS5PyiCp4i5RcG3U7DJ7BhY81IPTy6eAUNJrtifkcjDf4P2lzgCh57x+D0D7ZSTok71ShXmmX78PREQq7JF+8Wf5Nr6dJP/HUgpRniIx1JEhT6dPVyN6MTMMCI8l2NelL3BZXkkeY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=IDsgn9Lb; arc=none smtp.client-ip=209.85.128.176
-Received: by mail-yw1-f176.google.com with SMTP id 00721157ae682-80236b44a1dso12485657b3.0
-        for <linux-doc@vger.kernel.org>; Sun, 21 Jun 2026 06:57:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782050226; x=1782655026; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:date:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Sv1dki/80aNeWwp+36abGEnVJza7FGEeP7NOY9gPTvc=;
-        b=IDsgn9Lb23KedjXNwjRfloquBvpRj0dwvFPGPAQDtjR5tCjOlIZyxGX8LZYKD7D22S
-         +fP0YJVtDS6L66zOfEcfzPolWDTcyfNlcNO1LSEJnD92yZGoL/OCS9MzcPtB9YHA5uaX
-         MGlL7tW7+31ijgJzSFwabHABzodNxMxv+oEctyDgfvXJiw6HowI/qHOxN7oS0+xh7Ke6
-         7VlPJ3ja67RAZVkdDMP+SpeVM0/uL6ruLNMY+JzszK4GcENw/vay9RFT/XolJrMFGBFO
-         UB7ig/YBSzOPqaDSD35HVVMbr01R4ktSpk0esy3xlU7S83jBukJBPPHRDXIXxUwgoA23
-         n22g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782050226; x=1782655026;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:date:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Sv1dki/80aNeWwp+36abGEnVJza7FGEeP7NOY9gPTvc=;
-        b=F64zHWhc0Uki2de/4Z7NMWGfg8om/wmFsyogyEGLZkTGkX1PVh7wDGlYF9w1wVKqBV
-         thrSx+cLgZ5v1UU0AUpuAnKD2TFrtqa9zCrbD4MgD2LxKo+4mnijem3amTDu4zzQw5Ju
-         HWUIWUvWATAE2POc4qzsLueKYf8oiI84AA1GCPTaK0HpbIPiOybENidpUtx4hOJRC1NL
-         x0pI0Tc5xvWBoTUnfY3rCCZUMMlGeBvN6B2KUR71SvlKfW7VtBiVYZ+wn55+C9JNIJ7O
-         1DM8N8+m27wZHNqX6LXvNMnAR238hx1THJ+S5m+2F+5KNEnwICIyH5zX4jTCZG4nmDPu
-         yOXA==
-X-Forwarded-Encrypted: i=1; AHgh+RorjRC8x9gmHtOd9Iz8XipW5wrOMG9jVUxOV1LhFb7R3WMWpdQKdS5lRirV4zVdgPvNYIcIkj8/RHk=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz6XkebGXWJM+DvQmDUobP8lDgaig5IEcJ62cggpyvoSTL8Fvt6
-	PUnXSc0HtRYmxBQzD/S8D1ETi3SGMmuv9udDAXtXE52hOZrViU6WG86m
-X-Gm-Gg: AfdE7clOs8R9i7xBgddHyc6WtCXa5U3NS6oMGngjIUqm+Eywwrks4XZjPPZQADFkvln
-	TCQofsyoTiM/RB4hzpC/pXHJ+Yge8qQn6I3iQX0h2+91w2lgMC3bR+hZeCGGzwedHTndcaGVYev
-	/mXkFPbgtZLNujQRTYbID5WsLaXnpbId28d3GpvAR8cQ59CydlMKYOL0y5nS5hvPsdwSFSRl3Jp
-	awjw9JyjW6lBpYS2TFK5MfvdLRgdp5H1X8i04P0+ZHKTBHKUI6KWNUABq8iWTOy00QQ5zV2iUF+
-	XNMgtLXA/KC87vM94apHpvByW7aXf12tMbjg7cSXV/Tk8tBbmfJdRMy4jIG57Be1aWm1B4STjT6
-	GlwcnLDDnNKrhF1GOfPQ6l/5EEUyft6nmdcMD1Sxn4TyrOCoEu/YfdAIlJBiJsNot41qzL9joMJ
-	cF+QNBuW2SBaHElVEEFigjuDPw1UgVJiYdGjU=
-X-Received: by 2002:a05:690c:4b8b:b0:7c5:f6c:d311 with SMTP id 00721157ae682-80131d97bdamr100779827b3.13.1782050226417;
-        Sun, 21 Jun 2026 06:57:06 -0700 (PDT)
-Received: from localhost (user-24-214-85-55.knology.net. [24.214.85.55])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-8025c96fdb3sm21073127b3.1.2026.06.21.06.57.06
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 21 Jun 2026 06:57:06 -0700 (PDT)
-From: Yury Norov <yury.norov@gmail.com>
-X-Google-Original-From: Yury Norov <ynorov@nvidia.com>
-Date: Sun, 21 Jun 2026 09:57:05 -0400
-To: Yury Norov <yury.norov@gmail.com>
-Cc: Steven Rostedt <rostedt@goodmis.org>, linux-kernel@vger.kernel.org,
-	linux-trace-kernel@vger.kernel.org,
-	Masami Hiramatsu <mhiramat@kernel.org>,
-	Mark Rutland <mark.rutland@arm.com>,
-	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Linus Torvalds <torvalds@linux-foundation.org>,
-	Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-	John Ogness <john.ogness@linutronix.de>,
-	Thomas Gleixner <tglx@kernel.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Julia Lawall <julia.lawall@inria.fr>, linux-doc@vger.kernel.org,
-	linux-kbuild@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
-	dri-devel@lists.freedesktop.org,
-	linux-stm32@st-md-mailman.stormreply.com,
-	linux-arm-kernel@lists.infradead.org, linux-rdma@vger.kernel.org,
-	linux-usb@vger.kernel.org, linux-ext4@vger.kernel.org,
-	linux-nfs@vger.kernel.org, kvm@vger.kernel.org,
-	intel-gfx@lists.freedesktop.org
-Subject: Re: [PATCH 2/2] tracing: Add CONFIG_TRACE_PRINTK_DEBUGGING to clean
- up kernel.h
-Message-ID: <ajftsRwe19fPTP1r@yury>
-References: <20260621093430.264983361@kernel.org>
- <20260621093811.168514984@kernel.org>
- <20260621054721.7cde38f0@fedora>
- <ajfphe4Z8BrfYoUX@yury>
+	s=arc-20240116; t=1782052434; c=relaxed/simple;
+	bh=pGGVMrvKPQG31BRVKoUKRm1AwpOV0e0A59FSZzzfT8U=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=JL1cNuS84VZi5+i+5TwV0Egr3BbLuUIYZFWkWnD+LU+fMtdPZCOMy/MuMqQlTlnXfeQGXi8cbEfnFY1a7MZlUP00UVfudsK5oKhsjjaQJJWy4Afmim9AeBRgnGU+KIyu6ZwkDom2HLZW2m817aOD4FLhznO570+zf0xhUlP0IIs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MdEHEMfw; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 64EC01F000E9;
+	Sun, 21 Jun 2026 14:33:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1782052433;
+	bh=jG7mEeZzAT361IEEA2/W5AivgioiU4wcx1aAoJXHOGw=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=MdEHEMfwlTEZ6FeMru59/lASIeAKwJ+R/RfUXAxhBkZrdKziYcTEnSywUPOMvej6A
+	 ojLAWzufjVOuC+W/COzZ49a9OWR32QwMY/yE5peJUnAgJFFdiUpCq2G29Wli8mT5Gp
+	 M/TBUbg6Kr5ajSdMbdUnuBJZUdtMU3uMV5CB2LP/h1IfjNOkx2l38HoRMMAdVYSegH
+	 9M7UWlN0WNunj41bgRD0fpydDHJWgvxuaF9SDNBe3cxuHhWk81Iy+cJC1PxTZOJgpJ
+	 8sv8Pgdpobgloes+RdeK5nEIFkLwzO37KVqi661bgmNpNh42H7mmSC2Vuighk8Bium
+	 NnYnCWEu+hvUA==
+Date: Sun, 21 Jun 2026 15:33:40 +0100
+From: Jonathan Cameron <jic23@kernel.org>
+To: Nuno =?UTF-8?B?U8Oh?= <noname.nuno@gmail.com>
+Cc: Conor Dooley <conor@kernel.org>, Janani Sunil <jan.sun97@gmail.com>,
+ Rodrigo Alencar <455.rodrigo.alencar@gmail.com>, Janani Sunil
+ <janani.sunil@analog.com>, Lars-Peter Clausen <lars@metafoo.de>, Michael
+ Hennerich <Michael.Hennerich@analog.com>, David Lechner
+ <dlechner@baylibre.com>, Nuno =?UTF-8?B?U8Oh?= <nuno.sa@analog.com>, Andy
+ Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>, Krzysztof
+ Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Philipp
+ Zabel <p.zabel@pengutronix.de>, Jonathan Corbet <corbet@lwn.net>, Shuah
+ Khan <skhan@linuxfoundation.org>, linux-iio@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, Mark Brown <broonie@kernel.org>
+Subject: Re: [PATCH v3 1/2] dt-bindings: iio: dac: Add AD5529R
+Message-ID: <20260621153330.79b6600c@jic23-huawei>
+In-Reply-To: <ajVlD-j0nIGrRVow@nsa>
+References: <20260519-ad5529r-driver-v3-0-267c0731aa68@analog.com>
+	<20260519-ad5529r-driver-v3-1-267c0731aa68@analog.com>
+	<25mh6grzh7zh3b4uytcqnusyv5zjuf6ia4if3ce3oqzqz56ehi@le72iqv7ye3d>
+	<603473ac-30e6-45e5-8a3b-c9902715cc9e@gmail.com>
+	<20260614204455.408c4d40@jic23-huawei>
+	<076d7d2d-81a0-49c2-af94-bd65ead66c09@gmail.com>
+	<20260619-obstinate-polo-a230bef97fda@spud>
+	<20260619-bunch-diocese-dd7805cc17ff@spud>
+	<ajU73_TkKrSbqD4f@nsa>
+	<20260619-concierge-doozy-9c161533c369@spud>
+	<ajVlD-j0nIGrRVow@nsa>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ajfphe4Z8BrfYoUX@yury>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.16 / 15.00];
+X-Spamd-Result: default: False [-3.16 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	RCPT_COUNT_TWELVE(0.00)[21];
+	FORGED_RECIPIENTS(0.00)[m:noname.nuno@gmail.com,m:conor@kernel.org,m:jan.sun97@gmail.com,m:455.rodrigo.alencar@gmail.com,m:janani.sunil@analog.com,m:lars@metafoo.de,m:Michael.Hennerich@analog.com,m:dlechner@baylibre.com,m:nuno.sa@analog.com,m:andy@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:p.zabel@pengutronix.de,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-iio@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:broonie@kernel.org,m:nonamenuno@gmail.com,m:jansun97@gmail.com,m:455rodrigoalencar@gmail.com,m:krzk@kernel.org,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-93035-lists,linux-doc=lfdr.de];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FORGED_SENDER(0.00)[yurynorov@gmail.com,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[26];
-	FORGED_RECIPIENTS(0.00)[m:yury.norov@gmail.com,m:rostedt@goodmis.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:mhiramat@kernel.org,m:mark.rutland@arm.com,m:mathieu.desnoyers@efficios.com,m:akpm@linux-foundation.org,m:torvalds@linux-foundation.org,m:bigeasy@linutronix.de,m:john.ogness@linutronix.de,m:tglx@kernel.org,m:peterz@infradead.org,m:julia.lawall@inria.fr,m:linux-doc@vger.kernel.org,m:linux-kbuild@vger.kernel.org,m:linuxppc-dev@lists.ozlabs.org,m:dri-devel@lists.freedesktop.org,m:linux-stm32@st-md-mailman.stormreply.com,m:linux-arm-kernel@lists.infradead.org,m:linux-rdma@vger.kernel.org,m:linux-usb@vger.kernel.org,m:linux-ext4@vger.kernel.org,m:linux-nfs@vger.kernel.org,m:kvm@vger.kernel.org,m:intel-gfx@lists.freedesktop.org,m:yurynorov@gmail.com,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[jic23@kernel.org,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-93037-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[yurynorov@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[jic23@kernel.org,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[kernel.org,gmail.com,analog.com,metafoo.de,baylibre.com,pengutronix.de,lwn.net,linuxfoundation.org,vger.kernel.org];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[]
+	DKIM_TRACE(0.00)[kernel.org:+];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,jic23-huawei:mid,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: EF5DD6AB003
+X-Rspamd-Queue-Id: EB9F46AB148
 
-On Sun, Jun 21, 2026 at 09:39:17AM -0400, Yury Norov wrote:
-> On Sun, Jun 21, 2026 at 05:47:21AM -0400, Steven Rostedt wrote:
-> > On Sun, 21 Jun 2026 05:34:32 -0400
-> > Steven Rostedt <rostedt@kernel.org> wrote:
-> > 
-> > > Instead of having trace_printk.h included in kernel.h, create a config
-> > > TRACE_PRINTK_DEBUGGING that when set will update the CFLAGS in the
-> > > Makefile to allow developers to add trace_printk() without the need to add
-> > > the include for it. Having it included in the Makefile keeps it from being
-> > > in the dependency chain and it will not waste extra CPU cycles for those
-> > > building the kernel without using trace_printk.
-> > 
-> > Bah, I only tested with the config option enabled, and missed some
-> > dependencies with it disabled.
-> 
-> Yes you did.
->  
-> > For instance, rcu.h also uses ftrace_dump() so that too needs to go
-> > into kernel.h.
-> 
-> No, it shouldn't.
-> 
-> > I also need to add a few more includes to trace_printk.h.
-> 
-> > OK, I need to run this through all my tests to find where else I missed
-> > adding the includes. But the idea should hopefully satisfy everyone.
-> 
-> If you include it under config in kernel.h, to make the kernel buildable,
+On Fri, 19 Jun 2026 16:54:11 +0100
+Nuno S=C3=A1 <noname.nuno@gmail.com> wrote:
 
-I mean: in kernel.h or in Makefile.
+> On Fri, Jun 19, 2026 at 03:12:07PM +0100, Conor Dooley wrote:
+> > On Fri, Jun 19, 2026 at 02:01:08PM +0100, Nuno S=C3=A1 wrote: =20
+> > > On Fri, Jun 19, 2026 at 12:40:54PM +0100, Conor Dooley wrote: =20
+> > > > On Fri, Jun 19, 2026 at 12:36:55PM +0100, Conor Dooley wrote: =20
+> > > > > On Fri, Jun 19, 2026 at 12:33:11PM +0200, Janani Sunil wrote: =20
+> > > > > >=20
+> > > > > > On 6/14/26 21:44, Jonathan Cameron wrote: =20
+> > > > > > > On Tue, 9 Jun 2026 16:47:23 +0200
+> > > > > > > Janani Sunil <jan.sun97@gmail.com> wrote:
+> > > > > > >  =20
+> > > > > > > > On 5/26/26 15:11, Rodrigo Alencar wrote: =20
+> > > > > > > > > On 26/05/19 05:42PM, Janani Sunil wrote: =20
+> > > > > > > > > > Devicetree bindings for AD5529R 16 channel 12/16 bit hi=
+gh voltage,
+> > > > > > > > > > buffered voltage output digital-to-analog converter (DA=
+C) with an
+> > > > > > > > > > integrated precision reference. =20
+> > > > > > > > > ...
+> > > > > > > > > Probably others may comment on that, but...
+> > > > > > > > >=20
+> > > > > > > > > This parent node may support device addressing for multi-=
+device support through
+> > > > > > > > > those ID pins. I suppose that each device may have its ow=
+n power supplies or
+> > > > > > > > > other resources like the toggle pins or reset and enable.
+> > > > > > > > >=20
+> > > > > > > > > That way I suppose that an example would look like... =20
+> > > > > > > > > > +
+> > > > > > > > > > +patternProperties:
+> > > > > > > > > > +  "^channel@([0-9]|1[0-5])$":
+> > > > > > > > > > +    type: object
+> > > > > > > > > > +    description: Child nodes for individual channel co=
+nfiguration
+> > > > > > > > > > +
+> > > > > > > > > > +    properties:
+> > > > > > > > > > +      reg:
+> > > > > > > > > > +        description: Channel number.
+> > > > > > > > > > +        minimum: 0
+> > > > > > > > > > +        maximum: 15
+> > > > > > > > > > +
+> > > > > > > > > > +      adi,output-range-microvolt:
+> > > > > > > > > > +        description: |
+> > > > > > > > > > +          Output voltage range for this channel as [mi=
+n, max] in microvolts.
+> > > > > > > > > > +          If not specified, defaults to 0V to 5V range.
+> > > > > > > > > > +        oneOf:
+> > > > > > > > > > +          - items:
+> > > > > > > > > > +              - const: 0
+> > > > > > > > > > +              - enum: [5000000, 10000000, 20000000, 40=
+000000]
+> > > > > > > > > > +          - items:
+> > > > > > > > > > +              - const: -5000000
+> > > > > > > > > > +              - const: 5000000
+> > > > > > > > > > +          - items:
+> > > > > > > > > > +              - const: -10000000
+> > > > > > > > > > +              - const: 10000000
+> > > > > > > > > > +          - items:
+> > > > > > > > > > +              - const: -15000000
+> > > > > > > > > > +              - const: 15000000
+> > > > > > > > > > +          - items:
+> > > > > > > > > > +              - const: -20000000
+> > > > > > > > > > +              - const: 20000000
+> > > > > > > > > > +
+> > > > > > > > > > +    required:
+> > > > > > > > > > +      - reg
+> > > > > > > > > > +
+> > > > > > > > > > +    additionalProperties: false
+> > > > > > > > > > +
+> > > > > > > > > > +required:
+> > > > > > > > > > +  - compatible
+> > > > > > > > > > +  - reg
+> > > > > > > > > > +  - vdd-supply
+> > > > > > > > > > +  - avdd-supply
+> > > > > > > > > > +  - hvdd-supply
+> > > > > > > > > > +
+> > > > > > > > > > +dependencies:
+> > > > > > > > > > +  spi-cpha: [ spi-cpol ]
+> > > > > > > > > > +  spi-cpol: [ spi-cpha ]
+> > > > > > > > > > +
+> > > > > > > > > > +allOf:
+> > > > > > > > > > +  - $ref: /schemas/spi/spi-peripheral-props.yaml#
+> > > > > > > > > > +
+> > > > > > > > > > +unevaluatedProperties: false
+> > > > > > > > > > +
+> > > > > > > > > > +examples:
+> > > > > > > > > > +  - |
+> > > > > > > > > > +    #include <dt-bindings/gpio/gpio.h>
+> > > > > > > > > > +
+> > > > > > > > > > +    spi {
+> > > > > > > > > > +        #address-cells =3D <1>;
+> > > > > > > > > > +        #size-cells =3D <0>;
+> > > > > > > > > > +
+> > > > > > > > > > +        dac@0 {
+> > > > > > > > > > +            compatible =3D "adi,ad5529r-16";
+> > > > > > > > > > +            reg =3D <0>;
+> > > > > > > > > > +            spi-max-frequency =3D <25000000>;
+> > > > > > > > > > +
+> > > > > > > > > > +            vdd-supply =3D <&vdd_regulator>;
+> > > > > > > > > > +            avdd-supply =3D <&avdd_regulator>;
+> > > > > > > > > > +            hvdd-supply =3D <&hvdd_regulator>;
+> > > > > > > > > > +            hvss-supply =3D <&hvss_regulator>;
+> > > > > > > > > > +
+> > > > > > > > > > +            reset-gpios =3D <&gpio0 87 GPIO_ACTIVE_LOW=
+>;
+> > > > > > > > > > +
+> > > > > > > > > > +            #address-cells =3D <1>;
+> > > > > > > > > > +            #size-cells =3D <0>;
+> > > > > > > > > > +
+> > > > > > > > > > +            channel@0 {
+> > > > > > > > > > +                reg =3D <0>;
+> > > > > > > > > > +                adi,output-range-microvolt =3D <0 5000=
+000>;
+> > > > > > > > > > +            };
+> > > > > > > > > > +
+> > > > > > > > > > +            channel@1 {
+> > > > > > > > > > +                reg =3D <1>;
+> > > > > > > > > > +                adi,output-range-microvolt =3D <(-1000=
+0000) 10000000>;
+> > > > > > > > > > +            };
+> > > > > > > > > > +
+> > > > > > > > > > +            channel@2 {
+> > > > > > > > > > +                reg =3D <2>;
+> > > > > > > > > > +                adi,output-range-microvolt =3D <0 4000=
+0000>;
+> > > > > > > > > > +            };
+> > > > > > > > > > +        };
+> > > > > > > > > > +    }; =20
+> > > > > > > > > ...
+> > > > > > > > >=20
+> > > > > > > > > 	spi {
+> > > > > > > > > 		#address-cells =3D <1>;
+> > > > > > > > > 		#size-cells =3D <0>;
+> > > > > > > > >=20
+> > > > > > > > > 		multi-dac@0 {
+> > > > > > > > > 			compatible =3D "adi,ad5529r-16";
+> > > > > > > > > 			reg =3D <0>;
+> > > > > > > > > 			spi-max-frequency =3D <25000000>;
+> > > > > > > > >=20
+> > > > > > > > > 			#address-cells =3D <1>;
+> > > > > > > > > 			#size-cells =3D <0>;
+> > > > > > > > >=20
+> > > > > > > > > 			dac@0 {
+> > > > > > > > > 				reg =3D <0>;
+> > > > > > > > > 				vdd-supply =3D <&vdd_regulator>;
+> > > > > > > > > 				avdd-supply =3D <&avdd_regulator>;
+> > > > > > > > > 				hvdd-supply =3D <&hvdd_regulator>;
+> > > > > > > > > 				hvss-supply =3D <&hvss_regulator>;
+> > > > > > > > >=20
+> > > > > > > > > 				reset-gpios =3D <&gpio0 87 GPIO_ACTIVE_LOW>;
+> > > > > > > > >=20
+> > > > > > > > > 				#address-cells =3D <1>;
+> > > > > > > > > 				#size-cells =3D <0>;
+> > > > > > > > >=20
+> > > > > > > > > 				channel@0 {
+> > > > > > > > > 					reg =3D <0>;
+> > > > > > > > > 					adi,output-range-microvolt =3D <0 5000000>;
+> > > > > > > > > 				};
+> > > > > > > > >=20
+> > > > > > > > > 				channel@1 {
+> > > > > > > > > 					reg =3D <1>;
+> > > > > > > > > 					adi,output-range-microvolt =3D <(-10000000) 10000000=
+>;
+> > > > > > > > > 				};
+> > > > > > > > >=20
+> > > > > > > > > 				channel@2 {
+> > > > > > > > > 					reg =3D <2>;
+> > > > > > > > > 					adi,output-range-microvolt =3D <0 40000000>;
+> > > > > > > > > 				};
+> > > > > > > > > 			}
+> > > > > > > > >=20
+> > > > > > > > > 			dac@1 {
+> > > > > > > > > 				reg =3D <1>;
+> > > > > > > > > 				vdd-supply =3D <&vdd_regulator>;
+> > > > > > > > > 				avdd-supply =3D <&avdd_regulator>;
+> > > > > > > > > 				hvdd-supply =3D <&hvdd_regulator>;
+> > > > > > > > > 				hvss-supply =3D <&hvss_regulator>;
+> > > > > > > > >=20
+> > > > > > > > > 				reset-gpios =3D <&gpio0 88 GPIO_ACTIVE_LOW>;
+> > > > > > > > >=20
+> > > > > > > > > 				#address-cells =3D <1>;
+> > > > > > > > > 				#size-cells =3D <0>;
+> > > > > > > > >=20
+> > > > > > > > > 				channel@0 {
+> > > > > > > > > 					reg =3D <0>;
+> > > > > > > > > 					adi,output-range-microvolt =3D <0 5000000>;
+> > > > > > > > > 				};
+> > > > > > > > >=20
+> > > > > > > > > 				channel@1 {
+> > > > > > > > > 					reg =3D <1>;
+> > > > > > > > > 					adi,output-range-microvolt =3D <(-10000000) 10000000=
+>;
+> > > > > > > > > 				};
+> > > > > > > > > 			}
+> > > > > > > > > 		};
+> > > > > > > > > 	};
+> > > > > > > > >=20
+> > > > > > > > > then you might need something like:
+> > > > > > > > >=20
+> > > > > > > > > 	patternProperties:
+> > > > > > > > > 		"^dac@[0-3]$":
+> > > > > > > > >=20
+> > > > > > > > > and put most of the things under this node pattern.
+> > > > > > > > >=20
+> > > > > > > > > So the main driver that you're putting together might nee=
+d to handle up to four instances.
+> > > > > > > > > Even if your current driver cannot handle this, the dt-bi=
+ndings might need cover that.
+> > > > > > > > >=20
+> > > > > > > > > Need to double check if each dac node needs a separate co=
+mpatible, so you would maybe populate
+> > > > > > > > > a platform data to be shared with the child nodes, which =
+would be a separate driver.
+> > > > > > > > > (not sure if it would make sense to mix and match ad5529r=
+-16 and ad5529r-12). =20
+> > > > > > > > Hi Rodrigo,
+> > > > > > > >=20
+> > > > > > > > Thank you for looking at this.
+> > > > > > > >=20
+> > > > > > > > For now, I would prefer to keep the binding scoped to a sin=
+gle AD5529R device instance. The current
+> > > > > > > > hardware/use case we have only needs one device node and th=
+e driver is written around that model as well.
+> > > > > > > > While the device addressing pins could allow multi-device t=
+opology, we do not have an actual platform using
+> > > > > > > > that configuration at the moment, so I would prefer not to =
+introduce an extra parent/child binding structure
+> > > > > > > > speculatively without a validating use case. =20
+> > > > > > > Interesting feature - kind of similar to address control on a=
+ typical i2c bus device, or
+> > > > > > > looking at it another way a kind of distributed SPI mux.
+> > > > > > >=20
+> > > > > > > Challenge of a binding is we need to anticipate the future.  =
+So I think we do need something
+> > > > > > > like Rodrigo is suggesting even if we only (for now) support =
+a single instance in the driver.
+> > > > > > > That would leave the path open to supporting the addressing a=
+t a later date.
+> > > > > > > An alternative might be to look at it like a chained device s=
+etup. In those we pretend there
+> > > > > > > is just one device with a lot of channels etc.  The snag is t=
+hat here things are more loosely
+> > > > > > > coupled whereas for those devices it tends to be you have to =
+read / write the same register
+> > > > > > > in all devices in the chain as one big SPI message.
+> > > > > > >=20
+> > > > > > > +CC Mark Brown as he may know of some precedence for this fea=
+ture. For his reference..
+> > > > > > > - Each of these device has 2 ID pins.  The SPI transfers have=
+ to contain the 2 bit
+> > > > > > > value that matches that or they are ignored.  Thus a single b=
+us + 1 chip select can
+> > > > > > > be used to talk to 4 devices.  Question is what that looks li=
+ke in device tree + I guess
+> > > > > > > longer term how to support it cleanly in SPI. =20
+> > > > >=20
+> > > > > I'd swear I have seen this before, from some Microchip devices. L=
+et me
+> > > > > see if I can find what I am thinking of... =20
+> > > >=20
+> > > >=20
+> > > > microchip,mcp3911 and microchip,mcp3564 both seem to do this with
+> > > > slightly different properties.
+> > > >=20
+> > > >   microchip,device-addr:
+> > > >     description: Device address when multiple MCP3911 chips are pre=
+sent on the same SPI bus.
+> > > >     $ref: /schemas/types.yaml#/definitions/uint32
+> > > >     enum: [0, 1, 2, 3]
+> > > >     default: 0
+> > > >=20
+> > > > and
+> > > >=20
+> > > >=20
+> > > >   microchip,hw-device-address:
+> > > >     $ref: /schemas/types.yaml#/definitions/uint32
+> > > >     minimum: 0
+> > > >     maximum: 3
+> > > >     description:
+> > > >       The address is set on a per-device basis by fuses in the fact=
+ory,
+> > > >       configured on request. If not requested, the fuses are set fo=
+r 0x1.
+> > > >       The device address is part of the device markings to avoid
+> > > >       potential confusion. This address is coded on two bits, so fo=
+ur possible
+> > > >       addresses are available when multiple devices are present on =
+the same
+> > > >       SPI bus with only one Chip Select line for all devices.
+> > > >       Each device communication starts by a CS falling edge, follow=
+ed by the
+> > > >       clocking of the device address (BITS[7:6] - top two bits of C=
+OMMAND BYTE
+> > > >       which is first one on the wire).
+> > > >=20
+> > > > This sounds exactly like the sort of feature that you're dealing wi=
+th
+> > > > here?
+> > > >  =20
+> > >=20
+> > > The core idea yes but for this chip, things are a bit more annoying (=
+but
+> > > Janani can correct me if I'm wrong). Here, each device can, in theory,
+> > > have it's own supplies, pins and at the very least, channels with may=
+be
+> > > different scales. That is why Janani is proposing dac nodes. Given I
+> > > honestly don't like much of that "adi,ad5529r-bus" compatible I wonde=
+red
+> > > about solving this at the spi level.
+> > >=20
+> > > Ah and to make it more annoying, we can also mix 12 and 16 bits varia=
+nts
+> > > together in the same bus. =20
+> >=20
+> > I'm definitely missing something, because that property for the
+> > microchip devices is not impacted what else is on the bus. AFAICT, you
+> > could have an mcp3911 and an mcp3564 on the same bus even though both
+> > are completely different devices with different drivers. They have
+> > individual device nodes and their own supplies etc etc. These aren't
+> > per-channel properties on an adc or dac, they're per child device on a
+> > spi bus. =20
+>=20
+> Maybe I'm the one missing something :). IIRC, spi would not allow two
+> devices on the same CS right? Because for this chip we would need
+> something like:
+>=20
+> spi {
+> 	dac@0 {
+> 		reg =3D <0>;
+> 		adi,pin-id =3D <0>;
+> 	};
+>=20
+> 	dac@1 {
+> 		reg =3D <0>; // which seems already problematic?
+> 		adi,pin-id <1>;
+> 	};
+>=20
+> 	...
+>=20
+> 	//up to 4
+> };
+Yeah. It's not clear to me how that works for the microchip devices
+(I suspect it doesn't!)
 
-> you need to include trace_printk.h explicitly where it's actually used.
-> IOW, apply my patch v4-7.
-> 
-> Then, developers who use trace_printk() on their development machine,
-> will be really frustrated when their debugging code will break client
-> build just because CONFIG_TRACE_PRINTK_DEBUGGING is disabled there.
-> They will spend a day, at best, communicating with remote managers,
-> and end up with adding #include <linux/trace_printk.h> in the files
-> they touch. Is that your plan?
-> 
-> If I was one of those developers, the solution would be simple for me:
-> don't use trace_printk() at all.
-> 
-> Thanks,
-> Yury
+Just thinking as I type, but could we do something a bit nasty with
+a gpio mux that doesn't actually switch but represents the GPIO being
+shared?  Given this is all tied to the spi bus that should all happen
+under serializing locks.=20
+
+Agreed though that this would be nicer as an SPI thing that let
+us specify that a single CS is share by multiple devices and their
+is some other signal acting to select which one we are talking to.
+
+Jonathan
+
+
+>=20
+> - Nuno S=C3=A1
+>=20
+>=20
+
 
