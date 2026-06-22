@@ -1,157 +1,178 @@
-Return-Path: <linux-doc+bounces-93114-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93115-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id phk7IJZlOWprrgcAu9opvQ
-	(envelope-from <linux-doc+bounces-93114-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2026 18:40:54 +0200
+	id tSUUBcplOWqKrgcAu9opvQ
+	(envelope-from <linux-doc+bounces-93115-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2026 18:41:46 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 193DD6B131C
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2026 18:40:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A2FED6B1351
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2026 18:41:45 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b=wSEig2tX;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93114-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93114-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=infradead.org;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=WRGeQtuc;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93115-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93115-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=gmail.com;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 8457D3020002
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2026 16:40:53 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 112CC3020BEA
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2026 16:41:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8022C32ED5C;
-	Mon, 22 Jun 2026 16:40:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E4FB33368B6;
+	Mon, 22 Jun 2026 16:41:41 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 64312238D52;
-	Mon, 22 Jun 2026 16:40:49 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782146452; cv=none; b=TaSOTJJ2K8BH15QgQZ+a0WtpyrNnprsNFfuAjX8ay7JzxQwZ1eP3ZQ4swrr0ZzISQABsMzXtKzcXoBDTVJcdNlZsGN9FJFJ56rliV+A/L/7S6VZ6qcTTNsJFE2fjh1x3Kj2HYGIuxyOMfN+lu2K8qP/RnRDzjqlPEFdg6HYgdJw=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782146452; c=relaxed/simple;
-	bh=VlfRDc9QQZP3OTb4meK3W37YOlAqyrnZGvqyxn7MT0w=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=kCP5UK+Oe6zuu9WEdqREnyk4CLmh6yw6/5xOC6WfVGItJwLfFEKMZ03qD8D3bXSVdYKfbHwcFCmoxYHXBtx0RX/8aV/H7GSI23pTauMYmOmkhdawX59Z3m6LPg/J8pS+8eXJqIMd1G89J02WUIb51ipbKT29tG/i+VbYO5zkd1c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=pass smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=wSEig2tX; arc=none smtp.client-ip=198.137.202.133
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=c5UMhYqzW3FXITWipN5SHhAQOB1P9YUKBIDy0r3xPQw=; b=wSEig2tXNqqYlMi+DO0fVntY5n
-	xOHolZZKA+fIDoV0P9vbcZYk+nTw3ZO3neQaPzi4xv2gcxwSzlDonXdcprWpDH2QVuSHb1XstdPJW
-	SDJunku4cTdk3jGABXOOirk4qvdvStLyf+TSspP6lyyvSkgzI8foJ7iUHjAWC1KMbyOnlr8Bk2/AC
-	kSmplFs4mh7vU8qt6mUcBWozaXfZYbjxcaOPfxhFG3Z95uao/bptRNf0v9TlnvAPmJRfMGZZ11YUj
-	Kd2cOw4Cnm3blaF1fkpC/rbtuwYhawbpOJtgBO9UdgKUgdoYUd8ev6TfDb5XWKvISvKwTYP33Ug+E
-	awdU0f0A==;
-Received: from [50.53.43.113] (helo=[192.168.254.34])
-	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wbhhW-00000005CFj-0vuV;
-	Mon, 22 Jun 2026 16:40:46 +0000
-Message-ID: <08b3c961-18bb-43d9-8d7f-8a87bcad0afa@infradead.org>
-Date: Mon, 22 Jun 2026 09:40:45 -0700
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8FB1C2BCF4C
+	for <linux-doc@vger.kernel.org>; Mon, 22 Jun 2026 16:41:40 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1782146501; cv=pass; b=nJkMkFPTbA6S8WSz973nLHr2OAdRnyGjcERF5ILQQfxn1bcUoJM6jw62MFI82CcdfQMoVddrRo7qWSxXom8AiXanEF7cXXrHYHVn19JpMXJfMxKPwDEUNaBHoz9dEA6ZlCezdsv5/6GNr9p1znreA9A4bFJEw/e6QKb3dgMR3iQ=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1782146501; c=relaxed/simple;
+	bh=oEFJM2xVD+jdJtGhPooMvFbQOOY2K9LW1MgvzB3/sn0=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=lKtfFQJHWjLkNfTcyRw0SeMZVRThvtEof/QoHH+8NE5Y6csEpY+ZTHAjh8Z+B18095EAfsCAP2Pv4Hb5dxvAf6ZMqg435FVtMXE2Oy4lnWxGqEXonnkJistzwAuqik2pWajEKe2cnb6575XM5mCflS56QViHWrZr8BlgOwCWytg=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=WRGeQtuc; arc=pass smtp.client-ip=209.85.128.50
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-49249707788so16785755e9.2
+        for <linux-doc@vger.kernel.org>; Mon, 22 Jun 2026 09:41:40 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782146499; cv=none;
+        d=google.com; s=arc-20240605;
+        b=Na6ybvXH9trfcW7fJCJ2QQwukXObhrdWLglDojRZcLqAd1LvjHy68ZI1LOXMlD2eDk
+         E6Xe0iRTcX0TqTtCsvk6J0SQdkfkd1E2Q9Q2Jo64JN/aumHJsDlPDBtrUX2yb+1UqzH0
+         Qh6FKa05MHAqq4sMdM/05nbS4OGWj1wL8s1Gk2XNf5hoOb0qbNr1FSVOdWYIJvLX3JUK
+         JV6RY50++1F4F7xySgN6y4qi9dluy68CvX1B5XRFKa7ZYwNNDdIznR+MpgrqX97/6eE1
+         ZsTel9pOj6OOiyHbkcSDh2MFMaM0YoN20ugPbGgFT3kl1eq48xR/T2ztbdr9zpQiHD/f
+         WjoQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=LO4CLyWX1yuYF8Ov//x4PcViKwdSdNNQusnOJRyN6do=;
+        fh=r5zfofZ7hOh5yWzzle5/Rw7dFGoKDLtEWH+bik9VNdA=;
+        b=haUAC+18dT2suK0o2IEo0xabWLK0HZAjLjE/5Tfw4omSou9qiCW2asQBJAE5ya/7GN
+         sRojyxJ+KngxkEpQkLJTX91lyKUQYGNjiIYfwNbTIg+p7QLZ0lv0Ij+R64bX24wW3Byc
+         UQG1EFjuJVMYzc3z2CdNilP6HzgEKmmJUPuMDzvALzvIFHJn5dE91YS/TqCbtAcamW/8
+         mG7okVnL0ry/4RsnLGmL4nUa/aiBpghoDJY8PWiZNFMY+vgh6pj9Qi9IrApAkHMwPlSW
+         LQW0ki5wU3BFLZnB8zxVP3y4DYY2KblYBOsc1nDLmyZ4OnDUgDGqK8GPtU68fbpDAkj1
+         I+kw==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1782146499; x=1782751299; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=LO4CLyWX1yuYF8Ov//x4PcViKwdSdNNQusnOJRyN6do=;
+        b=WRGeQtucLAET+6KsAAE5ssKgAwyFGsGdoBIACUDMI62X6lbQmyewrKl7UpZQwAQb6f
+         PrUEvYOewzJRELRBGwZV1HJrTWwtWLnUVI7K+QcrMNac6YKsGb4QUMwT0QLYwvSeKcvQ
+         3FI6WIIWvNTuXresOuMagpAnl80Yn43c2bZRmYr8lg0y3W4YbryNxuK2hRv3HTqiLClz
+         vB021ssQD1fwd46LZbdg0Nx/sm0VK5HQDohZnzVz57JDCUjFeeqDkAygzx+dSc28KxWS
+         eyfGj1g70bPM+OpWq1Jm9B1VkvAcD62S7utr9vuHfRKJ4EHhUgy3sktIn96Re3pLfZji
+         Er6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1782146499; x=1782751299;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=LO4CLyWX1yuYF8Ov//x4PcViKwdSdNNQusnOJRyN6do=;
+        b=gx0W0KJWql4YZzsjZUCwPOeKH7AGYWMFYT91Cu6dIUvmLIyF6PAvhSqIhd6TYQVxa3
+         1c4Md0m/jOmgiDMcnlKwiICwntm+uE8rYxzqdpvrrXOaseea/0voYc4+JHvxVQ1+39rD
+         adakKn0OnlACPb/NQPbzCwjMRreCXeCpOaz+23oltVx22QHimHFJhHMTx0Sf3amwsJla
+         ybyJ2TQ6uIN9Ad9u298tkiXbN9q/Szp/CcrzT7Y8Hc/ZqxNhNlYZG2SlHkFOl9FKKcQ9
+         d3gW994P1qvaKkHIw2bophqpAdo/EhgX56LPkp89U9x+zDHLDNsl/OKdPVbGE7+Tisp5
+         iWsQ==
+X-Forwarded-Encrypted: i=1; AFNElJ+S4ns/KB7mJlLnzMrgrMNC+QymUJDNJTIGuN2ZpekJhdx9sj7tx0lc9laypad+rZcL3RgHSdd5tTk=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzKGY938ZD7NiqmE9GO5Zy0mZTw16VvRHQcOfl8OlH3rx+TggZZ
+	BvVYE1bJ4jIw4bWgjW1QBMs+tp2u6Mrg3UQi3/9jcs5jDzNYOV9FtM6Pz4/kxD47ef0LKLjM77b
+	+m99rtR8IIeP6r1eXns6qYESlJEiA90E=
+X-Gm-Gg: AfdE7clp9OLYJUbGsnStZVTNRzIDbB/48XOWD6HIga3fdrkXxMytYzeeOhK/x/SX7A0
+	AlYX5SG5dcprDMBA05L46JCJyhigLz9piAjG1EGfTZSTXIIy33A/0dhv5k4cH0NuJbT9JnDF1EY
+	8kmOaLS/6AIDXKjtI0CvGQYKK5iGnpsm+ALBZJ3ErthQIVTPARu5W5CRE0sx4Mo/rDW5XGW8o8u
+	dBeLl4aShAYz05JNp58oErhMzarHJyVjL1GFfNSMJwshxDWj7uLuC7M9/huXwtrevBYhbwctYIp
+	VitPGnxPKNWypvBdVDDMlcbAp1/r
+X-Received: by 2002:a05:600c:4f93:b0:492:3e44:214b with SMTP id
+ 5b1f17b1804b1-4924908ec09mr160471055e9.13.1782146498862; Mon, 22 Jun 2026
+ 09:41:38 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/2] tracing: Move trace_printk.h out of kernel.h
-To: Peter Zijlstra <peterz@infradead.org>, Steven Rostedt <rostedt@kernel.org>
-Cc: linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
- Masami Hiramatsu <mhiramat@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- Linus Torvalds <torvalds@linux-foundation.org>,
- Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
- John Ogness <john.ogness@linutronix.de>, Thomas Gleixner <tglx@kernel.org>,
- Julia Lawall <julia.lawall@inria.fr>, Yury Norov <yury.norov@gmail.com>,
- linux-doc@vger.kernel.org, linux-kbuild@vger.kernel.org,
- linuxppc-dev@lists.ozlabs.org, dri-devel@lists.freedesktop.org,
- linux-stm32@st-md-mailman.stormreply.com,
- linux-arm-kernel@lists.infradead.org, linux-rdma@vger.kernel.org,
- linux-usb@vger.kernel.org, linux-ext4@vger.kernel.org,
- linux-nfs@vger.kernel.org, kvm@vger.kernel.org,
- intel-gfx@lists.freedesktop.org
-References: <20260621093430.264983361@kernel.org>
- <20260622083440.GX49951@noisy.programming.kicks-ass.net>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20260622083440.GX49951@noisy.programming.kicks-ass.net>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20260620122751.388770-1-doehyunbaek@gmail.com>
+In-Reply-To: <20260620122751.388770-1-doehyunbaek@gmail.com>
+From: Nhat Pham <nphamcs@gmail.com>
+Date: Mon, 22 Jun 2026 09:41:27 -0700
+X-Gm-Features: AVVi8Cd1E9iWuTavN333q7KTJh9z6lMcL3JaeYY8kLllaHZeODJX9lKEfi3XoXA
+Message-ID: <CAKEwX=Oe+Oz3h2+jkg=EDszbaM5JaeO3H1dAfXqudskad58N-Q@mail.gmail.com>
+Subject: Re: [PATCH] Docs/admin-guide/cgroup-v2: fix memory.stat doc details
+To: Doehyun Baek <doehyunbaek@gmail.com>
+Cc: Tejun Heo <tj@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Johannes Weiner <hannes@cmpxchg.org>, 
+	=?UTF-8?Q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>, 
+	Andrew Morton <akpm@linux-foundation.org>, Shakeel Butt <shakeel.butt@linux.dev>, 
+	Roman Gushchin <roman.gushchin@linux.dev>, Yosry Ahmed <yosry@kernel.org>, cgroups@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-93114-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[26];
-	FORGED_RECIPIENTS(0.00)[m:peterz@infradead.org,m:rostedt@kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:mhiramat@kernel.org,m:mark.rutland@arm.com,m:mathieu.desnoyers@efficios.com,m:akpm@linux-foundation.org,m:torvalds@linux-foundation.org,m:bigeasy@linutronix.de,m:john.ogness@linutronix.de,m:tglx@kernel.org,m:julia.lawall@inria.fr,m:yury.norov@gmail.com,m:linux-doc@vger.kernel.org,m:linux-kbuild@vger.kernel.org,m:linuxppc-dev@lists.ozlabs.org,m:dri-devel@lists.freedesktop.org,m:linux-stm32@st-md-mailman.stormreply.com,m:linux-arm-kernel@lists.infradead.org,m:linux-rdma@vger.kernel.org,m:linux-usb@vger.kernel.org,m:linux-ext4@vger.kernel.org,m:linux-nfs@vger.kernel.org,m:kvm@vger.kernel.org,m:intel-gfx@lists.freedesktop.org,m:yurynorov@gmail.com,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FORGED_RECIPIENTS(0.00)[m:doehyunbaek@gmail.com,m:tj@kernel.org,m:corbet@lwn.net,m:hannes@cmpxchg.org,m:mkoutny@suse.com,m:akpm@linux-foundation.org,m:shakeel.butt@linux.dev,m:roman.gushchin@linux.dev,m:yosry@kernel.org,m:cgroups@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER(0.00)[nphamcs@gmail.com,linux-doc@vger.kernel.org];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,arm.com,efficios.com,linux-foundation.org,linutronix.de,inria.fr,gmail.com,lists.ozlabs.org,lists.freedesktop.org,st-md-mailman.stormreply.com,lists.infradead.org];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-93115-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[nphamcs@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,infradead.org:dkim,infradead.org:mid,infradead.org:from_mime]
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,vger.kernel.org:from_smtp,mail.gmail.com:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 193DD6B131C
+X-Rspamd-Queue-Id: A2FED6B1351
 
+On Sat, Jun 20, 2026 at 5:28=E2=80=AFAM Doehyun Baek <doehyunbaek@gmail.com=
+> wrote:
+>
+> Fix minor cgroup v2 memory.stat documentation issues.  Correct the
+> vmalloc per-node marker now that vmalloc uses the native NR_VMALLOC node
+> stat, and document zswap_incomp as a byte-valued memory amount instead
+> of as a page counter.
+>
+> Fixes: c466412c73c3 ("mm: memcontrol: switch to native NR_VMALLOC vmstat =
+counter")
+> Fixes: 5ad41a38c364 ("mm: zswap: add per-memcg stat for incompressible pa=
+ges")
+> Signed-off-by: Doehyun Baek <doehyunbaek@gmail.com>
+> -               Number of incompressible pages currently stored in zswap
+> +               Amount of memory used by incompressible pages currently s=
+tored in zswap
+>                 without compression. These pages could not be compressed =
+to
+>                 a size smaller than PAGE_SIZE, so they are stored as-is.
+>
 
+Good catch :)
 
-On 6/22/26 1:34 AM, Peter Zijlstra wrote:
-> On Sun, Jun 21, 2026 at 05:34:30AM -0400, Steven Rostedt wrote:
->> There's been complaints about trace_printk() being defined in kernel.h as it
->> can increase the compilation time. As it is only used by some developers for
->> debugging purposes, it should not be in kernel.h causing lots of wasted CPU
->> cycles for those that do not ever care about it.
->>
->> Instead, add a CONFIG_TRACE_PRINTK_DEBUGGING option that developers that do
->> use it can set and not have to always remember to add #include <linux/trace_printk.h>
->> to the files they add trace_printk() while debugging. It also means that
->> those that do not have that config set will not have to worry about wasted
->> CPU cycles as it is only include in the CFLAGS when the option is set, and
->> its completely ignored otherwise.
-> 
-> Did you forget your C 101 class? If you use a function, you gotta
-> include the relevant header.
-
-Also item #1 in Documentation/process/submit-checklist.rst.
-
-> You don't see userspace saying: 'Hey, you know what, perhaps we should
-> add stdio.h to every other header, just in case someone wants to
-> printf()' either.
-> 
-> I really don't understand your argument. Yes, maybe someone will forget
-> and then either their editor (if they have a halfway modern setup with
-> LSP enabled) or their build will complain, but so what? This is all
-> trivial stuff, surely we have more pressing matters to concern outselves
-> with?
-
-
-
--- 
-~Randy
-
+Reviewed-by: Nhat Pham <nphamcs@gmail.com>
 
