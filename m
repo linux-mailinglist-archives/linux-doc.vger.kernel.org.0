@@ -1,154 +1,197 @@
-Return-Path: <linux-doc+bounces-93083-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93082-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 7YZfGnwyOWpnoQcAu9opvQ
-	(envelope-from <linux-doc+bounces-93083-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2026 15:02:52 +0200
+	id PCLfMgwxOWrmoAcAu9opvQ
+	(envelope-from <linux-doc+bounces-93082-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2026 14:56:44 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DCE2D6AFA25
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2026 15:02:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE2536AF9A1
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2026 14:56:43 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=xn--rombobjrn-67a.se header.s=a header.b=g4xfAG22;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93083-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93083-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=none;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=dhTXUQv3;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93082-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93082-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id AA399300E15C
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2026 13:02:28 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id D42F83008C82
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2026 12:56:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7F8C03AEF45;
-	Mon, 22 Jun 2026 13:02:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 40C563AD535;
+	Mon, 22 Jun 2026 12:56:37 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.xn--rombobjrn-67a.se (nestor.xn--rombobjrn-67a.se [188.126.83.49])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7D5993B1025;
-	Mon, 22 Jun 2026 13:02:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F4B53AD522;
+	Mon, 22 Jun 2026 12:56:36 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782133347; cv=none; b=IB04lyhkNX0lNkji5aDxOeBuRNwFLkKpvUwzJtZu46YkRIM6CzFF5jnqUR5b7BRkyuOOtqSoSykgJ+MUhktWo6O6ej0rq5MFbrgXnDtutvDdmj44/TMVZF+0+OcBpPVVU8H62C0KCon6WHd52sgd/+LvANT50MG80CPZFg/MQE4=
+	t=1782132997; cv=none; b=WSuP01vCGnrojUiQ5RA2C6WhkkWVMRplRJnS/QQrsOKthl/l3twkVmlbu2KTuMJQE3lrZ1MmjfFm3KfwSpohZmfMhLcz7lh2i/rJrV31pmaXvDs1PvLskEGoTgGpN685tFp3+vP6pyTn0D3D4QuXZ2UmWhBc9T90PwUVNX24Yl4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782133347; c=relaxed/simple;
-	bh=GAhKwumPBM/ZJ/fs2a5wZfugooTYZFZ1iglSmH60i2Q=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=ubsLX4DdPqoJWvFQjKbplKGH4lFuQnTPdFMBd1x1wO7W1xeiSOCB8Re9kw76KiAfLEDJKsH0pvz8d0KKJxU2dpcbs6xKQ3spyuRofMRjPQKRDspxRvWWyHvxEkltlFIQo/zEjVN1LL27Nbb8aXUgnozXKLpsB12bKGaqzj83x1E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=xn--rombobjrn-67a.se; spf=pass smtp.mailfrom=xn--rombobjrn-67a.se; dkim=pass (2048-bit key) header.d=xn--rombobjrn-67a.se header.i=@xn--rombobjrn-67a.se header.b=g4xfAG22; arc=none smtp.client-ip=188.126.83.49
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=xn--rombobjrn-67a.se;
-	s=a; t=1782132878; bh=GAhKwumPBM/ZJ/fs2a5wZfugooTYZFZ1iglSmH60i2Q=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type:From:Sender:Reply-To:Original-From:
-	 Organization:To:CC:Subject:Original-Subject:Date:Message-ID:
-	 In-Reply-To:References:Original-Message-ID:
-	 Disposition-Notification-To:Disposition-Notification-Options:
-	 MIME-Version:Content-Transfer-Encoding:Content-Type:
-	 Content-Features:Content-Alternative:Content-Location:
-	 TLS-Report-Domain:TLS-Report-Submitter:MT-Priority;
-	b=g4xfAG22+OX2dShJpgZCots46hqwpNBazf7IiMIDRF+vF8wO08FNeNFNHmJAyAG/P
-	 VhQF6LIC0Dbs4pEJiRJ51JMdvg4K1ezPwLDyNSByS2ALIzlOz5ej8BZvn10ZLp2RPA
-	 0USgCtkNPhqVyVEWpSVvy9DIGDJkjUxlIokBlwTngbT8ur8YNlVse4ZOHOCVqZG3dT
-	 3/PKKdD7EbmUdt4xcu/h2Wr+Kc7h7dgZnTFzyYKA/QHAslBZyHjGzKhaUSbQeZ8bVI
-	 4/YrD+iadJNgjK8OSuba5LXHSor1v0bQpgpCuWoZVpwbn50Uc2PkzE105x6oWcOo9R
-	 hvx0CxnjOFWkQ==
-Received: from tag.xn--rombobjrn-67a.se (tag.xn--rombobjrn-67a.se [192.168.72.9])
-	by smtp.xn--rombobjrn-67a.se (Postfix) with ESMTPSA id AE1E8407E8E5;
-	Mon, 22 Jun 2026 14:54:38 +0200 (CEST)
-Date: Mon, 22 Jun 2026 14:54:01 +0200
-From: =?UTF-8?B?QmrDtnJu?= Persson <Bjorn@xn--rombobjrn-67a.se>
-To: Lee Jones <lee@kernel.org>
-Cc: Pavel Machek <pavel@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah
- Khan <skhan@linuxfoundation.org>, linux-leds@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] docs: leds: uleds: Make the documentation match the
- code.
-Message-ID: <20260622145401.3364c9cd@tag.xn--rombobjrn-67a.se>
-In-Reply-To: <20260513134505.GZ305027@google.com>
-References: <20260402220811.4804DD8F722@tag.xn--rombobjrn-67a.se>
-	<20260423152655.GF170138@google.com>
-	<20260424194714.71de0ef6@tag.xn--rombobjrn-67a.se>
-	<20260507131128.GM305027@google.com>
-	<20260510214308.09652225@tag.xn--rombobjrn-67a.se>
-	<20260513134505.GZ305027@google.com>
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
+	s=arc-20240116; t=1782132997; c=relaxed/simple;
+	bh=l2iDIuaF1VKCPijPKmXFMyUN8rIqLYAfStTAg8/YV8I=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=ZHKrw3Nhn52bdfoNiJNHUDNMR7jbr5WQF6PpZihzob4vIQgiKjGUIvhes5zikUAt9rfAAtMBxu4TYMQBmd7XVMrRTagGXTaM/i4YDuWx7ltxGromykrC4LF8qdbAaHY3itDG9xt9g2h6RWqXRTJcpxXiDivLuXS5eNqtgyJGbKc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dhTXUQv3; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 77C321F000E9;
+	Mon, 22 Jun 2026 12:56:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1782132995;
+	bh=l2iDIuaF1VKCPijPKmXFMyUN8rIqLYAfStTAg8/YV8I=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=dhTXUQv3s+G3948VNEUzwG8LXH8B99YNS4TcI8bDdEjy3NoNMQW8qC1bUUBSBq0Gl
+	 9CS1dv+dU1cEQKaafkSSnUFEbNMHMoE6bXWDLVN7hboEaUaa0dWkHmM3ceKJRehheI
+	 62XYgsevyO2fp8MahzfXuYboKooKO40EB5EXQNxnRy3bIhPev9AIkS9Bp6dEnSFUlM
+	 AjZ2wghBrD6limeBOmkB7AGjF4ZSY0kPfNw6svzcq0JIoX8gZWxztnmnWbaGHMOIDY
+	 oHJqQ4QcmtGnNGHxzYYAGiy5TkFXhUSIZiiK6+1TAFqEmqIuNPWL3IkLCH3FgkliFd
+	 sxlx9gq6SF69w==
+Message-ID: <4ab3bf02-70b9-4748-a12e-2bd564fec53d@kernel.org>
+Date: Mon, 22 Jun 2026 21:56:24 +0900
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/i.h8v9BQtXONSkWzVFG1ZFz";
- protocol="application/pgp-signature"; micalg=pgp-sha512
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 0/2] kasan: hw_tags: Add option to tag only at
+ allocation time
+To: Catalin Marinas <catalin.marinas@arm.com>
+Cc: Dev Jain <dev.jain@arm.com>, ryabinin.a.a@gmail.com,
+ akpm@linux-foundation.org, corbet@lwn.net, glider@google.com,
+ andreyknvl@gmail.com, dvyukov@google.com, vincenzo.frascino@arm.com,
+ kasan-dev@googlegroups.com, linux-mm@kvack.org,
+ linux-kernel@vger.kernel.org, skhan@linuxfoundation.org,
+ workflows@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, ryan.roberts@arm.com,
+ anshuman.khandual@arm.com, kaleshsingh@google.com, 21cnbao@gmail.com,
+ david@kernel.org, will@kernel.org
+References: <20260612044425.763060-1-dev.jain@arm.com>
+ <b1502a60-09a1-4699-886b-93d041de7023@kernel.org>
+ <2a7d21fa-28c1-446c-97f5-2513f29157d3@kernel.org> <ajU-b32dmwS7XOg4@arm.com>
+Content-Language: en-US
+From: Harry Yoo <harry@kernel.org>
+In-Reply-To: <ajU-b32dmwS7XOg4@arm.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------upsrUBOQYnFEnSXIs0AYK6aO"
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.76 / 15.00];
+X-Spamd-Result: default: False [-5.76 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	SIGNED_PGP(-2.00)[];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_DKIM_ALLOW(-0.20)[xn--rombobjrn-67a.se:s=a];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	MIME_GOOD(-0.20)[multipart/signed,multipart/mixed,text/plain];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_FROM(0.00)[bounces-93082-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-93083-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:lee@kernel.org,m:pavel@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-leds@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
-	DMARC_NA(0.00)[xn--rombobjrn-67a.se];
-	FORGED_SENDER(0.00)[Bjorn@xn--rombobjrn-67a.se,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	DKIM_TRACE(0.00)[xn--rombobjrn-67a.se:+];
-	FORWARDED(0.00)[lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER(0.00)[harry@kernel.org,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	FORGED_RECIPIENTS(0.00)[m:catalin.marinas@arm.com,m:dev.jain@arm.com,m:ryabinin.a.a@gmail.com,m:akpm@linux-foundation.org,m:corbet@lwn.net,m:glider@google.com,m:andreyknvl@gmail.com,m:dvyukov@google.com,m:vincenzo.frascino@arm.com,m:kasan-dev@googlegroups.com,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:skhan@linuxfoundation.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:ryan.roberts@arm.com,m:anshuman.khandual@arm.com,m:kaleshsingh@google.com,m:21cnbao@gmail.com,m:david@kernel.org,m:will@kernel.org,m:ryabininaa@gmail.com,s:lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[Bjorn@xn--rombobjrn-67a.se,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	HAS_ATTACHMENT(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	ALIAS_RESOLVED(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[harry@kernel.org,linux-doc@vger.kernel.org];
+	PRECEDENCE_BULK(0.00)[];
+	FREEMAIL_CC(0.00)[arm.com,gmail.com,linux-foundation.org,lwn.net,google.com,googlegroups.com,kvack.org,vger.kernel.org,linuxfoundation.org,lists.infradead.org,kernel.org];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[7];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tag.xn--rombobjrn-67a.se:mid,xn--rombobjrn-67a.se:dkim,xn--rombobjrn-67a.se:from_mime,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: DCE2D6AFA25
+X-Rspamd-Queue-Id: BE2536AF9A1
 
---Sig_/i.h8v9BQtXONSkWzVFG1ZFz
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------upsrUBOQYnFEnSXIs0AYK6aO
+Content-Type: multipart/mixed; boundary="------------Ps3zmfE9YngvIs8RaS9wbP7c";
+ protected-headers="v1"
+From: Harry Yoo <harry@kernel.org>
+To: Catalin Marinas <catalin.marinas@arm.com>
+Cc: Dev Jain <dev.jain@arm.com>, ryabinin.a.a@gmail.com,
+ akpm@linux-foundation.org, corbet@lwn.net, glider@google.com,
+ andreyknvl@gmail.com, dvyukov@google.com, vincenzo.frascino@arm.com,
+ kasan-dev@googlegroups.com, linux-mm@kvack.org,
+ linux-kernel@vger.kernel.org, skhan@linuxfoundation.org,
+ workflows@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, ryan.roberts@arm.com,
+ anshuman.khandual@arm.com, kaleshsingh@google.com, 21cnbao@gmail.com,
+ david@kernel.org, will@kernel.org
+Message-ID: <4ab3bf02-70b9-4748-a12e-2bd564fec53d@kernel.org>
+Subject: Re: [RFC PATCH 0/2] kasan: hw_tags: Add option to tag only at
+ allocation time
+References: <20260612044425.763060-1-dev.jain@arm.com>
+ <b1502a60-09a1-4699-886b-93d041de7023@kernel.org>
+ <2a7d21fa-28c1-446c-97f5-2513f29157d3@kernel.org> <ajU-b32dmwS7XOg4@arm.com>
+In-Reply-To: <ajU-b32dmwS7XOg4@arm.com>
+
+--------------Ps3zmfE9YngvIs8RaS9wbP7c
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Lee Jones wrote:
-> On Sun, 10 May 2026, Bj=C3=B6rn Persson wrote:
-> > If API documentation isn't allowed to name a type, then I withdraw the
-> > patch.
+
+
+On 6/19/26 10:04 PM, Catalin Marinas wrote:
+> On Thu, Jun 18, 2026 at 11:05:43PM +0900, Harry Yoo wrote:
+>> On 6/18/26 10:35 PM, Harry Yoo wrote:
+>>> On 6/12/26 1:44 PM, Dev Jain wrote:
+>>>> Introduce a boot option to tag only at allocation time of the object=
+s. This
+>>>> reduces KASAN MTE overhead, the tradeoff being reduced ability of
+>>>> catching bugs.
+>>>
+>>> I think most of overhead when enabling MTE comes from loading and
+>>> validing tags for every memory access (either in SYNC or ASYNC mode),=
+
+>>> rather than from storing tags.
+>>
+>> Is there any reason not to use STGM instead of STG + DC GVA when
+>> setting/clearing tags for large sizes when we know they are properly
+>> aligned?
 >=20
-> It's not that it's "not allowed".
+> STGM is intended for copying tags when paired with LDGM. Have you seen
+> hardware where STGM is faster than STG or DC GVA?
 
-In that case there may be a chance. I'm sending version 2.
+No, I haven't. It was a question I had after learning that there are
+multiple ways to store tags ;)
 
-Bj=C3=B6rn Persson
+> For properly aligned
+> buffers, I'd expect DC GVA to behave at least on par with STGM.
 
---Sig_/i.h8v9BQtXONSkWzVFG1ZFz
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signatur
+Thanks for answering!
+
+--=20
+Cheers,
+Harry / Hyeonggon
+
+--------------Ps3zmfE9YngvIs8RaS9wbP7c--
+
+--------------upsrUBOQYnFEnSXIs0AYK6aO
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEE52SginNFTPmg+iBb4Tha3NZK5j8FAmo5MGoACgkQ4Tha3NZK
-5j9IIBAAw9GN4N4UrO8ERxrcnAX06bihIvMgts5L6ln7ilfnwe4e0vqo0S0p+Iu1
-FPAKjvnT+9U6EozI0pTQqbDkH0NHaKaSKiqKUPOmptARGKOSvOzvablWVbP+gZ4Y
-3q70yoTZstYP+NneBhLKfHjC4m956r5jl8c/9lOqo8HrtaEM7vg7r9FS61iuFsdB
-J1lWN2MHY5Zj8uaEsriMGMFPLP//sli2DBhMMNqq0sEMViQLYQlnyp5H0RyF6fVE
-pXEEvNMJaX6NSg0R199Iy525lqyZaJniN6lPjAEbES5woEX4EkhMCZyhg6wefIqY
-fRDP6NjGwZLNjJDv7wlB+vfCwYJXVilNsIC03VEUHEQFCsAKYw03EkOtDISFk/Oq
-8mGs1fq4lRsIlf83Ui9qtS6jemwy6hizgKL5r3jYfdwodX8McYVkHeG5ueGfOeXF
-2xBpcEh/AVJ13ivk+ztfKsN6tbDdXsCfgVeHRw8bKOawjXT8n34Qrqhv65Rh318z
-mtZH4LcS8mehPiHTdGtKFpCMhADx9mDMWzILLPabywh6ROrlNjAZS49pjzQ/FEj9
-PiEu4+D8uYSdMMhND8zM9Ve5D0hyAD2e78hs/MmGJsYN1IyirfGt141fEO3ooX6+
-hHRjO/l0kC3UVuYOoDX5xT5AM/r+2kCbCd1mrmgHlJMmsYDhbIs=
-=VLM1
+iHUEARYKAB0WIQQQ1ub6gR5ogjaKRmOGXBN6rc5S1gUCajkw+AAKCRCGXBN6rc5S
+1qvyAPsF0DurImeEtMtFke9YXQWImsgXI+xfZ4SEz1mY+wbGswEA158qtw/Yf70R
+7SKOnegedFGVqJzsq5p+vAkSpPMfJQw=
+=RsAK
 -----END PGP SIGNATURE-----
 
---Sig_/i.h8v9BQtXONSkWzVFG1ZFz--
+--------------upsrUBOQYnFEnSXIs0AYK6aO--
 
