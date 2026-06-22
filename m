@@ -1,72 +1,72 @@
-Return-Path: <linux-doc+bounces-93128-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93131-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 2NXZCgaFOWrgugcAu9opvQ
-	(envelope-from <linux-doc+bounces-93128-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2026 20:55:02 +0200
+	id oHuzIBmEOWqzugcAu9opvQ
+	(envelope-from <linux-doc+bounces-93131-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2026 20:51:05 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 63D0D6B1EB9
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2026 20:55:01 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id AE2DA6B1E1C
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2026 20:51:04 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=google.com header.s=20251104 header.b=WNEHDTJF;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93128-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93128-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=google.com header.s=20251104 header.b=mjkZxq1u;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93131-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-93131-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=reject) header.from=google.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 7567F3026AB8
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2026 18:49:20 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 593BA3010F3B
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2026 18:49:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 340A0346E7A;
-	Mon, 22 Jun 2026 18:49:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0C09634CFAB;
+	Mon, 22 Jun 2026 18:49:16 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-f74.google.com (mail-ed1-f74.google.com [209.85.208.74])
+Received: from mail-ej1-f74.google.com (mail-ej1-f74.google.com [209.85.218.74])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68773348C7D
-	for <linux-doc@vger.kernel.org>; Mon, 22 Jun 2026 18:49:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1D6BC348896
+	for <linux-doc@vger.kernel.org>; Mon, 22 Jun 2026 18:49:08 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782154151; cv=none; b=g0N5CzQLFNdzI2h9VtqtOUo1GYYRZGSL91A3bgTQd6LJgUqTpyIgFwDaD3uwpCzTXATmLgdtw8xgR7yfj5hEjXm/jsn++NS8ur/jHzQ5aqgP4dESSK96/fRqTH1Pvq2s+t5S6M+L2xeNaOIRdz7esVf6cwbZqPUaYMs9uD4yFaI=
+	t=1782154155; cv=none; b=Yx06ZcrUM2TjG8kJ9/SLbPv5xe7VC+fzpvBhRvrhPo8WJd2siwIro9j1rrragjtZ7F4cBLawduahzDSX5FmQNLZBpayiAg6eI9qjWvPRcxpmO96gTe+n6ozoUHBoXAYAKjWWQInXH0IEc/iAlQ252GFfbwrp3Pf5Zm4rxu1itmU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782154151; c=relaxed/simple;
-	bh=eSsWjg7+Xo0AyadgQytCuqK0tjsGOi6I8g06Sl8yFn4=;
+	s=arc-20240116; t=1782154155; c=relaxed/simple;
+	bh=4fd32wwOqp1b2rzLONIyTMattuNYJq7jZ/FwvBa61es=;
 	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=VArLLvlJrZ4Cmj3oM/8BbifulPxe5ucm1JHtEZIxG3pzQpVj8Kke01jfnvBw6LNGEY0EhuKIdgsEWV+314N9NusrPBPwe6JQt+jI+pRFwR+fghLXY8/VVNWgGzxtFaqgJAR5v/3Q3x8mHkxKgCqznG8NdZXwlqZ0NvsylieCMWs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--tarunsahu.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=WNEHDTJF; arc=none smtp.client-ip=209.85.208.74
-Received: by mail-ed1-f74.google.com with SMTP id 4fb4d7f45d1cf-6960fb32b73so4305992a12.3
+	 To:Cc:Content-Type; b=K+uerQ0bVsIp3m3wG4gxZppjmKMF/jx/R4+b3NX2TZG+iflmDhVJjlxV/kToCa0CKTX3WHKYLplrP0Sa9QX2Gfh5SAkxcU3Lt4f+HhfplJBg8sJwBqRJNC9P7SbME3JkK6w9P1amAFqqZ3eLbiqqPDNKXDmB80//C5dsPSdCcps=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--tarunsahu.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=mjkZxq1u; arc=none smtp.client-ip=209.85.218.74
+Received: by mail-ej1-f74.google.com with SMTP id a640c23a62f3a-c08306ae1c3so379668966b.1
         for <linux-doc@vger.kernel.org>; Mon, 22 Jun 2026 11:49:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20251104; t=1782154146; x=1782758946; darn=vger.kernel.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=vrCK2iLTFuPkCKKXsEtILhMjhO8cYkJcRVq4TpiCh/Y=;
-        b=WNEHDTJFRR+c8NsWPLxQ2QcGrI1YuQpKfqoZi8ml5Iqsn7oGqu6f6mVBgJfhuM4xtB
-         OD7RATSFTmdsCde4ycwQcIU2R4LirjnkvpLSoFy9gQI9XiQ3jSvKPc1jPputg6SL4Ifv
-         1c7SvNBBW/3P3XONzjwQvGiNqqt77CvnN1gsPf1rrLZqyCCUgbAVMmZg6tkz0tBHIhh1
-         LfdtvjDGx5wstoNGR1XcAfFoUyR2Ena9qi6ToDYY7wDbffPKQmdLt9njkAoSqSU2p7q6
-         Nfh2h6mBiYlEoKci8JGvyoY73sgyYnhuyFJ+d772lhIq1XMXEnGR+VfrjJrKnUMczi8J
-         b2tQ==
+        bh=rUJD/qDxfrMv3GVCezTN8Ddb/ezsPEksCOi1qF1OubI=;
+        b=mjkZxq1uCscN4VHN7R6YR3M3S76N9nAR+Ay9+U4K/IoTLo7GqF1DBIQ40Yw+/vniUr
+         a+KU7nELmaeRZCvbynQxoaHmEg69yr7wCNZHYmMtnyfRtJUzQRZmRuP0wnDDpSMG6+1f
+         puuQqj//570IkH2uUnmVp/xDcZo/JCDNnL4K6eB+WQkKIGkNk7GlL8WQzFvGITNs/ELI
+         Th6euIjg3PlbFHfDsw84PCZjWorTqi8rZG4FnDjLHZ950SPGomUHm6DVKl8oo58YcCIh
+         zJjy9L7g6n76zXlN0mb9S0wSrK4Bb2GMyzRjysnAWuNLLgvu0xRwLgBYHzi81UquwCNz
+         etHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20251104; t=1782154146; x=1782758946;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=vrCK2iLTFuPkCKKXsEtILhMjhO8cYkJcRVq4TpiCh/Y=;
-        b=X0hECE5aDUbhc4zr6HEiFUsPvOj6hRXFYEZasgdxrRmyvoFQlZpN7tUnlPgrI+yqOX
-         pQ1Vxc4eihqrek9hzWcNjrySzgiWvuJLCW9ajmxetMZTgpYzBCoGAB01QenY6nfe3+AY
-         m32Sf925Zwa4k/lPpMEjJ7ylLBXOcv0FmfjBFrW0rWgcOULlcSK7ZkfVcL9IE6+I5eos
-         xsOh6b592HukeFaHAOjlwiqoPBynXH6wiWv79q4YHWxh4aRpDm/OkyL4UdffeV7sNf+x
-         ZjWDrRvgilyi9PUx6NfkeJAVpkn5/CTNId5POHIXij9VVzkv3lw4bgyttck08CP1MpyR
-         Nn2Q==
-X-Forwarded-Encrypted: i=1; AFNElJ9ApIlVvAUDSBiNntat+AP+SzbdAy5f4a5i9rESAXEX7vbYH0YxzOHLo6AwoUFb+DB68B4gZM7RTrs=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxDAhxJ1n9n8JLvLlpJYuXqYlBCG1JjmiuTsSnyyGJSydvcwyUY
-	LLJeBo5pS5uWLoCF4XmIHFlZpViYXKi6twjSdaPuGMlzCTO79TLLyRN6xQfl32nIexvPBaWb+vi
-	mS0+hN4b6ct3Ytj5pKA==
-X-Received: from edsl17.prod.google.com ([2002:aa7:d951:0:b0:695:f6a4:adb4])
+        bh=rUJD/qDxfrMv3GVCezTN8Ddb/ezsPEksCOi1qF1OubI=;
+        b=NhGO2X/od+NGFWaoBLnHcomHYQmuPBS4izl6GVN8MiO5A4EQ45qlS/ZeTTV1v8k632
+         LvyXxD5iifTZOZIqBnbCRmI2yycMNC0g9Gd7VD6wcV+ssrXYLb9S3GO4eQ5qJGhBiU0h
+         s8jZvSkgrIlj3nzEIw+7+WTPm0y+ew85iiEtx/mC+R197zyb5ysVlIn42ojFciVPvZ5h
+         mbEk6iLURrF7KlFcS9o7ByeK2miY7cuvvext7/BeVci4E7aZPpGJa7N/5JXcq1V/pLrC
+         Y8oFWqFfEcYnZLJAmlg3SYFfwJwTYiF1QvKRxl3pQ4SFdjFANYT95KX1j27hfataF+QS
+         bnyA==
+X-Forwarded-Encrypted: i=1; AFNElJ9QjMcZfb8Yu6yHB8vPddEF2+4QHdxp8GCxRdNTqD8XbxEoRdss0m+2tK+ci6VSskiBZq95Yzemg2o=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxEOAdizwBH80QIFQZ+3ywaBRbMnFupTirofR0r2xcsuaZglYNv
+	WUjUZxc+v+A1VlwbLqzb+uUY4+W1dGdZCEGXSHm/DfxExlLlV1U3phxpCGpcYxJVKcXnYWTNH2n
+	V3SW7knQ2TJ1NlRCbmA==
+X-Received: from ejet16.prod.google.com ([2002:a17:906:1790:b0:c08:3cd3:d05f])
  (user=tarunsahu job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:6402:35ca:b0:697:bd1d:116d with SMTP id 4fb4d7f45d1cf-697bd1d14acmr2221698a12.27.1782154145133;
- Mon, 22 Jun 2026 11:49:05 -0700 (PDT)
-Date: Mon, 22 Jun 2026 18:48:46 +0000
+ 2002:a17:906:7951:b0:bf1:1df7:3e50 with SMTP id a640c23a62f3a-c0c63dba03amr559821466b.3.1782154146145;
+ Mon, 22 Jun 2026 11:49:06 -0700 (PDT)
+Date: Mon, 22 Jun 2026 18:48:47 +0000
 In-Reply-To: <20260622184851.2309827-1-tarunsahu@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -76,9 +76,9 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 Mime-Version: 1.0
 References: <20260622184851.2309827-1-tarunsahu@google.com>
 X-Mailer: git-send-email 2.55.0.rc0.786.g65d90a0328-goog
-Message-ID: <20260622184851.2309827-5-tarunsahu@google.com>
-Subject: [PATCH v3 4/9] kvm: guest_memfd: Move internal definitions and helper
- to new header
+Message-ID: <20260622184851.2309827-6-tarunsahu@google.com>
+Subject: [PATCH v3 5/9] kvm: guest_memfd: Add support for freezing and
+ unfreezing mappings
 From: Tarun Sahu <tarunsahu@google.com>
 To: Jonathan Corbet <corbet@lwn.net>, Mike Rapoport <rppt@kernel.org>, Paolo Bonzini <pbonzini@redhat.com>, 
 	Alexander Graf <graf@amazon.com>, Shuah Khan <skhan@linuxfoundation.org>, 
@@ -95,20 +95,20 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
 	MV_CASE(0.50)[];
 	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:corbet@lwn.net,m:rppt@kernel.org,m:pbonzini@redhat.com,m:graf@amazon.com,m:skhan@linuxfoundation.org,m:pratyush@kernel.org,m:tarunsahu@google.com,m:pasha.tatashin@soleen.com,m:kvm@vger.kernel.org,m:linux-mm@kvack.org,m:kexec@lists.infradead.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER(0.00)[tarunsahu@google.com,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[14];
-	FORGED_RECIPIENTS(0.00)[m:corbet@lwn.net,m:rppt@kernel.org,m:pbonzini@redhat.com,m:graf@amazon.com,m:skhan@linuxfoundation.org,m:pratyush@kernel.org,m:tarunsahu@google.com,m:pasha.tatashin@soleen.com,m:kvm@vger.kernel.org,m:linux-mm@kvack.org,m:kexec@lists.infradead.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-93128-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-93131-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
@@ -118,187 +118,241 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 63D0D6B1EB9
+X-Rspamd-Queue-Id: AE2DA6B1E1C
 
-To support guest_memfd memory preservation with LUO, guest_memfd luo
-code needs to access guest_memfd internals and reconstruct guest_memfd
-file instances from a preserved state.
+This patch introduces the freeze on gmem_inode which prevents
+the fallocate call and any new page fault allocation. This will avoid
+gmem file modification when it is being preserved
 
-Extract gmem_file, gmem_inode, and the GMEM_I() helper from guest_memfd.c
-into a new internal header virt/kvm/guest_memfd.h.
+Used srcu lock to synchronise the freeze call, where write blocks
+until all the reads are free. And reads are re-entrant.
 
-Additionally, split __kvm_gmem_create() to expose a non-static
-__kvm_gmem_create_file() helper. This helper returns a struct file
-instead of a file descriptor, enabling file creation and initialization
-without installing it into a file descriptor table.
+Incase fault fails, It return -EPERM and VM_EXIT to userspace. userspace
+must handle this properly as every new fault will fail.
 
 Signed-off-by: Tarun Sahu <tarunsahu@google.com>
 ---
- virt/kvm/guest_memfd.c | 68 +++++++++++++++++-------------------------
- virt/kvm/guest_memfd.h | 39 ++++++++++++++++++++++++
- 2 files changed, 67 insertions(+), 40 deletions(-)
- create mode 100644 virt/kvm/guest_memfd.h
+ virt/kvm/guest_memfd.c | 117 +++++++++++++++++++++++++++++++++++++----
+ virt/kvm/guest_memfd.h |   5 ++
+ 2 files changed, 111 insertions(+), 11 deletions(-)
 
 diff --git a/virt/kvm/guest_memfd.c b/virt/kvm/guest_memfd.c
-index 8669068..fe1adc9b 100644
+index fe1adc9b..a4d9d34 100644
 --- a/virt/kvm/guest_memfd.c
 +++ b/virt/kvm/guest_memfd.c
-@@ -7,38 +7,12 @@
+@@ -7,11 +7,13 @@
  #include <linux/mempolicy.h>
  #include <linux/pseudo_fs.h>
  #include <linux/pagemap.h>
-+#include "guest_memfd.h"
++#include <linux/srcu.h>
+ #include "guest_memfd.h"
  
  #include "kvm_mm.h"
  
  static struct vfsmount *kvm_gmem_mnt;
++static struct srcu_struct kvm_gmem_freeze_srcu;
  
--/*
-- * A guest_memfd instance can be associated multiple VMs, each with its own
-- * "view" of the underlying physical memory.
-- *
-- * The gmem's inode is effectively the raw underlying physical storage, and is
-- * used to track properties of the physical memory, while each gmem file is
-- * effectively a single VM's view of that storage, and is used to track assets
-- * specific to its associated VM, e.g. memslots=>gmem bindings.
-- */
--struct gmem_file {
--	struct kvm *kvm;
--	struct xarray bindings;
--	struct list_head entry;
--};
--
--struct gmem_inode {
--	struct shared_policy policy;
--	struct inode vfs_inode;
--	struct list_head gmem_file_list;
--
--	u64 flags;
--};
--
--static __always_inline struct gmem_inode *GMEM_I(struct inode *inode)
--{
--	return container_of(inode, struct gmem_inode, vfs_inode);
--}
  
  #define kvm_gmem_for_each_file(f, inode) \
- 	list_for_each_entry(f, &GMEM_I(inode)->gmem_file_list, entry)
-@@ -557,23 +531,17 @@ bool __weak kvm_arch_supports_gmem_init_shared(struct kvm *kvm)
- 	return true;
- }
+@@ -96,6 +98,7 @@ static struct folio *kvm_gmem_get_folio(struct inode *inode, pgoff_t index)
+ 	/* TODO: Support huge pages. */
+ 	struct mempolicy *policy;
+ 	struct folio *folio;
++	int idx;
  
--static int __kvm_gmem_create(struct kvm *kvm, loff_t size, u64 flags)
-+struct file *__kvm_gmem_create_file(struct kvm *kvm, loff_t size, u64 flags)
- {
- 	static const char *name = "[kvm-gmem]";
- 	struct gmem_file *f;
- 	struct inode *inode;
- 	struct file *file;
--	int fd, err;
--
--	fd = get_unused_fd_flags(0);
--	if (fd < 0)
--		return fd;
-+	int err;
+ 	/*
+ 	 * Fast-path: See if folio is already present in mapping to avoid
+@@ -105,12 +108,20 @@ static struct folio *kvm_gmem_get_folio(struct inode *inode, pgoff_t index)
+ 	if (!IS_ERR(folio))
+ 		return folio;
  
- 	f = kzalloc_obj(*f);
--	if (!f) {
--		err = -ENOMEM;
--		goto err_fd;
--	}
-+	if (!f)
-+		return ERR_PTR(-ENOMEM);
- 
- 	/* __fput() will take care of fops_put(). */
- 	if (!fops_get(&kvm_gmem_fops)) {
-@@ -612,8 +580,7 @@ static int __kvm_gmem_create(struct kvm *kvm, loff_t size, u64 flags)
- 	xa_init(&f->bindings);
- 	list_add(&f->entry, &GMEM_I(inode)->gmem_file_list);
- 
--	fd_install(fd, file);
--	return fd;
-+	return file;
- 
- err_inode:
- 	iput(inode);
-@@ -621,7 +588,28 @@ static int __kvm_gmem_create(struct kvm *kvm, loff_t size, u64 flags)
- 	fops_put(&kvm_gmem_fops);
- err_gmem:
- 	kfree(f);
--err_fd:
-+	return ERR_PTR(err);
-+}
-+
-+static int __kvm_gmem_create(struct kvm *kvm, loff_t size, u64 flags)
-+{
-+	struct file *file;
-+	int fd, err;
-+
-+	fd = get_unused_fd_flags(0);
-+	if (fd < 0)
-+		return fd;
-+
-+	file = __kvm_gmem_create_file(kvm, size, flags);
-+	if (IS_ERR(file)) {
-+		err = PTR_ERR(file);
-+		goto err_put_fd;
++	idx = srcu_read_lock(&kvm_gmem_freeze_srcu);
++	if (kvm_gmem_is_frozen(inode)) {
++		srcu_read_unlock(&kvm_gmem_freeze_srcu, idx);
++		return ERR_PTR(-EPERM);
 +	}
 +
-+	fd_install(fd, file);
-+	return fd;
+ 	policy = mpol_shared_policy_lookup(&GMEM_I(inode)->policy, index);
+ 	folio = __filemap_get_folio_mpol(inode->i_mapping, index,
+ 					 FGP_LOCK | FGP_CREAT,
+ 					 mapping_gfp_mask(inode->i_mapping), policy);
+ 	mpol_cond_put(policy);
+ 
++	srcu_read_unlock(&kvm_gmem_freeze_srcu, idx);
 +
-+err_put_fd:
- 	put_unused_fd(fd);
- 	return err;
+ 	/*
+ 	 * External interfaces like kvm_gmem_get_pfn() support dealing
+ 	 * with hugepages to a degree, but internally, guest_memfd currently
+@@ -273,16 +284,30 @@ static long kvm_gmem_allocate(struct inode *inode, loff_t offset, loff_t len)
+ static long kvm_gmem_fallocate(struct file *file, int mode, loff_t offset,
+ 			       loff_t len)
+ {
++	struct inode *inode = file_inode(file);
+ 	int ret;
++	int idx;
+ 
+-	if (!(mode & FALLOC_FL_KEEP_SIZE))
+-		return -EOPNOTSUPP;
++	idx = srcu_read_lock(&kvm_gmem_freeze_srcu);
++	if (kvm_gmem_is_frozen(inode)) {
++		srcu_read_unlock(&kvm_gmem_freeze_srcu, idx);
++		return -EPERM;
++	}
+ 
+-	if (mode & ~(FALLOC_FL_KEEP_SIZE | FALLOC_FL_PUNCH_HOLE))
+-		return -EOPNOTSUPP;
++	if (!(mode & FALLOC_FL_KEEP_SIZE)) {
++		ret = -EOPNOTSUPP;
++		goto out;
++	}
+ 
+-	if (!PAGE_ALIGNED(offset) || !PAGE_ALIGNED(len))
+-		return -EINVAL;
++	if (mode & ~(FALLOC_FL_KEEP_SIZE | FALLOC_FL_PUNCH_HOLE)) {
++		ret = -EOPNOTSUPP;
++		goto out;
++	}
++
++	if (!PAGE_ALIGNED(offset) || !PAGE_ALIGNED(len)) {
++		ret = -EINVAL;
++		goto out;
++	}
+ 
+ 	if (mode & FALLOC_FL_PUNCH_HOLE)
+ 		ret = kvm_gmem_punch_hole(file_inode(file), offset, len);
+@@ -291,6 +316,9 @@ static long kvm_gmem_fallocate(struct file *file, int mode, loff_t offset,
+ 
+ 	if (!ret)
+ 		file_modified(file);
++
++out:
++	srcu_read_unlock(&kvm_gmem_freeze_srcu, idx);
+ 	return ret;
  }
-diff --git a/virt/kvm/guest_memfd.h b/virt/kvm/guest_memfd.h
-new file mode 100644
-index 0000000..c528b04
---- /dev/null
-+++ b/virt/kvm/guest_memfd.h
-@@ -0,0 +1,39 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef __KVM_GUEST_MEMFD_H__
-+#define __KVM_GUEST_MEMFD_H__ 1
+ 
+@@ -948,7 +976,9 @@ static void kvm_gmem_destroy_inode(struct inode *inode)
+ 
+ static void kvm_gmem_free_inode(struct inode *inode)
+ {
+-	kmem_cache_free(kvm_gmem_inode_cachep, GMEM_I(inode));
++	struct gmem_inode *gi = GMEM_I(inode);
 +
-+#include <linux/kvm_host.h>
-+#include <linux/fs.h>
-+#include <linux/mempolicy.h>
++	kmem_cache_free(kvm_gmem_inode_cachep, gi);
+ }
+ 
+ static const struct super_operations kvm_gmem_super_operations = {
+@@ -1005,12 +1035,21 @@ int kvm_gmem_init(struct module *module)
+ 	if (!kvm_gmem_inode_cachep)
+ 		return -ENOMEM;
+ 
++	ret = init_srcu_struct(&kvm_gmem_freeze_srcu);
++	if (ret)
++		goto err_cache;
 +
-+/*
-+ * A guest_memfd instance can be associated multiple VMs, each with its own
-+ * "view" of the underlying physical memory.
+ 	ret = kvm_gmem_init_mount();
+-	if (ret) {
+-		kmem_cache_destroy(kvm_gmem_inode_cachep);
+-		return ret;
+-	}
++	if (ret)
++		goto err_srcu;
++
+ 	return 0;
++
++err_srcu:
++	cleanup_srcu_struct(&kvm_gmem_freeze_srcu);
++err_cache:
++	kmem_cache_destroy(kvm_gmem_inode_cachep);
++	return ret;
+ }
+ 
+ void kvm_gmem_exit(void)
+@@ -1018,5 +1057,61 @@ void kvm_gmem_exit(void)
+ 	kern_unmount(kvm_gmem_mnt);
+ 	kvm_gmem_mnt = NULL;
+ 	rcu_barrier();
++	cleanup_srcu_struct(&kvm_gmem_freeze_srcu);
+ 	kmem_cache_destroy(kvm_gmem_inode_cachep);
+ }
++
++/**
++ * kvm_gmem_freeze - Freeze or unfreeze a guest_memfd inode mapping.
++ * @inode: The guest_memfd inode.
++ * @freeze: True to freeze, false to unfreeze.
 + *
-+ * The gmem's inode is effectively the raw underlying physical storage, and is
-+ * used to track properties of the physical memory, while each gmem file is
-+ * effectively a single VM's view of that storage, and is used to track assets
-+ * specific to its associated VM, e.g. memslots=>gmem bindings.
++ * This API is used strictly during the live update / preservation transition
++ * window to prevent host userspace and guest-side faults from making any
++ * mapping modifications (such as fallocate or page fault allocation)
++ * to the guest_memfd page cache.
++ *
++ * Synchronization Strategy (Sleepable RCU):
++ * To avoid high-contention VFS locks (like inode_lock or
++ * filemap_invalidate_lock) on the vCPU page fault hot paths, this subsystem
++ * implements a lightweight, system-wide Sleepable RCU (SRCU) mechanism
++ * (`kvm_gmem_freeze_srcu`):
++ *
++ * Global vs. Per-Inode SRCU
++ * ======================
++ * A single system-wide global static `srcu_struct` is used instead of a
++ * per-inode SRCU structure to completely prevent unprivileged users from
++ * exhausting the host's per-CPU memory allocator. Because
++ * `init_srcu_struct()` allocates per-CPU memory via `alloc_percpu()`, which
++ * is not accounted by memory cgroups (memcg),
++ * a per-inode SRCU structure would allow a tenant to bypass cgroup limits and
++ * trigger a system-wide Out-of-Memory (OOM) crash simply by spawning a large
++ * number of guest_memfd file descriptors (bounded only by RLIMIT_NOFILE).
++ *
++ * Flag Modification Note:
++ * Since `GUEST_MEMFD_F_MAPPING_FROZEN` is the ONLY flag in
++ * `GMEM_I(inode)->flags` that is mutated dynamically at runtime (all other
++ * flags are creation-time flags which remain strictly read-only), there is
++ * no possibility of concurrent bit-modification races. Therefore, a standard
++ * `WRITE_ONCE` is fully safe and does not require complex `cmpxchg`
++ * synchronization loops.
 + */
-+struct gmem_file {
-+	struct kvm *kvm;
-+	struct xarray bindings;
-+	struct list_head entry;
-+};
-+
-+struct gmem_inode {
-+	struct shared_policy policy;
-+	struct inode vfs_inode;
-+	struct list_head gmem_file_list;
-+
-+	u64 flags;
-+};
-+
-+static inline struct gmem_inode *GMEM_I(struct inode *inode)
++void kvm_gmem_freeze(struct inode *inode, bool freeze)
 +{
-+	return container_of(inode, struct gmem_inode, vfs_inode);
++	u64 flags = READ_ONCE(GMEM_I(inode)->flags);
++
++	if (freeze)
++		flags |= GUEST_MEMFD_F_MAPPING_FROZEN;
++	else
++		flags &= ~GUEST_MEMFD_F_MAPPING_FROZEN;
++
++	WRITE_ONCE(GMEM_I(inode)->flags, flags);
++
++	if (freeze)
++		synchronize_srcu(&kvm_gmem_freeze_srcu);
 +}
 +
-+struct file *__kvm_gmem_create_file(struct kvm *kvm, loff_t size, u64 flags);
++bool kvm_gmem_is_frozen(struct inode *inode)
++{
++	return READ_ONCE(GMEM_I(inode)->flags) & GUEST_MEMFD_F_MAPPING_FROZEN;
++}
+diff --git a/virt/kvm/guest_memfd.h b/virt/kvm/guest_memfd.h
+index c528b04..028c348 100644
+--- a/virt/kvm/guest_memfd.h
++++ b/virt/kvm/guest_memfd.h
+@@ -29,11 +29,16 @@ struct gmem_inode {
+ 	u64 flags;
+ };
+ 
++/* Internal kernel-only flags (must not overlap with UAPI flags) */
++#define GUEST_MEMFD_F_MAPPING_FROZEN	(1ULL << 63)
 +
-+#endif /* __KVM_GUEST_MEMFD_H__ */
+ static inline struct gmem_inode *GMEM_I(struct inode *inode)
+ {
+ 	return container_of(inode, struct gmem_inode, vfs_inode);
+ }
+ 
+ struct file *__kvm_gmem_create_file(struct kvm *kvm, loff_t size, u64 flags);
++void kvm_gmem_freeze(struct inode *inode, bool freeze);
++bool kvm_gmem_is_frozen(struct inode *inode);
+ 
+ #endif /* __KVM_GUEST_MEMFD_H__ */
 -- 
 2.55.0.rc0.786.g65d90a0328-goog
 
