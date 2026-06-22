@@ -1,166 +1,153 @@
-Return-Path: <linux-doc+bounces-93081-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93070-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id kNULCMEwOWrWoAcAu9opvQ
-	(envelope-from <linux-doc+bounces-93081-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2026 14:55:29 +0200
+	id PkRJNX4bOWrTmwcAu9opvQ
+	(envelope-from <linux-doc+bounces-93070-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2026 13:24:46 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1AB326AF989
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2026 14:55:28 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1275C6AF09F
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2026 13:24:46 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=xn--rombobjrn-67a.se header.s=a header.b=kjL6eW66;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93081-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93081-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=none;
+	dkim=pass header.d=hammerspace.com header.s=google header.b=KblrSsBX;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93070-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-93070-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=hammerspace.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 3D3323006001
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2026 12:55:25 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E8D5E30382BC
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2026 11:23:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 17E9F3ADB91;
-	Mon, 22 Jun 2026 12:55:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C309139A4DF;
+	Mon, 22 Jun 2026 11:23:51 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.xn--rombobjrn-67a.se (nestor.xn--rombobjrn-67a.se [188.126.83.49])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-oi1-f171.google.com (mail-oi1-f171.google.com [209.85.167.171])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3444399D08;
-	Mon, 22 Jun 2026 12:55:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E3C439934C
+	for <linux-doc@vger.kernel.org>; Mon, 22 Jun 2026 11:23:48 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782132921; cv=none; b=OyjLULm0XQ+15YUndWzv3MioNp0QcU5+U8GnPojfsNcgPMo/1mnFyL1hIgXN3LFlcWS7rtzrPhInZOjqscPTKpOteaWdrvw1VpvWBflVIbAPxX/ziLFhbRnemO1pjc2N1EZ15txMjr/sAG6/72Ko61WiR+SHdZsUc6fn0OLdAdA=
+	t=1782127431; cv=none; b=Kecg6nTGUA/j5NX1R/9FUG6iwddrFCs0xOopCRHf3wHJbabcxeljxXsaHQO9VfOcQvA80yQnfgCxhHvz3te/Q2sNjN467VgqbhSNdeAkfiF+ZWkatQX9chat6XE7vY5IrRu3d8jKVugxN5RzFHXNpwhgdPRIrXqf5WERGK+zl2Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782132921; c=relaxed/simple;
-	bh=sOYVThblm3r8If7SaQV5HS7IxRPlp/h8bhOODGRdbRU=;
-	h=From:To:Cc:Date:Subject:MIME-Version:Content-Type:Message-Id; b=V5T3n4Z+Qj/CUpNMoGYWf0Bo3cLHzNvZ8WgE3UxuHE1vLBQDktyDLuRnwaq2WiSzRqy0j1DVV3jK2LU7bPdiAbo580qkOrlWZHdFsG50tsC7KTLfVHpD4cHXZkQsQ1FSdtcXPbMkFuqK/Und2TKW0FLWTm5VEW2p6MAWvFjKiCM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=xn--rombobjrn-67a.se; spf=pass smtp.mailfrom=xn--rombobjrn-67a.se; dkim=pass (2048-bit key) header.d=xn--rombobjrn-67a.se header.i=@xn--rombobjrn-67a.se header.b=kjL6eW66; arc=none smtp.client-ip=188.126.83.49
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=xn--rombobjrn-67a.se;
-	s=a; t=1782132916; bh=sOYVThblm3r8If7SaQV5HS7IxRPlp/h8bhOODGRdbRU=;
-	h=From:To:Cc:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:From:Sender:Reply-To:
-	 Original-From:Organization:To:CC:Subject:Original-Subject:Date:
-	 Message-ID:In-Reply-To:References:Original-Message-ID:
-	 Disposition-Notification-To:Disposition-Notification-Options:
-	 MIME-Version:Content-Transfer-Encoding:Content-Type:
-	 Content-Features:Content-Alternative:Content-Location:
-	 TLS-Report-Domain:TLS-Report-Submitter:MT-Priority;
-	b=kjL6eW66KU1PrDm5Y6a1E5CmIxFx/s49pPjP3vaYtiTyUlSi8KeuQYxTq1N64SN3w
-	 ZIuupx4fbTyK3vDPkrXlWAR28oNAIMdH86cC543jeIuAjO3pTDAh/4LgkJAjZSTFLS
-	 bIJ6S1Rl6rZ5BR04v3ImPUZ+q6xDzRJRhXuvyyn2wv15H+I7SqmaYoFlWpBtmFArwZ
-	 jxulTJqSAag40Wikra4HhPyx8BzQxOhxjguY6aPO1gpSOZ2E+laGkGMsExqxK4gmrf
-	 XANeuTP2CLvHqKnvQHD+LYgJpD98aE5HkXA8DbbnPG5FfkuCF/l64SJ1G1/o5ML7go
-	 50nx4gZPC3MHQ==
-Received: from tag.xn--rombobjrn-67a.se (tag.xn--rombobjrn-67a.se [192.168.72.9])
-	by smtp.xn--rombobjrn-67a.se (Postfix) with ESMTPS id 40E69407E8F5;
-	Mon, 22 Jun 2026 14:55:16 +0200 (CEST)
-Received: by tag.xn--rombobjrn-67a.se (Postfix, from userid 1000)
-	id 25EC8F47BE9; Mon, 22 Jun 2026 14:55:16 +0200 (CEST)
-From: =?UTF-8?q?Bj=C3=B6rn=20Persson?= <Bjorn@xn--rombobjrn-67a.se>
-To: Lee Jones <lee@kernel.org>, Pavel Machek <pavel@kernel.org>
-Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, linux-leds@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Date: Mon, 22 Jun 2026 13:18:07 +0200
-Subject: [PATCH v2] docs: leds: uleds: Make the documentation match the code.
+	s=arc-20240116; t=1782127431; c=relaxed/simple;
+	bh=cO02jLM/sX3PxApH0smnLkC73bA09isiSv76kmh21do=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=mM/ZW1otPjk7FbUoaYVWh+KSIZ+E+7adEDSZ9MGLkdyiaOj7sm73ixomc3LGTiwVaRh5z75K2Nx2VhMosaf30Anyl4VqBwgzpbDD8/Gs+kxOirdl04Ya5qbAZu9hEp2K0uhM0izbv6lT2JlvUzUyJO1VoSCrzVgfWYAjEJb5zTw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=hammerspace.com; spf=pass smtp.mailfrom=hammerspace.com; dkim=pass (2048-bit key) header.d=hammerspace.com header.i=@hammerspace.com header.b=KblrSsBX; arc=none smtp.client-ip=209.85.167.171
+Received: by mail-oi1-f171.google.com with SMTP id 5614622812f47-4865b9e16d4so1541151b6e.1
+        for <linux-doc@vger.kernel.org>; Mon, 22 Jun 2026 04:23:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=hammerspace.com; s=google; t=1782127428; x=1782732228; darn=vger.kernel.org;
+        h=mime-version:references:in-reply-to:message-id:date:subject:cc:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=cO02jLM/sX3PxApH0smnLkC73bA09isiSv76kmh21do=;
+        b=KblrSsBXtafZ1DBp8YYJIPsqO89QH+yxCrcaFuxVjXq23msNMPqpIugz9OoGNZ6twO
+         xHc/MO79RKMKyqGzgBey1AO+xzSxDo0fT0pSYnikmIMdfMlvW8cYEMGKF2yNP5qjSBbe
+         sRNd01qcZTp08aN04bJW6bTfNGfcnUs/YLUYfpq9aezuOegZ1KLY73Lyp8UVWbnRRJlS
+         l6HZR8HHjyNHM2Rjk3Mfa0UTaUoKkKwnwwb7lK4gh4llNcSHjTobynHr4sUzIViUFCMH
+         yLZsDjI+I4IM6FI92lvI6arIjjO8Zv9hj7LXQ/u+TnFhfPxVo7tObmrjFJAgjjPNpOLW
+         Pl7A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1782127428; x=1782732228;
+        h=mime-version:references:in-reply-to:message-id:date:subject:cc:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=cO02jLM/sX3PxApH0smnLkC73bA09isiSv76kmh21do=;
+        b=IWnCR9tY75lFCmbvRNzJYsoxmCFDdjALyKA7YT0gXCNK2p7ceiqo8KTz+v1LylvETU
+         IfN6fV75Wy0I4sD5M1Q8s0GEdc0Spe5wgr64asy9JZzmSCVN2IEaP3Pgx3CxK7PR8Dcz
+         DNF37sGSesFfHTUT47jzPKlsiSK6uTetAOcZb9wfsRJizaq6o2QGAHiOiYmv7ZyhUuRM
+         oMuV6to6a2pX3bok5JQ+Y+kRmUahtGKtMY4n0Rc7GuPMvpSvDhCmvwW2fwuuHda2oOXJ
+         dfSzGGfLT+Tae6nuUpEyUnXBMZUjl3Fu5SqOSDJpKBe4QgjCP2n9ZXiSBZoQgM0nJJa3
+         2MLw==
+X-Forwarded-Encrypted: i=1; AFNElJ+4Omi4nEW226tJnUsSY1mlUIXPP+WiPS3kmTX/EYytEeUCG/fxaDTmLVuanF4G2cEvjIB2unGwUtA=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx/oUPtmXM54QLszVkKvwe43MmEvksd6KF6OMIy9kN6luYNK994
+	z3GU44matuIxtBnpZCTKJQdgOy4QkPjYKhc7cMfgoxR3aY5kv9yzCpitxv1gzNXiIq0=
+X-Gm-Gg: AfdE7clIKjDayLXXty05NEGiNy69qAH/KQy3IOmk/9K8Khw7mCelrQww+cKqGr196ee
+	g4J3BZg5wEKX57r8NSezA7OTMYuz55FSu52hNaVFVrZQGtXFeflKKDcXk0TQLUnyCx0smhjez2D
+	041Em6BdMI9R2GrAh9GTkZWrGIgp9p5SK1gBXaqZU+80e5KD/AY4b+3s/YFiRB2blRbSwqN983C
+	AqzcTYzqgg81ouyuIUSYi/Z2B2Oe1YiWlbD3Hf2simov+bv+jQUmJbZBCvTtsMBke2CeIIfOr0I
+	EWetcCGeqdsNAugVayWRYTn4Ij7shdFCTg85vfdWTK1P7kfEKOvzCKqNdEt0HcfjayDfu+HQXl8
+	44Swjp3/qGJQJEgx4yqH6EwR1rn8RiLwlS5/LywtDpn3bC4fj1pONuTObcJi8Lrnf3yZysTatJw
+	ohQNKzWFWMbC3fx/AEhe7S55myr082hpy5FyLhuu8fdrE=
+X-Received: by 2002:a05:6808:1717:b0:48b:1e49:24a8 with SMTP id 5614622812f47-48b1e493095mr7671785b6e.11.1782127427953;
+        Mon, 22 Jun 2026 04:23:47 -0700 (PDT)
+Received: from [192.168.254.51] ([66.97.168.37])
+        by smtp.gmail.com with ESMTPSA id 5614622812f47-48aec0e5e53sm4403466b6e.8.2026.06.22.04.23.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 22 Jun 2026 04:23:46 -0700 (PDT)
+From: Benjamin Coddington <ben.coddington@hammerspace.com>
+X-Google-Original-From: Benjamin Coddington <bcodding@hammerspace.com>
+To: Jeff Layton <jlayton@kernel.org>
+Cc: Trond Myklebust <trondmy@kernel.org>, Anna Schumaker <anna@kernel.org>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+ linux-nfs@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org
+Subject: Re: [PATCH 0/4] nfs: remove the fileid field from struct nfs_inode
+Date: Mon, 22 Jun 2026 07:23:44 -0400
+X-Mailer: MailMate (2.0r6272)
+Message-ID: <343F5ECC-7662-4301-8D89-ED039594EFF0@hammerspace.com>
+In-Reply-To: <20260512-nfsino-v1-0-284720522f4c@kernel.org>
+References: <20260512-nfsino-v1-0-284720522f4c@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Message-Id: <20260622125516.25EC8F47BE9@tag.xn--rombobjrn-67a.se>
+Content-Type: text/plain
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
-	R_DKIM_ALLOW(-0.20)[xn--rombobjrn-67a.se:s=a];
+	DMARC_POLICY_ALLOW(-0.50)[hammerspace.com,quarantine];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[hammerspace.com:s=google];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-93081-lists,linux-doc=lfdr.de];
-	DMARC_NA(0.00)[xn--rombobjrn-67a.se];
+	TAGGED_FROM(0.00)[bounces-93070-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:lee@kernel.org,m:pavel@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-leds@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER(0.00)[ben.coddington@hammerspace.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[hammerspace.com:+];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[xn--rombobjrn-67a.se:+];
+	FORGED_RECIPIENTS(0.00)[m:jlayton@kernel.org,m:trondmy@kernel.org,m:anna@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-nfs@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[Bjorn@xn--rombobjrn-67a.se,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	MISSING_XM_UA(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[Bjorn@xn--rombobjrn-67a.se,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[ben.coddington@hammerspace.com,linux-doc@vger.kernel.org];
 	ALIAS_RESOLVED(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[8];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,tag.xn--rombobjrn-67a.se:mid]
+	MID_RHS_MATCH_FROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 1AB326AF989
+X-Rspamd-Queue-Id: 1275C6AF09F
 
-From: Björn Persson <Bjorn@Rombobjörn.se>
+On 12 May 2026, at 12:12, Jeff Layton wrote:
 
-The description in uleds.rst omits the field max_brightness and claims
-falsely that the maximum brightness is always 255. Leaving max_brightness
-uninitialized or omitting it when writing to /dev/uleds won't work. It
-must be given a value, and that value becomes the maximum brightness.
+> v7.1-rc1 contains patches to make inode->i_ino to be a u64. With this
+> change, there is no need to keep a separate "fileid" field in struct
+> nfs_inode.
+>
+> This patchset eliminiates that field, and the inode number hashing
+> machinery that is no longer needed. This shaves 8 bytes off of each
+> nfs_inode.
+>
+> Trond/Anna: please consider this for v7.2.
+>
+> Assisted-by: Claude:claude-opus-4-6
+> Signed-off-by: Jeff Layton <jlayton@kernel.org>
 
-The document is also wrong about the type of brightness values. It says
-that a single byte shall be read at a time. That's actually not allowed.
-Then the word "unsigned" gives the impression that the type is unsigned.
-In fact a signed type is used even though the values are never negative.
+Looks good,
+Reviewed-by: Benjamin Coddington <bcodding@hammerspace.com>
 
-Change the document to describe the true API.
-
-Signed-off-by: Björn Persson <Bjorn@Rombobjörn.se>
----
-Changes in v2:
-Replaced "given" with "specified" to prevent misinterpretation of "given name", avoided mentioning a type name outside of C code fragments, and rewrote the commit message to read more like speech, as requested.
-
- Documentation/leds/uleds.rst | 21 ++++++++++++++-------
- 1 file changed, 14 insertions(+), 7 deletions(-)
-
-diff --git a/Documentation/leds/uleds.rst b/Documentation/leds/uleds.rst
-index 83221098009c..f985048c641f 100644
---- a/Documentation/leds/uleds.rst
-+++ b/Documentation/leds/uleds.rst
-@@ -17,16 +17,23 @@ structure to it (found in kernel public header file linux/uleds.h)::
- 
-     struct uleds_user_dev {
- 	char name[LED_MAX_NAME_SIZE];
-+	int max_brightness;
-     };
- 
--A new LED class device will be created with the name given. The name can be
--any valid sysfs device node name, but consider using the LED class naming
--convention of "devicename:color:function".
-+A new LED class device will be created with the specified name and maximum
-+brightness. The name can be any valid sysfs device node name, but consider
-+using the LED class naming convention of "devicename:color:function".
- 
--The current brightness is found by reading a single byte from the character
--device. Values are unsigned: 0 to 255. Reading will block until the brightness
--changes. The device node can also be polled to notify when the brightness value
--changes.
-+Although max_brightness is signed, only positive values are valid: 1 to INT_MAX.
-+
-+The current brightness shall be read from the character device like so::
-+
-+    int brightness;
-+    result = read(file, &brightness, sizeof(brightness));
-+
-+The possible values are 0 to max_brightness. Reading will block until the
-+brightness changes. The device node can also be polled to notify when the
-+brightness value changes.
- 
- The LED class device will be removed when the open file handle to /dev/uleds
- is closed.
--- 
-2.54.0
-
+Ben
 
