@@ -1,205 +1,156 @@
-Return-Path: <linux-doc+bounces-93186-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93188-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id xcgWLe4YOmqj1QcAu9opvQ
-	(envelope-from <linux-doc+bounces-93186-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 07:26:06 +0200
+	id C0HIEf0fOmqE1wcAu9opvQ
+	(envelope-from <linux-doc+bounces-93188-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 07:56:13 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0CCFF6B42A1
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 07:26:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DEE186B44C3
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 07:56:12 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=intel.com header.s=Intel header.b=BgvzCYVT;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93186-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93186-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=intel.com;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=ore5ZPac;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93188-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93188-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 461E73049731
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 05:25:43 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 2BCAE303DAD4
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 05:56:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 011E73A875D;
-	Tue, 23 Jun 2026 05:25:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E42E63AA4F1;
+	Tue, 23 Jun 2026 05:56:05 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.14])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32B033A3E67;
-	Tue, 23 Jun 2026 05:25:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA1C93A7F69;
+	Tue, 23 Jun 2026 05:56:05 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782192342; cv=none; b=u1qfz/l3vPJg7RfmEtWx0oY54OHeG6RkCWytsFjpXKeqJnMk3tozRdSKFn6v2nPJ7gECiYcK/JQk9vaQ8oOF5Kza2dhT8coqJ2zpJORyY9v7TCEBrEjp+H7ATpTI8nLEH8CPCTCKdbmb4+01qZJHN51Ts6xgGCg3kwgk30LACs8=
+	t=1782194165; cv=none; b=GVD5S/VqE3OyrPwqSLsr+axN2z8gRQswWcBhf9lErkxtDhNF4vLfTZMiPplfWUv+Qz5DtfvP8dWGbQTSL91k5HHVtrCf9z8QEIpzgAqZ2cdsrwiyqi6pIO46xHE4L6R5X94FSv4hv4ZmPK/fx5AakfGLqWHLf6xImQvhZD9GGfU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782192342; c=relaxed/simple;
-	bh=Uq5PeCcyAK+bL5pMg1ybj6yxp4BAEe7DhiVVYVptiko=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=rf5b3U1Dt5a4zL+eAtBVGEVlO42NDEwLQwMz+Au/K7CZrHPS1GUZVy2w9+CpepKdGf+C4s0tY2yBSw2eglZ6RmksCU2u/MHyNgPnD/8CzVlXjb6atkbuodTNxtFlJXwAogBMxG3Oq8zfNcpPPdIqTdGYEWUu8GDup7vx93EvNww=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=BgvzCYVT; arc=none smtp.client-ip=198.175.65.14
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1782192341; x=1813728341;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=Uq5PeCcyAK+bL5pMg1ybj6yxp4BAEe7DhiVVYVptiko=;
-  b=BgvzCYVT7WekwkghBtpcD1qh2JYOV8asN7CSeE4a0wEjhWbnjOQSZejL
-   dtYHLbQvujqFcyXFqqLJLK/sEk4b8mYRH7x48vvadqeBxTuAhI14vBYBs
-   bqOdUKXjF1DzbStpCPw0f6KxGdaBDnvIB+YYQLJ6xumGDcQaAgZX172fj
-   8egJBTf4c8Xx0ycpbqOJzQIMEZEgzazZRfptbfZ4D+09MHa30zAMQ7LrQ
-   j7JK7Kse6NYefL+Xe5oEPq4z9S0riyVLJLkNbOwa2DwWVP/aOXgEYdeto
-   JRUtManq0SXxpIXz3q2vePFR6EuQ881u1m75dFdkoi068A/rTaoS0kU/u
-   A==;
-X-CSE-ConnectionGUID: uNk5dytXQHiYMnaEYhhnzw==
-X-CSE-MsgGUID: J3dTFPg3RT+es+zT7QTH/Q==
-X-IronPort-AV: E=McAfee;i="6800,10657,11825"; a="86834044"
-X-IronPort-AV: E=Sophos;i="6.24,220,1774335600"; 
-   d="scan'208";a="86834044"
-Received: from fmviesa006.fm.intel.com ([10.60.135.146])
-  by orvoesa106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Jun 2026 22:25:40 -0700
-X-CSE-ConnectionGUID: +QKs7F9+Ru2ErBNCyvGNzg==
-X-CSE-MsgGUID: MlbtBeXQTPSGpda7Y/yfxQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.24,220,1774335600"; 
-   d="scan'208";a="245058541"
-Received: from unknown (HELO [10.238.2.81]) ([10.238.2.81])
-  by fmviesa006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Jun 2026 22:25:26 -0700
-Message-ID: <1b59fec2-a464-4429-8532-880394912af5@linux.intel.com>
-Date: Tue, 23 Jun 2026 13:25:24 +0800
+	s=arc-20240116; t=1782194165; c=relaxed/simple;
+	bh=XxHC+WBSkAS51ORVmSx/YM7z+DWofPW1mqwUDLPdqdM=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=cg8/KEwM1yzz6roDZkLPZ8o6RDkVl08mdTQG/DLi8/kGs2ZAMrqv80RrKlgLIYvJO1+k2ug97pveOgUlIeBxaiPJ6E75SWi7Q/hBOOFoeGQ0A3p1TAJkGJTx9WyyaIUZ624lFD7/Y/c1OvQFvF+NqLdh8pAQjebVkUIV8Og1AVc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ore5ZPac; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 53D7FC2BCB8;
+	Tue, 23 Jun 2026 05:56:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1782194165;
+	bh=XxHC+WBSkAS51ORVmSx/YM7z+DWofPW1mqwUDLPdqdM=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=ore5ZPac2OeoiimpPdp8rG1eK3SzKmzvuC44yS2FujE4Utbw3S/q/7EfBu1XzYTsw
+	 +RE6nrl/yb3uSUmBjQrdPaSMVeD79o+xOmygZRZhvpcKdtnk/sxJ2guTwlP3/AVROG
+	 qW2s5blWnXUqUsfEDX8Pag8x4lK9cDHOXwcKBZ9UQEYNy02OIvQ46Nm2+Nw9ppdF20
+	 AMIRsrWmi9fYn2EmBIfTJngTU0x3V3IBLUaZV8jHvnP07q9FQSc3UZSvusAfcyH+c0
+	 Wo7AiUls/B/IBf+pyNYR51vAUZ3OajHPVuQJaIT5hY5vEPfd0m9GpsPNHWiU+gprDi
+	 VUiR1nj8shpOw==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E543CDB470;
+	Tue, 23 Jun 2026 05:56:05 +0000 (UTC)
+From: Selvamani Rajagopal via B4 Relay <devnull+Selvamani.Rajagopal.onsemi.com@kernel.org>
+Subject: [PATCH 0/3] Support onsemi's FD5121 multiphase digital controller
+Date: Mon, 22 Jun 2026 22:55:36 -0700
+Message-Id: <20260622-support-fd5121-from-onsemi-v1-0-b31767689c65@onsemi.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 09/46] KVM: guest_memfd: Introduce function to check
- GFN private/shared status
-To: ackerleytng@google.com
-Cc: aik@amd.com, andrew.jones@linux.dev, brauner@kernel.org,
- chao.p.peng@linux.intel.com, david@kernel.org, jmattson@google.com,
- jthoughton@google.com, michael.roth@amd.com, oupton@kernel.org,
- pankaj.gupta@amd.com, qperret@google.com, rick.p.edgecombe@intel.com,
- rientjes@google.com, shivankg@amd.com, steven.price@arm.com,
- tabba@google.com, willy@infradead.org, wyihan@google.com,
- yan.y.zhao@intel.com, forkloop@google.com, pratyush@kernel.org,
- suzuki.poulose@arm.com, aneesh.kumar@kernel.org, liam@infradead.org,
- Paolo Bonzini <pbonzini@redhat.com>, Sean Christopherson
- <seanjc@google.com>, Thomas Gleixner <tglx@kernel.org>,
- Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
- Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
- "H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>,
- Masami Hiramatsu <mhiramat@kernel.org>,
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>,
- Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>,
- Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>,
- Nhat Pham <nphamcs@gmail.com>, Barry Song <baohua@kernel.org>,
- Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>,
- Wei Xu <weixugc@google.com>, Youngjun Park <youngjun.park@lge.com>,
- Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>,
- Kiryl Shutsemau <kas@kernel.org>, Baoquan He <baoquan.he@linux.dev>,
- Jason Gunthorpe <jgg@ziepe.ca>, Vlastimil Babka <vbabka@kernel.org>,
- kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kselftest@vger.kernel.org, linux-mm@kvack.org,
- linux-coco@lists.linux.dev
-References: <20260618-gmem-inplace-conversion-v8-0-9d2959357853@google.com>
- <20260618-gmem-inplace-conversion-v8-9-9d2959357853@google.com>
-Content-Language: en-US
-From: Binbin Wu <binbin.wu@linux.intel.com>
-In-Reply-To: <20260618-gmem-inplace-conversion-v8-9-9d2959357853@google.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIANgfOmoC/x3MOwrDMAwA0KsEzRXYgpgmVwkd8pFaDbGN1JZCy
+ N1jOr7lHeBsyg5jd4DxV11Lboi3DtbXnJ+MujUDBUohEaF/ai32Rtn6SBHFyo4lO++KSeZBhvv
+ SLxKgBdVY9PfPp8d5XqV2fBNsAAAA
+To: Guenter Roeck <linux@roeck-us.net>, Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>, 
+ Selva Rajagopal <selvamani.rajagopal@onsemi.com>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, 
+ Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1782194144; l=1270;
+ i=Selvamani.Rajagopal@onsemi.com; s=20260531; h=from:subject:message-id;
+ bh=XxHC+WBSkAS51ORVmSx/YM7z+DWofPW1mqwUDLPdqdM=;
+ b=O+5KQ40A0TgaP9oDBztyUxV5bx3S4eld/u7bTs2DIoewQ62OMXYw1Teqm/wZU2hGyUq1sWYER
+ WIeYGdvs3CHCJgve+f30LSywGE3AVupaO6zFCZc4ze9WtXQ13Cfl/KO
+X-Developer-Key: i=Selvamani.Rajagopal@onsemi.com; a=ed25519;
+ pk=5QRdM0HS/LGWWcUZZ9hVfZ+qbPQGZCumcTXOiN7Fyug=
+X-Endpoint-Received: by B4 Relay for
+ Selvamani.Rajagopal@onsemi.com/20260531 with auth_id=803
+X-Original-From: Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
+Reply-To: Selvamani.Rajagopal@onsemi.com
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-5.16 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [-3.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[amd.com,linux.dev,kernel.org,linux.intel.com,google.com,intel.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca,vger.kernel.org,kvack.org,lists.linux.dev];
-	TAGGED_FROM(0.00)[bounces-93186-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-93188-lists,linux-doc=lfdr.de,Selvamani.Rajagopal.onsemi.com];
+	FORGED_RECIPIENTS(0.00)[m:linux@roeck-us.net,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:selvamani.rajagopal@onsemi.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:linux-hwmon@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:devicetree@vger.kernel.org,m:Selvamani.Rajagopal@onsemi.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:ackerleytng@google.com,m:aik@amd.com,m:andrew.jones@linux.dev,m:brauner@kernel.org,m:chao.p.peng@linux.intel.com,m:david@kernel.org,m:jmattson@google.com,m:jthoughton@google.com,m:michael.roth@amd.com,m:oupton@kernel.org,m:pankaj.gupta@amd.com,m:qperret@google.com,m:rick.p.edgecombe@intel.com,m:rientjes@google.com,m:shivankg@amd.com,m:steven.price@arm.com,m:tabba@google.com,m:willy@infradead.org,m:wyihan@google.com,m:yan.y.zhao@intel.com,m:forkloop@google.com,m:pratyush@kernel.org,m:suzuki.poulose@arm.com,m:aneesh.kumar@kernel.org,m:liam@infradead.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:shuah@kernel.org,m:vannapurve@google.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencent.com,m:shikemeng@huaweiclou
- d.com,m:nphamcs@gmail.com,m:baohua@kernel.org,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:kas@kernel.org,m:baoquan.he@linux.dev,m:jgg@ziepe.ca,m:vbabka@kernel.org,m:kvm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,m:linux-coco@lists.linux.dev,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[binbin.wu@linux.intel.com,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
 	FORWARDED(0.00)[lists@lfdr.de];
-	DKIM_TRACE(0.00)[intel.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	HAS_REPLYTO(0.00)[Selvamani.Rajagopal@onsemi.com];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[binbin.wu@linux.intel.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[63];
-	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp]
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[onsemi.com:replyto,onsemi.com:email,onsemi.com:mid,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 0CCFF6B42A1
+X-Rspamd-Queue-Id: DEE186B44C3
 
+FD5121 is a dual rail, multi-phase controller designed to
+power CPU, ASIC or SoC with fully configurable rails.
 
+This driver adds support for FD5121, FD5123 and FD5125. These
+controllers configurability through PMBus 1.4.1. 
 
-On 6/19/2026 8:31 AM, Ackerley Tng via B4 Relay wrote:
-> From: Ackerley Tng <ackerleytng@google.com>
-> 
-> Introduce function for KVM to check the private/shared status of guest
-           ^
-Nit:       a
- > memory at a given GFN.
-> 
-> This will be used in a later patch.
+Added documents for these controllers.
 
-[...]
+Signed-off-by: Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
+---
+Selvamani Rajagopal (3):
+      Documentation/hwmon: Add onsemi's FD5121 controllers' documentation
+      dt-bindings: hwmon: pmbus: Support for onsemi's FD5121
+      hwmon: (pmbus/fd5121): Add support FD5121, FD5123 and FD5125
 
->  
-> +bool kvm_gmem_is_private(struct kvm *kvm, gfn_t gfn)
-> +{
-> +	struct kvm_memory_slot *slot = gfn_to_memslot(kvm, gfn);
-> +	struct inode *inode;
-> +
-> +	/*
-> +	 * If this gfn has no associated memslot, there's no chance of the gfn
-> +	 * being backed by private memory, since guest_memfd must be used for
-> +	 * private memory,
+ .../bindings/hwmon/pmbus/onnn,fd5121.yaml          |   41 +
+ Documentation/hwmon/fd5121.rst                     |   93 ++
+ Documentation/hwmon/index.rst                      |    1 +
+ MAINTAINERS                                        |    8 +
+ drivers/hwmon/pmbus/Kconfig                        |    9 +
+ drivers/hwmon/pmbus/Makefile                       |    1 +
+ drivers/hwmon/pmbus/fd5121.c                       | 1004 ++++++++++++++++++++
+ 7 files changed, 1157 insertions(+)
+---
+base-commit: 1a3746ccbb0a97bed3c06ccde6b880013b1dddc1
+change-id: 20260622-support-fd5121-from-onsemi-6fa9f98b5bf0
 
-"guest_memfd must be used for private memory" is a bit confusing to me.
+Best regards,
+-- 
+Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
 
-
-> and guest_memfd must be associated with some memslot.
-> +	 */
-> +	if (!slot)
-> +		return 0;
-> +
-> +	CLASS(gmem_get_file, file)(slot);
-> +	if (!file)
-> +		return 0;
-> +
-> +	inode = file_inode(file);
-> +
-> +	/*
-> +	 * Rely on the maple tree's internal RCU lock to ensure a
-> +	 * stable result. This result can become stale as soon as the
-> +	 * lock is dropped, so the caller _must_ still protect
-> +	 * consumption of private vs. shared by checking
-> +	 * mmu_invalidate_retry_gfn() under mmu_lock to serialize
-> +	 * against ongoing attribute updates.
-> +	 */
-> +	return kvm_gmem_is_private_mem(inode, kvm_gmem_get_index(slot, gfn));
-> +}
-> +EXPORT_SYMBOL_FOR_KVM_INTERNAL(kvm_gmem_is_private);
-> +
->  static struct file_operations kvm_gmem_fops = {
->  	.mmap		= kvm_gmem_mmap,
->  	.open		= generic_file_open,
-> 
 
 
