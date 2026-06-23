@@ -1,172 +1,184 @@
-Return-Path: <linux-doc+bounces-93243-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93244-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id CW0BIraTOmpdAggAu9opvQ
-	(envelope-from <linux-doc+bounces-93243-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 16:09:58 +0200
+	id oQPYOeaZOmpCBQgAu9opvQ
+	(envelope-from <linux-doc+bounces-93244-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 16:36:22 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB2626B7BF9
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 16:09:57 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 820856B7F3E
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 16:36:22 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=h-partners.com header.s=dkim header.b=f2mWTIgR;
-	dkim=pass header.d=h-partners.com header.s=dkim header.b=f2mWTIgR;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93243-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-93243-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=fail reason="SPF not aligned (relaxed), DKIM not aligned (relaxed)" header.from=huawei.com (policy=quarantine);
+	dkim=pass header.d=google.com header.s=20251104 header.b=CXuqAejG;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93244-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93244-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=google.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id B9AFC305A8B4
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 14:08:12 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id F107A3029520
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 14:36:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CFDA13806A6;
-	Tue, 23 Jun 2026 14:08:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BC690390219;
+	Tue, 23 Jun 2026 14:36:19 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from canpmsgout02.his.huawei.com (canpmsgout02.his.huawei.com [113.46.200.217])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f74.google.com (mail-ed1-f74.google.com [209.85.208.74])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 949BB3803E3;
-	Tue, 23 Jun 2026 14:08:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77F47385D88
+	for <linux-doc@vger.kernel.org>; Tue, 23 Jun 2026 14:36:18 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782223691; cv=none; b=bWvBMKn7kXjWWfc+LO5mpQjDSu/xCj2FCaqGsAz7/dMBaDVMQk6mmEknOPkzpArrSfmcCFAfKOeSGwd8UeDCC6lC026qfHk+E2htikhNv4Bcm58w39++q58/reRXvj97NojU6K7N/b9AmcW5jtmOuvT2xN0Fcggv5e2gLkt/I88=
+	t=1782225379; cv=none; b=bZDCe547xuUFYNXniTaoO/ivqKc9wr55p5sZkoUfIabYEooPStUgsT4vtzQm5nwSAvRw4teDbTLGP9mPj35YPg8Iemhp9F18TWMVPj23zHsNpS0HYQaAaYaqpO0DLpCEkKMM7mQ1L4F84yPnwV90+YxbTch0CpeK5kGboDQbIfs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782223691; c=relaxed/simple;
-	bh=tM88ehV0vRS7fFmScYoO3fuXe+FKN3oyB1IesDMdkWI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
-	 In-Reply-To:Content-Type; b=UzR4vz2T8lomLGhs+HGqJQ92A8B49fz1ZXLu7Jk+hGx6s7y7Oq3gwYs0UsbUhjZrXoRIACw9dy/Kxi3FHZb/v385o1nbzDAJ80urpMzjPh75qiZYpEsY6qmZ3lHhIqFaRn077cuUPBuSmS6fVjBltIxbaIG8rGOV5EhbMI7o4R0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=h-partners.com; dkim=pass (1024-bit key) header.d=h-partners.com header.i=@h-partners.com header.b=f2mWTIgR; dkim=pass (1024-bit key) header.d=h-partners.com header.i=@h-partners.com header.b=f2mWTIgR; arc=none smtp.client-ip=113.46.200.217
-dkim-signature: v=1; a=rsa-sha256; d=h-partners.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=4Kjc0ILl0J/jDwE6Rp8VeaX8HsM6FVKzVv2KZZcpLvE=;
-	b=f2mWTIgRI0OMt+a5DXk7llvGYG+YSSaNqEUOMlOA2s03QZHIYyfSkzRV1Z6b4x+STugLrsIPq
-	3m6oP+Rzqb0N2IaFfkxaKjYTPJucaumO6NrvPZ1nl2cSchKOLvsCKiwkRUAFEbcYKgg7VAPrMAf
-	PHbGQXpQFpA89e2wK8OSTX0=
-Received: from canpmsgout01.his.huawei.com (unknown [172.19.92.178])
-	by canpmsgout02.his.huawei.com (SkyGuard) with ESMTPS id 4gl6BT3pzczcb3n;
-	Tue, 23 Jun 2026 21:59:29 +0800 (CST)
-dkim-signature: v=1; a=rsa-sha256; d=h-partners.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=4Kjc0ILl0J/jDwE6Rp8VeaX8HsM6FVKzVv2KZZcpLvE=;
-	b=f2mWTIgRI0OMt+a5DXk7llvGYG+YSSaNqEUOMlOA2s03QZHIYyfSkzRV1Z6b4x+STugLrsIPq
-	3m6oP+Rzqb0N2IaFfkxaKjYTPJucaumO6NrvPZ1nl2cSchKOLvsCKiwkRUAFEbcYKgg7VAPrMAf
-	PHbGQXpQFpA89e2wK8OSTX0=
-Received: from mail.maildlp.com (unknown [172.19.163.104])
-	by canpmsgout01.his.huawei.com (SkyGuard) with ESMTPS id 4gl6BP4B7gz1T4GM;
-	Tue, 23 Jun 2026 21:59:25 +0800 (CST)
-Received: from kwepemf100008.china.huawei.com (unknown [7.202.181.222])
-	by mail.maildlp.com (Postfix) with ESMTPS id 460EE40363;
-	Tue, 23 Jun 2026 22:08:05 +0800 (CST)
-Received: from [10.174.179.37] (10.174.179.37) by
- kwepemf100008.china.huawei.com (7.202.181.222) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.36; Tue, 23 Jun 2026 22:08:04 +0800
-Message-ID: <7d46a48c-8805-09e1-4818-807953898fb4@huawei.com>
-Date: Tue, 23 Jun 2026 22:08:03 +0800
+	s=arc-20240116; t=1782225379; c=relaxed/simple;
+	bh=5xvJLFBWrKv1sutwBIRV98gtnRKv+wh/VKJT/0ccjr4=;
+	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
+	 To:Cc:Content-Type; b=kEqQT6Benah1qFbCDzwvhu4ATKBN6POmEFJQDMQCHg2R6TFCITveLcx1MrB7AsX+cDYbQHZt53Gtgcu8dEuPymQdHmdC6T2vnXJfC45PGh5cj5cEQ47zh1engj/pvX7kFkeOJqTQeyrW/lyvQNB/kP+aSJecvcSRMfagbRaQDKU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--tarunsahu.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=CXuqAejG; arc=none smtp.client-ip=209.85.208.74
+Received: by mail-ed1-f74.google.com with SMTP id 4fb4d7f45d1cf-69604dfdce2so5444413a12.0
+        for <linux-doc@vger.kernel.org>; Tue, 23 Jun 2026 07:36:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20251104; t=1782225377; x=1782830177; darn=vger.kernel.org;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=OZXZwKtoljMf9sP4FScDU2dpLN9WIG287qbX6i42q1U=;
+        b=CXuqAejGzp0unjUFAJRdkn6EWQjX47AwnVwl0Xkt58ewqEwmET0IyM2McWp1oRjKeM
+         /gkfUST/DEtsJc4XPbX1SvALO8h1E1jCvUtMBUx0ie77o/9fvzlih2fBuu8h4MYwmvyJ
+         BzrdAGi+xEHY9/y9myK+HfKZCjgaDfFnF1i/OoLuGtFK928gu5EmKM8Zk9yH3aU5g6J+
+         YTmxV4/i6hnNZlp59lTkTyHT4e5n+1l4SClNQePcmTXpZoYkv+ceh/8rfGV+JqSqXUg7
+         /xh9usPoz+ZX0ElnUTse+9bqHJvxu89UzaOt5mtTuvxYX1+hDH04H6/COV06T0JQA8o4
+         GXbQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1782225377; x=1782830177;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=OZXZwKtoljMf9sP4FScDU2dpLN9WIG287qbX6i42q1U=;
+        b=crrG6WvT9jPItu3bAG2gyuEBfQRNx3CNaiCUbszb0tVi31obT2nPKtYPfs2S/ovw88
+         VzhTMfzwbFlQfIa07gaAKkNHFhe88xZSerWT54tS09kxll0W7FtmwEcGIYy7fJ7ctqjT
+         F3hRujJnuHzUqYC/YwgRdioZbguGu+Q6uksmMaFC590nWeor9JfOysS5sY+m08a7lNd6
+         3U0i5vMvMdM+97OjkfNZjx5Ro/h7TpW+MtJXeu5ENs++012XVI4CIvWlwIbsajy2t5I2
+         W1Y0ie5we7liJRdRfCaDctexB4iPS83AZriAylAhHLWRDhrMDW7uc3CI5Uwm8re6FuVA
+         eKiQ==
+X-Forwarded-Encrypted: i=1; AFNElJ/1aVnZ4AdwwXBF+aoUrt3qPU7tIAWGfqyFjY8mvIvxhmIXtBH2q3PB40z1UopVjuMS06MBC3zDNXA=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwodP+uuT+WDkuLoxjDQNbFE199TX8HlQLQzG0UG14RBwsb//Rj
+	n+mYlHigxV0OnYMlJ6RGI0SVcfgROiNrkwojWSVZYI+0yETHGGSLe4fbSqY4O0J6N7q3NHMmKz9
+	SoPZ8beWuAP6qaQo1sQ==
+X-Received: from edaa1.prod.google.com ([2002:a05:6402:24c1:b0:695:df16:96c6])
+ (user=tarunsahu job=prod-delivery.src-stubby-dispatcher) by
+ 2002:a05:6402:510a:b0:697:e953:d14d with SMTP id 4fb4d7f45d1cf-697e953d492mr604080a12.17.1782225376632;
+ Tue, 23 Jun 2026 07:36:16 -0700 (PDT)
+Date: Tue, 23 Jun 2026 14:36:15 +0000
+In-Reply-To: <CAEvNRgFEHciT3T9y+qEYRvXhDwfrggoU7Rm=f9hT3OrV+wgpNQ@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [RFC PATCH 0/6] mm/damon: hardware-sampled access reports
-To: Ravi Jonnalagadda <ravis.opensrc@gmail.com>, <sj@kernel.org>,
-	<akinobu.mita@gmail.com>, <damon@lists.linux.dev>, <linux-mm@kvack.org>,
-	<linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>
-CC: <akpm@linux-foundation.org>, <corbet@lwn.net>, <bijan311@gmail.com>,
-	<ajayjoshi@micron.com>, <honggyu.kim@sk.com>, <yunjeong.mun@sk.com>
-References: <20260529165640.820-1-ravis.opensrc@gmail.com>
-Content-Language: en-US
-From: Zeng Heng <zengheng4@huawei.com>
-In-Reply-To: <20260529165640.820-1-ravis.opensrc@gmail.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: kwepems200002.china.huawei.com (7.221.188.68) To
- kwepemf100008.china.huawei.com (7.202.181.222)
+Mime-Version: 1.0
+References: <cover.1780676742.git.tarunsahu@google.com> <48777f4749fa43d5648085dbb2037aa99c144a88.1780676742.git.tarunsahu@google.com>
+ <CAEvNRgFEHciT3T9y+qEYRvXhDwfrggoU7Rm=f9hT3OrV+wgpNQ@mail.gmail.com>
+Message-ID: <9huztsqtmihs.fsf@tarunix.c.googlers.com>
+Subject: Re: [RFC PATCH v2 06/10] kvm: guest_memfd: Add support for freezing
+ and unfreezing mappings
+From: tarunsahu@google.com
+To: Ackerley Tng <ackerleytng@google.com>, Jonathan Corbet <corbet@lwn.net>, vannapurve@google.com, 
+	fvdl@google.com, Pasha Tatashin <pasha.tatashin@soleen.com>, 
+	Shuah Khan <skhan@linuxfoundation.org>, sagis@google.com, aneesh.kumar@kernel.org, 
+	skhawaja@google.com, vipinsh@google.com, Pratyush Yadav <pratyush@kernel.org>, 
+	david@redhat.com, dmatlack@google.com, mark.rutland@arm.com, 
+	Paolo Bonzini <pbonzini@redhat.com>, Mike Rapoport <rppt@kernel.org>, Alexander Graf <graf@amazon.com>, 
+	seanjc@google.com, axelrasmussen@google.com
+Cc: linux-kselftest@vger.kernel.org, kexec@lists.infradead.org, 
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, kvm@vger.kernel.org, 
+	linux-mm@kvack.org
+Content-Type: text/plain; charset="UTF-8"
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [1.34 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[huawei.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),quarantine];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_DKIM_ALLOW(-0.20)[h-partners.com:s=dkim];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	MV_CASE(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-93243-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[13];
 	RCVD_TLS_LAST(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_TO(0.00)[gmail.com,kernel.org,lists.linux.dev,kvack.org,vger.kernel.org];
-	FORGED_RECIPIENTS(0.00)[m:ravis.opensrc@gmail.com,m:sj@kernel.org,m:akinobu.mita@gmail.com,m:damon@lists.linux.dev,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:akpm@linux-foundation.org,m:corbet@lwn.net,m:bijan311@gmail.com,m:ajayjoshi@micron.com,m:honggyu.kim@sk.com,m:yunjeong.mun@sk.com,m:ravisopensrc@gmail.com,m:akinobumita@gmail.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[zengheng4@huawei.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS(0.00)[m:ackerleytng@google.com,m:corbet@lwn.net,m:vannapurve@google.com,m:fvdl@google.com,m:pasha.tatashin@soleen.com,m:skhan@linuxfoundation.org,m:sagis@google.com,m:aneesh.kumar@kernel.org,m:skhawaja@google.com,m:vipinsh@google.com,m:pratyush@kernel.org,m:david@redhat.com,m:dmatlack@google.com,m:mark.rutland@arm.com,m:pbonzini@redhat.com,m:rppt@kernel.org,m:graf@amazon.com,m:seanjc@google.com,m:axelrasmussen@google.com,m:linux-kselftest@vger.kernel.org,m:kexec@lists.infradead.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:kvm@vger.kernel.org,m:linux-mm@kvack.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[linux-foundation.org,lwn.net,gmail.com,micron.com,sk.com];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp,huawei.com:mid,huawei.com:from_mime];
+	TAGGED_FROM(0.00)[bounces-93244-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	FORGED_SENDER(0.00)[tarunsahu@google.com,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FROM_NEQ_ENVFROM(0.00)[tarunsahu@google.com,linux-doc@vger.kernel.org];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[zengheng4@huawei.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[h-partners.com:+];
 	ALIAS_RESOLVED(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	DKIM_TRACE(0.00)[google.com:+];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCVD_COUNT_SEVEN(0.00)[7]
+	TO_DN_SOME(0.00)[];
+	FROM_NO_DN(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,vger.kernel.org:from_smtp,tarunix.c.googlers.com:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: CB2626B7BF9
+X-Rspamd-Queue-Id: 820856B7F3E
 
-Hi Ravi,
+Ackerley Tng <ackerleytng@google.com> writes:
 
-On 2026/5/30 0:56, Ravi Jonnalagadda wrote:
-> This series introduces a vendor and PMU-agnostic substrate inside DAMON
-> that consumes hardware-sampled access reports through the standard
-> perf-event interface.  Userspace selects the PMU through sysfs (raw
-> type/config knobs), driving either Intel PEBS L3-miss sampling or AMD
-> IBS Op sampling.
-> 
+> Tarun Sahu <tarunsahu@google.com> writes:
+>
+>>  static long kvm_gmem_fallocate(struct file *file, int mode, loff_t offset,
+>>  			       loff_t len)
+>>  {
+>> +	struct inode *inode = file_inode(file);
+>>  	int ret;
+>> +	int idx;
+>>
+>> -	if (!(mode & FALLOC_FL_KEEP_SIZE))
+>> -		return -EOPNOTSUPP;
+>> +	idx = srcu_read_lock(&kvm_gmem_freeze_srcu);
+>> +	if (kvm_gmem_is_frozen(inode)) {
+>> +		srcu_read_unlock(&kvm_gmem_freeze_srcu, idx);
+>> +		return -EPERM;
+>> +	}
+>
+> fallocate may eventually go to kvm_gmem_get_folio(), so that would check
+> kvm_gmem_is_frozen() twice. Is this meant to catch the punch hole case?
+>
+>>
+>> -	if (mode & ~(FALLOC_FL_KEEP_SIZE | FALLOC_FL_PUNCH_HOLE))
+>> -		return -EOPNOTSUPP;
+>> +	if (!(mode & FALLOC_FL_KEEP_SIZE)) {
+>> +		ret = -EOPNOTSUPP;
+>> +		goto out;
+>> +	}
+>>
+>> -	if (!PAGE_ALIGNED(offset) || !PAGE_ALIGNED(len))
+>> -		return -EINVAL;
+>> +	if (mode & ~(FALLOC_FL_KEEP_SIZE | FALLOC_FL_PUNCH_HOLE)) {
+>> +		ret = -EOPNOTSUPP;
+>> +		goto out;
+>> +	}
+>> +
+>> +	if (!PAGE_ALIGNED(offset) || !PAGE_ALIGNED(len)) {
+>> +		ret = -EINVAL;
+>> +		goto out;
+>> +	}
+>
+> There's some reordering here. Why not let the validation happen like
+> before, then check kvm_gmem_is_frozen()?
 
-[...]
+To align with design. "stop the fallocate call if inode is frozen, No
+need to go further". I dont have strict opinion on this. I am fine with
+taking it across punch hole as well to make it more fine grained. But it
+will no longer claims stop the fallocate call (allocation one is stopped
+in separate path: fault path) , though functionally it does the same
+thing.
 
-> 
-> Ravi Jonnalagadda (6):
->    mm/damon: add struct damon_perf_event{,_attr} and per-ctx perf_events
->      list
->    mm/damon/sysfs-sample: expose perf_events configuration via sysfs
->    mm/damon/sysfs: install perf_events on apply
->    mm/damon/core: per-CPU SPSC ring drain and damon_perf_event lifecycle
->    mm/damon/vaddr: implement perf-event access check
->    mm/damon: add damos_node_eligible_mem_bp tracepoint
-> 
->   include/linux/damon.h        |  80 +++++
->   include/trace/events/damon.h |  49 +++
->   mm/damon/core.c              | 403 ++++++++++++++++++++----
->   mm/damon/ops-common.h        |  39 +++
->   mm/damon/sysfs-common.h      |   6 +
->   mm/damon/sysfs-sample.c      | 579 +++++++++++++++++++++++++++++++++++
->   mm/damon/sysfs.c             |   3 +
->   mm/damon/vaddr.c             | 267 ++++++++++++++++
->   8 files changed, 1370 insertions(+), 56 deletions(-)
-> 
-> 
-> base-commit: 4c8ad15abf15eb480d3ad85f902001e35465ef18
+WDYT?
 
-I wasn't able to apply this patch series to the linux (and linux-next)
-mainline branch, and also had trouble identifying the source of the base
-commit.
-
-Would you mind sharing where this baseline is from?
-
-Thanks in advance!
-
-
-Best Regards,
-Zeng Heng
+~Tarun
 
