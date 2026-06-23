@@ -1,67 +1,65 @@
-Return-Path: <linux-doc+bounces-93316-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93317-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id LQJKFOTtOmp4LwgAu9opvQ
-	(envelope-from <linux-doc+bounces-93316-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 22:34:44 +0200
+	id Gs0xNaHuOmrxLwgAu9opvQ
+	(envelope-from <linux-doc+bounces-93317-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 22:37:53 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 915D06BA0A5
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 22:34:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 29ADE6BA0EF
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 22:37:53 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lwn.net header.s=20201203 header.b=d4oop37f;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93316-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-93316-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=lwn.net header.s=20201203 header.b="cuiSzY/B";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93317-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-93317-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=lwn.net;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 592CC303A273
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 20:34:42 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 027203021E5A
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 20:37:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B76963A6B92;
-	Tue, 23 Jun 2026 20:34:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 72B5D3955EC;
+	Tue, 23 Jun 2026 20:37:01 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5CFA3A6417;
-	Tue, 23 Jun 2026 20:34:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 470F13A6B9C
+	for <linux-doc@vger.kernel.org>; Tue, 23 Jun 2026 20:37:00 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782246881; cv=none; b=iGL67FZGGDE78yNNd2QPSVN1NpfZJczORyhwmEmHqIMT1QmquFy8zB1kRjmy4RdCTMIA8sOwkPUlBjICYQJKjDmSM62TDsOCEYiB9uHg5963uu+bRa47oNpogy+fci/PH3YvUHU+eLNXiT7AqZtW5hN1v9TjLnz7TeDORUSoKK8=
+	t=1782247021; cv=none; b=e72lXcaganxOEFRvQ2cz3f7juU5r0gwRsPdV1sE/stclJYOFlJmXwcSMPhBSa3clFiTiJG1oScy0RgfkBF3WASfC+CBqftrwbBb1lxCweDvyIFfQuOxibiTgBSnMMRfznedom7k/mJ+qkZumdIE03RZ8OvfQL1ApIEYIOdch7qc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782246881; c=relaxed/simple;
-	bh=x2aDEwiyNGys2YUAbIqNKgX0lAxgo3Otaa9eAttDU5M=;
+	s=arc-20240116; t=1782247021; c=relaxed/simple;
+	bh=4d7rbSUoknYWkqLQldukzHGAy7E7sYvSut49rhPhijs=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=fVeCgjTpTsY6hzmzwQFxxjATrYqusJ8QngQxqdbeWwherPoDlMfb3hn4dYJgGxeYVRzoVoS5N0s0W8Kr+WF9Rmu8yB5/U+gng8jW7qPp8cVy/goIgIGeSfx78bfqwlKGsbB1GFQFUllDSfhzBV+hmO/mF3IfeIHJ0mbGngYmJIM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=d4oop37f; arc=none smtp.client-ip=45.79.88.28
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 0879240430
+	 MIME-Version:Content-Type; b=E0QcZzA88HigRX2qhfMBCDUIChXMhG50BdNzCY84k4xOJH7+Y4tRW2Dq4KvoYb7mwBIF5t0q6W5VxoZlKn7GdbEYcXD0KyRtqKP8xmdQgN0e4aHhfMoFgYpRhdMrmvmZ2bK2wKDbQi4X1m7EbeEHAbcnufkjS7mz1rO2jAk6ECg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=cuiSzY/B; arc=none smtp.client-ip=45.79.88.28
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net A731141592
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1782246880; bh=h1boQ/dW/mADxq+WJyv/QCTJlk7q1L+QoMvXEZJbtQk=;
+	t=1782247019; bh=tcGaOMIfoHNHvpsb5leLrOaPbNSZ4kNxIce0fkbKdOI=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=d4oop37fHhHemN7KR+5A1dMx0pKmhjOyGvJS7AUNxaOzmwqwdYztPf3nLiONU9qui
-	 j3n8cKnARukHujRX2a5yNc2QipmHjl7Bj+HL8ZNv3uMp3Gnz2ScfMW4B4Q7wZQ5nFL
-	 ZwCwgU3Jn7imIeBXlvXzaXNC18ua58NgdaguOZmuzBVU2jGwsQVtHImdyNm6CASRYJ
-	 KNYBYLaurbhy59/cxicHZna/u7Iuok55cVmAeZR51IoFLoz7h89iq3e5bB/3j4qFxK
-	 eMiRkKGwI9kLubkx6i8eDcDi0k9TkiTaQoXdWrKmKUXO+u5fDnDkHGJupKeEHJ33RD
-	 rFmgPTsXNEJlQ==
+	b=cuiSzY/BUcGZc4U0TvXvAZw8Www83Jb8BL3N30GfhHFVbHHV0bAXjFyrQEMwVBPIJ
+	 VQpRX4xXMfycCSioBxHXpnecCli752m1X0MFH2nX5clMgzWl3p//N+DniAyEljT9zr
+	 Lo+L7/8eg/NxxXQuTepOcD8IgcLnIlsCyLbB8Lm58vs0rftM66h47Rid/hulDHQaov
+	 BX4YpmVdccFhmKE6m8EbNutnBJ45IVazKzOQlxilmDgFGSFircuKPQIiuaTPruqYt7
+	 YJuIDQbse8PaxTMu+GzJv1WE/H7I3eApekdpKjPWf+l8QcCR6n7/oaCZ9cpkqiidP+
+	 OnMLcJzHGYH2w==
 Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 0879240430;
-	Tue, 23 Jun 2026 20:34:39 +0000 (UTC)
+	by ms.lwn.net (Postfix) with ESMTPSA id A731141592;
+	Tue, 23 Jun 2026 20:36:59 +0000 (UTC)
 From: Jonathan Corbet <corbet@lwn.net>
-To: Yudistira Putra <pyudistira519@gmail.com>, Steven Rostedt
- <rostedt@goodmis.org>, Masami Hiramatsu <mhiramat@kernel.org>
-Cc: Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Shuah Khan
- <skhan@linuxfoundation.org>, linux-trace-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, Yudistira Putra
- <pyudistira519@gmail.com>
-Subject: Re: [PATCH] Documentation: tracing: fix typo in events documentation
-In-Reply-To: <20260622143735.71778-1-pyudistira519@gmail.com>
-References: <20260622143735.71778-1-pyudistira519@gmail.com>
-Date: Tue, 23 Jun 2026 14:34:39 -0600
-Message-ID: <87echxatcw.fsf@trenco.lwn.net>
+To: "Matthew Wilcox (Oracle)" <willy@infradead.org>
+Cc: "Matthew Wilcox (Oracle)" <willy@infradead.org>, Mauro Carvalho Chehab
+ <mchehab+huawei@kernel.org>, Shuah Khan <skhan@linuxfoundation.org>,
+ linux-doc@vger.kernel.org
+Subject: Re: [PATCH] MAINTAINERS: Fix regex for kdoc
+In-Reply-To: <20260615154057.2156589-1-willy@infradead.org>
+References: <20260615154057.2156589-1-willy@infradead.org>
+Date: Tue, 23 Jun 2026 14:36:58 -0600
+Message-ID: <87a4slat91.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -70,7 +68,8 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
@@ -79,57 +78,56 @@ X-Spamd-Result: default: False [-1.66 / 15.00];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-93316-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-93317-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[efficios.com,linuxfoundation.org,vger.kernel.org,gmail.com];
+	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com,goodmis.org,kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:pyudistira519@gmail.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:skhan@linuxfoundation.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:willy@infradead.org,m:mchehab+huawei@kernel.org,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:mchehab@kernel.org,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_SENDER(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[lwn.net:+];
+	MIME_TRACE(0.00)[0:+];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TO_DN_SOME(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
+	DKIM_TRACE(0.00)[lwn.net:+];
 	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[trenco.lwn.net:mid,vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,lwn.net:dkim,lwn.net:from_mime]
+	RCPT_COUNT_FIVE(0.00)[5];
+	TAGGED_RCPT(0.00)[linux-doc,huawei];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp,lwn.net:dkim,lwn.net:from_mime,trenco.lwn.net:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 915D06BA0A5
+X-Rspamd-Queue-Id: 29ADE6BA0EF
 
-Yudistira Putra <pyudistira519@gmail.com> writes:
+"Matthew Wilcox (Oracle)" <willy@infradead.org> writes:
 
-> Fix a typo in the tracing events documentation: "can by built up"
-> should be "can be built up".
+> The trailing '*' means "all files in this directory, but not
+> subdirectories" which excluded tools/lib/python/kdoc/.  This is surely
+> not intended.
 >
-> Signed-off-by: Yudistira Putra <pyudistira519@gmail.com>
+> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 > ---
->  Documentation/trace/events.rst | 2 +-
+>  MAINTAINERS | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/Documentation/trace/events.rst b/Documentation/trace/events.rst
-> index 18d112963dec..581f2260614b 100644
-> --- a/Documentation/trace/events.rst
-> +++ b/Documentation/trace/events.rst
-> @@ -1064,7 +1064,7 @@ correct command type, and a pointer to an event-specific run_command()
->  callback that will be called to actually execute the event-specific
->  command function.
->  
-> -Once that's done, the command string can by built up by successive
-> +Once that's done, the command string can be built up by successive
->  calls to argument-adding functions.
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 0d94420eae3d..999957a3e0ca 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -7653,7 +7653,7 @@ S:	Maintained
+>  P:	Documentation/doc-guide/maintainer-profile.rst
+>  T:	git git://git.lwn.net/linux.git docs-next
+>  F:	Documentation/
+> -F:	tools/lib/python/*
+> +F:	tools/lib/python/
+>  F:	tools/docs/
 
 Applied, thanks.
 
