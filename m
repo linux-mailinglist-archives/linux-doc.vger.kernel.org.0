@@ -1,50 +1,51 @@
-Return-Path: <linux-doc+bounces-93167-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93168-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Olr7AfLkOWoOywcAu9opvQ
-	(envelope-from <linux-doc+bounces-93167-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 03:44:18 +0200
+	id 8dnsECXlOWolywcAu9opvQ
+	(envelope-from <linux-doc+bounces-93168-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 03:45:09 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 93C316B3526
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 03:44:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CF1936B3562
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 03:45:08 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=jZeo4cWT;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93167-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-93167-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=JHZ4LHCH;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93168-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-93168-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 01A623024EBE
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 01:44:16 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id CB498303A038
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 01:45:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A99F3379993;
-	Tue, 23 Jun 2026 01:44:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 22E7138887D;
+	Tue, 23 Jun 2026 01:44:25 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E646377019;
-	Tue, 23 Jun 2026 01:44:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A7E83859F6;
+	Tue, 23 Jun 2026 01:44:23 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782179055; cv=none; b=J7+ULdMxo7u02bYZCr/uRxI5Jv3Uxe1idfrqoWZp5drRe6JYeopGRJtj/+QI9WgGkeif0+xwC4J3mdQWh5n3Lmz1SlgA/l4bSUPtO7CLVuW2LZII+hxXrsH42fqNFdaY2jiBc+kNDrFVyGxAADjp0LDKja1FnF5uifZ7mnqzk8A=
+	t=1782179065; cv=none; b=LgfnxqPC2ZUXUylW+2iWhVV6vsklver7KhJCkvR77MSJRKU6NlCZj0D/J+rtGOcdhVEEDiv9p2GWi+OWHip8CYpQIfwBiM8J7JQpoBWGvhz8twPkW0V03XSWr6Gw4s5yQ9f95GkDFaCpJu57kp4YJuKgo15Ps6bWDILK19NA+ng=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782179055; c=relaxed/simple;
-	bh=ty118v/GEIKgPHRF7FkPEb1YYTctfSyI9LDfVCc8uBw=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=dnSrwMAR9M6GST8HTwJZa1YmHM/HP9vBALjheGdOgo/rZ7dw/pLS0LrOnxzJcRaD8Uwalvy/ucZ5RmY1Ewc70N/x9fm412hl26HOUsTbW1ofwYlIVwlX/bp+kU2e5EnBYRuzpNgCC/0afQEwEnyxha5fGOnwBBHDcnHSx365WcY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jZeo4cWT; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 386DD1F000E9;
-	Tue, 23 Jun 2026 01:44:12 +0000 (UTC)
+	s=arc-20240116; t=1782179065; c=relaxed/simple;
+	bh=z5s0hhTM8vrbPMEgU+zBo1ewxn60O4m9EDzvREP6uOM=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=pSLZ3XE0ClV3mVVuuF5vUoDF3RNJy6vsekLHBlILdFFeGCC1KPGIxoLRRVIm76wW5qbZnTpa1DtbT61wG3dH4lL9+2MLgsH6gFa87aQuZyTTDDvEQ0QNhMx3+mQ5NQ+9TP6iMdxuL/Lj344gx2wCJfdSyToZ7MpaWPZuBuenrJQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JHZ4LHCH; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B7FEA1F000E9;
+	Tue, 23 Jun 2026 01:44:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782179054;
-	bh=vni5Lyip3mgwniFnSgkoIOM9DFuNAQmCprTMRCiORoU=;
-	h=From:To:Cc:Subject:Date;
-	b=jZeo4cWTbOi4j3PW944Wwi8m+/QXtToDpe7N3uOJzT60jex6ZikMn6LvXCqG7GHMv
-	 q9k0q1V+TgggdtJkR+aCiufi5rt/fgZrSmjZg2yMz5DbjelHq7a5ZGdG8F4hYM63kL
-	 zNOOn/gqW/fGF5KI216G5d0HNxPyz76ViI59nGSkKEq/JswvFhwQYkfA4EnL86hQDW
-	 dqetFDoeTneXCXBYOZy7LNfbWFsWbeZ0cEUFIgQF2DGUyo/KZZ0zkS4p3WnSoSU3eM
-	 yigvj8RMw3O1xC/N3il+KbSvokgRHsjUB+rirELEAYWl0f4sY9a/D75/ZVC8hxiY4X
-	 h7y2iyWUnWD3A==
+	s=k20260515; t=1782179063;
+	bh=AqItfMwf8lSN3YOe0I7nNutx9lrvFmYXMpR6tugTZzc=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=JHZ4LHCHeIs/wCU+VXQ8X8JKTG5k4GcbNlbT0uu4DGxVRAoVsuKUqVc6JdDDvfE4I
+	 BJ334oZlPFoMvGc/9XICh8hHK0bdbi4WItIX7pf+3RKWz4SUwA/wJIJyr1NkHnst3y
+	 uMEs3pUiMUMredh7PfUIUrAklevcIG36gT1meJ5Q663Lp9Wr6bUMPvizfC5hltsjoQ
+	 WwMrG+WS30HlEuTSzLh4hWdd4tQrTb2dBhX5BmHZg3+wGEatYpvVqNVQZ9GahPYkyj
+	 A07uLBA5J39lw4o+o/EutpEkTp3byd1GUHtPTlaKf94UTJa8+khR7fwVnn+bbeBmx+
+	 fcIdGP/pqW+lg==
 From: "Masami Hiramatsu (Google)" <mhiramat@kernel.org>
 To: Steven Rostedt <rostedt@goodmis.org>,
 	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
@@ -55,10 +56,12 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	linux-trace-kernel@vger.kernel.org,
 	linux-doc@vger.kernel.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v7 00/10] tracing/probes: Add more typecast features
-Date: Tue, 23 Jun 2026 10:44:10 +0900
-Message-ID: <178217904992.643090.15726197350652241270.stgit@devnote2>
+Subject: [PATCH v7 01/10] tracing/probes: Fix double addition of offset for @+FOFFSET
+Date: Tue, 23 Jun 2026 10:44:19 +0900
+Message-ID: <178217905962.643090.1978577464942171332.stgit@devnote2>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <178217904992.643090.15726197350652241270.stgit@devnote2>
+References: <178217904992.643090.15726197350652241270.stgit@devnote2>
 User-Agent: StGit/0.19
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -86,7 +89,7 @@ X-Spamd-Result: default: False [-4.66 / 15.00];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_SENDER(0.00)[mhiramat@kernel.org,linux-doc@vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-93167-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-93168-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
@@ -102,101 +105,33 @@ X-Spamd-Result: default: False [-4.66 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 93C316B3526
+X-Rspamd-Queue-Id: CF1936B3562
 
-Hi,
+From: Masami Hiramatsu (Google) <mhiramat@kernel.org>
 
-Here is the 7th version of series to introduce more typecast features
-to probe events. The previous version is here:
+Since commit 533059281ee5 ("tracing: probeevent: Introduce new argument
+ fetching code") wrongly use @offset local variable during the parsing,
+the offset value is added twice when dereferencing.
+Reset the @offset after setting it in FETCH_OP_FOFFS.
 
- https://lore.kernel.org/all/178201238795.570818.15573963115625446598.stgit@devnote2/
-
-In this version, I added 2 new fix and cleanup patches and update
-according to Sashiko's review. [1/10] is a long-lived issue about
-@+FOFFS, which was wrongly adding offset twice. [2/10] is a clean
-up patch for renaming fetch_op name (good to dump it). 
-This is applicable against probes/core branch on linux-trace tree.
-
-Steve introduced BTF typecast feature for eprobe[1].
-This series extends it and add more options:
-
-1. Expanding BTF typecast to kprobe and fprobe.
-   (currently only function entry/exit)
-
-2. Introduce container_of like typecast. This adds a "assigned
-   member" option to the typecast.
-
-   (STRUCT,MEMBER)VAR->ANOTHER_MEMBER
-
-   This casts VAR to STRUCT type but the VAR is as the address
-   of STRUCT.MEMBER. In C, it is:
-
-   container_of(VAR, STRUCT, MEMBER)->ANOTHER_MEMBER
-
-3. Support nested typecast, e.g.
-
-   (STRUCT)((STRUCT2)VAR->MEMBER2)->MEMBER
-
-   the nest level must be smaller than 3.
-
-4. Add $current variable to point "current" task_struct.
-   This is useful with typecast, e.g.
-
-   (task_struct)$current->pid
-
-5. per-cpu dereference support.
-
-   Intrdouce this_cpu_read(VAR) and this_cpu_ptr(VAR) to
-   access per-cpu data on the current CPU (accessing other CPU
-   data is not stable, because it can be changed.)
-
-   You can access the member of per-cpu data structure using
-   typecast like:
-
-   (STRUCT)this_cpu_ptr(VAR)->MEMBER
-
-And added fetcharg dump feature (for debug) and updated test scripts
-to test part of them.
-
-Thanks,
-
+Fixes: 533059281ee5 ("tracing: probeevent: Introduce new argument fetching code")
+Signed-off-by: Masami Hiramatsu (Google) <mhiramat@kernel.org>
+Cc: stable@vger.kernel.org
 ---
-base-commit: 3ec75d0067f30eb5e0730f033766d6ab2feca7ae
+ kernel/trace/trace_probe.c |    1 +
+ 1 file changed, 1 insertion(+)
 
-Masami Hiramatsu (Google) (10):
-      tracing/probes: Fix double addition of offset for @+FOFFSET
-      tracing/probes: Rename FETCH_OP_DATA to FETCH_OP_IMMSTR
-      tracing/probes: Support dumping fetcharg program for debugging dynamic events
-      tracing/probes: Support typecast for various probe events
-      tracing/probes: Support nested typecast
-      tracing/probes: Type casting always involves nested calls
-      tracing/probes: Support field specifier option for typecast
-      tracing/probes: Add $current variable support
-      tracing/probes: Add this_cpu_read() and this_cpu_ptr() dereference method to fetcharg
-      tracing/probes: Add a new testcase for BTF typecasts
+diff --git a/kernel/trace/trace_probe.c b/kernel/trace/trace_probe.c
+index 98532c503d02..502fa6da5949 100644
+--- a/kernel/trace/trace_probe.c
++++ b/kernel/trace/trace_probe.c
+@@ -1241,6 +1241,7 @@ parse_probe_arg(char *arg, const struct fetch_type *type,
+ 
+ 			code->op = FETCH_OP_FOFFS;
+ 			code->immediate = (unsigned long)offset;  // imm64?
++			offset = 0;
+ 		} else {
+ 			/* uprobes don't support symbols */
+ 			if (!(ctx->flags & TPARG_FL_KERNEL)) {
 
-
- Documentation/trace/eprobetrace.rst                |    9 
- Documentation/trace/fprobetrace.rst                |   10 
- Documentation/trace/kprobetrace.rst                |   11 
- kernel/trace/Kconfig                               |   11 
- kernel/trace/trace.c                               |    8 
- kernel/trace/trace_eprobe.c                        |    2 
- kernel/trace/trace_fprobe.c                        |    2 
- kernel/trace/trace_kprobe.c                        |    2 
- kernel/trace/trace_probe.c                         |  582 ++++++++++++++++----
- kernel/trace/trace_probe.h                         |   98 ++-
- kernel/trace/trace_probe_tmpl.h                    |   27 +
- kernel/trace/trace_uprobe.c                        |    3 
- samples/trace_events/trace-events-sample.c         |   40 +
- samples/trace_events/trace-events-sample.h         |   34 +
- .../ftrace/test.d/dynevent/btf_probe_event.tc      |   51 ++
- .../ftrace/test.d/dynevent/fprobe_syntax_errors.tc |   11 
- .../ftrace/test.d/kprobe/kprobe_syntax_errors.tc   |   11 
- .../ftrace/test.d/kprobe/uprobe_syntax_errors.tc   |    5 
- 18 files changed, 756 insertions(+), 161 deletions(-)
- create mode 100644 tools/testing/selftests/ftrace/test.d/dynevent/btf_probe_event.tc
-
---
-Masami Hiramatsu (Google) <mhiramat@kernel.org>
 
