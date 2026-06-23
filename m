@@ -1,222 +1,179 @@
-Return-Path: <linux-doc+bounces-93162-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93164-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 6sslEOneOWq8yQcAu9opvQ
-	(envelope-from <linux-doc+bounces-93162-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 03:18:33 +0200
+	id RN3gHnLgOWr/yQcAu9opvQ
+	(envelope-from <linux-doc+bounces-93164-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 03:25:06 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id A7EDD6B322F
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 03:18:32 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id CB9716B329F
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 03:25:05 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=PdFiLo25;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93162-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-93162-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
+	dkim=pass header.d=linux.dev header.s=key1 header.b=xHuwGa3D;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93164-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-93164-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=linux.dev;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id B3BE130128FF
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 01:18:31 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id D5845305D805
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 01:22:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 67EF037107E;
-	Tue, 23 Jun 2026 01:18:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6D80A3769F7;
+	Tue, 23 Jun 2026 01:22:56 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from out-173.mta1.migadu.com (out-173.mta1.migadu.com [95.215.58.173])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EE3C35E929
-	for <linux-doc@vger.kernel.org>; Tue, 23 Jun 2026 01:18:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C149635F60E
+	for <linux-doc@vger.kernel.org>; Tue, 23 Jun 2026 01:22:54 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782177509; cv=none; b=H9r9AeSbKUwnlbjrexsfam1zqnPEcIVzWT/ReHaabXqeKMuIUrYRwGDEDoLjSsIHv0ByMVYiRZKpCpPU9zI5o87yxIziQrqsf4ft/JTriMfimdpLhWZEuIThG3JNETCT2mvJqqO7Pyyc0ckf2dEFCrLldRLwdvO6VgLIupK3aD8=
+	t=1782177776; cv=none; b=BRjJtyU5cwEBYAweS8RNUnrt13vJL8gPtc4uGFFe+KqmqQjf4vFZKlT9n1wnwAXLb/cmrzGoYBo+6M/+W1z5GRXrxfhjKYxX6/gmIi1Hmz/Tv2iUxJYt9gHrnr8/lIN4/gQwzDwkFs83K90xK2Woci8NARt+ZZ5CzdQhVvQCj/8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782177509; c=relaxed/simple;
-	bh=DmoUeLjpNfEfiOYCdY3qAp15oMfmxTnq7Cv/R8buu1U=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=tXqLZ/KUMfenUhnSiThDmPdQJb4QJI3M4BsJdoQz9TnBSNXJctvZis9SMm+Un2/RApYcCM/zwESzR1907M5SkU3KZ/iea29mCrZTgtpnOKwTOgR+GiWv2eQk8y3qD+iBddiiPhigt9GYzcO1qXMPsd3tcansUDNIQ4beQcR91ZQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=PdFiLo25; arc=none smtp.client-ip=209.85.214.177
-Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-2c69921bd15so20841865ad.1
-        for <linux-doc@vger.kernel.org>; Mon, 22 Jun 2026 18:18:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782177507; x=1782782307; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=DmoUeLjpNfEfiOYCdY3qAp15oMfmxTnq7Cv/R8buu1U=;
-        b=PdFiLo25252QNfZVhdQm/Xiqrm9NTmt01kT5Sy0wqjgU47zKkTF/jEkZDaxEwNwHiG
-         tfMGxHJyYDyp/zdQ7RPHakyfCftikdhG1/9NRinzj5W0Qm2FzlluXMccgn/h+rEM0HOM
-         KPOCuNsPPrdSkZtdLdmyyEr2KJ81jmFl1/sJ4jUAzE9QMiWS6xqwD9FPIBs6cUf/7u53
-         pswUxcOxcBsLrPydH8WRLt9mgwjPC9QOaCe1jmFRTlp1yZTInIdFzgS7zYBiGhD6MI7t
-         T2tqQKtWpvHsRrlUFhNSlGfjsZxIGnHS7v5i4eNU9ERwF+5fKWoved/oxqYpbbb3LWpA
-         IjBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782177507; x=1782782307;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=DmoUeLjpNfEfiOYCdY3qAp15oMfmxTnq7Cv/R8buu1U=;
-        b=ZeVRxE/aawu8ThW84Wureb/tR0JVV/LsG8RdAgE3BN+506szA83jHCHHO/C3QXnZWr
-         MezgCBMBF3/z4ArRgnF8WyEjO5ohe3UxXyljG4SM+A2MptE3hfQIGR5JcxEHW+glgJ0Q
-         rFre1V9Ak3i1IvwfJ9w82ol42RZKE+/UOb1P6VzLuTWJ5Q9gj/gT4ka9FbXqXjDnqb/N
-         zVY7uDYQRzkDiM0bvvtLLRfQrUxFRtDAK4NlpH2drluNP15mcQpNgWeDlbgSpH8EwUr8
-         eR9/BJcx8nC0c5MmUzjumqXjksQLRu45T/N2Kr8hzyQmNVU9ApfgZi6IMLglQHN+ns60
-         wLEQ==
-X-Forwarded-Encrypted: i=1; AHgh+Rq3DqCxRlhkLWN/kXEI0EpCmSPGWtKpOqWZJWPgNeVtYviweYPT8uZkfAtXvaEPYlirq136Wy1B9QU=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzHF4ymZIuPmkSna/W6iVjl//cW6QCptTWRd00y5kfYndWhoKUV
-	SJe5j8Po7qS9g4c2EL7pe1s9KFM8k7QizMI4NxeWhUazrZFJ4w/aYfe5
-X-Gm-Gg: AfdE7cnKCV2kxopCDemC3dJyVa2EA0ZVyekPaBSldCZNka6e41eb/LmUfk1jbVIW1XU
-	zWJCj+kgdbS+FzZuqRw/qP7/6eomgfJtXPLt6/MGZQLetlemgAvMfueLNMqBC67kGjU3fyqa/Gb
-	EvpxMUvnaW7h7v2v8fvEY8rV1WAh908vWKRTvC2vP4EfBrUyLb9hSBA8hHZpHMUBkSynxV0/SUl
-	Gnl90/uAjIsgnXicAMW4q5OJvMn1wjVLY7jvINp21pGkq4X9tds+ewzm6kjfOq9smbVEBMTx4Ap
-	ejfD2oIVhe4qld5CPU2C+jYw5skdkyvfGHn5i/hHP3phSgwtorWIi4FaZQxBaE++bNTjsmj7LR3
-	BOMz2F4fnDj2K8C9iOwgtmWf8BpC4T8sX0Str2TV+WOklEg+xq5wSBpMOJ7o4CLfUpYs79LmIBO
-	c6bbGyuQ==
-X-Received: by 2002:a17:902:e892:b0:2b2:5503:1b8c with SMTP id d9443c01a7336-2c7c99734famr1897205ad.11.1782177507312;
-        Mon, 22 Jun 2026 18:18:27 -0700 (PDT)
-Received: from dev ([163.43.103.131])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c799749cb3sm45863395ad.72.2026.06.22.18.18.23
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 22 Jun 2026 18:18:26 -0700 (PDT)
-From: Yuya Kusakabe <yuya.kusakabe@gmail.com>
-To: andrea@common-net.org
-Cc: Yuya Kusakabe <yuya.kusakabe@gmail.com>,
-	andrea.mayer@uniroma2.it,
-	davem@davemloft.net,
-	edumazet@google.com,
-	dsahern@kernel.org,
-	kuba@kernel.org,
-	pabeni@redhat.com,
-	horms@kernel.org,
-	justin.iurman@gmail.com,
-	shuah@kernel.org,
-	corbet@lwn.net,
-	skhan@linuxfoundation.org,
-	linux-kernel@vger.kernel.org,
-	netdev@vger.kernel.org,
-	linux-kselftest@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	stefano.salsano@uniroma2.it,
-	ahabdels@cisco.com
-Subject: Re: [PATCH v2 0/7] seg6: add SRv6 Mobile User Plane (RFC 9433) behaviors
-Date: Tue, 23 Jun 2026 10:18:14 +0900
-Message-ID: <20260612032313.28921-05-yuya.kusakabe@gmail.com>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20260608023951.ccd278890d7c489dbfe21113@common-net.org>
-References: <20260608023951.ccd278890d7c489dbfe21113@common-net.org>
+	s=arc-20240116; t=1782177776; c=relaxed/simple;
+	bh=v+OmKz/qwNb3cD++nL8Ju6+NRPVxqGL6FindB9q758Y=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=qmm5s3B6K8YwvRQWYR2pCSff043tsmTbac/RnAj4LxuMOjP6XMLsgcwhhCxqTFLdHAQVAh+nr9z6hdYK83mw5C7jWKHi9dH5DhGhvci4dmtTzD98+vqX9UlIAny5yTJSDhVgmEcmoEQwB6c3DJi4St9xM+X47Q+F8R+hsh/2MMg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=xHuwGa3D; arc=none smtp.client-ip=95.215.58.173
+Message-ID: <5a14e276-e59e-458d-9c24-622321bef8d7@linux.dev>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1782177763;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=IP1jrhz6V+SNpvaMxGkoV85OuYzi4/pwez8gDGp5Ys8=;
+	b=xHuwGa3DN5gWsnfU4l0oGCJBdIzNbawDfroYFbMOH494WtqAhZfo2y++a0yLOdC3LaKdVd
+	3cskoQ38Tg4ug6I/ZYEma+xobF2Htt1E9RA0KuwB2Mds6CXHBF0kcKC6DIkt7bqT5CEO4y
+	EjotpM65Xc33MmKXaZU/yqHUJ0FPta8=
+Date: Tue, 23 Jun 2026 09:22:30 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH 2/2] cgroup/cpuset: Rebind/migrate mm only for threadgroup
+ leader in cpuset_update_tasks_nodemask()
+To: Waiman Long <longman@redhat.com>, Tejun Heo <tj@kernel.org>,
+ Johannes Weiner <hannes@cmpxchg.org>, =?UTF-8?Q?Michal_Koutn=C3=BD?=
+ <mkoutny@suse.com>, Jonathan Corbet <corbet@lwn.net>,
+ Shuah Khan <skhan@linuxfoundation.org>
+Cc: cgroups@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org
+References: <20260622224509.1927419-1-longman@redhat.com>
+ <20260622224509.1927419-2-longman@redhat.com>
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Ridong Chen <ridong.chen@linux.dev>
+In-Reply-To: <20260622224509.1927419-2-longman@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Migadu-Flow: FLOW_OUT
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
+	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TAGGED_FROM(0.00)[bounces-93162-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[19];
+	TAGGED_FROM(0.00)[bounces-93164-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:andrea@common-net.org,m:yuya.kusakabe@gmail.com,m:andrea.mayer@uniroma2.it,m:davem@davemloft.net,m:edumazet@google.com,m:dsahern@kernel.org,m:kuba@kernel.org,m:pabeni@redhat.com,m:horms@kernel.org,m:justin.iurman@gmail.com,m:shuah@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-kernel@vger.kernel.org,m:netdev@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-doc@vger.kernel.org,m:stefano.salsano@uniroma2.it,m:ahabdels@cisco.com,m:yuyakusakabe@gmail.com,m:justiniurman@gmail.com,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[yuyakusakabe@gmail.com,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[gmail.com,uniroma2.it,davemloft.net,google.com,kernel.org,redhat.com,lwn.net,linuxfoundation.org,vger.kernel.org,cisco.com];
-	FORWARDED(0.00)[lists@lfdr.de];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[yuyakusakabe@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ALIAS_RESOLVED(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	FORGED_SENDER(0.00)[ridong.chen@linux.dev,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:longman@redhat.com,m:tj@kernel.org,m:hannes@cmpxchg.org,m:mkoutny@suse.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:cgroups@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[linux.dev:+];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[ridong.chen@linux.dev,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp,end.map:url]
+	MID_RHS_MATCH_FROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sashiko.dev:url,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp,linux.dev:dkim,linux.dev:email,linux.dev:mid,linux.dev:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: A7EDD6B322F
+X-Rspamd-Queue-Id: CB9716B329F
 
-Hi Andrea,
 
-Thank you for the answers.
 
-> On the placement, the new lwtunnel encap type you propose could be a way to
-> implement the seg6_mobile.c separation. Since this touches UAPI in
-> include/uapi/linux/lwtunnel.h beyond the SRv6 subsystem and cannot be
-> undone once merged, it needs careful design.
-[...]
-> As far as I can see, RFC 9433 has only one Headend behavior, and no L2 or
-> reduced variants. So a single LWTUNNEL_ENCAP_SEG6_MOBILE handling both
-> End.M.* and H.M.GTP4.D could be viable if accepting both input families
-> (ETH_P_IPV6 for End.M.*, ETH_P_IP for H.M.GTP4.D) is treated as a design
-> choice of the new encap type, not a stretching of the seg6_local endpoint
-> processing model.
->
-> These trade-offs are worth weighing in the final design. [...] I think the
-> lwtunnel direction will need feedback and comments from its community and
-> maintainers.
+On 6/23/2026 6:45 AM, Waiman Long wrote:
+> As reported by sashiko [1], cpuset_update_tasks_nodemask() will do
+> mpol_rebind_mm() and possibly cpuset_migrate_mm() for all threads of
+> a multithreaded process. Since commit 3df9ca0a2b8b ("cpuset: migrate
+> memory only for threadgroup leaders"), cpuset_attach() had been updated
+> to rebind and migrate memory only for threadgroup leaders to mark the
+> group leader as the owner of the mm_struct.
+> 
+> To be consistent and avoid unnecessary performance overhead for heavily
+> multithreaded processes, follow the cpuset_attach() example and perform
+> memory rebind and migration only for threadgroup leaders.
+> 
+> Also add a paragraph in cgroup-v2.rst under cpuset.mems that the
+> threadgroup leader is the memory owner of that threadgroup. Therefore
+> the non-leading threads shouldn't be in other cgroups whose "cpuset.mems"
+> doesn't fully overleap that of the group leader.
+> 
+> [1] https://sashiko.dev/#/patchset/20260621032816.1806773-1-longman%40redhat.com
+> 
+> Signed-off-by: Waiman Long <longman@redhat.com>
+> ---
+>   Documentation/admin-guide/cgroup-v2.rst | 7 +++++++
+>   kernel/cgroup/cpuset.c                  | 4 ++++
+>   2 files changed, 11 insertions(+)
+> 
+> diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
+> index 993446ab66d0..341037c7ec9d 100644
+> --- a/Documentation/admin-guide/cgroup-v2.rst
+> +++ b/Documentation/admin-guide/cgroup-v2.rst
+> @@ -2527,6 +2527,13 @@ Cpuset Interface Files
+>   	a need to change "cpuset.mems" with active tasks, it shouldn't
+>   	be done frequently.
+>   
+> +	For a multithreaded process, the threadgroup leader is
+> +	considered the owner of the group's memory. Memory policy
+> +	rebinding and migration will only happen with respect to the
+> +	threadgroup leader. To avoid unexpected result, non-leading
+> +	threads shouldn't be put into another cgroup whose "cpuset.mems"
+> +	doesn't full overleap that of the threadgroup leader.
+> +
+>     cpuset.mems.effective
+>   	A read-only multiple values file which exists on all
+>   	cpuset-enabled cgroups.
+> diff --git a/kernel/cgroup/cpuset.c b/kernel/cgroup/cpuset.c
+> index bc0207fd6e57..27bc7a466468 100644
+> --- a/kernel/cgroup/cpuset.c
+> +++ b/kernel/cgroup/cpuset.c
+> @@ -2659,6 +2659,10 @@ void cpuset_update_tasks_nodemask(struct cpuset *cs)
+>   
+>   		cpuset_change_task_nodemask(task, &newmems);
+>   
+> +		/* Rebind and migrate mm only for task group leader */
+> +		if (task != task->group_leader)
+> +			continue;
+> +
 
-Agreed. The first per-behavior RFC series (End.MAP) will introduce the
-LWTUNNEL_ENCAP_SEG6_MOBILE encap type and the SEG6_MOBILE_* attribute
-namespace, and explain in its cover letter that this is the shared
-container for the RFC 9433 Section 6 behaviors, so the lwtunnel and
-routing folks can weigh in early. The dual input family (ETH_P_IPV6
-for End.M.*, ETH_P_IP for H.M.GTP4.D) is specific to H.M.GTP4.D, so I
-will lay that out in the H.M.GTP4.D cover letter; keeping it last in
-the posting order gives that discussion time to converge.
+Nit.
 
-> If LWTUNNEL_ENCAP_SEG6_MOBILE is added, using SEG6_MOBILE_* attributes
-> instead of SEG6_LOCAL_* removes the NH6/SRH/OIF overload raised in v2.
-> After solving the above, additional issues remain in the patchset,
-> for example src is overloaded across MUP behaviors, and v4_mask_len
-> needs revision. These are independent of the lwtunnel decision.
+if (!thread_group_leader(task))
+     continue;
 
-Both will be addressed in the rework; the details are in my replies to
-your patch 2 and patch 3 reviews. In short: v4_mask_len and the src
-template will be removed from End.M.GTP4.E entirely (full 32-bit IPv4
-DA/SA recovery only), src will mean the verbatim outer IPv6 SA for the
-IPv6-emitting behaviors, and the H.M.GTP4.D "Source UPF Prefix"
-template can get its own attribute name in that series if you prefer.
+>   		mm = get_task_mm(task);
+>   		if (!mm)
+>   			continue;
 
-> I can lead it. I have been evaluating the SRv6 drop reasons with my
-> research group, alongside other pending SRv6 patches.
->
-> We can sync offline on which SRv6 reasons fit your MUP behaviors, which
-> v2 MUP-specific reasons would fit better as SRv6 or generic, and what
-> stays MUP-specific.
+Reviewed-by: Ridong Chen <ridong.chen@linux.dev>
 
-Thanks for taking the lead; happy to sync offline. Until the prep
-series lands, the per-behavior series will carry no MUP-specific drop
-reasons.
+-- 
+Best regards
+Ridong
 
-> Thanks. Maybe also worth covering bad packets, like fragmented input or
-> malformed GTP-U extensions.
-
-Will do; the C-helper selftests will cover malformed and truncated
-GTP-U extension chains, a duplicated PDU Session Container, and
-fragmented outer input (which the behaviors will reject explicitly).
-
-> Works for me. What matters is that the upcoming patches are well structured
-> so NF_HOOK can be wired in cleanly in the follow-up.
->
-> I am already working on the fix.
-
-Understood. Each behavior will keep a single strip / transform / push
-flow in its input handler, so the hook can later slot between strip
-and push without reintroducing the skb->cb context pattern.
-
-Thanks,
-Yuya
 
