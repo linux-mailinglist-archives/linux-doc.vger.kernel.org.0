@@ -1,151 +1,287 @@
-Return-Path: <linux-doc+bounces-93240-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93241-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 5yudLNqSOmoEAggAu9opvQ
-	(envelope-from <linux-doc+bounces-93240-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 16:06:18 +0200
+	id R64CA7iSOmr1AQgAu9opvQ
+	(envelope-from <linux-doc+bounces-93241-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 16:05:44 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04A0B6B7BA7
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 16:06:18 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5AA0E6B7B96
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 16:05:43 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=google.com header.s=20251104 header.b=khAeAjMC;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93240-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-93240-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=reject) header.from=google.com;
+	dkim=pass header.d=ibm.com header.s=pp1 header.b=YfB4mphF;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93241-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-93241-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=ibm.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id BBEBA309C4F9
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 14:03:39 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 57AEB3002E70
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 14:05:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4255437FF4B;
-	Tue, 23 Jun 2026 14:03:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 358283803CF;
+	Tue, 23 Jun 2026 14:05:40 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f73.google.com (mail-wm1-f73.google.com [209.85.128.73])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 06D4B37F73A
-	for <linux-doc@vger.kernel.org>; Tue, 23 Jun 2026 14:03:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE4463803C7;
+	Tue, 23 Jun 2026 14:05:38 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782223419; cv=none; b=q1Fug+QOGi6XGxXlqzGkxSAtC+0XH0wMH5bMiAsi+cQQvXOsYvjQuf6QDhVwubEaIrH+UcS3MwfVnyWOe9XSvH1nOsWbFDTSCRWwQfBiO53E0QrEBI09oDH4GHiBpZ8kkmPoQC0UKkFlkRP7IcmpCA57SdumsGptJQyKjDKoffc=
+	t=1782223540; cv=none; b=MlkGKIljDV1fmaZAdhKIxpXwHxTsBsfsyqwUHbnnfFSTIKkpW4ETWvtE7uXXZ2rrBUJ8M0WOJYulS1s0cC47F8YGkc3LrbCqH+EfFN752XNN+liTekQkcygR8bMNDk4DOuntXf1CwuOA3Xct+iMMlrzFuAgfHcKejuAaUAr4Lso=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782223419; c=relaxed/simple;
-	bh=Hn8y55bhgcCgZF0i9rw2W2DfMko1tyW8cgX8/rRvBP8=;
-	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=QMFBkRzN0b3NlifkmRJFmS07gDSycHbXW98fC+ukyuP702ldrzVRe7inpNV0e5bOxULPKEB8HSzi9lFEeGCPPideuk5KnRU49ur0txLRvDvNrqoBTUbdFeQuRE/wlEfsO4rime7W6ZHz0bSqql0GQzz0rzmGh8EnOWF+htc5erg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--tarunsahu.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=khAeAjMC; arc=none smtp.client-ip=209.85.128.73
-Received: by mail-wm1-f73.google.com with SMTP id 5b1f17b1804b1-49221de4ed4so37960465e9.0
-        for <linux-doc@vger.kernel.org>; Tue, 23 Jun 2026 07:03:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1782223416; x=1782828216; darn=vger.kernel.org;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=Pndzfg2mCWavHm/LZE4HxmOjSPKqkdyz2Mxcm9023NE=;
-        b=khAeAjMCX7kDLlXd7jnEOh2TB3kS1E+KsM2jtelv6ms8Y/gsEPGuvIeIG/gkrqHhWj
-         T671/NDTZMCMbLsC+/FdhFMXZgDdqwIASbPBAEMGb+46hKAaGnY/3kQHVDm1wtJ+YfM1
-         l7xk7XzWlxXzoufUROr5Olo1lmdhoJl0cy9O6yAjXPIWYIjXAUodM0SBDE4yki52HrHD
-         eG/3u5NI+vQu4kpt9wFNoJKYdfddAIrMrE03ZhRdCmwepZAY6j1ghF7SIAc3xr4vElDX
-         v6UPDI9vIiWFCt79H++LV9lK65e+6dQQh+Lb/QP4wPGSXvivDroOmmg9SMzWhO5TV+QQ
-         wAuw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782223416; x=1782828216;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Pndzfg2mCWavHm/LZE4HxmOjSPKqkdyz2Mxcm9023NE=;
-        b=S9oaQXrxjWLa1dVF+Ijxjno7xlSXPE8j3bttoKYNA1JGoW9AsBcgyBcXbl6Ndcdq2l
-         3WugVzcioz7djk92SA7qlJjfWOOBbz1LXhVHsnH7Kxn/lbkCTUAE1B99KGDX8/9D+hUk
-         veu3zDKIl99PSWchPtIdjGd3SC5i8SV7H8rS1Rf/fFRFFwtcWQ3wErGnP8UYesazd/rE
-         fYx/rBmc3IqbSgww8E2vRlzAYkev2u5QiG5G3641XxkZrzByaw01kKhqQOsmp9QohstC
-         YgFFRF/VjONVK9wmZ3VvFf1TWUr8C80tV3oAjnxa686tyiqibexukBCU4hbbPV36FXkn
-         FFyQ==
-X-Forwarded-Encrypted: i=1; AFNElJ9dUt0lt3PuG3RisyKh+RHWPV4p08chP3lFbcJjoe5kMig19j8DDEntOUnrBa5BUH8cmtrbHF5vKl4=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx0V/lujk1PszzAX+LhgBx3BelMbdFLgkQjAMfiWF2rkdjLWxQV
-	ZhXIgreHYAnKj8RfpFeX072dTqPQ6meen+EmPO5JmrVt3HoLUDCYfU4BsHZ+RHzTx75EVnbgWNK
-	i22yWjhHzwp6Tf4Aq9A==
-X-Received: from wmo12.prod.google.com ([2002:a05:600c:230c:b0:492:346d:8d96])
- (user=tarunsahu job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:600c:3f0f:b0:492:3214:cbe6 with SMTP id 5b1f17b1804b1-49240e7f6f2mr330026535e9.23.1782223415994;
- Tue, 23 Jun 2026 07:03:35 -0700 (PDT)
-Date: Tue, 23 Jun 2026 14:03:35 +0000
-In-Reply-To: <ajnOnzdknfwbuJ9g@google.com>
+	s=arc-20240116; t=1782223540; c=relaxed/simple;
+	bh=bJTiofTW5bf3S6Xfcb0IjVa5gOyMWnQTq5DHi/c3Ekw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=OLibB1DXimsZ7E9LIX9ArqnWEfHGKu82TqdOg8I/Y9xPIJcwhgZWIOZ9PUMmk5otcGyLg576cfIb+DTrI+1Xheop5gaMOMjIkQW1LtqmjGU80x1VETwtmfLWPnYY5mPupC3ovl3z6bLlgY/mnq9ehhQkllCiVxzDtZZRLOZIbq0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=YfB4mphF; arc=none smtp.client-ip=148.163.158.5
+Received: from pps.filterd (m0353725.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 65NBmueM1806273;
+	Tue, 23 Jun 2026 14:05:21 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=pp1; bh=/OQJjwaAIbyZX727RG1wnNhkFeYx1l
+	ZdR2cIcfZnNgc=; b=YfB4mphFNuKJ+wUr1qlSrCHl8qJZg1KEAV8YwFbccF+77G
+	hVNP7+l5foq1ZxDkQYoQ2Zh/t8LYgvyi8LHQ2ujzUlE0MZO1Fm4tX+QNGVVuF2Qk
+	+7c25tERXELNacEP1FouDanlRS191urskwydVwi8lRitPSU3/+I2L6WK3n/BhezK
+	mlazj8syfw9Kl8OMNxHr7KlKtejW4au4vyNBlY6vH5xflqSAuo6TvmCIesYbs7CM
+	Z3wd6UmwPQx7fwM8syGj+/7IWL76mrdDjxagzDJmmUMGQRZuXK8UJiT0/oPTiHxH
+	pSM1FQBgiPK2BikMnFj8+OnjBqG2KUhwLY7BBXrQ==
+Received: from ppma21.wdc07v.mail.ibm.com (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
+	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4ewh9gevpc-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Tue, 23 Jun 2026 14:05:21 +0000 (GMT)
+Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
+	by ppma21.wdc07v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 65NE4jwu032543;
+	Tue, 23 Jun 2026 14:05:20 GMT
+Received: from smtprelay02.fra02v.mail.ibm.com ([9.218.2.226])
+	by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4ex66k3kdk-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Tue, 23 Jun 2026 14:05:20 +0000 (GMT)
+Received: from smtpav03.fra02v.mail.ibm.com (smtpav03.fra02v.mail.ibm.com [10.20.54.102])
+	by smtprelay02.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 65NE5GWj52298014
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Tue, 23 Jun 2026 14:05:16 GMT
+Received: from smtpav03.fra02v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 6865920043;
+	Tue, 23 Jun 2026 14:05:16 +0000 (GMT)
+Received: from smtpav03.fra02v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id A018120040;
+	Tue, 23 Jun 2026 14:05:13 +0000 (GMT)
+Received: from fedora (unknown [9.5.7.39])
+	by smtpav03.fra02v.mail.ibm.com (Postfix) with ESMTPS;
+	Tue, 23 Jun 2026 14:05:13 +0000 (GMT)
+Date: Tue, 23 Jun 2026 19:35:17 +0530
+From: Amit Machhiwal <amachhiw@linux.ibm.com>
+To: Vaibhav Jain <vaibhav@linux.ibm.com>
+Cc: Amit Machhiwal <amachhiw@linux.ibm.com>, linuxppc-dev@lists.ozlabs.org,
+        Madhavan Srinivasan <maddy@linux.ibm.com>,
+        Anushree Mathur <anushree.mathur@linux.ibm.com>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Nicholas Piggin <npiggin@gmail.com>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>, kvm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, lkp@intel.com
+Subject: Re: [PATCH v4 4/4] KVM: PPC: Document KVM_PPC_GET_COMPAT_CAPS ioctl
+Message-ID: <20260623193128.6db5d6a0-15-amachhiw@linux.ibm.com>
+Mail-Followup-To: Vaibhav Jain <vaibhav@linux.ibm.com>, 
+	linuxppc-dev@lists.ozlabs.org, Madhavan Srinivasan <maddy@linux.ibm.com>, 
+	Anushree Mathur <anushree.mathur@linux.ibm.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+	Nicholas Piggin <npiggin@gmail.com>, Michael Ellerman <mpe@ellerman.id.au>, 
+	"Christophe Leroy (CS GROUP)" <chleroy@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, kvm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, lkp@intel.com
+References: <20260616123314.82721-1-amachhiw@linux.ibm.com>
+ <20260616123314.82721-5-amachhiw@linux.ibm.com>
+ <8733yjcb0y.fsf@vajain21.in.ibm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-References: <cover.1780676742.git.tarunsahu@google.com> <48777f4749fa43d5648085dbb2037aa99c144a88.1780676742.git.tarunsahu@google.com>
- <CAEvNRgFEHciT3T9y+qEYRvXhDwfrggoU7Rm=f9hT3OrV+wgpNQ@mail.gmail.com> <ajnOnzdknfwbuJ9g@google.com>
-Message-ID: <9huzwlvpmk08.fsf@tarunix.c.googlers.com>
-Subject: Re: [RFC PATCH v2 06/10] kvm: guest_memfd: Add support for freezing
- and unfreezing mappings
-From: tarunsahu@google.com
-To: Sean Christopherson <seanjc@google.com>, Ackerley Tng <ackerleytng@google.com>
-Cc: Jonathan Corbet <corbet@lwn.net>, vannapurve@google.com, fvdl@google.com, 
-	Pasha Tatashin <pasha.tatashin@soleen.com>, Shuah Khan <skhan@linuxfoundation.org>, sagis@google.com, 
-	aneesh.kumar@kernel.org, skhawaja@google.com, vipinsh@google.com, 
-	Pratyush Yadav <pratyush@kernel.org>, david@redhat.com, dmatlack@google.com, 
-	mark.rutland@arm.com, Paolo Bonzini <pbonzini@redhat.com>, Mike Rapoport <rppt@kernel.org>, 
-	Alexander Graf <graf@amazon.com>, axelrasmussen@google.com, linux-kselftest@vger.kernel.org, 
-	kexec@lists.infradead.org, linux-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org, kvm@vger.kernel.org, linux-mm@kvack.org
-Content-Type: text/plain; charset="UTF-8"
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <8733yjcb0y.fsf@vajain21.in.ibm.com>
+X-TM-AS-GCONF: 00
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-Proofpoint-GUID: Pqp4b3WvcWnQFDJ2YJ94ma5rUOup3IYB
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjIzMDExNCBTYWx0ZWRfX6bJazU3wNt4a
+ t51oJGu+6OCgdcL5MoY1XeRdVvEht9g7QLaIGG179HUOWVFtIyKCdWITXaFzzea+waS8tUDpOZ6
+ 6BTZk0WUZ5//oOnCISKwclyzQH9H0t4=
+X-Authority-Analysis: v=2.4 cv=c62bhx9l c=1 sm=1 tr=0 ts=6a3a92a1 cx=c_pps
+ a=GFwsV6G8L6GxiO2Y/PsHdQ==:117 a=GFwsV6G8L6GxiO2Y/PsHdQ==:17
+ a=kj9zAlcOel0A:10 a=FelO9ux0wxsA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=RnoormkPH1_aCDwRdu11:22 a=V8glGbnc2Ofi9Qvn3v5h:22 a=VnNF1IyMAAAA:8
+ a=A5PaLEsKMpW4Njs7qmoA:9 a=CjuIK1q_8ugA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjIzMDExNCBTYWx0ZWRfX+Mh8PG0SAJCA
+ SgNKQHid3P3eHxt2z2n6rhNf6/Osq4fdA4ZkZ0Xw6D5YkjQ3tS4UK59PoTOCQSWHDf+wwFkrD8T
+ zUvXL+OKil6dcDH8giKU2uYFjuWiB+aYyf7z/iADxsc4wqiEr9HWAaeEkPbgaR/F+xsdc4wxxXM
+ zjHu3LbSdW3UXsgkuS+aInTf+gHRlTNzlE8HjvNQwKYS4K1U/hetE0MDyaCXwtRlwMOBPUVlM0/
+ BUrqjdRopu7HKclcKTvEWrwS9FZRTvsF/kyy8gBoHzPhvI8ITHwgHmTovJrYjm85RFeR0BtCO2m
+ 4of8lyXIro3fKPj3P+9QDf8R9VJcsD8Z/MUoIWwet1JT8bvTczuOODenfBVqzJMWkdvqLR5dAhk
+ FXXwyyIil3JPP3XaONET0yy5LDlcUotzu27xl0c12lMUD+TaO2OCLyDn9GpCCATYL8w8CZky6Df
+ QRaKTI7x+pzAs0kdFOg==
+X-Proofpoint-ORIG-GUID: EcCHqrCPo4oWIheH4-4tbQX_84t5qrSO
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-23_03,2026-06-23_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 impostorscore=0 adultscore=0 clxscore=1015 suspectscore=0
+ priorityscore=1501 phishscore=0 spamscore=0 bulkscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606230114
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-1.16 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MV_CASE(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+	DMARC_POLICY_ALLOW(-0.50)[ibm.com,none];
+	R_DKIM_ALLOW(-0.20)[ibm.com:s=pp1];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	FREEMAIL_CC(0.00)[linux.ibm.com,lists.ozlabs.org,redhat.com,gmail.com,ellerman.id.au,kernel.org,lwn.net,linuxfoundation.org,vger.kernel.org,intel.com];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:seanjc@google.com,m:ackerleytng@google.com,m:corbet@lwn.net,m:vannapurve@google.com,m:fvdl@google.com,m:pasha.tatashin@soleen.com,m:skhan@linuxfoundation.org,m:sagis@google.com,m:aneesh.kumar@kernel.org,m:skhawaja@google.com,m:vipinsh@google.com,m:pratyush@kernel.org,m:david@redhat.com,m:dmatlack@google.com,m:mark.rutland@arm.com,m:pbonzini@redhat.com,m:rppt@kernel.org,m:graf@amazon.com,m:axelrasmussen@google.com,m:linux-kselftest@vger.kernel.org,m:kexec@lists.infradead.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:kvm@vger.kernel.org,m:linux-mm@kvack.org,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-93240-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[25];
-	FORGED_SENDER(0.00)[tarunsahu@google.com,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-93241-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:vaibhav@linux.ibm.com,m:amachhiw@linux.ibm.com,m:linuxppc-dev@lists.ozlabs.org,m:maddy@linux.ibm.com,m:anushree.mathur@linux.ibm.com,m:pbonzini@redhat.com,m:npiggin@gmail.com,m:mpe@ellerman.id.au,m:chleroy@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:kvm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:lkp@intel.com,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_NEQ_ENVFROM(0.00)[tarunsahu@google.com,linux-doc@vger.kernel.org];
-	MISSING_XM_UA(0.00)[];
+	FORGED_SENDER(0.00)[amachhiw@linux.ibm.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,linux.ibm.com:mid,linux.ibm.com:from_mime];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	DKIM_TRACE(0.00)[google.com:+];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
-	FROM_NO_DN(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tarunix.c.googlers.com:mid,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[amachhiw@linux.ibm.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[ibm.com:+];
+	ALIAS_RESOLVED(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	RCVD_COUNT_SEVEN(0.00)[11]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 04A0B6B7BA7
+X-Rspamd-Queue-Id: 5AA0E6B7B96
 
-Sean Christopherson <seanjc@google.com> writes:
+Hi Vaibhav,
 
-> On Mon, Jun 22, 2026, Ackerley Tng wrote:
->> Tarun Sahu <tarunsahu@google.com> writes:
->> 
->> > This patch introduces the freeze on gmem_inode which prevents
->> 
->> Can't find the reference now, but commit messages should take the
->> imperative mood and avoid "this patch" [*]
->
-> From Documentation/process/submitting-patches.rst:
->
->   Describe your changes in imperative mood, e.g. "make xyzzy do frotz"
->   instead of "[This patch] makes xyzzy do frotz" or "[I] changed xyzzy
->   to do frotz", as if you are giving orders to the codebase to change
->   its behaviour.
->
-> Documentation/process/maintainer-tip.rst and Documentation/process/maintainer-kvm-x86.rst
-> elaborate more on the preferred style (I do most of the guest_memfd maintenance,
-> and so for all intents and purpose it's bound by KVM x86 "rules").
+Thanks for reviewing this patch. Please find my response below.
 
+On 2026/06/19 11:44 AM, Vaibhav Jain wrote:
+> Hi Amit,
+> 
+> Thanks for the patch and incorporating V3 review comments. Further
+> review comments inline below:
+> 
+> Amit Machhiwal <amachhiw@linux.ibm.com> writes:
+> 
+> > Add documentation for the KVM_PPC_GET_COMPAT_CAPS ioctl to the KVM API
+> > documentation.
+> >
+> > The ioctl exposes host processor compatibility modes supported for
+> > nested KVM guests on PowerPC systems. The documentation includes
+> > comprehensive error code descriptions, structure field definitions
+> > including the size field for forward compatibility, and KVM-specific
+> > capability bit constants.
+> >
+> > Signed-off-by: Amit Machhiwal <amachhiw@linux.ibm.com>
+> > ---
+> >  Documentation/virt/kvm/api.rst | 47 ++++++++++++++++++++++++++++++++++
+> >  1 file changed, 47 insertions(+)
+> >
+> > diff --git a/Documentation/virt/kvm/api.rst b/Documentation/virt/kvm/api.rst
+> > index 52bbbb553ce1..ba6feba74d7d 100644
+> > --- a/Documentation/virt/kvm/api.rst
+> > +++ b/Documentation/virt/kvm/api.rst
+> > @@ -6553,6 +6553,53 @@ KVM_S390_KEYOP_SSKE
+> >    Sets the storage key for the guest address ``guest_addr`` to the key
+> >    specified in ``key``, returning the previous value in ``key``.
+> >  
+> > +4.145 KVM_PPC_GET_COMPAT_CAPS
+> > +-----------------------------
+> > +:Capability: KVM_CAP_PPC_COMPAT_CAPS
+> > +:Architectures: powerpc
+> > +:Type: vm ioctl
+> > +:Parameters: struct kvm_ppc_compat_caps (out)
+> > +:Returns: 0 on success, negative value on failure
+> > +
+> > +Errors include:
+> > +
+> > +  ======== ============================================================
+> > +  EFAULT   if ``struct kvm_ppc_compat_caps`` cannot be read from or
+> > +           written to userspace
+> > +  EINVAL   if the ``size`` field is smaller than the current structure
+> > +           size, or if the backend implementation fails to retrieve or
+> > +           map CPU compatibility capabilities
+> > +  ENOTTY   if the backend does not implement the ``get_compat_caps``
+> > +           operation (e.g., on non-pseries platforms or when the
+> > +           required KVM operations are not available)
+> > +  ======== ============================================================
+> > +
+> > +IBM POWER system server-based processors provide a compatibility mode feature
+> > +where an Nth generation processor can operate in modes consistent with earlier
+> > +generations such as (N-1) and (N-2).
+> > +
+> > +This ioctl provides userspace with information about the CPU compatibility modes
+> > +supported by the current host processor for booting the nested KVM guests on
+> > +PowerNV (KVM nested APIv1) and PowerVM (KVM nested APIv2) platforms.
+> > +
+> 
+> Please add a detail on how returned 'size' field can be less than what
+> the userspace has sent and how it should be handled.
 
-Thanks!. Will take care of that.
+Good point! However, with the suggested change from patch-1 (using
+strict equality check `user_size != sizeof(host_caps)`, the returned
+size will always equal what userspace sent, because we reject any size
+mismatch with -EINVAL.
+
+I'll update the documentation to clarify the strict size matching
+behavior:
+
+- Userspace must set size to sizeof(struct kvm_ppc_compat_caps) before
+  the ioctl
+- The kernel validates this with strict equality (!= check)
+- Returns -EINVAL if size doesn't match
+- On success, the returned size will always equal what was sent
+
+This should eliminates the forward-compatibility scenario where returned
+size could differ from sent size.
+
+Thank,
+Amit
+
+> 
+> > +::
+> > +
+> > +  struct kvm_ppc_compat_caps {
+> > +	__u64	flags;			/* Reserved for future use */
+> > +	__u64	size;			/* Size of this structure */
+> > +	__u64	compat_capabilities;	/* Capabilities supported by the host */
+> > +  };
+> > +
+> > +The ``compat_capabilities`` bit field describes the processor compatibility
+> > +modes supported by the host. For example, the following bits indicate support
+> > +for specific processor modes.
+> > +
+> > +::
+> > +
+> > +  KVM_PPC_COMPAT_CAP_POWER9  (bit 1): KVM guests can run in Power9 processor mode
+> > +  KVM_PPC_COMPAT_CAP_POWER10 (bit 2): KVM guests can run in Power10 processor mode
+> > +  KVM_PPC_COMPAT_CAP_POWER11 (bit 3): KVM guests can run in Power11 processor mode
+> > +
+> >  .. _kvm_run:
+> >  
+> >  5. The kvm_run structure
+> > -- 
+> > 2.50.1 (Apple Git-155)
+> >
+> 
+> -- 
+> Cheers
+> ~ Vaibhav
 
