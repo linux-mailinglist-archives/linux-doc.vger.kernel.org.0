@@ -1,153 +1,265 @@
-Return-Path: <linux-doc+bounces-93299-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93300-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id zR1eJwDXOmopIQgAu9opvQ
-	(envelope-from <linux-doc+bounces-93299-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 20:57:04 +0200
+	id jxj5M57XOmprIQgAu9opvQ
+	(envelope-from <linux-doc+bounces-93300-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 20:59:42 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 067DC6B98CB
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 20:57:04 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6EF2A6B9907
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 20:59:42 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linux-foundation.org header.s=google header.b=GjpMQAhk;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93299-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93299-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=HXE6iT4x;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93300-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-93300-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=none;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 4DA40302D951
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 18:56:31 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 83C43305882D
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 18:58:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 81C0936A03F;
-	Tue, 23 Jun 2026 18:56:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D1425372680;
+	Tue, 23 Jun 2026 18:58:28 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
+Received: from mail-dl1-f46.google.com (mail-dl1-f46.google.com [74.125.82.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E007D34D916
-	for <linux-doc@vger.kernel.org>; Tue, 23 Jun 2026 18:56:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8EF80348C42
+	for <linux-doc@vger.kernel.org>; Tue, 23 Jun 2026 18:58:27 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782240990; cv=none; b=L/rKRz5mR1y/eUp+y75Ztvwxvfo0tGw8P5z9cAeUcQpODRWehlicI7BLVrM/qAx0Rr++x9jYP8t0WKNfV+Iga4Zxk4VrU7Okp8bwHKBx1djUFoC2ca7/52/kwvqQa9TQkndypXmHjXok6rLGcvDsty5KKW+IKYom6onU4egoZDk=
+	t=1782241108; cv=none; b=n5uhHLcz7P5zz+cLl/NTbSOEWLofmMkWf94mpbv8JWIFTZN6gL2h4VLeQ4KXYwCkhEygrwZH1a22+HdndcEqA2ey2lIxGG9RY0FNI12DB2ieaJo5FwX6VRQUC/9JPM1zSnD6R2fP5mLvzwvNGahIu3IXXou1liDjOytDW8X4Xlo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782240990; c=relaxed/simple;
-	bh=24Dn8UqRZ1p8BQICezHYOo9NJl5h5GUSnVLscYJARrU=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=PqkN1iMxkck/PLPAr16MgnmPFH6NI5iu0Lr10jWJHwA026CFvZ2JYBdRiSuolbiw5sVLb0r0wfnDhqRKsN3qIHdJrVhnSUzCz8liwJMV7Hn6tgdzOXCuU0dbhgoFJeRIigDtIE3Mc6mV4Ir8zhHv1CszBdqbNN3iZPPNrCkXk4k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-foundation.org; spf=pass smtp.mailfrom=linuxfoundation.org; dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b=GjpMQAhk; arc=none smtp.client-ip=209.85.218.47
-Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-c029505b389so230352066b.1
-        for <linux-doc@vger.kernel.org>; Tue, 23 Jun 2026 11:56:28 -0700 (PDT)
+	s=arc-20240116; t=1782241108; c=relaxed/simple;
+	bh=LzJiggBHLjBj6N/HSTkbqtRCMo0V90Y4rJTAT0j39is=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=cSRDjReWhEABX4tFW1p4mWe6QfOfnw1DTOSlRNmgCa0plG0fnckDUOOz6/9A+ISflltLPUu9G+1kXEqWTx7T9wgc2fLQ4G5C1VKmmTtiG1N1ZzT7JQ9bti7nTQJ7Ggh6xMpvFiTj7BFsPX2F7Qdqmlr/YOhKhg3QHG1igdJPetY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=HXE6iT4x; arc=none smtp.client-ip=74.125.82.46
+Received: by mail-dl1-f46.google.com with SMTP id a92af1059eb24-1363fe80fe8so446865c88.0
+        for <linux-doc@vger.kernel.org>; Tue, 23 Jun 2026 11:58:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linux-foundation.org; s=google; t=1782240987; x=1782845787; darn=vger.kernel.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=sTYMiI8T7qy3LqZCJa3jMkJNbrBL8JjUNCpZXVETjNU=;
-        b=GjpMQAhkhcE8X4RT++ptLx82xBK1oNGSa/InTX9Vzyn4cK/rWE3Dy226VmQ1csGENE
-         4IP8uBlPo7j8O7MVdp03bntvV/2cT/lQtVmj80MQFtZ4M2dIt/KyfcaweKLuCJ+3DisO
-         412Jt2KYWBLogZEBYNLk8k6DwvQy3QG4my8QU=
+        d=gmail.com; s=20251104; t=1782241107; x=1782845907; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to;
+        bh=4lMK+ZpWDYrVOdz5BQ8dYsd2bSHJ/5zrZM2ImjIhIf4=;
+        b=HXE6iT4xnXuDuPkrgN8dkz8gsK6nlu4bpB556gOOq8hHq3p/lnnZKLZ+PXMgnpT75k
+         XyIPsBtcB61h8JNrbwLvEyIWB/keX8mAdjZRC+H+i8xFz9QGNpVgj4Q81WsON2pnCdoP
+         kt1RGMXLumuZP6EhDa/1YjAU2l1tIksO/aL6t1/8DlleJP92+1Pg8vXIRCn0jiY3DYfc
+         P8X3R6VhAai/V4VW2U6mPfug0DQFVV960g7tn24Quxh+YCddPfB5jeUlAdjZ2nRtNEO/
+         ARLrxW4YXLHkbWBIBggnRakuiHX3kugsPYrS1/heKNEv1Zm+bDEt6xfdBlJiieBAgd6l
+         EuYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782240987; x=1782845787;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=sTYMiI8T7qy3LqZCJa3jMkJNbrBL8JjUNCpZXVETjNU=;
-        b=rYTW27l6PSnke3Q69AbooH7Lph1EfVaDeaTpY6SQOPexUJxNuL7hevXqF90qdF+ddr
-         I72K4n27vwVTuz2WdU/UEKhJa7+M+k5wWFQWwZMaN38JSJqiNNpoOo8nXUmJrWtw0yD1
-         cSJ4qHz5tDmSq5JsGQ0uDvd93/F6wxtb3IFKSS1NDhZ6LIPp2jQnj7XYmsHa48MQQqbq
-         nN8m6nM0tJg9NzyMq2Zn5RZmfbGg5Ls9/geV8EM0x9LJTxMsKrUBvT7yYxXGMrGoUkJl
-         kJtoEFOC1kuo20dECISpgxXUzNf9MELxipOErHYPMHRvocSfOHxQY0xpRRDRl355rlcL
-         Odyg==
-X-Forwarded-Encrypted: i=1; AFNElJ90pSAYocyOgUstlvrGlQNEfk7EH0WUer1kj7QJQ7gHwW3Uw/RwuA0upNHyhE5IBm0n0wPlb84QUgM=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz+sUyj8OS0fMtXKZPySXfzO9exuHAzX81chi1VF5qbTvgdNII/
-	EWHFnn0YYuHaGO8Z39Ycitvs5dk7nLfkupWtAOREDus00TgsTwFhD/7mwQKdJOKuvp3ogbhM/K1
-	2oRpYr4A=
-X-Gm-Gg: AfdE7cmy+6RpVWpJm37t6f6nVeSTlTolYzEjIGWt96seJgj/khh7FB+QuSh+2ti0DPG
-	neBBelqfnQGFSBQJ2hj6JX++j1iDL5D/VYlrpMPtZI5uFZdUdu7TLC1ZdE8joicySPxoZIZo0yJ
-	J2KoIg2jgVuqTVRMqriJudKhCLLMZr5yiA2updn60no6L2AhUE1MKJDChBftdAYnifLRz558HVn
-	etFFENWvebW396PcaQsxNlhZIVVqhRhRUUAlhT516tGRkZ3WmbNesunpiK0umR2UAV5/LwHZXbl
-	0BXiWek1jH8MWrJGiRjQafc0frgxlayE5HC9deT5xoKY9LGm0UE443sBT8hwc+W1W4KR+Wv4pc1
-	2mpFhcLCp7CFp7t3geAcKWy/AaULwIQKksmrhxGwYQsXegOhGdWEdLCrZwQjmTRQFNeEE79E0dX
-	INi6Km8mBAv5nNK0fJlblmFsdhXd8t7VeJrguS71f1PN1BAJ/fuBXjtEaO2DvLwx2yC+jHsBRb
-X-Received: by 2002:a17:906:1383:b0:c11:5a1c:b1a7 with SMTP id a640c23a62f3a-c115a2c8561mr49394366b.7.1782240987409;
-        Tue, 23 Jun 2026 11:56:27 -0700 (PDT)
-Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com. [209.85.208.47])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c0c610e5280sm564516766b.53.2026.06.23.11.56.26
-        for <linux-doc@vger.kernel.org>
+        d=1e100.net; s=20251104; t=1782241107; x=1782845907;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=4lMK+ZpWDYrVOdz5BQ8dYsd2bSHJ/5zrZM2ImjIhIf4=;
+        b=aHcUwFCHg9lxM9BdZMiqGb3x4ttAoggN4kqQ2afKTsNfct3cXSFvsUtx2e/bYkjCOB
+         nF3HMTKA1uirWqVBK5vi94/MkEx8opx3M3XTH6POkCfhx57BnxqUvO2AV3GTuwKs395M
+         Tgt+ZNfbAKCOY0h5GkR3LwW0wHyJ1WG99danl21EcG+qjBpaMF+mnLuiWQhYUeiN4L6k
+         S5/4aLAV4fbu5s5/tromOGZxRyaFTP5UabLzEKsngOoIYJC3grGh+Z1BRTR/Iz1zTFWo
+         6oWNs+/AnsO2Qk3+4UwI0IPaEIjHku5MnfWc8MG5r0AmAb3g37LvElGhtYJoyc9bp2+g
+         r/wg==
+X-Forwarded-Encrypted: i=1; AFNElJ/QdY/B069xkzIq6sux7vBMTNSGIBopR0lWSBcu6N7s4Z1utgQGwb6cavDmO/A5ywbaIa+wNqzQr/4=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwtpP9h268iwpKW5Uu05SatJmigt4rlvLsDiQgGQqiaWCl1/262
+	FsuHplvT4LhsX+ICbrdfJNI0puvPDlFkdcQuRTskiZx4eBIVU2etKpCc
+X-Gm-Gg: AfdE7cl+1kVz5sTMtut3ScIhpGi7zBRhr9kz/bmq1/WgkZUdCI1Mab7CDIqbYZTxieK
+	T6pz2UUyDGBl8eZfD806CN+3PD6Znh+Kn3kUbNIK0v7MILiwzylNcxAjsc6W6Hg3o5KaW9Yg8S9
+	UOM4j4AiauqWVbT3aU/9nbP9hHN3aENNGVFGPQzmSjl9wdKRMO0LBh+5EeiNDoxiOvB1SgOANzo
+	qiKOsCT9PrNkI1Ui8MOhXV9A3VUd1KUFJ4xtbnEgHWBKgxjDOoQTsK6X5tuCGdXUbkHa30lGMWF
+	XjZaVCeH1/Y17XOtLCYoGh8haCkingwRAQSww+ismm9azKg4+oLeJu31eb2OQm11RpC8zj4WmX3
+	OljND4sTQ8SR8o1giD1Liww/s9EU2yHhkGkI3xgNYaBZWTHnpaFq4CYeY8rFpu/+Ew/wHXDS+Tp
+	oi1zEvjLOKRLF2tG7tgshjQix+vnsf3Gv0WE9ft4WO+Eb9lA0VY10y5XmHAjt+yw==
+X-Received: by 2002:a05:7022:629a:b0:138:2239:be with SMTP id a92af1059eb24-139d0bfe146mr3074c88.8.1782241106419;
+        Tue, 23 Jun 2026 11:58:26 -0700 (PDT)
+Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5? ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-139add81933sm14355280c88.14.2026.06.23.11.58.25
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 23 Jun 2026 11:56:27 -0700 (PDT)
-Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-697e96dd8d2so825371a12.1
-        for <linux-doc@vger.kernel.org>; Tue, 23 Jun 2026 11:56:26 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AFNElJ/zeV2AGhWm59sHOe9TNQZnTPIx3sQzy6mafCMN2lOGjPsQLMA+3ZB++eK55nTvw0/OZvxapM1KzRg=@vger.kernel.org
-X-Received: by 2002:a17:907:c207:b0:c11:8357:40f with SMTP id
- a640c23a62f3a-c11835704bfmr15229166b.2.1782240986490; Tue, 23 Jun 2026
- 11:56:26 -0700 (PDT)
+        Tue, 23 Jun 2026 11:58:25 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Message-ID: <b6d34af3-0c4a-4870-a240-f7873621d2ce@roeck-us.net>
+Date: Tue, 23 Jun 2026 11:58:24 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260430011544.31823-1-ebiggers@kernel.org> <7d08a6df54279e9915f5df6bd4e5e5dde52b4fe1.camel@hadess.net>
- <20260623164932.GA1793@sol>
-In-Reply-To: <20260623164932.GA1793@sol>
-From: Linus Torvalds <torvalds@linux-foundation.org>
-Date: Tue, 23 Jun 2026 11:56:10 -0700
-X-Gmail-Original-Message-ID: <CAHk-=wgNG=F3xO9PjL0RcKy3UWvq0Np9uZu+nFUQBAA8So9xdA@mail.gmail.com>
-X-Gm-Features: AVVi8CdpFGqem5dP7mBI1VIDKVc8WIWTZWMdjSeug8fejnSzLkFpq4QaapJhuLo
-Message-ID: <CAHk-=wgNG=F3xO9PjL0RcKy3UWvq0Np9uZu+nFUQBAA8So9xdA@mail.gmail.com>
-Subject: Re: [PATCH] crypto: af_alg - Document the deprecation of AF_ALG
-To: Eric Biggers <ebiggers@kernel.org>
-Cc: Bastien Nocera <hadess@hadess.net>, linux-crypto@vger.kernel.org, 
-	Herbert Xu <herbert@gondor.apana.org.au>, Marcel Holtmann <marcel@holtmann.org>, 
-	Luiz Augusto von Dentz <luiz.dentz@gmail.com>, linux-doc@vger.kernel.org, linux-api@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, netdev@vger.kernel.org, 
-	linux-bluetooth@vger.kernel.org, ell@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] dt-bindings: hwmon: chipcap2: Add label property
+To: Flaviu Nistor <flaviu.nistor@gmail.com>,
+ Javier Carrasco <javier.carrasco.cruz@gmail.com>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ Shuah Khan <skhan@linuxfoundation.org>, linux-hwmon@vger.kernel.org,
+ linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-doc@vger.kernel.org
+References: <DJFPYCV2FXW7.1BFG9DURPZRCC@gmail.com>
+ <20260623181625.5697-1-flaviu.nistor@gmail.com>
+Content-Language: en-US
+From: Guenter Roeck <linux@roeck-us.net>
+Autocrypt: addr=linux@roeck-us.net; keydata=
+ xsFNBE6H1WcBEACu6jIcw5kZ5dGeJ7E7B2uweQR/4FGxH10/H1O1+ApmcQ9i87XdZQiB9cpN
+ RYHA7RCEK2dh6dDccykQk3bC90xXMPg+O3R+C/SkwcnUak1UZaeK/SwQbq/t0tkMzYDRxfJ7
+ nyFiKxUehbNF3r9qlJgPqONwX5vJy4/GvDHdddSCxV41P/ejsZ8PykxyJs98UWhF54tGRWFl
+ 7i1xvaDB9lN5WTLRKSO7wICuLiSz5WZHXMkyF4d+/O5ll7yz/o/JxK5vO/sduYDIlFTvBZDh
+ gzaEtNf5tQjsjG4io8E0Yq0ViobLkS2RTNZT8ICq/Jmvl0SpbHRvYwa2DhNsK0YjHFQBB0FX
+ IdhdUEzNefcNcYvqigJpdICoP2e4yJSyflHFO4dr0OrdnGLe1Zi/8Xo/2+M1dSSEt196rXaC
+ kwu2KgIgmkRBb3cp2vIBBIIowU8W3qC1+w+RdMUrZxKGWJ3juwcgveJlzMpMZNyM1jobSXZ0
+ VHGMNJ3MwXlrEFPXaYJgibcg6brM6wGfX/LBvc/haWw4yO24lT5eitm4UBdIy9pKkKmHHh7s
+ jfZJkB5fWKVdoCv/omy6UyH6ykLOPFugl+hVL2Prf8xrXuZe1CMS7ID9Lc8FaL1ROIN/W8Vk
+ BIsJMaWOhks//7d92Uf3EArDlDShwR2+D+AMon8NULuLBHiEUQARAQABzTJHdWVudGVyIFJv
+ ZWNrIChMaW51eCBhY2NvdW50KSA8bGludXhAcm9lY2stdXMubmV0PsLBgQQTAQIAKwIbAwYL
+ CQgHAwIGFQgCCQoLBBYCAwECHgECF4ACGQEFAmgrMyQFCSbODQkACgkQyx8mb86fmYGcWRAA
+ oRwrk7V8fULqnGGpBIjp7pvR187Yzx+lhMGUHuM5H56TFEqeVwCMLWB2x1YRolYbY4MEFlQg
+ VUFcfeW0OknSr1s6wtrtQm0gdkolM8OcCL9ptTHOg1mmXa4YpW8QJiL0AVtbpE9BroeWGl9v
+ 2TGILPm9mVp+GmMQgkNeCS7Jonq5f5pDUGumAMguWzMFEg+Imt9wr2YA7aGen7KPSqJeQPpj
+ onPKhu7O/KJKkuC50ylxizHzmGx+IUSmOZxN950pZUFvVZH9CwhAAl+NYUtcF5ry/uSYG2U7
+ DCvpzqOryJRemKN63qt1bjF6cltsXwxjKOw6CvdjJYA3n6xCWLuJ6yk6CAy1Ukh545NhgBAs
+ rGGVkl6TUBi0ixL3EF3RWLa9IMDcHN32r7OBhw6vbul8HqyTFZWY2ksTvlTl+qG3zV6AJuzT
+ WdXmbcKN+TdhO5XlxVlbZoCm7ViBj1+PvIFQZCnLAhqSd/DJlhaq8fFXx1dCUPgQDcD+wo65
+ qulV/NijfU8bzFfEPgYP/3LP+BSAyFs33y/mdP8kbMxSCjnLEhimQMrSSo/To1Gxp5C97fw5
+ 3m1CaMILGKCmfI1B8iA8zd8ib7t1Rg0qCwcAnvsM36SkrID32GfFbv873bNskJCHAISK3Xkz
+ qo7IYZmjk/IJGbsiGzxUhvicwkgKE9r7a1rOwU0ETofVZwEQALlLbQeBDTDbwQYrj0gbx3bq
+ 7kpKABxN2MqeuqGr02DpS9883d/t7ontxasXoEz2GTioevvRmllJlPQERVxM8gQoNg22twF7
+ pB/zsrIjxkE9heE4wYfN1AyzT+AxgYN6f8hVQ7Nrc9XgZZe+8IkuW/Nf64KzNJXnSH4u6nJM
+ J2+Dt274YoFcXR1nG76Q259mKwzbCukKbd6piL+VsT/qBrLhZe9Ivbjq5WMdkQKnP7gYKCAi
+ pNVJC4enWfivZsYupMd9qn7Uv/oCZDYoBTdMSBUblaLMwlcjnPpOYK5rfHvC4opxl+P/Vzyz
+ 6WC2TLkPtKvYvXmdsI6rnEI4Uucg0Au/Ulg7aqqKhzGPIbVaL+U0Wk82nz6hz+WP2ggTrY1w
+ ZlPlRt8WM9w6WfLf2j+PuGklj37m+KvaOEfLsF1v464dSpy1tQVHhhp8LFTxh/6RWkRIR2uF
+ I4v3Xu/k5D0LhaZHpQ4C+xKsQxpTGuYh2tnRaRL14YMW1dlI3HfeB2gj7Yc8XdHh9vkpPyuT
+ nY/ZsFbnvBtiw7GchKKri2gDhRb2QNNDyBnQn5mRFw7CyuFclAksOdV/sdpQnYlYcRQWOUGY
+ HhQ5eqTRZjm9z+qQe/T0HQpmiPTqQcIaG/edgKVTUjITfA7AJMKLQHgp04Vylb+G6jocnQQX
+ JqvvP09whbqrABEBAAHCwWUEGAECAA8CGwwFAmgrMyQFCSbODQkACgkQyx8mb86fmYHlgg/9
+ H5JeDmB4jsreE9Bn621wZk7NMzxy9STxiVKSh8Mq4pb+IDu1RU2iLyetCY1TiJlcxnE362kj
+ njrfAdqyPteHM+LU59NtEbGwrfcXdQoh4XdMuPA5ADetPLma3YiRa3VsVkLwpnR7ilgwQw6u
+ dycEaOxQ7LUXCs0JaGVVP25Z2hMkHBwx6BlW6EZLNgzGI2rswSZ7SKcsBd1IRHVf0miwIFYy
+ j/UEfAFNW+tbtKPNn3xZTLs3quQN7GdYLh+J0XxITpBZaFOpwEKV+VS36pSLnNl0T5wm0E/y
+ scPJ0OVY7ly5Vm1nnoH4licaU5Y1nSkFR/j2douI5P7Cj687WuNMC6CcFd6j72kRfxklOqXw
+ zvy+2NEcXyziiLXp84130yxAKXfluax9sZhhrhKT6VrD45S6N3HxJpXQ/RY/EX35neH2/F7B
+ RgSloce2+zWfpELyS1qRkCUTt1tlGV2p+y2BPfXzrHn2vxvbhEn1QpQ6t+85FKN8YEhJEygJ
+ F0WaMvQMNrk9UAUziVcUkLU52NS9SXqpVg8vgrO0JKx97IXFPcNh0DWsSj/0Y8HO/RDkGXYn
+ FDMj7fZSPKyPQPmEHg+W/KzxSSfdgWIHF2QaQ0b2q1wOSec4Rti52ohmNSY+KNIW/zODhugJ
+ np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
+In-Reply-To: <20260623181625.5697-1-flaviu.nistor@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[linux-foundation.org:s=google];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-93299-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:ebiggers@kernel.org,m:hadess@hadess.net,m:linux-crypto@vger.kernel.org,m:herbert@gondor.apana.org.au,m:marcel@holtmann.org,m:luiz.dentz@gmail.com,m:linux-doc@vger.kernel.org,m:linux-api@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:netdev@vger.kernel.org,m:linux-bluetooth@vger.kernel.org,m:ell@lists.linux.dev,m:luizdentz@gmail.com,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-93300-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:flaviu.nistor@gmail.com,m:javier.carrasco.cruz@gmail.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-hwmon@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-doc@vger.kernel.org,m:flaviunistor@gmail.com,m:javiercarrascocruz@gmail.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[torvalds@linux-foundation.org,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	DMARC_NA(0.00)[linux-foundation.org];
+	FREEMAIL_TO(0.00)[gmail.com];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	DMARC_NA(0.00)[roeck-us.net];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[hadess.net,vger.kernel.org,gondor.apana.org.au,holtmann.org,gmail.com,lists.linux.dev];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[torvalds@linux-foundation.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linux-foundation.org:+];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[];
+	FORGED_SENDER(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[11];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp]
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 067DC6B98CB
+X-Rspamd-Queue-Id: 6EF2A6B9907
 
-On Tue, 23 Jun 2026 at 09:51, Eric Biggers <ebiggers@kernel.org> wrote:
->
-> We're aware of that and are taking it into account in the allowlist:
+On 6/23/26 11:16, Flaviu Nistor wrote:
+> On Mon Jun 22, 2026 at 7:29 PM CEST, Javier Carrasco wrote:
+>> On Mon Jun 22, 2026 at 2:21 PM CEST, Flaviu Nistor wrote:
+>>> Add support for an optional label property similar to other hwmon devices
+>>> This allows, in case of boards with multiple CHIPCAP2 sensors, to assign
+>>> distinct names to each instance.
+>>>
+>>> Signed-off-by: Flaviu Nistor <flaviu.nistor@gmail.com>
+>>> ---
+>>>   .../devicetree/bindings/hwmon/amphenol,chipcap2.yaml         | 5 +++++
+>>>   1 file changed, 5 insertions(+)
+>>>
+>>> diff --git a/Documentation/devicetree/bindings/hwmon/amphenol,chipcap2.ya=
+>> ml b/Documentation/devicetree/bindings/hwmon/amphenol,chipcap2.yaml
+>>> index 17351fdbefce..f00b5a4b14dd 100644
+>>> --- a/Documentation/devicetree/bindings/hwmon/amphenol,chipcap2.yaml
+>>> +++ b/Documentation/devicetree/bindings/hwmon/amphenol,chipcap2.yaml
+>>> @@ -33,6 +33,10 @@ properties:
+>>>     reg:
+>>>       maxItems: 1
+>>>
+>>> +  label:
+>>> +    description:
+>>> +      A descriptive name for this channel, like "ambient" or "psu".
+>>> +
+>>>     interrupts:
+>>>       items:
+>>>         - description: measurement ready indicator
+>>> @@ -72,6 +76,7 @@ examples:
+>>>                            <5 IRQ_TYPE_EDGE_RISING>,
+>>>                            <6 IRQ_TYPE_EDGE_RISING>;
+>>>               interrupt-names =3D "ready", "low", "high";
+>>> +            label =3D "somelabel";
+>>>               vdd-supply =3D <&reg_vdd>;
+>>>           };
+>>       };
+>>
+>> Hello Falviu, thank you for your patch.
+>>
+> 
+> Hello Javier, thanks for your reply.
+> 
+>> Should we not add a reference to hwmon-common.yaml (with
+>> unevelautedProperties instead of additionalProperties), as label is
+>> defined there? I believe that Krzysztof Kozlowski did something similar
+>> for the shunt-resistor-micro-ohms property. Could we follow suit here?
+>>
+> 
+> This is a good question and I am happy you asked. I also thought a lot
+> about this and the reason I decided to go for this approach is that by using
+> $ref: hwmon-common.yaml#, I would have to change additionalProperties: false
+> to unevaluatedProperties: false, which will evaluate in case it is used, also
+> shunt-resistor-micro-ohms property which does not apply to this sensor. At
+> least this is my understanding, but of course I can be wrong (I see lm75 binding
+> also uses $ref: hwmon-common.yaml# but shunt-resistor-micro-ohms does not apply).
+> 
 
-Note that if we can  just unconditionally make it depend on
-CAP_NET_ADMIN, that would be good - independently of any allowlist.
+Where does the idea come from that shunt-resistor-micro-ohms would be mandatory ?
+That would make hwmon-common.yaml unusable for most chips.
 
-Because if iwd and abluetoothd are the main two users, and both of
-those already require CAP_NET_ADMIN anyway...
+Guenter
 
-                Linus
+>> I am also not a big fan of a name like "somelabel", and a more
+>> meaningful name from a "real" example would look better. I know that
+>> some examples have already used "somelabel" as an example, but others
+>> have used more meaningful names too.
+>>
+> 
+> I will have to send a v2 since for the label property description I used
+> "channel" instead of "sensor" (detected by Sashiko AI review), so I can
+> use in the example section a more meaningful name like "Room" if no other
+> suggestion.
+> 
+>> Best regards,
+>> Javier Carrasco
+> 
+> Best regards,
+> Flaviu Nistor
+> 
+
 
