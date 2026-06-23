@@ -1,182 +1,334 @@
-Return-Path: <linux-doc+bounces-93185-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93191-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id +x3KKRAUOmpw1AcAu9opvQ
-	(envelope-from <linux-doc+bounces-93185-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 07:05:20 +0200
+	id qXJfH58gOmrC1wcAu9opvQ
+	(envelope-from <linux-doc+bounces-93191-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 07:58:55 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1249A6B419D
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 07:05:20 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id B156D6B4514
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 07:58:52 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=arm.com header.s=foss header.b=HuC8saHz;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93185-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93185-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=arm.com;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=intel.com header.s=Intel header.b=faVhgwXU;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93191-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93191-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=intel.com;
+	arc=reject ("cv is fail on i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 70963304F423
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 05:02:36 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id D1771301DCEE
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2026 05:57:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 962B735B646;
-	Tue, 23 Jun 2026 05:02:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 981A13AA9C4;
+	Tue, 23 Jun 2026 05:57:10 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AA47D1C5F13;
-	Tue, 23 Jun 2026 05:02:31 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782190953; cv=none; b=Uk7+mkKAOlASInjY15b1YM0XO254q9KSvKpJrpZD8IRtbpFpeId0HPaLX+/E1UZ+ixmKdIO/zkoRlqh/Xy8iQaiyRt/jG5/IouK21BkoEOjgR+prCrHpj2Imu4++KidbS/pLXenQNHemAdvTtgdfjrQf/92iog4HO/UNdVsc2/g=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782190953; c=relaxed/simple;
-	bh=/tf3ua+vKT99+55m2tCLALI+RpDjIfmCrLzHSIvEtUg=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=FJcKMD8TJETh7vvI31VlTyyusvE6YTB8XixG8Asg7Lul9gMb0VbhGIj5L32/So8DeVK9AHUU/zkk26rWq8T8uHA6DMIKlPDxJEi71WBt87Kl5HtZ8/Kd/BGf2eKXjrGdDflAtfCCOmL/Aw3CHvoDOgdw0pTP3xq8NB6Z4Y7yUvk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=HuC8saHz; arc=none smtp.client-ip=217.140.110.172
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9897D1A25;
-	Mon, 22 Jun 2026 22:02:20 -0700 (PDT)
-Received: from [10.164.19.14] (unknown [10.164.19.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A69713F632;
-	Mon, 22 Jun 2026 22:02:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1782190945; bh=/tf3ua+vKT99+55m2tCLALI+RpDjIfmCrLzHSIvEtUg=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=HuC8saHzhLFSENYFEE1x41S1sRkkb3fz7XT9b2XPuRDl4SGP1EPkUKZ1/29no1S1n
-	 6ygfCJM6BN+ZVQ+fbSop01/2Y7ev3RT41BJ9Llz54s8acdxivyvEQy2ypkWeyFwnsN
-	 DVF+azu/KTetekBkxbb1pagp+lFxQWb20y2KmTPs=
-Message-ID: <78d97371-b477-4230-8690-ac870a7bab3b@arm.com>
-Date: Tue, 23 Jun 2026 10:32:16 +0530
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.10])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 847B5331230;
+	Tue, 23 Jun 2026 05:57:07 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1782194230; cv=fail; b=HAz5iboisF9ELW77iMBhQPb6RTiwzfrJYSbFvZ56dZVDVO/CTjOqCYC4VWAdaF4Ye/+JhoXLYCug26FMkEaL+yZeK2WzV87BPWCalhir7GR2nU08NvgvjhjpuEX5yHgt5TM+5q4WIf4437vat5By6j8+AjMIrZp0wHDqU/kjJm4=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1782194230; c=relaxed/simple;
+	bh=rc/0lzZxz92Wz+qQhs+B706//1Blimav0TXnSZQtH9Q=;
+	h=Date:From:To:CC:Subject:Message-ID:References:Content-Type:
+	 Content-Disposition:In-Reply-To:MIME-Version; b=OI5mMXWybNgNz9um6GckT+7WFM+X+K9VvH9eU1BC+i8b0a1wcRsLh+HKjd3Yht3yX91ytTJCfo0DWe9rl5PLQWDG1NjKTL7k5nxdAuPF39G+V3Ck6hcV6DrwEETQXQR2PwPUj8olPbHIVxILkdT86qCAKB16m3vX5aKQjx2UkYk=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=faVhgwXU; arc=fail smtp.client-ip=192.198.163.10
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1782194227; x=1813730227;
+  h=date:from:to:cc:subject:message-id:reply-to:references:
+   in-reply-to:mime-version;
+  bh=rc/0lzZxz92Wz+qQhs+B706//1Blimav0TXnSZQtH9Q=;
+  b=faVhgwXUdaGwsXvOpgs8VEzmL8WtuNr74gH918z3Y1MpEaZXlxrJ5Xzy
+   9zX2XX65ZSnt5VQLhfkjo4tzYDncUaGw/whOGZcGOzJ4tWGfgOAVY5Fk5
+   YAiQIyrN//lPufvBubnG7NHr7sumYnjtgi/y/ZknF+cr0bzBr35zW3FVU
+   1z3Rt60OFt0kZCGOtf2nqqG1KnM2af5kbJX8RPRaUKFMVyFzmgda6gu6B
+   c6qn+IvNtUyjS/nOhbdVHF4wdsQ1LrzhIsRMG+/hIKaMlgGajnrr5GYiM
+   K/YHmT4+Q7H0AVbxNJdTanWWD440HmKe8GgKe2GCoWiuDxAwYCmnz6mCO
+   w==;
+X-CSE-ConnectionGUID: 7AHDDLF6R6ulnycVDA9TAg==
+X-CSE-MsgGUID: OyFACYO6RXiE5JHSpe0hEQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11825"; a="94317285"
+X-IronPort-AV: E=Sophos;i="6.24,220,1774335600"; 
+   d="scan'208";a="94317285"
+Received: from fmviesa007.fm.intel.com ([10.60.135.147])
+  by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Jun 2026 22:57:01 -0700
+X-CSE-ConnectionGUID: qcEmphcCT1+B1Ht+FTM4qw==
+X-CSE-MsgGUID: SYHRGV+fRlCgInwoNs9Elw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.24,220,1774335600"; 
+   d="scan'208";a="246510446"
+Received: from fmsmsx902.amr.corp.intel.com ([10.18.126.91])
+  by fmviesa007.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Jun 2026 22:56:59 -0700
+Received: from FMSMSX902.amr.corp.intel.com (10.18.126.91) by
+ fmsmsx902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.37; Mon, 22 Jun 2026 22:56:58 -0700
+Received: from fmsedg902.ED.cps.intel.com (10.1.192.144) by
+ FMSMSX902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.37 via Frontend Transport; Mon, 22 Jun 2026 22:56:58 -0700
+Received: from SN4PR0501CU005.outbound.protection.outlook.com (40.93.194.54)
+ by edgegateway.intel.com (192.55.55.82) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.37; Mon, 22 Jun 2026 22:56:58 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ZK6088QU5+XtxwQaYC2MMqwGiTWUsZHZvEXssFAykj6ihTTDad0nOhCRAfa3+gcymaPfEa5jRSkWEjeX9jHfoenZOwDle+1dHivfa1zvvGIRLiZrLrDOhUwbdR1dp3MQwUzvzE2ADTZWiehkrYAOukESnajxB8diBraNOCSHUm831ai+kgJjtDIjHNJrOmpZV5d3NNYRycOmPNAMdjb7bweGBsIkwMtCo+R5weE9P8ThYehwgBl40BmXMKQElEQjlp5/Q6+dJVSd4rpq6+tBIyc9Mw8O3RSZ4ftoyyJlfvyXAi7+JZi/UqzGvaUJmcUK7MA5OpSXDCLbAwdD7B4LUw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=5mz2AXRrG4arAwY+RYseUNKGdgGRmUW9N6spHFjbiZ8=;
+ b=WP4zM6VZJMSPcfdJbOkKOD2vuRJ+hHcXiqKsteUjtFKsTwZbu8xsBmz9hVAchOFlc34lyeHMqLK7oIYOgPyucdywrL0P+Lcxa5KdJeFL19qtFKedSHqBGeYPJE8hj5zY/gNuI9HfZfs2qKA2OGH9Ev5iXO5LEykYxrIas/N325VKoY6dJ6nwKOqE4VEPHMZpwXBuXqZo4qPTXIfSzOD/2TARcHR1DcTwlYglURkWFhjFfgVKvOElvHgb++I7bnIO3JsQox/lcjKeTDFrV74JUWefd4L1L3+Gtd3d4FKDMqZLU/xuTJZBlPYHLwUikvjTkKj6RMfq+fyv1xVzeCVoyQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Received: from PH0PR11MB7472.namprd11.prod.outlook.com (2603:10b6:510:28c::12)
+ by MW4PR11MB5823.namprd11.prod.outlook.com (2603:10b6:303:186::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.19; Tue, 23 Jun
+ 2026 05:56:48 +0000
+Received: from PH0PR11MB7472.namprd11.prod.outlook.com
+ ([fe80::1bad:44dd:4e60:6475]) by PH0PR11MB7472.namprd11.prod.outlook.com
+ ([fe80::1bad:44dd:4e60:6475%5]) with mapi id 15.21.0139.018; Tue, 23 Jun 2026
+ 05:56:47 +0000
+Date: Tue, 23 Jun 2026 13:16:14 +0800
+From: Yan Zhao <yan.y.zhao@intel.com>
+To: Sean Christopherson <seanjc@google.com>
+CC: <ackerleytng@google.com>, <aik@amd.com>, <andrew.jones@linux.dev>,
+	<binbin.wu@linux.intel.com>, <brauner@kernel.org>,
+	<chao.p.peng@linux.intel.com>, <david@kernel.org>, <jmattson@google.com>,
+	<jthoughton@google.com>, <michael.roth@amd.com>, <oupton@kernel.org>,
+	<pankaj.gupta@amd.com>, <qperret@google.com>, <rick.p.edgecombe@intel.com>,
+	<rientjes@google.com>, <shivankg@amd.com>, <steven.price@arm.com>,
+	<tabba@google.com>, <willy@infradead.org>, <wyihan@google.com>,
+	<forkloop@google.com>, <pratyush@kernel.org>, <suzuki.poulose@arm.com>,
+	<aneesh.kumar@kernel.org>, <liam@infradead.org>, Paolo Bonzini
+	<pbonzini@redhat.com>, Thomas Gleixner <tglx@kernel.org>, Ingo Molnar
+	<mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, Dave Hansen
+	<dave.hansen@linux.intel.com>, <x86@kernel.org>, "H. Peter Anvin"
+	<hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu
+	<mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+	Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>,
+	Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>,
+	Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>,
+	Nhat Pham <nphamcs@gmail.com>, Barry Song <baohua@kernel.org>, Axel Rasmussen
+	<axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>, Wei Xu
+	<weixugc@google.com>, Youngjun Park <youngjun.park@lge.com>, Qi Zheng
+	<qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, Kiryl Shutsemau
+	<kas@kernel.org>, Baoquan He <baoquan.he@linux.dev>, Jason Gunthorpe
+	<jgg@ziepe.ca>, Vlastimil Babka <vbabka@kernel.org>, <kvm@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <linux-trace-kernel@vger.kernel.org>,
+	<linux-doc@vger.kernel.org>, <linux-kselftest@vger.kernel.org>,
+	<linux-mm@kvack.org>, <linux-coco@lists.linux.dev>
+Subject: Re: [PATCH v8 23/46] KVM: TDX: Make source page optional for
+ KVM_TDX_INIT_MEM_REGION
+Message-ID: <ajoWngKaZ+wfIyR+@yzhao56-desk.sh.intel.com>
+Reply-To: Yan Zhao <yan.y.zhao@intel.com>
+References: <20260618-gmem-inplace-conversion-v8-0-9d2959357853@google.com>
+ <20260618-gmem-inplace-conversion-v8-23-9d2959357853@google.com>
+ <ajjc0hw8PjGw69e9@yzhao56-desk.sh.intel.com>
+ <ajnf5Z9nWZxoLS4x@google.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <ajnf5Z9nWZxoLS4x@google.com>
+X-ClientProxiedBy: TP0P295CA0043.TWNP295.PROD.OUTLOOK.COM
+ (2603:1096:910:4::18) To PH0PR11MB7472.namprd11.prod.outlook.com
+ (2603:10b6:510:28c::12)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 0/2] kasan: hw_tags: Add option to tag only at
- allocation time
-To: Catalin Marinas <catalin.marinas@arm.com>, Harry Yoo <harry@kernel.org>
-Cc: ryabinin.a.a@gmail.com, akpm@linux-foundation.org, corbet@lwn.net,
- glider@google.com, andreyknvl@gmail.com, dvyukov@google.com,
- vincenzo.frascino@arm.com, kasan-dev@googlegroups.com, linux-mm@kvack.org,
- linux-kernel@vger.kernel.org, skhan@linuxfoundation.org,
- workflows@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, ryan.roberts@arm.com,
- anshuman.khandual@arm.com, kaleshsingh@google.com, 21cnbao@gmail.com,
- david@kernel.org, will@kernel.org
-References: <20260612044425.763060-1-dev.jain@arm.com>
- <b1502a60-09a1-4699-886b-93d041de7023@kernel.org> <ajVByfkLbetzA8bB@arm.com>
- <2208123f-8a51-483b-aa93-c35d8d053d25@kernel.org> <ajltLd6FQg1aMge_@arm.com>
-Content-Language: en-US
-From: Dev Jain <dev.jain@arm.com>
-In-Reply-To: <ajltLd6FQg1aMge_@arm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH0PR11MB7472:EE_|MW4PR11MB5823:EE_
+X-MS-Office365-Filtering-Correlation-Id: d4503d11-a553-40cf-9ab7-08ded0ec365d
+X-LD-Processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|7416014|376014|23010399003|18002099003|6133799003|22082099003|56012099006|4143699003|11063799006|5023799004;
+X-Microsoft-Antispam-Message-Info: FCg88oh1zuHLnqk5EsZ8QtecKBsX4QRA83DPr/X5fSOmh9iidISmPLRFjXNqB+e1WCCUepDKQKCLWiPbf+q6mCSSuAXJNHk293rYAxyw0XobOdEUpxpudPbSihh+xXz3rp4NEBnDTdRFLau8XolsIKrab+rZGb1DHQV/ErIO6bUk039YS2r5EKrDtYz7zRKekrdS+zQnPfq58R6AtNBhXP6xl03mdRV3UQpujfJhbReGRS10DmMygTAyl2cF7LSu7JOshlgU7PsBj4JXC97Ifh5eomYRh9yyAGXlzsnR8M00t09hT+18fTPGow/K7sAlgh6W41iuBbPZoN4X7Nh6i5GgxWWzeYGCsFyy/FmZrHUV7Vm+ie5j/ts+3pYnGNtb1taUhk9pQuBsQqhKThuk5fGLghfK52eL3P3/0IoaVnuWwCemYUjbn6LDEWkdY7JgqwV/z+7mQHdHPGft42oZMHyiJAqVsWgCSsk37pXYADUs9CQ5aNTWf7863nSfsHAZjUrqZR/9kx/pl83GorL/Kb7WHUPqy06CALRkkFZvnABCZgL4VX54UP/u3QKN4QJS6p42vJ5dYu65pqeJAAetQmm9GCu9Y2TMsq0ytV9O2ur5Boe11kmq91NNdQGh8sfrNYSWPVB9NRnvX8JsGpiaFQiMpFLLC6hyuqIAeuFJU2w=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR11MB7472.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(7416014)(376014)(23010399003)(18002099003)(6133799003)(22082099003)(56012099006)(4143699003)(11063799006)(5023799004);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?dCGTagAjISviA3WzoCNvi2ouxn54hvc7WKdvgUUbJE3hrKXJYbhVNYGK/6MB?=
+ =?us-ascii?Q?VjtLLqYGNPU3zpLV040LBSTmeCFgkRO11u5C3f0n6c6d5kUokLVkGDXJGQR/?=
+ =?us-ascii?Q?lMFZb//aOdyBnDHk5nPIwhEYgNQeOvdDHky2gp+BooaYuPO5GXDqI+j5/d7w?=
+ =?us-ascii?Q?kQCyS0j52VKUYIEQSW6/t9aIZ8LuZQYwmll7BwgisHq11rYvQGNgWzBNB+De?=
+ =?us-ascii?Q?L0rJnckxhEhd9eMdGgKxKoctleAlYm2ux+5LGLe0Vkrgqq2pipAwjaKlL810?=
+ =?us-ascii?Q?j5xsyIb3GuzHqSZ0MDVI1pBuT3u6H+QoRxjqJdWj3CgVuByRiTUq+ooysG1V?=
+ =?us-ascii?Q?NirhySGAOaLY1jvLEWRK9pIGHtEMafyPR4MYHeTnRwo3RnxBosXGrfGwse6V?=
+ =?us-ascii?Q?ZIKutYAro4EwqxhW60Jfbwt0DpvSa9AIF+SNXmqe+ao0V4gJhg4DKCrDZI+X?=
+ =?us-ascii?Q?J3urEOzLlUKf0mXZQC5GP8Y9xMr67BpXuKvtilfsEiQk2OEajCR2N/k6rODt?=
+ =?us-ascii?Q?44uhkMO8Z33tw9aI6pjUg+fF4Qe6KIwj1fErDB05YSrz+8+uKGamXR5sq33m?=
+ =?us-ascii?Q?nEr5Sr1iwIZT+m2FoyMXo4+ey0U7mXl/17bVgS12Qg2N22Sz99HzXA9BEHGN?=
+ =?us-ascii?Q?VxmGG5/8RphA8omj67/qpIa1/5ur3q9IDTk4szCh1lfQMdWG5ZLG/XiLeENN?=
+ =?us-ascii?Q?v5jsa0bkU6/+TMOYd4v3cxd2ur0xUCJ9exW3mLuYxiRvjxcJ3f6HhB9iedzS?=
+ =?us-ascii?Q?WTR2m28iCNr725PHifyAeZLS5PONFaySl6u2RcFmkkYP0xnG76gc3wxp1AVA?=
+ =?us-ascii?Q?MD17SYGkV0WvU87uWalNlswaxCbq5QqiPfCgZeqOovC6dUC5a5q9WSRlk85b?=
+ =?us-ascii?Q?QGIh+m01xcx+ur9645lNrS/PZcGATfPaLw89+TYZ9w02WdlQwM7aREiC8IQB?=
+ =?us-ascii?Q?NM9B0B/pmTOYY/iSJy+bSCKkq6pIUjvtO7V11HWup4UNcHLvO33AOLztQEa5?=
+ =?us-ascii?Q?6SamfOMemc82D+VOss4Xrm+tSFgAUCZBYrDuWfJIaeODKErs6/035XVXSuKt?=
+ =?us-ascii?Q?yKkRtoDjXFM4BFezjGgwMS5trpg14godYqOhYbfLVhmhBevvrTr4Dz5QS2d5?=
+ =?us-ascii?Q?tuCV3TzclzzxsC6+owySdDR434Af1Am28ldt0QpEjXFgkG1ztLfhtH62mGN8?=
+ =?us-ascii?Q?WtZxFgZYaF5gGO+l39m1ACKQwgnO0Xy9yfxdedcyTEPXt0VFgUGbM4WsburS?=
+ =?us-ascii?Q?5CQFTiOVHZgXUYAXkF/2NW4g+7tRZ3D4pSJ4HsKRrdA/p5Gd5oFpJHMikHPx?=
+ =?us-ascii?Q?UHysEWxBsQ4Ix3OopHj7CYfxP+q6eHRTk6cHF+DKTouRzfmFF4CnIMB4uXWi?=
+ =?us-ascii?Q?3ifVShrZnicQ7OcAwIsMqhhcNfUXcLkOqGOedozMZ08noCNUFpzzb6LHkz3T?=
+ =?us-ascii?Q?VXbUbAbCIbVuwSU2alTdmHWJcwBD4rkKbN+I5Mfb4hMrvq1SptdLfdTfaiTj?=
+ =?us-ascii?Q?IgpgNP/2zDnukFxc9nJkqECoCB/0nkVS+p0GR4HfGgSVKH1VYzxjjRzLmr1r?=
+ =?us-ascii?Q?YM1r14i8Bc1vtBdb13nAjAqra+Ua1TzE3VCQ9QIBGngAp753Gcy7ocTUt6R3?=
+ =?us-ascii?Q?I02qBo505aKjQ9sPfkcU7k1GXS5RXWVcxolre83cz4hNjQjUXpc3GA0nTNwn?=
+ =?us-ascii?Q?NxMopkTtS1/YCw/p0yFDi+jovdc7qmSJlNzKqRyMkrwNA4QO54gMk3y10g8/?=
+ =?us-ascii?Q?kEtrd9TjlQ=3D=3D?=
+X-Exchange-RoutingPolicyChecked: aXUXQLYo5cNt2FS/P97Yi3JTkYFtE1rGP95uLzFkyOOJzHqX2IY4BMRL2Z8HGWrc1iGQ/VvYv7Lpq7UtvWun5DMmZtwU63nGxoo5qHeSgo8JIP6KlbabdZmddcdVVRkojHytYpiUOXfBebBm3fZ0iOoyAd5SnTcvqPbUe13IrIbSfPdYUx2v4Mi5LTducZvIuZM2vIJhJX94I5pHrHwJyU8NexDmhdeskhJMBn7SLziOlg1oOovzE+yfwaGwzmIR6eoSph7ndB0HKK1cgG2el1AFHPcp81Q0Mt9nIRsVvtGsAGS9neRQpKY0/SMGGs8CFXrTMrv1Aql9xdTyt+UaMA==
+X-MS-Exchange-CrossTenant-Network-Message-Id: d4503d11-a553-40cf-9ab7-08ded0ec365d
+X-MS-Exchange-CrossTenant-AuthSource: PH0PR11MB7472.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jun 2026 05:56:47.7414
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8858BmZHYwhGY3KmvqvZX8Vc4ObJ47P84jVYXvPUxo2FtNZ5pr7PSXPNmeLb1UBF2ofxQ60hL0Uc9RJkYfM6hw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR11MB5823
+X-OriginatorOrg: intel.com
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
+X-Spamd-Result: default: False [-3.16 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,kernel.org:s:+];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	TAGGED_FROM(0.00)[bounces-93185-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:catalin.marinas@arm.com,m:harry@kernel.org,m:ryabinin.a.a@gmail.com,m:akpm@linux-foundation.org,m:corbet@lwn.net,m:glider@google.com,m:andreyknvl@gmail.com,m:dvyukov@google.com,m:vincenzo.frascino@arm.com,m:kasan-dev@googlegroups.com,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:skhan@linuxfoundation.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:ryan.roberts@arm.com,m:anshuman.khandual@arm.com,m:kaleshsingh@google.com,m:21cnbao@gmail.com,m:david@kernel.org,m:will@kernel.org,m:ryabininaa@gmail.com,s:lists@lfdr.de];
+	FREEMAIL_CC(0.00)[google.com,amd.com,linux.dev,linux.intel.com,kernel.org,intel.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca,vger.kernel.org,kvack.org,lists.linux.dev];
+	TAGGED_FROM(0.00)[bounces-93191-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_SEVEN(0.00)[10];
+	FORGED_RECIPIENTS(0.00)[m:seanjc@google.com,m:ackerleytng@google.com,m:aik@amd.com,m:andrew.jones@linux.dev,m:binbin.wu@linux.intel.com,m:brauner@kernel.org,m:chao.p.peng@linux.intel.com,m:david@kernel.org,m:jmattson@google.com,m:jthoughton@google.com,m:michael.roth@amd.com,m:oupton@kernel.org,m:pankaj.gupta@amd.com,m:qperret@google.com,m:rick.p.edgecombe@intel.com,m:rientjes@google.com,m:shivankg@amd.com,m:steven.price@arm.com,m:tabba@google.com,m:willy@infradead.org,m:wyihan@google.com,m:forkloop@google.com,m:pratyush@kernel.org,m:suzuki.poulose@arm.com,m:aneesh.kumar@kernel.org,m:liam@infradead.org,m:pbonzini@redhat.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:shuah@kernel.org,m:vannapurve@google.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencent.com,m:shikemeng@huawe
+ icloud.com,m:nphamcs@gmail.com,m:baohua@kernel.org,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:kas@kernel.org,m:baoquan.he@linux.dev,m:jgg@ziepe.ca,m:vbabka@kernel.org,m:kvm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,m:linux-coco@lists.linux.dev,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[dev.jain@arm.com,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[gmail.com,linux-foundation.org,lwn.net,google.com,arm.com,googlegroups.com,kvack.org,vger.kernel.org,linuxfoundation.org,lists.infradead.org,kernel.org];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[dev.jain@arm.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[arm.com:+];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FORGED_SENDER(0.00)[yan.y.zhao@intel.com,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	DKIM_TRACE(0.00)[intel.com:+];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	HAS_REPLYTO(0.00)[yan.y.zhao@intel.com];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,intel.com:dkim,intel.com:replyto,intel.com:from_mime,vger.kernel.org:from_smtp];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[yan.y.zhao@intel.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[63];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp,arm.com:dkim,arm.com:mid,arm.com:from_mime]
+	REPLYTO_EQ_FROM(0.00)[]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 1249A6B419D
+X-Rspamd-Queue-Id: B156D6B4514
 
-
-
-On 22/06/26 10:43 pm, Catalin Marinas wrote:
-> Hi Harry,
+On Mon, Jun 22, 2026 at 06:22:45PM -0700, Sean Christopherson wrote:
+> On Mon, Jun 22, 2026, Yan Zhao wrote:
+> > On Thu, Jun 18, 2026 at 05:32:00PM -0700, Ackerley Tng via B4 Relay wrote:
+> > > From: Ackerley Tng <ackerleytng@google.com>
+> > > 
+> > > Update tdx_gmem_post_populate() to handle cases where a source page is
+> > > not explicitly provided. Instead of returning -EOPNOTSUPP when src_page
+> > > is NULL, default to using the page associated with the destination PFN.
+> > > 
+> > > This change allows for in-place memory conversion where the data is
+> > > already present in the target PFN, ensuring the TDX module has a valid
+> > > source page reference for the TDH.MEM.PAGE.ADD operation.
+> > > 
+> > > Signed-off-by: Ackerley Tng <ackerleytng@google.com>
+> > > Signed-off-by: Sean Christopherson <seanjc@google.com>
+> > > ---
+> > >  Documentation/virt/kvm/x86/intel-tdx.rst |  4 ++++
+> > >  arch/x86/kvm/vmx/tdx.c                   | 11 ++++++++---
+> > >  2 files changed, 12 insertions(+), 3 deletions(-)
+> > > 
+> > > diff --git a/Documentation/virt/kvm/x86/intel-tdx.rst b/Documentation/virt/kvm/x86/intel-tdx.rst
+> > > index 6a222e9d09541..74357fe87f9ec 100644
+> > > --- a/Documentation/virt/kvm/x86/intel-tdx.rst
+> > > +++ b/Documentation/virt/kvm/x86/intel-tdx.rst
+> > > @@ -158,6 +158,10 @@ KVM_TDX_INIT_MEM_REGION
+> > >  Initialize @nr_pages TDX guest private memory starting from @gpa with userspace
+> > >  provided data from @source_addr. @source_addr must be PAGE_SIZE-aligned.
+> > >  
+> > > +If guest_memfd in-place conversion is enabled, pass NULL for @source_addr to
+> > > +initialize the memory region using memory contents already populated in
+> > > +guest_memfd memory.
+> > > +
+> > >  Note, before calling this sub command, memory attribute of the range
+> > >  [gpa, gpa + nr_pages] needs to be private.  Userspace can use
+> > >  KVM_SET_MEMORY_ATTRIBUTES to set the attribute.
+> > > diff --git a/arch/x86/kvm/vmx/tdx.c b/arch/x86/kvm/vmx/tdx.c
+> > > index ffe9d0db58c59..56d10333c61a7 100644
+> > > --- a/arch/x86/kvm/vmx/tdx.c
+> > > +++ b/arch/x86/kvm/vmx/tdx.c
+> > > @@ -3198,8 +3198,12 @@ static int tdx_gmem_post_populate(struct kvm *kvm, gfn_t gfn, kvm_pfn_t pfn,
+> > >  	if (KVM_BUG_ON(kvm_tdx->page_add_src, kvm))
+> > >  		return -EIO;
+> > >  
+> > > -	if (!src_page)
+> > > -		return -EOPNOTSUPP;
+> > > +	if (!src_page) {
+> > > +		if (!gmem_in_place_conversion)
+> > When userspace turns on gmem_in_place_conversion while creating guest_memfd
+> > without the MMAP flag, the absence of src_page should still be treated as an
+> > error.
 > 
-> On Mon, Jun 22, 2026 at 09:42:10PM +0900, Harry Yoo wrote:
->> On 6/19/26 10:19 PM, Catalin Marinas wrote:
->>> On Thu, Jun 18, 2026 at 10:35:15PM +0900, Harry Yoo wrote:
->>>> On 6/12/26 1:44 PM, Dev Jain wrote:
->>>>> Now, when a memory object will be freed, it will retain the random tag it
->>>>> had at allocation time. This compromises on catching UAF bugs, till the
->>>>> time the object is not reallocated, at which point it will have a new
->>>>> random tag.
->>>>>
->>>>> Hence, not catching "use-after-free-before-reallocation" and not catching
->>>>> "double-free" will be the compromise for reduced KASAN overhead.
->>>>
->>>> I doubt users who care about security enough to enable HW_TAGS KASAN
->>>> are willing to compromise on security just to save a few instructions
->>>> to store tags in the free path.
->>>>
->>>> To me, it looks like too much of a compromise on security for little
->>>> performance gain.
->>>
->>> I don't think there's much compromise on security for use-after-free.
->>
->> I think it depends... OH, WAIT! I see what you mean.
->>
->> You mean use-after-free before reallocation does not lead to much
->> compromise on security because objects are initialized after allocation?
->>
->> You're probably right.
->>
->> Hmm, but stores to e.g.) free pointer, fields initialized by
->> constructor or accessed by SLAB_TYPESAFE_BY_RCU semantics after free
->> will be undiscovered if they happen before reallocation.
+> Why MMAP?
+Hmm, I was showing a scenario that in-place conversion couldn't occur.
+I didn't mean that with the MMAP flag, mmap() and user write must occur.
+
+> Shouldn't this be a general "if (!src_page && !up-to-date)"?  Just
+> because userspace _can_ mmap() the memory doesn't mean userspace _has_ mmap()'d
+> and written memory.  And when write() lands, MMAP wouldn't be necessary to
+> initialize the memory.
+Do you mean using up-to-date flag as below?
+
+if (!src_page) {
+	src_page = pfn_to_page(pfn);
+	if (!folio_test_uptodate(page_folio(src_page)))
+		return -EOPNOTSUPP;
+}
+
+One concern is that TDX now does not much care about the up-to-date flag since
+TDX doesn't rely on the flag to clear pages on conversions.
+I'm not sure if the flag can be reliably checked in this case. e.g.,
+now the whole folio is marked up-to-date even if only part of it is faulted by
+user access.
+Ensuring that the up-to-date flag works correctly with huge page support seems
+to have more effort than introducing a dedicated flag for TDX.
+
+> > Additionally, to properly enable in-place copying for the TDX initial memory
+> > region, userspace must not only specify source_addr to NULL, but also follow
+> > a specific sequence (where steps 1/2/3/7 are required only for in-place copy):
+> > 1. create guest_memfd with MMAP flag
+> > 2. mmap the guest_memfd.
+> > 3. convert the initial memory range to shared.
+> > 4. copy initial content to the source page.
+> > 5. convert the initial memory range to private
+> > 6. invoke ioctl KVM_TDX_INIT_MEM_REGION.
+> > 7. do not unmap the source backend.
+> > 
+> > So, would it be reasonable to introduce a dedicated flag that allows userspace
+> > to explicitly opt into the in-place copy functionality? e.g.,
 > 
-> Even with SLAB_TYPESAFE_BY_RCU, the object isn't tagged on free either
-> (or realloc, only if the actual slab page ends up freed). But we don't
-> get type confusion for such slab.
-> 
-> However, without tagging on free, one could argue that it reduces
-> security for cases where the page is re-allocated as untagged - e.g. all
-> user pages mapped without PROT_MTE. Currently we have a deterministic
-> tag check fault if the page is coloured as KASAN_TAG_INVALID. I think
-
-So you are saying that a stale kernel pointer can continue to use the
-reallocated page, because for non-PROT_MTE case the page does not get
-a new tag. Makes sense.
-> for this patch, it might be better to only do such skip on free in
-> kasan_poison_slab() rather than kasan_poison(). Freed pages would then
-> be tagged.
-
-I think you mean to say, "skip tag on free when freeing pages into buddy"?
-So that would mean, kasan_poison() will do the poisoning also in the
-case of value == KASAN_PAGE_FREE.
-
-> 
-> An alternative would be tagging on free only with a new tag and skipping
-> it on re-alloc. But we'd need to track when it's a completely new
-> allocation or a reused object (I haven't looked I'm pretty sure it's
-> doable).
-
-That was our original approach, and IIRC we had concluded there was no
-security compromise. However it is difficult to implement - it has cases
-like, what happens when two differently tagged pages are coalesced by
-buddy and someone gets that large page as an allocation.
-
-> 
-
+> Why?  It's userspace's responsibility to get the above right.  If userspace fails
+> to provide a src_page when it doesn't want in-place copy, that's a userspace bug.
+I mean if userspace specifies a NULL source_addr by mistake, it's better for
+kernel to detect this mistake, similar to how it validates whether source_addr
+is PAGE_ALIGNED.
+Since userspace already needs to perform additional steps to enable in-place
+copy, specifying a dedicated flag to indicate that the NULL source_addr is
+intentional seems like a reasonable burden.
 
