@@ -1,117 +1,146 @@
-Return-Path: <linux-doc+bounces-93422-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93423-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id py49MSA5PGrflQgAu9opvQ
-	(envelope-from <linux-doc+bounces-93422-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Jun 2026 22:08:00 +0200
+	id v3GMLNc6PGoTlggAu9opvQ
+	(envelope-from <linux-doc+bounces-93423-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Jun 2026 22:15:19 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 433066C12D0
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Jun 2026 22:08:00 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 758EA6C1301
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Jun 2026 22:15:18 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b="O/KTWK0/";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93422-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93422-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	dkim=pass header.d=intel.com header.s=Intel header.b=X+OOyNEz;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93423-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93423-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=intel.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 775523013AB3
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Jun 2026 20:07:58 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 7B1B33008CB0
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Jun 2026 20:15:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CD389378813;
-	Wed, 24 Jun 2026 20:07:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8CA123E0C59;
+	Wed, 24 Jun 2026 20:15:14 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.16])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA3FC3033CC;
-	Wed, 24 Jun 2026 20:07:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 270453E0754
+	for <linux-doc@vger.kernel.org>; Wed, 24 Jun 2026 20:15:13 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782331677; cv=none; b=L+57Giy7pfk6CkSNFzZJKV0Y/vuqoPanLbVqsBduNhPr6ugzdVlXiwecM85S387hWcBXQtoYgH1KYJn9grzxqkivMHosn7DiW/cy9mEcKrK4PLk36WsiVj4LhiJDhU32F1lICSeVEaw1hWKOEp1ZS/Iya3jXBes0TY4XZGiYVbk=
+	t=1782332114; cv=none; b=b8UJ5YYb7zmWwiKNnTYPi9yiCTpnN4bKA9J2roavGtByuVeD4EzcougsxAzF+d+Flr7KzMK9i3pdfGdiSUEc6ooBvByz9zE1pdwOFfHuJBLp2bJIfUMRJD5LPA+kqLdq4agQQruma3XTVyYqCa50aNmiiVkZFpMtdg4yy/Bg0c0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782331677; c=relaxed/simple;
-	bh=MvdxAoJ7YexdWzyjieZxC0ZqQhclQ8yHQTQhbVrniGg=;
-	h=Date:Message-ID:From:To:Cc:Subject:In-Reply-To:References; b=qxxtiBDN1tSXdKeGg0UoDQALT2ICo6HMd2U6OgWifLnvn6rxOT+NKLzJficqAMuHT2EFk3Ctk2TbQau9gbG3Cmkh9t/8ECVJsrtBQXuUWwOEnk/pY0nRj298g7QJ6XvkfWLp6ZIjwXsBYG4vGGFNUT+VnLyeeMJJvfF3FbJDcf8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=O/KTWK0/; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6CE341F000E9;
-	Wed, 24 Jun 2026 20:07:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782331676;
-	bh=MvdxAoJ7YexdWzyjieZxC0ZqQhclQ8yHQTQhbVrniGg=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=O/KTWK0/vfMmCWHBKZ383cCO4oBFSbI516hL2/lOepxH8pj71PnQKFdqZwg3DnXgp
-	 qUmlUWtx+vbuWa2u9sXyWfWEkSYPKOpXadD+bKRg7rVI1LdMIm1I3RwXk9oghc9RCe
-	 nIqG5v4bqfbjlP7WG3e/uTv8P0BeE8OxKcuXdAWmJGHab/8CIlL9oSqeSlX1Jb0aQp
-	 LNHGtRwEHka/75oZoCCgutlYct7RXLHjGPp6sRAKIinNQ2hKF9gpIVJlxZcbXXLNil
-	 xaIpAXf5Wz6i4lX6dDey10XVs+a8/NYw5Natj06ddj874Nje3FURfOmcFXRI16QPrp
-	 A22245zAVTwgA==
-Date: Wed, 24 Jun 2026 10:07:55 -1000
-Message-ID: <0130538fffad5f2457c422133435bd60@kernel.org>
-From: Tejun Heo <tj@kernel.org>
-To: Doehyun Baek <doehyunbaek@gmail.com>
-Cc: Jonathan Corbet <corbet@lwn.net>,
- Johannes Weiner <hannes@cmpxchg.org>,
- Michal Koutný <mkoutny@suse.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- Shakeel Butt <shakeel.butt@linux.dev>,
- Roman Gushchin <roman.gushchin@linux.dev>,
- Yosry Ahmed <yosry@kernel.org>,
- Nhat Pham <nphamcs@gmail.com>,
- cgroups@vger.kernel.org,
- linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] Docs/admin-guide/cgroup-v2: fix memory.stat doc details
-In-Reply-To: <20260620122751.388770-1-doehyunbaek@gmail.com>
-References: <20260620122751.388770-1-doehyunbaek@gmail.com>
+	s=arc-20240116; t=1782332114; c=relaxed/simple;
+	bh=JIggUnhiPPZlmMGQg7ETzIihtA9vAqiQc2mH603cdVQ=;
+	h=Date:From:Cc:Subject:Message-ID; b=bPPBxgWbLyCEXq2OoyhaYoHuqmnxBDuWUuMnbuNbtFdK2lJRdW5s08GeQ14Qs3/nIM2377lDiPYXIsXHiGuC86RQ9xzOt0wWSEvjtVUnqed45rzhIdyz3a4gCUiA13wCMnnzK8BseH01cLrzSmNWxGiBKPe+HvvqlABxSJV2a3M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=X+OOyNEz; arc=none smtp.client-ip=198.175.65.16
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1782332113; x=1813868113;
+  h=date:from:cc:subject:message-id;
+  bh=JIggUnhiPPZlmMGQg7ETzIihtA9vAqiQc2mH603cdVQ=;
+  b=X+OOyNEzqEkeiQJKZcus7tT2HtAs5pI5Y2scjmq1r9S4ploEoWCrz1Vl
+   LIC9orzr9jDAscgCzWmKQIvin22KM9lw0/VIfmMGtNX3d6AY3qZIH092c
+   0JZY5LRi5TSL+NenyVwsJ1q2mty4gTbFgfExLMo9GYbQGDvlfUOFwcfia
+   rRfrndg6SRPbtRxKCfmXL0OMhH6mHhC1ZSsktBJXnX+lSyJX0eBUjbBB0
+   6POv7TyQmb59R8dpkZbGegcn9Muqge5sTxMQXRFchfvkmb3BgmP8ns47P
+   Z2s3wKKZQgq1azQ+nQ3jCePZRnMd9KolPsp0R/7xoXb/L0HbDGCmuQHjr
+   Q==;
+X-CSE-ConnectionGUID: tacl7Z9IQhOpXUJDHuBlfQ==
+X-CSE-MsgGUID: t5aC2RqSSIasIOUaZsU7Bw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11827"; a="83294866"
+X-IronPort-AV: E=Sophos;i="6.24,223,1774335600"; 
+   d="scan'208";a="83294866"
+Received: from fmviesa001.fm.intel.com ([10.60.135.141])
+  by orvoesa108.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Jun 2026 13:15:12 -0700
+X-CSE-ConnectionGUID: ULs9WSw5SwKOJGIztTzrVw==
+X-CSE-MsgGUID: CgGrJbGSTp6QaHPj3v31tw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.24,223,1774335600"; 
+   d="scan'208";a="274171430"
+Received: from igk-lkp-server01.igk.intel.com (HELO 892db79562d4) ([10.211.93.152])
+  by fmviesa001.fm.intel.com with ESMTP; 24 Jun 2026 13:15:11 -0700
+Received: from kbuild by 892db79562d4 with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1wcU05-000000006Mz-1rGU;
+	Wed, 24 Jun 2026 20:15:09 +0000
+Date: Wed, 24 Jun 2026 22:14:10 +0200
+From: kernel test robot <lkp@intel.com>
+Cc: oe-kbuild-all@lists.linux.dev, Jeff Layton <jlayton@kernel.org>,
+ linux-doc@vger.kernel.org
+Subject: [jlayton:nfsd-testing 3/3] htmldocs: Warning:
+ fs/nfsd/nfs4proc.c references a file that doesn't exist:
+ Documentation/atomic_bitops.rst
+Message-ID: <202606242223.Mks9jBen-lkp@intel.com>
+User-Agent: s-nail v14.9.25
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-4.66 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [-1.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,kernel.org:s:+];
+	MISSING_TO(2.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
 	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	TAGGED_FROM(0.00)[bounces-93422-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:doehyunbaek@gmail.com,m:corbet@lwn.net,m:hannes@cmpxchg.org,m:mkoutny@suse.com,m:akpm@linux-foundation.org,m:shakeel.butt@linux.dev,m:roman.gushchin@linux.dev,m:yosry@kernel.org,m:nphamcs@gmail.com,m:cgroups@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[tj@kernel.org,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[lwn.net,cmpxchg.org,suse.com,linux-foundation.org,linux.dev,kernel.org,gmail.com,vger.kernel.org];
-	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-93423-lists,linux-doc=lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS(0.00)[m:oe-kbuild-all@lists.linux.dev,m:jlayton@kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_THREE(0.00)[3];
 	TO_DN_SOME(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tj@kernel.org,linux-doc@vger.kernel.org];
 	PRECEDENCE_BULK(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+];
+	RCVD_COUNT_FIVE(0.00)[6];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	SINGLE_SHORT_PART(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ALIAS_RESOLVED(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FROM_HAS_DN(0.00)[]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,01.org:url]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 433066C12D0
+X-Rspamd-Queue-Id: 758EA6C1301
 
-Applied to cgroup/for-7.2-fixes.
+tree:   https://git.kernel.org/pub/scm/linux/kernel/git/jlayton/linux.git nfsd-testing
+head:   a6bb4945e70c1078941fda53314ed0eb6198b724
+commit: a6bb4945e70c1078941fda53314ed0eb6198b724 [3/3] nfsd: fix UAF in async copy cancel and shutdown
+compiler: clang version 22.1.8 (https://github.com/llvm/llvm-project ca7933e47d3a3451d81e72ac174dcb5aa28b59d1)
+docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
+reproduce: (https://download.01.org/0day-ci/archive/20260624/202606242223.Mks9jBen-lkp@intel.com/reproduce)
 
-Thanks.
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202606242223.Mks9jBen-lkp@intel.com/
+
+All warnings (new ones prefixed by >>):
+
+   Warning: Documentation/translations/zh_CN/scsi/scsi_mid_low_api.rst references a file that doesn't exist: Documentation/Configure.help
+   Warning: MAINTAINERS references a file that doesn't exist: Documentation/ABI/testing/sysfs-platform-ayaneo
+   Warning: MAINTAINERS references a file that doesn't exist: Documentation/devicetree/bindings/display/bridge/megachips-stdpxxxx-ge-b850v3-fw.txt
+   Warning: arch/powerpc/sysdev/mpic.c references a file that doesn't exist: Documentation/devicetree/bindings/powerpc/fsl/mpic.txt
+   Warning: drivers/net/ethernet/smsc/Kconfig references a file that doesn't exist: file:Documentation/networking/device_drivers/ethernet/smsc/smc9.rst
+>> Warning: fs/nfsd/nfs4proc.c references a file that doesn't exist: Documentation/atomic_bitops.rst
+   Warning: rust/kernel/sync/atomic/ordering.rs references a file that doesn't exist: srctree/tools/memory-model/Documentation/explanation.txt
+   Warning: tools/docs/documentation-file-ref-check references a file that doesn't exist: Documentation/virtual/lguest/lguest.c
+   Warning: tools/docs/documentation-file-ref-check references a file that doesn't exist: m,\b(\S*)(Documentation/[A-Za-z0-9
+   Warning: tools/docs/documentation-file-ref-check references a file that doesn't exist: Documentation/devicetree/dt-object-internal.txt
+   Warning: tools/docs/documentation-file-ref-check references a file that doesn't exist: m,^Documentation/scheduler/sched-pelt
 
 --
-tejun
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
