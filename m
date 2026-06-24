@@ -1,51 +1,51 @@
-Return-Path: <linux-doc+bounces-93387-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93388-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id gVE3MKrtO2oXfggAu9opvQ
-	(envelope-from <linux-doc+bounces-93387-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Jun 2026 16:46:02 +0200
+	id /aVLAcLsO2rZfQgAu9opvQ
+	(envelope-from <linux-doc+bounces-93388-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Jun 2026 16:42:10 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B3176BF461
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Jun 2026 16:46:02 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id EB40F6BF3A1
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Jun 2026 16:42:08 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=EdTWVojq;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93387-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-93387-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=La639dCx;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93388-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-93388-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 1C5BE30E44BF
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Jun 2026 14:41:47 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 87D15300E919
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Jun 2026 14:41:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BB0033CA48E;
-	Wed, 24 Jun 2026 14:41:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 26C973CAA3A;
+	Wed, 24 Jun 2026 14:41:52 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E3D13CAA53;
-	Wed, 24 Jun 2026 14:41:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5DD43CA486;
+	Wed, 24 Jun 2026 14:41:50 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782312104; cv=none; b=fPXl3JNYDgoQUO0E3Jiy02hlMznAyrTThBR+bxnoSS2wu0qmXUrgwoCL0Rd8jh5G6qs1IGT8dnEbTWdal37lPc/X4zzuTEnA1p/xOhVBxqJkCPNGE2mc8tEHdsRrDHn+oOT20mlz4+ghgWm2IqKdY/DoAu2pZSzxfFXmfbzNBw4=
+	t=1782312112; cv=none; b=W6n1ym9hs1yurocLsAO8o/VWBmqMuFXhCxfpcE0N19NATQc59Oe6l3XnozNN+ZJINbVRXz9lYSF4gUhUMqv0LRr5j5K19wIlPq2WViZGuYo/ph4U/1ZVx+fycimG8y1p6bG4bVKGItMKVpx7O5SKPdWUo989q8GM4TnWkA4w/hk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782312104; c=relaxed/simple;
-	bh=wOy8eDPln65eIcStjYY3DBmrVz/uGPPTFR9tQLjhrDY=;
+	s=arc-20240116; t=1782312112; c=relaxed/simple;
+	bh=ILB/ElfIWa9u0xQ12aAYqyj8anSCHxMnZsNP9BRN1oE=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=XflUcwF4Tl08QowmzQ3LAMw3Hkj6s0YLPyZBZ49yiuJXRWAhcLXV4bRuwe5jO+SHwrOQGN6K+uT28tyWcgrmMT7M+A06nlqda+kUckehtLXfdHkp6CyE9Uaa6c1nb4zmv3P+1kBtIigsy4crzRc8BGHXsbknWAI4rrV1/ENY5y4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EdTWVojq; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6A2011F000E9;
-	Wed, 24 Jun 2026 14:41:39 +0000 (UTC)
+	 MIME-Version:Content-Type; b=XU+pnXDCcp9q4wF1A2IEEFcXzHlUROpp3v2xb2G+RZnkzb2TjkLSmxGrPvMnwYlKO5pjGtJ0K/ZErZsrryHG84DTNX1p5SzM30/jqAmQccLLxS3orE0BX1Su19UURFEytMD+yAWWUvfZ/W8BRmkjBztxS/whIA0pm+e9ycpN9IE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=La639dCx; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E98C81F000E9;
+	Wed, 24 Jun 2026 14:41:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782312101;
-	bh=/qoVN2xxrOkXbxj9Sc51IAOlcEYiH3we051lIIsBY5I=;
+	s=k20260515; t=1782312110;
+	bh=zA1ny7mz86qD9VEgfTKY9l9S9cY7unn92daWUtN0ORY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=EdTWVojqBxwLnm69yqvhZSpXGyvAVF6i5lHHRFmwq6Gi1eyqX56f9Y8A+kLLlERN+
-	 IatTtzwfrVxouWianqm6N2ICab2P2pv3evgNB5xpVgvfdHERrLF5k3U2QzAhFJfjQU
-	 o5Yh+JjUwoR8/mh6sQC4N/DpsiIWosR/f2PopBCNRIBK3NrQbJ+co/DwvLwiZrtxW1
-	 wbv+ik3f25nLh9CjGW2J+Ff/WkUYfa10/steZUne3ycb4LXj+u0YjMqHZDmaYJxLYF
-	 FRwNjJ4iQpzmyUYCArybCnlYXeBTXV0J+6ADmrULQlw7oxH9jcY0FH3gzI5pKsr8wT
-	 Ye8ir/8V8OEsA==
+	b=La639dCxhqfASTQUkgnoIZuoYGcv0Cotqto36Qwtzfy3PjSIO7XSvlFnLhzeTNvM7
+	 SEWtXHlCLRHJO58po692UhOBF/f7jCWsXXIXTvXeSXqJ0zNICXcZLQGNjB6X2cqixF
+	 kwRA8o7cee7xX/vDM4NG/+E5kyTHeWjy2luExXkTYUtexqgijWeWIxq080/oXo3AAf
+	 G23dBpInF25CiyNrLAAVGyDVDznbwSpdbFtJ0WTrJpCkZ6ryZVOK8DUtwpSA0ao0EQ
+	 IfdIIChQ8F5KsfgjpdJfZLdhFJPh4pMMv/H5ktty/CD8dUvAdELuVly5Sa0unZP8GA
+	 qytFKcGGDX7Tw==
 From: "Masami Hiramatsu (Google)" <mhiramat@kernel.org>
 To: Steven Rostedt <rostedt@goodmis.org>,
 	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
@@ -56,9 +56,9 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	linux-trace-kernel@vger.kernel.org,
 	linux-doc@vger.kernel.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v8 01/10] tracing/probes: Make the $ prefix mandatory for comm access
-Date: Wed, 24 Jun 2026 23:41:37 +0900
-Message-ID: <178231209724.732967.12049805699091810641.stgit@devnote2>
+Subject: [PATCH v8 02/10] tracing/probes: Allow eprobe to use variable without $ prefix
+Date: Wed, 24 Jun 2026 23:41:47 +0900
+Message-ID: <178231210706.732967.16859916754335270082.stgit@devnote2>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <178231208703.732967.1160700962651040729.stgit@devnote2>
 References: <178231208703.732967.1160700962651040729.stgit@devnote2>
@@ -79,7 +79,7 @@ X-Spamd-Result: default: False [-3.66 / 15.00];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	MID_RHS_NOT_FQDN(0.50)[];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
@@ -89,7 +89,7 @@ X-Spamd-Result: default: False [-3.66 / 15.00];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_SENDER(0.00)[mhiramat@kernel.org,linux-doc@vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-93387-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-93388-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
@@ -102,57 +102,84 @@ X-Spamd-Result: default: False [-3.66 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp,devnote2:mid]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,vger.kernel.org:from_smtp,devnote2:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 1B3176BF461
+X-Rspamd-Queue-Id: EB40F6BF3A1
 
 From: Masami Hiramatsu (Google) <mhiramat@kernel.org>
 
-Since $comm or $COMM are not event field but special fetcharg
-variables to access current->comm, It should not be accessed
-without '$' prefix even with typecast.
+The commit 69efd863a785 ("tracing/eprobes: Allow use of BTF names
+to dereference pointers") allows eprobe to use event field without
+"$" prefix when it is used with typecast, it is natual to allow it
+without typecast.
 
-Fixes: 69efd863a785 ("tracing/eprobes: Allow use of BTF names to dereference pointers")
 Signed-off-by: Masami Hiramatsu (Google) <mhiramat@kernel.org>
 ---
  Changes in v8:
   - Newly added.
 ---
- kernel/trace/trace_probe.c |   12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
+ kernel/trace/trace_probe.c                         |   12 +++++++++++-
+ kernel/trace/trace_probe.h                         |    1 +
+ .../test.d/dynevent/eprobes_syntax_errors.tc       |    3 +--
+ 3 files changed, 13 insertions(+), 3 deletions(-)
 
 diff --git a/kernel/trace/trace_probe.c b/kernel/trace/trace_probe.c
-index c10bbb0df7b9..0da7c0b53ba7 100644
+index 0da7c0b53ba7..2ce7d62471cb 100644
 --- a/kernel/trace/trace_probe.c
 +++ b/kernel/trace/trace_probe.c
-@@ -342,10 +342,6 @@ static int parse_trace_event(char *arg, struct fetch_insn *code,
- 	ret = parse_trace_event_arg(arg, code, ctx);
- 	if (!ret)
- 		return 0;
--	if (strcmp(arg, "comm") == 0 || strcmp(arg, "COMM") == 0) {
--		code->op = FETCH_OP_COMM;
--		return 0;
--	}
- 	return -EINVAL;
- }
- 
-@@ -1065,8 +1061,14 @@ static int parse_probe_vars(char *orig_arg, const struct fetch_type *t,
- 	int len;
- 
- 	if (ctx->flags & TPARG_FL_TEVENT) {
--		if (parse_trace_event(arg, code, ctx) < 0)
-+		if (parse_trace_event(arg, code, ctx) < 0) {
-+			/* 'comm' should be checked after field parsing. */
-+			if (strcmp(arg, "comm") == 0 || strcmp(arg, "COMM") == 0) {
-+				code->op = FETCH_OP_COMM;
-+				return 0;
+@@ -1341,7 +1341,17 @@ parse_probe_arg(char *arg, const struct fetch_type *type,
+ 		ret = handle_typecast(arg, pcode, end, ctx);
+ 		break;
+ 	default:
+-		if (isalpha(arg[0]) || arg[0] == '_') {	/* BTF variable */
++		if (isalpha(arg[0]) || arg[0] == '_') {
++			/* BTF variable or event field*/
++			if (ctx->flags & TPARG_FL_TEVENT) {
++				ret = parse_trace_event(arg, *pcode, ctx);
++				if (ret < 0) {
++					trace_probe_log_err(ctx->offset,
++							    NO_EVENT_FIELD);
++					return -EINVAL;
++				}
++				break;
 +			}
- 			goto inval;
-+		}
- 		return 0;
- 	}
+ 			if (!tparg_is_function_entry(ctx->flags) &&
+ 			    !tparg_is_function_return(ctx->flags)) {
+ 				trace_probe_log_err(ctx->offset, NOSUP_BTFARG);
+diff --git a/kernel/trace/trace_probe.h b/kernel/trace/trace_probe.h
+index 40b53b5b58a9..2e0d8384ee5c 100644
+--- a/kernel/trace/trace_probe.h
++++ b/kernel/trace/trace_probe.h
+@@ -559,6 +559,7 @@ extern int traceprobe_define_arg_fields(struct trace_event_call *event_call,
+ 	C(NO_PTR_STRCT,		"This is not a pointer to union/structure."),	\
+ 	C(NOSUP_DAT_ARG,	"Non pointer structure/union argument is not supported."),\
+ 	C(BAD_HYPHEN,		"Failed to parse single hyphen. Forgot '>'?"),	\
++	C(NO_EVENT_FIELD,	"This event field is not found."),	\
+ 	C(NO_BTF_FIELD,		"This field is not found."),	\
+ 	C(BAD_BTF_TID,		"Failed to get BTF type info."),\
+ 	C(BAD_TYPE4STR,		"This type does not fit for string."),\
+diff --git a/tools/testing/selftests/ftrace/test.d/dynevent/eprobes_syntax_errors.tc b/tools/testing/selftests/ftrace/test.d/dynevent/eprobes_syntax_errors.tc
+index 2a680c086047..0e65e787e426 100644
+--- a/tools/testing/selftests/ftrace/test.d/dynevent/eprobes_syntax_errors.tc
++++ b/tools/testing/selftests/ftrace/test.d/dynevent/eprobes_syntax_errors.tc
+@@ -10,7 +10,7 @@ check_error() { # command-with-error-pos-by-^
+ check_error 'e ^a.'			# NO_EVENT_INFO
+ check_error 'e ^.b'			# NO_EVENT_INFO
+ check_error 'e ^a.b'			# BAD_ATTACH_EVENT
+-check_error 'e syscalls/sys_enter_openat ^foo'	# BAD_ATTACH_ARG
++check_error 'e syscalls/sys_enter_openat ^foo'	# NO_EVENT_FIELD
+ check_error 'e:^/bar syscalls/sys_enter_openat'	# NO_GROUP_NAME
+ check_error 'e:^12345678901234567890123456789012345678901234567890123456789012345/bar syscalls/sys_enter_openat'	# GROUP_TOO_LONG
  
+@@ -19,7 +19,6 @@ check_error 'e:^ syscalls/sys_enter_openat'		# NO_EVENT_NAME
+ check_error 'e:foo/^12345678901234567890123456789012345678901234567890123456789012345 syscalls/sys_enter_openat'	# EVENT_TOO_LONG
+ check_error 'e:foo/^bar.1 syscalls/sys_enter_openat'	# BAD_EVENT_NAME
+ 
+-check_error 'e:foo/bar syscalls/sys_enter_openat arg=^dfd'	# BAD_FETCH_ARG
+ check_error 'e:foo/bar syscalls/sys_enter_openat arg=^$foo'	# BAD_ATTACH_ARG
+ 
+ if grep -q '<attached-group>\.<attached-event>.*\[if <filter>\]' README; then
 
 
