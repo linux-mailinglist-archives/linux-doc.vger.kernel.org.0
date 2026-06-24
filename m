@@ -1,190 +1,185 @@
-Return-Path: <linux-doc+bounces-93346-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93347-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id MwamNDOLO2oEZggAu9opvQ
-	(envelope-from <linux-doc+bounces-93346-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Jun 2026 09:45:55 +0200
+	id Zjs0JBuQO2oRZwgAu9opvQ
+	(envelope-from <linux-doc+bounces-93347-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Jun 2026 10:06:51 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2781E6BC472
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Jun 2026 09:45:55 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 85EBE6BC69A
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Jun 2026 10:06:50 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=lgpVhfux;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93346-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93346-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=IzYxjx+f;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93347-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-93347-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=gmail.com;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id CFB3A300CC27
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Jun 2026 07:45:53 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 95D29300E921
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Jun 2026 08:06:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 567AC3876CF;
-	Wed, 24 Jun 2026 07:45:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B1A2138E8A6;
+	Wed, 24 Jun 2026 08:06:43 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 021B835AC00;
-	Wed, 24 Jun 2026 07:45:52 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782287153; cv=none; b=Xyw7Qq9kaAVGoeQ5Kv8ZPfvL/nD0F777Jd0LsQES2ZteIQ+u73/A0KiznhQxRHvn5SY594p2OywtA0xJ1AaJYUg3fyF0BGzb0MlAzchrrtBilJYwm0dV6sqOZfIBeMd/em03JsyOvEdV/tvJaDz+uz/x4prEc9m2wepq3E+91fQ=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782287153; c=relaxed/simple;
-	bh=BrbedXJHRR9d7DDBgaqgW8fb+xYqeJc5Ux5AiNpR3Bk=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=NHX1f921xXnECJdGza/efnu+dJmz/xfZnbH/t0pajBR02gD0RXoF6EFccyN7GCIy8SvaY4CUDVqbN/WVnUKFaifrSWS8bwUQB0gU9xkwIonmUaNPdLbP7dzcE3oT9smZplLgehyFRZRDROUxY78B/A/TKsnsfvdCmpTxCuFiNN0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lgpVhfux; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 188EE1F000E9;
-	Wed, 24 Jun 2026 07:45:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782287151;
-	bh=nDEb+Mv3gmqnAXQiwkmb7huT4lhyBqYVAxZcicXAf4g=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=lgpVhfuxLqVO5uoodDr3tkOYsC2EaqDkwDIJJ99It+CmAUM8FR3KC/zXWxN6TBt3l
-	 EdTjRntqpXHdqSBq70BicyZg1y5GXfKajicFTUUG8juQitarX/NFT9wZjczZbkgarB
-	 +e9cFTU5wIrFgX3FBYdMRS8Sv5gTkOYBoFiju49k3A0jI2FxozlUWWC9gMCGPD123h
-	 rPI1kRHhCjrK0mPo3FYFf/LExYJ5eoFYPqveqdBNQX3JnKm3/Ki7U2egRogD9HdyxB
-	 wya+7/TsxSaiL2Yvhg3gucT5lVzkvm+qmB8tvuMw1m2MYvKsb6TLQStJoOL0N/rI3F
-	 1L3SfH/h8F5pA==
-Date: Wed, 24 Jun 2026 09:45:47 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Flaviu Nistor <flaviu.nistor@gmail.com>
-Cc: Guenter Roeck <linux@roeck-us.net>, 
-	Javier Carrasco <javier.carrasco.cruz@gmail.com>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
-	linux-hwmon@vger.kernel.org, linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH 1/2] dt-bindings: hwmon: chipcap2: Add label property
-Message-ID: <20260624-quantum-cormorant-of-beauty-0b1aa8@quoll>
-References: <b6d34af3-0c4a-4870-a240-f7873621d2ce@roeck-us.net>
- <20260623192217.4804-1-flaviu.nistor@gmail.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1518C385D69
+	for <linux-doc@vger.kernel.org>; Wed, 24 Jun 2026 08:06:41 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1782288403; cv=pass; b=laDq7sntXsUbTzidb5Gg8MCqnwlCcscDrYy93tijnjXXRSyCqenQdhcl3DsLZYrvu2s09GP2XGLRzlGAG2ddi9ZjToyVI7Q6kiBb3xMYyOHBoA06zXl+0XycVkXmL2PmWjsCLfOOBoaR0kU0EYn9QdwW9Lc+ElRoWO0hUBr5oHE=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1782288403; c=relaxed/simple;
+	bh=gZeNPuamGXtqBkLQzEmuZPlOeqKMujWLum9QRt/g1bQ=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=a2PH+m/hYyl9jVtPYSL4caxn4NcUYqgR+L767ZP0DtSB+zYCi7Z36BGZoMHsST60eqyo/2wlGCY4E9tjnO+w2iQ9PayOdk8Dn5ZNXuHZjTj+nKIWvd7Vh8M4jA4z6BMEk7cSSPM3DcQJyfWXFUcEc9sOSdmp+XlHmmxc7Nn9HCk=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=IzYxjx+f; arc=pass smtp.client-ip=209.85.218.53
+Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-c08922c23ebso94419566b.0
+        for <linux-doc@vger.kernel.org>; Wed, 24 Jun 2026 01:06:41 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782288400; cv=none;
+        d=google.com; s=arc-20240605;
+        b=fRmMJM2gHwouZG1ENr7E1LLfiTbEts1U3VbxfLsNLlEZNEBu2QDhCsDsqxCqgG/AMt
+         526rAJeNHTqx8FF+MIVKC38w9RITg1y4RkXzqq4GH5nS0gZYC52T4rbP3qODzrL47+dU
+         6cOEOaE3thbom74c+C/gTbREdxbvI2+hsMS9XjTzCkra1lsGLeuUt4CcV2Q9dF55/8RC
+         DPmywjAjRdETZLCltLbC/bKlaSRRGDKdHKQ56fUcP8aFRzDBZDvliGjYWXLBM15udroa
+         Wskbmp4e5J+FSm0h7jbQ9EY1PSbTlSbuzHM0l6Mr0n3TLuaDE/v1tklCLnM0Dg0/cmNm
+         Z6fQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=lM0sj/gFrnWNNsB/THsiD2+stmMptnCgeunijBGiJP0=;
+        fh=ezAnqhq+Q/yIew68LKViGL4/ERFVDmkKbtgqzUUT7c4=;
+        b=a/X0BzjWslLvhtorGkjhExkaZoYiGKr+UYX9R29aU3hjooT3oFPU43r04b6CSF1Vjy
+         t0BIrDg9A4dhV90Mns/TZIPeCfqWlfGpVlhk2EqxOsoyBsBVMWHJUUPQqxAFLxPPSr9R
+         XZueot2oTywVvSSo8QsyCW6ChXdBfJ/NojTgGky6BPjN0Igj8ZSw2PblsfD/5eLDoKpS
+         qJJmHey3ewsd/6EXokltiXk5GprMWw6y/cg88JkMVV4PNqKM6MmcTXq7fanttLpZ2c8q
+         fCHbnMiua2MhUqhsR9rWIVObvI92PrqbpXSX5H2etPcHufoTXHL8yMadTtz3O/orYg8U
+         eB9w==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1782288400; x=1782893200; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=lM0sj/gFrnWNNsB/THsiD2+stmMptnCgeunijBGiJP0=;
+        b=IzYxjx+f4Z8/We9K/7J6kIBnc5HIvl0pZPGjt0PCA/kXigCxu12jPdOVWcGNxvdVyK
+         le0cfMTSELGrd1aLyBTP6pYgGScgfLU04A+24F0B6pv/D9vnq+35RwZlBlccCGvXCZFr
+         UE3SrjCjoEweZGjKoK2Bqp/fDjb+CjnkVMLXUSB4xv7JWSVpFuu7B0Fv66RGcr7QM0NK
+         8Rb0U5IxYYWbeAuCsCtBpY+Q2riaUJdnYOkrIDAiOSgOKMkMkpRU8SaoWGhNLY0EqE7t
+         EMAl5Z/D5GX0h9L0L+zHv1H1oFJ6izYxyrlPJlzaa/8GvgX/Vz1MciPYBKvHqYGKErCC
+         yxIA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1782288400; x=1782893200;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=lM0sj/gFrnWNNsB/THsiD2+stmMptnCgeunijBGiJP0=;
+        b=mboXF7ywGpHTXhIJ7I6gBb/zbARJIR4tR9Ip4lH6dYVUhf/6JMpzA4g1O6yMoaje7P
+         7NGs9P5yjtBp3VPRyHeg9vNSMP2Tpjm6Hwsrmqjoibp9EhvygMKap2J53D8Wcwh+ayao
+         WDPdhA+H44ZPEOTUO/QIF9OACFEQ5K2gQuVVP7xs4dOXXVCVBKtbVtr2KxhA9AdZIUDK
+         J5voJtPiBtWSfofcrQdm/KtM1CqZc+u3NYP2PaWqjRR5B/9qpEAsaWakLbKPzeY+OKbX
+         cM6rXHlNodkWFPZxyGS+Y7XfgCXnT8+99BH4cqnZ5lv7b0pjcYQeXZkN4O7qF4nCkJvD
+         zFkw==
+X-Forwarded-Encrypted: i=1; AFNElJ/wZGmXetvadklw3ysN++EmXdUDEj+TFiEsd6JaH07q23ERBmggZxHKb8/4PyGqeutIdfP5dtstNjo=@vger.kernel.org
+X-Gm-Message-State: AOJu0YymMGluWM07bMIszGek9gewpLXFFizifF2nqX+cqemBband6ub3
+	CBYXNs2IJ32/tn7bXJtbc18XbMLT0NPsK300wfdMHfh0EcYJAxFfsGqAPi4HZ4oaeCOhZEegL7t
+	QJZ3hRSKz8+K1OnuXLLhXRobCcFg51yI=
+X-Gm-Gg: AfdE7ck18e6bsCdw/RHeVl9OABTiMAIQRpqgkPOJqsiz/ZVON3FhMLgBpwb98GmyVpg
+	vBuK5sNkmc7+DzKdvKc0l7/wmX/sBIk2vvFUxgWbIviM0D7QnNZ+lgo9gB/8l0NwK7A5I+rw+3K
+	wk11Vmxp+QYhXQ5qNOjT+SMjDfcdu7jSoylU1qo3+oXgKUR5iHnssLud0Dq2GMg6SB3sTicTk48
+	m40XEBaAWrUOgoswBCqeW/W5jVScmP6fwNmFKGxGP48mOU/AlXZTWIaxQ3dNnxHsAZAB3xcGA==
+X-Received: by 2002:a17:906:9f86:b0:bfa:f563:9294 with SMTP id
+ a640c23a62f3a-c107e0dfebbmr347805666b.18.1782288400043; Wed, 24 Jun 2026
+ 01:06:40 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260623192217.4804-1-flaviu.nistor@gmail.com>
+References: <20260623161035.5792-1-nikhilsolanke5@gmail.com>
+ <567e8866-4308-4e5f-819c-fe778dbf74f8@rowland.harvard.edu>
+ <CAFgddhJk0EYG71fnKdio=RHC-cH+JmL-EZ7-oVD-LdHoa2TBSA@mail.gmail.com> <5159fd69-dddf-4073-a8e7-95fa77de0b7f@rowland.harvard.edu>
+In-Reply-To: <5159fd69-dddf-4073-a8e7-95fa77de0b7f@rowland.harvard.edu>
+From: Nikhil Solanke <nikhilsolanke5@gmail.com>
+Date: Wed, 24 Jun 2026 13:36:28 +0530
+X-Gm-Features: AVVi8Cdz6KHrxpF6FVDarjMSsiC-uOJ-UdMHqIhmrG7YgFP-x12nJ9Fo0j02HUE
+Message-ID: <CAFgddhJ2HeJ=oTBX_axMJcgJq7GXH9abe+LH+x9NGekGO4BMyw@mail.gmail.com>
+Subject: Re: [PATCH v2] usbcore: Add quirk for 255-bytes initial config read
+To: Alan Stern <stern@rowland.harvard.edu>
+Cc: linux-usb@vger.kernel.org, gregkh@linuxfoundation.org, 
+	linux-kernel@vger.kernel.org, michal.pecio@gmail.com, stable@vger.kernel.org, 
+	corbet@lwn.net, skhan@linuxfoundation.org, linux-doc@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.16 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:flaviu.nistor@gmail.com,m:linux@roeck-us.net,m:javier.carrasco.cruz@gmail.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-hwmon@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-doc@vger.kernel.org,m:flaviunistor@gmail.com,m:javiercarrascocruz@gmail.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FORGED_SENDER(0.00)[krzk@kernel.org,linux-doc@vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-93346-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[krzk@kernel.org,linux-doc@vger.kernel.org];
-	PRECEDENCE_BULK(0.00)[];
-	FREEMAIL_CC(0.00)[roeck-us.net,gmail.com,kernel.org,lwn.net,linuxfoundation.org,vger.kernel.org];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_FROM(0.00)[bounces-93347-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FREEMAIL_CC(0.00)[vger.kernel.org,linuxfoundation.org,gmail.com,lwn.net];
+	FORGED_RECIPIENTS(0.00)[m:stern@rowland.harvard.edu,m:linux-usb@vger.kernel.org,m:gregkh@linuxfoundation.org,m:linux-kernel@vger.kernel.org,m:michal.pecio@gmail.com,m:stable@vger.kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:michalpecio@gmail.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[nikhilsolanke5@gmail.com,linux-doc@vger.kernel.org];
+	RCVD_COUNT_THREE(0.00)[4];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[nikhilsolanke5@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp,quoll:mid]
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 2781E6BC472
+X-Rspamd-Queue-Id: 85EBE6BC69A
 
-On Tue, Jun 23, 2026 at 10:22:17PM +0300, Flaviu Nistor wrote:
-> On 6/23/26 9:58 PM CET, Guenter Roeck wrote:
-> >On 6/23/26 11:16, Flaviu Nistor wrote:
-> >> On Mon Jun 22, 2026 at 7:29 PM CEST, Javier Carrasco wrote:
-> >>> On Mon Jun 22, 2026 at 2:21 PM CEST, Flaviu Nistor wrote:
-> >>>> Add support for an optional label property similar to other hwmon devices
-> >>>> This allows, in case of boards with multiple CHIPCAP2 sensors, to assign
-> >>>> distinct names to each instance.
-> >>>>
-> >>>> Signed-off-by: Flaviu Nistor <flaviu.nistor@gmail.com>
-> >>>> ---
-> >>>>   .../devicetree/bindings/hwmon/amphenol,chipcap2.yaml         | 5 +++++
-> >>>>   1 file changed, 5 insertions(+)
-> >>>>
-> >>>> diff --git a/Documentation/devicetree/bindings/hwmon/amphenol,chipcap2.ya=
-> >>> ml b/Documentation/devicetree/bindings/hwmon/amphenol,chipcap2.yaml
-> >>>> index 17351fdbefce..f00b5a4b14dd 100644
-> >>>> --- a/Documentation/devicetree/bindings/hwmon/amphenol,chipcap2.yaml
-> >>>> +++ b/Documentation/devicetree/bindings/hwmon/amphenol,chipcap2.yaml
-> >>>> @@ -33,6 +33,10 @@ properties:
-> >>>>     reg:
-> >>>>       maxItems: 1
-> >>>>
-> >>>> +  label:
-> >>>> +    description:
-> >>>> +      A descriptive name for this channel, like "ambient" or "psu".
-> >>>> +
-> >>>>     interrupts:
-> >>>>       items:
-> >>>>         - description: measurement ready indicator
-> >>>> @@ -72,6 +76,7 @@ examples:
-> >>>>                            <5 IRQ_TYPE_EDGE_RISING>,
-> >>>>                            <6 IRQ_TYPE_EDGE_RISING>;
-> >>>>               interrupt-names =3D "ready", "low", "high";
-> >>>> +            label =3D "somelabel";
-> >>>>               vdd-supply =3D <&reg_vdd>;
-> >>>>           };
-> >>>       };
-> >>>
-> >>> Hello Falviu, thank you for your patch.
-> >>>
-> >>
-> >> Hello Javier, thanks for your reply.
-> >>
-> >>> Should we not add a reference to hwmon-common.yaml (with
-> >>> unevelautedProperties instead of additionalProperties), as label is
-> >>> defined there? I believe that Krzysztof Kozlowski did something similar
-> >>> for the shunt-resistor-micro-ohms property. Could we follow suit here?
-> >>>
-> >>
-> >> This is a good question and I am happy you asked. I also thought a lot
-> >> about this and the reason I decided to go for this approach is that by using
-> >> $ref: hwmon-common.yaml#, I would have to change additionalProperties: false
-> >> to unevaluatedProperties: false, which will evaluate in case it is used, also
-> >> shunt-resistor-micro-ohms property which does not apply to this sensor. At
-> >> least this is my understanding, but of course I can be wrong (I see lm75 binding
-> >> also uses $ref: hwmon-common.yaml# but shunt-resistor-micro-ohms does not apply).
-> >>
-> >
-> >Where does the idea come from that shunt-resistor-micro-ohms would be mandatory ?
-> >That would make hwmon-common.yaml unusable for most chips.
-> 
-> I think this is a misunderstanding since I never had the intention to imply that
-> shunt-resistor-micro-ohms would be mandatory, but rather I observed that if I used
-> $ref: hwmon-common.yaml#, property shunt-resistor-micro-ohms can be added (no need to,
-> but still possible) in the example section and the dt_binding_check will pass.
-> Since hwmon-common.yaml is already there I will change the binding in a v2 and use it.
+> Actually, the best approach here would be to put this single change into
+> a separate patch that comes before the current one.  That removes issues
+> of making more than one functional change in one patch and improves
+> bisectability.
 
-I propose to reference hwmon-common.yaml with:
-label: true
-additionalProperties: false
+Before? Shouldn't it be after my changes? That would make it easier to
+justify the changes. And just to be sure, you did mention it does
+align with what the intention of USB_QUIRK_DELAY_INIT, but it does
+change its behavior when the quirk is not set. Atleast from what I
+understood from the documentation and an LLM's summary, the device
+needs time to prepare the full configuration set. So, does delaying
+before the first header read really work? I can't test this since I
+don't have a device that requires the quirk to be set.
 
-thus shunt-resistor won't be allowed but you still will reference common
-schema for the definition of common properties.
+I personally think adding a condition to check if the quirk is set and
+then delaying before sending the first request would be appropriate.
+What are your opinions on this.
 
+> The style used in this file is to indent continuation lines by 4 spaces,
+> because some of the continued statements are extremely long.  If you
+> want to align new continuation lines with an open paren, you can -- but
+> you didn't even do that in the example above; you aligned it with the
+> space following the first comma.
 
-Best regards,
-Krzysztof
+I will make my changes more consistent with the existing file, i.e.
+continuation with 4 spaces.
 
+Also is it fine if the string lines exceed 100 columns?
+
+Also, is there a need to check for krealloc()'s return value? Since we
+are only shrinking the buffer, there won't be any moves or completely
+new blocks (at least as per my understanding). Do I still need to
+check its return value for completeness' sake?
 
