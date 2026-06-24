@@ -1,187 +1,265 @@
-Return-Path: <linux-doc+bounces-93381-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93382-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id c4IaKjbjO2puewgAu9opvQ
-	(envelope-from <linux-doc+bounces-93381-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Jun 2026 16:01:26 +0200
+	id lF/PJ07nO2pyfAgAu9opvQ
+	(envelope-from <linux-doc+bounces-93382-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Jun 2026 16:18:54 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F2D76BEE7C
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Jun 2026 16:01:21 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 38B6C6BF07A
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Jun 2026 16:18:54 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=rowland.harvard.edu header.s=google header.b=KstfDJkD;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93381-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93381-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=rowland.harvard.edu;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=google.com header.s=20251104 header.b=df3sqHyt;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93382-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-93382-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=google.com;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 2B01E301586A
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Jun 2026 14:01:19 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id A7AC6300EE97
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Jun 2026 14:18:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DE9153B8BA1;
-	Wed, 24 Jun 2026 14:01:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D48353C198A;
+	Wed, 24 Jun 2026 14:18:51 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com [209.85.222.170])
+Received: from mail-dl1-f51.google.com (mail-dl1-f51.google.com [74.125.82.51])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 82CFC2EC09F
-	for <linux-doc@vger.kernel.org>; Wed, 24 Jun 2026 14:01:12 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782309673; cv=none; b=pfOMq3Sr0sLLOEWGZj45sGcKUZAZJHwra8jNkCaMt03dfNiP5Cts6fg+vhNp3nAGVymsF0+95z/8JD8B8FDLDN51G8ioSIAU9JP1ER+/8Ll5awbQtQYjgV4VDqLASVZlQxYGok8upiactgb5pjhd4iirmFK8eVBteiv/SKZ6M/Q=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782309673; c=relaxed/simple;
-	bh=sqz/nCl4XMoZ5TKKVVNz5tAI/LScRoJeM9WbyPmJx3E=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=aBWX/PWsN5XK3JqiTh5ZIbWeBRhjES7ciRiD82fHCWV7QbD9+nGT8XFFErGJ2qlWxcor8fc3o1L3HliZoZU7dTj82QLnfvh+Uq2aFl2q8mJ23h8ZBXMyK7ECS+t+tXGcKGTh3B6V0Zz3eAP9+WLpSkNHYItEuVgf6yJDMSPSd2s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rowland.harvard.edu; spf=fail smtp.mailfrom=g.harvard.edu; dkim=pass (2048-bit key) header.d=rowland.harvard.edu header.i=@rowland.harvard.edu header.b=KstfDJkD; arc=none smtp.client-ip=209.85.222.170
-Received: by mail-qk1-f170.google.com with SMTP id af79cd13be357-920f33347f5so81993085a.3
-        for <linux-doc@vger.kernel.org>; Wed, 24 Jun 2026 07:01:12 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF6E53C13F5
+	for <linux-doc@vger.kernel.org>; Wed, 24 Jun 2026 14:18:47 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1782310731; cv=pass; b=kYLzpTtHRLwgyzUnKizG1H8FKlbkC+9QLeQehtFQEJtsFxsm+QdZaBD4gDkkQIXNWp3B43VIUpPykqO72zcSpQ0dL81YA9Obwegx4SMZRhKUzpP3vTejR3zUMGFuSM/SLCL/a+N75Jtv7HIyp5vYs1L/U2f0OigRuzNSOXN6VM4=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1782310731; c=relaxed/simple;
+	bh=S43KLHfWZf4rr+LSchiMooKQ2vnBu5Vtd0C00yl/idE=;
+	h=From:In-Reply-To:References:MIME-Version:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=TbTPXU1ryvwlb6LHhX+9IOU/grQw4pnJ5BS2eJ+eYuQclIdDMGJIxQrne67aGQYOCjXpuBxF201JizP8CCmeNrG9l4go4NQCoa4oryWp9AcWFIWW2FS7Jh853mvPIosNW70R1+KNiuqdxZFffekonxM/Mpz9v1NLeGw1tlNMzJE=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=df3sqHyt; arc=pass smtp.client-ip=74.125.82.51
+Received: by mail-dl1-f51.google.com with SMTP id a92af1059eb24-13986d61b4eso2706739c88.0
+        for <linux-doc@vger.kernel.org>; Wed, 24 Jun 2026 07:18:47 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782310727; cv=none;
+        d=google.com; s=arc-20240605;
+        b=eFj/jbyCs2+qyaIXfLdiz40siNBI3QhM6dqShLGmRxSKWO2CW7ps/o0KX2zznFVU1G
+         NNn88OShJ1IYMhMJ9dbFJDeK53zbY2f/H3MuDZfGajvbytMUmRE34dGUD+Gqenii7U+B
+         XdHPfS1HFCyjJa+5XH2Tg15DR60s7WewrMXYaIupjknwxEg2nJQX/5djccvSbGxlhknv
+         K52X7OGGANUlkACEA+KTAwGifg3avW9pnfCTtme40fZYUZLBnvAVDXZvU0TykMFFEb8J
+         S4ggdQRTuilxBsntzJuYVlanIsIe4cilClWf7tKuvTBEEkYs77pIVExXbD4QoMtmw2XM
+         VVAw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
+         :from:dkim-signature;
+        bh=ucZ6vleVNv7XMe9m+p1ud+LWxJsaO5xEtX2/mrf+WGU=;
+        fh=rskO4aX7LWfp8dA7HRxh/Et6fkeSn8gsTHmCqECLZZM=;
+        b=cLzrDhRkwVBu1Fk5e6XBl3/ow9vKiUZwHf8OxYsnAEDZrkRmLw0qZcwvNUsLisvyYE
+         dBON2bv2ys3y/sqJ3dZxoW+ynfhQvjGo3OCINiq/+feFjoW6OF4CWSSFM1YpO7umuM+f
+         iy9I2NMvFoubQ9iFyg+gXSvMyNq5fLLNed8oCCOs2w6exAciqAp5CUm5b93DdbJaCH7K
+         y15znyp/zLS6J6vNys3B88VKKi8xQ9wNspnIUxnSG2iSh5Ipz5XY1WLWAj+uE6uNbruN
+         HvSns6miMEKfe6dZ2yqdbRbF7co4LX0ZHdwMmgzmoVrED+LjUDUYYSBkvTdvz1YRkpZ0
+         hXlA==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=rowland.harvard.edu; s=google; t=1782309671; x=1782914471; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=wsEoW4DBoKT0fUYLZPdL7MZJTkz7+GAlNaoQ4msQnkg=;
-        b=KstfDJkDlEZuT1HYy2wLN0zzVO7os9Mav9CMPrsd7Kv98rDcLUS7Wg5ukVEMLr3LVG
-         wrMAP69DjNNNzDVB2ZNOfiTOc1hFWk6LOgZdLKLlC+joHQiuqFZ40e7hNzcPh9oWhGY/
-         2G/O2HjDTmBS9oRGG1S37xQaTYUM3wBJHlcPNdyjlvsE1IDgBr7ovk0ZlAyLMvD5K4F2
-         s+LsOd3mFqtYmxhVb2PFHtvW7RF7jgiJBAVwWIQuzP65aYXobwjDznATwWFVkYABsJXZ
-         LVH9wW2TsSZf+p2SWTS7/3e2nLXqldUfpW6QUJzVbbrD9x+kGVzbxfNNIV+4CBNNqAON
-         puzw==
+        d=google.com; s=20251104; t=1782310727; x=1782915527; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=ucZ6vleVNv7XMe9m+p1ud+LWxJsaO5xEtX2/mrf+WGU=;
+        b=df3sqHytMdVQfm8AoVQf0XDsZFlP86k7xtk4HCgprtM4Sn9s7OAXQylD/qcfp/Ep9r
+         0t9p/fnfAiUBS/iQBNEPTdSrMRAMDtcJP1OwM4knL5F42tn5UEehXedN8s4JXkHtRTZK
+         VOqr9xe3z7xacVEAVUp0J8cETm9/thUkrXIXkD9i85dk8hbcnwljADl4eLtMcNHJUdq7
+         Y1FOh+re6oPej1vzugspLX8LP1l+xmKh7xNSPDHoAHZvo10EYqTi2dcHjOsy0YYdRivn
+         fRKFRvQUauDv62EyXbk7hRSdU8O/51XpfJwHFWCzmVQRJkPuzoLRk3OrekIrJxhOujO3
+         IjeQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782309671; x=1782914471;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=wsEoW4DBoKT0fUYLZPdL7MZJTkz7+GAlNaoQ4msQnkg=;
-        b=dL65NHWUfgyVsLdXpNKVkGMniwkGyzre65SG9gLFF4QTM5qqDmJKAvXE6YRUnP93BI
-         CdH95NGikNhwZliAUGYPaeV5khq0ks+3BlP0MUWRzizmq9JowGEjd/UVeX9FZBMye2m8
-         NhHYeskxkUqbDrRPhaVDMqcRqRr+ijZ1swKrwsGV6R3ye9HwC0OYEkJJAR63l5vpfhos
-         qBWKZSss0QemMq2EzEhNdzICHELJDRy/ubvJ8TLS+qL0lh0Nj6TZlg9zH+Dsv4/mMhnY
-         blk93yDjP3UmV7+QGdl8OgRsIBwwLIVk7qhoRxEMgNbFxrqEUvgraSD4E/SIKjOd+kyS
-         BxFg==
-X-Forwarded-Encrypted: i=1; AFNElJ+8cjeVryMJY32ca+nOr1BXnZSEmPzEI7z9yLC/8ILvgoDxfgzwpIioLf8ioxLW1Z4BeJ1SEF/eN3k=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxFTHEkuFOJCJ3TvmBEqNv7L0egEB6uSuuZXIsxyiNYyvqaglAU
-	m9ctQvCLRtUSDg5tIDeyw9VjaFDuqBthBCfGFrnOLGAvJHKKhNZLJsFf9rvOadk4wA==
-X-Gm-Gg: AfdE7cmMCw3q7+29Dc0ozNv9tAbKzmxHNke14Fs3UEM5b1RFkM7xjXDQ1uHuXX1uRWv
-	zjW1O3yK8EfRA7tpujTUwAZHhtsoWsUaNnTWuDV3lwR13g6rY/CxDa1j83C2/Bla0BkKBek0bCg
-	gkHaJ8dRdCKOsaY3w3TvZUGWS+TqjAq2mkReyqPtwUiSZQY+PZOUaZYrNYRRu9SE4A0QplvNZO1
-	Bpqb9wE3FXiZE6XL+VKzaMD5pywORJ8dk8TQICDLxuqtTwqznBfysHZT5JJcwd9TSSBuuSuPPXr
-	pNLgHuVklAkT2B7Ddgc28pMO++mWFKir1xpm01/VJTHa43TpqpHv8NIgmLlKXt265cShzNP6Ibv
-	SznTUM90nE1/Jxq0CJuqwxVG3xIb11bsl/Neht/CcBcLKSBx6wbEbE8eGLJO1iewI5OVbObkWfz
-	MMYuonfRWuaS3me4+YaWOpxfYpTEKYg64Z
-X-Received: by 2002:a05:620a:1a09:b0:915:cb5c:7f70 with SMTP id af79cd13be357-927800a2787mr561454085a.29.1782309641938;
-        Wed, 24 Jun 2026 07:00:41 -0700 (PDT)
-Received: from rowland.harvard.edu ([2601:19b:d01:d210:d62f:1911:f952:16ba])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-92600c7bf55sm552191785a.46.2026.06.24.07.00.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 Jun 2026 07:00:41 -0700 (PDT)
-Date: Wed, 24 Jun 2026 10:00:38 -0400
-From: Alan Stern <stern@rowland.harvard.edu>
-To: Nikhil Solanke <nikhilsolanke5@gmail.com>
-Cc: linux-usb@vger.kernel.org, gregkh@linuxfoundation.org,
-	linux-kernel@vger.kernel.org, michal.pecio@gmail.com,
-	stable@vger.kernel.org, corbet@lwn.net, skhan@linuxfoundation.org,
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v2] usbcore: Add quirk for 255-bytes initial config read
-Message-ID: <eb0dfd45-91c5-49ba-a297-b183dbc52c8c@rowland.harvard.edu>
-References: <20260623161035.5792-1-nikhilsolanke5@gmail.com>
- <567e8866-4308-4e5f-819c-fe778dbf74f8@rowland.harvard.edu>
- <CAFgddhJk0EYG71fnKdio=RHC-cH+JmL-EZ7-oVD-LdHoa2TBSA@mail.gmail.com>
- <5159fd69-dddf-4073-a8e7-95fa77de0b7f@rowland.harvard.edu>
- <CAFgddhJ2HeJ=oTBX_axMJcgJq7GXH9abe+LH+x9NGekGO4BMyw@mail.gmail.com>
+        d=1e100.net; s=20251104; t=1782310727; x=1782915527;
+        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ucZ6vleVNv7XMe9m+p1ud+LWxJsaO5xEtX2/mrf+WGU=;
+        b=J354j1j17VNvXIXea7VQmtVZIf6hM3inaspeKkQNQ75TQbA8c+dZbI0WuYJeJM3Hlb
+         Ip5sld3/IhU/tMBopyAniCntYUIRFe83pmU+VXUIh5OHu6xoyBhX2Hvu0xhVA4r3+1MB
+         gdojTA0ftLtkOdFGeEBQl6j+6mfTOWZyQ0NUtwLd7wFarlwhEhVZXEogleDDsZvcnlq6
+         CWSIsJDQf6ZSxlIp1YDpzpp+tDrCAld/sDt6cO4ixLHoeo3Zq8dbtDDrNk2mO/s/SJyP
+         ZGyCnyW9MnJij8mmfzO7w7vWT+fCzMKHcSYTkb6aiwDEtHlWlaNMp4HXqkUUnaK9B6gG
+         zjTw==
+X-Forwarded-Encrypted: i=1; AFNElJ8k3RNUPC6UKXC1BpUBNpDR86pnWDdY2pEVSdxvw5VCULsm3TUIlmHkMIkJrFyfwi0Ng0PbQCRsiGA=@vger.kernel.org
+X-Gm-Message-State: AOJu0YytaInXTTU08d6SAoa0DiIllNZquBioroYF6Slz2lLxDLWI4TFj
+	dpqQZI0do1tGwrm3MwAqAZQXDKJMWVczwUJjdJQmUcjMKIFuXC8XJFnZsgqIouLYjcXevRLpknO
+	MEQ1gyg9ZnWEzsto6OgGcbIEVMeCXnQ2JtltguL3z
+X-Gm-Gg: AfdE7cn+4z3PQYt9HAwf9TR0eFu/h/Jt8O2+HVv/7lBEog+EwmVjyOowaVOuutjfUkV
+	LWOBXQnZEQGukBECpR4ztPhXtE9hcCEOiGcV6/T8rvxClTAwBTcmwf20hfQeQ6kxrxc6Qm13+TV
+	a2ulv4l9MYOtKpcyK2/ZPGV0cMyRybadVgF4n2fTFfce1CJ9mVZscBeWjpMiHsnA49he9sqevZc
+	oBGG1z9cAUgTl9rFwIyRH8eUPtsETMJ0/2zBAehUntCLS6p+NPsoM1JEYWV+kjEb7SiA5x0cEm4
+	9uk1GTnQLcMskwMhVIAueAzgrgRE
+X-Received: by 2002:a05:7022:43a0:b0:12d:de3e:86a8 with SMTP id
+ a92af1059eb24-139ad72bfe4mr15983384c88.38.1782310725876; Wed, 24 Jun 2026
+ 07:18:45 -0700 (PDT)
+Received: from 176938342045 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 24 Jun 2026 07:18:45 -0700
+Received: from 176938342045 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 24 Jun 2026 07:18:44 -0700
+From: Ackerley Tng <ackerleytng@google.com>
+In-Reply-To: <3ec15992-2a29-434b-8c99-8b86bfcf007e@arm.com>
+References: <20260618-gmem-inplace-conversion-v8-0-9d2959357853@google.com>
+ <20260618-gmem-inplace-conversion-v8-8-9d2959357853@google.com>
+ <CA+EHjTw6x-mxDnJjnhE-6SV73tMrb0paKDTtOC2j6zJ1fXZDLA@mail.gmail.com>
+ <CA+EHjTxu32nQ+vPV7Zmcw76_-V4g2_g=P_UzRnnO2dP1PFO2ww@mail.gmail.com> <3ec15992-2a29-434b-8c99-8b86bfcf007e@arm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAFgddhJ2HeJ=oTBX_axMJcgJq7GXH9abe+LH+x9NGekGO4BMyw@mail.gmail.com>
+Date: Wed, 24 Jun 2026 07:18:44 -0700
+X-Gm-Features: AVVi8CeUzt8nV1nzvS6dw32sjloWQ_ALAuG02W0rgNOvY8pSNnpach_kfV-0O1g
+Message-ID: <CAEvNRgEKB0FhD=qhyX=0m2o+d02Jz6n6njdbFmjyiUpK3Up-4Q@mail.gmail.com>
+Subject: Re: [PATCH v8 08/46] KVM: Provide generic interface for checking
+ memory private/shared status
+To: Suzuki K Poulose <suzuki.poulose@arm.com>, Fuad Tabba <tabba@google.com>
+Cc: aik@amd.com, andrew.jones@linux.dev, binbin.wu@linux.intel.com, 
+	brauner@kernel.org, chao.p.peng@linux.intel.com, david@kernel.org, 
+	jmattson@google.com, jthoughton@google.com, michael.roth@amd.com, 
+	oupton@kernel.org, pankaj.gupta@amd.com, qperret@google.com, 
+	rick.p.edgecombe@intel.com, rientjes@google.com, shivankg@amd.com, 
+	steven.price@arm.com, willy@infradead.org, wyihan@google.com, 
+	yan.y.zhao@intel.com, forkloop@google.com, pratyush@kernel.org, 
+	aneesh.kumar@kernel.org, liam@infradead.org, 
+	Paolo Bonzini <pbonzini@redhat.com>, Sean Christopherson <seanjc@google.com>, 
+	Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
+	"H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>, 
+	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+	Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>, 
+	Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>, 
+	Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>, 
+	Nhat Pham <nphamcs@gmail.com>, Barry Song <baohua@kernel.org>, 
+	Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>, 
+	Wei Xu <weixugc@google.com>, Youngjun Park <youngjun.park@lge.com>, 
+	Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
+	Kiryl Shutsemau <kas@kernel.org>, Baoquan He <baoquan.he@linux.dev>, Jason Gunthorpe <jgg@ziepe.ca>, 
+	Vlastimil Babka <vbabka@kernel.org>, kvm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kselftest@vger.kernel.org, linux-mm@kvack.org, 
+	linux-coco@lists.linux.dev
+Content-Type: text/plain; charset="UTF-8"
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[rowland.harvard.edu,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
-	R_DKIM_ALLOW(-0.20)[rowland.harvard.edu:s=google];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-93381-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[amd.com,linux.dev,linux.intel.com,kernel.org,google.com,intel.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca,vger.kernel.org,kvack.org,lists.linux.dev];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,linuxfoundation.org,gmail.com,lwn.net];
+	TAGGED_FROM(0.00)[bounces-93382-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
+	FORGED_SENDER(0.00)[ackerleytng@google.com,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:nikhilsolanke5@gmail.com,m:linux-usb@vger.kernel.org,m:gregkh@linuxfoundation.org,m:linux-kernel@vger.kernel.org,m:michal.pecio@gmail.com,m:stable@vger.kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:michalpecio@gmail.com,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:suzuki.poulose@arm.com,m:tabba@google.com,m:aik@amd.com,m:andrew.jones@linux.dev,m:binbin.wu@linux.intel.com,m:brauner@kernel.org,m:chao.p.peng@linux.intel.com,m:david@kernel.org,m:jmattson@google.com,m:jthoughton@google.com,m:michael.roth@amd.com,m:oupton@kernel.org,m:pankaj.gupta@amd.com,m:qperret@google.com,m:rick.p.edgecombe@intel.com,m:rientjes@google.com,m:shivankg@amd.com,m:steven.price@arm.com,m:willy@infradead.org,m:wyihan@google.com,m:yan.y.zhao@intel.com,m:forkloop@google.com,m:pratyush@kernel.org,m:aneesh.kumar@kernel.org,m:liam@infradead.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:shuah@kernel.org,m:vannapurve@google.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencent.com,m:shikemeng@huaweic
+ loud.com,m:nphamcs@gmail.com,m:baohua@kernel.org,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:kas@kernel.org,m:baoquan.he@linux.dev,m:jgg@ziepe.ca,m:vbabka@kernel.org,m:kvm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,m:linux-coco@lists.linux.dev,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[stern@rowland.harvard.edu,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[rowland.harvard.edu:+];
-	RSPAMD_EMAILBL_FAIL(0.00)[stern@rowland.harvard.edu:query timed out,linux-doc@vger.kernel.org:query timed out];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[stern@rowland.harvard.edu,linux-doc@vger.kernel.org];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	TAGGED_RCPT(0.00)[linux-doc];
+	DKIM_TRACE(0.00)[google.com:+];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	MISSING_XM_UA(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,rowland.harvard.edu:dkim,rowland.harvard.edu:mid,rowland.harvard.edu:from_mime]
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[ackerleytng@google.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[63];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	TO_DN_SOME(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,vger.kernel.org:from_smtp,arm.com:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 8F2D76BEE7C
+X-Rspamd-Queue-Id: 38B6C6BF07A
 
-On Wed, Jun 24, 2026 at 01:36:28PM +0530, Nikhil Solanke wrote:
-> > Actually, the best approach here would be to put this single change into
-> > a separate patch that comes before the current one.  That removes issues
-> > of making more than one functional change in one patch and improves
-> > bisectability.
-> 
-> Before? Shouldn't it be after my changes? That would make it easier to
-> justify the changes. And just to be sure, you did mention it does
-> align with what the intention of USB_QUIRK_DELAY_INIT, but it does
-> change its behavior when the quirk is not set. Atleast from what I
-> understood from the documentation and an LLM's summary, the device
-> needs time to prepare the full configuration set. So, does delaying
-> before the first header read really work? I can't test this since I
-> don't have a device that requires the quirk to be set.
-> 
-> I personally think adding a condition to check if the quirk is set and
-> then delaying before sending the first request would be appropriate.
-> What are your opinions on this.
+Suzuki K Poulose <suzuki.poulose@arm.com> writes:
 
-Well, put it this way: If you change the existing behavior, that change 
-belongs in a separate patch.  If you want to redo this patch so that it 
-doesn't change anything when the quirk flag isn't set, that's fine.
+>
+> [...snip...]
+>
+>>>> @@ -2546,7 +2546,7 @@ bool kvm_arch_pre_set_memory_attributes(struct kvm *kvm,
+>>>>   bool kvm_arch_post_set_memory_attributes(struct kvm *kvm,
+>>>>                                           struct kvm_gfn_range *range);
+>>>>
+>>>> -static inline bool kvm_mem_is_private(struct kvm *kvm, gfn_t gfn)
+>>>> +static inline bool kvm_vm_mem_is_private(struct kvm *kvm, gfn_t gfn)
+>>
+>> Should have read the Sashiko review first, but where is this used?
+>> It's not used at all in this series...
+>
+> See below:
+>
+>>
+>> /fuad
+>>
+>>>>   {
+>>>>          return kvm_get_vm_memory_attributes(kvm, gfn) & KVM_MEMORY_ATTRIBUTE_PRIVATE;
+>>>>   }
+>>>> @@ -2557,6 +2557,16 @@ static inline bool kvm_mem_range_is_private(struct kvm *kvm, gfn_t start,
+>>>>                                                    KVM_MEMORY_ATTRIBUTE_PRIVATE,
+>>>>                                                    KVM_MEMORY_ATTRIBUTE_PRIVATE);
+>>>>   }
+>>>> +#endif  /* CONFIG_KVM_VM_MEMORY_ATTRIBUTES */
+>>>> +
+>>>> +#ifdef kvm_arch_has_private_mem
+>>>> +typedef bool (kvm_mem_is_private_t)(struct kvm *kvm, gfn_t gfn);
+>>>> +DECLARE_STATIC_CALL(__kvm_mem_is_private, kvm_mem_is_private_t);
+>>>> +
+>>>> +static inline bool kvm_mem_is_private(struct kvm *kvm, gfn_t gfn)
+>>>> +{
+>>>> +       return static_call(__kvm_mem_is_private)(kvm, gfn);
+>>>> +}
+>>>>   #else
+>>>>   static inline bool kvm_mem_is_private(struct kvm *kvm, gfn_t gfn)
+>>>>   {
+>>>> diff --git a/virt/kvm/kvm_main.c b/virt/kvm/kvm_main.c
+>>>> index 6669f1477013c..8b238e461b854 100644
+>>>> --- a/virt/kvm/kvm_main.c
+>>>> +++ b/virt/kvm/kvm_main.c
+>>>> @@ -2627,6 +2627,20 @@ static int kvm_vm_ioctl_set_mem_attributes(struct kvm *kvm,
+>>>>   }
+>>>>   #endif /* CONFIG_KVM_VM_MEMORY_ATTRIBUTES */
+>>>>
+>>>> +#ifdef kvm_arch_has_private_mem
+>>>> +DEFINE_STATIC_CALL_RET0(__kvm_mem_is_private, kvm_mem_is_private_t);
+>>>> +EXPORT_STATIC_CALL_GPL(__kvm_mem_is_private);
+>>>> +
+>>>> +static void kvm_init_memory_attributes(void)
+>>>> +{
+>>>> +#ifdef CONFIG_KVM_VM_MEMORY_ATTRIBUTES
+>>>> +       static_call_update(__kvm_mem_is_private, kvm_vm_mem_is_private);
+>>>> +#endif
+>>>> +}
+>
+>
+> Here ^^ as the static call update ?
+>
+>
+> Suzuki
 
-> Also is it fine if the string lines exceed 100 columns?
+Thanks Suzuki, it is used here. kvm_mem_is_private() was and still is
+the function used to check if some gfn is private or shared. Hence, in
+this patch, the usages of kvm_mem_is_private() were not
+updated. Instead, kvm_mem_is_private() is now set up as a static call,
+and the static call is hard-wired to kvm_vm_mem_is_private() in this
+patch.
 
-In lines containing long strings, it's okay for the string to extend 
-well beyond 80 columns.  But then you should break the line at some 
-point closely following the end of the string.  I'm sure you can find 
-examples of this if you look through some of the other source files.
+In the later wiring patch, all the places where attributes are looked up
+are updated all at once: if conversion enabled, take gmem route, else
+take VM route.
 
-> Also, is there a need to check for krealloc()'s return value? Since we
-> are only shrinking the buffer, there won't be any moves or completely
-> new blocks (at least as per my understanding). Do I still need to
-> check its return value for completeness' sake?
+kvm_mem_is_private() is special in that the if-else is done at KVM load
+time rather than runtime, and I believe that's for performance reasons
+since this is checked quite often from the KVM fault handling code.
 
-It's a little tricky to track this down, but if you look in 
-include/linux/slab.h you'll see that krealloc() is defined as 
-krealloc_node(), which is defined as krealloc_node_align(), which is 
-defined as krealloc_node_align_noprof(), which is declared with 
-__must_check.  So yes, you need to check the return value from 
-krealloc().
+Buut I think perhaps Fuad was referring to kvm_mem_range_is_private(),
+which is indeed not used anywhere. Binbin also asked about this, I think
+we should drop kvm_mem_range_is_private(). My reply to Binbin is at [1].
 
-Of course, you could simply try not checking the return value and seeing 
-if that provokes a warning or error from the compiler.
-
-Alan Stern
+[1] https://lore.kernel.org/all/CAEvNRgGbBcrX5Fw3vNTsTOBNC=Ypi=9-S07674yPxLU9i4akjA@mail.gmail.com/
 
