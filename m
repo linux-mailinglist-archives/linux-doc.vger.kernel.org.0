@@ -1,54 +1,55 @@
-Return-Path: <linux-doc+bounces-93467-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93469-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id vZaLIJGHPGp4pAgAu9opvQ
-	(envelope-from <linux-doc+bounces-93467-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 03:42:41 +0200
+	id JSNDAFiHPGpqpAgAu9opvQ
+	(envelope-from <linux-doc+bounces-93469-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 03:41:44 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0CB426C2318
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 03:42:41 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D2226C22ED
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 03:41:43 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b="kHHdih/C";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93467-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-93467-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=kEGtJ5vw;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93469-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93469-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 5D39B30B8371
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 01:40:53 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id EAEBD3049661
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 01:40:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 27D44379966;
-	Thu, 25 Jun 2026 01:40:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A149637269A;
+	Thu, 25 Jun 2026 01:40:59 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97E743750CC;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F2214378822;
 	Thu, 25 Jun 2026 01:40:48 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782351650; cv=none; b=FSh2X3kQL4MJD57Z4xzBf8OHhYLbr+lnvrvqBMaaTQPBCK3Fz0NcwBFP0OYeUteUITnT+1MHeaK/GdZLgzV+WEDfkaf1cwtdb5K5FSed5GXchSXltkCerCO/ecv1SBTAPE9ZHVd+JSiIS6zXa/6CaOJEQuuUZjgGcyc4VsgJx8Y=
+	t=1782351659; cv=none; b=HLnTgJznEq7nZT2X8VdgfsMLBhDwk4UXxXpv4FdpIDkqcEKMe14/zAh4OGL4oulnaCfbYHXheOEBL4Sq8rtSX1J2Xixu0/xOWKMyn312OVc9/lljLWh7svXPmx5qojFHyjkFzvmiWS6a/l7geHOXECJ1oduvIOHalXW0rKl82D0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782351650; c=relaxed/simple;
-	bh=+ionyFv9lurwwDiWw+ePTClCXdl69DtYgAkjTpcZ7Q0=;
+	s=arc-20240116; t=1782351659; c=relaxed/simple;
+	bh=xAQHu7pJE18WEQ3dc4i0maZ3ITHgzD0oaXVgeAHUtfs=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=NLRFh6jHy8cRyzmmO1RmEwAlcmHmX3UAoxcLw/GV2VMFTTHz66kztCoK/FQsNwjIW8pzkrq+l+DYdbPxKw2Wg9h81ptPgwXCDuYE5yMuisSyQOZLkyz3CGfn3CAYGrm++krKZIBX5fShF27BS8LQxGPH4nfbpJ3tDk35Q05B3K0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kHHdih/C; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D12B41F00ADB;
-	Thu, 25 Jun 2026 01:40:47 +0000 (UTC)
+	 In-Reply-To:To:Cc; b=OUmNqyRiWxuY4mD/4C2FNSTi4/FPRxcFVMaWF9Av8cB7WoyXXSdQJMw4J9cVpfxAfd+s/g9j+L/zwhogl0Nnq+HTnX/qcVZDHJ9vG2zE0nkH1YCUa+UzTpB5WV66AlwtEzOxuSLhtXMSYeuc3wTAszDeUfpL8hu0jQNxe1KT9uo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kEGtJ5vw; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 677A91F00ADF;
+	Thu, 25 Jun 2026 01:40:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
 	s=k20260515; t=1782351648;
-	bh=we1gTaO0/mtl656AVrC6p8j+YxwIRlQ30Hze8NO4hO4=;
+	bh=jY1wCdA0Fk09EfrpeC8Vj8YPRZgGaxvl5ff1BiLJNOE=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=kHHdih/CU4BYvohe7bZsMdnnuYPlL2wRO5CSPl9nFuBKnge5Gaah7uKJAIvb4pVsY
-	 QpOPc3VJB6tKHPRe5tL4xM8bRykQ1D1zMX+1JyOz2DA7pMoVq76cuP9l1Fjz9Tezer
-	 4lBxAcyk6V48uv+OePJKzkwKbuvCx/qQ783B8iWMhPFBHoZ5xjnDe/jD83nPf1Pj7/
-	 0Kbl8ME19UFLp/RJ/XAUW8nAvayGSg3ik0gMZjPV4XoHCcSV0kojYJqqSycV9bTXgG
-	 5cp5oRgaJqzlNL16vJef0f0qIU2R7uE7PYFZfclMJ/8dXryTN96t+bobD8CMS8XJK/
-	 3AVV8UcmtpdYQ==
+	b=kEGtJ5vw2qlAVAg0/xQFkFossP181BbZte4FFcKpPXSYbt+Y4klMeeKbeoA8sjfOy
+	 j0yTyntq7OjIEj/WxabUN6xjVR9U7Yu5VGbdGvC3E+Ak/I8U6XheEoavREQZd8acPU
+	 jo3TXpW3MUrTUX8ebm97GFfC4KfDLJBnV9V90P3GNyX7hHnVODbepQb5GAaqfX1CCB
+	 zkU56as+RxjsbSLN+gQPUppsh0toQq7uR9yTSotQyODqNGAVUxL2HUg/GnBFU0T7YW
+	 hQSNv7hOE8l86uSfDpkeCFykgpTSwszompCv9ODSCmhu086hnQW8PNCBKQYrGOiHm0
+	 lKrya17VpdTKQ==
 From: Drew Fustini <fustini@kernel.org>
-Date: Wed, 24 Jun 2026 18:38:34 -0700
-Subject: [PATCH v2 6/8] riscv: Enable resctrl filesystem for Ssqosid
+Date: Wed, 24 Jun 2026 18:38:35 -0700
+Subject: [PATCH v2 7/8] dt-bindings: riscv: Add generic CBQRI controller
+ binding
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -57,7 +58,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260624-dfustini-atl-sc-cbqri-dt-v2-6-2f8049fd902b@kernel.org>
+Message-Id: <20260624-dfustini-atl-sc-cbqri-dt-v2-7-2f8049fd902b@kernel.org>
 References: <20260624-dfustini-atl-sc-cbqri-dt-v2-0-2f8049fd902b@kernel.org>
 In-Reply-To: <20260624-dfustini-atl-sc-cbqri-dt-v2-0-2f8049fd902b@kernel.org>
 To: Adrien Ricciardi <aricciardi@baylibre.com>, 
@@ -87,12 +88,12 @@ Cc: linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org,
  x86@kernel.org, devicetree@vger.kernel.org, linux-rt-devel@lists.linux.dev, 
  linux-doc@vger.kernel.org
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=991; i=fustini@kernel.org;
- h=from:subject:message-id; bh=+ionyFv9lurwwDiWw+ePTClCXdl69DtYgAkjTpcZ7Q0=;
- b=owGbwMvMwCF2+43O4ZsaG3kYT6slMWTZtEtLTP4s1/hc+fWGHXnXpZIdV244ylvzzPGWzZVr3
- T7scv+edJSyMIhxMMiKKbJs+pB3YYlX6NcF819sg5nDygQyhIGLUwAmso+HkeHbnV15VqETGC9e
- WP6q5JMUZ6Kf9G6BqT5M7EKcAQczDNYyMtz48p998wKmsDZV67Cu7CXT9zcrMSxyk7q2wdN+i+b
- 8Ph4A
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4740; i=fustini@kernel.org;
+ h=from:subject:message-id; bh=xAQHu7pJE18WEQ3dc4i0maZ3ITHgzD0oaXVgeAHUtfs=;
+ b=owGbwMvMwCF2+43O4ZsaG3kYT6slMWTZtEvHPuO0MF8WdHDaBJENvazG5Vednwj5nbj2yPlr3
+ BTOeRuTOkpZGMQ4GGTFFFk2fci7sMQr9OuC+S+2wcxhZQIZwsDFKQATaQtg+O92pGhyjdzNCQXa
+ HZ2T+S+liu05IHgj0v7I2k9MGZ//THIAqlDXv/9G3EzTMMjA/uj7JP//fDMfnpF6w6IVMH3+NI8
+ 1vAA=
 X-Developer-Key: i=fustini@kernel.org; a=openpgp;
  fpr=1B6F948213EA489734F3997035D5CD577C1E6010
 X-Rspamd-Action: no action
@@ -101,15 +102,15 @@ X-Spamd-Result: default: False [-3.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS(0.00)[m:aricciardi@baylibre.com,m:alex@ghiti.fr,m:atishp@rivosinc.com,m:atish.patra@linux.dev,m:babu.moger@amd.com,m:ben.horgan@arm.com,m:bp@alien8.de,m:cp0613@linux.alibaba.com,m:conor.dooley@microchip.com,m:conor+dt@kernel.org,m:dave.hansen@linux.intel.com,m:Dave.Martin@arm.com,m:fenghua.yu@intel.com,m:gong.shuai@sanechips.com.cn,m:gsh517@gmail.com,m:guo.wenjia23@zte.com.cn,m:james.morse@arm.com,m:mindal@semihalf.com,m:krzk+dt@kernel.org,m:liu.qingtao2@zte.com.cn,m:zhiwei_liu@linux.alibaba.com,m:palmer@dabbelt.com,m:pjw@kernel.org,m:peternewman@google.com,m:rkrcmar@ventanamicro.com,m:reinette.chatre@intel.com,m:robh@kernel.org,m:samuel.holland@sifive.com,m:bigeasy@linutronix.de,m:tony.luck@intel.com,m:vasu@rivosinc.com,m:ved@rivosinc.com,m:liwei1518@gmail.com,m:cuiyunhui@bytedance.com,m:fustini@kernel.org,m:linux-kernel@vger.kernel.org,m:linux-riscv@lists.infradead.org,m:x86@kernel.org,m:devicetree@vger.kernel.org,m:linux-rt-devel@lists.linux.dev,m:linux-doc@vger
  .kernel.org,m:conor@kernel.org,m:krzk@kernel.org,s:lists@lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER(0.00)[fustini@kernel.org,linux-doc@vger.kernel.org];
 	RCPT_COUNT_TWELVE(0.00)[41];
@@ -117,7 +118,7 @@ X-Spamd-Result: default: False [-3.66 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-93467-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-93469-lists,linux-doc=lfdr.de];
 	DKIM_TRACE(0.00)[kernel.org:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
@@ -128,38 +129,142 @@ X-Spamd-Result: default: False [-3.66 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:email,vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,devicetree.org:url,baylibre.com:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 0CB426C2318
+X-Rspamd-Queue-Id: 6D2226C22ED
 
-RISCV_ISA_SSQOSID selects RISCV_CBQRI unconditionally.
+Document the generic compatibles for capacity and bandwidth controllers
+that implement the RISC-V CBQRI specification. The binding also
+describes the common riscv,cbqri-rcid and riscv,cbqri-mcid properties,
+and the optional riscv,cbqri-cache phandle that links a capacity
+controller to the cache whose capacity it allocates.
 
-The resctrl filesystem integration is gated separately by
-RISCV_CBQRI_RESCTRL_FS, a silent option that defaults to y when both
-RISCV_CBQRI and RESCTRL_FS are enabled. Enabling the resctrl filesystem
-itself stays a user choice via the standard fs/Kconfig MISC_FILESYSTEMS
-menu.
-
+Assisted-by: Claude:claude-opus-4-8
+Co-developed-by: Adrien Ricciardi <aricciardi@baylibre.com>
+Signed-off-by: Adrien Ricciardi <aricciardi@baylibre.com>
 Signed-off-by: Drew Fustini <fustini@kernel.org>
 ---
- arch/riscv/Kconfig | 2 ++
- 1 file changed, 2 insertions(+)
+ .../devicetree/bindings/riscv/riscv,cbqri.yaml     | 97 ++++++++++++++++++++++
+ MAINTAINERS                                        |  1 +
+ 2 files changed, 98 insertions(+)
 
-diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-index ee586925f97227668c228b5481c05a2f914d928c..9c28bcbc29dc94fe9dd19b8a5c91816a2c75123e 100644
---- a/arch/riscv/Kconfig
-+++ b/arch/riscv/Kconfig
-@@ -594,6 +594,8 @@ config RISCV_ISA_SSQOSID
- 	bool "Ssqosid extension support for supervisor mode Quality of Service ID"
- 	depends on 64BIT
- 	default n
-+	select ARCH_HAS_CPU_RESCTRL
-+	select RISCV_CBQRI
- 	help
- 	  Adds support for the Ssqosid ISA extension (Supervisor-mode
- 	  Quality of Service ID).
+diff --git a/Documentation/devicetree/bindings/riscv/riscv,cbqri.yaml b/Documentation/devicetree/bindings/riscv/riscv,cbqri.yaml
+new file mode 100644
+index 0000000000000000000000000000000000000000..5d6be645381780e187b39e60c3bb487fdf2cfb69
+--- /dev/null
++++ b/Documentation/devicetree/bindings/riscv/riscv,cbqri.yaml
+@@ -0,0 +1,97 @@
++# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/riscv/riscv,cbqri.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: RISC-V Capacity and Bandwidth QoS Register Interface (CBQRI) controller
++
++description: |
++  The RISC-V CBQRI specification defines capacity-controller and
++  bandwidth-controller register blocks that allocate cache capacity and memory
++  bandwidth to resource-control IDs (RCIDs) and monitor usage per
++  monitoring-counter ID (MCID):
++  https://github.com/riscv-non-isa/riscv-cbqri/blob/main/riscv-cbqri.pdf
++
++  Allocation and monitoring share one register block, and a controller may
++  implement either or both. A driver discovers which at runtime from the
++  capabilities register, so the compatible names only the controller type. It
++  does not distinguish allocation-only, monitoring-only or combined
++  controllers, and no property declares monitoring support.
++
++maintainers:
++  - Drew Fustini <fustini@kernel.org>
++
++properties:
++  compatible:
++    oneOf:
++      - items:
++          - description: Tenstorrent Ascalon Shared Cache
++            const: tenstorrent,ascalon-sc-cbqri
++          - const: riscv,cbqri-capacity-controller
++      - enum:
++          - riscv,cbqri-capacity-controller
++          - riscv,cbqri-bandwidth-controller
++
++  reg:
++    maxItems: 1
++    description:
++      The CBQRI controller register block.
++
++  riscv,cbqri-rcid:
++    $ref: /schemas/types.yaml#/definitions/uint32
++    description:
++      The maximum number of RCIDs the controller supports. RCIDs are the
++      resource-control IDs that allocation operations target.
++
++  riscv,cbqri-mcid:
++    $ref: /schemas/types.yaml#/definitions/uint32
++    description:
++      The maximum number of MCIDs the controller supports. MCIDs are the
++      monitoring-counter IDs that usage-monitoring operations target. Present
++      on controllers that implement monitoring.
++
++  riscv,cbqri-cache:
++    $ref: /schemas/types.yaml#/definitions/phandle
++    description:
++      Phandle to the cache node whose capacity this controller allocates.
++      Applies to capacity controllers that back a CPU cache. The cache level
++      and the harts sharing it are taken from that node's cache topology.
++
++required:
++  - compatible
++  - reg
++
++allOf:
++  - if:
++      properties:
++        compatible:
++          contains:
++            const: tenstorrent,ascalon-sc-cbqri
++    then:
++      required:
++        - riscv,cbqri-rcid
++        - riscv,cbqri-cache
++
++additionalProperties: false
++
++examples:
++  - |
++    l2_cache: l2-cache {
++        compatible = "cache";
++        cache-level = <2>;
++        cache-unified;
++        cache-size = <0xc00000>;
++        cache-sets = <512>;
++        cache-block-size = <64>;
++    };
++
++    cache-controller@a21a00c0 {
++        compatible = "tenstorrent,ascalon-sc-cbqri",
++                     "riscv,cbqri-capacity-controller";
++        reg = <0xa21a00c0 0xf40>;
++        riscv,cbqri-rcid = <16>;
++        riscv,cbqri-cache = <&l2_cache>;
++    };
++
++...
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 9e1092165046c773771b055869030bc1bdb64b16..64a95a4d795a57033d3f36200d98cfb4a013ab94 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -23298,6 +23298,7 @@ M:	Drew Fustini <fustini@kernel.org>
+ R:	yunhui cui <cuiyunhui@bytedance.com>
+ L:	linux-riscv@lists.infradead.org
+ S:	Supported
++F:	Documentation/devicetree/bindings/riscv/riscv,cbqri.yaml
+ F:	arch/riscv/include/asm/qos.h
+ F:	arch/riscv/include/asm/resctrl.h
+ F:	arch/riscv/kernel/qos.c
 
 -- 
 2.34.1
