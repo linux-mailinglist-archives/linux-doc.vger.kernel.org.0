@@ -1,140 +1,154 @@
-Return-Path: <linux-doc+bounces-93476-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93477-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id WU2sFmyWPGqRpggAu9opvQ
-	(envelope-from <linux-doc+bounces-93476-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 04:46:04 +0200
+	id ZwRDB7m3PGrCqwgAu9opvQ
+	(envelope-from <linux-doc+bounces-93477-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 07:08:09 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 146B76C271D
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 04:46:03 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 53E136C2B76
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 07:08:08 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=WkY3uKID;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93476-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-93476-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=h97HS0bX;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93477-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93477-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 7AB75300E913
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 02:45:51 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 0900D302B09D
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 05:08:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 318E82F3C3E;
-	Thu, 25 Jun 2026 02:45:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 284C72F28EA;
+	Thu, 25 Jun 2026 05:08:06 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F2DC27F19F;
-	Thu, 25 Jun 2026 02:45:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A2D52309AA;
+	Thu, 25 Jun 2026 05:08:05 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782355547; cv=none; b=g7trQT0QiLNE51tYBXPWeeryulSPz+mx6fK4JPh/zBxhbG2BhCYGmyN9Nez6JM6lTghL3RoM05wSw3XM1CJUc51nmB0M67mVevl3XeK48QBqg5QjBooGhGvCSi88aBPnt9nWEtqo3znTpq1CUIOzxjnP8WhmKW57lRFik4c5p2w=
+	t=1782364086; cv=none; b=jdcVLTRPApO5cwEq6shsubUN2WtQIXaM9644Rsz03Mksfois/DGcPCRiqbE2RZVSC4hxKw+pbthB3+v9isPpAa2IX02GfZfr7fT1QVMRmEMbVVF9wVFhr+/FEVCdn6IYgx0vJHacSMF1NRK2I2/wsXsll5uDthz9YdTC0JAP1a4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782355547; c=relaxed/simple;
-	bh=o9lzz74dzi2G98CsNy49nibBS0JN0Aqbuzw9PbcAdQc=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=S7Ynwxd4eaLd6LMPxghDj7S4td0KyJm6cy4gLmU32bq7AR4qyC0j5KyzUSJTJO8Xuc8q2/c5n7+T9/c4Eioy0pjlFgxLqVVPA0d1djbNNHoLl/qbT4eI7gimMCX57Wa2DHW4gC7XjwkZ6LAUZWBBWTVNZntWyY/N8oen3aow+04=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WkY3uKID; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 230441F00AC4;
-	Thu, 25 Jun 2026 02:45:45 +0000 (UTC)
+	s=arc-20240116; t=1782364086; c=relaxed/simple;
+	bh=IC2F2cMimek156nolJU8+lZbaKXwjmHP3WDWu2+nvbQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=elLVsvC/0/ni2ZvMov/Da2bDwRoomgJquOengMh+1H6NFYHkZiTw9xGbsal3wzd7MtQX+KLOgnYd1G0B4AXSLFZrI8h2ZoPM5fv4jpRW76dB6yvOiM7hbg09BWc+wklfJHcQTa77epEUYEMbW62HZcUMm3ZuK9+lc1okh8Nx0l4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=h97HS0bX; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 26CF21F000E9;
+	Thu, 25 Jun 2026 05:08:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782355545;
-	bh=+I3E4Gc+UcSMgz+gbL7FQhQ6yoN65t58RV4TjtaKbLc=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=WkY3uKIDrW1rloi6INImOYI/O0oBxuPoDh0qWO/SddOs1Nwa8H6WwBBzz7yeUv53k
-	 JE8BvInUy5w3zB30xrBG4bd7FFr2A85cefeljVMccUQHGtpluFz4XRtln7NPeQHGXq
-	 R4mkKITaphUsUKd5LA6CYCgOX1jsnRLG84Vggwcw/kav7pYXkpsD1Qr7jVXeEjM9f6
-	 Eu/o+DTcg2hJO30Inns4XCe3J8GVsQCWkiuZxQ0uNgaqdYMHsuF7gpRh0YhmVMvu+0
-	 oEjRTuEv1ao+cfkwtxEVFtgwNea1NgXAbB3DFs54AN7Df4Nc8csr/Tiz0Zec4wyJ45
-	 j+e5cHk+WhsnA==
-Date: Wed, 24 Jun 2026 19:45:44 -0700
-From: Jakub Kicinski <kuba@kernel.org>
-To: "Wu. JackBB (GSM)" <JackBB_Wu@compal.com>
-Cc: Loic Poulain <loic.poulain@oss.qualcomm.com>, Sergey Ryazanov
- <ryazanov.s.a@gmail.com>, Johannes Berg <johannes@sipsolutions.net>,
- "Andrew Lunn" <andrew+netdev@lunn.ch>, "David S. Miller"
- <davem@davemloft.net>, "Eric Dumazet" <edumazet@google.com>, Paolo Abeni
- <pabeni@redhat.com>, Wen-Zhi Huang <wen-zhi.huang@mediatek.com>, Shi-Wei
- Yeh <shi-wei.yeh@mediatek.com>, "Minano Tseng" <Minano.tseng@mediatek.com>,
- Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno
- <angelogioacchino.delregno@collabora.com>, "Simon Horman"
- <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan
- <skhan@linuxfoundation.org>, "linux-kernel@vger.kernel.org"
- <linux-kernel@vger.kernel.org>, "netdev@vger.kernel.org"
- <netdev@vger.kernel.org>, "linux-arm-kernel@lists.infradead.org"
- <linux-arm-kernel@lists.infradead.org>,
- "linux-mediatek@lists.infradead.org" <linux-mediatek@lists.infradead.org>,
- "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
-Subject: Re: [External Mail] Re: [PATCH v3 0/7] net: wwan: t9xx: Add
- MediaTek T9XX WWAN driver
-Message-ID: <20260624194544.2b4ef01b@kernel.org>
-In-Reply-To: <cec5736466864641967b99adcfaf324a@compal.com>
-References: <20260624-t9xx_driver_v1-v3-0-73ff03f60c48@compal.com>
-	<20260624170917.09967c74@kernel.org>
-	<cec5736466864641967b99adcfaf324a@compal.com>
+	s=k20260515; t=1782364084;
+	bh=BmpagdOaIAQomBWNFhud4TOCk8WnRyUMTV0ERkN5fWI=;
+	h=From:To:Cc:Subject:Date;
+	b=h97HS0bX2lgKH7mBsHMi5Ge2jdMoiskR/xFX6HOnHrvZj0Fdl2bY/FsHYpyhGu+du
+	 nw278SEcuJZgtp0qM9ES6PIsgbDl81jg9qXwwFbaEUbcAZPkXw/Xr6CncxwWpmRxm4
+	 gszK//V7J2ilwJDxsY04ADvw+yAdGcltWnX55zb4+NnEyMJDJGLjCoSABqiz6WzSW0
+	 +MciHIobFcZU9rqTBmpVKOXhsTYhY1asV0BzjV7030F1RFj3Evl1RsT6zDmur0rMvo
+	 CBUqNKJPwK9mugZPTwvoKgSrgTLJ2LaEjE/kJrEvgVMvuK6txkIdW3xpV3Aml36Qvs
+	 kdkeNQ/pxrIiA==
+From: SeongJae Park <sj@kernel.org>
+To: 
+Cc: SeongJae Park <sj@kernel.org>,
+	"Liam R. Howlett" <liam@infradead.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Brendan Higgins <brendan.higgins@linux.dev>,
+	David Gow <davidgow@davidgow.net>,
+	David Hildenbrand <david@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Lorenzo Stoakes <ljs@kernel.org>,
+	Michal Hocko <mhocko@suse.com>,
+	Mike Rapoport <rppt@kernel.org>,
+	Shuah Khan <shuah@kernel.org>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Vlastimil Babka <vbabka@kernel.org>,
+	damon@lists.linux.dev,
+	kunit-dev@googlegroups.com,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-kselftest@vger.kernel.org,
+	linux-mm@kvack.org
+Subject: [RFC PATCH v1.1 00/11] mm/damon: update, optimize, and clean up doc, tests, and code
+Date: Wed, 24 Jun 2026 22:07:43 -0700
+Message-ID: <20260625050756.91115-1-sj@kernel.org>
+X-Mailer: git-send-email 2.47.3
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-3.66 / 15.00];
 	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
-	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[21];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-93476-lists,linux-doc=lfdr.de];
-	FORGED_SENDER(0.00)[kuba@kernel.org,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-93477-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[20];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:JackBB_Wu@compal.com,m:loic.poulain@oss.qualcomm.com,m:ryazanov.s.a@gmail.com,m:johannes@sipsolutions.net,m:andrew+netdev@lunn.ch,m:davem@davemloft.net,m:edumazet@google.com,m:pabeni@redhat.com,m:wen-zhi.huang@mediatek.com,m:shi-wei.yeh@mediatek.com,m:Minano.tseng@mediatek.com,m:matthias.bgg@gmail.com,m:angelogioacchino.delregno@collabora.com,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-kernel@vger.kernel.org,m:netdev@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-mediatek@lists.infradead.org,m:linux-doc@vger.kernel.org,m:ryazanovsa@gmail.com,m:andrew@lunn.ch,m:matthiasbgg@gmail.com,s:lists@lfdr.de];
-	FORWARDED(0.00)[lists@lfdr.de];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[oss.qualcomm.com,gmail.com,sipsolutions.net,lunn.ch,davemloft.net,google.com,redhat.com,mediatek.com,collabora.com,kernel.org,lwn.net,linuxfoundation.org,vger.kernel.org,lists.infradead.org];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:sj@kernel.org,m:liam@infradead.org,m:akpm@linux-foundation.org,m:brendan.higgins@linux.dev,m:davidgow@davidgow.net,m:david@kernel.org,m:corbet@lwn.net,m:ljs@kernel.org,m:mhocko@suse.com,m:rppt@kernel.org,m:shuah@kernel.org,m:skhan@linuxfoundation.org,m:surenb@google.com,m:vbabka@kernel.org,m:damon@lists.linux.dev,m:kunit-dev@googlegroups.com,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[kuba@kernel.org,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	MISSING_XM_UA(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,vger.kernel.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 146B76C271D
+X-Rspamd-Queue-Id: 53E136C2B76
 
-On Thu, 25 Jun 2026 01:55:49 +0000 Wu. JackBB (GSM) wrote:
->   I have a question about the preferred workflow: the cover
->   letter changelog would get quite long if I include detailed
->   explanations for each sashiko comment we chose not to fix.
-> 
->   Was the concern more about timing? Should we have replied
->   to the sashiko review promptly when it came in, rather than
->   waiting until the full v3 was ready?
+Patches 1 and 2 update the design and ABI documents for recently added
+DAMON features.  Patches 3-7 add or update more unit and self tests for
+DAMON to cover recently changed or added functions and sysfs files.
+Patch 8 optimizes damon_commit_target_regions() to skip unnecessary
+adjacent ranges setup.  Patches 9-11 clean and fix up recently added
+DAMON sysfs interface code for readability.
 
-Either way works. Either give reviewers 24h to dispute the comments or
-add the comments to the repost. You don't have to keep a full detailed
-log in the changelog.
+Changes from RFC
+- RFC: https://lore.kernel.org/20260624142008.87180-1-sj@kernel.org
+- Rebase directly to latest mm-new.
 
-> ================================================================================================================================================================
-> This message may contain information which is private, privileged or confidential of Compal Electronics, Inc. If you are not the intended recipient of this message, please notify the sender and destroy/delete the message. Any review, retransmission, dissemination or other use of, or taking of any action in reliance upon this information, by persons or entities other than the intended recipient is prohibited.
-> ================================================================================================================================================================
+SeongJae Park (11):
+  Docs/mm/damon/design: update for DAMOS_QUOTA_NODE_ELIGIBLE_MEM_BP
+  Docs/ABI/damon: document probe files
+  mm/damon/tests/core-kunit: test damon_rand()
+  selftests/damon/sysfs.sh: test multiple probe dirs creation
+  selftests/damon/sysfs.sh: test {core,ops}_filters/ directories
+  selftests/damon/sysfs.sh: test dests dir
+  selftests/damon/sysfs.sh: test all files in quota goal dir
+  mm/damon/core: reduce range setup in damon_commit_target_regions()
+  mm/damon/sysfs: split probe setup function out
+  mm/damon/sysfs: split out filters setup function
+  mm/damon/sysfs: fix typos in probe_{add,rm}_dirs: s/attr/probe/
 
-Again, please fix this.
+ .../ABI/testing/sysfs-kernel-mm-damon         |  40 +++++++
+ Documentation/mm/damon/design.rst             |   2 +
+ mm/damon/core.c                               |  22 +++-
+ mm/damon/sysfs.c                              | 102 ++++++++++--------
+ mm/damon/tests/core-kunit.h                   |  21 ++++
+ tools/testing/selftests/damon/sysfs.sh        |  70 +++++++++++-
+ 6 files changed, 206 insertions(+), 51 deletions(-)
+
+
+base-commit: 09ff70563340c38d31012044b9c6c18f225f4fbf
+-- 
+2.47.3
 
