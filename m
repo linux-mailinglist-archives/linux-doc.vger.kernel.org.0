@@ -1,177 +1,184 @@
-Return-Path: <linux-doc+bounces-93557-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93559-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Wh3jGvJLPWrP0wgAu9opvQ
-	(envelope-from <linux-doc+bounces-93557-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 17:40:34 +0200
+	id TDb9FrlNPWod1AgAu9opvQ
+	(envelope-from <linux-doc+bounces-93559-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 17:48:09 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 231626C7219
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 17:40:34 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 02BA16C7298
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 17:48:07 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=google.com header.s=20251104 header.b=O1HkzZQI;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93557-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93557-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=reject) header.from=google.com;
+	dkim=pass header.d=163.com header.s=s110527 header.b=BJ+0i3vO;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93559-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93559-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=163.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 2AC06304CF69
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 15:40:33 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 54610305D840
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 15:47:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 437D627E049;
-	Thu, 25 Jun 2026 15:40:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 493CB2701B8;
+	Thu, 25 Jun 2026 15:47:58 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f201.google.com (mail-pg1-f201.google.com [209.85.215.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.5])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 067F623392F
-	for <linux-doc@vger.kernel.org>; Thu, 25 Jun 2026 15:40:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E84325A2B5;
+	Thu, 25 Jun 2026 15:47:53 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782402030; cv=none; b=MiD6HBi2dNgN/LdD/Fl+EDbEdoPTzYDB0mTUjwWte5b9QL1sBGjf5Ps26VxQhxtLCZGXl6c2y5PiFf3R8GlBfpkwamWx7brNxuZcYxRMX/dBiQMMj6fm+keWdadm1mxKsI+9bfDGvhXnMoTaDqQMuFWAiUmusE0nqaVkIor8yvw=
+	t=1782402478; cv=none; b=InDUhCQbTly3uzWFs04kf6NT4G/aaWLbbBJ7PSkHRCDVUMxN7pAHpk8SckxnqVSlXe46Xm8TmmdDURki54WgOjJM16Kk9KbKeS7XFS7YR0mX1VKovSjlNnCIqwpuT4hxEAPQTzUS8LLIoXdLHxqOcNj4fWOhRtEl66amEDxm2vw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782402030; c=relaxed/simple;
-	bh=wnycnk35ivpQHERfilV0c1wBVrlSSxbqgktgJps4HzY=;
-	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=FPIo3XzGqVzfVlmXJ8eABd4bPxmUHMvahYLcQKP0AR0NH2w1HOHDg4EXSaqWcGecSlLoSgWNpzBclL09S6bs/L/oWtY43iBOwSwJFdP6dlMHisOIYXyXIKbl2sR19oqN1E9wZUgK7t6iDuZKZO9hPvY34jHZPy6lPqvBt1Jzce4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--seanjc.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=O1HkzZQI; arc=none smtp.client-ip=209.85.215.201
-Received: by mail-pg1-f201.google.com with SMTP id 41be03b00d2f7-c85798977dcso9606a12.0
-        for <linux-doc@vger.kernel.org>; Thu, 25 Jun 2026 08:40:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1782402028; x=1783006828; darn=vger.kernel.org;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=Itjo2jMjkwhBM0k9+OlfOfXdIDoAWufeDNJNDd1hXfc=;
-        b=O1HkzZQIi+MnRkSybj5bbHuNPOdQm0Cmmkp8R2vnMeuw9GWpob8A+A/aD4CDhOrWgP
-         FJWl+84GxCOD51HXoVsHR9kMqxc0JN7hEHkV/ZXBReJ5S+BiDH5VKRRcuoOFAOyHvjlt
-         Q+IMC3Rx+3t+vBvSw0G+3Q+y5kUa5TeEfSfy8Bpsp0XtvORO3v5FaT7VZdS/Y7VFGLlX
-         0pg4Dshd8wn1n0dXEir7JeZzp6LGx1xIHBxPAZRpY//ieK0H6vF1eNPSDpUfyQ1vK1a5
-         Ve9TtzFxPu/KyrX0abS2rMpjTgJzrWKggNpa4IRUcEzwHDRqASoj5uZQ2pXXTguf7WNc
-         6thQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782402028; x=1783006828;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Itjo2jMjkwhBM0k9+OlfOfXdIDoAWufeDNJNDd1hXfc=;
-        b=ZOSAMlhgdzaBQB9LyunhEoE1z3gTi3doLKpw3mBE20i33yXdE8sbxsys6NTIxGLYfM
-         GiYyF391gT+oaD6UEyCT4ajEQ0CqhHdbJSmv1+zWypWZfrQ13Cf+it/BxmZcUpmUgv+T
-         jX3mZS+axOlaLfJJYAp2rneneP/tJpojhJJlZEyFXcvemV5AvlG/kMLFJ5I+WThRghjF
-         vuDcZv0xN+9DUCL7O59VC4Uy9QXudOEQJ2e+wJJV8cI08AMEf/OJOrCEB0BDBgmyMP70
-         9/m28MCwwbZvDir3In2llxQm5XHDc2JAXPQVizTeImyzaRLRSN1OXwcWpLg8C2HdPKut
-         9JMQ==
-X-Forwarded-Encrypted: i=1; AFNElJ9tP31+dIeQS6g1oIH2xxNzAUaFZDMQYDKN9Kg0rTDsNOBJAPeOk4nkN9vkOgxD4RJHsPLUpmitfdI=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyJikP76hjaQX2TH+JMxLvTpvpSiIdU2thXEotqA4Du/LaiCCQi
-	c1WzYcw/BHLbDEziZNuSWbqgAOGVPNiItxJWfSsoB5zVcB62R83wESD5YiJZ7F2zZM3DM6BJPLJ
-	9voGFow==
-X-Received: from pgbdk2.prod.google.com ([2002:a05:6a02:c82:b0:c85:9dd2:d11e])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6a20:cc97:b0:3b4:5c6f:cf30
- with SMTP id adf61e73a8af0-3bd4b25b347mr3615613637.38.1782402027934; Thu, 25
- Jun 2026 08:40:27 -0700 (PDT)
-Date: Thu, 25 Jun 2026 08:40:27 -0700
-In-Reply-To: <6ed7d12a-c3a1-4572-8385-754e6d5b8b44@kernel.org>
+	s=arc-20240116; t=1782402478; c=relaxed/simple;
+	bh=r10z/XNbEr3FGkYVC/xlcllUoZrQUAtdbL3x+Hji+nQ=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version; b=LUK7/nEqbVZ+EwmhRQzYQGOcv1sKC6IoJ2xcFTR7aGKgBXBypLCinxSyAle6vQoa3/7ciQHbvll4HhGCDb2WyUNgcTIxxF8UAbakaMbRib6Qc6/0iw1yQJFo5aZip5q3L5fIPLLuWhpYp5/NYJRIeyVBIfxiyjYO7L7j+1DdrpM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=BJ+0i3vO; arc=none smtp.client-ip=220.197.31.5
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=r6
+	Z+vqofs0Z6XLmf3qaOWgKbrty7AYM+MhIKhql/k/c=; b=BJ+0i3vO8qcoWYiv2K
+	GQGz965AfiIcdGiYYL3f7WBt7n6pM69GbCMne0DqSEAsC3fZtq8T0fx2zC8IGNdX
+	SSQlL0Y0RAiOn3TS6cgwtZNxTjPv1NNq4s5e9SQp/YszK4M454pzZ8RTr1hVNP5M
+	UZ7yvCElrWX6gwzlCkjklUvgQ=
+Received: from zhaoxin-MS-7E12.. (unknown [])
+	by gzsmtp1 (Coremail) with SMTP id PCgvCgDXgmsyTT1qofsSDg--.30639S2;
+	Thu, 25 Jun 2026 23:45:56 +0800 (CST)
+From: Xin Zhao <jackzxcui1989@163.com>
+To: ljs@kernel.org
+Cc: akpm@linux-foundation.org,
+	alex.aring@gmail.com,
+	allen.lkml@gmail.com,
+	arnd@arndb.de,
+	brauner@kernel.org,
+	chuck.lever@oracle.com,
+	corbet@lwn.net,
+	david@kernel.org,
+	ebiederm@xmission.com,
+	j.granados@samsung.com,
+	jack@suse.cz,
+	jackzxcui1989@163.com,
+	jlayton@kernel.org,
+	juri.lelli@redhat.com,
+	keescook@chromium.org,
+	liam@infradead.org,
+	linux-arch@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org,
+	mcgrof@kernel.org,
+	mingo@redhat.com,
+	mjguzik@gmail.com,
+	peterz@infradead.org,
+	pfalcato@suse.de,
+	vincent.guittot@linaro.org,
+	viro@zeniv.linux.org.uk
+Subject: Re: [PATCH v4] coredump: Add /proc/<pid>/coredump_pre_exit for pre-exit before dumping
+Date: Thu, 25 Jun 2026 23:45:54 +0800
+Message-Id: <20260625154554.1226457-1-jackzxcui1989@163.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <aj0cUrwdXYKIicC-@lucifer>
+References: <aj0cUrwdXYKIicC-@lucifer>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-References: <20260618-gmem-inplace-conversion-v8-0-9d2959357853@google.com>
- <20260618-gmem-inplace-conversion-v8-18-9d2959357853@google.com>
- <ajwMYCSrPlxg-Fok@google.com> <CAEvNRgE8HZDOnexMJeim6TjmxGG1AUXFY2+HH1YyKB=aM6D-DQ@mail.gmail.com>
- <ajx3vmNPRf-M9kR6@google.com> <6ed7d12a-c3a1-4572-8385-754e6d5b8b44@kernel.org>
-Message-ID: <aj1L626RI3Ty_hh3@google.com>
-Subject: Re: [PATCH v8 18/46] KVM: guest_memfd: Handle lru_add fbatch
- refcounts during conversion safety check
-From: Sean Christopherson <seanjc@google.com>
-To: "David Hildenbrand (Arm)" <david@kernel.org>
-Cc: Ackerley Tng <ackerleytng@google.com>, aik@amd.com, andrew.jones@linux.dev, 
-	binbin.wu@linux.intel.com, brauner@kernel.org, chao.p.peng@linux.intel.com, 
-	jmattson@google.com, jthoughton@google.com, michael.roth@amd.com, 
-	oupton@kernel.org, pankaj.gupta@amd.com, qperret@google.com, 
-	rick.p.edgecombe@intel.com, rientjes@google.com, shivankg@amd.com, 
-	steven.price@arm.com, tabba@google.com, willy@infradead.org, 
-	wyihan@google.com, yan.y.zhao@intel.com, forkloop@google.com, 
-	pratyush@kernel.org, suzuki.poulose@arm.com, aneesh.kumar@kernel.org, 
-	liam@infradead.org, Paolo Bonzini <pbonzini@redhat.com>, Thomas Gleixner <tglx@kernel.org>, 
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
-	"H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
-	Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>, 
-	Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>, 
-	Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>, 
-	Nhat Pham <nphamcs@gmail.com>, Barry Song <baohua@kernel.org>, 
-	Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>, 
-	Wei Xu <weixugc@google.com>, Youngjun Park <youngjun.park@lge.com>, 
-	Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
-	Kiryl Shutsemau <kas@kernel.org>, Baoquan He <baoquan.he@linux.dev>, Jason Gunthorpe <jgg@ziepe.ca>, 
-	Vlastimil Babka <vbabka@kernel.org>, kvm@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kselftest@vger.kernel.org, linux-mm@kvack.org, 
-	linux-coco@lists.linux.dev
-Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:PCgvCgDXgmsyTT1qofsSDg--.30639S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW7KFykZry5Aw43Kw4ftry3CFg_yoW8ur4xpF
+	WfKryakr1ktr4Ikr97uw47Za4Yv348Ka43WrnxW392krW5uF1xXrWI9F4Y9F1DWFW0kr1I
+	qrsrZas8Aa45JFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0JUn_-gUUUUU=
+X-CM-SenderInfo: pmdfy650fxxiqzyzqiywtou0bp/xtbC6BVKVGo9TTW94AAA3R
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [0.84 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MV_CASE(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[163.com,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[163.com:s=s110527];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[google.com,amd.com,linux.dev,linux.intel.com,kernel.org,intel.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca,vger.kernel.org,kvack.org,lists.linux.dev];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-93557-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_FROM(0.00)[bounces-93559-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[29];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:david@kernel.org,m:ackerleytng@google.com,m:aik@amd.com,m:andrew.jones@linux.dev,m:binbin.wu@linux.intel.com,m:brauner@kernel.org,m:chao.p.peng@linux.intel.com,m:jmattson@google.com,m:jthoughton@google.com,m:michael.roth@amd.com,m:oupton@kernel.org,m:pankaj.gupta@amd.com,m:qperret@google.com,m:rick.p.edgecombe@intel.com,m:rientjes@google.com,m:shivankg@amd.com,m:steven.price@arm.com,m:tabba@google.com,m:willy@infradead.org,m:wyihan@google.com,m:yan.y.zhao@intel.com,m:forkloop@google.com,m:pratyush@kernel.org,m:suzuki.poulose@arm.com,m:aneesh.kumar@kernel.org,m:liam@infradead.org,m:pbonzini@redhat.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:shuah@kernel.org,m:vannapurve@google.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencent.com,m:shikemeng@hu
- aweicloud.com,m:nphamcs@gmail.com,m:baohua@kernel.org,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:kas@kernel.org,m:baoquan.he@linux.dev,m:jgg@ziepe.ca,m:vbabka@kernel.org,m:kvm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,m:linux-coco@lists.linux.dev,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[seanjc@google.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[google.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	MISSING_XM_UA(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[63];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[seanjc@google.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER(0.00)[jackzxcui1989@163.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:ljs@kernel.org,m:akpm@linux-foundation.org,m:alex.aring@gmail.com,m:allen.lkml@gmail.com,m:arnd@arndb.de,m:brauner@kernel.org,m:chuck.lever@oracle.com,m:corbet@lwn.net,m:david@kernel.org,m:ebiederm@xmission.com,m:j.granados@samsung.com,m:jack@suse.cz,m:jackzxcui1989@163.com,m:jlayton@kernel.org,m:juri.lelli@redhat.com,m:keescook@chromium.org,m:liam@infradead.org,m:linux-arch@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:mcgrof@kernel.org,m:mingo@redhat.com,m:mjguzik@gmail.com,m:peterz@infradead.org,m:pfalcato@suse.de,m:vincent.guittot@linaro.org,m:viro@zeniv.linux.org.uk,m:alexaring@gmail.com,m:allenlkml@gmail.com,s:lists@lfdr.de];
+	DKIM_TRACE(0.00)[163.com:+];
+	FREEMAIL_FROM(0.00)[163.com];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	TO_DN_NONE(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[jackzxcui1989@163.com,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[linux-foundation.org,gmail.com,arndb.de,kernel.org,oracle.com,lwn.net,xmission.com,samsung.com,suse.cz,163.com,redhat.com,chromium.org,infradead.org,vger.kernel.org,kvack.org,suse.de,linaro.org,zeniv.linux.org.uk];
+	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	FROM_HAS_DN(0.00)[]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 231626C7219
+X-Rspamd-Queue-Id: 02BA16C7298
 
-On Thu, Jun 25, 2026, David Hildenbrand (Arm) wrote:
-> On 6/25/26 02:35, Sean Christopherson wrote:
-> > One thought I had, to avoid the IPIs that draining all per-CPU caches requires,
-> > was to disallow putting guest_memfd pages in folio batches, e.g. by hacking
-> > something into folio_may_be_lru_cached().  But due to taking a per-lru lock,
-> > that would penalize the relatively hot path and definitely common operation of
-> > faulting in guest memory.  On the other hand, memory conversion is already a
-> > relatively slow operation and is relatively uncommon compared to page faults,
-> > (and likely very uncommon for real world setups).  I.e. having to drain all
-> > caches if conversion isn't safe penalizes a relatively slow, relatively uncommon
-> > path.
-> 
-> Yeah, the lru_add_drain_all is rather messy.
-> 
-> We have similar code in
-> 
-> collect_longterm_unpinnable_folios(), where we first try a lru_add_drain(), to
-> then escalate to a lru_add_drain_all().
-> 
-> Maybe we could factor that (suboptimal code) out to not have to reinvent the
-> same thing multiple times?
+On Thu, 25 Jun 2026 13:48:10 +0100 Lorenzo Stoakes <ljs@kernel.org> wrote:
 
-As discussed in the guest_memfd call, we should do this straightaway, i.e. instead
-of merging this series as-is, so that we don't export lru_add_drain_all() only to
-drop the export a kernel or two later, and can instead export the helper to drain
-any batches for a folio (or set of folios/pages).
+> +cc missing maintainers, lists.
+> 
+> NAK.
+> 
+> This is un-upstreamable for numerous reasons.
+> 
+> The stuff you're doing in mm is broken, wrong and invasive and you've not
+> even bothered to cc- mm people. I'm annoyed by this.
+> 
+> You're also doing incredibly silly mistakes at v4 of something that should have
+> been an RFC.
+> 
+> You don't seem to understand the concept of patch _series_ (break it up into
+> smaller patches!!!) and you haven't bothered cc'ing maintainers whose subsystems
+> you're radically alterting.
+> 
+> I'm annoyed as you have a history where you were told not to add insane hacks
+> before ([0], my reply at [1]).
+> 
+> [0]:https://lore.kernel.org/all/20260116042817.3790405-1-jackzxcui1989@163.com/
+> [1]:https://lore.kernel.org/all/14110b70-19e7-474d-b0dd-ba80e8bed9b0@lucifer.local/
+> 
+> Was I wasting my time there? Am I wasting my time responding now?
+> 
+> And how hard is it to run a simple perl script?
+> 
+> Let me run it for you for _just_ the maintainers:
+
+I probably shouldn't reply to this email to waste more of your time, but I
+can't help but respond because your comments have been very beneficial to
+me, and I enjoy the process.
+
+The v4 version has changed too much compared to the v3 version. I should
+have re-executed the "get maintainer" script, but I mistakenly copied the
+previous email list and sent it out. I sincerely apologize for that.
+
+There are quite a few issues now, and I haven't come up with a good
+overall solution. I actually want to resolve the problems we encountered
+in our project with minimal kernel modifications, but I can't think of a
+good way to do it. It seems that the v4 version has turned out to be a
+complete disaster of a patch, and I sincerely hope that my example won't
+be used as a counterexample in the future. Thank you for that.
+
+Suddenly, I have some thoughts about this issue, but I even question
+whether I should have these ideas. Let me sit down and sort things out
+properly. I hope the v5 version won't be a disaster.
+
+Thanks
+Xin Zhao
 
 
