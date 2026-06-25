@@ -1,68 +1,55 @@
-Return-Path: <linux-doc+bounces-93460-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93462-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id vkilMkKEPGoCpAgAu9opvQ
-	(envelope-from <linux-doc+bounces-93460-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 03:28:34 +0200
+	id 4IdOBy2HPGpdpAgAu9opvQ
+	(envelope-from <linux-doc+bounces-93462-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 03:41:01 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0A5636C2248
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 03:28:34 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 763AE6C22C4
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 03:41:00 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=ZWciSQbP;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93460-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93460-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b="QVD/eUd2";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93462-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-93462-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 63DF33013198
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 01:27:26 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 340EF3035A8D
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 01:40:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 01EFA370ACF;
-	Thu, 25 Jun 2026 01:27:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2D4B5372EDD;
+	Thu, 25 Jun 2026 01:40:46 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A21A288BA;
-	Thu, 25 Jun 2026 01:27:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5ED336F903;
+	Thu, 25 Jun 2026 01:40:44 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782350842; cv=none; b=U8Z88aLaEBs911QwxVrZfwn/PGXOFvqQDSiLoj6b1KzWAR7LVc6gi/8yrhqeXeYaX8FN/u/BjedjSGYcO6b91GGta4E1vAk3FXgsolNofa3VtViIF94wu+pTvfbhsER+JPFyQoLyqT/ZwLMTabn8YbUFG+3qlEJS20eSTMmIjRA=
+	t=1782351646; cv=none; b=GCcXcL4QjotSxJV9jUwf167Oo5b2VQGIj4VtSv92ibzIw1sN5fsQHq6VKvz3goJS5jj+x5Zg+PVwY52CiaeYCD3tHdt+XgaLfiYd8+Mw2drpqnMbOzcpaT/CS6/IIYmJ+56aAWzN6osM0YY8Yg+1T/6VWGRsYjztB2D0Ffg44gg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782350842; c=relaxed/simple;
-	bh=LpUUCDpoIwkkOFjRNcBYvLv1rOvIr0Y1zQ81QXZeXdQ=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=n2H41OxbKZRd+GFOHBpZIaLFTgVc6T+ctsZmvWZgqpy4CYp+hiRBWS1VW1ZXuKHjgbN9cY2sVCxaOydfg/QPLV1N3E+TP6YMV0eYhZ0uBla32zel/sO5Ig8sSA9vIcu96PpIDBs6N+S6UaD3b95+4SfgJViOrL5MbYA0qL+jg3M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZWciSQbP; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E79241F000E9;
-	Thu, 25 Jun 2026 01:27:18 +0000 (UTC)
+	s=arc-20240116; t=1782351646; c=relaxed/simple;
+	bh=mS8sd4fSMPsk+u+fJ5JE6wIXGOfsPvHhpbFRyArZ3m4=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=klAFVCQlsZ+bLvFCkLY4kdmii7MY4IXhFtgVa+8wq1qK0m8juRi3CckaHXu7xbzv7MjcEwnbBoe9Fst6iIgo2VbWj1PrSnQ0TZsukyVC8HxSi0lw9DHyRndwbIwcvmgS7GpNxM2lvT0XzHr6brap0qpGdvcmMJ3+cCbetSI/qfs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QVD/eUd2; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DE8161F000E9;
+	Thu, 25 Jun 2026 01:40:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782350841;
-	bh=mtng3axioRLCWyuOlv6YOv0APH9Y/77gn1Kwcj2kCzg=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=ZWciSQbPzV07KOaFqpJ0nVxMTF9Yi53E9iwkRXMJOFdxKtTd9/DkzQdidp4z3M1+f
-	 FrZ8g7mo/r/s8RGT2YssiuXJ3IT6hXjif1hpolCZm9a/bYD4OZnTQbc/83S5P9j5Zr
-	 rtQOFnOSfP18NZpV5k2ywc4L+vN0joaCW4nWCyWXxVeOobxt9loLQw8x16cKZnrmn3
-	 KQinwmu6ILmxMPdMfrGchzLR022gKm90+jKwHku2adC51Dg3MtsmLaIkovw0Qojvvt
-	 /hV1FJBTwmQtJDCmCi1dKtp9ZmO1p+BvQ/O9K3ASByB3l72hktmzydO4onZRixgl7+
-	 GfdZQKW+v6WOA==
-From: "Masami Hiramatsu (Google)" <mhiramat@kernel.org>
-To: Steven Rostedt <rostedt@goodmis.org>,
-	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
-Cc: Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Masami Hiramatsu <mhiramat@kernel.org>,
-	linux-kernel@vger.kernel.org,
-	linux-trace-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kselftest@vger.kernel.org
-Subject: [PATCH v9 9/9] tracing/probes: Add a new testcase for BTF typecasts
-Date: Thu, 25 Jun 2026 10:27:16 +0900
-Message-ID: <178235083660.766912.16473770007686715516.stgit@devnote2>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <178235074943.766912.25308838431649508.stgit@devnote2>
-References: <178235074943.766912.25308838431649508.stgit@devnote2>
-User-Agent: StGit/0.19
+	s=k20260515; t=1782351644;
+	bh=viup3qVydYsBij9c3PAbPfpI7+NcZfIzNda/PtjvMwc=;
+	h=From:Subject:Date:To:Cc;
+	b=QVD/eUd20dfdy+g6W64RZmYZv0kpvGyEukHaHpcLgLg/g1JvqCZLLg37RDCgxnQYJ
+	 3KdQVbkpT9fYERGnvFG0zMSFOBPJdoM30Pcd2LvldBdldKQf4O2POXLv2gXAdIjm/n
+	 lqjYOQoWIeYRZd0jT7Zu784ijZyikvQVk1d1xbpJPHXZk+wbkYGHfPFwLgxq+ORP0j
+	 k9mMWqqg2MoTqCA4oC3DEq7DZ6wPclWzitGHCAau9XXIY/DtWGF9gJUcSJGEC0IRn8
+	 Kg1s3egC5vsBIkNujjBfxf4xuWqmz7ffmkODcHcF4oDXSketNoUkLIPqTl04buMrRM
+	 f1+RWX2fxdBqg==
+From: Drew Fustini <fustini@kernel.org>
+Subject: [PATCH v2 0/8] riscv: Add Ssqosid and initial CBQRI resctrl
+ support
+Date: Wed, 24 Jun 2026 18:38:28 -0700
+Message-Id: <20260624-dfustini-atl-sc-cbqri-dt-v2-0-2f8049fd902b@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -70,466 +57,212 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAJSGPGoC/3WNQQ6CMBBFr0K6dkxbDRVX3sOwKO0Ao6TotBAN4
+ e4CxqXLl/z/3iQiMmEU52wSjCNF6sMCepcJ19rQIJBfWGipc5krCb4eYqJAYFMH0YGrnkzgExy
+ VdCfURinvxXJ/MNb02tTX8stxqG7o0upbFy3F1PN7a49q3f0yxf/MqEACmsIaow+1reTljhyw2
+ /fciHKe5w8kP7Vr0wAAAA==
+X-Change-ID: 20260610-dfustini-atl-sc-cbqri-dt-410c8e2711dd
+To: Adrien Ricciardi <aricciardi@baylibre.com>, 
+ Alexandre Ghiti <alex@ghiti.fr>, Atish Kumar Patra <atishp@rivosinc.com>, 
+ Atish Patra <atish.patra@linux.dev>, Babu Moger <babu.moger@amd.com>, 
+ Ben Horgan <ben.horgan@arm.com>, Borislav Petkov <bp@alien8.de>, 
+ Chen Pei <cp0613@linux.alibaba.com>, 
+ Conor Dooley <conor.dooley@microchip.com>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Dave Hansen <dave.hansen@linux.intel.com>, 
+ Dave Martin <Dave.Martin@arm.com>, Fenghua Yu <fenghua.yu@intel.com>, 
+ Gong Shuai <gong.shuai@sanechips.com.cn>, Gong Shuai <gsh517@gmail.com>, 
+ guo.wenjia23@zte.com.cn, James Morse <james.morse@arm.com>, 
+ =?utf-8?q?Kornel_Dul=C4=99ba?= <mindal@semihalf.com>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, liu.qingtao2@zte.com.cn, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Paul Walmsley <pjw@kernel.org>, 
+ Peter Newman <peternewman@google.com>, 
+ =?utf-8?q?Radim_Kr=C4=8Dm=C3=A1=C5=99?= <rkrcmar@ventanamicro.com>, 
+ Reinette Chatre <reinette.chatre@intel.com>, Rob Herring <robh@kernel.org>, 
+ Samuel Holland <samuel.holland@sifive.com>, 
+ Sebastian Andrzej Siewior <bigeasy@linutronix.de>, 
+ Tony Luck <tony.luck@intel.com>, Vasudevan Srinivasan <vasu@rivosinc.com>, 
+ Ved Shanbhogue <ved@rivosinc.com>, Weiwei Li <liwei1518@gmail.com>, 
+ yunhui cui <cuiyunhui@bytedance.com>, Drew Fustini <fustini@kernel.org>
+Cc: linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org, 
+ x86@kernel.org, devicetree@vger.kernel.org, linux-rt-devel@lists.linux.dev, 
+ linux-doc@vger.kernel.org
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5991; i=fustini@kernel.org;
+ h=from:subject:message-id; bh=mS8sd4fSMPsk+u+fJ5JE6wIXGOfsPvHhpbFRyArZ3m4=;
+ b=owGbwMvMwCF2+43O4ZsaG3kYT6slMWTZtEs5Lz/ptO7iZ46qFc17rm9QdeDbfD5Dal6ubqWoW
+ XbHPo3pHaUsDGIcDLJiiiybPuRdWOIV+nXB/BfbYOawMoEMYeDiFICJHDnA8L9Ic8vvfeZ3L64Q
+ SVLe055jspdp/iSWgM/R3Sd+SbxM8z/IyDDX7v+T6efmzfETmrZpVuvGqozMmZov7u2ZdIcr/OG
+ 0RZO5AQ==
+X-Developer-Key: i=fustini@kernel.org; a=openpgp;
+ fpr=1B6F948213EA489734F3997035D5CD577C1E6010
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-4.66 / 15.00];
+X-Spamd-Result: default: False [-3.66 / 15.00];
 	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	FORGED_RECIPIENTS(0.00)[m:aricciardi@baylibre.com,m:alex@ghiti.fr,m:atishp@rivosinc.com,m:atish.patra@linux.dev,m:babu.moger@amd.com,m:ben.horgan@arm.com,m:bp@alien8.de,m:cp0613@linux.alibaba.com,m:conor.dooley@microchip.com,m:conor+dt@kernel.org,m:dave.hansen@linux.intel.com,m:Dave.Martin@arm.com,m:fenghua.yu@intel.com,m:gong.shuai@sanechips.com.cn,m:gsh517@gmail.com,m:guo.wenjia23@zte.com.cn,m:james.morse@arm.com,m:mindal@semihalf.com,m:krzk+dt@kernel.org,m:liu.qingtao2@zte.com.cn,m:zhiwei_liu@linux.alibaba.com,m:palmer@dabbelt.com,m:pjw@kernel.org,m:peternewman@google.com,m:rkrcmar@ventanamicro.com,m:reinette.chatre@intel.com,m:robh@kernel.org,m:samuel.holland@sifive.com,m:bigeasy@linutronix.de,m:tony.luck@intel.com,m:vasu@rivosinc.com,m:ved@rivosinc.com,m:liwei1518@gmail.com,m:cuiyunhui@bytedance.com,m:fustini@kernel.org,m:linux-kernel@vger.kernel.org,m:linux-riscv@lists.infradead.org,m:x86@kernel.org,m:devicetree@vger.kernel.org,m:linux-rt-devel@lists.linux.dev,m:linux-doc@vger
+ .kernel.org,m:conor@kernel.org,m:krzk@kernel.org,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:rostedt@goodmis.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:mhiramat@kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,s:lists@lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[mhiramat@kernel.org,linux-doc@vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-93460-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER(0.00)[fustini@kernel.org,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[41];
+	FREEMAIL_TO(0.00)[baylibre.com,ghiti.fr,rivosinc.com,linux.dev,amd.com,arm.com,alien8.de,linux.alibaba.com,microchip.com,kernel.org,linux.intel.com,intel.com,sanechips.com.cn,gmail.com,zte.com.cn,semihalf.com,dabbelt.com,google.com,ventanamicro.com,sifive.com,linutronix.de,bytedance.com];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-93462-lists,linux-doc=lfdr.de];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mhiramat@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[fustini@kernel.org,linux-doc@vger.kernel.org];
+	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[devnote2:mid,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,vger.kernel.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,sashiko.dev:url]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 0A5636C2248
+X-Rspamd-Queue-Id: 763AE6C22C4
 
-From: Masami Hiramatsu (Google) <mhiramat@kernel.org>
+This series adds initial RISC-V QoS support: the Ssqosid extension [1]
+(srmcfg CSR), the CBQRI controller interface [2] integrated with resctrl
+[3], and a DT-based platform driver for cache controllers. It has been
+tested on both the Tenstorrent Ascalon Shared Cache controller and a QEMU
+implementation [4].
 
-With the introduction of container_of-style BTF typecasting and
-per-CPU variable access support in trace probes, we need a way to
-verify their functionality and prevent regressions.
+  qemu-system-riscv64 -M virt,aia=aplic-imsic -nographic -m 1G -smp 8 \
+      -kernel arch/riscv/boot/Image \
+      -append "root=/dev/vda ro console=ttyS0 rootwait" \
+      -drive if=none,file=rootfs.ext2,format=raw,id=hd0 \
+      -device virtio-blk-device,drive=hd0 \
+      -device riscv.cbqri.capacity,max_mcids=256,max_rcids=64,ncblks=16,mmio_base=0x04820000
 
-Add a new ftrace kselftest and update the trace event sample module
-to test and validate these features.
+Cache allocation can be exercised on the booted system. Mount resctrl
+and read the default schemata. The L2 controller has 16 capacity
+blocks, so the default capacity bitmask (CBM) is 0xffff:
 
-Specifically, update the trace-events-sample module to set up a
-periodic timer whose callback accesses a per-CPU counter. Introduce
-a new sample trace event, foo_timer_fn, to trace this callback
-and log the current counter value.
+  # mount -t resctrl resctrl /sys/fs/resctrl
+  # cat /sys/fs/resctrl/schemata
+  L2:0=ffff
 
-Then, add a new test case, btf_probe_event.tc, which defines a
-dynamic probe on the timer callback. The probe uses BTF typecasting
-to recover the parent structure from the timer argument and
-this_cpu_read() to fetch the per-CPU counter. The test verifies
-the integrity of the implementation by ensuring the values
-recorded by the dynamic probe match those from the static tracepoint.
+Write a narrower CBM to a new control group and read it back to confirm
+the L2 controller applied it:
 
-Assisted-by: Antigravity:gemini-3.5-flash
-Signed-off-by: Masami Hiramatsu (Google) <mhiramat@kernel.org>
+  # mkdir /sys/fs/resctrl/group0
+  # echo "L2:0=ff" > /sys/fs/resctrl/group0/schemata
+  # cat /sys/fs/resctrl/group0/schemata
+  L2:0=ff
+
+Note that this series only implements support for resctrl L2 and L3
+cache resources using CBQRI capacity allocation control. cc_block_mask
+maps onto resctrl's existing cbm schema. However, cc_cunits is not
+supported as there is no existing equivalent for capacity units in the
+resctrl schemata.
+
+I had previously been iterating on an RFC series [5] that did a full
+implementation of CBQRI including capacity monitoring, bandwidth
+allocation and monitoring. The bandwidth controls for CBQRI do not fit
+well into resctrl's existing throttle-based MB schemata. I believe that
+the path forward is Reinette's generic schema description proof of
+concept [6]. My plan is to rebase the full support of CBQRI onto the
+generic schema once it is ready.
+
+This series is based on the linux-next tag next-20260623.
+
+[1] https://github.com/riscv/riscv-ssqosid/releases/tag/v1.0
+[2] https://github.com/riscv-non-isa/riscv-cbqri/releases/tag/v1.0
+[3] https://docs.kernel.org/filesystems/resctrl.html
+[4] https://github.com/tt-fustini/qemu/tree/riscv-cbqri-cache
+[5] https://lore.kernel.org/linux-riscv/20260601-ssqosid-cbqri-rqsc-v7-0-v6-16-baf00f50028a@kernel.org/
+[6] https://lore.kernel.org/all/aab804b9-e8b5-40ad-a85b-af7033391243@intel.com/
+
+Changes in v2:
+--------------
+The changes in this revision address the Sashiko review of v1.
+
+- Restore the srmcfg CSR for the current task on CPU_PM_EXIT and
+  CPU_PM_ENTER_FAILED, so it is not left configured incorrectly until
+  the next context switch.
+
+- Serialize the cbqri_controllers list insert and the boot time walk
+  with a mutex, so an asynchronous driver probe cannot corrupt the list.
+
+- Skip a controller at an unsupported cache level instead of aborting
+  resctrl setup, so valid L2 and L3 controllers still register.
+
+- RISCV_ISA_SSQOSID selects ARCH_HAS_CPU_RESCTRL and RISCV_CBQRI
+  together, so no intermediate commit enables RESCTRL_FS without the
+  CBQRI resctrl glue.
+
+- Rename the RISCV_CBQRI_DRIVER to RISCV_CBQRI, since it builds the
+  CBQRI core ops and resctrl integration rather than a driver.
+
+- Drop the RISCV_CBQRI_DRIVER_DEBUG Kconfig option and rely on dynamic
+  debug to control the pr_debug() output.
+
+- Note: Sashiko flagged the lack of suspend/resume state restore. I will
+  not fix that as register state is only lost when the power domain is
+  gated, which offlines the harts sharing the cache. resctrl reprograms
+  the default capacity mask through the normal control domain online
+  path on resume.
+
+Link to v1:
+https://lore.kernel.org/all/20260619-dfustini-atl-sc-cbqri-dt-v1-0-e79a7723fab0@kernel.org/
+
+Sashiko review:
+https://sashiko.dev/#/patchset/20260619-dfustini-atl-sc-cbqri-dt-v1-0-e79a7723fab0%40kernel.org
+
 ---
- Changes in v9:
-  - Add a testcase for checking new syntax.
- Changes in v8:
-  - Add more test cases.
- Changes in v6:
-  - Update testcase according to changes.
- Changes in v5:
-  - Add more syntax test cases.
- Changes in v4:
-  - Fix uprobe $current test.
- Changes in v3:
-  - Add syntax test case.
-  - Update testcase to use this_cpu_read()
- Changes in v2:
-  - Use timer_shutdown_sync() instead of timer_delete_sync() for teardown.
----
- samples/trace_events/trace-events-sample.c         |   40 +++++++
- samples/trace_events/trace-events-sample.h         |   34 ++++++
- .../ftrace/test.d/dynevent/btf_probe_event.tc      |   51 ++++++++++
- .../test.d/dynevent/btf_typecast_accepted.tc       |  107 ++++++++++++++++++++
- .../test.d/dynevent/eprobes_syntax_errors.tc       |    3 +
- .../ftrace/test.d/dynevent/fprobe_syntax_errors.tc |   12 ++
- .../ftrace/test.d/kprobe/kprobe_syntax_errors.tc   |   12 ++
- .../ftrace/test.d/kprobe/uprobe_syntax_errors.tc   |    5 +
- 8 files changed, 259 insertions(+), 5 deletions(-)
- create mode 100644 tools/testing/selftests/ftrace/test.d/dynevent/btf_probe_event.tc
- create mode 100644 tools/testing/selftests/ftrace/test.d/dynevent/btf_typecast_accepted.tc
+Drew Fustini (8):
+      dt-bindings: riscv: Add Ssqosid extension description
+      riscv: Detect the Ssqosid extension
+      riscv: Add support for srmcfg CSR from Ssqosid extension
+      riscv_cbqri: Add capacity controller probe and allocation device ops
+      riscv_cbqri: resctrl: Add cache allocation via capacity block mask
+      riscv: Enable resctrl filesystem for Ssqosid
+      dt-bindings: riscv: Add generic CBQRI controller binding
+      riscv_cbqri: Add CBQRI cache capacity-allocation platform driver
 
-diff --git a/samples/trace_events/trace-events-sample.c b/samples/trace_events/trace-events-sample.c
-index 0b7a6efdb247..ca5d98c360cb 100644
---- a/samples/trace_events/trace-events-sample.c
-+++ b/samples/trace_events/trace-events-sample.c
-@@ -94,6 +94,20 @@ static int simple_thread_fn(void *arg)
- static DEFINE_MUTEX(thread_mutex);
- static int simple_thread_cnt;
- 
-+static struct foo_timer_data *foo_timer_data;
-+
-+static void sample_timer_cb(struct timer_list *t)
-+{
-+	struct foo_timer_data *data = container_of(t, struct foo_timer_data, timer);
-+
-+	get_cpu();
-+	trace_foo_timer_fn(data);
-+	(*this_cpu_ptr(data->counter))++;
-+	put_cpu();
-+
-+	mod_timer(t, jiffies + HZ);
-+}
-+
- int foo_bar_reg(void)
- {
- 	mutex_lock(&thread_mutex);
-@@ -132,9 +146,27 @@ void foo_bar_unreg(void)
- 
- static int __init trace_event_init(void)
- {
-+	foo_timer_data = kzalloc_obj(*foo_timer_data, GFP_KERNEL);
-+	if (!foo_timer_data)
-+		return -ENOMEM;
-+
-+	foo_timer_data->name = "sample_timer_counter";
-+	foo_timer_data->counter = alloc_percpu(int);
-+	if (!foo_timer_data->counter) {
-+		kfree(foo_timer_data);
-+		return -ENOMEM;
-+	}
-+
-+	timer_setup(&foo_timer_data->timer, sample_timer_cb, 0);
-+	mod_timer(&foo_timer_data->timer, jiffies + HZ);
-+
- 	simple_tsk = kthread_run(simple_thread, NULL, "event-sample");
--	if (IS_ERR(simple_tsk))
--		return -1;
-+	if (IS_ERR(simple_tsk)) {
-+		timer_shutdown_sync(&foo_timer_data->timer);
-+		free_percpu(foo_timer_data->counter);
-+		kfree(foo_timer_data);
-+		return PTR_ERR(simple_tsk);
-+	}
- 
- 	return 0;
- }
-@@ -147,6 +179,10 @@ static void __exit trace_event_exit(void)
- 		kthread_stop(simple_tsk_fn);
- 	simple_tsk_fn = NULL;
- 	mutex_unlock(&thread_mutex);
-+
-+	timer_shutdown_sync(&foo_timer_data->timer);
-+	free_percpu(foo_timer_data->counter);
-+	kfree(foo_timer_data);
- }
- 
- module_init(trace_event_init);
-diff --git a/samples/trace_events/trace-events-sample.h b/samples/trace_events/trace-events-sample.h
-index 1a05fc153353..816848a456a2 100644
---- a/samples/trace_events/trace-events-sample.h
-+++ b/samples/trace_events/trace-events-sample.h
-@@ -247,12 +247,14 @@
-  */
- 
- /*
-- * It is OK to have helper functions in the file, but they need to be protected
-- * from being defined more than once. Remember, this file gets included more
-- * than once.
-+ * It is OK to have helper functions and data structures in the file, but they
-+ * need to be protected from being defined more than once. Remember, this file
-+ * gets included more than once.
-  */
- #ifndef __TRACE_EVENT_SAMPLE_HELPER_FUNCTIONS
- #define __TRACE_EVENT_SAMPLE_HELPER_FUNCTIONS
-+#include <linux/timer.h>
-+
- static inline int __length_of(const int *list)
- {
- 	int i;
-@@ -270,6 +272,13 @@ enum {
- 	TRACE_SAMPLE_BAR = 4,
- 	TRACE_SAMPLE_ZOO = 8,
- };
-+
-+struct foo_timer_data {
-+	const char		*name;
-+	struct timer_list	timer;
-+	int __percpu		*counter;
-+};
-+
- #endif
- 
- /*
-@@ -595,6 +604,25 @@ TRACE_EVENT(foo_rel_loc,
- 		  __get_rel_bitmask(bitmask),
- 		  __get_rel_cpumask(cpumask))
- );
-+
-+TRACE_EVENT(foo_timer_fn,
-+
-+	TP_PROTO(struct foo_timer_data *data),
-+
-+	TP_ARGS(data),
-+
-+	TP_STRUCT__entry(
-+		__string(	name,			data->name	)
-+		__field(	int,			count		)
-+	),
-+
-+	TP_fast_assign(
-+		__assign_str(name);
-+		__entry->count	= *this_cpu_ptr(data->counter);
-+	),
-+
-+	TP_printk("name=%s count=%d", __get_str(name), __entry->count)
-+);
- #endif
- 
- /***** NOTICE! The #if protection ends here. *****/
-diff --git a/tools/testing/selftests/ftrace/test.d/dynevent/btf_probe_event.tc b/tools/testing/selftests/ftrace/test.d/dynevent/btf_probe_event.tc
-new file mode 100644
-index 000000000000..96791e120b7d
---- /dev/null
-+++ b/tools/testing/selftests/ftrace/test.d/dynevent/btf_probe_event.tc
-@@ -0,0 +1,51 @@
-+#!/bin/sh
-+# SPDX-License-Identifier: GPL-2.0
-+# description: BTF event with typecast and percpu access
-+# requires: dynamic_events "this_cpu_read(<fetcharg>)":README "[(structname[,field])]<argname>[->field[->field|.field...]]":README
-+
-+# Check if the sample module is loaded
-+if ! lsmod | grep -q trace_events_sample; then
-+  modprobe trace-events-sample || exit_unsupported
-+fi
-+
-+echo 0 > events/enable
-+echo > dynamic_events
-+
-+# The sample_timer_cb(struct timer_list *t) is called.
-+# We want to check (STRUCT,FIELD)VAR typecast and this_cpu_read() access.
-+# (foo_timer_data,timer)t converts t to struct foo_timer_data * using container_of.
-+# data->counter is a per-cpu pointer to int.
-+# this_cpu_read(data->counter) should give the value of the counter.
-+
-+echo 'f:mysample/myevent sample_timer_cb name=(foo_timer_data,timer)t->name:string count=this_cpu_read((foo_timer_data,timer)t->counter)' >> dynamic_events
-+
-+echo 1 > events/mysample/myevent/enable
-+echo 1 > events/sample-trace/foo_timer_fn/enable
-+
-+sleep 2
-+
-+echo 0 > events/mysample/myevent/enable
-+echo 0 > events/sample-trace/foo_timer_fn/enable
-+
-+# Compare the values.
-+MATCH=0
-+while read line; do
-+  if echo $line | grep -q "foo_timer_fn:"; then
-+    NAME=`echo $line | sed 's/.*name=\([^ ]*\) .*/\1/'`
-+    COUNT=`echo $line | sed 's/.*count=\([^ ]*\).*/\1/'`
-+    if grep -q "myevent:.*name=\"${NAME}\" count=$COUNT" trace; then
-+       MATCH=$((MATCH+1))
-+    fi
-+  fi
-+done < trace
-+
-+if [ $MATCH -eq 0 ]; then
-+  echo "No matching events found"
-+  exit_fail
-+fi
-+
-+# Clean up
-+echo 0 > events/mysample/myevent/enable
-+echo 0 > events/sample-trace/foo_timer_fn/enable
-+echo > dynamic_events
-+clear_trace
-diff --git a/tools/testing/selftests/ftrace/test.d/dynevent/btf_typecast_accepted.tc b/tools/testing/selftests/ftrace/test.d/dynevent/btf_typecast_accepted.tc
-new file mode 100644
-index 000000000000..acf0b5a917d3
---- /dev/null
-+++ b/tools/testing/selftests/ftrace/test.d/dynevent/btf_typecast_accepted.tc
-@@ -0,0 +1,107 @@
-+#!/bin/sh
-+# SPDX-License-Identifier: GPL-2.0
-+# description: BTF typecast and percpu access syntax validation
-+# requires: dynamic_events "this_cpu_read(<fetcharg>)":README "[(structname[,field])]<argname>[->field[->field|.field...]]":README
-+
-+KPROBES=
-+FPROBES=
-+
-+if grep -qF "p[:[<group>/][<event>]] <place> [<args>]" README ; then
-+  KPROBES=yes
-+fi
-+if grep -qF "f[:[<group>/][<event>]] <func-name>[%return] [<args>]" README ; then
-+  FPROBES=yes
-+fi
-+
-+if [ -z "$KPROBES" -a -z "$FPROBES" ] ; then
-+  exit_unsupported
-+fi
-+
-+echo 0 > events/enable
-+echo > dynamic_events
-+
-+# Load trace-events-sample module if available to have per-CPU counter structure defined
-+if ! lsmod | grep -q trace_events_sample; then
-+  modprobe trace-events-sample || true
-+fi
-+
-+if [ "$FPROBES" ] ; then
-+  # 1. Test basic typecast on fprobe
-+  echo 'f:fpevent1 vfs_read name=(file)file->f_path.dentry->d_name.name:string' >> dynamic_events
-+  # 2. Test parenthesized typecast target on fprobe
-+  echo 'f:fpevent2 vfs_read name=(file)(file)->f_path.dentry->d_name.name:string' >> dynamic_events
-+  # 3. Test nested typecasts on fprobe
-+  echo 'f:fpevent3 vfs_read name=(dentry)((file)file->f_path.dentry)->d_name.name:string' >> dynamic_events
-+  # 4. Test container_of-style typecast with field option on fprobe
-+  echo 'f:fpevent4 vfs_read name=(file,f_path)file->f_mode' >> dynamic_events
-+  # 5. Test typecast on return value on fprobe
-+  echo 'f:fpevent5 vfs_read%return name=(file)$retval->f_path.dentry->d_name.name:string' >> dynamic_events
-+  # 6. Test $current variable support on fprobe
-+  echo 'f:fpevent6 vfs_read pid=$current->pid' >> dynamic_events
-+  echo 'f:fpevent7 vfs_read pid=(task_struct)$current->pid' >> dynamic_events
-+  echo 'f:fpevent8 vfs_read pid=(task_struct,group_leader)$current->pid' >> dynamic_events
-+
-+  # Test this_cpu_read and this_cpu_ptr on fprobe
-+  if lsmod | grep -q trace_events_sample; then
-+    echo 'f:fpevent9 sample_timer_cb name=(foo_timer_data,timer)t->name:string count=this_cpu_read((foo_timer_data,timer)t->counter)' >> dynamic_events
-+    echo 'f:fpevent10 sample_timer_cb ptr=this_cpu_ptr((foo_timer_data,timer)t->counter)' >> dynamic_events
-+  fi
-+fi
-+
-+if [ "$KPROBES" ] ; then
-+  # 7. Test basic typecast on kprobe
-+  echo 'p:kpevent1 vfs_read name=(file)file->f_path.dentry->d_name.name:string' >> dynamic_events
-+  # 8. Test parenthesized typecast target on kprobe
-+  echo 'p:kpevent2 vfs_read name=(file)(file)->f_path.dentry->d_name.name:string' >> dynamic_events
-+  # 9. Test nested typecasts on kprobe
-+  echo 'p:kpevent3 vfs_read name=(dentry)((file)file->f_path.dentry)->d_name.name:string' >> dynamic_events
-+  # 10. Test container_of-style typecast with field option on kprobe
-+  echo 'p:kpevent4 vfs_read name=(file,f_path)file->f_mode' >> dynamic_events
-+  # 11. Test typecast on return value on kretprobe
-+  echo 'r:kpevent5 vfs_read name=(file)$retval->f_path.dentry->d_name.name:string' >> dynamic_events
-+  # 12. Test $current variable support on kprobe
-+  echo 'p:kpevent6 vfs_read pid=$current->pid' >> dynamic_events
-+  echo 'p:kpevent7 vfs_read pid=(task_struct)$current->pid' >> dynamic_events
-+  echo 'p:kpevent8 vfs_read pid=(task_struct,group_leader)$current->pid' >> dynamic_events
-+
-+  # Test this_cpu_read and this_cpu_ptr on kprobe
-+  if lsmod | grep -q trace_events_sample; then
-+    echo 'p:kpevent9 sample_timer_cb name=(foo_timer_data,timer)t->name:string count=this_cpu_read((foo_timer_data,timer)t->counter)' >> dynamic_events
-+    echo 'p:kpevent10 sample_timer_cb ptr=this_cpu_ptr((foo_timer_data,timer)t->counter)' >> dynamic_events
-+  fi
-+fi
-+
-+# Verify the events exist in dynamic_events
-+if [ "$FPROBES" ] ; then
-+  grep -q "fpevent1 " dynamic_events
-+  grep -q "fpevent2 " dynamic_events
-+  grep -q "fpevent3 " dynamic_events
-+  grep -q "fpevent4 " dynamic_events
-+  grep -q "fpevent5 " dynamic_events
-+  grep -q "fpevent6 " dynamic_events
-+  grep -q "fpevent7 " dynamic_events
-+  grep -q "fpevent8 " dynamic_events
-+  if lsmod | grep -q trace_events_sample; then
-+    grep -q "fpevent9 " dynamic_events
-+    grep -q "fpevent10 " dynamic_events
-+  fi
-+fi
-+
-+if [ "$KPROBES" ] ; then
-+  grep -q "kpevent1 " dynamic_events
-+  grep -q "kpevent2 " dynamic_events
-+  grep -q "kpevent3 " dynamic_events
-+  grep -q "kpevent4 " dynamic_events
-+  grep -q "kpevent5 " dynamic_events
-+  grep -q "kpevent6 " dynamic_events
-+  grep -q "kpevent7 " dynamic_events
-+  grep -q "kpevent8 " dynamic_events
-+  if lsmod | grep -q trace_events_sample; then
-+    grep -q "kpevent9 " dynamic_events
-+    grep -q "kpevent10 " dynamic_events
-+  fi
-+fi
-+
-+# Clean up
-+echo > dynamic_events
-+clear_trace
-diff --git a/tools/testing/selftests/ftrace/test.d/dynevent/eprobes_syntax_errors.tc b/tools/testing/selftests/ftrace/test.d/dynevent/eprobes_syntax_errors.tc
-index 0e65e787e426..ae17eb344bf7 100644
---- a/tools/testing/selftests/ftrace/test.d/dynevent/eprobes_syntax_errors.tc
-+++ b/tools/testing/selftests/ftrace/test.d/dynevent/eprobes_syntax_errors.tc
-@@ -21,6 +21,9 @@ check_error 'e:foo/^bar.1 syscalls/sys_enter_openat'	# BAD_EVENT_NAME
- 
- check_error 'e:foo/bar syscalls/sys_enter_openat arg=^$foo'	# BAD_ATTACH_ARG
- 
-+check_error 'e:foo/bar syscalls/sys_enter_openat arg=^COMM'	# NO_EVENT_FIELD
-+check_error 'e:foo/bar syscalls/sys_enter_openat arg=^current'	# NO_EVENT_FIELD
-+
- if grep -q '<attached-group>\.<attached-event>.*\[if <filter>\]' README; then
-   check_error 'e:foo/bar syscalls/sys_enter_openat if ^'	# NO_EP_FILTER
- fi
-diff --git a/tools/testing/selftests/ftrace/test.d/dynevent/fprobe_syntax_errors.tc b/tools/testing/selftests/ftrace/test.d/dynevent/fprobe_syntax_errors.tc
-index fee479295e2f..e9d7e6919c7f 100644
---- a/tools/testing/selftests/ftrace/test.d/dynevent/fprobe_syntax_errors.tc
-+++ b/tools/testing/selftests/ftrace/test.d/dynevent/fprobe_syntax_errors.tc
-@@ -112,6 +112,18 @@ check_error 'f vfs_read%return $retval->^foo'	# NO_PTR_STRCT
- check_error 'f vfs_read file->^foo'		# NO_BTF_FIELD
- check_error 'f vfs_read file^-.foo'		# BAD_HYPHEN
- check_error 'f vfs_read ^file:string'		# BAD_TYPE4STR
-+if grep -qF "[(structname" README ; then
-+check_error 'f vfs_read arg1=(task_struct)file^'		# TYPECAST_REQ_FIELD
-+check_error 'f vfs_read arg1=(a)((b)((c)(^(d)file->d)->c)->b)->a'	# TOO_MANY_NESTED
-+check_error 'f vfs_read arg1=(task_struct,^in_execve)file->comm'	# TYPECAST_NOT_ALIGNED
-+check_error 'f vfs_read arg1=(task_struct,^foo_bar)file->pid'	# NO_BTF_FIELD
-+check_error 'f vfs_read arg1=(^task_struct1234)file->pid'	# NO_PTR_STRCT
-+check_error 'f vfs_read arg1=(task_struct,se^->group_node)file->comm'	# TYPECAST_BAD_ARROW
-+check_error 'f vfs_read arg1=(task_struct,^->pid)file->comm'	# NO_BTF_FIELD
-+check_error 'f vfs_read arg1=(task_struct,^.pid)file->comm'	# NO_BTF_FIELD
-+check_error 'f vfs_read arg1=(task_struct,^.)file->comm'	# NO_BTF_FIELD
-+check_error 'f vfs_read arg1=(task_struct)^@symbol+10->comm'	# TYPECAST_SYM_OFFSET
-+fi
- fi
- 
- else
-diff --git a/tools/testing/selftests/ftrace/test.d/kprobe/kprobe_syntax_errors.tc b/tools/testing/selftests/ftrace/test.d/kprobe/kprobe_syntax_errors.tc
-index 8f1c58f0c239..21ce8414459f 100644
---- a/tools/testing/selftests/ftrace/test.d/kprobe/kprobe_syntax_errors.tc
-+++ b/tools/testing/selftests/ftrace/test.d/kprobe/kprobe_syntax_errors.tc
-@@ -115,6 +115,18 @@ check_error 'p vfs_read+20 ^$arg*'		# NOFENTRY_ARGS
- check_error 'p vfs_read ^hoge'			# NO_BTFARG
- check_error 'p kfree ^$arg10'			# NO_BTFARG (exceed the number of parameters)
- check_error 'r kfree ^$retval'			# NO_RETVAL
-+if grep -qF "[(structname" README ; then
-+check_error 'p vfs_read arg1=(task_struct)file^'		# TYPECAST_REQ_FIELD
-+check_error 'p vfs_read arg1=(a)((b)((c)(^(d)file->d)->c)->b)->a'	# TOO_MANY_NESTED
-+check_error 'p vfs_read arg1=(task_struct,^in_execve)file->comm'	# TYPECAST_NOT_ALIGNED
-+check_error 'p vfs_read arg1=(task_struct,^foo_bar)file->pid'	# NO_BTF_FIELD
-+check_error 'p vfs_read arg1=(^task_struct1234)file->pid'		# NO_PTR_STRCT
-+check_error 'p vfs_read arg1=(task_struct,se^->group_node)file->comm'	# TYPECAST_BAD_ARROW
-+check_error 'p vfs_read arg1=(task_struct,^->pid)file->comm'	# NO_BTF_FIELD
-+check_error 'p vfs_read arg1=(task_struct,^.pid)file->comm'	# NO_BTF_FIELD
-+check_error 'p vfs_read arg1=(task_struct,^.)file->comm'	# NO_BTF_FIELD
-+check_error 'p vfs_read arg1=(task_struct)^@symbol+10->comm'	# TYPECAST_SYM_OFFSET
-+fi
- else
- check_error 'p vfs_read ^$arg*'			# NOSUP_BTFARG
- fi
-diff --git a/tools/testing/selftests/ftrace/test.d/kprobe/uprobe_syntax_errors.tc b/tools/testing/selftests/ftrace/test.d/kprobe/uprobe_syntax_errors.tc
-index c817158b99db..e12dc967ec76 100644
---- a/tools/testing/selftests/ftrace/test.d/kprobe/uprobe_syntax_errors.tc
-+++ b/tools/testing/selftests/ftrace/test.d/kprobe/uprobe_syntax_errors.tc
-@@ -28,4 +28,9 @@ if grep -q ".*symstr.*" README; then
- check_error 'p /bin/sh:10 $stack0:^symstr'	# BAD_TYPE
- fi
- 
-+# $current is not supported by uprobe
-+if grep -q "\$current.*" README; then
-+check_error 'p /bin/sh:10 ^$current:u8'	# BAD_VAR
-+fi
-+
- exit 0
+ .../devicetree/bindings/riscv/extensions.yaml      |   6 +
+ .../devicetree/bindings/riscv/riscv,cbqri.yaml     |  97 +++
+ MAINTAINERS                                        |  15 +
+ arch/riscv/Kconfig                                 |  20 +
+ arch/riscv/include/asm/csr.h                       |   5 +
+ arch/riscv/include/asm/hwcap.h                     |   1 +
+ arch/riscv/include/asm/processor.h                 |   3 +
+ arch/riscv/include/asm/qos.h                       |  83 +++
+ arch/riscv/include/asm/resctrl.h                   | 147 ++++
+ arch/riscv/include/asm/switch_to.h                 |   3 +
+ arch/riscv/kernel/Makefile                         |   2 +
+ arch/riscv/kernel/cpufeature.c                     |   1 +
+ arch/riscv/kernel/qos.c                            |  98 +++
+ drivers/resctrl/Kconfig                            |  29 +
+ drivers/resctrl/Makefile                           |   5 +
+ drivers/resctrl/cbqri_capacity.c                   | 132 ++++
+ drivers/resctrl/cbqri_devices.c                    | 520 ++++++++++++++
+ drivers/resctrl/cbqri_internal.h                   | 107 +++
+ drivers/resctrl/cbqri_resctrl.c                    | 779 +++++++++++++++++++++
+ include/linux/riscv_cbqri.h                        |  47 ++
+ 20 files changed, 2100 insertions(+)
+---
+base-commit: 4e5dfb7c84012007c3c7061126491bbc92d71bf1
+change-id: 20260610-dfustini-atl-sc-cbqri-dt-410c8e2711dd
+
+Best regards,
+-- 
+Drew Fustini <fustini@kernel.org>
 
 
