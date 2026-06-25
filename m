@@ -1,190 +1,174 @@
-Return-Path: <linux-doc+bounces-93502-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93503-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id BX+WBZv9PGrAvQgAu9opvQ
-	(envelope-from <linux-doc+bounces-93502-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 12:06:19 +0200
+	id yTWuFj8BPWqrvggAu9opvQ
+	(envelope-from <linux-doc+bounces-93503-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 12:21:51 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7111D6C47A3
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 12:06:18 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id A74326C49D8
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 12:21:50 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=KnnEqXIL;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93502-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93502-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
+	dkim=none;
+	dmarc=none;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93503-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93503-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id BDAD63016D3D
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 10:05:59 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 748C6302B77D
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 10:21:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E11323CE0A2;
-	Thu, 25 Jun 2026 10:05:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8C8E23CF973;
+	Thu, 25 Jun 2026 10:21:25 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mailgw.kylinos.cn (mailgw.kylinos.cn [124.126.103.232])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5CE223CEB9B
-	for <linux-doc@vger.kernel.org>; Thu, 25 Jun 2026 10:05:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 177693812CD;
+	Thu, 25 Jun 2026 10:21:21 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782381956; cv=none; b=mjlHxp6s5kcPflKt70IRt4p3myYfmZhlyu7PaEAu8GkdHpnc0Volzv9dYX4cirViJ5YqAOQ5Hvrr8hY28qxKlV67nte0fR0k9RiAWZOunaZGuXO3BM5FzBQGKX39af27ziZXR1sx7T0e2Q1wD7rMpLfWMZnDcSzdAGlq4aLOKjY=
+	t=1782382885; cv=none; b=hBBhQPDJsWAeTchUZQajTQmc4lb1w9HFv2O9O/nRYTzrKCzXS3Ilt9fcBr7b/WkpuvR7aZ/JU/lU/kyYnZ4zsohEsIWJ2MpWrMrbzwSorD/P8k/u58AvobPMlyXqPrTTRnQ4/U9ju4nk7TMwoOdJYX7323z5Fn2gr6/93vi5Y2w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782381956; c=relaxed/simple;
-	bh=bCzLf4a12m0+P4xvPF6Kf7T8wGTy2t8U1zmJTmo1qUs=;
-	h=From:Date:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=rvfJs7WS7y/3UyFMFRcNEHXWQyZNHP08kDTQiV2BBX2wOLVZ9g3OG68WYMYK1/DnGBDyHz+ahQnN0lbmxZdlO8Mkmkm6/xgSiVRKr53BPe6++QP3Yeq2FoHvFprBSKcPiU/ByYOR2Ex97d8VYnoUe3C+sptPeR2EBhBb+4SgzX8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=KnnEqXIL; arc=none smtp.client-ip=209.85.214.180
-Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-2c7cfa17fedso16081695ad.3
-        for <linux-doc@vger.kernel.org>; Thu, 25 Jun 2026 03:05:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782381954; x=1782986754; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:date:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=yuqp0KNKTBgh4MzJ+duwi9A+WSjJ1uqkPtcQvGtxNIc=;
-        b=KnnEqXILtRRtgTtODm/1rhV2Rnv+tttPQM6kZFVseUopZJ/Zr3kgAtVtJrfrS5sHJ7
-         rg2Bl1qEP2VXSDqYyPiCvS+RkREkSg3JEkhUjmpkRcjMD5eNOutWW1fAJyeBYtIM/FTq
-         tnErvisUyiRlUhcKoDMpRZamx/OFsPeIf6ZonS2ASOXJdVa/qCCo1JvJkG4LimyeHh7f
-         KOkIEYZMhf/r4GGbG1jhU45dGdlVouQodaxFVIwRswLEtTZlQBIs33eoouFV+tlZc4WW
-         zqpWCa1PqX5ag8o69Me7VQgV+WgPZAFDcGW9f12JQHu5rTw6HS5sLWnZL1bjzA0dXy0D
-         DRmA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782381954; x=1782986754;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:date:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=yuqp0KNKTBgh4MzJ+duwi9A+WSjJ1uqkPtcQvGtxNIc=;
-        b=mb0kroMFWzKEN+OdD0yGBvHnwXHN7PHqbiSVs/TiYLLhJ0H1BxlTA2TIWnM4YIaJ2n
-         Hq5R3aqf6jFWrX2dOZNzogIyR4JHwB0dT63I7UNwOl3VFKQ0+/qfe375RbHbkGrMNfAh
-         7MqB6ZI9E6sZvZlgsobcZhxkpuxzvtEI2PxxkRKnD53zdM7IDUHcRq9xzPAFE9vTKyem
-         XdwypNIlkVOy07zyfYhDk6w3orqK+Wqz4vxgw5a2+jR1ZHcvyuidz4LYTMpgbTYjovEf
-         L4FnQLDEa/qEamIK+s6YxhndtQ4Kvej+m+mLxVy0Pfh/q/yBmaQKeQIOgu38ItTzolfW
-         rJ8w==
-X-Gm-Message-State: AOJu0YzqTYUIquAex9yOcJJzbYG3cTQiPxUmdGC0ru0hFo9XIy2oWA5w
-	RXTrGgV5AQicnEL6lB5KLe19b/g/wsAur2h1vzwFkkYsXRPdCrl9YTCH
-X-Gm-Gg: AfdE7cm2z85ZXp6ORtOvG9X+03KLPZADuUdBds8mHSxsmU5llOh7ujI6GNFt2JYNI90
-	1HR1LwQk6UyLG3YsccO8/9uJHqZIzINKMIfiVJH7hQ/fBH1BkWFV1lXaZmSytTyW6zZ/E2yyNkM
-	UmYB4Koq8ZmiWToNCVNfVPdj9zopWXPRFnjXzSy8EoSdqxhgDQKLJXV380X+K3RLQgyoCgmvuQA
-	H4fHc2gjr4l0AOf5Jp5dCi3hTXe1AXcleRgVsv++zhPvGgptruM3OlXMlq7Z21ZOL0Fkm1H9GY5
-	6xCSNCwoeWj8MHGtj+QtGWc383eKOa+AqELhldP3yccjHcqAuQBlE0AE+M6RJ6trH9TZLAi5hUt
-	6FgUV5/OjcD6TYKCgdXTAtff2i7pulxynoM9vX7xVbgbvE/4n7Xledb9oIQo6ieRl9DBgzQ==
-X-Received: by 2002:a17:902:ce87:b0:2ae:450c:951e with SMTP id d9443c01a7336-2c7fc73bb04mr20774235ad.17.1782381954493;
-        Thu, 25 Jun 2026 03:05:54 -0700 (PDT)
-Received: from localhost ([2a09:bac5:55fe:30c8::4dc:c])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c7f63b2e18sm16974275ad.41.2026.06.25.03.05.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 25 Jun 2026 03:05:53 -0700 (PDT)
-From: Coiby Xu <coiby.xu@gmail.com>
-X-Google-Original-From: Coiby Xu <Coiby.Xu@gmail.com>
-Date: Thu, 25 Jun 2026 18:05:32 +0800
-To: Guillaume Tucker <gtucker@gtucker.io>
-Cc: linux-doc@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>, 
-	Shuah Khan <skhan@linuxfoundation.org>, "open list:DOCUMENTATION PROCESS" <workflows@vger.kernel.org>, 
-	open list <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH] Documentation: dev-tools: scripts/container prefers
- Podman
-Message-ID: <ajz8qtGkafGZnCPv@Rk>
-References: <20260624013850.1853171-1-coiby.xu@gmail.com>
- <df2fd6ae-69bd-42e6-bf28-ad8103b4189f@gtucker.io>
+	s=arc-20240116; t=1782382885; c=relaxed/simple;
+	bh=HclDAl9w7nD13+rfBStpPxKU94inq+mAd27AU3ktHDw=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=P7FxuQ1xIKC7Tk5hHRGr5OQjRRanCih64MwHC7PgANDiU39Wzif9aGMpWR79C//9yqJck7+337esFLAnV/8e7zjVtJWKw5zxJbGi23v4lMpEzI0r85/p8P5h/T3CBqZ20uUh03iodL6kXq1OvioyyClIfSX9cym1F/FES0yfXxI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=kylinos.cn; spf=pass smtp.mailfrom=kylinos.cn; arc=none smtp.client-ip=124.126.103.232
+X-UUID: 99c25ac0707f11f1aa26b74ffac11d73-20260625
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.3.12,REQID:0080bd47-685c-4fc7-9089-0ad4c452358a,IP:10,
+	URL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
+	:release,TS:10
+X-CID-INFO: VERSION:1.3.12,REQID:0080bd47-685c-4fc7-9089-0ad4c452358a,IP:10,UR
+	L:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:r
+	elease,TS:10
+X-CID-META: VersionHash:e7bac3a,CLOUDID:429edb8e878399609e86c16f6629f87f,BulkI
+	D:260624112706YSGBNPCQ,BulkQuantity:7,Recheck:0,SF:17|19|38|64|66|78|80|81
+	|82|83|102|127|841|865|898,TC:nil,Content:0|15|50,EDM:-3,IP:-2,URL:0,File:
+	nil,RT:nil,Bulk:40,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:
+	0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 2,SSN|SDN
+X-CID-BAS: 2,SSN|SDN,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR,TF_CID_SPAM_FAS,TF_CID_SPAM_FSD
+X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
+X-UUID: 99c25ac0707f11f1aa26b74ffac11d73-20260625
+X-User: lihongfu@kylinos.cn
+Received: from [192.168.109.123] [(223.70.159.239)] by mailgw.kylinos.cn
+	(envelope-from <lihongfu@kylinos.cn>)
+	(Generic MTA with TLSv1.3 TLS_AES_128_GCM_SHA256 128/128)
+	with ESMTP id 1977568665; Thu, 25 Jun 2026 18:21:16 +0800
+Message-ID: <c645a8df-1d76-4e4d-bb97-47c539f7a205@kylinos.cn>
+Date: Thu, 25 Jun 2026 18:21:11 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <df2fd6ae-69bd-42e6-bf28-ad8103b4189f@gtucker.io>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] cgroup/dmem: add per-region event counters
+To: Natalie Vock <natalie.vock@gmx.de>, tj@kernel.org
+Cc: cgroups@vger.kernel.org, corbet@lwn.net, dev@lankhorst.se,
+ dri-devel@lists.freedesktop.org, hannes@cmpxchg.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, mkoutny@suse.com,
+ mripard@kernel.org, skhan@linuxfoundation.org, hongfu.li@linux.dev
+References: <ajwnf0uzT4PMHYZx@slm.duckdns.org>
+ <20260625021053.488107-1-lihongfu@kylinos.cn>
+ <b549422c-7c35-434d-ad4a-49a4676970ac@gmx.de>
+From: Hongfu Li <lihongfu@kylinos.cn>
+In-Reply-To: <b549422c-7c35-434d-ad4a-49a4676970ac@gmx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-1.46 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:gtucker@gtucker.io,m:linux-doc@vger.kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:workflows@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[coibyxu@gmail.com,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TAGGED_FROM(0.00)[bounces-93502-lists,linux-doc=lfdr.de];
-	TO_DN_SOME(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:natalie.vock@gmx.de,m:tj@kernel.org,m:cgroups@vger.kernel.org,m:corbet@lwn.net,m:dev@lankhorst.se,m:dri-devel@lists.freedesktop.org,m:hannes@cmpxchg.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:mkoutny@suse.com,m:mripard@kernel.org,m:skhan@linuxfoundation.org,m:hongfu.li@linux.dev,s:lists@lfdr.de];
+	DMARC_NA(0.00)[kylinos.cn];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[coibyxu@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
+	FREEMAIL_TO(0.00)[gmx.de,kernel.org];
+	FORGED_SENDER(0.00)[lihongfu@kylinos.cn,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-93503-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,gtucker.io:email]
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[lihongfu@kylinos.cn,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	R_DKIM_NA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp,dmem.events:url]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 7111D6C47A3
+X-Rspamd-Queue-Id: A74326C49D8
 
-On Wed, Jun 24, 2026 at 11:02:49PM +0200, Guillaume Tucker wrote:
->Hi Coiby,
+Hi,
 
-Hi Guillaume,
-
+On 6/25/26 4:57 PM, Natalie Vock wrote:
+> Hi,
 >
->On 24/06/2026 03:38, Coiby Xu wrote:
->> Obviously scripts/container prefers Podman over Docker. Putting podman
->> before docker also makes it consistent with following parts of the doc
->> and the help text of the tool.
+> On 6/25/26 04:10, Hongfu Li wrote:
+>> Hi, Tejun
+>> Thanks for the review comments.
 >>
->> Signed-off-by: Coiby Xu <coiby.xu@gmail.com>
->> ---
->>  Documentation/dev-tools/container.rst | 6 +++---
->>  1 file changed, 3 insertions(+), 3 deletions(-)
+>>>> Add dmem.events to report hierarchical low/max event counts per DMEM
+>>>> region.  Increment counters on dmem.max allocation failures and
+>>>> dmem.low protection events.  The file is available for non-root 
+>>>> cgroups
+>>>> only.
+>>>
+>>> Please don't double space in descs or comments. Also, maybe it's 
+>>> obvious but
+>>> it'd help if you list why and how this is useful. Why do we want to add
+>>> this?
 >>
->> diff --git a/Documentation/dev-tools/container.rst b/Documentation/dev-tools/container.rst
->> index 452415b64662..9e23f79d5ae1 100644
->> --- a/Documentation/dev-tools/container.rst
->> +++ b/Documentation/dev-tools/container.rst
->> @@ -40,7 +40,7 @@ Available options:
+>> I'll fix the double spacing in the commit message and comments.
 >>
->>  ``-r, --runtime RUNTIME``
->>
->> -    Container runtime name.  Supported runtimes: ``docker``, ``podman``.
->> +    Container runtime name.  Supported runtimes: ``podman``, ``docker``.
->>
->>      If not specified, the first one found on the system will be used
->>      i.e. Podman if present, otherwise Docker.
->> @@ -75,8 +75,8 @@ working directory and adjust the user and group id as needed.
->>
->>  The container image which would typically include a compiler toolchain is
->>  provided by the user and selected via the ``-i`` option.  The container runtime
->> -can be selected with the ``-r`` option, which can be either ``docker`` or
->> -``podman``.  If none is specified, the first one found on the system will be
->> +can be selected with the ``-r`` option, which can be either ``podman`` or
->> +``docker``.  If none is specified, the first one found on the system will be
->>  used while giving priority to Podman.  Support for other runtimes may be added
->>  later depending on their popularity among users.
->>
+>> As for the motivation: dmem already exposes per-region limits and 
+>> current
+>> usage, but not how often those limits actually matter at runtime. 
+>> Without
+>> event counters, it's hard to tell whether allocation failures come from
+>> this cgroup, a parent limit, or pressure elsewhere in the hierarchy.
+>> dmem.events provides that visibility for tuning dmem.low/dmem.max and
+>> diagnosing recurring device memory pressure.
 >
->It's a very subtle tweak but it does help avoid some confusion.
->
->Reviewed-by: Guillaume Tucker <gtucker@gtucker.io>
+> Shouldn't you be able to deduce this rather trivially from just 
+> looking at the current usage together with the low/max limits you 
+> already set? I'm not sure I really see anything this events file 
+> provides that analysis of current usage and set limits doesn't? If 
+> your usage is highly variable, the separately-developed dmem.peak file 
+> might also suit your needs, but still, not sure what you can do with 
+> dmem.events that you can't already do with these tools. 
+Thanks for the question.
 
-Thanks for taking time to reviewing the patch!
+Besides exposing counters, dmem.events notifies userspace on changes via
+cgroup_file_notify(). This allows tools to monitor limit-related events
+(for example, allocation failures or low-protection fallbacks) 
+asynchronously,
+without the need to periodically poll dmem.current against the limits. 
+While
+you could infer some conditions from current usage and limits, polling is
+inefficient and cannot capture transient events in real time. dmem.peak only
+records the highest usage, not these specific events.
 
->
->Thanks,
->Guillaume
->
+So dmem.events provides both lower overhead and richer, actionable 
+information.
 
--- 
 Best regards,
-Coiby
+Hongfu
+
+
+
 
