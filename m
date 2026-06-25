@@ -1,326 +1,506 @@
-Return-Path: <linux-doc+bounces-93570-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93572-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 6CdlMB9VPWrz1QgAu9opvQ
-	(envelope-from <linux-doc+bounces-93570-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 18:19:43 +0200
+	id pFsAD4VdPWqx1wgAu9opvQ
+	(envelope-from <linux-doc+bounces-93572-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 18:55:33 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5EFBE6C7691
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 18:19:43 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id BDB7F6C794F
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 18:55:32 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=GtWTdtpB;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93570-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-93570-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=OVmp+EIE;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93572-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-93572-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=nvidia.com;
+	arc=reject ("cv is fail on i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id CBBDA3004DC2
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 16:19:42 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 1775B3035F2D
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 16:55:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 53B2B3DB964;
-	Thu, 25 Jun 2026 16:19:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E7ED93EB114;
+	Thu, 25 Jun 2026 16:55:26 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from PH8PR06CU001.outbound.protection.outlook.com (mail-westus3azon11012046.outbound.protection.outlook.com [40.107.209.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 07F1E35BDA4;
-	Thu, 25 Jun 2026 16:19:37 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782404379; cv=none; b=CNUMgTsJMp82y2L1ouUhUcWujLJzbYhfg/oNn86hk6TKHknyW952PPp0tjUK3lbiI+AW5wWcxU7pnHdRY8G36ew9zOz8CgmidEpSpAuKr6xTLMxkWEjUtB96bTbPHOWuBT4rWcYJNH1EOdHVlPc3/XaT+7wpfWLMB9ZWtrzqf6c=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782404379; c=relaxed/simple;
-	bh=qG1LzwDqL57cV5rkC2sruMzkCxUQSr9mlL1EhPq5ZRc=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=HHvDI7njengArvdy0rCqKd3QLwE17Hn6uwOjzBOXVentZ2C1E0kmVKaWJQTRl0EFTyPD9fcKXxwrhW8PZPaLENJ8BU9uPulhemCU1botLkKSesVPYbzLWA5A5/kiOdxSce3UyD41fLauubuFE+spJhH1ODeZH6/wddkJyDHxUjU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GtWTdtpB; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AAC171F000E9;
-	Thu, 25 Jun 2026 16:19:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782404377;
-	bh=7YcMVVY3Ngo1QA2QA4VNeE39obuNmOZ0bZLp0deFa4Q=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=GtWTdtpBtJaqqhntdx94UBquSGkQICKW/35LtX6FCenrEFQOyrhP84qGQESOlDQMt
-	 Z9LIvY5aXOX6SoaXq+xSAzSJD5sFsuPQEa1y6fVPdQJSFUMo7/orxM5U2/YWwXt6M9
-	 CpCNjZIw8p27gyJJtmV+DODPhEK+LlamOOUcQIT5Xtp4bjswlX3r7gYwJAnmM9ud/B
-	 4zUYWLNSXP2DM4cGiVm89nf7zweBbJS1rksQ1qj9fTKrAKhZ0SUb/3yUqGQKeQPrle
-	 tiMGmj9jRNQbb7eqYg+G/2mRp2ndZM6+jqbLXLHxlRvW3NweSnGfDA1sJZDs+YnhYq
-	 syY9nXn1Ozf9A==
-Date: Thu, 25 Jun 2026 17:19:28 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Drew Fustini <fustini@kernel.org>
-Cc: Adrien Ricciardi <aricciardi@baylibre.com>,
-	Alexandre Ghiti <alex@ghiti.fr>,
-	Atish Kumar Patra <atishp@rivosinc.com>,
-	Atish Patra <atish.patra@linux.dev>,
-	Babu Moger <babu.moger@amd.com>, Ben Horgan <ben.horgan@arm.com>,
-	Borislav Petkov <bp@alien8.de>, Chen Pei <cp0613@linux.alibaba.com>,
-	Conor Dooley <conor.dooley@microchip.com>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	Dave Martin <Dave.Martin@arm.com>,
-	Fenghua Yu <fenghua.yu@intel.com>,
-	Gong Shuai <gong.shuai@sanechips.com.cn>,
-	Gong Shuai <gsh517@gmail.com>, guo.wenjia23@zte.com.cn,
-	James Morse <james.morse@arm.com>,
-	Kornel =?utf-8?Q?Dul=C4=99ba?= <mindal@semihalf.com>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, liu.qingtao2@zte.com.cn,
-	Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>, Paul Walmsley <pjw@kernel.org>,
-	Peter Newman <peternewman@google.com>,
-	Radim =?utf-8?B?S3LEjW3DocWZ?= <rkrcmar@ventanamicro.com>,
-	Reinette Chatre <reinette.chatre@intel.com>,
-	Rob Herring <robh@kernel.org>,
-	Samuel Holland <samuel.holland@sifive.com>,
-	Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-	Tony Luck <tony.luck@intel.com>,
-	Vasudevan Srinivasan <vasu@rivosinc.com>,
-	Ved Shanbhogue <ved@rivosinc.com>, Weiwei Li <liwei1518@gmail.com>,
-	yunhui cui <cuiyunhui@bytedance.com>, linux-kernel@vger.kernel.org,
-	linux-riscv@lists.infradead.org, x86@kernel.org,
-	devicetree@vger.kernel.org, linux-rt-devel@lists.linux.dev,
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v2 7/8] dt-bindings: riscv: Add generic CBQRI controller
- binding
-Message-ID: <20260625-cupbearer-failing-9ce0abf97b93@spud>
-References: <20260624-dfustini-atl-sc-cbqri-dt-v2-0-2f8049fd902b@kernel.org>
- <20260624-dfustini-atl-sc-cbqri-dt-v2-7-2f8049fd902b@kernel.org>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F3BE30D414;
+	Thu, 25 Jun 2026 16:55:24 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1782406526; cv=fail; b=hujFZMwfzitgHaJbS8QzDCUsVMNexrRbJSibTYbAth/LeCNCWY+aV7kMF1y0CQxHfbLg8OEvseX9GevGVL1H4vA6K2JigUV1KkztcljyELF1jlM39gkmQ7WhRDo6s+se0AXyCjVgdRrH0i0vvHbkV31s7+IX4sNmBQXxjQAg7nU=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1782406526; c=relaxed/simple;
+	bh=wxFWbQtSW68/x10AIp2yoFRK+KdxYuTjkkj1CDc9x0k=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=Og4+KYtOxLOk+ijUj1lQHEaONJxZYFLpAJcRf5OZz3OaQEg26yXWEt/xm4eiYMlWmw4iObkk4eEACd2OCoM37ygdcuZtaIRpW0uY9cwWeWxUySnzwr8qCSZZBbIjdrssVc3cUuENilTNjwV5CYPZOD4ZyGzljoQgO4cE84tGLnQ=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=OVmp+EIE; arc=fail smtp.client-ip=40.107.209.46
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=uIDDodWUWz7OmGPNDRAHE3n5VcVLnVq2oRGbWwLQsIgGFf4ulN4hIR5CyamCgVcivnYp8/DVq8bbr3l3zt3nAClpoKYuY3w/Hd62aaA29ItIbCMQCzbvlSXeIRkB4x+8cx5ehHXQ5UQxp5ZVdwOVSjt8DO0vxASQofIBiartL6nIsdgAmIwtzuoVBnQzTCTVeqt9yg+p8NV+9T+URedZ9GfwwoFAFIqSfePpL3xXrG3C+WFRoLoLi2sVFHMHqjUgGyQf+HNS84oV9T/YBJAHL1WsicPwpKtaU5ksxGwgFBhzlt67aQYIYzGxVlSj6ZXe1WvXcJFlp55DXbKJe8Odtg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=nOA2vTtpn+2td4ugiRxrq+VQt5ksTYtUzw6gpnRXosk=;
+ b=p2Ga75Tc7wQtmD1TA9N6ao1BuF2u+U/DSplsnWl0cYyaoGEA8bvU6yQIppkBfYse5xSdtD9m2ZfNisz84xBsLkjKwrkIrO8XYsBtQE6RewKW9s+ehUyCsDSad5TBiVkZXaQ6BpO242VTfc0hLkgVUu0LfUCTstGoSGVBHnMnSie2nmMbHWkT1P6krA7iuSRS4xaLe1/yOI8HqKHGcxwnKedcyykU9TBBJRjdnNR/VC1IJrYLUIfe/Qopd4AdcjOZcHbOzCcTgH3FbUojMBK5rmYQb1x9ye2lY07EDH4CtYAL1HPYXEY/C+kM1XOKbKtvjvUR3rinVH4dMRxrguIdmQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.160) smtp.rcpttodomain=kernel.org smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=nOA2vTtpn+2td4ugiRxrq+VQt5ksTYtUzw6gpnRXosk=;
+ b=OVmp+EIENS+pGYQ8TRX0ePPNmC2H5SfYaOCoe1KYLnSGrmcuQlMKIV+GVs+vPfg8sIMOxQH0G+BmAgTGG3ZfPARv1dLGYePdw8BRHYNwPujvHZSjHODJmefZoowSD//20GF/P4mE9NS8TS/FPUKhSobQyIDUs29KF5TKzIKH+by31so1KQh6bYPyQgSebXNiijFEpCGopMS4atFHpY9WKo8gHSPhWIaCanOVRYJrgQb0jOyNcAXZxmfVvmPtJDMZ17PHOWQFUxsyHCKegOOeqjf4weseonMV8amOB5KgYkVjThPsRrWjqLW56kH3kM/ZgoAWm2EGz/+KidvWm6MghQ==
+Received: from BN9P223CA0001.NAMP223.PROD.OUTLOOK.COM (2603:10b6:408:10b::6)
+ by DS5PPF8002542C7.namprd12.prod.outlook.com (2603:10b6:f:fc00::657) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.18; Thu, 25 Jun
+ 2026 16:55:11 +0000
+Received: from BN3PEPF0000B077.namprd04.prod.outlook.com
+ (2603:10b6:408:10b:cafe::7c) by BN9P223CA0001.outlook.office365.com
+ (2603:10b6:408:10b::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.159.15 via Frontend Transport; Thu,
+ 25 Jun 2026 16:55:11 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
+ smtp.mailfrom=nvidia.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.160) by
+ BN3PEPF0000B077.mail.protection.outlook.com (10.167.243.122) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.181.6 via Frontend Transport; Thu, 25 Jun 2026 16:55:11 +0000
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
+ (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 25 Jun
+ 2026 09:54:44 -0700
+Received: from nvidia-4028GR-scsim.nvidia.com (10.126.230.37) by
+ rnnvmail201.nvidia.com (10.129.68.8) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.20; Thu, 25 Jun 2026 09:54:36 -0700
+From: <mhonap@nvidia.com>
+To: <djbw@kernel.org>, <alex@shazbot.org>, <jgg@ziepe.ca>, <jic23@kernel.org>,
+	<dave.jiang@intel.com>, <ankita@nvidia.com>,
+	<alejandro.lucero-palau@amd.com>, <alison.schofield@intel.com>,
+	<dave@stgolabs.net>, <dmatlack@google.com>, <gourry@gourry.net>,
+	<ira.weiny@intel.com>
+CC: <cjia@nvidia.com>, <kjaju@nvidia.com>, <vsethi@nvidia.com>,
+	<zhiw@nvidia.com>, <mhonap@nvidia.com>, <kvm@vger.kernel.org>,
+	<linux-cxl@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <linux-kselftest@vger.kernel.org>
+Subject: [PATCH v3 00/11] vfio/pci: Add CXL Type-2 device passthrough support
+Date: Thu, 25 Jun 2026 22:23:56 +0530
+Message-ID: <20260625165407.1769572-1-mhonap@nvidia.com>
+X-Mailer: git-send-email 2.25.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="iqz6WzvFJ9B9C8aq"
-Content-Disposition: inline
-In-Reply-To: <20260624-dfustini-atl-sc-cbqri-dt-v2-7-2f8049fd902b@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: rnnvmail203.nvidia.com (10.129.68.9) To
+ rnnvmail201.nvidia.com (10.129.68.8)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B077:EE_|DS5PPF8002542C7:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1c9d75ae-69ea-42c0-7ac6-08ded2da8532
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|82310400026|1800799024|7416014|376014|36860700016|23010399003|3122999024|13003099007|18002099003|921020|6133799003|5023799004|3023799007|56012099006|11063799006;
+X-Microsoft-Antispam-Message-Info:
+	8iKURhBExa8ayHiMwOSqvCJkxqoU5Z/q2TnNCD1ZzU2mAqHZY1RyRQifKqwJohBGJ+eqTAqInaXMHunSoG2GEVbrKfZwn6e7uD1Lqn8+Apdnw1g/zEYCN5gKKJelbicg1sNasNcbMbmD9L2SMNEqxxnf7PGKs3eBQq3BhPtbRmBh5Lq75uz0vLXwsfpwyXIIryIXVh7Kl9WcLua3BQS/9DX3QFEIRfMDHk84ZUCiYIMu9y/Bjw5q/I/FnNTeG02JC4kjwHaMW5C/t5KC4E7SjIDWhRbkysbp2JokXXN5NQwiUUGDDGUu+GkgjqKHO+qAPjGc9xB8sfW2mppz4SLJP6vOwZ6eBYKj7MmFBl5w4wE2FIqcIw+f39qKq+Ftx/+HWnN5VOlN48o2jDBeL6HvhIdmnsbXzTaMluVmnSmCn5u1dt4HfP6xr6Wz0FJBY2qsP1BLh4I/L1d3uVg378wg/z9DJyAclokiuvcCX0UuQubvIrDALg4p16aWIM91N0SkL+5D4QuVaFPgQHgLQge9tYDbXhgV8hboPQJZGnqrUX29eINvTmAoSJsnxQUNcOgMHRm8lS+IPaBbcpfk0AOlfOA2C77BM9TyPCmrpMOza6tXxNmrmcYTmO/oWCm8LhZKJC0vsLi/rGEhDZ5GHaHpy+wAnHQvwR1HWHuyTI/UfUU6UOI0AQQ3vlRlp4jMkXosAc7d1wagniTJgzbcfjBx5El1Qrvs3JOKo4b1GOW8pRMIjxG5dmYkTXHkuLXZBFZu
+X-Forefront-Antispam-Report:
+	CIP:216.228.117.160;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge1.nvidia.com;CAT:NONE;SFS:(13230040)(82310400026)(1800799024)(7416014)(376014)(36860700016)(23010399003)(3122999024)(13003099007)(18002099003)(921020)(6133799003)(5023799004)(3023799007)(56012099006)(11063799006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	7c8KzzLTy6COIkqGgABVpSn+E5RY2HulCelVGZl/8kzWKS+pqEq1SbTpCAEkQPTIx2Va1V01+PuFJNyhC2iD/2jejlKqLuVGvZRCh8dYsX37+hBa+Kyqu25GqiEFo8/KpGJVbbIADb1Uet6NUmzg8+7Pjk2xOv2D7aA20ExiLvxg9DM2/2UCq5dYxKzPn0g8eBV4wk+d6GIY9PMjJlxh01vUgfjbFoRvdQ36PpuPqm0Ks73dYBY/FzKl8ASwf87MCtDA/3ft13ZpHtBezUBZ5TEse+iStP888zKd7RWY0ndfS/rp6dIKWLMhVbEtj8dUTWM8q2wq34mH8oIlUMBVDdOfOdUC0APtf4nhumZDn//4pdtzSyhTemBsd6QM4xctzuFNcM31W+O9BE0nNLTnsyPgR4zirEH+MtcoKESmUemgJEtj5ThXlCNB3ng+k4cB
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jun 2026 16:55:11.0729
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1c9d75ae-69ea-42c0-7ac6-08ded2da8532
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.160];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN3PEPF0000B077.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS5PPF8002542C7
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-5.26 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
-	SIGNED_PGP(-2.00)[];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+X-Spamd-Result: default: False [-6.16 / 15.00];
+	WHITELIST_DMARC(-7.00)[nvidia.com:D:+];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
+	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:djbw@kernel.org,m:alex@shazbot.org,m:jgg@ziepe.ca,m:jic23@kernel.org,m:dave.jiang@intel.com,m:ankita@nvidia.com,m:alejandro.lucero-palau@amd.com,m:alison.schofield@intel.com,m:dave@stgolabs.net,m:dmatlack@google.com,m:gourry@gourry.net,m:ira.weiny@intel.com,m:cjia@nvidia.com,m:kjaju@nvidia.com,m:vsethi@nvidia.com,m:zhiw@nvidia.com,m:mhonap@nvidia.com,m:kvm@vger.kernel.org,m:linux-cxl@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-kselftest@vger.kernel.org,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-93572-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	RCPT_COUNT_TWELVE(0.00)[41];
-	FORGED_RECIPIENTS(0.00)[m:fustini@kernel.org,m:aricciardi@baylibre.com,m:alex@ghiti.fr,m:atishp@rivosinc.com,m:atish.patra@linux.dev,m:babu.moger@amd.com,m:ben.horgan@arm.com,m:bp@alien8.de,m:cp0613@linux.alibaba.com,m:conor.dooley@microchip.com,m:conor+dt@kernel.org,m:dave.hansen@linux.intel.com,m:Dave.Martin@arm.com,m:fenghua.yu@intel.com,m:gong.shuai@sanechips.com.cn,m:gsh517@gmail.com,m:guo.wenjia23@zte.com.cn,m:james.morse@arm.com,m:mindal@semihalf.com,m:krzk+dt@kernel.org,m:liu.qingtao2@zte.com.cn,m:zhiwei_liu@linux.alibaba.com,m:palmer@dabbelt.com,m:pjw@kernel.org,m:peternewman@google.com,m:rkrcmar@ventanamicro.com,m:reinette.chatre@intel.com,m:robh@kernel.org,m:samuel.holland@sifive.com,m:bigeasy@linutronix.de,m:tony.luck@intel.com,m:vasu@rivosinc.com,m:ved@rivosinc.com,m:liwei1518@gmail.com,m:cuiyunhui@bytedance.com,m:linux-kernel@vger.kernel.org,m:linux-riscv@lists.infradead.org,m:x86@kernel.org,m:devicetree@vger.kernel.org,m:linux-rt-devel@lists.linux.dev,m:linux-doc@vger
- .kernel.org,m:conor@kernel.org,m:krzk@kernel.org,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-93570-lists,linux-doc=lfdr.de];
-	FORGED_SENDER(0.00)[conor@kernel.org,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[conor@kernel.org,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[baylibre.com,ghiti.fr,rivosinc.com,linux.dev,amd.com,arm.com,alien8.de,linux.alibaba.com,microchip.com,kernel.org,linux.intel.com,intel.com,sanechips.com.cn,gmail.com,zte.com.cn,semihalf.com,dabbelt.com,google.com,ventanamicro.com,sifive.com,linutronix.de,bytedance.com,vger.kernel.org,lists.infradead.org,lists.linux.dev];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FORGED_SENDER(0.00)[mhonap@nvidia.com,linux-doc@vger.kernel.org];
+	RCVD_TLS_LAST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[Nvidia.com:dkim,vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,nvidia.com:email,nvidia.com:mid,nvidia.com:from_mime];
+	FROM_NO_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[bytedance.com:email,vger.kernel.org:from_smtp,infradead.org:email,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,devicetree.org:url,spud:mid,baylibre.com:email]
+	FORGED_SENDER_FORWARDING(0.00)[];
+	TO_DN_NONE(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[mhonap@nvidia.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[Nvidia.com:+];
+	ALIAS_RESOLVED(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	RCVD_COUNT_SEVEN(0.00)[8]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 5EFBE6C7691
+X-Rspamd-Queue-Id: BDB7F6C794F
 
+From: Manish Honap <mhonap@nvidia.com>
 
---iqz6WzvFJ9B9C8aq
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+CXL Type-2 accelerators (CXL.mem-capable GPUs and similar) cannot be
+passed through to virtual machines with stock vfio-pci because the
+driver has no concept of HDM decoder management, HDM region exposure,
+or component register virtualization.  This series adds those three
+pieces, sufficient for a guest to use the device's firmware-committed
+coherent memory under UVM / ATS.
 
-On Wed, Jun 24, 2026 at 06:38:35PM -0700, Drew Fustini wrote:
-> Document the generic compatibles for capacity and bandwidth controllers
-> that implement the RISC-V CBQRI specification. The binding also
-> describes the common riscv,cbqri-rcid and riscv,cbqri-mcid properties,
-> and the optional riscv,cbqri-cache phandle that links a capacity
-> controller to the cache whose capacity it allocates.
->=20
-> Assisted-by: Claude:claude-opus-4-8
-> Co-developed-by: Adrien Ricciardi <aricciardi@baylibre.com>
-> Signed-off-by: Adrien Ricciardi <aricciardi@baylibre.com>
-> Signed-off-by: Drew Fustini <fustini@kernel.org>
-> ---
->  .../devicetree/bindings/riscv/riscv,cbqri.yaml     | 97 ++++++++++++++++=
-++++++
->  MAINTAINERS                                        |  1 +
->  2 files changed, 98 insertions(+)
->=20
-> diff --git a/Documentation/devicetree/bindings/riscv/riscv,cbqri.yaml b/D=
-ocumentation/devicetree/bindings/riscv/riscv,cbqri.yaml
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..5d6be645381780e187b39e60c=
-3bb487fdf2cfb69
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/riscv/riscv,cbqri.yaml
-> @@ -0,0 +1,97 @@
-> +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/riscv/riscv,cbqri.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: RISC-V Capacity and Bandwidth QoS Register Interface (CBQRI) cont=
-roller
-> +
-> +description: |
-> +  The RISC-V CBQRI specification defines capacity-controller and
-> +  bandwidth-controller register blocks that allocate cache capacity and =
-memory
-> +  bandwidth to resource-control IDs (RCIDs) and monitor usage per
-> +  monitoring-counter ID (MCID):
-> +  https://github.com/riscv-non-isa/riscv-cbqri/blob/main/riscv-cbqri.pdf
-> +
-> +  Allocation and monitoring share one register block, and a controller m=
-ay
-> +  implement either or both. A driver discovers which at runtime from the
-> +  capabilities register, so the compatible names only the controller typ=
-e. It
-> +  does not distinguish allocation-only, monitoring-only or combined
-> +  controllers, and no property declares monitoring support.
-> +
-> +maintainers:
-> +  - Drew Fustini <fustini@kernel.org>
-> +
-> +properties:
-> +  compatible:
-> +    oneOf:
-> +      - items:
-> +          - description: Tenstorrent Ascalon Shared Cache
-> +            const: tenstorrent,ascalon-sc-cbqri
-> +          - const: riscv,cbqri-capacity-controller
-> +      - enum:
-> +          - riscv,cbqri-capacity-controller
-> +          - riscv,cbqri-bandwidth-controller
+v3 is a rewrite of the v2 framework form, responding to Dan's request
+in the v2 review for "less emulation, narrower interfaces, and a
+closer mapping to the spec language."
+In this release, cxl-core exposes four EXPORT_SYMBOL_GPL helpers behind
+an opaque handle.  vfio-pci becomes a thin transport on top of those.
+Please see "Changes since v2" and "Reviewer feedback addressed" below for
+the per-area summary.
 
-Please modify this, as has been done for other riscv spec related
-bindings, to let people get away without using device-specific
-compatibles.
+Motivation
+==========
 
-In this case, you can just delete the first entry from this enum, since
-it already has a user and only have to implement this feedback for the
-second entry.
+A CXL Type-2 device exposes its HDM-mapped device memory through HDM
+decoders that BIOS programs and commits at boot.  To pass such a
+device to a guest, vfio-pci has to do three things at once:
 
-pw-bot: changes-requested
+  1. Surface the firmware-committed HDM-mapped HPA range as a guest-
+     mmappable region.
 
-> +
-> +  reg:
-> +    maxItems: 1
-> +    description:
-> +      The CBQRI controller register block.
-> +
-> +  riscv,cbqri-rcid:
-> +    $ref: /schemas/types.yaml#/definitions/uint32
-> +    description:
-> +      The maximum number of RCIDs the controller supports. RCIDs are the
-> +      resource-control IDs that allocation operations target.
-> +
-> +  riscv,cbqri-mcid:
-> +    $ref: /schemas/types.yaml#/definitions/uint32
-> +    description:
-> +      The maximum number of MCIDs the controller supports. MCIDs are the
-> +      monitoring-counter IDs that usage-monitoring operations target. Pr=
-esent
-> +      on controllers that implement monitoring.
-> +
-> +  riscv,cbqri-cache:
-> +    $ref: /schemas/types.yaml#/definitions/phandle
-> +    description:
-> +      Phandle to the cache node whose capacity this controller allocates.
-> +      Applies to capacity controllers that back a CPU cache. The cache l=
-evel
-> +      and the harts sharing it are taken from that node's cache topology.
+  2. Surface a CXL-spec-compliant view of the CXL Device DVSEC body,
+     the HDM Decoder Capability block, and the CXL.cache/mem cap-array
+     prefix, so the guest's CXL driver enumerates the same topology
+     the host saw.
 
-Architecturally, is it impossible for a capacity controller to control
-more than one cache?
+  3. Keep the host's committed decoder configuration intact (the
+     physical decoder is never reprogrammed) while letting the guest
+     observe and manage a shadow that follows the per-field write
+     semantics in the spec.
 
-> +
-> +required:
-> +  - compatible
-> +  - reg
-> +
-> +allOf:
-> +  - if:
-> +      properties:
-> +        compatible:
-> +          contains:
-> +            const: tenstorrent,ascalon-sc-cbqri
-> +    then:
-> +      required:
-> +        - riscv,cbqri-rcid
-> +        - riscv,cbqri-cache
-> +
-> +additionalProperties: false
-> +
-> +examples:
-> +  - |
-> +    l2_cache: l2-cache {
-> +        compatible =3D "cache";
-> +        cache-level =3D <2>;
-> +        cache-unified;
-> +        cache-size =3D <0xc00000>;
-> +        cache-sets =3D <512>;
-> +        cache-block-size =3D <64>;
-> +    };
-> +
-> +    cache-controller@a21a00c0 {
-> +        compatible =3D "tenstorrent,ascalon-sc-cbqri",
-> +                     "riscv,cbqri-capacity-controller";
+The series builds on Alejandro Lucero-Palau's v28 work
+applied on for-7.3/cxl-type2-enabling [1] (sfc is the in-tree consumer
+today). vfio-pci becomes the second consumer.
 
-Is this or is this not a cache controller?
-The compatible and fact that the property points to an actual cache
-controller suggests that this is not.
+Architecture
+============
 
-Cheers,
-Conor.
+cxl-core owns the CXL semantics.  A new file
+drivers/cxl/core/passthrough.c (gated by hidden Kconfig
+CXL_VFIO_PASSTHROUGH) provides four exported symbols:
 
-> +        reg =3D <0xa21a00c0 0xf40>;
-> +        riscv,cbqri-rcid =3D <16>;
-> +        riscv,cbqri-cache =3D <&l2_cache>;
-> +    };
-> +
-> +...
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 9e1092165046c773771b055869030bc1bdb64b16..64a95a4d795a57033d3f36200=
-d98cfb4a013ab94 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -23298,6 +23298,7 @@ M:	Drew Fustini <fustini@kernel.org>
->  R:	yunhui cui <cuiyunhui@bytedance.com>
->  L:	linux-riscv@lists.infradead.org
->  S:	Supported
-> +F:	Documentation/devicetree/bindings/riscv/riscv,cbqri.yaml
->  F:	arch/riscv/include/asm/qos.h
->  F:	arch/riscv/include/asm/resctrl.h
->  F:	arch/riscv/kernel/qos.c
->=20
-> --=20
-> 2.34.1
->=20
+    struct cxl_passthrough *
+    devm_cxl_passthrough_create(struct device *dev,
+                                struct cxl_dev_state *cxlds);
 
---iqz6WzvFJ9B9C8aq
-Content-Type: application/pgp-signature; name=signature.asc
+    int cxl_passthrough_dvsec_rw(p, off, val, sz, write);
+    int cxl_passthrough_hdm_rw  (p, off, val,      write);
+    int cxl_passthrough_cm_rw   (p, off, val,      write);
 
------BEGIN PGP SIGNATURE-----
+cxl_passthrough is an opaque handle; vfio-pci sees no cxl-internal
+struct pointers.  The shadows are snapshotted at create time: the
+DVSEC body from PCI config space dword by dword, the CM cap-array and
+HDM block from the cxl-core MMIO mapping at cxlds->reg_map.base.
+Per-field write semantics follow below:
+CXL r4.0 8.1.3 DVSEC:
+- LOCK is RWO,
+- CONTROL/CONTROL2 are RWL gated on CONFIG_LOCK,
+- STATUS/STATUS2 are RW1C,
+- RANGE1 is HwInit, RANGE2 is RsvdZ
+CXL r4.0 8.2.4.20 HDM:
+- GLOBAL_CTRL RW,
+- decoder CTRL implements COMMIT/COMMITTED,
+- decoder BASE/SIZE RWL gated on COMMITTED or LOCK_ON_COMMIT,
+- cap header HwInit).
 
-iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaj1VEAAKCRB4tDGHoIJi
-0lXeAP4nYfY2HRKImG27gD+aSFjrJ2tV6sAdxhmJWyh1+AnCrAEAk6PNQ5SjX5nW
-VK2mq7VQ+4K/2o7w6hvbd2oKNvn30ww=
-=ZHZW
------END PGP SIGNATURE-----
+vfio-pci becomes a thin transport.  The new module
+drivers/vfio/pci/cxl/ exposes two VFIO regions.
 
---iqz6WzvFJ9B9C8aq--
+  VFIO_REGION_SUBTYPE_CXL (HDM region): mmappable view of the
+  HDM-mapped HPA. The mmap fault handler calls vmf_insert_pfn() from
+  the physical HPA. pread/pwrite go through the memremap_wb() kva
+  captured at bind time.
+
+  VFIO_REGION_SUBTYPE_CXL_COMP_REGS (component register shadow):
+  pread/pwrite only, dword-aligned (-EINVAL on misalignment).
+  Each dword dispatches by offset to cxl_passthrough_cm_rw() or
+  cxl_passthrough_hdm_rw(). No shadow state on the vfio side; cxl-core
+  enforces the spec.
+
+CXL DVSEC config-space accesses use a clipping shim in
+vfio_pci_config_rw_single(). A config-space chunk that crosses the
+DVSEC body boundary is split: header bytes go through the generic
+perm-bits path, body bytes go through cxl_passthrough_dvsec_rw().
+The shim replaces v2's approach of repointing ecap_perms[]
+
+Sparse-mmap is exposed on the component BAR so userspace can mmap the
+non-component portions directly; only the CXL component register
+sub-range goes through pread/pwrite emulation. The CXL sub-range is
+also skipped from vfio_pci-core's request_selected_regions() set
+because cxl-core's devm_cxl_probe_mem() already holds a
+request_mem_region() on it; the asymmetric skip is matched by an
+asymmetric release on disable().
+
+Scope and out-of-scope
+======================
+
+In scope (rejected at create time with -EOPNOTSUPP otherwise):
+
+  - Firmware-committed devices (HOST_FIRMWARE_COMMITTED set).
+  - Single HDM decoder (hdm_count == 1).
+  - No interleave (IW == 0).
+
+Out of scope, deferred for follow-on work:
+
+  - Multi-decoder devices and interleave.
+  - Guest-driven (non-firmware-committed) HDM commit.
+  - Hotplug, FLR, and sibling-function reset of CXL Type-2 devices.
+
+Changes since v2
+================
+
+This is a rewrite, not an incremental update.  The structure of the
+series changed (20 patches in v2 to 11 in v3) because v3 collapses
+v2 patches 9-15 (detection, HDM emulation, media readiness, region
+management, HDM region, DVSEC emulation) into one cxl-core helper
+file and one vfio-pci consumer.
+
+Framework replaced by narrow opaque-handle helpers (patches 6, 8)
+
+  v2 carried a generic register-emulation framework split across four
+  state-machine files in cxl-core.
+  v3 collapses it into one file: drivers/cxl/core/passthrough.c
+  exposing the four EXPORT_SYMBOL_GPL helpers above behind a struct
+  cxl_passthrough opaque handle.
+
+Shadow ownership moved into cxl-core (patches 6, 8)
+
+  vfio-pci no longer keeps any per-field state. It forwards
+  (offset, value) into cxl-core, and cxl-core enforces the spec
+  (RWO, RWL, RW1C, HwInit, RsvdZ) with explicit CXL r4.0 section
+  references in the switch arms.
+
+DVSEC config-space clipping shim (patch 8)
+
+  v2 repointed ecap_perms[] to redirect CXL DVSEC reads and writes.
+  v3 keeps ecap_perms[] untouched and clips per-config-access chunks
+  at the DVSEC body boundary in vfio_pci_config_rw_single(); header bytes
+  go through the generic perm-bits path, body bytes go through
+  cxl_passthrough_dvsec_rw(). The shim is local to the per-device
+  path.
+
+CONFIG_VFIO_PCI_CXL gates the new module (patch 7)
+
+  v2 had a CONFIG_VFIO_CXL_CORE Kconfig stub; v3 renames it to
+  CONFIG_VFIO_PCI_CXL to match the vfio-pci naming convention.
+  The hidden CXL_VFIO_PASSTHROUGH selects the cxl-core helper file
+  on demand. With both disabled, the cxl-core size is unchanged.
+
+UAPI rewritten with named fields (patch 5)
+
+  vfio_device_info_cap_cxl in v3 carries:
+    flags + HOST_FIRMWARE_COMMITTED bit
+    hdm_region_idx
+    comp_reg_region_idx
+    comp_reg_bar
+    comp_reg_offset
+    comp_reg_size
+  The DPA terminology is renamed to HDM region throughout.
+  CACHE_CAPABLE (HDM-DB indicator) is dropped;
+  it was informational only in v2 with no caller, and re-adding it
+  for an active CXL.cache plumbing series later.
+
+Selftests trimmed (patch 9)
+
+  v2 carried selftests for device detection, capability parsing,
+  region enumeration, HDM register emulation, HDM mmap with
+  page-fault insertion, FLR invalidation, and DVSEC register
+  emulation. v3 keeps a smoke-test set of six focused tests:
+
+    device_is_cxl                  GET_INFO advertises FLAGS_CXL
+                                   and a populated CAP_CXL.
+    hdm_region_mmap_rw             mmap one page, write+read back.
+    component_bar_sparse_mmap      SPARSE_MMAP cap excludes the
+                                   CXL component register sub-range.
+    comp_regs_cm_cap_array_read    pread of the CM cap-array
+                                   header at CXL_CM_OFFSET succeeds
+                                   (CAP_ID == 1).
+    dvsec_lock_byte_read           pread of the DVSEC CONFIG_LOCK
+                                   byte through the clipping shim
+                                   succeeds.
+    hdm_decoder_commit_fsm         COMMIT / COMMITTED state machine
+                                   and LOCK_ON_COMMIT behaviour.
+
+  FLR invalidation, page-fault insertion under load, and full
+  DVSEC field-by-field write coverage are deferred to a follow-on
+  selftest series. The current six are the minimal set that
+  exercises the kernel-side contract end-to-end.
+
+cxl-core prep patches split (patches 1-4)
+
+  v3 keeps the cxl-side enablers from v2 patches 1-4 but each as
+  a standalone change so the cxl maintainer can review the helper
+  API independently of the vfio consumer:
+
+    [1/11] cxl_get_hdm_info()
+    [2/11] cxl_await_range_active() split from media-ready wait
+    [3/11] cxl_register_map records BIR + BAR offset
+    [4/11] component/HDM register defines moved to uapi/cxl/cxl_regs.h
+
+Reviewer feedback addressed
+===========================
+
+Dan
+---
+
+- VFIO exposes HDM/host-visible region, not raw DPA; docs/UAPI say HDM
+  region, DPA only inside cxl-core where appropriate.
+- One vfio-pci device = one HDM region / one decoder, no interleave;
+  hdm_count != 1 → -EOPNOTSUPP.
+- Global HDM on DVSEC Range Base treated as legacy; RANGE1/RANGE2
+  read-only snapshot, guest writes dropped.
+- No guest/kernel lock games; DVSEC LOCK and HDM LOCK_ON_COMMIT RWO,
+  fixed at create from firmware snapshot.
+- Opaque cxl_passthrough handle only; vfio gets HPA via memdev probe +
+  layout via cxl_get_hdm_info(), rw via helpers.
+- No multi-region accelerator case in v3; single region enforced,
+  multi-region deferred.
+- cxl_await_range_active stays in cxl-core probe; not exported, vfio does
+  not call it.
+- No guest LOCK→0 reprogram; guest cannot clear LOCK to remap host HPA;
+  kernel uncommit tied to COMMIT, not LOCK alone.
+
+Jason / Gregory / Dan
+---------------------
+
+- memremap(WB) + request_mem_region on HPA; conflicting direct-map/EFI use
+  fails probe with -EBUSY.
+
+Jonathan
+--------
+
+- uapi/cxl/cxl_regs.h for register defines so VMMs need no private
+  kernel headers.
+- __free() locals on cxl-core/passthrough error paths instead of
+  struct-owned temporaries.
+- No "precommitted at probe" assumption; acquire checks COMMITTED in
+  HDM shadow and refuses if missing.
+
+Dave
+----
+
+- memremap(MEMREMAP_WB) for HDM host mapping (not ioremap_cache).
+- Renamed cap flag to VFIO_CXL_CAP_HOST_FIRMWARE_COMMITTED for clarity.
+- __free() / DEFINE_FREE() cleanup in new passthrough.c create path.
+
+Patch series
+============
+
+ [1/11] cxl: Add cxl_get_hdm_info() helper for HDM decoder metadata
+ [2/11] cxl: Split cxl_await_range_active() from media-ready wait
+ [3/11] cxl: Record BIR and BAR offset in cxl_register_map
+ [4/11] cxl: Move component/HDM register defines to
+        uapi/cxl/cxl_regs.h
+ [5/11] vfio: UAPI for CXL Type-2 device passthrough
+ [6/11] cxl: Add register-virtualization helpers for vfio Type-2
+        passthrough
+ [7/11] vfio/pci: Add CONFIG_VFIO_PCI_CXL with bind-time CXL Type-2
+        acquisition
+ [8/11] vfio/pci/cxl: Add HDM + COMP_REGS regions and DVSEC clipping
+        shim
+ [9/11] selftests/vfio: Add CXL Type-2 device passthrough smoke test
+[10/11] docs: vfio-pci: Document CXL Type-2 device passthrough
+[11/11] vfio/pci: Provide opt-out for CXL Type-2 extensions
+
+Dependencies
+============
+
+[1] [PATCH v28 0/5] Type2 device basic support
+https://lore.kernel.org/linux-cxl/20260618181806.118745-1-alejandro.lucero-palau@amd.com/
+
+[2] Previous version of this patch series
+[PATCH v2 00/20] vfio/pci: Add CXL Type-2 device passthrough support
+https://lore.kernel.org/linux-cxl/20260401143917.108413-1-mhonap@nvidia.com/
+
+[3] Companion QEMU series
+[RFC 0/9] QEMU: CXL Type-2 device passthrough via vfio-pci
+https://lore.kernel.org/linux-cxl/20260427181235.3003865-1-mhonap@nvidia.com/
+
+Manish Honap (11):
+  cxl: Add cxl_get_hdm_info() helper for HDM decoder metadata
+  cxl: Split cxl_await_range_active() from media-ready wait
+  cxl: Record BIR and BAR offset in cxl_register_map
+  cxl: Move component/HDM register defines to uapi/cxl/cxl_regs.h
+  vfio: UAPI for CXL Type-2 device passthrough
+  cxl: Add register-virtualization helpers for vfio Type-2 passthrough
+  vfio/pci: Add CONFIG_VFIO_PCI_CXL with bind-time CXL Type-2
+    acquisition
+  vfio/pci/cxl: Add HDM + COMP_REGS regions and DVSEC clipping shim
+  selftests/vfio: Add CXL Type-2 device passthrough smoke test
+  docs: vfio-pci: Document CXL Type-2 device passthrough
+  vfio/pci: Provide opt-out for CXL Type-2 extensions
+
+ Documentation/driver-api/index.rst            |   1 +
+ Documentation/driver-api/vfio-pci-cxl.rst     | 282 ++++++
+ drivers/cxl/Kconfig                           |   7 +
+ drivers/cxl/core/Makefile                     |   1 +
+ drivers/cxl/core/passthrough.c                | 590 ++++++++++++
+ drivers/cxl/core/pci.c                        |  70 +-
+ drivers/cxl/core/regs.c                       |  35 +
+ drivers/cxl/cxl.h                             |  52 +-
+ drivers/vfio/pci/Kconfig                      |   2 +
+ drivers/vfio/pci/Makefile                     |   1 +
+ drivers/vfio/pci/cxl/Kconfig                  |  34 +
+ drivers/vfio/pci/cxl/Makefile                 |   2 +
+ drivers/vfio/pci/cxl/vfio_cxl_core.c          | 889 ++++++++++++++++++
+ drivers/vfio/pci/cxl/vfio_cxl_priv.h          |  71 ++
+ drivers/vfio/pci/vfio_pci.c                   |   9 +
+ drivers/vfio/pci/vfio_pci_config.c            |  31 +
+ drivers/vfio/pci/vfio_pci_core.c              |  68 +-
+ drivers/vfio/pci/vfio_pci_priv.h              |  93 ++
+ drivers/vfio/pci/vfio_pci_rdwr.c              |  17 +
+ include/cxl/cxl.h                             |  18 +
+ include/cxl/passthrough.h                     | 121 +++
+ include/linux/vfio_pci_core.h                 |   8 +
+ include/uapi/cxl/cxl_regs.h                   |  63 ++
+ include/uapi/linux/vfio.h                     |  46 +
+ tools/testing/selftests/vfio/Makefile         |   1 +
+ .../selftests/vfio/lib/vfio_pci_device.c      |  11 +-
+ .../selftests/vfio/vfio_cxl_type2_test.c      | 350 +++++++
+ 27 files changed, 2821 insertions(+), 52 deletions(-)
+ create mode 100644 Documentation/driver-api/vfio-pci-cxl.rst
+ create mode 100644 drivers/cxl/core/passthrough.c
+ create mode 100644 drivers/vfio/pci/cxl/Kconfig
+ create mode 100644 drivers/vfio/pci/cxl/Makefile
+ create mode 100644 drivers/vfio/pci/cxl/vfio_cxl_core.c
+ create mode 100644 drivers/vfio/pci/cxl/vfio_cxl_priv.h
+ create mode 100644 include/cxl/passthrough.h
+ create mode 100644 include/uapi/cxl/cxl_regs.h
+ create mode 100644 tools/testing/selftests/vfio/vfio_cxl_type2_test.c
+
+base-commit: 90cf2e0d702c8a132ccbe72e7687f33c04c14658
+-- 
+2.25.1
+
 
