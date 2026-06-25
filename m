@@ -1,160 +1,169 @@
-Return-Path: <linux-doc+bounces-93546-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93547-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id VxaMIqgmPWrjxwgAu9opvQ
-	(envelope-from <linux-doc+bounces-93546-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 15:01:28 +0200
+	id fzPBMFcoPWp0yAgAu9opvQ
+	(envelope-from <linux-doc+bounces-93547-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 15:08:39 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 366836C5DBF
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 15:01:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CC3A86C5EF7
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 15:08:38 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lwn.net header.s=20201203 header.b=TXqLDLim;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93546-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-93546-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=lwn.net;
+	dkim=none;
+	dmarc=none;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93547-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-93547-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id C492930207C7
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 12:58:05 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id B4017300691C
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 13:08:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5A8263E4C7D;
-	Thu, 25 Jun 2026 12:58:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1BD662D97B7;
+	Thu, 25 Jun 2026 13:08:07 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+Received: from mailgw.kylinos.cn (mailgw.kylinos.cn [124.126.103.232])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D9773E4C64;
-	Thu, 25 Jun 2026 12:58:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AEB142D060D;
+	Thu, 25 Jun 2026 13:08:02 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782392284; cv=none; b=OZeJ1oVfbnoo0odz099Bmv4FQiQeMP8VZ+YErNpowdevEouChEkJefYiu/NJZbN3NA7c/SKr+bq4ln/GF3hffaAAAy0P/+O+37U1p3u3TYqk/w5a/gwkzjLj6yfLkI0u3fUR1blaVLVqFYQVYUYMbUSZHKCvZyRfKIGdO7EkHas=
+	t=1782392887; cv=none; b=UTwgMpumt5Z+G/J8/vI2LVZBCSQfG3rpOQTmrQGvAKx51W/hrdYYOLClfR9CMGy06xB/7bNCLBAH34ntU9FE82Bz+y/kCUCrqTKBWbaKrs0+4CFddWnTnGcJC6+0seD/vcTHkj/D+PCeyHEip28JtECfuS67tSyUA6BlKTOZ9RA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782392284; c=relaxed/simple;
-	bh=+8FIpGUTRG5OxnjOajsiu+VcuzrukFsRotvcOfA3bTs=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=kpB7p9jFdvWMEd2tiVDoYpmg2xyqZkhMItWou4AIgvmsGtuK7re8gFxeStHW/1uwvhiVAFWuawMH2keo3AVQ6tbdtTiDMfN2SY/VS/T8tmFHL1DMIr4UnphABd/Uyluo11Dp2eknre01S9fzsfcjNqzEgNgxue+WxUS0fP2Nxos=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=TXqLDLim; arc=none smtp.client-ip=45.79.88.28
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 47B7B40430
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1782392282; bh=KuP/RyNpafFwjGlGDLei8+szPs8KNU6ibJR8fDQ9/rw=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=TXqLDLimZbEpfM7mQC1zJjCwPXzg0lBb6+AP16rXlrK1IYuRIEIaxlWKF0Xlg3mcz
-	 we+gSbSktBfjQ+PTJ69oZMGDCJdq1HcYoSw199KrRb0etIVBrPaDsyqMr/svaCUCXU
-	 6EfBKu/S4/py0g6U1Fm+9dcvvZqCN85QEpmsS9I0gidDfkx+QILL30ixEO5aTWn+4X
-	 La1+dwI416Un5bW1qlQo+ExkxxZ/7Ziqdy5Dl08535sqKp+2tBuRJKf3ohQ/G1nKEc
-	 45/w5jTNtv4fzUBKepbpL6izgW8MG/8cKsAPehDX7MD08aPHQem+DRT9WT4I3/As8F
-	 ajy1uAy3bBKiA==
-Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 47B7B40430;
-	Thu, 25 Jun 2026 12:58:02 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: Linus Torvalds <torvalds@linuxfoundation.org>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, Shuah Khan
- <shuah@kernel.org>
-Subject: Re: [GIT PULL] Documentation fixes for 7.2
-In-Reply-To: <874iiq6aps.fsf@trenco.lwn.net>
-References: <874iiq6aps.fsf@trenco.lwn.net>
-Date: Thu, 25 Jun 2026 06:58:01 -0600
-Message-ID: <87wlvm4w12.fsf@trenco.lwn.net>
+	s=arc-20240116; t=1782392887; c=relaxed/simple;
+	bh=wxKs0oIjtl8h1n0FPsKgyNpBDFQIJZFKJHF6YcD0Pr0=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Type; b=EUmjbQ8/tNCIwitRxNZde30AC6m7zAi/aCEAjUM/yhWusYbs6KDoASsrWR+dWb5ezUWX8pMlKV37/iUAaMZH9Oaup4bIrTlXRthXFMTwDF1JGqR719Bk3JX372caIjLem2FGd0EIywlVZWh8U2W/QbNse3gIq7iOq0U41Ftz68k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=kylinos.cn; spf=pass smtp.mailfrom=kylinos.cn; arc=none smtp.client-ip=124.126.103.232
+X-UUID: e0389c46709611f1aa26b74ffac11d73-20260625
+X-CTIC-Tags:
+	HR_CC_COUNT, HR_CC_DOMAIN_COUNT, HR_CC_NAME, HR_CC_NO_NAME, HR_CHARSET
+	HR_CHARSET_NUM, HR_CTE_8B, HR_CTT_TXT, HR_DATE_H, HR_DATE_WKD
+	HR_DATE_ZONE, HR_FROM_NAME, HR_SJ_LANG, HR_SJ_LEN, HR_SJ_LETTER
+	HR_SJ_NOR_SYM, HR_SJ_PHRASE, HR_SJ_PHRASE_LEN, HR_SJ_WS, HR_TO_CHARSET
+	HR_TO_CHARSET_NUM, HR_TO_COUNT, HR_TO_DOMAIN_COUNT, HR_TO_NAME, IP_TRUSTED
+	SRC_TRUSTED, DN_TRUSTED, SA_TRUSTED, SA_EXISTED, SN_TRUSTED
+	SN_EXISTED, SPF_NOPASS, DKIM_NOPASS, DMARC_NOPASS, CIE_GOOD
+	CIE_GOOD_SPF, GTI_FG_BS, GTI_RG_INFO, GTI_C_BU, AMN_GOOD
+	ABX_MISS_RDNS
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.3.12,REQID:e1b0e46d-9d1a-4ec5-912b-067289893e2a,IP:10,
+	URL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
+	:release,TS:10
+X-CID-INFO: VERSION:1.3.12,REQID:e1b0e46d-9d1a-4ec5-912b-067289893e2a,IP:10,UR
+	L:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:r
+	elease,TS:10
+X-CID-META: VersionHash:e7bac3a,CLOUDID:874d4e85a3f4f74e0db688536e5b4231,BulkI
+	D:26062521075613Q2WM3T,BulkQuantity:0,Recheck:0,SF:10|38|66|78|102|127|136
+	|850|865|898,TC:nil,Content:0|15|50,EDM:-3,IP:-2,URL:0,File:nil,RT:nil,Bul
+	k:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0
+	,BRE:0,ARC:0
+X-CID-BVR: 2,SSN|SDN
+X-CID-BAS: 2,SSN|SDN,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
+X-UUID: e0389c46709611f1aa26b74ffac11d73-20260625
+X-User: sunshaojie@kylinos.cn
+Received: from localhost.localdomain [(223.70.159.239)] by mailgw.kylinos.cn
+	(envelope-from <sunshaojie@kylinos.cn>)
+	(Generic MTA with TLSv1.3 TLS_AES_256_GCM_SHA384 256/256)
+	with ESMTP id 1356698150; Thu, 25 Jun 2026 21:07:53 +0800
+From: Sun Shaojie <sunshaojie@kylinos.cn>
+To: Tejun Heo <tj@kernel.org>,
+	Johannes Weiner <hannes@cmpxchg.org>,
+	=?UTF-8?q?Michal=20Koutn=C3=BD?= <mkoutny@suse.com>,
+	Jonathan Corbet <corbet@lwn.net>
+Cc: Shuah Khan <skhan@linuxfoundation.org>,
+	cgroups@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Sun Shaojie <sunshaojie@kylinos.cn>
+Subject: [PATCH] cgroup/cpu: document cpu.stat.local
+Date: Thu, 25 Jun 2026 21:07:23 +0800
+Message-Id: <20260625130723.1144463-1-sunshaojie@kylinos.cn>
+X-Mailer: git-send-email 2.25.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-0.46 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
 	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DMARC_NA(0.00)[kylinos.cn];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-93546-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:torvalds@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:shuah@kernel.org,s:lists@lfdr.de];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:tj@kernel.org,m:hannes@cmpxchg.org,m:mkoutny@suse.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:cgroups@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:sunshaojie@kylinos.cn,s:lists@lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER(0.00)[sunshaojie@kylinos.cn,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-93547-lists,linux-doc=lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[lwn.net:+];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_THREE(0.00)[4];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,lwn.net:dkim,lwn.net:email,lwn.net:from_mime]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sunshaojie@kylinos.cn,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	R_DKIM_NA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,kylinos.cn:email,kylinos.cn:mid,kylinos.cn:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 366836C5DBF
+X-Rspamd-Queue-Id: CC3A86C5EF7
 
-Due to insufficient coffee absorption, I failed to copy this beyond
-Linus, so, for the record...
+Add documentation for the cpu.stat.local interface file, which reports
+the throttled_usec stat -- the actual throttling time incurred by the
+cgroup's own runqueues, which may include throttling inherited from
+ancestor cgroup bandwidth limits. Unlike cpu.stat's throttled_usec
+which only accounts for throttling caused by the cgroup's own CFS
+bandwidth limit.
 
-Jonathan Corbet <corbet@lwn.net> writes:
+When the controller is not enabled, the stat is not reported.
 
-> The following changes since commit fa34b01aa0f59355206b0807f862cced06c2b7a1:
->
->   docs: pt_BR: Translate 3.Early-stage.rst into Portuguese (2026-06-12 13:34:26 -0600)
->
-> are available in the Git repository at:
->
->   git://git.kernel.org/pub/scm/linux/kernel/git/docs/linux.git tags/docs-7.2-2
->
-> for you to fetch changes up to b13f724df35c4f1a69e20c965a2fc74fd2921e59:
->
->   docs: tools: Fix typo 'ackward' to 'awkward' in unittest.rst (2026-06-23 14:48:01 -0600)
->
-> ----------------------------------------------------------------
-> A handful of late-arriving docs fixes, along with one document update
-> that fell through the cracks before.
->
-> ----------------------------------------------------------------
-> David Hildenbrand (Arm) (1):
->       docs/mm: clarify that we are not looking for LLM generated content
->
-> Declan Wale (1):
->       docs: tools: Fix typo 'ackward' to 'awkward' in unittest.rst
->
-> Doehyun Baek (1):
->       Docs/driver-api/uio-howto: document mmap_prepare callback
->
-> Matthew Wilcox (Oracle) (1):
->       MAINTAINERS: Fix regex for kdoc
->
-> Randy Dunlap (3):
->       kernel-doc: xforms: support __SYSFS_FUNCTION_ALTERNATIVE()
->       kdoc: xforms_lists: handle DECLARE_PER_CPU() in kernel-doc
->       kdoc: xforms: ignore special static/inline macros
->
-> Yudistira Putra (1):
->       Documentation: tracing: fix typo in events documentation
->
-> Zenghui Yu (1):
->       docs: kgdb: Fix path of driver options
->
->  Documentation/driver-api/uio-howto.rst   |  4 ++--
->  Documentation/mm/index.rst               | 13 +++++++++++++
->  Documentation/process/debugging/kgdb.rst |  2 +-
->  Documentation/tools/unittest.rst         |  2 +-
->  Documentation/trace/events.rst           |  2 +-
->  MAINTAINERS                              |  2 +-
->  tools/lib/python/kdoc/xforms_lists.py    |  4 ++++
->  7 files changed, 23 insertions(+), 6 deletions(-)
+Signed-off-by: Sun Shaojie <sunshaojie@kylinos.cn>
+---
+ Documentation/admin-guide/cgroup-v2.rst | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+
+diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
+index 993446ab66d0..a7766f40ef65 100644
+--- a/Documentation/admin-guide/cgroup-v2.rst
++++ b/Documentation/admin-guide/cgroup-v2.rst
+@@ -1160,6 +1160,23 @@ will be referred to. All time durations are in microseconds.
+ 	- nr_bursts
+ 	- burst_usec
+ 
++  cpu.stat.local
++	A read-only flat-keyed file which exists on non-root cgroups.
++	This file exists whether the controller is enabled or not.
++
++	It reports the following stat when the controller is enabled:
++
++	- throttled_usec
++
++	Unlike the ``throttled_usec`` reported by ``cpu.stat`` which
++	accounts for throttling caused by this cgroup's own CFS
++	bandwidth limit, ``cpu.stat.local`` reports the actual
++	throttling time incurred by this cgroup's own runqueues,
++	which may include throttling inherited from ancestor
++	cgroup bandwidth limits.
++
++	When the controller is not enabled, this stat is not reported.
++
+   cpu.weight
+ 	A read-write single value file which exists on non-root
+ 	cgroups.  The default is "100".
+-- 
+2.25.1
+
 
