@@ -1,76 +1,75 @@
-Return-Path: <linux-doc+bounces-93522-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93531-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id RsYJI4sjPWqtxggAu9opvQ
-	(envelope-from <linux-doc+bounces-93522-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 14:48:11 +0200
+	id GngAANUjPWrIxggAu9opvQ
+	(envelope-from <linux-doc+bounces-93531-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 14:49:25 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 82D636C5B6C
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 14:48:10 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 95C9C6C5BA7
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 14:49:24 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=ibm.com header.s=pp1 header.b=Xk1M+ZFr;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93522-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93522-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=ibm.com header.s=pp1 header.b=VwJ95pkw;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93531-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-93531-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=ibm.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 67EB2300623E
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 12:48:01 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id AF34C303CF9C
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 12:49:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0AA8B3E3C5B;
-	Thu, 25 Jun 2026 12:48:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C420B3E44F9;
+	Thu, 25 Jun 2026 12:49:09 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7D0FB3E44F5;
-	Thu, 25 Jun 2026 12:47:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A67E3E0087;
+	Thu, 25 Jun 2026 12:49:08 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782391680; cv=none; b=igEp3PEINpGuNfYK6TFk9Gzw1q97YrS3MTI+a3JfMdxddKdyTeB0Nro9kGz2ssN3lngvO40qGruiDP1dYC0fItdJQCPMEuZDzuem2CHbbT4NkzQPx2ttb8L60k4beCoMc8nvBso/MRRyqvSaNw7J/+luu5BzhBfUzn+AU2I8SJE=
+	t=1782391749; cv=none; b=qAU5IzkqehG+QOvKROcgQZiyH6UwjouQScWJP55VkiKeDLqft9KzKQ0Dgjw17MrgYne3fZlMWglMNtdIfcN2sihPdMGLJGXcbowlWfdjNXi0dMlmA9JjOGrsuJINQ/bVSs4Zy0YcaTbcE4QfwrE44JogBcmoPGqviGEinRzzivI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782391680; c=relaxed/simple;
-	bh=1pL7qmp5XR5+eLV4jdtrdMZRuSmlbJvtUMCmX5S4Hp0=;
+	s=arc-20240116; t=1782391749; c=relaxed/simple;
+	bh=JzJPKc21H8pZZq8N6Vbh6r0Qw2ALS0gCFGYtZjOkOgM=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=ogDqPU5anwO9inhMiSI6Hh3T3dr01PugtIQdgqGiS5Iq/cfeYFZimj4zJDnEBG1asVzGbJJtvL6FMnifbeCKAB9qtFZzR3PsRL3YkRqwZ5iM9yI7XvIT41XtV+MyB4bhrbqEONG/3wZAobLxnYhUCEnyeLQMSD3ZJtFI0HAv6v8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=Xk1M+ZFr; arc=none smtp.client-ip=148.163.158.5
-Received: from pps.filterd (m0356516.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 65P3o5dH2929272;
-	Thu, 25 Jun 2026 12:47:44 GMT
+	 MIME-Version; b=jDJ9XOzoerXJK7SdICGVSWmw6Nk1Ebpw2aO326H+Tq+scO6mWkncSf4nqvLqRBKe/Ydp94GiGrq6rGIlLD6tRsnd3yVSjhym+XCw3irLG5UGP+WdkilVBTcGVFpqUuCFOcqE8ZFaExc61+zHpt5+Wef+Yhxq+0mvIZ94NGxXdQo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=VwJ95pkw; arc=none smtp.client-ip=148.163.156.1
+Received: from pps.filterd (m0360083.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 65P3mHWF3040722;
+	Thu, 25 Jun 2026 12:47:52 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=pp1; bh=lugr/M
-	vCAiyPlrXsVqXnUlMM57kBVV6maKbxu4mF3e4=; b=Xk1M+ZFrmF6yiuKWkJnHwP
-	DJQYl4dACOxM85vNDQsNoQbsjAbsdwzTRTaaJab1UagsERgJK7mk02Yq57PW+LH1
-	yDuyVYJY+9yyId4fJSEEvp4mGo7LQ62KJSNVch3z9wi6NWt9HZsg7F9+akDA8GpC
-	2T+XfUuMjnOtQYqM07M87A2BwNhKkU91JxHOlkIvC03NJTPgYX0x4lKYzYbLZLSK
-	d+cUNi9tzx2IFW/BgPCE+ZlLQWw0+f0NdqHsekLhPbBwtEIg51M5vEKUsoBJhZUf
-	Q/WWeODl3BHLjPsQypBL8wKv9ovvn30MVF860lX5sofkj587/WVaiNUO6YxJHw2g
-	==
-Received: from ppma12.dal12v.mail.ibm.com (dc.9e.1632.ip4.static.sl-reverse.com [50.22.158.220])
-	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4ewg9j1sxk-1
+	:content-transfer-encoding:date:from:in-reply-to:message-id
+	:mime-version:references:subject:to; s=pp1; bh=akqdjoOLD38kZE4G9
+	1ivjxHVgJiEWq0/Ka5nl/0hDaE=; b=VwJ95pkw/Fp6hdC5FN5pL/F2ZTeNJFpQ2
+	5RHGEXfElvwCZkbtsU7/zrnUcogSjDL5uhU2Qe/qVybFeAIDkNv0WF4U7G+MA1l4
+	QwH4hkHliigm/BTclenYOT/jwXUsonyJnwI8Eb22A2aIWaebAXBoLTA/wRmlbxxp
+	0CmVkpg0dq48HzQ/Tj0TfZ07EJAeBwHdv8PDNvkAce5L5lA4yYRD1mMlHggl6kOx
+	gZeT4ghiMZ1lDf3FTyZBiDMWHkwDOLgOsm9DVbvdaM5gCGFU8YnQ7cRoc+JkNsZ4
+	4dOGBmhkJRVbAc6uVzEUuB0hPyD4rxIMkv/bgqQ2ViIPJ+9x9HuRQ==
+Received: from ppma11.dal12v.mail.ibm.com (db.9e.1632.ip4.static.sl-reverse.com [50.22.158.219])
+	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4ewjc3svtn-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 25 Jun 2026 12:47:43 +0000 (GMT)
-Received: from pps.filterd (ppma12.dal12v.mail.ibm.com [127.0.0.1])
-	by ppma12.dal12v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 65PCYbTc019807;
-	Thu, 25 Jun 2026 12:47:42 GMT
-Received: from smtprelay02.fra02v.mail.ibm.com ([9.218.2.226])
-	by ppma12.dal12v.mail.ibm.com (PPS) with ESMTPS id 4ex56qpcbv-1
+	Thu, 25 Jun 2026 12:47:51 +0000 (GMT)
+Received: from pps.filterd (ppma11.dal12v.mail.ibm.com [127.0.0.1])
+	by ppma11.dal12v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 65PCYbos002240;
+	Thu, 25 Jun 2026 12:47:50 GMT
+Received: from smtprelay01.fra02v.mail.ibm.com ([9.218.2.227])
+	by ppma11.dal12v.mail.ibm.com (PPS) with ESMTPS id 4ex7vywurc-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 25 Jun 2026 12:47:42 +0000 (GMT)
+	Thu, 25 Jun 2026 12:47:50 +0000 (GMT)
 Received: from smtpav05.fra02v.mail.ibm.com (smtpav05.fra02v.mail.ibm.com [10.20.54.104])
-	by smtprelay02.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 65PCldYP53543352
+	by smtprelay01.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 65PCllMm60883280
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Thu, 25 Jun 2026 12:47:39 GMT
+	Thu, 25 Jun 2026 12:47:47 GMT
 Received: from smtpav05.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 2235520043;
+	by IMSVA (Postfix) with ESMTP id E1C1520043;
+	Thu, 25 Jun 2026 12:47:46 +0000 (GMT)
+Received: from smtpav05.fra02v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 8519D20040;
 	Thu, 25 Jun 2026 12:47:39 +0000 (GMT)
-Received: from smtpav05.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 6FDCA20040;
-	Thu, 25 Jun 2026 12:47:31 +0000 (GMT)
 Received: from li-7bb28a4c-2dab-11b2-a85c-887b5c60d769.ibm.com.com (unknown [9.39.20.6])
 	by smtpav05.fra02v.mail.ibm.com (Postfix) with ESMTP;
-	Thu, 25 Jun 2026 12:47:31 +0000 (GMT)
+	Thu, 25 Jun 2026 12:47:39 +0000 (GMT)
 From: Shrikanth Hegde <sshegde@linux.ibm.com>
 To: linux-kernel@vger.kernel.org, mingo@kernel.org, peterz@infradead.org,
         juri.lelli@redhat.com, vincent.guittot@linaro.org,
@@ -85,9 +84,9 @@ Cc: sshegde@linux.ibm.com, tglx@kernel.org, gregkh@linuxfoundation.org,
         tj@kernel.org, tommaso.cucinotta@gmail.com, maz@kernel.org,
         rafael@kernel.org, rdunlap@infradead.org, kernellwp@gmail.com,
         linux-doc@vger.kernel.org
-Subject: [PATCH v5 04/24] cpumask: Introduce cpu_preferred_mask
-Date: Thu, 25 Jun 2026 18:16:28 +0530
-Message-ID: <20260625124648.802832-5-sshegde@linux.ibm.com>
+Subject: [PATCH v5 05/24] sysfs: Add preferred CPU file
+Date: Thu, 25 Jun 2026 18:16:29 +0530
+Message-ID: <20260625124648.802832-6-sshegde@linux.ibm.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260625124648.802832-1-sshegde@linux.ibm.com>
 References: <20260625124648.802832-1-sshegde@linux.ibm.com>
@@ -97,57 +96,56 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-TM-AS-GCONF: 00
 X-Proofpoint-Reinject: loops=2 maxloops=12
-X-Proofpoint-ORIG-GUID: BmESdySgGYoWGR_ci6G3dLGNv5lNDP2s
-X-Proofpoint-GUID: 2iCD421l3Lf0DSrSEPqik2y2A8alyLiw
-X-Authority-Analysis: v=2.4 cv=Y4XIdBeN c=1 sm=1 tr=0 ts=6a3d2370 cx=c_pps
- a=bLidbwmWQ0KltjZqbj+ezA==:117 a=bLidbwmWQ0KltjZqbj+ezA==:17
- a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=RnoormkPH1_aCDwRdu11:22 a=Y2IxJ9c9Rs8Kov3niI8_:22 a=VnNF1IyMAAAA:8
- a=0mhcXptKf_jZ1Pm6q6UA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjI1MDEwNiBTYWx0ZWRfX6lvkLXkImdqo
- BZOFZd7Q+5fV5rmjJyqtEgUBJwUZMmLK0wTSg8+5WI6ROmW/5yoOE4HNdTz4CHbaElfByNW+sx9
- dRyfH13hXjwkrbYPTmUaySgpn/7LVYWC9SFl+QG3ElKgnMu3nJ/hdlXKaqDGUMMH01+j6P7fNhO
- JyK9n8GFSf7XDOa9QKzMM7Yp0lugCpRs+8cB4cgH7cxzBUtFPtJk2W5+HVtfkYyXPFhE+8MQ0qW
- vqRt+oQzrOadFKNJqk4pkqMLtERTfwg/uLcCYwQn8XMW3+DHsfbzjPRhDFplm++U7WPiWNN65sL
- lxCDANPzzpFN89moe7E3Do1ft1AB13edS81m/W56FwaTxSv2Hrb+7HhPKQo8AeYhx5AdE+Y+urP
- V7R5ah6Rkl7me7cxLbTScKj1X/9Xb1qFChkyNcmPW3ecEPf+rnn7Mf4Ym5PcrIyUvVpjtyxlobQ
- tpC25Y67muzT1UgCiIQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjI1MDEwNiBTYWx0ZWRfX0T4BejzPEQcN
- NerVLXrmNDgxtQu+QPsEkNOXSowD9xuf5b7WOxKIGasTNLpAYbTegT17B/pCdr/Bp0Y9pgTTOuj
- Ughmu+EiigU6t/dlMd3Osj1BBoSpvBI=
+X-Authority-Analysis: v=2.4 cv=X4Ni7mTe c=1 sm=1 tr=0 ts=6a3d2378 cx=c_pps
+ a=aDMHemPKRhS1OARIsFnwRA==:117 a=aDMHemPKRhS1OARIsFnwRA==:17
+ a=FelO9ux0wxsA:10 a=VkNPw1HP01LnGYTKEx00:22 a=RnoormkPH1_aCDwRdu11:22
+ a=iQ6ETzBq9ecOQQE5vZCe:22 a=VnNF1IyMAAAA:8 a=VwQbUJbxAAAA:8
+ a=md4hqiRJsRObfrzgdmAA:9
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjI1MDEwNiBTYWx0ZWRfX4aBuf+1Qc659
+ Ib/XLu2WYVrlauvioiCw1nI6Z930R5NvGhsw3nV0a6WlZ/fB3iefu1GdR0dhfnhAERg98Pmx18s
+ gfiI2/U0LWWT+BlzSo+P0Yf89k0Pma4=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjI1MDEwNiBTYWx0ZWRfX4YrJhqkrlBhU
+ JsbtyFGCyqJrMw8qc/PPvD7gnC8AGDVy66/C/04k+nahw+r06ne1P26H1NBcBwgJxqqAXDjM67p
+ LGtDBoO+W/7e58GJ1q1n/6b6w+6cV7/mbsZGq9hGh6DTvoz4cB5NP7Nhc4nHfK5ti4zTU8c04kc
+ c1SA0xMd0pzlvMEnYJTq/GdJX4NrRrD8xr2B+2gttGFVtuM1FTGNoXolNZWR7ssCCVZRK9k7z/W
+ d2a/wHknK7s3wGzSEocBFuyWhjk59iub8pp2fB2i6tAsP3++4NveBqlmokPESvch2sf13/OCbAm
+ R3BeWG3JaxVRo3g5W6/YyMn8cyvjPqunHalhKX6H1lrFyVRJgRdCQfGVVzmITbET4nOZjXmMtul
+ Rgh3EL3h+UEZP1xq6tbhPCwQ5EVR6YwU0CjtoccnCBRELynDUlgsKPl1dncnkVPBgREnaEYg+AN
+ CnIPNZUo5E4y0niEgBw==
+X-Proofpoint-ORIG-GUID: M6pcn4O5TrRfrNDex3HBs1TE2crNotNw
+X-Proofpoint-GUID: EmUHC0TvEUfDkBvYKxcXpuw_TzYsRf-I
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-25_01,2026-06-24_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 priorityscore=1501 malwarescore=0 lowpriorityscore=0 spamscore=0
- clxscore=1015 suspectscore=0 impostorscore=0 phishscore=0 bulkscore=0
+ phishscore=0 bulkscore=0 suspectscore=0 spamscore=0 priorityscore=1501
+ impostorscore=0 malwarescore=0 clxscore=1015 adultscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606250106
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.34 / 15.00];
+X-Spamd-Result: default: False [0.84 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[ibm.com,none];
 	R_DKIM_ALLOW(-0.20)[ibm.com:s=pp1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
 	FREEMAIL_CC(0.00)[linux.ibm.com,kernel.org,linuxfoundation.org,redhat.com,google.com,goodmis.org,arm.com,sina.com,bitbyteword.org,nvidia.com,gmail.com,infradead.org,vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-93522-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[sshegde@linux.ibm.com,linux-doc@vger.kernel.org];
 	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER(0.00)[sshegde@linux.ibm.com,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-93531-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS(0.00)[m:linux-kernel@vger.kernel.org,m:mingo@kernel.org,m:peterz@infradead.org,m:juri.lelli@redhat.com,m:vincent.guittot@linaro.org,m:yury.norov@gmail.com,m:kprateek.nayak@amd.com,m:iii@linux.ibm.com,m:corbet@lwn.net,m:sshegde@linux.ibm.com,m:tglx@kernel.org,m:gregkh@linuxfoundation.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:vschneid@redhat.com,m:huschle@linux.ibm.com,m:rostedt@goodmis.org,m:dietmar.eggemann@arm.com,m:maddy@linux.ibm.com,m:srikar@linux.ibm.com,m:hdanton@sina.com,m:chleroy@kernel.org,m:vineeth@bitbyteword.org,m:frederic@kernel.org,m:arighi@nvidia.com,m:pauld@redhat.com,m:christian.loehle@arm.com,m:tj@kernel.org,m:tommaso.cucinotta@gmail.com,m:maz@kernel.org,m:rafael@kernel.org,m:rdunlap@infradead.org,m:kernellwp@gmail.com,m:linux-doc@vger.kernel.org,m:yurynorov@gmail.com,m:tommasocucinotta@gmail.com,s:lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FREEMAIL_TO(0.00)[vger.kernel.org,kernel.org,infradead.org,redhat.com,linaro.org,gmail.com,amd.com,linux.ibm.com,lwn.net];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,vger.kernel.org:from_smtp,linux.ibm.com:mid,linux.ibm.com:from_mime];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[34];
 	PRECEDENCE_BULK(0.00)[];
@@ -156,143 +154,84 @@ X-Spamd-Result: default: False [0.34 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[ibm.com:+];
 	TO_DN_NONE(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,linux.ibm.com:mid,linux.ibm.com:from_mime];
 	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCVD_COUNT_SEVEN(0.00)[11]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 82D636C5B6C
+X-Rspamd-Queue-Id: 95C9C6C5BA7
 
-This patch does
-- Declare and Define cpu_preferred_mask.
-- Get/Set helpers for it.
+Add "preferred" file in /sys/devices/system/cpu
 
-Values are set/clear by the scheduler by detecting the steal time values.
+This offers
+- User can quickly check which CPUs are marked as preferred at this
+  moment.
+- Userspace algorithms irqbalance could use this mask to send irq into
+  preferred CPUs.
 
-A CPU is set to preferred when it becomes active. Later it may be
-marked as non-preferred depending on steal time values with
-steal monitor being enabled.
+For example:
+cat /sys/devices/system/cpu/online
+0-719
+cat /sys/devices/system/cpu/preferred
+0-599        <<< Implies 0-599 are preferred for workloads and 600-719
+                 should be avoided at this moment.
 
-Always maintain design construct of preferred is subset of active.
-i.e. preferred ⊆ active ⊆ online ⊆ present ⊆ possible
+cat /sys/devices/system/cpu/preferred
+0-719        <<< All CPUs are usable. There is no preferrence.
 
 Signed-off-by: Shrikanth Hegde <sshegde@linux.ibm.com>
 ---
-v4->v5:
-- Make it macro instead (Yury Norov)
+ Documentation/ABI/testing/sysfs-devices-system-cpu | 11 +++++++++++
+ drivers/base/cpu.c                                 |  8 ++++++++
+ 2 files changed, 19 insertions(+)
 
- include/linux/cpumask.h | 21 ++++++++++++++++++++-
- kernel/cpu.c            |  6 ++++++
- kernel/sched/core.c     |  5 +++++
- 3 files changed, 31 insertions(+), 1 deletion(-)
-
-diff --git a/include/linux/cpumask.h b/include/linux/cpumask.h
-index 80211900f373..5a643d608ea6 100644
---- a/include/linux/cpumask.h
-+++ b/include/linux/cpumask.h
-@@ -120,12 +120,20 @@ extern struct cpumask __cpu_enabled_mask;
- extern struct cpumask __cpu_present_mask;
- extern struct cpumask __cpu_active_mask;
- extern struct cpumask __cpu_dying_mask;
+diff --git a/Documentation/ABI/testing/sysfs-devices-system-cpu b/Documentation/ABI/testing/sysfs-devices-system-cpu
+index 82d10d556cc8..5fb973d53287 100644
+--- a/Documentation/ABI/testing/sysfs-devices-system-cpu
++++ b/Documentation/ABI/testing/sysfs-devices-system-cpu
+@@ -806,3 +806,14 @@ Date:		Nov 2022
+ Contact:	Linux kernel mailing list <linux-kernel@vger.kernel.org>
+ Description:
+ 		(RO) the list of CPUs that can be brought online.
 +
-+#ifdef CONFIG_PREFERRED_CPU
-+extern struct cpumask __cpu_preferred_mask;
-+#else
-+#define __cpu_preferred_mask __cpu_active_mask
-+#endif
-+
- #define cpu_possible_mask ((const struct cpumask *)&__cpu_possible_mask)
- #define cpu_online_mask   ((const struct cpumask *)&__cpu_online_mask)
- #define cpu_enabled_mask   ((const struct cpumask *)&__cpu_enabled_mask)
- #define cpu_present_mask  ((const struct cpumask *)&__cpu_present_mask)
- #define cpu_active_mask   ((const struct cpumask *)&__cpu_active_mask)
- #define cpu_dying_mask    ((const struct cpumask *)&__cpu_dying_mask)
-+#define cpu_preferred_mask ((const struct cpumask *)&__cpu_preferred_mask)
- 
- extern atomic_t __num_online_cpus;
- extern unsigned int __num_possible_cpus;
-@@ -1161,6 +1169,7 @@ void init_cpu_possible(const struct cpumask *src);
- #define set_cpu_present(cpu, present)	assign_cpu((cpu), &__cpu_present_mask, (present))
- #define set_cpu_active(cpu, active)	assign_cpu((cpu), &__cpu_active_mask, (active))
- #define set_cpu_dying(cpu, dying)	assign_cpu((cpu), &__cpu_dying_mask, (dying))
-+#define set_cpu_preferred(cpu, preferred) assign_cpu((cpu), &__cpu_preferred_mask, (preferred))
- 
- void set_cpu_online(unsigned int cpu, bool online);
- void set_cpu_possible(unsigned int cpu, bool possible);
-@@ -1256,7 +1265,12 @@ static __always_inline bool cpu_dying(unsigned int cpu)
- 	return cpumask_test_cpu(cpu, cpu_dying_mask);
++What:		/sys/devices/system/cpu/preferred
++Date:		Jun 2026
++Contact:	Linux kernel mailing list <linux-kernel@vger.kernel.org>
++Description:
++		(RO) the list of preferred CPUs at this moment.
++		These are the only CPUs meant to be used at the moment.
++		Using CPU outside of the list could lead to more
++		contention of underlying physical CPU resource. Dynamically
++		changes based on steal time. With CONFIG_PREFERRED_CPU=n it
++		is same as active CPUs. See sched-arch.rst for more details.
+diff --git a/drivers/base/cpu.c b/drivers/base/cpu.c
+index 875abdc9942e..0c6647805805 100644
+--- a/drivers/base/cpu.c
++++ b/drivers/base/cpu.c
+@@ -391,6 +391,13 @@ static int cpu_uevent(const struct device *dev, struct kobj_uevent_env *env)
  }
+ #endif
  
--#else
-+static __always_inline bool cpu_preferred(unsigned int cpu)
++static ssize_t preferred_show(struct device *dev,
++			      struct device_attribute *attr, char *buf)
 +{
-+	return cpumask_test_cpu(cpu, cpu_preferred_mask);
++	return sysfs_emit(buf, "%*pbl\n", cpumask_pr_args(cpu_preferred_mask));
 +}
++static DEVICE_ATTR_RO(preferred);
 +
-+#else	/* NR_CPUS <= 1 */
+ const struct bus_type cpu_subsys = {
+ 	.name = "cpu",
+ 	.dev_name = "cpu",
+@@ -532,6 +539,7 @@ static struct attribute *cpu_root_attrs[] = {
+ #ifdef CONFIG_GENERIC_CPU_AUTOPROBE
+ 	&dev_attr_modalias.attr,
+ #endif
++	&dev_attr_preferred.attr,
+ 	NULL
+ };
  
- #define num_online_cpus()	1U
- #define num_possible_cpus()	1U
-@@ -1294,6 +1308,11 @@ static __always_inline bool cpu_dying(unsigned int cpu)
- 	return false;
- }
- 
-+static __always_inline bool cpu_preferred(unsigned int cpu)
-+{
-+	return cpu == 0;
-+}
-+
- #endif /* NR_CPUS > 1 */
- 
- #define cpu_is_offline(cpu)	unlikely(!cpu_online(cpu))
-diff --git a/kernel/cpu.c b/kernel/cpu.c
-index bc4f7a9ba64e..d623a9c5554a 100644
---- a/kernel/cpu.c
-+++ b/kernel/cpu.c
-@@ -3107,6 +3107,11 @@ EXPORT_SYMBOL(__cpu_dying_mask);
- atomic_t __num_online_cpus __read_mostly;
- EXPORT_SYMBOL(__num_online_cpus);
- 
-+#ifdef CONFIG_PREFERRED_CPU
-+struct cpumask __cpu_preferred_mask __read_mostly;
-+EXPORT_SYMBOL(__cpu_preferred_mask);
-+#endif
-+
- void init_cpu_present(const struct cpumask *src)
- {
- 	cpumask_copy(&__cpu_present_mask, src);
-@@ -3164,6 +3169,7 @@ void __init boot_cpu_init(void)
- 	/* Mark the boot cpu "present", "online" etc for SMP and UP case */
- 	set_cpu_online(cpu, true);
- 	set_cpu_active(cpu, true);
-+	set_cpu_preferred(cpu, true);
- 	set_cpu_present(cpu, true);
- 	set_cpu_possible(cpu, true);
- 
-diff --git a/kernel/sched/core.c b/kernel/sched/core.c
-index 2f4530eb543f..9e16946c9d62 100644
---- a/kernel/sched/core.c
-+++ b/kernel/sched/core.c
-@@ -8685,6 +8685,9 @@ int sched_cpu_activate(unsigned int cpu)
- 	 */
- 	sched_set_rq_online(rq, cpu);
- 
-+	/* preferred is subset of active and follows its state */
-+	set_cpu_preferred(cpu, true);
-+
- 	return 0;
- }
- 
-@@ -8698,6 +8701,8 @@ int sched_cpu_deactivate(unsigned int cpu)
- 	if (ret)
- 		return ret;
- 
-+	set_cpu_preferred(cpu, false);
-+
- 	/*
- 	 * Remove CPU from nohz.idle_cpus_mask to prevent participating in
- 	 * load balancing when not active
 -- 
 2.47.3
 
