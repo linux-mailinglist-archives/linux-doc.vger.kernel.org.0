@@ -1,154 +1,135 @@
-Return-Path: <linux-doc+bounces-93617-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93618-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 6yasNtpzPWpJ3QgAu9opvQ
-	(envelope-from <linux-doc+bounces-93617-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 20:30:50 +0200
+	id ZPusHgF0PWpP3QgAu9opvQ
+	(envelope-from <linux-doc+bounces-93618-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 20:31:29 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 84D126C8354
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 20:30:50 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id CEF666C8362
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 20:31:28 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b=LeqTQAcp;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93617-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93617-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=infradead.org;
+	dkim=pass header.d=google.com header.s=20251104 header.b=VW30oJLi;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93618-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-93618-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=google.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id A8073300CBC5
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 18:29:25 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 9226230136AE
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 18:29:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 32B4C31F9BA;
-	Thu, 25 Jun 2026 18:29:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8CBF5325706;
+	Thu, 25 Jun 2026 18:29:34 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f202.google.com (mail-pl1-f202.google.com [209.85.214.202])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A40442DC350;
-	Thu, 25 Jun 2026 18:29:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 643F83168EE
+	for <linux-doc@vger.kernel.org>; Thu, 25 Jun 2026 18:29:33 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782412164; cv=none; b=jLRVa1V/TylV65luWTp8R8GxCPwbU1rPgN//1QCBAfGR6fpkLsWChLKP/SgU0+lJkzZ0I3R/REIR2qQYSelPAXek7whoWeUrMK8Tkg+GsAG1t6aAT6pohCt5jikE4QeEVZyzCu8/swyEHhaj11QLDixCH01iidVRGKbbDgxu8eg=
+	t=1782412174; cv=none; b=na1wnmuBsY+f29cUbwXe1o6LQzYJR7HLgn55/c8QdDEmBDQSk5FA8Iq+qKfisNnPoB2RKp/rf/emhg0AMxFlCI+XsTZ67LS0BC1lon3ywM/yzrLkLeQqdGtV765pfmdFPNxxMtgCyEStA33NuHZbW+BbggyuH99mRUMS4lGddpc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782412164; c=relaxed/simple;
-	bh=AxSREvOWEB5W1NWeqZN2hVKCno9mdks33VppHFPzea8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=CZ1ICQFsf1uTYR5v1cjZGf/n4dKOzewrokKws9obZf9CFQ0ekAHYgtSivnSVxGNkyB4UmWQ7hZEdGkXSOQC/GFPxXx5FFZjj4V2BcHpzd7dMEMxDUW720rAUqXI0TNFWDB02n3lhz5EUwYLV0amqr3JubuPmj9L2EkYx/KlaqjM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=pass smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=LeqTQAcp; arc=none smtp.client-ip=198.137.202.133
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=EY4iW47JlK6yTM+x46WwGDHsCoKvVxVuF5bBEpnou6k=; b=LeqTQAcpHH1TNVBPy40pntPQwA
-	WeTCKEqHsg4CU81Tlga6ft/KW45x3WI95xj92FURnyIe3DjuDOY9/AQ36LyNUhIAtHnvdTBjZZNqk
-	s/IP2UMn5wxau59deABMOPqbENyiZJ4zcPXzkBx6sq20RNJVbCd1oqGuvYygfSD/T3k2buTa6j7si
-	vsMbThJsK6LydkSBS31HM742LZ/22A9O8ZcJudbqPg/Q8zSCjQjmK2IWt5nKmNsiRAFN7Imz2gRTZ
-	whdTiujYtpF5fd+V6CQmoj8gZ+9igLI1VDqHISLZkGN7cce9G38k9XEs2nDTgPTsS74yfB3U8BuKA
-	rhT546hg==;
-Received: from [50.53.43.113] (helo=[192.168.254.34])
-	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wcop8-00000009gWu-0HVB;
-	Thu, 25 Jun 2026 18:29:14 +0000
-Message-ID: <60a7850d-1527-4517-aae8-cd5cbebcb9b5@infradead.org>
-Date: Thu, 25 Jun 2026 11:29:12 -0700
+	s=arc-20240116; t=1782412174; c=relaxed/simple;
+	bh=ruI1D+60LviHu6T85gvnun6dB5PLGiX7hIRc8JYMsR4=;
+	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
+	 To:Cc:Content-Type; b=Vunm9ON/hz8CtOkFRABvHN5cnx6mjLFggXnVpBfB8zybqicU0e+rXCpa680NLG1Kf5ugnaDxjpcnFl13ZJ/tNQodo3neU6rXzsf6Boo0JDhYoEExlUtRxacleERma5IaV2lonExdWiLskZ8f9+Id2bPNwAZo3ahBoENElDhBAcQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--seanjc.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=VW30oJLi; arc=none smtp.client-ip=209.85.214.202
+Received: by mail-pl1-f202.google.com with SMTP id d9443c01a7336-2c7ee3952d6so1514865ad.1
+        for <linux-doc@vger.kernel.org>; Thu, 25 Jun 2026 11:29:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20251104; t=1782412173; x=1783016973; darn=vger.kernel.org;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=UlrTxHjS5w8g7dS4TjG06CQGwg1aqavnJRIR747VzMs=;
+        b=VW30oJLi1YnO21Z9dAvCvWUufqDhrW2+KRY9yPzl/a3CX2BEHLYnxMdAfnspHDt5lx
+         eVipj7Vqe04jDp8b9Tgo+I34H/suTWeAip66n9cAPxd5XX0+lOjmSUX+RvO8+z5AoVjJ
+         7aCZbO9ik+gIZYCaA8ZCytU1iPHuXn4Mqr48BMDzyIVpNthG1K2rtFvxAy8WroyFbkfc
+         xc2zcQGBAM1VM2FArRNOdcwyUzuQu7srXQVlynXY0GIuxWo2UebnQBrUct/By4aoEUAo
+         erzUsAI9nT7gj/kc6ret8QhSASmRh+Leci3rzUsmIHooD+r8wT37uHYbD5QBeshX5vGa
+         l2Yw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1782412173; x=1783016973;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=UlrTxHjS5w8g7dS4TjG06CQGwg1aqavnJRIR747VzMs=;
+        b=dPxG9yNYz1uL1minVz9utJd2A4DTecoDqQQyaI8tf08updy161LpgneZzhvO5HsN8q
+         T0reRzxpxwmNKKQxwwf3RMT6dm398Tqv2YUOTZyRxxUTBX7HbDy8kSVjzGhZ1tM0wOKy
+         AQ5qNpFT3kllNn5juGmu277wkud0s2D6H2OnsVuwbHN4YkPZHbJsKkDECdh5rxhodzvS
+         /GrWMnOB8WuzXx8cspZTonoRDCNtvS8D2khpeZftOIILtNxYo+f7gDbzXDRgpw3NpVSx
+         cn5asWW4s1d6h9nqzBkEv6jqygELgw51tMDFF+aEBgk+vvb1n7J73N3YcaynBB6ldm4K
+         upOw==
+X-Forwarded-Encrypted: i=1; AHgh+Rp42NIyskYBMv80Sd3/lEYKNS7qDB4sAmsX0uGHe9hzR0ZMJXT/+VTgyHOaeSVpLXToNhHRRJnS7kk=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxHHDw4aUXBCq2QJ4AqB/bDEwk/MkpnHT+e7XojpaGuk7tMe8rS
+	cl2XYoDNuFEcS6I8LCq0J4LFH/gMNTLpq301me8j+7ukSssrANrCtcztrrgVxTqEHwpNtZQTIp/
+	sGOH1rQ==
+X-Received: from plps15.prod.google.com ([2002:a17:902:988f:b0:2bd:4f41:fbf4])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:902:d484:b0:2be:3850:297e
+ with SMTP id d9443c01a7336-2c7fc792f8emr34372895ad.31.1782412172316; Thu, 25
+ Jun 2026 11:29:32 -0700 (PDT)
+Date: Thu, 25 Jun 2026 11:29:31 -0700
+In-Reply-To: <20260527-kvm-locking-docs-v1-11-4fe8b602ff47@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 17/19] Documentation: ioctl: add CMH ioctl documentation
- and register 'J'
-To: Saravanakrishnan Krishnamoorthy <skrishnamoorthy@rambus.com>,
- Albert Ou <aou@eecs.berkeley.edu>,
- Alex Ousherovitch <aousherovitch@rambus.com>,
- Conor Dooley <conor+dt@kernel.org>, "David S. Miller" <davem@davemloft.net>,
- Herbert Xu <herbert@gondor.apana.org.au>, Jonathan Corbet <corbet@lwn.net>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Palmer Dabbelt
- <palmer@dabbelt.com>, Paul Walmsley <pjw@kernel.org>,
- Rob Herring <robh@kernel.org>, Shuah Khan <shuah@kernel.org>
-Cc: Alexandre Ghiti <alex@ghiti.fr>, devicetree@vger.kernel.org,
- Joel Wittenauer <Joel.Wittenauer@cryptography.com>,
- linux-api@vger.kernel.org, linux-crypto@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-kselftest@vger.kernel.org, linux-riscv@lists.infradead.org,
- Shuah Khan <skhan@linuxfoundation.org>, sipsupport@rambus.com,
- Thi Nguyen <thin@rambus.com>
-References: <20260625173328.1140487-1-skrishnamoorthy@rambus.com>
- <20260625173328.1140487-18-skrishnamoorthy@rambus.com>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20260625173328.1140487-18-skrishnamoorthy@rambus.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Mime-Version: 1.0
+References: <20260527-kvm-locking-docs-v1-0-4fe8b602ff47@google.com> <20260527-kvm-locking-docs-v1-11-4fe8b602ff47@google.com>
+Message-ID: <aj1zi1XIvFpJtNlq@google.com>
+Subject: Re: [PATCH RFC 11/12] KVM: mmu: Point users of host_pfn_mapping_level()
+ to docs
+From: Sean Christopherson <seanjc@google.com>
+To: Ackerley Tng <ackerleytng@google.com>
+Cc: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, Tianrui Zhao <zhaotianrui@loongson.cn>, 
+	Bibo Mao <maobibo@loongson.cn>, Huacai Chen <chenhuacai@kernel.org>, 
+	WANG Xuerui <kernel@xen0n.name>, Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
+	Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, 
+	Fuad Tabba <tabba@google.com>, vannapurve@google.com, x86@kernel.org, 
+	"H. Peter Anvin" <hpa@zytor.com>, kvm@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, loongarch@lists.linux.dev
+Content-Type: text/plain; charset="us-ascii"
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	MV_CASE(0.50)[];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-93617-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:skrishnamoorthy@rambus.com,m:aou@eecs.berkeley.edu,m:aousherovitch@rambus.com,m:conor+dt@kernel.org,m:davem@davemloft.net,m:herbert@gondor.apana.org.au,m:corbet@lwn.net,m:krzk+dt@kernel.org,m:palmer@dabbelt.com,m:pjw@kernel.org,m:robh@kernel.org,m:shuah@kernel.org,m:alex@ghiti.fr,m:devicetree@vger.kernel.org,m:Joel.Wittenauer@cryptography.com,m:linux-api@vger.kernel.org,m:linux-crypto@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-riscv@lists.infradead.org,m:skhan@linuxfoundation.org,m:sipsupport@rambus.com,m:thin@rambus.com,m:conor@kernel.org,m:krzk@kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[24];
-	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[20];
+	RCVD_TLS_LAST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:ackerleytng@google.com,m:pbonzini@redhat.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:zhaotianrui@loongson.cn,m:maobibo@loongson.cn,m:chenhuacai@kernel.org,m:kernel@xen0n.name,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:tabba@google.com,m:vannapurve@google.com,m:x86@kernel.org,m:hpa@zytor.com,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:loongarch@lists.linux.dev,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[seanjc@google.com,linux-doc@vger.kernel.org];
+	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_FROM(0.00)[bounces-93618-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[infradead.org:+];
+	FROM_NEQ_ENVFROM(0.00)[seanjc@google.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[google.com:+];
 	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
+	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[cryptography.com:email,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,infradead.org:dkim,infradead.org:mid,infradead.org:from_mime,vger.kernel.org:from_smtp]
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 84D126C8354
+X-Rspamd-Queue-Id: CEF666C8362
 
+On Wed, May 27, 2026, Ackerley Tng wrote:
+> After consolidating documentation for host_pfn_mapping_level() in
+> Documentation/virt/kvm/locking.rst, point users of function to docs.
 
-
-On 6/25/26 10:33 AM, Saravanakrishnan Krishnamoorthy wrote:
-> From: Alex Ousherovitch <aousherovitch@rambus.com>
-> 
-> Add Documentation/userspace-api/ioctl/cmh_mgmt.rst documenting the
-> ioctl commands on the /dev/cmh_mgmt misc device for the CRI
-> CryptoManager Hub (CMH) hardware crypto accelerator driver.  Covers
-> key management, KIC key derivation, PKE (RSA, ECDSA, ECDH, EdDSA),
-> PQC (ML-KEM, ML-DSA, SLH-DSA), SM2, EAC, and DRBG.
-> 
-> Register ioctl magic number 'J' (0x4A) in ioctl-number.rst.  The
-> driver uses ioctls 0x01-0x40.
-> 
-> Co-developed-by: Saravanakrishnan Krishnamoorthy <skrishnamoorthy@rambus.com>
-> Signed-off-by: Saravanakrishnan Krishnamoorthy <skrishnamoorthy@rambus.com>
-> Signed-off-by: Alex Ousherovitch <aousherovitch@rambus.com>
-> Reviewed-by: Joel Wittenauer <Joel.Wittenauer@cryptography.com>
-> Reviewed-by: Thi Nguyen <thin@rambus.com>
-> ---
->  .../userspace-api/ioctl/cmh_mgmt.rst          | 941 ++++++++++++++++++
->  .../userspace-api/ioctl/ioctl-number.rst      |   1 +
->  2 files changed, 942 insertions(+)
->  create mode 100644 Documentation/userspace-api/ioctl/cmh_mgmt.rst
-> 
-
-One docs build warning:
-
-Documentation/userspace-api/ioctl/cmh_mgmt.rst: WARNING: document isn't included in any toctree [toc.not_included]
-
-
--- 
-~Randy
-
+NAK.  I want the "formal" documentation to describe the rules and general mechanisms,
+not arch specific implementation details.  It's unfortunate the LoongArch copy+pasted
+x86's code, comment and all, but that's a separate problem.
 
