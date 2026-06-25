@@ -1,173 +1,171 @@
-Return-Path: <linux-doc+bounces-93491-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93492-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id LdpoHczhPGrytggAu9opvQ
-	(envelope-from <linux-doc+bounces-93491-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 10:07:40 +0200
+	id xYZRO9LoPGouuQgAu9opvQ
+	(envelope-from <linux-doc+bounces-93492-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 10:37:38 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id D467B6C3927
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 10:07:39 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9EED16C3E5C
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 10:37:38 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=daMinCnv;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93491-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93491-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=FGlFrAQy;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93492-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-93492-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id C1452301233D
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 08:07:38 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 89D8830338A8
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 08:37:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 403F4218592;
-	Thu, 25 Jun 2026 08:07:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 12C4D367F31;
+	Thu, 25 Jun 2026 08:37:31 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com [209.85.167.44])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B0CC7276050
-	for <linux-doc@vger.kernel.org>; Thu, 25 Jun 2026 08:07:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0281F3812D2;
+	Thu, 25 Jun 2026 08:37:29 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782374856; cv=none; b=PHJOUVi1x5AWGgEeWSC9ZUfkTt1pJlEuvVXQzTLt0EbLx0hQfOsznt3U9FW9peA9WUuqiKWi6leZUqDX0aLTxnwJ/1X/mrrfcgCgfCAAdkonaDkVeBkAC7P5T04+LrBG8pN6RaelCpSeoQMCkRCuY4PMugQKYWFfZHYx4mckmbw=
+	t=1782376651; cv=none; b=WRN+TbxwHWVS7NeTiU3/Jfc1Z/pzW2Xv+7yIjb2zblzXdxn/RwQHqPbKL04QLJOKNSA0X2xglx5QnnUd4iAssppPc13LIneBdGxDIe2VAxZ9z8Jul8z4yB5HbM7EPYoNehiE2V2lHEAtZACcOzG6AMwy8Pz4IkEHMVc4cL7yXQw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782374856; c=relaxed/simple;
-	bh=4qJuo5qU+I+SushrL2UeFNuIuwsBS6UwzTW5/V3pGsI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=cDNvMffrARMB9S48FnfaHue3x7CW7MjOulu6qB3wE4pDyVVD16/IMyS97na49S2zbFbpSAxLp38v7XDuXO1w71cs/H/JHb2XzaeIqSzKusGt/h0YSE+/A9G76HTcSxNou/LtCJhocU0n94FpgxYlEVr+HdF3HaKd3fJeOxW4uZo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=daMinCnv; arc=none smtp.client-ip=209.85.167.44
-Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-5ad583dc41eso1913852e87.1
-        for <linux-doc@vger.kernel.org>; Thu, 25 Jun 2026 01:07:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782374853; x=1782979653; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=xMl7TRyc5Ti1eJSQjKVmCxsmv7qZYLjfLBy4mCsAAeg=;
-        b=daMinCnv/xjQyCrEFNIAdSR3mgeyNn81DZDWzZosOf1ey3tU+jTMlMp1FUsoYDbtFa
-         s4zFs/oAPbrXfGHUTNWlhx3Xc6r8VcuTkUuubxK6/hI093oGSvLHaKjfrGOAPUUYRmCc
-         FKYo8wQlRkimEfU0H5YNXgSVncnLu7sXZhEjMe66zkPUmo/A9v2WQlTb1WumHWV7UM8U
-         USbIvC1K5vEGgVak1mqYzUFwOhiOUgRAi0cct3A4TkbLrjiW12vnR8GoPe/KuayVFpdZ
-         J61pFbDeevQQaF4kQ+VY+pmPLaijHH5km3qRxYMdwM25WVET7JIJz6q/r0ZyXUOd1OgS
-         lTVw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782374853; x=1782979653;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=xMl7TRyc5Ti1eJSQjKVmCxsmv7qZYLjfLBy4mCsAAeg=;
-        b=dKVL7UpuGLkIekhbDZSUhpfPabON5TEb1N/VHeEwY/4r8MytAYMFz08H1MkLM1xgXU
-         1p2ilEhNcioMBDZXdCuriL8taRcIdUVqzEhpIXru2qyHrFkGJgsJ8LVWwx6tMvYvP4Zq
-         jsS8m8zUeV4ltUlzhgJcC2VWx6AW+lDuDOOyX3F+F4R56pIqRiVIpvtuKqORgGDQkC6M
-         JsGcAiaToDK1FOk07SFRS03yP2uNBjUQhSndbkKk15lLxylTagSSlLMLUEsSIEwutRLr
-         6l3s54+hSzAJMkIUf3buAGkTS8XMuuf/bYbBwG+RbX21x5+KfxaQ+Udn4vmQW0mbesOv
-         kefg==
-X-Forwarded-Encrypted: i=1; AHgh+Rrt9DXEuzl+/t2BrmS4bWz1XAaADD4uszYGLuNk/rVTErNETUjLqldNSkf17jhLvXj8QkRwO4V01k8=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwJBZMu2kr6Ft20m7aSTKQlREytqVZKbMmlXvC/vxgz8HJ5MkiG
-	PgjSZo+enN7vht+Pi79+ck93k1UqVJqwF9ls5JdZAIyrrVYxt49sr6Ug
-X-Gm-Gg: AfdE7ckR11GTb85jqHdRUfbVgJ7Rpv/cVMwl8Ck0PKhclfPNe1wXFwuW+V7gx7+UxP8
-	3dP9/cNy7WIMxS95mwCWPdxJx8KizOaz1t4SKNaz3VsFRg9nTJMT+qRl3hbOxfr8fDlyfegmiVC
-	Cu5F0OT+D2txo0vfz01RDAbXDLSvOLM2meGp2tEBaWE2l37igTGZl2sMGfCTcSUoSa/CqeRIIfe
-	5KIsqqBQuZ4mNtDqfNbBfPNkZJWV8vPFKdUR6z49T49pFi6/nxe7ULuzEKdtjWD2njdYv0eHILh
-	Rck2UkQYzAuYNKFtwjEbc0am7ADOVY730ChGqO1wXjithYjHPI4FSeuZ511queJmwKC3Uft3DxT
-	FXA7BGVXQ76AFf2Ozl1WA6N3lRwkoGDXs9R8tFvyd4NW3/7dN0BACMmiJNiWWq2acBr6ATXUwo2
-	Kl1ancmxu/HkM6zbSk3M8Njw==
-X-Received: by 2002:a05:6512:40d0:10b0:5aa:6b8b:8c9c with SMTP id 2adb3069b0e04-5aea1f53efamr308064e87.42.1782374852743;
-        Thu, 25 Jun 2026 01:07:32 -0700 (PDT)
-Received: from [10.38.18.54] ([213.255.186.37])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3999b1b1a7esm41585921fa.40.2026.06.25.01.07.31
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 25 Jun 2026 01:07:31 -0700 (PDT)
-Message-ID: <ef408da3-5d46-43c9-ad71-cd33a9fc6d23@gmail.com>
-Date: Thu, 25 Jun 2026 11:07:30 +0300
+	s=arc-20240116; t=1782376651; c=relaxed/simple;
+	bh=CRKJgnURRmZG13pBfVf5Z1+tKvCPrR2kFBWC1BQDBt0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=GRPLaFCreoLqz0k2wlLEER0uKAIc+YLQ5o3g0GAMR6MS+vN2nrH/x0ow+onHnxVBNyiUFhg+PntNejQcINZMWc+Vsc9eOepqq2c6/UHGnEC2ZoWdVltim6ibBKZODnyB4U7wDMejVuZkRTbU2gIXaaUrwLYFoKaZSScsVg/V9qE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FGlFrAQy; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 930531F000E9;
+	Thu, 25 Jun 2026 08:37:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1782376649;
+	bh=DTHenELavdixkpehBZtgo0+fqBfXPK/qvE1tJsk4MnM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=FGlFrAQy6E1uz0C3XgqICgDtpY4DNdRjgthseoT8MOaduXl+SL2fHnjmBcTYDYVoi
+	 aahon87kV8Efqxe2wgajqSOfG+M8UjxNNxFsy+F5zI+k++5To0Lok2H3O3Rv1rReCc
+	 4GdaD1AQG03Ev/h+Ut1+huKOcnbWktK3QkMVU8PbwQ/NT4ysLrtbHE2zVbir4hs4P/
+	 NrVHnpV8HVagJwIgz0sIcJXup1HvAIrniYojkT3EXswnjYmA8WlxJbIWl1GTzV1Wo9
+	 uiKQORFPHRADJs5La5tVBgIZquUTMYRVkk8GBfS+6AZVOCWadOU7XYgpssTnjgx/Gv
+	 Xi0QONQ3Fwmug==
+Date: Thu, 25 Jun 2026 11:37:18 +0300
+From: Mike Rapoport <rppt@kernel.org>
+To: Shyam Saini <shyamsaini@linux.microsoft.com>
+Cc: linux-mm@kvack.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, akpm@linux-foundation.org,
+	tgopinath@linux.microsoft.com, bboscaccy@linux.microsoft.com,
+	kees@kernel.org, tony.luck@intel.com, gpiccoli@igalia.com,
+	bp@alien8.de, rdunlap@infradead.org, peterz@infradead.org,
+	feng.tang@linux.alibaba.com, dapeng1.mi@linux.intel.com,
+	elver@google.com, enelsonmoore@gmail.com, kuba@kernel.org,
+	lirongqing@baidu.com, ebiggers@kernel.org,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Will Deacon <will@kernel.org>, Ard Biesheuvel <ardb@kernel.org>,
+	David Hildenbrand <david@kernel.org>,
+	linux-arm-kernel@lists.infradead.org
+Subject: Re: [RFC v2 PATCH] reserve_mem: add support for static memory
+Message-ID: <ajzovhWHcFQZ9d3l@kernel.org>
+References: <20260619062331.348789-1-shyamsaini@linux.microsoft.com>
+ <aje-nY6QbwZP9XLG@kernel.org>
+ <ajyC2eX9MKSU84Z8@linuxonhyperv3.guj3yctzbm1etfxqx2vob5hsef.xx.internal.cloudapp.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] power: supply: bd71828: add a terminating table border
-To: Randy Dunlap <rdunlap@infradead.org>, linux-doc@vger.kernel.org
-Cc: Andreas Kemnade <andreas@kemnade.info>,
- Sebastian Reichel <sebastian.reichel@collabora.com>, linux-pm@vger.kernel.org
-References: <20260620011821.3568674-1-rdunlap@infradead.org>
-Content-Language: en-US, en-AU, en-GB, en-BW
-From: Matti Vaittinen <mazziesaccount@gmail.com>
-In-Reply-To: <20260620011821.3568674-1-rdunlap@infradead.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ajyC2eX9MKSU84Z8@linuxonhyperv3.guj3yctzbm1etfxqx2vob5hsef.xx.internal.cloudapp.net>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-5.16 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-93491-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:rdunlap@infradead.org,m:linux-doc@vger.kernel.org,m:andreas@kemnade.info,m:sebastian.reichel@collabora.com,m:linux-pm@vger.kernel.org,s:lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FORGED_SENDER(0.00)[mazziesaccount@gmail.com,linux-doc@vger.kernel.org];
-	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[25];
 	FORWARDED(0.00)[lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-93492-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:shyamsaini@linux.microsoft.com,m:linux-mm@kvack.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:akpm@linux-foundation.org,m:tgopinath@linux.microsoft.com,m:bboscaccy@linux.microsoft.com,m:kees@kernel.org,m:tony.luck@intel.com,m:gpiccoli@igalia.com,m:bp@alien8.de,m:rdunlap@infradead.org,m:peterz@infradead.org,m:feng.tang@linux.alibaba.com,m:dapeng1.mi@linux.intel.com,m:elver@google.com,m:enelsonmoore@gmail.com,m:kuba@kernel.org,m:lirongqing@baidu.com,m:ebiggers@kernel.org,m:catalin.marinas@arm.com,m:will@kernel.org,m:ardb@kernel.org,m:david@kernel.org,m:linux-arm-kernel@lists.infradead.org,s:lists@lfdr.de];
+	FREEMAIL_CC(0.00)[kvack.org,vger.kernel.org,linux-foundation.org,linux.microsoft.com,kernel.org,intel.com,igalia.com,alien8.de,infradead.org,linux.alibaba.com,linux.intel.com,google.com,gmail.com,baidu.com,arm.com,lists.infradead.org];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	RCPT_COUNT_FIVE(0.00)[5];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mazziesaccount@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[rppt@kernel.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rppt@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,collabora.com:email,kemnade.info:email]
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: D467B6C3927
+X-Rspamd-Queue-Id: 9EED16C3E5C
 
-On 20/06/2026 04:18, Randy Dunlap wrote:
-> Fix a documentation build error by adding a bottom table border:
-> 
-> Documentation/ABI/testing/sysfs-class-power-bd71828:1: ERROR: Malformed table.
-> No bottom table border found.
-> ============  ===========================================
-> 1             automatic adjustment of input current limit
-> 0             no adjustment of input current limit. This
->                helps for more unusual power sources like
->                solar modules. [docutils]
-> 
-> Fixes: e92786dd86a2 ("power: supply: bd71828: sysfs for auto input current limitation")
-> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-> ---
-> Cc: Andreas Kemnade <andreas@kemnade.info>
-> Cc: Matti Vaittinen <mazziesaccount@gmail.com>
-> Cc: Sebastian Reichel <sebastian.reichel@collabora.com>
-> Cc: linux-pm@vger.kernel.org
-> 
->   Documentation/ABI/testing/sysfs-class-power-bd71828 |    1 +
->   1 file changed, 1 insertion(+)
-> 
-> --- linux-next-20260619.orig/Documentation/ABI/testing/sysfs-class-power-bd71828
-> +++ linux-next-20260619/Documentation/ABI/testing/sysfs-class-power-bd71828
-> @@ -10,3 +10,4 @@ Description:
->   		0             no adjustment of input current limit. This
->   		              helps for more unusual power sources like
->   			      solar modules.
-> +		============  ===========================================
+Hi Shyam,
 
-Acked-by: Matti Vaittinen <mazziesaccount@gmail.com>
+On Wed, Jun 24, 2026 at 06:22:33PM -0700, Shyam Saini wrote:
+> On 21 Jun 2026 13:36, Mike Rapoport wrote:
+> > On Thu, Jun 18, 2026 at 11:23:31PM -0700, Shyam Saini wrote:
+> > > reserve_mem relies on dynamic memory allocation, this limits the
+> > > usecase where memory is required to be preserved across the boots.
+> > > Eg: ramoops memory reservation on ACPI platforms
+> > >
+> > > So add support to pass a pre-determined static address and reserve
+> > > memory at a specified location. This enables use case like ramoops
+> > > on ACPI platforms to reliably access ramoops region with previous
+> > > boot logs.
+> > > 
+> > > Also skip the parsing of <align> when static address is passed.
+> > > 
+> > > Example syntax for static address
+> > >  reserve_mem=4M@0x1E0000000:oops
+> > 
+> > reserve_mem is best effort by design because such hacks as well as memmap=
+> > cannot guarantee this memory is actually free.
+> > 
+> > If you want to preserve ramoops reliably, use KHO with reserve_mem.
+> > The first kernel will allocate memory, this memory will be preserved by KHO
+> > and could be picked up by the second kernel.
+> 
+> ok, On ARM64 DTS systems, we can reserve ramoops memory in the device tree during
+> the warm reboot.
+
+The cc list actually implied x86 ;-)
+Added arm64 folks now.
+
+> For an equivalent ARM64 ACPI platform, what is the recommended way to reserve
+> and preserve that memory across the boots? 
+
+I don't think it exists, but a command line option (be it memmap= or
+reserve_mem=) does not seem the right way to me.
+
+Most of the arguments that were made against adding memmap= to arm64 [1]
+apply here.
+
+If kexec is an option, KHO provides a reliable way to preserve memory
+across boots.
+
+If kexec is not an option, we should look for a generic way to specify
+something like DT's reserved_mem for ACPI/EFI systems.
+
+[1] https://lkml.kernel.org/lkml/20201118063314.22940-1-song.bao.hua@hisilicon.com/T/
+
+> Thanks,
+> Shyam
 
 -- 
-Matti Vaittinen
-Linux kernel developer at ROHM Semiconductors
-Oulu Finland
-
-~~ When things go utterly wrong vim users can always type :help! ~~
+Sincerely yours,
+Mike.
 
