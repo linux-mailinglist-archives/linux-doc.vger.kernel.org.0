@@ -1,125 +1,196 @@
-Return-Path: <linux-doc+bounces-93442-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93443-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id JmkPObRxPGpWoAgAu9opvQ
-	(envelope-from <linux-doc+bounces-93442-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 02:09:24 +0200
+	id tTPeGzB0PGq7oAgAu9opvQ
+	(envelope-from <linux-doc+bounces-93443-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 02:20:00 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2A5136C1F0A
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 02:09:24 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E40656C1F5F
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 02:19:59 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=MpSBA7rI;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93442-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-93442-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=google.com header.s=20251104 header.b=l6O4rAJ7;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93443-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93443-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=google.com;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id B6150303DD15
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 00:09:21 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E58C33049FD7
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jun 2026 00:19:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EC19D5B5AB;
-	Thu, 25 Jun 2026 00:09:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8456221D590;
+	Thu, 25 Jun 2026 00:19:35 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-dl1-f46.google.com (mail-dl1-f46.google.com [74.125.82.46])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F0FA61EA65;
-	Thu, 25 Jun 2026 00:09:19 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782346160; cv=none; b=BZaOwR17/B2luf/Jq3/XJk851aI5dpRgeYYG8nfsDaeW8VGZ+IdOdqG8c48cL4/S+unfLG0rJakCErf5YeWE7Ae/0l2Ji5g5CspSZc2VWOJbAPDQdx58/9mw4wxQZGzVQ8/vsuqSbOknOO56i9kkc0HpEOa8e9AHAdPnjy7V9BE=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782346160; c=relaxed/simple;
-	bh=EQz2XCBwRS8uLK6XBV7zSGPH2BY3UI9xhwr0H8YcNTM=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=bMCZTrzu8Hg9/Mg77ZjOFBIKJegHqJmOjGFXXHz3Z9/wn03GXs+Za4OaC90mUzKUsXh568ziZwEG2NJ/bWxc+6YBMRToxvBXy2s8vaV91geS7cK9SjT93d3j4V1epfCocwds5NKJmkyXpbxdgZi0Gr7WKMt033BbY3VK8WY3VI0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MpSBA7rI; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B78491F000E9;
-	Thu, 25 Jun 2026 00:09:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782346159;
-	bh=EQz2XCBwRS8uLK6XBV7zSGPH2BY3UI9xhwr0H8YcNTM=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=MpSBA7rI/ESXhoj9CFf1wpUgC6YJUA7qMDqhbRyBPAuDBK9Ia03yaI2I6ew/dbqJu
-	 sss2bjJYZ3xFjU7SUn10PhUlBSTCkC3jZ+5d8+XWPcf0b0mTJ8YetSCIuQnV/4JhP8
-	 P8IplKPYma/WqSQ3oTuKqFKsjQsjK4+ixeCCY7rVMaojpukWcsBA3hX2ffZ6pqF/TX
-	 TQdn+BW6ED5QjuxjNwGZqtBFZ9TseAmoE+282nKTfiTlpipVnSkH6rqv9FJiNDXNaS
-	 va5qPjm+KN3jX0XhZ+Py1CCPxU6lBx38jGoqyzWCGEln8G9SIirWiLNhXKj8/UXz2q
-	 l6X96M/sVO7kA==
-Date: Wed, 24 Jun 2026 17:09:17 -0700
-From: Jakub Kicinski <kuba@kernel.org>
-To: Jack Wu via B4 Relay <devnull+jackbb_wu.compal.com@kernel.org>
-Cc: jackbb_wu@compal.com, Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Sergey Ryazanov <ryazanov.s.a@gmail.com>, Johannes Berg
- <johannes@sipsolutions.net>, Andrew Lunn <andrew+netdev@lunn.ch>, "David S.
- Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Paolo
- Abeni <pabeni@redhat.com>, Wen-Zhi Huang <wen-zhi.huang@mediatek.com>,
- Shi-Wei Yeh <shi-wei.yeh@mediatek.com>, Minano Tseng
- <Minano.tseng@mediatek.com>, Matthias Brugger <matthias.bgg@gmail.com>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Simon
- Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan
- <skhan@linuxfoundation.org>, linux-kernel@vger.kernel.org,
- netdev@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-mediatek@lists.infradead.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH v3 0/7] net: wwan: t9xx: Add MediaTek T9XX WWAN driver
-Message-ID: <20260624170917.09967c74@kernel.org>
-In-Reply-To: <20260624-t9xx_driver_v1-v3-0-73ff03f60c48@compal.com>
-References: <20260624-t9xx_driver_v1-v3-0-73ff03f60c48@compal.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D24241F37D3
+	for <linux-doc@vger.kernel.org>; Thu, 25 Jun 2026 00:19:32 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1782346775; cv=pass; b=AAJ+WG/K7z2hBf/cBhisqP3TfDQqsgL3/fpLcQ66BNF/MLHYD2Kj4s+O6OpqknBPYygx5he4tx+nN1a3hUzJ+Zv740Q5TCDbfks6onEGjOv5sLN1lmWyp7CBxW5cIleQfF89IUyiuthFoiHtkeWZJ9DKAwvFlpwgaJYSRNbz9Ek=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1782346775; c=relaxed/simple;
+	bh=dsN6vnyaJBkYRNoTR8AKQC63zHcXTfT03kDeM9s3ZGs=;
+	h=From:In-Reply-To:References:MIME-Version:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=ZeXT/NR9thnsQfN3Jnsev07vqzb+k2eFiCJydwsnuDq91Dr41CoF3GtTzPDEq6AKO2Yohk3gQXYYDzkc9CeanM6hTtMj1hSGrR/1TLabVLa6i6hvOdN2kvg/jl3om+hXknw97jylr1Tr9gsX/4Jm3BWEpqka2s4jQsOBlnohWWY=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=l6O4rAJ7; arc=pass smtp.client-ip=74.125.82.46
+Received: by mail-dl1-f46.google.com with SMTP id a92af1059eb24-1397e093f90so4604829c88.1
+        for <linux-doc@vger.kernel.org>; Wed, 24 Jun 2026 17:19:32 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782346772; cv=none;
+        d=google.com; s=arc-20260327;
+        b=gUWYFEkT01QwbTTeAiHKUQlC5t1wXDWdD4UPEoGHmfk9WJZmnrZmfjvuqjIap5aOGf
+         GeVJXrXxlrGlV4Tm248LHvkG51dUF/lCwc56Bj0CjjRpWdC7aNNTUbiUYlHkO5GQDtdF
+         tojo86OWPs/PABuwdOtw3ZnRFoeo2oM4s5PrSYQWF4xjxqb36H1YLES5RyHCQPc3YP2K
+         +HCM5hfPcfUjEFP2UFY8a4Yx5bDm0haYfLFby5Ef2sPzhSvPNGf1ROiflOmNHUWM7INc
+         Af/N7j6In5ofq4MT8KhpxE3t/BJuFAWrX6Sp0CLFb4IzNtvnHxNR1274lSJ9fKSWpCpd
+         4R9w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
+         :from:dkim-signature;
+        bh=dsN6vnyaJBkYRNoTR8AKQC63zHcXTfT03kDeM9s3ZGs=;
+        fh=VR88BDva03PQWDuxlSPcj9E8gvlxIhd24K+pt5s3OJk=;
+        b=atRuVJ/4U9Vr/ED/cEnscjd+FKs3PUM1q+bGuHBG+OyZTXqmfGIP94jelAgETFUB9X
+         xfJ0jJvtW/5u0EsGQnZlYbARXMRZ2QBiCtG5ZEMJFOXBGDdD6nE1I3gXnLZLv931YAHo
+         3IQBW46URew8ExGavhfw2z6TfXut5hDU57pWXuXJlFvLdWZYuJQESRFYFkDsKFzUV3k5
+         a9pdsVQ8NgytxTOAroI/zJD7zGNEUR5Kb4I8zkNjGsi4iFVIRuENLqkdkrVP8ZyO5yTT
+         3FQZnKEidk3Av2XeeuO6Y4kCkfby0P7kTujZb4sY0uxTkyXvpIv53wKtzX39P6Z25E15
+         gYBw==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20251104; t=1782346772; x=1782951572; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=dsN6vnyaJBkYRNoTR8AKQC63zHcXTfT03kDeM9s3ZGs=;
+        b=l6O4rAJ7BuSElLvSVCjIBLBDcAro2phzO2UoQrwN6+H320mWttnof0i0/lcdgnC9VF
+         c9y5WMcG61fE+olfR6gSw8h/vck5HyRGv9OPpvaKvk4dYSiidvvra5Rw9W4ei3WZz5cG
+         UDcca5AyuQDRs00QKgdFarXvgscmMWiwFpV2z3nzvCLhch/PKdQuVbStjrT36He7sJ9P
+         GhEfxTfvYFKtGxEsKC5xmX7Uv8xQVPMpOur4cPG36WuKyLxOA+L0ckKRLWa8UjYesS6B
+         aVZHb21d4C76/LlYbQQRhBVZFjX4vQ965Jjr84Kc0tAN2qbTazomJ5RHU9u9L8RNh6sT
+         pxBg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1782346772; x=1782951572;
+        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=dsN6vnyaJBkYRNoTR8AKQC63zHcXTfT03kDeM9s3ZGs=;
+        b=PpAtCVfSV7OKAvFkX5Zvoc/YxUUHa2ALyxc9d88pkvqOGtaaNMLsA7Se45QdfXKda5
+         EeLw5rGOb18HTBNF7jqRmrw/OxXLQD0nuFWC6XU/ozZEg4Zk6GMhRNsC8zSEDoyJyW4e
+         g/n0LhvDnkRKPYCXxPO+o8Rq9r65EySBHm8ObQ+NaaRTL7edtTkGk9mESc/D+m+LB2/Y
+         o+B1FP8jGPjDG9Wd35FEU6pIXlJzeyNq+TYv5YqmCHXA31MtSipwn32cThP6rLxsJ/RJ
+         w58hQkqCxeZX4te6cuhjyksyhYtoQCA77Vn651Hp//RWrbT+xkhGiHCqWVaUQrgdaqWs
+         IMhg==
+X-Forwarded-Encrypted: i=1; AFNElJ8qcbfCC/1ZnXRYzhfLOCo1F7wVr+JUMXn3umXYCOVs3RqrOFfjhzjWn9nkDpxYFRlXT5dKCsKxWuo=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxzOwvspaZk0KZUsakz9SzdYmMLE2BmTpSUzmW4frq5h1dpVtXa
+	nEc4xmjMoUzrv1o7JvfPd8A8XBP5vVAip2sUkjxZ1sXDwkQXI1+Eqh3GBleOwHQ+POLVJY/V6Gn
+	Sn1BlFyA+csoUOHSFFWkjrg9SdhEZU7H1BislJsau
+X-Gm-Gg: AfdE7cmDbPygK5VeSntT8PKZvQEEFB6+8z5eXZaA40n74saAQqntCS9xyWPSaHnao2Q
+	L8SrnEmFT5BLDcAu7tnFhZlzRsX4vOP0K/gLd3JJQmU9AT/slP6++KPixuL4FPdiSHZkRvh/wMZ
+	3IRUElFeWaIAcoRKUzUiT0nlxU9K/+jgve1o4rdvyVXN/XbBhaRlR/qzQG0UhpnWC3WDo+Qdv+P
+	VMz8TIK9LSEGcZ0ThirL6mpIh7GiSn67WP4BLPlCnaqc8Xsjx4ML6fYaIY+43BaZqg8zMwb2qXn
+	kL12YP/KLbSNZ9ysi+JMpswIfx80cyYbk2CoxjzG2nIT1JIan/JfGBGmLRM=
+X-Received: by 2002:a05:7022:fd05:b0:12a:b39a:339f with SMTP id
+ a92af1059eb24-139dbab1be2mr235748c88.21.1782346771178; Wed, 24 Jun 2026
+ 17:19:31 -0700 (PDT)
+Received: from 176938342045 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 24 Jun 2026 17:19:29 -0700
+Received: from 176938342045 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 24 Jun 2026 17:19:29 -0700
+From: Ackerley Tng <ackerleytng@google.com>
+In-Reply-To: <a6373206-60b6-454c-9aa9-9d52f9d84de3@amd.com>
+References: <20260618-gmem-inplace-conversion-v8-0-9d2959357853@google.com> <a6373206-60b6-454c-9aa9-9d52f9d84de3@amd.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Date: Wed, 24 Jun 2026 17:19:29 -0700
+X-Gm-Features: AVVi8CeipeAcfAxYa6j2yQPCcdB9pyHrAKYmhFznoyz3FS_QiklRPL3N5ubFoHk
+Message-ID: <CAEvNRgFUru5GEM7g6Z7nuaqQK2iFmW3w2dPYEKPuehkdGvP2yg@mail.gmail.com>
+Subject: Re: [PATCH v8 00/46] guest_memfd: In-place conversion support
+To: "Garg, Shivank" <shivankg@amd.com>, aik@amd.com, andrew.jones@linux.dev, 
+	binbin.wu@linux.intel.com, brauner@kernel.org, chao.p.peng@linux.intel.com, 
+	david@kernel.org, jmattson@google.com, jthoughton@google.com, 
+	michael.roth@amd.com, oupton@kernel.org, pankaj.gupta@amd.com, 
+	qperret@google.com, rick.p.edgecombe@intel.com, rientjes@google.com, 
+	steven.price@arm.com, tabba@google.com, willy@infradead.org, 
+	wyihan@google.com, yan.y.zhao@intel.com, forkloop@google.com, 
+	pratyush@kernel.org, suzuki.poulose@arm.com, aneesh.kumar@kernel.org, 
+	liam@infradead.org, Paolo Bonzini <pbonzini@redhat.com>, 
+	Sean Christopherson <seanjc@google.com>, Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
+	Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
+	"H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>, 
+	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+	Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>, 
+	Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>, 
+	Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>, 
+	Nhat Pham <nphamcs@gmail.com>, Barry Song <baohua@kernel.org>, 
+	Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>, 
+	Wei Xu <weixugc@google.com>, Youngjun Park <youngjun.park@lge.com>, 
+	Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
+	Kiryl Shutsemau <kas@kernel.org>, Baoquan He <baoquan.he@linux.dev>, Jason Gunthorpe <jgg@ziepe.ca>, 
+	Vlastimil Babka <vbabka@kernel.org>
+Cc: kvm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kselftest@vger.kernel.org, linux-mm@kvack.org, 
+	linux-coco@lists.linux.dev
+Content-Type: text/plain; charset="UTF-8"
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.66 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-93442-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:devnull+jackbb_wu.compal.com@kernel.org,m:jackbb_wu@compal.com,m:loic.poulain@oss.qualcomm.com,m:ryazanov.s.a@gmail.com,m:johannes@sipsolutions.net,m:andrew+netdev@lunn.ch,m:davem@davemloft.net,m:edumazet@google.com,m:pabeni@redhat.com,m:wen-zhi.huang@mediatek.com,m:shi-wei.yeh@mediatek.com,m:Minano.tseng@mediatek.com,m:matthias.bgg@gmail.com,m:angelogioacchino.delregno@collabora.com,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-kernel@vger.kernel.org,m:netdev@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-mediatek@lists.infradead.org,m:linux-doc@vger.kernel.org,m:devnull@kernel.org,m:ryazanovsa@gmail.com,m:andrew@lunn.ch,m:matthiasbgg@gmail.com,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-93443-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[kuba@kernel.org,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:shivankg@amd.com,m:aik@amd.com,m:andrew.jones@linux.dev,m:binbin.wu@linux.intel.com,m:brauner@kernel.org,m:chao.p.peng@linux.intel.com,m:david@kernel.org,m:jmattson@google.com,m:jthoughton@google.com,m:michael.roth@amd.com,m:oupton@kernel.org,m:pankaj.gupta@amd.com,m:qperret@google.com,m:rick.p.edgecombe@intel.com,m:rientjes@google.com,m:steven.price@arm.com,m:tabba@google.com,m:willy@infradead.org,m:wyihan@google.com,m:yan.y.zhao@intel.com,m:forkloop@google.com,m:pratyush@kernel.org,m:suzuki.poulose@arm.com,m:aneesh.kumar@kernel.org,m:liam@infradead.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:shuah@kernel.org,m:vannapurve@google.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencent.com,m:shikemeng@huaweic
+ loud.com,m:nphamcs@gmail.com,m:baohua@kernel.org,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:kas@kernel.org,m:baoquan.he@linux.dev,m:jgg@ziepe.ca,m:vbabka@kernel.org,m:kvm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,m:linux-coco@lists.linux.dev,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[ackerleytng@google.com,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_TO(0.00)[amd.com,linux.dev,linux.intel.com,kernel.org,google.com,intel.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[compal.com,oss.qualcomm.com,gmail.com,sipsolutions.net,lunn.ch,davemloft.net,google.com,redhat.com,mediatek.com,collabora.com,kernel.org,lwn.net,linuxfoundation.org,vger.kernel.org,lists.infradead.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[kuba@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,jackbb_wu.compal.com,netdev];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[google.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	MISSING_XM_UA(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[ackerleytng@google.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[63];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	ALIAS_RESOLVED(0.00)[];
+	TO_DN_SOME(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,amd.com:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 2A5136C1F0A
+X-Rspamd-Queue-Id: E40656C1F5F
 
-On Wed, 24 Jun 2026 18:04:06 +0800 Jack Wu via B4 Relay wrote:
-> T9XX is the PCIe host device driver for MediaTek's
-> t900 modem. The driver uses the WWAN framework
-> infrastructure to create the following control ports
-> and network interfaces for data transactions.
+"Garg, Shivank" <shivankg@amd.com> writes:
 
-Replying after a long delay and then immediately posting a new version
-of patches is very bad. Don't bother replying and just put the comments
-you had in the changelog of the new posting. Otherwise the discussion
-may get split.
+>
+> [...snip...]
+>
+>
+> Hi,
+>
+> Thanks for this series.
+>
+> [...snip...]
+>
+>
+> Tested-by: Shivank Garg <shivankg@amd.com>
+
+Thanks for testing!
+
+>
+> Best regards,
+> Shivank
 
