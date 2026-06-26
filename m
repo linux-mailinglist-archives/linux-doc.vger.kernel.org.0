@@ -1,477 +1,263 @@
-Return-Path: <linux-doc+bounces-93738-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93740-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id PtmAFA2cPmoTJAkAu9opvQ
-	(envelope-from <linux-doc+bounces-93738-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Jun 2026 17:34:37 +0200
+	id zA3jDuSfPmo8JQkAu9opvQ
+	(envelope-from <linux-doc+bounces-93740-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Jun 2026 17:51:00 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id D92986CE89B
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Jun 2026 17:34:36 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F6476CEAD1
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Jun 2026 17:50:59 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=debian.org header.s=smtpauto.stravinsky header.b=rYA+eULg;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93738-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-93738-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=debian.org;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=Y3yjhDRK;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93740-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93740-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 244B8304317E
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Jun 2026 15:34:18 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 7480F31201AB
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Jun 2026 15:45:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 641EF3E1D14;
-	Fri, 26 Jun 2026 15:34:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 326523F1AC9;
+	Fri, 26 Jun 2026 15:45:11 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D2133E51FC;
-	Fri, 26 Jun 2026 15:34:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 593633F8ED3;
+	Fri, 26 Jun 2026 15:45:05 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782488055; cv=none; b=kV+7t8kS0qwDJf6xuWbmPCZFnWejbNuajzaAXryjsN0eaMCbi0YAUUybfbTf7khasTEKM+HLGurRbDv7qMmP2zLFs0fxIF3WLZ1RMy0zEjb6bEZVa+32ndQEvf+F4nXjPBa6pi1gWXU3XV1/lXzMvxWA4ECQB8f7xEmHQZYa3oQ=
+	t=1782488710; cv=none; b=t7BdWtI3hlzthPi1msgeLI/LTSEH+AHkWvc1hTINzslkPzaiprEACA8Hn6wzVrgOUVkH4q5mdK06m4x47awVPgs7a4KV3P3QQIPjrwN1HqZc1REvyJg+DTMF9UPmt4GLOCsJv9VH8MC8XOGa+uhQxhHAvoJV7AItp6MVZuwwhVY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782488055; c=relaxed/simple;
-	bh=ZsWCPb06ETk+H+SBSJ7KF4w8jwz3rpL52F//301DWbo=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=GMbC+zFic8jeXIkJboyyQYKqvlwRNe0JrUYij1xG1wRgD/uXg1ocgxn48xxsp9XCJWwtNrzT/IOeoC2+TX03fx+kpsG//iki3TwTh477iLwhhNMXlZ74o4UA20xKm2wPMAvyRNu6VZ87nfTwSvvIpdrWr8/2BEFQf0WHmXK7lgo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org; spf=pass smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=rYA+eULg; arc=none smtp.client-ip=82.195.75.108
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
-	s=smtpauto.stravinsky; h=X-Debian-User:Cc:To:In-Reply-To:References:
-	Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:
-	From:Reply-To:Content-ID:Content-Description;
-	bh=9AjDzRCh4/mXl8o45A7Z6nWHf+5IUCFbmpedUIoL4Bk=; b=rYA+eULg7NxAyWHoa8XMxUyNeh
-	JhW5EB4xeGog/tt4Bw5MXkrs/m4WJosyxC8nOrxI2tWvhh9HrVCJ82dwaee5864mnZBPO7BcxU8zB
-	Cv9z9HIEsmCxjJS/TCFWNpDSxJ0D/kyJWpHovuwCnaW1DnbuY+/Je9MWA3F5JPhPBgNyZksCkq1iR
-	gguzGe/wVxSzglzeyp0ROfqfcnOzHfEa/f1r8KyM192JkWseNrInMzyJeBo37DTwYCpG6o3hg4/KV
-	d7GyXPMzMGSd6XWUahpB8jOdI7qbzJsTtct3Kq17tplkpl8BzpvPkisfSNiZ5tBF91COTIXYuCUjq
-	ExXKmgRw==;
-Received: from authenticated-user
-	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
-	(Exim 4.96)
-	(envelope-from <leitao@debian.org>)
-	id 1wd8ZA-0044F4-2a;
-	Fri, 26 Jun 2026 15:34:05 +0000
-From: Breno Leitao <leitao@debian.org>
-Date: Fri, 26 Jun 2026 08:33:20 -0700
-Subject: [PATCH v10 6/6] selftests/mm: add hwpoison-panic destructive test
+	s=arc-20240116; t=1782488710; c=relaxed/simple;
+	bh=KKlH/8SEamUqGyyjWbc5rFZsLVr+VsxGBvdwYg4b4aI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=rOzioBfz9ebY9l50ym53ddQhNjTgT8140u7c4EH5YuNk6FjYgNKZVAzhKdrPQl6z0Nfs26ar6RQojsCWVgfCK7i0Dbk5uALwHBKtWFOkkqm6jA/XR5qBs7U+0BylX6RA2ZmVasEwg9seXVbvx0fE15qIMFQ0iQ/82oeo2mRrCxM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Y3yjhDRK; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1C2BF1F01561;
+	Fri, 26 Jun 2026 15:44:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1782488705;
+	bh=YoE9n7g3JaL94VUoMaa+5nIfgKgOXYELQGwVyrlOQDE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=Y3yjhDRKri5OqFVXbZ0Pnd8TmyxIp0+JQNaSAASUVkDKRZK3F5aD/cj7Mdk/lyWzj
+	 oeHeNrHk3b9lY6ssLUYcNsr1C4BN1AOrUsuDIno7QiCHl3IjGf7DS0dbuV3/2l2mk+
+	 UtP9/QlRgQLGiCNzbtpjAPN4TeSHLpLMz15UB5UHXey0pHTIrqJS4nb2G+z3zqPW5e
+	 9Crvxz22lYIWw73PxU4qRqzXUz5kygn7vKP88lseWFRZ1TPjU6KSSxHB/37hx6fL2l
+	 ii86j4F/28QrKlTXxLv8tHhilaDvOGDQvbBcOtaF047os8dt+0DfMKKJl7llUwUCQk
+	 7m+eXmrvm2SsA==
+Date: Fri, 26 Jun 2026 16:44:56 +0100
+From: Conor Dooley <conor@kernel.org>
+To: Drew Fustini <fustini@kernel.org>
+Cc: Adrien Ricciardi <aricciardi@baylibre.com>,
+	Alexandre Ghiti <alex@ghiti.fr>,
+	Atish Kumar Patra <atishp@rivosinc.com>,
+	Atish Patra <atish.patra@linux.dev>,
+	Babu Moger <babu.moger@amd.com>, Ben Horgan <ben.horgan@arm.com>,
+	Borislav Petkov <bp@alien8.de>, Chen Pei <cp0613@linux.alibaba.com>,
+	Conor Dooley <conor.dooley@microchip.com>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	Dave Martin <Dave.Martin@arm.com>,
+	Fenghua Yu <fenghua.yu@intel.com>,
+	Gong Shuai <gong.shuai@sanechips.com.cn>,
+	Gong Shuai <gsh517@gmail.com>, guo.wenjia23@zte.com.cn,
+	James Morse <james.morse@arm.com>,
+	Kornel =?utf-8?Q?Dul=C4=99ba?= <mindal@semihalf.com>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, liu.qingtao2@zte.com.cn,
+	Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+	Palmer Dabbelt <palmer@dabbelt.com>, Paul Walmsley <pjw@kernel.org>,
+	Peter Newman <peternewman@google.com>,
+	Radim =?utf-8?B?S3LEjW3DocWZ?= <rkrcmar@ventanamicro.com>,
+	Reinette Chatre <reinette.chatre@intel.com>,
+	Rob Herring <robh@kernel.org>,
+	Samuel Holland <samuel.holland@sifive.com>,
+	Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+	Tony Luck <tony.luck@intel.com>,
+	Vasudevan Srinivasan <vasu@rivosinc.com>,
+	Ved Shanbhogue <ved@rivosinc.com>, Weiwei Li <liwei1518@gmail.com>,
+	yunhui cui <cuiyunhui@bytedance.com>, linux-kernel@vger.kernel.org,
+	linux-riscv@lists.infradead.org, x86@kernel.org,
+	devicetree@vger.kernel.org, linux-rt-devel@lists.linux.dev,
+	linux-doc@vger.kernel.org
+Subject: Re: [PATCH v2 7/8] dt-bindings: riscv: Add generic CBQRI controller
+ binding
+Message-ID: <20260626-immobile-staining-c825a86bd613@spud>
+References: <20260624-dfustini-atl-sc-cbqri-dt-v2-0-2f8049fd902b@kernel.org>
+ <20260624-dfustini-atl-sc-cbqri-dt-v2-7-2f8049fd902b@kernel.org>
+ <20260625-cupbearer-failing-9ce0abf97b93@spud>
+ <aj1_0AnIBk8_xoDd@gen8>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260626-ecc_panic-v10-6-6dacb8ad024d@debian.org>
-References: <20260626-ecc_panic-v10-0-6dacb8ad024d@debian.org>
-In-Reply-To: <20260626-ecc_panic-v10-0-6dacb8ad024d@debian.org>
-To: Miaohe Lin <linmiaohe@huawei.com>, 
- Andrew Morton <akpm@linux-foundation.org>, 
- David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>, 
- Vlastimil Babka <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>, 
- Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>, 
- Shuah Khan <shuah@kernel.org>, Naoya Horiguchi <nao.horiguchi@gmail.com>, 
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
- "Liam R. Howlett" <liam@infradead.org>, lance.yang@linux.dev, 
- Steven Rostedt <rostedt@goodmis.org>, 
- Masami Hiramatsu <mhiramat@kernel.org>, 
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
- "Liam R. Howlett" <liam@infradead.org>
-Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org, 
- linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
- Breno Leitao <leitao@debian.org>, linux-trace-kernel@vger.kernel.org, 
- kernel-team@meta.com
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=13312; i=leitao@debian.org;
- h=from:subject:message-id; bh=ZsWCPb06ETk+H+SBSJ7KF4w8jwz3rpL52F//301DWbo=;
- b=owEBbQKS/ZANAwAIATWjk5/8eHdtAcsmYgBqPpvF6gFxxuCMs+B1+Kx6jC8kx8NSryaGY/Ld5
- 0W8EZX0DWqJAjMEAAEIAB0WIQSshTmm6PRnAspKQ5s1o5Of/Hh3bQUCaj6bxQAKCRA1o5Of/Hh3
- bXWLD/9Il3EphF2AdgJnTAOVUhNF616IGLqxTVnqa63j0Dr2XORloZGq7moVq8LzAAuHLlMfW1a
- bYOzphWYmv6aehAbeRisAF54OMLLn6YpOrDeMYLcY8setISmjVRU1CqIDJCK5Q9kB5SKqAxkLfo
- o94GWxUaN3o/opuOLYWJ+MyV7wIASlIG+93F4+zMN40QO7sfd299E1eJS4m4qKiZXdzr//NiCoD
- pkbLPB3PbY+kovpPJTNJIW13J0RzYJRotHBhz176hQ7pDhdiQ1F9jhFkbcf8doZ/PWWJxtve5Vp
- r/E3yEYbj9i/NligoHruPq2REMycy16enAUzybnRwhzclPJkfQP6Ll6PyfQiMrbQaNOeNABZEUL
- ASHGRaQFMwRB+X5vY4wgMhvXtZcqZGTPg0nP3PWpalr2k/qO644kmi2RLe7zYdPeUMEjucrKDp1
- 5Es3Wk1KYmHzxsovnNkDo4hdBp2Zbr9BVC7HJrdPbUjmhyuaJ/FFCjMAIK7/Hm00AvRvIvKBaT4
- Rkk6SOizESoS86NgHQ+Vswg7zwBK2OV+HHAy3zndf0/SvBAF4XEyWWFyLfY3FgRHFc12nidtSIf
- 8I9PNLxOm1+i8pOhR4CbrxYDBq/IxwCWuAgL9sNPvldqOnD5BYPv/HAWByo9wyKuSJWk7s8BNS5
- BIZn5Bx6vJG10qQ==
-X-Developer-Key: i=leitao@debian.org; a=openpgp;
- fpr=AC8539A6E8F46702CA4A439B35A3939FFC78776D
-X-Debian-User: leitao
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="/zmDCd3AvwrgXHjE"
+Content-Disposition: inline
+In-Reply-To: <aj1_0AnIBk8_xoDd@gen8>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-5.26 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+	SIGNED_PGP(-2.00)[];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[debian.org,none];
-	R_DKIM_ALLOW(-0.20)[debian.org:s=smtpauto.stravinsky];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
 	MAILLIST(-0.15)[generic];
-	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-93738-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:linmiaohe@huawei.com,m:akpm@linux-foundation.org,m:david@kernel.org,m:ljs@kernel.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:shuah@kernel.org,m:nao.horiguchi@gmail.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:liam@infradead.org,m:lance.yang@linux.dev,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:leitao@debian.org,m:linux-trace-kernel@vger.kernel.org,m:kernel-team@meta.com,m:naohoriguchi@gmail.com,s:lists@lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[huawei.com,linux-foundation.org,kernel.org,google.com,suse.com,gmail.com,lwn.net,linuxfoundation.org,infradead.org,linux.dev,goodmis.org,efficios.com];
-	FORGED_SENDER(0.00)[leitao@debian.org,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[25];
 	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	RCPT_COUNT_TWELVE(0.00)[41];
+	FORGED_RECIPIENTS(0.00)[m:fustini@kernel.org,m:aricciardi@baylibre.com,m:alex@ghiti.fr,m:atishp@rivosinc.com,m:atish.patra@linux.dev,m:babu.moger@amd.com,m:ben.horgan@arm.com,m:bp@alien8.de,m:cp0613@linux.alibaba.com,m:conor.dooley@microchip.com,m:conor+dt@kernel.org,m:dave.hansen@linux.intel.com,m:Dave.Martin@arm.com,m:fenghua.yu@intel.com,m:gong.shuai@sanechips.com.cn,m:gsh517@gmail.com,m:guo.wenjia23@zte.com.cn,m:james.morse@arm.com,m:mindal@semihalf.com,m:krzk+dt@kernel.org,m:liu.qingtao2@zte.com.cn,m:zhiwei_liu@linux.alibaba.com,m:palmer@dabbelt.com,m:pjw@kernel.org,m:peternewman@google.com,m:rkrcmar@ventanamicro.com,m:reinette.chatre@intel.com,m:robh@kernel.org,m:samuel.holland@sifive.com,m:bigeasy@linutronix.de,m:tony.luck@intel.com,m:vasu@rivosinc.com,m:ved@rivosinc.com,m:liwei1518@gmail.com,m:cuiyunhui@bytedance.com,m:linux-kernel@vger.kernel.org,m:linux-riscv@lists.infradead.org,m:x86@kernel.org,m:devicetree@vger.kernel.org,m:linux-rt-devel@lists.linux.dev,m:linux-doc@vger
+ .kernel.org,m:conor@kernel.org,m:krzk@kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-93740-lists,linux-doc=lfdr.de];
+	FORGED_SENDER(0.00)[conor@kernel.org,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[leitao@debian.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[debian.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[conor@kernel.org,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[baylibre.com,ghiti.fr,rivosinc.com,linux.dev,amd.com,arm.com,alien8.de,linux.alibaba.com,microchip.com,kernel.org,linux.intel.com,intel.com,sanechips.com.cn,gmail.com,zte.com.cn,semihalf.com,dabbelt.com,google.com,ventanamicro.com,sifive.com,linutronix.de,bytedance.com,vger.kernel.org,lists.infradead.org,lists.linux.dev];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,ksft_vmalloc.sh:url,ksft_userfaultfd.sh:url,ksft_vma_merge.sh:url,test_hmm.sh:url,run_vmtests.sh:url]
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,baylibre.com:email,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,spud:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: D92986CE89B
+X-Rspamd-Queue-Id: 9F6476CEAD1
 
-Add a destructive selftest that verifies
-vm.panic_on_unrecoverable_memory_failure actually panics when a
-hwpoison error hits a kernel-owned page.
 
-Three "kinds" of kernel-owned page can be targeted, selectable via
-the script's first positional argument (default: rodata):
+--/zmDCd3AvwrgXHjE
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-  rodata  - a PG_reserved page in the kernel rodata range, sourced
-            from the "Kernel rodata" sub-resource of "System RAM" in
-            /proc/iomem.  That entry is reported on every major
-            architecture and guarantees the chosen PFN is backed by
-            struct page (an online System RAM range, not a firmware
-            hole), is PG_reserved, and is read-only -- so even if
-            the panic fails to fire for some reason, the resulting
-            PG_hwpoison marker on rodata does not corrupt writable
-            kernel state.
+On Thu, Jun 25, 2026 at 12:21:52PM -0700, Drew Fustini wrote:
+> On Thu, Jun 25, 2026 at 05:19:28PM +0100, Conor Dooley wrote:
+> > On Wed, Jun 24, 2026 at 06:38:35PM -0700, Drew Fustini wrote:
+> > > Document the generic compatibles for capacity and bandwidth controlle=
+rs
+> > > that implement the RISC-V CBQRI specification. The binding also
+> > > describes the common riscv,cbqri-rcid and riscv,cbqri-mcid properties,
+> > > and the optional riscv,cbqri-cache phandle that links a capacity
+> > > controller to the cache whose capacity it allocates.
+> > >=20
+> > > Assisted-by: Claude:claude-opus-4-8
+> > > Co-developed-by: Adrien Ricciardi <aricciardi@baylibre.com>
+> > > Signed-off-by: Adrien Ricciardi <aricciardi@baylibre.com>
+> > > Signed-off-by: Drew Fustini <fustini@kernel.org>
+> > > ---
+> > >  .../devicetree/bindings/riscv/riscv,cbqri.yaml     | 97 ++++++++++++=
+++++++++++
+> > >  MAINTAINERS                                        |  1 +
+> > >  2 files changed, 98 insertions(+)
+>=20
+> Thanks for the review.
+>=20
+> [..]
+> > > +properties:
+> > > +  compatible:
+> > > +    oneOf:
+> > > +      - items:
+> > > +          - description: Tenstorrent Ascalon Shared Cache
+> > > +            const: tenstorrent,ascalon-sc-cbqri
+> > > +          - const: riscv,cbqri-capacity-controller
+> > > +      - enum:
+> > > +          - riscv,cbqri-capacity-controller
+> > > +          - riscv,cbqri-bandwidth-controller
+> >=20
+> > Please modify this, as has been done for other riscv spec related
+> > bindings, to let people get away without using device-specific
+> > compatibles.
+> >=20
+> > In this case, you can just delete the first entry from this enum, since
+> > it already has a user and only have to implement this feedback for the
+> > second entry.
+>=20
+> Would this work?
+>=20
+> properties:
+>   compatible:
+>     oneOf:
+>       - items:
+>           - enum:
+>               - tenstorrent,ascalon-sc-cbqri # Tenstorrent Ascalon Shared=
+ Cache
+>           - const: riscv,cbqri-capacity-controller
+>       - items:
+>           - {}
+>           - const: riscv,cbqri-bandwidth-controller
 
-  slab    - a slab page found by walking /proc/kpageflags for the
-            first PFN with KPF_SLAB set (and KPF_HWPOISON / KPF_NOPAGE
-            / KPF_COMPOUND_TAIL clear).  Exercises the get_any_page()
-            path on a non PG_reserved kernel-owned page and so
-            catches regressions where get_any_page() collapses
-            kernel-owned pages into a transient -EIO instead of
-            -ENOTRECOVERABLE.
 
-  pgtable - same as slab, but the PFN is selected via KPF_PGTABLE.
+Should do, yes. I question the need for a comment though, seems pretty
+evident from the compatible what it is.
 
-PageLargeKmalloc, the fourth page type matched by
-is_kernel_owned_page(), is intentionally not covered: it is a
-PAGE_TYPE_OPS flag with no /proc/kpageflags bit, so selecting such
-a PFN from userspace is not feasible.  The slab and pgtable
-variants already exercise the same get_any_page() positive-check
-branch.
+> > > +
+> > > +required:
+> > > +  - compatible
+> > > +  - reg
+> > > +
+> > > +allOf:
+> > > +  - if:
+> > > +      properties:
+> > > +        compatible:
+> > > +          contains:
+> > > +            const: tenstorrent,ascalon-sc-cbqri
+> > > +    then:
+> > > +      required:
+> > > +        - riscv,cbqri-rcid
+> > > +        - riscv,cbqri-cache
+> > > +
+> > > +additionalProperties: false
+> > > +
+> > > +examples:
+> > > +  - |
+> > > +    l2_cache: l2-cache {
+> > > +        compatible =3D "cache";
+> > > +        cache-level =3D <2>;
+> > > +        cache-unified;
+> > > +        cache-size =3D <0xc00000>;
+> > > +        cache-sets =3D <512>;
+> > > +        cache-block-size =3D <64>;
+> > > +    };
+> > > +
+> > > +    cache-controller@a21a00c0 {
+> > > +        compatible =3D "tenstorrent,ascalon-sc-cbqri",
+> > > +                     "riscv,cbqri-capacity-controller";
+> >=20
+> > Is this or is this not a cache controller?
+> > The compatible and fact that the property points to an actual cache
+> > controller suggests that this is not.
+>=20
+> Good point. This nodes represents just the QoS interface (CBQRI) and
+> should not use that node name. 'qos-controller' seems like it would be
+> more appropriate but that has no precedent. What do you think?
 
-The script enables the sysctl and writes the selected physical
-address to /sys/devices/system/memory/hard_offline_page.  A
-successful run crashes the kernel with
+Sure.
 
-  Memory failure: <pfn>: unrecoverable page
 
-A return from the inject means no panic fired.  Before reporting, the
-script restores the sysctl and best-effort unpoisons the target PFN
-through the hwpoison debugfs interface (hard_offline_page() injects
-with MF_SW_SIMULATED, so the page stays unpoisonable), then re-reads
-/proc/kpageflags: a PFN that is still the kernel-owned type it selected
-is a genuine failure, while one that raced to a different type before
-the inject is skipped as inconclusive.  Test outcome is therefore
-observed externally (serial console, kdump) rather than from the
-script's own exit code.
+--/zmDCd3AvwrgXHjE
+Content-Type: application/pgp-signature; name=signature.asc
 
-The script is intentionally NOT wired into run_vmtests.sh: every
-successful run panics the kernel, which is incompatible with the
-sequential "run each category in the same VM" model that
-run_vmtests.sh assumes.  It is also not registered as a TEST_PROGS /
-ksft_* wrapper so a default kselftest run does not opt itself into
-a panic.  The script is meant to be executed manually inside a
-disposable VM (e.g. virtme-ng), one variant per VM boot, and
-requires RUN_DESTRUCTIVE=1 in the environment as a safety net.
+-----BEGIN PGP SIGNATURE-----
 
-Signed-off-by: Breno Leitao <leitao@debian.org>
----
- tools/testing/selftests/mm/Makefile          |   4 +
- tools/testing/selftests/mm/hwpoison-panic.sh | 249 +++++++++++++++++++++++++++
- 2 files changed, 253 insertions(+)
+iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaj6eeAAKCRB4tDGHoIJi
+0j45AQDa9hIH0IvDEkhDSJ4irWoqKAUinH30Au/Pl3yikbPiWgD8CfQij41pcGKQ
+lnHL1Q1xyI46Q5kOGm2ZVr23WQjr/wo=
+=JJMy
+-----END PGP SIGNATURE-----
 
-diff --git a/tools/testing/selftests/mm/Makefile b/tools/testing/selftests/mm/Makefile
-index e6df968f0971c..ed321ae709dac 100644
---- a/tools/testing/selftests/mm/Makefile
-+++ b/tools/testing/selftests/mm/Makefile
-@@ -174,6 +174,10 @@ TEST_PROGS += ksft_userfaultfd.sh
- TEST_PROGS += ksft_vma_merge.sh
- TEST_PROGS += ksft_vmalloc.sh
- 
-+# Destructive: every successful run panics the kernel.  Installed and
-+# kept executable, but not run from a default kselftest invocation.
-+TEST_PROGS_EXTENDED += hwpoison-panic.sh
-+
- TEST_FILES := test_vmalloc.sh
- TEST_FILES += test_hmm.sh
- TEST_FILES += va_high_addr_switch.sh
-diff --git a/tools/testing/selftests/mm/hwpoison-panic.sh b/tools/testing/selftests/mm/hwpoison-panic.sh
-new file mode 100755
-index 0000000000000..aafc06e895d01
---- /dev/null
-+++ b/tools/testing/selftests/mm/hwpoison-panic.sh
-@@ -0,0 +1,249 @@
-+#!/bin/bash
-+# SPDX-License-Identifier: GPL-2.0
-+#
-+# Verify vm.panic_on_unrecoverable_memory_failure by injecting a hwpoison
-+# error on a kernel-owned page and confirming the kernel panics.
-+#
-+# Three "kinds" of kernel-owned page can be targeted, selectable via the
-+# first positional argument (default: rodata):
-+#
-+#   rodata  - a PG_reserved page in the kernel rodata range
-+#             (sourced from /proc/iomem "Kernel rodata").  Exercises
-+#             memory_failure() -> get_any_page() on a PageReserved page.
-+#
-+#   slab    - a slab page found via /proc/kpageflags (KPF_SLAB).
-+#             Exercises memory_failure() -> get_any_page() on a non
-+#             PG_reserved kernel-owned page.  This path is what catches
-+#             regressions where get_any_page() collapses kernel-owned
-+#             pages into a transient -EIO instead of -ENOTRECOVERABLE.
-+#
-+#   pgtable - a page-table page found via /proc/kpageflags (KPF_PGTABLE).
-+#             Same path as slab, different page type.
-+#
-+# This test is DESTRUCTIVE: a successful run crashes the kernel.  It is
-+# meant to be executed inside a disposable VM (e.g. virtme-ng) with a
-+# serial console captured by the harness.  It is skipped unless the
-+# caller opts in via RUN_DESTRUCTIVE=1.
-+#
-+# Test passes externally: the kernel must panic with
-+#   "Memory failure: <pfn>: unrecoverable page"
-+# A return from the inject means no panic fired: that is a failure,
-+# unless the target PFN raced to a different page type before injection,
-+# in which case the run is inconclusive and is skipped.
-+#
-+# Author: Breno Leitao <leitao@debian.org>
-+
-+set -u
-+
-+ksft_skip=4
-+sysctl_path=/proc/sys/vm/panic_on_unrecoverable_memory_failure
-+inject_path=/sys/devices/system/memory/hard_offline_page
-+kpageflags_path=/proc/kpageflags
-+unpoison_path=/sys/kernel/debug/hwpoison/unpoison-pfn
-+
-+# /proc/kpageflags bit positions (see include/uapi/linux/kernel-page-flags.h)
-+KPF_SLAB=7
-+KPF_COMPOUND_TAIL=16
-+KPF_HWPOISON=19
-+KPF_NOPAGE=20
-+KPF_PGTABLE=26
-+KPF_RESERVED=32
-+
-+pagesize=$(getconf PAGE_SIZE)
-+
-+kind=${1:-rodata}
-+
-+ksft_print() { echo "# $*"; }
-+ksft_exit_skip() { ksft_print "$*"; exit "$ksft_skip"; }
-+ksft_exit_fail() { echo "not ok 1 $*"; exit 1; }
-+
-+if [ "$(id -u)" -ne 0 ]; then
-+	ksft_exit_skip "must run as root"
-+fi
-+
-+if [ ! -w "$sysctl_path" ]; then
-+	ksft_exit_skip "$sysctl_path not present (kernel without the sysctl?)"
-+fi
-+
-+if [ ! -w "$inject_path" ]; then
-+	ksft_exit_skip "$inject_path not present (no MEMORY_HOTPLUG?)"
-+fi
-+
-+if [ "${RUN_DESTRUCTIVE:-0}" != "1" ]; then
-+	ksft_exit_skip "destructive test; re-run with RUN_DESTRUCTIVE=1 inside a disposable VM"
-+fi
-+
-+# Pick a PFN inside the kernel image rodata region of /proc/iomem.
-+# This is preferred over a top-level "Reserved" entry because top-level
-+# Reserved ranges are often firmware holes that have no backing struct
-+# page; pfn_to_online_page() returns NULL on those and memory_failure()
-+# bails out with -ENXIO before reaching the panic path.
-+#
-+# "Kernel rodata" is reported as a sub-resource of "System RAM" on every
-+# major architecture, which guarantees:
-+#   - the PFN is backed by struct page (within an online memory range);
-+#   - PG_reserved is set on the page (kernel image area);
-+#   - the memory is read-only, so setting PG_hwpoison on it does not
-+#     corrupt writable kernel state if the panic somehow does not fire.
-+#
-+# /proc/iomem entries look like (indented for sub-resources):
-+#     "  02500000-02ffffff : Kernel rodata"
-+pick_rodata_phys_addr() {
-+	awk -v pagesize="$(getconf PAGE_SIZE)" '
-+	# Convert a hex string to a number without relying on the gawk-only
-+	# strtonum().  mawk lacks it and would otherwise spuriously skip
-+	# this test on distros that ship mawk as /usr/bin/awk.
-+	function hex2num(s,   n, i, c, v) {
-+		n = 0
-+		for (i = 1; i <= length(s); i++) {
-+			c = tolower(substr(s, i, 1))
-+			v = index("0123456789abcdef", c) - 1
-+			if (v < 0)
-+				return -1
-+			n = n * 16 + v
-+		}
-+		return n
-+	}
-+	/: Kernel rodata[[:space:]]*$/ {
-+		sub(/^[[:space:]]+/, "")
-+		n = split($0, a, /[- ]/)
-+		start = hex2num(a[1])
-+		end   = hex2num(a[2])
-+		if (end <= start)
-+			next
-+		# Page-align upward and emit the first byte of that page.
-+		pfn = int((start + pagesize - 1) / pagesize)
-+		printf "0x%x\n", pfn * pagesize
-+		exit 0
-+	}
-+	' /proc/iomem
-+}
-+
-+# Walk /proc/kpageflags and return the phys addr of the first PFN that
-+# has bit $1 set, with KPF_HWPOISON, KPF_NOPAGE and KPF_COMPOUND_TAIL
-+# all clear (so we attack a real, non-tail, not-already-poisoned page).
-+#
-+# We skip the first 16 MiB of PFNs to step past low-memory special
-+# ranges (BIOS/EFI/ACPI/etc.) that often are PG_reserved and would not
-+# exhibit the slab/pgtable type we are looking for.
-+pick_kpageflags_phys_addr() {
-+	local want_bit=$1
-+	local pagesize skip_pfn
-+
-+	[ -r "$kpageflags_path" ] || return
-+
-+	pagesize=$(getconf PAGE_SIZE)
-+	skip_pfn=$(((16 * 1024 * 1024) / pagesize))
-+
-+	od -An -tx8 -v -w8 -j "$((skip_pfn * 8))" "$kpageflags_path" 2>/dev/null | \
-+	awk -v want_bit="$want_bit" \
-+	    -v hwp_bit="$KPF_HWPOISON" \
-+	    -v nopage_bit="$KPF_NOPAGE" \
-+	    -v tail_bit="$KPF_COMPOUND_TAIL" \
-+	    -v base_pfn="$skip_pfn" \
-+	    -v pagesize="$pagesize" '
-+	# Test whether bit "b" is set in the 16-hex-digit value "hex".
-+	# Done with substring + per-digit lookup so we never rely on awk
-+	# bitwise operators (mawk lacks them), 64-bit FP precision or the
-+	# gawk-only strtonum().
-+	function bit_set(hex, b,    di, bi, c, v) {
-+		di = int(b / 4)
-+		bi = b - di * 4
-+		c = substr(hex, length(hex) - di, 1)
-+		v = index("0123456789abcdef", tolower(c)) - 1
-+		if (bi == 0) return (v % 2) == 1
-+		if (bi == 1) return int(v / 2) % 2 == 1
-+		if (bi == 2) return int(v / 4) % 2 == 1
-+		return int(v / 8) % 2 == 1
-+	}
-+	{
-+		gsub(/^[[:space:]]+/, "")
-+		h = $1
-+		if (bit_set(h, want_bit) &&
-+		    !bit_set(h, hwp_bit) &&
-+		    !bit_set(h, nopage_bit) &&
-+		    !bit_set(h, tail_bit)) {
-+			pfn = base_pfn + NR - 1
-+			printf "0x%x\n", pfn * pagesize
-+			exit 0
-+		}
-+	}
-+	'
-+}
-+
-+# Return 0 if /proc/kpageflags bit $2 is set for PFN $1, 1 if it is
-+# clear, or 2 if the word cannot be read.  Used to re-confirm the target
-+# page type after a non-panicking inject.
-+kpageflags_bit_set() {
-+	local word
-+
-+	word=$(od -An -tx8 -v -j "$(($1 * 8))" -N 8 "$kpageflags_path" 2>/dev/null | tr -d '[:space:]')
-+	[ -n "$word" ] || return 2
-+	(( (16#$word >> $2) & 1 ))
-+}
-+
-+# Best-effort: drop the PG_hwpoison marker set by the inject so a failed
-+# run does not leave a poisoned page behind.  hard_offline_page() injects
-+# with MF_SW_SIMULATED, so the page stays unpoisonable through the
-+# hwpoison debugfs interface (needs CONFIG_HWPOISON_INJECT + debugfs).
-+try_unpoison() {
-+	[ -w "$unpoison_path" ] || return 0
-+	echo "$1" > "$unpoison_path" 2>/dev/null || true
-+}
-+
-+case "$kind" in
-+rodata)
-+	phys_addr=$(pick_rodata_phys_addr)
-+	recheck_bit=$KPF_RESERVED
-+	missing_msg='no "Kernel rodata" entry in /proc/iomem'
-+	;;
-+slab)
-+	phys_addr=$(pick_kpageflags_phys_addr "$KPF_SLAB")
-+	recheck_bit=$KPF_SLAB
-+	missing_msg="no usable slab PFN found in $kpageflags_path"
-+	;;
-+pgtable)
-+	phys_addr=$(pick_kpageflags_phys_addr "$KPF_PGTABLE")
-+	recheck_bit=$KPF_PGTABLE
-+	missing_msg="no usable page-table PFN found in $kpageflags_path"
-+	;;
-+*)
-+	ksft_exit_fail "unknown kind '$kind' (expected: rodata|slab|pgtable)"
-+	;;
-+esac
-+
-+if [ -z "$phys_addr" ]; then
-+	ksft_exit_skip "$missing_msg"
-+fi
-+
-+ksft_print "enabling $sysctl_path"
-+prior=$(cat "$sysctl_path")
-+echo 1 > "$sysctl_path" || ksft_exit_fail "failed to enable sysctl"
-+
-+pfn=$((phys_addr / pagesize))
-+ksft_print "injecting hwpoison at phys 0x$(printf '%x' "$phys_addr") (pfn 0x$(printf '%x' "$pfn"), kind=$kind)"
-+ksft_print "expecting kernel panic: 'Memory failure: <pfn>: unrecoverable page'"
-+
-+# A successful run never returns from the inject -- it panics the kernel.
-+# Reaching the code below therefore means no panic fired.  Note whether
-+# the write itself succeeded, then put the machine back: restore the
-+# sysctl and best-effort unpoison the page we just marked.
-+if echo "$phys_addr" > "$inject_path"; then
-+	verdict="inject returned without panic; sysctl ineffective"
-+else
-+	verdict="inject failed before reaching the panic path"
-+fi
-+
-+echo "$prior" > "$sysctl_path"
-+try_unpoison "$pfn"
-+
-+# The page type can change between selection and injection (e.g. a slab
-+# or page-table page is freed and reused).  Only treat a missing panic as
-+# a failure if the target PFN is still the kernel-owned type we aimed at;
-+# if it raced to another type the run is inconclusive, so skip instead.
-+kpageflags_bit_set "$pfn" "$recheck_bit"
-+case $? in
-+0)	ksft_exit_fail "$verdict (page still $kind)" ;;
-+1)	ksft_exit_skip "target PFN no longer $kind; raced before inject, inconclusive" ;;
-+*)	ksft_exit_fail "$verdict (could not reconfirm page type via $kpageflags_path)" ;;
-+esac
-
--- 
-2.53.0-Meta
-
+--/zmDCd3AvwrgXHjE--
 
