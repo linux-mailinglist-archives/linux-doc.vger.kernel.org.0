@@ -1,250 +1,260 @@
-Return-Path: <linux-doc+bounces-93683-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93685-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Lwj2EVVzPmpYGQkAu9opvQ
-	(envelope-from <linux-doc+bounces-93683-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Jun 2026 14:40:53 +0200
+	id WXHSK6J1PmriGQkAu9opvQ
+	(envelope-from <linux-doc+bounces-93685-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Jun 2026 14:50:42 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3FFB96CD14F
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Jun 2026 14:40:52 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 446956CD269
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Jun 2026 14:50:42 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=IJNqNbHn;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93683-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-93683-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
+	dkim=pass header.d=debian.org header.s=smtpauto.stravinsky header.b=ZObGbtHR;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93685-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93685-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=debian.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 980893010CF5
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Jun 2026 12:40:45 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 8D8F23044C11
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Jun 2026 12:50:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E063E3F54AD;
-	Fri, 26 Jun 2026 12:40:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 36DD43F20E7;
+	Fri, 26 Jun 2026 12:50:37 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dy1-f182.google.com (mail-dy1-f182.google.com [74.125.82.182])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 741D83EFFC8
-	for <linux-doc@vger.kernel.org>; Fri, 26 Jun 2026 12:40:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D9133B585C;
+	Fri, 26 Jun 2026 12:50:35 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782477641; cv=none; b=iFa8FR0gPbc5MBAWFK5X1CkTTA+vB7uBQQnWGs7M68vQPm3MSxa4fEeAShPAfIOcpEwKVm346UYm59S6v2RlSm7MT8Vb6yHUXm5i28kgDpAEsk4kXCni2VkpSy4gNW2ua1UW+wplLZdBlMZdzrTa8ZMn6OFY3eYOH0Nj/TUA2BY=
+	t=1782478237; cv=none; b=cD0Tqpm/4rHSPwW+QeVN0IEM0iztcv+JGglMPZF+qIw6UWVKjkudBnFGv1i3kBaKsV6nLGbsvPbP9eplF1ee/dZY2z1zDVCnSXBlwg1TOfe7B0SpfKlJAvHXXXOOq6cSlt/uVDP3E35gzUOJZCF3qHufenbB+g8qda5XoRmZh+c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782477641; c=relaxed/simple;
-	bh=D6TPjVX4PIXvoryU3WbNOaDZGZXFmhDa1A2Z9sWegms=;
-	h=From:Date:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=lqntgs+7+uBfgvPsgnqaCi4B4vJ3AFnuw0zCEF4BdLgrxaLtM/yXg2ufpWsCZPfT0wLlfIJRPtyLIbfN4qHctuqROLKjzV3zuBVgaayiNXlVz9XzG2166UJcKaFA2b7QxFCsn3KbO/s5rovrTcC9iWCTxPFGFE6oHZnrUnG3tck=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=IJNqNbHn; arc=none smtp.client-ip=74.125.82.182
-Received: by mail-dy1-f182.google.com with SMTP id 5a478bee46e88-30c03b09e02so1640794eec.1
-        for <linux-doc@vger.kernel.org>; Fri, 26 Jun 2026 05:40:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782477639; x=1783082439; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:date:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=/5kU5fjHQx+bqaeethf58z/XHlPAmzHNymozmWSY1+Q=;
-        b=IJNqNbHnFctly0zwOcLuP27Yf6ISBUBMkRm0ycHRWUnXt7JAS7St/5Eh9fau0y+HAf
-         kb7SoGcDqZanR3zga4WHd5TD1XpQRCA5ba0LMYomX0RT825PpFHftF0imFGNXlWFZYIf
-         i132YMmIvu14rn9TWfEq2iJeUK190BFM0E4yLmDl+xth3QuFC29uyp4QBty2vlNUINom
-         kGs6sWi5MX5cwAcsVx8gYHNPpPH1m7HKlcnZiBdsSRWswFqhu0MFcqGCcclpGhct93YF
-         LCyOY0oTy9vSMoMp7g/ULzN0qhWRs2+LWyVYuLjWw2TthoW14qfyiS2byuEsvE+fOQEu
-         YnkQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782477639; x=1783082439;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:date:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=/5kU5fjHQx+bqaeethf58z/XHlPAmzHNymozmWSY1+Q=;
-        b=Xuj2St7cSdMfn0mxbkMGJjLRAlNaRNfCqGL/Jz4dKBRUFonTCCcZfGVdq/f9sA9PwC
-         8qZy6sj4ybolnKxl4IHn/90k7sFt2bs6P5ooGq4cwChpBVuImhI1d0wT7WJhDjJwlUnt
-         yG0pSuy88kF+rubu+GJxCt0hzx5xxUwSg2heShBxgbmswzQlSLQmFdvVRng5WPLsfQ7Y
-         MlfebkpON/BH3U0vBCvzwxv1wlixzGiSE5SgOyKR5LT6PI1hOV6cRowKBb+zz9QJYoKL
-         KvH17pIL0qOtRhMVI2zvZn4ZgFDQAaTfZTzKZLoXckxtMrPKK35rA3TQD6QIsl+kNP0y
-         jDBg==
-X-Forwarded-Encrypted: i=1; AHgh+Rr/PIlE9nn9jZDnwUtCQUPM9+j0FMP5m7YBftCUU4HvzpkyUzlTzVx7OXvsVEK41Q5k5xCJ7bKdMiE=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzRwIZtFdT0hILirMe8kv7faNz5mWb6yyS9d3Tw//7BgGlEwbkH
-	tL0Cfoyw90Wq+ivl3zXNtTxoWyh61t5hQgY9NvpBnjnXaZVu7uwGwwml
-X-Gm-Gg: AfdE7cntcz2Wg3y3kPfT1XjTsWKy9a+kUupqw+1Yj8NjTO6gMDWhXUsFP/YxYp+vgP9
-	HjJy3K/ipay7kXiRhHXVvXv2oL5LCozMIUzhZ1Gm9JL1Mg751RAyqOyUj24ctQRWhWeJ5dt85lN
-	pLgAvh6cYySC04iPvcdf6yBWT9lw91wlyrNqjACKfUK+M0biwq5kWTbpYgI+41cjBknT8mYPhXO
-	1rERHiDgh9jiQqzGm4t2ArAdYKPgnrLap8yu4i8CWW1P0gs+QI0OuKaHWC7FkppI7sL7dDz3cln
-	vgl1l6jti7+X+7eVpVsTo+51HFReYs5WRIIGx22FhkjP793XyTYvpQmUvQ5R676Gvq38YakxLKP
-	5HDXl72dqrj9ZAL+YJjP0BlP293iArgJ8HAyrnYW6M/9u+LujpqR+0aHmqGdpSzj/lDvoCNrfhT
-	IKxD2MS/7z
-X-Received: by 2002:a05:693c:62cc:b0:30c:6690:53a1 with SMTP id 5a478bee46e88-30c84d10a64mr4844029eec.16.1782477638454;
-        Fri, 26 Jun 2026 05:40:38 -0700 (PDT)
-Received: from localhost ([216.228.127.129])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30c7c9e220bsm18411512eec.21.2026.06.26.05.40.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 26 Jun 2026 05:40:37 -0700 (PDT)
-From: Yury Norov <yury.norov@gmail.com>
-X-Google-Original-From: Yury Norov <ynorov@nvidia.com>
-Date: Fri, 26 Jun 2026 08:40:36 -0400
-To: Peter Zijlstra <peterz@infradead.org>
-Cc: Shrikanth Hegde <sshegde@linux.ibm.com>, linux-kernel@vger.kernel.org,
-	mingo@kernel.org, juri.lelli@redhat.com, vincent.guittot@linaro.org,
-	yury.norov@gmail.com, kprateek.nayak@amd.com, iii@linux.ibm.com,
-	corbet@lwn.net, tglx@kernel.org, gregkh@linuxfoundation.org,
-	pbonzini@redhat.com, seanjc@google.com, vschneid@redhat.com,
-	huschle@linux.ibm.com, rostedt@goodmis.org,
-	dietmar.eggemann@arm.com, maddy@linux.ibm.com, srikar@linux.ibm.com,
-	hdanton@sina.com, chleroy@kernel.org, vineeth@bitbyteword.org,
-	frederic@kernel.org, arighi@nvidia.com, pauld@redhat.com,
-	christian.loehle@arm.com, tj@kernel.org,
-	tommaso.cucinotta@gmail.com, maz@kernel.org, rafael@kernel.org,
-	rdunlap@infradead.org, kernellwp@gmail.com,
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v5 04/24] cpumask: Introduce cpu_preferred_mask
-Message-ID: <aj5zRBrQJG-cxs0_@yury>
-References: <20260625124648.802832-1-sshegde@linux.ibm.com>
- <20260625124648.802832-5-sshegde@linux.ibm.com>
- <20260626093901.GN1181229@noisy.programming.kicks-ass.net>
+	s=arc-20240116; t=1782478237; c=relaxed/simple;
+	bh=Y3E6Rd7fiFy7UxkzVEG4z9yZiAJLFESwNShbnpzDDIQ=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=RgkwD/zzNZVZoIxbh+1UdCpYL3lju92zXrzvOglKzRBN6RSl3MfQHbHs4dxkMMP8mcQI6EOPX1hBZvPX8Et8KD6mg8LHKCkyi5MbC0bHBDFZP1FOpbGg/vQrRE4gzMGPnRQJXyHoPMcq0hYa7cQEgoTNrbRWfgmt6aTnBu2Fbkk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org; spf=pass smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=ZObGbtHR; arc=none smtp.client-ip=82.195.75.108
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
+	s=smtpauto.stravinsky; h=X-Debian-User:Cc:To:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:Message-Id:Date:Subject:From:Reply-To:Content-ID:
+	Content-Description:In-Reply-To:References;
+	bh=YPMw7idwHYQh9hfFGkdrNz8/B+okT4m9RaLfTg0djp0=; b=ZObGbtHR9W1kYscqG1uHPh2Mvp
+	KSx7QMrd50ZxATjpKjHUh+CmXgWdV59wkRExurC8TKqH/8LWWZbC/vCxQpyouGyFhnyxrLTLyVjfp
+	7YZOskT0KWngEHiMFpdkqcIrpwXSbbJg76miO6OjMqVhxgZOaJ9M/Srr8Vxi21xD6Dbk+x1Vlnnos
+	Q6fN9vnA7eA5GE6YKZIYX9hELetqHaHWWcDM9p3NcG4CxHDRU7fGncm51Q9nyAp1wO/BB1PWuxRxU
+	wtF1N1RGNyYZv5cycvy4cSnUCyzC2GEhoDw1BBGZJ60ZphedmaHlD5JPeMQGjoNvOzWYI4B7LG37I
+	yx7I1BRQ==;
+Received: from authenticated-user
+	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
+	(Exim 4.96)
+	(envelope-from <leitao@debian.org>)
+	id 1wd60n-003yko-0w;
+	Fri, 26 Jun 2026 12:50:26 +0000
+From: Breno Leitao <leitao@debian.org>
+Subject: [PATCH v7 0/9] bootconfig: embed kernel.* cmdline at build time
+Date: Fri, 26 Jun 2026 05:50:09 -0700
+Message-Id: <20260626-bootconfig_using_tools-v7-0-24ab72139c29@debian.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260626093901.GN1181229@noisy.programming.kicks-ass.net>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAIJ1PmoC/3XQ22rDMAwG4FcJvq6G6oMc52rvMUZxfEg9RjziN
+ GyUvPtIN1hG8KXg5/sl3VkJUwqFdc2dTWFJJeWRdY0+Ncxd7TgESJ51DePICRW20Oc8uzzGNFx
+ uJY3DZc75vYCLVltrPFll2alhH1OI6fMBv7z+zOXWvwU3b9qWuKYy5+nr0byct9xvCde1kuUMC
+ D0ZJNtS0F49+9AnOz7laWBby8L/HEJVdTggeIEmKil7FfXBEXunevQiAEF671Ebi2To4Mi9Y6q
+ OBAQtnCQRUVhz3EftnHP9PwoQoletscY5FcTBoZ3DRdUhQCCJjkfVaivcP2dd129lD1MENwIAA
+ A==
+X-Change-ID: 20260508-bootconfig_using_tools-cfa7aa9d6a5a
+To: Masami Hiramatsu <mhiramat@kernel.org>, 
+ Andrew Morton <akpm@linux-foundation.org>, 
+ Nathan Chancellor <nathan@kernel.org>, paulmck@kernel.org, 
+ Nicolas Schier <nsc@kernel.org>, 
+ Nick Desaulniers <nick.desaulniers+lkml@gmail.com>, 
+ Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>, 
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>
+Cc: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
+ Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, 
+ x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
+ linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
+ linux-kbuild@vger.kernel.org, bpf@vger.kernel.org, llvm@lists.linux.dev, 
+ linux-doc@vger.kernel.org, Breno Leitao <leitao@debian.org>, 
+ kernel-team@meta.com, Nicolas Schier <n.schier@fritz.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6119; i=leitao@debian.org;
+ h=from:subject:message-id; bh=Y3E6Rd7fiFy7UxkzVEG4z9yZiAJLFESwNShbnpzDDIQ=;
+ b=owEBbQKS/ZANAwAIATWjk5/8eHdtAcsmYgBqPnWLlPdf+7kVg76KT7MbdGfMa/cTrDgMt99so
+ 87xJRUfn3mJAjMEAAEIAB0WIQSshTmm6PRnAspKQ5s1o5Of/Hh3bQUCaj51iwAKCRA1o5Of/Hh3
+ bTAGD/9RiLQeD/dTeF8ImCIPNmwmqgVkoKku0m7l9amKYS+NsszKW35l+9fFnN5epwnQV0E1aTS
+ LZq3y77az3ve3u+H4ewqvmUDT91EAihfaTrVabF6vAgMYEwzN9YOfXaQkGIslSIOHdLO+X+0pqr
+ 9nfRs/QeS3pIFjsvtQHbP5Vb/EhajDu24K/41MVcKjJrniWJhFxEZdUvLAs8e3HD1SQ0LASixtv
+ nPEVDY5QFFyDdlU9w9Yd9LL2Gb2hGioeWhSbx8GS0cZL3RNo44tDTP2Zol1rKjJWIbw9smXyMYG
+ EVW1dP0s7muGmq8R1DaYrHhp9D0jmBjYkQQZgb7NOo1BKac7RLYtJVPjnlKpOBfT/odRy4Hchrm
+ NRvT20IFT3DLB4h1/5pUNMMkYOu84sVhCdOxved0Gy+VUTm58c+pR6ltxG1bn4155syLUTJu5J7
+ UVNjQRBymW6PHTQu9xeBlmzFhCXEMJXuwOPkXtZCWfUF3kH1Phz3PMi7hjj8PHOa6xGBtNkZ00I
+ 6DYeJZCSX5/lSazazxM14yZbfrmXMKcCmy3ocQQMU/Mz9RM4MF4/8XpKsMlc5cYqy2+oAh3l0HL
+ vI/4//iFRGH8w/9ggu+WdtB0IDX08eXOAgTdUfnRwqwC9vNIfDnkTWkgMU4FqV8FGkQvaXHDCOH
+ U/+anXKfjZ2aAaQ==
+X-Developer-Key: i=leitao@debian.org; a=openpgp;
+ fpr=AC8539A6E8F46702CA4A439B35A3939FFC78776D
+X-Debian-User: leitao
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	DMARC_POLICY_ALLOW(-0.50)[debian.org,none];
+	R_DKIM_ALLOW(-0.20)[debian.org:s=smtpauto.stravinsky];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-93685-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:mhiramat@kernel.org,m:akpm@linux-foundation.org,m:nathan@kernel.org,m:paulmck@kernel.org,m:nsc@kernel.org,m:nick.desaulniers+lkml@gmail.com,m:morbo@google.com,m:justinstitt@google.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-kbuild@vger.kernel.org,m:bpf@vger.kernel.org,m:llvm@lists.linux.dev,m:linux-doc@vger.kernel.org,m:leitao@debian.org,m:kernel-team@meta.com,m:n.schier@fritz.com,m:nickdesaulniers@gmail.com,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-93683-lists,linux-doc=lfdr.de];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_SENDER(0.00)[yurynorov@gmail.com,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FORGED_RECIPIENTS(0.00)[m:peterz@infradead.org,m:sshegde@linux.ibm.com,m:linux-kernel@vger.kernel.org,m:mingo@kernel.org,m:juri.lelli@redhat.com,m:vincent.guittot@linaro.org,m:yury.norov@gmail.com,m:kprateek.nayak@amd.com,m:iii@linux.ibm.com,m:corbet@lwn.net,m:tglx@kernel.org,m:gregkh@linuxfoundation.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:vschneid@redhat.com,m:huschle@linux.ibm.com,m:rostedt@goodmis.org,m:dietmar.eggemann@arm.com,m:maddy@linux.ibm.com,m:srikar@linux.ibm.com,m:hdanton@sina.com,m:chleroy@kernel.org,m:vineeth@bitbyteword.org,m:frederic@kernel.org,m:arighi@nvidia.com,m:pauld@redhat.com,m:christian.loehle@arm.com,m:tj@kernel.org,m:tommaso.cucinotta@gmail.com,m:maz@kernel.org,m:rafael@kernel.org,m:rdunlap@infradead.org,m:kernellwp@gmail.com,m:linux-doc@vger.kernel.org,m:yurynorov@gmail.com,m:tommasocucinotta@gmail.com,s:lists@lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[34];
-	FORWARDED(0.00)[lists@lfdr.de];
+	FREEMAIL_TO(0.00)[kernel.org,linux-foundation.org,gmail.com,google.com,lwn.net,linuxfoundation.org];
+	FORGED_SENDER(0.00)[leitao@debian.org,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[yurynorov@gmail.com,linux-doc@vger.kernel.org];
-	PRECEDENCE_BULK(0.00)[];
-	FREEMAIL_CC(0.00)[linux.ibm.com,vger.kernel.org,kernel.org,redhat.com,linaro.org,gmail.com,amd.com,lwn.net,linuxfoundation.org,google.com,goodmis.org,arm.com,sina.com,bitbyteword.org,nvidia.com,infradead.org];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,vger.kernel.org:from_smtp]
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[leitao@debian.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[debian.org:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,lkml];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,msgid.link:url,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 3FFB96CD14F
+X-Rspamd-Queue-Id: 446956CD269
 
-On Fri, Jun 26, 2026 at 11:39:01AM +0200, Peter Zijlstra wrote:
-> On Thu, Jun 25, 2026 at 06:16:28PM +0530, Shrikanth Hegde wrote:
-> 
-> > diff --git a/include/linux/cpumask.h b/include/linux/cpumask.h
-> > index 80211900f373..5a643d608ea6 100644
-> > --- a/include/linux/cpumask.h
-> > +++ b/include/linux/cpumask.h
-> > @@ -120,12 +120,20 @@ extern struct cpumask __cpu_enabled_mask;
-> >  extern struct cpumask __cpu_present_mask;
-> >  extern struct cpumask __cpu_active_mask;
-> >  extern struct cpumask __cpu_dying_mask;
-> > +
-> > +#ifdef CONFIG_PREFERRED_CPU
-> > +extern struct cpumask __cpu_preferred_mask;
-> > +#else
-> > +#define __cpu_preferred_mask __cpu_active_mask
-> > +#endif
-> 
-> This is cure, but does it not result in set_cpu_preferred() changing
-> active mask, and it that not somewhat unexpected behaviour?
+The userspace pieces (xbc_snprint_cmdline() in lib/, tools/bootconfig -C)
+already landed; this series wires the rendered cmdline into the kernel.
 
-I agree, and I think I already commented on it on previous round.
-set_cpu_preferred() should be protected the same way as the
-corresponding mask, and should be a NOP when CONFIG_PREFERRED_CPU
-is disabled.
+Motivation: today the embedded bootconfig is parsed at runtime, after
+parse_early_param() has already run, so early_param() handlers can't
+see embedded values. Folding the kernel.* subtree into the cmdline at
+build time gives a CONFIG_CMDLINE-equivalent for embedded-bootconfig
+users without forcing them to maintain two cmdline sources.
 
-> >  #define cpu_possible_mask ((const struct cpumask *)&__cpu_possible_mask)
-> >  #define cpu_online_mask   ((const struct cpumask *)&__cpu_online_mask)
-> >  #define cpu_enabled_mask   ((const struct cpumask *)&__cpu_enabled_mask)
-> >  #define cpu_present_mask  ((const struct cpumask *)&__cpu_present_mask)
-> >  #define cpu_active_mask   ((const struct cpumask *)&__cpu_active_mask)
-> >  #define cpu_dying_mask    ((const struct cpumask *)&__cpu_dying_mask)
-> > +#define cpu_preferred_mask ((const struct cpumask *)&__cpu_preferred_mask)
-> >  
-> >  extern atomic_t __num_online_cpus;
-> >  extern unsigned int __num_possible_cpus;
-> 
-> > diff --git a/kernel/cpu.c b/kernel/cpu.c
-> > index bc4f7a9ba64e..d623a9c5554a 100644
-> > --- a/kernel/cpu.c
-> > +++ b/kernel/cpu.c
-> > @@ -3107,6 +3107,11 @@ EXPORT_SYMBOL(__cpu_dying_mask);
-> >  atomic_t __num_online_cpus __read_mostly;
-> >  EXPORT_SYMBOL(__num_online_cpus);
-> >  
-> > +#ifdef CONFIG_PREFERRED_CPU
-> > +struct cpumask __cpu_preferred_mask __read_mostly;
-> > +EXPORT_SYMBOL(__cpu_preferred_mask);
-> > +#endif
-> 
-> Precedent is definitely towards !GPL exports for this, but could we get
-> away with making this one GPL?
-> 
-> 
-> > @@ -3164,6 +3169,7 @@ void __init boot_cpu_init(void)
-> >  	/* Mark the boot cpu "present", "online" etc for SMP and UP case */
-> >  	set_cpu_online(cpu, true);
-> >  	set_cpu_active(cpu, true);
-> > +	set_cpu_preferred(cpu, true);
-> 
-> This sets active twice, which is harmless, but wasteful...
+Behaviorally, the "kernel" subtree is rendered to a flat string at
+build time and stashed in .init.rodata. setup_arch() prepends it to
+boot_command_line before parse_early_param() runs. Overflow is a soft
+error: the helper logs and leaves boot_command_line untouched rather
+than panicking, so an oversized embedded bconf cannot brick a boot.
 
-I think, the good criteria for correctness of this series would be the
-identical binaries before the series, and when CONFIG_PREFERRED_CPU is
-off. At least, as a mental model. This double-set chunk breaks that
-model. 
+Signed-off-by: Breno Leitao <leitao@debian.org>
+---
+Changes in v7:
+- The runtime opt-in now shares one helper instead of open-coding its
+  own. (Masami)
+- bootconfig_cmdline_requested() moved into generic lib code (Masami)
+- Link to v6: https://lore.kernel.org/r/20260623-bootconfig_using_tools-v6-0-640c2f587a3c@debian.org
 
-Thanks,
-Yury
- 
-> >  	set_cpu_present(cpu, true);
-> >  	set_cpu_possible(cpu, true);
-> >  
-> > diff --git a/kernel/sched/core.c b/kernel/sched/core.c
-> > index 2f4530eb543f..9e16946c9d62 100644
-> > --- a/kernel/sched/core.c
-> > +++ b/kernel/sched/core.c
-> > @@ -8685,6 +8685,9 @@ int sched_cpu_activate(unsigned int cpu)
-> >  	 */
-> >  	sched_set_rq_online(rq, cpu);
-> >  
-> > +	/* preferred is subset of active and follows its state */
-> > +	set_cpu_preferred(cpu, true);
-> > +
-> >  	return 0;
-> >  }
-> >  
-> > @@ -8698,6 +8701,8 @@ int sched_cpu_deactivate(unsigned int cpu)
-> >  	if (ret)
-> >  		return ret;
-> >  
-> > +	set_cpu_preferred(cpu, false);
-> > +
-> >  	/*
-> >  	 * Remove CPU from nohz.idle_cpus_mask to prevent participating in
-> >  	 * load balancing when not active
-> 
-> But this one clears active earlier, is that not a problem?
-> 
-> Perhaps it is best if the modifier is a no-op when preferred mask does
-> not exist?
+Changes in v6:
+- renamed CONFIG_BOOT_CONFIG_EMBED_CMDLINE to
+  CONFIG_CMDLINE_FROM_BOOTCONFIG
+- prepend embedded bootconfig cmdline before parse_early_param
+- Link to v5: https://lore.kernel.org/r/20260617-bootconfig_using_tools-v5-0-fd589a9cc5e3@debian.org
+
+Changes in v5:
+- Patch 3 (Kconfig): drop the redundant "depends on BOOT_CONFIG_EMBED"
+  from CMDLINE_FROM_BOOTCONFIG; Julian Braha.
+- Patch 6 (Documentation): spell out how the embedded cmdline interacts
+  with the bootloader cmdline, an initrd bootconfig, and the embedded
+  bootconfig
+- Link to v4: https://lore.kernel.org/r/20260609-bootconfig_using_tools-v4-0-73c463f03a97@debian.org
+
+Changes in v4:
+- Patch 3 (build pipeline): clear CROSS_COMPILE= in the kernel-side
+  tools/bootconfig sub-make. Without it, an LLVM=1 cross build
+  inherits CROSS_COMPILE and tools/scripts/Makefile.include injects
+  --target=/--sysroot= into the host clang, producing a target
+  binary that fails to exec.
+- Patch 3 (build pipeline): place embedded-cmdline.S in its own
+  .init.rodata.embed_cmdline subsection ("a") so ld.lld does not
+  see a section-type mismatch against lib/bootconfig-data.S's
+  writable .init.rodata ("aw"). The linker's *(.init.rodata
+  .init.rodata.*) glob still folds it into the init image.
+- Patch 6 (x86/setup): also accept the bootconfig=<anything> form
+  via cmdline_find_option(), matching the runtime parse_args() loop.
+  Without it, bootconfig=0/=off would skip the early prepend but
+  still trigger the late runtime apply -- a split-brain state.
+- New patch 7: document CONFIG_CMDLINE_FROM_BOOTCONFIG in
+  Documentation/admin-guide/bootconfig.rst (semantics, opt-in,
+  precedence, overflow behavior, example).
+- Link to v3: https://lore.kernel.org/r/20260608-bootconfig_using_tools-v3-0-4ddd079a0696@debian.org
+
+Changes in v3:
+- Patch 3: Move HOSTCC override to the kernel-side rule; tool keeps
+  $(CC) for standalone/cross builds.
+- Patch 6: Drop the false fail-safe wording; document the
+  BOOT_CONFIG_FORCE=y default interaction.
+- Link to v2:
+  https://lore.kernel.org/r/20260605-bootconfig_using_tools-v2-0-d309f544b5f7@debian.org
+
+Changes in v2 (addressing review of v1):
+- Split out a standalone fix for the NULL-pointer arithmetic in
+  xbc_snprint_cmdline() so the build-time render cannot trip host
+  UBSan/FORTIFY_SOURCE.
+- Rework the leaf-root handling: instead of returning early, skip @root
+  inside the loop so a root carrying both a value and subkeys
+  (kernel = x together with kernel.foo = bar) still renders its
+  descendant keys.
+- Build tools/bootconfig with $(HOSTCC) so cross-compiled (ARCH=...)
+  builds render the cmdline on the build host instead of failing with
+  "Exec format error".
+- Mark the embedded cmdline section read-only (drop the "w" flag from
+  .init.rodata).
+- Add a make-clean hook so tools/bootconfig artifacts are removed by
+  make clean.
+- Gate the x86 prepend on "bootconfig" being present on the command
+  line (or CONFIG_BOOT_CONFIG_FORCE), matching the init.* opt-in
+  semantics documented in bootconfig.rst and preserving fail-safe
+  recovery: dropping "bootconfig" from the bootloader cmdline now also
+  disables the embedded kernel.* keys.
+- Link to v1: https://patch.msgid.link/20260527-bootconfig_using_tools-v1-0-b6906a86e7d5@debian.org
+
+---
+Breno Leitao (9):
+      bootconfig: fix NULL-pointer arithmetic in xbc_snprint_cmdline()
+      bootconfig: render descendant keys when xbc_snprint_cmdline() root has a value
+      bootconfig: render embedded bootconfig as a kernel cmdline at build time
+      bootconfig: clean build-time tools/bootconfig from make clean
+      bootconfig: add xbc_prepend_embedded_cmdline() helper
+      Documentation: bootconfig: document build-time cmdline rendering
+      x86/setup: prepend embedded bootconfig cmdline before parse_early_param
+      bootconfig: skip runtime kernel.* render once prepended early
+      init/main.c: use bootconfig_cmdline_requested() for the runtime opt-in
+
+ Documentation/admin-guide/bootconfig.rst |  81 ++++++++++++++++
+ MAINTAINERS                              |   1 +
+ Makefile                                 |  27 +++++-
+ arch/x86/Kconfig                         |   1 +
+ arch/x86/kernel/setup.c                  |  14 ++-
+ include/linux/bootconfig.h               |  14 +++
+ init/Kconfig                             |  36 +++++++
+ init/main.c                              |  52 +++++-----
+ lib/Makefile                             |  16 +++
+ lib/bootconfig.c                         | 162 +++++++++++++++++++++++++++++--
+ lib/embedded-cmdline.S                   |  16 +++
+ tools/bootconfig/Makefile                |   4 +-
+ 12 files changed, 388 insertions(+), 36 deletions(-)
+---
+base-commit: a87737435cfa134f9cdcc696ba3080759d04cf72
+change-id: 20260508-bootconfig_using_tools-cfa7aa9d6a5a
+
+Best regards,
+-- 
+Breno Leitao <leitao@debian.org>
+
 
