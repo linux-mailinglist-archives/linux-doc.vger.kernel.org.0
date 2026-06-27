@@ -1,60 +1,60 @@
-Return-Path: <linux-doc+bounces-93771-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93773-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id rwTdOglEP2pxQwkAu9opvQ
-	(envelope-from <linux-doc+bounces-93771-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 27 Jun 2026 05:31:21 +0200
+	id J6g4FRJEP2p4QwkAu9opvQ
+	(envelope-from <linux-doc+bounces-93773-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 27 Jun 2026 05:31:30 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id E61646D0DD3
-	for <lists+linux-doc@lfdr.de>; Sat, 27 Jun 2026 05:31:20 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id B7E2C6D0DEA
+	for <lists+linux-doc@lfdr.de>; Sat, 27 Jun 2026 05:31:29 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=bootlin.com header.s=dkim header.b=GYbU6YRm;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93771-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-93771-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=bootlin.com header.s=dkim header.b=yTmyt0dj;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93773-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93773-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=reject) header.from=bootlin.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 78B81300F24E
-	for <lists+linux-doc@lfdr.de>; Sat, 27 Jun 2026 03:31:16 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 396923033AEB
+	for <lists+linux-doc@lfdr.de>; Sat, 27 Jun 2026 03:31:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3E5652882CD;
-	Sat, 27 Jun 2026 03:31:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8C3B02BEC5F;
+	Sat, 27 Jun 2026 03:31:13 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6F36F17B50F
-	for <linux-doc@vger.kernel.org>; Sat, 27 Jun 2026 03:31:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF1DA1A6813;
+	Sat, 27 Jun 2026 03:31:08 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782531071; cv=none; b=Hjb90rU1anSYi1bl09zHUVkRGfyW+XrRTVQCfyG1VsBcm/i8vja2l7HYkk1ETOSBhw+AJLVGyLAsB80vN4x55PMXf/tIA0JgvgGy6loIjs/AK8uij50XKS5ir7u27jNeCYs504BiSJEim9DvVXGd2jCqLwaGFSxugfUEXR37dZw=
+	t=1782531073; cv=none; b=SuDU61nqsgy428fzr+YWam2/VAvIYsj05MJWsJrnCdvQ5Wf67nx/QADhFdl6oKVWM+8Q9FS+O+IvXFW65jevGLC+oZI/uhSFObZhfWTcl8tKYKNXUSKzISt8JuXsavt2bJgMxXicCuGNSG2NFngmRpsWU2j1+AFW/Xo7N3J4kyw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782531071; c=relaxed/simple;
-	bh=tbNblOwZZzE1Y64mp73eAM5o2mppDB/MrH/5NXGp3ZY=;
+	s=arc-20240116; t=1782531073; c=relaxed/simple;
+	bh=M4IKg4jtN2coKi4h2W5OHuSx8L+kOjlkuI6yHVh2tSk=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=qlc38uEePK12yH8fea2TZC5Atfr0TLO2/TIwSve2SOcwrPNp1j+b6sHC3kJLFc4M7zmFbKUJeRYlISfO6ORRBoeG+sX8jj/49f7OcHEf3OD0SE5EOR9lVXbVrgFaiYVyYyVoBojxqzBOpSfZq08Z5PvfVpEmLDdJuDuJfjtVSGA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=GYbU6YRm; arc=none smtp.client-ip=185.246.85.4
+	 In-Reply-To:To:Cc; b=aysJXlKqZOE/1Ag/v+7k6rf27/gGYXHN0vjukxEELNoNT+zvAd+ydHpqtbJoliBJDHI1XFXhLGLGbqw7AhZWtQrbIQW+A0q9jFh78cQGmpMMHbBIUlNvJ5Gb/WqQTy71z82Ox/4hi2IrL9qawip0SZ25Sb903tfsDB2RLoiv+lE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=yTmyt0dj; arc=none smtp.client-ip=185.246.84.56
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id 306234E409E2;
-	Sat, 27 Jun 2026 03:31:05 +0000 (UTC)
+	by smtpout-02.galae.net (Postfix) with ESMTPS id 8EE7A1A0A10;
+	Sat, 27 Jun 2026 03:31:07 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 0424160233;
-	Sat, 27 Jun 2026 03:31:05 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id B0A90106F116F;
-	Sat, 27 Jun 2026 05:31:01 +0200 (CEST)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 61EFC60233;
+	Sat, 27 Jun 2026 03:31:07 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id C6B8C106F1170;
+	Sat, 27 Jun 2026 05:31:03 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1782531063; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	t=1782531065; h=from:subject:date:message-id:to:cc:mime-version:content-type:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=bfHiIvddr7Ju7wHJmkuXmzPCw5MJavyMHiE/+sY4NCQ=;
-	b=GYbU6YRmdiKAvOVx+SPWpf7asTWBeHNL43OLV0hzwWIc0YeGpTZHDHxpOdWmvv9UCpRa1Q
-	K2KRJGgDSc3Rftmvcnu8e9294XFGpn82cv0qAUMXBQ9Zmt9lTl1JJqSG+x96z622zorPIN
-	zfBjq4su/YQqyOU7FKyWnF2WxzjnOdKCMpqVlJXiXS8cug7VhoDk2ETHi5eiKMva2l7z5X
-	g0GKiBBR6GjneH2UVgAxgep1+gGhp5rDRKe1e4i7GerSkDGXv7/FvSBC5QU9R6Xb1LmAWl
-	2hO8syANEQl2eX7SlJ7Mgoi6oySaBEpy1Vl6vdgPSoIY4Kg2pVjywQ3ryCugjA==
+	bh=OZ8EM81DGMlJ9qEgvUE9Mt5KnFr4O4RtbirwspUTjRM=;
+	b=yTmyt0djrIvDz5sia3dlyFo9K+o8tbbwin4Dc8R2c/IlQnUv5irrsKvGzTdiwXbAJ34wKH
+	GM2McjpWG/y/nzI0XxZksRrgNBIO1CD4kQMRtHq2udX8Av0xJORWwQos+3c18aGqDNlzdW
+	HDqZ0gGG40q5PRgEW/7arD3C9gDALolyWcq46HDyEB4DSbLVg8NV6aknl4Uu6uR1C5M9Xr
+	AX3n3FIvM3+GKk1952j07Y3VlB0PLg2edZGqu5Jd0IYTi310d50O11t0biaUlGk7Io+6cf
+	VPs8Daj3QLuno5jxybirPd7cICEKkoV/OyN4SGXGobQHCb+xZpZrzMEsZ5YWXQ==
 From: Louis Chauvet <louis.chauvet@bootlin.com>
-Date: Sat, 27 Jun 2026 05:30:23 +0200
-Subject: [PATCH v5 06/38] drm/drm_atomic_state_helper: Properly load
- default value for rotation
+Date: Sat, 27 Jun 2026 05:30:24 +0200
+Subject: [PATCH v5 07/38] Documentation: ABI: vkms: Add current VKMS ABI
+ documentation
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -62,8 +62,8 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20260627-vkms-all-config-v5-6-854aa0840926@bootlin.com>
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260627-vkms-all-config-v5-7-854aa0840926@bootlin.com>
 References: <20260627-vkms-all-config-v5-0-854aa0840926@bootlin.com>
 In-Reply-To: <20260627-vkms-all-config-v5-0-854aa0840926@bootlin.com>
 To: Haneen Mohammed <hamohammed.sa@gmail.com>, 
@@ -82,21 +82,21 @@ Cc: Luca Ceresoli <luca.ceresoli@bootlin.com>,
  linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
  Louis Chauvet <louis.chauvet@bootlin.com>, llvm@lists.linux.dev
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1534;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4411;
  i=louis.chauvet@bootlin.com; h=from:subject:message-id;
- bh=tbNblOwZZzE1Y64mp73eAM5o2mppDB/MrH/5NXGp3ZY=;
- b=owEBiQJ2/ZANAwAIASCtLsZbECziAcsmYgBqP0PdBX1qs+QMZjo+7F8jVzOTpYFtq6nyNFaoY
- vdjMpCS49SJAk8EAAEIADkWIQRPj7g/vng8MQxQWQQgrS7GWxAs4gUCaj9D3RsUgAAAAAAEAA5t
- YW51MiwyLjUrMS4xMiwyLDIACgkQIK0uxlsQLOL6NQ/9Gi6+yRgbhFV/JzJUE3AYNmrzz/TFvXs
- 7Ek4sbTwkDgvrYEn5OUeumn44ZEec2IvXu9wDltv6tdFOEYMWLBUdf6IGCGMI03/D7Zz2lvDhOd
- goDUVKOyYBglZPs1f0zs/tdllgL8COFiEDet1HU/O+bjmwbXRdk1De2wkEcZ7h4GrPHFvqDhgMg
- Q1bK53YUl7rM+KC6lpHzDkS3pnskwomyUZz6J0QG4Kj7YbyLz3YPnfHMEPsaNYIM9pBG1Y3R8x5
- L6Qes0Tw1VIi6KkEbxJkbkN0gg5zSU291CrCsg75pyNiBZRVC8hbLrn+TNFhRQmbbcBQUi5cBCU
- Sqb54TSOm5+5hraC5HBvF27BaoG4l/AmkvInT8osQSOpsHcMkBZOOjzFX5Yh632qPG/48aWoWWk
- OSVV+aNAkca8p5ZQO2ApCGcq7D6d/icKJ3Ay9m59ZzsXh0/xq60qeVPRiKlsNuLv46F04PdTLxY
- xqCSxBRZ5+ZdvIgqP6efxGDyG1iB02Rhj5zTh9wV5g4HF35zks34AP3xKtt3E26cQ3huKh2m9ey
- W+T90RDYOtbXJmX4LxwM2KA3XefuR0iWUJ3a2CDpefxo+2qwTfvG3bdIjUJ2zkhh+ANCcX/VmzI
- WRXcDO8BizZC/BS3F/U17kp0PM4aiuyuR3it0jl1ww4Z+VnQAb8Y=
+ bh=M4IKg4jtN2coKi4h2W5OHuSx8L+kOjlkuI6yHVh2tSk=;
+ b=owEBiQJ2/ZANAwAIASCtLsZbECziAcsmYgBqP0Pd17dPdykH+J1Rl+Mvy3D02QP1ls2Fn3X5O
+ BB88oAgLUWJAk8EAAEIADkWIQRPj7g/vng8MQxQWQQgrS7GWxAs4gUCaj9D3RsUgAAAAAAEAA5t
+ YW51MiwyLjUrMS4xMiwyLDIACgkQIK0uxlsQLOLgpxAA1RNVJv+/B95y7Ja7uG6EkQvSfoqGq+l
+ OAI6TQXR1iIfG7eeDfeqpdDWWEXBNfU/L/C7GfIN8Y3Ibr7hrSdvn64cfwctxdnje2nZhUxSu8e
+ ACpBsIm1vj+XzT4rl1gWRGgLilo1xCHedZLgX+24tOxbWaYt0pZht4tIX6fMvMAeEFVPw6qt2cG
+ hrqmtLuQtLxLPlEOi5M3MUKh/y1KqECP1eppSeKAfzWrqvrljHC+RDnpT9+pVh6thVp0ANDq9cf
+ W+sMiJYdBmGwBrOAJ7NagBU9ePlPerphlwJ2mExMELXj0tz+yOoEa4rJcODSRw17lwS4jYczqgG
+ RrZuaEG/8e0nusUiZj1LqtKGQ8cZWZ78dM2vwbEGKKcoK1lIifcO9/HzSZIuH9RR3k4fa5j+e4x
+ STXSwrFDYWbZX5zgvbw+s+sUgcFHkBQP9LwQQ3RU5CbPVGVUoenJm6d8ucR+HQCIA9orszGEE9f
+ DKDByc4QnDEdPOZdZHXzY5nttS55MYyI/z6M6yq5w4+Pyp2BzJBXaMmIUlqtZBWKvhZLhxBYzBb
+ E+xPzZMQzFFJpWNgGiJhOQMuRIwsoabohSsHxNc1nnLBQ4OAHylJpEkIxbzv01fzn9xbm+tio04
+ xabB6LmUE/Gc7flSfjkuhuTZ0XtHVcrlCmw/KgPaIFkQNweAib1A=
 X-Developer-Key: i=louis.chauvet@bootlin.com; a=openpgp;
  fpr=8B7104AE9A272D6693F527F2EC1883F55E0B40A5
 X-Last-TLS-Session-Version: TLSv1.3
@@ -105,13 +105,13 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[bootlin.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	R_DKIM_ALLOW(-0.20)[bootlin.com:s=dkim];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	FROM_HAS_DN(0.00)[];
-	TAGGED_FROM(0.00)[bounces-93771-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-93773-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FREEMAIL_TO(0.00)[gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,lwn.net,linuxfoundation.org,google.com];
@@ -131,51 +131,146 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	DKIM_TRACE(0.00)[bootlin.com:+];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,lkml];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,bootlin.com:dkim,bootlin.com:email,bootlin.com:mid,bootlin.com:from_mime,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,lists.freedesktop.org:email,bootlin.com:dkim,bootlin.com:email,bootlin.com:mid,bootlin.com:from_mime,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: E61646D0DD3
+X-Rspamd-Queue-Id: B7E2C6D0DEA
 
-Currently, the default rotation is always DRM_MODE_ROTATE_0 for all planes.
-Some planes may have a rotation property, and the property may specify a
-different default value and supported values.
-
-This is not an issue for "fixed" configurations, but with the introduction
-of VKMS configuration, some plane may only support 90° and 180°
-rotations, so the reset state of the plane was wrong (forced to 0°).
+VKMS recently introduced a ConfigFS API to configure new devices.
+Add proper ABI documentation.
 
 Signed-off-by: Louis Chauvet <louis.chauvet@bootlin.com>
 ---
- drivers/gpu/drm/drm_atomic_state_helper.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ Documentation/ABI/testing/configfs-vkms | 118 ++++++++++++++++++++++++++++++++
+ 1 file changed, 118 insertions(+)
 
-diff --git a/drivers/gpu/drm/drm_atomic_state_helper.c b/drivers/gpu/drm/drm_atomic_state_helper.c
-index d90d1d7c9cf9..7fe612c4da83 100644
---- a/drivers/gpu/drm/drm_atomic_state_helper.c
-+++ b/drivers/gpu/drm/drm_atomic_state_helper.c
-@@ -32,6 +32,7 @@
- #include <drm/drm_crtc.h>
- #include <drm/drm_device.h>
- #include <drm/drm_framebuffer.h>
-+#include <drm/drm_mode_object.h>
- #include <drm/drm_plane.h>
- #include <drm/drm_print.h>
- #include <drm/drm_vblank.h>
-@@ -276,6 +277,11 @@ void __drm_atomic_helper_plane_state_init(struct drm_plane_state *plane_state,
- 
- 	plane_state->plane = plane;
- 	plane_state->rotation = DRM_MODE_ROTATE_0;
-+	if (plane->rotation_property &&
-+	    !drm_object_property_get_default_value(&plane->base,
-+						   plane->rotation_property,
-+						   &val))
-+		plane_state->rotation = val;
- 
- 	plane_state->alpha = DRM_BLEND_ALPHA_OPAQUE;
- 	plane_state->pixel_blend_mode = DRM_MODE_BLEND_PREMULTI;
+diff --git a/Documentation/ABI/testing/configfs-vkms b/Documentation/ABI/testing/configfs-vkms
+new file mode 100644
+index 000000000000..a1a3e186e50a
+--- /dev/null
++++ b/Documentation/ABI/testing/configfs-vkms
+@@ -0,0 +1,118 @@
++What:		/sys/kernel/config/vkms/
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++        This group contains sub-groups corresponding to created
++	VKMS devices.
++
++What:		/sys/kernel/config/vkms/<device>
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	This group contains sub-groups corresponding to the VKMS
++	device <device>.
++
++What:		/sys/kernel/config/vkms/<device>/connectors
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	This group contains sub-groups corresponding to the
++	connectors of the VKMS device <device>.
++
++What:		/sys/kernel/config/vkms/<device>/connectors/<connector>
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	This group contains attributes corresponding to the
++	connector <connector> of the VKMS device <device>.
++
++What:		/sys/kernel/config/vkms/<device>/connectors/<connector>/status
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	Connection status of the connector. Possible values:
++	1 - connected, 2 - disconnected, 3 - unknown.
++
++What:		/sys/kernel/config/vkms/<device>/connectors/<connector>/possible_encoders
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	This group contains symbolic links to possible encoders
++	for this connector.
++
++What:		/sys/kernel/config/vkms/<device>/crtcs
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	This group contains sub-groups corresponding to the
++	CRTCs of the VKMS device <device>.
++
++What:		/sys/kernel/config/vkms/<device>/crtcs/<crtc>
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	This group contains attributes corresponding to the
++	CRTC <crtc> of the VKMS device <device>.
++
++What:		/sys/kernel/config/vkms/<device>/crtcs/<crtc>/writeback
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	Enable or disable writeback connector support for this
++	CRTC. Value: 1 - enabled, 0 - disabled.
++
++What:		/sys/kernel/config/vkms/<device>/encoders
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	This group contains sub-groups corresponding to the
++	encoders of the VKMS device <device>.
++
++What:		/sys/kernel/config/vkms/<device>/encoders/<encoder>
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	This group contains attributes corresponding to the
++	encoder <encoder> of the VKMS device <device>.
++
++What:		/sys/kernel/config/vkms/<device>/encoders/<encoder>/possible_crtcs
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	This group contains symbolic links to possible CRTCs
++	for this encoder.
++
++What:		/sys/kernel/config/vkms/<device>/planes
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	This group contains sub-groups corresponding to the
++	planes of the VKMS device <device>.
++
++What:		/sys/kernel/config/vkms/<device>/planes/<plane>
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	This group contains attributes corresponding to the
++	plane <plane> of the VKMS device <device>.
++
++What:		/sys/kernel/config/vkms/<device>/planes/<plane>/type
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	Plane type. Possible values: 0 - overlay, 1 - primary,
++	2 - cursor.
++
++What:		/sys/kernel/config/vkms/<device>/planes/<plane>/possible_crtcs
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	This group contains symbolic links to possible CRTCs
++	for this plane.
++
++What:		/sys/kernel/config/vkms/<device>/enabled
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	Enable or disable the VKMS device. Value: 1 - enabled,
++	0 - disabled.
 
 -- 
 2.54.0
