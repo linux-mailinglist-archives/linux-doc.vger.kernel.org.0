@@ -1,186 +1,141 @@
-Return-Path: <linux-doc+bounces-93838-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93839-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id fgOKJ0VKQGoKegkAu9opvQ
-	(envelope-from <linux-doc+bounces-93838-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 28 Jun 2026 00:10:13 +0200
+	id 4qbPDPRgQGrMfAkAu9opvQ
+	(envelope-from <linux-doc+bounces-93839-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 28 Jun 2026 01:47:00 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03C116D2BD7
-	for <lists+linux-doc@lfdr.de>; Sun, 28 Jun 2026 00:10:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 327EC6D2D4A
+	for <lists+linux-doc@lfdr.de>; Sun, 28 Jun 2026 01:46:59 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=KwNrxQgJ;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93838-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93838-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	dkim=pass header.d=lunn.ch header.s=20171124 header.b=Xb2AsLYA;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93839-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93839-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=lunn.ch;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id A54E33015464
-	for <lists+linux-doc@lfdr.de>; Sat, 27 Jun 2026 22:10:09 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id BBB1C3014280
+	for <lists+linux-doc@lfdr.de>; Sat, 27 Jun 2026 23:46:57 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7CDFF36DA10;
-	Sat, 27 Jun 2026 22:10:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 31C932EFDA4;
+	Sat, 27 Jun 2026 23:46:57 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 662311D5ADE;
-	Sat, 27 Jun 2026 22:10:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0859578F26;
+	Sat, 27 Jun 2026 23:46:54 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782598207; cv=none; b=d6u7xfK598nHgtl8M0mSBZGM/LxwiZBLUaIv6+cIxtR9mc4ZG3N6YYjjMvKYqUeGuT8ggPLtLzIp72FdhfXTLg0BBGSOOpWd+nLtontzo/2Wj1hAde0ZmktbPOY8hSkbt8WndJjkyvuoLcxusgFZwcjopjPsAZVSYOD/wmMajNU=
+	t=1782604017; cv=none; b=FIBY2R6pal38dB0FSC0u3Ec1K+0/c4mDazQh7GM5D48xvDVb3/DWe2/Wt1030vNAj8tM4qlZLOcqlruZ6bvuQhSpq+y78BIAf6JJ5S2yc9gcr3cy4MgyXygxbb0L6P7yomydlM6c8iBRd9Yf0rG6omzwNAUF3TKhrBuoIwbA39c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782598207; c=relaxed/simple;
-	bh=d9G+ljKEjOva0maSSJ1JxkRDkBP2lZWCTnWq49qSDUY=;
+	s=arc-20240116; t=1782604017; c=relaxed/simple;
+	bh=0BgutQrxdo0WBm7uLd0I0f5fTxu1d/Bd/eheu73268U=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=hM+tHbctEhiwyMfkcrMuXm5tKe5ANPrqGcDW+SE8L/Vn0GHwjA5sSkVpS3XlWmeSa2+uU+jPD77nMNY1ZlwZx/zFQ+ef4honbRtPXbw3gDNVARbBMZS3G7Zo8Em6WkkzESX0p6KhFEJIqIom6RjRUd3HjUdt3LYzxkD5LsncrbI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KwNrxQgJ; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 93C491F000E9;
-	Sat, 27 Jun 2026 22:10:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782598206;
-	bh=hXk/3wj9lPuJCQvYpjGC/6+kjVjcs5SuF2pwhCfblgk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=KwNrxQgJVN8O/LbbNanheVHNF4seUkCijI6JBEHt+/pVyaoyi8GHna1M8j9Q8rFwy
-	 vjYXsheeYMBZZBM4h46nutz/29QBslwVDHlDG8v14K9zWPf8u3Q0TsPvzEpqNPULIy
-	 Ka+qEUM7TFWkIGMxpp+GaHihtgYKrWsLDXEZx7dizRfq9smMXkoYJR6bCLe6nSuNeo
-	 +kUpVcIbVWV/WYRzdY/1rCdNllhLfi+cVc+AVILwSEZ7UXYXPTaq9jk7fhok7zkKiY
-	 12B+J7VadfIPGgB4GEVSueOD6eHRiMYmLCCaiWUf6BRtOeLtSgLeXhN11rAr22sK93
-	 rFkVT4B/TcJCg==
-Date: Sat, 27 Jun 2026 15:10:04 -0700
-From: Drew Fustini <fustini@kernel.org>
-To: yunhui cui <cuiyunhui@bytedance.com>
-Cc: Adrien Ricciardi <aricciardi@baylibre.com>,
-	Alexandre Ghiti <alex@ghiti.fr>,
-	Atish Kumar Patra <atishp@rivosinc.com>,
-	Atish Patra <atish.patra@linux.dev>,
-	Babu Moger <babu.moger@amd.com>, Ben Horgan <ben.horgan@arm.com>,
-	Borislav Petkov <bp@alien8.de>, Chen Pei <cp0613@linux.alibaba.com>,
-	Conor Dooley <conor.dooley@microchip.com>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	Dave Martin <Dave.Martin@arm.com>,
-	Fenghua Yu <fenghua.yu@intel.com>,
-	Gong Shuai <gong.shuai@sanechips.com.cn>,
-	Gong Shuai <gsh517@gmail.com>, guo.wenjia23@zte.com.cn,
-	James Morse <james.morse@arm.com>,
-	Kornel =?utf-8?Q?Dul=C4=99ba?= <mindal@semihalf.com>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, liu.qingtao2@zte.com.cn,
-	Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>, Paul Walmsley <pjw@kernel.org>,
-	Peter Newman <peternewman@google.com>,
-	Radim =?utf-8?B?S3LEjW3DocWZ?= <rkrcmar@ventanamicro.com>,
-	Reinette Chatre <reinette.chatre@intel.com>,
-	Rob Herring <robh@kernel.org>,
-	Samuel Holland <samuel.holland@sifive.com>,
-	Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-	Tony Luck <tony.luck@intel.com>,
-	Vasudevan Srinivasan <vasu@rivosinc.com>,
-	Ved Shanbhogue <ved@rivosinc.com>, Weiwei Li <liwei1518@gmail.com>,
-	linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org,
-	x86@kernel.org, devicetree@vger.kernel.org,
-	linux-rt-devel@lists.linux.dev, linux-doc@vger.kernel.org
-Subject: Re: [External] [PATCH v2 4/8] riscv_cbqri: Add capacity controller
- probe and allocation device ops
-Message-ID: <akBKPFPi5213WgYX@x1>
-References: <20260624-dfustini-atl-sc-cbqri-dt-v2-0-2f8049fd902b@kernel.org>
- <20260624-dfustini-atl-sc-cbqri-dt-v2-4-2f8049fd902b@kernel.org>
- <CAEEQ3w=ZVtHPdLfN0tTzG8AACu+rjhEFWY5pCg+uxvmr7ofqfA@mail.gmail.com>
+	 Content-Type:Content-Disposition:In-Reply-To; b=MfZ7S+t1+cBt0ocnf+rC+T8nu7m6QxDQRr0SzPrszX8lvShLf3/UaJwQRooIwx+dmvgMnGvKr51kwOwr+rFG6sTPHOrSJZ09+HoU+3fscgdUmG5s/j8hc8OivoDyLoCx5JqOKOJSiKDCWLBCXRZqTSyyu7QJ16z9V9ygVkLYYZk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=Xb2AsLYA; arc=none smtp.client-ip=156.67.10.101
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+	bh=45H8N/PDlf+7m9SmOhmiRitaV8mLGwzcFX/BKLhJgVI=; b=Xb2AsLYAcvqdQxOnoSkgF5aawA
+	hUAHREyhw7MNUGU5iRUCXjce1cDO9zgymqLkBpSLS+Y1my5kCZqd5M57AB8c9RMnSIykmFV8nhe2e
+	7gWMFcae4nkeNbZvoPWT9fUdXJPadwM0PJScJFG3p8TiA+FQFNc0lJVmQHX6KbySUQtA=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+	(envelope-from <andrew@lunn.ch>)
+	id 1wdcjF-009XGt-89; Sun, 28 Jun 2026 01:46:29 +0200
+Date: Sun, 28 Jun 2026 01:46:29 +0200
+From: Andrew Lunn <andrew@lunn.ch>
+To: Jakub Kicinski <kuba@kernel.org>
+Cc: Maxime Chevallier <maxime.chevallier@bootlin.com>, davem@davemloft.net,
+	Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Russell King <linux@armlinux.org.uk>,
+	Heiner Kallweit <hkallweit1@gmail.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Oleksij Rempel <o.rempel@pengutronix.de>,
+	Vladimir Oltean <vladimir.oltean@nxp.com>,
+	Florian Fainelli <f.fainelli@gmail.com>,
+	thomas.petazzoni@bootlin.com, netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH net-next] Documentation: networking: Add a test plan for
+ ethtool pause validation
+Message-ID: <3b8abe17-5da7-4a7e-a42c-eb39a631843e@lunn.ch>
+References: <20260522175109.198059-1-maxime.chevallier@bootlin.com>
+ <20260526172447.10ca4b9e@kernel.org>
+ <5cb8e2b4-8eb6-4446-9b90-1cd4c7964cd9@lunn.ch>
+ <38bafe7e-d419-46f7-8fa7-87e9183e578c@bootlin.com>
+ <58f37d6e-973b-4242-be82-0561ccdb1a6f@lunn.ch>
+ <65d26fd2-fbb3-49cd-a9ac-07863d9a8909@bootlin.com>
+ <5b7dbdbc-93fd-4664-abad-0f47855fab55@lunn.ch>
+ <20260626173352.7dc8f106@kernel.org>
+ <12b66ea3-42df-4ecb-8eb7-44471407b83f@bootlin.com>
+ <20260627143028.5afed23a@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAEEQ3w=ZVtHPdLfN0tTzG8AACu+rjhEFWY5pCg+uxvmr7ofqfA@mail.gmail.com>
+In-Reply-To: <20260627143028.5afed23a@kernel.org>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.16 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64];
+	DMARC_POLICY_ALLOW(-0.50)[lunn.ch,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[lunn.ch:s=20171124];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[40];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:cuiyunhui@bytedance.com,m:aricciardi@baylibre.com,m:alex@ghiti.fr,m:atishp@rivosinc.com,m:atish.patra@linux.dev,m:babu.moger@amd.com,m:ben.horgan@arm.com,m:bp@alien8.de,m:cp0613@linux.alibaba.com,m:conor.dooley@microchip.com,m:conor+dt@kernel.org,m:dave.hansen@linux.intel.com,m:Dave.Martin@arm.com,m:fenghua.yu@intel.com,m:gong.shuai@sanechips.com.cn,m:gsh517@gmail.com,m:guo.wenjia23@zte.com.cn,m:james.morse@arm.com,m:mindal@semihalf.com,m:krzk+dt@kernel.org,m:liu.qingtao2@zte.com.cn,m:zhiwei_liu@linux.alibaba.com,m:palmer@dabbelt.com,m:pjw@kernel.org,m:peternewman@google.com,m:rkrcmar@ventanamicro.com,m:reinette.chatre@intel.com,m:robh@kernel.org,m:samuel.holland@sifive.com,m:bigeasy@linutronix.de,m:tony.luck@intel.com,m:vasu@rivosinc.com,m:ved@rivosinc.com,m:liwei1518@gmail.com,m:linux-kernel@vger.kernel.org,m:linux-riscv@lists.infradead.org,m:x86@kernel.org,m:devicetree@vger.kernel.org,m:linux-rt-devel@lists.linux.dev,m:linux-doc@vger.kernel.org,m:conor@k
- ernel.org,m:krzk@kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-93838-lists,linux-doc=lfdr.de];
-	FORGED_SENDER(0.00)[fustini@kernel.org,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-93839-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER(0.00)[andrew@lunn.ch,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	FORGED_RECIPIENTS(0.00)[m:kuba@kernel.org,m:maxime.chevallier@bootlin.com,m:davem@davemloft.net,m:edumazet@google.com,m:pabeni@redhat.com,m:horms@kernel.org,m:linux@armlinux.org.uk,m:hkallweit1@gmail.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:o.rempel@pengutronix.de,m:vladimir.oltean@nxp.com,m:f.fainelli@gmail.com,m:thomas.petazzoni@bootlin.com,m:netdev@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:ffainelli@gmail.com,s:lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FREEMAIL_CC(0.00)[bootlin.com,davemloft.net,google.com,redhat.com,kernel.org,armlinux.org.uk,gmail.com,lwn.net,linuxfoundation.org,pengutronix.de,nxp.com,vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[fustini@kernel.org,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[baylibre.com,ghiti.fr,rivosinc.com,linux.dev,amd.com,arm.com,alien8.de,linux.alibaba.com,microchip.com,kernel.org,linux.intel.com,intel.com,sanechips.com.cn,gmail.com,zte.com.cn,semihalf.com,dabbelt.com,google.com,ventanamicro.com,sifive.com,linutronix.de,vger.kernel.org,lists.infradead.org,lists.linux.dev];
+	FROM_NEQ_ENVFROM(0.00)[andrew@lunn.ch,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[lunn.ch:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
 	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,baylibre.com:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 03C116D2BD7
+X-Rspamd-Queue-Id: 327EC6D2D4A
 
-On Sat, Jun 27, 2026 at 05:31:03PM +0800, yunhui cui wrote:
-> Hi Drew,
+On Sat, Jun 27, 2026 at 02:30:28PM -0700, Jakub Kicinski wrote:
+> On Sat, 27 Jun 2026 07:34:31 +0200 Maxime Chevallier wrote:
+> > > This is very far from what existing python tests do in netdev.  
+> > 
+> > We can probably drop the class, as it is with this discussion, it's merely a way
+> > to regroup doc common to similar tests. The rest really is the usual set of
+> > ksft funcs you can feed to the run function, with a set of ksft_ethtool_*
+> > annotators for generic checks.
 > 
-> On Thu, Jun 25, 2026 at 9:41 AM Drew Fustini <fustini@kernel.org> wrote:
-> >
-> > Add support for the RISC-V CBQRI capacity controller. A platform driver
-> > passes a cbqri_controller_info descriptor together with the cache level
-> > to riscv_cbqri_register_cc_dt(), which probes the controller and adds it
-> > to the controller list.
-> >
-> > Assisted-by: Claude:claude-opus-4-7
-> > Co-developed-by: Adrien Ricciardi <aricciardi@baylibre.com>
-> > Signed-off-by: Adrien Ricciardi <aricciardi@baylibre.com>
-> > Signed-off-by: Drew Fustini <fustini@kernel.org>
-[..]
-> > diff --git a/drivers/resctrl/cbqri_devices.c b/drivers/resctrl/cbqri_devices.c
-> > new file mode 100644
-> > index 0000000000000000000000000000000000000000..8ad9df404f65d5d82722cf8b78f02936c489ca6d
-> > --- /dev/null
-> > +++ b/drivers/resctrl/cbqri_devices.c
-[..]
-> > +
-> > +/* Set capacity block mask (cc_block_mask) */
-> > +static void cbqri_set_cbm(struct cbqri_controller *ctrl, u64 cbm)
-> > +{
-> > +       iowrite64(cbm, ctrl->base + CBQRI_CC_BLOCK_MASK_OFF);
-> 
-> The CBQRI spec allows naturally aligned 4-byte accesses and only guarantees
-> atomicity for 4-byte accesses; 8-byte atomicity is unspecified.
-> 
-> Would 32-bit split accesses be preferable here instead of relying on
-> ioread64/iowrite64? This may also make the driver less dependent on native
-> 64-bit MMIO support.
+> The common way of checking prereqs in the tests is to call a function
+> called require_xyz() which then raises a skip. At a quick glance - the
+> rss_api and xdp_metadata are good tests to get a sense of the usual format.
 
-I suppose there could be systems that are RV64 but do 4-byte access for
-the CBQRI registers. You are right the spec only guarantees atomicity
-for naturally aligned 4-byte accesses and leaves 8-byte atomicity
-unspecified.
+The counter example is the ksft_disruptive() decorator.
 
-I will switch the controller register accesses to 32-bit reads and
-writes. The driver rejects ncblks > 32, so cc_block_mask only uses its
-low 32 bits. For cc_alloc_ctl, the writable fields all sit in the low
-word while the status and busy bits are read-only in the high word. A
-read can reconstruct the value from two 32-bit reads and a write only
-needs the low word. 
+Pythons own unittest framework makes use of decorators to skip
+tests. Its the Pythonic way.
 
-Thanks,
-Drew
+	Andrew
 
