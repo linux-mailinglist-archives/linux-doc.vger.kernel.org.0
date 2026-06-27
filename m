@@ -1,176 +1,566 @@
-Return-Path: <linux-doc+bounces-93820-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93821-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 7/gZDeyZP2q/UwkAu9opvQ
-	(envelope-from <linux-doc+bounces-93820-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 27 Jun 2026 11:37:48 +0200
+	id FOG/CyaaP2rIUwkAu9opvQ
+	(envelope-from <linux-doc+bounces-93821-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 27 Jun 2026 11:38:46 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id A23686D1A79
-	for <lists+linux-doc@lfdr.de>; Sat, 27 Jun 2026 11:37:47 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8FEC16D1A91
+	for <lists+linux-doc@lfdr.de>; Sat, 27 Jun 2026 11:38:45 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=qvbKsJjQ;
-	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=v7B3S3EF;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93820-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-93820-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=reject) header.from=mailbox.org;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=bytedance.com header.s=google header.b=FmBJVGCA;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93821-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93821-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=bytedance.com;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id E5BF430094E6
-	for <lists+linux-doc@lfdr.de>; Sat, 27 Jun 2026 09:34:10 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 96EF23014682
+	for <lists+linux-doc@lfdr.de>; Sat, 27 Jun 2026 09:38:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B80123537F9;
-	Sat, 27 Jun 2026 09:34:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2ED043955DB;
+	Sat, 27 Jun 2026 09:38:44 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ot1-f54.google.com (mail-ot1-f54.google.com [209.85.210.54])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D9999255F28;
-	Sat, 27 Jun 2026 09:34:07 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782552849; cv=none; b=D5ejMNSIPeiHDE6VGnZE6BCQ+ISaRGftSYf1+6mL5iUsUfoC4vYr/dcIkddvjU0U5etPTW2tazSS+wln5mpjd/Nw+VLyYn6JHuGCIh7pVEBQ6sZVroRSQe6KmCVc3HvXvhKqI8MRS8AcRUAQY57mmvPAxE9Xw7N7ufVuYTjGH/E=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782552849; c=relaxed/simple;
-	bh=o8G2XWf3wTqsL/ZkPnaxECa0u8BbID3YAFTKgqNE1v4=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=HRtG2BlR8N5MfzZBaXNCPXVBB/wuDVCZrv2QFC7RTrGuzWz7ebKWBvDEcN5/akAk6bT69ldRyJ5Gtif8de7+64YKR0CqN4lOYh2RhMI9JhkPlD+sUpjxeeDRIhtXSUDo2W/3AqxM4kiPjgEeDVHNK1+eDXGB0r1lC5XJE6ImQxg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org; spf=pass smtp.mailfrom=mailbox.org; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=qvbKsJjQ; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=v7B3S3EF; arc=none smtp.client-ip=80.241.56.151
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [IPv6:2001:67c:2050:b231:465::202])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gnS6P5xX2z9tkC;
-	Sat, 27 Jun 2026 11:34:05 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1782552845;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=YlWKjk2m93Y20GRwWu83QevunbPgZPbwOz1dqg0rweU=;
-	b=qvbKsJjQ/Q1b5F4v5ax1na89TuxGq9hkvDlGOOP55H9yQN1XBSSIICFzEVjRC0HuVQdl+I
-	vvLztHxXcJd6l1NUUe5xatLUN+fTy3HQqo7F+kMWTeLRsmtkwcGFKj5PAhYO1csCr7zKsB
-	pbN+yysQDmg8Zz5qLRptP7V+OeTK9PWehVSKY6/gxqw9TOeZuG//Lx6DGTM7plmybynXE+
-	yh3G7L+umtlmR6Ch4D3Dm+VuJ1aQSm5Fle2mdev6fHQ1vV4MGyzD+X+E8+So1NSrPbrUpu
-	hERCmKlHJSCUlUbpWqr/vjWcvOpm2cPpFjvXF8ryU2yRhi9rg5VnSjReu//x0Q==
-From: Manuel Ebner <manuelebner@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1782552844;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=YlWKjk2m93Y20GRwWu83QevunbPgZPbwOz1dqg0rweU=;
-	b=v7B3S3EFx9HgRlGsOBCEhXFOJoUxvfQHyiZC0x+yw+/SLqv+0AGZRoS5GR8lUda0BWkcQi
-	of4zz/zY+WzzC/ybphi6qUfv6Yg6n0kc8edUKzbikU0SX2cV0lFQwnvcr//7bkTKo+ywDu
-	q2V0gBlEqPOmOf1GUPSH7wf0yTNfFycuf+Xg+AymztVWAMkoigPPfTN3tQ6nJ+r/naZnux
-	6SzN9oLUIaQwoXLaeSk/epwrzaKF+RlPuw8IoXma5/LxIYZtD71yo72/qs1OX6lYAiAlwM
-	9ovXyOq6FlKZyfGwjhWqSK2QxGgOlabYsnr6DD1onvg/Zl9uUp3P7KzTK99N9w==
-To: Jason Gunthorpe <jgg@ziepe.ca>,
-	Leon Romanovsky <leon@kernel.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	David Hildenbrand <david@kernel.org>,
-	Lorenzo Stoakes <ljs@kernel.org>,
-	"Liam R . Howlett" <Liam.Howlett@oracle.com>,
-	Vlastimil Babka <vbabka@kernel.org>,
-	Mike Rapoport <rppt@kernel.org>,
-	Suren Baghdasaryan <surenb@google.com>,
-	Michal Hocko <mhocko@suse.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Shakeel Butt <shakeel.butt@linux.dev>,
-	linux-mm@kvack.org (open list:HMM - Heterogeneous Memory Management),
-	linux-doc@vger.kernel.org (open list:DOCUMENTATION),
-	linux-kernel@vger.kernel.org (open list)
-Cc: Manuel Ebner <manuelebner@mailbox.org>
-Subject: [PATCH] docs/mm: Fix brackets
-Date: Sat, 27 Jun 2026 11:32:59 +0200
-Message-ID: <20260627093258.31265-2-manuelebner@mailbox.org>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E1299361DA8
+	for <linux-doc@vger.kernel.org>; Sat, 27 Jun 2026 09:38:40 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1782553124; cv=pass; b=g+tgXi6Sb2wZ1Zi/P7WjOz4zKGNBXjGIljr+rKp6/2EHpO5nvUrdcktERsuShlxRIzjq5Eb1c9TVSd6ZV8ax06ZvEFAxyAd4KGEKxOQwlRaWdMQk0/0RlI2Ze21P3/AMPGBgk54ddTiWmGVuekUrlj+XQb0iIdjVfhOxQRlo4gI=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1782553124; c=relaxed/simple;
+	bh=mNpdzX0fXmVGddnasfqr8M4cQVizblAPeNv9Q1Q8i7M=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=fmGJKyavk8V/4UZ5JwTrxVR2RSaC5opC42waeReetTsogI/fUMdBk+bzMJ7lVlvTWAY91JDw+lOKqNkVQYtDcqgKd7bb4F3gz8o7kqexOynkkThIFBqL22M+PTdiZAqfirxrcOFvmWCGyskz6FHWO5/dBsWxoqy6uthWlHIS3DY=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=bytedance.com; spf=pass smtp.mailfrom=bytedance.com; dkim=pass (2048-bit key) header.d=bytedance.com header.i=@bytedance.com header.b=FmBJVGCA; arc=pass smtp.client-ip=209.85.210.54
+Received: by mail-ot1-f54.google.com with SMTP id 46e09a7af769-7e94d272a86so1286080a34.2
+        for <linux-doc@vger.kernel.org>; Sat, 27 Jun 2026 02:38:40 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782553120; cv=none;
+        d=google.com; s=arc-20260327;
+        b=Gfe5wxvjyHtpRNUFpFgzhNR/tfjlXgLcvjMz+pTYkNP9ZoU9pIJ+QoaaTUtbe5hTOV
+         jj5I8PSnQiZoBUTEHn8cenUSGMTZTob3o3eq1LsieSPRJ3Pq84pvAraf16ZtUWjU8DL8
+         0qX8PmlfMIYpApW1cEYwdohMMZqtGz9pPeC7irZ7cq1MSHQi4yX+ZuMpI7GJ/Hx5dC/t
+         EwfSsJbCOTbfKioh8ZAB2Nq3v+u9kuKthN5aO647UhgmXUQZ5NVJ6cjmPdi5RK/dg2qd
+         MmHx2Em9X/NEfqXnk6mzcWI97HfZ8LidbNNkTeMDWA+GDRKeIJoe/bMA+njCoSzyaNc1
+         1stA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=SvcelzH1KVTORxzp7ubHIQHGLkNMGQJGCAmY4qtxwro=;
+        fh=QyfdKdzxooXWNdyroszVzE7T9sb4YMDm51Blo1Axnmc=;
+        b=BL7R/UoTfr2beMzTg5t+nJdzTo7FImBxeWwE6Ssqc6epFFfcWl1r4e0wZ7/4QjL6eQ
+         cS4a2ADyHlXuvhbrOY4eKeIxf+qx708SS1RlrGgnPYbi3lmjq65guOpj1otG9E+mMQ/D
+         AGscVbJtShbOuAmZDfQDT896vmRJ+YRDSRmd7PUHlne0xKRJ1ziDvSc8OtsIUIyhuxBo
+         iI7zIqlxFrkDcp142nDJ87Ig6VhfPkTMWhBdvRcqSz3sXr0t9zfFOVaVDfoq0RgWcltu
+         LAOo8I7Y17P5Y0kw4RO8T6C4eyFlC3Nh6iui7IbHsYQ1g1aOP6rBDTvyvB6G5RzPdjc7
+         VF9A==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance.com; s=google; t=1782553120; x=1783157920; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=SvcelzH1KVTORxzp7ubHIQHGLkNMGQJGCAmY4qtxwro=;
+        b=FmBJVGCAyI6dsi6mLEEfuKkvJ2g4P/kT1j0Xwx03m+vw74o00h86NaspiyzTSqmu39
+         Zl1yKEil9e7W2nTKkxcXYPy4dF5Z7PniS6M6sGJRYkekmJd+zCiDfONUYgAOKkMWp3oB
+         962jB3T9g6rVJMqvX6SGfHkGlqSZbDa29G7oYX3o7oWjNMp45kJ+Wo4cXqrl1NGlWREe
+         g9IaiJijH17DyCmwnEfKP5A2gg2aVQoSlDIdlHc9nt7DVrlsVCzes15kmH4pXtN5GHMt
+         1T3x2ERDvafa1w/kif6jwleljGjUH5hjnKTiQvsVS7H1ebpSkpuTJHctzPqywzH1F9ts
+         u9TA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1782553120; x=1783157920;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=SvcelzH1KVTORxzp7ubHIQHGLkNMGQJGCAmY4qtxwro=;
+        b=QII/ueeQpuE/pARptrrPZ7G/FAdS1v5FB7pyEOaCVwsF67FHa43VZwEdPogoch9OEF
+         rrkEWkXuQPJ4m8ie8dF5GlOUIqErMaTO4dRHJes0MIw6Ty9Yn3kyoXa8fB9Iz0TKKtVH
+         b4rxBwN9aCh/1CNPGeXGwmPoPdyosGjZjaX8ymjHkYWg9HQsSfx5Qxv+QJ2TOuR3vcM+
+         sbhfirJ8jnTrCV+ZPAl4a3Rru3LjkcCWe0dYSKTUFxMHWcZ1Cu+0ERnTmYDmBoe+Bm8Z
+         WyjdM2DH9sAXDKG9MFkzJOd1ewoDx2GVuMTt6nN4EewHrFOdeevDYsYI7WDHN/Svem0m
+         t2Og==
+X-Forwarded-Encrypted: i=1; AFNElJ8YuPUxxtzU7XG30KZkL9GnndzX828OIdJt5jBFNMHbAccup3KlEOYeAUAeG32C7EUl+u1bX482Iao=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyTVGXSvOFxVYToO6V1e394rSd00ozbnA6z2l1yBV5ZxAEeMD20
+	Ig0tiyu7f6dkkjAq1JIrz+BAViZeIzKeId9Df39FGxlEeAY3rc9p4+MBoizeAipJjGivNVFsI4R
+	z/kHwyc7SyL0ll2d5GcZZHh66eNY3lzG3gb2ajLvk5A==
+X-Gm-Gg: AfdE7cmeI2H//ndogtreS3qRU+AkFE1gA0zHKC4mmm81rYSVf7WYyUlzA2JayqZl2R2
+	KO90ya8t2BDvqTiI1vXvv2aK0DhswPdAmS4KdALxvA1HqFWuBLoY/+QQJ5j21Ip0m/q4huhcZR+
+	jl80uFwKyIgow0J0e5tM34d0QOT4dV7YSVOK6/TzlC2m1d+faDsGLZn/KUT6qm9/pDR5zdB2srx
+	3SQHcC+kstYEo+Nb6QvTOUFroO3ZFJRrniEqV6QIlz4qXWZ1cpe5pzTIKGJQklYs/ykuA0AAGA=
+X-Received: by 2002:a05:6830:4125:b0:7e9:bf64:b70b with SMTP id
+ 46e09a7af769-7e9bf64bebemr1247190a34.1.1782553119722; Sat, 27 Jun 2026
+ 02:38:39 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: g9h6im1gwqhbb14o9nrdfej744p5ujkd
-X-MBO-RS-ID: 2c037404ca6d556e29a
+References: <20260624-dfustini-atl-sc-cbqri-dt-v2-0-2f8049fd902b@kernel.org> <20260624-dfustini-atl-sc-cbqri-dt-v2-3-2f8049fd902b@kernel.org>
+In-Reply-To: <20260624-dfustini-atl-sc-cbqri-dt-v2-3-2f8049fd902b@kernel.org>
+From: yunhui cui <cuiyunhui@bytedance.com>
+Date: Sat, 27 Jun 2026 17:38:28 +0800
+X-Gm-Features: AVVi8Ce-La-VrEpXdV-lbpn614DD5E90iVNbxh-JJDrD0KbknuHCDv3JXedCaeA
+Message-ID: <CAEEQ3wkhiE=TdFTzEn39GVWSgGnaN0raBpmd=6sYaoh304LNBg@mail.gmail.com>
+Subject: Re: [External] [PATCH v2 3/8] riscv: Add support for srmcfg CSR from
+ Ssqosid extension
+To: Drew Fustini <fustini@kernel.org>
+Cc: Adrien Ricciardi <aricciardi@baylibre.com>, Alexandre Ghiti <alex@ghiti.fr>, 
+	Atish Kumar Patra <atishp@rivosinc.com>, Atish Patra <atish.patra@linux.dev>, 
+	Babu Moger <babu.moger@amd.com>, Ben Horgan <ben.horgan@arm.com>, Borislav Petkov <bp@alien8.de>, 
+	Chen Pei <cp0613@linux.alibaba.com>, Conor Dooley <conor.dooley@microchip.com>, 
+	Conor Dooley <conor+dt@kernel.org>, Dave Hansen <dave.hansen@linux.intel.com>, 
+	Dave Martin <Dave.Martin@arm.com>, Fenghua Yu <fenghua.yu@intel.com>, 
+	Gong Shuai <gong.shuai@sanechips.com.cn>, Gong Shuai <gsh517@gmail.com>, guo.wenjia23@zte.com.cn, 
+	James Morse <james.morse@arm.com>, =?UTF-8?Q?Kornel_Dul=C4=99ba?= <mindal@semihalf.com>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, liu.qingtao2@zte.com.cn, 
+	Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+	Paul Walmsley <pjw@kernel.org>, Peter Newman <peternewman@google.com>, 
+	=?UTF-8?B?UmFkaW0gS3LEjW3DocWZ?= <rkrcmar@ventanamicro.com>, 
+	Reinette Chatre <reinette.chatre@intel.com>, Rob Herring <robh@kernel.org>, 
+	Samuel Holland <samuel.holland@sifive.com>, 
+	Sebastian Andrzej Siewior <bigeasy@linutronix.de>, Tony Luck <tony.luck@intel.com>, 
+	Vasudevan Srinivasan <vasu@rivosinc.com>, Ved Shanbhogue <ved@rivosinc.com>, Weiwei Li <liwei1518@gmail.com>, 
+	linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org, x86@kernel.org, 
+	devicetree@vger.kernel.org, linux-rt-devel@lists.linux.dev, 
+	linux-doc@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-0.66 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[mailbox.org,reject];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[mailbox.org:s=mail20150812];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[bytedance.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[bytedance.com:s=google];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[17];
+	FORGED_RECIPIENTS(0.00)[m:fustini@kernel.org,m:aricciardi@baylibre.com,m:alex@ghiti.fr,m:atishp@rivosinc.com,m:atish.patra@linux.dev,m:babu.moger@amd.com,m:ben.horgan@arm.com,m:bp@alien8.de,m:cp0613@linux.alibaba.com,m:conor.dooley@microchip.com,m:conor+dt@kernel.org,m:dave.hansen@linux.intel.com,m:Dave.Martin@arm.com,m:fenghua.yu@intel.com,m:gong.shuai@sanechips.com.cn,m:gsh517@gmail.com,m:guo.wenjia23@zte.com.cn,m:james.morse@arm.com,m:mindal@semihalf.com,m:krzk+dt@kernel.org,m:liu.qingtao2@zte.com.cn,m:zhiwei_liu@linux.alibaba.com,m:palmer@dabbelt.com,m:pjw@kernel.org,m:peternewman@google.com,m:rkrcmar@ventanamicro.com,m:reinette.chatre@intel.com,m:robh@kernel.org,m:samuel.holland@sifive.com,m:bigeasy@linutronix.de,m:tony.luck@intel.com,m:vasu@rivosinc.com,m:ved@rivosinc.com,m:liwei1518@gmail.com,m:linux-kernel@vger.kernel.org,m:linux-riscv@lists.infradead.org,m:x86@kernel.org,m:devicetree@vger.kernel.org,m:linux-rt-devel@lists.linux.dev,m:linux-doc@vger.kernel.org,m:conor@kernel
+ .org,m:krzk@kernel.org,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-93821-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-93820-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:jgg@ziepe.ca,m:leon@kernel.org,m:akpm@linux-foundation.org,m:david@kernel.org,m:ljs@kernel.org,m:Liam.Howlett@oracle.com,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:shakeel.butt@linux.dev,m:linux-mm@kvack.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:manuelebner@mailbox.org,s:lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[manuelebner@mailbox.org,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER(0.00)[cuiyunhui@bytedance.com,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[manuelebner@mailbox.org,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[40];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[mailbox.org:+];
+	DKIM_TRACE(0.00)[bytedance.com:+];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[cuiyunhui@bytedance.com,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[baylibre.com,ghiti.fr,rivosinc.com,linux.dev,amd.com,arm.com,alien8.de,linux.alibaba.com,microchip.com,kernel.org,linux.intel.com,intel.com,sanechips.com.cn,gmail.com,zte.com.cn,semihalf.com,dabbelt.com,google.com,ventanamicro.com,sifive.com,linutronix.de,vger.kernel.org,lists.infradead.org,lists.linux.dev];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mailbox.org:dkim,mailbox.org:email,mailbox.org:mid,mailbox.org:from_mime,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,summations.net:email,semihalf.com:email,mail.gmail.com:mid,infradead.org:email,bytedance.com:dkim,bytedance.com:email,bytedance.com:from_mime,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,brainfault.org:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: A23686D1A79
+X-Rspamd-Queue-Id: 8FEC16D1A91
 
-Remove unnecessary ')' and missing '('.
-Signed-off-by: Manuel Ebner <manuelebner@mailbox.org>
----
- Documentation/mm/hmm.rst           | 4 ++--
- Documentation/mm/process_addrs.rst | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+Hi Drew,
 
-diff --git a/Documentation/mm/hmm.rst b/Documentation/mm/hmm.rst
-index 7d61b7a8b65b..54c461e7a143 100644
---- a/Documentation/mm/hmm.rst
-+++ b/Documentation/mm/hmm.rst
-@@ -191,7 +191,7 @@ like a CPU page fault. The usage pattern is::
-       mmap_read_unlock(mm);
- 
-       take_lock(driver->update);
--      if (mmu_interval_read_retry(&ni, range.notifier_seq) {
-+      if (mmu_interval_read_retry(&ni, range.notifier_seq)) {
-           release_lock(driver->update);
-           goto again;
-       }
-@@ -316,7 +316,7 @@ between device driver specific code and shared common code:
-    system memory and device private memory.
- 
-    One of the first steps migrate_vma_setup() does is to invalidate other
--   device's MMUs with the ``mmu_notifier_invalidate_range_start(()`` and
-+   device's MMUs with the ``mmu_notifier_invalidate_range_start()`` and
-    ``mmu_notifier_invalidate_range_end()`` calls around the page table
-    walks to fill in the ``args->src`` array with PFNs to be migrated.
-    The ``invalidate_range_start()`` callback is passed a
-diff --git a/Documentation/mm/process_addrs.rst b/Documentation/mm/process_addrs.rst
-index 851680ead45f..b391502fbfd6 100644
---- a/Documentation/mm/process_addrs.rst
-+++ b/Documentation/mm/process_addrs.rst
-@@ -724,7 +724,7 @@ the zap and the invocation of :c:func:`!free_pgtables`.
- 
- Since it is assumed that all such steps have been taken, page table entries are
- cleared without page table locks (in the :c:func:`!pgd_clear`, :c:func:`!p4d_clear`,
--:c:func:`!pud_clear`, and :c:func:`!pmd_clear` functions.
-+:c:func:`!pud_clear`, and :c:func:`!pmd_clear` functions).
- 
- .. note:: It is possible for leaf page tables to be torn down independent of
-           the page tables above it as is done by
--- 
-2.54.0
+On Thu, Jun 25, 2026 at 9:40=E2=80=AFAM Drew Fustini <fustini@kernel.org> w=
+rote:
+>
+> Add support for the srmcfg CSR defined in the Ssqosid ISA extension.
+> The CSR contains two fields:
+>
+>   - Resource Control ID (RCID) for resource allocation
+>   - Monitoring Counter ID (MCID) for tracking resource usage
+>
+> Requests from a hart to shared resources are tagged with these IDs,
+> allowing resource usage to be associated with the running task.
+>
+> Add a srmcfg field to thread_struct with the same format as the CSR so
+> the scheduler can set the RCID and MCID for each task on context
+> switch. A per-cpu cpu_srmcfg variable mirrors the CSR state to avoid
+> redundant writes. L1D-hot memory access is faster than a CSR read and
+> avoids traps under virtualization.
+>
+> A per-cpu cpu_srmcfg_default holds the default srmcfg for each CPU as
+> set by resctrl CPU group assignment. On context switch, RCID and MCID
+> inherit from the CPU default independently: a task whose thread RCID
+> field is zero takes the CPU default's RCID, and likewise for MCID.
+>
+> Link: https://github.com/riscv/riscv-ssqosid/releases/tag/v1.0
+> Assisted-by: Claude:claude-opus-4-7
+> Co-developed-by: Kornel Dul=C4=99ba <mindal@semihalf.com>
+> Signed-off-by: Kornel Dul=C4=99ba <mindal@semihalf.com>
+> Signed-off-by: Drew Fustini <fustini@kernel.org>
+> ---
+>  MAINTAINERS                        |  8 ++++
+>  arch/riscv/Kconfig                 | 18 +++++++
+>  arch/riscv/include/asm/csr.h       |  5 ++
+>  arch/riscv/include/asm/processor.h |  3 ++
+>  arch/riscv/include/asm/qos.h       | 83 ++++++++++++++++++++++++++++++++
+>  arch/riscv/include/asm/switch_to.h |  3 ++
+>  arch/riscv/kernel/Makefile         |  2 +
+>  arch/riscv/kernel/qos.c            | 98 ++++++++++++++++++++++++++++++++=
+++++++
+>  8 files changed, 220 insertions(+)
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 0b9d7c8276acbafdb28a0ea5e81aa853ebee50b9..07109e1a8f8470377916c9807=
+4ab68fec51dfdc6 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -23293,6 +23293,14 @@ F:     drivers/perf/riscv_pmu.c
+>  F:     drivers/perf/riscv_pmu_legacy.c
+>  F:     drivers/perf/riscv_pmu_sbi.c
+>
+> +RISC-V QOS RESCTRL SUPPORT
+> +M:     Drew Fustini <fustini@kernel.org>
+> +R:     yunhui cui <cuiyunhui@bytedance.com>
+> +L:     linux-riscv@lists.infradead.org
+> +S:     Supported
+> +F:     arch/riscv/include/asm/qos.h
+> +F:     arch/riscv/kernel/qos.c
+> +
+>  RISC-V RPMI AND MPXY DRIVERS
+>  M:     Rahul Pathak <rahul@summations.net>
+>  M:     Anup Patel <anup@brainfault.org>
+> diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
+> index 3f0a647218e407f72890e83722ba8472858c1a59..ee586925f97227668c228b548=
+1c05a2f914d928c 100644
+> --- a/arch/riscv/Kconfig
+> +++ b/arch/riscv/Kconfig
+> @@ -590,6 +590,24 @@ config RISCV_ISA_SVNAPOT
+>
+>           If you don't know what to do here, say Y.
+>
+> +config RISCV_ISA_SSQOSID
+> +       bool "Ssqosid extension support for supervisor mode Quality of Se=
+rvice ID"
+> +       depends on 64BIT
 
+Why is 64BIT required here?
+
+> +       default n
+> +       help
+> +         Adds support for the Ssqosid ISA extension (Supervisor-mode
+> +         Quality of Service ID).
+> +
+> +         Ssqosid defines the srmcfg CSR which allows the system to tag t=
+he
+> +         running process with an RCID (Resource Control ID) and MCID
+> +         (Monitoring Counter ID). The RCID is used to determine resource
+> +         allocation. The MCID is used to track resource usage in event
+> +         counters.
+> +
+> +         For example, a cache controller may use the RCID to apply a
+> +         cache partitioning scheme and use the MCID to track how much
+> +         cache a process, or a group of processes, is using.
+> +
+>  config RISCV_ISA_SVPBMT
+>         bool "Svpbmt extension support for supervisor mode page-based mem=
+ory types"
+>         depends on 64BIT && MMU
+> diff --git a/arch/riscv/include/asm/csr.h b/arch/riscv/include/asm/csr.h
+> index 31b8988f4488daa89b854ccc97c4efe1c82bcc3e..7bce928e5daa09bd62f091727=
+9b04cfad30f46f5 100644
+> --- a/arch/riscv/include/asm/csr.h
+> +++ b/arch/riscv/include/asm/csr.h
+> @@ -84,6 +84,10 @@
+>  #define SATP_ASID_MASK _AC(0xFFFF, UL)
+>  #endif
+>
+> +/* SRMCFG fields */
+> +#define SRMCFG_RCID_MASK       GENMASK(11, 0)
+> +#define SRMCFG_MCID_MASK       GENMASK(27, 16)
+> +
+>  /* Exception cause high bit - is an interrupt if set */
+>  #define CAUSE_IRQ_FLAG         (_AC(1, UL) << (__riscv_xlen - 1))
+>
+> @@ -328,6 +332,7 @@
+>  #define CSR_STVAL              0x143
+>  #define CSR_SIP                        0x144
+>  #define CSR_SATP               0x180
+> +#define CSR_SRMCFG             0x181
+>
+>  #define CSR_STIMECMP           0x14D
+>  #define CSR_STIMECMPH          0x15D
+> diff --git a/arch/riscv/include/asm/processor.h b/arch/riscv/include/asm/=
+processor.h
+> index 812517b2cec1350f741849c1c56a35027321ef50..49a386d74cd3f0603a3ff9190=
+59d077a7e4d513c 100644
+> --- a/arch/riscv/include/asm/processor.h
+> +++ b/arch/riscv/include/asm/processor.h
+> @@ -123,6 +123,9 @@ struct thread_struct {
+>         /* A forced icache flush is not needed if migrating to the previo=
+us cpu. */
+>         unsigned int prev_cpu;
+>  #endif
+> +#ifdef CONFIG_RISCV_ISA_SSQOSID
+> +       u32 srmcfg;
+> +#endif
+>  };
+>
+>  /* Whitelist the fstate from the task_struct for hardened usercopy */
+> diff --git a/arch/riscv/include/asm/qos.h b/arch/riscv/include/asm/qos.h
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..e9e1d69f3797be5f89785a9b3=
+aa7d9d51c476a8a
+> --- /dev/null
+> +++ b/arch/riscv/include/asm/qos.h
+> @@ -0,0 +1,83 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +#ifndef _ASM_RISCV_QOS_H
+> +#define _ASM_RISCV_QOS_H
+> +
+> +#include <linux/percpu-defs.h>
+> +
+> +#ifdef CONFIG_RISCV_ISA_SSQOSID
+> +
+> +#include <linux/bitfield.h>
+> +#include <linux/cpufeature.h>
+> +#include <linux/sched.h>
+> +
+> +#include <asm/csr.h>
+> +#include <asm/fence.h>
+> +#include <asm/hwcap.h>
+> +
+> +/* cached value of srmcfg csr for each cpu */
+> +DECLARE_PER_CPU(u32, cpu_srmcfg);
+> +
+> +/* default srmcfg value for each cpu, set via resctrl cpu assignment */
+> +DECLARE_PER_CPU(u32, cpu_srmcfg_default);
+> +
+> +static inline void __switch_to_srmcfg(struct task_struct *next)
+> +{
+> +       u32 thread_srmcfg, default_srmcfg;
+> +
+> +       thread_srmcfg =3D READ_ONCE(next->thread.srmcfg);
+> +       default_srmcfg =3D __this_cpu_read(cpu_srmcfg_default);
+> +
+> +       /*
+> +        * RCID and MCID inherit from cpu_srmcfg_default independently.
+> +        * RESCTRL_RESERVED_CLOSID and RESCTRL_RESERVED_RMID are both 0, =
+so a
+> +        * zero field means "unassigned" and takes the CPU default.
+> +        */
+> +       if (thread_srmcfg =3D=3D 0) {
+> +               thread_srmcfg =3D default_srmcfg;
+> +       } else {
+> +               u32 rcid =3D FIELD_GET(SRMCFG_RCID_MASK, thread_srmcfg);
+> +               u32 mcid =3D FIELD_GET(SRMCFG_MCID_MASK, thread_srmcfg);
+> +
+> +               if (rcid =3D=3D 0 || mcid =3D=3D 0) {
+> +                       if (rcid =3D=3D 0)
+> +                               rcid =3D FIELD_GET(SRMCFG_RCID_MASK, defa=
+ult_srmcfg);
+> +                       if (mcid =3D=3D 0)
+> +                               mcid =3D FIELD_GET(SRMCFG_MCID_MASK, defa=
+ult_srmcfg);
+> +                       thread_srmcfg =3D FIELD_PREP(SRMCFG_RCID_MASK, rc=
+id) |
+> +                                       FIELD_PREP(SRMCFG_MCID_MASK, mcid=
+);
+> +               }
+> +       }
+> +
+> +       if (thread_srmcfg !=3D __this_cpu_read(cpu_srmcfg)) {
+> +               /*
+> +                * Drain stores from the outgoing task before the CSR wri=
+te
+> +                * so they retain the previous RCID/MCID tag at the cache
+> +                * interconnect.
+> +                */
+> +               RISCV_FENCE(rw, o);
+> +
+> +               __this_cpu_write(cpu_srmcfg, thread_srmcfg);
+> +               csr_write(CSR_SRMCFG, thread_srmcfg);
+> +               /*
+> +                * Order the csrw before the new task's loads/stores so t=
+hey
+> +                * pick up the new tag. Zicsr 6.1.1 makes CSR writes weak=
+ly
+> +                * ordered (device-output) vs memory ops. Ssqosid v1.0 is
+> +                * silent so honor the general CSR rule.
+> +                */
+> +               RISCV_FENCE(o, rw);
+> +       }
+> +}
+> +
+> +static __always_inline bool has_srmcfg(void)
+> +{
+> +       return riscv_has_extension_unlikely(RISCV_ISA_EXT_SSQOSID);
+> +}
+> +
+> +#else /* ! CONFIG_RISCV_ISA_SSQOSID  */
+> +
+> +struct task_struct;
+> +static __always_inline bool has_srmcfg(void) { return false; }
+> +static inline void __switch_to_srmcfg(struct task_struct *next) { }
+> +
+> +#endif /* CONFIG_RISCV_ISA_SSQOSID */
+> +#endif /* _ASM_RISCV_QOS_H */
+> diff --git a/arch/riscv/include/asm/switch_to.h b/arch/riscv/include/asm/=
+switch_to.h
+> index 0e71eb82f920cac2f14bb626879bb219a2f247cc..1c7ea53ec012adeaf03bf7c5d=
+549ab21849768b5 100644
+> --- a/arch/riscv/include/asm/switch_to.h
+> +++ b/arch/riscv/include/asm/switch_to.h
+> @@ -14,6 +14,7 @@
+>  #include <asm/processor.h>
+>  #include <asm/ptrace.h>
+>  #include <asm/csr.h>
+> +#include <asm/qos.h>
+>
+>  #ifdef CONFIG_FPU
+>  extern void __fstate_save(struct task_struct *save_to);
+> @@ -119,6 +120,8 @@ do {                                                 =
+       \
+>                 __switch_to_fpu(__prev, __next);        \
+>         if (has_vector() || has_xtheadvector())         \
+>                 __switch_to_vector(__prev, __next);     \
+> +       if (has_srmcfg())                               \
+> +               __switch_to_srmcfg(__next);             \
+>         if (switch_to_should_flush_icache(__next))      \
+>                 local_flush_icache_all();               \
+>         __switch_to_envcfg(__next);                     \
+> diff --git a/arch/riscv/kernel/Makefile b/arch/riscv/kernel/Makefile
+> index cabb99cadfb6d1e1284d6b4e9ae76044d36949f5..ebe1c3588177b4b825a52af9c=
+a17e17b5561427c 100644
+> --- a/arch/riscv/kernel/Makefile
+> +++ b/arch/riscv/kernel/Makefile
+> @@ -128,3 +128,5 @@ obj-$(CONFIG_ACPI_NUMA)     +=3D acpi_numa.o
+>
+>  obj-$(CONFIG_GENERIC_CPU_VULNERABILITIES) +=3D bugs.o
+>  obj-$(CONFIG_RISCV_USER_CFI) +=3D usercfi.o
+> +
+> +obj-$(CONFIG_RISCV_ISA_SSQOSID) +=3D qos.o
+> diff --git a/arch/riscv/kernel/qos.c b/arch/riscv/kernel/qos.c
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..ea33201a43f61534bf28b9c02=
+b62801f30f62154
+> --- /dev/null
+> +++ b/arch/riscv/kernel/qos.c
+> @@ -0,0 +1,98 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +#include <linux/cpu.h>
+> +#include <linux/cpu_pm.h>
+> +#include <linux/cpuhotplug.h>
+> +#include <linux/notifier.h>
+> +#include <linux/percpu-defs.h>
+> +#include <linux/types.h>
+> +
+> +#include <asm/cpufeature-macros.h>
+> +#include <asm/hwcap.h>
+> +#include <asm/qos.h>
+> +
+> +/*
+> + * Cached value of srmcfg csr for each cpu. Seeded to U32_MAX so the nex=
+t
+> + * __switch_to_srmcfg() unconditionally writes the CSR. The encoding
+> + * MCID << 16 | RCID with both fields well under 16 bits can never
+> + * produce this sentinel. This covers early-boot context switches that
+> + * happen before riscv_srmcfg_init() runs as an arch_initcall.
+> + */
+> +DEFINE_PER_CPU(u32, cpu_srmcfg) =3D U32_MAX;
+> +
+> +/* default srmcfg value for each cpu, set via resctrl cpu assignment */
+> +DEFINE_PER_CPU(u32, cpu_srmcfg_default);
+> +
+> +/*
+> + * Invalidate the per-CPU srmcfg cache, used as both the cpuhp startup a=
+nd
+> + * teardown callback. The sentinel is a value no real srmcfg encoding ca=
+n
+> + * produce (MCID << 16 | RCID, both fields well under 16 bits) so the ne=
+xt
+> + * __switch_to_srmcfg() unconditionally writes the CSR.
+> + *
+> + * Ssqosid v1.0 leaves CSR state across hart stop/start implementation-
+> + * defined, so the cached value cannot be trusted after online. Invalida=
+ting
+> + * on offline as well means the sentinel persists across the offline per=
+iod:
+> + * a CPU brought back online finds the cache already invalidated before =
+it is
+> + * schedulable, closing the window where a task scheduled before the sta=
+rtup
+> + * callback runs could match a stale cache and skip the CSR write while =
+the
+> + * hardware CSR was reset across hart stop/start.
+> + */
+> +static int riscv_srmcfg_reset_cache(unsigned int cpu)
+> +{
+> +       per_cpu(cpu_srmcfg, cpu) =3D U32_MAX;
+> +       return 0;
+> +}
+> +
+> +/*
+> + * CPU PM notifier: invalidate the cached srmcfg on resume from a deep
+> + * idle / suspend. Ssqosid v1.0 leaves CSR_SRMCFG state across low-power
+> + * transitions implementation-defined, and the boot CPU never goes
+> + * through the cpuhp online callback during system suspend, so without
+> + * this hook __switch_to_srmcfg() would skip the CSR write when the
+> + * outgoing task happens to share its srmcfg with the pre-suspend cache.
+> + */
+> +static int riscv_srmcfg_pm_notify(struct notifier_block *nb,
+> +                                 unsigned long action, void *unused)
+> +{
+> +       switch (action) {
+> +       case CPU_PM_EXIT:
+> +       case CPU_PM_ENTER_FAILED:
+> +               /*
+> +                * The CSR is implementation-defined across the low-power
+> +                * transition. Invalidate the cache and eagerly rewrite t=
+he
+> +                * CSR for the current task so it does not run mis-tagged
+> +                * until the next context switch.
+> +                */
+> +               __this_cpu_write(cpu_srmcfg, U32_MAX);
+> +               __switch_to_srmcfg(current);
+> +               break;
+> +       }
+> +       return NOTIFY_OK;
+> +}
+> +
+> +static struct notifier_block riscv_srmcfg_pm_nb =3D {
+> +       .notifier_call =3D riscv_srmcfg_pm_notify,
+> +};
+> +
+> +static int __init riscv_srmcfg_init(void)
+> +{
+> +       int err;
+> +
+> +       if (!riscv_has_extension_unlikely(RISCV_ISA_EXT_SSQOSID))
+> +               return 0;
+> +
+> +       /*
+> +        * cpuhp_setup_state() invokes the startup callback locally on ev=
+ery
+> +        * already-online CPU, so no separate seed loop is needed here.
+> +        */
+> +       err =3D cpuhp_setup_state(CPUHP_AP_ONLINE_DYN, "riscv/srmcfg:onli=
+ne",
+> +                               riscv_srmcfg_reset_cache, riscv_srmcfg_re=
+set_cache);
+> +       if (err < 0) {
+> +               pr_warn("srmcfg cpuhp registration failed (%d), cpus brou=
+ght online after boot will not invalidate the CSR_SRMCFG cache\n",
+> +                       err);
+> +               return err;
+> +       }
+> +
+> +       cpu_pm_register_notifier(&riscv_srmcfg_pm_nb);
+> +       return 0;
+> +}
+> +arch_initcall(riscv_srmcfg_init);
+>
+> --
+> 2.34.1
+>
+
+Thanks,
+Yunhui
 
