@@ -1,50 +1,51 @@
-Return-Path: <linux-doc+bounces-93875-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93876-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id pkdKCoazQWrTtgkAu9opvQ
-	(envelope-from <linux-doc+bounces-93875-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 01:51:34 +0200
+	id qJFpBqSzQWrbtgkAu9opvQ
+	(envelope-from <linux-doc+bounces-93876-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 01:52:04 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 625086D54AA
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 01:51:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 85AAD6D54B6
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 01:52:03 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=GptQmB01;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93875-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93875-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=WeI7pJos;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93876-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93876-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E3584300B45E
-	for <lists+linux-doc@lfdr.de>; Sun, 28 Jun 2026 23:51:31 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id DB8EF300DDDA
+	for <lists+linux-doc@lfdr.de>; Sun, 28 Jun 2026 23:51:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C4B4A2F12B3;
-	Sun, 28 Jun 2026 23:51:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 43A92357CEC;
+	Sun, 28 Jun 2026 23:51:39 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0835F40D58E;
-	Sun, 28 Jun 2026 23:51:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 268CD40D58E;
+	Sun, 28 Jun 2026 23:51:37 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782690690; cv=none; b=AWO55FBlFKuPwMSfToHAm2fB5sKMvpno9N+a0QXsbmmOerXyw2/mcUGVBswEg3bZvh0ausL3l6OvhL/tG1dBVQezK4Te2SKfJq4IEvzIV4N9UTMXZSv9hlBsJXlNyT25TELmMSDrvlcrqENqYLN7uWEq1muF7iq25Appwa72zWU=
+	t=1782690699; cv=none; b=An4BkvDl86PbEK5yfxIxSj5AhRB9W/AudnVzbeQ85LJqrDGUlVSFZBHruVLEtl0b3RqLzF3WGU9HwhEQ42Vxn7JXG5Rxw8f4nz278TJ9B4fhBnXH6d31wf2PtDbQNpvyEerbb3e/+VZOH1IkJlE61LBhGaitv63PQ1TLWZH54h4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782690690; c=relaxed/simple;
-	bh=qQCNNGLYeR/jXweBmpy6EHwOfbcMhIMwCLT/3beJgtc=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=aom3brtc1OvjIzqgG++ja0TGM3MA1V5qv9LvRl4C9IkGGDM13mgMUsObrwsGMyDg3oEPD3D/52qUibDjJkCj6WoCAYwLC+ZBkK8zEJna9bG/fLxJASzy+548/7pD0RmkfJE5UobSdpye3ModJhQmSgT0cy/g0B8J4bf9ssd4rSc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GptQmB01; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 62C651F000E9;
-	Sun, 28 Jun 2026 23:51:26 +0000 (UTC)
+	s=arc-20240116; t=1782690699; c=relaxed/simple;
+	bh=ILB/ElfIWa9u0xQ12aAYqyj8anSCHxMnZsNP9BRN1oE=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=Nx+OsB/dGbdmVRP3/AgunwjXvAaRAksADxyHILBMi3YO0xqsYKR3Rh8mcc+s8e/ernx75nVqGlbp3rt6BeeDTsFyO43hsjSnd4LpAZMRtnjbCQxRAPS6+hjqzvPcP9vBCOWBOeFB7AFyVsApACSvRo+Uxk4df8hkWa6P0cwP9w4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WeI7pJos; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C50EF1F000E9;
+	Sun, 28 Jun 2026 23:51:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782690688;
-	bh=IyzMFlWQGSxklRlwcoQbpnKOpH3OPh44AKZK7XAjx2g=;
-	h=From:To:Cc:Subject:Date;
-	b=GptQmB01urtRCsETvls97SGTW4cnjfAnOZjI+0HAVvBuk+VBqdCeaDhHIyNbd/n4y
-	 tQ4SUCeH7P+wT5JTTQrHN1Bn5jkVwb+YYAjMwt3Ctps9MAS1o97H56RM2m4kHJs+yn
-	 oy1Av5aQVNqPIrFJAteEQ2ZGv2RppiO/dHuI4SOZrMSJeBN0RTmqRuLw3rGBt2xDJj
-	 i289YpZLLvBFMju0Wj9z9XhLIab1VjJrXIXUODWYpCW2lu5q5BWd1VOBj3ZRpvZH8/
-	 B8KIJitMThHkvYl5oBSGUFkPgCnGwP6O5F8ZP81OOFV9uRFH8/Y1WP3kY1KgTc/9Wa
-	 utfFbqtAfg92g==
+	s=k20260515; t=1782690697;
+	bh=zA1ny7mz86qD9VEgfTKY9l9S9cY7unn92daWUtN0ORY=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=WeI7pJoslVv+Egp6xxPKksH/OO1X+0A2mNDpptcJAGsWkW+IVdt+h2MvdcsiWThMm
+	 HNDXmDFvwhXksnjaL0Kwr9vKYDxL14jq6TWon06mntY8BFQk2e5Rm8CjemjtW04kiZ
+	 u7vVynlCz1qLbJOBoS3kCdSBIrcH2ig+CbU0MkeoeqvCMJM078s5xPxxgzrDy9NslP
+	 b55hM7zavekzV+tTv1i/kcC3TSynXxpgEYKkzCqq88BBa2Nh7i4qHvoqYfZbm2roBH
+	 EirkdkP3Fqnn084Agl73iJwjGcEploEmuFjnhVucPRLNiwvb70lQv36zjEkp2E/5pz
+	 lMDIMCoZZXJ6g==
 From: "Masami Hiramatsu (Google)" <mhiramat@kernel.org>
 To: Steven Rostedt <rostedt@goodmis.org>,
 	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
@@ -55,10 +56,12 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	linux-trace-kernel@vger.kernel.org,
 	linux-doc@vger.kernel.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v12 00/11] tracing/probes: Add more typecast features
-Date: Mon, 29 Jun 2026 08:51:23 +0900
-Message-ID: <178269068329.1161310.17763177188897860801.stgit@devnote2>
+Subject: [PATCH v12 01/11] tracing/probes: Allow eprobe to use variable without $ prefix
+Date: Mon, 29 Jun 2026 08:51:34 +0900
+Message-ID: <178269069398.1161310.607309403448039758.stgit@devnote2>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <178269068329.1161310.17763177188897860801.stgit@devnote2>
+References: <178269068329.1161310.17763177188897860801.stgit@devnote2>
 User-Agent: StGit/0.19
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -69,27 +72,27 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-4.66 / 15.00];
+X-Spamd-Result: default: False [-3.66 / 15.00];
 	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
+	SUBJECT_HAS_CURRENCY(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64];
+	MID_RHS_NOT_FQDN(0.50)[];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_RECIPIENTS(0.00)[m:rostedt@goodmis.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:mhiramat@kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_SENDER(0.00)[mhiramat@kernel.org,linux-doc@vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-93875-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-93876-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
@@ -97,112 +100,86 @@ X-Spamd-Result: default: False [-4.66 / 15.00];
 	DKIM_TRACE(0.00)[kernel.org:+];
 	RCPT_COUNT_SEVEN(0.00)[9];
 	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,devnote2:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 625086D54AA
+X-Rspamd-Queue-Id: 85AAD6D54B6
 
-Hi,
+From: Masami Hiramatsu (Google) <mhiramat@kernel.org>
 
-Here is the 12th version of series to introduce more typecast features
-to probe events. The previous version is here:
+The commit 69efd863a785 ("tracing/eprobes: Allow use of BTF names
+to dereference pointers") allows eprobe to use event field without
+"$" prefix when it is used with typecast, it is natual to allow it
+without typecast.
 
- https://lore.kernel.org/all/178248325671.841606.17344906774310339507.stgit@devnote2/
-
-This version just updates the test cases according to the comment
-in last version[11/11].
-
-This series extends BTF typecast feature and add more options:
-
-1. Expanding BTF typecast to kprobe and fprobe.
-   (currently only function entry/exit)
-
-2. Introduce container_of like typecast. This adds a "assigned
-   member" option to the typecast.
-
-   (STRUCT,MEMBER)VAR->ANOTHER_MEMBER
-
-   This casts VAR to STRUCT type but the VAR is as the address
-   of STRUCT.MEMBER. In C, it is:
-
-   container_of(VAR, STRUCT, MEMBER)->ANOTHER_MEMBER
-
-3. Support nested typecast, e.g.
-
-   (STRUCT)((STRUCT2)VAR->MEMBER2)->MEMBER
-
-   the nest level must be smaller than 3.
-
-4. Add $current variable to point "current" task_struct.
-   This is useful with typecast, e.g.
-
-   (task_struct)$current->pid
-
-5. per-cpu dereference support.
-
-   Intrdouce this_cpu_read(VAR) and this_cpu_ptr(VAR) to
-   access per-cpu data on the current CPU (accessing other CPU
-   data is not stable, because it can be changed.)
-
-   You can access the member of per-cpu data structure using
-   typecast like:
-
-   (STRUCT)this_cpu_ptr(VAR)->MEMBER
-
-6. Support event fields without $ prefix on eprobes.
-
-   Now eprobe events can access its event fields.
-
-And added fetcharg dump feature (for debug) and updated test scripts
-to test part of them.
-
-Thanks,
-
+Signed-off-by: Masami Hiramatsu (Google) <mhiramat@kernel.org>
 ---
-base-commit: c69b5f959286395e94c237ce6d7d4970bad7f6e3
+ Changes in v8:
+  - Newly added.
+---
+ kernel/trace/trace_probe.c                         |   12 +++++++++++-
+ kernel/trace/trace_probe.h                         |    1 +
+ .../test.d/dynevent/eprobes_syntax_errors.tc       |    3 +--
+ 3 files changed, 13 insertions(+), 3 deletions(-)
 
-Masami Hiramatsu (Google) (11):
-      tracing/probes: Allow eprobe to use variable without $ prefix
-      tracing/probes: Support dumping fetcharg program for debugging dynamic events
-      tools/bootconfig: Ignore comment lines in dynamic_events/kprobe_events file
-      perf/probe: Ignore comment lines in dynamic_events/kprobe_events file
-      tracing/probes: Support typecast for various probe events
-      tracing/probes: Support nested typecast
-      tracing/probes: Type casting always involves nested calls
-      tracing/probes: Support field specifier option for typecast
-      tracing/probes: Add $current variable support
-      tracing/probes: Add this_cpu_read() and this_cpu_ptr() dereference method to fetcharg
-      tracing/probes: Add a new testcase for BTF typecasts
+diff --git a/kernel/trace/trace_probe.c b/kernel/trace/trace_probe.c
+index 0da7c0b53ba7..2ce7d62471cb 100644
+--- a/kernel/trace/trace_probe.c
++++ b/kernel/trace/trace_probe.c
+@@ -1341,7 +1341,17 @@ parse_probe_arg(char *arg, const struct fetch_type *type,
+ 		ret = handle_typecast(arg, pcode, end, ctx);
+ 		break;
+ 	default:
+-		if (isalpha(arg[0]) || arg[0] == '_') {	/* BTF variable */
++		if (isalpha(arg[0]) || arg[0] == '_') {
++			/* BTF variable or event field*/
++			if (ctx->flags & TPARG_FL_TEVENT) {
++				ret = parse_trace_event(arg, *pcode, ctx);
++				if (ret < 0) {
++					trace_probe_log_err(ctx->offset,
++							    NO_EVENT_FIELD);
++					return -EINVAL;
++				}
++				break;
++			}
+ 			if (!tparg_is_function_entry(ctx->flags) &&
+ 			    !tparg_is_function_return(ctx->flags)) {
+ 				trace_probe_log_err(ctx->offset, NOSUP_BTFARG);
+diff --git a/kernel/trace/trace_probe.h b/kernel/trace/trace_probe.h
+index 40b53b5b58a9..2e0d8384ee5c 100644
+--- a/kernel/trace/trace_probe.h
++++ b/kernel/trace/trace_probe.h
+@@ -559,6 +559,7 @@ extern int traceprobe_define_arg_fields(struct trace_event_call *event_call,
+ 	C(NO_PTR_STRCT,		"This is not a pointer to union/structure."),	\
+ 	C(NOSUP_DAT_ARG,	"Non pointer structure/union argument is not supported."),\
+ 	C(BAD_HYPHEN,		"Failed to parse single hyphen. Forgot '>'?"),	\
++	C(NO_EVENT_FIELD,	"This event field is not found."),	\
+ 	C(NO_BTF_FIELD,		"This field is not found."),	\
+ 	C(BAD_BTF_TID,		"Failed to get BTF type info."),\
+ 	C(BAD_TYPE4STR,		"This type does not fit for string."),\
+diff --git a/tools/testing/selftests/ftrace/test.d/dynevent/eprobes_syntax_errors.tc b/tools/testing/selftests/ftrace/test.d/dynevent/eprobes_syntax_errors.tc
+index 2a680c086047..0e65e787e426 100644
+--- a/tools/testing/selftests/ftrace/test.d/dynevent/eprobes_syntax_errors.tc
++++ b/tools/testing/selftests/ftrace/test.d/dynevent/eprobes_syntax_errors.tc
+@@ -10,7 +10,7 @@ check_error() { # command-with-error-pos-by-^
+ check_error 'e ^a.'			# NO_EVENT_INFO
+ check_error 'e ^.b'			# NO_EVENT_INFO
+ check_error 'e ^a.b'			# BAD_ATTACH_EVENT
+-check_error 'e syscalls/sys_enter_openat ^foo'	# BAD_ATTACH_ARG
++check_error 'e syscalls/sys_enter_openat ^foo'	# NO_EVENT_FIELD
+ check_error 'e:^/bar syscalls/sys_enter_openat'	# NO_GROUP_NAME
+ check_error 'e:^12345678901234567890123456789012345678901234567890123456789012345/bar syscalls/sys_enter_openat'	# GROUP_TOO_LONG
+ 
+@@ -19,7 +19,6 @@ check_error 'e:^ syscalls/sys_enter_openat'		# NO_EVENT_NAME
+ check_error 'e:foo/^12345678901234567890123456789012345678901234567890123456789012345 syscalls/sys_enter_openat'	# EVENT_TOO_LONG
+ check_error 'e:foo/^bar.1 syscalls/sys_enter_openat'	# BAD_EVENT_NAME
+ 
+-check_error 'e:foo/bar syscalls/sys_enter_openat arg=^dfd'	# BAD_FETCH_ARG
+ check_error 'e:foo/bar syscalls/sys_enter_openat arg=^$foo'	# BAD_ATTACH_ARG
+ 
+ if grep -q '<attached-group>\.<attached-event>.*\[if <filter>\]' README; then
 
-
- Documentation/trace/eprobetrace.rst                |    7 
- Documentation/trace/fprobetrace.rst                |   10 
- Documentation/trace/kprobetrace.rst                |   11 
- kernel/trace/Kconfig                               |   12 
- kernel/trace/trace.c                               |    8 
- kernel/trace/trace_eprobe.c                        |    2 
- kernel/trace/trace_fprobe.c                        |    2 
- kernel/trace/trace_kprobe.c                        |    2 
- kernel/trace/trace_probe.c                         |  585 ++++++++++++++++----
- kernel/trace/trace_probe.h                         |  100 ++-
- kernel/trace/trace_probe_tmpl.h                    |   25 +
- kernel/trace/trace_uprobe.c                        |    3 
- samples/trace_events/trace-events-sample.c         |   40 +
- samples/trace_events/trace-events-sample.h         |   34 +
- tools/bootconfig/scripts/ftrace2bconf.sh           |    2 
- tools/perf/util/probe-file.c                       |    2 
- .../ftrace/test.d/dynevent/btf_probe_event.tc      |   51 ++
- .../test.d/dynevent/btf_typecast_accepted.tc       |  103 ++++
- .../test.d/dynevent/eprobes_syntax_errors.tc       |   12 
- .../ftrace/test.d/dynevent/fprobe_syntax_errors.tc |   12 
- .../ftrace/test.d/kprobe/kprobe_syntax_errors.tc   |   12 
- .../ftrace/test.d/kprobe/uprobe_syntax_errors.tc   |    5 
- 22 files changed, 886 insertions(+), 154 deletions(-)
- create mode 100644 tools/testing/selftests/ftrace/test.d/dynevent/btf_probe_event.tc
- create mode 100644 tools/testing/selftests/ftrace/test.d/dynevent/btf_typecast_accepted.tc
-
---
-Masami Hiramatsu (Google) <mhiramat@kernel.org>
 
