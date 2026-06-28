@@ -1,51 +1,51 @@
-Return-Path: <linux-doc+bounces-93878-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93879-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id B5w+BqWzQWretgkAu9opvQ
-	(envelope-from <linux-doc+bounces-93878-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 01:52:05 +0200
+	id zVNSL7azQWrrtgkAu9opvQ
+	(envelope-from <linux-doc+bounces-93879-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 01:52:22 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id C00216D54C1
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 01:52:04 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 306CA6D54DC
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 01:52:22 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=hACAtW5R;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93878-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-93878-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=fSG6n3Zy;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93879-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93879-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 65324300E630
-	for <lists+linux-doc@lfdr.de>; Sun, 28 Jun 2026 23:52:01 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 1EAFD300FFAF
+	for <lists+linux-doc@lfdr.de>; Sun, 28 Jun 2026 23:52:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4CD19374A06;
-	Sun, 28 Jun 2026 23:51:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 54963374A01;
+	Sun, 28 Jun 2026 23:52:08 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D404346A1D;
-	Sun, 28 Jun 2026 23:51:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 49AEE2F7EE2;
+	Sun, 28 Jun 2026 23:52:07 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782690718; cv=none; b=GywDfBaexyuDSmqorKFIbUaq0SvuHcJNyXzy4vSuUIAffIXJTlgRvUomKyiPbSMp+rqwlQCai1dJKBBwoh/u7eSLDI0y1amncLWFGYipxL1diDIkjJBYRGeAWsvECeRdqoywkd9bTaFkHPvbDT2t0/s+RA/GeAjZfu4p2HzHZUQ=
+	t=1782690728; cv=none; b=PnqDwMYr/YOKA7J2lrn0jW2Eqkqx0vbHZmfRL5RAYeqhuAVUfPKD+FOYXzKsPOiZ4l1ZAXo9gCdac/OqF6BX9eUrDv3TyVLSNTXVnmfBzdzTtZMBpa5qGv9ocU3+WTZayIs18MBQCGiz8BgUb+jpGW24hOcDfLvXBGYgdjAXoUo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782690718; c=relaxed/simple;
-	bh=iwvJEEmSo6kakYtR3FrwdqO9JhTL7AXMa5BsjUanyOU=;
+	s=arc-20240116; t=1782690728; c=relaxed/simple;
+	bh=o3fcbFp0pBvZ6VeygN5BLrM057jFH+3OjGKMeTl88Ko=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=tVpnRk/IMGd7H7gejMHs8KKY4ry9GSiD9j7jlFYpfgZBDVxfrMyf7hdpcI2HpdB18UjTezly5DDIxm7kcqFNilS2PkxWb1kU/w4Z4+OtbusiEA0I4UWiRQLs8n+LC/64fHo1yDWx6IM+VvQt9JaH8VO5I6/RgmaoMhEtu9QYMGI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hACAtW5R; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3318C1F000E9;
-	Sun, 28 Jun 2026 23:51:55 +0000 (UTC)
+	 MIME-Version:Content-Type; b=MiLH1sYEfv+KOzE9DBnoujL/xtZxxum7a4hOa2O/09PAWIzbHbW20xvRXjAwM0YDtSfqm01XRON8/P396UTiBEOgHqsn05AZrBxlXj8/RMsRN5F4p5H7fn9qQb8/Cj3tFQUbF6LfRtHIfr5xEvS6Gv0LKwMspXduh+34zYTPsQY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fSG6n3Zy; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E4E511F000E9;
+	Sun, 28 Jun 2026 23:52:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782690717;
-	bh=DRQQpc50/HOc5q+xOiqMoSHrmuL8PZ/YatZQSWy4Uu4=;
+	s=k20260515; t=1782690726;
+	bh=IwXYV//eN/UulKrBQVQ9tKlK1h/PJvqTlVUST+nm2pU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=hACAtW5R613z4Zjua5JHlasoogVFRH3raTO8oN8fPcULWJbdtKtG09y3yvVQhjmPh
-	 l2sbaPrPPkAaGuAEUql/07B4JkfR2qEwrB0RM0h6bHZKuvq374aCKr03fblRAz/QYf
-	 Ssok35UYpQ5SCDutT3p46cwLVG/tnYEOMwZN1B5hWQAQMarghfBVAm4+a+BkFwdogT
-	 8Nizkh/0ol1/wYnLfTSdrtvMSaeKcBgtuhs22TaHWVQxACLKe0mk5cF0iXdHQBOn+K
-	 2T9Ebw6jeZnOqvv1p1L23PCfLQd3n6FqC1H7R2+PFvwW25fitGIWVz5iO61aVsmOYs
-	 OUNBofit4lu9w==
+	b=fSG6n3ZyLl8toRgb0ipPrbNHvz2p/aMRa6XkkqC9KQ8ccaOCL1viRx6WFCqnzSSHz
+	 BcsJk5f8BFEtS11G22yQqBaPu0AvrIiPhmnImK62PR7LYTHiswhTgl5aseZq+NyZyr
+	 ibBWDxxQchITIpXTJXfAEZRDTJiUUgIkYOT9+LFW7tXbBSfyaTBdK/MaRocz7W+pjB
+	 muK6VUDED6mcqeV3gR8GcgqysLYKd1n4hIye0gIMiRNBR4KiWESrMLeULD5mbGIZ3/
+	 lgAWbGTimpQP1K2x82era+bIQeXgdEJtsI3UzOvJlFXrlyzG0+5wYTi4XB3+KSptOf
+	 3L871G81JihJQ==
 From: "Masami Hiramatsu (Google)" <mhiramat@kernel.org>
 To: Steven Rostedt <rostedt@goodmis.org>,
 	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
@@ -56,9 +56,9 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	linux-trace-kernel@vger.kernel.org,
 	linux-doc@vger.kernel.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v12 03/11] tools/bootconfig: Ignore comment lines in dynamic_events/kprobe_events file
-Date: Mon, 29 Jun 2026 08:51:53 +0900
-Message-ID: <178269071303.1161310.17843439952709066151.stgit@devnote2>
+Subject: [PATCH v12 04/11] perf/probe: Ignore comment lines in dynamic_events/kprobe_events file
+Date: Mon, 29 Jun 2026 08:52:02 +0900
+Message-ID: <178269072265.1161310.10216930316552704905.stgit@devnote2>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <178269068329.1161310.17763177188897860801.stgit@devnote2>
 References: <178269068329.1161310.17763177188897860801.stgit@devnote2>
@@ -77,7 +77,7 @@ X-Spamd-Result: default: False [-4.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -89,7 +89,7 @@ X-Spamd-Result: default: False [-4.66 / 15.00];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_SENDER(0.00)[mhiramat@kernel.org,linux-doc@vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-93878-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-93879-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
@@ -101,11 +101,11 @@ X-Spamd-Result: default: False [-4.66 / 15.00];
 	RCPT_COUNT_SEVEN(0.00)[9];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,devnote2:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: C00216D54C1
+X-Rspamd-Queue-Id: 306CA6D54DC
 
 From: Masami Hiramatsu (Google) <mhiramat@kernel.org>
 
@@ -114,21 +114,21 @@ information as comment lines, its reader needs to ignore it.
 
 Signed-off-by: Masami Hiramatsu (Google) <mhiramat@kernel.org>
 ---
- tools/bootconfig/scripts/ftrace2bconf.sh |    2 ++
+ tools/perf/util/probe-file.c |    2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/tools/bootconfig/scripts/ftrace2bconf.sh b/tools/bootconfig/scripts/ftrace2bconf.sh
-index 1603801cf126..8eed445c295e 100755
---- a/tools/bootconfig/scripts/ftrace2bconf.sh
-+++ b/tools/bootconfig/scripts/ftrace2bconf.sh
-@@ -57,6 +57,8 @@ EOF
- kprobe_event_options() {
- 	cat $TRACEFS/kprobe_events | while read p args; do
- 		case $p in
-+		\#*)
-+		continue;;
- 		r*)
- 		cat 1>&2 << EOF
- # WARN: A return probe found but it is not supported by bootconfig. Skip it.
+diff --git a/tools/perf/util/probe-file.c b/tools/perf/util/probe-file.c
+index 4032572cbf55..4d12693a83b3 100644
+--- a/tools/perf/util/probe-file.c
++++ b/tools/perf/util/probe-file.c
+@@ -197,6 +197,8 @@ struct strlist *probe_file__get_rawlist(int fd)
+ 		idx = strlen(p) - 1;
+ 		if (p[idx] == '\n')
+ 			p[idx] = '\0';
++		if (buf[0] == '#')
++			continue;
+ 		ret = strlist__add(sl, buf);
+ 		if (ret < 0) {
+ 			pr_debug("strlist__add failed (%d)\n", ret);
 
 
