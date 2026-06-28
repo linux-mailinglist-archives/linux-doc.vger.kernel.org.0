@@ -1,203 +1,188 @@
-Return-Path: <linux-doc+bounces-93852-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93853-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id kYXHCWdWQWornwkAu9opvQ
-	(envelope-from <linux-doc+bounces-93852-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 28 Jun 2026 19:14:15 +0200
+	id sCekDEZYQWp6nwkAu9opvQ
+	(envelope-from <linux-doc+bounces-93853-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 28 Jun 2026 19:22:14 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8A4A26D4818
-	for <lists+linux-doc@lfdr.de>; Sun, 28 Jun 2026 19:14:14 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 323236D4865
+	for <lists+linux-doc@lfdr.de>; Sun, 28 Jun 2026 19:22:13 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=ImqHigvR;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93852-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93852-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=p9ZMZPeK;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93853-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-93853-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=gmail.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 26BD23009B06
-	for <lists+linux-doc@lfdr.de>; Sun, 28 Jun 2026 17:14:13 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E704B300D46E
+	for <lists+linux-doc@lfdr.de>; Sun, 28 Jun 2026 17:22:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BEFAA2E7378;
-	Sun, 28 Jun 2026 17:14:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DDE692F6586;
+	Sun, 28 Jun 2026 17:22:10 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A68FC2DF6E9;
-	Sun, 28 Jun 2026 17:14:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 647B02E03E4
+	for <linux-doc@vger.kernel.org>; Sun, 28 Jun 2026 17:22:09 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782666849; cv=none; b=SY7CxtQkSCCXfxSP6bQmebQkHCwsQETqS8WT7QmfwW/s09JvIAPW872nxgbJLUDsbUZoGeRll2IMzufVFxmsEPgx4T0uTn5So6K/EOvc/AaOQ8WNGGk6r7aQrT2VVQ1ZeHlAPqVUz4JUZ5+xN8/Rv3PZC4UFADhTaEgtoNouI9M=
+	t=1782667330; cv=none; b=eVLhZq64kuIUGMZzD+zSo3YI3hDeZObjmf+OE+7pZ0mSJnhQ5UaQNq4Hr+qClX6BJTiB9uezwkprG4joH9CkOqnaZ5rOAs8k4NluTbc9IjO1VUa9c7zAHL+zF04yErzijUQa+ZwWbGTtwe2LAIccDcHEdWfn+q9XS8SfqjC1ZMU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782666849; c=relaxed/simple;
-	bh=i74Z0u0srxyj5f1t9MAmQa6W7wE/osflRIc+NxsauE4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=VyttR/TWT3t7i8wrggswCVS4t5lr7iuatiKLuMcm5pv4DjLCdd0CWU9GdGSGalMg2IKweC36fF1XyQD4SlUANpQrLa9zBh1yzL8VqW16g9oPiqc2wqS3cK8GtF8vmAi8M71/+6I+ZH/64P8OGinN+j1d5rDamnh3Q4PU1XlUAFY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ImqHigvR; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 103051F000E9;
-	Sun, 28 Jun 2026 17:14:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782666848;
-	bh=9lGiDrKhDinjnXy4mzb89Q99lUH+tY3SY0KOK0lC7DA=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=ImqHigvRPAII/mrx//hPblk4b/IseAqJgr4a3u8LnfyGw7NUXXA1WYeGC5/Rridfj
-	 /vdYkuFq6o02cWxAzQ9XX5466zUktflPaaMb8DqKqrQT+OdruiwVcRIr1EzutbT8iU
-	 YQliki7ZQ9QdZlJyn6bPZaPWnuMKeZhXYm5l3Yyy3kBfeA3lQofjfNcPM5d/JfPE8M
-	 oP7Ks3HT2ZMHOmtAvoJnfcRMJC2kqchhtiKXK7d/vqEnCfUx5kYG0+AJ70D7D00j3a
-	 Ex0FIfhdKvWIgiKaFNSf037T1vZ9goT0W4QBT34Qbo8a8Lgpiab6/MrBwtQWu8SBaz
-	 QZLxAsSdAD/2A==
-Message-ID: <225e2dfb-d4af-4b86-a233-9c0ee9c1da2b@kernel.org>
-Date: Sun, 28 Jun 2026 11:14:04 -0600
+	s=arc-20240116; t=1782667330; c=relaxed/simple;
+	bh=K3EOnm1FTPPIVgm7ZBKpbKmC5oI+YrXDEzBB1/dVpHY=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=JevnbFIMQn+MaCQ9LIPHOeo0TI17hUuBy6xDnyqK5Q+vEX6Q2DiF3H7g8a81R+nghSsiez+N0JsjGxUpRWaOnmRHrE9wnotXMtI6x6mXmku51S490dbhFoxbR4dLKAjcXjQ54XR1YiAUAp36apLGBmBTrq/wzp0YE9RbS7URglI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=p9ZMZPeK; arc=none smtp.client-ip=209.85.221.49
+Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-472a14c9965so533122f8f.1
+        for <linux-doc@vger.kernel.org>; Sun, 28 Jun 2026 10:22:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1782667328; x=1783272128; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:subject:cc:to:from:date:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=BBABlV/y3tcVRj6J4pCvx1ErOlS8DPYAimesttySdoE=;
+        b=p9ZMZPeKYklW9y9bTUWZv3xL6SxinrYKC5qxU3P6Z7EqCWdR8yfWyWcsx4c4uga1cS
+         aqSPWK32B7VKgYG0SbA1DKqWFF4SvPv9n+/PKDkyEzkHFDjPJ3IsmHjP/OZhmjsyLmYC
+         /kGnBW3J+e62qCJiqiTZ/KOPwYF6x+P8OLWnJKDqDpYhglZp68xomAami1etPoSCVcs3
+         AEH4SIKd70Sv8N0g6Csgxpi6OY4yn+VBPMprnCVb7DoJI+FIbJEAZ24qSCFhw7cqUbSB
+         +95cB+MjtzRMKa4aDrWNVLpo+LRybZd1wwMXxcx2zaoaiOA0RhvbBQgyZegVuyJ7uygk
+         oLCg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1782667328; x=1783272128;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=BBABlV/y3tcVRj6J4pCvx1ErOlS8DPYAimesttySdoE=;
+        b=U1SR+UWwbncMopApHXEQ9Z4xB7moBsV71DU4Nst82IickEe5oJCcRxnK77EOgFDtSG
+         tyIjBlRzy1h77/KLiXMZXA1aWghAsqDrYI9Lo3JUPZSo4ZqrwUWaT+zwvcW9WgOz+UDK
+         oUEQ9afujz8w9FvhbRmay6WTvCJf2ge3BGw8crMd+qfmNXPr155bDz+BFy1kgWotGhE3
+         iT2cLLV5+NQS1Tpwxg4LsM+V4yqaHr15gaOXKv6T3cYjgwwbMtxHxgEtWs07MQif8yi0
+         snY0U+o7EVRcU+Un252/I/zTmUxtrBy/Cj9nyQxiwbGgy80CDR9My+gtCuuaVkMxyh4K
+         wdwQ==
+X-Forwarded-Encrypted: i=1; AHgh+RrTvEm/Hwk/vULDqtU4K0CxUXSiWjrRnh5OJC+Zdsz/bifnbCXUuUbY2abIfKEiDhfU2wsHP3wMDEE=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyV8vuZsgH5Z4XtorIn4VgPS3FmmkPt87QJ98GuYFBo01JbFFFk
+	rYzTYJ4GNHNlT/EfFseQ7E5LBEFtstwchRF61kzatC6IU78IJGin5aWk
+X-Gm-Gg: AfdE7cn7zAPadJCTPsPArQAbJZfuzVwPHtlk76c/p8QUlvnCbTVkqclDF9CWuHkSpcO
+	QxWhXvuwj4tlCGROwfVKsBhKiGxkPtogqYDr6fvcOg34/ZgD0ZkScwJCeJWPXC0vvnNQ8cKJHDD
+	6jTQdzK64+JmtbYKY7jBTEt6q4ETz9sjLXuBTtcXqywJYiVWXnKMyJSZB31II5+l66pTR19z98C
+	IE4jCN0K285C8BuZR5hUxeJuKcXpaXuNEmT52J1W7gzmEsq6Qywe2uv6zXSK0apaw3928qCU8O3
+	zGwmgdg1rigffskKgXjOhQz6+UllVC7sWelQLY06otnnR/S/GQ48ECKW8UR6fegaQd1G9neDbuX
+	uxuF8/8Dnprhk5nu81IHFfRPmfqZuKTfa6EelhRSitUDIY0uy2VIIcQufh1h/pTubGcWPSXwe4y
+	A8Rf0kADPI/jxRmpt72siAKHFn
+X-Received: by 2002:a05:6000:1867:b0:46d:8695:f49d with SMTP id ffacd0b85a97d-46dc2a1614cmr23514992f8f.34.1782667327708;
+        Sun, 28 Jun 2026 10:22:07 -0700 (PDT)
+Received: from foxbook (bgu190.neoplus.adsl.tpnet.pl. [83.28.84.190])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-472c7bec9c2sm7927088f8f.12.2026.06.28.10.22.06
+        (version=TLS1_2 cipher=AES128-SHA bits=128/128);
+        Sun, 28 Jun 2026 10:22:07 -0700 (PDT)
+Date: Sun, 28 Jun 2026 19:22:03 +0200
+From: Michal Pecio <michal.pecio@gmail.com>
+To: Alan Stern <stern@rowland.harvard.edu>
+Cc: Nikhil Solanke <nikhilsolanke5@gmail.com>, linux-usb@vger.kernel.org,
+ gregkh@linuxfoundation.org, linux-kernel@vger.kernel.org,
+ stable@vger.kernel.org, corbet@lwn.net, skhan@linuxfoundation.org,
+ linux-doc@vger.kernel.org
+Subject: Re: [PATCH v2] usbcore: Add quirk for 255-bytes initial config read
+Message-ID: <20260628192203.5fb9daac.michal.pecio@gmail.com>
+In-Reply-To: <20260628190201.00afdccf.michal.pecio@gmail.com>
+References: <20260623161035.5792-1-nikhilsolanke5@gmail.com>
+	<567e8866-4308-4e5f-819c-fe778dbf74f8@rowland.harvard.edu>
+	<CAFgddhJk0EYG71fnKdio=RHC-cH+JmL-EZ7-oVD-LdHoa2TBSA@mail.gmail.com>
+	<5159fd69-dddf-4073-a8e7-95fa77de0b7f@rowland.harvard.edu>
+	<CAFgddhJ2HeJ=oTBX_axMJcgJq7GXH9abe+LH+x9NGekGO4BMyw@mail.gmail.com>
+	<eb0dfd45-91c5-49ba-a297-b183dbc52c8c@rowland.harvard.edu>
+	<CAFgddhLZ9SuOzG_6mW09j9aDkCp6TedpNkzJ6TUD+DnR3TDLKA@mail.gmail.com>
+	<02060df3-b8c5-4a86-b3ab-3a28eea8a562@rowland.harvard.edu>
+	<20260628165040.76fd608d.michal.pecio@gmail.com>
+	<62e1fab3-1045-41f3-bc74-4c7624011619@rowland.harvard.edu>
+	<20260628190201.00afdccf.michal.pecio@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH iproute2-next 0/7] devlink: add per-port resource support
-Content-Language: en-US
-To: Tariq Toukan <tariqt@nvidia.com>,
- Stephen Hemminger <stephen@networkplumber.org>,
- Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
- Paolo Abeni <pabeni@redhat.com>, Andrew Lunn <andrew+netdev@lunn.ch>,
- "David S. Miller" <davem@davemloft.net>
-Cc: Donald Hunter <donald.hunter@gmail.com>, Simon Horman <horms@kernel.org>,
- Jiri Pirko <jiri@resnulli.us>, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>, Saeed Mahameed <saeedm@nvidia.com>,
- Leon Romanovsky <leon@kernel.org>, Mark Bloch <mbloch@nvidia.com>,
- Shuah Khan <shuah@kernel.org>, "Matthieu Baerts (NGI0)"
- <matttbe@kernel.org>, Chuck Lever <chuck.lever@oracle.com>,
- Or Har-Toov <ohartoov@nvidia.com>, Carolina Jubran <cjubran@nvidia.com>,
- Moshe Shemesh <moshe@nvidia.com>, Shay Drori <shayd@nvidia.com>,
- Dragos Tatulea <dtatulea@nvidia.com>, Daniel Zahka <daniel.zahka@gmail.com>,
- Shahar Shitrit <shshitrit@nvidia.com>,
- Jacob Keller <jacob.e.keller@intel.com>, Cosmin Ratiu <cratiu@nvidia.com>,
- Parav Pandit <parav@nvidia.com>, Kees Cook <kees@kernel.org>,
- Adithya Jayachandran <ajayachandra@nvidia.com>,
- Daniel Jurgens <danielj@nvidia.com>, netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-rdma@vger.kernel.org, linux-kselftest@vger.kernel.org,
- Gal Pressman <gal@nvidia.com>, Ido Schimmel <idosch@nvidia.com>,
- Jiri Pirko <jiri@nvidia.com>, Petr Machata <petrm@nvidia.com>
-References: <20260609053953.487152-1-tariqt@nvidia.com>
-From: David Ahern <dsahern@kernel.org>
-In-Reply-To: <20260609053953.487152-1-tariqt@nvidia.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.66 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-93852-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-93853-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:tariqt@nvidia.com,m:stephen@networkplumber.org,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:andrew+netdev@lunn.ch,m:davem@davemloft.net,m:donald.hunter@gmail.com,m:horms@kernel.org,m:jiri@resnulli.us,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:saeedm@nvidia.com,m:leon@kernel.org,m:mbloch@nvidia.com,m:shuah@kernel.org,m:matttbe@kernel.org,m:chuck.lever@oracle.com,m:ohartoov@nvidia.com,m:cjubran@nvidia.com,m:moshe@nvidia.com,m:shayd@nvidia.com,m:dtatulea@nvidia.com,m:daniel.zahka@gmail.com,m:shshitrit@nvidia.com,m:jacob.e.keller@intel.com,m:cratiu@nvidia.com,m:parav@nvidia.com,m:kees@kernel.org,m:ajayachandra@nvidia.com,m:danielj@nvidia.com,m:netdev@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-rdma@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:gal@nvidia.com,m:idosch@nvidia.com,m:jiri@nvidia.com,m:petrm@nvidia.com,m:andrew@lunn.ch,m:donaldhunter@gmail.com,m:danielzahka@gmail.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[dsahern@kernel.org,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[40];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[gmail.com,vger.kernel.org,linuxfoundation.org,lwn.net];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FORGED_RECIPIENTS(0.00)[m:stern@rowland.harvard.edu,m:nikhilsolanke5@gmail.com,m:linux-usb@vger.kernel.org,m:gregkh@linuxfoundation.org,m:linux-kernel@vger.kernel.org,m:stable@vger.kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[michalpecio@gmail.com,linux-doc@vger.kernel.org];
 	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[dsahern@kernel.org,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[gmail.com,kernel.org,resnulli.us,lwn.net,linuxfoundation.org,nvidia.com,oracle.com,intel.com,vger.kernel.org];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[michalpecio@gmail.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ALIAS_RESOLVED(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp]
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 8A4A26D4818
+X-Rspamd-Queue-Id: 323236D4865
 
-On 6/8/26 11:39 PM, Tariq Toukan wrote:
-> Hi,
-> 
-> Currently, devlink resource show only supports querying a specific
-> device and displays device-level resources. However, some resources
-> are per-port, such as the maximum number of SFs that can be created
-> on a specific PF port.
-> 
-> This series extends devlink resource show with full support for
-> port-level resources, including a dump mode, per-port querying syntax,
-> and scope filtering. In preparation for these features, the first two
-> patches refactor how dpipe tables are handled to unblock dump support
-> and ensure errors in secondary queries are non-fatal.
-> 
-> The series is organized as follows:
-> 
-> Patch 1 splits the dpipe tables display into a separate function.
-> 
-> Patch 2 moves the dpipe tables query into the per-device resource show
-> callback, ensuring it behaves correctly during a multi-device dump.
-> 
-> Patch 3 fixes a pre-existing memory leak in resource_ctx_fini.
-> 
-> Patch 4 adds dump support to resource show (no device required).
-> 
-> Patch 5 shows port-level resources returned in a dump reply.
-> 
-> Patch 6 adds DEV/PORT_INDEX syntax to resource show.
-> 
-> Patch 7 adds scope filter to resource show.
-> 
-> With this series, users can query resources at all levels:
-> 
-> $ devlink resource show
-> pci/0000:03:00.0:
->   name local_max_SFs size 508 unit entry
->   name external_max_SFs size 508 unit entry
-> pci/0000:03:00.0/196608:
->   name max_SFs size 20 unit entry
-> 
-> $ devlink resource show scope dev
-> pci/0000:03:00.0:
->   name local_max_SFs size 508 unit entry
->   name external_max_SFs size 508 unit entry
-> 
-> $ devlink resource show scope port
-> pci/0000:03:00.0/196608:
->   name max_SFs size 20 unit entry
-> 
-> $ devlink resource show pci/0000:03:00.0/196608
-> pci/0000:03:00.0/196608:
->   name max_SFs size 20 unit entry
-> 
-> This series is the userspace counterpart to the kernel series:
-> https://lore.kernel.org/all/20260407194107.148063-1-tariqt@nvidia.com/
-> 
-> Ido Schimmel (2):
->   devlink: Split dpipe tables output to a separate function
->   devlink: Move dpipe tables query to resources show callback
-> 
-> Or Har-Toov (5):
->   devlink: fix memory leak in resource_ctx_fini
->   devlink: add dump support for resource show
->   devlink: show port resources in resource dump
->   devlink: add per-port resource show support
->   devlink: add scope filter to resource show
-> 
->  bash-completion/devlink     |   8 ++
->  devlink/devlink.c           | 202 +++++++++++++++++++++++++++---------
->  man/man8/devlink-resource.8 |  34 +++++-
->  3 files changed, 192 insertions(+), 52 deletions(-)
-> 
-> 
-> base-commit: 7340b539841dc739bc0b813e8e86825bc1eb5a4c
+I really think it could (and should) be a simple patch.
 
-applied to iproute2-next with the fixup recommended by Claude and
-confirmed by Or
+This is what I wrote a few weeks ago. It's an unconditional change
+for all devices, but it would be easy to turn it into a quirk.
+
+
+--- a/drivers/usb/core/config.c
++++ b/drivers/usb/core/config.c
+@@ -938,15 +938,14 @@ int usb_get_configuration(struct usb_device *dev)
+ 	if (!dev->rawdescriptors)
+ 		return -ENOMEM;
+ 
+-	desc = kmalloc(USB_DT_CONFIG_SIZE, GFP_KERNEL);
++	desc = kmalloc(255, GFP_KERNEL);
+ 	if (!desc)
+ 		return -ENOMEM;
+ 
+ 	for (cfgno = 0; cfgno < ncfg; cfgno++) {
+-		/* We grab just the first descriptor so we know how long
+-		 * the whole configuration is */
++		/* Try 255 bytes first because that's what Windows does */
+ 		result = usb_get_descriptor(dev, USB_DT_CONFIG, cfgno,
+-		    desc, USB_DT_CONFIG_SIZE);
++		    desc, 255);
+ 		if (result < 0) {
+ 			dev_err(ddev, "unable to read config index %d "
+ 			    "descriptor/%s: %d\n", cfgno, "start", result);
+@@ -975,8 +974,12 @@ int usb_get_configuration(struct usb_device *dev)
+ 		if (dev->quirks & USB_QUIRK_DELAY_INIT)
+ 			msleep(200);
+ 
+-		result = usb_get_descriptor(dev, USB_DT_CONFIG, cfgno,
+-		    bigbuffer, length);
++		/* Don't bother if we already have it all */
++		if (length <= result)
++			memcpy(bigbuffer, desc, length);
++		else
++			result = usb_get_descriptor(dev, USB_DT_CONFIG, cfgno,
++					bigbuffer, length);
+ 		if (result < 0) {
+ 			dev_err(ddev, "unable to read config index %d "
+ 			    "descriptor/%s\n", cfgno, "all");
 
