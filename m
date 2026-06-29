@@ -1,153 +1,144 @@
-Return-Path: <linux-doc+bounces-94025-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94026-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id zHVPAu+WQmoF+QkAu9opvQ
-	(envelope-from <linux-doc+bounces-94025-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 18:01:51 +0200
+	id tNt6KhCXQmoJ+QkAu9opvQ
+	(envelope-from <linux-doc+bounces-94026-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 18:02:24 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4CA036DD117
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 18:01:49 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D2E66DD12A
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 18:02:23 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=cmHhiotX;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94025-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94025-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=none;
+	dkim=pass header.d=debian.org header.s=smtpauto.stravinsky header.b="mqqMcK/S";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94026-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94026-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=debian.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 4A4E3318CD13
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 15:49:35 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 36C283023C05
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 15:52:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3D8BC42B722;
-	Mon, 29 Jun 2026 15:48:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5244741C30A;
+	Mon, 29 Jun 2026 15:51:37 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dy1-f171.google.com (mail-dy1-f171.google.com [74.125.82.171])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD131427A03
-	for <linux-doc@vger.kernel.org>; Mon, 29 Jun 2026 15:48:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7AD3743C065;
+	Mon, 29 Jun 2026 15:51:35 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782748113; cv=none; b=XNAeJY/mNEYWFRaiJVahD9aSU8MKtqJXs8/0lWZ1YKh10DGYAPK5FzelyUH7GDSI5M/1RoaUn5Qy24BKKfdczSBHE58eofL9tMJw857DBC8qUvuWWEGgE7kQP4Njk2rBBjUVNN4odWk0j1QfY1kLi84HWL9CNBRzSwj2An+pra8=
+	t=1782748297; cv=none; b=agSu0zYrWKX6N+EusJq92XdDyEVrgjbJKmVQKAW6+isTSciFBLidYJWt+nov2gI906hPaLoelmoFRGeuQund7ReqQul5GU/pEqKxDvxacymZSiC0ulHc33ZV8VEDfXDYZmNxUDGIsG7Lv6yfBrpIRJQIgCyUvRpPLNLhBxdAvTs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782748113; c=relaxed/simple;
-	bh=i8ONpixMujFX/WAcwrYwZhC6OCLzpFUm7/dL2XKRKRU=;
+	s=arc-20240116; t=1782748297; c=relaxed/simple;
+	bh=Jfpbh1KLhwtXc+BxstE95MlO6t2jjL+Fd0+Ww72x8xc=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=VthXF9dzVT3taMNYRzzZv4vMtJB1A0TnnANo49FsEnHY8FPoExgqqBmoxx8fXpC2DKZmmvUuoNkPIP+DnF8jd8UWj9eEfWJlR41Tv9xSNKf7cEPdMny6a2stkjQA3eYlODndsANwKTtGdfup56aZYXcWtocsmRM7+kcpA3ym5jY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=cmHhiotX; arc=none smtp.client-ip=74.125.82.171
-Received: by mail-dy1-f171.google.com with SMTP id 5a478bee46e88-3078e0dcd67so6087587eec.0
-        for <linux-doc@vger.kernel.org>; Mon, 29 Jun 2026 08:48:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782748111; x=1783352911; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:sender
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=XnfYZFFV0ryFVGO4RHx8uwQIWAFO9eQlXqtuzCiwiyI=;
-        b=cmHhiotXAi/+1/XBDO+AngGh2lpfN0cq/Jo4ixTa9BY/pm3xBJ8AkhJlb1GqHoz+Iy
-         8e0BNwz69DsFKJ8eUzNk//657bOzam6AIdg25SJlRsS+asTkP6v0xiyfRO/r1F3BNvH5
-         E2O7nH3JZyAl6h2DtvyQZgRdffeBAKVqNFrQZiMdqSgt4mBQtBo33XZGgDTeG4Ri7Vgf
-         2UFoRloJKJLX7N9jxD0mdhev7YpOOFutRt7Jm1EaQYDAwdvQFjoklk129vI8P1+ryMWa
-         qk28TrJpOJbqVbyRbHxgBjmP+zv0J9fsh5jbaub8h8pjxQ3oDc7PNzVJk/JCVVzcw1I/
-         xgGw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782748111; x=1783352911;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:sender
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=XnfYZFFV0ryFVGO4RHx8uwQIWAFO9eQlXqtuzCiwiyI=;
-        b=lRhzq7CLecXNaHpCWe765PQaSb6Ciu5kTKtRtgMtdKkIf0G8UTBnaGrG3jwQw6y7ag
-         mEH4koSAs/n4FbgFBsZcwXdRSxclL3DyGRVJyFNmDiueAoghuHrNUBLPwtyG0Cz+b3bC
-         xAE4DmHwBHmVC2I6L9p6ybHcYyNaqDWS8kfzpc+wOvosaTNuHasZSvqkjLXATdQ26AnM
-         FcVADohsi3EAV6moRqkzcQopR4Etwd2wgwHF+VH4KK+GDeskjR8AsxvOliq6GqcgDkVW
-         XjBYHX4IENgXOYXU3YJoKZg+lNWvDtLuM55Ex2h2Arhj869LKUH6fVm2JPTwAmW0nO6O
-         kSSA==
-X-Gm-Message-State: AOJu0YyeghHkCduLZj6lZ3KL8Fi8BHp4JgulNguS7nZmrz8zjgL8mzMc
-	WIbjN4LERDjBsDMNLs5WBuBTwXJiOI3P4nqpHhqsICYjrrl5XSwVqcMZ
-X-Gm-Gg: AfdE7cnmZXCS4m35pFFBzOEQ2eLCtkbdq8YObskuwj03rUX7kmxc7gIm0epgknUns8d
-	aBeohEv4BA1lV1hLmOWvteDJPUVSKxhnSf4iwFBQHUp2/diOQ5i1yk2qHB0IiintPw2HDVruhh7
-	p9rtCYzljlUL7k+7dDjhaM5xz83LElliwbagPSNvpdhJb0IeJsHk98mLevRWynI3M3fAmme5LUX
-	F9GYAkwG+30j1LG18ukY0meU8fKARTduHX6FYu4q1Kgqfnzl8x8T8IZl0Q81h7meMgzztiCxBca
-	KXabWg2WOaHTtr2hkHMWWDbWjJ3OAHuT6v0eriThxLGjml+DfbFn4CLWZYhjP5oPbj1eKquuxgJ
-	GzGFygQNRG1SvRQFZZeVH4pF3gV8pRk2T9snvHk2lPU84MQPfHpMIPu9Xxjm4p6p5eGJXaaOhBu
-	I0aEHvG7EE6yBlyqWEZAeBQo/LUA==
-X-Received: by 2002:a05:7300:2150:b0:30c:472a:248 with SMTP id 5a478bee46e88-30ee14ba3aamr4290eec.32.1782748110867;
-        Mon, 29 Jun 2026 08:48:30 -0700 (PDT)
-Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30c7c52c664sm51583295eec.8.2026.06.29.08.48.30
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Jun 2026 08:48:30 -0700 (PDT)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Date: Mon, 29 Jun 2026 08:48:29 -0700
-From: Guenter Roeck <linux@roeck-us.net>
-To: Randy Dunlap <rdunlap@infradead.org>
-Cc: linux-doc@vger.kernel.org,
-	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
-	linux-hwmon@vger.kernel.org
-Subject: Re: [PATCH] hwmon: ltc4283: fix malformed table docs build error
-Message-ID: <b1f32693-608e-46b9-8fe4-8878fec580e4@roeck-us.net>
-References: <20260620011833.3568693-1-rdunlap@infradead.org>
+	 Content-Type:Content-Disposition:In-Reply-To; b=HSBjdfpWEqKzppjZw+4+zXzs4QvcSRrhq9FRMGTtwZ/Ykt1+1BZ1+tOViKjtxN5Xbauq9czSs60h6M9SFgCyYtHVfc036FhieGPr9/7hWe1gy1/OvKgyBgsgpYv7FWTx3Voaje0RNf5HPj4nP+wktdGK85QW8KNgwxNwRneCnS0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org; spf=pass smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=mqqMcK/S; arc=none smtp.client-ip=82.195.75.108
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
+	s=smtpauto.stravinsky; h=X-Debian-User:In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=VeejG0MGjUvD4AhkLMN95MQ3Dsdsxp52TnuJQNelYwA=; b=mqqMcK/S0ffTfirKJEMqcC/Ija
+	8MScC4GpriSuke5cvw9W89OocMlePAkwIX6hRqRBAOBICl/Jk24xJEReCepneIo9AsQ6T64BsTEuU
+	KJ7v6x86URFpLL6v0b35ayfP3ksScr/ZCwY+9RFl7FSivLEKwP1HPvd4T3Ky0pLFbp0Emy+LGVbAT
+	pa+V0JFJJnN0R/VjabN8iyidZewJxzgorjpeRhG+v4WZV/eUD+Er5X0mQ+KbBMLPuVhOWukCRRPkg
+	UOfYtf/pIAn+/y4sWQEsSlib+rJMDZxTPoWNtksRVS/9IjviHEnjRXOIgnK+lHrm7PpeaF8mwBgHD
+	xA9VFsaQ==;
+Received: from authenticated-user
+	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
+	(Exim 4.96)
+	(envelope-from <leitao@debian.org>)
+	id 1weEGA-006Ojz-0e;
+	Mon, 29 Jun 2026 15:50:58 +0000
+Date: Mon, 29 Jun 2026 08:50:51 -0700
+From: Breno Leitao <leitao@debian.org>
+To: Mike Rapoport <rppt@kernel.org>
+Cc: Miaohe Lin <linmiaohe@huawei.com>, 
+	Andrew Morton <akpm@linux-foundation.org>, David Hildenbrand <david@kernel.org>, 
+	Lorenzo Stoakes <ljs@kernel.org>, Vlastimil Babka <vbabka@kernel.org>, 
+	Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>, Shuah Khan <shuah@kernel.org>, 
+	Naoya Horiguchi <nao.horiguchi@gmail.com>, Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, "Liam R. Howlett" <liam@infradead.org>, lance.yang@linux.dev, 
+	Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu <mhiramat@kernel.org>, 
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, linux-mm@kvack.org, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
+	linux-trace-kernel@vger.kernel.org, kernel-team@meta.com
+Subject: Re: [PATCH v10 6/6] selftests/mm: add hwpoison-panic destructive test
+Message-ID: <akKUDDtww19NVra4@gmail.com>
+References: <20260626-ecc_panic-v10-0-6dacb8ad024d@debian.org>
+ <20260626-ecc_panic-v10-6-6dacb8ad024d@debian.org>
+ <aj-BShkN6BXex_ku@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260620011833.3568693-1-rdunlap@infradead.org>
+In-Reply-To: <aj-BShkN6BXex_ku@kernel.org>
+X-Debian-User: leitao
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	DMARC_POLICY_ALLOW(-0.50)[debian.org,none];
+	R_DKIM_ALLOW(-0.20)[debian.org:s=smtpauto.stravinsky];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94025-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:rdunlap@infradead.org,m:linux-doc@vger.kernel.org,m:nuno.sa@analog.com,m:linux-hwmon@vger.kernel.org,s:lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	DMARC_NA(0.00)[roeck-us.net];
-	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-94026-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:rppt@kernel.org,m:linmiaohe@huawei.com,m:akpm@linux-foundation.org,m:david@kernel.org,m:ljs@kernel.org,m:vbabka@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:shuah@kernel.org,m:nao.horiguchi@gmail.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:liam@infradead.org,m:lance.yang@linux.dev,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:kernel-team@meta.com,m:naohoriguchi@gmail.com,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_THREE(0.00)[4];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	FORGED_SENDER(0.00)[leitao@debian.org,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FREEMAIL_CC(0.00)[huawei.com,linux-foundation.org,kernel.org,google.com,suse.com,gmail.com,lwn.net,linuxfoundation.org,infradead.org,linux.dev,goodmis.org,efficios.com,kvack.org,vger.kernel.org,meta.com];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
-	MISSING_XM_UA(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[leitao@debian.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[debian.org:+];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,roeck-us.net:mid,roeck-us.net:from_mime,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 4CA036DD117
+X-Rspamd-Queue-Id: 6D2E66DD12A
 
-On Fri, Jun 19, 2026 at 06:18:30PM -0700, Randy Dunlap wrote:
-> Expand the table borders (upper & lower) to prevent a documentation
-> build error:
+On Sat, Jun 27, 2026 at 10:52:42AM +0300, Mike Rapoport wrote:
+> Hi Breno,
 > 
-> Documentation/hwmon/ltc4283.rst:261: ERROR: Malformed table.
-> Text in column margin in table line 3.
-> =======================         ==========================================
-> power1_failed_fault_log         Set to 1 by a power1 fault occurring.
-> power1_good_input_fault_log     Set to 1 by a power1 good input fault occurring at PGIO3.
+> On Fri, Jun 26, 2026 at 08:33:20AM -0700, Breno Leitao wrote:
+> > Add a destructive selftest that verifies
+> > vm.panic_on_unrecoverable_memory_failure actually panics when a
+> > hwpoison error hits a kernel-owned page.
 > 
-> Fixes: dd63353a0b5e ("hwmon: ltc4283: Add support for the LTC4283 Swap Controller")
-> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-> Reviewed-by: Nuno Sá <nuno.sa@analog.com>
+> > +ksft_skip=4
+> 
+> ...
+> 
+> > +ksft_print() { echo "# $*"; }
+> > +ksft_exit_skip() { ksft_print "$*"; exit "$ksft_skip"; }
+> > +ksft_exit_fail() { echo "not ok 1 $*"; exit 1; }
+> 
+> There is tools/testing/selftests/kselftest/ktap_helpers.sh that already
+> implements this :)
 
-Applied.
+Ack, let me source that file in my selftest.
 
-Thanks,
-Guenter
+	DIR="$(dirname "$(readlink -f "$0")")"
+	source "${DIR}"/../kselftest/ktap_helpers.sh
+
+I will update, thanks for the review,
+--breno
 
