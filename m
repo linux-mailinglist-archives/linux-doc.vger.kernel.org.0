@@ -1,175 +1,233 @@
-Return-Path: <linux-doc+bounces-93933-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93935-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id QDAVESsqQmrW1AkAu9opvQ
-	(envelope-from <linux-doc+bounces-93933-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 10:17:47 +0200
+	id CrjZN2UrQmoh1QkAu9opvQ
+	(envelope-from <linux-doc+bounces-93935-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 10:23:01 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id CEA286D7662
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 10:17:46 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E7E7D6D776E
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 10:23:00 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=karo-electronics.de header.s=kas202603021246 header.b=ecw7eren;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93933-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93933-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=karo-electronics.de;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=XivbAz0s;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93935-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-93935-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 0142F3098434
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 08:00:24 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 25CB53008CB9
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 08:22:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9C3873B4EB7;
-	Mon, 29 Jun 2026 08:00:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 557E23D6CDD;
+	Mon, 29 Jun 2026 08:22:55 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from dd54918.kasserver.com (dd54918.kasserver.com [85.13.167.58])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C6253B4EB0;
-	Mon, 29 Jun 2026 08:00:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 33AF03BBFDE;
+	Mon, 29 Jun 2026 08:22:54 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782720023; cv=none; b=UcXwu85HR8wtpwgtwnhd0l7qgxk4MvAFbCYoU8Z8qxQJbHk9ozmZ2mynMpbPCjFjN1V0Vitl+SZNbw1XS2IMtKA9GqLIhxJKZAQlsBFIDR5d9j4XBWl3Bn3sYOWpGl8dzP0rKSsDmuguT7/HWjALJsRobhRmZ+xNtd2/Jg44nkY=
+	t=1782721375; cv=none; b=cAn7CTTwzze1pcMrKgrVtnJesf0JKGPPtmLO6OllYDTmAJrdV3R0dFZ9XkVkfWvvHNrfYv+sOrbYKzlbGE5+xwRO1g47kEvz21D2BV+/A2T0GJ0VrpUizAvqvnj9TeKjJu80oPCAkYLtr2/me6VFVgzQhXDtiaOqbg+8W937uws=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782720023; c=relaxed/simple;
-	bh=Mu/vYRPrMM6y78Zq6iLYUkQGJTBkafHpPpDy8E5c9xQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=QwXpN5w01tAxYSCXSHl+K451mrYv+WKVW+jwPsH7oVkRAf+0htZc3Atdjg1HEOqA2cHy3uMge37OZq8DmfoL8Z2/fwSJKfuag27fyrfX92wr7Js+eRYyMWf8/Vj4Ze4SvJmd//toQWnz6HoKplIw60mY0GLRa7qfJzIIjP4CrfY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=KARO-electronics.de; spf=pass smtp.mailfrom=KARO-electronics.de; dkim=pass (2048-bit key) header.d=karo-electronics.de header.i=@karo-electronics.de header.b=ecw7eren; arc=none smtp.client-ip=85.13.167.58
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=karo-electronics.de;
-	s=kas202603021246; t=1782719411;
-	bh=Qylp1+q58BKXjVYMlUJn3x4tvz3kf67QuXXQvLn3hVQ=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:From;
-	b=ecw7erenvWIYPBx2V7ZPPuTiP0QJvB7JeAWgS4GWnn8/503xZok/8BGzb9DeXRFBc
-	 XeC7jO4MWatNjCHC1ECcBW6XrZdV0OBa382Qs/IVNEJ5dgLX3G92WP+J1ri7YIyWer
-	 dwai6hyb94q6EmVN0GrRTOkeBo/h0lefqhkodnLOH1A79zFz1cvQTTHVYCYQsOCsz1
-	 c62YtKjIwpqQE3i0RhHvCf2yilcCcl4J95W3ejucUfo5okw7f5V89GB8iMAPWRex8x
-	 ZZ1n2IpEQXDTL/6Gfp4KBftpnC4mSJJIA2vDTx0WN8aEMFIQMHm9Gls1wkkKm9TBcP
-	 0b7q1/LHFGtGQ==
-Received: from karo-electronics.de (unknown [89.1.81.74])
-	by dd54918.kasserver.com (Postfix) with ESMTPSA id 8485F7722430;
-	Mon, 29 Jun 2026 09:50:10 +0200 (CEST)
-Date: Mon, 29 Jun 2026 09:50:09 +0200
-From: Lothar =?UTF-8?B?V2HDn21hbm4=?= <LW@KARO-electronics.de>
-To: pankaj.gupta@oss.nxp.com
-Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan
- <skhan@linuxfoundation.org>, Rob Herring <robh@kernel.org>, Krzysztof
- Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Frank
- Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix
- Kernel Team <kernel@pengutronix.de>, Fabio Estevam <festevam@gmail.com>,
- Pankaj Gupta <pankaj.gupta@nxp.com>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
- imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, Frieder Schrempf
- <frieder.schrempf@kontron.de>, kernel test robot <lkp@intel.com>,
- sashiko-bot <sashiko-bot@kernel.org>
-Subject: Re: [PATCH v26 3/7] firmware: imx: add driver for NXP EdgeLock
- Enclave
-Message-ID: <20260629095009.3256f956@karo-electronics.de>
-In-Reply-To: <20260629-imx-se-if-v26-3-146446285744@nxp.com>
-References: <20260629-imx-se-if-v26-0-146446285744@nxp.com>
-	<20260629-imx-se-if-v26-3-146446285744@nxp.com>
-Organization: Ka-Ro electronics GmbH
+	s=arc-20240116; t=1782721375; c=relaxed/simple;
+	bh=/qvCfB/+hMAUzRTvNVnPwfLgW8fwdjy78lEtyErvzqI=;
+	h=MIME-Version:Content-Type:Subject:From:To:Cc:In-Reply-To:
+	 References:Date:Message-Id; b=Cw5XiV5+5ZdpH6lYGeHVVz3RyQTIGmqzxLpEePpZu+z7AwJHErwuKeDjzO4X7ybNY0EUVVqzaz1RLXf+b8X31Utqeg1bCbhYIVvnmKkVlpIIfrDOXHJ7tMMtMw50uoUT988mh+jv7C3FMcNCWdug1tKtWTilaHIDRpDTPM4nYz8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XivbAz0s; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 739681F000E9;
+	Mon, 29 Jun 2026 08:22:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1782721374;
+	bh=VO/Eqtujp/7YYhCx/kcKYmrsWvAHVn++t8w3Nw2m6SY=;
+	h=Subject:From:To:Cc:In-Reply-To:References:Date;
+	b=XivbAz0ssU3xBxeHz99KrnYfHYas/5DiSN2PW/BOqm8/4XmEauHi4ydRgkhrh1yA/
+	 bXL4NyUB4YbH6kQJku8f4JV6f6iVEOjQo1l6Wc+q+l3T/mnkji4bmigiQU39mNSGWZ
+	 L16g/BWnBADNf230G55BLuiGn6u0K0ei/NY69VivGRF7YbMegpJSIcgBo17lQsvn4+
+	 d9dDaI6+3hsqSde7H4JPxYif9lgIxW+UwXazss4NCelkMzdzJyGiSdHv3tX0J9koPR
+	 kiiA/e+m+x2AXI7uulaV3HGfJaM8dP/AYJbf1JdzpSJuxNVZsTFV4KVh28fkdJ/RKL
+	 3Rf7S7g1QLMJg==
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Spamd-Bar: /
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH v4 00/31] Introduce SCMI Telemetry FS support
+From: Christian Brauner <brauner@kernel.org>
+To: "David Hildenbrand (Arm)" <david@kernel.org>
+Cc: Cristian Marussi <cristian.marussi@arm.com>, 
+ Christian Brauner <brauner@kernel.org>, linux-kernel@vger.kernel.org, 
+ linux-arm-kernel@lists.infradead.org, arm-scmi@vger.kernel.org, 
+ linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org, 
+ sudeep.holla@kernel.org, james.quinlan@broadcom.com, f.fainelli@gmail.com, 
+ vincent.guittot@linaro.org, etienne.carriere@st.com, peng.fan@oss.nxp.com, 
+ michal.simek@amd.com, d-gole@ti.com, jic23@kernel.org, elif.topuz@arm.com, 
+ lukasz.luba@arm.com, philip.radford@arm.com, souvik.chakravarty@arm.com, 
+ leitao@kernel.org, kas@kernel.org, puranjay@kernel.org, 
+ usama.arif@linux.dev, kernel-team@meta.com
+In-Reply-To: <eba18827-5ef5-464c-90f0-2444a996acac@kernel.org>
+References: <20260612223802.1337232-1-cristian.marussi@arm.com>
+ <20260617-waten-allabendlich-zueinander-93d4b1367b8c@brauner>
+ <ajLVW1eHzbGDm4yn@pluto> <29a304f0-1e62-418a-b84f-aabdc4c0de8d@kernel.org>
+ <ajR_FBWOoXJKSeoH@pluto> <0025b907-27b9-4a51-b78f-f8ad413644d0@kernel.org>
+ <ajU7UqwPZBlwRGkf@pluto> <eba18827-5ef5-464c-90f0-2444a996acac@kernel.org>
+Date: Mon, 29 Jun 2026 10:22:46 +0200
+Message-Id: <20260629-rangfolge-intellektuell-flagrant-2814268b9d66@brauner>
+X-Mailer: b4 0.16-dev-4217c
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4629; i=brauner@kernel.org;
+ h=from:subject:message-id; bh=/qvCfB/+hMAUzRTvNVnPwfLgW8fwdjy78lEtyErvzqI=;
+ b=owGbwMvMwCU28Zj0gdSKO4sYT6slMWQ5aUdoSJ83+6L6VqSa5cq93csnn+A55qDlWFX7NL/lf
+ fjWokKDjlIWBjEuBlkxRRaHdpNwueU8FZuNMjVg5rAygQxh4OIUgInwBTL8r8hPX/Mv6+6XNvdn
+ LgGJ5wV/rrBX+1oevqyCp2e6z6z8VkaGy69NLvVWMe+6saT6k23GZbaqVc5rXZfWisy+8ra5dfV
+ WJgA=
+X-Developer-Key: i=brauner@kernel.org; a=openpgp;
+ fpr=4880B8C9BD0E5106FC070F4F7B3C391EFEA93624
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [0.84 / 15.00];
+	MID_END_EQ_FROM_USER_PART(4.00)[];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[karo-electronics.de,none];
-	R_DKIM_ALLOW(-0.20)[karo-electronics.de:s=kas202603021246];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-93933-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:pankaj.gupta@oss.nxp.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:Frank.Li@nxp.com,m:s.hauer@pengutronix.de,m:kernel@pengutronix.de,m:festevam@gmail.com,m:pankaj.gupta@nxp.com,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:devicetree@vger.kernel.org,m:imx@lists.linux.dev,m:linux-arm-kernel@lists.infradead.org,m:frieder.schrempf@kontron.de,m:lkp@intel.com,m:sashiko-bot@kernel.org,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[LW@KARO-electronics.de,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[19];
-	FREEMAIL_CC(0.00)[lwn.net,linuxfoundation.org,kernel.org,nxp.com,pengutronix.de,gmail.com,vger.kernel.org,lists.linux.dev,lists.infradead.org,kontron.de,intel.com];
+	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER(0.00)[brauner@kernel.org,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[26];
+	FORGED_RECIPIENTS(0.00)[m:david@kernel.org,m:cristian.marussi@arm.com,m:brauner@kernel.org,m:linux-kernel@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:arm-scmi@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:sudeep.holla@kernel.org,m:james.quinlan@broadcom.com,m:f.fainelli@gmail.com,m:vincent.guittot@linaro.org,m:etienne.carriere@st.com,m:peng.fan@oss.nxp.com,m:michal.simek@amd.com,m:d-gole@ti.com,m:jic23@kernel.org,m:elif.topuz@arm.com,m:lukasz.luba@arm.com,m:philip.radford@arm.com,m:souvik.chakravarty@arm.com,m:leitao@kernel.org,m:kas@kernel.org,m:puranjay@kernel.org,m:usama.arif@linux.dev,m:kernel-team@meta.com,m:ffainelli@gmail.com,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	HAS_ORG_HEADER(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-93935-lists,linux-doc=lfdr.de];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[LW@KARO-electronics.de,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[karo-electronics.de:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[brauner@kernel.org,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[arm.com,kernel.org,vger.kernel.org,lists.infradead.org,broadcom.com,gmail.com,linaro.org,st.com,oss.nxp.com,amd.com,ti.com,linux.dev,meta.com];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[i.mx:url,karo-electronics.de:dkim,karo-electronics.de:mid,KARO-electronics.de:from_mime,nxp.com:email,vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[brauner:mid,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: CEA286D7662
+X-Rspamd-Queue-Id: E7E7D6D776E
 
-Hi,
+> > Thanks a lot, David !
+> 
+> Let's hope for some guidance regarding the FS side soon.
+> 
+> But yeah, avoiding the in-kernel FS sounds completely reasonable at this point.
 
-On Mon, 29 Jun 2026 17:51:59 +0530 pankaj.gupta@oss.nxp.com wrote:
-> From: Pankaj Gupta <pankaj.gupta@nxp.com>
->=20
-> Add MU-based communication interface for secure enclave.
->=20
-> NXP hardware IP(s) for secure-enclaves like Edgelock Enclave(ELE), are
-> embedded in the SoC to support the features like HSM, SHE & V2X, using
-> message based communication interface.
->=20
-> The secure enclave FW communicates with Linux over single or multiple
-> dedicated messaging unit(MU) based interface(s).
-> Exists on i.MX SoC(s) like i.MX8ULP, i.MX93, i.MX95 etc.
->=20
-> For i.MX9x SoC(s) there is at least one dedicated ELE MU(s) for each
-> world - Linux(one or more) and OPTEE-OS (one or more).
->=20
-[...]
-> +	ret =3D se_fill_cmd_msg_hdr(priv, (struct se_msg_hdr *)&tx_msg->header,
-> +				  ELE_GET_INFO_REQ, ELE_GET_INFO_REQ_MSG_SZ,
-> +				  true);
-> +	if (ret)
-> +		goto exit;
-[...]
-> +/* Fill a command message header with a given command ID and length in b=
-ytes. */
-> +static inline int se_fill_cmd_msg_hdr(struct se_if_priv *priv, struct se=
-_msg_hdr *hdr,
-> +				      u8 cmd, u32 len, bool is_base_api)
-> +{
-> +	hdr->tag =3D priv->if_defs->cmd_tag;
-> +	hdr->ver =3D (is_base_api) ? priv->if_defs->base_api_ver : priv->if_def=
-s->fw_api_ver;
-> +	hdr->command =3D cmd;
-> +	hdr->size =3D len >> 2;
-> +
-> +	return 0;
-> +}
->
-I don't see a point in having a function always return zero and
-implement error checks that will never be used.
+Afaiu, David wanted me to add a few comments on the viability of a
+character device for this.
 
-[...]
-> +static const struct of_device_id se_match[] =3D {
-> +	{ .compatible =3D "fsl,imx8ulp-se-ele-hsm", .data =3D &imx8ulp_se_ele_h=
-sm},
-> +	{ .compatible =3D "fsl,imx93-se-ele-hsm", .data =3D &imx93_se_ele_hsm},
-> +	{},
->
-Since the last entry in this array must be a NULL entry, there should be
-no comma after the {}. This will generate a compile error if (e.g. by
-patch conflict resolution) an entry is added after the end marker.
+I think you usually have at least the following options:
 
+(1) character device
+(2) notification pipe
+(3) netlink
+(4) well-known AF_UNIX socket
 
+You then need to consider your constraints. David added a few:
 
-Lothar Wa=C3=9Fmann
+(i) root can set properties (enable/disable events)
+(ii) non-root can only retrieve properties/events
+
+I assume you mean real root, i.e., root on the host system or more
+specifically anyone with CAP_SYS_ADMIN or some other relevant
+capability.
+
+This is a rather simple model and gets a lot of head-scratching out of
+the way.
+
+But root could also mean "root in a users namespace" which makes this
+more complicated as it effectively means that an unprivileged container
+would be enable/disable events. This makes sense if there's a subset of
+events that naturally lends itself to be charged to a container and that
+the container might have a genuine use for.
+
+This touches on another design question which decides how complicated
+the whole implementation is going to be: What consumer-producer
+relationship does this need?
+
+The process subscribing to the telemetry stream might have exclusive
+access. IOW, once you have subscribed to the telemetry stream the
+connect is busy and no new subscribers are allowed. This is a very
+simple model ofc which has advantages.
+
+On the other end you have the uevent model. Uevents are broadcast to all
+subscribers who have a uevent netlink socket open (glossing over some
+namespacing details that are irrelevant here).
+
+You need to figure out what you really need here. The choice of
+transport also has quality of life implications. 
+
+  (1):
+  A character device is somewhat simple but it means it's all inherently
+  tied to devtmpfs and namespacing it retroactively is not possible. If
+  you ever want to namespace it, i.e., delegate it to unprivileged
+  sandboxes, userspace needs to bind-mount the character device into the
+  container at container startup or have a mechanism to inject said
+  character devices later via the new mount api. It's all possible I'm
+  just pointing out that you're tied to a rather rigid kernel object. But
+  I think in general it is ok.
+
+  (2):
+  A while ago David Howells extended pipes with the concept of a
+  watchqueue. A watchqueue is just a pipe with some special properties. It
+  can be created by passing O_NOTIFICATION to pipe(2) "meticulously
+  undocumented" as Jon would say...) into which the kernel splices small,
+  fixed-format notification records:
+
+  int fds[2];
+  pipe2(fds, O_NOTIFICATION_PIPE);
+  ioctl(fds[0], IOC_WATCH_QUEUE_SET_SIZE, nr_notes);   /* preallocate, 1..512 */
+  ioctl(fds[0], IOC_WATCH_QUEUE_SET_FILTER, &filter);  /* optional */
+  keyctl(KEYCTL_WATCH_KEY, KEY_SPEC_SESSION_KEYRING, fds[0], 0x01); /* subscribe a source */
+
+  If the ring is full or no free note exists, the record is dropped and
+  PIPE_BUF_FLAG_LOSS is set on the last buffer. So consumers always learn
+  that they missed something — but not what.
+
+  IOC_WATCH_QUEUE_SET_FILTER takes struct watch_notification_filter with
+  up to 16 watch_notification_type_filter entries. With a filter installed
+  the default is reject and only the type bit + subtype bit + info match
+  let a record through. Passing NULL removes all filters (everything
+  passes).
+
+  Kinda like a ringbuffer might be something to consider.
+  O_NOTIFICATION_PIPE works from all contexts (hence the preallocation).
+
+  (3):
+  No.
+
+  (4):
+  A while ago I added the "coredump socket" to the kernel. Basically,
+  userspace listens on a well-known AF_UNIX socket address (in this case
+  configured via /proc/sys/kernel/core_pattern). The kernel connects to it
+  and sends the coredump data via this socket (with some protocol
+  negotiation at the beginning).
+
+If you really want to transform the data stream you're receiving into a
+FUSE filesystem I think any of the referenced methods is compatible with
+that. You just refresh the various files when new events come in and
+otherwise show the data that you already have.
+
+In other words, if you allow multiple consumers the following scenario
+may happen: Consumer A consumes event E_1 and consumer B consumes E_2,
+consumer A now gets E_3. If consumer A is what funnels the data into a
+filesystem then consumer A misses data. That might be fine or might not
+be.
+
 
