@@ -1,270 +1,233 @@
-Return-Path: <linux-doc+bounces-93934-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93922-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id ZQo9NVYpQmqP1AkAu9opvQ
-	(envelope-from <linux-doc+bounces-93934-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 10:14:14 +0200
+	id CNGuIkUhQmrt0gkAu9opvQ
+	(envelope-from <linux-doc+bounces-93922-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 09:39:49 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 31F676D75A5
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 10:14:14 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id C1A946D7192
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 09:39:48 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=redadmin.org header.s=20231208space header.b=qteBWpSS;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93934-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-93934-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=redadmin.org;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
+	dkim=pass header.d=altera.com header.s=selector2 header.b=c9TraO2I;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93922-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-93922-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=altera.com;
+	arc=reject ("cv is fail on i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 512F63060CAF
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 08:05:11 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id B5153301D537
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 07:25:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D0A173B47FB;
-	Mon, 29 Jun 2026 08:05:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E7FAD3D6CA7;
+	Mon, 29 Jun 2026 07:25:08 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from www.redadmin.org (bc043154.ppp.asahi-net.or.jp [222.228.43.154])
+Received: from CH5PR02CU005.outbound.protection.outlook.com (mail-northcentralusazon11012037.outbound.protection.outlook.com [40.107.200.37])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 778483B4EB3;
-	Mon, 29 Jun 2026 08:05:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1DB303D667D;
+	Mon, 29 Jun 2026 07:25:05 +0000 (UTC)
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782720310; cv=pass; b=sA5EhaV1uQW+L/q1ZvuIUMPN04/TId/wKA4FzM7z5q1isif4LIBDiXvNmznBXt+73myzhiRPyTvwFJ+TCX9dcWJPx7lIYHyLB49cOeWkVjTvwMHRkqqqMYWmOEh18jlenU+gxJGFAtAeNo8g4TyXr4KBEYy4SNYRpvav/4ksQ/Y=
+	t=1782717908; cv=fail; b=JGNOIHtv38PqF+TBb7ITH4qmCBAb2VsMc2jEihNvysw4zZZo8t1Qt/AAtvvkh2x8hWgY0Ru+iSITqGSG/+1EDVBtiwDnD10oIduA3Zb8IGt0rG7qK0nM7HyrvvT3tgTNk4a/rGmLgSOEHGkYy7TGMAokHrrMLApyWbZGKouPThA=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782720310; c=relaxed/simple;
-	bh=rRF+Nv/WKxni+VdKiwhaF2sI09EOOtrtI1qEaD7lAuc=;
-	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
-	 Message-ID:Content-Type; b=rUXoOxM/cep7qbdmg/MkQQCxuIfDzBGvnaenuEABrIGOojU2Ef9XSBc+Bq6bj/Nw208ZN+N3L1GpQ4Kkm9TEyE1lYQndyNYcFQmvpZTwqZLl+pAu+9BZQPwcAdgDVSbtYn2VxydmTommHD4A28dKhpCNRUE6n09L0Kc3a53pccU=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redadmin.org; spf=pass smtp.mailfrom=redadmin.org; dkim=pass (1024-bit key) header.d=redadmin.org header.i=@redadmin.org header.b=qteBWpSS; arc=pass smtp.client-ip=222.228.43.154
-Received: from localhost (localhost [127.0.0.1])
-	by www.redadmin.org (Postfix) with ESMTP id 0A03E109F2940;
-	Mon, 29 Jun 2026 16:20:16 +0900 (JST)
-X-Virus-Scanned: amavis at redadmin.org
-Received: from www.redadmin.org ([127.0.0.1])
- by localhost (redadmin.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hX5ixFpPhF9c; Mon, 29 Jun 2026 16:20:11 +0900 (JST)
-DMARC-Filter: OpenDMARC Filter v1.4.2 www.redadmin.org A0D2D109F289A
-ARC-Seal: i=1; d=redadmin.org; s=20231208space; a=rsa-sha256; cv=none;
-	t=1782717611;
-	b=hSwJbPnwZXr6x8kq3qXVrTXzsWe3Ig0eiofd0j0gIktBmQpM3lpNdx/yfUWEg+tK3k54
-	 1VbHMO5RkRTvFedSJUgyjCgUL/eflR7NFjrtzUF+eqXUC6a9utJDlysFtXHtUuYyrGV8w
-	 rUkOSWAPPeXmj8CxYz+M+KJa39K6SDvC9o=
-ARC-Message-Signature: i=1; d=redadmin.org; s=20231208space; a=rsa-sha256;
-	c=relaxed/relaxed; t=1782717611;
-	h=DKIM-Filter:DKIM-Signature:MIME-Version:Date:From:To:Cc:Subject:
-	 In-Reply-To:References:Message-ID:X-Sender:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=HJ55Q5LqlVvIfrh7wQuwkO1c2iuJf1JU6Vj5ItabHt8=;
-	b=OXJff5msUBH1IjnB97m8r2SgjUp8MlDT+FMIvjiM4CKG1Zi3PysyOQMtMuBRMynQhfoz
-	 pwuCt24oLIfWgArHVXU8kUYanqG+9Gd032nk7h675SAnh8b0Zg9sKbi4uf5NiwdWcTsuh
-	 xba65qH5HgnkOeAW78SHhtcfetz10S9qGc=
-ARC-Authentication-Results: i=1; www.redadmin.org; arc=none smtp.remote-ip=192.168.11.50
-Received: from webmail.redadmin.org (redadmin.org [192.168.11.50])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (P-256) server-digest SHA256)
-	(Client did not present a certificate)
-	(Authenticated sender: weibu@redadmin.org)
-	by www.redadmin.org (Postfix) with ESMTPSA id A0D2D109F289A;
-	Mon, 29 Jun 2026 16:20:11 +0900 (JST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 www.redadmin.org A0D2D109F289A
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redadmin.org;
-	s=20231208space; t=1782717611;
-	bh=HJ55Q5LqlVvIfrh7wQuwkO1c2iuJf1JU6Vj5ItabHt8=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=qteBWpSSymPB6+oUTxuScawBwkAuqIh5z0TNOf4bCHnHo6vTcqCnpyS+p8nqyT/YE
-	 kUhBdnC3Kib3OSldsZWJ8vDlclqWijmZbpHidcHcl4Wz05OntxrQlzv+6kPy/Qwb2q
-	 t53NRK0v33IR6cUv3qmhIX0JRiz2UGaNn4b1Vol0=
+	s=arc-20240116; t=1782717908; c=relaxed/simple;
+	bh=j9D8OVgdaDBBimG/0dryGFTBssBAh7Wj5SW1k/uxh3g=;
+	h=From:To:Subject:Date:Message-ID:Content-Type:MIME-Version; b=Abg1FH1Fz2wtWd+VJ72qFz8NBmSHqjK+R4UXKYxRPIy29KvErKDF1K81NGCh5PTX/WBWKxw9XEphMQ3L/7B235P8lEORCtvsqLdrd56JsA6GDqSlZG5qiFJiZBAkDymC7l/B3WB6+pI5LXpHmj4xj0UKgqLc8qxGfHAZk/LHm78=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=altera.com; spf=pass smtp.mailfrom=altera.com; dkim=pass (2048-bit key) header.d=altera.com header.i=@altera.com header.b=c9TraO2I; arc=fail smtp.client-ip=40.107.200.37
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=DFz2McqJRHV9OWrVoVIJ/P5+Z5AtkIDWdtTsU+8iOJQv/CprcIDb77dXZIbTwn53yMahkDUiwb0lsA6nzYA4D0zkCCZq1oLYkThwygns0ax8s7ycRkLkgvU6ZDGy4Lx92YxcfewTqqd4PC+DYyHN0lAGPk50D/2I5t7cPwt6y2HZWkFoNJdrWGeMzvgtQVFznmT+fB3kmGZrc27fPcIFQKGcMXwBtKR/UVnJV1auwf8MRGxbirOlKGTB3Bi2BPAGbBgtbo7KIkGsMdX5eKCrNMzZ/X62LSDWlXb1PSxrA45hTvCkLLk890YGgsz45485wbxGEpsp5NFvPqe4pozAvg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ASXgruLa3aEX/NAa7b3YW6mZx1bA6EOYBkBFuxRlTMg=;
+ b=aYBHI9q1EboNaOAy4MnPoTJL+K003yGnuo7rnHA48dWUDSzksJ0sMlq/bhwMx4ad4FosIinled7BKEhL0NacrIsNEbpbEx/pBYHtuQCDPrKPBXm3LontTAaXLKWVtYdjJmaM6KBpvcSn4vpwXZLusHdq03I37mu3RCRak9Np3I9wqsvow7bdCVnTTwbzs+kYNuoBIkfVlTtdarFcuNFQY6O0s6ko0oU98/WDSAUowG6gEdfEu01r0xB6Gm24rc5nnbe+htLPSH2bN9ip9TxHO+Ye5FGjV4V/teqXdC3iQFn6tOA3DJSftv2XeCrRBxhVRaqhMgzy6mxdC7bMPH6A3A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ASXgruLa3aEX/NAa7b3YW6mZx1bA6EOYBkBFuxRlTMg=;
+ b=c9TraO2IlTT9qZD9AYPsTOfpf3dbUEuMcWcGHzmjuV6wBsznH9X7mFuD8yAFlw8NrrUo9DrWsZg90Svke0D48lsbKKgU030mjJv5b1OOnAfErDx3w5ZStDll1nBMIxiLLWATxqdfoNIwPYmIVzV6asdlJRVkk4DJfqeB/2tfbJ/xqtONMmkTcWBDYfkE2VPtcM9hmJpbC4PtO5WnFv3KAR2g9k0Ejuns3sBoh1MmbbXf0nIMdcyVDzN2JWSeF2H3pimLqJHbDLUhtptyAm/OV3EPsAW5GGklsXooABNvGzoX3/lWYb6O21j4+Qka3jzUst+kkN0gqanym2Gg9Cohlw==
+Received: from SJ0PR03MB5950.namprd03.prod.outlook.com (2603:10b6:a03:2d3::20)
+ by DS4PR03MB8376.namprd03.prod.outlook.com (2603:10b6:8:328::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.16; Mon, 29 Jun
+ 2026 07:24:59 +0000
+Received: from SJ0PR03MB5950.namprd03.prod.outlook.com
+ ([fe80::53a0:bf93:6b6b:de01]) by SJ0PR03MB5950.namprd03.prod.outlook.com
+ ([fe80::53a0:bf93:6b6b:de01%4]) with mapi id 15.21.0159.018; Mon, 29 Jun 2026
+ 07:24:59 +0000
+From: tze.yee.ng@altera.com
+To: Dinh Nguyen <dinguyen@kernel.org>,
+	linux-kernel@vger.kernel.org,
+	Guenter Roeck <linux@roeck-us.net>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	linux-hwmon@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Subject: [PATCH v2 0/2] hwmon: add Altera SoC FPGA hardware monitoring support
+Date: Mon, 29 Jun 2026 00:24:53 -0700
+Message-ID: <cover.1782715159.git.tze.yee.ng@altera.com>
+X-Mailer: git-send-email 2.43.7
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SJ2PR07CA0005.namprd07.prod.outlook.com
+ (2603:10b6:a03:505::29) To SJ0PR03MB5950.namprd03.prod.outlook.com
+ (2603:10b6:a03:2d3::20)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Date: Mon, 29 Jun 2026 16:20:11 +0900
-From: weibu@redadmin.org
-To: Akira Yokosawa <akiyks@gmail.com>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, corbet@lwn.net
-Subject: Re: [PATCH v1] docs/ja_JP: translate submitting-patches.rst
- (sign-off)
-In-Reply-To: <17b906ad-3f95-4a47-9762-b70589d86f6b@gmail.com>
-References: <20260613233541.50732-1-weibu@redadmin.org>
- <17b906ad-3f95-4a47-9762-b70589d86f6b@gmail.com>
-Message-ID: <d3a29ef047fe1381d18aef66f23304c7@redadmin.org>
-X-Sender: weibu@redadmin.org
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ0PR03MB5950:EE_|DS4PR03MB8376:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9c897fe5-3fb2-4f5a-c981-08ded5af86a4
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|23010399003|376014|366016|1800799024|56012099006|11063799006|6133799003|55112099003|3023799007|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	oIC0borvJjHHfSEUmz9XorGpJX3ecsxd8BacXPB3wc8ODJAzzFX7+z8bTpPFim7wfduVcsdlzWETpctBseiTSQIj+zEcKqmiNERkWQZNMQQIE67YEWlAOjLdhkGwP8c9FbrLk6cXwERC8TUAWAy1lbIxfFthT4NNvf4IdlDmLfQd8Kas1xBnZ1BHqKMJ2Uarjt6KKTVMWN2CbRC6PVa5lv2H+P6FK+XcklKTnw9SLBtl5ZrqPzyJFEHCgVrTHTvKDNMu/STYF3qraOmM7l9E5v6MBZZbfyUCJoqdiqm+/mJj2AfiUtYf22+HKczMWKBrPFybu0j7X3rfs/9LKmxtYHH+tVMA5O/6oe5gvempxbtBog7xGv8LnBnYdCOIqLsVWRa3pxGEQKCeB5W9btYcSRm4vhKKqn7xJDYFlv2wI/vHiP+AJ561LaGBIQfZkLOiq/4AMTKJuZytFD/qAvdymkpl+4dJJk0tfk9OTngvSNAW370EixQPIE6CMpUf9L5nQG/TDGsEbhIk89ot0Awkk61QiVr018OrqGahV/v+Jwi/0Uubu8Dq51tTDNQiTOMi18uuHZ+ZvAXOdjzxljNo1C+Oa8vTTD78NKKA2flGLbMQYCy+w3V/a31Mpghjz7FcHgGoEI/muCELcb1w4LNRE2KwOB588rIFK5KFfriGuDc=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR03MB5950.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(366016)(1800799024)(56012099006)(11063799006)(6133799003)(55112099003)(3023799007)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?dmNcHWNcLI5juSG9Y6zzCtAbFK8vZHbUd3ZcB942PdiK/Q8F3yIYqfiGnrUm?=
+ =?us-ascii?Q?O2HSc8aPy/c6Xc6/fPra3QrtUpqDudDicc/8slDmH0tvUrJVzc37c+NnPJJh?=
+ =?us-ascii?Q?hoEhr0EaFItfhzjO1dyzHjqolVkecF4QxrJcAxKBrp/Qx9QdwTFRDY3qdogc?=
+ =?us-ascii?Q?lCpSmfWX4powOxK6wsLQOrM0mPgBK/bGj3lv7RwVByvrwmvliAogoab07orx?=
+ =?us-ascii?Q?jRzmd6FyTXOlAUV1v7BLKB7RfHUWoZPu8GsRqmvf7EPKOz9KoRqaaHIf+N1+?=
+ =?us-ascii?Q?nV137A+G0wbxM2Nd/BmaZtEZIFgj1O/xUmDQAA904uZeggsiWiZyOlSNAdas?=
+ =?us-ascii?Q?0DtmDV1Sx+Vz0OHX/3sOwBv680v/uzPTFjoySsfzsXNrjCIvHpIdQ4ajSqc5?=
+ =?us-ascii?Q?O0nnX3Xy4nNyHk5dMeAkw6vNDO/mL5opPR5FPpxfe0G8fPBaZoFPd8CgcVSP?=
+ =?us-ascii?Q?dyZaGosnXIyHyi9KSyoH+GVud6judEI6ns1fdEIXIPaZA2JuvjK42ZOu9X+D?=
+ =?us-ascii?Q?ytJAr8M+JVyyOKjRpyGwYeXPiEzXy/6Gw4YzA7L5mOKZYKpA8VaN52xcz8eI?=
+ =?us-ascii?Q?0tPT8O1+977h/dQ0DN01Y5aoFJIcwTc62cxSo8EFTQE5Enzof6E8RjmwZhDZ?=
+ =?us-ascii?Q?K00KTFP1PlkoLVMpXdo3EsVs8rnChTyxA5mT97JZTDfoFXlMsDO8AeXk+CdG?=
+ =?us-ascii?Q?4rqV8TBIB9ZV4fHkkl3Q2Wf/XEe/4kg4HALxSmbclk3fJj0YVTmHgfU0PFNo?=
+ =?us-ascii?Q?dPTi0HgpJZp/aaI+2E27mR1O81EzswDDFA5OQRiFpYl8ZfOLJxYNdmx2SwYw?=
+ =?us-ascii?Q?aGfMslzOWKOAg+hnd2zNGdUgWNQsW2Al9GsbfpcfQPDFBIHQyzkmV7QflXLo?=
+ =?us-ascii?Q?aIKgiBf04ByRvc93IH6fnNIJ7eSzsSpN+pX88LdltVIMUpcRYHoeowzcLDbG?=
+ =?us-ascii?Q?hNUvqXQWXqEcOtQlbBumHMnH3CZHeRByEilgB0jcXX815iwOf23ufUl3TBjs?=
+ =?us-ascii?Q?yLMsqlUtm6m8qbI0kVSdh82LlF4lnmYi5b6BMRObd2hgOBkFvzsSihgAZhu4?=
+ =?us-ascii?Q?4Duvt7mXTbZ8CvgHcLF5f5S310FkK8suvhk9V0sFoU3uUzx0UI5rDI22YI7b?=
+ =?us-ascii?Q?Gzmj4AbjjSJvDr9Ab+0zcFKruq67Edr9MSbPdUC3we8Q3vfYe1vDutOyWLP3?=
+ =?us-ascii?Q?tWwBXqOSJSJtn2fNWQTts9Hvatwowiyr5iX60JY180VWvFaqd6MARGGrtdw1?=
+ =?us-ascii?Q?XwzJ38iQWnRIZIDOT6Rv47JiKDnKN4+0sESA/DFjkqBefd+Kv4oWDlrO+0zA?=
+ =?us-ascii?Q?neWF4XZ/R6HipJb0yLr6e4McJm/GnqrBCNVqQuFt4Nqvvg8XV0nsBI9nPVNt?=
+ =?us-ascii?Q?CU8/ID4wTIB0A6iRgyFBuWDVJOxXk43MDUAyB4Do6X2BEp8opdlUlZe05Ibu?=
+ =?us-ascii?Q?3ozpHEWuLliRp7MXBfW29cFvrUvdAGxi3a3eLNehQNLWCu2w63jKnzmzGSZN?=
+ =?us-ascii?Q?b7mGQO5BcS+YX9MXIVfRuC8/BLkzL4IPLyoLx2IlR9Va7E8+TlJuZNWjjVTQ?=
+ =?us-ascii?Q?CL1NUv0gZd36pnp12zV4n+MOMaG9HgfjYT3eQ3Quvo8IG2RCy2KKQ1onRRhF?=
+ =?us-ascii?Q?Y8ZR2y/Fy5pUKP3+Rkph8c29+XtHqVqkWhiZrNz9h3PDQYTU02W3yrlewtZg?=
+ =?us-ascii?Q?JOfsL/adaLIcIBT2wemZ+xoq3nFnq53dlnfd7HmtCFtxqf6U0+neienvdt7d?=
+ =?us-ascii?Q?ZQpb959Jug=3D=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9c897fe5-3fb2-4f5a-c981-08ded5af86a4
+X-MS-Exchange-CrossTenant-AuthSource: SJ0PR03MB5950.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jun 2026 07:24:58.9585
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: FKFpvO8H5I9OWmDk2CQCc5EZPR9CEyXwr3c41XHMV6P+BOFbuqKfpPrkHiTevRjOA/1Olyxp6hz8iCmwxffFsQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PR03MB8376
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[redadmin.org,none];
-	R_DKIM_ALLOW(-0.20)[redadmin.org:s=20231208space];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+X-Spamd-Result: default: False [1.34 / 15.00];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[altera.com,reject];
+	R_DKIM_ALLOW(-0.20)[altera.com:s=selector2];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-93934-lists,linux-doc=lfdr.de];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[weibu@redadmin.org,linux-doc@vger.kernel.org];
-	FREEMAIL_TO(0.00)[gmail.com];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:akiyks@gmail.com,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:corbet@lwn.net,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:dinguyen@kernel.org,m:linux-kernel@vger.kernel.org,m:linux@roeck-us.net,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-hwmon@vger.kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[weibu@redadmin.org,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[redadmin.org:+];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	RCPT_COUNT_THREE(0.00)[4];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	TAGGED_FROM(0.00)[bounces-93922-lists,linux-doc=lfdr.de];
+	FORGED_SENDER(0.00)[tze.yee.ng@altera.com,linux-doc@vger.kernel.org];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[altera.com:+];
 	FROM_NO_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[tze.yee.ng@altera.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,redadmin.org:dkim,redadmin.org:email,redadmin.org:mid,redadmin.org:from_mime,vger.kernel.org:from_smtp]
+	RCPT_COUNT_SEVEN(0.00)[7];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,altera.com:dkim,altera.com:email,altera.com:mid,altera.com:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 31F676D75A5
+X-Rspamd-Queue-Id: C1A946D7192
 
-Hi Akira-san,
+From: Tze Yee Ng <tze.yee.ng@altera.com>
 
-Thank you for the review.
+This series adds hardware monitor support for Altera SoC FPGA devices.
+Temperature and voltage sensors are accessed through the Stratix 10
+service layer and Secure Device Manager (SDM).
 
-I agree that translating the DCO text itself could be confusing,
-because the sign-off refers to the English certificate, not to a
-translated version.
+In v1, sensor channels were described in device tree under an
+altr,stratix10-hwmon child node of the service layer. Review feedback
+noted that this is not a discrete hardware block with its own resources,
+and that a dedicated hwmon DT binding was not appropriate.
 
-I'll wait for your fix to the English version and then update the
-Japanese translation accordingly.
+v2 removes all hwmon-related device tree bindings and DTS changes.
+Instead, stratix10-svc registers a socfpga-hwmon platform device when
+CONFIG_SENSORS_ALTERA_SOCFPGA_HWMON is enabled, similar to stratix10-rsu.
+The hwmon driver binds by platform device name only and selects sensor
+channels from hardcoded tables based on the parent service layer
+compatible string (intel,stratix10-svc or intel,agilex-svc).
 
-Thanks,
-Akiyoshi
+Patch 1 adds async HWMON SMC support to stratix10-svc and registers the
+socfpga-hwmon platform device.
 
+Patch 2 adds the socfpga-hwmon driver, documentation, Kconfig, and
+MAINTAINERS entry.
 
-2026-06-29 14:16 に Akira Yokosawa さんは書きました:
-> Hi,
-> 
-> I'm sorry I couldn't respond promptly.
-> 
-> On Sun, 14 Jun 2026 08:35:41 +0900, Akiyoshi Kurita wrote:
->> Translate the "Include PATCH in the subject" and "Sign your work -
->> the Developer's Certificate of Origin" sections in
->> Documentation/translations/ja_JP/process/submitting-patches.rst.
->> 
->> Keep the wording close to the English text and wrap lines to match
->> the style used in the surrounding Japanese translation.
->> 
->> Signed-off-by: Akiyoshi Kurita <weibu@redadmin.org>
->> ---
->>  .../ja_JP/process/submitting-patches.rst      | 70 
->> +++++++++++++++++++
->>  1 file changed, 70 insertions(+)
->> 
->> diff --git 
->> a/Documentation/translations/ja_JP/process/submitting-patches.rst 
->> b/Documentation/translations/ja_JP/process/submitting-patches.rst
->> index d31d469909e4..56494bac169c 100644
->> --- a/Documentation/translations/ja_JP/process/submitting-patches.rst
->> +++ b/Documentation/translations/ja_JP/process/submitting-patches.rst
->> @@ -402,3 +402,73 @@ ping したりする前に、少なくとも 1 週間は待ってください。
->>  パッチまたはパッチシリーズの修正版を投稿する場合は、"RESEND" を
->>  追加しないでください。"RESEND" は、前回の投稿から一切変更していない
->>  パッチまたはパッチシリーズを再送する場合にのみ使います。
->> +
->> +
->> +件名に PATCH を含める
->> +----------------------
->> +
->> +Linus と linux-kernel には大量のメールが届くため、メールの件名の
->> +先頭に ``[PATCH]`` を付けるのが一般的な慣例です。これにより、
->> +Linus や他のカーネル開発者は、パッチを他のメール議論からより
->> +簡単に区別できるようになります。
->> +
->> +``git send-email`` は、これを自動的に行ってくれます。
->> +
->> +
->> +自分の作業に署名する - Developer's Certificate of Origin
->> +---------------------------------------------------------
->> +
->> +誰が何を行ったのかを追跡しやすくするため、特に、複数階層の
->> +メンテナを経由して、最終的にカーネル内のあるべき場所へたどり着く
->> +可能性があるパッチについて、メールでやり取りされるパッチに
->> +``sign-off`` 手続きを導入しています。
->> +
->> +``sign-off`` は、パッチ説明の末尾に置く単純な 1 行です。これは、
->> +あなたがそのパッチを書いたこと、またはオープンソースのパッチとして
->> +渡す権利を持っていることを証明するものです。ルールは非常に単純です。
->> +以下を証明できるなら:
->> +
->> +Developer's Certificate of Origin 1.1
->> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 
-> You are keeping this title untranslated.
-> I agree it is not easy.  I even think it is close to impossible.
-> 
-> But then, I don't see much point in translating the "certificate"
-> itself.
-> 
->> +
->> +このプロジェクトへ貢献することにより、私は以下を証明します:
->> +
->> +        (a) この貢献は、全部または一部を私が作成したものであり、
->> +            ファイルに示されているオープンソースライセンスの下で
->> +            提出する権利を私が持っていること。または、
->> +
->> +        (b) この貢献は、私の知る限り、適切なオープンソース
->> +            ライセンスの下にある過去の成果物に基づくものであり、
->> +            そのライセンスの下で、その成果物を、全部または一部を
->> +            私が作成した修正とともに、同じオープンソースライセンスの
->> +            下で提出する権利を私が持っていること。ただし、
->> +            ファイルに示されているように、異なるライセンスでの提出が
->> +            許可されている場合を除きます。または、
->> +
->> +        (c) この貢献は、(a)、(b)、または (c) を証明した別の人物から
->> +            直接私に提供されたものであり、私はそれを変更していないこと。
->> +
->> +        (d) このプロジェクトと貢献が公開されること、ならびに、
->> +            貢献の記録（私が提出したすべての個人情報、私の sign-off を
->> +            含む）が無期限に維持され、このプロジェクトまたは関係する
->> +            オープンソースライセンスに従って再配布される可能性がある
->> +            ことを、私は理解し同意します。
-> 
-> What you need to agree in signing off is the English certificate.
-> Not the translated one.  So this can confuse people.
-> 
-> I don't have any good idea.
-> 
-> Please convince me you can translate the certificate
-> without any concern of confusion.
-> 
->> +
->> +その場合は、次のような行を追加するだけです::
->> +
->> +        Signed-off-by: Random J Developer 
->> <random@developer.example.org>
->> +
->> +確認可能な身元情報を使ってください（残念ながら、匿名での貢献は
->> +受け付けられません）。これは ``git commit -s`` を使えば自動的に
->> +行われます。Revert パッチにも ``Signed-off-by`` を含めるべきです。
->> +``git revert -s`` はこれを自動的に行ってくれます。
->> +
->> +パッチ末尾に追加のタグを付ける人もいます。それらは今のところ単に
->> +無視されますが、社内手続きを示したり、sign-off に関する特別な
->> +詳細を示したりするために使うことはできます。
->> +
->> +作者の SoB に続くそれ以降の SoB (Signed-off-by:) は、パッチを
->> +取り扱い、次へ受け渡した人々によるものですが、その開発に関与した
->> +ことを意味しません。SoB の連鎖は、パッチがメンテナへ伝わり、
->> +最終的に Linus へ届くまでに実際にたどった **本当の** 経路を
->> +反映すべきです。先頭の SoB エントリは、単独の主たる作者を示します。
-> 
-> I think organization of this section in English version was
-> corrupted during reST conversion.  I'll submit a fix.
-> 
-> Regards,
-> Akira
+Changes in v2:
+- Drop altr,stratix10-hwmon DT binding and intel,stratix10-svc hwmon
+  child property
+- Drop Stratix 10 SoCDK DTS hwmon node
+- Register socfpga-hwmon from stratix10-svc (RSU-style)
+- Replace DT channel parsing with hardcoded Stratix 10 and Agilex tables
+- Rename driver/module to socfpga-hwmon 
+  (CONFIG_SENSORS_ALTERA_SOCFPGA_HWMON)
+- Add Agilex channel support
+- Fix SDM value conversion (Q8.8 degrees Celsius and Q16 volts to hwmon
+  millidegrees/millivolts)
+- Improve sync-mode error handling via last_err
+
+Previous version:
+  https://lore.kernel.org/all/cover.1781861409.git.tze.yee.ng@altera.com/
+
+Tze Yee Ng (2):
+  firmware: stratix10-svc: add async HWMON read commands and register
+    socfpga-hwmon device
+  hwmon: add Altera SoC FPGA hardware monitoring driver
+
+ Documentation/hwmon/index.rst                |   1 +
+ Documentation/hwmon/socfpga-hwmon.rst        |  34 ++
+ MAINTAINERS                                  |   8 +
+ drivers/firmware/stratix10-svc.c             |  46 +-
+ drivers/hwmon/Kconfig                        |  10 +
+ drivers/hwmon/Makefile                       |   1 +
+ drivers/hwmon/socfpga-hwmon.c                | 596 +++++++++++++++++++
+ include/linux/firmware/intel/stratix10-smc.h |  38 ++
+ 8 files changed, 731 insertions(+), 3 deletions(-)
+ create mode 100644 Documentation/hwmon/socfpga-hwmon.rst
+ create mode 100644 drivers/hwmon/socfpga-hwmon.c
+
+-- 
+2.43.7
+
 
