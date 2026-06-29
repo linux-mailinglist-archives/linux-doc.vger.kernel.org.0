@@ -1,127 +1,120 @@
-Return-Path: <linux-doc+bounces-94002-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94003-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id pZgjKVB0QmpR7gkAu9opvQ
-	(envelope-from <linux-doc+bounces-94002-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 15:34:08 +0200
+	id AwfmA3V7Qmod8QkAu9opvQ
+	(envelope-from <linux-doc+bounces-94003-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 16:04:37 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0EAF96DB438
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 15:34:08 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F0876DBB65
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 16:04:36 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=eBSggJwm;
-	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=KCjLcoeB;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94002-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94002-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=reject) header.from=mailbox.org;
+	dkim=pass header.d=lwn.net header.s=20201203 header.b=XeVkzgxW;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94003-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94003-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=lwn.net;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 2902F30E292A
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 13:26:25 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id AE1E932689CD
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 13:42:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 983A1408633;
-	Mon, 29 Jun 2026 13:24:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2B09D2222C5;
+	Mon, 29 Jun 2026 13:42:17 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C442B409107;
-	Mon, 29 Jun 2026 13:24:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9FF5C222565;
+	Mon, 29 Jun 2026 13:42:15 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782739481; cv=none; b=Ht1C686T/9rx7WBkf8/yLhnHzT45J8YHXSAiqAk9VbYwhXMibzBzz/YTkvffPmppRPgxdLkRUwkIk97En6XwRG7Ej1fh0q8h5tOKWobjFQUvVw9PrW8iM43JuIvm2gP29op8pkZJ9OirCU/FI+kfC4GK5TBTJmivhCbNdJy48zM=
+	t=1782740537; cv=none; b=Go5mpSuwJPff1DRUezU3pWEEYyjP4DzqZZ39zXLRfqlnHBEwyBrL3qS2F0ns9a4HerdKNUCTmcxCqw8JPAWBzarVNDrvYH1rwt26PUjmdOlZoDrSLzpJTpGMbrN5OPWpXI2PGcW9ZDXNowj9yDkKD7wC0I0unj5m2ho2sEpikpc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782739481; c=relaxed/simple;
-	bh=XI36Wcjd53W3LgP4u8oNkwxJECwlX+KH/rCKXjbfWuw=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:Content-Type:
-	 MIME-Version; b=auA0mXInoEcYomaafPx3rJMXzgD/U2qBdsdB0qlBukWgE57hO1R+vo4srwGXaokMlyqZuYxWlDTFvAK6jk/XtNw/qZ0B+mOMrKkjgjhWwx8J0WmQxQ9snjKzV32cj6THzeqbKrOK5NC5pjzHQ2aTymV3ZW1orGlvxZJGSy6FWT4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org; spf=pass smtp.mailfrom=mailbox.org; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=eBSggJwm; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=KCjLcoeB; arc=none smtp.client-ip=80.241.56.172
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [IPv6:2001:67c:2050:b231:465::102])
+	s=arc-20240116; t=1782740537; c=relaxed/simple;
+	bh=mmtf0A7xzBvicHiaR8k96ma20BoqByKAARUwYePhH8M=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=l6/kfZa0SplP6EnV50V0LILuxPdnQAt/GItZHNcnlVt3ZQ2T2TrlxVjYQxNRtApVi1zrQZzquzEZPU8F6J23nBxE48t4luAmEXoksH5JL4vA59fzTJi2IGwi4qRLhRSR23WIiFVF3VHuh+O+ua11w/nOdv3qA1czko7A9ly+qks=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=XeVkzgxW; arc=none smtp.client-ip=45.79.88.28
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net B305840E59
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1782740528; bh=9UDS1rBClB2zraXdgOpykIMV5rwaSbg+XI7SiZ1Ajtk=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=XeVkzgxW0tNo0IDORLSuyWoeetBly8YWq0OSdcSsBZ/cH9oEuW3tl1Cz0++MASDq9
+	 z+h7cy7LjEuuxKOMcyd7Xxy7/2n4tJQPmvmXl2AdOvPPYplPvxfHEpJ+ak+m0UTeBk
+	 J8FVt39RBjDQrR2Jkv5ByUS1glWZnnMmZQlIyuVFmk1CKXd51G7zNX2uNTNfCKftgc
+	 +z1sSqFoPYJF8yDedntl2fccaQ2tcdQY+pxS3d2MEQOdBpfIquhP1Qdnjumo30Psrt
+	 l7u3dMPaW2InoiUjYC5gYNhu6h1USP8G4UcF7ql0UUxhuwHz2JZkAVt+Ev0hRRkZNz
+	 6U2MYITxNtHFQ==
+Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4gpn7T39mlz9tbV;
-	Mon, 29 Jun 2026 15:24:37 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1782739477;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:  in-reply-to:in-reply-to;
-	bh=XI36Wcjd53W3LgP4u8oNkwxJECwlX+KH/rCKXjbfWuw=;
-	b=eBSggJwme7Ioe48cM2xHIJDrn5PDsj5+Myx3lM0fXcJTQgEMbOqAqDisx8MSsd6vcx7zkC
-	7g6aCldqNS7Scbmj1vViucuC0r0cCUj781RcSPk/WOT7Yc2lY0wMkyjRkqsBdqnBaok3AW
-	cDv/J9adnWD3V7jQYIgFLGLaOVT7/SK9Tk9HDqnK/4VnNpw+fITjroUL8XLd7L0k2sRSaP
-	RhrSpKB3JGa3uOY6fgbouhp9EtjMMACbOaJS1Yib2ecksfV3gDNMR3Q5HN/bG2vihYXY7t
-	MmcPAvwvORbCCMbTEVSSoP/khK2lPCEteEWZvcdGxbYevVzJU6WDoo+GwJtB/w==
-Message-ID: <14d8a272b4d57b9e316a1351b38867417a2a6603.camel@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1782739475;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:  in-reply-to:in-reply-to;
-	bh=XI36Wcjd53W3LgP4u8oNkwxJECwlX+KH/rCKXjbfWuw=;
-	b=KCjLcoeBzamkPvuUFAq/i85UZHssRz5nCHQ1TLNagQ8rPGo8dqGIFdDjSguJIFqssF5M2V
-	6FjMkUJh/jXlGcOCVmcjOV4b8jSEHjIBoHLdZModz4oNVaCBsyfiEHcfRvM3rTTGCSnI9p
-	TnrDxR4akHA89+ImM1j+zionOS9BRZ/Siw71Mesda2IFjGNmykz76E1UaRCzTqYyq3PwBN
-	KMidS2+ZLZ1sKmNxwzw6NoDjJnA+/9HGq8l2i5dZiQKHuV9J6OYmqcHHBuZHqRcAESko6O
-	4UoEvKm83w+c1+ZYlpQmqht6PpLYdSKuk6voo+0UCkGf8KGGUyztl9jQsWWEeA==
+	by ms.lwn.net (Postfix) with ESMTPSA id B305840E59;
+	Mon, 29 Jun 2026 13:42:08 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Manuel Ebner <manuelebner@mailbox.org>, rdunlap@infradead.org
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-watchdog@vger.kernel.org, linux@roeck-us.net,
+ manuelebner@mailbox.org, skhan@linuxfoundation.org, wim@linux-watchdog.org
 Subject: Re: [PATCH] docs: watchdog: Fix brackets
-From: Manuel Ebner <manuelebner@mailbox.org>
-To: rdunlap@infradead.org
-Cc: corbet@lwn.net, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- 	linux-watchdog@vger.kernel.org, linux@roeck-us.net,
- manuelebner@mailbox.org, 	skhan@linuxfoundation.org, wim@linux-watchdog.org
-Date: Mon, 29 Jun 2026 15:24:30 +0200
-In-Reply-To: <040f4089-7f81-470a-92d3-3ad022f3fd86@infradead.org>
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <14d8a272b4d57b9e316a1351b38867417a2a6603.camel@mailbox.org>
+References: <14d8a272b4d57b9e316a1351b38867417a2a6603.camel@mailbox.org>
+Date: Mon, 29 Jun 2026 07:42:07 -0600
+Message-ID: <87pl19xy34.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MBO-RS-META: k8hdp4aqudafom9gmgrrdxdfcxz5fnf6
-X-MBO-RS-ID: 10ce00d0ddb0fe443d4
+Content-Type: text/plain
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[mailbox.org,reject];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[mailbox.org:s=mail20150812];
+	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[mailbox.org:+];
-	TAGGED_FROM(0.00)[bounces-94002-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-94003-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:rdunlap@infradead.org,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-watchdog@vger.kernel.org,m:linux@roeck-us.net,m:manuelebner@mailbox.org,m:skhan@linuxfoundation.org,m:wim@linux-watchdog.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[manuelebner@mailbox.org,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	FORGED_RECIPIENTS(0.00)[m:manuelebner@mailbox.org,m:rdunlap@infradead.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-watchdog@vger.kernel.org,m:linux@roeck-us.net,m:skhan@linuxfoundation.org,m:wim@linux-watchdog.org,s:lists@lfdr.de];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	TO_DN_NONE(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[manuelebner@mailbox.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[lwn.net:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MISSING_XM_UA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	RCPT_COUNT_SEVEN(0.00)[9];
-	SINGLE_SHORT_PART(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp,mailbox.org:dkim,mailbox.org:mid,mailbox.org:from_mime]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,mailbox.org:email,lwn.net:dkim,lwn.net:from_mime,vger.kernel.org:from_smtp,trenco.lwn.net:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 0EAF96DB438
+X-Rspamd-Queue-Id: 4F0876DBB65
 
-Hi,
+Manuel Ebner <manuelebner@mailbox.org> writes:
 
-is this patch on it's way?
+> Hi,
+>
+> is this patch on it's way?
 
-Thanks
- Manuel
+On its way where?
+
+You posted it two days ago, during the merge window.  Surely you do not
+expect action on it that quickly?
+
+jon
 
