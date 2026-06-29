@@ -1,151 +1,289 @@
-Return-Path: <linux-doc+bounces-94056-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94058-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id VpPONdi2QmpUAAoAu9opvQ
-	(envelope-from <linux-doc+bounces-94056-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 20:18:00 +0200
+	id qN8dMdO3Qmp9AAoAu9opvQ
+	(envelope-from <linux-doc+bounces-94058-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 20:22:11 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 47AEA6DDF61
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 20:18:00 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id AF07F6DDFB3
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 20:22:10 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b="s5/UGfiK";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94056-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-94056-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=CgCQhiSz;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94058-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94058-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=nvidia.com;
+	arc=reject ("cv is fail on i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 436F8300AED1
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 18:17:59 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id B5B9D300530F
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 18:22:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 89531379EF2;
-	Mon, 29 Jun 2026 18:17:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 344F3384CE3;
+	Mon, 29 Jun 2026 18:21:52 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dy1-f180.google.com (mail-dy1-f180.google.com [74.125.82.180])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from SJ2PR03CU001.outbound.protection.outlook.com (mail-westusazon11012034.outbound.protection.outlook.com [52.101.43.34])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A2CF381AEB
-	for <linux-doc@vger.kernel.org>; Mon, 29 Jun 2026 18:17:55 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782757076; cv=none; b=RFcsiVC8cmTpR9vK63oMwIE8h2+Br+M/fcAMd51ZtRdq/MV+DsdxDliWabgS/0CPIIxeWUbcUfPFDGv7KoL1Q6LonElAUd51finL3v6ATIwQm/X8lr289c4FcnBo1ipmswDLOwvVM0k6F2vZ2RVf8jS465YZKkZojE8N/vkIhw4=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782757076; c=relaxed/simple;
-	bh=9Imzwz6EgRLo5/3ynxMxR6x7BHSZy7sXOrf/tVTTZgw=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=jBFM/hQMtRW1F5xOisqffrzeyjqYXQgYDFZCEOS4aHtvx38G4ITHJsxALAXphtfM7jplrORw7Yqa2fZm4Lr8PfuNZtU2lyXOSkd1kJGQSSptPVftiSssIXwT7YdiTaflUQsmTM/YB7w030gKku4Iv6coX+ClTvfKWPrSUuW7iG4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=s5/UGfiK; arc=none smtp.client-ip=74.125.82.180
-Received: by mail-dy1-f180.google.com with SMTP id 5a478bee46e88-30eac9abd79so2682187eec.1
-        for <linux-doc@vger.kernel.org>; Mon, 29 Jun 2026 11:17:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782757074; x=1783361874; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=VfUxWLWQvY9mB/81AVkSpyLi8QxfdBiALIQMC7mv16k=;
-        b=s5/UGfiKQYDxEg2MV5pd+YF5sVbXxMhJFk+RIJk3bwUUYT6nqIjHNfGBDHQQJ4Z+kA
-         bCvBr4meDT1R25dHUFI4KcYhvsbLAgq60br2UhPc0J6087FfrwpDbwf1FNeWTI38y1GF
-         6jfy+Q1XEIdf8RB7ARtSQlEJ6Q3fMcXq2Zc0tC/QBy6Gr+FyBsjnOm95H7yqy/tMqLV9
-         9VccLQIyBRGue+/fYPOOu4u5b+00vROgQEripJPUn71xJJo+KSIAGsY79EQNfBZdcdPJ
-         XQdIWaeSX/GufGb9HpRlKBG3TWM7+6Dsnm5D8bGMbhE51jXYVJiY7a/HKcgHxXdbTlDf
-         O3kQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782757074; x=1783361874;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=VfUxWLWQvY9mB/81AVkSpyLi8QxfdBiALIQMC7mv16k=;
-        b=pOP+EA8eNi3IRSNjQnOGI2EivCU4P3vLUmPtQAcDEjCAFCI7vcAVaYELm56m7L7vYZ
-         r+QZUL7575xSHdmcZUBraGp6VXvRKHIeXci07gN6usD8wOb9ztJJmZ56jQ8sPVy2r9xV
-         PzzQksQnJJwdSyAYXp8T+2NCMxLt5BnvhipFaeYextQjEP3CWzDwmZOPTzwUqfIszqQT
-         9Ia7Wy2ZUjUIGqE3rMBhPqqIiInl5bY1Hj6WrUNo9w2YGxVEVsNPO1d+JcW33VMSzfxl
-         onpaEXm1JRcP1ulXBcfoqSjkr1PFPe8V2eYCoibYaiDoQU2yCptSUicU8mFS9x9JX0TX
-         E0YA==
-X-Forwarded-Encrypted: i=1; AHgh+RrBFlJdDcSVuO5E0mGc6l5+kfj2Ev7D53olvPvGQRy9nMoMPmt/6NLuiKEE876Bj1i6HlIsWSwoitU=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxD37mbxD3e9jY3ZRaYDBtfOkm9GSUllqtZ74aTpbyZV6OUg9nR
-	15MA54dslom7locy3Xmu6AziEY09ghkHDfFiKgLxmqOMbx+T/dwfrAiV
-X-Gm-Gg: AfdE7cn0otCpAHUhr79Mjd+jWWzalARsvoR4nuDbcEr2v2d6rfg3cL9hlan5wk7YhiJ
-	qbc+flUdTaMt6nrl295LJEUNfZGAfx5JvFj4rFFLbwBR/iCDtfA5TB+FtlJ2ZwPWJLci677KAuq
-	pJOrxXAMQHicD5H0dhiGridztgE4+qJOI49VRjme3jgNT3XyDykW5zUvo0Nptkx3qRuqTNjk/52
-	Yw8G/BJMRre8857FckxcjGQnBbwjE58kIQrFZxiY501lJO4eGtjuSCzbKK1kw7YUNcuShuteGhF
-	1jfVOuLfPq75PIgm0CrUWSBdgPknJk2nThT247L+WCuFLTrp9O3s21gbabzfasLauVuqdEox9HB
-	57hQywplJl+lUKE94A5GmAl7IXo+Co+E98PlUehM5vtOlsxZKAXCG2ZdiJIUkL2SPD2bBFfj80Y
-	uzZ7vOu1B8xtnCtbmAyKJzntPa1mFeClI2SX9zS9Aioqdw
-X-Received: by 2002:a05:7300:72cd:b0:30b:f5c1:4484 with SMTP id 5a478bee46e88-30ee13a2040mr379952eec.35.1782757074358;
-        Mon, 29 Jun 2026 11:17:54 -0700 (PDT)
-Received: from fedora ([2601:644:937c:6c90:6d4e:7b2d:4a39:fb0c])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30ee2fc12e7sm70363eec.8.2026.06.29.11.17.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Jun 2026 11:17:53 -0700 (PDT)
-Date: Mon, 29 Jun 2026 11:17:51 -0700
-From: Vishal Moola <vishal.moola@gmail.com>
-To: Manuel Ebner <manuelebner@mailbox.org>
-Cc: Jason Gunthorpe <jgg@ziepe.ca>, Leon Romanovsky <leon@kernel.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	David Hildenbrand <david@kernel.org>,
-	Lorenzo Stoakes <ljs@kernel.org>,
-	"Liam R. Howlett" <Liam.Howlett@oracle.com>,
-	Vlastimil Babka <vbabka@kernel.org>,
-	Mike Rapoport <rppt@kernel.org>,
-	Suren Baghdasaryan <surenb@google.com>,
-	Michal Hocko <mhocko@suse.com>, Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Shakeel Butt <shakeel.butt@linux.dev>,
-	Randy Dunlap <rdunlap@infradead.org>, linux-mm@kvack.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2] docs/mm: Fix braces
-Message-ID: <akK2z2q_OWiNBpYO@fedora>
-References: <20260629161156.90213-2-manuelebner@mailbox.org>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0AF8A2E3AF1;
+	Mon, 29 Jun 2026 18:21:48 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1782757312; cv=fail; b=aXpD4UzTjSAqrsDnRGcxENqVvr7bQJwHwPi67dLHAiBm6Ixqnz1O0tfm0BDD3pLWxDho8S8FbjvLBksljNar3o24Muui8cmRRerYCBwfa/7YHLjRScLE5/NNM77oGyaAXmoXASIMfvDwawoaljMkXwd+MgX+lZjqfr2WXb7/YZs=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1782757312; c=relaxed/simple;
+	bh=BNvk2Qe1SrZD5aJ4UyW2B+BAG19KDpGTxZ3/BkfzXRA=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=OK2PT/V26NQmskDkwXB8jh8s0dJhK8/vZdhFSPBFFumVgX/CbSK09k+PwP8erEQaFTppEX/b71A7WiQyZ8OySr8wZQpiUR6Bl0+KysJCRt5nsIQZ+PIL4OX7en6pcXbTHnGwiSlCDsiS+Qr0FT1xlra+ZrFVuns3xIF+/Che2Pg=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=CgCQhiSz; arc=fail smtp.client-ip=52.101.43.34
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=rgNrNcC72iJ968ENoO+eLH/wPAgEXniZC5pGMWBqSwJuXkLNCK1UahI4zgFVljF1OIHfPSlAXcwE/nWnDwykLiMCmfoL8ay3KJy2o5DpxVQm1TehjCCoZV0qnLumV7IpJJMBxDllmKxSgtCXYGd6MntZY/bWmaZ+ngBg0FrE83phHjbDdBoI3N8CUWmByIb5CkfuByeW/E/GD9ZZuL7XjcmvWMF1FnOb4CM4crd8A4Rh3ff3NK7UOsSMFjVFOF4qdSL2yvvM0W6+JYhtJHMNXp1gAJjfTZNJSzTa3dg6EqWkdZrM3G2V8c0MrPjXTBebYGSOD8kHe/+rTsHJ2IVJ6g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=wrIr/5ttcIiMeCgQH1ghmF1Kq+dzHnRITLs5VyV/OvM=;
+ b=aWRGTwUqW9wqPBlVxeblQVV/OAjDIvraDCTzvPM3925M7LUlLaH6sn/K2uKpkHwn5n0C/VIwI4Q23WT/fhZULEMrqFe0njov9nwULlfmeS17hPjLP+iu0hNmkJ1acCZ3FpzFxHg/qjktwp6Pjq0grvdaZe6h/mk6x1GUE5HcExjuPsVis01YinYJ2KQkCh9IFoml6gx5OT7psOoHHJeDJixKJssbpBFpFrnE1YcwMMLlouEao2AV+DQtPSnmMQXytNRJb6la+P6ppfkKVeYrrFXyxo+krhBI1F+i6zwoWgJzdSEmFxYMIyB6TGkgH+wYiewNDdzbGk3j0etRW/el4Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.161) smtp.rcpttodomain=resnulli.us smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=wrIr/5ttcIiMeCgQH1ghmF1Kq+dzHnRITLs5VyV/OvM=;
+ b=CgCQhiSzyxVBlExLwSd7iAEtkh2NSE6dniDBU5tHJGJhmh3WNxixwYwcLXpFwYVoP3viUsIWCd8tSNUZTbatyMTgosjb/YoI7iWeUC+PRZRgg1CKfUrqkHbs+mYdXnCk+wS26wbfJKtR4wE7vLPYZyi4D7+MSxFtLAd/hCvaKQgSLmYJrwOPfAq2dmy/n2VvLpQt//Jz4QuPtI/awZguQpXkIlANl0HgoQhYDfHFxs6OZocEZbOPx1wh9DYB8fTOSb8vYgr7/XbW6YDtQAT6PMgpniCMyxg86RaRhcJMSp0TYKx8diR3L+/8yaVAkcUccudmV5cTvEzfcTZAuNUFqw==
+Received: from PH7P220CA0127.NAMP220.PROD.OUTLOOK.COM (2603:10b6:510:327::7)
+ by DM6PR12MB4106.namprd12.prod.outlook.com (2603:10b6:5:221::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.19; Mon, 29 Jun
+ 2026 18:21:41 +0000
+Received: from CY4PEPF0000FCC1.namprd03.prod.outlook.com
+ (2603:10b6:510:327:cafe::d) by PH7P220CA0127.outlook.office365.com
+ (2603:10b6:510:327::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.159.19 via Frontend Transport; Mon,
+ 29 Jun 2026 18:21:40 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ smtp.mailfrom=nvidia.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.161) by
+ CY4PEPF0000FCC1.mail.protection.outlook.com (10.167.242.103) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.181.6 via Frontend Transport; Mon, 29 Jun 2026 18:21:40 +0000
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
+ (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 29 Jun
+ 2026 11:21:08 -0700
+Received: from rnnvmail202.nvidia.com (10.129.68.7) by rnnvmail201.nvidia.com
+ (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 29 Jun
+ 2026 11:21:07 -0700
+Received: from vdi.nvidia.com (10.127.8.10) by mail.nvidia.com (10.129.68.7)
+ with Microsoft SMTP Server id 15.2.2562.20 via Frontend Transport; Mon, 29
+ Jun 2026 11:21:03 -0700
+From: Mark Bloch <mbloch@nvidia.com>
+To: Jiri Pirko <jiri@resnulli.us>, Eric Dumazet <edumazet@google.com>, "Jakub
+ Kicinski" <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Simon Horman
+	<horms@kernel.org>
+CC: Saeed Mahameed <saeedm@nvidia.com>, Leon Romanovsky <leon@kernel.org>,
+	Tariq Toukan <tariqt@nvidia.com>, Andrew Lunn <andrew+netdev@lunn.ch>,
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+	<netdev@vger.kernel.org>, <linux-rdma@vger.kernel.org>,
+	<linux-doc@vger.kernel.org>, Mark Bloch <mbloch@nvidia.com>
+Subject: [PATCH net-next V4 0/6] evlink: Add boot-time eswitch mode defaults
+Date: Mon, 29 Jun 2026 21:20:55 +0300
+Message-ID: <20260629182102.245150-1-mbloch@nvidia.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260629161156.90213-2-manuelebner@mailbox.org>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-NV-OnPremToCloud: ExternallySecured
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCC1:EE_|DM6PR12MB4106:EE_
+X-MS-Office365-Filtering-Correlation-Id: 10e84036-22eb-46ea-bb4a-08ded60b43fb
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700016|376014|7416014|1800799024|23010399003|82310400026|18002099003|11063799006|56012099006|3023799007|6133799003;
+X-Microsoft-Antispam-Message-Info:
+	WUfiqNQZPnEpLJhYF6rJbeVObsoiYUHQ+UpuS6gGIlFCrakBbLiQ6sSsiGh5a6OHPCe4Ag/BNZZH/xbEE7A5zxYchh0RvYelEVbCDcOUt4FK45kA72UDl/U3c5+J/VKcSwJIdYleu7dImM5fcwP8PpLWM4Omb/HRLRHPnosJCbuhBH6wJKkLAlfdFuOtxDXyClXwxc3r6RoSo5tPbzyxQJ0YFKfct6hhZ+0IyNoXDrt16Woy/oFKNRQwa/FseiYTpfASvxxgyaoGKnAW1X58O2GH6wCaMXhYSKiU6QNoMKplnUsaosLz/kk7H7YyU6AFxsFIXAwiliIzlexoxPnAtRkAabde9iNQ7u/YLeOx27lCr0a8b70SHqunwVSKLpzR10/j62NxvXigwqHaDa7JBLVnLpZdNAomEDUEshVClTufaTEBDVeLssy65yws/ylcwLRR+wzHne+JECwL5TfRsO4v1Pk/qeVo6i+U25xWRRnYo++rTIlgMVcCI2Z89t+z78NfkG9g9hNx3PtdHgo98Nv0AyKPp/JWmhuqll3AZ1dRFDS4bpMJekVdHbyMzjJLsBHLLuuOuwyQOGCYGArLTvS3L2pxGT48yFIqHFU159HrKcYGZbR1cqJ/vOUhGVIwceAdsApK5t+GdLv5ZRq+0P3T/LaC/C9jWRtDPLJWXk2eClgUfADtgBCtJmcnh8cww4toFgGUrE+MOZIit/YQ2g==
+X-Forefront-Antispam-Report:
+	CIP:216.228.117.161;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge2.nvidia.com;CAT:NONE;SFS:(13230040)(36860700016)(376014)(7416014)(1800799024)(23010399003)(82310400026)(18002099003)(11063799006)(56012099006)(3023799007)(6133799003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	VfJW+qbfGqPB1FnECCsmIs2aJ5ZY+IeusReWP1CeT/y0kSrQLYAq/G6GAI4qFnkba1vKXw2KzHxNaKAzpltm1JiZ6rLQkL86cWjWO67n++fjPgA/8e6trlH7Pvj5zD//EhgW4puFyqKNfN5uXg7WISUiDIIVB8NP5ngotqLPWYP3CrJoSSpxfzo9Mhutmxn6QyAEPzf84bjuA76vvTEmDwdidRf+evMCgrxV52Ke7RxMISxlGzSY2GW5lTrwrpGAKAVfpuzQivPDwjrO/ZP1140ZFgKoqzxNUZ6eNIrnzE3dDILy1cp335ykQxo9cjq1Lp8C68rGeYctNcLm5EZH3MTJT6hTfTkOtVPA0rFQKBFnuTQGuKzIgiJjDT0z3lIat5rPu3ujdLhhqSl5tHUrnywOXA5vIQiJtoPL+t0WoFpgfvCZEdziZNtTU2MBWNv8
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jun 2026 18:21:40.5576
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 10e84036-22eb-46ea-bb4a-08ded60b43fb
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.161];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CY4PEPF0000FCC1.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4106
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.66 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+X-Spamd-Result: default: False [-4.16 / 15.00];
+	WHITELIST_DMARC(-7.00)[nvidia.com:D:+];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[vishalmoola@gmail.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS(0.00)[m:manuelebner@mailbox.org,m:jgg@ziepe.ca,m:leon@kernel.org,m:akpm@linux-foundation.org,m:david@kernel.org,m:ljs@kernel.org,m:Liam.Howlett@oracle.com,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:shakeel.butt@linux.dev,m:rdunlap@infradead.org,m:linux-mm@kvack.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94056-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	TAGGED_FROM(0.00)[bounces-94058-lists,linux-doc=lfdr.de];
+	FORGED_SENDER(0.00)[mbloch@nvidia.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS(0.00)[m:jiri@resnulli.us,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:horms@kernel.org,m:saeedm@nvidia.com,m:leon@kernel.org,m:tariqt@nvidia.com,m:andrew+netdev@lunn.ch,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:netdev@vger.kernel.org,m:linux-rdma@vger.kernel.org,m:linux-doc@vger.kernel.org,m:mbloch@nvidia.com,m:andrew@lunn.ch,s:lists@lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[vishalmoola@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[mbloch@nvidia.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[Nvidia.com:+];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,infradead.org:email,fedora:mid]
+	ALIAS_RESOLVED(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	RCVD_COUNT_SEVEN(0.00)[9]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 47AEA6DDF61
+X-Rspamd-Queue-Id: AF07F6DDFB3
 
-On Mon, Jun 29, 2026 at 06:11:56PM +0200, Manuel Ebner wrote:
-> Correct typos in mm documentation by balancing parentheses.
-> 
-> Signed-off-by: Manuel Ebner <manuelebner@mailbox.org>
-> Acked-by: Randy Dunlap <rdunlap@infradead.org>
-> Reviewed-by: Lorenzo Stoakes <ljs@kernel.org>
+This series adds a devlink_eswitch_mode= kernel command line parameter
+for setting a default devlink eswitch mode during boot.
 
-Reviewed-by: Vishal Moola <vishal.moola@gmail.com>
+Following the discussion with Jakub[1] and the feedback on the RFC
+postings, this version keeps the scope limited to a boot-time devlink
+eswitch mode default only.
+
+The option selects either all devlink handles or an explicit
+comma-separated handle list:
+
+devlink_eswitch_mode=*=switchdev
+devlink_eswitch_mode=pci/0000:08:00.0,pci/0000:09:00.1=switchdev_inactive
+
+The supported modes are legacy, switchdev and switchdev_inactive. The
+selected mode is applied through the existing eswitch_mode_set() devlink
+operation, the same operation used by the devlink eswitch mode command.
+
+Registration may happen before a driver is ready to change eswitch mode,
+so devlink core queues an asynchronous apply request from devl_register().
+The worker takes the devlink instance lock before calling into the driver.
+
+After a successful reload that performed DRIVER_REINIT, devlink core
+already holds the devlink instance lock and the driver completed
+reload_up(), so the default is applied directly from the reload path.
+
+Drivers that know exactly when the device is ready can call
+devl_apply_default_esw_mode() directly. mlx5 uses this after initial
+probe, when the device is initialized and the devlink lock is already
+held.
+
+Patch 1 clears the mlx5 FW reset-in-progress bit before reload.
+
+Patch 2 factors the common eswitch mode set validation into a helper.
+
+Patch 3 adds the devlink_eswitch_mode= parser and documentation.
+
+Patch 4 applies parsed defaults from devlink core.
+
+Patch 5 adds devl_apply_default_esw_mode() for drivers.
+
+Patch 6 wires mlx5 to apply the default after initial probe.
+
+Changelog:
+
+v3 -> v4:
+
+- Rework registration time apply to use per devlink delayed work instead
+  of calling eswitch_mode_set() directly from devl_register().
+
+- Apply the default directly after successful DRIVER_REINIT devlink reload,
+  where the devlink lock is already held and reload_up() has completed.
+
+- Add devl_apply_default_esw_mode() for drivers that know their exact ready
+  point.
+
+- Drop the driver registration-ordering preparation patches that are no
+  longer needed with the async registration apply path.
+
+v2 -> v3:
+
+- Change the devlink_eswitch_mode= API syntax to use <selector>=<mode>
+  instead of [<selector>]:<mode>, following a comment from Randy Dunlap.
+
+v1 -> v2:
+
+- Move default eswitch mode application into devlink core. The default is
+  now applied during devlink registration and after a successful devlink
+  reload that performed DRIVER_REINIT.
+
+- Remove the exported devl_apply_default_esw_mode() driver API and the mlx5
+  driver-side call to it.
+
+- Skip devlink health recovery notifications while the devlink instance is
+  not registered, so drivers can move registration later without early
+  health work hitting registration assertions.
+
+- Move mlx5 devlink registration after device initialization, including the
+  lightweight init path, so the core can apply the default through the
+  normal registration flow.
+
+- Move the matching netdevsim and mlx5 unregister paths before object
+  teardown, so unregister notifications come from devl_unregister() and the
+  later object teardown paths run while the devlink instance is no longer
+  registered.
+
+- Add registration-ordering preparation patches for netdevsim and octeontx2
+  AF/PF, so their eswitch state is ready before registration-time defaults
+  may call eswitch_mode_set().
+
+[1] lore.kernel.org/r/20260502184153.4fd8d06f@kernel.org/
+RFC v1: lore.kernel.org/r/20260506123739.1959770-1-mbloch@nvidia.com/
+RFC v2: lore.kernel.org/r/20260510185424.2041415-1-mbloch@nvidia.com/
+v1: lore.kernel.org/r/20260521072434.362624-1-tariqt@nvidia.com/
+v2: lore.kernel.org/all/20260603193259.3412464-1-mbloch@nvidia.com/
+v3: lore.kernel.org/all/20260605181030.3486619-1-mbloch@nvidia.com/
+
+Mark Bloch (6):
+  net/mlx5: Clear FW reset-in-progress bit before reload
+  devlink: Factor out eswitch mode setting
+  devlink: Parse eswitch mode boot defaults
+  devlink: Apply eswitch mode boot defaults
+  devlink: Add API to apply eswitch mode boot default
+  net/mlx5: Apply devlink eswitch mode boot default on probe
+
+ .../admin-guide/kernel-parameters.txt         |  25 ++
+ .../networking/devlink/devlink-defaults.rst   |  78 ++++
+ Documentation/networking/devlink/index.rst    |   1 +
+ .../ethernet/mellanox/mlx5/core/fw_reset.c    |  28 +-
+ .../net/ethernet/mellanox/mlx5/core/main.c    |  13 +
+ include/net/devlink.h                         |   1 +
+ net/devlink/core.c                            | 393 ++++++++++++++++++
+ net/devlink/dev.c                             |  33 +-
+ net/devlink/devl_internal.h                   |   8 +
+ 9 files changed, 562 insertions(+), 18 deletions(-)
+ create mode 100644 Documentation/networking/devlink/devlink-defaults.rst
+
+
+base-commit: 805185b7c7a1069e407b6f7b3bc98e44d415f484
+-- 
+2.43.0
+
 
