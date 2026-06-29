@@ -1,360 +1,270 @@
-Return-Path: <linux-doc+bounces-93920-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-93934-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 2x2rNM8dQmoB0gkAu9opvQ
-	(envelope-from <linux-doc+bounces-93920-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 09:25:03 +0200
+	id ZQo9NVYpQmqP1AkAu9opvQ
+	(envelope-from <linux-doc+bounces-93934-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 10:14:14 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0BFF46D6F7F
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 09:25:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 31F676D75A5
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 10:14:14 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=UoKebr6L;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93920-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-93920-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=redadmin.org header.s=20231208space header.b=qteBWpSS;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-93934-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-93934-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=redadmin.org;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id C1D583040AA0
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 07:18:12 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 512F63060CAF
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 08:05:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F40F13C2BB9;
-	Mon, 29 Jun 2026 07:18:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D0A173B47FB;
+	Mon, 29 Jun 2026 08:05:10 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from www.redadmin.org (bc043154.ppp.asahi-net.or.jp [222.228.43.154])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B21963C1F46
-	for <linux-doc@vger.kernel.org>; Mon, 29 Jun 2026 07:18:08 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782717491; cv=none; b=q7lHzFzUTt2J7SA2wY9PuMCuRMQOvWM9mGBZKO9OtzpzWitiM//eaclSO447T+KZRbN+lf3p2A3YIhbTE7gyjOPe8+yErF4GsIlrdmt8z1XOLSAn8+ROMJy8vrPh1kXNIe5BPYHCjgm1kiO2eMJl3DSLc7SPdRqMv6nUKdhpWs8=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782717491; c=relaxed/simple;
-	bh=blN7kUYjZ29Lu9JrwtLJvpjU1Wy8lfqujnHxweqK+8c=;
-	h=Message-ID:Date:From:To:Cc:Subject:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=lzT+bWm43ezL8G2T0qGlR+LlkW+3zKxmBNpxEKBg65T/HwkFsQrVc2OFKFxZKsrYLUMMuucMchPe83BfUKYWChA1GBRRhf3JxqiVdb7VTSi9Ax0B1rgy/1/5FyNHbE7nXwdHZKkTMn9LWyoOCH1yeag/ngfo4UB0mv8cTrlrYm4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=UoKebr6L; arc=none smtp.client-ip=209.85.221.51
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-47488efcf30so106396f8f.3
-        for <linux-doc@vger.kernel.org>; Mon, 29 Jun 2026 00:18:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782717487; x=1783322287; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:subject:cc
-         :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=BovyFstc80MYHmYyIZVG50kULX+1YfHlAuIHPTiI6jk=;
-        b=UoKebr6L7g61S2ib1/fbHXwppvTCC1ASPVOG2gTWyXjTEcnJTr1ZZ1tFbyCkBNX28I
-         ay9ZQqGMkmaKqeiUNL1Bpy+ituRDCsTu/jrTTful/YsQ2V4upAJBk1RlUzHnFE9F7iSy
-         Js1x1pW7T8syZXAMpb57x+17cn2zG3kTfBddZIGdcHwvZHOrz7jgTy3bLZSPOWXhcwaN
-         8zc6BJLiedrnyhgzyP+TwCMskBECBxC/d3Dw7oYdqOCuPPd1d84yvCVWdq6Lx6En/Rgt
-         knW2V5g7iTNkQhlBWIoSQbBRyuezOLGGLv/URcDeJtqZD8CfouiGkrVZPu4z0tPrf6Ys
-         VK0g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782717487; x=1783322287;
-        h=in-reply-to:content-disposition:mime-version:references:subject:cc
-         :to:from:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=BovyFstc80MYHmYyIZVG50kULX+1YfHlAuIHPTiI6jk=;
-        b=gljqCES3V0BKk4PlYSGStv+jwNuBtCc9Z2rDt3zIkRywNymKAmkEcaeWlprKO3EJes
-         D9Zg1flBW1H814VqDp55O5TfM6rRTaIsBqelqzQ+APbHF6/EHQNFiz3O2bnR0GgoEhLX
-         qhKXjKgo2DuBZ/zUwSm2SJ/809kD8bZmPJ5mYQ43XU9s0dQWfRePBuwH4hswxqPNBW13
-         XfNX9DcfGSaozwrQPN8kFYL0eFIDJlh8pd6WfKctfksnhdOtPloXiy2tv1LW78/h+/OU
-         w74TSY5NQnJi9h2hohuwDCawiqdxG7C7Tz6NpOUM4vqdvkxR3vI0Go9VmqtK3jHvYK8x
-         5ymw==
-X-Forwarded-Encrypted: i=1; AHgh+RoGlwpMXB7NmzS9TZFjUwTwW0V2DaHZMQNa26q/yQLGJd+a73pa+HPBbQgfweMAOgjL5ke9uNXC08Q=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyImO9r/hZjlJYASMm4BX31HQG2MgMfqJh03nYUuNOHAzws4vGE
-	AZVNGiT61KgegVUKsc5ieoC9xZj+f7j+pWlBeC1KScFzMyYJtsZbIpXG
-X-Gm-Gg: AfdE7clQVNVZNVpdd3TEvt50WhfmpOp54SQZD0yyzmko42C2guAx8V3O+wCFxemEWqz
-	/049rEdEp/E+GjljVak1FfRF45RYQkiQgh9AdkLEqa49GCp6UI87Z0pFtjAMVaGgjaoisg2Frr8
-	qREbAYM45hYb74nJOi01mA91zWSAaogJGoJwsaGlFzcZjEnaiW+OSn7XqMmRY6pmlT0ixei9l+b
-	odjRcZObYRMSCS9Q60mfrEbya1ZlN9Si5Fw4pHXf+BkaVGwubOS1ZNQbv2ekppclt8vvVQrXTni
-	mcjwZNRqOTdlv2o5UIFwCyc1yqxGTwMBN/b2Po5eDhp7sibu7cdqNOG07y38LcjbJ7H3PHbz/Jm
-	Le5YzO0+EtNvfsD/bQgH0dbnUov+sDCsgGmtYRQtoD/C0rvTTY1Td9e34KmFEqT8ta526FxeYOb
-	fBz+kYI68wt9ZPgAVuIzPZH5CcA3PGHVQpoqFsHMhV0xvwOq6IKVgDXnNxBLqcAIM+CU8=
-X-Received: by 2002:a5d:6a48:0:b0:46d:32:3340 with SMTP id ffacd0b85a97d-46fb8d93892mr12284633f8f.36.1782717486707;
-        Mon, 29 Jun 2026 00:18:06 -0700 (PDT)
-Received: from Ansuel-XPS. (host-80-183-219-152.pool80183.interbusiness.it. [80.183.219.152])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47290ed4377sm13297042f8f.37.2026.06.29.00.18.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Jun 2026 00:18:05 -0700 (PDT)
-Message-ID: <6a421c2d.1e0bfc4f.b2eb6.06fb@mx.google.com>
-X-Google-Original-Message-ID: <akIcKbA8zsoalq-G@Ansuel-XPS.>
-Date: Mon, 29 Jun 2026 09:18:01 +0200
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Maxime Chevallier <maxime.chevallier@bootlin.com>
-Cc: Andrew Lunn <andrew+netdev@lunn.ch>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Simon Horman <horms@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Lorenzo Bianconi <lorenzo@kernel.org>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Saravana Kannan <saravanak@kernel.org>,
-	Philipp Zabel <p.zabel@pengutronix.de>,
-	Nathan Chancellor <nathan@kernel.org>,
-	Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
-	Bill Wendling <morbo@google.com>,
-	Justin Stitt <justinstitt@google.com>, netdev@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-mediatek@lists.infradead.org, llvm@lists.linux.dev
-Subject: Re: [RFC PATCH net-next v8 03/12] net: phylink: add
- phylink_release_pcs() to externally release a PCS
-References: <20260618125752.1223-1-ansuelsmth@gmail.com>
- <20260618125752.1223-4-ansuelsmth@gmail.com>
- <a271385e-302d-45c7-a1df-aebd380b427b@bootlin.com>
- <6a3fc312.6161eb1e.3441bb.c0de@mx.google.com>
- <178defc6-8e60-4b0b-b3b0-f0f2a4003b68@bootlin.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 778483B4EB3;
+	Mon, 29 Jun 2026 08:05:05 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1782720310; cv=pass; b=sA5EhaV1uQW+L/q1ZvuIUMPN04/TId/wKA4FzM7z5q1isif4LIBDiXvNmznBXt+73myzhiRPyTvwFJ+TCX9dcWJPx7lIYHyLB49cOeWkVjTvwMHRkqqqMYWmOEh18jlenU+gxJGFAtAeNo8g4TyXr4KBEYy4SNYRpvav/4ksQ/Y=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1782720310; c=relaxed/simple;
+	bh=rRF+Nv/WKxni+VdKiwhaF2sI09EOOtrtI1qEaD7lAuc=;
+	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
+	 Message-ID:Content-Type; b=rUXoOxM/cep7qbdmg/MkQQCxuIfDzBGvnaenuEABrIGOojU2Ef9XSBc+Bq6bj/Nw208ZN+N3L1GpQ4Kkm9TEyE1lYQndyNYcFQmvpZTwqZLl+pAu+9BZQPwcAdgDVSbtYn2VxydmTommHD4A28dKhpCNRUE6n09L0Kc3a53pccU=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redadmin.org; spf=pass smtp.mailfrom=redadmin.org; dkim=pass (1024-bit key) header.d=redadmin.org header.i=@redadmin.org header.b=qteBWpSS; arc=pass smtp.client-ip=222.228.43.154
+Received: from localhost (localhost [127.0.0.1])
+	by www.redadmin.org (Postfix) with ESMTP id 0A03E109F2940;
+	Mon, 29 Jun 2026 16:20:16 +0900 (JST)
+X-Virus-Scanned: amavis at redadmin.org
+Received: from www.redadmin.org ([127.0.0.1])
+ by localhost (redadmin.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id hX5ixFpPhF9c; Mon, 29 Jun 2026 16:20:11 +0900 (JST)
+DMARC-Filter: OpenDMARC Filter v1.4.2 www.redadmin.org A0D2D109F289A
+ARC-Seal: i=1; d=redadmin.org; s=20231208space; a=rsa-sha256; cv=none;
+	t=1782717611;
+	b=hSwJbPnwZXr6x8kq3qXVrTXzsWe3Ig0eiofd0j0gIktBmQpM3lpNdx/yfUWEg+tK3k54
+	 1VbHMO5RkRTvFedSJUgyjCgUL/eflR7NFjrtzUF+eqXUC6a9utJDlysFtXHtUuYyrGV8w
+	 rUkOSWAPPeXmj8CxYz+M+KJa39K6SDvC9o=
+ARC-Message-Signature: i=1; d=redadmin.org; s=20231208space; a=rsa-sha256;
+	c=relaxed/relaxed; t=1782717611;
+	h=DKIM-Filter:DKIM-Signature:MIME-Version:Date:From:To:Cc:Subject:
+	 In-Reply-To:References:Message-ID:X-Sender:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=HJ55Q5LqlVvIfrh7wQuwkO1c2iuJf1JU6Vj5ItabHt8=;
+	b=OXJff5msUBH1IjnB97m8r2SgjUp8MlDT+FMIvjiM4CKG1Zi3PysyOQMtMuBRMynQhfoz
+	 pwuCt24oLIfWgArHVXU8kUYanqG+9Gd032nk7h675SAnh8b0Zg9sKbi4uf5NiwdWcTsuh
+	 xba65qH5HgnkOeAW78SHhtcfetz10S9qGc=
+ARC-Authentication-Results: i=1; www.redadmin.org; arc=none smtp.remote-ip=192.168.11.50
+Received: from webmail.redadmin.org (redadmin.org [192.168.11.50])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (P-256) server-digest SHA256)
+	(Client did not present a certificate)
+	(Authenticated sender: weibu@redadmin.org)
+	by www.redadmin.org (Postfix) with ESMTPSA id A0D2D109F289A;
+	Mon, 29 Jun 2026 16:20:11 +0900 (JST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 www.redadmin.org A0D2D109F289A
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redadmin.org;
+	s=20231208space; t=1782717611;
+	bh=HJ55Q5LqlVvIfrh7wQuwkO1c2iuJf1JU6Vj5ItabHt8=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=qteBWpSSymPB6+oUTxuScawBwkAuqIh5z0TNOf4bCHnHo6vTcqCnpyS+p8nqyT/YE
+	 kUhBdnC3Kib3OSldsZWJ8vDlclqWijmZbpHidcHcl4Wz05OntxrQlzv+6kPy/Qwb2q
+	 t53NRK0v33IR6cUv3qmhIX0JRiz2UGaNn4b1Vol0=
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <178defc6-8e60-4b0b-b3b0-f0f2a4003b68@bootlin.com>
+Date: Mon, 29 Jun 2026 16:20:11 +0900
+From: weibu@redadmin.org
+To: Akira Yokosawa <akiyks@gmail.com>
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, corbet@lwn.net
+Subject: Re: [PATCH v1] docs/ja_JP: translate submitting-patches.rst
+ (sign-off)
+In-Reply-To: <17b906ad-3f95-4a47-9762-b70589d86f6b@gmail.com>
+References: <20260613233541.50732-1-weibu@redadmin.org>
+ <17b906ad-3f95-4a47-9762-b70589d86f6b@gmail.com>
+Message-ID: <d3a29ef047fe1381d18aef66f23304c7@redadmin.org>
+X-Sender: weibu@redadmin.org
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[redadmin.org,none];
+	R_DKIM_ALLOW(-0.20)[redadmin.org:s=20231208space];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-93920-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-93934-lists,linux-doc=lfdr.de];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:maxime.chevallier@bootlin.com,m:andrew+netdev@lunn.ch,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:lorenzo@kernel.org,m:hkallweit1@gmail.com,m:linux@armlinux.org.uk,m:saravanak@kernel.org,m:p.zabel@pengutronix.de,m:nathan@kernel.org,m:nick.desaulniers+lkml@gmail.com,m:morbo@google.com,m:justinstitt@google.com,m:netdev@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-mediatek@lists.infradead.org,m:llvm@lists.linux.dev,m:andrew@lunn.ch,m:krzk@kernel.org,m:conor@kernel.org,m:nickdesaulniers@gmail.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[ansuelsmth@gmail.com,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FREEMAIL_CC(0.00)[lunn.ch,davemloft.net,google.com,kernel.org,redhat.com,lwn.net,linuxfoundation.org,gmail.com,armlinux.org.uk,pengutronix.de,vger.kernel.org,lists.infradead.org,lists.linux.dev];
-	RCPT_COUNT_TWELVE(0.00)[28];
-	FORWARDED(0.00)[lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ansuelsmth@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,netdev,dt,lkml];
+	FROM_NEQ_ENVFROM(0.00)[weibu@redadmin.org,linux-doc@vger.kernel.org];
+	FREEMAIL_TO(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:akiyks@gmail.com,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:corbet@lwn.net,s:lists@lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[weibu@redadmin.org,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[redadmin.org:+];
 	MISSING_XM_UA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	ALIAS_RESOLVED(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	RCPT_COUNT_THREE(0.00)[4];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NO_DN(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,mx.google.com:mid]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,redadmin.org:dkim,redadmin.org:email,redadmin.org:mid,redadmin.org:from_mime,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 0BFF46D6F7F
+X-Rspamd-Queue-Id: 31F676D75A5
 
-On Mon, Jun 29, 2026 at 09:04:49AM +0200, Maxime Chevallier wrote:
-> Hi Christian,
+Hi Akira-san,
+
+Thank you for the review.
+
+I agree that translating the DCO text itself could be confusing,
+because the sign-off refers to the English certificate, not to a
+translated version.
+
+I'll wait for your fix to the English version and then update the
+Japanese translation accordingly.
+
+Thanks,
+Akiyoshi
+
+
+2026-06-29 14:16 に Akira Yokosawa さんは書きました:
+> Hi,
 > 
-> On 6/27/26 14:33, Christian Marangi wrote:
-> > On Thu, Jun 25, 2026 at 04:13:14PM +0200, Maxime Chevallier wrote:
-> >> Hello Christian,
-> >>
-> >> On 6/18/26 14:57, Christian Marangi wrote:
-> >>> Add phylink_release_pcs() to externally release a PCS from a phylink
-> >>> instance. This can be used to handle case when a single PCS needs to be
-> >>> removed and the phylink instance needs to be refreshed.
-> >>>
-> >>> On calling phylink_release_pcs(), the PCS will be removed from the
-> >>> phylink internal PCS list and the phylink supported_interfaces value is
-> >>> reparsed with the remaining PCS interfaces.
-> >>>
-> >>> Also a phylink resolve is triggered to handle the PCS removal.
-> >>>
-> >>> The flag force_major_config is set to make phylink resolve reconfigure
-> >>> the interface (even if it didn't change).
-> >>> This is needed to handle the special case when the current PCS used
-> >>> by phylink is removed and a major_config is needed to propagae the
-> >>> configuration change. With this option enabled we also force mac_config
-> >>> even if the PHY link is not up for the in-band case.
-> >>>
-> >>> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
-> >>> ---
-> >>>  drivers/net/phy/phylink.c | 56 +++++++++++++++++++++++++++++++++++++++
-> >>>  include/linux/phylink.h   |  2 ++
-> >>>  2 files changed, 58 insertions(+)
-> >>>
-> >>> diff --git a/drivers/net/phy/phylink.c b/drivers/net/phy/phylink.c
-> >>> index c38bcd43b8c8..064d6f5a06da 100644
-> >>> --- a/drivers/net/phy/phylink.c
-> >>> +++ b/drivers/net/phy/phylink.c
-> >>> @@ -158,6 +158,8 @@ static const phy_interface_t phylink_sfp_interface_preference[] = {
-> >>>  static DECLARE_PHY_INTERFACE_MASK(phylink_sfp_interfaces);
-> >>>  
-> >>>  static void phylink_run_resolve(struct phylink *pl);
-> >>> +static void phylink_link_down(struct phylink *pl);
-> >>> +static void phylink_pcs_disable(struct phylink_pcs *pcs);
-> >>>  
-> >>>  /**
-> >>>   * phylink_set_port_modes() - set the port type modes in the ethtool mask
-> >>> @@ -918,6 +920,60 @@ static void phylink_resolve_an_pause(struct phylink_link_state *state)
-> >>>  	}
-> >>>  }
-> >>>  
-> >>> +/**
-> >>> + * phylink_release_pcs - Removes a PCS from the phylink PCS available list
-> >>> + * @pcs: a pointer to the phylink_pcs struct to be released
-> >>> + *
-> >>> + * This function release a PCS from the phylink PCS available list if
-> >>> + * actually in use. It also refreshes the supported interfaces of the
-> >>> + * phylink instance by copying the supported interfaces from the phylink
-> >>> + * conf and merging the supported interfaces of the remaining available PCS
-> >>> + * in the list and trigger a resolve.
-> >>> + */
-> >>> +void phylink_release_pcs(struct phylink_pcs *pcs)
-> >>> +{
-> >>> +	struct phylink *pl;
-> >>> +
-> >>> +	ASSERT_RTNL();
-> >>> +
-> >>> +	pl = pcs->phylink;
-> >>> +	if (!pl)
-> >>> +		return;
-> >>> +
-> >>> +	mutex_lock(&pl->state_mutex);
-> >>> +
-> >>> +	list_del(&pcs->list);
-> >>> +	pcs->phylink = NULL;
-> >>> +
-> >>> +	/*
-> >>> +	 * Check if we are removing the PCS currently
-> >>> +	 * in use by phylink. If this is the case, tear down
-> >>> +	 * the link, force phylink resolve to reconfigure the
-> >>> +	 * interface mode, disable the current PCS and set the
-> >>> +	 * phylink PCS to NULL.
-> >>> +	 */
-> >>> +	if (pl->pcs == pcs) {
-> >>> +		phylink_link_down(pl);
-> >>> +		phylink_pcs_disable(pl->pcs);
-> >>> +
-> >>> +		pl->force_major_config = true;
-> >>> +		pl->pcs = NULL;
-> >>> +	}
-> >>> +
-> >>> +	mutex_unlock(&pl->state_mutex);
-> >>> +
-> >>> +	/* Refresh supported interfaces */
-> >>> +	phy_interface_copy(pl->supported_interfaces,
-> >>> +			   pl->config->supported_interfaces);
-> >>> +	list_for_each_entry(pcs, &pl->pcs_list, list)
-> >>> +		phy_interface_or(pl->supported_interfaces,
-> >>> +				 pl->supported_interfaces,
-> >>> +				 pcs->supported_interfaces);
-> >>
-> >> I've given more thought to that 'supported_interfaces' thing. This
-> >> patchset redefines the meaning of
-> >>
-> >>   pl->config->supported_interfaces
-> >>
-> >> Currently, it's filled by the MAC driver and means "Every interface
-> >> we can support, including the ones provided by PCSs that we can use
-> >> with this MAC".
-> >>
-> >> It now becomes "Every interface we support without needing a PCS", at
-> >> least the way I understand that.
-> >>
-> > 
-> > Wait but with the current code using the OR logic, it still follows
-> > "Every interface we can support...". The modes that needs a PCS are
-> > specificed with the pcs_interfaces mask in phylink_config.
+> I'm sorry I couldn't respond promptly.
 > 
-> you current code is correct, I was mostly concerned about the doc
-> that goes along with it :)
-
-Oh yep thanks, I will update also that entry. Also maybe check the .rst
-introduced and tell me if something is confusing or badly described.
-
+> On Sun, 14 Jun 2026 08:35:41 +0900, Akiyoshi Kurita wrote:
+>> Translate the "Include PATCH in the subject" and "Sign your work -
+>> the Developer's Certificate of Origin" sections in
+>> Documentation/translations/ja_JP/process/submitting-patches.rst.
+>> 
+>> Keep the wording close to the English text and wrap lines to match
+>> the style used in the surrounding Japanese translation.
+>> 
+>> Signed-off-by: Akiyoshi Kurita <weibu@redadmin.org>
+>> ---
+>>  .../ja_JP/process/submitting-patches.rst      | 70 
+>> +++++++++++++++++++
+>>  1 file changed, 70 insertions(+)
+>> 
+>> diff --git 
+>> a/Documentation/translations/ja_JP/process/submitting-patches.rst 
+>> b/Documentation/translations/ja_JP/process/submitting-patches.rst
+>> index d31d469909e4..56494bac169c 100644
+>> --- a/Documentation/translations/ja_JP/process/submitting-patches.rst
+>> +++ b/Documentation/translations/ja_JP/process/submitting-patches.rst
+>> @@ -402,3 +402,73 @@ ping したりする前に、少なくとも 1 週間は待ってください。
+>>  パッチまたはパッチシリーズの修正版を投稿する場合は、"RESEND" を
+>>  追加しないでください。"RESEND" は、前回の投稿から一切変更していない
+>>  パッチまたはパッチシリーズを再送する場合にのみ使います。
+>> +
+>> +
+>> +件名に PATCH を含める
+>> +----------------------
+>> +
+>> +Linus と linux-kernel には大量のメールが届くため、メールの件名の
+>> +先頭に ``[PATCH]`` を付けるのが一般的な慣例です。これにより、
+>> +Linus や他のカーネル開発者は、パッチを他のメール議論からより
+>> +簡単に区別できるようになります。
+>> +
+>> +``git send-email`` は、これを自動的に行ってくれます。
+>> +
+>> +
+>> +自分の作業に署名する - Developer's Certificate of Origin
+>> +---------------------------------------------------------
+>> +
+>> +誰が何を行ったのかを追跡しやすくするため、特に、複数階層の
+>> +メンテナを経由して、最終的にカーネル内のあるべき場所へたどり着く
+>> +可能性があるパッチについて、メールでやり取りされるパッチに
+>> +``sign-off`` 手続きを導入しています。
+>> +
+>> +``sign-off`` は、パッチ説明の末尾に置く単純な 1 行です。これは、
+>> +あなたがそのパッチを書いたこと、またはオープンソースのパッチとして
+>> +渡す権利を持っていることを証明するものです。ルールは非常に単純です。
+>> +以下を証明できるなら:
+>> +
+>> +Developer's Certificate of Origin 1.1
+>> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 > 
-> So in the end, we'd have something like (simplified):
+> You are keeping this title untranslated.
+> I agree it is not easy.  I even think it is close to impossible.
 > 
-> pl->config.supported_interfaces = RGMII_xx | SGMII | 1000BaseX
-> pl->config.pcs_interfaces = SGMII | 1000BaseX
+> But then, I don't see much point in translating the "certificate"
+> itself.
 > 
-> pcs->supported_interface = SGMII| 1000BaseX
+>> +
+>> +このプロジェクトへ貢献することにより、私は以下を証明します:
+>> +
+>> +        (a) この貢献は、全部または一部を私が作成したものであり、
+>> +            ファイルに示されているオープンソースライセンスの下で
+>> +            提出する権利を私が持っていること。または、
+>> +
+>> +        (b) この貢献は、私の知る限り、適切なオープンソース
+>> +            ライセンスの下にある過去の成果物に基づくものであり、
+>> +            そのライセンスの下で、その成果物を、全部または一部を
+>> +            私が作成した修正とともに、同じオープンソースライセンスの
+>> +            下で提出する権利を私が持っていること。ただし、
+>> +            ファイルに示されているように、異なるライセンスでの提出が
+>> +            許可されている場合を除きます。または、
+>> +
+>> +        (c) この貢献は、(a)、(b)、または (c) を証明した別の人物から
+>> +            直接私に提供されたものであり、私はそれを変更していないこと。
+>> +
+>> +        (d) このプロジェクトと貢献が公開されること、ならびに、
+>> +            貢献の記録（私が提出したすべての個人情報、私の sign-off を
+>> +            含む）が無期限に維持され、このプロジェクトまたは関係する
+>> +            オープンソースライセンスに従って再配布される可能性がある
+>> +            ことを、私は理解し同意します。
 > 
-> correct ?
+> What you need to agree in signing off is the English certificate.
+> Not the translated one.  So this can confuse people.
 > 
-
-Correct. phylink_config describing that for SGMII and 1000BaseX a PCS is
-required and the related PCS declaring support for those modes.
-
-Code will skip searching for a PCS for RGMII.
-
-> > 
-> > The late add and release operates on the phylink supported_interfaces ONLY
-> > when the MAC didn't specify support for it (by removing it as only the PCS
-> > will declare support for it)
-> > 
-> > The confusion is present because everything is validated later on
-> > major_config so those supported_interfaces are just an HINT that are later
-> > verified with get_caps and with the pcs_validate OPs.
-> > 
-> > Adding the supported_interfaces to phylink is really to keep an original
-> > reference of the value. This is to address a pattern I have notice where
-> > the MAC driver always OR the interfaces with the one supported by the PCS.
-> > (I remember it was pointed out by Russell)
-> > 
-> > But I'm more than open to discussion as this is something marginal to the
-> > whole implementation, I'm also questioning if this OR is actually useful to
-> > anything on the nth tought on this.
-> > 
-> > One thing that I notice is that parsing this early with AND might be
-> > problematic at phylink_create, but I still have to evaluate that.
-> > 
-> > My take is that would be good to have some review also on the other logic
-> > as I think I reached a point where Sashiko starts to comments on more or
-> > less unreal problem.
+> I don't have any good idea.
 > 
-> True, TBH all the fwnode part is something I'm a bit less familiar with though
-> so maybe someone else can browse through that.
+> Please convince me you can translate the certificate
+> without any concern of confusion.
 > 
-> FWIW, I've tested that whole series on a board that has "legacy" PCS board
-> that has mvpp2 and 2 possible PCSs, and it seems to work fine so no regressions
-> there :)
+>> +
+>> +その場合は、次のような行を追加するだけです::
+>> +
+>> +        Signed-off-by: Random J Developer 
+>> <random@developer.example.org>
+>> +
+>> +確認可能な身元情報を使ってください（残念ながら、匿名での貢献は
+>> +受け付けられません）。これは ``git commit -s`` を使えば自動的に
+>> +行われます。Revert パッチにも ``Signed-off-by`` を含めるべきです。
+>> +``git revert -s`` はこれを自動的に行ってくれます。
+>> +
+>> +パッチ末尾に追加のタグを付ける人もいます。それらは今のところ単に
+>> +無視されますが、社内手続きを示したり、sign-off に関する特別な
+>> +詳細を示したりするために使うことはできます。
+>> +
+>> +作者の SoB に続くそれ以降の SoB (Signed-off-by:) は、パッチを
+>> +取り扱い、次へ受け渡した人々によるものですが、その開発に関与した
+>> +ことを意味しません。SoB の連鎖は、パッチがメンテナへ伝わり、
+>> +最終的に Linus へ届くまでに実際にたどった **本当の** 経路を
+>> +反映すべきです。先頭の SoB エントリは、単独の主たる作者を示します。
 > 
-> A side note with the "legacy" naming, I'd rather have it called "built-in" or
-> something like that, I don't see a clear path to porting the existing code to
-> fwnode without breaking DT compat, as it's likely we'll have to remove the PCS
-> register ranges out of the MAC's range. 
-
-I think also built-in might be confusing as a SoC might have a PCS built-in
-but just as a separate device on a different register map.
-
-A better description might be "externally-managed" but that is very long...
-
-Also the use of fwnode and DT is just to reference them and use the normal
-helper but the implementation is liberal on custom implementation for the
-current code.
-
-Everything is around the pcs_interface mask, num_possible_pcs and the
-fill_available_pcs.
-
-Nobody stops from implementing custom parser in fill_available_pcs and
-return a PCS pointer created directly by the MAC. (In such case late and
-release won't be needed as everything is present when phylink_create is
-called)
-
-On OpenWrt we migrated every SoC that used ""exotic"" pcs reference (Qcom,
-Realtek, MTK, Airoha) but I don't have a board that used something like the
-'pcs' property.
-
+> I think organization of this section in English version was
+> corrupted during reST conversion.  I'll submit a fix.
 > 
-> Thanks for this work anyway, this is great !
-> 
-> Maxime
-
--- 
-	Ansuel
+> Regards,
+> Akira
 
