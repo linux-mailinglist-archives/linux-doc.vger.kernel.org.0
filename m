@@ -1,228 +1,250 @@
-Return-Path: <linux-doc+bounces-94039-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94043-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 47ZrBICmQmrr/AkAu9opvQ
-	(envelope-from <linux-doc+bounces-94039-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 19:08:16 +0200
+	id dwZcI0GqQmqo/QkAu9opvQ
+	(envelope-from <linux-doc+bounces-94043-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 19:24:17 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B7646DD99D
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 19:08:15 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E73086DDAD4
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 19:24:16 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=onsemi.com header.s=mimecast20250127 header.b=EFguHKN3;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94039-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94039-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=reject) header.from=onsemi.com;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=VQvTDCNV;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94043-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94043-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 9ACBD302AC36
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 17:07:35 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 08BEE303264D
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 17:23:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 157A74534AC;
-	Mon, 29 Jun 2026 17:07:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2AFD146AEFB;
+	Mon, 29 Jun 2026 17:23:56 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from usb-smtp-delivery-120.mimecast.com (usb-smtp-delivery-120.mimecast.com [170.10.153.120])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D8B2428473
-	for <linux-doc@vger.kernel.org>; Mon, 29 Jun 2026 17:07:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EBE1443E9F6;
+	Mon, 29 Jun 2026 17:23:55 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782752854; cv=none; b=EvYWqD4QhuP7L6QYaRsa3OS+b8NY0TbW2DYAF6+avk2a961Qx7oc9oe4QK3NFYHvzWVl/+kVOscu1NqMMmXbuxF1kYj6xI8RAJJgEO9yiUEsXnuJ2TEnYY860BGyWjKCzkFPKz4fj45FTP+lC77TJt6/85nsX8LV3FNYe9QQVh8=
+	t=1782753836; cv=none; b=W+rrFQMGDkbdtrzGAfGyteXRGhV7+H6LNq4T+Wk8v0qskMzzbOWLvWyP+tprq8o41+ijfqiYdE/GSD0CLWNrAy61pUfRdhRBtAwLXB5VeUkBz5VkIf6IdBYqyrXhAaI3XwrePjk86IJqrazdcRIauAM1HrTdNNjsyrg8zTF2/Es=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782752854; c=relaxed/simple;
-	bh=b4m9ugKTd4P2FLzaPcwmBvTb4oJlDyBJ/58sBPB1jek=;
-	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
-	 MIME-Version:Content-Type; b=dnDVFlo0KAKHFbpUGoAfma4uGoQZiFnQ1twCyL8DiOnY9kDLlrskSUmJObB4XkNy1YOfgkX5sgUTNS+/rYzunIWAGXvjgsem5h5VEGsjLGL0uf7houTil9PyFeFOEkKn1OuuNw5rD3UU+za0HHGrhD7/bcRoGmOsNN1sC+J0Tag=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=onsemi.com; spf=pass smtp.mailfrom=onsemi.com; dkim=pass (2048-bit key) header.d=onsemi.com header.i=@onsemi.com header.b=EFguHKN3; arc=none smtp.client-ip=170.10.153.120
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=onsemi.com;
-	s=mimecast20250127; t=1782752846;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=b4m9ugKTd4P2FLzaPcwmBvTb4oJlDyBJ/58sBPB1jek=;
-	b=EFguHKN3GQif3CTC6EHEC999PAH0vYQ+dw10Dp8Q7ntVKVkuEjWWOqEa2CGcvve13cBfj6
-	Q5PXpzxTkbJL5D57jwrtsx5b8nE1RqRiitQ4EHGqmdgtmCrMDx5xlCI03IifeH0YwCJY/n
-	Ro06Wl10qZFah6VAx8JRXzFrisZWH0aST0Qto//S38wkL9Tizo46PVLSk8wg/WcBprj4i5
-	ViXIG9G4mb3u6Ge7NIubUffi1yB3CLy6FS+g5K3CIuS0CATbHasAdqP4SGZNbZrGnEEBwO
-	LQ8oXNnENBaulUlfq7iHDmnEBpuOqHeZ94kMINPQRBMYva9W2iFTsH7oBaGSxg==
-Received: from CH4PR04CU002.outbound.protection.outlook.com
- (mail-northcentralusazon11013005.outbound.protection.outlook.com
- [40.107.201.5]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- usb-mta-30-T3DZkBkHNxCvUwWnVkNcsA-1; Mon, 29 Jun 2026 10:07:20 -0700
-X-MC-Unique: T3DZkBkHNxCvUwWnVkNcsA-1
-X-Mimecast-MFC-AGG-ID: T3DZkBkHNxCvUwWnVkNcsA_1782752832
-Received: from CYYPR02MB9828.namprd02.prod.outlook.com (2603:10b6:930:b8::20)
- by MN2PR02MB6623.namprd02.prod.outlook.com (2603:10b6:208:1dd::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.18; Mon, 29 Jun
- 2026 17:07:10 +0000
-Received: from CYYPR02MB9828.namprd02.prod.outlook.com
- ([fe80::2767:f7d2:778c:8dca]) by CYYPR02MB9828.namprd02.prod.outlook.com
- ([fe80::2767:f7d2:778c:8dca%4]) with mapi id 15.21.0159.012; Mon, 29 Jun 2026
- 17:07:09 +0000
-From: Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
-To: Rob Herring <robh@kernel.org>
-CC: Andrew Lunn <andrew@lunn.ch>, Piergiorgio Beruto <Pier.Beruto@onsemi.com>,
-	Heiner Kallweit <hkallweit1@gmail.com>, Russell King <linux@armlinux.org.uk>,
-	"David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Andrew
- Lunn <andrew+netdev@lunn.ch>, Parthiban Veerasooran
-	<parthiban.veerasooran@microchip.com>, Richard Cochran
-	<richardcochran@gmail.com>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor
- Dooley <conor+dt@kernel.org>, Simon Horman <horms@kernel.org>, Jonathan
- Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
-	"netdev@vger.kernel.org" <netdev@vger.kernel.org>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
-	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>, Jerry Ray
-	<jerry.ray@microchip.com>
-Subject: RE: [PATCH net-next v5 14/15] dt-bindings: net: add onsemi's S2500
-Thread-Topic: [PATCH net-next v5 14/15] dt-bindings: net: add onsemi's S2500
-Thread-Index: AQHc/B9zVG+75VEz+E+ClqG9Xmjc7bY/Aa4AgBbXfAA=
-Date: Mon, 29 Jun 2026 17:07:09 +0000
-Message-ID: <CYYPR02MB9828308552BBC60427E8EF2283E82@CYYPR02MB9828.namprd02.prod.outlook.com>
-References: <20260614-s2500-mac-phy-support-v5-0-89874b72f725@onsemi.com>
- <20260614-s2500-mac-phy-support-v5-14-89874b72f725@onsemi.com>
- <20260615041056.GA1426553-robh@kernel.org>
-In-Reply-To: <20260615041056.GA1426553-robh@kernel.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: CYYPR02MB9828:EE_|MN2PR02MB6623:EE_
-x-ms-office365-filtering-correlation-id: fa98b7d8-8cb7-4f92-fec8-08ded600db33
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|23010399003|7416014|376014|366016|1800799024|38070700021|22082099003|18002099003|11063799006|56012099006|4143699003
-x-microsoft-antispam-message-info: Y68FVuxUprv+ldfFpy2CqPt8vssOsXvBzHFuYg/B+ECNuou+Yxj2aK2xx7IPj0geNXEfgX85KYsd/wDAMtFGXU0y1TsZOonKHXpWMg0fda1yz//Uw6Fn7TE11CzzERUVfx9gsleQW2p0bjHkiZLZFt+CsXZDZzKOOOAJLsViUqJ//sTUmNCPclesEaSeW57RJpNXoafdSGVGK1tmisUvvvuL+c8TpMT6UpwcD8Ii3xrmssaMp1hFMX+q74uM6Ays+LYtwUQ70KYsASFpNzAtHSxZn2GL/JabeU6kZUajuNxk6F4n2o5W6HyAMUuutJkksOmaTjDwHXg1JL7l51wF06nRUUiUUPn2NqfF3otLi78dqRNdQ1xyw4esDEZkoRyqjpQRMiXEQzRXR0Pvsk2Yc8njLIXvsJq47NkCOigkBD091o8C4rZasLLsNvhmJujOzLnHacJzOYuTrDlL2C06WXNSfkkswz0wH/hxE20jEExjt1tM805Fce6zLU1+yAqgmKnAwIfwEHpPyWf6kmcSRsq1/pd5HxVC7h71fkFocp4iQwFSfwlUSpDgN3qIT0v1qdMHFsF5XzMlqfFoL4ESNb/FXUUMiMj7hp9oUYVgOEaET8AzJ8MCrMT0jQBk4tx40o+PMlIr89WwvmThc9FKlySUdzHrsaldjICoVvf85afb+PD7Axn322o/PcrreKlkrdviYRo59g0Epxv6jAr4+ayAA99TSq+CfemWw6bywyw=
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CYYPR02MB9828.namprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(7416014)(376014)(366016)(1800799024)(38070700021)(22082099003)(18002099003)(11063799006)(56012099006)(4143699003);DIR:OUT;SFP:1101
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?U3ZkQ3N3TGNTVW5EK3Ixb3ZoUkZETWJsNVJXQmNjKzI2L3JzN3pJclg5Y3RH?=
- =?utf-8?B?dUhOWENrL04wNGpkci9FOC9BdlY2ZlVGMHZWaWxZNndQclBKRUtWN1F0NlFj?=
- =?utf-8?B?VDRwNzUwM1QxaERIZ0FHTnBzTHNHOVhPa3hlNW9JQ0tqb2Q0S1ArTkdYTGE3?=
- =?utf-8?B?YmovdTFEaEVjQldBQ3gwZzZTWnVaMkJ3MkFiMkZFZ3lSdmJ1Wlhqb2RvbTQw?=
- =?utf-8?B?NGUxSzJtUnNoR0xueENoWjRUcktna1VyZFlIUjFCT0pudHBnc3ZLU29meE9v?=
- =?utf-8?B?cEQ2RGtBVllrUytScVFrR2ZHVEZ0UGhlTit6U1JiNmQzRzdYN2FhaFhVTCta?=
- =?utf-8?B?SXhmakFQaDY5YUVMTEltNFI4NGV3VTRZeWd0WndkbTNXQWtNbmp6ZEZSRk1a?=
- =?utf-8?B?WGVkR2Rva1Y3QjltQ0lpRU4ybGtQQy9VQjRtSjZJdXBKTW1TZ2l0NlZ6SGpr?=
- =?utf-8?B?YlVjdDl2ZjlMTVpveDQvK0FDQzJwMk9WbmFtWWlmN1MwUmxld0E1R0ROMmox?=
- =?utf-8?B?UHBpTk0xQzZURi8zVEpQR0VWQVpJOTc4RXltNzJPZ1dVQzFUQzVrRWRhRUlP?=
- =?utf-8?B?QmZtaHZ5SkxCMko2Z1B0anNtdlNkWXZ6NGRNN2FGZkdEbFZoZ2ZTWlBpWWNH?=
- =?utf-8?B?ZVRDNm5EMGIyREthWXhYUXhMcmQ4OUNnMW16MHZObjJtbnd3UmJmL1NxVVR3?=
- =?utf-8?B?c3JUR0dLUjlzUnI1bXlIazJmRmV6S0FVT2E3VTdNQk94OVVUNjFNbHlHd0xz?=
- =?utf-8?B?cGo1WmlBQ2pjbFpNWFNQd0tKL004YjFkbjZpZzFJRHZqSDNBcEJ6L21uZFcv?=
- =?utf-8?B?M3FHUnI2U0tMblN3ZHRMN21UYzFvR1lwQ2lWS0tlTFFTZitKNmNRR21GVjNk?=
- =?utf-8?B?VnhUVUhBeE4xOFZJTHNTbDMrRllydm1nOUxwNTRNQVZaRG1SMHduMnRRYXh3?=
- =?utf-8?B?RmZqdGw1bWNWV0l1SlYyYTlhR0FucGo2NDlNZU4wV3NHT3pLWnlVdFJXRmQx?=
- =?utf-8?B?KzdXcVVwZTRSUWhmcU9MZUh4NmQrZjhqVVA5ejlvR2hUL1FBZXFGS0lONmN5?=
- =?utf-8?B?QmRDWjFxUURpMnFjaWh3ZU9RMVgzZ3IyUWRsZlk3RDFiUWJ5Y3NEbnI5a055?=
- =?utf-8?B?d21SV2FjSkV5MlpNUkY0dGp1QkxZZmhLdXdrck9EdHBJZmpueWFzRUJzRWsx?=
- =?utf-8?B?K05TWDAwZlRZWFNNZ1VybXBWbU1ET0ZzWllBRldrK0JFOG1KZnZ4Q2xYRW9X?=
- =?utf-8?B?dmdMZ0hqSURUWU8wM3VaV0cyS0ZjcVQwUTViam9IRjhQanZTT0JLK3BTV0FO?=
- =?utf-8?B?Q1VVdVIyTW9lRXZmbWF5bGNRRnB5N0tPakhtOWk5d3lja0toQlNIeFBlV1lI?=
- =?utf-8?B?SFVZaVFuOFhJaVVOd2puN2w4RlhhSnNQcnQ4UC8rQSswdUVONFBtdW9OK1E3?=
- =?utf-8?B?YytIU2x0azdGQWdVb1J0OXNBVHZsemE3RkNxNmhmUWZyZy9QK2RsaDB0UTlZ?=
- =?utf-8?B?NVNEdFNpQVJDTHVLSDZramhrZXE1OFNXZ1JQNjQ1OTUxbU51cWVaWlN3c0tH?=
- =?utf-8?B?cWZjcXJhZXpRdG1ORTNNV2xCamdpR21RK2JOWmR1dG05WEZlQXkvVDhDaG45?=
- =?utf-8?B?RURoWUZkZWw0QzZjakkrT0lWayt5bEc3TEpUUEh0RGRTQjd2Sk5RbldJa05X?=
- =?utf-8?B?SXVyWkhiWU9lcGN6RUdJTXp1ckY4SGNyUjRQWDJjV1FwQW5SVmx3alh5M28v?=
- =?utf-8?B?UUNKbGZ3SjVVVGlZYUpmalBmYWVXdXlObUVaUVFlL3FQQXc4dC81N3JTMmsw?=
- =?utf-8?B?QmhzNUw3ZHUzNDRBUTBvMjgxTnBhNW1IWWYzdjlsaFNTYkd1NG1BS3o0K2Nj?=
- =?utf-8?B?TlpSWlJYNFFwVGw3UTFvVFgrSkxSMEV2SUc4c0s5dUxzcGlRV0c4V0hSemFI?=
- =?utf-8?B?KzhldGhmM0wxbXlhTFVxOUpRNTBvL1psMVBrb0pyZW5OU3UzejB4WXR1Nmox?=
- =?utf-8?B?dXBwMlpuTThaQkFrWjRjUHdJczNGaDk3SWc0eldpUnNuemt3dURLQzhYQnB0?=
- =?utf-8?B?aTNFUDdtTzYzKzBxVTZlM2ZkaWQ4ZzJ5M0tEVVZsNzhlNGFGdUJpeFdMTGRF?=
- =?utf-8?B?Mk0vZDl5YmltQzRjcUxFY2tvT3hQZ0dWbEdaNGpKc08rQ1VYL2xwUlZPcWtM?=
- =?utf-8?B?NWNnU3pJdXg1Z1FPTXN0eDA2QzR6eUlIQTVKYVlPSXBMWk5TL01ObG90RWJl?=
- =?utf-8?B?WnU3M0RieEVVNXgwRVd4T3ZFbk12dFZVT2tXa210SWdVSVhqWC9hVTVUWDJn?=
- =?utf-8?B?VzdsZGpaaFFqQVpXaXBBR05KYXZHNUVoOEs2aERNaVEweXJBcTZhb3RaNTdY?=
- =?utf-8?Q?LfX0m9AkewxwuFgY=3D?=
+	s=arc-20240116; t=1782753836; c=relaxed/simple;
+	bh=MHM3iY9rUPUkIOtHIDHO5SKUbABanUkmnTNbJIA8c78=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=SG1UIrHpVtf4JPetBNoEgKgfyGFZ+XEg1lFWgoc6pMMJIm+zXq8xKpf370y5SHffRpe5m+DSNNuvQBL9K95GNRZ1e8haOWs6Msx5ipkLVrcS7b3jmi17Oy5fhXDzSov727TIPcahq089ZYtxsL1pfQxcL3XTYOp4X/jolov+OVk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=VQvTDCNV; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 82A72C19425;
+	Mon, 29 Jun 2026 17:23:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1782753835;
+	bh=MHM3iY9rUPUkIOtHIDHO5SKUbABanUkmnTNbJIA8c78=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=VQvTDCNVSVNXtjcxK7d4W7nUL3h7sQU589T8rOpocXa/ym4kRoOkNVBFkM8dNfCme
+	 zM5Wfx52YChHBznvhsEfrddTc34NV1r3eovIqV15AlXfI55ahriUcsIMoUWzzEGHgH
+	 L1fRwofdKA242gU45edVco7v85wtN3640g18ukZJk5PlCDhW1FraNckLHzOwnC+yqy
+	 IDbMf4gpEd/wYUEoSAK0ffCPq3/M0OEHTCoRPqcIHsPd1Q7kda03rj03gBluTkbvkQ
+	 CEn1Qz6NkHxmQD2jmFXsvwmpCn/D//wR3+47k3o7evM9WdfBd5XwxWrul3HitmSGOf
+	 qg0hq1JPBS0Ig==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 66F3CC43458;
+	Mon, 29 Jun 2026 17:23:55 +0000 (UTC)
+From: Selvamani Rajagopal via B4 Relay <devnull+Selvamani.Rajagopal.onsemi.com@kernel.org>
+Subject: [PATCH net-next v6 00/15] Support for onsemi's S2500 10Base-T1S
+ MAC-PHY
+Date: Mon, 29 Jun 2026 10:23:30 -0700
+Message-Id: <20260629-s2500-mac-phy-support-v6-0-18ce79500371@onsemi.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: od8VgRKhRsd8h29O65oZT24+CPWosfImA7Hxv7gVVTbuopifc0l0S8vQ7qMhucFp69IJbfMo0nsNXDIQihj2LCn9dggDLb3FmRhLXyslw8eurB4XZLWU3ahvwOVU6riE8/E877VJAh1kSFSsGgY+ba+xV5xdZMv/Iyu2BtF7Q6krN9gmPKizW4FY4RUgmMJJUTOVfAntZ8n64Oq0eDC9ar8MW+uSFkDcJ58PT8D7Z5MxHs611fJ7DWSIncwpn3BlKc+ieoKrYBQCgPpPlUK6HvaGoSBhkQJcLNam3dCDD63a+5LL23MZeYPM3pECXS4iDe2GkN62RHeWXTJ5Qkd4ag==
-X-OriginatorOrg: onsemi.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: CYYPR02MB9828.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fa98b7d8-8cb7-4f92-fec8-08ded600db33
-X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Jun 2026 17:07:09.8861
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 04e1674b-7af5-4d13-a082-64fc6e42384c
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: I9XIjRyjPPNBiJP98aTcLEcAMbr+K1HNguqOw63dOZerQgC4PmkyYEnRAcig7ki2kJHd6MlryVCqg0conz4SVOL8tA4MRUHhxDRkwy/H0rE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR02MB6623
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: Bqn_dfP47Jr3pIEM7y3NrmxjVgtKf-hIlJi8KBHhF4Q_1782752832
-X-Mimecast-Originator: onsemi.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIABSqQmoC/3WOyw6DIBBFf6Vh3WkQwUdX/Y+mC8Wx0kQggEZj/
+ Pei7aJduLy5c8+ZhXh0Cj25nhbicFReGR1Ddj4R2VX6iaCamAmjLKMZTcAzQSn0lQTbzeAHa40
+ LwNu0wpLRts5TErfWYaumnXsnGgNonAJ5fBo/1C+UYcNut53ywbh5f2Hk++JrEwe2kQOFBqNNJ
+ qnMmuJmtMdeXaTpd8kofjAJP8KIiCnKIud1ztqciT/Muq5va6hgXR4BAAA=
+To: Andrew Lunn <andrew@lunn.ch>, 
+ Piergiorgio Beruto <pier.beruto@onsemi.com>, 
+ Heiner Kallweit <hkallweit1@gmail.com>, 
+ Russell King <linux@armlinux.org.uk>, 
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+ Andrew Lunn <andrew+netdev@lunn.ch>, 
+ Parthiban Veerasooran <parthiban.veerasooran@microchip.com>, 
+ Selva Rajagopal <selvamani.rajagopal@onsemi.com>, 
+ Richard Cochran <richardcochran@gmail.com>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Simon Horman <horms@kernel.org>, 
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>
+Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-doc@vger.kernel.org, 
+ Jerry Ray <jerry.ray@microchip.com>, 
+ Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1782753817; l=5694;
+ i=Selvamani.Rajagopal@onsemi.com; s=20260531; h=from:subject:message-id;
+ bh=MHM3iY9rUPUkIOtHIDHO5SKUbABanUkmnTNbJIA8c78=;
+ b=6OLFiXySIPehNp8RCOGYSLAjvBmvBK8CMHOpta2yUI5tgoGEblmat3xZ8OWJRCxqG2OVKJueY
+ 3RxbdujPkgqAyWsIGQzKacax61lPrHCC2Tg/ooApqq446x90YVpDqhx
+X-Developer-Key: i=Selvamani.Rajagopal@onsemi.com; a=ed25519;
+ pk=5QRdM0HS/LGWWcUZZ9hVfZ+qbPQGZCumcTXOiN7Fyug=
+X-Endpoint-Received: by B4 Relay for
+ Selvamani.Rajagopal@onsemi.com/20260531 with auth_id=803
+X-Original-From: Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
+Reply-To: Selvamani.Rajagopal@onsemi.com
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.44 / 15.00];
+X-Spamd-Result: default: False [-3.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MIME_BASE64_TEXT_BOGUS(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[onsemi.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[onsemi.com:s=mimecast20250127];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-94039-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	FORGED_RECIPIENTS(0.00)[m:robh@kernel.org,m:andrew@lunn.ch,m:Pier.Beruto@onsemi.com,m:hkallweit1@gmail.com,m:linux@armlinux.org.uk,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:andrew+netdev@lunn.ch,m:parthiban.veerasooran@microchip.com,m:richardcochran@gmail.com,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:netdev@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jerry.ray@microchip.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[Selvamani.Rajagopal@onsemi.com,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-94043-lists,linux-doc=lfdr.de,Selvamani.Rajagopal.onsemi.com];
+	FORGED_RECIPIENTS(0.00)[m:andrew@lunn.ch,m:pier.beruto@onsemi.com,m:hkallweit1@gmail.com,m:linux@armlinux.org.uk,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:andrew+netdev@lunn.ch,m:parthiban.veerasooran@microchip.com,m:selvamani.rajagopal@onsemi.com,m:richardcochran@gmail.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:netdev@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jerry.ray@microchip.com,m:Selvamani.Rajagopal@onsemi.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
+	FREEMAIL_TO(0.00)[lunn.ch,onsemi.com,gmail.com,armlinux.org.uk,davemloft.net,google.com,kernel.org,redhat.com,microchip.com,lwn.net,linuxfoundation.org];
+	FORGED_SENDER(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[lunn.ch,onsemi.com,gmail.com,armlinux.org.uk,davemloft.net,google.com,kernel.org,redhat.com,microchip.com,lwn.net,linuxfoundation.org,vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[Selvamani.Rajagopal@onsemi.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[onsemi.com:+];
-	RCVD_COUNT_FIVE(0.00)[6];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	HAS_REPLYTO(0.00)[Selvamani.Rajagopal@onsemi.com];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc,netdev,dt];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[CYYPR02MB9828.namprd02.prod.outlook.com:mid,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp]
+	DKIM_TRACE(0.00)[kernel.org:+];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,onsemi.com:replyto,onsemi.com:email,onsemi.com:mid,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,msgid.link:url]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 6B7646DD99D
+X-Rspamd-Queue-Id: E73086DDAD4
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBSb2IgSGVycmluZyA8cm9iaEBr
-ZXJuZWwub3JnPg0KPiBTZW50OiBTdW5kYXksIEp1bmUgMTQsIDIwMjYgOToxMSBQTQ0KPiBUbzog
-U2VsdmFtYW5pIFJhamFnb3BhbCA8U2VsdmFtYW5pLlJhamFnb3BhbEBvbnNlbWkuY29tPg0KPiBT
-dWJqZWN0OiBSZTogW1BBVENIIG5ldC1uZXh0IHY1IDE0LzE1XSBkdC1iaW5kaW5nczogbmV0OiBh
-ZGQgb25zZW1pJ3MgUzI1MDANCj4gDQo+IA0KPiANCj4gQW5kIHlvdSBhcmUgbWlzc2luZyB0YWdz
-IGZyb20gcHJpb3IgdmVyc2lvbnMuIEl0IGlzIHlvdXIgcmVzcG9uc2liaWxpdHkNCj4gdG8gYWRk
-IHRoZW0uDQoNCkkgYWRkZWQgdGhlIHByaW9yIHZlcnNpb24ncyBsaW5rIHVuZGVyIGVhY2ggdmVy
-c2lvbi4gU29tZWhvdyAiYjQgcHJlcCAtLXNob3ctcmV2aXNpb24iIGNvbW1hbmQgZG9lc24ndCBw
-aWNrdXAgdGhlIG9sZGVyDQp2ZXJzaW9ucy4gSXQgc2hvd3MgdjQgYW5kIHY1IGNvcnJlY3RseSBh
-cyB0aGUgZW1haWxzIGNvbnRhaW5pbmcgcGF0Y2hlcyB3ZXJlIHNlbnQgaW4gYSB0aHJlYWRlZCBt
-YW5uZXIuDQoNCkJ1dCB3aXRoIHYxLHYyLHYzLCBhcyBlYWNoIHBhdGNoIHdhcyBzZW50IHRocm91
-Z2ggaW5kaXZpZHVhbCBlbWFpbCAod2l0aCBwcm9wZXIgc3ViamVjdCBsaW5lLCBvZiBjb3Vyc2Up
-IHVzaW5nIG91dGxvb2suIA0KSSBkb24ndCBrbm93IGlmIHRoZXJlIGlzIGEgd2F5IHRvIGZpeCB0
-aGlzLiANCg0KPiANCj4gPiBjaGFuZ2VzIGluIHY1DQo+ID4gLSBubyBjaGFuZ2VzDQo+ID4gY2hh
-bmdlcyBpbiB2NDoNCj4gPiAtIGFkZGVkIHNwaS1tYXgtZnJlcXVlbmN5IGFzIHN1Z2dlc3RlZCBi
-eSBBSSByZXZpZXcNCj4gPiAtIGNoYW5nZWQgaW50ZXJydXB0IHRvIElSUV9UWVBFX0VER0VfRkFM
-TElORyBhcyBpdCBpcw0KPiA+IGJlaW5nIHRha2VuIGNhcmUgaW4gbmV0IChzdGFibGUpIGJyYW5j
-aA0KPiA+IGNoYW5nZXMgaW4gdjMNCj4gPiAtIFJlbW92ZWQgVVJMIGxpbmsgdGhhdCBmYWlsZWQg
-dmVyaWZpY2F0aW9uDQo+ID4gY2hhbmdlcyBpbiB2Mg0KPiA+IC0gcmVtb3ZlZCBzcGktbWF4LWZy
-ZXF1ZW5jeSBlbnRyeQ0KPiA+IC0gY2hhbmdlZCB0aGUgY29tcGF0aWJsZSBzdHJpbmcgdG8gczI1
-MDANCj4gPiBjaGFuZ2VzIGluIHYxDQo+ID4gLSBBZGRlZCB0aGUgZmlyc3QgdmVyc2lvbiBvZiBZ
-QU1MIGZpbGUgZm9yIG9uc2VtaSBNQUMtUEhZDQo+ID4NCg0K
+This patch series brings support for onsemi's S2500 that iss
+IEEE 802.3cg compliant Ethernet transceiver with an integrated
+Media Access Controller (MAC-PHY)
+
+Driver implementation is compatible and works with OA TC6
+framework that is already present. S2500 driver supports
+hardware timestamping.
+
+Driver has support for running selftest and loopback tests.
+Through ethtool, it can provide traffic stats, rmon stats,
+and timestamping related traffic stats.
+
+As S2500 has an internal PHY, changes have been added
+to onsemi's PHY driver to support this device.
+
+Signed-off-by: Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
+---
+Changes in v6:
+- Changes to ensure onsemi code stay within 80 columns.
+- Fixed the error of "not described in comments section"
+  in comments section.
+
+- Fixed compiler warnings.
+- Link to v5: https://patch.msgid.link/20260614-s2500-mac-phy-support-v5-0-89874b72f725@onsemi.com
+
+Changes in v5:
+ - kernel doc related changes in oa_tc.c, onsemi driver files and
+  oa tc6 rst file
+- Link to v4: https://lore.kernel.org/r/20260605-s2500-mac-phy-support-v4-0-de0fbc13c6d8@onsemi.com
+
+Changes in v4:
+ - Added return value comment for genphy_read/write_phy_mmd functions
+ - Added genphy_loopback_fixed_speed helper function to be used in
+   set_loopback callbacks
+ - Updated networking documentation for OA TC6 framework to elaborate
+   on what is expected in the ptp_clock_info structure for registration.
+ - added spi-max-frequency in YAML file based on alert from sashiko-bot
+ - Removed model/version from the onsemi driver's private structure as
+   they were useful as "information-only" data.
+ - Replaced the non-standard selftest with Linux's standard selftest
+   and made it as a separate patch
+ - Changed bit manipulation, shift operations to use macros so that
+   it is clean and readable.
+ - added new read_register and write_register apis with _mms postfix
+   so that MMS (memory map selector) can be given as a parameter.
+ - Fixed the wrong condition check with NETIF_F_RXFCS to subtract
+   FCS size from the length of the frame.
+ - Link to v3: https://lore.kernel.org/r/CY8PR02MB92499C9080614FA3CEB8CD0483162@CY8PR02MB9249.namprd02.prod.outlook.com
+
+Changes in v3:
+ - Moved OA TC6 framework to its own directory.
+ - Split changes to smaller patches based on feedback.
+ - Added PHY loopback support as a separate patch.
+ - New, read and write register APIs with extra parameter MMS
+ - Link to v2: https://lore.kernel.org/r/CY8PR02MB924920C8825C7AE5D22EFA4483382@CY8PR02MB9249.namprd02.prod.outlook.com
+
+Changes in v2:
+ - API to add vendor specific MMS to mdio device map.
+ - Link to v1: https://lore.kernel.org/r/CY8PR02MB9249D083B637477C254F9B0583322@CY8PR02MB9249.namprd02.prod.outlook.com
+
+---
+Selvamani Rajagopal (15):
+      net: phy: Helper to read and write through C45 without lock
+      net: phy: Helper to modify PHY loopback mode only
+      net: ethernet: oa_tc6: Move oa_tc6.c to its own directory
+      net: phy: microchip_t1s: Use generic APIs for C45 read and write
+      net: ethernet: oa_tc6: Move constant definitions to header file
+      net: ethernet: oa_tc6: Support for hardware timestamp
+      net: ethernet: oa_tc6: Support for vendor specific MMS
+      net: ethernet: oa_tc6: read, write interface with MMS option
+      net: phy: ncn26000: Support for onsemi's S2500 internal phy
+      net: phy: ncn26000: Enable enhanced noise immunity
+      net: phy: ncn26000: Support for loopback
+      onsemi: s2500: Add driver support for TS2500 MAC-PHY
+      onsemi: s2500: Added selftest support to onsemi's S2500 driver
+      dt-bindings: net: add onsemi's S2500
+      Documentation: networking: Add timestamp related APIs to OA TC6 framework
+
+ .../devicetree/bindings/net/onnn,s2500.yaml        |  67 +++
+ Documentation/networking/oa-tc6-framework.rst      |  80 +++
+ MAINTAINERS                                        |  13 +-
+ drivers/net/ethernet/Kconfig                       |  12 +-
+ drivers/net/ethernet/Makefile                      |   2 +-
+ drivers/net/ethernet/microchip/lan865x/lan865x.c   |  61 +-
+ drivers/net/ethernet/oa_tc6/Kconfig                |  16 +
+ drivers/net/ethernet/oa_tc6/Makefile               |   7 +
+ drivers/net/ethernet/{ => oa_tc6}/oa_tc6.c         | 468 +++++++++------
+ drivers/net/ethernet/oa_tc6/oa_tc6_ptp.c           |  67 +++
+ drivers/net/ethernet/oa_tc6/oa_tc6_std_def.h       | 190 ++++++
+ drivers/net/ethernet/oa_tc6/oa_tc6_tstamp.c        | 201 +++++++
+ drivers/net/ethernet/onsemi/Kconfig                |  21 +
+ drivers/net/ethernet/onsemi/Makefile               |   7 +
+ drivers/net/ethernet/onsemi/s2500/Kconfig          |  22 +
+ drivers/net/ethernet/onsemi/s2500/Makefile         |   7 +
+ drivers/net/ethernet/onsemi/s2500/s2500_ethtool.c  | 360 +++++++++++
+ drivers/net/ethernet/onsemi/s2500/s2500_hw_def.h   | 225 +++++++
+ drivers/net/ethernet/onsemi/s2500/s2500_main.c     | 655 +++++++++++++++++++++
+ drivers/net/ethernet/onsemi/s2500/s2500_ptp.c      | 250 ++++++++
+ drivers/net/phy/dp83867.c                          |  11 +-
+ drivers/net/phy/microchip_t1s.c                    |  32 +-
+ drivers/net/phy/ncn26000.c                         |  63 +-
+ drivers/net/phy/phy_device.c                       |  75 +++
+ include/linux/oa_tc6.h                             |  36 ++
+ include/linux/phy.h                                |   6 +
+ 26 files changed, 2704 insertions(+), 250 deletions(-)
+---
+base-commit: 805185b7c7a1069e407b6f7b3bc98e44d415f484
+change-id: 20260601-s2500-mac-phy-support-4f3ae920fb73
+
+Best regards,
+-- 
+Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
+
 
 
