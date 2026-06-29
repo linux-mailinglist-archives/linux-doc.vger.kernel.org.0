@@ -1,58 +1,84 @@
-Return-Path: <linux-doc+bounces-94019-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94020-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id P54jIjqRQmqD9wkAu9opvQ
-	(envelope-from <linux-doc+bounces-94019-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 17:37:30 +0200
+	id z7ypK7KQQmpb9wkAu9opvQ
+	(envelope-from <linux-doc+bounces-94020-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 17:35:14 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 012EB6DCC72
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 17:37:29 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C5B66DCBF4
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 17:35:14 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=bootlin.com header.s=dkim header.b=YU+wIcTk;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94019-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-94019-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=reject) header.from=bootlin.com;
+	dkim=pass header.d=baylibre.com header.s=google header.b=mJaLXTBL;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94020-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94020-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=none;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 33F0431280DB
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 15:26:20 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id E220830D7FCD
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 15:27:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6749842EEDD;
-	Mon, 29 Jun 2026 15:25:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B461743DA56;
+	Mon, 29 Jun 2026 15:25:42 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-oa1-f44.google.com (mail-oa1-f44.google.com [209.85.160.44])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C683742EEB8;
-	Mon, 29 Jun 2026 15:24:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D1AB643DA40
+	for <linux-doc@vger.kernel.org>; Mon, 29 Jun 2026 15:25:40 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782746701; cv=none; b=ewr8UhI1OoAHixogyoCQ+Y4hAMntvu5Ro8FgEubWkTjjXN9fbGDS5CN3EXnB6t6kWBKIbO7QQu0Ko7ELVtwSLPExds/nalbVz4CfQ/Ac4ZnvI7YrQ33k904sOqa0Mfjs8aPvLH7C/60E8+drDZvB8SgaX/CsIq9wB4aX2vfrx7Y=
+	t=1782746742; cv=none; b=pcSKNl1vXfYyIKJpJfGCLnTbFWt/TYC05m+kU6rKGOBS7Q87XRd0tAB0rFCKLrSuyoHkkyiwCoKdshTNAbUuo3M4+zcKCMcQgJ1iAUQxsz8OiQYSE5e4lTm0jjQ3/SKs8HXws26ACTLNn7NQmwtE4UXfrHeF9OuYQC2/+Yg0ZsM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782746701; c=relaxed/simple;
-	bh=BxWHJw/g4OM8boiB+iRC+r6pkkeo8B1ZZ8goj81rBAI=;
+	s=arc-20240116; t=1782746742; c=relaxed/simple;
+	bh=bMEqNXZ9mHubK+aM6jy3pBJZxkKeyMW8AyvCDDB+Lrs=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=oFUtDAufAg1I4r8aF2dSGM9YhxuGmt/uNXjiNj/Pq8PUxiRZhe0uHRkPU3sBa7KYyCd2TKF1dozXmDb9XNk6azeEqoHYHWzIEgLwf8HGpz/I1YUGZQZl6VJyjwWaWJVgxNCdtcdvoKFmQnWY8zSaUWN4PjsbWDkmAQrIsnt0yfc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=YU+wIcTk; arc=none smtp.client-ip=185.246.85.4
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id 74C884E40B48;
-	Mon, 29 Jun 2026 15:24:58 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 421805FF96;
-	Mon, 29 Jun 2026 15:24:58 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id B6028106F1895;
-	Mon, 29 Jun 2026 17:24:51 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1782746697; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:content-language:in-reply-to:references;
-	bh=cV6cOM+bj7USh7hCsNibU/8DXk3lJFDt0xAap2b262Q=;
-	b=YU+wIcTkwOnnxgVT4g6EJRE0b0YtGWGu0SsA0ZopVUg/3hUzDC269GIpMtRq+zsV95prjU
-	eGtdXY+xxOaBVjJ3JKPk3ApBjhyli3rSEcIG1DLkgM722wa0O5ykt3uhdCTzSLh//Djg21
-	vuEIcH5a7E/DhnPSRKGbS9hxlfWJvzvzaNjj7j+MdI/iaSAzllXNbD9hdNUvCQ5+PXlYQw
-	HeDOuVjvd2hDtY7TnRXoWyO5KNsNwXM71aBT3liz33aftyvOJheMG8mfwfpCt8ahwlyCOu
-	fxM7PXJhGTz3+y1EiCsNk7A7L6TN2h2GLGFgfprz6U5oSykWr6l9zVt2Me2X1A==
-Message-ID: <01e3d32b-6d50-4179-8e2f-25cdf8ff6c32@bootlin.com>
-Date: Mon, 29 Jun 2026 17:24:51 +0200
+	 In-Reply-To:Content-Type; b=n7+tJgRl8bUaeYyOaZS4dtzeLeC/lb89h34raCpgt/zLdUTXBu52eQkoZxfTa/fMc/2FRjViW1qNWhfb8qKG/A9eeINRD2P5A5ctBkP5GO5fkMd6koAFY89O718O4rNHmYGTVhWc0OksMMNNbAXsww+3zOboHOJxtkiwbKnD8+I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=mJaLXTBL; arc=none smtp.client-ip=209.85.160.44
+Received: by mail-oa1-f44.google.com with SMTP id 586e51a60fabf-4486c5813afso661043fac.0
+        for <linux-doc@vger.kernel.org>; Mon, 29 Jun 2026 08:25:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre.com; s=google; t=1782746740; x=1783351540; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=XaJaAgaoRCLCjD+AlsRhR9FrqAL4y+0Revc/YO4kdQc=;
+        b=mJaLXTBLa1qxGRMHQu77viTO4XIUoCRPMKffn6Frhl+5jxJuXvfhWmKOKLWFtpX3Pq
+         6X5ukd4WrfEay3JhK5jUJ9HkVhQ2QrBsnXW3BgscFG95s5xJJgcswBGiJxFiZG8iphwy
+         miNpmJs3NhOy8nYPpfH+YJ+MKLXGomTyMRfd1ihBvymSHnOTLbunt/Q6iUpgmw7ZTDoq
+         vpjseUl3AKApgG1Gm77XvO+Q0vos+Vi/M1fir6bwwlNRBimriXLFJ9eGIkbJhayPIs7E
+         rVo22cdcFtJLWF39Qo1T7JWSlgqA7XTQ7GNaNAavYX5pztGqX+zi4rrG6ek+MEzcrsjX
+         k6aw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1782746740; x=1783351540;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=XaJaAgaoRCLCjD+AlsRhR9FrqAL4y+0Revc/YO4kdQc=;
+        b=TlKK06Ool4L4+Q4ZrYks02gEEhbIyN61HbZn0wucn4NnmAuGvY7Z6Ro8fY+r4brHNe
+         Svu+WxNZ4gPuYqivCUaCK1/L6NS7b6G3T9ZJphiZkMiCGILK9N2OJnzPKdS8iO3wBkU8
+         xh+pR0szvoIU21Ujl3xecv0QD3AHX0HSAMHXtke1lX1D5SQAH/yIUDzk7BVpXLltI8r7
+         LO632HxjcF0u32d1v0mv9bj+YohmWMNliWEPZqcSB2S0WhfoLl8ZA6hFOE4VaYbfhO51
+         jgd9EBgo14OcfjvLcoNwxWQcCLM9H1CvVj4sXl/qMHMusqG1/UaL0aFchz9QeFc9c+Gp
+         PqSg==
+X-Forwarded-Encrypted: i=1; AHgh+RqLqfF32ShuylIHKo1cdVX9oFpREdWe+gTjfdOBqQFfVnXe+Xj1skL9zHjFKkjsy2pPVlfyAf9ouBc=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyLKUO3rnKTk7Wxnov6uqTOegAl392LAASqWop0HpsLcMtDNmNp
+	OnqKAD1C+38YCInYd4xwNDDvSeDAKt7K+FmS96EMAl+1FZchWlUT2+BCQFrtRg6pD7Q=
+X-Gm-Gg: AfdE7cnEmO7PoX/BxBtG+z+SZTyKGcJCCKOnUQAwYOpgvTP7KFGkL1HjSeUMHxEkLj0
+	0Is+10EbgSNsg3NDc4OjqtqmiCRVlippmqYBGoA1X6Oi3UCzKo5mC6tz3EsvEIB8wR2DP+H/dvk
+	LwJrMv3jLIA4xRDnnFWz4BK+ZBA5JzVRm4jWrnXOLef3YlkGrmXg0xpcW6toNTN8nsW/m5ysZKG
+	vPRNH5FQhh8QeAZBhG+aK+uN3zlwB45sfPh79DZ9egJP5+4NOT5fPTOv8chFEmKqu36qm4xonaN
+	h09MgsrQ1wp4nHG941BxOT5pu+hhmq2mXc/YqLVdZlHOTb0Njj7H5UryEOcvxKaJp9uXaIamRCO
+	lHBGFzcJWu7GCyysfzj4ztMlUEIpt54oYP7XP0D7o4Nzat5nbCldQOo5vB8U/YRJW/HWzFEcsOm
+	A64IQ39KYoptROIWdLWqk5bMetRS68+b1tSfWsoZo1QGFj3kwZLHz04YF671eHnn8=
+X-Received: by 2002:a05:6870:9693:b0:448:6e54:4819 with SMTP id 586e51a60fabf-4486e544f3emr4992977fac.16.1782746739826;
+        Mon, 29 Jun 2026 08:25:39 -0700 (PDT)
+Received: from ?IPV6:2600:8803:e7e4:500:3533:aa22:9a69:df1c? ([2600:8803:e7e4:500:3533:aa22:9a69:df1c])
+        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-448dbb2302csm70720fac.7.2026.06.29.08.25.39
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 29 Jun 2026 08:25:39 -0700 (PDT)
+Message-ID: <9b179166-3057-4867-be04-b071a809f70f@baylibre.com>
+Date: Mon, 29 Jun 2026 10:25:38 -0500
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -60,106 +86,72 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net-next] Documentation: networking: Add a test plan for
- ethtool pause validation
-To: Andrew Lunn <andrew@lunn.ch>, Jakub Kicinski <kuba@kernel.org>
-Cc: davem@davemloft.net, Eric Dumazet <edumazet@google.com>,
- Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>,
- Russell King <linux@armlinux.org.uk>, Heiner Kallweit
- <hkallweit1@gmail.com>, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>,
- Oleksij Rempel <o.rempel@pengutronix.de>,
- Vladimir Oltean <vladimir.oltean@nxp.com>,
- Florian Fainelli <f.fainelli@gmail.com>, thomas.petazzoni@bootlin.com,
- netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org
-References: <20260522175109.198059-1-maxime.chevallier@bootlin.com>
- <20260526172447.10ca4b9e@kernel.org>
- <5cb8e2b4-8eb6-4446-9b90-1cd4c7964cd9@lunn.ch>
- <38bafe7e-d419-46f7-8fa7-87e9183e578c@bootlin.com>
- <58f37d6e-973b-4242-be82-0561ccdb1a6f@lunn.ch>
- <65d26fd2-fbb3-49cd-a9ac-07863d9a8909@bootlin.com>
- <5b7dbdbc-93fd-4664-abad-0f47855fab55@lunn.ch>
- <20260626173352.7dc8f106@kernel.org>
- <12b66ea3-42df-4ecb-8eb7-44471407b83f@bootlin.com>
- <20260627143028.5afed23a@kernel.org>
- <3b8abe17-5da7-4a7e-a42c-eb39a631843e@lunn.ch>
-From: Maxime Chevallier <maxime.chevallier@bootlin.com>
+Subject: Re: [PATCH RFC v6 0/5] iio: add Open Sensor Fusion IIO driver
+To: Jinseob Kim <kimjinseob88@gmail.com>, Jonathan Cameron
+ <jic23@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
+Cc: =?UTF-8?Q?Nuno_S=C3=A1?= <nuno.sa@analog.com>,
+ Andy Shevchenko <andy@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ Shuah Khan <skhan@linuxfoundation.org>, linux-iio@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260628191337.937-1-kimjinseob88@gmail.com>
 Content-Language: en-US
-In-Reply-To: <3b8abe17-5da7-4a7e-a42c-eb39a631843e@lunn.ch>
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <20260628191337.937-1-kimjinseob88@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[bootlin.com,reject];
-	R_DKIM_ALLOW(-0.20)[bootlin.com:s=dkim];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[baylibre.com:s=google];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-94019-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:andrew@lunn.ch,m:kuba@kernel.org,m:davem@davemloft.net,m:edumazet@google.com,m:pabeni@redhat.com,m:horms@kernel.org,m:linux@armlinux.org.uk,m:hkallweit1@gmail.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:o.rempel@pengutronix.de,m:vladimir.oltean@nxp.com,m:f.fainelli@gmail.com,m:thomas.petazzoni@bootlin.com,m:netdev@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:ffainelli@gmail.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[maxime.chevallier@bootlin.com,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[17];
-	FREEMAIL_CC(0.00)[davemloft.net,google.com,redhat.com,kernel.org,armlinux.org.uk,gmail.com,lwn.net,linuxfoundation.org,pengutronix.de,nxp.com,bootlin.com,vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:kimjinseob88@gmail.com,m:jic23@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:nuno.sa@analog.com,m:andy@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-iio@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
+	FREEMAIL_TO(0.00)[gmail.com,kernel.org];
+	DMARC_NA(0.00)[baylibre.com];
+	FORGED_SENDER(0.00)[dlechner@baylibre.com,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-94020-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[maxime.chevallier@bootlin.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[bootlin.com:+];
+	FROM_NEQ_ENVFROM(0.00)[dlechner@baylibre.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[baylibre.com:+];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	TO_DN_SOME(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,bootlin.com:dkim,bootlin.com:mid,bootlin.com:from_mime]
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,baylibre.com:dkim,baylibre.com:mid,baylibre.com:from_mime,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 012EB6DCC72
+X-Rspamd-Queue-Id: 4C5B66DCBF4
 
-Hi Jakub, Andrew,
-
-On 6/28/26 01:46, Andrew Lunn wrote:
-> On Sat, Jun 27, 2026 at 02:30:28PM -0700, Jakub Kicinski wrote:
->> On Sat, 27 Jun 2026 07:34:31 +0200 Maxime Chevallier wrote:
->>>> This is very far from what existing python tests do in netdev.  
->>>
->>> We can probably drop the class, as it is with this discussion, it's merely a way
->>> to regroup doc common to similar tests. The rest really is the usual set of
->>> ksft funcs you can feed to the run function, with a set of ksft_ethtool_*
->>> annotators for generic checks.
->>
->> The common way of checking prereqs in the tests is to call a function
->> called require_xyz() which then raises a skip. At a quick glance - the
->> rss_api and xdp_metadata are good tests to get a sense of the usual format.
+On 6/28/26 2:13 PM, Jinseob Kim wrote:
+> Open Sensor Fusion (OSF) devices expose a UART/serdev host interface
+> for a sensor aggregation hub.  This RFC adds a Linux IIO driver that
+> parses OSF frames and creates IIO devices at runtime from capability
+> reports provided by the device firmware.
 > 
-> The counter example is the ksft_disruptive() decorator.
+> When the corresponding capabilities are reported, the driver exposes
+> accelerometer, gyroscope, magnetometer, and temperature data as IIO
+> devices named osf-accel, osf-gyro, osf-magn, and osf-temp.
 > 
-> Pythons own unittest framework makes use of decorators to skip
-> tests. Its the Pythonic way.
+> This remains RFC while the binding, protocol subset, runtime discovery
+> model, and driver-facing ABI are reviewed.
 
-So maybe in the end, we can try to have something a bit less python-y, while still
-using extensive documentation using sphynx doc format ?
-
-Let me send a V2 with the full test list, we'll see how much scaffolding
-we can build for ethtool testing, and how. I suspect that running/skipping based on
-the device's capabilities is going to be used throughout lots of tests
-beyond pause.
-
-For now the important part is to get that test list right, and iterate on the
-test implementation once we agree on what to test, why and how.
-
-Maxime
+If you are just looking for review and don't have specific questions,
+then it is time to drop the RFC.
 
 
