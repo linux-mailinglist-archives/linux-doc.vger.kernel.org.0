@@ -1,224 +1,367 @@
-Return-Path: <linux-doc+bounces-94064-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94061-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id +cDSKF64QmqlAAoAu9opvQ
-	(envelope-from <linux-doc+bounces-94064-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 20:24:30 +0200
+	id EV5+EPq3QmqHAAoAu9opvQ
+	(envelope-from <linux-doc+bounces-94061-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 20:22:50 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A7266DE02E
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 20:24:30 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2541C6DDFDE
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 20:22:50 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=AY4Z7Cqu;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94064-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94064-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=reject) header.from=nvidia.com;
-	arc=reject ("cv is fail on i=2")
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=lZVlrTnH;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94061-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-94061-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=gmail.com;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 5A3A73071388
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 18:22:58 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 8D4AC301301C
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2026 18:22:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 26554392837;
-	Mon, 29 Jun 2026 18:22:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A645D384CE4;
+	Mon, 29 Jun 2026 18:22:08 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from CH4PR04CU002.outbound.protection.outlook.com (mail-northcentralusazon11013035.outbound.protection.outlook.com [40.107.201.35])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B49438E12D;
-	Mon, 29 Jun 2026 18:22:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2865F38655B
+	for <linux-doc@vger.kernel.org>; Mon, 29 Jun 2026 18:22:02 +0000 (UTC)
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782757336; cv=fail; b=hYDsnZX+s4o0iAgsDQDFf9AwgsEORUXjEu0WuEbhx6+OYxU9Lr2oRdXicDUsTmp500bxj8LmXjHGPIE5iSKQwrZSOP+16WkBBB518AxJAAmLWcgV1jgu77SotE12oiFj440i4bprxiVesp4Jrx0gcJXwkmho9CHwU4eHNp2+p4k=
+	t=1782757328; cv=pass; b=cnXDDAeOesMSDcn42pu1EzLIdUVHQii1w6Xs3pBbj5CkNyUyVnxcA89H6+twR9DYN6VfgB2RZx4lBTd0gcFU+DYz+i1RkQk1gnLVqNjW2/7rb5eaktRbTc0YgojYmhHAKC3Nde+PYjg8f/qZEX03cEb//DKcah6MsyfitYWoZIQ=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782757336; c=relaxed/simple;
-	bh=D7y1w1hAd0iotSyKh7CxtFC4/yc2h/GnCKbOuoAwXZ4=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=KDVS7KrEi/DqOiAgOWW2qzFW4drKA20FqUvRreUhYbC6q2CVvukhjYbrBD9UwjKqKXjKbbWtZo0ywT+E6Q0qeCxQgHiriUU+X8v3YCT12DLLYj2SMxKn32ezcKVU/FfqpL//uq0//ToMg81vB3ukFdLFBiDC3FkJVei2VOSrqNo=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=AY4Z7Cqu; arc=fail smtp.client-ip=40.107.201.35
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=st5u1hGrcJ34B3LUN1tOnrnZKJYmcTPbDxLorMpixlEwAMZo/Vjb9mvmBSzrWcdRYUWvZekQWvpcAY/Lvlp+8EqOIa/2rP4j38lYBYtyFHR2rc/6H86AE/xrpJIwsNpPR+QJue3iBP0DZ2TXE3msriGpSNNEfjzvAvxrbFIufqEgBSxHtEHgDjsFW8YRWQUy8hTJ45zEGmsZ7TvPnHrkBY+Y6tFrl7vvWfy6vGPBWyECvbPhgx8AF6EXlCWLtaI3WSbO4HfPqsqV+U1GaWjVEr9C8g4Ti9h4CeMQN+my0XJ+bpNFdhW/qrKyECS8NltHrsH7VmqcYkn2Rb5uKoR0qQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YruQRGdooAus926mXQ5iORF2/vtVgeWZuFRhOiiAGHc=;
- b=LBuuHDL5OVrxD3aQJXJkuU0pxQrLfXA92j6S96Asn6Hg4/cAcjZD3Fq0ho6p0AagN9bUAaU88+PhFMB0BGkHFKMJi86sTQbW+X0K9PpFWoMbYLfzaxDP38o9GNu0KRi/jTFcaJ3/KQNSEAA0W1C8qqFU0w8yREYpT9U0fDwHdFKS3NM4wSUxqyntlgBvqTsU7G+U3AX1/bv7I1Fru4KVXlG4pIhJXjRvRLoft7F8eo+Pj1v87IoNxjv8ER8bhEcHWbj3HlEQeXr+mZ16e0nLR7Rsn5/I3ioWEeIvIG/1sEDN1yg30Qf0mn6vD+5fa+Bv0ZbVBCK/hf18Sojd/yhunQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.161) smtp.rcpttodomain=resnulli.us smtp.mailfrom=nvidia.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YruQRGdooAus926mXQ5iORF2/vtVgeWZuFRhOiiAGHc=;
- b=AY4Z7CqukUG9xa6zK8F8own0nn7p6DaTi0pLccSQV1S8XG0R8STi0fQZlCRPPSFoyM1dZMy+hzQzLprdlhXJmylRxBaJMDMA1P2FnHyY5L6OgS3bE/7kDp19BfJc5JWsndetfpr1EUcv57eke+8lIX8Ut6psoe+AOque5EDE4pUgjrFAbvgL4cB6oHj+Y/nOcDZad4t+cabOoZ3N2bDAu+Kx7WHXVsOSlLlhB97FRXSjmrD8R+wjT/HY2HBaXL2+1ZjVMCEMC+H6mKpOfJ53g1hPVw5FaGX7y2O9EuMBsD79KIbaW01Ol0mJXGY/8L/2mzhN5IVU0x9EVzeCq9+2mA==
-Received: from BY3PR03CA0004.namprd03.prod.outlook.com (2603:10b6:a03:39a::9)
- by CH2PR12MB9544.namprd12.prod.outlook.com (2603:10b6:610:280::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.19; Mon, 29 Jun
- 2026 18:22:03 +0000
-Received: from SJ5PEPF00000204.namprd05.prod.outlook.com
- (2603:10b6:a03:39a:cafe::6b) by BY3PR03CA0004.outlook.office365.com
- (2603:10b6:a03:39a::9) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.159.19 via Frontend Transport; Mon,
- 29 Jun 2026 18:22:02 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
- smtp.mailfrom=nvidia.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.161) by
- SJ5PEPF00000204.mail.protection.outlook.com (10.167.244.37) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.181.6 via Frontend Transport; Mon, 29 Jun 2026 18:22:02 +0000
-Received: from rnnvmail203.nvidia.com (10.129.68.9) by mail.nvidia.com
- (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 29 Jun
- 2026 11:21:34 -0700
-Received: from rnnvmail202.nvidia.com (10.129.68.7) by rnnvmail203.nvidia.com
- (10.129.68.9) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 29 Jun
- 2026 11:21:33 -0700
-Received: from vdi.nvidia.com (10.127.8.10) by mail.nvidia.com (10.129.68.7)
- with Microsoft SMTP Server id 15.2.2562.20 via Frontend Transport; Mon, 29
- Jun 2026 11:21:29 -0700
-From: Mark Bloch <mbloch@nvidia.com>
-To: Jiri Pirko <jiri@resnulli.us>, Eric Dumazet <edumazet@google.com>, "Jakub
- Kicinski" <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Simon Horman
-	<horms@kernel.org>
-CC: Saeed Mahameed <saeedm@nvidia.com>, Leon Romanovsky <leon@kernel.org>,
-	Tariq Toukan <tariqt@nvidia.com>, Andrew Lunn <andrew+netdev@lunn.ch>,
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
-	<netdev@vger.kernel.org>, <linux-rdma@vger.kernel.org>,
-	<linux-doc@vger.kernel.org>, Mark Bloch <mbloch@nvidia.com>
-Subject: [PATCH net-next V4 6/6] net/mlx5: Apply devlink eswitch mode boot default on probe
-Date: Mon, 29 Jun 2026 21:21:01 +0300
-Message-ID: <20260629182102.245150-7-mbloch@nvidia.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260629182102.245150-1-mbloch@nvidia.com>
-References: <20260629182102.245150-1-mbloch@nvidia.com>
+	s=arc-20240116; t=1782757328; c=relaxed/simple;
+	bh=rTCC+Q2QI/RNZdcYErq5nB4Tg1Xxg7Ybj1fhnVetaOY=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=iRLtq7dFHYBY19chKZ0YbFbB0XSH06yvmYWEzTtRhWQAmM7q0uf5g3T9s3v8P/z+NTFDP6KKXLPGR8LYzm+tZoyYazZPyLO40+7T120lqC7c7aX5BEy/qWhvk/sMmoLNkS6CGleSku5TMzuZ2aUEMZ5rmA1EGnZGuXsj9A2a9fQ=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=lZVlrTnH; arc=pass smtp.client-ip=209.85.221.49
+Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-47231f1f8f3so2815623f8f.1
+        for <linux-doc@vger.kernel.org>; Mon, 29 Jun 2026 11:22:02 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782757321; cv=none;
+        d=google.com; s=arc-20260327;
+        b=nOC3XHqfGuTYvroLhQ29JmF4TXCqko1egRf87zqG8McaWR0GbiX2zP1K+XO83r4Heg
+         RFnnvXI3c8A7Kc38HI1E1KlqgumY9q3tWHA7CZ2bK420LjtYDzWXgGG8/qF9I7f3+g0W
+         LGu0TPheORd4rEoB+cBZ256/Y7pJVi0on28SLbgptFjLIGmuF3SqRDCieRUqHdskQIW1
+         pUfnL3UrxpxxVSTVKXidTc1BP+DTEXJZLtwB3Fi6nDWBCEJ7wTtlNyg83I8kU7/aQcLQ
+         FGZ2IQhkx9EKx6cFm3rV3Fges4md7kbbqhdnJrn/V0DS2gDWo3dBKqb54tj5LJDotE1Q
+         j9Dg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=5NfKOjNU6srylE75C2adpej95bKtXYvziT0LYJSnVds=;
+        fh=J1YXTG+6nSb549YyPaUD10n68hYU6y9I217txeJzeuA=;
+        b=paKcKib3s5IxO0vrkp2AdA/Y/Zd8WTFePhL6NL3a0Jb61sjEtE6/lxFzdBmG+W6u9x
+         wrd0LSW4Pe/OuFUWUyRBgW49Ecgqq0i9it0Vw21Ejpp9InSR9Zd455gwPoKtCTCU50o6
+         zoZCFRbulvIdwGtEB/H5+8xhBH0kdQ7vt3u8yEy7IuQO0GARmlz8Bv8+BzJRotOnFtfE
+         VDiBQG8x8x2kn3B3QNYWqNVxU8RM4wjg7ZLVpCH6Q7AD1WTA2W+ywDgSL2R8nsg6kEvn
+         et99dGS4GIlq4NrMN0jIsjzXa5OQTftgMjKFE61wmgyLe+6KFmkpMzlQQl5S2ac3Z1me
+         60uA==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1782757321; x=1783362121; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=5NfKOjNU6srylE75C2adpej95bKtXYvziT0LYJSnVds=;
+        b=lZVlrTnHAIE6MHhnr76cv5+Q9ab3WEF37l1jXtbCTR0zXFkwPQGjAcZs9ooF4TN2HA
+         0zv3vLRXJ/Z4ZopSsJuTeilRNAlXpdGx3QyUDpnwM2wLstJ3OzCQas6HEMKgpo0BeKYJ
+         qj7xeSFA26oJJb7ArIsLKQ8MBfTpLrvdPRsvqW2zDgjdJLFbP4TP+j14v/s7S+CqLrcc
+         8O0IDAPaVGDl2vZiXU9ZFXkSR/oXnO0+fTzcGsoxpCfMkTGKGgQauqdKcH0ChPVIRWEr
+         tD9o1Y7MPxLmN+a05ofn6At1meODNOzZbpa3hAkbYofXv4rW3ruTPeITd8d1GbJVn0wM
+         sevQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1782757321; x=1783362121;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=5NfKOjNU6srylE75C2adpej95bKtXYvziT0LYJSnVds=;
+        b=jhJ8tm8zbV+AeDES67lBfM/rAICAp5tci7czRJ9qGVtDEacf960KwIVQfyW1UtSfSj
+         j/Sl9jZGjQi0OKsApqvFRwfEvcnU15Q1v+6QrXs2L2k1YiDt9kkmwJ8UQesgd4W40bZh
+         kSWBRUYJ9iendTw1zNTlNW4N2YxpyloYtj68AKU7QeLekyaKOuduFNLUdL0OjJ5umPfC
+         0mkOvGSr6cViWNtjxG9HkXeiG9MOuK4NWe8e9g1OdHhDt2bVETa/D88EPWkP3bW5AW+6
+         fi30CprX6ffUXXHaemKdOvkaud56nz6u2yOiU+BiwnN4GB+aiEN+g3QCBjes/tLIFkLO
+         89Lg==
+X-Forwarded-Encrypted: i=1; AHgh+RqAka1A9kXc+o5zwGH7jgpL1wPYWfXDoiiGDOmUhlrGDV17drObotDdw69NwyYvdlnDSj9TYw5KWj8=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz39rkJmsp7nsjL+2t8GNKxEvIvIrvk9VBcYXsM2VVcUh1rQ28R
+	hwQLTQ3aMT5K2ns2iVoHV2FqKvkI6gzQOuQLswDvDZ9D7TOuUzdBgyfp5aEH3041tSyml+nN+9C
+	q3M7UE1Y8h5THGJ6LZy4gkkv8/8AlHLA=
+X-Gm-Gg: AfdE7cm3KwClRKZNPNYLA9cfKwjUBcPIdUo3XIpe/0DIr6eBa84V0wXFo59P6TbvDLc
+	xgh6tZV5eooK0i78kiIhQJFb0/D8Lrh2volXqBOyEO0MuFCTP72jjogYhtWi1QyqmiHQxlexvvD
+	OEnCQo1pq+Hv29YoQHl/omyQEGU4IqoxaYInWYtt8T4Rh/rLAYD7iVddxeSx0Gc1tih2KdCvloi
+	87sF/hHEUfDgP1pU84lCazmasDTBuzohY8dXaEy98isaLH0xG6P/fxZwGYRlFvwAD8Uj4Lxyebo
+	QwT4vtHrETskxP+5/L89dnNlFVkP1g==
+X-Received: by 2002:a05:6000:460d:b0:473:6e8d:7f3 with SMTP id
+ ffacd0b85a97d-475506e96a8mr558778f8f.1.1782757321163; Mon, 29 Jun 2026
+ 11:22:01 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-NV-OnPremToCloud: ExternallySecured
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF00000204:EE_|CH2PR12MB9544:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3dbc2d87-a2c5-442e-9c42-08ded60b5121
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|1800799024|7416014|376014|36860700016|82310400026|22082099003|56012099006|18002099003|6133799003|11063799006;
-X-Microsoft-Antispam-Message-Info:
-	BxKV+01KYuzasOYrOOvG0xFXztPW13FlPHwUO+yDzG9b9gmFVD76l06xrWufSQcOpc6O5A5oSSYzOT7ssi2fZryfoEsxdm1Lv87nrTrKweasbdfGlxrQEuaUOgaIAgVP6+AZleeO4DxmG/yFA8AcgETs0NLOxWVuEaVbKSYB4OSDYAou1BOCfCV/YwWNhFW0oNGfcq8h1xmZQUq7WZfmXipDkHThrVE/rWKzZGMOC9qChfu9EUX+cMymrLO+BHJEbSR0JpN0Rvpaa0DNXbBapi8WzjpfKrVLJXduKIt0jLKgaUt8qmilEOdFE6G/EV0ZCeI8WBOZQDMWmJfsW0Fw2ZE0BfW40G4Wz9kVXq++BOz8s/Bu+JINNqcv4S28AL6UdE7d1WCLU88mv038puCMTVt5zLHaYxVs84HkF+ZL6LpTLxGFGaAz0CIWIghMlUtq4YVM5vNYYkDd47JwMHyNw9PmxpqaJcySQFrXxp/7ranYb10WmbYJW+ZKuNLepvM02J3L2/dfcukhSZ+UUUmJYp6+0H4awK8y4aJmihwuIhhlI+tBudUEN40FOkV4AjkqY5ErconLfQQqGTmlESzEcdy+mUK4egLnq0pjd193PIvOX64RpkzUVNs2OXPv90zFDMBgn/JpoHRIp7sxbIZNcSEegNfrT22bBxFwI6I7yqc/BOEO+oxDgICsy9Gn2qmqjbnkm/EWoLX4Katmm8dupA==
-X-Forefront-Antispam-Report:
-	CIP:216.228.117.161;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge2.nvidia.com;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(7416014)(376014)(36860700016)(82310400026)(22082099003)(56012099006)(18002099003)(6133799003)(11063799006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	1IDKa+ktD+TI/p0FeGl4lZXcuHmSOdWap/z0sEBwkQaF/pTbV0OWuCWfl1GXRwC3FSlXARzx9c7Hr24HNuXNf7mCJ+5izvDek7fK/RJpEaOY5V55rNwRa+ppWLt268kRzfANWXCSEmiyHlSo3cmvwnJqF6qSkKq3mjLBoDwnkZBo0C1AgFBa/eWxvJ3lfnBICp8II+JF5SDxjQ/esA/fk6oQW1x+i+B8Tn4qr06AGyVhGbdiGYIXFRP+qh/xOp86yLKOmmp55NNhKzw1H78H3CTBBhG/BMpZE7K1/bp0HJ0JBq1fxgvpzv9lgGaVPVmSLFp5eWC3zFQBSD1M66kxQiJ2sU2oP5t69R1az35ntX5Eo8zzc86ge75M/iNSjyP+99Ea6eV1frdbqKjudrlRKnmP+Sc/arnc3Wu4921qwAHcdeW7C7LjJO98mAgLowNg
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jun 2026 18:22:02.6996
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3dbc2d87-a2c5-442e-9c42-08ded60b5121
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.161];Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SJ5PEPF00000204.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB9544
+References: <20260611-rva23u64-hwprobe-v2-v4-0-3f01a2449488@gmail.com> <20260611-rva23u64-hwprobe-v2-v4-6-3f01a2449488@gmail.com>
+In-Reply-To: <20260611-rva23u64-hwprobe-v2-v4-6-3f01a2449488@gmail.com>
+From: Jesse T <mr.bossman075@gmail.com>
+Date: Mon, 29 Jun 2026 14:21:24 -0400
+X-Gm-Features: AVVi8CeVJe5kDV9ivsXrbK-CzxJfU-Om1AQNkB7-XLVhzZDb1etpOuW05CkKE0c
+Message-ID: <CAJFTR8RK2sR88ePKREmZw-9FRkWEpV_FH6s7M9TegaObqU1cwA@mail.gmail.com>
+Subject: Re: [PATCH v4 06/16] riscv: Add Ziccamoa, Ziccif, Ziccrse, and Za64rs
+ to cpufeature and hwprobe
+To: Guodong Xu <docular.xu@gmail.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+	Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, 
+	Alexandre Ghiti <alex@ghiti.fr>, Zong Li <zong.li@sifive.com>, Deepak Gupta <debug@rivosinc.com>, 
+	Anup Patel <anup@brainfault.org>, Atish Patra <atish.patra@linux.dev>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Yixun Lan <dlan@kernel.org>, Chen Wang <unicorn_wang@outlook.com>, 
+	Inochi Amaoto <inochiama@gmail.com>, linux-doc@vger.kernel.org, 
+	linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org, 
+	kvm@vger.kernel.org, kvm-riscv@lists.infradead.org, 
+	Paul Walmsley <paul.walmsley@sifive.com>, Conor Dooley <conor@kernel.org>, devicetree@vger.kernel.org, 
+	spacemit@lists.linux.dev, sophgo@lists.linux.dev, 
+	linux-kselftest@vger.kernel.org, Palmer Dabbelt <palmer@sifive.com>, 
+	Andrew Jones <andrew.jones@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-4.16 / 15.00];
-	WHITELIST_DMARC(-7.00)[nvidia.com:D:+];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	ARC_REJECT(1.00)[cv is fail on i=2];
-	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FORGED_RECIPIENTS(0.00)[m:docular.xu@gmail.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:pjw@kernel.org,m:palmer@dabbelt.com,m:aou@eecs.berkeley.edu,m:alex@ghiti.fr,m:zong.li@sifive.com,m:debug@rivosinc.com,m:anup@brainfault.org,m:atish.patra@linux.dev,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:dlan@kernel.org,m:unicorn_wang@outlook.com,m:inochiama@gmail.com,m:linux-doc@vger.kernel.org,m:linux-riscv@lists.infradead.org,m:linux-kernel@vger.kernel.org,m:kvm@vger.kernel.org,m:kvm-riscv@lists.infradead.org,m:paul.walmsley@sifive.com,m:conor@kernel.org,m:devicetree@vger.kernel.org,m:spacemit@lists.linux.dev,m:sophgo@lists.linux.dev,m:linux-kselftest@vger.kernel.org,m:palmer@sifive.com,m:andrew.jones@oss.qualcomm.com,m:docularxu@gmail.com,m:krzk@kernel.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[15];
+	FORGED_SENDER(0.00)[mrbossman075@gmail.com,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94064-lists,linux-doc=lfdr.de];
-	FORGED_SENDER(0.00)[mbloch@nvidia.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS(0.00)[m:jiri@resnulli.us,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:horms@kernel.org,m:saeedm@nvidia.com,m:leon@kernel.org,m:tariqt@nvidia.com,m:andrew+netdev@lunn.ch,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:netdev@vger.kernel.org,m:linux-rdma@vger.kernel.org,m:linux-doc@vger.kernel.org,m:mbloch@nvidia.com,m:andrew@lunn.ch,s:lists@lfdr.de];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	TAGGED_FROM(0.00)[bounces-94061-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[30];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mbloch@nvidia.com,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[Nvidia.com:+];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,Nvidia.com:dkim,nvidia.com:email,nvidia.com:mid,nvidia.com:from_mime,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	RCVD_COUNT_SEVEN(0.00)[9]
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[mrbossman075@gmail.com,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[lwn.net,linuxfoundation.org,kernel.org,dabbelt.com,eecs.berkeley.edu,ghiti.fr,sifive.com,rivosinc.com,brainfault.org,linux.dev,outlook.com,gmail.com,vger.kernel.org,lists.infradead.org,lists.linux.dev,oss.qualcomm.com];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,infradead.org:url,infradead.org:email,vger.kernel.org:from_smtp,qualcomm.com:email,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 3A7266DE02E
+X-Rspamd-Queue-Id: 2541C6DDFDE
 
-Apply devlink_eswitch_mode= boot defaults for mlx5 after the initial
-probe finishes device initialization while holding the devlink instance
-lock.
+On Thu, Jun 11, 2026 at 4:14=E2=80=AFPM Guodong Xu <docular.xu@gmail.com> w=
+rote:
+>
+> From: Andrew Jones <andrew.jones@oss.qualcomm.com>
+>
+> Add Ziccamoa, Ziccif, and Za64rs to riscv_isa_ext[] so they can be
+> parsed from devicetree/ACPI ISA strings. Ziccrse is already present
+> in cpufeature; this patch only adds its hwprobe exposure.
+>
+> Expose all four extensions via hwprobe through new bits in
+> RISCV_HWPROBE_KEY_IMA_EXT_1 (RISCV_HWPROBE_EXT_ZICCAMOA, _ZICCIF,
+> _ZICCRSE, _ZA64RS), so userspace can probe each of these
+> RVA23U64-mandatory extensions individually.
+>
+> Rationale for the validation dependencies added for Ziccamoa and Za64rs:
+>
+> 1) Ziccamoa depends on Zaamo.  The RVA23 profile prose was updated
+> post-ratification to spell out the Zaamo reference: commit
+> 2b218613752d in riscv/riscv-profiles ("Improve description of
+> Ziccamoa (#224)") reworded the rva23-profile.adoc (and other profiles
+> that include Ziccamoa) text from "must support all atomics in A" to
+> "must support all atomics in the Zaamo extension" [1].
+>
+> 2) Za64rs depends on Zalrsc. The unprivileged ISA manual src/zars.adoc,
+> integrated in commit ebe06adc22cd ("Integrate profiles as Volume III
+> (#2771)"), defines Za64rs as: "The Za64rs extension requires that the
+> reservation sets used by the instructions in the Zalrsc extension be
+> contiguous, naturally aligned, and at most 64 bytes in size" [2].
+>
+> Link: https://github.com/riscv/riscv-profiles/commit/2b218613752d63287286=
+b5ae801b820cbd8cc10c [1]
+> Link: https://github.com/riscv/riscv-isa-manual/blob/main/src/unpriv/zars=
+.adoc [2]
+> Signed-off-by: Andrew Jones <andrew.jones@oss.qualcomm.com>
+> Signed-off-by: Guodong Xu <docular.xu@gmail.com>
 
-At this point the devlink instance is registered and mlx5 can perform an
-eswitch mode change. Calling devl_apply_default_esw_mode() also clears
-any pending default apply work queued by devl_register(), so the queued
-work will not apply the same default again.
+Reviewed-by: Jesse Taube <jtaubepe@redhat.com>
 
-Keep this call in mlx5_init_one() rather than the lower-level
-devl-locked init helper. That helper is also used by devlink reload, and
-devlink core already applies the boot default after a successful
-DRIVER_REINIT reload.
-
-Signed-off-by: Mark Bloch <mbloch@nvidia.com>
----
- drivers/net/ethernet/mellanox/mlx5/core/main.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
-
-diff --git a/drivers/net/ethernet/mellanox/mlx5/core/main.c b/drivers/net/ethernet/mellanox/mlx5/core/main.c
-index 643b4aac2033..0712efea74cc 100644
---- a/drivers/net/ethernet/mellanox/mlx5/core/main.c
-+++ b/drivers/net/ethernet/mellanox/mlx5/core/main.c
-@@ -1392,6 +1392,17 @@ static void mlx5_unload(struct mlx5_core_dev *dev)
- 	mlx5_free_bfreg(dev, &dev->priv.bfreg);
- }
- 
-+static void mlx5_devl_apply_default_esw_mode(struct mlx5_core_dev *dev)
-+{
-+	struct devlink *devlink = priv_to_devlink(dev);
-+
-+	if (!MLX5_ESWITCH_MANAGER(dev))
-+		return;
-+
-+	devl_assert_locked(devlink);
-+	devl_apply_default_esw_mode(devlink);
-+}
-+
- int mlx5_init_one_devl_locked(struct mlx5_core_dev *dev)
- {
- 	bool light_probe = mlx5_dev_is_lightweight(dev);
-@@ -1471,6 +1482,8 @@ int mlx5_init_one(struct mlx5_core_dev *dev)
- 	err = mlx5_init_one_devl_locked(dev);
- 	if (err)
- 		devl_unregister(devlink);
-+	else
-+		mlx5_devl_apply_default_esw_mode(dev);
- unlock:
- 	devl_unlock(devlink);
- 	return err;
--- 
-2.43.0
-
+> ---
+> v4: No change.
+> v3: Indent the added hwprobe.rst entries to match the normalized style; n=
+o other change.
+> v2:
+> - Rebased to v7.1-rc2.
+> - Reworded subject and expanded commit message.
+> - Validation added for Ziccamoa depending on Zaamo and Za64rs depending
+>   on Zalrsc.
+> ---
+>  Documentation/arch/riscv/hwprobe.rst  | 16 ++++++++++++++++
+>  arch/riscv/include/asm/hwcap.h        |  3 +++
+>  arch/riscv/include/uapi/asm/hwprobe.h |  4 ++++
+>  arch/riscv/kernel/cpufeature.c        | 21 +++++++++++++++++++++
+>  arch/riscv/kernel/sys_hwprobe.c       |  4 ++++
+>  5 files changed, 48 insertions(+)
+>
+> diff --git a/Documentation/arch/riscv/hwprobe.rst b/Documentation/arch/ri=
+scv/hwprobe.rst
+> index 49d9fb68632d0..893e1a1215d23 100644
+> --- a/Documentation/arch/riscv/hwprobe.rst
+> +++ b/Documentation/arch/riscv/hwprobe.rst
+> @@ -405,3 +405,19 @@ The following keys are defined:
+>    * :c:macro:`RISCV_HWPROBE_EXT_ZICCLSM`: The Zicclsm extension is suppo=
+rted,
+>      as defined in the RISC-V Profiles specification starting from commit
+>      b1d80660 ("Updated to ratified state.")
+> +
+> +  * :c:macro:`RISCV_HWPROBE_EXT_ZICCAMOA`: The Ziccamoa extension is sup=
+ported,
+> +    as defined in the RISC-V Profiles specification starting from commit
+> +    b1d80660 ("Updated to ratified state.")
+> +
+> +  * :c:macro:`RISCV_HWPROBE_EXT_ZICCIF`: The Ziccif extension is support=
+ed,
+> +    as defined in the RISC-V Profiles specification starting from commit
+> +    b1d80660 ("Updated to ratified state.")
+> +
+> +  * :c:macro:`RISCV_HWPROBE_EXT_ZICCRSE`: The Ziccrse extension is suppo=
+rted,
+> +    as defined in the RISC-V Profiles specification starting from commit
+> +    b1d80660 ("Updated to ratified state.")
+> +
+> +  * :c:macro:`RISCV_HWPROBE_EXT_ZA64RS`: The Za64rs extension is support=
+ed,
+> +    as defined in the RISC-V Profiles specification starting from commit
+> +    b1d80660 ("Updated to ratified state.")
+> diff --git a/arch/riscv/include/asm/hwcap.h b/arch/riscv/include/asm/hwca=
+p.h
+> index e8f4a7dd96a93..0acb7a01ecc0f 100644
+> --- a/arch/riscv/include/asm/hwcap.h
+> +++ b/arch/riscv/include/asm/hwcap.h
+> @@ -113,6 +113,9 @@
+>  #define RISCV_ISA_EXT_ZICFILP          104
+>  #define RISCV_ISA_EXT_ZICFISS          105
+>  #define RISCV_ISA_EXT_ZICCLSM          106
+> +#define RISCV_ISA_EXT_ZICCAMOA         107
+> +#define RISCV_ISA_EXT_ZICCIF           108
+> +#define RISCV_ISA_EXT_ZA64RS           109
+>
+>  #define RISCV_ISA_EXT_XLINUXENVCFG     127
+>
+> diff --git a/arch/riscv/include/uapi/asm/hwprobe.h b/arch/riscv/include/u=
+api/asm/hwprobe.h
+> index 6819df159c51e..58d1e86e47ae7 100644
+> --- a/arch/riscv/include/uapi/asm/hwprobe.h
+> +++ b/arch/riscv/include/uapi/asm/hwprobe.h
+> @@ -117,6 +117,10 @@ struct riscv_hwprobe {
+>  #define RISCV_HWPROBE_KEY_IMA_EXT_1            16
+>  #define                RISCV_HWPROBE_EXT_ZICFISS       (1ULL << 0)
+>  #define                RISCV_HWPROBE_EXT_ZICCLSM       (1ULL << 1)
+> +#define                RISCV_HWPROBE_EXT_ZICCAMOA      (1ULL << 2)
+> +#define                RISCV_HWPROBE_EXT_ZICCIF        (1ULL << 3)
+> +#define                RISCV_HWPROBE_EXT_ZICCRSE       (1ULL << 4)
+> +#define                RISCV_HWPROBE_EXT_ZA64RS        (1ULL << 5)
+>
+>  /* Increase RISCV_HWPROBE_MAX_KEY when adding items. */
+>
+> diff --git a/arch/riscv/kernel/cpufeature.c b/arch/riscv/kernel/cpufeatur=
+e.c
+> index 1fb595581adcf..b9538e69fa1b3 100644
+> --- a/arch/riscv/kernel/cpufeature.c
+> +++ b/arch/riscv/kernel/cpufeature.c
+> @@ -90,6 +90,24 @@ static int riscv_ext_f_depends(const struct riscv_isa_=
+ext_data *data,
+>         return -EPROBE_DEFER;
+>  }
+>
+> +static int riscv_ext_zaamo_depends(const struct riscv_isa_ext_data *data=
+,
+> +                                  const unsigned long *isa_bitmap)
+> +{
+> +       if (__riscv_isa_extension_available(isa_bitmap, RISCV_ISA_EXT_ZAA=
+MO))
+> +               return 0;
+> +
+> +       return -EPROBE_DEFER;
+> +}
+> +
+> +static int riscv_ext_zalrsc_depends(const struct riscv_isa_ext_data *dat=
+a,
+> +                                   const unsigned long *isa_bitmap)
+> +{
+> +       if (__riscv_isa_extension_available(isa_bitmap, RISCV_ISA_EXT_ZAL=
+RSC))
+> +               return 0;
+> +
+> +       return -EPROBE_DEFER;
+> +}
+> +
+>  static int riscv_ext_zicbom_validate(const struct riscv_isa_ext_data *da=
+ta,
+>                                      const unsigned long *isa_bitmap)
+>  {
+> @@ -502,6 +520,8 @@ const struct riscv_isa_ext_data riscv_isa_ext[] =3D {
+>         __RISCV_ISA_EXT_SUPERSET_VALIDATE(zicbom, RISCV_ISA_EXT_ZICBOM, r=
+iscv_xlinuxenvcfg_exts, riscv_ext_zicbom_validate),
+>         __RISCV_ISA_EXT_DATA_VALIDATE(zicbop, RISCV_ISA_EXT_ZICBOP, riscv=
+_ext_zicbop_validate),
+>         __RISCV_ISA_EXT_SUPERSET_VALIDATE(zicboz, RISCV_ISA_EXT_ZICBOZ, r=
+iscv_xlinuxenvcfg_exts, riscv_ext_zicboz_validate),
+> +       __RISCV_ISA_EXT_DATA_VALIDATE(ziccamoa, RISCV_ISA_EXT_ZICCAMOA, r=
+iscv_ext_zaamo_depends),
+> +       __RISCV_ISA_EXT_DATA(ziccif, RISCV_ISA_EXT_ZICCIF),
+>         __RISCV_ISA_EXT_DATA(zicclsm, RISCV_ISA_EXT_ZICCLSM),
+>         __RISCV_ISA_EXT_DATA(ziccrse, RISCV_ISA_EXT_ZICCRSE),
+>         __RISCV_ISA_EXT_SUPERSET_VALIDATE(zicfilp, RISCV_ISA_EXT_ZICFILP,=
+ riscv_xlinuxenvcfg_exts,
+> @@ -516,6 +536,7 @@ const struct riscv_isa_ext_data riscv_isa_ext[] =3D {
+>         __RISCV_ISA_EXT_DATA(zihintpause, RISCV_ISA_EXT_ZIHINTPAUSE),
+>         __RISCV_ISA_EXT_DATA(zihpm, RISCV_ISA_EXT_ZIHPM),
+>         __RISCV_ISA_EXT_DATA(zimop, RISCV_ISA_EXT_ZIMOP),
+> +       __RISCV_ISA_EXT_DATA_VALIDATE(za64rs, RISCV_ISA_EXT_ZA64RS, riscv=
+_ext_zalrsc_depends),
+>         __RISCV_ISA_EXT_DATA(zaamo, RISCV_ISA_EXT_ZAAMO),
+>         __RISCV_ISA_EXT_DATA(zabha, RISCV_ISA_EXT_ZABHA),
+>         __RISCV_ISA_EXT_DATA(zacas, RISCV_ISA_EXT_ZACAS),
+> diff --git a/arch/riscv/kernel/sys_hwprobe.c b/arch/riscv/kernel/sys_hwpr=
+obe.c
+> index 9cf62266f1890..b15ac9adf7920 100644
+> --- a/arch/riscv/kernel/sys_hwprobe.c
+> +++ b/arch/riscv/kernel/sys_hwprobe.c
+> @@ -206,6 +206,10 @@ static void hwprobe_isa_ext1(struct riscv_hwprobe *p=
+air,
+>                  */
+>                 EXT_KEY(isainfo->isa, ZICFISS, pair->value, missing);
+>                 EXT_KEY(isainfo->isa, ZICCLSM, pair->value, missing);
+> +               EXT_KEY(isainfo->isa, ZICCAMOA, pair->value, missing);
+> +               EXT_KEY(isainfo->isa, ZICCIF, pair->value, missing);
+> +               EXT_KEY(isainfo->isa, ZICCRSE, pair->value, missing);
+> +               EXT_KEY(isainfo->isa, ZA64RS, pair->value, missing);
+>         }
+>
+>         /* Now turn off reporting features if any CPU is missing it. */
+>
+> --
+> 2.43.0
+>
+>
+> _______________________________________________
+> linux-riscv mailing list
+> linux-riscv@lists.infradead.org
+> http://lists.infradead.org/mailman/listinfo/linux-riscv
 
