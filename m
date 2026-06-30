@@ -1,64 +1,66 @@
-Return-Path: <linux-doc+bounces-94235-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94236-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 4z2SEuUaRGpJogoAu9opvQ
-	(envelope-from <linux-doc+bounces-94235-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 21:37:09 +0200
+	id k12wHJ4cRGqBogoAu9opvQ
+	(envelope-from <linux-doc+bounces-94236-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 21:44:30 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 38AAF6E79D7
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 21:37:08 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id BD3086E7A16
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 21:44:29 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lwn.net header.s=20201203 header.b=PBAK3++P;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94235-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94235-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=lwn.net header.s=20201203 header.b=jYjmeuCa;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94236-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94236-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=lwn.net;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 02F66302B0BC
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 19:37:07 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id AF8B6301A17D
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 19:44:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 760463CDBDD;
-	Tue, 30 Jun 2026 19:37:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 27E8F3D1AB3;
+	Tue, 30 Jun 2026 19:44:26 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 618203793DE
-	for <linux-doc@vger.kernel.org>; Tue, 30 Jun 2026 19:37:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EAA683D171B;
+	Tue, 30 Jun 2026 19:44:24 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782848226; cv=none; b=F8kBNsN1z5MbaGhV/xcb+SgK7Kjvu16qszs4OrTVK57rM/jaQWbeBoqP+eEaQfcEyaA5GH0q7/0QzkWU3MGjtj1iRnvYkqx2gxeOHwAD2Uf96AMfeOQ2fxAkqVkrpjKNS1rU894POiGfpMgY60qeQjKXjJ6GQcbheyMLqnh4TZU=
+	t=1782848666; cv=none; b=l956qf5TiLKpq1w/LcjRxSy6yhCj2t5CghtpEQRQ1ZBo5knNfeqzyoFjimeX6yYhJ/BIK6zbNrrRrtsL4mSfgAp0cUs2j3Z+MbNDdisEbJGp8jbFA1+5fSw1LUYN2kkkfgYlDTUAE/NXgztvkq3xXtDAsZISeTyKNGbtpy+EfbA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782848226; c=relaxed/simple;
-	bh=Fe7IiDSdVzdQ+S86wA2h242xE2qW702JlNHBnT0ABfE=;
+	s=arc-20240116; t=1782848666; c=relaxed/simple;
+	bh=S4bQ5oB3FYqOo0il1Tq3otYqu+DjSIcENJSyTwn3yW0=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=Oze23OVsm04ObXs/+DwcRJL3nk5zL0qpOjeGhPQW6eD6wTkAwhBZDLQHqe2EyEekRv015c6AjwAncerXGoDc3PnL3lOrN7f4wuaQvAd8hiv/F9+kNzY3LR7lHj9eDaNy7p7u/rc3n3porILWxotY+TN9cNBpgHWCRC/GwrE1NTM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=PBAK3++P; arc=none smtp.client-ip=45.79.88.28
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net A7CDF41596
+	 MIME-Version:Content-Type; b=A1YG9nJU6YpAMUWUCKY1Twmrj+nFszufvjyyvIRxLCjBChtzR7FQHMz8Xcrtd3Mm/tkMpsuU4uXus9PgVZT1pNJjfuJlj3dwiI5QWYJg2oGSzomHEivUZdJtTP3GqWXrVSiwH2bPQ88yjNAHjvTWZXyEruCvCBWxn8qjIlxoE64=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=jYjmeuCa; arc=none smtp.client-ip=45.79.88.28
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 27E8040E27
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1782848224; bh=pEs+4XQ1Ba+IYSxgxY+euRNOFB0wGqJfBtAS9aNcbk8=;
+	t=1782848664; bh=7uFqC5xhgw4sKw8sqaWYA+AQq1bYc/FIBWG7fBx2FnA=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=PBAK3++Ps5wMCwgjHgtEVMpc4VjNo+qfzjum6+TO0cOmiBtfST8Io4Fd1GSERkP6b
-	 AZgTOlMg9Dv6+oDTXmWIzKN5uQUKWsj5IS6C/Da24qB5uT5DgEG9OI1itO7i31kbKM
-	 Qsh5lQe8UFbOLv8I3g9ezJnoT51/0luluXv7Gfu0xcgwhIb9u6Ju+6qhxiKxTwhIoo
-	 PXXWbY1vXaLAHJAGC6WDdc+pMYv3CC1UWR/+OxvURlHjOPCvNQw5kJdXJBBV2tJQD5
-	 5DbZI8DW9WEdZqvgWMjc8sbXzhUeXl4Hwn+iMlPlrUR39lG3F+JqLUW+ph6QyB8x2x
-	 6OC/D2qslkhYw==
+	b=jYjmeuCaISFrLjnnWS5KGnJWVOQ4feQgDwfSQfpJ+whIcKBkB/Rro5cv1XRSHFfPI
+	 k6CUE5RNn5KJHC2rJNUbDGuRK/gutrhKjKAVdJ2KJ7PShFskFzZChO63olaNYJiW4j
+	 SIeZZDrMukDklDhHbts3lF0W283qQ4tQT3VWUuRi9I60MpLNE+KA+0cfLv3t6LK6YW
+	 k1HASv7lXLnA6nRgGuvnE1WnjqW7LnQ3xThGE96TShqXOeOUqh4d5TsAbvAU+jxzvT
+	 WrlDNge1YskdU4feKrQ+HawtRPZBXuFDIU//bl8ZwRn9+Qs7MnGIAsieKhJ4BwQLSD
+	 piXW8uFkODBzg==
 Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id A7CDF41596;
-	Tue, 30 Jun 2026 19:37:04 +0000 (UTC)
+	by ms.lwn.net (Postfix) with ESMTPSA id 27E8040E27;
+	Tue, 30 Jun 2026 19:44:24 +0000 (UTC)
 From: Jonathan Corbet <corbet@lwn.net>
-To: Randy Dunlap <rdunlap@infradead.org>, linux-doc@vger.kernel.org
+To: Randy Dunlap <rdunlap@infradead.org>, linux-kernel@vger.kernel.org
 Cc: Randy Dunlap <rdunlap@infradead.org>, Shuah Khan
- <skhan@linuxfoundation.org>, Mauro Carvalho Chehab <mchehab@kernel.org>
-Subject: Re: [PATCH] Docs: conf.py: fix typos in comments
-In-Reply-To: <20260626005248.1121464-1-rdunlap@infradead.org>
-References: <20260626005248.1121464-1-rdunlap@infradead.org>
-Date: Tue, 30 Jun 2026 13:37:03 -0600
-Message-ID: <87wlvfrfa8.fsf@trenco.lwn.net>
+ <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org, Thomas Gleixner
+ <tglx@kernel.org>, Peter Zijlstra <peterz@infradead.org>, Andrew Morton
+ <akpm@linux-foundation.org>
+Subject: Re: [PATCH] Docs: SMP: add an SMP docbook chapter
+In-Reply-To: <20260625210331.1050915-1-rdunlap@infradead.org>
+References: <20260625210331.1050915-1-rdunlap@infradead.org>
+Date: Tue, 30 Jun 2026 13:44:23 -0600
+Message-ID: <87se63rey0.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -69,54 +71,57 @@ Content-Type: text/plain
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_FROM(0.00)[bounces-94236-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94235-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:rdunlap@infradead.org,m:linux-kernel@vger.kernel.org,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:tglx@kernel.org,m:peterz@infradead.org,m:akpm@linux-foundation.org,s:lists@lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[lwn.net:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_SENDER(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:rdunlap@infradead.org,m:linux-doc@vger.kernel.org,m:skhan@linuxfoundation.org,m:mchehab@kernel.org,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	DKIM_TRACE(0.00)[lwn.net:+];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[8];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:email,lwn.net:dkim,lwn.net:email,lwn.net:from_mime,vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,trenco.lwn.net:mid,linuxfoundation.org:email]
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,trenco.lwn.net:mid,infradead.org:email,lwn.net:dkim,lwn.net:email,lwn.net:from_mime,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,linux-foundation.org:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 38AAF6E79D7
+X-Rspamd-Queue-Id: BD3086E7A16
 
 Randy Dunlap <rdunlap@infradead.org> writes:
 
-> Change "variabled" to "variables".
-> Change "relative patch" to "relative path".
+> Add SMP primitives to the core-api documentation.
 >
 > Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
 > ---
 > Cc: Jonathan Corbet <corbet@lwn.net>
 > Cc: Shuah Khan <skhan@linuxfoundation.org>
-> Cc: Mauro Carvalho Chehab <mchehab@kernel.org>
+> Cc: linux-doc@vger.kernel.org
+> Cc: Thomas Gleixner <tglx@kernel.org>
+> Cc: Peter Zijlstra <peterz@infradead.org>
+> Cc: Andrew Morton <akpm@linux-foundation.org>
 >
->  Documentation/conf.py |    4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+>  Documentation/core-api/SMP.rst   |   11 +++++++++++
+>  Documentation/core-api/index.rst |    1 +
+>  2 files changed, 12 insertions(+)
 
 Applied, thanks.
 
