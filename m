@@ -1,59 +1,59 @@
-Return-Path: <linux-doc+bounces-94162-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94161-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id tN9GH2m7Q2ougAoAu9opvQ
-	(envelope-from <linux-doc+bounces-94162-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 14:49:45 +0200
+	id L6ZwBHK7Q2oygAoAu9opvQ
+	(envelope-from <linux-doc+bounces-94161-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 14:49:54 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4646E6E46F6
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 14:49:45 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 98E9F6E4706
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 14:49:53 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=debian.org header.s=smtpauto.stravinsky header.b=hyOt5eZb;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94162-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94162-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=debian.org header.s=smtpauto.stravinsky header.b=QLV75adW;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94161-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-94161-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=debian.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 1D78B30530D9
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 12:46:55 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 72866301B4C2
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 12:46:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3AF04410D3C;
-	Tue, 30 Jun 2026 12:46:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F21F8410D20;
+	Tue, 30 Jun 2026 12:46:48 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 706D73F65F9;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 707583FBEC1;
 	Tue, 30 Jun 2026 12:46:47 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782823609; cv=none; b=YTnCL43bQ6a6X8lutQKwWAMfSQv/PaD9mVYG+8TaSMkNdSdhUNZzeB8Uoq68lMCjqWQ9zmfgHnFBPdwVnef/k5OQEtREJyG7zcwGZBcjm4rWBTJsQ+o7J2pSmgdgiN13MinSw8L6iRnGfdJm3H5vYh4IjGfF3s8oeyiHfmOpnfo=
+	t=1782823608; cv=none; b=AWD3eylImk0tnfP/kRzPFVVjscsvPu6VyAm+3+QgcBYWDTpN7whkiqhXkWgelChYWA4V2nSDfIefhqq+P4m3C7PvgV04ijmX2IEja2MtwFS1xfv7ESu+TWOmaLVAOHGrcGm595wke8uIAnA0G5ZFFsJLjv1FnrTitdT4uS5H51o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782823609; c=relaxed/simple;
-	bh=GaED5srKVuxGk+sMRMSMg1mKfXoDXSHlZoLJEzW0g88=;
+	s=arc-20240116; t=1782823608; c=relaxed/simple;
+	bh=JSAYCq4FrRtXIBW3O9fBpGpm6NgSi4FFUoqeHM4uUhU=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=M1bk0OVDMTUAWacGkbk7NXKJcSzS1YBPC4LU3oguSivgAaDBfYjKEeXepO8YjgHcSI6c9otbsGE8OClLpwomRkeC3Y26SXKAqDN8NfAzpFJzYEWil9HuOhhd3QfdAPolWleRXpkpmGpKS76+GnaRdQ7tGUga9VyjX89ZAP0R7FM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org; spf=pass smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=hyOt5eZb; arc=none smtp.client-ip=82.195.75.108
+	 In-Reply-To:To:Cc; b=EoTU0fUGBqeeqnLdFbLFg5Jgy0Q/ICILeZn8u2yr2IR788gGYSDoTUJm8fs99rqIsjhqsQrts4s9/A3IwlmkUYIfZbdAun4JdVOubWY/03sOETQEMzsBF9pVMxqJx5LgvX/YQINSBu7B0O91MUPX/jAVXSom5ccqJLXoXnuLr9A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org; spf=pass smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=QLV75adW; arc=none smtp.client-ip=82.195.75.108
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
 	s=smtpauto.stravinsky; h=X-Debian-User:Cc:To:In-Reply-To:References:
 	Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:
 	From:Reply-To:Content-ID:Content-Description;
-	bh=weDADfQQC9XKEy/7w/rj1X2ztgRTHSRo5MmtKT2/6dE=; b=hyOt5eZbgEfmMIBv4QBhk37fEy
-	GSvM6THyIFD3emJUSrZo2SI9w8lL4W3F4b8YQlMsycDv3LxrUxj9XvICbP3jTcs+VFzqQfk/13GZk
-	kz7kHlClGocCPwhck9VjGDSE+24JfBCuup4MyZf6zsMgOqaczTLq9o8DtdX/u+kVhD9w3kfuNBYWQ
-	fQEtCF5tj3sotCtiK5v5XPBYxQEZr6N62LlNllPkzCSbeQyZbtuSj27lSsEqVaj/9KgkdAyVmlDrp
-	exyyepkKS69j0m6ZyBLE5SXrU2IShdTWKKabgPbF/xkOwPShPdTBTjfDZT8qQroB0xq4WsTnCnX3o
-	DYXM3+4A==;
+	bh=JRc6X3siF0MV7UwOUK6r+AaS4VmaqOkmIcYSgppzMs4=; b=QLV75adWAdll+nLPDpabSITgCm
+	WRfwp7heAEQXdj6pNmooyLOLz6U/Q//nyvCW9GtHxbihPr8K5PeP+uEjHolTYu7mMu14epk8OTEKV
+	+T4IudRkrWwP0xdMERYflB87MXWBJhgyj2wq+S5n0ppS6JI0XV+Hs6Ek5soct/ZqPcBXlXP0mu3xT
+	RwF2c3tR2aKhJgjOy+UzrZ8IoPGOtdW0tmxUcL9PLr61FjCQBOmUBoCFGdPjEmmtRZCY04GXIt5Zs
+	savCNoyEHcVZ4kjBfGgkBm3lxuUlnEvedKmzmUPQDfzZue8tQt6HPe+UVKzGBx/WSsuhmo8mIEKMP
+	xXvcmh3Q==;
 Received: from authenticated-user
 	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
 	(Exim 4.96)
 	(envelope-from <leitao@debian.org>)
-	id 1weXrM-0074bM-05;
-	Tue, 30 Jun 2026 12:46:40 +0000
+	id 1weXrR-0074bY-2D;
+	Tue, 30 Jun 2026 12:46:45 +0000
 From: Breno Leitao <leitao@debian.org>
-Date: Tue, 30 Jun 2026 05:46:05 -0700
-Subject: [PATCH v10 2/6] mm/memory-failure: surface unhandlable kernel
- pages as -ENOTRECOVERABLE
+Date: Tue, 30 Jun 2026 05:46:06 -0700
+Subject: [PATCH v10 3/6] mm/memory-failure: report MF_MSG_KERNEL for
+ unrecoverable kernel pages
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -62,7 +62,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260630-ecc_panic-v10-2-c6ed5b62eea2@debian.org>
+Message-Id: <20260630-ecc_panic-v10-3-c6ed5b62eea2@debian.org>
 References: <20260630-ecc_panic-v10-0-c6ed5b62eea2@debian.org>
 In-Reply-To: <20260630-ecc_panic-v10-0-c6ed5b62eea2@debian.org>
 To: Miaohe Lin <linmiaohe@huawei.com>, 
@@ -82,20 +82,20 @@ Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
  Breno Leitao <leitao@debian.org>, linux-trace-kernel@vger.kernel.org, 
  kernel-team@meta.com
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6620; i=leitao@debian.org;
- h=from:subject:message-id; bh=GaED5srKVuxGk+sMRMSMg1mKfXoDXSHlZoLJEzW0g88=;
- b=owEBbQKS/ZANAwAIATWjk5/8eHdtAcsmYgBqQ7qdfmSnk9V7vowWxhJ+2fhb0qD7NDDDv6ax9
- MMzj0i3J2yJAjMEAAEIAB0WIQSshTmm6PRnAspKQ5s1o5Of/Hh3bQUCakO6nQAKCRA1o5Of/Hh3
- baJhEACl3tXB/iBMjKZtuVvGXVxWjHMNEWUmKCgrKF+pBvwAg1xCR+nzPvdu+/ZInPcBmilU5Va
- ROBWT8FOz1KIDZ6r7dc272rZvS9huGCfl8NKrloKwjC2T6Wgxv+7hwRAxyR+yFTj3KSW/Xt+D9J
- NyGBsaxV1CpzAyIl7OQc1AmKt3KEhZOrLmmY4BgoKhxlW1WfpuRzh2JGvOs6KDlAPv6BlDK4gnS
- lF7vtkhmywymREDm+qqzSmYsTk4JK6ExpzaTVQffbD++N2q4ygSftdrjkx2OLCLIpcdu5MPQoC+
- TPUakIDu+8aRzCS7q/dqCbKYEd1nyfsqRohcljfA7kKSje7bEGZ9dOlixaVlvWx0wtUZdMfbM6Y
- AakspsuRDdncccB6c3DqJYrti0MKU2rEJsmV8dZ1F5xwca+Exfn0k3pkDDkrKhDwqrGUVvipwmv
- SmAFWhBRYh7VKrtjjOsVYP4uGDTg73fpNVsFgdAyI53cy0vw4cyNewsiAZYne3DHOtEus5ncdvt
- 01PhC8Nb+ROU3oi/KkSBDJAZ2PsT9h5erMazpQipoQ6Jhhwf5uVhb/N7bdUCBC6iwff39Ji6mTj
- doSISstgh/z1IlNmZ0L9P6Dsom/Vr+6jSDgjBVKY1+zQxnG93Z5kBBVVmJ4Dni1OgmDRUlxNtyj
- E8LYRE64ZDx/Fkw==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2455; i=leitao@debian.org;
+ h=from:subject:message-id; bh=JSAYCq4FrRtXIBW3O9fBpGpm6NgSi4FFUoqeHM4uUhU=;
+ b=owEBbQKS/ZANAwAIATWjk5/8eHdtAcsmYgBqQ7qdbrCPdmwOUYMeBX462paxufYr9tGRerbCH
+ OasygASlqmJAjMEAAEIAB0WIQSshTmm6PRnAspKQ5s1o5Of/Hh3bQUCakO6nQAKCRA1o5Of/Hh3
+ bVVQD/4gPbn24odiOayBajbGFGEEeV5MaoKhhXG2x1/3quOUZTcQSMVzShINOIi4z9ZAlEMRTUE
+ 5ed/n2fywG3+FEe4q2dBRsc0/FYG3V9ELv8zNEZAX1EeSFWBFdDA2u7wgVfT+Un65/8XZ/k5KaV
+ vpCH3gAO4HgKGe/uZevaJIgnb3L4eXaGu2e7kMQO8FVejK+v7knKyS3cvuLkPjhBGGHOZqJVZnV
+ i7IHaqKqbE0UrR/8vO96QzE6DnjLHZnvLC4UnHNfWaze4VlfDxRyPTep3Ft86WddFeRbjKvvH09
+ WMJ0j2cKBS+39po3CGSvekV/7MNXHNM8Qv6wnrASznY9CyzS5n8I5g5zZxyz9Z/DVWwIUY00KhW
+ 2a0FZ+pKA6b0gbIEwe++A0mcWP9dIEPyy6ZUWpoy7LdrfwtOqJ9bgGbxdtINVO71y8iypmC5WBV
+ +QHCtoLaEV2LRAXfOmalZ4o7ACJRFW2oowTyLFpk6bIWxpu5bauNW1aop28+H6qmRCsMlN5rFV+
+ 5beF2+9R5OcrHUx/gvtOGO6whauiYOE9h45WUa32074n+BSjTdp4hd/nZTaRCoe8MR2QF4DNVZC
+ ZYGxrEF34MtnDd1xCJ9T5of+4ojgSPUpMiOahFJC/EAgQNjC7/o9a3DfPebi1dSnSehwbs6LV0y
+ Yyx0yYDZy/xtuSg==
 X-Developer-Key: i=leitao@debian.org; a=openpgp;
  fpr=AC8539A6E8F46702CA4A439B35A3939FFC78776D
 X-Debian-User: leitao
@@ -105,11 +105,11 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[debian.org,none];
 	R_DKIM_ALLOW(-0.20)[debian.org:s=smtpauto.stravinsky];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-94162-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-94161-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS(0.00)[m:linmiaohe@huawei.com,m:akpm@linux-foundation.org,m:david@kernel.org,m:ljs@kernel.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:shuah@kernel.org,m:nao.horiguchi@gmail.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:liam@infradead.org,m:lance.yang@linux.dev,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:leitao@debian.org,m:linux-trace-kernel@vger.kernel.org,m:kernel-team@meta.com,m:naohoriguchi@gmail.com,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FREEMAIL_TO(0.00)[huawei.com,linux-foundation.org,kernel.org,google.com,suse.com,gmail.com,lwn.net,linuxfoundation.org,infradead.org,linux.dev,goodmis.org,efficios.com];
@@ -130,163 +130,74 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,linux.dev:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,huawei.com:email,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 4646E6E46F6
+X-Rspamd-Queue-Id: 98E9F6E4706
 
-get_any_page() collapses every HWPoisonHandlable() rejection into a
-single -EIO via the __get_hwpoison_page() -> -EBUSY -> shake_page()
--> retry path.  That is correct for the transient case (a userspace
-folio briefly off LRU during migration or compaction, which a later
-shake can drag back), but wrong for stable kernel-owned pages: slab,
-page-table, large-kmalloc and PG_reserved pages will never become
-HWPoisonHandlable(), so the retry loop is wasted work and the final
--EIO loses the "this is structurally unrecoverable" information.
-memory_failure() then maps -EIO into MF_MSG_GET_HWPOISON, which the
-panic-on-unrecoverable sysctl deliberately does not act on.
+The previous patch teaches get_any_page() to return -ENOTRECOVERABLE
+for stable unhandlable kernel pages (PG_reserved, slab, page tables,
+large-kmalloc).  memory_failure() still folds every negative return
+into MF_MSG_GET_HWPOISON, so callers that want to react to the
+unrecoverable cases (a panic option, smarter logging) cannot tell
+them apart from transient page-allocator races.
 
-Introduce is_kernel_owned_page(), a small predicate that positively
-identifies pages the hwpoison handler cannot recover from:
+Turn the post-call branch into a switch over the get_hwpoison_page()
+return code: map -ENOTRECOVERABLE to MF_MSG_KERNEL and any other
+negative return to MF_MSG_GET_HWPOISON.  case 0 keeps the existing
+free-buddy / kernel-high-order handling and case 1 falls through to
+the rest of memory_failure() unchanged.
 
-  is_kernel_owned_page(p) :=
-      PageReserved(p) ||
-      PageSlab(head) || PageTable(head) || PageLargeKmalloc(head)
-
-  where head = compound_head(p).
-
-PG_reserved is a per-page flag (PF_NO_COMPOUND) and is tested on the
-page directly.  The slab, page-table and large-kmalloc page-type bits
-are only stored on the head page, so those tests resolve the compound
-head first, then re-read compound_head(page) afterwards: a concurrent
-split or compound free that moves head invalidates the just-read flags
-and the loop retries.  The lookup still takes no refcount, mirroring
-the rest of get_any_page(); the recheck closes the common split race,
-and a residual free->alloc->free in the same window can only mis-tag
-a genuinely poisoned page, never reclassify a handlable one.
-
-No MF_SOFT_OFFLINE / page_has_movable_ops() opt-out is needed: a
-movable_ops page is always PageOffline or PageZsmalloc, whose
-page_type is mutually exclusive with slab, page-table and
-large-kmalloc, and it never carries PG_reserved, so it can never
-match any of the checks above.
-
-The list is intentionally not exhaustive.  vmalloc and kernel-stack
-pages, for example, do not carry a page_type bit and would need a
-different oracle; they keep going through the existing retry path
-unchanged.  This is the smallest set we can identify with certainty
-by page type.
-
-Wire the helper into the top of get_any_page() to short-circuit
-those pages before the retry loop runs.  On a hit, drop the caller's
-MF_COUNT_INCREASED reference (if any) and return -ENOTRECOVERABLE
-straight away.  Pages outside the helper's positive list still take
-the existing retry path and return -EIO, leaving operator-visible
-behaviour for those cases unchanged.
-
-Extend the unhandlable-page pr_err() to fire for either errno and
-update the get_hwpoison_page() kerneldoc to document the new return.
-
-memory_failure() still folds every negative return into
-MF_MSG_GET_HWPOISON via its existing "else if (res < 0)" branch, so
-this patch on its own only changes the errno that soft_offline_page()
-can propagate to its callers.  A follow-up wires -ENOTRECOVERABLE
-through memory_failure() and reports MF_MSG_KERNEL for the
-unrecoverable cases, which is what the
-panic_on_unrecoverable_memory_failure sysctl observes.
+The MF_MSG_KERNEL label and tracepoint string are kept as
+"reserved kernel page" to avoid breaking userspace tools that match
+on those literals; the enum value still adequately tags the failure
+even though it now also covers slab, page tables and large-kmalloc
+pages.
 
 Suggested-by: David Hildenbrand <david@kernel.org>
-Suggested-by: Lance Yang <lance.yang@linux.dev>
+Acked-by: David Hildenbrand (Arm) <david@kernel.org>
+Acked-by: Miaohe Lin <linmiaohe@huawei.com>
 Signed-off-by: Breno Leitao <leitao@debian.org>
 ---
- mm/memory-failure.c | 52 ++++++++++++++++++++++++++++++++++++++++++++++++++--
- 1 file changed, 50 insertions(+), 2 deletions(-)
+ mm/memory-failure.c | 17 +++++++++++++++--
+ 1 file changed, 15 insertions(+), 2 deletions(-)
 
 diff --git a/mm/memory-failure.c b/mm/memory-failure.c
-index f4d3e6e20e13f..087658484e242 100644
+index 087658484e242..5fc3de474014d 100644
 --- a/mm/memory-failure.c
 +++ b/mm/memory-failure.c
-@@ -1325,6 +1325,38 @@ static inline bool HWPoisonHandlable(struct page *page, unsigned long flags)
- 	return PageLRU(page) || is_free_buddy_page(page);
- }
- 
-+/*
-+ * Positive identification of pages the hwpoison handler cannot recover:
-+ * pages owned by kernel internals with no userspace mapping to unmap, no
-+ * file mapping to invalidate, and no migration target.
-+ */
-+static inline bool is_kernel_owned_page(struct page *page)
-+{
-+	struct page *head;
-+	bool kernel_owned;
-+
-+	/* PG_reserved is a per-page flag, never set on a compound page. */
-+	if (PageReserved(page))
-+		return true;
-+
-+	/*
-+	 * Page-type bits live only on the head page, so resolve any tail
-+	 * first.  The check takes no refcount; recheck the head afterwards
-+	 * so a concurrent split or compound free cannot leave us trusting
-+	 * a stale view.  A residual free->alloc->free cannot be closed here
-+	 * (frozen slab and large-kmalloc pages cannot be pinned), but is
-+	 * harmless: where a wrong verdict could panic, memory_failure() has
-+	 * already set PageHWPoison, which bars the page from the allocator.
-+	 */
-+retry:
-+	head = compound_head(page);
-+	kernel_owned = PageSlab(head) || PageTable(head) ||
-+		       PageLargeKmalloc(head);
-+	if (head != compound_head(page))
-+		goto retry;
-+	return kernel_owned;
-+}
-+
- static int __get_hwpoison_page(struct page *page, unsigned long flags)
- {
- 	struct folio *folio = page_folio(page);
-@@ -1371,6 +1403,19 @@ static int get_any_page(struct page *p, unsigned long flags)
- 	if (flags & MF_COUNT_INCREASED)
- 		count_increased = true;
- 
-+	/*
-+	 * Page types we know are kernel-owned and cannot be recovered.
-+	 * Short-circuit before the shake_page() / retry loop, which
-+	 * cannot turn any of these into something HWPoisonHandlable().
-+	 * Drop the caller's reference if MF_COUNT_INCREASED took one.
-+	 */
-+	if (is_kernel_owned_page(p)) {
-+		if (count_increased)
-+			put_page(p);
-+		ret = -ENOTRECOVERABLE;
-+		goto out;
-+	}
-+
- try_again:
- 	if (!count_increased) {
- 		ret = __get_hwpoison_page(p, flags);
-@@ -1418,7 +1463,7 @@ static int get_any_page(struct page *p, unsigned long flags)
- 		ret = -EIO;
+@@ -2436,7 +2436,8 @@ int memory_failure(unsigned long pfn, int flags)
+ 	 * that may make page_ref_freeze()/page_ref_unfreeze() mismatch.
+ 	 */
+ 	res = get_hwpoison_page(p, flags);
+-	if (!res) {
++	switch (res) {
++	case 0:
+ 		if (is_free_buddy_page(p)) {
+ 			if (take_page_off_buddy(p)) {
+ 				page_ref_inc(p);
+@@ -2455,7 +2456,19 @@ int memory_failure(unsigned long pfn, int flags)
+ 			res = action_result(pfn, MF_MSG_KERNEL_HIGH_ORDER, MF_IGNORED);
+ 		}
+ 		goto unlock_mutex;
+-	} else if (res < 0) {
++	case 1:
++		/* Got a refcount on a handlable page. */
++		break;
++	case -ENOTRECOVERABLE:
++		/*
++		 * Stable unhandlable kernel-owned page (PG_reserved,
++		 * slab, page tables, large-kmalloc).
++		 * No recovery possible.
++		 */
++		res = action_result(pfn, MF_MSG_KERNEL, MF_IGNORED);
++		goto unlock_mutex;
++	default:
++		/* Transient lifecycle race with the page allocator. */
+ 		res = action_result(pfn, MF_MSG_GET_HWPOISON, MF_IGNORED);
+ 		goto unlock_mutex;
  	}
- out:
--	if (ret == -EIO)
-+	if (ret == -EIO || ret == -ENOTRECOVERABLE)
- 		pr_err("%#lx: unhandlable page.\n", page_to_pfn(p));
- 
- 	return ret;
-@@ -1475,7 +1520,10 @@ static int __get_unpoison_page(struct page *page)
-  *         -EIO for pages on which we can not handle memory errors,
-  *         -EBUSY when get_hwpoison_page() has raced with page lifecycle
-  *         operations like allocation and free,
-- *         -EHWPOISON when the page is hwpoisoned and taken off from buddy.
-+ *         -EHWPOISON when the page is hwpoisoned and taken off from buddy,
-+ *         -ENOTRECOVERABLE for kernel-owned pages identified by
-+ *         is_kernel_owned_page() (PG_reserved, slab,
-+ *         page-table, large-kmalloc) that the handler cannot recover.
-  */
- static int get_hwpoison_page(struct page *p, unsigned long flags)
- {
 
 -- 
 2.53.0-Meta
