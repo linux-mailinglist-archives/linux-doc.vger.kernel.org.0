@@ -1,145 +1,160 @@
-Return-Path: <linux-doc+bounces-94172-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94173-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Ts0DCJ7LQ2oViQoAu9opvQ
-	(envelope-from <linux-doc+bounces-94172-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 15:58:54 +0200
+	id Aa5eINLLQ2pAiQoAu9opvQ
+	(envelope-from <linux-doc+bounces-94173-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 15:59:46 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 930056E523A
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 15:58:53 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B8496E527D
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 15:59:45 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=OB3f2+qO;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94172-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94172-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	dkim=pass header.d=intel.com header.s=Intel header.b=UAhQlEmE;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94173-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94173-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=intel.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 642933130630
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 13:53:38 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 3BB093004070
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 13:59:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 375B12FD68B;
-	Tue, 30 Jun 2026 13:53:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0E509382377;
+	Tue, 30 Jun 2026 13:59:40 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.13])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2572E7404E;
-	Tue, 30 Jun 2026 13:53:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D9DC0283FD9;
+	Tue, 30 Jun 2026 13:59:37 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782827618; cv=none; b=PdpATNWP6ntKGYBPFCkyQfsbdR90ENydj0Yf/JrWp6cplvvB4LG/VgfzdbqCgckqidDJTfAJ64qVss8kmcpmTTlYssjAn/hxC0KwHdEQxwd4fvtz2fX4HgFqLsDKQhhi5pRiVrUW/H3qGsKTTZVkuVNqUE2tdTG8FynTl11jzf8=
+	t=1782827979; cv=none; b=RVUiPmrYlaETx2otUw/PlmEbgp2XBlYuS8nj9lYuiE7l/+grceQeUUP5xVZQ6AUyhb4N7I9SHvInB+C4F60ZGbue2yhmgTXN6/hDaFNXZPCZGl3jTqQI4GPmL185wwiqbMAiZB7TJYvP7b4vNHoIV7iE36TziVUFMcZ8hO2fRGQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782827618; c=relaxed/simple;
-	bh=2Iha2aPRzf/edKvSXYfibJG6j0QD17DVopPfoz2YfRw=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=RuUt/AiTtGcZy2nYJMnAQATQZr/BXYt7g274g1+pe1jkjrmIhFkftfkzRPcYCl3lFmAXLdk0y1UAWcFqmPe/QTMQhy3sdowXn4h+A4l24B7OnxGw5sJY9GFi1Pkf/fxSFMfh7I+E4HAp1LypAnzHcmrqAw/Yg0/nFLYcDJEvsXc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OB3f2+qO; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E12051F000E9;
-	Tue, 30 Jun 2026 13:53:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782827616;
-	bh=L8auU58LgAXdY4hWCl6wHaE8gXHNNTt7g9BcuB3xl/A=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=OB3f2+qOmRlqlAGoNAuNbUTF/wGc94sX4j0dhQaK0hp4KClwPMcoDtyij1m4QI+uw
-	 7UIMIErKIwNYqmN/5ZFXwBHFquX/hrqbfTO0wriPqz0XN3WMC9syVtKDWc5PD93URW
-	 hON1xtFS5ALZ8eo0xAUfiEDad5rGxYTsiHIqfykre4fvR4ZN8N4m4u3hYvyAG1x/S2
-	 ttGmquaYzMsPbQr5aIP7Xr/ab3feOSwb6L0EF9HWA+JpTQeMy3qjy4zFwuWG5Y4+yT
-	 dt07mdNe0B/F8Ec6PqL/wvDdCLLqe+balCtUx+FBmjNUn4AAc6hH1Xdeqnv4YMyMC7
-	 Uwlc2bAjlkqzg==
-Date: Tue, 30 Jun 2026 14:53:31 +0100
-From: Will Deacon <will@kernel.org>
-To: Shanker Donthineni <sdonthineni@nvidia.com>
-Cc: Vladimir Murzin <vladimir.murzin@arm.com>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Jason Gunthorpe <jgg@nvidia.com>,
-	linux-arm-kernel@lists.infradead.org,
-	Mark Rutland <mark.rutland@arm.com>, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, Vikram Sethi <vsethi@nvidia.com>,
-	Jason Sequeira <jsequeira@nvidia.com>
-Subject: Re: [PATCH v4 0/2] arm64: errata: NVIDIA Olympus device store/load
- ordering
-Message-ID: <akPKWxYxDvLGVfQx@willie-the-truck>
-References: <20260625182425.3194066-1-sdonthineni@nvidia.com>
- <381fb71c-0a2c-4dec-98a3-56ad88e190c6@arm.com>
- <ba15e106-9066-4e55-be2f-6767a32e123d@nvidia.com>
+	s=arc-20240116; t=1782827979; c=relaxed/simple;
+	bh=oyLhme8KvYEs+zNfk1TaMsiBVBInHTNQshUzxiUOTew=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=GTpcA/oz/s45wWrO0KEtBtQ9HE+NoUeB9bBjyCCnEMVGTEetTGYLaxHGB/5dUsGFHpV4es2szXuquLRcrbS4hvhwCYMsE53QM0Thqnc016hLOtac1L05yWKX3qzqxrI5xCHUXGmpTo5EBfJRNrhRzBEpMm194fTauMpJClJzgqE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=UAhQlEmE; arc=none smtp.client-ip=192.198.163.13
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1782827978; x=1814363978;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=oyLhme8KvYEs+zNfk1TaMsiBVBInHTNQshUzxiUOTew=;
+  b=UAhQlEmExZmpF/hOujaLy8qhDCjaIgkS2T1t7Rjuv7ZZfi7M8Rz84to/
+   dRTiSVeLUWxlnRg8SyvQK/RgUcRclZFGsrg22kC5rlZZ2XorhMuDFrWJx
+   55QWA5bBOKMv2klj6qFDqO9pFgclT/c1Zd1hnhik7L0x3OP68TnMi0ixE
+   yTW1bIr15G+sEedQp17FVG11VuwF5lZylaanLIoHuD0LycHJ1Ucvo7Bji
+   N7zbLf/b33fqW9mDyDDewixr0vAK2LQxZzQOl5A+Ph223wL+YpMEzVA8B
+   p392MrXpVXY5oWpGsERQKJkiCSDlqC4F66EY9ZmZXyTogha50LMByCIQ0
+   Q==;
+X-CSE-ConnectionGUID: dIguFszgSGyLivFtIQE6Ag==
+X-CSE-MsgGUID: apm2N57cTIqRarEFNeWg9w==
+X-IronPort-AV: E=McAfee;i="6800,10657,11832"; a="86090770"
+X-IronPort-AV: E=Sophos;i="6.24,234,1774335600"; 
+   d="scan'208";a="86090770"
+Received: from orviesa002.jf.intel.com ([10.64.159.142])
+  by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Jun 2026 06:59:36 -0700
+X-CSE-ConnectionGUID: b3oTOdjFTX+YTYYJ9hCptg==
+X-CSE-MsgGUID: SyZ3q75eSoy2xfs0taI2NA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.24,234,1774335600"; 
+   d="scan'208";a="282337011"
+Received: from xiaoyaol-hp-g830.ccr.corp.intel.com (HELO [10.124.232.239]) ([10.124.232.239])
+  by orviesa002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Jun 2026 06:59:23 -0700
+Message-ID: <3c287ccc-a574-4617-aad4-1f8884265cbd@intel.com>
+Date: Tue, 30 Jun 2026 21:59:20 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ba15e106-9066-4e55-be2f-6767a32e123d@nvidia.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 11/46] KVM: Consolidate private memory and guest_memfd
+ ifdeffery in kvm_host.h
+To: ackerleytng@google.com, aik@amd.com, andrew.jones@linux.dev,
+ binbin.wu@linux.intel.com, brauner@kernel.org, chao.p.peng@linux.intel.com,
+ david@kernel.org, jmattson@google.com, jthoughton@google.com,
+ michael.roth@amd.com, oupton@kernel.org, pankaj.gupta@amd.com,
+ qperret@google.com, rick.p.edgecombe@intel.com, rientjes@google.com,
+ shivankg@amd.com, steven.price@arm.com, tabba@google.com,
+ willy@infradead.org, wyihan@google.com, yan.y.zhao@intel.com,
+ forkloop@google.com, pratyush@kernel.org, suzuki.poulose@arm.com,
+ aneesh.kumar@kernel.org, liam@infradead.org,
+ Paolo Bonzini <pbonzini@redhat.com>, Sean Christopherson
+ <seanjc@google.com>, Thomas Gleixner <tglx@kernel.org>,
+ Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+ Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+ "H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>,
+ Masami Hiramatsu <mhiramat@kernel.org>,
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+ Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>,
+ Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>,
+ Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>,
+ Nhat Pham <nphamcs@gmail.com>, Barry Song <baohua@kernel.org>,
+ Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>,
+ Wei Xu <weixugc@google.com>, Youngjun Park <youngjun.park@lge.com>,
+ Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>,
+ Kiryl Shutsemau <kas@kernel.org>, Baoquan He <baoquan.he@linux.dev>,
+ Jason Gunthorpe <jgg@ziepe.ca>, Vlastimil Babka <vbabka@kernel.org>
+Cc: kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kselftest@vger.kernel.org, linux-mm@kvack.org,
+ linux-coco@lists.linux.dev
+References: <20260618-gmem-inplace-conversion-v8-0-9d2959357853@google.com>
+ <20260618-gmem-inplace-conversion-v8-11-9d2959357853@google.com>
+Content-Language: en-US
+From: Xiaoyao Li <xiaoyao.li@intel.com>
+In-Reply-To: <20260618-gmem-inplace-conversion-v8-11-9d2959357853@google.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-4.66 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [-5.16 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,kernel.org:s:+];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-94173-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:sdonthineni@nvidia.com,m:vladimir.murzin@arm.com,m:catalin.marinas@arm.com,m:jgg@nvidia.com,m:linux-arm-kernel@lists.infradead.org,m:mark.rutland@arm.com,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:vsethi@nvidia.com,m:jsequeira@nvidia.com,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[will@kernel.org,linux-doc@vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-94172-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[will@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FREEMAIL_TO(0.00)[google.com,amd.com,linux.dev,linux.intel.com,kernel.org,intel.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca];
+	FORGED_SENDER(0.00)[xiaoyao.li@intel.com,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:ackerleytng@google.com,m:aik@amd.com,m:andrew.jones@linux.dev,m:binbin.wu@linux.intel.com,m:brauner@kernel.org,m:chao.p.peng@linux.intel.com,m:david@kernel.org,m:jmattson@google.com,m:jthoughton@google.com,m:michael.roth@amd.com,m:oupton@kernel.org,m:pankaj.gupta@amd.com,m:qperret@google.com,m:rick.p.edgecombe@intel.com,m:rientjes@google.com,m:shivankg@amd.com,m:steven.price@arm.com,m:tabba@google.com,m:willy@infradead.org,m:wyihan@google.com,m:yan.y.zhao@intel.com,m:forkloop@google.com,m:pratyush@kernel.org,m:suzuki.poulose@arm.com,m:aneesh.kumar@kernel.org,m:liam@infradead.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:shuah@kernel.org,m:vannapurve@google.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencen
+ t.com,m:shikemeng@huaweicloud.com,m:nphamcs@gmail.com,m:baohua@kernel.org,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:kas@kernel.org,m:baoquan.he@linux.dev,m:jgg@ziepe.ca,m:vbabka@kernel.org,m:kvm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,m:linux-coco@lists.linux.dev,s:lists@lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[xiaoyao.li@intel.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[64];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp,willie-the-truck:mid]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,intel.com:dkim,intel.com:email,intel.com:mid,intel.com:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 930056E523A
+X-Rspamd-Queue-Id: 1B8496E527D
 
-On Mon, Jun 29, 2026 at 06:08:37PM -0500, Shanker Donthineni wrote:
-> On 6/29/2026 5:45 AM, Vladimir Murzin wrote:
-> > That's interesting. With the way the patch set is structured, it
-> > now looks like:
-> > 
-> > 1. Fix the erratum, but cause a performance regression.
-> > 2. Restore the performance regression and (re)apply the erratum
-> >     workaround.
-> > 
-> > Would it make sense to avoid introducing the performance
-> > regression in the first place by structuring the patch set
-> > slightly differently?
-> > 
-> > 1. (Re)introduce arm64 memset_io()/memcpy_toio().
-> > 2. Fix the erratum once for all
-> > 
-> > What do you reckon?
+On 6/19/2026 8:31 AM, Ackerley Tng via B4 Relay wrote:
+> From: Sean Christopherson <seanjc@google.com>
 > 
-> Yes, that ordering makes sense.
+> Move the kvm_arch_has_private_mem() stub and a few guest_memfd function
+> definitions/declarations "down" in kvm_host.h to utilize existing #ifdefs,
+> and so that related code is clustered together.
 > 
-> I can restructure v5 so that patch 1 introduces the arm64 memset_{to}io()
-> implementations while preserving the existing behavior. Patch 2 will
-> then add the complete erratum workaround, including the conditional
-> trailing DMB for those block-write helpers. This avoids introducing
-> the intermediate performance regression and keeps each commit
-> independently usable.
+> No functional change intended.
 > 
-> Will and Catalin, could you please share your thoughts on this approach?
-
-tbh, I think I'm ok with the current ordering. The second patch is purely
-a performance thing for affected CPUs, so doesn't strictly need to be
-applied or backported for functional correctness afaict.
-
-Will
+> Signed-off-by: Sean Christopherson <seanjc@google.com>
+Reviewed-by: Xiaoyao Li <xiaoyao.li@intel.com>
 
