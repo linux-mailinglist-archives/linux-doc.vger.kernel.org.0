@@ -1,354 +1,168 @@
-Return-Path: <linux-doc+bounces-94174-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94176-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Aj+SHErOQ2r1igoAu9opvQ
-	(envelope-from <linux-doc+bounces-94174-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 16:10:18 +0200
+	id Y0plL67RQ2pnjQoAu9opvQ
+	(envelope-from <linux-doc+bounces-94176-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 16:24:46 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id B0D366E53FD
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 16:10:17 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 266566E5654
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 16:24:46 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b="aH/4/O97";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94174-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-94174-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=MpvryAXc;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94176-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94176-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id C26D030EBBFE
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 14:02:35 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 25A2C30DB4B7
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 14:17:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8C0CA3ED5C5;
-	Tue, 30 Jun 2026 14:02:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9C4993F4DEA;
+	Tue, 30 Jun 2026 14:17:37 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 37DBA3D902E;
-	Tue, 30 Jun 2026 14:02:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87EF426F47C;
+	Tue, 30 Jun 2026 14:17:36 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782828130; cv=none; b=jvhVylfijv/mZVXswaJ40aStwubyGmP4Mt8NgM9oM2/mnQOn1eppXiqXIRMViRjdU12QSBNS1diSYFPCS+Micp5YsMZKb0eKaooYNiT1SHpPiqZqb8gRNuv2Ot8UlR9n+1BNWmolJo3rPCUpOJE1W5E8Qu9p+FRL2MeLfUFEI9I=
+	t=1782829057; cv=none; b=CqTZJjiMEh9SYdCXfLfqPNXKzhGb21Pni+DH4f2WKvas6LrwNHxCDrH2ysWQJOF2Yfz53ggRVYlWRzOwj3FQ8IYsjvPURMJRW/9FkpC3h8b87Zraq+1javSEEScHqvyYPCPmgDBibzYL6S7o07bKreLtbMGgorbSuy9ooHcgpoY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782828130; c=relaxed/simple;
-	bh=9Zd0xLMn0lFqaEDohKACDpMcNvx7eG86dYNQ6Z2YD0U=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=TTWaEQO5a13T09vivpD6HW0r/oOS73jYKAGuhTJaIpkSAF2U6R1qhLjXo1sNnO+67DZ66KincBc+whjUgNF+l7TNOiFK60prDu3LerzfUaAY3VHVKz95FU9qYx67JMn5Oe6WpArjZ5ZMoKAdmnyT+vgNQVWvuyDuo+dJi351YSE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=aH/4/O97; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 79C7A1F00A3D;
-	Tue, 30 Jun 2026 14:02:08 +0000 (UTC)
+	s=arc-20240116; t=1782829057; c=relaxed/simple;
+	bh=UZymSPBa0XWWbwns/JOidAA5gjvPwF8fgglUWlRV/6Q=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=cd3BJRdMaHuMqGmrZ5aAA9ioFnBhHlXK8jyl7cFSuUC7HIjz35m1jKv1/8vSVvxw8gXMqlQnN7VJUwL0RT/rzq3fbtnOKusDa7YdEKCqZk32+szd71IWvRFIR5TSV8OE8My9SvR54/guuCD4Joh0sR3DPcg7q4ugIEDhPkwt604=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MpvryAXc; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 36A4E1F000E9;
+	Tue, 30 Jun 2026 14:17:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782828128;
-	bh=AhyO9uo6KidZv/UUPZL+eUnqxxv3KaSfybSbxX2r0Is=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=aH/4/O97ef+PBMmQZEnRmZE2eEcvV23RPiuJkui9GX6CcgNQLLlTWWaMKUotIsBoc
-	 JOoJBnXRRUZ0k4SNX/niZOnQt0ah62ecM9RHqYmDqddmwApS4S9fA2pQEXoOCAujyC
-	 JatJr0/IgXcFMq473CTyA8sD6pCJOQrSSVrqNuoxibXPKYsb7wN1ebUeAsLCZrX/Ks
-	 FDOZCn8p4EtYbjU742DQ4exl4qvWJw8jwmlh1NEDEApn+7mCyXe0N0TJt98Eo4vSCS
-	 as/r81Vr3CCpY4KEyKq5oESaNcxC9qSE8+DkLo43SsI4xdustuLwI/O8chKHD0AF4C
-	 vG2eiiS7I4PVA==
-Date: Tue, 30 Jun 2026 09:02:07 -0500
-From: Rob Herring <robh@kernel.org>
-To: Rodrigo Alencar <rodrigo.alencar@analog.com>
-Cc: linux-iio@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-hardening@vger.kernel.org,
-	Lars-Peter Clausen <lars@metafoo.de>,
-	Michael Hennerich <Michael.Hennerich@analog.com>,
-	Jonathan Cameron <jic23@kernel.org>,
-	David Lechner <dlechner@baylibre.com>,
-	Andy Shevchenko <andy@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Philipp Zabel <p.zabel@pengutronix.de>,
+	s=k20260515; t=1782829056;
+	bh=8vfRiINSDbirl30Dmm17gH3r0ZINd4Brr0niqjDS/TE=;
+	h=From:To:Cc:Subject:Date;
+	b=MpvryAXchpyZO7mGub1FHBvvvj9h2FyGUTCQqdpcpHzs6b4BwS62GwPEfLkxV9+Ic
+	 xznRbtcnDWntPb8Y0MzcvWGbukxiERNdlZi10+dJLsJGpW36Y2V/TIOO85+M7hDA4z
+	 6OUbwEta+oYPz9ehSP+A66TAbJJ+ftvyuYIgpMkcTbn1z6q+qHMuUwUL0Gg/+2fn7R
+	 5Fm0gaZ4xlsVjXBHsWgU7WIco4Qn2nhDOaWy7B/Ch7lJKXSewS2mz7umL2CjkHzns2
+	 sNSSc3AJUmpXpyijIKBL7OOaUyjKE49ZLQiZbrkPLPScBzT+SjxHYa0lSCjVz9mWIX
+	 O2sh0WBEvnsHw==
+From: SJ Park <sj@kernel.org>
+To: Andrew Morton <akpm@linux-foundation.org>
+Cc: SJ Park <sj@kernel.org>,
+	"Liam R. Howlett" <liam@infradead.org>,
+	Brendan Higgins <brendan.higgins@linux.dev>,
+	David Gow <davidgow@davidgow.net>,
+	David Hildenbrand <david@kernel.org>,
 	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>, Kees Cook <kees@kernel.org>,
-	"Gustavo A. R. Silva" <gustavoars@kernel.org>
-Subject: Re: [PATCH v6 08/16] dt-bindings: iio: frequency: add ad9910
-Message-ID: <20260630140207.GA2986379-robh@kernel.org>
-References: <20260618-ad9910-iio-driver-v6-0-79125ffbe430@analog.com>
- <20260618-ad9910-iio-driver-v6-8-79125ffbe430@analog.com>
+	Lorenzo Stoakes <ljs@kernel.org>,
+	Michal Hocko <mhocko@suse.com>,
+	Mike Rapoport <rppt@kernel.org>,
+	Shuah Khan <shuah@kernel.org>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Vlastimil Babka <vbabka@kernel.org>,
+	damon@lists.linux.dev,
+	kunit-dev@googlegroups.com,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-kselftest@vger.kernel.org,
+	linux-mm@kvack.org
+Subject: [PATCH 00/11] mm/damon: update, optimize, and clean up doc, tests, and code
+Date: Tue, 30 Jun 2026 07:17:14 -0700
+Message-ID: <20260630141726.92246-1-sj@kernel.org>
+X-Mailer: git-send-email 2.47.3
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260618-ad9910-iio-driver-v6-8-79125ffbe430@analog.com>
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.66 / 15.00];
+X-Spamd-Result: default: False [-3.66 / 15.00];
 	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
-	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94174-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_FROM(0.00)[bounces-94176-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[20];
+	FORGED_RECIPIENTS(0.00)[m:akpm@linux-foundation.org,m:sj@kernel.org,m:liam@infradead.org,m:brendan.higgins@linux.dev,m:davidgow@davidgow.net,m:david@kernel.org,m:corbet@lwn.net,m:ljs@kernel.org,m:mhocko@suse.com,m:rppt@kernel.org,m:shuah@kernel.org,m:skhan@linuxfoundation.org,m:surenb@google.com,m:vbabka@kernel.org,m:damon@lists.linux.dev,m:kunit-dev@googlegroups.com,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:rodrigo.alencar@analog.com,m:linux-iio@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-hardening@vger.kernel.org,m:lars@metafoo.de,m:Michael.Hennerich@analog.com,m:jic23@kernel.org,m:dlechner@baylibre.com,m:andy@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:p.zabel@pengutronix.de,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:kees@kernel.org,m:gustavoars@kernel.org,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[robh@kernel.org,linux-doc@vger.kernel.org];
+	FORGED_SENDER(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[robh@kernel.org,linux-doc@vger.kernel.org];
-	TO_DN_SOME(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,analog.com:url,analog.com:email,devicetree.org:url,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: B0D366E53FD
+X-Rspamd-Queue-Id: 266566E5654
 
-On Thu, Jun 18, 2026 at 02:27:24PM +0100, Rodrigo Alencar wrote:
-> DT-bindings for AD9910, a 1 GSPS DDS with 14-bit DAC. It includes
-> configurations for clocks, DAC current, reset and basic GPIO control.
-> 
-> Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
-> ---
->  .../bindings/iio/frequency/adi,ad9910.yaml         | 189 +++++++++++++++++++++
->  MAINTAINERS                                        |   7 +
->  2 files changed, 196 insertions(+)
-> 
-> diff --git a/Documentation/devicetree/bindings/iio/frequency/adi,ad9910.yaml b/Documentation/devicetree/bindings/iio/frequency/adi,ad9910.yaml
-> new file mode 100644
-> index 000000000000..a78fe33ba21f
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/iio/frequency/adi,ad9910.yaml
-> @@ -0,0 +1,189 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/iio/frequency/adi,ad9910.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Analog Devices AD9910 Direct Digital Synthesizer
-> +
-> +maintainers:
-> +  - Rodrigo Alencar <rodrigo.alencar@analog.com>
-> +
-> +description:
+Patches 1 and 2 update the design and ABI documents for recently added
+DAMON features.  Patches 3-7 add or update more unit and self tests for
+DAMON to cover recently changed or added functions and sysfs files.
+Patch 8 optimizes damon_commit_target_regions() to skip unnecessary
+adjacent ranges setup.  Patches 9-11 clean and fix up recently added
+DAMON sysfs interface code for readability.
 
-You need '>' to preserve paragraphs.
+Changes from RFC v1.3
+- RFC v1.3: https://lore.kernel.org/20260626001644.85825-1-sj@kernel.org
+- Drop RFC tag.
+- Rebase to latest mm-new.
+Changes from RFC v1.2
+- RFC v1.2: https://lore.kernel.org/20260625142357.103500-1-sj@kernel.org
+- Fix broken sphinx syntax in patch 1.
+- Drop unused counts[] for damon_rand() test in patch 3.
+Changes from RFC v1.1
+- RFC v1.1: https://lore.kernel.org/20260625050756.91115-1-sj@kernel.org
+- Document nid requirement for node_eligible_mem_bp.
+- Fix typos: s/memmcg/memcg/, s/geets/gets/.
+- Drop damon_rnd() randomness test case; test boundness only.
+- Fixup dests dir selftest to do real test with correct file permission
+  checks.
+Changes from RFC
+- RFC: https://lore.kernel.org/20260624142008.87180-1-sj@kernel.org
+- Rebase directly to latest mm-new.
 
-> +  The AD9910 is a 1 GSPS direct digital synthesizer (DDS) with an integrated
-> +  14-bit DAC. It features single tone mode with 8 configurable profiles,
-> +  a digital ramp generator, RAM control, OSK, and a parallel data port for
-> +  high-speed streaming.
-> +
-> +  https://www.analog.com/en/products/ad9910.html
-> +
-> +properties:
-> +  compatible:
-> +    const: adi,ad9910
-> +
-> +  reg:
-> +    maxItems: 1
-> +
-> +  spi-max-frequency:
-> +    maximum: 70000000
-> +
-> +  clocks:
-> +    minItems: 1
-> +    items:
-> +      - description: Reference clock (REF_CLK).
-> +      - description: Optional synchronization clock (SYNC_IN).
-> +
-> +  clock-names:
-> +    minItems: 1
-> +    items:
-> +      - const: ref_clk
-> +      - const: sync_in
-> +
-> +  '#clock-cells':
-> +    const: 1
-> +
-> +  clock-output-names:
-> +    minItems: 1
-> +    maxItems: 3
-> +    items:
-> +      enum: [ sync_clk, pdclk, sync_out ]
-> +
-> +  interrupts:
-> +    minItems: 1
-> +    maxItems: 2
-> +    description:
-> +      Requires interrupt-names property with the same number of items. The
-> +      supported interrupts are 'drover' (digital ramp generator limit) and
-> +      'ram_swp_ovr' (end of RAM sweep).
-> +
-> +  interrupt-names:
-> +    minItems: 1
-> +    maxItems: 2
-> +    items:
-> +      enum: [ drover, ram_swp_ovr ]
-> +
-> +  dvdd-io33-supply:
-> +    description: 3.3V Digital I/O supply.
-> +
-> +  avdd33-supply:
-> +    description: 3.3V Analog DAC supply.
-> +
-> +  dvdd18-supply:
-> +    description: 1.8V Digital Core supply.
-> +
-> +  avdd18-supply:
-> +    description: 1.8V Analog Core supply.
-> +
-> +  reset-gpios:
-> +    description:
-> +      GPIOs controlling the Main Device reset.
-> +
-> +  io-reset-gpios:
-> +    maxItems: 1
-> +    description:
-> +      GPIO controlling the I/O_RESET pin.
-> +
-> +  powerdown-gpios:
-> +    maxItems: 1
-> +    description:
-> +      GPIO controlling the EXT_PWR_DWN pin.
-> +
-> +  update-gpios:
-> +    maxItems: 1
-> +    description:
-> +      GPIO controlling the I/O_UPDATE pin.
-> +
-> +  profile-gpios:
-> +    minItems: 3
-> +    maxItems: 3
-> +    description:
-> +      GPIOs controlling the PROFILE[2:0] pins for profile selection.
-> +
-> +  sync-err-gpios:
-> +    maxItems: 1
-> +    description:
-> +      GPIO used to read SYNC_SMP_ERR pin status.
-> +
-> +  lock-detect-gpios:
-> +    maxItems: 1
-> +    description:
-> +      GPIO used to read PLL_LOCK pin status.
-> +
-> +  adi,pll-enable:
-> +    type: boolean
-> +    description:
-> +      Indicates that a loop filter is connected and the internal PLL is enabled.
-> +      Often used when the reference clock is provided by a crystal or by a
-> +      single-ended on-board oscillator.
-> +
-> +  adi,charge-pump-current-microamp:
-> +    minimum: 212
-> +    maximum: 387
-> +    default: 212
-> +    description:
-> +      PLL charge pump current in microamps. Only applicable when the internal
-> +      PLL is enabled. The value is rounded to the nearest supported step. This
-> +      value depends mostly on the loop filter design.
-> +
-> +  adi,refclk-out-drive-strength:
-> +    $ref: /schemas/types.yaml#/definitions/string
-> +    enum: [ disabled, low, medium, high ]
-> +    default: disabled
-> +    description:
-> +      Reference clock output (DRV0) drive strength. Only applicable when
-> +      the internal PLL is enabled.
-> +
-> +dependencies:
-> +  adi,charge-pump-current-microamp: [ 'adi,pll-enable' ]
-> +  adi,refclk-out-drive-strength: [ 'adi,pll-enable' ]
-> +  lock-detect-gpios: [ 'adi,pll-enable' ]
-> +  interrupts: [ interrupt-names ]
-> +  clocks: [ clock-names ]
+SJ Park (11):
+  Docs/mm/damon/design: update for DAMOS_QUOTA_NODE_ELIGIBLE_MEM_BP
+  Docs/ABI/damon: document probe files
+  mm/damon/tests/core-kunit: test damon_rand()
+  selftests/damon/sysfs.sh: test multiple probe dirs creation
+  selftests/damon/sysfs.sh: test {core,ops}_filters/ directories
+  selftests/damon/sysfs.sh: test dests dir
+  selftests/damon/sysfs.sh: test all files in quota goal dir
+  mm/damon/core: reduce range setup in damon_commit_target_regions()
+  mm/damon/sysfs: split probe setup function out
+  mm/damon/sysfs: split out filters setup function
+  mm/damon/sysfs: fix typos in probe_{add,rm}_dirs: s/attr/probe/
 
-As clocks is required below, then 'clock-names' is also always required.
+ .../ABI/testing/sysfs-kernel-mm-damon         |  40 +++++++
+ Documentation/mm/damon/design.rst             |   6 +-
+ mm/damon/core.c                               |  22 +++-
+ mm/damon/sysfs.c                              | 102 ++++++++++--------
+ mm/damon/tests/core-kunit.h                   |  15 +++
+ tools/testing/selftests/damon/sysfs.sh        |  71 +++++++++++-
+ 6 files changed, 203 insertions(+), 53 deletions(-)
 
-> +  '#clock-cells': [ clock-output-names ]
 
-The h/w sometimes has clock outputs and sometimes doesn't? #clock-cells 
-should always be required IMO.
-
-> +
-> +required:
-> +  - compatible
-> +  - reg
-> +  - clocks
-> +  - dvdd-io33-supply
-> +  - avdd33-supply
-> +  - dvdd18-supply
-> +  - avdd18-supply
-> +
-> +allOf:
-> +  - $ref: /schemas/spi/spi-peripheral-props.yaml#
-> +
-> +unevaluatedProperties: false
-> +
-> +examples:
-> +  - |
-> +    #include <dt-bindings/gpio/gpio.h>
-> +    spi {
-> +        #address-cells = <1>;
-> +        #size-cells = <0>;
-> +        dds@0 {
-> +            compatible = "adi,ad9910";
-> +            reg = <0>;
-> +            spi-max-frequency = <1000000>;
-> +            clocks = <&ad9910_refclk>;
-> +            clock-names = "ref_clk";
-> +
-> +            dvdd-io33-supply = <&vdd_io33>;
-> +            avdd33-supply = <&vdd_a33>;
-> +            dvdd18-supply = <&vdd_d18>;
-> +            avdd18-supply = <&vdd_a18>;
-> +
-> +            reset-gpios = <&gpio 0 GPIO_ACTIVE_HIGH>;
-> +            io-reset-gpios = <&gpio 1 GPIO_ACTIVE_HIGH>;
-> +            powerdown-gpios = <&gpio 2 GPIO_ACTIVE_HIGH>;
-> +            update-gpios = <&gpio 3 GPIO_ACTIVE_HIGH>;
-> +            profile-gpios = <&gpio 4 GPIO_ACTIVE_HIGH>,
-> +                            <&gpio 5 GPIO_ACTIVE_HIGH>,
-> +                            <&gpio 6 GPIO_ACTIVE_HIGH>;
-> +
-> +            adi,pll-enable;
-> +            adi,charge-pump-current-microamp = <387>;
-> +            adi,refclk-out-drive-strength = "disabled";
-> +        };
-> +    };
-> +...
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index b051eccafa60..998b06fd97fd 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -1645,6 +1645,13 @@ W:	https://ez.analog.com/linux-software-drivers
->  F:	Documentation/devicetree/bindings/iio/dac/adi,ad9739a.yaml
->  F:	drivers/iio/dac/ad9739a.c
->  
-> +ANALOG DEVICES INC AD9910 DRIVER
-> +M:	Rodrigo Alencar <rodrigo.alencar@analog.com>
-> +L:	linux-iio@vger.kernel.org
-> +S:	Supported
-> +W:	https://ez.analog.com/linux-software-drivers
-> +F:	Documentation/devicetree/bindings/iio/frequency/adi,ad9910.yaml
-> +
->  ANALOG DEVICES INC MAX22007 DRIVER
->  M:	Janani Sunil <janani.sunil@analog.com>
->  L:	linux-iio@vger.kernel.org
-> 
-> -- 
-> 2.43.0
-> 
+base-commit: bb5dde77be397d614ef968578e3bf6cf9674df3c
+-- 
+2.47.3
 
