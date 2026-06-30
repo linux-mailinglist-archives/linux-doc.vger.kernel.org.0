@@ -1,181 +1,224 @@
-Return-Path: <linux-doc+bounces-94202-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94203-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Pv59EsbwQ2qRlwoAu9opvQ
-	(envelope-from <linux-doc+bounces-94202-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 18:37:26 +0200
+	id rtovHITxQ2rIlwoAu9opvQ
+	(envelope-from <linux-doc+bounces-94203-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 18:40:36 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id ABB696E6855
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 18:37:25 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id CAA7B6E68AE
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 18:40:35 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=cmpxchg.org header.s=google header.b=khLiWr43;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94202-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94202-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=cmpxchg.org;
+	dkim=pass header.d=thegoodpenguin-co-uk.20251104.gappssmtp.com header.s=20251104 header.b=IuGbDrLu;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94203-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-94203-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=none;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id C884C3000529
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 16:34:53 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id E1AE930143FE
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 16:36:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0C29D1427A;
-	Tue, 30 Jun 2026 16:34:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 37C4F3BED70;
+	Tue, 30 Jun 2026 16:36:12 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com [209.85.222.174])
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E8BDF3B3BF7
-	for <linux-doc@vger.kernel.org>; Tue, 30 Jun 2026 16:34:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D24AF3C415F
+	for <linux-doc@vger.kernel.org>; Tue, 30 Jun 2026 16:36:08 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782837292; cv=none; b=dNUOZfvDlwq9iReDs1HXc5taL8DTXnKdgAomaMA98M+q5qpYiPU3uNbQbOGaLQOxLF0UHLUYLr18/T3nJ9DRTUdFW3TwgRwjpgKAD0qj2fuC6J9qhK9+qY3roEpt1kuztkUKAmdB7aSSkPiaXZeRChNHtjHZwgSy21qp75QMrY4=
+	t=1782837371; cv=none; b=JWqwRmFxfPUDuG/+0siPL/2Pu0g8hM1Ka5tJrndHWIlnCFeMiBJz28O6KT7elwoX7Mi8QF+jQ1Xn/kPZVSFtmwppRAt0GntMkZsBYhFapbe2XpSIT2aKaQsF61ev5R8HLTJHOcQIJVXguSgMw+97CtvJo5XBJsBdTM5GEcvf41Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782837292; c=relaxed/simple;
-	bh=An8LAuAebhAilZhop/a0/z/TNrwidNc5UkozEG2D6Yc=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=O23VHvcZOsHh/AZo92rr0l0uC2fA8YeuiAE3eaH+pCFFbvxA55AMhMIH2cgWycEioNSRoFG3mpFNJsSWTuc9gD/LL3mg0pH6C2ctI2SWH1jNzfNJFx/wynPpx8x5ThqzYwTJyA8UAxMUG7lNyJVCfaNsTEvyq8mDxDFsvK3PXP0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=cmpxchg.org; spf=pass smtp.mailfrom=cmpxchg.org; dkim=pass (2048-bit key) header.d=cmpxchg.org header.i=@cmpxchg.org header.b=khLiWr43; arc=none smtp.client-ip=209.85.222.174
-Received: by mail-qk1-f174.google.com with SMTP id af79cd13be357-92e6a434cabso54498385a.1
-        for <linux-doc@vger.kernel.org>; Tue, 30 Jun 2026 09:34:50 -0700 (PDT)
+	s=arc-20240116; t=1782837371; c=relaxed/simple;
+	bh=ySXKBmJ/U8bqVEuShkxwbboi3HlloriRk6YpRGniIko=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=GmK3E1Zjf3FmvO2GFeBRZd95vfoZDFRtAt6GhywHKq+iwhMWizX1fMIninhpBbC4PCusVeznXnSNfpXYlAfN9M2DyLOBWGQVv47EVi0C5X5qG7GZY8QmNxYQ/pZXCocGQ4c2EGbNOWVrAaELE+B8HG4uas1OpC71EgWVC/sZvD4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk; spf=pass smtp.mailfrom=thegoodpenguin.co.uk; dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20251104.gappssmtp.com header.i=@thegoodpenguin-co-uk.20251104.gappssmtp.com header.b=IuGbDrLu; arc=none smtp.client-ip=209.85.128.52
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4924593f45dso59959675e9.1
+        for <linux-doc@vger.kernel.org>; Tue, 30 Jun 2026 09:36:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cmpxchg.org; s=google; t=1782837290; x=1783442090; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=F3vzLp53JrizIZ8vRPTNfFVJq97fTRHFgjl0sdoikIw=;
-        b=khLiWr43a99ZzKZSus27qjuZh+h7yDjTgeMAs4VNvOi+tbZnYQuEgNp8rY9hPdvyYH
-         K1URXys8Xpkg8DcPnXZ6DUANLvwxP1XZZUbj0vUkWcBMVeKnLwFpz2Z/RAKF+QBqRcmS
-         bgY5AKPRRUZwcnSW2vqylqdroshZcsbCU5YnE6IM1nIcArRimpC+d+XEcE34ptnw6xD9
-         TRV+aFWewuxykwLJvJ0NZmoBMKWG5rMnzEKE3A7C/KwY7u4m9x6XSV4aWU7fNtq9JsHr
-         rp3Ht7ThAeapoKQXKU3JLADmS59pWrJo31moZVx1GBqPAPElnTO3UJlUfi37RPwmFi91
-         qZkQ==
+        d=thegoodpenguin-co-uk.20251104.gappssmtp.com; s=20251104; t=1782837367; x=1783442167; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=KlOvwkoIjqQ3dyIBe+7i8C6OqBUbb4KmOF29Y6QRtEg=;
+        b=IuGbDrLuV0N3Jj3Ikmh1T/iHWguCU5C40wflZZ2MSNGMTjzggZUBl2KitCJxITX5kb
+         w3qAbYGHp6IIGM5vRXD1ZdWCqUaNudiXhDkPrgXHeJrvop7vGDekDSGUzepATvmuWfTd
+         x5kQXjriz2IrJ1koF6vPcS2vDzvjjG1s1H2p0VgYDtfXgjrMH6HU6kH+J2GNb8eAPOzB
+         Kfh9rMLTuBeHA5vOZhuFD80yfx/KxxvZjkbPuLhbM8XFA0EaDbQIICu00g3PbN27bJa2
+         Tgmb4Q+7EsNw1HN8hYkD52YiO2oVni1CW5UZtufLjJG4bOsqFdawbMCnklwKMU3CsDHx
+         HSrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782837290; x=1783442090;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=F3vzLp53JrizIZ8vRPTNfFVJq97fTRHFgjl0sdoikIw=;
-        b=nfhgh+qQA4uJLAHZu2c66H/4Fr9Onc1L0OlkcxObEeTGiGD9xZJ5/jUtlzCTLOMX6N
-         q5dPGmGn5mbdbGVqh/L9po9vYinzdAgE8QgHR5ofZE0H+027KQwCioLiLNGtLrXtCgLV
-         ux++pMensDLw3GNBP2nkUpMcsoHAYvE6GITQMYcrPSFa8+QZwVUXRkQRGzNB9tEChQRA
-         Ryjwj9Qzd5VuC7IjsLxwSHpRPtnBBgQI444f1MnGOCF8t0dds3QygPf7D1zt67pNf7Ck
-         jQBIznQL3bJ2RAKuEVDp5nFoexR22wjT90kJ1ws7kbPB3rkm5bEfBKkUBgPkzdRqNDTP
-         Bp6Q==
-X-Forwarded-Encrypted: i=1; AFNElJ83u2YBckJ48sWLhP7fvTzd+hZMkyAgbAGS5C/IHP50uSw9NvFE/AW+0QPHTUBDaIEukLXbH6/DiUE=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yzn5aqBFspJ+a8LR7fi6+BdxJ4J1mpzm0KdoWEob151nlGHWp2P
-	l18potSTslXyZ+42SNDxXgm/+ID7fQcMBLetFh5AzLdxJJvwO7jfss6yxWnIel5vcJI=
-X-Gm-Gg: AfdE7cnFE/wBmdyfpQ4jMIi9JvuRGYdWuXdCQravezj9KPprbAU6HrD4srKgK0WEMKt
-	9LOwHSnrV/t9Nq4YEhoy1PdAWCTIAq6BtGhFZaIZJVD2z9kPLSb8dgeNloNsR+qbQtv+gGq3HJG
-	LBTUsNt19ZFc1zwIqh41aeOJwzLFUAFWVaye5UD1mxiBLAj3cX2//2DIzKPgExT83khXWyZE2br
-	i1HZ2WlKob8gWQqO/1RmJsFmvQzVObdNw2Sa8T3luTeG7bcjFofouzGxB1XaR88AkoynxX7JWC1
-	2I0TimhzmXnGaLnRfK+9HWIv3g5DlGQ3FeHlkq7Y/V1mgk2Vj1bD/c+rDitIiRxb0Hs/6UwIJT4
-	vEP7FQ1B5c1VPM7f+9iGlORRND31+XFTxpBn1CxTjZI6k6Fhzomq9lH9NGFQJQheXQFOAYLlfm1
-	8RUNL5s+exOxg=
-X-Received: by 2002:a05:620a:2b9b:b0:925:4655:a89b with SMTP id af79cd13be357-92e625f7147mr682887885a.27.1782837289779;
-        Tue, 30 Jun 2026 09:34:49 -0700 (PDT)
-Received: from localhost ([2603:7001:f100:500:365a:60ff:fe62:ff29])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-92e6213bc41sm273914985a.6.2026.06.30.09.34.49
+        d=1e100.net; s=20251104; t=1782837367; x=1783442167;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=KlOvwkoIjqQ3dyIBe+7i8C6OqBUbb4KmOF29Y6QRtEg=;
+        b=fFkdotCOWUlIDSTQJVMdnnlXvtob1DiPkjL+FmFNKZhdJay/lsQrNHqPA7I/iMo4+5
+         +y5xPfbWmJJLmZtiEBEWNtkJn0yEFSuxruyv5OtdrY9irtV+QDUDe1SlsoDEROpv5Fvb
+         Pb3dOSnI2Coecz7pd6oyjoJv0JrBDuOtly7JVkhpJy9OxeouxSU9ru8H8XjjuW/i1bfz
+         4mp76SwaTgv+uiy/zJdp27PPdLNg2ZTG3qLTv61APTbMGhm5fSNTOWYGS1yzldDdslc+
+         HuHaB5JASmBI5lhCFDisl3GCcXeME807zZm7tge+VBPGdTMtw+Yrq34iIgZHUovWIs0f
+         FSrw==
+X-Gm-Message-State: AOJu0Yxzlt0LxCn+JQooPa6g50yerh0eMrFX574ZOxQN4FMNpPtLEdtL
+	gGmCfJGNcmerrY4VXrxPEaZe0vNJj+Ptflw6xOb6vd2PjRiiNe919OcOTLZMd7e5jwc=
+X-Gm-Gg: AfdE7cngsu61sKiLPTmkpARGnqJ2qkx3VSFzGFa1rIt/2HgfQf63WVdiWghbVhOMHYj
+	64pdSaiQdDYka6WwcLNAJpG9ptEBdMUYnguAfuPOGJ3GHKxc2PpUZ+VA3f3DH8+c9Pq2Fggi2vS
+	IvffJaIAqE08BcbF9Qq1HuDrcX0VW/FVY/PXXBJ86xOxOt1au/4luEJg+elBUz5qwDu0YKr10id
+	1Y6OrEFftL2FRs/s/QE76OGHtOGePW9SdbOIgidYAVgCmsKWcyn9aH5bG6P/lGLIDlYxczS3/uR
+	tNDg6aAGyL3W3aI4aeKi+hDl71ozEsXeCldG3XS2B/gB3AL84kvJmDzjWMzclhIauNPgCZkpWFC
+	uNowxlEyKRNjLKR1FKex74Kpv7WaP6aPbzoIK4jZwM2ORQNp2Y79HvrtIg/1cGJ2m25V4x7IyWz
+	whOIpZi6zjdme4AzBE5Tzef7dSIVq6NijVZ58AIvXq3HtLX+W0dpQeUC8EA9SrcmIUSCQfjpIvI
+	cmF2sDBaLmkFiWdhzESzelTAUXS
+X-Received: by 2002:a05:600c:c16e:b0:493:b87c:c87d with SMTP id 5b1f17b1804b1-493bda41fc3mr20284025e9.11.1782837367139;
+        Tue, 30 Jun 2026 09:36:07 -0700 (PDT)
+Received: from [127.0.1.1] ([2a00:23c5:7815:1301:f27:e3a8:2334:314d])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-493be486f52sm8452225e9.0.2026.06.30.09.36.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 30 Jun 2026 09:34:49 -0700 (PDT)
-Date: Tue, 30 Jun 2026 12:34:48 -0400
-From: Johannes Weiner <hannes@cmpxchg.org>
-To: Jianyue Wu <wujianyue000@gmail.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>,
-	Kairui Song <kasong@tencent.com>,
-	Kemeng Shi <shikemeng@huaweicloud.com>,
-	Nhat Pham <nphamcs@gmail.com>, Barry Song <baohua@kernel.org>,
-	Youngjun Park <youngjun.park@lge.com>,
-	Qi Zheng <qi.zheng@linux.dev>,
-	Shakeel Butt <shakeel.butt@linux.dev>,
-	Axel Rasmussen <axelrasmussen@google.com>,
-	Yuanchu Xie <yuanchu@google.com>, Wei Xu <weixugc@google.com>,
-	David Hildenbrand <david@kernel.org>,
-	Michal Hocko <mhocko@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>,
-	"Liam R. Howlett" <liam@infradead.org>,
-	Vlastimil Babka <vbabka@kernel.org>,
-	Mike Rapoport <rppt@kernel.org>,
-	Suren Baghdasaryan <surenb@google.com>,
-	Michal Hocko <mhocko@suse.com>, Hugh Dickins <hughd@google.com>,
-	Baolin Wang <baolin.wang@linux.alibaba.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Baoquan He <baoquan.he@linux.dev>, linux-mm@kvack.org,
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH v6 1/3] mm/swap: colocate page-cluster sysctl with swap
- readahead
-Message-ID: <akPwKK22ahROxDqL@cmpxchg.org>
-References: <20260701-ch-swap-series-plus-folio-lru-cleanup-v6-0-d4f648963382@gmail.com>
- <20260701-ch-swap-series-plus-folio-lru-cleanup-v6-1-d4f648963382@gmail.com>
+        Tue, 30 Jun 2026 09:36:06 -0700 (PDT)
+From: Andrew Murray <amurray@thegoodpenguin.co.uk>
+Subject: [PATCH v2 0/4] printk: nbcon: deprecate boot_delay in favour of
+ printk_delay
+Date: Tue, 30 Jun 2026 17:35:56 +0100
+Message-Id: <20260630-deprecate_boot_delay-v2-0-f9883d36aa4b@thegoodpenguin.co.uk>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260701-ch-swap-series-plus-folio-lru-cleanup-v6-1-d4f648963382@gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAGzwQ2oC/22NQQ6DIBREr2JYFwMoaLryHo0xFH71pw0YQFNjv
+ Hup3Xb5JjNvdhIhIERyLXYSYMWI3mUQl4KYSbsRKNrMRDChmOSSWpgDGJ1guHufBgsvvdFGSK6
+ srtpaapKnufLA96m99ZknjMmH7XxZ+Tf9CRXj/4Urp4yaqja8bXgttOrSBKP3dgY3LuhK48vlS
+ frjOD4CEMX/wwAAAA==
+X-Change-ID: 20260515-deprecate_boot_delay-72516da3845a
+To: Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>, 
+ Russell King <linux@armlinux.org.uk>, 
+ Florian Fainelli <florian.fainelli@broadcom.com>, 
+ Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
+ Ray Jui <rjui@broadcom.com>, Scott Branden <sbranden@broadcom.com>, 
+ Petr Mladek <pmladek@suse.com>, Steven Rostedt <rostedt@goodmis.org>, 
+ John Ogness <john.ogness@linutronix.de>, 
+ Sergey Senozhatsky <senozhatsky@chromium.org>, 
+ Andrew Morton <akpm@linux-foundation.org>, 
+ Sebastian Andrzej Siewior <bigeasy@linutronix.de>, 
+ Clark Williams <clrkwllms@kernel.org>, Randy Dunlap <rdunlap@infradead.org>, 
+ Linus Torvalds <torvalds@linux-foundation.org>, 
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-arm-kernel@lists.infradead.org, linux-rpi-kernel@lists.infradead.org, 
+ linux-rt-devel@lists.linux.dev, 
+ Andrew Murray <amurray@thegoodpenguin.co.uk>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1782837365; l=3474;
+ i=amurray@thegoodpenguin.co.uk; s=20250914; h=from:subject:message-id;
+ bh=ySXKBmJ/U8bqVEuShkxwbboi3HlloriRk6YpRGniIko=;
+ b=O86itWXgtpUvHd6jHgcUSDYONHr8uM4FtjVKgxr5nMaMcbfYVqTugJVOlYcUmoahEOOuQHZO+
+ MNX9KPA/fAIAGn9TedwW6ewrNcoYK9JZHvG/qKvgLYQ/JtsDREPeuXO
+X-Developer-Key: i=amurray@thegoodpenguin.co.uk; a=ed25519;
+ pk=0SU0Q8S/uEiCdbXbXS+PvJGUCaBG1nDszD+HPU3Js0Q=
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[cmpxchg.org,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[cmpxchg.org:s=google];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[thegoodpenguin-co-uk.20251104.gappssmtp.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94202-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:wujianyue000@gmail.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencent.com,m:shikemeng@huaweicloud.com,m:nphamcs@gmail.com,m:baohua@kernel.org,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:david@kernel.org,m:mhocko@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:hughd@google.com,m:baolin.wang@linux.alibaba.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:baoquan.he@linux.dev,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FORGED_SENDER(0.00)[hannes@cmpxchg.org,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[29];
-	FREEMAIL_CC(0.00)[linux-foundation.org,kernel.org,tencent.com,huaweicloud.com,gmail.com,lge.com,linux.dev,google.com,infradead.org,suse.com,linux.alibaba.com,lwn.net,linuxfoundation.org,kvack.org,vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-94203-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux@armlinux.org.uk,m:florian.fainelli@broadcom.com,m:bcm-kernel-feedback-list@broadcom.com,m:rjui@broadcom.com,m:sbranden@broadcom.com,m:pmladek@suse.com,m:rostedt@goodmis.org,m:john.ogness@linutronix.de,m:senozhatsky@chromium.org,m:akpm@linux-foundation.org,m:bigeasy@linutronix.de,m:clrkwllms@kernel.org,m:rdunlap@infradead.org,m:torvalds@linux-foundation.org,m:gregkh@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-rpi-kernel@lists.infradead.org,m:linux-rt-devel@lists.linux.dev,m:amurray@thegoodpenguin.co.uk,s:lists@lfdr.de];
+	DMARC_NA(0.00)[thegoodpenguin.co.uk];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	FORGED_SENDER(0.00)[amurray@thegoodpenguin.co.uk,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[thegoodpenguin-co-uk.20251104.gappssmtp.com:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[hannes@cmpxchg.org,linux-doc@vger.kernel.org];
-	PRECEDENCE_BULK(0.00)[];
-	DKIM_TRACE(0.00)[cmpxchg.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[amurray@thegoodpenguin.co.uk,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,cmpxchg.org:dkim,cmpxchg.org:email,cmpxchg.org:mid,cmpxchg.org:from_mime,vger.kernel.org:from_smtp]
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[thegoodpenguin-co-uk.20251104.gappssmtp.com:dkim,thegoodpenguin.co.uk:email,thegoodpenguin.co.uk:mid,thegoodpenguin.co.uk:from_mime,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: ABB696E6855
+X-Rspamd-Queue-Id: CAA7B6E68AE
 
-On Wed, Jul 01, 2026 at 12:27:32AM +0800, Jianyue Wu wrote:
-> page_cluster and the vm.page-cluster sysctl are only used by swap-in
-> readahead in swap_state.c. Move them out of swap.c together with
-> swap_readahead_setup(), and make page_cluster static to that file.
-> 
-> Rename swap_setup() while moving it as well. The helper is internal to
-> MM and now only sets up swap readahead defaults and its sysctl hook, so
-> the more specific name matches its reduced scope.
-> 
-> swap_setup() previously lived in mm/swap.c, which is built
-> unconditionally, so the vm.page-cluster sysctl was registered also on
-> CONFIG_SWAP=n kernels. swap_readahead_setup() is now a no-op stub when
-> CONFIG_SWAP is disabled, so vm.page-cluster is no longer registered
-> there. The knob only tunes swap-in readahead and had no effect without
-> swap.
-> 
-> Suggested-by: Baoquan He <bhe@redhat.com>
-> Suggested-by: Barry Song <baohua@kernel.org>
-> Acked-by: David Hildenbrand (Arm) <david@kernel.org>
-> Signed-off-by: Jianyue Wu <wujianyue000@gmail.com>
+The boot_delay (BOOT_PRINTK_DELAY) kernel parameter and printk_delay
+sysctl are two distinct mechanisms for providing similar functionality
+which add a delay prior to each printed printk message.
 
-Acked-by: Johannes Weiner <hannes@cmpxchg.org>
+boot_delay provides a kernel parameter for delaying printk output from
+kernel start through to boot (SYSTEM_RUNNING), whereas printk_delay is
+configurable only via sysctl and thus is only used post boot.
 
-Btw, I suggested this:
+However, since the introduction of nbcon and the legacy printer thread
+for PREEMPT_RT kernels, printk records are now emited to the console
+asynchronously to the caller of printk. Thus, any printk delay added by
+boot_delay/printk_delay continues to slow down the calling process but
+may not have any impact to the rate in which records are emited to the
+console, especially for slow consoles.
 
-https://lore.kernel.org/all/adUTC-7iyOAUlhR7@cmpxchg.org/
+To address these issues, let's deprecate boot_delay, extend printk_delay
+to be useable from kernel start and ensure that delays occur at the point
+where console messages are printed rather than queued.
+
+Please note that this patchset results in delays occuring after a message
+is printed rather than, as it is now, before.
+
+Signed-off-by: Andrew Murray <amurray@thegoodpenguin.co.uk>
+---
+Please see the following related work for additional context:
+
+- https://lore.kernel.org/all/20260503214214.3475670-1-rdunlap@infradead.org/
+- https://lore.kernel.org/all/20260505-printk_delay-v1-1-5dba51d7f17c@thegoodpenguin.co.uk/
+- https://lore.kernel.org/r/20260601-deprecate_boot_delay-v1-0-c34c187142a6@thegoodpenguin.co.uk (v1)
+
+---
+Changes in v2:
+- Rebased onto v7.2-rc1
+- Correctly handle negative values for printk_delay_msec (patch 2)
+- Add missing newline in pr_warn (patch 2)
+- Improved patch descriptions for (patches 2 and 3)
+- Use new emitted flag in nbcon_context/nbcon_write_context in place of backlog && wctxt.len checks (patch 3)
+- Use unsigned char for unsafe_takeover field instead of bool in nbcon_write_context (patch 3)
+- Move printk_delay_msec and printk_delay from printk.h to internal.h (patch 3)
+- Revert regression added in v1 to __nbcon_atomic_flush_pending_con (patch 3)
+- Move printk_delay later in console_emit_next_record ensuring delay is always after emit (across nbcon/legacy) (patch 3)
+- Fixed typo in documentation s/boot_delay/printk_delay/g in printk_delay= section (patch 4)
+- Link to v1: https://lore.kernel.org/r/20260601-deprecate_boot_delay-v1-0-c34c187142a6@thegoodpenguin.co.uk
+
+---
+Andrew Murray (4):
+      printk: remove BOOT_PRINTK_DELAY config option
+      printk: deprecate boot_delay in favour of printk_delay
+      printk: nbcon: move printk_delay to console emiting code
+      Documentation/kernel-parameters: add/update printk_delay/boot_delay
+
+ Documentation/admin-guide/kernel-parameters.txt | 31 +++++++--
+ arch/arm/configs/bcm2835_defconfig              |  1 -
+ include/linux/console.h                         |  5 +-
+ include/linux/printk.h                          |  1 -
+ kernel/printk/internal.h                        |  6 ++
+ kernel/printk/nbcon.c                           | 13 ++++
+ kernel/printk/printk.c                          | 84 +++++++++++++++----------
+ lib/Kconfig.debug                               | 18 ------
+ 8 files changed, 101 insertions(+), 58 deletions(-)
+---
+base-commit: dc59e4fea9d83f03bad6bddf3fa2e52491777482
+change-id: 20260515-deprecate_boot_delay-72516da3845a
+
+Best regards,
+-- 
+Andrew Murray <amurray@thegoodpenguin.co.uk>
+
 
