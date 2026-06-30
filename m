@@ -1,168 +1,229 @@
-Return-Path: <linux-doc+bounces-94157-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94158-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 9ODhOWuzQ2q4fQoAu9opvQ
-	(envelope-from <linux-doc+bounces-94157-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 14:15:39 +0200
+	id tHxwG7W1Q2pLfgoAu9opvQ
+	(envelope-from <linux-doc+bounces-94158-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 14:25:25 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50FF96E411F
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 14:15:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0689D6E4244
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 14:25:25 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=intel.com header.s=Intel header.b=Az9jMOQi;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94157-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94157-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=intel.com header.s=Intel header.b=FGJaBBIF;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94158-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94158-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=intel.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id AF9DC30D0D88
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 11:56:24 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 4DAA4304179A
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 12:19:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E05D340757B;
-	Tue, 30 Jun 2026 11:56:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BB00740B38D;
+	Tue, 30 Jun 2026 12:19:45 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.13])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D5F2D3F20E7;
-	Tue, 30 Jun 2026 11:56:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 630B53F0765;
+	Tue, 30 Jun 2026 12:19:44 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782820582; cv=none; b=GetNaTovRAS1elZHpdSiQBGNPgzxK+/5+Gd5EniW+sJ918gXdAYlaORQcoGt1amU+lBTRacfnboEPHGak8rrE2NUd0TOT1N50Dfg+AzVfIg0MjVSkVa2ZkTpDXIV0PGCmD1SpWMw+Nm3GaOfWkQgtg6HPBmAhXMhRQeGwaYrPCI=
+	t=1782821985; cv=none; b=idRnb0hbETsmokcU1Y/YiKnp7inS78YQbmrZUNBM/uuwTOUCT+f6xYIC8SIHnXk1Rx6ZQyrfDS8s4SXrNxgVmsZZNkWQU1VKP+PPZvWKKztSBS8yv7YzV032KqZf/G4IEcCExZwZIs+/+/PCCIbfrrQEwcPPQd1ABvkuEYRu/bE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782820582; c=relaxed/simple;
-	bh=akHXz8SqMo1P30MsFdy4bQn/F7nC4aKuZCLZeDpg0Tw=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Hi0xkeab3rXOpbtxBqjvi5d6uikeIR1qj0WrX/2dpc6W8P/qN6BReKpn6U9bSaF0956kno17WRV7Bo00Z7bV0T662bN1spwqsxQQXG9emc6jcyOvxagowTnN1kkW9WNkUoINUMU6IeOyIXP00rpyoXQ2GhLOEonYccM36laPtLk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Az9jMOQi; arc=none smtp.client-ip=198.175.65.12
+	s=arc-20240116; t=1782821985; c=relaxed/simple;
+	bh=eazOhytQrFMvUq1ReP67qLKPgCSBV6aajIEIlT27i24=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Y2DTPpnn4xof2jwePa5r0PuOg7ZXk3X1+I7CciAc5p8Ge1s9h+yx3zpFF8+hWZ4pVCkO0CeG8ONl1nLh/FmoPokMwnZcxG6R0nH5N7YpIhyNBpo3XGJRJoiu6wJ0qiwGIIsew/szDipYu+GvhiQbdJxAnvxp55D6QbhEOFipS7A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=FGJaBBIF; arc=none smtp.client-ip=198.175.65.13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1782820581; x=1814356581;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=akHXz8SqMo1P30MsFdy4bQn/F7nC4aKuZCLZeDpg0Tw=;
-  b=Az9jMOQiJ1cFdTr5M0TvPgZv9EDsEUqFRDAL/VNautbCH0HzjzbPjXVu
-   UbXv+EN6Gk/hbMedt+9xREOtWfhv8nNBUZiUcLBqjagnka6jenSzoC5YL
-   6tDSDFrAVyxVW3fk5jSDu0beFmTWdlX8tCDBvbhndLqlAzK0Ou1sN3ow2
-   iQNGFL2P1WtyclCmJ3x53YNJ3HKzNzuriVJ4tV3w6sfgBjpxjAtZ8DDd0
-   6vjn0IAw6xZY/QS6k+Uod/1GnYX6ch12I3TjLeGO/nKXz0+Czok4aM7Pu
-   0VxIh8KhQ8O2j1nRY35czjwOD1Jb9kUltuM6s+Hu8Gwjq58qkkK/fpoEp
-   g==;
-X-CSE-ConnectionGUID: 3b+uT5j4Rx6kCMSAtVnp4g==
-X-CSE-MsgGUID: KRNMb9dTTpm2/QQux1qwAA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11832"; a="95036721"
+  t=1782821984; x=1814357984;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=eazOhytQrFMvUq1ReP67qLKPgCSBV6aajIEIlT27i24=;
+  b=FGJaBBIFz6yvBo2f2TDAFh0t9d7AI//1zWaI3NCu6PKQLGp3tAP6Id8G
+   +KV99JMcVrm+DAzVSDMMHDfzFRi5EQ3QHqZmXoGo4lcAAbFTwWsKdjK8e
+   1HpP45qFSO2o7kz5Xgd3r4+AZaiV/dmA7XFZamR6ZhNM55Xx0VVPlxAFb
+   Dj3MFQqx6GWO0qG/blCOb8m3GXrYtmqOUDtMjuA3FjPR6KSXUcydXNV/r
+   6WokWulxqzoDW/eM/upNg4+BwqMxan8CK4dnxMoVFOPIp10ObdBpfFudd
+   d/N2513uEySoDvsj7XIxicTJiqA2r2jT7yD+PmIMWDX8blSN8dSXoc3G6
+   w==;
+X-CSE-ConnectionGUID: caNl5UQ1SRuRB/eovcqpvg==
+X-CSE-MsgGUID: a3FKF91CS0GeysoFxyXfoA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11832"; a="94683316"
 X-IronPort-AV: E=Sophos;i="6.24,233,1774335600"; 
-   d="scan'208";a="95036721"
-Received: from orviesa004.jf.intel.com ([10.64.159.144])
-  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Jun 2026 04:56:21 -0700
-X-CSE-ConnectionGUID: MwUPi+6pS8Cq1G9RVUlGNQ==
-X-CSE-MsgGUID: TuRbyUU5Q/68vrOwhx8OPQ==
+   d="scan'208";a="94683316"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+  by orvoesa105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Jun 2026 05:19:44 -0700
+X-CSE-ConnectionGUID: B7OjnqsRQEixcvKJEwnbxg==
+X-CSE-MsgGUID: dfLIyfHYTAKDobdyePXMlQ==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.24,233,1774335600"; 
-   d="scan'208";a="256166706"
-Received: from kniemiec-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.96])
-  by orviesa004-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Jun 2026 04:56:16 -0700
-Date: Tue, 30 Jun 2026 14:56:14 +0300
-From: Andy Shevchenko <andriy.shevchenko@intel.com>
-To: Kim Jinseob <kimjinseob88@gmail.com>
-Cc: Jonathan Cameron <jic23@kernel.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	David Lechner <dlechner@baylibre.com>,
-	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
-	Andy Shevchenko <andy@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>, linux-iio@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH RFC v6 4/5] iio: osf: add authenticated stream parser
-Message-ID: <akOu3mXLvJa06CoO@ashevche-desk.local>
-References: <20260628191337.937-1-kimjinseob88@gmail.com>
- <20260628191337.937-5-kimjinseob88@gmail.com>
- <akJ818gkVzLN7HqU@ashevche-desk.local>
- <20260630000623.0c030d5f@jic23-huawei>
- <CALMSewJo-tnQL9KRyvABHpAf0-k=yOd1N=JzgK91rk0R0j_CBA@mail.gmail.com>
+   d="scan'208";a="254160487"
+Received: from xiaoyaol-hp-g830.ccr.corp.intel.com (HELO [10.239.158.70]) ([10.239.158.70])
+  by fmviesa004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Jun 2026 05:19:30 -0700
+Message-ID: <a8b4641f-ae3b-4b19-81e5-84e3c05b9760@intel.com>
+Date: Tue, 30 Jun 2026 20:19:27 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CALMSewJo-tnQL9KRyvABHpAf0-k=yOd1N=JzgK91rk0R0j_CBA@mail.gmail.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 09/46] KVM: guest_memfd: Introduce function to check
+ GFN private/shared status
+To: ackerleytng@google.com, aik@amd.com, andrew.jones@linux.dev,
+ binbin.wu@linux.intel.com, brauner@kernel.org, chao.p.peng@linux.intel.com,
+ david@kernel.org, jmattson@google.com, jthoughton@google.com,
+ michael.roth@amd.com, oupton@kernel.org, pankaj.gupta@amd.com,
+ qperret@google.com, rick.p.edgecombe@intel.com, rientjes@google.com,
+ shivankg@amd.com, steven.price@arm.com, tabba@google.com,
+ willy@infradead.org, wyihan@google.com, yan.y.zhao@intel.com,
+ forkloop@google.com, pratyush@kernel.org, suzuki.poulose@arm.com,
+ aneesh.kumar@kernel.org, liam@infradead.org,
+ Paolo Bonzini <pbonzini@redhat.com>, Sean Christopherson
+ <seanjc@google.com>, Thomas Gleixner <tglx@kernel.org>,
+ Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+ Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+ "H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>,
+ Masami Hiramatsu <mhiramat@kernel.org>,
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+ Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>,
+ Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>,
+ Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>,
+ Nhat Pham <nphamcs@gmail.com>, Barry Song <baohua@kernel.org>,
+ Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>,
+ Wei Xu <weixugc@google.com>, Youngjun Park <youngjun.park@lge.com>,
+ Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>,
+ Kiryl Shutsemau <kas@kernel.org>, Baoquan He <baoquan.he@linux.dev>,
+ Jason Gunthorpe <jgg@ziepe.ca>, Vlastimil Babka <vbabka@kernel.org>
+Cc: kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kselftest@vger.kernel.org, linux-mm@kvack.org,
+ linux-coco@lists.linux.dev
+References: <20260618-gmem-inplace-conversion-v8-0-9d2959357853@google.com>
+ <20260618-gmem-inplace-conversion-v8-9-9d2959357853@google.com>
+Content-Language: en-US
+From: Xiaoyao Li <xiaoyao.li@intel.com>
+In-Reply-To: <20260618-gmem-inplace-conversion-v8-9-9d2959357853@google.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.66 / 15.00];
+X-Spamd-Result: default: False [-5.16 / 15.00];
 	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,kernel.org:s:+];
-	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64];
 	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-94157-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[14];
+	TAGGED_FROM(0.00)[bounces-94158-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FORGED_RECIPIENTS(0.00)[m:kimjinseob88@gmail.com,m:jic23@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:dlechner@baylibre.com,m:nuno.sa@analog.com,m:andy@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-iio@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[andriy.shevchenko@intel.com,linux-doc@vger.kernel.org];
-	HAS_ORG_HEADER(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[andriy.shevchenko@intel.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
+	FREEMAIL_TO(0.00)[google.com,amd.com,linux.dev,linux.intel.com,kernel.org,intel.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca];
+	FORGED_SENDER(0.00)[xiaoyao.li@intel.com,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:ackerleytng@google.com,m:aik@amd.com,m:andrew.jones@linux.dev,m:binbin.wu@linux.intel.com,m:brauner@kernel.org,m:chao.p.peng@linux.intel.com,m:david@kernel.org,m:jmattson@google.com,m:jthoughton@google.com,m:michael.roth@amd.com,m:oupton@kernel.org,m:pankaj.gupta@amd.com,m:qperret@google.com,m:rick.p.edgecombe@intel.com,m:rientjes@google.com,m:shivankg@amd.com,m:steven.price@arm.com,m:tabba@google.com,m:willy@infradead.org,m:wyihan@google.com,m:yan.y.zhao@intel.com,m:forkloop@google.com,m:pratyush@kernel.org,m:suzuki.poulose@arm.com,m:aneesh.kumar@kernel.org,m:liam@infradead.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:shuah@kernel.org,m:vannapurve@google.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencen
+ t.com,m:shikemeng@huaweicloud.com,m:nphamcs@gmail.com,m:baohua@kernel.org,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:kas@kernel.org,m:baoquan.he@linux.dev,m:jgg@ziepe.ca,m:vbabka@kernel.org,m:kvm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,m:linux-coco@lists.linux.dev,s:lists@lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[intel.com:+];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,intel.com:dkim,intel.com:from_mime,vger.kernel.org:from_smtp]
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[xiaoyao.li@intel.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[64];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:dkim,intel.com:email,intel.com:mid,intel.com:from_mime,vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 50FF96E411F
+X-Rspamd-Queue-Id: 0689D6E4244
 
-On Tue, Jun 30, 2026 at 02:12:06PM +0900, Kim Jinseob wrote:
-
-And do not top-post!
-
-> Understood. I missed applying the earlier style feedback consistently
-> across this file, and I should have explicitly replied where a previous
-> comment was not addressed.
+On 6/19/2026 8:31 AM, Ackerley Tng via B4 Relay wrote:
+> From: Ackerley Tng <ackerleytng@google.com>
 > 
-> I will these:
-> - reuse the existing OSF magic definition instead of duplicating a byte array
->   in the stream parser;
-> - use loop-local variables where the variable is not used outside the loop;
-> - rework the stream error handling so authenticated and unauthenticated
->   failures are handled deliberately;
-> - either update partial_frames where appropriate or remove the unused
->   statistic.
+> Introduce function for KVM to check the private/shared status of guest
+> memory at a given GFN.
 > 
-> I will also check lore for the previous versions and track the earlier review
-> comments before posting another revision, making sure each one is either
-> addressed in code or explicitly answered.
+> This will be used in a later patch.
+> 
+> Signed-off-by: Ackerley Tng <ackerleytng@google.com>
+> Co-developed-by: Sean Christopherson <seanjc@google.com>
+> Signed-off-by: Sean Christopherson <seanjc@google.com>
 
-...
+With binbin's comment resolved,
 
-> > > Come again when each of the given comment will be either addressed or argued.
-> > >
-> > Likewise.  Please make sure to address every comment either through
-> > changes or through reply to the earlier thread.  Perhaps some emails
-> > have gone astray (it happens!). It can be a good idea to take a quick
-> > look at lore.kernel.org to make sure you aren't missing any feedback
-> > on a previous version.
+Reviewed-by: Xiaoyao Li <xiaoyao.li@intel.com>
 
--- 
-With Best Regards,
-Andy Shevchenko
+BTW, it looks better to move the patch 01 just behind this one.
 
+> ---
+>   include/linux/kvm_host.h |  2 ++
+>   virt/kvm/guest_memfd.c   | 31 +++++++++++++++++++++++++++++++
+>   2 files changed, 33 insertions(+)
+> 
+> diff --git a/include/linux/kvm_host.h b/include/linux/kvm_host.h
+> index 3915da2a61778..27687fb9d5201 100644
+> --- a/include/linux/kvm_host.h
+> +++ b/include/linux/kvm_host.h
+> @@ -2575,6 +2575,8 @@ static inline bool kvm_mem_is_private(struct kvm *kvm, gfn_t gfn)
+>   #endif /* CONFIG_KVM_VM_MEMORY_ATTRIBUTES */
+>   
+>   #ifdef CONFIG_KVM_GUEST_MEMFD
+> +bool kvm_gmem_is_private(struct kvm *kvm, gfn_t gfn);
+> +
+>   int kvm_gmem_get_pfn(struct kvm *kvm, struct kvm_memory_slot *slot,
+>   		     gfn_t gfn, kvm_pfn_t *pfn, struct page **page,
+>   		     int *max_order);
+> diff --git a/virt/kvm/guest_memfd.c b/virt/kvm/guest_memfd.c
+> index 8101f64e0366f..bca912db5be6e 100644
+> --- a/virt/kvm/guest_memfd.c
+> +++ b/virt/kvm/guest_memfd.c
+> @@ -510,6 +510,37 @@ static int kvm_gmem_mmap(struct file *file, struct vm_area_struct *vma)
+>   	return 0;
+>   }
+>   
+> +bool kvm_gmem_is_private(struct kvm *kvm, gfn_t gfn)
+> +{
+> +	struct kvm_memory_slot *slot = gfn_to_memslot(kvm, gfn);
+> +	struct inode *inode;
+> +
+> +	/*
+> +	 * If this gfn has no associated memslot, there's no chance of the gfn
+> +	 * being backed by private memory, since guest_memfd must be used for
+> +	 * private memory, and guest_memfd must be associated with some memslot.
+> +	 */
+> +	if (!slot)
+> +		return 0;
+> +
+> +	CLASS(gmem_get_file, file)(slot);
+> +	if (!file)
+> +		return 0;
+> +
+> +	inode = file_inode(file);
+> +
+> +	/*
+> +	 * Rely on the maple tree's internal RCU lock to ensure a
+> +	 * stable result. This result can become stale as soon as the
+> +	 * lock is dropped, so the caller _must_ still protect
+> +	 * consumption of private vs. shared by checking
+> +	 * mmu_invalidate_retry_gfn() under mmu_lock to serialize
+> +	 * against ongoing attribute updates.
+> +	 */
+> +	return kvm_gmem_is_private_mem(inode, kvm_gmem_get_index(slot, gfn));
+> +}
+> +EXPORT_SYMBOL_FOR_KVM_INTERNAL(kvm_gmem_is_private);
+> +
+>   static struct file_operations kvm_gmem_fops = {
+>   	.mmap		= kvm_gmem_mmap,
+>   	.open		= generic_file_open,
+> 
 
 
