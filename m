@@ -1,69 +1,64 @@
-Return-Path: <linux-doc+bounces-94139-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94140-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id o/byMFpiQ2rFXgoAu9opvQ
-	(envelope-from <linux-doc+bounces-94139-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 08:29:46 +0200
+	id 0wu2LqdvQ2qeYQoAu9opvQ
+	(envelope-from <linux-doc+bounces-94140-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 09:26:31 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6BE576E0C01
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 08:29:46 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 76BFE6E11FE
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 09:26:31 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=bzOwEau2;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94139-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-94139-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=kIkLS++d;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94140-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-94140-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 880A730166DE
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 06:29:35 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id E435630071DD
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 07:26:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1C1BD27FD74;
-	Tue, 30 Jun 2026 06:29:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 90AF539A048;
+	Tue, 30 Jun 2026 07:26:27 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2361B257827;
-	Tue, 30 Jun 2026 06:29:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8DC18394797;
+	Tue, 30 Jun 2026 07:26:26 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782800973; cv=none; b=RrG803u8792Ov1BPske29PbPBqJOggh3+m0DhMSI0xwCSS/zGkgwPizs2+1qhcJfCSMqcROh6dxkoDBE8DyVQeD6Sz04FaiRhN/m7EtWsxOuRRTTvnhcSX7GhFyhWLBJwROR/k3eBaEKqLm9xX7LYR8VIcFLdhoJjbT7HRV2D7A=
+	t=1782804387; cv=none; b=jNSCZqLS1G9DkCkUXZxQNLI6CGrO865bNjWINPov4TD9S2pu90pNrVpatCnzfGwadrVGVj4/VqZ1eoK8ozWkKnCl26Nk2NA/hjd2RpHn5injyvKLxUtOYdo/yHaZZ4dJe0PE7+sw1VP5DcjbDNhmrlkqfmSsu/QFG8dO+XExyLM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782800973; c=relaxed/simple;
-	bh=xx05GJO2blYEosxfNzQZ7F/MRFjRiTrWU+OnO8HLSpE=;
+	s=arc-20240116; t=1782804387; c=relaxed/simple;
+	bh=4Qykl1DAzexPzA14pjSagYez6F0f/KCIu6wyOZjFuwk=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=eqhjsqHmdLed2f/pc6U5KmmatfaN+GsFRqFn9Ia5rMyjYsAxd4FxVcKl7kl+NAohj0qnDLPCeDe9TyTngIh8zdN1Smk8Vqhcql1wXNtB5fABQEuavVF+T/TzYmUQpwL86Cv9nEsgSveENgL1LIrXpdOJkr6n2cte/aIHEg7C2Is=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bzOwEau2; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 16CE71F000E9;
-	Tue, 30 Jun 2026 06:29:30 +0000 (UTC)
+	 Content-Type:Content-Disposition:In-Reply-To; b=DDoadUXvZ+CisBX4lYHWkTPNv3LSGDh4w/GXlmi6PEZUzQKQ0OAJlMr8m1cq482L+FDgnIy2OEjv28E3krOwa1Waa+CwgXbKoWJ81kL1A6wkgnCfZy2EO7F3qq2mMx9w7PcEiCB9MGaJ7gprhAbrFZ1hUrL4ci/sF7rk13LkD5A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kIkLS++d; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0DD771F000E9;
+	Tue, 30 Jun 2026 07:26:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782800972;
-	bh=xx05GJO2blYEosxfNzQZ7F/MRFjRiTrWU+OnO8HLSpE=;
+	s=k20260515; t=1782804386;
+	bh=jxaNAkivZ1AVZW+PKQW8rZahuz3xPS1ieWwF7Eg9Yek=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=bzOwEau2Bl6p0XLHz1D3eJadtj9eiV8o0ZY6FheoUvGmbu/gdk2URuPW5lIskGQe8
-	 e3wQ3CwPGYNv5ZW2XZFGL1e68V2Y8S22HitqV8bFj+KTjk3veELn7w/pW3duQv6ADs
-	 /QwUW8TFsM9dW4gSEdaB9IJnk6O+x2WY+ro3WGzfqHZZe6jhMXFM0TblQLftY1dZMx
-	 Dd4ZlELkZLdMI7Ir+u3JOPuGUnO3Zg3CapKcW8WC50FP/Fgac0yeT5vgRv1Fq6a6rg
-	 u7hcaI84IFh0+rUvPg8pY1YD2BW9NsrbtjGzdnFHHn4yK5JGkC223SOkOMSHMEN/pt
-	 iEnkcZFoagy4g==
-Date: Tue, 30 Jun 2026 08:29:28 +0200
+	b=kIkLS++dnq5uONRuP5/hadR6FUC1ngfBC9zPyoJapY2xWLccOuHhezeJD44qUjLs3
+	 VuIfvHz8gvaSL+gGqCyeYw8Rl6uD8+N+LouAYfrV+M2e92mYSeWYOq1zFBSZLX1ALi
+	 m3wjqXbkkcjUXyRUa26U+/LZHq6fER0UKfKSl3ptBMhEmhfqLuNULlPEKIcwuTTc5J
+	 lycOJTEvTe2Ek2fMSb+HR1sk78YjpNnuMC/YbRsKo6bcV3dOjtodTumq0HbaRxEBCx
+	 PKqDqx2dVhvPyUhk9Kx8ZOmObd0qlunMSrMahjdFP7FtvqxPxYPpqGi2SDtDUZOgL6
+	 0fw9yTjPwU+iQ==
+Date: Tue, 30 Jun 2026 09:26:21 +0200
 From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
-Cc: Andrew Lunn <andrew@lunn.ch>, 
-	Piergiorgio Beruto <pier.beruto@onsemi.com>, Heiner Kallweit <hkallweit1@gmail.com>, 
-	Russell King <linux@armlinux.org.uk>, "David S. Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, 
-	Paolo Abeni <pabeni@redhat.com>, Andrew Lunn <andrew+netdev@lunn.ch>, 
-	Parthiban Veerasooran <parthiban.veerasooran@microchip.com>, Richard Cochran <richardcochran@gmail.com>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Simon Horman <horms@kernel.org>, 
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, netdev@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, linux-doc@vger.kernel.org, 
-	Jerry Ray <jerry.ray@microchip.com>
-Subject: Re: [PATCH net-next v6 14/15] dt-bindings: net: add onsemi's S2500
-Message-ID: <20260630-beryl-mongrel-of-exercise-abf63a@quoll>
-References: <20260629-s2500-mac-phy-support-v6-0-18ce79500371@onsemi.com>
- <20260629-s2500-mac-phy-support-v6-14-18ce79500371@onsemi.com>
+To: Alexis Czezar Torreno <alexisczezar.torreno@analog.com>
+Cc: Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+	linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org
+Subject: Re: [PATCH 1/6] dt-bindings: hwmon: (pmbus/max20830): add
+ enable-gpios property
+Message-ID: <20260630-cuddly-quiet-jackdaw-b7ab3d@quoll>
+References: <20260630-dev-max20830c-v1-0-a02786bde470@analog.com>
+ <20260630-dev-max20830c-v1-1-a02786bde470@analog.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -72,55 +67,70 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260629-s2500-mac-phy-support-v6-14-18ce79500371@onsemi.com>
+In-Reply-To: <20260630-dev-max20830c-v1-1-a02786bde470@analog.com>
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-3.16 / 15.00];
 	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:Selvamani.Rajagopal@onsemi.com,m:andrew@lunn.ch,m:pier.beruto@onsemi.com,m:hkallweit1@gmail.com,m:linux@armlinux.org.uk,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:andrew+netdev@lunn.ch,m:parthiban.veerasooran@microchip.com,m:richardcochran@gmail.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:netdev@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jerry.ray@microchip.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94139-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-94140-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:alexisczezar.torreno@analog.com,m:linux@roeck-us.net,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-hwmon@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
 	FORGED_SENDER(0.00)[krzk@kernel.org,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[krzk@kernel.org,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[lunn.ch,onsemi.com,gmail.com,armlinux.org.uk,davemloft.net,google.com,kernel.org,redhat.com,microchip.com,lwn.net,linuxfoundation.org,vger.kernel.org];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,netdev,dt];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,quoll:mid,vger.kernel.org:from_smtp]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[quoll:mid,analog.com:email,vger.kernel.org:from_smtp,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 6BE576E0C01
+X-Rspamd-Queue-Id: 76BFE6E11FE
 
-On Mon, Jun 29, 2026 at 10:23:44AM -0700, Selvamani Rajagopal wrote:
-> Add YAML device tree binding for the onsemi S2500 IEEE 802.3cg
+On Tue, Jun 30, 2026 at 10:46:43AM +0800, Alexis Czezar Torreno wrote:
+> Adding a missing entry for the MAX20830 EN (enable) pin.
 
-No improvements.
+... because? Device has it? Was missing?
 
-So not only you ignored review comment but you also ignored actual
-review tag.
+> 
+> Signed-off-by: Alexis Czezar Torreno <alexisczezar.torreno@analog.com>
+> ---
+>  Documentation/devicetree/bindings/hwmon/pmbus/adi,max20830.yaml | 5 +++++
+>  1 file changed, 5 insertions(+)
+> 
+> diff --git a/Documentation/devicetree/bindings/hwmon/pmbus/adi,max20830.yaml b/Documentation/devicetree/bindings/hwmon/pmbus/adi,max20830.yaml
+> index 1625dd59417f1b3ca689a9c86ca266da913d1217..ab8f6324866f29de8c66c3c63300845b2e02207e 100644
+> --- a/Documentation/devicetree/bindings/hwmon/pmbus/adi,max20830.yaml
+> +++ b/Documentation/devicetree/bindings/hwmon/pmbus/adi,max20830.yaml
+> @@ -39,6 +39,11 @@ properties:
+>      description:
+>        Optional 2.5V to 5.5V LDO input supply.
+>  
+> +  enable-gpios:
+> +    description:
+> +      GPIO connected to the EN (enable) pin.
+> +    maxItems: 1
 
-Don't worry, we can ignore your patches as well.
+Make also the example complete.
 
 Best regards,
 Krzysztof
