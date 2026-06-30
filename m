@@ -1,85 +1,85 @@
-Return-Path: <linux-doc+bounces-94127-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94128-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id gFgzG/I8Q2oWWAoAu9opvQ
-	(envelope-from <linux-doc+bounces-94127-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 05:50:10 +0200
+	id ZWLTCqhLQ2qOWgoAu9opvQ
+	(envelope-from <linux-doc+bounces-94128-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 06:52:56 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id CAF1A6E0245
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 05:50:09 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 823F56E055D
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 06:52:55 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=laZqm1hP;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94127-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94127-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=GtwpZS71;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94128-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94128-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=none;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id A41D2300DDFA
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 03:50:07 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id B3E6F3033A84
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 04:51:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 18E07346FA8;
-	Tue, 30 Jun 2026 03:50:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 87C733E1713;
+	Tue, 30 Jun 2026 04:51:56 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C67EF2D6E72
-	for <linux-doc@vger.kernel.org>; Tue, 30 Jun 2026 03:50:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E26D4396587
+	for <linux-doc@vger.kernel.org>; Tue, 30 Jun 2026 04:51:53 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782791406; cv=none; b=jY6aQSfTdnkOKwzTGMN7kag8A8fTiBTotD1iuILRUEf0ExOUT+VIjdjTkcL+TNWCwwgpxa8lAVphJrCh2q6fNun/gCXIoGoDGLNSRQb1FqbioTXITN077w9xwESwzmV3zQWJtna3dh6Cqa0hiQ/tkL8msNgu2AN2Mobut5/qgys=
+	t=1782795116; cv=none; b=kkXEIhJolML44NGrQpDEL5KuZpykmkX/CkShaWUaGNn/odcRwLxPdVRC0zrRj5PTBYKIHMc1QLTvrGGuZCBvjR/NwiqUx688qTE5n3ZX1q2meDx40jwkBQrRIvpl5MX9Mh16Y2aKWe1brF7NsXi6CvVk12zsAmu4DMCcDH/k7u4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782791406; c=relaxed/simple;
-	bh=JvndTcbdQfQeO0UnijpOjRGRT/07a4Eg6ZYoroFiGBo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=P56IH80WQd8P8tkBxLNHCX5IoqlwKdKD6TUTxcwOFe9M85JQoVcJnKil/qN7WcU7XULIE+fqL5mMMdh2H84VmFm7zvRvGJmKdTPiv4vD0fb1CeQqQcaFozZTe32Q2k/viLaIELRnU2WtVDSixLPwUYX1SJ6h1oNZx0v6WarK0Hw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=laZqm1hP; arc=none smtp.client-ip=209.85.214.169
-Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-2c74383c93cso37839725ad.1
-        for <linux-doc@vger.kernel.org>; Mon, 29 Jun 2026 20:50:04 -0700 (PDT)
+	s=arc-20240116; t=1782795116; c=relaxed/simple;
+	bh=+GppeprviWx6+rVyB68VL2Wo6H4/HCZqlCd4o4IZogQ=;
+	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
+	 In-Reply-To:Content-Type; b=aN8HM6nZOYqLUoSu4fw0tFda7UOeF2cfHPulbmsNspEQfwx2x0dD3V5+7nqzX0xs3HrBVSc0SdsPpvLNfBCMVCAeJjJ/WBwQjEHAjPGAZ+GQasJaDuDxT58A7NI0XWLzbisuT94vheAfKpsuIfzUKod5OxeTO8yavVgvzG658wQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=GtwpZS71; arc=none smtp.client-ip=209.85.216.53
+Received: by mail-pj1-f53.google.com with SMTP id 98e67ed59e1d1-38060005f1cso55756a91.0
+        for <linux-doc@vger.kernel.org>; Mon, 29 Jun 2026 21:51:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782791404; x=1783396204; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to;
-        bh=9jNn6l3C++B0B2TNE2QWEt8huvRiKl6q6nWK2b2vEJo=;
-        b=laZqm1hPkItOWfi9zs+hKCr+qvAuSZrXwpEx826JGy17VjyoAe1hW5/WSrWn18Xa45
-         nQDfbrWP4Jtw5Ol5GYLuJSD10Ag132ycKqV13TfvgZWD7TmXvM75E42rTzr33nTtJTTn
-         twE+L/94qwLif5jK2NWTGTz3UcppBdXR8YAM6rnwW2COTqaQoq8+Ej/Qq1uowDIIZkHx
-         sPhryP3I9JwjLrkDogbVSJNAr8U5ftrvFA8dOCSpgXX/lQhxO5Ar/Bnx+DZzGQ3OOV09
-         AVD4zuSpyHz1jKJS9GQByyPKOSYSflrqwehjI7ZHF5xeGIvZjlRwUYtYySGEqUSgyffU
-         Fg9Q==
+        d=gmail.com; s=20251104; t=1782795113; x=1783399913; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:sender:from:to:cc:subject:date:message-id:reply-to;
+        bh=jCZdfuwHXPS5iUGzRiV5MmLLNlygQGOVBjUIXIsu3F0=;
+        b=GtwpZS71HjWhJEdrhZTdkA1Noj+UM+NjRadB4MW2O5dLwBZzGHEty2QqrwqJDRhZRz
+         I00Yn6WAndHqPKx8YTuyyffybCBo0kJMtlHgBMzHtQgxx/unArfUV/sMzn2/CFe5wZ+i
+         MLFChpDaaLvdfiOMszfw48vKN6L5CywlQB9hpkx5Ji4WPWf/nc8etPK9NgWQtMqsDnhL
+         QTjRFCEDmidtPJSWClEz8YDfYIdM6tnE2v5ZNJ/6HlNIkiEP4jpptqg4uLRTejKjz0K5
+         C3NE7iUuGJpsA900tntWxF2e54axaTmkWIllQXBm7l/ZuexH0CYMk5xUNcqLoH1WM8mW
+         E5/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782791404; x=1783396204;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=9jNn6l3C++B0B2TNE2QWEt8huvRiKl6q6nWK2b2vEJo=;
-        b=SwOMpUaTTTXKWbRvLY3J3vUYMPNybNjcsvV0TJ192hrlzxjXFQFoJr0PIWuC9gHCLI
-         62mQ9Z8mbHRWsjgxjb8OntHKvUlTLh3oeGErJpLwXWGu/4p2fPyJL9jT522ZyQw6mIiS
-         OncMnakJE7X/LC733CMyKmBOCVC4FhYd1UeRxq96cHngsQB84jH+PnyMzuVnUeoAFBkq
-         6ttXdgZqN7w4LxYx8CZbhicCrDbUjzlrT/d4Hb0cp5PA5rD9zFmiLngirKbBZYcVWVGw
-         V96eM7e1ixT54Y1eH1g5CTp46myh8AjfTWDwHAlRIy9T/oY7Xt/pS7sEzc5zhtIHAMMt
-         sgOg==
-X-Forwarded-Encrypted: i=1; AHgh+RoA1xm00jQFn8tDs7wSACTd9YNPm0CL5HYm6POfHr9uGXGAL5SEoFLsTLQCVuB3C51MCmOQicKQ15Q=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzaMA3uGS8W8264JbVC4iezqoqmuduEYhWdVPHN/T6NAnJOzjSk
-	N1NH02HeShMhpqDwZHm/Ten9s5DkS9OFHANqo6HFUvyH2MRWlMDEFyZ5
-X-Gm-Gg: AfdE7cmBIEHwC4GhfDotyML1hZ2GikV+6aIBCr9C5zbIKR5xScpDCmnF2/uZn1Wy1EH
-	KhdhZ9cuh2nZRQaHq2x+16VBwi0H+2VtPBYhWfWVPoaSCI3uZNVBBR3Pw3qccUntJ/l3sdsi+qA
-	ZrWaPyrXt/oo2XrWraUYxlEaKgKHuFuio2fXu7d5nki7Zlx++2mOlPRbbkL9+9aPudwtk2Q7JyC
-	jFHDQkIngqh8GfF4YPLzTIPRMHs6YdxTKgWQdsvo3KJaREkMFR/qphcP21gj3wk8rWVB7M+GnSP
-	TJDcmhFN5tEcqxBQlbIOziedOdf+U7pSQtBTBl7CZihgDxiTvujL5nk3O+Ual8dCT4uBJsn0GiO
-	61hebUyxpiMeFMiFpa868OojRp+ysIewZwlJMsfoy+oG+qqu6qEuSouUZQHPgX5HpuhGL2noqb3
-	a1gXszenJVw8bWt0OToUuN+TQjfDAOEOZkagtEktGl2uBFrYqp9RD53yeE0Bv0mA==
-X-Received: by 2002:a17:902:f607:b0:2c9:97a7:3275 with SMTP id d9443c01a7336-2ca2ea334b3mr15260325ad.38.1782791403973;
-        Mon, 29 Jun 2026 20:50:03 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1782795113; x=1783399913;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=jCZdfuwHXPS5iUGzRiV5MmLLNlygQGOVBjUIXIsu3F0=;
+        b=DeYahKSzBTRF3DuNNZvCxpkm/JFZNtcs68iLdhiEqdAMsb9ofxy+ex25zGKh7gO7Xq
+         No+MeJbaonWT302Z1kTNt30gxiJJVkeBAkwafzksaRmahMkRk3XAJWyKDimylax73vUV
+         VcXAB8PVed6fVyna3UhZnSv7lzHzkE7l36ALRxGbkX6QTtErhW2DhBAgyDGBoZN/i63k
+         cTKIK8CCC23yjzRpF6qcowfc9KFJXIRb0tdKZdZzkRgWYHqnhWt6nOqpC+dQ7SeHyV1x
+         qamzU1+hmy3P48MaxvpmXuBdlhgWl5U02wt1lLcY1/WocbFyA6ZsnVjG+lWuVBo3WMog
+         8Jmw==
+X-Forwarded-Encrypted: i=1; AFNElJ9oEqrk0i52iNUv4VJOf+d/SZ5e9oz2UiVT/QIWwJFoY3SIeNnNJHvOZY4CATHNbL9UZSpWeeGmCuM=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw5sr2sgXz9SlvNlKBOqhMYQsqV1r+tJZcvQCQYvA9PHAJTrcCw
+	CaHxHg3C/QMblStqDB3yaAjJrsHT10fYMG/t8qOjQh+QH8ipokt6cMEkA+RWSQ==
+X-Gm-Gg: AfdE7cmdBvoqWZ8ghnI9Y7C/j9fx+eI/y/tJJ7jYC53lpqPJ5omUT/CCcO86xriQb2f
+	rUYHzEQSmTBkWdna1pIaWqNB2vfJMEFsFhQejmeOtmetVr3PdivCNSbbjt3XK+mUNmJEN+yTdd1
+	ytEAUFU9YMi0Pwv1HRFY72+LtAi2FYDj+Y1OZDrTI/W+0pdLGBopUSgEJYaHsx1xFBMIh3cWZms
+	y3Gg1Z1pcSDhMIbdgITptSRR0Q1MReOnSyzBmbV8tYy0I1GwP6ot80PAzxqLXFfH1ulqnkLavKR
+	rfHdy/VXJOwuVsLkTYAFEJTwdCKyMiVUhG8zEFY/pp+K3pielLRS2nI73OsM/h49Rc1b2Xy8mWc
+	0l+ozudsI/36fgRqKqjOR9UVO8vb72KLv2xPgNcGZxV8Bf6RsNSRPWjsoHR7JNxBtcsfHKuqC8A
+	vEkEOPbsVcx7YmIEDOQsbQVIWdLgmxo13V6qd8GCPDkj2WpwvzC5LuOV74JSOZqGTjsOz++TS7
+X-Received: by 2002:a05:6a21:10e:b0:3bf:9bd9:cf60 with SMTP id adf61e73a8af0-3bfd2637dd4mr251772637.6.1782795113067;
+        Mon, 29 Jun 2026 21:51:53 -0700 (PDT)
 Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5? ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ca37c738easm4553965ad.20.2026.06.29.20.50.02
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c9bbf95b8a4sm761296a12.18.2026.06.29.21.51.51
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 29 Jun 2026 20:50:03 -0700 (PDT)
+        Mon, 29 Jun 2026 21:51:52 -0700 (PDT)
 Sender: Guenter Roeck <groeck7@gmail.com>
-Message-ID: <836b833e-e503-4cbb-92f7-3574f3fb430f@roeck-us.net>
-Date: Mon, 29 Jun 2026 20:50:02 -0700
+Message-ID: <1eab7897-ffca-487b-b40b-958be4f30f49@roeck-us.net>
+Date: Mon, 29 Jun 2026 21:51:51 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -88,6 +88,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 2/6] hwmon: (pmbus/max20830): add support for enable GPIO
+From: Guenter Roeck <linux@roeck-us.net>
 To: Alexis Czezar Torreno <alexisczezar.torreno@analog.com>,
  Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
  Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
@@ -96,8 +97,8 @@ Cc: linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org,
  linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
 References: <20260630-dev-max20830c-v1-0-a02786bde470@analog.com>
  <20260630-dev-max20830c-v1-2-a02786bde470@analog.com>
+ <836b833e-e503-4cbb-92f7-3574f3fb430f@roeck-us.net>
 Content-Language: en-US
-From: Guenter Roeck <linux@roeck-us.net>
 Autocrypt: addr=linux@roeck-us.net; keydata=
  xsFNBE6H1WcBEACu6jIcw5kZ5dGeJ7E7B2uweQR/4FGxH10/H1O1+ApmcQ9i87XdZQiB9cpN
  RYHA7RCEK2dh6dDccykQk3bC90xXMPg+O3R+C/SkwcnUak1UZaeK/SwQbq/t0tkMzYDRxfJ7
@@ -141,19 +142,19 @@ Autocrypt: addr=linux@roeck-us.net; keydata=
  F0WaMvQMNrk9UAUziVcUkLU52NS9SXqpVg8vgrO0JKx97IXFPcNh0DWsSj/0Y8HO/RDkGXYn
  FDMj7fZSPKyPQPmEHg+W/KzxSSfdgWIHF2QaQ0b2q1wOSec4Rti52ohmNSY+KNIW/zODhugJ
  np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
-In-Reply-To: <20260630-dev-max20830c-v1-2-a02786bde470@analog.com>
+In-Reply-To: <836b833e-e503-4cbb-92f7-3574f3fb430f@roeck-us.net>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-94127-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-94128-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS(0.00)[m:alexisczezar.torreno@analog.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-hwmon@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
@@ -164,7 +165,7 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	FORGED_SENDER(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
@@ -176,57 +177,76 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	RCPT_COUNT_SEVEN(0.00)[10];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,roeck-us.net:mid,roeck-us.net:from_mime,analog.com:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: CAF1A6E0245
+X-Rspamd-Queue-Id: 823F56E055D
 
-On 6/29/26 19:46, Alexis Czezar Torreno wrote:
-> Add support for the GPIO controlled EN pin. The EN pin is asserted high
-> for device to operate.
+On 6/29/26 20:50, Guenter Roeck wrote:
+> On 6/29/26 19:46, Alexis Czezar Torreno wrote:
+>> Add support for the GPIO controlled EN pin. The EN pin is asserted high
+>> for device to operate.
+>>
+>> Signed-off-by: Alexis Czezar Torreno <alexisczezar.torreno@analog.com>
+>> ---
+>>   drivers/hwmon/pmbus/max20830.c | 7 +++++++
+>>   1 file changed, 7 insertions(+)
+>>
+>> diff --git a/drivers/hwmon/pmbus/max20830.c b/drivers/hwmon/pmbus/max20830.c
+>> index cb2c23672166d641852199ca07eb716924f4f286..cb3a39d747edee3aefb0fb4051ef957436b3c15b 100644
+>> --- a/drivers/hwmon/pmbus/max20830.c
+>> +++ b/drivers/hwmon/pmbus/max20830.c
+>> @@ -6,6 +6,7 @@
+>>    */
+>>   #include <linux/errno.h>
+>> +#include <linux/gpio/consumer.h>
+>>   #include <linux/i2c.h>
+>>   #include <linux/mod_devicetable.h>
+>>   #include <linux/module.h>
+>> @@ -29,8 +30,14 @@ static struct pmbus_driver_info max20830_info = {
+>>   static int max20830_probe(struct i2c_client *client)
+>>   {
+>>       u8 buf[I2C_SMBUS_BLOCK_MAX + 1] = {};
+>> +    struct gpio_desc *enable_gpio;
+>>       int ret;
+>> +    enable_gpio = devm_gpiod_get_optional(&client->dev, "enable", GPIOD_OUT_HIGH);
+>> +    if (IS_ERR(enable_gpio))
+>> +        return dev_err_probe(&client->dev, PTR_ERR(enable_gpio),
+>> +                     "Failed to get enable GPIO\n");
+>> +
 > 
-> Signed-off-by: Alexis Czezar Torreno <alexisczezar.torreno@analog.com>
-> ---
->   drivers/hwmon/pmbus/max20830.c | 7 +++++++
->   1 file changed, 7 insertions(+)
+> The above code gets the gpio reference, and then it doesn't do anything
+> with it. What exactly is the point of this exercise ? Where is the
+> chip actually enabled ?
 > 
-> diff --git a/drivers/hwmon/pmbus/max20830.c b/drivers/hwmon/pmbus/max20830.c
-> index cb2c23672166d641852199ca07eb716924f4f286..cb3a39d747edee3aefb0fb4051ef957436b3c15b 100644
-> --- a/drivers/hwmon/pmbus/max20830.c
-> +++ b/drivers/hwmon/pmbus/max20830.c
-> @@ -6,6 +6,7 @@
->    */
->   
->   #include <linux/errno.h>
-> +#include <linux/gpio/consumer.h>
->   #include <linux/i2c.h>
->   #include <linux/mod_devicetable.h>
->   #include <linux/module.h>
-> @@ -29,8 +30,14 @@ static struct pmbus_driver_info max20830_info = {
->   static int max20830_probe(struct i2c_client *client)
->   {
->   	u8 buf[I2C_SMBUS_BLOCK_MAX + 1] = {};
-> +	struct gpio_desc *enable_gpio;
->   	int ret;
->   
-> +	enable_gpio = devm_gpiod_get_optional(&client->dev, "enable", GPIOD_OUT_HIGH);
-> +	if (IS_ERR(enable_gpio))
-> +		return dev_err_probe(&client->dev, PTR_ERR(enable_gpio),
-> +				     "Failed to get enable GPIO\n");
-> +
+> Do you have an actual customer with such a set-up or is this
+> "just in case" ? Have you tested this code to ensure that the chip
+> is actually enabled in this setup ?
+> 
 
-The above code gets the gpio reference, and then it doesn't do anything
-with it. What exactly is the point of this exercise ? Where is the
-chip actually enabled ?
+Also, please explain the need in detail, especially in the context of
+PMBus command 0x02 (ON_OFF_CONFIG) which can be used to configure
+the pin functionality. Specifically, what would be the point of
+trying to force-enable the chip if on-off-config happens to be set
+to 0x1b (ignore EN pin and require OPERATION = 0x80) ?
+And if ON_OFF_CONFIG happens to be set to 0x17 (Ignore OPERATION
+command), why not just set it to 0x1b and override EN ?
 
-Do you have an actual customer with such a set-up or is this
-"just in case" ? Have you tested this code to ensure that the chip
-is actually enabled in this setup ?
+In other words, I expect the use case to be explained in the context
+of the ON_OFF_CONFIG and OPERATION commands. "The EN pin is asserted
+high for device to operate" is misleading and only half-true since that
+is only the case if the chip is configured to actually use it (which,
+I notice, you are not doing here).
 
-If there is indeed a use case where a customer indeed connects the
-enable pin to a gpio output, wouldn't that same customer also want
-to connect the "pgood" output to a gpio pin ? And what about
-the LDOIN pin ? Shouldn't that be connected to a power supply ?
-
+Thanks,
 Guenter
+
+> If there is indeed a use case where a customer indeed connects the
+> enable pin to a gpio output, wouldn't that same customer also want
+> to connect the "pgood" output to a gpio pin ? And what about
+> the LDOIN pin ? Shouldn't that be connected to a power supply ?
+> 
+> Guenter
+> 
+> 
 
 
