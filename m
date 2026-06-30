@@ -1,170 +1,162 @@
-Return-Path: <linux-doc+bounces-94188-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94189-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id xScvKmffQ2pHkwoAu9opvQ
-	(envelope-from <linux-doc+bounces-94188-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 17:23:19 +0200
+	id uH3nIMHhQ2rpkwoAu9opvQ
+	(envelope-from <linux-doc+bounces-94189-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 17:33:21 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 45D3F6E5E4D
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 17:23:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EB28D6E5F97
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 17:33:20 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=intel.com header.s=Intel header.b=MHc1saCt;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94188-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-94188-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=intel.com;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=l9gR71D9;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94189-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-94189-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id AD586304C772
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 15:23:13 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id B6C623081EBF
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 15:30:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0392C36C9C1;
-	Tue, 30 Jun 2026 15:23:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 73ACC3E9589;
+	Tue, 30 Jun 2026 15:29:20 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.10])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 532C0365A0B;
-	Tue, 30 Jun 2026 15:23:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 31ED13E558F
+	for <linux-doc@vger.kernel.org>; Tue, 30 Jun 2026 15:29:16 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782832989; cv=none; b=vAmB9frnSmofYBaOQPLz2q5SCUU8AfnfmeoN6eaOhjM635aFYENG5wjRyPVO/vchbpxF2ONngRr8/PJIuHB7qBN/0zgZWgl4M4nMyjz6KU2z9hJkQe25Av1+I1CWm3Z18z44IrulrC7hqZDZ4Thjgn0pf1jpIu4rYBbXVrVX99U=
+	t=1782833360; cv=none; b=HP9sMaFCmXh0E1njkzhn0SkGVaToJwhs6Se2MXZAPgBWigWbPL0er2PbNtRiglOCW7KfywuW3tAFvOZ797WtAdVnUsplq7NNw/+ENptpVWWn2sow94fwNpO5uwbJ3zMqPJWp7+Yf62fJhf9MjacCEIsL/rhDiZVf9Mk5BvwUnqA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782832989; c=relaxed/simple;
-	bh=mnhOZlEbmNxq5YsCTla36EPa18OakR+bG+jTvbDU7EM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=QEpVwiMe/qfO62U9HvuEZ+3Lv4pLd3W+kx0RwPfT/WFqpZGtQi2ldL4QPilbSq624sjN0RknBbvRdhF8vDqD39lUYI0NdtNOBN7sq9unn1g2LIaJJunpv32NWQHy2gFVeGcwCUzCC7FWotu5SXfkVybeCmALy3HZ4AJq2si50Sw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=MHc1saCt; arc=none smtp.client-ip=192.198.163.10
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1782832988; x=1814368988;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=mnhOZlEbmNxq5YsCTla36EPa18OakR+bG+jTvbDU7EM=;
-  b=MHc1saCtMsiBF66Fg81f6NeGqR5kPocL6EBqbk7JMtVxhyzCaGzaiCNu
-   K4hToOvkqG1nldxuyvxUADU7bLXxDVd+FncWUlt5vhbsWSOTCiYRydoHm
-   nI+AtOsvVnIgZbRD78HBZzjD29t6SjSe6tMM7xZu3y7Y+utUbNDVt2tWZ
-   V86GnJYPKH3CXFTpjG/Sm3iRjK4QeFvxJdx3Uhyxkm5u5kzV5pPjmsbAH
-   GHHFnR79hhXJg5E4Nfu0M5kPqe1hUaZ12pu/RxD0AGPRmVuRMltAnAXrS
-   IyhtMB4/xZpr0s16OqK4Yibs3k8/IJNHirUySwroFslhzlPF02Gn3sTyb
-   A==;
-X-CSE-ConnectionGUID: TqBX5rh4R+qB3nYFulFVLQ==
-X-CSE-MsgGUID: B0anJVctRvmxLz0kjTY0xg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11832"; a="94933094"
-X-IronPort-AV: E=Sophos;i="6.24,234,1774335600"; 
-   d="scan'208";a="94933094"
-Received: from fmviesa004.fm.intel.com ([10.60.135.144])
-  by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Jun 2026 08:23:07 -0700
-X-CSE-ConnectionGUID: koRW/7MOQAWk92/0rXPmZQ==
-X-CSE-MsgGUID: uXiMTSzqQL6ITT9qU5pf5g==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.24,234,1774335600"; 
-   d="scan'208";a="254200312"
-Received: from xiaoyaol-hp-g830.ccr.corp.intel.com (HELO [10.124.232.239]) ([10.124.232.239])
-  by fmviesa004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Jun 2026 08:22:54 -0700
-Message-ID: <a1b06afb-af6e-4666-8c7d-990e7fa150fa@intel.com>
-Date: Tue, 30 Jun 2026 23:22:51 +0800
+	s=arc-20240116; t=1782833360; c=relaxed/simple;
+	bh=WQRlvOCE1auyNFN25FfdvwAf8yTgJGPbfJqgPD3mkZg=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=sZcM53aIAZZH0wyYjtMhOSs4RiTOM5+LL/sJ94p6cejbNq+ZFPuK80UYpA8gd5YhzUil3X92IkO1eo4hCutIXaCrLCng1xXfL2w813eORyuFyAPsM8OPxtNvPzjhwIgq5OLt/UaFSxR+vEb4PCgN4OzThGBWVN6144FEy4FNnfY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=l9gR71D9; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 481EC1F00ADB
+	for <linux-doc@vger.kernel.org>; Tue, 30 Jun 2026 15:29:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1782833355;
+	bh=WQRlvOCE1auyNFN25FfdvwAf8yTgJGPbfJqgPD3mkZg=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=l9gR71D9A6uav7d5RvE8QcK9rQeFL2y3W1qche7RQUI9lOP2HhOU7uzwnleAUzXDc
+	 H5xzmFMe3gMPOEwSRZqy9u/bJQjUvWcKmo2ID//e3KXWnM2A5FwCLI5whSjBhSYTN+
+	 lcwp6M4pno6s8K0fCEvGVh96vBQegwRBPEzKykcKZpHhUMXr+KFvm07eaUZKm3Yk5h
+	 rLhaA+01Q0wiv1qrc3JC2BBJBOUCPHTRJ+lpBNpelvyEolCVdX1OkgTdQ3rkdxZZSI
+	 wJ3JrwmjqDTYwedbN/JY8gACsAP0ZLdFuRAO47jIJUuO9anmhtrPaBcm63E6d2+4D5
+	 Puuc2/AUqIJzg==
+Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-c0c15bd6b8fso481058066b.0
+        for <linux-doc@vger.kernel.org>; Tue, 30 Jun 2026 08:29:15 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RoR1PbPkS8qfr5iv4hRbOs1ycRkRaCnKo75W8u3anPpil1pdtpENc39JzDC2KJY2ShYfzKHtUpf67E=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyogHlga0kmMwQXPBrBBI1KgLtaH8LxLQ7FmJnC/cghGar8R1QK
+	1TxhEoEEM6oR5iIUldJJJL3VzmYzGwbRyRj6dOu3njhNUd00Ks3aMJY5vpbTy9yQYed2ZOgOghy
+	HNNybp72r93qYdO6I8XmYAVXtqpzIQA==
+X-Received: by 2002:a05:6938:a08a:20b0:c12:7e9f:5ae3 with SMTP id
+ a640c23a62f3a-c12872a34b4mr141132866b.15.1782833353756; Tue, 30 Jun 2026
+ 08:29:13 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 07/46] KVM: Rename memory attribute APIs to prepare for
- in-place gmem conversion
-To: ackerleytng@google.com, aik@amd.com, andrew.jones@linux.dev,
- binbin.wu@linux.intel.com, brauner@kernel.org, chao.p.peng@linux.intel.com,
- david@kernel.org, jmattson@google.com, jthoughton@google.com,
- michael.roth@amd.com, oupton@kernel.org, pankaj.gupta@amd.com,
- qperret@google.com, rick.p.edgecombe@intel.com, rientjes@google.com,
- shivankg@amd.com, steven.price@arm.com, tabba@google.com,
- willy@infradead.org, wyihan@google.com, yan.y.zhao@intel.com,
- forkloop@google.com, pratyush@kernel.org, suzuki.poulose@arm.com,
- aneesh.kumar@kernel.org, liam@infradead.org,
- Paolo Bonzini <pbonzini@redhat.com>, Sean Christopherson
- <seanjc@google.com>, Thomas Gleixner <tglx@kernel.org>,
- Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
- Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
- "H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>,
- Masami Hiramatsu <mhiramat@kernel.org>,
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>,
- Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>,
- Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>,
- Nhat Pham <nphamcs@gmail.com>, Barry Song <baohua@kernel.org>,
- Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>,
- Wei Xu <weixugc@google.com>, Youngjun Park <youngjun.park@lge.com>,
- Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>,
- Kiryl Shutsemau <kas@kernel.org>, Baoquan He <baoquan.he@linux.dev>,
- Jason Gunthorpe <jgg@ziepe.ca>, Vlastimil Babka <vbabka@kernel.org>
-Cc: kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kselftest@vger.kernel.org, linux-mm@kvack.org,
- linux-coco@lists.linux.dev
-References: <20260618-gmem-inplace-conversion-v8-0-9d2959357853@google.com>
- <20260618-gmem-inplace-conversion-v8-7-9d2959357853@google.com>
-Content-Language: en-US
-From: Xiaoyao Li <xiaoyao.li@intel.com>
-In-Reply-To: <20260618-gmem-inplace-conversion-v8-7-9d2959357853@google.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20260614-s2500-mac-phy-support-v5-0-89874b72f725@onsemi.com>
+ <20260614-s2500-mac-phy-support-v5-14-89874b72f725@onsemi.com>
+ <20260615041056.GA1426553-robh@kernel.org> <CYYPR02MB9828308552BBC60427E8EF2283E82@CYYPR02MB9828.namprd02.prod.outlook.com>
+In-Reply-To: <CYYPR02MB9828308552BBC60427E8EF2283E82@CYYPR02MB9828.namprd02.prod.outlook.com>
+From: Rob Herring <robh@kernel.org>
+Date: Tue, 30 Jun 2026 10:29:02 -0500
+X-Gmail-Original-Message-ID: <CAL_Jsq+H5qSep2+Wd6i+pir0fK8NDAdPj=7Ka7+qoG82QZeFqg@mail.gmail.com>
+X-Gm-Features: AVVi8CcE2u2osQeWDN_q0N5A5Le8-51ZMka5QYUjnRlp7Tx6YdkygDNIGVndh54
+Message-ID: <CAL_Jsq+H5qSep2+Wd6i+pir0fK8NDAdPj=7Ka7+qoG82QZeFqg@mail.gmail.com>
+Subject: Re: [PATCH net-next v5 14/15] dt-bindings: net: add onsemi's S2500
+To: Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
+Cc: Andrew Lunn <andrew@lunn.ch>, Piergiorgio Beruto <Pier.Beruto@onsemi.com>, 
+	Heiner Kallweit <hkallweit1@gmail.com>, Russell King <linux@armlinux.org.uk>, 
+	"David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Andrew Lunn <andrew+netdev@lunn.ch>, 
+	Parthiban Veerasooran <parthiban.veerasooran@microchip.com>, 
+	Richard Cochran <richardcochran@gmail.com>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Simon Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, 
+	"netdev@vger.kernel.org" <netdev@vger.kernel.org>, 
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, 
+	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, 
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>, Jerry Ray <jerry.ray@microchip.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-5.16 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [-3.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-94188-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[google.com,amd.com,linux.dev,linux.intel.com,kernel.org,intel.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca];
-	FORGED_SENDER(0.00)[xiaoyao.li@intel.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[22];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:ackerleytng@google.com,m:aik@amd.com,m:andrew.jones@linux.dev,m:binbin.wu@linux.intel.com,m:brauner@kernel.org,m:chao.p.peng@linux.intel.com,m:david@kernel.org,m:jmattson@google.com,m:jthoughton@google.com,m:michael.roth@amd.com,m:oupton@kernel.org,m:pankaj.gupta@amd.com,m:qperret@google.com,m:rick.p.edgecombe@intel.com,m:rientjes@google.com,m:shivankg@amd.com,m:steven.price@arm.com,m:tabba@google.com,m:willy@infradead.org,m:wyihan@google.com,m:yan.y.zhao@intel.com,m:forkloop@google.com,m:pratyush@kernel.org,m:suzuki.poulose@arm.com,m:aneesh.kumar@kernel.org,m:liam@infradead.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:shuah@kernel.org,m:vannapurve@google.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencen
- t.com,m:shikemeng@huaweicloud.com,m:nphamcs@gmail.com,m:baohua@kernel.org,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:kas@kernel.org,m:baoquan.he@linux.dev,m:jgg@ziepe.ca,m:vbabka@kernel.org,m:kvm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,m:linux-coco@lists.linux.dev,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-94189-lists,linux-doc=lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:Selvamani.Rajagopal@onsemi.com,m:andrew@lunn.ch,m:Pier.Beruto@onsemi.com,m:hkallweit1@gmail.com,m:linux@armlinux.org.uk,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:andrew+netdev@lunn.ch,m:parthiban.veerasooran@microchip.com,m:richardcochran@gmail.com,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:netdev@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jerry.ray@microchip.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[robh@kernel.org,linux-doc@vger.kernel.org];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[lunn.ch,onsemi.com,gmail.com,armlinux.org.uk,davemloft.net,google.com,kernel.org,redhat.com,microchip.com,lwn.net,linuxfoundation.org,vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	TO_DN_SOME(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[xiaoyao.li@intel.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[64];
-	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[robh@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	TAGGED_RCPT(0.00)[linux-doc,netdev,dt];
+	TO_DN_SOME(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,intel.com:dkim,intel.com:mid,intel.com:from_mime,vger.kernel.org:from_smtp]
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[onsemi.com:email,mail.gmail.com:mid,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 45D3F6E5E4D
+X-Rspamd-Queue-Id: EB28D6E5F97
 
-On 6/19/2026 8:31 AM, Ackerley Tng via B4 Relay wrote:
-> -bool kvm_range_has_memory_attributes(struct kvm *kvm, gfn_t start, gfn_t end,
-> -				     unsigned long mask, unsigned long attrs);
-> +bool kvm_range_has_vm_memory_attributes(struct kvm *kvm, gfn_t start, gfn_t end,
-> +					unsigned long mask, unsigned long attrs);
->   bool kvm_arch_pre_set_memory_attributes(struct kvm *kvm,
->   					struct kvm_gfn_range *range);
->   bool kvm_arch_post_set_memory_attributes(struct kvm *kvm,
+On Mon, Jun 29, 2026 at 12:07=E2=80=AFPM Selvamani Rajagopal
+<Selvamani.Rajagopal@onsemi.com> wrote:
+>
+> > -----Original Message-----
+> > From: Rob Herring <robh@kernel.org>
+> > Sent: Sunday, June 14, 2026 9:11 PM
+> > To: Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
+> > Subject: Re: [PATCH net-next v5 14/15] dt-bindings: net: add onsemi's S=
+2500
+> >
+> >
+> >
+> > And you are missing tags from prior versions. It is your responsibility
+> > to add them.
+>
+> I added the prior version's link under each version. Somehow "b4 prep --s=
+how-revision" command doesn't pickup the older
+> versions. It shows v4 and v5 correctly as the emails containing patches w=
+ere sent in a threaded manner.
+>
+> But with v1,v2,v3, as each patch was sent through individual email (with =
+proper subject line, of course) using outlook.
+> I don't know if there is a way to fix this.
 
-We have
+While links to prior versions is nice, tags means Reviewed-by,
+Acked-by, etc. lines. If you get those on version N, then you have to
+add them on version N+1 and later unless there are significant changes
+that nullify them. However, you don't need to send another version
+only to add tags. The tools will pickup tags from the current version.
 
-  - kvm_pre_set_memory_attributes()
-  - kvm_arch_pre_set_memory_attributes()
-  - kvm_arch_post_set_memory_attributes()
+The only advice for outlook is don't use it. It is incapable of
+following maillist etiquette.
 
-left, do they need to be renamed as well?
-
-then the interesting one is kvm_vm_set_mem_attributes(), which contains 
-"vm" already while it means "vm ioctl". Do we need to rename it to
-kvm_vm_set_vm_mem_attributes()?
-
+Rob
 
