@@ -1,152 +1,164 @@
-Return-Path: <linux-doc+bounces-94150-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94151-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id yISlKumKQ2p/awoAu9opvQ
-	(envelope-from <linux-doc+bounces-94150-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 11:22:49 +0200
+	id zCx2BDShQ2podwoAu9opvQ
+	(envelope-from <linux-doc+bounces-94151-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 12:57:56 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 121036E216D
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 11:22:49 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 65B1E6E33DE
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 12:57:55 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=intel.com header.s=Intel header.b=HuAvpylI;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94150-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94150-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=intel.com header.s=Intel header.b=a0PS2a2L;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94151-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94151-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=intel.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id EABAC30B1B06
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 09:14:25 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 6C03230D8BAF
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 10:45:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 394943E5A14;
-	Tue, 30 Jun 2026 09:14:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C9F693F8243;
+	Tue, 30 Jun 2026 10:45:38 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.18])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.13])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D401F37DEB6
-	for <linux-doc@vger.kernel.org>; Tue, 30 Jun 2026 09:14:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A1443F7892;
+	Tue, 30 Jun 2026 10:45:33 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782810863; cv=none; b=NULSgtsRu2+dQ/B3CbOCvHOnJHBrLFmqiuM1Hqds5zdAoFQPUn8FRpB32/QZeK79Ti/y6AnX/AxyuUQlQDQcWv1Oxv8whupw9gslceTefooUrfoSEX1Vm6eVEnc8oXHnFdD9Nn8cAcNwME6vz79WYO6slob09khe8OXjLhPSank=
+	t=1782816338; cv=none; b=cvJjOQbgvm8kOSurwGQe5mkV4bHytifTBejG/AfP7MgKy3XzVFDh7PyS9MtB32qqOfp+MmIn7D0uqpPBrahovqHxumVVfEGLwdk8v3Q3P7m9ghdsuvk7XhW6wYHZjO9zqFNjeDTI0rIEqpBChMbt2K7bW2Uv4xOM3NmRm01V3yw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782810863; c=relaxed/simple;
-	bh=v75CRjgxFA/pyoEsru7YfSISG9bmd5def/H4rNBDfeQ=;
-	h=Date:From:To:Cc:Subject:Message-ID; b=sLLRGrXSGvvIbhism/U+AKkV5KJChRN9xu6f9gFQF819UUwChmJarBzh0WVvLnTBISGMnVP/FqHmw35vF4RCnFT3zsmCcUZtbYrHGqWMrO9a5vGIilVUwxz7o+ou01DfSJ8F42GLOqXiFo31EBq9dXgskrVUAP1dVNZyvGtdzk0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=HuAvpylI; arc=none smtp.client-ip=192.198.163.18
+	s=arc-20240116; t=1782816338; c=relaxed/simple;
+	bh=p7ttWHTIJD2B+YvyB5/VMyFJN3tiZnBMZB/A/uANGBQ=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=or5u3Sv04xcflzI0bEt/FxDUvK4y5qQEwutEZzQ5nWJFh6h9lHShz0I+5cKxzXwar9HR8nw2OhGwh2FmVGBHMwi5LS+/qjhAxBerAO8qGARlIBmKlApVFmi6WQfF3VU3k6Wg7PYR8pud7CteJ5ddgibN274fw+HGmZoEaJh2eO4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=a0PS2a2L; arc=none smtp.client-ip=198.175.65.13
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1782810862; x=1814346862;
-  h=date:from:to:cc:subject:message-id;
-  bh=v75CRjgxFA/pyoEsru7YfSISG9bmd5def/H4rNBDfeQ=;
-  b=HuAvpylItPkph+B0SJfATFsxLEVqKMyp77e4Zre0shEQdHvZ4A00qgVr
-   o+YJQKj9kKveuUCUAVYqjJIdf+Ns7wrdtUs5YORpSYmniC492UooAZMIa
-   UlwO4sKWQYTcNXFttTzalrx0n3RoUeGngKkWQ2NqpwtWIz6suzVyN+Sd6
-   PWAWMn4YJ9oUkBQXAuBhoCwQKIcmS7Ey1X7VugbLY8fFoNw3vmcSyheWL
-   5669IayIXw/L7G01eZ1yttOdiY/hRkq31dL+mKR7zndrQTOaLlxUbwp9Q
-   73lJR5/R5Cch9U7+6M8DQovc89q04DbvHF6GOJ+MMDZfeJk2X8x2+02ct
-   A==;
-X-CSE-ConnectionGUID: gJTlZ+k9SSuJkHaGr2KiqQ==
-X-CSE-MsgGUID: 10eHWHhmQ8SnUVfowp8v9g==
-X-IronPort-AV: E=McAfee;i="6800,10657,11832"; a="82630466"
+  t=1782816334; x=1814352334;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=p7ttWHTIJD2B+YvyB5/VMyFJN3tiZnBMZB/A/uANGBQ=;
+  b=a0PS2a2L6VfcUwwdzTGSXQmdRp4zinWZuyrRBQu+N/wR1LrXFxoXe704
+   L8J0URditpT1g7DoW9gTfrUZwyhH/GjSmjjoZ8RJtSowhfHGE/qNAiyQG
+   IS1hAPOVLdpUX+1uqx/OcJjOWAZDh9IjtzAnWb5sm2gWyEAYqStUIyYXv
+   hddKlcJ5D5XUX2VxqpjvMYFR4jNf1wQHfVzUhWzRDsuJh0LXJo77txYk8
+   6P9xdh8FO80uITITD3YSjrEYT08QDSV08QF4wk/1t5vhyiC2uVD1cVtvC
+   Yyb0TedtEw0rv0SP3ChwFDO/CxLo2wfYGDVAv+eaJLWF3u/1UpS3DNoGK
+   w==;
+X-CSE-ConnectionGUID: qEwK8lmtTS+lHQ4O6drWoQ==
+X-CSE-MsgGUID: nffDEoFyRQKpA9D3+8vTQA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11832"; a="94676767"
 X-IronPort-AV: E=Sophos;i="6.24,233,1774335600"; 
-   d="scan'208";a="82630466"
-Received: from fmviesa001.fm.intel.com ([10.60.135.141])
-  by fmvoesa112.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Jun 2026 02:14:21 -0700
-X-CSE-ConnectionGUID: GKN7wfrnS4SYgUAlmS+Zow==
-X-CSE-MsgGUID: YpjrdLywTLan7IxxLjDa0A==
+   d="scan'208";a="94676767"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+  by orvoesa105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Jun 2026 03:45:33 -0700
+X-CSE-ConnectionGUID: G0umWb9HQS+An4zhZ2J2GQ==
+X-CSE-MsgGUID: 7pJP5KKLS4CYFPJWUNGiXg==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.24,233,1774335600"; 
-   d="scan'208";a="276484927"
-Received: from igk-lkp-server01.igk.intel.com (HELO e5a8ed462067) ([10.211.93.152])
-  by fmviesa001.fm.intel.com with ESMTP; 30 Jun 2026 02:14:19 -0700
-Received: from kbuild by e5a8ed462067 with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1weUXn-000000000R1-0H4d;
-	Tue, 30 Jun 2026 09:14:15 +0000
-Date: Tue, 30 Jun 2026 11:13:54 +0200
-From: kernel test robot <lkp@intel.com>
-To: Waqar Hameed <waqar.hameed@axis.com>
-Cc: oe-kbuild-all@lists.linux.dev, 0day robot <lkp@intel.com>,
- linux-doc@vger.kernel.org
-Subject: htmldocs:
- Documentation/ABI/testing/sysfs-class-power-rt9467:1: WARNING: Inline
- emphasis start-string without end-string. [docutils]
-Message-ID: <202606301107.ZU8YbyPc-lkp@intel.com>
-User-Agent: s-nail v14.9.25
+   d="scan'208";a="251179200"
+Received: from xiaoyaol-hp-g830.ccr.corp.intel.com (HELO [10.239.158.70]) ([10.239.158.70])
+  by orviesa010-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Jun 2026 03:45:19 -0700
+Message-ID: <8206e8f8-4759-4dcc-a764-1c7b0ab0a757@intel.com>
+Date: Tue, 30 Jun 2026 18:45:17 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 02/46] KVM: Rename KVM_GENERIC_MEMORY_ATTRIBUTES to
+ KVM_VM_MEMORY_ATTRIBUTES
+To: ackerleytng@google.com, aik@amd.com, andrew.jones@linux.dev,
+ binbin.wu@linux.intel.com, brauner@kernel.org, chao.p.peng@linux.intel.com,
+ david@kernel.org, jmattson@google.com, jthoughton@google.com,
+ michael.roth@amd.com, oupton@kernel.org, pankaj.gupta@amd.com,
+ qperret@google.com, rick.p.edgecombe@intel.com, rientjes@google.com,
+ shivankg@amd.com, steven.price@arm.com, tabba@google.com,
+ willy@infradead.org, wyihan@google.com, yan.y.zhao@intel.com,
+ forkloop@google.com, pratyush@kernel.org, suzuki.poulose@arm.com,
+ aneesh.kumar@kernel.org, liam@infradead.org,
+ Paolo Bonzini <pbonzini@redhat.com>, Sean Christopherson
+ <seanjc@google.com>, Thomas Gleixner <tglx@kernel.org>,
+ Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+ Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+ "H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>,
+ Masami Hiramatsu <mhiramat@kernel.org>,
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+ Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>,
+ Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>,
+ Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>,
+ Nhat Pham <nphamcs@gmail.com>, Barry Song <baohua@kernel.org>,
+ Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>,
+ Wei Xu <weixugc@google.com>, Youngjun Park <youngjun.park@lge.com>,
+ Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>,
+ Kiryl Shutsemau <kas@kernel.org>, Baoquan He <baoquan.he@linux.dev>,
+ Jason Gunthorpe <jgg@ziepe.ca>, Vlastimil Babka <vbabka@kernel.org>
+Cc: kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kselftest@vger.kernel.org, linux-mm@kvack.org,
+ linux-coco@lists.linux.dev
+References: <20260618-gmem-inplace-conversion-v8-0-9d2959357853@google.com>
+ <20260618-gmem-inplace-conversion-v8-2-9d2959357853@google.com>
+Content-Language: en-US
+From: Xiaoyao Li <xiaoyao.li@intel.com>
+In-Reply-To: <20260618-gmem-inplace-conversion-v8-2-9d2959357853@google.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.66 / 15.00];
+X-Spamd-Result: default: False [-5.16 / 15.00];
 	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,kernel.org:s:+];
-	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-94150-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-94151-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS(0.00)[m:waqar.hameed@axis.com,m:oe-kbuild-all@lists.linux.dev,m:lkp@intel.com,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
-	RCPT_COUNT_THREE(0.00)[4];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
+	FREEMAIL_TO(0.00)[google.com,amd.com,linux.dev,linux.intel.com,kernel.org,intel.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca];
+	FORGED_SENDER(0.00)[xiaoyao.li@intel.com,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:ackerleytng@google.com,m:aik@amd.com,m:andrew.jones@linux.dev,m:binbin.wu@linux.intel.com,m:brauner@kernel.org,m:chao.p.peng@linux.intel.com,m:david@kernel.org,m:jmattson@google.com,m:jthoughton@google.com,m:michael.roth@amd.com,m:oupton@kernel.org,m:pankaj.gupta@amd.com,m:qperret@google.com,m:rick.p.edgecombe@intel.com,m:rientjes@google.com,m:shivankg@amd.com,m:steven.price@arm.com,m:tabba@google.com,m:willy@infradead.org,m:wyihan@google.com,m:yan.y.zhao@intel.com,m:forkloop@google.com,m:pratyush@kernel.org,m:suzuki.poulose@arm.com,m:aneesh.kumar@kernel.org,m:liam@infradead.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:shuah@kernel.org,m:vannapurve@google.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencen
+ t.com,m:shikemeng@huaweicloud.com,m:nphamcs@gmail.com,m:baohua@kernel.org,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:kas@kernel.org,m:baoquan.he@linux.dev,m:jgg@ziepe.ca,m:vbabka@kernel.org,m:kvm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,m:linux-coco@lists.linux.dev,s:lists@lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[intel.com:+];
-	RCVD_COUNT_FIVE(0.00)[6];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[xiaoyao.li@intel.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[64];
+	MID_RHS_MATCH_FROM(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,intel.com:dkim,intel.com:email,intel.com:mid,intel.com:from_mime,01.org:url]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,intel.com:dkim,intel.com:email,intel.com:mid,intel.com:from_mime,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 121036E216D
+X-Rspamd-Queue-Id: 65B1E6E33DE
 
-tree:   https://github.com/intel-lab-lkp/linux/commits/Waqar-Hameed/power-supply-Add-sysfs-entry-for-system-load-control/20260629-235714
-head:   7f627c0c3f8b6254753610a05254e70cd6a2032d
-commit: 7d5467fb719bb1294f12059ff16ae2faf74cf1de power: supply: rt9467: Use POWER_SUPPLY_PROP_LOAD_SWITCH
-date:   17 hours ago
-compiler: clang version 22.1.8 (https://github.com/llvm/llvm-project ca7933e47d3a3451d81e72ac174dcb5aa28b59d1)
-docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
-reproduce: (https://download.01.org/0day-ci/archive/20260630/202606301107.ZU8YbyPc-lkp@intel.com/reproduce)
+On 6/19/2026 8:31 AM, Ackerley Tng via B4 Relay wrote:
+> From: Sean Christopherson <seanjc@google.com>
+> 
+> Rename the per-VM memory attributes Kconfig to make it explicitly about
+> per-VM attributes in anticipation of adding memory attributes support to
+> guest_memfd, at which point it will be possible (and desirable) to have
+> memory attributes without the per-VM support, even in x86.
+> 
+> No functional change intended.
+> 
+> Signed-off-by: Sean Christopherson <seanjc@google.com>
+> Reviewed-by: Fuad Tabba <tabba@google.com>
+> Signed-off-by: Ackerley Tng <ackerleytng@google.com>
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202606301107.ZU8YbyPc-lkp@intel.com/
-
-All warnings (new ones prefixed by >>):
-
-   ============  ===========================================
-   1             automatic adjustment of input current limit
-   0             no adjustment of input current limit. This
-   helps for more unusual power sources like
-   solar modules. [docutils]
->> Documentation/ABI/testing/sysfs-class-power-rt9467:1: WARNING: Inline emphasis start-string without end-string. [docutils]
-   Documentation/ABI/testing/sysfs-class-power-rt9471:1: WARNING: Inline emphasis start-string without end-string. [docutils]
-   WARNING: ./block/blk-map.c:366 Excess function parameter 'op' description in 'bio_copy_kern'
-   Documentation/devicetree/kernel-api:11: ./drivers/of/base.c:2161: WARNING: Inline emphasis start-string without end-string. [docutils]
-   Documentation/devicetree/kernel-api:11: ./drivers/of/base.c:2351: WARNING: Inline emphasis start-string without end-string. [docutils]
-   Documentation/driver-api/basics:42: ./kernel/time/time.c:370: WARNING: Duplicate C declaration, also defined at driver-api/basics:436.
-
-
-vim +1 Documentation/ABI/testing/sysfs-class-power-rt9467
-
-eedb923279b78c ChiaEn Wu 2023-01-03 @1  What:		/sys/class/power_supply/rt9467-*/sysoff_enable
-
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+Reviewed-by: Xiaoyao Li <xiaoyao.li@intel.com>
 
