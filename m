@@ -1,120 +1,122 @@
-Return-Path: <linux-doc+bounces-94242-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94243-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id pXRoIpshRGp+pAoAu9opvQ
-	(envelope-from <linux-doc+bounces-94242-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 22:05:47 +0200
+	id L5SJON0kRGqspQoAu9opvQ
+	(envelope-from <linux-doc+bounces-94243-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 22:19:41 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id CBD276E7B8D
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 22:05:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0E07C6E7C40
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 22:19:41 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lwn.net header.s=20201203 header.b=PU4U9dbf;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94242-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94242-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=lwn.net;
+	dkim=pass header.d=linux-foundation.org header.s=korg header.b=w4MuhO2i;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94243-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94243-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=none;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 012473061977
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 20:05:03 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E16BA307139A
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2026 20:19:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 89678364EB0;
-	Tue, 30 Jun 2026 20:05:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3C1DD3B27ED;
+	Tue, 30 Jun 2026 20:19:18 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7082532FA29;
-	Tue, 30 Jun 2026 20:05:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 27B28374735;
+	Tue, 30 Jun 2026 20:19:16 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782849902; cv=none; b=s+lpz2VlGfg6liRtBCbIaKAIs6qTg/nxAfYNaYGCRgBLnaJcWRE6BR28J6K8CAZcgYB6hrxL//g6PCfLarGBU8qZBJI2cHhVYHGDVSQDp1asczDiopO1o+ydhF3vn/1gOgQ00HrpkF5x46jWKet6irPByEtSyj18q+68EowWLcM=
+	t=1782850758; cv=none; b=d/Ws4NoU3owU1HNekyCzKi7fXSVaifN7qjSxt94rlhmRE+AgNqzGVWc8TcxTtMQDbu8om3Fr5RQEqhoTjBzzCPX0mrmxvP7iGSbeFxwkrGMXkTx4W9wG1oeC9KlcmTHfHzorAU61jYlGaD1UQiGRD6A1vg/RKrEsyAgzYzkmaLE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782849902; c=relaxed/simple;
-	bh=/t+ubOZUuusFckrpiVlyHMKu7qY8Yp4Rg6AJS/6E6CQ=;
-	h=From:To:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=um25soDWIonBoV0HYKDHcICgtHcDUSD5KQtwOM961XWjmRVmiBVCsFz0b0tZxIW13ASN2xBXcoxTdDEZBonV3yz/AXrMK9Bujd2jxrudfLYzt0a6q52AfaftrI1cxWrOToCkSnaGner74umnWqnJ7lDsbcMdd5/VJfwlVZ2YSyc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=PU4U9dbf; arc=none smtp.client-ip=45.79.88.28
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 7AEC440E27
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1782849900; bh=YoQ3XVOFiMR/6BPoDiUIuxJ3jzCsoWLoA17li2QxRdA=;
-	h=From:To:Subject:In-Reply-To:References:Date:From;
-	b=PU4U9dbfwK8iGhVjv8+a8gfDq+G28Q6dyGbDuwv9w7Jt8Dkqd7htE32MYPjxNprxP
-	 jicvdEbj68Wge6DkHIb/jXFhEIyNg8G534+sX/1/RSlWtCcIoQZm6tMQLETjVrULWL
-	 OmWyMuEzi7AMb2vrEXcZmT2l6y//vfs3mgrq/458IqgQNNIIRoSNrtI/7t2/wz+tkZ
-	 BdIehXMWUVBV9e/BZjKYAMylZG66Gn5M54QOuOT7+olMwMh4mC631C+FCt36+cfccW
-	 PYR+Ad/hP6dTtCuaek0pOztCWU0yDsThoEUJTGdrVUfOWIDPSse6OQWnafvRkgg8ZU
-	 u1apUDQSDbnZQ==
-Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 7AEC440E27;
-	Tue, 30 Jun 2026 20:05:00 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: Manuel Ebner <manuelebner@mailbox.org>, Shuah Khan
- <skhan@linuxfoundation.org>, Manuel Ebner <manuelebner@mailbox.org>,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] Documentation: locking.rst: update deprecated function
-In-Reply-To: <20260531175452.272136-2-manuelebner@mailbox.org>
-References: <20260531175452.272136-2-manuelebner@mailbox.org>
-Date: Tue, 30 Jun 2026 14:04:59 -0600
-Message-ID: <8733y3rdzo.fsf@trenco.lwn.net>
+	s=arc-20240116; t=1782850758; c=relaxed/simple;
+	bh=oxlRFg/iwbLML2nhonhDZJT/atpothAmrVWct/HQOlI=;
+	h=Date:From:To:Cc:Subject:Message-Id:In-Reply-To:References:
+	 Mime-Version:Content-Type; b=ex9Rvd3v7eAYMJQ5Inf2UQYCBWOWQ8Zl0fK6H0nIYZ6v/9efBJBgQ5fiGoWCMXF8rFVWoNV0V7X8bCrDKofLGo7Xh23coxuV0xTcOyl56DzYMNoy27a1AW7cwr7LNB7vOE+P8euKSRPNCJVYZRGWveDCLpalCHH2zTV7q+blI5Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b=w4MuhO2i; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 42DE81F000E9;
+	Tue, 30 Jun 2026 20:19:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=linux-foundation.org; s=korg; t=1782850756;
+	bh=xR+cURGiHZxqoJ7+yfUVxfoUewWAkloviweDWsdCuZ0=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=w4MuhO2iOCaOocWpVxUmI8FaSMXluXZ0p5jAAmsPH+pKjLCjTS8U6D2Zk48wmarIG
+	 SMxVOeOraTWWq22L9/BZVYjMcqyySzEvQRko+1KrqvhYdk42pZw45Kk17tf5KO7Lwl
+	 vgcwTbk/tyNvqy/70gP+BdsvCmoCfAMzcxTgIo5s=
+Date: Tue, 30 Jun 2026 13:19:15 -0700
+From: Andrew Morton <akpm@linux-foundation.org>
+To: Stanislav Kinsburskii <skinsburskii@gmail.com>
+Cc: Liam.Howlett@oracle.com, david@kernel.org, jgg@ziepe.ca, corbet@lwn.net,
+ leon@kernel.org, ljs@kernel.org, mhocko@suse.com, rppt@kernel.org,
+ shuah@kernel.org, skhan@linuxfoundation.org, surenb@google.com,
+ vbabka@kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-kselftest@vger.kernel.org, linux-mm@kvack.org
+Subject: Re: [PATCH v4 0/3] mm/hmm: Add mmap lock-drop support for
+ userfaultfd-backed mappings
+Message-Id: <20260630131915.a7a479fc92ad0b86bfc68173@linux-foundation.org>
+In-Reply-To: <178283277041.183052.6873574850714079228.stgit@skinsburskii>
+References: <178283277041.183052.6873574850714079228.stgit@skinsburskii>
+X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain
+Mime-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-1.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
-	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
+	MV_CASE(0.50)[];
+	R_DKIM_ALLOW(-0.20)[linux-foundation.org:s=korg];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:skinsburskii@gmail.com,m:Liam.Howlett@oracle.com,m:david@kernel.org,m:jgg@ziepe.ca,m:corbet@lwn.net,m:leon@kernel.org,m:ljs@kernel.org,m:mhocko@suse.com,m:rppt@kernel.org,m:shuah@kernel.org,m:skhan@linuxfoundation.org,m:surenb@google.com,m:vbabka@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,s:lists@lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
+	DMARC_NA(0.00)[linux-foundation.org];
+	FORGED_SENDER(0.00)[akpm@linux-foundation.org,linux-doc@vger.kernel.org];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94242-lists,linux-doc=lfdr.de];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_SENDER(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
-	TO_DN_SOME(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:manuelebner@mailbox.org,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	FREEMAIL_TO(0.00)[gmail.com];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	DKIM_TRACE(0.00)[lwn.net:+];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
+	TAGGED_FROM(0.00)[bounces-94243-lists,linux-doc=lfdr.de];
 	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[akpm@linux-foundation.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[linux-foundation.org:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	TO_DN_SOME(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,mailbox.org:email,trenco.lwn.net:mid,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,lwn.net:dkim,lwn.net:from_mime]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,sashiko.dev:url,linux-foundation.org:dkim,linux-foundation.org:mid,linux-foundation.org:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: CBD276E7B8D
+X-Rspamd-Queue-Id: 0E07C6E7C40
 
-Manuel Ebner <manuelebner@mailbox.org> writes:
+On Tue, 30 Jun 2026 08:21:21 -0700 Stanislav Kinsburskii <skinsburskii@gmail.com> wrote:
 
-> replace strcpy() with strscpy() as suggested in deprecated.rst
->
-> Signed-off-by: Manuel Ebner <manuelebner@mailbox.org>
-> ---
->  Documentation/kernel-hacking/locking.rst | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+> This series extends the HMM framework to support userfaultfd-backed memory
+> by allowing the mmap read lock to be dropped during hmm_range_fault().
 
-I've applied this, but that stuff is so old I wonder how much value it
-still has...
+Cool.
 
-jon
+AI review might have found some issues:
+
+	https://sashiko.dev/#/patchset/178283277041.183052.6873574850714079228.stgit@skinsburskii
+
+One of these is pre-existing so please take a look, see if there's
+something you feel should be done about it.
+
+As the series is presently unreviewed, I'll await that review feedback
+and/or v5, thanks.
+
 
