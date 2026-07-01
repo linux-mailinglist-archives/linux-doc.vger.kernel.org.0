@@ -1,466 +1,198 @@
-Return-Path: <linux-doc+bounces-94340-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94365-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id kSl5ABsORWoJ6AoAu9opvQ
-	(envelope-from <linux-doc+bounces-94340-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 14:54:51 +0200
+	id feqVDzYXRWpX6woAu9opvQ
+	(envelope-from <linux-doc+bounces-94365-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 15:33:42 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80BA46EDA3B
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 14:54:50 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 97E496EE2C4
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 15:33:41 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=ANasSRQc;
-	dkim=pass header.d=redhat.com header.s=google header.b=SL6mUymt;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94340-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94340-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=redhat.com;
+	dkim=fail ("headers rsa verify failed") header.d=cispa.de header.s=2023-rsa header.b=ZhbIw9fq;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94365-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94365-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=cispa.de (policy=none);
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 70F273298EDA
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 12:35:44 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 0D1D6320763F
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 13:04:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 060774968E3;
-	Wed,  1 Jul 2026 12:29:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 382B848BD3C;
+	Wed,  1 Jul 2026 13:02:42 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+Received: from mx-2023-1.gwdg.de (mx-2023-1.gwdg.de [134.76.10.21])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 319374963C7
-	for <linux-doc@vger.kernel.org>; Wed,  1 Jul 2026 12:29:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE63C48BD2A;
+	Wed,  1 Jul 2026 13:02:38 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782908966; cv=none; b=ljkukAKW+H+bCVbdsFdrSy0vp1COSNpzq6DSpYDwWw+zX/Dg25ozTzj79/CyoXXEmk4C45VV8o6Xnqr6XMvSj3JgjzM4cTzDALOPrWJXKqbPBUvk3tovhdnUoluK//s1KgJneACXbMEIKNlFxHCrizX5lnSH25RoX9ZNhb25u1w=
+	t=1782910962; cv=none; b=IsVRJFUog3Fx8H5Jsw8FaaEIfict4FSUhpmQgM2lGRNznk0F4n/uIcTx/pi1Pp3f4JhxIEwJJgoHuz+UoQ9eMZEGCW1UJWXQiwp5jSj2HFyggotI7McDQAOVKsYmwpvDOM5ozS2MqK4UL72rdkpvb+Fom2RgsDlWVzz355hsejQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782908966; c=relaxed/simple;
-	bh=EsRgTGwn9/ciJwe1BkaH+LEHpHlf8QDoSBbMPs4cZVY=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=QmrDqT6HhRNx3SYxkQLh48Jl5t8JNnHtnjV/JSl12Lo22x3gTFQyfBv0k9geYqjvUQVu2ETk+tc3urenTSpdaKw4rbWGaUVsHKQDwePCVEStExdRbdqvoY07eA+YRDOeFm2vdhkTe91+B/IryEQp7WedOtJzC4x2naei0YdZPhw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=ANasSRQc; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=SL6mUymt; arc=none smtp.client-ip=170.10.129.124
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1782908964;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=8QBml1wXQrKkB4Dbp2yh/EBSKR66LFRDhLUx+zmUXDw=;
-	b=ANasSRQcTp4nNULF2ZmFfTR1J+7NLsWKo2VKs2jzZDJR4Shup+t2xq22coIT9dKd28jnDw
-	YkIuUHztQ3pSmzVSWespUJV/HBXj2qdcEd+ntBdi3RW+fpc9qqTmdDf5moaOk+n/CDqB7/
-	OxQtQU/zJ0JMNtSqAA8bLqiSLVZtdAA=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-255-L52MIif1PKSFEL8l3nmyqA-1; Wed, 01 Jul 2026 08:29:23 -0400
-X-MC-Unique: L52MIif1PKSFEL8l3nmyqA-1
-X-Mimecast-MFC-AGG-ID: L52MIif1PKSFEL8l3nmyqA_1782908962
-Received: by mail-wm1-f71.google.com with SMTP id 5b1f17b1804b1-493b786d550so7128145e9.0
-        for <linux-doc@vger.kernel.org>; Wed, 01 Jul 2026 05:29:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1782908962; x=1783513762; darn=vger.kernel.org;
-        h=mime-version:user-agent:content-transfer-encoding:autocrypt
-         :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=8QBml1wXQrKkB4Dbp2yh/EBSKR66LFRDhLUx+zmUXDw=;
-        b=SL6mUymt9O2j3NjXXcD4VjA8HECRahGlEVSS7X5Wgq/dv2QlAOk30Rwg6iOgRqEnFn
-         uNCBD2QGci8iX8eMKrLiCHp+mLUP4hles+72Xiev7G6wcyciSAFbdaQYAPtNcRlSQkI2
-         CfiObUKhfloDNX0z1v9LaghXHqXXYHS7A9xTEaGP94c2Ybp1+N7zc4FyJVH/kZNvvHx8
-         RiYmcFsvHsZDfSgw7UrZE5yugdxqT5TN2uoIhPAhQM8Q6tWha8jVePVT5yDit53jLuRV
-         +YEOREK0sx9eP1uzLpAA8TMXMnaP5dKGAwCICgPtmRK4obwefb9b9se7msduFanp1rRi
-         5MNw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782908962; x=1783513762;
-        h=mime-version:user-agent:content-transfer-encoding:autocrypt
-         :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=8QBml1wXQrKkB4Dbp2yh/EBSKR66LFRDhLUx+zmUXDw=;
-        b=USvxWNstuNqfrYLr+N7skysorye9Sbob7u+MHNAqs0IyE+lvhAYECD9gI3wraSwaVs
-         aH+jtEKO8rFyLibMUitCfIkxMhnV8d3kqrPt8VoYBeZuv8ivC3IxZQcLjB5kkcqo3cD1
-         WRp4sV0gy2denWvYjxHqedLIk7yEBcYmPpD5XgNU6/pty0G+es35XT5d9ZrEhWplMzzZ
-         Q1vepoNU25wq+5KGwERBLjsZya8Jf0bO/1eSGxjP18kribrvbPYXZyF/THPwyEtASXu8
-         N+vVd7kynaJVNWPHgLSq6fGkIWrk0g053N88FhN92IPZLZY/KVoPPBnYCPVKMaD5gA1E
-         IwKw==
-X-Forwarded-Encrypted: i=1; AFNElJ+jXd/UkCXVkyeNRXn5aLUwwSzgepVqgLd2b5nz8c64B+YMfcgrzFsF6pMW07JhqVs+X4dE6H2E91c=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx4gxM7Rj2NJB5Whzf3BidJFx1xmZwXciVk6p33Jbc7FUvcO6Zm
-	nk/dqdDCEMcR8Z80X72s+drqY87Sdl/0rfbaWAUw5G3jzqJxKrgKK7ohMNLm7zsjGrv1Op5KAc7
-	WTt7Ce/qKGi14/dQsJMHC8hxafs1dBJ8UucfgaFNxfoce5nWeUP4ioin02iBa+A==
-X-Gm-Gg: AfdE7clo67itSebvhQ4T93Ry7sgcJctYsZF0Kt4iySfMjmzaZrCbsAvlkmO7+LCROsc
-	AUa7y8kst1buUa9epbv1JxNR5kVSlJbMdgqL4J8F3vLAImNNmZwudvSMa1cu5quWpGZthNl8aCK
-	1YY6kXLGkrLI45RdZFxLg5Cxf1w6N/Dagr0OFnX6q+P85IVRI53T1m0r7IwUboYLFNUY2FzD5iz
-	Fo1gME8ufJirCYQmHNl/Yuqya6oZ1aLi3RDqs79eaL8IcKP7+0nZL+iZcnM1g8r60puAjsf7MON
-	eO1Cnf5VyHaZw9FH4jVjEExaYs5wws+yNMzuwAhkq60F8uz4WP8FcM0eprvFQEK+nEJwmUy5Odf
-	iMS21g38cU14v6GfZenzozWdqt57n+eJHrK3DSS/c1D0bNQ5v2K4Ga1UV58KpuIn4NgHrwSX81K
-	BGwYNn
-X-Received: by 2002:a05:600c:6792:b0:493:bd71:6084 with SMTP id 5b1f17b1804b1-493c2b96797mr22805655e9.31.1782908961645;
-        Wed, 01 Jul 2026 05:29:21 -0700 (PDT)
-X-Received: by 2002:a05:600c:6792:b0:493:bd71:6084 with SMTP id 5b1f17b1804b1-493c2b96797mr22805175e9.31.1782908961210;
-        Wed, 01 Jul 2026 05:29:21 -0700 (PDT)
-Received: from gmonaco-thinkpadt14gen3.rmtit.csb (212-8-243-115.hosted-by-worldstream.net. [212.8.243.115])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-493be810c02sm79547145e9.11.2026.07.01.05.29.20
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 01 Jul 2026 05:29:20 -0700 (PDT)
-Message-ID: <72909c5431d8a6564aaab10056b9c59d5750d956.camel@redhat.com>
-Subject: Re: [PATCH v2 2/4] rv/rtapp/sleep: Update nanosleep rule
-From: Gabriele Monaco <gmonaco@redhat.com>
-To: Nam Cao <namcao@linutronix.de>
-Cc: Steven Rostedt <rostedt@goodmis.org>,
- linux-trace-kernel@vger.kernel.org, 	linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Date: Wed, 01 Jul 2026 14:29:19 +0200
-In-Reply-To: <c7ceb5c6263ee8f43a2676acae669cf486b0d903.1781852967.git.namcao@linutronix.de>
-References: <cover.1781852967.git.namcao@linutronix.de>
-	 <c7ceb5c6263ee8f43a2676acae669cf486b0d903.1781852967.git.namcao@linutronix.de>
-Autocrypt: addr=gmonaco@redhat.com; prefer-encrypt=mutual;
- keydata=mDMEZuK5YxYJKwYBBAHaRw8BAQdAmJ3dM9Sz6/Hodu33Qrf8QH2bNeNbOikqYtxWFLVm0
- 1a0JEdhYnJpZWxlIE1vbmFjbyA8Z21vbmFjb0BrZXJuZWwub3JnPoiZBBMWCgBBFiEEysoR+AuB3R
- Zwp6j270psSVh4TfIFAmjKX2MCGwMFCQWjmoAFCwkIBwICIgIGFQoJCAsCBBYCAwECHgcCF4AACgk
- Q70psSVh4TfIQuAD+JulczTN6l7oJjyroySU55Fbjdvo52xiYYlMjPG7dCTsBAMFI7dSL5zg98I+8
- cXY1J7kyNsY6/dcipqBM4RMaxXsOtCRHYWJyaWVsZSBNb25hY28gPGdtb25hY29AcmVkaGF0LmNvb
- T6InAQTFgoARAIbAwUJBaOagAULCQgHAgIiAgYVCgkICwIEFgIDAQIeBwIXgBYhBMrKEfgLgd0WcK
- eo9u9KbElYeE3yBQJoymCyAhkBAAoJEO9KbElYeE3yjX4BAJ/ETNnlHn8OjZPT77xGmal9kbT1bC1
- 7DfrYVISWV2Y1AP9HdAMhWNAvtCtN2S1beYjNybuK6IzWYcFfeOV+OBWRDQ==
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.60.2 (3.60.2-1.fc44) 
+	s=arc-20240116; t=1782910962; c=relaxed/simple;
+	bh=gIRBDH5MkVs4M65NaOL4Aqf/xk0q/mTwkbUGv/zYKOk=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=b/tsSbL6DZAchFBTDRTUWo3YwZek7ciuYE9kl27atiuZEXUSQ7FvlgBu64Smwjr3gxxijYSv/MB/8dBhYUt86l44Ad4xiaGmSS0BSK7qa8TNzA/6wCqvtZ2XP77LBGa9qSGJI3zdIWz+MJ+P0w4yJLGtJ7EXdqKVEBZ8dddUdVI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=cispa.de; spf=pass smtp.mailfrom=cispa.de; dkim=pass (2048-bit key) header.d=cispa.de header.i=@cispa.de header.b=ZhbIw9fq; arc=none smtp.client-ip=134.76.10.21
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=cispa.de;
+	s=2023-rsa; h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
+	In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=igSAA+qbMyAUJ/ctuYxX5vMbJh38ICoyVxEkz3kxQlY=; b=ZhbIw9fqquLvP+NzDA2txtXZ8+
+	WImhoVahtRvkNl83N1vvPN7gfIsZtm1VHNI87ooxtvhKVdig9marOfxvLCjjCFSenNpXc1lHYKEXl
+	C/P21mvQFxB1nigyI0O0+HsfPR/ZFZDHamKY6DAm9B1cEyWMqgNPsJYJBVuhtBfLOsBmPrgvQqzH4
+	FZQvsA6Qb2tmtzDhDklGgCJGqkkE0bU66O29EaMenvbONl5kOsRtpAc65zansqIaMUv7uKq9DEIzJ
+	+9JqTP4CkAWWlvkUnhTnUWgVORWdV7IvOlmwemw5hQ0O2wPcv1i1Fhx3HpYoPepzz96TF4F0Fw/fx
+	o4m4vdLg==;
+Received: from mailer.gwdg.de ([134.76.10.26]:52023)
+	by mailer.gwdg.de with esmtp (GWDG Mailer)
+	(envelope-from <lukas.gerlach@cispa.de>)
+	id 1weu9E-004V6p-1q;
+	Wed, 01 Jul 2026 14:34:36 +0200
+Received: from mbx19-sub-05.um.gwdg.de ([10.108.142.70] helo=email.gwdg.de)
+	by mailer.gwdg.de with esmtps (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(GWDG Mailer)
+	(envelope-from <lukas.gerlach@cispa.de>)
+	id 1weu9E-0001cN-1g;
+	Wed, 01 Jul 2026 14:34:36 +0200
+Received: from Mac (10.250.9.200) by MBX19-SUB-05.um.gwdg.de (10.108.142.70)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.43; Wed, 1 Jul
+ 2026 14:34:35 +0200
+From: Lukas Gerlach <lukas.gerlach@cispa.de>
+To: <akpm@linux-foundation.org>, <david@kernel.org>, <corbet@lwn.net>,
+	<linux-mm@kvack.org>, <linux-doc@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>
+CC: <xu.xin16@zte.com.cn>, <chengming.zhou@linux.dev>,
+	<skhan@linuxfoundation.org>, Lukas Gerlach <lukas.gerlach@cispa.de>, Jo Van
+ Bulck <jo.vanbulck@cs.kuleuven.be>, Tristan Hornetz
+	<tristan.hornetz@cispa.de>, Michael Schwarz <michael.schwarz@cispa.de>,
+	Shukai Ni <shukai.ni@kuleuven.be>
+Subject: [PATCH] mm/ksm: document side-channel security considerations
+Date: Wed, 1 Jul 2026 14:34:30 +0200
+Message-ID: <20260701123430.20699-1-lukas.gerlach@cispa.de>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <f75d286c-4d9e-4b64-8a9e-03e1afcb509f@kernel.org>
+References: <f75d286c-4d9e-4b64-8a9e-03e1afcb509f@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: MBX19-GWD-07.um.gwdg.de (10.108.142.60) To
+ MBX19-SUB-05.um.gwdg.de (10.108.142.70)
+X-Virus-Scanned: (clean) by clamav
+X-Spam-Level: -
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [1.14 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
+	R_DKIM_REJECT(1.00)[cispa.de:s=2023-rsa];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
+	DMARC_POLICY_SOFTFAIL(0.10)[cispa.de : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-94340-lists,linux-doc=lfdr.de];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	TAGGED_FROM(0.00)[bounces-94365-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:namcao@linutronix.de,m:rostedt@goodmis.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[gmonaco@redhat.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[redhat.com:+];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[lukas.gerlach@cispa.de,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS(0.00)[m:akpm@linux-foundation.org,m:david@kernel.org,m:corbet@lwn.net,m:linux-mm@kvack.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:xu.xin16@zte.com.cn,m:chengming.zhou@linux.dev,m:skhan@linuxfoundation.org,m:lukas.gerlach@cispa.de,m:jo.vanbulck@cs.kuleuven.be,m:tristan.hornetz@cispa.de,m:michael.schwarz@cispa.de,m:shukai.ni@kuleuven.be,s:lists@lfdr.de];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[gmonaco@redhat.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	ALIAS_RESOLVED(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[lukas.gerlach@cispa.de,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[cispa.de:-];
+	RCVD_COUNT_FIVE(0.00)[6];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	TO_DN_SOME(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp,linutronix.de:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,kuleuven.be:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 80BA46EDA3B
+X-Rspamd-Queue-Id: 97E496EE2C4
 
-On Fri, 2026-06-19 at 09:21 +0200, Nam Cao wrote:
-> CLOCK_REALTIME is the only clock that often is misused in real-time
-> applications. The other clocks either are safe for real-time uses
-> (CLOCK_TAI, CLOCK_MONOTONIC, CLOCK_BOOTTIME) or are unlikely to be misuse=
-d
-> (CLOCK_AUX, CLOCK_PROCESS_CPUTIME_ID).
->=20
-> Update the monitor to only warn about CLOCK_REALTIME.
->=20
-> While at it, update the out-of-sync documentation.
->=20
-> Signed-off-by: Nam Cao <namcao@linutronix.de>
+KSM is known to enable side channels, but the admin guide does not
+currently spell out the security implications of enabling page merging.
+Because KSM merges pages by content across all processes with mergeable
+memory, it forms a side channel that can be used to infer the contents
+of that memory across security domains, regardless of the user,
+container, or virtual machine the pages belong to.
 
-Looks good, thanks.
+Add a "Security considerations" section making this explicit, so that
+operators can make an informed decision: KSM should only be enabled for
+mutually trusting workloads, and any memory marked mergeable should be
+assumed readable by every other process using KSM.
 
-Reviewed-by: Gabriele Monaco <gmonaco@redhat.com>
+Co-developed-by: Jo Van Bulck <jo.vanbulck@cs.kuleuven.be>
+Signed-off-by: Jo Van Bulck <jo.vanbulck@cs.kuleuven.be>
+Signed-off-by: Lukas Gerlach <lukas.gerlach@cispa.de>
+Cc: Tristan Hornetz <tristan.hornetz@cispa.de>
+Cc: Michael Schwarz <michael.schwarz@cispa.de>
+Cc: Shukai Ni <shukai.ni@kuleuven.be>
+---
+Hi David,
 
-> ---
-> =C2=A0Documentation/trace/rv/monitor_rtapp.rst=C2=A0 | 17 +++++---
-> =C2=A0kernel/trace/rv/monitors/sleep/sleep.c=C2=A0=C2=A0=C2=A0 | 12 ++---=
--
-> =C2=A0kernel/trace/rv/monitors/sleep/sleep.h=C2=A0=C2=A0=C2=A0 | 52 +++++=
-++++++------------
-> =C2=A0tools/verification/models/rtapp/sleep.ltl |=C2=A0 2 +-
-> =C2=A04 files changed, 39 insertions(+), 44 deletions(-)
->=20
-> diff --git a/Documentation/trace/rv/monitor_rtapp.rst
-> b/Documentation/trace/rv/monitor_rtapp.rst
-> index 01656bf7080a..570be67a8f3b 100644
-> --- a/Documentation/trace/rv/monitor_rtapp.rst
-> +++ b/Documentation/trace/rv/monitor_rtapp.rst
-> @@ -51,12 +51,13 @@ The `sleep` monitor reports real-time threads sleepin=
-g in
-> a manner that may
-> =C2=A0cause undesirable latency. Real-time applications should only put a=
- real-time
-> =C2=A0thread to sleep for one of the following reasons:
-> =C2=A0
-> -=C2=A0 - Cyclic work: real-time thread sleeps waiting for the next cycle=
-. For this
-> -=C2=A0=C2=A0=C2=A0 case, only the `clock_nanosleep` syscall should be us=
-ed with
-> `TIMER_ABSTIME`
-> -=C2=A0=C2=A0=C2=A0 (to avoid time drift) and `CLOCK_MONOTONIC` (to avoid=
- the clock being
-> -=C2=A0=C2=A0=C2=A0 changed). No other method is safe for real-time. For =
-example, threads
-> -=C2=A0=C2=A0=C2=A0 waiting for timerfd can be woken by softirq which pro=
-vides no real-time
-> -=C2=A0=C2=A0=C2=A0 guarantee.
-> +=C2=A0 - Cyclic work: real-time thread sleeps waiting for the next
-> +=C2=A0=C2=A0=C2=A0 cycle. For this case, only the `clock_nanosleep` sysc=
-all should be
-> +=C2=A0=C2=A0=C2=A0 used with `TIMER_ABSTIME` (to avoid time drift). Addi=
-tionally,
-> +=C2=A0=C2=A0=C2=A0 `CLOCK_REALTIME` should not be used (to avoid the clo=
-ck being
-> +=C2=A0=C2=A0=C2=A0 changed). No other method is safe for real-time. For =
-example,
-> +=C2=A0=C2=A0=C2=A0 threads waiting for timerfd can be woken by softirq w=
-hich provides
-> +=C2=A0=C2=A0=C2=A0 no real-time guarantee.
-> =C2=A0=C2=A0 - Real-time thread waiting for something to happen (e.g. ano=
-ther thread
-> =C2=A0=C2=A0=C2=A0=C2=A0 releasing shared resources, or a completion sign=
-al from another thread).
-> In
-> =C2=A0=C2=A0=C2=A0=C2=A0 this case, only futexes (FUTEX_LOCK_PI, FUTEX_LO=
-CK_PI2 or one of
-> @@ -99,14 +100,16 @@ The monitor's specification is::
-> =C2=A0
-> =C2=A0=C2=A0 RT_VALID_SLEEP_REASON =3D FUTEX_WAIT
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 or RT_FR=
-IENDLY_NANOSLEEP
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 or EPOLL_WAIT
-> =C2=A0
-> =C2=A0=C2=A0 RT_FRIENDLY_NANOSLEEP =3D CLOCK_NANOSLEEP
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 and NANOSLEEP_=
-TIMER_ABSTIME
-> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 and NANOSLEEP_CLOCK_=
-MONOTONIC
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 and not NANOSLEEP_CL=
-OCK_REALTIME
-> =C2=A0
-> =C2=A0=C2=A0 RT_FRIENDLY_WAKE =3D WOKEN_BY_EQUAL_OR_HIGHER_PRIO
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 or WOKEN_BY_HARDIRQ
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 or WOKEN_BY_NMI
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 or ABORT_SLEEP
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 or KTHREAD_SHOULD_STOP
-> =C2=A0
-> =C2=A0=C2=A0 ALLOWLIST =3D BLOCK_ON_RT_MUTEX
-> diff --git a/kernel/trace/rv/monitors/sleep/sleep.c
-> b/kernel/trace/rv/monitors/sleep/sleep.c
-> index d6b677fab8f8..638be7d8747f 100644
-> --- a/kernel/trace/rv/monitors/sleep/sleep.c
-> +++ b/kernel/trace/rv/monitors/sleep/sleep.c
-> @@ -44,8 +44,7 @@ static void ltl_atoms_init(struct task_struct *task, st=
-ruct
-> ltl_monitor *mon, bo
-> =C2=A0
-> =C2=A0	if (task_creation) {
-> =C2=A0		ltl_atom_set(mon, LTL_KTHREAD_SHOULD_STOP, false);
-> -		ltl_atom_set(mon, LTL_NANOSLEEP_CLOCK_MONOTONIC, false);
-> -		ltl_atom_set(mon, LTL_NANOSLEEP_CLOCK_TAI, false);
-> +		ltl_atom_set(mon, LTL_NANOSLEEP_CLOCK_REALTIME, false);
-> =C2=A0		ltl_atom_set(mon, LTL_NANOSLEEP_TIMER_ABSTIME, false);
-> =C2=A0		ltl_atom_set(mon, LTL_CLOCK_NANOSLEEP, false);
-> =C2=A0		ltl_atom_set(mon, LTL_FUTEX_WAIT, false);
-> @@ -60,8 +59,7 @@ static void ltl_atoms_init(struct task_struct *task, st=
-ruct
-> ltl_monitor *mon, bo
-> =C2=A0		/* kernel tasks do not do syscall */
-> =C2=A0		ltl_atom_set(mon, LTL_FUTEX_WAIT, false);
-> =C2=A0		ltl_atom_set(mon, LTL_FUTEX_LOCK_PI, false);
-> -		ltl_atom_set(mon, LTL_NANOSLEEP_CLOCK_MONOTONIC, false);
-> -		ltl_atom_set(mon, LTL_NANOSLEEP_CLOCK_TAI, false);
-> +		ltl_atom_set(mon, LTL_NANOSLEEP_CLOCK_REALTIME, false);
-> =C2=A0		ltl_atom_set(mon, LTL_NANOSLEEP_TIMER_ABSTIME, false);
-> =C2=A0		ltl_atom_set(mon, LTL_CLOCK_NANOSLEEP, false);
-> =C2=A0		ltl_atom_set(mon, LTL_EPOLL_WAIT, false);
-> @@ -136,8 +134,7 @@ static void handle_sys_enter(void *data, struct pt_re=
-gs
-> *regs, long id)
-> =C2=A0	case __NR_clock_nanosleep_time64:
-> =C2=A0#endif
-> =C2=A0		syscall_get_arguments(current, regs, args);
-> -		ltl_atom_set(mon, LTL_NANOSLEEP_CLOCK_MONOTONIC, args[0] =3D=3D
-> CLOCK_MONOTONIC);
-> -		ltl_atom_set(mon, LTL_NANOSLEEP_CLOCK_TAI, args[0] =3D=3D
-> CLOCK_TAI);
-> +		ltl_atom_set(mon, LTL_NANOSLEEP_CLOCK_REALTIME, args[0] =3D=3D
-> CLOCK_REALTIME);
-> =C2=A0		ltl_atom_set(mon, LTL_NANOSLEEP_TIMER_ABSTIME, args[1] =3D=3D
-> TIMER_ABSTIME);
-> =C2=A0		ltl_atom_update(current, LTL_CLOCK_NANOSLEEP, true);
-> =C2=A0		break;
-> @@ -178,8 +175,7 @@ static void handle_sys_exit(void *data, struct pt_reg=
-s
-> *regs, long ret)
-> =C2=A0
-> =C2=A0	ltl_atom_set(mon, LTL_FUTEX_LOCK_PI, false);
-> =C2=A0	ltl_atom_set(mon, LTL_FUTEX_WAIT, false);
-> -	ltl_atom_set(mon, LTL_NANOSLEEP_CLOCK_MONOTONIC, false);
-> -	ltl_atom_set(mon, LTL_NANOSLEEP_CLOCK_TAI, false);
-> +	ltl_atom_set(mon, LTL_NANOSLEEP_CLOCK_REALTIME, false);
-> =C2=A0	ltl_atom_set(mon, LTL_NANOSLEEP_TIMER_ABSTIME, false);
-> =C2=A0	ltl_atom_set(mon, LTL_EPOLL_WAIT, false);
-> =C2=A0	ltl_atom_update(current, LTL_CLOCK_NANOSLEEP, false);
-> diff --git a/kernel/trace/rv/monitors/sleep/sleep.h
-> b/kernel/trace/rv/monitors/sleep/sleep.h
-> index 403dc2852c52..2fe2ec7edae8 100644
-> --- a/kernel/trace/rv/monitors/sleep/sleep.h
-> +++ b/kernel/trace/rv/monitors/sleep/sleep.h
-> @@ -20,8 +20,7 @@ enum ltl_atom {
-> =C2=A0	LTL_FUTEX_WAIT,
-> =C2=A0	LTL_KERNEL_THREAD,
-> =C2=A0	LTL_KTHREAD_SHOULD_STOP,
-> -	LTL_NANOSLEEP_CLOCK_MONOTONIC,
-> -	LTL_NANOSLEEP_CLOCK_TAI,
-> +	LTL_NANOSLEEP_CLOCK_REALTIME,
-> =C2=A0	LTL_NANOSLEEP_TIMER_ABSTIME,
-> =C2=A0	LTL_RT,
-> =C2=A0	LTL_SCHEDULE_IN,
-> @@ -46,8 +45,7 @@ static const char *ltl_atom_str(enum ltl_atom atom)
-> =C2=A0		"fu_wa",
-> =C2=A0		"ker_th",
-> =C2=A0		"kth_sh_st",
-> -		"na_cl_mo",
-> -		"na_cl_ta",
-> +		"na_cl_re",
-> =C2=A0		"na_ti_ab",
-> =C2=A0		"rt",
-> =C2=A0		"sch_in",
-> @@ -87,8 +85,7 @@ static void ltl_start(struct task_struct *task, struct
-> ltl_monitor *mon)
-> =C2=A0	bool schedule_in =3D test_bit(LTL_SCHEDULE_IN, mon->atoms);
-> =C2=A0	bool rt =3D test_bit(LTL_RT, mon->atoms);
-> =C2=A0	bool nanosleep_timer_abstime =3D test_bit(LTL_NANOSLEEP_TIMER_ABST=
-IME,
-> mon->atoms);
-> -	bool nanosleep_clock_tai =3D test_bit(LTL_NANOSLEEP_CLOCK_TAI, mon-
-> >atoms);
-> -	bool nanosleep_clock_monotonic =3D
-> test_bit(LTL_NANOSLEEP_CLOCK_MONOTONIC, mon->atoms);
-> +	bool nanosleep_clock_realtime =3D
-> test_bit(LTL_NANOSLEEP_CLOCK_REALTIME, mon->atoms);
-> =C2=A0	bool kthread_should_stop =3D test_bit(LTL_KTHREAD_SHOULD_STOP, mon=
--
-> >atoms);
-> =C2=A0	bool kernel_thread =3D test_bit(LTL_KERNEL_THREAD, mon->atoms);
-> =C2=A0	bool futex_wait =3D test_bit(LTL_FUTEX_WAIT, mon->atoms);
-> @@ -97,17 +94,17 @@ static void ltl_start(struct task_struct *task, struc=
-t
-> ltl_monitor *mon)
-> =C2=A0	bool clock_nanosleep =3D test_bit(LTL_CLOCK_NANOSLEEP, mon->atoms)=
-;
-> =C2=A0	bool block_on_rt_mutex =3D test_bit(LTL_BLOCK_ON_RT_MUTEX, mon->at=
-oms);
-> =C2=A0	bool abort_sleep =3D test_bit(LTL_ABORT_SLEEP, mon->atoms);
-> -	bool val42 =3D task_is_rcu || task_is_migration;
-> -	bool val43 =3D futex_lock_pi || val42;
-> -	bool val5 =3D block_on_rt_mutex || val43;
-> -	bool val34 =3D abort_sleep || kthread_should_stop;
-> -	bool val35 =3D woken_by_nmi || val34;
-> -	bool val36 =3D woken_by_hardirq || val35;
-> -	bool val14 =3D woken_by_equal_or_higher_prio || val36;
-> +	bool val41 =3D task_is_rcu || task_is_migration;
-> +	bool val42 =3D futex_lock_pi || val41;
-> +	bool val5 =3D block_on_rt_mutex || val42;
-> +	bool val33 =3D abort_sleep || kthread_should_stop;
-> +	bool val34 =3D woken_by_nmi || val33;
-> +	bool val35 =3D woken_by_hardirq || val34;
-> +	bool val14 =3D woken_by_equal_or_higher_prio || val35;
-> =C2=A0	bool val13 =3D !schedule_in;
-> -	bool val26 =3D nanosleep_clock_monotonic || nanosleep_clock_tai;
-> -	bool val27 =3D nanosleep_timer_abstime && val26;
-> -	bool val18 =3D clock_nanosleep && val27;
-> +	bool val25 =3D !nanosleep_clock_realtime;
-> +	bool val26 =3D nanosleep_timer_abstime && val25;
-> +	bool val18 =3D clock_nanosleep && val26;
-> =C2=A0	bool val20 =3D val18 || epoll_wait;
-> =C2=A0	bool val9 =3D futex_wait || val20;
-> =C2=A0	bool val11 =3D val9 || kernel_thread;
-> @@ -138,8 +135,7 @@ ltl_possible_next_states(struct ltl_monitor *mon, uns=
-igned
-> int state, unsigned l
-> =C2=A0	bool schedule_in =3D test_bit(LTL_SCHEDULE_IN, mon->atoms);
-> =C2=A0	bool rt =3D test_bit(LTL_RT, mon->atoms);
-> =C2=A0	bool nanosleep_timer_abstime =3D test_bit(LTL_NANOSLEEP_TIMER_ABST=
-IME,
-> mon->atoms);
-> -	bool nanosleep_clock_tai =3D test_bit(LTL_NANOSLEEP_CLOCK_TAI, mon-
-> >atoms);
-> -	bool nanosleep_clock_monotonic =3D
-> test_bit(LTL_NANOSLEEP_CLOCK_MONOTONIC, mon->atoms);
-> +	bool nanosleep_clock_realtime =3D
-> test_bit(LTL_NANOSLEEP_CLOCK_REALTIME, mon->atoms);
-> =C2=A0	bool kthread_should_stop =3D test_bit(LTL_KTHREAD_SHOULD_STOP, mon=
--
-> >atoms);
-> =C2=A0	bool kernel_thread =3D test_bit(LTL_KERNEL_THREAD, mon->atoms);
-> =C2=A0	bool futex_wait =3D test_bit(LTL_FUTEX_WAIT, mon->atoms);
-> @@ -148,17 +144,17 @@ ltl_possible_next_states(struct ltl_monitor *mon,
-> unsigned int state, unsigned l
-> =C2=A0	bool clock_nanosleep =3D test_bit(LTL_CLOCK_NANOSLEEP, mon->atoms)=
-;
-> =C2=A0	bool block_on_rt_mutex =3D test_bit(LTL_BLOCK_ON_RT_MUTEX, mon->at=
-oms);
-> =C2=A0	bool abort_sleep =3D test_bit(LTL_ABORT_SLEEP, mon->atoms);
-> -	bool val42 =3D task_is_rcu || task_is_migration;
-> -	bool val43 =3D futex_lock_pi || val42;
-> -	bool val5 =3D block_on_rt_mutex || val43;
-> -	bool val34 =3D abort_sleep || kthread_should_stop;
-> -	bool val35 =3D woken_by_nmi || val34;
-> -	bool val36 =3D woken_by_hardirq || val35;
-> -	bool val14 =3D woken_by_equal_or_higher_prio || val36;
-> +	bool val41 =3D task_is_rcu || task_is_migration;
-> +	bool val42 =3D futex_lock_pi || val41;
-> +	bool val5 =3D block_on_rt_mutex || val42;
-> +	bool val33 =3D abort_sleep || kthread_should_stop;
-> +	bool val34 =3D woken_by_nmi || val33;
-> +	bool val35 =3D woken_by_hardirq || val34;
-> +	bool val14 =3D woken_by_equal_or_higher_prio || val35;
-> =C2=A0	bool val13 =3D !schedule_in;
-> -	bool val26 =3D nanosleep_clock_monotonic || nanosleep_clock_tai;
-> -	bool val27 =3D nanosleep_timer_abstime && val26;
-> -	bool val18 =3D clock_nanosleep && val27;
-> +	bool val25 =3D !nanosleep_clock_realtime;
-> +	bool val26 =3D nanosleep_timer_abstime && val25;
-> +	bool val18 =3D clock_nanosleep && val26;
-> =C2=A0	bool val20 =3D val18 || epoll_wait;
-> =C2=A0	bool val9 =3D futex_wait || val20;
-> =C2=A0	bool val11 =3D val9 || kernel_thread;
-> diff --git a/tools/verification/models/rtapp/sleep.ltl
-> b/tools/verification/models/rtapp/sleep.ltl
-> index 464c84b9df87..5923e58d7810 100644
-> --- a/tools/verification/models/rtapp/sleep.ltl
-> +++ b/tools/verification/models/rtapp/sleep.ltl
-> @@ -9,7 +9,7 @@ RT_VALID_SLEEP_REASON =3D FUTEX_WAIT
-> =C2=A0
-> =C2=A0RT_FRIENDLY_NANOSLEEP =3D CLOCK_NANOSLEEP
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 and NANOSLEEP_TIMER_ABSTIM=
-E
-> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 and (NANOSLEEP_CLOCK_MONOTONIC o=
-r NANOSLEEP_CLOCK_TAI)
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 and not NANOSLEEP_CLOCK_REALTIME
-> =C2=A0
-> =C2=A0RT_FRIENDLY_WAKE =3D WOKEN_BY_EQUAL_OR_HIGHER_PRIO
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 or WOKEN_BY_HARDIRQ
+Thanks for the quick response.
 
+I generally agree. The issue I see is that the current documentation
+understates the risk. The RHEL documentation ("could be potentially
+used to leak information across guests") does not read like enabling
+KSM is an arbitrary read across VMs, which the side channel we
+disclosed (in contrast to previous works) is. So the documentation
+should really state that KSM is only an option for mutually trusted
+workloads. A clean model for this would be to assume that memory
+marked as mergeable is readable by everyone else using KSM.
+
+Patch below to clarify this in the admin guide. We would, in the
+future, publish a paper on this to further raise awareness of the
+risks involved with KSM.
+
+Greetings,
+Lukas
+
+ Documentation/admin-guide/mm/ksm.rst | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+
+diff --git a/Documentation/admin-guide/mm/ksm.rst b/Documentation/admin-guide/mm/ksm.rst
+index ad8e7a41f3b5..cbd5f2fdcfcb 100644
+--- a/Documentation/admin-guide/mm/ksm.rst
++++ b/Documentation/admin-guide/mm/ksm.rst
+@@ -27,6 +27,23 @@ KSM's merged pages were originally locked into kernel memory, but can now
+ be swapped out just like other user pages (but sharing is broken when they
+ are swapped back in: ksmd must rediscover their identity and merge again).
+
++Security considerations
++=======================
++
++Because KSM merges pages based on their content, across all processes
++with mergeable memory regardless of which user, container, or virtual
++machine they belong to, it exposes a side channel that can be used to
++infer the contents of mergeable memory across security domains.  Users
++should assume that any memory marked mergeable is readable by every
++other process using KSM.
++
++KSM should therefore only be enabled for mutually trusted workloads, or
++where the merged data is not sensitive; in particular, merging pages
++across mutually untrusted virtual machines or tenants is not secure.
++KSM is disabled by default (``run`` is 0).  Applications and VMMs that
++use ``MADV_MERGEABLE`` should limit it to regions that do not hold
++secrets.
++
+ Controlling KSM with madvise
+ ============================
+
+--
+2.51.0
 
