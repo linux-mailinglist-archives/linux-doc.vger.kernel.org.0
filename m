@@ -1,300 +1,419 @@
-Return-Path: <linux-doc+bounces-94402-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94401-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id MkJLKOIzRWqG8goAu9opvQ
-	(envelope-from <linux-doc+bounces-94402-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 17:36:02 +0200
+	id KG6hBOc0RWql8goAu9opvQ
+	(envelope-from <linux-doc+bounces-94401-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 17:40:23 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14F876EF4E8
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 17:36:02 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 638B26EF54B
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 17:40:22 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b="AY7/ypBx";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94402-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94402-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
+	dkim=pass header.d=google.com header.s=20251104 header.b=nOCDtuQu;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94401-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94401-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=google.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 1B36930094E3
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 15:36:01 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id BE25030014A4
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 15:36:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1AB8F42B75C;
-	Wed,  1 Jul 2026 15:36:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F292F4192FB;
+	Wed,  1 Jul 2026 15:35:59 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-yw1-f170.google.com (mail-yw1-f170.google.com [209.85.128.170])
+Received: from mail-pl1-f202.google.com (mail-pl1-f202.google.com [209.85.214.202])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A4C9E348C75
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DED72D0C89
 	for <linux-doc@vger.kernel.org>; Wed,  1 Jul 2026 15:35:58 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782920160; cv=none; b=o+GMDugAP2XcT2L6J7DSo0BBmlg8K/4dqPszrSouR9o0zNyPp8s2n3tVTnk2a63e6JD9/bH0FwJQZCmBHZKft3bpyzrBtBMIQuVWxtyUa/iEGDBAqq7eXHiA5ydnvpSlUdr+xw2EAbpaNCkmm1vMHw0VqUBJ0NbrRi2EuJJuzGA=
+	t=1782920159; cv=none; b=M4yMoZFH53CERhAqNZI51HF77q+WH8pYC5MNkJgwc2c6cufYlw4mZnpZq1rHx4xmSMfK+WLGrImpwDzmXqSDNTiOYDqKij3Fm4NZqdu6+OH1Z3dVbG6Lc32dkDZ692NvNfefyOPm/beRQj4D5j1QB7Kli7WcaG6+d2MgfYIZvBc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782920160; c=relaxed/simple;
-	bh=3R05u4YHDQ4KbnN/MSes9bHjtHg38wtiXjdSeaB5Dlc=;
-	h=From:Date:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=LLS3AVHNqh6jIpVZQMjJLDuS/jnhtn8jgIXWXFs0IOvWqhjtIaRDOM+P9bOYBglcREbqYUMXv47bqcUMpr/hxa6A+jFqZqYtWxqYKBIpsu0GQB/uK8Wc0SAWYyeWRiZ2O37Pb12mJpRZVk4ccmF+RsTZCiusdTh+ZFXHeR9xXcU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=AY7/ypBx; arc=none smtp.client-ip=209.85.128.170
-Received: by mail-yw1-f170.google.com with SMTP id 00721157ae682-7fe36f1be74so11798617b3.2
+	s=arc-20240116; t=1782920159; c=relaxed/simple;
+	bh=1CpXWYMXeecLyxRIvlWeS8DmEwA0TLBYjkJaloihYeU=;
+	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
+	 To:Cc:Content-Type; b=tLrVcgZVR6n9pMBXb0sVDOB0upnDD/TyWppjdRSBsy3Cat8MaYgd4hcUmdoSb5YQ3FIZXANEFO5vEkZc5oRcEXHXUhQrsOHROvvXwYq8SqYcIxoxJZIdNuVmwg+UmNE+F/2Kx68oC6SrvdHLTmmq8J5hjc5FQEAt07vqxhTWfGw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--seanjc.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=nOCDtuQu; arc=none smtp.client-ip=209.85.214.202
+Received: by mail-pl1-f202.google.com with SMTP id d9443c01a7336-2c804e38cb1so7177635ad.0
         for <linux-doc@vger.kernel.org>; Wed, 01 Jul 2026 08:35:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782920158; x=1783524958; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:date:from:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=uTRG7Pajwv3HZZVoro8AGOA4aqnFDn9VcJTzwsbcBv4=;
-        b=AY7/ypBxHX4JIYGDtAVH0yyDSfd9bVBFpjNNTe6VdnQRJswW1ieHq/V87t8oY5Ollp
-         t/Ni6HhH4aGUHWsdiYzq7LcbOdqOQEi92DO2+Jz4lmrxxsOQTXqPH/W3IEZRdAemPb3R
-         4lM80NbwKch1xMjFeY0YAWLcPJi6c4SGI/ZK93hlKC/6sC4+HBQOU4/u9b7QrGHwhOJF
-         l83FnuGkH8sFIGvmqLYlY1vb9GbImPuFUHdfYit0ZZmW5TvCZeiv7YlzPMidOfVgNBXO
-         59wkDzfDfCuTVfXFOZpefX/l9NM/Oa4yErwDs2yg3pVuHRxN4FVCO/xuUDZPtHnGdUnq
-         HwKg==
+        d=google.com; s=20251104; t=1782920157; x=1783524957; darn=vger.kernel.org;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=/dm8qbEauKVXJhYGr90L/dxzQTMgwF1P0y0BSIo+cWM=;
+        b=nOCDtuQugR4O/383c/SCPgYa+tKqM/VdSSevk8rHpAHhNPZvkBypeNZC+ncr77KTQ/
+         3l1wZuQCLqSZzx/KJN5RuuuWhm120JEx/hZArQCVeTxvCEFKPoGFwIvf3LCAYcm5cwG1
+         LBLYMDeTdNX4BYonN/1ljHSMA7zbKSaJL8YhDZ8dvM9THhtEIwe7+KJmQBxZNQNPw2dc
+         4KK67ALH7nI6yHUNbfDftHfqPPOgC8gL98JPLVfyr51kOD2wj0m43qLt2EFcdn0MRetj
+         S0hnLiHA7uCYyAxzvby1YJitfcPzREc+lUZGipsYYJW7YeeNtiUq9dyHGotMTS7m1YSg
+         MFnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782920158; x=1783524958;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=uTRG7Pajwv3HZZVoro8AGOA4aqnFDn9VcJTzwsbcBv4=;
-        b=EsFIIAxg8xo2cCoOv1Rn1l+PDdfccKSXJVpDtX3wkAXZMrJozp7kY3Mnn2GMhFx5g9
-         zZ8pfEqKxaCr0FSZrAEQ0l1NuWVINQU+uwWM7lzXz1yv3Ub4NQ+K3aMUtx8kWy4hSEEF
-         PIVmzheNLb2eEmVVrxm4/G9uWHhT4g8/NaN8SrWIhhyA7ZisDWoMKDpPL3tPq/Xm6s29
-         PHOpyS9gBEqzi/TghTcbBHvHrVLf/X0fYISnOSPY0758Cw2iYNQ60UhVoCBf+RAAuuFE
-         vLSwwzBRRljAJLSetgcRwfVWYN0EP9R8yvZuOJt9pidc18WdTiv3mBShudNUR3t64ORP
-         WxYw==
-X-Forwarded-Encrypted: i=1; AHgh+Ro0ulWUOIprF5EjRAFHMQgJhbu16dBfmc29+uVosbY9PLG6iY1pbCaRfYDnoB1XVszdBQg8kVy1gb0=@vger.kernel.org
-X-Gm-Message-State: AOJu0YySqf9rwMe0jj2oC+MhtF/i5knkKruoSHGiir6z3+qryxJuWTcR
-	jrNZHvcE5qw4eqrYseAY6jJJ33O1al8rwVyg5TXV6NDeXHBWDDqce5XJ
-X-Gm-Gg: AfdE7cmN+Io57dmuBDk0IOnE6VlxauoY+2wfB3R4zbQh5KhIY0gi3mw91JJOyJN0VMD
-	fhkAGRvKDClkfS1llXGlSzX9dz5YYBv/fdtvHL7CNk5WNVpUDiaSV+WaYnhtNkNd29t2pSSa1R0
-	7X8cw0Rz8f3i4L48RcO6FiUbjKWk7kbdYdFBx4olLiBuyUTZfCT/+t+CJ9QuGwO93tsH9eVAakf
-	rrQF/oOi1VY2/o/OE0w9/QmTAs5JZ8BYOdZylG+iqT1CwZx/93ewxNt/oXCOxGI9O390nYnRySd
-	KBTbgUcL0ZC3/8TaVtGK4wb40dlLze74JmzauLkdxi/jZa7lBY5GRyFCKiKtzMhDlz33H/91z93
-	gaR7uuOVf+VlzAqydTvLKSA4hyCmqE9pVfbQ6Uq0ReREibHXUm8lx/XmKlq+J+uIxK5F/Aakai3
-	kReyiFz2w/v2Sy9eE=
-X-Received: by 2002:a05:690c:630b:b0:80c:90ed:c79f with SMTP id 00721157ae682-812eb86989amr22063147b3.52.1782920157510;
-        Wed, 01 Jul 2026 08:35:57 -0700 (PDT)
-Received: from localhost ([24.129.38.94])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-8144783efacsm1543497b3.8.2026.07.01.08.35.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 01 Jul 2026 08:35:57 -0700 (PDT)
-From: Yury Norov <yury.norov@gmail.com>
-X-Google-Original-From: Yury Norov <ynorov@nvidia.com>
-Date: Wed, 1 Jul 2026 11:35:56 -0400
-To: Shrikanth Hegde <sshegde@linux.ibm.com>
-Cc: linux-kernel@vger.kernel.org, mingo@kernel.org, peterz@infradead.org,
-	juri.lelli@redhat.com, vincent.guittot@linaro.org,
-	yury.norov@gmail.com, kprateek.nayak@amd.com, iii@linux.ibm.com,
-	corbet@lwn.net, tglx@kernel.org, gregkh@linuxfoundation.org,
-	pbonzini@redhat.com, seanjc@google.com, vschneid@redhat.com,
-	huschle@linux.ibm.com, rostedt@goodmis.org,
-	dietmar.eggemann@arm.com, maddy@linux.ibm.com, srikar@linux.ibm.com,
-	hdanton@sina.com, chleroy@kernel.org, vineeth@bitbyteword.org,
-	frederic@kernel.org, arighi@nvidia.com, pauld@redhat.com,
-	christian.loehle@arm.com, tj@kernel.org,
-	tommaso.cucinotta@gmail.com, maz@kernel.org, rafael@kernel.org,
-	rdunlap@infradead.org, kernellwp@gmail.com,
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v6 03/23] cpumask: Introduce cpu_preferred_mask
-Message-ID: <akUz3GlKrWQTZIWK@yury>
-References: <20260701141654.500125-1-sshegde@linux.ibm.com>
- <20260701141654.500125-4-sshegde@linux.ibm.com>
+        d=1e100.net; s=20251104; t=1782920157; x=1783524957;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=/dm8qbEauKVXJhYGr90L/dxzQTMgwF1P0y0BSIo+cWM=;
+        b=VcgiG3Sn+5coZuH35WsTEapFtF7S0N4FXkGa6XJF2S2WIpqvvQpRTilHXY6xzucLQx
+         OeFDRPlhedr8Fsi88h6NRYOTGu4MByDUiboEgDzvPqz4zvtNwWTHsoUrrWo4U3fCdt6j
+         AxtZhpo9OoLqgWFp3G15iOdmRbe3T17pdDGNqKRnveS3veP9o7S+PHnr/3wJchgdSB1+
+         Y+8pvORunVb9q4aNO016tboHPawe6wF0ON9cIGEnGE16jf9Kcu4xXdFJZoL4ZOmBOq/r
+         zgLX+tE6X44H0z2u4+pYWid+YNhVI2pr9d3B+kcER5CUQnGUN39URQBwz5f1d+1whok1
+         6AcA==
+X-Forwarded-Encrypted: i=1; AHgh+Ro/zKFU1lj+1dzjMZv6p4DE+tpIgGiTa9S8NwDwNkPN5FwHZEg+2wZ2t5tKj4Bb7GZryFWuJv87y3o=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx+zeXh98x7As3bNqRBC3t0YiR5yJKg5GdmJH01vBP/OGHQPZW8
+	Lk7cIDUEHl63YHrXde+5DgBYhmDDeQ13E+60L8KVi7q2aw6YJ/c0fEfQOqTHNVMCqdEFoPJFe4j
+	OYIxFEA==
+X-Received: from plbkr11.prod.google.com ([2002:a17:903:80b:b0:2c7:3d65:ed18])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:902:ecc6:b0:2c9:fa31:84f9
+ with SMTP id d9443c01a7336-2ca7e682af0mr20521695ad.5.1782920156755; Wed, 01
+ Jul 2026 08:35:56 -0700 (PDT)
+Date: Wed, 1 Jul 2026 08:35:56 -0700
+In-Reply-To: <20260618-gmem-inplace-conversion-v8-13-9d2959357853@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260701141654.500125-4-sshegde@linux.ibm.com>
+Mime-Version: 1.0
+References: <20260618-gmem-inplace-conversion-v8-0-9d2959357853@google.com> <20260618-gmem-inplace-conversion-v8-13-9d2959357853@google.com>
+Message-ID: <akUz3M5Z2vnioB72@google.com>
+Subject: Re: [PATCH v8 13/46] KVM: guest_memfd: Add base support for KVM_SET_MEMORY_ATTRIBUTES2
+From: Sean Christopherson <seanjc@google.com>
+To: Ackerley Tng <ackerleytng@google.com>
+Cc: aik@amd.com, andrew.jones@linux.dev, binbin.wu@linux.intel.com, 
+	brauner@kernel.org, chao.p.peng@linux.intel.com, david@kernel.org, 
+	jmattson@google.com, jthoughton@google.com, michael.roth@amd.com, 
+	oupton@kernel.org, pankaj.gupta@amd.com, qperret@google.com, 
+	rick.p.edgecombe@intel.com, rientjes@google.com, shivankg@amd.com, 
+	steven.price@arm.com, tabba@google.com, willy@infradead.org, 
+	wyihan@google.com, yan.y.zhao@intel.com, forkloop@google.com, 
+	pratyush@kernel.org, suzuki.poulose@arm.com, aneesh.kumar@kernel.org, 
+	liam@infradead.org, Paolo Bonzini <pbonzini@redhat.com>, Thomas Gleixner <tglx@kernel.org>, 
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
+	"H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>, 
+	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+	Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>, 
+	Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>, 
+	Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>, 
+	Nhat Pham <nphamcs@gmail.com>, Barry Song <baohua@kernel.org>, 
+	Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>, 
+	Wei Xu <weixugc@google.com>, Youngjun Park <youngjun.park@lge.com>, 
+	Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
+	Kiryl Shutsemau <kas@kernel.org>, Baoquan He <baoquan.he@linux.dev>, Jason Gunthorpe <jgg@ziepe.ca>, 
+	Vlastimil Babka <vbabka@kernel.org>, kvm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kselftest@vger.kernel.org, linux-mm@kvack.org, 
+	linux-coco@lists.linux.dev
+Content-Type: text/plain; charset="us-ascii"
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	MV_CASE(0.50)[];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	FREEMAIL_CC(0.00)[amd.com,linux.dev,linux.intel.com,kernel.org,google.com,intel.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca,vger.kernel.org,kvack.org,lists.linux.dev];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94402-lists,linux-doc=lfdr.de];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_SENDER(0.00)[yurynorov@gmail.com,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FORGED_RECIPIENTS(0.00)[m:sshegde@linux.ibm.com,m:linux-kernel@vger.kernel.org,m:mingo@kernel.org,m:peterz@infradead.org,m:juri.lelli@redhat.com,m:vincent.guittot@linaro.org,m:yury.norov@gmail.com,m:kprateek.nayak@amd.com,m:iii@linux.ibm.com,m:corbet@lwn.net,m:tglx@kernel.org,m:gregkh@linuxfoundation.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:vschneid@redhat.com,m:huschle@linux.ibm.com,m:rostedt@goodmis.org,m:dietmar.eggemann@arm.com,m:maddy@linux.ibm.com,m:srikar@linux.ibm.com,m:hdanton@sina.com,m:chleroy@kernel.org,m:vineeth@bitbyteword.org,m:frederic@kernel.org,m:arighi@nvidia.com,m:pauld@redhat.com,m:christian.loehle@arm.com,m:tj@kernel.org,m:tommaso.cucinotta@gmail.com,m:maz@kernel.org,m:rafael@kernel.org,m:rdunlap@infradead.org,m:kernellwp@gmail.com,m:linux-doc@vger.kernel.org,m:yurynorov@gmail.com,m:tommasocucinotta@gmail.com,s:lists@lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[34];
-	FORWARDED(0.00)[lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-94401-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[yurynorov@gmail.com,linux-doc@vger.kernel.org];
-	PRECEDENCE_BULK(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,infradead.org,redhat.com,linaro.org,gmail.com,amd.com,linux.ibm.com,lwn.net,linuxfoundation.org,google.com,goodmis.org,arm.com,sina.com,bitbyteword.org,nvidia.com];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:ackerleytng@google.com,m:aik@amd.com,m:andrew.jones@linux.dev,m:binbin.wu@linux.intel.com,m:brauner@kernel.org,m:chao.p.peng@linux.intel.com,m:david@kernel.org,m:jmattson@google.com,m:jthoughton@google.com,m:michael.roth@amd.com,m:oupton@kernel.org,m:pankaj.gupta@amd.com,m:qperret@google.com,m:rick.p.edgecombe@intel.com,m:rientjes@google.com,m:shivankg@amd.com,m:steven.price@arm.com,m:tabba@google.com,m:willy@infradead.org,m:wyihan@google.com,m:yan.y.zhao@intel.com,m:forkloop@google.com,m:pratyush@kernel.org,m:suzuki.poulose@arm.com,m:aneesh.kumar@kernel.org,m:liam@infradead.org,m:pbonzini@redhat.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:shuah@kernel.org,m:vannapurve@google.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencent.com,m:shikemeng@hu
+ aweicloud.com,m:nphamcs@gmail.com,m:baohua@kernel.org,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:kas@kernel.org,m:baoquan.he@linux.dev,m:jgg@ziepe.ca,m:vbabka@kernel.org,m:kvm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,m:linux-coco@lists.linux.dev,s:lists@lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[seanjc@google.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[google.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,yury:mid]
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[63];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[seanjc@google.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 14F876EF4E8
+X-Rspamd-Queue-Id: 638B26EF54B
 
-On Wed, Jul 01, 2026 at 07:46:34PM +0530, Shrikanth Hegde wrote:
-> Provide cpu_preferred_mask infrastructure. Define get/set macros
-> which could be used to get/set CPU state as preferred.
+On Thu, Jun 18, 2026, Ackerley Tng wrote:
+> Introduce base support for KVM_SET_MEMORY_ATTRIBUTES2 in guest_memfd, which
+> just updates attributes tracked by guest_memfd.
 > 
-> Values are set/clear by the new driver called steal_monitor.
-> It periodically samples the steal time and decides preferred CPU state.
+> Validate input fields in general. Guard usage of KVM_SET_MEMORY_ATTRIBUTES2
+> by making sure requested attributes are supported for this instance of kvm.
 > 
-> A CPU is set to preferred when it becomes active. Later it may be
-> marked as non-preferred depending on steal time values with
-> steal_monitor being enabled.
+> A new KVM_SET_MEMORY_ATTRIBUTES2 is defined to support writes (unlike
+
+Phrase this as a command using imperative mood.  The wording is also weird,
+because "support writes" makes it sound like it allows controlling WRITE attributes,
+whereas what you mean by "support writes" is "allowing KVM to write back error
+information to the struct without technically violating the semantics embedded
+in the ioctl".  It's doubly confusing because the macros use a different polarity:
+IOW means userspace is writing, but this implicitly refers to IOW as "reads".
+
+> KVM_SET_MEMORY_ATTRIBUTES) in addition to reads so it can provide error
+> details to userspace. This will be used in a later patch.
 > 
-> Always maintain design construct of preferred is subset of active.
-> i.e. preferred ⊆ active ⊆ online ⊆ present ⊆ possible
-> 
-> With PREFERRED_CPU=n, set is nop and get returns active state.
-> 
-> Signed-off-by: Shrikanth Hegde <sshegde@linux.ibm.com>
+> The two ioctls use their corresponding structs with no overlap, but
+> backward compatibility is baked in for future support of
+> KVM_SET_MEMORY_ATTRIBUTES2 and struct kvm_memory_attributes2 in the VM
+> ioctl.
+
+I don't understand what this paragraph is trying to say with respect to backwards
+compatibility.  It's a new ioctl and struct, there's no compatibility in sight.
+
+E.g.
+
+  Add a new ioctl (and matching struct), KVM_SET_MEMORY_ATTRIBUTES2, using
+  the same base ioctl number (0xd2), but with R/W semantics for the kernel
+  instead of just read semantics.  "Officially" documenting that KVM writes
+  to the payload will allow KVM to support partial/incremental conversions,
+  instead of all-or-nothing updates (which requires complex unwinding), by
+  recording the failing offset if an error occurs.
+
+  Opportunistically add a new struct as well, even though KVM could squeeze
+  the error offset into "struct kvm_memory_attributes", as there's no cost
+  to doing so in practice.  Pad the struct with a pile of extra space to try
+  and avoid ending up with "struct kvm_memory_attributes3" in the future.
+  Use the same layout for the fields that common to version 1 of the struct,
+  e.g. to ease upgrading userspace, and to provide flexibility in KVM ever
+  adds support for KVM_SET_MEMORY_ATTRIBUTES2 at VM scope.
+
+> The process of setting memory attributes is set up such that the later half
+> will not fail due to allocation. Any necessary checks are performed before
+> the point of no return.
+
+Explain *why*.  Readers can usually understand the "what" by reading the code,
+but it's much harder to discern *why* things were done a certain way.  Some things
+go without saying, e.g. "validate input fields", but in that case, just drop the
+changelog blurb (if we _weren't_ validating input, *that* would be interesting and
+worth calling out).
+
+> Co-developed-by: Vishal Annapurve <vannapurve@google.com>
+> Signed-off-by: Vishal Annapurve <vannapurve@google.com>
+> Co-developed-by: Sean Christoperson <seanjc@google.com>
+> Signed-off-by: Sean Christoperson <seanjc@google.com>
+> Reviewed-by: Fuad Tabba <tabba@google.com>
+> Signed-off-by: Ackerley Tng <ackerleytng@google.com>
 > ---
-> v5->v6:
-> - Make it nop for PREFERRED_CPU=n
-> - Make it EXPORT_SYMBOL_GPL
+>  include/uapi/linux/kvm.h |  13 ++++++
+>  virt/kvm/Kconfig         |   1 +
+>  virt/kvm/guest_memfd.c   | 116 +++++++++++++++++++++++++++++++++++++++++++++++
+>  virt/kvm/kvm_main.c      |  12 +++++
+>  4 files changed, 142 insertions(+)
 > 
->  include/linux/cpumask.h | 27 ++++++++++++++++++++++++++-
->  kernel/cpu.c            |  6 ++++++
->  kernel/sched/core.c     |  5 +++++
->  3 files changed, 37 insertions(+), 1 deletion(-)
-> 
-> diff --git a/include/linux/cpumask.h b/include/linux/cpumask.h
-> index d3cda0544954..c97271c063ce 100644
-> --- a/include/linux/cpumask.h
-> +++ b/include/linux/cpumask.h
-> @@ -122,12 +122,20 @@ extern struct cpumask __cpu_enabled_mask;
->  extern struct cpumask __cpu_present_mask;
->  extern struct cpumask __cpu_active_mask;
->  extern struct cpumask __cpu_dying_mask;
-> +
-> +#ifdef CONFIG_PREFERRED_CPU
-> +extern struct cpumask __cpu_preferred_mask;
-> +#else
-> +#define __cpu_preferred_mask __cpu_active_mask
-> +#endif
-> +
->  #define cpu_possible_mask ((const struct cpumask *)&__cpu_possible_mask)
->  #define cpu_online_mask   ((const struct cpumask *)&__cpu_online_mask)
->  #define cpu_enabled_mask   ((const struct cpumask *)&__cpu_enabled_mask)
->  #define cpu_present_mask  ((const struct cpumask *)&__cpu_present_mask)
->  #define cpu_active_mask   ((const struct cpumask *)&__cpu_active_mask)
->  #define cpu_dying_mask    ((const struct cpumask *)&__cpu_dying_mask)
-> +#define cpu_preferred_mask ((const struct cpumask *)&__cpu_preferred_mask)
+> diff --git a/include/uapi/linux/kvm.h b/include/uapi/linux/kvm.h
+> index 419011097fa8e..956877a6aab05 100644
+> --- a/include/uapi/linux/kvm.h
+> +++ b/include/uapi/linux/kvm.h
+> @@ -1649,6 +1649,19 @@ struct kvm_memory_attributes {
+>  	__u64 flags;
+>  };
 >  
->  extern atomic_t __num_online_cpus;
->  extern unsigned int __num_possible_cpus;
-> @@ -1164,6 +1172,13 @@ void init_cpu_possible(const struct cpumask *src);
->  #define set_cpu_active(cpu, active)	assign_cpu((cpu), &__cpu_active_mask, (active))
->  #define set_cpu_dying(cpu, dying)	assign_cpu((cpu), &__cpu_dying_mask, (dying))
->  
-> +#ifdef CONFIG_PREFERRED_CPU
-> +#define set_cpu_preferred(cpu, preferred) assign_cpu((cpu), &__cpu_preferred_mask, (preferred))
-> +#else
-> +/* Don't edit active state when the feature is off */
-
-And that makes a random reader thinking like why in the world he mentions
-active state here?
-
-Can you move this in commit message, or drop entirely?
-
-> +#define set_cpu_preferred(cpu, preferred) {}
-> +#endif
+> +#define KVM_SET_MEMORY_ATTRIBUTES2              _IOWR(KVMIO,  0xd2, struct kvm_memory_attributes2)
 > +
->  void set_cpu_online(unsigned int cpu, bool online);
->  void set_cpu_possible(unsigned int cpu, bool possible);
+> +struct kvm_memory_attributes2 {
+> +	union {
+> +		__u64 address;
+> +		__u64 offset;
+> +	};
+> +	__u64 size;
+> +	__u64 attributes;
+> +	__u64 flags;
+> +	__u64 reserved[12];
+> +};
+> +
+>  #define KVM_MEMORY_ATTRIBUTE_PRIVATE           (1ULL << 3)
 >  
-> @@ -1258,7 +1273,12 @@ static __always_inline bool cpu_dying(unsigned int cpu)
->  	return cpumask_test_cpu(cpu, cpu_dying_mask);
+>  #define KVM_CREATE_GUEST_MEMFD	_IOWR(KVMIO,  0xd4, struct kvm_create_guest_memfd)
+> diff --git a/virt/kvm/Kconfig b/virt/kvm/Kconfig
+> index 297e4399fbd49..cfa2c78ba5fb9 100644
+> --- a/virt/kvm/Kconfig
+> +++ b/virt/kvm/Kconfig
+> @@ -102,6 +102,7 @@ config KVM_MMU_LOCKLESS_AGING
+>  
+>  config KVM_GUEST_MEMFD
+>         select XARRAY_MULTI
+> +       select KVM_MEMORY_ATTRIBUTES
+>         bool
+>  
+>  config HAVE_KVM_ARCH_GMEM_PREPARE
+> diff --git a/virt/kvm/guest_memfd.c b/virt/kvm/guest_memfd.c
+> index 65ce795c090d9..0d14548c1ed22 100644
+> --- a/virt/kvm/guest_memfd.c
+> +++ b/virt/kvm/guest_memfd.c
+> @@ -541,11 +541,127 @@ bool kvm_gmem_is_private(struct kvm *kvm, gfn_t gfn)
 >  }
+>  EXPORT_SYMBOL_FOR_KVM_INTERNAL(kvm_gmem_is_private);
 >  
-> -#else
-> +static __always_inline bool cpu_preferred(unsigned int cpu)
+> +/*
+> + * Preallocate memory for attributes to be stored on a maple tree, pointed to
+> + * by mas.  Adjacent ranges with attributes identical to the new attributes
+> + * will be merged.  Also sets mas's bounds up for storing attributes.
+> + *
+> + * This maintains the invariant that ranges with the same attributes will
+> + * always be merged.
+> + */
+> +static int kvm_gmem_mas_preallocate(struct ma_state *mas, u64 attributes,
+> +				    pgoff_t start, size_t nr_pages)
 > +{
-> +	return cpumask_test_cpu(cpu, cpu_preferred_mask);
+> +	pgoff_t end = start + nr_pages;
+> +	pgoff_t last = end - 1;
+> +	void *entry;
+> +
+> +	/* Try extending range. entry is NULL on overflow/wrap-around. */
+> +	mas_set(mas, end);
+> +	entry = mas_find(mas, end);
+> +	if (entry && xa_to_value(entry) == attributes)
+> +		last = mas->last;
+> +
+> +	if (start > 0) {
+> +		mas_set(mas, start - 1);
+> +		entry = mas_find(mas, start - 1);
+> +		if (entry && xa_to_value(entry) == attributes)
+> +			start = mas->index;
+> +	}
+> +
+> +	mas_set_range(mas, start, last);
+> +	return mas_preallocate(mas, xa_mk_value(attributes), GFP_KERNEL);
 > +}
 > +
-> +#else	/* NR_CPUS <= 1 */
-
-NR_CPUS can't be less than 1, I guess.
-
->  
->  #define num_online_cpus()	1U
->  #define num_possible_cpus()	1U
-> @@ -1296,6 +1316,11 @@ static __always_inline bool cpu_dying(unsigned int cpu)
->  	return false;
->  }
->  
-> +static __always_inline bool cpu_preferred(unsigned int cpu)
+> +static int __kvm_gmem_set_attributes(struct inode *inode, pgoff_t start,
+> +				     size_t nr_pages, uint64_t attrs)
 > +{
-> +	return cpu == 0;
+> +	struct address_space *mapping = inode->i_mapping;
+> +	struct gmem_inode *gi = GMEM_I(inode);
+> +	pgoff_t end = start + nr_pages;
+> +	struct maple_tree *mt;
+> +	struct ma_state mas;
+> +	int r;
+> +
+> +	mt = &gi->attributes;
+> +
+> +	filemap_invalidate_lock(mapping);
+> +
+> +	mas_init(&mas, mt, start);
+> +	r = kvm_gmem_mas_preallocate(&mas, attrs, start, nr_pages);
+> +	if (r)
+> +		goto out;
+> +
+> +	/*
+> +	 * From this point on guest_memfd has performed necessary
+> +	 * checks and can proceed to do guest-breaking changes.
+> +	 */
+> +
+> +	kvm_gmem_invalidate_start(inode, start, end);
+> +	mas_store_prealloc(&mas, xa_mk_value(attrs));
+> +	kvm_gmem_invalidate_end(inode, start, end);
+> +out:
+> +	filemap_invalidate_unlock(mapping);
+> +	return r;
 > +}
 > +
->  #endif /* NR_CPUS > 1 */
->  
->  #define cpu_is_offline(cpu)	unlikely(!cpu_online(cpu))
-> diff --git a/kernel/cpu.c b/kernel/cpu.c
-> index b3c8553d7bd6..376d297a6292 100644
-> --- a/kernel/cpu.c
-> +++ b/kernel/cpu.c
-> @@ -3103,6 +3103,11 @@ EXPORT_SYMBOL(__cpu_dying_mask);
->  atomic_t __num_online_cpus __read_mostly;
->  EXPORT_SYMBOL(__num_online_cpus);
->  
-> +#ifdef CONFIG_PREFERRED_CPU
-> +struct cpumask __cpu_preferred_mask __read_mostly;
-> +EXPORT_SYMBOL_GPL(__cpu_preferred_mask);
-> +#endif
+> +static long kvm_gmem_set_attributes(struct file *file, void __user *argp)
+> +{
+> +	struct gmem_file *f = file->private_data;
+> +	struct inode *inode = file_inode(file);
+> +	struct kvm_memory_attributes2 attrs;
+> +	size_t nr_pages;
+> +	pgoff_t index;
+> +	int i;
 > +
->  void init_cpu_present(const struct cpumask *src)
->  {
->  	cpumask_copy(&__cpu_present_mask, src);
-> @@ -3160,6 +3165,7 @@ void __init boot_cpu_init(void)
->  	/* Mark the boot cpu "present", "online" etc for SMP and UP case */
->  	set_cpu_online(cpu, true);
->  	set_cpu_active(cpu, true);
-> +	set_cpu_preferred(cpu, true);
->  	set_cpu_present(cpu, true);
->  	set_cpu_possible(cpu, true);
->  
-> diff --git a/kernel/sched/core.c b/kernel/sched/core.c
-> index 2e7cde033a31..a45f7c308329 100644
-> --- a/kernel/sched/core.c
-> +++ b/kernel/sched/core.c
-> @@ -8690,6 +8690,9 @@ int sched_cpu_activate(unsigned int cpu)
->  	 */
->  	sched_set_rq_online(rq, cpu);
->  
-> +	/* preferred is subset of active and follows its state */
-> +	set_cpu_preferred(cpu, true);
+> +	if (copy_from_user(&attrs, argp, sizeof(attrs)))
+> +		return -EFAULT;
 > +
->  	return 0;
->  }
->  
-> @@ -8703,6 +8706,8 @@ int sched_cpu_deactivate(unsigned int cpu)
->  	if (ret)
->  		return ret;
->  
-> +	set_cpu_preferred(cpu, false);
+> +	if (attrs.flags)
+> +		return -EINVAL;
+> +	for (i = 0; i < ARRAY_SIZE(attrs.reserved); i++) {
+> +		if (attrs.reserved[i])
+> +			return -EINVAL;
+> +	}
+> +	if (!kvm_arch_has_private_mem(f->kvm))
+> +		return -EINVAL;
+> +	if (attrs.attributes & ~KVM_MEMORY_ATTRIBUTE_PRIVATE)
+> +		return -EINVAL;
+> +	if (attrs.size == 0 || attrs.offset + attrs.size < attrs.offset)
+> +		return -EINVAL;
+> +	if (!PAGE_ALIGNED(attrs.offset) || !PAGE_ALIGNED(attrs.size))
+> +		return -EINVAL;
 > +
->  	/*
->  	 * Remove CPU from nohz.idle_cpus_mask to prevent participating in
->  	 * load balancing when not active
-> -- 
-> 2.47.3
+> +	if (attrs.offset >= i_size_read(inode) ||
+> +	    attrs.offset + attrs.size > i_size_read(inode))
+> +		return -EINVAL;
+> +
+> +	nr_pages = attrs.size >> PAGE_SHIFT;
+> +	index = attrs.offset >> PAGE_SHIFT;
+> +	return __kvm_gmem_set_attributes(inode, index, nr_pages,
+> +					 attrs.attributes);
+> +}
+> +
+> +static long kvm_gmem_ioctl(struct file *file, unsigned int ioctl,
+> +			   unsigned long arg)
+> +{
+> +	switch (ioctl) {
+> +	case KVM_SET_MEMORY_ATTRIBUTES2:
+> +		if (!gmem_in_place_conversion)
+> +			return -ENOTTY;
+> +
+> +		return kvm_gmem_set_attributes(file, (void __user *)arg);
+> +	default:
+> +		return -ENOTTY;
+> +	}
+> +}
+> +
+>  static struct file_operations kvm_gmem_fops = {
+>  	.mmap		= kvm_gmem_mmap,
+>  	.open		= generic_file_open,
+>  	.release	= kvm_gmem_release,
+>  	.fallocate	= kvm_gmem_fallocate,
+> +	.unlocked_ioctl	= kvm_gmem_ioctl,
+>  };
+>  
+>  static int kvm_gmem_migrate_folio(struct address_space *mapping,
+> diff --git a/virt/kvm/kvm_main.c b/virt/kvm/kvm_main.c
+> index 01761f6e25d25..a08b518cdb175 100644
+> --- a/virt/kvm/kvm_main.c
+> +++ b/virt/kvm/kvm_main.c
+> @@ -105,6 +105,18 @@ module_param(allow_unsafe_mappings, bool, 0444);
+>  bool __ro_after_init gmem_in_place_conversion = false;
+>  #endif
+>  
+> +#define MEMORY_ATTRIBUTES_MATCH(one, two)				\
+
+Use the same terminology as the memory region asserts, i.e.
+SANITY_CHECK_MEM_ATTRIBUTES_FIELD.  MEMORY_ATTRIBUTES_MATCH() reads like a helper
+that checks if the two objects have the same attributes.
+
+And put the checks where it actually matters, i.e. in the case-statement for
+KVM_SET_MEMORY_ATTRIBUTES (again, same as KVM_SET_USER_MEMORY_REGION).  Because
+the only reason it matters for KVM is if we want to add VM-scoped support for
+KVM_SET_MEMORY_ATTRIBUTES2 in the future, at which point we'll want to use the
+same overlay shenanigans that we did for KVM_SET_USER_MEMORY_REGION2.
+
+> +	static_assert(offsetof(struct kvm_memory_attributes, one) ==	\
+> +		      offsetof(struct kvm_memory_attributes2, two));	\
+
+And then once these are landed in function scope, use BUILD_BUG_ON() with a
+do { ... } while (0).
+
+> +	static_assert(sizeof_field(struct kvm_memory_attributes, one) ==\
+> +		      sizeof_field(struct kvm_memory_attributes2, two))
+> +
+> +/* Ensure the common parts of the two structs are identical. */
+> +MEMORY_ATTRIBUTES_MATCH(address, address);
+> +MEMORY_ATTRIBUTES_MATCH(size, size);
+> +MEMORY_ATTRIBUTES_MATCH(attributes, attributes);
+> +MEMORY_ATTRIBUTES_MATCH(flags, flags);
+
+Please put these asserts in the location where the overlay matters.  Actually, I
+don't think we need to enforce this?
 
