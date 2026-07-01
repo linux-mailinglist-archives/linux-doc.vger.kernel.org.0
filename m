@@ -1,239 +1,300 @@
-Return-Path: <linux-doc+bounces-94400-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94402-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id rMsdDfkxRWoK8goAu9opvQ
-	(envelope-from <linux-doc+bounces-94400-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 17:27:53 +0200
+	id MkJLKOIzRWqG8goAu9opvQ
+	(envelope-from <linux-doc+bounces-94402-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 17:36:02 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96F396EF3DD
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 17:27:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 14F876EF4E8
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 17:36:02 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=YKKi0Pjh;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94400-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94400-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b="AY7/ypBx";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94402-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94402-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=gmail.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 2F8BC3018C3D
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 15:27:28 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 1B36930094E3
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 15:36:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0C7F348AE20;
-	Wed,  1 Jul 2026 15:27:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1AB8F42B75C;
+	Wed,  1 Jul 2026 15:36:00 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-yw1-f170.google.com (mail-yw1-f170.google.com [209.85.128.170])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ABCA048BD26;
-	Wed,  1 Jul 2026 15:27:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A4C9E348C75
+	for <linux-doc@vger.kernel.org>; Wed,  1 Jul 2026 15:35:58 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782919644; cv=none; b=cFJm90duOg1emOkvVthePh+zTELPn24ED9meoUianQxaXfNaLFSnf9prHp5MPvKdnecVTY2FgCzYj2IIHESSRwz3deInPlocmSLJB30CX74IM9qy9ClHcvngKRBGGtNf2bu7q4xkXs0VlnPyFlHOgwcw7Rpo7qLMoTyk9LKg4Cg=
+	t=1782920160; cv=none; b=o+GMDugAP2XcT2L6J7DSo0BBmlg8K/4dqPszrSouR9o0zNyPp8s2n3tVTnk2a63e6JD9/bH0FwJQZCmBHZKft3bpyzrBtBMIQuVWxtyUa/iEGDBAqq7eXHiA5ydnvpSlUdr+xw2EAbpaNCkmm1vMHw0VqUBJ0NbrRi2EuJJuzGA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782919644; c=relaxed/simple;
-	bh=jhRISx6CQ3m4A0rbT41a5R76Aw7/Rf2ILwww2aaXjr8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=axnK0yw4zpOm2/h7JgY4U24PvqPU586oYWi3c+zX2lrcO/jf/y2guU54RNIUyGIz/IRwWq8kC/n3tqNwX859oiXret4R5L4TmvWIODnT2lQMjcbEJE4Bl3vn/ICqfZA3g+M6qE1/AF9uvUAP5zJYp3XAdKckaoNjAvVRPMzQWlo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YKKi0Pjh; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9C1041F00A3E;
-	Wed,  1 Jul 2026 15:27:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782919643;
-	bh=wDPki3aSQKwtM32F6/ODm6VehYF+zL7sFr5GC+qEOok=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=YKKi0PjhG524FOlcnZSSXXmkfcT7tcUu2/JsSJbF8zV6fzvVZP/eFT7Ogyjgx8oUp
-	 GEAfscTvc63KGQOWjB1Hr+2y/ZsNVxYcH8UC753C91wjjnm/x2FrLcWLeQGpM/5r17
-	 Zi0mP/7BQi0EXk+b7WxWlKV4L2W+EkDT8IZj3+lBAFuJg0Qb+ndFndZsKd8em+9RmA
-	 MORHEnL/ptOeYSnUKu6dBO730fTDEzk5NUHoKfOyfOxzGeUiTHWh28aDxxAAqh43EN
-	 aAAtDzrCFG/o9qsUqHkWlWDWBvBqotNVXEtxbLfVUoaYTLm9IGyCFgDU6EOeApKLEy
-	 2lI3focxEhLGg==
-Message-ID: <f7fc1fda-ad40-4a2a-bf93-28d3eaa9ba7f@kernel.org>
-Date: Wed, 1 Jul 2026 17:27:17 +0200
+	s=arc-20240116; t=1782920160; c=relaxed/simple;
+	bh=3R05u4YHDQ4KbnN/MSes9bHjtHg38wtiXjdSeaB5Dlc=;
+	h=From:Date:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=LLS3AVHNqh6jIpVZQMjJLDuS/jnhtn8jgIXWXFs0IOvWqhjtIaRDOM+P9bOYBglcREbqYUMXv47bqcUMpr/hxa6A+jFqZqYtWxqYKBIpsu0GQB/uK8Wc0SAWYyeWRiZ2O37Pb12mJpRZVk4ccmF+RsTZCiusdTh+ZFXHeR9xXcU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=AY7/ypBx; arc=none smtp.client-ip=209.85.128.170
+Received: by mail-yw1-f170.google.com with SMTP id 00721157ae682-7fe36f1be74so11798617b3.2
+        for <linux-doc@vger.kernel.org>; Wed, 01 Jul 2026 08:35:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1782920158; x=1783524958; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:date:from:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=uTRG7Pajwv3HZZVoro8AGOA4aqnFDn9VcJTzwsbcBv4=;
+        b=AY7/ypBxHX4JIYGDtAVH0yyDSfd9bVBFpjNNTe6VdnQRJswW1ieHq/V87t8oY5Ollp
+         t/Ni6HhH4aGUHWsdiYzq7LcbOdqOQEi92DO2+Jz4lmrxxsOQTXqPH/W3IEZRdAemPb3R
+         4lM80NbwKch1xMjFeY0YAWLcPJi6c4SGI/ZK93hlKC/6sC4+HBQOU4/u9b7QrGHwhOJF
+         l83FnuGkH8sFIGvmqLYlY1vb9GbImPuFUHdfYit0ZZmW5TvCZeiv7YlzPMidOfVgNBXO
+         59wkDzfDfCuTVfXFOZpefX/l9NM/Oa4yErwDs2yg3pVuHRxN4FVCO/xuUDZPtHnGdUnq
+         HwKg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1782920158; x=1783524958;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=uTRG7Pajwv3HZZVoro8AGOA4aqnFDn9VcJTzwsbcBv4=;
+        b=EsFIIAxg8xo2cCoOv1Rn1l+PDdfccKSXJVpDtX3wkAXZMrJozp7kY3Mnn2GMhFx5g9
+         zZ8pfEqKxaCr0FSZrAEQ0l1NuWVINQU+uwWM7lzXz1yv3Ub4NQ+K3aMUtx8kWy4hSEEF
+         PIVmzheNLb2eEmVVrxm4/G9uWHhT4g8/NaN8SrWIhhyA7ZisDWoMKDpPL3tPq/Xm6s29
+         PHOpyS9gBEqzi/TghTcbBHvHrVLf/X0fYISnOSPY0758Cw2iYNQ60UhVoCBf+RAAuuFE
+         vLSwwzBRRljAJLSetgcRwfVWYN0EP9R8yvZuOJt9pidc18WdTiv3mBShudNUR3t64ORP
+         WxYw==
+X-Forwarded-Encrypted: i=1; AHgh+Ro0ulWUOIprF5EjRAFHMQgJhbu16dBfmc29+uVosbY9PLG6iY1pbCaRfYDnoB1XVszdBQg8kVy1gb0=@vger.kernel.org
+X-Gm-Message-State: AOJu0YySqf9rwMe0jj2oC+MhtF/i5knkKruoSHGiir6z3+qryxJuWTcR
+	jrNZHvcE5qw4eqrYseAY6jJJ33O1al8rwVyg5TXV6NDeXHBWDDqce5XJ
+X-Gm-Gg: AfdE7cmN+Io57dmuBDk0IOnE6VlxauoY+2wfB3R4zbQh5KhIY0gi3mw91JJOyJN0VMD
+	fhkAGRvKDClkfS1llXGlSzX9dz5YYBv/fdtvHL7CNk5WNVpUDiaSV+WaYnhtNkNd29t2pSSa1R0
+	7X8cw0Rz8f3i4L48RcO6FiUbjKWk7kbdYdFBx4olLiBuyUTZfCT/+t+CJ9QuGwO93tsH9eVAakf
+	rrQF/oOi1VY2/o/OE0w9/QmTAs5JZ8BYOdZylG+iqT1CwZx/93ewxNt/oXCOxGI9O390nYnRySd
+	KBTbgUcL0ZC3/8TaVtGK4wb40dlLze74JmzauLkdxi/jZa7lBY5GRyFCKiKtzMhDlz33H/91z93
+	gaR7uuOVf+VlzAqydTvLKSA4hyCmqE9pVfbQ6Uq0ReREibHXUm8lx/XmKlq+J+uIxK5F/Aakai3
+	kReyiFz2w/v2Sy9eE=
+X-Received: by 2002:a05:690c:630b:b0:80c:90ed:c79f with SMTP id 00721157ae682-812eb86989amr22063147b3.52.1782920157510;
+        Wed, 01 Jul 2026 08:35:57 -0700 (PDT)
+Received: from localhost ([24.129.38.94])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-8144783efacsm1543497b3.8.2026.07.01.08.35.56
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 01 Jul 2026 08:35:57 -0700 (PDT)
+From: Yury Norov <yury.norov@gmail.com>
+X-Google-Original-From: Yury Norov <ynorov@nvidia.com>
+Date: Wed, 1 Jul 2026 11:35:56 -0400
+To: Shrikanth Hegde <sshegde@linux.ibm.com>
+Cc: linux-kernel@vger.kernel.org, mingo@kernel.org, peterz@infradead.org,
+	juri.lelli@redhat.com, vincent.guittot@linaro.org,
+	yury.norov@gmail.com, kprateek.nayak@amd.com, iii@linux.ibm.com,
+	corbet@lwn.net, tglx@kernel.org, gregkh@linuxfoundation.org,
+	pbonzini@redhat.com, seanjc@google.com, vschneid@redhat.com,
+	huschle@linux.ibm.com, rostedt@goodmis.org,
+	dietmar.eggemann@arm.com, maddy@linux.ibm.com, srikar@linux.ibm.com,
+	hdanton@sina.com, chleroy@kernel.org, vineeth@bitbyteword.org,
+	frederic@kernel.org, arighi@nvidia.com, pauld@redhat.com,
+	christian.loehle@arm.com, tj@kernel.org,
+	tommaso.cucinotta@gmail.com, maz@kernel.org, rafael@kernel.org,
+	rdunlap@infradead.org, kernellwp@gmail.com,
+	linux-doc@vger.kernel.org
+Subject: Re: [PATCH v6 03/23] cpumask: Introduce cpu_preferred_mask
+Message-ID: <akUz3GlKrWQTZIWK@yury>
+References: <20260701141654.500125-1-sshegde@linux.ibm.com>
+ <20260701141654.500125-4-sshegde@linux.ibm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mm/ksm: document side-channel security considerations
-To: Lukas Gerlach <lukas.gerlach@cispa.de>, akpm@linux-foundation.org,
- corbet@lwn.net, linux-mm@kvack.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Cc: xu.xin16@zte.com.cn, chengming.zhou@linux.dev, skhan@linuxfoundation.org,
- Jo Van Bulck <jo.vanbulck@cs.kuleuven.be>,
- Tristan Hornetz <tristan.hornetz@cispa.de>,
- Michael Schwarz <michael.schwarz@cispa.de>, Shukai Ni <shukai.ni@kuleuven.be>
-References: <f75d286c-4d9e-4b64-8a9e-03e1afcb509f@kernel.org>
- <20260701123430.20699-1-lukas.gerlach@cispa.de>
-From: "David Hildenbrand (Arm)" <david@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=david@kernel.org; keydata=
- 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
- qIws/H2t
-In-Reply-To: <20260701123430.20699-1-lukas.gerlach@cispa.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260701141654.500125-4-sshegde@linux.ibm.com>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-5.16 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:lukas.gerlach@cispa.de,m:akpm@linux-foundation.org,m:corbet@lwn.net,m:linux-mm@kvack.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:xu.xin16@zte.com.cn,m:chengming.zhou@linux.dev,m:skhan@linuxfoundation.org,m:jo.vanbulck@cs.kuleuven.be,m:tristan.hornetz@cispa.de,m:michael.schwarz@cispa.de,m:shukai.ni@kuleuven.be,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER(0.00)[david@kernel.org,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-94402-lists,linux-doc=lfdr.de];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORGED_SENDER(0.00)[yurynorov@gmail.com,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	TAGGED_FROM(0.00)[bounces-94400-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FORGED_RECIPIENTS(0.00)[m:sshegde@linux.ibm.com,m:linux-kernel@vger.kernel.org,m:mingo@kernel.org,m:peterz@infradead.org,m:juri.lelli@redhat.com,m:vincent.guittot@linaro.org,m:yury.norov@gmail.com,m:kprateek.nayak@amd.com,m:iii@linux.ibm.com,m:corbet@lwn.net,m:tglx@kernel.org,m:gregkh@linuxfoundation.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:vschneid@redhat.com,m:huschle@linux.ibm.com,m:rostedt@goodmis.org,m:dietmar.eggemann@arm.com,m:maddy@linux.ibm.com,m:srikar@linux.ibm.com,m:hdanton@sina.com,m:chleroy@kernel.org,m:vineeth@bitbyteword.org,m:frederic@kernel.org,m:arighi@nvidia.com,m:pauld@redhat.com,m:christian.loehle@arm.com,m:tj@kernel.org,m:tommaso.cucinotta@gmail.com,m:maz@kernel.org,m:rafael@kernel.org,m:rdunlap@infradead.org,m:kernellwp@gmail.com,m:linux-doc@vger.kernel.org,m:yurynorov@gmail.com,m:tommasocucinotta@gmail.com,s:lists@lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[34];
 	FORWARDED(0.00)[lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	ALIAS_RESOLVED(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[yurynorov@gmail.com,linux-doc@vger.kernel.org];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[david@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,infradead.org,redhat.com,linaro.org,gmail.com,amd.com,linux.ibm.com,lwn.net,linuxfoundation.org,google.com,goodmis.org,arm.com,sina.com,bitbyteword.org,nvidia.com];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp,kuleuven.be:email]
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,yury:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 96F396EF3DD
+X-Rspamd-Queue-Id: 14F876EF4E8
 
-On 7/1/26 14:34, Lukas Gerlach wrote:
-> KSM is known to enable side channels, but the admin guide does not
-> currently spell out the security implications of enabling page merging.
-> Because KSM merges pages by content across all processes with mergeable
-> memory, it forms a side channel that can be used to infer the contents
-> of that memory across security domains, regardless of the user,
-> container, or virtual machine the pages belong to.
+On Wed, Jul 01, 2026 at 07:46:34PM +0530, Shrikanth Hegde wrote:
+> Provide cpu_preferred_mask infrastructure. Define get/set macros
+> which could be used to get/set CPU state as preferred.
 > 
-> Add a "Security considerations" section making this explicit, so that
-> operators can make an informed decision: KSM should only be enabled for
-> mutually trusting workloads, and any memory marked mergeable should be
-> assumed readable by every other process using KSM.
+> Values are set/clear by the new driver called steal_monitor.
+> It periodically samples the steal time and decides preferred CPU state.
 > 
-> Co-developed-by: Jo Van Bulck <jo.vanbulck@cs.kuleuven.be>
-> Signed-off-by: Jo Van Bulck <jo.vanbulck@cs.kuleuven.be>
-> Signed-off-by: Lukas Gerlach <lukas.gerlach@cispa.de>
-> Cc: Tristan Hornetz <tristan.hornetz@cispa.de>
-> Cc: Michael Schwarz <michael.schwarz@cispa.de>
-> Cc: Shukai Ni <shukai.ni@kuleuven.be>
+> A CPU is set to preferred when it becomes active. Later it may be
+> marked as non-preferred depending on steal time values with
+> steal_monitor being enabled.
+> 
+> Always maintain design construct of preferred is subset of active.
+> i.e. preferred ⊆ active ⊆ online ⊆ present ⊆ possible
+> 
+> With PREFERRED_CPU=n, set is nop and get returns active state.
+> 
+> Signed-off-by: Shrikanth Hegde <sshegde@linux.ibm.com>
 > ---
-> Hi David,
+> v5->v6:
+> - Make it nop for PREFERRED_CPU=n
+> - Make it EXPORT_SYMBOL_GPL
 > 
-> Thanks for the quick response.
+>  include/linux/cpumask.h | 27 ++++++++++++++++++++++++++-
+>  kernel/cpu.c            |  6 ++++++
+>  kernel/sched/core.c     |  5 +++++
+>  3 files changed, 37 insertions(+), 1 deletion(-)
 > 
-> I generally agree. The issue I see is that the current documentation
-> understates the risk. The RHEL documentation ("could be potentially
-> used to leak information across guests") does not read like enabling
-> KSM is an arbitrary read across VMs, which the side channel we
-> disclosed (in contrast to previous works) is. So the documentation
-> should really state that KSM is only an option for mutually trusted
-> workloads. A clean model for this would be to assume that memory
-> marked as mergeable is readable by everyone else using KSM.
-
-Right.
-
-> 
-> Patch below to clarify this in the admin guide. We would, in the
-> future, publish a paper on this to further raise awareness of the
-> risks involved with KSM.
-> 
-> Greetings,
-> Lukas
-> 
->  Documentation/admin-guide/mm/ksm.rst | 17 +++++++++++++++++
->  1 file changed, 17 insertions(+)
-> 
-> diff --git a/Documentation/admin-guide/mm/ksm.rst b/Documentation/admin-guide/mm/ksm.rst
-> index ad8e7a41f3b5..cbd5f2fdcfcb 100644
-> --- a/Documentation/admin-guide/mm/ksm.rst
-> +++ b/Documentation/admin-guide/mm/ksm.rst
-> @@ -27,6 +27,23 @@ KSM's merged pages were originally locked into kernel memory, but can now
->  be swapped out just like other user pages (but sharing is broken when they
->  are swapped back in: ksmd must rediscover their identity and merge again).
-> 
-> +Security considerations
-> +=======================
+> diff --git a/include/linux/cpumask.h b/include/linux/cpumask.h
+> index d3cda0544954..c97271c063ce 100644
+> --- a/include/linux/cpumask.h
+> +++ b/include/linux/cpumask.h
+> @@ -122,12 +122,20 @@ extern struct cpumask __cpu_enabled_mask;
+>  extern struct cpumask __cpu_present_mask;
+>  extern struct cpumask __cpu_active_mask;
+>  extern struct cpumask __cpu_dying_mask;
 > +
-> +Because KSM merges pages based on their content, across all processes
-> +with mergeable memory regardless of which user, container, or virtual
-> +machine they belong to, it exposes a side channel that can be used to
-> +infer the contents of mergeable memory across security domains.  Users
-> +should assume that any memory marked mergeable is readable by every
-> +other process using KSM.
-
-Should we say here "... is effectively readable through side channels by every
-... " ?
-
+> +#ifdef CONFIG_PREFERRED_CPU
+> +extern struct cpumask __cpu_preferred_mask;
+> +#else
+> +#define __cpu_preferred_mask __cpu_active_mask
+> +#endif
 > +
-> +KSM should therefore only be enabled for mutually trusted workloads, or
-> +where the merged data is not sensitive; in particular, merging pages
-> +across mutually untrusted virtual machines or tenants is not secure.
-> +KSM is disabled by default (``run`` is 0).  Applications and VMMs that
-> +use ``MADV_MERGEABLE`` should limit it to regions that do not hold
+>  #define cpu_possible_mask ((const struct cpumask *)&__cpu_possible_mask)
+>  #define cpu_online_mask   ((const struct cpumask *)&__cpu_online_mask)
+>  #define cpu_enabled_mask   ((const struct cpumask *)&__cpu_enabled_mask)
+>  #define cpu_present_mask  ((const struct cpumask *)&__cpu_present_mask)
+>  #define cpu_active_mask   ((const struct cpumask *)&__cpu_active_mask)
+>  #define cpu_dying_mask    ((const struct cpumask *)&__cpu_dying_mask)
+> +#define cpu_preferred_mask ((const struct cpumask *)&__cpu_preferred_mask)
+>  
+>  extern atomic_t __num_online_cpus;
+>  extern unsigned int __num_possible_cpus;
+> @@ -1164,6 +1172,13 @@ void init_cpu_possible(const struct cpumask *src);
+>  #define set_cpu_active(cpu, active)	assign_cpu((cpu), &__cpu_active_mask, (active))
+>  #define set_cpu_dying(cpu, dying)	assign_cpu((cpu), &__cpu_dying_mask, (dying))
+>  
+> +#ifdef CONFIG_PREFERRED_CPU
+> +#define set_cpu_preferred(cpu, preferred) assign_cpu((cpu), &__cpu_preferred_mask, (preferred))
+> +#else
+> +/* Don't edit active state when the feature is off */
 
-Also good to mention here besides MADV_MERGABLE also "PR_SET_MEMORY_MERGE=1"
+And that makes a random reader thinking like why in the world he mentions
+active state here?
 
-I remember that KSM can also be used by user space to break the Linux kernel
-layout randomization. IIRC, the attack vector was Linux running inside a KSM VM,
-and user space inside the VM wanting to break Linux' layout randomization.
+Can you move this in commit message, or drop entirely?
 
-Is that sufficiently covered by your text?
+> +#define set_cpu_preferred(cpu, preferred) {}
+> +#endif
+> +
+>  void set_cpu_online(unsigned int cpu, bool online);
+>  void set_cpu_possible(unsigned int cpu, bool possible);
+>  
+> @@ -1258,7 +1273,12 @@ static __always_inline bool cpu_dying(unsigned int cpu)
+>  	return cpumask_test_cpu(cpu, cpu_dying_mask);
+>  }
+>  
+> -#else
+> +static __always_inline bool cpu_preferred(unsigned int cpu)
+> +{
+> +	return cpumask_test_cpu(cpu, cpu_preferred_mask);
+> +}
+> +
+> +#else	/* NR_CPUS <= 1 */
 
--- 
-Cheers,
+NR_CPUS can't be less than 1, I guess.
 
-David
+>  
+>  #define num_online_cpus()	1U
+>  #define num_possible_cpus()	1U
+> @@ -1296,6 +1316,11 @@ static __always_inline bool cpu_dying(unsigned int cpu)
+>  	return false;
+>  }
+>  
+> +static __always_inline bool cpu_preferred(unsigned int cpu)
+> +{
+> +	return cpu == 0;
+> +}
+> +
+>  #endif /* NR_CPUS > 1 */
+>  
+>  #define cpu_is_offline(cpu)	unlikely(!cpu_online(cpu))
+> diff --git a/kernel/cpu.c b/kernel/cpu.c
+> index b3c8553d7bd6..376d297a6292 100644
+> --- a/kernel/cpu.c
+> +++ b/kernel/cpu.c
+> @@ -3103,6 +3103,11 @@ EXPORT_SYMBOL(__cpu_dying_mask);
+>  atomic_t __num_online_cpus __read_mostly;
+>  EXPORT_SYMBOL(__num_online_cpus);
+>  
+> +#ifdef CONFIG_PREFERRED_CPU
+> +struct cpumask __cpu_preferred_mask __read_mostly;
+> +EXPORT_SYMBOL_GPL(__cpu_preferred_mask);
+> +#endif
+> +
+>  void init_cpu_present(const struct cpumask *src)
+>  {
+>  	cpumask_copy(&__cpu_present_mask, src);
+> @@ -3160,6 +3165,7 @@ void __init boot_cpu_init(void)
+>  	/* Mark the boot cpu "present", "online" etc for SMP and UP case */
+>  	set_cpu_online(cpu, true);
+>  	set_cpu_active(cpu, true);
+> +	set_cpu_preferred(cpu, true);
+>  	set_cpu_present(cpu, true);
+>  	set_cpu_possible(cpu, true);
+>  
+> diff --git a/kernel/sched/core.c b/kernel/sched/core.c
+> index 2e7cde033a31..a45f7c308329 100644
+> --- a/kernel/sched/core.c
+> +++ b/kernel/sched/core.c
+> @@ -8690,6 +8690,9 @@ int sched_cpu_activate(unsigned int cpu)
+>  	 */
+>  	sched_set_rq_online(rq, cpu);
+>  
+> +	/* preferred is subset of active and follows its state */
+> +	set_cpu_preferred(cpu, true);
+> +
+>  	return 0;
+>  }
+>  
+> @@ -8703,6 +8706,8 @@ int sched_cpu_deactivate(unsigned int cpu)
+>  	if (ret)
+>  		return ret;
+>  
+> +	set_cpu_preferred(cpu, false);
+> +
+>  	/*
+>  	 * Remove CPU from nohz.idle_cpus_mask to prevent participating in
+>  	 * load balancing when not active
+> -- 
+> 2.47.3
 
