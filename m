@@ -1,74 +1,74 @@
-Return-Path: <linux-doc+bounces-94455-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94457-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id ZT/1LYZuRWp2AAsAu9opvQ
-	(envelope-from <linux-doc+bounces-94455-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 21:46:14 +0200
+	id 0mfkDb5uRWqIAAsAu9opvQ
+	(envelope-from <linux-doc+bounces-94457-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 21:47:10 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5BC4B6F10AB
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 21:46:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AAF9F6F10DB
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 21:47:09 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=google.com header.s=20251104 header.b="f/JGcFWh";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94455-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94455-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=google.com header.s=20251104 header.b=UTADQx2Q;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94457-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94457-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=reject) header.from=google.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id BDFB431EA66F
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 19:37:43 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 12AA631F9A78
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 19:38:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 912B04189B3;
-	Wed,  1 Jul 2026 19:32:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C948D41C8D6;
+	Wed,  1 Jul 2026 19:33:00 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f202.google.com (mail-pl1-f202.google.com [209.85.214.202])
+Received: from mail-pg1-f202.google.com (mail-pg1-f202.google.com [209.85.215.202])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D471341227A
-	for <linux-doc@vger.kernel.org>; Wed,  1 Jul 2026 19:32:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AA90941228A
+	for <linux-doc@vger.kernel.org>; Wed,  1 Jul 2026 19:32:56 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782934378; cv=none; b=r3EmSu/UhpIixOT5cOGybv1xT15migkwodVXEuT+jKippeZj8nfORUDtWtAsGBRx/roD9AKQ7LqiPQBcjpJwg8+MQR9e4puinWqpvtsSPWGFNed+MGn66S3C1UoOQ0DLcUi81LnJTAzCLIwFVN70a/qvcgX0/QrvFtGxadPDaww=
+	t=1782934380; cv=none; b=MWnePUKAmNWiTLjQh5PsCbO1SEd2Rhx5TaipNxPWUcKaOX2dBk6CMwNEY3ahKkvgxs3pDjV6WG2KgSb3uF1FFy+LdMsQne8x3DhLP0GY2NKruk1Ww5cKV8lR05JrhRhnRtNyvqUjTq2Ink2LObbX6eHP9hO3rZBm4dLbIUfjg+0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782934378; c=relaxed/simple;
-	bh=ehvol4aPGGdBph7tPEcdqNiMmKvh5DD8WD/ckSXpqow=;
+	s=arc-20240116; t=1782934380; c=relaxed/simple;
+	bh=qoYpZpdKAvs3c+m3l1ZOE6Nj7iAKGdPQ69UNTM7lOtU=;
 	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=TdXbXpKxmPQlhZm38xCZEZ5xuR6YhkRM4Aa/okbEq5sw5nVJlHqfOugg3mndOmgyqXRTyrVZxPUxgKCNIezD3JGBpZDtK16xk09KWMpVYyfT46x5X8wPioYzjv+pFRn+vio0rK9Jf7vQko+NqfO9icDrAP3MBfZncK40i5eWQVM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--seanjc.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=f/JGcFWh; arc=none smtp.client-ip=209.85.214.202
-Received: by mail-pl1-f202.google.com with SMTP id d9443c01a7336-2ca1f16e391so11746115ad.2
-        for <linux-doc@vger.kernel.org>; Wed, 01 Jul 2026 12:32:55 -0700 (PDT)
+	 To:Cc:Content-Type; b=kgUIIpBmTpQw8EOwGEoCZoAGitgqwnEQK0ZflU5NXN3txzSOXZYwjnicN9cM66gvTwMSbsqqDVo6bThRbxyC/Fg8SAkUATzXF9IzDF9DGv/jVnAUHhs7zHf9MooYw53TOpfXTEE6jTmF3ew3UuQ7yyJJGhQagFFmotO4p/KO8iU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--seanjc.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=UTADQx2Q; arc=none smtp.client-ip=209.85.215.202
+Received: by mail-pg1-f202.google.com with SMTP id 41be03b00d2f7-c88d7a75507so1270517a12.1
+        for <linux-doc@vger.kernel.org>; Wed, 01 Jul 2026 12:32:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1782934375; x=1783539175; darn=vger.kernel.org;
+        d=google.com; s=20251104; t=1782934376; x=1783539176; darn=vger.kernel.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:reply-to:from:to:cc:subject:date:message-id:reply-to;
-        bh=XQAPpCEE/BDkXN3dIWP18HQMEopEl3zLKZ2PUcc2V5o=;
-        b=f/JGcFWh9X32X3N6GvM28619cTdSE/iPF4/e53t4cFm7B4if4byqEPzdf823jJz5ir
-         6hIuhr2LTZWHXRmnOWOlOMIzXVRBpQwWxqWIYG3Solt0Ed+kjYkeWG9R6nyN4pW3g2HV
-         VTbMs/xTPWkUuJeDUZ2nEiwjkoaPrszGNgkumoELpGUUoFnz8Lf6+GC5/3cPwwTBTPut
-         35VRi/V8IPu9wrkD1r+zsMG1gxaO29PTL6jjLH/v4es6yI7MXnMXl3MvPrEvfhjlWcgV
-         Xqpycw2Ql1+L86OHACPpPZQ0BxdlxVlYtrme1kd9gSMtObRVQ7Nq7zkqAklqfWvCOPh7
-         JNow==
+        bh=3ZuhwNx9YXpitDLlgZzJCjWGiYgYUv+Ggq0FniuPOLw=;
+        b=UTADQx2Qv+UkuYpZZzj6mDpjUB1/x1XUWBXs33eVIdTmwxCubn5aucvgGyZiIBiGX/
+         2TPZ8G72wpzaHNDFjufo4YNQENKFFOaBsntR93nlbouFrd7pi/CzWncg0qUVX+sM6YIE
+         PDxiCreYu6NWCtZQk7uI8Occpw5OUR4jZ9nrgb1Y4XtSEvoQLNygWDGBHI3E0VMQVa+v
+         PSgS+ovotPVCjzAoBDN2mYbIz6VQuVNeOmxbTzQS4wPP30RLzj2fOiYJ1RJL40e3gNF/
+         U3IvxDBU/KDo5NCD0EpiGoHLQl42WWqzSVU/mZAkeC29qAYoNjPrjwQBPYZ26E3mEnBm
+         869w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782934375; x=1783539175;
+        d=1e100.net; s=20251104; t=1782934376; x=1783539176;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:reply-to:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=XQAPpCEE/BDkXN3dIWP18HQMEopEl3zLKZ2PUcc2V5o=;
-        b=Lli2Ae87i+bOX+tf6EJtz1Z6HX1LxhFhSw+EH86tdlJAp64ZdQjT4TCeoeXNWjMPM/
-         WzYmDY+jh8wTEyFf2NBPOJ3l29FZbqhoWa6kC1FfNe1JE2u3GMgw1KSRudP/QYw7yv2n
-         Qs531ezV9kOf/6DqjLmPaEtzQ60Z63+CyVRAzUDt4/kwPr2YaXLGiE1f7nh63TdafwZc
-         /1Ae+BMl1o9EeWPsvNQ2Atk9Iki6/+TT1cGg5ftW9zLE0kOXSJXrlRAZhIQ9neSxrq+t
-         Sj0U3VyPw/x8d2T5k/Ja0mG0uvX+nj78V1XNgexqcj41cjtZx1llxW+6CIrze68ewyE/
-         xDgQ==
-X-Forwarded-Encrypted: i=1; AHgh+RqNs9xOusxUMnOep+q+zdQHFmFnk6APbY0aN1PU3fmdpZa1M07JI3Z0ea6TqcvSr8IgPas6gkN/uyc=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx+SxOlVt4Ih2G74+FwX9y3b2z3ab3zJkALJiFjiYRsvvtTEhi4
-	d6m3S8SUoS1Fxq4bp4ZWRLAhoZD/r+4UYurx8PlUu6+AzBk58W1mQe39wC12koDuAzGqBtreD4B
-	sclj7NQ==
-X-Received: from plpl11.prod.google.com ([2002:a17:903:3dcb:b0:2b0:46bd:4fe5])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:902:ce02:b0:2ca:62e:cc4f
- with SMTP id d9443c01a7336-2ca7e7645d1mr34535395ad.23.1782934374801; Wed, 01
- Jul 2026 12:32:54 -0700 (PDT)
+        bh=3ZuhwNx9YXpitDLlgZzJCjWGiYgYUv+Ggq0FniuPOLw=;
+        b=ck4EVdpYuR+HOY7Xk5VXlqegfnZaONxO090BN9sxG+atMfm+z/Kvg1dSRcTOXhSDaB
+         x95mFJ1VMimKZwX9CpagnU7e7SSMgSVHfLl8U8WQa7clwWw4TtFveX4jv1lsxYYoR4z4
+         hqzVe63E2xOd93ehYC4elogBQshR9nkHTM/ffxjHaLcR5Og/oaIjI41ZjXOkYORqmHW1
+         MyR537mXLRwbEv37RsG1kbt65hgT371Ri59VGP069cARe2VByu10e7Op/wIhV3MbifJj
+         qSDy1TZk5e0UgWHOv/k8SFTMH6ecG5WxIxYHZzkHgLrshd0LcE17Pzx+KCypt3ezqcG4
+         NLhg==
+X-Forwarded-Encrypted: i=1; AFNElJ8kaoNQiqIO4xV/4MhhPKeKlRw12SDLWRc39lKSgcJP2a+hSiBgE5Z1Lo1AMVtBJpMDcwPh7WnMlCE=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yydh6E+xEu0abaREesbGQJTgoj/o+ztTlDrNMQ0Rf9hNXbksUUJ
+	iTxuz8rdW0x65JUSxlaiK/Te6kz24E+ayxmMmV9z8toowyRTd7DAToQoOr6wxvo+q6Iid29F/t+
+	5hpLMZw==
+X-Received: from pglx30.prod.google.com ([2002:a63:171e:0:b0:c9e:a22d:15c4])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6a21:6e8f:b0:3bf:d0c8:2aa4
+ with SMTP id adf61e73a8af0-3bfed1c3990mr3189645637.8.1782934375853; Wed, 01
+ Jul 2026 12:32:55 -0700 (PDT)
 Reply-To: Sean Christopherson <seanjc@google.com>
-Date: Wed,  1 Jul 2026 12:31:44 -0700
+Date: Wed,  1 Jul 2026 12:31:45 -0700
 In-Reply-To: <20260701193212.749551-1-seanjc@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -78,9 +78,8 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 Mime-Version: 1.0
 References: <20260701193212.749551-1-seanjc@google.com>
 X-Mailer: git-send-email 2.55.0.rc0.799.gd6f94ed593-goog
-Message-ID: <20260701193212.749551-24-seanjc@google.com>
-Subject: [PATCH v5 23/51] x86/tsc: Add standalone helper for getting CPU
- frequency from CPUID
+Message-ID: <20260701193212.749551-25-seanjc@google.com>
+Subject: [PATCH v5 24/51] x86/kvm: Get CPU base frequency from CPUID when it's available
 From: Sean Christopherson <seanjc@google.com>
 To: Jonathan Corbet <corbet@lwn.net>, Paolo Bonzini <pbonzini@redhat.com>, 
 	Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
@@ -119,14 +118,14 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_RECIPIENTS(0.00)[m:corbet@lwn.net,m:pbonzini@redhat.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:kas@kernel.org,m:rick.p.edgecombe@intel.com,m:seanjc@google.com,m:kys@microsoft.com,m:haiyangz@microsoft.com,m:wei.liu@kernel.org,m:decui@microsoft.com,m:longli@microsoft.com,m:ajay.kaher@broadcom.com,m:alexey.makhalov@broadcom.com,m:jan.kiszka@siemens.com,m:luto@kernel.org,m:peterz@infradead.org,m:jgross@suse.com,m:daniel.lezcano@kernel.org,m:jstultz@google.com,m:skhan@linuxfoundation.org,m:hpa@zytor.com,m:vkuznets@redhat.com,m:bcm-kernel-feedback-list@broadcom.com,m:boris.ostrovsky@oracle.com,m:sboyd@kernel.org,m:linux-doc@vger.kernel.org,m:kvm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-coco@lists.linux.dev,m:linux-hyperv@vger.kernel.org,m:virtualization@lists.linux.dev,m:xen-devel@lists.xenproject.org,m:thomas.lendacky@amd.com,m:nikunj@amd.com,m:dwmw@amazon.co.uk,m:dwmw2@infradead.org,m:mhklinux@outlook.com
  ,m:tglx@linutronix.de,s:lists@lfdr.de];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,amazon.co.uk:email];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER(0.00)[seanjc@google.com,linux-doc@vger.kernel.org];
 	RCPT_COUNT_TWELVE(0.00)[42];
 	FORWARDED(0.00)[lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-94455-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-94457-lists,linux-doc=lfdr.de];
 	DKIM_TRACE(0.00)[google.com:+];
 	HAS_REPLYTO(0.00)[seanjc@google.com];
 	PRECEDENCE_BULK(0.00)[];
@@ -141,93 +140,59 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	REPLYTO_EQ_FROM(0.00)[]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 5BC4B6F10AB
+X-Rspamd-Queue-Id: AAF9F6F10DB
 
-Extract the guts of cpu_khz_from_cpuid() to a standalone helper that
-doesn't restrict the usage to Intel CPUs.  This will allow sharing the
-core logic with KVM-as-a-guest, as KVM generally doesn't restrict CPUID
-based on vendor.
+If CPUID.0x16 is present and valid, use the CPU frequency provided by
+CPUID instead of assuming that the virtual CPU runs at the same
+frequency as TSC and/or kvmclock.  Back before constant TSCs were a
+thing, treating the TSC and CPU frequencies as one and the same was
+somewhat reasonable, but now it's nonsensical, especially if the
+hypervisor explicitly enumerates the CPU frequency.
 
-No functional change intended.
-
-Reviewed-by: David Woodhouse <dwmw@amazon.co.uk>
 Signed-off-by: Sean Christopherson <seanjc@google.com>
 ---
- arch/x86/include/asm/tsc.h |  1 +
- arch/x86/kernel/tsc.c      | 31 +++++++++++++++----------------
- 2 files changed, 16 insertions(+), 16 deletions(-)
+ arch/x86/kernel/kvm.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-diff --git a/arch/x86/include/asm/tsc.h b/arch/x86/include/asm/tsc.h
-index c09ec485abcd..cb682f097ea7 100644
---- a/arch/x86/include/asm/tsc.h
-+++ b/arch/x86/include/asm/tsc.h
-@@ -88,6 +88,7 @@ struct cpuid_tsc_info {
- 	unsigned int crystal_khz;
- };
- extern int cpuid_get_tsc_info(struct cpuid_tsc_info *info);
-+extern unsigned int __cpu_khz_from_cpuid(void);
+diff --git a/arch/x86/kernel/kvm.c b/arch/x86/kernel/kvm.c
+index 1cef54e1e7d9..6c7011ff7bd1 100644
+--- a/arch/x86/kernel/kvm.c
++++ b/arch/x86/kernel/kvm.c
+@@ -50,6 +50,7 @@
+ #include <asm/e820/api.h>
  
- extern void tsc_early_init(void);
- extern void tsc_init(void);
-diff --git a/arch/x86/kernel/tsc.c b/arch/x86/kernel/tsc.c
-index 6ed6f8f012eb..56e73e96920a 100644
---- a/arch/x86/kernel/tsc.c
-+++ b/arch/x86/kernel/tsc.c
-@@ -668,6 +668,18 @@ int cpuid_get_tsc_info(struct cpuid_tsc_info *info)
- 	return 0;
+ static unsigned int kvm_tsc_khz_cpuid __initdata;
++static unsigned int kvm_cpu_khz_cpuid __initdata;
+ 
+ DEFINE_STATIC_KEY_FALSE_RO(kvm_async_pf_enabled);
+ 
+@@ -928,6 +929,11 @@ static unsigned int __init kvm_get_tsc_khz(void)
+ 	return kvm_tsc_khz_cpuid;
  }
  
-+unsigned int __cpu_khz_from_cpuid(void)
++static unsigned int __init kvm_get_cpu_khz(void)
 +{
-+	unsigned int eax_base_mhz, ebx, ecx, edx;
-+
-+	if (boot_cpu_data.cpuid_level < CPUID_LEAF_FREQ)
-+		return 0;
-+
-+	cpuid(CPUID_LEAF_FREQ, &eax_base_mhz, &ebx, &ecx, &edx);
-+
-+	return eax_base_mhz * 1000;
++	return kvm_cpu_khz_cpuid;
 +}
 +
- /**
-  * native_calibrate_tsc - determine TSC frequency
-  * Determine TSC frequency via CPUID, else return 0.
-@@ -703,12 +715,8 @@ static unsigned long native_calibrate_tsc(void)
- 	 * clock, but we can easily calculate it to a high degree of accuracy
- 	 * by considering the crystal ratio and the CPU speed.
- 	 */
--	if (!info.crystal_khz && boot_cpu_data.cpuid_level >= CPUID_LEAF_FREQ) {
--		unsigned int eax_base_mhz, ebx, ecx, edx;
--
--		cpuid(CPUID_LEAF_FREQ, &eax_base_mhz, &ebx, &ecx, &edx);
--		info.crystal_khz = eax_base_mhz * 1000 * info.denominator / info.numerator;
--	}
-+	if (!info.crystal_khz)
-+		info.crystal_khz = __cpu_khz_from_cpuid() * info.denominator / info.numerator;
- 
- 	if (!info.crystal_khz)
- 		return 0;
-@@ -733,19 +741,10 @@ static unsigned long native_calibrate_tsc(void)
- 
- static unsigned long cpu_khz_from_cpuid(void)
+ unsigned int kvm_arch_para_features(void)
  {
--	unsigned int eax_base_mhz, ebx_max_mhz, ecx_bus_mhz, edx;
--
- 	if (boot_cpu_data.x86_vendor != X86_VENDOR_INTEL)
- 		return 0;
+ 	return cpuid_eax(kvm_cpuid_base() | KVM_CPUID_FEATURES);
+@@ -1041,6 +1047,14 @@ static void __init kvm_init_platform(void)
+ 		}
+ 	}
  
--	if (boot_cpu_data.cpuid_level < CPUID_LEAF_FREQ)
--		return 0;
--
--	eax_base_mhz = ebx_max_mhz = ecx_bus_mhz = edx = 0;
--
--	cpuid(CPUID_LEAF_FREQ, &eax_base_mhz, &ebx_max_mhz, &ecx_bus_mhz, &edx);
--
--	return eax_base_mhz * 1000;
-+	return __cpu_khz_from_cpuid();
- }
- 
- /*
++	/*
++	 * Prefer CPUID.0x16 over KVM's PV CPUID when possible, as the base CPU
++	 * frequency isn't necessarily the same as the TSC frequency.
++	 */
++	kvm_cpu_khz_cpuid = __cpu_khz_from_cpuid();
++	if (kvm_cpu_khz_cpuid)
++		x86_init.hyper.get_cpu_khz = kvm_get_cpu_khz;
++
+         /*
+          * If the TSC counts at a constant frequency across P/T states and in
+          * deep C-states, treat the TSC reliable, as guaranteed by KVM.
 -- 
 2.55.0.rc0.799.gd6f94ed593-goog
 
