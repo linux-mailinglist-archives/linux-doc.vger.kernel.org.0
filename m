@@ -1,273 +1,288 @@
-Return-Path: <linux-doc+bounces-94361-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94349-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id oTD2EwYRRWp46QoAu9opvQ
-	(envelope-from <linux-doc+bounces-94361-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 15:07:18 +0200
+	id R59xKAcQRWoJ6QoAu9opvQ
+	(envelope-from <linux-doc+bounces-94349-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 15:03:03 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4AFD6EDD69
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 15:07:17 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id A4E316EDC7C
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 15:03:02 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=BR4aiH8B;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94361-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-94361-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=MufYbjHG;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94349-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94349-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id EB1ED303782A
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 12:58:36 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 8C861315BD37
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 12:54:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F42224963B2;
-	Wed,  1 Jul 2026 12:55:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9863748167E;
+	Wed,  1 Jul 2026 12:53:34 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60468495528
-	for <linux-doc@vger.kernel.org>; Wed,  1 Jul 2026 12:55:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3289A48B38D
+	for <linux-doc@vger.kernel.org>; Wed,  1 Jul 2026 12:53:33 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782910528; cv=none; b=FE1Wi7EUYbrqAcwl7NwSXxHTxLIsOAMh7lTqWAl07ajSO7ux+u8kwX5unNOnFfW/eyK4YhIIsB3Y42dbwV0Eio0xz7jMibl8INtfmBdQghSqup4Ih+DBwYkuKxuIuq+HKP/Zamf18d4ROmN6VGYEH+VM2rHcLULnD0U8mrfzcuY=
+	t=1782910414; cv=none; b=AKCu1zS2tmgB8c1nDY+1rsbQk2BMZrOItfI9yWlq7slVxJ0S5bgnmtf+s7iGVzYzy5lZ0sQ5b+5AcY0pFfBYHw3iIBIb1QW/jTGBTxZc33Rr4j679IWHwp1acjOU350BOIqUVHIh0IAgAcp1JLlHV6j6ugtqK0jJEECmDkQU8pA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782910528; c=relaxed/simple;
-	bh=JS2yG9pDjGwh3KA79+kpc5rS+oVEF7mlXGQkOFvbxFc=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=tBUGiTAjgsQm+yvRIr1THJeLofEEtk2SutumChFBHjVCqqAKeVi41NQHNxHnKnRfMvx3G/KnREDgZHlgXjBFoYUrWuE3716ZFK0kSYegVcVMQ/gMrs6AwkdK9CkfU/SoQl9u7ZGcND3oYD6/6SqB2UCO475f/CMUYe5uBAeE5aM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=BR4aiH8B; arc=none smtp.client-ip=209.85.210.179
-Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-8454160043aso419058b3a.3
-        for <linux-doc@vger.kernel.org>; Wed, 01 Jul 2026 05:55:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782910527; x=1783515327; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=0UYpoyK5fl+7ujxdLva1zphzrbPXeYkLwxH26RQow7w=;
-        b=BR4aiH8BOQQC2xNpBAVnQ9us6xtKwlsSiuxwOCRxI5J21LC7jQduRS/v10pTc3eVdf
-         Javdycerofv65LDjN4/bpn1DXW5x5fuWGcIfghurFf2XyVf59Vfjq2D7sWZ19EygHGHr
-         VTfLIOTWTgfKf6nNduq4U6Knkk7XhSYVK1z+Pv6Rx0DQ649+Y0M6HonulyAxKzsUcwo1
-         BPjDW4/r3EgIOv71Q6DZUu7g6gePUA8rn7tLbzfvOjGUJbjKq+TYK2fsYiJPuFf3R5Pe
-         CaBuD7H6xtilHhpMrnl1q9iSU1W34MjLDOGP3QBMoK8lhFu8JD/PNfuW9fBZbaen5ufq
-         ezzQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782910527; x=1783515327;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=0UYpoyK5fl+7ujxdLva1zphzrbPXeYkLwxH26RQow7w=;
-        b=RmZ+zWqgaGV3U2cCkpRHSf5/st8BCZii/cSHYeWPObmzZ4mMD84H/mRT2I9JL9hOp4
-         RfxWULyJPVKdlJpJT2qjczYscTjGzQIb/9aJfMj2kii40EZjVTHQvogIt2UvuRIawg0O
-         ITXdiKYG/du+MR/FhlbjwE6/c/rnL2OQPJHQireTOafygVYLRJTJibvfBX12NJ2y4Bwx
-         Imh2uep0SSGClw0FRaVT+miqQHqVi2zKNdKEbTyMVR1IXHTTo1VyWKPRUi7bB0g22Lv8
-         viSDu2/L7DGQ8K3Aqna1tmDeSrbyEgjWak+3XWOVKDEJ/XHdBGOOcyz6SnU9sS7bZRLI
-         rhGg==
-X-Gm-Message-State: AOJu0YwXFefUrEouMTO+2XXy1av+Ni2JO67L+JR3KS7xV2NGQrv06yo+
-	Ocv6Me2kxQuSKUkOerqbfGKT00cTJQmkIZHUkYO9rzlMVQPb2z/7FsUBk7gstaGN
-X-Gm-Gg: AfdE7cnBNt9ngozmpuL2rdpaRS/XPrVI2/36bn2cWrEH6zfBMGP27J34jfzs+TDtpls
-	nfh8OZzSucnDpRk9ZqnwrOUCPboEBz4IrDOH0r1866gmp06SBOZNMBx6GxSeR13IgYLDJEhF00P
-	/vsfHNOX1GZK10nzqnRiqRHkBCbZjd45ySVCJmpBAcF+KN4iTgycwX3ltSze1TYWwAy2U4X/h4T
-	/0hbs4UvDGzRW2G6+zEYLDuMbzJ6LJqejIF64ReH8Tm7SJTyKxxbB9dr6fpjw/qbtC+L9Hw54gr
-	CAT49iTC08JypKZ0GZBwileFvgZhH8HE5h83b8nGFitFvZjNDb6p8Ry51aJwSjYIqwJSy+wFR6d
-	5c9Oj6fw3ZySfeG95LETKIIsHtf4ZT5ULNDzw8ZaWYceiiC770uc042s36W88sNINB2VxaRJEKW
-	LR4XICvwFW878Wlj0fWquQ
-X-Received: by 2002:a05:6a00:8d0:b0:847:83bd:6676 with SMTP id d2e1a72fcca58-847c0797314mr1543138b3a.17.1782910526573;
-        Wed, 01 Jul 2026 05:55:26 -0700 (PDT)
-Received: from [127.0.1.1] ([120.244.9.45])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-847a03778basm3999403b3a.49.2026.07.01.05.55.17
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 01 Jul 2026 05:55:26 -0700 (PDT)
-From: Guodong Xu <docular.xu@gmail.com>
-Date: Wed, 01 Jul 2026 08:52:30 -0400
-Subject: [PATCH v5 17/17] riscv: hwprobe: Introduce rva23u64 base behavior
+	s=arc-20240116; t=1782910414; c=relaxed/simple;
+	bh=s4t3G5F4qqktsL4DaLIjyp87DSQDbY/2WsaSTuGkOyI=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=kjb/L+xFB22Tfkst8geD3h6rkQm+Ymno4hsds/r6h+eo5wEys79P7qCcn5XN/EUqN/Gy4XUPbdtV88h50iq7Rrwdrm18edqUcpC+L5C9bAEGThXMHkidCetDFP57pftv40sIJHyjGvocskf8uW4XjctC2fSripDC+IvF4Ck7RpM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MufYbjHG; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EB1531F00ACA
+	for <linux-doc@vger.kernel.org>; Wed,  1 Jul 2026 12:53:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1782910413;
+	bh=Uyf3m31VmHN9oNn8pJPThrwZz9OConCR56J0nW8Z1B8=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=MufYbjHGJ+AqBMTAq1MSueyWk8NL3FkKrsAoLPKzxFdDo+TS9gw6l/rX12RPLcC7E
+	 E/FbdCorOr4Ya9P1ikn4FegBLG5YGr6vE0mMY6Sgza3FaPLOZQSMV317K/0RpAVy6g
+	 KdyJVlQtjMgisOJNyISGFM42sUGekcIiHPN09HkBF8YJiiy7+7bHgcBggQJBjKyzHa
+	 u+43yGTMBxaqb/IU74okrGaOzI364i0EqU0QEoNxSOiR6sUPQwwtJ366ADRmHFw7+G
+	 MtjKQ7/d8kGrob1kKGJUy8MK/0qN5sZZ7iV1wWRO4FF2f61YtfHTlY/R+z99I0h3l7
+	 hZu1hOzBiNQvA==
+Received: by mail-lj1-f173.google.com with SMTP id 38308e7fff4ca-39b27812c96so5605641fa.0
+        for <linux-doc@vger.kernel.org>; Wed, 01 Jul 2026 05:53:32 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RrXbUbNK2oU5vSOAxAP9tKN2A+j+u8MyK//UG6hmIyQK94g+uhasTKW7boyHQdrNHZcnjYOEJPP87M=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx8fOivxOZzs5i39u6Dz0gdDElKsPX/Tt1UMjf4iHc84Du8QCtK
+	jmut+wFaP12SNAeZQCELcJaQur3HOOKzsRvioiLocX8RwOXwPqvHxFMVDxLPGkwREY9QaphgLJX
+	MIKxskBV/Ae9xlbkp0GdcbOIXHWtQ/3g=
+X-Received: by 2002:a05:6512:6382:b0:5ae:b97b:5855 with SMTP id
+ 2adb3069b0e04-5aec68b4320mr358186e87.40.1782910411374; Wed, 01 Jul 2026
+ 05:53:31 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260701-rva23u64-hwprobe-v2-v5-17-2c61f94a695a@gmail.com>
-References: <20260701-rva23u64-hwprobe-v2-v5-0-2c61f94a695a@gmail.com>
-In-Reply-To: <20260701-rva23u64-hwprobe-v2-v5-0-2c61f94a695a@gmail.com>
-To: Jonathan Corbet <corbet@lwn.net>, 
- Shuah Khan <skhan@linuxfoundation.org>, Paul Walmsley <pjw@kernel.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, 
- Alexandre Ghiti <alex@ghiti.fr>, Zong Li <zong.li@sifive.com>, 
- Deepak Gupta <debug@rivosinc.com>, Anup Patel <anup@brainfault.org>, 
- Atish Patra <atish.patra@linux.dev>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Yixun Lan <dlan@kernel.org>, 
- Chen Wang <unicorn_wang@outlook.com>, Inochi Amaoto <inochiama@gmail.com>, 
- Chen Wang <chen.wang@linux.dev>
-Cc: linux-doc@vger.kernel.org, linux-riscv@lists.infradead.org, 
- linux-kernel@vger.kernel.org, kvm@vger.kernel.org, 
- kvm-riscv@lists.infradead.org, Paul Walmsley <paul.walmsley@sifive.com>, 
- Conor Dooley <conor@kernel.org>, Jesse Taube <jtaubepe@redhat.com>, 
- Charlie Jenkins <thecharlesjenkins@gmail.com>, 
- Andrew Jones <andrew.jones@oss.qualcomm.com>, devicetree@vger.kernel.org, 
- spacemit@lists.linux.dev, sophgo@lists.linux.dev, 
- linux-kselftest@vger.kernel.org, Guodong Xu <docular.xu@gmail.com>
-X-Mailer: b4 0.15.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4859; i=docular.xu@gmail.com;
- h=from:subject:message-id; bh=JS2yG9pDjGwh3KA79+kpc5rS+oVEF7mlXGQkOFvbxFc=;
- b=owGbwMvMwCXWtEl1Z3CGpCDjabUkhixX3vaDBvML16z7O4dpxQF11qYlJadmHrDpqhEv/rXBV
- 9tr7sX4jlIWBjEuBlkxRZbDR1uyt77yifZ9zvkDZg4rE8gQBi5OAZiI4i6G//W2Nn4L07wviPnP
- LdUK7wr5wKn66Jh0oNmqaTU/WmetLGNkuBHhnqF5wDSfY9vegt8vfd7POrRq0kY2Y3mJhecqlh3
- h4gEA
-X-Developer-Key: i=docular.xu@gmail.com; a=openpgp;
- fpr=90B1DC3DF0BD10FD1227BD6344F254AF42F143EE
+References: <20260701045640.3130090-1-tzungbi@kernel.org> <20260701045640.3130090-3-tzungbi@kernel.org>
+ <2026070140-rally-prowling-4d66@gregkh>
+In-Reply-To: <2026070140-rally-prowling-4d66@gregkh>
+From: "Rafael J. Wysocki (Intel)" <rafael@kernel.org>
+Date: Wed, 1 Jul 2026 14:53:18 +0200
+X-Gmail-Original-Message-ID: <CAJZ5v0goFxWOjjm1_JyaORKViEEc99-Tj-Yq4K0guYqZEvU9gg@mail.gmail.com>
+X-Gm-Features: AVVi8Cf86nuhzIOE2p8v6g-b6ssqyCv2EsWN9SuC4GrAViSt0kYqBNdtyScE0U4
+Message-ID: <CAJZ5v0goFxWOjjm1_JyaORKViEEc99-Tj-Yq4K0guYqZEvU9gg@mail.gmail.com>
+Subject: Re: [PATCH v5 2/2] PM: dpm_watchdog: Allow disabling DPM watchdog by default
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Tzung-Bi Shih <tzungbi@kernel.org>
+Cc: Jonathan Corbet <corbet@lwn.net>, "Rafael J. Wysocki" <rafael@kernel.org>, 
+	Danilo Krummrich <dakr@kernel.org>, Shuah Khan <skhan@linuxfoundation.org>, 
+	Pavel Machek <pavel@kernel.org>, Len Brown <lenb@kernel.org>, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org, 
+	driver-core@lists.linux.dev, tfiga@chromium.org, senozhatsky@chromium.org, 
+	Randy Dunlap <rdunlap@infradead.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-5.16 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94361-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-94349-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:pjw@kernel.org,m:palmer@dabbelt.com,m:aou@eecs.berkeley.edu,m:alex@ghiti.fr,m:zong.li@sifive.com,m:debug@rivosinc.com,m:anup@brainfault.org,m:atish.patra@linux.dev,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:dlan@kernel.org,m:unicorn_wang@outlook.com,m:inochiama@gmail.com,m:chen.wang@linux.dev,m:linux-doc@vger.kernel.org,m:linux-riscv@lists.infradead.org,m:linux-kernel@vger.kernel.org,m:kvm@vger.kernel.org,m:kvm-riscv@lists.infradead.org,m:paul.walmsley@sifive.com,m:conor@kernel.org,m:jtaubepe@redhat.com,m:thecharlesjenkins@gmail.com,m:andrew.jones@oss.qualcomm.com,m:devicetree@vger.kernel.org,m:spacemit@lists.linux.dev,m:sophgo@lists.linux.dev,m:linux-kselftest@vger.kernel.org,m:docular.xu@gmail.com,m:krzk@kernel.org,m:docularxu@gmail.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[docularxu@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS(0.00)[m:gregkh@linuxfoundation.org,m:tzungbi@kernel.org,m:corbet@lwn.net,m:rafael@kernel.org,m:dakr@kernel.org,m:skhan@linuxfoundation.org,m:pavel@kernel.org,m:lenb@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-pm@vger.kernel.org,m:driver-core@lists.linux.dev,m:tfiga@chromium.org,m:senozhatsky@chromium.org,m:rdunlap@infradead.org,s:lists@lfdr.de];
+	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FREEMAIL_TO(0.00)[lwn.net,linuxfoundation.org,kernel.org,dabbelt.com,eecs.berkeley.edu,ghiti.fr,sifive.com,rivosinc.com,brainfault.org,linux.dev,outlook.com,gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[32];
-	FORWARDED(0.00)[lists@lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	FORGED_SENDER(0.00)[rafael@kernel.org,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[vger.kernel.org,lists.infradead.org,sifive.com,kernel.org,redhat.com,gmail.com,oss.qualcomm.com,lists.linux.dev];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[docularxu@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	FROM_NEQ_ENVFROM(0.00)[rafael@kernel.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[qualcomm.com:email,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,vger.kernel.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,mail.gmail.com:mid,linuxfoundation.org:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: E4AFD6EDD69
+X-Rspamd-Queue-Id: A4E316EDC7C
 
-Provide a hwprobe base-behavior bit so userspace can check RVA23U64
-support in one call.  Without it, a consumer needs five hwprobe
-calls and four prctl calls, which is error-prone to require of every
-caller.  Most software treats RVA23U64 as a new base anyway, so
-expose it directly.
+On Wed, Jul 1, 2026 at 9:22=E2=80=AFAM Greg Kroah-Hartman
+<gregkh@linuxfoundation.org> wrote:
+>
+> On Wed, Jul 01, 2026 at 04:56:40AM +0000, Tzung-Bi Shih wrote:
+> > Introduce the "dpm_watchdog_enabled" module parameter to allow the DPM
+> > watchdog to be enabled or disabled at boot time and runtime.
+>
+> As I say all the time, this isn't the 1990's, please don't add new
+> module parameters as they are a pain to manage and maintain over time
+> (as you found out with my rejection of patch 1/2 here...)
 
-Signed-off-by: Andrew Jones <andrew.jones@oss.qualcomm.com>
-Signed-off-by: Guodong Xu <docular.xu@gmail.com>
----
-v5: No change.
-v4: No change.
-v3: No change.
-v2:
-- Detect RVA23U64 by reading from the cached hart_isa[].isa_bases
-  bitmap populated by riscv_init_isa_bases() at init time, sharing
-  one source of truth with /proc/cpuinfo.
----
- Documentation/arch/riscv/hwprobe.rst               |  8 ++++++++
- arch/riscv/include/uapi/asm/hwprobe.h              |  3 ++-
- arch/riscv/kernel/sys_hwprobe.c                    | 23 +++++++++++++++-------
- tools/testing/selftests/riscv/hwprobe/which-cpus.c |  2 +-
- 4 files changed, 27 insertions(+), 9 deletions(-)
+Let me challenge this though because there are use cases for something
+like module parameters AFAICS.
 
-diff --git a/Documentation/arch/riscv/hwprobe.rst b/Documentation/arch/riscv/hwprobe.rst
-index 32a14331eb9de..dc70470093b1b 100644
---- a/Documentation/arch/riscv/hwprobe.rst
-+++ b/Documentation/arch/riscv/hwprobe.rst
-@@ -67,6 +67,14 @@ The following keys are defined:
-       programs (it may still be executed in userspace via a
-       kernel-controlled mechanism such as the vDSO).
- 
-+  * :c:macro:`RISCV_HWPROBE_BASE_BEHAVIOR_RVA23U64`: Support for all mandatory
-+    extensions of RVA23U64, as defined in the RISC-V Profiles specification
-+    starting from commit 0273f3c921b6 ("rva23/rvb23 ratified").
-+
-+    The RVA23U64 base is based upon the IMA base and therefore IMA extension
-+    keys (e.g. :c:macro:`RISCV_HWPROBE_KEY_IMA_EXT_0`:) may be used to probe
-+    optional extensions.
-+
- * :c:macro:`RISCV_HWPROBE_KEY_IMA_EXT_0`: A bitmask containing extensions
-   that are compatible with the :c:macro:`RISCV_HWPROBE_BASE_BEHAVIOR_IMA`:
-   base system behavior.
-diff --git a/arch/riscv/include/uapi/asm/hwprobe.h b/arch/riscv/include/uapi/asm/hwprobe.h
-index 36ec8ab470423..50733d3db7633 100644
---- a/arch/riscv/include/uapi/asm/hwprobe.h
-+++ b/arch/riscv/include/uapi/asm/hwprobe.h
-@@ -21,7 +21,8 @@ struct riscv_hwprobe {
- #define RISCV_HWPROBE_KEY_MARCHID	1
- #define RISCV_HWPROBE_KEY_MIMPID	2
- #define RISCV_HWPROBE_KEY_BASE_BEHAVIOR	3
--#define		RISCV_HWPROBE_BASE_BEHAVIOR_IMA	(1 << 0)
-+#define		RISCV_HWPROBE_BASE_BEHAVIOR_IMA		(1 << 0)
-+#define		RISCV_HWPROBE_BASE_BEHAVIOR_RVA23U64	(1 << 1)
- #define RISCV_HWPROBE_KEY_IMA_EXT_0	4
- #define		RISCV_HWPROBE_IMA_FD		(1 << 0)
- #define		RISCV_HWPROBE_IMA_C		(1 << 1)
-diff --git a/arch/riscv/kernel/sys_hwprobe.c b/arch/riscv/kernel/sys_hwprobe.c
-index 3e80e5551ae0d..3f66f2e99d41a 100644
---- a/arch/riscv/kernel/sys_hwprobe.c
-+++ b/arch/riscv/kernel/sys_hwprobe.c
-@@ -226,6 +226,17 @@ static bool hwprobe_ext0_has(const struct cpumask *cpus, u64 ext)
- 	return (pair.value & ext);
- }
- 
-+static bool hwprobe_has_isa_base(const struct cpumask *cpus, unsigned int base)
-+{
-+	int cpu;
-+
-+	for_each_cpu(cpu, cpus) {
-+		if (!test_bit(base, hart_isa[cpu].isa_bases))
-+			return false;
-+	}
-+	return true;
-+}
-+
- #if defined(CONFIG_RISCV_PROBE_UNALIGNED_ACCESS)
- static u64 hwprobe_misaligned(const struct cpumask *cpus)
- {
-@@ -308,14 +319,12 @@ static void hwprobe_one_pair(struct riscv_hwprobe *pair,
- 	case RISCV_HWPROBE_KEY_MIMPID:
- 		hwprobe_arch_id(pair, cpus);
- 		break;
--	/*
--	 * The kernel already assumes that the base single-letter ISA
--	 * extensions are supported on all harts, and only supports the
--	 * IMA base, so just cheat a bit here and tell that to
--	 * userspace.
--	 */
- 	case RISCV_HWPROBE_KEY_BASE_BEHAVIOR:
--		pair->value = RISCV_HWPROBE_BASE_BEHAVIOR_IMA;
-+		pair->value = 0;
-+		if (hwprobe_has_isa_base(cpus, RISCV_ISA_BASE_IMA))
-+			pair->value |= RISCV_HWPROBE_BASE_BEHAVIOR_IMA;
-+		if (hwprobe_has_isa_base(cpus, RISCV_ISA_BASE_RVA23U64))
-+			pair->value |= RISCV_HWPROBE_BASE_BEHAVIOR_RVA23U64;
- 		break;
- 
- 	case RISCV_HWPROBE_KEY_IMA_EXT_0:
-diff --git a/tools/testing/selftests/riscv/hwprobe/which-cpus.c b/tools/testing/selftests/riscv/hwprobe/which-cpus.c
-index 587feb198c049..f8c797b1d0fd9 100644
---- a/tools/testing/selftests/riscv/hwprobe/which-cpus.c
-+++ b/tools/testing/selftests/riscv/hwprobe/which-cpus.c
-@@ -105,7 +105,7 @@ int main(int argc, char **argv)
- 	pairs[0] = (struct riscv_hwprobe){ .key = RISCV_HWPROBE_KEY_BASE_BEHAVIOR, };
- 	rc = riscv_hwprobe(pairs, 1, 0, NULL, 0);
- 	assert(rc == 0 && pairs[0].key == RISCV_HWPROBE_KEY_BASE_BEHAVIOR &&
--	       pairs[0].value == RISCV_HWPROBE_BASE_BEHAVIOR_IMA);
-+	       (pairs[0].value & RISCV_HWPROBE_BASE_BEHAVIOR_IMA));
- 
- 	pairs[0] = (struct riscv_hwprobe){ .key = RISCV_HWPROBE_KEY_IMA_EXT_0, };
- 	rc = riscv_hwprobe(pairs, 1, 0, NULL, 0);
+There are things that are "on" by default that people want to turn
+"off" and ideally at init time.  If that happens in a loadable module,
+the only way to do so I'm aware of is using a module parameter.
 
--- 
-2.43.0
+There are also diagnostic features that are generally "off", but it is
+useful to turn them "on" occasionally, both at run time and at init
+time.  Adding a special kernel command line option and a separate
+special sysfs switch (for example) for that is kind of a pain and
+using a module parameter in such cases appears to be more
+straightforward to me, so what really is the problem with that?
 
+Moreover, there are those cases in which updating the kernel command
+line is more straightforward than updating user space to write into a
+specific file in sysfs after boot, so using a module parameter helps.
+
+So in general, assuming that the underlying use case is good enough,
+is a module parameter really worse than a combination of a special
+sysfs file and a special kernel command line argument and if so, then
+why?
+
+Of course, whether or not the underlying use case is good enough is a
+different matter.
+
+> > Additionally, introduce the CONFIG_DPM_WATCHDOG_ENABLED Kconfig option
+> > to set default value of the module parameter at compile time.
+> >
+> > This provides flexibility for systems that want the watchdog code
+> > compiled in but inactive by default, allowing it to be enabled only whe=
+n
+> > needed.
+> >
+> > Signed-off-by: Tzung-Bi Shih <tzungbi@kernel.org>
+> > ---
+> > v5: No changes.
+> >
+> > v4: https://lore.kernel.org/all/20260611021219.2093476-2-tzungbi@kernel=
+.org
+> > - Rewrite the commit message to indicate the module parameter is the
+> >   main change in the patch.
+> > - DPM_WATCHDOG_DEFAULT_ENABLED -> DPM_WATCHDOG_ENABLED.
+> >
+> > v3: https://lore.kernel.org/all/20260608021526.1023248-3-tzungbi@kernel=
+.org
+> > - Add "PM" tag (was missing).
+> > - Update the format and specify dependencies in kernel-parameters.txt.
+> > - Update the help message in Kconfig to reflect that dpm_watchdog_enabl=
+ed
+> >   can be set at runtime as well.
+> >
+> > v2: https://lore.kernel.org/all/20260604090756.2884671-3-tzungbi@kernel=
+.org
+> > - Use module parameter and bool for dpm_watchdog_enabled.
+> > - Use IS_ENABLED().
+> >
+> > v1: https://lore.kernel.org/all/20260528103215.505795-1-tzungbi@kernel.=
+org
+> > ---
+> >  Documentation/admin-guide/kernel-parameters.txt |  7 +++++++
+> >  drivers/base/power/main.c                       | 11 +++++++++++
+> >  kernel/power/Kconfig                            | 10 ++++++++++
+> >  3 files changed, 28 insertions(+)
+> >
+> > diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Document=
+ation/admin-guide/kernel-parameters.txt
+> > index b5493a7f8f22..46c20e1b5f05 100644
+> > --- a/Documentation/admin-guide/kernel-parameters.txt
+> > +++ b/Documentation/admin-guide/kernel-parameters.txt
+> > @@ -47,6 +47,7 @@
+> >       PCI     PCI bus support is enabled.
+> >       PCIE    PCI Express support is enabled.
+> >       PCMCIA  The PCMCIA subsystem is enabled.
+> > +     PM      Power Management support is enabled.
+> >       PNP     Plug & Play support is enabled.
+> >       PPC     PowerPC architecture is enabled.
+> >       PPT     Parallel port support is enabled.
+> > @@ -5354,6 +5355,12 @@ Kernel parameters
+> >       pm_debug_messages       [SUSPEND,KNL]
+> >                       Enable suspend/resume debug messages during boot =
+up.
+> >
+> > +     pm_sleep.dpm_watchdog_enabled=3D
+> > +                     [PM] Enable or disable the DPM watchdog.  Require=
+s
+> > +                     CONFIG_PM_SLEEP and CONFIG_DPM_WATCHDOG enabled.
+> > +                     Format: <bool>
+> > +                     Default value is set by CONFIG_DPM_WATCHDOG_ENABL=
+ED.
+> > +
+> >       pnp.debug=3D1     [PNP]
+> >                       Enable PNP debug messages (depends on the
+> >                       CONFIG_PNP_DEBUG_MESSAGES option).  Change at run=
+-time
+> > diff --git a/drivers/base/power/main.c b/drivers/base/power/main.c
+> > index c6a3300cfb7a..f58945758868 100644
+> > --- a/drivers/base/power/main.c
+> > +++ b/drivers/base/power/main.c
+> > @@ -535,6 +535,11 @@ module_param(dpm_watchdog_all_cpu_backtrace, bool,=
+ 0644);
+> >  MODULE_PARM_DESC(dpm_watchdog_all_cpu_backtrace,
+> >                "Backtrace all CPUs on DPM watchdog timeout");
+> >
+> > +static bool __read_mostly dpm_watchdog_enabled =3D
+> > +                             IS_ENABLED(CONFIG_DPM_WATCHDOG_ENABLED);
+> > +module_param(dpm_watchdog_enabled, bool, 0644);
+> > +MODULE_PARM_DESC(dpm_watchdog_enabled, "Enable DPM watchdog");
+> > +
+> >  static unsigned int __read_mostly dpm_watchdog_timeout =3D CONFIG_DPM_=
+WATCHDOG_TIMEOUT;
+> >  static unsigned int __read_mostly dpm_watchdog_warning_timeout =3D
+> >                                               CONFIG_DPM_WATCHDOG_WARNI=
+NG_TIMEOUT;
+> > @@ -630,6 +635,9 @@ static void dpm_watchdog_set(struct dpm_watchdog *w=
+d, struct device *dev)
+> >  {
+> >       struct timer_list *timer =3D &wd->timer;
+> >
+> > +     if (!dpm_watchdog_enabled)
+> > +             return;
+> > +
+> >       wd->dev =3D dev;
+> >       wd->tsk =3D current;
+> >       wd->fatal =3D dpm_watchdog_timeout =3D=3D dpm_watchdog_warning_ti=
+meout;
+> > @@ -648,6 +656,9 @@ static void dpm_watchdog_clear(struct dpm_watchdog =
+*wd)
+> >  {
+> >       struct timer_list *timer =3D &wd->timer;
+> >
+> > +     if (!dpm_watchdog_enabled)
+> > +             return;
+> > +
+> >       timer_delete_sync(timer);
+> >       timer_destroy_on_stack(timer);
+> >  }
+> > diff --git a/kernel/power/Kconfig b/kernel/power/Kconfig
+> > index 530c897311d4..508ceabc4d2e 100644
+> > --- a/kernel/power/Kconfig
+> > +++ b/kernel/power/Kconfig
+> > @@ -268,6 +268,16 @@ config DPM_WATCHDOG
+> >         captured in pstore device for inspection in subsequent
+> >         boot session.
+> >
+> > +config DPM_WATCHDOG_ENABLED
+> > +     bool "Enable DPM watchdog by default"
+> > +     depends on DPM_WATCHDOG
+> > +     default y
+>
+> Only do this if you can not boot without the option enabled, which I do
+> not think is the case here.
+
+So in this particular case, there is a way to adjust the watchdog
+timeout and if it is set to a very large value, the watchdog gets
+effectively disabled for all purposes.
+
+I'm not entirely sure if another switch to disable/enable it is needed
+in addition to that TBH.
 
