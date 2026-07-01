@@ -1,186 +1,202 @@
-Return-Path: <linux-doc+bounces-94377-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94381-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id WVeBKt8hRWpB7goAu9opvQ
-	(envelope-from <linux-doc+bounces-94377-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 16:19:11 +0200
+	id IJqVI9wjRWrH7goAu9opvQ
+	(envelope-from <linux-doc+bounces-94381-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 16:27:40 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6ACA06EE9F9
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 16:19:10 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id B41476EEB98
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 16:27:39 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=snu.ac.kr header.s=google header.b=UMx7eUN3;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94377-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94377-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=snu.ac.kr;
+	dkim=none;
+	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=zte.com.cn (policy=none);
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94381-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94381-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 6AC743049C60
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 14:18:36 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 7C76D3127013
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 14:20:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 56FAB344DAA;
-	Wed,  1 Jul 2026 14:18:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B930E344D88;
+	Wed,  1 Jul 2026 14:19:06 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mxhk.zte.com.cn (mxhk.zte.com.cn [160.30.148.34])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE05C344DA8
-	for <linux-doc@vger.kernel.org>; Wed,  1 Jul 2026 14:18:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0FE37343D75;
+	Wed,  1 Jul 2026 14:19:03 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782915498; cv=none; b=ae01JyyI4fpmAHhDjvxVjAOEADdFBDzJ1uIgTZaqJk1N+Sf3yRdxvBbnnHIS2BVYP4Bcf3i3iVysl6vZVbnBQJtktjXuX3h9gz0Stxo3559qinKqxF/PDAKlgPuN7AxAQdf3ZfCsvTXdjiHqZ7pKgWoaET42OJ8n0+MENwigJBY=
+	t=1782915546; cv=none; b=Est/yaH/RQl42RZnhB36uhCxMjSQ8U0P7x2d0usTEUHQxjMaviLOPP2X1eeVqF6tzYJGt0h0ss3qG968WmJDECIYNjT7KJwAf79APdQuzRu8De8EKXgUmR8mZmG7zw7C3qGoQ2SWaIZyfWptct+zTthZAS85IZF9W1AX4xpUhjc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782915498; c=relaxed/simple;
-	bh=F2YhkKxijOykhMXxuYIQHg9yc5lvoiTeuSTAXbMCDKc=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=BDNi1F8V/imBfd/GxoZ5jZV/TS3STUowyoc/ux+v36Cz6klyQ2DR1Xixp9Q+UasMkU3DP1X74OY5sZnV7JXZIWMU5r9KA12xNSrhHUUljIW9JE3t6qqzeJpVEQO0pPovAFLYVAA4unicP+sUUG0Q7cdElL5HmZAAfhOi7YRV2Kc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=snu.ac.kr; spf=pass smtp.mailfrom=snu.ac.kr; dkim=pass (1024-bit key) header.d=snu.ac.kr header.i=@snu.ac.kr header.b=UMx7eUN3; arc=none smtp.client-ip=209.85.214.177
-Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-2ca70925c25so6143115ad.1
-        for <linux-doc@vger.kernel.org>; Wed, 01 Jul 2026 07:18:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=snu.ac.kr; s=google; t=1782915495; x=1783520295; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=d1+h+rP9Cy+2+urt39ChSGhrhtQb1acD3XumdB+25eg=;
-        b=UMx7eUN3By4rRKYXRT01i8LLjaKheA+NlVMhQeTz9nFfMgpVyPYce6EwKVOpFRqi/r
-         4jyWocu1MuMHn1iUYOHipxqm1p6RleLsLBKpLA7g6ZDIn5eZBNCuuNyjLMq+MBBBHr88
-         3HJPdXGiG6nY1OzKB0CT5pRB4J1zuqReuWEA0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782915495; x=1783520295;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=d1+h+rP9Cy+2+urt39ChSGhrhtQb1acD3XumdB+25eg=;
-        b=Ffk3q+cUAnKHUX3dYTJjZ0ZitGI07AvBtQuOgrYAhB1c0a8cx6Sj/wwyx34sI10vpA
-         m5EFir3hobLCiUUYd92cx/7L6XrmzwebxM7rBTo1hLhejbkJOeqXPRlqScaf2/VddwtD
-         2UdYRnb6cxf9xVmxLWJ5fFA/rWGiJL4q63f4fNm3PFafcKqmS2Qx7i8pRKWBc3JGDzg6
-         jEGcgugF3VlxWUjT5tOEJcvwhm8Jn5GkoDXQxUuH8Q6w87J1UT7ImvjGzrckjfUSoEQr
-         XOc8HOFqaj2WQVMszYCrFwxkoF4GLGfj54ZyFbFdUHY3No12beGhP8Yroe53o42BVr2X
-         QeKg==
-X-Forwarded-Encrypted: i=1; AHgh+RreYl7Zn9ZFOfFRzeX3kLivLbjpEu7NMIIDEPea/foz8vpclbb3DEoPIdhWH0sBNaRdf/GUKWW8pqg=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyIOcqEcSsmJIxzpfFeGKimYRUeHuwDSdVOyXW8dAJ5su7YjCFA
-	CZSE1pYXjNDZG9vkw4DgJ9HgrTE7AQuYjsMiD4G6MfwWMCoolOHm60Tsq05XbAlLtr4=
-X-Gm-Gg: AfdE7cl3z0RP+Rds8A5/rnRshIdpZpz+Dicb+MF7kdZOPArhJKmVs7QoaifWYbztmbo
-	0JeDrMZNAj2SBtjfUYIpQIBxZQKde2C40/kh6gwXWzmSIOAz2/3HCDH+lio3U2vUYUvqxAV+DaF
-	ITuC0P6PLBeRuLlenNCtDGz6NsToXjW9R1fHtwMZH/QZKsOhg6xBmKXvY0lDk4d2rrHy+ukVcUL
-	qMSCXv83w2ymc6c+E0MmngB/sCS4YRwERp4LYaqTnAiljm8WZegLDaG4KWgpmpUB3Ox8+F3KgNs
-	SR7oRkvFZ1pFZckb1chIfdfcQn72HSEDxqMbvYteJWX9d0tXvxwg2eMLlggSV57xK2SOZSK8nai
-	Z8770H8KQsM5mpW95c6t28RUm0jRqgDI7ixOfdi32NawHuXbfWyhM8b8WUc8pzPwhv0eM8eJzmE
-	1s/fPvkygaNh3J/ii7+zr0sUP76F6p9jISY+U=
-X-Received: by 2002:a17:903:3848:b0:2c9:c46b:1286 with SMTP id d9443c01a7336-2ca912002fbmr8642185ad.34.1782915495058;
-        Wed, 01 Jul 2026 07:18:15 -0700 (PDT)
-Received: from localhost.localdomain ([59.29.41.108])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ca3828c8f3sm33109975ad.41.2026.07.01.07.18.12
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 01 Jul 2026 07:18:13 -0700 (PDT)
-From: Seongjun Hong <hsj0512@snu.ac.kr>
-To: Vlastimil Babka <vbabka@kernel.org>,
-	Harry Yoo <harry@kernel.org>,
-	Andrew Morton <akpm@linux-foundation.org>
-Cc: linux-mm@kvack.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Seongjun Hong <hsj0512@snu.ac.kr>
-Subject: [PATCH] docs: ABI: sysfs-kernel-slab: mark cpu_partial attributes deprecated
-Date: Wed,  1 Jul 2026 14:17:46 +0000
-Message-ID: <20260701141755.85119-1-hsj0512@snu.ac.kr>
-X-Mailer: git-send-email 2.43.0
+	s=arc-20240116; t=1782915546; c=relaxed/simple;
+	bh=RvR2U4ecz0xrbMHjk5maJ5Fx6sW/La41FvsQ+pJ0I4U=;
+	h=Message-ID:In-Reply-To:References:Date:Mime-Version:From:To:Cc:
+	 Subject:Content-Type; b=qPVe4Odk2vJXP1PfJCHvZas5vu6zGBwXGqW1i1byJ6O2Rru/1xhomlOfoGQZJelV4CPMoCnvXgOZiMObrTISpPeVBL8esKlEGblvKm3jmrNZW200Trg0AAyj8QmF5RdJp4A9gNMYU5ms2Wxh7U2ynoE4Ws4eGqU/fGUxTByz/0w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zte.com.cn; spf=pass smtp.mailfrom=zte.com.cn; arc=none smtp.client-ip=160.30.148.34
+Received: from mse-fl2.zte.com.cn (unknown [10.5.228.133])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mxhk.zte.com.cn (FangMail) with ESMTPS id 4gr2FK5Pftz5B109;
+	Wed, 01 Jul 2026 22:19:01 +0800 (CST)
+Received: from xaxapp05.zte.com.cn ([10.99.98.109])
+	by mse-fl2.zte.com.cn with SMTP id 661EIs1q000143;
+	Wed, 1 Jul 2026 22:18:54 +0800 (+08)
+	(envelope-from xu.xin16@zte.com.cn)
+Received: from mapi (xaxapp01[null])
+	by mapi (Zmail) with MAPI id mid32;
+	Wed, 1 Jul 2026 22:18:57 +0800 (CST)
+X-Zmail-TransId: 2af96a4521d1cb0-8f438
+X-Mailer: Zmail v1.0
+Message-ID: <202607012218574761db7fGjm1svTfeCoKtrIX@zte.com.cn>
+In-Reply-To: <20260701123430.20699-1-lukas.gerlach@cispa.de>
+References: f75d286c-4d9e-4b64-8a9e-03e1afcb509f@kernel.org,20260701123430.20699-1-lukas.gerlach@cispa.de
+Date: Wed, 1 Jul 2026 22:18:57 +0800 (CST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Mime-Version: 1.0
+From: <xu.xin16@zte.com.cn>
+To: <lukas.gerlach@cispa.de>, <akpm@linux-foundation.org>, <david@kernel.org>
+Cc: <akpm@linux-foundation.org>, <corbet@lwn.net>, <linux-mm@kvack.org>,
+        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <chengming.zhou@linux.dev>, <skhan@linuxfoundation.org>,
+        <lukas.gerlach@cispa.de>, <jo.vanbulck@cs.kuleuven.be>,
+        <tristan.hornetz@cispa.de>, <michael.schwarz@cispa.de>,
+        <shukai.ni@kuleuven.be>
+Subject: =?UTF-8?B?UmU6IFtQQVRDSF0gbW0va3NtOiBkb2N1bWVudCBzaWRlLWNoYW5uZWwgc2VjdXJpdHkgY29uc2lkZXJhdGlvbnM=?=
+Content-Type: text/plain;
+	charset="UTF-8"
+X-MAIL:mse-fl2.zte.com.cn 661EIs1q000143
+X-TLS: YES
+X-ENVELOPE-SENDER: xu.xin16@zte.com.cn
+X-SOURCE-IP: 10.5.228.133 unknown Wed, 01 Jul 2026 22:19:01 +0800
+X-CLEAN: YES
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-MID-QID: 6A4521D5.000/4gr2FK5Pftz5B109
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [2.14 / 15.00];
+	SUBJ_EXCESS_BASE64(1.50)[];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[snu.ac.kr,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[snu.ac.kr:s=google];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	MV_CASE(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[zte.com.cn : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
+	TAGGED_FROM(0.00)[bounces-94381-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94377-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:vbabka@kernel.org,m:harry@kernel.org,m:akpm@linux-foundation.org,m:linux-mm@kvack.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:hsj0512@snu.ac.kr,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[hsj0512@snu.ac.kr,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[xu.xin16@zte.com.cn,linux-doc@vger.kernel.org];
+	FORGED_SENDER(0.00)[xu.xin16@zte.com.cn,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:lukas.gerlach@cispa.de,m:akpm@linux-foundation.org,m:david@kernel.org,m:corbet@lwn.net,m:linux-mm@kvack.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:chengming.zhou@linux.dev,m:skhan@linuxfoundation.org,m:jo.vanbulck@cs.kuleuven.be,m:tristan.hornetz@cispa.de,m:michael.schwarz@cispa.de,m:shukai.ni@kuleuven.be,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_NEQ_ENVFROM(0.00)[hsj0512@snu.ac.kr,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	FROM_NO_DN(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	TO_DN_NONE(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	ALIAS_RESOLVED(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	DKIM_TRACE(0.00)[snu.ac.kr:+];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	R_DKIM_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,vger.kernel.org:from_smtp,snu.ac.kr:dkim,snu.ac.kr:email,snu.ac.kr:mid,snu.ac.kr:from_mime,gentwo.org:email,helsinki.fi:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 6ACA06EE9F9
+X-Rspamd-Queue-Id: B41476EEB98
 
-The per-cpu slab and per-cpu partial slab mechanisms were removed when
-SLUB was converted to per-cpu sheaves in Linux 7.0. The cpu_slabs,
-slabs_cpu_partial and cpu_partial sysfs attributes were kept as stubs
-that always return 0 for backwards compatibility, but their
-documentation still described them as if they were functional.
+> Subject: [PATCH] mm/ksm: document side-channel security considerations
+> Date: Wed, 1 Jul 2026 14:34:30 +0200	[thread overview]
+> Message-ID: <20260701123430.20699-1-lukas.gerlach@cispa.de> (raw)
+> In-Reply-To: <f75d286c-4d9e-4b64-8a9e-03e1afcb509f@kernel.org>
+> 
+> KSM is known to enable side channels, but the admin guide does not
+> currently spell out the security implications of enabling page merging.
+> Because KSM merges pages by content across all processes with mergeable
+> memory, it forms a side channel that can be used to infer the contents
+> of that memory across security domains, regardless of the user,
+> container, or virtual machine the pages belong to.
+> 
+> Add a "Security considerations" section making this explicit, so that
+> operators can make an informed decision: KSM should only be enabled for
+> mutually trusting workloads, and any memory marked mergeable should be
+> assumed readable by every other process using KSM.
+> 
+> Co-developed-by: Jo Van Bulck <jo.vanbulck@cs.kuleuven.be>
+> Signed-off-by: Jo Van Bulck <jo.vanbulck@cs.kuleuven.be>
+> Signed-off-by: Lukas Gerlach <lukas.gerlach@cispa.de>
+> Cc: Tristan Hornetz <tristan.hornetz@cispa.de>
+> Cc: Michael Schwarz <michael.schwarz@cispa.de>
+> Cc: Shukai Ni <shukai.ni@kuleuven.be>
+> ---
+> Hi David,
+> 
+> Thanks for the quick response.
+> 
+> I generally agree. The issue I see is that the current documentation
+> understates the risk. The RHEL documentation ("could be potentially
+> used to leak information across guests") does not read like enabling
+> KSM is an arbitrary read across VMs, which the side channel we
+> disclosed (in contrast to previous works) is. So the documentation
+> should really state that KSM is only an option for mutually trusted
+> workloads. A clean model for this would be to assume that memory
+> marked as mergeable is readable by everyone else using KSM.
+> 
+> Patch below to clarify this in the admin guide. We would, in the
+> future, publish a paper on this to further raise awareness of the
+> risks involved with KSM.
 
-Update the three descriptions to state that the attributes are
-deprecated and always read 0, and note that they are retained only for
-compatibility. While here, fix a "partialli" typo in the
-slabs_cpu_partial description.
+It seems you have discovered a new information leakage attack method,
+and we look forward to reading your paper. Meanwhile, we are currently
+researching a domain-isolated KSM-merge and mechanism to defend against
+similar attacks.
 
-Signed-off-by: Seongjun Hong <hsj0512@snu.ac.kr>
----
- Documentation/ABI/testing/sysfs-kernel-slab | 18 ++++++++++++------
- 1 file changed, 12 insertions(+), 6 deletions(-)
+The following statement is essentially factual and deserve being documented.
 
-diff --git a/Documentation/ABI/testing/sysfs-kernel-slab b/Documentation/ABI/testing/sysfs-kernel-slab
-index b26e4299f822..9b0085b86309 100644
---- a/Documentation/ABI/testing/sysfs-kernel-slab
-+++ b/Documentation/ABI/testing/sysfs-kernel-slab
-@@ -113,8 +113,10 @@ KernelVersion:	2.6.22
- Contact:	Pekka Enberg <penberg@cs.helsinki.fi>,
- 		Christoph Lameter <cl@gentwo.org>
- Description:
--		The cpu_slabs file is read-only and displays how many cpu slabs
--		are active and their NUMA locality.
-+		The cpu_slabs file is read-only. It is deprecated and always
-+		reads "0" since the removal of per-cpu slabs in Linux 7.0. It
-+		previously displayed how many cpu slabs were active and their
-+		NUMA locality. The file is kept for backwards compatibility.
- 
- What:		/sys/kernel/slab/<cache>/cpuslab_flush
- Date:		April 2009
-@@ -509,12 +511,16 @@ What:		/sys/kernel/slab/<cache>/slabs_cpu_partial
- Date:		Aug 2011
- Contact:	Christoph Lameter <cl@gentwo.org>
- Description:
--		This read-only file shows the number of partialli allocated
--		frozen slabs.
-+		This read-only file is deprecated and always reads "0(0)" since
-+		the removal of per-cpu partial slabs in Linux 7.0. It previously
-+		showed the number of partially allocated frozen slabs. The file
-+		is kept for backwards compatibility.
- 
- What:		/sys/kernel/slab/<cache>/cpu_partial
- Date:		Aug 2011
- Contact:	Christoph Lameter <cl@gentwo.org>
- Description:
--		This read-only file shows the number of per cpu partial
--		pages to keep around.
-+		This file is deprecated and always reads "0" since the removal of
-+		per-cpu partial slabs in Linux 7.0. It previously showed the
-+		number of per-cpu partial pages to keep around. The file is kept
-+		for backwards compatibility.
--- 
-2.43.0
+Reviewed-by: Xu Xin <xu.xin16@zte.com.cn>
 
+> 
+> Greetings,
+> Lukas
+> 
+>  Documentation/admin-guide/mm/ksm.rst | 17 +++++++++++++++++
+>  1 file changed, 17 insertions(+)
+> 
+> diff --git a/Documentation/admin-guide/mm/ksm.rst b/Documentation/admin-guide/mm/ksm.rst
+> index ad8e7a41f3b5..cbd5f2fdcfcb 100644
+> --- a/Documentation/admin-guide/mm/ksm.rst
+> +++ b/Documentation/admin-guide/mm/ksm.rst
+> @@ -27,6 +27,23 @@ KSM's merged pages were originally locked into kernel memory, but can now
+>  be swapped out just like other user pages (but sharing is broken when they
+>  are swapped back in: ksmd must rediscover their identity and merge again).
+> 
+> +Security considerations
+> +=======================
+> +
+> +Because KSM merges pages based on their content, across all processes
+> +with mergeable memory regardless of which user, container, or virtual
+> +machine they belong to, it exposes a side channel that can be used to
+> +infer the contents of mergeable memory across security domains.  Users
+> +should assume that any memory marked mergeable is readable by every
+> +other process using KSM.
+> +
+> +KSM should therefore only be enabled for mutually trusted workloads, or
+> +where the merged data is not sensitive; in particular, merging pages
+> +across mutually untrusted virtual machines or tenants is not secure.
+> +KSM is disabled by default (``run`` is 0).  Applications and VMMs that
+> +use ``MADV_MERGEABLE`` should limit it to regions that do not hold
+> +secrets.
+> +
+>  Controlling KSM with madvise
+>  ============================
+
+The above statement is essentially factual and deserve being documented.
 
