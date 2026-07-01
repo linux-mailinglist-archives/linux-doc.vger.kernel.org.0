@@ -1,76 +1,74 @@
-Return-Path: <linux-doc+bounces-94286-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94288-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 4jONNqa2RGqBzQoAu9opvQ
-	(envelope-from <linux-doc+bounces-94286-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 08:41:42 +0200
+	id On1ZC8+2RGqQzQoAu9opvQ
+	(envelope-from <linux-doc+bounces-94288-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 08:42:23 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id CCEF16EA496
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 08:41:41 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 853006EA4CA
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 08:42:22 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=analog.com header.s=DKIM header.b=mvhv7zXl;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94286-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94286-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=analog.com header.s=DKIM header.b=T56IFYaH;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94288-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94288-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=analog.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id DB904300B0B1
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 06:41:38 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 57CA83044553
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 06:41:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CCAA13AE1A9;
-	Wed,  1 Jul 2026 06:41:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7A8A73B19A0;
+	Wed,  1 Jul 2026 06:41:39 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0a-00128a01.pphosted.com (mx0a-00128a01.pphosted.com [148.163.135.77])
+Received: from mx0b-00128a01.pphosted.com (mx0a-00128a01.pphosted.com [148.163.135.77])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 09C823939C2;
-	Wed,  1 Jul 2026 06:41:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05C8F3B0AD8;
+	Wed,  1 Jul 2026 06:41:37 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782888097; cv=none; b=jpmWLZIxDTPFX9vlnapl2NF/uGSlL9GYGheMszsY7A0/yWkOXVio7BuVZtikqckik8r3BnZfIni1zA4zcJAEVnSmYZZ9NOUzcuJfcMn2rgqYaugz78yRTGj/b8yx1oigkq1tQkyMy5mdCzN7fXRD1jJpUkej4TVG1Ww/oiS28b4=
+	t=1782888099; cv=none; b=KnRRan2oNhNySAlr5X4jsooWo9tq5t5N4Zyy3z/E9BCZyY7G0YKk04UsqflpUGG84xI8QqssIn1NN6ruaI7n5UPtSsGhci/liQXgKOR4iRQsSZizW3PcBJU/bY4EPTAhRUygfEKsoBvg7gIRxnjJMj+ZGg36Vedc+1ffYZD/Cto=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782888097; c=relaxed/simple;
-	bh=Dfq57po5r9m5Jjzu3Nnky6cW7ciigIazOtfol1C5sZE=;
-	h=From:Subject:Date:Message-ID:MIME-Version:Content-Type:To:CC; b=khqaqzFeaR2jHEwNjZPMV3F33/vVwlx4aX+43IzaAaeagfKAsGF2ccSRuv2slEvAK5h0cRFe6vX5GSoDy1nXtPHtyNI3mQfWlFqb6KiYO4Sv/HWQSU/xvxkj0ArKiBhwVeP5G3qQeyjUsej67IsRXqP4oENAqaBcpACQ11Z0GLA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=analog.com; spf=pass smtp.mailfrom=analog.com; dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b=mvhv7zXl; arc=none smtp.client-ip=148.163.135.77
-Received: from pps.filterd (m0516787.ppops.net [127.0.0.1])
-	by mx0a-00128a01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6612wVKe2535986;
-	Wed, 1 Jul 2026 02:41:15 -0400
+	s=arc-20240116; t=1782888099; c=relaxed/simple;
+	bh=xO8qN1TBsqkbgTp82ZIlQcy1+L2pBMvbjcPy3LxRZ3U=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:References:
+	 In-Reply-To:To:CC; b=utA5yECBfmc+wruvZw4iHbZInwtxfZ/pru6EXKBs+r4ynEU3hUpIGwRlu8dwpleceZlGZPfW4O8T533b+T7TT1Y6WfN83HcV/sNTsR8/+wng+JRF36mbzuh+6c6fWIPDY//cV2THTaSmkHT8djZaPYP43X0yexrD96fwdplWQwg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=analog.com; spf=pass smtp.mailfrom=analog.com; dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b=T56IFYaH; arc=none smtp.client-ip=148.163.135.77
+Received: from pps.filterd (m0375855.ppops.net [127.0.0.1])
+	by mx0b-00128a01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6612vGQA2494013;
+	Wed, 1 Jul 2026 02:41:20 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=analog.com; h=cc
-	:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=DKIM; bh=qUglXI7CW4uvKCtK/SNFE+NCDmg
-	BovA/shKP9ModlF8=; b=mvhv7zXlDWLSbJa36OnUb3uKFKy0XMM7TXTllQVtoJp
-	pgs3dRPljn+Q9c+A3te2I9i00It56gwJgVKnTPzYEkInxqZvv5tLF6CjmECDVICl
-	Is76Enlrew8a5/0u96pLH9Dg05XOIzfclOLaaXc6myWtnYcmCJkkrsRJhSWD0MNx
-	7yZSJCkPgYhhRtLbu3/tVYItRMR4OziYTyVUoidPXbvF36tBIb2KyTcUdO2KVSWf
-	rQQ49nvxrSkCKCseNsaOG9cbhFl7kdcawiN8aFALuvwFOY66K1bpBy0zzpc3Hzlr
-	2P5jFUSHIoQvrA2dbfTX39f1ojoVklbD1zcNFUXUCDA==
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=DKIM; bh=HOksV
+	+nKssbQlk4op7PMp3sTyIr3dpGaBStdSlqZ/JU=; b=T56IFYaHvKTo8IsnCaDPu
+	C+iQ2AMqNyhdG4VJ/lKjNEroHtiJCgbdZGX+gejnK2Pdt3jPQs8U60LpsaoWq2yP
+	/p1WEB1IzGZC2iggNZ5lqdo/pZHfgTfmNXWmsJTnPfPuALzbHQtqwmyR+syKipZ6
+	C6FHrTWUzayFbqZgV9T7SkX/LR7ltJrhfSMGLgM02IDZTMvz+5H1i/DPTeoOb71I
+	UudqxiI0AmFzP8dfKXZKikAp82g/D16cIChrUIGFIKr6EqhNFY0w6R593CexkhAn
+	aMSzz5NbSjweudSNFwN5lWjSCvayQ3tkmlVvbV5SI0YUll6yrQmOdRY0H8U+hdEu
+	g==
 Received: from nwd2mta4.analog.com ([137.71.173.58])
-	by mx0a-00128a01.pphosted.com (PPS) with ESMTPS id 4f4604xp9g-1
+	by mx0b-00128a01.pphosted.com (PPS) with ESMTPS id 4f3sava1ee-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 01 Jul 2026 02:41:14 -0400 (EDT)
+	Wed, 01 Jul 2026 02:41:19 -0400 (EDT)
 Received: from ASHBMBX8.ad.analog.com (ASHBMBX8.ad.analog.com [10.64.17.5])
-	by nwd2mta4.analog.com (8.14.7/8.14.7) with ESMTP id 6616fCBs061163
+	by nwd2mta4.analog.com (8.14.7/8.14.7) with ESMTP id 6616fHq2061216
 	(version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 1 Jul 2026 02:41:12 -0400
-Received: from ASHBCASHYB5.ad.analog.com (10.64.17.133) by
- ASHBMBX8.ad.analog.com (10.64.17.5) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1748.37; Wed, 1 Jul 2026 02:41:12 -0400
-Received: from ASHBMBX9.ad.analog.com (10.64.17.10) by
- ASHBCASHYB5.ad.analog.com (10.64.17.133) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1748.37; Wed, 1 Jul 2026 02:41:12 -0400
-Received: from zeus.spd.analog.com (10.66.68.11) by ashbmbx9.ad.analog.com
- (10.64.17.10) with Microsoft SMTP Server id 15.2.1748.37 via Frontend
- Transport; Wed, 1 Jul 2026 02:41:12 -0400
+	Wed, 1 Jul 2026 02:41:17 -0400
+Received: from ASHBMBX8.ad.analog.com (10.64.17.5) by ASHBMBX8.ad.analog.com
+ (10.64.17.5) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1748.37; Wed, 1 Jul
+ 2026 02:41:17 -0400
+Received: from zeus.spd.analog.com (10.66.68.11) by ashbmbx8.ad.analog.com
+ (10.64.17.5) with Microsoft SMTP Server id 15.2.1748.37 via Frontend
+ Transport; Wed, 1 Jul 2026 02:41:17 -0400
 Received: from HYB-e1y2fvUQ3cx.ad.analog.com (HYB-e1y2fvUQ3cx.ad.analog.com [10.44.3.62] (may be forged))
-	by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 6616etN8002283;
-	Wed, 1 Jul 2026 02:40:57 -0400
+	by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 6616etN9002283;
+	Wed, 1 Jul 2026 02:41:08 -0400
 From: Janani Sunil <janani.sunil@analog.com>
-Subject: [PATCH v5 0/3] iio: dac: Add support for AD5529R DAC
-Date: Wed, 1 Jul 2026 08:40:38 +0200
-Message-ID: <20260701-ad5529r-driver-v5-0-ed087900e642@analog.com>
+Date: Wed, 1 Jul 2026 08:40:39 +0200
+Subject: [PATCH v5 1/3] dt-bindings: spi: Add spi,device-addr peripheral
+ property
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -78,18 +76,16 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-B4-Tracking: v=1; b=H4sIAGa2RGoC/3XMTQrCMBCG4atI1kbyM5lGV95DXKTJVAPaSipBK
- b27qRuV4Gr4Bp53YiOlSCPbrSaWKMcxDn0ZZr1i/uz6E/EYymZKKBRGNNwFY9Q28ZBipsQtYtu
- GYBECsYJuibr4eAcPx7LPcbwP6fnuZ7l8/6ay5IK3ACg67cvt9q53l+G08cOVLa2svr2tvCqet
- DQAEq0JTeX1l5fbyuviFTZeNFo6h7by8PEoag+LJ/BCKQ1Ouh8/z/MLtmnGwG0BAAA=
-X-Change-ID: 20260507-ad5529r-driver-866bbdd864de
+Content-Transfer-Encoding: 7bit
+Message-ID: <20260701-ad5529r-driver-v5-1-ed087900e642@analog.com>
+References: <20260701-ad5529r-driver-v5-0-ed087900e642@analog.com>
+In-Reply-To: <20260701-ad5529r-driver-v5-0-ed087900e642@analog.com>
 To: Lars-Peter Clausen <lars@metafoo.de>,
         Michael Hennerich
 	<Michael.Hennerich@analog.com>,
         Jonathan Cameron <jic23@kernel.org>,
-        "David
- Lechner" <dlechner@baylibre.com>,
+        David
+ Lechner <dlechner@baylibre.com>,
         =?utf-8?q?Nuno_S=C3=A1?=
 	<nuno.sa@analog.com>,
         Andy Shevchenko <andy@kernel.org>, Rob Herring
@@ -98,8 +94,8 @@ To: Lars-Peter Clausen <lars@metafoo.de>,
         Conor Dooley
 	<conor+dt@kernel.org>,
         Philipp Zabel <p.zabel@pengutronix.de>,
-        "Jonathan
- Corbet" <corbet@lwn.net>,
+        Jonathan
+ Corbet <corbet@lwn.net>,
         Shuah Khan <skhan@linuxfoundation.org>,
         Mark Brown
 	<broonie@kernel.org>
@@ -110,46 +106,46 @@ CC: <linux-iio@vger.kernel.org>, <devicetree@vger.kernel.org>,
         Janani Sunil
 	<janani.sunil@analog.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1782888055; l=6064;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1782888055; l=1155;
  i=janani.sunil@analog.com; s=20260507; h=from:subject:message-id;
- bh=Dfq57po5r9m5Jjzu3Nnky6cW7ciigIazOtfol1C5sZE=;
- b=16F5p5ocXhNDqOBfK1qxuWYjW6Y1Jq/Nt/2s0KDttL6hkMLVEPdcseshtfhoZzYz77tp1XpvI
- gLpheYxA2KmBR/pU+a1jyewenp0BoMEnGyRZEIfTfThbey3g7ZVzXEn
+ bh=xO8qN1TBsqkbgTp82ZIlQcy1+L2pBMvbjcPy3LxRZ3U=;
+ b=oZZR3RA15clOjersxLTdmiKSD3E8dSkil2U3VN1WFF6nRJVoqggivikdZpdGS7qqrfa9uuNFZ
+ +DwADRQ3yOBB2OwadysBk60EeMrohF7hV/puFbS4QlH2VYGASf+zYbq
 X-Developer-Key: i=janani.sunil@analog.com; a=ed25519;
  pk=e25MyjRLPY3RWrYm/LrJ+/+t1MZJUbkgIW5CZg+g+hA=
 X-ADIRuleOP-NewSCL: Rule Triggered
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzAxMDA2NiBTYWx0ZWRfXwIlP3UEp/eYX
- IpdiobVcblJIUAah97w48ExcXUzfghseiAC7quhmLKVkkYBXJMXCTOEReixt8R2BAYKPT1y0ei1
- n7T8T5R89QtasyQqA+FRC3vMOgX/uizWN6Ro8IZEQl6Fb9mq3NSW
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzAxMDA2NiBTYWx0ZWRfX86LQ5DsifUkh
- Gg3amKolj/rtmODfPtx8LeVdFLfRXrVYTXPumosI/QwHx7lXLwjWyPGQzNVhdizFGUu3oc1dYqd
- 7Mg68IsP7olecZHdIwO8odY+Egav+7Mtwo8BYa0KIH8phQyE4OIpUPy01wyZf1/1wtBnlzVKeFk
- GWJnSG+9x5KJh1oWXzlYXCoTBK6TFpCYcEv+GXc5OAs3H85G/jFan8PJUJuxXC9N43juoZlAVtv
- E4hIKltqKEH0+zvTV1ZrxMvyWhWz2PB56FlvzoyQen1n3kxnvSKB2iUHridRqbTqHLFDx4FAQe4
- UHp+DPTpz/8toF67+Psb2qhm3p/BSGn22vebFBVkB+gijuFZZhnDnQnUyaTvaIyy7tGnuxPXY8Y
- DrnPZhIxx5XaWO4NKiTOrv5PiZcuhmnWL1eN210537GAnLDyBMS82TOC9IzNkhEU7UJRjaSKQkV
- RPB2TZe4JhzqadrcETQ==
-X-Authority-Analysis: v=2.4 cv=BMCDalQG c=1 sm=1 tr=0 ts=6a44b68a cx=c_pps
+X-Authority-Analysis: v=2.4 cv=avWCzyZV c=1 sm=1 tr=0 ts=6a44b68f cx=c_pps
  a=3WNzaoukacrqR9RwcOSAdA==:117 a=3WNzaoukacrqR9RwcOSAdA==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=0sLvza09kfJOxVLZPwjg:22 a=OmVn7CZJonkx5R5zMQLL:22 a=VwQbUJbxAAAA:8
- a=gAnH3GRIAAAA:8 a=RFyswZHjbAIkJhqxi8oA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
-X-Proofpoint-ORIG-GUID: _gw89hjhpOuGvgTuEmRthpiRa67A21wV
-X-Proofpoint-GUID: _gw89hjhpOuGvgTuEmRthpiRa67A21wV
+ a=0sLvza09kfJOxVLZPwjg:22 a=N--XFCr6TIEc_64PeIT2:22 a=gAnH3GRIAAAA:8
+ a=p7DZuduEnTu05McJuzUA:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-ORIG-GUID: NaVuDlKh8V0Au6mKC6E6q-7oBNJIPx0d
+X-Proofpoint-GUID: NaVuDlKh8V0Au6mKC6E6q-7oBNJIPx0d
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzAxMDA2NyBTYWx0ZWRfX5pgOI43Hm5vC
+ waZyKvN8IejeuUZiU6Ynvs7FbBcXUCrn00/jG00ebWrnTktDWJVUyKpLv+39dOgQ9lbYa3D2IHo
+ A+i4W6S9qyO/JezA1PZyA8LeggYh56mlyUssHlyDYOlcUqMx9fAV
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzAxMDA2NyBTYWx0ZWRfX1pLrViEWf+3x
+ Hz3JBmn3gRLaG0BuE0RZM0Qa88X4RKJoL9WhCMQ078I2GrxhyXi+Dkxn5vJev/zjj4NXMhUT4EW
+ iOdlxjXK3vmF6roWRhODNC1jFA/5X/Jvxtu6/m2cA8mEb9aHjR0BD6hSITcZ61HJ7lC8Ric67cs
+ /JhFpTZR9a9UuRj/C/O4vq4ndDuIoPhJlKd80Sc8Na9B2HoKO9Ptwk1kbB7dqKDY0YT6v0dNFzD
+ t7i8lt26Z0+K5r+AczIJ41yIuayAz9Rrd1PVt+BmGuFr8bSMkNMLW0g7G1qJQ7OBun/m4VfBzNK
+ rL7n5PiSzPkkQWBZo7vZoIwMpjZJIBaCNKPTU0wlgkU48TtwfvTAn3ax1cNg0fwbTrFR1pG7LkQ
+ 0e8C0M4aOPCY1oqUodSRRN3GyiWKK3hqlXcq+AbQNqk1QwLzwbCzlOvAxlU1gL/xaJqzLCgMzCs
+ TzXZCpIT+0H87J052sw==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-07-01_01,2026-06-26_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1011 bulkscore=0 lowpriorityscore=0 spamscore=0 impostorscore=0
- phishscore=0 priorityscore=1501 adultscore=0 malwarescore=0 suspectscore=0
+ phishscore=0 priorityscore=1501 suspectscore=0 spamscore=0 bulkscore=0
+ clxscore=1011 lowpriorityscore=0 malwarescore=0 adultscore=0 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607010066
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607010067
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[analog.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[analog.com:s=DKIM];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -157,13 +153,13 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FORWARDED(0.00)[lists@lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[20];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-94286-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-94288-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS(0.00)[m:lars@metafoo.de,m:Michael.Hennerich@analog.com,m:jic23@kernel.org,m:dlechner@baylibre.com,m:nuno.sa@analog.com,m:andy@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:p.zabel@pengutronix.de,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:broonie@kernel.org,m:linux-iio@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jan.sun97@gmail.com,m:linux-spi@vger.kernel.org,m:janani.sunil@analog.com,m:krzk@kernel.org,m:conor@kernel.org,m:jansun97@gmail.com,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_SENDER(0.00)[janani.sunil@analog.com,linux-doc@vger.kernel.org];
 	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com,analog.com];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,vger.kernel.org:from_smtp];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp,analog.com:dkim,analog.com:email,analog.com:mid,analog.com:from_mime];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
@@ -174,136 +170,41 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
-	RCVD_COUNT_SEVEN(0.00)[10]
+	RCVD_COUNT_SEVEN(0.00)[9]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: CCEF16EA496
+X-Rspamd-Queue-Id: 853006EA4CA
 
-This patch series adds support for Analog Devices AD5529R, a 16 channel
-16 and 12 bit voltage Digital-to-Analog Converter (DAC) with integrated
-precision reference. The AD5529R operates from both unipolar and
-bipolar supplies. The device communicates via SPI interface.
-
-**Device Overview:**
-The AD5529R features 16 independent DAC channels, with 16 or 12 bit
-resolution, allowing independently programmable output ranges. The
-internal 4.096V precision reference sets the accuracy of the output
-voltage.
-
-**Features Implemented:**
-- Support for AD5529R 12-bit and 16-bit variants via device match data.
-- Reset support via GPIO.
-- Dual regmap configuration to handle 8 and 16 bit registers.
-- Per-channel output range configuration from devicetree.
-- Optional external reference and bipolar supply handling.
-
-**Patch Summary:**
-1. **dt-bindings**: Binding documentation with channel configuration.
-2. **driver**: Implement IIO DAC Driver with regmap support.
-
-**Testing:**
-The driver was compiled and tested on the EVAL-AD5529R-ARDZ using a
-coraZ7 with a mainline v7.0 kernel.
-
-**Driver Rationale:**
-AD5529R introduces:
-1. A unique register layout
-2. Mixed 8-bit and 16-bit register accesses
-3. Hardware specific features like function generators, multi-die
-hotpath registers etc.
-
-The device warrants its own drivers due to these fundamental
-architectural differences, that would require substantial changes to
-existing drivers without providing reusable benefits. The standalone
-driver also allows future extensions for related devices in the same
-family.
-
-**Not Implemented in this Series:**
-The binding includes generic, per-channel device addressing needed for
-multi-device support using a shared CS, but the driver presently
-supports only a single device.
+Some SPI devices support sharing a single chip select across multiple
+physical chips by encoding a device address in the SPI frame itself.
+Add a generic spi,device-addr property to document this per-peripheral
+address. This property belongs in channel or sub-device nodes of
+peripherals that use this addressing scheme.
 
 Signed-off-by: Janani Sunil <janani.sunil@analog.com>
 ---
-Changes in v5:
-- Move register bitfield definitions next to their parent register
-  addresses.
-- Remove spurious extra indent.
-- Rename ad5529r_output_ranges_mv[] to ad5529r_output_ranges_mV[].
-- Remove extra parentheses in regmap_reg_range() for the readback range.
-- Use reset_control_reset() instead of reset_control_deassert().
-- Use 10 * USEC_PER_MSEC instead of a bare 10000 in fsleep().
-- Use fwnode_property_present() to explicitly guard the optional property.
-- Rewrite external_vref detection using explicit if/else.
-- Follow reverse christmas tree variable declaration order.
-- Improve invalid channel error message to include the maximum.
-- Add a new spi property to include the SPI device address.
-- Update ad5529r devicetree binding to allow more than 16 channels to include multiple DACs.
-- Update cover letter to add a mention about the multi device support.
-- Update driver commit message to describe the device further.
-- Link to v4: https://lore.kernel.org/r/20260609-ad5529r-driver-v4-0-2e4c02234a1a@analog.com
+ Documentation/devicetree/bindings/spi/spi-peripheral-props.yaml | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-Changes in v4:
-- Fix DT child-node regex for hexadecimal channel addresses.
-- Wrap long DT binding description lines.
-- Simplify optional `vref-supply` and `hvss-supply` handling.
-- Update REF_SEL programming for optional external reference use.
-- Clean up range parsing and error messages.
-- Simplify debugfs register access by calling regmap helpers directly.
-- Add clarifying comments for reset settling time and RAW reads from `DAC_INPUT_A`.
-- Remove an unused vref regulator pointer and an include.
-- Rename the REF_SEL bit define and clean up small driver details.
-- Toggle pins defined as PWM pins, instead of GPIOs
-- Update cover letter to sync up latest changes.
-- Link to v3: https://lore.kernel.org/r/20260519-ad5529r-driver-v3-0-267c0731aa68@analog.com
+diff --git a/Documentation/devicetree/bindings/spi/spi-peripheral-props.yaml b/Documentation/devicetree/bindings/spi/spi-peripheral-props.yaml
+index 880a9f624566..3774e8018355 100644
+--- a/Documentation/devicetree/bindings/spi/spi-peripheral-props.yaml
++++ b/Documentation/devicetree/bindings/spi/spi-peripheral-props.yaml
+@@ -142,6 +142,11 @@ properties:
+     minItems: 2
+     maxItems: 4
+ 
++  spi,device-addr:
++    $ref: /schemas/types.yaml#/definitions/uint32
++    description:
++      Device address used when multiple peripherals share a single chip select.
++
+   st,spi-midi-ns:
+     deprecated: true
+     description: |
 
-Changes in v3:
-- Split into adi,ad5529r-16 and adi,ad5529r-12 device tree compatibles
-- Add DT-based output range configuration via adi,output-range-microvolt
-- Expand DT binding: vref-supply, clear/tg GPIOs, interrupts, muxout
-- Correct power supply voltage specifications as per datasheet
-- Reduce SPI frequency limit to 25MHz as per datasheet specs
-- Switch to autoincrement addressing mode, remove +1 register offsets
-- Use DT match data instead of device ID detection for fallback support
-- Implement dynamic scale/offset calculation per configured channel range
-- Added explicit val_format_endian and reg_stride for 16-bit regmap bus
-- Code cleanup: alphabetical includes, ARRAY_SIZE(), unused defines
-- Minor: .sign→.format field, simplify read/write order, optional hvss-supply
-- Remove redundant driver documentation ad5529r.rst
-- Link to v2: https://lore.kernel.org/r/20260508-ad5529r-driver-v2-0-e315441685d7@analog.com
-
-Changes in v2:
-- Fix IIO scale to use millivolts per ABI requirement
-- Fix documentation voltage calculations (2.5V not 2.048V)
-- Fix bipolar ranges in documentation (±5V, ±10V, ±15V, ±20V)
-- Fix alphabetical ordering in documentation index
-- Add missing newline to documentation file
-- Fix scale units description (millivolts not microvolts)
-- Include a section for driver rationale in the cover letter
-- Reword contents in cover letter 12/16 bit generic->variant
-- Add dependency array for spi-cpha and spi-cpol properties
-- Link to v1: https://lore.kernel.org/r/20260507-ad5529r-driver-v1-0-b4460f3cb44f@analog.com
-
----
-Janani Sunil (3):
-      dt-bindings: spi: Add spi,device-addr peripheral property
-      dt-bindings: iio: dac: Add AD5529R
-      iio: dac: Add AD5529R DAC driver support
-
- .../devicetree/bindings/iio/dac/adi,ad5529r.yaml   | 216 +++++++++
- .../bindings/spi/spi-peripheral-props.yaml         |   5 +
- MAINTAINERS                                        |   8 +
- drivers/iio/dac/Kconfig                            |  17 +
- drivers/iio/dac/Makefile                           |   1 +
- drivers/iio/dac/ad5529r.c                          | 531 +++++++++++++++++++++
- 6 files changed, 778 insertions(+)
----
-base-commit: 93df88612859e8e19dec93c69d563b4b73e9bd4b
-change-id: 20260507-ad5529r-driver-866bbdd864de
-
-Best regards,
 -- 
-Janani Sunil <janani.sunil@analog.com>
+2.43.0
 
 
