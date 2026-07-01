@@ -1,198 +1,190 @@
-Return-Path: <linux-doc+bounces-94365-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94341-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id feqVDzYXRWpX6woAu9opvQ
-	(envelope-from <linux-doc+bounces-94365-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 15:33:42 +0200
+	id N2kzG3oKRWqk5goAu9opvQ
+	(envelope-from <linux-doc+bounces-94341-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 14:39:22 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 97E496EE2C4
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 15:33:41 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 924326ED717
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 14:39:21 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("headers rsa verify failed") header.d=cispa.de header.s=2023-rsa header.b=ZhbIw9fq;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94365-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94365-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=cispa.de (policy=none);
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=dBYOpptC;
+	dkim=pass header.d=redhat.com header.s=google header.b="bhx/G5H8";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94341-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-94341-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=redhat.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 0D1D6320763F
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 13:04:36 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id C7129301020D
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 12:39:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 382B848BD3C;
-	Wed,  1 Jul 2026 13:02:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 619CB481258;
+	Wed,  1 Jul 2026 12:34:50 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx-2023-1.gwdg.de (mx-2023-1.gwdg.de [134.76.10.21])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE63C48BD2A;
-	Wed,  1 Jul 2026 13:02:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 596063B47CB
+	for <linux-doc@vger.kernel.org>; Wed,  1 Jul 2026 12:34:47 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782910962; cv=none; b=IsVRJFUog3Fx8H5Jsw8FaaEIfict4FSUhpmQgM2lGRNznk0F4n/uIcTx/pi1Pp3f4JhxIEwJJgoHuz+UoQ9eMZEGCW1UJWXQiwp5jSj2HFyggotI7McDQAOVKsYmwpvDOM5ozS2MqK4UL72rdkpvb+Fom2RgsDlWVzz355hsejQ=
+	t=1782909290; cv=none; b=OOIqoIRT0g4tNI9A7RyrmVFJfa7COKm12O0zSvz5U977HMzpNrbCRyKUWyI3bzowi/KfZUSTMbf89ZY9HO28cFvby5to2Hbk6glxwihrKk6svo2guEsU6lGij15wgbDQSJVR+KFDRqGQ+pP5oIg7oHI77SVA0xE51NZw5v9cMxQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782910962; c=relaxed/simple;
-	bh=gIRBDH5MkVs4M65NaOL4Aqf/xk0q/mTwkbUGv/zYKOk=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=b/tsSbL6DZAchFBTDRTUWo3YwZek7ciuYE9kl27atiuZEXUSQ7FvlgBu64Smwjr3gxxijYSv/MB/8dBhYUt86l44Ad4xiaGmSS0BSK7qa8TNzA/6wCqvtZ2XP77LBGa9qSGJI3zdIWz+MJ+P0w4yJLGtJ7EXdqKVEBZ8dddUdVI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=cispa.de; spf=pass smtp.mailfrom=cispa.de; dkim=pass (2048-bit key) header.d=cispa.de header.i=@cispa.de header.b=ZhbIw9fq; arc=none smtp.client-ip=134.76.10.21
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=cispa.de;
-	s=2023-rsa; h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
-	In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-	List-Post:List-Owner:List-Archive;
-	bh=igSAA+qbMyAUJ/ctuYxX5vMbJh38ICoyVxEkz3kxQlY=; b=ZhbIw9fqquLvP+NzDA2txtXZ8+
-	WImhoVahtRvkNl83N1vvPN7gfIsZtm1VHNI87ooxtvhKVdig9marOfxvLCjjCFSenNpXc1lHYKEXl
-	C/P21mvQFxB1nigyI0O0+HsfPR/ZFZDHamKY6DAm9B1cEyWMqgNPsJYJBVuhtBfLOsBmPrgvQqzH4
-	FZQvsA6Qb2tmtzDhDklGgCJGqkkE0bU66O29EaMenvbONl5kOsRtpAc65zansqIaMUv7uKq9DEIzJ
-	+9JqTP4CkAWWlvkUnhTnUWgVORWdV7IvOlmwemw5hQ0O2wPcv1i1Fhx3HpYoPepzz96TF4F0Fw/fx
-	o4m4vdLg==;
-Received: from mailer.gwdg.de ([134.76.10.26]:52023)
-	by mailer.gwdg.de with esmtp (GWDG Mailer)
-	(envelope-from <lukas.gerlach@cispa.de>)
-	id 1weu9E-004V6p-1q;
-	Wed, 01 Jul 2026 14:34:36 +0200
-Received: from mbx19-sub-05.um.gwdg.de ([10.108.142.70] helo=email.gwdg.de)
-	by mailer.gwdg.de with esmtps (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(GWDG Mailer)
-	(envelope-from <lukas.gerlach@cispa.de>)
-	id 1weu9E-0001cN-1g;
-	Wed, 01 Jul 2026 14:34:36 +0200
-Received: from Mac (10.250.9.200) by MBX19-SUB-05.um.gwdg.de (10.108.142.70)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.43; Wed, 1 Jul
- 2026 14:34:35 +0200
-From: Lukas Gerlach <lukas.gerlach@cispa.de>
-To: <akpm@linux-foundation.org>, <david@kernel.org>, <corbet@lwn.net>,
-	<linux-mm@kvack.org>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>
-CC: <xu.xin16@zte.com.cn>, <chengming.zhou@linux.dev>,
-	<skhan@linuxfoundation.org>, Lukas Gerlach <lukas.gerlach@cispa.de>, Jo Van
- Bulck <jo.vanbulck@cs.kuleuven.be>, Tristan Hornetz
-	<tristan.hornetz@cispa.de>, Michael Schwarz <michael.schwarz@cispa.de>,
-	Shukai Ni <shukai.ni@kuleuven.be>
-Subject: [PATCH] mm/ksm: document side-channel security considerations
-Date: Wed, 1 Jul 2026 14:34:30 +0200
-Message-ID: <20260701123430.20699-1-lukas.gerlach@cispa.de>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <f75d286c-4d9e-4b64-8a9e-03e1afcb509f@kernel.org>
-References: <f75d286c-4d9e-4b64-8a9e-03e1afcb509f@kernel.org>
+	s=arc-20240116; t=1782909290; c=relaxed/simple;
+	bh=WBSQH5doQ0XyZPnhEPmZ+vvlhRHyRdY4NTxRVrsDXZQ=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=oPE0NJk6edFaw5TIc3jB4EfokeHH0WkfGSKbfZPH8aNesv0P5g4Lj+rF2GZH4HIC6zk0SPSeO/iVMTrpK6doK7fQiLWtdV7yh0xMd/l3ZPehGUOtFvlctsdSIbbnSoBPU/QyYyKwe6D+A5YVeZDDAl5BgTzjMIYjjpIykfeBsdw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=dBYOpptC; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=bhx/G5H8; arc=none smtp.client-ip=170.10.133.124
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1782909287;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=6SImA3bc67S49Aleri4ZSDqcnWVDlr+FWuRlVb8TQRg=;
+	b=dBYOpptCDbM06q4RmuScC1uO/LUxuuOnxt/LyHhuMM/xyZE15sea+7YAd4hDDa1myLAAZb
+	vLuo6hLVIvDMIX98wCvfoE4wSCeyckoYJA+iN8uLlusi4GC4tKwVKuYOjlqaLOHs2LzlCd
+	eS7wwpLz3hMeSpqU/H4bYiG94mXLiPM=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-394-qBTOl1IINq-_qrAR_97omg-1; Wed, 01 Jul 2026 08:34:44 -0400
+X-MC-Unique: qBTOl1IINq-_qrAR_97omg-1
+X-Mimecast-MFC-AGG-ID: qBTOl1IINq-_qrAR_97omg_1782909283
+Received: by mail-wm1-f71.google.com with SMTP id 5b1f17b1804b1-493bd52dae6so4673725e9.0
+        for <linux-doc@vger.kernel.org>; Wed, 01 Jul 2026 05:34:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=redhat.com; s=google; t=1782909283; x=1783514083; darn=vger.kernel.org;
+        h=mime-version:user-agent:content-transfer-encoding:autocrypt
+         :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=6SImA3bc67S49Aleri4ZSDqcnWVDlr+FWuRlVb8TQRg=;
+        b=bhx/G5H8q65VxTs2nFGWH9gsr4OveWDjo2XvSQEsCmBEImzMkaFPmuqpxqzZSberMC
+         OLC4hWKIGXj1JjBJF6EzDZsWspKbbM45KAQ/jtdMbjLYutSnYbXjtvKi43Fr8I3yIxGj
+         jHLYlHwRNZfxFqK+WFFqnI3TEgqcNpEI0mOCDqjuZ7DM1nN7X0ivSze8u5UlS30IEhEn
+         9dKJRETypQbxM64DERQ47TVVicSmaRFqUCjIBHCdwGAtyg3UcKMkUTAwH2kwVU6lrrwn
+         0bz6HwTonLLMtNbTD++2s0Jpq8d2Fhw8WVSyaa8kEJBW+41gOwhnF5k9+py5l2Vtl4Cn
+         m7rg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1782909283; x=1783514083;
+        h=mime-version:user-agent:content-transfer-encoding:autocrypt
+         :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=6SImA3bc67S49Aleri4ZSDqcnWVDlr+FWuRlVb8TQRg=;
+        b=CH8ubzXgPPGXX6NfMgqiL//zr+z+8Aw7aTLQQQ6oQkugj2fzP+5iAsSF1DmwBbjTbp
+         NwDBJZ5Sg0XOrwvqrjhdaAHxdQ4rj+vFsqcznbKgJPQcHgUAdF0BMwPeY5MBiStjVrrr
+         s3/k/S1zlGwX12oKIhGlKW6Oajhumy24f1OPdmmnFkGF4DvbXpvCnpN0QN/taOvG3Km1
+         uOhs50QPH98YkUynsRzENFwL6T6JCwMAtqe5Ll5lxUwyTsGjsWeeiGlak1HFPmQFDLXQ
+         wE+EN8T80SJAVrvYQGjVfHfLkbTxZmS9ZuFfikB0Yex69J6/11QtjQHGuw0m1DsPI01R
+         bDyQ==
+X-Forwarded-Encrypted: i=1; AFNElJ+LH7uB0UIdXtaAaSWxzBCk/IwuVZkMHrkicoXYAYbO9F6P7KbC7EvlYdNM436vEDfqar4rTMKyCEw=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw97DHHO/KgH9z7+HChmpAhQuAREa+tpS1jyvKMjxE3mjaKPZU9
+	bgDB0LsKMFg4s5UAEBzVqKABO4/n+CI+AdnybKlIN9pfok+03EG0D101Z4XnV+hFj6KnzVcFxXL
+	ibFDjtQXMNwbhELT8QscnUeCvW7j+9F785AFVr7YaAU7ErObWcH0lPxExyGABEg==
+X-Gm-Gg: AfdE7cksmNZWs7Vjdt6crPGk2v5Ial7ARELAI0NRB/Gy9wJMSFDLAOrQ6XlftY4R3Ls
+	QWaNYgrzYjau3KfnJFVc2KHfZvxfBckxVg6gEursQ8NjSf5ceJV66rU/ynE2DPtwXu8bZ1W6+vh
+	1Hr6YAtGHe/E5TdXuasFSqsunhZ1gaCkrTgLYvOuLO3+Qxo2PkwGI33eTuivXax/rVNKXoF7Xjs
+	i9Hd9bXr6ZK5x5Cv/DcIkvw7X9IkhJm4CEZ2bq6VVQBWn5FIIOg2gEIidt9YdxJEjB/6gH93rGp
+	BnDzqo1Oh4hrAwyp1z7aV3zAy5Fa/DVd1oke8x+HIIm4qvrAh7oxK6C9noyzz3iV6RZ4iqz/CYU
+	QaXPiY1O9Xq/S3xzPaC+MDcgPlZXBUjElyyEuq2aOFZNZea5YvevBAN+E/GaV4I/9fw==
+X-Received: by 2002:a05:600c:68d0:b0:490:e5c1:b8bf with SMTP id 5b1f17b1804b1-493c2b4d01dmr14992045e9.13.1782909282921;
+        Wed, 01 Jul 2026 05:34:42 -0700 (PDT)
+X-Received: by 2002:a05:600c:68d0:b0:490:e5c1:b8bf with SMTP id 5b1f17b1804b1-493c2b4d01dmr14991685e9.13.1782909282587;
+        Wed, 01 Jul 2026 05:34:42 -0700 (PDT)
+Received: from gmonaco-thinkpadt14gen3.rmtit.csb (212-8-243-115.hosted-by-worldstream.net. [212.8.243.115])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47563d19573sm15953957f8f.4.2026.07.01.05.34.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 01 Jul 2026 05:34:42 -0700 (PDT)
+Message-ID: <84105e8f975673f9c49ed4a5c47f0437fa4f7dc4.camel@redhat.com>
+Subject: Re: [PATCH v2 1/4] rv/rtapp/sleep: Make the error more informative
+ for user
+From: Gabriele Monaco <gmonaco@redhat.com>
+To: Nam Cao <namcao@linutronix.de>
+Cc: Steven Rostedt <rostedt@goodmis.org>,
+ linux-trace-kernel@vger.kernel.org, 	linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Date: Wed, 01 Jul 2026 14:34:40 +0200
+In-Reply-To: <9bc739eec41b6616e9f81cbe50759cefb1c3ad9c.camel@redhat.com>
+References: <cover.1781852967.git.namcao@linutronix.de>
+		 <d97b4b5c476e5792b6875ec9bbf8dc214f999516.1781852967.git.namcao@linutronix.de>
+	 <9bc739eec41b6616e9f81cbe50759cefb1c3ad9c.camel@redhat.com>
+Autocrypt: addr=gmonaco@redhat.com; prefer-encrypt=mutual;
+ keydata=mDMEZuK5YxYJKwYBBAHaRw8BAQdAmJ3dM9Sz6/Hodu33Qrf8QH2bNeNbOikqYtxWFLVm0
+ 1a0JEdhYnJpZWxlIE1vbmFjbyA8Z21vbmFjb0BrZXJuZWwub3JnPoiZBBMWCgBBFiEEysoR+AuB3R
+ Zwp6j270psSVh4TfIFAmjKX2MCGwMFCQWjmoAFCwkIBwICIgIGFQoJCAsCBBYCAwECHgcCF4AACgk
+ Q70psSVh4TfIQuAD+JulczTN6l7oJjyroySU55Fbjdvo52xiYYlMjPG7dCTsBAMFI7dSL5zg98I+8
+ cXY1J7kyNsY6/dcipqBM4RMaxXsOtCRHYWJyaWVsZSBNb25hY28gPGdtb25hY29AcmVkaGF0LmNvb
+ T6InAQTFgoARAIbAwUJBaOagAULCQgHAgIiAgYVCgkICwIEFgIDAQIeBwIXgBYhBMrKEfgLgd0WcK
+ eo9u9KbElYeE3yBQJoymCyAhkBAAoJEO9KbElYeE3yjX4BAJ/ETNnlHn8OjZPT77xGmal9kbT1bC1
+ 7DfrYVISWV2Y1AP9HdAMhWNAvtCtN2S1beYjNybuK6IzWYcFfeOV+OBWRDQ==
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.60.2 (3.60.2-1.fc44) 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: MBX19-GWD-07.um.gwdg.de (10.108.142.60) To
- MBX19-SUB-05.um.gwdg.de (10.108.142.70)
-X-Virus-Scanned: (clean) by clamav
-X-Spam-Level: -
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [1.14 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_DKIM_REJECT(1.00)[cispa.de:s=2023-rsa];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
 	MAILLIST(-0.15)[generic];
-	DMARC_POLICY_SOFTFAIL(0.10)[cispa.de : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	TAGGED_FROM(0.00)[bounces-94365-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[lukas.gerlach@cispa.de,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS(0.00)[m:akpm@linux-foundation.org,m:david@kernel.org,m:corbet@lwn.net,m:linux-mm@kvack.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:xu.xin16@zte.com.cn,m:chengming.zhou@linux.dev,m:skhan@linuxfoundation.org,m:lukas.gerlach@cispa.de,m:jo.vanbulck@cs.kuleuven.be,m:tristan.hornetz@cispa.de,m:michael.schwarz@cispa.de,m:shukai.ni@kuleuven.be,s:lists@lfdr.de];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[lukas.gerlach@cispa.de,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[cispa.de:-];
-	RCVD_COUNT_FIVE(0.00)[6];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
+	TAGGED_FROM(0.00)[bounces-94341-lists,linux-doc=lfdr.de];
 	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:namcao@linutronix.de,m:rostedt@goodmis.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[gmonaco@redhat.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[redhat.com:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[5];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[gmonaco@redhat.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	ALIAS_RESOLVED(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,kuleuven.be:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 97E496EE2C4
+X-Rspamd-Queue-Id: 924326ED717
 
-KSM is known to enable side channels, but the admin guide does not
-currently spell out the security implications of enabling page merging.
-Because KSM merges pages by content across all processes with mergeable
-memory, it forms a side channel that can be used to infer the contents
-of that memory across security domains, regardless of the user,
-container, or virtual machine the pages belong to.
+On Wed, 2026-07-01 at 14:26 +0200, Gabriele Monaco wrote:
+> On Fri, 2026-06-19 at 09:21 +0200, Nam Cao wrote:
+> > -static void handle_sched_wakeup(void *data, struct task_struct *task)
+> > +static void handle_sched_exit(void *data, bool is_switch)
+> > =C2=A0{
+> > -	ltl_atom_pulse(task, LTL_WAKE, true);
+> > +	ltl_atom_pulse(current, LTL_SCHEDULE_IN, true);
+> > =C2=A0}
+>=20
+> Well, this triggers also in a spurious schedule: current -> current, can
+> that be a problem? Otherwise you may either use sched_switch over next
 
-Add a "Security considerations" section making this explicit, so that
-operators can make an informed decision: KSM should only be enabled for
-mutually trusting workloads, and any memory marked mergeable should be
-assumed readable by every other process using KSM.
+sched_switch would obviously be in the wrong context.. Ignore that.
 
-Co-developed-by: Jo Van Bulck <jo.vanbulck@cs.kuleuven.be>
-Signed-off-by: Jo Van Bulck <jo.vanbulck@cs.kuleuven.be>
-Signed-off-by: Lukas Gerlach <lukas.gerlach@cispa.de>
-Cc: Tristan Hornetz <tristan.hornetz@cispa.de>
-Cc: Michael Schwarz <michael.schwarz@cispa.de>
-Cc: Shukai Ni <shukai.ni@kuleuven.be>
----
-Hi David,
+> or pulse only if is_switch.
+>=20
+> It probably isn't a big deal though, since there's no SLEEP prior.. But
+> we may want to avoid the noise.
+>=20
+> Looks good overall.
+>=20
+> Reviewed-by: Gabriele Monaco <gmonaco@redhat.com>
+>=20
+> Thanks,
+> Gabriele
 
-Thanks for the quick response.
-
-I generally agree. The issue I see is that the current documentation
-understates the risk. The RHEL documentation ("could be potentially
-used to leak information across guests") does not read like enabling
-KSM is an arbitrary read across VMs, which the side channel we
-disclosed (in contrast to previous works) is. So the documentation
-should really state that KSM is only an option for mutually trusted
-workloads. A clean model for this would be to assume that memory
-marked as mergeable is readable by everyone else using KSM.
-
-Patch below to clarify this in the admin guide. We would, in the
-future, publish a paper on this to further raise awareness of the
-risks involved with KSM.
-
-Greetings,
-Lukas
-
- Documentation/admin-guide/mm/ksm.rst | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
-
-diff --git a/Documentation/admin-guide/mm/ksm.rst b/Documentation/admin-guide/mm/ksm.rst
-index ad8e7a41f3b5..cbd5f2fdcfcb 100644
---- a/Documentation/admin-guide/mm/ksm.rst
-+++ b/Documentation/admin-guide/mm/ksm.rst
-@@ -27,6 +27,23 @@ KSM's merged pages were originally locked into kernel memory, but can now
- be swapped out just like other user pages (but sharing is broken when they
- are swapped back in: ksmd must rediscover their identity and merge again).
-
-+Security considerations
-+=======================
-+
-+Because KSM merges pages based on their content, across all processes
-+with mergeable memory regardless of which user, container, or virtual
-+machine they belong to, it exposes a side channel that can be used to
-+infer the contents of mergeable memory across security domains.  Users
-+should assume that any memory marked mergeable is readable by every
-+other process using KSM.
-+
-+KSM should therefore only be enabled for mutually trusted workloads, or
-+where the merged data is not sensitive; in particular, merging pages
-+across mutually untrusted virtual machines or tenants is not secure.
-+KSM is disabled by default (``run`` is 0).  Applications and VMMs that
-+use ``MADV_MERGEABLE`` should limit it to regions that do not hold
-+secrets.
-+
- Controlling KSM with madvise
- ============================
-
---
-2.51.0
 
