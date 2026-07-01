@@ -1,51 +1,51 @@
-Return-Path: <linux-doc+bounces-94274-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94275-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id ThFIOCyeRGoNyAoAu9opvQ
-	(envelope-from <linux-doc+bounces-94274-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 06:57:16 +0200
+	id 0x4LIjueRGoUyAoAu9opvQ
+	(envelope-from <linux-doc+bounces-94275-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 06:57:31 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4BED46E9BE9
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 06:57:16 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id BA5BB6E9BF7
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 06:57:30 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=j011erUS;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94274-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-94274-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=Zemxb2SY;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94275-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-94275-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 9F6983025171
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 04:57:11 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id D36D43015154
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 04:57:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 648B1376BE2;
-	Wed,  1 Jul 2026 04:57:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6F1F438E5C8;
+	Wed,  1 Jul 2026 04:57:14 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4947D3822AE;
-	Wed,  1 Jul 2026 04:57:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 36A3D376481;
+	Wed,  1 Jul 2026 04:57:12 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782881831; cv=none; b=sBi2HSzWO0nrLENhlSHRB5+Tb4XUUj9YMcwoiaU6T4QVMx1uWvx1d0OComqkmeXuXmm/sBz7VBt97ZtmMaqt3laSJIJDhRG0Z7VkcpkVaZVNknQwP4szfRY57lJmob+3kccs1Ux98Q/UF4H3TpSOizgbvENEsoad2TFo9h/TFZs=
+	t=1782881834; cv=none; b=INocxBIAt54PI5O3AnvDFHfXZFbHtZI86RVu/RGiH2tqpRdUbR8i4jqzsP6dh5FTDKFJ5f0HLKmSo0T3GQH+i9D8ix3IrQlU5VhuZXsPcqtNrjsgHGRzFhXXY2Jw90XlQxavCkhVZn0jhal39xJy5CKnf5gb8cE3rlpLLXkEfZ4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782881831; c=relaxed/simple;
-	bh=ezT/kwJ6vuGxOUGBfuM2WhOVfpYHEaa+GiFbpovVI74=;
+	s=arc-20240116; t=1782881834; c=relaxed/simple;
+	bh=tEdhKc3H4ZIAU37o25wSUihgzUDDzNPYhfNShDLQzKI=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=N62l+0O/QxXApUo75l/OdPXsloNAqKL2xiXMj60btMyiH1CUbhyfcQpyNLuQj+0BHgEfg+WjPjAeancYq5ET5U74QjKMLRgK9ZqSRz8Xs7YCKKrlLaLZSgOhvMBeUfcg/WeNF35VvSyBu/cgBCzoA4O4fjjSu+yo2kVC3ud+CU0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=j011erUS; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8711E1F00A3E;
-	Wed,  1 Jul 2026 04:57:07 +0000 (UTC)
+	 MIME-Version; b=TOeuNWawoZzP3ao5G6RDnQVzJ1oiZYLaqXddHAxos56v0IG8i9qK0otheDiXNqLBMWu+UCnvhRRC6vTGlIc6ORVWurd3Kk0pPUupwslBTFZlNsSGdvqTNRCTgrEGruIPDETd4hiFkYuKAo0LvDvVN0AD7cSsbaoCFfx6fEbfM5w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Zemxb2SY; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 54D7A1F000E9;
+	Wed,  1 Jul 2026 04:57:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782881830;
-	bh=QQs046isBRl35lQy0d8eS22vntrYBD6IMKEp3I+x8xs=;
+	s=k20260515; t=1782881832;
+	bh=Gqmk9W9i6m6yGhLl1Skxl8wszy7mbwAIpGJfvaAfQ60=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=j011erUS55Z+JMO6FNqmgdq89swIRGU6aDsGbcZwHWkswD9F9lMcaiBrinMCGt8e2
-	 /cxwGwagYPdjNYqbWB2G9vIhyxgEOUyak5Y60A5vEissY4PrHJxYrakA6KmqIVyYR4
-	 J3SWuxZII+gg6c6/RMzTkw/VkRn4XFe18igFp7OgzeQHPqR4AkkwkGp7j0+eVNMTns
-	 IzNCwAtTnUJoaxDMfOKNGI4KQmxBedUMxr6s6cKzfDfan8eGgm7c8ata7K6qu1m/Pg
-	 PRvOpjt9S3xwJTlfauO3A+OE6IDXhGqxgzMAtd/Y5S0rZx9gVW29mBj/3+FmeE370t
-	 QEODPQjreQlaQ==
+	b=Zemxb2SYxQbVnizwzR8YM0Acoor2qoZ23XpItNSUHI8PmRiQs8TtBUmcsMMWDln4/
+	 lp+MtI1N//0eMx8ZmP1qU4DcsJ4ya0ocgNbQzW7tAMFYJurxU94f55rMMoIp/1PJAy
+	 0tKyeQemcicEhov09Ln6BF+gPzNpKa1kJ2BD79ZiE+XUoNBZ8fH83I9LuJHuMODcW/
+	 Me4wGvQIimskibE9mCH4/mm3i7MRk+NZkPps3ueN640RIpjkuEa0ZltNe41JVDu59h
+	 bJ/HtA8py/pf3tH8DnyCbuWk540B/ZivR7sMNedQAjlKlxddU1RuBUlQD/yQ4vIUd6
+	 oiowss+bQPsYQ==
 From: Tzung-Bi Shih <tzungbi@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
 	"Rafael J. Wysocki" <rafael@kernel.org>,
@@ -62,9 +62,9 @@ Cc: Shuah Khan <skhan@linuxfoundation.org>,
 	tfiga@chromium.org,
 	senozhatsky@chromium.org,
 	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH v5 1/2] PM: sleep: Rename module parameters prefix to "pm_sleep"
-Date: Wed,  1 Jul 2026 04:56:39 +0000
-Message-ID: <20260701045640.3130090-2-tzungbi@kernel.org>
+Subject: [PATCH v5 2/2] PM: dpm_watchdog: Allow disabling DPM watchdog by default
+Date: Wed,  1 Jul 2026 04:56:40 +0000
+Message-ID: <20260701045640.3130090-3-tzungbi@kernel.org>
 X-Mailer: git-send-email 2.55.0.rc0.799.gd6f94ed593-goog
 In-Reply-To: <20260701045640.3130090-1-tzungbi@kernel.org>
 References: <20260701045640.3130090-1-tzungbi@kernel.org>
@@ -82,13 +82,13 @@ X-Spamd-Result: default: False [-3.66 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94274-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-94275-lists,linux-doc=lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[15];
 	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
@@ -106,53 +106,130 @@ X-Spamd-Result: default: False [-3.66 / 15.00];
 	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 4BED46E9BE9
+X-Rspamd-Queue-Id: BA5BB6E9BF7
 
-Currently, the module parameters defined in drivers/base/power/main.c
-use the default prefix "main" (derived from the filename).  The prefix
-is too generic and non-descriptive.
+Introduce the "dpm_watchdog_enabled" module parameter to allow the DPM
+watchdog to be enabled or disabled at boot time and runtime.
 
-Redefine MODULE_PARAM_PREFIX to "pm_sleep." to group the module
-parameters under the namespace instead.  This makes the parameters more
-descriptive.
+Additionally, introduce the CONFIG_DPM_WATCHDOG_ENABLED Kconfig option
+to set default value of the module parameter at compile time.
+
+This provides flexibility for systems that want the watchdog code
+compiled in but inactive by default, allowing it to be enabled only when
+needed.
 
 Signed-off-by: Tzung-Bi Shih <tzungbi@kernel.org>
 ---
-v5:
-- No changes.
+v5: No changes.
 
 v4: https://lore.kernel.org/all/20260611021219.2093476-2-tzungbi@kernel.org
-- "power" -> "pm_sleep".
+- Rewrite the commit message to indicate the module parameter is the
+  main change in the patch.
+- DPM_WATCHDOG_DEFAULT_ENABLED -> DPM_WATCHDOG_ENABLED.
 
-v3: https://lore.kernel.org/all/20260608021526.1023248-2-tzungbi@kernel.org
-- No changes.
+v3: https://lore.kernel.org/all/20260608021526.1023248-3-tzungbi@kernel.org
+- Add "PM" tag (was missing).
+- Update the format and specify dependencies in kernel-parameters.txt.
+- Update the help message in Kconfig to reflect that dpm_watchdog_enabled
+  can be set at runtime as well.
 
-v2: https://lore.kernel.org/all/20260604090756.2884671-2-tzungbi@kernel.org
-- New to the series.
+v2: https://lore.kernel.org/all/20260604090756.2884671-3-tzungbi@kernel.org
+- Use module parameter and bool for dpm_watchdog_enabled.
+- Use IS_ENABLED().
 
-v1: Doesn't exist.
+v1: https://lore.kernel.org/all/20260528103215.505795-1-tzungbi@kernel.org
 ---
- drivers/base/power/main.c | 3 +++
- 1 file changed, 3 insertions(+)
+ Documentation/admin-guide/kernel-parameters.txt |  7 +++++++
+ drivers/base/power/main.c                       | 11 +++++++++++
+ kernel/power/Kconfig                            | 10 ++++++++++
+ 3 files changed, 28 insertions(+)
 
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+index b5493a7f8f22..46c20e1b5f05 100644
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -47,6 +47,7 @@
+ 	PCI	PCI bus support is enabled.
+ 	PCIE	PCI Express support is enabled.
+ 	PCMCIA	The PCMCIA subsystem is enabled.
++	PM	Power Management support is enabled.
+ 	PNP	Plug & Play support is enabled.
+ 	PPC	PowerPC architecture is enabled.
+ 	PPT	Parallel port support is enabled.
+@@ -5354,6 +5355,12 @@ Kernel parameters
+ 	pm_debug_messages	[SUSPEND,KNL]
+ 			Enable suspend/resume debug messages during boot up.
+ 
++	pm_sleep.dpm_watchdog_enabled=
++			[PM] Enable or disable the DPM watchdog.  Requires
++			CONFIG_PM_SLEEP and CONFIG_DPM_WATCHDOG enabled.
++			Format: <bool>
++			Default value is set by CONFIG_DPM_WATCHDOG_ENABLED.
++
+ 	pnp.debug=1	[PNP]
+ 			Enable PNP debug messages (depends on the
+ 			CONFIG_PNP_DEBUG_MESSAGES option).  Change at run-time
 diff --git a/drivers/base/power/main.c b/drivers/base/power/main.c
-index f71467f6ada4..c6a3300cfb7a 100644
+index c6a3300cfb7a..f58945758868 100644
 --- a/drivers/base/power/main.c
 +++ b/drivers/base/power/main.c
-@@ -41,6 +41,9 @@
- #include "../base.h"
- #include "power.h"
+@@ -535,6 +535,11 @@ module_param(dpm_watchdog_all_cpu_backtrace, bool, 0644);
+ MODULE_PARM_DESC(dpm_watchdog_all_cpu_backtrace,
+ 		 "Backtrace all CPUs on DPM watchdog timeout");
  
-+#undef MODULE_PARAM_PREFIX
-+#define MODULE_PARAM_PREFIX "pm_sleep."
++static bool __read_mostly dpm_watchdog_enabled =
++				IS_ENABLED(CONFIG_DPM_WATCHDOG_ENABLED);
++module_param(dpm_watchdog_enabled, bool, 0644);
++MODULE_PARM_DESC(dpm_watchdog_enabled, "Enable DPM watchdog");
 +
- typedef int (*pm_callback_t)(struct device *);
+ static unsigned int __read_mostly dpm_watchdog_timeout = CONFIG_DPM_WATCHDOG_TIMEOUT;
+ static unsigned int __read_mostly dpm_watchdog_warning_timeout =
+ 						CONFIG_DPM_WATCHDOG_WARNING_TIMEOUT;
+@@ -630,6 +635,9 @@ static void dpm_watchdog_set(struct dpm_watchdog *wd, struct device *dev)
+ {
+ 	struct timer_list *timer = &wd->timer;
  
- /*
++	if (!dpm_watchdog_enabled)
++		return;
++
+ 	wd->dev = dev;
+ 	wd->tsk = current;
+ 	wd->fatal = dpm_watchdog_timeout == dpm_watchdog_warning_timeout;
+@@ -648,6 +656,9 @@ static void dpm_watchdog_clear(struct dpm_watchdog *wd)
+ {
+ 	struct timer_list *timer = &wd->timer;
+ 
++	if (!dpm_watchdog_enabled)
++		return;
++
+ 	timer_delete_sync(timer);
+ 	timer_destroy_on_stack(timer);
+ }
+diff --git a/kernel/power/Kconfig b/kernel/power/Kconfig
+index 530c897311d4..508ceabc4d2e 100644
+--- a/kernel/power/Kconfig
++++ b/kernel/power/Kconfig
+@@ -268,6 +268,16 @@ config DPM_WATCHDOG
+ 	  captured in pstore device for inspection in subsequent
+ 	  boot session.
+ 
++config DPM_WATCHDOG_ENABLED
++	bool "Enable DPM watchdog by default"
++	depends on DPM_WATCHDOG
++	default y
++	help
++	  If you say Y here, the DPM watchdog will be enabled by default.
++	  If you say N, it will be compiled in but disabled.  It can be
++	  enabled at boot time via the "pm_sleep.dpm_watchdog_enabled"
++	  kernel parameter or at runtime via sysfs.
++
+ config DPM_WATCHDOG_TIMEOUT
+ 	int "Watchdog timeout to panic in seconds"
+ 	range 1 120
 -- 
 2.55.0.rc0.799.gd6f94ed593-goog
 
