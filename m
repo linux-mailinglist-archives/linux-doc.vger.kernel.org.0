@@ -1,187 +1,159 @@
-Return-Path: <linux-doc+bounces-94330-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94333-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id m3GaFe/0RGoB4AoAu9opvQ
-	(envelope-from <linux-doc+bounces-94330-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 13:07:27 +0200
+	id qdArEqT2RGp74AoAu9opvQ
+	(envelope-from <linux-doc+bounces-94333-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 13:14:44 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id EBA966EC902
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 13:07:26 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id DA83E6ECA24
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 13:14:43 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=RgF0apzc;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94330-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-94330-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	dkim=none;
+	dmarc=none;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94333-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94333-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id B7380306670F
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 11:05:16 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 79979305875D
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 11:13:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D28CC43CEF7;
-	Wed,  1 Jul 2026 11:04:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DC158426EC0;
+	Wed,  1 Jul 2026 11:13:07 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 261B643C06F;
-	Wed,  1 Jul 2026 11:04:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 52BC63B6356;
+	Wed,  1 Jul 2026 11:13:05 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782903887; cv=none; b=UByFasq+b2+oJRC3mzxkNHtiHfWPQrSgpxJP1vX5Iz0y+OzN2leV8fzZLXfpvkCwYQskT+HG6hbguLnCn/puYOeQvvNhBYsVxGj1+lljpJhkNujXqPUgaDsvE1zMrkjwNq+qc+A3vs6d5OoLBaTw2+JBJSP1mAXr8yKpO4XbV3c=
+	t=1782904387; cv=none; b=PQ2KJAh8EGm+lDlJoyOOUuo1pHFzv+0/b6Jh9QRxp90uiIFwyCM86eOAFb8mlX6M9N1oLbV4Tj8CR45Wngtkdc564R833HqtZ/zEiTQ0Xc1ZpfZI1/D9l6sWh+F/ONU3lzNnLIM3aVWki6PRx98QRenTwpkKCLuTmletaTero4o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782903887; c=relaxed/simple;
-	bh=iNoJHRXlCQkKiqMlZrlzGN5KLrGu8DA2/8z4Ei4QI/k=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=bklAYi1QXZ1pffa2gqM46+CpMYRAEmZt59AYEqk5fIwU3XtmecW74tbkDse4qH2jpS7Gq1Eiyakppve2cz3tmKSqJw1wZ5jqUXm8dhrT3/6nuLadVihBnqcOeWCl7NOZm2cKCuBIcIRM/w92kTN5yYJtfbmGHgrV9sxncYJhAYY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RgF0apzc; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BD7721F000E9;
-	Wed,  1 Jul 2026 11:04:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782903883;
-	bh=AnOUujFcKX3gpwz4D3fgVf4ygLddSqv9i61Ak3jx5rY=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=RgF0apzc2I8IGgQvXFBNTYGTj/QWPBWdU5Bh6iXatZRH4VqyZx+5vC0kZ0AeRgoD1
-	 HIrJbxmsJ/d8btCgzU1jENoUJdZn347X5FUjLieGAxHA7BBwoOUTNJ2erhM/lYZAj/
-	 kDldJSP0wW47BO3yL563p/nUT8y7CJQ63ssCuMY+0+CCaC823zHDMbWpWpaOWZEAcK
-	 +zeQl9Mg/yc9srbtD6sFr7YUwaA2xThoefpcBJ5uhUIqp8kpBl87731KoZrtnvAtSe
-	 tQJZV2J3BcyWH05lvsRFbo2NceNQcewoAeoFdJispYiHIoZAhcAHednAhBvPWLP7WO
-	 epwBmjZFpULrw==
-Date: Wed, 1 Jul 2026 12:04:37 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Janani Sunil <janani.sunil@analog.com>
-Cc: Lars-Peter Clausen <lars@metafoo.de>,
-	Michael Hennerich <Michael.Hennerich@analog.com>,
-	Jonathan Cameron <jic23@kernel.org>,
-	David Lechner <dlechner@baylibre.com>,
-	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
-	Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Philipp Zabel <p.zabel@pengutronix.de>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Mark Brown <broonie@kernel.org>, linux-iio@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, Janani Sunil <jan.sun97@gmail.com>,
-	linux-spi@vger.kernel.org
-Subject: Re: [PATCH v5 1/3] dt-bindings: spi: Add spi,device-addr peripheral
- property
-Message-ID: <20260701-immodest-carrot-611d255656b5@spud>
-References: <20260701-ad5529r-driver-v5-0-ed087900e642@analog.com>
- <20260701-ad5529r-driver-v5-1-ed087900e642@analog.com>
+	s=arc-20240116; t=1782904387; c=relaxed/simple;
+	bh=lmqv6nwOMIQ1/A6MU3tdd/l8iraWfFOg4UXcDmZWx3Q=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=Tba9GsrutolAMYiyhx1zdpjFS9uxZyv1y4rYtqyKsfFGB/9VC/XODoiX9dxmnd6d/6SYN/s5xlO8F+KvLx2AHzoboocOfBHkwJId8HTEPuE06M5i17I+8lX7wcRoWMGn46vxNxjE318vnudf2sR+lrfT3C7Tld7rKTMcssOg8RI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-m68k.org; spf=none smtp.mailfrom=linux-m68k.org; arc=none smtp.client-ip=212.18.0.10
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
+	by mail-out.m-online.net (Postfix) with ESMTP id 4gqxxr4nzTz1sHPn;
+	Wed,  1 Jul 2026 13:05:20 +0200 (CEST)
+Received: from frontend03.mail.m-online.net (unknown [192.168.6.182])
+	by mail-out.m-online.net (Postfix) with ESMTP id 4gqxxq4lg4z1sHPX;
+	Wed,  1 Jul 2026 13:05:19 +0200 (CEST)
+Received: from localhost (dynscan3.mnet-online.de [192.168.6.87])
+	by mail.m-online.net (Postfix) with ESMTP id 4gqxxp59v1z1qqlT;
+	Wed,  1 Jul 2026 13:05:18 +0200 (CEST)
+X-Virus-Scanned: amavis at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.6.182])
+ by localhost (dynscan3.mail.m-online.net [192.168.6.87]) (amavis, port 10024)
+ with ESMTP id tQZ9_tKXpaIT; Wed,  1 Jul 2026 13:05:09 +0200 (CEST)
+X-Auth-Info: Pt4uSQGEyIjPFT3BPFolkb81GA8tMoI4Th+4yeNg3MiwksamljRMriYVf7/YBrTR
+Received: from hawking (unknown [80.255.5.134])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mail.mnet-online.de (Postfix) with ESMTPSA;
+	Wed,  1 Jul 2026 13:05:09 +0200 (CEST)
+From: Andreas Schwab <schwab@linux-m68k.org>
+To: Deepak Gupta <debug@rivosinc.com>
+Cc: "Eric W. Biederman" <ebiederm@xmission.com>,  Deepak Gupta via B4 Relay
+ <devnull+debug.rivosinc.com@kernel.org>,  Thomas Gleixner
+ <tglx@linutronix.de>,  Ingo Molnar <mingo@redhat.com>,  Borislav Petkov
+ <bp@alien8.de>,  Dave Hansen <dave.hansen@linux.intel.com>,
+  x86@kernel.org,  "H. Peter Anvin" <hpa@zytor.com>,  Andrew Morton
+ <akpm@linux-foundation.org>,  "Liam R. Howlett" <Liam.Howlett@oracle.com>,
+  Vlastimil Babka <vbabka@suse.cz>,  Lorenzo Stoakes
+ <lorenzo.stoakes@oracle.com>,  Paul Walmsley <paul.walmsley@sifive.com>,
+  Palmer Dabbelt <palmer@dabbelt.com>,  Albert Ou <aou@eecs.berkeley.edu>,
+  Conor Dooley <conor@kernel.org>,  Rob Herring <robh@kernel.org>,
+  Krzysztof Kozlowski <krzk+dt@kernel.org>,  Arnd Bergmann <arnd@arndb.de>,
+  Christian Brauner <brauner@kernel.org>,  Peter Zijlstra
+ <peterz@infradead.org>,  Oleg Nesterov <oleg@redhat.com>,  Kees Cook
+ <kees@kernel.org>,  Jonathan Corbet <corbet@lwn.net>,  Shuah Khan
+ <shuah@kernel.org>,  Jann Horn <jannh@google.com>,  Conor Dooley
+ <conor+dt@kernel.org>,  Miguel Ojeda <ojeda@kernel.org>,  Alex Gaynor
+ <alex.gaynor@gmail.com>,  Boqun Feng <boqun.feng@gmail.com>,  Gary Guo
+ <gary@garyguo.net>,  =?utf-8?Q?Bj=C3=B6rn?= Roy Baron
+ <bjorn3_gh@protonmail.com>,  Andreas
+ Hindborg <a.hindborg@kernel.org>,  Alice Ryhl <aliceryhl@google.com>,
+  Trevor Gross <tmgross@umich.edu>,  Benno Lossin <lossin@kernel.org>,
+  linux-kernel@vger.kernel.org,  linux-fsdevel@vger.kernel.org,
+  linux-mm@kvack.org,  linux-riscv@lists.infradead.org,
+  devicetree@vger.kernel.org,  linux-arch@vger.kernel.org,
+  linux-doc@vger.kernel.org,  linux-kselftest@vger.kernel.org,
+  alistair.francis@wdc.com,  richard.henderson@linaro.org,
+  jim.shu@sifive.com,  andybnac@gmail.com,  kito.cheng@sifive.com,
+  charlie@rivosinc.com,  atishp@rivosinc.com,  evan@rivosinc.com,
+  cleger@rivosinc.com,  alexghiti@rivosinc.com,  samitolvanen@google.com,
+  broonie@kernel.org,  rick.p.edgecombe@intel.com,
+  rust-for-linux@vger.kernel.org,  Zong Li <zong.li@sifive.com>
+Subject: Re: [PATCH v23 06/28] riscv/mm : ensure PROT_WRITE leads to VM_READ
+ | VM_WRITE
+In-Reply-To: <CAKC1njRapOxS6ibQdCuES1E3aAjsA+yGz4yZ1xJAZHU2vkAm_A@mail.gmail.com>
+	(Deepak Gupta's message of "Tue, 2 Jun 2026 09:19:50 -0700")
+References: <20251112-v5_user_cfi_series-v23-0-b55691eacf4f@rivosinc.com>
+	<20251112-v5_user_cfi_series-v23-6-b55691eacf4f@rivosinc.com>
+	<87jyslndo4.fsf@igel.home>
+	<CAKC1njS=AHu6uHrH4ae8VxcdEbhgiPXYCAoN3F_mnppBd3SwOA@mail.gmail.com>
+	<875x44o9hj.fsf@igel.home>
+	<CAKC1njSn_rtCj8ii876PNQTk0nsCTfWsb4DzdymufHVthh1Rkg@mail.gmail.com>
+	<871peqgp9v.fsf@igel.home>
+	<CAKC1njR+dTdvp+BmLGPtgd8dufiUwBtkQ9a-qinELT_Fmi13sQ@mail.gmail.com>
+	<87wlwif04z.fsf@igel.home>
+	<87tsrli6lt.fsf@email.froward.int.ebiederm.org>
+	<CAKC1njRapOxS6ibQdCuES1E3aAjsA+yGz4yZ1xJAZHU2vkAm_A@mail.gmail.com>
+Date: Wed, 01 Jul 2026 13:05:09 +0200
+Message-ID: <mvm8q7vt1ga.fsf@suse.de>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="VqqCijwUkRPHXQ13"
-Content-Disposition: inline
-In-Reply-To: <20260701-ad5529r-driver-v5-1-ed087900e642@analog.com>
+Content-Type: text/plain
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-5.26 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
-	SIGNED_PGP(-2.00)[];
+X-Spamd-Result: default: False [0.54 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:debug@rivosinc.com,m:ebiederm@xmission.com,m:devnull+debug.rivosinc.com@kernel.org,m:tglx@linutronix.de,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:akpm@linux-foundation.org,m:Liam.Howlett@oracle.com,m:vbabka@suse.cz,m:lorenzo.stoakes@oracle.com,m:paul.walmsley@sifive.com,m:palmer@dabbelt.com,m:aou@eecs.berkeley.edu,m:conor@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:arnd@arndb.de,m:brauner@kernel.org,m:peterz@infradead.org,m:oleg@redhat.com,m:kees@kernel.org,m:corbet@lwn.net,m:shuah@kernel.org,m:jannh@google.com,m:conor+dt@kernel.org,m:ojeda@kernel.org,m:alex.gaynor@gmail.com,m:boqun.feng@gmail.com,m:gary@garyguo.net,m:bjorn3_gh@protonmail.com,m:a.hindborg@kernel.org,m:aliceryhl@google.com,m:tmgross@umich.edu,m:lossin@kernel.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-riscv@lists.infradead.org,m:devicetree@vger.kernel.org,m:linux-arch@vger.ker
+ nel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:alistair.francis@wdc.com,m:richard.henderson@linaro.org,m:jim.shu@sifive.com,m:andybnac@gmail.com,m:kito.cheng@sifive.com,m:charlie@rivosinc.com,m:atishp@rivosinc.com,m:evan@rivosinc.com,m:cleger@rivosinc.com,m:alexghiti@rivosinc.com,m:samitolvanen@google.com,m:broonie@kernel.org,m:rick.p.edgecombe@intel.com,m:rust-for-linux@vger.kernel.org,m:zong.li@sifive.com,m:devnull@kernel.org,m:krzk@kernel.org,m:alexgaynor@gmail.com,m:boqunfeng@gmail.com,s:lists@lfdr.de];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-94333-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	FORGED_RECIPIENTS(0.00)[m:janani.sunil@analog.com,m:lars@metafoo.de,m:Michael.Hennerich@analog.com,m:jic23@kernel.org,m:dlechner@baylibre.com,m:nuno.sa@analog.com,m:andy@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:p.zabel@pengutronix.de,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:broonie@kernel.org,m:linux-iio@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jan.sun97@gmail.com,m:linux-spi@vger.kernel.org,m:krzk@kernel.org,m:conor@kernel.org,m:jansun97@gmail.com,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94330-lists,linux-doc=lfdr.de];
-	FORGED_SENDER(0.00)[conor@kernel.org,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[conor@kernel.org,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[metafoo.de,analog.com,kernel.org,baylibre.com,pengutronix.de,lwn.net,linuxfoundation.org,vger.kernel.org,gmail.com];
+	DMARC_NA(0.00)[linux-m68k.org];
+	FORGED_SENDER(0.00)[schwab@linux-m68k.org,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[xmission.com,kernel.org,linutronix.de,redhat.com,alien8.de,linux.intel.com,zytor.com,linux-foundation.org,oracle.com,suse.cz,sifive.com,dabbelt.com,eecs.berkeley.edu,arndb.de,infradead.org,lwn.net,google.com,gmail.com,garyguo.net,protonmail.com,umich.edu,vger.kernel.org,kvack.org,lists.infradead.org,wdc.com,linaro.org,rivosinc.com,intel.com];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[schwab@linux-m68k.org,linux-doc@vger.kernel.org];
+	RCPT_COUNT_GT_50(0.00)[60];
+	ALIAS_RESOLVED(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp,linux-m68k.org:from_mime,linux-m68k.org:email];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo]
+	R_DKIM_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,debug.rivosinc.com,dt];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_SEVEN(0.00)[8]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: EBA966EC902
+X-Rspamd-Queue-Id: DA83E6ECA24
 
---VqqCijwUkRPHXQ13
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Any news? This is still broken in 7.2-rc1.
 
-On Wed, Jul 01, 2026 at 08:40:39AM +0200, Janani Sunil wrote:
-> Some SPI devices support sharing a single chip select across multiple
-> physical chips by encoding a device address in the SPI frame itself.
-> Add a generic spi,device-addr property to document this per-peripheral
-> address. This property belongs in channel or sub-device nodes of
-> peripherals that use this addressing scheme.
->=20
-> Signed-off-by: Janani Sunil <janani.sunil@analog.com>
-> ---
->  Documentation/devicetree/bindings/spi/spi-peripheral-props.yaml | 5 +++++
->  1 file changed, 5 insertions(+)
->=20
-> diff --git a/Documentation/devicetree/bindings/spi/spi-peripheral-props.y=
-aml b/Documentation/devicetree/bindings/spi/spi-peripheral-props.yaml
-> index 880a9f624566..3774e8018355 100644
-> --- a/Documentation/devicetree/bindings/spi/spi-peripheral-props.yaml
-> +++ b/Documentation/devicetree/bindings/spi/spi-peripheral-props.yaml
-> @@ -142,6 +142,11 @@ properties:
->      minItems: 2
->      maxItems: 4
-> =20
-> +  spi,device-addr:
-
-To match other generic spi properties, s/,/-/.
-
-However, you don't actually use this as a spi peripheral's property in
-your device binding, so you've got your wires crossed here somewhere.
-
-If it's a generic dac channel property (as you use it) it should be in
-dac.yaml (or adc.yaml for the other device that I asked you to add it
-for as proof of being generic), or it is a spi peripheral property and
-needs to go into the dac node itself.
-
-pw-bot: changes-requested
-
-> +    $ref: /schemas/types.yaml#/definitions/uint32
-> +    description:
-> +      Device address used when multiple peripherals share a single chip =
-select.
-> +
->    st,spi-midi-ns:
->      deprecated: true
->      description: |
->=20
-> --=20
-> 2.43.0
->=20
-
---VqqCijwUkRPHXQ13
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCakT0RQAKCRB4tDGHoIJi
-0oAXAQCicLyE78yFQYPOZCjJeHOLd/F4aci3owp0A2ld0WboDAD+PNHYrKK5luFd
-0otItNvp4UEA7giSba5VSuOwoQ6lqw4=
-=BtpN
------END PGP SIGNATURE-----
-
---VqqCijwUkRPHXQ13--
+-- 
+Andreas Schwab, schwab@linux-m68k.org
+GPG Key fingerprint = 7578 EB47 D4E5 4D69 2510  2552 DF73 E780 A9DA AEC1
+"And now for something completely different."
 
