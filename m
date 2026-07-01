@@ -1,195 +1,259 @@
-Return-Path: <linux-doc+bounces-94315-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94316-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id PsbTHPLbRGr02AoAu9opvQ
-	(envelope-from <linux-doc+bounces-94315-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 11:20:50 +0200
+	id r9iWHtTfRGrZ2QoAu9opvQ
+	(envelope-from <linux-doc+bounces-94316-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 11:37:24 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 691CF6EB8BB
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 11:20:49 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id C65F16EBA62
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 11:37:23 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=intel.com header.s=Intel header.b=XK4MnQt0;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94315-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-94315-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=intel.com;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=k5EL6dBF;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94316-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94316-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=gmail.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id E307C3009386
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 09:20:33 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 32B8D3052453
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 09:36:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8928F3F483F;
-	Wed,  1 Jul 2026 09:20:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0FE8F3BED08;
+	Wed,  1 Jul 2026 09:36:19 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.16])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6AE053F44C1;
-	Wed,  1 Jul 2026 09:20:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE2413BFE41
+	for <linux-doc@vger.kernel.org>; Wed,  1 Jul 2026 09:36:17 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782897629; cv=none; b=uLHcOYoe8syZzdkUQ5CyzDomQW9fQ2ZLxfErWoukUjV0aj3OtjOsZvdnueqkg/Rz200oU5s/D9WAPnAxBkSGI/OEt7mnCxn2PWrLhM4/EhohAvY4bEw0NqRcq1XaAp4EsYcV0nqXgQMu5fxRRqUWCvG/Kv5A6JE5oKCuFi1HpJc=
+	t=1782898579; cv=none; b=gimLAJpZFAxrm10OfxmOuhS4zUn/VdjWYgwd2nXpP4uIIVcV5635Mfz31lQ+7pJRmJgsaATWpadlnzbNZCa5bs+oH8NWpTZUrCdDp5dDxi1jmM0vuRb+I8mh1lnRVmyzvmvoosKO0VT5kbarRobki88PUVaFzOHsPYTEElfctXY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782897629; c=relaxed/simple;
-	bh=7J8U0aOHIOgQWuEsjj2TtWJ9iF88n4wrQKbJKxMJsMU=;
+	s=arc-20240116; t=1782898579; c=relaxed/simple;
+	bh=kFJU5S/ADS8cQ9IcAhCTCexim4U1NOWnfHr1WtpsRGM=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=ldxrJTCrg3x79lqPCjdegEfZXSYvK5Rbk/vM1qgIM4w/Sl6/nw2PzZH0cLu9Q5XoQ8izDCcpP9MJY2JVhnPMJMswFfd24p0S+atKunJ5ytcRCq3dZXINXvBqTCxjRtXsql4c2aUnm/oTkfMVXdfVc1KH1VOEhwqedG5bWPd5Iyg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=XK4MnQt0; arc=none smtp.client-ip=192.198.163.16
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1782897627; x=1814433627;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=7J8U0aOHIOgQWuEsjj2TtWJ9iF88n4wrQKbJKxMJsMU=;
-  b=XK4MnQt0hZ8LWZuZ6RjBzlNeIcRwghVNNP1FEkE24t80Sbq9Sv/YOBJt
-   2ISsnY5b5dq1uD+T8KszohM8SMxjOCZc85oeJIUkrnVM4L45Y1qvTW0CV
-   AAZoDcXNqLicQIvX400s1twrImbknyYTlr/VZAjJJO2KHmhzmlmlzZ+6t
-   PP5SkYR1PE8He9sVnadRvuwjYKvwkh62gpO935v95+GXD0uxd/z0lAcn/
-   gIckyqH59sU0Cg0DqIVJFPCH3VCTOSc+u87BQ5db5KOBKtqDHdGA50vUy
-   9q+Krp6rErXm/6JYARhwJ238IjfovKp4PaFzTHGdW1Pznwqbk68Z0+B2r
-   Q==;
-X-CSE-ConnectionGUID: DS4iwU16RXqNnhiehz54jA==
-X-CSE-MsgGUID: 8UIGvcxyS56IUW484EstBQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11833"; a="71148513"
-X-IronPort-AV: E=Sophos;i="6.24,235,1774335600"; 
-   d="scan'208";a="71148513"
-Received: from orviesa007.jf.intel.com ([10.64.159.147])
-  by fmvoesa110.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Jul 2026 02:20:26 -0700
-X-CSE-ConnectionGUID: GCoFRbeXS+CWkw/DTSBMHg==
-X-CSE-MsgGUID: g0z9xiZWQNWS5ThC6q4GpA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.24,235,1774335600"; 
-   d="scan'208";a="252647190"
-Received: from unknown (HELO [10.239.158.49]) ([10.239.158.49])
-  by orviesa007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Jul 2026 02:19:59 -0700
-Message-ID: <739e6834-40b3-405b-ada4-d31c38d8416a@intel.com>
-Date: Wed, 1 Jul 2026 17:19:54 +0800
+	 In-Reply-To:Content-Type; b=KBQG2U3vODtS25Ytssvn0iuHvYLcsTaKvLPSG1VaIgbsn7PVjMWCq58JSzPoD24wZuC4Ga+Mj4S556vP3F2Ze9FteW21MxIvTDYEf60YZWPVlNLnSDJEPMxNhs3zznuQqQ4wT70xzULl3SmwE8/4iYYcsMVgDHjHTmYdppWU8jo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=k5EL6dBF; arc=none smtp.client-ip=209.85.216.53
+Received: by mail-pj1-f53.google.com with SMTP id 98e67ed59e1d1-37f7a5a217fso304587a91.0
+        for <linux-doc@vger.kernel.org>; Wed, 01 Jul 2026 02:36:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1782898577; x=1783503377; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=RZ1T1yMzReBxlyUrs6yfTSt/QEbowwV85eIIRt2ArQ4=;
+        b=k5EL6dBFpgqCLtlochxhmoWK0jd98YXvCog3Tx2RyfaOvAz89eF+QzH97pDKmX4GwZ
+         gD/OSgNBYCir/XT2AjVH7rvu4J3FNo0wi4fmBLoF6B7WJud2MXIGrSlMNvNRcw3JgXjO
+         aMI+Ivao6vdlQr44L9tBt3i3pe1Z3p37Pz+HsAysFg25mtF0vQ+pLVAwRjsHhdEezpQw
+         +J0ck12sGwBbiGxM7yosfLQ5W2oyVWwSuzuKTxYGc8efhrt8fKanditwF+opOnZEvhF9
+         8nTv1j/j/AlcV3Av+oUKgzpAXJuJxOKGBbcTXv504MaVtIupU9hwdYVZhQY1S2Zek/V4
+         YB8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1782898577; x=1783503377;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=RZ1T1yMzReBxlyUrs6yfTSt/QEbowwV85eIIRt2ArQ4=;
+        b=QeRU2pcpYXZuCXzqVTdMV6/4UzeSBQSay533xHhke9DWVE/E6lSPHgGRH2ghhotpl4
+         Y3Zef99QgaTzmVdnSJIVeJsdUZOgEKxOPhmd0cft9iL1Fc/5mLzm1T0t9SZF2miEOyOW
+         gGFUir83QmFRTwxuphCpTgspPp7GS2UWITthMu0+10SWzuN4y0dl3kNF2ARuqpI1jyxb
+         d7eT9hAmiELcETxB2q+qJeF69/T4lKkcVrSjRAg0vbhULUVIXknWAFOjpoPr7ZVICuW3
+         nG3r7QHRlBcSXuvQCJcFH9VGVJjAFCiFN3dXMjUE63LSqfCxrc7MSUKT1qUJRslAwsD1
+         5DrA==
+X-Forwarded-Encrypted: i=1; AHgh+Rri2NJiipJDQffjr+kUIfu+801My82bvSrmqZjJPqELV7v3+Q4mVPjdsVigm2XfqFoO66RVqqflE94=@vger.kernel.org
+X-Gm-Message-State: AOJu0YymF2L3n38Uby57+MhkOrjViqvIQIGi6SZoN/w0+Y9T2igSjghA
+	e6NbZfaBs4hs54m1G1maBriT4GHru5TvK59jJlbG4Ky0vId0VTTT4/z5
+X-Gm-Gg: AfdE7cl1l8DVvTbSWwLYc1XsyFHuJp10Z9D+WDNn4ykJ3w0ooCC1rjrl94NqluSRBR8
+	SLb/qZmQeoZ9dyQUpur5O2b15H/YvqcmwvORUewmDqRt4YrE9WJwB1E8vc9G9Cz4+90yxWg31u3
+	ryz55UTAYipL6cz1pJFURzlbTrcCZMd0LQgneJbVMGdAJqYaQPp/Exu80hBvb5Dg9Vw3qAKS++g
+	2/jcrHfyNHkv2x5FrX7et/+uGxBIVumKo/X6UXOC4jMpAg09LP2I19Zce25F6CkYo+t0PkQ+D2+
+	PHmyGLEJxTgyJOeVyhedu+WX3IDI0wfZgh9afzXyjVrGyll+5+ted/zb8523K4MF5975ZngebLK
+	Y7xhAQvwceeeDuehBquTcRXZEGHrouiP6Cf5P9j4VcFcjsprIBcv937NUwmxO183syQNFG9neWr
+	2Y6iCTGQ14pflTW0X3NHesU1P3YxN/zNvT
+X-Received: by 2002:a17:90b:2687:b0:37f:caeb:69e3 with SMTP id 98e67ed59e1d1-380ba8fb076mr96356a91.23.1782898576891;
+        Wed, 01 Jul 2026 02:36:16 -0700 (PDT)
+Received: from [10.125.192.77] ([210.184.73.204])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38097da4c32sm717511a91.2.2026.07.01.02.36.02
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 01 Jul 2026 02:36:15 -0700 (PDT)
+Message-ID: <a1c139d9-08b8-9631-7a85-697df4c23d52@gmail.com>
+Date: Wed, 1 Jul 2026 17:35:55 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 06/46] KVM: Enumerate support for PRIVATE memory iff
- kvm_arch_has_private_mem is defined
-To: ackerleytng@google.com, aik@amd.com, andrew.jones@linux.dev,
- binbin.wu@linux.intel.com, brauner@kernel.org, chao.p.peng@linux.intel.com,
- david@kernel.org, jmattson@google.com, jthoughton@google.com,
- michael.roth@amd.com, oupton@kernel.org, pankaj.gupta@amd.com,
- qperret@google.com, rick.p.edgecombe@intel.com, rientjes@google.com,
- shivankg@amd.com, steven.price@arm.com, tabba@google.com,
- willy@infradead.org, wyihan@google.com, yan.y.zhao@intel.com,
- forkloop@google.com, pratyush@kernel.org, suzuki.poulose@arm.com,
- aneesh.kumar@kernel.org, liam@infradead.org,
- Paolo Bonzini <pbonzini@redhat.com>, Sean Christopherson
- <seanjc@google.com>, Thomas Gleixner <tglx@kernel.org>,
- Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
- Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
- "H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>,
- Masami Hiramatsu <mhiramat@kernel.org>,
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>,
- Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>,
- Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>,
- Nhat Pham <nphamcs@gmail.com>, Barry Song <baohua@kernel.org>,
- Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>,
- Wei Xu <weixugc@google.com>, Youngjun Park <youngjun.park@lge.com>,
- Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>,
- Kiryl Shutsemau <kas@kernel.org>, Baoquan He <baoquan.he@linux.dev>,
- Jason Gunthorpe <jgg@ziepe.ca>, Vlastimil Babka <vbabka@kernel.org>
-Cc: kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kselftest@vger.kernel.org, linux-mm@kvack.org,
- linux-coco@lists.linux.dev
-References: <20260618-gmem-inplace-conversion-v8-0-9d2959357853@google.com>
- <20260618-gmem-inplace-conversion-v8-6-9d2959357853@google.com>
-Content-Language: en-US
-From: Xiaoyao Li <xiaoyao.li@intel.com>
-In-Reply-To: <20260618-gmem-inplace-conversion-v8-6-9d2959357853@google.com>
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.15.0
+Subject: Re: [PATCH v5 4/6] mm/zswap: Implement proactive writeback
+To: Yosry Ahmed <yosry@kernel.org>
+Cc: akpm@linux-foundation.org, tj@kernel.org, hannes@cmpxchg.org,
+ shakeel.butt@linux.dev, mhocko@kernel.org, mkoutny@suse.com,
+ nphamcs@gmail.com, chengming.zhou@linux.dev, muchun.song@linux.dev,
+ roman.gushchin@linux.dev, linux-mm@kvack.org, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, Hao Jia <jiahao1@lixiang.com>
+References: <20260629112032.20423-1-jiahao.kernel@gmail.com>
+ <20260629112032.20423-5-jiahao.kernel@gmail.com>
+ <akMJ8UfeZXrVe5LN@google.com>
+ <cbbdf506-b67d-193c-2c94-bacf828d559f@gmail.com>
+ <CAO9r8zNCEis2QHROEsM5QZsb_H4ofNjA_sE-pM7SVxtgHg_rqg@mail.gmail.com>
+From: Hao Jia <jiahao.kernel@gmail.com>
+In-Reply-To: <CAO9r8zNCEis2QHROEsM5QZsb_H4ofNjA_sE-pM7SVxtgHg_rqg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-5.16 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-94315-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[google.com,amd.com,linux.dev,linux.intel.com,kernel.org,intel.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca];
-	FORGED_SENDER(0.00)[xiaoyao.li@intel.com,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:ackerleytng@google.com,m:aik@amd.com,m:andrew.jones@linux.dev,m:binbin.wu@linux.intel.com,m:brauner@kernel.org,m:chao.p.peng@linux.intel.com,m:david@kernel.org,m:jmattson@google.com,m:jthoughton@google.com,m:michael.roth@amd.com,m:oupton@kernel.org,m:pankaj.gupta@amd.com,m:qperret@google.com,m:rick.p.edgecombe@intel.com,m:rientjes@google.com,m:shivankg@amd.com,m:steven.price@arm.com,m:tabba@google.com,m:willy@infradead.org,m:wyihan@google.com,m:yan.y.zhao@intel.com,m:forkloop@google.com,m:pratyush@kernel.org,m:suzuki.poulose@arm.com,m:aneesh.kumar@kernel.org,m:liam@infradead.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:shuah@kernel.org,m:vannapurve@google.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencen
- t.com,m:shikemeng@huaweicloud.com,m:nphamcs@gmail.com,m:baohua@kernel.org,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:kas@kernel.org,m:baoquan.he@linux.dev,m:jgg@ziepe.ca,m:vbabka@kernel.org,m:kvm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,m:linux-coco@lists.linux.dev,s:lists@lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	TAGGED_FROM(0.00)[bounces-94316-lists,linux-doc=lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER(0.00)[jiahaokernel@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS(0.00)[m:yosry@kernel.org,m:akpm@linux-foundation.org,m:tj@kernel.org,m:hannes@cmpxchg.org,m:shakeel.butt@linux.dev,m:mhocko@kernel.org,m:mkoutny@suse.com,m:nphamcs@gmail.com,m:chengming.zhou@linux.dev,m:muchun.song@linux.dev,m:roman.gushchin@linux.dev,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jiahao1@lixiang.com,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	TO_DN_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[linux-foundation.org,kernel.org,cmpxchg.org,linux.dev,suse.com,gmail.com,kvack.org,vger.kernel.org,lixiang.com];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[xiaoyao.li@intel.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[64];
-	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[jiahaokernel@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,intel.com:dkim,intel.com:mid,intel.com:from_mime]
+	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 691CF6EB8BB
+X-Rspamd-Queue-Id: C65F16EBA62
 
-On 6/19/2026 8:31 AM, Ackerley Tng via B4 Relay wrote:
-> From: Ackerley Tng <ackerleytng@google.com>
+
+
+On 2026/7/1 00:10, Yosry Ahmed wrote:
+>>> Before going through more versions we need to figure out if this will
+>>> pivot to be a proactive demotion interfcae for swap tiering.
+>>>
+>>
+>> Yes. Should I drop patches 4-6 in the next version and wait for swap
+>> tiering to be finalized?
+>> We can try to get the non-memcg parts (patches 1-3) merged upstream
+>> first. This would also give them plenty of time to bake and catch any
+>> potential regressions. Thoughts?
 > 
-> Explicitly guard reporting support for KVM_MEMORY_ATTRIBUTE_PRIVATE based
-> on kvm_arch_has_private_mem being #defined in anticipation of decoupling
-> kvm_supported_mem_attributes() from CONFIG_KVM_VM_MEMORY_ATTRIBUTES.
-
-Well, after this series, kvm_supported_mem_attributes() is renamed to 
-kvm_supported_vm_mem_attributes(), and it's still under 
-CONFIG_KVM_VM_MEMORY_ATTRIBUTES.
-
-> guest_memfd support for memory attributes will be unconditional to avoid
-> yet more macros (all architectures that support guest_memfd are expected to
-> use per-gmem attributes at some point), at which point enumerating support
-> KVM_MEMORY_ATTRIBUTE_PRIVATE based solely on memory attributes being
-> supported _somewhere_ would result in KVM over-reporting support on arm64.
-
-I don't understand it. This patch only changes the behavior of 
-kvm_supported_mem_attributes(), the usage of which is guarded by 
-CONFIG_KVM_VM_MEMORY_ATTRIBUTES. This is config is only visible to x86 
-due to patch 03. How does it affect arm64?
-
-> Signed-off-by: Sean Christopherson <seanjc@google.com>
-> Reviewed-by: Fuad Tabba <tabba@google.com>
-> Signed-off-by: Ackerley Tng <ackerleytng@google.com>
-> ---
->   virt/kvm/kvm_main.c | 2 ++
->   1 file changed, 2 insertions(+)
+> Patches 1-2 can be sent and merged separately, yes. For patch 2,
+> please include some numbers for the writeback performance before and
+> after batching.
 > 
-> diff --git a/virt/kvm/kvm_main.c b/virt/kvm/kvm_main.c
-> index 1ccc4895a4c26..7b989b659cf82 100644
-> --- a/virt/kvm/kvm_main.c
-> +++ b/virt/kvm/kvm_main.c
-> @@ -2421,8 +2421,10 @@ static int kvm_vm_ioctl_clear_dirty_log(struct kvm *kvm,
->   #ifdef CONFIG_KVM_VM_MEMORY_ATTRIBUTES
->   static u64 kvm_supported_mem_attributes(struct kvm *kvm)
->   {
-> +#ifdef kvm_arch_has_private_mem
->   	if (!kvm || kvm_arch_has_private_mem(kvm))
->   		return KVM_MEMORY_ATTRIBUTE_PRIVATE;
-> +#endif
->   
->   	return 0;
->   }
-> 
+> Patch 3 does refactoring in preparation for patch 4, so I don't think
+> it makes sense on its own.
 
+Will do.
+
+> 
+>>>> +int zswap_proactive_writeback(struct mem_cgroup *memcg, u64 bytes_to_writeback)
+>>>> +{
+>>>> +    struct zswap_shrink_state s = {};
+>>>> +    struct mem_cgroup *iter = NULL;
+>>>> +    u64 bytes_written = 0;
+>>>> +    int ret = 0;
+>>>> +
+>>>> +    if (!memcg)
+>>>> +            return -EINVAL;
+>>>
+>>> Can this ever happen? It would be a bug in the caller.
+>>
+>> IIRC，Writing the following to the NUMA node sysfs entry triggers this
+>> check:
+>> echo "10M source=zswap" > /sys/devices/system/node/nodeN/reclaim
+> 
+> Oh yeah, I forgot about that one :)
+> 
+> If we keep this, probably combine the !memcg and writeback check below.
+
+Will do.
+> 
+>>
+>>>
+>>>> +    if (!mem_cgroup_zswap_writeback_enabled(memcg))
+>>>> +            return -EINVAL;
+>>>> +    if (!bytes_to_writeback)
+>>>> +            return 0;
+>>>
+>>> Do we need this? I think the loop will just never enter and
+>>> mem_cgroup_iter_break() will do nothing.
+>>
+>> Will do.
+>>>
+>>>> +
+>>>> +    while (bytes_written < bytes_to_writeback) {
+>>>> +            long shrunk;
+>>>> +
+>>>> +            cond_resched();
+>>>> +
+>>>> +            if (signal_pending(current)) {
+>>>> +                    ret = -EINTR;
+>>>> +                    break;
+>>>> +            }
+>>>> +
+>>>> +            /*
+>>>> +             * Use a local iterator to walk the memcg and its online descendants
+>>>> +             * in a round-robin manner. Upon exiting the loop, mem_cgroup_iter_break()
+>>>> +             * must be called to drop the iterator reference.
+>>>> +             */
+>>>> +            do {
+>>>> +                    iter = mem_cgroup_iter(memcg, iter, NULL);
+>>>> +            } while (iter && !mem_cgroup_tryget_online(iter));
+>>>> +
+>>>> +            shrunk = zswap_shrink_one_memcg(iter, &s);
+>>>> +            if (shrunk > 0)
+>>>> +                    bytes_written += shrunk;
+>>>> +
+>>>> +            /* drop the extra reference taken by mem_cgroup_tryget_online() */
+>>>> +            mem_cgroup_put(iter);
+>>>
+>>>
+>>> Can we just use mem_cgroup_online() instead since mem_cgroup_iter()
+>>> already graps a ref?
+>>>
+>> Will do.
+> 
+> If you're looking for another cleanup to do, shrink_worker() should
+> probably also use mem_cgroup_online() and avoid taking/dropping an
+> extra ref :)
+
+IIRC, this might not work because zswap_next_shrink is a global variable 
+and is accessed outside the lock during reclamation.
+
+Consider the following race condition between shrink_worker on CPU0 and 
+zswap_memcg_offline_cleanup on CPU1:
+
+
+           CPU0                            CPU1
+spin_lock(zswap_shrink_lock)
+memcg1 = mem_cgroup_iter()
+   memcg1.ref = 1
+   zswap_next_shrink = memcg1
+spin_unlock(zswap_shrink_lock)
+                               zswap_memcg_offline_cleanup()
+                               spin_lock(zswap_shrink_lock)
+                               css_put(zswap_next_shrink)
+                               memcg1.ref = 0  <--
+
+shrink_memcg(memcg1) *maybe UAF*
+
+Thanks,
+Hao
 
