@@ -1,312 +1,230 @@
-Return-Path: <linux-doc+bounces-94415-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94417-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id ylAWM1RGRWqQ9woAu9opvQ
-	(envelope-from <linux-doc+bounces-94415-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 18:54:44 +0200
+	id aD2MNMRHRWr49woAu9opvQ
+	(envelope-from <linux-doc+bounces-94417-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 19:00:52 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 317BA6F006B
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 18:54:44 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id B3FAD6F0177
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 19:00:51 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=lU8GDwPb;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94415-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94415-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
+	dkim=pass header.d=google.com header.s=20251104 header.b=Bm16Jk10;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94417-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-94417-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=google.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E94353069631
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 16:50:28 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 9467A309BEA5
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 16:55:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6C77737646E;
-	Wed,  1 Jul 2026 16:50:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8AB59370ACD;
+	Wed,  1 Jul 2026 16:55:03 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-yx1-f42.google.com (mail-yx1-f42.google.com [74.125.224.42])
+Received: from mail-pg1-f201.google.com (mail-pg1-f201.google.com [209.85.215.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F3308262FD0
-	for <linux-doc@vger.kernel.org>; Wed,  1 Jul 2026 16:50:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E188E37DAAD
+	for <linux-doc@vger.kernel.org>; Wed,  1 Jul 2026 16:55:01 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782924628; cv=none; b=N/M8tGJTS0XrqgLVTNWR4Xzh8WMzL57i5sNgdrLWDV8j932iiG8BH1SiffuBYOxVIJ6KcZPcTLQFhnHOxXNmGGMr3KK+w+yUTN9ytzyC/KgFjuR+bbfU+sAz5BZy8/5JIAIkLW764CKTajtjVn8re0Fcj0Aaf1DRKDEFddefQu4=
+	t=1782924903; cv=none; b=O0ncuCgx7Lio3h5YOeVlplAa4+5Ot9iUzGHI30t/fuBGjvatfGTpOpqybx6mH45fLhhTW6sjKDgHTVf0gD+Y+ouwrjmqf9q57r1bB80YpIH7WWoW+x+2fuVU3KpmNOL3rBHfAY4b8UA9zOZV5BJZo5TL9jT09tC7TvHWyLP0EJw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782924628; c=relaxed/simple;
-	bh=09HS8lyN13KQlLKIZ6ncHOBX6ivzk1EYRrfPdUFLHGc=;
-	h=From:Date:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=jgk4ZvZtGRIL0WZKcDd9W2icFkQDsASNpCBcw2rLAKsy90pa2dhBaKZxs6KzwfJpB6XmBg/jn6gU5YaQHc7TK1AAhlGpj0epOet03WUjU25hY+wpc3dzDpRA6g4Lkgx/NhpEezs2eX3Ze2IelUHGItXdLhKx/8WLrnqG5//OSew=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=lU8GDwPb; arc=none smtp.client-ip=74.125.224.42
-Received: by mail-yx1-f42.google.com with SMTP id 956f58d0204a3-6626b5ace23so2134003d50.0
-        for <linux-doc@vger.kernel.org>; Wed, 01 Jul 2026 09:50:26 -0700 (PDT)
+	s=arc-20240116; t=1782924903; c=relaxed/simple;
+	bh=L5c3o9vgdgjXHGOQSuIW9q3/2N3iJk6DLv8bljpS7DA=;
+	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
+	 To:Cc:Content-Type; b=WA/uFBcUSOMLXBc8gc9cSCrHRqxKhYE7r7QvJYMm6NKaJrasRjhhZ3mplibSBETP8LOQJxWEbvyzsnTohfvACWpQcPWltmJCecEJ0y+Eg3MT+x0gyZsTHMg8WsM42Gr3tNqk6/hyFa3uPJa7Vhzk/b3Azv2H91yIyB+EzkWmmuA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--seanjc.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=Bm16Jk10; arc=none smtp.client-ip=209.85.215.201
+Received: by mail-pg1-f201.google.com with SMTP id 41be03b00d2f7-c916d17dd43so1000491a12.3
+        for <linux-doc@vger.kernel.org>; Wed, 01 Jul 2026 09:55:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782924626; x=1783529426; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:date:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=YyDFYMVFanlLOtM66Vof6yYAS25wK6bFjDnPECv+0bg=;
-        b=lU8GDwPbBUjd5eSHaeTflDlGlXhck53HO1IavAqZPdaydNj9ZrcsohMG/v5YCbCzMq
-         vmjIduBVZiUXOpJpB9n+I968tjS7c+Sqnsopd5KwGzB3a55FfGYM1uKlKG+zrzQA3UxS
-         6DfCY+LG8Pf23WXs3BHJnlnSgNCr11AIFnKbkbJ/EJw1d9ixtsqouQS3vONbNwDuHXLv
-         mOa8KpW/q5ILWpEkL38/5FwxD7m02CsIUoqrzU7XZ9J+NqzxckJP87iyOoVq5yz4SsIy
-         BhoQW+kWrP7SCQrIDfFSrjgMnmpCkr6zLWqqotct+8uPOMXpNBJNj/K2JnI3xW9b+yOe
-         MrxQ==
+        d=google.com; s=20251104; t=1782924901; x=1783529701; darn=vger.kernel.org;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=lbVYdv7/FNdOOvrw/bcfsmdKoQ369BNbAkiBiKDICVU=;
+        b=Bm16Jk10DzFwFM1c7L4fhwdbnVfS0QXzyMzWyFobsZ2zse54L5EUYVd/71MHkeSFHj
+         KO50Lstmu5WUaTKkOpNvDhN544ttzDQhhydyddDJJB3vI2q8CnNVUX0LvodCKgB2r/ON
+         WlIi271UjYatvD6h1k3itEZwUQUUsJxdOvwekCs1tgd8LZ7rVLPbargP99LeV7LtI9q2
+         w+7CnH/Un7Qa9TMiL/hb+t4YlX9LnzrYuIwvc5e61wC+rtzAy8nozGPD0HriOIhqfpLb
+         vDY094LXpJ432U4I3O2M6nbsCzPKbRKqfC/xXGmdm2OXVsrOSL6cDSS9LAK/BYlbHv7r
+         XRCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782924626; x=1783529426;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:date:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=YyDFYMVFanlLOtM66Vof6yYAS25wK6bFjDnPECv+0bg=;
-        b=hk6rW79CKsxaHDmoivoTrpZKPtKpfNaTwZrjbtLZdqxvmo6xuvp2vmgV4y+Gv6dwH/
-         Qj0CXB3AD2T41Rwi8JO4d4zF0V/zLTIuAIix1f/v59OdcREvgbuVDaeAc6y7c3bEaigt
-         Ld5b3WhTlFpCRLQKESJHA1/OG1u81ErOKI6T5Pl55pOieoBiqOUpDA9DNTYMyoCzjpPO
-         H1cbkS6Z/PFtVWzXe1Kr5+Jv7QkIOVPby5+/iscxVLJHB0WaHSuJH+wOQmqnxWo8A0ph
-         vn4oRrK3cFXeMOwJynOXB8o628jzbPBmS0Fa7zdgv1MAdTYhAeXnGz4SdLaKH1mGJV+U
-         iWKQ==
-X-Forwarded-Encrypted: i=1; AHgh+Rpd6kmNC/c7bXdCz24r0QDb3d8GYZgvmJY562t3JkvpC9NC0IW8zgkpVYQCE28dEqmCPdEgqpsdhbM=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyjZsmohs/OA/O4EE0evyjVNNO56xn2oLSlQYuSuBn3Nz3qvHrW
-	VaBWh+5Jl2eWtE4fb69kSgxzQxhb2EOTFx8rrjWeJGQLzX4O2fCHDr/9
-X-Gm-Gg: AfdE7ckE521yJYtLTs9OLGh8A1j9WR2lvEUwCJglpEUr7NV2ifrJjpNSl1+2iEN+b4j
-	XyNNcfyjjVDn13SWifiLthjfFDR9qGrzj2hvsCj3Wg3sPWF6ANjt2Ea2sxa0gk3X6Isk31YYyA+
-	Oldz4oySPIs3tgjvHgquTlb3wEBOR3NExKf8+BymNP89rC8ipPe5RYMl6HtMVaelLteoP8y7svn
-	ObvPOsnCSVffVT7D77N9tGG2UPqKbYyQooi2zHjIRaneMlnTlF19pRFFdJnGIGauXjb2+erTyr5
-	72Tr+/QGsCD0uaW3idMWfNrBFft1duWB/LYSQk+M8iXzCyn2zFi2ZIyu4SKLgGcXoquJPxUc+NO
-	namZQdwTcIL36dx/c4+lDmZ4GWcAnm8HupeTfoO5IK/8mpROd3Y5HDnNNgcTyNhiGtzV+1GKrxD
-	MLG9J0
-X-Received: by 2002:a05:690e:450d:20b0:666:1ff5:fbf5 with SMTP id 956f58d0204a3-6661ff61996mr565918d50.13.1782924625901;
-        Wed, 01 Jul 2026 09:50:25 -0700 (PDT)
-Received: from localhost ([24.129.38.94])
-        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-6650053f901sm2552638d50.1.2026.07.01.09.50.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 01 Jul 2026 09:50:25 -0700 (PDT)
-From: Yury Norov <yury.norov@gmail.com>
-X-Google-Original-From: Yury Norov <ynorov@nvidia.com>
-Date: Wed, 1 Jul 2026 12:50:24 -0400
-To: Shrikanth Hegde <sshegde@linux.ibm.com>
-Cc: linux-kernel@vger.kernel.org, mingo@kernel.org, peterz@infradead.org,
-	juri.lelli@redhat.com, vincent.guittot@linaro.org,
-	yury.norov@gmail.com, kprateek.nayak@amd.com, iii@linux.ibm.com,
-	corbet@lwn.net, tglx@kernel.org, gregkh@linuxfoundation.org,
-	pbonzini@redhat.com, seanjc@google.com, vschneid@redhat.com,
-	huschle@linux.ibm.com, rostedt@goodmis.org,
-	dietmar.eggemann@arm.com, maddy@linux.ibm.com, srikar@linux.ibm.com,
-	hdanton@sina.com, chleroy@kernel.org, vineeth@bitbyteword.org,
-	frederic@kernel.org, arighi@nvidia.com, pauld@redhat.com,
-	christian.loehle@arm.com, tj@kernel.org,
-	tommaso.cucinotta@gmail.com, maz@kernel.org, rafael@kernel.org,
-	rdunlap@infradead.org, kernellwp@gmail.com,
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v6 09/23] sched/core: Push current task from non
- preferred CPU
-Message-ID: <akVFULP9qV2NPy3k@yury>
-References: <20260701141654.500125-1-sshegde@linux.ibm.com>
- <20260701141654.500125-10-sshegde@linux.ibm.com>
+        d=1e100.net; s=20251104; t=1782924901; x=1783529701;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=lbVYdv7/FNdOOvrw/bcfsmdKoQ369BNbAkiBiKDICVU=;
+        b=aS/MFlTqPnYYRoReZbB+E26yvx9DEfjX5mr7Qq1sHG1uWYdjk+cBcxc0oJx9eW8nQI
+         nlNEqRchtFIvAJVeFWfq9XzuaDh+dhIG90kjEtq5RccK/3Zt5ltT9+ntDWEx6NwQh4Vg
+         HTO/8prxs7rsVJVhRxQGmvPSAFNTKSY8bMAVz1vC7A8vppytiYzKAUkk5YNO5ZqoI/it
+         wzdvaM+4QTPjO3q8/sqiH/FxKYquXnmt96SI8ajd7OlKo7IZDCd1NbqoSxTSzqTNGBEf
+         4td+VeMFsKFRf5iquDV1FjcDaQfglxseiOhnG8MtlyTYPYheQYO+i9UO6tmQC5hF90xk
+         0KyQ==
+X-Forwarded-Encrypted: i=1; AFNElJ+BKWOQ74nK16A8T1pNXPHpnFEYP5rvqE8lmDi0uCCk23ksMK3mD6c6lArIMRvzmhxviEnhSG8Nx9w=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxKS8VWjXgxU93Vetsbgrn+EPeNAIeGqDKo8aI9VPtn0dT8dLD9
+	w4jwjJbsXiqi2lUwOzXeLZErA3SR+lrbLjTPr/NpLdJQ4LVvGLeXmHYzvNZUQNWRVNcDczKB/2J
+	VcHMmYA==
+X-Received: from pgja21.prod.google.com ([2002:a63:cd55:0:b0:c82:7761:9936])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6a21:a49:b0:3b3:bf95:f7e3
+ with SMTP id adf61e73a8af0-3bfed477967mr2785820637.43.1782924900819; Wed, 01
+ Jul 2026 09:55:00 -0700 (PDT)
+Date: Wed, 1 Jul 2026 09:55:00 -0700
+In-Reply-To: <739e6834-40b3-405b-ada4-d31c38d8416a@intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260701141654.500125-10-sshegde@linux.ibm.com>
+Mime-Version: 1.0
+References: <20260618-gmem-inplace-conversion-v8-0-9d2959357853@google.com>
+ <20260618-gmem-inplace-conversion-v8-6-9d2959357853@google.com> <739e6834-40b3-405b-ada4-d31c38d8416a@intel.com>
+Message-ID: <akVGZOeR1ytfkamK@google.com>
+Subject: Re: [PATCH v8 06/46] KVM: Enumerate support for PRIVATE memory iff
+ kvm_arch_has_private_mem is defined
+From: Sean Christopherson <seanjc@google.com>
+To: Xiaoyao Li <xiaoyao.li@intel.com>
+Cc: ackerleytng@google.com, aik@amd.com, andrew.jones@linux.dev, 
+	binbin.wu@linux.intel.com, brauner@kernel.org, chao.p.peng@linux.intel.com, 
+	david@kernel.org, jmattson@google.com, jthoughton@google.com, 
+	michael.roth@amd.com, oupton@kernel.org, pankaj.gupta@amd.com, 
+	qperret@google.com, rick.p.edgecombe@intel.com, rientjes@google.com, 
+	shivankg@amd.com, steven.price@arm.com, tabba@google.com, willy@infradead.org, 
+	wyihan@google.com, yan.y.zhao@intel.com, forkloop@google.com, 
+	pratyush@kernel.org, suzuki.poulose@arm.com, aneesh.kumar@kernel.org, 
+	liam@infradead.org, Paolo Bonzini <pbonzini@redhat.com>, Thomas Gleixner <tglx@kernel.org>, 
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
+	"H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>, 
+	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+	Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>, 
+	Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>, 
+	Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>, 
+	Nhat Pham <nphamcs@gmail.com>, Barry Song <baohua@kernel.org>, 
+	Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>, 
+	Wei Xu <weixugc@google.com>, Youngjun Park <youngjun.park@lge.com>, 
+	Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
+	Kiryl Shutsemau <kas@kernel.org>, Baoquan He <baoquan.he@linux.dev>, Jason Gunthorpe <jgg@ziepe.ca>, 
+	Vlastimil Babka <vbabka@kernel.org>, kvm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kselftest@vger.kernel.org, linux-mm@kvack.org, 
+	linux-coco@lists.linux.dev
+Content-Type: text/plain; charset="us-ascii"
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	MV_CASE(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	FREEMAIL_CC(0.00)[google.com,amd.com,linux.dev,linux.intel.com,kernel.org,intel.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca,vger.kernel.org,kvack.org,lists.linux.dev];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94415-lists,linux-doc=lfdr.de];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_SENDER(0.00)[yurynorov@gmail.com,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FORGED_RECIPIENTS(0.00)[m:sshegde@linux.ibm.com,m:linux-kernel@vger.kernel.org,m:mingo@kernel.org,m:peterz@infradead.org,m:juri.lelli@redhat.com,m:vincent.guittot@linaro.org,m:yury.norov@gmail.com,m:kprateek.nayak@amd.com,m:iii@linux.ibm.com,m:corbet@lwn.net,m:tglx@kernel.org,m:gregkh@linuxfoundation.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:vschneid@redhat.com,m:huschle@linux.ibm.com,m:rostedt@goodmis.org,m:dietmar.eggemann@arm.com,m:maddy@linux.ibm.com,m:srikar@linux.ibm.com,m:hdanton@sina.com,m:chleroy@kernel.org,m:vineeth@bitbyteword.org,m:frederic@kernel.org,m:arighi@nvidia.com,m:pauld@redhat.com,m:christian.loehle@arm.com,m:tj@kernel.org,m:tommaso.cucinotta@gmail.com,m:maz@kernel.org,m:rafael@kernel.org,m:rdunlap@infradead.org,m:kernellwp@gmail.com,m:linux-doc@vger.kernel.org,m:yurynorov@gmail.com,m:tommasocucinotta@gmail.com,s:lists@lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[34];
-	FORWARDED(0.00)[lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-94417-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[yurynorov@gmail.com,linux-doc@vger.kernel.org];
-	PRECEDENCE_BULK(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,infradead.org,redhat.com,linaro.org,gmail.com,amd.com,linux.ibm.com,lwn.net,linuxfoundation.org,google.com,goodmis.org,arm.com,sina.com,bitbyteword.org,nvidia.com];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:xiaoyao.li@intel.com,m:ackerleytng@google.com,m:aik@amd.com,m:andrew.jones@linux.dev,m:binbin.wu@linux.intel.com,m:brauner@kernel.org,m:chao.p.peng@linux.intel.com,m:david@kernel.org,m:jmattson@google.com,m:jthoughton@google.com,m:michael.roth@amd.com,m:oupton@kernel.org,m:pankaj.gupta@amd.com,m:qperret@google.com,m:rick.p.edgecombe@intel.com,m:rientjes@google.com,m:shivankg@amd.com,m:steven.price@arm.com,m:tabba@google.com,m:willy@infradead.org,m:wyihan@google.com,m:yan.y.zhao@intel.com,m:forkloop@google.com,m:pratyush@kernel.org,m:suzuki.poulose@arm.com,m:aneesh.kumar@kernel.org,m:liam@infradead.org,m:pbonzini@redhat.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:shuah@kernel.org,m:vannapurve@google.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@ten
+ cent.com,m:shikemeng@huaweicloud.com,m:nphamcs@gmail.com,m:baohua@kernel.org,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:kas@kernel.org,m:baoquan.he@linux.dev,m:jgg@ziepe.ca,m:vbabka@kernel.org,m:kvm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,m:linux-coco@lists.linux.dev,s:lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[seanjc@google.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[google.com:+];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp,yury:mid]
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[64];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[seanjc@google.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 317BA6F006B
+X-Rspamd-Queue-Id: B3FAD6F0177
 
-On Wed, Jul 01, 2026 at 07:46:40PM +0530, Shrikanth Hegde wrote:
-> Actively push out task running on a non-preferred CPU. Since the task is
-> running on the CPU, need to stop the cpu and push the task out.
-> However, if the task is pinned only to non-preferred CPUs, it will continue
-> running there. This will help in maintaining the userspace affinities
-> unlike CPU hotplug or isolated cpusets.
+On Wed, Jul 01, 2026, Xiaoyao Li wrote:
+> On 6/19/2026 8:31 AM, Ackerley Tng via B4 Relay wrote:
+> > From: Ackerley Tng <ackerleytng@google.com>
+> > 
+> > Explicitly guard reporting support for KVM_MEMORY_ATTRIBUTE_PRIVATE based
+> > on kvm_arch_has_private_mem being #defined in anticipation of decoupling
+> > kvm_supported_mem_attributes() from CONFIG_KVM_VM_MEMORY_ATTRIBUTES.
 > 
-> Though code is similar to  __balance_push_cpu_stop and quite close to
-> push_cpu_stop, it is being kept separate as it provides a cleaner
-> implementation with CONFIG_PREFERRED_CPU.
+> Well, after this series, kvm_supported_mem_attributes() is renamed to
+> kvm_supported_vm_mem_attributes(), and it's still under
+> CONFIG_KVM_VM_MEMORY_ATTRIBUTES.
 > 
-> Add push_task_work_done flag to protect work buffer.
-> Works only with FAIR class.
+> > guest_memfd support for memory attributes will be unconditional to avoid
+> > yet more macros (all architectures that support guest_memfd are expected to
+> > use per-gmem attributes at some point), at which point enumerating support
+> > KVM_MEMORY_ATTRIBUTE_PRIVATE based solely on memory attributes being
+> > supported _somewhere_ would result in KVM over-reporting support on arm64.
 > 
-> For now, only current running task is pushed out. This keeps the code
-> simpler. In future optimization maybe done to move all the queued
-> task on the rq.
-> 
-> Signed-off-by: Shrikanth Hegde <sshegde@linux.ibm.com>
-> ---
->  kernel/sched/core.c  | 87 ++++++++++++++++++++++++++++++++++++++++++++
->  kernel/sched/sched.h |  8 ++++
->  2 files changed, 95 insertions(+)
-> 
-> diff --git a/kernel/sched/core.c b/kernel/sched/core.c
-> index aa4201bb8082..56905bac9525 100644
-> --- a/kernel/sched/core.c
-> +++ b/kernel/sched/core.c
-> @@ -5797,6 +5797,9 @@ void sched_tick(void)
->  	unsigned long hw_pressure;
->  	u64 resched_latency;
->  
-> +	if (!cpu_preferred(cpu))
-> +		sched_push_current_non_preferred_cpu(rq);
-> +
->  	if (housekeeping_cpu(cpu, HK_TYPE_KERNEL_NOISE))
->  		arch_scale_freq_tick();
->  
-> @@ -11315,3 +11318,87 @@ void sched_change_end(struct sched_change_ctx *ctx)
->  		p->sched_class->prio_changed(rq, p, ctx->prio);
->  	}
->  }
-> +
-> +#ifdef CONFIG_PREFERRED_CPU
-> +/* npc - non preferred CPU */
-> +static DEFINE_PER_CPU(struct cpu_stop_work, npc_push_task_work);
-> +
-> +static int sched_non_preferred_cpu_push_stop(void *arg)
-> +{
-> +	struct task_struct *p = arg;
-> +	struct rq *rq = this_rq();
-> +	struct rq_flags rf;
-> +	int cpu;
-> +
-> +	/* sanity check and clear */
-> +	if (cpu_preferred(rq->cpu)) {
-> +		scoped_guard (rq_lock, rq)
+> I don't understand it. This patch only changes the behavior of
+> kvm_supported_mem_attributes(), the usage of which is guarded by
+> CONFIG_KVM_VM_MEMORY_ATTRIBUTESq. This is config is only visible to x86 due
+> to patch 03. How does it affect arm64?
 
-No whitespace please:
+Hrm, yeah, this is messed up.  Ahh, I think Ackerley shuffled things around and
+"broke" stuff in the process.  In v7[1] and earlier, the diff was this:
 
-$ git grep "scoped_guard" | wc -l
-2153
-$ git grep "scoped_guard (" | wc -l
-84
+diff --git a/include/linux/kvm_host.h b/include/linux/kvm_host.h
+index 091f201251159..68142bc962953 100644
+--- a/include/linux/kvm_host.h
++++ b/include/linux/kvm_host.h
+@@ -722,7 +722,7 @@ static inline int kvm_arch_vcpu_memslots_id(struct kvm_vcpu *vcpu)
+ }
+ #endif
+ 
+-#ifndef CONFIG_KVM_VM_MEMORY_ATTRIBUTES
++#ifndef kvm_arch_has_private_mem
+ static inline bool kvm_arch_has_private_mem(struct kvm *kvm)
+ {
+ 	return false;
+diff --git a/virt/kvm/kvm_main.c b/virt/kvm/kvm_main.c
+index 306153abbafa5..abb9cfa3eb04d 100644
+--- a/virt/kvm/kvm_main.c
++++ b/virt/kvm/kvm_main.c
+@@ -2421,8 +2421,10 @@ static int kvm_vm_ioctl_clear_dirty_log(struct kvm *kvm,
+ #ifdef CONFIG_KVM_VM_MEMORY_ATTRIBUTES
+ static u64 kvm_supported_mem_attributes(struct kvm *kvm)
+ {
++#ifdef kvm_arch_has_private_mem
+ 	if (!kvm || kvm_arch_has_private_mem(kvm))
+ 		return KVM_MEMORY_ATTRIBUTE_PRIVATE;
++#endif
+ 
+ 	return 0;
+ }
 
-> +			rq->push_task_work_done = 0;
-> +		put_task_struct(p);
-> +		return 0;
-> +	}
-> +
-> +	raw_spin_lock_irq(&p->pi_lock);
-> +
-> +	/* This could take rq lock. So call it before rq lock is taken */
-> +	cpu = select_fallback_rq(rq->cpu, p);
-> +	rq_lock(rq, &rf);
-> +	rq->push_task_work_done = 0;
-> +	update_rq_clock(rq);
-> +
-> +	context_unsafe_alias(rq);
-> +
-> +	if (task_rq(p) == rq && task_on_rq_queued(p))
-> +		rq = __migrate_task(rq, &rf, p, cpu);
-> +
-> +	rq_unlock(rq, &rf);
-> +	raw_spin_unlock_irq(&p->pi_lock);
-> +	put_task_struct(p);
-> +
-> +	return 0;
-> +}
-> +
-> +/*
-> + * Push the current task running on non-preferred CPU.
-> + * Using this non preferred CPU will lead to more vCPU preemptions
-> + * in the host. So it is better not to use this CPU.
-> + *
-> + * Since task is running, call a stopper to push the task out. This is
-> + * similar to how task moves during hotplug. In select_fallback_rq a
-> + * preferred CPU will be chosen and henceforth task shouldn't come back to
-> + * this CPU again.
-> + *
-> + * Works for FAIR class only
-> + *
-> + * If task is affined only non-preferred CPUs, it can't be moved out
-> + */
-> +void sched_push_current_non_preferred_cpu(struct rq *rq)
-> +{
-> +	struct task_struct *push_task = rq->curr;
-> +
-> +	/* Preferred feature works only for FAIR class */
-> +	if (push_task->sched_class != &fair_sched_class)
-> +		return;
+which makes a *lot* more sense given the changelog (and IMO for the ordering in
+general).  In v8 here, Ackerley combined part of a change[2] (that I provided
+off-list) with part of this commit, to create patch 4, "KVM: Decouple
+kvm_has_arch_private_mem from CONFIG_KVM_VM_MEMORY_ATTRIBUTESthe".
 
-This is useless - task_has_preferred_cpus() checks that already.
+Ackerley, the cover letter says:
 
-> +
-> +	if (kthread_is_per_cpu(push_task) ||
-> +	    is_migration_disabled(push_task))
-> +		return;
-> +
-> +	/* Don't push the task if it is affined only on non preferred CPUs */
-> +	if (!task_has_preferred_cpus(push_task))
-> +		return;
-> +
-> +	/* There is already a stopper thread for this. Dont race with it. */
-> +	if (rq->push_task_work_done == 1)
-> +		return;
-> +
-> +	/* sched_tick runs with interrupts disabled. */
-> +	get_task_struct(push_task);
-> +
-> +	scoped_guard (rq_lock, rq)
-> +		rq->push_task_work_done = 1;
-> +
-> +	stop_one_cpu_nowait(rq->cpu, sched_non_preferred_cpu_push_stop,
-> +			    push_task, this_cpu_ptr(&npc_push_task_work));
-> +}
-> +#endif
-> diff --git a/kernel/sched/sched.h b/kernel/sched/sched.h
-> index 36ae20310891..711fc8bd7ebc 100644
-> --- a/kernel/sched/sched.h
-> +++ b/kernel/sched/sched.h
-> @@ -1277,6 +1277,8 @@ struct rq {
->  
->  	struct list_head cfs_tasks;
->  
-> +	bool			push_task_work_done;
-> +
->  	struct sched_avg	avg_rt;
->  	struct sched_avg	avg_dl;
->  #ifdef CONFIG_HAVE_SCHED_AVG_IRQ
-> @@ -4239,4 +4241,10 @@ static inline bool task_has_preferred_cpus(struct task_struct *p)
->  	return cpumask_intersects(p->cpus_ptr, cpu_preferred_mask);
->  }
->  
-> +#ifdef CONFIG_PREFERRED_CPU
-> +void sched_push_current_non_preferred_cpu(struct rq *rq);
-> +#else	/* !CONFIG_PREFERRED_CPU */
-> +static inline void sched_push_current_non_preferred_cpu(struct rq *rq) { }
-> +#endif
-> +
->  #endif /* _KERNEL_SCHED_SCHED_H */
-> -- 
-> 2.47.3
+  + Reshuffled the earlier commits that deal with preparing KVM to stop
+    seeing VM memory attributes as the only source of attributes.
+
+but there's no explanation for *why* the reshuffling was done.  Reorganizing
+code like this at v8 of a series this size is a big "no-no" unless there's a
+*really* good reason to do so.  In addition to the resulting confusion, changes
+like this invalidate Fuad's Reviewed-by.  And since it's obviously quite difficult
+to tease out exactly what changed, it's not realistic to re-review things without
+doing a deep audit of the series, which no one wants to do for a series that is/was
+so close to being fully ready.  And without such an audit, I can't accept the
+patches, because I can't trust that what I am accepting is what I and others have
+reviewed.
+
+So, except where there is/was a *need* to shuffle things around relative to v7,
+I think we should revert back to the v7 ordering for v9.  And where there is a
+need to rework things, each and every one of those needs to be explicitly
+documented, because "Reshuffled the earlier commits" is grossly insufficient.
+
+[1] https://lore.kernel.org/all/20260522-gmem-inplace-conversion-v7-3-2f0fae496530@google.com
+[2] https://github.com/sean-jc/linux/commit/8a475b1bcf89f1cf776ed9ce7d6bb587aab0d421
 
