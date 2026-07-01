@@ -1,235 +1,717 @@
-Return-Path: <linux-doc+bounces-94364-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94366-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id tm0JEM0TRWo96goAu9opvQ
-	(envelope-from <linux-doc+bounces-94364-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 15:19:09 +0200
+	id AUTiJU4ZRWrV6woAu9opvQ
+	(envelope-from <linux-doc+bounces-94366-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 15:42:38 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id D06626EDFD8
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 15:19:08 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id AE3756EE3FE
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 15:42:37 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=T4ED8TA7;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94364-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-94364-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=reject) header.from=nvidia.com;
-	arc=reject ("cv is fail on i=2")
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=EkmDP5iR;
+	dkim=pass header.d=redhat.com header.s=google header.b=LkWy6OlC;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94366-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-94366-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=redhat.com;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 59D9830BC2E6
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 13:00:17 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id C795B3017F2E
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 13:10:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9659548167E;
-	Wed,  1 Jul 2026 12:57:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1EF0D481AB0;
+	Wed,  1 Jul 2026 13:10:11 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from CY7PR03CU001.outbound.protection.outlook.com (mail-westcentralusazon11010063.outbound.protection.outlook.com [40.93.198.63])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 502FC481AA0;
-	Wed,  1 Jul 2026 12:57:37 +0000 (UTC)
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782910658; cv=fail; b=u9OWPStjomRv+6r7ubzt0LWRy5hDbQLDgXt1IwFFj6HVBL0G0UbrLom6bz0u67VmfuHlzPeliXro+cAr0hnqIwPj5Aj8mlS9OoasrwFIey++gOKKQWKPXYBuWT5CnITLlJvbdFIjCeJ/5E4/rw+IhzosVY8hJg3+fZu+WH6FzKM=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782910658; c=relaxed/simple;
-	bh=Daa4SUPX7CmSAAa8n4mlHyzD5uiqOwbTSluXsEcNnZo=;
-	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
-	 Content-Type:MIME-Version; b=qZK7wbiihnl3qOF1rGgtswuoWNsIwRYE5XtUgbW2MuqVAg5KdSFEGm0GXVzwioamhxonYGyQ6Ye56zTRPI6NqDx1NQBFfH3xhOwiLhV0JU2G9yklo963IXJz4QBivx4HKZBoR6xQn8dsO8+KcXhG8ePPkcwxtzB9JSNE1V3/B8o=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=T4ED8TA7; arc=fail smtp.client-ip=40.93.198.63
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=YbO8Xg2XKhe9zCe6bsYh34josfrSmfLY9hnXNcEi6VhopgrdLRHRlskN0PzljhuEvPyFZhp0SaveM95YwIYEtdflJJIrCvRpZEK0UjKCGsmt210Nwi7TcGdAI0hruA3atwFqYCOrESYXOBGdd9zywrwfLz4x7kyW0XaJ7O29YgRJrsu5tE057tI5iS8UwcDF9X2kOX+pyXQZ3CtlSFk/xX8iih6asYiBjZs8NJ5JoH1FTjXzjzWGq7eKYIh8SaELSc5yUcxBBjOwEOV7h1cQEJi13lxwLwvw7BY2b67k5k7dwwEfb80Yvm7wVitv/3S3/MPtJI6jumHYD+w4Wvz5oQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fCXoGGuT/6DBFClE5vYHNEUFwwnY1aCRlkvAgJs5T/w=;
- b=DTbSvVGyGHCuyMOUl+2hIoIC7E81EfRpk7J5dytbLPSgVoNnvkFh2w52dp0bT5/hgDUiAnFn3trE1grRjoHhZqkwMzrIQqjbkrF6+XjotTO7hpVFDCssfGmsH7tb02zRcRpk+ezPEieI0kQBhkB4UMyIOWw+JEcmLHqKmidAJmpCIalkGpTQAR4RWh5dgk+fRUrJFTG3gnkQiT3R7wx52IFDaYFfMjD4z5DQaU9y9MpfqOQndlQpHFeIqBARtskRCZ/zr/aNSh7VjZpp8lrS253/VRdnYseDVFu1vZPBE4AA9m5Udwwt4q8D9qFe0wSZO6THulETD3uVPph8482Ssg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fCXoGGuT/6DBFClE5vYHNEUFwwnY1aCRlkvAgJs5T/w=;
- b=T4ED8TA7/vvwijDbaT2slo0Sz5ILSUEjB8c1QDpbBZRAx0KetSnrrOZv+JiCackir19VUKwBLz3sZoUEFK+nhDzTiuMyhM44MNw+nWIVgoXyMSpc2cprhasssFk/9QXU6QzMBqpeeIUn4thtDp2UjlyujRl9H/0oEbn19XFg9+LL9e+meMcZ031JVRTUBTpXxWzjtPK6JuDszJSh/D6/diQQYLyOEPBd88Zw4Ya+Xb0/f6xCqtuDzaO9gVm8aroVT1hu6Q4XL/6uO/ntmV5E+coOSKPT6aHyC22hmZ9KqAu32L2BqOFbNXAlbh84WHTfMvj4GNId+XAEuAWqa2W59w==
-Received: from CH3PR12MB7548.namprd12.prod.outlook.com (2603:10b6:610:144::12)
- by CY5PR12MB6407.namprd12.prod.outlook.com (2603:10b6:930:3c::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.8; Wed, 1 Jul 2026
- 12:57:24 +0000
-Received: from CH3PR12MB7548.namprd12.prod.outlook.com
- ([fe80::b710:d6a1:ab16:76de]) by CH3PR12MB7548.namprd12.prod.outlook.com
- ([fe80::b710:d6a1:ab16:76de%6]) with mapi id 15.21.0181.008; Wed, 1 Jul 2026
- 12:57:24 +0000
-Message-ID: <1d4ca929-82b8-4891-9058-1451bf71a660@nvidia.com>
-Date: Wed, 1 Jul 2026 15:57:21 +0300
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net-next V4 4/6] devlink: Apply eswitch mode boot defaults
-To: Jiri Pirko <jiri@resnulli.us>
-Cc: Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
- Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>,
- Saeed Mahameed <saeedm@nvidia.com>, Leon Romanovsky <leon@kernel.org>,
- Tariq Toukan <tariqt@nvidia.com>, Andrew Lunn <andrew+netdev@lunn.ch>,
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- netdev@vger.kernel.org, linux-rdma@vger.kernel.org, linux-doc@vger.kernel.org
-References: <20260629182102.245150-1-mbloch@nvidia.com>
- <20260629182102.245150-5-mbloch@nvidia.com> <akThPmvUHvCMT2cp@FV6GYCPJ69>
-Content-Language: en-US
-From: Mark Bloch <mbloch@nvidia.com>
-In-Reply-To: <akThPmvUHvCMT2cp@FV6GYCPJ69>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: TL0P290CA0003.ISRP290.PROD.OUTLOOK.COM
- (2603:1096:950:5::18) To CH3PR12MB7548.namprd12.prod.outlook.com
- (2603:10b6:610:144::12)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 26A943DB322
+	for <linux-doc@vger.kernel.org>; Wed,  1 Jul 2026 13:10:08 +0000 (UTC)
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1782911411; cv=none; b=PeNtNVlmAkttjEqr4WHic0LPc7dAo4hFcs2eDRxJqVEt20193+zo8q0Wwbh89ROyWLZuyH/AJ+uSJixtRR+6MyrGO6xd3/lkZkKmSj2sDC9FZNNEFIjpHzycantvX0+09P/PMpprOdc7WXeowjF3nt+TRx4aLS6Zyj4uhfGE034=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1782911411; c=relaxed/simple;
+	bh=dz25e4niRTjlLBTCzRqCwxUDdk/P4R3keA9tFG8GiDM=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=e3JgnEgzHlu2RX7p5qIyqFsw8qLKEV8u9d3BGrxI6zV6YMePVzDzRSvy57tRegM7CC0D7VEAnd7wYVuTP4y/ZZK9dzR8F6mWwV/vE3u3jZH4FrbhJb2rTF185zmRd3/iuOBmqOjQWqzKwS0tJBlcnMng4wZ8FBzsTXSESZl4gWE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=EkmDP5iR; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=LkWy6OlC; arc=none smtp.client-ip=170.10.129.124
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1782911408;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=uj8p9mOEpi1le29BugzJguH2/jwVpQA6SuiY+Jzqfpk=;
+	b=EkmDP5iRKrZ+DwLbkFtCkGKzLDqnYC+pc8+U1fldtDGnZh8YcCAhqVYcPPc34dlFvAtDf9
+	c819712/4rY/4x4PDzTZc9BOge9WG8k5QeW5qPl5IkTN7Qbem70dVxn3+QPmNPb3s656ti
+	npb/UZQHsXRdyQsHwITQD2NG+MYGjvU=
+Received: from mail-lj1-f198.google.com (mail-lj1-f198.google.com
+ [209.85.208.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-627-LjInI-D_PXGVCxicut5ukQ-1; Wed, 01 Jul 2026 09:10:06 -0400
+X-MC-Unique: LjInI-D_PXGVCxicut5ukQ-1
+X-Mimecast-MFC-AGG-ID: LjInI-D_PXGVCxicut5ukQ_1782911405
+Received: by mail-lj1-f198.google.com with SMTP id 38308e7fff4ca-39b2a664e3eso2679291fa.3
+        for <linux-doc@vger.kernel.org>; Wed, 01 Jul 2026 06:10:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=redhat.com; s=google; t=1782911405; x=1783516205; darn=vger.kernel.org;
+        h=mime-version:user-agent:content-transfer-encoding:autocrypt
+         :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=uj8p9mOEpi1le29BugzJguH2/jwVpQA6SuiY+Jzqfpk=;
+        b=LkWy6OlCckaNhifXS9pGx4P5Rv75ICGAiUUrU/8cxGg7XiJi5YD+3500q8u88FEZJT
+         N1OesSXXK6WP15JQKA13j68FV9dsxNIrM4x/2lRCKLxOxemF7HibpixlNSAxozfxTtkJ
+         3GMxQirRPjWT7gVD431oWajqVGZ5bzOsaDbVnD/8Ad5c4HPowhd2xdacEQP/Kde+5ycj
+         sjhVcDyriArQlPM0tK8DZgtccHyZY4xCYTYlFlFCesIjKvsV3n1AzQ+TYD9kiTn8eQq5
+         3+CaT0U9oj0FpKF16ZCf5481d/sptc7z7lZsw7+UQc9ypjYJwzL49DmbcPl7RcDg8gzm
+         CWcA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1782911405; x=1783516205;
+        h=mime-version:user-agent:content-transfer-encoding:autocrypt
+         :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=uj8p9mOEpi1le29BugzJguH2/jwVpQA6SuiY+Jzqfpk=;
+        b=hn1a1VTNAstCBdo7nLJguXXmiQJgYDg2rPfoPG9mnj+vAtMSiTYAITelOfAwHcdneZ
+         nAxUthdv1/dwE6Ov8CmPrG4PDUEeoqQWAIE7K4eynmn+T1NS1/eKp2woqhezYzh0atN1
+         8m1cf4m/h2yBsnnNjo5m/i7vOgUDZC4Zk9aEHpw5igPmV4WvS6hzCHu1faBJuXTiE7x3
+         BT/efICFg0HOB7atP8C8NAFBAi5NhMgKaIwNXa9fDCnEA2VTSrtsqYFQBRRlGRdqRGPi
+         B066rKXcHVR+6rp+BLqt1/+OvcuLQNUg6nb9yZIg7uYdxIS0ZbuGMrSlRl5B9jcqHXBL
+         J4gg==
+X-Forwarded-Encrypted: i=1; AHgh+RpWwCcyGWlL53IBvYqNW0be0BtVCpv5AgsU5nk6Z4/84FiU/PJq8pvFvuT6MKqTPyWMHQ3V7rxDIec=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzA4OpTyDunlHVXEodAPVEO5f69pxzsJe6O7z5waGmQ+iqmjcO+
+	jFAuhyvpQ8Mzb0OPzXHCuFi4LskmlA+TqBGcszxnnC3iAH8Bfye/tI1dCNlNpkaSxNavFoLt8VA
+	SUxN84nL5GhAnZIB3051vWei4dNjrnW6njApQ6tUOJlmoeVhrUAr5lWvwTwgPe5UCdoFiAU02
+X-Gm-Gg: AfdE7ckgJJyFsq3o6ejD9wGoD9lwyt2yU36TxVMT6gQoIqb+p1+7CfLc416ARA60396
+	V5vfU++3/KdOUHgW68HlHfJbyKnCIDFPAL81QdBDl5eUaoYGOlhhWL2yuOgWmmv2ZLalkqeCgkU
+	bdRHN2skae3pi0qBL5Vg1mjxvjkPYXBEtOG41+iVSGCCenDeza8wa8qXYWwHQQWpIlc9jn15xfO
+	K41xgUMz3H5Gep/1moAetAoKk9Kge4tE7MZDjtzYkbe2eKS1cOr8ZfZMKhGbwNNGujT80aLa8y1
+	B6pbgaWFxHqkBMc46Wmz8q71QmVhcZTZagEfZTSNGhNbdZVVhlRiaWNVkPPepOtMiwLMdO4jfRU
+	0Q/QskNEqEOkZqvgWcBmZXSOEH5JE6vT2yNKn1vbwig0TRtwFFOH49LRDjsWJbcw1M2hOGgj0Xx
+	NucCQP
+X-Received: by 2002:a05:6512:608f:b0:5ad:4cb6:fcf with SMTP id 2adb3069b0e04-5aec67a2aacmr416158e87.12.1782911404831;
+        Wed, 01 Jul 2026 06:10:04 -0700 (PDT)
+X-Received: by 2002:a05:600c:34d4:b0:493:a966:d5b5 with SMTP id 5b1f17b1804b1-493c2b3a709mr26824805e9.2.1782910956927;
+        Wed, 01 Jul 2026 06:02:36 -0700 (PDT)
+Received: from gmonaco-thinkpadt14gen3.rmtit.csb (212-8-243-115.hosted-by-worldstream.net. [212.8.243.115])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-493be810be8sm70747835e9.9.2026.07.01.06.02.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 01 Jul 2026 06:02:36 -0700 (PDT)
+Message-ID: <23cc72600e6ce9161f8fa375996dd572b4631552.camel@redhat.com>
+Subject: Re: [PATCH v2 3/4] rv/rtapp/sleep: Stop monitoring kernel threads
+From: Gabriele Monaco <gmonaco@redhat.com>
+To: Nam Cao <namcao@linutronix.de>
+Cc: Steven Rostedt <rostedt@goodmis.org>,
+ linux-trace-kernel@vger.kernel.org, 	linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Sebastian Andrzej Siewior
+ <bigeasy@linutronix.de>
+Date: Wed, 01 Jul 2026 15:02:34 +0200
+In-Reply-To: <eec2ca5224bcdacc45b8e1eb2f0e68109e1cae7a.1781852967.git.namcao@linutronix.de>
+References: <cover.1781852967.git.namcao@linutronix.de>
+	 <eec2ca5224bcdacc45b8e1eb2f0e68109e1cae7a.1781852967.git.namcao@linutronix.de>
+Autocrypt: addr=gmonaco@redhat.com; prefer-encrypt=mutual;
+ keydata=mDMEZuK5YxYJKwYBBAHaRw8BAQdAmJ3dM9Sz6/Hodu33Qrf8QH2bNeNbOikqYtxWFLVm0
+ 1a0JEdhYnJpZWxlIE1vbmFjbyA8Z21vbmFjb0BrZXJuZWwub3JnPoiZBBMWCgBBFiEEysoR+AuB3R
+ Zwp6j270psSVh4TfIFAmjKX2MCGwMFCQWjmoAFCwkIBwICIgIGFQoJCAsCBBYCAwECHgcCF4AACgk
+ Q70psSVh4TfIQuAD+JulczTN6l7oJjyroySU55Fbjdvo52xiYYlMjPG7dCTsBAMFI7dSL5zg98I+8
+ cXY1J7kyNsY6/dcipqBM4RMaxXsOtCRHYWJyaWVsZSBNb25hY28gPGdtb25hY29AcmVkaGF0LmNvb
+ T6InAQTFgoARAIbAwUJBaOagAULCQgHAgIiAgYVCgkICwIEFgIDAQIeBwIXgBYhBMrKEfgLgd0WcK
+ eo9u9KbElYeE3yBQJoymCyAhkBAAoJEO9KbElYeE3yjX4BAJ/ETNnlHn8OjZPT77xGmal9kbT1bC1
+ 7DfrYVISWV2Y1AP9HdAMhWNAvtCtN2S1beYjNybuK6IzWYcFfeOV+OBWRDQ==
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.60.2 (3.60.2-1.fc44) 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PR12MB7548:EE_|CY5PR12MB6407:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2d1c51c2-1d64-4997-e9db-08ded7704be3
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|1800799024|7416014|376014|23010399003|22082099003|18002099003|3023799007|11063799006|4143699003|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	7C/zVCi3iN8zBfQKUmfWAAj/TkO3uXn5nRKgEc6pfM4PhTHR+SNYJ04fOqUotwQk1J0nIwct0LJCelwNElKXGMUZFDrX+sMg1fx9mVvdxSF/AIBJtc4lxKe11XaJNICYGNQk9jNhYeQPrnV3lzMgabO31pTI1qS+q+s8u21vg/iTxucwAyEFmZzMa0y5NIv0HUoQaxKMtnhraaJWjTpbZyWm9fi+rYvOAIdP2k6eru76czaxKumwK0106IOupqp0w0x8zieZ38J2jQQOOLQXuO59BGmoD1WvvOyp7TuwePOR2N4GLqjxBJ1U4oZcGXxgijp0cs5BU2mAxSINs8K+bbmu6Q8z+8guEMom2YK2cF8hm0kErTwRns9eZS/ARAcs85eGIOY6vC33ZWOGayTSgvUlwyPeGtrpkTrQqse+cnDJsZ+man34AAEW9he1gDOzuwdUT6eo8zQBmB5VsDsX8g2vhLBnw+C2x53s+MPKYFj9ZE4QYkLADk8fZSluVLeRyLcWfNwZ/+nUH4yu6vmOUzIH7XnkC/uEvrbenqDhKKtovH4ol2nkODscsnVLRo+CjZJFe30CJcnuCqOD33DKzIergST3d1MbJ/p6FIrv7q/vkX1ynYhUR1OsDR7w7CbdZw1f5YHAhCkRizo9Nt6yJdQilbkuWz5fAGsCAQURYEw=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR12MB7548.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(7416014)(376014)(23010399003)(22082099003)(18002099003)(3023799007)(11063799006)(4143699003)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?OG1aVTNaNkpYRUdGYTFzTFBVZ3k3ODkxSTM5Nythc1h4L1lxeStid2ZFV0Nt?=
- =?utf-8?B?OVlEL1A5cyt5N2NzS2EzVXFFOWhlTm1Qcm9JMU5IdUJUVmtlMGowREdoaHA4?=
- =?utf-8?B?T3JCOVRjby9BUlNXQWFCQ1krL3NFZ2p4WnBaQm5oS0Ridml6V0ZVQ1FWY0pQ?=
- =?utf-8?B?VzFlQUZQKzhsNU53bWUwdWl4emUyNHIzb3FUOHM0dkhRYi9aYkk0MkFVSzJR?=
- =?utf-8?B?bTVObzRkM05JRThreTZiY3l2b2lwSGMzM1B0VWxBN1VRb2FBUTRlN3dHZmxj?=
- =?utf-8?B?RkhvQkQ0M21IUmd4V3V2T2dTZ1NRNWpvVlV2SnB6S0cwMk5qZXhJL2ozS0ZT?=
- =?utf-8?B?Ump1OTJoaHNrUlczMjVINVhBakpCMTRnaStBRnRieTNuRnZMNWdnc1BTSUVG?=
- =?utf-8?B?SjBQNVZjSFNQd2tlUEdJek9PNVgxZVNnSjJ4NnZPRFFGclM0Q1hja1pwMmU2?=
- =?utf-8?B?QTdzcTFVSGlnenUyNTN6ZGxwZ3kybTdvYjMwN0ZHTEIyais3Y0JxU3VYV2JM?=
- =?utf-8?B?S3h3ZW5tdHZEYVo3bzRnVFVVWE5RY2F2YVlkeWN2Z3prRnlCUmZoN0dDTGYr?=
- =?utf-8?B?ZE9QTnNKaUpUcEVuY1ZHZEJXb1NHV2NGdUxVbUl5M3ZqTzlaRlVwS1lxaEpZ?=
- =?utf-8?B?ZE9YRW9uS2pXRDNEU0xYLytraVVWaE5KMmNwaGVoeUprZWpzWm5kRFB6ZkFk?=
- =?utf-8?B?QzBic1ZTV1BwYTNQcm95cll3U1plS0ZjOWl3bG80WVNHc3pMVzZHaERscXRI?=
- =?utf-8?B?VlJ2c2gycFdPUUw4enB6Qms5SE0ybjJWL3RiL0JoOWN5NnoxcGRTdzBhWnQ1?=
- =?utf-8?B?NGhSU3M4TmE2REFjSHMzM0tpYjZYNGZPLzhpV0V5RXJUb2JpZktMMTdUOWsv?=
- =?utf-8?B?RzlPcUMzcEVIenU5N0pXNmZBWml6UmNDdVpkYURGVzBHWk52eVdaWGtwak9n?=
- =?utf-8?B?cmFhcE5IY1IwNW5TRWEvdHh6UWhicm5tS1J2alVpTkJLTEZvendwY2thNHZs?=
- =?utf-8?B?cGprOHZabU1jUmMwVVk5cjNvVG9TZUw5OTBnUUxOY1NVL3FvWnJJaEQxTnU3?=
- =?utf-8?B?R3FjTFJ0MmpCUk5JTjNPdTYxUzhOVTVJZ28wU2JYZ3ovN3E0OW5pTlllYVJn?=
- =?utf-8?B?dUpLTGNNSjF0UkY1WkNTNnJRYXdOV09vcUNZYndGeS85ZE9zdEpCVDMxYTBo?=
- =?utf-8?B?NCtTQk1jYmV6MGxUSWNRc2dlR2lpMk42TnRSRjJZT2M2a0pmdjNodEpzaXlE?=
- =?utf-8?B?WWxyQ0xZVERZWmpsRXFmS2dxOFlCb3ozVTNWY1hPRC9uZFgxa3JtR1p6T3Rh?=
- =?utf-8?B?TnFWdFFGd1ZiQzNYK2k1cGZTTmtDeCtTSU11aTc5WTZOMFNUZ2Z2YkpUbnNm?=
- =?utf-8?B?b1UvTTZVSm44N0twaWpjVEthdVZxLzdPMnZhQTBzZVdVbEJUaVhoREtPWWt5?=
- =?utf-8?B?cU5wM05INWZ3SWZuZnUxN3RUY0hhdCt3a2hJdTd3bGJKell0clJsbnhNZGpr?=
- =?utf-8?B?VlIvcmR2NUdETnZmV1VZSzdQTGFEenhkMFdpa3JManE5UVE1YWZkWEdPUVZs?=
- =?utf-8?B?d096THJNemdtY0ZBNUtLSkk5a2E0STZWSXFTK0g2bVRZT1hSNWc0cTdYaWpH?=
- =?utf-8?B?Njg5Z1UrZW1SSGk4TG9OSnF0RWtNVnNmVUJnRzh1TGNLYnhCU0IweXRUUys3?=
- =?utf-8?B?S1h2S25mdEhLbGpHeGhHRnVoaVQ0K2ZDcWpIZUpCVUZ3SWVCNHV6cmY3ZHU5?=
- =?utf-8?B?QWkzcUlISjZPUjliczUzWXcwZy9JRDRUdEhxaWdvNUpxbzJadlRJTFBPMDU2?=
- =?utf-8?B?ZFNvOTFQelVWUHBoQ2EwTkRVSzMzNUI0dlYrQi82UXFNWk1Dd2NiOVVCOTh1?=
- =?utf-8?B?a2JVYmtoNlp1NklPeTlHNkdHK1czaGdJMktvelZGK0dIZ1JYOEg1azhoSkpK?=
- =?utf-8?B?d3RoVEd1Umk4eGdBYkp1M3VLTHJwZ00xdkhqdmhJRWtxSEh0OGRPemZSSVA4?=
- =?utf-8?B?RDZxVk1rNFlGTGhDUmZRMFJNSFJLZ05reXExbXA2YXN4SUo3OVN5MEhMa0Qx?=
- =?utf-8?B?djhmaUZVYkdSc0lMUzM3VEM3YWJSUStnVUlXcXdvZmhQclFVWTlkYjgwZU01?=
- =?utf-8?B?TUYrTUhTVVRLd0hvVWpDRDZIMFJwZnZIMGVIdEJUL3NCdHpTYkthVWZaUTky?=
- =?utf-8?B?dmRVTnovdkE5bWFYNkpjWEphWG95N1JCOERrbFhQT0l2SkR6bjhyVUp5TVFU?=
- =?utf-8?B?TnRyT3dVQlNwakN4Uy9WdjJtOUphc2lVMjltelV3MWN2L1pIbTllcjhmVjAr?=
- =?utf-8?Q?/tBWRcvbzAcTekArqt?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2d1c51c2-1d64-4997-e9db-08ded7704be3
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR12MB7548.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jul 2026 12:57:24.4267
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: sdrHbGbX5a9l4gmFUSXBNSKnOgvS2MyFSAAwddxsf2zTGtIRk9C0OpYmkjhQtGEKS4r1qiRBgA2B1AOMNtXqAQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6407
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-5.66 / 15.00];
-	WHITELIST_DMARC(-7.00)[nvidia.com:D:+];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_REJECT(1.00)[cv is fail on i=2];
-	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
-	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-94364-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[mbloch@nvidia.com,linux-doc@vger.kernel.org];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:jiri@resnulli.us,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:horms@kernel.org,m:saeedm@nvidia.com,m:leon@kernel.org,m:tariqt@nvidia.com,m:andrew+netdev@lunn.ch,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:netdev@vger.kernel.org,m:linux-rdma@vger.kernel.org,m:linux-doc@vger.kernel.org,m:andrew@lunn.ch,s:lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-94366-lists,linux-doc=lfdr.de];
 	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:namcao@linutronix.de,m:rostedt@goodmis.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:bigeasy@linutronix.de,s:lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[gmonaco@redhat.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[redhat.com:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[6];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mbloch@nvidia.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[Nvidia.com:+];
+	FROM_NEQ_ENVFROM(0.00)[gmonaco@redhat.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,nvidia.com:email,nvidia.com:mid,nvidia.com:from_mime,Nvidia.com:dkim]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linutronix.de:email,vger.kernel.org:from_smtp,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: D06626EDFD8
+X-Rspamd-Queue-Id: AE3756EE3FE
 
+On Fri, 2026-06-19 at 09:21 +0200, Nam Cao wrote:
+> The rtapp/sleep monitor's primary purpose is detecting common mistakes
+> with user-space real-time design. Monitoring real-time issues with
+> kernel threads is a bonus.
+>=20
+> However, accomodating kernel threads complicates the monitor due to
+> the edge cases which is seen by the monitor as lower-priority task
+> waking higher-priority task:
+>=20
+> =C2=A0 - kthread_stop() wakes up the task in order to stop it.
+>=20
+> =C2=A0 - The rcu thread and migration thread can be woken by any task.
+>=20
+> =C2=A0 - The ktimerd thread is woken near the end of irq_exit_rcu(), wher=
+e
+> =C2=A0=C2=A0=C2=A0 the preempt counter is "broken" and falsely says this =
+is task
+> =C2=A0=C2=A0=C2=A0 context. This requires the monitor to use the hardirq_=
+context flag
+> =C2=A0=C2=A0=C2=A0 instead of the preempt counter.
+>=20
+> Beside complicating the monitor, the final case also requires enabling
+> CONFIG_TRACE_IRQFLAGS (so that "hardirq_context" can be used). This
+> adds overhead to the kernel even when the monitor is not active. This
+> may be an obstacle to enabling this monitor in distros' kernels.
 
+Very good especially for this!
 
-On 01/07/2026 12:48, Jiri Pirko wrote:
-> Mon, Jun 29, 2026 at 08:20:59PM +0200, mbloch@nvidia.com wrote:
->> Apply parsed devlink_eswitch_mode= defaults after devlink registration
->> and after successful reload.
->>
->> devl_register() may still be called before the device is ready for an
-> 
-> How so? I would assume that driver calls devl_register only after
-> everything is up and running and ready. If not, isn't it a bug?
-> 
+> Furthermore, kernel threads usually are started before the monitor is
+> enabled. Consequently, the threads' states (i.o.w. the monitor's
+> atomic propositions for the threads) are not fully known to the
+> monitor. As a result, the kernel threads mostly cannot be monitored.
+>=20
+> Overall, the downsides of accomodating kernel threads outweights the
+> benefits. Thus, exclude kernel threads to simplify the monitor.
+>=20
+> Signed-off-by: Nam Cao <namcao@linutronix.de>
 
-You would think so :)
+Reviewed-by: Gabriele Monaco <gmonaco@redhat.com>
 
-Some drivers, mlx5 included, call devl_register() while holding the
-devlink instance lock and then finish setting up state before releasing
-the lock.
+Thanks,
+Gabriele
 
-In v3 I tried to enforce exactly that model, move devl_register() to
-be the last thing the driver does. Jakub pushed back on making that a
-general rule. So in v4 I changed the approach. devl_register() only
-schedules the work, and the actual eswitch mode change can run only
-after the driver releases the devlink lock.
-
-Mark
-
-> 
->> eswitch mode change, so keep a per-devlink delayed work item and pending
->> flag for the registration path. Registration queues the work, and the
->> worker tries to take the devlink instance lock.
->>
->> If the lock is busy, the worker requeues itself with a delay.
->>
->> For successful reloads that performed DRIVER_REINIT, devlink_reload()
->> already holds the devlink instance lock and the driver has completed
->> reload_up(). Clear pending work and apply the default directly from the
->> reload path instead of queueing work.
->>
->> If a user sets eswitch mode through netlink before the pending
->> registration work runs, clear the pending flag so the queued default does
->> not override that user request. Cancel pending default apply work when
->> freeing the devlink instance.
-> 
-> These AI generated code descriptive messages are generally not very
-> useful :(
-> 
+> ---
+> Cc: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
+> ---
+> =C2=A0Documentation/trace/rv/monitor_rtapp.rst=C2=A0 |=C2=A0 22 ++---
+> =C2=A0kernel/trace/rv/monitors/sleep/Kconfig=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=
+=A0 1 -
+> =C2=A0kernel/trace/rv/monitors/sleep/sleep.c=C2=A0=C2=A0=C2=A0 |=C2=A0 39=
+ +-------
+> =C2=A0kernel/trace/rv/monitors/sleep/sleep.h=C2=A0=C2=A0=C2=A0 | 104 ++++=
++++++-------------
+> =C2=A0tools/verification/models/rtapp/sleep.ltl |=C2=A0=C2=A0 7 +-
+> =C2=A05 files changed, 54 insertions(+), 119 deletions(-)
+>=20
+> diff --git a/Documentation/trace/rv/monitor_rtapp.rst
+> b/Documentation/trace/rv/monitor_rtapp.rst
+> index 570be67a8f3b..502d3ea412eb 100644
+> --- a/Documentation/trace/rv/monitor_rtapp.rst
+> +++ b/Documentation/trace/rv/monitor_rtapp.rst
+> @@ -93,9 +93,9 @@ assessment.
+> =C2=A0
+> =C2=A0The monitor's specification is::
+> =C2=A0
+> -=C2=A0 RULE =3D always ((RT and SLEEP) imply (RT_FRIENDLY_SLEEP or ALLOW=
+LIST))
+> +=C2=A0 RULE =3D always ((RT and SLEEP and USER_THREAD) imply (RT_FRIENDL=
+Y_SLEEP or
+> ALLOWLIST))
+> =C2=A0
+> -=C2=A0 RT_FRIENDLY_SLEEP =3D (RT_VALID_SLEEP_REASON or KERNEL_THREAD)
+> +=C2=A0 RT_FRIENDLY_SLEEP =3D RT_VALID_SLEEP_REASON
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 and ((not SCHEDULE_IN) until RT_FRIEND=
+LY_WAKE)
+> =C2=A0
+> =C2=A0=C2=A0 RT_VALID_SLEEP_REASON =3D FUTEX_WAIT
+> @@ -110,23 +110,13 @@ The monitor's specification is::
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 or WOKEN_BY_HARDIRQ
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 or WOKEN_BY_NMI
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 or ABORT_SLEEP
+> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 or KTHREAD_SHOULD_STOP
+> =C2=A0
+> =C2=A0=C2=A0 ALLOWLIST =3D BLOCK_ON_RT_MUTEX
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 or FUT=
+EX_LOCK_PI
+> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 or TASK_IS_=
+RCU
+> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 or TASK_IS_=
+MIGRATION
+> -
+> -Beside the scenarios described above, this specification also handle som=
+e
+> -special cases:
+> -
+> -=C2=A0 - `KERNEL_THREAD`: kernel tasks do not have any pattern that can =
+be
+> recognized
+> -=C2=A0=C2=A0=C2=A0 as valid real-time sleeping reasons. Therefore sleepi=
+ng reason is not
+> -=C2=A0=C2=A0=C2=A0 checked for kernel tasks.
+> -=C2=A0 - `KTHREAD_SHOULD_STOP`: a non-real-time thread may stop a real-t=
+ime kernel
+> -=C2=A0=C2=A0=C2=A0 thread by waking it and waiting for it to exit (`kthr=
+ead_stop()`). This
+> -=C2=A0=C2=A0=C2=A0 wakeup is safe for real-time.
+> -=C2=A0 - `ALLOWLIST`: to handle known false positives with the kernel.
+> +
+> +Beside the scenarios described above, this specification also defines an
+> allow list
+> +to handle some special cases:
+> +
+> =C2=A0=C2=A0 - `BLOCK_ON_RT_MUTEX` is included in the allowlist due to it=
+s
+> implementation.
+> =C2=A0=C2=A0=C2=A0=C2=A0 In the release path of rt_mutex, a boosted task =
+is de-boosted before
+> waking
+> =C2=A0=C2=A0=C2=A0=C2=A0 the rt_mutex's waiter. Consequently, the monitor=
+ may see a real-time-
+> unsafe
+> diff --git a/kernel/trace/rv/monitors/sleep/Kconfig
+> b/kernel/trace/rv/monitors/sleep/Kconfig
+> index 6b7a122e7b47..d6ec3e9a91b6 100644
+> --- a/kernel/trace/rv/monitors/sleep/Kconfig
+> +++ b/kernel/trace/rv/monitors/sleep/Kconfig
+> @@ -5,7 +5,6 @@ config RV_MON_SLEEP
+> =C2=A0	select RV_LTL_MONITOR
+> =C2=A0	depends on HAVE_SYSCALL_TRACEPOINTS
+> =C2=A0	depends on RV_MON_RTAPP
+> -	select TRACE_IRQFLAGS
+> =C2=A0	default y
+> =C2=A0	select LTL_MON_EVENTS_ID
+> =C2=A0	bool "sleep monitor"
+> diff --git a/kernel/trace/rv/monitors/sleep/sleep.c
+> b/kernel/trace/rv/monitors/sleep/sleep.c
+> index 638be7d8747f..aa5a984853b5 100644
+> --- a/kernel/trace/rv/monitors/sleep/sleep.c
+> +++ b/kernel/trace/rv/monitors/sleep/sleep.c
+> @@ -43,7 +43,6 @@ static void ltl_atoms_init(struct task_struct *task, st=
+ruct
+> ltl_monitor *mon, bo
+> =C2=A0	ltl_atom_set(mon, LTL_WOKEN_BY_EQUAL_OR_HIGHER_PRIO, false);
+> =C2=A0
+> =C2=A0	if (task_creation) {
+> -		ltl_atom_set(mon, LTL_KTHREAD_SHOULD_STOP, false);
+> =C2=A0		ltl_atom_set(mon, LTL_NANOSLEEP_CLOCK_REALTIME, false);
+> =C2=A0		ltl_atom_set(mon, LTL_NANOSLEEP_TIMER_ABSTIME, false);
+> =C2=A0		ltl_atom_set(mon, LTL_CLOCK_NANOSLEEP, false);
+> @@ -53,33 +52,7 @@ static void ltl_atoms_init(struct task_struct *task, s=
+truct
+> ltl_monitor *mon, bo
+> =C2=A0		ltl_atom_set(mon, LTL_BLOCK_ON_RT_MUTEX, false);
+> =C2=A0	}
+> =C2=A0
+> -	if (task->flags & PF_KTHREAD) {
+> -		ltl_atom_set(mon, LTL_KERNEL_THREAD, true);
+> -
+> -		/* kernel tasks do not do syscall */
+> -		ltl_atom_set(mon, LTL_FUTEX_WAIT, false);
+> -		ltl_atom_set(mon, LTL_FUTEX_LOCK_PI, false);
+> -		ltl_atom_set(mon, LTL_NANOSLEEP_CLOCK_REALTIME, false);
+> -		ltl_atom_set(mon, LTL_NANOSLEEP_TIMER_ABSTIME, false);
+> -		ltl_atom_set(mon, LTL_CLOCK_NANOSLEEP, false);
+> -		ltl_atom_set(mon, LTL_EPOLL_WAIT, false);
+> -
+> -		if (strstarts(task->comm, "migration/"))
+> -			ltl_atom_set(mon, LTL_TASK_IS_MIGRATION, true);
+> -		else
+> -			ltl_atom_set(mon, LTL_TASK_IS_MIGRATION, false);
+> -
+> -		if (strstarts(task->comm, "rcu"))
+> -			ltl_atom_set(mon, LTL_TASK_IS_RCU, true);
+> -		else
+> -			ltl_atom_set(mon, LTL_TASK_IS_RCU, false);
+> -	} else {
+> -		ltl_atom_set(mon, LTL_KTHREAD_SHOULD_STOP, false);
+> -		ltl_atom_set(mon, LTL_KERNEL_THREAD, false);
+> -		ltl_atom_set(mon, LTL_TASK_IS_RCU, false);
+> -		ltl_atom_set(mon, LTL_TASK_IS_MIGRATION, false);
+> -	}
+> -
+> +	ltl_atom_set(mon, LTL_USER_THREAD, !(task->flags & PF_KTHREAD));
+> =C2=A0}
+> =C2=A0
+> =C2=A0static void handle_sched_set_state(void *data, struct task_struct *=
+task, int
+> state)
+> @@ -97,7 +70,7 @@ static void handle_sched_exit(void *data, bool is_switc=
+h)
+> =C2=A0
+> =C2=A0static void handle_sched_waking(void *data, struct task_struct *tas=
+k)
+> =C2=A0{
+> -	if (this_cpu_read(hardirq_context)) {
+> +	if (in_hardirq()) {
+> =C2=A0		ltl_atom_pulse(task, LTL_WOKEN_BY_HARDIRQ, true);
+> =C2=A0	} else if (in_task()) {
+> =C2=A0		if (current->prio <=3D task->prio)
+> @@ -181,12 +154,6 @@ static void handle_sys_exit(void *data, struct pt_re=
+gs
+> *regs, long ret)
+> =C2=A0	ltl_atom_update(current, LTL_CLOCK_NANOSLEEP, false);
+> =C2=A0}
+> =C2=A0
+> -static void handle_kthread_stop(void *data, struct task_struct *task)
+> -{
+> -	/* FIXME: this could race with other tracepoint handlers */
+> -	ltl_atom_update(task, LTL_KTHREAD_SHOULD_STOP, true);
+> -}
+> -
+> =C2=A0static int enable_sleep(void)
+> =C2=A0{
+> =C2=A0	int retval;
+> @@ -200,7 +167,6 @@ static int enable_sleep(void)
+> =C2=A0	rv_attach_trace_probe("rtapp_sleep", sched_set_state_tp,
+> handle_sched_set_state);
+> =C2=A0	rv_attach_trace_probe("rtapp_sleep", contention_begin,
+> handle_contention_begin);
+> =C2=A0	rv_attach_trace_probe("rtapp_sleep", contention_end,
+> handle_contention_end);
+> -	rv_attach_trace_probe("rtapp_sleep", sched_kthread_stop,
+> handle_kthread_stop);
+> =C2=A0	rv_attach_trace_probe("rtapp_sleep", sys_enter, handle_sys_enter);
+> =C2=A0	rv_attach_trace_probe("rtapp_sleep", sys_exit, handle_sys_exit);
+> =C2=A0	return 0;
+> @@ -213,7 +179,6 @@ static void disable_sleep(void)
+> =C2=A0	rv_detach_trace_probe("rtapp_sleep", sched_set_state_tp,
+> handle_sched_set_state);
+> =C2=A0	rv_detach_trace_probe("rtapp_sleep", contention_begin,
+> handle_contention_begin);
+> =C2=A0	rv_detach_trace_probe("rtapp_sleep", contention_end,
+> handle_contention_end);
+> -	rv_detach_trace_probe("rtapp_sleep", sched_kthread_stop,
+> handle_kthread_stop);
+> =C2=A0	rv_detach_trace_probe("rtapp_sleep", sys_enter, handle_sys_enter);
+> =C2=A0	rv_detach_trace_probe("rtapp_sleep", sys_exit, handle_sys_exit);
+> =C2=A0
+> diff --git a/kernel/trace/rv/monitors/sleep/sleep.h
+> b/kernel/trace/rv/monitors/sleep/sleep.h
+> index 2fe2ec7edae8..44e593f41e6a 100644
+> --- a/kernel/trace/rv/monitors/sleep/sleep.h
+> +++ b/kernel/trace/rv/monitors/sleep/sleep.h
+> @@ -18,15 +18,12 @@ enum ltl_atom {
+> =C2=A0	LTL_EPOLL_WAIT,
+> =C2=A0	LTL_FUTEX_LOCK_PI,
+> =C2=A0	LTL_FUTEX_WAIT,
+> -	LTL_KERNEL_THREAD,
+> -	LTL_KTHREAD_SHOULD_STOP,
+> =C2=A0	LTL_NANOSLEEP_CLOCK_REALTIME,
+> =C2=A0	LTL_NANOSLEEP_TIMER_ABSTIME,
+> =C2=A0	LTL_RT,
+> =C2=A0	LTL_SCHEDULE_IN,
+> =C2=A0	LTL_SLEEP,
+> -	LTL_TASK_IS_MIGRATION,
+> -	LTL_TASK_IS_RCU,
+> +	LTL_USER_THREAD,
+> =C2=A0	LTL_WOKEN_BY_EQUAL_OR_HIGHER_PRIO,
+> =C2=A0	LTL_WOKEN_BY_HARDIRQ,
+> =C2=A0	LTL_WOKEN_BY_NMI,
+> @@ -43,15 +40,12 @@ static const char *ltl_atom_str(enum ltl_atom atom)
+> =C2=A0		"ep_wa",
+> =C2=A0		"fu_lo_pi",
+> =C2=A0		"fu_wa",
+> -		"ker_th",
+> -		"kth_sh_st",
+> =C2=A0		"na_cl_re",
+> =C2=A0		"na_ti_ab",
+> =C2=A0		"rt",
+> =C2=A0		"sch_in",
+> =C2=A0		"sle",
+> -		"ta_mi",
+> -		"ta_rc",
+> +		"us_th",
+> =C2=A0		"wo_eq_hi_pr",
+> =C2=A0		"wo_ha",
+> =C2=A0		"wo_nm",
+> @@ -79,46 +73,41 @@ static void ltl_start(struct task_struct *task, struc=
+t
+> ltl_monitor *mon)
+> =C2=A0	bool woken_by_hardirq =3D test_bit(LTL_WOKEN_BY_HARDIRQ, mon->atom=
+s);
+> =C2=A0	bool woken_by_equal_or_higher_prio =3D
+> test_bit(LTL_WOKEN_BY_EQUAL_OR_HIGHER_PRIO,
+> =C2=A0	=C2=A0=C2=A0=C2=A0=C2=A0 mon->atoms);
+> -	bool task_is_rcu =3D test_bit(LTL_TASK_IS_RCU, mon->atoms);
+> -	bool task_is_migration =3D test_bit(LTL_TASK_IS_MIGRATION, mon->atoms);
+> +	bool user_thread =3D test_bit(LTL_USER_THREAD, mon->atoms);
+> =C2=A0	bool sleep =3D test_bit(LTL_SLEEP, mon->atoms);
+> =C2=A0	bool schedule_in =3D test_bit(LTL_SCHEDULE_IN, mon->atoms);
+> =C2=A0	bool rt =3D test_bit(LTL_RT, mon->atoms);
+> =C2=A0	bool nanosleep_timer_abstime =3D test_bit(LTL_NANOSLEEP_TIMER_ABST=
+IME,
+> mon->atoms);
+> =C2=A0	bool nanosleep_clock_realtime =3D
+> test_bit(LTL_NANOSLEEP_CLOCK_REALTIME, mon->atoms);
+> -	bool kthread_should_stop =3D test_bit(LTL_KTHREAD_SHOULD_STOP, mon-
+> >atoms);
+> -	bool kernel_thread =3D test_bit(LTL_KERNEL_THREAD, mon->atoms);
+> =C2=A0	bool futex_wait =3D test_bit(LTL_FUTEX_WAIT, mon->atoms);
+> =C2=A0	bool futex_lock_pi =3D test_bit(LTL_FUTEX_LOCK_PI, mon->atoms);
+> =C2=A0	bool epoll_wait =3D test_bit(LTL_EPOLL_WAIT, mon->atoms);
+> =C2=A0	bool clock_nanosleep =3D test_bit(LTL_CLOCK_NANOSLEEP, mon->atoms)=
+;
+> =C2=A0	bool block_on_rt_mutex =3D test_bit(LTL_BLOCK_ON_RT_MUTEX, mon->at=
+oms);
+> =C2=A0	bool abort_sleep =3D test_bit(LTL_ABORT_SLEEP, mon->atoms);
+> -	bool val41 =3D task_is_rcu || task_is_migration;
+> -	bool val42 =3D futex_lock_pi || val41;
+> -	bool val5 =3D block_on_rt_mutex || val42;
+> -	bool val33 =3D abort_sleep || kthread_should_stop;
+> -	bool val34 =3D woken_by_nmi || val33;
+> -	bool val35 =3D woken_by_hardirq || val34;
+> -	bool val14 =3D woken_by_equal_or_higher_prio || val35;
+> +	bool val7 =3D block_on_rt_mutex || futex_lock_pi;
+> +	bool val32 =3D woken_by_nmi || abort_sleep;
+> +	bool val33 =3D woken_by_hardirq || val32;
+> +	bool val14 =3D woken_by_equal_or_higher_prio || val33;
+> =C2=A0	bool val13 =3D !schedule_in;
+> =C2=A0	bool val25 =3D !nanosleep_clock_realtime;
+> =C2=A0	bool val26 =3D nanosleep_timer_abstime && val25;
+> =C2=A0	bool val18 =3D clock_nanosleep && val26;
+> =C2=A0	bool val20 =3D val18 || epoll_wait;
+> -	bool val9 =3D futex_wait || val20;
+> -	bool val11 =3D val9 || kernel_thread;
+> +	bool val11 =3D futex_wait || val20;
+> +	bool val3 =3D !user_thread;
+> =C2=A0	bool val2 =3D !sleep;
+> +	bool val4 =3D val2 || val3;
+> =C2=A0	bool val1 =3D !rt;
+> -	bool val3 =3D val1 || val2;
+> +	bool val5 =3D val1 || val4;
+> =C2=A0
+> -	if (val3)
+> +	if (val5)
+> =C2=A0		__set_bit(S0, mon->states);
+> =C2=A0	if (val11 && val13)
+> =C2=A0		__set_bit(S1, mon->states);
+> =C2=A0	if (val11 && val14)
+> =C2=A0		__set_bit(S4, mon->states);
+> -	if (val5)
+> +	if (val7)
+> =C2=A0		__set_bit(S5, mon->states);
+> =C2=A0}
+> =C2=A0
+> @@ -129,130 +118,125 @@ ltl_possible_next_states(struct ltl_monitor *mon,
+> unsigned int state, unsigned l
+> =C2=A0	bool woken_by_hardirq =3D test_bit(LTL_WOKEN_BY_HARDIRQ, mon->atom=
+s);
+> =C2=A0	bool woken_by_equal_or_higher_prio =3D
+> test_bit(LTL_WOKEN_BY_EQUAL_OR_HIGHER_PRIO,
+> =C2=A0	=C2=A0=C2=A0=C2=A0=C2=A0 mon->atoms);
+> -	bool task_is_rcu =3D test_bit(LTL_TASK_IS_RCU, mon->atoms);
+> -	bool task_is_migration =3D test_bit(LTL_TASK_IS_MIGRATION, mon->atoms);
+> +	bool user_thread =3D test_bit(LTL_USER_THREAD, mon->atoms);
+> =C2=A0	bool sleep =3D test_bit(LTL_SLEEP, mon->atoms);
+> =C2=A0	bool schedule_in =3D test_bit(LTL_SCHEDULE_IN, mon->atoms);
+> =C2=A0	bool rt =3D test_bit(LTL_RT, mon->atoms);
+> =C2=A0	bool nanosleep_timer_abstime =3D test_bit(LTL_NANOSLEEP_TIMER_ABST=
+IME,
+> mon->atoms);
+> =C2=A0	bool nanosleep_clock_realtime =3D
+> test_bit(LTL_NANOSLEEP_CLOCK_REALTIME, mon->atoms);
+> -	bool kthread_should_stop =3D test_bit(LTL_KTHREAD_SHOULD_STOP, mon-
+> >atoms);
+> -	bool kernel_thread =3D test_bit(LTL_KERNEL_THREAD, mon->atoms);
+> =C2=A0	bool futex_wait =3D test_bit(LTL_FUTEX_WAIT, mon->atoms);
+> =C2=A0	bool futex_lock_pi =3D test_bit(LTL_FUTEX_LOCK_PI, mon->atoms);
+> =C2=A0	bool epoll_wait =3D test_bit(LTL_EPOLL_WAIT, mon->atoms);
+> =C2=A0	bool clock_nanosleep =3D test_bit(LTL_CLOCK_NANOSLEEP, mon->atoms)=
+;
+> =C2=A0	bool block_on_rt_mutex =3D test_bit(LTL_BLOCK_ON_RT_MUTEX, mon->at=
+oms);
+> =C2=A0	bool abort_sleep =3D test_bit(LTL_ABORT_SLEEP, mon->atoms);
+> -	bool val41 =3D task_is_rcu || task_is_migration;
+> -	bool val42 =3D futex_lock_pi || val41;
+> -	bool val5 =3D block_on_rt_mutex || val42;
+> -	bool val33 =3D abort_sleep || kthread_should_stop;
+> -	bool val34 =3D woken_by_nmi || val33;
+> -	bool val35 =3D woken_by_hardirq || val34;
+> -	bool val14 =3D woken_by_equal_or_higher_prio || val35;
+> +	bool val7 =3D block_on_rt_mutex || futex_lock_pi;
+> +	bool val32 =3D woken_by_nmi || abort_sleep;
+> +	bool val33 =3D woken_by_hardirq || val32;
+> +	bool val14 =3D woken_by_equal_or_higher_prio || val33;
+> =C2=A0	bool val13 =3D !schedule_in;
+> =C2=A0	bool val25 =3D !nanosleep_clock_realtime;
+> =C2=A0	bool val26 =3D nanosleep_timer_abstime && val25;
+> =C2=A0	bool val18 =3D clock_nanosleep && val26;
+> =C2=A0	bool val20 =3D val18 || epoll_wait;
+> -	bool val9 =3D futex_wait || val20;
+> -	bool val11 =3D val9 || kernel_thread;
+> +	bool val11 =3D futex_wait || val20;
+> +	bool val3 =3D !user_thread;
+> =C2=A0	bool val2 =3D !sleep;
+> +	bool val4 =3D val2 || val3;
+> =C2=A0	bool val1 =3D !rt;
+> -	bool val3 =3D val1 || val2;
+> +	bool val5 =3D val1 || val4;
+> =C2=A0
+> =C2=A0	switch (state) {
+> =C2=A0	case S0:
+> -		if (val3)
+> +		if (val5)
+> =C2=A0			__set_bit(S0, next);
+> =C2=A0		if (val11 && val13)
+> =C2=A0			__set_bit(S1, next);
+> =C2=A0		if (val11 && val14)
+> =C2=A0			__set_bit(S4, next);
+> -		if (val5)
+> +		if (val7)
+> =C2=A0			__set_bit(S5, next);
+> =C2=A0		break;
+> =C2=A0	case S1:
+> =C2=A0		if (val11 && val13)
+> =C2=A0			__set_bit(S1, next);
+> -		if (val13 && val3)
+> +		if (val13 && val5)
+> =C2=A0			__set_bit(S2, next);
+> -		if (val14 && val3)
+> +		if (val14 && val5)
+> =C2=A0			__set_bit(S3, next);
+> =C2=A0		if (val11 && val14)
+> =C2=A0			__set_bit(S4, next);
+> -		if (val13 && val5)
+> +		if (val13 && val7)
+> =C2=A0			__set_bit(S6, next);
+> -		if (val14 && val5)
+> +		if (val14 && val7)
+> =C2=A0			__set_bit(S7, next);
+> =C2=A0		break;
+> =C2=A0	case S2:
+> =C2=A0		if (val11 && val13)
+> =C2=A0			__set_bit(S1, next);
+> -		if (val13 && val3)
+> +		if (val13 && val5)
+> =C2=A0			__set_bit(S2, next);
+> -		if (val14 && val3)
+> +		if (val14 && val5)
+> =C2=A0			__set_bit(S3, next);
+> =C2=A0		if (val11 && val14)
+> =C2=A0			__set_bit(S4, next);
+> -		if (val13 && val5)
+> +		if (val13 && val7)
+> =C2=A0			__set_bit(S6, next);
+> -		if (val14 && val5)
+> +		if (val14 && val7)
+> =C2=A0			__set_bit(S7, next);
+> =C2=A0		break;
+> =C2=A0	case S3:
+> -		if (val3)
+> +		if (val5)
+> =C2=A0			__set_bit(S0, next);
+> =C2=A0		if (val11 && val13)
+> =C2=A0			__set_bit(S1, next);
+> =C2=A0		if (val11 && val14)
+> =C2=A0			__set_bit(S4, next);
+> -		if (val5)
+> +		if (val7)
+> =C2=A0			__set_bit(S5, next);
+> =C2=A0		break;
+> =C2=A0	case S4:
+> -		if (val3)
+> +		if (val5)
+> =C2=A0			__set_bit(S0, next);
+> =C2=A0		if (val11 && val13)
+> =C2=A0			__set_bit(S1, next);
+> =C2=A0		if (val11 && val14)
+> =C2=A0			__set_bit(S4, next);
+> -		if (val5)
+> +		if (val7)
+> =C2=A0			__set_bit(S5, next);
+> =C2=A0		break;
+> =C2=A0	case S5:
+> -		if (val3)
+> +		if (val5)
+> =C2=A0			__set_bit(S0, next);
+> =C2=A0		if (val11 && val13)
+> =C2=A0			__set_bit(S1, next);
+> =C2=A0		if (val11 && val14)
+> =C2=A0			__set_bit(S4, next);
+> -		if (val5)
+> +		if (val7)
+> =C2=A0			__set_bit(S5, next);
+> =C2=A0		break;
+> =C2=A0	case S6:
+> =C2=A0		if (val11 && val13)
+> =C2=A0			__set_bit(S1, next);
+> -		if (val13 && val3)
+> +		if (val13 && val5)
+> =C2=A0			__set_bit(S2, next);
+> -		if (val14 && val3)
+> +		if (val14 && val5)
+> =C2=A0			__set_bit(S3, next);
+> =C2=A0		if (val11 && val14)
+> =C2=A0			__set_bit(S4, next);
+> -		if (val13 && val5)
+> +		if (val13 && val7)
+> =C2=A0			__set_bit(S6, next);
+> -		if (val14 && val5)
+> +		if (val14 && val7)
+> =C2=A0			__set_bit(S7, next);
+> =C2=A0		break;
+> =C2=A0	case S7:
+> -		if (val3)
+> +		if (val5)
+> =C2=A0			__set_bit(S0, next);
+> =C2=A0		if (val11 && val13)
+> =C2=A0			__set_bit(S1, next);
+> =C2=A0		if (val11 && val14)
+> =C2=A0			__set_bit(S4, next);
+> -		if (val5)
+> +		if (val7)
+> =C2=A0			__set_bit(S5, next);
+> =C2=A0		break;
+> =C2=A0	}
+> diff --git a/tools/verification/models/rtapp/sleep.ltl
+> b/tools/verification/models/rtapp/sleep.ltl
+> index 5923e58d7810..4d78fdd204c0 100644
+> --- a/tools/verification/models/rtapp/sleep.ltl
+> +++ b/tools/verification/models/rtapp/sleep.ltl
+> @@ -1,6 +1,6 @@
+> -RULE =3D always ((RT and SLEEP) imply (RT_FRIENDLY_SLEEP or ALLOWLIST))
+> +RULE =3D always ((RT and SLEEP and USER_THREAD) imply (RT_FRIENDLY_SLEEP=
+ or
+> ALLOWLIST))
+> =C2=A0
+> -RT_FRIENDLY_SLEEP =3D (RT_VALID_SLEEP_REASON or KERNEL_THREAD)
+> +RT_FRIENDLY_SLEEP =3D RT_VALID_SLEEP_REASON
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0 and ((not SCHEDULE_IN) until RT_FRIENDLY_WAKE)
+> =C2=A0
+> =C2=A0RT_VALID_SLEEP_REASON =3D FUTEX_WAIT
+> @@ -15,9 +15,6 @@ RT_FRIENDLY_WAKE =3D WOKEN_BY_EQUAL_OR_HIGHER_PRIO
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0 or WOKEN_BY_HARDIRQ
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0 or WOKEN_BY_NMI
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0 or ABORT_SLEEP
+> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 or KTHREAD_SHOULD_STOP
+> =C2=A0
+> =C2=A0ALLOWLIST =3D BLOCK_ON_RT_MUTEX
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 or FUTEX_LOCK_PI
+> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 or TASK_IS_RCU
+> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 or TASK_IS_MIGRATION
 
 
