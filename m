@@ -1,211 +1,153 @@
-Return-Path: <linux-doc+bounces-94488-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94494-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id hxe4NC58RWrIAwsAu9opvQ
-	(envelope-from <linux-doc+bounces-94488-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 22:44:30 +0200
+	id xbchJvd+RWqxBAsAu9opvQ
+	(envelope-from <linux-doc+bounces-94494-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 22:56:23 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2CAC06F18E4
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 22:44:30 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1FFB86F1AFC
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 22:56:23 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=RJRDi4cw;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94488-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94488-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=fAns894L;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94494-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94494-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=mailbox.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id B166F3060C81
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 20:39:28 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 3A04130BB201
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 20:52:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 70432394EB7;
-	Wed,  1 Jul 2026 20:39:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 786F23815E8;
+	Wed,  1 Jul 2026 20:52:24 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 596B13955C6;
-	Wed,  1 Jul 2026 20:39:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A8F614B08A;
+	Wed,  1 Jul 2026 20:52:22 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782938368; cv=none; b=tV7tA25ICIMdrnllipmZwgBnSV/7582EdqoJqaHO96Cxv0sWHRsiQwWIjChNL1QQPhdRhQF5YIxKiE8lcw3/GMmQpcRoGPfJZbtJHkudrdOd+2VYW/ZzqcUEo0b83fHrvKJKYzmFjZRpac8ojG9+GP+QFYj917NIVioH5hrJgl0=
+	t=1782939144; cv=none; b=X/wmyxJMxQ7K68yjHq220PLlrQVeTcReGFCmvfUlIMb6VXPmhuH5ZxlQi6owNBs9BXjA2I6vRMWhXnol7BjecZaJ3KSRCey+sDRGZBstl6BTVNLh/Q4c8euYuChFgo7aoRMP2SpEiLfee/UCOObZQSEi1FeHFYj9DQXilGwuLWg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782938368; c=relaxed/simple;
-	bh=K2JyJxCXLtM1eTdlopzD3fjkU2xPZMINicFo0HL5CgQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Z/uI6peXbqzGKkuQSoY47bCoVaoUXvQ2QpGjsI8+6/YjevlMklLHzRFp9gjRRQHwag6cD/j7dCW7WoLHRKnz4tikoMwbCB3A6lz809c3V7nBlzWMqfzONIHhKPXaZ/qKkFNkE8Cz4nQ+uVXl5d0sTLojADZMYjj1CtrCf4hIiPc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RJRDi4cw; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5CC711F000E9;
-	Wed,  1 Jul 2026 20:39:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782938367;
-	bh=f6QVBJJnOqTAmv9bGgn42fUJj2cY0FZxJ1ME1xdC+T8=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=RJRDi4cwA05SdSW+713uFlPiyHLZCwR49gpm/dBeCn1+LQodBzos5L0rNrOeB3byQ
-	 WYhZPYks9Se42SWieNvBWgUMjEsqBcwWOs4xOFFLRMbHi6ddQDqKg30NUNu0SRnybo
-	 Dxb53nC6CoI0/DRmyz5F3NPVghBQyDdplb73P47xUpH/v/YS8//CW0poBUhA6iC8QZ
-	 umZIFhJEUn1UA3tMpqYUH5xGl95l2jJ2JSaktuQKz/5/5/JCb3OwudfJXCtAean9jS
-	 MjQR6siiOHHeuqOsor+6mVOYZFjNM2kgMm41a5faaSghy28LcMtS8/BW+wK19MQomK
-	 Bdzqn1x2pljIA==
-Date: Wed, 1 Jul 2026 21:39:19 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Guodong Xu <docular.xu@gmail.com>
-Cc: Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
-	Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
-	Zong Li <zong.li@sifive.com>, Deepak Gupta <debug@rivosinc.com>,
-	Anup Patel <anup@brainfault.org>,
-	Atish Patra <atish.patra@linux.dev>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Yixun Lan <dlan@kernel.org>,
-	Chen Wang <unicorn_wang@outlook.com>,
-	Inochi Amaoto <inochiama@gmail.com>,
-	Chen Wang <chen.wang@linux.dev>, linux-doc@vger.kernel.org,
-	linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org,
-	kvm@vger.kernel.org, kvm-riscv@lists.infradead.org,
-	Paul Walmsley <paul.walmsley@sifive.com>,
-	Jesse Taube <jtaubepe@redhat.com>,
-	Charlie Jenkins <thecharlesjenkins@gmail.com>,
-	Andrew Jones <andrew.jones@oss.qualcomm.com>,
-	devicetree@vger.kernel.org, spacemit@lists.linux.dev,
-	sophgo@lists.linux.dev, linux-kselftest@vger.kernel.org,
-	Conor Dooley <conor.dooley@microchip.com>
-Subject: Re: [PATCH v5 08/17] dt-bindings: riscv: Require block-size for
- Zicbom, Zicbop, and Zicboz
-Message-ID: <20260701-squiggle-aging-459cd99cb2dc@spud>
-References: <20260701-rva23u64-hwprobe-v2-v5-0-2c61f94a695a@gmail.com>
- <20260701-rva23u64-hwprobe-v2-v5-8-2c61f94a695a@gmail.com>
+	s=arc-20240116; t=1782939144; c=relaxed/simple;
+	bh=+o2phwX2Z5VP++7LZPN8vtoSyAkclhd0tas9DPHpjsc=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=FbFo0LCStho+dxu4aRj2Tr0hiPi1LiENpydUEgnEs2+ikj86z/buIEERbIytbA8lUv5QP5GbdSlHtSl71yxnrcNs8vOW5trSmbcErVbaUktTVEfeG7Gkrz0xQ+NQCnVSh3Q75yhkD7kQ+gVx1MdNOOTNdQK3KHHJ0t4vTQFBV1A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org; spf=pass smtp.mailfrom=mailbox.org; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=fAns894L; arc=none smtp.client-ip=80.241.56.151
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [IPv6:2001:67c:2050:b231:465::102])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
+	(No client certificate requested)
+	by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4grBz720vsz8v1C;
+	Wed, 01 Jul 2026 22:52:19 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1782939139;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=ayUOZ2QprH56XGGDon1vuJ84zCr1jeUOuFnvGJtUCCQ=;
+	b=fAns894L4EkNHKwaThlEnJ7HXRkYjkE8PqnKTZrmXiTHFLDhD2sADLXT0iSXxl7Y3Z0xSZ
+	ihYCfgybwOKGDyjB3idHE8jOuuBwR4K+8as2T4TIEc4sIYBRSRGnoDcynjTL+Qiijlk1yb
+	sQPPTyv0Bm/45WS+qPZbM5by4NYgn03uxBkYXKaiy2YFChhrlLYn1g4fvsQ805iH37UYFE
+	IO3iRmJATNHhhvii1FaZ5kO3XHQQ8N8w/k0ri3+b8gLfaro6m6uzqZkJg2MPZzEfvboVFN
+	IMnUNDwsbLuidVbbxA8GyeaGQ/eDO/WsAav7Ih6JIABYgPT+/nOmXAR6aWF77A==
+Message-ID: <9b5efef3-421b-4fce-b299-f3c818cab8b6@mailbox.org>
+Date: Wed, 1 Jul 2026 22:40:42 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="dKXZ0SKTAmT4FGH2"
-Content-Disposition: inline
-In-Reply-To: <20260701-rva23u64-hwprobe-v2-v5-8-2c61f94a695a@gmail.com>
+Subject: Re: [PATCH v2 1/4] PCI: rcar-gen4: Configure AXIINTC if iMSI-RX not
+ used
+To: Manivannan Sadhasivam <mani@kernel.org>
+Cc: linux-pci@vger.kernel.org,
+ Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>,
+ =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+ Bjorn Helgaas <bhelgaas@google.com>,
+ Catalin Marinas <catalin.marinas@arm.com>, Conor Dooley
+ <conor+dt@kernel.org>, Geert Uytterhoeven <geert+renesas@glider.be>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Lorenzo Pieralisi <lpieralisi@kernel.org>, Marc Zyngier <maz@kernel.org>,
+ Rob Herring <robh@kernel.org>, devicetree@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-renesas-soc@vger.kernel.org
+References: <20260618220427.14325-1-marek.vasut+renesas@mailbox.org>
+ <20260618220427.14325-2-marek.vasut+renesas@mailbox.org>
+ <ck6i6tdw4ngde6vmtamfrvryg47ixycpmd74ny5hpzury5ekpr@ibgrw7o6uewj>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <ck6i6tdw4ngde6vmtamfrvryg47ixycpmd74ny5hpzury5ekpr@ibgrw7o6uewj>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: jz9cyeakpmxsygjbxd35i5fcbz36dybz
+X-MBO-RS-ID: ff32e8b634b5259b038
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-5.26 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
-	SIGNED_PGP(-2.00)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+	DMARC_POLICY_ALLOW(-0.50)[mailbox.org,reject];
+	R_DKIM_ALLOW(-0.20)[mailbox.org:s=mail20150812];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[gmail.com];
-	TAGGED_FROM(0.00)[bounces-94488-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	FORGED_RECIPIENTS(0.00)[m:docular.xu@gmail.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:pjw@kernel.org,m:palmer@dabbelt.com,m:aou@eecs.berkeley.edu,m:alex@ghiti.fr,m:zong.li@sifive.com,m:debug@rivosinc.com,m:anup@brainfault.org,m:atish.patra@linux.dev,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:dlan@kernel.org,m:unicorn_wang@outlook.com,m:inochiama@gmail.com,m:chen.wang@linux.dev,m:linux-doc@vger.kernel.org,m:linux-riscv@lists.infradead.org,m:linux-kernel@vger.kernel.org,m:kvm@vger.kernel.org,m:kvm-riscv@lists.infradead.org,m:paul.walmsley@sifive.com,m:jtaubepe@redhat.com,m:thecharlesjenkins@gmail.com,m:andrew.jones@oss.qualcomm.com,m:devicetree@vger.kernel.org,m:spacemit@lists.linux.dev,m:sophgo@lists.linux.dev,m:linux-kselftest@vger.kernel.org,m:conor.dooley@microchip.com,m:docularxu@gmail.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[conor@kernel.org,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-94494-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:mani@kernel.org,m:linux-pci@vger.kernel.org,m:yoshihiro.shimoda.uh@renesas.com,m:kwilczynski@kernel.org,m:bhelgaas@google.com,m:catalin.marinas@arm.com,m:conor+dt@kernel.org,m:geert+renesas@glider.be,m:krzk+dt@kernel.org,m:lpieralisi@kernel.org,m:maz@kernel.org,m:robh@kernel.org,m:devicetree@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-renesas-soc@vger.kernel.org,m:conor@kernel.org,m:geert@glider.be,m:krzk@kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[marek.vasut@mailbox.org,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	RCPT_COUNT_TWELVE(0.00)[32];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[conor@kernel.org,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[lwn.net,linuxfoundation.org,kernel.org,dabbelt.com,eecs.berkeley.edu,ghiti.fr,sifive.com,rivosinc.com,brainfault.org,linux.dev,outlook.com,gmail.com,vger.kernel.org,lists.infradead.org,redhat.com,oss.qualcomm.com,lists.linux.dev,microchip.com];
+	FROM_NEQ_ENVFROM(0.00)[marek.vasut@mailbox.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[mailbox.org:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt,renesas];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	TO_DN_SOME(0.00)[]
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,renesas.com:email,mailbox.org:dkim,mailbox.org:email,mailbox.org:mid,mailbox.org:from_mime,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 2CAC06F18E4
+X-Rspamd-Queue-Id: 1FFB86F1AFC
 
---dKXZ0SKTAmT4FGH2
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 6/30/26 6:22 PM, Manivannan Sadhasivam wrote:
 
-On Wed, Jul 01, 2026 at 08:52:21AM -0400, Guodong Xu wrote:
-> Zicbom, Zicbop, and Zicboz have no default cache block size, so a
-> devicetree that declares one must also provide the matching
-> riscv,cbom/cbop/cboz-block-size property. Make it required so a
-> missing block-size property can be caught by dtbs_check.
->=20
-> Suggested-by: Conor Dooley <conor.dooley@microchip.com>
-> Signed-off-by: Guodong Xu <docular.xu@gmail.com>
-> ---
-> v5: New patch.
-> ---
->  .../devicetree/bindings/riscv/extensions.yaml      | 26 ++++++++++++++++=
-++++++
->  1 file changed, 26 insertions(+)
->=20
-> diff --git a/Documentation/devicetree/bindings/riscv/extensions.yaml b/Do=
-cumentation/devicetree/bindings/riscv/extensions.yaml
-> index 5ffc40d599c02..f4dd34d446c02 100644
-> --- a/Documentation/devicetree/bindings/riscv/extensions.yaml
-> +++ b/Documentation/devicetree/bindings/riscv/extensions.yaml
-> @@ -1142,6 +1142,32 @@ allOf:
->            not:
->              contains:
->                const: zilsd
-> +  # All three Zicbo* extensions require their block size property as the=
-re's no
-> +  # default.
-> +  - if:
-> +      properties:
-> +        riscv,isa-extensions:
-> +          contains:
-> +            const: zicbom
+Hello Manivannan,
 
-I think the way to fix this is to add
-  required:
-    - riscv,isa-extensions
-to each of these if conditions
-(not got time to test it right now, sorry)
-
-> +    then:
-> +      required:
-> +        - riscv,cbom-block-size
-> +  - if:
-> +      properties:
-> +        riscv,isa-extensions:
-> +          contains:
-> +            const: zicbop
-> +    then:
-> +      required:
-> +        - riscv,cbop-block-size
-> +  - if:
-> +      properties:
-> +        riscv,isa-extensions:
-> +          contains:
-> +            const: zicboz
-> +    then:
-> +      required:
-> +        - riscv,cboz-block-size
-> =20
->  additionalProperties: true
->  ...
->=20
-> --=20
-> 2.43.0
->=20
-
---dKXZ0SKTAmT4FGH2
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCakV69wAKCRB4tDGHoIJi
-0qZuAPsE7PpkS7Q9Q/QdOXMXVi0vMgDYbeEgMRtzf0lMlv6w6gEA1JDV5vGVvkwY
-e3dZ2Ec1Eq1CjjFHEnDtDfSSbocyhQw=
-=AQmB
------END PGP SIGNATURE-----
-
---dKXZ0SKTAmT4FGH2--
+> On Fri, Jun 19, 2026 at 12:01:59AM +0200, Marek Vasut wrote:
+>> In case MSI are enabled, but DWC built-in iMSI-RX is not in use, the
+>> MSI are handled via GIC ITS. Configure all controller MSI registers
+>> fully.
+>>
+>> Set or clear MSI capability register MSICAP0 MSI enable MSIE bit and
+>> PCIe Interrupt Status 0 Enable register PCIEINTSTS0EN MSI interrupt
+>> enable MSI_CTRL_INT bit according to MSI enable state, set both bits
+>> if MSI are enabled, clear both bits if MSI are disabled.
+>>
+>> If MSI are disabled, or MSI are enabled and iMSI-RX is used, then
+>> deconfigure AXIINTCADDR and AXIINTCCONT to 0, which disables any
+>> pass through of MSI TLPs onto the AXI bus and then further into
+>> GIC ITS translation registers.
+>>
+>> If MSI are enabled and iMSI-RX is not used, the configure AXIINTCADDR
+>> with target address of GIC ITS translation registers, and configure
+>> AXIINTCCONT to enable MSI TLP pass through onto AXI bus and into the
+>> GIC ITS. This specific configuration allows handling of MSI via the
+>> GIC ITS instead of integrated iMSI-RX.
+>>
+>> Signed-off-by: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
+>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> 
+> Same as patch 3, SoB chain is broken. Rest LGTM!
+I hope this is now addressed in V3.
 
