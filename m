@@ -1,202 +1,189 @@
-Return-Path: <linux-doc+bounces-94381-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94399-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id IJqVI9wjRWrH7goAu9opvQ
-	(envelope-from <linux-doc+bounces-94381-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 16:27:40 +0200
+	id KCs9EcQtRWoV8QoAu9opvQ
+	(envelope-from <linux-doc+bounces-94399-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 17:09:56 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id B41476EEB98
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 16:27:39 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0A42D6EF20B
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Jul 2026 17:09:56 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=none;
-	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=zte.com.cn (policy=none);
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94381-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94381-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=google.com header.s=20251104 header.b=du7ybx56;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94399-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94399-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=google.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 7C76D3127013
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 14:20:12 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 159CE3055657
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Jul 2026 15:08:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B930E344D88;
-	Wed,  1 Jul 2026 14:19:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9C0EA48AE17;
+	Wed,  1 Jul 2026 15:07:20 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mxhk.zte.com.cn (mxhk.zte.com.cn [160.30.148.34])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f73.google.com (mail-pj1-f73.google.com [209.85.216.73])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0FE37343D75;
-	Wed,  1 Jul 2026 14:19:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AA48048A2DA
+	for <linux-doc@vger.kernel.org>; Wed,  1 Jul 2026 15:07:14 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782915546; cv=none; b=Est/yaH/RQl42RZnhB36uhCxMjSQ8U0P7x2d0usTEUHQxjMaviLOPP2X1eeVqF6tzYJGt0h0ss3qG968WmJDECIYNjT7KJwAf79APdQuzRu8De8EKXgUmR8mZmG7zw7C3qGoQ2SWaIZyfWptct+zTthZAS85IZF9W1AX4xpUhjc=
+	t=1782918440; cv=none; b=ZEvcJ5R/lpbW/tahSrZMRS+4YMzgWO7hi3Hv7aHL0tn124QE3Er/flMHn8WsG9tV4S/+bNWEQQ6XQK9gQ4eyyiHDzLD/f+54848YIAn1YpwHvRDupB2OeNhdUmrgKM0Cu0v7grSaE13SWaetuhNOMwBv9SSoV9sOINSKB0PjjXA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782915546; c=relaxed/simple;
-	bh=RvR2U4ecz0xrbMHjk5maJ5Fx6sW/La41FvsQ+pJ0I4U=;
-	h=Message-ID:In-Reply-To:References:Date:Mime-Version:From:To:Cc:
-	 Subject:Content-Type; b=qPVe4Odk2vJXP1PfJCHvZas5vu6zGBwXGqW1i1byJ6O2Rru/1xhomlOfoGQZJelV4CPMoCnvXgOZiMObrTISpPeVBL8esKlEGblvKm3jmrNZW200Trg0AAyj8QmF5RdJp4A9gNMYU5ms2Wxh7U2ynoE4Ws4eGqU/fGUxTByz/0w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zte.com.cn; spf=pass smtp.mailfrom=zte.com.cn; arc=none smtp.client-ip=160.30.148.34
-Received: from mse-fl2.zte.com.cn (unknown [10.5.228.133])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mxhk.zte.com.cn (FangMail) with ESMTPS id 4gr2FK5Pftz5B109;
-	Wed, 01 Jul 2026 22:19:01 +0800 (CST)
-Received: from xaxapp05.zte.com.cn ([10.99.98.109])
-	by mse-fl2.zte.com.cn with SMTP id 661EIs1q000143;
-	Wed, 1 Jul 2026 22:18:54 +0800 (+08)
-	(envelope-from xu.xin16@zte.com.cn)
-Received: from mapi (xaxapp01[null])
-	by mapi (Zmail) with MAPI id mid32;
-	Wed, 1 Jul 2026 22:18:57 +0800 (CST)
-X-Zmail-TransId: 2af96a4521d1cb0-8f438
-X-Mailer: Zmail v1.0
-Message-ID: <202607012218574761db7fGjm1svTfeCoKtrIX@zte.com.cn>
-In-Reply-To: <20260701123430.20699-1-lukas.gerlach@cispa.de>
-References: f75d286c-4d9e-4b64-8a9e-03e1afcb509f@kernel.org,20260701123430.20699-1-lukas.gerlach@cispa.de
-Date: Wed, 1 Jul 2026 22:18:57 +0800 (CST)
+	s=arc-20240116; t=1782918440; c=relaxed/simple;
+	bh=mtle515uIyp+O7vElJnFWYGr1uuE1TQcAdjdXN5Vo4c=;
+	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
+	 To:Cc:Content-Type; b=Ckj8v1HwJm3ePFeaUlDeY6jkEC+PaxSpKnmxNW9GTdBqpddw9GYXXiyV2QsAUBaHBv+9Ayii5w4mSueVpU/wU2MorLxFRNCjAWl7N834DvGyUuQNGlMglnOrVsHXCgazD/rKeg7m/rIJdMfEOeIOvfD++9KV4ScA93c+ckuprS0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--seanjc.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=du7ybx56; arc=none smtp.client-ip=209.85.216.73
+Received: by mail-pj1-f73.google.com with SMTP id 98e67ed59e1d1-37fc0aaa94cso638769a91.1
+        for <linux-doc@vger.kernel.org>; Wed, 01 Jul 2026 08:07:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20251104; t=1782918434; x=1783523234; darn=vger.kernel.org;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=35ip1FXhxTsr49Tf+Elt4WaaVNO58PfZuNT2YrZrg5w=;
+        b=du7ybx56GtUFlXWVU3O9LfpHYDV7/+pOAfpsOn3bikOwU9q6VYbpvER6Ii5TEfbid4
+         cVGaR09SdjsrGJzsKmN/yk+v0FhRORty75rVyokNjzxK8TyhzUilW2xLkb2MgKmKPMCc
+         AXL6zeLlvcL/k3UL1pnt14R02XyU25z7yY2LH3R0yT8o4mSPH07QIRNQ63+5HlF+6eNe
+         Mee8dMbugJRGxgfV3FBChkSW8XFiQktTpoNkk2YpP4HWAnrfvv0FNB5p9iNhvlXcNi0s
+         p2XwqZKe8gw2bF282V7CByNKa9hR9GbqUKZyqCWl8VM5fLHE9dY4omhI4shhIuROgFUV
+         uEsw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1782918434; x=1783523234;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=35ip1FXhxTsr49Tf+Elt4WaaVNO58PfZuNT2YrZrg5w=;
+        b=TrXeuSRPh4+NlbBTKPN7sMxUz970GN56agGqIJyJw3WNygUKwLE9aIBla2NiGZYkQT
+         ILt009xX1Z0Bq/H2kYkBeyqRcnM2A25/M/aifWp6nshBkezepghO0j6A0WbQGsi48SO7
+         wcNbCwibgpiCbcREXjUprRFu2UPp5MDTBIWi5JyZ7BajOOjLEYMRHU9OzNWy/4w5/rGQ
+         Vl/Emy0PChrhYNb1DVG4tRrJ5TzG9CunAzxB3LlS3vkrdo+02kmJvI+TJX/UJIGkUutS
+         PWTWEKSJxR1DDDQJ08UBXgeZn6ZCCfrHeSJ4z3Yx/E/xGWIxDlfm4upBKt20yPfaod+A
+         r7Yw==
+X-Forwarded-Encrypted: i=1; AHgh+Rp3poDEeLlf9j64kKl9uZOMd3EmATYMIooWXieJJ+oEFzwNX4CAt+ti3RDuuOJ7a4nkWIJVhjOaDUc=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzwQ+8vCFqtOVlsSvGg29SRQ8fal6CImpaGhfhSeHkQKF+YfrSf
+	U2WKVat8jjRlnvKVuTBZBXEk5wwKwPm9ClSkDGlPl/ItAbJ3qnM4QbheRRFwmH41U9zEo9wkIi9
+	qSSta6Q==
+X-Received: from plbl14.prod.google.com ([2002:a17:902:eb0e:b0:2b0:aef9:a5a2])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:903:3c50:b0:2ca:e5c:7fcf
+ with SMTP id d9443c01a7336-2ca7e654686mr23268045ad.3.1782918433131; Wed, 01
+ Jul 2026 08:07:13 -0700 (PDT)
+Date: Wed, 1 Jul 2026 08:07:12 -0700
+In-Reply-To: <e5876e41-a11a-4d5e-958f-9e247c19d387@intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 Mime-Version: 1.0
-From: <xu.xin16@zte.com.cn>
-To: <lukas.gerlach@cispa.de>, <akpm@linux-foundation.org>, <david@kernel.org>
-Cc: <akpm@linux-foundation.org>, <corbet@lwn.net>, <linux-mm@kvack.org>,
-        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <chengming.zhou@linux.dev>, <skhan@linuxfoundation.org>,
-        <lukas.gerlach@cispa.de>, <jo.vanbulck@cs.kuleuven.be>,
-        <tristan.hornetz@cispa.de>, <michael.schwarz@cispa.de>,
-        <shukai.ni@kuleuven.be>
-Subject: =?UTF-8?B?UmU6IFtQQVRDSF0gbW0va3NtOiBkb2N1bWVudCBzaWRlLWNoYW5uZWwgc2VjdXJpdHkgY29uc2lkZXJhdGlvbnM=?=
-Content-Type: text/plain;
-	charset="UTF-8"
-X-MAIL:mse-fl2.zte.com.cn 661EIs1q000143
-X-TLS: YES
-X-ENVELOPE-SENDER: xu.xin16@zte.com.cn
-X-SOURCE-IP: 10.5.228.133 unknown Wed, 01 Jul 2026 22:19:01 +0800
-X-CLEAN: YES
-X-Fangmail-Anti-Spam-Filtered: true
-X-Fangmail-MID-QID: 6A4521D5.000/4gr2FK5Pftz5B109
+References: <20260618-gmem-inplace-conversion-v8-0-9d2959357853@google.com>
+ <20260618-gmem-inplace-conversion-v8-7-9d2959357853@google.com>
+ <a1b06afb-af6e-4666-8c7d-990e7fa150fa@intel.com> <akP9Qv_IPVEh7GAB@google.com>
+ <e5876e41-a11a-4d5e-958f-9e247c19d387@intel.com>
+Message-ID: <akUtIDdRiU9YOr8-@google.com>
+Subject: Re: [PATCH v8 07/46] KVM: Rename memory attribute APIs to prepare for
+ in-place gmem conversion
+From: Sean Christopherson <seanjc@google.com>
+To: Xiaoyao Li <xiaoyao.li@intel.com>
+Cc: ackerleytng@google.com, aik@amd.com, andrew.jones@linux.dev, 
+	binbin.wu@linux.intel.com, brauner@kernel.org, chao.p.peng@linux.intel.com, 
+	david@kernel.org, jmattson@google.com, jthoughton@google.com, 
+	michael.roth@amd.com, oupton@kernel.org, pankaj.gupta@amd.com, 
+	qperret@google.com, rick.p.edgecombe@intel.com, rientjes@google.com, 
+	shivankg@amd.com, steven.price@arm.com, tabba@google.com, willy@infradead.org, 
+	wyihan@google.com, yan.y.zhao@intel.com, forkloop@google.com, 
+	pratyush@kernel.org, suzuki.poulose@arm.com, aneesh.kumar@kernel.org, 
+	liam@infradead.org, Paolo Bonzini <pbonzini@redhat.com>, Thomas Gleixner <tglx@kernel.org>, 
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
+	"H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>, 
+	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+	Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>, 
+	Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>, 
+	Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>, 
+	Nhat Pham <nphamcs@gmail.com>, Barry Song <baohua@kernel.org>, 
+	Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>, 
+	Wei Xu <weixugc@google.com>, Youngjun Park <youngjun.park@lge.com>, 
+	Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
+	Kiryl Shutsemau <kas@kernel.org>, Baoquan He <baoquan.he@linux.dev>, Jason Gunthorpe <jgg@ziepe.ca>, 
+	Vlastimil Babka <vbabka@kernel.org>, kvm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kselftest@vger.kernel.org, linux-mm@kvack.org, 
+	linux-coco@lists.linux.dev
+Content-Type: text/plain; charset="us-ascii"
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [2.14 / 15.00];
-	SUBJ_EXCESS_BASE64(1.50)[];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
 	MV_CASE(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[zte.com.cn : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-94381-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[google.com,amd.com,linux.dev,linux.intel.com,kernel.org,intel.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca,vger.kernel.org,kvack.org,lists.linux.dev];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[xu.xin16@zte.com.cn,linux-doc@vger.kernel.org];
-	FORGED_SENDER(0.00)[xu.xin16@zte.com.cn,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-94399-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:lukas.gerlach@cispa.de,m:akpm@linux-foundation.org,m:david@kernel.org,m:corbet@lwn.net,m:linux-mm@kvack.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:chengming.zhou@linux.dev,m:skhan@linuxfoundation.org,m:jo.vanbulck@cs.kuleuven.be,m:tristan.hornetz@cispa.de,m:michael.schwarz@cispa.de,m:shukai.ni@kuleuven.be,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:xiaoyao.li@intel.com,m:ackerleytng@google.com,m:aik@amd.com,m:andrew.jones@linux.dev,m:binbin.wu@linux.intel.com,m:brauner@kernel.org,m:chao.p.peng@linux.intel.com,m:david@kernel.org,m:jmattson@google.com,m:jthoughton@google.com,m:michael.roth@amd.com,m:oupton@kernel.org,m:pankaj.gupta@amd.com,m:qperret@google.com,m:rick.p.edgecombe@intel.com,m:rientjes@google.com,m:shivankg@amd.com,m:steven.price@arm.com,m:tabba@google.com,m:willy@infradead.org,m:wyihan@google.com,m:yan.y.zhao@intel.com,m:forkloop@google.com,m:pratyush@kernel.org,m:suzuki.poulose@arm.com,m:aneesh.kumar@kernel.org,m:liam@infradead.org,m:pbonzini@redhat.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:shuah@kernel.org,m:vannapurve@google.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@ten
+ cent.com,m:shikemeng@huaweicloud.com,m:nphamcs@gmail.com,m:baohua@kernel.org,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:kas@kernel.org,m:baoquan.he@linux.dev,m:jgg@ziepe.ca,m:vbabka@kernel.org,m:kvm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,m:linux-coco@lists.linux.dev,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[seanjc@google.com,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	FROM_NO_DN(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	TO_DN_NONE(0.00)[];
+	DKIM_TRACE(0.00)[google.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	MISSING_XM_UA(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[64];
 	PRECEDENCE_BULK(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[seanjc@google.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	R_DKIM_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
+	TO_DN_SOME(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: B41476EEB98
+X-Rspamd-Queue-Id: 0A42D6EF20B
 
-> Subject: [PATCH] mm/ksm: document side-channel security considerations
-> Date: Wed, 1 Jul 2026 14:34:30 +0200	[thread overview]
-> Message-ID: <20260701123430.20699-1-lukas.gerlach@cispa.de> (raw)
-> In-Reply-To: <f75d286c-4d9e-4b64-8a9e-03e1afcb509f@kernel.org>
+On Wed, Jul 01, 2026, Xiaoyao Li wrote:
+> On 7/1/2026 1:30 AM, Sean Christopherson wrote:
+> > On Tue, Jun 30, 2026, Xiaoyao Li wrote:
+> > > On 6/19/2026 8:31 AM, Ackerley Tng via B4 Relay wrote:
+> > > > -bool kvm_range_has_memory_attributes(struct kvm *kvm, gfn_t start, gfn_t end,
+> > > > -				     unsigned long mask, unsigned long attrs);
+> > > > +bool kvm_range_has_vm_memory_attributes(struct kvm *kvm, gfn_t start, gfn_t end,
+> > > > +					unsigned long mask, unsigned long attrs);
+> > > >    bool kvm_arch_pre_set_memory_attributes(struct kvm *kvm,
+> > > >    					struct kvm_gfn_range *range);
+> > > >    bool kvm_arch_post_set_memory_attributes(struct kvm *kvm,
+> > > 
+> > > We have
+> > > 
+> > >   - kvm_pre_set_memory_attributes()
+> > >   - kvm_arch_pre_set_memory_attributes()
+> > >   - kvm_arch_post_set_memory_attributes()
+> > 
+> > Yeah, that's probably for the best.
+> > 
+> > > left, do they need to be renamed as well?
+> > > 
+> > > then the interesting one is kvm_vm_set_mem_attributes(), which contains "vm"
+> > > already while it means "vm ioctl". Do we need to rename it to
+> > > kvm_vm_set_vm_mem_attributes()?
+> > 
+> > I say "no" on this last one, the fact that the function is scoped to a VM ioctl
+> > is enough to communicate that it applies to per-VM attributes.
+> > 
+> > Actually, since it's a local helper, we could go with kvm_set_vm_mem_attributes()
+> > to be consistent with the other functions.  That just leaves
+> > kvm_vm_ioctl_set_mem_attributes(), which I think it appropriately scoped.
 > 
-> KSM is known to enable side channels, but the admin guide does not
-> currently spell out the security implications of enabling page merging.
-> Because KSM merges pages by content across all processes with mergeable
-> memory, it forms a side channel that can be used to infer the contents
-> of that memory across security domains, regardless of the user,
-> container, or virtual machine the pages belong to.
-> 
-> Add a "Security considerations" section making this explicit, so that
-> operators can make an informed decision: KSM should only be enabled for
-> mutually trusting workloads, and any memory marked mergeable should be
-> assumed readable by every other process using KSM.
-> 
-> Co-developed-by: Jo Van Bulck <jo.vanbulck@cs.kuleuven.be>
-> Signed-off-by: Jo Van Bulck <jo.vanbulck@cs.kuleuven.be>
-> Signed-off-by: Lukas Gerlach <lukas.gerlach@cispa.de>
-> Cc: Tristan Hornetz <tristan.hornetz@cispa.de>
-> Cc: Michael Schwarz <michael.schwarz@cispa.de>
-> Cc: Shukai Ni <shukai.ni@kuleuven.be>
-> ---
-> Hi David,
-> 
-> Thanks for the quick response.
-> 
-> I generally agree. The issue I see is that the current documentation
-> understates the risk. The RHEL documentation ("could be potentially
-> used to leak information across guests") does not read like enabling
-> KSM is an arbitrary read across VMs, which the side channel we
-> disclosed (in contrast to previous works) is. So the documentation
-> should really state that KSM is only an option for mutually trusted
-> workloads. A clean model for this would be to assume that memory
-> marked as mergeable is readable by everyone else using KSM.
-> 
-> Patch below to clarify this in the admin guide. We would, in the
-> future, publish a paper on this to further raise awareness of the
-> risks involved with KSM.
+> If we finally choose to rename kvm_vm_set_mem_attributes() to
+> kvm_set_vm_mem_attributes(), I think the trace
+> trace_kvm_vm_set_mem_attributes() needs to be renamed to keep it consistent?
 
-It seems you have discovered a new information leakage attack method,
-and we look forward to reading your paper. Meanwhile, we are currently
-researching a domain-isolated KSM-merge and mechanism to defend against
-similar attacks.
-
-The following statement is essentially factual and deserve being documented.
-
-Reviewed-by: Xu Xin <xu.xin16@zte.com.cn>
-
-> 
-> Greetings,
-> Lukas
-> 
->  Documentation/admin-guide/mm/ksm.rst | 17 +++++++++++++++++
->  1 file changed, 17 insertions(+)
-> 
-> diff --git a/Documentation/admin-guide/mm/ksm.rst b/Documentation/admin-guide/mm/ksm.rst
-> index ad8e7a41f3b5..cbd5f2fdcfcb 100644
-> --- a/Documentation/admin-guide/mm/ksm.rst
-> +++ b/Documentation/admin-guide/mm/ksm.rst
-> @@ -27,6 +27,23 @@ KSM's merged pages were originally locked into kernel memory, but can now
->  be swapped out just like other user pages (but sharing is broken when they
->  are swapped back in: ksmd must rediscover their identity and merge again).
-> 
-> +Security considerations
-> +=======================
-> +
-> +Because KSM merges pages based on their content, across all processes
-> +with mergeable memory regardless of which user, container, or virtual
-> +machine they belong to, it exposes a side channel that can be used to
-> +infer the contents of mergeable memory across security domains.  Users
-> +should assume that any memory marked mergeable is readable by every
-> +other process using KSM.
-> +
-> +KSM should therefore only be enabled for mutually trusted workloads, or
-> +where the merged data is not sensitive; in particular, merging pages
-> +across mutually untrusted virtual machines or tenants is not secure.
-> +KSM is disabled by default (``run`` is 0).  Applications and VMMs that
-> +use ``MADV_MERGEABLE`` should limit it to regions that do not hold
-> +secrets.
-> +
->  Controlling KSM with madvise
->  ============================
-
-The above statement is essentially factual and deserve being documented.
+Ya, good catch!
 
