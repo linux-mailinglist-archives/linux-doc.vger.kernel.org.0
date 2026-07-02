@@ -1,72 +1,68 @@
-Return-Path: <linux-doc+bounces-94619-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94620-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id gGRaOWZ/Rmp6XQsAu9opvQ
-	(envelope-from <linux-doc+bounces-94619-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 17:10:30 +0200
+	id nw2cHKt8RmrKXAsAu9opvQ
+	(envelope-from <linux-doc+bounces-94620-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 16:58:51 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DDA6B6F93CC
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 17:10:29 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id F22066F920E
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 16:58:50 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=debian.org header.s=smtpauto.stravinsky header.b=FhWJEmba;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94619-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94619-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=debian.org;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=LQpbewK7;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94620-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-94620-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 68C513033EE4
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Jul 2026 14:56:38 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 57D8630449CA
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Jul 2026 14:57:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 98536433E74;
-	Thu,  2 Jul 2026 14:56:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4407E433E71;
+	Thu,  2 Jul 2026 14:57:25 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA640433E60;
-	Thu,  2 Jul 2026 14:56:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0C6E7433E65;
+	Thu,  2 Jul 2026 14:57:23 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783004172; cv=none; b=arHXDCbrhHnY3T+2nutrRjVVXbcNtjx/ZxiknqjIoaUoTDD2Z0NfbiT54TqIxQ7AhzwZsMMrXrllUTOZybeZiSsnRJCTkRwT/29NTmIuABmBj8C8j0kgN64S3joYLdeOzoIVIatpjth05LaPODl5RHD/Y94bdE5wODft7xVhJvM=
+	t=1783004245; cv=none; b=BTWyBdBrchOL06jOIivgHzSvN6kk7UCmlsNrFmuDeTY4iEufQqYWtOdwz6Umj9wbhohwnIhRHyYRsAA1LgEC5W9eliboJl9TxMUf2pp2fbbmmilPBuiyVx5m2LBNglCyBGnkXJPCTfgt5DxlwZ591qCWxT19w2fy+11Ef0qShcw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783004172; c=relaxed/simple;
-	bh=vDuGQeeUlAtESW9PFQxwTmnDGUc+u5aFK2oEUM8U0jE=;
+	s=arc-20240116; t=1783004245; c=relaxed/simple;
+	bh=60bukgHJpyxIUqcr7LqUTIJt2Dg3r3h+Em48QTYgA4o=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ajK8+XuqBdES9aURZ2gyI/wLf4N4pEkDeYPp6fMBvpmh+tW3L7jyHccW6W3YA+7Z39qMi86/kErzkt0pAW8pdK6oVFT4NP/7VxhREJ+DqwaNfPhXDUTM2UHIcTRfIO1hDB1CSqznhot5EY9xLtcQ/pfKTBnyjX829WScn56GsPY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org; spf=pass smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=FhWJEmba; arc=none smtp.client-ip=82.195.75.108
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
-	s=smtpauto.stravinsky; h=X-Debian-User:In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=T5zfo7gwxlXsH8BZgYvGWYJB1jbxdG1g9whcrQZbPWA=; b=FhWJEmbaGn6UtsXhnqmiUSuk42
-	oACCjFIyGz/kt/5rJT4X3y6beox60aT2V75XC1G+ptDHmqjKnSAmjOx2x1h6TagiUA5nKXTRYTbTS
-	imggaPZaZHVbnLkjVW+RW6xdGKAP34AdwblxmWNJ1gFZvOfOZbtM7aDTqztig/cb/Htcdd90dVBHC
-	hSrfA3aVx1FdAl8cYGJkP2igPo1dG67yeNpwKdc4qe7Ajk0A8yC+XZeskDbjuXgh8fVMLgyXaxHyI
-	gAPqHLvOCIIEaH3cB4/QD88kOkCcovhVZvjgYFO/S6JpaGDHYSVi9juyoSJbNjtNXrPSXCeY7cGm8
-	eRB4QPPQ==;
-Received: from authenticated-user
-	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
-	(Exim 4.96)
-	(envelope-from <leitao@debian.org>)
-	id 1wfIpQ-008heR-1v;
-	Thu, 02 Jul 2026 14:55:48 +0000
-Date: Thu, 2 Jul 2026 07:55:42 -0700
-From: Breno Leitao <leitao@debian.org>
-To: Catalin Marinas <catalin.marinas@arm.com>
-Cc: Jonathan Corbet <corbet@lwn.net>, 
-	Shuah Khan <skhan@linuxfoundation.org>, Andrew Morton <akpm@linux-foundation.org>, 
-	David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>, 
-	"Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>, 
-	Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
-	Michal Hocko <mhocko@suse.com>, Shuah Khan <shuah@kernel.org>, workflows@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-mm@kvack.org, 
-	linux-kselftest@vger.kernel.org, kernel-team@meta.com
-Subject: Re: [PATCH 2/2] selftests/mm: test kmemleak's N-consecutive-scan
- leak confirmation
-Message-ID: <akZ4tzQw70x3RR2D@gmail.com>
-References: <20260626-kmemleak_twice-v1-0-ab28f7cc0971@debian.org>
- <20260626-kmemleak_twice-v1-2-ab28f7cc0971@debian.org>
- <akYkKgWOsYnw6ETE@arm.com>
+	 Content-Type:Content-Disposition:In-Reply-To; b=eQ6rrw2YVxek4TGCl4DXf+ivaTulYzVvoJGngKM+5GsErguOVG++aIZilex1S1pVsIitEzmaD2TJ0OaOxSJ7/KKKPckZs+yg/60K+AYBq9MHRTwXkI5BzwtyjHDy27KZr/g9c/nuAPWgNkbuybdXtlhLLt0RQ3pRRBGVn+Mi2ug=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LQpbewK7; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BBDA41F000E9;
+	Thu,  2 Jul 2026 14:57:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783004243;
+	bh=4yuXlVHn6Pyak7JOlpG9NCZhDnZXAFm+smz+8Wr/tzg=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=LQpbewK77dimVIV67sbl0LG60CacyZDIFm/LOtg7Jy9KyPuLgrLT+F8Vhu54+bYd6
+	 gpOf2Sx0paZOiXpUh91lISOgFgA2kyP7IWeCnXgMqlSXFIVDfgTdggVfrfNf1HtO4v
+	 Sv497hhAw0DWkHOuA0fIVsbhR45+ZqBjpw/qPiN9hCe2lw8uriuRTFXc2dH70Gof3d
+	 dqDm3PeZmZCt5eEBtjJzq83QCJeGq3E/7GePw6As599JC8VKnhQ9MZCP6+2EIW1njx
+	 w5nKFrk5nX/HfaEhjQP22XqU22G7Kc9vin9bJrMSmWXVTC0sGujbByvZQ8qMNeO/4k
+	 3wYASoYToJT9w==
+Date: Thu, 2 Jul 2026 15:57:11 +0100
+From: Lorenzo Stoakes <ljs@kernel.org>
+To: Jeff Layton <jlayton@kernel.org>
+Cc: Linus Torvalds <torvalds@linux-foundation.org>, 
+	Jonathan Corbet <corbet@lwn.net>, Justin Stitt <justinstitt@google.com>, 
+	Laurent Pinchart <laurent.pinchart@ideasonboard.com>, Carlos Maiolino <cem@kernel.org>, 
+	Jakub Kicinski <kuba@kernel.org>, Jori Koolstra <jkoolstra@xs4all.nl>, 
+	Krzysztof Kozlowski <krzk@kernel.org>, Brian Foster <bfoster@redhat.com>, 
+	Christoph Hellwig <hch@infradead.org>, David Disseldorp <ddiss@suse.de>, 
+	Mark Brown <broonie@kernel.org>, Jani Nikula <jani.nikula@intel.com>, 
+	Jens Axboe <axboe@kernel.dk>, David Hildenbrand <david@kernel.org>, 
+	Vlastimil Babka <vbabka@kernel.org>, "Christian Brauner (Amutable)" <brauner@kernel.org>, 
+	workflows@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-fsdevel@vger.kernel.org
+Subject: Re: [PATCH] Documentation: remove the requirement for LLM attribution
+Message-ID: <akZ5_aiOuOpgLII1@lucifer>
+References: <20260702-aidoc-v1-1-735572dfb995@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -75,69 +71,187 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <akYkKgWOsYnw6ETE@arm.com>
-X-Debian-User: leitao
+In-Reply-To: <20260702-aidoc-v1-1-735572dfb995@kernel.org>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-4.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[debian.org,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
-	R_DKIM_ALLOW(-0.20)[debian.org:s=smtpauto.stravinsky];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:catalin.marinas@arm.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:akpm@linux-foundation.org,m:david@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:shuah@kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-kselftest@vger.kernel.org,m:kernel-team@meta.com,s:lists@lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER(0.00)[leitao@debian.org,linux-doc@vger.kernel.org];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:jlayton@kernel.org,m:torvalds@linux-foundation.org,m:corbet@lwn.net,m:justinstitt@google.com,m:laurent.pinchart@ideasonboard.com,m:cem@kernel.org,m:kuba@kernel.org,m:jkoolstra@xs4all.nl,m:krzk@kernel.org,m:bfoster@redhat.com,m:hch@infradead.org,m:ddiss@suse.de,m:broonie@kernel.org,m:jani.nikula@intel.com,m:axboe@kernel.dk,m:david@kernel.org,m:vbabka@kernel.org,m:brauner@kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,s:lists@lfdr.de];
+	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	TAGGED_FROM(0.00)[bounces-94619-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	FORGED_SENDER(0.00)[ljs@kernel.org,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-94620-lists,linux-doc=lfdr.de];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[leitao@debian.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[debian.org:+];
+	FROM_NEQ_ENVFROM(0.00)[ljs@kernel.org,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[linux-foundation.org,lwn.net,google.com,ideasonboard.com,kernel.org,xs4all.nl,redhat.com,infradead.org,suse.de,intel.com,kernel.dk,vger.kernel.org];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,lucifer:mid,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: DDA6B6F93CC
+X-Rspamd-Queue-Id: F22066F920E
 
-On Thu, Jul 02, 2026 at 09:41:14AM +0100, Catalin Marinas wrote:
-> On Fri, Jun 26, 2026 at 08:52:03AM -0700, Breno Leitao wrote:
-> > +pass "min_unref_scans=1 immediate; =2 gated to 2nd scan (counts $first/$s1/$s2); param read-back ok"
-> 
-> Are these off by one?
+I'm a little surprised I'm cc'd on this :) I'm not entirely sure if my pushing
+back on this is going to mean anything but I suppose here goes nothing.
 
-They seem to be OK, and I've tested it multiple times.
+On Thu, Jul 02, 2026 at 10:32:48AM -0400, Jeff Layton wrote:
+> We've had this requirement in place in the Documentation for several
+> months, but it's becoming clear that the signal to noise ratio from this
+> is quite low.
+>
+> 1/ It's not universally followed. While many people do try to attribute
+> the LLMs in good faith, not everyone does for various reasons.
 
-> Kmemleak has a mechanism to detect live objects
-> via the checksum. A side effect is that on allocation, the checksum is 0
-> and only after the first scan the checksum is changed.
+Does something not being universally followed therefore make it worthless?
 
-I got the impression that checksum continues to be zero for these
-objects during the whole life time? (weird). 
+You really have to explain that, because this is literally true of any rule
+whatsoever we might have in the kernel, should we drop all of them?
 
-If you think this selftest brings value, let me investigate what the
-heck is happening here.
+I think you should replace this with a cogent argument such as that you feel it
+is not being used in the _majority_ of cases or is very rarely used, and that
+value is in your view not there.
 
-> On checksum mismatch (i.e. the first scan), we mark the object gray
-> temporarily and won't increment unref_scans. So we already have an
-> implicit two scans required to report an object as unreferenced during
-> its early life.
-> 
-> I think this test needs a priming scan to update the checksums
-> followed by the actual check for min_unref_scans (with scan=off,
-> otherwise random scanning will skew the results).
+>
+> 2/ It basically serves as free advertising for proprietary LLM companies.
 
-I tried a priming scan and it actually breaks the min_unref_scans=2 case
+I agree with this point, we should drop the model.
+
+>
+> 3/ It's not clear why we want to collect this info in the first place.
+
+Well I made arguments on the other thread, but to repeat:
+
+- It makes it easier to engage with people when they do ack it.
+
+- It makes it far quicker to be able to do so.
+
+- There's a barrier to mentioning an LLM if it's not provided - people can get
+  upset, or it can cause issues to raise it as a concern.
+
+- Even if it's only there in _some_ cases, it makes _those_ cases easier to deal
+  with.
+
+- It provides some (incomplete) data that might make it easier to deal with
+  bug-causing patches.
+
+- It provides some (incomplete) data on bug rates with/without LLMs.
+
+I do agree they're far far less useful when there's not some indication of how
+much of the patch was LLM-generated.
+
+Their usefulness is obviously deeply far from perfect, but not zero.
+
+>
+> Given that the data this provides is flawed at best and is being
+> collected for a purpose that isn't clear, let's just kill the
+> requirement for these tags from the kernel at large.
+
+I feel there are purposes. Perhaps the argument is stronger for having the tags
+on submissions rather than actually in-tree, however.
+
+>
+> Signed-off-by: Jeff Layton <jlayton@kernel.org>
+
+I think simplifying by requiring only 'LLM' and adding a line simply suggesting
+a comment giving a sense of how much was used, and then perhaps a paragraph saying
+
+	Subsystems may vary in their acceptance of this patch blah blah blah
+
+Could be a compromise?
+
+> ---
+> Christian had proposed watering down the LLM attribution, but I think
+> it's not productive to try and track this until we have a clearer sense
+> of what we want to do with this information and how to make it more
+> reliable.
+
+Well he's moved now to stridently saying we should do what you're doing here so
+presumably you're now in alignment.
+
+> ---
+>  Documentation/process/coding-assistants.rst  | 22 ----------------------
+>  Documentation/process/submitting-patches.rst | 10 ----------
+>  2 files changed, 32 deletions(-)
+>
+> diff --git a/Documentation/process/coding-assistants.rst b/Documentation/process/coding-assistants.rst
+> index 899f4459c52d..c4cc0917fc92 100644
+> --- a/Documentation/process/coding-assistants.rst
+> +++ b/Documentation/process/coding-assistants.rst
+> @@ -35,25 +35,3 @@ is responsible for:
+>  * Ensuring compliance with licensing requirements
+>  * Adding their own Signed-off-by tag to certify the DCO
+>  * Taking full responsibility for the contribution
+> -
+> -Attribution
+> -===========
+> -
+> -When AI tools contribute to kernel development, proper attribution
+> -helps track the evolving role of AI in the development process.
+> -Contributions should include an Assisted-by tag in the following format::
+> -
+> -  Assisted-by: AGENT_NAME:MODEL_VERSION [TOOL1] [TOOL2]
+> -
+> -Where:
+> -
+> -* ``AGENT_NAME`` is the name of the AI tool or framework
+> -* ``MODEL_VERSION`` is the specific model version used
+> -* ``[TOOL1] [TOOL2]`` are optional specialized analysis tools used
+> -  (e.g., coccinelle, sparse, smatch, clang-tidy)
+> -
+> -Basic development tools (git, gcc, make, editors) should not be listed.
+> -
+> -Example::
+> -
+> -  Assisted-by: Claude:claude-3-opus coccinelle sparse
+> diff --git a/Documentation/process/submitting-patches.rst b/Documentation/process/submitting-patches.rst
+> index cc6a1f73d7f2..b74c38aa9770 100644
+> --- a/Documentation/process/submitting-patches.rst
+> +++ b/Documentation/process/submitting-patches.rst
+> @@ -634,16 +634,6 @@ bugzilla.kernel.org is a public place in this sense, but email addresses
+>  used there are private; so do not expose them in tags, unless the person
+>  used them in earlier contributions.
+>
+> -Using Assisted-by:
+> -------------------
+> -
+> -If you used any sort of advanced coding tool in the creation of your patch,
+> -you need to acknowledge that use by adding an Assisted-by tag.  Failure to
+> -do so may impede the acceptance of your work.  Please see
+> -Documentation/process/coding-assistants.rst for details regarding the
+> -acknowledgment of coding assistants.
+> -
+> -
+>  .. _the_canonical_patch_format:
+>
+>  The canonical patch format
+>
+> ---
+> base-commit: 665159e246749578d4e4bfe106ee3b74edcdab18
+> change-id: 20260702-aidoc-7e18f221d63a
+>
+> Best regards,
+> --
+> Jeff Layton <jlayton@kernel.org>
+>
+
+Thanks, Lorenzo
 
