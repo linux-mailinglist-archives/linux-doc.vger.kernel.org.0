@@ -1,53 +1,53 @@
-Return-Path: <linux-doc+bounces-94566-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94567-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 9cGYJPxJRmplNwsAu9opvQ
-	(envelope-from <linux-doc+bounces-94566-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 13:22:36 +0200
+	id RqWwDoFLRmrqNwsAu9opvQ
+	(envelope-from <linux-doc+bounces-94567-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 13:29:05 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8988A6F69EC
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 13:22:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 178406F6B36
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 13:29:04 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=oX9rZXvU;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94566-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94566-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=VGzSpga1;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94567-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94567-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id B8F2D30E873B
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Jul 2026 10:27:30 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 4C53B305D68F
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Jul 2026 10:34:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9E7644252AC;
-	Thu,  2 Jul 2026 10:27:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EEBD3366DD3;
+	Thu,  2 Jul 2026 10:34:43 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8CAC23C7DE1;
-	Thu,  2 Jul 2026 10:27:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E3C963164BA;
+	Thu,  2 Jul 2026 10:34:42 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782988046; cv=none; b=P6XtIgAhbTZWuIueKxznd11ZBxPUp1j7ITyVWtyrREHVlEVzwXWaaFj5BnNSToWy0pWAXOpUGGbUyIVaOs4QMT6PZJc88ydaBWTjO/Un3IK/MAhZblvhij6YIvRGTkbaVhRYUqQYhUxixexHrkdu3kQ533ufnudbcwYRHoUuODs=
+	t=1782988483; cv=none; b=aqWsduOi2VJ2rucRD9Ye7uJgbQin34NS0pElNSgm1Z4cVgavnmI5vElboge+8L8jqi6ZFUf13i37xJ+yhCcix1jJ/a5DKMqfsvGgSmA4WVH2XAjDr9TFwSYeJaDhVfTcjYLuxlnDfxIYHqIPJZEaQtLrSX/5eO4HZcszHTQh0II=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782988046; c=relaxed/simple;
-	bh=YvEOBLItkrqvAbCfU/vVsQkLk5Y7FT8BXnXQDbsF9EM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=cLOOeKb1fiemComVLRk8PNKVOdgTWgDw11IJHq5VuGBTlR8HUsmcdDC3lymH32sow3FlpmOyvRE17YoqcFeBNOiakaOS7cl2jXHshjVq2yB8t02L1Hx5PY7pC6LljTogVOCvJh64mckx0l6+frdIt7rvpW1lP50KHQZGJDBTnmc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=oX9rZXvU; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D4C731F000E9;
-	Thu,  2 Jul 2026 10:27:20 +0000 (UTC)
+	s=arc-20240116; t=1782988483; c=relaxed/simple;
+	bh=XWYzdk9hiyQlBB2g50taHCbyjP4wQob4Z2CB9KXp01k=;
+	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
+	 In-Reply-To:Content-Type; b=JYaXfSRiFUAgKH2Pf1TX1+nZz0weMEkbNbGTOIwobLeoT2oxG8dJWDzK+uUAfPOAQypak7XmafuGGD9ebsMRGLMhkhIyD5uKxRtvFxIggLx8hDbdvyXj51HtB8lXzBZew5are6UwZpvI/BV+/7HcmtIzPLLOBDQpwQJ36Gwtp1I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=VGzSpga1; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A8CAA1F000E9;
+	Thu,  2 Jul 2026 10:34:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782988045;
-	bh=t5DySkcPpG4n3I/KnPOM5e5iyA34NMFERIywYZbfhLQ=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=oX9rZXvUdGzGPlvLRGdF4+qalNgkcw4N+5930je5DTtsBnUxL1RDuFTrz1aIYLdzw
-	 cHbgubUCWtBkefvOx3mvzS558YSs2+DzDdLXZywGYGtvSQgTJ6WzLuut6sBT+3/VuE
-	 /080GgovCJqrVFbu1GQYdDaqLe4sD4tMzpnXoPlX4Sf2qalLx1JMm0uZN7wllyuWol
-	 AiMBLJ36LN5E1Z7Sp4hq3lSTSKdCtj8UkquuKtPwSUikoW3+W88+Z8CKEB2m8FVGVK
-	 Jidv/Amdkm6eyHQcWjkUfeHT+vOXNVPA2qqSTOaUAyrhfMZtwhW9DP01PjceEAMTrk
-	 W8J/Vrgil4BUw==
-Message-ID: <7d2ba1b4-6199-406e-88ae-fb5c9fad4689@kernel.org>
-Date: Thu, 2 Jul 2026 12:27:17 +0200
+	s=k20260515; t=1782988482;
+	bh=QO/ShcRFiuZ7uRN9u76tK9gF4d4SRTQ+F58FBJM4TNs=;
+	h=Date:Subject:To:References:From:In-Reply-To;
+	b=VGzSpga1jmhunbTZXCNrsQsG24+CnjSp5Ioaqke/+bycq9/6gXec+yNI5t/JPZrAm
+	 PsxlBsCaugoOmq+VzfEsf2GhbLUZoBiNaYxdmrhMeGMVz9d9uf/YQDidUosAhy90Hh
+	 0YiYPcSgqMW7dHzrkw0UGeBbmhjWJ8E82cWJ3ifZmVZokrnFiuRr806L26vVLCMnGk
+	 l+/UkCtjbOGuBp+BL1elT5q62LwFgvqY2FvTqhDTBU7SmPM/Mgph2x6QhwYi8pn8lI
+	 pm2JPItKg+vrfQfPFOgoMIHs63A2e5UPzyeUb0vhxzPz87Hh/ccklQ7fuNuE7adAfi
+	 JpklE87OMJ+7w==
+Message-ID: <afd0635c-1903-4c7b-8023-cbcd1823e081@kernel.org>
+Date: Thu, 2 Jul 2026 12:34:34 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -56,14 +56,17 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH RFC] coding-assistants: simplify attribution
-To: Christian Brauner <brauner@kernel.org>,
+To: "Vlastimil Babka (SUSE)" <vbabka@kernel.org>,
+ Jori Koolstra <jkoolstra@xs4all.nl>, Christian Brauner <brauner@kernel.org>,
  Linus Torvalds <torvalds@linux-foundation.org>,
- Jonathan Corbet <corbet@lwn.net>
-Cc: Jens Axboe <axboe@kernel.dk>, David Hildenbrand <david@kernel.org>,
- Jeff Layton <jlayton@kernel.org>, Vlastimil Babka <vbabka@kernel.org>,
+ Jonathan Corbet <corbet@lwn.net>, Jens Axboe <axboe@kernel.dk>,
+ David Hildenbrand <david@kernel.org>, Jeff Layton <jlayton@kernel.org>,
  workflows@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org
+ linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ Lorenzo Stoakes <ljs@kernel.org>
 References: <20260701-work-coding-assistants-v1-1-a20a94d1d606@kernel.org>
+ <akYasD1ckWcH1C0g@lt-jori.localdomain>
+ <a17b9a17-0ca7-4912-836d-4637cd0110f7@kernel.org>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -109,7 +112,7 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
  n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
  qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <20260701-work-coding-assistants-v1-1-a20a94d1d606@kernel.org>
+In-Reply-To: <a17b9a17-0ca7-4912-836d-4637cd0110f7@kernel.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
@@ -123,68 +126,70 @@ X-Spamd-Result: default: False [-5.16 / 15.00];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94566-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:brauner@kernel.org,m:torvalds@linux-foundation.org,m:corbet@lwn.net,m:axboe@kernel.dk,m:david@kernel.org,m:jlayton@kernel.org,m:vbabka@kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:vbabka@kernel.org,m:jkoolstra@xs4all.nl,m:brauner@kernel.org,m:torvalds@linux-foundation.org,m:corbet@lwn.net,m:axboe@kernel.dk,m:david@kernel.org,m:jlayton@kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:ljs@kernel.org,s:lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER(0.00)[krzk@kernel.org,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	FREEMAIL_TO(0.00)[kernel.org,xs4all.nl,linux-foundation.org,lwn.net,kernel.dk,vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-94567-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[krzk@kernel.org,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	TAGGED_RCPT(0.00)[linux-doc];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,vger.kernel.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 8988A6F69EC
+X-Rspamd-Queue-Id: 178406F6B36
 
-On 01/07/2026 17:54, Christian Brauner wrote:
-> I remain very confused by our coding assistant contribution guidelines.
-> I'm going to be a bit polemic now but this seriously in good faith.
+On 02/07/2026 10:44, Vlastimil Babka (SUSE) wrote:
+> On 7/2/26 10:12, Jori Koolstra wrote:
+>> Ah, I still reigniting this discussion again :)
+>>
+>> What about a combination of what David and Jeff say? The whole point
+>> seems to me that the salient information is not that an LLM was used (or
+>> are we going to tag Sashiko as well or any other LLM-based code review
+>> tool?), but what is was used to do. This information may be relevant for
+>> how the review is approached. The latter should perhaps only be in the
+>> cover letter and then we can drop the assisted-by tags altogether.
+>>
+>> The question about enforcement remains.
 > 
-> Why precisely do we require all this detailed information about what
-> specific coding assistant was used?
+> It's not possible to enforce it. People can deny it if the tag is missing
+> and you confront them and even though the submission has many signs of being
+> obviously LLM, there is no definite proof. We've seen (likely, as there's no
+> proof!) that happen in mm.
 > 
-> I find it very irritating that our git history has effectively started
-> to function a bit like a free advertising platform for a bunch of AI
-> companies and their proprietary agents and models.
-> 
-> And it reamins unclear to me what exactly we do get out of this detailed
-> information: Do we want to run statistical analysis on what agent and
-> model is used the most and publish that on LWN at some point?
-> 
-> I acknowledge that my stance is even more radical: imho we would just
-> stop it with any disclosure requirements completely. It's useless imho.
-> We already see that other than core contributors most people don't care
-> and will just not disclose their usage of AI. I think this is entirely
-> pointless and worse it brings in undefined legal status as well. It's
-> not like recent events of pulling certain models from the face of the
-> earth have made this any less concerning.
-> 
-> But fine, if we want to do this can we please just dumb it down to
-> 
-> Assisted-by: LLM
-> 
+> Such situation then penalizes those who disclose so obviously they won't. We
+> should drop the tag and instead think how we can empower maintainers to be
+> able to use their own judgment and deprioritize dealing with what they
+> perceive as LLM slop, without fearing consequences of not being properly
+> responsible etc, and not rely on any non-enforceable tags for that.
 
-Yes, I agree. Useful information would be the model or trained data,
-e.g. to judge for any copyright issues, but I doubt anyone will ever
-provide such details.
++1
 
-I also see little value to keep even the Assisted-by tag in the first
-place. I am interested in seeing named respectable tools in commit msg
-as reasons for doing this commit, e.g. I am fixing warning from Smatch
-so I mention Smatch. Sashiko fits this purpose as well. I have no
-interests to see "Claude" as reason of doing something.
+I see no benefits of enforcing the tag for these exact reasons. Every
+LLM slop will miss the tag. OTOH, seeing reasonable contribution with
+the tag makes my spider-senses tingling and causing unnecessary
+prejudice. If the contribution is reasonable, how does the tag
+information helps me? I trust (or not) the person, regardless what tool
+they use.
+
+And if we think about any future possible copyright issues with LLM
+contributions (like if there is ever a ruling that model trained on BSD
+data creates BSD-derivative work etc), does that tag anyhow solve it?
+Like if that ruling appear we will go through the history and revert the
+commits?
 
 Best regards,
 Krzysztof
