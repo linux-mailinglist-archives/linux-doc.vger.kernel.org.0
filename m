@@ -1,53 +1,68 @@
-Return-Path: <linux-doc+bounces-94595-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94596-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id rjlrLzhjRmrLSQsAu9opvQ
-	(envelope-from <linux-doc+bounces-94595-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 15:10:16 +0200
+	id ifwJKPpjRmoQSgsAu9opvQ
+	(envelope-from <linux-doc+bounces-94596-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 15:13:30 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D4066F8285
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 15:10:16 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 46AF86F82F6
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 15:13:30 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=ideasonboard.com header.s=mail header.b="BT/gjmaH";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94595-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94595-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=ideasonboard.com;
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=e5xSdVp9;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94596-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-94596-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=redhat.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id A359C300CC3E
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Jul 2026 13:07:54 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id B159B307BF1E
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Jul 2026 13:09:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C8CDB42B321;
-	Thu,  2 Jul 2026 13:07:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 497DB49251A;
+	Thu,  2 Jul 2026 13:09:23 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 339B948C8A1;
-	Thu,  2 Jul 2026 13:07:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 101C2492187
+	for <linux-doc@vger.kernel.org>; Thu,  2 Jul 2026 13:09:19 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782997673; cv=none; b=UO9QrICou+24Di3QWxxclhSVW9nsYL+/26vO3dXP5D3v4s0gBi/0I/S9+pf1OBkzhKVlDkN/qzK1Qwai6KWndrGhZKZQJnsGC8VIP1UEdPv8dhU4QrRaEHddTvxOfFfA+Mi6NqLspAp3RVGXb42lTrWVmbsXopuaXrqLPfos2mQ=
+	t=1782997762; cv=none; b=oxxFSM7gtiLZhHl7oFZVPNxVnVObf5JckkVzPOeKqUByEccd8lh+hPtGSqvh2KbCsAnxt0PXAVaC40yyQxJf+WmAGaGRTPS5Rq7EexatBB1mE0mbMdA+LgLrR/uoe2VEm3B8wSLLW0uNpIUTZSnTD8TJiRXAdV3uA6qnwrUpTGE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782997673; c=relaxed/simple;
-	bh=5dr//tfMOhqPbri/FQ9+o/A+RTH+vCjcdGSY4+mZ/MM=;
+	s=arc-20240116; t=1782997762; c=relaxed/simple;
+	bh=fiJrezrPzd/66Esvi9NNyo7ek1v+7YfLuLcqu8NbMQ4=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=JUG6zPtuZ9u0B452B0Cp7RZg1ot5aL2CSGJominW/M36fwixWjOCRhmQzjwGcHdNJfHrSGkYde0px0XDsvHCYCgXejnr/DkBDgL9122jhq7o1Yazc5lnXuaXXgOciLl0tM5aXsI+XyZFFaYMCiMZD363UXq0UbxSzYYwmkO3Ft4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com; spf=pass smtp.mailfrom=ideasonboard.com; dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b=BT/gjmaH; arc=none smtp.client-ip=213.167.242.64
-Received: from killaraus.ideasonboard.com (2001-14ba-70f3-e800--a06.rev.dnainternet.fi [IPv6:2001:14ba:70f3:e800::a06])
-	by perceval.ideasonboard.com (Postfix) with ESMTPSA id 0C7423A2;
-	Thu,  2 Jul 2026 15:06:56 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
-	s=mail; t=1782997617;
-	bh=5dr//tfMOhqPbri/FQ9+o/A+RTH+vCjcdGSY4+mZ/MM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=BT/gjmaHIxgKrSuuqeYr7xoSarPN2c/U2bL2Yka6+jzeWLInWwmx4b4TYMbGy7mFV
-	 RdnY4dqK26RSVLzCNV5TcdsI4FDXGM6Apvw/x11LMM7bQJIThpoZO+9aQ8adhcJj2s
-	 5xdHwDyAblqt6adcasCPd2YeBMXDq32QeitSIuV4=
-Date: Thu, 2 Jul 2026 16:07:40 +0300
-From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+	 Content-Type:Content-Disposition:In-Reply-To; b=saDQ68dBjpmztsekv03nze3w7SaGaf+miLQlqWhgxt8XPH/TWd8T2uXdn3QIWad28F7jwEFoyeVnNka++17nT2q+o1dmXZnH314HW0JXiTNtiU+1M63OKz8kSm40+BPnliAsgB2yjHkkLm7aY5n/9XHExy+WJzvfFufp1m6BVYo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=e5xSdVp9; arc=none smtp.client-ip=170.10.133.124
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1782997759;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=pk2pYhN52w0a/kFsyxeCmsifCUQ0v8hhl1JGZ0yb2rk=;
+	b=e5xSdVp9T9b8A8dVDrIaiGy+Lvt04MOedLt0Rs8EvCdQxxee7hADQUMr+zvRRP66ko7Uqg
+	B6TBIo6TDUy7d3y/jlEPxlLiLLlQdcwFQubYMpBdCXsep6syOqEhwomBPCF68o5WzBYr7n
+	fiLXkKPJJQ70xUSloCclbRWV2vq1Fuo=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-642-9HHLOQTTMlCktmfHsFKvaQ-1; Thu,
+ 02 Jul 2026 09:09:13 -0400
+X-MC-Unique: 9HHLOQTTMlCktmfHsFKvaQ-1
+X-Mimecast-MFC-AGG-ID: 9HHLOQTTMlCktmfHsFKvaQ_1782997751
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id C51CB1944EB6;
+	Thu,  2 Jul 2026 13:09:10 +0000 (UTC)
+Received: from bfoster (unknown [10.22.80.59])
+	by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 29A923001D87;
+	Thu,  2 Jul 2026 13:09:08 +0000 (UTC)
+Date: Thu, 2 Jul 2026 09:09:05 -0400
+From: Brian Foster <bfoster@redhat.com>
 To: Lorenzo Stoakes <ljs@kernel.org>
-Cc: Brian Foster <bfoster@redhat.com>,
+Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
 	"Vlastimil Babka (SUSE)" <vbabka@kernel.org>,
 	Jori Koolstra <jkoolstra@xs4all.nl>,
 	Christian Brauner <brauner@kernel.org>,
@@ -58,7 +73,7 @@ Cc: Brian Foster <bfoster@redhat.com>,
 	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
 	linux-fsdevel@vger.kernel.org
 Subject: Re: [PATCH RFC] coding-assistants: simplify attribution
-Message-ID: <20260702130740.GB3534761@killaraus.ideasonboard.com>
+Message-ID: <akZi8XmYA0XUCx2-@bfoster>
 References: <20260701-work-coding-assistants-v1-1-a20a94d1d606@kernel.org>
  <akYasD1ckWcH1C0g@lt-jori.localdomain>
  <a17b9a17-0ca7-4912-836d-4637cd0110f7@kernel.org>
@@ -72,45 +87,45 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 In-Reply-To: <akZW1RPqTc-4_7jW@lucifer>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [2.34 / 15.00];
+	MID_END_EQ_FROM_USER_PART(4.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[ideasonboard.com,none];
-	R_DKIM_ALLOW(-0.20)[ideasonboard.com:s=mail];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-94595-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER(0.00)[laurent.pinchart@ideasonboard.com,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[redhat.com,kernel.org,xs4all.nl,linux-foundation.org,lwn.net,kernel.dk,vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	FORGED_RECIPIENTS(0.00)[m:ljs@kernel.org,m:bfoster@redhat.com,m:vbabka@kernel.org,m:jkoolstra@xs4all.nl,m:brauner@kernel.org,m:torvalds@linux-foundation.org,m:corbet@lwn.net,m:axboe@kernel.dk,m:david@kernel.org,m:jlayton@kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-94596-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:ljs@kernel.org,m:laurent.pinchart@ideasonboard.com,m:vbabka@kernel.org,m:jkoolstra@xs4all.nl,m:brauner@kernel.org,m:torvalds@linux-foundation.org,m:corbet@lwn.net,m:axboe@kernel.dk,m:david@kernel.org,m:jlayton@kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[bfoster@redhat.com,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[ideasonboard.com,kernel.org,xs4all.nl,linux-foundation.org,lwn.net,kernel.dk,vger.kernel.org];
 	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[laurent.pinchart@ideasonboard.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[ideasonboard.com:+];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[bfoster@redhat.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[redhat.com:+];
+	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,ideasonboard.com:dkim,ideasonboard.com:from_mime,killaraus.ideasonboard.com:mid]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 0D4066F8285
+X-Rspamd-Queue-Id: 46AF86F82F6
 
 On Thu, Jul 02, 2026 at 01:18:06PM +0100, Lorenzo Stoakes wrote:
 > On Thu, Jul 02, 2026 at 07:57:45AM -0400, Brian Foster wrote:
@@ -183,19 +198,41 @@ On Thu, Jul 02, 2026 at 01:18:06PM +0100, Lorenzo Stoakes wrote:
 > Yup I thought of this, have done this on series and they do detect it
 > reliably.
 > 
+
+Interesting.
+
 > But then it becomes an arms race. People will get AI to try to defeat AI
 > detection. So I'm not sure it's a safe road to go down.
+> 
 
-That would be my concern too.
+Yeah that's fair, but my thinking is the goal would be more to detect
+slop content as opposed to just LLM usage. The trend of these
+discussions has been that we generally don't care too much about LLM use
+in general when it's used properly as a tool, but rather as you stated
+earlier we want to be able to quickly dismiss slop to avoid wasting
+maintainer and reviewer time.
 
-At this stage, I think it's better to make sure people know our
-expectations, and expect that the vast majority will understand it's a
-trust-based system where being caught willingly breaching trust will
-have a very high cost. Or have we reached a point where that doesn't
-work any more ?
+It seems like we're generally able to sniff out pure LLM generated
+content in most cases. That suggests we should be able document some
+common patterns that tend to describe slop such that an LLM bot could
+detect and flag it. For example, "Slop bot has detected comments have
+LLM prose and just repeat what the code does," "Slop bot has detected
+unnecessary code volume and duplication," etc. etc.
 
--- 
-Regards,
+So the idea with that would be that defeating the slop bot is the point.
+Consider it a sort of informal/minimal goal before a submitter is
+entitled to human review. But yeah, I guess it's still just a handwavy
+theory that you'd be able to reliably disentagle detection of general
+LLM code generation from something that more qualifies as LLM slop. Just
+thinking out loud.
 
-Laurent Pinchart
+Brian
+
+> >
+> > Brian
+> >
+> 
+> Thanks, Lorenzo
+> 
+
 
