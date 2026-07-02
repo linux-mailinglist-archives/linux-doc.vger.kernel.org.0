@@ -1,58 +1,75 @@
-Return-Path: <linux-doc+bounces-94630-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94631-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Ss1XKwyFRmoLXwsAu9opvQ
-	(envelope-from <linux-doc+bounces-94630-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 17:34:36 +0200
+	id 4U8bMR6IRmrlXwsAu9opvQ
+	(envelope-from <linux-doc+bounces-94631-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 17:47:42 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 025786F978F
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 17:34:36 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id C37236F99FB
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 17:47:41 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=ideasonboard.com header.s=mail header.b=KDXBYfPz;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94630-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94630-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=ideasonboard.com;
+	dkim=pass header.d=xs4all.nl header.s=xs4all01 header.b=hcDea4j4;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94631-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94631-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=xs4all.nl;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id A030B30AB29F
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Jul 2026 15:28:34 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 2E8D13019B21
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Jul 2026 15:33:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B33E8353A9B;
-	Thu,  2 Jul 2026 15:28:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 91E1237A84C;
+	Thu,  2 Jul 2026 15:33:23 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B14963FCC;
-	Thu,  2 Jul 2026 15:28:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D5F82F8EBF
+	for <linux-doc@vger.kernel.org>; Thu,  2 Jul 2026 15:33:21 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783006101; cv=none; b=ofRDBZACIhFdE+DM9Mvg/1FStc0gOZ140VWjZeTnWUx2P7/1G6D/Bobcc0SO3k0j56jNSmIg3hbjEwCGemD7w/HpWJaQ6H0KAo2kSFTXp+do3hw0f9gU/SxuOkE/JsSxOmfAmqQA7ArZX6mbCDTMPsEHa97F0PEqiRVzmkE3KjI=
+	t=1783006403; cv=none; b=KGqpGAor/eP9GH3CSey9jMXYU3y7BF3MecTFXFw9N8iO96mj8qPWZxvV4wDzVHBCqXXz9nBSf/+h+zvS+epMQBD19Qz1GFUNzFLj6QkzqucKev9yR3s16WaO4zz3J6PTBHZIzGWIzDteRU9+q7efXevvi1yORvGF2ZuScQ5n1NM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783006101; c=relaxed/simple;
-	bh=VA040G+v0TOpHUy+dFK5DbNlnXz2nfZoKYv2a39Yzd0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=O28VP1UpsgCuI5i8RWQfHiY4cgCBssjJfXm1nAU/d5dEFXcXS3SNWO1ynoJudCbe10MXEICseIv/2uIrttfOath8uZWxtL1j1ZMLWvP7e8+vpji/ae1zGfLmafAHkN/Xu4TIUwuIRuCVRimDG7jb3xJbJDkkj5LjGeF5jeXRHXo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com; spf=pass smtp.mailfrom=ideasonboard.com; dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b=KDXBYfPz; arc=none smtp.client-ip=213.167.242.64
-Received: from killaraus.ideasonboard.com (2001-14ba-70f3-e800--a06.rev.dnainternet.fi [IPv6:2001:14ba:70f3:e800::a06])
-	by perceval.ideasonboard.com (Postfix) with ESMTPSA id 09A3C3A2;
-	Thu,  2 Jul 2026 17:27:31 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
-	s=mail; t=1783006052;
-	bh=VA040G+v0TOpHUy+dFK5DbNlnXz2nfZoKYv2a39Yzd0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=KDXBYfPzJEfG4yxO3+bupZDdZM/7G1maG6iFYRMdaYzxRFzcx4EgSBEG8BIJxk4t3
-	 6D5QAzkvquAkZvMaaV8MoQzScD+zp3aOkFpwAT6fLwiG4eri3YBQjA8IqGixoiPN5v
-	 hIcSpXemUoJOkevc9cKvlJstr031dZXKSdAA74C8=
-Date: Thu, 2 Jul 2026 18:28:15 +0300
-From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-To: Lorenzo Stoakes <ljs@kernel.org>
-Cc: Jeff Layton <jlayton@kernel.org>,
-	Linus Torvalds <torvalds@linux-foundation.org>,
+	s=arc-20240116; t=1783006403; c=relaxed/simple;
+	bh=6+FOGgp4zzePfz4mEYW62UyRjtfv/25YQIJRauA6qj8=;
+	h=Date:From:To:Cc:Message-ID:In-Reply-To:References:Subject:
+	 MIME-Version:Content-Type; b=rHbRH+PVN5hkE5Gjqa6X348ka6TMv6WxReqvRSjPIhpO+Lz9lDxdNrxxqcmm6IM1BKBOUi61PtBRB5cLhKPWogSM8ASQWvAvjcuFLqjtZgQ2GcSkoVFF16jUejA0BJgKwIWF6qHk1oK07mKrguos1VwD3jCzk9ZfZlanpf1cunM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=xs4all.nl; spf=pass smtp.mailfrom=xs4all.nl; dkim=pass (2048-bit key) header.d=xs4all.nl header.i=@xs4all.nl header.b=hcDea4j4; arc=none smtp.client-ip=195.121.94.186
+X-KPN-MessageId: 566d04c1-762b-11f1-bfba-00505699b430
+Received: from mta.kpnmail.nl (unknown [10.31.161.190])
+	by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+	id 566d04c1-762b-11f1-bfba-00505699b430;
+	Thu, 02 Jul 2026 17:33:13 +0200 (CEST)
+Received: from mtaoutbound.kpnmail.nl (unknown [10.128.135.190])
+	by mta.kpnmail.nl (Halon) with ESMTP
+	id 566bc83b-762b-11f1-b2fb-0050569977a2;
+	Thu, 02 Jul 2026 17:33:13 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=xs4all.nl; s=xs4all01;
+	h=content-type:mime-version:subject:message-id:to:from:date;
+	bh=WvRby7nWdKkPfgg1YGrRbzS6rYiEI/bAfqEiULM34s8=;
+	b=hcDea4j44mVeLZJ2O3CpWJvQSib/wwcogega2L8/HU4BooVE7o5xEE7AD5eGxR6uhh/O2LFLpCpv8
+	 m0LAN1SGAjrmkfriUsXlO/03VjB7ZwizuxaXcN2Z5SnpCSNukpGEdlPkVv+qy3QI+++7KqtF12xq9o
+	 st5QRv7uzv39tlEPQf+PNi+nsal/jWOE/yA7urH7yebUUvVzm332+C/L8pUIQFh4ESVdeT+nonWbJt
+	 xoS9zIXZtFcwPYlveTn+xIuc+SKQfGiAL0YAIsq73USb6rsv1yueYb+G4+/DSfTWjjX00+V29GMxqi
+	 JUoFAI3oZKvbvuExbOLSTs6I+pSNkOw==
+X-KPN-MID: 33|kMZtHkKLbcYpIFkbOIByUxO8S5Ppan/BpkZOKGlvAuukHK68krF7xLgskdCNagy
+ EMgARzD2qpmDWXDg3M6WWB78IfUjZNsDhdcG0xqvrTQc=
+X-CMASSUN: 33|rXWkDtkJkurxpzJh3rFxsTHtFC5VZWkhbCp8YRpP39GWxSS+v71q70JqaKwUeqf
+ LaxoQmMxOZKbEQIDtGQR0cg==
+X-KPN-VerifiedSender: Yes
+Received: from cpxoxapps-mh03 (cpxoxapps-mh03.personalcloud.so.kpn.org [10.128.135.209])
+	by mtaoutbound.kpnmail.nl (Halon) with ESMTPSA
+	id 565f692a-762b-11f1-916a-005056995d6c;
+	Thu, 02 Jul 2026 17:33:13 +0200 (CEST)
+Date: Thu, 2 Jul 2026 17:33:12 +0200 (CEST)
+From: Jori Koolstra <jkoolstra@xs4all.nl>
+To: Greg KH <gregkh@linuxfoundation.org>, Jeff Layton <jlayton@kernel.org>
+Cc: Linus Torvalds <torvalds@linux-foundation.org>,
 	Jonathan Corbet <corbet@lwn.net>,
 	Justin Stitt <justinstitt@google.com>,
+	Lorenzo Stoakes <ljs@kernel.org>,
+	Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
 	Carlos Maiolino <cem@kernel.org>, Jakub Kicinski <kuba@kernel.org>,
-	Jori Koolstra <jkoolstra@xs4all.nl>,
 	Krzysztof Kozlowski <krzk@kernel.org>,
 	Brian Foster <bfoster@redhat.com>,
 	Christoph Hellwig <hch@infradead.org>,
@@ -63,211 +80,108 @@ Cc: Jeff Layton <jlayton@kernel.org>,
 	"Christian Brauner (Amutable)" <brauner@kernel.org>,
 	workflows@vger.kernel.org, linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org
-Subject: Re: [PATCH] Documentation: remove the requirement for LLM attribution
-Message-ID: <20260702152815.GA3559965@killaraus.ideasonboard.com>
+Message-ID: <128935557.3798727.1783006392991@kpc.webmail.kpnmail.nl>
+In-Reply-To: <2026070224-unholy-commode-cf45@gregkh>
 References: <20260702-aidoc-v1-1-735572dfb995@kernel.org>
- <akZ5_aiOuOpgLII1@lucifer>
+ <2026070224-unholy-commode-cf45@gregkh>
+Subject: Re: [PATCH] Documentation: remove the requirement for LLM
+ attribution
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <akZ5_aiOuOpgLII1@lucifer>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Priority: 3
+Importance: Normal
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[ideasonboard.com,none];
-	R_DKIM_ALLOW(-0.20)[ideasonboard.com:s=mail];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	DMARC_POLICY_ALLOW(-0.50)[xs4all.nl,reject];
+	R_DKIM_ALLOW(-0.20)[xs4all.nl:s=xs4all01];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-94630-lists,linux-doc=lfdr.de];
+	FREEMAIL_FROM(0.00)[xs4all.nl];
+	RCPT_COUNT_TWELVE(0.00)[23];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER(0.00)[laurent.pinchart@ideasonboard.com,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[kernel.org,linux-foundation.org,lwn.net,google.com,xs4all.nl,redhat.com,infradead.org,suse.de,intel.com,kernel.dk,vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	FORGED_RECIPIENTS(0.00)[m:ljs@kernel.org,m:jlayton@kernel.org,m:torvalds@linux-foundation.org,m:corbet@lwn.net,m:justinstitt@google.com,m:cem@kernel.org,m:kuba@kernel.org,m:jkoolstra@xs4all.nl,m:krzk@kernel.org,m:bfoster@redhat.com,m:hch@infradead.org,m:ddiss@suse.de,m:broonie@kernel.org,m:jani.nikula@intel.com,m:axboe@kernel.dk,m:david@kernel.org,m:vbabka@kernel.org,m:brauner@kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-94631-lists,linux-doc=lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER(0.00)[jkoolstra@xs4all.nl,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS(0.00)[m:gregkh@linuxfoundation.org,m:jlayton@kernel.org,m:torvalds@linux-foundation.org,m:corbet@lwn.net,m:justinstitt@google.com,m:ljs@kernel.org,m:laurent.pinchart@ideasonboard.com,m:cem@kernel.org,m:kuba@kernel.org,m:krzk@kernel.org,m:bfoster@redhat.com,m:hch@infradead.org,m:ddiss@suse.de,m:broonie@kernel.org,m:jani.nikula@intel.com,m:axboe@kernel.dk,m:david@kernel.org,m:vbabka@kernel.org,m:brauner@kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	HAS_X_PRIO_THREE(0.00)[3];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[laurent.pinchart@ideasonboard.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[ideasonboard.com:+];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[jkoolstra@xs4all.nl,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[xs4all.nl:+];
+	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,ideasonboard.com:dkim,ideasonboard.com:from_mime,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,killaraus.ideasonboard.com:mid]
+	TO_DN_SOME(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linuxfoundation.org:email,xs4all.nl:dkim,xs4all.nl:from_mime,kpc.webmail.kpnmail.nl:mid,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 025786F978F
+X-Rspamd-Queue-Id: C37236F99FB
 
-Hi Lorenzo,
 
-On Thu, Jul 02, 2026 at 03:57:11PM +0100, Lorenzo Stoakes wrote:
-> I'm a little surprised I'm cc'd on this :) I'm not entirely sure if my pushing
-> back on this is going to mean anything but I suppose here goes nothing.
+> Op 02-07-2026 17:07 CEST schreef Greg KH <gregkh@linuxfoundation.org>:
 > 
+>  
 > On Thu, Jul 02, 2026 at 10:32:48AM -0400, Jeff Layton wrote:
 > > We've had this requirement in place in the Documentation for several
 > > months, but it's becoming clear that the signal to noise ratio from this
 > > is quite low.
-> >
+> > 
 > > 1/ It's not universally followed. While many people do try to attribute
 > > the LLMs in good faith, not everyone does for various reasons.
 > 
-> Does something not being universally followed therefore make it worthless?
+> Then let's move to get people to follow it.
 > 
-> You really have to explain that, because this is literally true of any rule
-> whatsoever we might have in the kernel, should we drop all of them?
-> 
-> I think you should replace this with a cogent argument such as that you feel it
-> is not being used in the _majority_ of cases or is very rarely used, and that
-> value is in your view not there.
-> 
-> >
 > > 2/ It basically serves as free advertising for proprietary LLM companies.
 > 
-> I agree with this point, we should drop the model.
+> Who cares, make up a name, all I want is the "signal" that someone is
+> using a LLM so that I can review it as-such.  And if I think someone is
+> not reporting that, I can ask for them to properly attribute it and if
+> they lie, well, that's on them.
 > 
 > > 3/ It's not clear why we want to collect this info in the first place.
 > 
-> Well I made arguments on the other thread, but to repeat:
-> 
-> - It makes it easier to engage with people when they do ack it.
-> 
-> - It makes it far quicker to be able to do so.
-> 
-> - There's a barrier to mentioning an LLM if it's not provided - people can get
->   upset, or it can cause issues to raise it as a concern.
-> 
-> - Even if it's only there in _some_ cases, it makes _those_ cases easier to deal
->   with.
-
-As far as I understand, all the above arguments would also be addressed
-with either a free-formed mention of LLM usage, or a formal
-"non-advertising" tag that is not merged in the kernel history, right ?
-
-> - It provides some (incomplete) data that might make it easier to deal with
->   bug-causing patches.
-> 
-> - It provides some (incomplete) data on bug rates with/without LLMs.
-
-For those two I suppose a machine-parseable tag in the git history could
-improve things slightly compared to information provided in the patch
-submission that would not get recorded in the history.
-
-Is this why you have a preference for a formal tag compared to a
-free-formed mention ?
-
-> I do agree they're far far less useful when there's not some indication of how
-> much of the patch was LLM-generated.
-> 
-> Their usefulness is obviously deeply far from perfect, but not zero.
+> We want to know if a LLM is being used.
 > 
 > > Given that the data this provides is flawed at best and is being
 > > collected for a purpose that isn't clear, let's just kill the
 > > requirement for these tags from the kernel at large.
 > 
-> I feel there are purposes. Perhaps the argument is stronger for having the tags
-> on submissions rather than actually in-tree, however.
+> No, please do not do this.  It's useful already for many patches in my
+> subsystems, and is only going to be used more in the future.
+> 
+> thanks,
+> 
+> greg k-h
 
-I really think we need to have the information at submission. I think I
-have a slight preference for not recording it in the kernel tree, but
-only slight.
+Why not:
 
-> > Signed-off-by: Jeff Layton <jlayton@kernel.org>
-> 
-> I think simplifying by requiring only 'LLM' and adding a line simply suggesting
-> a comment giving a sense of how much was used, and then perhaps a paragraph saying
-> 
-> 	Subsystems may vary in their acceptance of this patch blah blah blah
-> 
-> Could be a compromise?
-> 
-> > ---
-> > Christian had proposed watering down the LLM attribution, but I think
-> > it's not productive to try and track this until we have a clearer sense
-> > of what we want to do with this information and how to make it more
-> > reliable.
-> 
-> Well he's moved now to stridently saying we should do what you're doing here so
-> presumably you're now in alignment.
-> 
-> > ---
-> >  Documentation/process/coding-assistants.rst  | 22 ----------------------
-> >  Documentation/process/submitting-patches.rst | 10 ----------
-> >  2 files changed, 32 deletions(-)
-> >
-> > diff --git a/Documentation/process/coding-assistants.rst b/Documentation/process/coding-assistants.rst
-> > index 899f4459c52d..c4cc0917fc92 100644
-> > --- a/Documentation/process/coding-assistants.rst
-> > +++ b/Documentation/process/coding-assistants.rst
-> > @@ -35,25 +35,3 @@ is responsible for:
-> >  * Ensuring compliance with licensing requirements
-> >  * Adding their own Signed-off-by tag to certify the DCO
-> >  * Taking full responsibility for the contribution
-> > -
-> > -Attribution
-> > -===========
-> > -
-> > -When AI tools contribute to kernel development, proper attribution
-> > -helps track the evolving role of AI in the development process.
-> > -Contributions should include an Assisted-by tag in the following format::
-> > -
-> > -  Assisted-by: AGENT_NAME:MODEL_VERSION [TOOL1] [TOOL2]
-> > -
-> > -Where:
-> > -
-> > -* ``AGENT_NAME`` is the name of the AI tool or framework
-> > -* ``MODEL_VERSION`` is the specific model version used
-> > -* ``[TOOL1] [TOOL2]`` are optional specialized analysis tools used
-> > -  (e.g., coccinelle, sparse, smatch, clang-tidy)
-> > -
-> > -Basic development tools (git, gcc, make, editors) should not be listed.
-> > -
-> > -Example::
-> > -
-> > -  Assisted-by: Claude:claude-3-opus coccinelle sparse
-> > diff --git a/Documentation/process/submitting-patches.rst b/Documentation/process/submitting-patches.rst
-> > index cc6a1f73d7f2..b74c38aa9770 100644
-> > --- a/Documentation/process/submitting-patches.rst
-> > +++ b/Documentation/process/submitting-patches.rst
-> > @@ -634,16 +634,6 @@ bugzilla.kernel.org is a public place in this sense, but email addresses
-> >  used there are private; so do not expose them in tags, unless the person
-> >  used them in earlier contributions.
-> >
-> > -Using Assisted-by:
-> > -------------------
-> > -
-> > -If you used any sort of advanced coding tool in the creation of your patch,
-> > -you need to acknowledge that use by adding an Assisted-by tag.  Failure to
-> > -do so may impede the acceptance of your work.  Please see
-> > -Documentation/process/coding-assistants.rst for details regarding the
-> > -acknowledgment of coding assistants.
-> > -
-> > -
-> >  .. _the_canonical_patch_format:
-> >
-> >  The canonical patch format
-> >
-> > ---
-> > base-commit: 665159e246749578d4e4bfe106ee3b74edcdab18
-> > change-id: 20260702-aidoc-7e18f221d63a
+Keep the tag like David suggested as:
 
--- 
-Regards,
+Assisted-by: LLM # automated removal of useless blabla
 
-Laurent Pinchart
+I am indifferent to whether this should be a tag or just below the --- .
+
+And add something like the systemd guidelines that Christian linked to to the
+AI Coding Assistants doc page. This provides much more useful guidelines than
+what is currently there. I triggered this whole discussion by reading the page
+and adding the model to some clean-up commits, so some people do read it...
+
+Best,
+Jori.
 
