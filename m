@@ -1,251 +1,229 @@
-Return-Path: <linux-doc+bounces-94699-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94700-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id HZCWHQnORmq1dwsAu9opvQ
-	(envelope-from <linux-doc+bounces-94699-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 22:46:01 +0200
+	id aTqbI3HURmpAeQsAu9opvQ
+	(envelope-from <linux-doc+bounces-94700-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 23:13:21 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id D828D6FCCDE
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 22:46:00 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id ECC6E6FCE30
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 23:13:20 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=UaD5CREX;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94699-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-94699-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=paul-moore.com header.s=google header.b=Ck61Fc5T;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94700-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94700-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=paul-moore.com;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 8C81A30416BA
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Jul 2026 20:45:59 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 73E043046EF3
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Jul 2026 21:13:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A500E2EDD58;
-	Thu,  2 Jul 2026 20:45:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A6B1C38E8D1;
+	Thu,  2 Jul 2026 21:13:06 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6423D1D7E41;
-	Thu,  2 Jul 2026 20:45:57 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783025158; cv=none; b=o60W65vH/p17Ezs8NXxGjKMr+SVCH/gGKbVhMvIo/iQZYEGMgUFh/M7eLyWo48YNkGfrdqFeKYaiEfl0RPpMTV1pZTiV2fFxHlQBGjyAkNq5s6PYNZf30fwff0/AhsaCFMYJxxp2zL6JMmr0fYW0efTJVATb5bXU4N003c5HOPI=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783025158; c=relaxed/simple;
-	bh=ba3X3ZETjVs6YknWjbiZ8awUBHTLyUR0p9siPtBSq5s=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=hsKcTKE3HwfGpvr18Mfgh0HAz5o4M3HlQvzq9/gFmYNiLlnVZckuXzHCJRtC/QrjYL5+2F3N0jlMlDvwNgjyfWUBFg4UR3YpxzkcO6rnvBg+6qO1rXtbFQJlbURfSzOjhFADjXXvoXtEJ+YdIN+kaKd0DGzOZVPBfYFnIAhJTyE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UaD5CREX; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7E22A1F000E9;
-	Thu,  2 Jul 2026 20:45:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783025157;
-	bh=RgKO/UZyvy5Z38gyC0IxY1FJQhRYi6rg13CXydLdQY0=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date;
-	b=UaD5CREX6zIC4y3TKyphGTRRC28mz0dermBnriIDo4VJeBY/fdSm+bo4SMeeqxcg4
-	 2nZAzjliM6+hr13yB3w26OsBLeq2/LrH4mPoYTvdvIoIgX7/pLVzQh7YACklPUTPLp
-	 FLllWVPCLOhkab1Df0IWNyhs3Ywb2DxH7ixWEd8w6zgUPmPOydjr19iHGh9HjLcZ4F
-	 9UCuRvgiy4zhYBZoDyEW5Z9msFbTaIp5y2F8IW6O+Mb0197Xa/ngseuyyyv0Wudwne
-	 iFoJGUnjorvAS2hYs4zLCLoOB5VYqaG8YVDJzvMwOcYqcJ7sZ/KrRKbchO6zN9ftrj
-	 z/YENEra/5DFg==
-From: Thomas Gleixner <tglx@kernel.org>
-To: Michal =?utf-8?Q?Such=C3=A1nek?= <msuchanek@suse.de>
-Cc: Peter Zijlstra <peterz@infradead.org>, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>, Huacai Chen
- <chenhuacai@kernel.org>, WANG Xuerui <kernel@xen0n.name>, Madhavan
- Srinivasan <maddy@linux.ibm.com>, Michael Ellerman <mpe@ellerman.id.au>,
- Nicholas Piggin <npiggin@gmail.com>, "Christophe Leroy (CS GROUP)"
- <chleroy@kernel.org>, Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt
- <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti
- <alex@ghiti.fr>, Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik
- <gor@linux.ibm.com>, Alexander Gordeev <agordeev@linux.ibm.com>, Christian
- Borntraeger <borntraeger@linux.ibm.com>, Sven Schnelle
- <svens@linux.ibm.com>, Andy Lutomirski <luto@kernel.org>, Ingo Molnar
- <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, Dave Hansen
- <dave.hansen@linux.intel.com>, x86@kernel.org, "H. Peter Anvin"
- <hpa@zytor.com>, Andrew Donnellan <andrew+kernel@donnellan.id.au>, Mark
- Rutland <mark.rutland@arm.com>, Arnd Bergmann <arnd@arndb.de>, Jiaxun Yang
- <jiaxun.yang@flygoat.com>, Ryan Roberts <ryan.roberts@arm.com>, Greg
- Kroah-Hartman <gregkh@linuxfoundation.org>, Mukesh Kumar Chaurasiya
- <mkchauras@linux.ibm.com>, Shrikanth Hegde <sshegde@linux.ibm.com>, Zong
- Li <zong.li@sifive.com>, Nam Cao <namcao@linutronix.de>, Deepak Gupta
- <debug@rivosinc.com>, Lukas Gerlach <lukas.gerlach@cispa.de>, Rui Qi
- <qirui.001@bytedance.com>, Kees Cook <kees@kernel.org>,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- loongarch@lists.linux.dev, linuxppc-dev@lists.ozlabs.org,
- linux-riscv@lists.infradead.org, linux-s390@vger.kernel.org
-Subject: Re: [RFC] entry: Untangle the return value of
- syscall_enter_from_user_mode from syscall NR
-In-Reply-To: <akZPakNl6JT_jgGd@kunlun.suse.cz>
-References: <akVRcPsD_R_CE1qW@kunlun.suse.cz> <878q7tprau.ffs@fw13>
- <akZPakNl6JT_jgGd@kunlun.suse.cz>
-Date: Thu, 02 Jul 2026 22:45:54 +0200
-Message-ID: <87jyrdnmrh.ffs@fw13>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5BC3D385D7D
+	for <linux-doc@vger.kernel.org>; Thu,  2 Jul 2026 21:13:05 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783026786; cv=pass; b=EGetyHQwLcWBYtv4nDQbfiPjhgjtXq7rl+bM46bMle6jpRjPBmpU6AkWJr2ta9uvyRQqFKi0J+yyVjZboTo1a87t37s/AHnb5A7Fl/M+b0u8vKbg7nlUzIx+49zTqq6+CUqv/9zTRYeaKn1LNAPaPj05LA7v2g+aVF8AfPxDtSY=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783026786; c=relaxed/simple;
+	bh=6cZbDjgOL37MD41a4mUgO48Jw/rtoj/VLkwNf4EshIs=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=rmE3FsSVWI7vkvHmE9oRkaOOQAqGluHD9RNGWf2t+X7VneCDDDLFZVBjP1/+mVebvAfqFLqPjgXAMMQjCzfG+CSa9ssrVaYYyU5Wh6ouIdE/FHqrvgVYL+/4+puwNU0azRL5LVGFITgMb4t13sQyg03o4AjOZnmsbXnmP7Bsskw=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=paul-moore.com; spf=pass smtp.mailfrom=paul-moore.com; dkim=pass (2048-bit key) header.d=paul-moore.com header.i=@paul-moore.com header.b=Ck61Fc5T; arc=pass smtp.client-ip=209.85.214.173
+Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2c7ebfb63c6so17462435ad.3
+        for <linux-doc@vger.kernel.org>; Thu, 02 Jul 2026 14:13:05 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783026784; cv=none;
+        d=google.com; s=arc-20260327;
+        b=AeNLrHGbjb6PkV8rDy9q0qY4Sy5DKrZv8hplivRIU1EvX8cxfVOGMO7SKrI+VBNbxR
+         9nTCqJwsMHEh+8oOfs6MSoYS3FCP1yNMNo0OkO9oyYTZvRVCwvzEOeUbBb2L6n3X8Qam
+         JGfBudoeAa23iBWlcs6Wg+eow1D1GNA/8XEzkcFL6RoD3AmT5kHfX1dMQ068ht8v4Q3h
+         zi8IPvQkTqYqkA/fDw82DTlRdTL66cy9medxCl1DOfGzuUF1LWhqKOdGbcuxF5ZXW00I
+         SBovEm4nyqsGSHdNkk0KOG05zTsMyujYyeaTQiVITv0+Fgg1bdvk2I0eGWeKdlpwVXAn
+         BgOw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=AyIW9b1L4RTcWNQ05u8o4YPVZ1U+N1SMUlgeq725Esc=;
+        fh=0swqiWcByUxWULuSw4jLYjsjbX7q+/bVsB4PzqYuquI=;
+        b=NMAlEElLh/EG+k2c+nqV7UBfsS5Rxfq8oO8jFW0q5lftks40fANMxaV2Qrm28VGPFn
+         NcVldDG1lG1ZqT8fFUToIy+i22frj3GGLs4avRroM5wDAtexIq1eQhJQUBASy+jNaBHY
+         u+J1C75tQvxnj9clcmtL8mnhi43C5sDPPp/lajz5hoAs89l22sxLAsnImSFmCHev5zrV
+         48lqPQeDaOzAoYo43jGyHKmumK9m5+WQHwkKD5JYdLCpvYueFckWWWMqR3U2JR06mg64
+         crpaMlr50nnPTNnR5/Z+P5PMOp9RkC/C2YrmnZ70+my2h1TatjJbWR/ZpWjMfDWX/hrJ
+         dofA==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=paul-moore.com; s=google; t=1783026784; x=1783631584; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=AyIW9b1L4RTcWNQ05u8o4YPVZ1U+N1SMUlgeq725Esc=;
+        b=Ck61Fc5TJzIU09+axx+e6RLYwDfGVqprsoe1m2tRj4enLqm0IA8/WvBxd04tQAaBIB
+         9lQUsZEYbaCGOpP8E4rC242gtPQnirRjBU+EOLWNY36xMxvff1qytC3d15QIMGCFTVRf
+         n4mfpzQmQkbbOaEdaNFIzkkh3I6RmvoL09K4bkE2wlrV0k6U4oBom/XqLGIalWKessfp
+         AG43lp7KJrk47m3/UJeuw13uKE7hVwwvGDiW7VmPyJF7aoC3JiTALcaHuF6uQf4i3jKt
+         6ko+xoobjCKjtpAymZl/QgRORh21J4ihVvZXnWIaR5iRpxt+vFRhM2mg1MBaFMTzsO1e
+         b8Ww==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783026784; x=1783631584;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=AyIW9b1L4RTcWNQ05u8o4YPVZ1U+N1SMUlgeq725Esc=;
+        b=X6oPfBuPzfKtDhq+9eoEkm92tLyd5CuxK6Ee2YhQdNe0Zq6ZCkHB8O8upUWdLzRj+S
+         ESR9Z08KdaroCdTNMdEk7p/ovKUZzywlc1v74dS3Sr0TfQKC6xOWPNv5z8N//NMfkKqt
+         ZzlUGXiYTNAPJhpl1aThQ3H7p5dOCj+ktxv9xzqmhRzhyTry3p13yvlz5iObD/uPfP9N
+         Q0b1po9qY4Tq23QFvSMUTjYoXfORUynCKP5wbQz5wP/Nbn9SNpRP6AALej1ba1BTv3iq
+         SOtcSg14QrMsebbZ0wzij/vUaj4uLjn34sD/66VzDMMiTLT1sj+osZrOA4UdeMUl6rVJ
+         fOhA==
+X-Forwarded-Encrypted: i=1; AHgh+RrU2dHtK/j8uWK75wsdWy7G6yB72sa3XK92uYitGmgJ6v1YwAPOuFiNQcRCkPe2YmShLbRDL3EUko4=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw5E4X+9v5YNP7cdDF4Rkwoi+sAGRW6tJzNHfURdeaSL3gO7TdY
+	DVpd8G8HmfqTbjJqZQvE+NIFPRklenA/I+p7R/zakNZJSTMTyhQUfgvhlkGmzPuIYcQPVdBYx3F
+	cLgNvfufxjKOG61JhJW8Lo9V9elpeSo26m9zm4vIq
+X-Gm-Gg: AfdE7ckytDR/Yoq1wNsntExeOXHq+JJFoV9048NOXuGmN7bgA5v5MW7nkJi1VBayf9w
+	qmrjzDkW3U5nC2UHjllVIyTW4IPHl24caeEx/D4aOoBBMWwECDocdq4FekarFx2rWyZc2Mmyjl4
+	l3S7k/DaM/FDKRrl3CniSbyZw5/77aRoY7tL55cipnG2jyf22r/7WZ/h7T9YxAeW4lFwGkBFzZD
+	V4gpsJte0QzuyMzs64TWkibUzuTQNYR0bDHgWIG/u0AS3sAfOmS0ybbZfi1lwuyJPegDGT6
+X-Received: by 2002:a17:902:f710:b0:2c9:854b:d53c with SMTP id
+ d9443c01a7336-2ca911f9311mr68892545ad.36.1783026784472; Thu, 02 Jul 2026
+ 14:13:04 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+References: <20260529-remove-task-euid-v4-0-07cbdf3af980@google.com>
+ <CAHC9VhR5Ca+WyP2OiNGtL1SqHn0SwLe=M9SB8D2bxtdS52quhg@mail.gmail.com>
+ <ah51DY5yfaNZejBd@google.com> <CAHC9VhQyNzxJgdMkmEsOeAQ7Wt2L+eW6aNLjeoYmnCQLmcYRnw@mail.gmail.com>
+ <CAH5fLghJaFXheAZqKyM9Cdo6iqTw1W=haA79POhmZWEfuKujRA@mail.gmail.com>
+In-Reply-To: <CAH5fLghJaFXheAZqKyM9Cdo6iqTw1W=haA79POhmZWEfuKujRA@mail.gmail.com>
+From: Paul Moore <paul@paul-moore.com>
+Date: Thu, 2 Jul 2026 17:12:52 -0400
+X-Gm-Features: AVVi8Cc226agFjsV3IzoL0ZtqLK8mwQAJ-H8dg4RuGGydr2Hd_jseubNHLDGNTk
+Message-ID: <CAHC9VhTfOnOgOzGk9==wJYKx5gAi3Zf3oTwbj183o0_xxrfKag@mail.gmail.com>
+Subject: Re: [PATCH v4 0/2] Delete task_euid()
+To: Alice Ryhl <aliceryhl@google.com>
+Cc: Serge Hallyn <sergeh@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Shuah Khan <skhan@linuxfoundation.org>, 
+	Alex Shi <alexs@kernel.org>, Yanteng Si <si.yanteng@linux.dev>, 
+	Dongliang Mu <dzm91@hust.edu.cn>, Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>, 
+	Gary Guo <gary@garyguo.net>, =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
+	Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
+	Trevor Gross <tmgross@umich.edu>, Danilo Krummrich <dakr@kernel.org>, Jann Horn <jannh@google.com>, 
+	linux-security-module@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.16 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[paul-moore.com,none];
+	R_DKIM_ALLOW(-0.20)[paul-moore.com:s=google];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:aliceryhl@google.com,m:sergeh@kernel.org,m:corbet@lwn.net,m:gregkh@linuxfoundation.org,m:skhan@linuxfoundation.org,m:alexs@kernel.org,m:si.yanteng@linux.dev,m:dzm91@hust.edu.cn,m:ojeda@kernel.org,m:boqun@kernel.org,m:gary@garyguo.net,m:bjorn3_gh@protonmail.com,m:lossin@kernel.org,m:a.hindborg@kernel.org,m:tmgross@umich.edu,m:dakr@kernel.org,m:jannh@google.com,m:linux-security-module@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:rust-for-linux@vger.kernel.org,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-94700-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[45];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:msuchanek@suse.de,m:peterz@infradead.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:chenhuacai@kernel.org,m:kernel@xen0n.name,m:maddy@linux.ibm.com,m:mpe@ellerman.id.au,m:npiggin@gmail.com,m:chleroy@kernel.org,m:pjw@kernel.org,m:palmer@dabbelt.com,m:aou@eecs.berkeley.edu,m:alex@ghiti.fr,m:hca@linux.ibm.com,m:gor@linux.ibm.com,m:agordeev@linux.ibm.com,m:borntraeger@linux.ibm.com,m:svens@linux.ibm.com,m:luto@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:andrew+kernel@donnellan.id.au,m:mark.rutland@arm.com,m:arnd@arndb.de,m:jiaxun.yang@flygoat.com,m:ryan.roberts@arm.com,m:gregkh@linuxfoundation.org,m:mkchauras@linux.ibm.com,m:sshegde@linux.ibm.com,m:zong.li@sifive.com,m:namcao@linutronix.de,m:debug@rivosinc.com,m:lukas.gerlach@cispa.de,m:qirui.001@bytedance.com,m:kees@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:loongarch@lists.linux.dev,m:linuxppc-dev@lists.ozlabs.o
- rg,m:linux-riscv@lists.infradead.org,m:linux-s390@vger.kernel.org,m:andrew@donnellan.id.au,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94699-lists,linux-doc=lfdr.de];
-	FORGED_SENDER(0.00)[tglx@kernel.org,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FORGED_SENDER(0.00)[paul@paul-moore.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[21];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FREEMAIL_CC(0.00)[kernel.org,lwn.net,linuxfoundation.org,linux.dev,hust.edu.cn,garyguo.net,protonmail.com,umich.edu,google.com,vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tglx@kernel.org,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[infradead.org,lwn.net,linuxfoundation.org,kernel.org,xen0n.name,linux.ibm.com,ellerman.id.au,gmail.com,dabbelt.com,eecs.berkeley.edu,ghiti.fr,redhat.com,alien8.de,linux.intel.com,zytor.com,donnellan.id.au,arm.com,arndb.de,flygoat.com,sifive.com,linutronix.de,rivosinc.com,cispa.de,bytedance.com,vger.kernel.org,lists.linux.dev,lists.ozlabs.org,lists.infradead.org];
+	FROM_NEQ_ENVFROM(0.00)[paul@paul-moore.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[paul-moore.com:+];
+	ALIAS_RESOLVED(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,kernel];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,vger.kernel.org:from_smtp]
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,mail.gmail.com:mid,paul-moore.com:dkim,paul-moore.com:email,paul-moore.com:url,paul-moore.com:from_mime,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: D828D6FCCDE
+X-Rspamd-Queue-Id: ECC6E6FCE30
 
-On Thu, Jul 02 2026 at 13:45, Michal Such=C3=A1nek wrote:
-> On Thu, Jul 02, 2026 at 01:24:57PM +0200, Thomas Gleixner wrote:
->> On Wed, Jul 01 2026 at 19:42, Michal Such=C3=A1nek wrote:
->> > The return value of syscall_enter_from_user_mode is used both for the
->> > adjusted syscall number and the indicator that a syscall should be
->> > skipped.
->> >
->> > As seccomp can be invoked on any syscall, including invalid ones this
->> > somewhat undermines seccomp.
->> >
->> > While the seccomp variants that terminate the process do not need to
->> > care about this for the filter that sets the syscall return value this
->> > disctinction is required.
->>=20
->> You completely fail to explain why and what actual problem you are
->> trying to solve. At least I can't figure it out from the above word
->> salad.
+On Wed, Jun 3, 2026 at 1:05=E2=80=AFPM Alice Ryhl <aliceryhl@google.com> wr=
+ote:
+> On Wed, Jun 3, 2026 at 6:05=E2=80=AFPM Paul Moore <paul@paul-moore.com> w=
+rote:
+> >
+> > On Tue, Jun 2, 2026 at 2:15=E2=80=AFAM Alice Ryhl <aliceryhl@google.com=
+> wrote:
+> > > On Mon, Jun 01, 2026 at 07:13:37PM -0400, Paul Moore wrote:
+> > > > On Fri, May 29, 2026 at 5:33=E2=80=AFAM Alice Ryhl <aliceryhl@googl=
+e.com> wrote:
+> > > > >
+> > > > > The task_euid() method is a very weird method, and Binder was the=
+ only
+> > > > > user. As of commit 65b672152289 ("binder: use current_euid() for
+> > > > > transaction sender identity") Binder doesn't use task_euid() anym=
+ore,
+> > > > > so we can delete this method.
+> > > >
+> > > > Given the problems from last time, it seems like it might be pruden=
+t
+> > > > to let the commit have some time to "breathe" in a proper release, =
+I'd
+> > > > suggest merging this not for the upcoming v7.2 merge window but
+> > > > instead waiting for v7.3.
+> > >
+> > > Sure, that makes sense. I'll resend after the merge window.
+> >
+> > No need to resend if there are no changes (see below), it's in
+> > patchwork and I'm tracking it so you're all set.  I'll send another
+> > notice when I merge it.
+> >
+> > > > > My suggestion would be to merge this through the LSM tree.
+> > > >
+> > > > That's fine with me.  I'd also suggest updating the commit descript=
+ion
+> > > > in patch 1/2 to indicate that binder is no longer using task_euid()=
+;
+> > > > it currently reads like it is still being used.
+> > >
+> > > I guess this occurred because when patch 1 was written, it really *wa=
+s*
+> > > still being used.
+> >
+> > Yeah, I understand the world has changed since patch 1/2 was written,
+> > which is okay, we just need to update the commit description ... which
+> > should be a trivial task.
+> >
+> > > Perhaps we could pick up only patch 1 now since even
+> > > if we run into problems and Binder has to go back to using task_euid(=
+),
+> > > clarifying the docs is still useful.
+> >
+> > I assumed that was one of the reasons for splitting the changes across
+> > two patches (reverting patch 2/2 leaves patch 1/2 intact).
+> > Regardless, we're at -rc6 and with patch 1/2 being purely a comment
+> > update I don't see an urgent rush on this, especially considering that
+> > if I did pick it up now, it would be for the v7.2 merge window and the
+> > binder/current_euid() change will ship in v7.1.
+> >
+> > Let's update the commit description - you've got a couple of weeks to
+> > do that - and then we'll merge everything once the v7.2 merge window
+> > closes.
 >
-> syscall_enter_from_user_mode returns the new syscall number after doing
-> something arbitrarry with it, including running seccomp.
->
-> Wehn the syscall is already handled, eg. by seccomp filtering it returns
-> -1 as the new syscall number. -1 is an invalid syscall number but it can
-> still be filtered by seccomp.
+> Sounds good, thanks!
 
-Once syscall_enter_from_user_mode() returns -1 nothing can filter it
-anymore.
+Just wanted to check in and see if this is still on your todo list?
+No rush, we are only at -rc1, but I was reminded of this while merging
+other patches and just wanted to check ;)
 
-> When the syscall number was -1 to start with it's not possible to
-> determine if the syscall was fileterd from the return value. s390
-> returns the filtered state in a flag it sets on the regs structure,
-> avoiding this problem.
-
-What needs to determine whether the syscall was filtered or not?
-
-> However, the API should be specified in a way that does not require
-> everyone implementing such flag.
-
-Which exact problem does the flag solve?
-
->> > -	instrumentation_begin();
->> > -	if (!invoke_syscall(regs, nr) && nr !=3D -1)
->> > -	 	result_reg(regs) =3D __sys_ni_syscall(regs);
->> > -	instrumentation_end();
->> > +	/* Skip syscall when -1 is returned */
->> > +	if (!syscall_enter_from_user_mode(regs, &nr)) {
->>=20
->> Seriously?
->>=20
->> If we go and separate the syscall number from the return value, then the
->> return value 0 means success and anything else fail. Which in other
->> words is a boolean. So instead of tastelessly adding a completely
->> nonsensical comment about -1 here, syscall_enter_from_user_mode() wants
->> to have the return value type bool with a proper boolean logic: true =3D
->> success, false =3D abort.
->
-> We have that very same API down to __secure_computing() which returns
-> boolean represented as -1 and 0 values. That does not mean it's not
-> tasteless.
-
-Hahahahaha.
-
-We have a lot of functions which have a boolean return value but a
-int/long return type for historical reasons.
-
-We've added bool because it's not ambiguous and allows the compiler to
-optimize better. It also makes the code more clear. Modern code uses a
-non-boolean return type only when there is an actual reason for it,
-e.g. propagating an error code all the way back through the call chain.
-The historical 0=3Dsuccess <0 =3D errorcode model really want's to be
-restricted to such cases.
-
-Just for the record:
-
-  https://lore.kernel.org/all/67c3ae5c-d88b-4172-9996-4e2046b7e0dc@huawei.c=
-om/
-  https://lore.kernel.org/all/20260629130616.642022-2-ruanjinjie@huawei.com/
-
-So I stand with my comment that it is sloppy and tasteless to slap an
-argument into a pile of functions, claim separation of return value and
-syscall number and leave the return value in an ill-defined state.
-
->> > @@ -168,8 +168,7 @@ __visible noinstr void do_int80_emulation(struct p=
-t_regs *regs)
->> >  	nr =3D syscall_32_enter(regs);
->> >=20=20
->> >  	local_irq_enable();
->> > -	nr =3D syscall_enter_from_user_mode_work(regs, nr);
->> > -	do_syscall_32_irqs_on(regs, nr);
->> > +	syscall_enter_from_user_mode_work(regs, &nr);
->>=20
->> How exactly is this ever going to invoke a valid syscall?
->
-> That's one of the problems with giant all-in-one patch, things like this
-> easily slip in. However, it is in cluded mostly for illustration, I
-> don't expect anyone to merge this as-is.
-
-It's a problem with hastily cobbled together slop. Even RFC patches
-should at least be functional.
-=20
->> > +	if (!syscall_enter_from_user_mode_work(regs, &nr)) {
->> > +		nr &=3D GENMASK(31, 0);
->> > +		do_syscall_32_irqs_on(regs, nr);
->>=20
->>   do_syscall_32_irqs_on(regs, (int)nr);
->>=20
->> would be too simple, right?
->
-> Also way less explicit.
-
-Now you care about explicit, but the return value mess can be left
-ambiguous, right?
-
-Aside of that, the cast is very much explicit for people who can read C.
-
-It would be great if you could sit back and come up with a very explicit
-and comprehensible explanation for the problem you are trying to solve.
-
-Thanks,
-
-        tglx
+--=20
+paul-moore.com
 
