@@ -1,177 +1,200 @@
-Return-Path: <linux-doc+bounces-94683-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94684-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id DgMSN8etRmrfbQsAu9opvQ
-	(envelope-from <linux-doc+bounces-94683-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 20:28:23 +0200
+	id XwjvK+G0RmqrbwsAu9opvQ
+	(envelope-from <linux-doc+bounces-94684-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 20:58:41 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 217AE6FC089
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 20:28:23 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id ACF746FC5AF
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 20:58:40 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=ideasonboard.com header.s=mail header.b=iJmiFWRZ;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94683-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-94683-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=ideasonboard.com;
+	dkim=pass header.d=dilger-ca.20251104.gappssmtp.com header.s=20251104 header.b=eHrxH70q;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94684-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-94684-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=none;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 7512E3002E06
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Jul 2026 18:26:38 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 945C53036075
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Jul 2026 18:46:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BDBB63A6B71;
-	Thu,  2 Jul 2026 18:26:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0C43533F5A2;
+	Thu,  2 Jul 2026 18:46:35 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1134835F8C9;
-	Thu,  2 Jul 2026 18:26:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E249318BB3
+	for <linux-doc@vger.kernel.org>; Thu,  2 Jul 2026 18:46:33 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783016797; cv=none; b=upxOw5iPw48+RIR9QolIvP4mRH0jxHssc3ukzhTUG3vNZUK9OhKexfofHcuLQskFRImQSiUrdtSClyj86ovfAtRoUvgzRkgXIk5XFIv01xKKbrJbD9iIswMldyQDspIL6j8kLgY+7T28mNPGGe4TnRlNBVRMBO8ll4jeOLq+p2E=
+	t=1783017994; cv=none; b=ouGWxNbiUnKLccQd+g6akwDHFiQiVbKtom1jaNFNWQVYeqJgZ9Zr4DC+cD+obUeb1NfKo+Ju7id20GK0l4VKaeIse7YKPps3amkNNcSSv+FqHNV0Nkrdbi4M9zx8VSZiF6mw59dWV6fQCsa8Rzp5Iu7BnmoYHEkmGGmJKijKBz4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783016797; c=relaxed/simple;
-	bh=702n5uwlpSV1g6DnemtXU12j9s/IrN3vzdMAjbwngY8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=QjvjOWvqsHw1aC4As2j2Vi7Bacm63JNGvl0SL3N00YZo9vA6BcxM2CY/QbUnXUW1b/9TbW6EpvbVg6afFtM7TJGQVNKVEeydbMExTIgczmcZvyg/Uzhd8B3Hgash9d8XPBZhYJ6Pby0bSgocLdURbp3sSJALNG/RdKIk20eIa0k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com; spf=pass smtp.mailfrom=ideasonboard.com; dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b=iJmiFWRZ; arc=none smtp.client-ip=213.167.242.64
-Received: from killaraus.ideasonboard.com (2001-14ba-70f3-e800--a06.rev.dnainternet.fi [IPv6:2001:14ba:70f3:e800::a06])
-	by perceval.ideasonboard.com (Postfix) with ESMTPSA id E75B622B;
-	Thu,  2 Jul 2026 20:25:47 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
-	s=mail; t=1783016748;
-	bh=702n5uwlpSV1g6DnemtXU12j9s/IrN3vzdMAjbwngY8=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=iJmiFWRZs2etEg/T1pnKYxd5hp/zibXGasTOyP00NWKcO2U4NEWKGvmRnw2ajt6yG
-	 WuefcF6dNx3eM0jXuTJ2b+uog4KfJM/Kwc1sMZxZfVYPZgwD6ySbrYtu/WL4cQfXEa
-	 3ZRpfA3MTbhs70GUhrSVUBt1gz70EG4tOupJnQ2c=
-Date: Thu, 2 Jul 2026 21:26:32 +0300
-From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-To: Lorenzo Stoakes <ljs@kernel.org>
-Cc: Jonathan Corbet <corbet@lwn.net>,
-	Linus Torvalds <torvalds@linux-foundation.org>,
-	Justin Stitt <justinstitt@google.com>,
-	Carlos Maiolino <cem@kernel.org>, Jakub Kicinski <kuba@kernel.org>,
-	Jori Koolstra <jkoolstra@xs4all.nl>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Brian Foster <bfoster@redhat.com>,
-	Christoph Hellwig <hch@infradead.org>,
-	David Disseldorp <ddiss@suse.de>, Mark Brown <broonie@kernel.org>,
-	Jani Nikula <jani.nikula@intel.com>, Jens Axboe <axboe@kernel.dk>,
-	David Hildenbrand <david@kernel.org>,
-	Vlastimil Babka <vbabka@kernel.org>,
-	Christian Brauner <brauner@kernel.org>,
-	Jeff Layton <jlayton@kernel.org>, workflows@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org
-Subject: Re: [PATCH] docs: link AI coding assistants and tool-generated
- content pages
-Message-ID: <20260702182632.GK3534761@killaraus.ideasonboard.com>
-References: <20260702164901.121128-1-ljs@kernel.org>
+	s=arc-20240116; t=1783017994; c=relaxed/simple;
+	bh=eEfxaVDeuHg/2O86tGs17Sc/sYUDZxKDGC64ZP7eDt0=;
+	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
+	 Message-Id:References:To; b=pWjMPqor4pBEonD63dduTwcgXCQQjH3xp3EYSSwzpuE8dtqbVasI+gMFhT7sob/FPAWFSc/ynb94ZQi5VJIulRljEb1qMBiuOZ1Lw6/91iFBzv2DfjLRwaY0tNW8wBMLiNUnZnnLcl/5N4E1VqN0lY4aLKQQaFW9pacFc3K4Q1Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=dilger.ca; spf=pass smtp.mailfrom=dilger.ca; dkim=pass (2048-bit key) header.d=dilger-ca.20251104.gappssmtp.com header.i=@dilger-ca.20251104.gappssmtp.com header.b=eHrxH70q; arc=none smtp.client-ip=209.85.215.172
+Received: by mail-pg1-f172.google.com with SMTP id 41be03b00d2f7-c9aea40d799so1044552a12.0
+        for <linux-doc@vger.kernel.org>; Thu, 02 Jul 2026 11:46:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=dilger-ca.20251104.gappssmtp.com; s=20251104; t=1783017992; x=1783622792; darn=vger.kernel.org;
+        h=to:references:message-id:content-transfer-encoding:cc:date
+         :in-reply-to:from:subject:mime-version:content-type:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=VEx+Ou5+j9qUkh59LaYDmj5XVpjw59xEgpgRSs88k90=;
+        b=eHrxH70qCWhTLR0AUERi07EsCpfeIupO2LXrNDFQepR/MCF1/lhjK+kDfc2ss/C9Hs
+         jjK3KLXRieG0DpM+FNKFhUNGOQnmY9DrP5MSOtoy9MRJAULk0ZEgTeOBNqD3QnsI8MY8
+         ipNk0WPG/lOSZGTgY7A58YIyrQSpb9yc1RjwFPfRAwZYpvVp6r+ShEOVmg/M6pOY9rzX
+         YfFyu2HdKdYk7ZyDSKyAd3TMzgQxxMsMPbT4w41JVto4/mQyicabktEPRyI2mLYy7SIv
+         PTA7xKHN6em8q/QCN6dn8cMG+LdSZWcBVZkrWZIG/a4O66gR0DLx4ezTlHcdOhvB/tED
+         6SXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783017992; x=1783622792;
+        h=to:references:message-id:content-transfer-encoding:cc:date
+         :in-reply-to:from:subject:mime-version:content-type:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=VEx+Ou5+j9qUkh59LaYDmj5XVpjw59xEgpgRSs88k90=;
+        b=EHQAAFLSrDtQ2YH0ioj3xy6g0ks80eopPyowCxMmAewPtsQ4BwCddgs81rsmvLEBZO
+         JuWvk1Da9hGd0RuflZzefrRdH57+n3LxMmhzncf8bwSJVF0qpp/hBwWu5vbq4jLy1GlV
+         Hq2yQBlzWgvMmvF4IsLDFmd5eWaYKmrtQm1Lr1gcnQGVOwOOLGGEs3ZN4Wo0JO18njWE
+         EYF+slXXZRD6yuGhfqhaTjn8E+flwmdqsAUmqNmnvtn+9MBKURPl8Rbrh1aow0bqbLiN
+         b8kvSVtTgLW68S/4sINcvA/63hEcuySWWPjYqIkHmTwEu4N6fcaQV+lUsGv7zZAmXcXg
+         aBVA==
+X-Forwarded-Encrypted: i=1; AFNElJ8n04s7h3To4BT02SIf9yCAeS7ybOlTOOIr9K3EtOGSy1Skns1iYqW33iX/div4gJfmuNYuYs5KOo8=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxGifljZ+LL7dc4yWMXkZPMXggy+PWea/hTIM4t3L9v6dTQfFYn
+	XCY5s2xKdgzhrrf/Ht4NDseZBVQTdCF+aO0KQBWCrxR1+K3lkFM8tWZxRauoeWIKvkY=
+X-Gm-Gg: AfdE7ck5CFlOzjHmqjssfDoLN1dqqX5P8rtechKrMKM1CqPYKRz2fykNdrvoVgMCV3M
+	jG00gwB2HVPr5bm4Tj4MzM62EXuiYvTZubqsYH49NfRi6bjsJx9HSfTYnixq7TldzetqPXlr2u7
+	RiSvcFJlTtjbITAtFKfcIx0ELl6VDm0WVsRFqnm8lmWCN74weeRsUxf7o853ZNhLp8A3Ior+zgt
+	9Rh7B60dxwKKYO1idyRFnSXRVHGZlBFExrW4bKUZIgaNS6AsvVU5S59gYj//vYE69GweqqXjnxV
+	x4OHuE1QBxqwFesfxTTwEr6+aDUP8rvVRbbbSlT8YlJlZ1GR3gSWSye9QZWRUDuqPUs8u88KUK0
+	Y5C+FHktHc+7cqonqXbh+BkFpQsEh06T+AxWUciSGiYDTXrJ8Wn57SfLGgyID47y57GMSzqcx7W
+	nhH85CvOvWVQB9otG0L3UthpTcMrMUkObRQU5/Fb9nCm8JLvVklfx71OgWTtEy+H0y48M=
+X-Received: by 2002:a05:6a20:2d2c:b0:3b4:b24e:27a2 with SMTP id adf61e73a8af0-3bff4258cf8mr7186870637.31.1783017992494;
+        Thu, 02 Jul 2026 11:46:32 -0700 (PDT)
+Received: from smtpclient.apple (S01068c763f81ca4b.cg.shawcable.net. [70.77.200.158])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c9e921cd139sm1593095a12.23.2026.07.02.11.46.30
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Thu, 02 Jul 2026 11:46:31 -0700 (PDT)
+Content-Type: text/plain;
+	charset=us-ascii
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260702164901.121128-1-ljs@kernel.org>
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3864.100.1.1.5\))
+Subject: Re: [PATCH] Documentation: remove the requirement for LLM attribution
+From: Andreas Dilger <adilger@dilger.ca>
+In-Reply-To: <87cxx5l900.fsf@trenco.lwn.net>
+Date: Thu, 2 Jul 2026 12:46:19 -0600
+Cc: Greg KH <gregkh@linuxfoundation.org>,
+ Jeff Layton <jlayton@kernel.org>,
+ Linus Torvalds <torvalds@linux-foundation.org>,
+ Justin Stitt <justinstitt@google.com>,
+ Lorenzo Stoakes <ljs@kernel.org>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Carlos Maiolino <cem@kernel.org>,
+ Jakub Kicinski <kuba@kernel.org>,
+ Jori Koolstra <jkoolstra@xs4all.nl>,
+ Krzysztof Kozlowski <krzk@kernel.org>,
+ Brian Foster <bfoster@redhat.com>,
+ Christoph Hellwig <hch@infradead.org>,
+ David Disseldorp <ddiss@suse.de>,
+ Mark Brown <broonie@kernel.org>,
+ Jani Nikula <jani.nikula@intel.com>,
+ Jens Axboe <axboe@kernel.dk>,
+ David Hildenbrand <david@kernel.org>,
+ Vlastimil Babka <vbabka@kernel.org>,
+ "Christian Brauner (Amutable)" <brauner@kernel.org>,
+ workflows@vger.kernel.org,
+ linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <7C39A5C8-EA03-4C8D-9BE5-5097101B71D6@dilger.ca>
+References: <20260702-aidoc-v1-1-735572dfb995@kernel.org>
+ <2026070224-unholy-commode-cf45@gregkh> <87cxx5l900.fsf@trenco.lwn.net>
+To: Jonathan Corbet <corbet@lwn.net>
+X-Mailer: Apple Mail (2.3864.100.1.1.5)
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-1.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[ideasonboard.com,none];
-	R_DKIM_ALLOW(-0.20)[ideasonboard.com:s=mail];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	MV_CASE(0.50)[];
+	R_DKIM_ALLOW(-0.20)[dilger-ca.20251104.gappssmtp.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-94683-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[24];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:ljs@kernel.org,m:corbet@lwn.net,m:torvalds@linux-foundation.org,m:justinstitt@google.com,m:cem@kernel.org,m:kuba@kernel.org,m:jkoolstra@xs4all.nl,m:krzk@kernel.org,m:bfoster@redhat.com,m:hch@infradead.org,m:ddiss@suse.de,m:broonie@kernel.org,m:jani.nikula@intel.com,m:axboe@kernel.dk,m:david@kernel.org,m:vbabka@kernel.org,m:brauner@kernel.org,m:jlayton@kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[laurent.pinchart@ideasonboard.com,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[lwn.net,linux-foundation.org,google.com,kernel.org,xs4all.nl,redhat.com,infradead.org,suse.de,intel.com,kernel.dk,vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_FROM(0.00)[bounces-94684-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[linuxfoundation.org,kernel.org,linux-foundation.org,google.com,ideasonboard.com,xs4all.nl,redhat.com,infradead.org,suse.de,intel.com,kernel.dk,vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:gregkh@linuxfoundation.org,m:jlayton@kernel.org,m:torvalds@linux-foundation.org,m:justinstitt@google.com,m:ljs@kernel.org,m:laurent.pinchart@ideasonboard.com,m:cem@kernel.org,m:kuba@kernel.org,m:jkoolstra@xs4all.nl,m:krzk@kernel.org,m:bfoster@redhat.com,m:hch@infradead.org,m:ddiss@suse.de,m:broonie@kernel.org,m:jani.nikula@intel.com,m:axboe@kernel.dk,m:david@kernel.org,m:vbabka@kernel.org,m:brauner@kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:corbet@lwn.net,s:lists@lfdr.de];
+	DMARC_NA(0.00)[dilger.ca];
+	FORGED_SENDER(0.00)[adilger@dilger.ca,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	DKIM_TRACE(0.00)[dilger-ca.20251104.gappssmtp.com:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[laurent.pinchart@ideasonboard.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[ideasonboard.com:+];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[adilger@dilger.ca,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	ALIAS_RESOLVED(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[104.64.211.4:from];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,killaraus.ideasonboard.com:mid,ideasonboard.com:dkim,ideasonboard.com:from_mime]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lwn.net:email,dilger-ca.20251104.gappssmtp.com:dkim,linuxfoundation.org:email,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,dilger.ca:mid,dilger.ca:from_mime,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 217AE6FC089
+X-Rspamd-Queue-Id: ACF746FC5AF
 
-On Thu, Jul 02, 2026 at 05:49:01PM +0100, Lorenzo Stoakes wrote:
-> Both of these guidelines are complimentary to one another - one specifying
-> guidelines on AI coding assistants, and the other specifying those for
-> tool-generated content.
-> 
-> Since they are complimentary to one another, provide a link to each in the
-> other.
-> 
-> Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
-> ---
->  Documentation/process/coding-assistants.rst | 4 ++++
->  Documentation/process/generated-content.rst | 7 +++++++
->  2 files changed, 11 insertions(+)
-> 
-> diff --git a/Documentation/process/coding-assistants.rst b/Documentation/process/coding-assistants.rst
-> index 899f4459c52d..6125ee4914c5 100644
-> --- a/Documentation/process/coding-assistants.rst
-> +++ b/Documentation/process/coding-assistants.rst
-> @@ -15,6 +15,10 @@ kernel development process:
->  * Documentation/process/coding-style.rst
->  * Documentation/process/submitting-patches.rst
-> 
-> +For guidelines on content generated by AI coding assistants see:
-> +
-> +* Documentation/process/generated-content.rst
-> +
+On Jul 2, 2026, at 09:13, Jonathan Corbet <corbet@lwn.net> wrote:
+>=20
+> Greg KH <gregkh@linuxfoundation.org> writes:
+>=20
+>> On Thu, Jul 02, 2026 at 10:32:48AM -0400, Jeff Layton wrote:
+>>> We've had this requirement in place in the Documentation for several
+>>> months, but it's becoming clear that the signal to noise ratio from =
+this
+>>> is quite low.
+>>>=20
+>>> 1/ It's not universally followed. While many people do try to =
+attribute
+>>> the LLMs in good faith, not everyone does for various reasons.
+>>=20
+>> Then let's move to get people to follow it.
+>=20
+> FWIW, in my experience, simple ignorance of the rules is one of the
+> biggest reasons why so many people fail to follow them.  When I've =
+asked
+> docs contributors about the source of their work, they tend to come
+> clean, apologize, and add the tags going forward.
 
-It could be worth it checking if this increases the likelyhood that an
-agent would include a disclosure statement in patches. I would have
-assumed that the "Attribution" section in this file to be enough. Has
-anyone ever tried to understand why it doesn't work and if it can be
-improved ?
+It would make sense IMHO to address the ignorance in the most expedient =
+manner,
+namely by telling the *LLM itself* to add this tag when it generates the =
+commit
+message and/or reviews the code.
 
-Maybe a stronger statement would help here:
+This could be achieved by adding a statement in "AGENTS.md" in the root =
+of the
+source tree to this effect, or telling the agent to reference and follow =
+rules
+in Documentation/process/coding-assistants.rst regarding the =
+Assisted-by: tag.
 
-"Furthermore, AI tools must follow the guidelines for generated content
-documented in Documentation/process/generated-content.rst."
+Cheers, Andreas
 
->  Licensing and Legal Requirements
->  ================================
-> 
-> diff --git a/Documentation/process/generated-content.rst b/Documentation/process/generated-content.rst
-> index 08621e50a462..aad2caad9f8b 100644
-> --- a/Documentation/process/generated-content.rst
-> +++ b/Documentation/process/generated-content.rst
-> @@ -107,3 +107,10 @@ the resulting changes.
-> 
->  If you do so anyway, maintainers are entitled to reject your series
->  without detailed review.
-> +
-> +References
-> +==========
-> +
-> +For specific guidelines on AI coding assistants, see:
-> +
-> +* Documentation/process/coding-assistants.rst
 
--- 
-Regards,
 
-Laurent Pinchart
+
+
 
