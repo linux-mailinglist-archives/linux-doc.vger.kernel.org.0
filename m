@@ -1,74 +1,71 @@
-Return-Path: <linux-doc+bounces-94644-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94645-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id cUixADqSRmoPYwsAu9opvQ
-	(envelope-from <linux-doc+bounces-94644-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 18:30:50 +0200
+	id GNTILEaVRmp7ZAsAu9opvQ
+	(envelope-from <linux-doc+bounces-94645-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 18:43:50 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 64B8B6FA323
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 18:30:49 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0E3C76FA747
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 18:43:50 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linuxfoundation.org header.s=korg header.b=zApc09pG;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94644-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94644-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=linuxfoundation.org;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=PkErobcu;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94645-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94645-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 622B631A1635
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Jul 2026 16:23:21 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 8DE6F310B1BB
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Jul 2026 16:33:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BC3643385A1;
-	Thu,  2 Jul 2026 16:22:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2B9C9492517;
+	Thu,  2 Jul 2026 16:29:39 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D4C83382DA;
-	Thu,  2 Jul 2026 16:22:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 16DD83A83AC;
+	Thu,  2 Jul 2026 16:29:36 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783009322; cv=none; b=MgezYMAxLDVsJ0aj5jkdM2Bn61qgHd2fdMutGZvG2t+AJE5KsNg+bnBigOWsg4x4J6IxyJmiT7LAdN3fDBX4p5pz1rXNEiQdCUUoPUQleBwIB3XQGLVOJHteVwtIAUMI44HwCI6sIwuUB44NHG0GOl5LHVPvJewdT/P0WYAjz68=
+	t=1783009778; cv=none; b=NY0XQU5R8dnezoQHNrc9bP3s5JclutzoiLE0FSBG1g7ukYW4zwJYdvzN2iP3dZGAVzO2E4yBbsy5CTNq6eH9BYfjVJlVJZtZ3UBqeUUnIv4CxFxswZMTysAJEdN9RXA4tyDmC0eQrknoqO3cWZNUnRDh0Jgmm0nNNnUUpBZiMYE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783009322; c=relaxed/simple;
-	bh=OsSDOQIrgtchdtrVgSK3nnizozNNXFaJwSyg5VreD7k=;
+	s=arc-20240116; t=1783009778; c=relaxed/simple;
+	bh=T2h39zdyPIPtjb2Qpyo15fSXK8QPl8IEyg/B6Ms8gEs=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=XFc9K2BUtAhp/r1dSSwlXxJKdHX1HbOYEskJpdloX1GrKLZxamrleDpsZ6zANPdfIN/qkxcsSOCII1wGDt7oNfwVPFu6A0yfhG2iD5OetQrrmQtlE8saxv0VGpyiEnHrH6B9JvAxrU+7Y0auh6GBy8HX+5+t237SulYn61/jrIo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=zApc09pG; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BE3631F000E9;
-	Thu,  2 Jul 2026 16:22:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linuxfoundation.org;
-	s=korg; t=1783009321;
-	bh=kK4vBztoIykW9+OGgKvTHApPTBMrfjJGiJlwKiL6kOg=;
+	 Content-Type:Content-Disposition:In-Reply-To; b=WJdKBz2BdqrkxKbsiU/W6+zh7JIeauo9G5KcwfXCreIe1HrUiwLnNcqT7x3+azdYQzJmSxvU/EOMeQtgkP42/zTMAYdQo6DmhWNRTIKZFBiV9EWh53FNoxZTKl/LgQTF10AZ1GkkcqAj0EZpseT5M22ANRB76LheQQNS6E8e45U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PkErobcu; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 00C7E1F00A3D;
+	Thu,  2 Jul 2026 16:29:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783009775;
+	bh=T2h39zdyPIPtjb2Qpyo15fSXK8QPl8IEyg/B6Ms8gEs=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=zApc09pGa6ijstV9hQYvpSJDrSI7IbslYravwN/5RkJD9XwRhzlLk6ASUxpxWJiVk
-	 LopIiO17izoTFkYfkjliqyajJ+myI0ZHqR+smtB9wWBXxKHw2x7gPN6wezCbqw71n6
-	 Mzds3mfibgDnSK86ov2VKFNRcytYY4IKSAGtLJns=
-Date: Thu, 2 Jul 2026 18:19:15 +0200
-From: Greg KH <gregkh@linuxfoundation.org>
-To: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-Cc: Jeff Layton <jlayton@kernel.org>,
-	Linus Torvalds <torvalds@linux-foundation.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Justin Stitt <justinstitt@google.com>,
-	Lorenzo Stoakes <ljs@kernel.org>, Carlos Maiolino <cem@kernel.org>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Jori Koolstra <jkoolstra@xs4all.nl>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Brian Foster <bfoster@redhat.com>,
-	Christoph Hellwig <hch@infradead.org>,
-	David Disseldorp <ddiss@suse.de>, Mark Brown <broonie@kernel.org>,
-	Jani Nikula <jani.nikula@intel.com>, Jens Axboe <axboe@kernel.dk>,
-	David Hildenbrand <david@kernel.org>,
-	Vlastimil Babka <vbabka@kernel.org>,
-	"Christian Brauner (Amutable)" <brauner@kernel.org>,
-	workflows@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org
-Subject: Re: [PATCH] Documentation: remove the requirement for LLM attribution
-Message-ID: <2026070227-payroll-eradicate-8f66@gregkh>
-References: <20260702-aidoc-v1-1-735572dfb995@kernel.org>
- <2026070224-unholy-commode-cf45@gregkh>
- <2114bb79bb5b6e5584a8236de3590e2f4bf0899f.camel@kernel.org>
- <20260702161330.GH3534761@killaraus.ideasonboard.com>
+	b=PkErobcuES/0G07JpaCQu3n7TJ+zeLFzfROrPjVkBQbfK9uuKWG0BrUWsJQzfrt1a
+	 scAEzEnOxPmWyA9VdoHryO7gMjRmRvGZUsHzqL/rIvodPVKQXgMBSyn4rIlrqAkpSv
+	 4UJVgTUnf0JIwMjyoFKd/kCmsMfqQOzhRrXLYCmsu33a1hJh0RapyXBuxrEvfDX+UT
+	 m1Kd5YLNgZZJxkGUEIh61WyfJzmK+V5FhgvjfDPr6yMQuz1tBg2CIqBzuYg2kG2u1j
+	 E+J0Rj1e/xqRdagvAMJ9lF4cocxJsGsTIbp5xUJDzMHlRIw0boFHIeZPF5f7981sjP
+	 ZFv5FvTi0X4tg==
+Date: Thu, 2 Jul 2026 17:29:25 +0100
+From: Lorenzo Stoakes <ljs@kernel.org>
+To: Christian Brauner <brauner@kernel.org>
+Cc: "David Hildenbrand (Arm)" <david@kernel.org>, 
+	Linus Torvalds <torvalds@linux-foundation.org>, Jonathan Corbet <corbet@lwn.net>, Jens Axboe <axboe@kernel.dk>, 
+	Jeff Layton <jlayton@kernel.org>, Vlastimil Babka <vbabka@kernel.org>, workflows@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
+	Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>
+Subject: Re: [PATCH RFC] coding-assistants: simplify attribution
+Message-ID: <akaRyUtHdNaUNElw@lucifer>
+References: <5e7b9d23-4291-48fb-bdc6-47db82d33c80@kernel.org>
+ <20260702-seekrank-stilrichtung-mitentscheiden-69a64ee097ec@brauner>
+ <1f29f48d-b9ff-4de2-a392-dc05781728be@kernel.org>
+ <akYz2aMIco1fbD-t@lucifer>
+ <54d3a698-a275-488e-ad36-ef423db30f70@kernel.org>
+ <20260702-weitreichend-aufgearbeitet-flausen-fd92f38bbba0@brauner>
+ <akZqigap0GTOSkyx@lucifer>
+ <20260702-angewachsen-glatze-kassen-61b7761f6564@brauner>
+ <akZzDfK-yr5ErVJT@lucifer>
+ <20260702-jagdrevier-halfen-paragraf-442896b3a5a0@brauner>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -77,86 +74,55 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260702161330.GH3534761@killaraus.ideasonboard.com>
+In-Reply-To: <20260702-jagdrevier-halfen-paragraf-442896b3a5a0@brauner>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [2.34 / 15.00];
-	MID_END_EQ_FROM_USER_PART(4.00)[];
+X-Spamd-Result: default: False [-4.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[linuxfoundation.org,none];
-	R_DKIM_ALLOW(-0.20)[linuxfoundation.org:s=korg];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94644-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:brauner@kernel.org,m:david@kernel.org,m:torvalds@linux-foundation.org,m:corbet@lwn.net,m:axboe@kernel.dk,m:jlayton@kernel.org,m:vbabka@kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:ast@kernel.org,m:daniel@iogearbox.net,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER(0.00)[gregkh@linuxfoundation.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	FORGED_RECIPIENTS(0.00)[m:laurent.pinchart@ideasonboard.com,m:jlayton@kernel.org,m:torvalds@linux-foundation.org,m:corbet@lwn.net,m:justinstitt@google.com,m:ljs@kernel.org,m:cem@kernel.org,m:kuba@kernel.org,m:jkoolstra@xs4all.nl,m:krzk@kernel.org,m:bfoster@redhat.com,m:hch@infradead.org,m:ddiss@suse.de,m:broonie@kernel.org,m:jani.nikula@intel.com,m:axboe@kernel.dk,m:david@kernel.org,m:vbabka@kernel.org,m:brauner@kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,s:lists@lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	FORGED_SENDER(0.00)[ljs@kernel.org,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[kernel.org,linux-foundation.org,lwn.net,google.com,xs4all.nl,redhat.com,infradead.org,suse.de,intel.com,kernel.dk,vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-94645-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[gregkh@linuxfoundation.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linuxfoundation.org:+];
+	FROM_NEQ_ENVFROM(0.00)[ljs@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,gregkh:mid,linuxfoundation.org:dkim,linuxfoundation.org:from_mime]
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 64B8B6FA323
+X-Rspamd-Queue-Id: 0E3C76FA747
 
-On Thu, Jul 02, 2026 at 07:13:30PM +0300, Laurent Pinchart wrote:
-> On Thu, Jul 02, 2026 at 11:57:46AM -0400, Jeff Layton wrote:
-> > On Thu, 2026-07-02 at 17:07 +0200, Greg KH wrote:
-> > > On Thu, Jul 02, 2026 at 10:32:48AM -0400, Jeff Layton wrote:
-> > > > We've had this requirement in place in the Documentation for several
-> > > > months, but it's becoming clear that the signal to noise ratio from this
-> > > > is quite low.
-> > > > 
-> > > > 1/ It's not universally followed. While many people do try to attribute
-> > > > the LLMs in good faith, not everyone does for various reasons.
-> > > 
-> > > Then let's move to get people to follow it.
-> > > 
-> > > > 2/ It basically serves as free advertising for proprietary LLM companies.
-> > > 
-> > > Who cares, make up a name, all I want is the "signal" that someone is
-> > > using a LLM so that I can review it as-such.  And if I think someone is
-> > > not reporting that, I can ask for them to properly attribute it and if
-> > > they lie, well, that's on them.
-> > > 
-> > > > 3/ It's not clear why we want to collect this info in the first place.
-> > > 
-> > > We want to know if a LLM is being used.
-> > 
-> > But why? What do you intend to do with this information?
-> > 
-> > Do you mean to use it as an indicator that the patch should receive
-> > "extra" review (or maybe that it should be ignored)? Do you mean to use
-> > it to generate some sort of statistics at a later time? 
-> 
-> I use the information to decide how to review the patch, and what level
-> of priority to give it. For that usage I don't need a tag, but I need
-> the information in some human-readable form at patch submission time.
+On Thu, Jul 02, 2026 at 06:18:45PM +0200, Christian Brauner wrote:
+> > I don't understand that at all. The coding assistants document is not being
+> > deleted, and if you read https://docs.kernel.org/process/generated-content.html
+> > you can see it doesn't enforce tags.
+>
+> I think that was a misunderstanding. I just wasn't clear on what you
+> wanted to do.
+>
 
-Same here.  I don't care about stats, I care about "how do I review this
-patch" and this gives me that signal that I need if faced with a
-llm-helped patch.
+Ack ok thanks :) maybe I wasn't clear about it, really just wanting to make sure
+reader of one doc is aware of the other, will be a trivial patch.
 
-So it needs to stay please.
-
-thanks,
-
-greg k-h
+Cheers, Lorenzo
 
