@@ -1,170 +1,215 @@
-Return-Path: <linux-doc+bounces-94546-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94547-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 75SpCNkvRmpsLQsAu9opvQ
-	(envelope-from <linux-doc+bounces-94546-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 11:31:05 +0200
+	id zmSMIqdJRmpHNwsAu9opvQ
+	(envelope-from <linux-doc+bounces-94547-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 13:21:11 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 703A76F5450
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 11:31:04 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id E136B6F699E
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 13:21:10 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=xs4all.nl header.s=xs4all01 header.b=ZEiDPTGN;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94546-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94546-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=reject) header.from=xs4all.nl;
+	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=qTiFPQh+;
+	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b="aP6p0YP/";
+	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=xiNrM9PH;
+	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=Gd5jd37P;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94547-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-94547-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=suse.de;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 5DC4B30EFA7F
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Jul 2026 09:12:04 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 9070D31B256E
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Jul 2026 09:13:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F151E47DD75;
-	Thu,  2 Jul 2026 09:09:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3002247A0AE;
+	Thu,  2 Jul 2026 09:12:31 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.185])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4631747DD79
-	for <linux-doc@vger.kernel.org>; Thu,  2 Jul 2026 09:09:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 01D833546F4
+	for <linux-doc@vger.kernel.org>; Thu,  2 Jul 2026 09:12:28 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782983380; cv=none; b=ali5Wis19m4IsF8aQkYfTD658fRhlVZioiPLwl9CMmi1cigwkGMXXSZ3uDqEe675C1GCBhF0viAvIGepvIJpF271wd9kNMTUyXk4dcILqOQiPMT4ea3drnhLFOZ4Q11DeQkXDynSyJmiRBNF6kfuB/T8RKMG0qUTNMmKDeQTTbY=
+	t=1782983551; cv=none; b=PdbfflP1DZDOUc+v6P1yd3mRl06r4I/kma9quZAnmT77SLefPtFt59Dn87okZVNKYxQzkA7SB867z+OBmjD7BPyD75SwMf4lGfK3lNbyubQL9zZrIlFhE0uYOxIcWQmWzx4zxqOaGOUzys3aW5oLUktnAZi9lA7QiS/m+fkq2DQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782983380; c=relaxed/simple;
-	bh=X4lWb4Zgyq9kDtHYjOqT/HcpzyRjjLI0DNIX1c5jUaM=;
-	h=Date:From:To:Message-ID:In-Reply-To:References:Subject:
-	 MIME-Version:Content-Type; b=IqImIRHxjO3yIjapvHo/BkhmjDGOfp+xFeNFSaYRktfFKljtz+irKkiY4sxsAWwo/KfwUqy8Tj40I4w6IYliAQltb76AAdyA3WyWQA0EOBKnXRAzoZfZZLCYAUDw+juvWFAuzLTkbmYR9Xjj30+GFBuogwYgmNEN/cvah6lVC6k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=xs4all.nl; spf=pass smtp.mailfrom=xs4all.nl; dkim=pass (2048-bit key) header.d=xs4all.nl header.i=@xs4all.nl header.b=ZEiDPTGN; arc=none smtp.client-ip=195.121.94.185
-X-KPN-MessageId: bff4b762-75f5-11f1-9e8e-005056999439
-Received: from mta.kpnmail.nl (unknown [10.31.161.191])
-	by ewsoutbound.so.kpn.org (Halon) with ESMTPS
-	id bff4b762-75f5-11f1-9e8e-005056999439;
-	Thu, 02 Jul 2026 11:09:37 +0200 (CEST)
-Received: from mtaoutbound.kpnmail.nl (unknown [10.128.135.190])
-	by mta.kpnmail.nl (Halon) with ESMTP
-	id bff2e651-75f5-11f1-91b1-00505699891e;
-	Thu, 02 Jul 2026 11:09:37 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=xs4all.nl; s=xs4all01;
-	h=content-type:mime-version:subject:message-id:to:from:date;
-	bh=PqYWlkDcCBR62HicUulD+ZvvBxbrhHpWKTkTuPcmOVk=;
-	b=ZEiDPTGNBOsEJe7MBRiZA+HoZfQoCwumR1bRMcSFV5e9HqtGX/AvhvfHYteM5cMrTBkGUKpL+yN63
-	 4KuIx7VOlkYtRDupf3JnPqFpzA2x9PbhcodHS8OYX9WbobOI+rJl0ZU/Dsex1PqFnQ+sPxHn7Da9ZM
-	 zstxb371hUTwEpUOUun9fryUYtOkWO5iusVSXdi1KlEbSUrKXZsiBeAqdI3L7c5WYrb3TQvreaF/5L
-	 NVaR4sFh1jnQYgVbWA5xjXLOJ9yjShdLbhjGw5lBYtWjDhu+bp6JU+Yh/cVAFlA1jnRtKcaW3rZSuB
-	 2P0rGauZpugbjh6TmrbjqNb7DNqbfGg==
-X-KPN-MID: 33|A06hq9/OspSCblDEB2XsEAaS5PUjMJ/PvGk4O1z0S/ckLTliPawVDjQhJtQvp7M
- bC1I6m8Et6gUXIjvcKmMYL13UY3qYJ2f+ajB4taehJ64=
-X-CMASSUN: 33|xV5+ZKyjGAqrRMlg92btei7Fl/lSCjGxTWwji/cF8+tpZaRdc5GIqoJHUqUCdfC
- j3Qw633Ao3CXiKU7+omMp5A==
-X-KPN-VerifiedSender: Yes
-Received: from cpxoxapps-mh03 (cpxoxapps-mh03.personalcloud.so.kpn.org [10.128.135.209])
-	by mtaoutbound.kpnmail.nl (Halon) with ESMTPSA
-	id bfe2ba4c-75f5-11f1-916a-005056995d6c;
-	Thu, 02 Jul 2026 11:09:37 +0200 (CEST)
-Date: Thu, 2 Jul 2026 11:09:37 +0200 (CEST)
-From: Jori Koolstra <jkoolstra@xs4all.nl>
-To: "Vlastimil Babka (SUSE)" <vbabka@kernel.org>,
-	Christian Brauner <brauner@kernel.org>,
-	Linus Torvalds <torvalds@linux-foundation.org>,
-	Jonathan Corbet <corbet@lwn.net>, Jens Axboe <axboe@kernel.dk>,
-	David Hildenbrand <david@kernel.org>,
-	Jeff Layton <jlayton@kernel.org>, workflows@vger.kernel.org,
+	s=arc-20240116; t=1782983551; c=relaxed/simple;
+	bh=F66FVDICJACD/8WF2MIWmai+aPat3u0t1FsfmGgIBmc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=AMAj6xKF79q+6MLgqIKG9udbhuSf06DJm8W0JyosoQn8Fx1+BOFgSLValg0GRUt79psXDZ0j9GYqxCd/U+jmVK6Dlse0+vZTtygLrvqcGKIEVe8r/jB9XUCEb8RXxS+RPYBGYncVjAHucKxYeqGqupD48iMW/uMIg+nF3ZX5DS8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=qTiFPQh+; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=aP6p0YP/; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=xiNrM9PH; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=Gd5jd37P; arc=none smtp.client-ip=195.135.223.130
+Received: from kunlun.suse.cz (unknown [IPv6:2a07:de40:b306:2000::2])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by smtp-out1.suse.de (Postfix) with ESMTPS id CC71C740D7;
+	Thu,  2 Jul 2026 09:12:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1782983547; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=uRjlOG5TiXfZ2nHN8jbS31TsEigRmVqtiMO2xZmgwtE=;
+	b=qTiFPQh+EAtnfZMspyIp88DVum08lq2h4M2oG+17REMmQZO/x99GyEPSyZcrk+53/j4pE7
+	ayUyxs1+H15MCkTXYR6IAyOF8/FJedHYq6bIOW4Tu55Xzy1cDgxE3TtnSGRxrEKYkr9qCx
+	MPDOGMtMfY/q90k/HdbzQB0MG6RtC98=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1782983547;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=uRjlOG5TiXfZ2nHN8jbS31TsEigRmVqtiMO2xZmgwtE=;
+	b=aP6p0YP/H9yklntcuxcs7O0hloiylzECiJuUePIZbwx7+JaYmW/QkkjkEZbLRVL/Qrxsum
+	V6sX1ipWkXeTo6AA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1782983546; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=uRjlOG5TiXfZ2nHN8jbS31TsEigRmVqtiMO2xZmgwtE=;
+	b=xiNrM9PHv8T5r22Baf5wzuy/XEFUTC4h/U218uOWQiGo4hRQJKmIZSs8S+OlGNXeruiGUh
+	uEK3DCLCp2w+dcRHtrJu/oX0nohIw+HkUyfnSS2l1y6lkIHXdw2JY7qfkq/ytqyU4xB6Zp
+	TSkWj8Mxuv4w/GQNzlcb1o/p9eJieDE=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1782983546;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=uRjlOG5TiXfZ2nHN8jbS31TsEigRmVqtiMO2xZmgwtE=;
+	b=Gd5jd37PMMWNL15+a5FHWW6qPpNO2PnTB1RPKgya/PwYhq70rKS0IfGDTjRQHsyTLs59rb
+	EnhfcqK6Ag9I1tBQ==
+Date: Thu, 2 Jul 2026 11:12:25 +0200
+From: Michal =?iso-8859-1?Q?Such=E1nek?= <msuchanek@suse.de>
+To: Sven Schnelle <svens@linux.ibm.com>
+Cc: Peter Zijlstra <peterz@infradead.org>, Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Huacai Chen <chenhuacai@kernel.org>,
+	WANG Xuerui <kernel@xen0n.name>,
+	Madhavan Srinivasan <maddy@linux.ibm.com>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	"Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
+	Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+	Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
+	Heiko Carstens <hca@linux.ibm.com>,
+	Vasily Gorbik <gor@linux.ibm.com>,
+	Alexander Gordeev <agordeev@linux.ibm.com>,
+	Christian Borntraeger <borntraeger@linux.ibm.com>,
+	Andy Lutomirski <luto@kernel.org>,
+	Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Andrew Donnellan <andrew+kernel@donnellan.id.au>,
+	Mark Rutland <mark.rutland@arm.com>, Arnd Bergmann <arnd@arndb.de>,
+	Jiaxun Yang <jiaxun.yang@flygoat.com>,
+	Ryan Roberts <ryan.roberts@arm.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Mukesh Kumar Chaurasiya <mkchauras@linux.ibm.com>,
+	Shrikanth Hegde <sshegde@linux.ibm.com>,
+	Zong Li <zong.li@sifive.com>, Nam Cao <namcao@linutronix.de>,
+	Deepak Gupta <debug@rivosinc.com>,
+	Lukas Gerlach <lukas.gerlach@cispa.de>,
+	Rui Qi <qirui.001@bytedance.com>, Kees Cook <kees@kernel.org>,
 	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org, Lorenzo Stoakes <ljs@kernel.org>
-Message-ID: <1468431527.3731104.1782983377190@kpc.webmail.kpnmail.nl>
-In-Reply-To: <a17b9a17-0ca7-4912-836d-4637cd0110f7@kernel.org>
-References: <20260701-work-coding-assistants-v1-1-a20a94d1d606@kernel.org>
- <akYasD1ckWcH1C0g@lt-jori.localdomain>
- <a17b9a17-0ca7-4912-836d-4637cd0110f7@kernel.org>
-Subject: Re: [PATCH RFC] coding-assistants: simplify attribution
+	loongarch@lists.linux.dev, linuxppc-dev@lists.ozlabs.org,
+	linux-riscv@lists.infradead.org, linux-s390@vger.kernel.org
+Subject: Re: [RFC] entry: Untangle the return value of
+ syscall_enter_from_user_mode from syscall NR
+Message-ID: <akYreY_BHuRbxSsO@kunlun.suse.cz>
+References: <akVRcPsD_R_CE1qW@kunlun.suse.cz>
+ <yt9dechlbyj0.fsf@linux.ibm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Priority: 3
-Importance: Normal
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <yt9dechlbyj0.fsf@linux.ibm.com>
+X-Spamd-Bar: +++++++++++++++
+X-Spam-Flag: YES
+X-Spam-Score: 15.65
+X-Spam-Level: ***************
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [4.34 / 15.00];
+	SPAM_FLAG(5.00)[];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[xs4all.nl,reject];
-	R_DKIM_ALLOW(-0.20)[xs4all.nl:s=xs4all01];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[suse.de,none];
+	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_FROM(0.00)[xs4all.nl];
-	RCPT_COUNT_TWELVE(0.00)[12];
+	FORGED_RECIPIENTS(0.00)[m:svens@linux.ibm.com,m:peterz@infradead.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:chenhuacai@kernel.org,m:kernel@xen0n.name,m:maddy@linux.ibm.com,m:mpe@ellerman.id.au,m:npiggin@gmail.com,m:chleroy@kernel.org,m:pjw@kernel.org,m:palmer@dabbelt.com,m:aou@eecs.berkeley.edu,m:alex@ghiti.fr,m:hca@linux.ibm.com,m:gor@linux.ibm.com,m:agordeev@linux.ibm.com,m:borntraeger@linux.ibm.com,m:luto@kernel.org,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:andrew+kernel@donnellan.id.au,m:mark.rutland@arm.com,m:arnd@arndb.de,m:jiaxun.yang@flygoat.com,m:ryan.roberts@arm.com,m:gregkh@linuxfoundation.org,m:mkchauras@linux.ibm.com,m:sshegde@linux.ibm.com,m:zong.li@sifive.com,m:namcao@linutronix.de,m:debug@rivosinc.com,m:lukas.gerlach@cispa.de,m:qirui.001@bytedance.com,m:kees@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:loongarch@lists.linux.dev,m:linuxppc-dev@lists.ozlabs.org
+ ,m:linux-riscv@lists.infradead.org,m:linux-s390@vger.kernel.org,m:andrew@donnellan.id.au,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94546-lists,linux-doc=lfdr.de];
-	FORWARDED(0.00)[lists@lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[45];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[jkoolstra@xs4all.nl,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS(0.00)[m:vbabka@kernel.org,m:brauner@kernel.org,m:torvalds@linux-foundation.org,m:corbet@lwn.net,m:axboe@kernel.dk,m:david@kernel.org,m:jlayton@kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:ljs@kernel.org,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-94547-lists,linux-doc=lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	HAS_X_PRIO_THREE(0.00)[3];
+	FORGED_SENDER(0.00)[msuchanek@suse.de,linux-doc@vger.kernel.org];
+	GREYLIST(0.00)[pass,body];
 	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jkoolstra@xs4all.nl,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[xs4all.nl:+];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[msuchanek@suse.de,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[infradead.org,lwn.net,linuxfoundation.org,kernel.org,xen0n.name,linux.ibm.com,ellerman.id.au,gmail.com,dabbelt.com,eecs.berkeley.edu,ghiti.fr,redhat.com,alien8.de,linux.intel.com,zytor.com,donnellan.id.au,arm.com,arndb.de,flygoat.com,sifive.com,linutronix.de,rivosinc.com,cispa.de,bytedance.com,vger.kernel.org,lists.linux.dev,lists.ozlabs.org,lists.infradead.org];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,kpc.webmail.kpnmail.nl:mid,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	DKIM_TRACE(0.00)[suse.de:+];
+	TAGGED_RCPT(0.00)[linux-doc,kernel];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:dkim,suse.de:email,suse.de:from_mime,vger.kernel.org:from_smtp,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,kunlun.suse.cz:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 703A76F5450
+X-Rspamd-Queue-Id: E136B6F699E
 
-
-> Op 02-07-2026 10:44 CEST schreef Vlastimil Babka (SUSE) <vbabka@kernel.org>:
+On Thu, Jul 02, 2026 at 10:12:35AM +0200, Sven Schnelle wrote:
+> Michal Suchánek <msuchanek@suse.de> writes:
 > 
->  
-> On 7/2/26 10:12, Jori Koolstra wrote:
-> > Ah, I still reigniting this discussion again :)
-> > 
-> > What about a combination of what David and Jeff say? The whole point
-> > seems to me that the salient information is not that an LLM was used (or
-> > are we going to tag Sashiko as well or any other LLM-based code review
-> > tool?), but what is was used to do. This information may be relevant for
-> > how the review is approached. The latter should perhaps only be in the
-> > cover letter and then we can drop the assisted-by tags altogether.
-> > 
-> > The question about enforcement remains.
+> > The return value of syscall_enter_from_user_mode is used both for the
+> > adjusted syscall number and the indicator that a syscall should be
+> > skipped.
+> >
+> > As seccomp can be invoked on any syscall, including invalid ones this
+> > somewhat undermines seccomp.
+> >
+> > While the seccomp variants that terminate the process do not need to
+> > care about this for the filter that sets the syscall return value this
+> > disctinction is required.
+> >
+> > Pass the syscall number as a pointer to the inline entry functions, and
+> > use the return value exclusively for the indication that the syscall is
+> > already handled.
+> >
+> > This should avoid the need for the s390 PIF_SYSCALL_RET_SET which is the
+> > workaround for exactly this deficiency.
 > 
-> It's not possible to enforce it. People can deny it if the tag is missing
-> and you confront them and even though the submission has many signs of being
-> obviously LLM, there is no definite proof. We've seen (likely, as there's no
-> proof!) that happen in mm.
-> 
+> I'm not sure whether PIF_SYSCALL_RET_SET can be removed - the syscall
+> return might still get set by PTRACE_SET_SYSCALL_INFO when the tracee is
+> stopped. This might be a positive number which can't be distinguished
+> from a syscall number. But maybe i'm missing something? It's been quite
+> a while since I touched all that ptrace stuff.
 
-Maintainers should be free to ignore what they perceive as slop without needing
-to defend that call. Reputation can be gained by submitting useful work or
-being present in the community, attending conferences, giving talks, etc.
-I am not saying that we should be harsh on beginning contributors (or I would
-have to count myself out as well), but they should be as free as possible to
-only invest their time in the project and people that may become involved in the
-community. And that call is up to them.
+When the syscall return value is set (in the registers) the return value
+which is also the modified syscall number is set to -1 indicating the
+syscall was handled. At least that's how the API is described.
 
-I try to review fix-up patches of first-time contributors, but if it reeks of
-AI I don't bother. We have the same policy in the kernel mentorship program,
-we invest time to help people get involved with the community and kernel, not
-to let someone strike "kernel contributor" of their list. The whole point is
-not that most of this clean-up work is super useful (and indeed an LLM can do it),
-but to let someone feel excited about contributing and maybe getting them to
-to stick around.
+So yes, if the syscall number range is restricted or the syscall number
+is returned through a path different from the function return value the
+flag should not be needed in the entry path because the case can be
+detected through the return value alone.
 
-> Such situation then penalizes those who disclose so obviously they won't. We
-> should drop the tag and instead think how we can empower maintainers to be
-> able to use their own judgment and deprioritize dealing with what they
-> perceive as LLM slop, without fearing consequences of not being properly
-> responsible etc, and not rely on any non-enforceable tags for that.
+Thanks
+
+Michal
 
