@@ -1,51 +1,51 @@
-Return-Path: <linux-doc+bounces-94523-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94525-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 4pbrFDwVRmoVJgsAu9opvQ
-	(envelope-from <linux-doc+bounces-94523-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 09:37:32 +0200
+	id 2k9CBJIWRmpxJgsAu9opvQ
+	(envelope-from <linux-doc+bounces-94525-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 09:43:14 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9FCB66F4430
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 09:37:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5DE846F44DB
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 09:43:13 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=cu2ZqfIW;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94523-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94523-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=GIiZmgcr;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94525-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94525-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id EF95F303DA87
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Jul 2026 07:28:11 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 5D489315B0C5
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Jul 2026 07:29:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A9EC7390C88;
-	Thu,  2 Jul 2026 07:28:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8F4023914E9;
+	Thu,  2 Jul 2026 07:29:17 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 89EEC22AE48;
-	Thu,  2 Jul 2026 07:28:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 79C2D3914E5;
+	Thu,  2 Jul 2026 07:29:16 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1782977291; cv=none; b=RzyaT9HvCpef/ZATphxN3m7J7hc5Ik8W8MidSZ5SlTOps0gH1fnYzrWvtko5245JStyEZDATx5PGwNO6ctPpFGnQTc3noiCJ7KKvFj5OVM9lKhFBhsjEPqb9iKNhfVi/m+zqq1GNbCmNHNvYE2Q9mMuzzddCGDEeukLwIZec/hU=
+	t=1782977357; cv=none; b=st9aULorckx6uz8LycteWX98rmWtSz+RgyBQhcuwq0zYmFwfIBMYxNJdvBhZjRXMhQSokF99abeVIGyp8yC0gcvYRP8qzC/tOMDxYFomldJq/m1hU8MVqHv598pxU+hCVDMnYsM1HmDBoTGeUTGAV2nQh+Agn0xXRVT+EtmOKQQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1782977291; c=relaxed/simple;
-	bh=V6rR3G5QQQaAclYfKh2FZObCQoeYebWwyXda8cZc+JA=;
+	s=arc-20240116; t=1782977357; c=relaxed/simple;
+	bh=Lawg9YFySEGOgubbh1cOdatE9TtSMuRVqTofSHmUhUI=;
 	h=MIME-Version:Content-Type:Subject:From:To:Cc:In-Reply-To:
-	 References:Date:Message-Id; b=RScoTvdQlulORm6NGGUr65+zCCvL+bAczubAuxkrAMKFSujQOTJ3GejpWBDZt4CqJFpwNOB9HkAFdIZ2HKcA2/kdhRW/upImz0fJkjemhaFNdZ/TOhkTRlWjIkzO1DUbuStw2i3L8D8rBP8L6lzy8SwBlr5fGZzELPfq/30UZ6E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cu2ZqfIW; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C68961F000E9;
-	Thu,  2 Jul 2026 07:28:07 +0000 (UTC)
+	 References:Date:Message-Id; b=JShs0i4TmpjoQ5yb/7+BoB8GaKx5kwF+s1CmLwE7KMQcalYUYue+Pff/rvV/EHjQ30XVpOudGEmcHEok24kaEcdRFuW9pW0QQPUvlY/MgjJnywoGp4WdrC199caOH6He5SfTqh0NB5KQ2QVkR3nTroqDhcdtcGwDPG+0TtGHQZo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GIiZmgcr; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8128C1F000E9;
+	Thu,  2 Jul 2026 07:29:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782977290;
-	bh=V1nke6B8RPgiDenv6Vl1w+IcU3ZP+J7NQjuoPM29too=;
+	s=k20260515; t=1782977356;
+	bh=RW6SqLELVkDjLMxPpQI8Ty2YK2jLiDbzTAVsATnYajs=;
 	h=Subject:From:To:Cc:In-Reply-To:References:Date;
-	b=cu2ZqfIWefe7ooK5AZxaX3g2IOmHylHHM1ClKjaYA2z7lpV7UO6qrtScD6yGJDxdE
-	 9mFRSXCSdekaZEc6lEbxmAuqtDMN8TQBpxZOINqjuPR2G9/jwLpAaPUwRWWYjyMhyW
-	 KBaYQ4qKkJfyLtvAHWH7k/A9zCO8y7fDOPed27pIxMnbFkJHqFN6U61btxk0ulkMWr
-	 5NjDXKwODdIZGYg0Lg/Gvf6OjfKZ/a+19L95WpE/naNqZ49RTXgdbiOT1BXaIj3IAo
-	 3dfo9Nf9PnLnuXw2Bi6bxCIGYVt/tFw9JAhmSrmXVAMqu1Q7AwRxdgVIKcmdm59rzT
-	 ZOr5Vz8SAHWlw==
+	b=GIiZmgcrgeHAeLML2XeNiJwOH+L3j/64WDzDO35aq8yZT/jHxV7m9wHy7ut5AA1et
+	 cCwYx3pYwcCNZxgDW3mLKJNly/CD81grA5V3ddM6AFBtbBqqq+8tehx1+L+Ap0csRz
+	 +ISDUXz71y5a9zU/BVa/UQw5DyYEJ+vzd+2aiCNFMTAVpQuBL84HV73tcJ0S5P8jOx
+	 Y6GHbgw8/EhR+1qtYHWgT2zZEiNhYaSk4S43Ehmxjfr9kM+Z5qGZ0KzhYCh9rgTMN2
+	 tYkoavqiVF2bFWFx5IBA15E0Qz4dwzNopzw6XpsGBX03bRSMAAuttwKg3zWlxRHR44
+	 HmW+F24oNMflQ==
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -53,28 +53,30 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Subject: Re: [PATCH RFC] coding-assistants: simplify attribution
 From: Christian Brauner <brauner@kernel.org>
-To: Jeff Layton <jlayton@kernel.org>
-Cc: Christian Brauner <brauner@kernel.org>, 
+To: Jakub Kicinski <kuba@kernel.org>
+Cc: Jeff Layton <jlayton@kernel.org>, 
+ Christian Brauner <brauner@kernel.org>, 
  Linus Torvalds <torvalds@linux-foundation.org>, 
  Jonathan Corbet <corbet@lwn.net>, Jens Axboe <axboe@kernel.dk>, 
  David Hildenbrand <david@kernel.org>, Vlastimil Babka <vbabka@kernel.org>, 
  workflows@vger.kernel.org, linux-doc@vger.kernel.org, 
  linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org
-In-Reply-To: <bffcce9436c47e8762e6f4fa4cae9f7ddd183b8f.camel@kernel.org>
+In-Reply-To: <20260701115302.29c66401@kernel.org>
 References: <20260701-work-coding-assistants-v1-1-a20a94d1d606@kernel.org>
  <bffcce9436c47e8762e6f4fa4cae9f7ddd183b8f.camel@kernel.org>
-Date: Thu, 02 Jul 2026 09:28:05 +0200
-Message-Id: <20260702-hinarbeiten-hergab-altbacken-a024cf20038c@brauner>
+ <20260701115302.29c66401@kernel.org>
+Date: Thu, 02 Jul 2026 09:29:11 +0200
+Message-Id: <20260702-sucht-bauabschnitt-rausspringen-577b7b7be2c7@brauner>
 X-Mailer: b4 0.16-dev-4217c
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3632; i=brauner@kernel.org;
- h=from:subject:message-id; bh=V6rR3G5QQQaAclYfKh2FZObCQoeYebWwyXda8cZc+JA=;
- b=owGbwMvMwCU28Zj0gdSKO4sYT6slMWS5CbP/Z732+V5FrcYp7uu9cy8eb2pOMmbP+1jGaRXq+
- Mfx7kWOjlIWBjEuBlkxRRaHdpNwueU8FZuNMjVg5rAygQxh4OIUgInsmc3wT/Ock/aC79sXlSu8
- bG9XtJwYt2lrzf475sYhO6aeyd+zkYfhf3rz6ycpRaeETh1g9vb4Eal7adWHPefPqim/uejPIN6
- hwAcA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1792; i=brauner@kernel.org;
+ h=from:subject:message-id; bh=Lawg9YFySEGOgubbh1cOdatE9TtSMuRVqTofSHmUhUI=;
+ b=owGbwMvMwCU28Zj0gdSKO4sYT6slMWS5CXv2c35Y2mapEp9sFbBZldcizv0N2+nSrAJ3cUez2
+ cGCt951lLIwiHExyIopsji0m4TLLeep2GyUqQEzh5UJZAgDF6cATCTHhZHhhtJF/VtHXetO7btg
+ 2X2hOmDzoZAjk1ylu4q3J7x2UG8+yPDPvuvuVyuPzOLC2cI9PZ3/1OITwueWpIXvfen8KonvLRM
+ jAA==
 X-Developer-Key: i=brauner@kernel.org; a=openpgp;
  fpr=4880B8C9BD0E5106FC070F4F7B3C391EFEA93624
 X-Rspamd-Action: no action
@@ -82,119 +84,74 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MID_END_EQ_FROM_USER_PART(4.00)[];
 	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	MID_RHS_NOT_FQDN(0.50)[];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:jlayton@kernel.org,m:brauner@kernel.org,m:torvalds@linux-foundation.org,m:corbet@lwn.net,m:axboe@kernel.dk,m:david@kernel.org,m:vbabka@kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,s:lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[brauner@kernel.org,linux-doc@vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-94523-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	FORGED_RECIPIENTS(0.00)[m:kuba@kernel.org,m:jlayton@kernel.org,m:brauner@kernel.org,m:torvalds@linux-foundation.org,m:corbet@lwn.net,m:axboe@kernel.dk,m:david@kernel.org,m:vbabka@kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER(0.00)[brauner@kernel.org,linux-doc@vger.kernel.org];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[brauner@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	TAGGED_RCPT(0.00)[linux-doc];
+	TAGGED_FROM(0.00)[bounces-94525-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TO_DN_SOME(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp,brauner:mid]
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,brauner:mid,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 9FCB66F4430
+X-Rspamd-Queue-Id: 5DE846F44DB
 
-On 2026-07-01 14:35 -0400, Jeff Layton wrote:
-> On Wed, 2026-07-01 at 17:54 +0200, Christian Brauner wrote:
-> > I remain very confused by our coding assistant contribution guidelines.
-> > I'm going to be a bit polemic now but this seriously in good faith.
-> > 
-> > Why precisely do we require all this detailed information about what
-> > specific coding assistant was used?
-> > 
-> > I find it very irritating that our git history has effectively started
-> > to function a bit like a free advertising platform for a bunch of AI
-> > companies and their proprietary agents and models.
-> > 
-> > And it reamins unclear to me what exactly we do get out of this detailed
-> > information: Do we want to run statistical analysis on what agent and
-> > model is used the most and publish that on LWN at some point?
-> > 
-> > I acknowledge that my stance is even more radical: imho we would just
-> > stop it with any disclosure requirements completely. It's useless imho.
-> > We already see that other than core contributors most people don't care
-> > and will just not disclose their usage of AI. I think this is entirely
-> > pointless and worse it brings in undefined legal status as well. It's
-> > not like recent events of pulling certain models from the face of the
-> > earth have made this any less concerning.
-> > 
-> > But fine, if we want to do this can we please just dumb it down to
-> > 
-> > Assisted-by: LLM
-> > 
-> > or
-> > 
-> > Assisted-by: Coding Assistant
-> > 
-> > or something else. That still gives the "careful review" signal to
-> > reviewers that want to pay special attention to LLM generated work while
-> > avoiding this slew of metadata.
-> > 
-> > Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
-> > ---
-> >  Documentation/process/coding-assistants.rst | 8 ++------
-> >  1 file changed, 2 insertions(+), 6 deletions(-)
-> > 
-> > diff --git a/Documentation/process/coding-assistants.rst b/Documentation/process/coding-assistants.rst
-> > index 899f4459c52d..fe34f3e7e828 100644
-> > --- a/Documentation/process/coding-assistants.rst
-> > +++ b/Documentation/process/coding-assistants.rst
-> > @@ -43,12 +43,8 @@ When AI tools contribute to kernel development, proper attribution
-> >  helps track the evolving role of AI in the development process.
-> >  Contributions should include an Assisted-by tag in the following format::
-> >  
-> > -  Assisted-by: AGENT_NAME:MODEL_VERSION [TOOL1] [TOOL2]
-> > +  Assisted-by: LLM [TOOL1] [TOOL2]
-> >  
-> > -Where:
-> > -
-> > -* ``AGENT_NAME`` is the name of the AI tool or framework
-> > -* ``MODEL_VERSION`` is the specific model version used
-> >  * ``[TOOL1] [TOOL2]`` are optional specialized analysis tools used
-> >    (e.g., coccinelle, sparse, smatch, clang-tidy)
-> >  
-> > @@ -56,4 +52,4 @@ Basic development tools (git, gcc, make, editors) should not be listed.
-> >  
-> >  Example::
-> >  
-> > -  Assisted-by: Claude:claude-3-opus coccinelle sparse
-> > +  Assisted-by: LLM coccinelle sparse
-> > 
-> > ---
-> > base-commit: dc59e4fea9d83f03bad6bddf3fa2e52491777482
-> > change-id: 20260701-work-coding-assistants-650ae1202ee0
+On 2026-07-01 11:53 -0700, Jakub Kicinski wrote:
+> On Wed, 01 Jul 2026 14:35:08 -0400 Jeff Layton wrote:
+> > On Wed, 2026-07-01 at 17:54 +0200, Christian Brauner wrote:
+> > > I remain very confused by our coding assistant contribution guidelines.
+> > > I'm going to be a bit polemic now but this seriously in good faith.
+> > > 
+> > > Why precisely do we require all this detailed information about what
+> > > specific coding assistant was used?
+> > > 
+> > > I find it very irritating that our git history has effectively started
+> > > to function a bit like a free advertising platform for a bunch of AI
+> > > companies and their proprietary agents and models.
 > 
+> FWIW, this is exactly how I feel. I added a regex to strip these in
+> my git hooks. So at least the net/ history should be ads-free 🤷️
+
+Ah, that's good to know. I've been rewriting them to "LLM" but I might
+just start doing what netdev is.
+
+> > In general, collecting data for nebulous purposes usually turns out to
+> > be a bad idea. If we're not 100% clear on why we want this data, then
+> > we're probably better off not collecting it at all.
+> > 
+> > With that in mind: if we're going to water down the tag, then I say
+> > just remove the requirement altogether. If we later decide that we want
+> > to start collecting more detailed info for some (clear) purpose then we
+> > can revisit the idea.
 > 
-> In general, collecting data for nebulous purposes usually turns out to
-> be a bad idea. If we're not 100% clear on why we want this data, then
-> we're probably better off not collecting it at all.
-
-Agreed.
-
-> With that in mind: if we're going to water down the tag, then I say
-> just remove the requirement altogether. If we later decide that we want
-> to start collecting more detailed info for some (clear) purpose then we
-> can revisit the idea.
+> +1
+> 
+> Honestly even tool attribution feels increasingly moot.
+> People vibe code tools and AI-in-the-loop pipelines which they never
+> publish. Open source tools are (hopefully?) used in pre-commit
+> pipelines, so they have the "kbuild bot problem" of problems getting
+> fixed before the code is merged. And we have the same free advertising
+> problem for the rest.
 
 Agreed.
 
