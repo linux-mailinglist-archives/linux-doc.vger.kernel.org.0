@@ -1,219 +1,311 @@
-Return-Path: <linux-doc+bounces-94702-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94703-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 6jVpO/XWRmrFeQsAu9opvQ
-	(envelope-from <linux-doc+bounces-94702-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 23:24:06 +0200
+	id YmFvG+LXRmr8eQsAu9opvQ
+	(envelope-from <linux-doc+bounces-94703-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 23:28:02 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B1CC6FCED1
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 23:24:05 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 691256FCF35
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Jul 2026 23:28:01 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=onsemi.com header.s=mimecast20250127 header.b=U96LO76x;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94702-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-94702-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=reject) header.from=onsemi.com;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=CLWNu4Z4;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94703-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94703-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=gmail.com;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 05C0C301FF95
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Jul 2026 21:24:05 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 82A97300ADBE
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Jul 2026 21:27:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 19B8A2459E1;
-	Thu,  2 Jul 2026 21:24:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8B49D39F19F;
+	Thu,  2 Jul 2026 21:27:56 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from usb-smtp-delivery-120.mimecast.com (usb-smtp-delivery-120.mimecast.com [170.10.153.120])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lj1-f170.google.com (mail-lj1-f170.google.com [209.85.208.170])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5E743845B0
-	for <linux-doc@vger.kernel.org>; Thu,  2 Jul 2026 21:24:01 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783027443; cv=none; b=hMVN2Ynwre+OzVIhV2KE3uBTyD48U3cDInc1492X9bnpjlIXXNbgxnBlJb0bkuKuI/l3De8WwkebGJW9Q5U2tDQurf2xh7G4GxySOnDGGagTypa3F5V9Ohw1obOKmAXtolaNgOsW+Ep/tl9F9YIl9VTj2lhrs/azqF7c2XzjwwM=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783027443; c=relaxed/simple;
-	bh=7jXDJM1QUEP/DWJdvvppnZaO2IP9MOm/HKIejCGQDeM=;
-	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
-	 MIME-Version:Content-Type; b=tCaiVg/Ab215QkbfYuo/M5WiBti22F8C6AXsHk97A5PTf0QIsEVWXL2zE0vzKi2fmLZhyb41QrgR3mk1cV9ivTBA6wvOhcpHb8WVANjbk/NuoGKNs2ULAa7QCr2s0PTZ0h3qa7PyfrmDNttuoKClMsKrCp3DPqQ2GCP32Bb0D+I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=onsemi.com; spf=pass smtp.mailfrom=onsemi.com; dkim=pass (2048-bit key) header.d=onsemi.com header.i=@onsemi.com header.b=U96LO76x; arc=none smtp.client-ip=170.10.153.120
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=onsemi.com;
-	s=mimecast20250127; t=1783027435;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=7jXDJM1QUEP/DWJdvvppnZaO2IP9MOm/HKIejCGQDeM=;
-	b=U96LO76xEz9VKII9fdFX9Z2hCWmurCyPuDz2XcbIerN+XfoFzcOfPcDLcrzOg5uD6rkvpt
-	qSRLhCinUvo3V8rSumoAqlgO+pogtacgGy2zYCjVJQjVcRrq1SZvN7Z9fVrihrKLAb5H3v
-	nNEOgVDGSHhEdIpbfoKDvG0yPp+RpNawlfHE8hAhaRD5m0b4iymH7JHmRZaPdTUETYaaxX
-	XAEWwKCkA7FK72nY8i6BQMaSXFZvd4KkxY3IMw+Kj/mXvyVAYibHuQUoUTdGAjcbv6CpbF
-	sTvQTbBXr+v/6jWmS2pB/i2DtDtiwM9VrcP2AJpI0jX0Gk74xNJYgK4J+5SgHQ==
-Received: from PH8PR06CU001.outbound.protection.outlook.com
- (mail-westus3azon11012003.outbound.protection.outlook.com [40.107.209.3])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id usb-mta-50-e97GZKnkOtiz9hllbi6IaQ-1; Thu,
- 02 Jul 2026 14:23:49 -0700
-X-MC-Unique: e97GZKnkOtiz9hllbi6IaQ-1
-X-Mimecast-MFC-AGG-ID: e97GZKnkOtiz9hllbi6IaQ_1783027424
-Received: from CYYPR02MB9828.namprd02.prod.outlook.com (2603:10b6:930:b8::20)
- by DS0PR02MB9500.namprd02.prod.outlook.com (2603:10b6:8:f1::9) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.181.8; Thu, 2 Jul 2026 21:23:39 +0000
-Received: from CYYPR02MB9828.namprd02.prod.outlook.com
- ([fe80::2767:f7d2:778c:8dca]) by CYYPR02MB9828.namprd02.prod.outlook.com
- ([fe80::2767:f7d2:778c:8dca%4]) with mapi id 15.21.0181.009; Thu, 2 Jul 2026
- 21:23:39 +0000
-From: Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
-To: Julian Braha <julianbraha@gmail.com>, Andrew Lunn <andrew@lunn.ch>,
-	Piergiorgio Beruto <Pier.Beruto@onsemi.com>, Heiner Kallweit
-	<hkallweit1@gmail.com>, Russell King <linux@armlinux.org.uk>, "David S.
- Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub
- Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Andrew Lunn
-	<andrew+netdev@lunn.ch>, Parthiban Veerasooran
-	<parthiban.veerasooran@microchip.com>, Richard Cochran
-	<richardcochran@gmail.com>, Rob Herring <robh@kernel.org>, Krzysztof
- Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Simon
- Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan
-	<skhan@linuxfoundation.org>
-CC: "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
-	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>, Jerry Ray
-	<jerry.ray@microchip.com>
-Subject: RE: [PATCH net-next v6 12/15] onsemi: s2500: Add driver support for
- TS2500 MAC-PHY
-Thread-Topic: [PATCH net-next v6 12/15] onsemi: s2500: Add driver support for
- TS2500 MAC-PHY
-Thread-Index: AQHdB+wZw4OihCeBzE+Ub6CPdp8aWLZaol4AgAAfP2A=
-Date: Thu, 2 Jul 2026 21:23:39 +0000
-Message-ID: <CYYPR02MB9828BFBEE2BC55DF7D4F675183F52@CYYPR02MB9828.namprd02.prod.outlook.com>
-References: <20260629-s2500-mac-phy-support-v6-0-18ce79500371@onsemi.com>
- <20260629-s2500-mac-phy-support-v6-12-18ce79500371@onsemi.com>
- <d6a56d05-0c6f-49a5-9281-1194b62ab86e@gmail.com>
-In-Reply-To: <d6a56d05-0c6f-49a5-9281-1194b62ab86e@gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: CYYPR02MB9828:EE_|DS0PR02MB9500:EE_
-x-ms-office365-filtering-correlation-id: 9aa45b97-0d8c-4733-36c7-08ded8802f62
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|366016|376014|7416014|23010399003|1800799024|22082099003|18002099003|921020|38070700021|11063799006|56012099006|4143699003
-x-microsoft-antispam-message-info: HgqipnCuebMURcAUxQtHqPB6MqR86HkA7wjIJS0IGQRjLkLW10HgO5ITajtnVaZOY7o6JgE4e/LuHrJT0feUl85FtTJjC69iLS9TxwJlb6Pd6V0/F6OxJ89Eqvx9UBu/x/2vq7UJE9UvOV3uULuQUEigqn25tJ5WZ1qb1E8ifQiC2dNT5+wK/TxAwAW5N8UpNVirma9GA0v7KEGvQJC+m4agVRrv9FE38Aa0YOUxSOTIPSE57EKDyxs8StmTFY9SMRF0eAQ+cB8WrzKKiB847qdxz/HU29J4dVsKzgH97R5YRW+uBClHNx+WVoSFRLurciRXoUluj3dKcVBvmDRduQhoC22vwuqj8MyaNDLIOX84t8ISzONBHMSLzt5byVPgLJbm2W1oYV0kVYcgj4HqalZ4OGT0j5JmXkVuG2zr25fBal87bGirbcl9QUpmcmwjHyeHxhGCS4orModPhMZRT4DR0CbCNSerHfInLXr4ZvCP47Xk1S3sZfejFOgjZPN8FZldzI+O73sxYHpTG29X1WKQSHzV9ywsIO9XS9vje0F2Si6xmogErm4bXhy2lKhZNUVSM7vvx7baZ8KQyd6yW4XpfkN4IWHU1DLH8hZ5hxwpzj+cvxqGolSwG0UpX7oMCs+O4kieP7WJ/zHULpazhkMX72GTwybrpliBuVPOVCVpSQpuBL0AFjogVzgfW9jHI0QZ5CNlM3h5yDGyLLOE4whafJIWkiYJUqBiFGHlTUE3VDbHUZ+1fh4DT9s78vA/
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CYYPR02MB9828.namprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(7416014)(23010399003)(1800799024)(22082099003)(18002099003)(921020)(38070700021)(11063799006)(56012099006)(4143699003);DIR:OUT;SFP:1101
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?QWJ4NDNhR0VGU1o1UEx0eVdwdlVNNmVQak5tNmhnTVZFTWZKVi9RL1o4TTJm?=
- =?utf-8?B?aGFoR2Ixb2Nxd3FBZW45MEY4alZqL1k5VG14QmxEa0ZpVVk1OUhnK09ka2Fi?=
- =?utf-8?B?UjY4dkJIMTBnVjY1TjVQRVVPdTZwNEpjQ1p2TDUwblQxR2tpT0xrSk80em1V?=
- =?utf-8?B?a2QwZVN5MDgrcXVlWHJKMHlSUWQzRzNYbmNyQ0xDVlZuSEY3RGNBTW9COFhs?=
- =?utf-8?B?VmM5dlpsOVhKNFNpejZnZkt2blVQcXU4K05TMTNEc3A4OGFoSVlFWC93VTZH?=
- =?utf-8?B?Vm10L3FzMERWMGNEdVBranhGb2FUUTNQZldSSXhIZHZKelQwNG4ydnduRFEy?=
- =?utf-8?B?QkpiNVJEeXRhaExXQ000T2tZWWVUb1VINnl4ck5hVzhOeloybkpyZEgrSlQ1?=
- =?utf-8?B?ZnRHaW1OMVdxNU1LV0xUSzdwdkRFYXpyTGc4WjlWdm1WOFNpRFBDRlRnb0RZ?=
- =?utf-8?B?Wmx2OWFuQkRnMllibXFzaUFtTmdWc3FiZC9TeUtGYTF6MWRrZ0NVbHJkOHl0?=
- =?utf-8?B?dWJzZ3Q4OEEraDJzT09kU2hDcFdpb0doQmdraWc4cDFxcGZ4cktXNjZoSU5X?=
- =?utf-8?B?eC9aR0dGOXUzMnYrSlEyRU0xa0NVUnA0RnlJbkF3aDFheEc1dDFaQ2JROVJ6?=
- =?utf-8?B?U3lxSi9nN2VUcjc2MEEzL0NtRzA5dlVYU2lSSnY1N3JKVks5VTIrMVhoVWp4?=
- =?utf-8?B?eE1DTEtzblh1N3ptczJ0YzFrdGRibU5wemZoWUlMdlVhN2xJZ2wwSUV2SWU0?=
- =?utf-8?B?S0dhN2J3b2F1M0Fwd3ZsaGpMdERyY3J0L0Q3cHlqQUU1ZkVDb0hFbDBnbUNv?=
- =?utf-8?B?cys3MUc1eHpLa3FQSmN6Sm5CdlpmMFZSY1lURlZCalV3WnZyOTJUQW1KU2xE?=
- =?utf-8?B?NjY3elVvREJKS2dieW9kNnNDamU3T1ZEdHpHNGVBQ3hHU2dHNlgyVjJOSTZt?=
- =?utf-8?B?dG95U2xCYkMyWjFPMlkzYmp2Kyt3RVRBT3BUeWZ0dTVaN1RhOWl3NFRjMHYv?=
- =?utf-8?B?bytQZ1JmcmJLWVRXQkpad1crczdKcnZjT2VkYnFhbDFBdFplVzhQTGFJM1VP?=
- =?utf-8?B?dXhBMHRpRUZQdVBYQ2kyTkt0bXQ1WHhSOWQ5YmhzTFhoV1ZrM0JjOUhWeDNW?=
- =?utf-8?B?WGc0b1lRTXpNRE9hYjBDNWpWR2dyMG1SUDh0emNlVU9OcGkrNnlpdU5ZYURp?=
- =?utf-8?B?Ky9sRFVaRGZqRFBFckdHdXZFMTZWZmx1Mkk0S0MzSTdkeWI5QWdTR2JGdnpz?=
- =?utf-8?B?R2t1aFNzWjgvUzFSb3JaSGJWVWpRZnZkMGU2Q3VUYXlBaXRrM0pxMGhUb0Zn?=
- =?utf-8?B?RmE1ZWptU2gzS2EvQXQ3clh1cEpjUEY2U3FXZGZkbWg5Z3c0WGRzTnkwdzVu?=
- =?utf-8?B?aWhSRDlrWFg1SHZieURWb1NRZ3Z0NmlNN2pHYUxjSDFRelB1Q2oydEdJUzA2?=
- =?utf-8?B?Zi9iZ0kzckVPenBQZVhRRDArYVEwMm1yME4xUnpGcHl6K0NackVnUzQ2L1Rk?=
- =?utf-8?B?ZjVIMUtHbVlITDRyTDJWU0tHTUhNN2YwMWp3NDVGSlp3dVQ0bzg4Uk9Scm9p?=
- =?utf-8?B?N1RsWFBuU0tiM0VSOUhSd1VSaFErTWtYbXkzenlEMWJRQmxHK2NZdElVZGI5?=
- =?utf-8?B?U2lPd1lnWndwRDRXcDdNL3RkYkhXUlBNdmxWblpwdmR6MnovM3F3b1hlVnhJ?=
- =?utf-8?B?MjZoRGNBUks4NHNVN1V5ZEEvVWJNeDV5ZDRRUGdCS0dnUWovMUZoQ1FtQVZ1?=
- =?utf-8?B?S25GSHNUZVd2eVIya0tnczFJdU9aejdENFd6enpUbmprcnh1Z3VqcTFYd3RG?=
- =?utf-8?B?ZTBudFlXVDJnb09LcTk4YjF4aW9Sa0tWU3VMVitxVEhVUVVWTzRaeGJPTVZo?=
- =?utf-8?B?REtybzQxd2l1S3dlR2JwR3FwR0JQemI1L29tNzRaRVZ1RFFpNDlIanVUNzhk?=
- =?utf-8?B?bUN1S3BIQ0IwSENielB2d0YrMFZBWVM3UVVOdzRCRDdqZ3lweDNNa3JnV2t4?=
- =?utf-8?B?RUpRb2djbW9rUWJNUC9malpLc29DOGlIYVNzTVFRYnlFYklnK050SUNmQVpm?=
- =?utf-8?B?MVIzTTBCeDVTSWJNTkxiSUcwUTdqOHZjSEU5Q0pUaGQ5TDJybXd3aWgzbEVz?=
- =?utf-8?B?WU9PWWg0WXBxM3BOMkZ1d1pIQUI0VDZPK2tOTnlNVVhsSFVtYkVIbkpxdzZh?=
- =?utf-8?B?TzdHNktlRnFZN1RGS2RJQkxoQ3Jsd1dGVVdzd1JGS0tubEdHbHp1N3BlTUoz?=
- =?utf-8?B?eGFCTkQ5dWRwa0lHYk1hR3J1QWdWcEhRcVp4UC8zTmhxc3NZNC9Fb2pybkVs?=
- =?utf-8?B?SHFJbHZ6aDhsbVdZVERHNlYwbk44R3A5UDcxZDViOHVoYTBPdDZTbitqTDlR?=
- =?utf-8?Q?Qr853f+1r/BmKqWI=3D?=
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA73139901C
+	for <linux-doc@vger.kernel.org>; Thu,  2 Jul 2026 21:27:54 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783027676; cv=pass; b=OswQ1yrng8LWD35qszEX7cJROhWnyVNktmj8RCfOrc8HCIx54WPcC2C+4FFILTEUEQDpIcLRpdoU4RM75+jcS7AFePkXwUNDJv6Ek0O7qYIlKUlAzslVQLHUPtLRUumTqZoipi5kZdfCVShEX6Uwt5jxe5RXhH7BYqZzqQmF9G4=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783027676; c=relaxed/simple;
+	bh=iHfqVSKBVJJ17dOYemIMOGwikBoir5LnY3YdQVW/J+8=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=P8mR2zW8+DCiC3yuem5Tpxy+SvvjIixCr9Vd3ylrFsQ2AyChwo4zCuO0VIF+5CfOjoJXyXpnTY2Z0sH2Wiqfr8N9d7ea7v8E6tTCKwXV5/k44FkExeEfsAzfUVSHi/KPEObCd2rgLOa91Sz/7w7r+kFPM/jja77BGhWszSTqkpQ=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=CLWNu4Z4; arc=pass smtp.client-ip=209.85.208.170
+Received: by mail-lj1-f170.google.com with SMTP id 38308e7fff4ca-39b2d38b200so12999501fa.1
+        for <linux-doc@vger.kernel.org>; Thu, 02 Jul 2026 14:27:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783027673; cv=none;
+        d=google.com; s=arc-20260327;
+        b=q5n8tz8MSe3MPr2KIF3WAm609JRxC4I7vNgQDFM8wgChZP+XF/dZ2hH/7wc+gqs99q
+         TwALJ1hHIiseCeTrvBwCoGAzi5ecX68nkg0S+39j3SdzdJ4t+EgPh7FnaSpB5QX6hxfD
+         OxmeN2eVMfxB4/amtkyNWEm0UUDRc/YZw5btL5U3VNxDOveW0BqJIK0Wvav4rsQogYyF
+         Lj5PYK5l4LsP9ezANmhpns+1wC1gJWDElWDQP8KBb8h/oRc0w5tAHMWrSnMwOydSYO2u
+         U/u317fHHW0yeRonqodBgWlntV34M9QdNh0hRH0rebjky3BpIYzkVwlyckJa/2dNToTp
+         nwUg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=rcAwHmJiuEyn5QlxBrFpWdNCiczpryFO8k1MLRmVpao=;
+        fh=v5d5E77dqJQNDt5YxzwZVTKhajwI731N1Mw6G6KUy08=;
+        b=L4hCtvcFpwvifoZJpVGCAoqy0W3Xrgfon+H5h91s22DHpFISg+dIHkMkbjqfpib9lE
+         U+cIy++JgPa15eXNRPtc9d8yu7ITq1HYdAVUebBKKRHCeG/mCPlSFvWwRdcn98v+jSiv
+         mp6Zx9YzlS4vRHVMsgOcYbsWxb3MBY1W2QZambUl/z20MQ3AQ7/utBHjpxDydbZdc4nS
+         j7DqPC0dX7Msw+Fmkl6LKQ+iB1xyjIqEu+UES9qqv8PN6STCnE1NkkUyiw0fGXUYFQS8
+         abp3BqposGvJlqE88fpbJRvXu3Sqf7dbvgTlfw3GqQRPedoN1vjJIez4Zl6P/yztHE5q
+         kgdQ==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1783027673; x=1783632473; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=rcAwHmJiuEyn5QlxBrFpWdNCiczpryFO8k1MLRmVpao=;
+        b=CLWNu4Z4g1jrWFUJ7NXsc8HzJ8UOnGOHAq7XqEAQlzMWCz13KLjsKQLgV5rel01CL0
+         RSd/2QXCMCKImanD4z1TN7ltnU0mSRBxNDxgmC7nbibiraf4BJHtxf970cYSq9tN+Cr2
+         l4XUI9F0oALfMnEvwp15N8+b3A7nzasTevOIN8/wLEQN3Z28wImsh+7oBw2WKZw7VS/l
+         pu6vVGQij5AweHe4eO7VVeTuTWELXHx1CmqjC3cphR1GLuNb00Vl+v0iUcmqlbNNNPmN
+         vnZzsNkRPQEGxK5rr3HrAmjli9WHh/vbVRb8N9c1F0hYhqNfo8VWGqtNhd0EuzMIpgVR
+         fcwA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783027673; x=1783632473;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=rcAwHmJiuEyn5QlxBrFpWdNCiczpryFO8k1MLRmVpao=;
+        b=Opyo+MUZaWCACRL4YrcsDicuVqCP8GxvcX84mPHBFFORWlxIk67e/zvQzqKgeB8I5x
+         9XmSOK3PXVI3jRwtD4ihGaNWeGAoHD0mxhtp9pQlAnld8MnQAzW4O5bXTmLHeuUTrz0h
+         ML6Yy9y9opXRW/FinOffsTn5+PAtR0qJv1e2grOjAz4E5LWjAOGJmoD8PxHzbFQ7tRu3
+         I+tpUwZ3tb4MzOd29LUbu0unmPCxuwTtk66Aduk2LTc0mmhqK21EMBdmPdvtEv4JAnGJ
+         NpRcYBPa/h4tbJREGh+G4glV/BbM56WnpBiUi5nxRHUb05teVDo0vFLMo9UuWiSkhxkC
+         7ASA==
+X-Forwarded-Encrypted: i=1; AHgh+Rqy009Yoz0FGskVqWKJn8bkhkfqJu2EslcbNd1J2oGoafTaAxWFGsYPRcDt6cOqLAX6lacujefz5dM=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwvkCQiLQMFq2RITYO+54+bn3JpR6QX0FIR3HRd7n/aM3EXufXx
+	VFYoty7f19DcpP/ZpeCcoSXVBoNQdB9CvG9qXQyeZfBPDKQBuv97e8FtA8GOwy0T2q9CjMr3+8X
+	bbTsoLZAwEPJLycoZmR5Z3m6Zxv7noyM=
+X-Gm-Gg: AfdE7ckw/Nml5OCV6IDW9l23bEw8AHwj7vmXgwPepNA3M+AhyHbX77mqYgHCIW950Ce
+	gs5TZiMK+Is2fenwocmgyikx0ygQqId3DWUe/6s3a/g+gUGm9R1h4yRGXeZKsaUlO02mdK+26O8
+	ijjTAOQbphiuY7Tby+VRVVDHHpEjos+M881J8Yn9OLkz42deb6o3KjxM1UVdhp0+xZDpuNLtP4z
+	WP3tsolAnH2TkiO3YSMPeoD9qYG83Vs3xNAOl5NX1ETP95ELTreCl/QIpJjLPs/USnUPbKPyUCb
+	td1U/xJdVJFE2hKJ6+w/nR+K+3Rr+II=
+X-Received: by 2002:a05:651c:2123:b0:396:3ca3:4f1b with SMTP id
+ 38308e7fff4ca-39b453982e3mr3260251fa.19.1783027672830; Thu, 02 Jul 2026
+ 14:27:52 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: Yu3DV94oVd/fUl3hsnukDP3q9kPVgnjouXKmbCGi5W7KvR8GY8AFz+T7u7TwL6abfXtY94YEe21eelXZa7VMa4eMz0hBSbUdo5mEiCRZ27M4vXeHhTQexmJ4aDA6/H52PCNFHOd0OFt6gJyPdVeOg9GxCjzU34wiY9J8m2yZXNnn9x0sY2nsqTaSMz1lwayKON8Bc+L573ItB9XmvIevUz6Rc5NmUB99n92UYtaSybceTzTBeWxYbzCcjLKNKpnbAhnYmEccEgABIgL5lqtl4V/+hi0vpfnslenq3bnCVE7+/pUYGY1OVnHGpgRKC+0PKcSkTwpBtiPtBePRyEPXcg==
-X-OriginatorOrg: onsemi.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: CYYPR02MB9828.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9aa45b97-0d8c-4733-36c7-08ded8802f62
-X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Jul 2026 21:23:39.3867
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 04e1674b-7af5-4d13-a082-64fc6e42384c
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: tq56GtHJUlRYQENPNpTIzX+u+8CyPKcYXC4H91d+8cvH9O748Rvy2gapPKamDgJ3rQEsKL04ToO9BlC9VhxgwojFd70NMqsS7wNmprmeSdQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR02MB9500
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: 03Kh8CxK8gTROndhJ4FzlyimI0EJNNqoOUKuQL5fyUQ_1783027424
-X-Mimecast-Originator: onsemi.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: base64
+References: <20260629083542.10041-1-lucaslnobrega38@gmail.com>
+ <CAJZ5v0iVD90XPsWgT8B+fw9vmFRZTVL7MasPP-=Ci0OdUmNR=A@mail.gmail.com>
+ <6021784.DvuYhMxLoT@rafael.j.wysocki> <CAMVixxV83tSLEi_o1vmHjqfgPnnXDwo2LjP_m-Y7iEWfvUAP2g@mail.gmail.com>
+ <CAJZ5v0h=u3dGbujFpU2yObyLXT0ZLZTxpG2+zLZLP7wpKsBvQw@mail.gmail.com> <CAMVixxXpT90bkwGTpL+T-d3ve7BTK3xXwBcaMfhvJ7R+DkxXiw@mail.gmail.com>
+In-Reply-To: <CAMVixxXpT90bkwGTpL+T-d3ve7BTK3xXwBcaMfhvJ7R+DkxXiw@mail.gmail.com>
+From: Lucas Lima <lucaslnobrega38@gmail.com>
+Date: Thu, 2 Jul 2026 18:27:40 -0300
+X-Gm-Features: AVVi8Ccol9c8xyIcq94NVubQWNykKY8OP_R3rXWcudbhXoUZzKgbdFd2EKdxliI
+Message-ID: <CAMVixxXCOMb330_rvgbx2Zdy4yufW0BiB5jmv04v_icK-TTVpA@mail.gmail.com>
+Subject: Re: [PATCH] sched/topology: Allow EAS without schedutil for
+ artificial Energy Models
+To: "Rafael J. Wysocki (Intel)" <rafael@kernel.org>
+Cc: viresh.kumar@linaro.org, mingo@redhat.com, peterz@infradead.org, 
+	juri.lelli@redhat.com, vincent.guittot@linaro.org, dietmar.eggemann@arm.com, 
+	rostedt@goodmis.org, bsegall@google.com, mgorman@suse.de, vschneid@redhat.com, 
+	kprateek.nayak@amd.com, corbet@lwn.net, skhan@linuxfoundation.org, 
+	linux-pm@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.44 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MIME_BASE64_TEXT_BOGUS(1.00)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[onsemi.com,reject];
-	R_DKIM_ALLOW(-0.20)[onsemi.com:s=mimecast20250127];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:julianbraha@gmail.com,m:andrew@lunn.ch,m:Pier.Beruto@onsemi.com,m:hkallweit1@gmail.com,m:linux@armlinux.org.uk,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:andrew+netdev@lunn.ch,m:parthiban.veerasooran@microchip.com,m:richardcochran@gmail.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:netdev@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jerry.ray@microchip.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:rafael@kernel.org,m:viresh.kumar@linaro.org,m:mingo@redhat.com,m:peterz@infradead.org,m:juri.lelli@redhat.com,m:vincent.guittot@linaro.org,m:dietmar.eggemann@arm.com,m:rostedt@goodmis.org,m:bsegall@google.com,m:mgorman@suse.de,m:vschneid@redhat.com,m:kprateek.nayak@amd.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-pm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94702-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_TO(0.00)[gmail.com,lunn.ch,onsemi.com,armlinux.org.uk,davemloft.net,google.com,kernel.org,redhat.com,microchip.com,lwn.net,linuxfoundation.org];
-	FORGED_SENDER(0.00)[Selvamani.Rajagopal@onsemi.com,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-94703-lists,linux-doc=lfdr.de];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FORGED_SENDER(0.00)[lucaslnobrega38@gmail.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	FORWARDED(0.00)[lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[Selvamani.Rajagopal@onsemi.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[onsemi.com:+];
-	RCVD_COUNT_FIVE(0.00)[6];
+	ALIAS_RESOLVED(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[lucaslnobrega38@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc,netdev,dt];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,vger.kernel.org:from_smtp,mail.gmail.com:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 8B1CC6FCED1
+X-Rspamd-Queue-Id: 691256FCF35
 
-DQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IEp1bGlhbiBCcmFoYSA8anVs
-aWFuLmJyYWhhQGdtYWlsLmNvbT4gT24gQmVoYWxmIE9mIEp1bGlhbiBCcmFoYQ0KPiBTdWJqZWN0
-OiBSZTogW1BBVENIIG5ldC1uZXh0IHY2IDEyLzE1XSBvbnNlbWk6IHMyNTAwOiBBZGQgZHJpdmVy
-IHN1cHBvcnQgZm9yIFRTMjUwMCBNQUMtUEhZDQo+IA0KPiA+ICtlbmRpZiAjIE5FVF9WRU5ET1Jf
-T05TRU1JDQo+IA0KPiBTMjUwMF9NQUNQSFkgc3RpbGwgaGFzIHRoYXQgZHVwbGljYXRlIGRlcGVu
-ZGVuY3kgZnJvbSBiZWluZyBpbnNpZGUgdHdvDQo+IG9mIHRoZXNlOg0KPiAnaWYgTkVUX1ZFTkRP
-Ul9PTlNFTUkuLmVuZGlmJw0KPiANCj4gQW5kIEkgYWxyZWFkeSBwb2ludGVkIGl0IG91dCBvbiB2
-NToNCg0KU29tZWhvdywgSSBtaXNzZWQgeW91ciBmZWVkYmFjay4gU29ycnkgYWJvdXQgdGhhdC4g
-V2lsbCByZW1vdmUgdGhlIGR1cGxpY2F0aW9uLg0KKEFsc28gd2lsbCBnbyBvdmVyIGFsbCB0aGUg
-cmVzcG9uc2VzIHRvIHNlZSBpZiBJIG1pc3NlZCBhbnl0aGluZyBlbHNlKQ0KDQoNCj4gOigNCj4g
-DQo+IC0gSnVsaWFuIEJyYWhhDQoNCg==
+After some testing I found out schedutil is indeed slower to react to load
+changes compared to pstate active.
 
+The methodology was to empty a cpu, run a serial float recurrence
+(kept non-vectorizable
+on purpose, to isolate frequency ramp-up rather than throughput headroom)
+and compare the average throughput over several initial time windows
+against the steady-state throughput in order to measure the CPU frequency
+ramp-up delay under pstate active and schedutil.
+
+### P-core
+                                  pstate-eas-balanced
+pstate-eas-performance    schedutil-eas-balanced
+schedutil-eas-performance
+------------------------------------------------------------------------------------------------------------------------------------------
+Ramp-up (average throughput at time window / steady):
+    0-0.005s (%)                  70.6                      99.4
+               59.7                      61.3
+    0-0.01s (%)                   83.0                      99.5
+               60.2                      62.1
+    0-0.02s (%)                   91.3                      99.5
+               62.9                      65.7
+    0-0.05s (%)                   96.7                      99.8
+               74.8                      77.6
+    0-0.1s (%)                    98.6                      99.9
+               86.9                      88.7
+    0-0.5s (%)                    100.0                     100.1
+               97.4                      97.8
+    0-1.0s (%)                    100.2                     100.1
+               98.7                      98.9
+  Convergence to 95% (ms)         5                         0
+               52                        47
+Steady-state:
+    Throughput (Mops/s)           649.8                     654.4
+               652.3                     651.7
+Energy:
+    Average Power (W)             9.01                      8.98
+               9.10                      9.07
+    Efficiency (J/Gop)            13.889                    13.735
+               14.000                    13.961
+
+### E-core
+                                  pstate-eas-balanced
+pstate-eas-performance    schedutil-eas-balanced
+schedutil-eas-performance
+------------------------------------------------------------------------------------------------------------------------------------------
+Ramp-up (average throughput at time window / steady):
+    0-0.005s (%)                  75.6                      99.0
+               62.3                      57.9
+    0-0.01s (%)                   85.1                      99.1
+               62.2                      58.8
+    0-0.02s (%)                   92.4                      99.3
+               64.5                      61.0
+    0-0.05s (%)                   97.0                      99.7
+               72.9                      69.2
+    0-0.1s (%)                    98.6                      99.9
+               84.8                      82.1
+    0-0.5s (%)                    99.8                      100.0
+               96.9                      96.4
+    0-1.0s (%)                    100.0                     100.0
+               98.5                      98.2
+  Convergence to 95% (ms)         8                         0
+               67                        72
+Steady-state:
+    Throughput (Mops/s)           540.6                     540.8
+               540.1                     539.7
+Energy:
+    Average Power (W)             5.46                      5.47
+               5.61                      5.51
+    Efficiency (J/Gop)            10.119                    10.125
+               10.426                    10.241
+
+That alone might make it worth it to use pstate active alongside EAS, as
+responsiveness gains are noticeable while busy energy consumption is similar.
+
+Furthermore, I implemented an EPP based EAS compatibility selection: when
+EPP is set to 0 (performance), eas_compatible is set to false regardless
+of the active cpufreq driver mode -- this also overrides schedutil's own
+eas_compatible assignment in sugov_init()/sugov_exit() when running in
+passive mode. IMHO that makes more sense than gating only on the governor,
+as users selecting the performance power profile are looking for
+responsiveness above all, independently of intel_pstate or governor settings.
+
+It's also worth noting that governors already have the ability to change
+EPP on their own (via intel_pstate_hwp_set()'s save/restore logic for
+CPUFREQ_POLICY_PERFORMANCE), which can lead to a state where the desktop's
+power profile indicator becomes inconsistent with the actual EPP value:
+
+  1. Switch governor: powersave -> performance
+     (intel_pstate saves the current EPP internally and forces EPP to 0)
+
+  2. Switch power profile: balanced -> performance
+     (EPP is explicitly written as 0 again; no visible change, since it
+     was already 0)
+
+  3. Switch governor: performance -> powersave
+     (intel_pstate restores the EPP to balanced,
+     because the current EPP still reads as 0 and the
+     restore heuristic cannot tell that this 0 was an explicit choice
+     rather than the still-forced value from step 1)
+
+After step 3, EAS becomes re-enabled, since EPP is no longer "performance"
+-- but the desktop still shows "performance" as the active power profile,
+since nothing told power-profiles-daemon that the EPP changed underneath
+it. This isn't something my patch introduces, it's an existing property
+of intel_pstate's governor-triggered EPP save/restore, but it is relevant
+here.
+
+diff --git a/drivers/cpufreq/intel_pstate.c b/drivers/cpufreq/intel_pstate.c
+index 8f5ab9fa3..6d7133b94 100644
+--- a/drivers/cpufreq/intel_pstate.c
++++ b/drivers/cpufreq/intel_pstate.c
+@@ -791,6 +791,18 @@
+cpufreq_freq_attr_ro(energy_performance_available_preferences);
+
+ static struct cpufreq_driver intel_pstate;
+
++static inline void update_eas_compatibility(struct cpufreq_policy
+*policy, struct cpudata *cpu)
++{
++ bool eas_compatible_was = policy->eas_compatible;
++
++ policy->eas_compatible = hwp_is_hybrid &&
++ cpu->policy != CPUFREQ_POLICY_PERFORMANCE &&
++ intel_pstate_get_epp(cpu, 0) != HWP_EPP_PERFORMANCE;
++
++ if (policy->eas_compatible != eas_compatible_was)
++ em_rebuild_sched_domains();
++}
++
+ static ssize_t store_energy_performance_preference(
+  struct cpufreq_policy *policy, const char *buf, size_t count)
+ {
+@@ -856,6 +868,8 @@ static ssize_t store_energy_performance_preference(
+
+  mutex_unlock(&intel_pstate_limits_lock);
+
++ update_eas_compatibility(policy, cpu);
++
+  return ret ?: count;
+ }
+
+@@ -2922,10 +2936,7 @@ static int intel_pstate_set_policy(struct
+cpufreq_policy *policy)
+  intel_pstate_clear_update_util_hook(policy->cpu);
+  intel_pstate_hwp_set(policy->cpu);
+
+- policy->eas_compatible = hwp_is_hybrid &&
+- cpu->policy != CPUFREQ_POLICY_PERFORMANCE;
+- if (policy->eas_compatible)
+- em_rebuild_sched_domains();
++ update_eas_compatibility(policy, cpu);
+  }
+  /*
+  * policy->cur is never updated with the intel_pstate driver, but it
 
