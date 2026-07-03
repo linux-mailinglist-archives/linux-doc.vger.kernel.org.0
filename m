@@ -1,357 +1,286 @@
-Return-Path: <linux-doc+bounces-94905-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94916-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Dp8ALnclSGpemwAAu9opvQ
-	(envelope-from <linux-doc+bounces-94905-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 23:11:19 +0200
+	id 3pfhBqEoSGpknAAAu9opvQ
+	(envelope-from <linux-doc+bounces-94916-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 23:24:49 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 101A4705B25
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 23:11:19 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D3FD705CCA
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 23:24:48 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=Vr7uC09r;
-	dmarc=pass (policy=reject) header.from=nvidia.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94905-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94905-lists+linux-doc=lfdr.de@vger.kernel.org";
-	arc=reject ("cv is fail on i=2")
+	dkim=pass header.d=infradead.org header.s=casper.20170209 header.b=W9XzMKZF;
+	dmarc=pass (policy=none) header.from=infradead.org;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94916-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-94916-lists+linux-doc=lfdr.de@vger.kernel.org";
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 1BA783009566
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 21:11:18 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 7107D301CD3F
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 21:22:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E1605331EBC;
-	Fri,  3 Jul 2026 21:11:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7507E36A350;
+	Fri,  3 Jul 2026 21:22:08 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from SN4PR0501CU005.outbound.protection.outlook.com (mail-southcentralusazon11011048.outbound.protection.outlook.com [40.93.194.48])
+Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 398C030C164;
-	Fri,  3 Jul 2026 21:11:13 +0000 (UTC)
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783113075; cv=fail; b=Qp9dLPg2yE1KrFUHWMmkJq50m8R+bIi+wzRUZISfMDEUmSm1e1iJ3PjroKu3q77dyTmS8/LlmKyPgFUT2YEIbw2GGsnhXHaAJJjAa7SZhC1c4rw1fN6L8HuD/6nZmPQpD9E3TpmU3qW+sOzwH2vB3KnjqR1oXzQYUlgKRcetyZ4=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783113075; c=relaxed/simple;
-	bh=sHC84Bo92HMqApFdvcQBkU+ps7291jAuAkPOyzm+F5Y=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=U98AIEaNq08nSGccEE/Re2avLVEKozFAkxEUDiPMAnVOwVakMKB21mQnVUnwXnyY9KYxJtwNF5mD/c431vN4arB4Yp2Pur4+MnfuxdUxDcwjt2hvEk8bYJ4rV/i0HyfTaJBlH8l/uPI8IzLewEkw6dUfV801tUX5t1g+EsX1zds=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=Vr7uC09r; arc=fail smtp.client-ip=40.93.194.48
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=w/Dpry65RncwLH1BFkIoTDXObGtLOUBKQPcH+/cZUOtUFK9jPcPIylbp6Gv+V0xIGQfl3wkO91keqraBsYzehK7xCA2VKe8YJlpFqMHg41Z45Cznt/s6ux3y6ZoVJ3f6B3mLDuDdqBXexvb2ZhbTqqv2QktIVATZLcgzyl68z90vSoggtVAyNyhYb/TF5BclaZDDvptaLy0mFs6q/ipUOnMRXFB6ouB3P3hwMfDXPN2ZMquujuxaqbzU+NmeLJGmLTUFj1cC9WeffRpWsrj3aJ2bvXUzSNBhjevy/UQ6G4zdJgacHx7+s8s6U/s2dUDQODvm7W/SxxtUVJyscGCpIQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=X0LOzoSu1tagWWHxyc8c9ENN8+3fpAKwgnI4cssGYpE=;
- b=BkBkUvNPrYOlKKKfqA/Dgrx/zcTw6jHZbh/JeSowKdzBVZCKgw/947HaelgScgEgi1RnWjf9wxgYBbSeRvra+K7zPybu3vrqGHHgyTDfwbH+xJ+G+eS6HCIm/I0ua/C8Rk6efF3hpbb8wuJp6tNQkKSdUIJ2Pt6TstgeRiUK1qV6vnAu/XTGcRSWI+JYntAJxeezaKX4S/Fie4AQYq6KxwpD76XL8IF9cHgg2nDBcr/KhF/L6yID2bHYsEOXsFgxd0tCGyN6rlI6HN3NOfPA2MzynFkAy3VzoO52uv7zjzqIG0MbBLkwMH9uN48E0MzQKIIl6aA61CXtQtQh9msoKg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=X0LOzoSu1tagWWHxyc8c9ENN8+3fpAKwgnI4cssGYpE=;
- b=Vr7uC09rK1ebhEh5Cg/k0QmduFVrQvZp+yAPsHTr7SBL1K7xxEySRFWApGM5XjNoPEDXiDGpS+LslLLtrlj0K/OF2Zt8hppFnzz1809Cs/B3LIwE7Qgx4/3WDsDPL6FbrTePs/6S2MkaCZmJwiJVQYfZ1L+bxBLA1FZmjHzLQXUOc6n+wFGOU73Cdd7HUo49IFtl4WOtrkJJo6mZsBzrpBg2nxqzAoblsaaJSF/R5XpNakwmwtjPbVvPgrjRergVNxCOVbpnWva/xJWqVPhwrwW/HJeLFHfPAKSWqYct5Qm3aB8oYmrKzfLfjfAZXSQuD72cft0K8q5VuF7lBJdw4Q==
-Received: from LV3PR12MB9356.namprd12.prod.outlook.com (2603:10b6:408:20c::21)
- by DS0PR12MB9323.namprd12.prod.outlook.com (2603:10b6:8:1b3::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.10; Fri, 3 Jul
- 2026 21:11:02 +0000
-Received: from LV3PR12MB9356.namprd12.prod.outlook.com
- ([fe80::1c36:31b4:c420:6286]) by LV3PR12MB9356.namprd12.prod.outlook.com
- ([fe80::1c36:31b4:c420:6286%5]) with mapi id 15.21.0181.009; Fri, 3 Jul 2026
- 21:11:02 +0000
-Date: Fri, 3 Jul 2026 17:11:01 -0400
-From: Yury Norov <ynorov@nvidia.com>
-To: Shrikanth Hegde <sshegde@linux.ibm.com>
-Cc: linux-kernel@vger.kernel.org, mingo@kernel.org, peterz@infradead.org,
-	juri.lelli@redhat.com, vincent.guittot@linaro.org,
-	yury.norov@gmail.com, kprateek.nayak@amd.com, iii@linux.ibm.com,
-	corbet@lwn.net, tglx@kernel.org, gregkh@linuxfoundation.org,
-	pbonzini@redhat.com, seanjc@google.com, vschneid@redhat.com,
-	huschle@linux.ibm.com, rostedt@goodmis.org,
-	dietmar.eggemann@arm.com, maddy@linux.ibm.com, srikar@linux.ibm.com,
-	hdanton@sina.com, chleroy@kernel.org, vineeth@bitbyteword.org,
-	frederic@kernel.org, arighi@nvidia.com, pauld@redhat.com,
-	christian.loehle@arm.com, tj@kernel.org,
-	tommaso.cucinotta@gmail.com, maz@kernel.org, rafael@kernel.org,
-	rdunlap@infradead.org, kernellwp@gmail.com,
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v6 18/23] virt/steal_monitor: Provide default method to
- inc/dec preferred CPUs
-Message-ID: <akglZQrZ0ghbwLth@yury>
-References: <20260701141654.500125-1-sshegde@linux.ibm.com>
- <20260701141654.500125-19-sshegde@linux.ibm.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260701141654.500125-19-sshegde@linux.ibm.com>
-X-ClientProxiedBy: CH0PR03CA0072.namprd03.prod.outlook.com
- (2603:10b6:610:cc::17) To LV3PR12MB9356.namprd12.prod.outlook.com
- (2603:10b6:408:20c::21)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1CD53403E0;
+	Fri,  3 Jul 2026 21:22:05 +0000 (UTC)
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783113728; cv=none; b=Vt6OAh7HFkQprnD8XY3ax0wMPgFjwvJ0zIQUTR54q6MnTCxRaE3XXnknRkAdK67gC0ctLYa14f57RqkqT2QWtQG/1CkJLShES02szMIFqkIoPIhbPz0iyhyEj/xxG9SY3yRTHJ+aHkTxeCT/quemavD6L+CfzmNspHQTojgtqqA=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783113728; c=relaxed/simple;
+	bh=9mGiQUKRAIzkU7xBNiFoxOQ0lev2fQX3eEuG+hhioAE=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version; b=bV+ZEbCOK4ST17fQxmLzDsseDrVfef1UoNdM6Iq5zQAOxY9K9+ezSWRqMpcLD1OgyAhQbTlbSKqfFKQBnrYJTN7XiKt0uL3BE6dNuT7GupZv2C45MXVzXF07yC4Rnm/WOdUOTv6DKAPoZAQKzMR13Vhx1eq7Q9txcsMbt1av8kE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=casper.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=W9XzMKZF; arc=none smtp.client-ip=90.155.50.34
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+	MIME-Version:Message-ID:Date:Subject:To:From:Reply-To:Cc:Content-Type:
+	Content-ID:Content-Description:In-Reply-To:References;
+	bh=wvuVYxcpMKTUzB1PVAb2vp+z8q/daFQH97Zt0FzYdTI=; b=W9XzMKZF+Q5CoOq/aV2FImKmn4
+	+MBNEUMz1UUX//35ieMEnUbaiZsHQsTOrfpMqJyem7xM2MCXsESLogrweax1K4VEn7VGsaAxuFtol
+	n+KQ3EN4fgjtWaRqFyqxHg1HXf/yi2skXyW+jTaS0Qk1V7TSrvx56j13mRj5oekE/3fEQ694N2cEW
+	mgq2fLxp2c99mW3FSQvDkCeudg1OHZOrce5n9XulglxvOXfr3wtY6IequF8Fr3xVB2motyCwj4WPC
+	gykHtGQP7j0TgEtGz5X17+6/VdjMQG4YNf7bRWnBi75ZgSnmbQsHS/Sr74SliiI5bkrRKoTzdHNeY
+	jhjnQZOA==;
+Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
+	by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+	id 1wflKV-0000000AsXw-3fP8;
+	Fri, 03 Jul 2026 21:21:48 +0000
+Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.2 #2 (Red Hat Linux))
+	id 1wflKV-00000001RNm-31u8;
+	Fri, 03 Jul 2026 22:21:47 +0100
+From: David Woodhouse <dwmw2@infradead.org>
+To: Paolo Bonzini <pbonzini@redhat.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Sean Christopherson <seanjc@google.com>,
+	Thomas Gleixner <tglx@kernel.org>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Vitaly Kuznetsov <vkuznets@redhat.com>,
+	Juergen Gross <jgross@suse.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	David Woodhouse <dwmw2@infradead.org>,
+	Paul Durrant <paul@xen.org>,
+	Jonathan Cameron <jic23@kernel.org>,
+	Sascha Bischoff <Sascha.Bischoff@arm.com>,
+	Marc Zyngier <maz@kernel.org>,
+	Joey Gouly <joey.gouly@arm.com>,
+	Jack Allister <jalliste@amazon.com>,
+	Dongli Zhang <dongli.zhang@oracle.com>,
+	joe.jin@oracle.com,
+	kvm@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	linux-kselftest@vger.kernel.org
+Subject: [PATCH v6 00/36] Cleaning up the KVM clock mess
+Date: Fri,  3 Jul 2026 22:17:39 +0100
+Message-ID: <20260703212145.343527-1-dwmw2@infradead.org>
+X-Mailer: git-send-email 2.54.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV3PR12MB9356:EE_|DS0PR12MB9323:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8856821a-afee-4a37-f113-08ded9479679
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|376014|7416014|1800799024|366016|4143699003|5023799004|11063799006|56012099006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	QpT9gvd19Bt2zZrvzJqv7jArbpWQ88pvgldgRAgeGbRpNNjamgjRHaoJ09GeNxmaFlaiyhoioaKb9hxCTUG+RVZaQEPeGa4r0OVsSpArexwhr+C+Ojuc9hDIOHJz3vQLHbxFEp99gJP5iFPgJqlY6z1JbhZLlQzK/8sYKs27P2EzQNpHwUp3S1+gWAjyhrW4IzUzgAB5/Pp9+SbJFR2JNK1g4BniBBZbfdQ6BZIdG3yH0FR4IAas3aw/ffZPUJ1R2kieJYhjiwITI5+dL0DQnb85+2lDgS58FPvLsJCE6z0A76vcMdfHG3e0YLaG5B9ny8w9vP9BQouIV55Znt6sJy65/i2SpU70KGlJ4DpI6WoJ0S2qnLXMRE6hvwdubaDZNigZXY5Ap8haregmsA2rBieAvxmc58GOkLmZpNUQ6zlFDDXedNCHcXBQRKzw43NtgV6yMsKgmTiwvc1674dMIIp62OhrSiN1TJNLgNgp7ZS8t2hxTgt4dZx7w96xA+hQTB6qFNWCE7wItZhOQV0J6XS3+RndtciI595Q/qnCUDNtnAmiAmXQsHmOrCq3/ExzQvzvyagbHiq3H20THzFSDvSCf+I5StydKK7y5KE/4DJWB/AxUSmzhSxg4m23OohfF0DnTU+G7Dlb2cGrZQHNXgM16IhNahEG+I6mpj2uFRc=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV3PR12MB9356.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(7416014)(1800799024)(366016)(4143699003)(5023799004)(11063799006)(56012099006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?y8pg7X7MVIT1GNt1Ykf784vS2F0LMnuCTf27FMtiNr434iuC4sDZMu9oMqyq?=
- =?us-ascii?Q?f66vhkxaF8AFC3PmjE80PYE2Yw+cMLfdHMTUqNNoXTjMizxS7lPBjzRMKkon?=
- =?us-ascii?Q?sefvqhbBmJriDHdf4gv5Q1nP7KGuGTDGfhR7J/GGVsCX9Yxyk9mYa+MHwk9D?=
- =?us-ascii?Q?xij3wtOxjSKJfm0kJpEgHKrzJIsTSwTxHZK6Z1OQV3mhBLqL/Wm9wgRZRkxQ?=
- =?us-ascii?Q?4berJAxWE4sCo6sze1ZgOL4AeIB03P6ttX5FY8lYxZNZT4dQAc2YnmyfNVdK?=
- =?us-ascii?Q?6HWHxd3VGHWSd4WJ5HGgJUWcKGu/oCEh/pzyEkURZ5/vdaZV6PZEdhx9IW9y?=
- =?us-ascii?Q?wOZnNWoPV3f45nsoaSwth7bhUS7dehR4u/tJJzvKR2fPd2K5dXuBbbW35akL?=
- =?us-ascii?Q?LSPk6rSmu0XZzk0rTVcoQXRx0Q/hyU+IvOSBC2HGhZtp+xcyxSsHRSFGb7l4?=
- =?us-ascii?Q?EtxZnCyxOW4VT0/O9VxM1z1+cHdz7I3JXqm2Xmf94tHDh09T5ujUFEV927h5?=
- =?us-ascii?Q?sd4KmrNNt2rMTOF8MjNMHGhcJmhA8M/xik/LJVoXMsPqavmtmVyvDHLjdSN+?=
- =?us-ascii?Q?qX/XCR6+mFl1pdeS600LprhncpdtbJrG1NYV99qYTmDqYWLnRDgB0UfOdSpm?=
- =?us-ascii?Q?VYDWcB/TydwkhsgBcIKeTbZJ5qCup+zOdUOKHYyY2KUBFIML1qHf0Y1U+ffj?=
- =?us-ascii?Q?1Rv8XvyaLNtXkRIYQwnDalNXGzm2R1f93FrkFZNnPI/SaGNa07lESg1rZvkK?=
- =?us-ascii?Q?2fMRv2C9QR+761vOo4IWj1K5F73k2xv4BKeWSV86wunJWS/VYxcMNjO/O5ey?=
- =?us-ascii?Q?9MUVdehAtAKxiQTxXpopa1n4AUnNhHNNcptX4tYYJHg4gA6YRj7xxaj1GPxK?=
- =?us-ascii?Q?cRk4MkaFlvpGdefWv/aO0HSo7HilsuLTMx7ZC94BUiUX6ZMB1mBGcMT76O0c?=
- =?us-ascii?Q?4gCyxyfq5WU8P9D3HwFZ/lTR3Zea1C1XqokCM1yqHbUXr1MmFyk6T6F5wZyI?=
- =?us-ascii?Q?MWwDIiGYAxNyUoE1zZ7MBCZwZJxCsT344mw/st2neEMCR0aPtFg5gkITRjrd?=
- =?us-ascii?Q?CzVFuktku+bJ4e661Dm509z9/TWbczRIf1uDDu5n4SIi/qZnAJvao+2Rrk3A?=
- =?us-ascii?Q?LhkOLbjEbX9vYgzCWateG/Eh+/1cTn+oXv7uolfQL50lkf+R6YuEsVxdmiXU?=
- =?us-ascii?Q?xOASRkE2RIxUx0pYpwlwAMBYy2rYTePygy3iyTPua7mJ17M9XzA6CiCnu8nZ?=
- =?us-ascii?Q?HATdTH9G6EaR7ekhNsVGQhCR84As9Q9eYz5i7PS5ilSydr+YiCu8Nga1tpwh?=
- =?us-ascii?Q?i3zlZ3mWFp7LC96r4lP65Pax6orsD3Ibxa7sfeMeAR8HlRixddMscR4O9Xdb?=
- =?us-ascii?Q?omZnOYB7PLghcFsPqJsYQH56Cva4mGLZufZInAsP2PCof40RNkWKL9gTVRxS?=
- =?us-ascii?Q?ToGa0S2I95Xhw0w/OVfj/zUj9axl3c/g//3MG/SRXvKEfq0Yfv17TbnFc29u?=
- =?us-ascii?Q?teNjjI4uG0j3eRhkzdkE3HfGkUImQp1A0GOPTh1Y9zR4mX5UdwjCWBz8r+iD?=
- =?us-ascii?Q?12/PeU5zuMe0hoKAZB6uwCag8lGXYZU0fas/yMT/rIcIQ9UbAjCXBlGplstL?=
- =?us-ascii?Q?A13G4zgdh5E3k0cbgQ7+wxsGYvE688E/+DO6C1HI5j76b3eJOs14i0kemx1+?=
- =?us-ascii?Q?Id2rRsyW1ogLTg+Jxp5SLCSeUX/qXVOPkKg2vbDMGHhS53H/?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8856821a-afee-4a37-f113-08ded9479679
-X-MS-Exchange-CrossTenant-AuthSource: LV3PR12MB9356.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jul 2026 21:11:02.5846
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qqNzcPTlvu/JC4oX3rtRXRITjo7A2emFVEzDR6afGyYny89KvjBkHDM5VDScmpelNinvXHVVlykkUWu4eiQFXg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB9323
+Content-Transfer-Encoding: 8bit
+Sender: David Woodhouse <dwmw2@infradead.org>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-5.16 / 15.00];
-	WHITELIST_DMARC(-7.00)[nvidia.com:D:+];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_REJECT(1.00)[cv is fail on i=2];
-	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=casper.20170209];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-94916-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94905-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:sshegde@linux.ibm.com,m:linux-kernel@vger.kernel.org,m:mingo@kernel.org,m:peterz@infradead.org,m:juri.lelli@redhat.com,m:vincent.guittot@linaro.org,m:yury.norov@gmail.com,m:kprateek.nayak@amd.com,m:iii@linux.ibm.com,m:corbet@lwn.net,m:tglx@kernel.org,m:gregkh@linuxfoundation.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:vschneid@redhat.com,m:huschle@linux.ibm.com,m:rostedt@goodmis.org,m:dietmar.eggemann@arm.com,m:maddy@linux.ibm.com,m:srikar@linux.ibm.com,m:hdanton@sina.com,m:chleroy@kernel.org,m:vineeth@bitbyteword.org,m:frederic@kernel.org,m:arighi@nvidia.com,m:pauld@redhat.com,m:christian.loehle@arm.com,m:tj@kernel.org,m:tommaso.cucinotta@gmail.com,m:maz@kernel.org,m:rafael@kernel.org,m:rdunlap@infradead.org,m:kernellwp@gmail.com,m:linux-doc@vger.kernel.org,m:yurynorov@gmail.com,m:tommasocucinotta@gmail.com,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:pbonzini@redhat.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:vkuznets@redhat.com,m:jgross@suse.com,m:boris.ostrovsky@oracle.com,m:dwmw2@infradead.org,m:paul@xen.org,m:jic23@kernel.org,m:Sascha.Bischoff@arm.com,m:maz@kernel.org,m:joey.gouly@arm.com,m:jalliste@amazon.com,m:dongli.zhang@oracle.com,m:joe.jin@oracle.com,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:xen-devel@lists.xenproject.org,m:linux-kselftest@vger.kernel.org,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[34];
-	FORGED_SENDER(0.00)[ynorov@nvidia.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[27];
+	FORGED_SENDER(0.00)[dwmw2@infradead.org,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[Nvidia.com:+];
+	DKIM_TRACE(0.00)[infradead.org:+];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ynorov@nvidia.com,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,infradead.org,redhat.com,linaro.org,gmail.com,amd.com,linux.ibm.com,lwn.net,linuxfoundation.org,google.com,goodmis.org,arm.com,sina.com,bitbyteword.org,nvidia.com];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[dwmw2@infradead.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,Nvidia.com:dkim,nvidia.com:from_mime]
+	ALIAS_RESOLVED(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:from_mime,infradead.org:dkim,infradead.org:mid,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 101A4705B25
+X-Rspamd-Queue-Id: 4D3FD705CCA
 
-On Wed, Jul 01, 2026 at 07:46:49PM +0530, Shrikanth Hegde wrote:
-> These methods will be used by the steal_monitor core in subsequent
-> patches. Default implementation are likely good enough for most archs.
-> 
-> decrease_preferred_cpus() - Called when there is high steal time. It needs
-> to decide which CPUs to mark as non-preferred and set that state.
-> increase_preferred_cpus() - Called when there is low steal time. It needs
-> to decide which CPUs to mark as preferred and set that state.
-> 
-> Default Implementations:
-> decrease_preferred_cpus()
-> - Get first housekeeping CPU and its core mask. Mark it as
->   protected core. This helps to keep at least one core as preferred.
+This is v6 of the series to clean up the KVM clock, rebased onto the
+tip timers/ptp material (the timers-ptp-2026-06-13 merge, which includes
+Thomas's ktime snapshot series and the read_snapshot patches).
 
-Is there any measurable difference to manage preferred CPUs per-core
-vs per-cpu? If not, I'd choose to per-cpu version as it's simpler.
+The KVM clock has historically suffered from three problems:
 
->   This is to be safe under non-normal cases.
-> - Find the last CPU outside of this protected core mask. (target CPU)
->   This works for cases where one may specify nohz_full= for last set of
->   CPUs as well.
+ 1. Imprecision: get_kvmclock_ns() computed the clock from the *host*
+    TSC without applying guest TSC scaling, causing systemic drift from
+    the values the guest computes from its own TSC.
 
-And doesn't work for cases where one specifies nohz_full for the first
-set of CPUs. If you want to do it properly, you need two passes:
-1. Search for preferred nohz_full candidates, and 
-2. If no such CPU found, search for any preferred CPU.      
+ 2. Unnecessary discontinuities: gratuitous KVM_REQ_MASTERCLOCK_UPDATE
+    requests caused the master clock reference point to be re-snapshotted,
+    yanking the guest's clock due to arithmetic precision differences.
 
-> - If no such CPU exits, then only housekeeping core remains. Bail out.
-> - Based on that target CPU, get its sibling and mark them as
->   non-preferred. If they are nohz_full, enable the tick.
->   push mechanism relies on sched_tick.
-> 
-> increase_preferred_cpus()
-> - Get the first active non-preferred CPUs. This likely is the last
->   set of CPUs being marked as non-preferred.
-> - If there is no such CPU, i.e preferred is same as active. Nothing
->   todo further.
-> - If not, get the siblings of that core and mark them as preferred.
->   Note that clearing the tick isn't needed as that would be handled via
->   sched_can_stop_tick.
-> 
-> Using core instead of individual CPUs give better numbers as SMT is
-> quite common and some hypervisor such as powerVM does core scheduling.
-> 
-> Note: This doesn't do any NUMA splicing to keep the code simpler and
-> minimal overhead. current code expects CPUs spread unformly
-> across NUMA nodes.
-> 
-> Signed-off-by: Shrikanth Hegde <sshegde@linux.ibm.com>
-> ---
-> v5->v6:
-> - Make it work for all cases when nohz_full= may be specified.
-> 
->  drivers/virt/steal_monitor/defaults.c | 74 +++++++++++++++++++++++++++
->  drivers/virt/steal_monitor/sm_core.h  |  2 +
->  2 files changed, 76 insertions(+)
-> 
-> diff --git a/drivers/virt/steal_monitor/defaults.c b/drivers/virt/steal_monitor/defaults.c
-> index 6681f9938f6a..4e2e5b233948 100644
-> --- a/drivers/virt/steal_monitor/defaults.c
-> +++ b/drivers/virt/steal_monitor/defaults.c
-> @@ -26,3 +26,77 @@ u64 __weak get_system_steal_time(void)
->  
->  	return total_steal;
->  }
-> +
-> +/*
-> + * Default implementation of decrementing the preferred CPUs based on steal
-> + * time. This is simple logic and decrease the preferred CPUs by 1 core.
-> + * It takes out the last core in the active & preferred.
-> + *
-> + * Ensure at least one housekeeping core is always kept as preferred
-> + *
-> + * Could be overwritten by arch specific handling. Arch must ensure
-> + * preferred is always subset of active.
-> + */
-> +
-> +#define get_core_mask(cpu) topology_sibling_cpumask(cpu)
+ 3. No precise migration API: the existing KVM_[GS]ET_CLOCK only allows
+    setting the clock at a given UTC reference time, which is necessarily
+    imprecise. There was no way to preserve the exact arithmetic
+    relationship between guest TSC and KVM clock across live migration.
 
-useless redefinition.
+This series addresses all three, and adds new APIs for precise clock
+migration and TSC frequency reporting. As an added bonus, it now rips
+out the whole pvclock_gtod_data hack which was shadowing the kernel's
+timekeeping, and uses ktime snapshots as $DEITY (well, Thomas) intended.
 
-> +
-> +void __weak decrease_preferred_cpus(struct steal_monitor *ctx)
-> +{
-> +	int tmp_cpu, first_hk_cpu;
-> +	const struct cpumask *first_hk_core;
-> +	int target_cpu = nr_cpu_ids;
-> +
-> +	guard(cpus_read_lock)();
-> +
-> +	first_hk_cpu = cpumask_first_and(housekeeping_cpumask(HK_TYPE_KERNEL_NOISE),
-> +					 cpu_active_mask);
+v5: https://lore.kernel.org/all/20260608145455.89187-1-dwmw2@infradead.org/
 
-Why active mask? If you want to preserve a cpu in preferred mask,
-search the cpu_preferred_mask.
+Changes since v5:
+ - Rebased onto the tip timers-ptp-2026-06-13 merge.
 
-Can you explain why HK_TYPE_KERNEL_NOISE? Honestly, I don't
-understand the idea behind this logic.
+ - Series shape: two new patches ("KVM: selftests: Use UAPI pvclock-abi.h
+   in xen_shinfo_test" and "KVM: x86: Activate master clock from
+   kvm_arch_init_vm()"); "Replace pvclock_gtod_data vclock_mode with
+   boolean" is replaced by "Cache host vclock_mode for masterclock
+   eligibility checks".
 
-> +
-> +	if (first_hk_cpu >= nr_cpu_ids)
-> +		return;
-> +
-> +	first_hk_core = get_core_mask(first_hk_cpu);
-> +
-> +	/* Always leave first housekeeping core as preferred. */
-> +	for_each_cpu_andnot(tmp_cpu, cpu_preferred_mask, first_hk_core)
-> +		target_cpu = tmp_cpu;
-> +
-> +	/* Only the first housekeeping core remains */
-> +	if (target_cpu >= nr_cpu_ids)
-> +		return;
-> +
-> +	/*
-> +	 * set tick bit for nohz_full CPU to push the task out. Once the tasks
-> +	 * are pushed out, bit will be cleared if there are no tasks.
-> +	 */
-> +
-> +	for_each_cpu_and(tmp_cpu, get_core_mask(target_cpu), cpu_active_mask) {
+ - Sean Christopherson's review:
+   * KVM_VCPU_TSC_SCALE: return -ENXIO (not -EINVAL) from the get/set
+     device-attribute handlers when !has_tsc_control, and do so in the
+     patch that introduces the attribute.
+   * Clear SECONDARY_EXEC_TSC_SCALING in setup_vmcs_config() rather than
+     vmx_hardware_setup(), so the per-CPU configs recomputed by
+     vmx_check_processor_compat() stay consistent with the golden
+     vmcs_config.
 
-Why active mask here? It should be preferred, I guess? If you traverse
-the active mask, you're at least doing an extra work by disabling the
-already disabled CPUs, and probably have some side effects by calling
-tick_nohz_dep_set_cpu() twice.
+ - kernel test robot (0-day), i386 W=1 warnings:
+   * get_kvmclock(): move hv_clock into the use_master_clock block, drop
+     the now-unnecessary get_cpu()/put_cpu() pinning (use_master_clock
+     implies a stable synchronised TSC clocksource), and replace the
+     goto/'fallback:' label with a 'continue'.
+   * pvclock_gtod_notify(): move 'tk' inside CONFIG_X86_64.
 
-> +		set_cpu_preferred(tmp_cpu, false);
-> +		if (tick_nohz_full_cpu(tmp_cpu))
-> +			tick_nohz_dep_set_cpu(tmp_cpu, TICK_DEP_BIT_SCHED);
-> +	}
-> +}
-> +
-> +/*
-> + * Default implementation of incrementing preferred CPUs based on steal
-> + * time. This is simple logic and increases the preferred CPUs by 1 core.
-> + * It adds the first core in active & !preferred
-> + *
-> + * Nothing to do if active == preferred
-> + *
-> + * Could be overwritten by arch specific handling. Arch must ensure
-> + * preferred is subset of active.
-> + */
-> +void __weak increase_preferred_cpus(struct steal_monitor *ctx)
-> +{
-> +	int first_cpu, tmp_cpu;
-> +
-> +	guard(cpus_read_lock)();
-> +
-> +	first_cpu = cpumask_first_andnot(cpu_active_mask, cpu_preferred_mask);
-> +	/* All CPUs are preferred. Nothing to increase further */
-> +	if (first_cpu >= nr_cpu_ids)
-> +		return;
-> +
-> +	for_each_cpu_and(tmp_cpu, get_core_mask(first_cpu), cpu_active_mask)
+ - Correctness fixes from review:
+   * KVM_SET_CLOCK_GUEST: bound the shift in hvclock_to_hz(), tighten
+     tsc_shift validation to [-31, 31], and reject guest_tsc below
+     pvclock.tsc_timestamp.
+   * kvm_guest_time_update(): read kvmclock_offset inside the pvclock
+     seqcount loop to avoid a torn read.
+   * kvm_snapshot_has_tsc(): honour snap->valid and zero-init the
+     snapshot, avoiding use of uninitialised stack.
+   * kvm_synchronize_tsc(): advance the matched reference point to "now"
+     to preserve the 1-second TSC matching window.
+   * kvm_track_tsc_matching(): request a masterclock update when
+     all_vcpus_matched_tsc changes, so PVCLOCK_TSC_STABLE_BIT is
+     broadcast to the other vCPUs.
+   * kvm_arch_enable_virtualization_cpu(): adjust cur_tsc_offset together
+     with cur_tsc_write under tsc_write_lock on the backwards-TSC / host
+     S4 resume path.
+   * kvm_set_tsc_khz(): sample the guest TSC before changing the ratio,
+     preserving continuity across the frequency change.
+   * Keep the real vclock_mode (int) rather than collapsing it to a
+     bool, so kvm_check_tsc_unstable() still special-cases HVCLOCK.
+   * Activate the master clock, and establish the initial TSC generation
+     and kvmclock epoch, from kvm_arch_init_vm() instead of a synchronous
+     kvm_update_masterclock() at each vCPU creation (avoids O(N^2)).
 
-Here I agree, it should be cpu_active_mask. 
+ - selftests: use kvm_vm_free() instead of kvm_vm_release(); add the
+   missing Makefile entry for xen_migration_test; guard on
+   KVM_GET_CLOCK_GUEST / KVM_VCPU_TSC_OFFSET availability; use the
+   KVM_VCPU_TSC_SCALE enum instead of a literal; overflow-safe
+   arithmetic and looser tolerances.
 
-> +		set_cpu_preferred(tmp_cpu, true);
-> +}
-> diff --git a/drivers/virt/steal_monitor/sm_core.h b/drivers/virt/steal_monitor/sm_core.h
-> index 634c9f5a2610..030f6236c38e 100644
-> --- a/drivers/virt/steal_monitor/sm_core.h
-> +++ b/drivers/virt/steal_monitor/sm_core.h
-> @@ -26,5 +26,7 @@ struct steal_monitor {
->  extern struct steal_monitor sm_core_ctx;
->  
->  u64 get_system_steal_time(void);
-> +void increase_preferred_cpus(struct steal_monitor *ctx);
-> +void decrease_preferred_cpus(struct steal_monitor *ctx);
->  
->  #endif /* __VIRT_STEAL_CORE_H */
-> -- 
-> 2.47.3
+ - Documentation: fix the KVM_VCPU_TSC_OFFSET / KVM_VCPU_TSC_SCALE ReST
+   heading underlines (Randy Dunlap).
+
+ - UAPI: asm/kvm.h now includes <asm/pvclock-abi.h> so the
+   KVM_[GS]ET_CLOCK_GUEST ioctls are self-contained.
+
+ - Collected Dongli Zhang's Tested-by (kexec/LUO testing of the KVM clock
+   accuracy, pvclock-abi UAPI move, KVM_[GS]ET_CLOCK_GUEST and
+   redundant-masterclock-update patches).
+
+David Woodhouse (33):
+      KVM: x86/xen: Do not corrupt KVM clock in kvm_xen_shared_info_init()
+      KVM: x86: Improve accuracy of KVM clock when TSC scaling is in force
+      KVM: selftests: Use UAPI pvclock-abi.h in xen_shinfo_test
+      KVM: x86: Explicitly disable TSC scaling without CONSTANT_TSC
+      KVM: x86: Activate master clock immediately on vCPU creation
+      KVM: x86: Add KVM_VCPU_TSC_SCALE and fix the documentation on TSC migration
+      KVM: x86: Avoid NTP frequency skew for KVM clock on 32-bit host
+      KVM: x86: Fold __get_kvmclock() into get_kvmclock()
+      KVM: x86: Restructure get_kvmclock()
+      KVM: x86: Fix KVM clock precision in get_kvmclock() with TSC scaling
+      KVM: x86: Use get_kvmclock() in kvm_get_wall_clock_epoch()
+      KVM: x86: Fix compute_guest_tsc() to handle negative time deltas
+      KVM: x86: Restructure kvm_guest_time_update() for TSC upscaling
+      KVM: x86: Simplify and comment kvm_get_time_scale()
+      KVM: x86: Remove implicit rdtsc() from kvm_compute_l1_tsc_offset()
+      KVM: x86: Improve synchronization in kvm_synchronize_tsc()
+      KVM: x86: Kill last_tsc_{nsec,write,offset} fields
+      KVM: x86: Replace nr_vcpus_matched_tsc count with all_vcpus_matched_tsc bool
+      KVM: x86: Allow KVM master clock mode when TSCs are offset from each other
+      KVM: selftests: Add master clock offset test
+      KVM: x86: Factor out kvm_use_master_clock()
+      KVM: x86: Avoid gratuitous global clock updates
+      KVM: x86/xen: Prevent runstate times from becoming negative
+      KVM: x86: Avoid redundant masterclock updates from multiple vCPUs
+      KVM: x86: Remove runtime Xen TSC frequency CPUID update
+      KVM: selftests: Add Xen/generic CPUID timing leaf test
+      KVM: x86: Re-synchronize TSC after KVM_SET_TSC_KHZ
+      KVM: selftests: Add Xen runstate migration test
+      KVM: x86: Use ktime_get_snapshot_id() for master clock
+      KVM: x86: Compute kvmclock base without pvclock_gtod_data
+      KVM: x86: Cache host vclock_mode for masterclock eligibility checks
+      KVM: x86: Remove pvclock_gtod_data and private timekeeping code
+      KVM: x86: Activate master clock from kvm_arch_init_vm()
+
+Jack Allister (3):
+      UAPI: x86: Move pvclock-abi to UAPI for x86 platforms
+      KVM: x86: Add KVM_[GS]ET_CLOCK_GUEST for accurate KVM clock migration
+      KVM: selftests: Add KVM/PV clock selftest to prove timer correction
+
+ Documentation/virt/kvm/api.rst                     |   37 +
+ Documentation/virt/kvm/devices/vcpu.rst            |  120 ++-
+ MAINTAINERS                                        |    4 +-
+ arch/x86/include/asm/kvm_host.h                    |   16 +-
+ arch/x86/include/uapi/asm/kvm.h                    |    7 +
+ arch/x86/include/{ => uapi}/asm/pvclock-abi.h      |   27 +-
+ arch/x86/kvm/cpuid.c                               |   16 -
+ arch/x86/kvm/svm/svm.c                             |    3 +-
+ arch/x86/kvm/vmx/vmx.c                             |   10 +
+ arch/x86/kvm/x86.c                                 | 1104 ++++++++++++--------
+ arch/x86/kvm/xen.c                                 |   30 +-
+ arch/x86/kvm/xen.h                                 |   13 -
+ include/uapi/linux/kvm.h                           |    3 +
+ scripts/xen-hypercalls.sh                          |    2 +-
+ tools/testing/selftests/kvm/Makefile.kvm           |    5 +
+ .../selftests/kvm/x86/masterclock_offset_test.c    |  180 ++++
+ .../selftests/kvm/x86/pvclock_migration_test.c     |  383 +++++++
+ tools/testing/selftests/kvm/x86/pvclock_test.c     |  443 ++++++++
+ .../selftests/kvm/x86/xen_cpuid_timing_test.c      |  230 ++++
+ .../testing/selftests/kvm/x86/xen_migration_test.c |  194 ++++
+ tools/testing/selftests/kvm/x86/xen_shinfo_test.c  |   17 +-
+ 21 files changed, 2318 insertions(+), 526 deletions(-)
+
+base-commit: 2d6d57f889f3
+
 
