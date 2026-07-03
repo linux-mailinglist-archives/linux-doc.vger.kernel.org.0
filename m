@@ -1,55 +1,55 @@
-Return-Path: <linux-doc+bounces-94933-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94906-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id ElSxGQkrSGr5nAAAu9opvQ
-	(envelope-from <linux-doc+bounces-94933-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 23:35:05 +0200
+	id FF2AJwsoSGoAnAAAu9opvQ
+	(envelope-from <linux-doc+bounces-94906-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 23:22:19 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04787705E33
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 23:35:05 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9B8EC705B9A
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 23:22:18 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=infradead.org header.s=desiato.20200630 header.b=Tbbp2+Tw;
+	dkim=pass header.d=infradead.org header.s=casper.20170209 header.b="K/OjjdcT";
 	dmarc=pass (policy=none) header.from=infradead.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94933-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-94933-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94906-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94906-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id DD0AF30B1DE2
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 21:26:41 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 37B783012CE6
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 21:22:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B66B1379966;
-	Fri,  3 Jul 2026 21:24:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0C45B349B0A;
+	Fri,  3 Jul 2026 21:22:06 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from desiato.infradead.org (desiato.infradead.org [90.155.92.199])
+Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D152337881E;
-	Fri,  3 Jul 2026 21:24:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6187B30D410;
+	Fri,  3 Jul 2026 21:22:02 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783113850; cv=none; b=asvb6DZ7lo0sPtvU1AiJNd3eQjc/u3TaiWcjT1kTlWxNs8LUgnNXPWWXUap4uv1vC9AXKnt7SajspSBm3UM+1Mg2I+QeG8eK1bu2fwT5EKU/Qcg+cDjCo1yF5v8zCmM9OIrEAX3w6p9XAUK6Whli4JLrVo2yY/YMQL/J3xoAozE=
+	t=1783113725; cv=none; b=emLYCzgFVhOY8kNDFn3M80ikoDkYNf94p4YgjR7B4ER0S66r5zVv1QrJ9QpC6M225OU3c6BGtinwePZ0p/65pa/2gJJ+Zo/Nv4ldZ9tJffXlU3w1EreQuGNJpIhSMe3EeqEa8VT1U+45ubDO/9bNcL5DfbpjGK4SOmBhpMc7z50=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783113850; c=relaxed/simple;
-	bh=XGr1PtaeIhNzI+9qcm04k8q8b+leZWwCsY1929boQck=;
+	s=arc-20240116; t=1783113725; c=relaxed/simple;
+	bh=/05u8B1dPBoK2NFDpnKQF4OBXA/6Fj4Ci8NGitp6wi0=;
 	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=f1OjV5/dhTXfuhdloMhL01S2NKDgKRLBzBZqgpFXHEVqZ8vLHpmvmAmBjJYbtT5GihPSguifFcdLnz9er8ajkodJFAUvY1Zq7gp3GVPLi7ZtJGdaMd+QK2gOVM1w4CenFLK5F7rAdTvFHO78p5cI/TZJFCVBnNOPVqq6zle9D78=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=desiato.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=Tbbp2+Tw; arc=none smtp.client-ip=90.155.92.199
+	 MIME-Version; b=qctTL2b6IcIxqTV/5ImPDV02IUpWU6lAo26npHQraOU2VwiXmyfAQR7U5A460wnRz6Aig5TikUTWZmScVaox/NPFYyWy4gGCeSI58RgFJVv+u8m2a62AVt+GXWPh0ZjVrXZMuUl3l92H51u4KjdhopBuUkWiPfQt83EAj3riBVc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=casper.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=K/OjjdcT; arc=none smtp.client-ip=90.155.50.34
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
 	Cc:Content-Type:Content-ID:Content-Description;
-	bh=flkC/OcSCGAXpnaP19vXBE2hMaRp11igqBu5RS6r3dg=; b=Tbbp2+TwxLpc+G6p3RBqRTKHVF
-	F4m+83xyTjWYceXJyh2USsFVoW6+F+mtSXFFxfE40w5kBpDY7LtCXofCcMc5DNYajLyDOqwL8awjr
-	D8NjUmK74H6WSJ4msHlpTTp23TRYPcLxDbu5yf3S4NBseUm1GXoEO6eGOWBjZbhbqtgNYV3EslBHl
-	sdjDwDOi/MgPFJ/us5LXXWA4S16xfC6rAOzt5Ui6F0K99DIcw/7CW4aX8nJ96jKVAAqZ7lQKV3S/e
-	wuu9Y93KEfLorCJOM0DRw0AlgEomw2lcT+tPvveFIhQ0M5LxwRmzGgsezMN8iEKUMRI6h7CJsDgke
-	xHD9FbXQ==;
+	bh=JGip5OQmCNyYBe2RKNqtANSbVWKYmHi+8pzbH2BRHSA=; b=K/OjjdcT6O/cygwEuqkom8qloZ
+	C+OSPUx10ymjhW/V1tZF78Q5nJxxW2QjPYLriE1GdGwSREYz44Tw3TsyTe82NSqCWM4lhGivf38wg
+	9D4xJ62zrzNbRoTxpSRpCCvI1dys9Fy/vhBI//h1vnhNBgX8NhQ4YfneO8qb7VoE7Wc2qbmTreVVa
+	GCneIJ/+04IgHesf0fEdF7QfFZ4qvRcVRcQeGwt1frRTnHVzA3JdKed2mpPaZI/LW7m4axN8dohsQ
+	eqIh5yx6j6F7xOtPZxM5z3JlqseV4oJ+7+jG5Og0yXJOI4I7gubsrk0nQ/3NxYg95+n+OLVBYJeVh
+	wxION8tA==;
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
-	by desiato.infradead.org with esmtpsa (Exim 4.99.2 #2 (Red Hat Linux))
-	id 1wflKc-000000059Nv-34Xj;
-	Fri, 03 Jul 2026 21:23:38 +0000
+	by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+	id 1wflKW-0000000AsXx-09Ii;
+	Fri, 03 Jul 2026 21:21:48 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.2 #2 (Red Hat Linux))
-	id 1wflKV-00000001RNt-3e6d;
+	id 1wflKV-00000001RNx-3z0C;
 	Fri, 03 Jul 2026 22:21:47 +0100
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
@@ -79,9 +79,9 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v6 02/36] KVM: x86: Improve accuracy of KVM clock when TSC scaling is in force
-Date: Fri,  3 Jul 2026 22:17:41 +0100
-Message-ID: <20260703212145.343527-3-dwmw2@infradead.org>
+Subject: [PATCH v6 03/36] UAPI: x86: Move pvclock-abi to UAPI for x86 platforms
+Date: Fri,  3 Jul 2026 22:17:42 +0100
+Message-ID: <20260703212145.343527-4-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260703212145.343527-1-dwmw2@infradead.org>
 References: <20260703212145.343527-1-dwmw2@infradead.org>
@@ -93,19 +93,19 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=desiato.20200630];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=casper.20170209];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-94933-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-94906-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS(0.00)[m:pbonzini@redhat.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:vkuznets@redhat.com,m:jgross@suse.com,m:boris.ostrovsky@oracle.com,m:dwmw2@infradead.org,m:paul@xen.org,m:jic23@kernel.org,m:Sascha.Bischoff@arm.com,m:maz@kernel.org,m:joey.gouly@arm.com,m:jalliste@amazon.com,m:dongli.zhang@oracle.com,m:joe.jin@oracle.com,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:xen-devel@lists.xenproject.org,m:linux-kselftest@vger.kernel.org,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -114,7 +114,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
 	DKIM_TRACE(0.00)[infradead.org:+];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
@@ -126,116 +126,117 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ALIAS_RESOLVED(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[xen.org:email,vger.kernel.org:from_smtp,infradead.org:from_mime,infradead.org:dkim,infradead.org:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,amazon.co.uk:email,oracle.com:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,infradead.org:from_mime,infradead.org:dkim,infradead.org:mid,amazon.co.uk:email,xen.org:email,oracle.com:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 04787705E33
+X-Rspamd-Queue-Id: 9B8EC705B9A
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+From: Jack Allister <jalliste@amazon.com>
 
-The kvm_guest_time_update() function scales the host TSC frequency to
-the guest's using kvm_scale_tsc() and the v->arch.l1_tsc_scaling_ratio
-scaling ratio previously calculated for that vCPU. Then calculates the
-scaling factors for the KVM clock itself based on that guest TSC
-frequency.
+A subsequent commit will provide a new KVM interface for performing a
+fixup/correction of the KVM clock against the reference TSC. The
+KVM_[GS]ET_CLOCK_GUEST API requires a pvclock_vcpu_time_info, as such
+the caller must know about this definition.
 
-However, it uses kHz as the unit when scaling, and then multiplies by
-1000 only at the end.
+Move the definition to the UAPI folder so that it is exported to
+usermode and also change the type definitions to use the standard for
+UAPI exports.
 
-With a host TSC frequency of 3000MHz and a guest set to 2500MHz, the
-result of kvm_scale_tsc() will actually come out at 2,499,999kHz. So
-the KVM clock advertised to the guest is based on a frequency of
-2,499,999,000 Hz.
-
-By using Hz as the unit from the beginning, the KVM clock would be based
-on a more accurate frequency of 2,499,999,999 Hz in this example.
-
-Use u64 for the hw_tsc_hz field since an unsigned int would overflow for
-TSC frequencies above 4GHz. Use div_u64() for the Xen CPUID leaf to
-play nice with 32-bit kernels.
-
-Fixes: 78db6a503796 ("KVM: x86: rewrite handling of scaled TSC for kvmclock")
-Reviewed-by: Paul Durrant <paul@xen.org>
+Signed-off-by: Jack Allister <jalliste@amazon.com>
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Paul Durrant <paul@xen.org>
 Tested-by: Dongli Zhang <dongli.zhang@oracle.com>
 ---
- arch/x86/include/asm/kvm_host.h |  2 +-
- arch/x86/kvm/cpuid.c            |  2 +-
- arch/x86/kvm/x86.c              | 17 +++++++++--------
- 3 files changed, 11 insertions(+), 10 deletions(-)
+ MAINTAINERS                                   |  4 +--
+ arch/x86/include/{ => uapi}/asm/pvclock-abi.h | 27 ++++++++++---------
+ scripts/xen-hypercalls.sh                     |  2 +-
+ 3 files changed, 18 insertions(+), 15 deletions(-)
+ rename arch/x86/include/{ => uapi}/asm/pvclock-abi.h (82%)
 
-diff --git a/arch/x86/include/asm/kvm_host.h b/arch/x86/include/asm/kvm_host.h
-index f14009f25a3b..b2446c04a076 100644
---- a/arch/x86/include/asm/kvm_host.h
-+++ b/arch/x86/include/asm/kvm_host.h
-@@ -950,7 +950,7 @@ struct kvm_vcpu_arch {
- 	gpa_t time;
- 	s8  pvclock_tsc_shift;
- 	u32 pvclock_tsc_mul;
--	unsigned int hw_tsc_khz;
-+	u64 hw_tsc_hz;
- 	struct gfn_to_pfn_cache pv_time;
- 	/* set guest stopped flag in pvclock flags field */
- 	bool pvclock_set_guest_stopped_request;
-diff --git a/arch/x86/kvm/cpuid.c b/arch/x86/kvm/cpuid.c
-index e69156b54cff..621d950ec692 100644
---- a/arch/x86/kvm/cpuid.c
-+++ b/arch/x86/kvm/cpuid.c
-@@ -2131,7 +2131,7 @@ bool kvm_cpuid(struct kvm_vcpu *vcpu, u32 *eax, u32 *ebx,
- 				*ecx = vcpu->arch.pvclock_tsc_mul;
- 				*edx = vcpu->arch.pvclock_tsc_shift;
- 			} else if (index == 2) {
--				*eax = vcpu->arch.hw_tsc_khz;
-+				*eax = div_u64(vcpu->arch.hw_tsc_hz, 1000);
- 			}
- 		}
- 	} else {
-diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index 0550359ed798..dbcff49cd561 100644
---- a/arch/x86/kvm/x86.c
-+++ b/arch/x86/kvm/x86.c
-@@ -3314,7 +3314,8 @@ static void kvm_setup_guest_pvclock(struct pvclock_vcpu_time_info *ref_hv_clock,
- int kvm_guest_time_update(struct kvm_vcpu *v)
- {
- 	struct pvclock_vcpu_time_info hv_clock = {};
--	unsigned long flags, tgt_tsc_khz;
-+	unsigned long flags;
-+	u64 tgt_tsc_hz;
- 	unsigned seq;
- 	struct kvm_vcpu_arch *vcpu = &v->arch;
- 	struct kvm_arch *ka = &v->kvm->arch;
-@@ -3340,8 +3341,8 @@ int kvm_guest_time_update(struct kvm_vcpu *v)
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 905c29fe4996..057ccef8d1fa 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -14420,7 +14420,7 @@ S:	Supported
+ T:	git git://git.kernel.org/pub/scm/virt/kvm/kvm.git
+ F:	arch/um/include/asm/kvm_para.h
+ F:	arch/x86/include/asm/kvm_para.h
+-F:	arch/x86/include/asm/pvclock-abi.h
++F:	arch/x86/include/uapi/asm/pvclock-abi.h
+ F:	arch/x86/include/uapi/asm/kvm_para.h
+ F:	arch/x86/kernel/kvm.c
+ F:	arch/x86/kernel/kvmclock.c
+@@ -29105,7 +29105,7 @@ R:	Boris Ostrovsky <boris.ostrovsky@oracle.com>
+ L:	xen-devel@lists.xenproject.org (moderated for non-subscribers)
+ S:	Supported
+ F:	arch/x86/configs/xen.config
+-F:	arch/x86/include/asm/pvclock-abi.h
++F:	arch/x86/include/uapi/asm/pvclock-abi.h
+ F:	arch/x86/include/asm/xen/
+ F:	arch/x86/platform/pvh/
+ F:	arch/x86/xen/
+diff --git a/arch/x86/include/asm/pvclock-abi.h b/arch/x86/include/uapi/asm/pvclock-abi.h
+similarity index 82%
+rename from arch/x86/include/asm/pvclock-abi.h
+rename to arch/x86/include/uapi/asm/pvclock-abi.h
+index b9fece5fc96d..6d70cf640362 100644
+--- a/arch/x86/include/asm/pvclock-abi.h
++++ b/arch/x86/include/uapi/asm/pvclock-abi.h
+@@ -1,6 +1,9 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
++/* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
+ #ifndef _ASM_X86_PVCLOCK_ABI_H
+ #define _ASM_X86_PVCLOCK_ABI_H
++
++#include <linux/types.h>
++
+ #ifndef __ASSEMBLER__
  
- 	/* Keep irq disabled to prevent changes to the clock */
- 	local_irq_save(flags);
--	tgt_tsc_khz = get_cpu_tsc_khz();
--	if (unlikely(tgt_tsc_khz == 0)) {
-+	tgt_tsc_hz = (u64)get_cpu_tsc_khz() * 1000;
-+	if (unlikely(tgt_tsc_hz == 0)) {
- 		local_irq_restore(flags);
- 		kvm_make_request(KVM_REQ_CLOCK_UPDATE, v);
- 		return 1;
-@@ -3376,16 +3377,16 @@ int kvm_guest_time_update(struct kvm_vcpu *v)
- 	/* With all the info we got, fill in the values */
+ /*
+@@ -24,20 +27,20 @@
+  */
  
- 	if (kvm_caps.has_tsc_control) {
--		tgt_tsc_khz = kvm_scale_tsc(tgt_tsc_khz,
-+		tgt_tsc_hz = kvm_scale_tsc(tgt_tsc_hz,
- 					    v->arch.l1_tsc_scaling_ratio);
--		tgt_tsc_khz = tgt_tsc_khz ? : 1;
-+		tgt_tsc_hz = tgt_tsc_hz ? : 1;
- 	}
+ struct pvclock_vcpu_time_info {
+-	u32   version;
+-	u32   pad0;
+-	u64   tsc_timestamp;
+-	u64   system_time;
+-	u32   tsc_to_system_mul;
+-	s8    tsc_shift;
+-	u8    flags;
+-	u8    pad[2];
++	__u32   version;
++	__u32   pad0;
++	__u64   tsc_timestamp;
++	__u64   system_time;
++	__u32   tsc_to_system_mul;
++	__s8    tsc_shift;
++	__u8    flags;
++	__u8    pad[2];
+ } __attribute__((__packed__)); /* 32 bytes */
  
--	if (unlikely(vcpu->hw_tsc_khz != tgt_tsc_khz)) {
--		kvm_get_time_scale(NSEC_PER_SEC, tgt_tsc_khz * 1000LL,
-+	if (unlikely(vcpu->hw_tsc_hz != tgt_tsc_hz)) {
-+		kvm_get_time_scale(NSEC_PER_SEC, tgt_tsc_hz,
- 				   &vcpu->pvclock_tsc_shift,
- 				   &vcpu->pvclock_tsc_mul);
--		vcpu->hw_tsc_khz = tgt_tsc_khz;
-+		vcpu->hw_tsc_hz = tgt_tsc_hz;
- 	}
+ struct pvclock_wall_clock {
+-	u32   version;
+-	u32   sec;
+-	u32   nsec;
++	__u32   version;
++	__u32   sec;
++	__u32   nsec;
+ } __attribute__((__packed__));
  
- 	hv_clock.tsc_shift = vcpu->pvclock_tsc_shift;
+ #define PVCLOCK_TSC_STABLE_BIT	(1 << 0)
+diff --git a/scripts/xen-hypercalls.sh b/scripts/xen-hypercalls.sh
+index f18b00843df3..51a722198997 100755
+--- a/scripts/xen-hypercalls.sh
++++ b/scripts/xen-hypercalls.sh
+@@ -5,7 +5,7 @@ shift
+ in="$@"
+ 
+ for i in $in; do
+-	eval $CPP $LINUXINCLUDE -dD -imacros "$i" -x c /dev/null
++	eval $CPP -D__KERNEL__ $LINUXINCLUDE -dD -imacros "$i" -x c /dev/null
+ done | \
+ awk '$1 == "#define" && $2 ~ /__HYPERVISOR_[a-z][a-z_0-9]*/ { v[$3] = $2 }
+ 	END {   print "/* auto-generated by scripts/xen-hypercall.sh */"
 -- 
 2.54.0
 
