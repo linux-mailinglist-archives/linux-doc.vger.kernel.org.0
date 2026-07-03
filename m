@@ -1,164 +1,334 @@
-Return-Path: <linux-doc+bounces-94768-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94787-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 77ArLruIR2ozaQAAu9opvQ
-	(envelope-from <linux-doc+bounces-94768-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 12:02:35 +0200
+	id MEnaAYiNR2psbAAAu9opvQ
+	(envelope-from <linux-doc+bounces-94787-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 12:23:04 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F7D2700ED8
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 12:02:35 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 61831701298
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 12:23:03 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b="A7V9YHX/";
-	dmarc=pass (policy=none) header.from=gmail.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94768-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-94768-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=linux.dev header.s=key1 header.b=e0Cuc7Jv;
+	dmarc=pass (policy=none) header.from=linux.dev;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94787-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94787-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 57146301CD12
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 10:02:30 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 1F9E5305B968
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 10:19:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1D71C3B8944;
-	Fri,  3 Jul 2026 10:01:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DE4043B5E01;
+	Fri,  3 Jul 2026 10:19:43 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from out-184.mta0.migadu.com (out-184.mta0.migadu.com [91.218.175.184])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E06633B7B96
-	for <linux-doc@vger.kernel.org>; Fri,  3 Jul 2026 10:01:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56DE53B6361;
+	Fri,  3 Jul 2026 10:19:41 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783072905; cv=none; b=A02BvHVISVzTYyEogtkcjXPz5QHo58NNB5TQ+By0vqJuSh/xp+d6uzY8iFSXbwnGS4LBj2s7salMzFphxejS+VmzM6qjcT8LWGX6l4Z6EsShRnEF/zQSG64QmwaFZXK5zxl6J/W3fGrCon2TklTPBHRO7ySizcmZVyniYVDzHfc=
+	t=1783073983; cv=none; b=ToRKEemN+sgQSil73AmV31A7c2uabjVvB6BQxKBqaEQSAFi9rPkIP94tbsN2kvNCDABxd0vEBp7aCwWkejEkbDNz1u2nWePsuIDp6eWDDDOzog8euaYRv0nGa58YTB1h8x9oQoytijOCXP+fScxF4WQv42VAaFrxUGYuwF7epH0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783072905; c=relaxed/simple;
-	bh=RYeeLX2JG8dp87oYPPrNDLM4wRbMmmAVowH6Gs/X6vw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Dd+WZULQ0etCyG8i3Dii3fzM4IdsCNQvwQtylEHUWnmTEtz/57Y6RB2C28AktTP62pM8AJz7bS3P+5IXkJcUq9nOFICOk/JxYsyaerWAfwVXxlstsauHeO2IwaZc3wotepG161eW5i1v76YiwtnOS6+ddeYhWNUKs+Cvd4gO950=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=A7V9YHX/; arc=none smtp.client-ip=209.85.208.46
-Received: by mail-ed1-f46.google.com with SMTP id 4fb4d7f45d1cf-698e5859a3cso766419a12.0
-        for <linux-doc@vger.kernel.org>; Fri, 03 Jul 2026 03:01:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783072899; x=1783677699; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=iphKavMyEGyoKkZ7flBVPKctJFRcurdGeTwbxLH/hOs=;
-        b=A7V9YHX/6P5OlAht23tj0RMGPFoSinD9l1uXNrDG4TPTQp7WTHxT8tXxV+iZlehnoa
-         lPLc48BQEtflxSDW3TSmiC2M3IoGKKqoI8Wr1qollpaU81PrGqSz+Qr7AMC06BMOK+BL
-         R1rYxp0yzuGoHOnWQjQrMqJ+0MBwn/aMKS8iGmuVDhdxtDTVLz5JrH+QXfJmvwnudQAo
-         yLcriQBv8FQy7WbBR8+K7UH/35OSk3PAqDSdcBZ8qKgg1wumB/gX20RXu6xb9thFeZzM
-         d0RIaLgusB8tjNciytWwZmzyX8va4aT4orP2S7LqxVeTpWHBURkm4S5y6WrCopp1c308
-         GhZQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783072899; x=1783677699;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=iphKavMyEGyoKkZ7flBVPKctJFRcurdGeTwbxLH/hOs=;
-        b=ltydKiIeYYrmyqA2go62dLhuEIasHAbs73n2nU+7GT6ABzdH3t3xXYJV5UZGrOAdtH
-         MjM0GZ2PVZYdfBEWoaGWXQIiV8jj1yLgNx1hS1o8Fg6PaVlMNa1YZEnL4mdgHLqaLFIK
-         8tPzhkCGmTLF9PLuK/aJXZKmCkOGJIutkZ372TmbNBAvHS36ACpiSHZkyQKEQTAi1lIl
-         YLug1T7i7XreW1WLJzYdoR8h95PNpKSEm/q6gY5crMPMtQkEAOaBSK8LoijlJzT7qH/a
-         z6+aTq0nsY3wjO7eTOgVzj8srWtPS2snkdiSkKjagAAtnXHPGhYUTWLHY6HgsyTO1bPF
-         Oo0A==
-X-Forwarded-Encrypted: i=1; AHgh+Ro7YtZzbyuOoQW3U0rVZQ/A2nP5MLveFsHAHBD2xsBws3ScH1L87uObcYB8uMEU74QUuyzUowd0T1E=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz2k0N0a1oRrM57HUtkSaVB6Y2LrCkG0UPIvXajhmpta9WFztbQ
-	MYHudkkfWlA/yFQT1NCvf2SjYq2nkZ4NZRHG8vHIpfDJepBFiINcvkol
-X-Gm-Gg: AfdE7cme23eduTa1O/MvrguQseZ8DMkP2O+eGAHUnZ0a7XxNd23zoFzKdQkjCNs9LKw
-	A8I3ts5QToRIDFYdbxIHc8iimNTQ40chX0e1kaFpv/9nkcnq9PxOWuvBqCjeAo40yRvrNq6w7Zs
-	YBIDz2mpwnrOzYGIFWvpzfRM6lbPnhkW0Zqn3XFewBH/e4Z+ydnwBwcSlqPsaaqvwFe4KmQHCeg
-	MEN60KPqzdupYBFnIDJXoO09Qz/5rq5/Hh6/70mqQYXrw5qBUlD/GZCQLA4UUhiO3jBpAh1AVUq
-	zhnw4Nn11DsKiON2NHIGmBhHdpoRR07pMK1FPnFr2Itn7ma6cIEwHVlkZAkjOlZcPPIZROnXSCC
-	N7+tC3VxhAYCpQBg9eZrFqbLrfBNuY5fsyaWCe0aJ2erd1y0EMYVI9ds7egKFMKOgnQZbkq0FT/
-	MOLvcb5KOJykkpSpLnERvUBzAD0Cy+AsLTlZN7XFrhlcJXvo73wG/fbw==
-X-Received: by 2002:aa7:c68e:0:b0:698:ff3:85ea with SMTP id 4fb4d7f45d1cf-698c104c5f8mr1030271a12.5.1783072898947;
-        Fri, 03 Jul 2026 03:01:38 -0700 (PDT)
-Received: from ?IPV6:2a00:1e:db84:b301:ed61:1b51:c39f:49c? ([2a00:1e:db84:b301:ed61:1b51:c39f:49c])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-698ad118f43sm2162762a12.25.2026.07.03.03.01.36
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 03 Jul 2026 03:01:37 -0700 (PDT)
-Message-ID: <3e094744-8603-443e-8027-8fc2f2817879@gmail.com>
-Date: Fri, 3 Jul 2026 12:01:35 +0200
+	s=arc-20240116; t=1783073983; c=relaxed/simple;
+	bh=tRqX3R6EiKC5w+Fjl8swgCaFgI3p6H6/SqU24pOE9sM=;
+	h=Mime-Version:Content-Type:Date:Message-Id:Subject:From:To:Cc:
+	 References:In-Reply-To; b=FyPvM9hJTTepwdpJw1iT73+SHOVqiVsg1KdlACKw2z4jrJV3c+IvHhsEKm8e8pjNMtOZrf1g6JTFKjZ5M04pgCkpgPLLWH2nnNVWtfPRVRA2RisyBHEfdBu35psld1+I7TMQHhL7Gj72T+8skVe/zzIrtc1L+gkD5/TCzyJutEw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=e0Cuc7Jv; arc=none smtp.client-ip=91.218.175.184
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 2/3] dt-bindings: iio: dac: Add AD5529R
-To: Jonathan Cameron <jic23@kernel.org>,
- Janani Sunil <janani.sunil@analog.com>
-Cc: Lars-Peter Clausen <lars@metafoo.de>,
- Michael Hennerich <Michael.Hennerich@analog.com>,
- David Lechner <dlechner@baylibre.com>, =?UTF-8?Q?Nuno_S=C3=A1?=
- <nuno.sa@analog.com>, Andy Shevchenko <andy@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Philipp Zabel <p.zabel@pengutronix.de>,
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- Mark Brown <broonie@kernel.org>, linux-iio@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-spi@vger.kernel.org
-References: <20260701-ad5529r-driver-v5-0-ed087900e642@analog.com>
- <20260701-ad5529r-driver-v5-2-ed087900e642@analog.com>
- <20260701194103.45541cbe@jic23-huawei>
-Content-Language: en-US
-From: Janani Sunil <jan.sun97@gmail.com>
-In-Reply-To: <20260701194103.45541cbe@jic23-huawei>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Mime-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1783073967;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=kh3FyxapX81U/ZPkDXPQ35eHo8l1a0EYTCkh/tPyQcQ=;
+	b=e0Cuc7JvJVHteKushc+UtNVkwNT9o1lVu5LvqWVmdqPsMSPQgu9A2kRfsnx0xQfRnUHPYp
+	E5DoGGsQTiJ/6LeWKpBLgQMBOdLAW9HcOCrzUybirGsEQP8UiAZrRmv4xietGvdTMPXY2X
+	gD/tE/T+aE5W3zMioXiLzp1kYJy+Cz0=
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 03 Jul 2026 10:19:10 +0000
+Message-Id: <DJOUYOKL6N3R.BFIO8HEL03OA@linux.dev>
+Subject: Re: [PATCH v12 02/16] set_memory: add
+ folio_{zap,restore}_direct_map helpers
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: "Brendan Jackman" <brendan.jackman@linux.dev>
+To: "Kalyazin, Nikita" <kalyazin@amazon.co.uk>, "kvm@vger.kernel.org"
+ <kvm@vger.kernel.org>, "linux-doc@vger.kernel.org"
+ <linux-doc@vger.kernel.org>, "linux-kernel@vger.kernel.org"
+ <linux-kernel@vger.kernel.org>, "linux-arm-kernel@lists.infradead.org"
+ <linux-arm-kernel@lists.infradead.org>, "kvmarm@lists.linux.dev"
+ <kvmarm@lists.linux.dev>, "linux-fsdevel@vger.kernel.org"
+ <linux-fsdevel@vger.kernel.org>, "linux-mm@kvack.org" <linux-mm@kvack.org>,
+ "bpf@vger.kernel.org" <bpf@vger.kernel.org>,
+ "linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>,
+ "kernel@xen0n.name" <kernel@xen0n.name>, "linux-riscv@lists.infradead.org"
+ <linux-riscv@lists.infradead.org>, "linux-s390@vger.kernel.org"
+ <linux-s390@vger.kernel.org>, "loongarch@lists.linux.dev"
+ <loongarch@lists.linux.dev>, "linux-pm@vger.kernel.org"
+ <linux-pm@vger.kernel.org>
+Cc: "pbonzini@redhat.com" <pbonzini@redhat.com>, "corbet@lwn.net"
+ <corbet@lwn.net>, "suzuki.poulose@arm.com" <suzuki.poulose@arm.com>,
+ "yuzenghui@huawei.com" <yuzenghui@huawei.com>, "will@kernel.org"
+ <will@kernel.org>, "seanjc@google.com" <seanjc@google.com>,
+ "tglx@kernel.org" <tglx@kernel.org>, "mingo@redhat.com" <mingo@redhat.com>,
+ "bp@alien8.de" <bp@alien8.de>, "dave.hansen@linux.intel.com"
+ <dave.hansen@linux.intel.com>, "x86@kernel.org" <x86@kernel.org>,
+ "hpa@zytor.com" <hpa@zytor.com>, "luto@kernel.org" <luto@kernel.org>,
+ "peterz@infradead.org" <peterz@infradead.org>, "willy@infradead.org"
+ <willy@infradead.org>, "akpm@linux-foundation.org"
+ <akpm@linux-foundation.org>, "david@kernel.org" <david@kernel.org>,
+ "lorenzo.stoakes@oracle.com" <lorenzo.stoakes@oracle.com>,
+ "vbabka@kernel.org" <vbabka@kernel.org>, "rppt@kernel.org"
+ <rppt@kernel.org>, "surenb@google.com" <surenb@google.com>,
+ "mhocko@suse.com" <mhocko@suse.com>, "ast@kernel.org" <ast@kernel.org>,
+ "martin.lau@linux.dev" <martin.lau@linux.dev>, "eddyz87@gmail.com"
+ <eddyz87@gmail.com>, "song@kernel.org" <song@kernel.org>,
+ "yonghong.song@linux.dev" <yonghong.song@linux.dev>,
+ "john.fastabend@gmail.com" <john.fastabend@gmail.com>, "kpsingh@kernel.org"
+ <kpsingh@kernel.org>, "sdf@fomichev.me" <sdf@fomichev.me>,
+ "haoluo@google.com" <haoluo@google.com>, "jolsa@kernel.org"
+ <jolsa@kernel.org>, "jgg@ziepe.ca" <jgg@ziepe.ca>, "jhubbard@nvidia.com"
+ <jhubbard@nvidia.com>, "peterx@redhat.com" <peterx@redhat.com>,
+ "jannh@google.com" <jannh@google.com>, "pfalcato@suse.de"
+ <pfalcato@suse.de>, "skhan@linuxfoundation.org"
+ <skhan@linuxfoundation.org>, "riel@surriel.com" <riel@surriel.com>,
+ "ryan.roberts@arm.com" <ryan.roberts@arm.com>, "jgross@suse.com"
+ <jgross@suse.com>, "yu-cheng.yu@intel.com" <yu-cheng.yu@intel.com>,
+ "kas@kernel.org" <kas@kernel.org>, "coxu@redhat.com" <coxu@redhat.com>,
+ "ackerleytng@google.com" <ackerleytng@google.com>, "yosry@kernel.org"
+ <yosry@kernel.org>, "maobibo@loongson.cn" <maobibo@loongson.cn>,
+ "tabba@google.com" <tabba@google.com>, "prsampat@amd.com"
+ <prsampat@amd.com>, "jthoughton@google.com" <jthoughton@google.com>,
+ "agordeev@linux.ibm.com" <agordeev@linux.ibm.com>, "aou@eecs.berkeley.edu"
+ <aou@eecs.berkeley.edu>, "borntraeger@linux.ibm.com"
+ <borntraeger@linux.ibm.com>, "chenhuacai@kernel.org"
+ <chenhuacai@kernel.org>, "baolu.lu@linux.intel.com"
+ <baolu.lu@linux.intel.com>, "dev.jain@arm.com" <dev.jain@arm.com>,
+ "gor@linux.ibm.com" <gor@linux.ibm.com>, "hca@linux.ibm.com"
+ <hca@linux.ibm.com>, "palmer@dabbelt.com" <palmer@dabbelt.com>,
+ "pjw@kernel.org" <pjw@kernel.org>, "shijie@os.amperecomputing.com"
+ <shijie@os.amperecomputing.com>, "svens@linux.ibm.com"
+ <svens@linux.ibm.com>, "thuth@redhat.com" <thuth@redhat.com>,
+ "yang@os.amperecomputing.com" <yang@os.amperecomputing.com>,
+ "Liam.Howlett@oracle.com" <Liam.Howlett@oracle.com>, "urezki@gmail.com"
+ <urezki@gmail.com>, "zhengqi.arch@bytedance.com"
+ <zhengqi.arch@bytedance.com>, "gerald.schaefer@linux.ibm.com"
+ <gerald.schaefer@linux.ibm.com>, "jiayuan.chen@shopee.com"
+ <jiayuan.chen@shopee.com>, "rafael@kernel.org" <rafael@kernel.org>,
+ "yangyicong@hisilicon.com" <yangyicong@hisilicon.com>,
+ "vannapurve@google.com" <vannapurve@google.com>, "jackmanb@google.com"
+ <jackmanb@google.com>, "patrick.roy@linux.dev" <patrick.roy@linux.dev>,
+ "Itazuri, Takahiro" <itazur@amazon.co.uk>, "Manwaring, Derek"
+ <derekmn@amazon.com>
+References: <20260410151746.61150-1-kalyazin@amazon.com>
+ <20260410151746.61150-3-kalyazin@amazon.com>
+In-Reply-To: <20260410151746.61150-3-kalyazin@amazon.com>
+X-Migadu-Flow: FLOW_OUT
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
+	MV_CASE(0.50)[];
+	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
-	TAGGED_FROM(0.00)[bounces-94768-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[jansun97@gmail.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS(0.00)[m:jic23@kernel.org,m:janani.sunil@analog.com,m:lars@metafoo.de,m:Michael.Hennerich@analog.com,m:dlechner@baylibre.com,m:nuno.sa@analog.com,m:andy@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:p.zabel@pengutronix.de,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:broonie@kernel.org,m:linux-iio@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-spi@vger.kernel.org,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	TAGGED_FROM(0.00)[bounces-94787-lists,linux-doc=lfdr.de];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:kalyazin@amazon.co.uk,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:kvmarm@lists.linux.dev,m:linux-fsdevel@vger.kernel.org,m:linux-mm@kvack.org,m:bpf@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:kernel@xen0n.name,m:linux-riscv@lists.infradead.org,m:linux-s390@vger.kernel.org,m:loongarch@lists.linux.dev,m:linux-pm@vger.kernel.org,m:pbonzini@redhat.com,m:corbet@lwn.net,m:suzuki.poulose@arm.com,m:yuzenghui@huawei.com,m:will@kernel.org,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:luto@kernel.org,m:peterz@infradead.org,m:willy@infradead.org,m:akpm@linux-foundation.org,m:david@kernel.org,m:lorenzo.stoakes@oracle.com,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:ast@kernel.org,m:martin.lau@linux.dev,m:eddyz87@gmail.com,m:song@kernel.org,m:yonghong.song@linux.de
+ v,m:john.fastabend@gmail.com,m:kpsingh@kernel.org,m:sdf@fomichev.me,m:haoluo@google.com,m:jolsa@kernel.org,m:jgg@ziepe.ca,m:jhubbard@nvidia.com,m:peterx@redhat.com,m:jannh@google.com,m:pfalcato@suse.de,m:skhan@linuxfoundation.org,m:riel@surriel.com,m:ryan.roberts@arm.com,m:jgross@suse.com,m:yu-cheng.yu@intel.com,m:kas@kernel.org,m:coxu@redhat.com,m:ackerleytng@google.com,m:yosry@kernel.org,m:maobibo@loongson.cn,m:tabba@google.com,m:prsampat@amd.com,m:jthoughton@google.com,m:agordeev@linux.ibm.com,m:aou@eecs.berkeley.edu,m:borntraeger@linux.ibm.com,m:chenhuacai@kernel.org,m:baolu.lu@linux.intel.com,m:dev.jain@arm.com,m:gor@linux.ibm.com,m:hca@linux.ibm.com,m:palmer@dabbelt.com,m:pjw@kernel.org,m:shijie@os.amperecomputing.com,m:svens@linux.ibm.com,m:thuth@redhat.com,m:yang@os.amperecomputing.com,m:Liam.Howlett@oracle.com,m:urezki@gmail.com,m:zhengqi.arch@bytedance.com,m:gerald.schaefer@linux.ibm.com,m:jiayuan.chen@shopee.com,m:rafael@kernel.org,m:yangyicong@hisilicon.com,m:vannapurve@
+ google.com,m:jackmanb@google.com,m:patrick.roy@linux.dev,m:itazur@amazon.co.uk,m:derekmn@amazon.com,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[3];
+	FORGED_SENDER(0.00)[brendan.jackman@linux.dev,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[redhat.com,lwn.net,arm.com,huawei.com,kernel.org,google.com,alien8.de,linux.intel.com,zytor.com,infradead.org,linux-foundation.org,oracle.com,suse.com,linux.dev,gmail.com,fomichev.me,ziepe.ca,nvidia.com,suse.de,linuxfoundation.org,surriel.com,intel.com,loongson.cn,amd.com,linux.ibm.com,eecs.berkeley.edu,dabbelt.com,os.amperecomputing.com,bytedance.com,shopee.com,hisilicon.com,amazon.co.uk,amazon.com];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	RCPT_COUNT_GT_50(0.00)[91];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jansun97@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	FROM_NEQ_ENVFROM(0.00)[brendan.jackman@linux.dev,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[linux.dev:+];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:from_mime,linux.dev:email,linux.dev:mid,linux.dev:dkim,vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,qemu.org:url]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 6F7D2700ED8
+X-Rspamd-Queue-Id: 61831701298
 
-
-On 7/1/26 20:41, Jonathan Cameron wrote:
-> On Wed, 1 Jul 2026 08:40:40 +0200
-> Janani Sunil <janani.sunil@analog.com> wrote:
+On Fri Apr 10, 2026 at 3:18 PM UTC, Nikita Kalyazin wrote:
+> From: Nikita Kalyazin <nikita.kalyazin@linux.dev>
 >
+> Let's provide folio_{zap,restore}_direct_map helpers as preparation for
+> supporting removal of the direct map for guest_memfd folios.
+> In folio_zap_direct_map(), flush TLB to make sure the data is not
+> accessible.  On some architectures, there may be a double TLB flush
+> issued because set_direct_map_valid_noflush already performs a flush
+> internally.
 >
->> +      adi,output-range-microvolt:
->> +        description: |
->> +          Output voltage range for this channel as [min, max] in microvolts.
->> +          If not specified, defaults to 0V to 5V range.
-> No way to specify the default as part of the binding rather than a comment?
-> I haven't checked but does
->         default: [0 5000000]
-> not work?
+> The new helpers need to be accessible to KVM on architectures that
+> support guest_memfd (x86 and arm64).
+>
+> Direct map removal gives guest_memfd the same protection that
+> memfd_secret does, such as hardening against Spectre-like attacks
+> through in-kernel gadgets.
+>
+> Acked-by: David Hildenbrand (Arm) <david@kernel.org>
+> Signed-off-by: Nikita Kalyazin <nikita.kalyazin@linux.dev>
+> ---
+>  include/linux/set_memory.h | 13 +++++++++++
+>  mm/memory.c                | 45 ++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 58 insertions(+)
+>
+> diff --git a/include/linux/set_memory.h b/include/linux/set_memory.h
+> index 1a2563f525fc..24caea2931f9 100644
+> --- a/include/linux/set_memory.h
+> +++ b/include/linux/set_memory.h
+> @@ -41,6 +41,15 @@ static inline int set_direct_map_valid_noflush(const v=
+oid *addr,
+>  	return 0;
+>  }
+> =20
+> +static inline int folio_zap_direct_map(struct folio *folio)
+> +{
+> +	return 0;
+> +}
+> +
+> +static inline void folio_restore_direct_map(struct folio *folio)
+> +{
+> +}
+> +
+>  static inline bool kernel_page_present(struct page *page)
+>  {
+>  	return true;
+> @@ -57,6 +66,10 @@ static inline bool can_set_direct_map(void)
+>  }
+>  #define can_set_direct_map can_set_direct_map
+>  #endif
+> +
+> +int folio_zap_direct_map(struct folio *folio);
+> +void folio_restore_direct_map(struct folio *folio);
+> +
+>  #endif /* CONFIG_ARCH_HAS_SET_DIRECT_MAP */
+> =20
+>  #ifdef CONFIG_X86_64
+> diff --git a/mm/memory.c b/mm/memory.c
+> index 2f815a34d924..3b9ada2cc19c 100644
+> --- a/mm/memory.c
+> +++ b/mm/memory.c
+> @@ -78,6 +78,7 @@
+>  #include <linux/sched/sysctl.h>
+>  #include <linux/pgalloc.h>
+>  #include <linux/uaccess.h>
+> +#include <linux/set_memory.h>
+> =20
+>  #include <trace/events/kmem.h>
+> =20
+> @@ -7479,3 +7480,47 @@ void vma_pgtable_walk_end(struct vm_area_struct *v=
+ma)
+>  	if (is_vm_hugetlb_page(vma))
+>  		hugetlb_vma_unlock_read(vma);
+>  }
+> +
+> +#ifdef CONFIG_ARCH_HAS_SET_DIRECT_MAP
+> +/**
+> + * folio_zap_direct_map - remove a folio from the kernel direct map
+> + * @folio: folio to remove from the direct map
+> + *
+> + * Removes the folio from the kernel direct map and flushes the TLB.  Th=
+is may
+> + * require splitting huge pages in the direct map, which can fail due to=
+ memory
+> + * allocation.  So far, only order-0 folios are supported.
+> + *
+> + * Return: 0 on success, or a negative error code on failure.
+> + */
+> +int folio_zap_direct_map(struct folio *folio)
+> +{
+> +	const void *addr =3D folio_address(folio);
+> +	int ret;
+> +
+> +	if (folio_test_large(folio))
+> +		return -EINVAL;
+> +
+> +	ret =3D set_direct_map_valid_noflush(addr, folio_nr_pages(folio), false=
+);
+> +	flush_tlb_kernel_range((unsigned long)addr,
+> +			       (unsigned long)addr + folio_size(folio));
+> +
+> +	return ret;
+> +}
 
-Tried that approach. But the dt binding check does not accept default for this DT cell-array property.
+My local Sashiko run pointed out that this is broken for highmem.
 
+There's no highmem for guest_memfd but there is for secretmem.
+
+... but this isn't actually an issue with the patch, it's currently
+broken in Linus' master:
+
+Su[   30.071284] ------------[ cut here ]------------
+ccessfully allocated and mapped 2097152000 bytes at 0x3a449000
+Populating memor[   30.074614] CPA: called for zero pte. vaddr =3D 0 cpa->v=
+addr =3D 0
+y...
+[   30.078636] WARNING: arch/x86/mm/pat/set_memory.c:1840 at __cpa_process_=
+fault+0x34d/0x360, CPU#5: allocate_secret/570
+[   30.084789] CPU: 5 UID: 0 PID: 570 Comm: allocate_secret Not tainted 7.1=
+.0-14063-g4edcdefd4083-dirty #10 PREEMPTLAZY
+[   30.090937] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS =
+rel-1.17.0-0-gb52ca86e094d-prebuilt.qemu.org 04/01/2014
+[   30.097543] EIP: __cpa_process_fault+0x34d/0x360
+[   30.100514] Code: ff ff 85 c0 0f 89 7d fe ff ff e9 3d fe ff ff 8b 03 8b =
+00 c7 04 24 c8 ff 64 c1 89 44 24 08 8b 45 e8 89 44 24 04 e8 53 7a 00 00 <0f=
+> 0b c7 45 f0 f2 ff ff ff e9 fc fc ff ff 90 8d 74 26 00 55 25 00
+[   30.110829] EAX: 00000000 EBX: f64afe98 ECX: 00000000 EDX: 00000000
+[   30.114799] ESI: 00000000 EDI: f64afe98 EBP: f64afe04 ESP: f64afdcc
+[   30.118785] DS: 007b ES: 007b FS: 00d8 GS: 0033 SS: 0068 EFLAGS: 0001024=
+6
+[   30.123020] CR0: 80050033 CR2: 46c48ffc CR3: 038c8000 CR4: 00000690
+[   30.127010] Call Trace:
+[   30.129078]  __change_page_attr_set_clr+0x5e7/0x870
+[   30.132275]  ? console_unlock+0x99/0x130
+[   30.135069]  ? irq_work_queue+0x36/0x70
+[   30.137853]  ? page_address+0xd3/0xf0
+[   30.140421]  set_direct_map_invalid_noflush+0x52/0x60
+[   30.143782]  secretmem_fault+0x128/0x210
+[   30.146560]  __do_fault+0x25/0x90
+[   30.149053]  handle_mm_fault+0x6d1/0xcb0
+[   30.151759]  exc_page_fault+0x135/0x3b0
+[   30.154487]  ? doublefault_shim+0x150/0x150
+[   30.157416]  handle_exception+0x130/0x130
+[   30.160137] EIP: 0x804d29f
+[   30.162307] Code: 89 54 08 e1 89 54 08 e5 89 54 08 e9 89 54 08 ed c3 0f =
+b6 44 24 08 89 7c 24 0c 69 c0 01 01 01 01 8b 7c 24 04 f7 c7 0f 00 00 00 <89=
+> 44 0f fc 75 0e c1 e9 02 f3 ab 8b 44 24 04 8b 7c 24 0c c3 31 d2
+[   30.172936] EAX: 5a5a5a5a EBX: 00000000 ECX: 0c800000 EDX: 3a449000
+[   30.176927] ESI: 00000000 EDI: 3a449000 EBP: bfbbae18 ESP: bfbbadac
+[   30.180897] DS: 007b ES: 007b FS: 0000 GS: 0033 SS: 007b EFLAGS: 0001024=
+6
+[   30.185161]  ? doublefault_shim+0x150/0x150
+[   30.187979] ---[ end trace 0000000000000000 ]---
+Bus error                  (core dumped) ./allocate_secret_i686 2000M
+
+Fixing this directly in secretmem.c is kinda yucky but if we can just
+make folio_zap_direct_map() a NOP for highmem folios it's nice and easy
+so I propose to just fix it as a followup to this series.
+
+Alternatively, we maybe should disable secretmem for highmem systems
+since it evidently doesn't have any users.
 
