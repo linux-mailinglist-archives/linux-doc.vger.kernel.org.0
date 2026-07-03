@@ -1,144 +1,147 @@
-Return-Path: <linux-doc+bounces-94857-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94858-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id akycFSbSR2oYfwAAu9opvQ
-	(envelope-from <linux-doc+bounces-94857-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 17:15:50 +0200
+	id d2SbEmfWR2prgAAAu9opvQ
+	(envelope-from <linux-doc+bounces-94858-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 17:33:59 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 75909703C4A
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 17:15:49 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 93354703EBA
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 17:33:58 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linux.dev header.s=key1 header.b="j/vuK0n+";
-	dmarc=pass (policy=none) header.from=linux.dev;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94857-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94857-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=intel.com header.s=Intel header.b=m8a3lNum;
+	dmarc=pass (policy=none) header.from=intel.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94858-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94858-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 75FA1303C00A
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 15:10:26 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id D841530DAAFC
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 15:26:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0C05F22652D;
-	Fri,  3 Jul 2026 15:10:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B4006417345;
+	Fri,  3 Jul 2026 15:26:17 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-171.mta1.migadu.com (out-171.mta1.migadu.com [95.215.58.171])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 004B53D9030
-	for <linux-doc@vger.kernel.org>; Fri,  3 Jul 2026 15:10:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1BAF241735A
+	for <linux-doc@vger.kernel.org>; Fri,  3 Jul 2026 15:26:15 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783091424; cv=none; b=IsiwVkTBkoY9sNjT17ekcUo7L7YQOBEgzXcRB1+SqXGoLfDlPfZryHQXsSqPondNFythU5y1WHg0/dQhqM5X9yxerjdB5dd3IjFAJfNcUQwJ6Xumnyv31K1W50dg7zZRs1LFV1IjNVa6XAi9NGzkiIyRFlEXx1TT9WP9sL7A6bI=
+	t=1783092377; cv=none; b=rZDlM/SFf3Lyoy/QwN1pHIj3k3q97Wo5d8EcwKWbcAXZyZDbPAogtB1ik6dnIhRNOC7Bk5zpbj/+5iBb/QqDWL0b9Pw7G7A57hoyQVfJxhW3lNOwAo3fXm/lEiv/A1koNOryeCjeDamVcLU9Zw5kL59LIrKMbfnl0XR7FNEyI+k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783091424; c=relaxed/simple;
-	bh=gMq49LfcOOMy7F8qJulmEnCAYgqGsKpGp2FMwqmiwLA=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=kKZizvRX/2a0vEw+VXfVHxZdbGLKOEf4hTC4zpp5wxECFC42R/HIW8rvCRO92oTtw1WcWlb4rIXLmP4egE5bB3bjCYkkj5G6aX9WPmiQI6I3qh9jOQ0FcxaXMquEwAx8VJzbHmEZb3AUiXa8RYSDsN68GcHCpURLXieAEDX2s+Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=j/vuK0n+; arc=none smtp.client-ip=95.215.58.171
-Message-ID: <b6f5f3b2-bf62-4b77-9c74-debbed9a4738@linux.dev>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1783091420;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=D0jQhMPhscsL1NbyNjS1WJWCL9R2xskq5LtPdLuRjgQ=;
-	b=j/vuK0n+G28zyIBLktJU1GlREKmOyVhgVtBHvZIfkZ4ZTiO05suHg86BY+INcDSH3/rzg2
-	eYKS5nnCjeL0L8QyipRBNB3i4lx61WmR8qewTnZB8a6H4G6v1/uqV3zSQLbG+NWz4f4tBv
-	P9w44JsWEgPbVPjshqUB3G39TMkvs9Y=
-Date: Fri, 3 Jul 2026 23:09:55 +0800
+	s=arc-20240116; t=1783092377; c=relaxed/simple;
+	bh=q72dfMto2H9k5CgU07ACQMAWpo99WoFvfPSY3fgiiYw=;
+	h=Date:From:To:Cc:Subject:Message-ID; b=V+GAgGtDZLyboan7wLBnJuBPL5knWwdYpcG4k8XtLOsQtDe88n4zLk/vjHCdJFY3iLiA4X/gDTJAX8Rj7em0cKEFXBMoKYlMFPDfoJJGs5chgDcqQG661S4pefBDVh3M93H8FDnluIx8jf+Cw4UjzmMmyjJaBttqwzY6HtkocMk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=m8a3lNum; arc=none smtp.client-ip=198.175.65.12
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1783092376; x=1814628376;
+  h=date:from:to:cc:subject:message-id;
+  bh=q72dfMto2H9k5CgU07ACQMAWpo99WoFvfPSY3fgiiYw=;
+  b=m8a3lNumUcXgkPxCeznRxuQ3Aedqh/mcpOONpJfDy6+fAN2kAI3QHmiM
+   VyuXfZrOo2vQjkrr0YrMFph2fTnlmtpSuomBlxPidyuNheJLGX9lj7WaG
+   8Aye3BgnTIYXOhzBri+AdZaSKcUlNmAfZOO/U88kgQTl9n4/PqJGt3f8P
+   uWfSS97njenRKB/U0w1GjtCuV+hK2lhp+Gy+R3aQa/eJqdi4/W+wWTkb0
+   ip40ekOlLS1/4uO3/+T27RUUYDZdS+98Gz88fkCwi6AH2qfGNHBpWduc7
+   lnn6MvLjqcrEFEUfyGF7sh7FuN3mEuP5WuMcsCaR9Wm1fABvj/++GCCO4
+   w==;
+X-CSE-ConnectionGUID: UkxMSjksRtWCYsZKcrjWEQ==
+X-CSE-MsgGUID: DY6vE6WyRj2Ceb059kEk6w==
+X-IronPort-AV: E=McAfee;i="6800,10657,11836"; a="95352296"
+X-IronPort-AV: E=Sophos;i="6.25,145,1779174000"; 
+   d="scan'208";a="95352296"
+Received: from orviesa005.jf.intel.com ([10.64.159.145])
+  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Jul 2026 08:26:16 -0700
+X-CSE-ConnectionGUID: V9Tk0trdT+SPpPHcIYznIw==
+X-CSE-MsgGUID: T7yzDAksR/eNvMNAaGr/+A==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.25,145,1779174000"; 
+   d="scan'208";a="257466981"
+Received: from igk-lkp-server01.igk.intel.com (HELO e5a8ed462067) ([10.211.93.152])
+  by orviesa005.jf.intel.com with ESMTP; 03 Jul 2026 08:26:14 -0700
+Received: from kbuild by e5a8ed462067 with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1wffmN-000000001XV-3qJZ;
+	Fri, 03 Jul 2026 15:26:11 +0000
+Date: Fri, 03 Jul 2026 17:26:08 +0200
+From: kernel test robot <lkp@intel.com>
+To: Eduard Bostina <egbostina@gmail.com>
+Cc: oe-kbuild-all@lists.linux.dev, Krzysztof Kozlowski <krzk@kernel.org>,
+ linux-doc@vger.kernel.org
+Subject: [krzk-w1:w1-next 2/3] htmldocs: Warning:
+ Documentation/w1/masters/omap-hdq.rst references a file that doesn't exist:
+ Documentation/devicetree/bindings/w1/omap-hdq.txt
+Message-ID: <202607031709.owfUeGBJ-lkp@intel.com>
+User-Agent: s-nail v14.9.25
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Subject: Re: [PATCH] mm/mseal: fix mseal documentation for 32-bit kernels
-To: =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>
-Cc: linux-mm@kvack.org, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>,
- Andrew Morton <akpm@linux-foundation.org>,
- "Liam R . Howlett" <liam@infradead.org>, Lorenzo Stoakes <ljs@kernel.org>,
- Vlastimil Babka <vbabka@kernel.org>, Jann Horn <jannh@google.com>,
- Pedro Falcato <pfalcato@suse.de>, Paul Walmsley <pjw@kernel.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>,
- Alexandre Ghiti <alex@ghiti.fr>, Nathan Chancellor <nathan@kernel.org>,
- Peter Zijlstra <peterz@infradead.org>, Miguel Ojeda <ojeda@kernel.org>,
- Nicolas Schier <nsc@kernel.org>, Thomas Gleixner <tglx@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Douglas Anderson <dianders@chromium.org>,
- Gary Guo <gary@garyguo.net>, Anand Moon <linux.amoon@gmail.com>,
- Randy Dunlap <rdunlap@infradead.org>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org
-References: <20260703022507.187457-1-leon.hwang@linux.dev>
- <20260703114128-2a7a4723-0060-436b-99d9-7499bd90fa82@linutronix.de>
-Content-Language: en-US
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Leon Hwang <leon.hwang@linux.dev>
-In-Reply-To: <20260703114128-2a7a4723-0060-436b-99d9-7499bd90fa82@linutronix.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-3.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,kernel.org:s:+];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94857-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	FORGED_SENDER(0.00)[leon.hwang@linux.dev,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[27];
-	FORGED_RECIPIENTS(0.00)[m:thomas.weissschuh@linutronix.de,m:linux-mm@kvack.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:akpm@linux-foundation.org,m:liam@infradead.org,m:ljs@kernel.org,m:vbabka@kernel.org,m:jannh@google.com,m:pfalcato@suse.de,m:pjw@kernel.org,m:palmer@dabbelt.com,m:aou@eecs.berkeley.edu,m:alex@ghiti.fr,m:nathan@kernel.org,m:peterz@infradead.org,m:ojeda@kernel.org,m:nsc@kernel.org,m:tglx@kernel.org,m:aliceryhl@google.com,m:dianders@chromium.org,m:gary@garyguo.net,m:linux.amoon@gmail.com,m:rdunlap@infradead.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-riscv@lists.infradead.org,m:linuxamoon@gmail.com,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[kvack.org,lwn.net,linuxfoundation.org,linux-foundation.org,infradead.org,kernel.org,google.com,suse.de,dabbelt.com,eecs.berkeley.edu,ghiti.fr,chromium.org,garyguo.net,gmail.com,vger.kernel.org,lists.infradead.org];
+	TAGGED_FROM(0.00)[bounces-94858-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:egbostina@gmail.com,m:oe-kbuild-all@lists.linux.dev,m:krzk@kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_THREE(0.00)[4];
 	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[leon.hwang@linux.dev,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linux.dev:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+];
+	RCVD_COUNT_FIVE(0.00)[6];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linux.dev:from_mime,linux.dev:dkim,linux.dev:mid]
+	ALIAS_RESOLVED(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,intel.com:from_mime,intel.com:email,intel.com:mid,intel.com:dkim]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 75909703C4A
+X-Rspamd-Queue-Id: 93354703EBA
 
-On 2026/7/3 17:44, Thomas Weißschuh wrote:
-> On Fri, Jul 03, 2026 at 10:25:07AM +0800, Leon Hwang wrote:
-> (...)
-> 
->>    The following architectures currently support this feature: x86-64, arm64,
->> -  loongarch and s390.
->> +  loongarch, riscv, and s390.
-> 
-> For per-architecture feature documentation we also have
-> Documentation/features/. Maybe move it there.
+tree:   https://git.kernel.org/pub/scm/linux/kernel/git/krzk/linux-w1.git w1-next
+head:   487eca6535cab91944ade06a155e9d789591a1e5
+commit: e89bccb295a8880493693e69e091a3668dc0c279 [2/3] dt-bindings: w1: Convert HDQ One Wire to DT schema
+compiler: clang version 22.1.8 (https://github.com/llvm/llvm-project ca7933e47d3a3451d81e72ac174dcb5aa28b59d1)
+docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
+reproduce: (https://download.01.org/0day-ci/archive/20260703/202607031709.owfUeGBJ-lkp@intel.com/reproduce)
 
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202607031709.owfUeGBJ-lkp@intel.com/
 
-Better to replace with a reference to the feature doc?
+All warnings (new ones prefixed by >>):
 
-+  Refer to :doc:`features/core/mseal_sys_mappings/arch-support` for the
-+  support status of each architecture.
+   Warning: Documentation/translations/zh_CN/filesystems/gfs2-uevents.rst references a file that doesn't exist: Documentation/filesystems/gfs2-uevents.rst
+   Warning: Documentation/translations/zh_CN/filesystems/gfs2.rst references a file that doesn't exist: Documentation/filesystems/gfs2.rst
+   Warning: Documentation/translations/zh_CN/how-to.rst references a file that doesn't exist: Documentation/xxx/xxx.rst
+   Warning: Documentation/translations/zh_CN/networking/xfrm_proc.rst references a file that doesn't exist: Documentation/networking/xfrm_proc.rst
+   Warning: Documentation/translations/zh_CN/scsi/scsi_mid_low_api.rst references a file that doesn't exist: Documentation/Configure.help
+>> Warning: Documentation/w1/masters/omap-hdq.rst references a file that doesn't exist: Documentation/devicetree/bindings/w1/omap-hdq.txt
+   Warning: MAINTAINERS references a file that doesn't exist: Documentation/ABI/testing/sysfs-platform-ayaneo
+   Warning: MAINTAINERS references a file that doesn't exist: Documentation/devicetree/bindings/display/bridge/megachips-stdpxxxx-ge-b850v3-fw.txt
+   Warning: arch/powerpc/sysdev/mpic.c references a file that doesn't exist: Documentation/devicetree/bindings/powerpc/fsl/mpic.txt
+   Warning: drivers/net/ethernet/smsc/Kconfig references a file that doesn't exist: file:Documentation/networking/device_drivers/ethernet/smsc/smc9.rst
+   Warning: rust/kernel/sync/atomic/ordering.rs references a file that doesn't exist: srctree/tools/memory-model/Documentation/explanation.txt
 
-Thanks,
-Leon
-
-> 
->>  
->>    WARNING: This feature breaks programs which rely on relocating
->>    or unmapping system mappings. Known broken software at the time
-> 
-> (...)
-
+--
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
