@@ -1,259 +1,186 @@
-Return-Path: <linux-doc+bounces-94852-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94853-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id uMNwJdTNR2o/fgAAu9opvQ
-	(envelope-from <linux-doc+bounces-94852-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 16:57:24 +0200
+	id eo48JEfNR2ogfgAAu9opvQ
+	(envelope-from <linux-doc+bounces-94853-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 16:55:03 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03D1C703A80
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 16:57:24 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 26C13703A26
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 16:55:03 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linux.dev header.s=key1 header.b="UDBNB8/0";
+	dkim=pass header.d=linux.dev header.s=key1 header.b=GoqgUdNe;
 	dmarc=pass (policy=none) header.from=linux.dev;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94852-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-94852-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94853-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94853-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id E5E773024A38
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 14:51:02 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 7889C3001FC8
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 14:55:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CCE2B2367D3;
-	Fri,  3 Jul 2026 14:51:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B25873F4824;
+	Fri,  3 Jul 2026 14:55:00 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from out-185.mta0.migadu.com (out-185.mta0.migadu.com [91.218.175.185])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4759D375F69
-	for <linux-doc@vger.kernel.org>; Fri,  3 Jul 2026 14:51:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 04B083438BA
+	for <linux-doc@vger.kernel.org>; Fri,  3 Jul 2026 14:54:58 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783090261; cv=none; b=ETfVT4wgAyfbFUqLNrNXPnLaMPigHUzRas+ZgoF+ZJT0as4gTXXlNANt/IpJN7xqFVkJJg+I7v7nE5erEbpqnhP5D5rRjnQj40LSvB7+Z5CVzNfCheg+QYWOsaqlKrrHGvn8/PNChwROffXv7OcHyBJ2y3bSYjpFN2rpJ7blPco=
+	t=1783090500; cv=none; b=OUj8VG2AXj4kX2RaCupNThB08bH70DZP3TZ0htRNr9GnZBLiUhXt1w8zB5H0JoLrDlckuXWM8FDPFCLNVol/dGx/WxynDJsxizEvQWlcjS49/ZrxSA01UBo+RPeV1c9MiCS8I5h1vg9dnPULeK9MII7af8yrtnohp26DwJmo5EI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783090261; c=relaxed/simple;
-	bh=D5ud8qWqRJ9MykIWJlRVr4bTYlYROne+B+OgA5icF38=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=C6GfpQ3TjKZoa6BjiPRBgTc9r0wK5IEi0cp8WCOZ00S47W4MN0S9WtbzfxM4NF1eriwvbkJfeo0FEaw76qfiigCdcswttp9F2hkTlg/UlRMF1IR2CmMRSWlC2JWGJp/BR9tAm16uP4AbyKXgBtATiK1Zusyx77lVvHVilX8kPlM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=UDBNB8/0; arc=none smtp.client-ip=91.218.175.185
-Message-ID: <8f75dc18-dd4c-4989-a76c-eec6cc513ccf@linux.dev>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1783090246;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=CXlZY4gPG+zU33k3H0xm4g/0VaNA0tr7HNt5303WUBg=;
-	b=UDBNB8/0B1x3/BrOa/t8tH6XYsteLhqIKb6sFPxo+8voiJoXwSGbGVTm7m2V2fKjxbZfG5
-	wYXqGIpNv/UsD7//6L9xKs/IvOligQC3lhghGNicG75MZUNKdc91kSBysgQAuIKoLqiQ3k
-	zeQenTliY3QJ+tbtFUjK7MHFfZ7WXFo=
-Date: Fri, 3 Jul 2026 22:50:29 +0800
+	s=arc-20240116; t=1783090500; c=relaxed/simple;
+	bh=SbPuoxe9/8K5nDiss1P1G+SXa5cD6+BbCbutJ10O3gA=;
+	h=Mime-Version:Content-Type:Date:Message-Id:Cc:Subject:From:To:
+	 References:In-Reply-To; b=aEYthiScmjqUuGUIQI+318CQxUtDxTTcAFgbC+J4x8PUqD6uNMIxTYDBLdMq86jsEp9eM/fNRnAayQaOqQCyuv4ExydXTXYUTErHXCL4DAr0DYfn3HNss2mjuOsPkGH8zMYah6KzDcRnm3JULODtBG92sSzFErp3BPf86w9b/5E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=GoqgUdNe; arc=none smtp.client-ip=91.218.175.185
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Subject: Re: [PATCH] mm/mseal: fix mseal documentation for 32-bit kernels
-To: Pedro Falcato <pfalcato@suse.de>
-Cc: linux-mm@kvack.org, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>,
- Andrew Morton <akpm@linux-foundation.org>,
- "Liam R . Howlett" <liam@infradead.org>, Lorenzo Stoakes <ljs@kernel.org>,
- Vlastimil Babka <vbabka@kernel.org>, Jann Horn <jannh@google.com>,
- Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
- Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
- Nathan Chancellor <nathan@kernel.org>, Peter Zijlstra
- <peterz@infradead.org>, Miguel Ojeda <ojeda@kernel.org>,
- Nicolas Schier <nsc@kernel.org>, Thomas Gleixner <tglx@kernel.org>,
- =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
- Alice Ryhl <aliceryhl@google.com>, Douglas Anderson <dianders@chromium.org>,
- Gary Guo <gary@garyguo.net>, Anand Moon <linux.amoon@gmail.com>,
- Randy Dunlap <rdunlap@infradead.org>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org
-References: <20260703022507.187457-1-leon.hwang@linux.dev>
- <akeDk49-pPgUDek1@pedro-suse>
-Content-Language: en-US
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Leon Hwang <leon.hwang@linux.dev>
-In-Reply-To: <akeDk49-pPgUDek1@pedro-suse>
+Mime-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1783090495;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=SbPuoxe9/8K5nDiss1P1G+SXa5cD6+BbCbutJ10O3gA=;
+	b=GoqgUdNey9WibpT4bCWElWCK/Q8ZarEulgJnOwtH8yUYJA68i9+SGQflaQqhfntmLTLqoe
+	eB23ClEBpn2xCd2QuZuRlpe/F6BVVRjYG8MpJKtoXNNPTsnfkNo24Jc6bEsuCimTjf2nDr
+	Gtk6mCa7gTMDQeIwZl5Jn3GGSudvZ6Y=
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Date: Fri, 03 Jul 2026 14:54:45 +0000
+Message-Id: <DJP0TON6OW7J.EPYIYFFA5ZOZ@linux.dev>
+Cc: "Kalyazin, Nikita" <kalyazin@amazon.co.uk>, "kvm@vger.kernel.org"
+ <kvm@vger.kernel.org>, "linux-doc@vger.kernel.org"
+ <linux-doc@vger.kernel.org>, "linux-kernel@vger.kernel.org"
+ <linux-kernel@vger.kernel.org>, "linux-arm-kernel@lists.infradead.org"
+ <linux-arm-kernel@lists.infradead.org>, "kvmarm@lists.linux.dev"
+ <kvmarm@lists.linux.dev>, "linux-fsdevel@vger.kernel.org"
+ <linux-fsdevel@vger.kernel.org>, "linux-mm@kvack.org" <linux-mm@kvack.org>,
+ "bpf@vger.kernel.org" <bpf@vger.kernel.org>,
+ "linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>,
+ "kernel@xen0n.name" <kernel@xen0n.name>, "linux-riscv@lists.infradead.org"
+ <linux-riscv@lists.infradead.org>, "linux-s390@vger.kernel.org"
+ <linux-s390@vger.kernel.org>, "loongarch@lists.linux.dev"
+ <loongarch@lists.linux.dev>, "linux-pm@vger.kernel.org"
+ <linux-pm@vger.kernel.org>, "pbonzini@redhat.com" <pbonzini@redhat.com>,
+ "corbet@lwn.net" <corbet@lwn.net>, "suzuki.poulose@arm.com"
+ <suzuki.poulose@arm.com>, "yuzenghui@huawei.com" <yuzenghui@huawei.com>,
+ "will@kernel.org" <will@kernel.org>, "seanjc@google.com"
+ <seanjc@google.com>, "tglx@kernel.org" <tglx@kernel.org>,
+ "mingo@redhat.com" <mingo@redhat.com>, "bp@alien8.de" <bp@alien8.de>,
+ "dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>,
+ "x86@kernel.org" <x86@kernel.org>, "hpa@zytor.com" <hpa@zytor.com>,
+ "luto@kernel.org" <luto@kernel.org>, "peterz@infradead.org"
+ <peterz@infradead.org>, "willy@infradead.org" <willy@infradead.org>,
+ "akpm@linux-foundation.org" <akpm@linux-foundation.org>, "david@kernel.org"
+ <david@kernel.org>, "lorenzo.stoakes@oracle.com"
+ <lorenzo.stoakes@oracle.com>, "vbabka@kernel.org" <vbabka@kernel.org>,
+ "surenb@google.com" <surenb@google.com>, "mhocko@suse.com"
+ <mhocko@suse.com>, "ast@kernel.org" <ast@kernel.org>,
+ "martin.lau@linux.dev" <martin.lau@linux.dev>, "eddyz87@gmail.com"
+ <eddyz87@gmail.com>, "song@kernel.org" <song@kernel.org>,
+ "yonghong.song@linux.dev" <yonghong.song@linux.dev>,
+ "john.fastabend@gmail.com" <john.fastabend@gmail.com>, "kpsingh@kernel.org"
+ <kpsingh@kernel.org>, "sdf@fomichev.me" <sdf@fomichev.me>,
+ "haoluo@google.com" <haoluo@google.com>, "jolsa@kernel.org"
+ <jolsa@kernel.org>, "jgg@ziepe.ca" <jgg@ziepe.ca>, "jhubbard@nvidia.com"
+ <jhubbard@nvidia.com>, "peterx@redhat.com" <peterx@redhat.com>,
+ "jannh@google.com" <jannh@google.com>, "pfalcato@suse.de"
+ <pfalcato@suse.de>, "skhan@linuxfoundation.org"
+ <skhan@linuxfoundation.org>, "riel@surriel.com" <riel@surriel.com>,
+ "ryan.roberts@arm.com" <ryan.roberts@arm.com>, "jgross@suse.com"
+ <jgross@suse.com>, "yu-cheng.yu@intel.com" <yu-cheng.yu@intel.com>,
+ "kas@kernel.org" <kas@kernel.org>, "coxu@redhat.com" <coxu@redhat.com>,
+ "ackerleytng@google.com" <ackerleytng@google.com>, "yosry@kernel.org"
+ <yosry@kernel.org>, "maobibo@loongson.cn" <maobibo@loongson.cn>,
+ "tabba@google.com" <tabba@google.com>, "prsampat@amd.com"
+ <prsampat@amd.com>, "jthoughton@google.com" <jthoughton@google.com>,
+ "agordeev@linux.ibm.com" <agordeev@linux.ibm.com>, "aou@eecs.berkeley.edu"
+ <aou@eecs.berkeley.edu>, "borntraeger@linux.ibm.com"
+ <borntraeger@linux.ibm.com>, "chenhuacai@kernel.org"
+ <chenhuacai@kernel.org>, "baolu.lu@linux.intel.com"
+ <baolu.lu@linux.intel.com>, "dev.jain@arm.com" <dev.jain@arm.com>,
+ "gor@linux.ibm.com" <gor@linux.ibm.com>, "hca@linux.ibm.com"
+ <hca@linux.ibm.com>, "palmer@dabbelt.com" <palmer@dabbelt.com>,
+ "pjw@kernel.org" <pjw@kernel.org>, "shijie@os.amperecomputing.com"
+ <shijie@os.amperecomputing.com>, "svens@linux.ibm.com"
+ <svens@linux.ibm.com>, "thuth@redhat.com" <thuth@redhat.com>,
+ "yang@os.amperecomputing.com" <yang@os.amperecomputing.com>,
+ "Liam.Howlett@oracle.com" <Liam.Howlett@oracle.com>, "urezki@gmail.com"
+ <urezki@gmail.com>, "zhengqi.arch@bytedance.com"
+ <zhengqi.arch@bytedance.com>, "gerald.schaefer@linux.ibm.com"
+ <gerald.schaefer@linux.ibm.com>, "jiayuan.chen@shopee.com"
+ <jiayuan.chen@shopee.com>, "rafael@kernel.org" <rafael@kernel.org>,
+ "yangyicong@hisilicon.com" <yangyicong@hisilicon.com>,
+ "vannapurve@google.com" <vannapurve@google.com>, "jackmanb@google.com"
+ <jackmanb@google.com>, "patrick.roy@linux.dev" <patrick.roy@linux.dev>,
+ "Itazuri, Takahiro" <itazur@amazon.co.uk>, "Manwaring, Derek"
+ <derekmn@amazon.com>
+Subject: Re: [PATCH v12 02/16] set_memory: add
+ folio_{zap,restore}_direct_map helpers
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: "Brendan Jackman" <brendan.jackman@linux.dev>
+To: "Mike Rapoport" <rppt@kernel.org>, "Brendan Jackman"
+ <brendan.jackman@linux.dev>
+References: <20260410151746.61150-1-kalyazin@amazon.com>
+ <20260410151746.61150-3-kalyazin@amazon.com>
+ <DJOUYOKL6N3R.BFIO8HEL03OA@linux.dev> <ake7aPB2O_-dAXhI@kernel.org>
+In-Reply-To: <ake7aPB2O_-dAXhI@kernel.org>
 X-Migadu-Flow: FLOW_OUT
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	MV_CASE(0.50)[];
 	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94852-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:pfalcato@suse.de,m:linux-mm@kvack.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:akpm@linux-foundation.org,m:liam@infradead.org,m:ljs@kernel.org,m:vbabka@kernel.org,m:jannh@google.com,m:pjw@kernel.org,m:palmer@dabbelt.com,m:aou@eecs.berkeley.edu,m:alex@ghiti.fr,m:nathan@kernel.org,m:peterz@infradead.org,m:ojeda@kernel.org,m:nsc@kernel.org,m:tglx@kernel.org,m:thomas.weissschuh@linutronix.de,m:aliceryhl@google.com,m:dianders@chromium.org,m:gary@garyguo.net,m:linux.amoon@gmail.com,m:rdunlap@infradead.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-riscv@lists.infradead.org,m:linuxamoon@gmail.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[leon.hwang@linux.dev,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[27];
-	RCVD_COUNT_THREE(0.00)[3];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[kvack.org,lwn.net,linuxfoundation.org,linux-foundation.org,infradead.org,kernel.org,google.com,dabbelt.com,eecs.berkeley.edu,ghiti.fr,linutronix.de,chromium.org,garyguo.net,gmail.com,vger.kernel.org,lists.infradead.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[leon.hwang@linux.dev,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linux.dev:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	TAGGED_FROM(0.00)[bounces-94853-lists,linux-doc=lfdr.de];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:kalyazin@amazon.co.uk,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:kvmarm@lists.linux.dev,m:linux-fsdevel@vger.kernel.org,m:linux-mm@kvack.org,m:bpf@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:kernel@xen0n.name,m:linux-riscv@lists.infradead.org,m:linux-s390@vger.kernel.org,m:loongarch@lists.linux.dev,m:linux-pm@vger.kernel.org,m:pbonzini@redhat.com,m:corbet@lwn.net,m:suzuki.poulose@arm.com,m:yuzenghui@huawei.com,m:will@kernel.org,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:luto@kernel.org,m:peterz@infradead.org,m:willy@infradead.org,m:akpm@linux-foundation.org,m:david@kernel.org,m:lorenzo.stoakes@oracle.com,m:vbabka@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:ast@kernel.org,m:martin.lau@linux.dev,m:eddyz87@gmail.com,m:song@kernel.org,m:yonghong.song@linux.dev,m:john.fastabend
+ @gmail.com,m:kpsingh@kernel.org,m:sdf@fomichev.me,m:haoluo@google.com,m:jolsa@kernel.org,m:jgg@ziepe.ca,m:jhubbard@nvidia.com,m:peterx@redhat.com,m:jannh@google.com,m:pfalcato@suse.de,m:skhan@linuxfoundation.org,m:riel@surriel.com,m:ryan.roberts@arm.com,m:jgross@suse.com,m:yu-cheng.yu@intel.com,m:kas@kernel.org,m:coxu@redhat.com,m:ackerleytng@google.com,m:yosry@kernel.org,m:maobibo@loongson.cn,m:tabba@google.com,m:prsampat@amd.com,m:jthoughton@google.com,m:agordeev@linux.ibm.com,m:aou@eecs.berkeley.edu,m:borntraeger@linux.ibm.com,m:chenhuacai@kernel.org,m:baolu.lu@linux.intel.com,m:dev.jain@arm.com,m:gor@linux.ibm.com,m:hca@linux.ibm.com,m:palmer@dabbelt.com,m:pjw@kernel.org,m:shijie@os.amperecomputing.com,m:svens@linux.ibm.com,m:thuth@redhat.com,m:yang@os.amperecomputing.com,m:Liam.Howlett@oracle.com,m:urezki@gmail.com,m:zhengqi.arch@bytedance.com,m:gerald.schaefer@linux.ibm.com,m:jiayuan.chen@shopee.com,m:rafael@kernel.org,m:yangyicong@hisilicon.com,m:vannapurve@google.com,m:jackm
+ anb@google.com,m:patrick.roy@linux.dev,m:itazur@amazon.co.uk,m:derekmn@amazon.com,m:rppt@kernel.org,m:brendan.jackman@linux.dev,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[3];
+	FORGED_SENDER(0.00)[brendan.jackman@linux.dev,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[amazon.co.uk,vger.kernel.org,lists.infradead.org,lists.linux.dev,kvack.org,xen0n.name,redhat.com,lwn.net,arm.com,huawei.com,kernel.org,google.com,alien8.de,linux.intel.com,zytor.com,infradead.org,linux-foundation.org,oracle.com,suse.com,linux.dev,gmail.com,fomichev.me,ziepe.ca,nvidia.com,suse.de,linuxfoundation.org,surriel.com,intel.com,loongson.cn,amd.com,linux.ibm.com,eecs.berkeley.edu,dabbelt.com,os.amperecomputing.com,bytedance.com,shopee.com,hisilicon.com,amazon.com];
+	FROM_HAS_DN(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,linux.dev:from_mime,linux.dev:email,linux.dev:mid,linux.dev:dkim,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[92];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[brendan.jackman@linux.dev,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[linux.dev:+];
+	ALIAS_RESOLVED(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:from_mime,linux.dev:dkim,linux.dev:mid,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 03D1C703A80
+X-Rspamd-Queue-Id: 26C13703A26
 
-On 2026/7/3 17:44, Pedro Falcato wrote:
-> On Fri, Jul 03, 2026 at 10:25:07AM +0800, Leon Hwang wrote:
->> mseal.o is built only for 64-bit kernels, so 32-bit kernels fall back
->> to sys_ni_syscall() and return -ENOSYS rather than -EPERM.
->>
->> Document the -EINTR return from mmap_write_lock_killable(), fix the
->> CONFIG_MSEAL_SYSTEM_MAPPINGS typo, and describe system mappings in
->> terms of VM_SEALED_SYSMAP.
->>
->> Signed-off-by: Leon Hwang <leon.hwang@linux.dev>
->> ---
->>  Documentation/userspace-api/mseal.rst | 18 ++++++++++--------
->>  init/Kconfig                          |  2 +-
->>  mm/mseal.c                            |  4 ++--
->>  3 files changed, 13 insertions(+), 11 deletions(-)
->>
->> diff --git a/Documentation/userspace-api/mseal.rst b/Documentation/userspace-api/mseal.rst
->> index ea9b11a0bd89..1f1cf206670c 100644
->> --- a/Documentation/userspace-api/mseal.rst
->> +++ b/Documentation/userspace-api/mseal.rst
->> @@ -50,8 +50,10 @@ mseal syscall signature
->>           * The start address (``addr``) is not allocated.
->>           * The end address (``addr`` + ``len``) is not allocated.
->>           * A gap (unallocated memory) between start and end address.
->> -      - **-EPERM**:
->> -         * sealing is supported only on 64-bit CPUs, 32-bit is not supported.
->> +      - **-EINTR**:
->> +         * Interrupted while waiting for the mmap write lock.
->> +      - **-ENOSYS**:
->> +         * The kernel does not implement ``mseal()``.
->>  
->>     **Note about error return**:
->>        - For above error cases, users can expect the given memory range is
-> 
-> Honestly, this whole thing needs to be deleted. We need a proper manpage.
+On Fri Jul 3, 2026 at 1:38 PM UTC, Mike Rapoport wrote:
+> On Fri, Jul 03, 2026 at 10:19:10AM +0000, Brendan Jackman wrote:
+...
+>> Alternatively, we maybe should disable secretmem for highmem systems
+>> since it evidently doesn't have any users.
+>
+> Yes, please :)=20
 
-$ man mseal
-No manual entry for mseal
-
-When searching "mseal manual" using Google, this doc is the first entry.
-
-So, this change is worthy.
-
-> 
->> @@ -62,7 +64,8 @@ mseal syscall signature
->>          memory range could happen. However, those cases should be rare.
->>  
->>     **Architecture support**:
->> -      mseal only works on 64-bit CPUs, not 32-bit CPUs.
->> +      mseal is built only for 64-bit kernels. 32-bit kernels return
->> +      ``-ENOSYS``.
-> 
-> This LGTM.
-> 
->>  
->>     **Idempotent**:
->>        users can call mseal multiple times. mseal on an already sealed memory
->> @@ -131,20 +134,19 @@ Use cases
->>  - Chrome browser: protect some security sensitive data structures.
->>  
->>  - System mappings:
->> -  The system mappings are created by the kernel and includes vdso, vvar,
->> +  The system mappings are created by the kernel and include vdso, vvar,
->>    vvar_vclock, vectors (arm compat-mode), sigpage (arm compat-mode), uprobes.
->>  
->>    Those system mappings are readonly only or execute only, memory sealing can
->> -  protect them from ever changing to writable or unmmap/remapped as different
->> +  protect them from ever changing to writable or unmapped/remapped as different
->>    attributes. This is useful to mitigate memory corruption issues where a
->>    corrupted pointer is passed to a memory management system.
-> 
-> Also LGTM.
-> 
->>  
->>    If supported by an architecture (CONFIG_ARCH_SUPPORTS_MSEAL_SYSTEM_MAPPINGS),
->> -  the CONFIG_MSEAL_SYSTEM_MAPPINGS seals all system mappings of this
->> -  architecture.
->> +  CONFIG_MSEAL_SYSTEM_MAPPINGS seals mappings marked with VM_SEALED_SYSMAP.
-> 
-> VM_SEALED_SYSMAP isn't meaningful to userspace.
-
-
-Got it. Will drop this change.
-
-> 
->>  
->>    The following architectures currently support this feature: x86-64, arm64,
->> -  loongarch and s390.
->> +  loongarch, riscv, and s390.
-> 
-> This is also useless, every 64-bit architecture will support this.
-
-
-Do you mean dropping this sentence, or this change?
-
-> 
->>  
->>    WARNING: This feature breaks programs which rely on relocating
->>    or unmapping system mappings. Known broken software at the time
->> diff --git a/init/Kconfig b/init/Kconfig
->> index 5230d4879b1c..12bb39f637b1 100644
->> --- a/init/Kconfig
->> +++ b/init/Kconfig
->> @@ -2112,7 +2112,7 @@ config ARCH_SUPPORTS_MSEAL_SYSTEM_MAPPINGS
->>  	  from a kernel perspective.
->>  
->>  	  After the architecture enables this, a distribution can set
->> -	  CONFIG_MSEAL_SYSTEM_MAPPING to manage access to the feature.
->> +	  CONFIG_MSEAL_SYSTEM_MAPPINGS to manage access to the feature.
->>  
->>  	  For complete descriptions of memory sealing, please see
->>  	  Documentation/userspace-api/mseal.rst
->> diff --git a/mm/mseal.c b/mm/mseal.c
->> index 9781647483d1..0464c7b94ab9 100644
->> --- a/mm/mseal.c
->> +++ b/mm/mseal.c
->> @@ -132,8 +132,8 @@ static int mseal_apply(struct mm_struct *mm,
->>   *   addr is not a valid address (not allocated).
->>   *   end (start + len) is not a valid address.
->>   *   a gap (unallocated memory) between start and end.
->> - *  -EPERM:
->> - *  - In 32 bit architecture, sealing is not supported.
->> + *  -EINTR:
->> + *   interrupted while waiting for the mmap write lock.
->>   * Note:
->>   *  user can call mseal(2) multiple times, adding a seal on an
->>   *  already sealed memory is a no-action (no error).
-> 
-> And this whole header needs to be deleted as well. No one's looking at
-> kernel code for documentation (and if they are, we did a horrendous job
-> at actually documenting the thing).
-> 
-
-
-Just to confirm, do you mean removing the entire function comment above
-do_mseal()?
-
-Thanks,
-Leon
-
-
+https://lore.kernel.org/all/20260703-secretmem-highmem-v1-1-30d5ff944664@go=
+ogle.com/
 
