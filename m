@@ -1,290 +1,165 @@
-Return-Path: <linux-doc+bounces-94752-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94757-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Ra+YDBtxR2ozYQAAu9opvQ
-	(envelope-from <linux-doc+bounces-94752-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 10:21:47 +0200
+	id QupeAJ5yR2p2YQAAu9opvQ
+	(envelope-from <linux-doc+bounces-94757-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 10:28:14 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 81EA6700004
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 10:21:46 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B42D7000C8
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 10:28:13 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=gF2rbx1p;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94752-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94752-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=utwQtHIg;
+	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=NhmnZYGG;
+	dmarc=pass (policy=reject) header.from=mailbox.org;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94757-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-94757-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id A16D43050C9E
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 08:00:52 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 3FD8F3147F1E
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 08:11:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 483993769E6;
-	Fri,  3 Jul 2026 08:00:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 59FD037104C;
+	Fri,  3 Jul 2026 08:11:28 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CB94A371D15;
-	Fri,  3 Jul 2026 08:00:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 04DBE433E7C;
+	Fri,  3 Jul 2026 08:11:25 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783065629; cv=none; b=nbPoIdxYkObCroxtqAePWbTCjILhIxRUmjQFqlvpOR07ct+CX24MnLlafpPtZP75aYC7F08fflt5yoAth8jJ/BPmXCP8PaoWUDlPayQ/XfYNw12x4bw0J1vKiE9eDq7BgXWAjo/3p/VkjOPxDf0HC2SyF8ZLBdZW045/96FNqNc=
+	t=1783066288; cv=none; b=pqhSe6s3QbC9+BE/Vf3EGK0mSPKHGHAiqKSvLLlRFrVbAa872RKFMJmvViWWfce+/fSaA8GVcmSUuadHkAVuziDzZsTMaJUiE6/c2P8UZzJILRcgH3m5zdOwoV6FapptxlxzaxdXV/aKYHz/kxZgdo3bHk5vfH3syXd2UBr2I+U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783065629; c=relaxed/simple;
-	bh=g4JQuhHD/RK6GHrhnwml/L/+nYMSlIjvihkKG4F2kk4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ZcyYWGtHvE4k5YB59HcW//bqvdnESLX9egooHOqIdLzSiKhMpKYqB39ujyn1x9x3+nGRGWzgvChroV8WZralYiue9Wvn3ZLj6ch7KgjPrVmbLc3QW7hw8mtX2ryhgfdvAQGQh3Nw8fexNB9B6Kk1bVL653F2LG5DPH/NZPL7op0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gF2rbx1p; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D01171F000E9;
-	Fri,  3 Jul 2026 08:00:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783065627;
-	bh=N6cvB6ilYfXF9Z+EldI441PSyI9lUhF0hrtl69qJt7g=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=gF2rbx1ppjqa9+2qsNeLPi+Dr2B6uYU5jU8z5gb2wDPgIeKuRlItYFkeO0++ERkLy
-	 WPvyzPIjbipYpLrP67Ua4EXeUGGJAARcis1cpcHOZ7OgxypilI6yvDTW/4Os0pCDTR
-	 Z7GmHDUQMB7BLPxVBNMicUYmFuqzJF9mbFZU+6XCsunk4+/GlRX7snOL6wXVMWrnE5
-	 YWq6SdeWTqgCc8LOAZ9uRPf43Ho1otnVSXVTUDl4WKTMh60V2Wrn2HJ60Jy3GJ+43u
-	 Wi1jX8hHDHYsBtIgrVL7mAbyxfChNsCoFG0jZBO4T3eCLC05Ig28n1JXtNZtyECWN7
-	 aKPO4wDGwEZ+A==
-Date: Fri, 3 Jul 2026 01:00:25 -0700
-From: Drew Fustini <fustini@kernel.org>
-To: Fenghua Yu <fenghuay@nvidia.com>
-Cc: Adrien Ricciardi <aricciardi@baylibre.com>,
-	Alexandre Ghiti <alex@ghiti.fr>,
-	Atish Kumar Patra <atishp@rivosinc.com>,
-	Atish Patra <atish.patra@linux.dev>,
-	Babu Moger <babu.moger@amd.com>, Ben Horgan <ben.horgan@arm.com>,
-	Borislav Petkov <bp@alien8.de>, Chen Pei <cp0613@linux.alibaba.com>,
-	Conor Dooley <conor.dooley@microchip.com>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	Dave Martin <Dave.Martin@arm.com>,
-	Gong Shuai <gong.shuai@sanechips.com.cn>,
-	Gong Shuai <gsh517@gmail.com>, guo.wenjia23@zte.com.cn,
-	James Morse <james.morse@arm.com>,
-	Kornel =?utf-8?Q?Dul=C4=99ba?= <mindal@semihalf.com>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, liu.qingtao2@zte.com.cn,
-	Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>, Paul Walmsley <pjw@kernel.org>,
-	Peter Newman <peternewman@google.com>,
-	Radim =?utf-8?B?S3LEjW3DocWZ?= <rkrcmar@ventanamicro.com>,
-	Reinette Chatre <reinette.chatre@intel.com>,
-	Rob Herring <robh@kernel.org>,
-	Samuel Holland <samuel.holland@sifive.com>,
-	Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-	Tony Luck <tony.luck@intel.com>,
-	Vasudevan Srinivasan <vasu@rivosinc.com>,
-	Ved Shanbhogue <ved@rivosinc.com>, Weiwei Li <liwei1518@gmail.com>,
-	yunhui cui <cuiyunhui@bytedance.com>, linux-kernel@vger.kernel.org,
-	linux-riscv@lists.infradead.org, x86@kernel.org,
-	devicetree@vger.kernel.org, linux-rt-devel@lists.linux.dev,
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v3 5/8] riscv_cbqri: resctrl: Add cache allocation via
- capacity block mask
-Message-ID: <akdsGZm8e9w5idhn@x1>
-References: <20260628-dfustini-atl-sc-cbqri-dt-v3-0-c9c1342fe3cf@kernel.org>
- <20260628-dfustini-atl-sc-cbqri-dt-v3-5-c9c1342fe3cf@kernel.org>
- <473da771-b711-457b-b9ad-491fee111b16@nvidia.com>
+	s=arc-20240116; t=1783066288; c=relaxed/simple;
+	bh=zLx7l5kx04C6KeXdlbIoe+uCZNDrRGzA+phbSWIPNQ0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=gSQLxvBB+lTTrludEz2fdZHiTAQE5wFgF25pJqCoqt0kFtmPJaSy+V8aIA/j1IuAilgnlZmqPZoSR8QKe5fxrqv1fx4v2GLhL3Vps8yeADT3va2TjyWzShADPSK1oHPgdyggY2sbJrQRn18mGA6+RBlFpVujId7RYaSqbGQujb8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org; spf=pass smtp.mailfrom=mailbox.org; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=utwQtHIg; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=NhmnZYGG; arc=none smtp.client-ip=80.241.56.172
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4gs60D0SGfz9tZF;
+	Fri,  3 Jul 2026 10:11:24 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1783066284;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=q6tfuCZZi4Yr0K9wDrm5AhdIyW9zDxXqPlusCRAtMWY=;
+	b=utwQtHIgiyNgTyulXeCuSBy27Sjir1YOaEKwvGR52iwV5ndLaznZxE7yzZs+lESUldeq1y
+	xRLX+SmodYsRfdtOwGgsRehy6l1uiQXZmRKYZWAtAP6qcVk9xp60cH0xlxk1gcx3rXRFqW
+	hEI7h4tjQnq3DbSB9hELkxkjAdwWg6k5e+3nIxeVslJaCV2AWPdDU+U5Mg9wE4WqFtiy+Y
+	USrfml0baAQwzRUE+6TxefSq1Fbzp7SQl827OC5VCzYe1y8sTeW4zx0MNndi4GL6KhcChH
+	NEIUvQ6fMa3em+2+I0RCK1I7EaGhpRlYQSc0U5Q4aby4iz+bCs31Qp6U9d4+FQ==
+From: Manuel Ebner <manuelebner@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1783066282;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=q6tfuCZZi4Yr0K9wDrm5AhdIyW9zDxXqPlusCRAtMWY=;
+	b=NhmnZYGGpRw/uhE2ToT6OITW7/68XEKGtgoLn6+nrWwM7DeDdzQ/ThyR60bTnG2cnietTh
+	96yxCsUSCanVbam/6S9mZMi4mZV0BaHNeJcYN5hJfzJebVZR+XDj+o3T79huCz2YquZgHP
+	WPDksE3Y1H5bpncf7NNsQB2bqxhUiHuFE/vtoYYWhhpdl3U0K40Aid2hKvdzLKPC5pQv2M
+	lqkXk/TJ5v/ReQx3hs/SoFiZNYhV51NuvYEN6hZ4Fnb0dmfCo3Z00at2Wwh5ztP7FEUR6x
+	K1KXHAjYWO9zZVh4ZwnW975KGVMYC8tKwSW4JgILNXXEkPRtAxRP6KbE5j4qVQ==
+To: Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>
+Cc: Randy Dunlap <rdunlap@infradead.org>,
+	Kernel Janitors <kernel-janitors@vger.kernel.org>,
+	Manuel Ebner <manuelebner@mailbox.org>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH] Documentation/kernel-parameters: fix brackets
+Date: Fri,  3 Jul 2026 10:08:06 +0200
+Message-ID: <20260703080806.223782-2-manuelebner@mailbox.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <473da771-b711-457b-b9ad-491fee111b16@nvidia.com>
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: rbidibxtzmfnrut3p8essby8txxkahzz
+X-MBO-RS-ID: 3dcec43993f7fb0df76
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.16 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[mailbox.org,reject];
+	R_DKIM_ALLOW(-0.20)[mailbox.org:s=mail20150812];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-94757-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[40];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:fenghuay@nvidia.com,m:aricciardi@baylibre.com,m:alex@ghiti.fr,m:atishp@rivosinc.com,m:atish.patra@linux.dev,m:babu.moger@amd.com,m:ben.horgan@arm.com,m:bp@alien8.de,m:cp0613@linux.alibaba.com,m:conor.dooley@microchip.com,m:conor+dt@kernel.org,m:dave.hansen@linux.intel.com,m:Dave.Martin@arm.com,m:gong.shuai@sanechips.com.cn,m:gsh517@gmail.com,m:guo.wenjia23@zte.com.cn,m:james.morse@arm.com,m:mindal@semihalf.com,m:krzk+dt@kernel.org,m:liu.qingtao2@zte.com.cn,m:zhiwei_liu@linux.alibaba.com,m:palmer@dabbelt.com,m:pjw@kernel.org,m:peternewman@google.com,m:rkrcmar@ventanamicro.com,m:reinette.chatre@intel.com,m:robh@kernel.org,m:samuel.holland@sifive.com,m:bigeasy@linutronix.de,m:tony.luck@intel.com,m:vasu@rivosinc.com,m:ved@rivosinc.com,m:liwei1518@gmail.com,m:cuiyunhui@bytedance.com,m:linux-kernel@vger.kernel.org,m:linux-riscv@lists.infradead.org,m:x86@kernel.org,m:devicetree@vger.kernel.org,m:linux-rt-devel@lists.linux.dev,m:linux-doc@vger.kernel.org,m:conor@ke
- rnel.org,m:krzk@kernel.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94752-lists,linux-doc=lfdr.de];
-	FORGED_SENDER(0.00)[fustini@kernel.org,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[fustini@kernel.org,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[baylibre.com,ghiti.fr,rivosinc.com,linux.dev,amd.com,arm.com,alien8.de,linux.alibaba.com,microchip.com,kernel.org,linux.intel.com,sanechips.com.cn,gmail.com,zte.com.cn,semihalf.com,dabbelt.com,google.com,ventanamicro.com,intel.com,sifive.com,linutronix.de,bytedance.com,vger.kernel.org,lists.infradead.org,lists.linux.dev];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
+	FORGED_SENDER(0.00)[manuelebner@mailbox.org,linux-doc@vger.kernel.org];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:rdunlap@infradead.org,m:kernel-janitors@vger.kernel.org,m:manuelebner@mailbox.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
+	DKIM_TRACE(0.00)[mailbox.org:+];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp,nvidia.com:email,baylibre.com:email]
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[manuelebner@mailbox.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[7];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,mailbox.org:from_mime,mailbox.org:email,mailbox.org:mid,mailbox.org:dkim]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 81EA6700004
+X-Rspamd-Queue-Id: 8B42D7000C8
 
-On Wed, Jul 01, 2026 at 01:18:41PM -0700, Fenghua Yu wrote:
-> Hi, Drew,
+Add a few missing ']'s and a ')'.
 
-Hi, thanks for reviewing.
+Signed-off-by: Manuel Ebner <manuelebner@mailbox.org>
+---
+ Documentation/admin-guide/kernel-parameters.txt | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-> Could you please change my email address to my NVIDIA email
-> fenghuay@nvidia.com?
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+index b5493a7f8f22..60777968a063 100644
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -6413,9 +6413,9 @@ Kernel parameters
+ 	reboot=		[KNL]
+ 			Format (x86 or x86_64):
+ 				[w[arm] | c[old] | h[ard] | s[oft] | g[pio]] | d[efault] \
+-				[[,]s[mp]#### \
++				[[,]s[mp]]#### \
+ 				[[,]b[ios] | a[cpi] | k[bd] | t[riple] | e[fi] | p[ci]] \
+-				[[,]f[orce]
++				[[,]f[orce]]
+ 			Where reboot_mode is one of warm (soft) or cold (hard) or gpio
+ 					(prefix with 'panic_' to set mode for panic
+ 					reboot only),
+@@ -6875,7 +6875,7 @@ Kernel parameters
+ 			xtime_lock contention on larger systems, and/or RCU lock
+ 			contention on all systems with CONFIG_MAXSMP set.
+ 			Format: { "0" | "1" }
+-			0 -- disable. (may be 1 via CONFIG_CMDLINE="skew_tick=1"
++			0 -- disable. (may be 1 via CONFIG_CMDLINE="skew_tick=1")
+ 			1 -- enable.
+ 			Note: increases power consumption, thus should only be
+ 			enabled if running jitter sensitive (HPC/RT) workloads.
+@@ -6916,7 +6916,7 @@ Kernel parameters
+ 			apic=verbose is specified.
+ 			Example: apic=debug show_lapic=all
+ 
+-	slab_debug[=options[,slabs][;[options[,slabs]]...]	[MM]
++	slab_debug[=options[,slabs][;[options[,slabs]]...]]	[MM]
+ 			Enabling slab_debug allows one to determine the
+ 			culprit if slab objects become corrupted. Enabling
+ 			slab_debug can create guard zones around objects and
+-- 
+2.54.0
 
-No problem.
-
-> On 6/28/26 14:18, Drew Fustini wrote:
-> > Wire CBQRI capacity controllers into resctrl as RDT_RESOURCE_L2 and
-> > RDT_RESOURCE_L3 schemata.
-> > 
-> > Mismatched CC caps at the same cache level are treated as a fatal
-> > configuration error since fs/resctrl exposes a single per-rid cap
-> > set. Domains are created lazily in the cpuhp online callback so
-> > cpu_mask reflects only currently online CPUs.
-> > 
-> > Assisted-by: Claude:claude-opus-4-7
-> > Co-developed-by: Adrien Ricciardi <aricciardi@baylibre.com>
-> > Signed-off-by: Adrien Ricciardi <aricciardi@baylibre.com>
-> > Signed-off-by: Drew Fustini <fustini@kernel.org>
-> > ---
-> >   MAINTAINERS                      |   2 +
-> >   arch/riscv/include/asm/resctrl.h | 147 ++++++++
-> >   drivers/resctrl/Kconfig          |   4 +
-> >   drivers/resctrl/Makefile         |   1 +
-> >   drivers/resctrl/cbqri_resctrl.c  | 787 +++++++++++++++++++++++++++++++++++++++
-> >   5 files changed, 941 insertions(+)
-> [SNIP]
-> 
-> > +/*
-> > + * Walk cbqri_controllers and pick one capacity controller (CC) per cache
-> > + * level (L2/L3) to back the corresponding RDT_RESOURCE_L*. When more than
-> > + * one CC sits at the same level (e.g. one per socket), they must agree on
-> > + * rcid_count / ncblks / alloc_capable. A mismatch is fatal because resctrl
-> > + * exposes a single set of caps per rid. The first matching controller wins.
-> > + */
-> > +static int cbqri_resctrl_pick_caches(void)
-> > +{
-> > +	struct cbqri_controller *ctrl;
-> > +	int ret = 0;
-> > +
-> > +	mutex_lock(&cbqri_controllers_lock);
-> 
-> Is it better to change mutex_lock()/mutex_unlock() to
->  guard(mutex)(&cbqri_controllers_lock)?
-> 
-> 1. This code is simpler and can avoid potential missing unlock issue.
-> 2. This matches mpam code.
-
-Good point, I will switch cbqri_controllers_lock lock/unlock to
-guard(mutex).
-
-> 
-> > +
-> > +	list_for_each_entry(ctrl, &cbqri_controllers, list) {
-> > +		struct cbqri_resctrl_res *cbqri_res;
-> > +		int rid;
-> > +
-> > +		if (ctrl->type != CBQRI_CONTROLLER_TYPE_CAPACITY)
-> > +			continue;
-> > +		if (!ctrl->alloc_capable)
-> > +			continue;
-> > +
-> > +		rid = cbqri_cache_level_to_rid(ctrl->cache.cache_level);
-> > +		if (rid < 0) {
-> > +			pr_info("skipping controller at unsupported cache level %u\n",
-> > +				ctrl->cache.cache_level);
-> > +			continue;
-> > +		}
-> > +
-> > +		cbqri_res = &cbqri_resctrl_resources[rid];
-> > +		if (cbqri_res->ctrl) {
-> > +			/*
-> > +			 * CCs at the same cache level must agree on every cap
-> > +			 * resctrl exposes globally. Reject mismatches at pick
-> > +			 * time so the inconsistency is visible at boot.
-> > +			 */
-> > +			if (cbqri_res->ctrl->rcid_count != ctrl->rcid_count ||
-> > +			    cbqri_res->ctrl->cc.ncblks != ctrl->cc.ncblks ||
-> > +			    cbqri_res->ctrl->cc.supports_alloc_at_code !=
-> > +				    ctrl->cc.supports_alloc_at_code ||
-> > +			    cbqri_res->ctrl->alloc_capable != ctrl->alloc_capable) {
-> > +				pr_err("L%d controllers have mismatched capabilities\n",
-> > +				       ctrl->cache.cache_level);
-> > +				ret = -EINVAL;
-> > +				break;
-> 
-> Is it possible to support cbqri on both L2 and L3 on the same machine?
-> Failure on one controller will stop picking another other controller here.
-> 
-> If both L2 and L3 can be supported on the same machine, does it make sense
-> to pr_err() (fatal for this controller) and continue to go to the next
-> controller? So failure on L2 won't impact L3?
-> 
-> If that's the case, does it make sense not to return error for
-> pick_caches()? So pick_caches() failure is not fatal?
-
-Yes, both L2 and L3 can be present at once, and you're right that this
-approach was too strict. I will change it so that it drops only the
-offending cache level. I will make pick_caches() clear that rid so it is
-not exposed and continue to the next controller. It no longer returns an
-error, so an L2 mismatch leaves L3, and any future QoS feature untouched.
-
-[..]
-> > +static int cbqri_attach_cpu_to_all_ctrls(unsigned int cpu)
-> > +{
-> > +	struct cbqri_controller *ctrl;
-> > +	int err = 0;
-> > +
-> > +	lockdep_assert_held(&cbqri_domain_list_lock);
-> > +
-> > +	/*
-> > +	 * Hold cbqri_controllers_lock across the walk so a controller
-> > +	 * registered after boot cannot corrupt it. The register path takes
-> > +	 * it as a leaf and never cbqri_domain_list_lock, so this nesting
-> > +	 * cannot invert.
-> > +	 */
-> > +	mutex_lock(&cbqri_controllers_lock);
-> 
-> guard(mutex)(&cbqri_controllers_lock)?
-
-Ack.
-
-> > +static int cbqri_resctrl_setup(void)
-> > +{
-> > +	int rid;
-> > +	int err;
-> > +
-> > +	for (rid = 0; rid < RDT_NUM_RESOURCES; rid++)
-> > +		cbqri_resctrl_resources[rid].resctrl_res.rid = rid;
-> > +
-> > +	err = cbqri_resctrl_pick_caches();
-> > +	if (err)
-> > +		return err;
-> 
-> Failure in pick_caches() will abort any future cbqri features e.g. memory bw
-> allocation/monitoring. Is it possible to ignore the pick_caches() failure
-> and continue to setup other cbqri features? Failed caches won't impact other
-> QoS features, right?
-
-You're right, and this is the same change as the L2/L3 mismatch above. I
-will drop the error return from pick_caches() so that a cache problem can
-no longer abort setup or block other QoS features. Cache capacity and
-memory bandwidth are separate controller types that will be picked
-independently, so a failed cache will not gate bandwidth alloc/mon when
-those land. The only early return I will keep is the -ENODEV for when
-nothing at all is exposable.
-
-Thanks,
-Drew
 
