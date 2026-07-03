@@ -1,167 +1,144 @@
-Return-Path: <linux-doc+bounces-94761-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94762-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id qal0Lk2BR2oPZwAAu9opvQ
-	(envelope-from <linux-doc+bounces-94761-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 11:30:53 +0200
+	id fJ3nOKGDR2qhZwAAu9opvQ
+	(envelope-from <linux-doc+bounces-94762-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 11:40:49 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 977ED700A7C
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 11:30:53 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4ED36700BB1
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 11:40:49 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=OczjT20v;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94761-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-94761-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=linux.dev header.s=key1 header.b=i2YS9x+o;
+	dmarc=pass (policy=none) header.from=linux.dev;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94762-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94762-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 6C68C3043906
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 09:27:30 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 0871F3034546
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 09:30:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D52A739DBFC;
-	Fri,  3 Jul 2026 09:27:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 625583B0AC4;
+	Fri,  3 Jul 2026 09:30:47 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from out-173.mta0.migadu.com (out-173.mta0.migadu.com [91.218.175.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7BD0331EB6;
-	Fri,  3 Jul 2026 09:27:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 212833793A2
+	for <linux-doc@vger.kernel.org>; Fri,  3 Jul 2026 09:30:44 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783070845; cv=none; b=lkt3B5Vrs1W7uns9h+r6eP5Bd0etrmXrYubO0Gx+5dwF5EYL0nDMQUtRk1iSVpVe1/AvctHELRoiZkZ97hu/r9dU2rdRcYOtFp1+f2ZfNpzerEfBu36/4nLfPWs3YcFe8bZWo4yTvx4bUzHwC8xFmK8+/kl88gb3JBpZrNwLCEA=
+	t=1783071047; cv=none; b=TdFV5/Kk9l7JtX9I8QHb0Sbhs+m3x+cQizRl63zzVllTQ9L4qn2Kap59TqAJOHSR3kg1vQcRp90L8OzFe1fEayetHk45R6fksY7m4kiJUY9pfjcQPPMVmqx6ptwUDupmAngoZGp5ZXjO/MS7K/DUutFNzr0x/OxWysWiLOKbea8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783070845; c=relaxed/simple;
-	bh=QuasMf+Z9Xub/CzQGz8vCZq23/KL14xhcuPnFpaaICs=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=J8uHYI0D7IYqXtPJEqnnD2ZKPORYBtpFH+6VfsnbrP6x93a5gSAjY7i6bceLzBIh8o3BUT7y5mQkHc+s9eOH4s49pTg0eYin6ZVvnj7IFgkcTeHE27XL3AIQQovBjLBIWaFjkxDulDrp0uCHdP2Spm9Z+q6cTt8YpnUkAKaKWGQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OczjT20v; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9809D1F000E9;
-	Fri,  3 Jul 2026 09:27:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783070844;
-	bh=QuasMf+Z9Xub/CzQGz8vCZq23/KL14xhcuPnFpaaICs=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date;
-	b=OczjT20v15qvKEkXq5ZHLpZYNZQbovIf6GEuPtND2QuFezSfQYQeZgytKgqGJBzBr
-	 B/jp4SWOj8u567yywz+pCgFHT+1jxob9zbEppMKh6/CEdrWFR/R55FZPUnta67mUb+
-	 m3TbZnSVzp0CFisk1WJPySMlAQjUMxUqwWaMnBMsgJO+20nwPVsHNeNOf4yF2r2KpS
-	 j3CHRJ6QYQa0gaj/f3FSiryAtMLoKRmQ4vEf+vp5e8tYaIU+a3OkLLl9qtKy9X+TNj
-	 EsAtb4Bwg5hiVNKlW+NG6+ZS5AuqKREn5z6ilhF+RiuFF2ddQJWJzDmlhoNddH2HvW
-	 KKjExXgWni8bA==
-From: Thomas Gleixner <tglx@kernel.org>
-To: Sven Schnelle <svens@linux.ibm.com>
-Cc: "H. Peter Anvin" <hpa@zytor.com>, Michal =?utf-8?Q?Such=C3=A1nek?=
- <msuchanek@suse.de>,
- Peter Zijlstra <peterz@infradead.org>, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>, Huacai Chen
- <chenhuacai@kernel.org>, WANG Xuerui <kernel@xen0n.name>, Madhavan
- Srinivasan <maddy@linux.ibm.com>, Michael Ellerman <mpe@ellerman.id.au>,
- Nicholas Piggin <npiggin@gmail.com>, "Christophe Leroy (CS GROUP)"
- <chleroy@kernel.org>, Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt
- <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti
- <alex@ghiti.fr>, Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik
- <gor@linux.ibm.com>, Alexander Gordeev <agordeev@linux.ibm.com>, Christian
- Borntraeger <borntraeger@linux.ibm.com>, Andy Lutomirski
- <luto@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov
- <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
- Andrew Donnellan <andrew+kernel@donnellan.id.au>, Mark
- Rutland <mark.rutland@arm.com>, Arnd Bergmann <arnd@arndb.de>, Jiaxun
- Yang <jiaxun.yang@flygoat.com>, Ryan Roberts <ryan.roberts@arm.com>, Greg
- Kroah-Hartman <gregkh@linuxfoundation.org>, Mukesh Kumar Chaurasiya
- <mkchauras@linux.ibm.com>, Shrikanth Hegde <sshegde@linux.ibm.com>, Zong
- Li <zong.li@sifive.com>, Nam Cao <namcao@linutronix.de>, Deepak Gupta
- <debug@rivosinc.com>, Lukas Gerlach <lukas.gerlach@cispa.de>, Rui Qi
- <qirui.001@bytedance.com>, Kees Cook <kees@kernel.org>,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- loongarch@lists.linux.dev, linuxppc-dev@lists.ozlabs.org,
- linux-riscv@lists.infradead.org, linux-s390@vger.kernel.org
-Subject: Re: [RFC] entry: Untangle the return value of
- syscall_enter_from_user_mode from syscall NR
-In-Reply-To: <yt9dwlvca8rn.fsf@linux.ibm.com>
-References: <akVRcPsD_R_CE1qW@kunlun.suse.cz>
- <BA7CD91D-C0E5-47A1-B49C-BC6AF6604182@zytor.com> <87h5mhnjsr.ffs@fw13>
- <yt9dwlvca8rn.fsf@linux.ibm.com>
-Date: Fri, 03 Jul 2026 11:27:21 +0200
-Message-ID: <87ldbsmnie.ffs@fw13>
+	s=arc-20240116; t=1783071047; c=relaxed/simple;
+	bh=xuj4UnMGsBwq1kBf1xI+PfS24Rf5Ofr+yXc48b8F1fE=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=Sh41oAdsOfEP77flEn/BZT1sA6ghg34qElt77WeaMYcHqUIiFMZzHDuQlHZ9OHj9HOgFZqsaMPl2xzhytyeK6yOLo+x31ObybqlDRq8kGyVYI/LbO2lqF46iZbUEV1y+omChF/D3ZsjRsHbT5jN6+/iup6/nwio9sdLCCB/STBo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=i2YS9x+o; arc=none smtp.client-ip=91.218.175.173
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1783071042;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=xuj4UnMGsBwq1kBf1xI+PfS24Rf5Ofr+yXc48b8F1fE=;
+	b=i2YS9x+oI5i8+MyTYtWwOYkr6wUeX4fu1pD0OLDQjFM8j8c1uzq6HpnDniVQGTpplZC07A
+	Ga9w6Xvf9t8tN7PxQoaSkIkLf1VeSqB27A7LBxT7+Yz7KjMYNTToXx87Xu35l19yF+qAXi
+	PrEr8oKBtNF8V6/Xlzz8crHEoXjywr8=
+From: Lance Yang <lance.yang@linux.dev>
+To: leon.hwang@linux.dev
+Cc: linux-mm@kvack.org,
+	corbet@lwn.net,
+	skhan@linuxfoundation.org,
+	akpm@linux-foundation.org,
+	liam@infradead.org,
+	ljs@kernel.org,
+	vbabka@kernel.org,
+	jannh@google.com,
+	pfalcato@suse.de,
+	pjw@kernel.org,
+	palmer@dabbelt.com,
+	aou@eecs.berkeley.edu,
+	alex@ghiti.fr,
+	nathan@kernel.org,
+	peterz@infradead.org,
+	ojeda@kernel.org,
+	nsc@kernel.org,
+	tglx@kernel.org,
+	thomas.weissschuh@linutronix.de,
+	aliceryhl@google.com,
+	dianders@chromium.org,
+	gary@garyguo.net,
+	linux.amoon@gmail.com,
+	rdunlap@infradead.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-riscv@lists.infradead.org,
+	Lance Yang <lance.yang@linux.dev>
+Subject: Re: [PATCH] mm/mseal: fix mseal documentation for 32-bit kernels
+Date: Fri,  3 Jul 2026 17:30:32 +0800
+Message-Id: <20260703093032.51640-1-lance.yang@linux.dev>
+In-Reply-To: <20260703022507.187457-1-leon.hwang@linux.dev>
+References: <20260703022507.187457-1-leon.hwang@linux.dev>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Migadu-Flow: FLOW_OUT
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.66 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [0.34 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10];
+	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-94762-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[3];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94761-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:svens@linux.ibm.com,m:hpa@zytor.com,m:msuchanek@suse.de,m:peterz@infradead.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:chenhuacai@kernel.org,m:kernel@xen0n.name,m:maddy@linux.ibm.com,m:mpe@ellerman.id.au,m:npiggin@gmail.com,m:chleroy@kernel.org,m:pjw@kernel.org,m:palmer@dabbelt.com,m:aou@eecs.berkeley.edu,m:alex@ghiti.fr,m:hca@linux.ibm.com,m:gor@linux.ibm.com,m:agordeev@linux.ibm.com,m:borntraeger@linux.ibm.com,m:luto@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:andrew+kernel@donnellan.id.au,m:mark.rutland@arm.com,m:arnd@arndb.de,m:jiaxun.yang@flygoat.com,m:ryan.roberts@arm.com,m:gregkh@linuxfoundation.org,m:mkchauras@linux.ibm.com,m:sshegde@linux.ibm.com,m:zong.li@sifive.com,m:namcao@linutronix.de,m:debug@rivosinc.com,m:lukas.gerlach@cispa.de,m:qirui.001@bytedance.com,m:kees@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:loongarch@lists.linux.dev,m:linuxppc-dev@lists.ozlabs.o
- rg,m:linux-riscv@lists.infradead.org,m:linux-s390@vger.kernel.org,m:andrew@donnellan.id.au,s:lists@lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[45];
-	FORWARDED(0.00)[lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:leon.hwang@linux.dev,m:linux-mm@kvack.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:akpm@linux-foundation.org,m:liam@infradead.org,m:ljs@kernel.org,m:vbabka@kernel.org,m:jannh@google.com,m:pfalcato@suse.de,m:pjw@kernel.org,m:palmer@dabbelt.com,m:aou@eecs.berkeley.edu,m:alex@ghiti.fr,m:nathan@kernel.org,m:peterz@infradead.org,m:ojeda@kernel.org,m:nsc@kernel.org,m:tglx@kernel.org,m:thomas.weissschuh@linutronix.de,m:aliceryhl@google.com,m:dianders@chromium.org,m:gary@garyguo.net,m:linux.amoon@gmail.com,m:rdunlap@infradead.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-riscv@lists.infradead.org,m:lance.yang@linux.dev,m:linuxamoon@gmail.com,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[tglx@kernel.org,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[29];
+	FORGED_SENDER(0.00)[lance.yang@linux.dev,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[linux.dev:+];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tglx@kernel.org,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[zytor.com,suse.de,infradead.org,lwn.net,linuxfoundation.org,kernel.org,xen0n.name,linux.ibm.com,ellerman.id.au,gmail.com,dabbelt.com,eecs.berkeley.edu,ghiti.fr,redhat.com,alien8.de,linux.intel.com,donnellan.id.au,arm.com,arndb.de,flygoat.com,sifive.com,linutronix.de,rivosinc.com,cispa.de,bytedance.com,vger.kernel.org,lists.linux.dev,lists.ozlabs.org,lists.infradead.org];
+	FROM_NEQ_ENVFROM(0.00)[lance.yang@linux.dev,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[kvack.org,lwn.net,linuxfoundation.org,linux-foundation.org,infradead.org,kernel.org,google.com,suse.de,dabbelt.com,eecs.berkeley.edu,ghiti.fr,linutronix.de,chromium.org,garyguo.net,gmail.com,vger.kernel.org,lists.infradead.org,linux.dev];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,kernel];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,fw13:mid,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linux.dev:from_mime,linux.dev:email,linux.dev:mid,linux.dev:dkim,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 977ED700A7C
+X-Rspamd-Queue-Id: 4ED36700BB1
 
-On Fri, Jul 03 2026 at 08:26, Sven Schnelle wrote:
-> Thomas Gleixner <tglx@kernel.org> writes:
->> It's less than obvious and I have no objections to clean that up and
->> make it more intuitive, but I still fail to see what Michal is actually
->> trying to solve and what the magic flag is for. If s390 requires it,
->> then that's an s390 problem, but definitely x86 does not.
+
+On Fri, Jul 03, 2026 at 10:25:07AM +0800, Leon Hwang wrote:
+>mseal.o is built only for 64-bit kernels, so 32-bit kernels fall back
+>to sys_ni_syscall() and return -ENOSYS rather than -EPERM.
 >
-> The difference between x86 and s390 is that on s390, regs->gprs[2] is
-> used for both the syscall number and the syscall return value.
-> That was a design mistake early in the begin about 25 years ago, but
-> it's ABI now, so it cannot be changed.
-
-Cute.
-
-> When seccomp decides to skip a syscall, it write a return value into
-> regs->gprs[2]. When syscall_enter_from_user_mode_work() returns, it
-> returns this number. If it's negative all is good - the 'if (likely(nr <
-> NR_syscalls))' conditiion would just catch it and skip the syscall.
+>Document the -EINTR return from mmap_write_lock_killable(), fix the
+>CONFIG_MSEAL_SYSTEM_MAPPINGS typo, and describe system mappings in
+>terms of VM_SEALED_SYSMAP.
 >
-> But if it's a positive number, the code cannot distinguish whether
-> that's a return value or a syscall number.
->
-> So I introduced PIF_SYSCALL_RET_SET when converting s390 to generic
-> entry. This flag tells the syscall code that a return value was set in
-> ptregs and the syscall should be skipped.
+>Signed-off-by: Leon Hwang <leon.hwang@linux.dev>
+>---
 
-You also could have added a 'syscall_ret' member to pt_regs, operate
-on that for the return values (seccomp, syscall...) and swap it into
-gprs[2] right before returning to user space.
+Thanks, free free to add:
 
-> I'd like to see something like the change from Michal going in - cleaned
-> up of course. It would allow us to get rid of PIF_SYSCALL_RET_SET.
-
-I have no objections against cleaning it up and making it less
-convoluted.
+Acked-by: Lance Yang <lance.yang@linux.dev>
 
