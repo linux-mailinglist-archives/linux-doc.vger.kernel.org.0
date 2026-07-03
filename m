@@ -1,187 +1,244 @@
-Return-Path: <linux-doc+bounces-94750-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94751-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id /MW1FF9nR2odXwAAu9opvQ
-	(envelope-from <linux-doc+bounces-94750-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 09:40:15 +0200
+	id 8W7GA89+R2oiZgAAu9opvQ
+	(envelope-from <linux-doc+bounces-94751-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 11:20:15 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0C086FFA46
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 09:40:14 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 077877008DA
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 11:20:14 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=M+1kuoOw;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94750-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94750-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=CbRmmERq;
+	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=IocVvEyL;
+	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=Xmvd85vR;
+	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=hGkTJQ74;
+	dmarc=pass (policy=none) header.from=suse.de;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94751-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-94751-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id D7E66310EEF9
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 07:34:01 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id AD2EB30921CD
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 07:54:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7BF78369225;
-	Fri,  3 Jul 2026 07:33:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3BD9A36F415;
+	Fri,  3 Jul 2026 07:54:01 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C60935E94E;
-	Fri,  3 Jul 2026 07:33:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC87D36EAA8
+	for <linux-doc@vger.kernel.org>; Fri,  3 Jul 2026 07:53:59 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783064039; cv=none; b=lK0qG1oWdQZfZ1cWB0hcTEIyECSJ/AYZXRwlNGo1u5V+PBm3RLdsQbM0bdgG+x5ms1nlMGD5BkkgcdfacI3lyRlNLU/4CPjN9wwNNw+0nVjuYahAiqp70ZcdEi/30H9l4k7tl5Cy7akLLtmRm+1hem2TQd38X35B4OTdKFqz2rk=
+	t=1783065241; cv=none; b=YShBSYM0O35kpY1M089H4LcsPk7SV4isRLuYXH2UjPPp72XAUzNfKn/AN3Wg/plgBsav0C36mqse1twZ+/CrrCT2W9CIx7fY69dYSYvKIKlbvnRRubmjIlS8salOTK+uRPZ03g0OpJNgI9NpcsJaoVH/CXixEanoVD12uoGBV9I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783064039; c=relaxed/simple;
-	bh=QSgLqn/ZnRzk83zOj4lZfvoAOv6lPBf7NLO7jgC/B+c=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=nvEd/YF11pNYwgDQOohCWAiXQrR8jziQISBPYBBbAPmU0CoYpkgLhOa79tWxQCi70Tj5lyvBywLzfAV7d87DD1SxrC2yNAijWa8Bj7pnScW2ZbeFWvGVlCy0lyBJaJRtH6s863oIJNhdmjXr04p0oFLc3DhoPCnjTaoMf4uFYPQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=M+1kuoOw; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8B3E41F00A3A;
-	Fri,  3 Jul 2026 07:33:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783064038;
-	bh=Ap4dw9qygU5ddfl7mGT7F55uCIr+XQovmmskhhMmYrc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=M+1kuoOwrh98sre5HlyOCXlGUqeTzUjFLwfK68f2k21tY7bzVmajTty8r2RdiUqjC
-	 CjnkiTVCP1D+CBt7qAFXT64LkDoqFFr/ruQ64QueayWcdXzsluJK791DsRIBNbqK/O
-	 Zf0iHz6P1ty8fL1Pb2blLFHe+e6DRMtj1mXWHwodQWgHmcLQqRIkXT40F7D8Zx/UQG
-	 dy3uitYiG96i/DB6eTSrL8Rry0NYtvb+LuPb1i5Gd1TNcIa70BfklXqlsJVLW3OIhR
-	 kkZqE2UJxgO2FT9fKQq+Ll7K0amPPM386W83bICr6QI5MwWEIjcaBDV9CNJJN0J9Pa
-	 BvnJVh7TgACMA==
-Message-ID: <e34099fd-4616-4f97-b5c4-f99c1b7d29d7@kernel.org>
-Date: Fri, 3 Jul 2026 09:33:50 +0200
+	s=arc-20240116; t=1783065241; c=relaxed/simple;
+	bh=Jo1HaNhObHl7wG20yGqS3718LydcoLNWIaNtvzbyLyQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=nVGufO56u6+tSKSTd3KPRF9z1McvPiF2iRtZngw3Yo2koLrzyX/Q2tzmsqXvvQxyIlNCs+t/VrOQsm9rdOfVRSkoPwxZQYTjMXnrWTrflcoMB/+z9m74o2JPLfmmq1APkPq9Uet6vSLoxB4/WEFxmXrWY5+bsoKtSXRmLK6Jmr4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=CbRmmERq; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=IocVvEyL; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=Xmvd85vR; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=hGkTJQ74; arc=none smtp.client-ip=195.135.223.131
+Received: from kunlun.suse.cz (unknown [IPv6:2a07:de40:b306:2000::2])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by smtp-out2.suse.de (Postfix) with ESMTPS id CBA9F7618A;
+	Fri,  3 Jul 2026 07:53:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1783065238; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=86AOamRcFcJIzmtTIHlbMlj4CRLkggYnO20t0jZshpc=;
+	b=CbRmmERqfWieu4ysWTh10omj+YQCxVfB6dtLRO5KwpMHTtbWI+HMjDSfkdmWL6Z5tBwSs0
+	64dI9grAIJDKA53bwvMISb6ax0xKvJuXpWIS4xJvcO2WNzHkbVy0dGLLrFfoOL/of8MbJZ
+	G8zUR0YbYZJ05OGL/vLxC4OMac4mNf0=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1783065238;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=86AOamRcFcJIzmtTIHlbMlj4CRLkggYnO20t0jZshpc=;
+	b=IocVvEyLW43oonFkQ+U2aar5zYKMFxmM4+MchCTOViE1CdZikSQHLgiS6R7lAvS5xh7nj2
+	a6Dtpaov7ehMQpDg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1783065237; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=86AOamRcFcJIzmtTIHlbMlj4CRLkggYnO20t0jZshpc=;
+	b=Xmvd85vRfIousfUHpOVFKa/+9oD4iF1jN72BWQqdOKQeyot1g8dqDeb96zST6xXQUnrWZd
+	B/kWaO83Faf+lmPKFWp4CBuZksHwyAp3cMta7AX/exjpEQS9rlrW5BHFIn5WBCg9O1H8iE
+	iaNxS6PbUufL/OKXF41SzStOrutbeHM=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1783065237;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=86AOamRcFcJIzmtTIHlbMlj4CRLkggYnO20t0jZshpc=;
+	b=hGkTJQ74isW/5ugiXaiIuvBc0DJmprtXDaMZ10c37l+VbtperReN+4kbg0PGnbQNDEOVJn
+	gCgyD/JHPKJMedDA==
+Date: Fri, 3 Jul 2026 09:53:56 +0200
+From: Michal =?iso-8859-1?Q?Such=E1nek?= <msuchanek@suse.de>
+To: Thomas Gleixner <tglx@kernel.org>
+Cc: Peter Zijlstra <peterz@infradead.org>, Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Huacai Chen <chenhuacai@kernel.org>,
+	WANG Xuerui <kernel@xen0n.name>,
+	Madhavan Srinivasan <maddy@linux.ibm.com>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	"Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
+	Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+	Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
+	Heiko Carstens <hca@linux.ibm.com>,
+	Vasily Gorbik <gor@linux.ibm.com>,
+	Alexander Gordeev <agordeev@linux.ibm.com>,
+	Christian Borntraeger <borntraeger@linux.ibm.com>,
+	Sven Schnelle <svens@linux.ibm.com>,
+	Andy Lutomirski <luto@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Andrew Donnellan <andrew+kernel@donnellan.id.au>,
+	Mark Rutland <mark.rutland@arm.com>, Arnd Bergmann <arnd@arndb.de>,
+	Jiaxun Yang <jiaxun.yang@flygoat.com>,
+	Ryan Roberts <ryan.roberts@arm.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Mukesh Kumar Chaurasiya <mkchauras@linux.ibm.com>,
+	Shrikanth Hegde <sshegde@linux.ibm.com>,
+	Zong Li <zong.li@sifive.com>, Nam Cao <namcao@linutronix.de>,
+	Deepak Gupta <debug@rivosinc.com>,
+	Lukas Gerlach <lukas.gerlach@cispa.de>,
+	Rui Qi <qirui.001@bytedance.com>, Kees Cook <kees@kernel.org>,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	loongarch@lists.linux.dev, linuxppc-dev@lists.ozlabs.org,
+	linux-riscv@lists.infradead.org, linux-s390@vger.kernel.org
+Subject: Re: [RFC] entry: Untangle the return value of
+ syscall_enter_from_user_mode from syscall NR
+Message-ID: <akdqlO0eJ6jKH-wU@kunlun.suse.cz>
+References: <akVRcPsD_R_CE1qW@kunlun.suse.cz>
+ <878q7tprau.ffs@fw13>
+ <akZPakNl6JT_jgGd@kunlun.suse.cz>
+ <87jyrdnmrh.ffs@fw13>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Documentation: remove the requirement for LLM attribution
-To: Greg KH <gregkh@linuxfoundation.org>
-Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Linus Torvalds <torvalds@linux-foundation.org>,
- Jeff Layton <jlayton@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- Justin Stitt <justinstitt@google.com>, Lorenzo Stoakes <ljs@kernel.org>,
- Carlos Maiolino <cem@kernel.org>, Jakub Kicinski <kuba@kernel.org>,
- Jori Koolstra <jkoolstra@xs4all.nl>, Krzysztof Kozlowski <krzk@kernel.org>,
- Brian Foster <bfoster@redhat.com>, Christoph Hellwig <hch@infradead.org>,
- David Disseldorp <ddiss@suse.de>, Mark Brown <broonie@kernel.org>,
- Jani Nikula <jani.nikula@intel.com>, Jens Axboe <axboe@kernel.dk>,
- Vlastimil Babka <vbabka@kernel.org>,
- "Christian Brauner (Amutable)" <brauner@kernel.org>,
- workflows@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org
-References: <20260702-aidoc-v1-1-735572dfb995@kernel.org>
- <2026070224-unholy-commode-cf45@gregkh>
- <2114bb79bb5b6e5584a8236de3590e2f4bf0899f.camel@kernel.org>
- <20260702161330.GH3534761@killaraus.ideasonboard.com>
- <2026070227-payroll-eradicate-8f66@gregkh>
- <20260702163215.GC3559965@killaraus.ideasonboard.com>
- <2026070350-drown-untreated-5835@gregkh>
- <a095d9b4-f774-47d9-affd-d519d8acfb34@kernel.org>
- <2026070343-copied-quarters-1e2a@gregkh>
-From: "David Hildenbrand (Arm)" <david@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=david@kernel.org; keydata=
- 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
- qIws/H2t
-In-Reply-To: <2026070343-copied-quarters-1e2a@gregkh>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <87jyrdnmrh.ffs@fw13>
+X-Spamd-Bar: ++++++++++++++++
+X-Spam-Flag: YES
+X-Spam-Score: 16.54
+X-Spam-Level: ****************
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-5.16 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [4.34 / 15.00];
+	SPAM_FLAG(5.00)[];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[suse.de,none];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-94750-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:gregkh@linuxfoundation.org,m:laurent.pinchart@ideasonboard.com,m:torvalds@linux-foundation.org,m:jlayton@kernel.org,m:corbet@lwn.net,m:justinstitt@google.com,m:ljs@kernel.org,m:cem@kernel.org,m:kuba@kernel.org,m:jkoolstra@xs4all.nl,m:krzk@kernel.org,m:bfoster@redhat.com,m:hch@infradead.org,m:ddiss@suse.de,m:broonie@kernel.org,m:jani.nikula@intel.com,m:axboe@kernel.dk,m:vbabka@kernel.org,m:brauner@kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:tglx@kernel.org,m:peterz@infradead.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:chenhuacai@kernel.org,m:kernel@xen0n.name,m:maddy@linux.ibm.com,m:mpe@ellerman.id.au,m:npiggin@gmail.com,m:chleroy@kernel.org,m:pjw@kernel.org,m:palmer@dabbelt.com,m:aou@eecs.berkeley.edu,m:alex@ghiti.fr,m:hca@linux.ibm.com,m:gor@linux.ibm.com,m:agordeev@linux.ibm.com,m:borntraeger@linux.ibm.com,m:svens@linux.ibm.com,m:luto@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:andrew+kernel@donnellan.id.au,m:mark.rutland@arm.com,m:arnd@arndb.de,m:jiaxun.yang@flygoat.com,m:ryan.roberts@arm.com,m:gregkh@linuxfoundation.org,m:mkchauras@linux.ibm.com,m:sshegde@linux.ibm.com,m:zong.li@sifive.com,m:namcao@linutronix.de,m:debug@rivosinc.com,m:lukas.gerlach@cispa.de,m:qirui.001@bytedance.com,m:kees@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:loongarch@lists.linux.dev,m:linuxppc-dev@lists.ozlabs.org
+ ,m:linux-riscv@lists.infradead.org,m:linux-s390@vger.kernel.org,m:andrew@donnellan.id.au,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[david@kernel.org,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[23];
 	RCVD_COUNT_THREE(0.00)[4];
+	GREYLIST(0.00)[pass,body];
+	FORGED_SENDER(0.00)[msuchanek@suse.de,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[45];
+	TAGGED_FROM(0.00)[bounces-94751-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[ideasonboard.com,linux-foundation.org,kernel.org,lwn.net,google.com,xs4all.nl,redhat.com,infradead.org,suse.de,intel.com,kernel.dk,vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[suse.de:+];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[david@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[msuchanek@suse.de,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[infradead.org,lwn.net,linuxfoundation.org,kernel.org,xen0n.name,linux.ibm.com,ellerman.id.au,gmail.com,dabbelt.com,eecs.berkeley.edu,ghiti.fr,redhat.com,alien8.de,linux.intel.com,zytor.com,donnellan.id.au,arm.com,arndb.de,flygoat.com,sifive.com,linutronix.de,rivosinc.com,cispa.de,bytedance.com,vger.kernel.org,lists.linux.dev,lists.ozlabs.org,lists.infradead.org];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
+	RWL_MAILSPIKE_POSSIBLE(0.00)[104.64.211.4:from];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,kernel];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,suse.de:from_mime,suse.de:dkim,kunlun.suse.cz:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: E0C086FFA46
+X-Rspamd-Queue-Id: 077877008DA
 
->> I'll also note, that the "*should* include an Assisted-by tag" is pretty weak,
->> as someone who worked on specs before.
->>
->> My kids should clean up their room; doesn't work.
+On Thu, Jul 02, 2026 at 10:45:54PM +0200, Thomas Gleixner wrote:
+> On Thu, Jul 02 2026 at 13:45, Michal Suchánek wrote:
+> > On Thu, Jul 02, 2026 at 01:24:57PM +0200, Thomas Gleixner wrote:
+> >> On Wed, Jul 01 2026 at 19:42, Michal Suchánek wrote:
+> >> > The return value of syscall_enter_from_user_mode is used both for the
+> >> > adjusted syscall number and the indicator that a syscall should be
+> >> > skipped.
+> >> >
+> >> > As seccomp can be invoked on any syscall, including invalid ones this
+> >> > somewhat undermines seccomp.
+> >> >
+> >> > While the seccomp variants that terminate the process do not need to
+> >> > care about this for the filter that sets the syscall return value this
+> >> > disctinction is required.
+> >> 
+> >> You completely fail to explain why and what actual problem you are
+> >> trying to solve. At least I can't figure it out from the above word
+> >> salad.
+> >
+> > syscall_enter_from_user_mode returns the new syscall number after doing
+> > something arbitrarry with it, including running seccomp.
+> >
+> > Wehn the syscall is already handled, eg. by seccomp filtering it returns
+> > -1 as the new syscall number. -1 is an invalid syscall number but it can
+> > still be filtered by seccomp.
 > 
-> But, if you notice that your kids didn't clean up their room, and you
-> had told them to, you can then talk to them about doing it properly
-> based on what they are supposed to be doing.
+> Once syscall_enter_from_user_mode() returns -1 nothing can filter it
+> anymore.
 > 
-> That's the point here.
+> > When the syscall number was -1 to start with it's not possible to
+> > determine if the syscall was fileterd from the return value. s390
+> > returns the filtered state in a flag it sets on the regs structure,
+> > avoiding this problem.
+> 
+> What needs to determine whether the syscall was filtered or not?
 
-Well, they are smart. They will tell me that it was not a strict requirement.
+The code that executes syscall_enter_from_user_mode() needs to determine
+that.
 
-So I'll have to rephrase it as "STOP ARGUING, CLEAN UP YOUR ROOM!!!" ;)
+After syscall_enter_from_user_mode() returns the syscall needs to be
+executed or skipped.
 
--- 
-Cheers,
+'Executing' an invalid syscall boils down to setting the return value to
+-ENOSYS.
 
-David
+But if the syscall number returned is -1 was the syscall filtered and
+the return value set by syscall_enter_from_user_mode() or should it be
+set by the caller to -ENOSYS?
+
+> 
+> > However, the API should be specified in a way that does not require
+> > everyone implementing such flag.
+> 
+> Which exact problem does the flag solve?
+
+To be able to tell if the syscall was handled or no, the return value
+from syscall_enter_from_user_mode() is inconclusive.
+
+That's what the flag is for. To be able to tell if the syscall was
+handled without relying on the ambiguous return value of
+syscall_enter_from_user_mode().
+
+Thanks
+
+Michal
 
