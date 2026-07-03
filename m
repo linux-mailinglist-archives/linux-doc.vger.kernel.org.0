@@ -1,156 +1,194 @@
-Return-Path: <linux-doc+bounces-94799-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94797-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id pUvgBxqkR2oScwAAu9opvQ
-	(envelope-from <linux-doc+bounces-94799-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 13:59:22 +0200
+	id g1gRHd+jR2r/cgAAu9opvQ
+	(envelope-from <linux-doc+bounces-94797-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 13:58:23 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7E5C37021C9
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 13:59:21 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id C0BE1702198
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 13:58:22 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=niVDhjzK;
-	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=KyF7lq68;
-	dmarc=pass (policy=reject) header.from=mailbox.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94799-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-94799-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=ideasonboard.com header.s=mail header.b="Uge/SPsL";
+	dmarc=pass (policy=none) header.from=ideasonboard.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94797-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94797-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 1B1A3300A4F8
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 11:59:07 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 43969301DE33
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 11:53:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 048F53CC7FF;
-	Fri,  3 Jul 2026 11:59:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4C3373CC315;
+	Fri,  3 Jul 2026 11:53:52 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B9F303CC7EB;
-	Fri,  3 Jul 2026 11:59:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B86E3CBE7E;
+	Fri,  3 Jul 2026 11:53:50 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783079945; cv=none; b=GitjhbKotAstn7q2+4GF0Xe3sNO4eYj+bKex+memq90dVpYX3vuk+g+CodwGtMNwNCrWvjJicaCu18eUEcVAAkyWga1YZHC1pMtE++HEcaNimA+OZdoZ84q9VL7S0LkQuZmFd2N1UqvHDziqFRbsNIJQ89siXLEX12rzj22VN/g=
+	t=1783079632; cv=none; b=PujiqMCIXVFmGFQgZAMvywcGGblS75i++noGXZc+XIb+vf+2zXFT3v3pzT4UhPK1gEQ0OpotHSGgnR+JZKMsY7QFrI01mkcznadjophMerX53N9PzllQI3xrA4P9GAS6kLWWB+W3n2D9AONSeVWCl4Y5M1yT40YoR/ucmh+3J2Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783079945; c=relaxed/simple;
-	bh=L7J0ROE6wLSCQByXzCGOE+AxJp0npA3yn8AEZRw0WAs=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=AIlV2MxXiyw08KmjjA+Cf8zZ+QrKD0mwHpfW6lnVmOQzJMoe9CZPIcyYapRnGD/B1CWqdQlhdy9lrfhGBlpXVX9i4mFQ9cWxJITQZ1QjVWqLzI1sKQpsfriMOLPLsw+p6yvlV9gJNz9zJ4uewa4/1AwoyZfYhUx4JsVGbe/t9gk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org; spf=pass smtp.mailfrom=mailbox.org; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=niVDhjzK; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=KyF7lq68; arc=none smtp.client-ip=80.241.56.151
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
-	(No client certificate requested)
-	by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gsC2r4ZqNz8v17;
-	Fri, 03 Jul 2026 13:59:00 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1783079940;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=ZXICK1mdeCK7VdDznnyllzaidC+uzcAfl8/1FTyycxo=;
-	b=niVDhjzK1BBSGFVoC21+SDLXB18XSDDyMx/P6m+5skAjvMqS8eY5S8CBF8d0B87TNGnI+m
-	NJd26ESWxGesHuFTLDSS3Ugj42UDsLLsq+aWvM7Lbrz82Zcw9f0hWCp3pOKfsnZwSma2nb
-	LmVFJYQcTJsoILclVZIsAPCZiAYZ8cml+Ba0u5esJrQ/wobkSj8CryP1X3XYFQohOQJ4lf
-	ywt2ICX7zqDYISDPPg1+LF1s1rmwR6Eo2rbP/wySELxwdkecJLAwqfmunuBgP2711+V0Nf
-	2oJnrxOYh7vIqd6YEgPGMqHdC20ZCNdAJZXjDoTCj90cPPk6GV0TtQ1Tdqv41A==
-From: Manuel Ebner <manuelebner@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1783079939;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=ZXICK1mdeCK7VdDznnyllzaidC+uzcAfl8/1FTyycxo=;
-	b=KyF7lq68w4pta5cCxL/F3cop+7Md73QrXe0mfxZZYF04xZ7NEU6ls9drlHT8/2w5KXn5oD
-	9zQAz6N53sQhOd0N3+4tRGJY3604DV2OfgDi4YGsY3RBU2Ms9lyN9EJD2JJFr/FMWoMPPz
-	+X/gsRMuqPQmjho9gR0mmDwTMIHsr/f68SHZZ2jWP3Wi7yTEEZCm03rp+fS+lZWAqJv3PA
-	O6KnqJiUvIloX5wBiGBbZ+2my48XDxZ43b7jS9vi6k+2cahy2tRDwDMWyWeki23YSTfHgl
-	kxEyJfrtyKFSFd/v+W6odLYYH0564ESJs8rloLFW/93VPzRY5myrgGbBl1QU+Q==
-To: Ingo Molnar <mingo@redhat.com>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Juri Lelli <juri.lelli@redhat.com>,
-	Vincent Guittot <vincent.guittot@linaro.org>,
-	Dietmar Eggemann <dietmar.eggemann@arm.com>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Ben Segall <bsegall@google.com>,
-	Mel Gorman <mgorman@suse.de>,
-	Valentin Schneider <vschneid@redhat.com>,
-	K Prateek Nayak <kprateek.nayak@amd.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>
-Cc: Manuel Ebner <manuelebner@mailbox.org>,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH] sched/Documentation: fix code
-Date: Fri,  3 Jul 2026 13:51:15 +0200
-Message-ID: <20260703115114.229848-3-manuelebner@mailbox.org>
+	s=arc-20240116; t=1783079632; c=relaxed/simple;
+	bh=pf71b/AVgEKRQp/LCupa+IHFkhKe7lSe68g9vfscOwc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=sOCOgTyaH+Ai43L4HSxhij6EWNy2FnT6g3FUoWmHSuviBSvWFLWUBd7G4OTRg//Qup9uThZOOajgQp0gqVL3e1CP/qKMni7cGhOe5Lc7Qa9y4yNGt39XTvw17hWLAI0tjtRnE2exh3O9rt1g3vmfYRl++GCKK8UEraDPZkbN7eE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com; spf=pass smtp.mailfrom=ideasonboard.com; dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b=Uge/SPsL; arc=none smtp.client-ip=213.167.242.64
+Received: from killaraus.ideasonboard.com (2001-14ba-70f3-e800--a06.rev.dnainternet.fi [IPv6:2001:14ba:70f3:e800::a06])
+	by perceval.ideasonboard.com (Postfix) with ESMTPSA id 84C351121;
+	Fri,  3 Jul 2026 13:53:01 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+	s=mail; t=1783079581;
+	bh=pf71b/AVgEKRQp/LCupa+IHFkhKe7lSe68g9vfscOwc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Uge/SPsLAzlN0O/55kXzsg2q6gWLaJTsTKWUVZ25fOxY2SBFovxwM1bX0kzhhpsTt
+	 S4W4+L3IrXlPAk01cvaiffK3XNrrKOygVH4JsQ77n4qroCM/VuFM4fgjngpU/6wFKS
+	 T2Lkmf9zlegdElKxwWMAxw3We1RMTH/rFbrosD58=
+Date: Fri, 3 Jul 2026 14:53:45 +0300
+From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+To: Theodore Tso <tytso@mit.edu>
+Cc: Greg KH <gregkh@linuxfoundation.org>,
+	"David Hildenbrand (Arm)" <david@kernel.org>,
+	Linus Torvalds <torvalds@linux-foundation.org>,
+	Jeff Layton <jlayton@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+	Justin Stitt <justinstitt@google.com>,
+	Lorenzo Stoakes <ljs@kernel.org>, Carlos Maiolino <cem@kernel.org>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Jori Koolstra <jkoolstra@xs4all.nl>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Brian Foster <bfoster@redhat.com>,
+	Christoph Hellwig <hch@infradead.org>,
+	David Disseldorp <ddiss@suse.de>, Mark Brown <broonie@kernel.org>,
+	Jani Nikula <jani.nikula@intel.com>, Jens Axboe <axboe@kernel.dk>,
+	Vlastimil Babka <vbabka@kernel.org>,
+	"Christian Brauner (Amutable)" <brauner@kernel.org>,
+	workflows@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org
+Subject: Re: [PATCH] Documentation: remove the requirement for LLM attribution
+Message-ID: <20260703115345.GB3659451@killaraus.ideasonboard.com>
+References: <20260702-aidoc-v1-1-735572dfb995@kernel.org>
+ <2026070224-unholy-commode-cf45@gregkh>
+ <2114bb79bb5b6e5584a8236de3590e2f4bf0899f.camel@kernel.org>
+ <20260702161330.GH3534761@killaraus.ideasonboard.com>
+ <2026070227-payroll-eradicate-8f66@gregkh>
+ <20260702163215.GC3559965@killaraus.ideasonboard.com>
+ <2026070350-drown-untreated-5835@gregkh>
+ <a095d9b4-f774-47d9-affd-d519d8acfb34@kernel.org>
+ <2026070343-copied-quarters-1e2a@gregkh>
+ <akeaouJETPWpE838@mit.edu>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: jbqwno9gex6ps6tfmbz4pdte8zncy8hp
-X-MBO-RS-ID: 291543d9e9cc0f66ac7
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <akeaouJETPWpE838@mit.edu>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[mailbox.org,reject];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[mailbox.org:s=mail20150812];
+	DMARC_POLICY_ALLOW(-0.50)[ideasonboard.com,none];
+	R_DKIM_ALLOW(-0.20)[ideasonboard.com:s=mail];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
+	TAGGED_FROM(0.00)[bounces-94797-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94799-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:mingo@redhat.com,m:peterz@infradead.org,m:juri.lelli@redhat.com,m:vincent.guittot@linaro.org,m:dietmar.eggemann@arm.com,m:rostedt@goodmis.org,m:bsegall@google.com,m:mgorman@suse.de,m:vschneid@redhat.com,m:kprateek.nayak@amd.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:manuelebner@mailbox.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:tytso@mit.edu,m:gregkh@linuxfoundation.org,m:david@kernel.org,m:torvalds@linux-foundation.org,m:jlayton@kernel.org,m:corbet@lwn.net,m:justinstitt@google.com,m:ljs@kernel.org,m:cem@kernel.org,m:kuba@kernel.org,m:jkoolstra@xs4all.nl,m:krzk@kernel.org,m:bfoster@redhat.com,m:hch@infradead.org,m:ddiss@suse.de,m:broonie@kernel.org,m:jani.nikula@intel.com,m:axboe@kernel.dk,m:vbabka@kernel.org,m:brauner@kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[laurent.pinchart@ideasonboard.com,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[linuxfoundation.org,kernel.org,linux-foundation.org,lwn.net,google.com,xs4all.nl,redhat.com,infradead.org,suse.de,intel.com,kernel.dk,vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[24];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[manuelebner@mailbox.org,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[manuelebner@mailbox.org,linux-doc@vger.kernel.org];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[mailbox.org:+];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[laurent.pinchart@ideasonboard.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[ideasonboard.com:+];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,mailbox.org:from_mime,mailbox.org:email,mailbox.org:mid,mailbox.org:dkim,checkpatch.pl:url]
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 7E5C37021C9
+X-Rspamd-Queue-Id: C0BE1702198
 
-checkpatch.pl returns 'trailing statements should be on next line'
-for this file. Do as told.
+On Fri, Jul 03, 2026 at 07:42:35AM -0400, Theodore Tso wrote:
+> On Fri, Jul 03, 2026 at 09:30:28AM -0500, Greg KH wrote:
+> > > So clarifying there that a "Assisted-by: LLM" is also good enough would make
+> > > sense if we agree on that.
+> > 
+> > If we all agree on that, I'm saying that _I_ don't care, but others
+> > might.
+> 
+> I agree that requiring the model name is not a good idea, because some
+> developers might be using unreleased products where the name itself
+> might not be public.  So allowing the version number of the LLM to be
+> elided would be a good change.
+> 
+> I'll also note that it's starting to be the case where tool is
+> actually quite relevant.  So it's not just about the LLM Model, but
+> whether you're using Codex, Claude Code, OpenCode, or Shahiko.  You
+> can use the tool or the harness with different models.
+> 
+> So whether the tag is:
+> 
+> Assisted-By: OpenCode:Gemini 3.5 Pro
+> Assisted-By: Claude Code
+> Assisted-By: LLM
+> 
+> I'd be fine with reviewing patches with any of the above.  However, to
+> me that's actually not the most interesting part.  See below....
+> 
+> > For me, the info after "Assisted-by:" doesn't matter, it's the first
+> > part.
+> 
+> For me, what I care most about is *how* the LLM was used.  For
+> example, if someone just used the output of Sashiko to fix a problem
+> in their commit, that's one kind of "Assisted-by".  If Sahsiko
+> identifies a pre-existing bug, and the developer addes a patch to the
+> patch series, or creates a new patch series, that's a different kind
+> of "Assisted-by".  A third kind of "Assisted-by" might include asking
+> the LLM to create a Coccinelle semantic patches (because I'm not smart
+> enough to create semantic patches).
+> 
+> And of course, all of this is quite different from the stereotypical
+> "vibe coding" where the LLM generates thousands of lines of code which
+> the human doesn't understand before sending the pull request.  :-)
+> 
+> So for me, adding something after a #-sign comment explaning how the
+> LLM was used would be very useful.
+> 
+> > > My kids should clean up their room; doesn't work.
+> > 
+> > But, if you notice that your kids didn't clean up their room, and you
+> > had told them to, you can then talk to them about doing it properly
+> > based on what they are supposed to be doing.
+> 
+> Another metaphor might be that people shouldn't try to evade paying
+> their taxes; merely passing a law saying they have to file correct tax
+> returns doesn't guarantee this.  But it was specifically the law
+> against tax evasion is how US Law Enforcement arrested the Chicago mob
+> boss Al Capone.
+> 
+> Just because some people might lie doesn't mean that we shouldn't
+> bother to ask everyone to fill out tax returns.
 
-Signed-off-by: Manuel Ebner <manuelebner@mailbox.org>
----
-This is the only checkpatch-error in all of Documentation/*/*.c
----
- Documentation/scheduler/sched-pelt.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+I think we're digressing here. The original point, if I understood it
+carefully, is that "must" would convey a requirement better than
+"should", and I agree with that.
 
-diff --git a/Documentation/scheduler/sched-pelt.c b/Documentation/scheduler/sched-pelt.c
-index 7238b355919c..38ff53dcf352 100644
---- a/Documentation/scheduler/sched-pelt.c
-+++ b/Documentation/scheduler/sched-pelt.c
-@@ -25,7 +25,8 @@ void calc_runnable_avg_yN_inv(void)
- 	for (i = 0; i < HALFLIFE; i++) {
- 		x = ((1UL<<32)-1)*pow(y, i);
- 
--		if (i % 6 == 0) printf("\n\t");
-+		if (i % 6 == 0)
-+			printf("\n\t");
- 		printf("0x%8x, ", x);
- 	}
- 	printf("\n};\n\n");
 -- 
-2.54.0
+Regards,
 
+Laurent Pinchart
 
