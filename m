@@ -1,55 +1,55 @@
-Return-Path: <linux-doc+bounces-94922-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94910-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id GnRKD7MpSGqynAAAu9opvQ
-	(envelope-from <linux-doc+bounces-94922-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 23:29:23 +0200
+	id trL0BDcoSGotnAAAu9opvQ
+	(envelope-from <linux-doc+bounces-94910-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 23:23:03 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8435705D7B
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 23:29:22 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 81DC8705C14
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 23:23:02 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=infradead.org header.s=casper.20170209 header.b=aeZWxhF7;
+	dkim=pass header.d=infradead.org header.s=casper.20170209 header.b=jIerjpGT;
 	dmarc=pass (policy=none) header.from=infradead.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94922-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-94922-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94910-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94910-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 2D25530391FB
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 21:24:20 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 7C95030416A3
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 21:22:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0678635AC3B;
-	Fri,  3 Jul 2026 21:22:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2CE3D357D08;
+	Fri,  3 Jul 2026 21:22:07 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8AEEC357D0E;
-	Fri,  3 Jul 2026 21:22:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 758C433262A;
+	Fri,  3 Jul 2026 21:22:03 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783113743; cv=none; b=HH8js7E58fVtYuOqG9lqjfIu2z0/CosyaWfRasW7mWEmoZBK+sHTSGKCNjOQMnYvx2yv+IOZM0KNAeyk7wFN0/VoUelsKPgRXI+TsAGrz5lNcupO3IRv/35yngbz1H9cBIPJUiFtT1H157ySsR3IC9dh+mZP4I7aDFSi9IvIO9w=
+	t=1783113727; cv=none; b=ZrnVlzvYQ7IF1Jo6a2MEWMPzq5bOEVGZxQxjfTdG96IZrGUzGvrz8YcwaWFtKIGmiT26/G4JoHjd1SwYkUiz+aE0KRMXwAgeT34XfbcEbsJ/ZIhupFwfu79Os9PGb9lXyge2bjECR4dtbX69tlSmPv7ej+OT7trk4VyUy3V1IHg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783113743; c=relaxed/simple;
-	bh=0QU19PM5cj664GaP0sccBCQ4IdZ+K5qHWYzILUISxkg=;
+	s=arc-20240116; t=1783113727; c=relaxed/simple;
+	bh=/PB52yGHdrD606n4KgU8xDjAmsk2GsExyy6zqIT2KKs=;
 	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=LI+aNPi8dxceRPiNMAEaiqw9/JjlZglCAvx6qlJK4VBBj4LRBtRg2Hwyf4jemf79UqV8yx6F3gStEpB/yvBOI1evewfBbifDCEPeA5s3YYJUPJCl0DIDFkXp/IPQ8m83d4vpUv2wcQ1cA9fqKd2xOX9jmd1X80eW+qIjfz3hfpM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=casper.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=aeZWxhF7; arc=none smtp.client-ip=90.155.50.34
+	 MIME-Version:Content-Type; b=eRCC6EDhx2JC94YIh998M4EU3Tx0P93CT4xSLlLxHgPWcu33RJ8Tuf6YyXXlY8462u/GCA5pI5QxjtAtENRxF7KzovlvqZ9+/tu4dE2PScjHGpRPJ7ixUwtWchHLuMab/khfE40mxZ76Vw1fhyTg0uioudRAsWQI+R+7b/PqIjE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=casper.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=jIerjpGT; arc=none smtp.client-ip=90.155.50.34
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
-	Cc:Content-Type:Content-ID:Content-Description;
-	bh=O/oUbS7kYPJiTQjk6lyYh7lx0CQJ2SSehd3aLwyJ2+s=; b=aeZWxhF7AsGk3HBJM42jxJ3/G5
-	41bAnL10ZxObpBizC6FNpkO2Xhx7SLTdkscJ8MKF5yDV47DW5K+0Rw52xwDwbc1v5Xr6MFbnNaTIv
-	fMmGadiIUz9/bFMDHwx0xHflvuT1vZtuOSFpAKCF3QT2vzA8bXyzcVb4uDPgzNPhaOjGPB/vOO/IA
-	loTUM/AxnKgV+4Vvn7XmBqxGyMwOCoM+b1mH5d8sGRjOgY1ASOuzE7uJuQuuP+lcgT+aChKij4fAP
-	gHIMwiL9H7nnCcslwip0AW7fSsC5uwRS4Eu3HetQtUtYTjnz0/Qt9luFtpmls6AGa86HRk5vBEFwt
-	e062+P2A==;
+	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:
+	From:Reply-To:Cc:Content-ID:Content-Description;
+	bh=EpzXffKcCC8OCVBj38i2t8eVI2Er97bsxo1QNBYCK8E=; b=jIerjpGT+yTwXfADnzFS9Ehvw1
+	qj5/hvk/X0LarGRgEVv+dsiKFbGxRWGknJH57gqRXscS5FUYAhSqnvtRBTN2Z6vn9teqs3fY7T27K
+	jW8kTa1Wn2iOLEOqSbhIdiHt8Zmudzhq+tZg56Q8n6poP0Su9bZXGRUplcGieKFs0iNapavWjR6fc
+	hzkoY/l9qx1zH8w8EdFXPjFM5inA9cmW6nJSdRy1/qSf00oSXhQLvq8P2NHcd9wzCsCydXn58F6FC
+	AElEi2x7GlGagDUvtuQfZMQtQYs0miIjMnEqFVh2YzqPw/nArOHgfhgvtrehoSUcccIphTfkzHx4t
+	XG8AdZ9w==;
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
 	by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wflKX-0000000AsYP-3AaT;
-	Fri, 03 Jul 2026 21:21:49 +0000
+	id 1wflKX-0000000AsYQ-3NCh;
+	Fri, 03 Jul 2026 21:21:50 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.2 #2 (Red Hat Linux))
-	id 1wflKX-00000001RQ2-2bjR;
+	id 1wflKX-00000001RQ7-2xkg;
 	Fri, 03 Jul 2026 22:21:49 +0100
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
@@ -79,9 +79,9 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v6 33/36] KVM: x86: Compute kvmclock base without pvclock_gtod_data
-Date: Fri,  3 Jul 2026 22:18:12 +0100
-Message-ID: <20260703212145.343527-34-dwmw2@infradead.org>
+Subject: [PATCH v6 34/36] KVM: x86: Cache host vclock_mode for masterclock eligibility checks
+Date: Fri,  3 Jul 2026 22:18:13 +0100
+Message-ID: <20260703212145.343527-35-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260703212145.343527-1-dwmw2@infradead.org>
 References: <20260703212145.343527-1-dwmw2@infradead.org>
@@ -91,71 +91,154 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+X-Spamd-Result: default: False [-1.16 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	R_DKIM_ALLOW(-0.20)[infradead.org:s=casper.20170209];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-94922-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:pbonzini@redhat.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:vkuznets@redhat.com,m:jgross@suse.com,m:boris.ostrovsky@oracle.com,m:dwmw2@infradead.org,m:paul@xen.org,m:jic23@kernel.org,m:Sascha.Bischoff@arm.com,m:maz@kernel.org,m:joey.gouly@arm.com,m:jalliste@amazon.com,m:dongli.zhang@oracle.com,m:joe.jin@oracle.com,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:xen-devel@lists.xenproject.org,m:linux-kselftest@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-94910-lists,linux-doc=lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[27];
-	FORGED_SENDER(0.00)[dwmw2@infradead.org,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:pbonzini@redhat.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:vkuznets@redhat.com,m:jgross@suse.com,m:boris.ostrovsky@oracle.com,m:dwmw2@infradead.org,m:paul@xen.org,m:jic23@kernel.org,m:Sascha.Bischoff@arm.com,m:maz@kernel.org,m:joey.gouly@arm.com,m:jalliste@amazon.com,m:dongli.zhang@oracle.com,m:joe.jin@oracle.com,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:xen-devel@lists.xenproject.org,m:linux-kselftest@vger.kernel.org,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[dwmw2@infradead.org,linux-doc@vger.kernel.org];
+	FORGED_SENDER(0.00)[dwmw2@infradead.org,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[dwmw2@infradead.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[infradead.org:+];
 	ALIAS_RESOLVED(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,infradead.org:from_mime,infradead.org:dkim,infradead.org:mid,vger.kernel.org:from_smtp,amazon.co.uk:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: C8435705D7B
+X-Rspamd-Queue-Id: 81DC8705C14
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-get_kvmclock_base_ns() needs CLOCK_MONOTONIC_RAW + offs_boot. Compute
-this directly rather than reading offs_boot from the pvclock_gtod_data
-private copy. offs_boot only changes at suspend/resume so does not
-need to be atomically paired with the raw clock read.
+The remaining users of pvclock_gtod_data only need to know whether
+the host clocksource is TSC-based. Cache the vclock_mode value in a
+simple kvm_host_vclock_mode variable, updated by the pvclock_gtod_notify
+callback, and use gtod_is_based_on_tsc() for eligibility checks.
+
+This is inherently racy (as it always was — kvm_track_tsc_matching
+never held the gtod seqcount), relying on eventual consistency: the
+notifier fires on every timekeeping update and will correct any
+transient inconsistency within one tick.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Assisted-by: Kiro:claude-opus-4.6-1m
+Assisted-by: Kiro (claude-opus-4.6-1m)
 ---
- arch/x86/kvm/x86.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/x86/kvm/x86.c | 23 +++++++++++++----------
+ 1 file changed, 13 insertions(+), 10 deletions(-)
 
 diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index 56afd5e66c06..8d520bfae089 100644
+index 8d520bfae089..c67655f8e078 100644
 --- a/arch/x86/kvm/x86.c
 +++ b/arch/x86/kvm/x86.c
-@@ -2402,7 +2402,7 @@ static void update_pvclock_gtod(struct timekeeper *tk)
- static s64 get_kvmclock_base_ns(void)
- {
- 	/* Count up from boot time, but with the frequency of the raw clock.  */
--	return ktime_to_ns(ktime_add(ktime_get_raw(), pvclock_gtod_data.offs_boot));
-+	return ktime_to_ns(ktime_mono_to_any(ktime_get_raw(), TK_OFFS_BOOT));
+@@ -2647,6 +2647,8 @@ static u64 compute_guest_tsc(struct kvm_vcpu *vcpu, s64 kernel_ns)
  }
  
- static void kvm_write_wall_clock(struct kvm *kvm, gpa_t wall_clock, int sec_hi_ofs)
+ #ifdef CONFIG_X86_64
++static int kvm_host_vclock_mode;
++
+ static inline bool gtod_is_based_on_tsc(int mode)
+ {
+ 	return mode == VDSO_CLOCKMODE_TSC || mode == VDSO_CLOCKMODE_HVCLOCK;
+@@ -2676,7 +2678,6 @@ static bool kvm_use_master_clock(struct kvm *kvm)
+ static void kvm_track_tsc_matching(struct kvm_vcpu *vcpu, bool update_mclock)
+ {
+ 	struct kvm_arch *ka = &vcpu->kvm->arch;
+-	struct pvclock_gtod_data *gtod = &pvclock_gtod_data;
+ 	bool prev_matched_tsc = ka->all_vcpus_matched_tsc;
+ 
+ 	/*
+@@ -2713,7 +2714,7 @@ static void kvm_track_tsc_matching(struct kvm_vcpu *vcpu, bool update_mclock)
+ 	 * accounts for its offset.
+ 	 */
+ 	bool use_master_clock = kvm_use_master_clock(vcpu->kvm) &&
+-				gtod_is_based_on_tsc(gtod->clock.vclock_mode);
++				gtod_is_based_on_tsc(kvm_host_vclock_mode);
+ 
+ 	/*
+ 	 * Request a masterclock update if needed: toggling master clock,
+@@ -2726,11 +2727,11 @@ static void kvm_track_tsc_matching(struct kvm_vcpu *vcpu, bool update_mclock)
+ 
+ 	trace_kvm_track_tsc(vcpu->vcpu_id, ka->nr_vcpus_matched_tsc,
+ 			    atomic_read(&vcpu->kvm->online_vcpus),
+-		            ka->use_master_clock, gtod->clock.vclock_mode);
++		            ka->use_master_clock, kvm_host_vclock_mode);
+ }
+ #else
+ static inline void kvm_track_tsc_matching(struct kvm_vcpu *vcpu,
+-					  bool new_generation) {}
++					  bool update_mclock) {}
+ #endif
+ 
+ /*
+@@ -2850,7 +2851,7 @@ static inline bool kvm_check_tsc_unstable(void)
+ 	 * TSC is marked unstable when we're running on Hyper-V,
+ 	 * 'TSC page' clocksource is good.
+ 	 */
+-	if (pvclock_gtod_data.clock.vclock_mode == VDSO_CLOCKMODE_HVCLOCK)
++	if (kvm_host_vclock_mode == VDSO_CLOCKMODE_HVCLOCK)
+ 		return false;
+ #endif
+ 	return check_tsc_unstable();
+@@ -3274,7 +3275,6 @@ static void pvclock_update_vm_gtod_copy(struct kvm *kvm)
+ {
+ #ifdef CONFIG_X86_64
+ 	struct kvm_arch *ka = &kvm->arch;
+-	int vclock_mode;
+ 	bool host_tsc_clocksource;
+ 
+ 	lockdep_assert_held(&kvm->arch.tsc_write_lock);
+@@ -3314,9 +3314,9 @@ static void pvclock_update_vm_gtod_copy(struct kvm *kvm)
+ 			ka->use_master_clock = false;
+ 	}
+ 
+-	vclock_mode = pvclock_gtod_data.clock.vclock_mode;
+-	trace_kvm_update_master_clock(ka->use_master_clock, vclock_mode,
+-					ka->all_vcpus_matched_freq);
++	trace_kvm_update_master_clock(ka->use_master_clock,
++				     kvm_host_vclock_mode,
++				     ka->all_vcpus_matched_freq);
+ #endif
+ }
+ 
+@@ -10399,12 +10399,15 @@ static int pvclock_gtod_notify(struct notifier_block *nb, unsigned long unused,
+ 	update_pvclock_gtod(tk);
+ 
+ #ifdef CONFIG_X86_64
++	kvm_host_vclock_mode =
++		tk->tkr_mono.clock->vdso_clock_mode;
++
+ 	/*
+ 	 * Disable master clock if host does not trust, or does not use,
+ 	 * TSC based clocksource. Delegate queue_work() to irq_work as
+ 	 * this is invoked with tk_core.seq write held.
+ 	 */
+-	if (!gtod_is_based_on_tsc(pvclock_gtod_data.clock.vclock_mode) &&
++	if (!gtod_is_based_on_tsc(kvm_host_vclock_mode) &&
+ 	    atomic_read(&kvm_guest_has_master_clock) != 0)
+ 		irq_work_queue(&pvclock_irq_work);
+ #endif
 -- 
 2.54.0
 
