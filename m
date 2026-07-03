@@ -1,55 +1,55 @@
-Return-Path: <linux-doc+bounces-94935-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94920-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id M6OEOmoqSGrcnAAAu9opvQ
-	(envelope-from <linux-doc+bounces-94935-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 23:32:26 +0200
+	id EqKYK5EoSGphnAAAu9opvQ
+	(envelope-from <linux-doc+bounces-94920-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 23:24:33 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A4CC705DE0
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 23:32:26 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 624A5705CBF
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 23:24:31 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=infradead.org header.s=desiato.20200630 header.b=i2HbQgc8;
+	dkim=pass header.d=infradead.org header.s=casper.20170209 header.b=D+gxe+zO;
 	dmarc=pass (policy=none) header.from=infradead.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94935-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-94935-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94920-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-94920-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 54A293125453
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 21:26:49 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id DA7503037051
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 21:23:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id ED837379EC1;
-	Fri,  3 Jul 2026 21:24:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9BA2A37A486;
+	Fri,  3 Jul 2026 21:22:17 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from desiato.infradead.org (desiato.infradead.org [90.155.92.199])
+Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D162637881F;
-	Fri,  3 Jul 2026 21:24:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F42E379C47;
+	Fri,  3 Jul 2026 21:22:15 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783113850; cv=none; b=jMeQRNKylecMdcgZrPXQL4/a9YLu3L2SOy3t3ggAmYvqwY+kiAMbH2lTlCnltIAf0PMYriVLIZ1TQC5zlZybBl5OH4Rzq09VLrIu2wOuNdkTCiZ8WKE54j90f9vpad6MmYgqoM19ntgaQbWyAK7UJfcmgrmH6s0HD2rxoUqPZaE=
+	t=1783113737; cv=none; b=JC6/MxhxDLGnOG8RfREkMFv9R/QRhKBrsxK2u9TH5ZbTE4Q4kUIOaXHH60uWFl5JucfhGSvdf+zCNpMWP9N9LxJmrPSJKonM6LL4jHwKHIcxXChn6c7cAUMlmfoQuvQ48rffkfsfsHnhlyYNG895TTQrT64SBi4RavPaek7AMuE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783113850; c=relaxed/simple;
-	bh=UyWYnjCodXiabb0T9qRhX61nC0ZGtFSm29fF7CbpEWo=;
+	s=arc-20240116; t=1783113737; c=relaxed/simple;
+	bh=dQWLulag1/1kw4qEPoAKxqwCwYRrlcSCRrY2YKAQV/c=;
 	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=tJKbhRLlRyXEgH3/FTZy8DujoO2LiBbAvcn35WG0A+k7BsT81hyMaTb5vIn8PqPicNkpgwe3p6wRrb1Rikr/0ecZcKLJtBJkik6gwIUQ8SBgtPsdgf5UDl9qnaDJasTYRYrY0XFPuKHqcNHT5gaZx+ci13oSkidOVTbURQmKx0U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=desiato.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=i2HbQgc8; arc=none smtp.client-ip=90.155.92.199
+	 MIME-Version:Content-Type; b=WiiFwtOAUzTjcOls7P/vysT//ZXMkTTF/JHBhM6tiqRRQhLtC+HgBvVK8htWbBFnH09e1MtneP8PSRb9k4YE5PmPd3QIkagEkV84h7xUNZO8x3om+XXLNmDbSOcJ4SX5hx1/LfZtX+oXE31K/X07dHkFsGodPbqvuseZzmMdvPo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=casper.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=D+gxe+zO; arc=none smtp.client-ip=90.155.50.34
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:
 	From:Reply-To:Cc:Content-ID:Content-Description;
-	bh=wRdzvKD2bSU5nsIEUajIFrEJsqOT3VIHViFgVZVhuqk=; b=i2HbQgc8AAYdlD8WujdrvoPn1U
-	qoodV8ewcMdiGBQg69o486bMpQqj3pTV6LFQ+p4lqOS+REgBO5BemjRGoJIYKDskYoX3dzxU/dlWs
-	fn2vzHq+FScArRGbLA7uB4jy7vpg8ka9zk3nmtu49+oDQijwv+s28SVc4L6+1aNJSTs0xpcGVGk+4
-	PUaalf6n5Bs4BQ+P+PIB8knTn4QDDa19PFHuBjY+s0Xdh5h6LrgJk/Hs3e1pM9yixhVu0mhnBsWjJ
-	q2hW1MEceXMx6MN7p1chCFiOsbQ0DLRYilZs1FhSzRg3dTm8+BBZ+L5AdoSzqbp/un2xzu5DlNmAh
-	h7pBrsWw==;
+	bh=LCPHKocQxei12eLOnimwDSC7Gdxv3emgr2rZMstPsfQ=; b=D+gxe+zOcTheHMuzWnvdCppNWA
+	57JVykAHl5rRTwt63XLCRD1vkYCu3NQBErzPcDEbuP+MaahyYUw5hq3EwgT7E4w2h7Gg0Ma1b5I9c
+	y+FhSO1tI4GXlHfRW+zlB1kpu6M0vVZhLe9024hdHZX3BeH+AbDSkFNkPcop8uZEzpFkwZZTViDED
+	XNcIi+iHLsu+wlkRd+qUOzLAXeurJLINvTyk2DBnlnB/8mRDQeMAjew2fmG/MNXpKG+17Z+JFWmfB
+	M+I6BAQ6bxpzkaSzDdefvG7Z1bLT2dKVd2DTwpsBwrI0PN2j3OaH1YdS6A6i80wBBLY9y/hrMp1mS
+	kde8DTaQ==;
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
-	by desiato.infradead.org with esmtpsa (Exim 4.99.2 #2 (Red Hat Linux))
-	id 1wflKc-000000059OA-40uX;
-	Fri, 03 Jul 2026 21:23:38 +0000
+	by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+	id 1wflKX-0000000AsYD-0x2z;
+	Fri, 03 Jul 2026 21:21:49 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.2 #2 (Red Hat Linux))
-	id 1wflKX-00000001RPL-0RPj;
+	id 1wflKX-00000001RPP-0bzt;
 	Fri, 03 Jul 2026 22:21:49 +0100
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
@@ -79,9 +79,9 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v6 23/36] KVM: selftests: Add master clock offset test
-Date: Fri,  3 Jul 2026 22:18:02 +0100
-Message-ID: <20260703212145.343527-24-dwmw2@infradead.org>
+Subject: [PATCH v6 24/36] KVM: x86: Factor out kvm_use_master_clock()
+Date: Fri,  3 Jul 2026 22:18:03 +0100
+Message-ID: <20260703212145.343527-25-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260703212145.343527-1-dwmw2@infradead.org>
 References: <20260703212145.343527-1-dwmw2@infradead.org>
@@ -94,19 +94,19 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-1.16 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=desiato.20200630];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=casper.20170209];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94935-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-94920-lists,linux-doc=lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[27];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS(0.00)[m:pbonzini@redhat.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:vkuznets@redhat.com,m:jgross@suse.com,m:boris.ostrovsky@oracle.com,m:dwmw2@infradead.org,m:paul@xen.org,m:jic23@kernel.org,m:Sascha.Bischoff@arm.com,m:maz@kernel.org,m:joey.gouly@arm.com,m:jalliste@amazon.com,m:dongli.zhang@oracle.com,m:joe.jin@oracle.com,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:xen-devel@lists.xenproject.org,m:linux-kselftest@vger.kernel.org,s:lists@lfdr.de];
@@ -114,7 +114,7 @@ X-Spamd-Result: default: False [-1.16 / 15.00];
 	FORGED_SENDER(0.00)[dwmw2@infradead.org,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
@@ -126,226 +126,122 @@ X-Spamd-Result: default: False [-1.16 / 15.00];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	TO_DN_SOME(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,infradead.org:from_mime,infradead.org:dkim,infradead.org:mid,amazon.co.uk:email,vger.kernel.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[xen.org:email,amazon.co.uk:email,vger.kernel.org:from_smtp,infradead.org:from_mime,infradead.org:dkim,infradead.org:mid,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 9A4CC705DE0
+X-Rspamd-Queue-Id: 624A5705CBF
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Verify that KVM master clock mode remains active when vCPUs have
-different TSC offsets but the same frequency. Creates three vCPUs,
-sets one to a different TSC value, and confirms:
+Both kvm_track_tsc_matching() and pvclock_update_vm_gtod_copy() make a
+decision about whether the KVM clock should be in master clock mode.
+They used *different* criteria for the decision though. This isn't
+really a problem; it only has the potential to cause unnecessary
+invocations of KVM_REQ_MASTERCLOCK_UPDATE if the masterclock was
+disabled due to TSC going backwards, or the guest using the old MSR.
+But it isn't pretty.
 
- - KVM_CLOCK_HOST_TSC is set (master clock active)
- - KVM_CLOCK_TSC_STABLE IS set (master clock ⇒ stable flag)
- - PVCLOCK_TSC_STABLE_BIT is NOT set (offsets differ)
+Factor the decision out to a single function. And document the
+historical reason why it's disabled for guests that use the old
+MSR_KVM_SYSTEM_TIME.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Assisted-by: Kiro (claude-opus-4.6-1m)
+Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- tools/testing/selftests/kvm/Makefile.kvm      |   1 +
- .../kvm/x86/masterclock_offset_test.c         | 180 ++++++++++++++++++
- 2 files changed, 181 insertions(+)
- create mode 100644 tools/testing/selftests/kvm/x86/masterclock_offset_test.c
+ arch/x86/kvm/x86.c | 40 ++++++++++++++++++++++++++++++----------
+ 1 file changed, 30 insertions(+), 10 deletions(-)
 
-diff --git a/tools/testing/selftests/kvm/Makefile.kvm b/tools/testing/selftests/kvm/Makefile.kvm
-index 90568ab631d7..7ecaaf82056e 100644
---- a/tools/testing/selftests/kvm/Makefile.kvm
-+++ b/tools/testing/selftests/kvm/Makefile.kvm
-@@ -106,6 +106,7 @@ TEST_GEN_PROGS_x86 += x86/pmu_event_filter_test
- TEST_GEN_PROGS_x86 += x86/private_mem_conversions_test
- TEST_GEN_PROGS_x86 += x86/private_mem_kvm_exits_test
- TEST_GEN_PROGS_x86 += x86/pvclock_test
-+TEST_GEN_PROGS_x86 += x86/masterclock_offset_test
- TEST_GEN_PROGS_x86 += x86/pvclock_migration_test
- TEST_GEN_PROGS_x86 += x86/set_boot_cpu_id
- TEST_GEN_PROGS_x86 += x86/set_sregs_test
-diff --git a/tools/testing/selftests/kvm/x86/masterclock_offset_test.c b/tools/testing/selftests/kvm/x86/masterclock_offset_test.c
-new file mode 100644
-index 000000000000..88e2bd2edab5
---- /dev/null
-+++ b/tools/testing/selftests/kvm/x86/masterclock_offset_test.c
-@@ -0,0 +1,180 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Test that KVM master clock mode works with different TSC offsets
-+ * as long as all vCPUs have the same TSC frequency.
-+ */
-+#include <stdint.h>
-+#include <string.h>
+diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
+index 3a651f5ce2d2..f8883c3b8ed2 100644
+--- a/arch/x86/kvm/x86.c
++++ b/arch/x86/kvm/x86.c
+@@ -2638,11 +2638,30 @@ static inline bool gtod_is_based_on_tsc(int mode)
+ {
+ 	return mode == VDSO_CLOCKMODE_TSC || mode == VDSO_CLOCKMODE_HVCLOCK;
+ }
+-#endif
 +
-+#include "test_util.h"
-+#include "kvm_util.h"
-+#include "processor.h"
-+
-+#include <asm/pvclock-abi.h>
-+
-+#define KVMCLOCK_GPA	0xc0000000ull
-+#define TSC_OFFSET	(1000000000ULL)
-+
-+static uint64_t pvclock_calc(struct pvclock_vcpu_time_info *pvti, uint64_t guest_tsc)
++static bool kvm_use_master_clock(struct kvm *kvm)
 +{
-+	uint64_t delta = guest_tsc - pvti->tsc_timestamp;
-+
-+	if (pvti->tsc_shift >= 0)
-+		delta <<= pvti->tsc_shift;
-+	else
-+		delta >>= -(int)pvti->tsc_shift;
-+
-+	return pvti->system_time + ((__uint128_t)delta * pvti->tsc_to_system_mul >> 32);
-+}
-+
-+static void guest_code(void)
-+{
-+	wrmsr(MSR_KVM_SYSTEM_TIME_NEW, KVMCLOCK_GPA | KVM_MSR_ENABLED);
-+	for (;;)
-+		GUEST_SYNC(0);
-+}
-+
-+int main(void)
-+{
-+	struct kvm_vcpu *vcpus[3];
-+	struct kvm_clock_data clock;
-+	struct pvclock_vcpu_time_info pvti[3];
-+	struct kvm_vm *vm;
-+	uint64_t offset0, host_tsc, clk0, clk2;
-+	int i;
-+
-+	TEST_REQUIRE(sys_clocksource_is_based_on_tsc());
-+
-+	vm = vm_create_with_vcpus(3, guest_code, vcpus);
-+
-+	TEST_REQUIRE(!__vcpu_has_device_attr(vcpus[0], KVM_VCPU_TSC_CTRL,
-+					     KVM_VCPU_TSC_OFFSET));
-+
-+	vm_userspace_mem_region_add(vm, VM_MEM_SRC_ANONYMOUS,
-+				    KVMCLOCK_GPA, 1,
-+				    vm_calc_num_guest_pages(VM_MODE_DEFAULT,
-+							   getpagesize()), 0);
-+	virt_map(vm, KVMCLOCK_GPA, KVMCLOCK_GPA,
-+		 vm_calc_num_guest_pages(VM_MODE_DEFAULT, getpagesize()));
-+
-+	/* Get vCPU 0's default offset and set vCPU 2's offset higher */
-+	vcpu_device_attr_get(vcpus[0], KVM_VCPU_TSC_CTRL,
-+			     KVM_VCPU_TSC_OFFSET, &offset0);
-+	uint64_t offset2 = offset0 + TSC_OFFSET;
-+	vcpu_device_attr_set(vcpus[2], KVM_VCPU_TSC_CTRL,
-+			     KVM_VCPU_TSC_OFFSET, &offset2);
-+
-+	/* Run each vCPU to enable kvmclock (with offset already set) */
-+	for (i = 0; i < 3; i++) {
-+		vcpu_run(vcpus[i]);
-+		TEST_ASSERT_KVM_EXIT_REASON(vcpus[i], KVM_EXIT_IO);
-+	}
-+
-+	/* Check master clock is active */
-+	memset(&clock, 0, sizeof(clock));
-+	vm_ioctl(vm, KVM_GET_CLOCK, &clock);
-+	pr_info("KVM_GET_CLOCK flags: 0x%x\n", clock.flags);
-+	TEST_ASSERT(clock.flags & KVM_CLOCK_HOST_TSC,
-+		    "Master clock should be active, flags=0x%x", clock.flags);
-+	TEST_ASSERT(clock.flags & KVM_CLOCK_TSC_STABLE,
-+		    "KVM_CLOCK_TSC_STABLE should be set, flags=0x%x", clock.flags);
-+
-+	/* Get per-vCPU pvclock in order 0, 2, 1 */
-+	int order[] = {0, 2, 1};
-+	for (i = 0; i < 3; i++) {
-+		int idx = order[i];
-+		__vcpu_ioctl(vcpus[idx], KVM_GET_CLOCK_GUEST, &pvti[idx]);
-+		pr_info("vCPU %d: tsc_timestamp=%lu system_time=%lu "
-+			"mul=%u shift=%d flags=0x%x\n",
-+			idx, (unsigned long)pvti[idx].tsc_timestamp,
-+			(unsigned long)pvti[idx].system_time,
-+			pvti[idx].tsc_to_system_mul, pvti[idx].tsc_shift,
-+			pvti[idx].flags);
-+	}
-+
-+	/* Read guest TSCs: should see (0+OFF) < 2 < (1+OFF) */
-+	uint64_t gtsc0 = vcpu_get_msr(vcpus[0], MSR_IA32_TSC);
-+	uint64_t gtsc2 = vcpu_get_msr(vcpus[2], MSR_IA32_TSC);
-+	uint64_t gtsc1 = vcpu_get_msr(vcpus[1], MSR_IA32_TSC);
-+	pr_info("Guest TSCs: vcpu0=%lu vcpu2=%lu vcpu1=%lu\n",
-+		(unsigned long)gtsc0, (unsigned long)gtsc2, (unsigned long)gtsc1);
-+	pr_info("vcpu0+OFF=%lu vcpu1+OFF=%lu\n",
-+		(unsigned long)(gtsc0 + TSC_OFFSET),
-+		(unsigned long)(gtsc1 + TSC_OFFSET));
-+	TEST_ASSERT(gtsc0 + TSC_OFFSET < gtsc2 && gtsc2 < gtsc1 + TSC_OFFSET,
-+		    "Expected (vcpu0+OFF) < vcpu2 < (vcpu1+OFF)");
-+
-+	/* PVCLOCK_TSC_STABLE_BIT should NOT be set (offsets differ) */
-+	TEST_ASSERT(!(pvti[2].flags & PVCLOCK_TSC_STABLE_BIT),
-+		    "PVCLOCK_TSC_STABLE_BIT should NOT be set, flags=0x%x",
-+		    pvti[2].flags);
-+
-+	/* Same mul/shift */
-+	TEST_ASSERT(pvti[0].tsc_to_system_mul == pvti[2].tsc_to_system_mul &&
-+		    pvti[0].tsc_shift == pvti[2].tsc_shift,
-+		    "All vCPUs should have same mul/shift");
++	struct kvm_arch *ka = &kvm->arch;
 +
 +	/*
-+	 * Read host TSC once. At this instant:
-+	 *   vCPU 0 guest TSC = host_tsc + offset0
-+	 *   vCPU 2 guest TSC = host_tsc + offset0 + TSC_OFFSET
-+	 * Feed each through its pvclock. Expect the same kvmclock.
++	 * The 'old kvmclock' check is a workaround (from 2015) for a
++	 * SUSE 2.6.16 kernel that didn't boot if the system_time in
++	 * its kvmclock was too far behind the current time. So the
++	 * mode of just setting the reference point and allowing time
++	 * to proceed linearly from there makes it fail to boot.
++	 * Despite that being kind of the *point* of the way the clock
++	 * is exposed to the guest. By coincidence, the offending
++	 * kernels used the old MSR_KVM_SYSTEM_TIME, which was moved
++	 * only because it resided in the wrong number range. So the
++	 * workaround is activated for *all* guests using the old MSR.
 +	 */
-+	host_tsc = rdtsc();
-+	clk0 = pvclock_calc(&pvti[0], host_tsc + offset0);
-+	clk2 = pvclock_calc(&pvti[2], host_tsc + offset0 + TSC_OFFSET);
-+
-+	pr_info("kvmclock via vCPU 0: %lu ns\n", (unsigned long)clk0);
-+	pr_info("kvmclock via vCPU 2: %lu ns\n", (unsigned long)clk2);
-+	TEST_ASSERT(clk0 == clk2,
-+		    "kvmclock from offset vCPUs should match exactly, "
-+		    "diff=%ld ns", (long)(clk2 - clk0));
-+
-+	pr_info("PASSED: pvclock consistent across offset vCPUs\n");
-+
-+	/*
-+	 * Now add an hour to the VM kvmclock via KVM_SET_CLOCK, run each
-+	 * vCPU to pick up the update, and check they're still in sync.
-+	 */
-+	{
-+#define ONE_HOUR_NS (3600ULL * NSEC_PER_SEC)
-+		struct kvm_clock_data setclk = { .clock = clock.clock + ONE_HOUR_NS };
-+
-+		vm_ioctl(vm, KVM_SET_CLOCK, &setclk);
-+	}
-+
-+	/* Guest code does GUEST_SYNC then exits — run each to see update */
-+	for (i = 0; i < 3; i++) {
-+		vcpu_run(vcpus[order[i]]);
-+		TEST_ASSERT_KVM_EXIT_REASON(vcpus[order[i]], KVM_EXIT_IO);
-+	}
-+
-+	/* Re-read pvclocks */
-+	for (i = 0; i < 3; i++)
-+		__vcpu_ioctl(vcpus[order[i]], KVM_GET_CLOCK_GUEST, &pvti[order[i]]);
-+
-+	pr_info("After +1h: vCPU 0 system_time=%lu, vCPU 2 system_time=%lu\n",
-+		(unsigned long)pvti[0].system_time,
-+		(unsigned long)pvti[2].system_time);
-+	TEST_ASSERT(pvti[0].system_time == pvti[2].system_time,
-+		    "system_time should still match after KVM_SET_CLOCK");
-+
-+	host_tsc = rdtsc();
-+	clk0 = pvclock_calc(&pvti[0], host_tsc + offset0);
-+	clk2 = pvclock_calc(&pvti[2], host_tsc + offset0 + TSC_OFFSET);
-+
-+	pr_info("After +1h: kvmclock via vCPU 0: %lu ns\n", (unsigned long)clk0);
-+	pr_info("After +1h: kvmclock via vCPU 2: %lu ns\n", (unsigned long)clk2);
-+	TEST_ASSERT(clk0 == clk2,
-+		    "After +1h: kvmclock should still match, diff=%ld ns",
-+		    (long)(clk2 - clk0));
-+
-+	/* Verify the clock actually moved by ~1 hour */
-+	TEST_ASSERT(clk0 > ONE_HOUR_NS,
-+		    "Clock should be > 1 hour after set, got %lu ns",
-+		    (unsigned long)clk0);
-+
-+	pr_info("PASSED: pvclock still consistent after KVM_SET_CLOCK +1h\n");
-+	kvm_vm_free(vm);
-+	return 0;
++	return ka->all_vcpus_matched_freq &&
++		!ka->backwards_tsc_observed &&
++		!ka->boot_vcpu_runs_old_kvmclock;
 +}
+ 
+ static void kvm_track_tsc_matching(struct kvm_vcpu *vcpu, bool update_mclock)
+ {
+-#ifdef CONFIG_X86_64
+ 	struct kvm_arch *ka = &vcpu->kvm->arch;
+ 	struct pvclock_gtod_data *gtod = &pvclock_gtod_data;
+ 	bool prev_matched_tsc = ka->all_vcpus_matched_tsc;
+@@ -2680,7 +2699,7 @@ static void kvm_track_tsc_matching(struct kvm_vcpu *vcpu, bool update_mclock)
+ 	 * are fine — each vCPU's pvclock has its own tsc_timestamp that
+ 	 * accounts for its offset.
+ 	 */
+-	bool use_master_clock = ka->all_vcpus_matched_freq &&
++	bool use_master_clock = kvm_use_master_clock(vcpu->kvm) &&
+ 				gtod_is_based_on_tsc(gtod->clock.vclock_mode);
+ 
+ 	/*
+@@ -2695,8 +2714,11 @@ static void kvm_track_tsc_matching(struct kvm_vcpu *vcpu, bool update_mclock)
+ 	trace_kvm_track_tsc(vcpu->vcpu_id, ka->nr_vcpus_matched_tsc,
+ 			    atomic_read(&vcpu->kvm->online_vcpus),
+ 		            ka->use_master_clock, gtod->clock.vclock_mode);
+-#endif
+ }
++#else
++static inline void kvm_track_tsc_matching(struct kvm_vcpu *vcpu,
++					  bool new_generation) {}
++#endif
+ 
+ /*
+  * Multiply tsc by a fixed point number represented by ratio.
+@@ -3210,10 +3232,9 @@ static void pvclock_update_vm_gtod_copy(struct kvm *kvm)
+ #ifdef CONFIG_X86_64
+ 	struct kvm_arch *ka = &kvm->arch;
+ 	int vclock_mode;
+-	bool host_tsc_clocksource, vcpus_matched;
++	bool host_tsc_clocksource;
+ 
+ 	lockdep_assert_held(&kvm->arch.tsc_write_lock);
+-	vcpus_matched = ka->all_vcpus_matched_freq;
+ 
+ 	/*
+ 	 * If the host uses TSC clock, then passthrough TSC as stable
+@@ -3223,9 +3244,8 @@ static void pvclock_update_vm_gtod_copy(struct kvm *kvm)
+ 					&ka->master_kernel_ns,
+ 					&ka->master_cycle_now);
+ 
+-	ka->use_master_clock = host_tsc_clocksource && vcpus_matched
+-				&& !ka->backwards_tsc_observed
+-				&& !ka->boot_vcpu_runs_old_kvmclock;
++	ka->use_master_clock = host_tsc_clocksource &&
++				kvm_use_master_clock(kvm);
+ 
+ 	if (ka->use_master_clock) {
+ 		u64 tsc_hz;
+@@ -3253,7 +3273,7 @@ static void pvclock_update_vm_gtod_copy(struct kvm *kvm)
+ 
+ 	vclock_mode = pvclock_gtod_data.clock.vclock_mode;
+ 	trace_kvm_update_master_clock(ka->use_master_clock, vclock_mode,
+-					vcpus_matched);
++					ka->all_vcpus_matched_freq);
+ #endif
+ }
+ 
 -- 
 2.54.0
 
