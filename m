@@ -1,163 +1,189 @@
-Return-Path: <linux-doc+bounces-94866-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94867-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 9CnmGEnnR2p0hQAAu9opvQ
-	(envelope-from <linux-doc+bounces-94866-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 18:46:01 +0200
+	id u1hUCUzsR2qShgAAu9opvQ
+	(envelope-from <linux-doc+bounces-94867-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 19:07:24 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id D3A0F704637
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 18:46:00 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 86EF9704868
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 19:07:23 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=debian.org header.s=smtpauto.stravinsky header.b=E0GDICzy;
-	dmarc=pass (policy=none) header.from=debian.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94866-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-94866-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=NWXDJPm9;
+	dmarc=pass (policy=none) header.from=gmail.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94867-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-94867-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 2565E30321BF
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 16:45:40 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 3FFFB301024E
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 17:07:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F16BA433E99;
-	Fri,  3 Jul 2026 16:45:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B3E0529D291;
+	Fri,  3 Jul 2026 17:07:11 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 495FE27732;
-	Fri,  3 Jul 2026 16:45:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 621FD2BEFEE
+	for <linux-doc@vger.kernel.org>; Fri,  3 Jul 2026 17:07:10 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783097138; cv=none; b=HE5IFekcL5P2V7VqGT9HfpwReDA0G0nNPbMR+xa41eKRiBfkNtwXDE4HhH0o5JKIe2MtQcAkaP+jvMBxwTc3R+0/ogQ5DBHp/sQo5Ta8U3AsTF3b3q1I8UvTSFnaimb+5omdU5bUYuu2896PenwTHXHhkbL8EaAa2ori44yB93s=
+	t=1783098431; cv=none; b=V10dMJtvpxcTcVbLAZVOkFzdMZdRoFyZ7d5y46ccoV5fuN53jEJ2PnI8CbvIC42erHtHrJSxnjrkEJGHiUeQoSpEKF6yYcN5TIJDD+/1MkrYmpE8h/bkfPmTrEP/FygZhmFJv3hCxaAdpKukREddvW44RZsmoca/sHni//fbpJM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783097138; c=relaxed/simple;
-	bh=0DRZ2smuBcmNbxpX37Hz2EgOkA+rk2Dh8WvQYelSEMo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=InTGwnIjJkVo8wc9jN2EkEtXTFKPyJnTVRgfZO4Fuz6d7uqWZ5BlAuta5b6Om2OOSOt2vqfFCtLbHun0hBD7VcmtP3DczUpeiL6ghnsdp09aGXG8X12V9ytJ67u/76f/UWJTIsilzrMFXHwk3TsslfMDIsk5FGqHxo1+F2X7yH0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org; spf=pass smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=E0GDICzy; arc=none smtp.client-ip=82.195.75.108
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
-	s=smtpauto.stravinsky; h=X-Debian-User:In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=oytYUjBSAM6Spo5uHh1E+ruoHlc7Qx0XVI6YVgYR4W0=; b=E0GDICzyxiEzkb1P1PTSVX/dVw
-	VmKHeNXg+otnMSNWJGB/XkjhUL0j7yonSPmQAu+C/Udh7xPN+dZemORrAS3b+4D8Gj47HkVri42rx
-	GKgldjgD4S4efDLbncRFppb/a/NNFhIhgNpatLLb+KaX2LRbr7BYEfaHnCVtHBuDhIVfXGcU+St7m
-	Rrq6y2vJpYduX9hTKjA7Y63IZti8sk7pdikdtC7r0afBHaE72b880h+bJnPFTnGeP5jQVfzU1Nopj
-	pbj66BcLAKn5MqITFO2pjdqBSOXxSCqhM3NZl4mZW5T5zFWKPfe8yN6RA6Y1I7GL43fweacMW2/H3
-	CvYs1Cuw==;
-Received: from authenticated-user
-	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
-	(Exim 4.96)
-	(envelope-from <leitao@debian.org>)
-	id 1wfh04-009XSc-13;
-	Fri, 03 Jul 2026 16:44:24 +0000
-Date: Fri, 3 Jul 2026 09:44:11 -0700
-From: Breno Leitao <leitao@debian.org>
-To: Jinjie Ruan <ruanjinjie@huawei.com>
-Cc: catalin.marinas@arm.com, will@kernel.org, corbet@lwn.net, 
-	skhan@linuxfoundation.org, maz@kernel.org, ardb@kernel.org, ilias.apalodimas@linaro.org, 
-	oupton@kernel.org, joey.gouly@arm.com, seiden@linux.ibm.com, suzuki.poulose@arm.com, 
-	yuzenghui@huawei.com, oleg@redhat.com, mark.rutland@arm.com, lpieralisi@kernel.org, 
-	tglx@kernel.org, ada.coupriediaz@arm.com, anshuman.khandual@arm.com, 
-	ebiggers@kernel.org, broonie@kernel.org, mrigendra.chaubey@gmail.com, 
-	baohua@kernel.org, lucaswei@google.com, james.morse@arm.com, zengheng4@huawei.com, 
-	thuth@redhat.com, yang@os.amperecomputing.com, leo.bras@arm.com, 
-	Sascha.Bischoff@arm.com, james.clark@linaro.org, peterz@infradead.org, ben.horgan@arm.com, 
-	punit.agrawal@oss.qualcomm.com, gshan@redhat.com, osama.abdelkader@gmail.com, 
-	fengchengwen@huawei.com, ryan.roberts@arm.com, yangyicong@hisilicon.com, 
-	kevin.brodsky@arm.com, kees@kernel.org, jeson.gao@unisoc.com, zhaoyang.huang@unisoc.com, 
-	ryotkkr98@gmail.com, wsw9603@163.com, pasha.tatashin@soleen.com, 
-	jeremy.linton@arm.com, schuster.simon@siemens-energy.com, osandov@fb.com, arnd@arndb.de, 
-	zhangpengjie2@huawei.com, smostafa@google.com, vladimir.murzin@arm.com, tabba@google.com, 
-	vdonnefort@google.com, kaleshsingh@google.com, jic23@kernel.org, timothy.hayes@arm.com, 
-	alexandru.elisei@arm.com, zenghui.yu@linux.dev, david@kernel.org, 
-	akpm@linux-foundation.org, ljs@kernel.org, memxor@gmail.com, qperret@google.com, 
-	chaitanyas.prakash@arm.com, linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-efi@vger.kernel.org, kvmarm@lists.linux.dev
-Subject: Re: [PATCH 01/17] arm64: Move DAIF macros to ptrace.h and use them
- centrally
-Message-ID: <akfl8VwB-RkHIFgm@gmail.com>
-References: <20260703100135.2512312-1-ruanjinjie@huawei.com>
- <20260703100135.2512312-2-ruanjinjie@huawei.com>
+	s=arc-20240116; t=1783098431; c=relaxed/simple;
+	bh=TScPT134W+E4UN6BNVVPGG0o0CJvwBXxJ31qbIrrzGA=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=b4VdxZ8lcLRnHfitejWZvy1fIOHmQIcnRUa7PTXs1/9rP15mTXgD50qrLQhIGxwjRMN7oPf95Zc2FfiYbAnK3rq7/92WcAq77AVhc58Tc+xY6PqUruKqVuKbgC3qcFWAMkwHbVCq09L9yMNNtGS7Y6OKzJTl8kamxSsKXxNIolE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=NWXDJPm9; arc=none smtp.client-ip=209.85.214.182
+Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-2cacf197759so10499935ad.2
+        for <linux-doc@vger.kernel.org>; Fri, 03 Jul 2026 10:07:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1783098429; x=1783703229; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=RmNuqUOtCZwKWpFv/G4WFvqRYroonXT9uxOxUH2oEGM=;
+        b=NWXDJPm9RNEI81t1buiFuKTHDTyzjyptp6nzJPHRQA2tQHhtCxEF3sDaf/bE8533fj
+         HAxQc8Etk8ZAUDpxg0MVP059RdOpAOGjHLG6FTR7ALR9H8yxiM0Y/hohYywd38T/rMOg
+         vhpXiWUEtct03KptAKzWTQxq4c8GvFtx75XShZc8t4A/MENxfxtK5RMRVELVFYVr5Kgy
+         EyR4z3hn0oMclacmXiAWYk/KU6iL8ygml103g6rzUExAlcF351Mm4bzV84ppO38ZpNz7
+         SxOkLk1XUDyJMa3YRZxAQ1W64pZpRlmTfPnQ0DIQbaVBC7Ra874oDwJKxjzeatR5RExc
+         tcLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783098429; x=1783703229;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=RmNuqUOtCZwKWpFv/G4WFvqRYroonXT9uxOxUH2oEGM=;
+        b=j2onUC536cG8oy7hj98TFyFzy+seJsC00lgM/MEr0cPZLV6c0jKrrTXkbAaorowtHm
+         YPlo4ClO772uDRxj8dxZcOiZrPWtW2YzzKdKQpYW4dU5hkOf/3srMYwHA0WYVmXIzfdR
+         pgS5RvrvWOUkBGQblQ3V6pAPBn8IOruEPK284P+dIijQlrl8Li3iO8V/JanCy1C3qz4+
+         PeWoJl96wTenK3x0HUu4+anhv2okG6nbnFM4LdWY4rTsXqx9SxM8DWr60wSdm1Oigskr
+         D1bXLvSQl97YzEtT8sy4CVpMOcLOOSsjfAVFTty+Ppcchn4PRYITnIeM0A1rN3r30xjG
+         vUOA==
+X-Gm-Message-State: AOJu0YwvPFYDMFKvkWc1EdrEyQSkX19lYLblsRcXj0ziP4lOqu5/s3ok
+	wfMdu4fA4Cb9tctfNzTjSOJ3PjT1t7kkfO4vOfSR+GLvoh617480AmbANQWbnJDO
+X-Gm-Gg: AfdE7cmrcgVw7ZqXyTJ0WgSO+SigeJmCgxM44E5Flu9iJuhAOEG1yT7I5aL5Hr7ZndZ
+	FP2XLRAxpJ5TAWgQt7B5PQhJjr612mbv2hVtilAS3VMugfCIn9lRGSu0MmVla81b0Ca6GjjENtj
+	kCHemb7/N8tI8Q6GR99W7Q1hzEbPSABeFYiFcsj5t93yAznneel0d2rwlV6ZoCCuKK61D72ChuL
+	/yS4dDppXM1IncmM4Tq0R/l41crGwIGpKW3t1GO3meTVqr7JecqB5VDkex73VmeJat8bKOmTWFx
+	R0Vo94UvUwNAxWjTljfi1JKQ+/eM1+micphLyPNKUDwO3QMdGQEJDdGwQ+qvIo/sakxDxdKlhss
+	ruUqNvzSYTpeN/y1OqKe7WVuYXbpCC51Pv0pp4hX1A2gfvXa4ktxfL82hTAuS1Lh5vzwNiM5XDX
+	WMX0xd16nZCc3NLaDG82vrKH+hBAQ0tTLGJ+JRJSgZTyT1MdQKIBtx4qd3yFt1Zc/utc02DXUEI
+	L1sYu+EA4ESv5tOBN4NV8FE3P8ifABgEf0Aq0niCDF2+Y6a+Jk=
+X-Received: by 2002:a17:902:ffd0:b0:2c8:1c05:16bb with SMTP id d9443c01a7336-2cbb9e9f3f3mr1021855ad.24.1783098429420;
+        Fri, 03 Jul 2026 10:07:09 -0700 (PDT)
+Received: from parrot.meuintelbras.local ([45.179.5.227])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13b3c876ea9sm19643688c88.13.2026.07.03.10.07.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 03 Jul 2026 10:07:09 -0700 (PDT)
+From: Daniel Pereira <danielmaraboo@gmail.com>
+To: corbet@lwn.net
+Cc: linux-doc@vger.kernel.org,
+	Daniel Pereira <danielmaraboo@gmail.com>
+Subject: [PATCH v2 0/7] docs: pt_BR: process: translation updates and additions
+Date: Fri,  3 Jul 2026 14:05:40 -0300
+Message-ID: <20260703170552.174764-1-danielmaraboo@gmail.com>
+X-Mailer: git-send-email 2.47.3
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260703100135.2512312-2-ruanjinjie@huawei.com>
-X-Debian-User: leitao
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[debian.org,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
-	R_DKIM_ALLOW(-0.20)[debian.org:s=smtpauto.stravinsky];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-94866-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:ruanjinjie@huawei.com,m:catalin.marinas@arm.com,m:will@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:maz@kernel.org,m:ardb@kernel.org,m:ilias.apalodimas@linaro.org,m:oupton@kernel.org,m:joey.gouly@arm.com,m:seiden@linux.ibm.com,m:suzuki.poulose@arm.com,m:yuzenghui@huawei.com,m:oleg@redhat.com,m:mark.rutland@arm.com,m:lpieralisi@kernel.org,m:tglx@kernel.org,m:ada.coupriediaz@arm.com,m:anshuman.khandual@arm.com,m:ebiggers@kernel.org,m:broonie@kernel.org,m:mrigendra.chaubey@gmail.com,m:baohua@kernel.org,m:lucaswei@google.com,m:james.morse@arm.com,m:zengheng4@huawei.com,m:thuth@redhat.com,m:yang@os.amperecomputing.com,m:leo.bras@arm.com,m:Sascha.Bischoff@arm.com,m:james.clark@linaro.org,m:peterz@infradead.org,m:ben.horgan@arm.com,m:punit.agrawal@oss.qualcomm.com,m:gshan@redhat.com,m:osama.abdelkader@gmail.com,m:fengchengwen@huawei.com,m:ryan.roberts@arm.com,m:yangyicong@hisilicon.com,m:kevin.brodsky@arm.com,m:kees@kernel.org,m:jeson.gao@unisoc.com,m
- :zhaoyang.huang@unisoc.com,m:ryotkkr98@gmail.com,m:wsw9603@163.com,m:pasha.tatashin@soleen.com,m:jeremy.linton@arm.com,m:schuster.simon@siemens-energy.com,m:osandov@fb.com,m:arnd@arndb.de,m:zhangpengjie2@huawei.com,m:smostafa@google.com,m:vladimir.murzin@arm.com,m:tabba@google.com,m:vdonnefort@google.com,m:kaleshsingh@google.com,m:jic23@kernel.org,m:timothy.hayes@arm.com,m:alexandru.elisei@arm.com,m:zenghui.yu@linux.dev,m:david@kernel.org,m:akpm@linux-foundation.org,m:ljs@kernel.org,m:memxor@gmail.com,m:qperret@google.com,m:chaitanyas.prakash@arm.com,m:linux-arm-kernel@lists.infradead.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-efi@vger.kernel.org,m:kvmarm@lists.linux.dev,m:mrigendrachaubey@gmail.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[leitao@debian.org,linux-doc@vger.kernel.org];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_CC(0.00)[arm.com,kernel.org,lwn.net,linuxfoundation.org,linaro.org,linux.ibm.com,huawei.com,redhat.com,gmail.com,google.com,os.amperecomputing.com,infradead.org,oss.qualcomm.com,hisilicon.com,unisoc.com,163.com,soleen.com,siemens-energy.com,fb.com,arndb.de,linux.dev,linux-foundation.org,lists.infradead.org,vger.kernel.org,lists.linux.dev];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[71];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[leitao@debian.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[debian.org:+];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com];
 	TO_DN_SOME(0.00)[];
+	TAGGED_FROM(0.00)[bounces-94867-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[danielmaraboo@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS(0.00)[m:corbet@lwn.net,m:linux-doc@vger.kernel.org,m:danielmaraboo@gmail.com,s:lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_THREE(0.00)[3];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[danielmaraboo@gmail.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	RCVD_COUNT_FIVE(0.00)[5];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ALIAS_RESOLVED(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: D3A0F704637
+X-Rspamd-Queue-Id: 86EF9704868
 
-On Fri, Jul 03, 2026 at 06:01:19PM +0800, Jinjie Ruan wrote:
-> So move the definitions of DAIF_PROCCTX, DAIF_PROCCTX_NOIRQ, DAIF_ERRCTX,
-> and DAIF_MASK from <asm/daifflags.h> to <asm/ptrace.h>. 
+This patch series updates the Brazilian Portuguese (pt_BR) translation
+for the core Linux kernel development process documentation.
 
-This seems a bit counter intuitive, to have DAIF definitions at
-arm/ptrace.h instead of asm/daifflags.h, no?
+The goal is to expand accessibility for Portuguese-speaking developers,
+bringing over crucial guides ranging from subsystem-specific rules to
+organizational maturity frameworks.
 
-> diff --git a/arch/arm64/kvm/hyp/nvhe/host.S b/arch/arm64/kvm/hyp/nvhe/host.S
-> index 9393fe3ea6a1..cbe2a616c726 100644
-> --- a/arch/arm64/kvm/hyp/nvhe/host.S
-> +++ b/arch/arm64/kvm/hyp/nvhe/host.S
-> @@ -11,6 +11,7 @@
->  #include <asm/kvm_asm.h>
->  #include <asm/kvm_mmu.h>
->  #include <asm/kvm_ptrauth.h>
-> +#include <asm/ptrace.h>
+All documents have been strictly formatted to adhere to the 80-column
+line length limit to ensure proper Sphinx HTML rendering and consistency
+with the existing pt_BR infrastructure.
 
-..
+Changes in v2:
+- Patch 7: Added adding-syscalls.rst to the index.rst toctree to resolve a Sphinx 
+  build warning.
 
-> diff --git a/arch/arm64/kvm/hyp/nvhe/hyp-init.S b/arch/arm64/kvm/hyp/nvhe/hyp-init.S
-> index 89cb553be1e5..26ea02e7f5fd 100644
-> --- a/arch/arm64/kvm/hyp/nvhe/hyp-init.S
-> +++ b/arch/arm64/kvm/hyp/nvhe/hyp-init.S
-> @@ -15,6 +15,7 @@
->  #include <asm/kvm_asm.h>
->  #include <asm/kvm_mmu.h>
->  #include <asm/pgtable-hwdef.h>
-> +#include <asm/ptrace.h>
+Summary of translations included in this series:
+- process/adding-syscalls.rst (Adding System Calls guide)
+- process/contribution-maturity-model.rst (TAB Upstream Maturity framework)
+- process/botching-up-ioctls.rst (Driver-private API and ioctl design)
+- process/backporting.rst (Stable tree backporting and conflict resolution)
+- process/applying-patches.rst (Patch application workflows)
+- process/development-process.rst (Advanced Topics and Conclusion sections)
+- process/6.Followthrough.rst (Patch life-cycle followthrough guide)
 
-And then you need to do this in many low level files, which sounds less
-intuitive to have to have ptrace.h include instead of asm/daifflags.h
-(which is clear why we need it).
+Thanks!
 
---breno
+Signed-off-by: Daniel Pereira <danielmaraboo@gmail.com>
+
+Daniel Pereira (7):
+docs: pt_BR: process: Translate the patch followthrough guide
+docs: pt_BR: process: translate 7.AdvancedTopics and 8.Conclusion
+docs: pt_BR: Add translation for applying-patches and update index
+docs: pt_BR:  translate backporting.rst documentation
+docs: pt_BR: process: translate botching-up-ioctls guide
+docs: pt_BR: process: translate contribution maturity model
+docs: pt_BR: translate process/adding-syscalls.rst
+
+Documentation/translations/pt_BR/index.rst   |   5 +
+.../pt_BR/process/6.Followthrough.rst        | 220 ++++++
+.../pt_BR/process/7.AdvancedTopics.rst       | 201 +++++
+.../pt_BR/process/8.Conclusion.rst           |  73 ++
+.../pt_BR/process/adding-syscalls.rst        | 700 ++++++++++++++++++
+.../pt_BR/process/applying-patches.rst       | 447 +++++++++++
+.../pt_BR/process/backporting.rst            | 598 +++++++++++++++
+.../pt_BR/process/botching-up-ioctls.rst     | 256 +++++++
+.../process/contribution-maturity-model.rst  | 111 +++
+.../pt_BR/process/development-process.rst    |   3 +
+10 files changed, 2614 insertions(+)
+create mode 100644 Documentation/translations/pt_BR/process/6.Followthrough.rst
+create mode 100644 Documentation/translations/pt_BR/process/7.AdvancedTopics.rst
+create mode 100644 Documentation/translations/pt_BR/process/8.Conclusion.rst
+create mode 100644 Documentation/translations/pt_BR/process/adding-syscalls.rst
+create mode 100644 Documentation/translations/pt_BR/process/applying-patches.rst
+create mode 100644 Documentation/translations/pt_BR/process/backporting.rst
+create mode 100644 Documentation/translations/pt_BR/process/botching-up-ioctls.rst
+create mode 100644 Documentation/translations/pt_BR/process/contribution-maturity-model.rst
+
+--
+2.47.3
 
