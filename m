@@ -1,55 +1,56 @@
-Return-Path: <linux-doc+bounces-94770-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94769-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id acS4JOaIR2pFaQAAu9opvQ
-	(envelope-from <linux-doc+bounces-94770-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 12:03:18 +0200
+	id V5UrHeCIR2pCaQAAu9opvQ
+	(envelope-from <linux-doc+bounces-94769-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 12:03:12 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E452700F07
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 12:03:18 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 405C5700EFC
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 12:03:11 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=huawei.com header.s=dkim header.b=VTHrluJO;
+	dkim=pass header.d=huawei.com header.s=dkim header.b=GQIlrVZ2;
 	dmarc=pass (policy=quarantine) header.from=huawei.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94770-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94770-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94769-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-94769-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id AC6F83034228
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 10:02:51 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 3A96F30332E0
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 10:02:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1AD783B5820;
-	Fri,  3 Jul 2026 10:02:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 424723AFD1D;
+	Fri,  3 Jul 2026 10:02:24 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from canpmsgout02.his.huawei.com (canpmsgout02.his.huawei.com [113.46.200.217])
+Received: from canpmsgout03.his.huawei.com (canpmsgout03.his.huawei.com [113.46.200.218])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1B811358388;
-	Fri,  3 Jul 2026 10:02:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D895B35A387;
+	Fri,  3 Jul 2026 10:02:20 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783072945; cv=none; b=naTVsvxQEOGWAPHSffmV7Lm7CPag5vecbPqv2jUFWPLpRA1005YFUrMmokDRpXq30EOtxrB1yahT17OY92x5qpGNGLGhZ8V5mqnSPbcjtR8BoAEB7tJr94L2u3LrCVHFy1WO4N3uY5GlRt3tOc9+ReXvX2HZYdK7XJX36i6Vfq4=
+	t=1783072944; cv=none; b=snTWxADMKBFAKsz0CqYFb2TNpXIkb+SUWewfUkSykA4vGdWstVjQxA7iZNC0BZY0FgAkfuiNN0qxjP3z2QXT3tnlFVzzGoBBj6vlIClwoTvkPlEV68VNX2FgXUVD3Z4wvGU0A8/qCAi5U6JvAHvFikK0Wg2fB7pGfCrqxIn0PEE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783072945; c=relaxed/simple;
-	bh=48mdkA37dTy8784W7L9yLGxdd9aNk5qQK+Ij+77ual4=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type; b=D6JThRWZetUJr6C1zr9ywb/wog8mmp5Gi37dYOghSWzA2Eugq7GybbFNacpniEvfFrRP3AgPJVj7ntqJVSotjBGl6AuFravEZfHsG747cYjik0SCdtZEsbbwaQo1+2cI7ijRdyeT4VHrZv17gxkTxeg9rHmpZoT58BjJ3/iMsas=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=VTHrluJO; arc=none smtp.client-ip=113.46.200.217
+	s=arc-20240116; t=1783072944; c=relaxed/simple;
+	bh=JWCxTOsV2dA7z6VxVONQlPLmdWFhrFsM9+oISbpODdQ=;
+	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=NuNwsNmSNe6e52Jg70Gx3idpkQUoZJUm6rq1z7gpWC+7RQD3Vp4PdPyqZ2qjxoDVJEieqNJ6wmhax/tdUOp1IIXPL4VyMzAO/iCDs8WRGhY017cTHbkVoYwXWlIHEnyWnEFt+Kk2A24bc0R+gK92sgLHowAItkcSCNGq8G8R7wo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=GQIlrVZ2; arc=none smtp.client-ip=113.46.200.218
 dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
 	c=relaxed/relaxed; q=dns/txt;
 	h=From;
-	bh=+Be4tamqNPytL0DlmMhHstiAdEjMJ3KYct4tTEDAvpQ=;
-	b=VTHrluJOOle+Ae3JMHD/J98W7USvFa5ZhBV07q33gTWT38NDnRoeqx/whESEPj+t9PtnB7Nk1
-	LZTFTSeUF4sDuXS0W2YLq68pWgvr1SgBq7oCFHTMsFh8l7tsqguh4UaUVv5QnzofzdIxskFYf87
-	bjQi0cY4kY+ISCFsNX0xwsQ=
-Received: from mail.maildlp.com (unknown [172.19.162.140])
-	by canpmsgout02.his.huawei.com (SkyGuard) with ESMTPS id 4gs8Fr4HkmzcZyF;
-	Fri,  3 Jul 2026 17:53:20 +0800 (CST)
+	bh=6a6mDkZdZ+OBlzajcYcMQbQWF9p+PLV7Ah7P0dvJklc=;
+	b=GQIlrVZ2TK2Rh0A1ilD5HVA8yknucAhH67lTSe6r48BWk3EDCcBlSkzlbr6qFvR03KaIfWqvE
+	zvQiPmt0FDevX4I+nFoCFyz+bGAkEc3V7z6DKm1cOrX+XBvoZSd6QN/NxywOTp3aBlb867A9zaW
+	SmlycWbjr+Gfuv7/0K4wGYE=
+Received: from mail.maildlp.com (unknown [172.19.162.197])
+	by canpmsgout03.his.huawei.com (SkyGuard) with ESMTPS id 4gs8GL65XfzpSvY;
+	Fri,  3 Jul 2026 17:53:46 +0800 (CST)
 Received: from dggpemf500011.china.huawei.com (unknown [7.185.36.131])
-	by mail.maildlp.com (Postfix) with ESMTPS id A78AA2012A;
-	Fri,  3 Jul 2026 18:02:14 +0800 (CST)
+	by mail.maildlp.com (Postfix) with ESMTPS id 4167F40579;
+	Fri,  3 Jul 2026 18:02:18 +0800 (CST)
 Received: from huawei.com (10.90.53.73) by dggpemf500011.china.huawei.com
  (7.185.36.131) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Fri, 3 Jul
- 2026 18:02:10 +0800
+ 2026 18:02:14 +0800
 From: Jinjie Ruan <ruanjinjie@huawei.com>
 To: <catalin.marinas@arm.com>, <will@kernel.org>, <corbet@lwn.net>,
 	<skhan@linuxfoundation.org>, <maz@kernel.org>, <ardb@kernel.org>,
@@ -77,10 +78,12 @@ To: <catalin.marinas@arm.com>, <will@kernel.org>, <corbet@lwn.net>,
 	<linux-arm-kernel@lists.infradead.org>, <linux-doc@vger.kernel.org>,
 	<linux-kernel@vger.kernel.org>, <linux-efi@vger.kernel.org>,
 	<kvmarm@lists.linux.dev>
-Subject: [PATCH 00/17] arm64: Support FEAT_NMI and Rework Exception Masking
-Date: Fri, 3 Jul 2026 18:01:18 +0800
-Message-ID: <20260703100135.2512312-1-ruanjinjie@huawei.com>
+Subject: [PATCH 01/17] arm64: Move DAIF macros to ptrace.h and use them centrally
+Date: Fri, 3 Jul 2026 18:01:19 +0800
+Message-ID: <20260703100135.2512312-2-ruanjinjie@huawei.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260703100135.2512312-1-ruanjinjie@huawei.com>
+References: <20260703100135.2512312-1-ruanjinjie@huawei.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -100,13 +103,13 @@ X-Spamd-Result: default: False [-6.16 / 15.00];
 	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
 	R_MISSING_CHARSET(0.50)[];
 	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94770-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-94769-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS(0.00)[m:catalin.marinas@arm.com,m:will@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:maz@kernel.org,m:ardb@kernel.org,m:ilias.apalodimas@linaro.org,m:oupton@kernel.org,m:joey.gouly@arm.com,m:seiden@linux.ibm.com,m:suzuki.poulose@arm.com,m:yuzenghui@huawei.com,m:oleg@redhat.com,m:mark.rutland@arm.com,m:lpieralisi@kernel.org,m:tglx@kernel.org,m:ada.coupriediaz@arm.com,m:anshuman.khandual@arm.com,m:ruanjinjie@huawei.com,m:ebiggers@kernel.org,m:broonie@kernel.org,m:mrigendra.chaubey@gmail.com,m:baohua@kernel.org,m:lucaswei@google.com,m:james.morse@arm.com,m:zengheng4@huawei.com,m:thuth@redhat.com,m:yang@os.amperecomputing.com,m:leo.bras@arm.com,m:Sascha.Bischoff@arm.com,m:james.clark@linaro.org,m:peterz@infradead.org,m:leitao@debian.org,m:ben.horgan@arm.com,m:punit.agrawal@oss.qualcomm.com,m:gshan@redhat.com,m:osama.abdelkader@gmail.com,m:fengchengwen@huawei.com,m:ryan.roberts@arm.com,m:yangyicong@hisilicon.com,m:kevin.brodsky@arm.com,m:kees@kernel.org,m:je
  son.gao@unisoc.com,m:zhaoyang.huang@unisoc.com,m:ryotkkr98@gmail.com,m:wsw9603@163.com,m:pasha.tatashin@soleen.com,m:jeremy.linton@arm.com,m:schuster.simon@siemens-energy.com,m:osandov@fb.com,m:arnd@arndb.de,m:zhangpengjie2@huawei.com,m:smostafa@google.com,m:vladimir.murzin@arm.com,m:tabba@google.com,m:vdonnefort@google.com,m:kaleshsingh@google.com,m:jic23@kernel.org,m:timothy.hayes@arm.com,m:alexandru.elisei@arm.com,m:zenghui.yu@linux.dev,m:david@kernel.org,m:akpm@linux-foundation.org,m:ljs@kernel.org,m:memxor@gmail.com,m:qperret@google.com,m:chaitanyas.prakash@arm.com,m:linux-arm-kernel@lists.infradead.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-efi@vger.kernel.org,m:kvmarm@lists.linux.dev,m:mrigendrachaubey@gmail.com,s:lists@lfdr.de];
 	FREEMAIL_TO(0.00)[arm.com,kernel.org,lwn.net,linuxfoundation.org,linaro.org,linux.ibm.com,huawei.com,redhat.com,gmail.com,google.com,os.amperecomputing.com,infradead.org,debian.org,oss.qualcomm.com,hisilicon.com,unisoc.com,163.com,soleen.com,siemens-energy.com,fb.com,arndb.de,linux.dev,linux-foundation.org,lists.infradead.org,vger.kernel.org,lists.linux.dev];
@@ -124,167 +127,256 @@ X-Spamd-Result: default: False [-6.16 / 15.00];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	MIME_TRACE(0.00)[0:+];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,huawei.com:from_mime,huawei.com:dkim,huawei.com:mid]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,huawei.com:from_mime,huawei.com:email,huawei.com:mid,huawei.com:dkim]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 4E452700F07
+X-Rspamd-Queue-Id: 405C5700EFC
 
-Hi all,
+Currently, various subsystems and low-level headers explicitly combine
+PSR_I_BIT, PSR_F_BIT, and other DAIF bits (such as D and A) to mask
+or unmask interrupts and exceptions. This hardcoded approach reduces
+code readability and increases the maintenance burden when managing
+processor contexts.
 
-This patch series implements support for the ARMv8.8-A/v9.3-A
-hardware NMI extension (FEAT_NMI), introducing the use of PSTATE.ALLINT
-to manage superpriority interrupts on arm64.
+So move the definitions of DAIF_PROCCTX, DAIF_PROCCTX_NOIRQ, DAIF_ERRCTX,
+and DAIF_MASK from <asm/daifflags.h> to <asm/ptrace.h>. And clean this up
+by replacing explicit bitmask combinations with the unified
+macros defined in <asm/daifflags.h>. Specifically:
 
-Background and Current Status
------------------------------
+- Replace `PSR_I_BIT | PSR_F_BIT` with `DAIF_PROCCTX_NOIRQ` where
+  normal interrupts are disabled but NMIs/asynchronous errors can
+  still be taken.
 
-The hardware ecosystem is already mature and fully ready for FEAT_NMI:
+- Replace the full explicit DAIF bit mask with `DAIF_MASK`.
 
-- Production Hardware: Huawei's Kunpeng servers (such as the HIP12 based
-  platforms) already feature native hardware support for FEAT_NMI.
+This unifies DAIF flag manipulation across kvm, cpuidle, daifflags, and
+efi subsystems, making the code more readable.
 
-- Emulation: QEMU has integrated robust FEAT_NMI emulation[1] support
-  since 2024.
+Signed-off-by: Jinjie Ruan <ruanjinjie@huawei.com>
+---
+ arch/arm64/include/asm/cpuidle.h   |  3 ++-
+ arch/arm64/include/asm/daifflags.h | 12 +++---------
+ arch/arm64/include/asm/efi.h       |  2 +-
+ arch/arm64/include/asm/ptrace.h    | 11 +++++++----
+ arch/arm64/kvm/emulate-nested.c    |  6 +++---
+ arch/arm64/kvm/hyp/nvhe/host.S     |  4 ++--
+ arch/arm64/kvm/hyp/nvhe/hyp-init.S |  3 ++-
+ arch/arm64/kvm/hyp/nvhe/hyp-main.c |  4 ++--
+ arch/arm64/kvm/reset.c             |  6 ++----
+ 9 files changed, 24 insertions(+), 27 deletions(-)
 
-Despite the hardware readiness, upstream support for FEAT_NMI has been
-delayed. Previous patch[2] attempts tried to bundle ALLINT management
-directly into the existing DAIF abstraction layers. As Mark Rutland
-pointed out[3], pretending ALLINT or pseudo-NMI (GIC PMR) is part of
-DAIF creates convoluted, unmaintainable hacks that frequently fail to
-handle complex edge cases correctly (such as state escape during
-context switching).
-
-Reworking Exception Masking (Mark's Feedback)
----------------------------------------------
-
-Following Mark Rutland's strong recommendation ("We must clean up
-the existing approach before we add the real NMI support"), this series
-does not simply stack FEAT_NMI on top of the old framework. Instead, it
-completely reworks how the arm64 kernel manages abstract and logical
-exception masks.
-
-Per Mark's guidelines, this series achieves the following architectural
-improvements:
-
-1. Entry/Exit Specific Helpers (a):
-
-   Introduces abstract exception mask helpers specifically for exception
-   boundaries. They handle unified unmask-at-entry and mask-at-exit
-   behaviors. This decouples the entry/exit paths from raw DAIF
-   manipulation. In this series, these helpers are first refactored to
-   manage DAIF + PMR cleanly, preparing the ground before any FEAT_NMI
-   code is introduced.
-
-2. Logical Exception Mask Separation (b):
-
-   Introduces a decoupled logical mask tracking mechanism that treats DAIF,
-   PMR, and ALLINT as separate, distinct elements. This enables accurate
-   irqflag tracking and debug assertions to save, restore, and validate all
-   elements without forcing them to fake or pollute a traditional DAIF
-   layout.
-
-Production Bug Fixes & Integration
------------------------------------
-
-On top of this solid architectural foundation, this series adds the actual
-support for FEAT_NMI (ALLINT management). Crucially, during baisc testing
-and validation on production Kunpeng (HIP12) servers, we identified and
-resolved several critical bugs.
-
-The series is structured as follows:
-
-- Patches 1-5: Clean up and rework the existing DAIF/PMR masking into
-  separate logical exception helpers (Pre-requisite refactoring).
-
-- Patches 6-17: Add FEAT_NMI support for ARM64, including specific
-  stability fixes found on Kunpeng hardware and QEmu.
-
-Any feedback, testing, or review, especially regarding the exception
-masking refactoring, is highly appreciated.
-
-[1]: https://lore.kernel.org/all/20240407081733.3231820-1-ruanjinjie@huawei.com/
-[2]: https://lore.kernel.org/linux-arm-kernel/20221112151708.175147-1-broonie@kernel.org/
-[3]: https://lore.kernel.org/linux-arm-kernel/Y5c9SLeJacLYHmP7@FVFF77S0Q05N/
-
-Jinjie Ruan (5):
-  arm64: Move DAIF macros to ptrace.h and use them centrally
-  arm64: Rework exception masking into abstract logical mask
-  arm64: entry: arm64: entry: Move DAIF masking for EL1 exit to C code
-  arm64: entry: Add entry-specific helpers
-  arm64: Introduce helpers for restoring standard exception masks
-
-Lorenzo Pieralisi (1):
-  irqchip/gic-v3: Implement FEAT_GICv3_NMI support
-
-Mark Brown (11):
-  arm64/booting: Document boot requirements for FEAT_NMI
-  arm64/sysreg: Add definitions for immediate versions of MSR ALLINT
-  arm64/hyp-stub: Enable access to ALLINT
-  arm64/idreg: Add an override for FEAT_NMI
-  arm64/cpufeature: Detect PE support for FEAT_NMI
-  KVM: arm64: Hide FEAT_NMI from guests
-  arm64/nmi: Manage masking for superpriority interrupts along with DAIF
-  arm64/entry: Don't call preempt_schedule_irq() with NMIs masked
-  arm64/irq: Document handling of FEAT_NMI in irqflags.h
-  arm64/nmi: Add handling of superpriority interrupts as NMIs
-  arm64/nmi: Add Kconfig for NMI
-
- Documentation/arch/arm64/booting.rst     |   6 +
- arch/arm64/Kconfig                       |  17 ++
- arch/arm64/include/asm/arch_gicv3.h      |   7 +-
- arch/arm64/include/asm/assembler.h       |  17 +-
- arch/arm64/include/asm/cpufeature.h      |   5 +
- arch/arm64/include/asm/cpuidle.h         |  30 ++-
- arch/arm64/include/asm/daifflags.h       | 144 --------------
- arch/arm64/include/asm/efi.h             |  22 ++-
- arch/arm64/include/asm/el2_setup.h       |  13 ++
- arch/arm64/include/asm/entry-common.h    |  11 +-
- arch/arm64/include/asm/exception_masks.h | 232 +++++++++++++++++++++++
- arch/arm64/include/asm/irq.h             |   2 +
- arch/arm64/include/asm/irqflags.h        |  10 +
- arch/arm64/include/asm/kvm_host.h        |   2 +-
- arch/arm64/include/asm/mmu_context.h     |   2 +-
- arch/arm64/include/asm/nmi.h             |  23 +++
- arch/arm64/include/asm/ptrace.h          |  11 +-
- arch/arm64/include/asm/sysreg.h          |   2 +
- arch/arm64/include/uapi/asm/ptrace.h     |   1 +
- arch/arm64/kernel/acpi.c                 |  14 +-
- arch/arm64/kernel/cpufeature.c           |  58 +++++-
- arch/arm64/kernel/debug-monitors.c       |   9 +-
- arch/arm64/kernel/entry-common.c         | 167 +++++++++++-----
- arch/arm64/kernel/entry.S                |   4 -
- arch/arm64/kernel/hibernate.c            |  10 +-
- arch/arm64/kernel/idle.c                 |   7 +-
- arch/arm64/kernel/irq.c                  |  36 +++-
- arch/arm64/kernel/machine_kexec.c        |   4 +-
- arch/arm64/kernel/pi/idreg-override.c    |   1 +
- arch/arm64/kernel/probes/kprobes.c       |   9 +-
- arch/arm64/kernel/process.c              |   7 +-
- arch/arm64/kernel/setup.c                |   4 +-
- arch/arm64/kernel/signal.c               |   2 +-
- arch/arm64/kernel/smp.c                  |  22 +--
- arch/arm64/kernel/suspend.c              |  15 +-
- arch/arm64/kernel/traps.c                |   2 +-
- arch/arm64/kvm/emulate-nested.c          |   6 +-
- arch/arm64/kvm/hyp/include/hyp/switch.h  |   6 +
- arch/arm64/kvm/hyp/nvhe/host.S           |   4 +-
- arch/arm64/kvm/hyp/nvhe/hyp-init.S       |   3 +-
- arch/arm64/kvm/hyp/nvhe/hyp-main.c       |   4 +-
- arch/arm64/kvm/hyp/vgic-v3-sr.c          |   6 +-
- arch/arm64/kvm/hyp/vhe/switch.c          |   6 +-
- arch/arm64/kvm/reset.c                   |   6 +-
- arch/arm64/mm/fault.c                    |   2 +-
- arch/arm64/mm/mmu.c                      |   6 +-
- arch/arm64/tools/cpucaps                 |   2 +
- drivers/firmware/psci/psci.c             |   7 +-
- drivers/irqchip/irq-gic-v3.c             | 152 +++++++++++++--
- include/linux/irqchip/arm-gic-v3.h       |   4 +
- 50 files changed, 822 insertions(+), 320 deletions(-)
- delete mode 100644 arch/arm64/include/asm/daifflags.h
- create mode 100644 arch/arm64/include/asm/exception_masks.h
- create mode 100644 arch/arm64/include/asm/nmi.h
-
+diff --git a/arch/arm64/include/asm/cpuidle.h b/arch/arm64/include/asm/cpuidle.h
+index 2047713e097d..64ddb533d3ec 100644
+--- a/arch/arm64/include/asm/cpuidle.h
++++ b/arch/arm64/include/asm/cpuidle.h
+@@ -6,6 +6,7 @@
+ 
+ #ifdef CONFIG_ARM64_PSEUDO_NMI
+ #include <asm/arch_gicv3.h>
++#include <asm/ptrace.h>
+ 
+ struct arm_cpuidle_irq_context {
+ 	unsigned long pmr;
+@@ -17,7 +18,7 @@ struct arm_cpuidle_irq_context {
+ 		struct arm_cpuidle_irq_context *c = __c;		\
+ 		if (system_uses_irq_prio_masking()) {			\
+ 			c->daif_bits = read_sysreg(daif);		\
+-			write_sysreg(c->daif_bits | PSR_I_BIT | PSR_F_BIT, \
++			write_sysreg(c->daif_bits | DAIF_PROCCTX_NOIRQ, \
+ 				     daif);				\
+ 			c->pmr = gic_read_pmr();			\
+ 			gic_write_pmr(GIC_PRIO_IRQON | GIC_PRIO_PSR_I_SET); \
+diff --git a/arch/arm64/include/asm/daifflags.h b/arch/arm64/include/asm/daifflags.h
+index 795b35128467..3a4b63a948ac 100644
+--- a/arch/arm64/include/asm/daifflags.h
++++ b/arch/arm64/include/asm/daifflags.h
+@@ -12,12 +12,6 @@
+ #include <asm/cpufeature.h>
+ #include <asm/ptrace.h>
+ 
+-#define DAIF_PROCCTX		0
+-#define DAIF_PROCCTX_NOIRQ	(PSR_I_BIT | PSR_F_BIT)
+-#define DAIF_ERRCTX		(PSR_A_BIT | PSR_I_BIT | PSR_F_BIT)
+-#define DAIF_MASK		(PSR_D_BIT | PSR_A_BIT | PSR_I_BIT | PSR_F_BIT)
+-
+-
+ /* mask/save/unmask/restore all exceptions, including interrupts. */
+ static __always_inline void local_daif_mask(void)
+ {
+@@ -47,7 +41,7 @@ static __always_inline unsigned long local_daif_save_flags(void)
+ 	if (system_uses_irq_prio_masking()) {
+ 		/* If IRQs are masked with PMR, reflect it in the flags */
+ 		if (read_sysreg_s(SYS_ICC_PMR_EL1) != GIC_PRIO_IRQON)
+-			flags |= PSR_I_BIT | PSR_F_BIT;
++			flags |= DAIF_PROCCTX_NOIRQ;
+ 	}
+ 
+ 	return flags;
+@@ -69,7 +63,7 @@ static __always_inline void local_daif_restore(unsigned long flags)
+ 	bool irq_disabled = flags & PSR_I_BIT;
+ 
+ 	WARN_ON(system_has_prio_mask_debugging() &&
+-		(read_sysreg(daif) & (PSR_I_BIT | PSR_F_BIT)) != (PSR_I_BIT | PSR_F_BIT));
++		(read_sysreg(daif) & DAIF_PROCCTX_NOIRQ) != DAIF_PROCCTX_NOIRQ);
+ 
+ 	if (!irq_disabled) {
+ 		trace_hardirqs_on();
+@@ -86,7 +80,7 @@ static __always_inline void local_daif_restore(unsigned long flags)
+ 			 * If interrupts are disabled but we can take
+ 			 * asynchronous errors, we can take NMIs
+ 			 */
+-			flags &= ~(PSR_I_BIT | PSR_F_BIT);
++			flags &= ~DAIF_PROCCTX_NOIRQ;
+ 			pmr = GIC_PRIO_IRQOFF;
+ 		} else {
+ 			pmr = GIC_PRIO_IRQON | GIC_PRIO_PSR_I_SET;
+diff --git a/arch/arm64/include/asm/efi.h b/arch/arm64/include/asm/efi.h
+index e8a9783235cb..ae2a24868ee7 100644
+--- a/arch/arm64/include/asm/efi.h
++++ b/arch/arm64/include/asm/efi.h
+@@ -48,7 +48,7 @@ void arch_efi_call_virt_teardown(void);
+ 	(efi_rt_stack_top != NULL &&					\
+ 	 on_task_stack(current, READ_ONCE(efi_rt_stack_top[-1]), 1))
+ 
+-#define ARCH_EFI_IRQ_FLAGS_MASK (PSR_D_BIT | PSR_A_BIT | PSR_I_BIT | PSR_F_BIT)
++#define ARCH_EFI_IRQ_FLAGS_MASK (DAIF_MASK)
+ 
+ /*
+  * Even when Linux uses IRQ priorities for IRQ disabling, EFI does not.
+diff --git a/arch/arm64/include/asm/ptrace.h b/arch/arm64/include/asm/ptrace.h
+index 39582511ad72..f33f75881c9a 100644
+--- a/arch/arm64/include/asm/ptrace.h
++++ b/arch/arm64/include/asm/ptrace.h
+@@ -12,14 +12,17 @@
+ 
+ #include <uapi/asm/ptrace.h>
+ 
++#define DAIF_PROCCTX		0
++#define DAIF_PROCCTX_NOIRQ	(PSR_I_BIT | PSR_F_BIT)
++#define DAIF_ERRCTX		(PSR_A_BIT | PSR_I_BIT | PSR_F_BIT)
++#define DAIF_MASK		(PSR_D_BIT | PSR_A_BIT | PSR_I_BIT | PSR_F_BIT)
++
+ /* Current Exception Level values, as contained in CurrentEL */
+ #define CurrentEL_EL1		(1 << 2)
+ #define CurrentEL_EL2		(2 << 2)
+ 
+-#define INIT_PSTATE_EL1 \
+-	(PSR_D_BIT | PSR_A_BIT | PSR_I_BIT | PSR_F_BIT | PSR_MODE_EL1h)
+-#define INIT_PSTATE_EL2 \
+-	(PSR_D_BIT | PSR_A_BIT | PSR_I_BIT | PSR_F_BIT | PSR_MODE_EL2h)
++#define INIT_PSTATE_EL1	(DAIF_MASK | PSR_MODE_EL1h)
++#define INIT_PSTATE_EL2	(DAIF_MASK | PSR_MODE_EL2h)
+ 
+ #include <linux/irqchip/arm-gic-v3-prio.h>
+ 
+diff --git a/arch/arm64/kvm/emulate-nested.c b/arch/arm64/kvm/emulate-nested.c
+index e688bc5139c1..356b67aa8dc0 100644
+--- a/arch/arm64/kvm/emulate-nested.c
++++ b/arch/arm64/kvm/emulate-nested.c
+@@ -9,6 +9,7 @@
+ 
+ #include <asm/kvm_emulate.h>
+ #include <asm/kvm_nested.h>
++#include <asm/ptrace.h>
+ 
+ #include "hyp/include/hyp/adjust_pc.h"
+ 
+@@ -2754,9 +2755,8 @@ static u64 kvm_check_illegal_exception_return(struct kvm_vcpu *vcpu, u64 spsr)
+ 		 */
+ 		spsr = *vcpu_cpsr(vcpu);
+ 
+-		spsr &= (PSR_D_BIT | PSR_A_BIT | PSR_I_BIT | PSR_F_BIT |
+-			 PSR_N_BIT | PSR_Z_BIT | PSR_C_BIT | PSR_V_BIT |
+-			 PSR_MODE_MASK | PSR_MODE32_BIT);
++		spsr &= (DAIF_MASK | PSR_N_BIT | PSR_Z_BIT | PSR_C_BIT |
++			 PSR_V_BIT | PSR_MODE_MASK | PSR_MODE32_BIT);
+ 		spsr |= PSR_IL_BIT;
+ 	}
+ 
+diff --git a/arch/arm64/kvm/hyp/nvhe/host.S b/arch/arm64/kvm/hyp/nvhe/host.S
+index 9393fe3ea6a1..cbe2a616c726 100644
+--- a/arch/arm64/kvm/hyp/nvhe/host.S
++++ b/arch/arm64/kvm/hyp/nvhe/host.S
+@@ -11,6 +11,7 @@
+ #include <asm/kvm_asm.h>
+ #include <asm/kvm_mmu.h>
+ #include <asm/kvm_ptrauth.h>
++#include <asm/ptrace.h>
+ 
+ 	.text
+ 
+@@ -111,8 +112,7 @@ SYM_FUNC_END(__host_enter)
+  */
+ SYM_FUNC_START(__hyp_do_panic)
+ 	/* Prepare and exit to the host's panic function. */
+-	mov	lr, #(PSR_F_BIT | PSR_I_BIT | PSR_A_BIT | PSR_D_BIT |\
+-		      PSR_MODE_EL1h)
++	mov	lr, #(DAIF_MASK | PSR_MODE_EL1h)
+ 	msr	spsr_el2, lr
+ 	adr_l	lr, nvhe_hyp_panic_handler
+ 	hyp_kimg_va lr, x6
+diff --git a/arch/arm64/kvm/hyp/nvhe/hyp-init.S b/arch/arm64/kvm/hyp/nvhe/hyp-init.S
+index 89cb553be1e5..26ea02e7f5fd 100644
+--- a/arch/arm64/kvm/hyp/nvhe/hyp-init.S
++++ b/arch/arm64/kvm/hyp/nvhe/hyp-init.S
+@@ -15,6 +15,7 @@
+ #include <asm/kvm_asm.h>
+ #include <asm/kvm_mmu.h>
+ #include <asm/pgtable-hwdef.h>
++#include <asm/ptrace.h>
+ #include <asm/sysreg.h>
+ #include <asm/virt.h>
+ 
+@@ -224,7 +225,7 @@ SYM_CODE_START(__kvm_handle_stub_hvc)
+ 
+ 	/* This is where we're about to jump, staying at EL2 */
+ 	msr	elr_el2, x1
+-	mov	x0, #(PSR_F_BIT | PSR_I_BIT | PSR_A_BIT | PSR_D_BIT | PSR_MODE_EL2h)
++	mov	x0, #(DAIF_MASK | PSR_MODE_EL2h)
+ 	msr	spsr_el2, x0
+ 
+ 	/* Shuffle the arguments, and don't come back */
+diff --git a/arch/arm64/kvm/hyp/nvhe/hyp-main.c b/arch/arm64/kvm/hyp/nvhe/hyp-main.c
+index d3c69de698f4..69dfbbe109ad 100644
+--- a/arch/arm64/kvm/hyp/nvhe/hyp-main.c
++++ b/arch/arm64/kvm/hyp/nvhe/hyp-main.c
+@@ -8,6 +8,7 @@
+ #include <hyp/switch.h>
+ 
+ #include <asm/pgtable-types.h>
++#include <asm/ptrace.h>
+ #include <asm/kvm_asm.h>
+ #include <asm/kvm_emulate.h>
+ #include <asm/kvm_host.h>
+@@ -859,8 +860,7 @@ void inject_host_exception(u64 esr)
+ 	}
+ 
+ 	spsr_el2 &= spsr_mask;
+-	spsr_el2 |= PSR_D_BIT | PSR_A_BIT | PSR_I_BIT | PSR_F_BIT |
+-		    PSR_MODE_EL1h;
++	spsr_el2 |= DAIF_MASK | PSR_MODE_EL1h;
+ 
+ 	sctlr = read_sysreg_el1(SYS_SCTLR);
+ 	if (!(sctlr & SCTLR_EL1_SPAN))
+diff --git a/arch/arm64/kvm/reset.c b/arch/arm64/kvm/reset.c
+index b963fd975aac..0e1167eee5c0 100644
+--- a/arch/arm64/kvm/reset.c
++++ b/arch/arm64/kvm/reset.c
+@@ -37,11 +37,9 @@ unsigned int __ro_after_init kvm_host_sve_max_vl;
+ /*
+  * ARMv8 Reset Values
+  */
+-#define VCPU_RESET_PSTATE_EL1	(PSR_MODE_EL1h | PSR_A_BIT | PSR_I_BIT | \
+-				 PSR_F_BIT | PSR_D_BIT)
++#define VCPU_RESET_PSTATE_EL1	(PSR_MODE_EL1h | DAIF_MASK)
+ 
+-#define VCPU_RESET_PSTATE_EL2	(PSR_MODE_EL2h | PSR_A_BIT | PSR_I_BIT | \
+-				 PSR_F_BIT | PSR_D_BIT)
++#define VCPU_RESET_PSTATE_EL2	(PSR_MODE_EL2h | DAIF_MASK)
+ 
+ #define VCPU_RESET_PSTATE_SVC	(PSR_AA32_MODE_SVC | PSR_AA32_A_BIT | \
+ 				 PSR_AA32_I_BIT | PSR_AA32_F_BIT)
 -- 
 2.34.1
 
