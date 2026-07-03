@@ -1,55 +1,55 @@
-Return-Path: <linux-doc+bounces-94932-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94915-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id +d0mF4ApSGqcnAAAu9opvQ
-	(envelope-from <linux-doc+bounces-94932-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 23:28:32 +0200
+	id hXI6LGkoSGpLnAAAu9opvQ
+	(envelope-from <linux-doc+bounces-94915-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 23:23:53 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id E2CB3705D3A
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 23:28:31 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 483CD705C68
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 23:23:53 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=infradead.org header.s=desiato.20200630 header.b=SkZEUnib;
+	dkim=pass header.d=infradead.org header.s=casper.20170209 header.b=RUX0gU2B;
 	dmarc=pass (policy=none) header.from=infradead.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94932-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-94932-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94915-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-94915-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 688ED304A16F
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 21:26:40 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 0363C304E672
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 21:22:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A34CA3793BD;
-	Fri,  3 Jul 2026 21:24:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 265383624DE;
+	Fri,  3 Jul 2026 21:22:08 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from desiato.infradead.org (desiato.infradead.org [90.155.92.199])
+Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D1304358387;
-	Fri,  3 Jul 2026 21:24:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB3B8321F5E;
+	Fri,  3 Jul 2026 21:22:05 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783113850; cv=none; b=B7xrXlxqBmFhepAnrtOoodtkQRZTRp1ZjGbj+jciynYIwdS8NpzCAPk3hxsh1PyutqclppOaTmXW8QXS+ce/+BfM4VbU4enfFwE4aShnCJFmF2cUwnHiTOMwOPUkpoLlLSnlWCbV+/psjVD5/hDWN5M2QZNYUDGhrJJ7h7Dhrjs=
+	t=1783113728; cv=none; b=Ndf+w42KTVScrL+mhK1zkWPLFzvcqbfHYRgVjWfwa/wAzzOGIvrnorA3BgdaPoypDZpUsnOXP5YTNkYJ3CBkejngl0qXLs96mM2IHpwrkC5Alz8y15upPL1z09UupRuaUruLZ2Ilnz8IvsfmvR+QnxqNi1rCDRpZ8bGIF5tlnnw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783113850; c=relaxed/simple;
-	bh=1Og+6Zf9EcRP8aeOfTZN5pyqZsB/xK0m5YEUJutSVsQ=;
+	s=arc-20240116; t=1783113728; c=relaxed/simple;
+	bh=GPQ4RVhn2z0gC5h+3i62w3f/Gxsc358KVYQk9miUThk=;
 	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Dw9VrxdC+fw9c4My7XwDTsShs7XYO/1AyiB7/Cq77WET9oo/jHosLj5wyBvD//mZ9iDJiLPLX4CVuZoyBT2A1ZUhhljfyLG1dcG2ZuXZEXdY+QKU0TZa5A0OsqedhAgkW5odxWkhTTDqeEyE6RMQt/sSkmXjTACg8bbY7JvZQAs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=desiato.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=SkZEUnib; arc=none smtp.client-ip=90.155.92.199
+	 MIME-Version; b=llsUl7SHjAIK6EHC92HgjtfyBIfnI3hkDjkCEeKpXgd8e6k8Tav+v4OBmLPkEWW4D3X1L3UjYSQD5cx/OmbDoVWUkpY8RWmUDhZQwp7MBECWGggkBIawi6eXsawO1op+qShrqn/pgOyVgwGbJORlfDj4YVlSlvnb4JeJbKPVH1I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=casper.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=RUX0gU2B; arc=none smtp.client-ip=90.155.50.34
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
 	Cc:Content-Type:Content-ID:Content-Description;
-	bh=shVwq4KBAoPWsH6/R3iiBMGtywtPoLEemfeJh0CtfZs=; b=SkZEUnibqnamMNvwwjyJzispV2
-	1MAtJAGPw1iTZJIRDZxFsdCIlehr1AJH72HcFSyB3jKCKJfw0Fd90BGAlMMMQdhA236xcz+KnrZt5
-	J6i/f9vm7aYd6lYLWiOLY+LqdIMG1Ummf9nhQjx/g01cPSSLh5/CKmfSk5kPOmdKGFOhCTL26KmEI
-	ziGIU04PWq+VUBYLPAmIU9CwFFR6ay7jQAr64KUXu8sagOP2LGtLZxu7PLuu1f+oiXbDPU+92cEal
-	OqD64ZglNnmvPA+hnXOyUgFGpeEPFJtjTQHmX1QHmakytiLhcqBRD3DUGTLbIfb+3qld2oG2YjZa1
-	kKLVzvmg==;
+	bh=aJbyYvbMlra4ob/lrPKW+13k0D2GomXNtoUlefAARyI=; b=RUX0gU2BmZAS8Mc7MvtqcjpKaA
+	4X2GDo7Scxh/FJ1zfZj/ZZUyMDJLZdQtdY/yzpdVZO3bM/BQQLjwYOuR7nQJiiOLfJN8o9bXd0KEm
+	l746azezEjoQE2RTg+hpkWKNpt6Vb5ogWz+nAFg5mQQ0InOMCWqd7vLGDc76I66RSvfzFQY+yfOne
+	tJbmYqYf4y8NcSnh+ymr0gQ0qUnSjLlbP7a9/JcR68N/4qX/IVF7uUKlxqNM4lp3vkFKExekknJt9
+	4Ipax9FNfOZuryGMT0mvzgT9ncQ6Of+VmYZ1R2nRjr/PYhl4mTt99MskS2b0Erewa9tJ3yQ+Kw6dt
+	ciUtLalA==;
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
-	by desiato.infradead.org with esmtpsa (Exim 4.99.2 #2 (Red Hat Linux))
-	id 1wflKd-000000059O7-0xa8;
-	Fri, 03 Jul 2026 21:23:38 +0000
+	by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+	id 1wflKW-0000000AsYA-412E;
+	Fri, 03 Jul 2026 21:21:49 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.2 #2 (Red Hat Linux))
-	id 1wflKW-00000001RP0-3AEv;
+	id 1wflKW-00000001RP5-3Puq;
 	Fri, 03 Jul 2026 22:21:48 +0100
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
@@ -79,9 +79,9 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v6 18/36] KVM: x86: Remove implicit rdtsc() from kvm_compute_l1_tsc_offset()
-Date: Fri,  3 Jul 2026 22:17:57 +0100
-Message-ID: <20260703212145.343527-19-dwmw2@infradead.org>
+Subject: [PATCH v6 19/36] KVM: x86: Improve synchronization in kvm_synchronize_tsc()
+Date: Fri,  3 Jul 2026 22:17:58 +0100
+Message-ID: <20260703212145.343527-20-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260703212145.343527-1-dwmw2@infradead.org>
 References: <20260703212145.343527-1-dwmw2@infradead.org>
@@ -93,19 +93,19 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=desiato.20200630];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=casper.20170209];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-94932-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-94915-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS(0.00)[m:pbonzini@redhat.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:vkuznets@redhat.com,m:jgross@suse.com,m:boris.ostrovsky@oracle.com,m:dwmw2@infradead.org,m:paul@xen.org,m:jic23@kernel.org,m:Sascha.Bischoff@arm.com,m:maz@kernel.org,m:joey.gouly@arm.com,m:jalliste@amazon.com,m:dongli.zhang@oracle.com,m:joe.jin@oracle.com,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:xen-devel@lists.xenproject.org,m:linux-kselftest@vger.kernel.org,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -114,7 +114,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
 	DKIM_TRACE(0.00)[infradead.org:+];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
@@ -126,85 +126,104 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ALIAS_RESOLVED(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:from_mime,infradead.org:dkim,infradead.org:mid,vger.kernel.org:from_smtp,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,amazon.co.uk:email,xen.org:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[xen.org:email,amazon.co.uk:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp,infradead.org:from_mime,infradead.org:dkim,infradead.org:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: E2CB3705D3A
+X-Rspamd-Queue-Id: 483CD705C68
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Let the callers pass the host TSC value in as an explicit parameter.
-This leaves some fairly obviously stupid code, which is using this
-function to compare the guest TSC at some *other* time, with the
-newly-minted TSC value from rdtsc(). Unless it's being used to measure
-*elapsed* time, that isn't very sensible.
+When synchronizing to an existing TSC (either by explicitly writing
+zero, or the legacy hack where the TSC is written within one second's
+worth of the previously written TSC), the last_tsc_write and
+last_tsc_nsec values were being misrecorded by __kvm_synchronize_tsc().
+The *unsynchronized* value of the TSC (perhaps even zero) was being
+recorded, along with the current time at which kvm_synchronize_tsc()
+was called. This could cause *subsequent* writes to fail to synchronize
+correctly.
 
-In this case, "obviously stupid" is an improvement over being
-non-obviously so.
+Fix that by resetting {data, ns} to the previous values before passing
+them to __kvm_synchronize_tsc() when synchronization is detected.
+Except in the case where the TSC is unstable and *has* to be synthesised
+from the host clock, in which case attempt to create a nsec/tsc pair
+which is on the correct line.
 
-No functional change intended.
+Furthermore, there were *three* different TSC reads used for calculating
+the "current" time, all slightly different from each other. Fix that by
+using kvm_get_time_and_clockread() where possible and using the same
+host_tsc value in all cases.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- arch/x86/kvm/x86.c | 14 ++++++++------
- 1 file changed, 8 insertions(+), 6 deletions(-)
+ arch/x86/kvm/x86.c | 35 ++++++++++++++++++++++++++---------
+ 1 file changed, 26 insertions(+), 9 deletions(-)
 
 diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index 0087ddd08e83..0fa2050f4bd4 100644
+index 0fa2050f4bd4..ffe5f98a5688 100644
 --- a/arch/x86/kvm/x86.c
 +++ b/arch/x86/kvm/x86.c
-@@ -2693,11 +2693,12 @@ u64 kvm_scale_tsc(u64 tsc, u64 ratio)
- 	return _tsc;
- }
+@@ -203,6 +203,9 @@ module_param(mitigate_smt_rsb, bool, 0444);
+  * usermode, e.g. SYSCALL MSRs and TSC_AUX, can be deferred until the CPU
+  * returns to userspace, i.e. the kernel can run with the guest's value.
+  */
++#ifdef CONFIG_X86_64
++static bool kvm_get_time_and_clockread(s64 *kernel_ns, u64 *tsc_timestamp);
++#endif
+ #define KVM_MAX_NR_USER_RETURN_MSRS 16
  
--static u64 kvm_compute_l1_tsc_offset(struct kvm_vcpu *vcpu, u64 target_tsc)
-+static u64 kvm_compute_l1_tsc_offset(struct kvm_vcpu *vcpu, u64 host_tsc,
-+				     u64 target_tsc)
+ struct kvm_user_return_msrs {
+@@ -2854,14 +2857,23 @@ static void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *user_value)
  {
- 	u64 tsc;
- 
--	tsc = kvm_scale_tsc(rdtsc(), vcpu->arch.l1_tsc_scaling_ratio);
-+	tsc = kvm_scale_tsc(host_tsc, vcpu->arch.l1_tsc_scaling_ratio);
- 
- 	return target_tsc - tsc;
- }
-@@ -2859,7 +2860,7 @@ static void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *user_value)
+ 	u64 data = user_value ? *user_value : 0;
+ 	struct kvm *kvm = vcpu->kvm;
+-	u64 offset, ns, elapsed;
++	u64 offset, host_tsc, elapsed;
++	s64 ns;
+ 	unsigned long flags;
+ 	bool matched = false;
  	bool synchronizing = false;
  
  	raw_spin_lock_irqsave(&kvm->arch.tsc_write_lock, flags);
--	offset = kvm_compute_l1_tsc_offset(vcpu, data);
-+	offset = kvm_compute_l1_tsc_offset(vcpu, rdtsc(), data);
- 	ns = get_kvmclock_base_ns();
+-	offset = kvm_compute_l1_tsc_offset(vcpu, rdtsc(), data);
+-	ns = get_kvmclock_base_ns();
++
++#ifdef CONFIG_X86_64
++	if (!kvm_get_time_and_clockread(&ns, &host_tsc))
++#endif
++	{
++		host_tsc = rdtsc();
++		ns = get_kvmclock_base_ns();
++	}
++
++	offset = kvm_compute_l1_tsc_offset(vcpu, host_tsc, data);
  	elapsed = ns - kvm->arch.last_tsc_nsec;
  
-@@ -2908,7 +2909,7 @@ static void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *user_value)
- 		} else {
- 			u64 delta = nsec_to_cycles(vcpu, elapsed);
- 			data += delta;
--			offset = kvm_compute_l1_tsc_offset(vcpu, data);
-+			offset = kvm_compute_l1_tsc_offset(vcpu, rdtsc(), data);
- 		}
+ 	if (vcpu->arch.virtual_tsc_khz) {
+@@ -2904,13 +2916,18 @@ static void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *user_value)
+          */
+ 	if (synchronizing &&
+ 	    vcpu->arch.virtual_tsc_khz == kvm->arch.last_tsc_khz) {
+-		if (!kvm_check_tsc_unstable()) {
++		/*
++		 * If synchronizing, advance the reference point to "now"
++		 * so the matching window slides forward with each vCPU.
++		 */
++		u64 delta = nsec_to_cycles(vcpu, elapsed);
++
++		data = kvm->arch.cur_tsc_write + delta;
++
++		if (!kvm_check_tsc_unstable())
+ 			offset = kvm->arch.cur_tsc_offset;
+-		} else {
+-			u64 delta = nsec_to_cycles(vcpu, elapsed);
+-			data += delta;
+-			offset = kvm_compute_l1_tsc_offset(vcpu, rdtsc(), data);
+-		}
++		else
++			offset = kvm_compute_l1_tsc_offset(vcpu, host_tsc, data);
  		matched = true;
  	}
-@@ -4139,7 +4140,8 @@ int kvm_set_msr_common(struct kvm_vcpu *vcpu, struct msr_data *msr_info)
- 		if (msr_info->host_initiated) {
- 			kvm_synchronize_tsc(vcpu, &data);
- 		} else if (!vcpu->arch.guest_tsc_protected) {
--			u64 adj = kvm_compute_l1_tsc_offset(vcpu, data) - vcpu->arch.l1_tsc_offset;
-+			u64 adj = kvm_compute_l1_tsc_offset(vcpu, rdtsc(), data) -
-+				  vcpu->arch.l1_tsc_offset;
- 			adjust_tsc_offset_guest(vcpu, adj);
- 			vcpu->arch.ia32_tsc_adjust_msr += adj;
- 		}
-@@ -5263,7 +5265,7 @@ void kvm_arch_vcpu_load(struct kvm_vcpu *vcpu, int cpu)
- 			mark_tsc_unstable("KVM discovered backwards TSC");
  
- 		if (kvm_check_tsc_unstable()) {
--			u64 offset = kvm_compute_l1_tsc_offset(vcpu,
-+			u64 offset = kvm_compute_l1_tsc_offset(vcpu, rdtsc(),
- 						vcpu->arch.last_guest_tsc);
- 			kvm_vcpu_write_tsc_offset(vcpu, offset);
- 			if (!vcpu->arch.guest_tsc_protected)
 -- 
 2.54.0
 
