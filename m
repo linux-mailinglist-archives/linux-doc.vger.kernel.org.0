@@ -1,237 +1,291 @@
-Return-Path: <linux-doc+bounces-94767-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94770-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id EzDAFV2IR2oGaQAAu9opvQ
-	(envelope-from <linux-doc+bounces-94767-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 12:01:01 +0200
+	id acS4JOaIR2pFaQAAu9opvQ
+	(envelope-from <linux-doc+bounces-94770-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 12:03:18 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 794CD700E75
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 12:00:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E452700F07
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 12:03:18 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=ibm.com header.s=pp1 header.b=sNzsJBSJ;
-	dmarc=pass (policy=none) header.from=ibm.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94767-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94767-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=huawei.com header.s=dkim header.b=VTHrluJO;
+	dmarc=pass (policy=quarantine) header.from=huawei.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94770-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94770-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id D770B30000BE
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 10:00:50 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id AC6F83034228
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 10:02:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 645A93B71D2;
-	Fri,  3 Jul 2026 10:00:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1AD783B5820;
+	Fri,  3 Jul 2026 10:02:26 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
+Received: from canpmsgout02.his.huawei.com (canpmsgout02.his.huawei.com [113.46.200.217])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE6023B14AD;
-	Fri,  3 Jul 2026 10:00:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1B811358388;
+	Fri,  3 Jul 2026 10:02:22 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783072843; cv=none; b=FAQ/PmSlTecCMYeuN9aNgYZjU+nElnYYpKkuCwKNiLdro/KAcpwujxuCB4Hkf+GZGOSwvoO3q+AjUWMZcsX0WB1E4MvDxLAR3h5JQs55az2xcpDnw6XBoMlOLRvN+lzAtwYiai1lz9CGG4PC5Mwd9CnP43cuSLIZff3hDZdqKc8=
+	t=1783072945; cv=none; b=naTVsvxQEOGWAPHSffmV7Lm7CPag5vecbPqv2jUFWPLpRA1005YFUrMmokDRpXq30EOtxrB1yahT17OY92x5qpGNGLGhZ8V5mqnSPbcjtR8BoAEB7tJr94L2u3LrCVHFy1WO4N3uY5GlRt3tOc9+ReXvX2HZYdK7XJX36i6Vfq4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783072843; c=relaxed/simple;
-	bh=XkZRwCRa2XhLgna4NJMGvoHXqep1IUGIjBvB5bpJuls=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=HHrNUGF7EMkSPia7vZ1b1TWrBcumfIHM2BAU9lvgggZCToxgl/ES6pd1qZLVdpf8g233oEM9zq2/tcOvkiZ8Lyd2ianCiBZ4jfBBo06d/FWhv9G+5L1yxbSO2OrPhu+3znsTVB5aTH6vnQG2rnqm6vyRdnNc7RWhjCKe4t/blAA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=sNzsJBSJ; arc=none smtp.client-ip=148.163.158.5
-Received: from pps.filterd (m0360072.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6636JW2R1762888;
-	Fri, 3 Jul 2026 09:59:14 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=pp1; bh=XkZRwCRa2XhLgna4NJMGvoHXqep1IU
-	GIjBvB5bpJuls=; b=sNzsJBSJE0At5moOOpohmVjQzetUDhecbWJtU/m6Bze7zq
-	z+RrCESoaCZmvBe++NZ1sOGEfWnxfJFd31TdIHLW/TxZO1nxuCSC7zqBofLiGUt7
-	eY9t51b8vVsYwVu5zi2pHQUeRg0uooWAhwfH64a1V1CSxYVhEITXRkMoPZEwgKSI
-	3LVExr7ylz5KDKZQJyFauWLV26RwjqkUwgElPJxZqNL7sPGCYZ/QkjXnAHGLxz2o
-	AadgZh2Nx47mH+l9cfY2Puqix6XBXJPgRDm4gypdKviCzsIDlio9B6EBH2jOZ53r
-	LP9GtE8SPV4qoBaQhkyE3iSOH/EoHLMhgyTUpSpQ==
-Received: from ppma22.wdc07v.mail.ibm.com (5c.69.3da9.ip4.static.sl-reverse.com [169.61.105.92])
-	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4f26mk63uk-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 03 Jul 2026 09:59:13 +0000 (GMT)
-Received: from pps.filterd (ppma22.wdc07v.mail.ibm.com [127.0.0.1])
-	by ppma22.wdc07v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 6639na9h008970;
-	Fri, 3 Jul 2026 09:59:12 GMT
-Received: from smtprelay05.fra02v.mail.ibm.com ([9.218.2.225])
-	by ppma22.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4f2s7wgamb-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 03 Jul 2026 09:59:12 +0000 (GMT)
-Received: from smtpav03.fra02v.mail.ibm.com (smtpav03.fra02v.mail.ibm.com [10.20.54.102])
-	by smtprelay05.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 6639x8AG50135304
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Fri, 3 Jul 2026 09:59:08 GMT
-Received: from smtpav03.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id AB02320043;
-	Fri,  3 Jul 2026 09:59:08 +0000 (GMT)
-Received: from smtpav03.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 419EF20040;
-	Fri,  3 Jul 2026 09:59:08 +0000 (GMT)
-Received: from tuxmaker.linux.ibm.com (unknown [9.87.85.9])
-	by smtpav03.fra02v.mail.ibm.com (Postfix) with ESMTPS;
-	Fri,  3 Jul 2026 09:59:08 +0000 (GMT)
-From: Sven Schnelle <svens@linux.ibm.com>
-To: Thomas Gleixner <tglx@kernel.org>
-Cc: "H. Peter Anvin" <hpa@zytor.com>,
-        Michal =?utf-8?Q?Such=C3=A1nek?=
- <msuchanek@suse.de>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Shuah Khan <skhan@linuxfoundation.org>,
-        Huacai Chen
- <chenhuacai@kernel.org>, WANG Xuerui <kernel@xen0n.name>,
-        Madhavan
- Srinivasan <maddy@linux.ibm.com>,
-        Michael Ellerman <mpe@ellerman.id.au>,
-        Nicholas Piggin <npiggin@gmail.com>,
-        "Christophe Leroy (CS GROUP)"
- <chleroy@kernel.org>,
-        Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt
- <palmer@dabbelt.com>,
-        Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti
- <alex@ghiti.fr>,
-        Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik
- <gor@linux.ibm.com>,
-        Alexander Gordeev <agordeev@linux.ibm.com>,
-        Christian Borntraeger <borntraeger@linux.ibm.com>,
-        Andy Lutomirski
- <luto@kernel.org>, Ingo Molnar <mingo@redhat.com>,
-        Borislav Petkov
- <bp@alien8.de>,
-        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
-        Andrew Donnellan <andrew+kernel@donnellan.id.au>,
-        Mark
- Rutland <mark.rutland@arm.com>, Arnd Bergmann <arnd@arndb.de>,
-        Jiaxun
- Yang <jiaxun.yang@flygoat.com>,
-        Ryan Roberts <ryan.roberts@arm.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Mukesh Kumar Chaurasiya
- <mkchauras@linux.ibm.com>,
-        Shrikanth Hegde <sshegde@linux.ibm.com>, Zong
- Li <zong.li@sifive.com>,
-        Nam Cao <namcao@linutronix.de>, Deepak Gupta
- <debug@rivosinc.com>,
-        Lukas Gerlach <lukas.gerlach@cispa.de>,
-        Rui Qi
- <qirui.001@bytedance.com>, Kees Cook <kees@kernel.org>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        loongarch@lists.linux.dev, linuxppc-dev@lists.ozlabs.org,
-        linux-riscv@lists.infradead.org, linux-s390@vger.kernel.org
-Subject: Re: [RFC] entry: Untangle the return value of
- syscall_enter_from_user_mode from syscall NR
-In-Reply-To: <87ldbsmnie.ffs@fw13>
-References: <akVRcPsD_R_CE1qW@kunlun.suse.cz>
-	<BA7CD91D-C0E5-47A1-B49C-BC6AF6604182@zytor.com> <87h5mhnjsr.ffs@fw13>
-	<yt9dwlvca8rn.fsf@linux.ibm.com> <87ldbsmnie.ffs@fw13>
-Date: Fri, 03 Jul 2026 11:59:07 +0200
-Message-ID: <yt9d5x2w5r84.fsf@linux.ibm.com>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+	s=arc-20240116; t=1783072945; c=relaxed/simple;
+	bh=48mdkA37dTy8784W7L9yLGxdd9aNk5qQK+Ij+77ual4=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type; b=D6JThRWZetUJr6C1zr9ywb/wog8mmp5Gi37dYOghSWzA2Eugq7GybbFNacpniEvfFrRP3AgPJVj7ntqJVSotjBGl6AuFravEZfHsG747cYjik0SCdtZEsbbwaQo1+2cI7ijRdyeT4VHrZv17gxkTxeg9rHmpZoT58BjJ3/iMsas=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=VTHrluJO; arc=none smtp.client-ip=113.46.200.217
+dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
+	c=relaxed/relaxed; q=dns/txt;
+	h=From;
+	bh=+Be4tamqNPytL0DlmMhHstiAdEjMJ3KYct4tTEDAvpQ=;
+	b=VTHrluJOOle+Ae3JMHD/J98W7USvFa5ZhBV07q33gTWT38NDnRoeqx/whESEPj+t9PtnB7Nk1
+	LZTFTSeUF4sDuXS0W2YLq68pWgvr1SgBq7oCFHTMsFh8l7tsqguh4UaUVv5QnzofzdIxskFYf87
+	bjQi0cY4kY+ISCFsNX0xwsQ=
+Received: from mail.maildlp.com (unknown [172.19.162.140])
+	by canpmsgout02.his.huawei.com (SkyGuard) with ESMTPS id 4gs8Fr4HkmzcZyF;
+	Fri,  3 Jul 2026 17:53:20 +0800 (CST)
+Received: from dggpemf500011.china.huawei.com (unknown [7.185.36.131])
+	by mail.maildlp.com (Postfix) with ESMTPS id A78AA2012A;
+	Fri,  3 Jul 2026 18:02:14 +0800 (CST)
+Received: from huawei.com (10.90.53.73) by dggpemf500011.china.huawei.com
+ (7.185.36.131) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Fri, 3 Jul
+ 2026 18:02:10 +0800
+From: Jinjie Ruan <ruanjinjie@huawei.com>
+To: <catalin.marinas@arm.com>, <will@kernel.org>, <corbet@lwn.net>,
+	<skhan@linuxfoundation.org>, <maz@kernel.org>, <ardb@kernel.org>,
+	<ilias.apalodimas@linaro.org>, <oupton@kernel.org>, <joey.gouly@arm.com>,
+	<seiden@linux.ibm.com>, <suzuki.poulose@arm.com>, <yuzenghui@huawei.com>,
+	<oleg@redhat.com>, <mark.rutland@arm.com>, <lpieralisi@kernel.org>,
+	<tglx@kernel.org>, <ada.coupriediaz@arm.com>, <anshuman.khandual@arm.com>,
+	<ruanjinjie@huawei.com>, <ebiggers@kernel.org>, <broonie@kernel.org>,
+	<mrigendra.chaubey@gmail.com>, <baohua@kernel.org>, <lucaswei@google.com>,
+	<james.morse@arm.com>, <zengheng4@huawei.com>, <thuth@redhat.com>,
+	<yang@os.amperecomputing.com>, <leo.bras@arm.com>, <Sascha.Bischoff@arm.com>,
+	<james.clark@linaro.org>, <peterz@infradead.org>, <leitao@debian.org>,
+	<ben.horgan@arm.com>, <punit.agrawal@oss.qualcomm.com>, <gshan@redhat.com>,
+	<osama.abdelkader@gmail.com>, <fengchengwen@huawei.com>,
+	<ryan.roberts@arm.com>, <yangyicong@hisilicon.com>, <kevin.brodsky@arm.com>,
+	<kees@kernel.org>, <jeson.gao@unisoc.com>, <zhaoyang.huang@unisoc.com>,
+	<ryotkkr98@gmail.com>, <wsw9603@163.com>, <pasha.tatashin@soleen.com>,
+	<jeremy.linton@arm.com>, <schuster.simon@siemens-energy.com>,
+	<osandov@fb.com>, <arnd@arndb.de>, <zhangpengjie2@huawei.com>,
+	<smostafa@google.com>, <vladimir.murzin@arm.com>, <tabba@google.com>,
+	<vdonnefort@google.com>, <kaleshsingh@google.com>, <jic23@kernel.org>,
+	<timothy.hayes@arm.com>, <alexandru.elisei@arm.com>, <zenghui.yu@linux.dev>,
+	<david@kernel.org>, <akpm@linux-foundation.org>, <ljs@kernel.org>,
+	<memxor@gmail.com>, <qperret@google.com>, <chaitanyas.prakash@arm.com>,
+	<linux-arm-kernel@lists.infradead.org>, <linux-doc@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <linux-efi@vger.kernel.org>,
+	<kvmarm@lists.linux.dev>
+Subject: [PATCH 00/17] arm64: Support FEAT_NMI and Rework Exception Masking
+Date: Fri, 3 Jul 2026 18:01:18 +0800
+Message-ID: <20260703100135.2512312-1-ruanjinjie@huawei.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-TM-AS-GCONF: 00
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzAzMDA5NCBTYWx0ZWRfX9FMLwetAf5KQ
- ndfxMBLSR49ue71Xv2NR40Icekc2MOvRbwixUqeEGtjdNkCalSSoGb966whocZ1gXXqpEriij7i
- lynNNC3vb2CQvMQydbLaS3VAu0jrXMOm+jrv0ORIZSdXnj7Vi1yorOQLGdSZSAOdWCDMFX3r3pN
- OuxRPVsNiZ9CQ3hGPyW9d4jjGhtQEH4JbcTwHIUqcZ7kznMyp1iLXVpiAu42PsAq9HSVzRZ1xeF
- OvamAeXQ82LGybWvpxvCiyLv5wDWgXgkKO8Hf7eaiVVVSAu3moZrspj1/CUqHGOp0ZISuFiCOfm
- 6AWwmNs4Kr04L5enCaF4YgWYGrYLmt6j4D8H0M1WcGM1ayQeiM6Yok1G5GskscCRoSEIeV8DpbU
- tkC4ar4pU/D2r9uqicbUF56hge/NSmTFC3OSbbHRYF3sz6B3Za9sH3Juh93DjTwWc9D28Pc5hiX
- 1sXDVTwSc86kcB2B9Rg==
-X-Proofpoint-GUID: fyPeOXFOcSecTLM12SqKB2NhFn9No9dY
-X-Authority-Analysis: v=2.4 cv=Z8bc2nRA c=1 sm=1 tr=0 ts=6a4787f2 cx=c_pps
- a=5BHTudwdYE3Te8bg5FgnPg==:117 a=5BHTudwdYE3Te8bg5FgnPg==:17
- a=RAioF0-LDSMA:10 a=VkNPw1HP01LnGYTKEx00:22 a=RnoormkPH1_aCDwRdu11:22
- a=RzCfie-kr_QcCd8fBx8p:22 a=VwQbUJbxAAAA:8 a=QZGpZFnrDBDqr2p2_-4A:9
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzAzMDA5NCBTYWx0ZWRfXw6X4LK9BAJr/
- jeW91FBp5LTSjcZFRxjPIFSbzH40kzNpBhFPHP3F9N4dLBEIibxelkNLlh5TXnBBP24GksYOxGs
- cdYngkRwuJr0O4yJ1YvQBiRfSdFRCMk=
-X-Proofpoint-ORIG-GUID: Zheb6wdsp5g_GwqVLO_LBTgHraVWDNxT
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-07-03_02,2026-06-26_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 adultscore=0 spamscore=0 priorityscore=1501 impostorscore=0
- malwarescore=0 phishscore=0 bulkscore=0 lowpriorityscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607030094
+X-ClientProxiedBy: kwepems200002.china.huawei.com (7.221.188.68) To
+ dggpemf500011.china.huawei.com (7.185.36.131)
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.16 / 15.00];
+X-Spamd-Result: default: False [-6.16 / 15.00];
+	WHITELIST_DMARC(-7.00)[huawei.com:D:+];
 	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
 	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[ibm.com,none];
-	R_DKIM_ALLOW(-0.20)[ibm.com:s=pp1];
+	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[45];
-	TAGGED_FROM(0.00)[bounces-94767-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER(0.00)[svens@linux.ibm.com,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[zytor.com,suse.de,infradead.org,lwn.net,linuxfoundation.org,kernel.org,xen0n.name,linux.ibm.com,ellerman.id.au,gmail.com,dabbelt.com,eecs.berkeley.edu,ghiti.fr,redhat.com,alien8.de,linux.intel.com,donnellan.id.au,arm.com,arndb.de,flygoat.com,sifive.com,linutronix.de,rivosinc.com,cispa.de,bytedance.com,vger.kernel.org,lists.linux.dev,lists.ozlabs.org,lists.infradead.org];
-	FORGED_RECIPIENTS(0.00)[m:tglx@kernel.org,m:hpa@zytor.com,m:msuchanek@suse.de,m:peterz@infradead.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:chenhuacai@kernel.org,m:kernel@xen0n.name,m:maddy@linux.ibm.com,m:mpe@ellerman.id.au,m:npiggin@gmail.com,m:chleroy@kernel.org,m:pjw@kernel.org,m:palmer@dabbelt.com,m:aou@eecs.berkeley.edu,m:alex@ghiti.fr,m:hca@linux.ibm.com,m:gor@linux.ibm.com,m:agordeev@linux.ibm.com,m:borntraeger@linux.ibm.com,m:luto@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:andrew+kernel@donnellan.id.au,m:mark.rutland@arm.com,m:arnd@arndb.de,m:jiaxun.yang@flygoat.com,m:ryan.roberts@arm.com,m:gregkh@linuxfoundation.org,m:mkchauras@linux.ibm.com,m:sshegde@linux.ibm.com,m:zong.li@sifive.com,m:namcao@linutronix.de,m:debug@rivosinc.com,m:lukas.gerlach@cispa.de,m:qirui.001@bytedance.com,m:kees@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:loongarch@lists.linux.dev,m:linuxppc-dev@lists.ozlabs.org,m
- :linux-riscv@lists.infradead.org,m:linux-s390@vger.kernel.org,m:andrew@donnellan.id.au,s:lists@lfdr.de];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[svens@linux.ibm.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[ibm.com:+];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,linux.ibm.com:mid,linux.ibm.com:from_mime,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TO_DN_SOME(0.00)[];
+	TAGGED_FROM(0.00)[bounces-94770-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:catalin.marinas@arm.com,m:will@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:maz@kernel.org,m:ardb@kernel.org,m:ilias.apalodimas@linaro.org,m:oupton@kernel.org,m:joey.gouly@arm.com,m:seiden@linux.ibm.com,m:suzuki.poulose@arm.com,m:yuzenghui@huawei.com,m:oleg@redhat.com,m:mark.rutland@arm.com,m:lpieralisi@kernel.org,m:tglx@kernel.org,m:ada.coupriediaz@arm.com,m:anshuman.khandual@arm.com,m:ruanjinjie@huawei.com,m:ebiggers@kernel.org,m:broonie@kernel.org,m:mrigendra.chaubey@gmail.com,m:baohua@kernel.org,m:lucaswei@google.com,m:james.morse@arm.com,m:zengheng4@huawei.com,m:thuth@redhat.com,m:yang@os.amperecomputing.com,m:leo.bras@arm.com,m:Sascha.Bischoff@arm.com,m:james.clark@linaro.org,m:peterz@infradead.org,m:leitao@debian.org,m:ben.horgan@arm.com,m:punit.agrawal@oss.qualcomm.com,m:gshan@redhat.com,m:osama.abdelkader@gmail.com,m:fengchengwen@huawei.com,m:ryan.roberts@arm.com,m:yangyicong@hisilicon.com,m:kevin.brodsky@arm.com,m:kees@kernel.org,m:je
+ son.gao@unisoc.com,m:zhaoyang.huang@unisoc.com,m:ryotkkr98@gmail.com,m:wsw9603@163.com,m:pasha.tatashin@soleen.com,m:jeremy.linton@arm.com,m:schuster.simon@siemens-energy.com,m:osandov@fb.com,m:arnd@arndb.de,m:zhangpengjie2@huawei.com,m:smostafa@google.com,m:vladimir.murzin@arm.com,m:tabba@google.com,m:vdonnefort@google.com,m:kaleshsingh@google.com,m:jic23@kernel.org,m:timothy.hayes@arm.com,m:alexandru.elisei@arm.com,m:zenghui.yu@linux.dev,m:david@kernel.org,m:akpm@linux-foundation.org,m:ljs@kernel.org,m:memxor@gmail.com,m:qperret@google.com,m:chaitanyas.prakash@arm.com,m:linux-arm-kernel@lists.infradead.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-efi@vger.kernel.org,m:kvmarm@lists.linux.dev,m:mrigendrachaubey@gmail.com,s:lists@lfdr.de];
+	FREEMAIL_TO(0.00)[arm.com,kernel.org,lwn.net,linuxfoundation.org,linaro.org,linux.ibm.com,huawei.com,redhat.com,gmail.com,google.com,os.amperecomputing.com,infradead.org,debian.org,oss.qualcomm.com,hisilicon.com,unisoc.com,163.com,soleen.com,siemens-energy.com,fb.com,arndb.de,linux.dev,linux-foundation.org,lists.infradead.org,vger.kernel.org,lists.linux.dev];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FROM_NEQ_ENVFROM(0.00)[ruanjinjie@huawei.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[ruanjinjie@huawei.com,linux-doc@vger.kernel.org];
+	PRECEDENCE_BULK(0.00)[];
+	DKIM_TRACE(0.00)[huawei.com:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_NONE(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,kernel];
+	RCPT_COUNT_GT_50(0.00)[72];
+	RCVD_COUNT_FIVE(0.00)[6];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_COUNT_SEVEN(0.00)[11]
+	FORGED_SENDER_FORWARDING(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	MIME_TRACE(0.00)[0:+];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,huawei.com:from_mime,huawei.com:dkim,huawei.com:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 794CD700E75
+X-Rspamd-Queue-Id: 4E452700F07
 
-Thomas Gleixner <tglx@kernel.org> writes:
+Hi all,
 
-> On Fri, Jul 03 2026 at 08:26, Sven Schnelle wrote:
->> Thomas Gleixner <tglx@kernel.org> writes:
->>> It's less than obvious and I have no objections to clean that up and
->>> make it more intuitive, but I still fail to see what Michal is actually
->>> trying to solve and what the magic flag is for. If s390 requires it,
->>> then that's an s390 problem, but definitely x86 does not.
->>
->> The difference between x86 and s390 is that on s390, regs->gprs[2] is
->> used for both the syscall number and the syscall return value.
->> That was a design mistake early in the begin about 25 years ago, but
->> it's ABI now, so it cannot be changed.
->
-> Cute.
->
->> When seccomp decides to skip a syscall, it write a return value into
->> regs->gprs[2]. When syscall_enter_from_user_mode_work() returns, it
->> returns this number. If it's negative all is good - the 'if (likely(nr <
->> NR_syscalls))' conditiion would just catch it and skip the syscall.
->>
->> But if it's a positive number, the code cannot distinguish whether
->> that's a return value or a syscall number.
->>
->> So I introduced PIF_SYSCALL_RET_SET when converting s390 to generic
->> entry. This flag tells the syscall code that a return value was set in
->> ptregs and the syscall should be skipped.
->
-> You also could have added a 'syscall_ret' member to pt_regs, operate
-> on that for the return values (seccomp, syscall...) and swap it into
-> gprs[2] right before returning to user space.
+This patch series implements support for the ARMv8.8-A/v9.3-A
+hardware NMI extension (FEAT_NMI), introducing the use of PSTATE.ALLINT
+to manage superpriority interrupts on arm64.
 
-That would likely also work, but I found it easier to read and
-understand to have an additional flag with a descriptive name than having
-yet another 'somehow-related-to-gpr2' member in ptregs.
+Background and Current Status
+-----------------------------
+
+The hardware ecosystem is already mature and fully ready for FEAT_NMI:
+
+- Production Hardware: Huawei's Kunpeng servers (such as the HIP12 based
+  platforms) already feature native hardware support for FEAT_NMI.
+
+- Emulation: QEMU has integrated robust FEAT_NMI emulation[1] support
+  since 2024.
+
+Despite the hardware readiness, upstream support for FEAT_NMI has been
+delayed. Previous patch[2] attempts tried to bundle ALLINT management
+directly into the existing DAIF abstraction layers. As Mark Rutland
+pointed out[3], pretending ALLINT or pseudo-NMI (GIC PMR) is part of
+DAIF creates convoluted, unmaintainable hacks that frequently fail to
+handle complex edge cases correctly (such as state escape during
+context switching).
+
+Reworking Exception Masking (Mark's Feedback)
+---------------------------------------------
+
+Following Mark Rutland's strong recommendation ("We must clean up
+the existing approach before we add the real NMI support"), this series
+does not simply stack FEAT_NMI on top of the old framework. Instead, it
+completely reworks how the arm64 kernel manages abstract and logical
+exception masks.
+
+Per Mark's guidelines, this series achieves the following architectural
+improvements:
+
+1. Entry/Exit Specific Helpers (a):
+
+   Introduces abstract exception mask helpers specifically for exception
+   boundaries. They handle unified unmask-at-entry and mask-at-exit
+   behaviors. This decouples the entry/exit paths from raw DAIF
+   manipulation. In this series, these helpers are first refactored to
+   manage DAIF + PMR cleanly, preparing the ground before any FEAT_NMI
+   code is introduced.
+
+2. Logical Exception Mask Separation (b):
+
+   Introduces a decoupled logical mask tracking mechanism that treats DAIF,
+   PMR, and ALLINT as separate, distinct elements. This enables accurate
+   irqflag tracking and debug assertions to save, restore, and validate all
+   elements without forcing them to fake or pollute a traditional DAIF
+   layout.
+
+Production Bug Fixes & Integration
+-----------------------------------
+
+On top of this solid architectural foundation, this series adds the actual
+support for FEAT_NMI (ALLINT management). Crucially, during baisc testing
+and validation on production Kunpeng (HIP12) servers, we identified and
+resolved several critical bugs.
+
+The series is structured as follows:
+
+- Patches 1-5: Clean up and rework the existing DAIF/PMR masking into
+  separate logical exception helpers (Pre-requisite refactoring).
+
+- Patches 6-17: Add FEAT_NMI support for ARM64, including specific
+  stability fixes found on Kunpeng hardware and QEmu.
+
+Any feedback, testing, or review, especially regarding the exception
+masking refactoring, is highly appreciated.
+
+[1]: https://lore.kernel.org/all/20240407081733.3231820-1-ruanjinjie@huawei.com/
+[2]: https://lore.kernel.org/linux-arm-kernel/20221112151708.175147-1-broonie@kernel.org/
+[3]: https://lore.kernel.org/linux-arm-kernel/Y5c9SLeJacLYHmP7@FVFF77S0Q05N/
+
+Jinjie Ruan (5):
+  arm64: Move DAIF macros to ptrace.h and use them centrally
+  arm64: Rework exception masking into abstract logical mask
+  arm64: entry: arm64: entry: Move DAIF masking for EL1 exit to C code
+  arm64: entry: Add entry-specific helpers
+  arm64: Introduce helpers for restoring standard exception masks
+
+Lorenzo Pieralisi (1):
+  irqchip/gic-v3: Implement FEAT_GICv3_NMI support
+
+Mark Brown (11):
+  arm64/booting: Document boot requirements for FEAT_NMI
+  arm64/sysreg: Add definitions for immediate versions of MSR ALLINT
+  arm64/hyp-stub: Enable access to ALLINT
+  arm64/idreg: Add an override for FEAT_NMI
+  arm64/cpufeature: Detect PE support for FEAT_NMI
+  KVM: arm64: Hide FEAT_NMI from guests
+  arm64/nmi: Manage masking for superpriority interrupts along with DAIF
+  arm64/entry: Don't call preempt_schedule_irq() with NMIs masked
+  arm64/irq: Document handling of FEAT_NMI in irqflags.h
+  arm64/nmi: Add handling of superpriority interrupts as NMIs
+  arm64/nmi: Add Kconfig for NMI
+
+ Documentation/arch/arm64/booting.rst     |   6 +
+ arch/arm64/Kconfig                       |  17 ++
+ arch/arm64/include/asm/arch_gicv3.h      |   7 +-
+ arch/arm64/include/asm/assembler.h       |  17 +-
+ arch/arm64/include/asm/cpufeature.h      |   5 +
+ arch/arm64/include/asm/cpuidle.h         |  30 ++-
+ arch/arm64/include/asm/daifflags.h       | 144 --------------
+ arch/arm64/include/asm/efi.h             |  22 ++-
+ arch/arm64/include/asm/el2_setup.h       |  13 ++
+ arch/arm64/include/asm/entry-common.h    |  11 +-
+ arch/arm64/include/asm/exception_masks.h | 232 +++++++++++++++++++++++
+ arch/arm64/include/asm/irq.h             |   2 +
+ arch/arm64/include/asm/irqflags.h        |  10 +
+ arch/arm64/include/asm/kvm_host.h        |   2 +-
+ arch/arm64/include/asm/mmu_context.h     |   2 +-
+ arch/arm64/include/asm/nmi.h             |  23 +++
+ arch/arm64/include/asm/ptrace.h          |  11 +-
+ arch/arm64/include/asm/sysreg.h          |   2 +
+ arch/arm64/include/uapi/asm/ptrace.h     |   1 +
+ arch/arm64/kernel/acpi.c                 |  14 +-
+ arch/arm64/kernel/cpufeature.c           |  58 +++++-
+ arch/arm64/kernel/debug-monitors.c       |   9 +-
+ arch/arm64/kernel/entry-common.c         | 167 +++++++++++-----
+ arch/arm64/kernel/entry.S                |   4 -
+ arch/arm64/kernel/hibernate.c            |  10 +-
+ arch/arm64/kernel/idle.c                 |   7 +-
+ arch/arm64/kernel/irq.c                  |  36 +++-
+ arch/arm64/kernel/machine_kexec.c        |   4 +-
+ arch/arm64/kernel/pi/idreg-override.c    |   1 +
+ arch/arm64/kernel/probes/kprobes.c       |   9 +-
+ arch/arm64/kernel/process.c              |   7 +-
+ arch/arm64/kernel/setup.c                |   4 +-
+ arch/arm64/kernel/signal.c               |   2 +-
+ arch/arm64/kernel/smp.c                  |  22 +--
+ arch/arm64/kernel/suspend.c              |  15 +-
+ arch/arm64/kernel/traps.c                |   2 +-
+ arch/arm64/kvm/emulate-nested.c          |   6 +-
+ arch/arm64/kvm/hyp/include/hyp/switch.h  |   6 +
+ arch/arm64/kvm/hyp/nvhe/host.S           |   4 +-
+ arch/arm64/kvm/hyp/nvhe/hyp-init.S       |   3 +-
+ arch/arm64/kvm/hyp/nvhe/hyp-main.c       |   4 +-
+ arch/arm64/kvm/hyp/vgic-v3-sr.c          |   6 +-
+ arch/arm64/kvm/hyp/vhe/switch.c          |   6 +-
+ arch/arm64/kvm/reset.c                   |   6 +-
+ arch/arm64/mm/fault.c                    |   2 +-
+ arch/arm64/mm/mmu.c                      |   6 +-
+ arch/arm64/tools/cpucaps                 |   2 +
+ drivers/firmware/psci/psci.c             |   7 +-
+ drivers/irqchip/irq-gic-v3.c             | 152 +++++++++++++--
+ include/linux/irqchip/arm-gic-v3.h       |   4 +
+ 50 files changed, 822 insertions(+), 320 deletions(-)
+ delete mode 100644 arch/arm64/include/asm/daifflags.h
+ create mode 100644 arch/arm64/include/asm/exception_masks.h
+ create mode 100644 arch/arm64/include/asm/nmi.h
+
+-- 
+2.34.1
+
 
