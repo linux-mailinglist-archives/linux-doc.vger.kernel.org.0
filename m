@@ -1,240 +1,204 @@
-Return-Path: <linux-doc+bounces-94908-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94943-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id P7UmFxgoSGoEnAAAu9opvQ
-	(envelope-from <linux-doc+bounces-94908-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 23:22:32 +0200
+	id B6c6CkdVSGp9pAAAu9opvQ
+	(envelope-from <linux-doc+bounces-94943-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 04 Jul 2026 02:35:19 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6CA85705BAE
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Jul 2026 23:22:31 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7CDC3706497
+	for <lists+linux-doc@lfdr.de>; Sat, 04 Jul 2026 02:35:18 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=infradead.org header.s=casper.20170209 header.b=fcUVvHAI;
-	dmarc=pass (policy=none) header.from=infradead.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94908-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-94908-lists+linux-doc=lfdr.de@vger.kernel.org";
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=pSnUN7Z1;
+	dmarc=pass (policy=none) header.from=gmail.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94943-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94943-lists+linux-doc=lfdr.de@vger.kernel.org";
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 7D308301519C
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Jul 2026 21:22:12 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id D12193014291
+	for <lists+linux-doc@lfdr.de>; Sat,  4 Jul 2026 00:35:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B532E353A82;
-	Fri,  3 Jul 2026 21:22:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 275531F4631;
+	Sat,  4 Jul 2026 00:35:14 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1C1F32143D;
-	Fri,  3 Jul 2026 21:22:04 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783113726; cv=none; b=lm4B8y6L+bb7nmhK9IvAvTgtcCYBszcXG3Nl+Cc07HxtsiXV6EZVCms1yJ9yJ9awIFIoLpjG131cfXTEISfmZCeHtuIY7bYpIBdLz/+5Cx7WeubGaKRIBf0213vbnSIaq/3gChTpqbn6clFyVaaYxwo4v5DjAVVG85jcBvnj7K0=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783113726; c=relaxed/simple;
-	bh=lEF++bOI9LQfD57eTioGvJkH8QvoBPOp3vTuT0g71Gc=;
-	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=YYRIYVKNt0bdvkCIpvSVgMXNGbjpMVsIGX9iEB0vbX+L2tBV6j4XIQSFBYncoxBzyqMJPFHGznNxnU92VHr/E+QEzfCkvUmgkUjX5xI6VXVkAnqJFtKY5oGvjtkC2v/VEz3qzNy3YMuAUEGDR8GsIiPPJaOlcUV74l5IuILaqwU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=casper.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=fcUVvHAI; arc=none smtp.client-ip=90.155.50.34
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:
-	From:Reply-To:Cc:Content-ID:Content-Description;
-	bh=9YLu6jUxizeyw6FPvXNgLWAHtpjzd7Ja/IQI9k+fk+s=; b=fcUVvHAIPPdYkE7/dYS8PsNO0M
-	0l7rKpCfaWyv7qnO627IUm/45JZzCNXpKFxdSx3aOe4X/asoyK1w+W3ZNk66BM8q3BbjYRzGNQLNV
-	FIOdbKNq2+NaKcooJ/SV2aSPahIzidPDXtyB92+iE1701oAJYZIobMAgIC8rg0p2P6qLAa9eY/PVl
-	/pGKXDoXfX1z+5rZmDtJJ9Wv34vMFTG3iFXgK7vu2PgYTbtbFTcJhelUV/ioie3vUIgVLGidMeVnR
-	PeaxJ2Y8zB3aSgCvh1ZPeMDKjka+OYRslMm979N9HKfPZmmsO4HL0U8OnTYlA/VVYGrcVlh/JcdzD
-	AnicB8aQ==;
-Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
-	by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wflKX-0000000AsYS-3lGH;
-	Fri, 03 Jul 2026 21:21:50 +0000
-Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.2 #2 (Red Hat Linux))
-	id 1wflKX-00000001RQI-3LPT;
-	Fri, 03 Jul 2026 22:21:49 +0100
-From: David Woodhouse <dwmw2@infradead.org>
-To: Paolo Bonzini <pbonzini@redhat.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Sean Christopherson <seanjc@google.com>,
-	Thomas Gleixner <tglx@kernel.org>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	x86@kernel.org,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Vitaly Kuznetsov <vkuznets@redhat.com>,
-	Juergen Gross <jgross@suse.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	David Woodhouse <dwmw2@infradead.org>,
-	Paul Durrant <paul@xen.org>,
-	Jonathan Cameron <jic23@kernel.org>,
-	Sascha Bischoff <Sascha.Bischoff@arm.com>,
-	Marc Zyngier <maz@kernel.org>,
-	Joey Gouly <joey.gouly@arm.com>,
-	Jack Allister <jalliste@amazon.com>,
-	Dongli Zhang <dongli.zhang@oracle.com>,
-	joe.jin@oracle.com,
-	kvm@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	xen-devel@lists.xenproject.org,
-	linux-kselftest@vger.kernel.org
-Subject: [PATCH v6 36/36] KVM: x86: Activate master clock from kvm_arch_init_vm()
-Date: Fri,  3 Jul 2026 22:18:15 +0100
-Message-ID: <20260703212145.343527-37-dwmw2@infradead.org>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260703212145.343527-1-dwmw2@infradead.org>
-References: <20260703212145.343527-1-dwmw2@infradead.org>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A4BFA1F192E
+	for <linux-doc@vger.kernel.org>; Sat,  4 Jul 2026 00:35:12 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783125314; cv=pass; b=LDle6A0OAXdaBIB6Q0ZhMfIrQ7wZLnObTQ4TNemLHXxIO0wgqizRCBuE3hWTcRx/43Elvy+omXyHIEGUs9FiyZco+Wy1W9NHZfo6HdWPRm4hqtSODFXi96SE9AUA+D8Ny0SPv94ekv6U3mGuU02H5WImbwKwD0m2BfuKF7stLmo=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783125314; c=relaxed/simple;
+	bh=clrDD96YBt5A3a2Rvc28rREplTx9fw9n1eB41uH1mEU=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=Lkz41KDr3HKfKi9AbSgbJpySSE92FkxolOrTg2h2LqlOXJum3MN9gicSyr+qCu9aaYrpkk6l6NN3tmeJhEoTsZUQOwHZYUKOG8ezERT+8SeDtMAQlNgr4ql5SHl+ZnhrraSPUrTvytuySOt9tzj75e2le7GA2JVSpz1DzusOA5Y=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=pSnUN7Z1; arc=pass smtp.client-ip=209.85.128.54
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-493ba701891so7655115e9.3
+        for <linux-doc@vger.kernel.org>; Fri, 03 Jul 2026 17:35:12 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783125311; cv=none;
+        d=google.com; s=arc-20260327;
+        b=k1/NxRmyV9ww0A6NczSzCuUo2xATJq7FWFEdHQj2aPxdJLfDwvaaRLVRZfnJ9lliNA
+         bO6MFay1WbcrA9Bs1gRc8b499fXdeqEJFGNbnaDLU47ah597LdeaoWvQAKVSlBdP2d8W
+         KUbOPo1IoqOnaFQUSBCBmAdp1jKSz2aTKbf8d9IVP5sal5Kd0B5iryUZWNuUeeIXCajg
+         31cMcjjOmslf0zDMJy6EyoGiamZyvzESDKdb/FnH+rN1f6Oq39V5eTU/xqyvGghk7QX5
+         4F/Ld3kKsvQjbDRvLHi1scXrTGTZ0h03WD7JJS+9P2UdkZbhChwSV94p7uxzEjHXk1NW
+         ZvFA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=wW7AlhxqGYiRva1oC552NzvH7YtXs9EvRN6VDKKQkfM=;
+        fh=IejIGdh9xwdVUT+JhRyrNyprMvJCpbBDoD4SjKtGg2I=;
+        b=laYU/9y/ukBzTgbdvwB9IHMOjggWh5sDrzq5l79lUhvcrDQsJoGpfa9vFCtCXB4clo
+         UY8uKMoGQ2vaimZVLhqpraVO9S4X0ixGMr4AarXMvuML9So/rp+36NfaABVzG1L7qyXz
+         xKpxpqfLp+hjh0Z2WvyEjMC5nY88qm8Tm4zOzz0a7bkWUM9/sqTfKnsDsLjG45/Tzlnj
+         /EXjkZjeq9TPfVG91p0rSYpDBn8FyttAgdP9onKwHBEpv0dc2zgzkXCzXPjbd4Hdp046
+         lFuB856Piay3YO0NPqCktgx0bkTKaVyQ8wNj5KDLcc7yiE2Eey5ioDevMl1cIF8kuibM
+         23DA==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1783125311; x=1783730111; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=wW7AlhxqGYiRva1oC552NzvH7YtXs9EvRN6VDKKQkfM=;
+        b=pSnUN7Z1IPzl1PUejj1ZbBo/KW7cjP/Q3GRVbjj/54TkXCqh4uwm302JQIauMohZYJ
+         mUvkfiO6qyBMktjaZ5S6UJJQplzNMgNEdHyJ+QXaBmfHm/b6UEl2ggeU/4s8ijZzbc7r
+         asCQw4+mjoUHkjssFZLc5Iw3B00xouaqqStkeNJ71sRQeB+U+WKPB8jo7KX2siGB3yEh
+         MzOIRkvZJmisEPi9wPPdoJ2vmw3Tty+hKT5+3bSXaeiivvZyJtvBQs04+8DiXDwgOXDL
+         JxshMTB8jXxOe1uLdfz/a7cNGFV1DyfkM0D4mXN0NaarvA3V5YNE7/5XOuU2dql4egiC
+         c3Tg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783125311; x=1783730111;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=wW7AlhxqGYiRva1oC552NzvH7YtXs9EvRN6VDKKQkfM=;
+        b=PgqgrHjXtbxK+joebrAKmzCfvi1MUd/NN0IZO9te8EBZsSV16RNeG18xTB9awxk0RC
+         QLpHl3lnQ3PBlK8AlLf+vUcePYWQpGHItcFj57dbwQn8/ErlyFCSkhQOw2Mqd8V9rll/
+         0TIAGfYtYj5Ch9Hyp8C5kpYf3g4vC8H4rBWTtPyU02pzBdPZB2DtC7iKUs9vLzRVphph
+         dlXH3aTVBsbK0x0iVqjK+qlHj2FwTt0zvm3WO7nOICTXP4se/9peJl4rUZMzypjC3tk5
+         M6EFkPIuX+B3mukzdsRE+0Qe/qrygBLGtqgutrzfy5/KL+46lcqeWkFsKCbiWJLgVCRE
+         07PQ==
+X-Forwarded-Encrypted: i=1; AFNElJ/ZjV2VY042m33VWjD7NjTDmXbCeaMLV1RBtizvBy/F36TgCYPW2z4kstLLYZpcnnF+yjh0/b6/yLY=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzPX8kpgzINC5i9kvMIJ//nSGonwR8x4kzRzE6uLLK9Pj3ZVgW1
+	rCqkJF6kb2DPyen9LmOtOrnhgiWeDIZDxqIbzuMiACxtS/uh1O7WVKHbGUbtEy3grH9A1jhWbWg
+	qLqOIfUIC49PmF9qninDIYMMnJEcmkis=
+X-Gm-Gg: AfdE7clkXQz2xCdX91krGlgRfbFaYsZT5+HHhHtopuPrwpv9Iqq+mtmLwIHSs3nXBAZ
+	XgSZQH0zSdf5wMrZ46wuwKbYuguLrBq9K2vRnS6hLztBDwWUCpGOpjweFnxunN7d3N95bO20Y/L
+	63SU9Zu/1RbnKa3t40MBdFnRkHjcDGe1asNWWV2AcKSlTVFKvfcgOOTwp/jW3hstaFX8sQXF9MG
+	Yf+q/JTXZ6XW8UuLAyj8IzeZHCqH/NO7BpsOuWcZ+CcT1jYJakGKS0iFwYe9KnOBgy3/wAzOEqo
+	dqtu/bGqj6cjakkyGL30icfH/A2dFTboKAbb3BFVtskRqqlexMlv
+X-Received: by 2002:a05:600c:5250:b0:493:bb0:3b43 with SMTP id
+ 5b1f17b1804b1-493d11cefc8mr15023595e9.2.1783125311110; Fri, 03 Jul 2026
+ 17:35:11 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+References: <20260701000949.1666714-1-joannelkoong@gmail.com>
+ <20260701000949.1666714-19-joannelkoong@gmail.com> <20260702192658.GN9392@frogsfrogsfrogs>
+ <CAJnrk1YZQOQ0D6p6qYx1BPvKQaDgZsrKzLbGZzaH8tUkj_OoOQ@mail.gmail.com>
+ <20260703020020.GS9392@frogsfrogsfrogs> <20260703124331.GA26440@lst.de> <20260703161147.GB9407@frogsfrogsfrogs>
+In-Reply-To: <20260703161147.GB9407@frogsfrogsfrogs>
+From: Joanne Koong <joannelkoong@gmail.com>
+Date: Fri, 3 Jul 2026 17:34:59 -0700
+X-Gm-Features: AVVi8Cc9z61uFW2rqHr93JegF3VWx93elWcFHjnHavv8xxM4AtcZoZcVqoAB6DI
+Message-ID: <CAJnrk1Zv8FEAD+T=1+ZLi6q8ztHVY1zray019QNdeLpYjTNQAQ@mail.gmail.com>
+Subject: Re: [PATCH v2 18/18] Documentation: iomap: update docs to reflect
+ iomap_next model
+To: "Darrick J. Wong" <djwong@kernel.org>
+Cc: Christoph Hellwig <hch@lst.de>, brauner@kernel.org, willy@infradead.org, 
+	hsiangkao@linux.alibaba.com, linux-fsdevel@vger.kernel.org, 
+	linux-xfs@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, 
+	"open list:DOCUMENTATION" <linux-doc@vger.kernel.org>, open list <linux-kernel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.16 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=casper.20170209];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94908-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[27];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:pbonzini@redhat.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:vkuznets@redhat.com,m:jgross@suse.com,m:boris.ostrovsky@oracle.com,m:dwmw2@infradead.org,m:paul@xen.org,m:jic23@kernel.org,m:Sascha.Bischoff@arm.com,m:maz@kernel.org,m:joey.gouly@arm.com,m:jalliste@amazon.com,m:dongli.zhang@oracle.com,m:joe.jin@oracle.com,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:xen-devel@lists.xenproject.org,m:linux-kselftest@vger.kernel.org,s:lists@lfdr.de];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[dwmw2@infradead.org,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[dwmw2@infradead.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	TAGGED_FROM(0.00)[bounces-94943-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER(0.00)[joannelkoong@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,infradead.org:from_mime,infradead.org:dkim,infradead.org:mid,amazon.co.uk:email,vger.kernel.org:from_smtp]
+	FORGED_RECIPIENTS(0.00)[m:djwong@kernel.org,m:hch@lst.de,m:brauner@kernel.org,m:willy@infradead.org,m:hsiangkao@linux.alibaba.com,m:linux-fsdevel@vger.kernel.org,m:linux-xfs@vger.kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[joannelkoong@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp,mail.gmail.com:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 6CA85705BAE
+X-Rspamd-Queue-Id: 7CDC3706497
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+On Fri, Jul 3, 2026 at 9:11=E2=80=AFAM Darrick J. Wong <djwong@kernel.org> =
+wrote:
+>
+> On Fri, Jul 03, 2026 at 02:43:31PM +0200, Christoph Hellwig wrote:
+> > On Thu, Jul 02, 2026 at 07:00:20PM -0700, Darrick J. Wong wrote:
+> > > The ->begin method can still set iomap::private and the ->end method =
+can
+> > > dispose of it, right?  Oh, wait, no, that doesn't work because you're
+> > > talking about ->begin/->end passing something to the next ->begin.
+> >
+> > Should we move ->private from struct iomap to struct iomap_iter?
+> > That'll deal with the constness and the fact that private data
+> > really is a per-operation thing.
 
-Initialize the TSC generation and master clock state at VM creation
-time, rather than relying on kvm_update_masterclock() from
-kvm_arch_vcpu_postcreate().
+I'm not sure I understand. Doesn't struct iomap_iter already have a
+private field that holds caller-supplied per-operation context?
+afaics, the users of iomap->private (gfs2, ntfs3, fuse-dax) do use it
+for per-mapping data and release it in the same iteration.
 
-Set cur_tsc_generation=1, cur_tsc_khz, cur_tsc_scaling_ratio,
-cur_tsc_offset, cur_tsc_nsec and kvmclock_offset from an atomic
-ktime/TSC snapshot. This establishes a coherent epoch so that:
+>
+> I dunno -- towards the end of the fuse-iomap development work I actually
+> had started using iomap.private to store per-mapping private data.  But
+> that work is dead now, so that's not a strong argument.
+>
+> > That also reminds me that now that we actually still keep the low-level
+> > begin/end ops we need to switch them to a calling convention that
+> > passes the iter instead of the ugly container_of.  This is something
+> > I wanted deferred until we get the iter conversion, but it turns out
+> > that now leaves them untouched..
 
- - The first vCPU synchronizes to the existing generation (getting
-   the pre-computed TSC offset) rather than computing its own.
- - pvclock_update_vm_gtod_copy() succeeds immediately (no zero
-   tsc_hz from uninitialized cur_tsc_scaling_ratio).
- - KVM_GET_CLOCK returns valid {host_tsc, realtime} fields as soon
-   as any vCPU exists.
- - KVM_[GS]ET_CLOCK_GUEST works without a prior KVM_RUN.
- - No O(N) iteration of all vCPUs on each vCPU creation.
+That's a good point. Do you think it'd be better to include those
+changes as part of this series or do that as a separate follow-up
+series that targets the same merge window timeline as this one?
 
-This replaces the kvm_update_masterclock() call that was added to
-kvm_arch_vcpu_postcreate() to work around the missing initialization.
+>
+> Oh, you mean changing the signature to:
+>
+> typedef int (iomap_begin_fn)(struct iomap_iter *iter...);
+>
+> instead of passing parts of the iter as separate arguments?
+> Yeah, that would be nice.
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Assisted-by: Kiro (claude-opus-4.6-1m)
----
- arch/x86/kvm/x86.c | 45 +++++++++++++++++++++++++++++++++++++--------
- 1 file changed, 37 insertions(+), 8 deletions(-)
+Agreed.
 
-diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index 58016af64932..d35f2ac3ef49 100644
---- a/arch/x86/kvm/x86.c
-+++ b/arch/x86/kvm/x86.c
-@@ -13161,8 +13161,6 @@ void kvm_arch_vcpu_postcreate(struct kvm_vcpu *vcpu)
- 		return;
- 	vcpu_load(vcpu);
- 	kvm_synchronize_tsc(vcpu, NULL);
--	if (!vcpu->kvm->arch.use_master_clock)
--		kvm_update_masterclock(vcpu->kvm, NULL);
- 	vcpu_put(vcpu);
- 
- 	/* poll control enabled by default */
-@@ -13572,6 +13570,8 @@ int kvm_arch_init_vm(struct kvm *kvm, unsigned long type)
- {
- 	int ret;
- 	unsigned long flags;
-+	u64 kvmclock_host_tsc;
-+	s64 kvmclock_ns;
- 
- 	if (!kvm_is_vm_type_supported(type))
- 		return -EINVAL;
-@@ -13603,18 +13603,47 @@ int kvm_arch_init_vm(struct kvm *kvm, unsigned long type)
- 	seqcount_raw_spinlock_init(&kvm->arch.pvclock_sc, &kvm->arch.tsc_write_lock);
- 	ratelimit_state_init(&kvm->arch.kvmclock_update_rs, HZ, 10);
- 	ratelimit_set_flags(&kvm->arch.kvmclock_update_rs, RATELIMIT_MSG_ON_RELEASE);
--	kvm->arch.kvmclock_offset = -get_kvmclock_base_ns();
--	kvm->arch.all_vcpus_matched_freq = true;
--
--	raw_spin_lock_irqsave(&kvm->arch.tsc_write_lock, flags);
--	pvclock_update_vm_gtod_copy(kvm);
--	raw_spin_unlock_irqrestore(&kvm->arch.tsc_write_lock, flags);
- 
- 	kvm->arch.default_tsc_khz = max_tsc_khz ? : tsc_khz;
- 	kvm->arch.apic_bus_cycle_ns = APIC_BUS_CYCLE_NS_DEFAULT;
- 	kvm->arch.guest_can_read_msr_platform_info = true;
- 	kvm->arch.enable_pmu = enable_pmu;
- 
-+	kvm->arch.all_vcpus_matched_freq = true;
-+	kvm->arch.all_vcpus_matched_tsc = true;
-+	kvm->arch.cur_tsc_scaling_ratio = kvm_caps.default_tsc_scaling_ratio;
-+	kvm->arch.cur_tsc_khz = kvm->arch.default_tsc_khz;
-+
-+	raw_spin_lock_irqsave(&kvm->arch.tsc_write_lock, flags);
-+
-+	/*
-+	 * Establish the initial TSC generation for synchronization logic.
-+	 * The first vCPU will sync to this, starting its guest TSC at the
-+	 * number of cycles elapsed since VM creation rather than at zero.
-+	 * This ensures coherence with the kvmclock epoch (also set here)
-+	 * and means the master clock snapshot taken below is immediately
-+	 * valid — no need to redo it at first vCPU creation.
-+	 */
-+#ifdef CONFIG_X86_64
-+	if (!kvm_get_time_and_clockread(&kvmclock_ns, &kvmclock_host_tsc))
-+#endif
-+	{
-+		/*
-+		 * If not simultaneous, we want the TSC to be zero slightly
-+		 * *after* the kvmclock is zero.
-+		 */
-+		kvmclock_ns = get_kvmclock_base_ns();
-+		kvmclock_host_tsc = rdtsc();
-+	}
-+	kvm->arch.cur_tsc_write = 0;
-+	kvm->arch.cur_tsc_offset = -(s64)kvmclock_host_tsc;
-+	kvm->arch.cur_tsc_nsec = kvmclock_ns;
-+	kvm->arch.cur_tsc_generation = 1;
-+	kvm->arch.kvmclock_offset = -kvmclock_ns;
-+
-+	pvclock_update_vm_gtod_copy(kvm);
-+	raw_spin_unlock_irqrestore(&kvm->arch.tsc_write_lock, flags);
-+
- #if IS_ENABLED(CONFIG_HYPERV)
- 	spin_lock_init(&kvm->arch.hv_root_tdp_lock);
- 	kvm->arch.hv_root_tdp = INVALID_PAGE;
--- 
-2.54.0
-
+Thanks,
+Joanne
 
