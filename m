@@ -1,319 +1,175 @@
-Return-Path: <linux-doc+bounces-94964-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94966-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 0p89Bus5SWq6zQAAu9opvQ
-	(envelope-from <linux-doc+bounces-94964-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 04 Jul 2026 18:50:51 +0200
+	id mBgbGKxESWpozwAAu9opvQ
+	(envelope-from <linux-doc+bounces-94966-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 04 Jul 2026 19:36:44 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 760F270801A
-	for <lists+linux-doc@lfdr.de>; Sat, 04 Jul 2026 18:50:50 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id AD2FE7081AF
+	for <lists+linux-doc@lfdr.de>; Sat, 04 Jul 2026 19:36:43 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=baylibre.com header.s=google header.b=KGIVjtDh;
-	dmarc=none;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94964-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94964-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=zytor.com header.s=2026062701 header.b=CJF5CAKR;
+	dmarc=pass (policy=none) header.from=zytor.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94966-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94966-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id D923F3019381
-	for <lists+linux-doc@lfdr.de>; Sat,  4 Jul 2026 16:50:45 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 6B5F7300F515
+	for <lists+linux-doc@lfdr.de>; Sat,  4 Jul 2026 17:36:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4515D374170;
-	Sat,  4 Jul 2026 16:50:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AF5B3372EE2;
+	Sat,  4 Jul 2026 17:36:41 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com [209.85.210.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mail.zytor.com (terminus.zytor.com [198.137.202.136])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08D1F23815B
-	for <linux-doc@vger.kernel.org>; Sat,  4 Jul 2026 16:50:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B0CF35E1B1;
+	Sat,  4 Jul 2026 17:36:40 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783183841; cv=none; b=FZxszP/6W49x/PIkD2CZYrKcEGSuIpWsYpqvEQizqeLPlkfzANVnxmtrySqjZDFV89OCso3lJ1XyyW3G7ycMz1fw8EHkha4X/+UUBd2zs4HJWv8N494qox6EXT+xpQyj5iFKDzJ58CFivVBSUZYoAGBcwPiZeiRaUtRmPnFJRxg=
+	t=1783186601; cv=none; b=B+3mp6MISNcNXHPpamlb9ox9fr91BJZbbWkO26WnRHXh672bdaIrAtlaVJCj/N8d/cLygzLDrl06HaDrEOQNrzrnebGawQNtq4tAYGKoYlbiHDTsQESIRgwOKpfo3Xpgz+UylPqX0tHnDrtLU+PJ2ZWHDvJGQaPPzOHi7YEkYP0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783183841; c=relaxed/simple;
-	bh=I4w7J78soOjJ0QUV6I0ifDS+Q+5IOOM3fxCKJ+hVduw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=cOvxekFoFQ3wWgb+yjPEYWlKRO0tsyQ/l59MlfPRpmlUYB8qkVsXUaUg2/x9sm7bUFxu6oJY+XpT/RkEMWYsTT6mJbW4TAcAOxGyXLPu0D7/ZPDi99VYIoejF9HYIjz3uqrlljjPEHuOItKfTu8eEsNlaWLHVwDWGbjLQvbSLu0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=KGIVjtDh; arc=none smtp.client-ip=209.85.210.51
-Received: by mail-ot1-f51.google.com with SMTP id 46e09a7af769-7eb64371a2aso1065559a34.0
-        for <linux-doc@vger.kernel.org>; Sat, 04 Jul 2026 09:50:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1783183837; x=1783788637; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=r/gEBWdH2YbusOaxF2AVLiisIf8zHaMmjVT4xSj8PXs=;
-        b=KGIVjtDhSG+kReS0uIixBDUPdCC0wM05UXt5tWRk0oHxz1iqW7xAnZDjkVlLpzaQy6
-         rTurFDpmEfqO8QfjPIWOJgRRqzLm8D4JlPvSBYhw+vhCwKP83RrBphshgMv9C7mEPCvh
-         48qUsxEbi63Nr6sBUPx6rHf5nQjf4MtLmWjDZ9kpUqc456fsiom4RbjTRyyH1P70NsYP
-         grsOPaqf54MsYZZ8MN/PBKFl8E43QEdy8hNH/QV+SFPkM64i0h636DYr2hfd+i7KtwTj
-         bVvpqqdONNZkOK1wqYNi4s4JUY/55RNmFcWG8sFT0Tv9ktTjO4FuG5mXdZOLNvXb2YL5
-         ceNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783183837; x=1783788637;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=r/gEBWdH2YbusOaxF2AVLiisIf8zHaMmjVT4xSj8PXs=;
-        b=GWMMN41meZ1OUM0RE+ODrdHsFBLj/TVwPpiqzsy02TDoUgkCf0E3/O+USJWJ4ni8d0
-         J6bNkssWbh+7KiBSxptaiiPhyEKF01cu7y2MCRthx/KoDU8SbbgWY06WwY3Qk04KefgX
-         K/vbwxfaKpw4PN8AYgxwpooY4SBk/qd8ITT7xTdp+bOixp68FfLdz3odUn2l3hlswqbe
-         qN02/W4RtpVdtIaj+zX2rW3BEGwr3m8Jq6lW7r6IyoIHaNjjtOXVVLfbN3m8u3vmNwS5
-         5WH+8fqz+JQzOZC5NIo6jKvFzyMSjOyRcS1/umoTnSc/i6qF1g8wA5srUENao68Md402
-         +ZLA==
-X-Forwarded-Encrypted: i=1; AFNElJ959viRsm447BpIC/K9lGYqHF2dzuQ+0mbGGbK3FmyfDtaZfl7Cl6ARi9Qjk7VNxSdp8M7WNRunMuM=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyqhKFeE70SkC9plr9oT4Z378V0dIocjhYVuyd50lMptMoNQogL
-	I/m8iLJk2DzF5uoNalOgW34FzNSBf0qOuxVpfBCEfVc9GprS1mpNe+iLKyso/H8f1yc=
-X-Gm-Gg: AfdE7cnhRd28wjWpsUXNRhgQonmYCq6ggW3rT6NvDrM1n5lJU0flRheVk1jmrSXm9+k
-	qNWaFOpQb9e69qLQtJG1hHjykAqleDKfnHIrJ8Fa5NbOqaks50jPozJZwWHttG6xaqcQRZn/O98
-	wyS+qg1AUN2UQlsmwUHdoRp4CpQfdld/QZ/KIG8Buvj21evKAgLeNycfe+QGr7w8gva3Po9Pp7t
-	o+A5is1ew9uVfMcOrcVwjH2jgsD+63F65UbxzXcBpawxY/FQHDyiN7BhYDj+v3i9+mZeDOgPXOr
-	SXOaowe6ReNnvkdM6tNV2dOdAYbUujyAuhmb7niCSjqW4ufp5Jjr6zDXctpufMMeZow3AZ/iAr5
-	RWWURDbAcnEN6dyWIBNd8aAG38UfJajXmQNvqnvrQmcuwqQ1hcuLmAIHg6FuhCjC572n5kQKCLK
-	fwhbqf5tWOloP3+tXMM5uF+aXM3Gf2B2KFi1IpOY4KjfWDEFzjnNRyXMNb5i2wAkM=
-X-Received: by 2002:a05:6830:381a:b0:7df:5fc:3fd8 with SMTP id 46e09a7af769-7eb7fd2c5d2mr2822485a34.1.1783183836823;
-        Sat, 04 Jul 2026 09:50:36 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:4944:e714:93fc:9815? ([2600:8803:e7e4:500:4944:e714:93fc:9815])
-        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7eb542936e6sm7552846a34.5.2026.07.04.09.50.35
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 04 Jul 2026 09:50:36 -0700 (PDT)
-Message-ID: <1493eed5-5bb8-4a2c-8f2d-8b4bc5dde157@baylibre.com>
-Date: Sat, 4 Jul 2026 11:50:35 -0500
+	s=arc-20240116; t=1783186601; c=relaxed/simple;
+	bh=dTFud6IYNn4nvyg1znQWrkcJonRufF/qiM6XZzzUK0c=;
+	h=Date:From:To:CC:Subject:In-Reply-To:References:Message-ID:
+	 MIME-Version:Content-Type; b=b7CTBvpxeFqPcZ3YmE0g8a2g/0p6vXjSxDQ1e6NHBf5crSLjsxKf5YV1KH2nQNCYN4rcidX6LwOnimdKTlNArWGJQVSOipTAJ4644WATcW5cHOAK4ZxJdFMzb3DxKsIxu81VFuyXM32MpZELeiklnYO4l8F3Cp6oj2j/W3D3t1w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com; spf=pass smtp.mailfrom=zytor.com; dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b=CJF5CAKR; arc=none smtp.client-ip=198.137.202.136
+Received: from ehlo.thunderbird.net (c-76-133-66-138.hsd1.ca.comcast.net [76.133.66.138])
+	(authenticated bits=0)
+	by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 664HJ3VH1732288
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
+	Sat, 4 Jul 2026 10:19:04 -0700
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 664HJ3VH1732288
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
+	s=2026062701; t=1783185548;
+	bh=dTFud6IYNn4nvyg1znQWrkcJonRufF/qiM6XZzzUK0c=;
+	h=Date:From:To:CC:Subject:In-Reply-To:References:From;
+	b=CJF5CAKRz4eNOPyR8kG0iAzsmyc+IwhntrZI2+KNzBcxTwm4Pcp7ISaY7lclR6A+T
+	 R6iud2HrZonYFu7Ng8lIZ2Zy+h6YMeauv3txYKWEhoUf4+sfZRGAxFauHe9YYLo4uT
+	 C6dgcvSiTqEU+iIkY6G3PGqbNZPx4bFWNID7VQM3t0H3q9hYfHNBXSLVMX7VMkyGoT
+	 AchFenE1pkrCZJeaXw8wK9l7BRpqKAAfu9aoRxmSUBXrsCED1ggSW/SS3uws8TW93A
+	 TkiqPgvXsUI43KFbqW08LGibZW5bbrWgmswEj6zjL2nzb2J1On7jMSJi4qiHbO8w3j
+	 5g1n/GjjLwl9A==
+Date: Sat, 04 Jul 2026 10:18:58 -0700
+From: "H. Peter Anvin" <hpa@zytor.com>
+To: Sven Schnelle <svens@linux.ibm.com>,
+        =?ISO-8859-1?Q?Michal_Such=E1nek?= <msuchanek@suse.de>
+CC: Peter Zijlstra <peterz@infradead.org>, Thomas Gleixner <tglx@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Huacai Chen <chenhuacai@kernel.org>, WANG Xuerui <kernel@xen0n.name>,
+        Madhavan Srinivasan <maddy@linux.ibm.com>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        Nicholas Piggin <npiggin@gmail.com>,
+        "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
+        Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+        Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
+        Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>,
+        Alexander Gordeev <agordeev@linux.ibm.com>,
+        Christian Borntraeger <borntraeger@linux.ibm.com>,
+        Andy Lutomirski <luto@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+        Andrew Donnellan <andrew+kernel@donnellan.id.au>,
+        Mark Rutland <mark.rutland@arm.com>, Arnd Bergmann <arnd@arndb.de>,
+        Jiaxun Yang <jiaxun.yang@flygoat.com>,
+        Ryan Roberts <ryan.roberts@arm.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Mukesh Kumar Chaurasiya <mkchauras@linux.ibm.com>,
+        Shrikanth Hegde <sshegde@linux.ibm.com>, Zong Li <zong.li@sifive.com>,
+        Nam Cao <namcao@linutronix.de>, Deepak Gupta <debug@rivosinc.com>,
+        Lukas Gerlach <lukas.gerlach@cispa.de>,
+        Rui Qi <qirui.001@bytedance.com>, Kees Cook <kees@kernel.org>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        loongarch@lists.linux.dev, linuxppc-dev@lists.ozlabs.org,
+        linux-riscv@lists.infradead.org, linux-s390@vger.kernel.org
+Subject: =?US-ASCII?Q?Re=3A_=5BRFC=5D_entry=3A_Untangle_the_return_value_of?=
+ =?US-ASCII?Q?_syscall=5Fenter=5Ffrom=5Fuser=5Fmode_from_syscall_NR?=
+User-Agent: K-9 Mail for Android
+In-Reply-To: <yt9dtsqg480p.fsf@linux.ibm.com>
+References: <akVRcPsD_R_CE1qW@kunlun.suse.cz> <BA7CD91D-C0E5-47A1-B49C-BC6AF6604182@zytor.com> <87h5mhnjsr.ffs@fw13> <yt9dwlvca8rn.fsf@linux.ibm.com> <87ldbsmnie.ffs@fw13> <yt9d5x2w5r84.fsf@linux.ibm.com> <20260703105718.GO751831@noisy.programming.kicks-ass.net> <akecJWAJP-e5CYP_@kunlun.suse.cz> <yt9dtsqg480p.fsf@linux.ibm.com>
+Message-ID: <69ACC6A7-7845-41B4-B0D0-2E6FCDA7443D@zytor.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 12/16] iio: frequency: ad9910: add RAM mode support
-To: =?UTF-8?Q?Nuno_S=C3=A1?= <noname.nuno@gmail.com>,
- Jonathan Cameron <jic23@kernel.org>
-Cc: Rodrigo Alencar via B4 Relay
- <devnull+rodrigo.alencar.analog.com@kernel.org>, rodrigo.alencar@analog.com,
- linux-iio@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-hardening@vger.kernel.org, Lars-Peter Clausen <lars@metafoo.de>,
- Michael Hennerich <Michael.Hennerich@analog.com>,
- Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Philipp Zabel <p.zabel@pengutronix.de>,
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- Kees Cook <kees@kernel.org>, "Gustavo A. R. Silva" <gustavoars@kernel.org>
-References: <20260618-ad9910-iio-driver-v6-0-79125ffbe430@analog.com>
- <20260618-ad9910-iio-driver-v6-12-79125ffbe430@analog.com>
- <20260703040544.08a8ea5e@jic23-huawei> <ake_YWfvVC9RQ3wu@nsa>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <ake_YWfvVC9RQ3wu@nsa>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.16 / 15.00];
+X-Spamd-Result: default: False [0.54 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
+	SUBJ_EXCESS_QP(1.20)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_DKIM_ALLOW(-0.20)[baylibre.com:s=google];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[zytor.com,none];
+	R_DKIM_ALLOW(-0.20)[zytor.com:s=2026062701];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_FROM(0.00)[bounces-94966-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[infradead.org,kernel.org,lwn.net,linuxfoundation.org,xen0n.name,linux.ibm.com,ellerman.id.au,gmail.com,dabbelt.com,eecs.berkeley.edu,ghiti.fr,redhat.com,alien8.de,linux.intel.com,donnellan.id.au,arm.com,arndb.de,flygoat.com,sifive.com,linutronix.de,rivosinc.com,cispa.de,bytedance.com,vger.kernel.org,lists.linux.dev,lists.ozlabs.org,lists.infradead.org];
 	FORWARDED(0.00)[lists@lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[20];
+	FORGED_SENDER(0.00)[hpa@zytor.com,linux-doc@vger.kernel.org];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:noname.nuno@gmail.com,m:jic23@kernel.org,m:devnull+rodrigo.alencar.analog.com@kernel.org,m:rodrigo.alencar@analog.com,m:linux-iio@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-hardening@vger.kernel.org,m:lars@metafoo.de,m:Michael.Hennerich@analog.com,m:andy@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:p.zabel@pengutronix.de,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:kees@kernel.org,m:gustavoars@kernel.org,m:nonamenuno@gmail.com,m:devnull@kernel.org,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
-	FREEMAIL_TO(0.00)[gmail.com,kernel.org];
-	DMARC_NA(0.00)[baylibre.com];
-	FORGED_SENDER(0.00)[dlechner@baylibre.com,linux-doc@vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-94964-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:svens@linux.ibm.com,m:msuchanek@suse.de,m:peterz@infradead.org,m:tglx@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:chenhuacai@kernel.org,m:kernel@xen0n.name,m:maddy@linux.ibm.com,m:mpe@ellerman.id.au,m:npiggin@gmail.com,m:chleroy@kernel.org,m:pjw@kernel.org,m:palmer@dabbelt.com,m:aou@eecs.berkeley.edu,m:alex@ghiti.fr,m:hca@linux.ibm.com,m:gor@linux.ibm.com,m:agordeev@linux.ibm.com,m:borntraeger@linux.ibm.com,m:luto@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:andrew+kernel@donnellan.id.au,m:mark.rutland@arm.com,m:arnd@arndb.de,m:jiaxun.yang@flygoat.com,m:ryan.roberts@arm.com,m:gregkh@linuxfoundation.org,m:mkchauras@linux.ibm.com,m:sshegde@linux.ibm.com,m:zong.li@sifive.com,m:namcao@linutronix.de,m:debug@rivosinc.com,m:lukas.gerlach@cispa.de,m:qirui.001@bytedance.com,m:kees@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:loongarch@lists.linux.dev,m:linuxppc-dev@lists.ozlabs
+ .org,m:linux-riscv@lists.infradead.org,m:linux-s390@vger.kernel.org,m:andrew@donnellan.id.au,s:lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[dlechner@baylibre.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[baylibre.com:+];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[hpa@zytor.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[zytor.com:+];
 	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,kernel];
+	RCPT_COUNT_TWELVE(0.00)[45];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,rodrigo.alencar.analog.com,dt];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[baylibre.com:from_mime,baylibre.com:dkim,baylibre.com:mid,vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,analog.com:email]
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 760F270801A
+X-Rspamd-Queue-Id: AD2FE7081AF
 
-On 7/3/26 9:09 AM, Nuno Sá wrote:
-> On Fri, Jul 03, 2026 at 04:05:44AM +0100, Jonathan Cameron wrote:
->> On Thu, 18 Jun 2026 14:27:28 +0100
->> Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org> wrote:
+On July 3, 2026 4:39:18 AM PDT, Sven Schnelle <svens@linux=2Eibm=2Ecom> wro=
+te:
+>Michal Such=C3=A1nek <msuchanek@suse=2Ede> writes:
+>
+>> The same could be asked of syscall_enter_from_user_mode=2E I find it ve=
+ry
+>> odd=2E Why does it conflate the syscall number with its return value?
 >>
->>> From: Rodrigo Alencar <rodrigo.alencar@analog.com>
->>>
->>> Add RAM control channel, which includes:
->>> - RAM data loading via firmware upload interface;
->>> - Per-profile configuration and DDS core parameter destination as firmware
->>>   metadata;
->>> - Profile switching relying on profile channels;
->>> - Sampling frequency control of the active profile;
->>> - ram-enable-aware read/write paths that redirect single tone
->>>   frequency/phase/amplitude access through reg_profile cache when RAM is
->>>   active;
->>>
->>> When RAM is enabled, the DDS profile parameters (frequency, phase,
->>> amplitude) for the single tone mode are sourced from a shadow register
->>> cache (reg_profile[]) since the profile registers are repurposed for RAM
->>> control.
->>>
->>> Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
+>> It never uses the syscall number passed in except when returning it
+>> unchanged=2E When it pokes the registers it reads the syscall number fr=
+om
+>> them=2E
 >>
->>> diff --git a/drivers/iio/frequency/ad9910.c b/drivers/iio/frequency/ad9910.c
->>> index 3fe97aa887c3..c4e179dda715 100644
->>> --- a/drivers/iio/frequency/ad9910.c
->>> +++ b/drivers/iio/frequency/ad9910.c
->>
->>> +static enum fw_upload_err ad9910_ram_fwu_write(struct fw_upload *fw_upload,
->>> +					       const u8 *data, u32 offset,
->>> +					       u32 size, u32 *written)
->>> +{
->>> +	const struct ad9910_ram_fw *fw_data = (const struct ad9910_ram_fw *)data;
->>> +	struct ad9910_state *st = fw_upload->dd_handle;
->>> +	int ret, ret2, idx, wcount;
->>> +	u64 tmp64, backup;
->>> +
->>> +	if (offset != 0)
->>> +		return FW_UPLOAD_ERR_INVALID_SIZE;
->>> +
->>> +	guard(mutex)(&st->lock);
->>> +
->>> +	if (st->ram_fwu_cancel)
->>> +		return FW_UPLOAD_ERR_CANCELED;
->>> +
->>> +	if (AD9910_RAM_ENABLED(st))
->>> +		return FW_UPLOAD_ERR_HW_ERROR;
->>> +
->>> +	for (idx = 0; idx < AD9910_NUM_PROFILES; idx++)
->>> +		st->reg_profile[idx] = get_unaligned_be64(&fw_data->profiles[idx]) |
->>> +				       AD9910_PROFILE_RAM_OPEN_MSK;
->>> +
->>> +	ret = ad9910_reg32_update(st, AD9910_REG_CFR1,
->>> +				  AD9910_CFR1_RAM_PLAYBACK_DEST_MSK |
->>> +				  AD9910_CFR1_INT_PROFILE_CTL_MSK,
->>> +				  get_unaligned_be32(&fw_data->cfr1), true);
->>> +	if (ret)
->>> +		return FW_UPLOAD_ERR_RW_ERROR;
->>> +
->>> +	wcount = get_unaligned_be16(&fw_data->wcount);
->>> +	if (!wcount) {
->>> +		*written = size;
->>> +		return FW_UPLOAD_ERR_NONE; /* nothing else to write */
->>> +	}
->>> +
->>> +	ret = ad9910_profile_set(st, st->profile);
->>> +	if (ret)
->>> +		return FW_UPLOAD_ERR_HW_ERROR;
->>> +
->>> +	/* backup profile register and update it with required address range */
->>> +	backup = st->reg[AD9910_REG_PROFILE(st->profile)].val64;
->>> +	tmp64 = AD9910_PROFILE_RAM_STEP_RATE_MSK |
->>> +		FIELD_PREP(AD9910_PROFILE_RAM_START_ADDR_MSK, 0) |
->>> +		FIELD_PREP(AD9910_PROFILE_RAM_END_ADDR_MSK, wcount - 1);
->>> +	ret = ad9910_reg64_write(st, AD9910_REG_PROFILE(st->profile), tmp64, true);
->>> +	if (ret)
->>> +		return FW_UPLOAD_ERR_RW_ERROR;
->>> +
->>> +	memcpy(&st->tx_buf[1], fw_data->words, wcount * AD9910_RAM_WORD_SIZE);
->>> +
->>> +	/* write ram data and restore profile register */
->>> +	ret = ad9910_spi_write(st, AD9910_REG_RAM,
->>> +			       wcount * AD9910_RAM_WORD_SIZE, false);
->>> +	ret2 = ad9910_reg64_write(st, AD9910_REG_PROFILE(st->profile), backup, true);
->>> +	if (ret || ret2)
->>> +		return FW_UPLOAD_ERR_RW_ERROR;
->>> +
->>> +	*written = size;
->>
->> I'd like a blank line here. Mostly to make that 'good' return more obvious.
->>
->>> +	return FW_UPLOAD_ERR_NONE;
->>> +}
->>
->>>  
->>> +static inline void ad9910_debugfs_init(struct ad9910_state *st,
->>> +				       struct iio_dev *indio_dev)
->>> +{
->>> +	struct dentry *d = iio_get_debugfs_dentry(indio_dev);
->>> +	char buf[64];
->>> +
->>> +	/*
->>> +	 * symlinks are created here so iio userspace tools can refer to them
->>> +	 * as debug attributes.
->>
->> Maybe worth a reference to appropriate ABI doc here (even if it is introduced
->> in a later patch)
-> 
-> I'm not so sure about these links. I mean, I definitely agree we should
-> make it easy for userspace tools like libiio to be able to handle
-> these kind of attributes but using debugfs is questionable to me. Pretty
-> much because this is not a debug thing. It is a real setting for the
-> driver so ideally we would be able to control it (using the existent
-> tools) without enforcing one to mount debugfs (I know that most of the
-> times it's always mounted but still feels wrong to tie "real
-> functionality" to debugfs). 
-> 
-> Having said the above, some suggestions:
-> 
-> 1. Make the iio_dev the parent so that the attr name is just "ram" and
-> it will be a subdir /sys/bus/iio/iio:deviceN/ram/.
-> 2. Propose a new helper for the firmware_loader code so we can get
-> struct device from struct fw_upload then we can easily create a sysfs
-> symlink.
-> 3. Name the attr as dev_name(iio_dev):attr so that it becomes
-> iio:deviceN:attr_name.
-> 
-> Now that I think about it, 2. does not make much sense when compared to
-> 1. And If I'm not missing anything both 1. and 3. can be sanely parsable
-> from userspace (being 3. maybe a bit more reliable). And yes, both require
-> user space tools (in this case libiio) to support a new type of
-> attribute (firmware) but that is another problem.
+>> If the caller of syscall_enter_from_user_mode only read the syscall
+>> number from the registers when syscall_enter_from_user_mode returns and
+>> indicates the syscall should be still executed this whole shenigan woul=
+d
+>
+>I agree=2E The fact that if (nr < NR_syscall) just works because -1 gets
+>casted to 0xffffffff and is therefore out of bounds is very odd=2E
+>
 
-I would say that udev should be used to find the firmware device from
-userspace rather than creating symlinks. And you probably don't even
-need udev if you already have the `iio-device:<ID>` value. The path
-is always going to be `/sys/class/firmware/iio-device:<ID>:ram/`. It
-seems like the same amount of work for usespace to computer the path
-either way, so might as well keep it simple and leave out the symlink
-stuff.
+Not at all strange=2E It is an *extremely* common construct in C, especial=
+ly for range checking values into [0, n)=2E
 
-> 
-> - Nuno Sá
->>
->>> +	 */
->>> +	snprintf(buf, sizeof(buf), "/sys/class/firmware/%s/loading", st->ram_fwu_name);
->>> +	debugfs_create_symlink("ram_loading", d, buf);
->>> +
->>> +	snprintf(buf, sizeof(buf), "/sys/class/firmware/%s/data", st->ram_fwu_name);
->>> +	debugfs_create_symlink("ram_data", d, buf);
->>> +}
->>> +
->>>  static int ad9910_probe(struct spi_device *spi)
->>>  {
->>>  	static const char * const supplies[] = {
->>> @@ -1561,7 +1876,25 @@ static int ad9910_probe(struct spi_device *spi)
->> ...
->>
->>> +	ad9910_debugfs_init(st, indio_dev);
->>
->> Blank line preferred before a simple return like this one.
->>
->>> +	return 0;
->>>  }
->>>  
->>>  static const struct spi_device_id ad9910_id[] = {
->>>
->>
+In addition to being idiomatic, keep in mind that this is one of the absol=
+utely most performance critical paths in the entire kernel=2E One of the fu=
+ndamental cornerstones behind Unix is to keep system calls cheap so that th=
+ey can be simple building blocks for more complex operations=2E It is not t=
+he only possible design philosophy, but it is the one we chose to adopt, qu=
+ite successfully=2E
 
+The downside? Squeezing every possible cycle out of the system call path b=
+ecomes one of the most essential tuning tasks=2E The good part is that keep=
+ing the system call path clean also makes it maintainable, even when there =
+are quirks=2E
 
