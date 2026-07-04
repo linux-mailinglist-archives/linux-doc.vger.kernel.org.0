@@ -1,532 +1,395 @@
-Return-Path: <linux-doc+bounces-94950-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94952-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id HpIWHWzCSGoGtgAAu9opvQ
-	(envelope-from <linux-doc+bounces-94950-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 04 Jul 2026 10:21:00 +0200
+	id s/7yAf7SSGrYuAAAu9opvQ
+	(envelope-from <linux-doc+bounces-94952-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 04 Jul 2026 11:31:42 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id E948C7070DA
-	for <lists+linux-doc@lfdr.de>; Sat, 04 Jul 2026 10:20:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A6137073EF
+	for <lists+linux-doc@lfdr.de>; Sat, 04 Jul 2026 11:31:41 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=yeah.net header.s=s110527 header.b=S2GZWr7b;
-	dmarc=pass (policy=none) header.from=yeah.net;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94950-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-94950-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=QsoaTYMI;
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94952-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-94952-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 39B453003602
-	for <lists+linux-doc@lfdr.de>; Sat,  4 Jul 2026 08:20:59 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 07054300E2B2
+	for <lists+linux-doc@lfdr.de>; Sat,  4 Jul 2026 09:31:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7830939061C;
-	Sat,  4 Jul 2026 08:20:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F0E343A3826;
+	Sat,  4 Jul 2026 09:31:38 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m16.yeah.net (mail-m16.yeah.net [220.197.32.18])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B23684039;
-	Sat,  4 Jul 2026 08:20:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 03D5539D3DA;
+	Sat,  4 Jul 2026 09:31:36 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783153256; cv=none; b=RAO8oPNN/TaP0Mcs2ZMylqD9OOPd6+0yMN4JVMYyqcTcliq7OkQdRjLinOTW1n3Moxa20VnW9hQ8P4dSuxtBXFjCpqKFBMJydCHC8kJWr8/hCpRFl9dXqhVjGSu0dbx4b9gzjGnFgTwfcEomkQSQ2+SW2bqex0rQM+ehd/J4jxw=
+	t=1783157498; cv=none; b=UVl2tTz+plRXKu4TbcwZTkyqvB3Tt+f3DCU+LNSjplbBZo/mERHWWT7MurvTa6Bd3Ckc8LHF7dY7TMUM8UBGxyPM0ffTK83eFb4em/RCCv541eUEtLMlaO2/NesdSO11kKzglJEFiUgO+2il7O2O3RpNdAs7maKl8yAfqPeX+Pc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783153256; c=relaxed/simple;
-	bh=rhYbhWfYyDMlrqXhxAFAxRd5osxVOPAzin7IcO7jzb0=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=fffJI84u6r8O5k0gjrZn72DfE0zsDOLp9LPuRYpZyS/HNqKiDqroQ3/Ybx/hVuhwYzUnFMMXXUJhOXoM+74Hyb6vruoJPfR++6NIjWw/lmfqUqLCTKM/Qqbw9nx25UXeROX5Sh9y5us76PzbbnEHkcQlKbPLsJe5zC4h2c9HTCE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=yeah.net; spf=pass smtp.mailfrom=yeah.net; dkim=pass (1024-bit key) header.d=yeah.net header.i=@yeah.net header.b=S2GZWr7b; arc=none smtp.client-ip=220.197.32.18
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yeah.net;
-	s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=Jw
-	Y0wdZxk2en8JfBhYY7cC7bI+X6k5bpanys1IPBwZA=; b=S2GZWr7b5yvI90ITRp
-	MszkUNsp+a8kfDviR2VOSlYbh84imcYQSf8zfuSFSnkjuGys8IeUEDWCciM+OuH5
-	xyyADsgOg6HvIOFaYWioIQAuZkx9ivaV7xtTdbEfzYPh+/NBJYaBUPQe/BxLSB3I
-	3shWi9nRhScUb21SB4/cD1uKk=
-Received: from localhost.localdomain (unknown [])
-	by gzsmtp2 (Coremail) with UTF8SMTPA id Ms8vCgD3308rwkhqyJoLAQ--.13660S3;
-	Sat, 04 Jul 2026 16:19:59 +0800 (CST)
-From: wenswang@yeah.net
-To: robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
-	linux@roeck-us.net,
-	corbet@lwn.net,
-	skhan@linuxfoundation.org
-Cc: devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-hwmon@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	Wensheng Wang <wenswang@yeah.net>
-Subject: [PATCH 2/2] hwmon: add MPQ82D00 driver
-Date: Sat,  4 Jul 2026 16:19:52 +0800
-Message-Id: <20260704081952.1701914-2-wenswang@yeah.net>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20260704081952.1701914-1-wenswang@yeah.net>
-References: <20260704081810.1701587-1-wenswang@yeah.net>
- <20260704081952.1701914-1-wenswang@yeah.net>
+	s=arc-20240116; t=1783157498; c=relaxed/simple;
+	bh=VbX6NacYvLE2FJCi58V0medyBvA0ZGJMYN4yv7QEMHg=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=A1+P2xoi+QhczhTcqvqISYjNKlLrVFnQQ2VIX6+IMpd7zT6A4A8234F2YxXyPFKt/ra2+6eHULyrVRE1rRoaqGJ6y4GeRRxY35U2h6Y3mp6SSYOmaN69is1eCtrh6sYAquTmk4Um5eE0/z3Au/Zso6dRfkPkPd8O611bAYUuHr8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QsoaTYMI; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D423E1F000E9;
+	Sat,  4 Jul 2026 09:31:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783157496;
+	bh=p1NRWPeXH4Cx6+cby7q1IV9WGoYMUGRxotRm9lK8E8M=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=QsoaTYMI8AZ1KC7mXmN8STYCDOr7HqJLnj+iE5TUu8webmH8x7cy2/kCISGvaXK2U
+	 3HyagT7YzPamqCEVFNflmhXIh1lNh9NognRS8tUPfRVIf6pqeucxu47zEJnaGgoKuE
+	 cjySlsga79nNUVGvxyL5k4YvCTm9VK37KRPOEuDbsf2Y4Q85TlNrH6s1l34WDDqhNW
+	 j+87m5nrHbt3FLm1m9AbfhNky17N1jvno7Cbp0JvZzn8MYEs+qQVi7z9NX2tlqaW3q
+	 0JPzWcWB98LclBK5Uz7mUgLsVQd2/RenbKnTxOjQpKkng5tRTzij55mKWppOCYuxEk
+	 FCKzcu182tT0A==
+Date: Sat, 4 Jul 2026 12:31:26 +0300
+From: Mike Rapoport <rppt@kernel.org>
+To: Breno Leitao <leitao@debian.org>
+Cc: Miaohe Lin <linmiaohe@huawei.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	David Hildenbrand <david@kernel.org>,
+	Lorenzo Stoakes <ljs@kernel.org>,
+	Vlastimil Babka <vbabka@kernel.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Michal Hocko <mhocko@suse.com>, Shuah Khan <shuah@kernel.org>,
+	Naoya Horiguchi <nao.horiguchi@gmail.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	"Liam R. Howlett" <liam@infradead.org>, lance.yang@linux.dev,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	linux-mm@kvack.org, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
+	linux-trace-kernel@vger.kernel.org, kernel-team@meta.com
+Subject: Re: [PATCH v10 6/6] selftests/mm: add hwpoison-panic destructive test
+Message-ID: <akjS7kiGjVwWaWEz@kernel.org>
+References: <20260630-ecc_panic-v10-0-c6ed5b62eea2@debian.org>
+ <20260630-ecc_panic-v10-6-c6ed5b62eea2@debian.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:Ms8vCgD3308rwkhqyJoLAQ--.13660S3
-X-Coremail-Antispam: 1Uf129KBjvJXoW3ur45ury7Gw4ftryUGrW7Arb_yoWkJw18pa
-	yrurWfAr4UJF4xW3ykCF47ZF13K3Wxur42yFnFk34FvF1UXrZrZF17tF90yFnrGrWrGFWa
-	qr4jqayDWa45J3JanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0zRUUUUUUUUU=
-X-CM-SenderInfo: 5zhq24xdqjq5hhdkh0dhw/1tbiNw9oDWpIwi9DQQAA3Q
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260630-ecc_panic-v10-6-c6ed5b62eea2@debian.org>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.84 / 15.00];
+X-Spamd-Result: default: False [-3.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[yeah.net,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[yeah.net:s=s110527];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94950-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:linux@roeck-us.net,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-hwmon@vger.kernel.org,m:linux-doc@vger.kernel.org,m:wenswang@yeah.net,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[wenswang@yeah.net,linux-doc@vger.kernel.org];
-	TO_DN_SOME(0.00)[];
+	TAGGED_FROM(0.00)[bounces-94952-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER(0.00)[rppt@kernel.org,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	FORGED_RECIPIENTS(0.00)[m:leitao@debian.org,m:linmiaohe@huawei.com,m:akpm@linux-foundation.org,m:david@kernel.org,m:ljs@kernel.org,m:vbabka@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:shuah@kernel.org,m:nao.horiguchi@gmail.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:liam@infradead.org,m:lance.yang@linux.dev,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:kernel-team@meta.com,m:naohoriguchi@gmail.com,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[vger.kernel.org,yeah.net];
-	DKIM_TRACE(0.00)[yeah.net:+];
+	FREEMAIL_CC(0.00)[huawei.com,linux-foundation.org,kernel.org,google.com,suse.com,gmail.com,lwn.net,linuxfoundation.org,infradead.org,linux.dev,goodmis.org,efficios.com,kvack.org,vger.kernel.org,meta.com];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[wenswang@yeah.net,linux-doc@vger.kernel.org];
-	FREEMAIL_FROM(0.00)[yeah.net];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
+	FROM_NEQ_ENVFROM(0.00)[rppt@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FROM_NO_DN(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[yeah.net:from_mime,yeah.net:email,yeah.net:mid,yeah.net:dkim,vger.kernel.org:from_smtp,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[test_vmalloc.sh:url,ksft_vmalloc.sh:url,ksft_userfaultfd.sh:url,vger.kernel.org:from_smtp,ksft_vma_merge.sh:url]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: E948C7070DA
+X-Rspamd-Queue-Id: 9A6137073EF
 
-From: Wensheng Wang <wenswang@yeah.net>
+Hi Breno,
 
-Add support for MPS mpq82d00 controller. This driver exposes
-telemetry and limit value readings and writtings.
+On Tue, Jun 30, 2026 at 05:46:09AM -0700, Breno Leitao wrote:
+> Add a destructive selftest that verifies
+> vm.panic_on_unrecoverable_memory_failure actually panics when a
+> hwpoison error hits a kernel-owned page.
+> 
+> Three "kinds" of kernel-owned page can be targeted, selectable via
+> the script's first positional argument (default: rodata):
+> 
+>   rodata  - a PG_reserved page in the kernel rodata range, sourced
+>             from the "Kernel rodata" sub-resource of "System RAM" in
+>             /proc/iomem.  That entry is reported on every major
+>             architecture and guarantees the chosen PFN is backed by
+>             struct page (an online System RAM range, not a firmware
+>             hole), is PG_reserved, and is read-only -- so even if
+>             the panic fails to fire for some reason, the resulting
+>             PG_hwpoison marker on rodata does not corrupt writable
+>             kernel state.
+> 
+>   slab    - a slab page found by walking /proc/kpageflags for the
+>             first PFN with KPF_SLAB set (and KPF_HWPOISON / KPF_NOPAGE
+>             / KPF_COMPOUND_TAIL clear).  Exercises the get_any_page()
+>             path on a non PG_reserved kernel-owned page and so
+>             catches regressions where get_any_page() collapses
+>             kernel-owned pages into a transient -EIO instead of
+>             -ENOTRECOVERABLE.
+> 
+>   pgtable - same as slab, but the PFN is selected via KPF_PGTABLE.
+> 
+> PageLargeKmalloc, the fourth page type matched by
+> is_kernel_owned_page(), is intentionally not covered: it is a
+> PAGE_TYPE_OPS flag with no /proc/kpageflags bit, so selecting such
+> a PFN from userspace is not feasible.  The slab and pgtable
+> variants already exercise the same get_any_page() positive-check
+> branch.
+> 
+> The script enables the sysctl and writes the selected physical
+> address to /sys/devices/system/memory/hard_offline_page.  A
+> successful run crashes the kernel with
+> 
+>   Memory failure: <pfn>: unrecoverable page
+> 
+> A return from the inject means no panic fired.  Before reporting, the
+> script restores the sysctl and best-effort unpoisons the target PFN
+> through the hwpoison debugfs interface (hard_offline_page() injects
+> with MF_SW_SIMULATED, so the page stays unpoisonable), then re-reads
+> /proc/kpageflags: a PFN that is still the kernel-owned type it selected
+> is a genuine failure, while one that raced to a different type before
+> the inject is skipped as inconclusive.  Test outcome is therefore
+> observed externally (serial console, kdump) rather than from the
+> script's own exit code.
+> 
+> The script is intentionally NOT wired into run_vmtests.sh: every
+> successful run panics the kernel, which is incompatible with the
+> sequential "run each category in the same VM" model that
+> run_vmtests.sh assumes.  It is also not registered as a TEST_PROGS /
+> ksft_* wrapper so a default kselftest run does not opt itself into
+> a panic.  The script is meant to be executed manually inside a
+> disposable VM (e.g. virtme-ng), one variant per VM boot, and
+> requires RUN_DESTRUCTIVE=1 in the environment as a safety net.
+> 
+> Signed-off-by: Breno Leitao <leitao@debian.org>
+> ---
+>  tools/testing/selftests/mm/Makefile          |   4 +
+>  tools/testing/selftests/mm/hwpoison-panic.sh | 255 +++++++++++++++++++++++++++
+>  2 files changed, 259 insertions(+)
+> 
+> diff --git a/tools/testing/selftests/mm/Makefile b/tools/testing/selftests/mm/Makefile
+> index e6df968f0971c..ed321ae709dac 100644
+> --- a/tools/testing/selftests/mm/Makefile
+> +++ b/tools/testing/selftests/mm/Makefile
+> @@ -174,6 +174,10 @@ TEST_PROGS += ksft_userfaultfd.sh
+>  TEST_PROGS += ksft_vma_merge.sh
+>  TEST_PROGS += ksft_vmalloc.sh
+>  
+> +# Destructive: every successful run panics the kernel.  Installed and
+> +# kept executable, but not run from a default kselftest invocation.
+> +TEST_PROGS_EXTENDED += hwpoison-panic.sh
+> +
+>  TEST_FILES := test_vmalloc.sh
+>  TEST_FILES += test_hmm.sh
+>  TEST_FILES += va_high_addr_switch.sh
+> diff --git a/tools/testing/selftests/mm/hwpoison-panic.sh b/tools/testing/selftests/mm/hwpoison-panic.sh
+> new file mode 100755
+> index 0000000000000..d953d13673324
+> --- /dev/null
+> +++ b/tools/testing/selftests/mm/hwpoison-panic.sh
+> @@ -0,0 +1,255 @@
+> +#!/bin/bash
+> +# SPDX-License-Identifier: GPL-2.0
+> +#
+> +# Verify vm.panic_on_unrecoverable_memory_failure by injecting a hwpoison
+> +# error on a kernel-owned page and confirming the kernel panics.
+> +#
+> +# Three "kinds" of kernel-owned page can be targeted, selectable via the
+> +# first positional argument (default: rodata):
+> +#
+> +#   rodata  - a PG_reserved page in the kernel rodata range
+> +#             (sourced from /proc/iomem "Kernel rodata").  Exercises
+> +#             memory_failure() -> get_any_page() on a PageReserved page.
+> +#
+> +#   slab    - a slab page found via /proc/kpageflags (KPF_SLAB).
+> +#             Exercises memory_failure() -> get_any_page() on a non
+> +#             PG_reserved kernel-owned page.  This path is what catches
+> +#             regressions where get_any_page() collapses kernel-owned
+> +#             pages into a transient -EIO instead of -ENOTRECOVERABLE.
+> +#
+> +#   pgtable - a page-table page found via /proc/kpageflags (KPF_PGTABLE).
+> +#             Same path as slab, different page type.
+> +#
+> +# This test is DESTRUCTIVE: a successful run crashes the kernel.  It is
+> +# meant to be executed inside a disposable VM (e.g. virtme-ng) with a
+> +# serial console captured by the harness.  It is skipped unless the
+> +# caller opts in via RUN_DESTRUCTIVE=1.
+> +#
+> +# Test passes externally: the kernel must panic with
+> +#   "Memory failure: <pfn>: unrecoverable page"
+> +# A return from the inject means no panic fired: that is a failure,
+> +# unless the target PFN raced to a different page type before injection,
+> +# in which case the run is inconclusive and is skipped.
+> +#
+> +# Author: Breno Leitao <leitao@debian.org>
+> +
+> +set -u
+> +
+> +# KTAP output helpers (ktap_print_msg, ktap_skip_all, ktap_exit_fail_msg, ...).
+> +DIR="$(dirname "$(readlink -f "$0")")"
+> +# shellcheck source=../kselftest/ktap_helpers.sh
+> +source "${DIR}"/../kselftest/ktap_helpers.sh
+> +
+> +sysctl_path=/proc/sys/vm/panic_on_unrecoverable_memory_failure
+> +inject_path=/sys/devices/system/memory/hard_offline_page
+> +kpageflags_path=/proc/kpageflags
+> +unpoison_path=/sys/kernel/debug/hwpoison/unpoison-pfn
+> +
+> +# /proc/kpageflags bit positions (see include/uapi/linux/kernel-page-flags.h)
+> +KPF_SLAB=7
+> +KPF_COMPOUND_TAIL=16
+> +KPF_HWPOISON=19
+> +KPF_NOPAGE=20
+> +KPF_PGTABLE=26
+> +KPF_RESERVED=32
+> +
+> +pagesize=$(getconf PAGE_SIZE)
+> +
+> +kind=${1:-rodata}
+> +
+> +if [ "$(id -u)" -ne 0 ]; then
+> +	ktap_skip_all "must run as root"
+> +	exit "$KSFT_SKIP"
+> +fi
+> +
+> +if [ ! -w "$sysctl_path" ]; then
+> +	ktap_skip_all "$sysctl_path not present (kernel without the sysctl?)"
+> +	exit "$KSFT_SKIP"
+> +fi
+> +
+> +if [ ! -w "$inject_path" ]; then
+> +	ktap_skip_all "$inject_path not present (no MEMORY_HOTPLUG?)"
+> +	exit "$KSFT_SKIP"
+> +fi
+> +
+> +if [ "${RUN_DESTRUCTIVE:-0}" != "1" ]; then
+> +	ktap_skip_all "destructive test; re-run with RUN_DESTRUCTIVE=1 inside a disposable VM"
+> +	exit "$KSFT_SKIP"
+> +fi
+> +
+> +# Pick a PFN inside the kernel image rodata region of /proc/iomem.
+> +# This is preferred over a top-level "Reserved" entry because top-level
+> +# Reserved ranges are often firmware holes that have no backing struct
+> +# page; pfn_to_online_page() returns NULL on those and memory_failure()
+> +# bails out with -ENXIO before reaching the panic path.
+> +#
+> +# "Kernel rodata" is reported as a sub-resource of "System RAM" on every
+> +# major architecture, which guarantees:
+> +#   - the PFN is backed by struct page (within an online memory range);
+> +#   - PG_reserved is set on the page (kernel image area);
+> +#   - the memory is read-only, so setting PG_hwpoison on it does not
+> +#     corrupt writable kernel state if the panic somehow does not fire.
+> +#
+> +# /proc/iomem entries look like (indented for sub-resources):
+> +#     "  02500000-02ffffff : Kernel rodata"
+> +pick_rodata_phys_addr() {
+> +	awk -v pagesize="$(getconf PAGE_SIZE)" '
+> +	# Convert a hex string to a number without relying on the gawk-only
+> +	# strtonum().  mawk lacks it and would otherwise spuriously skip
+> +	# this test on distros that ship mawk as /usr/bin/awk.
+> +	function hex2num(s,   n, i, c, v) {
+> +		n = 0
+> +		for (i = 1; i <= length(s); i++) {
+> +			c = tolower(substr(s, i, 1))
+> +			v = index("0123456789abcdef", c) - 1
+> +			if (v < 0)
+> +				return -1
+> +			n = n * 16 + v
+> +		}
+> +		return n
+> +	}
+> +	/: Kernel rodata[[:space:]]*$/ {
+> +		sub(/^[[:space:]]+/, "")
+> +		n = split($0, a, /[- ]/)
+> +		start = hex2num(a[1])
+> +		end   = hex2num(a[2])
+> +		if (end <= start)
+> +			next
+> +		# Page-align upward and emit the first byte of that page.
+> +		pfn = int((start + pagesize - 1) / pagesize)
+> +		printf "0x%x\n", pfn * pagesize
+> +		exit 0
+> +	}
+> +	' /proc/iomem
+> +}
+> +
+> +# Walk /proc/kpageflags and return the phys addr of the first PFN that
+> +# has bit $1 set, with KPF_HWPOISON, KPF_NOPAGE and KPF_COMPOUND_TAIL
+> +# all clear (so we attack a real, non-tail, not-already-poisoned page).
+> +#
+> +# We skip the first 16 MiB of PFNs to step past low-memory special
+> +# ranges (BIOS/EFI/ACPI/etc.) that often are PG_reserved and would not
+> +# exhibit the slab/pgtable type we are looking for.
+> +pick_kpageflags_phys_addr() {
+> +	local want_bit=$1
+> +	local pagesize skip_pfn
+> +
+> +	[ -r "$kpageflags_path" ] || return
+> +
+> +	pagesize=$(getconf PAGE_SIZE)
+> +	skip_pfn=$(((16 * 1024 * 1024) / pagesize))
+> +
+> +	od -An -tx8 -v -w8 -j "$((skip_pfn * 8))" "$kpageflags_path" 2>/dev/null | \
+> +	awk -v want_bit="$want_bit" \
+> +	    -v hwp_bit="$KPF_HWPOISON" \
+> +	    -v nopage_bit="$KPF_NOPAGE" \
+> +	    -v tail_bit="$KPF_COMPOUND_TAIL" \
+> +	    -v base_pfn="$skip_pfn" \
+> +	    -v pagesize="$pagesize" '
+> +	# Test whether bit "b" is set in the 16-hex-digit value "hex".
+> +	# Done with substring + per-digit lookup so we never rely on awk
+> +	# bitwise operators (mawk lacks them), 64-bit FP precision or the
+> +	# gawk-only strtonum().
+> +	function bit_set(hex, b,    di, bi, c, v) {
+> +		di = int(b / 4)
+> +		bi = b - di * 4
+> +		c = substr(hex, length(hex) - di, 1)
+> +		v = index("0123456789abcdef", tolower(c)) - 1
+> +		if (bi == 0) return (v % 2) == 1
+> +		if (bi == 1) return int(v / 2) % 2 == 1
+> +		if (bi == 2) return int(v / 4) % 2 == 1
+> +		return int(v / 8) % 2 == 1
+> +	}
+> +	{
+> +		gsub(/^[[:space:]]+/, "")
+> +		h = $1
+> +		if (bit_set(h, want_bit) &&
+> +		    !bit_set(h, hwp_bit) &&
+> +		    !bit_set(h, nopage_bit) &&
+> +		    !bit_set(h, tail_bit)) {
+> +			pfn = base_pfn + NR - 1
+> +			printf "0x%x\n", pfn * pagesize
+> +			exit 0
+> +		}
+> +	}
 
-Signed-off-by: Wensheng Wang <wenswang@yeah.net>
----
- Documentation/hwmon/index.rst    |   1 +
- Documentation/hwmon/mpq82d00.rst |  73 +++++++++
- MAINTAINERS                      |   7 +
- drivers/hwmon/pmbus/Kconfig      |   9 ++
- drivers/hwmon/pmbus/Makefile     |   1 +
- drivers/hwmon/pmbus/mpq82d00.c   | 249 +++++++++++++++++++++++++++++++
- 6 files changed, 340 insertions(+)
- create mode 100644 Documentation/hwmon/mpq82d00.rst
- create mode 100644 drivers/hwmon/pmbus/mpq82d00.c
+I'm looking at these awk scripts and od encodings and I wonder if wasn't it
+simpler to write the test in C.
 
-diff --git a/Documentation/hwmon/index.rst b/Documentation/hwmon/index.rst
-index 29130df44d12..5d8cf2f60c27 100644
---- a/Documentation/hwmon/index.rst
-+++ b/Documentation/hwmon/index.rst
-@@ -201,6 +201,7 @@ Hardware Monitoring Kernel Drivers
-    mp5990
-    mp9941
-    mp9945
-+   mpq82d00
-    mpq8785
-    nct6683
-    nct6775
-diff --git a/Documentation/hwmon/mpq82d00.rst b/Documentation/hwmon/mpq82d00.rst
-new file mode 100644
-index 000000000000..5dc523042493
---- /dev/null
-+++ b/Documentation/hwmon/mpq82d00.rst
-@@ -0,0 +1,73 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+Kernel driver mpq82d00
-+====================
-+
-+Supported chips:
-+
-+  * MPS mpq82d00
-+
-+    Prefix: 'mpq82d00'
-+
-+Author:
-+
-+	Wensheng Wang <wenswang@yeah.net>
-+
-+Description
-+-----------
-+
-+This driver implements support for Monolithic Power Systems, Inc. (MPS)
-+MPQ82D00 Step-Down Controller.
-+
-+Device compliant with:
-+
-+- PMBus rev 1.3 interface.
-+
-+The driver exports the following attributes via the 'sysfs' files
-+for input voltage:
-+
-+**in1_input**
-+
-+**in1_label**
-+
-+**in1_alarm**
-+
-+The driver provides the following attributes for output voltage:
-+
-+**in2_input**
-+
-+**in2_label**
-+
-+**in2_alarm**
-+
-+The driver provides the following attributes for output current:
-+
-+**curr1_input**
-+
-+**curr1_label**
-+
-+**curr1_crit**
-+
-+**curr1_crit_alarm**
-+
-+The driver provides the following attributes for input power:
-+
-+**power1_input**
-+
-+**power1_label**
-+
-+**power1_alarm**
-+
-+The driver provides the following attributes for output power:
-+
-+**power2_input**
-+
-+**power2_label**
-+
-+The driver provides the following attributes for temperature:
-+
-+**temp1_input**
-+
-+**temp1_crit**
-+
-+**temp1_crit_alarm**
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 15011f5752a9..c4cda9f664a1 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -18325,6 +18325,13 @@ S:	Maintained
- F:	Documentation/hwmon/mp9945.rst
- F:	drivers/hwmon/pmbus/mp9945.c
- 
-+MPS MPQ82D00 DRIVER
-+M:	Wensheng Wang <wenswang@yeah.net>
-+L:	linux-hwmon@vger.kernel.org
-+S:	Maintained
-+F:	Documentation/hwmon/mpq82d00.rst
-+F:	drivers/hwmon/pmbus/mpq82d00.c
-+
- MR800 AVERMEDIA USB FM RADIO DRIVER
- M:	Alexey Klimov <alexey.klimov@linaro.org>
- L:	linux-media@vger.kernel.org
-diff --git a/drivers/hwmon/pmbus/Kconfig b/drivers/hwmon/pmbus/Kconfig
-index c8cda160b5f8..1804d366c2d9 100644
---- a/drivers/hwmon/pmbus/Kconfig
-+++ b/drivers/hwmon/pmbus/Kconfig
-@@ -607,6 +607,15 @@ config SENSORS_MPQ7932
- 	  This driver can also be built as a module. If so, the module will
- 	  be called mpq7932.
- 
-+config SENSORS_MPQ82D00
-+	tristate "MPS MPQ82D00"
-+	help
-+	  If you say yes here you get hardware monitoring functionality support
-+	  for power management IC MPS MPQ82D00.
-+
-+	  This driver can also be built as a module. If so, the module will
-+	  be called mpq82d00.
-+
- config SENSORS_MPQ8785
- 	tristate "MPS MPQ8785"
- 	help
-diff --git a/drivers/hwmon/pmbus/Makefile b/drivers/hwmon/pmbus/Makefile
-index ffc05f493213..31d62d01c3f0 100644
---- a/drivers/hwmon/pmbus/Makefile
-+++ b/drivers/hwmon/pmbus/Makefile
-@@ -59,6 +59,7 @@ obj-$(CONFIG_SENSORS_MP5990)	+= mp5990.o
- obj-$(CONFIG_SENSORS_MP9941)	+= mp9941.o
- obj-$(CONFIG_SENSORS_MP9945)	+= mp9945.o
- obj-$(CONFIG_SENSORS_MPQ7932)	+= mpq7932.o
-+obj-$(CONFIG_SENSORS_MPQ82D00)	+= mpq82d00.o
- obj-$(CONFIG_SENSORS_MPQ8785)	+= mpq8785.o
- obj-$(CONFIG_SENSORS_PLI1209BC)	+= pli1209bc.o
- obj-$(CONFIG_SENSORS_PM6764TR)	+= pm6764tr.o
-diff --git a/drivers/hwmon/pmbus/mpq82d00.c b/drivers/hwmon/pmbus/mpq82d00.c
-new file mode 100644
-index 000000000000..a88a5ac5a363
---- /dev/null
-+++ b/drivers/hwmon/pmbus/mpq82d00.c
-@@ -0,0 +1,249 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Hardware monitoring driver for MPS Synchronous Step-Down Converter(MPQ82D00)
-+ */
-+
-+#include <linux/bitfield.h>
-+#include <linux/err.h>
-+#include <linux/i2c.h>
-+#include <linux/init.h>
-+#include <linux/kernel.h>
-+#include <linux/module.h>
-+#include "pmbus.h"
-+
-+#define MPQ82D00_VOUT_DIV	64
-+
-+#define MPQ82D00_PAGE_NUM	1
-+
-+#define MPQ82D00_RAIL1_FUNC	(PMBUS_HAVE_VIN | PMBUS_HAVE_VOUT | \
-+							PMBUS_HAVE_IOUT | PMBUS_HAVE_TEMP | \
-+							PMBUS_HAVE_POUT | PMBUS_HAVE_PIN | \
-+							PMBUS_HAVE_STATUS_VOUT | \
-+							PMBUS_HAVE_STATUS_IOUT | \
-+							PMBUS_HAVE_STATUS_TEMP | \
-+							PMBUS_HAVE_STATUS_INPUT)
-+
-+struct mpq82d00_data {
-+	struct pmbus_driver_info info;
-+	int vout_scale;
-+};
-+
-+#define to_mpq82d00_data(x) container_of(x, struct mpq82d00_data, info)
-+
-+static u16 mpq82d00_linear_exp_transfer(u16 word, u16 expect_exponent)
-+{
-+	s16 exponent, mantissa, target_exponent;
-+
-+	exponent = ((s16)word) >> 11;
-+	mantissa = ((s16)((word & 0x7ff) << 5)) >> 5;
-+	target_exponent = (s16)((expect_exponent & 0x1f) << 11) >> 11;
-+
-+	/*
-+	 * The MPQ82D00 does not support negtive limit value, if a negtive
-+	 * limit value is written, the limit value will become to 0. And
-+	 * the maximum positive limit value is limitted to 0x3FF.
-+	 */
-+	if (mantissa < 0) {
-+		mantissa = 0;
-+	} else {
-+		if (exponent > target_exponent) {
-+			mantissa = (1023 >> (exponent - target_exponent)) >= mantissa ?
-+						mantissa << (exponent - target_exponent) :
-+						0x3FF;
-+		} else {
-+			mantissa = clamp_val(mantissa >> (target_exponent - exponent),
-+					     0, 0x3FF);
-+		}
-+	}
-+
-+	return mantissa | ((expect_exponent << 11) & 0xf800);
-+}
-+
-+static int mpq82d00_read_byte_data(struct i2c_client *client, int page, int reg)
-+{
-+	int ret;
-+
-+	switch (reg) {
-+	case PMBUS_VOUT_MODE:
-+		/*
-+		 * The MPQ82D00 does not follow standard PMBus protocol completely,
-+		 * and the calculation of vout in this driver is based on direct
-+		 * format. As a result, the format of vout is enforced to direct.
-+		 */
-+		ret = PB_VOUT_MODE_DIRECT;
-+		break;
-+	default:
-+		/*
-+		 * These registers are not explicitly handled by the driver,
-+		 * as a result, return -ENODATA directly.
-+		 */
-+		ret = -ENODATA;
-+		break;
-+	}
-+
-+	return ret;
-+}
-+
-+static int mpq82d00_read_word_data(struct i2c_client *client, int page,
-+				   int phase, int reg)
-+{
-+	const struct pmbus_driver_info *info = pmbus_get_driver_info(client);
-+	struct mpq82d00_data *data = to_mpq82d00_data(info);
-+	int ret;
-+
-+	switch (reg) {
-+	case PMBUS_STATUS_WORD:
-+	case PMBUS_READ_VIN:
-+	case PMBUS_READ_IOUT:
-+	case PMBUS_READ_POUT:
-+	case PMBUS_READ_PIN:
-+	case PMBUS_READ_TEMPERATURE_1:
-+	case PMBUS_IOUT_OC_FAULT_LIMIT:
-+	case PMBUS_OT_FAULT_LIMIT:
-+		/*
-+		 * These registers are not explicitly handled by the driver,
-+		 * as a result, return -ENODATA directly.
-+		 */
-+		ret = -ENODATA;
-+		break;
-+	case PMBUS_READ_VOUT:
-+		ret = pmbus_read_word_data(client, page, phase, reg);
-+		if (ret < 0)
-+			return ret;
-+
-+		ret = DIV_ROUND_CLOSEST((ret & GENMASK(11, 0)) * data->vout_scale,
-+					MPQ82D00_VOUT_DIV);
-+		break;
-+	default:
-+		/*
-+		 * The MPQ82D00 do not support other telemetry and limit
-+		 * value reading, so, return -EINVAL directly.
-+		 */
-+		ret = -EINVAL;
-+		break;
-+	}
-+
-+	return ret;
-+}
-+
-+static int mpq82d00_write_word_data(struct i2c_client *client, int page, int reg,
-+				    u16 word)
-+{
-+	int ret;
-+
-+	switch (reg) {
-+	case PMBUS_OT_FAULT_LIMIT:
-+		/*
-+		 * The PMBUS_OT_FAULT_LIMIT of MPQ82D00 is linear11 format,
-+		 * and the exponent is a constant value(5'b00000), so the
-+		 * exponent of word parameter should be converted to 5'b00000.
-+		 */
-+		ret = pmbus_write_word_data(client, page, reg,
-+					    mpq82d00_linear_exp_transfer(word, 0x00));
-+		break;
-+	case PMBUS_IOUT_OC_FAULT_LIMIT:
-+		/*
-+		 * The PMBUS_IOUT_OC_FAULT_LIMIT of MPQ82D00 is linear11 format,
-+		 * and the exponent is a constant value(5'b11100), so the
-+		 * exponent of word parameter should be converted to 5'b11100.
-+		 */
-+		ret = pmbus_write_word_data(client, page, reg,
-+					    mpq82d00_linear_exp_transfer(word, 0x1C));
-+		break;
-+	default:
-+		/*
-+		 * The MPQ82D00 do not support other limit value configuration,
-+		 * so, return -EINVAL directly.
-+		 */
-+		ret = -EINVAL;
-+		break;
-+	}
-+
-+	return ret;
-+}
-+
-+static int mpq82d00_identify(struct i2c_client *client, struct pmbus_driver_info *info)
-+{
-+	struct mpq82d00_data *data = to_mpq82d00_data(info);
-+	int ret;
-+
-+	ret = i2c_smbus_write_byte_data(client, PMBUS_PAGE, 0);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = i2c_smbus_read_byte_data(client, PMBUS_VOUT_MODE);
-+	if (ret < 0)
-+		return ret;
-+
-+	/*
-+	 * The MPQ82D00 supports three vout mode. If PMBUS_VOUT_MODE
-+	 * bit5 is 1, the vout scale is 5mv/LSB.If PMBUS_VOUT_MODE bit5
-+	 * is 0, it is linear mode, the vout scale is 1.953125mv/LSB.
-+	 */
-+	if (FIELD_GET(GENMASK(5, 5), ret))
-+		data->vout_scale = 320;
-+	else
-+		data->vout_scale = 125;
-+
-+	return 0;
-+}
-+
-+static struct pmbus_driver_info mpq82d00_info = {
-+	.pages = MPQ82D00_PAGE_NUM,
-+	.format[PSC_VOLTAGE_IN] = linear,
-+	.format[PSC_CURRENT_OUT] = linear,
-+	.format[PSC_TEMPERATURE] = linear,
-+	.format[PSC_VOLTAGE_OUT] = direct,
-+	.format[PSC_POWER] = linear,
-+
-+	.m[PSC_VOLTAGE_OUT] = 1,
-+	.R[PSC_VOLTAGE_OUT] = 3,
-+	.b[PSC_VOLTAGE_OUT] = 0,
-+
-+	.func[0] = MPQ82D00_RAIL1_FUNC,
-+	.read_word_data = mpq82d00_read_word_data,
-+	.read_byte_data = mpq82d00_read_byte_data,
-+	.write_word_data = mpq82d00_write_word_data,
-+	.identify = mpq82d00_identify,
-+};
-+
-+static int mpq82d00_probe(struct i2c_client *client)
-+{
-+	struct mpq82d00_data *data;
-+
-+	data = devm_kzalloc(&client->dev, sizeof(struct mpq82d00_data), GFP_KERNEL);
-+	if (!data)
-+		return -ENOMEM;
-+
-+	memcpy(&data->info, &mpq82d00_info, sizeof(mpq82d00_info));
-+
-+	return pmbus_do_probe(client, &data->info);
-+}
-+
-+static const struct i2c_device_id mpq82d00_id[] = {
-+	{.name = "mpq82d00"},
-+	{}
-+};
-+MODULE_DEVICE_TABLE(i2c, mpq82d00_id);
-+
-+static const struct of_device_id __maybe_unused mpq82d00_of_match[] = {
-+	{.compatible = "mps,mpq82d00"},
-+	{}
-+};
-+MODULE_DEVICE_TABLE(of, mpq82d00_of_match);
-+
-+static struct i2c_driver mpq82d00_driver = {
-+	.driver = {
-+		.name = "mpq82d00",
-+		.of_match_table = mpq82d00_of_match,
-+	},
-+	.probe = mpq82d00_probe,
-+	.id_table = mpq82d00_id,
-+};
-+
-+module_i2c_driver(mpq82d00_driver);
-+
-+MODULE_AUTHOR("Wensheng Wang <wenswang@yeah.net");
-+MODULE_DESCRIPTION("PMBus driver for MPS MPQ82D00 device");
-+MODULE_LICENSE("GPL");
-+MODULE_IMPORT_NS("PMBUS");
+We have a bunch of helpers in tools/testing/selftests/mm/vm_utils.h for
+accessing /proc files and there is already /proc/iomem parser in
+tools/testing/selftests/mm/pfnmap.c that also could be lifter to vm_util
+
 -- 
-2.25.1
-
+Sincerely yours,
+Mike.
 
