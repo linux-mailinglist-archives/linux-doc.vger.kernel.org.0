@@ -1,188 +1,138 @@
-Return-Path: <linux-doc+bounces-94997-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94998-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id cw7PBkp2SmowDgEAu9opvQ
-	(envelope-from <linux-doc+bounces-94997-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 05 Jul 2026 17:20:42 +0200
+	id oWhIK714SmreDgEAu9opvQ
+	(envelope-from <linux-doc+bounces-94998-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 05 Jul 2026 17:31:09 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96C9F70A72D
-	for <lists+linux-doc@lfdr.de>; Sun, 05 Jul 2026 17:20:41 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3766170A753
+	for <lists+linux-doc@lfdr.de>; Sun, 05 Jul 2026 17:31:07 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=BVRzYpc7;
-	dmarc=pass (policy=none) header.from=gmail.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94997-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-94997-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=infradead.org header.s=casper.20170209 header.b=kEopeywY;
+	dmarc=pass (policy=none) header.from=infradead.org;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94998-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94998-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 094A03002308
-	for <lists+linux-doc@lfdr.de>; Sun,  5 Jul 2026 15:20:41 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id DACDD300A762
+	for <lists+linux-doc@lfdr.de>; Sun,  5 Jul 2026 15:31:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A619938552C;
-	Sun,  5 Jul 2026 15:20:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1DA3F368D73;
+	Sun,  5 Jul 2026 15:31:03 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com [209.85.215.195])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A11D3806C1
-	for <linux-doc@vger.kernel.org>; Sun,  5 Jul 2026 15:20:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 34166211A14;
+	Sun,  5 Jul 2026 15:30:56 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783264837; cv=none; b=TGEPmyOZgoxXdnIgyQ7X2L6D5psvdGEAtg5IT0IM7fuWjd/A8UcaxPQV0VR/2gk8FACPAIoKvpNH0M1wjCd14sciwMT4E14ISo0GPbXFyjTFI+tIzZY2rkJdqxZ/9T5WvbUYsAaaFNgkblOfzwOtGO/HpZona9z6EFpkQVXiT7w=
+	t=1783265462; cv=none; b=eBpsPC1EShbwAOqFWxl15RXNmp2XDXBx6L51ahuDbK6rYqCrQH3CKGsr0OlfQ1H+CzyYPp6pGfBclPY6i6XfX4+MvJUVpfjVUCA8XnXRRgy5L5gftolsp75PVkhzwgaM7t/jguLkHgbcpr+JqrnKRsGHV+k6qvImC5TjJoQOmKE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783264837; c=relaxed/simple;
-	bh=oymWQKimephLAZpLw5SG/jhsPwFz5w2t9N0FgL6L4sg=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Yu1WTkGzJ4DHmEMsX1YIvk90KhEQWlVgB+uxM2JMYUPjQzzM1kIJGsVrJNuleM2cbqy9aMimHGwesc5LCLBiLfyyJRHhpTsZG+ki40A3rqjYiyRukaSE3SvSP8M7MYbUEVSYUit/4rkNyfJDft3l1jyo/yuBqo8mCgb+W+zKBU8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=BVRzYpc7; arc=none smtp.client-ip=209.85.215.195
-Received: by mail-pg1-f195.google.com with SMTP id 41be03b00d2f7-ca1328b8584so1396030a12.1
-        for <linux-doc@vger.kernel.org>; Sun, 05 Jul 2026 08:20:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783264835; x=1783869635; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=LyRHUEdDzHEn5VoIw+uE0PQuPndQy8QL1VRSCVaZgpI=;
-        b=BVRzYpc7B/6qm8jcew45TuctjyZiZY7yY8+7S6LcVAKk9z7Q1tP2lQ5rEwrisuON5P
-         GYycdLIOfTRboJXCez8CgYBWGEeJqFaCXLXKK14TrMiAGSWbBqooHVJ0ZXpW+77WVm5q
-         TDFofyWuocRaoZMWjogisaqCKejT4KF6J3CdNeZ1SR8vtbU9aYjm8x3hKhc9etxe07Cu
-         E+vncFuwMQZrxZwrlagtjlI3FTYt6uy+XE34yyh3Tk5DHdGPLpG0sJ/h4YSH8ouN9epO
-         KgCEVNB+Ih9/LLAiTR0ShNjq90ahmpSyjc9sGQKmrFzMyfcGSz5ofVfaPD5b7o6ugjEb
-         6GPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783264835; x=1783869635;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=LyRHUEdDzHEn5VoIw+uE0PQuPndQy8QL1VRSCVaZgpI=;
-        b=Qb+MCf7J94W8X9zJn270DW1AVjdpux35qKo8lCo/CqrWT1GGoM6BZaEyZbmxdEizGV
-         XzxO3VcMETEJzg1FYzvnOHg1OzfN94f1/ZNxzclhXfluE+LCKisLyMIqUu4CBAJcgKJD
-         ZBpz3y1SBlg0hrIbgipiQKlyr9bUAjOY6x0PHyffnOGbT2c6CA961XS0GJvVVRAOfWqq
-         x3sU2NurNbprem/0eIiWWYrHjDFsTTUcEFWb8IP7A8thXVz1iHA2Y/TZ0p4weOjOlb0z
-         YD1qZavF4VzVFApC2QMcoJyOLq0DqV99AG9od8AwyEx070LmDe0TBd69mPWZJEO/cmMX
-         5uaQ==
-X-Forwarded-Encrypted: i=1; AHgh+Rr0WyvuA5xVs06M2l+jqJjdZCXNzy/jDsmLqPMP8Gc3aywPvizEBCGmEoPIZJ9SIZzpcUFX3znuoCI=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxXjl4dXare9upjvC3rgMvWoJg94b1ce37u5m53Ogwpj2qTrZHP
-	88NjQcm2ZFPBeINuH2vIqfhLKHjvqux17Ls1FuW8IdztnSJm/pCViEd5
-X-Gm-Gg: AfdE7cnN/tG2XueGqaUpVAeV+gQSMOmrLzzAfKsEAoUHxeL7GUGuhop6ymrSGocx6mP
-	102JK/N5oDUXzMwVZs6F3MVqfJxiqutDcchoUF+nmgMwkvfAxry48/5vzna6ILfJdzfpxKfaGXy
-	ocU1SEsqQbkM6+Dj02lgkcDKdcfyZpO6iwbnOWx7DygDLZpZD445ckXSVmJDg1XFluN4KId8RgD
-	jtDc/lcVNigA3W1roYshzwTBh+V5YrTP3AZXDYoLSHwYHfRU4Z4UHCyvZZRhVuwkY8YhG0AUtxl
-	bg+GjdQn/wwTtFksdIVh0/ldiFOdkywY0ES8qyetA/gHTjIs+FIEl+smsliXYddTqcULf4rzNp9
-	GX/uJMb3Zy43mEyqviDI6AC+H94bXEDNcALs/IRwmewYIV5oVD+cmP81mNKC8dg0ASQf7pmtl7x
-	Mf1gJ7IOPX25glNjkPZX6Bb/9yfWPaphk=
-X-Received: by 2002:a17:903:2b0d:b0:2c9:e6d7:fbb4 with SMTP id d9443c01a7336-2cbb9ebb87bmr67973575ad.31.1783264834986;
-        Sun, 05 Jul 2026 08:20:34 -0700 (PDT)
-Received: from localhost ([2409:8a4c:cc0:9ab1:cd4b:250d:9228:2c4d])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cad7144e1asm35542645ad.31.2026.07.05.08.20.34
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Jul 2026 08:20:34 -0700 (PDT)
-Date: Sun, 5 Jul 2026 23:20:30 +0800
-From: Jiandong Qiu <qiujiandong1998@gmail.com>
-To: Weijie Yuan <wy@wyuan.org>, alexs@kernel.org, si.yanteng@linux.dev
-Cc: dzm91@hust.edu.cn, corbet@lwn.net, skhan@linuxfoundation.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 0/2] docs/zh_CN: update translations for
- process/changes.rst and sphinx.rst
-Message-ID: <akpxuLXKrbN7qB9o@archlinux>
-References: <20260621131215.1303439-1-qiujiandong1998@gmail.com>
- <akn4oYmihmNHFOY7@wyuan.org>
+	s=arc-20240116; t=1783265462; c=relaxed/simple;
+	bh=KhaeSJ8H2dcBuR4zI/JKQBsMdLeiuOkRa7tc4VYCiZo=;
+	h=Date:From:To:CC:Subject:In-Reply-To:References:Message-ID:
+	 MIME-Version:Content-Type; b=auBFHZ3XsIIf48y3gi7W/D8wU6frOLEN9NHg+k4XgtHvyNFP+ehDmI8RBiINdLKlq0JdEBR9HnAgGjHtoMczZAFXbNtl8a/Gv1H+kWc2cnqHhBRdHpggwIf/7/svRbxLYoGvhoi1MTL3KcbSsTO1Y09ftyYVPVZvoGfHkg+5fpM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=pass smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=kEopeywY; arc=none smtp.client-ip=90.155.50.34
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
+	MIME-Version:Message-ID:References:In-Reply-To:Subject:CC:To:From:Date:Sender
+	:Reply-To:Content-ID:Content-Description;
+	bh=WL4lDo2YGrNjgURafNClWjvuTQQ9JaX4Xxd5HPv51NY=; b=kEopeywYiDYHx+3LQ6UHzOQZQD
+	XL9oVHpIFpuVb2IKU7K2tcedGpxmL6bpHjloHu80THx396ATta6u3BK6wE9sdXxgGt+PWRzE6NTSW
+	CaiHkX0101iM1k1xneknqs7Sy+P1GjuTTbngy+6KMgXtK13sNhRc6gD/oYQJYrYu+8B5tKAwNzW0y
+	CzkUwUBI4ivUqO0pyKqw+92QbdCjusQqMe4km6SXbtb2he9F/bI7uNZ14ROSBcfv0GbJdZUHio3oz
+	12p+2o2sTd6ui7+Jv2raiXwqtYmaihrtUueyRhxT1df+LgLwRVj/fFlnSruVjwozSKNJhtaM3RtJW
+	r2ee9snA==;
+Received: from [129.95.232.135] (helo=ehlo.thunderbird.net)
+	by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+	id 1wgOnv-0000000EIsf-0UWY;
+	Sun, 05 Jul 2026 15:30:47 +0000
+Date: Sun, 05 Jul 2026 08:30:42 -0700
+From: Randy Dunlap <rdunlap@infradead.org>
+To: Yuhong Cheng <ceohunk@gmail.com>, corbet@lwn.net
+CC: linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH=5D_docs=3A_filesystems=3A_porting?=
+ =?US-ASCII?Q?=3A_fix_spelling_of_returned_and_instead?=
+User-Agent: K-9 Mail for Android
+In-Reply-To: <20260705072609.1692-1-ceohunk@gmail.com>
+References: <20260705072609.1692-1-ceohunk@gmail.com>
+Message-ID: <3009A727-CB8E-40FF-971A-E0FD4D955547@infradead.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <akn4oYmihmNHFOY7@wyuan.org>
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-0.96 / 15.00];
+	SUBJ_EXCESS_QP(1.20)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=casper.20170209];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-94997-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:wy@wyuan.org,m:alexs@kernel.org,m:si.yanteng@linux.dev,m:dzm91@hust.edu.cn,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[qiujiandong1998@gmail.com,linux-doc@vger.kernel.org];
-	TO_DN_SOME(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-94998-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:ceohunk@gmail.com,m:corbet@lwn.net,m:linux-fsdevel@vger.kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	MISSING_XM_UA(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[qiujiandong1998@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com,lwn.net];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[infradead.org:+];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,archlinux:mid]
+	TO_DN_SOME(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 96C9F70A72D
+X-Rspamd-Queue-Id: 3766170A753
 
-On Sun, Jul 05, 2026 at 02:24:33PM +0800, Weijie Yuan wrote:
-> One minor readability concern I noticed in both patches is that some
-> simple tables mix CJK text with ASCII table markup. (correct me if I'm
-> wrong) Which are, patch 1/2 adds the "当前最低需求" table in
-> process/changes.rst, and patch 2/2 adds the tables under
-> "数学渲染器的选择" and "设置 SPHINX_IMGMATH 的效果" in
-> doc-guide/sphinx.rst.
-> 
-> These tables may look aligned with an East-Asian-width-aware
-> font/editor, but the column boundaries can look misaligned in some other
-> fonts, mail readers, or editors when reading the plain .rst source. For
-> example, the lore archive itself.
-> ...
-> But I'm not familiar with rst and have never delved into fonts, it may
-> be better to ask maintainers to reach an agreement.
+On July 5, 2026 12:26:09 AM PDT, Yuhong Cheng <ceohunk@gmail=2Ecom> wrote:
+>Fix the spelling of 'rreturned' and 'instread' in the LOOKUP_EXCL section=
+=2E
+>
+>Signed-off-by: Yuhong Cheng <ceohunk@gmail=2Ecom>
 
-Thanks for the Weijie's careful review and the readability suggestion.
+Acked-by: Randy Dunlap <rdunlap@infradead=2Eorg>
+Thanks=2E
 
-```rst
-====================== ===============  ====================
-        程序               最低版本         版本检查命令
-====================== ===============  ====================
-bc                     1.06.95          bc --version
-bindgen（可选）        0.65.1           bindgen --version
-binutils               2.30             ld -v
-```
+>---
+> Documentation/filesystems/porting=2Erst | 2 +-
+> 1 file changed, 1 insertion(+), 1 deletion(-)
+>
+>diff --git a/Documentation/filesystems/porting=2Erst b/Documentation/file=
+systems/porting=2Erst
+>index d13f0a23c=2E=2Ee040b0ff4 100644
+>--- a/Documentation/filesystems/porting=2Erst
+>+++ b/Documentation/filesystems/porting=2Erst
+>@@ -1173,7 +1173,7 @@ these conditions don't require explicit checks:
+>  - if LOOKUP_CREATE is NOT given, then the dentry won't be negative,
+>    ERR_PTR(-ENOENT) is returned instead
+>  - if LOOKUP_EXCL IS given, then the dentry won't be positive,
+>-   ERR_PTR(-EEXIST) is rreturned instread
+>+   ERR_PTR(-EEXIST) is returned instead
+>=20
+> LOOKUP_EXCL now means "target must not exist"=2E  It can be combined wit=
+h
+> LOOK_CREATE or LOOKUP_RENAME_TARGET=2E
 
-Like the code above, the line with "可选" is misaligned in lore archive.
-I agree that in plain .rst source, mixing CJK text with ASCII table markup
-can look misaligned without a proper 2:1 width monospace font. However,
-a few clarifications:
 
-1. The rendered HTML documentation displays these as standard bordered
-tables, so there's no issue there.
-
-2. The real problem is the lore archive's rendering, which apparently
-doesn't use a CJK-aware monospace font for source display.
-
-3. In my local environment, I use Maple Mono NF CN (a font with perfect
-2:1 CJK/ASCII width ratio), so everything aligns correctly.
-
-IMO, this is a minor issue that doesn't affect actual patch review,
-as reviewers can pull the patch locally and view it with a proper font.
-A fundamental fix, if needed, would be improving lore archive's rendering
-rather than adjusting individual tables.
-
-I'd like to hear the maintainers' opinion on this.
-
-Thanks,
-Jiandong
+~Randy
 
