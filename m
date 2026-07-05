@@ -1,91 +1,91 @@
-Return-Path: <linux-doc+bounces-94983-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-94984-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id QhECGrFASmpMAAEAu9opvQ
-	(envelope-from <linux-doc+bounces-94983-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 05 Jul 2026 13:32:01 +0200
+	id AsM/L/dASmpuAAEAu9opvQ
+	(envelope-from <linux-doc+bounces-94984-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 05 Jul 2026 13:33:11 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A785709D15
-	for <lists+linux-doc@lfdr.de>; Sun, 05 Jul 2026 13:32:00 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 025B6709D1E
+	for <lists+linux-doc@lfdr.de>; Sun, 05 Jul 2026 13:33:11 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=drySj0NI;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=SpzKUKJr;
 	dmarc=pass (policy=none) header.from=gmail.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94983-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-94983-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-94984-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-94984-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 393C130028FE
-	for <lists+linux-doc@lfdr.de>; Sun,  5 Jul 2026 11:31:57 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id BE3F7300AB1B
+	for <lists+linux-doc@lfdr.de>; Sun,  5 Jul 2026 11:33:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EE46935AC16;
-	Sun,  5 Jul 2026 11:31:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2853135AC16;
+	Sun,  5 Jul 2026 11:33:09 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 783DB283C82
-	for <linux-doc@vger.kernel.org>; Sun,  5 Jul 2026 11:31:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C0711FF1B5
+	for <linux-doc@vger.kernel.org>; Sun,  5 Jul 2026 11:33:07 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783251114; cv=none; b=YiJKuOth6dKe/WXy+2Naykfaymqa37jsRy7v/fYMm0H/+zYqYiUviIDdMwhePzw4N13cb97MORXY8KvIuJfHf1+HICRuChE2fNNWPr5p54ZBrY8jouvHMi4tw9BFezk40QAyINdpKqczF8CRHf+4V35pWScPT9SOgkvDoZiIEP0=
+	t=1783251189; cv=none; b=ffrK+X6Ujecbq1gBkW4yQLJSqWKJpnDj+A9QwJeZeVgio5cdmyglNAzJRbRFTqeMJ5beTi3wa6dX5StGqolbz4p8BJ6hNtc4RkzBey47sk+V0bCphtRTeTjrDpbqyJq5rTHBpEtEZWrTR43rNZVp8vQOYDQIL7zx6mQoxpJjbys=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783251114; c=relaxed/simple;
-	bh=ysh6ReeHvJe9TwyiaXD20oAVatLGkl/mCNQ5S1j0pt4=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=XEYwaCuQUvpaPMh7HM4PTsmo1poFMUPkpi+KHLC/vqUjBNCabdzNNxNBKBU5Hz5FKg6I6D4E7zJqhShePqVgQwLpkx68nWB/4zRkf2NR4IS3MEXXcSiZ4tTCII5jauULsCQJ5p9rjZ4FsEB6pjanEzNyXsVhhv8MzIAFsmQhC9s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=drySj0NI; arc=none smtp.client-ip=209.85.128.46
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-493c2c0b9a8so18323235e9.1
-        for <linux-doc@vger.kernel.org>; Sun, 05 Jul 2026 04:31:53 -0700 (PDT)
+	s=arc-20240116; t=1783251189; c=relaxed/simple;
+	bh=8P0QNjJlcHI6HgxOlg6IUhN5+Kup9IuekanC4zCHlFg=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=qxSSrQjU/cVlWcaMxFTQOAFVis1ckdvEd3fHhtCFjjs/hHBOr4L8GXHq5uXtPViP3nfKeUKnNyBA+1r2QQGPYx93ego8wvUxe+7kPwR9SgHV14QlzAlqhV0pGiaEzvjTCxofiuVtjYtjzEhmC6TR61Fs+zwxOQ/1zY5Ba17B6go=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=SpzKUKJr; arc=none smtp.client-ip=209.85.221.49
+Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-4798bea72f9so1206049f8f.1
+        for <linux-doc@vger.kernel.org>; Sun, 05 Jul 2026 04:33:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783251112; x=1783855912; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1783251186; x=1783855986; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=v5BS4AAszkEfCLhT3vHbqa6KSd2l7Qvz7/ajSmqfW3c=;
-        b=drySj0NIUigj8gy9zfWJrmLr0ZqWPwv3DcsfDZRXbRXYDmbzo1LhY5NweGWiMQQqzG
-         +IDBd5L9cVgD94N1nWtrtKl2qMuhQHJrSls188t3tXmSUxf5RDhOYgUwkmi995Sh9cPF
-         s4SDXq7Z0CQMdLiL1WxIeFu51vNW2vuSwFIyFygT+XjUgpfCbkxEHB/TONamwphvCs9h
-         cKL1S8OAuc6qzUYrDnW2ihf2tJFghhtduYWUeUxggDhymIJC0OLIsk1z8H2n7NzioDXC
-         O0ed6Is9nZvq9FgQZiP5NhxdTqhII/fN1sxEcDbCIWWyEM5Q1QEvibIyZrFgfp4Q3A/r
-         aeOw==
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=1GKZD8suZHUX72iEyA8RIZIB5/2RWsYR7LLY9AUUTX8=;
+        b=SpzKUKJruAOg2GVpiB237sKO4JuTh1iRi/Lye8ltFtX2rQtgHKXsOZsOb82EdIHAYH
+         yDgc4vlDhP9gF/xodzQoBlwCIh5TqODVskp9GaOgl50/h2bsajvTBXvZcPJmLTiLxdW3
+         Pn4m1Rx/dNuSZbk5esj/5XMi1B0MNToMNEF7TzQAc7qlYfSJQxhM8nBfO9lnFP+ZTezm
+         5KtpoHv7loVAbbEGx8JGlLnb4PZcwPuW90BkPXHZdcsMRFVabwCLMRY0H/6xcUHu6ER6
+         jWLZpt0dfv89fqukFjvOzsNUqCJsEzFNCxgMWxChhdAuLU8Lxr9yoifxR9gIw7aewG2X
+         k4ZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783251112; x=1783855912;
+        d=1e100.net; s=20251104; t=1783251186; x=1783855986;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=v5BS4AAszkEfCLhT3vHbqa6KSd2l7Qvz7/ajSmqfW3c=;
-        b=ObNwhw93Lp1H53haF5+aFUI7X6ONYShheIWQVsgVft8la1dfSF6PzmvlM4gMoE73Ql
-         6qJ2RsPPi8AghhQ9FJwaZEfQB8hSOvbj6tLGRd3ZuO3j8IPrueIJ3ehCmfOjogqGM38w
-         2X3mdkILFg8CW31M0eB/ts4LRlKyI4k3ZGLkJwMhmf9DFH6iJGv9aZ8Bj8Xiyt5X5VwR
-         uSkxnPB4+C92IPAGYtCI3QKDX93tw8kDNF416t8XAS4LwxuiOc6IenNxQtUO329F8ade
-         8gh6sSVS9l9xFzuJYDzJYnA7lJzfrKk8cHUizNPcgUvWlN9Ial6xdo1MZrZdnedUxBQV
-         0NtA==
-X-Forwarded-Encrypted: i=1; AFNElJ9sfu0xH+FDDpiIdke/F6loOwInjyRr+pyx9NQ96IVnSRzX/pR6aOCURLcpEQYbqnZaW8chjdTG5W8=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwLUlinnPl/SbqVkms8SADhvkb2fIZKuW4GvgOnw6vjlptRwjkA
-	ErSHENDApFxFQ8et7T7rMYedP9aCNcB2sG7QxGdtKVkIaTv6ztyV5wL7
-X-Gm-Gg: AfdE7clOuM7NebWCoiiFMh/6laRySGjLb4nVt+JP+rXpqKSJ+xofO7HWnCP6i3QzbTT
-	5tweAFpPNXC9v2aNPgWI+ws1E4nzOqJap+6dd7Gzeq8rg9nCQicKUUiIacUf4vxCebj8jjSFwrk
-	w6ZczG3jX1LWkbVO8dJH5TiFfUlvQAk79LoeMaayB2myDy3WoFaqCwVZXfCm3sU/lyIWwzi6C6i
-	FZWxq1qdPnDAtuwblid5+vp/P0yVTPm1APn12f0MwPF2iUpNNLdo9XHSI6jR+1SCP54JtyziMSz
-	2tfshWUdCO+tdKU+mbsat63R9jjL8BPkiohBALLPtuHXhZTueQ98ikj199cY1+0DnkY7FjOP6Cy
-	ycCQfyXRMTK4sdj+k/URx4L/8xFDu3wReUhqtrgcXohAUSO/7b0Lto5+OebHjb59SWHnnp2S6v9
-	KXhz+vsAVcD19ifYkRcsMWGnzshtO4+6g=
-X-Received: by 2002:a05:600c:6288:b0:493:bef8:ba8 with SMTP id 5b1f17b1804b1-493d1201f26mr69773425e9.39.1783251111668;
-        Sun, 05 Jul 2026 04:31:51 -0700 (PDT)
+         :message-id:reply-to;
+        bh=1GKZD8suZHUX72iEyA8RIZIB5/2RWsYR7LLY9AUUTX8=;
+        b=o39LAY2aDdlX0VuKoyUkV0JhuGPrieBAlMmpS9W/k8x96Qub5twq4150/v0L8r32l4
+         TZgaPMD30nhPAXNiTfVvyapJXjGgRIGzqFh8cPmujiv4MFSbBdzpBe4Joqob6NMH6kEh
+         s6/p80PuHjB+kkmvM/tA+H0eJl7J7Dk+yZiLPxg9J7ZGkhZlYetysAmLnaiwkuWgPhn0
+         AXzn43rAvUQAyJq44Q1WcL0uykfus77ax5I29tAxfef7GYnDJhLPSbV4JDFRkA9Tc5Za
+         eiuaXQPC/N7Cc1DS04/JaLQnPSG/K/2WRq9cvz5ySf18YhoyYP9n0FAd8z0arIyzVEzz
+         twwQ==
+X-Forwarded-Encrypted: i=1; AHgh+RoM1r8hcQO7bt87wRB9p7bBnOLipl28tuAkJYVbn1LQyivSMTd0j/Fgiy9mAo+tbLZBPrQ2D2Eooag=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy3IpGPPpH8Rbkrz3jYUPhpDdNS3b33Bo/D0/fwCdfkwtaJHW+T
+	cDGUwRgme+/W6aWDJeSDZ0lB4IdCGxIYXS2QSHIPEM3zUAcjNDqLoLKG
+X-Gm-Gg: AfdE7ckWm/B6yKYHlihS4kBVuBiKAaFBG5H9rZ0N0jIjtzOM9qGYl7apmtrmQPFBkmz
+	psS4y7yDBXPcG6w9G7rkmP785uE+e1Df6KrTEEKmiBeukdU8DMBKEcDzJYy1BBj+CkZ4WSAiNQ0
+	lwzEjBAcMrH+du/1LEXvlH5Qky4zntHy5feqx9CA6um2KzCMVzLuoIyP7MDhZuE9/t9gkjbPHaO
+	ZydSTZIrhYd34V2sMeU1jHmJyeI5VPU2Jv3veLesOSVrAIcGzNOreLxqDusiOumGQQT+DUTQ2Pi
+	j/PrhZkAwaLTstG58DsIP5MFZMc8jlhWqUMv9vFOMPSyOvCW6YLZWETGG8CM4DQ9Tz6GUFde0ZG
+	j3wqoAI27TViRUQUrBVaP0/7JMP/06qcIkogan+vJHbpviGu5KMt5U9w8+ESEhTZVWAMAouc3VE
+	5L3Pf4A+TTA7PCLs75IVe7zJiW/HLoCEw=
+X-Received: by 2002:adf:e391:0:b0:475:f0c2:5b07 with SMTP id ffacd0b85a97d-47aad8304d0mr5378708f8f.61.1783251185783;
+        Sun, 05 Jul 2026 04:33:05 -0700 (PDT)
 Received: from puma.museclub.art ([2a00:6020:b326:d300:d19:a765:d8d7:bedc])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-493c636ec8asm237235895e9.1.2026.07.05.04.31.50
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47a9e4d7801sm15860984f8f.16.2026.07.05.04.33.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Jul 2026 04:31:50 -0700 (PDT)
+        Sun, 05 Jul 2026 04:33:05 -0700 (PDT)
 From: Eugene Shalygin <eugene.shalygin@gmail.com>
 To: eugene.shalygin@gmail.com
-Cc: Florian Schut <mail@florianschut.nl>,
+Cc: =?UTF-8?q?Miska=20H=C3=A4m=C3=A4l=C3=A4inen?= <miska.hamalainen@hotmail.com>,
 	Guenter Roeck <linux@roeck-us.net>,
 	Jonathan Corbet <corbet@lwn.net>,
 	Shuah Khan <skhan@linuxfoundation.org>,
 	linux-hwmon@vger.kernel.org (open list:HARDWARE MONITORING),
 	linux-doc@vger.kernel.org (open list:DOCUMENTATION),
 	linux-kernel@vger.kernel.org (open list)
-Subject: [PATCH] hwmon: (asus-ec-sensors) add ROG Maximus Z790 Hero
-Date: Sun,  5 Jul 2026 13:31:15 +0200
-Message-ID: <20260705113125.812045-1-eugene.shalygin@gmail.com>
+Subject: [PATCH] hwmon: (asus-ec-sensors) add ROG CROSSHAIR X870E HERO
+Date: Sun,  5 Jul 2026 13:32:36 +0200
+Message-ID: <20260705113246.812500-1-eugene.shalygin@gmail.com>
 X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -93,51 +93,52 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	TO_DN_SOME(0.00)[];
-	TAGGED_FROM(0.00)[bounces-94983-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-94984-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:eugene.shalygin@gmail.com,m:mail@florianschut.nl,m:linux@roeck-us.net,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-hwmon@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:eugeneshalygin@gmail.com,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:eugene.shalygin@gmail.com,m:miska.hamalainen@hotmail.com,m:linux@roeck-us.net,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-hwmon@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:eugeneshalygin@gmail.com,s:lists@lfdr.de];
 	FREEMAIL_TO(0.00)[gmail.com];
 	FORGED_SENDER(0.00)[eugeneshalygin@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[hotmail.com,roeck-us.net,lwn.net,linuxfoundation.org,vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[eugeneshalygin@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	ALIAS_RESOLVED(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[eugeneshalygin@gmail.com,linux-doc@vger.kernel.org];
+	PRECEDENCE_BULK(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	RCPT_COUNT_SEVEN(0.00)[8];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[florianschut.nl:email,vger.kernel.org:from_smtp,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+	FREEMAIL_FROM(0.00)[gmail.com];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 3A785709D15
+X-Rspamd-Queue-Id: 025B6709D1E
 
-From: Florian Schut <mail@florianschut.nl>
+From: Miska Hämäläinen <miska.hamalainen@hotmail.com>
 
-Add support for ROG Maximus Z790 Hero.
+Add support for ROG CROSSHAIR X870E HERO
 
-Signed-off-by: Florian Schut <mail@florianschut.nl>
+Signed-off-by: Miska Hämäläinen <miska.hamalainen@hotmail.com>
 Signed-off-by: Eugene Shalygin <eugene.shalygin@gmail.com>
 ---
  Documentation/hwmon/asus_ec_sensors.rst |  1 +
@@ -145,45 +146,45 @@ Signed-off-by: Eugene Shalygin <eugene.shalygin@gmail.com>
  2 files changed, 11 insertions(+)
 
 diff --git a/Documentation/hwmon/asus_ec_sensors.rst b/Documentation/hwmon/asus_ec_sensors.rst
-index 77a709517437..ccf43fd1fa9f 100644
+index ccf43fd1fa9f..84c9160efdd2 100644
 --- a/Documentation/hwmon/asus_ec_sensors.rst
 +++ b/Documentation/hwmon/asus_ec_sensors.rst
-@@ -30,6 +30,7 @@ Supported boards:
+@@ -25,6 +25,7 @@ Supported boards:
+  * ROG CROSSHAIR X670E EXTREME
+  * ROG CROSSHAIR X670E HERO
+  * ROG CROSSHAIR X670E GENE
++ * ROG CROSSHAIR X870E HERO
+  * ROG MAXIMUS X HERO
+  * ROG MAXIMUS XI HERO
   * ROG MAXIMUS XI HERO (WI-FI)
-  * ROG MAXIMUS Z690 FORMULA
-  * ROG MAXIMUS Z790 EXTREME
-+ * ROG MAXIMUS Z790 HERO
-  * ROG STRIX B550-E GAMING
-  * ROG STRIX B550-I GAMING
-  * ROG STRIX B650E-E GAMING WIFI
 diff --git a/drivers/hwmon/asus-ec-sensors.c b/drivers/hwmon/asus-ec-sensors.c
-index 29a23484cbe7..4ec2028f7dfe 100644
+index 4ec2028f7dfe..381c399963e8 100644
 --- a/drivers/hwmon/asus-ec-sensors.c
 +++ b/drivers/hwmon/asus-ec-sensors.c
-@@ -527,6 +527,14 @@ static const struct ec_board_info board_info_maximus_z790_extreme = {
- 	.family = family_intel_700_series,
+@@ -487,6 +487,14 @@ static const struct ec_board_info board_info_crosshair_x670e_hero = {
+ 	.family = family_amd_600_series,
  };
  
-+static const struct ec_board_info board_info_maximus_z790_hero = {
-+	.sensors = SENSOR_TEMP_T_SENSOR | SENSOR_TEMP_VRM |
-+		SENSOR_SET_TEMP_WATER | SENSOR_FAN_WATER_FLOW |
-+		SENSOR_FAN_CPU_OPT,
-+	.mutex_path = ASUS_HW_ACCESS_MUTEX_RMTW_ASMX,
-+	.family = family_intel_700_series,
++static const struct ec_board_info board_info_crosshair_x870e_hero = {
++	.sensors = SENSOR_TEMP_CPU | SENSOR_TEMP_CPU_PACKAGE |
++		SENSOR_TEMP_MB | SENSOR_TEMP_VRM |
++		SENSOR_TEMP_T_SENSOR | SENSOR_FAN_CPU_OPT,
++	.mutex_path = ASUS_HW_ACCESS_MUTEX_SB_PCI0_SBRG_SIO1_MUT0,
++	.family = family_amd_800_series,
 +};
 +
- static const struct ec_board_info board_info_prime_x470_pro = {
+ static const struct ec_board_info board_info_maximus_vi_hero = {
  	.sensors = SENSOR_SET_TEMP_CHIPSET_CPU_MB |
- 		SENSOR_TEMP_T_SENSOR | SENSOR_TEMP_VRM |
-@@ -893,6 +901,8 @@ static const struct dmi_system_id dmi_table[] = {
- 					&board_info_maximus_z690_formula),
- 	DMI_EXACT_MATCH_ASUS_BOARD_NAME("ROG MAXIMUS Z790 EXTREME",
- 					&board_info_maximus_z790_extreme),
-+	DMI_EXACT_MATCH_ASUS_BOARD_NAME("ROG MAXIMUS Z790 HERO",
-+					&board_info_maximus_z790_hero),
- 	DMI_EXACT_MATCH_ASUS_BOARD_NAME("ROG STRIX B550-E GAMING",
- 					&board_info_strix_b550_e_gaming),
- 	DMI_EXACT_MATCH_ASUS_BOARD_NAME("ROG STRIX B550-I GAMING",
+ 		SENSOR_TEMP_T_SENSOR |
+@@ -891,6 +899,8 @@ static const struct dmi_system_id dmi_table[] = {
+ 					&board_info_crosshair_x670e_gene),
+ 	DMI_EXACT_MATCH_ASUS_BOARD_NAME("ROG CROSSHAIR X670E HERO",
+ 					&board_info_crosshair_x670e_hero),
++	DMI_EXACT_MATCH_ASUS_BOARD_NAME("ROG CROSSHAIR X870E HERO",
++					&board_info_crosshair_x870e_hero),
+ 	DMI_EXACT_MATCH_ASUS_BOARD_NAME("ROG MAXIMUS XI HERO",
+ 					&board_info_maximus_xi_hero),
+ 	DMI_EXACT_MATCH_ASUS_BOARD_NAME("ROG MAXIMUS XI HERO (WI-FI)",
 -- 
 2.55.0
 
