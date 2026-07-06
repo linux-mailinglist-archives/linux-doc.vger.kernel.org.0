@@ -1,288 +1,159 @@
-Return-Path: <linux-doc+bounces-95106-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95109-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id bcSlIZp3S2q5RwEAu9opvQ
-	(envelope-from <linux-doc+bounces-95106-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 11:38:34 +0200
+	id tYk5FXaTS2pKVwEAu9opvQ
+	(envelope-from <linux-doc+bounces-95109-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 13:37:26 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF44170EADE
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 11:38:33 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F1B470FF08
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 13:37:25 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=arm.com header.s=foss header.b=spjOGrMA;
-	dmarc=pass (policy=none) header.from=arm.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95106-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-95106-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=h34glNGw;
+	dmarc=pass (policy=quarantine) header.from=redhat.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95109-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95109-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 2466C30EBE1A
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 09:20:46 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 40A3B305F5BF
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 09:34:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 72E063DA7D7;
-	Mon,  6 Jul 2026 09:06:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3598C3F482E;
+	Mon,  6 Jul 2026 09:21:04 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 97A86412282;
-	Mon,  6 Jul 2026 09:05:55 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D18C414A2D
+	for <linux-doc@vger.kernel.org>; Mon,  6 Jul 2026 09:20:58 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783328762; cv=none; b=CkTp60JxKpdG1lPW2oI9jxpbbiIRi+/mWvUT5U999t0Q9cz1MzKcrH+JFCBOZ5BxM2ZrdJAHKDCUuQU1N4ic2pr6vQMZTvfZGUVXo5vWcutrZR1qcCajxG9ShLIBxs121gkkgrkOrCbH+8G5awJLYkgdllv5Rsg49tVa3F1W4vk=
+	t=1783329662; cv=none; b=i4dLcv7IKDjU57VjcwZuACs5qPYCoXLxb3OsaIFPE77H1aBzmZ/mbE5wJzGNJTqoG4stZMeKBYh0rpUYCu430RTbdyRPoOUZS2n4YtQJiDIIwVqjSgsW0OjlT4QKKwKC2IJdXAy1EoECe0FK4yfaH0quFGMKEApCYaSTQDtyBZs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783328762; c=relaxed/simple;
-	bh=bESqk9eewv/vehvp5JMG4OWDxAE4mHNt5/iPs1hiMS4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=sfHzX0uslhvRj/KakRoJ8uevkRGJ+D8KVTMRSbo4CdbtnkW/wbD/PfIYFBuJ051w/EXiQTjWO2pdeY3nqnWpLRyZuIGTMhRKEOqSiDKoQm7NoJOHTBRuGdICXhOF9XS93FYh0mYlNbDlr86AVE6meK8EHao1E60rppSGJu/OsH4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=spjOGrMA; arc=none smtp.client-ip=217.140.110.172
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AF4F92BC4;
-	Mon,  6 Jul 2026 02:05:49 -0700 (PDT)
-Received: from [10.1.27.96] (e127648.arm.com [10.1.27.96])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id F2AA83F7B4;
-	Mon,  6 Jul 2026 02:05:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1783328754; bh=bESqk9eewv/vehvp5JMG4OWDxAE4mHNt5/iPs1hiMS4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=spjOGrMAtUgbwz9Ik89gqOmd72rCYEg9E6eWq0nccS4uUCTI18ijXkLIdtj8/1SNu
-	 CX5SnXUv35vAN9C4jNcb73+ZnkTKCFBwrmaprozedaRLtcjnFvxGCdFtl57R2UQBhD
-	 YLIcc6yYu+FKz+dLNqnqp4Puc3KGULS9JOwhuzUo=
-Message-ID: <c21a1bc0-ef6d-4cd3-9575-9dd36e911a3c@arm.com>
-Date: Mon, 6 Jul 2026 10:05:49 +0100
+	s=arc-20240116; t=1783329662; c=relaxed/simple;
+	bh=aXFcvMPJglyyPN/cp/+2729sZbTrCA3QYDjLxsa/gl0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=YQEJH/GUKFsXezkl7YmF/j4YlAaHHo0ImkO9uzoyjmcbRqSpISWm20v5i7QemkPWb2XsmeZ5H2GdXKSWxmvzLy8OUABEcWgKfxqGi/FXc6p1ujz9ln/2Mmz9RMtWpfPmbCK6EoVKT1r0008tAr+fXqlKRYANOqalakdUkd2j+24=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=h34glNGw; arc=none smtp.client-ip=170.10.133.124
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1783329657;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=+Ffk881gDyUgg9mQ+JlQ4lLzZ/nMxQSbsnUYykxYCb0=;
+	b=h34glNGw2pGRbiVsZz5a/6JJHq3d+a1yQkpfZLB2JxWxqsc9AVCB3dPtpllBdFx+dzSEEP
+	L+sF4Dz9jCDsoHtvhSwX8pP1Nem440TYYfYPC/7Q2BtU2f0c6QG2fRamfww3+eM+9gK9Mi
+	hEqsCHgkaAYFd6IEOZH1eidmeqhN6Pc=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-6-vpE8Ft9LOJqF2Uv59DgHgA-1; Mon,
+ 06 Jul 2026 05:20:52 -0400
+X-MC-Unique: vpE8Ft9LOJqF2Uv59DgHgA-1
+X-Mimecast-MFC-AGG-ID: vpE8Ft9LOJqF2Uv59DgHgA_1783329650
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id A9DD31955F1F;
+	Mon,  6 Jul 2026 09:20:49 +0000 (UTC)
+Received: from work.fritz.box (unknown [10.44.49.159])
+	by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id ABED53000B4D;
+	Mon,  6 Jul 2026 09:20:44 +0000 (UTC)
+From: Tim Wiederhake <twiederh@redhat.com>
+To: Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Ingo Molnar <mingo@redhat.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	kvm@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Sean Christopherson <seanjc@google.com>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Thomas Gleixner <tglx@kernel.org>,
+	x86@kernel.org
+Cc: Tim Wiederhake <twiederh@redhat.com>
+Subject: [PATCH 0/4] KVM: x86: Document and enforce APIC base memory hole
+Date: Mon,  6 Jul 2026 11:20:15 +0200
+Message-ID: <20260706092021.3625908-2-twiederh@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] sched/topology: Allow EAS without schedutil for
- artificial Energy Models
-To: Lucas Lima <lucaslnobrega38@gmail.com>,
- "Rafael J. Wysocki (Intel)" <rafael@kernel.org>
-Cc: viresh.kumar@linaro.org, mingo@redhat.com, peterz@infradead.org,
- juri.lelli@redhat.com, vincent.guittot@linaro.org, dietmar.eggemann@arm.com,
- rostedt@goodmis.org, bsegall@google.com, mgorman@suse.de,
- vschneid@redhat.com, kprateek.nayak@amd.com, corbet@lwn.net,
- skhan@linuxfoundation.org, linux-pm@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260629083542.10041-1-lucaslnobrega38@gmail.com>
- <CAJZ5v0iVD90XPsWgT8B+fw9vmFRZTVL7MasPP-=Ci0OdUmNR=A@mail.gmail.com>
- <6021784.DvuYhMxLoT@rafael.j.wysocki>
- <CAMVixxV83tSLEi_o1vmHjqfgPnnXDwo2LjP_m-Y7iEWfvUAP2g@mail.gmail.com>
- <CAJZ5v0h=u3dGbujFpU2yObyLXT0ZLZTxpG2+zLZLP7wpKsBvQw@mail.gmail.com>
- <CAMVixxXpT90bkwGTpL+T-d3ve7BTK3xXwBcaMfhvJ7R+DkxXiw@mail.gmail.com>
- <CAMVixxXCOMb330_rvgbx2Zdy4yufW0BiB5jmv04v_icK-TTVpA@mail.gmail.com>
-Content-Language: en-US
-From: Christian Loehle <christian.loehle@arm.com>
-In-Reply-To: <CAMVixxXCOMb330_rvgbx2Zdy4yufW0BiB5jmv04v_icK-TTVpA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
-	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-95109-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-95106-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:lucaslnobrega38@gmail.com,m:rafael@kernel.org,m:viresh.kumar@linaro.org,m:mingo@redhat.com,m:peterz@infradead.org,m:juri.lelli@redhat.com,m:vincent.guittot@linaro.org,m:dietmar.eggemann@arm.com,m:rostedt@goodmis.org,m:bsegall@google.com,m:mgorman@suse.de,m:vschneid@redhat.com,m:kprateek.nayak@amd.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-pm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[christian.loehle@arm.com,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	FREEMAIL_TO(0.00)[gmail.com,kernel.org];
-	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:hpa@zytor.com,m:mingo@redhat.com,m:corbet@lwn.net,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:skhan@linuxfoundation.org,m:tglx@kernel.org,m:x86@kernel.org,m:twiederh@redhat.com,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	FORGED_SENDER(0.00)[twiederh@redhat.com,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	DKIM_TRACE(0.00)[arm.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	DKIM_TRACE(0.00)[redhat.com:+];
+	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[christian.loehle@arm.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[twiederh@redhat.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp,arm.com:from_mime,arm.com:dkim,arm.com:mid]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: EF44170EADE
+X-Rspamd-Queue-Id: 8F1B470FF08
 
-On 7/2/26 22:27, Lucas Lima wrote:
-> After some testing I found out schedutil is indeed slower to react to load
-> changes compared to pstate active.
-> 
-> The methodology was to empty a cpu, run a serial float recurrence
-> (kept non-vectorizable
-> on purpose, to isolate frequency ramp-up rather than throughput headroom)
-> and compare the average throughput over several initial time windows
-> against the steady-state throughput in order to measure the CPU frequency
-> ramp-up delay under pstate active and schedutil.
+When an in-kernel irqchip is enabled on x86, KVM installs a private
+memory slot at the default APIC base address (0xfee00000) during vcpu
+creation.  If user space has already mapped a memory region covering
+that address, vcpu creation fails with -EEXIST.  The same happens in
+reverse: mapping memory over the APIC base after vcpu creation also
+fails with -EEXIST.
 
-You might be interested in rt-app for more complex experiments along those lines.
+None of this is documented, and the error is reported far from where
+the actual conflict is introduced.  A VMM developer hitting this has
+to trace through KVM internals to understand what went wrong.
 
-> 
-> ### P-core
->                                   pstate-eas-balanced
-> pstate-eas-performance    schedutil-eas-balanced
-> schedutil-eas-performance
-> ------------------------------------------------------------------------------------------------------------------------------------------
-> Ramp-up (average throughput at time window / steady):
->     0-0.005s (%)                  70.6                      99.4
->                59.7                      61.3
->     0-0.01s (%)                   83.0                      99.5
->                60.2                      62.1
->     0-0.02s (%)                   91.3                      99.5
->                62.9                      65.7
->     0-0.05s (%)                   96.7                      99.8
->                74.8                      77.6
->     0-0.1s (%)                    98.6                      99.9
->                86.9                      88.7
->     0-0.5s (%)                    100.0                     100.1
->                97.4                      97.8
->     0-1.0s (%)                    100.2                     100.1
->                98.7                      98.9
->   Convergence to 95% (ms)         5                         0
->                52                        47
-> Steady-state:
->     Throughput (Mops/s)           649.8                     654.4
->                652.3                     651.7
-> Energy:
->     Average Power (W)             9.01                      8.98
->                9.10                      9.07
->     Efficiency (J/Gop)            13.889                    13.735
->                14.000                    13.961
-> 
-> ### E-core
->                                   pstate-eas-balanced
-> pstate-eas-performance    schedutil-eas-balanced
-> schedutil-eas-performance
-> ------------------------------------------------------------------------------------------------------------------------------------------
-> Ramp-up (average throughput at time window / steady):
->     0-0.005s (%)                  75.6                      99.0
->                62.3                      57.9
->     0-0.01s (%)                   85.1                      99.1
->                62.2                      58.8
->     0-0.02s (%)                   92.4                      99.3
->                64.5                      61.0
->     0-0.05s (%)                   97.0                      99.7
->                72.9                      69.2
->     0-0.1s (%)                    98.6                      99.9
->                84.8                      82.1
->     0-0.5s (%)                    99.8                      100.0
->                96.9                      96.4
->     0-1.0s (%)                    100.0                     100.0
->                98.5                      98.2
->   Convergence to 95% (ms)         8                         0
->                67                        72
-> Steady-state:
->     Throughput (Mops/s)           540.6                     540.8
->                540.1                     539.7
-> Energy:
->     Average Power (W)             5.46                      5.47
->                5.61                      5.51
->     Efficiency (J/Gop)            10.119                    10.125
->                10.426                    10.241
-> 
+This series documents the two undocumented constraints (irqchip before
+vcpu, APIC base memory hole) and adds early checks so the error is
+reported at the ioctl that actually violates the constraint.
 
-Thanks for the data, is this 1000HZ?
-Rampup is one thing, the vast difference is obviously when tasks are migrated,
-which EAS is very eager to do on wakeup, sugov 'knows' the right OPP immediately,
-HWP needs to run through the same wakeup again, and during that window you're
-energy calculations are bogus.
+Patches 1-2 are documentation only.  Patches 3-4 add early validation
+that turns a confusing -EEXIST at vcpu creation into an explicit error
+at the point where the conflict is introduced.
 
-> That alone might make it worth it to use pstate active alongside EAS, as
-> responsiveness gains are noticeable while busy energy consumption is similar.
-> 
-> Furthermore, I implemented an EPP based EAS compatibility selection: when
-> EPP is set to 0 (performance), eas_compatible is set to false regardless
-> of the active cpufreq driver mode -- this also overrides schedutil's own
-> eas_compatible assignment in sugov_init()/sugov_exit() when running in
-> passive mode. IMHO that makes more sense than gating only on the governor,
-> as users selecting the performance power profile are looking for
-> responsiveness above all, independently of intel_pstate or governor settings.
-> 
-> It's also worth noting that governors already have the ability to change
-> EPP on their own (via intel_pstate_hwp_set()'s save/restore logic for
-> CPUFREQ_POLICY_PERFORMANCE), which can lead to a state where the desktop's
-> power profile indicator becomes inconsistent with the actual EPP value:
-> 
->   1. Switch governor: powersave -> performance
->      (intel_pstate saves the current EPP internally and forces EPP to 0)
-> 
->   2. Switch power profile: balanced -> performance
->      (EPP is explicitly written as 0 again; no visible change, since it
->      was already 0)
-> 
->   3. Switch governor: performance -> powersave
->      (intel_pstate restores the EPP to balanced,
->      because the current EPP still reads as 0 and the
->      restore heuristic cannot tell that this 0 was an explicit choice
->      rather than the still-forced value from step 1)
-> 
-> After step 3, EAS becomes re-enabled, since EPP is no longer "performance"
-> -- but the desktop still shows "performance" as the active power profile,
-> since nothing told power-profiles-daemon that the EPP changed underneath
-> it. This isn't something my patch introduces, it's an existing property
-> of intel_pstate's governor-triggered EPP save/restore, but it is relevant
-> here.
+Tested with a reproducer that exercises all six orderings of
+{irqchip, memory, vcpu} creation against both overlapping and
+non-overlapping memory regions.
 
-I think this is a separate ownership problem, but IMO the user gets a choice,
-either have a userspace daemon take care of these settings or set it themselves,
-i.e. step 1 mustn't happen (I'm reading that correctly that 1. wasn't set
-through power-profiles-daemon? If it was that seems a bug in power-profiles-daemon).
+Tim Wiederhake (4):
+  KVM: x86: Document that KVM_CREATE_IRQCHIP must precede vcpu creation
+  KVM: x86: Document APIC base address constraint for in-kernel irqchip
+  KVM: x86: Reject KVM_CREATE_IRQCHIP if APIC base is already mapped
+  KVM: x86: Reject user memory regions covering the APIC base
 
-> 
-> diff --git a/drivers/cpufreq/intel_pstate.c b/drivers/cpufreq/intel_pstate.c
-> index 8f5ab9fa3..6d7133b94 100644
-> --- a/drivers/cpufreq/intel_pstate.c
-> +++ b/drivers/cpufreq/intel_pstate.c
-> @@ -791,6 +791,18 @@
-> cpufreq_freq_attr_ro(energy_performance_available_preferences);
-> 
->  static struct cpufreq_driver intel_pstate;
-> 
-> +static inline void update_eas_compatibility(struct cpufreq_policy
-> *policy, struct cpudata *cpu)
-> +{
-> + bool eas_compatible_was = policy->eas_compatible;
-> +
-> + policy->eas_compatible = hwp_is_hybrid &&
-> + cpu->policy != CPUFREQ_POLICY_PERFORMANCE &&
-> + intel_pstate_get_epp(cpu, 0) != HWP_EPP_PERFORMANCE;
-> +
-> + if (policy->eas_compatible != eas_compatible_was)
-> + em_rebuild_sched_domains();
-> +}
-> +
->  static ssize_t store_energy_performance_preference(
->   struct cpufreq_policy *policy, const char *buf, size_t count)
->  {
-> @@ -856,6 +868,8 @@ static ssize_t store_energy_performance_preference(
-> 
->   mutex_unlock(&intel_pstate_limits_lock);
-> 
-> + update_eas_compatibility(policy, cpu);
-> +
->   return ret ?: count;
->  }
-> 
-> @@ -2922,10 +2936,7 @@ static int intel_pstate_set_policy(struct
-> cpufreq_policy *policy)
->   intel_pstate_clear_update_util_hook(policy->cpu);
->   intel_pstate_hwp_set(policy->cpu);
-> 
-> - policy->eas_compatible = hwp_is_hybrid &&
-> - cpu->policy != CPUFREQ_POLICY_PERFORMANCE;
-> - if (policy->eas_compatible)
-> - em_rebuild_sched_domains();
-> + update_eas_compatibility(policy, cpu);
->   }
->   /*
->   * policy->cur is never updated with the intel_pstate driver, but it
-> 
+ Documentation/virt/kvm/api.rst |  8 +++++++-
+ arch/x86/kvm/x86.c             | 11 +++++++++++
+ 2 files changed, 18 insertions(+), 1 deletion(-)
+
+-- 
+2.52.0
 
 
