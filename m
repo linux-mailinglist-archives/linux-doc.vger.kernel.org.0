@@ -1,153 +1,334 @@
-Return-Path: <linux-doc+bounces-95216-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95217-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 6rZ3Ng/xS2qQdQEAu9opvQ
-	(envelope-from <linux-doc+bounces-95216-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 20:16:47 +0200
+	id zfIKNpoDTGoHewEAu9opvQ
+	(envelope-from <linux-doc+bounces-95217-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 21:35:54 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 797D6714617
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 20:16:47 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B2CC71508A
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 21:35:54 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=ziepe.ca header.s=google header.b=FehRhRiV;
-	dmarc=none;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95216-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-95216-lists+linux-doc=lfdr.de@vger.kernel.org";
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=google.com header.s=20251104 header.b=ZJd7ZdwW;
+	dmarc=pass (policy=reject) header.from=google.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95217-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-95217-lists+linux-doc=lfdr.de@vger.kernel.org";
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id E9DB43001D7E
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 18:16:46 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 113B43206718
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 18:17:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 54AC841DEF1;
-	Mon,  6 Jul 2026 18:16:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B47C6400E1F;
+	Mon,  6 Jul 2026 18:17:44 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qv1-f43.google.com (mail-qv1-f43.google.com [209.85.219.43])
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B8C8B400E1F
-	for <linux-doc@vger.kernel.org>; Mon,  6 Jul 2026 18:16:43 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783361805; cv=none; b=jSBWkdJmDbsoxOODCscYgMbOw60OUKyTbp5KzmKOGCwL+TY15GTZ8mFgd/X4KpeRoZ2HZTkQ5vXEfR+J3t2A9cAejMUqWgNuT7BI9cD1o9CBk6pn3jk7uvW/+ksEo/hkGRwng4VYsrrHkLVM99vna27JQoZcU7SVrwzj2vFA5Js=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783361805; c=relaxed/simple;
-	bh=XBxMi0JruZRfOpKBpk8TTN47HygeQas2rW6X95AsLZ4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=JzIFiMgTJMLTcQbi1OPWzcwHd6Xv2ZSbnFAJDcDPkn+JEUWZzXibfX2T1T9QAQ5gzsGT/baYlDB3SMCu9mTNuEmXrVu4VqYOLa+AnMYSGQEnJGBibU6cgfgPxkhDfgXzUpXG1v9/g5jlQCOXnyN1D4o9beavUl5zFEbv5yDKBqI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca; spf=pass smtp.mailfrom=ziepe.ca; dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b=FehRhRiV; arc=none smtp.client-ip=209.85.219.43
-Received: by mail-qv1-f43.google.com with SMTP id 6a1803df08f44-8eeadbc5e21so23704556d6.3
-        for <linux-doc@vger.kernel.org>; Mon, 06 Jul 2026 11:16:43 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 234C4436BE2
+	for <linux-doc@vger.kernel.org>; Mon,  6 Jul 2026 18:17:43 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783361864; cv=pass; b=O/xXFgYXJg4hC4oHBKInyrx58MuhT7xdz1Ut4x92V4k1wG4HYD9du74ZBiT+36r4u+0WrSm4/QwaG/yUe4GM6rDwTxO9rMIHcWmnJ0x2eB/anB0dSVWxvl0ri4WrcQkOphL5jHuJm3yvx2uqEpWO9F52VBoyqnhNT0i7Phudu8I=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783361864; c=relaxed/simple;
+	bh=qof4S+F17VBSSA1zaUR6umxTYpxJBd4EYxHTZo5RHIU=;
+	h=From:In-Reply-To:References:MIME-Version:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=lyUMHq77WO9XW7L334ZxiWNhogpz0FKXl6yZJeUlgILB74RBQy5ZQnpPPBucEijUfrAAik8pATw2SbXB7EeiwDPGdWrUEvyr56YLjmvglTadPR1gJl5q789P9qBCNpCyQyWvnHCexZ1H2jxCI7acI/y0P4W7WmsV5OXIoPMg7gw=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=ZJd7ZdwW; arc=pass smtp.client-ip=209.85.215.172
+Received: by mail-pg1-f172.google.com with SMTP id 41be03b00d2f7-c9a20f70263so83115a12.1
+        for <linux-doc@vger.kernel.org>; Mon, 06 Jul 2026 11:17:43 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783361862; cv=none;
+        d=google.com; s=arc-20260327;
+        b=VMsxj08jvESJHeFZ7tK68s8m4L4uWpBedbwIAfo8gXM2D6Zg2x+cETECrDZNl+v1WF
+         k9xfNHe/62pFDE2ICNeFXNdPd+gmn5fCd9NlfA1/ZxqaiBn3UVOHde+3QATPW4p5SOZl
+         hMruMjpsAnYAdXQ0Ze9m9jiC6EoTVCFrU5/fxM3UjWY2HdGdqzHFtqRnXvROFO07vlaa
+         uCrejj9rdHJtorbgOfZfzMdD5GKpGOc6/ymRh7TiOUjhNfkXeHacxQlAs9TJBmDBMjyz
+         vbQNl7CHduo2q3n1oVgxPu5nsuQZQNUqjUHctXpZZ8nZXeuYkQdi2yYIjnfrPCx15kLe
+         0PIQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
+         :from:dkim-signature;
+        bh=c+wxJ1Yd1HSbDSoQd0ZgV/xzQAnAHKSd8sgBz4R4ZFc=;
+        fh=sl0OZBQ55caj60hbDlD5MxafGYu2vTtaNM8vF2wEaJ0=;
+        b=fctRDbibN7W5O5UJz3Xf8oYMWq6h2JUK8Lo/Htk7rXI0g/K339EEHookhMarxF3JWv
+         XheP4v0jMXfwdJm9I08poCUzcFWrc2zRQa4l5sFH2WUdZnw3Do/2zwOM9BUow0ZzrhHe
+         rPoTAJMSufpxupoASJfn51JiH80vHNTO2atLX2ZmI5sN56pb2nFYQcSY1cukYbNn5ax6
+         HHIC32/Akx1m8hXvBc8n3GMiZmnggjx8lxLjvaqgzNSdNd5ZGBpfuwCgXkNGj6o+QYiw
+         PWkZfNlsX8W/TTX05QLaxgyufeYQxFLu93yRxIg7UPJyb2ZhmXLjPi/ieyldsxMEpJHs
+         4hZA==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ziepe.ca; s=google; t=1783361803; x=1783966603; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=XBxMi0JruZRfOpKBpk8TTN47HygeQas2rW6X95AsLZ4=;
-        b=FehRhRiViCRvs6KWCYlxLKVPllj/RBP1vFb7kDLqghWhOb/EXWfAnu0dE/lldlDRce
-         Zl+VyEuaWEYXPqq97wk2nLqiifcGBWzhrmkmitr5tErtWIEi0REw7ZVuk1Vun4PgjQOV
-         yXySEw97AeYeQkdU3B6TEOUgO7zYAbEIOLD+yOuMCkoc4blTkC5hwgZu7y+85EJo5QDn
-         d2Uk0veJHIQYlJx+VL38M2KkXmAsdd8G7vvAAmII5uEimL8ou8Wnz5gI3W6QRbO4V1EW
-         tHs/SEM7aWrpytcfgNBa3ab8RBbECpq0XwhES/0eFbJuPYCNcITIp27aMdE3zPQqzwiZ
-         6SiQ==
+        d=google.com; s=20251104; t=1783361862; x=1783966662; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=c+wxJ1Yd1HSbDSoQd0ZgV/xzQAnAHKSd8sgBz4R4ZFc=;
+        b=ZJd7ZdwWlAbQKSLwjOSWuHPVGVhCVdGI7XLRLLc7OEy6svimB49ddFMt9Yb57Nkn+3
+         EOS+mec+Nu9yHfb6xFf+bchy0TMR4xL2PNpwj78qsYBye7WfAQl11eitoKlXKEHIZSjm
+         ZVnA0g23QvXquT1+wVXtMfVwWq5OgLLRSVGuWzV5hypKAvFU8pBMAgbWyNCnOR9C0FoZ
+         fGhryIyT2oiUl8Y4xzhL3QzR8r2O4/+Rj7MfV+YnOWQ95RbSWSaCfC/XOm/HauEdxe1h
+         Gzv4XBYIPNYUOqqU77rMMwZwpCMk/tDkvWfmOM6hjq1cEwqaepW3MPjSLymIt3UvGHeH
+         SHdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783361803; x=1783966603;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=XBxMi0JruZRfOpKBpk8TTN47HygeQas2rW6X95AsLZ4=;
-        b=KlhZcvENdprfigDnPGuzR/UcGUXiZpuJ6omMQ75TYdgBKd1hCdRWhljw8B2h2ZH9TZ
-         NAS0kmv//d0NN//2E8kljSatIHdVuT7bDRcoltHRxeY6a3SzfrkamV3/DtyUStPUyULl
-         9eCGr24b+XBbCJA2fTuRD9aaC1H+Ekm/MFpWx0vburuNmj7BsqYj0rNv8txR/nPSJ/1J
-         /CvXbjDvVBv3SbE5Gag3nrv7wr1AjDJ5nv7Ft8EpKLCSJjdPcmcdKwFpLwie2JMUjnB/
-         rrgU/VwhVToXSbafKgcqh5imUpxW6Y9gqjd0yaKHeaylWBCoxP5CUp34XqZYQDz2/XMX
-         pTjg==
-X-Forwarded-Encrypted: i=1; AHgh+Rq0V5FI4HdZsj1kjDylnN9k1YwmAGOP/9J7oG57EsBBqxtXTGXYqUdvmhdIqqM/vDKS5YLvZn7Njkw=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy73gDEeJvR+duCukGnxgJMxdbj/lWaklQCPOMhza7sQSIbBoqp
-	K+yF5BPg6cAJKK//RlY+GGC2YKON/14FfD8B6mx/Zu03ZXO46XGi6kDWcJB0ESKbDEA=
-X-Gm-Gg: AfdE7cn082WkiFixtR6edfNbUa3VQlqnhgO97DuH+y95JNlXsmNfZKuaJktpikn/MPn
-	RdkYwOPafTR8R6CMM9xQtFOXdFTIeFNf95PrM9Vz526C6szuHqr9+VNN642TEREtJTj8onk0Ydm
-	PNACnfuZ5tM1ZO1okE5hBtBYbCaub6bd8JQZfTVqgaOTq3O40+nJg5LEjXR+Hj2B9BkymCzuCrP
-	GBvks8f7lPAtBBVJ4ZjLMYFL5B0Zi1aJXxUDonkK3OAH1w+l3ogxwIHZh/PaN+SijXqPVe4kruc
-	ip/IiC3LGbMvv4zizdFJ/GIMQJUpG00ZJAZmE4FJc2gqHs7ycdodlIv2ucUPgKtLK7AYu1pHDCc
-	SXe6VIsv5iEDvM2u7LXEzohYSiBEynBHJU9fEMXANzi/57L0wkpa70MpuIh6MXyuj6V7w/Hs=
-X-Received: by 2002:a05:6214:226b:b0:8ee:b05c:596d with SMTP id 6a1803df08f44-8fcb336e9fbmr21380346d6.22.1783361802525;
-        Mon, 06 Jul 2026 11:16:42 -0700 (PDT)
-Received: from ziepe.ca ([159.2.72.92])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-8f4724b9ff8sm139929466d6.40.2026.07.06.11.16.41
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 Jul 2026 11:16:42 -0700 (PDT)
-Received: from jgg by wakko with local (Exim 4.97)
-	(envelope-from <jgg@ziepe.ca>)
-	id 1wgns0-00000000dbb-1jFq;
-	Mon, 06 Jul 2026 15:16:40 -0300
-Date: Mon, 6 Jul 2026 15:16:40 -0300
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: Stanislav Kinsburskii <skinsburskii@gmail.com>
-Cc: Liam.Howlett@oracle.com, akpm@linux-foundation.org, david@kernel.org,
-	corbet@lwn.net, leon@kernel.org, ljs@kernel.org, mhocko@suse.com,
-	rppt@kernel.org, shuah@kernel.org, skhan@linuxfoundation.org,
-	surenb@google.com, vbabka@kernel.org, kys@microsoft.com,
-	haiyangz@microsoft.com, wei.liu@kernel.org, decui@microsoft.com,
-	longli@microsoft.com, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
-	linux-mm@kvack.org, linux-hyperv@vger.kernel.org
-Subject: Re: [PATCH v6 4/4] mshv: Use hmm_range_fault_unlocked() for region
- faults
-Message-ID: <20260706181640.GC118978@ziepe.ca>
-References: <178336023903.504354.7500950448226027718.stgit@skinsburskii>
- <178336052192.504354.1841795575701703197.stgit@skinsburskii>
+        d=1e100.net; s=20251104; t=1783361862; x=1783966662;
+        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=c+wxJ1Yd1HSbDSoQd0ZgV/xzQAnAHKSd8sgBz4R4ZFc=;
+        b=ms4F/NlmHYEzqo009KlVgVEP0Fh0Lc3SfAnhAUwwnLiAfrNcvuWOEkR61rznsESqRu
+         XJPllp3BQMg2DCb1lNOlSji5BZVJIuh+YHxt7cF/zcZ+0kr8F+Zecb0yk/8ozzcKDVQC
+         nu4c3ea/aaBAGnuQc8xV3jrC+CUWTPXoQU3xD4P1x4ZpQgH5T0N1ay7+80CH7RCniFfK
+         oQUjzjOpuYKr6QIBFZngB+JnqEP0Hn8DYpSBIohMfE8R9tWv/sh0+czOxk5aqjEcnX3U
+         gevoQUBS4VbkJvhwgmQUQKy0WY4nAolJmrhVSGh9sSjUJDjQwQYl/fE6wsM572dlqfe8
+         RaLg==
+X-Forwarded-Encrypted: i=1; AHgh+RpDBp5doymxhTykD6TN4JzyzhMReWGMGUaxwehv/QQng0vrpfLkierhME21t8kQn6thaUNcjF5fgQk=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx1BHgcchWIildTCwtaGqhA8kw/XPiz2Uy9bimvn3DmRLgcbt/v
+	KPg2umz6odeu31nWUp4b2xDLZeNrfWD6PAAXfir8WJw9fUdpNtlPgUfHl2YlbPcdEyS5cr8omRx
+	xa7MrAWQIEExZe8SztkSup4GIkLq4Ud/J3M1rZM99
+X-Gm-Gg: AfdE7ckU1X5o9uSJ7r9ALWQgRCG2K8gFn1CPopKqaymsIw+4tn7nsgf3Dya9t9kM/bm
+	m64DUYvo8Sd1+/p4eskObs9duCBKAiiE570xSMKltSJn5I8bA9s9X6YuxJwryeSnZ9ovRbgBVSU
+	5xfM1bZ6Aa5cb3uZ0BME/iH36aMXmJgZAzqZWt4i7MKx81+6qxJyD1Oo8clv7JBo2GmGnZOwVoD
+	YLh5rbSSrUG4YWLSRRRcvE1B/E2arwUTKyCCm5+ctY87FtfnFZBMDOXTgoCKzk/reJj8ewaoLPx
+	7USb7kmnTmB/wptqUgYWOFNCicaKKAM5RAF9PiybqA6i8K4veaM3KBgkE2F4UW7Xm+QndQ==
+X-Received: by 2002:a05:6a21:6906:b0:3bf:79b5:ebdb with SMTP id
+ adf61e73a8af0-3c01caab306mr16907533637.21.1783361861894; Mon, 06 Jul 2026
+ 11:17:41 -0700 (PDT)
+Received: from 176938342045 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 6 Jul 2026 11:17:40 -0700
+Received: from 176938342045 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 6 Jul 2026 11:17:40 -0700
+From: Ackerley Tng <ackerleytng@google.com>
+In-Reply-To: <114e2488-97ed-4740-a8e8-1edd991f26c5@arm.com>
+References: <20260618-gmem-inplace-conversion-v8-0-9d2959357853@google.com>
+ <20260618-gmem-inplace-conversion-v8-13-9d2959357853@google.com> <114e2488-97ed-4740-a8e8-1edd991f26c5@arm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <178336052192.504354.1841795575701703197.stgit@skinsburskii>
+Date: Mon, 6 Jul 2026 11:17:40 -0700
+X-Gm-Features: AVVi8CeLpju1khujHSRbueqIxtdXRIsffiKvTI6S-exNvUblyDgAMTgWeujtT7w
+Message-ID: <CAEvNRgFKbKfTMkqh_XF-igm07qYWfRwYJ5SH7wHcLZnqesCzTw@mail.gmail.com>
+Subject: Re: [PATCH v8 13/46] KVM: guest_memfd: Add base support for KVM_SET_MEMORY_ATTRIBUTES2
+To: Suzuki K Poulose <suzuki.poulose@arm.com>, aik@amd.com, andrew.jones@linux.dev, 
+	binbin.wu@linux.intel.com, brauner@kernel.org, chao.p.peng@linux.intel.com, 
+	david@kernel.org, jmattson@google.com, jthoughton@google.com, 
+	michael.roth@amd.com, oupton@kernel.org, pankaj.gupta@amd.com, 
+	qperret@google.com, rick.p.edgecombe@intel.com, rientjes@google.com, 
+	shivankg@amd.com, steven.price@arm.com, tabba@google.com, willy@infradead.org, 
+	wyihan@google.com, yan.y.zhao@intel.com, forkloop@google.com, 
+	pratyush@kernel.org, aneesh.kumar@kernel.org, liam@infradead.org, 
+	Paolo Bonzini <pbonzini@redhat.com>, Sean Christopherson <seanjc@google.com>, 
+	Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
+	"H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>, 
+	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+	Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>, 
+	Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>, 
+	Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>, 
+	Nhat Pham <nphamcs@gmail.com>, Barry Song <baohua@kernel.org>, 
+	Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>, 
+	Wei Xu <weixugc@google.com>, Youngjun Park <youngjun.park@lge.com>, 
+	Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
+	Kiryl Shutsemau <kas@kernel.org>, Baoquan He <baoquan.he@linux.dev>, Jason Gunthorpe <jgg@ziepe.ca>, 
+	Vlastimil Babka <vbabka@kernel.org>
+Cc: kvm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kselftest@vger.kernel.org, linux-mm@kvack.org, 
+	linux-coco@lists.linux.dev
+Content-Type: text/plain; charset="UTF-8"
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.66 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_DKIM_ALLOW(-0.20)[ziepe.ca:s=google];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:skinsburskii@gmail.com,m:Liam.Howlett@oracle.com,m:akpm@linux-foundation.org,m:david@kernel.org,m:corbet@lwn.net,m:leon@kernel.org,m:ljs@kernel.org,m:mhocko@suse.com,m:rppt@kernel.org,m:shuah@kernel.org,m:skhan@linuxfoundation.org,m:surenb@google.com,m:vbabka@kernel.org,m:kys@microsoft.com,m:haiyangz@microsoft.com,m:wei.liu@kernel.org,m:decui@microsoft.com,m:longli@microsoft.com,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,m:linux-hyperv@vger.kernel.org,s:lists@lfdr.de];
-	DMARC_NA(0.00)[ziepe.ca];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
+	TAGGED_FROM(0.00)[bounces-95217-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[jgg@ziepe.ca,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	TAGGED_FROM(0.00)[bounces-95216-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:suzuki.poulose@arm.com,m:aik@amd.com,m:andrew.jones@linux.dev,m:binbin.wu@linux.intel.com,m:brauner@kernel.org,m:chao.p.peng@linux.intel.com,m:david@kernel.org,m:jmattson@google.com,m:jthoughton@google.com,m:michael.roth@amd.com,m:oupton@kernel.org,m:pankaj.gupta@amd.com,m:qperret@google.com,m:rick.p.edgecombe@intel.com,m:rientjes@google.com,m:shivankg@amd.com,m:steven.price@arm.com,m:tabba@google.com,m:willy@infradead.org,m:wyihan@google.com,m:yan.y.zhao@intel.com,m:forkloop@google.com,m:pratyush@kernel.org,m:aneesh.kumar@kernel.org,m:liam@infradead.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:shuah@kernel.org,m:vannapurve@google.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencent.com,m:shikemeng@huaweic
+ loud.com,m:nphamcs@gmail.com,m:baohua@kernel.org,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:kas@kernel.org,m:baoquan.he@linux.dev,m:jgg@ziepe.ca,m:vbabka@kernel.org,m:kvm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,m:linux-coco@lists.linux.dev,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[ackerleytng@google.com,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_TO(0.00)[arm.com,amd.com,linux.dev,linux.intel.com,kernel.org,google.com,intel.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca];
 	FORWARDED(0.00)[lists@lfdr.de];
-	DKIM_TRACE(0.00)[ziepe.ca:+];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[google.com:+];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	MISSING_XM_UA(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jgg@ziepe.ca,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[ackerleytng@google.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[63];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
 	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 797D6714617
+X-Rspamd-Queue-Id: 3B2CC71508A
 
-On Mon, Jul 06, 2026 at 10:55:21AM -0700, Stanislav Kinsburskii wrote:
-> Convert mshv_region_hmm_fault_and_lock() to use
-> hmm_range_fault_unlocked() instead of taking mmap_read_lock() around
-> hmm_range_fault() directly.
+Suzuki K Poulose <suzuki.poulose@arm.com> writes:
 
-Please convert all the trivial users too, thanks
+>
+> [...snip...]
+>
+>> +static int __kvm_gmem_set_attributes(struct inode *inode, pgoff_t start,
+>> +				     size_t nr_pages, uint64_t attrs)
+>> +{
+>> +	struct address_space *mapping = inode->i_mapping;
+>> +	struct gmem_inode *gi = GMEM_I(inode);
+>> +	pgoff_t end = start + nr_pages;
+>> +	struct maple_tree *mt;
+>> +	struct ma_state mas;
+>> +	int r;
+>> +
+>> +	mt = &gi->attributes;
+>> +
+>> +	filemap_invalidate_lock(mapping);
+>> +
+>> +	mas_init(&mas, mt, start);
+>> +	r = kvm_gmem_mas_preallocate(&mas, attrs, start, nr_pages);
+>> +	if (r)
+>> +		goto out;
+>> +
+>> +	/*
+>> +	 * From this point on guest_memfd has performed necessary
+>> +	 * checks and can proceed to do guest-breaking changes.
+>> +	 */
+>> +
+>> +	kvm_gmem_invalidate_start(inode, start, end);
+>
+> I added support for Arm CCA KVM patches with the inplace conversion and
+> I am hitting the following issue.
+>
+> 1. I am supporting INIT_SHARED + MMAP flags.
+> 2. VMM creates the Gmem_fd with both the flags above.
+> 3. Uses the shared gmem-mmap to load the initial payloads (kernel, dtb).
+> 4. At the VM finalization time, Populate the loaded regions one by one
+>     by
+>      a) copying the images to a temparory buffer - Since CCA can't really
+>         load the contents in-place.
 
-Jason
+Sounds good :). I see that you blocked this in the kernel by returning
+-EOPNOTSUPP if (!src_page) [0].
+
+>      b) Set the "region" to Private in the gmem_fd (via
+> SET_MEMORY_ATTRIBUTES2)
+>      c) Invoke CCA backend to populate the private memory via
+>         ioctl(KVM_ARM_RMI_POPULATE,..) [0]
+>
+
+This flow sounds right.
+
+> [0]
+> https://lore.kernel.org/all/20260513131757.116630-27-steven.price@arm.com/
+>
+>
+> 5. Additionally, VMM can mark the entire RAM to be private before the VM
+>     starts running, again via SET_MEMORY_ATTRIBUTES2. On CCA, this
+> action is measured and doesn't require the Host to "commit" memory to
+> the VM.
+> Instead the host can lazily donate memory on a fault.
+>
+
+For both TDX and SNP, the host can also lazily donate memory,
+guest_memfd supports this.
+
+> But step (5) triggers the invalidation of both private and shared
+> mappings of the gmem area, from the kvm_gmem_invalidate_start()
+> above.
+>
+> This is because, the entire DRAM now has, some portions PRIVATE (the
+> loaded regions) and the rest are SHARED (from the Gmem_fd creation).
+>   Thus, kvm_gmem_get_invalidate_filter(Dram_start, Dram_end) causes the
+> invalidation of both "PRIVATE" and "SHARED" regions, which results
+> in the destruction of the already loaded data and things go south.
+>
+
+This destruction will happen for TDX as well. I think we managed to get
+around this because we didn't apply conversion on the already-private
+ranges.
+
+IIUC on SNP, zapping pages in the stage 2 page tables doesn't destroy
+the data, so that's probably why it has been fine for SNP.
+
+> When we know that the kvm_gmem_invalidate_xx is triggered by a
+> conversion, we don't need to invalidate the existing pages that
+> are in the requested state. i.e., the following patch on top of
+> this series does the trick for me :
+>
+>
+> diff --git a/virt/kvm/guest_memfd.c b/virt/kvm/guest_memfd.c
+> index a97fcac34a0e..62e0427a49f4 100644
+> --- a/virt/kvm/guest_memfd.c
+> +++ b/virt/kvm/guest_memfd.c
+> @@ -250,16 +250,23 @@ static void __kvm_gmem_invalidate_start(struct
+> gmem_file *f, pgoff_t start,
+>                  KVM_MMU_UNLOCK(kvm);
+>   }
+>
+> +static void kvm_gmem_invalidate_start_filter(struct inode *inode,
+> pgoff_t start,
+> +                                            pgoff_t end,
+> +                                            enum kvm_gfn_range_filter
+> attr_filter)
+> +{
+> +       struct gmem_file *f;
+> +
+> +       kvm_gmem_for_each_file(f, inode)
+> +               __kvm_gmem_invalidate_start(f, start, end, attr_filter);
+> +}
+> +
+>   static void kvm_gmem_invalidate_start(struct inode *inode, pgoff_t start,
+>                                        pgoff_t end)
+>   {
+>          enum kvm_gfn_range_filter attr_filter;
+> -       struct gmem_file *f;
+> -
+>          attr_filter = kvm_gmem_get_invalidate_filter(inode, start, end);
+>
+> -       kvm_gmem_for_each_file(f, inode)
+> -               __kvm_gmem_invalidate_start(f, start, end, attr_filter);
+> +       kvm_gmem_invalidate_start_filter(inode, start, end, attr_filter);
+>   }
+>
+>   static void __kvm_gmem_invalidate_end(struct gmem_file *f, pgoff_t start,
+> @@ -724,9 +731,14 @@ static int __kvm_gmem_set_attributes(struct inode
+> *inode, pgoff_t start,
+>          /*
+>           * From this point on guest_memfd has performed necessary
+>           * checks and can proceed to do guest-breaking changes.
+> +        * Also, we don't have to invalidate the regions that
+> +        * may already be in the requested state. Hence, we could
+> +        * explicitly filter the invalidations to the opposite
+> +        * state.
+>           */
+>
+> -       kvm_gmem_invalidate_start(inode, start, end);
+> +       kvm_gmem_invalidate_start_filter(inode, start, end,
+> +                                       to_private ? KVM_FILTER_SHARED :
+> KVM_FILTER_PRIVATE);
+>
+
+I think this makes sense. Thanks for catching this.
+
+>          if (!to_private)
+>                  kvm_gmem_invalidate(inode, start, end);
+>
+>
+> Thoughts ?
+>
+> Suzuki
+>
+>
+>>
+>> [...snip...]
+>>
 
