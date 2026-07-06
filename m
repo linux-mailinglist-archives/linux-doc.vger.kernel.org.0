@@ -1,119 +1,134 @@
-Return-Path: <linux-doc+bounces-95079-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95080-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id gyaGNQBZS2o3PwEAu9opvQ
-	(envelope-from <linux-doc+bounces-95079-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 09:28:00 +0200
+	id ey8iFEVWS2qXPgEAu9opvQ
+	(envelope-from <linux-doc+bounces-95080-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 09:16:21 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A66370D874
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 09:28:00 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3C7A870D6B6
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 09:16:20 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=c8xg32Ni;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95079-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-95079-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=none;
+	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=tu-dortmund.de (policy=none);
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95080-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-95080-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 0340B32961C2
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 07:00:19 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id A7695302DEAC
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 07:08:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DF9353EC2EA;
-	Mon,  6 Jul 2026 06:40:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8103A481A9A;
+	Mon,  6 Jul 2026 06:50:33 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from unimail.uni-dortmund.de (mx1.hrz.uni-dortmund.de [129.217.128.51])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91F1E3F99EA;
-	Mon,  6 Jul 2026 06:40:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F9814A1399;
+	Mon,  6 Jul 2026 06:50:22 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783320055; cv=none; b=Kjqeyo18rPaMmJW9FWXjGy1s3UQTfvhndcpIbV+7yXKxzZCgz22HF9DhPPckbcKZezAQU/tjf3R1yb5iGJ3f077CumvH6+0eMiyfY1TVWdTD6c12agoN9s/ffuLVJ3Tbr+BvF6n1k6L4Hc8mWbnXBMuw+UOslu8b1xHORpPtPhI=
+	t=1783320631; cv=none; b=BeW26ykjgQp3KixJLyfI2aSdOkRPJjfQ6T3er1/Lj4Zk7Nv0T0g2RJjQe9oFIxpKrlyqqE5/2jugGo4OlZ/4QADqOpjlf8u1lv3GhpWOqK4XiyzGjwvDC8dnbZJvQ+ZPSEki5rom3mE1x6YLL9AufG3/vizji+LzyKZlSNvrc5E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783320055; c=relaxed/simple;
-	bh=EfeC6xCemxNveVDmaUafIdp2sJnX+4EfPNNYlhqRDxc=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=KGzGPRwDiu8Izr0465hNP2RXLuiTR8JA+Zkabpp1K7pePXVsk6TxPrco6EH8HYtU7NcTQAFIlxXtTbeEIEq1lKibcNjIZTGHeTf7GiSU6dRjABhLNHXyr6RE/HIEc2uIJzTs2zu3qRzDadDM6iEDbJN1aRovIwawZh8bYzwOL40=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=c8xg32Ni; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B9D601F000E9;
-	Mon,  6 Jul 2026 06:40:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783320043;
-	bh=EfeC6xCemxNveVDmaUafIdp2sJnX+4EfPNNYlhqRDxc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=c8xg32Niw4KbPhHwe7xnwd+uNFNpmQV12KbwAmx0QBdNKdX/WM5QTi6BXPNNbu1BF
-	 CjPRNDwhpk1QpGDeB7GT55ybj+L6f80Bk+e06Rs0G1R7PSIVBqdmJlpgT73vDDXoCF
-	 Dpfe6fk314G4V93Ps23saNRfXBtbPhATzU5bykJHMetFSywBi8G59Dkt3j+c8jWgRE
-	 9uOzGZPOeK+LHx8zoC2Kyf36QzRgrRndwGDL/nQXqwZqqqCJZ0ujGkdzNN/Gi42QmB
-	 tV/mM4Hxu0GnKTBWNIJI+OxELgpNQqYzQrIifUnc0mmux52sWKtOTrePgNboIZ6trE
-	 gZztML2UvHglQ==
-Date: Mon, 6 Jul 2026 08:40:38 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Alexis Czezar Torreno <alexisczezar.torreno@analog.com>
-Cc: Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
-	linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v2 4/5] dt-bindings: hwmon: (pmbus/max20830): add
- max20830c and max20840c support
-Message-ID: <20260706-abstract-apricot-platypus-b932ff@quoll>
-References: <20260706-dev-max20830c-v2-0-37761e89bb5f@analog.com>
- <20260706-dev-max20830c-v2-4-37761e89bb5f@analog.com>
+	s=arc-20240116; t=1783320631; c=relaxed/simple;
+	bh=wn//s5w0hgs6ufiyHhdXrTuz3iRrO5q24YE9mr2oCEw=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=BHDD6WcttwOedwvypXsQoAon0/FGsr6/Qqa1JOnh0W8k2aBJAWEgsDZK0qMTVTbmiDqRfpbDypFCVY8zow+jxJRaJJRY9EuzZ+A52bVzEZ5YI0ViFrgkxcloDscXNO2sKJm8ZuF7KKsaZR89uPrkcJShduEdnfA3ybibJIAUqcs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=tu-dortmund.de; spf=pass smtp.mailfrom=tu-dortmund.de; arc=none smtp.client-ip=129.217.128.51
+Received: from [129.217.186.105] ([129.217.186.105])
+	(authenticated bits=0)
+	by unimail.uni-dortmund.de (8.19.0.2/8.19.0.2) with ESMTPSA id 6666ksni005709
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Mon, 6 Jul 2026 08:46:55 +0200 (CEST)
+Message-ID: <f6d454f2-06d2-4296-b6c8-5de4972552fe@tu-dortmund.de>
+Date: Mon, 6 Jul 2026 08:46:54 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260706-dev-max20830c-v2-4-37761e89bb5f@analog.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH net] tun/tap & vhost-net: make qdisc backpressure opt-in
+ via IFF_BACKPRESSURE
+To: Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
+        Jason Wang <jasowangio@gmail.com>,
+        "David S . Miller" <davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>,
+        "Michael S . Tsirkin" <mst@redhat.com>, netdev@vger.kernel.org
+Cc: Simon Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Andrew Lunn <andrew+netdev@lunn.ch>,
+        Tim Gebauer <tim.gebauer@tu-dortmund.de>,
+        Brett Sheffield <brett@librecast.net>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260704112058.95421-1-simon.schippers@tu-dortmund.de>
+Content-Language: en-US
+From: Simon Schippers <simon.schippers@tu-dortmund.de>
+In-Reply-To: <20260704112058.95421-1-simon.schippers@tu-dortmund.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.16 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [0.14 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[tu-dortmund.de : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-95079-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:alexisczezar.torreno@analog.com,m:linux@roeck-us.net,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-hwmon@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[krzk@kernel.org,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:willemdebruijn.kernel@gmail.com,m:jasowangio@gmail.com,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:mst@redhat.com,m:netdev@vger.kernel.org,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:andrew+netdev@lunn.ch,m:tim.gebauer@tu-dortmund.de,m:brett@librecast.net,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:willemdebruijnkernel@gmail.com,m:andrew@lunn.ch,s:lists@lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORWARDED(0.00)[lists@lfdr.de];
+	FREEMAIL_TO(0.00)[gmail.com,davemloft.net,google.com,kernel.org,redhat.com,vger.kernel.org];
+	FORGED_SENDER(0.00)[simon.schippers@tu-dortmund.de,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	TAGGED_FROM(0.00)[bounces-95080-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[krzk@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[simon.schippers@tu-dortmund.de,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	R_DKIM_NA(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,qualcomm.com:email,vger.kernel.org:from_smtp,quoll:mid]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,vger.kernel.org:from_smtp,tu-dortmund.de:mid,tu-dortmund.de:from_mime,sashiko.dev:url]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 1A66370D874
+X-Rspamd-Queue-Id: 3C7A870D6B6
 
-On Mon, Jul 06, 2026 at 10:08:44AM +0800, Alexis Czezar Torreno wrote:
-> Add compatible strings for variants of MAX20830 which are MAX20830C
-> and MAX20840C. These devices have the same register functionality with
-> MAX20830 but with a longer IC_DEVICE_ID.
+On 7/4/26 13:20, Simon Schippers wrote:
+> @@ -2893,8 +2899,19 @@ static int tun_set_iff(struct net *net, struct file *file, struct ifreq *ifr)
+>  	/* Make sure persistent devices do not get stuck in
+>  	 * xoff state.
+>  	 */
+> -	if (netif_running(tun->dev))
+> -		netif_tx_wake_all_queues(tun->dev);
+> +	if (netif_running(tun->dev)) {
+> +		for (int i = 0; i < tun->numqueues; i++) {
+> +			struct tun_file *i_tfile;
+> +
+> +			i_tfile = rtnl_dereference(tun->tfiles[i]);
+> +			spin_lock_bh(&i_tfile->tx_ring.consumer_lock);
+> +			spin_lock(&i_tfile->tx_ring.producer_lock);
+> +			netif_wake_subqueue(tun->dev, i_tfile->queue_index);
+> +			i_tfile->cons_cnt = 0;
+> +			spin_unlock(&i_tfile->tx_ring.producer_lock);
+> +			spin_unlock_bh(&i_tfile->tx_ring.consumer_lock);
+> +		}
+> +	}
 
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+I think Sashiko [1] is right. I forgot to wake the disabled queues.
 
-Best regards,
-Krzysztof
+I will post a v2.
+
+[1] Link: https://sashiko.dev/#/patchset/20260704112058.95421-1-simon.schippers%40tu-dortmund.de
 
 
