@@ -1,53 +1,51 @@
-Return-Path: <linux-doc+bounces-95105-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95106-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id UVl9IOmMS2p6VQEAu9opvQ
-	(envelope-from <linux-doc+bounces-95105-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 13:09:29 +0200
+	id bcSlIZp3S2q5RwEAu9opvQ
+	(envelope-from <linux-doc+bounces-95106-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 11:38:34 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id D0F8770FAAA
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 13:09:28 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id EF44170EADE
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 11:38:33 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=CMmpIc8B;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95105-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95105-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=arm.com header.s=foss header.b=spjOGrMA;
+	dmarc=pass (policy=none) header.from=arm.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95106-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-95106-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id C7944349B05B
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 08:59:14 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 2466C30EBE1A
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 09:20:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 828BA42E011;
-	Mon,  6 Jul 2026 08:51:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 72E063DA7D7;
+	Mon,  6 Jul 2026 09:06:04 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DEDC23890F1;
-	Mon,  6 Jul 2026 08:51:17 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 97A86412282;
+	Mon,  6 Jul 2026 09:05:55 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783327882; cv=none; b=lq8qd+GuHUfH6A+SGtlh+yHLzOvKpH2rmwsjliNCgMM+edk+AiJd86ycqKzJUhzquV86ioXO78bzptZOPkfg/w+SUvZjOP17DHF357APoIrLaXvCesn0y9fEr0HcVbdlpKgH2Sh6O51zgj2FIkgxNTVDdKPVaar4VkAHQ8FE9Es=
+	t=1783328762; cv=none; b=CkTp60JxKpdG1lPW2oI9jxpbbiIRi+/mWvUT5U999t0Q9cz1MzKcrH+JFCBOZ5BxM2ZrdJAHKDCUuQU1N4ic2pr6vQMZTvfZGUVXo5vWcutrZR1qcCajxG9ShLIBxs121gkkgrkOrCbH+8G5awJLYkgdllv5Rsg49tVa3F1W4vk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783327882; c=relaxed/simple;
-	bh=syY7sAmSlg+O76Krteu3SOK7sgsgqcxHbwhWRYYI1/8=;
+	s=arc-20240116; t=1783328762; c=relaxed/simple;
+	bh=bESqk9eewv/vehvp5JMG4OWDxAE4mHNt5/iPs1hiMS4=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=ehtVX8Pjh9dsaWOCHeKy6r/QhVGbT+XjuaON65xxFmh719rsg9muET2zQFrZ53iliTiKsUQQg0oqrxg95CuNc+vTnS2rNKmLsAe1sBZFlBtPQ3V2U36TbGKv2sgKm5tsjmKxwcsd5eR1zB1o056wTldTKEfqZ50z+nXs9OOcXGw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CMmpIc8B; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3632F1F000E9;
-	Mon,  6 Jul 2026 08:51:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783327875;
-	bh=XzLv+da1VK2uoG9pUr+oPk8RYYDxZ2UhQ4fGhBT+UfI=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=CMmpIc8BJghNiDy/pCe9GTyMUvlDSFT5HUMJXFRfF++L/1UvvKWrD9rnn4yjenoVD
-	 5dHcgnp0FYUtLagXsim9k2A86Uv16/jzW84Wq2myLedNIHiqEWp0liHjjizBorDkaG
-	 0Sg0fukbNdlhhOQjZ5ZL8LLx79gVWn4CtiXUSLxvekkwV6HZX9IEWSiaVYFWEEhNiq
-	 k+MQ14GVNEQsBg+eDXeAMmoeow423kX3Ibdm1BdXtIrdTS5CxziVrG7yMm72YIWB2b
-	 9NDhD0ZpAMGdJNBMOxUgV8k9avzG0Dx7N5Xrr1JcH8vQZii9SH6/66is7xCTON+Sdl
-	 XDgtaStJD8VCg==
-Message-ID: <69f71507-0a42-4fdf-af33-2c596657aca1@kernel.org>
-Date: Mon, 6 Jul 2026 10:51:05 +0200
+	 In-Reply-To:Content-Type; b=sfHzX0uslhvRj/KakRoJ8uevkRGJ+D8KVTMRSbo4CdbtnkW/wbD/PfIYFBuJ051w/EXiQTjWO2pdeY3nqnWpLRyZuIGTMhRKEOqSiDKoQm7NoJOHTBRuGdICXhOF9XS93FYh0mYlNbDlr86AVE6meK8EHao1E60rppSGJu/OsH4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=spjOGrMA; arc=none smtp.client-ip=217.140.110.172
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AF4F92BC4;
+	Mon,  6 Jul 2026 02:05:49 -0700 (PDT)
+Received: from [10.1.27.96] (e127648.arm.com [10.1.27.96])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id F2AA83F7B4;
+	Mon,  6 Jul 2026 02:05:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1783328754; bh=bESqk9eewv/vehvp5JMG4OWDxAE4mHNt5/iPs1hiMS4=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=spjOGrMAtUgbwz9Ik89gqOmd72rCYEg9E6eWq0nccS4uUCTI18ijXkLIdtj8/1SNu
+	 CX5SnXUv35vAN9C4jNcb73+ZnkTKCFBwrmaprozedaRLtcjnFvxGCdFtl57R2UQBhD
+	 YLIcc6yYu+FKz+dLNqnqp4Puc3KGULS9JOwhuzUo=
+Message-ID: <c21a1bc0-ef6d-4cd3-9575-9dd36e911a3c@arm.com>
+Date: Mon, 6 Jul 2026 10:05:49 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -55,135 +53,236 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 3/3] mm: move reclaim-internal declarations out of
- swap.h
-To: Jianyue Wu <wujianyue000@gmail.com>,
- Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>,
- Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>,
- Nhat Pham <nphamcs@gmail.com>, Barry Song <baohua@kernel.org>,
- Youngjun Park <youngjun.park@lge.com>, Qi Zheng <qi.zheng@linux.dev>,
- Shakeel Butt <shakeel.butt@linux.dev>,
- Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>,
- Wei Xu <weixugc@google.com>, Johannes Weiner <hannes@cmpxchg.org>,
- Michal Hocko <mhocko@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>,
- "Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>,
- Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>,
- Michal Hocko <mhocko@suse.com>, Hugh Dickins <hughd@google.com>,
- Baolin Wang <baolin.wang@linux.alibaba.com>, Jonathan Corbet
- <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- Baoquan He <baoquan.he@linux.dev>
-Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org
-References: <20260705-ch-swap-series-plus-folio-lru-cleanup-v7-0-a028e8b5fc3d@gmail.com>
- <20260705-ch-swap-series-plus-folio-lru-cleanup-v7-3-a028e8b5fc3d@gmail.com>
-From: "David Hildenbrand (Arm)" <david@kernel.org>
+Subject: Re: [PATCH] sched/topology: Allow EAS without schedutil for
+ artificial Energy Models
+To: Lucas Lima <lucaslnobrega38@gmail.com>,
+ "Rafael J. Wysocki (Intel)" <rafael@kernel.org>
+Cc: viresh.kumar@linaro.org, mingo@redhat.com, peterz@infradead.org,
+ juri.lelli@redhat.com, vincent.guittot@linaro.org, dietmar.eggemann@arm.com,
+ rostedt@goodmis.org, bsegall@google.com, mgorman@suse.de,
+ vschneid@redhat.com, kprateek.nayak@amd.com, corbet@lwn.net,
+ skhan@linuxfoundation.org, linux-pm@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260629083542.10041-1-lucaslnobrega38@gmail.com>
+ <CAJZ5v0iVD90XPsWgT8B+fw9vmFRZTVL7MasPP-=Ci0OdUmNR=A@mail.gmail.com>
+ <6021784.DvuYhMxLoT@rafael.j.wysocki>
+ <CAMVixxV83tSLEi_o1vmHjqfgPnnXDwo2LjP_m-Y7iEWfvUAP2g@mail.gmail.com>
+ <CAJZ5v0h=u3dGbujFpU2yObyLXT0ZLZTxpG2+zLZLP7wpKsBvQw@mail.gmail.com>
+ <CAMVixxXpT90bkwGTpL+T-d3ve7BTK3xXwBcaMfhvJ7R+DkxXiw@mail.gmail.com>
+ <CAMVixxXCOMb330_rvgbx2Zdy4yufW0BiB5jmv04v_icK-TTVpA@mail.gmail.com>
 Content-Language: en-US
-Autocrypt: addr=david@kernel.org; keydata=
- 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
- qIws/H2t
-In-Reply-To: <20260705-ch-swap-series-plus-folio-lru-cleanup-v7-3-a028e8b5fc3d@gmail.com>
+From: Christian Loehle <christian.loehle@arm.com>
+In-Reply-To: <CAMVixxXCOMb330_rvgbx2Zdy4yufW0BiB5jmv04v_icK-TTVpA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-5.16 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
+	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:wujianyue000@gmail.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencent.com,m:shikemeng@huaweicloud.com,m:nphamcs@gmail.com,m:baohua@kernel.org,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:hannes@cmpxchg.org,m:mhocko@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:hughd@google.com,m:baolin.wang@linux.alibaba.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:baoquan.he@linux.dev,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-95106-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:lucaslnobrega38@gmail.com,m:rafael@kernel.org,m:viresh.kumar@linaro.org,m:mingo@redhat.com,m:peterz@infradead.org,m:juri.lelli@redhat.com,m:vincent.guittot@linaro.org,m:dietmar.eggemann@arm.com,m:rostedt@goodmis.org,m:bsegall@google.com,m:mgorman@suse.de,m:vschneid@redhat.com,m:kprateek.nayak@amd.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-pm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[david@kernel.org,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[29];
-	FREEMAIL_TO(0.00)[gmail.com,linux-foundation.org,kernel.org,tencent.com,huaweicloud.com,lge.com,linux.dev,google.com,cmpxchg.org,infradead.org,suse.com,linux.alibaba.com,lwn.net,linuxfoundation.org];
+	FORGED_SENDER(0.00)[christian.loehle@arm.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[18];
+	FREEMAIL_TO(0.00)[gmail.com,kernel.org];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-95105-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[arm.com:+];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[david@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[christian.loehle@arm.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp,cmpxchg.org:email]
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp,arm.com:from_mime,arm.com:dkim,arm.com:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: D0F8770FAAA
+X-Rspamd-Queue-Id: EF44170EADE
 
-On 7/5/26 16:12, Jianyue Wu wrote:
-> Keep include/linux/swap.h focused on swap-facing interfaces by moving
-> MM-internal reclaim and workingset declarations into mm/internal.h.
+On 7/2/26 22:27, Lucas Lima wrote:
+> After some testing I found out schedutil is indeed slower to react to load
+> changes compared to pstate active.
 > 
-> Leave the small set of LRU helper declarations that are used outside mm/
-> in swap.h so this cleanup does not need a new public header under
-> include/linux/.
+> The methodology was to empty a cpu, run a serial float recurrence
+> (kept non-vectorizable
+> on purpose, to isolate frequency ramp-up rather than throughput headroom)
+> and compare the average throughput over several initial time windows
+> against the steady-state throughput in order to measure the CPU frequency
+> ramp-up delay under pstate active and schedutil.
+
+You might be interested in rt-app for more complex experiments along those lines.
+
 > 
-> Suggested-by: Barry Song <baohua@kernel.org>
-> Suggested-by: Baoquan He <bhe@redhat.com>
-> Acked-by: Johannes Weiner <hannes@cmpxchg.org>
-> Signed-off-by: Jianyue Wu <wujianyue000@gmail.com>
-> ---
->  include/linux/swap.h | 75 +++++-----------------------------------------------
->  mm/internal.h        | 67 ++++++++++++++++++++++++++++++++++++++++++++++
+> ### P-core
+>                                   pstate-eas-balanced
+> pstate-eas-performance    schedutil-eas-balanced
+> schedutil-eas-performance
+> ------------------------------------------------------------------------------------------------------------------------------------------
+> Ramp-up (average throughput at time window / steady):
+>     0-0.005s (%)                  70.6                      99.4
+>                59.7                      61.3
+>     0-0.01s (%)                   83.0                      99.5
+>                60.2                      62.1
+>     0-0.02s (%)                   91.3                      99.5
+>                62.9                      65.7
+>     0-0.05s (%)                   96.7                      99.8
+>                74.8                      77.6
+>     0-0.1s (%)                    98.6                      99.9
+>                86.9                      88.7
+>     0-0.5s (%)                    100.0                     100.1
+>                97.4                      97.8
+>     0-1.0s (%)                    100.2                     100.1
+>                98.7                      98.9
+>   Convergence to 95% (ms)         5                         0
+>                52                        47
+> Steady-state:
+>     Throughput (Mops/s)           649.8                     654.4
+>                652.3                     651.7
+> Energy:
+>     Average Power (W)             9.01                      8.98
+>                9.10                      9.07
+>     Efficiency (J/Gop)            13.889                    13.735
+>                14.000                    13.961
+> 
+> ### E-core
+>                                   pstate-eas-balanced
+> pstate-eas-performance    schedutil-eas-balanced
+> schedutil-eas-performance
+> ------------------------------------------------------------------------------------------------------------------------------------------
+> Ramp-up (average throughput at time window / steady):
+>     0-0.005s (%)                  75.6                      99.0
+>                62.3                      57.9
+>     0-0.01s (%)                   85.1                      99.1
+>                62.2                      58.8
+>     0-0.02s (%)                   92.4                      99.3
+>                64.5                      61.0
+>     0-0.05s (%)                   97.0                      99.7
+>                72.9                      69.2
+>     0-0.1s (%)                    98.6                      99.9
+>                84.8                      82.1
+>     0-0.5s (%)                    99.8                      100.0
+>                96.9                      96.4
+>     0-1.0s (%)                    100.0                     100.0
+>                98.5                      98.2
+>   Convergence to 95% (ms)         8                         0
+>                67                        72
+> Steady-state:
+>     Throughput (Mops/s)           540.6                     540.8
+>                540.1                     539.7
+> Energy:
+>     Average Power (W)             5.46                      5.47
+>                5.61                      5.51
+>     Efficiency (J/Gop)            10.119                    10.125
+>                10.426                    10.241
+> 
 
-We likely want to split that up soon, but let's do that separately.
+Thanks for the data, is this 1000HZ?
+Rampup is one thing, the vast difference is obviously when tasks are migrated,
+which EAS is very eager to do on wakeup, sugov 'knows' the right OPP immediately,
+HWP needs to run through the same wakeup again, and during that window you're
+energy calculations are bogus.
 
-Acked-by: David Hildenbrand (Arm) <david@kernel.org>
+> That alone might make it worth it to use pstate active alongside EAS, as
+> responsiveness gains are noticeable while busy energy consumption is similar.
+> 
+> Furthermore, I implemented an EPP based EAS compatibility selection: when
+> EPP is set to 0 (performance), eas_compatible is set to false regardless
+> of the active cpufreq driver mode -- this also overrides schedutil's own
+> eas_compatible assignment in sugov_init()/sugov_exit() when running in
+> passive mode. IMHO that makes more sense than gating only on the governor,
+> as users selecting the performance power profile are looking for
+> responsiveness above all, independently of intel_pstate or governor settings.
+> 
+> It's also worth noting that governors already have the ability to change
+> EPP on their own (via intel_pstate_hwp_set()'s save/restore logic for
+> CPUFREQ_POLICY_PERFORMANCE), which can lead to a state where the desktop's
+> power profile indicator becomes inconsistent with the actual EPP value:
+> 
+>   1. Switch governor: powersave -> performance
+>      (intel_pstate saves the current EPP internally and forces EPP to 0)
+> 
+>   2. Switch power profile: balanced -> performance
+>      (EPP is explicitly written as 0 again; no visible change, since it
+>      was already 0)
+> 
+>   3. Switch governor: performance -> powersave
+>      (intel_pstate restores the EPP to balanced,
+>      because the current EPP still reads as 0 and the
+>      restore heuristic cannot tell that this 0 was an explicit choice
+>      rather than the still-forced value from step 1)
+> 
+> After step 3, EAS becomes re-enabled, since EPP is no longer "performance"
+> -- but the desktop still shows "performance" as the active power profile,
+> since nothing told power-profiles-daemon that the EPP changed underneath
+> it. This isn't something my patch introduces, it's an existing property
+> of intel_pstate's governor-triggered EPP save/restore, but it is relevant
+> here.
 
--- 
-Cheers,
+I think this is a separate ownership problem, but IMO the user gets a choice,
+either have a userspace daemon take care of these settings or set it themselves,
+i.e. step 1 mustn't happen (I'm reading that correctly that 1. wasn't set
+through power-profiles-daemon? If it was that seems a bug in power-profiles-daemon).
 
-David
+> 
+> diff --git a/drivers/cpufreq/intel_pstate.c b/drivers/cpufreq/intel_pstate.c
+> index 8f5ab9fa3..6d7133b94 100644
+> --- a/drivers/cpufreq/intel_pstate.c
+> +++ b/drivers/cpufreq/intel_pstate.c
+> @@ -791,6 +791,18 @@
+> cpufreq_freq_attr_ro(energy_performance_available_preferences);
+> 
+>  static struct cpufreq_driver intel_pstate;
+> 
+> +static inline void update_eas_compatibility(struct cpufreq_policy
+> *policy, struct cpudata *cpu)
+> +{
+> + bool eas_compatible_was = policy->eas_compatible;
+> +
+> + policy->eas_compatible = hwp_is_hybrid &&
+> + cpu->policy != CPUFREQ_POLICY_PERFORMANCE &&
+> + intel_pstate_get_epp(cpu, 0) != HWP_EPP_PERFORMANCE;
+> +
+> + if (policy->eas_compatible != eas_compatible_was)
+> + em_rebuild_sched_domains();
+> +}
+> +
+>  static ssize_t store_energy_performance_preference(
+>   struct cpufreq_policy *policy, const char *buf, size_t count)
+>  {
+> @@ -856,6 +868,8 @@ static ssize_t store_energy_performance_preference(
+> 
+>   mutex_unlock(&intel_pstate_limits_lock);
+> 
+> + update_eas_compatibility(policy, cpu);
+> +
+>   return ret ?: count;
+>  }
+> 
+> @@ -2922,10 +2936,7 @@ static int intel_pstate_set_policy(struct
+> cpufreq_policy *policy)
+>   intel_pstate_clear_update_util_hook(policy->cpu);
+>   intel_pstate_hwp_set(policy->cpu);
+> 
+> - policy->eas_compatible = hwp_is_hybrid &&
+> - cpu->policy != CPUFREQ_POLICY_PERFORMANCE;
+> - if (policy->eas_compatible)
+> - em_rebuild_sched_domains();
+> + update_eas_compatibility(policy, cpu);
+>   }
+>   /*
+>   * policy->cur is never updated with the intel_pstate driver, but it
+> 
+
 
