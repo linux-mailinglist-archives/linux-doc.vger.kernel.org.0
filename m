@@ -1,272 +1,266 @@
-Return-Path: <linux-doc+bounces-95218-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95221-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id ylJPKGvzS2pkdgEAu9opvQ
-	(envelope-from <linux-doc+bounces-95218-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 20:26:51 +0200
+	id a/o3HNj1S2rxdgEAu9opvQ
+	(envelope-from <linux-doc+bounces-95221-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 20:37:12 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE2557147D9
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 20:26:50 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2028D71493E
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 20:37:10 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=kumziUdy;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95218-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95218-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=google.com header.s=20251104 header.b=Fn3VINei;
+	dmarc=pass (policy=reject) header.from=google.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95221-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95221-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 875353025E48
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 18:24:01 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 0BCD53013C5A
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 18:26:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 733B6436BEB;
-	Mon,  6 Jul 2026 18:24:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4434043786C;
+	Mon,  6 Jul 2026 18:25:58 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f74.google.com (mail-pj1-f74.google.com [209.85.216.74])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28B89B672;
-	Mon,  6 Jul 2026 18:23:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57A183F5BE4
+	for <linux-doc@vger.kernel.org>; Mon,  6 Jul 2026 18:25:55 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783362240; cv=none; b=RKx1y986YWs5pspqRuN7uY1Anqlni/y5pkzo6pfr0DPRqm/8g7wc6j/tYEiFVmgDll9cPqPDsPIT/UKHsviO3/wTDOzdawqYNWHy7S2DE3v92l43L2NvD18QkV5n4y6r2gFAqEBmvTAOQsL0OzNw7vwoHFV+yzLz1EW5M+kH2cY=
+	t=1783362358; cv=none; b=jawBGz6F51bY3eCtxdXOma7sRxqX3Ddc1NNP1vNfTt8Onxocmsd0fSDxS8GUHdTipE7+6jK/ofaoavHfe8bGawIseZUjaZ3XANZ5hgsyZsWNSIYJoH2KYlMdkKRd65E2cuhi/Sd5pRDihk6nugy4h5XXPGYkBOBrTvFbdqevPhY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783362240; c=relaxed/simple;
-	bh=OAZW2mOhO7NaL6oxqnNTVcDyra+tNWR2x3SKVGe+Lf4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=lFFRdwmHy0cHLDp9Td2lUlqPGVogP3G9TnXh+p00AWjnanFzkel56sBdQglNoRWgGrn1/F8wJwBUNwnU0rH4eFfoUvaeo7Ojcyp+QMxwed/nk0ampgpDsIi8EwQjOPUg50iYbxFEYv7l3sTMT/ts/4sR0zadPZjicBsBddiy6vo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kumziUdy; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7BD941F000E9;
-	Mon,  6 Jul 2026 18:23:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783362238;
-	bh=SsdGNSB4zy5M0ej3qNdxVPNJ5ocdqwgLpYFnxrwRiOA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=kumziUdyrjugrxYZugzIjlWcmC9HIodhRMZrmVkXke0JQHc6DSSO6eYyMfq5CiKE9
-	 BBmRIfa50qID9aoZHs3mU54ICO17zjuZm2QSn0ZNhv4rX8myFYPfFwehkg2/YxyEUC
-	 y4cwrMjn5amJToz/JhoF1gAGvh0rSORDSCafQZ9sOrZp1XWo3//gU/Z6518bMMgfLc
-	 7l2YRvqGYxltd3+1No6PKk5KCn2uJuCQlWLTXTZfA9RdbAh6BN0zxHIPcPJ40mpgCH
-	 PwetxkjP2bXyTXfxGXDQZDob0kfbFiGrQCFG10MA64mdwp706YJKni8AECL7P7ZaQq
-	 f0FBu47IYqtTw==
-Date: Mon, 6 Jul 2026 11:23:57 -0700
-From: Oliver Upton <oupton@kernel.org>
-To: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Cc: Marc Zyngier <maz@kernel.org>, Joey Gouly <joey.gouly@arm.com>,
-	Suzuki K Poulose <suzuki.poulose@arm.com>,
-	Zenghui Yu <yuzenghui@huawei.com>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>, Kees Cook <kees@kernel.org>,
-	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	linux-arm-kernel@lists.infradead.org, kvmarm@lists.linux.dev,
-	linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org,
-	devel@daynix.com, kvm@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kselftest@vger.kernel.org
-Subject: Re: [PATCH v8 5/7] KVM: arm64: PMU: Implement fixed-counters-only
- emulation
-Message-ID: <akvyvclUQ2b2YHiU@kernel.org>
-References: <20260706-hybrid-v8-0-de459617b59d@rsg.ci.i.u-tokyo.ac.jp>
- <20260706-hybrid-v8-5-de459617b59d@rsg.ci.i.u-tokyo.ac.jp>
+	s=arc-20240116; t=1783362358; c=relaxed/simple;
+	bh=JPx51r5+iKu2FP3u9Zlx8iDiXrXkZOi9oZzoO8CG8YY=;
+	h=Date:Mime-Version:Message-ID:Subject:From:To:Cc:Content-Type; b=KR+gKNKA/kbm35f3LYRExbMCubJiPNjhmi9+5Pliu867es/q3drhVNd3Xob0TGzIe4487khkNLknr/aEp5vnW9Vwf35lWpbVLOANnPaQIWk6SO+6hpHD8ZSMVQ1Z0PT31Fe+1qo8d/zcUV0qC8rnnQfXJNZQZyByt3UoZszzO9I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--abhishekbapat.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=Fn3VINei; arc=none smtp.client-ip=209.85.216.74
+Received: by mail-pj1-f74.google.com with SMTP id 98e67ed59e1d1-37d4eede8ccso2810432a91.0
+        for <linux-doc@vger.kernel.org>; Mon, 06 Jul 2026 11:25:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20251104; t=1783362354; x=1783967154; darn=vger.kernel.org;
+        h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=Qc2L6Kdu/a/xe4gb6oPGtuJlo6tOjRnEmbZIgntO/B0=;
+        b=Fn3VINeiQX1qOuuOrioo8/d9WOb9Isrmt9rXi6dnHnmDVI5rxgBI3J/WRlteJ/JEus
+         oMT+QXNEohbdqH9WlnnF8pANqYfDN2svgFIA4zr42mMpPBzdWehe1x0jpt56HFH3fX/Y
+         4e8HohzW6nSE9VhHNYHeIE7DJQ2+m+NBlgHvZWK50f3p14P5eCxhWqt5vZ78lUbDB3s4
+         KqmhUZMp38AZqt1lsb65xhUaUOJGPjRDMDG5xrBTnv4XQX8KCsE6pgvLraP91X7uoB8m
+         HCfxOBpmMjIBz2iBGtn2lNbk6PgExBYDvnzkOEnrlFurucJMDj0R5JmX8vIby2blyFsH
+         qfZA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783362354; x=1783967154;
+        h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=Qc2L6Kdu/a/xe4gb6oPGtuJlo6tOjRnEmbZIgntO/B0=;
+        b=AxXPtWclvfBsXlCslb6VoGcLoWCPNkCslpS+W3cFDAAA1ofS62VQrpsjSDoVZOuXko
+         P5L3s3DVAK1MxRGOf6QMiGwz4edtieT0Ixc6MrVdlfoTWib7u/7frdZtga4y9jbx/Ut+
+         GskU50KMw2SpSICOciNBSqk3XkDu4ze7El5Yc5VrZMh2Z0ovpLJXtzzVFiOP6wZm1jUD
+         SVThnLfhuKMOD8BgZ4fj9hiOjSiYNdvw9mYvLVXYBNpiGLfbWZ6RtL9UliI3W3jXNJy+
+         /cXmtjqs4Jc+bHX/OLPGgloSI3wcmfT/OPTZRd0TheaOHNk2AFxkXK0rnpgNqhdsBUJP
+         eMyA==
+X-Forwarded-Encrypted: i=1; AHgh+Rp9vsQoeqqfupggUWxC9oVRNrqbv/N4XPUQYqhX05MjwO5wS23Riv80sSYIl3kcu9fdssJf3yEw6O0=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyOPtkDclYbgIX/POtkzkEEgbNwudtjtSFRl8hHjVEPxhZ3G151
+	QczOkx2/bZ7w0a5PfnRY+w1Yi6JY7Mx3VENBLSCUQh7F0aJ7Vgq1vCYZTd7hsMYsByzKbqJUu1G
+	dNxeRs77TOabx7Tv6L3uFe1SkXzfAj5VYfA==
+X-Received: from dycop6.prod.google.com ([2002:a05:7301:9bc6:b0:30e:ee3a:f2f1])
+ (user=abhishekbapat job=prod-delivery.src-stubby-dispatcher) by
+ 2002:a17:90b:48c1:b0:37f:f4ae:5f25 with SMTP id 98e67ed59e1d1-38756ce281dmr1653545a91.20.1783362354324;
+ Mon, 06 Jul 2026 11:25:54 -0700 (PDT)
+Date: Mon,  6 Jul 2026 18:25:43 +0000
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260706-hybrid-v8-5-de459617b59d@rsg.ci.i.u-tokyo.ac.jp>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.55.0.rc2.803.g1fd1e6609c-goog
+Message-ID: <cover.1783361692.git.abhishekbapat@google.com>
+Subject: [PATCH v7 0/6] alloc_tag: introduce IOCTL-based filtering for MAP
+From: Abhishek Bapat <abhishekbapat@google.com>
+To: Suren Baghdasaryan <surenb@google.com>, Andrew Morton <akpm@linux-foundation.org>, 
+	Kent Overstreet <kent.overstreet@linux.dev>, Hao Ge <hao.ge@linux.dev>
+Cc: Shuah Khan <skhan@linuxfoundation.org>, Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-mm@kvack.org, 
+	Sourav Panda <souravpanda@google.com>, Abhishek Bapat <abhishekbapat@google.com>
+Content-Type: text/plain; charset="UTF-8"
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-5.16 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	MV_CASE(0.50)[];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:odaki@rsg.ci.i.u-tokyo.ac.jp,m:maz@kernel.org,m:joey.gouly@arm.com,m:suzuki.poulose@arm.com,m:yuzenghui@huawei.com,m:catalin.marinas@arm.com,m:will@kernel.org,m:kees@kernel.org,m:gustavoars@kernel.org,m:pbonzini@redhat.com,m:corbet@lwn.net,m:shuah@kernel.org,m:skhan@linuxfoundation.org,m:linux-arm-kernel@lists.infradead.org,m:kvmarm@lists.linux.dev,m:linux-kernel@vger.kernel.org,m:linux-hardening@vger.kernel.org,m:devel@daynix.com,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER(0.00)[oupton@kernel.org,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[21];
-	TAGGED_FROM(0.00)[bounces-95218-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-95221-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER(0.00)[abhishekbapat@google.com,linux-doc@vger.kernel.org];
 	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:surenb@google.com,m:akpm@linux-foundation.org,m:kent.overstreet@linux.dev,m:hao.ge@linux.dev,m:skhan@linuxfoundation.org,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:souravpanda@google.com,m:abhishekbapat@google.com,s:lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[oupton@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[abhishekbapat@google.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[google.com:+];
+	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,u-tokyo.ac.jp:email]
+	RCPT_COUNT_SEVEN(0.00)[11];
+	TO_DN_SOME(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: DE2557147D9
+X-Rspamd-Queue-Id: 2028D71493E
 
-On Mon, Jul 06, 2026 at 07:03:28PM +0900, Akihiko Odaki wrote:
-> Add internal state for PMUv3 emulation without programmable event
-> counters. When fixed-counters-only mode is active, KVM reports no
-> programmable counters and hides PMCEID, avoiding event-counter state
-> whose behavior can depend on the selected hardware PMU.
-> 
-> The cycle counter still uses a host perf event. Unlike the normal PMU
-> path, fixed-counters-only mode may create that event from the hardware
-> PMU attached to the VCPU's current pCPU. If the VCPU later loads on a
-> pCPU that is not covered by the existing event's PMU, request a PMU
-> reload so the cycle counter can be recreated against the new pCPU's PMU.
-> Keep this affinity check limited to fixed-counters-only VMs; the normal
-> programmable-counter mode continues to use the VM-wide PMU and does not
-> need per-load reload decisions.
-> 
-> Add a separate internal flag for explicit userspace PMU selection. The
-> UAPI wiring added later will use it to keep explicit PMU selection and
-> fixed-counters-only mode mutually exclusive while still allowing
-> fixed-counters-only mode to replace the default PMU selected during
-> KVM_ARM_VCPU_INIT.
-> 
-> The UAPI wiring that sets the fixed-counters-only flag and records
-> explicit PMU selection is added later in the series.
-> 
-> Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-> ---
->  arch/arm64/include/asm/kvm_host.h |  4 ++++
->  arch/arm64/kvm/arm.c              |  1 +
->  arch/arm64/kvm/pmu-emul.c         | 43 +++++++++++++++++++++++++++++++++++++--
->  include/kvm/arm_pmu.h             |  2 ++
->  4 files changed, 48 insertions(+), 2 deletions(-)
-> 
-> diff --git a/arch/arm64/include/asm/kvm_host.h b/arch/arm64/include/asm/kvm_host.h
-> index 0c39d9db7d57..aa07b05b8231 100644
-> --- a/arch/arm64/include/asm/kvm_host.h
-> +++ b/arch/arm64/include/asm/kvm_host.h
-> @@ -353,6 +353,10 @@ struct kvm_arch {
->  #define KVM_ARCH_FLAG_WRITABLE_IMP_ID_REGS		10
->  	/* Unhandled SEAs are taken to userspace */
->  #define KVM_ARCH_FLAG_EXIT_SEA				11
-> +	/* PMUv3 is emulated with an explicitly specified hardware PMU */
-> +#define KVM_ARCH_FLAG_PMU_V3_EXPLICIT			12
-> +	/* PMUv3 is emulated without progammable event counters */
-> +#define KVM_ARCH_FLAG_PMU_V3_FIXED_COUNTERS_ONLY	13
->  	unsigned long flags;
->  
->  	/* VM-wide vCPU feature set */
-> diff --git a/arch/arm64/kvm/arm.c b/arch/arm64/kvm/arm.c
-> index 68767bb08285..1cc7754d5ace 100644
-> --- a/arch/arm64/kvm/arm.c
-> +++ b/arch/arm64/kvm/arm.c
-> @@ -687,6 +687,7 @@ void kvm_arch_vcpu_load(struct kvm_vcpu *vcpu, int cpu)
->  	if (has_vhe())
->  		kvm_vcpu_load_vhe(vcpu);
->  	kvm_arch_vcpu_load_fp(vcpu);
-> +	kvm_vcpu_load_pmu(vcpu);
->  	kvm_vcpu_pmu_restore_guest(vcpu);
->  	if (kvm_arm_is_pvtime_enabled(&vcpu->arch))
->  		kvm_make_request(KVM_REQ_RECORD_STEAL, vcpu);
-> diff --git a/arch/arm64/kvm/pmu-emul.c b/arch/arm64/kvm/pmu-emul.c
-> index e70628653e4b..40cad183376c 100644
-> --- a/arch/arm64/kvm/pmu-emul.c
-> +++ b/arch/arm64/kvm/pmu-emul.c
-> @@ -96,6 +96,11 @@ u64 kvm_pmu_evtyper_mask(struct kvm *kvm)
->  	return mask;
->  }
->  
-> +static bool kvm_pmu_fixed_counters_only(struct kvm *kvm)
-> +{
-> +	return test_bit(KVM_ARCH_FLAG_PMU_V3_FIXED_COUNTERS_ONLY, &kvm->arch.flags);
-> +}
-> +
->  /**
->   * kvm_pmc_is_64bit - determine if counter is 64bit
->   * @pmc: counter context
-> @@ -343,7 +348,11 @@ u64 kvm_pmu_implemented_counter_mask(struct kvm_vcpu *vcpu)
->  
->  static void kvm_pmc_enable_perf_event(struct kvm_pmc *pmc)
->  {
-> -	if (!pmc->perf_event) {
-> +	struct kvm_vcpu *vcpu = kvm_pmc_to_vcpu(pmc);
-> +
-> +	if (!pmc->perf_event ||
-> +	    (kvm_pmu_fixed_counters_only(vcpu->kvm) &&
-> +	     !cpumask_test_cpu(vcpu->cpu, &to_arm_pmu(pmc->perf_event->pmu)->supported_cpus))) {
->  		kvm_pmu_create_perf_event(pmc);
->  		return;
->  	}
-> @@ -720,6 +729,12 @@ static void kvm_pmu_create_perf_event(struct kvm_pmc *pmc)
->  	int eventsel;
->  	u64 evtreg;
->  
-> +	if (kvm_pmu_fixed_counters_only(vcpu->kvm)) {
-> +		arm_pmu = kvm_pmu_probe_armpmu(vcpu->cpu);
-> +		if (WARN_ON_ONCE(!arm_pmu))
-> +			return;
-> +	}
-> +
->  	evtreg = kvm_pmc_read_evtreg(pmc);
->  
->  	kvm_pmu_stop_counter(pmc);
-> @@ -748,7 +763,7 @@ static void kvm_pmu_create_perf_event(struct kvm_pmc *pmc)
->  	 * Don't create an event if we're running on hardware that requires
->  	 * PMUv3 event translation and we couldn't find a valid mapping.
->  	 */
-> -	eventsel = kvm_map_pmu_event(vcpu->kvm->arch.arm_pmu, eventsel);
-> +	eventsel = kvm_map_pmu_event(arm_pmu, eventsel);
->  	if (eventsel < 0)
->  		return;
->  
-> @@ -878,6 +893,9 @@ u64 kvm_pmu_get_pmceid(struct kvm_vcpu *vcpu, bool pmceid1)
->  	u64 val, mask = 0;
->  	int base, i, nr_events;
->  
-> +	if (kvm_pmu_fixed_counters_only(vcpu->kvm))
-> +		return 0;
-> +
+Currently, memory allocation profiling data is primarily exposed through
+/proc/allocinfo. While useful for manual inspection, this text-based
+interface poses challenges for production monitoring and large-scale
+analysis:
 
-Even if we advertise bits in PMCEID, does it matter? There's no PMC that
-the guest could use to count it.
+1. Userspace must parse large amounts of text to extract specific
+fields.
+2. To find specific tags, userspace must read the entire dataset,
+requiring many context switches and high data copying.
+3. The kernel currently aggregates per-CPU counters for every allocation
+size, even those the user intends to filter out immediately.
 
-I understand it isn't aesthetic but I really want to minimize the
-special-casing that has to be done for this feature.
+This series introduces a new IOCTL-based binary interface for allocinfo
+that supports kernel-side filtering. By allowing the user to specify a
+filter mask, we significantly reduce the work performed in-kernel and
+the amount of data transferred to userspace. The IOCTL mechanism was
+chosen for allocinfo to address the per-CPU counter aggregation
+bottleneck. A traditional read() operation must report the total
+allocation count and sizes for every code tag in the system. Doing so
+requires iterating across all CPUs to sum their per-CPU counters for
+thousands of tags, which introduces substantial runtime overhead.
 
-> +void kvm_vcpu_load_pmu(struct kvm_vcpu *vcpu)
-> +{
-> +	/*
-> +	 * ARMV8_PMU_INSTR_IDX will need the same check once
-> +	 * FEAT_PMUv3_ICNTR is supported.
-> +	 */
-> +	struct kvm_pmc *pmc = kvm_vcpu_idx_to_pmc(vcpu, ARMV8_PMU_CYCLE_IDX);
-> +	struct arm_pmu *cpu_pmu;
-> +
-> +	if (!kvm_pmu_fixed_counters_only(vcpu->kvm) ||
-> +	    !kvm_pmu_counter_is_enabled(pmc) || !pmc->perf_event)
-> +		return;
-> +
-> +	cpu_pmu = to_arm_pmu(pmc->perf_event->pmu);
-> +	if (!cpumask_test_cpu(vcpu->cpu, &cpu_pmu->supported_cpus))
-> +		kvm_make_request(KVM_REQ_RELOAD_PMU, vcpu);
+The IOCTL interface allows userspace to push selective filtering
+criteria directly into the kernel before the per-CPU counter
+aggregation. The kernel aggregates per-CPU counters only for a small
+subset of tags that match the filter. This results in significant
+performance improvement.
 
-Just detect the changing PMU implementation here, KVM_REQ_RELOAD_PMU
-will need to detect the PMCs that require an update anyway. Stash the
-last cpu in kvm_arch_vcpu_load() and pass it to this:
+Beyond fast filtered retrieval, the IOCTL foundation allows introducing
+a context capture mechanism in the future to capture the context for
+specific allocations.
 
-void kvm_vcpu_load_pmu(struct kvm_vcpu *vcpu, int last_cpu)
-{
-	if (!kvm_pmu_fixed_counters_only(vcpu->kvm) || vcpu->cpu == last_cpu)
-		return;
+Performance measurements were conducted on an Intel Xeon Platinum 8481C
+(224 CPUs) with caches dropped before each run.
 
-	if (kvm_pmu_probe_armpmu(vcpu->cpu) != kvm_pmu_probe_armpmu(last_cpu))
-		kvm_make_request(KVM_REQ_RELOAD_PMU);
-}
+The IOCTL mechanism shows a ~20x performance improvement for
+filtered queries. The kernel avoids the expensive per-CPU counter
+aggregation (alloc_tag_read) for any tags that fail the initial string
+or location filters.
 
-Thanks,
-Oliver
+Scenario 1: Specific File Filtering (arch/x86/events/rapl.c)
+1. Traditional (cat /proc/allocinfo | grep): 22ms (sys)
+2. IOCTL Interface: 1ms (sys)
+
+Scenario 2: Compound Filtering (Filename + Size)
+1. Traditional: (cat ... | grep | awk): 21ms (sys)
+2. IOCTL Interface: 1ms (sys)
+
+Scenario 3: Size-Based Filtering (min_size = 1MB)
+1. Traditional: (cat ... | awk): 21ms (sys)
+2. IOCTL Interface: 14ms (sys)
+
+v7 changes:
+- Patch 5/6: Used $KHDR_INCLUDES in the kselftest Makefile. Replaced
+  goto statetments with break in get_filtered_ioctl_entries function.
+- Patch 6/6: In test_size_filter, added a verification step to validate
+  the size of the found tag matches target_size. In test_lineno_filter,
+improved the comment, and verified that ioctl retrieves the original tag
+that was used to record target_lineno.
+
+v6 changes:
+- Patch 1/6: Added comments explaining why last 64 characters are
+  compared in the filter.
+- Patch 3/6: Moved allocinfo_prefetch_counters outside of
+  allocinfo_to_params
+- Patch 5/6: Fixed fd leak in get_filtered_ioctl_entries() function.
+  Added alloc_tag selftest to the top-level Makefile.
+- Patch 6/6: Moved include for errno.h to this patch.
+
+v5 changes:
+- Patch 1/6: Added explicit mutex_destroy.
+- Patch 5/6: Self-contained file descriptors to avoid wrap-around errors
+  in retry loops.
+- Patch 6/6: Fixed minor issues raised by sashiko in v4.
+
+v4 changes:
+- Patch 1/6: Fixed a copyright comment inside
+  include/uapi/linux/alloc_tag.h
+- Patch 3/6: Among other nits, fixed the inadvertent build failure
+  introduced in v3.
+- Patch 4/6: Included a comment stating that the accurate field in
+  struct allocinfo_tag is only used for filtering.
+- Patch 5/6: Modified test to trim prefix and keep suffix for entries
+  with filenames exceeding the size limit.
+- Patch 6/6: Modified test_size_filter such that if content_id changes
+  between the moment when procfs and ioctl entries are read, both
+entries are invalidated and re-fetched. Removed the tags->count == 0
+check from test_lineno_filter as it's virtually unreachable.
+
+v3 changes:
+- Patch 1/6: Modified Documentation to indicate that map supports
+  ioctl(). Modified struct allocinfo_count to use
+__attribute__((aligned(8))) instead of manual padding. Removed
+redundance type-casting. Added comments for static functions in
+lib/alloc_tag.c. Introduced a new seq counter for content_id that gets
+bumped every time module is loaded / unloaded. Introduced logic to
+validate user specified position is not greater than number of
+allocation tags and return early if it is. Changed strscpy to
+strscpy_pad to not echo arbitrary user data back to the user.
+- Patch 2/6: Handled the case where user wants to specifically filter
+  for built-in modules. Included some comments for static functions.
+- Patch 3/6: Modified logic to only fetch per-CPU counters for codetags
+  that satisfy other filters. Included some comments for static
+functions.
+
+v2 changes:
+- Patch 1/6: Introduced locking for m->private. Also included the new uapi
+header file in MAINTAINERS list.
+- Patch 2/6: Handled the case where ALLOCINFO_FILTER_MASK_MODNAME is
+passed but ct->modname is NULL.
+- Patch 3/6: Moved min_size and max_size outside of struct allocinfo_tag
+into struct allocinfo_filter. Added validation that min_size <=
+max_size. Prefetched alloc_tag_counters if size based filter masks are
+provided to avoid assimilating per-cpu counters twice.
+- Patch 5/6: Removed the hardcoded logic to skip the header, instead the
+test will skip lines that don't match the format. Also included the
+newly added alloc_tag selftests directory in MAINTAINERS list.
+
+Abhishek Bapat (5):
+  alloc_tag: add ioctl filters to /proc/allocinfo
+  alloc_tag: add size-based filtering to ioctl
+  alloc_tag: add accuracy based filtering to ioctl
+  kselftest: alloc_tag: add kselftest for ioctl interface
+  kselftest: alloc_tag: extend the allocinfo ioctl kselftest
+
+Suren Baghdasaryan (1):
+  alloc_tag: add ioctl to /proc/allocinfo
+
+ Documentation/mm/allocation-profiling.rst     |   5 +
+ .../userspace-api/ioctl/ioctl-number.rst      |   2 +
+ MAINTAINERS                                   |   2 +
+ include/linux/codetag.h                       |   2 +
+ include/uapi/linux/alloc_tag.h                |  99 ++++
+ lib/codetag.c                                 |  18 +
+ mm/alloc_tag.c                                | 344 ++++++++++-
+ tools/testing/selftests/Makefile              |   1 +
+ tools/testing/selftests/alloc_tag/Makefile    |   9 +
+ .../alloc_tag/allocinfo_ioctl_test.c          | 548 ++++++++++++++++++
+ 10 files changed, 1028 insertions(+), 2 deletions(-)
+ create mode 100644 include/uapi/linux/alloc_tag.h
+ create mode 100644 tools/testing/selftests/alloc_tag/Makefile
+ create mode 100644 tools/testing/selftests/alloc_tag/allocinfo_ioctl_test.c
+
+-- 
+2.55.0.rc2.803.g1fd1e6609c-goog
+
 
