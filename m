@@ -1,286 +1,165 @@
-Return-Path: <linux-doc+bounces-95021-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95024-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Mvx0OaAOS2qnLQEAu9opvQ
-	(envelope-from <linux-doc+bounces-95021-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 04:10:40 +0200
+	id HPYIJecjS2p1MQEAu9opvQ
+	(envelope-from <linux-doc+bounces-95024-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 05:41:27 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E24770C0B9
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 04:10:40 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id EF7B370C5BE
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 05:41:26 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=analog.com header.s=DKIM header.b=x5nuSzUF;
-	dmarc=pass (policy=quarantine) header.from=analog.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95021-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95021-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=Irmwrz+v;
+	dmarc=pass (policy=none) header.from=gmail.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95024-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95024-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id DDD723019F32
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 02:09:46 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id DBE643009F13
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 03:41:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EC2D437DADD;
-	Mon,  6 Jul 2026 02:09:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 712B83AA9D4;
+	Mon,  6 Jul 2026 03:41:23 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-00128a01.pphosted.com (mx0a-00128a01.pphosted.com [148.163.135.77])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 241D937C109;
-	Mon,  6 Jul 2026 02:09:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35DF3381AF
+	for <linux-doc@vger.kernel.org>; Mon,  6 Jul 2026 03:41:22 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783303783; cv=none; b=CrT5J7IcwMskv4KZyzIiruG2cO+vvk4dCzwCpxzo2bWuL5Ag6+ancOgsJgnkJZg4d6lh5jhgJWSxf4PhNshfwhk8Vqu3TfS8wAIMEnnavtR6iRJIlz8lBFgI+Q0rWhqQ5YoEYG+ZFD0/Za98u6s4NEFIFR3bQu4I/mvaBKaUKLU=
+	t=1783309283; cv=none; b=pU+XJnT5tfClJOhIk1sqBCriW4dKkqRs721DFycVV6/wzcP+eCl9ivQ+3sJFiPG/Yw+OjZnPAnwskUx6C2KtZkJ+SPynGR8oATVgoUTZ6gMYv6tg2noe0O1+ny+x+VS4MFIpHVF8sqhKSl5lprVgk8RUUfED9KgsYaIThikB+QA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783303783; c=relaxed/simple;
-	bh=zZXRPOLanBG9xGhl0Bdk0xzGHSR0Jb/0GCj6E+Fek7g=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:References:
-	 In-Reply-To:To:CC; b=Y0ybE1OVskL1UbRbNf6B/wZKZGLG/XC4CWYZL+gdEoT/aKjzqavfrjWK1bY1ixlpFAYSXkeuldm9Gb6N2iGdA6vXU5EqsQMhqEheEfcQK5Up3xzkEhQjY9+UH0AWwcxO2ozqvTJHo+l0IFuKhKBF9g3JOcb/g5zUSnuA3Nv8RRY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=analog.com; spf=pass smtp.mailfrom=analog.com; dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b=x5nuSzUF; arc=none smtp.client-ip=148.163.135.77
-Received: from pps.filterd (m0375855.ppops.net [127.0.0.1])
-	by mx0b-00128a01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 665M34U03100652;
-	Sun, 5 Jul 2026 22:09:26 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=analog.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=DKIM; bh=P5swf
-	zEg8mwmOtHZ8NB0BYRHSGzAO8Kw7yUhbzzqamk=; b=x5nuSzUF34O5dDa3dV/t6
-	aJs08/FUSkoCqcMvmsqiISe/8rIRoPY0FMQJa+kBxEREzZZfUsn1WRaJ/PQB7yEb
-	Nlh4AnpoXDkP8qYtiK476h6NxPbCctmSvLxwYFTQn8WQP/REQdIXZvmbXZCX6ApT
-	8aEbrZYtRZrgH+otVLXVbUVd3oUpAGCcGthILUAbk0FD1Egk4NjmKtqW2JYsKQ5U
-	MVKr7/x6eFm0jPYJpD4XamU2LpItEbzPXBnbyAwMJgfzTn707YuBIEPNQbn4LqQW
-	hntikDBNzskHNsTslHnZn29s/plmVHbYRvA+sxyGvv98+MXedi8sSnQEhoimhfxJ
-	g==
-Received: from nwd2mta4.analog.com ([137.71.173.58])
-	by mx0b-00128a01.pphosted.com (PPS) with ESMTPS id 4f7ggbt5na-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Sun, 05 Jul 2026 22:09:25 -0400 (EDT)
-Received: from ASHBMBX9.ad.analog.com (ASHBMBX9.ad.analog.com [10.64.17.10])
-	by nwd2mta4.analog.com (8.14.7/8.14.7) with ESMTP id 66629Orf045199
-	(version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Sun, 5 Jul 2026 22:09:24 -0400
-Received: from ASHBCASHYB4.ad.analog.com (10.64.17.132) by
- ASHBMBX9.ad.analog.com (10.64.17.10) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1748.37; Sun, 5 Jul 2026 22:09:24 -0400
-Received: from ASHBMBX8.ad.analog.com (10.64.17.5) by
- ASHBCASHYB4.ad.analog.com (10.64.17.132) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1748.37; Sun, 5 Jul 2026 22:09:24 -0400
-Received: from zeus.spd.analog.com (10.66.68.11) by ashbmbx8.ad.analog.com
- (10.64.17.5) with Microsoft SMTP Server id 15.2.1748.37 via Frontend
- Transport; Sun, 5 Jul 2026 22:09:24 -0400
-Received: from ATORRENO-L02.ad.analog.com ([10.66.6.191])
-	by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 66628o7U015791;
-	Sun, 5 Jul 2026 22:09:18 -0400
-From: Alexis Czezar Torreno <alexisczezar.torreno@analog.com>
-Date: Mon, 6 Jul 2026 10:08:45 +0800
-Subject: [PATCH v2 5/5] hwmon: (pmbus/max20830): add support for max20830c
- and max20840c
+	s=arc-20240116; t=1783309283; c=relaxed/simple;
+	bh=QDWocMUXj1DjdyDumWeLX3GcsGYAGlap1XzZK5sYEcQ=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=AC8tJe3h06imvsr1utP2SUCMHIYEpf4yKES4O3udqZ9m6sIQr7g25y7Mzn/MqNo3VRX24bPeTUgj4m9kufAQEZuWgn+Futs6jfllkzW9ReQRyDkHaB58E8uRyFgwsvcPpM/p3F3vDvjeDFOP1Bgmx4glLycQQloV/Rl76k6w9Z4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Irmwrz+v; arc=none smtp.client-ip=209.85.216.54
+Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-37df72c9984so2251272a91.3
+        for <linux-doc@vger.kernel.org>; Sun, 05 Jul 2026 20:41:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1783309281; x=1783914081; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:content-language:from
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=4xI2vNstjAg1+oCGXkBzd/Bl6APC2mTL6Vz9VUuJT38=;
+        b=Irmwrz+vWchzb/iQmZdxmf6pSI/DHQw+qqVtQdWNI+j3Jiuz8jr1nv0BA4RQ4hR5Uh
+         Y3NTHdWe1ZiUnX0+T0/N4kHUMHthz2hgG3P/HOcB+dN4x5N7orOUqlYu6NGoQi3aTRaO
+         xIQX5iSL7TBKo/RT+sQxqPw/bo9w5+GSIWwJcvrrz4KVImfaMn8apfcLshwhhhwr/9yR
+         VROgG4KL3TptQkcAy2c4lFhVRMvBjYvh/vmxfCsykqw/c97rTZOXn5dGohE1sFMK7ZhA
+         B/3dBAQvbTIX9/n3RiuQ0iqw3OajG8LmCAu3uW6qJhAThGO42sCsCvDZ+oMS4ANJpR+S
+         vvqw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783309281; x=1783914081;
+        h=content-transfer-encoding:in-reply-to:content-language:from
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=4xI2vNstjAg1+oCGXkBzd/Bl6APC2mTL6Vz9VUuJT38=;
+        b=e7xsQBFRy5pcVVWBcwq8OlGVHV85ONlOutB79dO3hZKOJicJeqWF5nXlcCE8IgLpWo
+         ODUO+i+XTVPn1X8MOQCHiE2olh9V7qLOQXgSgtJwL3OKnXNm0Rx3kWg8tom5uM1r1Iq7
+         zCfudH/SERpYsZtA2LJbuac4BUCchQBegKODo2WvwlWOmoPhExqFN9v5cp6LgyFAFTbi
+         mszXwpota3FaD0frQPdRS+ZnNu4kEj265XhgPj8d7BnidZLs/mIFflAV+E2V1jQL0JzF
+         iborGiBbVO1cguL2I6l5rsRB0v+2CjNTMqyYSh5/hQqdDSPnyXpx9ul0NBtsYB8oUMTc
+         o/pA==
+X-Forwarded-Encrypted: i=1; AHgh+RrkxidGNTMVjEegxoJWiJARKJbopLSutrl6yYJix4QuYGRAUooZKQyVQ7c/r378rusL4BHO1GkZwqg=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxXA1YAwrpVnsnhxHD33esWx0z0HcffOiZ721ABsdh1M9ry5cgL
+	IVrSyounryxeWWGU4cO9QecGk3/TyY6ZQKSknfuawKp9T3NmLWjXyihh
+X-Gm-Gg: AfdE7cnNotjAmIF1P5GmWzMPZ1/m24VGIk9ziscr3FxirDyJ2IBqNt3fyyyOdUiQrGq
+	jJ5sibsMd/PGP6ePe6lkCT5/HYedpiqtq0kHP23J/qz8MuHTvIEt2ohqmPoKHMNpIyzzhAAHtio
+	jYPGC151LPetQ5wR+d9UfeSykEQkXhaEff2JM5nC1qcQO2vjeeJi802tI9F8IuMsv5nWR3RQiYI
+	03/Y9pPWih10cW5p1S6JjW3Bg40cItC8w9bbQ3PmKFPl1kDT23WSgd2rjH7FWLZJMZdDw8uwDc+
+	YEeswU5NKtXYCvsmi6+Fwn6ty9c2FYsFREyRbOcj3GhdX2VjbHbxUzgqc/u/HYchdfF5/vz1rI2
+	CZkmpXlvysOzvGMSx6hMerQJmysEpciT3YGJK69NjrAEkddqC1KX1Ioq9uM33vmReZmgSJAGxUi
+	w4MEcvgUHRL4Ce
+X-Received: by 2002:a17:90a:d44f:b0:380:9f17:6df3 with SMTP id 98e67ed59e1d1-382807ae17bmr7926482a91.4.1783309281511;
+        Sun, 05 Jul 2026 20:41:21 -0700 (PDT)
+Received: from [192.168.71.21] ([116.6.102.190])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38127c0c17csm4139110a91.6.2026.07.05.20.41.18
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 05 Jul 2026 20:41:21 -0700 (PDT)
+Message-ID: <a7b5f2ab-2249-44c7-8973-f6d668e202fb@gmail.com>
+Date: Mon, 6 Jul 2026 11:41:15 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20260706-dev-max20830c-v2-5-37761e89bb5f@analog.com>
-References: <20260706-dev-max20830c-v2-0-37761e89bb5f@analog.com>
-In-Reply-To: <20260706-dev-max20830c-v2-0-37761e89bb5f@analog.com>
-To: Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-        Shuah Khan <skhan@linuxfoundation.org>
-CC: <linux-hwmon@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        "Alexis Czezar
- Torreno" <alexisczezar.torreno@analog.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1783303730; l=4454;
- i=alexisczezar.torreno@analog.com; s=20250213; h=from:subject:message-id;
- bh=zZXRPOLanBG9xGhl0Bdk0xzGHSR0Jb/0GCj6E+Fek7g=;
- b=rUC8yh6XCHPrFXQ74fRS6BvV4bl2aiim66ITc7qONzvNYvYasj4gQI89D1s+OeoC7aS0Zxjpu
- khK3qT2Ptg0D8UktLBa5lf9DUDqz8LyAj7FlVC2Y9zId5CuZJr3TDsx
-X-Developer-Key: i=alexisczezar.torreno@analog.com; a=ed25519;
- pk=XpXmJnRjnsKdDil6YpOlj9+44S+XYXVFnxvkbmaZ+10=
-X-ADIRuleOP-NewSCL: Rule Triggered
-X-Proofpoint-GUID: _lAHBeDG1_-l5JKOtJFHD6lBm4I_GFzn
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA2MDAxOSBTYWx0ZWRfX/xPpJlXdcx62
- aoEsGWRY4CKqmU8chJrY1JhL4YwVggvBEU4Xw/CHuJ/C/kvdcVjSAQkP43gRi1oMLLP824o85mS
- cuiR/EfpzEEwmGpXtSGaertVQYpEjHPmwelSUpV8wk6bhVsb/kgU
-X-Authority-Analysis: v=2.4 cv=TPx1jVla c=1 sm=1 tr=0 ts=6a4b0e55 cx=c_pps
- a=3WNzaoukacrqR9RwcOSAdA==:117 a=3WNzaoukacrqR9RwcOSAdA==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=0sLvza09kfJOxVLZPwjg:22 a=N--XFCr6TIEc_64PeIT2:22 a=gAnH3GRIAAAA:8
- a=v52DSUhV1VzBc46Xrp8A:9 a=QEXdDO2ut3YA:10
-X-Proofpoint-ORIG-GUID: _lAHBeDG1_-l5JKOtJFHD6lBm4I_GFzn
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA2MDAxOSBTYWx0ZWRfX0SXWBpvq7Vb4
- uu7Idvfv7qfehnRJDTpJZVDSn/kPaI7yw+LS6RpAniKfpEdtIdf5kMX/9Drbj6duExmr1k6L5WC
- mE7ulYEIjAAYypeVYzx0JdGHGyWfDt0ZgE1kUNSFPnoSVoFYOG3tNDjNjvLgd0kNNY28P7zcupT
- qMaOplwKBTZxV8hBTYl1QQB5WVeCvo4KRkF+TkunxIakvDjai4WjkcLL/TJRV/NUQMFMnku0QHu
- WzJ5prVvbH8Qcbb7rRnCE5jrFS+/cM1vcSCahA3tccac0NrXZoCEvjS+KtO+95bLufe6KJVW1Za
- gYwOFGz+NtsijJojHaMV6BZOSRb8zd/10HagqQOT2LrG+6iUqpgwjkWbythicAF+JeajO7RYHy5
- L/EXSvO3V4oUHBuaIqW4jIoz4cjdshp/AZdYcv6Iqv6MzBsLDysZ8gIaVleWyyYK3lXhNc7Pd+a
- 45aKcg8rcR74iYH5DDA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-07-05_02,2026-07-03_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 spamscore=0 clxscore=1015 bulkscore=0 adultscore=0
- lowpriorityscore=0 phishscore=0 impostorscore=0 suspectscore=0
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607060019
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] docs/zh_CN: fix CONFIG_CGROUP typo for CONFIG_CGROUPS
+To: Ethan Nelson-Moore <enelsonmoore@gmail.com>,
+ Dongliang Mu <dzm91@hust.edu.cn>, Shuah Khan <skhan@linuxfoundation.org>,
+ linux-doc@vger.kernel.org
+Cc: Alex Shi <alexs@kernel.org>, Yanteng Si <si.yanteng@linux.dev>,
+ Jonathan Corbet <corbet@lwn.net>
+References: <20260613211300.86016-1-enelsonmoore@gmail.com>
+From: Alex Shi <seakeel@gmail.com>
+Content-Language: en-US
+In-Reply-To: <20260613211300.86016-1-enelsonmoore@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[analog.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[analog.com:s=DKIM];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-95021-lists,linux-doc=lfdr.de];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[analog.com:dkim,analog.com:mid,analog.com:from_mime,analog.com:url,analog.com:email,vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns];
-	FORGED_SENDER(0.00)[alexisczezar.torreno@analog.com,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:linux@roeck-us.net,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-hwmon@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:alexisczezar.torreno@analog.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[analog.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[alexisczezar.torreno@analog.com,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-95024-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:enelsonmoore@gmail.com,m:dzm91@hust.edu.cn,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:alexs@kernel.org,m:si.yanteng@linux.dev,m:corbet@lwn.net,s:lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER(0.00)[seakeel@gmail.com,linux-doc@vger.kernel.org];
+	TO_DN_SOME(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com,hust.edu.cn,linuxfoundation.org,vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[seakeel@gmail.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	RCVD_COUNT_SEVEN(0.00)[10]
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCPT_COUNT_SEVEN(0.00)[7];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 4E24770C0B9
+X-Rspamd-Queue-Id: EF7B370C5BE
 
-Add support for MAX20830C and MAX20840 step-down DC-DC switching
-regulator with PMBus interface. MAX20830C is a different packaging
-for MAX20830, and MAX20840C supports 40A regulation compared to
-MAX20830 that is only 30A.
+Applied, thanks!
 
-Signed-off-by: Alexis Czezar Torreno <alexisczezar.torreno@analog.com>
----
- Documentation/hwmon/max20830.rst | 27 ++++++++++++++++++++++-----
- drivers/hwmon/pmbus/max20830.c   | 27 ++++++++++++++-------------
- 2 files changed, 36 insertions(+), 18 deletions(-)
-
-diff --git a/Documentation/hwmon/max20830.rst b/Documentation/hwmon/max20830.rst
-index 936e409dcc5c0898dde27d782308d4a7e1357e73..b850f3b6e40d1f1d0cec944be40af02265aced59 100644
---- a/Documentation/hwmon/max20830.rst
-+++ b/Documentation/hwmon/max20830.rst
-@@ -13,6 +13,22 @@ Supported chips:
- 
-     Datasheet: https://www.analog.com/media/en/technical-documentation/data-sheets/max20830.pdf
- 
-+  * Analog Devices MAX20830C
-+
-+    Prefix: 'max20830c'
-+
-+    Addresses scanned: -
-+
-+    Datasheet:
-+
-+  * Analog Devices MAX20840C
-+
-+    Prefix: 'max20840c'
-+
-+    Addresses scanned: -
-+
-+    Datasheet:
-+
- Author:
- 
-   - Alexis Czezar Torreno <alexisczezar.torreno@analog.com>
-@@ -21,12 +37,13 @@ Author:
- Description
- -----------
- 
--This driver supports hardware monitoring for Analog Devices MAX20830
--Step-Down Switching Regulator with PMBus Interface.
-+This driver supports hardware monitoring for Analog Devices MAX20830, MAX20830C
-+and MAX20840C. These are Step-Down Switching Regulator with PMBus Interface.
- 
--The MAX20830 is a 2.7V to 16V, 30A fully integrated step-down DC-DC switching
--regulator. Through the PMBus interface, the device can monitor input/output
--voltages, output current and temperature.
-+MAX20830, and MAX20830C are 2.7V to 16V, 30A fully integrated step-down DC-DC
-+switching regulators. MAX20840C is similar but can reach 40A. Through the PMBus
-+interface, these devices can monitor input/output voltages, output current and
-+temperature.
- 
- The driver is a client driver to the core PMBus driver. Please see
- Documentation/hwmon/pmbus.rst for details on PMBus client drivers.
-diff --git a/drivers/hwmon/pmbus/max20830.c b/drivers/hwmon/pmbus/max20830.c
-index 5aad4448054fc55bb0a87920d89f96bc28fda072..88fc45447792b1fea7691dee9fb385238c5d82c1 100644
---- a/drivers/hwmon/pmbus/max20830.c
-+++ b/drivers/hwmon/pmbus/max20830.c
-@@ -93,13 +93,12 @@ static int max20830_probe(struct i2c_client *client)
- 	 * which do not support SMBus block reads.
- 	 */
- 	if (i2c_check_functionality(client->adapter, I2C_FUNC_SMBUS_READ_BLOCK_DATA)) {
--		/* Reads 9 Data bytes from MAX20830 */
- 		ret = i2c_smbus_read_block_data(client, PMBUS_IC_DEVICE_ID, buf);
- 		if (ret < 0)
- 			return dev_err_probe(&client->dev, ret,
- 					     "Failed to read IC_DEVICE_ID\n");
- 	} else {
--		/* Reads 1 length byte + 9 Data bytes from MAX20830 */
-+		/* Reads 1 length byte + data bytes */
- 		ret = i2c_smbus_read_i2c_block_data(client, PMBUS_IC_DEVICE_ID,
- 						    MAX20830_IC_DEVICE_ID_LENGTH + 1,
- 						    buf);
-@@ -115,26 +114,28 @@ static int max20830_probe(struct i2c_client *client)
- 		ret = ret - 1;
- 	}
- 
--	/*
--	 * MAX20830 IC_DEVICE_ID sends string data "MAX20830\0".
--	 * Return value should at least be 9 bytes of data.
--	 */
-+	/* Verify we read the expected number of bytes */
- 	if (ret < MAX20830_IC_DEVICE_ID_LENGTH)
- 		return dev_err_probe(&client->dev, -ENODEV,
--				     "IC_DEVICE_ID too short: expected at least 9 bytes, got %d\n",
--				     ret);
-+				     "IC_DEVICE_ID too short: expected %d bytes, got %d\n",
-+				     MAX20830_IC_DEVICE_ID_LENGTH, ret);
-+
-+	/* Null-terminate the string */
-+	buf[ret] = '\0';
- 
--	/* 9 bytes of data, buf[0]-buf[7] = "MAX20830", buf[8] = '\0' */
--	buf[MAX20830_IC_DEVICE_ID_LENGTH - 1] = '\0';
--	if (strncmp(buf, "MAX20830", MAX20830_IC_DEVICE_ID_LENGTH - 1))
-+	/* Verify the device ID matches what we expect */
-+	if ((strcmp(buf, "MAX20830") && strcmp(buf, "MAX20830C") &&
-+	    strcmp(buf, "MAX20840C")))
- 		return dev_err_probe(&client->dev, -ENODEV,
--				     "Unsupported device: '%s'\n", buf);
-+				     "Unsupported device: '%*pE'\n", ret, buf);
- 
- 	return pmbus_do_probe(client, &data->info);
- }
- 
- static const struct i2c_device_id max20830_id[] = {
--	{"max20830"},
-+	{ "max20830" },
-+	{ "max20830c" },
-+	{ "max20840c" },
- 	{ }
- };
- MODULE_DEVICE_TABLE(i2c, max20830_id);
-
--- 
-2.34.1
+On 2026/6/14 05:12, Ethan Nelson-Moore wrote:
+> The Simplified Chinese translation of accounting/psi.rst
+> contains a typo CONFIG_CGROUP for CONFIG_CGROUPS. Fix it.
+> 
+> Signed-off-by: Ethan Nelson-Moore<enelsonmoore@gmail.com>
+> ---
+>   Documentation/translations/zh_CN/accounting/psi.rst | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/translations/zh_CN/accounting/psi.rst b/Documentation/translations/zh_CN/accounting/psi.rst
+> index a0ddb7bd257c..703bc81ff9be 100644
+> --- a/Documentation/translations/zh_CN/accounting/psi.rst
+> +++ b/Documentation/translations/zh_CN/accounting/psi.rst
+> @@ -148,7 +148,7 @@ psi接口提供的均值即可。
+>   Cgroup2接口
+>   ===========
+>   
+> -对于CONFIG_CGROUP=y及挂载了cgroup2文件系统的系统，能够获取cgroups内任务的psi。
+> +对于CONFIG_CGROUPS=y及挂载了cgroup2文件系统的系统，能够获取cgroups内任务的psi。
+>   此场景下cgroupfs挂载点的子目录包含cpu.pressure、memory.pressure、io.pressure文件，
+>   内容格式与/proc/pressure/下的文件相同。
+>   
+> -- 2.43.0
+> 
 
 
