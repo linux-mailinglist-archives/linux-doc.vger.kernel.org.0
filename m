@@ -1,55 +1,54 @@
-Return-Path: <linux-doc+bounces-95258-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95260-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id JaMQAAE1TGrlhgEAu9opvQ
-	(envelope-from <linux-doc+bounces-95258-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 01:06:41 +0200
+	id OY4RN/g0TGrjhgEAu9opvQ
+	(envelope-from <linux-doc+bounces-95260-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 01:06:32 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F0307163A1
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 01:06:40 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 512F2716397
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 01:06:32 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=EN50UGgD;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=a8js5rXe;
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95258-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95258-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95260-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95260-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 369B1303C009
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 23:06:28 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 1749D302A4E7
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 23:06:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 05C0A3E5A27;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D8473437858;
 	Mon,  6 Jul 2026 23:06:27 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C4EF13D3002;
-	Mon,  6 Jul 2026 23:06:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8DE913D3309;
+	Mon,  6 Jul 2026 23:06:26 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783379186; cv=none; b=G1/rH4mwZQN4gGI1eXNVlNcRIt/UNpxBlTTRQKCV5jeDTBOuLLmfHLekKPA1+Max6ZqVDEhkltPqjTZPxa9E/dHtg7GnRKrREW5/cm5tD5h0JyOi4T1K2PbETrFbJ1zkK2RKXOh4UeG3/a4HIpI8N4Kt8lf7DS42XHveOflaZSM=
+	t=1783379187; cv=none; b=uY1F3jjFVcs8KT2VWtmxF4+vy15WU9JBzxRACakuLdJ0rxMvySpu6oxEc3TsiogNPHWJepKkVT12dl/eGE1OIeA9vZFaomR4u2WGWD83YH9AGjLF0ukod3UOxqfDQaxfZigi3wH/Bq6pxgvVX8TMx9tCSNx6ILoXcDcjX/ifZlg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783379186; c=relaxed/simple;
-	bh=oVWQwUJrVLgt2ds0hOtdw/u3HLWC21FLWSsgjsdIJHo=;
+	s=arc-20240116; t=1783379187; c=relaxed/simple;
+	bh=58g1568NRL7/SI4d2HoFSQSOKccqgmn0k03hr3pJQEU=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=IoeKeyMSx5w7lQ00VbXCUSdLlufsoNF9g4PVoNIlF3+LVaVMFhc50O6iosmWekolgmJ5pugLhc1NOjSSUyT27q9biwwDsLiJusRigqma3mknf23mQLXEla7MeOHNv+jyciz3IgkiZLhHrEfKBhHXpX4f2CGDL8FU9WeIP1uSP20=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EN50UGgD; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 399001F00AC4;
+	 In-Reply-To:To:Cc; b=XsuD5sNVMvR6WcalVJvTCDPpxf5fPASjge1nOpVK2lBLnHjmqFUXuzWqpTHZIMa9G7SAtUfLEuoHaHgu5DTr78Ot9giOcoVcVdKGFYPL04j2vZwP7CF0pQJSNlYCLpqnuso3QmS84wG1yXtl2+RQhEm9j3CjNhpRC0WUJdfOd28=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=a8js5rXe; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C2FDF1F00ADB;
 	Mon,  6 Jul 2026 23:06:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783379185;
-	bh=srvdFyNcKWrG6UhIb2zhEmit0iT5/TwfHnN+QzKDIL4=;
+	s=k20260515; t=1783379186;
+	bh=SoMF0NvEK/nHml8RMjqK0ASTpVqLJvBd+3O6LznwQbI=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=EN50UGgDDiP+s4pwKbsgr7tDnGCh+xcmJV56oysUkM9sEl7ZZD4ZBhHbZcO+XNfdt
-	 ONxoUbSf5c7VkktfnFSKH+fS80IZ5Upf6pkelvzZKtyTfUWS+urhaJvEH5ibvNZKo2
-	 T3583WingNd5GnB/+wo2QNw61uWUZtZ+w9/cqwLZGjytKo23zkFSL2ZiGgU7pyhvEz
-	 Kk+/f/gWYaXjjP8VFQ77QqTvpIEMkrq7NlV6gb18kDS79dh3Q0R0taF/CRZIIIO4P6
-	 SE5XBuCq7/WZbo+oiUh8bFrTNA3qREcIY7TOScXgJbADOjyIDldR7O9Fw6/JVpEl23
-	 lbwVYpbrdwucQ==
+	b=a8js5rXeMjDMVJNUZVsFGEzPM7l/KJtZKoECTUBOUnOFTNyuPnpoRBctGLOD0AwcA
+	 MNzoWdEtho+cBU6xmFSp4nRgJb9za4ByoYqVJWYnacskotd4cmOHkiI+ya2L69dQqO
+	 mv0glk5EemV/1/H6azrKSl3mfQmHYZd8KnrKkQEPUS02j2W+JJ8qNuhBKERsdWZ7cc
+	 wVbk3oWveqwSkWPRTymDca428JIangQYD+MFA3WZOdS4V4e3evNZvqIhgdW/dUGoJZ
+	 W36Xd7r5TOuKz0tdi6vRLB97lBPbmh7VFy5bpTstReaoMwdmGwAZNYsvz2xg6WwM7M
+	 4YDQUXmInVhAA==
 From: Drew Fustini <fustini@kernel.org>
-Date: Mon, 06 Jul 2026 16:06:11 -0700
-Subject: [PATCH v4 1/8] dt-bindings: riscv: Add Ssqosid extension
- description
+Date: Mon, 06 Jul 2026 16:06:12 -0700
+Subject: [PATCH v4 2/8] riscv: Detect the Ssqosid extension
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -57,8 +56,8 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260706-dfustini-atl-sc-cbqri-dt-v4-1-e75c20201d64@kernel.org>
+Content-Transfer-Encoding: 8bit
+Message-Id: <20260706-dfustini-atl-sc-cbqri-dt-v4-2-e75c20201d64@kernel.org>
 References: <20260706-dfustini-atl-sc-cbqri-dt-v4-0-e75c20201d64@kernel.org>
 In-Reply-To: <20260706-dfustini-atl-sc-cbqri-dt-v4-0-e75c20201d64@kernel.org>
 To: Adrien Ricciardi <aricciardi@baylibre.com>, 
@@ -88,12 +87,12 @@ Cc: linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org,
  x86@kernel.org, devicetree@vger.kernel.org, linux-rt-devel@lists.linux.dev, 
  linux-doc@vger.kernel.org
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1227; i=fustini@kernel.org;
- h=from:subject:message-id; bh=oVWQwUJrVLgt2ds0hOtdw/u3HLWC21FLWSsgjsdIJHo=;
- b=owGbwMvMwCV2+43O4ZsaG3kYT6slMWT5mLzP/Oo7yV3MvkvpatbJv6kmVimibsxfhNOkZG6I7
- mXcdt+wo5SFQYyLQVZMkWXTh7wLS7xCvy6Y/2IbzBxWJpAhDFycAjCREglGhpu/KlfNUtgUYsaS
- puS/2ErXRGq1rVtj8uYfXo3Pf8cFcjP8Zil+cv/1Y0abVdwRV08nusnMb8iXvKOc+jW7jVVqZ3Y
- hBwA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1637; i=fustini@kernel.org;
+ h=from:subject:message-id; bh=58g1568NRL7/SI4d2HoFSQSOKccqgmn0k03hr3pJQEU=;
+ b=owGbwMvMwCV2+43O4ZsaG3kYT6slMWT5mLyf5mivpCz66K9i0zSJ4yfYRetmXxd/Z/4rasnHO
+ q7Y4uALHaUsDGJcDLJiiiybPuRdWOIV+nXB/BfbYOawMoEMYeDiFICJHDJm+CvKqT/9ndmun/vO
+ 7QnXuPKWybgkzZ758s/8Rheh2TJ6zj8ZGZYvz2s/sWxy03ytdKfLr2ffEkr7Xhh/P8WM6SXv+t3
+ lFXwA
 X-Developer-Key: i=fustini@kernel.org; a=openpgp;
  fpr=1B6F948213EA489734F3997035D5CD577C1E6010
 X-Rspamd-Action: no action
@@ -102,7 +101,7 @@ X-Spamd-Result: default: False [-3.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -118,7 +117,7 @@ X-Spamd-Result: default: False [-3.66 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-95258-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-95260-lists,linux-doc=lfdr.de];
 	DKIM_TRACE(0.00)[kernel.org:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
@@ -129,39 +128,49 @@ X-Spamd-Result: default: False [-3.66 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,microchip.com:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[semihalf.com:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 3F0307163A1
+X-Rspamd-Queue-Id: 512F2716397
 
-Document the ratified Supervisor-mode Quality of Service ID (Ssqosid)
-extension v1.0.
+Ssqosid is the RISC-V Quality-of-Service (QoS) Identifiers specification
+which defines the Supervisor Resource Management Configuration (srmcfg)
+register.
 
 Link: https://github.com/riscv/riscv-ssqosid/releases/tag/v1.0
-Acked-by: Conor Dooley <conor.dooley@microchip.com>
+Co-developed-by: Kornel Dulęba <mindal@semihalf.com>
+Signed-off-by: Kornel Dulęba <mindal@semihalf.com>
 Signed-off-by: Drew Fustini <fustini@kernel.org>
 ---
- Documentation/devicetree/bindings/riscv/extensions.yaml | 6 ++++++
- 1 file changed, 6 insertions(+)
+ arch/riscv/include/asm/hwcap.h | 1 +
+ arch/riscv/kernel/cpufeature.c | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/Documentation/devicetree/bindings/riscv/extensions.yaml b/Documentation/devicetree/bindings/riscv/extensions.yaml
-index 2b0a8a93bb21..1c6f091518d4 100644
---- a/Documentation/devicetree/bindings/riscv/extensions.yaml
-+++ b/Documentation/devicetree/bindings/riscv/extensions.yaml
-@@ -232,6 +232,12 @@ properties:
-             ratified at commit d70011dde6c2 ("Update to ratified state")
-             of riscv-j-extension.
+diff --git a/arch/riscv/include/asm/hwcap.h b/arch/riscv/include/asm/hwcap.h
+index 7ef8e5f55c8d..b83dae5cebb9 100644
+--- a/arch/riscv/include/asm/hwcap.h
++++ b/arch/riscv/include/asm/hwcap.h
+@@ -112,6 +112,7 @@
+ #define RISCV_ISA_EXT_ZCLSD		103
+ #define RISCV_ISA_EXT_ZICFILP		104
+ #define RISCV_ISA_EXT_ZICFISS		105
++#define RISCV_ISA_EXT_SSQOSID		106
  
-+        - const: ssqosid
-+          description: |
-+            The standard Ssqosid extension for Quality of Service ID is
-+            ratified as v1.0 in commit d9c616497fde ("Merge pull
-+            request #7 from ved-rivos/Ratified") of riscv-ssqosid.
-+
-         - const: ssstateen
-           description: |
-             The standard Ssstateen extension for supervisor-mode view of the
+ #define RISCV_ISA_EXT_XLINUXENVCFG	127
+ 
+diff --git a/arch/riscv/kernel/cpufeature.c b/arch/riscv/kernel/cpufeature.c
+index f46aa5602d74..668a7e71ff1c 100644
+--- a/arch/riscv/kernel/cpufeature.c
++++ b/arch/riscv/kernel/cpufeature.c
+@@ -582,6 +582,7 @@ const struct riscv_isa_ext_data riscv_isa_ext[] = {
+ 	__RISCV_ISA_EXT_DATA(ssaia, RISCV_ISA_EXT_SSAIA),
+ 	__RISCV_ISA_EXT_DATA(sscofpmf, RISCV_ISA_EXT_SSCOFPMF),
+ 	__RISCV_ISA_EXT_SUPERSET(ssnpm, RISCV_ISA_EXT_SSNPM, riscv_xlinuxenvcfg_exts),
++	__RISCV_ISA_EXT_DATA(ssqosid, RISCV_ISA_EXT_SSQOSID),
+ 	__RISCV_ISA_EXT_DATA(sstc, RISCV_ISA_EXT_SSTC),
+ 	__RISCV_ISA_EXT_DATA(svade, RISCV_ISA_EXT_SVADE),
+ 	__RISCV_ISA_EXT_DATA_VALIDATE(svadu, RISCV_ISA_EXT_SVADU, riscv_ext_svadu_validate),
 
 -- 
 2.43.0
