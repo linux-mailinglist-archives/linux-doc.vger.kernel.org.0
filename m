@@ -1,53 +1,53 @@
-Return-Path: <linux-doc+bounces-95104-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95105-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id /jUQBzhzS2qJRgEAu9opvQ
-	(envelope-from <linux-doc+bounces-95104-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 11:19:52 +0200
+	id UVl9IOmMS2p6VQEAu9opvQ
+	(envelope-from <linux-doc+bounces-95105-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 13:09:29 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6680B70E891
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 11:19:51 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id D0F8770FAAA
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 13:09:28 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=ANrs69qg;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=CMmpIc8B;
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95104-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-95104-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95105-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95105-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id AF58B3296482
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 08:57:54 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id C7944349B05B
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 08:59:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 576EC4D8DB8;
-	Mon,  6 Jul 2026 08:50:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 828BA42E011;
+	Mon,  6 Jul 2026 08:51:24 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C16814D8D93;
-	Mon,  6 Jul 2026 08:50:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DEDC23890F1;
+	Mon,  6 Jul 2026 08:51:17 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783327849; cv=none; b=cQe6o2hVNaXSuLmq0yuFjTmCXTDbt9Z2ZXC/58OIc6REFWB43VKwHWgPAcmQTTpm1jDfQbqtldZimUzTQ9ArLfOdAixqGo3FQjOFaE5hEsaWO0Jh40JgNsmUzTfVtA5m0kpx+GHENiWOPXvzVvPkH4OxnGg16ySVBYlQ+YYf/Vs=
+	t=1783327882; cv=none; b=lq8qd+GuHUfH6A+SGtlh+yHLzOvKpH2rmwsjliNCgMM+edk+AiJd86ycqKzJUhzquV86ioXO78bzptZOPkfg/w+SUvZjOP17DHF357APoIrLaXvCesn0y9fEr0HcVbdlpKgH2Sh6O51zgj2FIkgxNTVDdKPVaar4VkAHQ8FE9Es=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783327849; c=relaxed/simple;
-	bh=H3R55HuygTxCPIU8vdqStb3w/WmVYqJlsQERoMXP2iM=;
+	s=arc-20240116; t=1783327882; c=relaxed/simple;
+	bh=syY7sAmSlg+O76Krteu3SOK7sgsgqcxHbwhWRYYI1/8=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=SQnfHEdtp4EqLQBvFxQ5jIgES730XtBpME1+HN0srA84HOmN9vqkgov7VWNtaO3KFTb3InuxhCf82c3rnfGd1k8o6X4gqaEAYy01sfsttd7fihh+zsG5GZlgqDNDPPesMZLC74HeIsRjUOQ1xILqP2VH5aEzh9YN40Zemqfswck=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ANrs69qg; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 249C11F000E9;
-	Mon,  6 Jul 2026 08:50:30 +0000 (UTC)
+	 In-Reply-To:Content-Type; b=ehtVX8Pjh9dsaWOCHeKy6r/QhVGbT+XjuaON65xxFmh719rsg9muET2zQFrZ53iliTiKsUQQg0oqrxg95CuNc+vTnS2rNKmLsAe1sBZFlBtPQ3V2U36TbGKv2sgKm5tsjmKxwcsd5eR1zB1o056wTldTKEfqZ50z+nXs9OOcXGw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CMmpIc8B; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3632F1F000E9;
+	Mon,  6 Jul 2026 08:51:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783327838;
-	bh=8H3wDGn6Io2auw5Dq74h7CwVRzPBSpUoio1EButPo5M=;
+	s=k20260515; t=1783327875;
+	bh=XzLv+da1VK2uoG9pUr+oPk8RYYDxZ2UhQ4fGhBT+UfI=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=ANrs69qg8B3upFzmzz1q7UCws+ttEpVdzpUaimTCvD+uOwRkVwPhWXcUho7F/IFpN
-	 4/3l6+TGqMN52tbb57MIGpQrKX+d+7eT7XIjWnp06L7ElnOXaFdHJrztZchHeiwsBA
-	 ZrVqHR0tM0wRs2N487lJriz3Or9FEzWLT3uM2LvA/o93I3Di5DLHOlV6ohvF/Z++c6
-	 51PaDGH0EWETai89/+uekM80tJN5ttLsg3Lss2ODsuwWqsQtTqbmIL6giAN+VByDkT
-	 oshZumLA9dxRPcpU2kbrWB+QtgnBmbMFJe9l/ZB2TSu/9Zs90Z0cusfmVjzt7LM4Al
-	 lveYFOyQ64FXQ==
-Message-ID: <67c96fa1-9e9d-45fc-94fe-1e67253f5270@kernel.org>
-Date: Mon, 6 Jul 2026 10:50:29 +0200
+	b=CMmpIc8BJghNiDy/pCe9GTyMUvlDSFT5HUMJXFRfF++L/1UvvKWrD9rnn4yjenoVD
+	 5dHcgnp0FYUtLagXsim9k2A86Uv16/jzW84Wq2myLedNIHiqEWp0liHjjizBorDkaG
+	 0Sg0fukbNdlhhOQjZ5ZL8LLx79gVWn4CtiXUSLxvekkwV6HZX9IEWSiaVYFWEEhNiq
+	 k+MQ14GVNEQsBg+eDXeAMmoeow423kX3Ibdm1BdXtIrdTS5CxziVrG7yMm72YIWB2b
+	 9NDhD0ZpAMGdJNBMOxUgV8k9avzG0Dx7N5Xrr1JcH8vQZii9SH6/66is7xCTON+Sdl
+	 XDgtaStJD8VCg==
+Message-ID: <69f71507-0a42-4fdf-af33-2c596657aca1@kernel.org>
+Date: Mon, 6 Jul 2026 10:51:05 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -55,7 +55,8 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 2/3] mm: rename swap.c to folio.c
+Subject: Re: [PATCH v7 3/3] mm: move reclaim-internal declarations out of
+ swap.h
 To: Jianyue Wu <wujianyue000@gmail.com>,
  Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>,
  Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>,
@@ -72,9 +73,9 @@ To: Jianyue Wu <wujianyue000@gmail.com>,
  <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
  Baoquan He <baoquan.he@linux.dev>
 Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org, Matthew Wilcox <willy@infradead.org>
+ linux-doc@vger.kernel.org
 References: <20260705-ch-swap-series-plus-folio-lru-cleanup-v7-0-a028e8b5fc3d@gmail.com>
- <20260705-ch-swap-series-plus-folio-lru-cleanup-v7-2-a028e8b5fc3d@gmail.com>
+ <20260705-ch-swap-series-plus-folio-lru-cleanup-v7-3-a028e8b5fc3d@gmail.com>
 From: "David Hildenbrand (Arm)" <david@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=david@kernel.org; keydata=
@@ -121,7 +122,7 @@ Autocrypt: addr=david@kernel.org; keydata=
  3iyY2Nsd7JxfKu1PRhCGwXzRw5TlfEsoRI7V9A8isUCoqE2Dzh3FvYHVeX4Us+bRL/oqareJ
  CIFqgYMyvHj7Q06kTKmauOe4Nf0l0qEkIuIzfoLJ3qr5UyXc2hLtWyT9Ir+lYlX9efqh7mOY
  qIws/H2t
-In-Reply-To: <20260705-ch-swap-series-plus-folio-lru-cleanup-v7-2-a028e8b5fc3d@gmail.com>
+In-Reply-To: <20260705-ch-swap-series-plus-folio-lru-cleanup-v7-3-a028e8b5fc3d@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
@@ -129,22 +130,22 @@ X-Spamd-Result: default: False [-5.16 / 15.00];
 	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:wujianyue000@gmail.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencent.com,m:shikemeng@huaweicloud.com,m:nphamcs@gmail.com,m:baohua@kernel.org,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:hannes@cmpxchg.org,m:mhocko@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:hughd@google.com,m:baolin.wang@linux.alibaba.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:baoquan.he@linux.dev,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:willy@infradead.org,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:wujianyue000@gmail.com,m:akpm@linux-foundation.org,m:chrisl@kernel.org,m:kasong@tencent.com,m:shikemeng@huaweicloud.com,m:nphamcs@gmail.com,m:baohua@kernel.org,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:hannes@cmpxchg.org,m:mhocko@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:hughd@google.com,m:baolin.wang@linux.alibaba.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:baoquan.he@linux.dev,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER(0.00)[david@kernel.org,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[30];
+	RCPT_COUNT_TWELVE(0.00)[29];
 	FREEMAIL_TO(0.00)[gmail.com,linux-foundation.org,kernel.org,tencent.com,huaweicloud.com,lge.com,linux.dev,google.com,cmpxchg.org,infradead.org,suse.com,linux.alibaba.com,lwn.net,linuxfoundation.org];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-95104-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-95105-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
@@ -155,30 +156,29 @@ X-Spamd-Result: default: False [-5.16 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,infradead.org:email,cmpxchg.org:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp,cmpxchg.org:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 6680B70E891
+X-Rspamd-Queue-Id: D0F8770FAAA
 
 On 7/5/26 16:12, Jianyue Wu wrote:
-> Rename mm/swap.c to mm/folio.c so the filename better matches
-> the code's main responsibility.
+> Keep include/linux/swap.h focused on swap-facing interfaces by moving
+> MM-internal reclaim and workingset declarations into mm/internal.h.
 > 
-> This keeps the implementation split from swap-specific code without
-> changing the published LRU helper interfaces.
+> Leave the small set of LRU helper declarations that are used outside mm/
+> in swap.h so this cleanup does not need a new public header under
+> include/linux/.
 > 
-> Update MAINTAINERS and the remaining mm/swap.c documentation references
-> after the rename.
-> 
+> Suggested-by: Barry Song <baohua@kernel.org>
 > Suggested-by: Baoquan He <bhe@redhat.com>
-> Suggested-by: David Hildenbrand <david@kernel.org>
-> Suggested-by: Matthew Wilcox <willy@infradead.org>
-> Reviewed-by: Lorenzo Stoakes <ljs@kernel.org>
 > Acked-by: Johannes Weiner <hannes@cmpxchg.org>
-> Acked-by: David Hildenbrand (Arm) <david@kernel.org>
 > Signed-off-by: Jianyue Wu <wujianyue000@gmail.com>
 > ---
+>  include/linux/swap.h | 75 +++++-----------------------------------------------
+>  mm/internal.h        | 67 ++++++++++++++++++++++++++++++++++++++++++++++
+
+We likely want to split that up soon, but let's do that separately.
 
 Acked-by: David Hildenbrand (Arm) <david@kernel.org>
 
