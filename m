@@ -1,155 +1,157 @@
-Return-Path: <linux-doc+bounces-95268-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95267-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id vwkgJP84TGqfhwEAu9opvQ
-	(envelope-from <linux-doc+bounces-95268-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 01:23:43 +0200
+	id NUeADZ44TGqChwEAu9opvQ
+	(envelope-from <linux-doc+bounces-95267-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 01:22:06 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id D84147164B4
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 01:23:42 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 82B6971648D
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 01:22:05 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=ubuntu.com header.s=fe-953a8a3ca9 header.b=Jl+uKqXM;
-	dmarc=pass (policy=none) header.from=ubuntu.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95268-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95268-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=google.com header.s=20251104 header.b=Q3ji1pM3;
+	dmarc=pass (policy=reject) header.from=google.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95267-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95267-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 616EF30356F5
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 23:23:34 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id CE8D83028B2A
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 23:22:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 490983F660F;
-	Mon,  6 Jul 2026 23:23:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F2F403E7BCC;
+	Mon,  6 Jul 2026 23:22:02 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+Received: from mail-pf1-f201.google.com (mail-pf1-f201.google.com [209.85.210.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9EBAE3E51E8
-	for <linux-doc@vger.kernel.org>; Mon,  6 Jul 2026 23:23:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF8BB3E51E8
+	for <linux-doc@vger.kernel.org>; Mon,  6 Jul 2026 23:22:01 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783380213; cv=none; b=VSbs1qagQ2Idzk1BleE3+Uw2tVaQ5kIjeuPKR2PLPtLLUdq3wDcTeG2XQpAM1kUPTNxPQEly81CrkpWeQV8Wi3CyejtrYC+Y46eZkGwwE70n5dPNB+Mk+Au/53wsbMjx9UNhS9UYB5R6LcwohDLQt/bQNcR+tcXzpwc9SKNG8K4=
+	t=1783380122; cv=none; b=Dd+mZ9jIT20HpKII/31+BWexrbH0WFIMdiQbr+wegIKo9igdKLVRIrfeWTth1dAtPXAaDqUNEw6/vMqNLMcoL9cl+PYp2UDmSCD+KaL4H9533J/RndhXlENVVSlXL4hIed+shC9/5eJh1BO1be8JlvEJ4bjf2238KpvOSTHMf/8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783380213; c=relaxed/simple;
-	bh=rWWebR3w8Mim8nqyrpPGlBB+sWkzlr8vPrDMP4Qn8+8=;
-	h=Mime-Version:Content-Type:Date:Message-Id:Subject:From:To:Cc:
-	 References:In-Reply-To; b=hM5tdu+99y8XbV33xuDsIL25ls07Y3zMPuUKhPMEdAmCah33fHR6dhFd+ceuPqvl4ZxALlg44vVbgn15igjPOft7o0MGeUGNEHmU9V+5V4ZjmgW4eLahSIIgwZpqvEb8eCPJl2rd/1Lirqu8be/fUorIAwxfgD2COadigO4NzUQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ubuntu.com; spf=pass smtp.mailfrom=fe-bounces.ubuntu.com; dkim=pass (2048-bit key) header.d=ubuntu.com header.i=@ubuntu.com header.b=Jl+uKqXM; arc=none smtp.client-ip=149.28.215.223
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ubuntu.com;
- h=In-Reply-To: References: Cc: To: From: Subject: Message-Id: Date:
- Content-Type: Content-Transfer-Encoding: Mime-Version; q=dns/txt;
- s=fe-953a8a3ca9; t=1783380210;
- bh=OEZrGANo2cEZWsDxSQlyGeYA6D2OMj2sQBUWO+CdYtI=;
- b=Jl+uKqXMLyKo/uN3yCDo9ku4BLb55S0RLaEdNj20VOZaKs8GrWkMERcyQo/uoZg+NzvxxGyNy
- iQI+1uz27iUdSgCChGLgROWzu+jhG8Zu2R5DnWHO71KDIPNqWapMOWtm5LmQlPA93+m16HgNY+W
- 6ebv5Low9D0jwsnJDp52XGeXV+lVfwUelKSC5/Vb5B4oi8fAcBmTg0aq+ng6ATWspfHDw1XyvMj
- /I0pvEH7wZJSVC3XUDIKtiCmmumomtdfXa52X8W+mlAdd0pgXSUP853mDuw8zq/Mj5NvFUxCSnw
- pEPUyJlSh2hFRStCJ9lSJ3j/+otoKmtOyHDq0Sy45HsA==
-X-Forward-Email-ID: 6a4c3867ebac8711c86b79d5
-X-Forward-Email-Sender: rfc822; jpeisach@ubuntu.com, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 2.9.7
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
+	s=arc-20240116; t=1783380122; c=relaxed/simple;
+	bh=5tTJzFCz090WEshickhyWZBU+H17ZnKRtGBALiNloLs=;
+	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
+	 To:Cc:Content-Type; b=UxNHOtGc1gvk08IQ38UekD0ur7PJioIj2pVnWn0G/OLvwPW4CcxKxy7lIdDSeLZA5cGaBb5XCpraj7cSkEgiTbKf2mUocwWDSmrwj0DSV3VtNwbnH4hUN4ou7eYn0SeffOvFpfVzgjzjDCTbtu8GHzam7sXnoSIlB7/H9s1T9YQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--seanjc.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=Q3ji1pM3; arc=none smtp.client-ip=209.85.210.201
+Received: by mail-pf1-f201.google.com with SMTP id d2e1a72fcca58-8423f1fe39eso7205092b3a.1
+        for <linux-doc@vger.kernel.org>; Mon, 06 Jul 2026 16:22:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20251104; t=1783380121; x=1783984921; darn=vger.kernel.org;
+        h=content-type:cc:to:from:subject:message-id:references:mime-version
+         :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=MkGzf5Ltjdp17l7lz9dFJNCiKSFQqbXrN82DhhAxuS4=;
+        b=Q3ji1pM3TEx9qTs8lyrmnbPXJ5AuzBP1mkFHj1juU45RaVB6um1ykpX5nJ5DpI5bjf
+         7wA83gh1nHeEme4R27MlyAmAfV2M+rhJhgKZVQvqGuOeXaxjOKsNkM8vULO0LClZ8lTE
+         jw+EIY1VlIRca4U89BC9R6Nem7nvEwJ161GD69bwGebls3csshtJXaCl9nSwCum8jlIn
+         nbOtVfqk1en9AbcZAxuSzJZS7Dsef/m5WPvrryhHYS/0wmiegjF2Y4gn+XCzDwX3mYAV
+         Xor8fh2vakqcLoR4l4yrhan/3Fet165oK4WOuu4Ip5aWWPxmSWlvzCBjsxHXhp9Ibv/M
+         qRow==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783380121; x=1783984921;
+        h=content-type:cc:to:from:subject:message-id:references:mime-version
+         :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=MkGzf5Ltjdp17l7lz9dFJNCiKSFQqbXrN82DhhAxuS4=;
+        b=nDehDXbVnEfB6woF6j1Y9X56Tr6ZIiPmudpeBn3ayXW1jE9wSgHY7rkAWbGWO1kG0V
+         3t9Q2/wqfGfRznRDqrBwcWmHM8OPbrFH9bhrR0nVi+XtoZWhuTigzFk3uoWoqVxFIO2B
+         tBCFlPKeHjjOr7cgH9Nm79Asy7jxt01yrwiUtp26RxW/guNKYCmriLfkTW6QzhgkXKt3
+         U8gcNw9kK78SJ8An+uQh41vCOxFpeYQTvHL+OKB+Ffab7zE/pHfV95u5wCGYl9aogiWG
+         UrXsfnh77SGS/DJExNHpaXcYfoyXDiU1I9IDDraE6egTY63yIMkTZKCsLJQ5XNeQk3rC
+         s99Q==
+X-Forwarded-Encrypted: i=1; AHgh+Ro/+Fh1LqsM3wolJ8yHC8kV0gQdsoAzdeVHsbdCJnEaDwKfOE0afB62k1hSn5nkVOB+C5Uw+Iylydw=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzLkIjGFN+yCfercwEnvAxSKnFejGZsxWegQUWdvxoBiSwBDzmY
+	nO+jFkRRJFccrQccEvq2MNQrezAc2N6xxZvMcPNGTadFHLfe5/4yTHC1HMddsjbylFnHqFX1cXy
+	i+tmCiQ==
+X-Received: from pfx50.prod.google.com ([2002:a05:6a00:a472:b0:846:f544:63be])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6a00:94f3:b0:845:d284:9e11
+ with SMTP id d2e1a72fcca58-84826e38a3bmr2549381b3a.56.1783380120822; Mon, 06
+ Jul 2026 16:22:00 -0700 (PDT)
+Date: Mon, 6 Jul 2026 16:22:00 -0700
+In-Reply-To: <20260706092021.3625908-3-twiederh@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8; format=Flowed
-Date: Mon, 06 Jul 2026 19:21:09 -0400
-Message-Id: <DJRVH1JI4C7F.3HZUQJ5YXD7BO@ubuntu.com>
-Subject: Re: [PATCH] arch: arm64: add early_param idle=<wfi|yield|nop>
-From: "Joshua Peisach" <jpeisach@ubuntu.com>
-To: "Yureka Lilian" <yureka@cyberchaos.dev>, "Jonathan Corbet"
- <corbet@lwn.net>, "Shuah Khan" <skhan@linuxfoundation.org>, "Catalin
- Marinas" <catalin.marinas@arm.com>, "Will Deacon" <will@kernel.org>
-Cc: <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
- <linux-arm-kernel@lists.infradead.org>, <asahi@lists.linux.dev>
-X-Mailer: aerc 0.21.0
-References: <20260705-arm64-idle-param-v1-1-7454249f473f@cyberchaos.dev>
-In-Reply-To: <20260705-arm64-idle-param-v1-1-7454249f473f@cyberchaos.dev>
+References: <20260706092021.3625908-2-twiederh@redhat.com> <20260706092021.3625908-3-twiederh@redhat.com>
+Message-ID: <akw4mH99FGquorxC@google.com>
+Subject: Re: [PATCH 1/4] KVM: x86: Document that KVM_CREATE_IRQCHIP must
+ precede vcpu creation
+From: Sean Christopherson <seanjc@google.com>
+To: Tim Wiederhake <twiederh@redhat.com>
+Cc: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, kvm@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[ubuntu.com,none];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
 	MV_CASE(0.50)[];
-	R_DKIM_ALLOW(-0.20)[ubuntu.com:s=fe-953a8a3ca9];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-95268-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:yureka@cyberchaos.dev,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:catalin.marinas@arm.com,m:will@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:asahi@lists.linux.dev,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-95267-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[jpeisach@ubuntu.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER(0.00)[seanjc@google.com,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[3];
+	FORGED_RECIPIENTS(0.00)[m:twiederh@redhat.com,m:pbonzini@redhat.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[ubuntu.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DKIM_TRACE(0.00)[google.com:+];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jpeisach@ubuntu.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[seanjc@google.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[7];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ubuntu.com:from_mime,ubuntu.com:dkim,ubuntu.com:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
+	MID_RHS_MATCH_FROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: D84147164B4
+X-Rspamd-Queue-Id: 82B6971648D
 
-On Sun Jul 5, 2026 at 6:02 AM EDT, Yureka Lilian wrote:
-> +
-> +enum idle_mode idle =3D WFI;
-> +
-> +/* User can over-ride above with "idle=3D<wfi|yield|nop>" in cmdline */
-> +static int __init setup_idle(char *s)
-> +{
-> +	if (!s)
-> +		return -1;
-> +	else if (!strcmp(s, "wfi"))
-> +		idle =3D WFI;
-> +	else if (!strcmp(s, "yield"))
-> +		idle =3D YIELD;
-> +	else if (!strcmp(s, "nop"))
-> +		idle =3D NOP;
-> +	else
-> +		return -1;
-> +
-> +	return 0;
-> +}
-> +early_param("idle", setup_idle);
-> +
->  /*
->   *	cpu_do_idle()
->   *
-> @@ -26,8 +48,13 @@ void __cpuidle cpu_do_idle(void)
-> =20
->  	arm_cpuidle_save_irq_context(&context);
-> =20
-> -	dsb(sy);
-> -	wfi();
-> +	if (likely(idle =3D=3D WFI)) {
-> +		dsb(sy);
-> +		wfi();
-> +	} else if (idle =3D=3D YIELD) {
-> +		dsb(sy);
-> +		asm volatile("yield" ::: "memory");
-> +	}
->
+On Mon, Jul 06, 2026, Tim Wiederhake wrote:
+> The kernel rejects KVM_CREATE_IRQCHIP with -EINVAL if any vcpus have
+> already been created, but the API documentation does not mention this
+> requirement.  Add a note.
+> 
+> Signed-off-by: Tim Wiederhake <twiederh@redhat.com>
+> ---
+>  Documentation/virt/kvm/api.rst | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/virt/kvm/api.rst b/Documentation/virt/kvm/api.rst
+> index 52bbbb553ce1..ec5bf99ff8b8 100644
+> --- a/Documentation/virt/kvm/api.rst
+> +++ b/Documentation/virt/kvm/api.rst
+> @@ -856,7 +856,8 @@ Writes the floating point state to the vcpu.
+>  Creates an interrupt controller model in the kernel.
+>  On x86, creates a virtual ioapic, a virtual PIC (two PICs, nested), and sets up
+>  future vcpus to have a local APIC.  IRQ routing for GSIs 0-15 is set to both
+> -PIC and IOAPIC; GSI 16-23 only go to the IOAPIC.
+> +PIC and IOAPIC; GSI 16-23 only go to the IOAPIC.  This ioctl must be called
+> +before creating any vcpus.
 
-And otherwise...........?
+I would say instead "This ioctl can only be called before creating any vCPUs",
+because a reasonable reading of "must be called before" is that userpace must
+*always* call KVM_CREATE_IRQCHIP before creating vCPUs.
 
-I guess it would be NOP, so do nothing - is this expected behavior?
-
--Josh
+>  On arm64, a GICv2 is created. Any other GIC versions require the usage of
+>  KVM_CREATE_DEVICE, which also supports creating a GICv2.  Using
+>  KVM_CREATE_DEVICE is preferred over KVM_CREATE_IRQCHIP for GICv2.
+> -- 
+> 2.52.0
+> 
 
