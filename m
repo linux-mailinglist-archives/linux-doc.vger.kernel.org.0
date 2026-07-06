@@ -1,152 +1,235 @@
-Return-Path: <linux-doc+bounces-95114-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95118-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Nb7KBBuES2ocSwEAu9opvQ
-	(envelope-from <linux-doc+bounces-95114-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 12:31:55 +0200
+	id iellAZmES2o3SwEAu9opvQ
+	(envelope-from <linux-doc+bounces-95118-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 12:34:01 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4EF4D70F370
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 12:31:54 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id E82D370F3C6
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 12:33:59 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=none;
-	dmarc=none;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95114-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95114-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=none ("invalid DKIM record") header.d=rsg.ci.i.u-tokyo.ac.jp header.s=rs20250326 header.b=UQOoy6nv;
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=u-tokyo.ac.jp (policy=none);
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95118-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-95118-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id AB5C032FFC89
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 10:06:39 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 716E830BF84C
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 10:11:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B5EF8436BC8;
-	Mon,  6 Jul 2026 09:56:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 14050414A22;
+	Mon,  6 Jul 2026 10:04:32 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from zg8tmja5ljk3lje4mi4ymjia.icoremail.net (zg8tmja5ljk3lje4mi4ymjia.icoremail.net [209.97.182.222])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2B7B03F5BD6
-	for <linux-doc@vger.kernel.org>; Mon,  6 Jul 2026 09:56:33 +0000 (UTC)
+Received: from www3579.sakura.ne.jp (www3579.sakura.ne.jp [49.212.243.89])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 21ECC38BF7F;
+	Mon,  6 Jul 2026 10:04:29 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783331800; cv=none; b=c/s+pBrYF7//nTP0biD38WBLTTLS5hptC2/Ii1jyo8CgCQ3RZu0KJgpbA6Oz4g7kVTQfz6Tpg4TOQPNsVIztvcQ1DL8xVcsVPscV3n9sebgDjqE2fGNmaEMrdWem+q+c7fL5UhIk5lzLc7pBT5FsP+tDNQEdAyIMs7uSe1JKsg8=
+	t=1783332271; cv=none; b=uioCRsH3d2K/y+ljc+yex5jDj9fLAeLptothtPJQ8fDO13roWuBrvfa4BbKAVlYDEqs0M0/8DMp63DmB72BVk/8KIzoi7JiP6gB+YOjE/fMUQsMhpxEXphPYuLvKikZ764uclSfkJYra67ldEeTiF0JZAoUJACIH32S2wiU4504=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783331800; c=relaxed/simple;
-	bh=7d2sBhZFr4GG0CEGXF6QEtzWN0nIY3LgOoQnzBz7UQ4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=rn8pN617xMz3Of4hJRNN5OjVbuC+UZudFgdYXTPauCTP6UzzTfgQPQADIVK9jv44YZfssli1lwKrpvVIrkL6u1WTbe6Du45rzt0m0vOomGmaLAljfAbyfyncoy6i0k7eBzzx2Fd8lotf+7xuY7soKZofRY+c/OmU3gN82cU0lmM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=hust.edu.cn; spf=pass smtp.mailfrom=hust.edu.cn; arc=none smtp.client-ip=209.97.182.222
-Received: from hust.edu.cn (unknown [172.16.0.50])
-	by app2 (Coremail) with SMTP id HwEQrAAn_jSre0tqtw9XAA--.35221S2;
-	Mon, 06 Jul 2026 17:55:55 +0800 (CST)
-Received: from [100.81.40.43] (unknown [10.12.191.55])
-	by gateway (Coremail) with SMTP id _____wD30BGge0tqqL2aAA--.44846S2;
-	Mon, 06 Jul 2026 17:55:45 +0800 (CST)
-Message-ID: <7f339754-ca9a-4b90-80cb-d225b402daf6@hust.edu.cn>
-Date: Mon, 6 Jul 2026 17:55:42 +0800
+	s=arc-20240116; t=1783332271; c=relaxed/simple;
+	bh=YTaUOgt4RHyMQMOgs+n4nh7xY1jL3z6GlzYKPwU9O1A=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=i/pMwtBJwblgah558Kq2GmNSbU2cnc9G7cPNxJqFeZ2kYbeHg3WuZeP5X/WbSxz6emWcBlsJO0/TBJgY0mbyDUi4drd6TGpEAw2SRaZeB16uNoYynB1iCI5zqv3cB7+dfEHl0pWJucbRgtzVjAHFJkSfqhyCR8P8XeGXhrO28fA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rsg.ci.i.u-tokyo.ac.jp; spf=pass smtp.mailfrom=rsg.ci.i.u-tokyo.ac.jp; dkim=fail (0-bit key) header.d=rsg.ci.i.u-tokyo.ac.jp header.i=@rsg.ci.i.u-tokyo.ac.jp header.b=UQOoy6nv reason="key not found in DNS"; arc=none smtp.client-ip=49.212.243.89
+Received: from h183.csg.ci.i.u-tokyo.ac.jp (h183.csg.ci.i.u-tokyo.ac.jp [133.11.54.183])
+	(authenticated bits=0)
+	by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 666A3TQ3013128
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+	Mon, 6 Jul 2026 19:03:43 +0900 (JST)
+	(envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
+DKIM-Signature: a=rsa-sha256; bh=u9ylCnyhodN1ABO4bi2JZj59coCy9WQ2YLNSBMgoIis=;
+        c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
+        h=From:Message-Id:To:Subject:Date;
+        s=rs20250326; t=1783332223; v=1;
+        b=UQOoy6nvYHKBsdWzumgQytbv3x0zNPPfjDpWb5TNf7lxZyQ1iG4Nas7wg+ig90Sh
+         +vYHlj0QeDkuM0mDFC07QrB7o7u4b2zuUv4u0CqgzumbWYai5EsUJHYlV2PWkHqY
+         iuiSqnhVeOaNyzIPVLK6lJvyANfay16QHSwiWiVcNjQ6fNIhQu9IGelFE4QxVftE
+         k/uPp3XIZoOGwTmmnI8gNBHOiuF6Y2qv5RfFyOUUd6rhVqWAeXhWRt6nUab9iD03
+         a44iMO5Vo1JIAdUPCUIrkgDkapkjysMW8i++IPYcOC4cSd8k+S9UizXiQxxZnm4E
+         AYHWOdoqEYzm69FbFlS2JA==
+From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+Subject: [PATCH v8 0/7] KVM: arm64: PMU: Use multiple host PMUs
+Date: Mon, 06 Jul 2026 19:03:23 +0900
+Message-Id: <20260706-hybrid-v8-0-de459617b59d@rsg.ci.i.u-tokyo.ac.jp>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [alexs:docs-next 3/7] htmldocs: Warning:
- Documentation/translations/zh_CN/how-to.rst references a file that doesn't
- exist: Documentation/translations/zh_CN/xxx.rst
-To: kernel test robot <lkp@intel.com>
-Cc: oe-kbuild-all@lists.linux.dev, Alex Shi <alexs@kernel.org>,
- Yanteng Si <si.yanteng@linux.dev>, linux-doc@vger.kernel.org
-References: <202607061141.fmjoYjew-lkp@intel.com>
-From: Dongliang Mu <dzm91@hust.edu.cn>
-In-Reply-To: <202607061141.fmjoYjew-lkp@intel.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-CM-TRANSID:HwEQrAAn_jSre0tqtw9XAA--.35221S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxCw13Zw13Aw1kJryDXw1xAFb_yoW5WF4xpa
-	yjkF1xKF1rAr18K3y0gr12gr1xua4Iqay3GFyqqwnYqFs0vwnayr1akryqqa9xtrZ2qFWY
-	qFWIgrW0qryDu37anT9S1TB71UUUUjUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUmYb7Iv0xC_tr1lb4IE77IF4wAFc2x0x2IEx4CE42xK8VAvwI8I
-	cIk0rVWrJVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjx
-	v20xvE14v26w1j6s0DM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4UJVWxJr1l84ACjcxK
-	6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1ln4kS14v26r
-	1Y6r17M2vYz4IE04k24VAvwVAKI4IrM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI
-	12xvs2x26I8E6xACxx1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj64x0Y40En7xvr7AKxV
-	W8Jr0_Cr1UMcIj6x8ErcxFaVAv8VW8uFyUJr1UMcIj6xkF7I0En7xvr7AKxVW8Jr0_Cr1U
-	McvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwCF04k20xvY0x0EwIxGrwCF04k20x
-	vE74AGY7Cv6cx26r4fZr1UJr1l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1l4IxYO2xFxVAFwI0_
-	Jrv_JF1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1V
-	AY17CE14v26r126r1DMIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAI
-	cVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42
-	IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIev
-	Ja73UjIFyTuYvjxUV9N3UUUUU
-X-CM-SenderInfo: asqsiiirqrkko6kx23oohg3hdfq/
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/33Ry27CMBAF0F9BWdeRHxM/WPEfVRe2ZwxuBaFJi
+ IgQ/14TRGBTltfyHF+NL1VPXaa+Wq8uVUdj7nN7KMF+rKq484ctsYwlV5LLhksJbDeFLiPjApu
+ UwBCirMrlY0cpn2fo8+ueO/o9FW+4H1bB98Riu9/nYb0SRNKgj4EajICUwArjAK1zqE3gCI3h3
+ EF1s3a5H9pumjuOYsbmOkq4R51RMMEAhUcvOBnebNBPh3yuy4OzMcrnnOV6mZOMM6618BSVTzZ
+ uun5bx1zn+sSG9mdqax/r7+PdUA9Dl1U0i6GKAZpsIim5tfytAU9DCbMYUIyAWoaIYDXAW6N5G
+ iDEYjQ3g4MKgC6Bo7eGfjXUYuhikHFoNE8mifDWMK+GXQxTDBmSch7LH4b0r3G9Xv8AO8RVVIE
+ CAAA=
+X-Change-ID: 20250224-hybrid-01d5ff47edd2
+To: Marc Zyngier <maz@kernel.org>, Oliver Upton <oupton@kernel.org>,
+        Joey Gouly <joey.gouly@arm.com>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Zenghui Yu <yuzenghui@huawei.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>, Kees Cook <kees@kernel.org>,
+        "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+        Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <shuah@kernel.org>, Shuah Khan <skhan@linuxfoundation.org>
+Cc: linux-arm-kernel@lists.infradead.org, kvmarm@lists.linux.dev,
+        linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org,
+        devel@daynix.com, kvm@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kselftest@vger.kernel.org,
+        Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+X-Mailer: b4 0.16-dev-925f5
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.46 / 15.00];
+X-Spamd-Result: default: False [-1.36 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[u-tokyo.ac.jp : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-95114-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[22];
 	RCVD_TLS_LAST(0.00)[];
-	DMARC_NA(0.00)[hust.edu.cn];
-	FORGED_RECIPIENTS(0.00)[m:lkp@intel.com,m:oe-kbuild-all@lists.linux.dev,m:alexs@kernel.org,m:si.yanteng@linux.dev,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[dzm91@hust.edu.cn,linux-doc@vger.kernel.org];
+	FORWARDED(0.00)[lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-95118-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:maz@kernel.org,m:oupton@kernel.org,m:joey.gouly@arm.com,m:suzuki.poulose@arm.com,m:yuzenghui@huawei.com,m:catalin.marinas@arm.com,m:will@kernel.org,m:kees@kernel.org,m:gustavoars@kernel.org,m:pbonzini@redhat.com,m:corbet@lwn.net,m:shuah@kernel.org,m:skhan@linuxfoundation.org,m:linux-arm-kernel@lists.infradead.org,m:kvmarm@lists.linux.dev,m:linux-kernel@vger.kernel.org,m:linux-hardening@vger.kernel.org,m:devel@daynix.com,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:odaki@rsg.ci.i.u-tokyo.ac.jp,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	DKIM_TRACE(0.00)[rsg.ci.i.u-tokyo.ac.jp:~];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER(0.00)[odaki@rsg.ci.i.u-tokyo.ac.jp,linux-doc@vger.kernel.org];
+	R_DKIM_PERMFAIL(0.00)[rsg.ci.i.u-tokyo.ac.jp:s=rs20250326];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
-	FORGED_SENDER_FORWARDING(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[dzm91@hust.edu.cn,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	RCVD_COUNT_FIVE(0.00)[5];
-	R_DKIM_NA(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[odaki@rsg.ci.i.u-tokyo.ac.jp,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp,intel.com:email,01.org:url]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[rsg.ci.i.u-tokyo.ac.jp:mid,rsg.ci.i.u-tokyo.ac.jp:from_mime,vger.kernel.org:from_smtp,u-tokyo.ac.jp:email,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 4EF4D70F370
+X-Rspamd-Queue-Id: E82D370F3C6
 
+On a heterogeneous arm64 system, KVM's PMU emulation is based on the
+features of a single host PMU instance. When a vCPU is migrated to a
+pCPU with an incompatible PMU, counters such as PMCCNTR_EL0 stop
+incrementing.
 
-On 7/6/26 5:45 PM, kernel test robot wrote:
-> tree:   https://git.kernel.org/pub/scm/linux/kernel/git/alexs/linux.git docs-next
-> head:   bc2e3e1124b7362f83c5fb8557274bbca3da1a74
-> commit: 359c3caf50481aa08b0ab761436e4b70ad027f73 [3/7] docs/zh_CN: restructure how-to.rst patch submission workflow
-> compiler: clang version 22.1.8 (https://github.com/llvm/llvm-project ca7933e47d3a3451d81e72ac174dcb5aa28b59d1)
-> docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
-> reproduce: (https://download.01.org/0day-ci/archive/20260706/202607061141.fmjoYjew-lkp@intel.com/reproduce)
->
-> If you fix the issue in a separate patch/commit (i.e. not just a new version of
-> the same patch/commit), kindly add following tags
-> | Reported-by: kernel test robot <lkp@intel.com>
-> | Closes: https://lore.kernel.org/oe-kbuild-all/202607061141.fmjoYjew-lkp@intel.com/
->
-> All warnings (new ones prefixed by >>):
->
->     Warning: Documentation/translations/zh_CN/doc-guide/parse-headers.rst references a file that doesn't exist: Documentation/userspace-api/media/Makefile
->     Warning: Documentation/translations/zh_CN/filesystems/gfs2-glocks.rst references a file that doesn't exist: Documentation/filesystems/gfs2-glocks.rst
->     Warning: Documentation/translations/zh_CN/filesystems/gfs2-uevents.rst references a file that doesn't exist: Documentation/filesystems/gfs2-uevents.rst
->     Warning: Documentation/translations/zh_CN/filesystems/gfs2.rst references a file that doesn't exist: Documentation/filesystems/gfs2.rst
->     Warning: Documentation/translations/zh_CN/how-to.rst references a file that doesn't exist: Documentation/xxx/xxx.rst
->>> Warning: Documentation/translations/zh_CN/how-to.rst references a file that doesn't exist: Documentation/translations/zh_CN/xxx.rst
+Although this behavior is permitted by the architecture, Windows does
+not handle it gracefully and may crash with a division-by-zero error.
 
+The current workaround requires VMMs to pin vCPUs to a set of pCPUs
+that share a compatible PMU. This is difficult to implement correctly in
+QEMU/libvirt, where pinning occurs after vCPU initialization, and it
+also restricts the guest to a subset of available pCPUs.
 
-The above two references are intended as demos, other than typos.
+This patch introduces the KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY
+attribute. If set, PMUv3 will be emulated without programmable event
+counters. KVM will be able to run VCPUs on any physical CPUs with a
+compatible hardware PMU.
 
-Dongliang Mu
+This allows Windows guests to run reliably on heterogeneous systems
+without crashing, even without vCPU pinning, and enables VMMs to
+schedule vCPUs across all available pCPUs, making full use of the host
+hardware.
 
+A QEMU patch that demonstrates the usage of the new attribute is
+available at:
+https://lore.kernel.org/qemu-devel/20260706-kvm-v4-1-089cac8c25c3@rsg.ci.i.u-tokyo.ac.jp/
+("[PATCH RFC v4] target/arm/kvm: Choose PMU backend")
 
->     Warning: Documentation/translations/zh_CN/networking/xfrm_proc.rst references a file that doesn't exist: Documentation/networking/xfrm_proc.rst
->     Warning: Documentation/translations/zh_CN/scsi/scsi_mid_low_api.rst references a file that doesn't exist: Documentation/Configure.help
->     Warning: MAINTAINERS references a file that doesn't exist: Documentation/ABI/testing/sysfs-platform-ayaneo
->     Warning: MAINTAINERS references a file that doesn't exist: Documentation/devicetree/bindings/display/bridge/megachips-stdpxxxx-ge-b850v3-fw.txt
->     Warning: arch/powerpc/sysdev/mpic.c references a file that doesn't exist: Documentation/devicetree/bindings/powerpc/fsl/mpic.txt
->
-> --
-> 0-DAY CI Kernel Test Service
-> https://github.com/intel/lkp-tests/wiki
+Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+---
+Changes in v8:
+- Added patch
+  "KVM: arm64: Disallow vPMU when pPMUs do not cover all CPUs".
+- Split patch "KVM: arm64: PMU: Introduce FIXED_COUNTERS_ONLY".
+- Documented the FEAT_PMUv3_ICNTR support plan.
+- Ensured KVM_ARM_VCPU_PMU_V3_FILTER and
+  KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY are mutually exclusive.
+- Ensured KVM_ARM_VCPU_PMU_V3_SET_PMU and
+  KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY are mutually exclusive.
+- Dropped the code to support KVM_ARM_VCPU_PMU_V3_SET_NR_COUNTERS for
+  KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY.
+- Added a function to de-duplicate
+  "test_bit(KVM_ARCH_FLAG_PMU_V3_FIXED_COUNTERS_ONLY, ...)".
+- Link to v7: https://lore.kernel.org/r/20260418-hybrid-v7-0-2bf39ad009bf@rsg.ci.i.u-tokyo.ac.jp
+
+Changes in v7:
+- Fixed the vCPU run hang in test_fixed_counters_only().
+- Link to v6: https://lore.kernel.org/r/20260413-hybrid-v6-0-e79d760f7f1b@rsg.ci.i.u-tokyo.ac.jp
+
+Changes in v6:
+- Removed WARN_ON_ONCE() in kvm_pmu_create_perf_event(). It can be
+  triggered in kvm_arch_vcpu_load() before it checks supported_cpus.
+- Removed an extra lockdep assertion in kvm_arm_pmu_v3_get_attr().
+- Fixed error messages in test_fixed_counters_only().
+- Fixed the vCPU run in test_fixed_counters_only().
+- Link to v5: https://lore.kernel.org/r/20260411-hybrid-v5-0-b043b4d9f49e@rsg.ci.i.u-tokyo.ac.jp
+
+Changes in v5:
+- Rebased.
+- Fixed the order to clear KVM_ARCH_FLAG_PMU_V3_FIXED_COUNTERS_ONLY in
+  kvm_arm_pmu_v3_set_pmu().
+- Fixed the setting of KVM_ARM_VCPU_PMU_V3_IRQ in
+  test_fixed_counters_only().
+- Changed to WARN_ON_ONCE() when kvm_pmu_probe_armpmu() returns NULL in
+  kvm_pmu_create_perf_event(), which is no longer supposed to happen.
+- Link to v4: https://lore.kernel.org/r/20260317-hybrid-v4-0-bd62bcd48644@rsg.ci.i.u-tokyo.ac.jp
+
+Changes in v4:
+- Extracted kvm_pmu_enabled_counter_mask() into a separate patch.
+- Added patch "KVM: arm64: PMU: Protect the list of PMUs with RCU".
+- Merged KVM_REQ_CREATE_PMU into KVM_REQ_RELOAD_PMU.
+- Added a check to avoid unnecessary KVM_REQ_RELOAD_PMU requests.
+- Dropped the change to avoid setting kvm_arm_set_default_pmu() when
+  KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY is not set.
+- Link to v3: https://lore.kernel.org/r/20260225-hybrid-v3-0-46e8fe220880@rsg.ci.i.u-tokyo.ac.jp
+
+Changes in v3:
+- Renamed the attribute to KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY.
+- Changed to request the creation of perf counters when loading vCPU.
+- Link to v2: https://lore.kernel.org/r/20250806-hybrid-v2-0-0661aec3af8c@rsg.ci.i.u-tokyo.ac.jp
+
+Changes in v2:
+- Added the KVM_ARM_VCPU_PMU_V3_COMPOSITION attribute to opt in the
+  feature.
+- Added code to handle overflow.
+- Link to v1: https://lore.kernel.org/r/20250319-hybrid-v1-1-4d1ada10e705@daynix.com
+
+---
+Akihiko Odaki (7):
+      KVM: arm64: Disallow vPMU when pPMUs do not cover all CPUs
+      KVM: arm64: PMU: Protect the list of PMUs with RCU
+      KVM: arm64: PMU: Pass the pPMU to kvm_map_pmu_event()
+      KVM: arm64: PMU: Pass the target CPU to kvm_pmu_probe_armpmu()
+      KVM: arm64: PMU: Implement fixed-counters-only emulation
+      KVM: arm64: PMU: Introduce FIXED_COUNTERS_ONLY
+      KVM: arm64: selftests: Test PMU_V3_FIXED_COUNTERS_ONLY
+
+ Documentation/virt/kvm/devices/vcpu.rst            |  32 +++-
+ arch/arm64/include/asm/kvm_host.h                  |   4 +
+ arch/arm64/include/uapi/asm/kvm.h                  |   1 +
+ arch/arm64/kvm/arm.c                               |  17 +-
+ arch/arm64/kvm/pmu-emul.c                          | 176 +++++++++++++++------
+ include/kvm/arm_pmu.h                              |   8 +-
+ .../selftests/kvm/arm64/vpmu_counter_access.c      | 152 +++++++++++++++---
+ 7 files changed, 303 insertions(+), 87 deletions(-)
+---
+base-commit: 1ee27dacbe5dc4def481794d899d67b0d4570094
+change-id: 20250224-hybrid-01d5ff47edd2
+
+Best regards,
+--  
+Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 
 
