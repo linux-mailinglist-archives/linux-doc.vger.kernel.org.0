@@ -1,84 +1,84 @@
-Return-Path: <linux-doc+bounces-95024-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95025-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id HPYIJecjS2p1MQEAu9opvQ
-	(envelope-from <linux-doc+bounces-95024-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 05:41:27 +0200
+	id CupfFWUmS2rLMQEAu9opvQ
+	(envelope-from <linux-doc+bounces-95025-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 05:52:05 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF7B370C5BE
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 05:41:26 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9BBA470C5F5
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 05:52:04 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=Irmwrz+v;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=mwK2hdw0;
 	dmarc=pass (policy=none) header.from=gmail.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95024-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95024-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95025-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95025-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id DBE643009F13
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 03:41:25 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 2666330037E7
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 03:52:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 712B83AA9D4;
-	Mon,  6 Jul 2026 03:41:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4E4E434FF74;
+	Mon,  6 Jul 2026 03:52:02 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35DF3381AF
-	for <linux-doc@vger.kernel.org>; Mon,  6 Jul 2026 03:41:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10A6A13B7A3
+	for <linux-doc@vger.kernel.org>; Mon,  6 Jul 2026 03:52:00 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783309283; cv=none; b=pU+XJnT5tfClJOhIk1sqBCriW4dKkqRs721DFycVV6/wzcP+eCl9ivQ+3sJFiPG/Yw+OjZnPAnwskUx6C2KtZkJ+SPynGR8oATVgoUTZ6gMYv6tg2noe0O1+ny+x+VS4MFIpHVF8sqhKSl5lprVgk8RUUfED9KgsYaIThikB+QA=
+	t=1783309922; cv=none; b=iAEu6VbRpshNKTo+Y3hPuMM1q2bgW4y1Onhc/4QxWMEiBngrcUBzscXMW8y/Q9ndxUY4Z4UFHGZxW1yCClNyvNbvF1KOC0DAlxssth9e1n+i/p+jks72epgTaxCkhMbS0USFP8wztMvbm2fpGaaQEo7XbwGGVfk1AG2d3XLIFWg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783309283; c=relaxed/simple;
-	bh=QDWocMUXj1DjdyDumWeLX3GcsGYAGlap1XzZK5sYEcQ=;
+	s=arc-20240116; t=1783309922; c=relaxed/simple;
+	bh=tbT6LA2EzO8/bVSMdY5KbNbdbbdZ/LoX3mzR939bYzM=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=AC8tJe3h06imvsr1utP2SUCMHIYEpf4yKES4O3udqZ9m6sIQr7g25y7Mzn/MqNo3VRX24bPeTUgj4m9kufAQEZuWgn+Futs6jfllkzW9ReQRyDkHaB58E8uRyFgwsvcPpM/p3F3vDvjeDFOP1Bgmx4glLycQQloV/Rl76k6w9Z4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Irmwrz+v; arc=none smtp.client-ip=209.85.216.54
-Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-37df72c9984so2251272a91.3
-        for <linux-doc@vger.kernel.org>; Sun, 05 Jul 2026 20:41:22 -0700 (PDT)
+	 In-Reply-To:Content-Type; b=ZmnXk3Sw1ISLat8mEIiZAsEW+Bpoj7jRp1Lenwm2HZNazr6mbDmyQW3zuaDs/oP5gXuU25Eu3BlqgIIdJQwuOzPkWFekL4xLAooYd/x6G/ejl+2gu7pi7ZmS9ksMqlRFjvl8SPMJoSbURpcewxSQ7NFmBLVB3hJrnAFMjxi3vns=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=mwK2hdw0; arc=none smtp.client-ip=209.85.214.170
+Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-2cc891373e0so5849335ad.2
+        for <linux-doc@vger.kernel.org>; Sun, 05 Jul 2026 20:52:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783309281; x=1783914081; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1783309920; x=1783914720; darn=vger.kernel.org;
         h=content-transfer-encoding:in-reply-to:content-language:from
          :references:cc:to:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=4xI2vNstjAg1+oCGXkBzd/Bl6APC2mTL6Vz9VUuJT38=;
-        b=Irmwrz+vWchzb/iQmZdxmf6pSI/DHQw+qqVtQdWNI+j3Jiuz8jr1nv0BA4RQ4hR5Uh
-         Y3NTHdWe1ZiUnX0+T0/N4kHUMHthz2hgG3P/HOcB+dN4x5N7orOUqlYu6NGoQi3aTRaO
-         xIQX5iSL7TBKo/RT+sQxqPw/bo9w5+GSIWwJcvrrz4KVImfaMn8apfcLshwhhhwr/9yR
-         VROgG4KL3TptQkcAy2c4lFhVRMvBjYvh/vmxfCsykqw/c97rTZOXn5dGohE1sFMK7ZhA
-         B/3dBAQvbTIX9/n3RiuQ0iqw3OajG8LmCAu3uW6qJhAThGO42sCsCvDZ+oMS4ANJpR+S
-         vvqw==
+        bh=c/2hIGD6u2twTzuPmXPfOFFoHUmuJFfDxo8HGJg3xH4=;
+        b=mwK2hdw01BaWxNwhYg+HgCqGtsWnXVA11/kWuSOM8TvZe0BxwBPh+lWsqjOSDk8ldi
+         hE3Z61GGZE+Y/EEk7M008XAiRjYtrSDmKdKgwOAH51GvZ9DbMLCYqQ4KcejmGHG5FPSI
+         Ki5dpLLvYSr01qQORmT3RqpOdlEacevPdrI7ezFcI6pjBm2oeo9UiAItXmJFy2oMUkbE
+         IjF8R3hrFuGkSmtCvEWmAhk1OHsMBkw01r4a9OIROc0l30zRCpGzLl0jtZg3ofn9tLFQ
+         r1tGHSH+BmCQh5nLBs6PLV5S/KLojf+ZdNX0DbS5ZE6DfB1NDD6knm2TVtmS4XZvEMmY
+         0bqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783309281; x=1783914081;
+        d=1e100.net; s=20251104; t=1783309920; x=1783914720;
         h=content-transfer-encoding:in-reply-to:content-language:from
          :references:cc:to:subject:user-agent:mime-version:date:message-id
          :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=4xI2vNstjAg1+oCGXkBzd/Bl6APC2mTL6Vz9VUuJT38=;
-        b=e7xsQBFRy5pcVVWBcwq8OlGVHV85ONlOutB79dO3hZKOJicJeqWF5nXlcCE8IgLpWo
-         ODUO+i+XTVPn1X8MOQCHiE2olh9V7qLOQXgSgtJwL3OKnXNm0Rx3kWg8tom5uM1r1Iq7
-         zCfudH/SERpYsZtA2LJbuac4BUCchQBegKODo2WvwlWOmoPhExqFN9v5cp6LgyFAFTbi
-         mszXwpota3FaD0frQPdRS+ZnNu4kEj265XhgPj8d7BnidZLs/mIFflAV+E2V1jQL0JzF
-         iborGiBbVO1cguL2I6l5rsRB0v+2CjNTMqyYSh5/hQqdDSPnyXpx9ul0NBtsYB8oUMTc
-         o/pA==
-X-Forwarded-Encrypted: i=1; AHgh+RrkxidGNTMVjEegxoJWiJARKJbopLSutrl6yYJix4QuYGRAUooZKQyVQ7c/r378rusL4BHO1GkZwqg=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxXA1YAwrpVnsnhxHD33esWx0z0HcffOiZ721ABsdh1M9ry5cgL
-	IVrSyounryxeWWGU4cO9QecGk3/TyY6ZQKSknfuawKp9T3NmLWjXyihh
-X-Gm-Gg: AfdE7cnNotjAmIF1P5GmWzMPZ1/m24VGIk9ziscr3FxirDyJ2IBqNt3fyyyOdUiQrGq
-	jJ5sibsMd/PGP6ePe6lkCT5/HYedpiqtq0kHP23J/qz8MuHTvIEt2ohqmPoKHMNpIyzzhAAHtio
-	jYPGC151LPetQ5wR+d9UfeSykEQkXhaEff2JM5nC1qcQO2vjeeJi802tI9F8IuMsv5nWR3RQiYI
-	03/Y9pPWih10cW5p1S6JjW3Bg40cItC8w9bbQ3PmKFPl1kDT23WSgd2rjH7FWLZJMZdDw8uwDc+
-	YEeswU5NKtXYCvsmi6+Fwn6ty9c2FYsFREyRbOcj3GhdX2VjbHbxUzgqc/u/HYchdfF5/vz1rI2
-	CZkmpXlvysOzvGMSx6hMerQJmysEpciT3YGJK69NjrAEkddqC1KX1Ioq9uM33vmReZmgSJAGxUi
-	w4MEcvgUHRL4Ce
-X-Received: by 2002:a17:90a:d44f:b0:380:9f17:6df3 with SMTP id 98e67ed59e1d1-382807ae17bmr7926482a91.4.1783309281511;
-        Sun, 05 Jul 2026 20:41:21 -0700 (PDT)
+        bh=c/2hIGD6u2twTzuPmXPfOFFoHUmuJFfDxo8HGJg3xH4=;
+        b=QtUYGr8JkZ89auPx5d2z+aPjF//SjYDfAOxzj/mcjOblwlyN28J8/aNAXLwIAyeAAb
+         RJBfAfydKcXG7KKv0D58BsrmoMEdFmavlwMZcgMSSujsd8b8zNpWpipRWRb4bfErJFkO
+         f0s5+Xf8MmOD5da5JrTieu0sLBwOzDNxYi0iE3qLkBWRTujLrANyw5DDb21twYwRbDux
+         sFUtZK+iEV6s8CHx9xWE135STYqbMVYUyaqauM/gBhuGHXHkdCvFyI3TY290mX5Yb7bj
+         EBtZU66jsarnKx6lXgnIgmQj++KQBck7jSSGTAE8jzahyzOsRaPyIHo5CofgmIWwe6JR
+         lwxw==
+X-Forwarded-Encrypted: i=1; AHgh+RpYwiBBItYNQK12aufSQsY/o/ca7FIFWwJj7jLKUzkdVhKf7o9WH9GNa9ALVsNf8gvMwzw/v7aHdDo=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwO8XFTkenDjdkhiC2RZjNJhxxjkvGj796zqP/xtES0/DXUtlwk
+	RXmRhxObT5VrCODm7rytq26QH8ifu6x36PoYf0VXsIII3nLkI8Ap0P0+
+X-Gm-Gg: AfdE7clUZlmuvFeQO9iBMxFIiaPWcueKH1PgZv0B6DTyqk02g0vSPXATED0nTM8txPb
+	It8+qCYGELrj++ccMjFO3Ob62DTkNN/XHh4W+EU+weknIchEJmf5+FkKTjfCPnYag0nqvkrV963
+	nxYIacDrYcTsZsOXPDgpoFv8Yh1AtQgoZ4PlAAcKlx4Lx+SQepukXXvXgDBDWOUm6LKEBOFByfw
+	8r3VWbiIQbctTOTnGjb5IHYhH4LJJBf72n9e4QhvJx9hGeE494VCluVg1HIz0rtyloKLF2nfj//
+	obW/nK91YtFoLrPwHwLJnChFzTNdNRm+3OPZV9Mr+lj5OC0ozwD18JExKf4ZybqvpldRhLLWzp9
+	YFhIjOKKs76wbVANDDEvjh0dx1hzEGxN7YcJc/Mwj6tvERwV82vNu4BmMQhAub7Jr265ReCXheR
+	5vXUdVDGMeJUnw
+X-Received: by 2002:a17:903:943:b0:2c9:c6f3:457a with SMTP id d9443c01a7336-2cbb9eaae60mr86009405ad.31.1783309920356;
+        Sun, 05 Jul 2026 20:52:00 -0700 (PDT)
 Received: from [192.168.71.21] ([116.6.102.190])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38127c0c17csm4139110a91.6.2026.07.05.20.41.18
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cad77657d6sm40289265ad.45.2026.07.05.20.51.57
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 05 Jul 2026 20:41:21 -0700 (PDT)
-Message-ID: <a7b5f2ab-2249-44c7-8973-f6d668e202fb@gmail.com>
-Date: Mon, 6 Jul 2026 11:41:15 +0800
+        Sun, 05 Jul 2026 20:51:59 -0700 (PDT)
+Message-ID: <d199d200-37bc-437b-94c4-d23b4d1bbe17@gmail.com>
+Date: Mon, 6 Jul 2026 11:51:55 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -86,16 +86,16 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] docs/zh_CN: fix CONFIG_CGROUP typo for CONFIG_CGROUPS
+Subject: Re: [PATCH v2] docs/zh_CN: fix CONFIG_CONPAT typo for CONFIG_COMPAT
 To: Ethan Nelson-Moore <enelsonmoore@gmail.com>,
  Dongliang Mu <dzm91@hust.edu.cn>, Shuah Khan <skhan@linuxfoundation.org>,
- linux-doc@vger.kernel.org
+ Kees Cook <kees@kernel.org>, linux-doc@vger.kernel.org
 Cc: Alex Shi <alexs@kernel.org>, Yanteng Si <si.yanteng@linux.dev>,
  Jonathan Corbet <corbet@lwn.net>
-References: <20260613211300.86016-1-enelsonmoore@gmail.com>
+References: <20260613183737.11434-1-enelsonmoore@gmail.com>
 From: Alex Shi <seakeel@gmail.com>
 Content-Language: en-US
-In-Reply-To: <20260613211300.86016-1-enelsonmoore@gmail.com>
+In-Reply-To: <20260613183737.11434-1-enelsonmoore@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
@@ -103,22 +103,22 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-95024-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:enelsonmoore@gmail.com,m:dzm91@hust.edu.cn,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:alexs@kernel.org,m:si.yanteng@linux.dev,m:corbet@lwn.net,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-95025-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:enelsonmoore@gmail.com,m:dzm91@hust.edu.cn,m:skhan@linuxfoundation.org,m:kees@kernel.org,m:linux-doc@vger.kernel.org,m:alexs@kernel.org,m:si.yanteng@linux.dev,m:corbet@lwn.net,s:lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER(0.00)[seakeel@gmail.com,linux-doc@vger.kernel.org];
 	TO_DN_SOME(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com,hust.edu.cn,linuxfoundation.org,vger.kernel.org];
+	FREEMAIL_TO(0.00)[gmail.com,hust.edu.cn,linuxfoundation.org,kernel.org,vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
 	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
@@ -128,37 +128,39 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	ALIAS_RESOLVED(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
 	FREEMAIL_FROM(0.00)[gmail.com];
-	RCPT_COUNT_SEVEN(0.00)[7];
+	RCPT_COUNT_SEVEN(0.00)[8];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: EF7B370C5BE
+X-Rspamd-Queue-Id: 9BBA470C5F5
 
-Applied, thanks!
+Applied, Thanks!
 
-On 2026/6/14 05:12, Ethan Nelson-Moore wrote:
-> The Simplified Chinese translation of accounting/psi.rst
-> contains a typo CONFIG_CGROUP for CONFIG_CGROUPS. Fix it.
+On 2026/6/14 02:37, Ethan Nelson-Moore wrote:
+> The Simplified Chinese translation of security/self-protection.rst
+> contains a typo CONFIG_CONPAT for CONFIG_COMPAT. Fix it.
 > 
 > Signed-off-by: Ethan Nelson-Moore<enelsonmoore@gmail.com>
 > ---
->   Documentation/translations/zh_CN/accounting/psi.rst | 2 +-
+> Changes in v2: remove unnecessary information from commit message
+> 
+>   Documentation/translations/zh_CN/security/self-protection.rst | 2 +-
 >   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/Documentation/translations/zh_CN/accounting/psi.rst b/Documentation/translations/zh_CN/accounting/psi.rst
-> index a0ddb7bd257c..703bc81ff9be 100644
-> --- a/Documentation/translations/zh_CN/accounting/psi.rst
-> +++ b/Documentation/translations/zh_CN/accounting/psi.rst
-> @@ -148,7 +148,7 @@ psi接口提供的均值即可。
->   Cgroup2接口
->   ===========
+> diff --git a/Documentation/translations/zh_CN/security/self-protection.rst b/Documentation/translations/zh_CN/security/self-protection.rst
+> index 93de9cee5c1a..ad96bb4a4995 100644
+> --- a/Documentation/translations/zh_CN/security/self-protection.rst
+> +++ b/Documentation/translations/zh_CN/security/self-protection.rst
+> @@ -97,7 +97,7 @@ ARCH_OPTIONAL_KERNEL_RWX时的默认设置。
+>   --------------------
 >   
-> -对于CONFIG_CGROUP=y及挂载了cgroup2文件系统的系统，能够获取cgroups内任务的psi。
-> +对于CONFIG_CGROUPS=y及挂载了cgroup2文件系统的系统，能够获取cgroups内任务的psi。
->   此场景下cgroupfs挂载点的子目录包含cpu.pressure、memory.pressure、io.pressure文件，
->   内容格式与/proc/pressure/下的文件相同。
+>   对于64位系统，一种消除许多系统调用最简单的方法是构建时不启用
+> -CONFIG_CONPAT。然而，这种情况通常不可行。
+> +CONFIG_COMPAT。然而，这种情况通常不可行。
 >   
+>   “seccomp”系统为用户空间提供了一种可选功能，提供了一种减少可供
+>   运行中进程使用内核入口点数量的方法。这限制了可以访问内核代码
 > -- 2.43.0
 > 
 
