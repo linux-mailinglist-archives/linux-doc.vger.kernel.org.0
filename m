@@ -1,154 +1,153 @@
-Return-Path: <linux-doc+bounces-95219-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95216-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id VG/hH8zzS2qAdgEAu9opvQ
-	(envelope-from <linux-doc+bounces-95219-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 20:28:28 +0200
+	id 6rZ3Ng/xS2qQdQEAu9opvQ
+	(envelope-from <linux-doc+bounces-95216-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 20:16:47 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4AA4714828
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 20:28:27 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 797D6714617
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 20:16:47 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=bqGnlarD;
-	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=eOkuwFV4;
-	dmarc=pass (policy=reject) header.from=mailbox.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95219-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95219-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=ziepe.ca header.s=google header.b=FehRhRiV;
+	dmarc=none;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95216-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-95216-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 8303430347CD
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 18:25:19 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id E9DB43001D7E
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 18:16:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 46B3E437857;
-	Mon,  6 Jul 2026 18:25:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 54AC841DEF1;
+	Mon,  6 Jul 2026 18:16:45 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qv1-f43.google.com (mail-qv1-f43.google.com [209.85.219.43])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5D9DB3B3C06;
-	Mon,  6 Jul 2026 18:25:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B8C8B400E1F
+	for <linux-doc@vger.kernel.org>; Mon,  6 Jul 2026 18:16:43 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783362317; cv=none; b=pcZ5RnIBsbWqfaH8T7oQHZiBEJPnM+DkJceh8Wuo985g3zOOn5Q7kMTbq2htP4yyKmRui2jGqgOBKsq06o8na5G6pzG70htOi/vCf6+zatJLupr9WwlVS7S6aVR+QO838XxxHHd3lw6No2ZA6VNcBa9KMpMi3OCGdJb5adDVjsY=
+	t=1783361805; cv=none; b=jSBWkdJmDbsoxOODCscYgMbOw60OUKyTbp5KzmKOGCwL+TY15GTZ8mFgd/X4KpeRoZ2HZTkQ5vXEfR+J3t2A9cAejMUqWgNuT7BI9cD1o9CBk6pn3jk7uvW/+ksEo/hkGRwng4VYsrrHkLVM99vna27JQoZcU7SVrwzj2vFA5Js=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783362317; c=relaxed/simple;
-	bh=taPYAofwLO2LNO1f+yUAG53BChJyr0Rqs+YiTqHTSQM=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=k4CO6yxeCN+K6jU6ThxjJdMzX0DGgTJ//Rs5+618opEm1W/UMkl51U2wzQUWzLSieCa3Ig4WT7dLS8neSnoMph/9+HEJk/7gyJpycUA7wQHYyE+FI2CVoQNlSQMwNxnJyC8KKpMdj5XX3ck6XTNoz65DZIfAMXmfgXAtstujVzY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org; spf=pass smtp.mailfrom=mailbox.org; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=bqGnlarD; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=eOkuwFV4; arc=none smtp.client-ip=80.241.56.161
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
-	(No client certificate requested)
-	by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4gvCT51H3gzKn7H;
-	Mon, 06 Jul 2026 20:25:13 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1783362313;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=6dSbBe8D8SlZbGm5NYlJ4nvOYSwjvIyEneEBSZcApDY=;
-	b=bqGnlarDUpX8y/ht/BIcDQ9oRpHiwtA4F3IbUyiye5k6JcBQNj1Vz4TqPQSgT8Kw4/NzLB
-	NFzOqNAB7Ymal9jjJUM1pTEnNURaf1znGHjncyLsgUn24l8Jq8agCkaxiw4PieSFEzL4sx
-	F2VuYfW+qs+SgrHlLpLkwdPxS/pyUauR4DlNsYPO1MrhArQ1VUhOgsuoX1nvRs6345zJIx
-	IbLasNfwqb8QJfjvDzP112mTOwF0Ebr8recoaQFsP8QWi5pBhqGXFKMoL/RMP7gXWEK3Vr
-	9ckIfwUxNZ7JXZ/zo+ERyrLUr0V27E+IDYXi60mJHWy17hA74gwg1DeYnEfHag==
-From: Manuel Ebner <manuelebner@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1783362311;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=6dSbBe8D8SlZbGm5NYlJ4nvOYSwjvIyEneEBSZcApDY=;
-	b=eOkuwFV4Rh00KkMFFCEA2D4Kpbsfk/oGa/sEaN5KCZoQ0GliYxA4EgZti3jIH0EsTcU0oa
-	vw0qLSGZp5YfQVlxbK3H4gDGG8YZAwTwzWgW1i9wDW2tuT50UGm42ieyvifZUZ5inJte35
-	p0I6T3DEH9MGejkxp8/gceyetVca62EWQp9tCXaDExBtk14LTlM694QPeUyuqcTG5HD0s6
-	RCu/H1/4tgy9uMGQcjZBFX2riXJHWSHEdVQ8stDdpW4EBexLO+uaXTl5tixloT/EtBs+zT
-	w5mJqj8curskpEW83FJTizIE+IsKOcUdE6ZjBDKtC5D2kICGi8UN9+P9GbJSig==
-To: Andreas Noever <andreas.noever@gmail.com>,
-	Mika Westerberg <westeri@kernel.org>,
-	Yehezkel Bernat <YehezkelShB@gmail.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Rajmohan Mani <rajmohan.mani@intel.com>
-Cc: Manuel Ebner <manuelebner@mailbox.org>,
-	Mika Westerberg <mika.westerberg@linux.intel.com>,
-	linux-usb@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH] docs: admin-guide: thunderbolt: fix sentence structure
-Date: Mon,  6 Jul 2026 20:14:30 +0200
-Message-ID: <20260706181429.264791-3-manuelebner@mailbox.org>
+	s=arc-20240116; t=1783361805; c=relaxed/simple;
+	bh=XBxMi0JruZRfOpKBpk8TTN47HygeQas2rW6X95AsLZ4=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=JzIFiMgTJMLTcQbi1OPWzcwHd6Xv2ZSbnFAJDcDPkn+JEUWZzXibfX2T1T9QAQ5gzsGT/baYlDB3SMCu9mTNuEmXrVu4VqYOLa+AnMYSGQEnJGBibU6cgfgPxkhDfgXzUpXG1v9/g5jlQCOXnyN1D4o9beavUl5zFEbv5yDKBqI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca; spf=pass smtp.mailfrom=ziepe.ca; dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b=FehRhRiV; arc=none smtp.client-ip=209.85.219.43
+Received: by mail-qv1-f43.google.com with SMTP id 6a1803df08f44-8eeadbc5e21so23704556d6.3
+        for <linux-doc@vger.kernel.org>; Mon, 06 Jul 2026 11:16:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ziepe.ca; s=google; t=1783361803; x=1783966603; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=XBxMi0JruZRfOpKBpk8TTN47HygeQas2rW6X95AsLZ4=;
+        b=FehRhRiViCRvs6KWCYlxLKVPllj/RBP1vFb7kDLqghWhOb/EXWfAnu0dE/lldlDRce
+         Zl+VyEuaWEYXPqq97wk2nLqiifcGBWzhrmkmitr5tErtWIEi0REw7ZVuk1Vun4PgjQOV
+         yXySEw97AeYeQkdU3B6TEOUgO7zYAbEIOLD+yOuMCkoc4blTkC5hwgZu7y+85EJo5QDn
+         d2Uk0veJHIQYlJx+VL38M2KkXmAsdd8G7vvAAmII5uEimL8ou8Wnz5gI3W6QRbO4V1EW
+         tHs/SEM7aWrpytcfgNBa3ab8RBbECpq0XwhES/0eFbJuPYCNcITIp27aMdE3zPQqzwiZ
+         6SiQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783361803; x=1783966603;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=XBxMi0JruZRfOpKBpk8TTN47HygeQas2rW6X95AsLZ4=;
+        b=KlhZcvENdprfigDnPGuzR/UcGUXiZpuJ6omMQ75TYdgBKd1hCdRWhljw8B2h2ZH9TZ
+         NAS0kmv//d0NN//2E8kljSatIHdVuT7bDRcoltHRxeY6a3SzfrkamV3/DtyUStPUyULl
+         9eCGr24b+XBbCJA2fTuRD9aaC1H+Ekm/MFpWx0vburuNmj7BsqYj0rNv8txR/nPSJ/1J
+         /CvXbjDvVBv3SbE5Gag3nrv7wr1AjDJ5nv7Ft8EpKLCSJjdPcmcdKwFpLwie2JMUjnB/
+         rrgU/VwhVToXSbafKgcqh5imUpxW6Y9gqjd0yaKHeaylWBCoxP5CUp34XqZYQDz2/XMX
+         pTjg==
+X-Forwarded-Encrypted: i=1; AHgh+Rq0V5FI4HdZsj1kjDylnN9k1YwmAGOP/9J7oG57EsBBqxtXTGXYqUdvmhdIqqM/vDKS5YLvZn7Njkw=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy73gDEeJvR+duCukGnxgJMxdbj/lWaklQCPOMhza7sQSIbBoqp
+	K+yF5BPg6cAJKK//RlY+GGC2YKON/14FfD8B6mx/Zu03ZXO46XGi6kDWcJB0ESKbDEA=
+X-Gm-Gg: AfdE7cn082WkiFixtR6edfNbUa3VQlqnhgO97DuH+y95JNlXsmNfZKuaJktpikn/MPn
+	RdkYwOPafTR8R6CMM9xQtFOXdFTIeFNf95PrM9Vz526C6szuHqr9+VNN642TEREtJTj8onk0Ydm
+	PNACnfuZ5tM1ZO1okE5hBtBYbCaub6bd8JQZfTVqgaOTq3O40+nJg5LEjXR+Hj2B9BkymCzuCrP
+	GBvks8f7lPAtBBVJ4ZjLMYFL5B0Zi1aJXxUDonkK3OAH1w+l3ogxwIHZh/PaN+SijXqPVe4kruc
+	ip/IiC3LGbMvv4zizdFJ/GIMQJUpG00ZJAZmE4FJc2gqHs7ycdodlIv2ucUPgKtLK7AYu1pHDCc
+	SXe6VIsv5iEDvM2u7LXEzohYSiBEynBHJU9fEMXANzi/57L0wkpa70MpuIh6MXyuj6V7w/Hs=
+X-Received: by 2002:a05:6214:226b:b0:8ee:b05c:596d with SMTP id 6a1803df08f44-8fcb336e9fbmr21380346d6.22.1783361802525;
+        Mon, 06 Jul 2026 11:16:42 -0700 (PDT)
+Received: from ziepe.ca ([159.2.72.92])
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-8f4724b9ff8sm139929466d6.40.2026.07.06.11.16.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 06 Jul 2026 11:16:42 -0700 (PDT)
+Received: from jgg by wakko with local (Exim 4.97)
+	(envelope-from <jgg@ziepe.ca>)
+	id 1wgns0-00000000dbb-1jFq;
+	Mon, 06 Jul 2026 15:16:40 -0300
+Date: Mon, 6 Jul 2026 15:16:40 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Stanislav Kinsburskii <skinsburskii@gmail.com>
+Cc: Liam.Howlett@oracle.com, akpm@linux-foundation.org, david@kernel.org,
+	corbet@lwn.net, leon@kernel.org, ljs@kernel.org, mhocko@suse.com,
+	rppt@kernel.org, shuah@kernel.org, skhan@linuxfoundation.org,
+	surenb@google.com, vbabka@kernel.org, kys@microsoft.com,
+	haiyangz@microsoft.com, wei.liu@kernel.org, decui@microsoft.com,
+	longli@microsoft.com, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
+	linux-mm@kvack.org, linux-hyperv@vger.kernel.org
+Subject: Re: [PATCH v6 4/4] mshv: Use hmm_range_fault_unlocked() for region
+ faults
+Message-ID: <20260706181640.GC118978@ziepe.ca>
+References: <178336023903.504354.7500950448226027718.stgit@skinsburskii>
+ <178336052192.504354.1841795575701703197.stgit@skinsburskii>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: d7103e3ad656f128414
-X-MBO-RS-META: sw1sis8iopkgco4gnnnxekm7of1jfbsc
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <178336052192.504354.1841795575701703197.stgit@skinsburskii>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.84 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[mailbox.org,reject];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[mailbox.org:s=mail20150812];
+	R_DKIM_ALLOW(-0.20)[ziepe.ca:s=google];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	FORGED_RECIPIENTS(0.00)[m:skinsburskii@gmail.com,m:Liam.Howlett@oracle.com,m:akpm@linux-foundation.org,m:david@kernel.org,m:corbet@lwn.net,m:leon@kernel.org,m:ljs@kernel.org,m:mhocko@suse.com,m:rppt@kernel.org,m:shuah@kernel.org,m:skhan@linuxfoundation.org,m:surenb@google.com,m:vbabka@kernel.org,m:kys@microsoft.com,m:haiyangz@microsoft.com,m:wei.liu@kernel.org,m:decui@microsoft.com,m:longli@microsoft.com,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-mm@kvack.org,m:linux-hyperv@vger.kernel.org,s:lists@lfdr.de];
+	DMARC_NA(0.00)[ziepe.ca];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-95219-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:andreas.noever@gmail.com,m:westeri@kernel.org,m:YehezkelShB@gmail.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:gregkh@linuxfoundation.org,m:rajmohan.mani@intel.com,m:manuelebner@mailbox.org,m:mika.westerberg@linux.intel.com,m:linux-usb@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:andreasnoever@gmail.com,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[manuelebner@mailbox.org,linux-doc@vger.kernel.org];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_TO(0.00)[gmail.com,kernel.org,lwn.net,linuxfoundation.org,intel.com];
-	DKIM_TRACE(0.00)[mailbox.org:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[manuelebner@mailbox.org,linux-doc@vger.kernel.org];
+	FREEMAIL_TO(0.00)[gmail.com];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORGED_SENDER(0.00)[jgg@ziepe.ca,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	TAGGED_FROM(0.00)[bounces-95216-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	DKIM_TRACE(0.00)[ziepe.ca:+];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp,mailbox.org:from_mime,mailbox.org:email,mailbox.org:mid,mailbox.org:dkim]
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[jgg@ziepe.ca,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: E4AA4714828
+X-Rspamd-Queue-Id: 797D6714617
 
-Replace ')' with ',' and add 'is' to sentence.
+On Mon, Jul 06, 2026 at 10:55:21AM -0700, Stanislav Kinsburskii wrote:
+> Convert mshv_region_hmm_fault_and_lock() to use
+> hmm_range_fault_unlocked() instead of taking mmap_read_lock() around
+> hmm_range_fault() directly.
 
-Fixes: 3fb10ea4ce86 ("thunderbolt: Add support for retimer NVM upgrade when there is no link")
-Signed-off-by: Manuel Ebner <manuelebner@mailbox.org>
----
- Documentation/admin-guide/thunderbolt.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Please convert all the trivial users too, thanks
 
-diff --git a/Documentation/admin-guide/thunderbolt.rst b/Documentation/admin-guide/thunderbolt.rst
-index 91a6cb109988..ff25fe853706 100644
---- a/Documentation/admin-guide/thunderbolt.rst
-+++ b/Documentation/admin-guide/thunderbolt.rst
-@@ -294,8 +294,8 @@ for the retimers::
- 
- This enumerates and adds the on-board retimers. Now retimer NVM can be
- upgraded in the same way than with cable connected (see previous
--section). However, the retimer is not disconnected as we are offline
--mode) so after writing ``1`` to ``nvm_authenticate`` one should wait for
-+section). However, the retimer is not disconnected as we are in offline
-+mode, so after writing ``1`` to ``nvm_authenticate`` one should wait for
- 5 or more seconds before running rescan again::
- 
-   # echo 1 > /sys/bus/thunderbolt/devices/0-0/usb4_port1/rescan
--- 
-2.54.0
-
+Jason
 
