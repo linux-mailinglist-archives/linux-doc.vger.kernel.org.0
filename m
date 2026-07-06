@@ -1,150 +1,224 @@
-Return-Path: <linux-doc+bounces-95189-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95191-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id nb0HC2LcS2pVbgEAu9opvQ
-	(envelope-from <linux-doc+bounces-95189-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 18:48:34 +0200
+	id gVq4GRryS2r6dQEAu9opvQ
+	(envelope-from <linux-doc+bounces-95191-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 20:21:14 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF7197137D7
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 18:48:33 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id B2A397146DF
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 20:21:13 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=mBIeOIrQ;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95189-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-95189-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=gmail.com header.s=20251104 header.b="X/nx5YcL";
+	dmarc=none;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95191-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95191-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 800A83043EED
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 16:23:54 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 55283312DE77
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 16:33:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1F3E43ADBB4;
-	Mon,  6 Jul 2026 16:23:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 01C4A3FB7D2;
+	Mon,  6 Jul 2026 16:33:37 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1493825A359;
-	Mon,  6 Jul 2026 16:23:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 200633E121D
+	for <linux-doc@vger.kernel.org>; Mon,  6 Jul 2026 16:33:34 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783355031; cv=none; b=jHTqFHHqgDvdMjDpwaBRgg+9ozWA46/CkKDZgyQJaHQSouG5nvQqXSQxoL5QW+tcokfzxNmyvSAYeR26bM5+G0bVwB8Mr4h1RPAVZf5pbKA9/Ng8Fr+vimqmjn9MA/4/RHj7TJi3K/0X3CIPcuNna7MTtKk/WFLdqlyk2B9sTdg=
+	t=1783355616; cv=none; b=hPoowK2uXUuf1GIfgCSvGp8f7hNoPBhIJmal7bJWNeC7MuM8V35jHN93Zdv6yETbHCye//O5goXr/nOeu8lkQK4re+WEmGMGXO+8wPnWnIDB5GqFHZoCauIp+R46N86vsLJVQfPwAHoWn/jpOembgtqGdPdSDvuJWvte+epS3S4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783355031; c=relaxed/simple;
-	bh=GcZm7hTREYj/AH08uyg2/jGONo0jqSBiDWmPpkmxnrk=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=DTH1hQzVT1rQQ6DVIfr437B75qTPpH63V9vAa6fa4ZcA4xgXiktQv7GfDeJCj5cIU/FXsCPcdCS/pLFwrlrK+xS6aspqMq9fJuFnjjMCLzNLqvzHkwSbyblfpYF5DWcDTWCblgfbIpQakgR+x4ntdb/m1nqTRHWS5aY8/BKruV8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mBIeOIrQ; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3B4EB1F000E9;
-	Mon,  6 Jul 2026 16:23:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783355030;
-	bh=7wHt8+HkNGnM0KxjsEMNSxKDUZE1xV28kMigSgeCFxA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=mBIeOIrQabVsxIUz+QOTSD9LBsdjsg87Mq8zSzYyUz4LPP7CDEzQ/vXsHMoLDtrgf
-	 dEZt5lYkdRunGlUtVvX95Jdocdjo34KBqgi4ZxbDX/a03zrCfiitxcWoSJOgYkZ92V
-	 z2ZlbKtgb8Yho0Vgdg8LygVvEPOOybAj/HOCNsHkO0ruI4Vzs+jcxnZWNvy8klXH+u
-	 xq327ySGBvoJo4kBrfXUCEsTViLRrJzFefIhUhtjWcLX3SBKMin8qwtSYeR7qVn2F1
-	 pJUdUUmIhUpgmGX42UzmCLbQCclvOhhX5PvmoGVaqj1KFDM7Dahd7c+/BShR/kPSba
-	 iAQ4vh4KfzR9w==
-Date: Mon, 6 Jul 2026 19:23:38 +0300
-From: Mike Rapoport <rppt@kernel.org>
-To: Breno Leitao <leitao@debian.org>
-Cc: Miaohe Lin <linmiaohe@huawei.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	David Hildenbrand <david@kernel.org>,
-	Lorenzo Stoakes <ljs@kernel.org>,
-	Vlastimil Babka <vbabka@kernel.org>,
-	Suren Baghdasaryan <surenb@google.com>,
-	Michal Hocko <mhocko@suse.com>, Shuah Khan <shuah@kernel.org>,
-	Naoya Horiguchi <nao.horiguchi@gmail.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	"Liam R. Howlett" <liam@infradead.org>, lance.yang@linux.dev,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Masami Hiramatsu <mhiramat@kernel.org>,
-	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-	linux-mm@kvack.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
-	linux-trace-kernel@vger.kernel.org, kernel-team@meta.com
-Subject: Re: [PATCH v10 6/6] selftests/mm: add hwpoison-panic destructive test
-Message-ID: <akvWipFuwLt41wOM@kernel.org>
-References: <20260630-ecc_panic-v10-0-c6ed5b62eea2@debian.org>
- <20260630-ecc_panic-v10-6-c6ed5b62eea2@debian.org>
- <akjS7kiGjVwWaWEz@kernel.org>
- <akvSzb0mRSS5aCg_@gmail.com>
+	s=arc-20240116; t=1783355616; c=relaxed/simple;
+	bh=6NMmYy62ZFXZlbxjQZjcsrKWVKzo16auoFFByfnuD1g=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=JxSG1fgHSee2BPr7af8Uo8LqYC8rUyVr7UlEE8UTYjGGfWVB+XCI67fTKH0gUifNI3pFtcamE5gWx2DqB2+quYCM9TOok9GBj3OnXPEcGzSpXdRLCVNWKVUDNh7R7QdXQnoS/YtVS5xlVqteYYQAFGV2wm5366OjAL2xXJFxpr4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=X/nx5YcL; arc=none smtp.client-ip=209.85.214.172
+Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-2cca24023edso16254575ad.1
+        for <linux-doc@vger.kernel.org>; Mon, 06 Jul 2026 09:33:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1783355614; x=1783960414; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to;
+        bh=rxxY2BfHIcCLRUYump74eH/fMlKZQi/IR8VG2OQVFJ4=;
+        b=X/nx5YcL4mtmhlQ/O2jbueNc0xl8UGKK6rlU7Z+w+MJtGVz/q/WVtFUW8qkV00LdVw
+         mVNfImcOHK65jIqUp+kxUuX5lrP+S56fPA0nmnfM3iqcSYFQLJXuv3qY61aoqVgk1i5I
+         nu1EMq5W5xXCIS6k/Dl+BNAwQU2GxI3+7pagGt8W3Mhs+5CNTQ/34Pf/VKIJLSKTWfqP
+         z0zJXj4n3WwxzxQzjm7AdEsrMr+Fis/EYLgvHu1UVRSGhvubIBilQXBx13NPAdfaVAxI
+         uida0+Ehu6w8WNSb0+P7BbX9ijWWpN+Ype/8Sqz1FLlmrJP8L6aaPE/EMkqUDieRL87A
+         4/MQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783355614; x=1783960414;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=rxxY2BfHIcCLRUYump74eH/fMlKZQi/IR8VG2OQVFJ4=;
+        b=XdxQkZCqDNy9B0vbQuFuWqE+oPkS7BpOtuRzQWMumvSO5Y68P8aTF8RUheQdqFyTLb
+         kcbfN3R7bL9lpOEdrQf6yaUQKy2Jyzsx/ao8recZ4e7pIR5TchZH9yyGOiNo3+nUdugv
+         Lh2p4d7vhev7gAthrjgle+Q+6Um5drqKpL0tWUw5PlcjZOGwKwRUZvLGj9w3jz+EGBQY
+         KnvC5FJmmeIz9WkAqSa685u5j+s3p834jlMXOKlSMYfYcJH9rKY0YmjoL5KGnoyTYeok
+         igPMeg6NlWcf1ZyKkFRDkXJyELyqtvXgoX/wiywFaOZTswHabP5CyvLg+vAE14u/BQ7L
+         gAXg==
+X-Forwarded-Encrypted: i=1; AHgh+Rr0xknUL1QytNjlJ3DETplzIymBte+b8HqlkMDJ435vqOdkFcOGoqNmZUu3eA/HfYJZdZtaKco/NM8=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyKDg7CxcqlnR4CSlMtEy08Ru/qsEPs+MGZRyKb3TBLOu7q5nR4
+	lFxlwY7iE8LUieH9KWGY1Aa2uQsclmu/4tcA81Qo00/rY/e2tPIe/P00
+X-Gm-Gg: AfdE7cmAPnWw7YVmXONRxrPSG0u3XwhTbljA7AI8SH/dKN0RbCXxb04+Me1CmY8x9JF
+	r5w3WO/K1tI8vpTxE2cPh1gM3QMuIuGIUqLfwUw9I7+4sDYSpYxLzHNb1Zkwm1g9bUA74+4fEXO
+	9onXo2wO8wCjIElPbPh3hoEj0rl0Ocv8mxMeA4+V0m2HfhTLsAie1hiaHIWibw1KwsJhiOI/Taj
+	Cd/cVvBdaGdHOrUuMHBezkrJE7Uam/7DkfR1ycnSBr6wjLFcx8wRELbpfO8O4TLqKEzBMLwi9dJ
+	1b35UTRSvtPu5CFKi7scEC3i/Q2i6i3TazKGQBNi0NyUGM3hOsPa3H46MryPXAXEZs+KjdCryPa
+	lY9vVulMYqunpocmEeKmgi1wOb18Kl4lYhy43a/psmbTbmtFgZQ2++lW7LBQp8lYZLERvfqsWCN
+	ahqn8s1+GJC8YmrsSOUktkna5PBDJnWG7IaX7KrA/HKFjjFxGdM4l6/biUicg5KMsUN6Fc9dPG
+X-Received: by 2002:a17:902:d2cf:b0:2cc:6329:b7ba with SMTP id d9443c01a7336-2ccbe615a2emr14691785ad.16.1783355614326;
+        Mon, 06 Jul 2026 09:33:34 -0700 (PDT)
+Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5? ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cad6f25f87sm54027575ad.3.2026.07.06.09.33.32
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 06 Jul 2026 09:33:33 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Message-ID: <65ebf21f-5a23-43b5-b10c-684fe421b0dc@roeck-us.net>
+Date: Mon, 6 Jul 2026 09:33:32 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <akvSzb0mRSS5aCg_@gmail.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/5] dt-bindings: hwmon: (pmbus/max20830): add
+ enable-gpios property and complete examples
+To: "Torreno, Alexis Czezar" <AlexisCzezar.Torreno@analog.com>,
+ Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ Shuah Khan <skhan@linuxfoundation.org>,
+ "linux-hwmon@vger.kernel.org" <linux-hwmon@vger.kernel.org>,
+ "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
+References: <20260706-dev-max20830c-v2-0-37761e89bb5f@analog.com>
+ <20260706-dev-max20830c-v2-1-37761e89bb5f@analog.com>
+ <20260706-neat-perky-malamute-7518b7@quoll>
+ <PH0PR03MB6351C4B212D2CCBA3F1BF113F1F12@PH0PR03MB6351.namprd03.prod.outlook.com>
+Content-Language: en-US
+From: Guenter Roeck <linux@roeck-us.net>
+Autocrypt: addr=linux@roeck-us.net; keydata=
+ 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
+ np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
+In-Reply-To: <PH0PR03MB6351C4B212D2CCBA3F1BF113F1F12@PH0PR03MB6351.namprd03.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.66 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-95189-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-95191-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:AlexisCzezar.Torreno@analog.com,m:krzk@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-hwmon@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[rppt@kernel.org,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	FORGED_RECIPIENTS(0.00)[m:leitao@debian.org,m:linmiaohe@huawei.com,m:akpm@linux-foundation.org,m:david@kernel.org,m:ljs@kernel.org,m:vbabka@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:shuah@kernel.org,m:nao.horiguchi@gmail.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:liam@infradead.org,m:lance.yang@linux.dev,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-trace-kernel@vger.kernel.org,m:kernel-team@meta.com,m:naohoriguchi@gmail.com,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[huawei.com,linux-foundation.org,kernel.org,google.com,suse.com,gmail.com,lwn.net,linuxfoundation.org,infradead.org,linux.dev,goodmis.org,efficios.com,kvack.org,vger.kernel.org,meta.com];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
 	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rppt@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
+	DMARC_NA(0.00)[roeck-us.net];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
+	FORWARDED(0.00)[lists@lfdr.de];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[11];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,analog.com:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: CF7197137D7
+X-Rspamd-Queue-Id: B2A397146DF
 
-On Mon, Jul 06, 2026 at 09:14:22AM -0700, Breno Leitao wrote:
-> Hello Mike,
+On 7/6/26 00:13, Torreno, Alexis Czezar wrote:
 > 
-> On Sat, Jul 04, 2026 at 12:31:26PM +0300, Mike Rapoport wrote:
-> > On Tue, Jun 30, 2026 at 05:46:09AM -0700, Breno Leitao wrote:
+>> On Mon, Jul 06, 2026 at 10:08:41AM +0800, Alexis Czezar Torreno wrote:
+>>> Adding an entry for the MAX20830 EN (enable) pin. This pin exist but
+>>> was not included before. Also edited examples entry to be more complete.
+>>>
+>>> Signed-off-by: Alexis Czezar Torreno <alexisczezar.torreno@analog.com>
+>>> ---
+>>>   .../devicetree/bindings/hwmon/pmbus/adi,max20830.yaml         | 11
+>> +++++++++++
+>>>   1 file changed, 11 insertions(+)
+>>>
+>>
+>> How did you address previous feedback?
+>>
 > 
-> > I'm looking at these awk scripts and od encodings and I wonder if wasn't it
-> > simpler to write the test in C.
-> > 
-> > We have a bunch of helpers in tools/testing/selftests/mm/vm_utils.h for
-> > accessing /proc files and there is already /proc/iomem parser in
-> > tools/testing/selftests/mm/pfnmap.c that also could be lifter to vm_util
+> Regarding the enable pin, I added this since I know bindings like being complete
+> and saw that I didn't add it the first time I submitted max20830.
+> I added driver code for the gpio but learned that it wasn't really a use case so
+> I simply dropped the patch for it.
 > 
-> I'm fine with either approach.
-> 
-> My main concern is keeping the selftest decoupled from the feature
-> itself, so that review of the test doesn't block the feature from
-> landing. Would that work for you?
 
-Sure.
- 
-> Thanks
-> --breno
+I guess I am completely missing the point here. I can not imagine a situation
+where one would want to connect the enable pin to a driver-controlled GPIO pin,
+or why would one connect the chip's PGOOD output pin to a GPIO input pin
+and connect that back to the driver.
 
--- 
-Sincerely yours,
-Mike.
+I think we will need guidance from devicetree maintainers explaining what
+"complete" means in such a context to avoid having to repeat this discussion
+for every driver going forward.
+
+Thanks,
+Guenter
+
 
