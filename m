@@ -1,224 +1,150 @@
-Return-Path: <linux-doc+bounces-95183-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95184-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id NqbJFAzuS2qYdAEAu9opvQ
-	(envelope-from <linux-doc+bounces-95183-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 20:03:56 +0200
+	id 2meUOD3VS2pUbAEAu9opvQ
+	(envelope-from <linux-doc+bounces-95184-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 18:18:05 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A28797143FE
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 20:03:55 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 776D87131F0
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 18:18:05 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linaro.org header.s=google header.b="Z+/eLfFN";
-	dmarc=pass (policy=none) header.from=linaro.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95183-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95183-lists+linux-doc=lfdr.de@vger.kernel.org";
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
+	dkim=pass header.d=arm.com header.s=foss header.b=VJ62eoTN;
+	dmarc=pass (policy=none) header.from=arm.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95184-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-95184-lists+linux-doc=lfdr.de@vger.kernel.org";
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 61B6132DA8A3
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 15:58:09 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id C73203092E62
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 16:06:57 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EAB57430CCE;
-	Mon,  6 Jul 2026 15:58:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2E5623F4827;
+	Mon,  6 Jul 2026 16:06:54 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF0A6430CD6
-	for <linux-doc@vger.kernel.org>; Mon,  6 Jul 2026 15:57:59 +0000 (UTC)
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783353481; cv=pass; b=Y9r5sWkmm7CI/xmrUuf8Zc4YlGuFcETI0Fk0aWClKJfXSrYjooCS0vKCzbrg5AbBorvmvi6qHyorJWv+8jyWOIgVRSH4y2zmc+BwlhP8d8G80TmOarwm6954jXyR4WoZ7VeejdX+iOsJf1jIsnKhMuCA8I+waTNMt7WEg/QEjvU=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783353481; c=relaxed/simple;
-	bh=gCs9HokUb+6ZMGzRlYcfJL9jBr5oqoU0ENUXdBhbWys=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=UoxfwRCADJwTwsSx9D8VPEir9A3ZzjUjQozN9JHZdEMyYVXM4W+9deCEoXXOSnMjg+RlSFpLtmQs2Iq/H0pPJFcluGNM4idDMe19VNqKems4o3FqzvteHfU+dctXz5X8+xZWtXij2LDsjTqtvjEtSpM8uUt5IqUnVAEay9Ol1u4=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=Z+/eLfFN; arc=pass smtp.client-ip=209.85.208.50
-Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-691c5776f95so5975877a12.3
-        for <linux-doc@vger.kernel.org>; Mon, 06 Jul 2026 08:57:59 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783353478; cv=none;
-        d=google.com; s=arc-20260327;
-        b=sS1/BHxE08+EAJ5WTWNDXYu1OP9EdI+xlx8gMM7547YJiww1V13a6YEeZinj4vDPc1
-         QTXsp0jjv3hi6e0osronhOf+Jo5TGgL0Dhi9VcoMODDk2aL8k5ahg6nr2YQQ9ID2NxCX
-         m0FrQHAXCDMMDEI6xM+48W7khs0HRbmk2l0Tc1CYclXUUqMLDxpN/CaIHu6HLglvPBJc
-         tshZuTJ4d3riAb0AE7fs1IL8LCuhFFBsP+n3ukh/cV275LCI0UhPEDrNSJfXEN8aHot6
-         6N4D2BoUvge+eC3WfydA+T8NqLOJc+CrrIM3yZ0u6D/ylkzm409UiDhMcXYy5apFjvYP
-         ae2w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=lGxnHQcUvM+Wk9iuDAhV9iKJOnzCJXCRMoquKntthQc=;
-        fh=c4zUaHifJ2Mj256K4Mn0iqi+vFU9tOMAY7xd7NFRSIM=;
-        b=Eko/z6H9sfx03CqaVNHbFR2VeCov+G568WwlNiZZZecOho7GOWCQfTK+4hwv1ybtA4
-         RYC/KaVi/3hG2ryhTaEnNYPpR8FRD2rFRBD5qZ5HqM8a+jArWQLYOa1nyQ1Yz1QGFVpd
-         rgmWy2y5hVCHH1Hriu2ZbqeAGhSEwb7nW9JU6hSALtagAYcdsCGwzLX3zksNQCZO8KtZ
-         ubNIX4vvb1xt+7Lkr3H9toqAe/U1KMqiGEoRM4jVVuG3hjWcCwzoDS2XV27ZC/QIyB/O
-         OMD0PcJ9UgR3vKmP0jZOGjVpEsLRGR4+kxL+3canVX7s/YKb0IjjxqFMhJ2t3AxwdCvf
-         /4/Q==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1783353478; x=1783958278; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=lGxnHQcUvM+Wk9iuDAhV9iKJOnzCJXCRMoquKntthQc=;
-        b=Z+/eLfFN6xCQ/JXzVDa72FWOBSmvZ2SHuV4SdsDbvXjEyKc7QtkRbACuGnlZmMG1kS
-         21xIPFkDIo19WZWh4MCGa4sk2CXpayXD+H7uysfPymrkR11lVhaYQsy9vLo9bLKb8A6Y
-         J7RgKGvrNJf78fC8qhM7hy4ya+8hxs5TsxX7lhtYNglg6SzH2zpVinycyfn84YPIu6H5
-         s0TrKrmW0KzxtTjJuha8xi0nxCtR5aqldd/QyCQfIfdFotfXtR3TKSAdS6pRs9vAXOZm
-         d8f1EjuuZdwgNaLvS6tH4uHhS9ttCCosKo2FD8YrHuH4jO28GtDw3mVpSPdp8lR97Dso
-         z2ww==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783353478; x=1783958278;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=lGxnHQcUvM+Wk9iuDAhV9iKJOnzCJXCRMoquKntthQc=;
-        b=SIDFGCb50piB5vir+fOw1R+gckobCRSoK+IQv9kBZadJuFx6CJk4tdhr5tb9emvLii
-         ivUTR7v0cIoKDsn18T8biCEfi9xiwjYmhSUiTssFlcmvHqULNhrZ8nt35Lmo0c4uLQVj
-         VIgCN2d4m3ZFO6+trUQ86dvcUcRFw/Eh66rp6yxYkmZASegGSLNQKr2KChrEVHovur74
-         /W0H5SJs2wkjgUbXWmYN0HBwvjJU0ShyGR3f4Zp2bD1eZChY5faKGfGMjPRNWsWH5+6G
-         ISvM1Mwg8LxVftmTsSexXTiokpnKTwtd/qTt+Z92zC2BFLxMHV1YC9EG1lT6nSXN7iDP
-         WMUQ==
-X-Forwarded-Encrypted: i=1; AHgh+RrLWCPL00oV3yxYV+W+LJHG02dELmYSI62WunPUribd3CvcHuuu0HinQJDwVPiq3jYXafwAfd8ExTw=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yxmvf1lStF6aJMo8+eHESkATgjT5WVVNT08QJJnv26QX8DKtkv1
-	YuBw4v3rt3aGR2h4w1O0Cz7B0GPRT/H2c2GFer7msZ4wnxtx+HWIg3CXw1YmB9s9I0yrHX36GFG
-	aV1s5gWpmo7bITNFewlPqXk4fTqayYZpyLGwUjqq3fQ==
-X-Gm-Gg: AfdE7ckwTL0tN6fUL3rizBZAFvyrDvWHiaYrhozQHBO0EkBzqIYkMpIzvWxWfQBZQMX
-	5sICKt6It5KBVVv5FOovjHV+bqTkNgFrb/spCwxvvXBMU89kBTSWFia+awYIKNkhDkSG5W5sh00
-	cALw4+HasLn9H6lfpNcpj8OnLzHVJT14e60C3NVOR1qFnVjeIGndjTnjzteyBJi+D39VQrkg5hr
-	69Vj11+5EVGhKnJwPxAmYb06zvpF6GTg/tY7DFE3AmFCXrrpBdtZnBhLKGSfIBOK5GlzkVTb1uX
-	yIpEZzhplOGxoWohgZCnJtlwAKR5
-X-Received: by 2002:a17:906:3ce:b0:c12:992b:16d4 with SMTP id
- a640c23a62f3a-c15a68cf56fmr47982566b.41.1783353478105; Mon, 06 Jul 2026
- 08:57:58 -0700 (PDT)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 51D3D29AAFA;
+	Mon,  6 Jul 2026 16:06:52 +0000 (UTC)
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783354014; cv=none; b=OqKrKiEvt0aXsl5hsiVYjGlrLTwh7AaxLAqKm/9/J3b1Xbjy8cqoZzeEHHTo3LSgCLzolE1bnus+9QfetZneB4bDwtzAqKnn0PIpjDN63GVe9fhsofoW6L0bOcNnPbcfftvJQhnIeI0ncr/QFGJ92KWd4C3BzA00AE3JVWDiezw=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783354014; c=relaxed/simple;
+	bh=lUHJmn5wlrMvcq+hpHYVTMorp9ZzXvkHwDH7DGxf6Rc=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=u72wDWUc3UpXu8qQBv0Va5GdIwxdxzJ3MVJJdkE/PzXdMWNNUSkPHG+wmzF34M/KG4vWHCQ/K7NgQDQlkBfFMaQogNKm6MKWvi6Tp16oybudonuBk+SKBlPv+A0LK3qgiUzginaWP7eiJhChjq7H1GG2+vgVrE3GQw30Qh2SRr0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=VJ62eoTN; arc=none smtp.client-ip=217.140.110.172
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 46E941BB2;
+	Mon,  6 Jul 2026 09:06:47 -0700 (PDT)
+Received: from e134344.cambridge.arm.com (e134344.arm.com [10.2.212.8])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id E15D73F905;
+	Mon,  6 Jul 2026 09:06:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1783354011; bh=lUHJmn5wlrMvcq+hpHYVTMorp9ZzXvkHwDH7DGxf6Rc=;
+	h=From:To:Cc:Subject:Date:From;
+	b=VJ62eoTNY+k1jw9yC53/qBd0VDrpJLEkdYS2C1LZKfXX6LK1nzP3Cy6T3z8moneR5
+	 p7frNkEPuNTkwAEbcbw12EO6vHTB39DMDEDlUbK2UriamgNw1yg91D0z+a5JVH5dvZ
+	 GihyN9l0BtwRtLtRG2H2X1yQvuE15jNCFpmgGdTQ=
+From: Ben Horgan <ben.horgan@arm.com>
+To: ben.horgan@arm.com
+Cc: james.morse@arm.com,
+	reinette.chatre@intel.com,
+	fenghuay@nvidia.com,
+	linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	tglx@linutronix.de,
+	mingo@redhat.com,
+	bp@alien8.de,
+	dave.hansen@linux.intel.com,
+	hpa@zytor.com,
+	corbet@lwn.net,
+	x86@kernel.org,
+	linux-doc@vger.kernel.org,
+	dave.martin@arm.com
+Subject: [PATCH v4 0/3] x86,fs/resctrl,arm_mpam: Factor MBA parse-time conversion to be per-arch
+Date: Mon,  6 Jul 2026 17:06:36 +0100
+Message-ID: <20260706160639.2136674-1-ben.horgan@arm.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260625155432.815185-1-shenwei.wang@oss.nxp.com> <PAXPR04MB91855056638F0028BCC5F9EF89F12@PAXPR04MB9185.eurprd04.prod.outlook.com>
-In-Reply-To: <PAXPR04MB91855056638F0028BCC5F9EF89F12@PAXPR04MB9185.eurprd04.prod.outlook.com>
-From: Mathieu Poirier <mathieu.poirier@linaro.org>
-Date: Mon, 6 Jul 2026 09:57:47 -0600
-X-Gm-Features: AVVi8CfCK8RZVsOnom89zz62dC_eh8WB0dnPwnnTYPsAfwJakdAft3ffWaiSkNg
-Message-ID: <CANLsYkxmf=QfNUe=BLrrP7kBtZKq2Z1BkQDLnzmcQsW-kYzTPQ@mail.gmail.com>
-Subject: Re: [PATCH v14 0/5] Enable Remote GPIO over RPMSG on i.MX Platform
-To: "Shenwei Wang (OSS)" <shenwei.wang@oss.nxp.com>
-Cc: Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Bjorn Andersson <andersson@kernel.org>, Frank Li <frank.li@nxp.com>, 
-	Sascha Hauer <s.hauer@pengutronix.de>, Shuah Khan <skhan@linuxfoundation.org>, 
-	"linux-gpio@vger.kernel.org" <linux-gpio@vger.kernel.org>, 
-	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>, 
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, 
-	Pengutronix Kernel Team <kernel@pengutronix.de>, Fabio Estevam <festevam@gmail.com>, 
-	Shenwei Wang <shenwei.wang@nxp.com>, Peng Fan <peng.fan@nxp.com>, 
-	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, 
-	"linux-remoteproc@vger.kernel.org" <linux-remoteproc@vger.kernel.org>, 
-	"imx@lists.linux.dev" <imx@lists.linux.dev>, 
-	"linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>, dl-linux-imx <linux-imx@nxp.com>, 
-	Arnaud POULIQUEN <arnaud.pouliquen@foss.st.com>, "b-padhi@ti.com" <b-padhi@ti.com>, 
-	Andrew Lunn <andrew@lunn.ch>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
-	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-95183-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:shenwei.wang@oss.nxp.com,m:linusw@kernel.org,m:brgl@kernel.org,m:corbet@lwn.net,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:andersson@kernel.org,m:frank.li@nxp.com,m:s.hauer@pengutronix.de,m:skhan@linuxfoundation.org,m:linux-gpio@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:kernel@pengutronix.de,m:festevam@gmail.com,m:shenwei.wang@nxp.com,m:peng.fan@nxp.com,m:devicetree@vger.kernel.org,m:linux-remoteproc@vger.kernel.org,m:imx@lists.linux.dev,m:linux-arm-kernel@lists.infradead.org,m:linux-imx@nxp.com,m:arnaud.pouliquen@foss.st.com,m:b-padhi@ti.com,m:andrew@lunn.ch,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[26];
-	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[mathieu.poirier@linaro.org,linux-doc@vger.kernel.org];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[kernel.org,lwn.net,nxp.com,pengutronix.de,linuxfoundation.org,vger.kernel.org,gmail.com,lists.linux.dev,lists.infradead.org,foss.st.com,ti.com,lunn.ch];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mathieu.poirier@linaro.org,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-95184-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:ben.horgan@arm.com,m:james.morse@arm.com,m:reinette.chatre@intel.com,m:fenghuay@nvidia.com,m:linux-kernel@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:tglx@linutronix.de,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:hpa@zytor.com,m:corbet@lwn.net,m:x86@kernel.org,m:linux-doc@vger.kernel.org,m:dave.martin@arm.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[ben.horgan@arm.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[linaro.org:+];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FROM_NEQ_ENVFROM(0.00)[ben.horgan@arm.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
+	TO_DN_NONE(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	DKIM_TRACE(0.00)[arm.com:+];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,arm.com:from_mime,arm.com:dkim,arm.com:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: A28797143FE
+X-Rspamd-Queue-Id: 776D87131F0
 
-On Mon, 6 Jul 2026 at 09:40, Shenwei Wang (OSS)
-<shenwei.wang@oss.nxp.com> wrote:
->
->
->
-> > -----Original Message-----
-> > From: Shenwei Wang (OSS)
-> > Sent: Thursday, June 25, 2026 10:55 AM
-> > To: Linus Walleij <linusw@kernel.org>; Bartosz Golaszewski <brgl@kernel=
-.org>;
-> > Jonathan Corbet <corbet@lwn.net>; Rob Herring <robh@kernel.org>; Krzysz=
-tof
-> > Kozlowski <krzk+dt@kernel.org>; Conor Dooley <conor+dt@kernel.org>; Bjo=
-rn
-> > Andersson <andersson@kernel.org>; Mathieu Poirier
-> > <mathieu.poirier@linaro.org>; Frank Li <frank.li@nxp.com>; Sascha Hauer
-> > <s.hauer@pengutronix.de>
-> > Cc: Shuah Khan <skhan@linuxfoundation.org>; linux-gpio@vger.kernel.org;=
- linux-
-> > doc@vger.kernel.org; linux-kernel@vger.kernel.org; Pengutronix Kernel T=
-eam
-> > <kernel@pengutronix.de>; Fabio Estevam <festevam@gmail.com>; Shenwei
-> > Wang <shenwei.wang@nxp.com>; Peng Fan <peng.fan@nxp.com>;
-> > devicetree@vger.kernel.org; linux-remoteproc@vger.kernel.org;
-> > imx@lists.linux.dev; linux-arm-kernel@lists.infradead.org; dl-linux-imx=
- <linux-
-> > imx@nxp.com>; Arnaud POULIQUEN <arnaud.pouliquen@foss.st.com>; b-
-> > padhi@ti.com; Andrew Lunn <andrew@lunn.ch>
-> > Subject: [PATCH v14 0/5] Enable Remote GPIO over RPMSG on i.MX Platform
-> >
-> > From: Shenwei Wang <shenwei.wang@nxp.com>
-> >
-> > Support the remote devices on the remote processor via the RPMSG bus on=
- i.MX
-> > platform.
-> >
-> > Changes in v14:
-> >  - Update gpio-rpmsg.rst per Mathieu=E2=80=99s feedback.
->
-> Hi Mathieu,
->
-> Could you please let me know if you have any further comments on this ver=
-sion?
+This version of v4 addresses Reinette's review comments and adds her R-b's - thanks!
 
-I intend to review your patches but other people's work is ahead of yours.
+Changelogs in patches.
 
->
-> Thanks,
-> Shenwei
->
-> >  - Align the rpmsg-gpio driver with the revised gpio-rpmsg.rst.
-> >  - Modify rpmsg-core to enable prefix-based matching of RPMSG device ID=
-s.
-> >
-> > Changes in v13:
-> >  - drop the support for legacy NXP firmware.
-> >  - remove the fixed_up hooks from the rpmsg gpio driver.
-> >  - code cleanup.
-> >
->
+From cover letter of v3:
+
+This is a new version of Dave Martin's patch [1] to delegate rounding of
+bandwidth control user values to the arch code. As there is now more than one
+architecture using resctrl, I split the original patch into two, a core resctrl
+patch and an x86 patch, and added an MPAM patch. Please let me know if the patch
+break down and ordering is sensible and whether the pattern should be followed
+for any future similar changes.
+
+This does have a user visible effect on MB schema when using MPAM hardware
+with 'bandwidth_gran' greater than 1. I'm not sure if MPAM hardware with such
+coarse controls exists in the wild but it is spec compliant and I've tested it
+on a model.
+
+[1] https://lore.kernel.org/lkml/20251031154225.14799-1-Dave.Martin@arm.com/
+
+v3: https://lore.kernel.org/lkml/20260515140612.1205251-1-ben.horgan@arm.com/
+
+Based on v7.2-rc2
+
+Ben Horgan (2):
+  x86,fs/resctrl: Add resctrl_arch_preconvert_bw()
+  arm_mpam: resctrl: Add pass-through resctrl_arch_preconvert_bw()
+
+Dave Martin (1):
+  fs/resctrl: Factor MBA parse-time conversion to be per-arch
+
+ Documentation/filesystems/resctrl.rst     | 17 +++++++++--------
+ arch/x86/kernel/cpu/resctrl/ctrlmondata.c |  6 ++++++
+ drivers/resctrl/mpam_resctrl.c            |  5 +++++
+ fs/resctrl/ctrlmondata.c                  |  6 +++---
+ include/linux/resctrl.h                   | 19 +++++++++++++++++++
+ 5 files changed, 42 insertions(+), 11 deletions(-)
+
+-- 
+2.43.0
+
 
