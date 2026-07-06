@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-95185-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95186-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id LB45Bd3ZS2q0bQEAu9opvQ
-	(envelope-from <linux-doc+bounces-95185-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 18:37:49 +0200
+	id Sf/pGK/ZS2qhbQEAu9opvQ
+	(envelope-from <linux-doc+bounces-95186-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 18:37:03 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 82A657135F6
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 18:37:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BB9467135C1
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 18:37:02 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=arm.com header.s=foss header.b=DpV8Zz5y;
+	dkim=pass header.d=arm.com header.s=foss header.b=bHVBBcng;
 	dmarc=pass (policy=none) header.from=arm.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95185-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95185-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95186-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95186-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 9C71730EF9D9
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 16:07:12 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 2502A310E968
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 16:07:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6960A39EF20;
-	Mon,  6 Jul 2026 16:06:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1DE383FE644;
+	Mon,  6 Jul 2026 16:07:01 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B980242CAF2;
-	Mon,  6 Jul 2026 16:06:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9085043148F;
+	Mon,  6 Jul 2026 16:06:59 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783354017; cv=none; b=JT7PsdTe4u11Nj2ye+kD6p72dpjJO5b9pPa9CXAJp6LPJOtKPQtmApU2FKSqbajVgIW1Jcl/KUZupwbqjfTtpY9ur3Ndip9Je09Z6Aj0i4lCgre1/cTmGS4YsAvOF1VZnZB5/WjaU139p++SFbebVf6gTXsYPM4q4lPmq8DVYs8=
+	t=1783354021; cv=none; b=lGKsrfMO4MCfutiYGyXRh/nTqRxaW3Qc39clLnsjoVKKGks96VPk56apQLBdLAhuX/O5qL5M1hIcfZrjxFgsMV6HbKV2ti61cZqaC15J+MxIuzcmYiELXmr1TVbgl/OFlQpA3vS5Gwl4TRKoVAZ7BAIX7aukiIpRtRU1kW4/KEc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783354017; c=relaxed/simple;
-	bh=SgSLAmpEHjQVvI3w3XPeQkB8UDBA1FlyFSv8NkcsKME=;
+	s=arc-20240116; t=1783354021; c=relaxed/simple;
+	bh=4g7Ytd0MPyjsSrvRjEeiYDsb2RtqJyQNg8z8cWlum9Y=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=KS68VYuO1Mo3Rr5IUn+XhS6WNwGRFndoLHqoyXZ0G04i2fAWMZMwEU61bF8Onuy/oc3pSJsNgrwZaqxSPuMb/PPbW7GQpl3/dZnkUxeJGbbdCFg1fHRXQh+kXTyDCkyV8c+6OPMSSc0EAAgvC5OOJtEbtWMh3TzhSN6lDNf+PPk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=DpV8Zz5y; arc=none smtp.client-ip=217.140.110.172
+	 MIME-Version; b=dVYF+mko5gpHVDON4PX/LoUmqT3486rcD0OgW//Wu44ZIAyuxSk6HINy3uqMbCA1dwunBYDlOFccb30XJeyKaC/MrC7q2e0SwSbJiLDwwNC5x1K3kZtQI1OL5cK2qgJTh3cwRKzLhKs+21iHcaOU6bKEQjpKViJbfoDH18upQgk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=bHVBBcng; arc=none smtp.client-ip=217.140.110.172
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B6F0D1BCA;
-	Mon,  6 Jul 2026 09:06:50 -0700 (PDT)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 88B45271B;
+	Mon,  6 Jul 2026 09:06:54 -0700 (PDT)
 Received: from e134344.cambridge.arm.com (e134344.arm.com [10.2.212.8])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id E0CF93F905;
-	Mon,  6 Jul 2026 09:06:51 -0700 (PDT)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 7FFCB3F905;
+	Mon,  6 Jul 2026 09:06:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1783354015; bh=SgSLAmpEHjQVvI3w3XPeQkB8UDBA1FlyFSv8NkcsKME=;
+	t=1783354018; bh=4g7Ytd0MPyjsSrvRjEeiYDsb2RtqJyQNg8z8cWlum9Y=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=DpV8Zz5yn6JaDRYQoZD9lVZFmu14vmLQbfXsXSfBSNGCFGS7luIjjP9Qqf8oqqyNB
-	 +KZLdtwCHikV+GXqIEBRDichY0xdV144CV7u0Prsx9zaM4XVKHTPY3sOwhTXpFXir6
-	 Opqb7CZaY6zyrQ7bYmPaZhMdV6olelyxV/ypDIrA=
+	b=bHVBBcng+I847HGIjWG/fHvewidYFlUo7rtP9RuVVf2lk1z7U1KVOdZ06ifyQIYZa
+	 e6X6rBt98Tsja8JZ2ugkqaDpwzHJjxdMjY3gG5QJ5rRmHhY7zBOcul5+27T2XlJ4kU
+	 R0/zAlMn6egkmsjXTE1rLITBW3T/QRp+nfAZ1IrE=
 From: Ben Horgan <ben.horgan@arm.com>
 To: ben.horgan@arm.com
 Cc: james.morse@arm.com,
@@ -60,9 +60,9 @@ Cc: james.morse@arm.com,
 	x86@kernel.org,
 	linux-doc@vger.kernel.org,
 	dave.martin@arm.com
-Subject: [PATCH v4 1/3] x86,fs/resctrl: Add resctrl_arch_preconvert_bw()
-Date: Mon,  6 Jul 2026 17:06:37 +0100
-Message-ID: <20260706160639.2136674-2-ben.horgan@arm.com>
+Subject: [PATCH v4 2/3] arm_mpam: resctrl: Add pass-through resctrl_arch_preconvert_bw()
+Date: Mon,  6 Jul 2026 17:06:38 +0100
+Message-ID: <20260706160639.2136674-3-ben.horgan@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260706160639.2136674-1-ben.horgan@arm.com>
 References: <20260706160639.2136674-1-ben.horgan@arm.com>
@@ -85,7 +85,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	TAGGED_FROM(0.00)[bounces-95185-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-95186-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS(0.00)[m:ben.horgan@arm.com,m:james.morse@arm.com,m:reinette.chatre@intel.com,m:fenghuay@nvidia.com,m:linux-kernel@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:tglx@linutronix.de,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:hpa@zytor.com,m:corbet@lwn.net,m:x86@kernel.org,m:linux-doc@vger.kernel.org,m:dave.martin@arm.com,s:lists@lfdr.de];
 	FORGED_SENDER(0.00)[ben.horgan@arm.com,linux-doc@vger.kernel.org];
@@ -107,86 +107,48 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	RCPT_COUNT_TWELVE(0.00)[15];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,arm.com:from_mime,arm.com:email,arm.com:mid,arm.com:dkim,intel.com:email,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 82A657135F6
+X-Rspamd-Queue-Id: BB9467135C1
 
-On MPAM systems the rounding behaviour of the MBA control would be improved
-if the rounding in the fs/resctrl code is removed but this is not the
-case for x86. To allow any rounding or conversion of the bandwidth value
-provided by the user to be specified by the arch code a new arch hook is
-required.
+resctrl rounds up the percentage value of the MBA based on the bw_gran. As
+MPAM uses a binary fixed point fraction format for MBA rather than a
+decimal percentage, this introduces rounding errors.
 
-Introduce resctrl_arch_preconvert_bw(), and add its x86 implementation.
-This is currently unused in resctrl but when plumbed in it will replace the
-call to roundup() in bw_validate().
+Without this additional rounding, if the user reads the value in an MB
+schema and then writes it back to the schema, the value in hardware won't
+change. However, with this additional rounding, this guarantee is broken
+for systems with mbw_wd < 7.
 
-Signed-off-by: Dave Martin <dave.martin@arm.com>
+resctrl is introducing resctrl_arch_preconvert_bw() to allow the arch code
+to specify the conversion resctrl does to the user-provided bandwidth
+value. Add the MPAM version of resctrl_arch_preconvert_bw(). This does no
+conversion.
+
 Signed-off-by: Ben Horgan <ben.horgan@arm.com>
 Reviewed-by: Reinette Chatre <reinette.chatre@intel.com>
----
-Changes since Dave's v2:
-Split from larger patch and add commit message
-Update kernel-doc (Reinette)
 
 Changes since v3:
-Swap parameter order (Reinette)
-Change summary prefix include fs/resctrl (Reinette)
-val -> @val
+Parameter order switch (Reinette)
 Add Reinette's R-b
 ---
- arch/x86/kernel/cpu/resctrl/ctrlmondata.c |  6 ++++++
- include/linux/resctrl.h                   | 19 +++++++++++++++++++
- 2 files changed, 25 insertions(+)
+ drivers/resctrl/mpam_resctrl.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/arch/x86/kernel/cpu/resctrl/ctrlmondata.c b/arch/x86/kernel/cpu/resctrl/ctrlmondata.c
-index b20e705606b8..81a08526d3d1 100644
---- a/arch/x86/kernel/cpu/resctrl/ctrlmondata.c
-+++ b/arch/x86/kernel/cpu/resctrl/ctrlmondata.c
-@@ -16,9 +16,15 @@
- #define pr_fmt(fmt)	KBUILD_MODNAME ": " fmt
- 
- #include <linux/cpu.h>
-+#include <linux/math.h>
- 
- #include "internal.h"
+diff --git a/drivers/resctrl/mpam_resctrl.c b/drivers/resctrl/mpam_resctrl.c
+index 226ff6f532fa..e9dea8c40265 100644
+--- a/drivers/resctrl/mpam_resctrl.c
++++ b/drivers/resctrl/mpam_resctrl.c
+@@ -167,6 +167,11 @@ bool resctrl_arch_get_cdp_enabled(enum resctrl_res_level rid)
+ 	return mpam_resctrl_controls[rid].cdp_enabled;
+ }
  
 +u32 resctrl_arch_preconvert_bw(const struct rdt_resource *r, u32 val)
 +{
-+	return roundup(val, (unsigned long)r->membw.bw_gran);
++	return val;
 +}
 +
- int resctrl_arch_update_one(struct rdt_resource *r, struct rdt_ctrl_domain *d,
- 			    u32 closid, enum resctrl_conf_type t, u32 cfg_val)
- {
-diff --git a/include/linux/resctrl.h b/include/linux/resctrl.h
-index 73ff522448a0..1ebd4b90043a 100644
---- a/include/linux/resctrl.h
-+++ b/include/linux/resctrl.h
-@@ -504,6 +504,25 @@ bool resctrl_arch_mbm_cntr_assign_enabled(struct rdt_resource *r);
-  */
- int resctrl_arch_mbm_cntr_assign_set(struct rdt_resource *r, bool enable);
- 
-+/**
-+ * resctrl_arch_preconvert_bw() - Prepare bandwidth control value for arch use.
-+ * @r:		Resource whose schema was written.
-+ * @val:	Bandwidth control value written to the schemata file by userspace.
-+ *
-+ * Convert the user provided bandwidth control value to an appropriate form for
-+ * consumption by the hardware driver for resource @r. Converted value is stored
-+ * in rdt_ctrl_domain::staged_config[] for later consumption by
-+ * resctrl_arch_update_domains(). Is not called when MBA software controller is
-+ * enabled.
-+ *
-+ * Architectures for which this pre-conversion hook is not useful should supply
-+ * an implementation of this function that just returns @val unmodified.
-+ *
-+ * Return:
-+ * The converted value.
-+ */
-+u32 resctrl_arch_preconvert_bw(const struct rdt_resource *r, u32 val);
-+
- /*
-  * Update the ctrl_val and apply this config right now.
-  * Must be called on one of the domain's CPUs.
+ /**
+  * resctrl_reset_task_closids() - Reset the PARTID/PMG values for all tasks.
+  *
 -- 
 2.43.0
 
