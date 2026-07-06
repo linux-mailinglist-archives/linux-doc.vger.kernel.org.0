@@ -1,403 +1,321 @@
-Return-Path: <linux-doc+bounces-95107-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95113-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id O/y1Egt+S2o2SQEAu9opvQ
-	(envelope-from <linux-doc+bounces-95107-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 12:06:03 +0200
+	id 5E9IBEuJS2okVAEAu9opvQ
+	(envelope-from <linux-doc+bounces-95113-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 12:54:03 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA0C970EE4C
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 12:06:02 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5AF7C70F83F
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 12:54:02 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=ibm.com header.s=pp1 header.b=tgbFO8PO;
-	dmarc=pass (policy=none) header.from=ibm.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95107-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-95107-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=tu-dortmund.de header.s=unimail header.b=GPVlpaGD;
+	dmarc=pass (policy=none) header.from=tu-dortmund.de;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95113-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95113-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id E84983149ECA
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 09:34:12 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id D2B5130F1C50
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 10:03:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F3936414A30;
-	Mon,  6 Jul 2026 09:20:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6A2954C6F02;
+	Mon,  6 Jul 2026 09:46:44 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
+Received: from unimail.uni-dortmund.de (mx1.hrz.uni-dortmund.de [129.217.128.51])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 880A71632E7;
-	Mon,  6 Jul 2026 09:20:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B15AD3A1686;
+	Mon,  6 Jul 2026 09:46:37 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783329655; cv=none; b=EiyXg+cSRZHtuPkIzfuMOqqSNFCp7J2bEijrff8A8l4rjpgn7MZWVOzaWnrLkT1UqneXfvKa0Ko6m9QZEqHbN5eVLzh8Mn6yCJZZrRV1KCqk7CT1S43NhFcOWE5wi+jQGLr+WDc5ztYpjS9ri6nRqwCIcmtcRECYFRfJC/hsVis=
+	t=1783331203; cv=none; b=fHU59H3KRH0LUpBP2MeBJmI5CXNeB6tkqkXWXi5VDkSVx3ElSig1uLmgc7taIT+tftWQCHLA1271Xqlcdc/xkuOVGJ3LiQoq2aOxz/ORml+YcBwVHmTkOb/DreSmh8k6KJoM3mCcoztwHnBBVfC4gE6Wro3pFOBiI1XDretGDFQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783329655; c=relaxed/simple;
-	bh=PsUFjWrXxVq+TqYR9khBBZGiPPNvQ96xT+xb/Yjh8QQ=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=pwd05Ua3bBHxSduXbQvWIX24wqgewRszHp+NXMxBDCPgeEtRVj6f5g/tVCHORiNLb4m2MP/jgN3vwgyQjT4mNbYWE+Bwy7JF35rIf0N0U0Vsd4EVE2tmMb/+/MT5QsP1vg/mHjnAd6KTbzi+XeIWHX9//v63gEGt88Sjoxk0tc0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=tgbFO8PO; arc=none smtp.client-ip=148.163.158.5
-Received: from pps.filterd (m0360072.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6669IPT33133967;
-	Mon, 6 Jul 2026 09:20:34 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=pp1; bh=P1cXPx
-	zUgBkYIj711vrqvXzK3mtv170zpjWBgBNAFqk=; b=tgbFO8POuL3/nCjJv2Wu5V
-	dxlk1EVPcYzpxSuSkTno5ayoPOLh70n0PuadnYoMVV0aFR/cmA9Rnj3M/zXvxnV6
-	M5I85zFZNlE8CsZGjZMaI0yJW0xg2wR57dQ8E8q8oYze0+8f+10JqEBk82Q8AfNu
-	3j81R+EjI/xBTRoLx3QZrYb0burgMFtIzPpXBF+v8LMhJZB9gG6vufZZ1G7IScU7
-	alwhB754UnLHNyTKtNOxtAajZsaiwNGmnVTiHSTIWB6bVZuUeGenqgAkQiTtSIvM
-	1g5TvYlJN/QsJvEz9/xT5z4/D4tjiVYUG771J0AUopTANYt8axDHMYoTwMFOf78Q
-	==
-Received: from ppma21.wdc07v.mail.ibm.com (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
-	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4f6stsh64b-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Mon, 06 Jul 2026 09:20:33 +0000 (GMT)
-Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
-	by ppma21.wdc07v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 6669JkoU013193;
-	Mon, 6 Jul 2026 09:20:32 GMT
-Received: from smtprelay01.fra02v.mail.ibm.com ([9.218.2.227])
-	by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4f7dgjvx5j-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Mon, 06 Jul 2026 09:20:32 +0000 (GMT)
-Received: from smtpav02.fra02v.mail.ibm.com (smtpav02.fra02v.mail.ibm.com [10.20.54.101])
-	by smtprelay01.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 6669KSkH35324190
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Mon, 6 Jul 2026 09:20:28 GMT
-Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 9C60720040;
-	Mon,  6 Jul 2026 09:20:28 +0000 (GMT)
-Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 48C8820043;
-	Mon,  6 Jul 2026 09:20:22 +0000 (GMT)
-Received: from [9.123.5.233] (unknown [9.123.5.233])
-	by smtpav02.fra02v.mail.ibm.com (Postfix) with ESMTP;
-	Mon,  6 Jul 2026 09:20:22 +0000 (GMT)
-Message-ID: <929e1275-a568-45aa-909f-8ffcf859d7cb@linux.ibm.com>
-Date: Mon, 6 Jul 2026 14:50:21 +0530
+	s=arc-20240116; t=1783331203; c=relaxed/simple;
+	bh=qBGu4Eg6aXtmJf84ub/wFLby4RjgGYZfQwlHcJU1pHU=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=rNjhvnf5yc26lidWvkkpZ8gUhasfm71yBJLivd7yWLNaland6Wr+vhThmLY1EjbDYFNknh7LFCynGWLw/e+EyUIHMDVFX+yhiQbXPyjs2HLmu8eys3o5Hf0q4t4E1nHNDUMoaN7jIAlYnkItgUcIYYyxkillrihuipOEVxybFx4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=tu-dortmund.de; spf=pass smtp.mailfrom=tu-dortmund.de; dkim=pass (1024-bit key) header.d=tu-dortmund.de header.i=@tu-dortmund.de header.b=GPVlpaGD; arc=none smtp.client-ip=129.217.128.51
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tu-dortmund.de;
+	s=unimail; t=1783330992;
+	bh=4aUq9hNomM3wVZ+MmRk9U8Emi4jxb74PHusgdr1u9DE=;
+	h=From:To:Cc:Subject:Date;
+	b=GPVlpaGD0FyiOz1hb8O69MIemTbYKSCZlr8FJMxlal8SOVcnSciMb3Zx8M+Bgx7GY
+	 JQzGEBNlvVA/222VPFJv3Vk+BSj7uEe77Jp8aQsvrzSSbeMPAaWLbL/eZEs4tZbw5y
+	 jLIh58UM3FbTW9nbBq+cVjcoHV248jG4yeC1uo1g=
+Received: from simon-Latitude-5450.cni.e-technik.tu-dortmund.de ([129.217.186.105])
+	(authenticated bits=0)
+	by unimail.uni-dortmund.de (8.19.0.2/8.19.0.2) with ESMTPSA id 6669hBLT020592
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Mon, 6 Jul 2026 11:43:11 +0200 (CEST)
+From: Simon Schippers <simon.schippers@tu-dortmund.de>
+To: Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
+        Jason Wang <jasowangio@gmail.com>,
+        "David S . Miller" <davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>,
+        "Michael S . Tsirkin" <mst@redhat.com>, netdev@vger.kernel.org
+Cc: Simon Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Andrew Lunn <andrew+netdev@lunn.ch>,
+        Tim Gebauer <tim.gebauer@tu-dortmund.de>,
+        Brett Sheffield <brett@librecast.net>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Simon Schippers <simon.schippers@tu-dortmund.de>
+Subject: [PATCH net v2] tun/tap & vhost-net: make qdisc backpressure opt-in via IFF_BACKPRESSURE
+Date: Mon,  6 Jul 2026 11:42:42 +0200
+Message-ID: <20260706094242.115992-1-simon.schippers@tu-dortmund.de>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 18/23] virt/steal_monitor: Provide default method to
- inc/dec preferred CPUs
-To: Yury Norov <ynorov@nvidia.com>
-Cc: linux-kernel@vger.kernel.org, mingo@kernel.org, peterz@infradead.org,
-        juri.lelli@redhat.com, vincent.guittot@linaro.org,
-        yury.norov@gmail.com, kprateek.nayak@amd.com, iii@linux.ibm.com,
-        corbet@lwn.net, tglx@kernel.org, gregkh@linuxfoundation.org,
-        pbonzini@redhat.com, seanjc@google.com, vschneid@redhat.com,
-        huschle@linux.ibm.com, rostedt@goodmis.org, dietmar.eggemann@arm.com,
-        maddy@linux.ibm.com, srikar@linux.ibm.com, hdanton@sina.com,
-        chleroy@kernel.org, vineeth@bitbyteword.org, frederic@kernel.org,
-        arighi@nvidia.com, pauld@redhat.com, christian.loehle@arm.com,
-        tj@kernel.org, tommaso.cucinotta@gmail.com, maz@kernel.org,
-        rafael@kernel.org, rdunlap@infradead.org, kernellwp@gmail.com,
-        linux-doc@vger.kernel.org
-References: <20260701141654.500125-1-sshegde@linux.ibm.com>
- <20260701141654.500125-19-sshegde@linux.ibm.com> <akglZQrZ0ghbwLth@yury>
-From: Shrikanth Hegde <sshegde@linux.ibm.com>
-Content-Language: en-US
-In-Reply-To: <akglZQrZ0ghbwLth@yury>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-Proofpoint-ORIG-GUID: Q7w8cLldR4yeXPPCiws3E87HlQUFGlZs
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA2MDA5NCBTYWx0ZWRfXwgzHomdgEzzh
- QchXtSXOeS4hksZFqmt6I8dD1DAMAS4eB1D4V2kq2IBgT5rrdsU9MelRpEXTsriqK6iGMD4y3S3
- BivKEAlM1zAZMIqVSqmloavtd4DcSeM=
-X-Authority-Analysis: v=2.4 cv=DKW/JSNb c=1 sm=1 tr=0 ts=6a4b7362 cx=c_pps
- a=GFwsV6G8L6GxiO2Y/PsHdQ==:117 a=GFwsV6G8L6GxiO2Y/PsHdQ==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=RnoormkPH1_aCDwRdu11:22 a=RzCfie-kr_QcCd8fBx8p:22 a=VnNF1IyMAAAA:8
- a=fR9Wyhvoc6gyoXbRuRgA:9 a=QEXdDO2ut3YA:10
-X-Proofpoint-GUID: gmrOwWHujn3h2hymjXN7YKs-kZ2Aj9aS
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA2MDA5NCBTYWx0ZWRfX5A5zqwsTYxBA
- YmkPDSZqaJJJAj+4rr5gTEAZl2wKdFDdQyHzJRMikC54FnL51P72d9Chn6LCihbreYk0m4n9Mqv
- 4nPgLTFKPqYoDRbLkdy4cKYqg6HeLaZzG27znZ+DBoAbxqBt3JiyCnMxdmh4dzJk5JxCsbbhQC+
- Kdd5E4Bho00f3HEEeqFZCdk5bBlDy2pZYwBfLLDzudxMMijk8QHQP5qxoHQklmRhDczI2rgXp1z
- lMdqDxp9cxhocYqGV7jOOyJATUx2vxr2EzaIaauWf6gnjnvjMxnMWWW+8dhz6iY90nUWE2nPqyZ
- CLDGqCNUhMhZt/usKKIV/gt/ji46P/vKKlEhJSh29up0tIMgvyMAD6iX5qWCyAbrQOFMs5XiPa2
- gQ1iLrdL3ilQzyELSaMv5anxAY1x4sEfudIYYIkFqVXyQyfwwBZywQuttw6KFhf637sZ6Ga2gPT
- iCV1DNIc6k4CG53FTMQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-07-06_01,2026-07-03_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 bulkscore=0 clxscore=1015 phishscore=0 impostorscore=0
- priorityscore=1501 adultscore=0 lowpriorityscore=0 suspectscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607060094
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [0.84 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[ibm.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[ibm.com:s=pp1];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[tu-dortmund.de,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[tu-dortmund.de:s=unimail];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[34];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-95107-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:ynorov@nvidia.com,m:linux-kernel@vger.kernel.org,m:mingo@kernel.org,m:peterz@infradead.org,m:juri.lelli@redhat.com,m:vincent.guittot@linaro.org,m:yury.norov@gmail.com,m:kprateek.nayak@amd.com,m:iii@linux.ibm.com,m:corbet@lwn.net,m:tglx@kernel.org,m:gregkh@linuxfoundation.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:vschneid@redhat.com,m:huschle@linux.ibm.com,m:rostedt@goodmis.org,m:dietmar.eggemann@arm.com,m:maddy@linux.ibm.com,m:srikar@linux.ibm.com,m:hdanton@sina.com,m:chleroy@kernel.org,m:vineeth@bitbyteword.org,m:frederic@kernel.org,m:arighi@nvidia.com,m:pauld@redhat.com,m:christian.loehle@arm.com,m:tj@kernel.org,m:tommaso.cucinotta@gmail.com,m:maz@kernel.org,m:rafael@kernel.org,m:rdunlap@infradead.org,m:kernellwp@gmail.com,m:linux-doc@vger.kernel.org,m:yurynorov@gmail.com,m:tommasocucinotta@gmail.com,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-95113-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:willemdebruijn.kernel@gmail.com,m:jasowangio@gmail.com,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:mst@redhat.com,m:netdev@vger.kernel.org,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:andrew+netdev@lunn.ch,m:tim.gebauer@tu-dortmund.de,m:brett@librecast.net,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:simon.schippers@tu-dortmund.de,m:willemdebruijnkernel@gmail.com,m:andrew@lunn.ch,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[sshegde@linux.ibm.com,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,infradead.org,redhat.com,linaro.org,gmail.com,amd.com,linux.ibm.com,lwn.net,linuxfoundation.org,google.com,goodmis.org,arm.com,sina.com,bitbyteword.org,nvidia.com];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,linux.ibm.com:mid,linux.ibm.com:from_mime,vger.kernel.org:from_smtp];
+	FORGED_SENDER(0.00)[simon.schippers@tu-dortmund.de,linux-doc@vger.kernel.org];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FREEMAIL_TO(0.00)[gmail.com,davemloft.net,google.com,kernel.org,redhat.com,vger.kernel.org];
+	DKIM_TRACE(0.00)[tu-dortmund.de:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[sshegde@linux.ibm.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[simon.schippers@tu-dortmund.de,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[ibm.com:+];
+	TO_DN_SOME(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCVD_COUNT_SEVEN(0.00)[11]
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: AA0C970EE4C
+X-Rspamd-Queue-Id: 5AF7C70F83F
 
-Hi Yury,
+Commit 1d6e569b7d0c ("tun/tap & vhost-net: avoid ptr_ring tail-drop
+when a qdisc is present") did not show a relevant performance regression
+in my testing but on Brett Sheffield's librecast testbed it shows a
+significant performance drop in a IPv6 multicast testcase. The regression
+can be pinpointed when multiple iperf3 UDP threads are sending. For 8
+threads the performance dropped from 13.5 Gbit/s to 9.13 Gbit/s. This is
+the reason why this patch makes the qdisc backpressure behavior opt-in.
 
-On 7/4/26 2:41 AM, Yury Norov wrote:
-> On Wed, Jul 01, 2026 at 07:46:49PM +0530, Shrikanth Hegde wrote:
->> These methods will be used by the steal_monitor core in subsequent
->> patches. Default implementation are likely good enough for most archs.
->>
->> decrease_preferred_cpus() - Called when there is high steal time. It needs
->> to decide which CPUs to mark as non-preferred and set that state.
->> increase_preferred_cpus() - Called when there is low steal time. It needs
->> to decide which CPUs to mark as preferred and set that state.
->>
->> Default Implementations:
->> decrease_preferred_cpus()
->> - Get first housekeeping CPU and its core mask. Mark it as
->>    protected core. This helps to keep at least one core as preferred.
-> 
-> Is there any measurable difference to manage preferred CPUs per-core
-> vs per-cpu? If not, I'd choose to per-cpu version as it's simpler.
-> 
+One option to accomplish the opt-in would be to set the default qdisc to
+noqueue at init. However this may also break userspace as users might
+have chosen a custom qdisc even though most of the qdiscs did nothing
+for tun/tap in the past due to missing backpressure...
 
-Yes, per-core is much better.
-Since powerpc is SMT8 and phyp does core scheduling, taking on/off a full core makes a difference.
+This is the reason why in this patch, the flag IFF_BACKPRESSURE is
+introduced instead which is required to enable the backpressure logic.
+This means the stopping logic in tun_net_xmit() and the waking logic in
+__tun_wake_queue() are skipped if the flag is disabled.
 
-Even for other arch having it per core (SMT2 is being most common) it better IMO.
-It allows to achieve the same level of packing without aggressive interval_ms.
+To avoid a possible stall due to disabling IFF_BACKPRESSURE, the new
+helper tun_force_wake_queue() is implemented. The helper safely wakes the
+respective netdev queue and resets cons_cnt while the consumer_lock and
+the producer_lock of the ring are held. The helper is run in tun_attach()
+when a queue (re)attaches, in tun_set_iff() for attached tfiles, and
+in tun_queue_resize().
 
->>    This is to be safe under non-normal cases.
->> - Find the last CPU outside of this protected core mask. (target CPU)
->>    This works for cases where one may specify nohz_full= for last set of
->>    CPUs as well.
-> 
-> And doesn't work for cases where one specifies nohz_full for the first
-> set of CPUs. If you want to do it properly, you need two passes:
-> 1. Search for preferred nohz_full candidates, and
-> 2. If no such CPU found, search for any preferred CPU.
-> 
+The documentation in tuntap.rst is updated accordingly.
 
-It works, in that case protected core is one outside of nohz_full list.
+Fixes: 1d6e569b7d0c ("tun/tap & vhost-net: avoid ptr_ring tail-drop when a qdisc is present")
+Reported-by: Brett Sheffield <brett@librecast.net>
+Closes: https://lore.kernel.org/netdev/akVnoOYQOrt8k-Gu@karahi.librecast.net/T/#u
+Signed-off-by: Simon Schippers <simon.schippers@tu-dortmund.de>
+---
+V1 -> V2:
+- Sashiko: Ensure detached queues are woken on re-attach by calling the
+  new tun_force_wake_queue() helper from tun_attach(), and reuse it
+  across the existing wake paths.
+- Specify the failing test case in the commit message.
+---
+ Documentation/networking/tuntap.rst | 17 ++++++++++
+ drivers/net/tun.c                   | 49 ++++++++++++++++++-----------
+ include/uapi/linux/if_tun.h         |  1 +
+ tools/include/uapi/linux/if_tun.h   |  1 +
+ 4 files changed, 50 insertions(+), 18 deletions(-)
 
-I have tried on the system.
-I have 480 CPUs. (60 cores SMT8) I see this happening.
-
-If nohz_full=<0-239> protected core will be 240-247
-(CPUs 240-479 are part of HK_TYPE_KERNEL_NOISE)
-if nohz_full=<240-479> protected core is 0-7
-(CPUs 0-239 are part of HK_TYPE_KERNEL_NOISE)
-
-If i pass nohz_full=0-479, then i see below in dmesg.
-Housekeeping: must include one present CPU, using boot CPU:0
-cat nohz_full
-1-479
-In that case too, protected core is 0-7
-
->> - If no such CPU exits, then only housekeeping core remains. Bail out.
->> - Based on that target CPU, get its sibling and mark them as
->>    non-preferred. If they are nohz_full, enable the tick.
->>    push mechanism relies on sched_tick.
->>
->> increase_preferred_cpus()
->> - Get the first active non-preferred CPUs. This likely is the last
->>    set of CPUs being marked as non-preferred.
->> - If there is no such CPU, i.e preferred is same as active. Nothing
->>    todo further.
->> - If not, get the siblings of that core and mark them as preferred.
->>    Note that clearing the tick isn't needed as that would be handled via
->>    sched_can_stop_tick.
->>
->> Using core instead of individual CPUs give better numbers as SMT is
->> quite common and some hypervisor such as powerVM does core scheduling.
->>
->> Note: This doesn't do any NUMA splicing to keep the code simpler and
->> minimal overhead. current code expects CPUs spread unformly
->> across NUMA nodes.
->>
->> Signed-off-by: Shrikanth Hegde <sshegde@linux.ibm.com>
->> ---
->> v5->v6:
->> - Make it work for all cases when nohz_full= may be specified.
->>
->>   drivers/virt/steal_monitor/defaults.c | 74 +++++++++++++++++++++++++++
->>   drivers/virt/steal_monitor/sm_core.h  |  2 +
->>   2 files changed, 76 insertions(+)
->>
->> diff --git a/drivers/virt/steal_monitor/defaults.c b/drivers/virt/steal_monitor/defaults.c
->> index 6681f9938f6a..4e2e5b233948 100644
->> --- a/drivers/virt/steal_monitor/defaults.c
->> +++ b/drivers/virt/steal_monitor/defaults.c
->> @@ -26,3 +26,77 @@ u64 __weak get_system_steal_time(void)
->>   
->>   	return total_steal;
->>   }
->> +
->> +/*
->> + * Default implementation of decrementing the preferred CPUs based on steal
->> + * time. This is simple logic and decrease the preferred CPUs by 1 core.
->> + * It takes out the last core in the active & preferred.
->> + *
->> + * Ensure at least one housekeeping core is always kept as preferred
->> + *
->> + * Could be overwritten by arch specific handling. Arch must ensure
->> + * preferred is always subset of active.
->> + */
->> +
->> +#define get_core_mask(cpu) topology_sibling_cpumask(cpu)
-> 
-> useless redefinition.
-
-that was keep for loop under 80 chars. I can drop it.
-
-> 
->> +
->> +void __weak decrease_preferred_cpus(struct steal_monitor *ctx)
->> +{
->> +	int tmp_cpu, first_hk_cpu;
->> +	const struct cpumask *first_hk_core;
->> +	int target_cpu = nr_cpu_ids;
->> +
->> +	guard(cpus_read_lock)();
->> +
->> +	first_hk_cpu = cpumask_first_and(housekeeping_cpumask(HK_TYPE_KERNEL_NOISE),
->> +					 cpu_active_mask);
-> 
-> Why active mask? If you want to preserve a cpu in preferred mask,
-> search the cpu_preferred_mask.
-> 
-> Can you explain why HK_TYPE_KERNEL_NOISE? Honestly, I don't
-> understand the idea behind this logic.
-
-HK_TYPE_KERNEL_NOISE logic is, kernel ensures atleast one CPU is always left and it
-can't be hotplugged. So use that core for the protected core, as leaving atleast one
-core as preferred is better.
-
-Whole logic (this patch and Patch 23 is to ensure that) is leave that core as preferred.
-
-For example, I have 480 CPUs. (60 cores SMT8)
-
-If nohz_full=<0-239> protected core will be 240-247
-(CPUs 240-479 are part of HK_TYPE_KERNEL_NOISE)
-
-if nohz_full=<240-479> protected core is 0-7
-(CPUs 0-239 are part of HK_TYPE_KERNEL_NOISE)
-
-
-I see that happening with the patch series.
-
-> 
->> +
->> +	if (first_hk_cpu >= nr_cpu_ids)
->> +		return;
->> +
->> +	first_hk_core = get_core_mask(first_hk_cpu);
->> +
->> +	/* Always leave first housekeeping core as preferred. */
->> +	for_each_cpu_andnot(tmp_cpu, cpu_preferred_mask, first_hk_core)
->> +		target_cpu = tmp_cpu;
->> +
->> +	/* Only the first housekeeping core remains */
->> +	if (target_cpu >= nr_cpu_ids)
->> +		return;
->> +
->> +	/*
->> +	 * set tick bit for nohz_full CPU to push the task out. Once the tasks
->> +	 * are pushed out, bit will be cleared if there are no tasks.
->> +	 */
->> +
->> +	for_each_cpu_and(tmp_cpu, get_core_mask(target_cpu), cpu_active_mask) {
-> 
-> Why active mask here? It should be preferred, I guess? If you traverse
-> the active mask, you're at least doing an extra work by disabling the
-> already disabled CPUs, and probably have some side effects by calling
-> tick_nohz_dep_set_cpu() twice.
-
-Ok. I think preferred is better here.
-
-But active also shouldn't cause any issue i think, since target_cpu is expected
-to be a preferred CPU. So there is no double disable.
-
-If there is was hotplug done, then it won;t be there in active too.
-It takes cpus_read_lock to be safe against hotplug happening in parallel.
-
-> 
->> +		set_cpu_preferred(tmp_cpu, false);
->> +		if (tick_nohz_full_cpu(tmp_cpu))
->> +			tick_nohz_dep_set_cpu(tmp_cpu, TICK_DEP_BIT_SCHED);
->> +	}
->> +}
->> +
->> +/*
->> + * Default implementation of incrementing preferred CPUs based on steal
->> + * time. This is simple logic and increases the preferred CPUs by 1 core.
->> + * It adds the first core in active & !preferred
->> + *
->> + * Nothing to do if active == preferred
->> + *
->> + * Could be overwritten by arch specific handling. Arch must ensure
->> + * preferred is subset of active.
->> + */
->> +void __weak increase_preferred_cpus(struct steal_monitor *ctx)
->> +{
->> +	int first_cpu, tmp_cpu;
->> +
->> +	guard(cpus_read_lock)();
->> +
->> +	first_cpu = cpumask_first_andnot(cpu_active_mask, cpu_preferred_mask);
->> +	/* All CPUs are preferred. Nothing to increase further */
->> +	if (first_cpu >= nr_cpu_ids)
->> +		return;
->> +
->> +	for_each_cpu_and(tmp_cpu, get_core_mask(first_cpu), cpu_active_mask)
-> 
-> Here I agree, it should be cpu_active_mask.
-
-Yes.
-
-> 
->> +		set_cpu_preferred(tmp_cpu, true);
->> +}
->> diff --git a/drivers/virt/steal_monitor/sm_core.h b/drivers/virt/steal_monitor/sm_core.h
->> index 634c9f5a2610..030f6236c38e 100644
->> --- a/drivers/virt/steal_monitor/sm_core.h
->> +++ b/drivers/virt/steal_monitor/sm_core.h
->> @@ -26,5 +26,7 @@ struct steal_monitor {
->>   extern struct steal_monitor sm_core_ctx;
->>   
->>   u64 get_system_steal_time(void);
->> +void increase_preferred_cpus(struct steal_monitor *ctx);
->> +void decrease_preferred_cpus(struct steal_monitor *ctx);
->>   
->>   #endif /* __VIRT_STEAL_CORE_H */
->> -- 
->> 2.47.3
+diff --git a/Documentation/networking/tuntap.rst b/Documentation/networking/tuntap.rst
+index 4d7087f727be..599264825dd2 100644
+--- a/Documentation/networking/tuntap.rst
++++ b/Documentation/networking/tuntap.rst
+@@ -206,6 +206,23 @@ enable is true we enable it, otherwise we disable it::
+       return ioctl(fd, TUNSETQUEUE, (void *)&ifr);
+   }
+ 
++3.4 qdisc backpressure
++----------------------
++
++Starting with Linux 7.2, IFF_BACKPRESSURE can be set to enable qdisc
++backpressure. Without it, TX drops occur when the internal ring buffer is
++full. With it, the kernel stops the TX queue instead, letting the qdisc
++hold packets. Drops only occur as a rare race. This can benefit protocols
++like TCP that react to drops. Backpressure requires a qdisc to be
++attached and has no effect with noqueue.
++
++The TUN/TAP ring buffer size can be reduced alongside this flag to
++further shift buffering into the qdisc and reduce bufferbloat, but comes
++at possible performance cost.
++
++When running multiple network streams in parallel, the flag may reduce
++performance due to the extra overhead of the backpressure mechanism.
++
+ Universal TUN/TAP device driver Frequently Asked Question
+ =========================================================
+ 
+diff --git a/drivers/net/tun.c b/drivers/net/tun.c
+index ffbe6f13fb1f..62e5eab4e345 100644
+--- a/drivers/net/tun.c
++++ b/drivers/net/tun.c
+@@ -98,7 +98,8 @@ static void tun_default_link_ksettings(struct net_device *dev,
+ #define TUN_FASYNC	IFF_ATTACH_QUEUE
+ 
+ #define TUN_FEATURES (IFF_NO_PI | IFF_ONE_QUEUE | IFF_VNET_HDR | \
+-		      IFF_MULTI_QUEUE | IFF_NAPI | IFF_NAPI_FRAGS)
++		      IFF_MULTI_QUEUE | IFF_NAPI | IFF_NAPI_FRAGS | \
++		      IFF_BACKPRESSURE)
+ 
+ #define GOODCOPY_LEN 128
+ 
+@@ -694,6 +695,20 @@ static void tun_detach_all(struct net_device *dev)
+ 		module_put(THIS_MODULE);
+ }
+ 
++static void tun_force_wake_queue(struct tun_struct *tun,
++				 struct tun_file *tfile)
++{
++	/* Ensure that the producer can not stop the
++	 * queue concurrently by taking locks.
++	 */
++	spin_lock_bh(&tfile->tx_ring.consumer_lock);
++	spin_lock(&tfile->tx_ring.producer_lock);
++	netif_wake_subqueue(tun->dev, tfile->queue_index);
++	tfile->cons_cnt = 0;
++	spin_unlock(&tfile->tx_ring.producer_lock);
++	spin_unlock_bh(&tfile->tx_ring.consumer_lock);
++}
++
+ static int tun_attach(struct tun_struct *tun, struct file *file,
+ 		      bool skip_filter, bool napi, bool napi_frags,
+ 		      bool publish_tun)
+@@ -737,11 +752,9 @@ static int tun_attach(struct tun_struct *tun, struct file *file,
+ 		goto out;
+ 	}
+ 
+-	spin_lock(&tfile->tx_ring.consumer_lock);
+-	tfile->cons_cnt = 0;
+-	spin_unlock(&tfile->tx_ring.consumer_lock);
+ 	tfile->queue_index = tun->numqueues;
+ 	tfile->socket.sk->sk_shutdown &= ~RCV_SHUTDOWN;
++	tun_force_wake_queue(tun, tfile);
+ 
+ 	if (tfile->detached) {
+ 		/* Re-attach detached tfile, updating XDP queue_index */
+@@ -1077,7 +1090,8 @@ static netdev_tx_t tun_net_xmit(struct sk_buff *skb, struct net_device *dev)
+ 
+ 	spin_lock(&tfile->tx_ring.producer_lock);
+ 	ret = __ptr_ring_produce(&tfile->tx_ring, skb);
+-	if (!qdisc_txq_has_no_queue(queue) &&
++	if ((tun->flags & IFF_BACKPRESSURE) &&
++	    !qdisc_txq_has_no_queue(queue) &&
+ 	    __ptr_ring_check_produce(&tfile->tx_ring) == -ENOSPC) {
+ 		netif_tx_stop_queue(queue);
+ 		/* Paired with smp_mb() in __tun_wake_queue() */
+@@ -2151,8 +2165,12 @@ static ssize_t tun_put_user(struct tun_struct *tun,
+ static void __tun_wake_queue(struct tun_struct *tun,
+ 			     struct tun_file *tfile, int consumed)
+ {
+-	struct netdev_queue *txq = netdev_get_tx_queue(tun->dev,
+-						tfile->queue_index);
++	struct netdev_queue *txq;
++
++	if (!(tun->flags & IFF_BACKPRESSURE))
++		return;
++
++	txq = netdev_get_tx_queue(tun->dev, tfile->queue_index);
+ 
+ 	/* Paired with smp_mb__after_atomic() in tun_net_xmit() */
+ 	smp_mb();
+@@ -2764,7 +2782,7 @@ static int tun_set_iff(struct net *net, struct file *file, struct ifreq *ifr)
+ 	struct tun_struct *tun;
+ 	struct tun_file *tfile = file->private_data;
+ 	struct net_device *dev;
+-	int err;
++	int err, i;
+ 
+ 	if (tfile->detached)
+ 		return -EINVAL;
+@@ -2894,7 +2912,8 @@ static int tun_set_iff(struct net *net, struct file *file, struct ifreq *ifr)
+ 	 * xoff state.
+ 	 */
+ 	if (netif_running(tun->dev))
+-		netif_tx_wake_all_queues(tun->dev);
++		for (i = 0; i < tun->numqueues; i++)
++			tun_force_wake_queue(tun, rtnl_dereference(tun->tfiles[i]));
+ 
+ 	strscpy(ifr->ifr_name, tun->dev->name);
+ 	return 0;
+@@ -3690,15 +3709,9 @@ static int tun_queue_resize(struct tun_struct *tun)
+ 					  dev->tx_queue_len, GFP_KERNEL,
+ 					  tun_ptr_free);
+ 
+-	if (!ret) {
+-		for (i = 0; i < tun->numqueues; i++) {
+-			tfile = rtnl_dereference(tun->tfiles[i]);
+-			spin_lock(&tfile->tx_ring.consumer_lock);
+-			netif_wake_subqueue(tun->dev, tfile->queue_index);
+-			tfile->cons_cnt = 0;
+-			spin_unlock(&tfile->tx_ring.consumer_lock);
+-		}
+-	}
++	if (!ret)
++		for (i = 0; i < tun->numqueues; i++)
++			tun_force_wake_queue(tun, rtnl_dereference(tun->tfiles[i]));
+ 
+ 	kfree(rings);
+ 	return ret;
+diff --git a/include/uapi/linux/if_tun.h b/include/uapi/linux/if_tun.h
+index 79d53c7a1ebd..73a77141315c 100644
+--- a/include/uapi/linux/if_tun.h
++++ b/include/uapi/linux/if_tun.h
+@@ -69,6 +69,7 @@
+ #define IFF_NAPI_FRAGS	0x0020
+ /* Used in TUNSETIFF to bring up tun/tap without carrier */
+ #define IFF_NO_CARRIER	0x0040
++#define IFF_BACKPRESSURE	0x0080
+ #define IFF_NO_PI	0x1000
+ /* This flag has no real effect */
+ #define IFF_ONE_QUEUE	0x2000
+diff --git a/tools/include/uapi/linux/if_tun.h b/tools/include/uapi/linux/if_tun.h
+index 2ec07de1d73b..97b670f5bc0a 100644
+--- a/tools/include/uapi/linux/if_tun.h
++++ b/tools/include/uapi/linux/if_tun.h
+@@ -67,6 +67,7 @@
+ #define IFF_TAP		0x0002
+ #define IFF_NAPI	0x0010
+ #define IFF_NAPI_FRAGS	0x0020
++#define IFF_BACKPRESSURE	0x0080
+ #define IFF_NO_PI	0x1000
+ /* This flag has no real effect */
+ #define IFF_ONE_QUEUE	0x2000
+-- 
+2.43.0
 
 
