@@ -1,78 +1,80 @@
-Return-Path: <linux-doc+bounces-95144-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95146-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id nS1UNH2+S2o2ZgEAu9opvQ
-	(envelope-from <linux-doc+bounces-95144-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 16:41:01 +0200
+	id noUSEI6+S2o6ZgEAu9opvQ
+	(envelope-from <linux-doc+bounces-95146-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 16:41:18 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3FD89712177
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 16:41:01 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id BF98771218A
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Jul 2026 16:41:17 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gourry.net header.s=google header.b=FKilO3SP;
+	dkim=pass header.d=gourry.net header.s=google header.b=Hj9BFTIG;
 	dmarc=none;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95144-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95144-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95146-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-95146-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 1CB50317FE02
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 14:00:54 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id B1FCB3186959
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jul 2026 14:01:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 20C1E37703B;
-	Mon,  6 Jul 2026 14:00:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5A811348C70;
+	Mon,  6 Jul 2026 14:01:03 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com [209.85.222.170])
+Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com [209.85.222.175])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A5CD376BD9
-	for <linux-doc@vger.kernel.org>; Mon,  6 Jul 2026 14:00:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B4C1D27F728
+	for <linux-doc@vger.kernel.org>; Mon,  6 Jul 2026 14:01:01 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783346442; cv=none; b=bzojnteVJt1CZuWLzMxCN4kApXDGzmaphXxQC/k1SGzA0OgfdygefHCBZCAH0x4ezzKnbcn7TSPvR1IvlEr4g52e/HKZzV6fl3B3tsXRieHlntoSBYetl0SKlUhEzQRCj2vciqmxKdyWJJM1FfHUo4yF5GhOM/hm4K+jAQ3O3xE=
+	t=1783346463; cv=none; b=SePcm0c6JHOIFry7cDcgImw6DUWJWPHTsoZ/LEzaJYPVNrEyMnq/8S/cKxXJ6lOhf+zZyWW4DkNJNMSprE3H8qgzVTWtucVIZ0XpupfgXqYs/rHVYfH86I7nd5cg13Go7Mw2A5HwxjmXp02DFgRvBByiS3+JA88xJNqleGqQP7E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783346442; c=relaxed/simple;
-	bh=GT+ppberu0anEAeC+qXazUY5shgeTwe7gFCmxdinqZQ=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=hK83PjeQnkXuFe6e61naIpOJ+vThknpBHg+nFYkvCEvoFxmxCA/AdItrk6pKzljvoOfIfwZv758Wi7hYSSIDfzqBV362OTguMqSHUYxvkyvNwxVu84R85vqNz93to2E2BncNdYU2rFBYSL7F1siRqVBA88Ni+4On4zDjNlraULg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net; spf=pass smtp.mailfrom=gourry.net; dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b=FKilO3SP; arc=none smtp.client-ip=209.85.222.170
-Received: by mail-qk1-f170.google.com with SMTP id af79cd13be357-92e5c9211d2so245252785a.1
-        for <linux-doc@vger.kernel.org>; Mon, 06 Jul 2026 07:00:40 -0700 (PDT)
+	s=arc-20240116; t=1783346463; c=relaxed/simple;
+	bh=EB9bl3+08DCr5hMRFP2x18GYsUrC/G2BROQXGL5I3fs=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=qT3OX3iNw+1HGRlOuneIcuHeH7aWEScpgSUGZBg/ylBLscEgNjhjNksyrV8LHQ48gdM7o56Ujn1/AuDyjyeNOcnMkQ7FcEyjZQArHYe+6jU79UlbHmsvm2LZBitm+yZp1xmlz9jYN9FnR2+ml6CABV8GYyc5hW9+DKQH8Uj9wlM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net; spf=pass smtp.mailfrom=gourry.net; dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b=Hj9BFTIG; arc=none smtp.client-ip=209.85.222.175
+Received: by mail-qk1-f175.google.com with SMTP id af79cd13be357-92e57a753f9so224407585a.2
+        for <linux-doc@vger.kernel.org>; Mon, 06 Jul 2026 07:01:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gourry.net; s=google; t=1783346439; x=1783951239; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=gMQ0qI/f+RyF4bWPFQs8Uzubn//EeZ6p5jr0pifSbWk=;
-        b=FKilO3SP2i/MAFuuSbllSSYXybkBdbne+G8dJ7Lv8rhQ+Su912RjmfvR6l6v2XeQq9
-         T6QneZonXsGfGhcZft2Yo+QU4pqJOzVTncMqHB/680MlWXIKTdCpNImFVLHAWeLx9T8E
-         Ne3EPpGdxF/bC8tbCObFJgz2Z7JAmiNvq8B+HbpThOAVE+MTVoMhNKhUu7vNxjznIkk5
-         VBAIOQ8ra4/DhPm0osHX+++XEi7ZzZBwa+MzDHO9GcAQ4aFy8DPAY8d4sBhfDQrxmecW
-         1c1KqcTXf76ScLQCQkedoPi3YYFJYyiozzZ0cjv6zsZPeG/YfpEtcU6yw87ZKdioYSPd
-         /vGw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783346439; x=1783951239;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gourry.net; s=google; t=1783346461; x=1783951261; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=gMQ0qI/f+RyF4bWPFQs8Uzubn//EeZ6p5jr0pifSbWk=;
-        b=Ogbvtmc1YyKC1khxW7Wwzrf/7Lxzhb8vdXcGZWDwf+cOwQkYH6rxMijMXquZ6c1bdj
-         YC63s3Jnc9MyKUoQHF8U7x5gJvX7r1UI1Cq/TGPPlykz6RyDsTWr+QKM5WX0kyPpDi8b
-         lv53X0jnMBTzaYofCNKAQkCZcmHt35fnrbNMtt0NQcriDmMRsnbXFZXns0shuhGcUdKq
-         nII5MyZZZB6HwDWbjY3a4WWtA6Ju1+FxoZigT3tj29L3Q9tc9cwBkiOrLF82mjCshpft
-         Im78ZnK/5yhX2pxQkGENpetG3Xq/iVnhgn8/uLgFZk67uBlNFId2KTVM7LlJRpmDnDYE
-         tNyg==
-X-Gm-Message-State: AOJu0YzSYVlhFddTXElsbE/9bjijLDWw5XJWxdoC8gnrEYKj4KTh6XNu
-	lcX7h2PsMXnHXP/9iKTtE2T0aVfb83dqGhAofbPbrZAoTCoaaLPse0oGYuxuaO2jDGI=
-X-Gm-Gg: AfdE7cn182ptGMGXu/xCz1EGnxg371/TjILIl1YBM+K2RgGiVmpioZB+pUGE9LUYEYJ
-	xYKWGEVrUgYG00TdGFamDe+8ZIMdE9k4+0K1hRrhNKPPOWyxoC0Sw35WbHQpmKK57FnbyUa5mlP
-	gblBmeoFOdZF893ZHZ0M+08MhD7mf/UVd1DraOO0bfa6LmouIBIho2OD/WL6aW/Yk08DotsAU0Q
-	TkJ65iX+rrQi8CkO05XVFopONm28rkmWBFm3MjTEe8eqZbkvFR3cPQ6pvjiJKCL/Udky0DKi47l
-	LrmW5gpb3yNBuXs6PBoXwjXLVaIuCnlXDbPGD+mmGJ4B/M66byxOa37BKPRRKSJaMyMtdYKgVRm
-	poSSLP4Z5pew1Uu4Bpp9W4XQ5mJkK+Jo2v60RrfM7eGLiTdxB9ghspmKQR2UlhOYz/sS21CWKYb
-	2Xc8SF5mo=
-X-Received: by 2002:a05:620a:880b:b0:92b:3720:bc5d with SMTP id af79cd13be357-92ebb55780cmr90485685a.38.1783346432478;
-        Mon, 06 Jul 2026 07:00:32 -0700 (PDT)
+        bh=EaKA4XfYRMSPlyfQmcR3Q5U3XM9OAtXE2SUzPnGXtCQ=;
+        b=Hj9BFTIG+FcpOHC2MaDl6b9RzkHsb16JtMnXoOX2q+po2P+J9xBlYXQS87fnXfYYgj
+         ZytbFWF+6XrNHTPxfN7JxwU4J43BFPQdeiVXtp+RMyS1Y0m7ivua53X+AHJFss4IsEKV
+         l04YIbvWSSHtz6a2puRfIgxihIUSSRQ0vDQXqGzwGssp+SlRSbFPlGh6mcY/m12/PIk0
+         OnS/TeeV9SCc2ibMU7PBq3uLEl6V9XVVXWD9yyQexGtFUpZP4SjbeTzngXjz6Rcm4TGu
+         3QcOmsFkj+fburvkUQdM0bGM1AygRLZGSGJ93pqBHWVDYdgYvj6iIwPZJW7Xw44b0oT1
+         LUJA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783346461; x=1783951261;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=EaKA4XfYRMSPlyfQmcR3Q5U3XM9OAtXE2SUzPnGXtCQ=;
+        b=tWCrM5yhzl9kFrKbatpux2w+L33e+zi8sFqIuMVeX/0qRMuQBuK0ujSCgFs/xIcRhg
+         h/i1oXMcSG0prDBVjKHy4BSlp/nYc/+0CmeYosON2t5YI7nqlIYv6OPVXRC+gqDK1Oeh
+         79rXPHjbLxNp/8OIjzG24fc/BFA8HwsY+o3v5tbY3WSuLJzhk7sdI9stFuqY5OIKS/xh
+         M3qUcFtJCMK9rPDaExLs7oyXMDm1r3BO0Jg+YDa0lDv5QfhrFa8CFC7ZYsMQhQuv0hng
+         Mzje3bhovd2JeyaGJFuTkiIoviSKGAQlIz9TOws1hYz8GKhd33oyyMo7qQtC1kPexE8X
+         ebrw==
+X-Gm-Message-State: AOJu0YxnY7bQSWnR5bj3pcNQVTN4C1W6d7JlF0JUZ4eUaQXlTNvnC+fB
+	vj5kEt0lkmuZMbfQoGStNz9pLB6l54kOSptSpmZxsW3pv8/whMNiPZiP6pLFH6uivKw=
+X-Gm-Gg: AfdE7cmBA+bl0WvWDgWn7S6EMLHv5zGvKOI7k9reGV7RCBgGodwb+vhKAdYyu6tRKTU
+	BIcCmV9UrbP2DnSt3P+U8uhMI9m9r2jrrOw9OLFJcJYTjvL2g8OmjQWDiMQdEuoeOtQMY7aGhzV
+	IwoJyanY6u9i+34NnfxaKXJn7JcbG8YJwebSMXjQ/fI85Jzt8tcV7ed8DU4c1GVmMDXHH4HTmOX
+	/WYj/NHhLDZs8fzbwIGbN17JDjLPpV1VlKGbeuOSw3lM2c2py9Ion+TPxXfclA0fyw3jb3aKmX+
+	VrsYQGh2agT6xtKQEsoaEaqgoMiItTPxvSpHAB/EROEjdrAliIUy3k7651wqqyw7dXJk77SBj16
+	WHDXnQK2ZFhY/WzJJAQ7Dlj88QIEi3p5lc5TegMSYMYqz8MYA5zb1qh8baGb99DdqF3m9PZiD98
+	65XBX9Rzs=
+X-Received: by 2002:a05:620a:4014:b0:92e:5ef2:2c0d with SMTP id af79cd13be357-92ebb5af416mr91321085a.63.1783346436180;
+        Mon, 06 Jul 2026 07:00:36 -0700 (PDT)
 Received: from fedora ([172.56.218.236])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-92e90cce037sm918577385a.38.2026.07.06.07.00.28
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-92e90cce037sm918577385a.38.2026.07.06.07.00.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 Jul 2026 07:00:30 -0700 (PDT)
+        Mon, 06 Jul 2026 07:00:35 -0700 (PDT)
 From: Gregory Price <gourry@gourry.net>
 To: linux-kernel@vger.kernel.org
 Cc: linux-doc@vger.kernel.org,
@@ -95,10 +97,12 @@ Cc: linux-doc@vger.kernel.org,
 	xur@google.com,
 	lukas.bulwahn@redhat.com,
 	ryan.roberts@arm.com
-Subject: [PATCH v3 0/2] syscall_user_dispatch: add build/runtime configs
-Date: Mon,  6 Jul 2026 10:00:17 -0400
-Message-ID: <20260706140020.873735-1-gourry@gourry.net>
+Subject: [PATCH v3 1/2] syscall_user_dispatch: Make it configurable in Kconfig
+Date: Mon,  6 Jul 2026 10:00:18 -0400
+Message-ID: <20260706140020.873735-2-gourry@gourry.net>
 X-Mailer: git-send-email 2.54.0
+In-Reply-To: <20260706140020.873735-1-gourry@gourry.net>
+References: <20260706140020.873735-1-gourry@gourry.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -112,13 +116,13 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
 	R_DKIM_ALLOW(-0.20)[gourry.net:s=google];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS(0.00)[m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:tglx@kernel.org,m:peterz@infradead.org,m:luto@kernel.org,m:akpm@linux-foundation.org,m:feng.tang@linux.alibaba.com,m:pmladek@suse.com,m:lance.yang@linux.dev,m:marc.herbert@linux.intel.com,m:kees@kernel.org,m:leitao@debian.org,m:gourry@gourry.net,m:joel.granados@kernel.org,m:lirongqing@baidu.com,m:nathan@kernel.org,m:xur@google.com,m:lukas.bulwahn@redhat.com,m:ryan.roberts@arm.com,s:lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-95144-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-95146-lists,linux-doc=lfdr.de];
 	DMARC_NA(0.00)[gourry.net];
 	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER(0.00)[gourry@gourry.net,linux-doc@vger.kernel.org];
@@ -127,7 +131,7 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[gourry.net:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	FROM_NEQ_ENVFROM(0.00)[gourry@gourry.net,linux-doc@vger.kernel.org];
 	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
@@ -138,51 +142,176 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[21];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp,gourry.net:from_mime,gourry.net:dkim,gourry.net:mid]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[gourry.net:from_mime,gourry.net:email,gourry.net:mid,gourry.net:dkim,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 3FD89712177
+X-Rspamd-Queue-Id: BF98771218A
 
-Syscall User Dispatch is presently compiled in by default for all
-architectures enabling CONFIG_GENERIC_ENTRY, and some users may
-not wish to have the feature functional at runtime.
+Syscall User Dispatch is presently built under CONFIG_GENERIC_SYSCALL
+and cannot be disabled independently.
 
-Add CONFIG_SYSCALL_USER_DISPATCH and kernel.syscall_user_dispatch
-to make it a configurable feature at both build and runtime.
+Add CONFIG_SYSCALL_USER_DISPATCH to make it an optional feature.
 
-CONFIG_SYSCALL_USER_DISPATCH depends on CONFIG_GENERIC_ENTRY
-but is separately configurable.
-
-The runtime control is enabled by default, and disabling the feature
-while a task has already armed it does not cause it to become inactive
-in that task's context. Instead it remains active until the user
-attempts to disable/re-enable via prctl or ptrace.  On the next attempt
-to re-enable, the prctl/ptrace call fails gracefully.
-
-Gregory Price (2):
-  syscall_user_dispatch: Make it configurable in Kconfig
-  syscall_user_dispatch: add kernel.syscall_user_dispatch sysctl
-
- Documentation/admin-guide/sysctl/kernel.rst   | 17 +++++++++
- arch/Kconfig                                  | 10 +++++
- include/linux/entry-common.h                  | 11 ++----
- include/linux/syscall_user_dispatch.h         | 28 +++++++++++++-
+Signed-off-by: Gregory Price <gourry@gourry.net>
+---
+ arch/Kconfig                                  | 10 +++++++
+ include/linux/entry-common.h                  | 11 +++-----
+ include/linux/syscall_user_dispatch.h         | 28 +++++++++++++++++--
  include/linux/syscall_user_dispatch_types.h   |  2 +-
  kernel/entry/Makefile                         |  3 +-
- kernel/entry/syscall_user_dispatch.c          | 38 +++++++++++++++----
  .../selftests/syscall_user_dispatch/config    |  2 +-
- 8 files changed, 92 insertions(+), 19 deletions(-)
+ 6 files changed, 44 insertions(+), 12 deletions(-)
 
----
-
-Changes since v2:
-  - CONFIG_SYSCTL -> CONFIG_PROC_SYSCTL
-  - selftest fixup for CONFIG_SYSCALL_USER_DISPATCH
-  - Reword "IP address range"
-  - __always_inline fixup (tglx)
-  - include ordering (tglx)
-  - proc_dobool (tglx)
-  - whitespace (tglx)
-
+diff --git a/arch/Kconfig b/arch/Kconfig
+index fa7507ac8e13..0c01521c2f3f 100644
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -114,6 +114,16 @@ config GENERIC_ENTRY
+ 	select GENERIC_IRQ_ENTRY
+ 	select GENERIC_SYSCALL
+ 
++config SYSCALL_USER_DISPATCH
++	bool "Syscall User Dispatch"
++	depends on GENERIC_ENTRY
++	default y
++	help
++	  Syscall User Dispatch lets a thread have its own system calls
++	  intercepted and redirected to a userspace signal handler based
++	  on a prctl() configured instruction pointer range.
++	  If unsure, say Y.
++
+ config KPROBES
+ 	bool "Kprobes"
+ 	depends on HAVE_KPROBES
+diff --git a/include/linux/entry-common.h b/include/linux/entry-common.h
+index 416a3352261f..43afee3e1b29 100644
+--- a/include/linux/entry-common.h
++++ b/include/linux/entry-common.h
+@@ -2,6 +2,8 @@
+ #ifndef __LINUX_ENTRYCOMMON_H
+ #define __LINUX_ENTRYCOMMON_H
+ 
++#include <asm/entry-common.h>
++#include <asm/syscall.h>
+ #include <linux/audit.h>
+ #include <linux/irq-entry-common.h>
+ #include <linux/livepatch.h>
+@@ -9,9 +11,7 @@
+ #include <linux/resume_user_mode.h>
+ #include <linux/seccomp.h>
+ #include <linux/sched.h>
+-
+-#include <asm/entry-common.h>
+-#include <asm/syscall.h>
++#include <linux/syscall_user_dispatch.h>
+ 
+ #ifndef _TIF_UPROBE
+ # define _TIF_UPROBE			(0)
+@@ -55,7 +55,6 @@ static __always_inline int arch_ptrace_report_syscall_entry(struct pt_regs *regs
+ }
+ #endif
+ 
+-bool syscall_user_dispatch(struct pt_regs *regs);
+ long trace_syscall_enter(struct pt_regs *regs, long syscall);
+ void trace_syscall_exit(struct pt_regs *regs, long ret);
+ 
+@@ -232,10 +231,8 @@ static __always_inline void syscall_exit_work(struct pt_regs *regs, unsigned lon
+ 	 * of these syscalls is unknown.
+ 	 */
+ 	if (work & SYSCALL_WORK_SYSCALL_USER_DISPATCH) {
+-		if (unlikely(current->syscall_dispatch.on_dispatch)) {
+-			current->syscall_dispatch.on_dispatch = false;
++		if (syscall_user_dispatch_clear_on_dispatch())
+ 			return;
+-		}
+ 	}
+ 
+ 	audit_syscall_exit(regs);
+diff --git a/include/linux/syscall_user_dispatch.h b/include/linux/syscall_user_dispatch.h
+index 3858a6ffdd5c..3dd30f4b2799 100644
+--- a/include/linux/syscall_user_dispatch.h
++++ b/include/linux/syscall_user_dispatch.h
+@@ -6,9 +6,23 @@
+ #define _SYSCALL_USER_DISPATCH_H
+ 
+ #include <linux/thread_info.h>
++#include <linux/sched.h>
+ #include <linux/syscall_user_dispatch_types.h>
+ 
+-#ifdef CONFIG_GENERIC_ENTRY
++struct pt_regs;
++
++#ifdef CONFIG_SYSCALL_USER_DISPATCH
++
++bool syscall_user_dispatch(struct pt_regs *regs);
++
++static __always_inline bool syscall_user_dispatch_clear_on_dispatch(void)
++{
++	if (likely(!current->syscall_dispatch.on_dispatch))
++		return false;
++
++	current->syscall_dispatch.on_dispatch = false;
++	return true;
++}
+ 
+ int set_syscall_user_dispatch(unsigned long mode, unsigned long offset,
+ 			      unsigned long len, char __user *selector);
+@@ -24,6 +38,16 @@ int syscall_user_dispatch_set_config(struct task_struct *task, unsigned long siz
+ 
+ #else
+ 
++static __always_inline bool syscall_user_dispatch(struct pt_regs *regs)
++{
++	return false;
++}
++
++static __always_inline bool syscall_user_dispatch_clear_on_dispatch(void)
++{
++	return false;
++}
++
+ static inline int set_syscall_user_dispatch(unsigned long mode, unsigned long offset,
+ 					    unsigned long len, char __user *selector)
+ {
+@@ -46,6 +70,6 @@ static inline int syscall_user_dispatch_set_config(struct task_struct *task,
+ 	return -EINVAL;
+ }
+ 
+-#endif /* CONFIG_GENERIC_ENTRY */
++#endif /* CONFIG_SYSCALL_USER_DISPATCH */
+ 
+ #endif /* _SYSCALL_USER_DISPATCH_H */
+diff --git a/include/linux/syscall_user_dispatch_types.h b/include/linux/syscall_user_dispatch_types.h
+index 3be36b06c7d7..c0bdd4f760d3 100644
+--- a/include/linux/syscall_user_dispatch_types.h
++++ b/include/linux/syscall_user_dispatch_types.h
+@@ -4,7 +4,7 @@
+ 
+ #include <linux/types.h>
+ 
+-#ifdef CONFIG_GENERIC_ENTRY
++#ifdef CONFIG_SYSCALL_USER_DISPATCH
+ 
+ struct syscall_user_dispatch {
+ 	char __user	*selector;
+diff --git a/kernel/entry/Makefile b/kernel/entry/Makefile
+index 2333d70802e4..f220bae86b12 100644
+--- a/kernel/entry/Makefile
++++ b/kernel/entry/Makefile
+@@ -13,5 +13,6 @@ CFLAGS_REMOVE_common.o	 = -fstack-protector -fstack-protector-strong
+ CFLAGS_common.o		+= -fno-stack-protector
+ 
+ obj-$(CONFIG_GENERIC_IRQ_ENTRY) 	+= common.o
+-obj-$(CONFIG_GENERIC_SYSCALL) 		+= syscall-common.o syscall_user_dispatch.o
++obj-$(CONFIG_GENERIC_SYSCALL) 		+= syscall-common.o
++obj-$(CONFIG_SYSCALL_USER_DISPATCH)	+= syscall_user_dispatch.o
+ obj-$(CONFIG_VIRT_XFER_TO_GUEST_WORK)	+= virt.o
+diff --git a/tools/testing/selftests/syscall_user_dispatch/config b/tools/testing/selftests/syscall_user_dispatch/config
+index 039e303e59d7..22c4dfe167ca 100644
+--- a/tools/testing/selftests/syscall_user_dispatch/config
++++ b/tools/testing/selftests/syscall_user_dispatch/config
+@@ -1 +1 @@
+-CONFIG_GENERIC_ENTRY=y
++CONFIG_SYSCALL_USER_DISPATCH=y
 -- 
 2.54.0
 
