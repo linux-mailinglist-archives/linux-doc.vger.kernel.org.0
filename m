@@ -1,280 +1,215 @@
-Return-Path: <linux-doc+bounces-95405-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95406-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id rO6UMdkgTWpAvgEAu9opvQ
-	(envelope-from <linux-doc+bounces-95405-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 17:52:57 +0200
+	id 8H+WOcMjTWrRvgEAu9opvQ
+	(envelope-from <linux-doc+bounces-95406-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 18:05:23 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E86471D876
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 17:52:57 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 37B8F71DA48
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 18:05:23 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=cIrRwsun;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95405-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-95405-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=intel.com header.s=Intel header.b=Jf8aXEkr;
+	dmarc=pass (policy=none) header.from=intel.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95406-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95406-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 6AE0D304A8C8
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 15:41:34 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id C6BF630FB098
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 15:58:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9761541F7C7;
-	Tue,  7 Jul 2026 15:41:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id ABC26430312;
+	Tue,  7 Jul 2026 15:58:13 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.16])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 41818175A60;
-	Tue,  7 Jul 2026 15:41:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E67BC43031F;
+	Tue,  7 Jul 2026 15:58:11 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783438893; cv=none; b=DXU8O6/polvnCUFcKTzZNRX4XNRiqmrrXsZUWjYnA1TOfWq916kwjJFYHSIrUkmlpyvHnNzAPjkUrrK8SvPevBGXwJlb4oOiI0g+RJx+ilh/Ev0xLLhaGAYX+77C0pPViJiXlnsJAskMyL73HUe0WcBno8CRJOrS9x6nk4ZXAj0=
+	t=1783439893; cv=none; b=KF6fxGAdCbjni+qEuj4+xQSefIHXts8L1ditRhcrIKvueGA6nayS33dSjbQAfkUoniLhKYFakHqPC7W0y9GWZyFjJ2/pqosxEnsuoxYAUHCBQKN9DLiR+h+Ww66lrBqYXoCmPXhFgHwf1O5InwkpT9yjae8tEWpl6K+QUfsJb5o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783438893; c=relaxed/simple;
-	bh=LwsjovfpbGjUYDUE+hGvSr0VbIY/8dbOfADTatOaBSc=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=ZlRLrt2u1ytMROf852rj/2xXitLK/TWgUXqLARe+DqEl6bnCfce8OjpQQ4aIsWUP08ckkbbl2h+KJV6UxprAquYcwybUhDS42fTHRdzP4R76rss+0K+OpWe4HcMg3kIvd+AeVCDLsfDInNrG7JUi/BDLVFG5O4UxTx3gITQd5yw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cIrRwsun; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 60CED1F000E9;
-	Tue,  7 Jul 2026 15:41:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783438891;
-	bh=Q1Kwud0dvJdx+NdcimkPz3yZCGnaN/yJ0h1aVkDOmMY=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date;
-	b=cIrRwsunHV1lDrfE3muhzbxHCOAELWIUY4Y8Dr11AdxgevUodaWpzzfaQgziBJqFg
-	 Z60VV1AYFgIGExsq+K4YD+E8mINg+UGjQjUucqjzcYkgvyChec5TQWT0r8JRcDzzsO
-	 ajeOF6AnC3vYj9l0S8854nCl1kGiv6wC6OWjfR1j5vCDMbro8IHNrAuBnjzLg2/wuL
-	 VqonITdE1JIZFFud4MWnWk9fVlfKdlXHpLspgt148IMfd9dcj7xTk/HgJ6AtxoGDq9
-	 A1oZLgLvBqEPzV03Fl4gc3HqWQhBJod8ryZmA41BJag+VMtLxNAh6tIiEUqhF3XZp1
-	 hBkNn203hcJFA==
-From: Pratyush Yadav <pratyush@kernel.org>
-To: David Matlack <dmatlack@google.com>
-Cc: Pratyush Yadav <pratyush@kernel.org>,  Pasha Tatashin
- <pasha.tatashin@soleen.com>,  kexec@lists.infradead.org,
-  linux-doc@vger.kernel.org,  linux-kernel@vger.kernel.org,
-  linux-mm@kvack.org,  linux-pci@vger.kernel.org,  Adithya Jayachandran
- <ajayachandra@nvidia.com>,  Alexander Graf <graf@amazon.com>,  Alex
- Williamson <alex@shazbot.org>,  Bjorn Helgaas <bhelgaas@google.com>,
-  Chris Li <chrisl@kernel.org>,  David Rientjes <rientjes@google.com>,
-  Jacob Pan <jacob.pan@linux.microsoft.com>,  Jason Gunthorpe
- <jgg@nvidia.com>,  Jonathan Corbet <corbet@lwn.net>,  Josh Hilke
- <jrhilke@google.com>,  Leon Romanovsky <leonro@nvidia.com>,  Lukas Wunner
- <lukas@wunner.de>,  Mike Rapoport <rppt@kernel.org>,  Parav Pandit
- <parav@nvidia.com>,  Pranjal Shrivastava <praan@google.com>,  Saeed
- Mahameed <saeedm@nvidia.com>,  Samiullah Khawaja <skhawaja@google.com>,
-  Shuah Khan <skhan@linuxfoundation.org>,  Vipin Sharma
- <vipinsh@google.com>,  William Tu <witu@nvidia.com>,  Yi Liu
- <yi.l.liu@intel.com>
-Subject: Re: [PATCH v6 03/12] PCI: liveupdate: Track incoming preserved PCI
- devices
-In-Reply-To: <CALzav=fN8m9+rso7RSLR35bozZpNKv6McOR3jv1-ngxApM1BCg@mail.gmail.com>
-	(David Matlack's message of "Mon, 29 Jun 2026 11:48:55 -0700")
-References: <20260522202410.3104264-1-dmatlack@google.com>
-	<20260522202410.3104264-4-dmatlack@google.com>
-	<178144432039.1257322.9644414453415904478.b4-review@b4>
-	<ajBgj_aSuzMZG47e@google.com> <2vxzechulmcp.fsf@kernel.org>
-	<CALzav=fN8m9+rso7RSLR35bozZpNKv6McOR3jv1-ngxApM1BCg@mail.gmail.com>
-Date: Tue, 07 Jul 2026 17:41:25 +0200
-Message-ID: <2vxzechen6xm.fsf@kernel.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+	s=arc-20240116; t=1783439893; c=relaxed/simple;
+	bh=RbRMYiE9+daV0ts9FpBOpnXSHjXIEaEb4RzBHa2+DXM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=mEmT1LvOCmjngvCAVb9dnonH70T7gljpCCbECLD9Re2TkoBZu+bRofVhcrRep4hx5ZOUz8NKCCeFz+MXvJZ6pEVMbO+Qf1DsJCTwKdh8zXBs/SRjRiKNpH6QDArQFgyZglT7B6aFH/UG9GszcpBXSAtKwh4gp1qoAGTG8tlzZH8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Jf8aXEkr; arc=none smtp.client-ip=198.175.65.16
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1783439892; x=1814975892;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=RbRMYiE9+daV0ts9FpBOpnXSHjXIEaEb4RzBHa2+DXM=;
+  b=Jf8aXEkrjtn455xfOnbwFPvkkk9IjsKEe4cnlffFX/Q8GPp1NHUa6Viy
+   w4ubPRmZMbeJa1mXpcLN6Cu+gVS7QY4tuhaUi4mY8UYfaD7woQqtLrhr7
+   zRx5md8qeEBP0noDWMaFlRhr/5icZeDb1JWfuBOstdfQ2HIu7227qiO8S
+   /7Av6JGbVUFNt987kL8ImODFuQHhc11ERUEfc19aLltOvpT8Hgnnmrx5o
+   uZM/VOSRJ0nlLiBenWQxBInJ9CfsBh0Pm+oq8DflCn5eOKeEL+RzmQruy
+   nUYdQ+8hZ05EjbynBHgHT0NiFUFRXrAHi2irzWTNT0nnh6kqxxBaQx9la
+   w==;
+X-CSE-ConnectionGUID: xbyVrNdcTvC2nKGBiirHnQ==
+X-CSE-MsgGUID: J59ox94YRoqg4z1o3yvATg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11840"; a="84282025"
+X-IronPort-AV: E=Sophos;i="6.25,153,1779174000"; 
+   d="scan'208";a="84282025"
+Received: from fmviesa009.fm.intel.com ([10.60.135.149])
+  by orvoesa108.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jul 2026 08:58:12 -0700
+X-CSE-ConnectionGUID: BOFx/iMmSAGIsJHsIdTz/A==
+X-CSE-MsgGUID: eeYuXCkrSW6NlXR8G4ksIA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.25,153,1779174000"; 
+   d="scan'208";a="247652662"
+Received: from slindbla-desk.ger.corp.intel.com (HELO localhost) ([10.245.245.36])
+  by fmviesa009-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jul 2026 08:58:07 -0700
+Date: Tue, 7 Jul 2026 18:58:05 +0300
+From: Andy Shevchenko <andriy.shevchenko@intel.com>
+To: rodrigo.alencar@analog.com
+Cc: linux-iio@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-hardening@vger.kernel.org,
+	Lars-Peter Clausen <lars@metafoo.de>,
+	Michael Hennerich <Michael.Hennerich@analog.com>,
+	Jonathan Cameron <jic23@kernel.org>,
+	David Lechner <dlechner@baylibre.com>,
+	Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Philipp Zabel <p.zabel@pengutronix.de>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>, Kees Cook <kees@kernel.org>,
+	"Gustavo A. R. Silva" <gustavoars@kernel.org>
+Subject: Re: [PATCH v7 06/17] iio: core: create local
+ __iio_chan_prefix_emit() for reuse
+Message-ID: <ak0iDafuEGoKMy-m@ashevche-desk.local>
+References: <20260707-ad9910-iio-driver-v7-0-a4ec30f63700@analog.com>
+ <20260707-ad9910-iio-driver-v7-6-a4ec30f63700@analog.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260707-ad9910-iio-driver-v7-6-a4ec30f63700@analog.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-5.16 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [-3.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,kernel.org:s:+];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:dmatlack@google.com,m:pratyush@kernel.org,m:pasha.tatashin@soleen.com,m:kexec@lists.infradead.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-pci@vger.kernel.org,m:ajayachandra@nvidia.com,m:graf@amazon.com,m:alex@shazbot.org,m:bhelgaas@google.com,m:chrisl@kernel.org,m:rientjes@google.com,m:jacob.pan@linux.microsoft.com,m:jgg@nvidia.com,m:corbet@lwn.net,m:jrhilke@google.com,m:leonro@nvidia.com,m:lukas@wunner.de,m:rppt@kernel.org,m:parav@nvidia.com,m:praan@google.com,m:saeedm@nvidia.com,m:skhawaja@google.com,m:skhan@linuxfoundation.org,m:vipinsh@google.com,m:witu@nvidia.com,m:yi.l.liu@intel.com,s:lists@lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[19];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER(0.00)[pratyush@kernel.org,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[29];
-	TAGGED_FROM(0.00)[bounces-95405-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-95406-lists,linux-doc=lfdr.de];
+	HAS_ORG_HEADER(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:rodrigo.alencar@analog.com,m:linux-iio@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-hardening@vger.kernel.org,m:lars@metafoo.de,m:Michael.Hennerich@analog.com,m:jic23@kernel.org,m:dlechner@baylibre.com,m:andy@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:p.zabel@pengutronix.de,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:kees@kernel.org,m:gustavoars@kernel.org,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER(0.00)[andriy.shevchenko@intel.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[pratyush@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[andriy.shevchenko@intel.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+];
+	RCVD_COUNT_FIVE(0.00)[5];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
+	TO_DN_SOME(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:from_mime,intel.com:dkim,ashevche-desk.local:mid,vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 1E86471D876
+X-Rspamd-Queue-Id: 37B8F71DA48
 
-On Mon, Jun 29 2026, David Matlack wrote:
+On Tue, Jul 07, 2026 at 03:04:27PM +0100, Rodrigo Alencar via B4 Relay wrote:
 
-> On Thu, Jun 25, 2026 at 7:35=E2=80=AFAM Pratyush Yadav <pratyush@kernel.o=
-rg> wrote:
->>
->> Hi David,
->>
->> On Mon, Jun 15 2026, David Matlack wrote:
->>
->> > On 2026-06-14 01:38 PM, Pasha Tatashin wrote:
->> >> On Fri, 22 May 2026 20:24:01 +0000, David Matlack <dmatlack@google.co=
-m> wrote:
->> [...]
->> >> > +  }
->> >> > +
->> >> > +  pci_info(dev, "Device was preserved by previous kernel across Li=
-ve Update\n");
->> >> > +  dev->liveupdate.incoming =3D dev_ser;
->> >> > +
->> >> > +  /*
->> >> > +   * Hold the ref on the incoming FLB until pci_liveupdate_finish(=
-) so
->> >> > +   * that dev->liveupdate.incoming does not get freed while it is =
-in use.
->> >> > +   */
->> >>
->> >> How would that work? If finish is not called FLB stays around until t=
-he
->> >> next reboot.
->> >
->> > True... I think if the PCI core trusts drivers to call
->> > pci_liveupdate_finish() then we don't need to hold onto the incoming
->> > reference here.
->>
->> That was my point when I was arguing against refcounts on outgoing FLBs.
->> This is very easy to abuse, especially when we are talking about device
->> drivers. And this refcounting mechanism makes the FLB no longer
->> file-lifecycle-bound, since now it is entirely up to drivers to decide
->> the lifecycle of this data.
->
-> The PCI core holds a reference to the incoming FLB for as long as it
-> maintains a pointer to that FLB in struct pci_dev
-> (dev->liveupdate.incoming). The lifetime of that pointer is aligned
-> with the lifetime of the file as long as the driver calls
-> pci_liveupdate_finish() in its file finish() callback.
->
-> If there is a bug in the driver that causes it to not call
-> pci_liveupdate_finish() then the FLB will leak past the file yes. But
-> the alternative would be to leak a pointer to freed memory in
-> dev->liveupdate.incoming, which could lead to UAF.
->
-> Leaking the FLB seems safer than UAF, which is why I went for the
-> refcounting approach.
+> Move logic to create a channel prefix for naming attribute files into a
+> separate __iio_chan_prefix_emit() function for reuse. The dev pointer is
+> passed to __iio_device_attr_init() so that WARN() replaced by dev_err().
+> The new helper is going to be used to expose channel relationships as
+> sysfs attributes.
 
-Hmm, that does make sense. I still feel a bit odd doing this, but since
-I don't have any better ideas, I think let's keep this as-is. If this
-does turn out to be a real problem, we can fix it later. This is kernel
-internal API anyway.
+...
 
-Also, I didn't know the plan was to do VFIO only. I thought at some
-point in the near future we will get support for PF drivers. With only
-VFIO, I think this is a lot simpler and problems will be a lot easier to
-fix since there is only one user. I was mainly worried about random
-drivers holding on to PCI/LUO core data structures.
+> +static ssize_t __iio_chan_prefix_emit(struct device *dev,
+> +				      const struct iio_chan_spec *chan,
+> +				      enum iio_shared_by shared_by,
+> +				      char *buf, size_t len)
+> +{
+> +	const char *type = iio_chan_type_name_spec[chan->type];
+> +	const char *dir = iio_direction[chan->output];
+> +	struct seq_buf s;
+> +
+> +	seq_buf_init(&s, buf, len);
+> +
+> +	switch (shared_by) {
+> +	case IIO_SHARED_BY_ALL:
+> +		break;
+> +	case IIO_SHARED_BY_DIR:
+> +		seq_buf_printf(&s, "%s", dir);
+> +		break;
+> +	case IIO_SHARED_BY_TYPE:
+> +		seq_buf_printf(&s, "%s_%s", dir, type);
+> +		if (chan->differential)
+> +			seq_buf_printf(&s, "-%s", type);
 
->
-> Another approach entirely would be to drop the
-> dev->liveupdate.incoming and do the xarray lookup everytime instead.
 
-But then you'd need to have a lifetime for the xarray, no?
+> +		break;
+> +	case IIO_SEPARATE:
 
->
->>
->> I have been thinking about this a bit more in the last couple days, and
->> I wonder if we are doing this right. Here's an idea I have been thinking
->> of.
->>
->> We should make live update a first class citizen in PCI. Instead of
->> patching in liveupdate via the liveupdate.incoming field, and letting
->> drivers figure out when to use it, we should separate out probe and
->> retrieve paths entirely.
->>
->> Probe and retrieve are fundamentally different operations. While they
->> may share some common initialization logic for the _software_ state, how
->> they interface with the hardware is completely different. I think mixing
->> the two will result in driver code being more spaghetti by having
->> liveupdate checks sprayed out all over.
->
-> We are only planning on supporting Live Update for VFIO drivers for
-> the forseeable future. The VFIO work during probe is almost entirely
-> software state setup. The only hardware logic we need to "if" out in
-> the vfio-pci driver's probe() is putting the device into a low-power
-> mode via the runtime power manager. So I don't think we will get any
-> benefit from this approach, and it would be a lot more intrusive to
-> both the PCI core driver framework, and VFIO itself, to support this.
->
->> This series doesn't add support for any drivers, but looking at some of
->> the code we have downstream, I see this problem. The liveupdate code is
->> all over the place in the driver and it is very hard to wrap one's head
->> around how the device is actually retrieved.
->
-> You can find the vfio-pci driver changes here:
->
->   https://lore.kernel.org/kvm/20260511234802.2280368-1-vipinsh@google.com/
->
-> Let's keep the discussion focused on upstream VFIO drivers since that
-> is all we are planning to support right now due to LUO's requirement
-> of file-based preservation. The downstream driver changes we are
-> carrying is not reflective of what we want to support upstream.
->
->> So I think PCI core should track preserved devices, and if the device is
->> preserved, it should skip the probe and wait for retrieve. Retrieve does
->> the full initialization of the device. This fits in with the LUO model
->> as well. You can make retrieve a callback of struct pci_driver and do
->> some wrappers to talk with LUO, so device drivers don't directly
->> interface with LUO at all.
->>
->> We should do similar things on the shutdown path. Shutdown is a
->> fundamentally different operation from freeze, and so we should separate
->> them out as well.
->
-> This is speculative. In practice, we haven't needed to change VFIO's
-> shutdown() or probe() functions so far. The only change I anticipate
-> needing is skipping runtime power management "put" during probe() I
-> mentioned above.
->
-> If we actually made retrieve() a first-class callback and used that
-> instead of probe(), VFIO would internally just call its probe()
-> function because that would be the cleanest way to set up all the
-> software state it needs to manage the device.
+> +		if (chan->indexed) {
+> +			seq_buf_printf(&s, "%s_%s%d", dir, type, chan->channel);
+> +			if (chan->differential)
+> +				seq_buf_printf(&s, "-%s%d", type, chan->channel2);
+> +		} else {
+> +			if (chan->differential) {
+> +				dev_err(dev, "Differential channels must be indexed\n");
+> +				return -EINVAL;
+> +			}
+> +			seq_buf_printf(&s, "%s_%s", dir, type);
+> +		}
 
-Right, for only VFIO this doesn't make much sense. I wrote this thinking
-we will add PF preservation support at some point.
+So, in analogue with _BY_TYPE
 
->
->> This solves the lifetime problem as well. When PCI core is initializing,
->> it knows for sure that no retrievals are going to happen. That's because
->> none of the drivers have registered yet. So it can safely access the FLB
->> and initialize its state. After that, drivers can register themselves
->> and start accepting retrieve() calls. Once the last driver goes away,
->> the FLB is freed automatically.
->
-> It's not so simple. The PCI core does not really initialize itself.
-> Scanning devices gets triggered externally, e.g. by ACPI, device
-> trees, runtime hotplug events, etc., and that is when the PCI core
-> gets notified about a device. None of this is synchronized with "when
-> drivers have registered", which I assume you are referring to
-> registering with LUO.
->
->>
->> I am sorry for suggesting a big refactor at v6, but the early versions
->> looked good to me at the time, and I only thought more deeply about this
->> when trying to figure out how we can make the lifetimes cleaner.
+		seq_buf_printf(&s, "%s_%s", dir, type);
+		if (chan->indexed) {
+			seq_buf_printf(&s, "%d", chan->channel);
+			if (chan->differential)
+				seq_buf_printf(&s, "-%s%d", type, chan->channel2);
+		} else if (chan->differential) {
+			dev_err(dev, "Differential channels must be indexed\n");
+			return -EINVAL;
+		}
 
---=20
-Regards,
-Pratyush Yadav
+> +		if (chan->modified) {
+> +			if (chan->differential) {
+> +				dev_err(dev, "Differential channels can not have modifier\n");
+> +				return -EINVAL;
+> +			}
+> +			seq_buf_printf(&s, "_%s", iio_modifier_names[chan->channel2]);
+> +		}
+> +
+> +		if (chan->extend_name)
+> +			seq_buf_printf(&s, "_%s", chan->extend_name);
+> +		break;
+> +	}
+> +
+> +	return seq_buf_has_overflowed(&s) ? -EOVERFLOW : s.len;
+> +}
+
+-- 
+With Best Regards,
+Andy Shevchenko
+
+
 
