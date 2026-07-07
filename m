@@ -1,272 +1,291 @@
-Return-Path: <linux-doc+bounces-95308-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95310-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id MAR7MgWmTGphngEAu9opvQ
-	(envelope-from <linux-doc+bounces-95308-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 09:08:53 +0200
+	id CDclKxCoTGrlngEAu9opvQ
+	(envelope-from <linux-doc+bounces-95310-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 09:17:36 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B275718490
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 09:08:53 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9EF707185EF
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 09:17:35 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=A47IAmZm;
-	dkim=pass header.d=redhat.com header.s=google header.b="LqaJ/riC";
-	dmarc=pass (policy=quarantine) header.from=redhat.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95308-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95308-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=ibm.com header.s=pp1 header.b=Qm4vL90B;
+	dmarc=pass (policy=none) header.from=ibm.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95310-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95310-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 627B63101DC2
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 06:57:10 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 57F273015182
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 07:17:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0BB5F386C1C;
-	Tue,  7 Jul 2026 06:57:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 018CD3AFCF8;
+	Tue,  7 Jul 2026 07:16:38 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6149E385D8B
-	for <linux-doc@vger.kernel.org>; Tue,  7 Jul 2026 06:57:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 61F7A3AEF27;
+	Tue,  7 Jul 2026 07:16:34 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783407423; cv=none; b=FLcNjELSTOp1MtOtrU/GEVwE+Mv+qMYhf1l/o5+LP0K192ESthZObBjTMy7GsXPrYr9HXPldObajGKQNSjjHtc8gDCiAJp4A1RAAqZd0SYDPLdWXElCIFw+ckNoBI+UBWhn6Ip9JAa/XQCpopjqleyQm+7FY2dCzMnI4Q341S1I=
+	t=1783408597; cv=none; b=RdHWxzyej60NLzKfYYtT2g5F47oD8dge/96jqsoB2AF9ier33sj9EQSSZ97iRIiTukcfDjLN3ylFKI7Z1gENZxb5Tph197PMSoywf7NjwQ4G+BtPteBGmim+WEkmqpioVgL14lGFEQv/vNSXj21DTR7V2sjN4jeijsKvc8LIzOw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783407423; c=relaxed/simple;
-	bh=Yn6Q+8GnYlNXJzkpUayPJQNdvcW7QhLJ7slDTUH0s5s=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=BoZPryAD3bAXPsQ38M23Vi53cKzzOmz2YKVtuaI0cWZI2M2Xq+cUlRAqXnw+hlkOLSr22jw9OrYZV/gR06KjtRZx/Y3F4ZJPZmFsw6jPpWx5Kd53mx6JYy85sFa+JpOMZC++W3cGKlueti3QD0sVAgKw6Ac7Ebtohw7b8BLCjAE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=A47IAmZm; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=LqaJ/riC; arc=none smtp.client-ip=170.10.129.124
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1783407421;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=c0FBWE8Jb5+vMlrP70d2roSOjCV4VZTmyKyzdZd5y78=;
-	b=A47IAmZm7FeS/wJVPxxVj7fHbJUZOlQ897si8dDMrjWMNFZXfldeznOxqpnO6tESzQSA9U
-	AoNy6XEVfCDsRpkaW+g3kaghqdSDosaA9dWIQXlQzJ4wHXfnyTLTHWS19A+iKJDYDhdNqR
-	HC3B+R1q3l7PIkaqoRBxJU8XH+tVh40=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-439-rkBeaJ-hMRqRp3egiJN2KQ-1; Tue, 07 Jul 2026 02:57:00 -0400
-X-MC-Unique: rkBeaJ-hMRqRp3egiJN2KQ-1
-X-Mimecast-MFC-AGG-ID: rkBeaJ-hMRqRp3egiJN2KQ_1783407419
-Received: by mail-wm1-f70.google.com with SMTP id 5b1f17b1804b1-493bf840a69so27535395e9.3
-        for <linux-doc@vger.kernel.org>; Mon, 06 Jul 2026 23:57:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1783407419; x=1784012219; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=c0FBWE8Jb5+vMlrP70d2roSOjCV4VZTmyKyzdZd5y78=;
-        b=LqaJ/riCRO/ceVIxkCsWnOgcLb4+3lgVyIf5E2cZzvP5D+TRSpkgD9gY+om4ERKLfs
-         QIhaCsTW1+LxjOG4V6p6ZPJiPEmuVu5i6u/oBSzzf+TNT0T/SuASE+q+iCAtYQMq8AJA
-         KDGWGMpJFBvTYOC7WdWiLQpKwxC8e0E7a/zTqDKVFDCMfFSUwindfdmNHnOAoQC8+1n+
-         tdpSzou45uumEfxd3MkjF4JQFHx4yv4YAlB9yuGcx+BFVMXHg8NHwjB8UpVRcc0q99Uf
-         rvwlKSv5TAWwXO5QQj1GsAdnPJRMBh7nG1cmg9/805bFVK588PXo2yJ0dfKED0p0JU3a
-         lyDg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783407419; x=1784012219;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=c0FBWE8Jb5+vMlrP70d2roSOjCV4VZTmyKyzdZd5y78=;
-        b=e5jvkcYP1hyOKfJWfG8wSpSX9oo6cSrDXLFgfp8Y/gR0Fs8lWEd8TT/zr6gN5JN9J4
-         3a7/yqfBSmj9qzyh2RzGgS7GLqpKEaxRWbfJ7AzO0RQji51S/x/UGHamReBHuoJY7ZiC
-         Rt5X0gDfAVOQqThnv386P7MNfU2bda0y4ZFsTNWqCced/P4xQB8Ukr6uwjfMfpZJadOl
-         K0GhSm/KaGHm69+EFdudfOfEhCQMTYAXy9BxojcYamPzi5HVAtdSdMf9jwaf2lSDicgx
-         I8EkD14phXAatcdpfc2LXdcYIkvAqM0sxw3i19Jo4O5icW2p17qNyKcnHhtnLfpxfTfT
-         EmoQ==
-X-Forwarded-Encrypted: i=1; AHgh+RqMPnukMAEQRPeekUceF7X6EqlGuIZ4hVZQmz6JbraSRKHNlk/DFppIWPof0ivej52sEpTDhLMPecc=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx2JuhimOThc52HhsLuvfYzHdGDCliAPd3rX9uWuwaV++cAsLoZ
-	nR2f4pe/cP73+iQof3HJ305S46Bmr2f9Fiz8FIneqMTUdDAHcnNJR4XJtQ4GKzNEvCA9bGxdIPI
-	ZY2aNyJC+15th7H134g1PPRlyyJjNesQCtGm+raR1zQHt6y7yylr4kHL4UXT70g==
-X-Gm-Gg: AfdE7cnbnEnq53LTuSMLzsKxhjsSrx44TSF3W05GH3Clta6qeHa+zNY1IL1BS2gHdSE
-	ELUGbVd26HfrIoXbMOKTGQtjzkVwSH+xsmV3io0ZV8JE5CdepaDA9Ewyzm/Xs4PoiiZY3Ka6fqW
-	1aYNpPPP9iwCZo9asDX9zMI5+oKU2dZ+mmatNzMJ5RRgnvGFvQ6wMnPtnujd+tQVMrjwUCh0nTU
-	genaQHxustN4uLTugIfAxUzdkwoxiU1J8MGVBYz/CqpZ12q0Jp9Q50iYjPo2jKI3z0adaZdOICE
-	cvL4W+cleV4ZAJjGCHG/FC9dRNha/KNp4RrC18zIZLlMtHi2fFPfGhJqams5JrNvqGofXsd9zVj
-	bQBnvajK0VgOR/WTSUuH4y59kyWasmlat
-X-Received: by 2002:a05:600c:83c9:b0:493:bc31:b2ae with SMTP id 5b1f17b1804b1-493df040597mr40628295e9.10.1783407418842;
-        Mon, 06 Jul 2026 23:56:58 -0700 (PDT)
-X-Received: by 2002:a05:600c:83c9:b0:493:bc31:b2ae with SMTP id 5b1f17b1804b1-493df040597mr40628075e9.10.1783407418369;
-        Mon, 06 Jul 2026 23:56:58 -0700 (PDT)
-Received: from redhat.com (IGLD-80-230-68-31.inter.net.il. [80.230.68.31])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-493e0fc1348sm30919825e9.14.2026.07.06.23.56.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 Jul 2026 23:56:57 -0700 (PDT)
-Date: Tue, 7 Jul 2026 02:56:54 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Sourav Panda <souravpanda@google.com>
-Cc: muchun.song@linux.dev, osalvador@suse.de, akpm@linux-foundation.org,
-	david@kernel.org, ljs@kernel.org, liam@infradead.org,
-	vbabka@kernel.org, rppt@kernel.org, surenb@google.com,
-	mhocko@suse.com, mhklinux@outlook.com, fvdl@google.com,
-	gthelen@google.com, mike.kravetz@oracle.com,
-	pasha.tatashin@soleen.com, rientjes@google.com, riel@surriel.com,
-	linux-mm@kvack.org, linux-kernel@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [RFC PATCH 0/6] mm/hugetlb: Dynamic, NUMA-aware HugePage Cache &
- Free Page Reporting
-Message-ID: <20260707024744-mutt-send-email-mst@kernel.org>
-References: <20260707064235.1386552-1-souravpanda@google.com>
+	s=arc-20240116; t=1783408597; c=relaxed/simple;
+	bh=P/nNMOZtlx5UwsCO6zfYhKwpyOg/CrcHowynz9Jk6s4=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=KTbtIbXgS33BxPX3cCryGSu+BcUbDW2fMy9dYxVnsXVMamQRD1ZHUNlSR88nt1nmenY1U7239unDqzhX3rYdYEABMZ37y5u95DKcruM1xdY1MhiE3YqYPHvA2UjpsENSiN2/uFtes/J3qOPBR/yX8ELLeSG5QVnvo8Q0NkBm5ZU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=Qm4vL90B; arc=none smtp.client-ip=148.163.158.5
+Received: from pps.filterd (m0353725.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6674IhSG1652449;
+	Tue, 7 Jul 2026 07:16:17 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=pp1; bh=ARFRf5
+	rZTrT2ZTXVYf34S+yMtxItKl4Aj+mC9j2gVkA=; b=Qm4vL90BvfOsJ7AeGU6fnH
+	CEKGfVAAwScAE2IT/hCVURyF9PhQvKyTyCpQu11I36aGmbigPoaRAPcnU6rICKrE
+	5n6IYnCIYX/yHF9XhtzRUledVX0uXyLcD9ESvYnSjzWbibKv388eb3A5iB2e90/u
+	2FT5Vr6gNbxq25D5jFPRCYTM0x14LtYfA5XHQYYq1V6oWxr4FU4PyFFQWuQKIatj
+	FrJIepIqO/TMEeDW2pe2k0rQi1kzyVCR35kumg9588rSDpi17r9BS08k/jqjDmYK
+	gpg16Gzplx1nlsBc9y4WI9XtbLZ715XDOV2/7kN0/VlBAXV02L2HvJ2HLt3AHiMQ
+	==
+Received: from ppma22.wdc07v.mail.ibm.com (5c.69.3da9.ip4.static.sl-reverse.com [169.61.105.92])
+	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4f6rkdp8kp-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Tue, 07 Jul 2026 07:16:16 +0000 (GMT)
+Received: from pps.filterd (ppma22.wdc07v.mail.ibm.com [127.0.0.1])
+	by ppma22.wdc07v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 66774bdl024237;
+	Tue, 7 Jul 2026 07:16:16 GMT
+Received: from smtprelay03.fra02v.mail.ibm.com ([9.218.2.224])
+	by ppma22.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4f7cvw1n22-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Tue, 07 Jul 2026 07:16:15 +0000 (GMT)
+Received: from smtpav02.fra02v.mail.ibm.com (smtpav02.fra02v.mail.ibm.com [10.20.54.101])
+	by smtprelay03.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 6677GCTh33292584
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Tue, 7 Jul 2026 07:16:12 GMT
+Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 02D732004B;
+	Tue,  7 Jul 2026 07:16:12 +0000 (GMT)
+Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 5441520040;
+	Tue,  7 Jul 2026 07:16:03 +0000 (GMT)
+Received: from [9.124.214.176] (unknown [9.124.214.176])
+	by smtpav02.fra02v.mail.ibm.com (Postfix) with ESMTP;
+	Tue,  7 Jul 2026 07:16:02 +0000 (GMT)
+Message-ID: <6548b668-d3e1-42dd-be9f-2fe3193874a1@linux.ibm.com>
+Date: Tue, 7 Jul 2026 12:46:01 +0530
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260707064235.1386552-1-souravpanda@google.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 20/23] virt/steal_monitor: Act on steal values at
+ regular intervals
+To: Yury Norov <ynorov@nvidia.com>
+Cc: linux-kernel@vger.kernel.org, mingo@kernel.org, peterz@infradead.org,
+        juri.lelli@redhat.com, vincent.guittot@linaro.org,
+        yury.norov@gmail.com, kprateek.nayak@amd.com, iii@linux.ibm.com,
+        corbet@lwn.net, tglx@kernel.org, gregkh@linuxfoundation.org,
+        pbonzini@redhat.com, seanjc@google.com, vschneid@redhat.com,
+        huschle@linux.ibm.com, rostedt@goodmis.org, dietmar.eggemann@arm.com,
+        maddy@linux.ibm.com, srikar@linux.ibm.com, hdanton@sina.com,
+        chleroy@kernel.org, vineeth@bitbyteword.org, frederic@kernel.org,
+        arighi@nvidia.com, pauld@redhat.com, christian.loehle@arm.com,
+        tj@kernel.org, tommaso.cucinotta@gmail.com, maz@kernel.org,
+        rafael@kernel.org, rdunlap@infradead.org, kernellwp@gmail.com,
+        linux-doc@vger.kernel.org
+References: <20260701141654.500125-1-sshegde@linux.ibm.com>
+ <20260701141654.500125-21-sshegde@linux.ibm.com> <akwRJnQklymOjNTv@yury>
+Content-Language: en-US
+From: Shrikanth Hegde <sshegde@linux.ibm.com>
+In-Reply-To: <akwRJnQklymOjNTv@yury>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-TM-AS-GCONF: 00
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-Authority-Analysis: v=2.4 cv=M7J97Sws c=1 sm=1 tr=0 ts=6a4ca7c1 cx=c_pps
+ a=5BHTudwdYE3Te8bg5FgnPg==:117 a=5BHTudwdYE3Te8bg5FgnPg==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=RnoormkPH1_aCDwRdu11:22 a=V8glGbnc2Ofi9Qvn3v5h:22 a=VnNF1IyMAAAA:8
+ a=xxs58_2HAHV7FaYEMWIA:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA3MDA2NCBTYWx0ZWRfX+vhbwT6AcRl9
+ CblNPkeBWymMd6+kGwLs/6cauAGUlyFAIRAJnJ23fbeXap02HF/IpQJetz7qFRUV3jIAUh8uTqw
+ L8IwvV5ibgYIwGWDF4pFPK+Mjge4/yh75bUU0waYp/af+M9V1wx9f03H+saliW0dWq/00MrtFuz
+ T+5Omh+o35hjYU8D8EoKaGZ73esCBqluBxbtDWCKED8EwkL1yPN1eIomEqo6y3fgbDym2fP46db
+ sRX5JrE21vO8UY3k2/nOy+gxDad8mgctieQsbkKaKU2xjPqTOiHmVXLguBFXJeoCcF8sSIliR9u
+ H7+/qEEwEBwJzamW8NKIkgN3tH86+a2Rkz9RT26vIJyIGL2juU/+jQ28cvFE3+qj8ZbKMbjDcfn
+ DpWJW97nC7oKO8hHvDLpL7MYeE9vVsItJI5SH9NBDaujqiwq4ZaC2w7313dJLFyPgENWJuIGQfZ
+ CMvQlwwJO8evHUgriOg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA3MDA2NCBTYWx0ZWRfX6gvQi+SIUdpz
+ bmGdrRtcn2iHYiXUlqGOuBJaXjYCLvWpucKRTIaM71f0h5W7jjipJdHp70MPeon/hECODUIAHs4
+ vvdnIMxwptO6DMPKONCS/KRpnXCD6pk=
+X-Proofpoint-GUID: ZZTPobW4ZsglARt5L1GyuhYy3aPuR2Uj
+X-Proofpoint-ORIG-GUID: -oKnm_LhTdj3IgNkz_fgC7DsuA0IpyCT
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-07_01,2026-07-06_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 lowpriorityscore=0 malwarescore=0 clxscore=1015 adultscore=0
+ priorityscore=1501 bulkscore=0 spamscore=0 impostorscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607070064
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
+	DMARC_POLICY_ALLOW(-0.50)[ibm.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_DKIM_ALLOW(-0.20)[ibm.com:s=pp1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-95308-lists,linux-doc=lfdr.de];
-	FREEMAIL_CC(0.00)[linux.dev,suse.de,linux-foundation.org,kernel.org,infradead.org,google.com,suse.com,outlook.com,oracle.com,soleen.com,surriel.com,kvack.org,vger.kernel.org];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[mst@redhat.com,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	FORGED_RECIPIENTS(0.00)[m:souravpanda@google.com,m:muchun.song@linux.dev,m:osalvador@suse.de,m:akpm@linux-foundation.org,m:david@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:mhklinux@outlook.com,m:fvdl@google.com,m:gthelen@google.com,m:mike.kravetz@oracle.com,m:pasha.tatashin@soleen.com,m:rientjes@google.com,m:riel@surriel.com,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	DKIM_TRACE(0.00)[redhat.com:+];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mst@redhat.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[34];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-95310-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:ynorov@nvidia.com,m:linux-kernel@vger.kernel.org,m:mingo@kernel.org,m:peterz@infradead.org,m:juri.lelli@redhat.com,m:vincent.guittot@linaro.org,m:yury.norov@gmail.com,m:kprateek.nayak@amd.com,m:iii@linux.ibm.com,m:corbet@lwn.net,m:tglx@kernel.org,m:gregkh@linuxfoundation.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:vschneid@redhat.com,m:huschle@linux.ibm.com,m:rostedt@goodmis.org,m:dietmar.eggemann@arm.com,m:maddy@linux.ibm.com,m:srikar@linux.ibm.com,m:hdanton@sina.com,m:chleroy@kernel.org,m:vineeth@bitbyteword.org,m:frederic@kernel.org,m:arighi@nvidia.com,m:pauld@redhat.com,m:christian.loehle@arm.com,m:tj@kernel.org,m:tommaso.cucinotta@gmail.com,m:maz@kernel.org,m:rafael@kernel.org,m:rdunlap@infradead.org,m:kernellwp@gmail.com,m:linux-doc@vger.kernel.org,m:yurynorov@gmail.com,m:tommasocucinotta@gmail.com,s:lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[sshegde@linux.ibm.com,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,infradead.org,redhat.com,linaro.org,gmail.com,amd.com,linux.ibm.com,lwn.net,linuxfoundation.org,google.com,goodmis.org,arm.com,sina.com,bitbyteword.org,nvidia.com];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,linux.ibm.com:mid,linux.ibm.com:from_mime,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sshegde@linux.ibm.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[ibm.com:+];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCVD_COUNT_SEVEN(0.00)[11]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 4B275718490
+X-Rspamd-Queue-Id: 9EF707185EF
 
-On Tue, Jul 07, 2026 at 06:42:29AM +0000, Sourav Panda wrote:
-> Overview
-> This patch series introduces a dynamic, NUMA-aware HugePage Cache,
-> backed by a kernel shrinker to safely return memory under pressure, and
-> integrates it with Free Page Reporting (virtio-balloon) for HugeTLB,
-> specifically targeting gigantic (1GB) hugepages. The goal is to solve
-> the tradeoff between allocation latency and memory
-> fungibility in virtualized and heterogeneous cloud environments.
-> 
-> ---
-> 
-> The Core Problem: Allocation Latency vs. Memory Fungibility
-> 
-> With highly heterogeneous workloads, latency-critical applications demand
-> gigantic hugepages. However, dynamic runtime allocation of 1GB pages
-> from the buddy allocator (via CMA) is slow.
-> 
-> To bypass this latency, operators often pre-allocate hugepages
-> statically. However, this locks up the memory: when the HugeTLB
-> workloads are idle, that memory is completely unavailable for other
-> buddy-allocator workloads (e.g., page cache, anonymous memory). If buddy
-> memory is exhausted, the system will OOM even if gigabytes of HugeTLB
-> pages are sitting idle.
-> 
-> This series resolves this challenge by delivering Dynamic Fungibility:
-> 
-> 1.  Dynamic Caching: Intercepts freed surplus hugepages and recycles
->     them into a NUMA-aware cache instead of dissolving them immediately.
-> 2.  Fast Allocations: Satisfies subsequent dynamic allocations
->     instantly from this warm, local hugepage cache.
-> 3.  Kernel Shrinker Integration: Registers a NUMA-aware kernel shrinker
->     to dynamically dissolve cached pages back to the buddy allocator
->     under memory pressure, restoring host/guest memory fungibility.
-> 4.  Free Page Reporting Integration: For virtualized environments (Guest
->     VMs),
 
-I was going to look into this part, thanks for working on this.
 
-> cached pages trigger background Free Page Reporting via
->     virtio-balloon. This allows the host to reclaim the physical memory
->     while the guest retains its Vmemmap Optimization (HVO) metadata
->     savings (~14GB saved per 1TB VM)!
+On 7/7/26 2:03 AM, Yury Norov wrote:
+> On Wed, Jul 01, 2026 at 07:46:51PM +0530, Shrikanth Hegde wrote:
+>> This is the steal_monitor core functionality done in periodic work
+>>
+>> - Calculate the steal_ratio. It is multiplied by 100 to consider the
+>>    fractional values of steal time. I.e 10 means 0.1% steal time.
+>> - If steal value is higher than high threshold, call the method to reduce
+>>    the preferred CPUs.
+>> - If steal value is lower or equal to low threshold, call the method to
+>>    increase the preferred CPUs.
+>> - If the steal value is in between, no action is taken.
+>> - Save the values for next delta calculations.
+>>
+>> Signed-off-by: Shrikanth Hegde <sshegde@linux.ibm.com>
+>> ---
+>> v5->v6:
+>> - Address u64 overflow concerns.
+>>
+>>   drivers/virt/steal_monitor/sm_core.c | 33 ++++++++++++++++++++++++++++
+>>   1 file changed, 33 insertions(+)
+>>
+>> diff --git a/drivers/virt/steal_monitor/sm_core.c b/drivers/virt/steal_monitor/sm_core.c
+>> index b499faa61010..7b7435f79b85 100644
+>> --- a/drivers/virt/steal_monitor/sm_core.c
+>> +++ b/drivers/virt/steal_monitor/sm_core.c
+>> @@ -34,6 +34,37 @@ MODULE_PARM_DESC(low_threshold,
+>>   
+>>   static void compute_preferred_cpus_work(struct work_struct *work)
+>>   {
+>> +	u64 curr_steal, delta_steal, delta_ns, steal_ratio;
+>> +	ktime_t now;
+>> +
+>> +	curr_steal = get_system_steal_time();
+>> +	now = ktime_get();
+>> +
+>> +	/* get the deltas */
+>> +	delta_steal = curr_steal > sm_core_ctx.prev_steal ?
+>> +		      curr_steal - sm_core_ctx.prev_steal : 0;
+>> +	delta_ns = max_t(u64, ktime_to_ns(ktime_sub(now, sm_core_ctx.prev_time)), 1);
+> 
+> The below return on '!delta_ns' makes this max(...) useless, right?
+> Regardless, if the time between 2 measures is less then 1ns, I
+> believe, the whole measure is not trustworthy
+> 
 
-Why "!" - that's 1.5%, seems surprisingly modest.
-Are you sure it's working as intended?
+Seeing sashiko comment on divide by zero, i forgot I had max above there :(
 
->   +---------------+   Slow Allocate  +---------------------+
->   | Buddy         | ---------------> | Active HugeTLB Page |
->   | Allocator     |                  +---------------------+
->   +---------------+                    |                ^
->     ^                                  | (1) Free to    | (2) Fast
->     | (3) Under                        v     Cache      |     Allocate
->     | Pressure                       +---------------------+
->     | Shrink()  <------------------- | HugeTLB Cache       |
->                                      +---------------------+
->                                        |
->                                        v (4) Free Page Reporting
->                                          (Host Reclaim in the case
->                                           of virtualization)
+>> +
+>> +	/* Update for next calculation */
+>> +	sm_core_ctx.prev_steal = curr_steal;
+>> +	sm_core_ctx.prev_time = now;
 > 
-> ---
+> So below return should go prior to this update, because 'now' is actually
+> the same as 'prev_time', right?
 > 
-> Patch Series Structure
+> I don't understand why 'now' can be so close to prev_time, because
+> you've scheduled this callback on the regular interval. But if that's
+> possible, can you explain that and do like this at the very beginning
+> of the function:
 > 
-> Patch 1/6: mm/hugetlb: add Kconfig and basic cache infrastructure
->   - Introduces the CONFIG_HUGETLB_CACHE option, hstate tracking fields,
->     and the HPG_cached page flag.
->   - Establishes the clean helper API (hugetlb_folio_is_cached(),
->     hugetlb_cache_remove(), hugetlb_cache_add()) and updates
->     remove_hugetlb_folio() to be cache-aware, eliminating inline #ifdef
->     blocks.
-> Patch 2/6: mm/hugetlb: implement cache recycling and allocation
->   - Hooks up recycling in free_huge_folio() (up to the cache limit) and
->     allocation in alloc_surplus_hugetlb_folio().
->   - Implements MRU allocation policy for maximum warmth, poison safety
->     checks, and MTE/dcache cleaning.
-> Patch 3/6: mm/hugetlb: add sysfs interfaces for cache
->   - Exposes global and per-node sysfs attributes (max_cached_huge_pages,
->     nr_cached_hugepages) for dynamic userspace control, including NUMA
->     memory policy scaling.
->   - Supports dynamic delta adjustments (+1/-1) to safely scale cache
->     sizes alongside concurrent background reclaim operations.
-> Patch 4/6: mm/hugetlb: add memory shrinker for cache
->   - Registers a NUMA-aware kernel shrinker to evict and dissolve cached
->     gigantic pages back to buddy under memory pressure.
-> Patch 5/6: Documentation/admin-guide/mm/hugetlbpage.rst: document cache
->     interfaces
->   - Documents the Kconfig option, sysfs attributes, and shrinker
->     behavior in the admin guide.
-> Patch 6/6: mm/hugetlb: support free page reporting for cached hugepages
->   - Integrates the cache with the Free Page Reporting framework (virtio-
->     balloon), introducing the HPG_reported flag and the
->     reporting/isolation/draining lifecycle.
-> Sourav Panda (6):
->   mm/hugetlb: add Kconfig and basic cache infrastructure
->   mm/hugetlb: implement cache recycling and allocation
->   mm/hugetlb: add sysfs interfaces for cache
->   mm/hugetlb: add memory shrinker for cache
->   Documentation/admin-guide/mm/hugetlbpage.rst: document cache
->     interfaces
->   mm/hugetlb: support free page reporting for cached hugepages
+>          now = ktime_get();
+>          if (unlikely(now < sm_core_ctx.prev_time + sm_core_ctx.interval / 2)) {
+>                  pr_warn(...);
+>                  return;
+>          }
+
+Pretty much, just have to requeue the work.
+
 > 
->  Documentation/admin-guide/mm/hugetlbpage.rst |  34 +-
->  fs/Kconfig                                   |   9 +
->  include/linux/hugetlb.h                      |  45 ++
->  include/linux/page_reporting.h               |   1 +
->  mm/hugetlb.c                                 | 590 ++++++++++++++++++-
->  mm/hugetlb_internal.h                        |   9 +
->  mm/hugetlb_sysfs.c                           | 158 +++++
->  mm/page_reporting.c                          |  10 +-
->  mm/page_reporting.h                          |   6 +
->  9 files changed, 844 insertions(+), 18 deletions(-)
+> And if it's a never-happen condition, just use WARN_ON().
 > 
-> -- 
-> 2.55.0.rc0.799.gd6f94ed593-goog
+
+Ya, it is a never-happen condition. I will use WARN_ON.
+
+>> +
+>> +	/*
+>> +	 * Multiply by 100 to consider the fractional values of steal time.
+>> +	 * steal_ratio = (delta_steal * 100 * 100)/(delta_ns * num_cpus())
+>> +	 */
+>> +	delta_ns = div_u64(delta_ns * get_num_cpus_steal_ratio(), 100 * 100);
+> 
+> You're not multiplying by 100, you're dividing by 10k. Can you reword the
+> comment?
+
+Let me re-word it. It is to avoid overflows.
+
+> 
+>> +	if (unlikely(!delta_ns))
+>> +		return;
+>> +
+>> +	steal_ratio = div64_u64(delta_steal, delta_ns);
+>> +	/* If the steal time values are high, reduce preferred CPUs */
+> 
+> I really believe that the below code is clear enough, worth nothing
+> explaining it.
+
+ok.
+
+> 
+>> +	if (steal_ratio > sm_core_ctx.high_threshold)
+>> +		decrease_preferred_cpus(&sm_core_ctx);
+>> +	/* If the steal time values are low, increase preferred CPUs */
+>> +	if (steal_ratio <= sm_core_ctx.low_threshold)
+>> +		increase_preferred_cpus(&sm_core_ctx);
+>> +
+>>   	/* At least one core is kept as preferred */
+>>   	WARN_ON(cpumask_empty(cpu_preferred_mask));
+>>   
+>> @@ -54,6 +85,8 @@ static int __init steal_monitor_init(void)
+>>   		sm_core_ctx.interval_ms, sm_core_ctx.high_threshold, sm_core_ctx.low_threshold);
+>>   
+>>   	INIT_DELAYED_WORK(&sm_core_ctx.work, compute_preferred_cpus_work);
+>> +	sm_core_ctx.prev_steal = get_system_steal_time();
+>> +	sm_core_ctx.prev_time = ktime_get();
+>>   
+>>   	schedule_delayed_work(&sm_core_ctx.work,
+>>   			      msecs_to_jiffies(sm_core_ctx.interval_ms));
+>> -- 
+>> 2.47.3
 
 
