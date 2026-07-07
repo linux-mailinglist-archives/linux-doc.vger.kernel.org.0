@@ -1,188 +1,147 @@
-Return-Path: <linux-doc+bounces-95481-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95482-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 8+N3HERcTWqYywEAu9opvQ
-	(envelope-from <linux-doc+bounces-95481-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 22:06:28 +0200
+	id tQ/0E4xgTWphzAEAu9opvQ
+	(envelope-from <linux-doc+bounces-95482-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 22:24:44 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8377871F793
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 22:06:27 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id A9E7971F858
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 22:24:43 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=none;
-	dmarc=none;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95481-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-95481-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=hlX9qH3P;
+	dmarc=pass (policy=reject) header.from=mailbox.org;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95482-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-95482-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id A9D9A3008614
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 20:06:24 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id CD91B3012C4B
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 20:24:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 747A73D3CE0;
-	Tue,  7 Jul 2026 20:06:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 07548360EC2;
+	Tue,  7 Jul 2026 20:24:22 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bregans-0.gladserv.net (bregans-0.gladserv.net [185.128.210.58])
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9266A3B9D9E;
-	Tue,  7 Jul 2026 20:06:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E38F442087F;
+	Tue,  7 Jul 2026 20:24:18 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783454781; cv=none; b=fbx47/HJ6L4cPlXr69jrdBDLK1NBaCDR5oReexNTcv9K5lKJ+sdbTWTiTOnDrmHQwEFyekGXDSFRK+Omy+xZlXvv72ZuJgeD5vGB0zRhGNDr/ezKNryRn6CvpcL1GNB1pvPzUp3ivVOpYm24ZPxdk5x2kp80G4pLqla26YMX0Ak=
+	t=1783455861; cv=none; b=bp+ag6D0kCMed7oSiJyygW+jHv36+sVMPuz9M6PZJQ1yNcfpvNnL9x7QPO6qEtffb3sEzDUVRflWYxoasVTFa4dnRJPvtxwWQeR27gIa7C0qUggm2Zr94pX3RxHa5In57zQtj0qME62BEWxXgQNTbGSCgF+a4ph1JqBnl0oBZOw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783454781; c=relaxed/simple;
-	bh=WYqFwOi8quQy3Uk+VrFiQW/eZL0UWoAEItTKR3fuMzU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Fy8TqWheW8kwIolC9mWpORCFQdMbKhyFh/Jx477/vuAMWS6Wiw2FxCuqca+Bg0MDUVifLgpXcm34pkLwF4KIew60wTHGzAr6Yn9EymHxgrGES57kpWVjiL7Uu82MGZVyZIGPX2/v3pb/XHi+g3+ey+hxaj2ZCuileydb+YHcRgo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=librecast.net; spf=pass smtp.mailfrom=librecast.net; arc=none smtp.client-ip=185.128.210.58
-Date: Tue, 7 Jul 2026 22:05:52 +0200
-From: Brett A C Sheffield <bacs@librecast.net>
-To: Simon Schippers <simon.schippers@tu-dortmund.de>
-Cc: "Michael S. Tsirkin" <mst@redhat.com>,
-	Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
-	Jason Wang <jasowangio@gmail.com>,
-	"David S . Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	netdev@vger.kernel.org, Simon Horman <horms@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	Tim Gebauer <tim.gebauer@tu-dortmund.de>, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH net v2] tun/tap & vhost-net: make qdisc backpressure
- opt-in via IFF_BACKPRESSURE
-Message-ID: <ak1cIAwQzKS35x0m@karahi.librecast.net>
-References: <20260706094242.115992-1-simon.schippers@tu-dortmund.de>
- <akt_Q7kdR3Zb8_GZ@karahi.librecast.net>
- <20260706091706-mutt-send-email-mst@kernel.org>
- <2728c540-2e76-4e06-9064-ed1dff071cbe@tu-dortmund.de>
- <akvhhy_JpH64KrcL@karahi.librecast.net>
- <0d28fdc4-3c03-48d6-bd59-e59f7a01f4b6@tu-dortmund.de>
+	s=arc-20240116; t=1783455861; c=relaxed/simple;
+	bh=fwReva9uoUxB1MQyBfEquSl0KIEHdpI1AQyr6XKGsNI=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=aa32OWy9EGSIVcOwfJHEX0kU7L2lUA/8Vxe4kFEdl74/h26T8nGWCqQdImAzK4iDCmnD/y1XWveGMA1W/rdCE7XrEHHp5SJ9qQ0kmIkyK/jQ8e+KFQWpbsXqoexiuoi8a06ZmnZd+nr+9la1AxkzkglLKdnuR0EIFzGdOKNOCDE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org; spf=pass smtp.mailfrom=mailbox.org; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=hlX9qH3P; arc=none smtp.client-ip=80.241.56.172
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [IPv6:2001:67c:2050:b231:465::102])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
+	(No client certificate requested)
+	by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4gvt3r6X4zzMlHZ;
+	Tue, 07 Jul 2026 22:24:08 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1783455848;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=pE6yNMp+uXpgGUcwJt1cNGBLI12Hj8FXQ5m2BI8bX4s=;
+	b=hlX9qH3P7QNIy3fjcF4n/8eSucWZ176Mk6rgjs1M739zaMKvTQvGGk549o/lK7yzZY8UKe
+	jrzFdT6d+qGQ8TmH5E8onyjvFhIdY+IgHM7HLT6Llob5IE5V+y8Fk7WgrW3QqWf4ODCQIa
+	eYSgnfyQrdAPnV8IUCnsSUcelKJAkz9guNykDXeTGHK/kY5secL5vamRRk/cwduEriTwSM
+	f8CZF+4XnDZ0VgOApdQJ4+L+WpHH7MVIYfFxN6LKJEcgVUhp1FGVkc5sucYDAu0sbcym+B
+	BmjQEfAMRLzikJr7elz3UFrWy8d2X9uQAUaLcjfAlrZXHRJsHRxMO6xWLW81Dw==
+Message-ID: <e67d526b-7e4c-424d-b971-35e06c163376@mailbox.org>
+Date: Tue, 7 Jul 2026 22:24:03 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <0d28fdc4-3c03-48d6-bd59-e59f7a01f4b6@tu-dortmund.de>
+Subject: Re: [PATCH v3 1/5] PCI: dwc: Determine whether iMSI is used before
+ calling .init
+To: Manivannan Sadhasivam <mani@kernel.org>
+Cc: linux-pci@vger.kernel.org, =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?=
+ <kwilczynski@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
+ Catalin Marinas <catalin.marinas@arm.com>, Conor Dooley
+ <conor+dt@kernel.org>, Geert Uytterhoeven <geert+renesas@glider.be>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Lorenzo Pieralisi <lpieralisi@kernel.org>, Marc Zyngier <maz@kernel.org>,
+ Rob Herring <robh@kernel.org>,
+ Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>,
+ devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-renesas-soc@vger.kernel.org
+References: <20260701203918.63189-1-marek.vasut+renesas@mailbox.org>
+ <20260701203918.63189-2-marek.vasut+renesas@mailbox.org>
+ <4qyn4fljtb3cbzcmfpkdomkm7vqnwn2rfbtqng4iwmtvfd4bpj@t6kkw53erl7f>
+ <8a921ce9-e339-445a-af05-d20f9f2df01e@mailbox.org>
+ <p4it4hcg24narbtjtoqdk6zg7wpfs5hc2mm77acyoi6hwfkh5u@5bqlwhylosmo>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <p4it4hcg24narbtjtoqdk6zg7wpfs5hc2mm77acyoi6hwfkh5u@5bqlwhylosmo>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 073d86a19c85a0d025b
+X-MBO-RS-META: 5dycfot7945dqgf3kieqojhkr9yf6hae
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.04 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	DMARC_POLICY_ALLOW(-0.50)[mailbox.org,reject];
+	R_DKIM_ALLOW(-0.20)[mailbox.org:s=mail20150812];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	DMARC_NA(0.00)[librecast.net];
-	TAGGED_FROM(0.00)[bounces-95481-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	FORGED_SENDER(0.00)[bacs@librecast.net,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	FORGED_RECIPIENTS(0.00)[m:simon.schippers@tu-dortmund.de,m:mst@redhat.com,m:willemdebruijn.kernel@gmail.com,m:jasowangio@gmail.com,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:netdev@vger.kernel.org,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:andrew+netdev@lunn.ch,m:tim.gebauer@tu-dortmund.de,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:willemdebruijnkernel@gmail.com,m:andrew@lunn.ch,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-95482-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:mani@kernel.org,m:linux-pci@vger.kernel.org,m:kwilczynski@kernel.org,m:bhelgaas@google.com,m:catalin.marinas@arm.com,m:conor+dt@kernel.org,m:geert+renesas@glider.be,m:krzk+dt@kernel.org,m:lpieralisi@kernel.org,m:maz@kernel.org,m:robh@kernel.org,m:yoshihiro.shimoda.uh@renesas.com,m:devicetree@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-renesas-soc@vger.kernel.org,m:conor@kernel.org,m:geert@glider.be,m:krzk@kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[marek.vasut@mailbox.org,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[redhat.com,gmail.com,davemloft.net,google.com,kernel.org,vger.kernel.org,lwn.net,linuxfoundation.org,lunn.ch,tu-dortmund.de];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[bacs@librecast.net,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	R_DKIM_NA(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[marek.vasut@mailbox.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[mailbox.org:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt,renesas];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,mailbox.org:from_mime,mailbox.org:email,mailbox.org:mid,mailbox.org:dkim]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 8377871F793
+X-Rspamd-Queue-Id: A9E7971F858
 
-On 2026-07-07 08:52, Simon Schippers wrote:
-> Brett, can you try the two attached patches here with iperf3?
-> I think testing with 8 and 16 threads is enough, so where there is a
-> regression.
+On 7/7/26 5:36 PM, Manivannan Sadhasivam wrote:
+> On Mon, Jul 06, 2026 at 07:48:24PM +0200, Marek Vasut wrote:
+>> On 7/6/26 6:43 PM, Manivannan Sadhasivam wrote:
+>>> On Wed, Jul 01, 2026 at 10:37:44PM +0200, Marek Vasut wrote:
+>>>> The R-Car Gen4 PCIe controller integration configures MSI registers
+>>>> in the controller driver .init callback, because those registers
+>>>> have to be configured while PERST signal is asserted, and the PERST
+>>>> signal is asserted across the controller driver .init callback.
+>>>>
+>>>> The registers have to be configured differently in case the iMSI is
+>>>> or is not used. Assign pp->use_imsi_rx before the controller driver
+>>>> .init callback is called, so the controller driver .init callback
+>>>> implementation can use the pp->use_imsi_rx value.
+>>>>
+>>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>>>
+>>> LGTM!
+>> Thank you. Can I get AB/RB before sending V4 ?
 > 
-> The two patches are about time when to wake:
-> Currently we wake after consuming half the internal ring buffer.
-> One of the attached patches wakes after 2 cachelines (128 of 1000
-> packets) and the other one just wakes once the ring buffer is empty.
-> 
-> This would really help :)
-
-Sure...
-
-
-7.2.0-rc2 (unpatched)
-
-threads 1
-[  5]   0.00-10.00  sec  20.4 GBytes  17.5 Gbits/sec    0            sender
-[  5]   0.00-10.00  sec  2.00 GBytes  1.72 Gbits/sec                  receiver
-
-threads 2
-[SUM]   0.00-10.00  sec  12.7 GBytes  10.9 Gbits/sec    0             sender
-[SUM]   0.00-10.00  sec  4.00 GBytes  3.43 Gbits/sec                  receiver
-
-threads 8
-[SUM]   0.00-10.00  sec  11.5 GBytes  9.85 Gbits/sec    0             sender
-[SUM]   0.00-10.01  sec  11.4 GBytes  9.83 Gbits/sec                  receiver
-
-threads 16
-[SUM]   0.00-10.00  sec  11.6 GBytes  9.95 Gbits/sec    0             sender
-[SUM]   0.00-10.01  sec  11.5 GBytes  9.91 Gbits/sec                  receiver
-
-
-7.2.0-rc2 with 0001-tun-set-waking-threshold-to-ptr_ring_empty.patch
-
-threads 1
-[  5]   0.00-10.00  sec  19.6 GBytes  16.8 Gbits/sec    0            sender
-[  5]   0.00-10.00  sec  2.00 GBytes  1.72 Gbits/sec                  receiver
-
-threads 2
-[SUM]   0.00-10.00  sec  11.1 GBytes  9.50 Gbits/sec    0             sender
-[SUM]   0.00-10.00  sec  4.00 GBytes  3.43 Gbits/sec                  receiver
-
-threads 8
-[SUM]   0.00-10.00  sec  10.8 GBytes  9.25 Gbits/sec    0             sender
-[SUM]   0.00-10.01  sec  10.7 GBytes  9.23 Gbits/sec                  receiver
-
-threads 16
-[SUM]   0.00-10.00  sec  10.9 GBytes  9.34 Gbits/sec    0             sender
-[SUM]   0.00-10.01  sec  10.8 GBytes  9.30 Gbits/sec                  receiver
-
-
-7.2.0-rc2 with 0001-tun-set-waking-threshold-to-tx_ring.batch.patch
-
-threads 1
-[  5]   0.00-10.00  sec  19.6 GBytes  16.9 Gbits/sec    2            sender
-[  5]   0.00-10.00  sec  2.00 GBytes  1.72 Gbits/sec                  receiver
-
-threads 2
-[SUM]   0.00-10.00  sec  13.9 GBytes  11.9 Gbits/sec    0             sender
-[SUM]   0.00-10.00  sec  4.00 GBytes  3.43 Gbits/sec                  receiver
-
-threads 8
-[SUM]   0.00-10.00  sec  12.7 GBytes  10.9 Gbits/sec    0             sender
-[SUM]   0.00-10.01  sec  12.3 GBytes  10.6 Gbits/sec                  receiver
-
-threads 16
-[SUM]   0.00-10.00  sec  12.5 GBytes  10.7 Gbits/sec    0             sender
-[SUM]   0.00-10.00  sec  12.4 GBytes  10.7 Gbits/sec                  receiver
-
-
-
-HTH,
-
-
-Brett
--- 
-Brett Sheffield (he/him)
-Librecast - Decentralising the Internet with Multicast
-https://librecast.net/
-https://blog.brettsheffield.com/
+> Why? Since this series goes through PCI tree and all PCI patches are controller
+> patches, I'm going to merge the series. So no need of the A-b/R-b tags.
+All right, V4 patchset is coming shortly.
 
