@@ -1,229 +1,191 @@
-Return-Path: <linux-doc+bounces-95431-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95432-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id SkQTCEc/TWpPxQEAu9opvQ
-	(envelope-from <linux-doc+bounces-95431-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 20:02:47 +0200
+	id yY1+K4BCTWrbxQEAu9opvQ
+	(envelope-from <linux-doc+bounces-95432-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 20:16:32 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 766CE71E77C
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 20:02:46 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F72B71E8E0
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 20:16:32 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=N+Vnbwou;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b="aX/Y2Ep0";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95431-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-95431-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95432-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-95432-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 1FF263030804
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 18:02:42 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 1CAE3300ECA1
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 18:16:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A553B3DBD60;
-	Tue,  7 Jul 2026 18:02:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1988243C7B2;
+	Tue,  7 Jul 2026 18:16:30 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 738D8225791;
-	Tue,  7 Jul 2026 18:02:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED21430E858;
+	Tue,  7 Jul 2026 18:16:28 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783447360; cv=none; b=qhcdcUwjLV9Ba5F85Wt3bZ4B0+fFibMzSDi4fCCnopFap95dbJnJwwErK4SafWQGbT6JzQtq/r/Bg37m1v1a6aYURSfslnHhj4qNPiL9wFfLAnM6LHdhje0Mgr8/TGoxCldoHq7zT2MT1OxKz1xTGOn5RG/sHFoGxH489ALO5QI=
+	t=1783448190; cv=none; b=Ub/Xm/j7bUCrjNFaa6FGRw4T2njZs5Fkwuny3wQh0juquPcE8n4DPLaqLX6KhFXInwLHGCZEQxqADcqb8RYpqcLCClArSOI/es5vVmQAMwzj3enaUoTQjpZiKPWz8BFNHARxMTnvYHu6iLSJBzJ37QBnJ8YdIAPViGSBVwDUaPw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783447360; c=relaxed/simple;
-	bh=v5UE4CN/5U1UeycwVcqpmK3ZPN8kJbKTuuCG+EL1iLU=;
+	s=arc-20240116; t=1783448190; c=relaxed/simple;
+	bh=tBsoGsWVTB1fKQ6KeMMeSEfbcngCCs8AaTyTeTMK7AE=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Il+ij5X9Y384JJmfhQppciOmcycKQD6liBipyP2qW191VinXaxH/s01uXSlaIelFhcCfum3GZyQe2uh9rl3ISv0GnuTALH8x1LMCM6HP2HcGvOYk0M9nQeHayh/z4Sp+BakD+FVrPlvT4bCXKmKq+PMZL8xz+hpeEwq8VaDn5NQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=N+Vnbwou; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B41221F000E9;
-	Tue,  7 Jul 2026 18:02:38 +0000 (UTC)
+	 Content-Type:Content-Disposition:In-Reply-To; b=rUbdeCuvbKyDJspxNR2o/1xafKEia23Kfevke8jMixDbS8mr1sn3ASXCAqhGPszr3tMW9hxc0Kq6lPoLP3zz5ZJSTq01sMEV/C+d+BzMFjQqq4sla40HSS2pb0VnAYJKVFAbuhqXl8ebxGzcdTjPA5lT/fizTA4ganIZuXxn4e4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=aX/Y2Ep0; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 274A01F000E9;
+	Tue,  7 Jul 2026 18:16:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783447359;
-	bh=FryudSw1T2aBIUC8yNaOKfA0SsyG7mefxgdiOUUg/jo=;
+	s=k20260515; t=1783448188;
+	bh=XmepRTPWwRnVbUnZzeTYEcNXbXDzNGQFuUqYXSOcfCA=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=N+Vnbwoua/QGFqX1FJgxTZEeQArxQywA5ZLkb+cuyiLT1RyZBO8UKEnY1TN1bRU+y
-	 mmImothqrfHNURIQLWJ/FVvuF+nGkjn62x3ctvrxuKVMdasv+rz8+EhJWbyE9bVMAP
-	 XeXPvElu8iOFTsq5ShjS+JCrJ+t9w6iHaJZ2BvoL54Gs1evNMASXj19FeDmeueAseD
-	 M7yO3DIThFb6/MbvZUUbt+47vSyWcwfhLN5nmXrCiCUy18/Fgo7e71ItmXyNIni1sr
-	 e1Cudg/8AwbbkWQxfyGpEJeGE//8QxHgz5emwJUSZxpzTmnrZQg99BNpuQfCaJSKtR
-	 0RMZFg5mGzjig==
-Date: Tue, 7 Jul 2026 11:02:37 -0700
-From: Oliver Upton <oupton@kernel.org>
-To: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Cc: Marc Zyngier <maz@kernel.org>, Joey Gouly <joey.gouly@arm.com>,
-	Suzuki K Poulose <suzuki.poulose@arm.com>,
-	Zenghui Yu <yuzenghui@huawei.com>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>, Kees Cook <kees@kernel.org>,
-	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	linux-arm-kernel@lists.infradead.org, kvmarm@lists.linux.dev,
-	linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org,
-	devel@daynix.com, kvm@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kselftest@vger.kernel.org
-Subject: Re: [PATCH v8 5/7] KVM: arm64: PMU: Implement fixed-counters-only
- emulation
-Message-ID: <ak0_PSnxyAWm9_Fu@kernel.org>
-References: <20260706-hybrid-v8-0-de459617b59d@rsg.ci.i.u-tokyo.ac.jp>
- <20260706-hybrid-v8-5-de459617b59d@rsg.ci.i.u-tokyo.ac.jp>
- <akvyvclUQ2b2YHiU@kernel.org>
- <cb5d5f13-a1a9-47dd-a717-5533a8b32b20@rsg.ci.i.u-tokyo.ac.jp>
- <5e66748a-bfda-41a9-8614-88cbf2fe1f09@rsg.ci.i.u-tokyo.ac.jp>
+	b=aX/Y2Ep0+l8exoXDFJNq3CoNTjW358ElKQjFxPr5x+ySYh5/KK0vVo23Q/5jzJkwH
+	 AkZ+dslz3IGAgAax2AOti9AJlD9fQoUOXFuFhHE//U6FdRchMlvmRwAZ4OCxQDNtEo
+	 VIXBj8mgDgv9562Nf8GHtBmkJJ4eE+9lsMOLBILmwnH7jlyH7qY8SzQ5W4H4VUm3rX
+	 zXZSo57p0K/Hilgk14FsH7N7NH7++5UNddadLjwejlNthgqPTt91cgLRkiOMNm6W+g
+	 7kLbCcSku2S53mZVS1YV+0Bsz5z35O6ocDvQgqvMJggMfexUelXRMTm+geEfE0c7Tb
+	 zz7MK8ldtiiUg==
+Date: Tue, 7 Jul 2026 19:16:15 +0100
+From: Lorenzo Stoakes <ljs@kernel.org>
+To: "Darrick J. Wong" <djwong@kernel.org>
+Cc: "David Hildenbrand (Arm)" <david@kernel.org>, 
+	Laurent Pinchart <laurent.pinchart@ideasonboard.com>, Boris Burkov <boris@bur.io>, Jeff Layton <jlayton@kernel.org>, 
+	Greg KH <gregkh@linuxfoundation.org>, Linus Torvalds <torvalds@linux-foundation.org>, 
+	Jonathan Corbet <corbet@lwn.net>, Justin Stitt <justinstitt@google.com>, 
+	Carlos Maiolino <cem@kernel.org>, Jakub Kicinski <kuba@kernel.org>, 
+	Jori Koolstra <jkoolstra@xs4all.nl>, Krzysztof Kozlowski <krzk@kernel.org>, 
+	Brian Foster <bfoster@redhat.com>, Christoph Hellwig <hch@infradead.org>, 
+	David Disseldorp <ddiss@suse.de>, Mark Brown <broonie@kernel.org>, 
+	Jani Nikula <jani.nikula@intel.com>, Jens Axboe <axboe@kernel.dk>, 
+	Vlastimil Babka <vbabka@kernel.org>, "Christian Brauner (Amutable)" <brauner@kernel.org>, 
+	workflows@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-fsdevel@vger.kernel.org
+Subject: Re: [PATCH] Documentation: remove the requirement for LLM attribution
+Message-ID: <ak1CT2xKc9hx8fJk@lucifer>
+References: <3f447113-4407-471f-878f-e6d6edafee71@kernel.org>
+ <akez23ZhLRSGMFQ1@lucifer>
+ <20260703163251.GB3734786@killaraus.ideasonboard.com>
+ <e93d28e4-750c-4a4f-8bfd-7a0b404cd05c@kernel.org>
+ <akzETpsps4TMfqpC@lucifer>
+ <0ba6bf66-e48f-40df-a953-503d317b3dbe@kernel.org>
+ <akzMh-ySQ2fN0d8R@lucifer>
+ <5ccbb28a-171e-40c1-9a6b-9ac7b6b7777d@kernel.org>
+ <ak0UjMSqm_6vCDIu@lucifer>
+ <20260707171039.GD9368@frogsfrogsfrogs>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <5e66748a-bfda-41a9-8614-88cbf2fe1f09@rsg.ci.i.u-tokyo.ac.jp>
+In-Reply-To: <20260707171039.GD9368@frogsfrogsfrogs>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-5.16 / 15.00];
+X-Spamd-Result: default: False [-4.66 / 15.00];
 	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:odaki@rsg.ci.i.u-tokyo.ac.jp,m:maz@kernel.org,m:joey.gouly@arm.com,m:suzuki.poulose@arm.com,m:yuzenghui@huawei.com,m:catalin.marinas@arm.com,m:will@kernel.org,m:kees@kernel.org,m:gustavoars@kernel.org,m:pbonzini@redhat.com,m:corbet@lwn.net,m:shuah@kernel.org,m:skhan@linuxfoundation.org,m:linux-arm-kernel@lists.infradead.org,m:kvmarm@lists.linux.dev,m:linux-kernel@vger.kernel.org,m:linux-hardening@vger.kernel.org,m:devel@daynix.com,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:djwong@kernel.org,m:david@kernel.org,m:laurent.pinchart@ideasonboard.com,m:boris@bur.io,m:jlayton@kernel.org,m:gregkh@linuxfoundation.org,m:torvalds@linux-foundation.org,m:corbet@lwn.net,m:justinstitt@google.com,m:cem@kernel.org,m:kuba@kernel.org,m:jkoolstra@xs4all.nl,m:krzk@kernel.org,m:bfoster@redhat.com,m:hch@infradead.org,m:ddiss@suse.de,m:broonie@kernel.org,m:jani.nikula@intel.com,m:axboe@kernel.dk,m:vbabka@kernel.org,m:brauner@kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER(0.00)[oupton@kernel.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[21];
-	TAGGED_FROM(0.00)[bounces-95431-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	FORGED_SENDER(0.00)[ljs@kernel.org,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-95432-lists,linux-doc=lfdr.de];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[oupton@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[ljs@kernel.org,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[kernel.org,ideasonboard.com,bur.io,linuxfoundation.org,linux-foundation.org,lwn.net,google.com,xs4all.nl,redhat.com,infradead.org,suse.de,intel.com,kernel.dk,vger.kernel.org];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 766CE71E77C
+X-Rspamd-Queue-Id: 1F72B71E8E0
 
-On Tue, Jul 07, 2026 at 09:52:49PM +0900, Akihiko Odaki wrote:
-> On 2026/07/07 20:23, Akihiko Odaki wrote:
-> > On 2026/07/07 3:23, Oliver Upton wrote:
-> > > Just detect the changing PMU implementation here, KVM_REQ_RELOAD_PMU
-> > > will need to detect the PMCs that require an update anyway. Stash the
-> > > last cpu in kvm_arch_vcpu_load() and pass it to this:
-> > > 
-> > > void kvm_vcpu_load_pmu(struct kvm_vcpu *vcpu, int last_cpu)
-> > > {
-> > >     if (!kvm_pmu_fixed_counters_only(vcpu->kvm) || vcpu->cpu == last_cpu)
-> > >         return;
-> > > 
-> > >     if (kvm_pmu_probe_armpmu(vcpu->cpu) !=
-> > > kvm_pmu_probe_armpmu(last_cpu))
-> > >         kvm_make_request(KVM_REQ_RELOAD_PMU);
-> > > }
-> > 
-> > It is a nice way to simplify the code and to avoid hardcoding
-> > ARMV8_PMU_INSTR_IDX. I'll use the code for the next version.
-> 
-> I tried this but unfortunately it doesn't seem to work. kvm_arch_vcpu_put()
-> sets vcpu->cpu to -1 so we cannot simply read it to get the last cpu in
-> kvm_arch_vcpu_load().
+On Tue, Jul 07, 2026 at 10:10:39AM -0700, Darrick J. Wong wrote:
+> On Tue, Jul 07, 2026 at 04:10:07PM +0100, Lorenzo Stoakes wrote:
+> > On Tue, Jul 07, 2026 at 03:29:44PM +0200, David Hildenbrand (Arm) wrote:
+> > > On 7/7/26 11:55, Lorenzo Stoakes wrote:
+> > > > LGTM! Do you want to send that then? People can comment on the actual path then
+> > > > (probably worth cc'ing everybody here on that also).
+> > >
+> > > Let's first gather some more thoughts on the rough direction before spinning of
+> > > yet another discussion. :)
+> >
+> > I'm suggesting sending a simple, uncontroversial, change to get movement rather
+> > than continue this never-ending talking shop :)
+>
+> Oh but I love shop talk! :P
+>
+> My opinions (having been on vacation for most of this thread) are
+> roughly:
+>
+> 1. For patches generated by deterministic tools (e.g. sed/cocinelle),
+> please include the source code so that anyone reading the patch can
+> check the reproducibility of that patch.  But that can be free-form
+> in the commit message:
+>
+> https://lore.kernel.org/linux-xfs/157343508488.1945685.9867882880040545380.stgit@magnolia/
+>
+> 2. For nondeterministic machine assistance, I like the idea of asking
+> patch submitters to note which part(s) of the patch had machine
+> assistance applied.  I don't care all that much about the technology
+> used (e.g. LLM, or Eliza, or whatever).  Something like:
+>
+> Assisted-by: LLM # commit message
+> Assisted-by: LLM # finding bugs in the original commit
+>
+> I don't care to give free advertising to any specific LLM-pusher, nor
+> do I care to give the whole *industry* any free publicity.  They can
+> spend their own leveraged money on advertising.
+>
+> Mecha-assistance-done-by: finding bugs in the original commit
+>
+> or maybe just
+>
+> MAD: finding bugs in the original commit
+>
+> :P
+>
+> 3. I grade *all* the trailers that submitters attach to patches!  And
+> how well they engage me on my weird followup questions!  Both help me to
+> construct a conscientiousness vibe, which is how I decide how much
+> effort to put into making a response.  Do you allege that your patch
+> fixes a bug but fail to cc stable?  Do you post obviously LLM generated
+> content but leave out an Assisted-by tag?  Do you habitually drop off
+> the list for long periods of time?  Decline to run /any/ QA on your
+> patches at all?  Not gonna waste my time.
+>
+> OTOH, I also look for *good* behavior: cc'ing stable, responding to
+> questions with a day or two, kvetching on fstests@ about the horridness
+> of bash scripts?  I find that endearing. ;)
+>
+> --D
+>
+> > Anyway I'll leave it up to you!
+> >
+> > Thanks, Lorenzo
+> >
 
-Urgh, there's no reason for doing that any more. Let's fix it, I want a
-straightforward way to detect pCPU migrations. There may be other
-reasons for using it in the future.
+I love all of this, no notes :)
 
-Untested, but could you give this a whirl?
-
-From bb5af058030aada66f5c9eafa54db604979acf55 Mon Sep 17 00:00:00 2001
-From: Oliver Upton <oupton@kernel.org>
-Date: Tue, 7 Jul 2026 09:50:00 -0700
-Subject: [PATCH] KVM: arm64: Don't clear vcpu->cpu in kvm_arch_vcpu_put()
-
-commit e9b152cb957c ("arm/arm64: kvm: Set vcpu->cpu to -1 on vcpu_put")
-reset vcpu->cpu in order for the VGIC to determine if there was any vCPU
-running at the time of access. The VGIC has gone through an entire
-rewrite since then, and with commit 7d450e282171 ("KVM: arm/arm64:
-vgic-new: Add userland access to VGIC dist registers") the user
-accessors just grab all vCPU mutexes instead.
-
-Drop this remaining vestige such that kvm_arch_vcpu_load() can properly
-detect a CPU migration. While at it, rework kvm_reset_vcpu() to do a
-much more pedantic check that the provided vCPU is actually what's
-running on the present CPU.
-
-Signed-off-by: Oliver Upton <oupton@kernel.org>
----
- arch/arm64/kvm/arm.c   |  1 -
- arch/arm64/kvm/reset.c | 15 ++++++++++-----
- 2 files changed, 10 insertions(+), 6 deletions(-)
-
-diff --git a/arch/arm64/kvm/arm.c b/arch/arm64/kvm/arm.c
-index 50adfff75be8..735acc42b50b 100644
---- a/arch/arm64/kvm/arm.c
-+++ b/arch/arm64/kvm/arm.c
-@@ -749,7 +749,6 @@ void kvm_arch_vcpu_put(struct kvm_vcpu *vcpu)
- 	kvm_arm_vmid_clear_active();
- 
- 	vcpu_clear_on_unsupported_cpu(vcpu);
--	vcpu->cpu = -1;
- }
- 
- static void __kvm_arm_vcpu_power_off(struct kvm_vcpu *vcpu)
-diff --git a/arch/arm64/kvm/reset.c b/arch/arm64/kvm/reset.c
-index b963fd975aac..6aba085c0673 100644
---- a/arch/arm64/kvm/reset.c
-+++ b/arch/arm64/kvm/reset.c
-@@ -190,7 +190,8 @@ static void kvm_vcpu_reset_sve(struct kvm_vcpu *vcpu)
- void kvm_reset_vcpu(struct kvm_vcpu *vcpu)
- {
- 	struct vcpu_reset_state reset_state;
--	bool loaded;
-+	struct kvm_vcpu *running;
-+	bool loaded = false;
- 	u32 pstate;
- 
- 	spin_lock(&vcpu->arch.mp_state_lock);
-@@ -198,10 +199,15 @@ void kvm_reset_vcpu(struct kvm_vcpu *vcpu)
- 	vcpu->arch.reset_state.reset = false;
- 	spin_unlock(&vcpu->arch.mp_state_lock);
- 
--	preempt_disable();
--	loaded = (vcpu->cpu != -1);
--	if (loaded)
-+	guard(preempt)();
-+
-+	if ((running = kvm_get_running_vcpu())) {
-+		if (KVM_BUG_ON(running != vcpu, vcpu->kvm))
-+			return;
-+
-+		loaded = true;
- 		kvm_arch_vcpu_put(vcpu);
-+	}
- 
- 	if (!kvm_arm_vcpu_sve_finalized(vcpu)) {
- 		if (vcpu_has_feature(vcpu, KVM_ARM_VCPU_SVE))
-@@ -269,7 +275,6 @@ void kvm_reset_vcpu(struct kvm_vcpu *vcpu)
- 
- 	if (loaded)
- 		kvm_arch_vcpu_load(vcpu, smp_processor_id());
--	preempt_enable();
- }
- 
- u32 kvm_get_pa_bits(struct kvm *kvm)
--- 
-2.47.3
-
+Cheers, Lorenzo
 
