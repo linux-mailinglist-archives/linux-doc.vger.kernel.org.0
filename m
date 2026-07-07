@@ -1,243 +1,185 @@
-Return-Path: <linux-doc+bounces-95422-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95423-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 6gJqI4k2TWqzwgEAu9opvQ
-	(envelope-from <linux-doc+bounces-95422-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 19:25:29 +0200
+	id oH9jCj05TWpCxAEAu9opvQ
+	(envelope-from <linux-doc+bounces-95423-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 19:37:01 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id D8F4C71E425
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 19:25:28 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7BE0571E579
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 19:37:00 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=intel.com header.s=Intel header.b=gwBFlRpe;
-	dmarc=pass (policy=none) header.from=intel.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95422-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95422-lists+linux-doc=lfdr.de@vger.kernel.org";
-	arc=reject ("cv is fail on i=2")
+	dkim=pass header.d=lwn.net header.s=20201203 header.b="rk3/UTRm";
+	dmarc=pass (policy=none) header.from=lwn.net;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95423-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95423-lists+linux-doc=lfdr.de@vger.kernel.org";
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id EA14D3031329
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 17:25:26 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 4EA2B3017077
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 17:36:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 64A2C436BCA;
-	Tue,  7 Jul 2026 17:25:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2000734FF62;
+	Tue,  7 Jul 2026 17:36:58 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.12])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 71F6D438463;
-	Tue,  7 Jul 2026 17:25:23 +0000 (UTC)
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783445125; cv=fail; b=NwJDWTXQzUo3ZQWmxrdUK49eMIvHjNJ0qOSGWUUOuXRQwWfpi9enZ/Zk2fyU7NM0rhJxUx/31SzPQ9f6JGptPjL8K010/SKa99H5Iq0hoho/l/zP1VO3ddPLio0z3fvmW1yd0DHrYp+H6Rk90Z9VmCRSqyVZsSr3dbp3CQH6xmE=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783445125; c=relaxed/simple;
-	bh=7Asamc249mIB08uXQSc2Vrh0fT9CCl1bAWBr18EHqps=;
-	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
-	 Content-Type:MIME-Version; b=nQ6pUiAN7xSqoq/urTRwTNJUkgapTCtBzycddvnyShcpOy7h8AKFqoq6qTIGpvjqrO1V8PoXy6Az3wkMZqjoCDmakRt/vIhUK4xFPEywyOK1q0ZtjzZAdkp6w/pGXXtmldHB8Ya3wlhcpR4nh60rUg1hgKVHF55BxXvKjzVFxEo=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=gwBFlRpe; arc=fail smtp.client-ip=192.198.163.12
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1783445123; x=1814981123;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-id:content-transfer-encoding:
-   mime-version;
-  bh=7Asamc249mIB08uXQSc2Vrh0fT9CCl1bAWBr18EHqps=;
-  b=gwBFlRpeGD/FW3muHDGsghfD4ZJEWgg+YnECBpjslkM6rEAtZ2RcFhxA
-   NtGkx3bSKZ5LeAlGtZwf9i2MOSvfhPRH4eLapqK1ufEyIBCI/F/ytu9vX
-   ur5cV6sHtkZWm2lXBwpm04H2EKq5/HrmyTlM/vy9N9KzzwLn9pnwFHAUe
-   mHyWMo58dVzJ02MmYFrEk3C58FH7lvF3ctEx3l4KKgbgs52maaH+CRklr
-   JaJ0Dt+OsIS8A1JQyam/ELS8Rxza9JhBwOfxtVD/Kv8iOXpmji9y5y8gr
-   WUeqmtgUYV+VNo3iWFlW5BDwLoaklhzBpHaSA/Qc9NmCO0H5NIfcw6UY8
-   Q==;
-X-CSE-ConnectionGUID: UYZl+IvdQIynEV/jmmmC6w==
-X-CSE-MsgGUID: gQVvw7fvShutnoUQxaN1+g==
-X-IronPort-AV: E=McAfee;i="6800,10657,11840"; a="87918088"
-X-IronPort-AV: E=Sophos;i="6.25,153,1779174000"; 
-   d="scan'208";a="87918088"
-Received: from orviesa004.jf.intel.com ([10.64.159.144])
-  by fmvoesa106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jul 2026 10:25:23 -0700
-X-CSE-ConnectionGUID: dSFXiOFfSNSZPlh0PIADdQ==
-X-CSE-MsgGUID: KaC5haepT9ifKzDYIrf1cA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.25,153,1779174000"; 
-   d="scan'208";a="257936751"
-Received: from fmsmsx903.amr.corp.intel.com ([10.18.126.92])
-  by orviesa004.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jul 2026 10:25:23 -0700
-Received: from FMSMSX901.amr.corp.intel.com (10.18.126.90) by
- fmsmsx903.amr.corp.intel.com (10.18.126.92) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.43; Tue, 7 Jul 2026 10:25:22 -0700
-Received: from fmsedg901.ED.cps.intel.com (10.1.192.143) by
- FMSMSX901.amr.corp.intel.com (10.18.126.90) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.43 via Frontend Transport; Tue, 7 Jul 2026 10:25:22 -0700
-Received: from CH4PR04CU002.outbound.protection.outlook.com (40.107.201.33) by
- edgegateway.intel.com (192.55.55.81) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.43; Tue, 7 Jul 2026 10:25:21 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qBxyuCBTbLVNFQTnr4JLaQwTznZTJ5yfnRIgsSR36DXPEz5A4iMLEfcCbmYrURdajMulhpNR8hQIZnM64OwXSRP+HtjVQK1TOILBA8pij+9CqlxPo9krSa43E4M5uyfJR346z2UHLEV8lVQvezqEqAlihHX7k3bdy29QR41Fx/rwjYh9oGlGNFkCUdWdHlCMZ19dlf1Eeo6qPL+cNKPvBI5E4MsEvvdhvXNRCRuoJP1squ+28DrzKpJ7dwuKkSTdzu7oZmQ7G2IBEYFWgBhDgqE8AG4s3gG6+5OKTU0P7Z7ryp6qzggZrd1nsVlbeEevMvQXPV/VJ4FN7TjbW8pUsQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7Asamc249mIB08uXQSc2Vrh0fT9CCl1bAWBr18EHqps=;
- b=FszkKbxEpzkW8lTCC/2zuOPhT/Z13iECcy960xwH0ek6LPp4qfPYOeExAOWJlRzwdFgPEPrwAOiy040daQVe/XnctU5V3r42PlxiSeThbqHZpYuuFZQ3FHiL48m8TO5VG9pdIR3T2qq/VS8eTjPo71EbdJ9CD7jXNmo6y+VFEc4Dzqx2JekgztnvPdBUZ6NFg3VvRqflJpzeDzuUwTRXh4f+fUOzUr/i8iatbkIuU+EQvpw/E+cBVEnDPapcTwM/KDnZoYYa6w21ftKHaZhmGm8PIIPkUiFEaTRk/Fo8BaeC/W/LYWV9R6O2NFbe+I+cbhIONDokn/6IzX7mambgfw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Received: from PH7PR11MB6771.namprd11.prod.outlook.com (2603:10b6:510:1b5::20)
- by SN7PR11MB6727.namprd11.prod.outlook.com (2603:10b6:806:265::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.9; Tue, 7 Jul 2026
- 17:25:17 +0000
-Received: from PH7PR11MB6771.namprd11.prod.outlook.com
- ([fe80::effa:162e:c9c9:a1b4]) by PH7PR11MB6771.namprd11.prod.outlook.com
- ([fe80::effa:162e:c9c9:a1b4%4]) with mapi id 15.21.0181.008; Tue, 7 Jul 2026
- 17:25:17 +0000
-From: "Edgecombe, Rick P" <rick.p.edgecombe@intel.com>
-To: "seanjc@google.com" <seanjc@google.com>
-CC: "kvm@vger.kernel.org" <kvm@vger.kernel.org>, "linux-coco@lists.linux.dev"
-	<linux-coco@lists.linux.dev>, "Huang, Kai" <kai.huang@intel.com>, "Hansen,
- Dave" <dave.hansen@intel.com>, "Zhao, Yan Y" <yan.y.zhao@intel.com>,
-	"kas@kernel.org" <kas@kernel.org>, "mingo@redhat.com" <mingo@redhat.com>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	"pbonzini@redhat.com" <pbonzini@redhat.com>, "nik.borisov@suse.com"
-	<nik.borisov@suse.com>, "linux-doc@vger.kernel.org"
-	<linux-doc@vger.kernel.org>, "hpa@zytor.com" <hpa@zytor.com>,
-	"tglx@kernel.org" <tglx@kernel.org>, "Annapurve, Vishal"
-	<vannapurve@google.com>, "bp@alien8.de" <bp@alien8.de>, "Gao, Chao"
-	<chao.gao@intel.com>, "x86@kernel.org" <x86@kernel.org>
-Subject: Re: [PATCH v6 00/11] Dynamic PAMT
-Thread-Topic: [PATCH v6 00/11] Dynamic PAMT
-Thread-Index: AQHc7Lharxh55RbAGkSefZRzihMYJbZhO7eAgAFDE4CAABLpAA==
-Date: Tue, 7 Jul 2026 17:25:17 +0000
-Message-ID: <afa3018f954a08ea2bdd44782026e94b74be646a.camel@intel.com>
-References: <20260526023515.288829-1-rick.p.edgecombe@intel.com>
-	 <f2b2a3a048ad6429305e0e21319a8c27bedf39db.camel@intel.com>
-	 <ak0mnZKoxK5Y04Dw@google.com>
-In-Reply-To: <ak0mnZKoxK5Y04Dw@google.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-user-agent: Evolution 3.44.4-0ubuntu2.1 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PH7PR11MB6771:EE_|SN7PR11MB6727:EE_
-x-ms-office365-filtering-correlation-id: b0cbddd0-0446-43a9-8cbb-08dedc4cb6a0
-x-ld-processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|23010399003|376014|1800799024|366016|7416014|56012099006|22082099003|18002099003|11063799006|4143699003|38070700021;
-x-microsoft-antispam-message-info: od96/80d8C0jbuigPdr7crmkNFTkBzyBh9sD1i/vqBHKuSK5w5xHU5nQSPZn2n5Vo2dXdN1ZCuvRtnQuuKobPFbgOyFNsgtUnD2o4C/f5u53odzMjorVDZ+3LV7wcZUXGzz4OsXujedviaTnbf5aL1nbBJn5rMTkq1N7xrA1ot2xUN0QXGsfOuzV9c5GV3lO7lpbF4DBCVQ01t2zXoNybcXQFZGYUtjT1i1EaRez8y0at8LMTiyt8PRINh3UB5a4bqogZNe7KvSOBnWCXB+trSbX3UQCeVTYkZ/yaeZg3Wc7AcAGluxn8LG9Gei2u9Td9WEakNNEiHb/d7WkDS3kEVLbK4WflFjKKIXQRc1wrrh0T67VKMwDHEKr77n8q7NUspeKTFChK8asQUu3RyzRTJsYrEwBTc00zDC8lYSgToEbzR3pHhLtW2bzT3f09MO1xkG0L+6rLQ2MWmct2IVGYNBLfMKUEZIQvTiNvr4uSPsLsVQt8nUcSBqnJMj4eyKpt0gALou9t5sja57qtoDM4Sk37hhnEP+31ZyTgxSJ4MIYZv1shTs8NGsy+uFC+taFv41/OupaOnfSAa8jgOJY+DGmRMFITGkn0d6KhlX78mKOZH4YkoB0bcuqRk7ouw7KPAesmM0xnk+R1YHs3uywqBqtSDPAMPeSvbZTxrfmriWN2O7RK9hvPtrkpC7k7BEV9eGUZ0cvpeaWUOJk8feFMRLwspdAHYUUFaxwV7BFXpo=
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR11MB6771.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(1800799024)(366016)(7416014)(56012099006)(22082099003)(18002099003)(11063799006)(4143699003)(38070700021);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?UW13bmFnZU9PN0cvRVArZUwrdUxJRG5ueGJSSnY5U0xMWVVnaDBBNTMyOFpx?=
- =?utf-8?B?eUZpVGNTdVBsNjMzRG5FYVNjTWlPOWNVMnhhMWl1dnZlSGRScHNLK0dpK09I?=
- =?utf-8?B?UitaVWdHa1FSWGFOVk5seWY2bmYxMGpMVE9iNXBkSFl4czlJQ2ZRRUNtQmxB?=
- =?utf-8?B?ZUM3VXRaM2lucHJJS2ExY3ZsblJ5WjhIVHJPZ3ZaODAzKy9xTFc0MG9yN3px?=
- =?utf-8?B?QStNQWtnVnZSTWdEbjNXcVRieEVJVHptVW1vRlVaK0tvTlB1alB0V0N0cndt?=
- =?utf-8?B?c3JrZThSVkVNVzgzb0ZCbnB0RTlDL05JMWlZcUxIUzIzM2YwemJLWndpMmpM?=
- =?utf-8?B?VTF0VXJudERIcDlwNmxMTW9NLzBlNlRWakNFaFVBL0pXbWdNMk5NUnNnZ3F3?=
- =?utf-8?B?VXlaUVFIZkhaWTViaThXS1FEYzkvbE5UN2dSQTZsdEdxTkxtdTdoOGFVNTdQ?=
- =?utf-8?B?aEZDc25RcERyZmw5Qnc1Y0FkWmswUlFEUTlPNWNWRjZaVGJXb0NuVVJ1Rkk5?=
- =?utf-8?B?MVFJc0x4OGY1cU9WaTY2YUI4bUVMMy9lRWYzY0ZvZWtEMkJHdEhmcVBKaHYz?=
- =?utf-8?B?Y0N6TExya3pRMTFrNWlOc2NQYWowYnZveVF3S1hoNitKeG1NM1NPaVJHMG9n?=
- =?utf-8?B?ZUVnVXgyMXZ2NE1vL1lVTmxyaDdEUGgxM2h1NndZb3dMTXZmMkN0STRiQkRq?=
- =?utf-8?B?VGJrbE85dEtDZTFzNzRuQitLcTBQeCtzc0w0c0QwbDNOMWpVUG5xcmZjeDho?=
- =?utf-8?B?d0pJYkF2eGhWRmowb3FSYzBybDJzeEZ4RktDZGFOZjlPZmVQSjN4aE1rcXhu?=
- =?utf-8?B?Q0lRRmZXalp0ekN5NE5HazR1dC9ZczVHd293SGkvaFpIWUhEYjRrdHI0MG9Y?=
- =?utf-8?B?TWZSUGZwbkwzUHcxaGh1M1BaNHNFbVREUmVicGFjR3FtRlM1SmlkcjBoV0dW?=
- =?utf-8?B?RGo4OFlXczdqbThYRy91RmVRNFhEMkpoWlJ5VXBUUTNGOW1ML3lOZzVGU3ds?=
- =?utf-8?B?cFRLUi9tSnlLckZoRWNsUFNMeGFtQjFvcDJaNVY2VHA3ekFKTFA4RURnNE9U?=
- =?utf-8?B?R1ZnaE95TzYwblB4bXNDMFRmc3JuclpWRzlyRmdrTDNUb2dPU0Zxdk1jMDZY?=
- =?utf-8?B?c05ybGpVc3FNblMybC8vZ0xKbGlRbGtRb09xOGRlcXFoREh1SEhSNUNqa0xp?=
- =?utf-8?B?bStFRVZobzlLSk9yaWNySUI3L1BObzBGbUQrcGJmdnlqaTlXc2J5a29PWDdu?=
- =?utf-8?B?K1RkSFFIaVZ0d2FOeVdJTEhJc01XOHlZMDdBTWFJNFArTVhYbDBYbVk1WFdh?=
- =?utf-8?B?OGw5K1hzOXRBUXRsYzAyenJlYnh1M0ZmKzFMdkRQZUVFTWltVDRTeGZMQzZQ?=
- =?utf-8?B?VjJENDZreHZSZWc5MXVnaWJCbTNoT2RkakRUdkpEK3VPdzJLdWljQVpkamFR?=
- =?utf-8?B?UzBoN2tVRDRYNmx5QjV2cU1xSXV5OGdYR2dCdTd2MkV3WjdPcFJTOEI2alZK?=
- =?utf-8?B?cGNoc2dHL0dXTFVrVjdlcFJPUkd3Z1QyYmFoSGNRcXJOdE9uL2szNTRtNGo5?=
- =?utf-8?B?b0cwbWtTSmVEdExYdnBGVWJoVXdKajdGWUphU3ozNFZjS1p2Nk9yeStJU2RF?=
- =?utf-8?B?RkpRUkpMOTd1cy96QzJsemdNZGc0Tk1ldkxGcFgwLzNNN3pVRmZhRVhpdE9G?=
- =?utf-8?B?SFVXdlorSEZsN0RCWDdkdDFKK3lqT1FxOFNyRFlRZGNuVXRIaFQzazZINzh6?=
- =?utf-8?B?MUVIUk5XK0M3aFZYcExFQlhMY2c1TThLaXhLQU1sZk0rYXpFZjUrVjUwNGpU?=
- =?utf-8?B?V3hlVFVsY2hkaGVReHE4RXlJbXRUTDhReTJqUER5dEJBVzVDNXlqalI3RVdH?=
- =?utf-8?B?U1dBZHowRzlSMHo2VTRvdFo4Z3NjZWhMOHprazc2V2doNXJoTWZySm1TMVBM?=
- =?utf-8?B?V3NqTWxJR0xlMEhwV3Frb3VUS1kybzIwT3JpSjBtNFZkUWUyTnhwUE5qYWtX?=
- =?utf-8?B?UnVFMVhaQ2JiLzZNTWowYS9Za1JXelc0TlZYOERsM3Vkd0cvY253T0k0UzlQ?=
- =?utf-8?B?andaSnpoNTZkUjM4ckR1K3NQNjRJakhjM1JCaEJwc3U0SHNpNEM4OGhFanZI?=
- =?utf-8?B?cVFTMnlPa0NLUlEzaFZubnExeDcyMExOZHhtZjVHK0lURUZPTXVQbGRnR3dS?=
- =?utf-8?B?ZDU1SG9nbDdaZTRRb01aUStUbTZWOThJZE9KL1JuY1R3anU4RzArWmVnd053?=
- =?utf-8?B?V3ZIaEpWbnFPejRSRzRqNlpub1J2MlBrT2hueUthcW9WTUFvb0Ivc3l6eU13?=
- =?utf-8?B?ZjUwMUg4Y1YwQUUrV0s0TmlUTGtSZDFGV3JBRnBUakNDWm9RRHBhdDE3c2xR?=
- =?utf-8?Q?+HGcqalJCNM+isoU=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <D72CA45156C17043B495C3B2C5396607@namprd11.prod.outlook.com>
-Content-Transfer-Encoding: base64
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8FA921A6823;
+	Tue,  7 Jul 2026 17:36:56 +0000 (UTC)
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783445818; cv=none; b=jyk4kRTjxf1NVB+E4QTT8ZsITknikHGGA07sAfDsJZXyEcT32wNCh5a7Kv77VGGR0MMGauM+cGTm/M2d3dt/F/utvdPe6L1V9+QlfJhxeZNbZB3u72AhaWA3/FpmFluNudbCb9Pl7Dz+QrQkTTc6RuQ5ZCZKbQ6sYSmu9WBeGnM=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783445818; c=relaxed/simple;
+	bh=Ib/vVqcal4j1MGj8D0TYa+zICO91dCuZmlsT4KqrO20=;
+	h=From:To:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=kbhe1D6CfBqyCa33ahnEuScufC0CJlEaP5FOC7LJlhbqy4ULa5O2K438sHokrcUSsPzutOXWkFyk2hfOgmeKVTY4db814wRw1+JOafjeAtRH8BCB04DeTHFYn7rs/nlhrLbkwGB/DxXNILvGCQKagBMNOfycldIs3iZOQVv0YBU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=rk3/UTRm; arc=none smtp.client-ip=45.79.88.28
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net A66E040430
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1783445815; bh=COXHWe8bmkjlnZivcKeLq98DBvhs3tW0/+YwQdc3IWU=;
+	h=From:To:Subject:In-Reply-To:References:Date:From;
+	b=rk3/UTRmwQJgFwPjxnuOk8nvd6IPczW0ZRnxhLUuJI2lKSkc/tuTYIkJIykpMXW8h
+	 KHdNGLyfbsW9paWamyXjGuOUuY8o6jfuK8aA9T6av66YqdsvyvYA0qPmGIdXXEJyAQ
+	 cLRW18gw2+pDpjjcTDQsyU+YqL63JB72AgLYlSoG+NBys79xzQH4InPJzUTtVKOTof
+	 DBLY6cQPeYBxOPeBg1opVkSzE2sdhVfW2t3xiPtvRv/6pYVgVXnYhf1oxkycqEiqJ3
+	 xR1OA5YO8555kUaWG1dEMmKDNgEPSvRUh6bz6PknNig/u66IMir+TRRkEmfCk1Hvkk
+	 1NLzgpNmKWIZA==
+Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id A66E040430;
+	Tue,  7 Jul 2026 17:36:55 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Daniel Lundberg Pedersen <dlp@qtec.com>, linux-doc@vger.kernel.org,
+ linux-media@vger.kernel.org, Rito Rhymes <rito@ritovision.com>
+Subject: Re: Bad wrapping in some tables
+In-Reply-To: <c542aaf7-6a40-4730-8bd6-208c9fe932d5@qtec.com>
+References: <c542aaf7-6a40-4730-8bd6-208c9fe932d5@qtec.com>
+Date: Tue, 07 Jul 2026 11:36:54 -0600
+Message-ID: <87pl0yr9ah.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: VSzvXBFNmqwWuCuKY7aWuPEb/UK/1snl6Z4iPJcPxqMJseccn2juwc3JOv8eJGT/nk+Qnf8o5awrqJhFlXvJOJyVwD4SoD4qe5HMHVCpUoqG28NKJkY9e2Is/WVHqehoxAdk30RLWrtI3da+bIBznbIps2YEFk8EqEtXCra/xA4SVnrAb3f7OrQQXsTk4nMZsU9+xz1f3jkEsnFG1VbRrKR+uhLMPYmtGPLQnxJWt/dTOTAwyTXr7zWd9Dr6+rN18P3Rn0bXAGhZvavfBXS1IiJhzuWtxuGBfhKH2LgB4u1tkEy1bbhshGiWKegt8q8TaPipYL6w0f6JyOysRh3cjQ==
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR11MB6771.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b0cbddd0-0446-43a9-8cbb-08dedc4cb6a0
-X-MS-Exchange-CrossTenant-originalarrivaltime: 07 Jul 2026 17:25:17.2501
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: pIXuHrUkMQZmN7w9Y3TEN9/kqrE0GfcRZdh9v4Yc9n862z1m+fjlIRKPXmD5r4oe/D28daMX4Zmq11coy8Mmk1ws9JoYnpxhgGX6NFzDTbg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR11MB6727
-X-OriginatorOrg: intel.com
+Content-Type: text/plain
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.06 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,kernel.org:s:+];
-	ARC_REJECT(1.00)[cv is fail on i=2];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+X-Spamd-Result: default: False [-1.66 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
 	MAILLIST(-0.15)[generic];
-	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-95423-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-95422-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:seanjc@google.com,m:kvm@vger.kernel.org,m:linux-coco@lists.linux.dev,m:kai.huang@intel.com,m:dave.hansen@intel.com,m:yan.y.zhao@intel.com,m:kas@kernel.org,m:mingo@redhat.com,m:linux-kernel@vger.kernel.org,m:pbonzini@redhat.com,m:nik.borisov@suse.com,m:linux-doc@vger.kernel.org,m:hpa@zytor.com,m:tglx@kernel.org,m:vannapurve@google.com,m:bp@alien8.de,m:chao.gao@intel.com,m:x86@kernel.org,s:lists@lfdr.de];
-	FORWARDED(0.00)[lists@lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[18];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[rick.p.edgecombe@intel.com,linux-doc@vger.kernel.org];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,intel.com:from_mime,intel.com:dkim,intel.com:mid];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rick.p.edgecombe@intel.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS(0.00)[m:dlp@qtec.com,m:linux-doc@vger.kernel.org,m:linux-media@vger.kernel.org,m:rito@ritovision.com,s:lists@lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_COUNT_SEVEN(0.00)[10]
+	RCPT_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[lwn.net:+];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	FROM_HAS_DN(0.00)[]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: D8F4C71E425
+X-Rspamd-Queue-Id: 7BE0571E579
 
-T24gVHVlLCAyMDI2LTA3LTA3IGF0IDA5OjE3IC0wNzAwLCBTZWFuIENocmlzdG9waGVyc29uIHdy
-b3RlOg0KPiBPbiBNb24sIEp1bCAwNiwgMjAyNiwgUmljayBQIEVkZ2Vjb21iZSB3cm90ZToNCj4g
-PiBTZWFuLA0KPiA+IA0KPiA+IE9uIE1vbiwgMjAyNi0wNS0yNSBhdCAxOTozNSAtMDcwMCwgUmlj
-ayBFZGdlY29tYmUgd3JvdGU6DQo+ID4gPiDCoCBLVk06IFREWDogQWxsb2NhdGUgUEFNVCBtZW1v
-cnkgZm9yIFREIGFuZCB2Q1BVIGNvbnRyb2wgc3RydWN0dXJlcw0KPiA+ID4gwqAgS1ZNOiBURFg6
-IEdldC9wdXQgUEFNVCBwYWdlcyB3aGVuICh1biltYXBwaW5nIHByaXZhdGUgbWVtb3J5DQo+ID4g
-DQo+ID4gV291bGQgeW91IGJlIHdpbGxpbmcgdG8gdGFrZSBhIGxvb2sgYXQgdGhlc2UgdHdvIHBh
-dGNoZXMgdGhhdCBuZWVkIGFjaydzIGZyb20NCj4gPiB0aGUgS1ZNIHNpZGU/IEknbSBob3Bpbmcg
-dG8gbWFrZSB0aGUgbmV4dCB2ZXJzaW9uIG9mIHRoaXMgdGhlIGxhc3Qgb25lLiBTbyBpdA0KPiA+
-IHdvdWxkIGJlIGdyZWF0IHRvIGdldCBhbnkgcmVtYWluaW5nIGNvbW1lbnRzIGJlZm9yZSB0aGVu
-Lg0KPiANCj4gTEdUTSBiZXlvbmQgdGhlIHRvX3RkeCgpIGFuZCBBc3NpdGVkLWJ5IG5pdHMuDQoN
-ClRoYW5rcyBTZWFuIQ0K
+Daniel Lundberg Pedersen <dlp@qtec.com> writes:
+
+> I've noticed some bad wrapping happening in tables, seemingly only in
+> the Media docs, but that's also where I look the most, after v7.1.
+>
+> See:
+>
+> https://www.kernel.org/doc/html/v7.1/userspace-api/media/v4l/vidioc-create-bufs.html#c.V4L.v4l2_create_buffers
+>
+> Compared to:
+>
+> https://www.kernel.org/doc/html/v7.0/userspace-api/media/v4l/vidioc-create-bufs.html#c.V4L.v4l2_create_buffers
+>
+> Other tables have also changed, but they don't end up this bad, e.g:
+>
+> https://www.kernel.org/doc/html/v7.1/process/debugging/kgdb.html#run-time-parameter-kgdbreboot
+>
+> I've bisected it to be f2679ac773899f5fdea0b68d5077eef5f88dfd42 that
+> has caused the change, and I did try some quick changes to see if I
+> could fix it for the tables, but I didn't get any positive results.
+
+For future reference, it really does help to copy the maintainer and the
+author of the patch.
+
+The patch in question tweaked our CSS thusly:
+
+> +code.docutils.literal span.pre {
+> +    white-space: normal;
+> +    overflow-wrap: anywhere;
+> +}
+
+That overflow-wrap line is the problem.  The patch was trying to improve
+overflow from some literal blocks, but it does seem that the cure is
+worse than the disease.
+
+I've just made the attached revert - thanks for the report!
+
+jon
+
+From 1afefde902c5267d1197da8a3b039354ed771d37 Mon Sep 17 00:00:00 2001
+From: Jonathan Corbet <corbet@lwn.net>
+Date: Tue, 7 Jul 2026 11:34:47 -0600
+Subject: [PATCH] Revert "docs: allow inline literals in paragraphs to wrap to
+ prevent overflow"
+
+This reverts commit f2679ac773899f5fdea0b68d5077eef5f88dfd42.
+
+This change causes truly unreadable breaking of literal strings in a number
+of settings.
+
+Reported-by: Daniel Lundberg Pedersen <dlp@qtec.com>
+Signed-off-by: Jonathan Corbet <corbet@lwn.net>
+---
+ Documentation/sphinx-static/custom.css | 9 ---------
+ 1 file changed, 9 deletions(-)
+
+diff --git a/Documentation/sphinx-static/custom.css b/Documentation/sphinx-static/custom.css
+index 5aa0a1ed9864..2e019c8f8a56 100644
+--- a/Documentation/sphinx-static/custom.css
++++ b/Documentation/sphinx-static/custom.css
+@@ -156,15 +156,6 @@ div.language-selection ul li:hover {
+     background: #dddddd;
+ }
+ 
+-/*
+- * Let long inline literals in paragraph text wrap as needed to prevent
+- * overflow.
+- */
+-code.docutils.literal span.pre {
+-    white-space: normal;
+-    overflow-wrap: anywhere;
+-}
+-
+ /* Let rendered reference links in tables wrap when needed. */
+ div.body table.docutils a.reference {
+     overflow-wrap: anywhere;
+-- 
+2.54.0
+
+
 
