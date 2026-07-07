@@ -1,968 +1,234 @@
-Return-Path: <linux-doc+bounces-95390-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95393-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id IChjJ4gKTWpGuAEAu9opvQ
-	(envelope-from <linux-doc+bounces-95390-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 16:17:44 +0200
+	id Qo5dElINTWoLuQEAu9opvQ
+	(envelope-from <linux-doc+bounces-95393-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 16:29:38 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A3EF71C799
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 16:17:44 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 85EDB71CA0F
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 16:29:37 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=OYnMzBY2;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95390-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-95390-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=ideasonboard.com header.s=mail header.b=Iq+X1lY9;
+	dmarc=pass (policy=none) header.from=ideasonboard.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95393-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-95393-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 4305330D78E9
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 14:05:20 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 7C0BE3248DE5
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 14:18:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0E8FF42A7B9;
-	Tue,  7 Jul 2026 14:04:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 610F942847F;
+	Tue,  7 Jul 2026 14:18:11 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B11E442A142;
-	Tue,  7 Jul 2026 14:04:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1102F3EFD36;
+	Tue,  7 Jul 2026 14:18:08 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783433068; cv=none; b=NMJSxS8Rs0zwQv0e3eM54cc4Us6YTH8aJX5Uf2kuLTXEbufZZChDuTpVaih8k4VyXOxb4nt1L5fYaYWJy0RkngKYl8iFJLpgwzPUi4vOcIiLXlgRUz9lbazq4Ps7H2nFRG1hrfdD+tKdS+o163DoV6ZFW8L5qfHDDxH5rg0683U=
+	t=1783433891; cv=none; b=bdIOOUQvhOPrgl2x9YDRwx3vZMtTFq9MkXosgyZXWUoDMoheMvnI3HGiJSH76p7bpvph0HFLrj4QP+BDQftPxHBllOn3lZ0spX8o/VY1Ux9qZGOFKpn/ewzjdW1H0zFK7tvzWvpBxoDscqDTOOLa+VP8dVhqvuDBM1pCz+YoZtU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783433068; c=relaxed/simple;
-	bh=QqqlWU0qGvjyXv0YwETTEMlPwCwn6ol/U9R1CWhodEM=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=WF8wV1XiHSUhKEFfnfh0C/P4LNluDDQKMVs0qFVrNyBzreYeAFX9a7aTWNMqiFEzjatHk1G+G73Wmt/2ZET2ZpWB7sBAgpqWtJKuUbX7ALwIU/1xqgdOWxCUKIt+SMP11MJkaqTj7ntmNcP99aqRGo+KEjIFoezjtALovfaWPmA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OYnMzBY2; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 8D541C2BCF7;
-	Tue,  7 Jul 2026 14:04:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1783433068;
-	bh=QqqlWU0qGvjyXv0YwETTEMlPwCwn6ol/U9R1CWhodEM=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=OYnMzBY2eLZ5jVK7utT/T0qCujJFkahvouI7rx2ZBmTQm6Mxlf0LTL1BruOUkBqGi
-	 xba4bausQ+XkfOkzqXKswkPhgphCoUb+4f/r4ZNkk9DV71Yq9Uthkx1yHUY0SMAI5G
-	 9zsigYuFQMM8farU6836wApRxcgxdjAZlCmT99E+THPOikR3GY2X8c/F80N+f523O4
-	 2LEBl76Kos2hnWAr89JVTOMbdpQCWMwWbzfg1TDg0Tu4S6GjXcwAC8ZPu3B7IfaxCp
-	 0RXCrsL3hjoNUhE084+TaP/FHie5lu4cEQxMAubm5ljUlUN8Sf1EFbT55SP0kjFeOI
-	 hvwXAdlQZi+zw==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B4ACC43602;
-	Tue,  7 Jul 2026 14:04:28 +0000 (UTC)
-From: Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>
-Date: Tue, 07 Jul 2026 15:04:38 +0100
-Subject: [PATCH v7 17/17] docs: iio: add documentation for ad9910 driver
+	s=arc-20240116; t=1783433891; c=relaxed/simple;
+	bh=7FXO0U8q0YSY+Zd9s0qRnAqixb03/I7Hq5cM4mWdmIU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=l++LsXPha5rbxNXebGIpKPI91M0DZkUzwNGqeITxBr8GXIiLgHERp+nsMG191pLYnPd/lyUV7tndBpd4kGmeasc+MWAPiGkIyFK2tyVt4Q36dRoacbq781Mrq9AxqwC9Kqi+sc++TdSs8F28FUIuGiJoBVhWQfUDZ8BQeMXfEL8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com; spf=pass smtp.mailfrom=ideasonboard.com; dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b=Iq+X1lY9; arc=none smtp.client-ip=213.167.242.64
+Received: from killaraus.ideasonboard.com (2001-14ba-70f3-e800--a06.rev.dnainternet.fi [IPv6:2001:14ba:70f3:e800::a06])
+	by perceval.ideasonboard.com (Postfix) with ESMTPSA id 0D956673;
+	Tue,  7 Jul 2026 16:17:15 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+	s=mail; t=1783433836;
+	bh=7FXO0U8q0YSY+Zd9s0qRnAqixb03/I7Hq5cM4mWdmIU=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Iq+X1lY90EJPJ/V8foE1YjHXoKurBinqu/X/3ycpv54pzYaU1VipR1BuFbbh3mkjJ
+	 qbCDUwlFojQOGLvibC7Tk1+bVKyVvjBZo4IUwjRdjmIoiyKB6MV201hkDwJLVTBWXV
+	 ziDWrjvGr0v0IkgstDaZ9Iix8MadQ35/11p5Qcds=
+Date: Tue, 7 Jul 2026 17:18:03 +0300
+From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+To: "David Hildenbrand (Arm)" <david@kernel.org>
+Cc: Lorenzo Stoakes <ljs@kernel.org>, Boris Burkov <boris@bur.io>,
+	Jeff Layton <jlayton@kernel.org>,
+	Greg KH <gregkh@linuxfoundation.org>,
+	Linus Torvalds <torvalds@linux-foundation.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Justin Stitt <justinstitt@google.com>,
+	Carlos Maiolino <cem@kernel.org>, Jakub Kicinski <kuba@kernel.org>,
+	Jori Koolstra <jkoolstra@xs4all.nl>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Brian Foster <bfoster@redhat.com>,
+	Christoph Hellwig <hch@infradead.org>,
+	David Disseldorp <ddiss@suse.de>, Mark Brown <broonie@kernel.org>,
+	Jani Nikula <jani.nikula@intel.com>, Jens Axboe <axboe@kernel.dk>,
+	Vlastimil Babka <vbabka@kernel.org>,
+	"Christian Brauner (Amutable)" <brauner@kernel.org>,
+	workflows@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org
+Subject: Re: [PATCH] Documentation: remove the requirement for LLM attribution
+Message-ID: <20260707141803.GA254690@killaraus.ideasonboard.com>
+References: <akaWnQ5Pkg_676B-@lucifer>
+ <20260702211740.GA639365@zen.localdomain>
+ <3f447113-4407-471f-878f-e6d6edafee71@kernel.org>
+ <akez23ZhLRSGMFQ1@lucifer>
+ <20260703163251.GB3734786@killaraus.ideasonboard.com>
+ <e93d28e4-750c-4a4f-8bfd-7a0b404cd05c@kernel.org>
+ <akzETpsps4TMfqpC@lucifer>
+ <0ba6bf66-e48f-40df-a953-503d317b3dbe@kernel.org>
+ <20260707124031.GC211515@killaraus.ideasonboard.com>
+ <ebc1f034-7297-459e-975d-5c143567392f@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20260707-ad9910-iio-driver-v7-17-a4ec30f63700@analog.com>
-References: <20260707-ad9910-iio-driver-v7-0-a4ec30f63700@analog.com>
-In-Reply-To: <20260707-ad9910-iio-driver-v7-0-a4ec30f63700@analog.com>
-To: linux-iio@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
- linux-hardening@vger.kernel.org
-Cc: Lars-Peter Clausen <lars@metafoo.de>, 
- Michael Hennerich <Michael.Hennerich@analog.com>, 
- Jonathan Cameron <jic23@kernel.org>, David Lechner <dlechner@baylibre.com>, 
- Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Philipp Zabel <p.zabel@pengutronix.de>, 
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
- Kees Cook <kees@kernel.org>, "Gustavo A. R. Silva" <gustavoars@kernel.org>, 
- Rodrigo Alencar <rodrigo.alencar@analog.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1783433065; l=26572;
- i=rodrigo.alencar@analog.com; s=default; h=from:subject:message-id;
- bh=XjPrbwRvLfCQxC6OicjFFgBc8u7NIy4D0B0gb3cC/T0=;
- b=gWVbCAawcVRr6t86vp2b4bNkB5QmZVI/bnUPYEj2cZUp7xlJsBOcITKIxrCXjFwoeKPOG3RTr
- mieVX7T/96yCSn4sOom+2Gumt3FAZLb9O4WqR3g5/BglK5EKfYlReaM
-X-Developer-Key: i=rodrigo.alencar@analog.com; a=ed25519;
- pk=ULeHbgU/OYh/PG/4anHDfLgldFItQHAhOktYRVLMFRo=
-X-Endpoint-Received: by B4 Relay for rodrigo.alencar@analog.com/default
- with auth_id=561
-X-Original-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
-Reply-To: rodrigo.alencar@analog.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <ebc1f034-7297-459e-975d-5c143567392f@kernel.org>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.66 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	DMARC_POLICY_ALLOW(-0.50)[ideasonboard.com,none];
+	R_DKIM_ALLOW(-0.20)[ideasonboard.com:s=mail];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-95390-lists,linux-doc=lfdr.de,rodrigo.alencar.analog.com];
-	FORGED_RECIPIENTS(0.00)[m:linux-iio@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-hardening@vger.kernel.org,m:lars@metafoo.de,m:Michael.Hennerich@analog.com,m:jic23@kernel.org,m:dlechner@baylibre.com,m:andy@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:p.zabel@pengutronix.de,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:kees@kernel.org,m:gustavoars@kernel.org,m:rodrigo.alencar@analog.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-95393-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
-	FORWARDED(0.00)[lists@lfdr.de];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
+	FORGED_RECIPIENTS(0.00)[m:david@kernel.org,m:ljs@kernel.org,m:boris@bur.io,m:jlayton@kernel.org,m:gregkh@linuxfoundation.org,m:torvalds@linux-foundation.org,m:corbet@lwn.net,m:justinstitt@google.com,m:cem@kernel.org,m:kuba@kernel.org,m:jkoolstra@xs4all.nl,m:krzk@kernel.org,m:bfoster@redhat.com,m:hch@infradead.org,m:ddiss@suse.de,m:broonie@kernel.org,m:jani.nikula@intel.com,m:axboe@kernel.dk,m:vbabka@kernel.org,m:brauner@kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[laurent.pinchart@ideasonboard.com,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[kernel.org,bur.io,linuxfoundation.org,linux-foundation.org,lwn.net,google.com,xs4all.nl,redhat.com,infradead.org,suse.de,intel.com,kernel.dk,vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	HAS_REPLYTO(0.00)[rodrigo.alencar@analog.com];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,analog.com:url,analog.com:replyto,analog.com:mid,analog.com:email,vger.kernel.org:from_smtp]
+	FORGED_SENDER_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[laurent.pinchart@ideasonboard.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[ideasonboard.com:+];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,ideasonboard.com:from_mime,ideasonboard.com:dkim,killaraus.ideasonboard.com:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 3A3EF71C799
+X-Rspamd-Queue-Id: 85EDB71CA0F
 
-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
+On Tue, Jul 07, 2026 at 03:28:49PM +0200, David Hildenbrand (Arm) wrote:
+> On 7/7/26 14:40, Laurent Pinchart wrote:
+> > On Tue, Jul 07, 2026 at 11:49:31AM +0200, David Hildenbrand (Arm) wrote:
+> >> On 7/7/26 11:20, Lorenzo Stoakes wrote:
+> >>>
+> >>> I think the silence suggests nobody :)
+> >>>
+> >>> What we could do is send a patch to simply add a section on adding a comment
+> >>> explaining _what_ used an LLM and strongly suggesting it would be helpful to do
+> >>> so.
+> >>>
+> >>> That should hopefully be uncontroversial, then later (or alongside that?) we
+> >>> could submit an RFC for making the language move to 'you MUST do this', as that
+> >>> will probably be the more controversial bit.
+> >>
+> >> Maybe we should just spell out about which scenario we care about where we really
+> >> expect the disclosure.
+> >>
+> >> Sure, it might be more controversial and we could have that in a separate patch.
+> >>
+> >> I was thinking of the following end result:
+> >>
+> >> diff --git a/Documentation/process/coding-assistants.rst b/Documentation/process/coding-assistants.rst
+> >> index 899f4459c52d2..4c2ab4dfc6da7 100644
+> >> --- a/Documentation/process/coding-assistants.rst
+> >> +++ b/Documentation/process/coding-assistants.rst
+> >> @@ -40,20 +40,37 @@ Attribution
+> >>  ===========
+> >>  
+> >>  When AI tools contribute to kernel development, proper attribution
+> >> -helps track the evolving role of AI in the development process.
+> >> -Contributions should include an Assisted-by tag in the following format::
+> >> +helps track the evolving role of AI in the development process. Further,
+> >> +for reviewers and maintainers it is also crucially important to know how
+> >> +AI tools were used.
+> >>  
+> >> -  Assisted-by: AGENT_NAME:MODEL_VERSION [TOOL1] [TOOL2]
+> >> +Contributions that used AI to generate significant portions of code,
+> >> +comments, or patch descriptions must include an Assisted-by tag in the
+> >> +following format::
+> >>  
+> >> -Where (preferred):
+> >> +  Assisted-by: LLM # brief description of usage
+> >> +
+> >> +Or alternatively::
+> >> +
+> >> +  Assisted-by: AGENT_NAME:MODEL_VERSION # brief description of usage
+> > 
+> > I would like to drop this one. As I understand, several people objected
+> > to including the product name in the git history as it is just free
+> > adverising, and nobody objected to dropping it.
+> 
+> Yeah. I mean, we could go the following direction (dropping the models and
+> encouraging also a description of usage for other tools), but not sure how
+> much pushback we will get:
 
-Add documentation for the AD9910 DDS IIO driver, which describes channels,
-DDS modes, attributes and ABI usage examples.
+I haven't heard anyone involved in this mail thread objecting to the
+concepts you translated into sentences below, so I think it's worth a
+try. Of course there may be objections from people who are not aware of
+this very conversation.
 
-Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
----
- Documentation/iio/ad9910.rst | 792 +++++++++++++++++++++++++++++++++++++++++++
- Documentation/iio/index.rst  |   1 +
- MAINTAINERS                  |   1 +
- 3 files changed, 794 insertions(+)
-
-diff --git a/Documentation/iio/ad9910.rst b/Documentation/iio/ad9910.rst
-new file mode 100644
-index 000000000000..ab5223c70c01
---- /dev/null
-+++ b/Documentation/iio/ad9910.rst
-@@ -0,0 +1,792 @@
-+.. SPDX-License-Identifier: GPL-2.0-only
-+
-+=============
-+AD9910 driver
-+=============
-+
-+Direct Digital Synthesizer (DDS) driver for the Analog Devices Inc. AD9910.
-+The module name is ``ad9910``.
-+
-+* `AD9910 <https://www.analog.com/en/products/ad9910.html>`_
-+
-+The AD9910 is a 1 GSPS DDS with a 14-bit DAC, controlled over SPI. The driver
-+exposes the device through a hierarchy of typed IIO output channels. The root
-+``phy`` channel controls the system clock and full-scale output current.
-+Sub-channels provide independent control over single tone profiles, parallel
-+port modulation, digital ramp generation (DRG), RAM playback and output shift
-+keying (OSK).
-+
-+
-+Channel hierarchy
-+=================
-+
-+The driver exposes the following IIO output channels, each identified by a
-+unique channel number and a human-readable label. The ``phy`` channel is the
-+root of the hierarchy. Changing its ``sampling_frequency`` reconfigures the
-+system clock (SYSCLK) which affects all other channels.
-+
-+.. flat-table::
-+   :header-rows: 1
-+
-+   * - Channel
-+     - Label
-+     - Parent
-+     - Description
-+
-+   * - ``out_altcurrent100``
-+     - ``phy``
-+     -
-+     - Physical output: system clock and full-scale output current (:math:`I_{FS}`).
-+       See `Physical channel`_.
-+
-+   * - ``out_altcurrent110`` ... ``out_altcurrent117``
-+     - ``profile0`` ... ``profile7``
-+     - ``phy``
-+     - Single tone control: frequency, phase, amplitude, enable.
-+       See `Single Tone mode`_.
-+
-+   * - ``out_altcurrent120``
-+     - ``parallel_amplitude``
-+     - ``phy``
-+     - Parallel port amplitude channel.
-+       See `Parallel Port mode`_.
-+
-+   * - ``out_phase120``
-+     - ``parallel_phase``
-+     - ``phy``
-+     - Parallel port phase channel.
-+
-+   * - ``out_frequency120``
-+     - ``parallel_frequency``
-+     - ``phy``
-+     - Parallel port frequency channel: ``scale`` sets the FM gain
-+       (power-of-2 multiplier), ``offset`` sets the base FTW.
-+
-+   * - ``out_altcurrent121``
-+     - ``parallel_polar_amplitude``
-+     - ``phy``
-+     - Parallel polar amplitude channel: ``scale`` is the amplitude
-+       resolution, ``offset`` is the amplitude bias (lower 6 bits of ASF).
-+
-+   * - ``out_phase121``
-+     - ``parallel_polar_phase``
-+     - ``phy``
-+     - Parallel polar phase channel: ``scale`` is the phase resolution,
-+       ``offset`` is the phase bias (lower 8 bits of POW).
-+
-+   * - ``out_frequency130``
-+     - ``drg_frequency``
-+     - ``phy``
-+     - DRG frequency channel: ``en`` selects and enables the DRG with
-+       frequency as the ramp target.
-+       See `Digital ramp generator (DRG)`_.
-+
-+   * - ``out_frequency131``
-+     - ``drg_rising_frequency``
-+     - ``drg_frequency``
-+     - DRG frequency rising-ramp parameters: limit code, dwell enable,
-+       ramp clock, rate of change.
-+
-+   * - ``out_frequency132``
-+     - ``drg_falling_frequency``
-+     - ``drg_frequency``
-+     - DRG frequency falling-ramp parameters: limit code, dwell enable,
-+       ramp clock, rate of change.
-+
-+   * - ``out_phase130``
-+     - ``drg_phase``
-+     - ``phy``
-+     - DRG phase channel: ``en`` selects and enables the DRG with phase
-+       as the ramp target.
-+       See `Digital ramp generator (DRG)`_.
-+
-+   * - ``out_phase131``
-+     - ``drg_rising_phase``
-+     - ``drg_phase``
-+     - DRG phase rising-ramp parameters: limit code, dwell enable, ramp clock,
-+       rate of change.
-+
-+   * - ``out_phase132``
-+     - ``drg_falling_phase``
-+     - ``drg_phase``
-+     - DRG phase falling-ramp parameters: limit code, dwell enable, ramp clock,
-+       rate of change.
-+
-+   * - ``out_altcurrent130``
-+     - ``drg_amplitude``
-+     - ``phy``
-+     - DRG amplitude channel: ``en`` selects and enables the DRG with
-+       amplitude as the ramp target.
-+       See `Digital ramp generator (DRG)`_.
-+
-+   * - ``out_altcurrent131``
-+     - ``drg_rising_amplitude``
-+     - ``drg_amplitude``
-+     - DRG amplitude rising-ramp parameters: limit code, dwell enable,
-+       ramp clock, rate of change.
-+
-+   * - ``out_altcurrent132``
-+     - ``drg_falling_amplitude``
-+     - ``drg_amplitude``
-+     - DRG amplitude falling-ramp parameters: limit code, dwell enable,
-+       ramp clock, rate of change.
-+
-+   * - ``out_altcurrent140``
-+     - ``ram``
-+     - ``phy``
-+     - RAM playback: enable, frequency, phase and sampling frequency for
-+       the active profile. See `RAM mode`_.
-+
-+   * - ``out_altcurrent150``
-+     - ``osk``
-+     - ``phy``
-+     - Output shift keying (OSK): enable, amplitude code, ramp rate,
-+       rate of change. See `Output Shift Keying (OSK)`_.
-+
-+DDS modes
-+=========
-+
-+The AD9910 supports multiple modes of operation that can be configured
-+independently or in combination. Each DDS core parameter (frequency, phase
-+and amplitude) can come from different sources, but only one is active at a
-+time. This activation depends on a priority list, which is based on the enable
-+and destination configurations for such modes. The following tables are
-+extracted from the AD9910 datasheet and summarize the control parameters for
-+each mode and their priority when multiple sources are enabled simultaneously:
-+
-+.. flat-table:: DDS Frequency Control
-+   :header-rows: 1
-+
-+   * - Priority
-+     - Data Source
-+     - Conditions
-+
-+   * - Highest Priority
-+     - RAM
-+     - RAM enabled and data destination is frequency
-+
-+   * -
-+     - DRG
-+     - DRG enabled and data destination is frequency
-+
-+   * -
-+     - Parallel data and Frequency Tuning Word, FTW (frequency_offset)
-+     - Parallel data port enabled and data destination is frequency
-+
-+   * -
-+     - FTW register (frequency)
-+     - RAM enabled and data destination is not frequency
-+
-+   * - Lowest Priority
-+     - FTW (frequency) in single tone channel for the active profile
-+     - All other cases
-+
-+.. flat-table:: DDS Phase Control
-+   :header-rows: 1
-+
-+   * - Priority
-+     - Data Source
-+     - Conditions
-+
-+   * - Highest Priority
-+     - RAM
-+     - RAM enabled and data destination is phase or polar
-+
-+   * -
-+     - DRG
-+     - DRG enabled and data destination is phase
-+
-+   * -
-+     - Parallel data port
-+     - Parallel data port enabled and data destination is phase
-+
-+   * -
-+     - Parallel data port and Phase Offset Word, POW register LSBs (phase_offset)
-+     - Parallel data port enabled and data destination is polar
-+
-+   * -
-+     - POW register (phase)
-+     - RAM enabled and destination is not phase nor polar
-+
-+   * - Lowest Priority
-+     - POW (phase) in single tone channel for the active profile
-+     - All other cases
-+
-+.. flat-table:: DDS Amplitude Control
-+   :header-rows: 1
-+
-+   * - Priority
-+     - Data Source
-+     - Conditions
-+
-+   * - Highest Priority
-+     - Amplitude Scale Factor, ASF register and OSK generator
-+     - OSK enabled
-+
-+   * -
-+     - RAM
-+     - RAM enabled and data destination is amplitude or polar
-+
-+   * -
-+     - DRG
-+     - DRG enabled and data destination is amplitude
-+
-+   * -
-+     - Parallel data port
-+     - Parallel data port enabled and data destination is amplitude
-+
-+   * -
-+     - Parallel data port and ASF register LSBs (scale_offset)
-+     - Parallel data port enabled and data destination is polar
-+
-+   * - Lowest Priority
-+     - ASF (scale) in single tone channel for the active profile
-+     - (Amplitude scale is already enabled by default)
-+
-+While debugging or testing, the debug attributes ``frequency_source``,
-+``phase_source`` and ``amplitude_source`` can be used to read the label of
-+the channel that is actively controlling the correspondent DDS parameter,
-+which reflects the priority list described above.
-+
-+Single Tone mode
-+----------------
-+
-+Single tone is the baseline operating mode. The ``profileY`` channels
-+provide enable, frequency, phase and amplitude control:
-+
-+.. flat-table::
-+   :header-rows: 1
-+
-+   * - Attribute
-+     - Unit
-+     - Description
-+
-+   * - ``en``
-+     - boolean (0 or 1)
-+     - Enable/disable profile Y. Only one profile can be active at a
-+       time. When enabling a profile it disables the current active profile.
-+       Disabling an active profile brings the device to a powered down state.
-+
-+   * - ``frequency``
-+     - Hz
-+     - Output frequency. Range :math:`[0, f_{SYSCLK} / 2)`. Stored in the
-+       profile's frequency tuning word (FTW).
-+
-+   * - ``phase``
-+     - rad
-+     - Phase offset. Range :math:`[0, 2\pi)`. Stored in the profile's phase
-+       offset word (POW).
-+
-+   * - ``raw``
-+     - integer
-+     - Amplitude scale factor code. Range :math:`[0, 16383]`. Stored in the
-+       profile's amplitude scale factor (ASF) register. The physical output
-+       amplitude is ``raw * scale`` where ``scale`` is read from the ``phy``
-+       channel.
-+
-+Profile switching is allowed while RAM mode is enabled. In that case single
-+tone parameters are stored in a shadow register and are not written to
-+hardware until RAM mode is disabled.
-+
-+Usage examples
-+^^^^^^^^^^^^^^
-+
-+Configure a 100 MHz tone in profile 2 and set it as the active profile:
-+
-+.. code-block:: bash
-+
-+  echo 100000000 > /sys/bus/iio/devices/iio\:device0/out_altcurrent112_frequency
-+  echo 0 > /sys/bus/iio/devices/iio\:device0/out_altcurrent112_phase
-+  echo 16383 > /sys/bus/iio/devices/iio\:device0/out_altcurrent112_raw
-+
-+  # Activate profile 2
-+  echo 1 > /sys/bus/iio/devices/iio\:device0/out_altcurrent112_en
-+
-+Read back the current single tone frequency:
-+
-+.. code-block:: bash
-+
-+  cat /sys/bus/iio/devices/iio\:device0/out_altcurrent112_frequency
-+
-+Parallel Port mode
-+------------------
-+
-+The parallel port allows real-time modulation of DDS parameters through a
-+16-bit external data bus. The driver exposes separate typed channels for each
-+modulation target.
-+
-+Non-polar modulation
-+^^^^^^^^^^^^^^^^^^^^
-+
-+In non-polar mode each DDS parameter is controlled by an independent 16-bit bus
-+input. The parallel port channels expose the resolution and base offset of their
-+respective bus inputs:
-+
-+.. flat-table::
-+   :header-rows: 1
-+
-+   * - Channel
-+     - Attribute
-+     - Unit
-+     - Description
-+
-+   * - ``out_phase120``
-+     - ``scale``
-+     - rad
-+     - Phase resolution per parallel bus LSB. Fixed at :math:`\pi / 2^{15}`
-+       rad/LSB (full 16-bit POW resolution).
-+
-+   * - ``out_frequency120``
-+     - ``scale``
-+     - Hz
-+     - Outputs the frequency scale evaluated as
-+       :math:`f_{SYSCLK} \cdot FM / 2^{32}`. Assuming that :math:`f_{SYSCLK}` is
-+       fixed, it is used to configure the modulation gain :math:`FM`, which is a
-+       power-of-2 multiplier in range :math:`[1, 32768]`. Writing to this
-+       attribute rounds up to the nearest :math:`FM` power of 2.
-+
-+   * - ``out_frequency120``
-+     - ``offset``
-+     - Hz
-+     - Outputs the frequency offset in raw units evaluated as :math:`FTW / FM`.
-+       Assuming that :math:`FM` is fixed, it is used to configure the FTW
-+       register, which is a 32-bit unsigned integer.
-+
-+Polar modulation
-+^^^^^^^^^^^^^^^^
-+
-+In polar mode a single 16-bit bus word carries both amplitude (high byte)
-+and phase (low byte). The ``parallel_polar_amplitude`` and
-+``parallel_polar_phase`` channels configure the bias applied to the low-order
-+bits of the ASF and POW registers respectively:
-+
-+.. flat-table::
-+   :header-rows: 1
-+
-+   * - Channel
-+     - Attribute
-+     - Unit
-+     - Description
-+
-+   * - ``out_altcurrent121``
-+     - ``scale``
-+     - mA/LSB
-+     - Full-scale amplitude resolution (read-only, fixed at :math:`I_{FS} / 2^{8}`).
-+
-+   * - ``out_altcurrent121``
-+     - ``offset``
-+     - fractional (raw units)
-+     - Amplitude bias. Lower 6 bits of ASF register. Range :math:`[0, 1)`.
-+
-+   * - ``out_phase121``
-+     - ``scale``
-+     - rad/LSB
-+     - Phase resolution (read-only, fixed at :math:`\pi / 2^{7}`).
-+
-+   * - ``out_phase121``
-+     - ``offset``
-+     - fractional (raw units)
-+     - Phase bias. Lower 8 bits of POW register. Range :math:`[0, 1)`.
-+
-+Usage examples
-+^^^^^^^^^^^^^^
-+
-+Set parallel port frequency modulation with a modulation gain of 16 and a 50 MHz
-+offset:
-+
-+.. code-block:: bash
-+
-+  # f_SYSCLK = 1 GHz, FM = 16
-+  # frequency scale = f_SYSCLK * FM / 2^32 = 3.725290298
-+  echo 3.725290298 > /sys/bus/iio/devices/iio\:device0/out_frequency120_scale
-+  # frequency offset = 50 MHz / scale = 50e6 / 13421772.8
-+  echo 13421772.8 > /sys/bus/iio/devices/iio\:device0/out_frequency120_offset
-+
-+One should choose a frequency scale that allows all the desired frequencies
-+to be represented in the 16-bit bus range, i.e.,
-+:math:`scale = (f_{max} - f_{min}) / 2^{16}`.
-+
-+
-+Digital ramp generator (DRG)
-+----------------------------
-+
-+The DRG produces linear frequency, phase or amplitude sweeps using dedicated
-+hardware. The active ramp target (destination) is selected by enabling the
-+corresponding typed channel at channel number 130:
-+
-+- ``out_frequency130`` (label ``drg_frequency``) — ramp targets frequency
-+- ``out_phase130`` (label ``drg_phase``) — ramp targets phase
-+- ``out_altcurrent130`` (label ``drg_amplitude``) — ramp targets amplitude
-+
-+Writing ``en=1`` to one of these channels enables the DRG and switches its
-+destination. Writing ``en=0`` disables the DRG if the channel is the current
-+active destination; writing to an already-inactive destination is a no-op.
-+
-+Each destination channel also exposes a read-only ``scale`` attribute
-+reporting the physical quantity per ramp register LSB, which allows converting
-+raw limit codes to physical values.
-+
-+The six ramp channels:
-+
-+- ``out_frequency131`` (label ``drg_rising_frequency``)
-+- ``out_frequency132`` (label ``drg_falling_frequency``)
-+- ``out_phase131`` (label ``drg_rising_phase``)
-+- ``out_phase132`` (label ``drg_falling_phase``)
-+- ``out_altcurrent131`` (label ``drg_rising_amplitude``)
-+- ``out_altcurrent132`` (label ``drg_falling_amplitude``)
-+
-+configure ascending and descending ramp parameters.
-+
-+Destination channel attributes
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+.. flat-table::
-+   :header-rows: 1
-+
-+   * - Attribute
-+     - Unit
-+     - Description
-+
-+   * - ``en``
-+     - boolean
-+     - Enable the DRG with this channel as the active destination. Only one
-+       destination can be active at a time.
-+
-+   * - ``scale``
-+     - Hz/LSB, rad/LSB or mA/LSB
-+     - Read-only. Physical quantity per raw units. Multiply a ramp
-+       rising/falling channel ``raw`` value by this scale to get the physical
-+       ramp target.
-+
-+Ramp channel attributes
-+^^^^^^^^^^^^^^^^^^^^^^^
-+
-+.. flat-table::
-+   :header-rows: 1
-+
-+   * - Attribute
-+     - Unit
-+     - Description
-+
-+   * - ``dwell_en``
-+     - boolean
-+     - Enable dwell at the ramp limit. When disabled, the ramp
-+       auto-transitions at this limit without waiting for the DRCTL pin.
-+       Disabling both creates a bidirectional continuous ramp (triangular
-+       pattern). Other combinations create single-shot ramps at the DRCTL
-+       pin transition.
-+
-+   * - ``raw``
-+     - integer (64-bit)
-+     - Ramp limit expressed as a raw DRG register code in
-+       :math:`[0, 2^{32}-1]`. The physical value is ``raw * scale`` where
-+       ``scale`` is read from the active destination channel.
-+
-+   * - ``sampling_frequency``
-+     - Hz
-+     - Ramp clock rate. Controlled by an integer divider; the written value
-+       is adjusted to the nearest supported rate.
-+
-+   * - ``raw_roc``
-+     - /s
-+     - Rate of change. Number of register codes advanced per second, computed
-+       from the hardware step size and the current ramp clock. Writing
-+       requires ``sampling_frequency`` to be configured first.
-+
-+Usage examples
-+^^^^^^^^^^^^^^
-+
-+Configure a frequency sweep from 40 MHz to 60 MHz with a rate of change of
-+25 GHz/s:
-+
-+.. code-block:: bash
-+
-+  # Disable dwell on both limits for a bidirectional continuous ramp
-+  echo 0 > /sys/bus/iio/devices/iio\:device0/out_frequency131_dwell_en
-+  echo 0 > /sys/bus/iio/devices/iio\:device0/out_frequency132_dwell_en
-+
-+  # Set ramp rate at 250 MHz
-+  echo 250000000 > /sys/bus/iio/devices/iio\:device0/out_frequency131_sampling_frequency
-+  echo 250000000 > /sys/bus/iio/devices/iio\:device0/out_frequency132_sampling_frequency
-+
-+  # read the frequency scale to convert physical values to raw units
-+  cat /sys/bus/iio/devices/iio\:device0/out_frequency130_scale
-+  0.232830643650
-+
-+  # 40 MHz / 0.232830643650 = 171798692
-+  echo 171798692 > /sys/bus/iio/devices/iio\:device0/out_frequency131_raw
-+  # 60 MHz / 0.232830643650 = 257698038
-+  echo 257698038 > /sys/bus/iio/devices/iio\:device0/out_frequency132_raw
-+
-+  # 25 GHz/s / 0.232830643650 = 107374182402
-+  echo 107374182402 > /sys/bus/iio/devices/iio\:device0/out_frequency131_raw_roc
-+  echo 107374182402 > /sys/bus/iio/devices/iio\:device0/out_frequency132_raw_roc
-+
-+  # Enable the DRG with frequency as the destination
-+  echo 1 > /sys/bus/iio/devices/iio\:device0/out_frequency130_en
-+
-+RAM mode
-+--------
-+
-+The AD9910 contains a 1024 x 32-bit RAM that can be loaded with waveform data
-+and played back to modulate frequency, phase, amplitude, or polar (phase +
-+amplitude) parameters.
-+
-+RAM control channel attributes
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+.. flat-table::
-+   :header-rows: 1
-+
-+   * - Attribute
-+     - Unit
-+     - Description
-+
-+   * - ``en``
-+     - boolean
-+     - Enable/disable RAM playback. Toggling swaps profile registers between
-+       single tone and RAM configurations across all 8 profiles.
-+
-+   * - ``frequency``
-+     - Hz
-+     - Frequency tuning word used as the single tone frequency when
-+       RAM destination is not ``frequency``. Range: :math:`[0, f_{SYSCLK} / 2)`.
-+
-+   * - ``phase``
-+     - rad
-+     - Phase offset word used as the single tone phase when RAM destination
-+       is not ``phase``. Range: :math:`[0, 2\pi)`.
-+
-+   * - ``sampling_frequency``
-+     - Hz
-+     - RAM playback step rate of the active profile, which controls how fast
-+       the address counter advances. Controlled by an integer divider; the
-+       written value is adjusted to the nearest supported rate.
-+
-+Loading RAM data
-+^^^^^^^^^^^^^^^^
-+
-+RAM data is loaded through the firmware upload framework. The driver registers
-+a firmware upload sysfs entry named ``iio_deviceX:ram``. The firmware data
-+follows a binary format (version 1) with an 80-byte header followed by data
-+words. All fields are big-endian.
-+
-+.. flat-table:: RAM firmware header (80 bytes)
-+   :header-rows: 1
-+
-+   * - Offset
-+     - Size
-+     - Field
-+     - Description
-+
-+   * - 0
-+     - 4
-+     - ``magic``
-+     - Magic number: ``0x00AD9910``
-+
-+   * - 4
-+     - 2
-+     - ``version``
-+     - Format version: ``0x0001``
-+
-+   * - 6
-+     - 2
-+     - ``wcount``
-+     - Number of 32-bit RAM data words (0--1024)
-+
-+   * - 8
-+     - 4
-+     - ``crc``
-+     - CRC32 checksum over ``cfr1``, ``profiles`` and ``words``
-+
-+   * - 12
-+     - 4
-+     - ``cfr1``
-+     - CFR1 register value. Only RAM-relevant bits are used:
-+       bits [30:29] set data destination (00: frequency, 01: phase,
-+       10: amplitude, 11: polar); bits [20:17] set internal profile
-+       control (see datasheet Table 14)
-+
-+   * - 16
-+     - 64
-+     - ``profiles[0..7]``
-+     - 8 sets of 8-byte RAM profile configurations (see below)
-+
-+   * - 80
-+     - 4 x wcount
-+     - ``words[]``
-+     - RAM data words in reverse order
-+
-+Each 8-byte profile entry contains:
-+
-+.. flat-table:: RAM profile entry (8 bytes)
-+   :header-rows: 1
-+
-+   * - Bits
-+     - Field
-+     - Description
-+
-+   * - [55:40]
-+     - Address step rate
-+     - Controls playback speed for this profile
-+
-+   * - [39:30]
-+     - End address
-+     - Last RAM address for this profile
-+
-+   * - [23:14]
-+     - Start address
-+     - First RAM address for this profile
-+
-+   * - [5]
-+     - No-dwell high
-+     - No-dwell at high limit (ramp-up mode)
-+
-+   * - [3]
-+     - Zero-crossing
-+     - Zero-crossing enable (direct-switch mode)
-+
-+   * - [2:0]
-+     - Operating mode
-+     - 000: direct switch, 001: ramp-up, 010: bidirectional,
-+       011: bidirectional continuous, 100: ramp-up continuous
-+
-+Usage examples
-+^^^^^^^^^^^^^^
-+
-+Configure RAM mode with firmware data and enable it:
-+
-+.. code-block:: bash
-+
-+  # Load RAM data via firmware upload
-+  echo 1 > /sys/class/firmware/iio\:device0\:ram/loading
-+  cat ad9910-ram.bin > /sys/class/firmware/iio\:device0\:ram/data
-+  echo 0 > /sys/class/firmware/iio\:device0\:ram/loading
-+
-+  # Enable RAM mode
-+  echo 1 > /sys/bus/iio/devices/iio\:device0/out_altcurrent140_en
-+
-+Output Shift Keying (OSK)
-+-------------------------
-+
-+OSK controls the output amplitude envelope, allowing the output to be ramped
-+on/off rather than switched abruptly.
-+
-+.. flat-table::
-+   :header-rows: 1
-+
-+   * - Attribute
-+     - Unit
-+     - Description
-+
-+   * - ``en``
-+     - boolean (0 or 1)
-+     - Enable/disable OSK.
-+
-+   * - ``raw``
-+     - integer
-+     - Target amplitude code. 14-bit ASF field. Range: :math:`[0, 16383]`.
-+       The physical output amplitude is ``raw * scale`` where ``scale`` is read
-+       from the ``phy`` channel.
-+
-+   * - ``raw_roc``
-+     - /s
-+     - Amplitude ramp rate. Writing a non-zero value enables automatic OSK
-+       and selects the closest hardware step size. Writing ``0`` disables
-+       automatic ramping (manual control via ``raw``). Writing the maximum
-+       available value enables pin-controlled immediate transition.
-+
-+   * - ``raw_roc_available``
-+     - /s
-+     - Lists the available ``raw_roc`` values based on the current
-+       ``sampling_frequency``. The first value is always ``0`` (disabled) and
-+       the last value corresponds to pin-controlled immediate mode.
-+
-+   * - ``sampling_frequency``
-+     - Hz
-+     - OSK ramp clock. Controlled by an integer divider; the written value
-+       is adjusted to the nearest supported rate.
-+
-+Usage examples
-+^^^^^^^^^^^^^^
-+
-+Enable OSK with automatic ramping:
-+
-+.. code-block:: bash
-+
-+  # Set ramp rate 1MHz
-+  echo 1000000 > /sys/bus/iio/devices/iio\:device0/out_altcurrent150_sampling_frequency
-+
-+  # Check available rate of change values
-+  cat /sys/bus/iio/devices/iio\:device0/out_altcurrent150_raw_roc_available
-+  0 1000000 2000000 4000000 8000000 16383000000
-+
-+  # Enable automatic OSK with a rate of change of 8000000 raw units/s
-+  echo 8000000 > /sys/bus/iio/devices/iio\:device0/out_altcurrent150_raw_roc
-+
-+  # Enable OSK
-+  echo 1 > /sys/bus/iio/devices/iio\:device0/out_altcurrent150_en
-+
-+Enable pin-controlled immediate OSK:
-+
-+.. code-block:: bash
-+
-+  # Enable OSK in manual mode (no ramp)
-+  echo 0 > /sys/bus/iio/devices/iio\:device0/out_altcurrent150_raw_roc
-+  echo 1 > /sys/bus/iio/devices/iio\:device0/out_altcurrent150_en
-+
-+  # Set target amplitude to full scale
-+  echo 16383 > /sys/bus/iio/devices/iio\:device0/out_altcurrent150_raw
-+
-+Physical channel
-+================
-+
-+The ``phy`` channel provides device-level control:
-+
-+.. flat-table::
-+   :header-rows: 1
-+
-+   * - Attribute
-+     - Unit
-+     - Description
-+
-+   * - ``sampling_frequency``
-+     - Hz
-+     - System clock (SYSCLK) frequency. When the internal PLL is enabled
-+       (via the ``adi,pll-enable`` devicetree property), configures the PLL
-+       multiplier (Range: :math:`[420, 1000]` MHz). Without PLL, the reference
-+       clock can only be divided by 2.
-+
-+   * - ``scale``
-+     - mA/LSB
-+     - Full-scale DAC output current per amplitude code LSB, which is evaluated
-+       as :math:`I_{FS} / 2^{14}`. Shared across all ``altcurrent`` channels.
-+       Setting this attribute reconfigures the auxiliary DAC full-scale code and
-+       updates the effective amplitude resolution for single tone profiles,
-+       DRG amplitude ramps and OSK.
-+
-+   * - ``powerdown``
-+     - boolean (0 or 1)
-+     - Software power-down. Writing 1 powers down the digital core, DAC,
-+       reference clock input and auxiliary DAC simultaneously.
-+
-+Usage examples
-+--------------
-+
-+Set the system clock to 1 GHz:
-+
-+.. code-block:: bash
-+
-+  echo 1000000000 > /sys/bus/iio/devices/iio\:device0/out_altcurrent100_sampling_frequency
-+
-+Read current system clock frequency:
-+
-+.. code-block:: bash
-+
-+  cat /sys/bus/iio/devices/iio\:device0/out_altcurrent100_sampling_frequency
-+
-+Power down the device:
-+
-+.. code-block:: bash
-+
-+  echo 1 > /sys/bus/iio/devices/iio\:device0/out_altcurrent100_powerdown
-\ No newline at end of file
-diff --git a/Documentation/iio/index.rst b/Documentation/iio/index.rst
-index b02b879b053a..4c30ef033685 100644
---- a/Documentation/iio/index.rst
-+++ b/Documentation/iio/index.rst
-@@ -30,6 +30,7 @@ Industrial I/O Kernel Drivers
-    ad7606
-    ad7625
-    ad7944
-+   ad9910
-    ade9000
-    adf41513
-    adis16475
-diff --git a/MAINTAINERS b/MAINTAINERS
-index fd6119aaad8c..e3a7631c3958 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1686,6 +1686,7 @@ W:	https://ez.analog.com/linux-software-drivers
- F:	Documentation/ABI/testing/debugfs-iio-ad9910
- F:	Documentation/ABI/testing/sysfs-bus-iio-frequency-ad9910
- F:	Documentation/devicetree/bindings/iio/frequency/adi,ad9910.yaml
-+F:	Documentation/iio/ad9910.rst
- F:	drivers/iio/frequency/ad9910.c
- 
- ANALOG DEVICES INC MAX22007 DRIVER
+> diff --git a/Documentation/process/coding-assistants.rst b/Documentation/process/coding-assistants.rst
+> index 899f4459c52d2..a085a15d59990 100644
+> --- a/Documentation/process/coding-assistants.rst
+> +++ b/Documentation/process/coding-assistants.rst
+> @@ -40,20 +40,26 @@ Attribution
+>  ===========
+>  
+>  When AI tools contribute to kernel development, proper attribution
+> -helps track the evolving role of AI in the development process.
+> -Contributions should include an Assisted-by tag in the following format::
+> +helps track the evolving role of AI in the development process. Further,
+> +for reviewers and maintainers it is also crucially important to know how
+> +AI tools were used.
+>  
+> -  Assisted-by: AGENT_NAME:MODEL_VERSION [TOOL1] [TOOL2]
+> +Contributions that used AI to generate significant portions of code,
+> +comments, or patch descriptions must include an Assisted-by tag in the
+> +following format::
+>  
+> -Where:
+> +  Assisted-by: LLM # mandatory brief description of usage
+>  
+> -* ``AGENT_NAME`` is the name of the AI tool or framework
+> -* ``MODEL_VERSION`` is the specific model version used
+> -* ``[TOOL1] [TOOL2]`` are optional specialized analysis tools used
+> -  (e.g., coccinelle, sparse, smatch, clang-tidy)
+> +Similarly, usage of other specialized analysis tools should be
+> +indicated through an Assisted-by tag in the following format::
+>  
+> -Basic development tools (git, gcc, make, editors) should not be listed.
+> +  Assisted-by: [TOOL1] [TOOL2] # optional brief description of usage
+>  
+> -Example::
+> +Examples for ``[TOOL1] [TOOL2]`` are coccinelle, sparse, smatch, and
+> +clang-tidy. Basic development tools (git, gcc, make, editors) should not
+> +be listed.
+>  
+> -  Assisted-by: Claude:claude-3-opus coccinelle sparse
+> +Examples::
+> +
+> +  Assisted-by: LLM # translate patch description
+> +  Assisted-by: coccinelle # batch conversion with small manual fixups
+> davhil01@e142025:~/git/linux$ 
 
 -- 
-2.43.0
+Regards,
 
-
+Laurent Pinchart
 
