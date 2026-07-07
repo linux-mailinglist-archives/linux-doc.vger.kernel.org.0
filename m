@@ -1,50 +1,50 @@
-Return-Path: <linux-doc+bounces-95347-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95348-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id T8dOFunVTGpYqgEAu9opvQ
-	(envelope-from <linux-doc+bounces-95347-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 12:33:13 +0200
+	id 4IRBGBLYTGrwqgEAu9opvQ
+	(envelope-from <linux-doc+bounces-95348-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 12:42:26 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id B836071A6DC
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 12:33:12 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 532B371A89C
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 12:42:25 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linux.dev header.s=key1 header.b=VSb1WFL6;
+	dkim=pass header.d=linux.dev header.s=key1 header.b=sYuUGfNw;
 	dmarc=pass (policy=none) header.from=linux.dev;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95347-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95347-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95348-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-95348-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 9A7D630AD8FC
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 10:23:28 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 57CF0303CECC
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 10:23:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 708A33E3C74;
-	Tue,  7 Jul 2026 10:22:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D89D03E16BD;
+	Tue,  7 Jul 2026 10:22:40 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-187.mta1.migadu.com (out-187.mta1.migadu.com [95.215.58.187])
+Received: from out-181.mta1.migadu.com (out-181.mta1.migadu.com [95.215.58.181])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B18823E025F
-	for <linux-doc@vger.kernel.org>; Tue,  7 Jul 2026 10:22:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 604064D8CE
+	for <linux-doc@vger.kernel.org>; Tue,  7 Jul 2026 10:22:39 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783419753; cv=none; b=ARwdKZ5xX8tLgT8HnO8/Ka4goQS/kMXTrRjSSxCZ7d/acysfky+9T803L0Mg87Uk8Yt9DVVD1E1mjejC98CLzBCuoxB1A0QTYqGXGGDmcaxasLq9QuTGsX+5lfOGAPLnK94UO3iW8ON/kGPcSjfagtE7cfjrhdYRrGK5ZxzkP3g=
+	t=1783419760; cv=none; b=itZPRo65hxDUuN3I7aW5iTXCIorGob+mq7wViF3Vd8AjsgX6KlBLH0pn/agXKW4Ba9PxRKYSDkEkPGs3bT2zSBC4o4F2FPU/BVdk6fgRS0IPXcRn/c/YH3BBRRxj5bGtKn2Dr//tS7AdMY3IOpIWrllZ5p/LmaXMrz2BG1pHz7U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783419753; c=relaxed/simple;
-	bh=UJF90wddtURlNpPrITFUw9JAfusR4oacQc6J31ypKQY=;
+	s=arc-20240116; t=1783419760; c=relaxed/simple;
+	bh=DaLe8/QXrTWscizG+dYcIkmo6WTPEu4GyF4vvjyKeyE=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=JuoagUK/0QroYkkhM0fUvgbrehmsLEOXIuBdeUhdZTGO2tZL+pQTdq1cj/zztz3gnzGz97aNRJGYTdKnPVGbUwmet0SwK6KuBBr91Q43ZcuYqV7G5T2cBsy/MIYgk7COvmGmosB2LueZteXW2dWPjoGH/moeYBfm9hB4YxfjX+s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=VSb1WFL6; arc=none smtp.client-ip=95.215.58.187
+	 MIME-Version; b=OpFcT+TpXyL4OdQgtIspY6FhHgVfBtmf5KKW0Szf+P+hvWs5awIB0tOLlmPbCAaSPKCNPEe605O4eRGr85NUDJz5iMM6RD1LghoDo3SVyXzwGRBioVME4NHfpQAUL/21W5rLPzNSjCl1THBfJugx7ip3su6PgAz1hv2rOJDhA10=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=sYuUGfNw; arc=none smtp.client-ip=95.215.58.181
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1783419750;
+	t=1783419757;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=7B5Q6YmLzumcR7aPGfA8TNRl7ZAeq3JFkw4iMkiANt0=;
-	b=VSb1WFL6QsqGOfl4+Laf4i58FTffkj+APB4D8fSa7e11411eb8RR0+SFv16xYI9vmUiDPz
-	zk8zlyl8v43lvafY2pK7lzT8isUTieDsPahuRZm/zg8o3NADuA4u10+IqjMYcFi6TRUs+z
-	dkobEnqbDCalhEdHW1Al3YitgqaK1h0=
+	bh=R9pYchVVq66JQF9/AQXK87a2K/GG6sLwSAaz3vkY6xc=;
+	b=sYuUGfNw0ciX5Btk/+HD/kCsVAsGe0ylxo8MZopdMGjHjljF2KDR6PYR2lgZ7BqpMp7dEy
+	AMX3jnhHEwDJfC/G13Krb8s/TCmhRPSUIdTC/LkiZd5IxdacIC4/hTt+SUAM2vlFOCq9cG
+	MBVj9dGf4R/05IjyyZqEQu9+uLuTaOg=
 From: Guopeng Zhang <guopeng.zhang@linux.dev>
 To: Tejun Heo <tj@kernel.org>,
 	Johannes Weiner <hannes@cmpxchg.org>,
@@ -55,11 +55,10 @@ Cc: Shuah Khan <skhan@linuxfoundation.org>,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Guopeng Zhang <guopeng.zhang@linux.dev>,
-	Guopeng Zhang <zhangguopeng@kylinos.cn>,
-	Tao Cui <cuitao@kylinos.cn>
-Subject: [PATCH 2/3] Docs/admin-guide/cgroup-v1: document rdma.peak, rdma.events and rdma.events.local
-Date: Tue,  7 Jul 2026 18:21:47 +0800
-Message-ID: <20260707102148.692250-3-guopeng.zhang@linux.dev>
+	Guopeng Zhang <zhangguopeng@kylinos.cn>
+Subject: [PATCH 3/3] Docs/admin-guide/cgroup-v2: note blkcg_debug_stats gates io.latency stats
+Date: Tue,  7 Jul 2026 18:21:48 +0800
+Message-ID: <20260707102148.692250-4-guopeng.zhang@linux.dev>
 In-Reply-To: <20260707102148.692250-1-guopeng.zhang@linux.dev>
 References: <20260707102148.692250-1-guopeng.zhang@linux.dev>
 Precedence: bulk
@@ -77,18 +76,18 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
 	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-95347-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-95348-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:tj@kernel.org,m:hannes@cmpxchg.org,m:mkoutny@suse.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:cgroups@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:guopeng.zhang@linux.dev,m:zhangguopeng@kylinos.cn,m:cuitao@kylinos.cn,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[3];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_SENDER(0.00)[guopeng.zhang@linux.dev,linux-doc@vger.kernel.org];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
+	FORGED_RECIPIENTS(0.00)[m:tj@kernel.org,m:hannes@cmpxchg.org,m:mkoutny@suse.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:cgroups@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:guopeng.zhang@linux.dev,m:zhangguopeng@kylinos.cn,s:lists@lfdr.de];
 	DKIM_TRACE(0.00)[linux.dev:+];
 	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
@@ -99,109 +98,61 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,linux.dev:from_mime,linux.dev:dkim,linux.dev:mid,kylinos.cn:email,rdma.events:url]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:from_mime,linux.dev:dkim,linux.dev:mid,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: B836071A6DC
+X-Rspamd-Queue-Id: 532B371A89C
 
 From: Guopeng Zhang <zhangguopeng@kylinos.cn>
 
-The v1 RDMA controller documentation only describes rdma.max and
-rdma.current, but the controller exposes three more files -- rdma.peak,
-rdma.events and rdma.events.local -- which are already documented for
-v2. Mirror the v2 wording so the v1 documentation matches the files
-actually visible on a v1 mount.
+The io.stat section says that enabling the io.latency controller exposes
+the depth, avg_lat and win stats in addition to the normal ones. However,
+these io.latency-specific stats are debug stats and are only emitted when
+the blkcg_debug_stats module parameter is enabled, which is disabled by
+default.
 
-Co-developed-by: Tao Cui <cuitao@kylinos.cn>
-Signed-off-by: Tao Cui <cuitao@kylinos.cn>
+Make this explicit so users do not expect these fields to appear in
+io.stat by default, and qualify the usage text that suggests using
+avg_lat to pick an io.latency target.
+
 Signed-off-by: Guopeng Zhang <zhangguopeng@kylinos.cn>
 ---
- Documentation/admin-guide/cgroup-v1/rdma.rst | 66 ++++++++++++++++++++
- 1 file changed, 66 insertions(+)
+ Documentation/admin-guide/cgroup-v2.rst | 13 ++++++++-----
+ 1 file changed, 8 insertions(+), 5 deletions(-)
 
-diff --git a/Documentation/admin-guide/cgroup-v1/rdma.rst b/Documentation/admin-guide/cgroup-v1/rdma.rst
-index e69369b7252e..abddf34d2667 100644
---- a/Documentation/admin-guide/cgroup-v1/rdma.rst
-+++ b/Documentation/admin-guide/cgroup-v1/rdma.rst
-@@ -9,6 +9,7 @@ RDMA Controller
-      1-2. Why RDMA controller needed?
-      1-3. How is RDMA controller implemented?
-    2. Usage Examples
-+   3. RDMA Interface Files
+diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
+index df3fe7a7c6b3..0df15a672cf3 100644
+--- a/Documentation/admin-guide/cgroup-v2.rst
++++ b/Documentation/admin-guide/cgroup-v2.rst
+@@ -2278,10 +2278,11 @@ groups D and F will influence each other.  Group G will influence nobody::
+ So the ideal way to configure this is to set io.latency in groups A, B, and C.
+ Generally you do not want to set a value lower than the latency your device
+ supports.  Experiment to find the value that works best for your workload.
+-Start at higher than the expected latency for your device and watch the
+-avg_lat value in io.stat for your workload group to get an idea of the
+-latency you see during normal operation.  Use the avg_lat value as a basis for
+-your real setting, setting at 10-15% higher than the value in io.stat.
++Start at higher than the expected latency for your device and, with
++blkcg_debug_stats enabled, watch the avg_lat value in io.stat for your
++workload group to get an idea of the latency you see during normal operation.
++Use the avg_lat value as a basis for your real setting, setting at 10-15%
++higher than the value in io.stat.
  
- 1. Overview
- ===========
-@@ -115,3 +116,68 @@ Following resources can be accounted by rdma controller.
- (d) Delete resource limit::
+ How IO Latency Throttling Works
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@@ -2319,7 +2320,9 @@ IO Latency Interface Files
  
- 	echo mlx4_0 hca_handle=max hca_object=max > /sys/fs/cgroup/rdma/1/rdma.max
-+
-+3. RDMA Interface Files
-+========================
-+
-+The following interface files are available in each non-root RDMA cgroup.
-+
-+  rdma.max
-+	A read-write file which describes the configured resource limit
-+	for an RDMA/IB device.  See the Usage Examples above.
-+
-+  rdma.current
-+	A read-only file which describes the current resource usage.
-+
-+  rdma.peak
-+	A read-only nested-keyed file which shows the historical high
-+	watermark of resource usage per device since the cgroup was created.
-+
-+	An example for mlx4 and ocrdma device follows::
-+
-+	  mlx4_0 hca_handle=1 hca_object=20
-+	  ocrdma1 hca_handle=0 hca_object=23
-+
-+  rdma.events
-+	A read-only nested-keyed file which exists on non-root cgroups
-+	and contains the following keys:
-+
-+	  max
-+		The number of times a process in this cgroup or its
-+		descendants attempted an RDMA resource allocation that
-+		was rejected because a rdma.max limit in the subtree
-+		was reached.  This is a hierarchical counter propagated
-+		upward to all ancestor cgroups.  A value change in this
-+		file generates a file modified event.
-+
-+	  alloc_fail
-+		The number of RDMA resource allocation attempts that
-+		originated in this cgroup or its descendants and failed
-+		due to a rdma.max limit being reached.  This is a
-+		hierarchical counter propagated upward.
-+
-+	An example for mlx4 device follows::
-+
-+	  mlx4_0 hca_handle.max=5 hca_handle.alloc_fail=3 hca_object.max=0 hca_object.alloc_fail=0
-+
-+  rdma.events.local
-+	Similar to rdma.events but the fields are local to the cgroup,
-+	i.e. not hierarchical.  The file modified event generated on this
-+	file reflects only the local events.
-+
-+	The following nested keys are defined.
-+
-+	  max
-+		The number of times a process in this cgroup or its
-+		descendants attempted an RDMA resource allocation that
-+		was rejected because this cgroup's own rdma.max limit
-+		was reached.
-+
-+	  alloc_fail
-+		The number of RDMA resource allocation attempts
-+		originating from this cgroup that failed due to this
-+		cgroup's or an ancestor's rdma.max limit.
-+
-+	An example for mlx4 device follows::
-+
-+	  mlx4_0 hca_handle.max=5 hca_handle.alloc_fail=0 hca_object.max=0 hca_object.alloc_fail=0
+   io.stat
+ 	If the controller is enabled you will see extra stats in io.stat in
+-	addition to the normal ones.
++	addition to the normal ones.  These debug stats are only emitted when
++	the blkcg_debug_stats module parameter is enabled (it is disabled by
++	default).
+ 
+ 	  depth
+ 		This is the current queue depth for the group.
 -- 
 2.43.0
 
