@@ -1,271 +1,296 @@
-Return-Path: <linux-doc+bounces-95362-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95363-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id /+w3EiD1TGpYsgEAu9opvQ
-	(envelope-from <linux-doc+bounces-95362-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 14:46:24 +0200
+	id 0fUYIcv3TGoOswEAu9opvQ
+	(envelope-from <linux-doc+bounces-95363-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 14:57:47 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DC3B071B7F1
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 14:46:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A62C871B96F
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 14:57:46 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=ideasonboard.com header.s=mail header.b=pr9ECtD8;
-	dmarc=pass (policy=none) header.from=ideasonboard.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95362-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95362-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=none ("invalid DKIM record") header.d=rsg.ci.i.u-tokyo.ac.jp header.s=rs20250326 header.b=R81RxZKK;
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=u-tokyo.ac.jp (policy=none);
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95363-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95363-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 63BDF316280F
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 12:40:37 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 57BDD315DC36
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 12:53:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C87DA40D560;
-	Tue,  7 Jul 2026 12:40:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DC3753F86E0;
+	Tue,  7 Jul 2026 12:53:35 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
+Received: from www3579.sakura.ne.jp (www3579.sakura.ne.jp [49.212.243.89])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 41CA93E7BC7;
-	Tue,  7 Jul 2026 12:40:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D23C63ECBEB;
+	Tue,  7 Jul 2026 12:53:33 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783428036; cv=none; b=C5huw3LR3vD2rkBvNXffXyZOhWQKcYxL4xRsl07az7uCOuUUfBTKsn1tGfjRIm+H7vuZxrrw74nYESJwb78AdQIVvEiFmDqmW/M/tpMBPlcjxKLes1CncAsp+eLoeumCuU5TqenYCsNsoK9/tCq+o8SM1HY7/UyGoegcVTon+Go=
+	t=1783428815; cv=none; b=TeTL0flOQ9Bq7ol1AI3U5Ta7m/mnBrRSu1uvIGhcYYK2rL7J6vGRDiDInAlhs3gg1Q377ybX6xisWxasHwo0BYPzH1uz8+0OknubSbhGsDrqRvU3jK17OAyyjxm4GmQY8vgeH1cSXN21EUg0J3wXIkLrLmfEEGh1tqsaaDTZ7EQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783428036; c=relaxed/simple;
-	bh=n0xUh5OGPh9z2w0Sp46nckGuiAEOctFlK6hVKNx2f1c=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=R//Q7eNMPqTbL9RQdnIwLKG/s5Q2o+B5+4LOCJ6RoBWezugJKGvXC3bZ+OQBJW4HzzbwESqgg5sKOJY5ufCxU1JIMYfUXfL1J1x3Ad5GjxnsEaOeYxJUHYOZ/M8gExr8DTYBlEmjGjqDemFY5byRon2QKryyPB9vqfJzafntp+0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com; spf=pass smtp.mailfrom=ideasonboard.com; dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b=pr9ECtD8; arc=none smtp.client-ip=213.167.242.64
-Received: from killaraus.ideasonboard.com (2001-14ba-70f3-e800--a06.rev.dnainternet.fi [IPv6:2001:14ba:70f3:e800::a06])
-	by perceval.ideasonboard.com (Postfix) with ESMTPSA id 9C012673;
-	Tue,  7 Jul 2026 14:39:43 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
-	s=mail; t=1783427983;
-	bh=n0xUh5OGPh9z2w0Sp46nckGuiAEOctFlK6hVKNx2f1c=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=pr9ECtD8qCdWzZnArS158+LZBum436RpE+whkULJndc87+LXTAapOABZb++49Rzho
-	 iUXVsO5t0uLygtqVudGC1v2lgcxflnEP2GsS3Xe3fvRWugXvubQUOw+/c6Nj4ec5Hu
-	 QiAE+KFiICDstz+Lw30atdZ648Rl/NBHRS2DmexU=
-Date: Tue, 7 Jul 2026 15:40:31 +0300
-From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-To: "David Hildenbrand (Arm)" <david@kernel.org>
-Cc: Lorenzo Stoakes <ljs@kernel.org>, Boris Burkov <boris@bur.io>,
-	Jeff Layton <jlayton@kernel.org>,
-	Greg KH <gregkh@linuxfoundation.org>,
-	Linus Torvalds <torvalds@linux-foundation.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Justin Stitt <justinstitt@google.com>,
-	Carlos Maiolino <cem@kernel.org>, Jakub Kicinski <kuba@kernel.org>,
-	Jori Koolstra <jkoolstra@xs4all.nl>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Brian Foster <bfoster@redhat.com>,
-	Christoph Hellwig <hch@infradead.org>,
-	David Disseldorp <ddiss@suse.de>, Mark Brown <broonie@kernel.org>,
-	Jani Nikula <jani.nikula@intel.com>, Jens Axboe <axboe@kernel.dk>,
-	Vlastimil Babka <vbabka@kernel.org>,
-	"Christian Brauner (Amutable)" <brauner@kernel.org>,
-	workflows@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org
-Subject: Re: [PATCH] Documentation: remove the requirement for LLM attribution
-Message-ID: <20260707124031.GC211515@killaraus.ideasonboard.com>
-References: <2026070227-payroll-eradicate-8f66@gregkh>
- <16c507cea8f2873766e1de586d9a0d73234a3038.camel@kernel.org>
- <akaWnQ5Pkg_676B-@lucifer>
- <20260702211740.GA639365@zen.localdomain>
- <3f447113-4407-471f-878f-e6d6edafee71@kernel.org>
- <akez23ZhLRSGMFQ1@lucifer>
- <20260703163251.GB3734786@killaraus.ideasonboard.com>
- <e93d28e4-750c-4a4f-8bfd-7a0b404cd05c@kernel.org>
- <akzETpsps4TMfqpC@lucifer>
- <0ba6bf66-e48f-40df-a953-503d317b3dbe@kernel.org>
+	s=arc-20240116; t=1783428815; c=relaxed/simple;
+	bh=Xb+YqBjRz0qD+o6CKIOqq56fPsxW6/yG2jq8gj08s6w=;
+	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
+	 In-Reply-To:Content-Type; b=sIiYPtktC28V2vXOiSFSCh7sdGQDcFwifdlCrMNxJ4Pv1+Kib1bC0vJ1GocWEnll6zoWqhfRHPx949C9HuutD51UWtDk0F9iqChTodQpj5fyeM5UPQqOHBfhJLlFh0D5YPz44bPliqItTlFgs6B2Ln7UYCMBykWx+C0N46kkznM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rsg.ci.i.u-tokyo.ac.jp; spf=pass smtp.mailfrom=rsg.ci.i.u-tokyo.ac.jp; dkim=fail (0-bit key) header.d=rsg.ci.i.u-tokyo.ac.jp header.i=@rsg.ci.i.u-tokyo.ac.jp header.b=R81RxZKK reason="key not found in DNS"; arc=none smtp.client-ip=49.212.243.89
+Received: from [133.11.54.183] (h183.csg.ci.i.u-tokyo.ac.jp [133.11.54.183])
+	(authenticated bits=0)
+	by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 667Cqolx003077
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+	Tue, 7 Jul 2026 21:52:50 +0900 (JST)
+	(envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
+DKIM-Signature: a=rsa-sha256; bh=Q8mzB5h+eiRPcyM+Q6UnMUdYQq5QX0PPqK6QKz/gjn8=;
+        c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
+        h=From:Message-ID:To:Subject:Date;
+        s=rs20250326; t=1783428770; v=1;
+        b=R81RxZKKr830m5okZVbuAUx4R8H9TjeZgWqeLdmsDWICaaofU7CAqfRjVh3fvZD3
+         mrliymgWKokZgwSB89BSujTeGSgjgItUFlZ9M/0gs0AnaVlRp91/oo2sR+MHyrRE
+         u/iC4N79tmrHs+w/SIt3Sqt8TuyTZQpZf0Mkvwea9OXeOiS6J2KTyJE2gN2hjwRU
+         G5EVKOY9d3cqJ2LUpgO0t9O8tlPEaetmyhzQxG/P8NrievxGEtr5Nqjr1/75WN2J
+         kc4fCJhY3PMJKabOSTXG+qkwTxV6xFS6PmaWS1iBzxNRPqn7Wj8u5ZNaOoX/+aDE
+         xixulSsKGWtekmOPgcjeWg==
+Message-ID: <5e66748a-bfda-41a9-8614-88cbf2fe1f09@rsg.ci.i.u-tokyo.ac.jp>
+Date: Tue, 7 Jul 2026 21:52:49 +0900
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <0ba6bf66-e48f-40df-a953-503d317b3dbe@kernel.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 5/7] KVM: arm64: PMU: Implement fixed-counters-only
+ emulation
+From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+To: Oliver Upton <oupton@kernel.org>
+Cc: Marc Zyngier <maz@kernel.org>, Joey Gouly <joey.gouly@arm.com>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Zenghui Yu
+ <yuzenghui@huawei.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>, Kees Cook <kees@kernel.org>,
+        "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+        Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <shuah@kernel.org>, Shuah Khan <skhan@linuxfoundation.org>,
+        linux-arm-kernel@lists.infradead.org, kvmarm@lists.linux.dev,
+        linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org,
+        devel@daynix.com, kvm@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kselftest@vger.kernel.org
+References: <20260706-hybrid-v8-0-de459617b59d@rsg.ci.i.u-tokyo.ac.jp>
+ <20260706-hybrid-v8-5-de459617b59d@rsg.ci.i.u-tokyo.ac.jp>
+ <akvyvclUQ2b2YHiU@kernel.org>
+ <cb5d5f13-a1a9-47dd-a717-5533a8b32b20@rsg.ci.i.u-tokyo.ac.jp>
+Content-Language: en-US
+In-Reply-To: <cb5d5f13-a1a9-47dd-a717-5533a8b32b20@rsg.ci.i.u-tokyo.ac.jp>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-1.36 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[ideasonboard.com,none];
-	R_DKIM_ALLOW(-0.20)[ideasonboard.com:s=mail];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[u-tokyo.ac.jp : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-95362-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[21];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:david@kernel.org,m:ljs@kernel.org,m:boris@bur.io,m:jlayton@kernel.org,m:gregkh@linuxfoundation.org,m:torvalds@linux-foundation.org,m:corbet@lwn.net,m:justinstitt@google.com,m:cem@kernel.org,m:kuba@kernel.org,m:jkoolstra@xs4all.nl,m:krzk@kernel.org,m:bfoster@redhat.com,m:hch@infradead.org,m:ddiss@suse.de,m:broonie@kernel.org,m:jani.nikula@intel.com,m:axboe@kernel.dk,m:vbabka@kernel.org,m:brauner@kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[laurent.pinchart@ideasonboard.com,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[kernel.org,bur.io,linuxfoundation.org,linux-foundation.org,lwn.net,google.com,xs4all.nl,redhat.com,infradead.org,suse.de,intel.com,kernel.dk,vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[24];
-	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	TAGGED_FROM(0.00)[bounces-95363-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:oupton@kernel.org,m:maz@kernel.org,m:joey.gouly@arm.com,m:suzuki.poulose@arm.com,m:yuzenghui@huawei.com,m:catalin.marinas@arm.com,m:will@kernel.org,m:kees@kernel.org,m:gustavoars@kernel.org,m:pbonzini@redhat.com,m:corbet@lwn.net,m:shuah@kernel.org,m:skhan@linuxfoundation.org,m:linux-arm-kernel@lists.infradead.org,m:kvmarm@lists.linux.dev,m:linux-kernel@vger.kernel.org,m:linux-hardening@vger.kernel.org,m:devel@daynix.com,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	DKIM_TRACE(0.00)[rsg.ci.i.u-tokyo.ac.jp:~];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER(0.00)[odaki@rsg.ci.i.u-tokyo.ac.jp,linux-doc@vger.kernel.org];
+	R_DKIM_PERMFAIL(0.00)[rsg.ci.i.u-tokyo.ac.jp:s=rs20250326];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[laurent.pinchart@ideasonboard.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[ideasonboard.com:+];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[odaki@rsg.ci.i.u-tokyo.ac.jp,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[killaraus.ideasonboard.com:mid,vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,ideasonboard.com:from_mime,ideasonboard.com:dkim]
+	ALIAS_RESOLVED(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,rsg.ci.i.u-tokyo.ac.jp:mid,rsg.ci.i.u-tokyo.ac.jp:from_mime,u-tokyo.ac.jp:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: DC3B071B7F1
+X-Rspamd-Queue-Id: A62C871B96F
 
-On Tue, Jul 07, 2026 at 11:49:31AM +0200, David Hildenbrand (Arm) wrote:
-> On 7/7/26 11:20, Lorenzo Stoakes wrote:
-> > On Fri, Jul 03, 2026 at 08:22:20PM +0200, David Hildenbrand (Arm) wrote:
-> >> On 7/3/26 18:32, Laurent Pinchart wrote:
-> >>>
-> >>> I'd support a patch that replaces
-> >>>
-> >>> Assisted-by: Claude:claude-3-opus coccinelle sparse
-> >>>
-> >>> with
-> >>>
-> >>> Assisted-by: LLM # generate some test cases
-> >>>
-> >>> and rewrites the Attribution section of
-> >>> Documentation/process/coding-assistants.rst accordingly.
-> >>>
-> >>> I think most people in this mail thread have expressed that how
-> >>> generative AI was used is the most important information, and several
-> >>> people (including myself) have expressed a desire to stop the free
-> >>> advertising. Unless I missed something, I don't think anyone has
-> >>> expressed an interest in keeping the agent name and model.
-> >>
-> >> Yes, that's something I would enjoy seeing. Who reading along has a problem with
-> >> that? (assuming that the tag must stay)
-> > 
-> > I think the silence suggests nobody :)
-> > 
-> > What we could do is send a patch to simply add a section on adding a comment
-> > explaining _what_ used an LLM and strongly suggesting it would be helpful to do
-> > so.
-> > 
-> > That should hopefully be uncontroversial, then later (or alongside that?) we
-> > could submit an RFC for making the language move to 'you MUST do this', as that
-> > will probably be the more controversial bit.
+On 2026/07/07 20:23, Akihiko Odaki wrote:
+> On 2026/07/07 3:23, Oliver Upton wrote:
+>> On Mon, Jul 06, 2026 at 07:03:28PM +0900, Akihiko Odaki wrote:
+>>> Add internal state for PMUv3 emulation without programmable event
+>>> counters. When fixed-counters-only mode is active, KVM reports no
+>>> programmable counters and hides PMCEID, avoiding event-counter state
+>>> whose behavior can depend on the selected hardware PMU.
+>>>
+>>> The cycle counter still uses a host perf event. Unlike the normal PMU
+>>> path, fixed-counters-only mode may create that event from the hardware
+>>> PMU attached to the VCPU's current pCPU. If the VCPU later loads on a
+>>> pCPU that is not covered by the existing event's PMU, request a PMU
+>>> reload so the cycle counter can be recreated against the new pCPU's PMU.
+>>> Keep this affinity check limited to fixed-counters-only VMs; the normal
+>>> programmable-counter mode continues to use the VM-wide PMU and does not
+>>> need per-load reload decisions.
+>>>
+>>> Add a separate internal flag for explicit userspace PMU selection. The
+>>> UAPI wiring added later will use it to keep explicit PMU selection and
+>>> fixed-counters-only mode mutually exclusive while still allowing
+>>> fixed-counters-only mode to replace the default PMU selected during
+>>> KVM_ARM_VCPU_INIT.
+>>>
+>>> The UAPI wiring that sets the fixed-counters-only flag and records
+>>> explicit PMU selection is added later in the series.
+>>>
+>>> Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+>>> ---
+>>>   arch/arm64/include/asm/kvm_host.h |  4 ++++
+>>>   arch/arm64/kvm/arm.c              |  1 +
+>>>   arch/arm64/kvm/pmu-emul.c         | 43 ++++++++++++++++++++++++++++ 
+>>> +++++++++--
+>>>   include/kvm/arm_pmu.h             |  2 ++
+>>>   4 files changed, 48 insertions(+), 2 deletions(-)
+>>>
+>>> diff --git a/arch/arm64/include/asm/kvm_host.h b/arch/arm64/include/ 
+>>> asm/kvm_host.h
+>>> index 0c39d9db7d57..aa07b05b8231 100644
+>>> --- a/arch/arm64/include/asm/kvm_host.h
+>>> +++ b/arch/arm64/include/asm/kvm_host.h
+>>> @@ -353,6 +353,10 @@ struct kvm_arch {
+>>>   #define KVM_ARCH_FLAG_WRITABLE_IMP_ID_REGS        10
+>>>       /* Unhandled SEAs are taken to userspace */
+>>>   #define KVM_ARCH_FLAG_EXIT_SEA                11
+>>> +    /* PMUv3 is emulated with an explicitly specified hardware PMU */
+>>> +#define KVM_ARCH_FLAG_PMU_V3_EXPLICIT            12
+>>> +    /* PMUv3 is emulated without progammable event counters */
+>>> +#define KVM_ARCH_FLAG_PMU_V3_FIXED_COUNTERS_ONLY    13
+>>>       unsigned long flags;
+>>>       /* VM-wide vCPU feature set */
+>>> diff --git a/arch/arm64/kvm/arm.c b/arch/arm64/kvm/arm.c
+>>> index 68767bb08285..1cc7754d5ace 100644
+>>> --- a/arch/arm64/kvm/arm.c
+>>> +++ b/arch/arm64/kvm/arm.c
+>>> @@ -687,6 +687,7 @@ void kvm_arch_vcpu_load(struct kvm_vcpu *vcpu, 
+>>> int cpu)
+>>>       if (has_vhe())
+>>>           kvm_vcpu_load_vhe(vcpu);
+>>>       kvm_arch_vcpu_load_fp(vcpu);
+>>> +    kvm_vcpu_load_pmu(vcpu);
+>>>       kvm_vcpu_pmu_restore_guest(vcpu);
+>>>       if (kvm_arm_is_pvtime_enabled(&vcpu->arch))
+>>>           kvm_make_request(KVM_REQ_RECORD_STEAL, vcpu);
+>>> diff --git a/arch/arm64/kvm/pmu-emul.c b/arch/arm64/kvm/pmu-emul.c
+>>> index e70628653e4b..40cad183376c 100644
+>>> --- a/arch/arm64/kvm/pmu-emul.c
+>>> +++ b/arch/arm64/kvm/pmu-emul.c
+>>> @@ -96,6 +96,11 @@ u64 kvm_pmu_evtyper_mask(struct kvm *kvm)
+>>>       return mask;
+>>>   }
+>>> +static bool kvm_pmu_fixed_counters_only(struct kvm *kvm)
+>>> +{
+>>> +    return test_bit(KVM_ARCH_FLAG_PMU_V3_FIXED_COUNTERS_ONLY, &kvm- 
+>>> >arch.flags);
+>>> +}
+>>> +
+>>>   /**
+>>>    * kvm_pmc_is_64bit - determine if counter is 64bit
+>>>    * @pmc: counter context
+>>> @@ -343,7 +348,11 @@ u64 kvm_pmu_implemented_counter_mask(struct 
+>>> kvm_vcpu *vcpu)
+>>>   static void kvm_pmc_enable_perf_event(struct kvm_pmc *pmc)
+>>>   {
+>>> -    if (!pmc->perf_event) {
+>>> +    struct kvm_vcpu *vcpu = kvm_pmc_to_vcpu(pmc);
+>>> +
+>>> +    if (!pmc->perf_event ||
+>>> +        (kvm_pmu_fixed_counters_only(vcpu->kvm) &&
+>>> +         !cpumask_test_cpu(vcpu->cpu, &to_arm_pmu(pmc->perf_event- 
+>>> >pmu)->supported_cpus))) {
+>>>           kvm_pmu_create_perf_event(pmc);
+>>>           return;
+>>>       }
+>>> @@ -720,6 +729,12 @@ static void kvm_pmu_create_perf_event(struct 
+>>> kvm_pmc *pmc)
+>>>       int eventsel;
+>>>       u64 evtreg;
+>>> +    if (kvm_pmu_fixed_counters_only(vcpu->kvm)) {
+>>> +        arm_pmu = kvm_pmu_probe_armpmu(vcpu->cpu);
+>>> +        if (WARN_ON_ONCE(!arm_pmu))
+>>> +            return;
+>>> +    }
+>>> +
+>>>       evtreg = kvm_pmc_read_evtreg(pmc);
+>>>       kvm_pmu_stop_counter(pmc);
+>>> @@ -748,7 +763,7 @@ static void kvm_pmu_create_perf_event(struct 
+>>> kvm_pmc *pmc)
+>>>        * Don't create an event if we're running on hardware that 
+>>> requires
+>>>        * PMUv3 event translation and we couldn't find a valid mapping.
+>>>        */
+>>> -    eventsel = kvm_map_pmu_event(vcpu->kvm->arch.arm_pmu, eventsel);
+>>> +    eventsel = kvm_map_pmu_event(arm_pmu, eventsel);
+>>>       if (eventsel < 0)
+>>>           return;
+>>> @@ -878,6 +893,9 @@ u64 kvm_pmu_get_pmceid(struct kvm_vcpu *vcpu, 
+>>> bool pmceid1)
+>>>       u64 val, mask = 0;
+>>>       int base, i, nr_events;
+>>> +    if (kvm_pmu_fixed_counters_only(vcpu->kvm))
+>>> +        return 0;
+>>> +
+>>
+>> Even if we advertise bits in PMCEID, does it matter? There's no PMC that
+>> the guest could use to count it.
+>>
+>> I understand it isn't aesthetic but I really want to minimize the
+>> special-casing that has to be done for this feature.
 > 
-> Maybe we should just spell out about which scenario we care about where we really
-> expect the disclosure.
+> This strictly ensures that sysregs are stable after migrating across 
+> physical CPUs, which may have different PMCEID values.
 > 
-> Sure, it might be more controversial and we could have that in a separate patch.
+>>
+>>> +void kvm_vcpu_load_pmu(struct kvm_vcpu *vcpu)
+>>> +{
+>>> +    /*
+>>> +     * ARMV8_PMU_INSTR_IDX will need the same check once
+>>> +     * FEAT_PMUv3_ICNTR is supported.
+>>> +     */
+>>> +    struct kvm_pmc *pmc = kvm_vcpu_idx_to_pmc(vcpu, 
+>>> ARMV8_PMU_CYCLE_IDX);
+>>> +    struct arm_pmu *cpu_pmu;
+>>> +
+>>> +    if (!kvm_pmu_fixed_counters_only(vcpu->kvm) ||
+>>> +        !kvm_pmu_counter_is_enabled(pmc) || !pmc->perf_event)
+>>> +        return;
+>>> +
+>>> +    cpu_pmu = to_arm_pmu(pmc->perf_event->pmu);
+>>> +    if (!cpumask_test_cpu(vcpu->cpu, &cpu_pmu->supported_cpus))
+>>> +        kvm_make_request(KVM_REQ_RELOAD_PMU, vcpu);
+>>
+>> Just detect the changing PMU implementation here, KVM_REQ_RELOAD_PMU
+>> will need to detect the PMCs that require an update anyway. Stash the
+>> last cpu in kvm_arch_vcpu_load() and pass it to this:
+>>
+>> void kvm_vcpu_load_pmu(struct kvm_vcpu *vcpu, int last_cpu)
+>> {
+>>     if (!kvm_pmu_fixed_counters_only(vcpu->kvm) || vcpu->cpu == last_cpu)
+>>         return;
+>>
+>>     if (kvm_pmu_probe_armpmu(vcpu->cpu) != 
+>> kvm_pmu_probe_armpmu(last_cpu))
+>>         kvm_make_request(KVM_REQ_RELOAD_PMU);
+>> }
 > 
-> I was thinking of the following end result:
-> 
-> diff --git a/Documentation/process/coding-assistants.rst b/Documentation/process/coding-assistants.rst
-> index 899f4459c52d2..4c2ab4dfc6da7 100644
-> --- a/Documentation/process/coding-assistants.rst
-> +++ b/Documentation/process/coding-assistants.rst
-> @@ -40,20 +40,37 @@ Attribution
->  ===========
->  
->  When AI tools contribute to kernel development, proper attribution
-> -helps track the evolving role of AI in the development process.
-> -Contributions should include an Assisted-by tag in the following format::
-> +helps track the evolving role of AI in the development process. Further,
-> +for reviewers and maintainers it is also crucially important to know how
-> +AI tools were used.
->  
-> -  Assisted-by: AGENT_NAME:MODEL_VERSION [TOOL1] [TOOL2]
-> +Contributions that used AI to generate significant portions of code,
-> +comments, or patch descriptions must include an Assisted-by tag in the
-> +following format::
->  
-> -Where (preferred):
-> +  Assisted-by: LLM # brief description of usage
-> +
-> +Or alternatively::
-> +
-> +  Assisted-by: AGENT_NAME:MODEL_VERSION # brief description of usage
+> It is a nice way to simplify the code and to avoid hardcoding 
+> ARMV8_PMU_INSTR_IDX. I'll use the code for the next version.
 
-I would like to drop this one. As I understand, several people objected
-to including the product name in the git history as it is just free
-adverising, and nobody objected to dropping it.
+I tried this but unfortunately it doesn't seem to work. 
+kvm_arch_vcpu_put() sets vcpu->cpu to -1 so we cannot simply read it to 
+get the last cpu in kvm_arch_vcpu_load().
 
-> +
-> +Where::
->  
->  * ``AGENT_NAME`` is the name of the AI tool or framework
->  * ``MODEL_VERSION`` is the specific model version used
-> -* ``[TOOL1] [TOOL2]`` are optional specialized analysis tools used
-> -  (e.g., coccinelle, sparse, smatch, clang-tidy)
-> +
-> +If other tools were used, they should be specified through a dedicated
-> +Assisted-by tag in the following format::
-> +
-> +  Assisted-by: [TOOL1] [TOOL2]
-> +
-> +Where ``[TOOL1] [TOOL2]`` are specialized analysis tools used
-> +(e.g., coccinelle, sparse, smatch, clang-tidy)
->  
->  Basic development tools (git, gcc, make, editors) should not be listed.
->  
-> -Example::
-> +Examples::
->  
-> -  Assisted-by: Claude:claude-3-opus coccinelle sparse
-> +  Assisted-by: LLM # translate patch description
-> +  Assisted-by: Claude:claude-3-opus # generate most of the code
-> +  Assisted-by: coccinelle sparse
-> 
-> 
-> But I am not really sure why we should specify other tools here, really.
-> People usually do that as part of the patch description, including sharing
-> coccinelle scripts etc.
-
-We've mentioned coccinelle usage in commit messages, with a copy of the
-semantic patch, for years and years and I'm not aware of anyone giving a
-technical reason why we need a tag instead. The only reason I see is to
-avoid pointing specifically at LLMs and normalize their usage as "just
-another tool". That's a political reason, not a technical one.
-
-> Because looking at the history:
-> 
-> $ git log | grep "Assisted-by" | grep -E "(coccinelle|sparse|smatch|clang)"
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
->     Assisted-by: unnamed:deepseek-v3.2 coccinelle
-
--- 
 Regards,
-
-Laurent Pinchart
+Akihiko Odaki
 
