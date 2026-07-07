@@ -1,140 +1,133 @@
-Return-Path: <linux-doc+bounces-95272-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95273-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id w766LJ1CTGrWiQEAu9opvQ
-	(envelope-from <linux-doc+bounces-95272-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 02:04:45 +0200
+	id QMGGF21GTGp5igEAu9opvQ
+	(envelope-from <linux-doc+bounces-95273-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 02:21:01 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D899716694
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 02:04:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AB01571677F
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 02:21:00 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b=jRyjemAb;
-	dmarc=pass (policy=none) header.from=infradead.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95272-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-95272-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=QfisRpmL;
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95273-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-95273-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E2744302D96B
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 00:04:43 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id C03A5306598B
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 00:14:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B8D303FFD;
-	Tue,  7 Jul 2026 00:04:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1A33B4AEEF;
+	Tue,  7 Jul 2026 00:14:00 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 82EC114ABE;
-	Tue,  7 Jul 2026 00:04:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E66133BB48;
+	Tue,  7 Jul 2026 00:13:58 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783382682; cv=none; b=acis9Fv0gv2xmdOMNK9ZcT9I6OViPDEfKZTsryoc2wOEln4FkOygDolq7w19qdBjzNhK8Sfi0f9CNQsUmqpeNHKKH7oMGzlNHfYxf3TXDIZhbch5BE3kbcPq7dIq3Mz6gjB1pS5AJq6xY5IZcOVapeZ9AZJKjbPFPedAwtxXiig=
+	t=1783383239; cv=none; b=cPfZq0VMtfgcSFiLMz6A3X6bHxg5DHA98i1ijCEuBckbRceQq7PPcKq9i97V9o7DIklbLsBji211742gaFbGJCUO1YnU44cExDEAdPjJmat3H3ftatVlsJQ2Q5jaVaza4pU12bzQoeTwXK1PDhUpVaFyLbs1fVZeuq9U3BH4E3I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783382682; c=relaxed/simple;
-	bh=4K15lUYlCT2M8aHdYBpqCJdEfhnL4ojMLyt6K+OBoWA=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=PCVaNI6RpelADJqPo1sH8gIkAeyzjF8t4IjHihh6Lc6KqZHelbST9+LHIrzp5zFsJli/itv3X9TYkXAOp3jYrLweWI1DfZUqJdvRBD+QBlqbXLQzhYLA6K8vfENeGWgszlpxg06g9Ldiq/cyfcxPK3eddyIvRT2GAz0Yt4r6Lfw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=pass smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=jRyjemAb; arc=none smtp.client-ip=198.137.202.133
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=wBEE3bGdJJeaKsBMj2QzhwubA7UQnhJ2zebSKEE6TDU=; b=jRyjemAbpHk2JMkzX9tuEyJ6Y7
-	nleU1Cl6Q9OBmS9A6uRm9DXMmvqZTQeZGjKCpoekH0HL/f5cgDFba1HvlK4zcZTiolyl4M4V58qA4
-	4VnBEHAez89C7wXwCdNj3cZrtfySyLKWn7fyutsxBqPNJmFWimPrnv/WsKItGoE2/D1MtOsYEG2bj
-	eIIF80mC7O08eFYqhq7qmuIW1plc50i/vs3QlngyArq3tcr96k9YPB1rdOVlPpdAlILXb1+sajOYX
-	ljhvFT2+6IZ9lrf2XQQqXi9rr32Xs4v0t+9iyRLIkm/Vdtzu9TqcBLYstz/ZMrNCj1i5hAjDXc5UX
-	VfNczXNQ==;
-Received: from [50.53.43.113] (helo=[192.168.254.34])
-	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wgtIf-0000000DoWM-0NSW;
-	Tue, 07 Jul 2026 00:04:33 +0000
-Message-ID: <9811a0ae-5acf-4124-a1e4-4a4d6c267aa0@infradead.org>
-Date: Mon, 6 Jul 2026 17:04:32 -0700
+	s=arc-20240116; t=1783383239; c=relaxed/simple;
+	bh=/0NVCbWgX65HWRuxfBgpZC6MLIvjEpKKOc5Y9vHiX7Y=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=cyAUW0sUeGX6tQ7T1pSmYb1KhTDvttXw2t1voPHjwd0e0KjqSpH38zgbBcIPa8MJ5g/+pN0/WzAXf03xxJBU9OLHkIEhhxM6F/szAjLkRN3s9siTuIrp6ebosDQBkCy1jkGR39RQQo/7g6pnUzWKPc+Czdvu4hTrF4vJ2yIlras=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QfisRpmL; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9F4061F000E9;
+	Tue,  7 Jul 2026 00:13:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783383238;
+	bh=eB1zO+hEcVPqicULA2t7Fk+v6ErU6JNrcgHBtzJJkzs=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=QfisRpmL2Q7w5vhJODKT4L8MN52r2hKZK1CUd5JBD+iHnkyyQ5OhUgtVxtUeEg9lB
+	 eNxlm7zM36O9+peBNmx2jkzYsEVdlBRHCfLrIgKRpICoHXwykEeEh8hOEm9BrRBFYV
+	 o2OUt+qNG7f6ak+9jD8DgsavWkBS3gZs9X+WBIk3e5iQ53XnmJd7+ENMUET9bp69qs
+	 cyjgB1Rt5a/0BQfxxMrKkWX+XW/D2oQjJXAnR75wh3q8zqOeFqiHRtcAZlYytGCg/o
+	 sjMu98VOEpUkOyXfnviw9v4NUmS3Ic2lpdJ0rsLD0Bfoned6QsYjD1y4JHy9C5VsDc
+	 7MpJqJeD2tHrw==
+From: SJ Park <sj@kernel.org>
+To: SJ Park <sj@kernel.org>
+Cc: "Liam R. Howlett" <liam@infradead.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	David Hildenbrand <david@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Lorenzo Stoakes <ljs@kernel.org>,
+	Michal Hocko <mhocko@suse.com>,
+	Mike Rapoport <rppt@kernel.org>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Vlastimil Babka <vbabka@kernel.org>,
+	damon@lists.linux.dev,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org
+Subject: Re: [RFC PATCH v1.1 00/16] mm/damon: introduce data attributes only monitoring
+Date: Mon,  6 Jul 2026 17:13:51 -0700
+Message-ID: <20260707001353.98054-1-sj@kernel.org>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260706141912.88445-1-sj@kernel.org>
+References: 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Documentation/arch/x86/amd-memory-encryption.rst: Fix
- typo
-To: =?UTF-8?Q?C=C3=A9dric_Hannotier?= <hannotiercedric@gmail.com>,
- Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
- x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>
-Cc: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-References: <20260704125516.49944-1-hannotiercedric@gmail.com>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20260704125516.49944-1-hannotiercedric@gmail.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-3.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_FROM(0.00)[bounces-95272-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-95273-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[gmail.com,kernel.org,redhat.com,alien8.de,linux.intel.com,zytor.com,lwn.net,linuxfoundation.org];
-	FORGED_SENDER(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:hannotiercedric@gmail.com,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
-	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:sj@kernel.org,m:liam@infradead.org,m:akpm@linux-foundation.org,m:david@kernel.org,m:corbet@lwn.net,m:ljs@kernel.org,m:mhocko@suse.com,m:rppt@kernel.org,m:skhan@linuxfoundation.org,m:surenb@google.com,m:vbabka@kernel.org,m:damon@lists.linux.dev,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
+	FORGED_SENDER(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[11];
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp,infradead.org:from_mime,infradead.org:email,infradead.org:mid,infradead.org:dkim]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 2D899716694
+X-Rspamd-Queue-Id: AB01571677F
+
+On Mon,  6 Jul 2026 07:18:54 -0700 SJ Park <sj@kernel.org> wrote:
+
+> TL;DR: Introduce a way to get DAMON's best effort accuracy monitoring of
+> user-demanding non-access data attributes.
+
+Sashiko is continuously finding a few things including integer overflows from
+wrong or weird user setups.  Those are minor issues in my opinion.  But because
+the core layer parameters validation patch series is merged into mm-new, fixing
+thosse should be straightforward.
+
+I will fix simple ones in the way, as a part of the next series or as a
+separate series.
 
 
+Thanks,
+SJ
 
-On 7/4/26 5:55 AM, Cédric Hannotier wrote:
-> The MSR address has one 0 too many: 0xc00100010 → 0xc0010010.
-> 
-> Signed-off-by: Cédric Hannotier <hannotiercedric@gmail.com>
-
-Acked-by: Randy Dunlap <rdunlap@infradead.org>
-Thanks.
-
-> ---
->  Documentation/arch/x86/amd-memory-encryption.rst | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/Documentation/arch/x86/amd-memory-encryption.rst b/Documentation/arch/x86/amd-memory-encryption.rst
-> index bd840df70..92edb26a5 100644
-> --- a/Documentation/arch/x86/amd-memory-encryption.rst
-> +++ b/Documentation/arch/x86/amd-memory-encryption.rst
-> @@ -53,7 +53,7 @@ CPUID function 0x8000001f reports information related to SME::
->  			   system physical addresses, not guest physical
->  			   addresses)
->  
-> -If support for SME is present, MSR 0xc00100010 (MSR_AMD64_SYSCFG) can be used to
-> +If support for SME is present, MSR 0xc0010010 (MSR_AMD64_SYSCFG) can be used to
->  determine if SME is enabled and/or to enable memory encryption::
->  
->  	0xc0010010:
-
--- 
-~Randy
+[...]
 
