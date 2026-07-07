@@ -1,78 +1,54 @@
-Return-Path: <linux-doc+bounces-95307-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95309-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id iNXiKqCkTGolngEAu9opvQ
-	(envelope-from <linux-doc+bounces-95307-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 09:02:56 +0200
+	id vbN4EfClTGpXngEAu9opvQ
+	(envelope-from <linux-doc+bounces-95309-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 09:08:32 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D0C47183DD
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 09:02:56 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id C3C60718470
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 09:08:31 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=ibm.com header.s=pp1 header.b=rLveP2Qo;
-	dmarc=pass (policy=none) header.from=ibm.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95307-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95307-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=tu-dortmund.de header.s=unimail header.b=gUqA1FTH;
+	dmarc=pass (policy=none) header.from=tu-dortmund.de;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95309-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95309-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E49F630AC7BE
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 06:56:42 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 6D69E30DE34F
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 07:00:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B029F3D9541;
-	Tue,  7 Jul 2026 06:56:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8EF823B19BB;
+	Tue,  7 Jul 2026 06:59:32 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
+Received: from unimail.uni-dortmund.de (mx1.hrz.uni-dortmund.de [129.217.128.51])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BC5E3A0B1D;
-	Tue,  7 Jul 2026 06:56:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1E873BE642;
+	Tue,  7 Jul 2026 06:59:29 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783407392; cv=none; b=l+75I4AX8L7UpLCjchi9URYeJ7VEEwr7+zqH+mSVNfZmZfEUSt9SFw3MOZCneBy7efcwWWNK0I8McVDh2m3CIiMg9zsG2jA5weyTmz6yUOH8h1O5PLo802d80H0mZIq3sD/R5IUuhgEz00pNpVtISlAS3/cvNmuGsi6OEbFQZws=
+	t=1783407572; cv=none; b=U1YHK8XjUhxA8Y1pXVH8Fm+nD83oj8TXSZIbgNQuvECrtNQTbTKlBtUsiVxhBjpJ9I350c5yVyXs7trioEIuyTg80AcTThwd455ToOAlkPIntXAg0YDJI6Mg+7JJlXdgSjvoZJHLR5I5P2rxL8tvud2nvX+fvHfm60308uTNsNU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783407392; c=relaxed/simple;
-	bh=W4hCFa4chPtM93XO+t51Gpt1iV2uZ22TQlKBMBCMdfw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=KhgJWKpbAokAgD6cfFsDxepHfInucHOp9R9xL7pXIJUKEPfx1AMr4U4DZKxp2tHb5rCXqAjS97i/E6R5jFTviW2NF+R8kpcGey4gPgCYCXw7XvsONVAtycwpomEmxNgVVC0BF2K0J9Rkz/LfNfgayPL9JK5a6NOe1OqMV/dcbPw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=rLveP2Qo; arc=none smtp.client-ip=148.163.156.1
-Received: from pps.filterd (m0360083.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6674ISRU2385676;
-	Tue, 7 Jul 2026 06:56:03 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=pp1; bh=GXBCX6
-	+1HDv/7hPX2ypIq1K1JBll4AZCnUZhfrwnP/o=; b=rLveP2QoMXDwMejX31aC0E
-	0g8eS9Flj5DAsMSnwu48NiK+7LxRG1PI2ddkxNZBkgE5BSMz/EHBSE+RDDb3a1Kq
-	n5p2ws3mjd+VuKw3NhJPXwzXKrZlaL59hbieKdLJoU52lqN6dehqlYKWdJQGOP6G
-	fc15rl5SqvokS/dbxs+8q1EZGbEt5/SiG2udUzhZWZ8SRInAqO2oWN0jlWR+qxfU
-	Ym88SzpdhCnKNIBOL2sxPeV9GxMNwpZANBmgNkTNFSJE9QVTkNRt6iCzspdJIHKS
-	uMG/+RdQ9J0z8Lz5GMw87UNpskj9nbXjW/qFdcN3JljbSMNP9vqqYuXVmwgHm/iA
-	==
-Received: from ppma22.wdc07v.mail.ibm.com (5c.69.3da9.ip4.static.sl-reverse.com [169.61.105.92])
-	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4f6sp3nn0b-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 07 Jul 2026 06:56:02 +0000 (GMT)
-Received: from pps.filterd (ppma22.wdc07v.mail.ibm.com [127.0.0.1])
-	by ppma22.wdc07v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 6676ndO9007415;
-	Tue, 7 Jul 2026 06:56:01 GMT
-Received: from smtprelay05.fra02v.mail.ibm.com ([9.218.2.225])
-	by ppma22.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4f7cvw1hy8-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 07 Jul 2026 06:56:01 +0000 (GMT)
-Received: from smtpav02.fra02v.mail.ibm.com (smtpav02.fra02v.mail.ibm.com [10.20.54.101])
-	by smtprelay05.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 6676tu9949873402
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Tue, 7 Jul 2026 06:55:56 GMT
-Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 3329720040;
-	Tue,  7 Jul 2026 06:55:56 +0000 (GMT)
-Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 5F71E20043;
-	Tue,  7 Jul 2026 06:55:46 +0000 (GMT)
-Received: from [9.124.214.176] (unknown [9.124.214.176])
-	by smtpav02.fra02v.mail.ibm.com (Postfix) with ESMTP;
-	Tue,  7 Jul 2026 06:55:46 +0000 (GMT)
-Message-ID: <2efb17e0-3b1f-4275-b5a4-58849ee56034@linux.ibm.com>
-Date: Tue, 7 Jul 2026 12:25:45 +0530
+	s=arc-20240116; t=1783407572; c=relaxed/simple;
+	bh=J5z4v8MnX37yvRsBRkrgJ7RXFCTxbHS1dIRgegQB26U=;
+	h=Content-Type:Message-ID:Date:MIME-Version:Subject:From:To:Cc:
+	 References:In-Reply-To; b=SVtV9ZlG0siUCNW7r/KEQ9FDeZ6axKf+nl5yjo4npZ680SHBAttJGW6mmOAdP8Q3yOQQOJHNgiYRLC8F6LNfxBXEuBGr6I3yka6sOA5zXcJJ866BFPOvlXLgfR/3F+bPzgG9n1XKMv+i3ZzjpeIaUO/TGQ/oFyxY67N8tutOkIc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=tu-dortmund.de; spf=pass smtp.mailfrom=tu-dortmund.de; dkim=pass (1024-bit key) header.d=tu-dortmund.de header.i=@tu-dortmund.de header.b=gUqA1FTH; arc=none smtp.client-ip=129.217.128.51
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tu-dortmund.de;
+	s=unimail; t=1783407369;
+	bh=kaPGdKlGO3D+peQmYigaO6QLSP3edbFA8eMgoOpcNKI=;
+	h=Date:Subject:From:To:Cc:References:In-Reply-To;
+	b=gUqA1FTHPEG8EOihHgfi4S46ixfVwWuEhwaIGk12dZXa1Q6q0/NBTneYiRU0jaegy
+	 n5ZdVJAtYbka1LfFD+vvIZIA3SiqGeT1N4A7oyqYbJK7VqAsmM12ZDGz28FXtqqO2h
+	 sINyMwK+N3NAPC7oKD/8BNNZ8PLRmpMX6NBlrOeM=
+Received: from [129.217.186.105] ([129.217.186.105])
+	(authenticated bits=0)
+	by unimail.uni-dortmund.de (8.19.0.2/8.19.0.2) with ESMTPSA id 6676u7Zc022889
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Tue, 7 Jul 2026 08:56:08 +0200 (CEST)
+Content-Type: multipart/mixed; boundary="------------MskE5ndfay3xkFhLGVVkdWqb"
+Message-ID: <527f81a7-05da-4c01-b4fa-aa090c6f57ce@tu-dortmund.de>
+Date: Tue, 7 Jul 2026 08:56:07 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -80,164 +56,114 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 19/23] virt/steal_monitor: Provide default method to
- get num of CPUs for steal ratio
-To: Yury Norov <ynorov@nvidia.com>
-Cc: linux-kernel@vger.kernel.org, mingo@kernel.org, peterz@infradead.org,
-        juri.lelli@redhat.com, vincent.guittot@linaro.org,
-        yury.norov@gmail.com, kprateek.nayak@amd.com, iii@linux.ibm.com,
-        corbet@lwn.net, tglx@kernel.org, gregkh@linuxfoundation.org,
-        pbonzini@redhat.com, seanjc@google.com, vschneid@redhat.com,
-        huschle@linux.ibm.com, rostedt@goodmis.org, dietmar.eggemann@arm.com,
-        maddy@linux.ibm.com, srikar@linux.ibm.com, hdanton@sina.com,
-        chleroy@kernel.org, vineeth@bitbyteword.org, frederic@kernel.org,
-        arighi@nvidia.com, pauld@redhat.com, christian.loehle@arm.com,
-        tj@kernel.org, tommaso.cucinotta@gmail.com, maz@kernel.org,
-        rafael@kernel.org, rdunlap@infradead.org, kernellwp@gmail.com,
-        linux-doc@vger.kernel.org
-References: <20260701141654.500125-1-sshegde@linux.ibm.com>
- <20260701141654.500125-20-sshegde@linux.ibm.com> <akwBa4aXjsFkrMOh@yury>
+Subject: Re: [PATCH net v2] tun/tap & vhost-net: make qdisc backpressure
+ opt-in via IFF_BACKPRESSURE
+From: Simon Schippers <simon.schippers@tu-dortmund.de>
+To: Brett A C Sheffield <bacs@librecast.net>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>,
+        Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
+        Jason Wang <jasowangio@gmail.com>,
+        "David S . Miller" <davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>, netdev@vger.kernel.org,
+        Simon Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Andrew Lunn <andrew+netdev@lunn.ch>,
+        Tim Gebauer <tim.gebauer@tu-dortmund.de>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260706094242.115992-1-simon.schippers@tu-dortmund.de>
+ <akt_Q7kdR3Zb8_GZ@karahi.librecast.net>
+ <20260706091706-mutt-send-email-mst@kernel.org>
+ <2728c540-2e76-4e06-9064-ed1dff071cbe@tu-dortmund.de>
+ <akvhhy_JpH64KrcL@karahi.librecast.net>
+ <0d28fdc4-3c03-48d6-bd59-e59f7a01f4b6@tu-dortmund.de>
 Content-Language: en-US
-From: Shrikanth Hegde <sshegde@linux.ibm.com>
-In-Reply-To: <akwBa4aXjsFkrMOh@yury>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-Authority-Analysis: v=2.4 cv=KsJ9H2WN c=1 sm=1 tr=0 ts=6a4ca303 cx=c_pps
- a=5BHTudwdYE3Te8bg5FgnPg==:117 a=5BHTudwdYE3Te8bg5FgnPg==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=RnoormkPH1_aCDwRdu11:22 a=iQ6ETzBq9ecOQQE5vZCe:22 a=VnNF1IyMAAAA:8
- a=YVLwSRtI9ssZgaGdXnAA:9 a=QEXdDO2ut3YA:10
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA3MDA2NCBTYWx0ZWRfX5cMZvEUHENCM
- qUg3kcPWX5++wG7lmaLHb2eWyiWeeJwHenEiKx05gDGkOSFZPdpy0PeLFT3G2S+ar4VV2ms/Nxb
- oXQDioa+dMuP9JMSnd/p9Oga4VivljI=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA3MDA2NCBTYWx0ZWRfXw+uG+7wtkHi/
- OBpncpmbgTlkV9FaBaGHOuNcVU5RhzYYo3LzEVJAeSp+VyBTrNgn3Uz91riLgtZl+VRglgc11NT
- pZPsUuNcGznL0ZwQDis9xmAssBkCZdbKQzBQCOHJSIVnuGG3iZCp7FOU/sp8TsgYIGr8+hqUx0i
- 2EOFJAqhZIOi88dmgOoaIwEm7vR52Kjv+9LSJaYuVZ0Ns6++CBVn6hu2V/QG28/uamQQlD1lX+f
- YI/ZlD/so2Q5eqLK7StImWmtA5rkuq6+Mo2O8pkpP0ddrApQdUSt3zkA4aIgLLsRpDgIo1z2HL1
- B39hGhppYVrxblxZ7InCa/a+B2BesMdUqCqXCpu6QegZVgHWuh1m/m2fKC68kcSyEQk1YiGc6LU
- +jRBalPd/kuSAdpvIAmhUdiKunmx95JYaQmjBk4Y48rCw8oVMD6pRv4CkomhoRQAAaaT1i1qsov
- pY8W/59/pHKZMtj+fyA==
-X-Proofpoint-ORIG-GUID: VFY5i8XSNdNAhLbIBWdYHDs1a1bJnWz-
-X-Proofpoint-GUID: Tt1IiWpMdcB_89ITNmuotV-lRRtBbShK
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-07_01,2026-07-06_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 malwarescore=0 spamscore=0 adultscore=0 clxscore=1015
- suspectscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607070064
+In-Reply-To: <0d28fdc4-3c03-48d6-bd59-e59f7a01f4b6@tu-dortmund.de>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [0.44 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[ibm.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[ibm.com:s=pp1];
+	MIME_BASE64_TEXT_BOGUS(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[tu-dortmund.de,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[tu-dortmund.de:s=unimail];
 	MAILLIST(-0.15)[generic];
-	MIME_GOOD(-0.10)[text/plain];
+	MIME_BASE64_TEXT(0.10)[];
+	MIME_GOOD(-0.10)[multipart/mixed,text/plain,text/x-patch];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[34];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-95307-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-95309-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:ynorov@nvidia.com,m:linux-kernel@vger.kernel.org,m:mingo@kernel.org,m:peterz@infradead.org,m:juri.lelli@redhat.com,m:vincent.guittot@linaro.org,m:yury.norov@gmail.com,m:kprateek.nayak@amd.com,m:iii@linux.ibm.com,m:corbet@lwn.net,m:tglx@kernel.org,m:gregkh@linuxfoundation.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:vschneid@redhat.com,m:huschle@linux.ibm.com,m:rostedt@goodmis.org,m:dietmar.eggemann@arm.com,m:maddy@linux.ibm.com,m:srikar@linux.ibm.com,m:hdanton@sina.com,m:chleroy@kernel.org,m:vineeth@bitbyteword.org,m:frederic@kernel.org,m:arighi@nvidia.com,m:pauld@redhat.com,m:christian.loehle@arm.com,m:tj@kernel.org,m:tommaso.cucinotta@gmail.com,m:maz@kernel.org,m:rafael@kernel.org,m:rdunlap@infradead.org,m:kernellwp@gmail.com,m:linux-doc@vger.kernel.org,m:yurynorov@gmail.com,m:tommasocucinotta@gmail.com,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:bacs@librecast.net,m:mst@redhat.com,m:willemdebruijn.kernel@gmail.com,m:jasowangio@gmail.com,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:netdev@vger.kernel.org,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:andrew+netdev@lunn.ch,m:tim.gebauer@tu-dortmund.de,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:willemdebruijnkernel@gmail.com,m:andrew@lunn.ch,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[simon.schippers@tu-dortmund.de,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+,1:+,2:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[sshegde@linux.ibm.com,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,infradead.org,redhat.com,linaro.org,gmail.com,amd.com,linux.ibm.com,lwn.net,linuxfoundation.org,google.com,goodmis.org,arm.com,sina.com,bitbyteword.org,nvidia.com];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,linux.ibm.com:mid,linux.ibm.com:from_mime,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[sshegde@linux.ibm.com,linux-doc@vger.kernel.org];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[ibm.com:+];
+	DKIM_TRACE(0.00)[tu-dortmund.de:+];
+	TO_DN_SOME(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCVD_COUNT_SEVEN(0.00)[11]
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[simon.schippers@tu-dortmund.de,linux-doc@vger.kernel.org];
+	PRECEDENCE_BULK(0.00)[];
+	FREEMAIL_CC(0.00)[redhat.com,gmail.com,davemloft.net,google.com,kernel.org,vger.kernel.org,lwn.net,linuxfoundation.org,lunn.ch,tu-dortmund.de];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	HAS_ATTACHMENT(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,tu-dortmund.de:from_mime,tu-dortmund.de:email,tu-dortmund.de:mid,tu-dortmund.de:dkim]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 0D0C47183DD
+X-Rspamd-Queue-Id: C3C60718470
 
+This is a multi-part message in MIME format.
+--------------MskE5ndfay3xkFhLGVVkdWqb
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-
-On 7/7/26 12:56 AM, Yury Norov wrote:
-> On Wed, Jul 01, 2026 at 07:46:50PM +0530, Shrikanth Hegde wrote:
->> This method informs the steal_monitor core, how many CPUs it needs to
->> consider for steal ratio calculations.
->> steal_ratio = (delta_steal * 100 * 100) / (delta_ns * number_of_cpus);
->>
->> Default method returns number of Active CPUs since it calculates steal
->> time across active CPUs.
->>
->> Signed-off-by: Shrikanth Hegde <sshegde@linux.ibm.com>
->> ---
->> v5->v6:
->> - Add cpus_read_lock() for hotplug safety.
->>
->>   drivers/virt/steal_monitor/defaults.c | 11 +++++++++++
->>   drivers/virt/steal_monitor/sm_core.h  |  1 +
->>   2 files changed, 12 insertions(+)
->>
->> diff --git a/drivers/virt/steal_monitor/defaults.c b/drivers/virt/steal_monitor/defaults.c
->> index 4e2e5b233948..70dcfb1ce4cb 100644
->> --- a/drivers/virt/steal_monitor/defaults.c
->> +++ b/drivers/virt/steal_monitor/defaults.c
->> @@ -27,6 +27,17 @@ u64 __weak get_system_steal_time(void)
->>   	return total_steal;
->>   }
->>   
->> +/*
->> + * Return number of CPUs to consider for steal ratio calculation
->> + *
->> + * Default returns number of active CPUs.
->> + */
->> +unsigned int __weak get_num_cpus_steal_ratio(void)
->> +{
->> +	guard(cpus_read_lock)();
->> +	return num_active_cpus();
->> +}
+On 7/7/26 08:52, Simon Schippers wrote:
+> Brett, can you try the two attached patches here with iperf3?
+> I think testing with 8 and 16 threads is enough, so where there is a
+> regression.
 > 
-> How is this lock supposed to work? When you exit the scope, you can be
-> interrupted and your caller will get outdated information.
+> The two patches are about time when to wake:
+> Currently we wake after consuming half the internal ring buffer.
+> One of the attached patches wakes after 2 cachelines (128 of 1000
+> packets) and the other one just wakes once the ring buffer is empty.
 > 
+> This would really help :)
 
-> The other callers of num_active_cpus() don't bother taking the lock.
-> 
+Whoops send you the wrong patch (the opt-in patch again), here
+is the wake on empty patch.
 
-I am thinking i will switch to possible CPUs for steal ratio calculations.
+--------------MskE5ndfay3xkFhLGVVkdWqb
+Content-Type: text/x-patch; charset=UTF-8;
+ name="0001-tun-set-waking-threshold-to-ptr_ring_empty.patch"
+Content-Disposition: attachment;
+ filename="0001-tun-set-waking-threshold-to-ptr_ring_empty.patch"
+Content-Transfer-Encoding: base64
 
-That way cumulative steal_values are monotonically increasing and safe against
-hotplug. That leaves the necessary for locks too.
+RnJvbSBhNDM0MzkyMmU2MzVjYjFjYWIwMTdiMmU4NWNkZDJlNjA2Y2I2NjdhIE1vbiBTZXAg
+MTcgMDA6MDA6MDAgMjAwMQpGcm9tOiBTaW1vbiBTY2hpcHBlcnMgPHNpbW9uLnNjaGlwcGVy
+c0B0dS1kb3J0bXVuZC5kZT4KRGF0ZTogVHVlLCA3IEp1bCAyMDI2IDA4OjM4OjMxICswMjAw
+ClN1YmplY3Q6IFtQQVRDSF0gdHVuOiBzZXQgd2FraW5nIHRocmVzaG9sZCB0byBwdHJfcmlu
+Z19lbXB0eSgpCgpPbmx5IHdha2Ugb25jZSB0aGUgcHRyX3JpbmcgaXMgZW1wdHksIHdoaWNo
+IHJlc3VsdHMgaW4gbGF0ZXIgYW5kIGxlc3MKY2FsbHMgb2YgbmV0aWZfdHhfd2FrZV9xdWV1
+ZSgpLgotLS0KIGRyaXZlcnMvbmV0L3R1bi5jIHwgMyArLS0KIDEgZmlsZSBjaGFuZ2VkLCAx
+IGluc2VydGlvbigrKSwgMiBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9kcml2ZXJzL25l
+dC90dW4uYyBiL2RyaXZlcnMvbmV0L3R1bi5jCmluZGV4IGZmYmU2ZjEzZmIxZi4uYWNiYWZk
+MzlmM2FlIDEwMDY0NAotLS0gYS9kcml2ZXJzL25ldC90dW4uYworKysgYi9kcml2ZXJzL25l
+dC90dW4uYwpAQCAtMjE1OCw4ICsyMTU4LDcgQEAgc3RhdGljIHZvaWQgX190dW5fd2FrZV9x
+dWV1ZShzdHJ1Y3QgdHVuX3N0cnVjdCAqdHVuLAogCXNtcF9tYigpOwogCWlmIChuZXRpZl90
+eF9xdWV1ZV9zdG9wcGVkKHR4cSkpIHsKIAkJdGZpbGUtPmNvbnNfY250ICs9IGNvbnN1bWVk
+OwotCQlpZiAodGZpbGUtPmNvbnNfY250ID49IHRmaWxlLT50eF9yaW5nLnNpemUgLyAyIHx8
+Ci0JCSAgICBfX3B0cl9yaW5nX2VtcHR5KCZ0ZmlsZS0+dHhfcmluZykpIHsKKwkJaWYgKF9f
+cHRyX3JpbmdfZW1wdHkoJnRmaWxlLT50eF9yaW5nKSkgewogCQkJbmV0aWZfdHhfd2FrZV9x
+dWV1ZSh0eHEpOwogCQkJdGZpbGUtPmNvbnNfY250ID0gMDsKIAkJfQotLSAKMi40My4wCgo=
 
-For the SUT it is okay since possible==active. In any systems where it is not,
-they have edit their default values a bit. Nothing else changes.
 
-
->> +
->>   /*
->>    * Default implementation of decrementing the preferred CPUs based on steal
->>    * time. This is simple logic and decrease the preferred CPUs by 1 core.
->> diff --git a/drivers/virt/steal_monitor/sm_core.h b/drivers/virt/steal_monitor/sm_core.h
->> index 030f6236c38e..794d3be04248 100644
->> --- a/drivers/virt/steal_monitor/sm_core.h
->> +++ b/drivers/virt/steal_monitor/sm_core.h
->> @@ -26,6 +26,7 @@ struct steal_monitor {
->>   extern struct steal_monitor sm_core_ctx;
->>   
->>   u64 get_system_steal_time(void);
->> +unsigned int get_num_cpus_steal_ratio(void);
->>   void increase_preferred_cpus(struct steal_monitor *ctx);
->>   void decrease_preferred_cpus(struct steal_monitor *ctx);
->>   
->> -- 
->> 2.47.3
-
+--------------MskE5ndfay3xkFhLGVVkdWqb--
 
