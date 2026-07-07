@@ -1,159 +1,195 @@
-Return-Path: <linux-doc+bounces-95348-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95349-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 4IRBGBLYTGrwqgEAu9opvQ
-	(envelope-from <linux-doc+bounces-95348-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 12:42:26 +0200
+	id Y7ZsIaPWTGqGqgEAu9opvQ
+	(envelope-from <linux-doc+bounces-95349-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 12:36:19 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 532B371A89C
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 12:42:25 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 13EAC71A751
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 12:36:19 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linux.dev header.s=key1 header.b=sYuUGfNw;
-	dmarc=pass (policy=none) header.from=linux.dev;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95348-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-95348-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=UMqazu3Q;
+	dkim=pass header.d=redhat.com header.s=google header.b=OZdLAA90;
+	dmarc=pass (policy=quarantine) header.from=redhat.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95349-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-95349-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 57CF0303CECC
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 10:23:38 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id EC9C73123C90
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 10:27:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D89D03E16BD;
-	Tue,  7 Jul 2026 10:22:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 92D0E3E5A33;
+	Tue,  7 Jul 2026 10:25:49 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-181.mta1.migadu.com (out-181.mta1.migadu.com [95.215.58.181])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 604064D8CE
-	for <linux-doc@vger.kernel.org>; Tue,  7 Jul 2026 10:22:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3A6BF3E51D2
+	for <linux-doc@vger.kernel.org>; Tue,  7 Jul 2026 10:25:44 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783419760; cv=none; b=itZPRo65hxDUuN3I7aW5iTXCIorGob+mq7wViF3Vd8AjsgX6KlBLH0pn/agXKW4Ba9PxRKYSDkEkPGs3bT2zSBC4o4F2FPU/BVdk6fgRS0IPXcRn/c/YH3BBRRxj5bGtKn2Dr//tS7AdMY3IOpIWrllZ5p/LmaXMrz2BG1pHz7U=
+	t=1783419948; cv=none; b=Eu36+EfLhhHDxX8Lr4jSydIuUYRPLd5FnWTydGqnQHGUbRSseQNaem2fO8AqmL3ht0cJqeNSNPxgnEJCxH9If1qrSESfgznS8bmNWQBPldj9Ur7XlLZgIUyBgvCl3SSGTulu6wQvUx36hYvyeIdvyG4YD+4o8u7QFOfkKhRoQAk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783419760; c=relaxed/simple;
-	bh=DaLe8/QXrTWscizG+dYcIkmo6WTPEu4GyF4vvjyKeyE=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=OpFcT+TpXyL4OdQgtIspY6FhHgVfBtmf5KKW0Szf+P+hvWs5awIB0tOLlmPbCAaSPKCNPEe605O4eRGr85NUDJz5iMM6RD1LghoDo3SVyXzwGRBioVME4NHfpQAUL/21W5rLPzNSjCl1THBfJugx7ip3su6PgAz1hv2rOJDhA10=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=sYuUGfNw; arc=none smtp.client-ip=95.215.58.181
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1783419757;
+	s=arc-20240116; t=1783419948; c=relaxed/simple;
+	bh=gqOFLV/X0owYRcnHzvrsp/DH0uPVs/VkzGR4wK4JoEk=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=QbqOWnUCIvFVLnCC9tYLMP4K18ORUE0LBxEPT8cudfuheg74D+SWpt/QlHQ/19+8JRw/4/AYStYDcmN5HmHuafOI6Wjri4t7k0FSwnRJRJ2iBZmPlYlj0j+g8aIFg57KNCCaj0UFppbUpJm5OoaOiO9v+nADjZYdkegfY+AQ8Hw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=UMqazu3Q; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=OZdLAA90; arc=none smtp.client-ip=170.10.129.124
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1783419943;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=R9pYchVVq66JQF9/AQXK87a2K/GG6sLwSAaz3vkY6xc=;
-	b=sYuUGfNw0ciX5Btk/+HD/kCsVAsGe0ylxo8MZopdMGjHjljF2KDR6PYR2lgZ7BqpMp7dEy
-	AMX3jnhHEwDJfC/G13Krb8s/TCmhRPSUIdTC/LkiZd5IxdacIC4/hTt+SUAM2vlFOCq9cG
-	MBVj9dGf4R/05IjyyZqEQu9+uLuTaOg=
-From: Guopeng Zhang <guopeng.zhang@linux.dev>
-To: Tejun Heo <tj@kernel.org>,
-	Johannes Weiner <hannes@cmpxchg.org>,
-	=?UTF-8?q?Michal=20Koutn=C3=BD?= <mkoutny@suse.com>,
-	Jonathan Corbet <corbet@lwn.net>
-Cc: Shuah Khan <skhan@linuxfoundation.org>,
-	cgroups@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Guopeng Zhang <guopeng.zhang@linux.dev>,
-	Guopeng Zhang <zhangguopeng@kylinos.cn>
-Subject: [PATCH 3/3] Docs/admin-guide/cgroup-v2: note blkcg_debug_stats gates io.latency stats
-Date: Tue,  7 Jul 2026 18:21:48 +0800
-Message-ID: <20260707102148.692250-4-guopeng.zhang@linux.dev>
-In-Reply-To: <20260707102148.692250-1-guopeng.zhang@linux.dev>
-References: <20260707102148.692250-1-guopeng.zhang@linux.dev>
+	bh=VR1L8Tfvs37DPjneOYKS8+jqtMz73BhJHMeN7x0oADU=;
+	b=UMqazu3QrR8Yyd6QZ8fXhCk9DN/PZD6NYTTXO1EoLHWHBk5klGHolsl8okD4q9M7aVah7y
+	fE/x7LoIvAhyVKL76md/6s3iUgJCrCgs1sLQc/U9nKFH/6PRC8ykihVtDNRzzgdRPi95p8
+	YxFGMQx7KwANzmSkwko9cZC6OTiC7mI=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-17-pTQLfgkvPDmi5opsAPnUgg-1; Tue, 07 Jul 2026 06:25:42 -0400
+X-MC-Unique: pTQLfgkvPDmi5opsAPnUgg-1
+X-Mimecast-MFC-AGG-ID: pTQLfgkvPDmi5opsAPnUgg_1783419941
+Received: by mail-wm1-f72.google.com with SMTP id 5b1f17b1804b1-493c20d0468so54496175e9.1
+        for <linux-doc@vger.kernel.org>; Tue, 07 Jul 2026 03:25:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=redhat.com; s=google; t=1783419941; x=1784024741; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=VR1L8Tfvs37DPjneOYKS8+jqtMz73BhJHMeN7x0oADU=;
+        b=OZdLAA90hZClBd9ZaS4A7GjeCRQeL+VBh5NO0bYmK/mSaXddnnOcNQgZOZnyhN5hgt
+         6hUk1EniddSpJeDE9mN2CoPlOQGFwYyf8tWKHPLV5W7WghRV4qfqwPAc+jOgKSxSWLc8
+         kebgulCLg1ZrAgu4Q/MQJEVK7JEJsyFfOkCfu40zHfz2hrZ2vZO7pRydmuyy5E8OuIS5
+         kOyCRtCp2XpsD93hM6dwiMMZar0eXrX4ykHFhPryvH/CTLlyiDUnzjk7kv7JWEXOm63n
+         DMjTu1gPno/GnO6PpZcdk5RhvM6w78LZUGvPFRmicJ+aQd5G5JHJLvBiXXFdaZduUJWD
+         Z5lQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783419941; x=1784024741;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=VR1L8Tfvs37DPjneOYKS8+jqtMz73BhJHMeN7x0oADU=;
+        b=DS3di8bEqTF9ylg5/BwT2a0XqKulpx0laRypIaKAcRc0HPTvcP5t+zHmMI7WXNTKD7
+         OT/QG4y96q2lMEyvIC0tVfKniggvUDKDSO2XzL9oTzQjASkKggXk7DvGTNHP5jBiwDln
+         9U4alxbZSicw2TCj3ZiGshkxU5QZFFzFesmCe006+BTM8rYeC8Q9Pkn/3ac36DCIK77F
+         kcvhIr1ftSi0kl5J77XiB7Sd665lC+v/9EjGQrADwFOIuVa0HpeangDW+N+5M0U6FYPR
+         WJqV6ft/IYFpSRRYI5LHY3ofY1z2uUdk9vgSmcaAnsctcwb3M2oxva5lRFHzLnoTAHMl
+         A+bA==
+X-Forwarded-Encrypted: i=1; AHgh+RoIKWRf4dBoQrtmYvkEIp/yh5Tr64KNjzpOQOSmdGC8O3rsL0CrOqWAwV3rRkArGlkloKW4o7lyIAA=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwREkqnbqOuVzEJwSHRXpzjNT0o2xBYS1emkxscpmzrVwjrK1nV
+	+d0JzBH9wH/lbvT/KNwHlEbWfO5O4C3RsZcPZxaIsBPFpCbRQ5nnP84egt9OY19E5K8ECja7wTo
+	kl6ficeB9CLnlYSbRgidlCmrroIMHkEO+32GjlYFC8Ui+orGB8QshMQn8yRRDVg==
+X-Gm-Gg: AfdE7cnFUXuHi3IWiNnB7cz6eEac5klvQHbW+5gzt/ippNY5tkbai/MXAYCZVbhvQlH
+	fzosuf1DyvVZaIEtAoUGZOyhx17fVtwgyv33tOKpSb4E6Vkgjk72aaYBJHIOSNDEeDGfxQAAXN+
+	mTZeLikqIrNT48lu0tsyF2fF6oyNhlFHJU4nWY11VewieXIWOuOzbj11pHalyH7AH8CS4sTmnHs
+	9vXmyCV/atqHxiI3kmzpnWUg3pJAFZGvRM3aJaugY6P7myjIalCvbKw/Dxwcm2Fl69UDUaGjl6z
+	cddiNYM5eN2JidmyR/Qlglgi1HnTj/tyMedqMocmqDry4Gka8+SFN5Bk1/s8AkpRVH6J+/pidpe
+	n35kWObIzjh60UtWzE94sq8lZffpjHIsW
+X-Received: by 2002:a05:600c:1383:b0:493:b647:1acd with SMTP id 5b1f17b1804b1-493df090a95mr49448565e9.36.1783419941244;
+        Tue, 07 Jul 2026 03:25:41 -0700 (PDT)
+X-Received: by 2002:a05:600c:1383:b0:493:b647:1acd with SMTP id 5b1f17b1804b1-493df090a95mr49448105e9.36.1783419940603;
+        Tue, 07 Jul 2026 03:25:40 -0700 (PDT)
+Received: from redhat.com (IGLD-80-230-68-31.inter.net.il. [80.230.68.31])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47aa039b126sm32286020f8f.24.2026.07.07.03.25.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 07 Jul 2026 03:25:40 -0700 (PDT)
+Date: Tue, 7 Jul 2026 06:25:36 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: "David Hildenbrand (Arm)" <david@kernel.org>
+Cc: Sourav Panda <souravpanda@google.com>, muchun.song@linux.dev,
+	osalvador@suse.de, akpm@linux-foundation.org, ljs@kernel.org,
+	liam@infradead.org, vbabka@kernel.org, rppt@kernel.org,
+	surenb@google.com, mhocko@suse.com, mhklinux@outlook.com,
+	fvdl@google.com, gthelen@google.com, mike.kravetz@oracle.com,
+	pasha.tatashin@soleen.com, rientjes@google.com, riel@surriel.com,
+	linux-mm@kvack.org, linux-kernel@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [RFC PATCH 0/6] mm/hugetlb: Dynamic, NUMA-aware HugePage Cache &
+ Free Page Reporting
+Message-ID: <20260707062428-mutt-send-email-mst@kernel.org>
+References: <20260707064235.1386552-1-souravpanda@google.com>
+ <9624988a-366e-4884-9408-3f3b88c27290@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <9624988a-366e-4884-9408-3f3b88c27290@kernel.org>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-1.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	MID_RHS_MATCH_TO(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-95348-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-95349-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[google.com,linux.dev,suse.de,linux-foundation.org,kernel.org,infradead.org,suse.com,outlook.com,oracle.com,soleen.com,surriel.com,kvack.org,vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:david@kernel.org,m:souravpanda@google.com,m:muchun.song@linux.dev,m:osalvador@suse.de,m:akpm@linux-foundation.org,m:ljs@kernel.org,m:liam@infradead.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:mhklinux@outlook.com,m:fvdl@google.com,m:gthelen@google.com,m:mike.kravetz@oracle.com,m:pasha.tatashin@soleen.com,m:rientjes@google.com,m:riel@surriel.com,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	FORGED_SENDER(0.00)[mst@redhat.com,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[3];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[guopeng.zhang@linux.dev,linux-doc@vger.kernel.org];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:tj@kernel.org,m:hannes@cmpxchg.org,m:mkoutny@suse.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:cgroups@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:guopeng.zhang@linux.dev,m:zhangguopeng@kylinos.cn,s:lists@lfdr.de];
-	DKIM_TRACE(0.00)[linux.dev:+];
+	DKIM_TRACE(0.00)[redhat.com:+];
 	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[guopeng.zhang@linux.dev,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[mst@redhat.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:from_mime,linux.dev:dkim,linux.dev:mid,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 532B371A89C
+X-Rspamd-Queue-Id: 13EAC71A751
 
-From: Guopeng Zhang <zhangguopeng@kylinos.cn>
+On Tue, Jul 07, 2026 at 09:29:07AM +0200, David Hildenbrand (Arm) wrote:
+> On 7/7/26 08:42, Sourav Panda wrote:
+> > Overview
+> > This patch series introduces a dynamic, NUMA-aware HugePage Cache,
+> > backed by a kernel shrinker to safely return memory under pressure, and
+> > integrates it with Free Page Reporting (virtio-balloon) for HugeTLB,
+> > specifically targeting gigantic (1GB) hugepages. The goal is to solve
+> > the tradeoff between allocation latency and memory
+> > fungibility in virtualized and heterogeneous cloud environments.
+> 
+> Hi,
+> 
+> in general, we consider hugetlb nowadays to be mostly in feature freeze, as we
+> realized a while ago that adding more special casing on top of something too
+> special for all of MM is only going to hurt us more in the long run.
+> 
+> We want to have less special casing and less special sauce, not more.
+> 
+> Now, there is nothing wrong in making hugetlb be less special, by making it use
+> more of core infrastructure etc.
+> 
+> But optimizing for surplus hugetlb pages by teaching hugetlb about new caches
+> and its custom free-page-reporting support rather looks like the wrong direction
+> for me?
+> 
+> -- 
+> Cheers,
+> 
+> David
 
-The io.stat section says that enabling the io.latency controller exposes
-the depth, avg_lat and win stats in addition to the normal ones. However,
-these io.latency-specific stats are debug stats and are only emitted when
-the blkcg_debug_stats module parameter is enabled, which is disabled by
-default.
 
-Make this explicit so users do not expect these fields to appear in
-io.stat by default, and qualify the usage text that suggests using
-avg_lat to pick an io.latency target.
-
-Signed-off-by: Guopeng Zhang <zhangguopeng@kylinos.cn>
----
- Documentation/admin-guide/cgroup-v2.rst | 13 ++++++++-----
- 1 file changed, 8 insertions(+), 5 deletions(-)
-
-diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
-index df3fe7a7c6b3..0df15a672cf3 100644
---- a/Documentation/admin-guide/cgroup-v2.rst
-+++ b/Documentation/admin-guide/cgroup-v2.rst
-@@ -2278,10 +2278,11 @@ groups D and F will influence each other.  Group G will influence nobody::
- So the ideal way to configure this is to set io.latency in groups A, B, and C.
- Generally you do not want to set a value lower than the latency your device
- supports.  Experiment to find the value that works best for your workload.
--Start at higher than the expected latency for your device and watch the
--avg_lat value in io.stat for your workload group to get an idea of the
--latency you see during normal operation.  Use the avg_lat value as a basis for
--your real setting, setting at 10-15% higher than the value in io.stat.
-+Start at higher than the expected latency for your device and, with
-+blkcg_debug_stats enabled, watch the avg_lat value in io.stat for your
-+workload group to get an idea of the latency you see during normal operation.
-+Use the avg_lat value as a basis for your real setting, setting at 10-15%
-+higher than the value in io.stat.
- 
- How IO Latency Throttling Works
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-@@ -2319,7 +2320,9 @@ IO Latency Interface Files
- 
-   io.stat
- 	If the controller is enabled you will see extra stats in io.stat in
--	addition to the normal ones.
-+	addition to the normal ones.  These debug stats are only emitted when
-+	the blkcg_debug_stats module parameter is enabled (it is disabled by
-+	default).
- 
- 	  depth
- 		This is the current queue depth for the group.
--- 
-2.43.0
+It is currently bypassing free-page-reporting completely.
+Making existing free lists not ignore free-page-reporting would
+maybe considered "making it be less special"?
 
 
