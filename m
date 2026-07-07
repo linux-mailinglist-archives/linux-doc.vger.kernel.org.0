@@ -1,84 +1,84 @@
-Return-Path: <linux-doc+bounces-95464-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95465-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id WJMmLkNPTWpzyAEAu9opvQ
-	(envelope-from <linux-doc+bounces-95464-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 21:10:59 +0200
+	id edrCAiBSTWpjyQEAu9opvQ
+	(envelope-from <linux-doc+bounces-95465-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 21:23:12 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 57EAD71EFB2
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 21:10:59 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 551A171F29F
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 21:23:11 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=paul-moore.com header.s=google header.b=c+BA9des;
+	dkim=pass header.d=paul-moore.com header.s=google header.b=EQxitSu4;
 	dmarc=pass (policy=none) header.from=paul-moore.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95464-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-95464-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95465-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95465-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 49E543017B85
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 19:10:54 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id BF76330B0414
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 19:10:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9B0A1395D8C;
-	Tue,  7 Jul 2026 19:10:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0F4BF3B14CD;
+	Tue,  7 Jul 2026 19:10:50 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qv1-f41.google.com (mail-qv1-f41.google.com [209.85.219.41])
+Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com [209.85.219.51])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE22D33F390
-	for <linux-doc@vger.kernel.org>; Tue,  7 Jul 2026 19:10:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 807163A5E6C
+	for <linux-doc@vger.kernel.org>; Tue,  7 Jul 2026 19:10:48 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783451449; cv=none; b=YoW23hE1oC3nb+ichjEFd/5qY0xznTfYPngBX7VkeZhWpXhTdPmvtCnxr/KnGhotQugYUo7X+X4uBo+P3k+bWfQZGBY7hqu3bjvv+5vkKsDfYRadV79VECDUgj4f7aJdZwA+/iXoxv7kfK7pJM4FRuQ+FaAyyqyKs2QMhhY10zA=
+	t=1783451449; cv=none; b=gKgmDbAiDGOfvkijuQY874fCG7CLvp7R8OyScV19vrmDhgtC/+WRe1EHpjKK4PB8fVBfavavzkwtT10txKmFMZOmIoryPiAQ9VuCPPQ3VC3vYa7VvxZpD+dly7/rH8T5/gnUFlx6o8rOKeZG1vN9wBSgiEZ39nZk8hp+2SdNFA0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1783451449; c=relaxed/simple;
-	bh=6QIPcqi/hr9Q5Mw00FYk5D293PSOJwYSWX9mfItRy44=;
+	bh=9e9qjg8FjE4LIAcZ8mjOkqL/o0d4wmhbdAuKcnOX1/Y=;
 	h=Date:Message-ID:MIME-Version:Content-Type:From:To:Cc:Subject:
-	 References:In-Reply-To; b=JOarM0bWwWtQyKCNAAdXD0m849Bfr2+G9QCHuOKqK1gAAYnQtiO4RTHFbxu6SpDmQrV01vBlKdjIyqk6YNMBAEf6UmRZn+3wJaZx4LX9UYYPAKdxMenbXq3+eiVZgcvVP5k6FQFlLLI+g/zpSckEHMmj93iwhzNxGURGSRsLl+M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=paul-moore.com; spf=pass smtp.mailfrom=paul-moore.com; dkim=pass (2048-bit key) header.d=paul-moore.com header.i=@paul-moore.com header.b=c+BA9des; arc=none smtp.client-ip=209.85.219.41
-Received: by mail-qv1-f41.google.com with SMTP id 6a1803df08f44-8ef7b7651ecso7957296d6.1
-        for <linux-doc@vger.kernel.org>; Tue, 07 Jul 2026 12:10:46 -0700 (PDT)
+	 References:In-Reply-To; b=IOh7P05gqiCgRCLUhWknIhh5jSapbYeL60l1lYMjLqi1zDHNbDOFmQX9mXH7XKQMKRRZCOiPBoG+DDDcm9uEYNh00jsCXK3WKEX04Fzv0xb82VL8FkKjmVtYZbymf1kEHeLXJU1+YbKazHJuui+89XSbv2ZiWuTLN/OPn1egYPg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=paul-moore.com; spf=pass smtp.mailfrom=paul-moore.com; dkim=pass (2048-bit key) header.d=paul-moore.com header.i=@paul-moore.com header.b=EQxitSu4; arc=none smtp.client-ip=209.85.219.51
+Received: by mail-qv1-f51.google.com with SMTP id 6a1803df08f44-8eefd0c5f59so31561946d6.3
+        for <linux-doc@vger.kernel.org>; Tue, 07 Jul 2026 12:10:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=paul-moore.com; s=google; t=1783451446; x=1784056246; darn=vger.kernel.org;
+        d=paul-moore.com; s=google; t=1783451447; x=1784056247; darn=vger.kernel.org;
         h=in-reply-to:references:subject:cc:to:from:content-transfer-encoding
-         :mime-version:message-id:date:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=2LUpyADyWOfmSP2Gd0K/OIW0oeVkcwDMQQoPjYwT+FQ=;
-        b=c+BA9des1e1uFnmqACzRnsVP+9gsL0iFDlEeHo5Ts1RVfRBQDtDTENqR8mqNBFQjtb
-         BjW9KVwtSLpakQSpiJ8C3+zMwD35VIFTdTDJyoGxalj2MswXSjTG6WnKquZTUS+bR59R
-         Emtjkol631c5jbD0JWshZ84dOnr8UN2RdPSrKFnUbBj3snPZvFNrw9zfzgE7XFhiHZ17
-         CVLmIZauLKJo7Gic5PSOzGE+urEF9a8p/Yk/ZePgyP4Y3cyiGqL/ZZJPGAzWMJsGlBHr
-         Kt6UmOpaPZBC3qc0PCdxWBlaAzfyAVwPVtLZNOxrdhDZVy1QW3CVR6xypPXyQSxetDMv
-         NN4A==
+         :content-type:mime-version:message-id:date:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=mBSYWCX0Xl0nrH7KuyJZql2xgbujaGVevFK59n9qnxQ=;
+        b=EQxitSu4R1D7XwJ2ijwuyXMLO4lNwZa6kMMfoi5eV9WaDx4ELjcZFnB0IG3ZfdWmnM
+         GHdtwcsAGgMxpJOuYVy+ItS8Y3lyy6i+FicFIcqMaLIuMB/Y7rlk632Y0g8hz64N8S26
+         S+02vS/e3//ux0QMLNxr9aKJIz/GTMWuNI6hXxA5VlDTvzYZbux5KicDEBNTM0FTSdZO
+         aNA5sbY4X/jJWDZ+z4Ep7i7Xx0IUj+IXR3VMYr5r/xPqqF+ET1O0Kby6+yqZ4CJ2P/jC
+         J14ra/5leABskcW+AEF3o7Laey8f6Pa8msJQQ0yGgY/+XSN1tSUhqs5nsBipfB/5Mso4
+         BjaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783451446; x=1784056246;
+        d=1e100.net; s=20251104; t=1783451447; x=1784056247;
         h=in-reply-to:references:subject:cc:to:from:content-transfer-encoding
-         :mime-version:message-id:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=2LUpyADyWOfmSP2Gd0K/OIW0oeVkcwDMQQoPjYwT+FQ=;
-        b=dSpmgrQ6BgzOic5ZEk3hyZE+7TsgpCicZseCEWTlOvLtEPpDmiwSqOKqqCsjhl2YyX
-         toDVCQu7kq5JnVEjfBnvV069r48DvmWv/OkLuo1HtE3TC1nN7lBd5heXJjDj4JzeccEz
-         56em76ptlanxOlhg1JLAPKH38l8gBUoFEcmSm+Cn0OD/yo5ITdcq48PWdW1XXnW8SHOb
-         id95BP0wECRf6haoq5plWXdxM8V4brTE/DEnNllkUOrSyLzy8lhfeZZ2kJ9otMfojrBd
-         nVAMDqsKBvbS3EsfrMtVMp3lswK09S4cG3qXNCaT/TrJadYOYBbuwLSSv6zKNIf+1hIA
-         AKzg==
-X-Forwarded-Encrypted: i=1; AHgh+Ro2Fwya9985HOcUHnoy3Csx4DjFQKR9LLCFPJxjS5REhu0nM6Ao+tdSwA8jjNR3i0oe+3S+68zNeT4=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz7Ta061nd0mojx9t+rciLGI9h4/CsRkaXweoFqmOSPX8UXv7Aj
-	XVpei0ni0D8pwhZUnzWmc/HmmFQAjB861+jl+UW6UMlYr8cD5mMDdQ0cEwEpVi0stixiljncEhs
-	LS/X5Hfk2
-X-Gm-Gg: AfdE7cl/HjV3EzkgP18bK2Lxj6DaJK5sYuq2p8dxi7UlWSMDRZWyq6cBNqqAak7L4Z0
-	mvC8kJRdjYWe6aiMYVyf2+CwCowj+0BisaDxU++bBlv9sZ4tOi8GY8qRgEAdPGYYDP+ZyXfUEZE
-	ofodqRgkRT5/8BEXXX2nTA7IUCyg2RUDY/DDoFmcPtNv7NDYfJkfo1+npBSA3BpY5brBQZhY/9Y
-	5zziDMoVXdjnyHp962zc2RYzIIw2zopwbj4yWe1n/xWGiKNKq0AKpIGW6FK7v/S4F6GveWMzBwC
-	li2eG855kB38WozJsfnTT0tL3J7dGBPJJdfcOsdTqgyeVYw2qyPGQLfqi2Kst2GgoQUldqN8rDx
-	3l4L1MNTHcpc8xgn1UyjgYmUOy6/Kx13JeP4kFVS3Dv0y+miz3DVWqflIR7rOjonuBtQlusNtZ6
-	l4/mckLgO+XmwwJlOzh90AVBXV0IJrTXEGBk1y/QnpaMFU5R4uyQ2hbNSmaikaPLGnzaGo
-X-Received: by 2002:ad4:5dec:0:b0:8f1:4bff:24dd with SMTP id 6a1803df08f44-8fd71be1e1cmr41525216d6.5.1783451445824;
-        Tue, 07 Jul 2026 12:10:45 -0700 (PDT)
+         :content-type:mime-version:message-id:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=mBSYWCX0Xl0nrH7KuyJZql2xgbujaGVevFK59n9qnxQ=;
+        b=YQ0NnH7iHoWwJAyW8DJR92g5eQ3vJ9S2WD6nX23JgJdCPGjU8H2/nYNkqniO1e26XR
+         IbDyQrrkSb1Rex5Q2uin9amYCof7lH/Jxr6TWpWJ/uZ0YwzpmT6qo2Nf1iYF/k4zHcRx
+         9Wj9xr+pUmv4fGAgyL6VO9ZHJsywracmrAbOU/uUkZBoWcWnwoO4nS8/9BLJh6BMZQaX
+         4ltk5Sm4GnZTXw0n9KP7RbAIATkSstvpQiuUC4oRdfsvG2Ydv1a3Mc6UpON4baWo+dJD
+         CXPF7IT00IBIABj09wRhCpwqXh3DiYTNwdw2IbnN4oOvx4q5GjPqQlBLTiXtHsAEYGWm
+         km+A==
+X-Forwarded-Encrypted: i=1; AHgh+RqDvU/pI+wYZHTsEch9IaDhi7GAdaSf2Z/4BWTIx+JS/NtN+LWTY9kx9UVoS6Fpmx1B5Gks1KMsb8M=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz0yMSoY4PRlQuUPfGsdh1h7ihDUpjkhPG8/YOfx0F5Qn10DCoc
+	4LjJEI5KtoIIQgB2CRZAblFDncsi3zdP1mfkVoHWtn2sMq/owNVvL7vL9gslloNyBw==
+X-Gm-Gg: AfdE7cnyd5c5iC+A8U/v0CLbz+dEaUJcuZGomg4jYDnP6iTy4KsGyxlK3KFz7q1GQum
+	LUrbJsGTn9V4x0ABgM2bp414W/sM1zArq/ffbrNGkZwwP7NonLWpbALikiJGgP3JjIrvvXkELaZ
+	Vwl6NQu8ej0lLkjY+zFGY/13CaZVZmR40tT0bLnSZMHyQHQRgfGdf/bl1/zcLWSqKHsJE88TeFL
+	y3b3f8OZScZsoQzeELuXvUdRptISCRn2itmDiYkfUiQMMcAyVRpk5nmyekv0xID2xeuMdtPCULX
+	Wf7vkcP0hYkI0ZynwngYeRLtjn0tmzAbpdq4Qe/lBLfwzc9rXixzODTp6a8cuPMat6MqwsdxEbe
+	meOxnBcQCiPtidyIHcx09EFMXh5JQQyR/DdEFajRjtTScpjzStoIJeizW4FYDvML0vBs5oQavrO
+	eacv/txV9mdaNoBwloBgMRr9DSb1g1yLiNnAbiNYuavIMDG+tSqZKVtWs6v4QtXWuapyRD
+X-Received: by 2002:ad4:5d4a:0:b0:8eb:24e8:8d28 with SMTP id 6a1803df08f44-8fcb4904bd7mr89056376d6.46.1783451447567;
+        Tue, 07 Jul 2026 12:10:47 -0700 (PDT)
 Received: from localhost (pool-71-126-255-178.bstnma.fios.verizon.net. [71.126.255.178])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-8f4724ba6fesm165735406d6.41.2026.07.07.12.10.44
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-8f46f30c04fsm178016696d6.22.2026.07.07.12.10.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 07 Jul 2026 12:10:44 -0700 (PDT)
-Date: Tue, 07 Jul 2026 15:10:43 -0400
-Message-ID: <c49545c6c69225bbc7e93cac58d58cd3@paul-moore.com>
+        Tue, 07 Jul 2026 12:10:46 -0700 (PDT)
+Date: Tue, 07 Jul 2026 15:10:45 -0400
+Message-ID: <054bead629039656c730231393b4418f@paul-moore.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -91,14 +91,14 @@ X-Mailer: pstg-pwork:20260707_1504/pstg-lib:20260707_1258/pstg-pwork:20260707_15
 From: Paul Moore <paul@paul-moore.com>
 To: Alice Ryhl <aliceryhl@google.com>, Serge Hallyn <sergeh@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Shuah Khan <skhan@linuxfoundation.org>, Alex Shi <alexs@kernel.org>, Yanteng Si <si.yanteng@linux.dev>, Dongliang Mu <dzm91@hust.edu.cn>
 Cc: Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>, Gary Guo <gary@garyguo.net>, "=?utf-8?q?Bj=C3=B6rn_Roy_Baron?=" <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, Trevor Gross <tmgross@umich.edu>, Danilo Krummrich <dakr@kernel.org>, Jann Horn <jannh@google.com>, linux-security-module@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, Alice Ryhl <aliceryhl@google.com>
-Subject: Re: [PATCH v5 1/2] rust: task: clarify comments on task UID accessors
-References: <20260703-remove-task-euid-v5-1-c90c7e2ddf54@google.com>
-In-Reply-To: <20260703-remove-task-euid-v5-1-c90c7e2ddf54@google.com>
+Subject: Re: [PATCH v5 2/2] cred: delete task_euid()
+References: <20260703-remove-task-euid-v5-2-c90c7e2ddf54@google.com>
+In-Reply-To: <20260703-remove-task-euid-v5-2-c90c7e2ddf54@google.com>
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[paul-moore.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[paul-moore.com:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -106,7 +106,7 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	RCPT_COUNT_TWELVE(0.00)[22];
-	TAGGED_FROM(0.00)[bounces-95464-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-95465-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_RECIPIENTS(0.00)[m:aliceryhl@google.com,m:sergeh@kernel.org,m:corbet@lwn.net,m:gregkh@linuxfoundation.org,m:skhan@linuxfoundation.org,m:alexs@kernel.org,m:si.yanteng@linux.dev,m:dzm91@hust.edu.cn,m:ojeda@kernel.org,m:boqun@kernel.org,m:gary@garyguo.net,m:bjorn3_gh@protonmail.com,m:lossin@kernel.org,m:a.hindborg@kernel.org,m:tmgross@umich.edu,m:dakr@kernel.org,m:jannh@google.com,m:linux-security-module@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:rust-for-linux@vger.kernel.org,s:lists@lfdr.de];
@@ -114,7 +114,7 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	FORGED_SENDER(0.00)[paul@paul-moore.com,linux-doc@vger.kernel.org];
 	FREEMAIL_CC(0.00)[kernel.org,garyguo.net,protonmail.com,umich.edu,google.com,vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
@@ -127,45 +127,37 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,garyguo.net:email,vger.kernel.org:from_smtp,paul-moore.com:from_mime,paul-moore.com:url,paul-moore.com:mid,paul-moore.com:dkim]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,garyguo.net:email,paul-moore.com:from_mime,paul-moore.com:url,paul-moore.com:mid,paul-moore.com:dkim]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 57EAD71EFB2
+X-Rspamd-Queue-Id: 551A171F29F
 
 On Jul  3, 2026 Alice Ryhl <aliceryhl@google.com> wrote:
 > 
-> Linux has separate subjective and objective task credentials, see the
-> comment above `struct cred`. Clarify which accessor functions operate on
-> which set of credentials.
+> task_euid() is a very weird operation. You can see how weird it is by
+> grepping for task_euid() - binder is its only user. task_euid() obtains
+> the objective effective UID - it looks at the credentials of the task
+> for purposes of acting on it as an object, but then accesses the
+> effective UID (which the credentials.7 man page describes as "[...] used
+> by the kernel to determine the permissions that the process will have
+> when accessing shared resources [...]").
 > 
-> Also document that Task::euid() is a very weird operation. You can see how
-> weird it is by grepping for task_euid() in the history - binder was its
-> only user. Task::euid() obtains the objective effective UID - it looks
-> at the credentials of the task for purposes of acting on it as an
-> object, but then accesses the effective UID (which the credentials.7 man
-> page describes as "[...] used by the kernel to determine the permissions
-> that the process will have when accessing shared resources [...]").
+> Since usage in Binder has now been removed, get rid of the resulting
+> dead code.
 > 
-> For context:
-> Arguably, binder's use of task_euid() is a theoretical security problem,
-> which only has no impact on Android because Android has no setuid binaries
-> executable by apps.
-> commit 29bc22ac5e5b ("binder: use euid from cred instead of using task")
-> originally fixed that by removing that only user of task_euid(), but the
-> fix got reverted in commit c21a80ca0684 ("binder: fix test regression
-> due to sender_euid change") because some Android test started failing.
-> It was since fixed again by commit 65b672152289 ("binder: use
-> current_euid() for transaction sender identity"), which uses
-> current_euid() instead.
+> Changes to the zh_CN translation was carried out with the help of
+> Gemini and Google Translate, and since adjusted as per Alex Shi's
+> feedback.
 > 
-> Signed-off-by: Jann Horn <jannh@google.com>
+> Suggested-by: Jann Horn <jannh@google.com>
 > Reviewed-by: Gary Guo <gary@garyguo.net>
 > Signed-off-by: Alice Ryhl <aliceryhl@google.com>
 > ---
-> Originally sent as:
-> https://lore.kernel.org/r/20260212-rust-uid-v1-1-deff4214c766@google.com
-> ---
->  rust/kernel/task.rs | 9 ++++++---
->  1 file changed, 6 insertions(+), 3 deletions(-)
+>  Documentation/security/credentials.rst                    |  6 ++----
+>  Documentation/translations/zh_CN/security/credentials.rst |  4 +---
+>  include/linux/cred.h                                      |  1 -
+>  rust/helpers/task.c                                       |  5 -----
+>  rust/kernel/task.rs                                       | 10 ----------
+>  5 files changed, 3 insertions(+), 23 deletions(-)
 
 Merged into lsm/dev, thanks!
 
