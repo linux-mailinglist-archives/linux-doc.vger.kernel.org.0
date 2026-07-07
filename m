@@ -1,161 +1,138 @@
-Return-Path: <linux-doc+bounces-95344-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95345-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id +8urCQbTTGpsqQEAu9opvQ
-	(envelope-from <linux-doc+bounces-95344-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 12:20:54 +0200
+	id XWCXHvDTTGrFqQEAu9opvQ
+	(envelope-from <linux-doc+bounces-95345-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 12:24:48 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9BA771A435
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 12:20:53 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2216871A53E
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 12:24:48 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=lL3ZLL5Z;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95344-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95344-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=linux.dev header.s=key1 header.b="n5/pMC7x";
+	dmarc=pass (policy=none) header.from=linux.dev;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95345-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-95345-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 0314A300CB10
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 10:20:29 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 4C622306F11D
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 10:22:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0F36D3DEAC0;
-	Tue,  7 Jul 2026 10:20:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4EE6E3E1221;
+	Tue,  7 Jul 2026 10:22:26 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from out-181.mta1.migadu.com (out-181.mta1.migadu.com [95.215.58.181])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4C9C43DD857;
-	Tue,  7 Jul 2026 10:20:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AEC213E2AD8
+	for <linux-doc@vger.kernel.org>; Tue,  7 Jul 2026 10:22:24 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783419624; cv=none; b=fXnhrxKYp7nVgdZ+/G/U37LxCRKyWDpWZv8z3zPC9LJE7hOR+fR4kQXz2Q2hskvf7d1KmPufbYvREqhEvUlbvjzBSNUGOmV6eTkO1wjCzLJIn4avtjiVszZ2QY+YjddKeu23EjFY30RJREJG1DgQyvKgkqBwLlSbvL/Cm+eJMFg=
+	t=1783419746; cv=none; b=VJgTwGin6SSk8mnn1HccuwaZOhkLLEEiDHfnFbIROLhwU9jEIrV9n9/zuk6YhezvcLGWdItwdTtoU2msC9K7IQNE3vyZGMhJjmiq3pF7mVateHmE1mgQBEanqGV2sMPYNIyhkPPPm9Hrr9jw9H+1pSr2h5/+kIx/NZH97g3HmZg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783419624; c=relaxed/simple;
-	bh=Saj76Lq9BEvEFw8B7zH2j9ldyhjzqJM6VhTK7aEmel8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=P5B6WY4PQhXMHpLyS0EKvOOLU8DVl56uus1isOx0nfm9Ba1CfziVA7PNOdqnbKNuvd7I1lMcuIEJUSFAZLH6alAt12zkMa7iHbtHYEitYwtQPX8CFpn8X968Wbve/Lnc/Wx3Poc2n7saWmfKoner/Ck+A/9Kcn6v92zpaSBuytQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lL3ZLL5Z; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DD3941F000E9;
-	Tue,  7 Jul 2026 10:20:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783419622;
-	bh=zFHdqMXUD4SifWHe4Jfr5ztqAyuGMXTfuQjJsFdb/OY=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=lL3ZLL5Z5OQvQbkEcbNVoPRVf3P5h5jCaReGEPBQj+/jrb7a21WPSOyf9zclCmCNs
-	 sVOoZdxJomPR57xbNB4bnlwZXN2wIESuAH9rxblIHR2iOwzwe06htZpU3BftgzEIfY
-	 wa7kgbORZ5rhHe4NSVns5TVheR/iIoCsMwsSdDK0i7yxniRb/CU6cyV1kgFGO8KMYE
-	 EmtCLoe5g1v3qojA+K1ZnVGNRdJ5I7t9PWkaukoo1SZQoocWzUAWBKYNVUvH76N9l+
-	 1HcXmK2B0WzR5nIyepAZ3Cw2DXHG+qwO4PdJkcXSyF3p/H8/brCjKtkwWR0+71IDcE
-	 mGnv5NpK3CxXQ==
-Date: Tue, 7 Jul 2026 11:20:09 +0100
-From: Lorenzo Stoakes <ljs@kernel.org>
-To: Jori Koolstra <jkoolstra@xs4all.nl>
-Cc: "David Hildenbrand (Arm)" <david@kernel.org>, 
-	Laurent Pinchart <laurent.pinchart@ideasonboard.com>, Boris Burkov <boris@bur.io>, Jeff Layton <jlayton@kernel.org>, 
-	Greg KH <gregkh@linuxfoundation.org>, Linus Torvalds <torvalds@linux-foundation.org>, 
-	Jonathan Corbet <corbet@lwn.net>, Justin Stitt <justinstitt@google.com>, 
-	Carlos Maiolino <cem@kernel.org>, Jakub Kicinski <kuba@kernel.org>, 
-	Krzysztof Kozlowski <krzk@kernel.org>, Brian Foster <bfoster@redhat.com>, 
-	Christoph Hellwig <hch@infradead.org>, David Disseldorp <ddiss@suse.de>, 
-	Mark Brown <broonie@kernel.org>, Jani Nikula <jani.nikula@intel.com>, 
-	Jens Axboe <axboe@kernel.dk>, Vlastimil Babka <vbabka@kernel.org>, 
-	"Christian Brauner (Amutable)" <brauner@kernel.org>, workflows@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org
-Subject: Re: [PATCH] Documentation: remove the requirement for LLM attribution
-Message-ID: <akzSY47Rjn7TDOL6@lucifer>
-References: <2026070227-payroll-eradicate-8f66@gregkh>
- <16c507cea8f2873766e1de586d9a0d73234a3038.camel@kernel.org>
- <akaWnQ5Pkg_676B-@lucifer>
- <20260702211740.GA639365@zen.localdomain>
- <3f447113-4407-471f-878f-e6d6edafee71@kernel.org>
- <akez23ZhLRSGMFQ1@lucifer>
- <20260703163251.GB3734786@killaraus.ideasonboard.com>
- <e93d28e4-750c-4a4f-8bfd-7a0b404cd05c@kernel.org>
- <akzETpsps4TMfqpC@lucifer>
- <1778033301.182575.1783419343917@kpc.webmail.kpnmail.nl>
+	s=arc-20240116; t=1783419746; c=relaxed/simple;
+	bh=N3mlkE+V8OacYwpttMQ2zP/Vz4zdha1L7zeYJjcI1Jg=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=DB2VKcMK06bjHZa+lWtJFU9U7LyYk0wqUFNzLFnRGi540Rzq8kbUSWOKGUM0x/sJ8Gh1PwJqs/fusMPfIZwXLVfGSbqP25lMixUwHPz4CFN6lPslKdEPgMp+rFwX2tlyqo5wyfJtUukJiTNMwpTuaw2l15mUir6AhQhDQQ/A/SU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=n5/pMC7x; arc=none smtp.client-ip=95.215.58.181
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1783419732;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=eWcDQnYOYYrvM2ZYBY8bvALrAF2J5/f2P4vYcNggq1c=;
+	b=n5/pMC7xiQirBMKCLQ5d5nmVfVzXRJFumz1+KMOioOerExgZhdvJ3fDoVB1ldAp8Md5NGi
+	Q3kyRsrA/UbBjKtAbKn6TN+u6mwDhx2b+ekZGCPRx64pRkaJ8J60EII34xp1i9eNGWbk59
+	M0ifxb7j2AdjwwNtu2D+wLPiSOvWV3I=
+From: Guopeng Zhang <guopeng.zhang@linux.dev>
+To: Tejun Heo <tj@kernel.org>,
+	Johannes Weiner <hannes@cmpxchg.org>,
+	=?UTF-8?q?Michal=20Koutn=C3=BD?= <mkoutny@suse.com>,
+	Jonathan Corbet <corbet@lwn.net>
+Cc: Shuah Khan <skhan@linuxfoundation.org>,
+	cgroups@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Guopeng Zhang <guopeng.zhang@linux.dev>,
+	Guopeng Zhang <zhangguopeng@kylinos.cn>
+Subject: [PATCH 0/3] Docs/admin-guide/cgroup: update controller interface docs
+Date: Tue,  7 Jul 2026 18:21:45 +0800
+Message-ID: <20260707102148.692250-1-guopeng.zhang@linux.dev>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <1778033301.182575.1783419343917@kpc.webmail.kpnmail.nl>
+Content-Transfer-Encoding: 8bit
+X-Migadu-Flow: FLOW_OUT
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-4.66 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
+	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:jkoolstra@xs4all.nl,m:david@kernel.org,m:laurent.pinchart@ideasonboard.com,m:boris@bur.io,m:jlayton@kernel.org,m:gregkh@linuxfoundation.org,m:torvalds@linux-foundation.org,m:corbet@lwn.net,m:justinstitt@google.com,m:cem@kernel.org,m:kuba@kernel.org,m:krzk@kernel.org,m:bfoster@redhat.com,m:hch@infradead.org,m:ddiss@suse.de,m:broonie@kernel.org,m:jani.nikula@intel.com,m:axboe@kernel.dk,m:vbabka@kernel.org,m:brauner@kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,s:lists@lfdr.de];
-	FREEMAIL_TO(0.00)[xs4all.nl];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[24];
-	FORGED_SENDER(0.00)[ljs@kernel.org,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-95345-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[3];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[guopeng.zhang@linux.dev,linux-doc@vger.kernel.org];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ljs@kernel.org,linux-doc@vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-95344-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS(0.00)[m:tj@kernel.org,m:hannes@cmpxchg.org,m:mkoutny@suse.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:cgroups@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:guopeng.zhang@linux.dev,m:zhangguopeng@kylinos.cn,s:lists@lfdr.de];
+	DKIM_TRACE(0.00)[linux.dev:+];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,lucifer:mid,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[guopeng.zhang@linux.dev,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:from_mime,linux.dev:dkim,linux.dev:mid,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,kylinos.cn:email,rdma.events:url,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: D9BA771A435
+X-Rspamd-Queue-Id: 2216871A53E
 
-On Tue, Jul 07, 2026 at 12:15:43PM +0200, Jori Koolstra wrote:
->
-> I haven't really seen anyone opposed the following I wrote earlier:
->
-> - it's more relevant to know how an LLM was used than that it was used (and the
->   tag is just a quick indication of this)
-> - advertising for particular corporations does not really serve any purpose to
->   the community, so just say "LLM"
-> - the tags may be used to prevent arguing
-> - the requirement to be open about LLM use (whether by tags or whatever) makes
->   it easier for maintainers (if they feel the need) to de-prioritize patches
->   by someone unwilling to abide by these rules whenever the maintainer perceives
->   or suspects prior undeclared LLM use. This prevents an asymmetrical situation
->   of LLM slop being produced much faster that what can be reviewed.
+From: Guopeng Zhang <zhangguopeng@kylinos.cn>
 
-Yup completely agree.
+Hi,
 
-I just want to get something merged rather than just talk :) and so to avoid any
-_possible_ argument 'keep it like it is but add a comment' is a much, much
-easier sell to everybody.
+This small series updates cgroup controller documentation to match the
+interfaces exposed by the current code.
 
-Then we can follow up with anything else one we get _something useful merged_ :)
+Patch 1 drops a stale interface-file count from the misc controller
+documentation.
 
->
-> Perhaps the last point is more controversial.
+Patch 2 documents the RDMA v1 interface files that are already exposed
+by the controller and already documented for cgroup v2.
 
-Not in my opinion. We're only at the beginning of this horror show and I think
-far stronger measures will eventually be needed (e.g. newcomes will have to
-build trust first, which sucks, but it may be the only practical solution).
+Patch 3 notes that the io.latency-specific depth, avg_lat and win
+io.stat fields are only emitted when blkcg_debug_stats is enabled, and
+qualifies the usage text that suggests using avg_lat to pick a latency
+target.
 
->
-> I would really like to adept the systemd policy text.[1] If I have time later today
-> I'll try to write something up... although maybe it is too ambitious :)
->
-> [1]: https://lore.kernel.org/linux-fsdevel/20260702-bahnen-ertappen-verspannungen-0eaaf1e3f5af@brauner/
+Thanks,
+Guopeng
 
-:)
+Guopeng Zhang (3):
+  Docs/admin-guide/cgroup-v2: drop stale misc interface file count
+  Docs/admin-guide/cgroup-v1: document rdma.peak, rdma.events and
+    rdma.events.local
+  Docs/admin-guide/cgroup-v2: note blkcg_debug_stats gates io.latency
+    stats
 
-Cheers, Lorenzo
+ Documentation/admin-guide/cgroup-v1/rdma.rst | 66 ++++++++++++++++++++
+ Documentation/admin-guide/cgroup-v2.rst      | 16 +++--
+ 2 files changed, 76 insertions(+), 6 deletions(-)
+
+-- 
+2.43.0
 
