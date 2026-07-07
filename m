@@ -1,245 +1,243 @@
-Return-Path: <linux-doc+bounces-95305-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95307-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id ZBpXKsyiTGq9nQEAu9opvQ
-	(envelope-from <linux-doc+bounces-95305-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 08:55:08 +0200
+	id iNXiKqCkTGolngEAu9opvQ
+	(envelope-from <linux-doc+bounces-95307-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 09:02:56 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 410117182C8
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 08:55:08 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D0C47183DD
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Jul 2026 09:02:56 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=intel.com header.s=Intel header.b=a1MLAASs;
-	dmarc=pass (policy=none) header.from=intel.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95305-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95305-lists+linux-doc=lfdr.de@vger.kernel.org";
-	arc=reject ("cv is fail on i=2")
+	dkim=pass header.d=ibm.com header.s=pp1 header.b=rLveP2Qo;
+	dmarc=pass (policy=none) header.from=ibm.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95307-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95307-lists+linux-doc=lfdr.de@vger.kernel.org";
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id B6921301B802
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 06:55:07 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E49F630AC7BE
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2026 06:56:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B86DD3AE1A6;
-	Tue,  7 Jul 2026 06:55:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B029F3D9541;
+	Tue,  7 Jul 2026 06:56:33 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.17])
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C657F3BFE33;
-	Tue,  7 Jul 2026 06:55:03 +0000 (UTC)
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783407306; cv=fail; b=AVkhcbrnfKk/2HWQE+Zo4QpeT//OU2jfas+i7tSGEqHv0YQhJPT5d6vHQQVOZleHx4iPW/UXP7TwP3CKiPRXOx9axLbo7SBE0/MNpAV3XgKAkHfwbFyOWo66E3YT39D0CGDeByCso+ef8BFqIRaH0I42K9bSvnublE+0W/V+qFg=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783407306; c=relaxed/simple;
-	bh=VBIs8GKVPlqrvX1qARiu6NHl8Qa+CoGiPxPazAHZ/bc=;
-	h=Date:From:To:CC:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=TCxkuM/IplFOjlgoh2Ugkubpm+TcOh80ZSrjoNxdWS68EfraNPgQg3C5upWxhcMPqBCoQK5Pq34tug3SwdrE4cMjo2E7ELxKaxxwry+yetV0WW8n0M3/q+YkR5GoVt4I5evfSKAXiZ1Sc+LkqIm+N/6u55xOpSjBcp+uG0T1mYM=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=a1MLAASs; arc=fail smtp.client-ip=198.175.65.17
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1783407304; x=1814943304;
-  h=date:from:to:cc:subject:message-id:references:
-   in-reply-to:mime-version;
-  bh=VBIs8GKVPlqrvX1qARiu6NHl8Qa+CoGiPxPazAHZ/bc=;
-  b=a1MLAASsrzY5AkTzaBmhWqmHm3/COupDUCq4mGL9XpYZSeTSSjN7DQTW
-   JVcN0oV/VxmARDj7B21DQD3SNBPpvfVrtwwGpvZUFxKgxQbL6WT1s3u+T
-   ub3qKrbcqiSqDsv85YuhRdimYyCFJuZVxLXprXz8CfPzTlcclFvAgGJd5
-   4o+55G+/q8enfdZTG1hinyolsHww1DCiUsPbbZ/IMtoqmD8WGxJnE+b7z
-   1XX8bmjCnu31grxsUTamv+WD0iR+3jlXgrn8WNCpewTKFslGTApVFEdwC
-   aEQHu84f4F4jWs3AaqbTsRkDPzQ6h39pa2WncqO/FWRNgL1uk59fiDRfR
-   Q==;
-X-CSE-ConnectionGUID: k8iq6tk+QDmbwi/jlnL36w==
-X-CSE-MsgGUID: iN19/LOhSo+0hX2F/86ygg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11839"; a="84071104"
-X-IronPort-AV: E=Sophos;i="6.25,153,1779174000"; 
-   d="scan'208";a="84071104"
-Received: from orviesa010.jf.intel.com ([10.64.159.150])
-  by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Jul 2026 23:55:03 -0700
-X-CSE-ConnectionGUID: XvCy+CgqTCKRBQXhA5b7LA==
-X-CSE-MsgGUID: jS28QfJVTXWfW1Ogmv4lwA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.25,153,1779174000"; 
-   d="scan'208";a="252845321"
-Received: from orsmsx901.amr.corp.intel.com ([10.22.229.23])
-  by orviesa010.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Jul 2026 23:55:03 -0700
-Received: from ORSMSX903.amr.corp.intel.com (10.22.229.25) by
- ORSMSX901.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.43; Mon, 6 Jul 2026 23:55:02 -0700
-Received: from ORSEDG902.ED.cps.intel.com (10.7.248.12) by
- ORSMSX903.amr.corp.intel.com (10.22.229.25) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.43 via Frontend Transport; Mon, 6 Jul 2026 23:55:02 -0700
-Received: from MW6PR02CU001.outbound.protection.outlook.com (52.101.48.43) by
- edgegateway.intel.com (134.134.137.112) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.43; Mon, 6 Jul 2026 23:55:02 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TcnK/r6kvHJVfxZVDL1rtfjrVLrfXtxAL9tkjoMhX2/q4n8+ECxGHTMRP1DEyQpNneIomuy4wcp+qWde4pibgINz1yp9k4YkB2rdX3RN0ptaFTQznSpSjcS0/bp6+EuSFH6UpTkxCkveIZ5sQNXqtmEnY5MDSTJGSw3DIja9lrtLjp+fK9x84X9zAUDstbEzBPgNaRO59gZjjGuNnM43e+UC1cFiez9IVHZ/S3W4rLEfRS5w16ilgLRKS4O08foY5CInzN0uwCgVsP/hYtXJ0+AiAonBNK+vd3COpfKlb494sz+hpOHdWFrlISsoHvAd1yMmQi2O7eVFAFZdsMX54g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VBIs8GKVPlqrvX1qARiu6NHl8Qa+CoGiPxPazAHZ/bc=;
- b=gqvlYjZGlcsPH12aZKeodME+HGko57zel+J04sXe0qyDe1LdQedULWWXJBkGK+mh57kV/OI3PAIRcUUsKvGjF28POCikylnFG3wqzgWyV751pZgShyd/EVpb/zhj/3WJMQppkVz93/QF1p1OdNBwIuZZ9LebYAJKA+L5lqI5wLn/ozmyJF3fjB2wdDsC9e56tA/j6VVePYnYBh9eBs4U4Z5KTuAZrnYb6hRYMprIMritydgpZgGzYhhuLlMkVFHUNsVmwmS5B944lYuViZ5yMtwEeNU/6mKlVSAOsfON0/OWkE6+0K5kHfizaj1AUImeDEFAql8V8xLMH6glGeeIDw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Received: from BN7PR11MB2836.namprd11.prod.outlook.com (2603:10b6:406:ad::26)
- by PH0PR11MB7660.namprd11.prod.outlook.com (2603:10b6:510:26f::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.11; Tue, 7 Jul
- 2026 06:54:59 +0000
-Received: from BN7PR11MB2836.namprd11.prod.outlook.com
- ([fe80::ac36:7540:4e6f:8d3b]) by BN7PR11MB2836.namprd11.prod.outlook.com
- ([fe80::ac36:7540:4e6f:8d3b%6]) with mapi id 15.21.0181.012; Tue, 7 Jul 2026
- 06:54:59 +0000
-Date: Tue, 7 Jul 2026 14:54:48 +0800
-From: Chao Gao <chao.gao@intel.com>
-To: Rick Edgecombe <rick.p.edgecombe@intel.com>
-CC: <bp@alien8.de>, <dave.hansen@intel.com>, <hpa@zytor.com>,
-	<kas@kernel.org>, <kvm@vger.kernel.org>, <linux-coco@lists.linux.dev>,
-	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-	<mingo@redhat.com>, <nik.borisov@suse.com>, <pbonzini@redhat.com>,
-	<seanjc@google.com>, <tglx@kernel.org>, <vannapurve@google.com>,
-	<x86@kernel.org>, <yan.y.zhao@intel.com>, <kai.huang@intel.com>, "Kirill A.
- Shutemov" <kirill.shutemov@linux.intel.com>
-Subject: Re: [PATCH v6 07/11] KVM: TDX: Allocate PAMT memory for TD and vCPU
- control structures
-Message-ID: <akyiuAfTSciZyGpB@intel.com>
-References: <20260526023515.288829-1-rick.p.edgecombe@intel.com>
- <20260526023515.288829-8-rick.p.edgecombe@intel.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20260526023515.288829-8-rick.p.edgecombe@intel.com>
-X-ClientProxiedBy: TPYP295CA0057.TWNP295.PROD.OUTLOOK.COM (2603:1096:7d0:8::8)
- To BN7PR11MB2836.namprd11.prod.outlook.com (2603:10b6:406:ad::26)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BC5E3A0B1D;
+	Tue,  7 Jul 2026 06:56:29 +0000 (UTC)
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783407392; cv=none; b=l+75I4AX8L7UpLCjchi9URYeJ7VEEwr7+zqH+mSVNfZmZfEUSt9SFw3MOZCneBy7efcwWWNK0I8McVDh2m3CIiMg9zsG2jA5weyTmz6yUOH8h1O5PLo802d80H0mZIq3sD/R5IUuhgEz00pNpVtISlAS3/cvNmuGsi6OEbFQZws=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783407392; c=relaxed/simple;
+	bh=W4hCFa4chPtM93XO+t51Gpt1iV2uZ22TQlKBMBCMdfw=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=KhgJWKpbAokAgD6cfFsDxepHfInucHOp9R9xL7pXIJUKEPfx1AMr4U4DZKxp2tHb5rCXqAjS97i/E6R5jFTviW2NF+R8kpcGey4gPgCYCXw7XvsONVAtycwpomEmxNgVVC0BF2K0J9Rkz/LfNfgayPL9JK5a6NOe1OqMV/dcbPw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=rLveP2Qo; arc=none smtp.client-ip=148.163.156.1
+Received: from pps.filterd (m0360083.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6674ISRU2385676;
+	Tue, 7 Jul 2026 06:56:03 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=pp1; bh=GXBCX6
+	+1HDv/7hPX2ypIq1K1JBll4AZCnUZhfrwnP/o=; b=rLveP2QoMXDwMejX31aC0E
+	0g8eS9Flj5DAsMSnwu48NiK+7LxRG1PI2ddkxNZBkgE5BSMz/EHBSE+RDDb3a1Kq
+	n5p2ws3mjd+VuKw3NhJPXwzXKrZlaL59hbieKdLJoU52lqN6dehqlYKWdJQGOP6G
+	fc15rl5SqvokS/dbxs+8q1EZGbEt5/SiG2udUzhZWZ8SRInAqO2oWN0jlWR+qxfU
+	Ym88SzpdhCnKNIBOL2sxPeV9GxMNwpZANBmgNkTNFSJE9QVTkNRt6iCzspdJIHKS
+	uMG/+RdQ9J0z8Lz5GMw87UNpskj9nbXjW/qFdcN3JljbSMNP9vqqYuXVmwgHm/iA
+	==
+Received: from ppma22.wdc07v.mail.ibm.com (5c.69.3da9.ip4.static.sl-reverse.com [169.61.105.92])
+	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4f6sp3nn0b-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Tue, 07 Jul 2026 06:56:02 +0000 (GMT)
+Received: from pps.filterd (ppma22.wdc07v.mail.ibm.com [127.0.0.1])
+	by ppma22.wdc07v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 6676ndO9007415;
+	Tue, 7 Jul 2026 06:56:01 GMT
+Received: from smtprelay05.fra02v.mail.ibm.com ([9.218.2.225])
+	by ppma22.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4f7cvw1hy8-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Tue, 07 Jul 2026 06:56:01 +0000 (GMT)
+Received: from smtpav02.fra02v.mail.ibm.com (smtpav02.fra02v.mail.ibm.com [10.20.54.101])
+	by smtprelay05.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 6676tu9949873402
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Tue, 7 Jul 2026 06:55:56 GMT
+Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 3329720040;
+	Tue,  7 Jul 2026 06:55:56 +0000 (GMT)
+Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 5F71E20043;
+	Tue,  7 Jul 2026 06:55:46 +0000 (GMT)
+Received: from [9.124.214.176] (unknown [9.124.214.176])
+	by smtpav02.fra02v.mail.ibm.com (Postfix) with ESMTP;
+	Tue,  7 Jul 2026 06:55:46 +0000 (GMT)
+Message-ID: <2efb17e0-3b1f-4275-b5a4-58849ee56034@linux.ibm.com>
+Date: Tue, 7 Jul 2026 12:25:45 +0530
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN7PR11MB2836:EE_|PH0PR11MB7660:EE_
-X-MS-Office365-Filtering-Correlation-Id: 40a1864e-59d3-4e49-c886-08dedbf4a97c
-X-LD-Processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|23010399003|7416014|376014|22082099003|18002099003|4143699003|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info: nVD5t5BG6C4yY3eRYD4Yq+ASEMSU+E77ww2Lpf1t83RlDS7MmwhkwTPM5XUJu3V24KrD86mjTyD1xcOq476m/FjNlf03Z3wecMJceYvhFEgnX6eWNcYHkcUeVu+m3ZpTK2W1lIzrP9ldR7cQgaeuiLMrViVduvY4lITpQnKDLPVa9en/CrV09W0OgvFNDNC8MCQBFmHxk+nlkdH9Ox00LJALC+cK6jmDWxe8gYs3fLhcKz8szvrE3Sq5y1EU90lwEzmkwpmZqMVoV56MBJNwpBa9FkOS+x3OJ9nGZzn3dWzpTSIctFA7TbEr6XxyXw6JUSlWORDmcj5PF8ooyPDTEW+9goOYjGZd6+V6EbIj3coHONXaHSNZqRjfXeeIk0fq9to3hM+19sT0qw7Ofb6d6OX9xO/m6IHQe8mbrnMLrXhFlvpck8zCCtGHlOVY6q9MHxZv8+885HCJzSzYP868S/zAd/QqybxOSvtYAk1j2M1slG8NbS5bQIF1nOBwGTjam9O2DXQ7HERqRxsSGi5yug6VCXE9RJGKV2e5Z4/FV9P0afdU5Dpc/vneTXD4kbMo0c+1M9A2n7CNeK3K/6IF/tLVLThVTackGr3nZjGvpakbvXdhpk3MYLqTXZWBi8/RsLnihXFm/uz5MzTg6dYLLq+Q/qQQAtIshjXyBkfjIXE=
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN7PR11MB2836.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(23010399003)(7416014)(376014)(22082099003)(18002099003)(4143699003)(56012099006)(11063799006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?gJQJpjJHrbcRGqLRKgbCHxXulN1Kqg2SUw4rOvoYLRfHcgOeLM53FgkRGFdl?=
- =?us-ascii?Q?q6PISyoTc4eYgSZtVSjQ/dPx08Ey0a/LgwJvVwWHtMy21c3+KpyuyVThz8jZ?=
- =?us-ascii?Q?Uz8EycJe2rvumTcGJvmlaE7+w5TzU9SL6MkaKJUlwTJcuieoIuRrybw8D+c0?=
- =?us-ascii?Q?VeD2NrYifTDx92EWg7bTEaG76MmtAg8PloFJ1VjjgEb/7Z4ImnnLeeqQ1LBJ?=
- =?us-ascii?Q?CReAZJfOPpiM0Xo5vHq6E/djVIOEyPP3q5bKSPpXLkTAP1Np1jXI+40iEiMd?=
- =?us-ascii?Q?1zD7S3wlbqZqnVIHHsSzHZc1BZ+MvgWfcWef7znh0CUm6qtKMe3G15adc5dX?=
- =?us-ascii?Q?iY1cbOfs0+CfNDJafRuA9aAzIAXhNQrI07diS4zILe4omdKtE226a+pkxvtN?=
- =?us-ascii?Q?4Gv45XthL2Qz50V1Z0NY7vbXFM6oQOPC1gNvkLYyMGq0G+h6/pP86IZrsIG8?=
- =?us-ascii?Q?4e/F6sdejEVJ5Erx6AhhPRXAO7KjfIP0UfgiyC+EiWN1n3Qe1PpEfZ3IQbqB?=
- =?us-ascii?Q?aTGjGJU4hiDeK3QjioX3tP5EGiSaZSbrzHY5j9Fz6Ok20v27jFbN3V+wkGWB?=
- =?us-ascii?Q?S0iKIRtOqORPntHtk2RHJCyzhLu8Dmvr6HN6QJpf871zlDsyBZ0zKLIRKuns?=
- =?us-ascii?Q?JACdeFVfJ+MlVVnwEoDGt0hgmJ1omW6cvriFrJa7Fi9B52LGZ5JSBzJEnfNk?=
- =?us-ascii?Q?bYfM9bKfk0Lu3W83qWw0FQfKitg7mKdIE6++CzxRV8n2GEnZyCohQjDQ8Tdk?=
- =?us-ascii?Q?A/axOOlVXNOVIES+vRrMZ+X+u9rCa/o2N1dPNXT5VzZdw1mxGE9CxUDZdfzy?=
- =?us-ascii?Q?saafqH/GaGVkZQu0s+QeC409tROh5VfzAkaczpyOw3DSrKSzv9v+6ucbnZea?=
- =?us-ascii?Q?HI+2guNdfNtODNlPwDpZHCkrxyXTrQPzuw8CY0s9tDJ+V8fM8aAtnm+IIRy1?=
- =?us-ascii?Q?IlrETVCTUQLzg68i5cIeCsfjOe6Ze79ws+C6bvbtvAc4NNC01+6247qkemBC?=
- =?us-ascii?Q?gg1jl7vbNqUdL0P8eerLXuO1Ez7oCh0TjIq/oCMLiBbXmGpg8hkqcgv0bnen?=
- =?us-ascii?Q?/tm9ihlERJGEh2P+xBhGyyEidK+4qqMz9PP3uQw++cwdbh017+qAsJQNsUfO?=
- =?us-ascii?Q?nebskzbZXkv+3lgPAZ7h0KdKdY2BVdr+gnSdYeNND+2B4VYEcHVZz1oXmaFu?=
- =?us-ascii?Q?1ubM/ZtfZgR2swTNcfcC5LXYv/gf3vCbHiocKIl5hby/RzWVmBbHXJFwFV5f?=
- =?us-ascii?Q?axmDz1/Y8n7EHT22t0qNJsASy+nJep5jliAWcAjMccNZy7TeyJqofUuCn5Ls?=
- =?us-ascii?Q?aZjlXgG4ZzUpYGm7z/5/VsYWvW6gV9k3H5pyQC+8esuBuabsPnvgAVNg5B9B?=
- =?us-ascii?Q?S3+TaMA2ozEh9pTAvitNjohh1mvC0glcouEqLNVibWPbTO3qk3JJFus4YtWE?=
- =?us-ascii?Q?tiSCzO/SZjGBoxZNz+DdRTR78kYKhztspCeBq0wTbdhm+8HGzo/dm3biX43y?=
- =?us-ascii?Q?FLvaKOQo1QPov0O6xDFZP4edajIGbS8YzZe5bdOVlwspZ0hyFH+G6LzPwHrc?=
- =?us-ascii?Q?Y3oG8uMTQel60NXmYANkGDLULrqkS29Nqc0TS28ylwqd2JrznnvmLD0rvJQS?=
- =?us-ascii?Q?OXzXmgPC1/bAaXZP0cdrE45hvDeJrMTljL9DXVtRk8FwTp3OYb7gpNNHYJ9L?=
- =?us-ascii?Q?Cowkq7vI9l5IeqslCPX3noeP+CdvRJoKHJZXIKNUZ+fKbLQLOJSsPGmutqI2?=
- =?us-ascii?Q?vxdbEQBrXQ=3D=3D?=
-X-Exchange-RoutingPolicyChecked: SFsN3VMtDrawT8SI8Pr0OUPnXqv9fu0Fn8TSwaOTXvN9ua0M0+Nfk35bJiOGos2tRwHRhxJJhRCx3uT6uRPNknmaiI+LVSOsnfecxVC15VByD+QDwjLjpERyZoVl42AR5M6/YLqdN74OElOrXK4s19o/ESt2K8zIfV+RGjz8Matv5G8WFvGPZPobUloeLm4dg7XdFr3lQq4n5DmB9l+7FRk+80N/7UgZoTEXOwapaJU+8R4k67DSA8d00Q9MmOTgubLIcsQtj3YN1s+ROsCwdbIPG4pZ/wJq/SeaVkVK+SziI38+4qu0hiVLP6hnjFJ1AaHmtg7PkuuKXOT2ICVg9w==
-X-MS-Exchange-CrossTenant-Network-Message-Id: 40a1864e-59d3-4e49-c886-08dedbf4a97c
-X-MS-Exchange-CrossTenant-AuthSource: BN7PR11MB2836.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jul 2026 06:54:59.8563
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: /zLjSPHDJjzSPXlOTF1ZkcQ02BbkyRFAZfHXh8wolQr+XyIKD6C7bUs6BYM2jtTc/NIeto/rLPz2FHXUypLp0Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR11MB7660
-X-OriginatorOrg: intel.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 19/23] virt/steal_monitor: Provide default method to
+ get num of CPUs for steal ratio
+To: Yury Norov <ynorov@nvidia.com>
+Cc: linux-kernel@vger.kernel.org, mingo@kernel.org, peterz@infradead.org,
+        juri.lelli@redhat.com, vincent.guittot@linaro.org,
+        yury.norov@gmail.com, kprateek.nayak@amd.com, iii@linux.ibm.com,
+        corbet@lwn.net, tglx@kernel.org, gregkh@linuxfoundation.org,
+        pbonzini@redhat.com, seanjc@google.com, vschneid@redhat.com,
+        huschle@linux.ibm.com, rostedt@goodmis.org, dietmar.eggemann@arm.com,
+        maddy@linux.ibm.com, srikar@linux.ibm.com, hdanton@sina.com,
+        chleroy@kernel.org, vineeth@bitbyteword.org, frederic@kernel.org,
+        arighi@nvidia.com, pauld@redhat.com, christian.loehle@arm.com,
+        tj@kernel.org, tommaso.cucinotta@gmail.com, maz@kernel.org,
+        rafael@kernel.org, rdunlap@infradead.org, kernellwp@gmail.com,
+        linux-doc@vger.kernel.org
+References: <20260701141654.500125-1-sshegde@linux.ibm.com>
+ <20260701141654.500125-20-sshegde@linux.ibm.com> <akwBa4aXjsFkrMOh@yury>
+Content-Language: en-US
+From: Shrikanth Hegde <sshegde@linux.ibm.com>
+In-Reply-To: <akwBa4aXjsFkrMOh@yury>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-TM-AS-GCONF: 00
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-Authority-Analysis: v=2.4 cv=KsJ9H2WN c=1 sm=1 tr=0 ts=6a4ca303 cx=c_pps
+ a=5BHTudwdYE3Te8bg5FgnPg==:117 a=5BHTudwdYE3Te8bg5FgnPg==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=RnoormkPH1_aCDwRdu11:22 a=iQ6ETzBq9ecOQQE5vZCe:22 a=VnNF1IyMAAAA:8
+ a=YVLwSRtI9ssZgaGdXnAA:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA3MDA2NCBTYWx0ZWRfX5cMZvEUHENCM
+ qUg3kcPWX5++wG7lmaLHb2eWyiWeeJwHenEiKx05gDGkOSFZPdpy0PeLFT3G2S+ar4VV2ms/Nxb
+ oXQDioa+dMuP9JMSnd/p9Oga4VivljI=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA3MDA2NCBTYWx0ZWRfXw+uG+7wtkHi/
+ OBpncpmbgTlkV9FaBaGHOuNcVU5RhzYYo3LzEVJAeSp+VyBTrNgn3Uz91riLgtZl+VRglgc11NT
+ pZPsUuNcGznL0ZwQDis9xmAssBkCZdbKQzBQCOHJSIVnuGG3iZCp7FOU/sp8TsgYIGr8+hqUx0i
+ 2EOFJAqhZIOi88dmgOoaIwEm7vR52Kjv+9LSJaYuVZ0Ns6++CBVn6hu2V/QG28/uamQQlD1lX+f
+ YI/ZlD/so2Q5eqLK7StImWmtA5rkuq6+Mo2O8pkpP0ddrApQdUSt3zkA4aIgLLsRpDgIo1z2HL1
+ B39hGhppYVrxblxZ7InCa/a+B2BesMdUqCqXCpu6QegZVgHWuh1m/m2fKC68kcSyEQk1YiGc6LU
+ +jRBalPd/kuSAdpvIAmhUdiKunmx95JYaQmjBk4Y48rCw8oVMD6pRv4CkomhoRQAAaaT1i1qsov
+ pY8W/59/pHKZMtj+fyA==
+X-Proofpoint-ORIG-GUID: VFY5i8XSNdNAhLbIBWdYHDs1a1bJnWz-
+X-Proofpoint-GUID: Tt1IiWpMdcB_89ITNmuotV-lRRtBbShK
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-07_01,2026-07-06_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 malwarescore=0 spamscore=0 adultscore=0 clxscore=1015
+ suspectscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607070064
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.16 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,kernel.org:s:+];
-	ARC_REJECT(1.00)[cv is fail on i=2];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[ibm.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[ibm.com:s=pp1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
-	TAGGED_FROM(0.00)[bounces-95305-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:rick.p.edgecombe@intel.com,m:bp@alien8.de,m:dave.hansen@intel.com,m:hpa@zytor.com,m:kas@kernel.org,m:kvm@vger.kernel.org,m:linux-coco@lists.linux.dev,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:mingo@redhat.com,m:nik.borisov@suse.com,m:pbonzini@redhat.com,m:seanjc@google.com,m:tglx@kernel.org,m:vannapurve@google.com,m:x86@kernel.org,m:yan.y.zhao@intel.com,m:kai.huang@intel.com,m:kirill.shutemov@linux.intel.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[chao.gao@intel.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[34];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-95307-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:ynorov@nvidia.com,m:linux-kernel@vger.kernel.org,m:mingo@kernel.org,m:peterz@infradead.org,m:juri.lelli@redhat.com,m:vincent.guittot@linaro.org,m:yury.norov@gmail.com,m:kprateek.nayak@amd.com,m:iii@linux.ibm.com,m:corbet@lwn.net,m:tglx@kernel.org,m:gregkh@linuxfoundation.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:vschneid@redhat.com,m:huschle@linux.ibm.com,m:rostedt@goodmis.org,m:dietmar.eggemann@arm.com,m:maddy@linux.ibm.com,m:srikar@linux.ibm.com,m:hdanton@sina.com,m:chleroy@kernel.org,m:vineeth@bitbyteword.org,m:frederic@kernel.org,m:arighi@nvidia.com,m:pauld@redhat.com,m:christian.loehle@arm.com,m:tj@kernel.org,m:tommaso.cucinotta@gmail.com,m:maz@kernel.org,m:rafael@kernel.org,m:rdunlap@infradead.org,m:kernellwp@gmail.com,m:linux-doc@vger.kernel.org,m:yurynorov@gmail.com,m:tommasocucinotta@gmail.com,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,intel.com:from_mime,intel.com:email,intel.com:mid,intel.com:dkim];
+	FORGED_SENDER(0.00)[sshegde@linux.ibm.com,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,infradead.org,redhat.com,linaro.org,gmail.com,amd.com,linux.ibm.com,lwn.net,linuxfoundation.org,google.com,goodmis.org,arm.com,sina.com,bitbyteword.org,nvidia.com];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,linux.ibm.com:mid,linux.ibm.com:from_mime,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[chao.gao@intel.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[sshegde@linux.ibm.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+];
+	DKIM_TRACE(0.00)[ibm.com:+];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCVD_COUNT_SEVEN(0.00)[10]
+	RCVD_COUNT_SEVEN(0.00)[11]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 410117182C8
+X-Rspamd-Queue-Id: 0D0C47183DD
 
-On Mon, May 25, 2026 at 07:35:11PM -0700, Rick Edgecombe wrote:
->From: "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>
->
->Use control page helpers for allocating and freeing TD control structures,
->such these operations can work for Dynamic PAMT.
->
->The TDX module tracks some state for each page of physical memory that it
->might use. It calls this state the PAMT. It includes separate state for
->each page size a physical page could be utilized at within the TDX module
->(1GB, 2MB, 4KB). In Dynamic PAMT, only the 4KB page size state is
->allocated dynamically. So the kernel must install PAMT backing for each 4KB
->page before gifting it to the TDX module, and tear it down after the page
->is reclaimed.
->
->TD-scoped control pages (TDR, TDCS) and vCPU-scoped control pages (TDVPR,
->TDCX) are all handed to the TDX module at 4KB page size and are therefore
->subject to this requirement. Replace the raw alloc_page()/__free_page()
->calls for these pages with tdx_alloc/free_control_page().
->
->Switching between special Dynamic PAMT operations or normal page
->alloc/free operations is handled internally in
->tdx_alloc/free_control_page(). So don't check for Dynamic PAMT around these
->calls. Just call them unconditionally. Similarly, drop the NULL checks
->before freeing, as tdx_free_control_page() handles NULL internally.
->
->No functional change intended when Dynamic PAMT is not in use.
->
->Assisted-by: GitHub Copilot:claude-opus-4-6 Claude:claude-opus-4-7
->Signed-off-by: Kirill A. Shutemov <kirill.shutemov@linux.intel.com>
->[sean: handle alloc+free+reclaim in one patch]
->Co-developed-by: Sean Christopherson <seanjc@google.com>
->Signed-off-by: Sean Christopherson <seanjc@google.com>
->[Rick: enhance log]
->Signed-off-by: Rick Edgecombe <rick.p.edgecombe@intel.com>
 
-Reviewed-by: Chao Gao <chao.gao@intel.com>
+
+On 7/7/26 12:56 AM, Yury Norov wrote:
+> On Wed, Jul 01, 2026 at 07:46:50PM +0530, Shrikanth Hegde wrote:
+>> This method informs the steal_monitor core, how many CPUs it needs to
+>> consider for steal ratio calculations.
+>> steal_ratio = (delta_steal * 100 * 100) / (delta_ns * number_of_cpus);
+>>
+>> Default method returns number of Active CPUs since it calculates steal
+>> time across active CPUs.
+>>
+>> Signed-off-by: Shrikanth Hegde <sshegde@linux.ibm.com>
+>> ---
+>> v5->v6:
+>> - Add cpus_read_lock() for hotplug safety.
+>>
+>>   drivers/virt/steal_monitor/defaults.c | 11 +++++++++++
+>>   drivers/virt/steal_monitor/sm_core.h  |  1 +
+>>   2 files changed, 12 insertions(+)
+>>
+>> diff --git a/drivers/virt/steal_monitor/defaults.c b/drivers/virt/steal_monitor/defaults.c
+>> index 4e2e5b233948..70dcfb1ce4cb 100644
+>> --- a/drivers/virt/steal_monitor/defaults.c
+>> +++ b/drivers/virt/steal_monitor/defaults.c
+>> @@ -27,6 +27,17 @@ u64 __weak get_system_steal_time(void)
+>>   	return total_steal;
+>>   }
+>>   
+>> +/*
+>> + * Return number of CPUs to consider for steal ratio calculation
+>> + *
+>> + * Default returns number of active CPUs.
+>> + */
+>> +unsigned int __weak get_num_cpus_steal_ratio(void)
+>> +{
+>> +	guard(cpus_read_lock)();
+>> +	return num_active_cpus();
+>> +}
+> 
+> How is this lock supposed to work? When you exit the scope, you can be
+> interrupted and your caller will get outdated information.
+> 
+
+> The other callers of num_active_cpus() don't bother taking the lock.
+> 
+
+I am thinking i will switch to possible CPUs for steal ratio calculations.
+
+That way cumulative steal_values are monotonically increasing and safe against
+hotplug. That leaves the necessary for locks too.
+
+For the SUT it is okay since possible==active. In any systems where it is not,
+they have edit their default values a bit. Nothing else changes.
+
+
+>> +
+>>   /*
+>>    * Default implementation of decrementing the preferred CPUs based on steal
+>>    * time. This is simple logic and decrease the preferred CPUs by 1 core.
+>> diff --git a/drivers/virt/steal_monitor/sm_core.h b/drivers/virt/steal_monitor/sm_core.h
+>> index 030f6236c38e..794d3be04248 100644
+>> --- a/drivers/virt/steal_monitor/sm_core.h
+>> +++ b/drivers/virt/steal_monitor/sm_core.h
+>> @@ -26,6 +26,7 @@ struct steal_monitor {
+>>   extern struct steal_monitor sm_core_ctx;
+>>   
+>>   u64 get_system_steal_time(void);
+>> +unsigned int get_num_cpus_steal_ratio(void);
+>>   void increase_preferred_cpus(struct steal_monitor *ctx);
+>>   void decrease_preferred_cpus(struct steal_monitor *ctx);
+>>   
+>> -- 
+>> 2.47.3
+
 
