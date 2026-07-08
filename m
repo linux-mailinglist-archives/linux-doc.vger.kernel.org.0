@@ -1,166 +1,220 @@
-Return-Path: <linux-doc+bounces-95667-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95668-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id YHXiNSsWTmpVCwIAu9opvQ
-	(envelope-from <linux-doc+bounces-95667-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 11:19:39 +0200
+	id 6LOwKCUXTmrTCwIAu9opvQ
+	(envelope-from <linux-doc+bounces-95668-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 11:23:49 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61C17723962
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 11:19:39 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2427B723A7C
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 11:23:49 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=DFMxLuEi;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95667-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95667-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=LGjEPZee;
+	dkim=pass header.d=redhat.com header.s=google header.b=PoTPdlpW;
+	dmarc=pass (policy=quarantine) header.from=redhat.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95668-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95668-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 7D80F3067E57
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2026 09:15:17 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 520E730F0F9A
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2026 09:16:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4DD12409621;
-	Wed,  8 Jul 2026 09:15:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EF9B740913C;
+	Wed,  8 Jul 2026 09:16:10 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2257D40861C;
-	Wed,  8 Jul 2026 09:15:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 80A0D409127
+	for <linux-doc@vger.kernel.org>; Wed,  8 Jul 2026 09:16:09 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783502115; cv=none; b=jXckOTx/4QqondwWvg3sOpmukA0lehJEAdlVVGktku2/cDmmbcjrRMd5h4B3UI9ocpgVXtI2UEmjbsGKL6oXoh7NpcTdJzOqENJymYdCRze7irleLdO+4wS2E9sJxcrhyftL1oGuBGWbuRAZqQP+jMgEizFknpwtVLr0I4xun1E=
+	t=1783502170; cv=none; b=OqW2lKoKN92oc7yS+w9J8qe13LFj6XB6IM2cVjy4Z5ujDB2a3fnm4D3Z+sySDvShVcwc0wjy93lIeGesFzr8cg/KrA5JhzNWPy2b9nAdYkqElqM6c38BkSDuEzcSvZbXb/lm3Jn/0ETP/Dbuhh+DuhJ7PpWqRAYXOJB+004J+VQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783502115; c=relaxed/simple;
-	bh=SRkB/8NeU7bs34ctpapaBV36fJTXyPj0DgisaqC60Yo=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=ZtyWwbW0qDsOBt3OP5ruG5q+T1ilUK6BS3SCUDH5R3mglPTauZDs8ghqXcuQzJJ0Lilo0LT8yKlxfwgFuUvb2HrwRA3pcizqbYgsV0lVZBGrkKkZSC7uVvGG0pLt6KEinimw2A4Lx6EOlsOdmwmAVC8/gOdojltrhq3c0kLwAPQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DFMxLuEi; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D697D1F00A3A;
-	Wed,  8 Jul 2026 09:15:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783502113;
-	bh=QXKIkU3dsIb83LaNl9YeImi7A85K1dyuGPQma33N644=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date;
-	b=DFMxLuEi7KbiLxKOKr7+5tYyHQCk3JpHfb6tuRzE2WRkuMx1mPUf9jIugzEHb8/5x
-	 LO8Xyowg5mKltHMmbDOr+gi5tZvNMk+K5CLlhuwiVeBNQv3EKRcMCXRbA9wKg3qjXN
-	 yktK4sMH/4XosacPFHJ3cmJotsn19Buu9FUV++AMzk2yr3c1ztSf7A6xr+F2FPufYH
-	 7C4ovIQAnZoRC6G/Qa1C+7b0RWd5ohzlBHkaLFo1vS55Av8D6fJzCv3nFP2MI70JYw
-	 B1ItdudtjTbPFz/5q4TbBg2sVxB0g3L5dtrLprFMkBcrpN5g+UQIf8TbjYMP31tAm2
-	 nw7+qD9T59MIw==
-From: Thomas Gleixner <tglx@kernel.org>
-To: Jinjie Ruan <ruanjinjie@huawei.com>, LKML <linux-kernel@vger.kernel.org>
-Cc: Peter Zijlstra <peterz@infradead.org>, Mark Rutland
- <mark.rutland@arm.com>, Kees Cook <kees@kernel.org>, Andy Lutomirski
- <luto@kernel.org>, Oleg Nesterov <oleg@redhat.com>, Richard Henderson
- <richard.henderson@linaro.org>, Russell King <linux@armlinux.org.uk>,
- Catalin
- Marinas <catalin.marinas@arm.com>, Guo Ren <guoren@kernel.org>, Geert
- Uytterhoeven <geert@linux-m68k.org>, Thomas Bogendoerfer
- <tsbogend@alpha.franken.de>, Helge Deller <deller@gmx.de>, Yoshinori Sato
- <ysato@users.sourceforge.jp>, Richard Weinberger <richard@nod.at>, Chris
- Zankel <chris@zankel.net>, linux-arm-kernel@lists.infradead.org,
- linux-alpha@vger.kernel.org, linux-csky@vger.kernel.org,
- linux-m68k@lists.linux-m68k.org, linux-mips@vger.kernel.org,
- linux-parisc@vger.kernel.org, linux-sh@vger.kernel.org,
- linux-um@lists.infradead.org, Michael Ellerman <mpe@ellerman.id.au>,
- Shrikanth Hegde <sshegde@linux.ibm.com>, linuxppc-dev@lists.ozlabs.org,
- Huacai Chen <chenhuacai@kernel.org>, loongarch@lists.linux.dev, Paul
- Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
- linux-riscv@lists.infradead.org, Sven Schnelle <svens@linux.ibm.com>,
- linux-s390@vger.kernel.org, x86@kernel.org, Arnd Bergmann <arnd@arndb.de>,
- Vineet Gupta <vgupta@kernel.org>, Will Deacon <will@kernel.org>, Brian
- Cain <bcain@kernel.org>, Michal Simek <monstr@monstr.eu>, Dinh Nguyen
- <dinguyen@kernel.org>, "David S. Miller" <davem@davemloft.net>, Andreas
- Larsson <andreas@gaisler.com>, linux-snps-arc@lists.infradead.org,
- linux-hexagon@vger.kernel.org, linux-openrisc@vger.kernel.org,
- sparclinux@vger.kernel.org, linux-arch@vger.kernel.org, Michal
- =?utf-8?Q?Such=C3=A1nek?=
- <msuchanek@suse.de>, Jonathan Corbet <corbet@lwn.net>,
- linux-doc@vger.kernel.org
-Subject: Re: [patch 11/18] seccomp, treewide: Rename and convert
- __secure_computing() to return boolean
-In-Reply-To: <2e6ed364-ce8f-4b4b-8675-acd07f140f4f@huawei.com>
-References: <20260707181957.433213175@kernel.org>
- <20260707190254.230735780@kernel.org>
- <2e6ed364-ce8f-4b4b-8675-acd07f140f4f@huawei.com>
-Date: Wed, 08 Jul 2026 11:15:10 +0200
-Message-ID: <871pddsuzl.ffs@fw13>
+	s=arc-20240116; t=1783502170; c=relaxed/simple;
+	bh=sQOlJyYK7iAm5eS9zDGCitM6vWVm4bMYnRlB2QL6l8E=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=UY9ncJwX9kYvxkLHrOaXh5jiOs67zY7mSWEHjFBwDv3XeSDNnp1Eln/b1iJKUonIpR08k5FWkWoqw10QeWLVrayrztYxGLTpuaMAirmZQINCZzfGhV1c1R1dchAYHFsbZLLqPcSYdvAXukEp8twnWoz0+DQbly+QjhvWMsShp5U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=LGjEPZee; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=PoTPdlpW; arc=none smtp.client-ip=170.10.133.124
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1783502168;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=b4K/HdwkKVaSF1+rIVNyQiESO9vsDqggAz/6RtbS1nI=;
+	b=LGjEPZeemMuviSF8/bhZlfMQTgmkFE+YUdZqkODW5rQPn7C84+mM+ybu9UAzNSmVdnMRv9
+	XpuK55P/d2vf4Ku14X/yVVtM10YwR/GVrqogheNr2YMNq4EepfAfu99AbrLaI3VI6J5Cfv
+	O6oT1mSLsB6LyChaqjF0HflLVFJY+2E=
+Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
+ [209.85.218.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-230-_jvL1qJNMnS_ijoPufbe9A-1; Wed, 08 Jul 2026 05:16:07 -0400
+X-MC-Unique: _jvL1qJNMnS_ijoPufbe9A-1
+X-Mimecast-MFC-AGG-ID: _jvL1qJNMnS_ijoPufbe9A_1783502166
+Received: by mail-ej1-f70.google.com with SMTP id a640c23a62f3a-c15cec1ccb6so41586966b.1
+        for <linux-doc@vger.kernel.org>; Wed, 08 Jul 2026 02:16:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=redhat.com; s=google; t=1783502166; x=1784106966; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=b4K/HdwkKVaSF1+rIVNyQiESO9vsDqggAz/6RtbS1nI=;
+        b=PoTPdlpWkuUHRNm7Ix5YIE4eUzJMeeiOHmm5qyxDErRjPOaCyC0WPG0ikKKbTxIsc2
+         7/uPna9Ibuy/sK+WMbv+bZvg463MdRkWlrmtRy0s88APevASmVlSFrCGibNadHOj/jSQ
+         ghMVAGozWSjO3RhxTXzeFaee9IuI0c76tDhheKn+c33VTz7VHOsXChgl6dAcBjPzM9vm
+         39R6ZHFDDuJo+3Ypte1XFPlpPgn01PFKyYMTZ3fXoEFq7lqmcjetG8M4LVJriU1JLkli
+         89j+wjYNOs8SaIRTwfizG4mFLe3Sx4tp3yPBe298LpciCmJidDhE0FLYOUUhvAu4Xjcw
+         uMdg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783502166; x=1784106966;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=b4K/HdwkKVaSF1+rIVNyQiESO9vsDqggAz/6RtbS1nI=;
+        b=pYreqeEJRtkqvvbtHbr9ovL/cBXpAL2R7RkXRaHwRj3YFMcQpgda4HirATemE7YFoy
+         R3dF/KbmAnGfvIrUag3MpxL1PMH3dD3TfypHmW8H4Dirqdw7jQKj5CnFXAjssaLKGVgh
+         OySa9VQlojNh3D8UkPr++dpynLoVgrRilirRaApCcw236O32aIm49zk1Z1EVPLoQ4CHB
+         5iaE7RBkKshGrfupzPrlTTvtWdamRcMy79dQ9E44ptxuu7pHqzag8R8QY6jM9/vq2IFv
+         UAl1w55ync0ppnGOfgU6nx/XJZIdyLLbBgVNHFPUZz0tZX96mzGKraT2j47WJy8zQzXy
+         AKYQ==
+X-Forwarded-Encrypted: i=1; AHgh+RoGxSD0HAC2LdIcC5kWKDOV5XTkKcGFsukdWKNhGWCo9R867eCaqlv72JQWcA3J/F9wQdohSrcf1rI=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzbsThrMHo2eRrOEw1xjpFoJHo5wKoOy1BJDv0cNk+KM721jhrD
+	mi6J/OBsOnZZ8GoACzE9NTM8Z8bYIgVrCljiB9HwH2LBzd7ShPB0Zj4cV3RcIjLL22AlVl45DVf
+	8d4iRSn7+vVv9jaVeEYSQKk8MJJpRKEdS9gIpb1wi0r/r8+pR735uA2OhzCJmug==
+X-Gm-Gg: AfdE7cmagDN5JDmuPmk13Zn4GtnmBAH00XC+Gsdut/PVFyD7qrmS4EpZPar32b9PxfM
+	mf6KvAYkradwIvWceWXdey3B1dTLzc5SI+5WQ6nJUs38fD3EDsYwp1Z40xAxRxKzvKZSyLKmfqA
+	2cg38WcaP2itHCq6hrg5CYyoj1XXCZOLCaCVMPMUWeYLDra/NtT+XhrU/p7F+s1xuR7YEzgntiD
+	toF4Ld5iaDUy/ixtPO3+iJcvwMpEAHpKChJjT7+S6RwyyflL3zWK7mDxfum6WI+NO1WM4OZeNDX
+	yAaiu6bAz8Aryf08FoLMWefID2hsMZu8jXETAwZAlpL7hozIXafLUhDsith5eOhXkfRixmCnVyN
+	umJ7VEYGJxEQaf2XPSST4oP18Y0NpzW6g
+X-Received: by 2002:a17:907:1003:b0:c15:9709:fb9b with SMTP id a640c23a62f3a-c15ce0f880emr64102266b.44.1783502166172;
+        Wed, 08 Jul 2026 02:16:06 -0700 (PDT)
+X-Received: by 2002:a17:907:1003:b0:c15:9709:fb9b with SMTP id a640c23a62f3a-c15ce0f880emr64098866b.44.1783502165600;
+        Wed, 08 Jul 2026 02:16:05 -0700 (PDT)
+Received: from redhat.com (IGLD-80-230-68-31.inter.net.il. [80.230.68.31])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c15ad9bca25sm286808266b.35.2026.07.08.02.16.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 08 Jul 2026 02:16:04 -0700 (PDT)
+Date: Wed, 8 Jul 2026 05:16:00 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Lorenzo Stoakes <ljs@kernel.org>
+Cc: "David Hildenbrand (Arm)" <david@kernel.org>,
+	Sourav Panda <souravpanda@google.com>, muchun.song@linux.dev,
+	osalvador@suse.de, akpm@linux-foundation.org, liam@infradead.org,
+	vbabka@kernel.org, rppt@kernel.org, surenb@google.com,
+	mhocko@suse.com, mhklinux@outlook.com, fvdl@google.com,
+	gthelen@google.com, mike.kravetz@oracle.com,
+	pasha.tatashin@soleen.com, rientjes@google.com, riel@surriel.com,
+	linux-mm@kvack.org, linux-kernel@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [RFC PATCH 0/6] mm/hugetlb: Dynamic, NUMA-aware HugePage Cache &
+ Free Page Reporting
+Message-ID: <20260708050547-mutt-send-email-mst@kernel.org>
+References: <20260707064235.1386552-1-souravpanda@google.com>
+ <9624988a-366e-4884-9408-3f3b88c27290@kernel.org>
+ <20260707062428-mutt-send-email-mst@kernel.org>
+ <b9a48d89-74f1-43d4-b7bb-be988b6855c9@kernel.org>
+ <akzZr2jfJ0J8zox4@lucifer>
+ <20260707095843-mutt-send-email-mst@kernel.org>
+ <ak0xWgpJPSaNWPsl@lucifer>
+ <20260707152755-mutt-send-email-mst@kernel.org>
+ <f9bad4b3-93ee-4daf-84d5-97f6ca305240@kernel.org>
+ <ak4JiBcvi29sYx0v@lucifer>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ak4JiBcvi29sYx0v@lucifer>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-4.16 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [-1.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	MID_RHS_MATCH_TO(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-95667-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-95668-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[tglx@kernel.org,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[infradead.org,arm.com,kernel.org,redhat.com,linaro.org,armlinux.org.uk,linux-m68k.org,alpha.franken.de,gmx.de,users.sourceforge.jp,nod.at,zankel.net,lists.infradead.org,vger.kernel.org,lists.linux-m68k.org,ellerman.id.au,linux.ibm.com,lists.ozlabs.org,lists.linux.dev,dabbelt.com,arndb.de,monstr.eu,davemloft.net,gaisler.com,suse.de,lwn.net];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:ruanjinjie@huawei.com,m:linux-kernel@vger.kernel.org,m:peterz@infradead.org,m:mark.rutland@arm.com,m:kees@kernel.org,m:luto@kernel.org,m:oleg@redhat.com,m:richard.henderson@linaro.org,m:linux@armlinux.org.uk,m:catalin.marinas@arm.com,m:guoren@kernel.org,m:geert@linux-m68k.org,m:tsbogend@alpha.franken.de,m:deller@gmx.de,m:ysato@users.sourceforge.jp,m:richard@nod.at,m:chris@zankel.net,m:linux-arm-kernel@lists.infradead.org,m:linux-alpha@vger.kernel.org,m:linux-csky@vger.kernel.org,m:linux-m68k@lists.linux-m68k.org,m:linux-mips@vger.kernel.org,m:linux-parisc@vger.kernel.org,m:linux-sh@vger.kernel.org,m:linux-um@lists.infradead.org,m:mpe@ellerman.id.au,m:sshegde@linux.ibm.com,m:linuxppc-dev@lists.ozlabs.org,m:chenhuacai@kernel.org,m:loongarch@lists.linux.dev,m:pjw@kernel.org,m:palmer@dabbelt.com,m:linux-riscv@lists.infradead.org,m:svens@linux.ibm.com,m:linux-s390@vger.kernel.org,m:x86@kernel.org,m:arnd@arndb.de,m:vgupta@kernel.org,m:will@kernel.org,m:bcain@kern
- el.org,m:monstr@monstr.eu,m:dinguyen@kernel.org,m:davem@davemloft.net,m:andreas@gaisler.com,m:linux-snps-arc@lists.infradead.org,m:linux-hexagon@vger.kernel.org,m:linux-openrisc@vger.kernel.org,m:sparclinux@vger.kernel.org,m:linux-arch@vger.kernel.org,m:msuchanek@suse.de,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[52];
-	PRECEDENCE_BULK(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,google.com,linux.dev,suse.de,linux-foundation.org,infradead.org,suse.com,outlook.com,oracle.com,soleen.com,surriel.com,kvack.org,vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tglx@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FORGED_RECIPIENTS(0.00)[m:ljs@kernel.org,m:david@kernel.org,m:souravpanda@google.com,m:muchun.song@linux.dev,m:osalvador@suse.de,m:akpm@linux-foundation.org,m:liam@infradead.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:mhklinux@outlook.com,m:fvdl@google.com,m:gthelen@google.com,m:mike.kravetz@oracle.com,m:pasha.tatashin@soleen.com,m:rientjes@google.com,m:riel@surriel.com,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	FORGED_SENDER(0.00)[mst@redhat.com,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	DKIM_TRACE(0.00)[redhat.com:+];
+	MISSING_XM_UA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[mst@redhat.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,fw13:mid,vger.kernel.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 61C17723962
+X-Rspamd-Queue-Id: 2427B723A7C
 
-On Wed, Jul 08 2026 at 09:43, Jinjie Ruan wrote:
-> On 7/8/2026 3:06 AM, Thomas Gleixner wrote:
-> As Ada pointed out, the description of secure_computing in arch/Kconfig
-> need to be updated, a possible suggestion:
->
-> --- a/arch/Kconfig
-> +++ b/arch/Kconfig
-> @@ -636,8 +636,8 @@ config HAVE_ARCH_SECCOMP_FILTER
->           - syscall_rollback()
->           - syscall_set_return_value()
->           - SIGSYS siginfo_t support
-> -         - secure_computing is called from a ptrace_event()-safe context
-> -         - secure_computing return value is checked and a return value
-> of -1
-> +         - seccomp_permits_syscall is called from a ptrace_event()-safe
-> context
-> +         - seccomp_permits_syscall return value is checked and if false
+On Wed, Jul 08, 2026 at 09:26:18AM +0100, Lorenzo Stoakes wrote:
+> On Tue, Jul 07, 2026 at 09:46:14PM +0200, David Hildenbrand (Arm) wrote:
+> > On 7/7/26 21:32, Michael S. Tsirkin wrote:
+> > > On Tue, Jul 07, 2026 at 07:46:28PM +0100, Lorenzo Stoakes wrote:
+> > >> On Tue, Jul 07, 2026 at 10:01:55AM -0400, Michael S. Tsirkin wrote:
+> > >>>
+> > >>> Fair enough.
+> > >>>
+> > >>>
+> > >>> Lorenzo, do you know *how* you want it reworked? Could you write it up
+> > >>> at a high level?
+> > >>> Because if not, it's not really practical to make it the asking price.
+> > >>
+> > >> Michael, you're an experienced maintainer, I'm surprised I have to tell you that
+> > >> the burden for that lands on the submitter.
+> > >
+> > > Oh sure, "fix bugs A,B,C before you add to this mess" is a classic way
+> > > to actually not end up with even more of a mess.  But I usually do try
+> > > to be explicit of what are specific issues I want submitter to address.
+> > > I don't really feel figuring that out lands on the submitter.
+> >
+> > Sometimes it's certainly easier. With things like hugetlb there often just isn't
+> > a feasible way to integrate it nicely into core-mm. It's just too special.
+> 
+> Yeah exactly :) once you reach a certain level of 'specialness' it is more like
+> pointing at a flaming trash pile and crying ;)
+> 
+> >
+> > --
+> > Cheers,
+> >
+> > David
+> 
+> Cheers, Lorenzo
 
-Makes sense.
->>  		if (__seccomp_filter(this_syscall, true))
->> -			return -1;
->> +			return false;
->
-> The return value of __seccomp_filter is checked in the wrong way, check
-> -1 should be replaced with check false, maybe:
->
-> -               if (__seccomp_filter(this_syscall, true))
-> -                       return -1;
-> +               if (!__seccomp_filter(this_syscall, true))
-> +                       return false;
+Well as long as I'm not the one being asked to put it out ... it is just
+hard for me to get motivated to do cleanups if there's no actual bug to
+fix, or a feature to develop somewhat proportional in size to the
+cleanup.  But for example, and without calling anything trash, after poking
+at memory-failure.c, *I* want to cry, because either there's multiple
+races, or I just don't understand the code.  Some of these we discussed
+here already.
 
-Ooops.
+It seems to boil down to the fact that when people start getting lots of
+these errors they rush out and buy a new system, so hey. But maybe with
+RAM prices spiking it will become less practical. I'll put together an
+email with a list later, maybe.
+
+-- 
+MST
+
 
