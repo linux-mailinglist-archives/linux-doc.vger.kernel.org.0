@@ -1,206 +1,159 @@
-Return-Path: <linux-doc+bounces-95810-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95811-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 2TwLKS3GTmo6TwIAu9opvQ
-	(envelope-from <linux-doc+bounces-95810-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 23:50:37 +0200
+	id lE07GeXGTmpsTwIAu9opvQ
+	(envelope-from <linux-doc+bounces-95811-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 23:53:41 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5C7C72AA6B
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 23:50:36 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id F1E4172AAC2
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 23:53:40 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=google.com header.s=20251104 header.b=snlbuN0T;
-	dmarc=pass (policy=reject) header.from=google.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95810-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95810-lists+linux-doc=lfdr.de@vger.kernel.org";
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=LQXgoHnJ;
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95811-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95811-lists+linux-doc=lfdr.de@vger.kernel.org";
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 2FBB6302FC1C
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2026 21:49:08 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 100A3314036D
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2026 21:50:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A232D3F8714;
-	Wed,  8 Jul 2026 21:48:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B974B3FBB73;
+	Wed,  8 Jul 2026 21:50:06 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E06703F8248
-	for <linux-doc@vger.kernel.org>; Wed,  8 Jul 2026 21:48:48 +0000 (UTC)
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783547330; cv=pass; b=WnpUCYUOpjDoFnFQZZkp3s7FhhuR9wBeDBEqwdhrTpI40H5dv7Nvduy9Lbz2McHxEefDeI0kdqRxL66KjhNsHKxfSykc6g92VmVFmmqj9wfDDq2DAor1X6l1dzgYcn92p0YR1mvIxkXFiBSiM3g4e5niDnsz3wM3ILpVLky+R90=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783547330; c=relaxed/simple;
-	bh=NLMDF7I6FstMAQAeirtdi6wuSf+np5zuq01Umjpc8ow=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=obVHnW8/YoH+dxL1jf6KavFcS9Gq4t/z0OQIZ0pwA+7f8hchXlGQ2S+KNePlG9VlRvwPwp4g52t8BfAyMUWZNxSILs7UsTjlewS3GEOUZ2CgWS4uZaxDRl8GKqONiW6mmFrw+1uyL543w3Nof5Fdc3HMxLS4Q5LF7eIYv8dnSos=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=snlbuN0T; arc=pass smtp.client-ip=209.85.208.49
-Received: by mail-ed1-f49.google.com with SMTP id 4fb4d7f45d1cf-698b78c05b0so1849a12.1
-        for <linux-doc@vger.kernel.org>; Wed, 08 Jul 2026 14:48:48 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783547327; cv=none;
-        d=google.com; s=arc-20260327;
-        b=IX+FZdGty7ha78RcDC9MuK1f5p0pEm2GhVQ7FwQ6D+wvZtNbDiY8k+BHYFfxh0Y6MB
-         IZojjjJreDHj6BOpekaUfw84hHppC2lNdtW0ZsUWPlqJaUBOK0KdG+QZuvQ9aOEdBcYn
-         O4yNZFtXcUDn7/ZcMiWip8RECO512T12mFRPvLzjjQU9RPmxTq+6S1hcsmbO7vrZI9uL
-         AF3QPE4mWTLteQKW6vrJOONPObqkqxdIxwPEPi95RR+JAPXk/ZZbtKEhNNrXZt0muG38
-         1G+WYcIPek3nQEMDd1AsMFUMiD3Ppsjb43OHeSq5xilK7CjIBBujj4DsGH+Yjqcy3/U9
-         J3iA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=DKUZ0lFg17Mh7sHmvQEAtUOIrfiiXO1vlZnioYWzL2U=;
-        fh=kxUfw2gYvKYC86D39AJOFjMHxUF3dwcfgbki/p1uE5Q=;
-        b=GD9rWyJ0Yfxm6FNVVPtwCOKpSNNE8cJRMXtYK8cCmThooYeQB2cm/sikGrsf4tVIKa
-         ENIStVZeaPAicsnRdHemifQzp8hB/K9dRgAPSHOJJadvOxR4Y3EtTupK8dyJrWagwAs1
-         sTKH25WakoJWFTi4dRRGOiuPA52qhtqGP25ovaaDz08g5RApw7yqh1XeNBZAa0XIHHlB
-         RI+krgMVGav4ar1PElLB3en9MicTVQO/5y1RS7XfR4DngEjo3YViwWAZDbQAlqT78/YO
-         0ITQqMc9vWPc3N9/yGhMcoHn1QnI944zydYkzMeA4GALRABRsKLNudevWMyTsSzWsX4j
-         TCzA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1783547327; x=1784152127; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=DKUZ0lFg17Mh7sHmvQEAtUOIrfiiXO1vlZnioYWzL2U=;
-        b=snlbuN0T8wHaa3tJ6R7Fw8Fb5eUHt6G3EXUUvM5WAQORi5t7JPHtSIy5M92Ks3YRX3
-         uMkpvZ61V7xs8nrwJaKD9O+EV+SgKRBDa0zO7a4pjr8KfsRybkpAENjOPOuCR8VhB0Z9
-         YdqlK6dbq/Gnue3JmHc3zsG8ghahOfaiYS5ZuIgjcGbrYdkRSvxpV9lPpEuvxKmEsphD
-         Sa3G61FmTFDL7XZYUtqbh4TjLBb2mLbJRDwY3UtLR3/IvEhjusmf1j4BCRRb9Efjt4fC
-         ECbDQkacrWhg9+76fw/w/Pf24meRV/r7zjudYOtKmIhv95roFCjcpxMMUa3fAK2jhhih
-         qolw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783547327; x=1784152127;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=DKUZ0lFg17Mh7sHmvQEAtUOIrfiiXO1vlZnioYWzL2U=;
-        b=JNjZUNXKyvkFQ40gFAVYb4/Te+azWQCRCQ2gHJU7fXUa9J2PNUZbTlb9dWzbeOye8n
-         YSkqM02P72BIy0hvb84XHA/IJIuB4dSrqWY5Ar6FwnArgoXAjLE2GHqc3AoZUc7oyEAr
-         AR8X8pOmf/J0eqtlYLinxNbOOLX/UVkpWjeR1JOgeJ6YkjX7bVu/ZPkvSwVV0wF3OEey
-         9lazZN/v0SllFANWR/UYsyQhcDv3+dMiYFp77hu9OmxcubGqWn0OhlVU0Y4YGfSuLyCV
-         ReKJSuEtlm5cRT1FK2THWcYgc61cQXVh+y+B8yP1ThYlPleJoYxBy+8Gvln5D2mqnMy2
-         4xkQ==
-X-Forwarded-Encrypted: i=1; AHgh+RqjWEvtiJalJZ/i4JgZb6tz9HK4Een6bd5Kf2MK02PerqJ+MW/nPqTZaWgbvWCtERVf9rUyEYY+pCs=@vger.kernel.org
-X-Gm-Message-State: AOJu0YztC3MD6pab53Ez1RKcGOkoP2+0nTkjjthJg5gItZQ8nO4B3VtK
-	RoBV3q4I6gtlrzEpQjUvUJhHQTeqBLObOximBcwJ4fpCwK/ma2KxsoFFBwGDUQKikQdbNWTNZzt
-	80Q3Gv/loGz3Exx5fdfBSqX9sJEDRrHYJDHb+T5H4
-X-Gm-Gg: AfdE7cmb7sc/IFH3ItTLCj/Nd7wfINwCuCaXUAY8eC/z2LbaBh0+hfPiyGB2pj1cU5s
-	nILgpQ+0+nOdQaGnfk6T/8dF2FthnE8/jiA+Rf7bS/61oyNJ8U+Y8VCf6UCREHAuwGlJNK9zroO
-	BQS8zINp1ZPaU1Gdazn/t+a7Ukd2mIRBuNnlF+ry6Cg8i/Fz39xRccrliWQc25Fo/r2WniSIs1+
-	+XOGMPify/6rGEYxzD/QU3lWBf4+pmZnflqU4NMU8q2K7Pw3p6uMQrHweipDmKzBcfyrtZIFmvg
-	zizm9CXFvBn54ErRrBKqNsea87Gk+L7/4DWT8yr6YpZsAgCdG+59+Mu7u1Loq8DVRHx5
-X-Received: by 2002:a05:6402:2053:b0:69a:fb2d:e84b with SMTP id
- 4fb4d7f45d1cf-69bff1b2bacmr4833a12.9.1783547326726; Wed, 08 Jul 2026 14:48:46
- -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E06463F9A1E;
+	Wed,  8 Jul 2026 21:50:01 +0000 (UTC)
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783547406; cv=none; b=Kj3fWai445s1Y4tEA3LBqO8D1jow3pu23e22ZXiatR/sVdwtgRHCUsSwzT7CFCOBrdwebjwrvtdd2tLZ+gYcHOQ8ZE9JfaJoBGdC9fMliIS0l9Ssf3c9GQzI5mKc4ahqVpcjIrv9YBXQBI8Hal6nif9ekdnwTMTfc3gIlKQNwG4=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783547406; c=relaxed/simple;
+	bh=+8HfgLZyui7wCYW/Esm1C88V5zrlYiIi+6nE0VLErnM=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=TlTd8oVHLKLU/jH5bP39NifbuZIucWhHnvizTrovnrv6TpdX1Auq/dylfK0DyeHCuiflVqObPVzx+Oen/bjwmJ7n09IZ+VLwOxobCNeyfinM+j+KyjKgdh2H1hYsDINW+uGIy65T0finQnH36zt7R/lDEKgKK+DxcF/EQbvfVnk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LQXgoHnJ; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C6ADD1F000E9;
+	Wed,  8 Jul 2026 21:49:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783547400;
+	bh=vmuHxwYgqm1gQOMh7c/wvEC96VXO05kzD/lM2vW9atQ=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date;
+	b=LQXgoHnJBN1jyue5u35c/dE+tvbdFa3zUViq7zqGblJh/ZruG6J0COcocKehdLFfd
+	 4xXw/bCoVIbrdpJZ1yxvDgT9U95yzkk950wT9I897knLqsLOwWpBR6zC0Wl0OmKtGN
+	 qA7xvyVuCxc36Uggfu07lBhQDGgG4EE5F0SW1Nvv4sJgy854Xef255mh0e3TvqBF2r
+	 SBr4Ish5mjPGiV3ozZVjDpPopq53Klt37AdVF1ulSRh47ns0ya3XPMuPgRNdRIF3jm
+	 1AeWmFDRhRZWLT6auHwI3KvNlkgzOBPY9SYSho4DzEN/jTu7kl2ls2cvpTtmqLBfh9
+	 CtbtIsoeAAukg==
+From: Thomas Gleixner <tglx@kernel.org>
+To: Oleg Nesterov <oleg@redhat.com>
+Cc: Jinjie Ruan <ruanjinjie@huawei.com>, LKML
+ <linux-kernel@vger.kernel.org>, Peter Zijlstra <peterz@infradead.org>,
+ Mark Rutland <mark.rutland@arm.com>, Kees Cook <kees@kernel.org>, Andy
+ Lutomirski <luto@kernel.org>, Richard Henderson
+ <richard.henderson@linaro.org>, Russell King <linux@armlinux.org.uk>,
+ Catalin Marinas <catalin.marinas@arm.com>, Guo Ren <guoren@kernel.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>, Thomas Bogendoerfer
+ <tsbogend@alpha.franken.de>, Helge Deller <deller@gmx.de>, Yoshinori Sato
+ <ysato@users.sourceforge.jp>, Richard Weinberger <richard@nod.at>, Chris
+ Zankel <chris@zankel.net>, linux-arm-kernel@lists.infradead.org,
+ linux-alpha@vger.kernel.org, linux-csky@vger.kernel.org,
+ linux-m68k@lists.linux-m68k.org, linux-mips@vger.kernel.org,
+ linux-parisc@vger.kernel.org, linux-sh@vger.kernel.org,
+ linux-um@lists.infradead.org, Michael Ellerman <mpe@ellerman.id.au>,
+ Shrikanth Hegde <sshegde@linux.ibm.com>, linuxppc-dev@lists.ozlabs.org,
+ Huacai Chen <chenhuacai@kernel.org>, loongarch@lists.linux.dev, Paul
+ Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+ linux-riscv@lists.infradead.org, Sven Schnelle <svens@linux.ibm.com>,
+ linux-s390@vger.kernel.org, x86@kernel.org, Arnd Bergmann <arnd@arndb.de>,
+ Vineet Gupta <vgupta@kernel.org>, Will Deacon <will@kernel.org>, Brian
+ Cain <bcain@kernel.org>, Michal Simek <monstr@monstr.eu>, Dinh Nguyen
+ <dinguyen@kernel.org>, "David S. Miller" <davem@davemloft.net>, Andreas
+ Larsson <andreas@gaisler.com>, linux-snps-arc@lists.infradead.org,
+ linux-hexagon@vger.kernel.org, linux-openrisc@vger.kernel.org,
+ sparclinux@vger.kernel.org, linux-arch@vger.kernel.org, Michal
+ =?utf-8?Q?Such=C3=A1nek?=
+ <msuchanek@suse.de>, Jonathan Corbet <corbet@lwn.net>,
+ linux-doc@vger.kernel.org
+Subject: Re: [patch 11/18] seccomp, treewide: Rename and convert
+ __secure_computing() to return boolean
+In-Reply-To: <ak51A77h1YRIl5tz@redhat.com>
+References: <20260707181957.433213175@kernel.org>
+ <20260707190254.230735780@kernel.org>
+ <2e6ed364-ce8f-4b4b-8675-acd07f140f4f@huawei.com> <871pddsuzl.ffs@fw13>
+ <ak51A77h1YRIl5tz@redhat.com>
+Date: Wed, 08 Jul 2026 23:49:57 +0200
+Message-ID: <87pl0xqhh6.ffs@fw13>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260707210336.2060040-1-mic@digikod.net>
-In-Reply-To: <20260707210336.2060040-1-mic@digikod.net>
-From: Jann Horn <jannh@google.com>
-Date: Wed, 8 Jul 2026 23:48:09 +0200
-X-Gm-Features: AVVi8Cd70VXTPmi6Yd7YJ6QWdP__iVuKDOVFxgYsM6z5t2MksbTZvyWjknkN4Wk
-Message-ID: <CAG48ez3ywK8FZ-TZFzp1GwiW6Wb+DeO3OFt3Ys4QAeGTS0jv6g@mail.gmail.com>
-Subject: Re: [PATCH v1] landlock: Document the threat model
-To: =?UTF-8?B?TWlja2HDq2wgU2FsYcO8bg==?= <mic@digikod.net>
-Cc: =?UTF-8?Q?G=C3=BCnther_Noack?= <gnoack@google.com>, 
-	Bryam Vargas <hexlabsecurity@proton.me>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Jens Axboe <axboe@kernel.dk>, Jonathan Corbet <corbet@lwn.net>, Justin Suess <utilityemal77@gmail.com>, 
-	Konstantin Meskhidze <konstantin.meskhidze@huawei.com>, Leon Romanovsky <leon@kernel.org>, 
-	Matthieu Buffet <matthieu@buffet.re>, Mikhail Ivanov <ivanov.mikhail1@huawei-partners.com>, 
-	Nicolas Bouchinet <nicolas.bouchinet@oss.cyber.gouv.fr>, Paul Moore <paul@paul-moore.com>, 
-	Shuah Khan <skhan@linuxfoundation.org>, Tingmao Wang <m@maowtm.org>, 
-	Ubisectech Sirius <bugreport@ubisectech.com>, Willy Tarreau <w@1wt.eu>, 
-	Yuxian Mao <maoyuxian@cqsoftware.com.cn>, kernel-team@cloudflare.com, 
-	landlock@lists.linux.dev, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-security-module@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+X-Spamd-Result: default: False [-4.16 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:mic@digikod.net,m:gnoack@google.com,m:hexlabsecurity@proton.me,m:gregkh@linuxfoundation.org,m:axboe@kernel.dk,m:corbet@lwn.net,m:utilityemal77@gmail.com,m:konstantin.meskhidze@huawei.com,m:leon@kernel.org,m:matthieu@buffet.re,m:ivanov.mikhail1@huawei-partners.com,m:nicolas.bouchinet@oss.cyber.gouv.fr,m:paul@paul-moore.com,m:skhan@linuxfoundation.org,m:m@maowtm.org,m:bugreport@ubisectech.com,m:w@1wt.eu,m:maoyuxian@cqsoftware.com.cn,m:kernel-team@cloudflare.com,m:landlock@lists.linux.dev,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-security-module@vger.kernel.org,s:lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-95810-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[jannh@google.com,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-95811-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[google.com,proton.me,linuxfoundation.org,kernel.dk,lwn.net,gmail.com,huawei.com,kernel.org,buffet.re,huawei-partners.com,oss.cyber.gouv.fr,paul-moore.com,maowtm.org,ubisectech.com,1wt.eu,cqsoftware.com.cn,cloudflare.com,lists.linux.dev,vger.kernel.org];
+	FORGED_SENDER(0.00)[tglx@kernel.org,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[huawei.com,vger.kernel.org,infradead.org,arm.com,kernel.org,linaro.org,armlinux.org.uk,linux-m68k.org,alpha.franken.de,gmx.de,users.sourceforge.jp,nod.at,zankel.net,lists.infradead.org,lists.linux-m68k.org,ellerman.id.au,linux.ibm.com,lists.ozlabs.org,lists.linux.dev,dabbelt.com,arndb.de,monstr.eu,davemloft.net,gaisler.com,suse.de,lwn.net];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:oleg@redhat.com,m:ruanjinjie@huawei.com,m:linux-kernel@vger.kernel.org,m:peterz@infradead.org,m:mark.rutland@arm.com,m:kees@kernel.org,m:luto@kernel.org,m:richard.henderson@linaro.org,m:linux@armlinux.org.uk,m:catalin.marinas@arm.com,m:guoren@kernel.org,m:geert@linux-m68k.org,m:tsbogend@alpha.franken.de,m:deller@gmx.de,m:ysato@users.sourceforge.jp,m:richard@nod.at,m:chris@zankel.net,m:linux-arm-kernel@lists.infradead.org,m:linux-alpha@vger.kernel.org,m:linux-csky@vger.kernel.org,m:linux-m68k@lists.linux-m68k.org,m:linux-mips@vger.kernel.org,m:linux-parisc@vger.kernel.org,m:linux-sh@vger.kernel.org,m:linux-um@lists.infradead.org,m:mpe@ellerman.id.au,m:sshegde@linux.ibm.com,m:linuxppc-dev@lists.ozlabs.org,m:chenhuacai@kernel.org,m:loongarch@lists.linux.dev,m:pjw@kernel.org,m:palmer@dabbelt.com,m:linux-riscv@lists.infradead.org,m:svens@linux.ibm.com,m:linux-s390@vger.kernel.org,m:x86@kernel.org,m:arnd@arndb.de,m:vgupta@kernel.org,m:will@kernel.org,m:bcain@kern
+ el.org,m:monstr@monstr.eu,m:dinguyen@kernel.org,m:davem@davemloft.net,m:andreas@gaisler.com,m:linux-snps-arc@lists.infradead.org,m:linux-hexagon@vger.kernel.org,m:linux-openrisc@vger.kernel.org,m:sparclinux@vger.kernel.org,m:linux-arch@vger.kernel.org,m:msuchanek@suse.de,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[52];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jannh@google.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[google.com:+];
+	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[tglx@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,mail.gmail.com:mid,vger.kernel.org:from_smtp,digikod.net:email]
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,fw13:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: A5C7C72AA6B
+X-Rspamd-Queue-Id: F1E4172AAC2
 
-On Tue, Jul 7, 2026 at 11:03=E2=80=AFPM Micka=C3=ABl Sala=C3=BCn <mic@digik=
-od.net> wrote:
-> +Sandboxing is layered
-> +---------------------
-> +
-> +Landlock is the access-control layer of a sandbox, not the whole sandbox=
-.  A
-> +robust sandbox also needs steps that are the program's responsibility: s=
-witching
-> +to an unprivileged user, dropping capabilities, setting ``PR_SET_NO_NEW_=
-PRIVS``,
-> +and confining all threads of the process with the same domain.  A
-> +single-threaded process gets the latter for free; a multithreaded one ca=
-n
-> +enforce a ruleset atomically on all its threads, or must otherwise synch=
-ronize
-> +them before any untrusted work.  Landlock is typically applied last, to =
-tighten
-> +access and make the domain identifiable and auditable.
-> +
-> +Stronger isolation can come from combining Landlock with other mechanism=
-s in a
-> +defense-in-depth approach, notably seccomp-bpf (see
-> +Documentation/userspace-api/seccomp_filter.rst) for what Landlock does n=
-ot yet
-> +cover.  A long-term goal of Landlock is to control access to any kind of=
- kernel
-> +resource in a way suited to sandboxing.
+On Wed, Jul 08 2026 at 18:04, Oleg Nesterov wrote:
+> On 07/08, Thomas Gleixner wrote:
+>>
+>> On Wed, Jul 08 2026 at 09:43, Jinjie Ruan wrote:
+>> >
+>> > The return value of __seccomp_filter is checked in the wrong way, check
+>> > -1 should be replaced with check false, maybe:
+>> >
+>> > -               if (__seccomp_filter(this_syscall, true))
+>> > -                       return -1;
+>> > +               if (!__seccomp_filter(this_syscall, true))
+>> > +                       return false;
+>
+> Or simply
+>
+> 	return __seccomp_filter(this_syscall, true);
+>
+> and remove "return true" below ?
 
-I think this part is something that should go near the top of the
-document, and should have a title like "How to securely use landlock"
-- most of the document is focused on telling kernel developers or
-security researchers what the boundaries of the threat model are, but
-I think it is also important (and maybe even more important) to
-present this from the perspective of "if I want to design a sandbox
-using landlock, what do I need to pay attention to".
+Duh. Obvious now that you point it out :)
 
-I think it would also make sense to give more specific guidance on
-which sets of syscalls, with what argument restrictions, can be
-permitted in a seccomp policy because landlock covers any accesses
-that these syscalls can perform to objects to which the process
-doesn't already hold file descriptors or such.
-I think it would be helpful to have instructions like "you can safely
-allow socket operations if you ensure that socket creation (socket())
-only works for AF_UNIX, and that the process has no existing socket
-file descriptors for non-covered socket types, and you have fs_access
-rules, and the kernel is sufficiently recent".
+> Either way, I personally like this change, I was always confused by these -1's.
+
+Welcome to the club!
 
