@@ -1,205 +1,165 @@
-Return-Path: <linux-doc+bounces-95764-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95766-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id CWxrGs6HTmrWOgIAu9opvQ
-	(envelope-from <linux-doc+bounces-95764-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 19:24:30 +0200
+	id 0SxwCSKJTmqGOwIAu9opvQ
+	(envelope-from <linux-doc+bounces-95766-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 19:30:10 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id F30CD729278
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 19:24:29 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8368C72938D
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 19:30:09 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=IYPtHZOU;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95764-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95764-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=rendec.net header.s=default header.b=MwinUj84;
+	dmarc=pass (policy=reject) header.from=rendec.net;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95766-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-95766-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id D90EE30881A4
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2026 17:13:09 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id BDC7730719FF
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2026 17:23:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D49564CA270;
-	Wed,  8 Jul 2026 17:12:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 430643BB12E;
+	Wed,  8 Jul 2026 17:23:47 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mail.mindbit.ro (xs1.mindbit.ro [80.86.107.70])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 94A0B4C955C;
-	Wed,  8 Jul 2026 17:12:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D9BA7423142;
+	Wed,  8 Jul 2026 17:23:43 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783530757; cv=none; b=cLSeQWE4hwzNlyOU54Q/pHglhKmt7POFhwGrdrE9rhVexYrPX8Ea7T0wTXG/nT8w0Ei9gSKebPYjees87LwtTogSJKfvlOl+O+hzdDTk35286W6mpnzsSX9hryfvSq95OOqqoJcCodCXIrlECrdcRniO5ShkJTOxnUWt580YN90=
+	t=1783531427; cv=none; b=fxH8cldDHZ2J+6U6UuC12FwBl/8w5AZNzm/ewymhoUSjZtyb/S9uqmpTaDcOO5Hf11YX9fSmPJsxaaFmVw+NKpHb/op9BTzhuAHfPegkjN2xokvOtmtqEuFPcouIyyw923ntWuDKfcJioH1KgvulexJQhZTG3qtjNqVICObLNOc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783530757; c=relaxed/simple;
-	bh=tO65MYkXi3aUKw0XR3bn0/mIiIMrnwfj1GuESNTstxw=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=hGXc4AtJKpeHUd5Rzf0Ca1Edxb+HaoszZyN9KtEZe74B62xJ+XdR45NEpStezTI1CMMG1OVevWkgkMw4G6Vgg+jx/YJx2MUYiCsfkp5AzcmehDGV5yx3FfXjCyYgsgaLiGwiPiHBCet7x6qML8x1yjAOQgH6m5ISKk65hg+Sark=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IYPtHZOU; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 6A453C2BCFB;
-	Wed,  8 Jul 2026 17:12:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1783530757;
-	bh=tO65MYkXi3aUKw0XR3bn0/mIiIMrnwfj1GuESNTstxw=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=IYPtHZOUIn9NsZ8kB9eWUu4fjXeGRcJBpNS9RNz35q3dB/B0+hgCKFzgHlkhORo8Z
-	 6x+2MG7iLkBlPSzgZrsLO6aHe0JLbg8BOcBUXp+SllHnigGtJEc5YdgO0X1tMzda3K
-	 Ti9q4WFkYcZsMPIZQ56lWbShAf7e5L8CL8PMt/mcw+x7z9nk1Qb2OeGFCHCrKfVpNc
-	 E9ejq+trpEqy4qQflnPnCNnz8sehOGwpnM2ceB+b657x67nXMXFiOMsdZw9YgTNf4Y
-	 LPl0oBmBF4yxmslUw+y5ysH/ZVa3/9F62qk+OYiCkvks5SydVaSiutp//QWncptIiQ
-	 zQmz5C+MVARTg==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 50A3CC44507;
-	Wed,  8 Jul 2026 17:12:37 +0000 (UTC)
-From: Selvamani Rajagopal via B4 Relay <devnull+Selvamani.Rajagopal.onsemi.com@kernel.org>
-Date: Wed, 08 Jul 2026 10:12:45 -0700
-Subject: [PATCH net-next v7 15/15] onsemi: s2500: Added selftest support to
- onsemi's S2500 driver
+	s=arc-20240116; t=1783531427; c=relaxed/simple;
+	bh=2FwtfvgYnqfApEQzRk2DFogg7eg5G8hQUvc99OfH2ig=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=b84SP7LnmZcj0+jcfb0cw9vrmMWRLuZLnB0EYoTvn7/D96LnTgNWcHIAdHnoCn34FVCLV/L0Ta6yE4VIHBuRq2KRS3HMFdZ6jSDVv2faCNhMYA++jS8aUxw7Dv2DygkLMHlA1Z5Nw3Y7NPTXkXHa8OB08DRg+LH8S0kidtg8Qas=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=rendec.net; spf=pass smtp.mailfrom=rendec.net; dkim=pass (2048-bit key) header.d=rendec.net header.i=@rendec.net header.b=MwinUj84; arc=none smtp.client-ip=80.86.107.70
+Received: from bat.kanata.rendec.net (unknown [24.114.111.125])
+	by mail.mindbit.ro (Postfix) with ESMTPSA id C6722C2A01;
+	Wed,  8 Jul 2026 20:23:07 +0300 (EEST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.mindbit.ro C6722C2A01
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rendec.net;
+	s=default; t=1783531415;
+	bh=Z81AqF8sZ0HbKd4OyTLskHjABuyT0Tc0putXPru6w9M=;
+	h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
+	b=MwinUj84iH00nexlmnhmDgR8X+WQik+DrvADedzcPZ9CeQY6xX1Fx3GoyEAx9wrw+
+	 Qdscs2HlxOLAQsUWmM9C8f5DrkHkoVgKYwJs+XQ2tFPd5t4en+6vUqgSLYxSBdIwBj
+	 555LvdKRH7m1aCTa5jMD6siDGQdvrKp961ZSe90G1chGvdgdtY0LoAvKa+i9v8wU5c
+	 bWRF7OLablSVqprq4HLnjHYPD0Doh6wC1fnDaN+ZveYxw8RUEs8Ut6dFJfZDIKl5We
+	 w78c65fWXzE8Q1+/ZRaJSLn4ncOl+TKAdXUve5QtEGG7DQ85WMF0AHi0oAnduE4Xgt
+	 l68qBKty9jNkA==
+Message-ID: <4614d1281cace737e3e117bd7242253475a30f58.camel@rendec.net>
+Subject: Re: [patch 01/18] powerpc: Move stack randomization after
+ syscall_enter_from_user_mode()
+From: Radu Rendec <radu@rendec.net>
+To: Thomas Gleixner <tglx@kernel.org>, LKML <linux-kernel@vger.kernel.org>
+Cc: Peter Zijlstra <peterz@infradead.org>, Michael Ellerman
+ <mpe@ellerman.id.au>,  Shrikanth Hegde <sshegde@linux.ibm.com>,
+ linuxppc-dev@lists.ozlabs.org, Kees Cook <kees@kernel.org>, Huacai Chen	
+ <chenhuacai@kernel.org>, loongarch@lists.linux.dev, Paul Walmsley
+ <pjw@kernel.org>,  Palmer Dabbelt <palmer@dabbelt.com>,
+ linux-riscv@lists.infradead.org, Sven Schnelle <svens@linux.ibm.com>, 
+	linux-s390@vger.kernel.org, x86@kernel.org, Mark Rutland
+ <mark.rutland@arm.com>,  Jinjie Ruan <ruanjinjie@huawei.com>, Andy
+ Lutomirski <luto@kernel.org>, Oleg Nesterov <oleg@redhat.com>,  Richard
+ Henderson <richard.henderson@linaro.org>, Russell King
+ <linux@armlinux.org.uk>, Catalin Marinas	 <catalin.marinas@arm.com>, Guo
+ Ren <guoren@kernel.org>, Geert Uytterhoeven	 <geert@linux-m68k.org>, Thomas
+ Bogendoerfer <tsbogend@alpha.franken.de>,  Helge Deller	 <deller@gmx.de>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>, Richard Weinberger
+ <richard@nod.at>, Chris Zankel <chris@zankel.net>,
+ linux-arm-kernel@lists.infradead.org, 	linux-alpha@vger.kernel.org,
+ linux-csky@vger.kernel.org, 	linux-m68k@lists.linux-m68k.org,
+ linux-mips@vger.kernel.org, 	linux-parisc@vger.kernel.org,
+ linux-sh@vger.kernel.org, 	linux-um@lists.infradead.org, Arnd Bergmann
+ <arnd@arndb.de>, Vineet Gupta	 <vgupta@kernel.org>, Will Deacon
+ <will@kernel.org>, Brian Cain <bcain@kernel.org>,  Michal Simek
+ <monstr@monstr.eu>, Dinh Nguyen <dinguyen@kernel.org>, "David S. Miller"
+ <davem@davemloft.net>,  Andreas Larsson <andreas@gaisler.com>,
+ linux-snps-arc@lists.infradead.org, linux-hexagon@vger.kernel.org, 
+	linux-openrisc@vger.kernel.org, sparclinux@vger.kernel.org, 
+	linux-arch@vger.kernel.org, Michal =?ISO-8859-1?Q?Such=E1nek?=	
+ <msuchanek@suse.de>, Jonathan Corbet <corbet@lwn.net>, 
+	linux-doc@vger.kernel.org
+Date: Wed, 08 Jul 2026 13:22:58 -0400
+In-Reply-To: <20260707190253.718191130@kernel.org>
+References: <20260707181957.433213175@kernel.org>
+	 <20260707190253.718191130@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.58.3 (3.58.3-1.fc43) 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260708-s2500-mac-phy-support-v7-15-478c877aa1a9@onsemi.com>
-References: <20260708-s2500-mac-phy-support-v7-0-478c877aa1a9@onsemi.com>
-In-Reply-To: <20260708-s2500-mac-phy-support-v7-0-478c877aa1a9@onsemi.com>
-To: Andrew Lunn <andrew@lunn.ch>, 
- Piergiorgio Beruto <pier.beruto@onsemi.com>, 
- Heiner Kallweit <hkallweit1@gmail.com>, 
- Russell King <linux@armlinux.org.uk>, 
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
- Andrew Lunn <andrew+netdev@lunn.ch>, 
- Parthiban Veerasooran <parthiban.veerasooran@microchip.com>, 
- Selva Rajagopal <selvamani.rajagopal@onsemi.com>, 
- Richard Cochran <richardcochran@gmail.com>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Simon Horman <horms@kernel.org>, 
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>
-Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-doc@vger.kernel.org, 
- Jerry Ray <jerry.ray@microchip.com>, 
- Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
-X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1783530757; l=1904;
- i=Selvamani.Rajagopal@onsemi.com; s=20260531; h=from:subject:message-id;
- bh=2F0qNA75xdPACjyZAhDG2bEj0CghDHnrBQqxbAXox/w=;
- b=34FcZ5aLfX7qa4rp2Rj7EI5IE2MOkVn3CLe9AGFEiu0AdYthBE2JsX0rGbVm51XqFZj7DjrRM
- HSlw9tT8Q9uDmIA0gwJ7qEceF6yA9l8DUtGztD3Fb8uqChXPSjcwlcq
-X-Developer-Key: i=Selvamani.Rajagopal@onsemi.com; a=ed25519;
- pk=5QRdM0HS/LGWWcUZZ9hVfZ+qbPQGZCumcTXOiN7Fyug=
-X-Endpoint-Received: by B4 Relay for
- Selvamani.Rajagopal@onsemi.com/20260531 with auth_id=803
-X-Original-From: Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
-Reply-To: Selvamani.Rajagopal@onsemi.com
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.66 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[rendec.net,reject];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[rendec.net:s=default];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-95766-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-95764-lists,linux-doc=lfdr.de,Selvamani.Rajagopal.onsemi.com];
-	FORGED_RECIPIENTS(0.00)[m:andrew@lunn.ch,m:pier.beruto@onsemi.com,m:hkallweit1@gmail.com,m:linux@armlinux.org.uk,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:andrew+netdev@lunn.ch,m:parthiban.veerasooran@microchip.com,m:selvamani.rajagopal@onsemi.com,m:richardcochran@gmail.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:netdev@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jerry.ray@microchip.com,m:Selvamani.Rajagopal@onsemi.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
-	FREEMAIL_TO(0.00)[lunn.ch,onsemi.com,gmail.com,armlinux.org.uk,davemloft.net,google.com,kernel.org,redhat.com,microchip.com,lwn.net,linuxfoundation.org];
-	FORGED_SENDER(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
-	FORWARDED(0.00)[lists@lfdr.de];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[24];
-	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[infradead.org,ellerman.id.au,linux.ibm.com,lists.ozlabs.org,kernel.org,lists.linux.dev,dabbelt.com,lists.infradead.org,vger.kernel.org,arm.com,huawei.com,redhat.com,linaro.org,armlinux.org.uk,linux-m68k.org,alpha.franken.de,gmx.de,users.sourceforge.jp,nod.at,zankel.net,lists.linux-m68k.org,arndb.de,monstr.eu,davemloft.net,gaisler.com,suse.de,lwn.net];
 	FROM_HAS_DN(0.00)[];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	HAS_REPLYTO(0.00)[Selvamani.Rajagopal@onsemi.com];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:tglx@kernel.org,m:linux-kernel@vger.kernel.org,m:peterz@infradead.org,m:mpe@ellerman.id.au,m:sshegde@linux.ibm.com,m:linuxppc-dev@lists.ozlabs.org,m:kees@kernel.org,m:chenhuacai@kernel.org,m:loongarch@lists.linux.dev,m:pjw@kernel.org,m:palmer@dabbelt.com,m:linux-riscv@lists.infradead.org,m:svens@linux.ibm.com,m:linux-s390@vger.kernel.org,m:x86@kernel.org,m:mark.rutland@arm.com,m:ruanjinjie@huawei.com,m:luto@kernel.org,m:oleg@redhat.com,m:richard.henderson@linaro.org,m:linux@armlinux.org.uk,m:catalin.marinas@arm.com,m:guoren@kernel.org,m:geert@linux-m68k.org,m:tsbogend@alpha.franken.de,m:deller@gmx.de,m:ysato@users.sourceforge.jp,m:richard@nod.at,m:chris@zankel.net,m:linux-arm-kernel@lists.infradead.org,m:linux-alpha@vger.kernel.org,m:linux-csky@vger.kernel.org,m:linux-m68k@lists.linux-m68k.org,m:linux-mips@vger.kernel.org,m:linux-parisc@vger.kernel.org,m:linux-sh@vger.kernel.org,m:linux-um@lists.infradead.org,m:arnd@arndb.de,m:vgupta@kernel.org,m:will@kerne
+ l.org,m:bcain@kernel.org,m:monstr@monstr.eu,m:dinguyen@kernel.org,m:davem@davemloft.net,m:andreas@gaisler.com,m:linux-snps-arc@lists.infradead.org,m:linux-hexagon@vger.kernel.org,m:linux-openrisc@vger.kernel.org,m:sparclinux@vger.kernel.org,m:linux-arch@vger.kernel.org,m:msuchanek@suse.de,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[radu@rendec.net,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[rendec.net:+];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	RCPT_COUNT_GT_50(0.00)[53];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,netdev,dt];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[radu@rendec.net,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,onsemi.com:replyto,onsemi.com:mid,onsemi.com:email]
+	ALIAS_RESOLVED(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ozlabs.org:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,ellerman.id.au:email,rendec.net:from_mime,rendec.net:email,rendec.net:mid,rendec.net:dkim,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: F30CD729278
+X-Rspamd-Queue-Id: 8368C72938D
 
-From: Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
+On Tue, 2026-07-07 at 21:05 +0200, Thomas Gleixner wrote:
+> add_random_kstack_offset() is invoked before syscall_enter_from_user_mode=
+()
+> establishes state. That's wrong because add_random_kstack_offset() calls
+> into instrumentable code.
+>=20
+> Move it after syscall_enter_from_user_mode() to ensure that state is
+> correctly established.
+>=20
+> Signed-off-by: Thomas Gleixner <tglx@kernel.org>
+> Cc: Michael Ellerman <mpe@ellerman.id.au>
+> Cc: Shrikanth Hegde <sshegde@linux.ibm.com>
+> Cc: linuxppc-dev@lists.ozlabs.org
+> ---
+> =C2=A0arch/powerpc/kernel/syscall.c |=C2=A0=C2=A0=C2=A0 2 +-
+> =C2=A01 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> --- a/arch/powerpc/kernel/syscall.c
+> +++ b/arch/powerpc/kernel/syscall.c
+> @@ -19,8 +19,8 @@ notrace long system_call_exception(struc
+> =C2=A0	long ret;
+> =C2=A0	syscall_fn f;
+> =C2=A0
+> -	add_random_kstack_offset();
+> =C2=A0	r0 =3D syscall_enter_from_user_mode(regs, r0);
+> +	add_random_kstack_offset();
+> =C2=A0
+> =C2=A0	if (unlikely(r0 >=3D NR_syscalls)) {
+> =C2=A0		if (unlikely(trap_is_unsupported_scv(regs))) {
 
-Adds selftest support for onsemi S2500 MAC-PHY. Added as a separate
-patch for the ease of review.
-
-Signed-off-by: Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
-
----
-changes in v7
-  - No change
-changes in v6
-  - Moved the signed off information to the correct place.
-changes in v5
-  - No change
-changes in v4:
-  - Added a selftest as a separate patch
-  - First patch
----
- drivers/net/ethernet/onsemi/s2500/Kconfig         | 1 +
- drivers/net/ethernet/onsemi/s2500/s2500_ethtool.c | 6 ++++++
- 2 files changed, 7 insertions(+)
-
-diff --git a/drivers/net/ethernet/onsemi/s2500/Kconfig b/drivers/net/ethernet/onsemi/s2500/Kconfig
-index 7786f702d6ec..141fbaf1b641 100644
---- a/drivers/net/ethernet/onsemi/s2500/Kconfig
-+++ b/drivers/net/ethernet/onsemi/s2500/Kconfig
-@@ -6,6 +6,7 @@
- config S2500_MACPHY
- 	tristate "S2500 support"
- 	depends on SPI
-+	imply NET_SELFTESTS
- 	select NCN26000_PHY
- 	select OA_TC6
- 	help
-diff --git a/drivers/net/ethernet/onsemi/s2500/s2500_ethtool.c b/drivers/net/ethernet/onsemi/s2500/s2500_ethtool.c
-index 7e96d9ad563f..0b7ef490d7ca 100644
---- a/drivers/net/ethernet/onsemi/s2500/s2500_ethtool.c
-+++ b/drivers/net/ethernet/onsemi/s2500/s2500_ethtool.c
-@@ -5,6 +5,7 @@
-  */
- 
- #include <linux/ethtool.h>
-+#include <net/selftests.h>
- #include <linux/phy.h>
- 
- #include "s2500_hw_def.h"
-@@ -229,6 +230,8 @@ static int s2500_get_sset_count(struct net_device *ndev, int sset)
- 	switch (sset) {
- 	case ETH_SS_STATS:
- 		return S2500_MAC_STATS_LEN;
-+	case ETH_SS_TEST:
-+		return net_selftest_get_count();
- 	default:
- 		return -EOPNOTSUPP;
- 	}
-@@ -242,6 +245,9 @@ static void s2500_get_strings(struct net_device *ndev, u32 stringset,
- 		memcpy(buf, s2500_mac_stat_strings,
- 		       S2500_MAC_STATS_LEN * ETH_GSTRING_LEN);
- 		break;
-+	case ETH_SS_TEST:
-+		net_selftest_get_strings(buf);
-+		break;
- 	}
- }
- 
-
--- 
-2.43.0
-
-
+Reviewed-by: Radu Rendec <radu@rendec.net>
 
