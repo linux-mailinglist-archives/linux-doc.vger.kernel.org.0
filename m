@@ -1,239 +1,199 @@
-Return-Path: <linux-doc+bounces-95787-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95789-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id mdByFrypTmq2RgIAu9opvQ
-	(envelope-from <linux-doc+bounces-95787-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 21:49:16 +0200
+	id WROADZCrTmo8RwIAu9opvQ
+	(envelope-from <linux-doc+bounces-95789-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 21:57:04 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4E5C729FBC
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 21:49:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E65D72A058
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 21:57:03 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=Qil1fVDq;
-	dkim=pass header.d=redhat.com header.s=google header.b=W0TKygWB;
-	dmarc=pass (policy=quarantine) header.from=redhat.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95787-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-95787-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=ZcmKbYqi;
+	dmarc=pass (policy=none) header.from=gmail.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95789-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-95789-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 956DB300C924
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2026 19:48:37 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 35442302C913
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2026 19:57:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1A6A83AC0C7;
-	Wed,  8 Jul 2026 19:48:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CCA073DEAD8;
+	Wed,  8 Jul 2026 19:57:00 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95BFD24E4C6
-	for <linux-doc@vger.kernel.org>; Wed,  8 Jul 2026 19:48:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40CFD3D6CB4
+	for <linux-doc@vger.kernel.org>; Wed,  8 Jul 2026 19:56:59 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783540117; cv=none; b=Fo54h3YluT7S1ZRReHk2B93+IAHDRmua8PohO0iX24Oz6ABpyTkOQ94mS9aojWOxRwn9HJZAf2n7A913/mpUXYe7qiAlDffF1O9+zyGmwexIP+q6pNNmLIso7SdVDYHNPkCyAQToQK8LWHhIz9CA+GvOvRw9tnZyp1cI14EgflI=
+	t=1783540620; cv=none; b=ueko7OZbKoEJFRsWabegBd1fG1UQ0CB8RGY4/OUGo1yW2Rmu4aVkf1WL6HPXRcPNOBCjNBEczlH0dZpxuoUeNjfarELzE4U2HJDWPC1m9YBr5fEyeD11qvVlwu4w/0CzGJfWmbR9/cwx+3eklHXsk6lZdA6+7Ir2p3eSZNzpQ+Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783540117; c=relaxed/simple;
-	bh=Ghlr+avBEixSaVhL6xV8udcrvOQwEYxFq5oqvOlsQTk=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=L3Aqo9lDVoESAC2okGPnyS+IrnigCCWeewYve0m235vmSBNxJdJiz9vyHrGU9QB+qrJtKAfts+kEH5AzFt7bmn+U0JeTvdwZ1iQfu5tqYH7Suct16mu5pMVkAH7w0HvcfqFtJ0cpfBTCXbBwV+oHQiCSvkomVPYvyaB3RFn56ww=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=Qil1fVDq; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=W0TKygWB; arc=none smtp.client-ip=170.10.133.124
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1783540114;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Ghlr+avBEixSaVhL6xV8udcrvOQwEYxFq5oqvOlsQTk=;
-	b=Qil1fVDqn43Ninn+uIMJmwbOh7YufLT2gv5rcOrs7VLk+s+Tx8atG+DGG1Kzxn3t/WIRHC
-	8M2Sad8wHu/K6sl+OSPfTFjVgbK0TCOW9NOPlsHiaVZWbTO/dHpUw2GWufPj8FknGBdrzT
-	1fEXwduJRBTS4waVksnZ3MtgFKslpZE=
-Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
- [209.85.208.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-486-Dlkfsk3xNxS5u5jyEHfgFw-1; Wed, 08 Jul 2026 15:48:33 -0400
-X-MC-Unique: Dlkfsk3xNxS5u5jyEHfgFw-1
-X-Mimecast-MFC-AGG-ID: Dlkfsk3xNxS5u5jyEHfgFw_1783540112
-Received: by mail-ed1-f71.google.com with SMTP id 4fb4d7f45d1cf-6984787eeddso99188a12.1
-        for <linux-doc@vger.kernel.org>; Wed, 08 Jul 2026 12:48:33 -0700 (PDT)
+	s=arc-20240116; t=1783540620; c=relaxed/simple;
+	bh=TDMWQykWRLH+xUnH6dEBJSSnBtEoUJ8mDeu0JnQ5ykg=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=XFqiyg2jbNMiAQRVlgeB5h++wVt+scduDJ/Fpsw6gupMN1GJeyhzKEJWAMsdNlqvsviencCi1+UmIZ8sYznYEaoPXh6f1fvWkKzHw73llK/roTlk5tMGUaflT5j96vrfzJ7fwZEh+m+wwnUlyyj/5dFLo2NfjsO8g+p5XFH/aKc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ZcmKbYqi; arc=none smtp.client-ip=209.85.221.48
+Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-47d6c634f45so71006f8f.3
+        for <linux-doc@vger.kernel.org>; Wed, 08 Jul 2026 12:56:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1783540112; x=1784144912; darn=vger.kernel.org;
-        h=mime-version:user-agent:content-transfer-encoding:content-type
-         :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=Ghlr+avBEixSaVhL6xV8udcrvOQwEYxFq5oqvOlsQTk=;
-        b=W0TKygWBt1EIgkAxTf5kykT67WuZMD8eykar0aEOteenFhu2ZjXRKqB8VHUdYXbEdn
-         /imhnibGLOQPT5vuFWnYnp/HGDpRrh37QasmkfFG0Ejdnb67tCDrflneGtsxp3cPbrKL
-         o/3uY2G3AKJ33Ip2I1rALOs6U8uxBcOW2quZPcMHUy6CZB5otOGcoIlkRSCn3G0S/Odw
-         k+/Jjn6QFMyIKvQnb4tKjIh2j9SSllhxbndnsQlLfx2hgerJmChxMCeCWggSWk48m7XH
-         dlFe4IE8SRDJhP+fwqCiFFs9EjvMfa1tooS/2xYurJiWx2vdo3twzO58WFnFzdaUaumr
-         BeqQ==
+        d=gmail.com; s=20251104; t=1783540618; x=1784145418; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=PaQGGp+ro7L+efkwpTdWheFx/o+vkLCN2v+zKVvSvAg=;
+        b=ZcmKbYqiVcMyuzKc4D9jDtykAF7KSPC1oacuUhHAZ8PbA/aNA29OJhqRnViL4bq11+
+         2YMMLyUoTp4nGSpLquun1Z2Yp+6k+1BakUB08IAnwSorDE2mRbBfeZzrndv+vvM8g8TA
+         blazTaRXiPAWnckhBnvKB11qyDMX/hdIL/ibGNkkhYMAI9OD+JlYiNpNLbTWjrkxnnUG
+         DOr7XA9GOkwCU5VKn9XS7PeALz51MxxFtHCz8RIzXu7qtm26pCyeaoGDgFCQcDGe+Zkw
+         zCI7iYw6dyJvNiRmizARLnidpMmHJl8vKIPn2mCqWAwdL6knGAxlLtpo+ZairUis48o+
+         aKNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783540112; x=1784144912;
-        h=mime-version:user-agent:content-transfer-encoding:content-type
-         :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Ghlr+avBEixSaVhL6xV8udcrvOQwEYxFq5oqvOlsQTk=;
-        b=TLDsda08PSqZLygwuEyRHqR1Pb1A8vLA95hku39V5XG/A/Bh9+88+5mCy1Lmxesj/v
-         LwsZVwGnKIolO2mIdnRX+AKzUHf3PpMEaRVqzibO51E85ixqRNnDjNyJqcv54wL+P86u
-         hQIDSywBdcfiODmYolgpD8lRUvTpLK+KXsLCtU3OI+V/UOFviakq/Pajq78OGQekoTC6
-         EbBoQMMRzaVNimSXBSUm41yZfySkXsHmT/J5tDv8BDEu4GSMPQ7lj0TA456NgM8Mf9af
-         O5DOT91CV0AYxSbkT/qajLceIUqBn3/wcdvP7QjR00xuauc5zxutam/Ww1Hu8OrM1YDA
-         7fEg==
-X-Forwarded-Encrypted: i=1; AHgh+RrgwKaU00VdyzXlOu3J/4EJb3OAcuUOiBAJybQR3Yd80ZXLMsjWzQ5n9j7355NnTAkrJ8rHJargAr0=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwRXgCpzWzmAEbV5EzPFKhNeV1bhAssiKnL4Dz5amklh1qHHvHS
-	7qD0ozSP/7vojSuLtTQdvKqb7BZM5bcTVYVB4JECfVPUPjUU4blksH2O7MYa41XykYQCk4dZPXt
-	I7Yw5VKe6hvTtFPzu4Aa/bHmHAGKEJJQBZFP2VOlRx0hq/myGnKzo+1BHlTKzaA==
-X-Gm-Gg: AfdE7ckPviJ5xkUooNF1yIcnSXhMPiV/44gDSCn8uC8QasbPN8rZu//Mk9yZU+5UDF2
-	bwEdO5Mhng9+xn1tKeGsZjhrrdrIjgUfqsYSVV3KCluWienFBC3tEZeOyxSJhu5i4v98YFKjfrB
-	9BqZlF0SxyqxP+7u4z3qyYQLcbNzw+mKQ/W27M2jXKEPBLIdWkTGWFIh6YvDX58Gk/tLXVu5QSX
-	iYwm/0HoUrUVq1jp4BMt4L94h1A+m4hwsOc9hIknuRf5gTgzk/PjLqO/oB7I82nXBb0tIdFlCkf
-	HeK5AQkM+mRht6xGjYjCQILohI6dmzN4Ct/RaT0Dw9MFpz7/u0ELJk4C4RknNvSGNxAuNmBbJca
-	i/HbkY7DV2WkOk8J96dz0rUyvz8FEj0MrlG0mhPthJvtZT3lr40AVI+m+DmWxU1E=
-X-Received: by 2002:a05:6402:3788:b0:698:3ce6:767f with SMTP id 4fb4d7f45d1cf-69ab445dd6amr1730462a12.12.1783540112169;
-        Wed, 08 Jul 2026 12:48:32 -0700 (PDT)
-X-Received: by 2002:a05:6402:3788:b0:698:3ce6:767f with SMTP id 4fb4d7f45d1cf-69ab445dd6amr1730448a12.12.1783540111797;
-        Wed, 08 Jul 2026 12:48:31 -0700 (PDT)
-Received: from ?IPv6:2a01:41e1:62a8:c300:7322:3fab:8db6:d28c? ([2a01:41e1:62a8:c300:7322:3fab:8db6:d28c])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-69a19cf68f5sm8795151a12.13.2026.07.08.12.48.30
+        d=1e100.net; s=20251104; t=1783540618; x=1784145418;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=PaQGGp+ro7L+efkwpTdWheFx/o+vkLCN2v+zKVvSvAg=;
+        b=V74mq+UVZYuOQ24Ic40ewPtb4eSZBlnzY+MFewmEPTYlLHz89gdNtJRtoxLXFh4nQE
+         GuTqD8cRvwVtXVxSn7lZ3aeboWfA+rbmmqz721T7IgAhb4suy0cQJt+lCrep2nwnkdBG
+         InfBRYoHmjEC6XcvYmXOziKl4xPrHrTCQMrpO1Yo8FU+1yl2Uwn1NgF53GHh1k8POtRw
+         YYTicYHeqhOPzcXkkraaDt/wdFK9iO7tKofQodcUAQS5se6S92DnjTwSgIBqHLBU88zY
+         +zDc+bxqIIE6W3FhnvrKlHY39d2sDa54awdP8tEvQ+3uQyCYShDsz+/VnFvVlpWjKdZA
+         H+Xg==
+X-Forwarded-Encrypted: i=1; AHgh+Ro4guQyDRRtE3NQnu35yiB+6bMHaH0Othou8Q2M5cUagfrKKbW/Hkbu1lBQK097gnFBx8KY/MnuRjg=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzHmKldYIlLCr46MEEItSLwD/zdAIDzBj01KWELWnhJlNsC6nxy
+	cfT2RwVrfjhRmRa/3CWYEmmjDdvJSy+n/gwV6dLqYxJso3gT8YN5IV+c
+X-Gm-Gg: AfdE7clMpQzC9NCo9N/bf553OF1Dhk79H4iNH0PJPOGOVXYA/e11U7nWBDtLd8rmELF
+	SAu+7/bZpS8dTyWM4QVy4AQpzl2oc8gVyt3U60RDrBI/7/S6GOyk9n2biOTdS1aAu4E7C4bjO8o
+	bx1RYg2G4SzmR/sW3YLjGAgPdBaNAiAOGIqmADtAXE1WJQgNm33UJ8psteWsKFO9+cPhnH3HqAw
+	OmQE4KGjDuXw9dS+4AFWldfbmG/BPsYvzWsiYtllf4iNiXtK28Uj5k6Vz/MzSqHxbO9uTQUmu45
+	4B+wSAb2UO4pcd8UYmq4kAEOPfWL2FvUuqdDaE6Qn2YNqlcek1zGAAIvqo6ZTxmz583DbmSX5p5
+	+ozHxfLWO949OINTD8o/f2m/mkxpOGdZONi/0jPDm/gzlZcaAULPI1sV/2pkFbnLNrAuJA255ly
+	qL1W8HYahJq6UI4aj/KGB3FTcQMjplqOw=
+X-Received: by 2002:a5d:5f53:0:b0:47d:e0da:fe6e with SMTP id ffacd0b85a97d-47df073179emr5473702f8f.27.1783540617473;
+        Wed, 08 Jul 2026 12:56:57 -0700 (PDT)
+Received: from puma.museclub.art ([2a00:6020:b326:d300:d19:a765:d8d7:bedc])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47aa0f213e8sm43090783f8f.34.2026.07.08.12.56.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Jul 2026 12:48:31 -0700 (PDT)
-Message-ID: <8b35057f72cd281637cf9d4bcbe1d0d753a3710e.camel@redhat.com>
-Subject: Re: [PATCH 0/4] KVM: x86: Document and enforce APIC base memory hole
-From: Tim Wiederhake <twiederh@redhat.com>
-To: Sean Christopherson <seanjc@google.com>
-Cc: Borislav Petkov <bp@alien8.de>, Dave Hansen
- <dave.hansen@linux.intel.com>,  "H. Peter Anvin"	 <hpa@zytor.com>, Ingo
- Molnar <mingo@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
-	kvm@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org,  Paolo Bonzini <pbonzini@redhat.com>, Shuah
- Khan <skhan@linuxfoundation.org>, Thomas Gleixner <tglx@kernel.org>, 
-	x86@kernel.org
-Date: Wed, 08 Jul 2026 21:48:30 +0200
-In-Reply-To: <ak5TojZfR04SWWd-@google.com>
-References: <20260706092021.3625908-2-twiederh@redhat.com>
-	 <akwrncCjosItvAeO@google.com>
-	 <bceedaf195adf713db70a1dba743055fe4f20bc0.camel@redhat.com>
-	 <ak5TojZfR04SWWd-@google.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.58.2 (3.58.2-1.fc43) 
+        Wed, 08 Jul 2026 12:56:56 -0700 (PDT)
+From: Eugene Shalygin <eugene.shalygin@gmail.com>
+To: eugene.shalygin@gmail.com
+Cc: Maurice Mehlhaff <maurice.mehlhaff@gmx.de>,
+	Guenter Roeck <linux@roeck-us.net>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	linux-hwmon@vger.kernel.org (open list:HARDWARE MONITORING),
+	linux-doc@vger.kernel.org (open list:DOCUMENTATION),
+	linux-kernel@vger.kernel.org (open list)
+Subject: [PATCH] hwmon: (asus_ec_sensors) add ProArt Z690-CREATOR WIFI
+Date: Wed,  8 Jul 2026 21:56:26 +0200
+Message-ID: <20260708195638.1324168-1-eugene.shalygin@gmail.com>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-95787-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[13];
+	TAGGED_FROM(0.00)[bounces-95789-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[gmx.de,roeck-us.net,lwn.net,linuxfoundation.org,vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_LAST(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:seanjc@google.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:hpa@zytor.com,m:mingo@redhat.com,m:corbet@lwn.net,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:pbonzini@redhat.com,m:skhan@linuxfoundation.org,m:tglx@kernel.org,m:x86@kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[twiederh@redhat.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[redhat.com:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[twiederh@redhat.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	ALIAS_RESOLVED(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER(0.00)[eugeneshalygin@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS(0.00)[m:eugene.shalygin@gmail.com,m:maurice.mehlhaff@gmx.de,m:linux@roeck-us.net,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-hwmon@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:eugeneshalygin@gmail.com,s:lists@lfdr.de];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[eugeneshalygin@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCPT_COUNT_SEVEN(0.00)[8];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp,gmx.de:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: A4E5C729FBC
+X-Rspamd-Queue-Id: 7E65D72A058
 
-On Wed, 2026-07-08 at 06:41 -0700, Sean Christopherson wrote:
-> On Wed, Jul 08, 2026, Tim Wiederhake wrote:
-> > On Mon, 2026-07-06 at 15:26 -0700, Sean Christopherson wrote:
-> > > On Mon, Jul 06, 2026, Tim Wiederhake wrote:
-> > > > When an in-kernel irqchip is enabled on x86, KVM installs a
-> > > > private
-> > > > memory slot at the default APIC base address (0xfee00000)
-> > > > during
-> > > > vcpu
-> > > > creation.=C2=A0 If user space has already mapped a memory region
-> > > > covering
-> > > > that address, vcpu creation fails with -EEXIST.=C2=A0 The same
-> > > > happens
-> > > > in
-> > > > reverse: mapping memory over the APIC base after vcpu creation
-> > > > also
-> > > > fails with -EEXIST.
-> > > >=20
-> > > > None of this is documented, and the error is reported far from
-> > > > where
-> > > > the actual conflict is introduced.=C2=A0 A VMM developer hitting
-> > > > this
-> > > > has
-> > > > to trace through KVM internals to understand what went wrong.
-> > > >=20
-> > > > This series documents the two undocumented constraints (irqchip
-> > > > before
-> > > > vcpu, APIC base memory hole) and adds early checks so the error
-> > > > is
-> > > > reported at the ioctl that actually violates the constraint.
-> > > >=20
-> > > > Patches 1-2 are documentation only.=C2=A0 Patches 3-4 add early
-> > > > validation
-> > > > that turns a confusing -EEXIST at vcpu creation into an
-> > > > explicit
-> > > > error
-> > > > at the point where the conflict is introduced.
-> > >=20
-> > > I'm 100% in favor of documenting the behavior, but I'm not
-> > > exactly
-> > > excited about
-> > > the enforcement.=C2=A0 It's not needed for KVM's safety, and while I
-> > > appreciate that
-> > > such a goof would be somewhat annoying to debug, I have a hard
-> > > time
-> > > believing it's
-> > > a common failure.=C2=A0 I.e. I'm not convinced carrying the code is
-> > > worth
-> > > the marginal
-> > > benefits it provides.
-> >=20
-> > FWIW, I did run into this exact issue myself and debugging it was
->=20
-> What were you doing (or trying to do?) when you ran afoul of this?=C2=A0 =
-I
-> ask because
-> maybe there's a way to help developers without impacting KVM's uABI.
->=20
+From: Maurice Mehlhaff <maurice.mehlhaff@gmx.de>
 
-Experimenting, mostly with pmode code. For simplicity, I use a single
-memory slot at 0x0. Due to an off-by-one error, I gave the VM only 2 GB
-instead of 4 GB as intended. When I fixed that, suddenly vcpu creation
-failed.
+Add support for the ProArt Z690-CREATOR WIFI board
 
-> > indeed quite a ride. The EEXIST from vcpu creation led me
-> > completely
-> > astray and I was very close to just giving up. If I had, I wouldn't
-> > have written this patch, and the failure would be perceived as even
-> > less common.
-> >=20
-> > I don't mind dropping patches 3 and 4 (the actual "enforcement"
-> > patches) for v2, the documentation is more important in my opinion.
-> > Still, if there is interest, I'd be more than happy to rework these
-> > patches for eventual inclusion.
-> >=20
-> > Thanks for the review,
-> > Tim
-> >=20
+Signed-off-by: Maurice Mehlhaff <maurice.mehlhaff@gmx.de>
+Signed-off-by: Eugene Shalygin <eugene.shalygin@gmail.com>
+---
+ Documentation/hwmon/asus_ec_sensors.rst |  1 +
+ drivers/hwmon/asus-ec-sensors.c         | 11 +++++++++++
+ 2 files changed, 12 insertions(+)
+
+diff --git a/Documentation/hwmon/asus_ec_sensors.rst b/Documentation/hwmon/asus_ec_sensors.rst
+index 77a709517437..d76e6356acce 100644
+--- a/Documentation/hwmon/asus_ec_sensors.rst
++++ b/Documentation/hwmon/asus_ec_sensors.rst
+@@ -17,6 +17,7 @@ Supported boards:
+  * ProArt X670E-CREATOR WIFI
+  * ProArt X870E-CREATOR WIFI
+  * ProArt B550-CREATOR
++ * ProArt Z690-CREATOR WIFI
+  * ROG CROSSHAIR VIII DARK HERO
+  * ROG CROSSHAIR VIII HERO (WI-FI)
+  * ROG CROSSHAIR VIII FORMULA
+diff --git a/drivers/hwmon/asus-ec-sensors.c b/drivers/hwmon/asus-ec-sensors.c
+index 29a23484cbe7..389f8ee129fe 100644
+--- a/drivers/hwmon/asus-ec-sensors.c
++++ b/drivers/hwmon/asus-ec-sensors.c
+@@ -386,6 +386,8 @@ static const struct ec_sensor_info sensors_family_intel_600[] = {
+ 	[ec_sensor_temp_t_sensor] =
+ 		EC_SENSOR("T_Sensor", hwmon_temp, 1, 0x00, 0x3d),
+ 	[ec_sensor_temp_vrm] = EC_SENSOR("VRM", hwmon_temp, 1, 0x00, 0x3e),
++	[ec_sensor_fan_cpu_opt] =
++		EC_SENSOR("CPU_Opt", hwmon_fan, 2, 0x00, 0xb0),
+ 	[ec_sensor_fan_water_flow] =
+ 		EC_SENSOR("Water_Flow", hwmon_fan, 2, 0x00, 0xbe),
+ 	[ec_sensor_temp_water_in] =
+@@ -590,6 +592,13 @@ static const struct ec_board_info board_info_pro_art_x870E_creator_wifi = {
+ 	.family = family_amd_800_series,
+ };
+ 
++static const struct ec_board_info board_info_pro_art_z690_creator_wifi = {
++	.sensors = SENSOR_TEMP_T_SENSOR | SENSOR_TEMP_VRM |
++		SENSOR_FAN_CPU_OPT,
++	.mutex_path = ASUS_HW_ACCESS_MUTEX_SB_PC00_LPCB_SIO1_MUT0,
++	.family = family_intel_600_series,
++};
++
+ static const struct ec_board_info board_info_pro_ws_trx50_sage_wifi = {
+ 	/* Board also has a nct6798 */
+ 	.sensors = SENSOR_TEMP_CPU | SENSOR_TEMP_CPU_PACKAGE | SENSOR_TEMP_VRME |
+@@ -859,6 +868,8 @@ static const struct dmi_system_id dmi_table[] = {
+ 					&board_info_pro_art_x670E_creator_wifi),
+ 	DMI_EXACT_MATCH_ASUS_BOARD_NAME("ProArt X870E-CREATOR WIFI",
+ 					&board_info_pro_art_x870E_creator_wifi),
++	DMI_EXACT_MATCH_ASUS_BOARD_NAME("ProArt Z690-CREATOR WIFI",
++					&board_info_pro_art_z690_creator_wifi),
+ 	DMI_EXACT_MATCH_ASUS_BOARD_NAME("Pro WS TRX50-SAGE WIFI",
+ 					&board_info_pro_ws_trx50_sage_wifi),
+ 	DMI_EXACT_MATCH_ASUS_BOARD_NAME("Pro WS TRX50-SAGE WIFI A",
+-- 
+2.55.0
 
 
