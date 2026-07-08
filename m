@@ -1,124 +1,166 @@
-Return-Path: <linux-doc+bounces-95666-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95667-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id F5GDDM0VTmoxCwIAu9opvQ
-	(envelope-from <linux-doc+bounces-95666-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 11:18:05 +0200
+	id YHXiNSsWTmpVCwIAu9opvQ
+	(envelope-from <linux-doc+bounces-95667-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 11:19:39 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1619B72390C
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 11:18:04 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 61C17723962
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 11:19:39 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=aliasing.net header.s=sig1 header.b=UBQVKLT3;
-	dmarc=pass (policy=quarantine) header.from=aliasing.net;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95666-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-95666-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=DFMxLuEi;
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95667-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95667-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 3F65F306F8E9
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2026 09:14:51 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 7D80F3067E57
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2026 09:15:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B7B7A40802F;
-	Wed,  8 Jul 2026 09:14:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4DD12409621;
+	Wed,  8 Jul 2026 09:15:15 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from outbound.st.icloud.com (p-east2-cluster5-host2-snip4-10.eps.apple.com [57.103.79.23])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22E4E408006
-	for <linux-doc@vger.kernel.org>; Wed,  8 Jul 2026 09:14:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2257D40861C;
+	Wed,  8 Jul 2026 09:15:13 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783502089; cv=none; b=C0SRtm0ChUreqXAA+T1YW2OlUghO/yWI+kGir+CVaI05CIIuFsrCrKqPMDp7QnObmHZyEEFPGgfIsoAEJwx3iWmMPduzHwUmdl8XTEiDhiLqbG/mD8ceMgSvWw2PfyXa7w50fxpd4NNxR4JOwLYkdrIGnVNfHNUrvgx/ae2IP/E=
+	t=1783502115; cv=none; b=jXckOTx/4QqondwWvg3sOpmukA0lehJEAdlVVGktku2/cDmmbcjrRMd5h4B3UI9ocpgVXtI2UEmjbsGKL6oXoh7NpcTdJzOqENJymYdCRze7irleLdO+4wS2E9sJxcrhyftL1oGuBGWbuRAZqQP+jMgEizFknpwtVLr0I4xun1E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783502089; c=relaxed/simple;
-	bh=jHQBDidGD/gDyP2uRLukKzou2QNi+hUDBR04lTls07A=;
-	h=Date:Message-Id:To:Cc:Subject:From:In-Reply-To:References:
-	 Mime-Version:Content-Type; b=qxGXqDosfzrHFWKzeIE7yRhdXQsrVHk1TEvYyjcaQiVCd5L7ksQ4r9jttPrGahTVmkPnZgsk7NRgeb4CkBjhBkE9U390tupKkoAyU23QBpKAu2vS9Zi7DyvAsqO5wf6+t9M7ZFJ+UDbZV5/Rxgv0CDuyT4OL9gd0G7eXXBRwAXY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=aliasing.net; spf=pass smtp.mailfrom=aliasing.net; dkim=pass (2048-bit key) header.d=aliasing.net header.i=@aliasing.net header.b=UBQVKLT3; arc=none smtp.client-ip=57.103.79.23
-Received: from outbound.st.icloud.com (unknown [127.0.0.2])
-	by p00-icloudmta-asmtp-us-east-1a-60-percent-6 (Postfix) with ESMTPS id 4E55818005E5;
-	Wed, 08 Jul 2026 09:14:43 +0000 (UTC)
-X-ICL-RepId: 019f4102-145a-7386-9a41-faf4d851ae4d
-X-ICL-Out-Info: HUtFAUMHWwJACUgATUQeDx5WFlZNRAJCTQhNAEMFXwBeC0oCQwZfBlBcHA4ZWAZdMFgUWgxEAlwXFxZWGRcNVk1YFFoMRAJcFxcWVhkXGVFNCEoTBVIHXU1WDUcPWB5cFBcLR0NeCF4fTBwdDlgGEgBNCg42BlkFXglWA0MFNhIUXUVSAV4KQRlXHx0DUh8SHVAcDlEFWwBGCU8DVRlaCkENSApDBVsARglLA18PWQpHAUsKVQVfBl5fDVkEQwpyEVURUh5eBVVeVx1HUxcfSwBcRVAYRB9dHWYcXABWAlw=
-Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aliasing.net; s=sig1; t=1783502087; x=1786094087; bh=Rlt8vlfBNyKk4cSoSC5XZbIR42pZqzh63rscOEUuEwk=; h=Date:Message-Id:To:Subject:From:Mime-Version:Content-Type:x-icloud-hme; b=UBQVKLT3oacYhQ8n0aegz3svu4lYukSUDW88yP6knLV1KGaT4k1Wji7285EPjCnxryG4hr/RJHrgo+HDn7r4BDPD37gBiFefA5LCNBojvqOJxy2LxjxiceQGwaKJrWw8cmq5NxBY0WLWHMQikkHg8wlm+cyH4nHbwQcsAxVBbdIAGHf6oJzBPcHp1FO1HPcPOkbxYzgJyjdWmqqPMwhWzY9WKt74XXq4VRB2q7bYjKWV17eY0FLhXxv8lPGrbBnOZp/IPKTHUhRSqE1aiw033W+fWBjde57ACKAUHZpOnvTtPCL6sAsCkdr1AcZph0brb887tHRHxsasKxUE/l/w7A==
-mail-alias-created-date: 1769500909675
-Received: from localhost (unknown [17.42.251.67])
-	by p00-icloudmta-asmtp-us-east-1a-60-percent-6 (Postfix) with ESMTPSA id 123F11800B81;
-	Wed, 08 Jul 2026 09:14:36 +0000 (UTC)
-Date: Wed, 08 Jul 2026 18:14:09 +0900 (JST)
-Message-Id: <20260708.181409.2026030282878398244.fujita@aliasing.net>
-To: harish.cs.ss24@gmail.com
-Cc: apw@canonical.com, joe@perches.com, dwaipayanray1@gmail.com,
- lukas.bulwahn@gmail.com, corbet@lwn.net, skhan@linuxfoundation.org,
- ojeda@kernel.org, linux-kernel@vger.kernel.org, workflows@vger.kernel.org,
- linux-doc@vger.kernel.org, rust-for-linux@vger.kernel.org
-Subject: Re: [PATCH] checkpatch: warn on Rust unwrap and expect calls
-From: FUJITA Tomonori <tomo@aliasing.net>
-In-Reply-To: <20260707082104.90951-1-harish.cs.ss24@gmail.com>
-References: <20260707082104.90951-1-harish.cs.ss24@gmail.com>
+	s=arc-20240116; t=1783502115; c=relaxed/simple;
+	bh=SRkB/8NeU7bs34ctpapaBV36fJTXyPj0DgisaqC60Yo=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=ZtyWwbW0qDsOBt3OP5ruG5q+T1ilUK6BS3SCUDH5R3mglPTauZDs8ghqXcuQzJJ0Lilo0LT8yKlxfwgFuUvb2HrwRA3pcizqbYgsV0lVZBGrkKkZSC7uVvGG0pLt6KEinimw2A4Lx6EOlsOdmwmAVC8/gOdojltrhq3c0kLwAPQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DFMxLuEi; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D697D1F00A3A;
+	Wed,  8 Jul 2026 09:15:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783502113;
+	bh=QXKIkU3dsIb83LaNl9YeImi7A85K1dyuGPQma33N644=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date;
+	b=DFMxLuEi7KbiLxKOKr7+5tYyHQCk3JpHfb6tuRzE2WRkuMx1mPUf9jIugzEHb8/5x
+	 LO8Xyowg5mKltHMmbDOr+gi5tZvNMk+K5CLlhuwiVeBNQv3EKRcMCXRbA9wKg3qjXN
+	 yktK4sMH/4XosacPFHJ3cmJotsn19Buu9FUV++AMzk2yr3c1ztSf7A6xr+F2FPufYH
+	 7C4ovIQAnZoRC6G/Qa1C+7b0RWd5ohzlBHkaLFo1vS55Av8D6fJzCv3nFP2MI70JYw
+	 B1ItdudtjTbPFz/5q4TbBg2sVxB0g3L5dtrLprFMkBcrpN5g+UQIf8TbjYMP31tAm2
+	 nw7+qD9T59MIw==
+From: Thomas Gleixner <tglx@kernel.org>
+To: Jinjie Ruan <ruanjinjie@huawei.com>, LKML <linux-kernel@vger.kernel.org>
+Cc: Peter Zijlstra <peterz@infradead.org>, Mark Rutland
+ <mark.rutland@arm.com>, Kees Cook <kees@kernel.org>, Andy Lutomirski
+ <luto@kernel.org>, Oleg Nesterov <oleg@redhat.com>, Richard Henderson
+ <richard.henderson@linaro.org>, Russell King <linux@armlinux.org.uk>,
+ Catalin
+ Marinas <catalin.marinas@arm.com>, Guo Ren <guoren@kernel.org>, Geert
+ Uytterhoeven <geert@linux-m68k.org>, Thomas Bogendoerfer
+ <tsbogend@alpha.franken.de>, Helge Deller <deller@gmx.de>, Yoshinori Sato
+ <ysato@users.sourceforge.jp>, Richard Weinberger <richard@nod.at>, Chris
+ Zankel <chris@zankel.net>, linux-arm-kernel@lists.infradead.org,
+ linux-alpha@vger.kernel.org, linux-csky@vger.kernel.org,
+ linux-m68k@lists.linux-m68k.org, linux-mips@vger.kernel.org,
+ linux-parisc@vger.kernel.org, linux-sh@vger.kernel.org,
+ linux-um@lists.infradead.org, Michael Ellerman <mpe@ellerman.id.au>,
+ Shrikanth Hegde <sshegde@linux.ibm.com>, linuxppc-dev@lists.ozlabs.org,
+ Huacai Chen <chenhuacai@kernel.org>, loongarch@lists.linux.dev, Paul
+ Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+ linux-riscv@lists.infradead.org, Sven Schnelle <svens@linux.ibm.com>,
+ linux-s390@vger.kernel.org, x86@kernel.org, Arnd Bergmann <arnd@arndb.de>,
+ Vineet Gupta <vgupta@kernel.org>, Will Deacon <will@kernel.org>, Brian
+ Cain <bcain@kernel.org>, Michal Simek <monstr@monstr.eu>, Dinh Nguyen
+ <dinguyen@kernel.org>, "David S. Miller" <davem@davemloft.net>, Andreas
+ Larsson <andreas@gaisler.com>, linux-snps-arc@lists.infradead.org,
+ linux-hexagon@vger.kernel.org, linux-openrisc@vger.kernel.org,
+ sparclinux@vger.kernel.org, linux-arch@vger.kernel.org, Michal
+ =?utf-8?Q?Such=C3=A1nek?=
+ <msuchanek@suse.de>, Jonathan Corbet <corbet@lwn.net>,
+ linux-doc@vger.kernel.org
+Subject: Re: [patch 11/18] seccomp, treewide: Rename and convert
+ __secure_computing() to return boolean
+In-Reply-To: <2e6ed364-ce8f-4b4b-8675-acd07f140f4f@huawei.com>
+References: <20260707181957.433213175@kernel.org>
+ <20260707190254.230735780@kernel.org>
+ <2e6ed364-ce8f-4b4b-8675-acd07f140f4f@huawei.com>
+Date: Wed, 08 Jul 2026 11:15:10 +0200
+Message-ID: <871pddsuzl.ffs@fw13>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Content-Type: Text/Plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: -S6o572Dt0dytXkNP_h-f-Iu-0Ztuohb
-X-Proofpoint-GUID: -S6o572Dt0dytXkNP_h-f-Iu-0Ztuohb
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA4MDA4OSBTYWx0ZWRfX4GEfd8sY1SW7
- 6ltp6Eu/HpDAST/RUC01/Idt5zws/+YJo4OsX8WZfCjqYa9rrdxqyAxuYelvs/NWzFqQVQVIsvj
- RbHmBUddlvKVmiLXunSI18l/Dqtg7WSdYiOuKH8EXu0eLkIpIBnlitK9QsUwjJZK9lk+10WR90V
- 60g5PhpqN9Wh7QdQisCjg4fiL482Uxxu8bL3u29GGjWjgEND9IlTXMrvYxp/t7+6R3kA3mxcRqm
- C1ft/w22Qd16TFPUWlEX/7nkCG8cXiSw87P1zGkPJlfdjJzOAM0GlW7zI/qclAKo58m20YvRMoG
- 1QaHh/XQMvf+299THYh
+MIME-Version: 1.0
+Content-Type: text/plain
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-4.16 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MV_CASE(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[aliasing.net,quarantine];
-	R_DKIM_ALLOW(-0.20)[aliasing.net:s=sig1];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-95666-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[canonical.com,perches.com,gmail.com,lwn.net,linuxfoundation.org,kernel.org,vger.kernel.org];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:harish.cs.ss24@gmail.com,m:apw@canonical.com,m:joe@perches.com,m:dwaipayanray1@gmail.com,m:lukas.bulwahn@gmail.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:ojeda@kernel.org,m:linux-kernel@vger.kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:rust-for-linux@vger.kernel.org,m:harishcsss24@gmail.com,m:lukasbulwahn@gmail.com,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-95667-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[tomo@aliasing.net,linux-doc@vger.kernel.org];
+	FORGED_SENDER(0.00)[tglx@kernel.org,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[aliasing.net:+];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	FREEMAIL_CC(0.00)[infradead.org,arm.com,kernel.org,redhat.com,linaro.org,armlinux.org.uk,linux-m68k.org,alpha.franken.de,gmx.de,users.sourceforge.jp,nod.at,zankel.net,lists.infradead.org,vger.kernel.org,lists.linux-m68k.org,ellerman.id.au,linux.ibm.com,lists.ozlabs.org,lists.linux.dev,dabbelt.com,arndb.de,monstr.eu,davemloft.net,gaisler.com,suse.de,lwn.net];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:ruanjinjie@huawei.com,m:linux-kernel@vger.kernel.org,m:peterz@infradead.org,m:mark.rutland@arm.com,m:kees@kernel.org,m:luto@kernel.org,m:oleg@redhat.com,m:richard.henderson@linaro.org,m:linux@armlinux.org.uk,m:catalin.marinas@arm.com,m:guoren@kernel.org,m:geert@linux-m68k.org,m:tsbogend@alpha.franken.de,m:deller@gmx.de,m:ysato@users.sourceforge.jp,m:richard@nod.at,m:chris@zankel.net,m:linux-arm-kernel@lists.infradead.org,m:linux-alpha@vger.kernel.org,m:linux-csky@vger.kernel.org,m:linux-m68k@lists.linux-m68k.org,m:linux-mips@vger.kernel.org,m:linux-parisc@vger.kernel.org,m:linux-sh@vger.kernel.org,m:linux-um@lists.infradead.org,m:mpe@ellerman.id.au,m:sshegde@linux.ibm.com,m:linuxppc-dev@lists.ozlabs.org,m:chenhuacai@kernel.org,m:loongarch@lists.linux.dev,m:pjw@kernel.org,m:palmer@dabbelt.com,m:linux-riscv@lists.infradead.org,m:svens@linux.ibm.com,m:linux-s390@vger.kernel.org,m:x86@kernel.org,m:arnd@arndb.de,m:vgupta@kernel.org,m:will@kernel.org,m:bcain@kern
+ el.org,m:monstr@monstr.eu,m:dinguyen@kernel.org,m:davem@davemloft.net,m:andreas@gaisler.com,m:linux-snps-arc@lists.infradead.org,m:linux-hexagon@vger.kernel.org,m:linux-openrisc@vger.kernel.org,m:sparclinux@vger.kernel.org,m:linux-arch@vger.kernel.org,m:msuchanek@suse.de,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
 	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	TO_DN_NONE(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tomo@aliasing.net,linux-doc@vger.kernel.org];
-	PRECEDENCE_BULK(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[52];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[tglx@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	TO_DN_SOME(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,fw13:mid,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 1619B72390C
+X-Rspamd-Queue-Id: 61C17723962
 
-On Tue,  7 Jul 2026 13:51:04 +0530
-Harish-CS <harish.cs.ss24@gmail.com> wrote:
+On Wed, Jul 08 2026 at 09:43, Jinjie Ruan wrote:
+> On 7/8/2026 3:06 AM, Thomas Gleixner wrote:
+> As Ada pointed out, the description of secure_computing in arch/Kconfig
+> need to be updated, a possible suggestion:
+>
+> --- a/arch/Kconfig
+> +++ b/arch/Kconfig
+> @@ -636,8 +636,8 @@ config HAVE_ARCH_SECCOMP_FILTER
+>           - syscall_rollback()
+>           - syscall_set_return_value()
+>           - SIGSYS siginfo_t support
+> -         - secure_computing is called from a ptrace_event()-safe context
+> -         - secure_computing return value is checked and a return value
+> of -1
+> +         - seccomp_permits_syscall is called from a ptrace_event()-safe
+> context
+> +         - seccomp_permits_syscall return value is checked and if false
 
-> Rust panic paths are discouraged in kernel code because panics currently
-> lead to BUG-like behavior. Add a checkpatch warning for newly added Rust
-> uses of unwrap(), unwrap_err(), expect() and expect_err() so contributors
-> notice them during patch review.
+Makes sense.
+>>  		if (__seccomp_filter(this_syscall, true))
+>> -			return -1;
+>> +			return false;
+>
+> The return value of __seccomp_filter is checked in the wrong way, check
+> -1 should be replaced with check false, maybe:
+>
+> -               if (__seccomp_filter(this_syscall, true))
+> -                       return -1;
+> +               if (!__seccomp_filter(this_syscall, true))
+> +                       return false;
 
-How about panic!()?
+Ooops.
 
