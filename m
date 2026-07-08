@@ -1,391 +1,182 @@
-Return-Path: <linux-doc+bounces-95778-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95779-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Ddd9CZaQTmomPgIAu9opvQ
-	(envelope-from <linux-doc+bounces-95778-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 20:01:58 +0200
+	id dQcHOmWXTmplQAIAu9opvQ
+	(envelope-from <linux-doc+bounces-95779-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 20:31:01 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8747F729647
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 20:01:57 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D195729840
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 20:31:01 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=google.com header.s=20251104 header.b=pZ+0X43H;
-	dmarc=pass (policy=reject) header.from=google.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95778-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95778-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=intel.com header.s=Intel header.b=eF97BtCU;
+	dmarc=pass (policy=none) header.from=intel.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95779-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95779-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 4DBEB303E8C7
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2026 18:01:41 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 98945301664C
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2026 18:31:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 412EA49550B;
-	Wed,  8 Jul 2026 18:01:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8D1704C6F11;
+	Wed,  8 Jul 2026 18:30:57 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f201.google.com (mail-pl1-f201.google.com [209.85.214.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.13])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED6E647F2E1
-	for <linux-doc@vger.kernel.org>; Wed,  8 Jul 2026 18:01:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D8D8837C11C;
+	Wed,  8 Jul 2026 18:30:55 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783533698; cv=none; b=R6xxrSOH5aPS/JnzY/yfZlB7ifFDnTjvMqyRBPQbTAtTqFpLA98fFFrHaLliXi1LtVT2egtKEZNZ7sk2F47eRd1IqVeXV5xh6gxU+feL1NLxmp/Yup3rx025uJeOYV3KuoUfRKDp3NeOxdzR8SYyaqH0q1EfhqmhAqZ9+KYY9kY=
+	t=1783535457; cv=none; b=XGWIhnYlL/e0VUrhZ+0qRquJI5F+hi3muLTfdQ6UT2G6racN0SLlk8RzQjL2egjZuEyNfF9359OYWLDDepOrljdfBnV1HL0rP8t3/N9xVTIUVGwnO8RQNaeFwX98Z4vIwe/WlKiT9Osj1uxrGgGPhDRnXMdBksUJ7zSz+gjr118=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783533698; c=relaxed/simple;
-	bh=sqWIgudGTpUeV4ZuCiP029XN1a8xuVLkuWwCH9LVg4k=;
-	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=Z/ZKyOzyCIjNw/BY7/CZRJmeobyCFBkxVdMrq0u1ExI2HYcpsnavVlQImd2hVswCX2mmai6gOQKk/hDMLYgp7bLI/KyRPCpqIrPU7rzA3jAgh56uX2wPVnwBPaBNUuenvK84JXkNtJtZEu1UZjdxhCS5nkxa2TBMJHB77XFn6zI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--abhishekbapat.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=pZ+0X43H; arc=none smtp.client-ip=209.85.214.201
-Received: by mail-pl1-f201.google.com with SMTP id d9443c01a7336-2cacd6d37edso18420475ad.0
-        for <linux-doc@vger.kernel.org>; Wed, 08 Jul 2026 11:01:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1783533695; x=1784138495; darn=vger.kernel.org;
-        h=content-type:cc:to:from:subject:message-id:references:mime-version
-         :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=T7UKXB2WhHPZfBUr+7nlWpVJ1Kl8ZwGizFgFGzwoYUY=;
-        b=pZ+0X43HhdopVL4ac55B9/Ja5ol8XL9uAxGCU1UCOGfnziDC7YycbEimPHFzroWbOj
-         x0PbB30X6WzIZmbqd2WB186+lzoVCMOixcgycZH0K+SGzfrgn6JbakPgPPeIyh59h+9x
-         lk0WjaUgs5IzIA8NVkLzx2dwsMF6mO9XVXk/VaD1IiLX/XvfXTn3M3333uFug1mF9/Oj
-         Fk7qfxqdQeWMlHr0u5icmh5Um/4AhrOhA5o5U5KeCicsK7/3NerJ3X2GgrQP6NN0xGkX
-         jfHUOGba7Vlx0o4gwznsPKhro7PUPw7DQ3qMc6ORthloriBg7fdk8LIgXtZ7J4zebhc+
-         ak3g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783533695; x=1784138495;
-        h=content-type:cc:to:from:subject:message-id:references:mime-version
-         :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=T7UKXB2WhHPZfBUr+7nlWpVJ1Kl8ZwGizFgFGzwoYUY=;
-        b=DOYYDhjqKj4/j68N3DsNoEK9Dg0mhKNmTygZqk65OvuL2dSgAdC/jx46QahGfe990A
-         g8p7YYioFEt/3LtALVpOBnq6cLq9/uaugugz3RdZMvwHw9DCYfs6fxhnILg5EH0wodNs
-         UOkUErDvab6UJI8QdnXWvaIsDCPoyf6nZs2+Smns9EhhBtIXVPexJNcyT+BlXcg0o2MD
-         g0bujvj+PGao4sysiTlyS0xtgcWciw42P9lfHRdpibikb7FyHodRpZ/bTUK4drTH8qWY
-         ClVlQ6qDENpIVFRowdS/MRg2jb1wSKg6MgcPGd6xYl0VKLl4Qf4zcHnx+qbQFW3/V/K+
-         TSmg==
-X-Forwarded-Encrypted: i=1; AHgh+Rq0UB9LuxX8Zr7cZurTtwISPdApltAvrY0ZT5pCFLuqZWnX4I0pXU/WcxKX7EVgA4TOjhd4p61IjRk=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzxY5DitvuE1jgxxgpm4vXpmI4x81u7mTkRmMJobgRKagNzk+j6
-	DQIS4quETWSvHAYg4MElS+j1/Uu5hEYTNkkQC6ss6gEArpLAu/c2aBQSkB+SiHXABIv++5HVsdj
-	hbhkyjwEa7FSeWgxWNIQybdlckLVLCxkYbA==
-X-Received: from dycme2.prod.google.com ([2002:a05:693c:2402:b0:30c:2df8:2138])
- (user=abhishekbapat job=prod-delivery.src-stubby-dispatcher) by
- 2002:a17:90b:28c3:b0:37f:db06:2299 with SMTP id 98e67ed59e1d1-38942f70dfbmr3593771a91.21.1783533694942;
- Wed, 08 Jul 2026 11:01:34 -0700 (PDT)
-Date: Wed,  8 Jul 2026 18:01:28 +0000
-In-Reply-To: <cover.1783532853.git.abhishekbapat@google.com>
+	s=arc-20240116; t=1783535457; c=relaxed/simple;
+	bh=PeEpSEZq1+VMqDqAHelt/AmWF/XCE8R8BLld6KCqkC0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=bArtUv1mqXYz9u4lGTZXTEQXWMQAVqNCfV9Jbbs+4me0GDKGsVB7skwfhGTehcZHeH4H10NmqOvR8cboRFGNuMhgT2puS8WkJPcvRixjHcJPDTm6tsIDBXR+oJXDgFXNUL7AUkQ2HmFATrZ/qsGp+rgOm1AV/OLkwVXbAnSooDU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=eF97BtCU; arc=none smtp.client-ip=198.175.65.13
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1783535456; x=1815071456;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=PeEpSEZq1+VMqDqAHelt/AmWF/XCE8R8BLld6KCqkC0=;
+  b=eF97BtCUkzh5zFfaNbLJ0283TFbT+vGX4KlGqj9jC2AaaYI/wJ4zs/tW
+   1UYz/dGvBZwh5VFI27BMkAvqcxsn0rTRk0arkrVtcneBTwQNSmhKAQtf8
+   UKz2VSlTPrC+GCsFwlFtuhkDxgbsOnKPNtmGtILpOOgS2Gv3/ujivLvHe
+   GTpVjFpdNJt1Zii2/gwNssTCyseTChiIPEPi7QDVx5ec8men9wg0nJ9fL
+   HRo+VAKEBOkVR9iTKSO3RNubbeDswol6AJrwHepo85atPVMXqOERYD+ye
+   iXVlCI/cAL3UwQ5+qQCof9+gVwW/wHNHsHiUT9OGDuJ50TVY/fE5bJsVR
+   Q==;
+X-CSE-ConnectionGUID: g4Dk7s9YS3ekRktw3YyxPw==
+X-CSE-MsgGUID: pcCldno5TvyefzcoM7TuWQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11841"; a="95367632"
+X-IronPort-AV: E=Sophos;i="6.25,153,1779174000"; 
+   d="scan'208";a="95367632"
+Received: from fmviesa001.fm.intel.com ([10.60.135.141])
+  by orvoesa105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Jul 2026 11:30:55 -0700
+X-CSE-ConnectionGUID: wDfqHoS3T9OFsDlcr0el2A==
+X-CSE-MsgGUID: WAw7ajAbSuCqb6nB/coM7w==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.25,153,1779174000"; 
+   d="scan'208";a="278751101"
+Received: from jmaxwel1-mobl.amr.corp.intel.com (HELO [10.125.111.66]) ([10.125.111.66])
+  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Jul 2026 11:30:54 -0700
+Message-ID: <a16ebde9-e275-4f32-9759-a9378b0e36bc@intel.com>
+Date: Wed, 8 Jul 2026 11:30:51 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-References: <cover.1783532853.git.abhishekbapat@google.com>
-X-Mailer: git-send-email 2.55.0.795.g602f6c329a-goog
-Message-ID: <e5171926b48802531284c1cb5f04734017141341.1783532853.git.abhishekbapat@google.com>
-Subject: [PATCH v8 6/6] kselftest: alloc_tag: extend the allocinfo ioctl kselftest
-From: Abhishek Bapat <abhishekbapat@google.com>
-To: Suren Baghdasaryan <surenb@google.com>, Andrew Morton <akpm@linux-foundation.org>, 
-	Kent Overstreet <kent.overstreet@linux.dev>, Hao Ge <hao.ge@linux.dev>
-Cc: Shuah Khan <skhan@linuxfoundation.org>, Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-mm@kvack.org, 
-	Sourav Panda <souravpanda@google.com>, Abhishek Bapat <abhishekbapat@google.com>
-Content-Type: text/plain; charset="UTF-8"
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 07/11] KVM: TDX: Allocate PAMT memory for TD and vCPU
+ control structures
+To: Sean Christopherson <seanjc@google.com>,
+ Rick Edgecombe <rick.p.edgecombe@intel.com>
+Cc: bp@alien8.de, hpa@zytor.com, kas@kernel.org, kvm@vger.kernel.org,
+ linux-coco@lists.linux.dev, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, mingo@redhat.com, nik.borisov@suse.com,
+ pbonzini@redhat.com, tglx@kernel.org, vannapurve@google.com, x86@kernel.org,
+ chao.gao@intel.com, yan.y.zhao@intel.com, kai.huang@intel.com,
+ "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>
+References: <20260526023515.288829-1-rick.p.edgecombe@intel.com>
+ <20260526023515.288829-8-rick.p.edgecombe@intel.com>
+ <akw-dgBE_dycts0o@google.com>
+From: Dave Hansen <dave.hansen@intel.com>
+Content-Language: en-US
+Autocrypt: addr=dave.hansen@intel.com; keydata=
+ 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
+In-Reply-To: <akw-dgBE_dycts0o@google.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-5.16 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,kernel.org:s:+];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	MV_CASE(0.50)[];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-95778-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[abhishekbapat@google.com,linux-doc@vger.kernel.org];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[19];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:surenb@google.com,m:akpm@linux-foundation.org,m:kent.overstreet@linux.dev,m:hao.ge@linux.dev,m:skhan@linuxfoundation.org,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:souravpanda@google.com,m:abhishekbapat@google.com,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:seanjc@google.com,m:rick.p.edgecombe@intel.com,m:bp@alien8.de,m:hpa@zytor.com,m:kas@kernel.org,m:kvm@vger.kernel.org,m:linux-coco@lists.linux.dev,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:mingo@redhat.com,m:nik.borisov@suse.com,m:pbonzini@redhat.com,m:tglx@kernel.org,m:vannapurve@google.com,m:x86@kernel.org,m:chao.gao@intel.com,m:yan.y.zhao@intel.com,m:kai.huang@intel.com,m:kirill.shutemov@linux.intel.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[dave.hansen@intel.com,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-95779-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[abhishekbapat@google.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[google.com:+];
+	FROM_NEQ_ENVFROM(0.00)[dave.hansen@intel.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[intel.com:+];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[11];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TO_DN_SOME(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[get_at_params.data:url,vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,intel.com:from_mime,intel.com:email,intel.com:mid,intel.com:dkim]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 8747F729647
+X-Rspamd-Queue-Id: 2D195729840
 
-Add the following 2 scenarios to the allocinfo ioctl kselftest:
-1. Validate size based filtering
-2. Validate lineno based filtering
+On 7/6/26 16:47, Sean Christopherson wrote:
+>> Signed-off-by: Kirill A. Shutemov <kirill.shutemov@linux.intel.com>
+>> [sean: handle alloc+free+reclaim in one patch]
+>> Co-developed-by: Sean Christopherson <seanjc@google.com>
+> Where did this come from?  I don't think me squashing two patches together
+> warrants a Co-developed-by.
 
-The first test uses "do_init_module" as the candidate function for the
-test. This is because the associated site will only allocate memory when
-a kernel module is loaded. The return value of get_content_id() changes
-every time modules are loaded or unloaded. Hence, as long as
-get_content_id() values at the start and the end of the test are the
-same, the memory allocated by the do_init_module call site should also
-remain the same. Consequently, the test can assume consistency between
-the value returned by the ioctl and the procfs resulting in less
-flakiness.
+FWIW, I think the pendulum has swung way too far in terms of people
+trying to tell the whole tortured story of their patches via tags. I
+prefer some prose which is less formal *and* more descriptive than tags.
 
-Signed-off-by: Abhishek Bapat <abhishekbapat@google.com>
----
- .../alloc_tag/allocinfo_ioctl_test.c          | 216 +++++++++++++++++-
- 1 file changed, 215 insertions(+), 1 deletion(-)
-
-diff --git a/tools/testing/selftests/alloc_tag/allocinfo_ioctl_test.c b/tools/testing/selftests/alloc_tag/allocinfo_ioctl_test.c
-index 9ce7b53078b1..7d94abb785a1 100644
---- a/tools/testing/selftests/alloc_tag/allocinfo_ioctl_test.c
-+++ b/tools/testing/selftests/alloc_tag/allocinfo_ioctl_test.c
-@@ -5,6 +5,7 @@
-  * Copyright (C) 2026 Google, Inc.
-  */
- 
-+#include <errno.h>
- #include <fcntl.h>
- #include <stdio.h>
- #include <stdlib.h>
-@@ -312,11 +313,212 @@ static int test_function_filter(void)
- 	return run_filter_test(&filter);
- }
- 
-+static int test_size_filter(void)
-+{
-+	int fd;
-+	struct allocinfo_tag_data_vec *tags = malloc(sizeof(*tags));
-+	struct allocinfo_tag_data_vec *procfs_entries = malloc(sizeof(*procfs_entries));
-+	struct allocinfo_filter filter;
-+	int ret = KSFT_PASS;
-+	__u64 target_size, i, pos;
-+	struct allocinfo_tag_data *found_tag = NULL;
-+	const char *target_function = "do_init_module";
-+	struct allocinfo_content_id start_cont_id, end_cont_id;
-+	int retry = 0;
-+	const int max_retries = 10;
-+
-+	if (!tags || !procfs_entries) {
-+		ksft_print_msg("Memory allocation failed.\n");
-+		ret = KSFT_FAIL;
-+		goto freemem;
-+	}
-+
-+	fd = open(ALLOCINFO_PROC, O_RDONLY);
-+	if (fd < 0) {
-+		ksft_print_msg("Failed to open " ALLOCINFO_PROC ": %s\n", strerror(errno));
-+		ret = KSFT_SKIP;
-+		goto freemem;
-+	}
-+
-+	do {
-+		found_tag = NULL;
-+		pos = 0;
-+
-+		if (__allocinfo_get_content_id(fd, &start_cont_id)) {
-+			ksft_print_msg("allocinfo_get_content_id failed\n");
-+			ret = KSFT_FAIL;
-+			goto exit;
-+		}
-+
-+		memset(&filter, 0, sizeof(filter));
-+		filter.mask |= ALLOCINFO_FILTER_MASK_FUNCTION;
-+		strncpy(filter.fields.function, target_function, ALLOCINFO_STR_SIZE);
-+
-+		if (get_filtered_procfs_entries(procfs_entries, &filter)) {
-+			ksft_print_msg("Error retrieving entries from " ALLOCINFO_PROC "\n");
-+			ret = KSFT_SKIP;
-+			goto exit;
-+		}
-+
-+		if (procfs_entries->count == 0) {
-+			ksft_print_msg("Function %s not found in procfs\n", target_function);
-+			ret = KSFT_SKIP;
-+			goto exit;
-+		}
-+
-+		target_size = procfs_entries->tag[0].counter.bytes;
-+
-+		memset(&filter, 0, sizeof(filter));
-+		filter.mask |= ALLOCINFO_FILTER_MASK_MIN_SIZE | ALLOCINFO_FILTER_MASK_MAX_SIZE;
-+		filter.min_size = target_size;
-+		filter.max_size = target_size;
-+
-+		while (1) {
-+			struct allocinfo_get_at get_at_params;
-+
-+			memset(&get_at_params, 0, sizeof(get_at_params));
-+			memcpy(&get_at_params.filter, &filter, sizeof(filter));
-+			get_at_params.pos = pos;
-+
-+			if (__allocinfo_get_at(fd, &get_at_params))
-+				break;
-+
-+			tags->count = 0;
-+			memcpy(&tags->tag[tags->count++], &get_at_params.data,
-+			       sizeof(get_at_params.data));
-+
-+			while (tags->count < VEC_MAX_ENTRIES &&
-+			       __allocinfo_get_next(fd, &tags->tag[tags->count]) == 0)
-+				tags->count++;
-+
-+			for (i = 0; i < tags->count; i++) {
-+				if (strcmp(tags->tag[i].tag.function, target_function) == 0) {
-+					found_tag = &tags->tag[i];
-+					break;
-+				}
-+			}
-+
-+			if (found_tag || tags->count < VEC_MAX_ENTRIES)
-+				break;
-+
-+			pos += tags->count;
-+		}
-+
-+		if (__allocinfo_get_content_id(fd, &end_cont_id)) {
-+			ksft_print_msg("allocinfo_get_content_id failed\n");
-+			ret = KSFT_FAIL;
-+			goto exit;
-+		}
-+
-+		if (start_cont_id.id == end_cont_id.id)
-+			break;
-+
-+		ksft_print_msg("Module load detected during size verification, retrying...\n");
-+	} while (retry++ < max_retries);
-+
-+	if (start_cont_id.id == end_cont_id.id && !found_tag) {
-+		ksft_print_msg("Entry with function %s not found in IOCTL results\n",
-+			       target_function);
-+		ret = KSFT_FAIL;
-+	} else if (start_cont_id.id != end_cont_id.id) {
-+		ksft_print_msg("Failed to match content_ids for procfs and IOCTL, skipping...\n");
-+		ret = KSFT_SKIP;
-+	} else if (found_tag && found_tag->counter.bytes != target_size) {
-+		ksft_print_msg("IOCTL entry size %llu does not match target size %llu\n",
-+			       found_tag->counter.bytes, target_size);
-+		ret = KSFT_FAIL;
-+	}
-+
-+exit:
-+	close(fd);
-+freemem:
-+	free(tags);
-+	free(procfs_entries);
-+	return ret;
-+}
-+
-+static int test_lineno_filter(void)
-+{
-+	struct allocinfo_tag_data_vec *tags = malloc(sizeof(*tags));
-+	struct allocinfo_tag_data_vec *procfs_entries = malloc(sizeof(*procfs_entries));
-+	struct allocinfo_filter filter;
-+	enum ioctl_ret ioctl_status;
-+	int ret = KSFT_PASS;
-+	__u64 target_lineno, i;
-+	struct allocinfo_tag_data *target_tag;
-+	bool found = false;
-+
-+	if (!tags || !procfs_entries) {
-+		ksft_print_msg("Memory allocation failed.\n");
-+		ret = KSFT_FAIL;
-+		goto exit;
-+	}
-+
-+	memset(&filter, 0, sizeof(filter));
-+
-+	if (get_filtered_procfs_entries(procfs_entries, &filter)) {
-+		ksft_print_msg("Error retrieving entries from " ALLOCINFO_PROC "\n");
-+		ret = KSFT_SKIP;
-+		goto exit;
-+	}
-+	if (procfs_entries->count == 0) {
-+		ksft_print_msg("Could not retrieve procfs entries\n");
-+		ret = KSFT_SKIP;
-+		goto exit;
-+	}
-+	/*
-+	 * We depend on the procfs results to determine the line number for the filter before
-+	 * making the ioctl query. Hence, we cannot reuse run_filter_test here.
-+	 */
-+	target_tag = &procfs_entries->tag[0];
-+	target_lineno = target_tag->tag.lineno;
-+
-+	filter.mask |= ALLOCINFO_FILTER_MASK_LINENO;
-+	filter.fields.lineno = target_lineno;
-+
-+	ioctl_status = get_filtered_ioctl_entries(tags, &filter, 0);
-+	if (ioctl_status == IOCTL_INVALID_DATA) {
-+		ksft_print_msg("Trouble retrieving valid IOCTL entries, skipping.\n");
-+		ret = KSFT_SKIP;
-+		goto exit;
-+	}
-+	if (ioctl_status == IOCTL_FAILURE) {
-+		ksft_print_msg("Error retrieving IOCTL entries.\n");
-+		ret = KSFT_FAIL;
-+		goto exit;
-+	}
-+
-+	for (i = 0; i < tags->count; i++) {
-+		if (tags->tag[i].tag.lineno != target_lineno) {
-+			ksft_print_msg("IOCTL entry %llu has incorrect lineno %llu.\n",
-+				       i, tags->tag[i].tag.lineno);
-+			ret = KSFT_FAIL;
-+			goto exit;
-+		}
-+
-+		if (strncmp(tags->tag[i].tag.function, target_tag->tag.function,
-+			    ALLOCINFO_STR_SIZE) == 0 &&
-+		    strncmp(tags->tag[i].tag.filename, target_tag->tag.filename,
-+			    ALLOCINFO_STR_SIZE) == 0)
-+			found = true;
-+	}
-+
-+	if (!found) {
-+		ksft_print_msg("Original procfs entry not found in IOCTL lineno filter results.\n");
-+		ret = KSFT_FAIL;
-+	}
-+
-+exit:
-+	free(tags);
-+	free(procfs_entries);
-+	return ret;
-+}
-+
- int main(int argc, char *argv[])
- {
- 	int ret;
- 
--	ksft_set_plan(2);
-+	ksft_set_plan(4);
- 
- 	ret = test_filename_filter();
- 	if (ret == KSFT_SKIP)
-@@ -330,5 +532,17 @@ int main(int argc, char *argv[])
- 	else
- 		ksft_test_result(ret == KSFT_PASS, "test_function_filter\n");
- 
-+	ret = test_size_filter();
-+	if (ret == KSFT_SKIP)
-+		ksft_test_result_skip("Skipping test_size_filter\n");
-+	else
-+		ksft_test_result(ret == KSFT_PASS, "test_size_filter\n");
-+
-+	ret = test_lineno_filter();
-+	if (ret == KSFT_SKIP)
-+		ksft_test_result_skip("Skipping test_lineno_filter\n");
-+	else
-+		ksft_test_result(ret == KSFT_PASS, "test_lineno_filter\n");
-+
- 	ksft_finished();
- }
--- 
-2.55.0.795.g602f6c329a-goog
-
+Sounds like Sean and I are mostly on the same page here too, which is a
+bonus.
 
