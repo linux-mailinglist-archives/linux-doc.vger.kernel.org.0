@@ -1,85 +1,86 @@
-Return-Path: <linux-doc+bounces-95553-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95555-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id cIkzBpCzTWq79AEAu9opvQ
-	(envelope-from <linux-doc+bounces-95553-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 04:18:56 +0200
+	id xV0eJkG0TWr89AEAu9opvQ
+	(envelope-from <linux-doc+bounces-95555-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 04:21:53 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id A7C75721071
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 04:18:55 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 33FEA721164
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 04:21:53 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=JLX+fB04;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=QumXT6Li;
 	dmarc=pass (policy=none) header.from=gmail.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95553-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-95553-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95555-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-95555-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id C230C301EC53
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2026 02:18:37 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 94A5A3099016
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2026 02:18:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 712BE3803E7;
-	Wed,  8 Jul 2026 02:18:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 379BD3B52F4;
+	Wed,  8 Jul 2026 02:18:39 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oi1-f180.google.com (mail-oi1-f180.google.com [209.85.167.180])
+Received: from mail-oi1-f181.google.com (mail-oi1-f181.google.com [209.85.167.181])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4A78F3B19D6
-	for <linux-doc@vger.kernel.org>; Wed,  8 Jul 2026 02:18:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE8943B47FD
+	for <linux-doc@vger.kernel.org>; Wed,  8 Jul 2026 02:18:36 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783477117; cv=none; b=MokrVoLgQH1Wh4GERBJmyFAoxxpkrkpviSmjNYFanL02YpEGIuxiUYTjKKm0wKGo2cG/ouqhT6pO8ZJqY1sCgaAhWRyGcgiKuXrCi/ffF4taerOglBI2HrLCRDBNpDD/bwyMHNAe00I6bZ/MBIdSelcpK5A1hOf0DaciqRQWKnw=
+	t=1783477119; cv=none; b=oMcVkbXXusZRqVgVJBQEmDplWItMCwkV+51Wu1NJ2acIy1aXapccDI/MurqEGOlBNvkLNGXQbnEQKIHAlMnmAYPMIVtmA6bjfYQ3SEMic9ExWdGotF2Krb7XueLYNPFS2luorcfD4o5gFMQ7GfmnkUoELa6+PQ5FZhs/Jl1Y1mY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783477117; c=relaxed/simple;
-	bh=48IhllGZGlKVUO2aWGnTjwvlc3GYofwCmRrA9ZA4NVw=;
+	s=arc-20240116; t=1783477119; c=relaxed/simple;
+	bh=c5WIgaUW86zxkVqcui5pvUWjMpEd0rPqQJs9nD03Rho=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=hBpMHaChrbPYrJEJg3SrhDt7n0b7mRKz3IP39yTIeCE+4VJtnHZE/9JpFmheCyRW/O1WxFDI5Ovn+4peWgnpuwIe37sxOGwaiyrSG/pE9e4vcPOzuvLUeaMqEAuDnmF+IZmB4Ebnc84jk3QOO0y2Lb+BZWvCYgFb9xmdqV7UtN0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=JLX+fB04; arc=none smtp.client-ip=209.85.167.180
-Received: by mail-oi1-f180.google.com with SMTP id 5614622812f47-495c63c4141so153781b6e.2
-        for <linux-doc@vger.kernel.org>; Tue, 07 Jul 2026 19:18:35 -0700 (PDT)
+	 In-Reply-To:To:Cc; b=PiUuFQ6W2/aNckplms/QG6ohh+yT90IoZFr455pLxYxe2Av2FB4NZzIPbgH7kZ3m8BQ5I6VqqFD88klLWFmvVjwX1o3HgKxbU9xm4DZJuulYov1iaCswAetRAY+UjXyDgQYZPfD5B/vRvoChzhDStCLYeKQkewMdJ3mjm4rZP0c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=QumXT6Li; arc=none smtp.client-ip=209.85.167.181
+Received: by mail-oi1-f181.google.com with SMTP id 5614622812f47-495c63c41ceso111740b6e.2
+        for <linux-doc@vger.kernel.org>; Tue, 07 Jul 2026 19:18:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783477114; x=1784081914; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1783477116; x=1784081916; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=IthTBY0ylXLMf8SIGUJ5qIKEdVrHHeLRSYWe1vKaXJM=;
-        b=JLX+fB04EYXM79brG6ppOp22l5FHrRHMZQV3WKPBP7kPXpjgDlhiCXMYcXoZ5n1S8Y
-         M9GkFj63HIWDYgdjffTjeM//HkwATw+dTSTi03PGaxgYEVjLwZj5MblF1s1pfkNcHXaK
-         aabygfF47CC4TOM/VxDAlFOWK7dFAbluOPEx9EgYIDzqS4+FIU0WHd3ALIcJVdtwmyxj
-         lYzuFSAhr11/Hr+I4wG9+FksNUQPMmsIkJzYV0qBrTKRdLqoMkt11uLuTzlcun6LCZvc
-         OEOkhVvAOsCLtU4MTv0XF8iqhhLNkiqXGj+JsaQqa2VNNkXuBekZRjlSGYsCgYx/9tog
-         GxZA==
+        bh=mMbFBVb+54AdS6XN7q8pHuRmeyLjOD33H8GcCbRh278=;
+        b=QumXT6LiUj2wdjuxy7wrWIPaOJeTN/xDQayDH//bFAtJzLtjUKCEnkoAGn4CP30v34
+         CMevnTeFnWOodgxrQv+AXfvuY63zDgXYkbEfnUy6mt94xUF3GPsLdVDZoD5xTd47ydsK
+         p8i9b6I5I7PnwQ1Z56O7IpwSqgNJFVpwN3BK3Jnxatfieb2ZnnYKKuGLYg5+1MUPl6iX
+         Gl2Ika8hy6qP2YT+5P7O8IRHCSWKEV+VLXK8NRSmtJkf0u/LsY0H+CfwVzwZcmi90IV2
+         lfRe8YWzzts2/i5XXdUBDSrqXDSODosBTOwtQRQx/8s35Wos8bDx1Jb8r5oxXAgaucm1
+         OxhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783477114; x=1784081914;
+        d=1e100.net; s=20251104; t=1783477116; x=1784081916;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=IthTBY0ylXLMf8SIGUJ5qIKEdVrHHeLRSYWe1vKaXJM=;
-        b=qUYpLbU6Pa+e8jwOnnoIwgmR3RiWGoJ8K3HubYXC672/Us19b8NlJS0H5WyAAeJoiY
-         KBkVL76AXrfRUrhOy/yS7lUB9+8eZIACZcQBVg/SBQ1XeRl67W+SiAuSLn+48nan+T5Z
-         ePs3uDjr6EPL3wthc2KR8tW6+KgvMDJOCQBld+R2R0ls3b94eBqZlt62Nn6/evCYXIGu
-         KEeLtmYCz03/Dp9gQntSzA6YJ3LZ0ciN1bNzx7wrEwTAlscZMhBq8ketf90VZMpKvMBJ
-         neUY60KKUk+Ouxb0UvCinj0BArNcR4dtrhc+bu+NmslgaeFihxjz1KcPSrw3tUkj+oj9
-         C/7A==
-X-Forwarded-Encrypted: i=1; AFNElJ9ixBbb08e4BuBJvz+bw0ClyHeZ3ldV3X5SAwaoGrSMZCMLzzlInY5ajG8n+1FT3eGnRs8IQYEjZgQ=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxkYoZRhe+yzoB5gWIFtYufRm6yJeVPn9AyM4IMPlKtsiqPJvmn
-	IHD0IdCHYlN5+WlFAa4i3/FhKdbAxNdeauuuS54qXmiLuQ4IovCYrMvy
-X-Gm-Gg: AfdE7ckz4odkJYUIxzc69f1lwqO5S96yMOOy0gl5q4fHrpg/NvaR+AZU3Ae40GpkcHf
-	D7qfYZ1P+rKSPVKpbZGcigsDC7w9ETE5IKEDLi8GlTpXSIA2GguWY4/NYARjDKocCvMRqY13AA5
-	vpVvOHFJM+9/HeNpViDT5FcCNSkKR3/bL5XMC7gsU0MVHvHrdAhgB+DElfk3hdC3QAd7HC1d9+O
-	tICtFzLRa3RZl1F0rAhaejG5UEn+r+bYJiKRsv//zzGz6LWdKa67uR7rRaa4LYnDC4jGl5B2bFH
-	x+nT2ZNhhAFGkt+4PvUtxunm0Zxw0Ihn95GTtjs+qaJiHHTy7xrso3HW/G/FAopP6rXYTHhZi53
-	SDQty34vJW0SUDsrsUYYrI2qeq7VycEyZTabj/LPwMHo5EeMVzu8Z4dxrUpt+StHOZxrzg2F2+H
-	cQyJqm+a3TBRIZ715DqA+rlJgAfR+0oAkqinXsgYra2//kaea5OzM=
-X-Received: by 2002:a05:6808:670b:b0:496:233:3c3a with SMTP id 5614622812f47-4a20550e7aemr357266b6e.22.1783477114134;
-        Tue, 07 Jul 2026 19:18:34 -0700 (PDT)
+        bh=mMbFBVb+54AdS6XN7q8pHuRmeyLjOD33H8GcCbRh278=;
+        b=koRzU3GWP7JOIG1QzAqboIre1l+QnBGNpoKGWBnovuNvCyPVqfL49PAnkSdBNaM+6F
+         o4xSBfF142MAJ54CgkYy8DAd5fZh3Mq2M/sxD3+qlwxHSNgf3vdvxTx0R+0xU5HQdq5f
+         XS57V88GQMtr1Q6ZWnO+b2EwzYic1PbmBzpOm8M+ZPu55VuHC+FpKF4RfbZH18u9Z9v6
+         hYpPFclvTUi5nOvCKV+RDLVA2EtDzX94IH1nKsTMBhE7zeE2tk5daxOB2cwwI0+5rz7x
+         1d31x7qTMLG6hcZd50HSHKz9yUbafjWGkKkMJrFpzeTf8yhFasziOeYIWOX81XrYbFGm
+         AO+w==
+X-Forwarded-Encrypted: i=1; AFNElJ9q6UuXOjb2SnlhY6uyNWom/bHHKrjBo/Y0C0F9FQuQPwDw8PvHIKebipKLX+usEDsUwAnH4hN1xt0=@vger.kernel.org
+X-Gm-Message-State: AOJu0YylgtuMIfzezkjSJU9PFOf9B4lRSVg8tFo3/iVd6WSdST1PpCKH
+	u3sGfYBW1zTGA2NAX9h8p1cvoWdngEbQD6Ej5HCFADpzwfoJoljcM5/S
+X-Gm-Gg: AfdE7clwpj643vQmNKpeDT1/8h+/YJLe7PP2qbXXqypKX9ateS6n4cTnb6WD6X74bzM
+	YT8F6QkgRD/gR9uFi+CqjoHd17iq09NUcxeg0vQRFzC0WgVsHG7F9hOnj5CwwzchBiVjKZk4ld0
+	aCKlQ8bttseb8wWse97M70KNyoF6DPYwYucFS63Zj9fSNtwGR1SEX9QWgHpwop4QAzGu1eSIvCj
+	T+wecwzTUzT08mjZTPRsYCwdlsgV+OZgy1vlUFnwXj8V9z17WN25TpSxC1TBqkVACxhgwP+6RMm
+	ong3qy2Z0TCrkA7qBtIWMO4+pKB60OBw5QhddmTA2YF5DI0D4q5v+4D6B8aqV/n5WntNvq+TsM5
+	pX2BpBVYXSYg1rLL6aqZxjvL4QqlOtOT/pPMZt8EccX9xGKLwoVlK9uqwcjuWNGUct+aEcyvue8
+	hWNKKBj5t17d1AUvDG7Y/Hd2c9CpWam7g2y9Ah7a+OnKEQ2atc7S8=
+X-Received: by 2002:a05:6808:1203:b0:496:fd2:94e8 with SMTP id 5614622812f47-4a20252b9f2mr325652b6e.12.1783477115870;
+        Tue, 07 Jul 2026 19:18:35 -0700 (PDT)
 Received: from [192.168.0.245] (c-98-38-17-99.hsd1.co.comcast.net. [98.38.17.99])
-        by smtp.googlemail.com with ESMTPSA id 5614622812f47-4a1aa006f74sm799975b6e.0.2026.07.07.19.18.32
+        by smtp.googlemail.com with ESMTPSA id 5614622812f47-4a1aa006f74sm799975b6e.0.2026.07.07.19.18.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 07 Jul 2026 19:18:33 -0700 (PDT)
+        Tue, 07 Jul 2026 19:18:35 -0700 (PDT)
 From: Jim Cromie <jim.cromie@gmail.com>
-Date: Tue, 07 Jul 2026 20:18:05 -0600
-Subject: [PATCH v6 05/24] dyndbg.lds.S: fix lost dyndbg sections in modules
+Date: Tue, 07 Jul 2026 20:18:06 -0600
+Subject: [PATCH v6 06/24] dyndbg: factor ddebug_match_desc out from
+ ddebug_change
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -88,7 +89,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260707-dd-maint-2-v6-5-381f3edb0045@gmail.com>
+Message-Id: <20260707-dd-maint-2-v6-6-381f3edb0045@gmail.com>
 References: <20260707-dd-maint-2-v6-0-381f3edb0045@gmail.com>
 In-Reply-To: <20260707-dd-maint-2-v6-0-381f3edb0045@gmail.com>
 To: Andrew Morton <akpm@linux-foundation.org>, 
@@ -102,13 +103,14 @@ To: Andrew Morton <akpm@linux-foundation.org>,
  Petr Pavlu <petr.pavlu@suse.com>
 Cc: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
  dri-devel@lists.freedesktop.org, linux-arch@vger.kernel.org, 
- linux-modules@vger.kernel.org, Jim Cromie <jim.cromie@gmail.com>
+ linux-modules@vger.kernel.org, Jim Cromie <jim.cromie@gmail.com>, 
+ Louis Chauvet <louis.chauvet@bootlin.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1783477102; l=5103;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1783477102; l=4529;
  i=jim.cromie@gmail.com; s=20260203; h=from:subject:message-id;
- bh=48IhllGZGlKVUO2aWGnTjwvlc3GYofwCmRrA9ZA4NVw=;
- b=Dgizoa0dMPSdWw/1QoGENMuIOfcE8tq0L21huZWFCgpycKW/rvEdNeHdmYrS95ivvI/cPN5kJ
- u5IiJbf/JjpCiBg7YzPsfmrYDeeyKHY4bBZ0VGqN9CxkGLi5wofxlym
+ bh=c5WIgaUW86zxkVqcui5pvUWjMpEd0rPqQJs9nD03Rho=;
+ b=04RgXc/Apq9U8cVOxkk9yG7Al6ydGuc69Ip+3XA/yuC3YkRyQar6eVXBInEVdxoRCCuknZtdO
+ +FNIb0eFwmIB3dOAaNrZUY01ELAnI3eh1V4e8zq/FpVXFi3JrNiRDWj
 X-Developer-Key: i=jim.cromie@gmail.com; a=ed25519;
  pk=C6E5ODlPQo7ZBynATXH9wg7K6HxP0pIXyf4s38Qw0XE=
 X-Rspamd-Action: no action
@@ -116,23 +118,23 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	FROM_HAS_DN(0.00)[];
-	TAGGED_FROM(0.00)[bounces-95553-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-95555-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:akpm@linux-foundation.org,m:jbaron@akamai.com,m:gregkh@linuxfoundation.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:maarten.lankhorst@linux.intel.com,m:mripard@kernel.org,m:tzimmermann@suse.de,m:airlied@gmail.com,m:simona@ffwll.ch,m:arnd@arndb.de,m:mcgrof@kernel.org,m:petr.pavlu@suse.com,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-arch@vger.kernel.org,m:linux-modules@vger.kernel.org,m:jim.cromie@gmail.com,m:jimcromie@gmail.com,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:akpm@linux-foundation.org,m:jbaron@akamai.com,m:gregkh@linuxfoundation.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:maarten.lankhorst@linux.intel.com,m:mripard@kernel.org,m:tzimmermann@suse.de,m:airlied@gmail.com,m:simona@ffwll.ch,m:arnd@arndb.de,m:mcgrof@kernel.org,m:petr.pavlu@suse.com,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-arch@vger.kernel.org,m:linux-modules@vger.kernel.org,m:jim.cromie@gmail.com,m:louis.chauvet@bootlin.com,m:jimcromie@gmail.com,s:lists@lfdr.de];
 	FORGED_SENDER(0.00)[jimcromie@gmail.com,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FREEMAIL_FROM(0.00)[gmail.com];
 	FREEMAIL_TO(0.00)[linux-foundation.org,akamai.com,linuxfoundation.org,lwn.net,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,arndb.de,suse.com];
-	RCPT_COUNT_TWELVE(0.00)[19];
+	RCPT_COUNT_TWELVE(0.00)[20];
 	FORWARDED(0.00)[lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[vger.kernel.org,lists.freedesktop.org,gmail.com];
+	FREEMAIL_CC(0.00)[vger.kernel.org,lists.freedesktop.org,gmail.com,bootlin.com];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
@@ -142,156 +144,149 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	DKIM_TRACE(0.00)[gmail.com:+];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp,arndb.de:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[bootlin.com:email,vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: A7C75721071
+X-Rspamd-Queue-Id: 33FEA721164
 
-With CONFIG_DRM_USE_DYNAMIC_DEBUG=y, several build configs had
-problems with __dyndbg* sections getting lost in drm drivers.  Fix
-this by following the model demonstrated in codetag.lds.h.
+ddebug_change() is a big (~100 lines) function with a nested for loop.
 
-Introduce include/asm-generic/dyndbg.lds.h, to bundle dynamic-debug's
-multiple sections together, into 2 macros:
+The outer loop walks the per-module ddebug_tables list, and does
+module stuff: it filters on a query's "module FOO*" and "class BAR",
+failures here skip the entire inner loop.
 
-vmlinux.lds.h DATA_DATA: move the 2 BOUNDED_SECTION_BY(__dyndbg*)
-calls into dyndbg.lds.h DYNDBG_SECTIONS(). vmlinux.lds.h now includes
-the new file and calls the new macro.
+The inner loop (60 lines) scans a module's descriptors.  It starts
+with a long block of filters on function, line, format, and the
+validated "BAR" class (or the legacy/_DPRINTK_CLASS_DFLT).
 
-MOD_DYNDBG_SECTIONS keeps the 2 sections by name, aligns them and sets
-the output address to 0 when the sections are empty.
+These filters "continue" past pr_debugs that don't match the query
+criteria, before it falls through the code below that counts matches,
+then adjusts the flags and static-keys.  This is unnecessarily hard to
+think about.
 
-dyndbg.lds.h includes (reuses) bounded-section.lds.h
+So move the per-descriptor filter-block into a boolean function:
+ddebug_match_desc(desc), and change each "continue" to "return false".
+This puts a clear interface in place, so any future changes are either
+inside, outside, or across this interface.
 
-scripts/module.lds.S: now calls MOD_DYNDBG_SECTIONS right before the
-CODETAG macro (consistent with their placements in vmlinux.lds.h), and
-also includes dyndbg.lds.h
+also fix checkpatch complaints about spaces and braces.
 
-This isolates vmlinux.lds.h from further __dyndbg section additions.
-
-CC: Arnd Bergmann <arnd@arndb.de>
 Signed-off-by: Jim Cromie <jim.cromie@gmail.com>
-Reviewed-by: Petr Pavlu <petr.pavlu@suse.com>
+Reviewed-by: Louis Chauvet <louis.chauvet@bootlin.com>
 ---
-v3: move #includes to top, drop extra ALIGN(8) in DYNDBG_SECTIONS, add RvBy
-
-v2: Address linker script review feedback for relocatable modules.
-
-MOD_DYNDBG_SECTIONS() used the BOUNDED_SECTION_BY() macro, which
-proved problematic for kernel modules for two reasons:
-
-1. Unwanted Empty Sections:
-   BOUNDED_SECTION_BY() automatically generates `__start` and `__stop`
-   symbols. When applied to `MOD_DYNDBG_SECTIONS()`, the linker assumes
-   the sections are populated due to the symbol definitions, forcing an
-   empty `__dyndbg` and `__dyndbg_classes` output section in every
-   compiled module, even those without dynamic debug configuration.
-   Since the module loader uses `section_objs()` to locate data via
-   ELF headers instead of relying on `__start`/`__stop` symbols, these
-   assignments are completely unnecessary.
-
-2. Non-zero Output Addresses:
-   During relocatable linking (e.g., `ld.bfd -r`), omitting an explicit
-   base address causes the section to inherit the current location
-   counter. This results in non-zero sh_addr values in `.ko` files,
-   which is confusing, degrades compressibility, and can cause issues
-   with external tools parsing the ELF.
-
-Fix both issues by dropping `BOUNDED_SECTION_BY()` in favor of a simple
-`KEEP(*(...))` constraint and explicitly defining the sections with a `0`
-base address: `__dyndbg 0 : ALIGN(8) { ... }`.
-
-fixup-inc-vml
+v5: check for null format in callsite. shouldnt happen, but pr_debug() isnt illegal
 ---
- MAINTAINERS                       |  1 +
- include/asm-generic/dyndbg.lds.h  | 18 ++++++++++++++++++
- include/asm-generic/vmlinux.lds.h |  6 ++----
- scripts/module.lds.S              |  2 ++
- 4 files changed, 23 insertions(+), 4 deletions(-)
+ lib/dynamic_debug.c | 87 +++++++++++++++++++++++++++++++----------------------
+ 1 file changed, 51 insertions(+), 36 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 4a8b0fd665ce..25400fee9f32 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -9178,6 +9178,7 @@ DYNAMIC DEBUG
- M:	Jason Baron <jbaron@akamai.com>
- M:	Jim Cromie <jim.cromie@gmail.com>
- S:	Maintained
-+F:	include/asm-generic/dyndbg.lds.h
- F:	include/linux/dynamic_debug.h
- F:	lib/dynamic_debug.c
- F:	lib/test_dynamic_debug.c
-diff --git a/include/asm-generic/dyndbg.lds.h b/include/asm-generic/dyndbg.lds.h
-new file mode 100644
-index 000000000000..9d8951bef688
---- /dev/null
-+++ b/include/asm-generic/dyndbg.lds.h
-@@ -0,0 +1,18 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef __ASM_GENERIC_DYNDBG_LDS_H
-+#define __ASM_GENERIC_DYNDBG_LDS_H
+diff --git a/lib/dynamic_debug.c b/lib/dynamic_debug.c
+index 18a71a9108d3..577a07916072 100644
+--- a/lib/dynamic_debug.c
++++ b/lib/dynamic_debug.c
+@@ -172,6 +172,56 @@ static struct ddebug_class_map *ddebug_find_valid_class(struct ddebug_table cons
+  * callsites, normally the same as number of changes.  If verbose,
+  * logs the changes.  Takes ddebug_lock.
+  */
++static bool ddebug_match_desc(const struct ddebug_query *query,
++			      struct _ddebug *dp,
++			      int valid_class)
++{
++	/* match site against query-class */
++	if (dp->class_id != valid_class)
++		return false;
 +
-+#include <asm-generic/bounded_sections.lds.h>
-+#define DYNDBG_SECTIONS()					\
-+	BOUNDED_SECTION_BY(__dyndbg, ___dyndbg)			\
-+	BOUNDED_SECTION_BY(__dyndbg_classes, ___dyndbg_classes)
++	/* match against the source filename */
++	if (query->filename &&
++	    !match_wildcard(query->filename, dp->filename) &&
++	    !match_wildcard(query->filename,
++			    kbasename(dp->filename)) &&
++	    !match_wildcard(query->filename,
++			    trim_prefix(dp->filename)))
++		return false;
 +
-+#define MOD_DYNDBG_SECTIONS()						\
-+	__dyndbg 0 : ALIGN(8) {						\
-+		KEEP(*(__dyndbg))					\
-+	}								\
-+	__dyndbg_classes 0 : ALIGN(8) {					\
-+		KEEP(*(__dyndbg_classes))				\
++	/* match against the function */
++	if (query->function &&
++	    !match_wildcard(query->function, dp->function))
++		return false;
++
++	/* match against the format */
++	if (query->format) {
++		if (!dp->format) {
++			pr_info("encountered a NULL format\n");
++			return false;
++		}
++		if (*query->format == '^') {
++			char *p;
++			/* anchored search. match must be at beginning */
++			p = strstr(dp->format, query->format + 1);
++			if (p != dp->format)
++				return false;
++		} else if (!strstr(dp->format, query->format)) {
++			return false;
++		}
 +	}
 +
-+#endif /* __ASM_GENERIC_DYNDBG_LDS_H */
-diff --git a/include/asm-generic/vmlinux.lds.h b/include/asm-generic/vmlinux.lds.h
-index 3758a79d0430..bd60f278f762 100644
---- a/include/asm-generic/vmlinux.lds.h
-+++ b/include/asm-generic/vmlinux.lds.h
-@@ -52,6 +52,7 @@
++	/* match against the line number range */
++	if (query->first_lineno &&
++	    dp->lineno < query->first_lineno)
++		return false;
++	if (query->last_lineno &&
++	    dp->lineno > query->last_lineno)
++		return false;
++
++	return true;
++}
++
+ static int ddebug_change(const struct ddebug_query *query,
+ 			 struct flag_settings *modifiers)
+ {
+@@ -204,42 +254,7 @@ static int ddebug_change(const struct ddebug_query *query,
+ 		for (i = 0; i < dt->num_ddebugs; i++) {
+ 			struct _ddebug *dp = &dt->ddebugs[i];
  
- #include <asm-generic/bounded_sections.lds.h>
- #include <asm-generic/codetag.lds.h>
-+#include <asm-generic/dyndbg.lds.h>
+-			/* match site against query-class */
+-			if (dp->class_id != valid_class)
+-				continue;
+-
+-			/* match against the source filename */
+-			if (query->filename &&
+-			    !match_wildcard(query->filename, dp->filename) &&
+-			    !match_wildcard(query->filename,
+-					   kbasename(dp->filename)) &&
+-			    !match_wildcard(query->filename,
+-					   trim_prefix(dp->filename)))
+-				continue;
+-
+-			/* match against the function */
+-			if (query->function &&
+-			    !match_wildcard(query->function, dp->function))
+-				continue;
+-
+-			/* match against the format */
+-			if (query->format) {
+-				if (*query->format == '^') {
+-					char *p;
+-					/* anchored search. match must be at beginning */
+-					p = strstr(dp->format, query->format+1);
+-					if (p != dp->format)
+-						continue;
+-				} else if (!strstr(dp->format, query->format))
+-					continue;
+-			}
+-
+-			/* match against the line number range */
+-			if (query->first_lineno &&
+-			    dp->lineno < query->first_lineno)
+-				continue;
+-			if (query->last_lineno &&
+-			    dp->lineno > query->last_lineno)
++			if (!ddebug_match_desc(query, dp, valid_class))
+ 				continue;
  
- #ifndef LOAD_OFFSET
- #define LOAD_OFFSET 0
-@@ -344,10 +345,7 @@
- 	*(.data..do_once)						\
- 	STRUCT_ALIGN();							\
- 	*(__tracepoints)						\
--	/* implement dynamic printk debug */				\
--	. = ALIGN(8);							\
--	BOUNDED_SECTION_BY(__dyndbg_classes, ___dyndbg_classes)		\
--	BOUNDED_SECTION_BY(__dyndbg, ___dyndbg)				\
-+	DYNDBG_SECTIONS()						\
- 	CODETAG_SECTIONS()						\
- 	LIKELY_PROFILE()		       				\
- 	BRANCH_PROFILE()						\
-diff --git a/scripts/module.lds.S b/scripts/module.lds.S
-index b62683061d79..2e62dc5bd5d4 100644
---- a/scripts/module.lds.S
-+++ b/scripts/module.lds.S
-@@ -10,6 +10,7 @@
- #endif
- 
- #include <asm-generic/codetag.lds.h>
-+#include <asm-generic/dyndbg.lds.h>
- 
- SECTIONS {
- 	/DISCARD/ : {
-@@ -61,6 +62,7 @@ SECTIONS {
- 		*(.rodata..L*)
- 	}
- 
-+	MOD_DYNDBG_SECTIONS()
- 	MOD_SEPARATE_CODETAG_SECTIONS()
- }
- 
+ 			nfound++;
 
 -- 
 2.55.0
