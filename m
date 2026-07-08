@@ -1,52 +1,52 @@
-Return-Path: <linux-doc+bounces-95719-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95720-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id fmJ1NixYTmoULAIAu9opvQ
-	(envelope-from <linux-doc+bounces-95719-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 16:01:16 +0200
+	id OELYCT5YTmoYLAIAu9opvQ
+	(envelope-from <linux-doc+bounces-95720-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 16:01:34 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id B432272707C
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 16:01:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9DC9C727089
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 16:01:33 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=arm.com header.s=foss header.b="U/EYVI2P";
+	dkim=pass header.d=arm.com header.s=foss header.b=I52Nto02;
 	dmarc=pass (policy=none) header.from=arm.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95719-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-95719-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95720-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-95720-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 76A9E303D32C
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2026 14:00:03 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id D00283044140
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2026 14:00:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 27987426D18;
-	Wed,  8 Jul 2026 13:59:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DC1323F39F7;
+	Wed,  8 Jul 2026 13:59:56 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D3D5C425CE7;
-	Wed,  8 Jul 2026 13:59:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1D734416D05;
+	Wed,  8 Jul 2026 13:59:55 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783519192; cv=none; b=J1wbwBzAHERHpj3Xqzei8KyS44aH5336Ph2wnIKYCtBUQxyWermz2mnO3/TI/tJ3SlNxjun8ESl2v73GbtyunhZC6Yp2sUgj7J1YOd7lW8XnxEY/tr6NBh2POJ2KgA9EErurwsr9hwsUlVZQ9BwtMvN+qftIpIrxjksctALAcco=
+	t=1783519196; cv=none; b=D8pbFTHYhTFm/cC16AXat53iQcKuXFkHM6KT3udyEDRwAWb9VfSCBNZYszFIy6k7ASi6vCyBiG9Q4ZpNtNYylExvDoVsUsD9IkDnHEdG5gczYpmtVpGsoSWgxDD5st2BJ43E+YSKYnP5xlwpk/f8tm4yUzKsXCU9WKYmSG9IP5U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783519192; c=relaxed/simple;
-	bh=m+Rir9qQJxeEvy4zcNmwvIPVKvHkQ2LpXQCSR4RGK/k=;
+	s=arc-20240116; t=1783519196; c=relaxed/simple;
+	bh=ay+25JwVynvQtCEWeKp44s8sytv+u1LllO8MpqoV8gs=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=fIBL6oCznypR6glkYkStct/sTEGM3eUZkdP6RmS6AkHX2/CdxJ1+P82YewYHvHiuMHxKrXGjdwUjWCsvvGl+lYaxNPv4bRSBNznXLOA7oUWpFnMZThAH+OL2TSZTqZt3JhWn7236a8crmID6WlSUX2VDKWbHpKqqCjWObmq41uQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=U/EYVI2P; arc=none smtp.client-ip=217.140.110.172
+	 In-Reply-To:To:Cc; b=fJP+jmKhCt6hF4ZBqWS4UrfNse+3QRPGsSPPSeiM/LMvOnll2Y/fBkQTO7ktv0lFa2mD/awckuywWU4/H7jAh08dxnKIkY9sb1nPMtu0rsIkmvqZna5tRG2abvpn0P1SoIUcYAoK74JOLAhZQ8q8gJ1gvFdELMYvOQWQev4Mjfs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=I52Nto02; arc=none smtp.client-ip=217.140.110.172
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 03D921F91;
-	Wed,  8 Jul 2026 06:59:45 -0700 (PDT)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 564C61FC4;
+	Wed,  8 Jul 2026 06:59:50 -0700 (PDT)
 Received: from e134710.arm.com (e134710.arm.com [10.33.10.82])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7AF763F66F;
-	Wed,  8 Jul 2026 06:59:44 -0700 (PDT)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A25C73F66F;
+	Wed,  8 Jul 2026 06:59:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1783519189; bh=m+Rir9qQJxeEvy4zcNmwvIPVKvHkQ2LpXQCSR4RGK/k=;
+	t=1783519194; bh=ay+25JwVynvQtCEWeKp44s8sytv+u1LllO8MpqoV8gs=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=U/EYVI2P/LJaUAD9qYjnANqxCJAtI81z1pyeNODy0oleHOouZ8jQW+ojdtNeb+fFk
-	 NLcMoTTeIzzm975KyCghjH5LquwBHwBqEcAq5JUO9QQHrfbBRs7SQik/zb+SDUmsYN
-	 O+Ejjd8OvfaVOuhZKr74C1STnfmFGqDNBIzI5FU0=
+	b=I52Nto02EyO3HQgMpBeyZPHKL04aOXE+8bLemqbiEfxOx2v0pL7tE42RSUYEqRLfA
+	 na5WFO+TyM81m83bp9gdCQ8/61ZYojozIqGr+ck+6P7Z90q2la1e0IrXcJuLOTBGzh
+	 8nvOe2Y/dzuFJ/j1TMgo+0P9MAKkwemBx/ETpjYk=
 From: Ahmed Tiba <ahmed.tiba@arm.com>
-Date: Wed, 08 Jul 2026 14:59:04 +0100
-Subject: [PATCH v7 05/10] ACPI: APEI: GHES: move vendor record helpers
+Date: Wed, 08 Jul 2026 14:59:05 +0100
+Subject: [PATCH v7 06/10] ACPI: APEI: GHES: move CXL CPER helpers
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -55,7 +55,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260708-topics-ahmtib01-ras_ffh_arm_internal_review-v7-5-8b3a85216cef@arm.com>
+Message-Id: <20260708-topics-ahmtib01-ras_ffh_arm_internal_review-v7-6-8b3a85216cef@arm.com>
 References: <20260708-topics-ahmtib01-ras_ffh_arm_internal_review-v7-0-8b3a85216cef@arm.com>
 In-Reply-To: <20260708-topics-ahmtib01-ras_ffh_arm_internal_review-v7-0-8b3a85216cef@arm.com>
 To: "Rafael J. Wysocki" <rafael@kernel.org>, 
@@ -80,11 +80,11 @@ Cc: linux-kernel@vger.kernel.org, linux-acpi@vger.kernel.org,
  devicetree@vger.kernel.org, linux-edac@vger.kernel.org, 
  linux-doc@vger.kernel.org, Dmitry.Lamerov@arm.com
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1783519157; l=6442;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1783519157; l=12681;
  i=ahmed.tiba@arm.com; s=20260219; h=from:subject:message-id;
- bh=m+Rir9qQJxeEvy4zcNmwvIPVKvHkQ2LpXQCSR4RGK/k=;
- b=bVj+vCq2iQ32yyUrW44OR3IUx7RREz4D7phTILPujJep+Kboo/XT+PfGO6nPL9IK1yyjkGgAE
- zEXm7auPh7WB3JxXiSIrh2bYGlhW6qTkfLwqnW8h1jLyS4FSfO4QMgs
+ bh=ay+25JwVynvQtCEWeKp44s8sytv+u1LllO8MpqoV8gs=;
+ b=lQaW4kGRtYqH95zoYrTpq75ntbFXxgyvYNElsUngyypiSPRhMrldyALw8L5bXDG1CzlihsBdq
+ e4F82uvN8RNB3K0zoDb6wzw70QLUUgHY14EopQ38npHzAGiDm3AEunq
 X-Developer-Key: i=ahmed.tiba@arm.com; a=ed25519;
  pk=xVOtd+Qklh/4tuM3tB+BEZD4jj5a6W59C3KCNX6v7OE=
 X-Rspamd-Action: no action
@@ -97,220 +97,447 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-95719-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-95720-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_TO(0.00)[kernel.org,intel.com,alien8.de,huawei.com,linux.alibaba.com,stgolabs.net,zohomail.com,linux.ibm.com,gmail.com,google.com,arm.com,lwn.net,linuxfoundation.org];
-	FORGED_RECIPIENTS(0.00)[m:rafael@kernel.org,m:tony.luck@intel.com,m:bp@alien8.de,m:guohanjun@huawei.com,m:mchehab@kernel.org,m:xueshuai@linux.alibaba.com,m:lenb@kernel.org,m:saket.dumbre@intel.com,m:dave@stgolabs.net,m:jic23@kernel.org,m:dave.jiang@intel.com,m:alison.schofield@intel.com,m:vishal.l.verma@intel.com,m:djbw@kernel.org,m:iweiny@kernel.org,m:ming.li@zohomail.com,m:mahesh@linux.ibm.com,m:oohall@gmail.com,m:bhelgaas@google.com,m:ahmed.tiba@arm.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-kernel@vger.kernel.org,m:linux-acpi@vger.kernel.org,m:acpica-devel@lists.linux.dev,m:linux-cxl@vger.kernel.org,m:linuxppc-dev@lists.ozlabs.org,m:linux-pci@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-edac@vger.kernel.org,m:linux-doc@vger.kernel.org,m:Dmitry.Lamerov@arm.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
-	RSPAMD_URIBL_FAIL(0.00)[vger.kernel.org:query timed out,arm.com:query timed out];
-	FORGED_SENDER(0.00)[ahmed.tiba@arm.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
+	FREEMAIL_TO(0.00)[kernel.org,intel.com,alien8.de,huawei.com,linux.alibaba.com,stgolabs.net,zohomail.com,linux.ibm.com,gmail.com,google.com,arm.com,lwn.net,linuxfoundation.org];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:rafael@kernel.org,m:tony.luck@intel.com,m:bp@alien8.de,m:guohanjun@huawei.com,m:mchehab@kernel.org,m:xueshuai@linux.alibaba.com,m:lenb@kernel.org,m:saket.dumbre@intel.com,m:dave@stgolabs.net,m:jic23@kernel.org,m:dave.jiang@intel.com,m:alison.schofield@intel.com,m:vishal.l.verma@intel.com,m:djbw@kernel.org,m:iweiny@kernel.org,m:ming.li@zohomail.com,m:mahesh@linux.ibm.com,m:oohall@gmail.com,m:bhelgaas@google.com,m:ahmed.tiba@arm.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-kernel@vger.kernel.org,m:linux-acpi@vger.kernel.org,m:acpica-devel@lists.linux.dev,m:linux-cxl@vger.kernel.org,m:linuxppc-dev@lists.ozlabs.org,m:linux-pci@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-edac@vger.kernel.org,m:linux-doc@vger.kernel.org,m:Dmitry.Lamerov@arm.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[ahmed.tiba@arm.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[arm.com:+];
 	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[35];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[ahmed.tiba@arm.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[arm.com:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[35];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
 	TO_DN_SOME(0.00)[]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: B432272707C
+X-Rspamd-Queue-Id: 9DC9C727089
 
-Shift the vendor record workqueue helpers into ghes_cper.c so both GHES
-and future DT-based providers can use the same implementation. The change
-is mechanical and keeps the notifier behavior identical.
+Move the CXL CPER handling paths out of ghes.c and into ghes_cper.c so the
+helpers can be reused. The code is moved as-is, with the public
+prototypes updated so GHES keeps calling into the new translation unit.
 
+While moving this code, also add CXL CPER section length checks and use
+spinlock_irqsave() in CXL register/unregister paths for locking
+consistency.
+
+Reviewed-by: Jonathan Cameron <jic23@kernel.org>
 Signed-off-by: Ahmed Tiba <ahmed.tiba@arm.com>
 ---
- drivers/acpi/apei/ghes.c      | 68 ------------------------------------------
- drivers/acpi/apei/ghes_cper.c | 69 +++++++++++++++++++++++++++++++++++++++++++
- include/acpi/ghes_cper.h      |  2 ++
- 3 files changed, 71 insertions(+), 68 deletions(-)
+ drivers/acpi/apei/ghes.c      | 180 +++++++++++-------------------------------
+ drivers/acpi/apei/ghes_cper.c | 135 +++++++++++++++++++++++++++++++
+ include/acpi/ghes_cper.h      |  11 +++
+ 3 files changed, 194 insertions(+), 132 deletions(-)
 
 diff --git a/drivers/acpi/apei/ghes.c b/drivers/acpi/apei/ghes.c
-index e9cb576eefcf..07e4001ea8d7 100644
+index 07e4001ea8d7..2a83d326e692 100644
 --- a/drivers/acpi/apei/ghes.c
 +++ b/drivers/acpi/apei/ghes.c
-@@ -383,74 +383,6 @@ static void ghes_handle_aer(struct acpi_hest_generic_data *gdata)
+@@ -383,138 +383,6 @@ static void ghes_handle_aer(struct acpi_hest_generic_data *gdata)
  #endif
  }
  
--static BLOCKING_NOTIFIER_HEAD(vendor_record_notify_list);
+-/* Room for 8 entries */
+-#define CXL_CPER_PROT_ERR_FIFO_DEPTH 8
+-static DEFINE_KFIFO(cxl_cper_prot_err_fifo, struct cxl_cper_prot_err_work_data,
+-		    CXL_CPER_PROT_ERR_FIFO_DEPTH);
 -
--int ghes_register_vendor_record_notifier(struct notifier_block *nb)
+-/* Synchronize schedule_work() with cxl_cper_prot_err_work changes */
+-static DEFINE_SPINLOCK(cxl_cper_prot_err_work_lock);
+-struct work_struct *cxl_cper_prot_err_work;
+-
+-static void cxl_cper_post_prot_err(struct cxl_cper_sec_prot_err *prot_err,
+-				   int severity)
 -{
--	return blocking_notifier_chain_register(&vendor_record_notify_list, nb);
--}
--EXPORT_SYMBOL_GPL(ghes_register_vendor_record_notifier);
+-#ifdef CONFIG_ACPI_APEI_PCIEAER
+-	struct cxl_cper_prot_err_work_data wd;
 -
--void ghes_unregister_vendor_record_notifier(struct notifier_block *nb)
--{
--	blocking_notifier_chain_unregister(&vendor_record_notify_list, nb);
--}
--EXPORT_SYMBOL_GPL(ghes_unregister_vendor_record_notifier);
--
--static void ghes_vendor_record_notifier_destroy(void *nb)
--{
--	ghes_unregister_vendor_record_notifier(nb);
--}
--
--int devm_ghes_register_vendor_record_notifier(struct device *dev,
--					      struct notifier_block *nb)
--{
--	int ret;
--
--	ret = ghes_register_vendor_record_notifier(nb);
--	if (ret)
--		return ret;
--
--	return devm_add_action_or_reset(dev, ghes_vendor_record_notifier_destroy, nb);
--}
--EXPORT_SYMBOL_GPL(devm_ghes_register_vendor_record_notifier);
--
--static void ghes_vendor_record_work_func(struct work_struct *work)
--{
--	struct ghes_vendor_record_entry *entry;
--	struct acpi_hest_generic_data *gdata;
--	u32 len;
--
--	entry = container_of(work, struct ghes_vendor_record_entry, work);
--	gdata = GHES_GDATA_FROM_VENDOR_ENTRY(entry);
--
--	blocking_notifier_call_chain(&vendor_record_notify_list,
--				     entry->error_severity, gdata);
--
--	len = GHES_VENDOR_ENTRY_LEN(acpi_hest_get_record_size(gdata));
--	gen_pool_free(ghes_estatus_pool, (unsigned long)entry, len);
--}
--
--static void ghes_defer_non_standard_event(struct acpi_hest_generic_data *gdata,
--					  int sev)
--{
--	struct acpi_hest_generic_data *copied_gdata;
--	struct ghes_vendor_record_entry *entry;
--	u32 len;
--
--	len = GHES_VENDOR_ENTRY_LEN(acpi_hest_get_record_size(gdata));
--	entry = (void *)gen_pool_alloc(ghes_estatus_pool, len);
--	if (!entry)
+-	if (cxl_cper_sec_prot_err_valid(prot_err))
 -		return;
 -
--	copied_gdata = GHES_GDATA_FROM_VENDOR_ENTRY(entry);
--	memcpy(copied_gdata, gdata, acpi_hest_get_record_size(gdata));
--	entry->error_severity = sev;
+-	guard(spinlock_irqsave)(&cxl_cper_prot_err_work_lock);
 -
--	INIT_WORK(&entry->work, ghes_vendor_record_work_func);
--	schedule_work(&entry->work);
+-	if (!cxl_cper_prot_err_work)
+-		return;
+-
+-	if (cxl_cper_setup_prot_err_work_data(&wd, prot_err, severity))
+-		return;
+-
+-	if (!kfifo_put(&cxl_cper_prot_err_fifo, wd)) {
+-		pr_err_ratelimited("CXL CPER kfifo overflow\n");
+-		return;
+-	}
+-
+-	schedule_work(cxl_cper_prot_err_work);
+-#endif
 -}
 -
- /* Room for 8 entries */
- #define CXL_CPER_PROT_ERR_FIFO_DEPTH 8
- static DEFINE_KFIFO(cxl_cper_prot_err_fifo, struct cxl_cper_prot_err_work_data,
+-int cxl_cper_register_prot_err_work(struct work_struct *work)
+-{
+-	if (cxl_cper_prot_err_work)
+-		return -EINVAL;
+-
+-	guard(spinlock)(&cxl_cper_prot_err_work_lock);
+-	cxl_cper_prot_err_work = work;
+-	return 0;
+-}
+-EXPORT_SYMBOL_NS_GPL(cxl_cper_register_prot_err_work, "CXL");
+-
+-int cxl_cper_unregister_prot_err_work(struct work_struct *work)
+-{
+-	if (cxl_cper_prot_err_work != work)
+-		return -EINVAL;
+-
+-	guard(spinlock)(&cxl_cper_prot_err_work_lock);
+-	cxl_cper_prot_err_work = NULL;
+-	return 0;
+-}
+-EXPORT_SYMBOL_NS_GPL(cxl_cper_unregister_prot_err_work, "CXL");
+-
+-int cxl_cper_prot_err_kfifo_get(struct cxl_cper_prot_err_work_data *wd)
+-{
+-	return kfifo_get(&cxl_cper_prot_err_fifo, wd);
+-}
+-EXPORT_SYMBOL_NS_GPL(cxl_cper_prot_err_kfifo_get, "CXL");
+-
+-/* Room for 8 entries for each of the 4 event log queues */
+-#define CXL_CPER_FIFO_DEPTH 32
+-DEFINE_KFIFO(cxl_cper_fifo, struct cxl_cper_work_data, CXL_CPER_FIFO_DEPTH);
+-
+-/* Synchronize schedule_work() with cxl_cper_work changes */
+-static DEFINE_SPINLOCK(cxl_cper_work_lock);
+-struct work_struct *cxl_cper_work;
+-
+-static void cxl_cper_post_event(enum cxl_event_type event_type,
+-				struct cxl_cper_event_rec *rec)
+-{
+-	struct cxl_cper_work_data wd;
+-
+-	if (rec->hdr.length <= sizeof(rec->hdr) ||
+-	    rec->hdr.length > sizeof(*rec)) {
+-		pr_err(FW_WARN "CXL CPER Invalid section length (%u)\n",
+-		       rec->hdr.length);
+-		return;
+-	}
+-
+-	if (!(rec->hdr.validation_bits & CPER_CXL_COMP_EVENT_LOG_VALID)) {
+-		pr_err(FW_WARN "CXL CPER invalid event\n");
+-		return;
+-	}
+-
+-	guard(spinlock_irqsave)(&cxl_cper_work_lock);
+-
+-	if (!cxl_cper_work)
+-		return;
+-
+-	wd.event_type = event_type;
+-	memcpy(&wd.rec, rec, sizeof(wd.rec));
+-
+-	if (!kfifo_put(&cxl_cper_fifo, wd)) {
+-		pr_err_ratelimited("CXL CPER kfifo overflow\n");
+-		return;
+-	}
+-
+-	schedule_work(cxl_cper_work);
+-}
+-
+-int cxl_cper_register_work(struct work_struct *work)
+-{
+-	if (cxl_cper_work)
+-		return -EINVAL;
+-
+-	guard(spinlock)(&cxl_cper_work_lock);
+-	cxl_cper_work = work;
+-	return 0;
+-}
+-EXPORT_SYMBOL_NS_GPL(cxl_cper_register_work, "CXL");
+-
+-int cxl_cper_unregister_work(struct work_struct *work)
+-{
+-	if (cxl_cper_work != work)
+-		return -EINVAL;
+-
+-	guard(spinlock)(&cxl_cper_work_lock);
+-	cxl_cper_work = NULL;
+-	return 0;
+-}
+-EXPORT_SYMBOL_NS_GPL(cxl_cper_unregister_work, "CXL");
+-
+-int cxl_cper_kfifo_get(struct cxl_cper_work_data *wd)
+-{
+-	return kfifo_get(&cxl_cper_fifo, wd);
+-}
+-EXPORT_SYMBOL_NS_GPL(cxl_cper_kfifo_get, "CXL");
+-
+ static void ghes_log_hwerr(int sev, guid_t *sec_type)
+ {
+ 	if (sev != CPER_SEV_RECOVERABLE)
+@@ -549,6 +417,42 @@ static void ghes_log_hwerr(int sev, guid_t *sec_type)
+ 	hwerr_log_error_type(HWERR_RECOV_OTHERS);
+ }
+ 
++static bool ghes_cxl_event_len_valid(struct acpi_hest_generic_data *gdata,
++				     struct cxl_cper_event_rec *rec)
++{
++	if (gdata->error_data_length < sizeof(*rec) ||
++	    rec->hdr.length <= sizeof(rec->hdr) ||
++	    rec->hdr.length > gdata->error_data_length ||
++	    rec->hdr.length > sizeof(*rec)) {
++		pr_err(FW_WARN "CXL CPER Invalid section length (%u)\n",
++		       rec->hdr.length);
++		return false;
++	}
++
++	return true;
++}
++
++static bool ghes_cxl_prot_err_len_valid(struct acpi_hest_generic_data *gdata,
++					struct cxl_cper_sec_prot_err *prot_err)
++{
++	if (gdata->error_data_length < sizeof(*prot_err) +
++	    sizeof(struct cxl_ras_capability_regs)) {
++		pr_err(FW_WARN "CXL CPER Invalid protocol error length (%u)\n",
++		       gdata->error_data_length);
++		return false;
++	}
++
++	if (prot_err->dvsec_len >
++	    gdata->error_data_length - sizeof(*prot_err) -
++	    sizeof(struct cxl_ras_capability_regs)) {
++		pr_err(FW_WARN "CXL CPER invalid DVSEC length (%u)\n",
++		       prot_err->dvsec_len);
++		return false;
++	}
++
++	return true;
++}
++
+ static void ghes_do_proc(struct ghes *ghes,
+ 			 const struct acpi_hest_generic_status *estatus)
+ {
+@@ -585,18 +489,30 @@ static void ghes_do_proc(struct ghes *ghes,
+ 		} else if (guid_equal(sec_type, &CPER_SEC_CXL_PROT_ERR)) {
+ 			struct cxl_cper_sec_prot_err *prot_err = acpi_hest_get_payload(gdata);
+ 
++			if (!ghes_cxl_prot_err_len_valid(gdata, prot_err))
++				continue;
++
+ 			cxl_cper_post_prot_err(prot_err, gdata->error_severity);
+ 		} else if (guid_equal(sec_type, &CPER_SEC_CXL_GEN_MEDIA_GUID)) {
+ 			struct cxl_cper_event_rec *rec = acpi_hest_get_payload(gdata);
+ 
++			if (!ghes_cxl_event_len_valid(gdata, rec))
++				continue;
++
+ 			cxl_cper_post_event(CXL_CPER_EVENT_GEN_MEDIA, rec);
+ 		} else if (guid_equal(sec_type, &CPER_SEC_CXL_DRAM_GUID)) {
+ 			struct cxl_cper_event_rec *rec = acpi_hest_get_payload(gdata);
+ 
++			if (!ghes_cxl_event_len_valid(gdata, rec))
++				continue;
++
+ 			cxl_cper_post_event(CXL_CPER_EVENT_DRAM, rec);
+ 		} else if (guid_equal(sec_type, &CPER_SEC_CXL_MEM_MODULE_GUID)) {
+ 			struct cxl_cper_event_rec *rec = acpi_hest_get_payload(gdata);
+ 
++			if (!ghes_cxl_event_len_valid(gdata, rec))
++				continue;
++
+ 			cxl_cper_post_event(CXL_CPER_EVENT_MEM_MODULE, rec);
+ 		} else {
+ 			void *err = acpi_hest_get_payload(gdata);
 diff --git a/drivers/acpi/apei/ghes_cper.c b/drivers/acpi/apei/ghes_cper.c
-index 44b644584703..7e4a66b788b8 100644
+index 7e4a66b788b8..b59e3ed3eab3 100644
 --- a/drivers/acpi/apei/ghes_cper.c
 +++ b/drivers/acpi/apei/ghes_cper.c
-@@ -18,6 +18,7 @@
+@@ -12,9 +12,12 @@
+  *   Author: Huang Ying <ying.huang@intel.com>
+  */
+ 
++#include <linux/aer.h>
++#include <linux/cleanup.h>
+ #include <linux/err.h>
+ #include <linux/genalloc.h>
+ #include <linux/io.h>
++#include <linux/kfifo.h>
  #include <linux/kernel.h>
  #include <linux/math64.h>
  #include <linux/mm.h>
-+#include <linux/notifier.h>
- #include <linux/ratelimit.h>
- #include <linux/rcupdate.h>
- #include <linux/sched/clock.h>
-@@ -281,6 +282,74 @@ void ghes_clear_estatus(struct ghes *ghes,
- 		ghes_ack_error(ghes->generic_v2);
+@@ -350,6 +353,138 @@ void ghes_defer_non_standard_event(struct acpi_hest_generic_data *gdata,
+ 	schedule_work(&entry->work);
  }
  
-+static BLOCKING_NOTIFIER_HEAD(vendor_record_notify_list);
++/* Room for 8 entries */
++#define CXL_CPER_PROT_ERR_FIFO_DEPTH 8
++static DEFINE_KFIFO(cxl_cper_prot_err_fifo, struct cxl_cper_prot_err_work_data,
++		    CXL_CPER_PROT_ERR_FIFO_DEPTH);
 +
-+int ghes_register_vendor_record_notifier(struct notifier_block *nb)
++/* Synchronize schedule_work() with cxl_cper_prot_err_work changes */
++static DEFINE_SPINLOCK(cxl_cper_prot_err_work_lock);
++struct work_struct *cxl_cper_prot_err_work;
++
++void cxl_cper_post_prot_err(struct cxl_cper_sec_prot_err *prot_err,
++			    int severity)
 +{
-+	return blocking_notifier_chain_register(&vendor_record_notify_list, nb);
-+}
-+EXPORT_SYMBOL_GPL(ghes_register_vendor_record_notifier);
++#ifdef CONFIG_ACPI_APEI_PCIEAER
++	struct cxl_cper_prot_err_work_data wd;
 +
-+void ghes_unregister_vendor_record_notifier(struct notifier_block *nb)
-+{
-+	blocking_notifier_chain_unregister(&vendor_record_notify_list, nb);
-+}
-+EXPORT_SYMBOL_GPL(ghes_unregister_vendor_record_notifier);
-+
-+static void ghes_vendor_record_notifier_destroy(void *nb)
-+{
-+	ghes_unregister_vendor_record_notifier(nb);
-+}
-+
-+int devm_ghes_register_vendor_record_notifier(struct device *dev,
-+					      struct notifier_block *nb)
-+{
-+	int ret;
-+
-+	ret = ghes_register_vendor_record_notifier(nb);
-+	if (ret)
-+		return ret;
-+
-+	return devm_add_action_or_reset(dev, ghes_vendor_record_notifier_destroy, nb);
-+}
-+EXPORT_SYMBOL_GPL(devm_ghes_register_vendor_record_notifier);
-+
-+static void ghes_vendor_record_work_func(struct work_struct *work)
-+{
-+	struct ghes_vendor_record_entry *entry;
-+	struct acpi_hest_generic_data *gdata;
-+	u32 len;
-+
-+	entry = container_of(work, struct ghes_vendor_record_entry, work);
-+	gdata = GHES_GDATA_FROM_VENDOR_ENTRY(entry);
-+
-+	blocking_notifier_call_chain(&vendor_record_notify_list,
-+				     entry->error_severity, gdata);
-+
-+	len = GHES_VENDOR_ENTRY_LEN(acpi_hest_get_record_size(gdata));
-+	gen_pool_free(ghes_estatus_pool, (unsigned long)entry, len);
-+}
-+
-+void ghes_defer_non_standard_event(struct acpi_hest_generic_data *gdata,
-+				   int sev)
-+{
-+	struct acpi_hest_generic_data *copied_gdata;
-+	struct ghes_vendor_record_entry *entry;
-+	u32 len;
-+
-+	len = GHES_VENDOR_ENTRY_LEN(acpi_hest_get_record_size(gdata));
-+	entry = (void *)gen_pool_alloc(ghes_estatus_pool, len);
-+	if (!entry)
++	if (cxl_cper_sec_prot_err_valid(prot_err))
 +		return;
 +
-+	copied_gdata = GHES_GDATA_FROM_VENDOR_ENTRY(entry);
-+	memcpy(copied_gdata, gdata, acpi_hest_get_record_size(gdata));
-+	entry->error_severity = sev;
++	guard(spinlock_irqsave)(&cxl_cper_prot_err_work_lock);
 +
-+	INIT_WORK(&entry->work, ghes_vendor_record_work_func);
-+	schedule_work(&entry->work);
++	if (!cxl_cper_prot_err_work)
++		return;
++
++	if (cxl_cper_setup_prot_err_work_data(&wd, prot_err, severity))
++		return;
++
++	if (!kfifo_put(&cxl_cper_prot_err_fifo, wd)) {
++		pr_err_ratelimited("CXL CPER kfifo overflow\n");
++		return;
++	}
++
++	schedule_work(cxl_cper_prot_err_work);
++#endif
 +}
++
++int cxl_cper_register_prot_err_work(struct work_struct *work)
++{
++	if (cxl_cper_prot_err_work)
++		return -EINVAL;
++
++	guard(spinlock_irqsave)(&cxl_cper_prot_err_work_lock);
++	cxl_cper_prot_err_work = work;
++	return 0;
++}
++EXPORT_SYMBOL_NS_GPL(cxl_cper_register_prot_err_work, "CXL");
++
++int cxl_cper_unregister_prot_err_work(struct work_struct *work)
++{
++	if (cxl_cper_prot_err_work != work)
++		return -EINVAL;
++
++	guard(spinlock_irqsave)(&cxl_cper_prot_err_work_lock);
++	cxl_cper_prot_err_work = NULL;
++	return 0;
++}
++EXPORT_SYMBOL_NS_GPL(cxl_cper_unregister_prot_err_work, "CXL");
++
++int cxl_cper_prot_err_kfifo_get(struct cxl_cper_prot_err_work_data *wd)
++{
++	return kfifo_get(&cxl_cper_prot_err_fifo, wd);
++}
++EXPORT_SYMBOL_NS_GPL(cxl_cper_prot_err_kfifo_get, "CXL");
++
++/* Room for 8 entries for each of the 4 event log queues */
++#define CXL_CPER_FIFO_DEPTH 32
++static DEFINE_KFIFO(cxl_cper_fifo, struct cxl_cper_work_data, CXL_CPER_FIFO_DEPTH);
++
++/* Synchronize schedule_work() with cxl_cper_work changes */
++static DEFINE_SPINLOCK(cxl_cper_work_lock);
++struct work_struct *cxl_cper_work;
++
++void cxl_cper_post_event(enum cxl_event_type event_type,
++			 struct cxl_cper_event_rec *rec)
++{
++	struct cxl_cper_work_data wd;
++
++	if (rec->hdr.length <= sizeof(rec->hdr) ||
++	    rec->hdr.length > sizeof(*rec)) {
++		pr_err(FW_WARN "CXL CPER Invalid section length (%u)\n",
++		       rec->hdr.length);
++		return;
++	}
++
++	if (!(rec->hdr.validation_bits & CPER_CXL_COMP_EVENT_LOG_VALID)) {
++		pr_err(FW_WARN "CXL CPER invalid event\n");
++		return;
++	}
++
++	guard(spinlock_irqsave)(&cxl_cper_work_lock);
++
++	if (!cxl_cper_work)
++		return;
++
++	wd.event_type = event_type;
++	memcpy(&wd.rec, rec, sizeof(wd.rec));
++
++	if (!kfifo_put(&cxl_cper_fifo, wd)) {
++		pr_err_ratelimited("CXL CPER kfifo overflow\n");
++		return;
++	}
++
++	schedule_work(cxl_cper_work);
++}
++
++int cxl_cper_register_work(struct work_struct *work)
++{
++	if (cxl_cper_work)
++		return -EINVAL;
++
++	guard(spinlock_irqsave)(&cxl_cper_work_lock);
++	cxl_cper_work = work;
++	return 0;
++}
++EXPORT_SYMBOL_NS_GPL(cxl_cper_register_work, "CXL");
++
++int cxl_cper_unregister_work(struct work_struct *work)
++{
++	if (cxl_cper_work != work)
++		return -EINVAL;
++
++	guard(spinlock_irqsave)(&cxl_cper_work_lock);
++	cxl_cper_work = NULL;
++	return 0;
++}
++EXPORT_SYMBOL_NS_GPL(cxl_cper_unregister_work, "CXL");
++
++int cxl_cper_kfifo_get(struct cxl_cper_work_data *wd)
++{
++	return kfifo_get(&cxl_cper_fifo, wd);
++}
++EXPORT_SYMBOL_NS_GPL(cxl_cper_kfifo_get, "CXL");
 +
  /*
   * GHES error status reporting throttle, to report more kinds of
   * errors, instead of just most frequently occurred errors.
 diff --git a/include/acpi/ghes_cper.h b/include/acpi/ghes_cper.h
-index 15305c8be9a7..d9f9253d8de9 100644
+index d9f9253d8de9..a853a5996cdf 100644
 --- a/include/acpi/ghes_cper.h
 +++ b/include/acpi/ghes_cper.h
-@@ -104,5 +104,7 @@ int __ghes_read_estatus(struct acpi_hest_generic_status *estatus,
- int ghes_estatus_cached(struct acpi_hest_generic_status *estatus);
- void ghes_estatus_cache_add(struct acpi_hest_generic *generic,
+@@ -20,6 +20,7 @@
+ 
+ #include <acpi/ghes.h>
+ #include <asm/fixmap.h>
++#include <cxl/event.h>
+ 
+ #define GHES_PFX	"GHES: "
+ 
+@@ -106,5 +107,15 @@ void ghes_estatus_cache_add(struct acpi_hest_generic *generic,
  			    struct acpi_hest_generic_status *estatus);
-+void ghes_defer_non_standard_event(struct acpi_hest_generic_data *gdata,
-+				   int sev);
+ void ghes_defer_non_standard_event(struct acpi_hest_generic_data *gdata,
+ 				   int sev);
++void cxl_cper_post_prot_err(struct cxl_cper_sec_prot_err *prot_err,
++			    int severity);
++int cxl_cper_register_prot_err_work(struct work_struct *work);
++int cxl_cper_unregister_prot_err_work(struct work_struct *work);
++int cxl_cper_prot_err_kfifo_get(struct cxl_cper_prot_err_work_data *wd);
++void cxl_cper_post_event(enum cxl_event_type event_type,
++			 struct cxl_cper_event_rec *rec);
++int cxl_cper_register_work(struct work_struct *work);
++int cxl_cper_unregister_work(struct work_struct *work);
++int cxl_cper_kfifo_get(struct cxl_cper_work_data *wd);
  
  #endif /* ACPI_APEI_GHES_CPER_H */
 
