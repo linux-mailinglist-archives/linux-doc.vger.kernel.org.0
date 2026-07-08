@@ -1,146 +1,182 @@
-Return-Path: <linux-doc+bounces-95808-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95809-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id DE74FhTETmqyTgIAu9opvQ
-	(envelope-from <linux-doc+bounces-95808-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 23:41:40 +0200
+	id N1FkN6XETmrTTgIAu9opvQ
+	(envelope-from <linux-doc+bounces-95809-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 23:44:05 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB0A172A99B
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 23:41:39 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 85C8A72A9E2
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 23:44:05 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b=1YurD4Bp;
-	dmarc=pass (policy=none) header.from=infradead.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95808-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-95808-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=rendec.net header.s=default header.b=Vxaj5QTr;
+	dmarc=pass (policy=reject) header.from=rendec.net;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95809-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95809-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 540E6308AC4D
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2026 21:35:55 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 697AD305650D
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2026 21:40:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C87B13F6C26;
-	Wed,  8 Jul 2026 21:35:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3853D3F787B;
+	Wed,  8 Jul 2026 21:40:22 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+Received: from mail.mindbit.ro (xs1.mindbit.ro [80.86.107.70])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D5093AB29E;
-	Wed,  8 Jul 2026 21:35:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ABBDD3F0AA9;
+	Wed,  8 Jul 2026 21:40:20 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783546554; cv=none; b=fRlyIbDg6SwmXHZm7BVsMB9KIT9GKzGQkgIRCS9QrR68aBMgQFImP/KfWzzq3SIkpY7YJeqEZ6w5jaEymqW2MjBo5BbkFFEmR9qm/Zg993xOvn9PE3ZHo+9axYxR7VfwZkzLrnrR1XjT5iTgiWuC67pKw6YAQdcYKo4cZfU1eCc=
+	t=1783546822; cv=none; b=ZNuopx4u6yfIC37WJotDX6CqR0iuRSLKeKpLdcVOOUD3Xv1KJAoiXTOtXr7It/0mu38j0psdB2zb0vio7LiA3vFNh7KRTWTVSEJ7ARqByPlehikTBDcMjzqLd5nk0JWAFBiTn+vvyFL35yQUMFp5GDwoh6xUfwBkZV7NxwGEBQM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783546554; c=relaxed/simple;
-	bh=v/alvAQP+jlzA+aPsb7wsJALL8BWeqnB0RmIUKanbEs=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=t909ToSFc+9Nn6PUgeACUnsa1c90E5fOypchNkNLTEJsG5U4rk8dcX0siBN35Fb0mJ57jPcotXIDgB2fNlXbqHEPEOicu1iEO9NS03EpS5CLq+WfCdKapz9Uh+h862RlSWPt60DF9PTdJC7i5t4W3IGPuZQ4gcCIDEkRdWla0dI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=pass smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=1YurD4Bp; arc=none smtp.client-ip=198.137.202.133
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
-	Content-ID:Content-Description:In-Reply-To:References;
-	bh=v5GQi58UpKN/xjPR77HNmT/9H9qJkRbf6vrytCHrfhY=; b=1YurD4BphaNx7EJvKravGeZ5f3
-	STQE+OxHlj4n5qi4TV9obhX9YI2u++s8edlTugW83CTAFB0W/FMf6D9likbdfWwxEReUSj1vN5aaK
-	if3Xn/kz7QVu/cxxRPEddlRzdjt2ya1Jh00ONYsz3qZjyaietR18jRY/i8xx8KuO/OMbnpnurk+GG
-	MXnLGnZk7z3b+C+wz9r+mW1/npZeWajHTUfPu4tanNSILdY1Uzb2ZFU29noQCXmzoFWjzLQoKFYhV
-	P3ol4yQaZbxCzmfB29c5vD3kj+yYSBBYKYgzfnbo1gBtIChepwgwXLv5gtx6Qa4F9kplY+eRIb38S
-	HwmKTjEw==;
-Received: from [50.53.43.113] (helo=bombadil.infradead.org)
-	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1whZvp-00000000SCc-0q1x;
-	Wed, 08 Jul 2026 21:35:49 +0000
-From: Randy Dunlap <rdunlap@infradead.org>
-To: linux-kernel@vger.kernel.org
-Cc: Randy Dunlap <rdunlap@infradead.org>,
-	Zhen Ni <zhen.ni@easystack.cn>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	linux-doc@vger.kernel.org,
-	linux-mm@kvack.org
-Subject: [PATCH] mm/page_owner: avoid docs build warning
-Date: Wed,  8 Jul 2026 14:35:48 -0700
-Message-ID: <20260708213548.469155-1-rdunlap@infradead.org>
-X-Mailer: git-send-email 2.54.0
+	s=arc-20240116; t=1783546822; c=relaxed/simple;
+	bh=06X0wts/VWiidyiW7nEPWVVzTkue+gIEbtnmzGNDpCM=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=rDEzU7iXzJPw60qMH7JuBQDc+qS1ktyZa7v0mXeSriYFYGSDMVKeTN1pljCr5bRSQd8eoYzk7l2TD4PDWtIPh/TlKyBMvZ/MyM1yqBWNxk1dtAecO/XRzwzGWAotU0akzcf8ta/uM2PXNdXFY87DrCUKX9S/uzeBExXmQXE5W3s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=rendec.net; spf=pass smtp.mailfrom=rendec.net; dkim=pass (2048-bit key) header.d=rendec.net header.i=@rendec.net header.b=Vxaj5QTr; arc=none smtp.client-ip=80.86.107.70
+Received: from bat.kanata.rendec.net (unknown [24.114.111.125])
+	by mail.mindbit.ro (Postfix) with ESMTPSA id 362D5C2A88;
+	Thu,  9 Jul 2026 00:39:55 +0300 (EEST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.mindbit.ro 362D5C2A88
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rendec.net;
+	s=default; t=1783546818;
+	bh=vh8LzxdSEB6LZ5YWToq98HafI55oS8+SMbKFy7UAtCc=;
+	h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
+	b=Vxaj5QTrZmnMb8kgo0DAnYKLpgF1VNrrEnZhf9ONVOiUDzl0XehMr6So/mzP7wSyL
+	 f/bqBaPzsa1UU5XOryNPd/7wb5rGQ7IwzXh6waI3HHJA4HLb35t2X+7MMwejCU49/V
+	 wyf2N0EPqZ3qOvz85kyJv8Z4VVG4eamp/AsyfiC+iferCPdwrWRhhI2Gihi8EYWMG6
+	 w9oTc7WxIT/1nxUO9bTb5BDnYHc4NJdQoeD9M4hXia3YTHnUvNPgR3MY/vwUlZnDJN
+	 KsGLwDIHTElRb68oeRo724l+p50zYouaHMInNxEVvF4Rx2YclHGHsHkUSx9MW9gMJA
+	 BLbx/jCYTxmsw==
+Message-ID: <0f3a6ccaadc1d330215416d9cec13263d71b685e.camel@rendec.net>
+Subject: Re: [patch 10/18] entry: Use syscall number instead of rereading it
+From: Radu Rendec <radu@rendec.net>
+To: Thomas Gleixner <tglx@kernel.org>, LKML <linux-kernel@vger.kernel.org>
+Cc: Peter Zijlstra <peterz@infradead.org>, Michael Ellerman
+ <mpe@ellerman.id.au>,  Shrikanth Hegde <sshegde@linux.ibm.com>,
+ linuxppc-dev@lists.ozlabs.org, Kees Cook <kees@kernel.org>, Huacai Chen	
+ <chenhuacai@kernel.org>, loongarch@lists.linux.dev, Paul Walmsley
+ <pjw@kernel.org>,  Palmer Dabbelt <palmer@dabbelt.com>,
+ linux-riscv@lists.infradead.org, Sven Schnelle <svens@linux.ibm.com>, 
+	linux-s390@vger.kernel.org, x86@kernel.org, Mark Rutland
+ <mark.rutland@arm.com>,  Jinjie Ruan <ruanjinjie@huawei.com>, Andy
+ Lutomirski <luto@kernel.org>, Oleg Nesterov <oleg@redhat.com>,  Richard
+ Henderson <richard.henderson@linaro.org>, Russell King
+ <linux@armlinux.org.uk>, Catalin Marinas	 <catalin.marinas@arm.com>, Guo
+ Ren <guoren@kernel.org>, Geert Uytterhoeven	 <geert@linux-m68k.org>, Thomas
+ Bogendoerfer <tsbogend@alpha.franken.de>,  Helge Deller	 <deller@gmx.de>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>, Richard Weinberger
+ <richard@nod.at>, Chris Zankel <chris@zankel.net>,
+ linux-arm-kernel@lists.infradead.org, 	linux-alpha@vger.kernel.org,
+ linux-csky@vger.kernel.org, 	linux-m68k@lists.linux-m68k.org,
+ linux-mips@vger.kernel.org, 	linux-parisc@vger.kernel.org,
+ linux-sh@vger.kernel.org, 	linux-um@lists.infradead.org, Arnd Bergmann
+ <arnd@arndb.de>, Vineet Gupta	 <vgupta@kernel.org>, Will Deacon
+ <will@kernel.org>, Brian Cain <bcain@kernel.org>,  Michal Simek
+ <monstr@monstr.eu>, Dinh Nguyen <dinguyen@kernel.org>, "David S. Miller"
+ <davem@davemloft.net>,  Andreas Larsson <andreas@gaisler.com>,
+ linux-snps-arc@lists.infradead.org, linux-hexagon@vger.kernel.org, 
+	linux-openrisc@vger.kernel.org, sparclinux@vger.kernel.org, 
+	linux-arch@vger.kernel.org, Michal =?ISO-8859-1?Q?Such=E1nek?=	
+ <msuchanek@suse.de>, Jonathan Corbet <corbet@lwn.net>, 
+	linux-doc@vger.kernel.org
+Date: Wed, 08 Jul 2026 17:39:50 -0400
+In-Reply-To: <20260707190254.181086755@kernel.org>
+References: <20260707181957.433213175@kernel.org>
+	 <20260707190254.181086755@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.58.3 (3.58.3-1.fc43) 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	DMARC_POLICY_ALLOW(-0.50)[rendec.net,reject];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[rendec.net:s=default];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-95808-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-95809-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:linux-kernel@vger.kernel.org,m:rdunlap@infradead.org,m:zhen.ni@easystack.cn,m:akpm@linux-foundation.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:linux-mm@kvack.org,s:lists@lfdr.de];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[infradead.org,ellerman.id.au,linux.ibm.com,lists.ozlabs.org,kernel.org,lists.linux.dev,dabbelt.com,lists.infradead.org,vger.kernel.org,arm.com,huawei.com,redhat.com,linaro.org,armlinux.org.uk,linux-m68k.org,alpha.franken.de,gmx.de,users.sourceforge.jp,nod.at,zankel.net,lists.linux-m68k.org,arndb.de,monstr.eu,davemloft.net,gaisler.com,suse.de,lwn.net];
 	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:tglx@kernel.org,m:linux-kernel@vger.kernel.org,m:peterz@infradead.org,m:mpe@ellerman.id.au,m:sshegde@linux.ibm.com,m:linuxppc-dev@lists.ozlabs.org,m:kees@kernel.org,m:chenhuacai@kernel.org,m:loongarch@lists.linux.dev,m:pjw@kernel.org,m:palmer@dabbelt.com,m:linux-riscv@lists.infradead.org,m:svens@linux.ibm.com,m:linux-s390@vger.kernel.org,m:x86@kernel.org,m:mark.rutland@arm.com,m:ruanjinjie@huawei.com,m:luto@kernel.org,m:oleg@redhat.com,m:richard.henderson@linaro.org,m:linux@armlinux.org.uk,m:catalin.marinas@arm.com,m:guoren@kernel.org,m:geert@linux-m68k.org,m:tsbogend@alpha.franken.de,m:deller@gmx.de,m:ysato@users.sourceforge.jp,m:richard@nod.at,m:chris@zankel.net,m:linux-arm-kernel@lists.infradead.org,m:linux-alpha@vger.kernel.org,m:linux-csky@vger.kernel.org,m:linux-m68k@lists.linux-m68k.org,m:linux-mips@vger.kernel.org,m:linux-parisc@vger.kernel.org,m:linux-sh@vger.kernel.org,m:linux-um@lists.infradead.org,m:arnd@arndb.de,m:vgupta@kernel.org,m:will@kerne
+ l.org,m:bcain@kernel.org,m:monstr@monstr.eu,m:dinguyen@kernel.org,m:davem@davemloft.net,m:andreas@gaisler.com,m:linux-snps-arc@lists.infradead.org,m:linux-hexagon@vger.kernel.org,m:linux-openrisc@vger.kernel.org,m:sparclinux@vger.kernel.org,m:linux-arch@vger.kernel.org,m:msuchanek@suse.de,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[radu@rendec.net,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[rendec.net:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[53];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[radu@rendec.net,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[8];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,lwn.net:email,infradead.org:from_mime,infradead.org:email,infradead.org:mid,infradead.org:dkim,kvack.org:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linux-foundation.org:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp,rendec.net:from_mime,rendec.net:email,rendec.net:mid,rendec.net:dkim]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: DB0A172A99B
+X-Rspamd-Queue-Id: 85C8A72A9E2
 
-Fix literal block and indentation to prevent a docs build warning:
+On Tue, 2026-07-07 at 21:06 +0200, Thomas Gleixner wrote:
+> rseq_syscall_enter_work() is invoked before the syscall number can be
+> modified. So there is no point in rereading it from pt_regs.
+>=20
+> Signed-off-by: Thomas Gleixner <tglx@kernel.org>
+> ---
+> =C2=A0include/linux/entry-common.h |=C2=A0=C2=A0=C2=A0 9 +++++----
+> =C2=A01 file changed, 5 insertions(+), 4 deletions(-)
+>=20
+> --- a/include/linux/entry-common.h
+> +++ b/include/linux/entry-common.h
+> @@ -70,9 +70,10 @@ static inline void syscall_enter_audit(s
+> =C2=A0	}
+> =C2=A0}
+> =C2=A0
+> -static __always_inline long syscall_trace_enter(struct pt_regs *regs, un=
+signed long work)
+> +static __always_inline long syscall_trace_enter(struct pt_regs *regs, un=
+signed long work,
+> +						long syscall)
+> =C2=A0{
+> -	long syscall, ret =3D 0;
+> +	long ret =3D 0;
+> =C2=A0
+> =C2=A0	/*
+> =C2=A0	 * Handle Syscall User Dispatch.=C2=A0 This must comes first, sinc=
+e
+> @@ -90,7 +91,7 @@ static __always_inline long syscall_trac
+> =C2=A0	 * through hrtimer_interrupt().
+> =C2=A0	 */
+> =C2=A0	if (work & SYSCALL_WORK_SYSCALL_RSEQ_SLICE)
+> -		rseq_syscall_enter_work(syscall_get_nr(current, regs));
+> +		rseq_syscall_enter_work(syscall);
+> =C2=A0
+> =C2=A0	/* Handle ptrace */
+> =C2=A0	if (work & (SYSCALL_WORK_SYSCALL_TRACE | SYSCALL_WORK_SYSCALL_EMU)=
+) {
+> @@ -145,7 +146,7 @@ static __always_inline long syscall_ente
+> =C2=A0	unsigned long work =3D READ_ONCE(current_thread_info()->syscall_wo=
+rk);
+> =C2=A0
+> =C2=A0	if (work & SYSCALL_WORK_ENTER)
+> -		syscall =3D syscall_trace_enter(regs, work);
+> +		syscall =3D syscall_trace_enter(regs, work, syscall);
+> =C2=A0
+> =C2=A0	return syscall;
+> =C2=A0}
 
-Documentation/mm/page_owner.rst:70: WARNING: Literal block expected; none found. [docutils]
-
-Fixes: c34eea8cecca ("mm/page_owner: document page_owner filter")
-Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
----
-OK, there may be a better way but I didn't find it.
-
-Cc: Zhen Ni <zhen.ni@easystack.cn>
-Cc: Andrew Morton <akpm@linux-foundation.org>
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: Shuah Khan <skhan@linuxfoundation.org>
-Cc: linux-doc@vger.kernel.org
-Cc: linux-mm@kvack.org
-
- Documentation/mm/page_owner.rst |    7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
-
---- linux-next-20260706.orig/Documentation/mm/page_owner.rst
-+++ linux-next-20260706/Documentation/mm/page_owner.rst
-@@ -65,14 +65,15 @@ un-tracking state.
- Usage
- =====
- 
--1) Build user-space helpers::
-+1) Build user-space helpers:
-+::
- 
--To filter page_owner output:
-+   To filter page_owner output:
- 
- 	cd tools/mm
- 	make page_owner_filter
- 
--To sort and analyze page_owner output:
-+   To sort and analyze page_owner output:
- 
- 	cd tools/mm
- 	make page_owner_sort
+Reviewed-by: Radu Rendec <radu@rendec.net>
 
