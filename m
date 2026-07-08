@@ -1,187 +1,354 @@
-Return-Path: <linux-doc+bounces-95706-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95707-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Vi4bDIZKTmorKQIAu9opvQ
-	(envelope-from <linux-doc+bounces-95706-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 15:03:02 +0200
+	id Af4QCqVLTmphKQIAu9opvQ
+	(envelope-from <linux-doc+bounces-95707-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 15:07:49 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B7DB72693D
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 15:03:01 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 152FD7269DE
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 15:07:48 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b="CZZI31/F";
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=mm1n6pxp;
 	dmarc=pass (policy=none) header.from=gmail.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95706-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-95706-lists+linux-doc=lfdr.de@vger.kernel.org";
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95707-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-95707-lists+linux-doc=lfdr.de@vger.kernel.org";
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id C5CD4301C430
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2026 13:02:53 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 400853013C6E
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2026 13:07:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8E0BF2609C5;
-	Wed,  8 Jul 2026 13:02:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9FB1026ED2D;
+	Wed,  8 Jul 2026 13:07:01 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0692D228CB8
-	for <linux-doc@vger.kernel.org>; Wed,  8 Jul 2026 13:02:45 +0000 (UTC)
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783515768; cv=pass; b=QJOKsHZ0OfJgPKH8iBdANl9pq2h5HWswpvV9NV6B/nZ5lHcSR1lH13PnDlyIixtI8PNLW+0MBW0LVVJ/6Eg4/54/wMs1z7FyoHAFBhEQ8j01F+gNXhGyEg5VcmGrguudCVkovEs88nv1oN0z7NZlDzA2wxt0PdqAKk4JkPNonKs=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783515768; c=relaxed/simple;
-	bh=01GSOieINClQbTWiNGIDEavqyXKAQTpjChNDJs64pCI=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=BtE+WEsP5oKfQcB4igjBx6jj8Z8O2rRw5AvoUo/XsoPWyIADz90g0EFR7q79Q9uRbr33xLOWtmr3m7kGEQZ3CLBR0aMWlL9dCrt2zNtIaktCUT5BWXSb51j1gZsu6yNZWioRYb79MkwXf1nch8LmX7yRwFAuYXedXNU3lTdeK6o=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=CZZI31/F; arc=pass smtp.client-ip=209.85.216.47
-Received: by mail-pj1-f47.google.com with SMTP id 98e67ed59e1d1-3856d4015e0so54399a91.2
-        for <linux-doc@vger.kernel.org>; Wed, 08 Jul 2026 06:02:45 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783515765; cv=none;
-        d=google.com; s=arc-20260327;
-        b=P6dHwMxgRXrEsYON9cOL5IUVExXEXw0F/I9BZZkOylAL76Yl3r4ibIO3K4pOIdY6T6
-         8O99P1xhSpIPff+MUvwjzfceltHfKtscOOreyhkEXvY59yJHvp12jZqaeWJZ0NUjiB+a
-         lX9598as3nWstAYIXdRmSss7KEA49T/aKJ8aMsx+0Lje6dtrs9hWOE5hHLw0wiYDSKGN
-         z0TcUe1jCO1WMgPHk+kSqRmkdulJaLdYmTDHTkK9NaochdlbUPf7sC5MyD1BsaHsem21
-         JYeN1Wic0DGZOyrZNWh4L9pBuF+jpaCqDxoMZhg1kfLrQIWEnVqQ8+cpOq+XIjSSpAF7
-         6KDA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=ffbj3vyfKfSu1/ovXdhyqJv0LJd9O4yZhbGsSBgFMUg=;
-        fh=oyq+Tl7h3xh5Hz+Rb2hruh2ty0TH2bZ286O69JBlRio=;
-        b=B/PIaUTl3ksucHsW5Hz9FMI2u/j5ovJv7Vk34y/4C2EvboRFMTC9UUlUhEQbjYhr2a
-         ezS7NIejzVNvKRwmVy9Imn395u5VhEYWj5DtoeRh2QaU2WgCtjInIdcT/QyXuPaV3MJ+
-         N+fF4Y3BbqnIEQIherWHryR5Dijc2wRN60v/UsQJAIzS/TT9nvmaH0mR+ZPS+GLwT8a0
-         WXF32ERUC0Lz+Y0Xkubh6hK1qCkBLoOetUXGgHkbO5YpMPdsc+NjzSB36nR7KiVBw+8Q
-         FjAqwDchA1Agxf6wEj4lPUgnarciMZ96024w2i0rnbdDvKNZU1LuMXdwbsORbe+ewfDK
-         tOCQ==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B7EE246770
+	for <linux-doc@vger.kernel.org>; Wed,  8 Jul 2026 13:07:00 +0000 (UTC)
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783516021; cv=none; b=h0X6DwqFPtK1iAB6DcA09IPeRS28JorosEJ5LPIZREC1q6Ma+GrUCsgSsjLP+6Hn6kYXwfc68BSrlRbrgWlu8vyvkYvnaiDr0ynZ16R/FZ4SoZRptZOigHY4rRxWYgrITcYzQO9SMCh+MUVyj9qnwMPvwDrp/POUhgHhLhYMZ2Y=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783516021; c=relaxed/simple;
+	bh=ypK3AIpxQwm8fclgl/LYM7JWfJS+m8PZmdWHNPnhXAA=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=r79rznU7e6KG/jdiM6O4yse2RjIionGWnUt06tEBuxZxGReRwjqRkIQmuVV6buYrcs687FPb7CLHxYCV87sD11QjzDpUiKGVeq3NBS+McibYjfs9FphB0ldFHAw0NhH/xD+BPw6chILP4ts6nNlU7LT13o3QKgXeiDjN2QRIrVY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=mm1n6pxp; arc=none smtp.client-ip=209.85.215.180
+Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-c9e607d81fcso367607a12.2
+        for <linux-doc@vger.kernel.org>; Wed, 08 Jul 2026 06:07:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783515765; x=1784120565; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=ffbj3vyfKfSu1/ovXdhyqJv0LJd9O4yZhbGsSBgFMUg=;
-        b=CZZI31/FxNNpWtOly2DU0cXbcA+45474Qkg5GVMdjIxCS2OSchNs/Q0OhjpcEtZhOD
-         inwHap9QQ6Rk9y+fHtPxiBYHoQDU3vtm7CWqCwBNgYEyJRCVEOa3RUN2E6ujqYp22y9B
-         Mw+ZwHg4yseD3P5mGWFCKbfdJSRzaLpFMqloutDgjsaVT31q7IkFKP7NXiHqtskjsf7N
-         tTc6vNeC7XGoSW084r+90OCPnkadmwy2AkcGHo35/LCUIbjtzc3gktWRTpkCa+/JMfIO
-         lkgYLPJj6AIXlrlCTDKnt3p4zdevPYKCuW9eNcogHUp138Uy+0p1QSt/1dETv9dO2iud
-         zy5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783515765; x=1784120565;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=gmail.com; s=20251104; t=1783516019; x=1784120819; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=ffbj3vyfKfSu1/ovXdhyqJv0LJd9O4yZhbGsSBgFMUg=;
-        b=f1Mc7ugdI2lPXR6slCyhxTWlD9BJD7PQq0Ex36J5kHtoqTO8XHkEsWscMKmZkyaX2L
-         D3Q0ifQVws8zKIRzJdAohIi9W0s62HjrXN2vtpO5vkwuCkqo+LtV2NelJ4M1fqJPbQ40
-         83Z8aPWjv/9F8WBxjR8y6ac6zTu4xbkMaNb9P8TwvPx4dL0n0KYEHRU4PLwdtT6QXq4H
-         IIamKxj9CcMdeN4UAqMYtXyFVm8rqOOxKEfdCGtHwaGjxDaAXNX51ktrkrxs8VUn2btV
-         kmhcyNTlKEmVcExaadtmdqedbaqvhGUfVh+p0Zvd77z9CF3eBgSiMnN+J7heUGoHXwnT
-         kwqQ==
-X-Forwarded-Encrypted: i=1; AHgh+RpDtYLl6kEaf6B7kiwihA2O7vLCyYCW806UiAEKaUfCmqO96nSRA1Vg8dX/LAVzrYuii8kjBRuXcOs=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy71FbuvjP81V+CffHlKxtaLvWpxiNbDaK18Rn/s9BW2/ZRywIG
-	gy/glJ0lA5q4Gja3VRaX1JO3eG0uyXQDbesGoy8YG3q2HKeeh7JLP0qg3QSoIPCx8Cz3JAWLr0Z
-	94svFsfKVX4fe9wHmTSOpoAQrcby/hpo=
-X-Gm-Gg: AfdE7ck2h3eWbfjVbRaydGnVvQpmEvJ00fb32kWQCGMxtRgHAOchCQ2+x3e5Q2ic5nx
-	FMmspjh4xodb2/9Mm/b5DCzNlyhBQFy/U6QMkc1nR/yBAOjZuuVHLWb6IVB0uMw1KHNIxHbSTLg
-	0v0kbCZI1/eWYEh4XFVA3u8X8urKpTv3XedQPLLEnIIY9jwIS08TrUP6QrwrZtqFyn5FQ4M5KNw
-	mLjBmyJJzrsPKd0hZ8KUE6W3ZLTerFcXf5MyymtNDneAZRay+/d9IE8LLsdTVarVslIhkFXPPKM
-	0GV1PxUF5RALZtT5GRuJ+U4CXdst0oRAIy0lA7Kv4Vb3zexSXr+8ub/kIqa4su+pXby1/2B76rc
-	M6zdN0oUL9NYp
-X-Received: by 2002:a17:90b:568c:b0:381:16b0:55c5 with SMTP id
- 98e67ed59e1d1-3893f97c879mr2063340a91.2.1783515764982; Wed, 08 Jul 2026
- 06:02:44 -0700 (PDT)
+        bh=s74v2avsJlcuWUXv/SP6LYjG4ujBbKcJtdg+IdFhrXc=;
+        b=mm1n6pxpPkrTBNi0SU2DOy2cktsmzA92GMxAiTuxxfc6853g8xAbFimUL16x6pPTDQ
+         QqPHQEHXNkK4V3A+lEmF3OKMkN+2Av7r3eDSlaBiI1/F+1MODfc7KHcI5lWoVPW5Xwm1
+         xNNb6lH3ENrtCOD6xWkUCcpinBSRNkIcDouA7tGph6TfHvgTCe6BXYROKC4borUEPVkm
+         K1lACSBS4iCB4WjdeDBtVQ+N/iL+39GQXwDaQbfI6ZGOIeWBhdT9vekrLv9VpEBc13NJ
+         7wAaw1ZF5HoRhcgQHEC5qSKYHDmdV7jxJUs0zd9Tu3Dji9TR9vfkh0GSpfihmA1M2reg
+         Ya4w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783516019; x=1784120819;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=s74v2avsJlcuWUXv/SP6LYjG4ujBbKcJtdg+IdFhrXc=;
+        b=gNWcw3j/wy4TDdo2KPFnQTDcKahjjASU6GB0YItYdJsCANzbObRq2mjZS2EWs0k9Lm
+         b+Gk1tbF5lySnaRu7tkbzZnnbMvQfdGV6UHXUnsNM4YCEfuSaAyRLJ0wA9U0ISedt1Xk
+         3ZX2As07rTOstVyI4pkETgEGGvpTcvM3ZFokTTk6VO7u7hFokkwFbN2JhvvGr02WstZG
+         260gQOxq45QRDBtKkfzln6ibwlgMn7wusD/Qk1OS7UqlEyoP33CKIaVh86pXIEOvjiK+
+         FfMUh2Xq4OlZhTRUNkUjI9LiFddiKe4U4BQEMKdnT93rlNY8Ti3TANkyVbDRIBBcHsxY
+         OVrA==
+X-Gm-Message-State: AOJu0YzmlVOjarV6Z+CGFknH+fZvZOCG8qiRG+1mbtjsPKqCiAgYg9jE
+	z6DZ5ocFTji0DtVEwOSFcGs+zScYSefQ4tJxHuSSSeevgFAHg52LgbKyo46GIIf4192xgyk5
+X-Gm-Gg: AfdE7ckHfyOcvD9BjkQ13D2vBL3C64lHauqxyd3Aew8cOgAOoynn9PDG7D4loLZarP3
+	L9lkR95omxYXuhfqKY7b7FkkG3qobv+HjWOyxJbF9mSLriYS+C9PBl6sb8RYto9sZ9Z0eutYUth
+	jdfiVM0DKnVvYnPdIHt0teZ7gqG6mMCipqvAt1t9Iqocdcvo/SbVukPZ+8nV+QFqKM9/N/Y2WGS
+	6gUsrP3cDogYmGTkQ2gR7lj+wkPaNSb9cI1SXN9jB6CSmqTqUaXTtIRH52nB5E5nZm+Pq/mvqOo
+	lZaBzKZe1s22gb+T18l5MI91IdUK2SI6RV9qhZ3n1Nu4xxfbPOtUsuCgguQzKKB6W9HdXA0kPtz
+	izPillGIxBAIBCs8+nBNBFXw2FlZ+LTxKzdG0jnhNbHmOncwHSg03cmSUoEkpTFAqSPOu7d78lb
+	J1E/TVplWPr6LFzmiREXCM8S7hkwR5NVYSniN3n0MUvwxK3r20wqfvSpI=
+X-Received: by 2002:a05:6a20:c996:b0:3bf:65b7:22d9 with SMTP id adf61e73a8af0-3c0bcb7e30bmr3442031637.41.1783516019356;
+        Wed, 08 Jul 2026 06:06:59 -0700 (PDT)
+Received: from fedora ([2804:14c:a8:965f::1f2c])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13b659c8572sm20305843c88.9.2026.07.08.06.06.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 08 Jul 2026 06:06:58 -0700 (PDT)
+From: Igor Giamoniano <igorgphotoarte@gmail.com>
+To: danielmaraboo@gmail.com
+Cc: linux-doc@vger.kernel.org,
+	Igor Giamoniano <igorgphotoarte@gmail.com>
+Subject: [PATCH] docs: pt_BR: process: Translate the kernel driver statement
+Date: Wed,  8 Jul 2026 10:05:56 -0300
+Message-ID: <20260708130558.12604-1-igorgphotoarte@gmail.com>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260707082104.90951-1-harish.cs.ss24@gmail.com>
- <db94b1a3-cc1e-47e8-92ee-976400209a43@de.bosch.com> <7bcbb466-0c2e-41c5-9c85-8b4e73348d1b@de.bosch.com>
- <CAGjpMsQgjBLTMt3PU8FHokCOBWc59YFagSjqcE2ZJSBGixLGOA@mail.gmail.com> <CAGjpMsTvHHbfaGXDTK+pK9j59wpAx1zitfgRDeC1NAnbt2K67A@mail.gmail.com>
-In-Reply-To: <CAGjpMsTvHHbfaGXDTK+pK9j59wpAx1zitfgRDeC1NAnbt2K67A@mail.gmail.com>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Wed, 8 Jul 2026 15:02:29 +0200
-X-Gm-Features: AVVi8CfG8PaAXSQQxyc-sE5YJS5cPaEgoiwxvzqNgWwMzRipNLGngs0fOznfSAA
-Message-ID: <CANiq72k1kdv4R+QYyROpJmO6sZBASCh+RwYkoLZ=wf8zTyUrHg@mail.gmail.com>
-Subject: Re: [PATCH] checkpatch: warn on Rust unwrap and expect calls
-To: Harish CS <harish.cs.ss24@gmail.com>
-Cc: Dirk Behme <dirk.behme@de.bosch.com>, Andy Whitcroft <apw@canonical.com>, 
-	Joe Perches <joe@perches.com>, Dwaipayan Ray <dwaipayanray1@gmail.com>, 
-	Lukas Bulwahn <lukas.bulwahn@gmail.com>, Jonathan Corbet <corbet@lwn.net>, 
-	Shuah Khan <skhan@linuxfoundation.org>, Miguel Ojeda <ojeda@kernel.org>, 
-	linux-kernel@vger.kernel.org, workflows@vger.kernel.org, 
-	linux-doc@vger.kernel.org, rust-for-linux@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+X-Spamd-Result: default: False [-1.16 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:harish.cs.ss24@gmail.com,m:dirk.behme@de.bosch.com,m:apw@canonical.com,m:joe@perches.com,m:dwaipayanray1@gmail.com,m:lukas.bulwahn@gmail.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:ojeda@kernel.org,m:linux-kernel@vger.kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:rust-for-linux@vger.kernel.org,m:harishcsss24@gmail.com,m:lukasbulwahn@gmail.com,s:lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-95706-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-95707-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	FORGED_SENDER(0.00)[miguelojedasandonis@gmail.com,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[miguelojedasandonis@gmail.com,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[de.bosch.com,canonical.com,perches.com,gmail.com,lwn.net,linuxfoundation.org,kernel.org,vger.kernel.org];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:danielmaraboo@gmail.com,m:linux-doc@vger.kernel.org,m:igorgphotoarte@gmail.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[igorgphotoarte@gmail.com,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_THREE(0.00)[3];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[igorgphotoarte@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[]
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 7B7DB72693D
+X-Rspamd-Queue-Id: 152FD7269DE
 
-On Wed, Jul 8, 2026 at 2:38=E2=80=AFPM Harish CS <harish.cs.ss24@gmail.com>=
- wrote:
->
-> Do you think using Clippy's existing semantic lints would be a better
-> direction to solve this in the build time itself ? Or do you have another=
- approach in mind?
+Translate Documentation/process/kernel-driver-statement.rst into Brazilian
+Portuguese, keeping the reStructuredText formatting and the list of
+signatories unchanged.
 
-The most recent context about this is that we talked with upstream
-Clippy in RustWeek about this again, and, bandwidth-allowing, I think
-they are open to such lints.
+Signed-off-by: Igor Giamoniano <igorgphotoarte@gmail.com>
+---
+ .../pt_BR/process/kernel-driver-statement.rst | 205 ++++++++++++++++++
+ 1 file changed, 205 insertions(+)
+ create mode 100644 Documentation/translations/pt_BR/process/kernel-driver-statement.rst
 
-In fact, for `// PANIC`, there is an open PR:
+diff --git a/Documentation/translations/pt_BR/process/kernel-driver-statement.rst b/Documentation/translations/pt_BR/process/kernel-driver-statement.rst
+new file mode 100644
+index 000000000..5a8a8f41d
+--- /dev/null
++++ b/Documentation/translations/pt_BR/process/kernel-driver-statement.rst
+@@ -0,0 +1,205 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++Declaração sobre Drivers do Kernel
++----------------------------------
++
++Posicionamento sobre os Módulos do Kernel Linux
++===============================================
++
++
++Nós, os desenvolvedores do kernel Linux abaixo assinados, consideramos
++qualquer módulo ou driver de código fechado para o kernel Linux
++prejudicial e indesejável. Repetidamente, constatamos que eles são
++nocivos aos usuários do Linux, às empresas e ao ecossistema Linux como
++um todo. Tais módulos negam a abertura, a estabilidade, a flexibilidade
++e a manutenibilidade do modelo de desenvolvimento do Linux e privam
++seus usuários do conhecimento da comunidade Linux. Fornecedores que
++oferecem módulos de kernel de código fechado forçam seus clientes a
++abrir mão de vantagens fundamentais do Linux ou a escolher novos
++fornecedores. Portanto, para aproveitar plenamente a economia de custos
++e os benefícios de suporte compartilhado que o código aberto tem a
++oferecer, incentivamos fortemente para que os fornecedores adotem uma
++política de dar suporte a seus clientes no Linux com código de kernel
++de código aberto.
++
++Falamos apenas por nós mesmos, e não por qualquer empresa para a qual
++possamos trabalhar hoje, tenhamos trabalhado no passado ou venhamos a
++trabalhar no futuro.
++
++ - Dave Airlie
++ - Nick Andrew
++ - Jens Axboe
++ - Ralf Baechle
++ - Felipe Balbi
++ - Ohad Ben-Cohen
++ - Muli Ben-Yehuda
++ - Jiri Benc
++ - Arnd Bergmann
++ - Thomas Bogendoerfer
++ - Vitaly Bordug
++ - James Bottomley
++ - Josh Boyer
++ - Neil Brown
++ - Mark Brown
++ - David Brownell
++ - Michael Buesch
++ - Franck Bui-Huu
++ - Adrian Bunk
++ - François Cami
++ - Ralph Campbell
++ - Luiz Fernando N. Capitulino
++ - Mauro Carvalho Chehab
++ - Denis Cheng
++ - Jonathan Corbet
++ - Glauber Costa
++ - Alan Cox
++ - Magnus Damm
++ - Ahmed S. Darwish
++ - Robert P. J. Day
++ - Hans de Goede
++ - Arnaldo Carvalho de Melo
++ - Helge Deller
++ - Jean Delvare
++ - Mathieu Desnoyers
++ - Sven-Thorsten Dietrich
++ - Alexey Dobriyan
++ - Daniel Drake
++ - Alex Dubov
++ - Randy Dunlap
++ - Michael Ellerman
++ - Pekka Enberg
++ - Jan Engelhardt
++ - Mark Fasheh
++ - J. Bruce Fields
++ - Larry Finger
++ - Jeremy Fitzhardinge
++ - Mike Frysinger
++ - Kumar Gala
++ - Robin Getz
++ - Liam Girdwood
++ - Jan-Benedict Glaw
++ - Thomas Gleixner
++ - Brice Goglin
++ - Cyrill Gorcunov
++ - Andy Gospodarek
++ - Thomas Graf
++ - Krzysztof Halasa
++ - Harvey Harrison
++ - Stephen Hemminger
++ - Michael Hennerich
++ - Tejun Heo
++ - Benjamin Herrenschmidt
++ - Kristian Høgsberg
++ - Henrique de Moraes Holschuh
++ - Marcel Holtmann
++ - Mike Isely
++ - Takashi Iwai
++ - Olof Johansson
++ - Dave Jones
++ - Jesper Juhl
++ - Matthias Kaehlcke
++ - Kenji Kaneshige
++ - Jan Kara
++ - Jeremy Kerr
++ - Russell King
++ - Olaf Kirch
++ - Roel Kluin
++ - Hans-Jürgen Koch
++ - Auke Kok
++ - Peter Korsgaard
++ - Jiri Kosina
++ - Aaro Koskinen
++ - Mariusz Kozlowski
++ - Greg Kroah-Hartman
++ - Michael Krufky
++ - Aneesh Kumar
++ - Clemens Ladisch
++ - Christoph Lameter
++ - Gunnar Larisch
++ - Anders Larsen
++ - Grant Likely
++ - John W. Linville
++ - Yinghai Lu
++ - Tony Luck
++ - Pavel Machek
++ - Matt Mackall
++ - Paul Mackerras
++ - Roland McGrath
++ - Patrick McHardy
++ - Kyle McMartin
++ - Paul Menage
++ - Thierry Merle
++ - Eric Miao
++ - Akinobu Mita
++ - Ingo Molnar
++ - James Morris
++ - Andrew Morton
++ - Paul Mundt
++ - Oleg Nesterov
++ - Luca Olivetti
++ - S.Çağlar Onur
++ - Pierre Ossman
++ - Keith Owens
++ - Venkatesh Pallipadi
++ - Nick Piggin
++ - Nicolas Pitre
++ - Evgeniy Polyakov
++ - Richard Purdie
++ - Mike Rapoport
++ - Sam Ravnborg
++ - Gerrit Renker
++ - Stefan Richter
++ - David Rientjes
++ - Luis R. Rodriguez
++ - Stefan Roese
++ - Francois Romieu
++ - Rami Rosen
++ - Stephen Rothwell
++ - Maciej W. Rozycki
++ - Mark Salyzyn
++ - Yoshinori Sato
++ - Deepak Saxena
++ - Holger Schurig
++ - Amit Shah
++ - Yoshihiro Shimoda
++ - Sergei Shtylyov
++ - Kay Sievers
++ - Sebastian Siewior
++ - Rik Snel
++ - Jes Sorensen
++ - Alexey Starikovskiy
++ - Alan Stern
++ - Timur Tabi
++ - Hirokazu Takata
++ - Eliezer Tamir
++ - Eugene Teo
++ - Doug Thompson
++ - FUJITA Tomonori
++ - Dmitry Torokhov
++ - Marcelo Tosatti
++ - Steven Toth
++ - Theodore Tso
++ - Matthias Urlichs
++ - Geert Uytterhoeven
++ - Arjan van de Ven
++ - Ivo van Doorn
++ - Rik van Riel
++ - Wim Van Sebroeck
++ - Hans Verkuil
++ - Horst H. von Brand
++ - Dmitri Vorobiev
++ - Anton Vorontsov
++ - Daniel Walker
++ - Johannes Weiner
++ - Harald Welte
++ - Matthew Wilcox
++ - Dan J. Williams
++ - Darrick J. Wong
++ - David Woodhouse
++ - Chris Wright
++ - Bryan Wu
++ - Rafael J. Wysocki
++ - Herbert Xu
++ - Vlad Yasevich
++ - Peter Zijlstra
++ - Bartlomiej Zolnierkiewicz
+-- 
+2.55.0
 
-  https://github.com/rust-lang/rust-clippy/pull/15969
-
-Helping test and review that one for the kernel use case would be
-welcome, I would imagine, since getting lints right is harder than it
-looks!
-
-I have more context in the live list at:
-
-  https://github.com/Rust-for-Linux/linux/issues/349
-
-I hope that helps & thanks!
-
-Cheers,
-Miguel
 
