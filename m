@@ -1,389 +1,236 @@
-Return-Path: <linux-doc+bounces-95620-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95631-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 34W/KInyTWrjAQIAu9opvQ
-	(envelope-from <linux-doc+bounces-95620-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 08:47:37 +0200
+	id JnayDo70TWqbAgIAu9opvQ
+	(envelope-from <linux-doc+bounces-95631-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 08:56:14 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id A024D7224F0
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 08:47:36 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id A1658722641
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 08:56:13 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=intel.com header.s=Intel header.b=DeAXD6WV;
-	dmarc=pass (policy=none) header.from=intel.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95620-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-95620-lists+linux-doc=lfdr.de@vger.kernel.org";
-	arc=reject ("cv is fail on i=2")
+	dkim=pass header.d=ibm.com header.s=pp1 header.b=J3VvRJOP;
+	dmarc=pass (policy=none) header.from=ibm.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95631-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-95631-lists+linux-doc=lfdr.de@vger.kernel.org";
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id AA4CB300AD60
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2026 06:46:53 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 963053081D11
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2026 06:50:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CAAC53E51F0;
-	Wed,  8 Jul 2026 06:46:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1753D3EF64A;
+	Wed,  8 Jul 2026 06:48:19 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D84A3E44E6;
-	Wed,  8 Jul 2026 06:46:50 +0000 (UTC)
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783493212; cv=fail; b=U/XqdGjWGVyQERlGSS9QgvNh0lJXlFtN3GNAILcUxQsmrfTSuyXKcvFfpBR0h6U2mXFv31JP+Mzob+s4j+3aGsSZ3ZVZUJUXilcp38zI31IvjPyNa8Ab45Yk4m4CPbgMSljRY2Yt8Ykmm+SXXT4XRjQ5HyoBlgmacNxfbBgAWwE=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783493212; c=relaxed/simple;
-	bh=bIkwyTjkBBUapqFuPdKdsGcfV2URxMEv6xKPVK7KXvM=;
-	h=Date:From:To:CC:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=qiR4Q4ujXnQDGGCavwcBzvUXXcFs/OUa/6uscFSrUjawpjKe5ZN1d3LPLjClMpYoDIqpZpMJJusSgKX0ihyYNRxzG3/SJc4fulOkVMj2rE0shW0gA3F/GiEKRNkSZD2C+FfP0b93l9w6JwucBkO1YLU75fg2aOeukGwgygWuWN8=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=DeAXD6WV; arc=fail smtp.client-ip=198.175.65.19
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1783493211; x=1815029211;
-  h=date:from:to:cc:subject:message-id:reply-to:references:
-   in-reply-to:mime-version;
-  bh=bIkwyTjkBBUapqFuPdKdsGcfV2URxMEv6xKPVK7KXvM=;
-  b=DeAXD6WVCDL7/8pUXGY7sOVm2IxC14oRnQIHQ8T8+DBWl9NmpTL9kRHH
-   rxqPHYLIRLY6Qqaws+ESGLqWgTBY58wmmYtMlWBf7V5JhnTyrSJKqyM4W
-   cXu7r8b/1VeEx0cVQ/lZU0siZgTat5Zococykr0aF9KOVAh3n9gzAudLY
-   uczPkG8OV8T2Iky09O/AY3r4V45MEsEWmbPUdayUH554x7vtc5MHey+mW
-   znIIVXo6xHCUgSe+7uCfPbG5tSDZ8/m4HbaGm/eCKEWUjdhZq68z3jjNH
-   EsRc1AeJTJPUCTQ8kAOwadKDUQlTW1NxhGEwvZFobq9wW9OeBGyGbj+q3
-   Q==;
-X-CSE-ConnectionGUID: zK9tCLBNRA6zzCNbqtgx6w==
-X-CSE-MsgGUID: xF520OwESQyIdkgC7wDFXw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11840"; a="84120902"
-X-IronPort-AV: E=Sophos;i="6.25,153,1779174000"; 
-   d="scan'208";a="84120902"
-Received: from fmviesa003.fm.intel.com ([10.60.135.143])
-  by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jul 2026 23:46:50 -0700
-X-CSE-ConnectionGUID: c6QPcHDlTOitYxD7Q0FR+Q==
-X-CSE-MsgGUID: cxsBvFESTOSgjx3sNhaTcA==
-X-ExtLoop1: 1
-Received: from fmsmsx903.amr.corp.intel.com ([10.18.126.92])
-  by fmviesa003.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jul 2026 23:46:49 -0700
-Received: from FMSMSX902.amr.corp.intel.com (10.18.126.91) by
- fmsmsx903.amr.corp.intel.com (10.18.126.92) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.43; Tue, 7 Jul 2026 23:46:48 -0700
-Received: from fmsedg902.ED.cps.intel.com (10.1.192.144) by
- FMSMSX902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.43 via Frontend Transport; Tue, 7 Jul 2026 23:46:48 -0700
-Received: from PH7PR06CU001.outbound.protection.outlook.com (52.101.201.9) by
- edgegateway.intel.com (192.55.55.82) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.43; Tue, 7 Jul 2026 23:46:48 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=grSL4sVKBxmb9P+/CfLOOcIHsUWa8KwkfM602UeVg7fvvf2X2ddeCmJQnaDm+WxL+VFdsPoTuecTwUQDay/t83+3SWXTaADQf6lo/WHedCGcudiXsUKBuuKEiem67+XdM19pIpA1JM6jZOWsKL5I7vAfwl8YF6N0u/GcyJ5fbz4lFfPCBzX7f5MDkyUTe21NaGYM46ZIY/RZ39puZQaXHbEtx4WFt6wzo090UZXhv9cxoa/KaTrpjkImVNUsjKdUKaQRJ4bkFa3R+T43sbtlCqxfVDNSpJubmAWzuJI4lWpnncwC92jupuP8cZiRq3LEiWS8iLEV/zNEXvOxF9lSNg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WfVhvjY0MNVVLbJjyItuZDhYjjAlzGcl96IJIzZlC/c=;
- b=Y+Rwq8vbXQlB/HtUPDFzFXXHtMowY+1u0Dat4Agsa1F8eORfwRWrdCr3HX9f1/wFCIlq2YGSLbswKKu6JHKGjzNFpPW4cBDdJR+DicQkMEKMRqQ1BZXQWD6vsy3B0/TZsru6ib+usZ/b+4Sh7SADM6+jmwozrn+KKXUxiuPpYMLYfLJBx66MesvnV0Bb9R4zT08/ehnFefsDqGrnIwHm/hA5dBQAj4J3kQH3JOfdlGxv/E/b0bbSR5uqjq6n2VDPWPM6RlG6eHWdbnsdOKC83W6CqNtwxrkuHqa6ejXDzR5JL0XYNMGVA9cFnuyHDkUAnPgh7fcwjaui+87vLw1ILg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Received: from PH0PR11MB7472.namprd11.prod.outlook.com (2603:10b6:510:28c::12)
- by PH7PR11MB6554.namprd11.prod.outlook.com (2603:10b6:510:1a8::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.19; Wed, 8 Jul
- 2026 06:46:40 +0000
-Received: from PH0PR11MB7472.namprd11.prod.outlook.com
- ([fe80::1bad:44dd:4e60:6475]) by PH0PR11MB7472.namprd11.prod.outlook.com
- ([fe80::1bad:44dd:4e60:6475%5]) with mapi id 15.21.0181.008; Wed, 8 Jul 2026
- 06:46:40 +0000
-Date: Wed, 8 Jul 2026 14:46:32 +0800
-From: Yan Zhao <yan.y.zhao@intel.com>
-To: Rick Edgecombe <rick.p.edgecombe@intel.com>
-CC: <bp@alien8.de>, <dave.hansen@intel.com>, <hpa@zytor.com>,
-	<kas@kernel.org>, <kvm@vger.kernel.org>, <linux-coco@lists.linux.dev>,
-	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-	<mingo@redhat.com>, <nik.borisov@suse.com>, <pbonzini@redhat.com>,
-	<seanjc@google.com>, <tglx@kernel.org>, <vannapurve@google.com>,
-	<x86@kernel.org>, <chao.gao@intel.com>, <kai.huang@intel.com>, "Kirill A.
- Shutemov" <kirill.shutemov@linux.intel.com>
-Subject: Re: [PATCH v6 05/11] x86/virt/tdx: Handle concurrent callers in
- tdx_pamt_get/put()
-Message-ID: <ak3ySL89u5+1oCZB@yzhao56-desk.sh.intel.com>
-Reply-To: Yan Zhao <yan.y.zhao@intel.com>
-References: <20260526023515.288829-1-rick.p.edgecombe@intel.com>
- <20260526023515.288829-6-rick.p.edgecombe@intel.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20260526023515.288829-6-rick.p.edgecombe@intel.com>
-X-ClientProxiedBy: KL1PR0401CA0008.apcprd04.prod.outlook.com
- (2603:1096:820:f::13) To PH0PR11MB7472.namprd11.prod.outlook.com
- (2603:10b6:510:28c::12)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D82F3ED13B;
+	Wed,  8 Jul 2026 06:48:11 +0000 (UTC)
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783493298; cv=none; b=b865xFRMMB5TgOOvhkQZRkYpt8JkJIpaIcQ3gXFlVrj6Q5f3Y0GMJX8dPQr2l1NRQO5t9oMGW1Xq588U5g6eIdpPs2JjTE7yzmSdsEaIxjqjrCxvz2cbwljd6hBYM4azZPuzD23/fNaLYpeyDh7STRFxJ2oxqs6BEutUJgnEjQY=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783493298; c=relaxed/simple;
+	bh=M28jEEiyxsmjSyjJRlntHZlI7gfJ2BDu8p/uyxAr2B4=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=qMX43TK75xG0bw9S5JxFK4WPZaDR4J0yDmWZ6pKJ257XC/hoUcO/vemFTJkZAEfobvOSYPHIW1+tqT8m0UEoj2s5WseBUIt1iziNzWy2UNTSRAVVEclSWUKPgumgDn2XgkSIhZW1pKK5+rQGgbZ/L1S5t06+3deku3C9YxmMBXY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=J3VvRJOP; arc=none smtp.client-ip=148.163.156.1
+Received: from pps.filterd (m0356517.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 667MmZNI820082;
+	Wed, 8 Jul 2026 06:47:20 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=pp1; bh=5NHaxsIUhuT4+gPoK3v5GAm1W4gFqo
+	zMGBzG5dhHB64=; b=J3VvRJOPVCo8sfswlNLclj5tEllTcDb/5mOo4UwrcEmwj9
+	kOcib6SJfoOPHBqfKEFzjNZQd2EwJ57/yD6sG6B0H0tNDzXD0wPRsIJ0gKTgnWVA
+	9JsrNlpGhEja0n+s390NL3qqR6LSh3vnBOyCGMWPrvuvLPrc+xg0eqGbCG9GpFQt
+	T6IXomRuMHhJ8IUHLiU8SEMvKhLQvSru/L88QBvsa6uwMTaUt3hfk/CVTVbxikmA
+	E2o0GDHMrGc6K06KjQtEHO/0pun9gVtSFIiO8WD/BwEDrzHsyEsZJRJzRzP90hSH
+	1GPjR3pHagQg1Xr7sMrs+qCTC9VvOfizqWMYYnbA==
+Received: from ppma13.dal12v.mail.ibm.com (dd.9e.1632.ip4.static.sl-reverse.com [50.22.158.221])
+	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4f6sw4u21t-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Wed, 08 Jul 2026 06:47:19 +0000 (GMT)
+Received: from pps.filterd (ppma13.dal12v.mail.ibm.com [127.0.0.1])
+	by ppma13.dal12v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 6686YexQ019843;
+	Wed, 8 Jul 2026 06:47:18 GMT
+Received: from smtprelay04.fra02v.mail.ibm.com ([9.218.2.228])
+	by ppma13.dal12v.mail.ibm.com (PPS) with ESMTPS id 4f7eqg65y6-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Wed, 08 Jul 2026 06:47:18 +0000 (GMT)
+Received: from smtpav06.fra02v.mail.ibm.com (smtpav06.fra02v.mail.ibm.com [10.20.54.105])
+	by smtprelay04.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 6686lGMb12976422
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Wed, 8 Jul 2026 06:47:16 GMT
+Received: from smtpav06.fra02v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 84BCD20049;
+	Wed,  8 Jul 2026 06:47:16 +0000 (GMT)
+Received: from smtpav06.fra02v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 09F8D20040;
+	Wed,  8 Jul 2026 06:47:16 +0000 (GMT)
+Received: from tuxmaker.linux.ibm.com (unknown [9.87.85.9])
+	by smtpav06.fra02v.mail.ibm.com (Postfix) with ESMTPS;
+	Wed,  8 Jul 2026 06:47:15 +0000 (GMT)
+From: Sven Schnelle <svens@linux.ibm.com>
+To: Thomas Gleixner <tglx@kernel.org>
+Cc: LKML <linux-kernel@vger.kernel.org>,
+        Peter Zijlstra
+ <peterz@infradead.org>, linux-s390@vger.kernel.org,
+        Michael Ellerman
+ <mpe@ellerman.id.au>,
+        Shrikanth Hegde <sshegde@linux.ibm.com>, linuxppc-dev@lists.ozlabs.org,
+        Kees Cook <kees@kernel.org>, Huacai Chen
+ <chenhuacai@kernel.org>,
+        loongarch@lists.linux.dev, Paul Walmsley
+ <pjw@kernel.org>,
+        Palmer Dabbelt <palmer@dabbelt.com>, linux-riscv@lists.infradead.org,
+        x86@kernel.org, Mark Rutland
+ <mark.rutland@arm.com>,
+        Jinjie Ruan <ruanjinjie@huawei.com>,
+        Andy
+ Lutomirski <luto@kernel.org>, Oleg Nesterov <oleg@redhat.com>,
+        Richard
+ Henderson <richard.henderson@linaro.org>,
+        Russell King
+ <linux@armlinux.org.uk>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Guo
+ Ren <guoren@kernel.org>,
+        Geert Uytterhoeven <geert@linux-m68k.org>,
+        Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+        Helge Deller
+ <deller@gmx.de>,
+        Yoshinori Sato <ysato@users.sourceforge.jp>,
+        Richard
+ Weinberger <richard@nod.at>, Chris Zankel <chris@zankel.net>,
+        linux-arm-kernel@lists.infradead.org, linux-alpha@vger.kernel.org,
+        linux-csky@vger.kernel.org, linux-m68k@lists.linux-m68k.org,
+        linux-mips@vger.kernel.org, linux-parisc@vger.kernel.org,
+        linux-sh@vger.kernel.org, linux-um@lists.infradead.org,
+        Arnd Bergmann
+ <arnd@arndb.de>, Vineet Gupta <vgupta@kernel.org>,
+        Will Deacon
+ <will@kernel.org>, Brian Cain <bcain@kernel.org>,
+        Michal Simek
+ <monstr@monstr.eu>, Dinh Nguyen <dinguyen@kernel.org>,
+        "David S. Miller"
+ <davem@davemloft.net>,
+        Andreas Larsson <andreas@gaisler.com>,
+        linux-snps-arc@lists.infradead.org, linux-hexagon@vger.kernel.org,
+        linux-openrisc@vger.kernel.org, sparclinux@vger.kernel.org,
+        linux-arch@vger.kernel.org,
+        Michal =?utf-8?Q?Such=C3=A1nek?=
+ <msuchanek@suse.de>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Subject: Re: [patch 07/18] s390/syscall: Use
+ enter_from_user_mode_randomize_stack()
+In-Reply-To: <20260707190254.030598804@kernel.org>
+References: <20260707181957.433213175@kernel.org>
+	<20260707190254.030598804@kernel.org>
+Date: Wed, 08 Jul 2026 08:47:15 +0200
+Message-ID: <yt9d1pde6kr0.fsf@linux.ibm.com>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH0PR11MB7472:EE_|PH7PR11MB6554:EE_
-X-MS-Office365-Filtering-Correlation-Id: c228ff6a-f9fb-4b15-592f-08dedcbcaa21
-X-LD-Processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|7416014|1800799024|23010399003|22082099003|18002099003|4143699003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info: U+x5cETria+4GFRF8USVsY6Ijpop9sVrDe8Qe7L1kmPgEIhdv7MJYsyKpS22lu4RTTUjE45nh1HTSkDRDLSV7MumiUmj+/HVrIWnyHrLkF33nrBvbmr3kAKzx+QDLbvQfJ2jSMcDsTUChv9gUG4S1CNuce8H01vnZ9rdiMHml71n9PeARUOmp/Qteytq59tsAP+nEbIEBxgoqJf6yAuZsOq4pvpD4abOzdbda0qv8xvYJc3q7MsrIIU4kGUFM4NxiIhymSR2jgwR5T691WpXyOmI5+gMPnc5fj9i8xzHn32RcZzLG8IpNIP9pxfFuLQQ1CCR6Fux05vUvFC4wwVCDLAyPuSPvxIiCw+ydqqh58S79ehvxaX3Do9KmlJWag9GXAWcMb7AQWawvpXngAFqJNTxFRsetbEYhTFRp2d6bb7ysNsw8/Fc6eIfcDC4Kjb+kMstN/kz/lMtpgSkNft1Ma6rP/S5BENRipZF8yT4ux+EPws00mOe35wIsUPUnZZCxw1LCMGhj/hYGcazCZCkDgaotvvh9eUGXonqL/GvWAXTxFisqzmGUX43MWhbRqMtpwgtmigysKuHl5cjBXnBa1EtWyL3Cv8uHgKUYmvCtoB5fkpjQNM/uIjLB4/loMiTloK7EcMzjE9W9p3azCdLQmoLOasH1krbgMJX4PFNKzY=
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR11MB7472.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(7416014)(1800799024)(23010399003)(22082099003)(18002099003)(4143699003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?O1e241TIJyQP8IT8KyekFxwEZxpl3Zoe11widi9DEKhoUvusCBJlUKGQhytK?=
- =?us-ascii?Q?VcglMH497QAITPdORYbTY7EpnBaoHZ8CxIHHpD4Pb3CBwc7T448N8qE7Cis0?=
- =?us-ascii?Q?OL2mnyIbzu1u7ZFaaecHwnfq8l/B7LI/DDmNs4SdEeyyH0LsvPPbrfst0NID?=
- =?us-ascii?Q?sIyM47bT5ES3MiqK6vT3XZRC2/2o1w+9wDFDw7kE7Mi2LeI3ZtBsvxQdBUnn?=
- =?us-ascii?Q?XBLFai8ybGsoR2usBSey29EPjn9bmdMTuQvuXIqDVm96PR2pbfjHNvjCN1Xx?=
- =?us-ascii?Q?GIEesljJzl/hD9xAYQWE4Kl8KcnD5SMUI8On+juJewLhWtSzAxpc6gJcCVFA?=
- =?us-ascii?Q?8EKYV5jUwRpCq0BnruiXRuVbqvHkAvGtIy2YFTRXAftIIfwUGB8Bw5Q1mLkn?=
- =?us-ascii?Q?qxwkIuqwPBQZd5R67+stRYN9zlG7pflEy8clS5ENe4L8bAc55G6s/cK77CRi?=
- =?us-ascii?Q?uOVHnmIfuAN802DdXn75/TJJHv//bic5gDWz/pPkSN1tJAm6GYkszBpgomNT?=
- =?us-ascii?Q?Gz2tLPcEdq+g5tLCAydKYnU+HUEs21mKS9dtW6n4vr5yyg8+HyExN7AN8Yik?=
- =?us-ascii?Q?VDqsq0XC0grwAoBFbtIKnismsWK7ojTYsBMJPSOPqeC3gNbC/+xEjpGgol73?=
- =?us-ascii?Q?zL/+iqaM57ezBpYjVdrPIbyUd6fvOGDb177LdyTHYgGzeB/R/2X+FEWUbZHU?=
- =?us-ascii?Q?Fi2UQjCsicRm9vmhS2k8C45Y/A6tJ9KTIqw9H2p63oGFjyNvfoqcoosC4LrE?=
- =?us-ascii?Q?VJiGRl5RoFl/ntqhouL0Gv7J11/D3OXYEEYOBZAZkImPkzvAsYhWKHjG8f90?=
- =?us-ascii?Q?Py/Xrr2sPSqIKSctJEQxsLsqWzJC25zdH6kCj35WCyBc30U0YyrwhSkKJ6+E?=
- =?us-ascii?Q?/P3ng8zw2zW+cwiVYJuleuj40h4caYRIDQ3kyAdeRygnvLUqSl31bwg3f+87?=
- =?us-ascii?Q?yYKH7JkTMH3zjVE8ZpQlX1Ea4lRNJ37qZMmSUGLqKNJlvROHVYa/Ax366n6w?=
- =?us-ascii?Q?jZ99k7awzz+So6FyuDPgBfvYnWRQTb1WUIQ605g9prJAsKmq/Ac+EZ1Vay21?=
- =?us-ascii?Q?PuT6fshXfK1nO89EomkC+aMOUi4rN0Gr28ATH1Jbc2YnwQEATTrRr3sfkHiE?=
- =?us-ascii?Q?sQbfUAvnV+RgitGhTKLtolZshSwVmY6sYkPAxiyhx6jqFKuTs94w7jtliPgO?=
- =?us-ascii?Q?SaOTY4DbhmmydbZeFzBT/n3+8pNPuPGApPNXVEY7NO4B1405Nw0yLpx9LZG9?=
- =?us-ascii?Q?AqS3415COne+ApEEYQlFrw+X1z/Z6kLto+LY/FXcbEbLHCiKRseLdKqd14yz?=
- =?us-ascii?Q?Krb2vJ4CSMq7UsrHfkl4N5Vo3I5/NZ6+YI66zNW4lhLlhKdsloYkZd02RpVr?=
- =?us-ascii?Q?fDjfpUyjIKpMnL5oGr1GViAJuyzWj0jpsqV/XHIQn9MDOAOB7vRpGfWp89Ab?=
- =?us-ascii?Q?GiAjpqd93mOu1TjacYOIRJJU/HXDjzUeac7Di0iXqu2XMEPue0Zl1pMFOQq9?=
- =?us-ascii?Q?qsDOCWZvx1Iweb7VdIxiLVAs6Cm7JKbpmn4PvasplNa5RF5nkH4ow6LmnphO?=
- =?us-ascii?Q?Mkcp4KioZoqjWBZsmQugbL8e9iWUT8dV1RTaZcIWVVMB336jWXUbWkA0AEYU?=
- =?us-ascii?Q?5bPVT5/t2rN0EWmn7sRXcTUwKGHySrhX6Tjff3PjdMUPv/Ds/i1+QQK4FPKY?=
- =?us-ascii?Q?yoNGgeIux+Sgr8v2JcVKcOlbM2ACQMEPAY5DuOrXCNQFwkzQE+FRBVJhhGyn?=
- =?us-ascii?Q?BVhBAYOfwA=3D=3D?=
-X-Exchange-RoutingPolicyChecked: NfRc+nRIfZuVKkZllKTeJf2K6vvBfpsHtffZn+9720KQTESBJxmmj/bT8BoTCqe1izcbjoUqoGT35UhWnmjaz4xtJWV1EIncCX4x4tgZJZN9JEeViB1huqUeVFPHOwKmAY3Y3Hi4fFw307ma0RRlZLnIaNcLKMckwrgitQnlBtlzCmD1R7dOVki+eFcQHzJws0lYNaEc5K2P4hPOHFASvyPhP7pEIJTF3ESAdRNdRRniRmYqohlk1ejzmb8fG8WnhC6YoaP9PcWLBM2K1EF0e24Hv8HvoMLXVa9Jar/0vWG83GtzprYBuZpIxaVd16noDdfEUyOCJQIkIqcgQ+m5Mg==
-X-MS-Exchange-CrossTenant-Network-Message-Id: c228ff6a-f9fb-4b15-592f-08dedcbcaa21
-X-MS-Exchange-CrossTenant-AuthSource: PH0PR11MB7472.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jul 2026 06:46:40.2793
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: aifXYGovSstmapZPT/9P6VXRca/5eih6oMXQfAjn2a3veaDOJRhGJxiMx/w8SuEDjMJGe+eIRSEIQlZVS8MOnA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR11MB6554
-X-OriginatorOrg: intel.com
+Content-Type: text/plain
+X-TM-AS-GCONF: 00
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-Proofpoint-GUID: _L7edkq3BwnBWML6vUHeJ0rb1UtEu9CY
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA4MDA1OCBTYWx0ZWRfXy3LHxWa7PIH+
+ 8urugSBuUbrtJi57OI87IYjkuqIiXGOGFK+88q8gEVOe7ERBr8TsrVGypKfNgvFuShFuK5wtiHj
+ Zfx4VvtSTJG9XBXaO4MYfRBFI5rBkjhHVxI5WzazNrE1rEbw178sbd/cxA6Auww+KIhdddwtejJ
+ 248bkWj12S+T6W3/mrf0LUiPVaXvbe32OIrqpAKj3jON8/Z4sW461FTCn6oauugcrSdf4ngCG9A
+ Bjd+1hUZ81iR2MpsmkN2NtBwDJEQ+ZZf2mqghRWaGHeLLWTgm34cVk/vHeRpsZXUWFoQ1vYe+5X
+ tbeYGoFzMCGLc9Qs5veIX8EC8xAv74iY/tqVUC8qt3d6EAvNIn5PzUFU1St8HVwn1XFeDmcRHny
+ oEoQT+YS+miZuXlhWPhpBKCjMLxdBjJ9JOvWOsxszLTqO3yRBp31v2W/sChgHwIr1VV7XgJC5Cp
+ eAQ5TpTCNimIS0W4vmA==
+X-Proofpoint-ORIG-GUID: pEfjwvvoAjoHowG9Dv6PDIJZE3RmcFmr
+X-Authority-Analysis: v=2.4 cv=FqQ1OWrq c=1 sm=1 tr=0 ts=6a4df278 cx=c_pps
+ a=AfN7/Ok6k8XGzOShvHwTGQ==:117 a=AfN7/Ok6k8XGzOShvHwTGQ==:17
+ a=RAioF0-LDSMA:10 a=VkNPw1HP01LnGYTKEx00:22 a=RnoormkPH1_aCDwRdu11:22
+ a=U7nrCbtTmkRpXpFmAIza:22 a=VwQbUJbxAAAA:8 a=VnNF1IyMAAAA:8
+ a=buEBMWGfP5CXRQqppmAA:9
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA4MDA1OCBTYWx0ZWRfX+R5HcxjXVv1w
+ RVsRwLeD9F3N1eXzMOe+apX4IAesgta7GXGOixJqeU/NBHDn+tO8IhjIk+MU7dU+sY37T5/6W7w
+ fxWFhXVc37deMYvOOlkRHjGNzgYwS7c=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-07_06,2026-07-06_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 impostorscore=0 clxscore=1011 malwarescore=0 lowpriorityscore=0
+ priorityscore=1501 bulkscore=0 suspectscore=0 spamscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607080058
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.16 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,kernel.org:s:+];
-	ARC_REJECT(1.00)[cv is fail on i=2];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+X-Spamd-Result: default: False [-1.66 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[ibm.com,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[ibm.com:s=pp1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-95631-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[vger.kernel.org,infradead.org,ellerman.id.au,linux.ibm.com,lists.ozlabs.org,kernel.org,lists.linux.dev,dabbelt.com,lists.infradead.org,arm.com,huawei.com,redhat.com,linaro.org,armlinux.org.uk,linux-m68k.org,alpha.franken.de,gmx.de,users.sourceforge.jp,nod.at,zankel.net,lists.linux-m68k.org,arndb.de,monstr.eu,davemloft.net,gaisler.com,suse.de,lwn.net];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-95620-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:rick.p.edgecombe@intel.com,m:bp@alien8.de,m:dave.hansen@intel.com,m:hpa@zytor.com,m:kas@kernel.org,m:kvm@vger.kernel.org,m:linux-coco@lists.linux.dev,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:mingo@redhat.com,m:nik.borisov@suse.com,m:pbonzini@redhat.com,m:seanjc@google.com,m:tglx@kernel.org,m:vannapurve@google.com,m:x86@kernel.org,m:chao.gao@intel.com,m:kai.huang@intel.com,m:kirill.shutemov@linux.intel.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[yan.y.zhao@intel.com,linux-doc@vger.kernel.org];
-	FORWARDED(0.00)[lists@lfdr.de];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_SEVEN(0.00)[10];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	HAS_REPLYTO(0.00)[yan.y.zhao@intel.com];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,yzhao56-desk.sh.intel.com:mid,vger.kernel.org:from_smtp,intel.com:from_mime,intel.com:email,intel.com:replyto,intel.com:dkim];
+	FORGED_RECIPIENTS(0.00)[m:tglx@kernel.org,m:linux-kernel@vger.kernel.org,m:peterz@infradead.org,m:linux-s390@vger.kernel.org,m:mpe@ellerman.id.au,m:sshegde@linux.ibm.com,m:linuxppc-dev@lists.ozlabs.org,m:kees@kernel.org,m:chenhuacai@kernel.org,m:loongarch@lists.linux.dev,m:pjw@kernel.org,m:palmer@dabbelt.com,m:linux-riscv@lists.infradead.org,m:x86@kernel.org,m:mark.rutland@arm.com,m:ruanjinjie@huawei.com,m:luto@kernel.org,m:oleg@redhat.com,m:richard.henderson@linaro.org,m:linux@armlinux.org.uk,m:catalin.marinas@arm.com,m:guoren@kernel.org,m:geert@linux-m68k.org,m:tsbogend@alpha.franken.de,m:deller@gmx.de,m:ysato@users.sourceforge.jp,m:richard@nod.at,m:chris@zankel.net,m:linux-arm-kernel@lists.infradead.org,m:linux-alpha@vger.kernel.org,m:linux-csky@vger.kernel.org,m:linux-m68k@lists.linux-m68k.org,m:linux-mips@vger.kernel.org,m:linux-parisc@vger.kernel.org,m:linux-sh@vger.kernel.org,m:linux-um@lists.infradead.org,m:arnd@arndb.de,m:vgupta@kernel.org,m:will@kernel.org,m:bcain@kernel.o
+ rg,m:monstr@monstr.eu,m:dinguyen@kernel.org,m:davem@davemloft.net,m:andreas@gaisler.com,m:linux-snps-arc@lists.infradead.org,m:linux-hexagon@vger.kernel.org,m:linux-openrisc@vger.kernel.org,m:sparclinux@vger.kernel.org,m:linux-arch@vger.kernel.org,m:msuchanek@suse.de,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
 	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER(0.00)[svens@linux.ibm.com,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[yan.y.zhao@intel.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[intel.com:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[ibm.com:+];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[svens@linux.ibm.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_GT_50(0.00)[52];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp,linux.ibm.com:mid,linux.ibm.com:from_mime];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	REPLYTO_EQ_FROM(0.00)[]
+	MID_RHS_MATCH_FROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCVD_COUNT_SEVEN(0.00)[11]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: A024D7224F0
+X-Rspamd-Queue-Id: A1658722641
 
-On Mon, May 25, 2026 at 07:35:09PM -0700, Rick Edgecombe wrote:
-> From: "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>
-> 
-> tdx_pamt_get()/tdx_pamt_put() unconditionally add or remove Dynamic PAMT
-> backing for the 2MB region covering the passed pfn. However, multiple
-> callers can concurrently operate on 4KB pages that fall within the same
-> 2MB region. When this happens only one Dynamic PAMT page pair needs to be
-What "this" stands for is not clear and a comma is missing after "happens".
+Thomas Gleixner <tglx@kernel.org> writes:
 
-> installed to cover the 2MB range. And when one page is freed, the Dynamic
-> PAMT backing cannot be freed until all pages in the range are no longer in
-> use. Make the helpers handle these races internally.
-> 
-> Use the per-2MB refcounts from previous changes to track how many 4KB
-> pages are in use within each region. Gate the actual Dynamic PAMT add and
-> remove on refcount transitions (0->1 and 1->0). Serialize the refcount
-> check and SEAMCALL with a global spinlock so the read-decide-act sequence
-> is atomic. This also avoids TDX module BUSY errors, as Dynamic PAMT add
-> and remove SEAMCALLs take an internal TDX module locks at 2MB granularity,
-"an internal TDX module locks" --> "internal TDX module locks"?
-
-> so simultaneous attempts on the same region would conflict.
-How about:
-"This also avoids TDX module BUSY errors, as Dynamic PAMT add
-and remove SEAMCALLs take internal TDX module locks for the 2MB ranges of
-the specified PFN and the PAMT page pair PFNs, so simultaneous attempts on
-the same 2MB ranges of the PFNs would conflict." ?
-
-
-> The lock is global and heavyweight. Use simple conditional logic to keep
-> correctness obvious. This will be optimized in a later change.
-> 
-> Assisted-by: GitHub Copilot:claude-opus-4-6 Claude:claude-opus-4-7
-> Signed-off-by: Kirill A. Shutemov <kirill.shutemov@linux.intel.com>
-> Co-developed-by: Rick Edgecombe <rick.p.edgecombe@intel.com>
-> Signed-off-by: Rick Edgecombe <rick.p.edgecombe@intel.com>
+> enter_from_user_mode_randomize_stack() replaces enter_from_user_mode() and
+> the subsequent invocation of add_random_kstack_offset_irqsoff().
+>
+> As a bonus this avoids the overhead of get/put_cpu_var() in
+> add_random_kstack_offset().
+>
+> No functional change.
+>
+> Signed-off-by: Thomas Gleixner <tglx@kernel.org>
+> Cc: Sven Schnelle <svens@linux.ibm.com>
+> Cc: linux-s390@vger.kernel.org
 > ---
-> v6:
->  - Split from "x86/virt/tdx: Add tdx_alloc/free_control_page() helpers"
->  - Return 0 instead of ret to be clearer (Binbin)
->  - Clarify log (Nikolay)
->  - Justify why the patch is not optimized in response to comments by
->    (Nikolay)
->  - Move tdx_find_pamt_refcount() to faciliate patch re-order
->  - Adjustments from dropping error helper patches
->  - Log tweaks
-> ---
->  arch/x86/virt/vmx/tdx/tdx.c | 72 ++++++++++++++++++++++++++++---------
->  1 file changed, 56 insertions(+), 16 deletions(-)
-> 
-> diff --git a/arch/x86/virt/vmx/tdx/tdx.c b/arch/x86/virt/vmx/tdx/tdx.c
-> index 6658a6be6697c..50333eb96efa6 100644
-> --- a/arch/x86/virt/vmx/tdx/tdx.c
-> +++ b/arch/x86/virt/vmx/tdx/tdx.c
-> @@ -2043,10 +2043,14 @@ static u64 tdh_phymem_pamt_remove(kvm_pfn_t pfn, struct page **pamt_pages)
->  	return 0;
->  }
->  
-> -/* Allocate PAMT memory for the given page */
-> +/* Serializes adding/removing PAMT memory */
-> +static DEFINE_SPINLOCK(pamt_lock);
-> +
-> +/* Bump PAMT refcount for the given page and allocate PAMT memory if needed */
-How about
-"Bump the refcount of the PAMT page pair for the given PFN and add the PAMT
-page pair on the first reference." ?
-
->  static int tdx_pamt_get(kvm_pfn_t pfn)
+>  arch/s390/kernel/syscall.c |    4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> --- a/arch/s390/kernel/syscall.c
+> +++ b/arch/s390/kernel/syscall.c
+> @@ -97,8 +97,8 @@ void noinstr __do_syscall(struct pt_regs
 >  {
->  	struct page *pamt_pages[TDX_DPAMT_ENTRY_PAGE_CNT];
-> +	atomic_t *pamt_refcount;
->  	u64 tdx_status;
->  	int ret;
+>  	unsigned long nr;
 >  
-> @@ -2057,10 +2061,26 @@ static int tdx_pamt_get(kvm_pfn_t pfn)
->  	if (ret)
->  		return ret;
->  
-> -	tdx_status = tdh_phymem_pamt_add(pfn, pamt_pages);
-> -	if (tdx_status != TDX_SUCCESS) {
-> -		ret = -EIO;
-> -		goto out_free;
-> +	pamt_refcount = tdx_find_pamt_refcount(pfn);
+> -	enter_from_user_mode(regs);
+> -	add_random_kstack_offset();
+> +	enter_from_user_mode_randomize_stack(regs);
 > +
-> +	scoped_guard(spinlock, &pamt_lock) {
-> +		/*
-> +		 * If the pamt page is already added (i.e. refcount >= 1),
-> +		 * then just increment the refcount.
-> +		 */
-> +		if (atomic_read(pamt_refcount)) {
-> +			atomic_inc(pamt_refcount);
-> +			goto out_free;
-> +		}
-> +
-> +		/* Try to add the pamt page and take the refcount 0->1. */
-> +		tdx_status = tdh_phymem_pamt_add(pfn, pamt_pages);
-> +		if (WARN_ON_ONCE(tdx_status != TDX_SUCCESS)) {
-> +			ret = -EIO;
-> +			goto out_free;
-> +		}
-> +
-> +		atomic_set(pamt_refcount, 1);
->  	}
->  
->  	return 0;
-> @@ -2069,26 +2089,46 @@ static int tdx_pamt_get(kvm_pfn_t pfn)
->  	return ret;
->  }
->  
-> -/* Free PAMT memory for the given page */
-> +/*
-> + * Drop PAMT refcount for the given page and free PAMT memory if it is no
-> + * longer needed.
-How about:
-"Drop the refcount of the PAMT page pair for the given PFN, and remove the
-PAMT page pair if it is no longer needed." ?
+>  	regs->psw = get_lowcore()->svc_old_psw;
+>  	regs->int_code = get_lowcore()->svc_int_code;
+>  	update_timer_sys();
 
-> + */
->  static void tdx_pamt_put(kvm_pfn_t pfn)
->  {
->  	struct page *pamt_pages[TDX_DPAMT_ENTRY_PAGE_CNT] = {};
-> +	atomic_t *pamt_refcount;
->  	u64 tdx_status;
->  
->  	if (!tdx_supports_dynamic_pamt(&tdx_sysinfo))
->  		return;
->  
-> -	tdx_status = tdh_phymem_pamt_remove(pfn, pamt_pages);
-> +	pamt_refcount = tdx_find_pamt_refcount(pfn);
->  
-> -	/*
-> -	 * Don't free pamt_pages as it could hold garbage when
-> -	 * tdh_phymem_pamt_remove() fails.  Don't panic/BUG_ON(), as
-> -	 * there is no risk of data corruption, but do yell loudly as
-> -	 * failure indicates a kernel bug, memory is being leaked, and
-> -	 * the dangling PAMT entry may cause future operations to fail.
-> -	 */
-> -	if (WARN_ON_ONCE(tdx_status != TDX_SUCCESS))
-> -		return;
-> +	scoped_guard(spinlock, &pamt_lock) {
-> +		/*
-> +		 * If the there are more than 1 references on the pamt page,
-s/If the/If
-s/references/reference
-
-> +		 * don't remove it yet. Just decrement the refcount.
-> +		 */
-> +		if (atomic_read(pamt_refcount) > 1) {
-> +			atomic_dec(pamt_refcount);
-> +			return;
-> +		}
-> +
-> +		/* Try to remove the pamt page and take the refcount 1->0. */
-> +		tdx_status = tdh_phymem_pamt_remove(pfn, pamt_pages);
-> +
-> +		/*
-> +		 * Don't free pamt_pages as it could hold garbage when
-> +		 * tdh_phymem_pamt_remove() fails.  Don't panic/BUG_ON(), as
-> +		 * there is no risk of data corruption, but do yell loudly as
-> +		 * failure indicates a kernel bug, memory is being leaked, and
-> +		 * the dangling PAMT entry may cause future operations to fail.
-> +		 */
-> +		if (WARN_ON_ONCE(tdx_status != TDX_SUCCESS))
-> +			return;
-> +
-> +		atomic_set(pamt_refcount, 0);
-> +	}
->  
->  	free_pamt_array(pamt_pages);
->  }
-
-Another nit:
-How about renaming the title from
-"Handle concurrent callers in tdx_pamt_get/put()" to
-"Handle concurrent calls to tdx_pamt_get/put()" ?
-
-
-Reviewed-by: Yan Zhao <yan.y.zhao@intel.com>
+Reviewed-by: Sven Schnelle <svens@linux.ibm.com>
 
