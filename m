@@ -1,220 +1,182 @@
-Return-Path: <linux-doc+bounces-95765-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95767-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id hrUsDRCJTmp7OwIAu9opvQ
-	(envelope-from <linux-doc+bounces-95765-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 19:29:52 +0200
+	id u3lXHGOJTmqpOwIAu9opvQ
+	(envelope-from <linux-doc+bounces-95767-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 19:31:15 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 98BC4729383
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 19:29:51 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id B325A7293C8
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Jul 2026 19:31:14 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=onsemi.com header.s=mimecast20250127 header.b=Om5Kjp1e;
-	dmarc=pass (policy=reject) header.from=onsemi.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95765-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-95765-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=rendec.net header.s=default header.b=OJuzJLG2;
+	dmarc=pass (policy=reject) header.from=rendec.net;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95767-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-95767-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 02D62306970B
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2026 17:23:31 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id A2F27301EC01
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2026 17:25:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C655141CB2E;
-	Wed,  8 Jul 2026 17:23:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 904444963B2;
+	Wed,  8 Jul 2026 17:25:10 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from usb-smtp-delivery-120.mimecast.com (usb-smtp-delivery-120.mimecast.com [170.10.153.120])
+Received: from mail.mindbit.ro (xs1.mindbit.ro [80.86.107.70])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3FF7C36212C
-	for <linux-doc@vger.kernel.org>; Wed,  8 Jul 2026 17:23:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2796F36212C;
+	Wed,  8 Jul 2026 17:25:09 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783531409; cv=none; b=mDcRzkbJcUqS0JhqQqtVA/9PEN3GSPHLCZqHLf/hvHsW25NqZdRABuTGnQXxE8j6W77srwtIPl2Z7WVdN6iULEz7XjZpYlc1i/imld7SVlbBjV9Yqf4k7vaaj1dGkdwc3qDp+UAKz/ZfL5AkfNzCjNVVWuhkqdA9UgaWiedoWUo=
+	t=1783531510; cv=none; b=P4b0ne1Ur4BcVDHf5zykwDF5jXjU8gihgCtIE5Ms4N1vNxStqofIHUnMSbvn06Saqpj7toXG0fzYE9V0CVOwvAgH+DI+0ZlXPYRebIeDFRhndc3bXn1oCZEDs6ZbHMK0b0g728O/zTLt8Aj5kBuj7PO4F96sNgjnx1SnfMGg08s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783531409; c=relaxed/simple;
-	bh=opa2vJ38yo/TmbBikeSJKFf5BP2xboddjxfMfty6vr0=;
-	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
-	 MIME-Version:Content-Type; b=heYNmzhCvI37ezHY7gNlDeaRjGuh18i/iV48Yuwn4hhNDyQ2VicXaQoF5LK/kIiuRZDJ4H33IFgn48t4fpKreutOnNvUikJjhgJ32WPJI2eGTB375IaaumqiIx/C713BH9xtr+l3waIMF26WrW4Lm3KQ7RPRIMXfZjXN8+ijifY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=onsemi.com; spf=pass smtp.mailfrom=onsemi.com; dkim=pass (2048-bit key) header.d=onsemi.com header.i=@onsemi.com header.b=Om5Kjp1e; arc=none smtp.client-ip=170.10.153.120
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=onsemi.com;
-	s=mimecast20250127; t=1783531401;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=opa2vJ38yo/TmbBikeSJKFf5BP2xboddjxfMfty6vr0=;
-	b=Om5Kjp1efSRNc7NIANlgyKY8B8fMdTRUWtR0v6pNOBG0UkpDNOoqgNI5HCwDRXUCFTpKG8
-	x7KEnzBvZageisHM7nbKm7xF9yPlYF/MNwqORU8lgBaaVlDaOmyY9h0G1gh3nsXoGIQx/c
-	q3ay8VWPJXc4UHghFfvbsvAy7wTGOKPfcq96PUg1Db+Lr+oA9XBc8Mtfnt0SbnmNbXs867
-	U2a4QrorQl9ZRmeKCVVddCI+UuM1wofOydTxVdvf4a2TeoomM91YP0SG7c85DAoH6egrzq
-	xIRdz4bvx53ZzeiTUdJmG0BXnttpr56SOkCUkVCllorcb/jertGyyrAe4adVBg==
-Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azon11010020.outbound.protection.outlook.com [52.101.201.20])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id usb-mta-12-SGChQ_NuMHOVX9M66_CEcA-2; Wed,
- 08 Jul 2026 10:23:15 -0700
-X-MC-Unique: SGChQ_NuMHOVX9M66_CEcA-2
-X-Mimecast-MFC-AGG-ID: SGChQ_NuMHOVX9M66_CEcA_1783531390
-Received: from CYYPR02MB9828.namprd02.prod.outlook.com (2603:10b6:930:b8::20)
- by DSVPR02MB11614.namprd02.prod.outlook.com (2603:10b6:8:3aa::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.10; Wed, 8 Jul
- 2026 17:23:05 +0000
-Received: from CYYPR02MB9828.namprd02.prod.outlook.com
- ([fe80::2767:f7d2:778c:8dca]) by CYYPR02MB9828.namprd02.prod.outlook.com
- ([fe80::2767:f7d2:778c:8dca%4]) with mapi id 15.21.0181.009; Wed, 8 Jul 2026
- 17:23:05 +0000
-From: Selvamani Rajagopal <Selvamani.Rajagopal@onsemi.com>
-To: "ciprian.regus@analog.com" <ciprian.regus@analog.com>, Parthiban
- Veerasooran <parthiban.veerasooran@microchip.com>, Andrew Lunn
-	<andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>, Eric
- Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni
-	<pabeni@redhat.com>, Simon Horman <horms@kernel.org>, Jonathan Corbet
-	<corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Andrew Lunn
-	<andrew@lunn.ch>, Heiner Kallweit <hkallweit1@gmail.com>, Russell King
-	<linux@armlinux.org.uk>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski
-	<krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
-CC: "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>
-Subject: RE: [PATCH net-next v5 07/13] net: ethernet: oa_tc6: Add
- read_mms/write_mms register access functions
-Thread-Topic: [PATCH net-next v5 07/13] net: ethernet: oa_tc6: Add
- read_mms/write_mms register access functions
-Thread-Index: AQHdDmHhTw2cxvt8oEy8gW3cJW1mz7Zj3pAQ
-Date: Wed, 8 Jul 2026 17:23:05 +0000
-Message-ID: <CYYPR02MB9828C512D59B69CB8EBC721083FF2@CYYPR02MB9828.namprd02.prod.outlook.com>
-References: <20260708-adin1140-driver-v5-0-4aca7b51a58b@analog.com>
- <20260708-adin1140-driver-v5-7-4aca7b51a58b@analog.com>
-In-Reply-To: <20260708-adin1140-driver-v5-7-4aca7b51a58b@analog.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: CYYPR02MB9828:EE_|DSVPR02MB11614:EE_
-x-ms-office365-filtering-correlation-id: 34bcb85c-d316-41c6-3099-08dedd15928f
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|7416014|376014|1800799024|23010399003|366016|921020|38070700021|6133799003|56012099006|4143699003|11063799006|22082099003|18002099003
-x-microsoft-antispam-message-info: SNCH4lmiHOawX5LgT8NED6dNxZnBVo+eIVA7bn4PGaml04VP6Z2GDzalesuOdJlCpRP7NQBYJntelehMD47rMY+vpANxfNeCThnSMtWAIrMb1GlvjD8O3RZ/PWfDVgV9dW27iGVNwixodP4pxrnDIDZEIH+SCXKi2Cu6EmDYzpECldAfBlRr+XlN+AA3NlXHdGojJgtfUvvJGj5cmk1CJVuJUWKog/9VXUF3Y1UshpLvhUE/m5yzLBLdNsG2i7oaS5fS+Y7yFafF+qFHF5bWMbSfZcyuUW6NhGan7HBRqbQkjUAn+qUfcIn7b1QmFJEMUrLhiKPmeXZoRLhHFZG/n62/qwzfNKQDxKdpJzFc+TWsk9ezANJF6u4oPVLBwM7IT6aNQiR14uSNPOObiYZhmcNv16YvehRPtlIC3SWEwzpZRiJ8tr2e73RBTNiGxBgjHnNmnNNxS6Rn9852Ftt8zuf0FwV9AKSX++zwSrYWjLAtHS9WSLjZabS6qQUxhNevaa2BehGtpS4pUsXESe8+Wt7RCD/6XA4tBsq1oUA8GZHG2dejvhXVDj8U3dlWYKLPy7V3RxyntU5zjtwGtXoIEBfUN2Ng0idmK+fbd2cNjcSThDbW9b6iUYnx6oxHciYYYieARrS+aOLpVscQRHKvD3OQ4iVS+h8ZHqrbWNYcM7UcbKf6k6qpMf4bDr5hVQzY2o2gn8kVkK1epzYuR9uLlz2ZplRLI3joKjfbbR5gZJU=
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CYYPR02MB9828.namprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(1800799024)(23010399003)(366016)(921020)(38070700021)(6133799003)(56012099006)(4143699003)(11063799006)(22082099003)(18002099003);DIR:OUT;SFP:1101
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?L1U4c3FhQmhKb3ZuRTFtd0JjRC9DL0ZsUCtxeWRtZzQ1REhEYTJVU3RNdGdL?=
- =?utf-8?B?d2FLK0xUSW50ZmV5d3RyWXdzTDZwOFFvMXlwUVNqaEJNdVppUjRTUlBpNDJ1?=
- =?utf-8?B?MHFBeWZxOG1CelZQTTQ5ZXh2TGV1L1NGZTVWaTlNdFcwUnlONk5BU0Ztd2tF?=
- =?utf-8?B?TlpLZDUyd0dkZitwaGcvcmRESmlmUk9JUCtobTVBL0xrTGc4RmpMdG9INGVk?=
- =?utf-8?B?dFlUand4OEEzanl0TERNNm9KVXdMdjNNbHZqUUFYS09BYStSY1FDYUljWlRF?=
- =?utf-8?B?Nk50LzN6OGpjclkvY0VYdHptN0N1T0lCSEp0VE1LdzZhczU5NmlFNGVJdFpB?=
- =?utf-8?B?OG9XWG9WSGNqbW9ET1oxUitoSVBxZy84QXExMXcxYndHeHc5MHhYWmU1K0dx?=
- =?utf-8?B?aUN3U09Uak9Mb0hNMWpQRlhjU3d2dkJqbzdtT1ZtMDdHV0Q4aTJyYWNWMThB?=
- =?utf-8?B?d0tiMTk0RGRpeXZEQXBlamN1NzhWT245Z3d6MzcyVlBYTWJsUmJDenZZUm1r?=
- =?utf-8?B?UFRaQ3hISlVaRlVOSzBsRWo0VkY2NXF5WkN1UXZYUUl4cHVUSVRjbnA5bllk?=
- =?utf-8?B?bE12WWhtWDFHVTVQTzN0VzVxTWIwK09aMlVCU0hDT09zbGY0dzJ2RTJzeUU2?=
- =?utf-8?B?NDN4QmRWRFFOQnI4S25hbU9GRnBtYTA3UVpLbTQzdHdWNHgyZjV6ZHVwemZH?=
- =?utf-8?B?NlVSTlJZTnRTb1ducS9OTDh2azBlWnJ4b0RsR05tYkZwWDB0UmNBbFhZZEhH?=
- =?utf-8?B?ZEhOZ0Z0bTVCb2lqVzd1b1p1SUVvOFFRTGphTm9rMjk3Z2pybjBJNk5YZ1Q1?=
- =?utf-8?B?Mm5VMkU4dTIybVVLMkQzWVlCWHJBV2JTalhSdE0rY2p0aC8vbTdyN2JJYkVQ?=
- =?utf-8?B?ZkUyMGlpbjhUbmtMSnhOcWthOVpuNWFUMFpSZmdsU1dpVFM3V0Y4Z3c0S1ZF?=
- =?utf-8?B?NkYwY1RhRW1yYkQxa083VUowcGR5UDFTUk5lRjliTlNpYU0wcWdvZmkrWjRz?=
- =?utf-8?B?RXE1SzJNOEU0dXFmNUNZY1Z2RlBMeUdJMnkzSVlWdW9rZnRQYjh4K21ZaTV6?=
- =?utf-8?B?L3pNQVZNTTNGS0NHY1IweHFKaVpFWWFuRWg5ZDJPMWFDSnlkUmFXbTd0Nmwx?=
- =?utf-8?B?eEJ5OVdEaUNzbzNGTG9RdFJ1VExpejdXdWZvckNRWkJINUdLOUExTFduZG5Y?=
- =?utf-8?B?ZFhhLy9TSGpMbEdwcWFyQXV1R2o5R0piOXVBUHNiZlhBcGtWRmV1WEtRdDZT?=
- =?utf-8?B?VlcrM0FqaTVyUkhWdUdKZFJTUFppS2dTb2NWeDYzUmg1bi8xb0VSbHhpYjEr?=
- =?utf-8?B?MVBabmVGTjVteTlmNzVvU3BVbDdnVS9mV09XL3BpUHlieHk4RnNmd2I1dVZH?=
- =?utf-8?B?Z3RXcWtKY0RIRUlKWWgyR3FsdWZoaXNHM0ExTW9YeVBPdE1mMHNjL1lLYlc5?=
- =?utf-8?B?VDJDaXI2Yy9nQlNMUEJ4NSs1TVdObGxJME81Q1Z6a1AxYnFDMzE4N3hBR0dW?=
- =?utf-8?B?YkhLRHNadU9yQnZPb0VZSXJFUVJhSnRlTENLOUhuN0xRaHNoWUp3T2JSSi9H?=
- =?utf-8?B?a0xRamR4cFNjWVlVbGM2VlFLMW5BOEhiWlQ1MkFMSUtMcHRneXlQK21jQUlY?=
- =?utf-8?B?QllRUnM5MmdIZGh6U0R0UmcvRTJmajZ3V083WFVDcE95MnUzQm9TOWhFVFBC?=
- =?utf-8?B?NUZEWXlJTkJ5eGNIQXpHQ3lyUk5HcnFObkUrQU5xRVNhZXVXRzRVd241OVBZ?=
- =?utf-8?B?NVhacHdrYlZhazcrRjBVYUVDMjBxbkNsd0NhcXJycUFzeVZYNjJNbkk5ZkhC?=
- =?utf-8?B?bmZFcTRLYWpDYnlyRjdoUTc5d3QvNVI2eDhnMlRUeGlmdEdMNCtOQ25LSCtG?=
- =?utf-8?B?SmRtOHBKbDRkRFAzbVdLb1puWW1UbXYyamZEbS9COFA1WDlDRnBMSmUxRnRR?=
- =?utf-8?B?YmM1OEVrL1p2RlNDYkFEcHBVZEY0TUMrZFRrQmxOTUJzbDJ3ZlN4UEdWWUFa?=
- =?utf-8?B?SkRocWZTNlUzZ0Z2TVA1OE14ZXFHUFpiUDViWEhIeUFwUWc0UVBsTFlJMkho?=
- =?utf-8?B?SGlNTHFtOUlJYldKcXlCTFFMcEIrMkc0VUcxT09laEdTQ1VNbnhtT0dJMVo3?=
- =?utf-8?B?MmN6bjQvdjJ3Rnd5bUFLRXlUb0ZKWUREckF0TGdvZVlKT0hURlZkKy92TmdG?=
- =?utf-8?B?OUI4dkpNOTh1dUtGejg4Uzl6eUZFajdGUENpdzRma1k4UVpQU0ZKRTNSMFlC?=
- =?utf-8?B?L0t6V2lHMXdnUmJPZDQyQmw4SUJhM2pHR1lYZjBuOHRhMGtFblROZzZnT2lj?=
- =?utf-8?B?UGFwaEhERjRsLzFWbGtlNkRjR0tqTkw5eE03ZTlSSUlWOGxqVGo2VE4xU0Zl?=
- =?utf-8?Q?AyyWChpLl0fZBtZ4=3D?=
+	s=arc-20240116; t=1783531510; c=relaxed/simple;
+	bh=+vr3rkQW2LSYCUlbLOF8LC9jOocAXenj6nApMOfDgGE=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=fkk39GvKzBt7vsoRmbybR90crv9A81GO/bkKMEvIDj8JfOHw2zv9An2PJDno7gccCwyG2a6U27k8hozUzCOF+XnFO/UEwj/1m6p9wTuyqo7njayfHGBc0+R0K72NMPqbMr5jzzyYqbkF/YZ7CXxzlgI6y5nxYLRSG07db8y1qCA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=rendec.net; spf=pass smtp.mailfrom=rendec.net; dkim=pass (2048-bit key) header.d=rendec.net header.i=@rendec.net header.b=OJuzJLG2; arc=none smtp.client-ip=80.86.107.70
+Received: from bat.kanata.rendec.net (unknown [24.114.111.125])
+	by mail.mindbit.ro (Postfix) with ESMTPSA id 1E89DC2B1F;
+	Wed,  8 Jul 2026 20:24:38 +0300 (EEST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.mindbit.ro 1E89DC2B1F
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rendec.net;
+	s=default; t=1783531507;
+	bh=oMlf4rzg7sFMgtBO8f/rqo4QHF22NzBws1cUSUO+r80=;
+	h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
+	b=OJuzJLG2oJHC8E6/z6u4YL1brifg3n0KypZd9zeBUsdEd6uLxd+9vUKIXm8fNb+sD
+	 40TB/onHyQSWEZ0oPdpje/xAjGna37MjawhgGr3bVxva9cjLjk1XfUhqToNdmtUx7z
+	 YMvmViVzUq9/FTET4wtq/Yhx/L0ZlUxPuNUXmfoDanL5GBZtufQoF3ZbsskDV434aw
+	 kxDRuhqvAGGem4j2hDVIoI59nXr2IxQ3aAqoNF0TEbKK88RSrx6CqBol40sxnwMfxK
+	 rd7e4S6y5Zb6OYXlWmLIfxqvBAfINm0f8D7u03YVplchQ7tuJ84O05FoHalkh1Nik9
+	 f0YRdybiCZuUQ==
+Message-ID: <db4b8c27df9be997f935928f2624a863a1f998d6.camel@rendec.net>
+Subject: Re: [patch 02/18] randomize_kstack: Provide
+ add_random_kstack_offset_irqsoff()
+From: Radu Rendec <radu@rendec.net>
+To: Thomas Gleixner <tglx@kernel.org>, LKML <linux-kernel@vger.kernel.org>
+Cc: Peter Zijlstra <peterz@infradead.org>, Kees Cook <kees@kernel.org>, 
+ Michael Ellerman <mpe@ellerman.id.au>, Shrikanth Hegde
+ <sshegde@linux.ibm.com>, linuxppc-dev@lists.ozlabs.org,  Huacai Chen
+ <chenhuacai@kernel.org>, loongarch@lists.linux.dev, Paul Walmsley
+ <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+ linux-riscv@lists.infradead.org, Sven Schnelle <svens@linux.ibm.com>, 
+	linux-s390@vger.kernel.org, x86@kernel.org, Mark Rutland
+ <mark.rutland@arm.com>,  Jinjie Ruan <ruanjinjie@huawei.com>, Andy
+ Lutomirski <luto@kernel.org>, Oleg Nesterov <oleg@redhat.com>,  Richard
+ Henderson <richard.henderson@linaro.org>, Russell King
+ <linux@armlinux.org.uk>, Catalin Marinas	 <catalin.marinas@arm.com>, Guo
+ Ren <guoren@kernel.org>, Geert Uytterhoeven	 <geert@linux-m68k.org>, Thomas
+ Bogendoerfer <tsbogend@alpha.franken.de>,  Helge Deller	 <deller@gmx.de>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>, Richard Weinberger
+ <richard@nod.at>, Chris Zankel <chris@zankel.net>,
+ linux-arm-kernel@lists.infradead.org, 	linux-alpha@vger.kernel.org,
+ linux-csky@vger.kernel.org, 	linux-m68k@lists.linux-m68k.org,
+ linux-mips@vger.kernel.org, 	linux-parisc@vger.kernel.org,
+ linux-sh@vger.kernel.org, 	linux-um@lists.infradead.org, Arnd Bergmann
+ <arnd@arndb.de>, Vineet Gupta	 <vgupta@kernel.org>, Will Deacon
+ <will@kernel.org>, Brian Cain <bcain@kernel.org>,  Michal Simek
+ <monstr@monstr.eu>, Dinh Nguyen <dinguyen@kernel.org>, "David S. Miller"
+ <davem@davemloft.net>,  Andreas Larsson <andreas@gaisler.com>,
+ linux-snps-arc@lists.infradead.org, linux-hexagon@vger.kernel.org, 
+	linux-openrisc@vger.kernel.org, sparclinux@vger.kernel.org, 
+	linux-arch@vger.kernel.org, Michal =?ISO-8859-1?Q?Such=E1nek?=	
+ <msuchanek@suse.de>, Jonathan Corbet <corbet@lwn.net>, 
+	linux-doc@vger.kernel.org
+Date: Wed, 08 Jul 2026 13:24:33 -0400
+In-Reply-To: <20260707190253.768842729@kernel.org>
+References: <20260707181957.433213175@kernel.org>
+	 <20260707190253.768842729@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.58.3 (3.58.3-1.fc43) 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: oD7njjBOruSeb2O0BdTQrEdr2cShCEf0NSV7h07betT/jiGTw1M88bvDv5ZfJwpmQlPTEQ/isouxiad/Mq13ddpbm2GbfQl9mPkyNAvhS8QU3X9CQWqnEKfxXq0vnUvdisruxPBUm8VNw/8En5xyXJJfYOxyhjxJw3jpYfh8MgWmikf7iyeuI8vUAeTIAu/9Vp9SkwBzVyH5Y+d1c3rKINVvb2nwVoXy4Gv/HKyPB57XSk/UN/3JOA9N6mrhfcQ2nB3HcaO5ZK/4Dk/u5hwI1fejg+AOuMry9csCrM9PLzbd/k7ySERfadUVPcYpZZNkRrO1TawB5Di5F24Q19USjg==
-X-OriginatorOrg: onsemi.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: CYYPR02MB9828.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 34bcb85c-d316-41c6-3099-08dedd15928f
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Jul 2026 17:23:05.5858
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 04e1674b-7af5-4d13-a082-64fc6e42384c
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: CWIW4vgT1EBFEOeWFJhzTHLSmb+daYwtgyVBl8MCGkWr56hbmGV7CqJV8k+vcPRtb2OxeTaJ8m/lkLLXcHSRs/nvXa6kv2RvQDgd9xB8DHE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DSVPR02MB11614
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: 9pXVn3SbhaVrTS0HZ93SRbJgQM9-IZ05iz_V6p36oII_1783531390
-X-Mimecast-Originator: onsemi.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: base64
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.44 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MIME_BASE64_TEXT_BOGUS(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[onsemi.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[onsemi.com:s=mimecast20250127];
+	DMARC_POLICY_ALLOW(-0.50)[rendec.net,reject];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[rendec.net:s=default];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-95767-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-95765-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:ciprian.regus@analog.com,m:parthiban.veerasooran@microchip.com,m:andrew+netdev@lunn.ch,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:andrew@lunn.ch,m:hkallweit1@gmail.com,m:linux@armlinux.org.uk,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:netdev@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:devicetree@vger.kernel.org,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[Selvamani.Rajagopal@onsemi.com,linux-doc@vger.kernel.org];
-	FREEMAIL_TO(0.00)[analog.com,microchip.com,lunn.ch,davemloft.net,google.com,kernel.org,redhat.com,lwn.net,linuxfoundation.org,gmail.com,armlinux.org.uk];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[Selvamani.Rajagopal@onsemi.com,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[infradead.org,kernel.org,ellerman.id.au,linux.ibm.com,lists.ozlabs.org,lists.linux.dev,dabbelt.com,lists.infradead.org,vger.kernel.org,arm.com,huawei.com,redhat.com,linaro.org,armlinux.org.uk,linux-m68k.org,alpha.franken.de,gmx.de,users.sourceforge.jp,nod.at,zankel.net,lists.linux-m68k.org,arndb.de,monstr.eu,davemloft.net,gaisler.com,suse.de,lwn.net];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[onsemi.com:+];
-	RCVD_COUNT_FIVE(0.00)[6];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:tglx@kernel.org,m:linux-kernel@vger.kernel.org,m:peterz@infradead.org,m:kees@kernel.org,m:mpe@ellerman.id.au,m:sshegde@linux.ibm.com,m:linuxppc-dev@lists.ozlabs.org,m:chenhuacai@kernel.org,m:loongarch@lists.linux.dev,m:pjw@kernel.org,m:palmer@dabbelt.com,m:linux-riscv@lists.infradead.org,m:svens@linux.ibm.com,m:linux-s390@vger.kernel.org,m:x86@kernel.org,m:mark.rutland@arm.com,m:ruanjinjie@huawei.com,m:luto@kernel.org,m:oleg@redhat.com,m:richard.henderson@linaro.org,m:linux@armlinux.org.uk,m:catalin.marinas@arm.com,m:guoren@kernel.org,m:geert@linux-m68k.org,m:tsbogend@alpha.franken.de,m:deller@gmx.de,m:ysato@users.sourceforge.jp,m:richard@nod.at,m:chris@zankel.net,m:linux-arm-kernel@lists.infradead.org,m:linux-alpha@vger.kernel.org,m:linux-csky@vger.kernel.org,m:linux-m68k@lists.linux-m68k.org,m:linux-mips@vger.kernel.org,m:linux-parisc@vger.kernel.org,m:linux-sh@vger.kernel.org,m:linux-um@lists.infradead.org,m:arnd@arndb.de,m:vgupta@kernel.org,m:will@kerne
+ l.org,m:bcain@kernel.org,m:monstr@monstr.eu,m:dinguyen@kernel.org,m:davem@davemloft.net,m:andreas@gaisler.com,m:linux-snps-arc@lists.infradead.org,m:linux-hexagon@vger.kernel.org,m:linux-openrisc@vger.kernel.org,m:sparclinux@vger.kernel.org,m:linux-arch@vger.kernel.org,m:msuchanek@suse.de,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[radu@rendec.net,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[rendec.net:+];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[53];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[radu@rendec.net,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc,netdev,dt];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,analog.com:email,CYYPR02MB9828.namprd02.prod.outlook.com:mid,vger.kernel.org:from_smtp,onsemi.com:from_mime,onsemi.com:dkim]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,rendec.net:from_mime,rendec.net:email,rendec.net:mid,rendec.net:dkim,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 98BC4729383
+X-Rspamd-Queue-Id: B325A7293C8
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBDaXByaWFuIFJlZ3VzIHZpYSBC
-NCBSZWxheSA8ZGV2bnVsbCtjaXByaWFuLnJlZ3VzLmFuYWxvZy5jb21Aa2VybmVsLm9yZz4NCj4g
-U2VudDogVHVlc2RheSwgSnVseSA3LCAyMDI2IDM6MzQgUE0NCj4gU3ViamVjdDogW1BBVENIIG5l
-dC1uZXh0IHY1IDA3LzEzXSBuZXQ6IGV0aGVybmV0OiBvYV90YzY6IEFkZCByZWFkX21tcy93cml0
-ZV9tbXMNCj4gcmVnaXN0ZXIgYWNjZXNzIGZ1bmN0aW9ucw0KPiANCj4gDQo+IEZyb206IENpcHJp
-YW4gUmVndXMgPGNpcHJpYW4ucmVndXNAYW5hbG9nLmNvbT4NCj4gDQo+ICsgKi8NCj4gK2ludCBv
-YV90YzZfcmVhZF9yZWdpc3Rlcl9tbXMoc3RydWN0IG9hX3RjNiAqdGM2LCB1OCBtbXMsIHUxNiBh
-ZGRyZXNzLA0KPiArIHUzMiAqdmFsdWUpDQo+ICt7DQoNCkNpcHJpYW4sDQoNCkkgaG9wZSB5b3Ug
-bm90aWNlZCB0aGF0IEkgaGF2ZSBzaW1pbGFyIGZ1bmN0aW9uIGluIG15IHBhdGNoIHdoZXJlICJt
-bXMiIGNvbWVzIGFmdGVyICJhZGRyZXNzIi4NCkkgdGhvdWdodCBvZiBhbGlnbmluZyBteSBwYXRj
-aCB3aXRoIHlvdXJzLiBUaGVuIEkgcmVhbGl6ZWQsIGlmIHlvdXIgY29kZSBnZXRzIG1lcmdlZCBm
-aXJzdCwgdGhpcyB3b24ndCBiZQ0KdGhlIG9ubHkgY2hhbmdlIEkgd291bGQgYmUgZG9pbmcuIFRo
-YXQncyB0aGUgcmVhc29uIEkgZGVjaWRlZCB0byB3YWl0IGZvciBvbmUgb2Ygb3VyIHBhdGNoZXMg
-DQpnZXQgbWVyZ2VkIHNvIHRoYXQgd2UgY2FuIHVwZGF0ZSB0aGUgcGF0Y2ggYWNjb3JkaW5nbHku
-DQoNCkhvcGUgaXQgbWFrZXMgc2Vuc2UuDQoNClNpbmNlcmVseQ0KU2VsdmENCg0K
+On Tue, 2026-07-07 at 21:06 +0200, Thomas Gleixner wrote:
+> add_random_kstack_offset() uses get/put_cpu_var() which is pointless
+> overhead when it is invoked from low level entry code with interrupts
+> disabled.
+>=20
+> Provide a irqsoff() variant, which avoids that.
+>=20
+> Signed-off-by: Thomas Gleixner <tglx@kernel.org>
+> Cc: Kees Cook <kees@kernel.org>
+> ---
+> =C2=A0include/linux/randomize_kstack.h |=C2=A0=C2=A0 19 +++++++++++++++++=
+++
+> =C2=A01 file changed, 19 insertions(+)
+>=20
+> --- a/include/linux/randomize_kstack.h
+> +++ b/include/linux/randomize_kstack.h
+> @@ -77,8 +77,27 @@ static __always_inline u32 get_kstack_of
+> =C2=A0	}								\
+> =C2=A0} while (0)
+> =C2=A0
+> +/**
+> + * add_random_kstack_offset_irqsoff - Increase stack utilization by a ra=
+ndom offset.
+> + *
+> + * This should be used in the syscall entry path after user registers ha=
+ve been
+> + * stored to the stack. Interrupts must be still disabled.
+> + */
+> +#define add_random_kstack_offset_irqsoff()					\
+> +do {										\
+> +	lockdep_assert_irqs_disabled();						\
+> +	if (static_branch_maybe(CONFIG_RANDOMIZE_KSTACK_OFFSET_DEFAULT,		\
+> +				&randomize_kstack_offset)) {			\
+> +		u32 offset =3D prandom_u32_state(raw_cpu_ptr(&kstack_rnd_state));	\
+> +		u8 *ptr =3D __kstack_alloca(KSTACK_OFFSET_MAX(offset));		\
+> +		/* Keep allocation even after "ptr" loses scope. */		\
+> +		asm volatile("" :: "r"(ptr) : "memory");			\
+> +	}									\
+> +} while (0)
+> +
+> =C2=A0#else /* CONFIG_RANDOMIZE_KSTACK_OFFSET */
+> =C2=A0#define add_random_kstack_offset()		do { } while (0)
+> +#define add_random_kstack_offset_irqsoff()	do { } while (0)
+> =C2=A0#endif /* CONFIG_RANDOMIZE_KSTACK_OFFSET */
+> =C2=A0
+> =C2=A0#endif
 
+Reviewed-by: Radu Rendec <radu@rendec.net>
 
