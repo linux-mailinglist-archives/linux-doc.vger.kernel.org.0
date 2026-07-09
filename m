@@ -1,178 +1,166 @@
-Return-Path: <linux-doc+bounces-95984-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95985-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id gqpWFTiuT2qpmgIAu9opvQ
-	(envelope-from <linux-doc+bounces-95984-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 16:20:40 +0200
+	id uIfsIeu2T2q4nAIAu9opvQ
+	(envelope-from <linux-doc+bounces-95985-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 16:57:47 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 90501732249
-	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 16:20:39 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7325F7328B8
+	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 16:57:46 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=E4231nrm;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95984-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-95984-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b="nTZXEq/p";
+	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=SWW8AHWd;
+	dmarc=pass (policy=reject) header.from=mailbox.org;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95985-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95985-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 958F2315D60E
-	for <lists+linux-doc@lfdr.de>; Thu,  9 Jul 2026 14:10:40 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id BF6FC322F4AC
+	for <lists+linux-doc@lfdr.de>; Thu,  9 Jul 2026 14:12:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 02C8E4343F1;
-	Thu,  9 Jul 2026 14:06:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A698D2C237E;
+	Thu,  9 Jul 2026 14:11:56 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2CCF542E8E2;
-	Thu,  9 Jul 2026 14:06:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1797125B081;
+	Thu,  9 Jul 2026 14:11:53 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783605972; cv=none; b=ZST1hQfJj7XLCuzVbEqjuLb4nliseW72lPOph4ACc0ZwbeYDzwrL5oMabAP+NPdD4XjfR0+G75VjomZlb5/fe6SAVXHFx6JcNnvb08V+2vk6UxAH+hZ3krqkfmXdjVS7SCf56VepuGMsGmsTgKglai21My5SGAYjp06LjTf9BMY=
+	t=1783606316; cv=none; b=XWPk+81Lbqp+V5mfUmQMp04g49S3J3dL7fzStvsKzK97DFUTNOrDbmt9qrN90TwlKM1JHojheXM3LtBxg8wQxfH9ZIpIY/lTdiANvfA/0fp1jtbT3GoK1405G/oVNTf+GjjCdRj43qv+0+7j6CvcBIiCGBuASxBgGCAC2Bonl8U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783605972; c=relaxed/simple;
-	bh=TLs1sYIl6XDuSQdKZPBscGAxeps+1GHv3mJ2ZEZb9QU=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=rjr+LgQlytb+xgy1uxhifeJ7yGZOJvOEhmZVZ10NoQNffLTSF5u/WcE9Z26/YCqpKQuAaQY1S5tzkTemzWWmq76k9BNWPT3+b9rxdZ133QwtXpQzH9SQMu0UFyROALQq2OXFbiaQDeogUkK2uy5nEGeQTMzccPI3QyNky3tqgSo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=E4231nrm; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4FE301F00A3E;
-	Thu,  9 Jul 2026 14:06:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783605971;
-	bh=CCjb58wtAAk5F9PdDMQvKlFN0DE7q9fXquVywqvC5OU=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=E4231nrmhGQ5ukLReRLVDZIAzyt76r360wdxDclPmJDeyjYjGCBKhJtsTzRfnbKjU
-	 I+4TC21pOjR0PVu3Hpg259SLeMiFCqYDkTI39jWMsSZbt69rgMFXyT+Lpwynqo4T8+
-	 ZQgT21Sh51dG9qNccfgdSRXtUutErpyCIkcsvPsd/IBChclIHkhRgtHp1PR0GSrgyV
-	 DQj0+sCMmbPfvhiw6verabX5TA57H6ikmVSjKBBb8TsdmyKeGK16mzbVBU/PEaghPn
-	 VqJTgjlw+wFU4pw6MsLNkWGsYOF/ijEaJzTC/HrB2ZUTKy5EI2htVNSH2E94Noi+sC
-	 KDH7QE7YevxwA==
-From: SJ Park <sj@kernel.org>
-To: 
-Cc: SJ Park <sj@kernel.org>,
-	"Liam R. Howlett" <liam@infradead.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	David Hildenbrand <david@kernel.org>,
+	s=arc-20240116; t=1783606316; c=relaxed/simple;
+	bh=mWbP2+Hzt6NOsA5S+X3iSMAtW4HUCWL1Tn2tEgduIxI=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=tjJrqkK8MCUBfo3iDPQgFhAAJxzhnSwm0S2tSvddw0xlHZ731npCKxS2RmwcQkprV3qj9OS/4wcfGtR4NWSEHW8LOIc67ugzYIuth+qNO0XWvbVINejp0VxJFboIsGuwMnK1TrCAhhNSOwCed4plQqciZvQ9pWAH9oBIOr7CXNY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org; spf=pass smtp.mailfrom=mailbox.org; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=nTZXEq/p; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=SWW8AHWd; arc=none smtp.client-ip=80.241.56.152
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
+	(No client certificate requested)
+	by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gwxjM5dv0zKvtZ;
+	Thu, 09 Jul 2026 16:11:51 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1783606311;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=D5M001/X9CVn4ScHLoRqgK9VNEW2LByAELLAivYQiEw=;
+	b=nTZXEq/pMtPwZj2aIQGjQNs41LkvDv7A9v7OSTFxga2jhETZ2k3YUwh1HeGLjoAsr2cuN3
+	Po+6hnfFuoReWrjuwVH6VSQKKfPRJZ/oHA+fG75LNeZLBnC9B05UYPQZ/FfScm9vSP+vJT
+	DWWyxnRJ32wxGr8qTIikak1hXCt8M15YPv+f0bIkr+mnNCMe/zcjrVnX7JzGaDKTlXHAiI
+	HHPatYLq9Ll4MkSsZ4A97uTodOC1bM6+CndvTn+6I3YcwTFeCidkIq8JkOguzuhL9hkvjl
+	fa+uJgoCSYFh8mGS/tiGPpVs5NUpPthKdSZ7wJeqtV9q+10TpzkXqdc768p0DA==
+From: Manuel Ebner <manuelebner@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1783606309;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=D5M001/X9CVn4ScHLoRqgK9VNEW2LByAELLAivYQiEw=;
+	b=SWW8AHWdaBAfPP1T+fP3jVBeGmE2S1Iw+oOLZg7roQDvAlpzRm+GIP0BZsRne/CzvMXJd/
+	28G0fwlG9dGGFoMrL/STF84XtsuqbdKxFeYTyN1p7A25g5QURw4ziSUedYn0lYeHfy0GkC
+	6YWlWi5LgvMQTY+2fZ/sNG4y6UxYcF3Q76W8fg9fRmO1ZOQDTggNosFw0K+xQNWMEwpZ/A
+	q8bPK8Oi1LTiOIfVi/fxYkejqvPbtR98XADKP9XOn3h1uxpPbWvCHnWaxhA07ab/hNwt3+
+	bPIIpGUFp9/HON/Wq/Gmi6IwUDqyNG9pz0HBKrT8vyQZd+gwbLtNTAQdAbZZuA==
+To: Vladimir Oltean <olteanv@gmail.com>,
 	Jonathan Corbet <corbet@lwn.net>,
-	Lorenzo Stoakes <ljs@kernel.org>,
-	Michal Hocko <mhocko@suse.com>,
-	Mike Rapoport <rppt@kernel.org>,
 	Shuah Khan <skhan@linuxfoundation.org>,
-	Suren Baghdasaryan <surenb@google.com>,
-	Vlastimil Babka <vbabka@kernel.org>,
-	damon@lists.linux.dev,
+	Jacob Keller <jacob.e.keller@intel.com>,
+	Jakub Kicinski <kuba@kernel.org>
+Cc: Manuel Ebner <manuelebner@mailbox.org>,
+	Andrew Lunn <andrew@lunn.ch>,
+	Vladimir Oltean <vladimir.oltean@nxp.com>,
+	netdev@vger.kernel.org,
 	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-mm@kvack.org
-Subject: [RFC PATCH v1.2 18/19] Docs/admin-guide/mm/damon/usage: document weight sysfs file
-Date: Thu,  9 Jul 2026 07:05:56 -0700
-Message-ID: <20260709140600.90950-19-sj@kernel.org>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260709140600.90950-1-sj@kernel.org>
-References: <20260709140600.90950-1-sj@kernel.org>
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v2] docs: packaging: fix brackets
+Date: Thu,  9 Jul 2026 16:10:12 +0200
+Message-ID: <20260709141012.400011-2-manuelebner@mailbox.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 6ad87ef3ed1b3b9ba63
+X-MBO-RS-META: 33pbrwb6r993k4zzx6y5dzzs3zsutzc9
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-4.16 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[mailbox.org,reject];
+	R_DKIM_ALLOW(-0.20)[mailbox.org:s=mail20150812];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:sj@kernel.org,m:liam@infradead.org,m:akpm@linux-foundation.org,m:david@kernel.org,m:corbet@lwn.net,m:ljs@kernel.org,m:mhocko@suse.com,m:rppt@kernel.org,m:skhan@linuxfoundation.org,m:surenb@google.com,m:vbabka@kernel.org,m:damon@lists.linux.dev,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,s:lists@lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	FORGED_SENDER(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-95985-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:olteanv@gmail.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:jacob.e.keller@intel.com,m:kuba@kernel.org,m:manuelebner@mailbox.org,m:andrew@lunn.ch,m:vladimir.oltean@nxp.com,m:netdev@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com,lwn.net,linuxfoundation.org,intel.com,kernel.org];
 	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-95984-lists,linux-doc=lfdr.de];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FORGED_SENDER(0.00)[manuelebner@mailbox.org,linux-doc@vger.kernel.org];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
-	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[manuelebner@mailbox.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[mailbox.org:+];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,mailbox.org:from_mime,mailbox.org:email,mailbox.org:mid,mailbox.org:dkim]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 90501732249
+X-Rspamd-Queue-Id: 7325F7328B8
 
-Update DAMON usage document for newly added probe weight file.
+Add two ')' to nested functions in code block.
 
-Signed-off-by: SJ Park <sj@kernel.org>
+Fixes: a9ad2a8dfb43 ("lib: packing: document recently added APIs")
+Signed-off-by: Manuel Ebner <manuelebner@mailbox.org>
+Reviewed-by: Andrew Lunn <andrew@lunn.ch>
 ---
- Documentation/admin-guide/mm/damon/usage.rst | 11 ++++++++---
- Documentation/mm/damon/design.rst            |  5 +++++
- 2 files changed, 13 insertions(+), 3 deletions(-)
+[v2]
+ add Fixes tag.
+ add Reviewed-by.
+[v1]
+ https://lore.kernel.org/all/20260709121427.391749-2-manuelebner@mailbox.org/
+---
+ Documentation/core-api/packing.rst | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/Documentation/admin-guide/mm/damon/usage.rst b/Documentation/admin-guide/mm/damon/usage.rst
-index b2649ea011f93..da5f9afd08aef 100644
---- a/Documentation/admin-guide/mm/damon/usage.rst
-+++ b/Documentation/admin-guide/mm/damon/usage.rst
-@@ -73,9 +73,10 @@ comma (",").
-     │ │ │ │ │ │ │ intervals_goal/access_bp,aggrs,min_sample_us,max_sample_us
-     │ │ │ │ │ │ nr_regions/min,max
-     │ │ │ │ │ │ :ref:`probes <damon_usage_sysfs_probes>`/nr_probes
--    │ │ │ │ │ │ │ 0/filters/nr_filters
--    │ │ │ │ │ │ │ │ 0/type,matching,allow,path
--    │ │ │ │ │ │ │ │ ...
-+    │ │ │ │ │ │ │ 0/weight
-+    │ │ │ │ │ │ │ │ filters/nr_filters
-+    │ │ │ │ │ │ │ │ │ 0/type,matching,allow,path
-+    │ │ │ │ │ │ │ │ │ ...
-     │ │ │ │ │ │ │ ...
-     │ │ │ │ │ :ref:`targets <sysfs_targets>`/nr_targets
-     │ │ │ │ │ │ :ref:`0 <sysfs_target>`/pid_target,obsolete_target
-@@ -286,6 +287,10 @@ In each probe directory, one directory, ``filters`` exists.  The directory
- contains files for installing filters for the probe, that is used to determine
- the data attribute for the probe.
+diff --git a/Documentation/core-api/packing.rst b/Documentation/core-api/packing.rst
+index f68f1e08fef9..cff1a262efce 100644
+--- a/Documentation/core-api/packing.rst
++++ b/Documentation/core-api/packing.rst
+@@ -330,7 +330,7 @@ Here is an example of how to use the fields APIs:
  
-+Each probe directory also contains ``weight`` file.  Reading from and writing
-+to the file gets and sets the :ref:`attributes-only monitoring
-+<damon_design_attrs_only_monitoring>` weight for the attribute of the probe.
-+
- In the beginning, ``filters`` directory has only one file, ``nr_filters``.
- Writing a number (``N``) to the file creates the number of child directories
- named ``0`` to ``N-1``.  Each directory represents each filter and works in a
-diff --git a/Documentation/mm/damon/design.rst b/Documentation/mm/damon/design.rst
-index 6d79e7d69be84..aed6cb1cf4831 100644
---- a/Documentation/mm/damon/design.rst
-+++ b/Documentation/mm/damon/design.rst
-@@ -316,6 +316,8 @@ Another way to do this for higher accuracy is using :ref:`DAMOS filter
- information in page level.  But, because it is operated in page level, the
- overhead is proportional to the size of the memory.
+    void unpack_your_data(const packed_buf_t *buf, struct data *unpacked)
+    {
+-           BUILD_BUG_ON(sizeof(*buf) != SIZE;
++           BUILD_BUG_ON(sizeof(*buf) != SIZE);
  
-+.. _damon_design_attrs_only_monitoring:
-+
- Data Attributes-only Monitoring
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            unpack_fields(buf, sizeof(*buf), unpacked, fields,
+                          QUIRK_LITTLE_ENDIAN);
+@@ -338,7 +338,7 @@ Here is an example of how to use the fields APIs:
  
-@@ -336,6 +338,9 @@ automatically turned off.  The access counter (``nr_accesses``) will always be
- zero and not updated.  Hence the mode is called Data Attributes "only"
- monitoring.
+    void pack_your_data(const struct data *unpacked, packed_buf_t *buf)
+    {
+-           BUILD_BUG_ON(sizeof(*buf) != SIZE;
++           BUILD_BUG_ON(sizeof(*buf) != SIZE);
  
-+Refer to the :ref:`admin guide <damon_usage_sysfs_probes>` to know how users
-+can use the mode.
-+
- Dynamic Target Space Updates Handling
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 
+            pack_fields(buf, sizeof(*buf), unpacked, fields,
+                        QUIRK_LITTLE_ENDIAN);
 -- 
-2.47.3
+2.54.0
+
 
