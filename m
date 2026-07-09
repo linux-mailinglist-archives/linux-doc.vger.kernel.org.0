@@ -1,230 +1,192 @@
-Return-Path: <linux-doc+bounces-95953-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95955-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id JMpJC56KT2rUjAIAu9opvQ
-	(envelope-from <linux-doc+bounces-95953-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 13:48:46 +0200
+	id bS3iBjGLT2opjQIAu9opvQ
+	(envelope-from <linux-doc+bounces-95955-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 13:51:13 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 07AC7730950
-	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 13:48:45 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0BEBE7309B5
+	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 13:51:12 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=samsung.com header.s=mail20170921 header.b=dmyp4Var;
-	dmarc=pass (policy=none) header.from=samsung.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95953-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-95953-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=linux.dev header.s=key1 header.b=INLRqR+i;
+	dmarc=pass (policy=none) header.from=linux.dev;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95955-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95955-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 94FEB3006D6E
-	for <lists+linux-doc@lfdr.de>; Thu,  9 Jul 2026 11:48:26 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id B11BF3015D6E
+	for <lists+linux-doc@lfdr.de>; Thu,  9 Jul 2026 11:50:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1555C40E8CE;
-	Thu,  9 Jul 2026 11:48:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F074B411692;
+	Thu,  9 Jul 2026 11:50:16 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com [210.118.77.12])
+Received: from out-170.mta1.migadu.com (out-170.mta1.migadu.com [95.215.58.170])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFA614192FC
-	for <linux-doc@vger.kernel.org>; Thu,  9 Jul 2026 11:48:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 602153FCB22
+	for <linux-doc@vger.kernel.org>; Thu,  9 Jul 2026 11:50:14 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783597702; cv=none; b=fVJopOQr6Iowu+ZqjWl/urpndmFsHGBtZSYDAYbdi0QXtFcXxJ1fiCbpeREXac6AuzRLjBYznhmfYr3Zyyo9GLoalLMRFPMAIa8lSw9LabRZniXQBWtfx6GVLp6swuDnZX23pR52Np4h4sPEL91uOwREzXzQyLO1pmicMh09gdI=
+	t=1783597816; cv=none; b=o8LEN51Iyv0WGvBBIuC49E+L6H01DOQlvNvO2NsSg8i0lDIwvMxONhMiLcW+oQUOM/8L8Q9OPeVOaty8+1RfUe+ewUhGAjRU3NMMjRcVvPF1VXMpPHFzcYlgY27pmxRYVH/EYn1njXW1rnMY9E8OhxSyfHHEIyFCEx5sAxtfMzg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783597702; c=relaxed/simple;
-	bh=b6Cc4UcywU20YwkD+cdB4MosSaGEN9+qS/zz4wONwV4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:From:In-Reply-To:
-	 Content-Type:References; b=MDlS6lGv6MuuaMpfx4ZjJdti8wSM7x93tWBLnXYX8o72Se0EgRzUHokQVQ2ecV3mxxm5tBQIrawOuDX9LjE6Nv9RJIzHmrTSCjO3xzCU6Lr9ER6kKp0Ra1zKvwVDSpBP+j4lGo0+wbDpKNsZjfmaA+rENS4k4fwzAi78G6XznoY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com; spf=pass smtp.mailfrom=samsung.com; dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b=dmyp4Var; arc=none smtp.client-ip=210.118.77.12
-Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
-	by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id 20260709114817euoutp02c871ce0f2ab1c5a11237b08d24762793~AnKff0lH11287612876euoutp02v
-	for <linux-doc@vger.kernel.org>; Thu,  9 Jul 2026 11:48:17 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com 20260709114817euoutp02c871ce0f2ab1c5a11237b08d24762793~AnKff0lH11287612876euoutp02v
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1783597697;
-	bh=mbdm+gUkaYDjaWGKLha+HVrbYf+sfFzbfVrVqxEhhvQ=;
-	h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
-	b=dmyp4Var6RjkkB1vajADW+b854j66E4a8tOhbdAZBc+KrQ3T4ExgndaJ0ru91bFtT
-	 4aL0TDpMA9o+owJxLFhQYpDaChGMM6tI/YudIMETgaGbaq9fQRz+OvPjywucg/6gyP
-	 5VSgJg+HKMF4+vsL6EffRkXM0S6JTsUkMvX8OOK4=
-Received: from eusmtip2.samsung.com (unknown [203.254.199.222]) by
-	eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
-	20260709114816eucas1p110f68ffa791aae37e094a48f7c81a84c~AnKfIORfW0198001980eucas1p1j;
-	Thu,  9 Jul 2026 11:48:16 +0000 (GMT)
-Received: from [106.210.134.192] (unknown [106.210.134.192]) by
-	eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
-	20260709114815eusmtip26476bf679b9f8b6a9369ca12f533d2b8~AnKd7jPDA0429604296eusmtip2W;
-	Thu,  9 Jul 2026 11:48:15 +0000 (GMT)
-Message-ID: <b3caef50-db1a-4102-9be8-745c68d53074@samsung.com>
-Date: Thu, 9 Jul 2026 13:48:14 +0200
+	s=arc-20240116; t=1783597816; c=relaxed/simple;
+	bh=ZWYDTPt2INsfrfjekJ9+Fr6OaUFIO4TQs4dluGhiECQ=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=h7nN68kd7M/+nJVreJcybowM8zEHHoVyENSokEj4CMr6wGtxXIthcpM9FN8/5GawnaF53XsBrcznZTBrFXE9U3CYB8OOiZHgr2Wb9bDI6wKP1eDq59Y9aOLXGNWBhk05rXcbuwvUYg4xMn0eh/f6zAF+AS8mwRWImsxYDrr5P0A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=INLRqR+i; arc=none smtp.client-ip=95.215.58.170
+X-Forwarded-Encrypted: i=1; AHgh+RrLcnL5ipFMk54UM5LLjly3HIhAfRqNmLWPJS2rqlsxHWhuDQEI9CGBK6MWm0DE99NFXWgymJ6c09o=@vger.kernel.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1783597812;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=L3SuTrK7ua1jSt5ecvosiLTOXicZe+1p9rD4HzyC/xI=;
+	b=INLRqR+ieSjA/N84vwt70/AkodsDk59oUdDJXLo/ukPq3Nsz/FSJAmlxUbkz+PlD2GyMvN
+	GXrTUJbU94wBXw077Tn2cgFBscdib9y+NqbypA045nGWKdHbT0rGDkyVhSVYJHreFYg/nX
+	4yrtKVAQ2GYItIOOV7J5oxe7+rVZ0oY=
+X-Gm-Message-State: AOJu0YxRkf/odXBikV/0okmHsznxdx55r8ryuxZzAbruqtp3uJ1GIEuG
+	HmZZPQ37XdGo4YWaqr1xXT9t+LwwdIEaMESsyZ69jRPrLQoGqFQmNhdldZGi1PRc69kkq1Xmn9b
+	QskxzTv5Cwcuzih8lHRTr+Sy+x6BgPJgEmPAN11f3
+X-Received: by 2002:ac8:7f0d:0:b0:51c:6b7:d3de with SMTP id
+ d75a77b69052e-51c9c573e75mr5591691cf.5.1783597796410; Thu, 09 Jul 2026
+ 04:49:56 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Betterbird (Windows)
-Subject: Re: [RFC PATCH] x86/pci-dma: add "any" keyword to swiotlb= kernel
- parameter
-To: Aakarsh Jain <aakarsh.jain@oss.qualcomm.com>, robin.murphy@arm.com
-Cc: corbet@lwn.net, skhan@linuxfoundation.org, akpm@linux-foundation.org,
-	bp@alien8.de, rdunlap@infradead.org, peterz@infradead.org,
-	feng.tang@linux.alibaba.com, dapeng1.mi@linux.intel.com, elver@google.com,
-	enelsonmoore@gmail.com, kuba@kernel.org, lirongqing@baidu.com,
-	ebiggers@kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, iommu@lists.linux.dev,
-	aneesh.kumar@kernel.org, alexey.kardashevskiy@amd.com,
-	thomas.lendacky@amd.com, jeff.hugo@oss.qualcomm.com,
-	thanson@qti.qualcomm.com
-Content-Language: en-US
-From: Marek Szyprowski <m.szyprowski@samsung.com>
-In-Reply-To: <20260708114244.246176-1-aakarsh.jain@oss.qualcomm.com>
-Content-Transfer-Encoding: 7bit
-X-CMS-MailID: 20260709114816eucas1p110f68ffa791aae37e094a48f7c81a84c
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-RootMTR: 20260708114338eucas1p2bbdea8406913619fdc046b6e8f66d5ca
-X-EPHeader: CA
-X-CMS-RootMailID: 20260708114338eucas1p2bbdea8406913619fdc046b6e8f66d5ca
-References: <CGME20260708114338eucas1p2bbdea8406913619fdc046b6e8f66d5ca@eucas1p2.samsung.com>
-	<20260708114244.246176-1-aakarsh.jain@oss.qualcomm.com>
+References: <20260709-kvm-arm64-sme-v11-0-32799f66db9d@kernel.org>
+ <CA+EHjTyAxBx4jhGq-Gme5hPi1ZyDAkL2CP_U22ykkQemD1dUhg@mail.gmail.com> <4b2fb0ef-4d3e-4a1f-8d33-177bb4af2005@sirena.org.uk>
+In-Reply-To: <4b2fb0ef-4d3e-4a1f-8d33-177bb4af2005@sirena.org.uk>
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Fuad Tabba <fuad.tabba@linux.dev>
+Date: Thu, 9 Jul 2026 12:49:19 +0100
+X-Gmail-Original-Message-ID: <CA+EHjTyhRFMa+diHpWyKcCuB8DrTH4p1bvraiaQnO0Fru74cHw@mail.gmail.com>
+X-Gm-Features: AUfX_myGvG9GzTq40K-onGYQvIqSeZZ7bcchUs-KHtoNqS1WCKCcF98we18uqCM
+Message-ID: <CA+EHjTyhRFMa+diHpWyKcCuB8DrTH4p1bvraiaQnO0Fru74cHw@mail.gmail.com>
+Subject: Re: [PATCH v11 00/29] KVM: arm64: Implement support for SME
+To: Mark Brown <broonie@kernel.org>
+Cc: Konstantin Ryabitsev <konstantin@linuxfoundation.org>, Marc Zyngier <maz@kernel.org>, 
+	Joey Gouly <joey.gouly@arm.com>, Catalin Marinas <catalin.marinas@arm.com>, 
+	Suzuki K Poulose <suzuki.poulose@arm.com>, Will Deacon <will@kernel.org>, 
+	Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>, 
+	Oliver Upton <oupton@kernel.org>, Dave Martin <Dave.Martin@arm.com>, 
+	Mark Rutland <mark.rutland@arm.com>, Ben Horgan <ben.horgan@arm.com>, 
+	Jean-Philippe Brucker <jpb@kernel.org>, linux-arm-kernel@lists.infradead.org, 
+	kvmarm@lists.linux.dev, linux-kernel@vger.kernel.org, kvm@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
+	Peter Maydell <peter.maydell@linaro.org>, Eric Auger <eric.auger@redhat.com>, 
+	Roman Gushchin <roman.gushchin@linux.dev>, tools@kernel.org
+Content-Type: text/plain; charset="UTF-8"
+X-Migadu-Flow: FLOW_OUT
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-5.15 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[samsung.com:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[samsung.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4];
-	R_DKIM_ALLOW(-0.20)[samsung.com:s=mail20170921];
+	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	XM_UA_NO_VERSION(0.01)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-95953-lists,linux-doc=lfdr.de];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:aakarsh.jain@oss.qualcomm.com,m:robin.murphy@arm.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:akpm@linux-foundation.org,m:bp@alien8.de,m:rdunlap@infradead.org,m:peterz@infradead.org,m:feng.tang@linux.alibaba.com,m:dapeng1.mi@linux.intel.com,m:elver@google.com,m:enelsonmoore@gmail.com,m:kuba@kernel.org,m:lirongqing@baidu.com,m:ebiggers@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:iommu@lists.linux.dev,m:aneesh.kumar@kernel.org,m:alexey.kardashevskiy@amd.com,m:thomas.lendacky@amd.com,m:jeff.hugo@oss.qualcomm.com,m:thanson@qti.qualcomm.com,s:lists@lfdr.de];
-	FREEMAIL_CC(0.00)[lwn.net,linuxfoundation.org,linux-foundation.org,alien8.de,infradead.org,linux.alibaba.com,linux.intel.com,google.com,gmail.com,kernel.org,baidu.com,vger.kernel.org,lists.linux.dev,amd.com,oss.qualcomm.com,qti.qualcomm.com];
-	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:broonie@kernel.org,m:konstantin@linuxfoundation.org,m:maz@kernel.org,m:joey.gouly@arm.com,m:catalin.marinas@arm.com,m:suzuki.poulose@arm.com,m:will@kernel.org,m:pbonzini@redhat.com,m:corbet@lwn.net,m:shuah@kernel.org,m:oupton@kernel.org,m:Dave.Martin@arm.com,m:mark.rutland@arm.com,m:ben.horgan@arm.com,m:jpb@kernel.org,m:linux-arm-kernel@lists.infradead.org,m:kvmarm@lists.linux.dev,m:linux-kernel@vger.kernel.org,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:peter.maydell@linaro.org,m:eric.auger@redhat.com,m:roman.gushchin@linux.dev,m:tools@kernel.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[3];
+	FORGED_SENDER(0.00)[fuad.tabba@linux.dev,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[m.szyprowski@samsung.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	TAGGED_FROM(0.00)[bounces-95955-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[m.szyprowski@samsung.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[samsung.com:+];
+	FROM_NEQ_ENVFROM(0.00)[fuad.tabba@linux.dev,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[linux.dev:+];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[qualcomm.com:email,vger.kernel.org:from_smtp,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,samsung.com:from_mime,samsung.com:dkim,samsung.com:mid]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,linux.dev:from_mime,linux.dev:dkim,linux-foundation.org:email,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,mail.gmail.com:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 07AC7730950
+X-Rspamd-Queue-Id: 0BEBE7309B5
 
-On 08.07.2026 13:42, Aakarsh Jain wrote:
-> CoCo guests (AMD SEV-SNP, Intel TDX) require large swiotlb pools for
-> streaming DMA workloads such as high-speed NIC and AI accelerator
-> inference. The existing swiotlb pool allocator restricts placement to
-> low memory (below 4GB by default), capping usable pool size at ~1GB even
-> when a larger pool is requested via swiotlb=<nslabs>.
+On Thu, 9 Jul 2026 at 12:36, Mark Brown <broonie@kernel.org> wrote:
 >
-> The SWIOTLB_ANY flag already exists to lift this restriction, and
-> swiotlb_init_remap() already handles it correctly via the flags
-> parameter (see CONFIG_SWIOTLB_DYNAMIC path: io_tlb_default_mem.phys_limit
-> is set to virt_to_phys(high_memory-1) when SWIOTLB_ANY is set).
+> On Thu, Jul 09, 2026 at 11:26:41AM +0100, Fuad Tabba wrote:
+> > > base-commit: 4c45e14df2f4e77982ad70d6d8e3fe750edd4c37
 >
-> However, there is no way to set SWIOTLB_ANY from the command line. The
-> only existing mechanism was via arch-specific code (e.g. powerpc SVM sets
-> SWIOTLB_ANY in pci_iommu_init). x86 CoCo guests have no such path.
+> > I think this SHA is local to your tree. I can't locate it, and neither
+> > could Sashiko [1, 2]. For a series this big and complex, it would be
+> > good to get Sashiko to review it. Could you please fix that?
 >
-> After Aneesh  series ("dma-mapping: Track shared DMA state through
-> direct, pool and swiotlb paths", https://patchwork.kernel.org/project/linux-arm-kernel/cover/20260701054926.825925-1-aneesh.kumar@kernel.org/)
-> removes SWIOTLB_FORCE, x86 pci_swiotlb_detect() leaves x86_swiotlb_flags = 0 for
-> CoCo guests. The pool falls back to low memory and caps at ~1GB:
->
->   Without "any": pool at 0x35a9c000 (~900MB, below 4GB boundary)
->   With    "any": pool at 0x1df9c00000 (~120GB, anywhere in RAM)
->   [Tested on AMD SEV-SNP guest, swiotlb=4194304]
+> That is the v7.2-rc2 tag, copying in Konstantin since this probably
+> wants fixing in b4 and Roman for sashiko since this might bite others.
+> I told b4 the code was based on v7.2-rc2 (which it is) by specifiying it
+> as "v7.2-rc2" in --edit-deps and it's translated that into the git
+> object hash for the tag and dropped that in there rather than the hash
+> of the commit that was signed.
 
+I figured out what the issue is in Sashiko and submitted a fix:
+https://github.com/sashiko-dev/sashiko/pull/317
 
-Do we really need a new option for that? Doesn't this simply mean that
-x86_swiotlb_flags should be always set to "any" for CoCo guests?
+It wasn't advancing the local HEAD after fetching.
 
+Cheers,
+/fuad
 
-> Add "any" as a new keyword to the swiotlb= kernel parameter. This is an
-> explicit, opt-in mechanism that sets SWIOTLB_ANY for the default pool at
-> boot time, without touching any arch-specific code.
 >
-> Devices with 32-bit DMA masks are not affected, they still use the normal
-> low-memory bounce buffer path. The "any" option is only meaningful for
-> workloads where all active DMA devices have 64-bit masks.
+> Probably if b4 is going to resolve deps into hashes it should make sure
+> to resolve them into a commit object in case users aren't pulling tags
+> (which I'm guessing is what's affected both Sashiko and you here).
+> Either that or just keep the text (which would make it more obvious
+> what's happened but doesn't actually fix anything if it's automation
+> that's impacted).
 >
-> Signed-off-by: Aakarsh Jain <aakarsh.jain@oss.qualcomm.com>
-> ---
->  Documentation/admin-guide/kernel-parameters.txt | 5 ++++-
->  kernel/dma/swiotlb.c                            | 5 +++++
->  2 files changed, 9 insertions(+), 1 deletion(-)
+> Unless someone objects I'll resend with the dependency specified as the
+> commit object for Sashiko's benefit :/
 >
-> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-> index b5493a7f8f22..8a1fccbd9b25 100644
-> --- a/Documentation/admin-guide/kernel-parameters.txt
-> +++ b/Documentation/admin-guide/kernel-parameters.txt
-> @@ -7477,7 +7477,7 @@ Kernel parameters
->  			Execution Facility on pSeries.
->  
->  	swiotlb=	[ARM,PPC,MIPS,X86,S390,EARLY]
-> -			Format: { <int> [,<int>] | force | noforce }
-> +			Format: { <int> [,<int>] | force | noforce | any}
->  			<int> -- Number of I/O TLB slabs
->  			<int> -- Second integer after comma. Number of swiotlb
->  				 areas with their own lock. Will be rounded up
-> @@ -7485,6 +7485,9 @@ Kernel parameters
->  			force -- force using of bounce buffers even if they
->  			         wouldn't be automatically used by the kernel
->  			noforce -- Never use bounce buffers (for debugging)
-> +			any --  Allow the swiotlb pool to be placed anywhere in
-> +				system RAM, lifting the default low-memory (4GB)
-> +				restriction.
->  
->  	switches=	[HW,M68k,EARLY]
->  
-> diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
-> index 1abd3e6146f4..34773ae7c770 100644
-> --- a/kernel/dma/swiotlb.c
-> +++ b/kernel/dma/swiotlb.c
-> @@ -80,6 +80,7 @@ struct io_tlb_slot {
->  
->  static bool swiotlb_force_bounce;
->  static bool swiotlb_force_disable;
-> +static unsigned int swiotlb_param_flags __initdata;
->  
->  #ifdef CONFIG_SWIOTLB_DYNAMIC
->  
-> @@ -198,6 +199,8 @@ setup_io_tlb_npages(char *str)
->  		swiotlb_force_bounce = true;
->  	else if (!strcmp(str, "noforce"))
->  		swiotlb_force_disable = true;
-> +	else if (!strcmp(str, "any"))
-> +		swiotlb_param_flags |= SWIOTLB_ANY;
->  
->  	return 0;
->  }
-> @@ -445,6 +448,8 @@ int swiotlb_init_late(size_t size, gfp_t gfp_mask,
->  
->  	io_tlb_default_mem.force_bounce = swiotlb_force_bounce;
->  
-> +	flags |= swiotlb_param_flags;
-> +
->  #ifdef CONFIG_SWIOTLB_DYNAMIC
->  	if (!remap)
->  		io_tlb_default_mem.can_grow = true;
-
-Best regards
--- 
-Marek Szyprowski, PhD
-Samsung R&D Institute Poland
-
+> FWIW:
+>
+> $ git show 4c45e14df2f4e77982ad70d6d8e3fe750edd4c37
+> tag v7.2-rc2
+> Tagger: Linus Torvalds <torvalds@linux-foundation.org>
+> Date:   Sun Jul 5 14:44:06 2026 -1000
+>
+> Linux 7.2-rc2
+> -----BEGIN PGP SIGNATURE-----
+>
+> iQFSBAABCgA8FiEEq68RxlopcLEwq+PEeb4+QwBBGIYFAmpK+lYeHHRvcnZhbGRz
+> QGxpbnV4LWZvdW5kYXRpb24ub3JnAAoJEHm+PkMAQRiGsv8H/Rn7Hr3Hp8t6au8B
+> xQueZThJWjqQ4v8pyLnXF6OomKiDR24OTXMCrFgDkcmZ7RK2ALqowI3tQVwLUTuI
+> yUN0qL2z2y+LyTcO0CYf3Lple8KlgLAXYMsv7pGLsOvhS7BW2jW97/bcbpUNxoHb
+> eghxqbIEnyRImUbbyg+nW7VVk65RKdPUNkBPXfQ2NMVwe+SDE5Rl+NXNVqDNjGad
+> soDTUBrD9yXkWX+4s0myleE62UzzH5nYgGPQeQgYmzWgq7LybH6WBlbQK9D7ODJR
+> Cw3LCq1hwZZ2w04Yx+XwMHquGJYHW8L2pj77h95uhzksz8buKnM0AGwBCTC6RMoi
+> AyUQvdc=
+> =JUWl
+> -----END PGP SIGNATURE-----
+>
+> commit 8cdeaa50eae8dad34885515f62559ee83e7e8dda
+> Author: Linus Torvalds <torvalds@linux-foundation.org>
+> Date:   Sun Jul 5 14:44:06 2026 -1000
+>
+>     Linux 7.2-rc2
+>
+> diff --git a/Makefile b/Makefile
+> index b9c5792c79e0..b4035d3cef26 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -2,7 +2,7 @@
+>  VERSION = 7
+>  PATCHLEVEL = 2
+>  SUBLEVEL = 0
+> -EXTRAVERSION = -rc1
+> +EXTRAVERSION = -rc2
+>  NAME = Baby Opossum Posse
+>
+>  # *DOCUMENTATION*
 
