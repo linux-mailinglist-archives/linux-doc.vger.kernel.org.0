@@ -1,155 +1,244 @@
-Return-Path: <linux-doc+bounces-96004-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96005-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id P8vTLefBT2q7nwIAu9opvQ
-	(envelope-from <linux-doc+bounces-96004-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 17:44:39 +0200
+	id YfhqIJC/T2oWnwIAu9opvQ
+	(envelope-from <linux-doc+bounces-96005-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 17:34:40 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id B0FFA7330EE
-	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 17:44:37 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id C93F6732F71
+	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 17:34:39 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=wyuan.org header.s=key1 header.b=hBQqDe+I;
-	dmarc=pass (policy=quarantine) header.from=wyuan.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96004-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-96004-lists+linux-doc=lfdr.de@vger.kernel.org";
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=thegoodpenguin-co-uk.20251104.gappssmtp.com header.s=20251104 header.b="CD/BLg/u";
+	dmarc=none;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96005-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-96005-lists+linux-doc=lfdr.de@vger.kernel.org";
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 23A373099D06
-	for <lists+linux-doc@lfdr.de>; Thu,  9 Jul 2026 15:27:06 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 49BC73047546
+	for <lists+linux-doc@lfdr.de>; Thu,  9 Jul 2026 15:28:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5178837DADE;
-	Thu,  9 Jul 2026 15:27:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CE9FA37E2ED;
+	Thu,  9 Jul 2026 15:28:01 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-179.mta0.migadu.com (out-179.mta0.migadu.com [91.218.175.179])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-oa1-f53.google.com (mail-oa1-f53.google.com [209.85.160.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC1D237F721
-	for <linux-doc@vger.kernel.org>; Thu,  9 Jul 2026 15:26:54 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783610824; cv=none; b=rNc4XKxTor/Y+wLCjVXu7SEI1LuUo88eoVZN2v5OBPiWAIzdIBoJxOs7DYMSmLN6JZmOy567G9iXeHYcjHDxeVQ3skRT8/y0IKzKJ4y0ZkY1D2TFnxZehNmbLCLa+sNl8t1jnxzUgpJ0mmDgbjkU1JqLFg9nqINf9swVbJUP7uE=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783610824; c=relaxed/simple;
-	bh=/7gWABiz3usncEzH9N58qfQfv73wsN7IXAidQfk0Z6A=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=LlPoVaE+wBqpuQwiaZixfMLarhSMmhESFm23yuvRLEOyuCUOz3h4AinNjo8Qnag8m6JODeYZYbUzKnLChdKw+cHsHS8qLseKADbQ44UxNu2Kt4V1LtQN5V8YXW/Pdg9dPcke97NOCA+xRAcrcR53AkD7gRXMrEAgRIHv/Sqb0oM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=wyuan.org; spf=pass smtp.mailfrom=wyuan.org; dkim=pass (2048-bit key) header.d=wyuan.org header.i=@wyuan.org header.b=hBQqDe+I; arc=none smtp.client-ip=91.218.175.179
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=wyuan.org; s=key1;
-	t=1783610801;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=PLQs8YTVcD6fvu2d36jJZ5mY0k2anIDnOU3cDbCFiRI=;
-	b=hBQqDe+IyifV2IU+EcVtbDyUJ2l7KjVk/TUzl9t03E03nrWpZZOouQJPSSOjQNtnWccDfr
-	ft7nefg4iytUznbvbVx1BJNasnyo+5rR5JeW1c+Hn1mDaId9PpFTeL+yYEdAPw2BzT5G7a
-	wEjQe8T+lFvQKjUkDJg7yHFtmvHRB3Z7tT3OdfI8IdUkUxbv8xhyfENU6EEGixCsT0yDUi
-	qV93NGzGVddAOR2mOv9VpfTNDKRS05zV8BY68HfGUQPL042sGvvp5toVkdKFhWRPlKIfc3
-	AaypxpN/+sVQ6VRY8cDQW7RpFKOL9jStr4XK3oo1JB2nIrGHB5L16RspprpO7w==
-From: Weijie Yuan <wy@wyuan.org>
-To: Alex Shi <alexs@kernel.org>,
-	Yanteng Si <si.yanteng@linux.dev>,
-	Dongliang Mu <dzm91@hust.edu.cn>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>
-Cc: linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	Weijie Yuan <wy@wyuan.org>
-Subject: [PATCH] docs/zh_CN: add docs-next checkout workaround
-Date: Thu,  9 Jul 2026 23:25:29 +0800
-Message-ID: <4e5e728877c77a89f6c59e89c88ba8ffa8842643.1783609005.git.wy@wyuan.org>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55A68368D78
+	for <linux-doc@vger.kernel.org>; Thu,  9 Jul 2026 15:28:00 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783610881; cv=pass; b=eduPgpvbtKg1rnFOf6HwF77DsCa0E4e/0yJzPSTV5mN4lsKpfI68Bko1oLoTS+moN/SloPrHt+tCSKdYww2kQMTu3M9Tzl+xV+bCJY80A9MeZ8vbjhoi32GyNYS50+XL3X8I2tnWUS8elIqyFKAmpWVr539yL9nwsPq9wubrqCE=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783610881; c=relaxed/simple;
+	bh=21RPxRc4cmI9WN0jYw1wxAhXRKd+dQO6mAAvwxMOeQ0=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=I5YNgOrLuW6hJmWDLdzl25+rxa7rDrYsJWvuWLXAMWD2QNgVWAvFiuk3jTTSey2kwzK2a3tNsn0AQtVVA/LEmdGYaygmFK8kT5bUSaScud1K6lHOCYqBBKJN3qh5unAZNUpXLKc1fU7EtdZuwF4OXw00wNxLFqkqXUfS2h+JMXs=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk; spf=pass smtp.mailfrom=thegoodpenguin.co.uk; dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20251104.gappssmtp.com header.i=@thegoodpenguin-co-uk.20251104.gappssmtp.com header.b=CD/BLg/u; arc=pass smtp.client-ip=209.85.160.53
+Received: by mail-oa1-f53.google.com with SMTP id 586e51a60fabf-43b7e186a0cso854231fac.0
+        for <linux-doc@vger.kernel.org>; Thu, 09 Jul 2026 08:28:00 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783610879; cv=none;
+        d=google.com; s=arc-20260327;
+        b=M+i/ffr9uWXR+DBfTHeWl9WHsRVBmPtplJo0boyiZs6LCrWvbAeNqDzJasO/1v9e24
+         SDldlsmedK/uiKrvj0kuEWssPTrU7GOboSfeeEpsEoIgZXcg8vU7tShKe6NwacKer0Xy
+         +4uMSbEKLrYW1dwhS1YyqDrH1THCBVptLM1AHOu3oDz36IwpDmmyp1kgrTvh8jbE/Kht
+         BhCmveh8OMeUwSzEl8/I3tF2GAkX78E83s9RSww4CnE47tIzFtZ9RHVxNJxS7WRqcKY7
+         AIPyaECmpHZldVUxWEjrOv3lGYedmzJfp1iuVj4ymPs0hMyVVnZXjt8kFfs4QHHeknbz
+         aQcA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=3ETsmdmb+3cHXN08EH+iCV/ETN1CcrQj41jPmLj5YZI=;
+        fh=KkmwYUz4t65t2J8XsnfDXcK0d3yORAbksEptIJHSpuY=;
+        b=Fx1cAl/scgBZt68UvpuJll0LEiO7sU9VvrHWRWLrYPO4ftFSUNs3BVT7ISQu5CxE1N
+         kew9lOWJOqvEGjMZgFf6EOXyOWMq8TEXxBoaGNspiRAFAbUHD+Iy1SqkmNDXR8LSSlti
+         oJlMa9mXCMdEI8qkfTIAg+rGf7bU7f8+s7dfQ0ks8pnijtGJwfDqfafOD0bPh4IRIylL
+         0zYERw7HFL/TvVsH2AV2uiMacxs28Ph3IBNHal2SqyaW8yGFXGHLrOuefACXozt5hVk+
+         UE8tVm+nejS2gNAm2P7FEhTNSX4zIjJF94FmZQNOj7C6u9CBWib+2kP9RPjFGtHbHKek
+         1PIQ==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=thegoodpenguin-co-uk.20251104.gappssmtp.com; s=20251104; t=1783610879; x=1784215679; darn=vger.kernel.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=3ETsmdmb+3cHXN08EH+iCV/ETN1CcrQj41jPmLj5YZI=;
+        b=CD/BLg/uKd2sHlNwz0XMs0sl9GDGLPjTpPAwXW1pkolywPM2DjFZ9rfxe7EY1Glx09
+         ePpPZMksRidv4T6tQVqsC5WMwTOZABHhE3dlrQuvxKMOTQOTopKiHbSV+POLIoQn76C7
+         t943G2wQj04kG1dMC0+HLCjLwIvI9ZeVCtlc9phV881F0noguKV2fgyYwDg0UkEskV+t
+         gLrTMG8kAeI8f8w6lJ6vOMV7Zf4magV+02P8prlelN1Gy4FPiP7/b3lgl3sys2tKKidF
+         9V66W+uyxq8BA1IORQAnLETcnGKHFXJOB7JXv/VWBdUUeaPe8cWzXwqhhVYQpA2HZAjd
+         Ap2Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783610879; x=1784215679;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=3ETsmdmb+3cHXN08EH+iCV/ETN1CcrQj41jPmLj5YZI=;
+        b=b/BzaG956FoeP+mOFqmT7+KqveMaFYpUE8DL+XydTOtHyx6+F4aDrLTtnD5L8ao8ce
+         ND9zk2XS+t2T8oROJZqpZqp0sJ8u0cQB0KkNHy18xt99oxVq3OzYzJPrrCJM+GEnt114
+         zogNlTDfUa8HxHOFe+WAOd/riuy3of6ne5TGXVFX2HG/iFLW2bsDE9+XdaarmyY6kcbK
+         id/fcZQ3v+G6tks2ebY7iQVJL+0plYzGVn7ESE6YSNU2GnxdhQcot+EwI6K98cmjnVPk
+         g6OZtd3RB2OrdmvEqet1Gk5LQ/hL3Y3Mrpyw+mTUASbcGxXTCUuaRR9QfBJnq5TxR++i
+         IM+g==
+X-Forwarded-Encrypted: i=1; AFNElJ/++bMVJvSZkKjR9I/axo8qle5Fi8Ipz3lGMbpyUawaV6xibDpymDORzjMs9b0AQyUnyDylRud6NDU=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwTcLyb1eJljssmQTpulf/L3EVjpYQZ4MLkjdcUu6c7e2+lhL1M
+	7BTvTHoCL4WxfOj7t4oev0gYnQYQDujSXbenAdbX3p8jRJzEoyYe3GBAClP07n0m3DLki90ij12
+	9ztcITber3z+s+LSPYVFZA5L2iFkh/B5OT0mg/dybSZawqU6D6Wyr+Etv1w==
+X-Gm-Gg: AfdE7cm9fw6r1200vzmcshrbUGqOG1+Y01KpInrocLclpFlkAriK3edR6QJ4ALbH/V6
+	S93lJVwlyURXleVFSvrMR8qYmUVTddQsO9DYDj3VxXvrUq+qOCOoUR56D6v3Ba0TehwLARUJowA
+	tJLBqAgnGG9FBA3wm2SUQkD4vgzrOjpgzj09JjEq0678Ff4s9hz+RjjCDeGUgy94vBoN153hkxu
+	DMMVBxdgFFgTGE8b11HqrAdxmGVh8Dc7nxyQCeHjSs7KrBvi9NXgD8XVSQOo7wchE2U+5QVd5Pb
+	FgoZG0RMTW33JsKWraf/hWEjdLdzwS59rKqiBgHeVlllJCTRSAlOi9yQHiVYrnaYed9SeOChQH8
+	2Q5HrEG5W72mgAmNIzhdKMETrQHuX
+X-Received: by 2002:a05:6820:4dc6:b0:6a3:c14:c985 with SMTP id
+ 006d021491bc7-6a36da6566dmr5303668eaf.72.1783610879362; Thu, 09 Jul 2026
+ 08:27:59 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
+References: <20260630-deprecate_boot_delay-v2-0-f9883d36aa4b@thegoodpenguin.co.uk>
+ <20260630-deprecate_boot_delay-v2-3-f9883d36aa4b@thegoodpenguin.co.uk>
+ <87zf08w7qo.fsf@jogness.linutronix.de> <ak0b2S9jjYy49a8V@pathway.suse.cz>
+ <87echdvkd5.fsf@jogness.linutronix.de> <ak5X718OcOi8OeT4@pathway.suse.cz>
+In-Reply-To: <ak5X718OcOi8OeT4@pathway.suse.cz>
+From: Andrew Murray <amurray@thegoodpenguin.co.uk>
+Date: Thu, 9 Jul 2026 16:27:47 +0100
+X-Gm-Features: AUfX_mzqUqAOJpVXS1zSrcgE0KUX94znIqSV83ZukwijZLhjWKW1vacbJxvZC-s
+Message-ID: <CALqELGwMa8N8VRQeDWK=vWX+YGpa66HNMSA1VmvSvu1-adbh3A@mail.gmail.com>
+Subject: Re: [PATCH v2 3/4] printk: nbcon: move printk_delay to console
+ emiting code
+To: Petr Mladek <pmladek@suse.com>
+Cc: John Ogness <john.ogness@linutronix.de>, Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, Russell King <linux@armlinux.org.uk>, 
+	Florian Fainelli <florian.fainelli@broadcom.com>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Ray Jui <rjui@broadcom.com>, 
+	Scott Branden <sbranden@broadcom.com>, Steven Rostedt <rostedt@goodmis.org>, 
+	Sergey Senozhatsky <senozhatsky@chromium.org>, Andrew Morton <akpm@linux-foundation.org>, 
+	Sebastian Andrzej Siewior <bigeasy@linutronix.de>, Clark Williams <clrkwllms@kernel.org>, 
+	Randy Dunlap <rdunlap@infradead.org>, Linus Torvalds <torvalds@linux-foundation.org>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	linux-rpi-kernel@lists.infradead.org, linux-rt-devel@lists.linux.dev
+Content-Type: text/plain; charset="UTF-8"
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[wyuan.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[wyuan.org:s=key1];
+X-Spamd-Result: default: False [-1.66 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10];
+	R_DKIM_ALLOW(-0.20)[thegoodpenguin-co-uk.20251104.gappssmtp.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-96004-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	FORGED_SENDER(0.00)[wy@wyuan.org,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:alexs@kernel.org,m:si.yanteng@linux.dev,m:dzm91@hust.edu.cn,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:wy@wyuan.org,s:lists@lfdr.de];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	DMARC_NA(0.00)[thegoodpenguin.co.uk];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:pmladek@suse.com,m:john.ogness@linutronix.de,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux@armlinux.org.uk,m:florian.fainelli@broadcom.com,m:bcm-kernel-feedback-list@broadcom.com,m:rjui@broadcom.com,m:sbranden@broadcom.com,m:rostedt@goodmis.org,m:senozhatsky@chromium.org,m:akpm@linux-foundation.org,m:bigeasy@linutronix.de,m:clrkwllms@kernel.org,m:rdunlap@infradead.org,m:torvalds@linux-foundation.org,m:gregkh@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-rpi-kernel@lists.infradead.org,m:linux-rt-devel@lists.linux.dev,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[amurray@thegoodpenguin.co.uk,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-96005-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[wy@wyuan.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[wyuan.org:+];
-	RCPT_COUNT_SEVEN(0.00)[8];
+	FROM_NEQ_ENVFROM(0.00)[amurray@thegoodpenguin.co.uk,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[thegoodpenguin-co-uk.20251104.gappssmtp.com:+];
+	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,hust.edu.cn:url,tsinghua.edu.cn:url]
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,suse.com:email,thegoodpenguin.co.uk:from_mime,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,mail.gmail.com:mid,thegoodpenguin-co-uk.20251104.gappssmtp.com:dkim]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: B0FFA7330EE
+X-Rspamd-Queue-Id: C93F6732F71
 
-Hi all,
+On Wed, 8 Jul 2026 at 15:00, Petr Mladek <pmladek@suse.com> wrote:
+>
+> On Wed 2026-07-08 12:42:22, John Ogness wrote:
+> > On 2026-07-07, Petr Mladek <pmladek@suse.com> wrote:
+> > >> This is too deep (also pointed out by Sashiko) because it multiplies the
+> > >> delay times the number of consoles. For the legacy printing, it would be
+> > >> more appropriate to put the delay inside console_flush_all() and
+> > >> legacy_kthread_func().
+> > >
+> > > True. The question is if the proper solution is worth the complexity.
+> > > We would need to pass the information down two level of the API.
+> > > It would require adding a new (output) parameter to console_flush_one_record(),
+> > > nbcon_legacy_emit_next_record(), and console_emit_next_record().
+> > >
+> > > It is not that complicated but these functions are already hairy
+> > > enough so we should be careful.
 
-Since cloning Alex Shi's tree from the HUST mirror may be unstable, as
-reported in [1]. I think adding one more option for beginners to get
-started might be a good idea.
+Indeed - It would have been nice to put the delay in
+console_flush_one_record, but nbcon_legacy_emit_next_record and
+console_emit_next_record don't provide an easy way of knowing if the
+record was actually printed.
 
-Thanks,
-Weijie
 
-[1] https://lore.kernel.org/linux-doc/4292BADB2022F3A5+5117009.JcJflTAXpt@anka-vmware20-1/
+> >
+> > Fair enough. But then it should be consistent and
+> > console_emit_next_record() should perform the delay before allowing the
+> > handover. Something like this:
+>
+> Great catch!
 
---- >8 ---
+I'll update the series to reflect this.
 
-The Chinese documentation guide asks contributors to base their work on
-the docs-next branch of Alex Shi's tree. However, cloning that tree from
-git.kernel.org or mirrors.hust.edu.cn may fail in some network
-environments.
 
-Document an alternative workflow: clone Linus Torvalds' tree from a
-local mirror, add Alex Shi's tree as another remote, fetch docs-next
-from it, and then create a local branch that tracks alexs/docs-next.
+>
+> > diff --git a/kernel/printk/printk.c b/kernel/printk/printk.c
+> > index 2fe9a963c823a..62fd6a5ebef66 100644
+> > --- a/kernel/printk/printk.c
+> > +++ b/kernel/printk/printk.c
+> > @@ -3161,6 +3161,8 @@ static bool console_emit_next_record(struct console *con, bool *handover, int co
+> >                */
+> >
+> >               con->write(con, outbuf, pmsg.outbuf_len);
+> > +             printk_delay(false);
+> > +
+> >               con->seq = pmsg.seq + 1;
+> >       } else {
+> >               /*
+> > @@ -3182,6 +3184,7 @@ static bool console_emit_next_record(struct console *con, bool *handover, int co
+> >               printk_legacy_allow_spinlock_enter();
+> >               con->write(con, outbuf, pmsg.outbuf_len);
+> >               printk_legacy_allow_spinlock_exit();
+> > +             printk_delay(true);
+>
+> It is pity that this is inside printk_safe context with IRQs
+> disabled. A solution might be to call it before the write.
 
-Signed-off-by: Weijie Yuan <wy@wyuan.org>
----
- Documentation/translations/zh_CN/how-to.rst | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+I tried to be consistent about always performing the delay before or
+after the emit. As part of this series I moved the delay so it now
+occurs after the emit. This made it easier to know if the message was
+actually emitted (rather than delaying, and then a handover occurring
+before actually emitting).
 
-diff --git a/Documentation/translations/zh_CN/how-to.rst b/Documentation/translations/zh_CN/how-to.rst
-index 9ec2384e1e76..fcfe0a4a8be2 100644
---- a/Documentation/translations/zh_CN/how-to.rst
-+++ b/Documentation/translations/zh_CN/how-to.rst
-@@ -53,6 +53,16 @@ Linux 发行版和简单地使用 Linux 命令行，那么可以迅速开始了
- 这是 Alex 开发树的镜像库，每两个小时同步一次上游。如果您了解到更快的 mirror，
- 请随时 **添加** 。
- 
-+或者::
-+
-+	git clone https://mirrors.tuna.tsinghua.edu.cn/git/linux.git
-+	cd linux
-+	git remote add alexs https://git.kernel.org/pub/scm/linux/kernel/git/alexs/linux.git/
-+	git fetch alexs docs-next:refs/remotes/alexs/docs-next
-+	git switch -c docs-next --track alexs/docs-next
-+
-+这将先用清华源拉取 Linus Torvalds 的开发树，再增量下载中文开发分支中的内容。
-+
- 命令执行完毕后，您会在当前目录下得到一个 linux 目录，该目录就是您之后的工作
- 仓库，请把它放在一个稳妥的位置。
- 
--- 
-2.55.0.795.g602f6c329a
 
+>
+> But maybe, this is good enough. This code path is called from
+> vprintk_emit() and it might be in an atomic context anyway.
+> Also it increases the chance of successful handover which
+> might help as well.
+>
+> Anyway, it would be nice to mention these pitfalls into commit message.
+
+Sure.
+
+Thanks for the feedback Petr, John, Benedikt!
+
+Andrew Murray
+
+>
+> >
+> >               start_critical_timings();
+> >
+> >
+> > John
 
