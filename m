@@ -1,223 +1,171 @@
-Return-Path: <linux-doc+bounces-95965-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95966-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id I5qGEFqUT2pEkAIAu9opvQ
-	(envelope-from <linux-doc+bounces-95965-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 14:30:18 +0200
+	id RPQCHiiWT2r+kAIAu9opvQ
+	(envelope-from <linux-doc+bounces-95966-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 14:38:00 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id B9A8C730FC4
-	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 14:30:17 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 10B65731101
+	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 14:38:00 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=arm.com header.s=foss header.b=SueM+Xfo;
-	dmarc=pass (policy=none) header.from=arm.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95965-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95965-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=SO0DVmru;
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95966-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-95966-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 0A0B3303954A
-	for <lists+linux-doc@lfdr.de>; Thu,  9 Jul 2026 12:28:39 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id B625430166C9
+	for <lists+linux-doc@lfdr.de>; Thu,  9 Jul 2026 12:32:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3EE6A3F23AF;
-	Thu,  9 Jul 2026 12:28:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2D21941C308;
+	Thu,  9 Jul 2026 12:32:13 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A3DFB42189B;
-	Thu,  9 Jul 2026 12:28:36 +0000 (UTC)
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AFE924219F7
+	for <linux-doc@vger.kernel.org>; Thu,  9 Jul 2026 12:32:11 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783600118; cv=none; b=ph/boHDF5atfOoAHywhnnBkPz4iqL4wBotwDOvVUdlrpOxsD31bzDaIQluwe9ZRLxbGktDtIE2OFDYs8QotNuQfJSo58KMEyu/Pv5ifmtvh1qczrmWl8o1mWsCahcMN0UYtfgYCR7mlpryJxmj8nZAsI5FLo7GnncbtZfSM07EQ=
+	t=1783600333; cv=none; b=hqJhrVA6+YBnYOQ4m4H9FLUW7HUqRRq2buz9/4gTRa/Ssx5T+x97bo7Z4nHnYLSi69UztwkrifxkRCMqs50cZTyI5L/xHsMRKPz3rhZahI8BWJK92kTJ0eM2k+Pj2/falIPx50R83QGnFCmI3u6OrtjxYz6B8sXtVKu2mhdinlc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783600118; c=relaxed/simple;
-	bh=NnmsjNhmzW8bThr0JWOuKyFi1grEkGRM8hcunCmz8cg=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=gvQvtflOmjTFh3xAzlIphtQW432AKhqd4syi5cDPphpzRypCuMHmNJVqbYLFtyZU9/avyPmxRXbB5HAuPl+7ykVSamEie0S6tpIvWb2TjtXjDdPT+fIWHXLfXaW2HcgvLelqo3/yZYJNyVzauwO0y4V9gVzHWaVb644B5XOl4xM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=SueM+Xfo; arc=none smtp.client-ip=217.140.110.172
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C0E751684;
-	Thu,  9 Jul 2026 05:28:31 -0700 (PDT)
-Received: from [10.2.212.23] (e121345-lin.cambridge.arm.com [10.2.212.23])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7EAD23F66F;
-	Thu,  9 Jul 2026 05:28:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1783600116; bh=NnmsjNhmzW8bThr0JWOuKyFi1grEkGRM8hcunCmz8cg=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=SueM+Xfo0cdmmUSQ+xzz4/+MZ+JENGI5JGQsNpGkY99Cas7h0ao728fHm6tkvi4Jx
-	 ZQQNmwdFGSY93bqNWhdRCH27jM9l24R3zdCD4kBXo8bRnFGm900NPXAkFCHBHt1wkE
-	 Lq7MD5nIVl3YvO4kuIcgfyyXhpogpdRqJtmhLja8=
-Message-ID: <7c21e121-9bce-469e-a983-adbdf3781842@arm.com>
-Date: Thu, 9 Jul 2026 13:28:30 +0100
+	s=arc-20240116; t=1783600333; c=relaxed/simple;
+	bh=oD7sVcKI0EP5wbCBcbErCM6cSOoSEbzddvyLGpoAsBI=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=sv8zlUVWmZrg6rI5oeDAP4JyZgBr1AphdHDRuGsL4U4xMOm60wWm2Zuu2pUjPYEjLi2voQpOuo1FTh3ckDAG8HZo0H+Q/E3NplQCTe3bKmFrqWVnvca20C4S+YxgIPRzXyj2mQ6Zokr8ULZDiCv2yk0jV0WVWFpKxzD34GySFvc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SO0DVmru; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6ED7D1F00A3F
+	for <linux-doc@vger.kernel.org>; Thu,  9 Jul 2026 12:32:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783600331;
+	bh=4aR9R9rWW9lEHBtHD1X7oe8tDfOcExVaxQWxI0iwWpw=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=SO0DVmruKzGhRCEDUhvR08+VaUPO+EXfcFiEUq4/kCU65mP7IoJMaFZlkS29qL85z
+	 jJqVr+be51s9PC+n6LxjenfQicQBWU32x3EIrjs7o/hMtZB2cOSXQFXBPVWyZA37s+
+	 oKn8SU8hXX0zXwTCgFwdn7WykFJ0ofTRsbWH7aBSz65+B1qiEIpHw5b8/h2JIoeVpm
+	 EORHEOYRb6ulLk49aBGhA5mNE6BpjbffZ6cO/hT199i4VW+7qhIazzFa1Qeeg5rVGs
+	 0Tlrpw2m9NyIusahdzqvKHIIMwUyY5lxR3fLthjVU6h87fT5qGJS4DpYLy8E+bmBQg
+	 4R7ZRsOUP/47Q==
+Received: by mail-lj1-f178.google.com with SMTP id 38308e7fff4ca-39c610a7ab9so13336851fa.1
+        for <linux-doc@vger.kernel.org>; Thu, 09 Jul 2026 05:32:11 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RrlV4nQ5MIbTxLsOLFTLpM/Mp0gbvP9FEH/QCZLcooJmaL/t5yYVpqNaMO4XacDwoKbW/tCCv3FlbA=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzWQKP/vQRxV16ZYDZgO0hGTFTD/1J5bmSejshWF3Gv9kQC7vC9
+	JlAoNtxoSfLLg2IYQ1dnu88I0Yf9dUI+fU2cKLfR5bfcja/JrXu8h5IHBtkczgl+P4zvQW80e+m
+	kG+0DARG0kzd0BQ58VkfCi+t0w2lG7hDY1YSAU8Jmig==
+X-Received: by 2002:a05:651c:a09:b0:39a:d7f7:9823 with SMTP id
+ 38308e7fff4ca-39c798813b4mr15252851fa.17.1783600329964; Thu, 09 Jul 2026
+ 05:32:09 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 9 Jul 2026 05:32:08 -0700
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 9 Jul 2026 05:32:08 -0700
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <ak4_vsdef9MJd1Yv@linaro.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH] x86/pci-dma: add "any" keyword to swiotlb= kernel
- parameter
-To: Aakarsh Jain <aakarsh.jain@oss.qualcomm.com>, m.szyprowski@samsung.com
-Cc: corbet@lwn.net, skhan@linuxfoundation.org, akpm@linux-foundation.org,
- bp@alien8.de, rdunlap@infradead.org, peterz@infradead.org,
- feng.tang@linux.alibaba.com, dapeng1.mi@linux.intel.com, elver@google.com,
- enelsonmoore@gmail.com, kuba@kernel.org, lirongqing@baidu.com,
- ebiggers@kernel.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, iommu@lists.linux.dev,
- aneesh.kumar@kernel.org, alexey.kardashevskiy@amd.com,
- thomas.lendacky@amd.com, jeff.hugo@oss.qualcomm.com, thanson@qti.qualcomm.com
-References: <20260708114244.246176-1-aakarsh.jain@oss.qualcomm.com>
-From: Robin Murphy <robin.murphy@arm.com>
-Content-Language: en-GB
-In-Reply-To: <20260708114244.246176-1-aakarsh.jain@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20260629-qcom-qce-cmd-descr-v20-0-56f67da84c05@oss.qualcomm.com>
+ <20260629-qcom-qce-cmd-descr-v20-6-56f67da84c05@oss.qualcomm.com> <ak4_vsdef9MJd1Yv@linaro.org>
+Date: Thu, 9 Jul 2026 05:32:08 -0700
+X-Gmail-Original-Message-ID: <CAMRc=Me93OOyk5gzqD2kSEbR=SNXbOC7azsqc14BLVirnkEmjg@mail.gmail.com>
+X-Gm-Features: AVVi8Cee9x38eRLPwnHC8PzzhrHOdP202SPN2_gv8BvqViABwY4y57pWiMje_Lg
+Message-ID: <CAMRc=Me93OOyk5gzqD2kSEbR=SNXbOC7azsqc14BLVirnkEmjg@mail.gmail.com>
+Subject: Re: [PATCH v20 06/14] dmaengine: qcom: bam_dma: add support for BAM locking
+To: Stephan Gerhold <stephan.gerhold@linaro.org>
+Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, Vinod Koul <vkoul@kernel.org>, 
+	Jonathan Corbet <corbet@lwn.net>, Thara Gopinath <thara.gopinath@gmail.com>, 
+	Herbert Xu <herbert@gondor.apana.org.au>, "David S. Miller" <davem@davemloft.net>, 
+	Udit Tiwari <quic_utiwari@quicinc.com>, Md Sadre Alam <mdalam@qti.qualcomm.com>, 
+	Dmitry Baryshkov <lumag@kernel.org>, Manivannan Sadhasivam <mani@kernel.org>, 
+	Bjorn Andersson <andersson@kernel.org>, Peter Ujfalusi <peter.ujfalusi@gmail.com>, 
+	Michal Simek <michal.simek@amd.com>, Frank Li <Frank.Li@kernel.org>, 
+	Andy Gross <agross@codeaurora.org>, Neil Armstrong <neil.armstrong@linaro.org>, 
+	dmaengine@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-crypto@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	brgl@kernel.org, Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-3.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[lwn.net,linuxfoundation.org,linux-foundation.org,alien8.de,infradead.org,linux.alibaba.com,linux.intel.com,google.com,gmail.com,kernel.org,baidu.com,vger.kernel.org,lists.linux.dev,amd.com,oss.qualcomm.com,qti.qualcomm.com];
 	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-95965-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[25];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-95966-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[robin.murphy@arm.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS(0.00)[m:aakarsh.jain@oss.qualcomm.com,m:m.szyprowski@samsung.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:akpm@linux-foundation.org,m:bp@alien8.de,m:rdunlap@infradead.org,m:peterz@infradead.org,m:feng.tang@linux.alibaba.com,m:dapeng1.mi@linux.intel.com,m:elver@google.com,m:enelsonmoore@gmail.com,m:kuba@kernel.org,m:lirongqing@baidu.com,m:ebiggers@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:iommu@lists.linux.dev,m:aneesh.kumar@kernel.org,m:alexey.kardashevskiy@amd.com,m:thomas.lendacky@amd.com,m:jeff.hugo@oss.qualcomm.com,m:thanson@qti.qualcomm.com,s:lists@lfdr.de];
-	DKIM_TRACE(0.00)[arm.com:+];
+	FORGED_RECIPIENTS(0.00)[m:stephan.gerhold@linaro.org,m:bartosz.golaszewski@oss.qualcomm.com,m:vkoul@kernel.org,m:corbet@lwn.net,m:thara.gopinath@gmail.com,m:herbert@gondor.apana.org.au,m:davem@davemloft.net,m:quic_utiwari@quicinc.com,m:mdalam@qti.qualcomm.com,m:lumag@kernel.org,m:mani@kernel.org,m:andersson@kernel.org,m:peter.ujfalusi@gmail.com,m:michal.simek@amd.com,m:Frank.Li@kernel.org,m:agross@codeaurora.org,m:neil.armstrong@linaro.org,m:dmaengine@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-arm-msm@vger.kernel.org,m:linux-crypto@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:brgl@kernel.org,m:bartosz.golaszewski@linaro.org,m:tharagopinath@gmail.com,m:peterujfalusi@gmail.com,s:lists@lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[brgl@kernel.org,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[oss.qualcomm.com,kernel.org,lwn.net,gmail.com,gondor.apana.org.au,davemloft.net,quicinc.com,qti.qualcomm.com,amd.com,codeaurora.org,linaro.org,vger.kernel.org,lists.infradead.org];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,mail.gmail.com:mid,vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,sashiko.dev:url];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[robin.murphy@arm.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[brgl@kernel.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[]
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCVD_COUNT_SEVEN(0.00)[7]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: B9A8C730FC4
+X-Rspamd-Queue-Id: 10B65731101
 
-On 08/07/2026 12:42 pm, Aakarsh Jain wrote:
-> CoCo guests (AMD SEV-SNP, Intel TDX) require large swiotlb pools for
-> streaming DMA workloads such as high-speed NIC and AI accelerator
-> inference. The existing swiotlb pool allocator restricts placement to
-> low memory (below 4GB by default), capping usable pool size at ~1GB even
-> when a larger pool is requested via swiotlb=<nslabs>.
-> 
-> The SWIOTLB_ANY flag already exists to lift this restriction, and
-> swiotlb_init_remap() already handles it correctly via the flags
-> parameter (see CONFIG_SWIOTLB_DYNAMIC path: io_tlb_default_mem.phys_limit
-> is set to virt_to_phys(high_memory-1) when SWIOTLB_ANY is set).
-> 
-> However, there is no way to set SWIOTLB_ANY from the command line. The
-> only existing mechanism was via arch-specific code (e.g. powerpc SVM sets
-> SWIOTLB_ANY in pci_iommu_init). x86 CoCo guests have no such path.
-> 
-> After Aneesh  series ("dma-mapping: Track shared DMA state through
-> direct, pool and swiotlb paths", https://patchwork.kernel.org/project/linux-arm-kernel/cover/20260701054926.825925-1-aneesh.kumar@kernel.org/)
-> removes SWIOTLB_FORCE, x86 pci_swiotlb_detect() leaves x86_swiotlb_flags = 0 for
-> CoCo guests. The pool falls back to low memory and caps at ~1GB:
+On Wed, 8 Jul 2026 14:17:51 +0200, Stephan Gerhold
+<stephan.gerhold@linaro.org> said:
+> On Mon, Jun 29, 2026 at 12:01:08PM +0200, Bartosz Golaszewski wrote:
+>>
+>> @@ -1064,9 +1220,23 @@ static void bam_start_dma(struct bam_chan *bchan)
+>>
+>>  	lockdep_assert_held(&bchan->vc.lock);
+>>
+>> +	vd = vchan_next_desc(&bchan->vc);
+>>  	if (!vd)
+>>  		return;
+>>
+>> +	/*
+>> +	 * Wrap the issued work with a LOCK/UNLOCK pair exactly once, at the
+>> +	 * start of a fresh sequence and only when there is real work to lock
+>> +	 * around. On a re-entry after a full FIFO, we see the BAM is locked
+>> +	 * and must not add another pair we simply continue loading the
+>> +	 * remainder of the same locked sequence.
+>> +	 */
+>> +	if (!bchan->bam_locked) {
+>> +		ret = bam_setup_pipe_lock(bchan);
+>> +		if (ret == 0 && bchan->bam_locked)
+>> +			vd = vchan_next_desc(&bchan->vc);
+>> +	}
+>
+> I *suspect* though that Sashiko is right about the new race condition
+> here if new descriptors are queued while the hardware is busy processing
+> a locked sequence.
+>
+> https://sashiko.dev/#/patchset/20260629-qcom-qce-cmd-descr-v20-0-56f67da84c05%40oss.qualcomm.com?part=6
+>
+> Any idea how to fix this?
+>
 
-This is entirely irrelevant; SWIOTLB_FORCE has no impact on allocation 
-behaviour anyway. x86 wasn't passing SWIOTLB_ANY before and it still 
-isn't, although there doesn't seem to be any particular reason why the 
-well-reviewed patch for that hasn't been picked up:
+We could move the bam_clocked clearing from the IRQ handler into
+bam_start_dma(), right after the UNLOCK descriptor is committed to the FIFO.
+Basically track the state at queue-time, not at interrupt time. Once we commit
+the UNLOCK, the locked range of descriptors is "sealed". If there's more work,
+we'd call bam_setup_pipe_lock() again with a new "sealed" range surrounded
+by LOCK/UNLOCK.
 
-https://lore.kernel.org/lkml/20260625012616.2992535-1-jun.miao@intel.com/
-
->    Without "any": pool at 0x35a9c000 (~900MB, below 4GB boundary)
->    With    "any": pool at 0x1df9c00000 (~120GB, anywhere in RAM)
->    [Tested on AMD SEV-SNP guest, swiotlb=4194304]
-> 
-> Add "any" as a new keyword to the swiotlb= kernel parameter. This is an
-> explicit, opt-in mechanism that sets SWIOTLB_ANY for the default pool at
-> boot time, without touching any arch-specific code.
-> 
-> Devices with 32-bit DMA masks are not affected, they still use the normal
-> low-memory bounce buffer path. The "any" option is only meaningful for
-> workloads where all active DMA devices have 64-bit masks.
-
-That doesn't make any sense - if a user passes this option then any 
-devices with DMA addressing limitations definitely *are* going to be 
-affected, and quite likely broken altogether. If anything, the 
-documentation should be even more explicit that this should only be used 
-if you do know for sure that no devices have DMA addressing limitations.
-
-As a general SWIOTLB-behaviour-debugging option for orthogonality with 
-force/noforce I'm not opposed to the idea, but it is definitely not 
-something that real CoCo use-cases should rely on - if the general 
-consensus if that CoCo environments want a different setup by default 
-then the arch/CoCo code should be taking care of that.
-
-Thanks,
-Robin.
-
-> Signed-off-by: Aakarsh Jain <aakarsh.jain@oss.qualcomm.com>
-> ---
->   Documentation/admin-guide/kernel-parameters.txt | 5 ++++-
->   kernel/dma/swiotlb.c                            | 5 +++++
->   2 files changed, 9 insertions(+), 1 deletion(-)
-> 
-> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-> index b5493a7f8f22..8a1fccbd9b25 100644
-> --- a/Documentation/admin-guide/kernel-parameters.txt
-> +++ b/Documentation/admin-guide/kernel-parameters.txt
-> @@ -7477,7 +7477,7 @@ Kernel parameters
->   			Execution Facility on pSeries.
->   
->   	swiotlb=	[ARM,PPC,MIPS,X86,S390,EARLY]
-> -			Format: { <int> [,<int>] | force | noforce }
-> +			Format: { <int> [,<int>] | force | noforce | any}
->   			<int> -- Number of I/O TLB slabs
->   			<int> -- Second integer after comma. Number of swiotlb
->   				 areas with their own lock. Will be rounded up
-> @@ -7485,6 +7485,9 @@ Kernel parameters
->   			force -- force using of bounce buffers even if they
->   			         wouldn't be automatically used by the kernel
->   			noforce -- Never use bounce buffers (for debugging)
-> +			any --  Allow the swiotlb pool to be placed anywhere in
-> +				system RAM, lifting the default low-memory (4GB)
-> +				restriction.
->   
->   	switches=	[HW,M68k,EARLY]
->   
-> diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
-> index 1abd3e6146f4..34773ae7c770 100644
-> --- a/kernel/dma/swiotlb.c
-> +++ b/kernel/dma/swiotlb.c
-> @@ -80,6 +80,7 @@ struct io_tlb_slot {
->   
->   static bool swiotlb_force_bounce;
->   static bool swiotlb_force_disable;
-> +static unsigned int swiotlb_param_flags __initdata;
->   
->   #ifdef CONFIG_SWIOTLB_DYNAMIC
->   
-> @@ -198,6 +199,8 @@ setup_io_tlb_npages(char *str)
->   		swiotlb_force_bounce = true;
->   	else if (!strcmp(str, "noforce"))
->   		swiotlb_force_disable = true;
-> +	else if (!strcmp(str, "any"))
-> +		swiotlb_param_flags |= SWIOTLB_ANY;
->   
->   	return 0;
->   }
-> @@ -445,6 +448,8 @@ int swiotlb_init_late(size_t size, gfp_t gfp_mask,
->   
->   	io_tlb_default_mem.force_bounce = swiotlb_force_bounce;
->   
-> +	flags |= swiotlb_param_flags;
-> +
->   #ifdef CONFIG_SWIOTLB_DYNAMIC
->   	if (!remap)
->   		io_tlb_default_mem.can_grow = true;
-
+Bart
 
