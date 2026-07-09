@@ -1,136 +1,188 @@
-Return-Path: <linux-doc+bounces-95926-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95927-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id rKqLFg18T2q2hwIAu9opvQ
-	(envelope-from <linux-doc+bounces-95926-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 12:46:37 +0200
+	id QqwkHsd9T2pPiAIAu9opvQ
+	(envelope-from <linux-doc+bounces-95927-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 12:53:59 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3FD4172FD36
-	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 12:46:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C8E6372FE9C
+	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 12:53:50 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linux.dev header.s=key1 header.b=qMtUZfQW;
-	dmarc=pass (policy=none) header.from=linux.dev;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95926-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-95926-lists+linux-doc=lfdr.de@vger.kernel.org";
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=temperror ("DNS error when getting key") header.d=redadmin.org header.s=20231208space header.b=ll9PLPn3;
+	dmarc=temperror reason="query timed out" header.from=redadmin.org (policy=temperror);
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95927-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-95927-lists+linux-doc=lfdr.de@vger.kernel.org";
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 8520130C1CF7
-	for <lists+linux-doc@lfdr.de>; Thu,  9 Jul 2026 10:28:08 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 4C0A130516D4
+	for <lists+linux-doc@lfdr.de>; Thu,  9 Jul 2026 10:34:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 959683AD535;
-	Thu,  9 Jul 2026 10:28:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8B376405C21;
+	Thu,  9 Jul 2026 10:34:26 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-186.mta0.migadu.com (out-186.mta0.migadu.com [91.218.175.186])
+Received: from www.redadmin.org (bc043154.ppp.asahi-net.or.jp [222.228.43.154])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 110A8403B07
-	for <linux-doc@vger.kernel.org>; Thu,  9 Jul 2026 10:28:00 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783592882; cv=none; b=nJ0fsYHWAsrXB/CtVTWOos3f6d9Aq1WC+hIM3WJPXwZBqQvC3jEvTkDydvhQ4wNwPH5672Q0f6oi8AQsX2dO/eFspfVSQaqLvQzYtvzxCW3vlQTEU8X+C7xCo3fN873rtZb2q0ypbVeVu5mB0wRsSqn42mBTc2Wbxg3soGtTAbg=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783592882; c=relaxed/simple;
-	bh=MxLey4kR4pPKpR8Eqs6jpbSuCMQEbnoM8JXbBb9w8kA=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=k5xrRaQ/u00ggq+/StbU1Nox/UC6Xe1uMrYHQXpSpkXD2GcaU6gC4AF7PrxyMcciZsrvuxN7rIekDqjGqUtNyutmANWKKFIve8v8+VrV/daIrdedENiKndl5WEvoaMtH9rFBS2hYchQZP/XI8ao1e+WonLAORdf79+Ra+TYHcmg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=qMtUZfQW; arc=none smtp.client-ip=91.218.175.186
-X-Forwarded-Encrypted: i=1; AHgh+Rpuwipyja8JnfwW6W+PrskGUKDEmFVBFdrOMNihUC8zYPP7YyDN3+J8QoaTguPtl1jFFzogE1VuH1s=@vger.kernel.org
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1783592879;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=MxLey4kR4pPKpR8Eqs6jpbSuCMQEbnoM8JXbBb9w8kA=;
-	b=qMtUZfQWBJHXylSaH+WIU/LECbY1mNBLUxpYrOZmX/bh5EqZygB8qCG9NPmauuxgNtuIBb
-	8F7Cz4Y0f30GUw/VmKWodmMt1iV5PrUiw1jOfvIf83M6BUmcmKLqJrtYOHOwFY9g2Y4Sve
-	S/2SG/5mf0Av0DbAcpr6jjjspGBkKZ4=
-X-Gm-Message-State: AOJu0YyTcwfv/F4duee9onJSxZ6QK8UD5STDTT0FkUU8UcwpC9JdaKkg
-	2UfQJByVUO6HnxY/437b67DJ7kdwvmpyDKKCOxgegBOBDynl6lsCthfo3B24UgIE9Xxm6csaZCc
-	lIN8eLsUjf9DrbEL7c+h4nWeLVOonpd2IGEHDKUOZ
-X-Received: by 2002:a05:622a:248b:b0:517:5ac7:332e with SMTP id
- d75a77b69052e-51c9a7990e9mr6344801cf.6.1783592838569; Thu, 09 Jul 2026
- 03:27:18 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D85C3FAE10;
+	Thu,  9 Jul 2026 10:34:21 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783593266; cv=pass; b=hvAACxfHIZNVR78PrAGUHTAbCy+FzhLNgDeuTmcMzGvic/3MEBsfMYjN+gsfu0jypIjX4DSzht00ILY7nNGFa7j8p3zA/XW3ZGzuf6tSLDRVssUokuCdPmdFd345y9FSzT6S+6B7RopTfZuRez8v5tnfT0nDBpjiCKPcnBMKHlY=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783593266; c=relaxed/simple;
+	bh=5xFHYt5qaN8ud9dn9divYtXE4YYsc1tBGY0Icd09ttI=;
+	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
+	 Message-ID:Content-Type; b=YSOiLzAU2wWYxfA3aKP9OABtg82a4QU5sL4a9gVGcorDhEcQ1PJuGIAMhOS1uDaRUk5bTup4rrU36s+Dh15IkLwTiAMtuQM03icr2gA7PtLxvvPFP01RBnN9DzJAk+wGst+a7Y6FwsG3CISWTUR3K3pV6xNFvlCO+lJQnCuVDNQ=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redadmin.org; spf=pass smtp.mailfrom=redadmin.org; dkim=pass (1024-bit key) header.d=redadmin.org header.i=@redadmin.org header.b=ll9PLPn3; arc=pass smtp.client-ip=222.228.43.154
+Received: from localhost (localhost [127.0.0.1])
+	by www.redadmin.org (Postfix) with ESMTP id 3559F10B40B6F;
+	Thu,  9 Jul 2026 19:34:19 +0900 (JST)
+X-Virus-Scanned: amavis at redadmin.org
+Received: from www.redadmin.org ([127.0.0.1])
+ by localhost (redadmin.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id E7Q9O2v-OmhP; Thu,  9 Jul 2026 19:34:15 +0900 (JST)
+DMARC-Filter: OpenDMARC Filter v1.4.2 www.redadmin.org 64F8B10B40B4F
+ARC-Seal: i=1; d=redadmin.org; s=20231208space; a=rsa-sha256; cv=none;
+	t=1783593255;
+	b=u0S0xl7PNn3zd8swXKwyhKmXXWqJt0sgNb2CybRB1hHiDhm4SkavgQu/JnnvCEQB5C7v
+	 AyzUgZUVByaEPBm1urYsu35MI0NFnv1avf8YF68h2urXZU9KSM8KeiorLNc+GCpKHYSSE
+	 CMEzi0IqJvbmwepP5ohfyowtfjr7WckuA8=
+ARC-Message-Signature: i=1; d=redadmin.org; s=20231208space; a=rsa-sha256;
+	c=relaxed/relaxed; t=1783593255;
+	h=DKIM-Filter:DKIM-Signature:MIME-Version:Date:From:To:Cc:Subject:
+	 In-Reply-To:References:Message-ID:X-Sender:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=gbZc01zxm/XHB6OiBBKkn4ZbxstPNHgzEI2Wpvn33Fc=;
+	b=JNmskrwSDvu5Uae1apCCJ6W7lPpyqkuzESO+FdtVuVLdMsetay2Q2zpBDpJjieOHwHhq
+	 dXw+1xwygMcc85ElBQHkIMVoXsEPgxrjcm5wiCdB7E6MA3kzxtNAChcr89SJ/Ywje9iyf
+	 eVVjIRnh1sn7PUDVXq1bQPxTq0NetGpnL4=
+ARC-Authentication-Results: i=1; www.redadmin.org; arc=none smtp.remote-ip=192.168.11.50
+Received: from webmail.redadmin.org (redadmin.org [192.168.11.50])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (P-256) server-digest SHA256)
+	(Client did not present a certificate)
+	(Authenticated sender: weibu@redadmin.org)
+	by www.redadmin.org (Postfix) with ESMTPSA id 64F8B10B40B4F;
+	Thu,  9 Jul 2026 19:34:15 +0900 (JST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 www.redadmin.org 64F8B10B40B4F
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redadmin.org;
+	s=20231208space; t=1783593255;
+	bh=gbZc01zxm/XHB6OiBBKkn4ZbxstPNHgzEI2Wpvn33Fc=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=ll9PLPn3NZQ8kPtYcEzPI5wnrdNLXJpSPHfMWrAEXAFwU/zfErwl1vzqTZh9efhq/
+	 q95+kSZg2nElRD/FFOZTPP/GEcRLddHOkRlSPeTVnvMGs0daumBqgjFmSb4JKTO5jG
+	 5PPiSqLkC64SxZC02qOo5+xiUlhbNC9kGs0mPU98=
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260709-kvm-arm64-sme-v11-0-32799f66db9d@kernel.org>
-In-Reply-To: <20260709-kvm-arm64-sme-v11-0-32799f66db9d@kernel.org>
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Fuad Tabba <fuad.tabba@linux.dev>
-Date: Thu, 9 Jul 2026 11:26:41 +0100
-X-Gmail-Original-Message-ID: <CA+EHjTyAxBx4jhGq-Gme5hPi1ZyDAkL2CP_U22ykkQemD1dUhg@mail.gmail.com>
-X-Gm-Features: AUfX_mwpyfAsKpUMf2tNxcvppePr82pc_iCQFLAefIFcUoHnYHNmsUIYIv4f_m4
-Message-ID: <CA+EHjTyAxBx4jhGq-Gme5hPi1ZyDAkL2CP_U22ykkQemD1dUhg@mail.gmail.com>
-Subject: Re: [PATCH v11 00/29] KVM: arm64: Implement support for SME
-To: Mark Brown <broonie@kernel.org>
-Cc: Marc Zyngier <maz@kernel.org>, Joey Gouly <joey.gouly@arm.com>, 
-	Catalin Marinas <catalin.marinas@arm.com>, Suzuki K Poulose <suzuki.poulose@arm.com>, 
-	Will Deacon <will@kernel.org>, Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
-	Shuah Khan <shuah@kernel.org>, Oliver Upton <oupton@kernel.org>, Dave Martin <Dave.Martin@arm.com>, 
-	Mark Rutland <mark.rutland@arm.com>, Ben Horgan <ben.horgan@arm.com>, 
-	Jean-Philippe Brucker <jpb@kernel.org>, linux-arm-kernel@lists.infradead.org, 
-	kvmarm@lists.linux.dev, linux-kernel@vger.kernel.org, kvm@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
-	Peter Maydell <peter.maydell@linaro.org>, Eric Auger <eric.auger@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Migadu-Flow: FLOW_OUT
+Date: Thu, 09 Jul 2026 19:34:15 +0900
+From: weibu@redadmin.org
+To: Randy Dunlap <rdunlap@infradead.org>
+Cc: Akira Yokosawa <akiyks@gmail.com>, Jonathan Corbet <corbet@lwn.net>,
+ Shuah Khan <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH -next] docs: submitting-patches: Fix section structure
+ around DCO
+In-Reply-To: <1bf78dca-1651-4173-938c-d76b3c8db229@infradead.org>
+References: <5f320260-5cb0-42cc-949a-c92404124618@gmail.com>
+ <1bf78dca-1651-4173-938c-d76b3c8db229@infradead.org>
+Message-ID: <e942938989f17a884019324412d33031@redadmin.org>
+X-Sender: weibu@redadmin.org
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
+X-Spamd-Result: default: False [-1.46 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
 	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-95927-lists,linux-doc=lfdr.de];
+	FROM_NEQ_ENVFROM(0.00)[weibu@redadmin.org,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[gmail.com,lwn.net,linuxfoundation.org,vger.kernel.org];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:broonie@kernel.org,m:maz@kernel.org,m:joey.gouly@arm.com,m:catalin.marinas@arm.com,m:suzuki.poulose@arm.com,m:will@kernel.org,m:pbonzini@redhat.com,m:corbet@lwn.net,m:shuah@kernel.org,m:oupton@kernel.org,m:Dave.Martin@arm.com,m:mark.rutland@arm.com,m:ben.horgan@arm.com,m:jpb@kernel.org,m:linux-arm-kernel@lists.infradead.org,m:kvmarm@lists.linux.dev,m:linux-kernel@vger.kernel.org,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:peter.maydell@linaro.org,m:eric.auger@redhat.com,s:lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[3];
-	FORGED_SENDER(0.00)[fuad.tabba@linux.dev,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	TAGGED_FROM(0.00)[bounces-95926-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[redadmin.org:?];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:rdunlap@infradead.org,m:akiyks@gmail.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[weibu@redadmin.org,linux-doc@vger.kernel.org];
 	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[fuad.tabba@linux.dev,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linux.dev:+];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
 	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sashiko.dev:url,vger.kernel.org:from_smtp,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,linux.dev:from_mime,linux.dev:dkim,mail.gmail.com:mid]
+	RCPT_COUNT_FIVE(0.00)[6];
+	RCVD_COUNT_FIVE(0.00)[6];
+	ALIAS_RESOLVED(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NO_DN(0.00)[];
+	DMARC_DNSFAIL(0.00)[redadmin.org : query timed out];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	R_DKIM_TEMPFAIL(0.00)[redadmin.org:s=20231208space];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,vger.kernel.org:from_smtp,infradead.org:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 3FD4172FD36
+X-Rspamd-Queue-Id: C8E6372FE9C
 
-Hi Mark,
-
-[snip]
-
-> base-commit: 4c45e14df2f4e77982ad70d6d8e3fe750edd4c37
-
-I think this SHA is local to your tree. I can't locate it, and neither
-could Sashiko [1, 2]. For a series this big and complex, it would be
-good to get Sashiko to review it. Could you please fix that?
+Maybe it would be better to send this as a follow-up patch after the 
+original patch is merged, to avoid unnecessary churn.
 
 Thanks,
-/fuad
+Akiyoshi Kurita
 
-[1] https://sashiko.dev/#/patchset/20260709-kvm-arm64-sme-v11-0-32799f66db9d%40kernel.org
-[2] https://sashiko.dev/#/log/baseline/42725/0
 
-> change-id: 20230301-kvm-arm64-sme-06a1246d3636
->
-> Best regards,
-> --
-> Mark Brown <broonie@kernel.org>
->
+2026-07-09 06:04 に Randy Dunlap さんは書きました:
+> Hi,
+> 
+> On 7/2/26 3:44 AM, Akira Yokosawa wrote:
+>> Commit 5903019b2a5e ("Documentation/SubmittingPatches: convert it to
+>> ReST markup") made "DCO 1.1" a subsection under the section "Sign your
+>> work - ...".  However, the DCO text is meant to be referenced in the
+>> section.
+>> 
+>> Furthermore, in HTML and PDF docs, paragraphs following the DCO:
+>> 
+>>     then you just add a line saying:
+>> 
+>>         Signed-off-by: [...]
+>> 
+>>     [...]
+>>     as it was propagated to the maintainers and ultimately to Linus, 
+>> with
+>>     the first SoB entry signalling primary authorship of a single 
+>> author.
+>> 
+>> appear to belong to the DCO, rather than to "Sign your work - ..."
+>> where it should.
+>> 
+>> In reST (and other documentation tools), once you start a subsection
+>> under a section, there is no way to go back to the section.
+>> 
+>> Fix the section structure by making the DCO a literal block, with
+>> indent changes made in commit 5903019b2a5e reverted.
+> 
+> I don't see much difference in the before and after HTML
+> other than the use of literal blocks, which do make it a
+> small bit clearer where the DCO/Reviewer's blocks are.
+> 
+> Tested-by: Randy Dunlap <rdunlap@infradead.org>
+> Acked-by: Randy Dunlap <rdunlap@infradead.org>
+> 
+> Thanks.
+> 
+>> While at it, fix the same issue at "Reviewer's statement of
+>> oversight".
+>> 
+>> Signed-off-by: Akira Yokosawa <akiyks@gmail.com>
+>> ---
+>>  Documentation/process/submitting-patches.rst | 14 ++++++--------
+>>  1 file changed, 6 insertions(+), 8 deletions(-)
 
