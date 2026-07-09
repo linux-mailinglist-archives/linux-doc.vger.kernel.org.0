@@ -1,52 +1,52 @@
-Return-Path: <linux-doc+bounces-95925-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95926-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id BgRIGA18T2q4hwIAu9opvQ
-	(envelope-from <linux-doc+bounces-95925-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	id rKqLFg18T2q2hwIAu9opvQ
+	(envelope-from <linux-doc+bounces-95926-lists+linux-doc=lfdr.de@vger.kernel.org>)
 	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 12:46:37 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5ED8C72FD37
+	by mail.lfdr.de (Postfix) with ESMTPS id 3FD4172FD36
 	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 12:46:36 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linux.dev header.s=key1 header.b="AH7n639/";
+	dkim=pass header.d=linux.dev header.s=key1 header.b=qMtUZfQW;
 	dmarc=pass (policy=none) header.from=linux.dev;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95925-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-95925-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95926-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-95926-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id CDD6930C2602
-	for <lists+linux-doc@lfdr.de>; Thu,  9 Jul 2026 10:28:07 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 8520130C1CF7
+	for <lists+linux-doc@lfdr.de>; Thu,  9 Jul 2026 10:28:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 82699405C54;
-	Thu,  9 Jul 2026 10:27:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 959683AD535;
+	Thu,  9 Jul 2026 10:28:02 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from out-186.mta0.migadu.com (out-186.mta0.migadu.com [91.218.175.186])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E9AE7405C44
-	for <linux-doc@vger.kernel.org>; Thu,  9 Jul 2026 10:27:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 110A8403B07
+	for <linux-doc@vger.kernel.org>; Thu,  9 Jul 2026 10:28:00 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783592877; cv=none; b=GdwfDco1d5F5x9QIbpaZFZ76xR47wgFRjohpNhHOnUnR+LXkPU6FUTRyrDOvlhVT8G+rsvCGemJ12soU9TvEAGJ2c4rJALovst6sVwTVwjVcZGzPxRw52iRElEjt4f2rd9kj3Q1qU94s44zDvzUpkEabKXch7SxrdGgsnuXlAhQ=
+	t=1783592882; cv=none; b=nJ0fsYHWAsrXB/CtVTWOos3f6d9Aq1WC+hIM3WJPXwZBqQvC3jEvTkDydvhQ4wNwPH5672Q0f6oi8AQsX2dO/eFspfVSQaqLvQzYtvzxCW3vlQTEU8X+C7xCo3fN873rtZb2q0ypbVeVu5mB0wRsSqn42mBTc2Wbxg3soGtTAbg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783592877; c=relaxed/simple;
+	s=arc-20240116; t=1783592882; c=relaxed/simple;
 	bh=MxLey4kR4pPKpR8Eqs6jpbSuCMQEbnoM8JXbBb9w8kA=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=ueTuyyBCkrE7GuKbJ4xzOaWLZjnaKltSr23SFtl0Hs5uktdSAcUXZBwiwdwlzl46WMqxta4DlCjRTc5+GvE1Z5YsZ6xZmCCd6zxnu7FtYHFI4uNdbIfnB4Wf+xhzuoAj+/OB1aSCQFwoZU3aaKYAYV3QaS/6zq8aptyBIOHFyrg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=AH7n639/; arc=none smtp.client-ip=91.218.175.186
-X-Forwarded-Encrypted: i=1; AHgh+RpnySxn/BUK5oNhiUSmVEZjbnvXljN6xOiXrYho5qBnj6S1YFbAe0w5FL2EtFHSdIm4WgfO6eM+I94=@vger.kernel.org
+	 To:Cc:Content-Type; b=k5xrRaQ/u00ggq+/StbU1Nox/UC6Xe1uMrYHQXpSpkXD2GcaU6gC4AF7PrxyMcciZsrvuxN7rIekDqjGqUtNyutmANWKKFIve8v8+VrV/daIrdedENiKndl5WEvoaMtH9rFBS2hYchQZP/XI8ao1e+WonLAORdf79+Ra+TYHcmg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=qMtUZfQW; arc=none smtp.client-ip=91.218.175.186
+X-Forwarded-Encrypted: i=1; AHgh+Rpuwipyja8JnfwW6W+PrskGUKDEmFVBFdrOMNihUC8zYPP7YyDN3+J8QoaTguPtl1jFFzogE1VuH1s=@vger.kernel.org
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1783592874;
+	t=1783592879;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
 	bh=MxLey4kR4pPKpR8Eqs6jpbSuCMQEbnoM8JXbBb9w8kA=;
-	b=AH7n639/kFMdW2L2km1GnBr6sw4dlcqv74kgpxCCm7WLW3pE/kaUZ8w0Fl8IONuvz5hTo8
-	Vx58s8Vz77XTmpqRsHhkOtLwmnGqaSt716p0kJwuVaA4sQCJrS4XcLumaz4hQPxXh5YMvl
-	Nbbj2gvvj7SI579exTdnyWlFoeJKIQM=
-X-Gm-Message-State: AOJu0YyuTRxi1aMvPvHRP2EeK8N710nY4l9U/FyhVX88lJXtJLoNoAjT
-	CNbpNUvEJzxjf1zMKyiyC481GudzZKdP2UVUu9Vd5455oKbVtG1Lw1k4t9hI0H/rvtK7wH5MXqu
-	Wh1V7jOPIBTrmXle81YUZNaS75cefR27BOyvXqzYT
+	b=qMtUZfQWBJHXylSaH+WIU/LECbY1mNBLUxpYrOZmX/bh5EqZygB8qCG9NPmauuxgNtuIBb
+	8F7Cz4Y0f30GUw/VmKWodmMt1iV5PrUiw1jOfvIf83M6BUmcmKLqJrtYOHOwFY9g2Y4Sve
+	S/2SG/5mf0Av0DbAcpr6jjjspGBkKZ4=
+X-Gm-Message-State: AOJu0YyTcwfv/F4duee9onJSxZ6QK8UD5STDTT0FkUU8UcwpC9JdaKkg
+	2UfQJByVUO6HnxY/437b67DJ7kdwvmpyDKKCOxgegBOBDynl6lsCthfo3B24UgIE9Xxm6csaZCc
+	lIN8eLsUjf9DrbEL7c+h4nWeLVOonpd2IGEHDKUOZ
 X-Received: by 2002:a05:622a:248b:b0:517:5ac7:332e with SMTP id
  d75a77b69052e-51c9a7990e9mr6344801cf.6.1783592838569; Thu, 09 Jul 2026
  03:27:18 -0700 (PDT)
@@ -92,7 +92,7 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	FORGED_SENDER(0.00)[fuad.tabba@linux.dev,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[22];
-	TAGGED_FROM(0.00)[bounces-95925-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-95926-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
@@ -109,7 +109,7 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sashiko.dev:url,vger.kernel.org:from_smtp,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,linux.dev:from_mime,linux.dev:dkim,mail.gmail.com:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 5ED8C72FD37
+X-Rspamd-Queue-Id: 3FD4172FD36
 
 Hi Mark,
 
