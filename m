@@ -1,152 +1,136 @@
-Return-Path: <linux-doc+bounces-95923-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95924-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id j4cWC5l3T2oOhQIAu9opvQ
-	(envelope-from <linux-doc+bounces-95923-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 12:27:37 +0200
+	id 4LNaAPR3T2ofhQIAu9opvQ
+	(envelope-from <linux-doc+bounces-95924-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 12:29:08 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id D3F3E72F946
-	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 12:27:36 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A9B272F96D
+	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 12:29:07 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=DTci9JOW;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95923-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-95923-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=linux.dev header.s=key1 header.b=nLVeQaVS;
+	dmarc=pass (policy=none) header.from=linux.dev;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95924-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95924-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id EB56B305DBD7
-	for <lists+linux-doc@lfdr.de>; Thu,  9 Jul 2026 10:26:18 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id E80D530253B3
+	for <lists+linux-doc@lfdr.de>; Thu,  9 Jul 2026 10:28:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B9BD33F23D0;
-	Thu,  9 Jul 2026 10:26:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 01702405C4A;
+	Thu,  9 Jul 2026 10:27:54 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from out-178.mta0.migadu.com (out-178.mta0.migadu.com [91.218.175.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 61E0A401A13;
-	Thu,  9 Jul 2026 10:26:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 72DC0406271
+	for <linux-doc@vger.kernel.org>; Thu,  9 Jul 2026 10:27:52 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783592776; cv=none; b=DQQh47EACezCzAwWUxDECoyC8Y/YP1G4gQm4TPnjgnuVh3UzUMO3cOKwY21QEu8OU+MHbQzemZg1sv+4aYaZcJPPOdBFZaB0l5v5MDu8l2Sx1tTGVEU6IH1T/cDeQj3lxiFdn2XHoPm9d83Gx9JpQyxnVtjmM9O+p0MFVKqEIRY=
+	t=1783592873; cv=none; b=SvhS31+6ZSZJa7xPNPMqtbrCWRGJ0Nu5MyPs6vn1tGe/H91avnkv/uhdJdJJ1P+uVKVcy6qhNkBnl4HQAqs86fa8XiSWEr4T08WC7ugLDiFtbfIZM7p176KhWBkWTAXQ3VPiYS++EYCi5ReW2ZzA74nLY8qWXbn+NYHyq7Wer88=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783592776; c=relaxed/simple;
-	bh=5HjcXSURjY/ODwJG9TdR5EZq9MDPqVY6MvHd7UOAfrM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=kP98fGMbRLXpyGNSj3BwjmYF7PZ7xAyT3ucvrGUxHekqZqXLJsiu0wOQTDsYEInYKy5VQonn1DG6CD/lFgosk27ZyOt9L/WQa5Fcrly7fUSI29S3Lmbt59CmVuvfKyXSjeJkWYru4M3/hffC+vsSvqnuPcbYS/m8Y3TNxIawCQc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DTci9JOW; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 85ADD1F00A3A;
-	Thu,  9 Jul 2026 10:26:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783592775;
-	bh=TPdVHdBqE78Tyd4PBWnjxJl0mWtpdEwQn28B3/SGb/w=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=DTci9JOWIGHKfBoQb3CBfSV1SkaFony1B9cQxR/582XmSaBE0WcAVXehCunpqUihN
-	 FcSL9fchO9EriU8hNo2GAlseP1MoOnrrdV/AyxTRDEq1Ol5ptedub8IwkszrzuqoEY
-	 swWIWr9i1t5L/RQDig18MQO15ZxE+C2JBWaEWTU4bG25OzyCJ51zbowDDHd3UFF5XE
-	 f3PMBjDE+iF6kT+TtVb99M0QRkFKJaZDrOEDpLo7xKZuZMAIMY60GLDzL1TodfoyH4
-	 Wv9HTOujAGR4LZKtOqXySgP/XHA8H65aLq/KqyUT0ASQ0/EqW7VhIL1rPzLeQcwxQS
-	 uTq86OLThc6Rg==
-Date: Thu, 9 Jul 2026 11:26:08 +0100
-From: Sudeep Holla <sudeep.holla@kernel.org>
-To: Shyam Saini <shyamsaini@linux.microsoft.com>
-Cc: Catalin Marinas <catalin.marinas@arm.com>,
-	Sudeep Holla <sudeep.holla@kernel.org>,
-	Mike Rapoport <rppt@kernel.org>, ardb@kernel.org, david@kernel.org,
-	will@kernel.org, linux-arm-kernel@lists.infradead.org,
-	akpm@linux-foundation.org, bboscaccy@linux.microsoft.com,
-	bp@alien8.de, dapeng1.mi@linux.intel.com, ebiggers@kernel.org,
-	elver@google.com, enelsonmoore@gmail.com,
-	feng.tang@linux.alibaba.com, gpiccoli@igalia.com, kees@kernel.org,
-	kuba@kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-mm@kvack.org,
-	lirongqing@baidu.com, peterz@infradead.org, rdunlap@infradead.org,
-	tgopinath@linux.microsoft.com, tony.luck@intel.com,
-	Lorenzo Pieralisi <lpieralisi@kernel.org>,
-	Hanjun Guo <guohanjun@huawei.com>
-Subject: Re: [RFC v2 PATCH] reserve_mem: add support for static memory
-Message-ID: <20260709-educational-nimble-seagull-5fc031@sudeepholla>
-References: <20260630170911.43521-1-shyamsaini@linux.microsoft.com>
- <ak4fu1qINGyAQUEl@arm.com>
- <ak7tTVs6tWZPOln0@linuxonhyperv3.guj3yctzbm1etfxqx2vob5hsef.xx.internal.cloudapp.net>
+	s=arc-20240116; t=1783592873; c=relaxed/simple;
+	bh=MxLey4kR4pPKpR8Eqs6jpbSuCMQEbnoM8JXbBb9w8kA=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=JadtTaNoL3TBrButQftgG6P5WeU8Gt4EijVibp/PgyVCSS+zKvxq6l16UrgZY3oZ4Tl+cCCnJQci0eWWD0+GidG5L5POpsOQEajHxN36kp+ognn8xaWZgYz96iw53PaHEXbEoo0eCODoFjA/lvcJ8DhS1I4zGo2mYEjzanaJpEU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=nLVeQaVS; arc=none smtp.client-ip=91.218.175.178
+X-Forwarded-Encrypted: i=1; AHgh+RomHDiPQLnV2qxxvUGXBD9n14E+Kms6GkoZn5wcps10aLu3O9El17NmWV6W+5m7dzfMAoFYSVVhXAw=@vger.kernel.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1783592870;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=MxLey4kR4pPKpR8Eqs6jpbSuCMQEbnoM8JXbBb9w8kA=;
+	b=nLVeQaVS6jw9oSwr7kWZ3wDXEM4E5XS2JjgNe2OcBEY4h23FjgefANrfWJlsrzBIUrfXJV
+	7FuwdpBxCGuSCtuKpDmab6X230eKpLF12CVv8yOl3zAYnWDeRjpfG7B3+CwgHlNfX5nPEV
+	1juqAwP7Nwqe4EXGFYT1oqh7PKmDrx8=
+X-Gm-Message-State: AOJu0Yx5mAXekHKyREEQXuc7TpqM8YABWcuXzFDizHpPBXKfsABpWbCh
+	vdE2bcQrugMqhKiE4h1jN30GbuSOwvZ6o1PMO5kur26/EVSNSL1y8h+SHT0jsOJhEO3XZAVEh3A
+	fLPSkciI96705L2lLchR3tDFM5SoiJADbkiJM5App
+X-Received: by 2002:a05:622a:248b:b0:517:5ac7:332e with SMTP id
+ d75a77b69052e-51c9a7990e9mr6344801cf.6.1783592838569; Thu, 09 Jul 2026
+ 03:27:18 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ak7tTVs6tWZPOln0@linuxonhyperv3.guj3yctzbm1etfxqx2vob5hsef.xx.internal.cloudapp.net>
+References: <20260709-kvm-arm64-sme-v11-0-32799f66db9d@kernel.org>
+In-Reply-To: <20260709-kvm-arm64-sme-v11-0-32799f66db9d@kernel.org>
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Fuad Tabba <fuad.tabba@linux.dev>
+Date: Thu, 9 Jul 2026 11:26:41 +0100
+X-Gmail-Original-Message-ID: <CA+EHjTyAxBx4jhGq-Gme5hPi1ZyDAkL2CP_U22ykkQemD1dUhg@mail.gmail.com>
+X-Gm-Features: AUfX_mwpyfAsKpUMf2tNxcvppePr82pc_iCQFLAefIFcUoHnYHNmsUIYIv4f_m4
+Message-ID: <CA+EHjTyAxBx4jhGq-Gme5hPi1ZyDAkL2CP_U22ykkQemD1dUhg@mail.gmail.com>
+Subject: Re: [PATCH v11 00/29] KVM: arm64: Implement support for SME
+To: Mark Brown <broonie@kernel.org>
+Cc: Marc Zyngier <maz@kernel.org>, Joey Gouly <joey.gouly@arm.com>, 
+	Catalin Marinas <catalin.marinas@arm.com>, Suzuki K Poulose <suzuki.poulose@arm.com>, 
+	Will Deacon <will@kernel.org>, Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <shuah@kernel.org>, Oliver Upton <oupton@kernel.org>, Dave Martin <Dave.Martin@arm.com>, 
+	Mark Rutland <mark.rutland@arm.com>, Ben Horgan <ben.horgan@arm.com>, 
+	Jean-Philippe Brucker <jpb@kernel.org>, linux-arm-kernel@lists.infradead.org, 
+	kvmarm@lists.linux.dev, linux-kernel@vger.kernel.org, kvm@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
+	Peter Maydell <peter.maydell@linaro.org>, Eric Auger <eric.auger@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Migadu-Flow: FLOW_OUT
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-4.66 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:shyamsaini@linux.microsoft.com,m:catalin.marinas@arm.com,m:sudeep.holla@kernel.org,m:rppt@kernel.org,m:ardb@kernel.org,m:david@kernel.org,m:will@kernel.org,m:linux-arm-kernel@lists.infradead.org,m:akpm@linux-foundation.org,m:bboscaccy@linux.microsoft.com,m:bp@alien8.de,m:dapeng1.mi@linux.intel.com,m:ebiggers@kernel.org,m:elver@google.com,m:enelsonmoore@gmail.com,m:feng.tang@linux.alibaba.com,m:gpiccoli@igalia.com,m:kees@kernel.org,m:kuba@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:lirongqing@baidu.com,m:peterz@infradead.org,m:rdunlap@infradead.org,m:tgopinath@linux.microsoft.com,m:tony.luck@intel.com,m:lpieralisi@kernel.org,m:guohanjun@huawei.com,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:broonie@kernel.org,m:maz@kernel.org,m:joey.gouly@arm.com,m:catalin.marinas@arm.com,m:suzuki.poulose@arm.com,m:will@kernel.org,m:pbonzini@redhat.com,m:corbet@lwn.net,m:shuah@kernel.org,m:oupton@kernel.org,m:Dave.Martin@arm.com,m:mark.rutland@arm.com,m:ben.horgan@arm.com,m:jpb@kernel.org,m:linux-arm-kernel@lists.infradead.org,m:kvmarm@lists.linux.dev,m:linux-kernel@vger.kernel.org,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:peter.maydell@linaro.org,m:eric.auger@redhat.com,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[3];
+	FORGED_SENDER(0.00)[fuad.tabba@linux.dev,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[29];
-	FORGED_SENDER(0.00)[sudeep.holla@kernel.org,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	TAGGED_FROM(0.00)[bounces-95924-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-95923-lists,linux-doc=lfdr.de];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[sudeep.holla@kernel.org,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[arm.com,kernel.org,lists.infradead.org,linux-foundation.org,linux.microsoft.com,alien8.de,linux.intel.com,google.com,gmail.com,linux.alibaba.com,igalia.com,vger.kernel.org,kvack.org,baidu.com,infradead.org,intel.com,huawei.com];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[fuad.tabba@linux.dev,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[linux.dev:+];
+	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sudeepholla:mid,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:from_mime,linux.dev:dkim,sashiko.dev:url,vger.kernel.org:from_smtp,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,mail.gmail.com:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: D3F3E72F946
+X-Rspamd-Queue-Id: 5A9B272F96D
 
-On Wed, Jul 08, 2026 at 05:37:33PM -0700, Shyam Saini wrote:
-> Hi Catalin,
-> 
-> On 08 Jul 2026 11:00, Catalin Marinas wrote:
-> > Hi Shyam,
-> > 
-> > Adding Lorenzo, Hanjun, Sudeep.
-> > 
-> > On Tue, Jun 30, 2026 at 10:09:11AM -0700, Shyam Saini wrote:
-> > > Following up on this, As Mike pointed that reserve_mem is best effort
-> > > reservation mechanism, so what is the recommended reliable Linux
-> > > mechanism, if any, to reserve a predetermined memory range during
-> > > early boot on ARM64/ACPI platforms for warm boot scenarios? KHO is
-> > > one option, but I'm specifically looking for a solution that preserves
-> > > the region across warm reboots.
-> > 
-> > If you need ramoops-like support, I think ACPI ERST is a better fit and
-> > we don't need any memory reservation tricks. I'll let the arm ACPI
-> > maintainers comment further.
-> > 
-> 
-> while this patch mentions use case of ramoops, there are other uses cases that
-> requires predetermined memory reservation at boot time, one of them is PMEM.
-> Like Mike pointed out in this [1] thread, we don't seem to have an
-> equivalent mechanism for reserving predetermined memory on ARM/ACPI
-> platforms, as is available on ARM/DTS based platforms.
-> 
+Hi Mark,
 
-Indeed, it was been discussed in several forums in the past but AFAIK there
-is no conclusion or a direction towards solving this yet.
+[snip]
 
--- 
-Regards,
-Sudeep
+> base-commit: 4c45e14df2f4e77982ad70d6d8e3fe750edd4c37
+
+I think this SHA is local to your tree. I can't locate it, and neither
+could Sashiko [1, 2]. For a series this big and complex, it would be
+good to get Sashiko to review it. Could you please fix that?
+
+Thanks,
+/fuad
+
+[1] https://sashiko.dev/#/patchset/20260709-kvm-arm64-sme-v11-0-32799f66db9d%40kernel.org
+[2] https://sashiko.dev/#/log/baseline/42725/0
+
+> change-id: 20230301-kvm-arm64-sme-06a1246d3636
+>
+> Best regards,
+> --
+> Mark Brown <broonie@kernel.org>
+>
 
