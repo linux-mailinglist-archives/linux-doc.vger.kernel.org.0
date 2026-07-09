@@ -1,199 +1,175 @@
-Return-Path: <linux-doc+bounces-96069-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96036-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 5u+9J2DuT2pPqgIAu9opvQ
-	(envelope-from <linux-doc+bounces-96069-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 20:54:24 +0200
+	id QppDNmTpT2qNqAIAu9opvQ
+	(envelope-from <linux-doc+bounces-96036-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 20:33:08 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 32B9E73496A
-	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 20:54:24 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 800F77344C7
+	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 20:33:08 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=om4MN8j4;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96069-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-96069-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=KWkpnfjV;
+	dmarc=pass (policy=none) header.from=gmail.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96036-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96036-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id C0D5830E3712
-	for <lists+linux-doc@lfdr.de>; Thu,  9 Jul 2026 18:45:59 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id A8A93303A251
+	for <lists+linux-doc@lfdr.de>; Thu,  9 Jul 2026 18:32:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D0EE143FD0B;
-	Thu,  9 Jul 2026 18:42:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E26814DBD60;
+	Thu,  9 Jul 2026 18:32:49 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9061B43B4A9;
-	Thu,  9 Jul 2026 18:42:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A127B3B389A
+	for <linux-doc@vger.kernel.org>; Thu,  9 Jul 2026 18:32:47 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783622539; cv=none; b=p/lcFoYaJ/HIKbeihBRMHdJf1ht2DqTj6pTo413T1GxMtbqBNICYkbDt2g0lj088vncV27zJuW2jsRoG9e13K0+chnhgvmdzwqkOQiRraJN2eZd+AR0RxYrNO0asAahuitoxn0CH63yamzicNh5rOBgH527V3MJDeKLs4bfW+yg=
+	t=1783621969; cv=none; b=MPkZbuE141bNrBU9VzpP/j8cizX8ME44hYlo6kaGO+sTMPqdgG4ogYD72XZcqzckxBvajyIvlnhjgQE95OhDzSm8H9sgVUVbqtzMRYJGsd5FUFpic/Ra4tTXjLXhX4DqTLaMomze8NQRFmHM/W5r8Isf/DI9sVNP5UURWSav4sg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783622539; c=relaxed/simple;
-	bh=q7gRFDO7XUzOJdjKk7dinZEmMYgpMJThzBI3Uxs/+tg=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=pFLNJoiIaqnxL+mpzNpmkdRMdqwl3RCA7OOsoeZV3VKZLfbGmUvIFuieEa58HHTQQ+17tSaE+m48yxQC4P6uTtgMZVglTKr8KSxIpsPPjVWSS4GnjhNCPLCnZVKzIfQYTyZgQgyo6l7LwXm2pH9FUANx5MnsrvRQofZtaBslFIA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=om4MN8j4; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0BB121F000E9;
-	Thu,  9 Jul 2026 18:42:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783622538;
-	bh=XECF9ZZpHN11rgO/zTL5kqZIcvgfBhcTmPU6H51lc1c=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=om4MN8j4T9S1gJ6RcrNGwq31Rui8bwxb6u5K24PkOrExLur4vrArun7m/ayyKeybG
-	 DRlOMhyvmeLyWYQkLI5/B/VCaZUrFC58STn6nN+nTMg02ksEUH+tbTNG73dHEsbtDj
-	 mjByXFjQWoZ77wWc89xctPmMXs+HpIq6nrfHvihBquOzFzPr4TeZRhVNj3ARHFL8Jp
-	 De3V+DCU4Ws7I58/u9BL0Yixu8GGbR6Y56/LSAjqmYpnoA1WRo41LuCmcr6ydpfU/v
-	 sJgUX26c7s+yLglWdgBcO9aSr4MjWakdqqbrv7rydFDJoLWWHDrRrvdFOIn0gua5uY
-	 i5TxpzpHs6Uew==
-From: Mark Brown <broonie@kernel.org>
-Date: Thu, 09 Jul 2026 19:27:50 +0100
-Subject: [PATCH v12 29/29] KVM: arm64: selftests: Add SME to set_id_regs
- test
+	s=arc-20240116; t=1783621969; c=relaxed/simple;
+	bh=CuadLq4gnh6A+s/YbTQsNOibHt22WuOTEhntcyj5qbU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=VggngBifPitcmTxJM6bL+r1A66hpUBAePPW+XvVAdlXSE1SnO91zTMKfqqFNLSD3/dfuFK9EvgLGwdYSJ9TQNtncL1V2aIA8LwkJx06/IpXRP1fhC//7rnu/q+oTQ2/67+myVbBOtqAqwq2xGZl4+2RyE6jUzgAWbej8jUmN8VY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=KWkpnfjV; arc=none smtp.client-ip=209.85.215.175
+Received: by mail-pg1-f175.google.com with SMTP id 41be03b00d2f7-c981c2c37cbso111839a12.0
+        for <linux-doc@vger.kernel.org>; Thu, 09 Jul 2026 11:32:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1783621967; x=1784226767; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=M/JWBZ9pJgvX+aNnWpGPI681HI0WIvMMNN0M2xj5UX4=;
+        b=KWkpnfjVTlyooxWnZivEMv29Lc4Rx9cDyF6J4LOxWofw2SYGiJ94402vXOQ3L+AEyX
+         OnHDDP8J9Km6O1Ukmg3JVJARFTtv5Vxn8ULRTTXToivtQVQDPK5shmO1WDcLAh59C2OK
+         F2Ny+Uj3ulcIuBV5OCgRwwra/fPpL9rhXVKUjB8BACaokK+QN/ogvVtY6kvcNBm9ot3w
+         8GKcwjakfAAIawsqSPIGtmErK29jdSKpm3MEi1SXtRLJ8qaw4JiupfmgggB0TOs7i8QJ
+         U4iRx6lyMoDPncNyF79obx9o/iFypE6ksXFgAbBOaoWpQYxJkULwJUNmAUBfXVhOssdN
+         YcZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783621967; x=1784226767;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=M/JWBZ9pJgvX+aNnWpGPI681HI0WIvMMNN0M2xj5UX4=;
+        b=gYxHDZj0PmGkkK3BM2K+cHKeiy6aMccNYsloTW49iExWgSWptUOGnVlc562yeYmysT
+         7/TphTyugX7s5GzjtK201UYOkAa56d/TQCZFqbt19v/oMUzQmV/onerTYm6Gu71Q+Xlz
+         +Ni+fwYMKDXxNigAH12h8eCu9tD4WUjAdSs4v4FkXG1NqC4sCUJQH18IVWZ669v5lzwU
+         6oED7Za6aEg0WNAW4QqvGE2TPSPN6vuhdcz2tVHbaHjU9EBkqavVxcrATOE8cIpaQ9dc
+         z2+rlO8ealV2RBRN6Q9/ca6CApOyUiZ20A2AEnmGHx4rfykS7MTQ4h5czxhMuKw+iZPR
+         U0zQ==
+X-Forwarded-Encrypted: i=1; AHgh+RqvdWTLRT6zN1P74uDCGg8jI1XFs51geMbf8RRUha6sCcwf8Eqx1F/z+O3IR916epUkIEH+/ImqFAw=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy5LVPVefMwb4T3w9wHhdaCc3a+C7ozEcUErvbzTZBsdbKrI42a
+	ndsmBYDzU3wKIEWZgTWaODdPG7eFx4Ba86Bb9e4W3Vb8cYZzFLsHN/vK
+X-Gm-Gg: AfdE7clLWFwkl2iOIGM/HTqE7VEX0xFIvwrl7wm2f0mGn+kfAU/TC/SS9uFd45zPAag
+	fTbecdz9K1FevcDc5Cyx3v32QR9dGgtyw2KFLlBkIhxqGuk9cmDbdFcFMIiEc2kZ9MPgZKO1bSi
+	mTiAAfHkUt/qX+awI/Mv52P3d5c/wF64av3ZHCOHBcWAC2PGxDbpNOB4ZiM9+KAHlnuXCafsuVf
+	GhYFfb7hHchMuZXVy+LoVS3kE01mID3ZMff2+29ao2jz/C68yJu4Vlh0ggDADDR0HK+nTOpUqx0
+	WSDqItWC21xGhaVw/KfZLmce+2HYnOhehpHWkRxTOKuHh/oEY9TF2k7Lh8zunYo2zXlGhdxhQQs
+	M8lHIlyTr2XC/Xv8LTQeep2y7yTS8Dj1agEN0EIzdKEg2Wxm4WxHhau+1/PdJldMJthsdHvdBsO
+	l6P7VEFdy0DvtIG3d6wQ8VSCRJR/lI8FfJcOSohkDSHEvjdxsSYlBpi8cl71ILgFidihZwsVA=
+X-Received: by 2002:a05:6a21:3295:b0:3c0:9c18:d5a7 with SMTP id adf61e73a8af0-3c0bd1c4948mr10580989637.68.1783621966489;
+        Thu, 09 Jul 2026 11:32:46 -0700 (PDT)
+Received: from li-1a3e774c-28e4-11b2-a85c-acc9f2883e29.ibm.com ([106.51.160.236])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13b659d8da9sm55669365c88.14.2026.07.09.11.32.29
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 09 Jul 2026 11:32:46 -0700 (PDT)
+Date: Fri, 10 Jul 2026 00:02:27 +0530
+From: Mukesh Kumar Chaurasiya <mkchauras@gmail.com>
+To: Thomas Gleixner <tglx@kernel.org>
+Cc: LKML <linux-kernel@vger.kernel.org>, 
+	Peter Zijlstra <peterz@infradead.org>, Michael Ellerman <mpe@ellerman.id.au>, 
+	Shrikanth Hegde <sshegde@linux.ibm.com>, linuxppc-dev@lists.ozlabs.org, Kees Cook <kees@kernel.org>, 
+	Huacai Chen <chenhuacai@kernel.org>, loongarch@lists.linux.dev, Paul Walmsley <pjw@kernel.org>, 
+	Palmer Dabbelt <palmer@dabbelt.com>, linux-riscv@lists.infradead.org, 
+	Sven Schnelle <svens@linux.ibm.com>, linux-s390@vger.kernel.org, x86@kernel.org, 
+	Mark Rutland <mark.rutland@arm.com>, Jinjie Ruan <ruanjinjie@huawei.com>, 
+	Andy Lutomirski <luto@kernel.org>, Oleg Nesterov <oleg@redhat.com>, 
+	Richard Henderson <richard.henderson@linaro.org>, Russell King <linux@armlinux.org.uk>, 
+	Catalin Marinas <catalin.marinas@arm.com>, Guo Ren <guoren@kernel.org>, 
+	Geert Uytterhoeven <geert@linux-m68k.org>, Thomas Bogendoerfer <tsbogend@alpha.franken.de>, 
+	Helge Deller <deller@gmx.de>, Yoshinori Sato <ysato@users.sourceforge.jp>, 
+	Richard Weinberger <richard@nod.at>, Chris Zankel <chris@zankel.net>, 
+	linux-arm-kernel@lists.infradead.org, linux-alpha@vger.kernel.org, linux-csky@vger.kernel.org, 
+	linux-m68k@lists.linux-m68k.org, linux-mips@vger.kernel.org, linux-parisc@vger.kernel.org, 
+	linux-sh@vger.kernel.org, linux-um@lists.infradead.org, Arnd Bergmann <arnd@arndb.de>, 
+	Vineet Gupta <vgupta@kernel.org>, Will Deacon <will@kernel.org>, Brian Cain <bcain@kernel.org>, 
+	Michal Simek <monstr@monstr.eu>, Dinh Nguyen <dinguyen@kernel.org>, 
+	"David S. Miller" <davem@davemloft.net>, Andreas Larsson <andreas@gaisler.com>, 
+	linux-snps-arc@lists.infradead.org, linux-hexagon@vger.kernel.org, linux-openrisc@vger.kernel.org, 
+	sparclinux@vger.kernel.org, linux-arch@vger.kernel.org, 
+	Michal =?utf-8?B?U3VjaMOhbmVr?= <msuchanek@suse.de>, Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Subject: Re: [patch 01/18] powerpc: Move stack randomization after
+ syscall_enter_from_user_mode()
+Message-ID: <ak_pE64J_xnLQBMd@li-1a3e774c-28e4-11b2-a85c-acc9f2883e29.ibm.com>
+References: <20260707181957.433213175@kernel.org>
+ <20260707190253.718191130@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260709-kvm-arm64-sme-v12-29-d0301d79ef58@kernel.org>
-References: <20260709-kvm-arm64-sme-v12-0-d0301d79ef58@kernel.org>
-In-Reply-To: <20260709-kvm-arm64-sme-v12-0-d0301d79ef58@kernel.org>
-To: Marc Zyngier <maz@kernel.org>, Joey Gouly <joey.gouly@arm.com>, 
- Catalin Marinas <catalin.marinas@arm.com>, 
- Suzuki K Poulose <suzuki.poulose@arm.com>, Will Deacon <will@kernel.org>, 
- Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
- Shuah Khan <shuah@kernel.org>, Oliver Upton <oupton@kernel.org>
-Cc: Dave Martin <Dave.Martin@arm.com>, Fuad Tabba <tabba@google.com>, 
- Mark Rutland <mark.rutland@arm.com>, Ben Horgan <ben.horgan@arm.com>, 
- Jean-Philippe Brucker <jpb@kernel.org>, 
- linux-arm-kernel@lists.infradead.org, kvmarm@lists.linux.dev, 
- linux-kernel@vger.kernel.org, kvm@vger.kernel.org, 
- linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
- Peter Maydell <peter.maydell@linaro.org>, 
- Eric Auger <eric.auger@redhat.com>, Mark Brown <broonie@kernel.org>
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3538; i=broonie@kernel.org;
- h=from:subject:message-id; bh=q7gRFDO7XUzOJdjKk7dinZEmMYgpMJThzBI3Uxs/+tg=;
- b=owEBbQGS/pANAwAKASTWi3JdVIfQAcsmYgBqT+sAuw7myrbcgUVgJNZQ/jetM2DjXieP+8OEe
- UPSUnc0/tKJATMEAAEKAB0WIQSt5miqZ1cYtZ/in+ok1otyXVSH0AUCak/rAAAKCRAk1otyXVSH
- 0DLXB/9PWTecBw9vRlEMUmyTZnUDGsd+6k0m+yErwCEEBlLJYYI/+3QolnJWwgqe+cXdKbYe3mG
- vMk1TXUu6KCx2yJNhCnqnMbQp1PQwVo0PbCJEHLRSNTyZuKEZwZuiBBpFbT+z/nL90BKC0cS8Pn
- a/wZ+C8k3HwcpCQ50JLe2doxOLmwu1q+LseQoBxEmPk58cjN0fJitLPg0fARl/h8n+nQwKfDPn6
- LxIZz9hpYHSGysP985W5+rikM37TqfqEiBIqsaRxcfxiXJcRgV6E4iZG+O38R9pHPtZj3fdSQeR
- EkJy9cso+vX8Sd9RYbdSrbIID0rA1c5M+QTd8O7FaauC7hb1
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260707190253.718191130@kernel.org>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-5.16 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:maz@kernel.org,m:joey.gouly@arm.com,m:catalin.marinas@arm.com,m:suzuki.poulose@arm.com,m:will@kernel.org,m:pbonzini@redhat.com,m:corbet@lwn.net,m:shuah@kernel.org,m:oupton@kernel.org,m:Dave.Martin@arm.com,m:tabba@google.com,m:mark.rutland@arm.com,m:ben.horgan@arm.com,m:jpb@kernel.org,m:linux-arm-kernel@lists.infradead.org,m:kvmarm@lists.linux.dev,m:linux-kernel@vger.kernel.org,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:peter.maydell@linaro.org,m:eric.auger@redhat.com,m:broonie@kernel.org,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-96036-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER(0.00)[broonie@kernel.org,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[vger.kernel.org,infradead.org,ellerman.id.au,linux.ibm.com,lists.ozlabs.org,kernel.org,lists.linux.dev,dabbelt.com,lists.infradead.org,arm.com,huawei.com,redhat.com,linaro.org,armlinux.org.uk,linux-m68k.org,alpha.franken.de,gmx.de,users.sourceforge.jp,nod.at,zankel.net,lists.linux-m68k.org,arndb.de,monstr.eu,davemloft.net,gaisler.com,suse.de,lwn.net];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:tglx@kernel.org,m:linux-kernel@vger.kernel.org,m:peterz@infradead.org,m:mpe@ellerman.id.au,m:sshegde@linux.ibm.com,m:linuxppc-dev@lists.ozlabs.org,m:kees@kernel.org,m:chenhuacai@kernel.org,m:loongarch@lists.linux.dev,m:pjw@kernel.org,m:palmer@dabbelt.com,m:linux-riscv@lists.infradead.org,m:svens@linux.ibm.com,m:linux-s390@vger.kernel.org,m:x86@kernel.org,m:mark.rutland@arm.com,m:ruanjinjie@huawei.com,m:luto@kernel.org,m:oleg@redhat.com,m:richard.henderson@linaro.org,m:linux@armlinux.org.uk,m:catalin.marinas@arm.com,m:guoren@kernel.org,m:geert@linux-m68k.org,m:tsbogend@alpha.franken.de,m:deller@gmx.de,m:ysato@users.sourceforge.jp,m:richard@nod.at,m:chris@zankel.net,m:linux-arm-kernel@lists.infradead.org,m:linux-alpha@vger.kernel.org,m:linux-csky@vger.kernel.org,m:linux-m68k@lists.linux-m68k.org,m:linux-mips@vger.kernel.org,m:linux-parisc@vger.kernel.org,m:linux-sh@vger.kernel.org,m:linux-um@lists.infradead.org,m:arnd@arndb.de,m:vgupta@kernel.org,m:will@kerne
+ l.org,m:bcain@kernel.org,m:monstr@monstr.eu,m:dinguyen@kernel.org,m:davem@davemloft.net,m:andreas@gaisler.com,m:linux-snps-arc@lists.infradead.org,m:linux-hexagon@vger.kernel.org,m:linux-openrisc@vger.kernel.org,m:sparclinux@vger.kernel.org,m:linux-arch@vger.kernel.org,m:msuchanek@suse.de,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	TAGGED_FROM(0.00)[bounces-96069-lists,linux-doc=lfdr.de];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER(0.00)[mkchauras@gmail.com,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	MISSING_XM_UA(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[broonie@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[mkchauras@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[53];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	ALIAS_RESOLVED(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ozlabs.org:email,li-1a3e774c-28e4-11b2-a85c-acc9f2883e29.ibm.com:mid,ellerman.id.au:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 32B9E73496A
+X-Rspamd-Queue-Id: 800F77344C7
 
-Add coverage of the SME ID registers to set_id_regs, ID_AA64PFR1_EL1.SME
-becomes writable and we add ID_AA64SMFR0_EL1 and it's subfields.
+On Tue, Jul 07, 2026 at 09:05:58PM +0200, Thomas Gleixner wrote:
+> add_random_kstack_offset() is invoked before syscall_enter_from_user_mode()
+> establishes state. That's wrong because add_random_kstack_offset() calls
+> into instrumentable code.
+> 
+> Move it after syscall_enter_from_user_mode() to ensure that state is
+> correctly established.
+> 
+> Signed-off-by: Thomas Gleixner <tglx@kernel.org>
+> Cc: Michael Ellerman <mpe@ellerman.id.au>
+> Cc: Shrikanth Hegde <sshegde@linux.ibm.com>
+> Cc: linuxppc-dev@lists.ozlabs.org
 
-Signed-off-by: Mark Brown <broonie@kernel.org>
----
- tools/testing/selftests/kvm/arm64/set_id_regs.c | 30 +++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
+Thanks for fixing this.
 
-diff --git a/tools/testing/selftests/kvm/arm64/set_id_regs.c b/tools/testing/selftests/kvm/arm64/set_id_regs.c
-index da9349bf31ab..26db507f6e73 100644
---- a/tools/testing/selftests/kvm/arm64/set_id_regs.c
-+++ b/tools/testing/selftests/kvm/arm64/set_id_regs.c
-@@ -155,6 +155,7 @@ static const struct reg_ftr_bits ftr_id_aa64pfr0_el1[] = {
- static const struct reg_ftr_bits ftr_id_aa64pfr1_el1[] = {
- 	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64PFR1_EL1, DF2, 0),
- 	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64PFR1_EL1, CSV2_frac, 0),
-+	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64PFR1_EL1, SME, 0),
- 	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64PFR1_EL1, SSBS, ID_AA64PFR1_EL1_SSBS_NI),
- 	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64PFR1_EL1, BT, 0),
- 	REG_FTR_END,
-@@ -212,6 +213,33 @@ static const struct reg_ftr_bits ftr_id_aa64mmfr3_el1[] = {
- 	REG_FTR_END,
- };
- 
-+static const struct reg_ftr_bits ftr_id_aa64smfr0_el1[] = {
-+	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64SMFR0_EL1, FA64, 0),
-+	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64SMFR0_EL1, LUTv2, 0),
-+	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64SMFR0_EL1, SMEver, 0),
-+	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64SMFR0_EL1, I16I64, 0),
-+	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64SMFR0_EL1, F64F64, 0),
-+	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64SMFR0_EL1, I16I32, 0),
-+	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64SMFR0_EL1, B16B16, 0),
-+	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64SMFR0_EL1, F16F16, 0),
-+	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64SMFR0_EL1, F8F16, 0),
-+	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64SMFR0_EL1, F8F32, 0),
-+	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64SMFR0_EL1, I8I32, 0),
-+	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64SMFR0_EL1, F16F32, 0),
-+	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64SMFR0_EL1, B16F32, 0),
-+	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64SMFR0_EL1, BI32I32, 0),
-+	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64SMFR0_EL1, F32F32, 0),
-+	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64SMFR0_EL1, SF8FMA, 0),
-+	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64SMFR0_EL1, SF8DP4, 0),
-+	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64SMFR0_EL1, SF8DP2, 0),
-+	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64SMFR0_EL1, SBitPerm, 0),
-+	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64SMFR0_EL1, AES, 0),
-+	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64SMFR0_EL1, SFEXPA, 0),
-+	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64SMFR0_EL1, STMOP, 0),
-+	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64SMFR0_EL1, SMOP4, 0),
-+	REG_FTR_END,
-+};
-+
- static const struct reg_ftr_bits ftr_id_aa64zfr0_el1[] = {
- 	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64ZFR0_EL1, F64MM, 0),
- 	REG_FTR_BITS(FTR_LOWER_SAFE, ID_AA64ZFR0_EL1, F32MM, 0),
-@@ -244,6 +272,7 @@ static struct test_feature_reg test_regs[] = {
- 	TEST_REG(SYS_ID_AA64MMFR1_EL1, ftr_id_aa64mmfr1_el1),
- 	TEST_REG(SYS_ID_AA64MMFR2_EL1, ftr_id_aa64mmfr2_el1),
- 	TEST_REG(SYS_ID_AA64MMFR3_EL1, ftr_id_aa64mmfr3_el1),
-+	TEST_REG(SYS_ID_AA64SMFR0_EL1, ftr_id_aa64smfr0_el1),
- 	TEST_REG(SYS_ID_AA64ZFR0_EL1, ftr_id_aa64zfr0_el1),
- };
- 
-@@ -263,6 +292,7 @@ static void guest_code(void)
- 	GUEST_REG_SYNC(SYS_ID_AA64MMFR1_EL1);
- 	GUEST_REG_SYNC(SYS_ID_AA64MMFR2_EL1);
- 	GUEST_REG_SYNC(SYS_ID_AA64MMFR3_EL1);
-+	GUEST_REG_SYNC(SYS_ID_AA64SMFR0_EL1);
- 	GUEST_REG_SYNC(SYS_ID_AA64ZFR0_EL1);
- 	GUEST_REG_SYNC(SYS_MPIDR_EL1);
- 	GUEST_REG_SYNC(SYS_CLIDR_EL1);
+Reviewed-by: Mukesh Kumar Chaurasiya (IBM) <mkchauras@gmail.com>
 
--- 
-2.47.3
-
+[...]
 
