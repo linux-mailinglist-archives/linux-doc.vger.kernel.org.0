@@ -1,151 +1,155 @@
-Return-Path: <linux-doc+bounces-96003-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96004-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id rdZtCz2/T2r9ngIAu9opvQ
-	(envelope-from <linux-doc+bounces-96003-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 17:33:17 +0200
+	id P8vTLefBT2q7nwIAu9opvQ
+	(envelope-from <linux-doc+bounces-96004-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 17:44:39 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A495732F2A
-	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 17:33:16 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id B0FFA7330EE
+	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 17:44:37 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=BQ7qj2ik;
-	dmarc=pass (policy=reject) header.from=mailbox.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96003-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96003-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=wyuan.org header.s=key1 header.b=hBQqDe+I;
+	dmarc=pass (policy=quarantine) header.from=wyuan.org;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96004-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-96004-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E7B6030C6EC9
-	for <lists+linux-doc@lfdr.de>; Thu,  9 Jul 2026 15:23:31 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 23A373099D06
+	for <lists+linux-doc@lfdr.de>; Thu,  9 Jul 2026 15:27:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3B0EE368D78;
-	Thu,  9 Jul 2026 15:23:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5178837DADE;
+	Thu,  9 Jul 2026 15:27:05 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+Received: from out-179.mta0.migadu.com (out-179.mta0.migadu.com [91.218.175.179])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1CFD6364943;
-	Thu,  9 Jul 2026 15:23:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC1D237F721
+	for <linux-doc@vger.kernel.org>; Thu,  9 Jul 2026 15:26:54 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783610611; cv=none; b=HHwLFyW4ULMbzme28gMQMtd9c2OAEOlv6CNKx/hRx+SMyAij9SYzv7BHlhwkeioz4aTrLikhcT9QkWZ3DLklZ41Vh1ItveNGyNLBtctf92W6UEP7qhtC7Pif3JW/lS/5aHJ4/C4g1GeOSf6b/aTLEj3Icr7E2cSrUTEg3XlU0yk=
+	t=1783610824; cv=none; b=rNc4XKxTor/Y+wLCjVXu7SEI1LuUo88eoVZN2v5OBPiWAIzdIBoJxOs7DYMSmLN6JZmOy567G9iXeHYcjHDxeVQ3skRT8/y0IKzKJ4y0ZkY1D2TFnxZehNmbLCLa+sNl8t1jnxzUgpJ0mmDgbjkU1JqLFg9nqINf9swVbJUP7uE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783610611; c=relaxed/simple;
-	bh=FGj4BXdhDBDAGB4iwVbKiirOotKTnPLYsioMLbfUeUA=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Q3juqexYkXskWGmCDZeGO5bvn9GCPcAocBjM8QSqp31FI1FoOH3RWISKY8Dvzaw2kbWWc46CaHBNUPP9Z94sk+5fXoBLfpeXuuMpHLCPa4wcs6gUlZus/XBmo1YqGYQ0JesUv9ZLwEayRmw3muZnrEImjAlyvIEQm+mOyMMuXXE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org; spf=pass smtp.mailfrom=mailbox.org; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=BQ7qj2ik; arc=none smtp.client-ip=80.241.56.161
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
-	(No client certificate requested)
-	by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4gwzHx3V6xzKnRd;
-	Thu, 09 Jul 2026 17:23:25 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1783610605;
+	s=arc-20240116; t=1783610824; c=relaxed/simple;
+	bh=/7gWABiz3usncEzH9N58qfQfv73wsN7IXAidQfk0Z6A=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=LlPoVaE+wBqpuQwiaZixfMLarhSMmhESFm23yuvRLEOyuCUOz3h4AinNjo8Qnag8m6JODeYZYbUzKnLChdKw+cHsHS8qLseKADbQ44UxNu2Kt4V1LtQN5V8YXW/Pdg9dPcke97NOCA+xRAcrcR53AkD7gRXMrEAgRIHv/Sqb0oM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=wyuan.org; spf=pass smtp.mailfrom=wyuan.org; dkim=pass (2048-bit key) header.d=wyuan.org header.i=@wyuan.org header.b=hBQqDe+I; arc=none smtp.client-ip=91.218.175.179
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=wyuan.org; s=key1;
+	t=1783610801;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=3DJtdglWdhtyGucyQVZjA4gR9eVcUWIO30Bf0LYMArA=;
-	b=BQ7qj2ikuao6hCeNkVjToIpnnOPPxG5jLL+0iwcDY8+7B7zpJJg/zpTeSP5IbLZ8+ZWSRw
-	6d2K7pJtenD3l95c1cNZ607GCFfxVCL0xxYrQ4HPV6X67laguX9IYzI47FAe+b26xXYuyf
-	IbB8N0JFDswID8N6f56VF8LqEBBu647mV4rLfIgEecghLbjO76iBIWz5NEyCaDXcxDx1GG
-	/O1Ee4jE3Xd5C06TR67+43tHw3bMAZ5jcrb+UdDsi0yjhGF6mm9KwxUhpF8YLHx8yyDfwN
-	b3Dr6ijdLOJDKKBhZvUuNkfh4kVcJPO+PxgQAQm7HO8qhwYCGZCUcuGspnEq3A==
-Message-ID: <6c93677c-974b-46d5-aa81-1ab04c8dd940@mailbox.org>
-Date: Thu, 9 Jul 2026 17:23:21 +0200
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=PLQs8YTVcD6fvu2d36jJZ5mY0k2anIDnOU3cDbCFiRI=;
+	b=hBQqDe+IyifV2IU+EcVtbDyUJ2l7KjVk/TUzl9t03E03nrWpZZOouQJPSSOjQNtnWccDfr
+	ft7nefg4iytUznbvbVx1BJNasnyo+5rR5JeW1c+Hn1mDaId9PpFTeL+yYEdAPw2BzT5G7a
+	wEjQe8T+lFvQKjUkDJg7yHFtmvHRB3Z7tT3OdfI8IdUkUxbv8xhyfENU6EEGixCsT0yDUi
+	qV93NGzGVddAOR2mOv9VpfTNDKRS05zV8BY68HfGUQPL042sGvvp5toVkdKFhWRPlKIfc3
+	AaypxpN/+sVQ6VRY8cDQW7RpFKOL9jStr4XK3oo1JB2nIrGHB5L16RspprpO7w==
+From: Weijie Yuan <wy@wyuan.org>
+To: Alex Shi <alexs@kernel.org>,
+	Yanteng Si <si.yanteng@linux.dev>,
+	Dongliang Mu <dzm91@hust.edu.cn>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>
+Cc: linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	Weijie Yuan <wy@wyuan.org>
+Subject: [PATCH] docs/zh_CN: add docs-next checkout workaround
+Date: Thu,  9 Jul 2026 23:25:29 +0800
+Message-ID: <4e5e728877c77a89f6c59e89c88ba8ffa8842643.1783609005.git.wy@wyuan.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Subject: Re: (subset) [PATCH v4 0/5] PCI: rcar-gen4: irqchip/gic-v3: Handle
- GIC ITS
-To: Manivannan Sadhasivam <mani@kernel.org>, linux-pci@vger.kernel.org
-Cc: =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
- Bjorn Helgaas <bhelgaas@google.com>,
- Catalin Marinas <catalin.marinas@arm.com>, Conor Dooley
- <conor+dt@kernel.org>, Geert Uytterhoeven <geert+renesas@glider.be>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Lorenzo Pieralisi <lpieralisi@kernel.org>, Marc Zyngier <maz@kernel.org>,
- Rob Herring <robh@kernel.org>,
- Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>,
- devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-renesas-soc@vger.kernel.org
-References: <20260707203743.88299-1-marek.vasut+renesas@mailbox.org>
- <178360186732.755595.3582150626313807959.b4-ty@b4>
- <ael3rodbevow3q7r4y6zavouh3pvoljmyaev5it6dknyaw7vcb@szfampjit4ds>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <ael3rodbevow3q7r4y6zavouh3pvoljmyaev5it6dknyaw7vcb@szfampjit4ds>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 4a5df62b25b95807fda
-X-MBO-RS-META: t18uwoiuq7fkdmahe51a9qkz95ma4n46
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Migadu-Flow: FLOW_OUT
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-1.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[mailbox.org,reject];
-	R_DKIM_ALLOW(-0.20)[mailbox.org:s=mail20150812];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[wyuan.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[wyuan.org:s=key1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-96004-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-96003-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:mani@kernel.org,m:linux-pci@vger.kernel.org,m:kwilczynski@kernel.org,m:bhelgaas@google.com,m:catalin.marinas@arm.com,m:conor+dt@kernel.org,m:geert+renesas@glider.be,m:krzk+dt@kernel.org,m:lpieralisi@kernel.org,m:maz@kernel.org,m:robh@kernel.org,m:yoshihiro.shimoda.uh@renesas.com,m:devicetree@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-renesas-soc@vger.kernel.org,m:conor@kernel.org,m:geert@glider.be,m:krzk@kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[marek.vasut@mailbox.org,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[17];
-	RCVD_COUNT_THREE(0.00)[4];
+	RCVD_COUNT_THREE(0.00)[3];
+	FORGED_SENDER(0.00)[wy@wyuan.org,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:alexs@kernel.org,m:si.yanteng@linux.dev,m:dzm91@hust.edu.cn,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:wy@wyuan.org,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[marek.vasut@mailbox.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[mailbox.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt,renesas];
+	FROM_NEQ_ENVFROM(0.00)[wy@wyuan.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[wyuan.org:+];
+	RCPT_COUNT_SEVEN(0.00)[8];
+	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,mailbox.org:from_mime,mailbox.org:dkim,mailbox.org:mid]
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,hust.edu.cn:url,tsinghua.edu.cn:url]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 7A495732F2A
+X-Rspamd-Queue-Id: B0FFA7330EE
 
-On 7/9/26 2:59 PM, Manivannan Sadhasivam wrote:
-> On Thu, Jul 09, 2026 at 02:57:47PM +0200, Manivannan Sadhasivam wrote:
->>
->> On Tue, 07 Jul 2026 22:35:38 +0200, Marek Vasut wrote:
->>> Configure all R-Car Gen4 PCIe controller MSI registers fully, both in
->>> case MSI are enabled and disabled.
->>>
->>> Patch GIC ITS driver and add quirks for R-Car Gen4 GIC ITS, which is
->>> configured to 32-bit address width for AXI or APB interface.
->>>
->>> Switch R-Car V4H to use GIC ITS in its DT and describe the GIC ITS
->>> implementation cacheable and shareable limitations.
->>>
->>> [...]
->>
->> Applied, thanks!
->>
->> [3/5] irqchip/gic-v3: Refactor GIC600 limited to 32bit PA erratum handling
->>        commit: 96b193897fd374fcb63a782c52f8b079134d0222
->> [4/5] irqchip/gic-v3: Add Renesas R-Car Gen4 erratum workaround
->>        commit: 14e8394423ffd4fd28884ec8b4d5ba15be6e7e0d
-> 
-> B4 got confused here. I applied all 4 patches.
-Understood.
+Hi all,
 
-5/5 should go through Geert / Renesas SoC tree ?
+Since cloning Alex Shi's tree from the HUST mirror may be unstable, as
+reported in [1]. I think adding one more option for beginners to get
+started might be a good idea.
 
-Thank you !
+Thanks,
+Weijie
+
+[1] https://lore.kernel.org/linux-doc/4292BADB2022F3A5+5117009.JcJflTAXpt@anka-vmware20-1/
+
+--- >8 ---
+
+The Chinese documentation guide asks contributors to base their work on
+the docs-next branch of Alex Shi's tree. However, cloning that tree from
+git.kernel.org or mirrors.hust.edu.cn may fail in some network
+environments.
+
+Document an alternative workflow: clone Linus Torvalds' tree from a
+local mirror, add Alex Shi's tree as another remote, fetch docs-next
+from it, and then create a local branch that tracks alexs/docs-next.
+
+Signed-off-by: Weijie Yuan <wy@wyuan.org>
+---
+ Documentation/translations/zh_CN/how-to.rst | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/Documentation/translations/zh_CN/how-to.rst b/Documentation/translations/zh_CN/how-to.rst
+index 9ec2384e1e76..fcfe0a4a8be2 100644
+--- a/Documentation/translations/zh_CN/how-to.rst
++++ b/Documentation/translations/zh_CN/how-to.rst
+@@ -53,6 +53,16 @@ Linux 发行版和简单地使用 Linux 命令行，那么可以迅速开始了
+ 这是 Alex 开发树的镜像库，每两个小时同步一次上游。如果您了解到更快的 mirror，
+ 请随时 **添加** 。
+ 
++或者::
++
++	git clone https://mirrors.tuna.tsinghua.edu.cn/git/linux.git
++	cd linux
++	git remote add alexs https://git.kernel.org/pub/scm/linux/kernel/git/alexs/linux.git/
++	git fetch alexs docs-next:refs/remotes/alexs/docs-next
++	git switch -c docs-next --track alexs/docs-next
++
++这将先用清华源拉取 Linus Torvalds 的开发树，再增量下载中文开发分支中的内容。
++
+ 命令执行完毕后，您会在当前目录下得到一个 linux 目录，该目录就是您之后的工作
+ 仓库，请把它放在一个稳妥的位置。
+ 
+-- 
+2.55.0.795.g602f6c329a
+
 
