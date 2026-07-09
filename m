@@ -1,250 +1,171 @@
-Return-Path: <linux-doc+bounces-95900-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95901-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id mpawFRVZT2q3ewIAu9opvQ
-	(envelope-from <linux-doc+bounces-95900-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 10:17:25 +0200
+	id bGT/LuhjT2o/fwIAu9opvQ
+	(envelope-from <linux-doc+bounces-95901-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 11:03:36 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2DC4172E27F
-	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 10:17:25 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id B1A6B72EA50
+	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 11:03:35 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=suse.com header.s=google header.b=BvFrVRoe;
-	dmarc=pass (policy=quarantine) header.from=suse.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95900-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95900-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=none;
+	dmarc=none;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95901-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95901-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id BD11C3040B32
-	for <lists+linux-doc@lfdr.de>; Thu,  9 Jul 2026 08:16:21 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id EBE0D30B6CD3
+	for <lists+linux-doc@lfdr.de>; Thu,  9 Jul 2026 08:48:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EA07D3EAC80;
-	Thu,  9 Jul 2026 08:16:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 39F853E63AE;
+	Thu,  9 Jul 2026 08:48:37 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DEEC737C0E5
-	for <linux-doc@vger.kernel.org>; Thu,  9 Jul 2026 08:16:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B6C12853E9
+	for <linux-doc@vger.kernel.org>; Thu,  9 Jul 2026 08:48:35 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783584979; cv=none; b=JeUmch6hZCxAC9211ohwbr7PEfFWo3aBInGgCOrzKdmd7T3l44WUGDtpngI6aRAI0eNZTqmwmMrv8qluW/bJT1W1j8EmO8OOhbhOO7qrCL7jZx77Vzz23M5JGN5TOqtdUCe6tuZFLYe3p1lvOc+iBTaN7qUr3tcoXXXMdL/yIa8=
+	t=1783586917; cv=none; b=RgQZZKQTgtL3LnNBvSHLJGLpsRSNM7gSVFGNgfQHM2cgc/b4dk8ZRKmaDMqdBcwj3TIfMNS1SqYSCznL76GW6peoniEy4AhIEreZzVqeH9RNco0LirdCGjbLrf+ZQeq+4d4X5VYhHoUYJx8kg+VWx5da3KYiciXQPBuN8L/jFZc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783584979; c=relaxed/simple;
-	bh=vMvzVDyhwRVZ9mU/uGek2iqLm5M9Oc3aOzpsUrM1kxM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=NBneuLA8DOwefoUOmM1dHS2a1ZsZYUs30Tc6Uo1HU4R19dHfv7ww02jHNu2b/OsM9UAL3zOx5kSrZpelYEr1R16UsN7JwqsuP45Rn6TWXhAUsqGr5PPzF/F7UvDWeKun1CJXDm5VtnReo+fNNp8TffL+Vw23KIdKJ4kCOme2++Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b=BvFrVRoe; arc=none smtp.client-ip=209.85.128.44
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-493b77b150aso12226475e9.2
-        for <linux-doc@vger.kernel.org>; Thu, 09 Jul 2026 01:16:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1783584976; x=1784189776; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=z+CFlNGgVOBUKoyPjKhrOhvumBe76lgJlilpAZoLH+g=;
-        b=BvFrVRoeLdX9K67kasMhrWS3/kUZ3sUPj+VTdiYOPJrmUJ2OVcYURmwa5PSTGOl80p
-         EKMqIJlyhLMJIDKcjk/Uupo22TEgpkVnjJ3miA+2E6zuDJECj4soGqwzKsL0HzzQUH4c
-         kmSzGWLSqlgnxW9Kig//yvcbRE58E7qwLWaM70bo6Y8pu6+BQMQtY6J1ytMSDWQIHRYk
-         BhSVn9FzF8ZLqhxyoL+F20K+CvCwkYwbkpIRWa3zP6tf04lYKxrWcOk0koGiilHLjWyh
-         0/xUZkcbeb1xgpVL7F6EvzAeQHxKAf+g5kby0g8tvIK6H0+8v+A32sHsdg2XmTJ6iuSL
-         jnKw==
+	s=arc-20240116; t=1783586917; c=relaxed/simple;
+	bh=vcIYcFn8wOu64JToHCd3V3ghUBsco6aWxPDuriYHfZc=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=DEVD4SBRjmU11lCJKu4CvFKNvu7Cz/9vQDFcxkNTlcegtGxdzflc3mC8NniF7xNY4zi7+yQFIPHjTq5YiME1M2NeJQRsw8qLm0+dQA/ov0hOi8YmMaR1G3urag0adGCSN1T7CxXIOcz73cR3920V37/GX8etOwLW8uDa+F/8H84=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-m68k.org; spf=pass smtp.mailfrom=gmail.com; arc=none smtp.client-ip=209.85.214.179
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2c9b1edf2bdso23706525ad.1
+        for <linux-doc@vger.kernel.org>; Thu, 09 Jul 2026 01:48:35 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783584976; x=1784189776;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=z+CFlNGgVOBUKoyPjKhrOhvumBe76lgJlilpAZoLH+g=;
-        b=hU35MfgjxiDm99uyCSauFn2CkndOlv0I/ueTKsNN1VN1ZEK0VSs13J4ISSTtxW3bsA
-         rv+EhmEHpOljI3wfyNUzIUWeVI/f5DuQg6iJORcnz8/6+hdFz/K+Zwb7T6gkL1/XDXpr
-         Fr3HWY1QFuQdWpOpZahLUxu7qt2mK4e046JAv0gPkvFhpy7+v1ndAud9iMaSNbrk6UgS
-         NIOeEGC9BuMAR8MePvnkmP7kpbC1UHg9ikXw86MqXOYNkjdNcyWbEZhEiKbwHQoikJNK
-         YQJVVA6BZ/PlXmTMO7StiJQJpW7uJkDmxGQyc553wls2yBdeR73Fqy52403FHKWyiyqp
-         qiqA==
-X-Forwarded-Encrypted: i=1; AHgh+Rql18ar0jFTyCL+csUC0j6Teihw9V9BvoHYO/6ypAwZ5mTf3UIntQWiJ4vUT/WFFzvD0b46+Xq/r10=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx1sWRs3S9kBbdVYkzzzKagqRBNZYkLszd30frCLUpNWOkbzeoe
-	4pZ3v8gqlkb2A1Rg1flJK65DiiIWJsK3i20J/8o6Yk6KXsa/ojit9TqSMDcj1HM5d14=
-X-Gm-Gg: AfdE7clf45yvelqSUeh4ZX5mg+kOIgrV4F7xB781K1GY63OdxnD8Qal8vEgASIezua0
-	LahH/c9lUyLIdhKtQbm9ymHuZSvbzS1UDe/wEp23m45Gq4/MGv3AnAMinlD5u7/NmDmqdo+YGgd
-	LkGIRrsdCp4rQKt14sTfRy/D3PK0uaNcusAXmyRJYBp22tPb/i+75h/625cn8eXmxG5uE1IQooJ
-	GJknvY1CqlqBlgv6OiXgCYRO3SiBiAT+/NLe/pgBbTuRdnzy9x2jp9Dbf1BD1zkXm1pLR47CJ/c
-	EYUMehEhK1geVzhcmQzPoqVgqYj5Jh7KjV50/TppR/SE7wyfnUIJSLN7ZieI93JfrX+q0RW6JIh
-	jLoxfpuYRMdHB5i+Z1BzMTP5ojLbKY1kYRLS2JA+/irvF8wiqisjtbgP7o0IRPfl1QBMhsGvnkj
-	+w8sLRga54sRGq+DY=
-X-Received: by 2002:a05:600c:1d1e:b0:492:7084:32af with SMTP id 5b1f17b1804b1-493e68bf03amr56205565e9.23.1783584976164;
-        Thu, 09 Jul 2026 01:16:16 -0700 (PDT)
-Received: from pathway.suse.cz ([176.114.240.130])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-493ee2bcac0sm20177645e9.0.2026.07.09.01.16.13
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Jul 2026 01:16:15 -0700 (PDT)
-Date: Thu, 9 Jul 2026 10:16:12 +0200
-From: Petr Mladek <pmladek@suse.com>
-To: Lorenzo Stoakes <ljs@kernel.org>
-Cc: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Eugen Hristev <ehristev@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
-	Dennis Zhou <dennis@kernel.org>, Tejun Heo <tj@kernel.org>,
-	Christoph Lameter <cl@gentwo.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Thomas Gleixner <tglx@kernel.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Anna-Maria Behnsen <anna-maria@linutronix.de>,
-	Frederic Weisbecker <frederic@kernel.org>,
-	John Stultz <jstultz@google.com>, Stephen Boyd <sboyd@kernel.org>,
-	Kees Cook <kees@kernel.org>, Ingo Molnar <mingo@redhat.com>,
-	Juri Lelli <juri.lelli@redhat.com>,
-	Vincent Guittot <vincent.guittot@linaro.org>,
-	Dietmar Eggemann <dietmar.eggemann@arm.com>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Ben Segall <bsegall@google.com>, Mel Gorman <mgorman@suse.de>,
-	Valentin Schneider <vschneid@redhat.com>,
-	K Prateek Nayak <kprateek.nayak@amd.com>,
-	David Hildenbrand <david@kernel.org>,
-	"Liam R. Howlett" <liam@infradead.org>,
-	Vlastimil Babka <vbabka@kernel.org>,
-	Mike Rapoport <rppt@kernel.org>,
-	Suren Baghdasaryan <surenb@google.com>,
-	Michal Hocko <mhocko@suse.com>,
-	Brendan Jackman <jackmanb@google.com>,
-	Johannes Weiner <hannes@cmpxchg.org>, Zi Yan <ziy@nvidia.com>,
-	Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>,
-	Kemeng Shi <shikemeng@huaweicloud.com>,
-	Nhat Pham <nphamcs@gmail.com>, Baoquan He <baoquan.he@linux.dev>,
-	Barry Song <baohua@kernel.org>,
-	Youngjun Park <youngjun.park@lge.com>,
-	John Ogness <john.ogness@linutronix.de>,
-	Sergey Senozhatsky <senozhatsky@chromium.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Mathieu Poirier <mathieu.poirier@linaro.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Saravana Kannan <saravanak@kernel.org>, workflows@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-arch@vger.kernel.org, linux-mm@kvack.org,
-	linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
-	devicetree@vger.kernel.org
-Subject: Re: [PATCH v3 21/26] printk: Register information into meminspect
-Message-ID: <ak9YzK_Puejpg_du@pathway.suse.cz>
-References: <20260708-meminspect-v3-v3-0-7aa5a0a74d5c@oss.qualcomm.com>
- <20260708-meminspect-v3-v3-21-7aa5a0a74d5c@oss.qualcomm.com>
- <ak4Cr5GEMdo8xWqu@lucifer>
+        d=1e100.net; s=20251104; t=1783586915; x=1784191715;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=O3mkBNkViagFAJs3obyg41kBlrTMtmvpPUP/R2gZOPo=;
+        b=lHdVlNnWLxpayZJb7TxgYyRkqw6L7Z/Hhx7FOpt2Vc9LFGXQwarZBgXoP1gIDJGKBT
+         yTuK/U4SuHZVWRLIXKlVjNtrV9Ug0tcBAWdqCOoTOegPQDq5AS/2sQ6tzRbSbCGr5az5
+         p+sawwyy6U55oL2Rkk3mPHcjQk+uFuDv2zqW8+O0HNa37Ypus0xodQoA3+61xC04zEsj
+         lrfIPRNxCs38PAx6Eqf3C4FRCrLCn+3Ym5xjo/jAM1fV5fU3DuW6/vHeYBBtqZrTMieR
+         FGtpJS1a5MxSGz1ejFNs/8Vd66EGfFP2NrmzwThP9vkxikoIreg/kfVBozvGEK9Ev5y/
+         89cw==
+X-Forwarded-Encrypted: i=1; AHgh+RoU6JRI6B9Nokgfs4Sb6zFiEk1oKl3pD5sLdPHrtFz5tNNFlE5v7EpyfhZR2ZGoxo32YZpzmDckEUM=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx12YTGwLHzxHpeWbrEZiGBdZ2Jz3ztQL/nlW0omWhkmnEICVzo
+	9eqtWu8NGMMGBWyY9U0NobiCXe84ox565snrjPU+wATfKhs9e7Ajd1j1qXX9Ppc4zD0=
+X-Gm-Gg: AfdE7clb6x+VRk4qYWlXioSZrYNmFL3+ooxB0XUQRgcyw70egsKfZHZ2lU2zWcsSC2K
+	lV6MS4dksdU9vrSdTHqefIe2v1ZqsxgfT+zUcZz5HFj7e87R4u+fRZs92voXEg7/WVnIgt3wTTe
+	BHO2kWwV3wMIUJNG23DB/U29/T/Gu6Fv52Tm8HKd1Di2ipMnSuK2TdyXosB6T3kCqduh7dC/PJS
+	IT5M/fTswevLQqsyACn7GdD3FAiIISB+It4brCJfIwgfW5O9QUSHGaKdq0Pxg46FNBy1r9lAT4O
+	56X31l0j+P+qbbTaKOpRWMqQpMAgUbC5ts4SS+3gVjft58VAe7bFqxqGtnvvRwQH3FUanTOIyqW
+	e7Yp8kAK0PMhjl7MZNKR/wBY5yAGRbUfjiwa8hZ20FvN18Ng1zU5trlfJ9gXmv7AiHcuI2ITPLY
+	VNDQvmwZi2DwT3xpwzf21UCxR8cw3AXO8A/mAiwg7J9+wJW303Ig==
+X-Received: by 2002:a17:902:e74a:b0:2ca:e08e:9e70 with SMTP id d9443c01a7336-2ccea47fc80mr61026455ad.46.1783586914749;
+        Thu, 09 Jul 2026 01:48:34 -0700 (PDT)
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com. [209.85.216.52])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ccc9d5bd2fsm40144315ad.78.2026.07.09.01.48.34
+        for <linux-doc@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 09 Jul 2026 01:48:34 -0700 (PDT)
+Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-3817f800c8bso1361357a91.1
+        for <linux-doc@vger.kernel.org>; Thu, 09 Jul 2026 01:48:34 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RqwDw2pJO9N1U3HoJrdOPhxm+Cts7vHXPkj78SLN7+M5/TEPaPuaWW3ZJOg6GfnEeAeYkZwWPenQpw=@vger.kernel.org
+X-Received: by 2002:a05:6102:6895:b0:738:9dd5:9b03 with SMTP id
+ ada2fe7eead31-744e03a337dmr3306957137.20.1783586528282; Thu, 09 Jul 2026
+ 01:42:08 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ak4Cr5GEMdo8xWqu@lucifer>
+References: <20260707181957.433213175@kernel.org> <20260707190254.280015701@kernel.org>
+In-Reply-To: <20260707190254.280015701@kernel.org>
+From: Geert Uytterhoeven <geert@linux-m68k.org>
+Date: Thu, 9 Jul 2026 10:41:56 +0200
+X-Gmail-Original-Message-ID: <CAMuHMdWe1D0CZrav5h6EhDDbeJzgJcHvT89jrs6109Bdj-pdTw@mail.gmail.com>
+X-Gm-Features: AUfX_mw8w2Kp5VuAYozzfDNS6gDbdKhQdYzfXsv-G72F3LS58UBytbGwOmplITc
+Message-ID: <CAMuHMdWe1D0CZrav5h6EhDDbeJzgJcHvT89jrs6109Bdj-pdTw@mail.gmail.com>
+Subject: Re: [patch 12/18] ptrace, treewide: Rename ptrace_report_syscall_entry()
+ to ptrace_report_syscall_permit_entry()
+To: Thomas Gleixner <tglx@kernel.org>
+Cc: LKML <linux-kernel@vger.kernel.org>, Peter Zijlstra <peterz@infradead.org>, 
+	Arnd Bergmann <arnd@arndb.de>, Oleg Nesterov <oleg@redhat.com>, 
+	Richard Henderson <richard.henderson@linaro.org>, Vineet Gupta <vgupta@kernel.org>, 
+	Russell King <linux@armlinux.org.uk>, Catalin Marinas <catalin.marinas@arm.com>, 
+	Will Deacon <will@kernel.org>, Guo Ren <guoren@kernel.org>, Brian Cain <bcain@kernel.org>, 
+	Michal Simek <monstr@monstr.eu>, Thomas Bogendoerfer <tsbogend@alpha.franken.de>, 
+	Dinh Nguyen <dinguyen@kernel.org>, Helge Deller <deller@gmx.de>, 
+	Yoshinori Sato <ysato@users.sourceforge.jp>, "David S. Miller" <davem@davemloft.net>, 
+	Andreas Larsson <andreas@gaisler.com>, Chris Zankel <chris@zankel.net>, linux-alpha@vger.kernel.org, 
+	linux-snps-arc@lists.infradead.org, linux-arm-kernel@lists.infradead.org, 
+	linux-csky@vger.kernel.org, linux-hexagon@vger.kernel.org, 
+	linux-m68k@lists.linux-m68k.org, linux-mips@vger.kernel.org, 
+	linux-openrisc@vger.kernel.org, linux-parisc@vger.kernel.org, 
+	linux-sh@vger.kernel.org, sparclinux@vger.kernel.org, 
+	linux-um@lists.infradead.org, linux-arch@vger.kernel.org, 
+	Michael Ellerman <mpe@ellerman.id.au>, Shrikanth Hegde <sshegde@linux.ibm.com>, 
+	linuxppc-dev@lists.ozlabs.org, Kees Cook <kees@kernel.org>, 
+	Huacai Chen <chenhuacai@kernel.org>, loongarch@lists.linux.dev, 
+	Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, linux-riscv@lists.infradead.org, 
+	Sven Schnelle <svens@linux.ibm.com>, linux-s390@vger.kernel.org, x86@kernel.org, 
+	Mark Rutland <mark.rutland@arm.com>, Jinjie Ruan <ruanjinjie@huawei.com>, 
+	Andy Lutomirski <luto@kernel.org>, Richard Weinberger <richard@nod.at>, =?UTF-8?Q?Michal_Such=C3=A1nek?= <msuchanek@suse.de>, 
+	Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [0.04 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[suse.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=google];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[oss.qualcomm.com,lwn.net,linuxfoundation.org,kernel.org,arndb.de,gentwo.org,linux-foundation.org,infradead.org,linutronix.de,google.com,redhat.com,linaro.org,arm.com,goodmis.org,suse.de,amd.com,suse.com,cmpxchg.org,nvidia.com,tencent.com,huaweicloud.com,gmail.com,linux.dev,lge.com,chromium.org,vger.kernel.org,kvack.org];
-	TAGGED_FROM(0.00)[bounces-95900-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-95901-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[pmladek@suse.com,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[vger.kernel.org,infradead.org,arndb.de,redhat.com,linaro.org,kernel.org,armlinux.org.uk,arm.com,monstr.eu,alpha.franken.de,gmx.de,users.sourceforge.jp,davemloft.net,gaisler.com,zankel.net,lists.infradead.org,lists.linux-m68k.org,ellerman.id.au,linux.ibm.com,lists.ozlabs.org,lists.linux.dev,dabbelt.com,huawei.com,nod.at,suse.de,lwn.net];
+	RCVD_TLS_LAST(0.00)[];
+	DMARC_NA(0.00)[linux-m68k.org];
+	FORGED_RECIPIENTS(0.00)[m:tglx@kernel.org,m:linux-kernel@vger.kernel.org,m:peterz@infradead.org,m:arnd@arndb.de,m:oleg@redhat.com,m:richard.henderson@linaro.org,m:vgupta@kernel.org,m:linux@armlinux.org.uk,m:catalin.marinas@arm.com,m:will@kernel.org,m:guoren@kernel.org,m:bcain@kernel.org,m:monstr@monstr.eu,m:tsbogend@alpha.franken.de,m:dinguyen@kernel.org,m:deller@gmx.de,m:ysato@users.sourceforge.jp,m:davem@davemloft.net,m:andreas@gaisler.com,m:chris@zankel.net,m:linux-alpha@vger.kernel.org,m:linux-snps-arc@lists.infradead.org,m:linux-arm-kernel@lists.infradead.org,m:linux-csky@vger.kernel.org,m:linux-hexagon@vger.kernel.org,m:linux-m68k@lists.linux-m68k.org,m:linux-mips@vger.kernel.org,m:linux-openrisc@vger.kernel.org,m:linux-parisc@vger.kernel.org,m:linux-sh@vger.kernel.org,m:sparclinux@vger.kernel.org,m:linux-um@lists.infradead.org,m:linux-arch@vger.kernel.org,m:mpe@ellerman.id.au,m:sshegde@linux.ibm.com,m:linuxppc-dev@lists.ozlabs.org,m:kees@kernel.org,m:chenhuacai@kernel.org,m:l
+ oongarch@lists.linux.dev,m:pjw@kernel.org,m:palmer@dabbelt.com,m:linux-riscv@lists.infradead.org,m:svens@linux.ibm.com,m:linux-s390@vger.kernel.org,m:x86@kernel.org,m:mark.rutland@arm.com,m:ruanjinjie@huawei.com,m:luto@kernel.org,m:richard@nod.at,m:msuchanek@suse.de,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:ljs@kernel.org,m:mukesh.ojha@oss.qualcomm.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:ehristev@kernel.org,m:arnd@arndb.de,m:dennis@kernel.org,m:tj@kernel.org,m:cl@gentwo.org,m:akpm@linux-foundation.org,m:tglx@kernel.org,m:peterz@infradead.org,m:anna-maria@linutronix.de,m:frederic@kernel.org,m:jstultz@google.com,m:sboyd@kernel.org,m:kees@kernel.org,m:mingo@redhat.com,m:juri.lelli@redhat.com,m:vincent.guittot@linaro.org,m:dietmar.eggemann@arm.com,m:rostedt@goodmis.org,m:bsegall@google.com,m:mgorman@suse.de,m:vschneid@redhat.com,m:kprateek.nayak@amd.com,m:david@kernel.org,m:liam@infradead.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:jackmanb@google.com,m:hannes@cmpxchg.org,m:ziy@nvidia.com,m:chrisl@kernel.org,m:kasong@tencent.com,m:shikemeng@huaweicloud.com,m:nphamcs@gmail.com,m:baoquan.he@linux.dev,m:baohua@kernel.org,m:youngjun.park@lge.com,m:john.ogness@linutronix.de,m:senozhatsky@chromium.org,m:andersson@kernel.o
- rg,m:mathieu.poirier@linaro.org,m:konradybcio@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:saravanak@kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-arch@vger.kernel.org,m:linux-mm@kvack.org,m:linux-arm-msm@vger.kernel.org,m:linux-remoteproc@vger.kernel.org,m:devicetree@vger.kernel.org,s:lists@lfdr.de];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[suse.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	MISSING_XM_UA(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[pmladek@suse.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[59];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[geert@linux-m68k.org,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[geert@linux-m68k.org,linux-doc@vger.kernel.org];
+	MISSING_XM_UA(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[52];
+	R_DKIM_NA(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:from_mime,suse.com:dkim,vger.kernel.org:from_smtp,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,vger.kernel.org:from_smtp,linux-m68k.org:from_mime,linux-m68k.org:email,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 2DC4172E27F
+X-Rspamd-Queue-Id: B1A6B72EA50
 
-On Wed 2026-07-08 08:59:26, Lorenzo Stoakes wrote:
-> On Wed, Jul 08, 2026 at 11:02:00AM +0530, Mukesh Ojha wrote:
-> > Annotate vital static, dynamic information into meminspect for debugging
-> >
-> > Static:
-> >  - prb_descs
-> >  - prb_infos
-> >  - prb
-> >  - prb_data
-> >  - clear_seq
-> >  - printk_rb_static
-> >  - printk_rb_dynamic
-> >
-> > Dynamic:
-> >  - new_descs
-> >  - new_infos
-> >  - new_log_buf
-> >
-> > --- a/kernel/printk/printk.c
-> > +++ b/kernel/printk/printk.c
-> > @@ -49,6 +49,7 @@
-> >  #include <linux/sched/debug.h>
-> >  #include <linux/sched/task_stack.h>
-> >  #include <linux/panic.h>
-> > +#include <linux/meminspect.h>
-> >
-> >  #include <linux/uaccess.h>
-> >  #include <asm/sections.h>
-> > @@ -518,10 +519,17 @@ static u32 log_buf_len = __LOG_BUF_LEN;
-> >  #endif
-> >  _DEFINE_PRINTKRB(printk_rb_static, CONFIG_LOG_BUF_SHIFT - PRB_AVGBITS,
-> >  		 PRB_AVGBITS, &__log_buf[0]);
-> > +MEMINSPECT_NAMED_ENTRY(prb_descs, _printk_rb_static_descs);
-> > +MEMINSPECT_NAMED_ENTRY(prb_infos, _printk_rb_static_infos);
-> > +MEMINSPECT_NAMED_ENTRY(prb_data, __log_buf);
-> > +MEMINSPECT_SIMPLE_ENTRY(printk_rb_static);
-> >
-> >  static struct printk_ringbuffer printk_rb_dynamic;
-> > +MEMINSPECT_SIMPLE_ENTRY(printk_rb_dynamic);
-> >
-> >  struct printk_ringbuffer *prb = &printk_rb_static;
-> > +MEMINSPECT_SIMPLE_ENTRY(prb);
-> > +MEMINSPECT_SIMPLE_ENTRY(clear_seq);
-> >
-> >  /*
-> >   * We cannot access per-CPU data (e.g. per-CPU flush irq_work) before
-> > @@ -1238,6 +1246,10 @@ void __init setup_log_buf(int early)
-> >
-> >  	local_irq_restore(flags);
-> >
-> > +	meminspect_lock_register_va(new_log_buf, new_log_buf_len);
-> > +	meminspect_lock_register_va(new_descs, new_descs_size);
-> > +	meminspect_lock_register_va(new_infos, new_infos_size);
-> > +
-> >  	/*
-> >  	 * Copy any remaining messages that might have appeared from
-> >  	 * NMI context after copying but before switching to the
-> 
-> Overall exposing live dynamic printk information to drivers seems unwise, but
-> not quite as insane as some of the other stuff thus exposed...
+On Tue, 7 Jul 2026 at 21:06, Thomas Gleixner <tglx@kernel.org> wrote:
+> The return value of that function is boolean and tells the caller whether
+> to permit the syscall processing or not.
+>
+> Rename the function so the purpose is clear and make the return type bool.
 
-I agree that we should be careful with exporting symbols.
+>  arch/m68k/kernel/ptrace.c       |    2 +-
 
-Well, if I get it correctly then at least the printk-related symbols
-are already exported a similar way using vmcore_info.h API,
-see log_buf_vmcoreinfo_setup().
+Acked-by: Geert Uytterhoeven <geert@linux-m68k.org> # m68k
 
-Best Regards,
-Petr
+Gr{oetje,eeting}s,
+
+                        Geert
+
+-- 
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+                                -- Linus Torvalds
 
