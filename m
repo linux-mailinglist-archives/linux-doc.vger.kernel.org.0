@@ -1,166 +1,163 @@
-Return-Path: <linux-doc+bounces-95985-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-95986-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id uIfsIeu2T2q4nAIAu9opvQ
-	(envelope-from <linux-doc+bounces-95985-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 16:57:47 +0200
+	id bqtfDu+xT2qNmwIAu9opvQ
+	(envelope-from <linux-doc+bounces-95986-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 16:36:31 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7325F7328B8
-	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 16:57:46 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 882ED732529
+	for <lists+linux-doc@lfdr.de>; Thu, 09 Jul 2026 16:36:30 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b="nTZXEq/p";
-	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=SWW8AHWd;
-	dmarc=pass (policy=reject) header.from=mailbox.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95985-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95985-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=CrkQxVcj;
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-95986-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-95986-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id BF6FC322F4AC
-	for <lists+linux-doc@lfdr.de>; Thu,  9 Jul 2026 14:12:46 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 2A15431AFC19
+	for <lists+linux-doc@lfdr.de>; Thu,  9 Jul 2026 14:14:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A698D2C237E;
-	Thu,  9 Jul 2026 14:11:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9E2FE3126BF;
+	Thu,  9 Jul 2026 14:14:42 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1797125B081;
-	Thu,  9 Jul 2026 14:11:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6F0F124A06A;
+	Thu,  9 Jul 2026 14:14:41 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783606316; cv=none; b=XWPk+81Lbqp+V5mfUmQMp04g49S3J3dL7fzStvsKzK97DFUTNOrDbmt9qrN90TwlKM1JHojheXM3LtBxg8wQxfH9ZIpIY/lTdiANvfA/0fp1jtbT3GoK1405G/oVNTf+GjjCdRj43qv+0+7j6CvcBIiCGBuASxBgGCAC2Bonl8U=
+	t=1783606482; cv=none; b=Rxj5hRLoG7dVLb1NEq3XP3CYNFHzPorQ64hArX7rTX2Jb0GB4ZHRVUS7n4aUM0hM75P5QhSVBpkV71nJ0XuE6609ETdPaOa7ZUb8esgXgtpNNwWEEuziQ1ZCa+gpIfDZMiGZoou/oCi47zjL7oxqc85ncLrWfuTvInyQSmWrnbI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783606316; c=relaxed/simple;
-	bh=mWbP2+Hzt6NOsA5S+X3iSMAtW4HUCWL1Tn2tEgduIxI=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=tjJrqkK8MCUBfo3iDPQgFhAAJxzhnSwm0S2tSvddw0xlHZ731npCKxS2RmwcQkprV3qj9OS/4wcfGtR4NWSEHW8LOIc67ugzYIuth+qNO0XWvbVINejp0VxJFboIsGuwMnK1TrCAhhNSOwCed4plQqciZvQ9pWAH9oBIOr7CXNY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org; spf=pass smtp.mailfrom=mailbox.org; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=nTZXEq/p; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=SWW8AHWd; arc=none smtp.client-ip=80.241.56.152
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
-	(No client certificate requested)
-	by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gwxjM5dv0zKvtZ;
-	Thu, 09 Jul 2026 16:11:51 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1783606311;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=D5M001/X9CVn4ScHLoRqgK9VNEW2LByAELLAivYQiEw=;
-	b=nTZXEq/pMtPwZj2aIQGjQNs41LkvDv7A9v7OSTFxga2jhETZ2k3YUwh1HeGLjoAsr2cuN3
-	Po+6hnfFuoReWrjuwVH6VSQKKfPRJZ/oHA+fG75LNeZLBnC9B05UYPQZ/FfScm9vSP+vJT
-	DWWyxnRJ32wxGr8qTIikak1hXCt8M15YPv+f0bIkr+mnNCMe/zcjrVnX7JzGaDKTlXHAiI
-	HHPatYLq9Ll4MkSsZ4A97uTodOC1bM6+CndvTn+6I3YcwTFeCidkIq8JkOguzuhL9hkvjl
-	fa+uJgoCSYFh8mGS/tiGPpVs5NUpPthKdSZ7wJeqtV9q+10TpzkXqdc768p0DA==
-From: Manuel Ebner <manuelebner@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1783606309;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=D5M001/X9CVn4ScHLoRqgK9VNEW2LByAELLAivYQiEw=;
-	b=SWW8AHWdaBAfPP1T+fP3jVBeGmE2S1Iw+oOLZg7roQDvAlpzRm+GIP0BZsRne/CzvMXJd/
-	28G0fwlG9dGGFoMrL/STF84XtsuqbdKxFeYTyN1p7A25g5QURw4ziSUedYn0lYeHfy0GkC
-	6YWlWi5LgvMQTY+2fZ/sNG4y6UxYcF3Q76W8fg9fRmO1ZOQDTggNosFw0K+xQNWMEwpZ/A
-	q8bPK8Oi1LTiOIfVi/fxYkejqvPbtR98XADKP9XOn3h1uxpPbWvCHnWaxhA07ab/hNwt3+
-	bPIIpGUFp9/HON/Wq/Gmi6IwUDqyNG9pz0HBKrT8vyQZd+gwbLtNTAQdAbZZuA==
-To: Vladimir Oltean <olteanv@gmail.com>,
-	Jonathan Corbet <corbet@lwn.net>,
+	s=arc-20240116; t=1783606482; c=relaxed/simple;
+	bh=5I/mpHQudS97OUP9lf2pVHWPkfbDxf+UsN1az0CvXGk=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=FZW9jhsEcBpVbmxh4SWYoeC/MtDzPW7i9NYu/iI0cT5a9EAUqpjjGFcXTlO0xzff/pd9LgsBAlj69isDyok8jBYZ+kWYbLOWqzGua04fWUn06AMferKqk+CvyH3p7SmYOdfaKuuemTAiqDu871G07DhQRngJZCpEXA+GtIyFYoc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CrkQxVcj; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 22C521F000E9;
+	Thu,  9 Jul 2026 14:14:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783606481;
+	bh=sred5ICwa7oh4IdeWBE/Ft824zVIPyZQqaedLWMzR8w=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=CrkQxVcjI61muQapvFh6VMzFaBJaq7fyVUubTMQhJp3gAo5qzeqd+S1fsOsH7wtbn
+	 SuD++jFi0JwrLJO2YYQagZ+isGqbJVIpwleSaSH7q9GWu0ZragTiPz1hQJE1Xrk5aU
+	 V6tQi68t4nx9JQBQJ4sTbWAINkfdzQRJjAFAHKVNoby0+5vRxmzH8kV+oJJHKQPdKK
+	 SmZH0+tSQWnMnc/5lXyMFEu8pnYgCo2YN/ee05k/5zwvpLSV3JW2N8jQUfwLvo2DUn
+	 vgNlF0WLn8u2XSCkPsW5K19mUWMCQKIHqVf2yC1XMZnjSH0PI5KzzhX2V7fRndnAbN
+	 K5mYw9F2dXILA==
+Date: Thu, 9 Jul 2026 15:14:32 +0100
+From: Sudeep Holla <sudeep.holla@kernel.org>
+To: Michal Simek <michal.simek@amd.com>
+Cc: linux-kernel@vger.kernel.org, monstr@monstr.eu, git@amd.com,
+	vincent.guittot@linaro.org, Souvik.Chakravarty@arm.com,
+	Sudeep Holla <sudeep.holla@kernel.org>, Alex Shi <alexs@kernel.org>,
+	Andy Shevchenko <andy@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Brian Masney <bmasney@redhat.com>,
+	Cristian Marussi <cristian.marussi@arm.com>,
+	David Lechner <dlechner@baylibre.com>,
+	Dongliang Mu <dzm91@hust.edu.cn>,
+	Fabio Estevam <festevam@gmail.com>, Frank Li <Frank.Li@nxp.com>,
+	Guenter Roeck <linux@roeck-us.net>,
+	Jonathan Cameron <jic23@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>, Len Brown <lenb@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Linus Walleij <linusw@kernel.org>,
+	Lukasz Luba <lukasz.luba@arm.com>, Mark Brown <broonie@kernel.org>,
+	Michael Turquette <mturquette@baylibre.com>,
+	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
+	Pavel Machek <pavel@kernel.org>, Peng Fan <peng.fan@nxp.com>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Philipp Zabel <p.zabel@pengutronix.de>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
 	Shuah Khan <skhan@linuxfoundation.org>,
-	Jacob Keller <jacob.e.keller@intel.com>,
-	Jakub Kicinski <kuba@kernel.org>
-Cc: Manuel Ebner <manuelebner@mailbox.org>,
-	Andrew Lunn <andrew@lunn.ch>,
-	Vladimir Oltean <vladimir.oltean@nxp.com>,
-	netdev@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v2] docs: packaging: fix brackets
-Date: Thu,  9 Jul 2026 16:10:12 +0200
-Message-ID: <20260709141012.400011-2-manuelebner@mailbox.org>
+	Stephen Boyd <sboyd@kernel.org>, Ulf Hansson <ulfh@kernel.org>,
+	Viresh Kumar <viresh.kumar@linaro.org>,
+	Yanteng Si <si.yanteng@linux.dev>, arm-scmi@vger.kernel.org,
+	"open list:ARM/FREESCALE IMX / MXC ARM ARCHITECTURE" <imx@lists.linux.dev>,
+	linux-arm-kernel@lists.infradead.org,
+	"open list:COMMON CLK FRAMEWORK" <linux-clk@vger.kernel.org>,
+	"open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+	"open list:GPIO SUBSYSTEM" <linux-gpio@vger.kernel.org>,
+	"open list:HARDWARE MONITORING" <linux-hwmon@vger.kernel.org>,
+	"open list:IIO SUBSYSTEM AND DRIVERS" <linux-iio@vger.kernel.org>,
+	"open list:ENERGY MODEL" <linux-pm@vger.kernel.org>
+Subject: Re: [RFC PATCH] firmware: scmi: Make SCMI arch independent
+Message-ID: <20260709-tidy-oarfish-of-refinement-d98dac@sudeepholla>
+References: <d7f7e8c9589d937b60e43168845ab4fda15037a3.1783603600.git.michal.simek@amd.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 6ad87ef3ed1b3b9ba63
-X-MBO-RS-META: 33pbrwb6r993k4zzx6y5dzzs3zsutzc9
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <d7f7e8c9589d937b60e43168845ab4fda15037a3.1783603600.git.michal.simek@amd.com>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-4.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[mailbox.org,reject];
-	R_DKIM_ALLOW(-0.20)[mailbox.org:s=mail20150812];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:michal.simek@amd.com,m:linux-kernel@vger.kernel.org,m:monstr@monstr.eu,m:git@amd.com,m:vincent.guittot@linaro.org,m:Souvik.Chakravarty@arm.com,m:sudeep.holla@kernel.org,m:alexs@kernel.org,m:andy@kernel.org,m:brgl@kernel.org,m:bmasney@redhat.com,m:cristian.marussi@arm.com,m:dlechner@baylibre.com,m:dzm91@hust.edu.cn,m:festevam@gmail.com,m:Frank.Li@nxp.com,m:linux@roeck-us.net,m:jic23@kernel.org,m:corbet@lwn.net,m:lenb@kernel.org,m:lgirdwood@gmail.com,m:linusw@kernel.org,m:lukasz.luba@arm.com,m:broonie@kernel.org,m:mturquette@baylibre.com,m:nuno.sa@analog.com,m:pavel@kernel.org,m:peng.fan@nxp.com,m:kernel@pengutronix.de,m:p.zabel@pengutronix.de,m:rafael@kernel.org,m:s.hauer@pengutronix.de,m:skhan@linuxfoundation.org,m:sboyd@kernel.org,m:ulfh@kernel.org,m:viresh.kumar@linaro.org,m:si.yanteng@linux.dev,m:arm-scmi@vger.kernel.org,m:imx@lists.linux.dev,m:linux-arm-kernel@lists.infradead.org,m:linux-clk@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-gpio@vger.
+ kernel.org,m:linux-hwmon@vger.kernel.org,m:linux-iio@vger.kernel.org,m:linux-pm@vger.kernel.org,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-95985-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:olteanv@gmail.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:jacob.e.keller@intel.com,m:kuba@kernel.org,m:manuelebner@mailbox.org,m:andrew@lunn.ch,m:vladimir.oltean@nxp.com,m:netdev@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com,lwn.net,linuxfoundation.org,intel.com,kernel.org];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[manuelebner@mailbox.org,linux-doc@vger.kernel.org];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[manuelebner@mailbox.org,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[mailbox.org:+];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[46];
+	FORGED_SENDER(0.00)[sudeep.holla@kernel.org,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-95986-lists,linux-doc=lfdr.de];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sudeep.holla@kernel.org,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[vger.kernel.org,monstr.eu,amd.com,linaro.org,arm.com,kernel.org,redhat.com,baylibre.com,hust.edu.cn,gmail.com,nxp.com,roeck-us.net,lwn.net,analog.com,pengutronix.de,linuxfoundation.org,linux.dev,lists.linux.dev,lists.infradead.org];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,mailbox.org:from_mime,mailbox.org:email,mailbox.org:mid,mailbox.org:dkim]
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sudeepholla:mid,vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 7325F7328B8
+X-Rspamd-Queue-Id: 882ED732529
 
-Add two ')' to nested functions in code block.
+On Thu, Jul 09, 2026 at 03:27:00PM +0200, Michal Simek wrote:
+> On heterogenious systems like AMD/Xilinx FPGA there is a need to talk to
+> SCMI server from different architectures than ARM that's why remove
+> ARM/ARM64 Kconfig dependency with also remove ARM from description and
+> rename folder to reflect it.
+> From specification perspective only ARM specific transport layers should be
+> available on ARM/ARM64 architectures.
+> 
+> That's why get rid of ARM prefix and description from documentation, file
+> names, folder names, MODULE description, module names, Kconfig and
+> comments.
+> But keep origin Kconfig symbols not to break existing users.
+> 
+> Hwmon, pinctrl, powercap, regulator, reset, clk and cpufreq scmi drivers
+> already miss arm prefix that's why synchronize all of them to be without
+> arm prefix.
+> 
 
-Fixes: a9ad2a8dfb43 ("lib: packing: document recently added APIs")
-Signed-off-by: Manuel Ebner <manuelebner@mailbox.org>
-Reviewed-by: Andrew Lunn <andrew@lunn.ch>
----
-[v2]
- add Fixes tag.
- add Reviewed-by.
-[v1]
- https://lore.kernel.org/all/20260709121427.391749-2-manuelebner@mailbox.org/
----
- Documentation/core-api/packing.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Technically it sounds good. We just need to workout logistics to apply
+this treewide. Preferably a script that Arm SoC team can run may be the
+ideal solution IMO.
 
-diff --git a/Documentation/core-api/packing.rst b/Documentation/core-api/packing.rst
-index f68f1e08fef9..cff1a262efce 100644
---- a/Documentation/core-api/packing.rst
-+++ b/Documentation/core-api/packing.rst
-@@ -330,7 +330,7 @@ Here is an example of how to use the fields APIs:
- 
-    void unpack_your_data(const packed_buf_t *buf, struct data *unpacked)
-    {
--           BUILD_BUG_ON(sizeof(*buf) != SIZE;
-+           BUILD_BUG_ON(sizeof(*buf) != SIZE);
- 
-            unpack_fields(buf, sizeof(*buf), unpacked, fields,
-                          QUIRK_LITTLE_ENDIAN);
-@@ -338,7 +338,7 @@ Here is an example of how to use the fields APIs:
- 
-    void pack_your_data(const struct data *unpacked, packed_buf_t *buf)
-    {
--           BUILD_BUG_ON(sizeof(*buf) != SIZE;
-+           BUILD_BUG_ON(sizeof(*buf) != SIZE);
- 
-            pack_fields(buf, sizeof(*buf), unpacked, fields,
-                        QUIRK_LITTLE_ENDIAN);
 -- 
-2.54.0
-
+Regards,
+Sudeep
 
