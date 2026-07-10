@@ -1,88 +1,85 @@
-Return-Path: <linux-doc+bounces-96301-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96302-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id MdP1B8skUWq8/wIAu9opvQ
-	(envelope-from <linux-doc+bounces-96301-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 18:58:51 +0200
+	id 3fclE/8jUWqa/wIAu9opvQ
+	(envelope-from <linux-doc+bounces-96302-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 18:55:27 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C8DC73CD1E
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 18:58:50 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D5D773CCC0
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 18:55:26 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=ziepe.ca header.s=google header.b=pJjUs4fx;
-	dmarc=none;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96301-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96301-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=Z1WlVrvZ;
+	dmarc=pass (policy=none) header.from=gmail.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96302-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-96302-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id AD41830AE257
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 16:52:45 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 70251300A3AD
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 16:55:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0106243DA30;
-	Fri, 10 Jul 2026 16:47:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C353047CC92;
+	Fri, 10 Jul 2026 16:48:49 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com [209.85.222.171])
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 99E4024E4C6
-	for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 16:47:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2386847CC6C
+	for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 16:48:47 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783702069; cv=none; b=C9DwOZjjQ1b3enxHnY6ofwisz4mS1YH51UPV0SoY1lnNVDyClsKVEF0E3IinJfKOdhMeg0e/6pAzUOZVMz+oV9Kc7/aUXLbRRArLA4zdD0a9itFB+g1/ylXtLkUym0MzGBynZRgzVTyzlFUk63PYSjCD5HkSCLf245VKuIvfrOo=
+	t=1783702129; cv=none; b=BVZjg/gx4boFzueKclcq05lY63mcuc2czTYJh0sNlA8OnmapleS9Iij70RtrGYONOQRKgoPyYOETWNvmj1IEHeoKHYmq0hPpvFozW6KpkXMgjH1j4/2YgdIGKLfmlkkM1wZNH3g+wqG9Bw0Xpo0SE4oyvBZGjtmdkl4EMBqX/Zw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783702069; c=relaxed/simple;
-	bh=5mY/LNzOoYWIQwJjGaIbGESQyPbUXU5+u9YysOMf/yw=;
+	s=arc-20240116; t=1783702129; c=relaxed/simple;
+	bh=gpGH/Q6yZYnkzQY2k0xRm/7mc5sBuLAhp6W6fGmbMLk=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=qlR7u6Do/f91mQ5Cb9liglWc4aJn+076FzTjpAOyqzwmaJbScpdAZ+cm53kSREHR4D6VsNhNdO/WwjVytmge2dbA4DHgkTK+68Rl0wSJmrIzYVkYIAFYDqQ6jv+4V7zVYb04r/tkF5H/YvcCcaCKb0fwGdYio65d3B1v3xegecA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca; spf=pass smtp.mailfrom=ziepe.ca; dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b=pJjUs4fx; arc=none smtp.client-ip=209.85.222.171
-Received: by mail-qk1-f171.google.com with SMTP id af79cd13be357-9204711e831so93964085a.2
-        for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 09:47:46 -0700 (PDT)
+	 Content-Type:Content-Disposition:In-Reply-To; b=BlDATP3o9fpIQRRCdnHsbKW+aPGwkPXMhW+6pFWuOB0hQDAfDiQbKn5ZRpbKSXIa5C+07tRua5H0qeCpVUenKxx3OnJRfCi2DmVFweVpIalUopp6blkm+h43H8KDgNUY5USHXM2UtADmF7SaIytbqWag1q5ejLIDzonXRxtyuwc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Z1WlVrvZ; arc=none smtp.client-ip=209.85.210.172
+Received: by mail-pf1-f172.google.com with SMTP id d2e1a72fcca58-8486672f03cso1044418b3a.0
+        for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 09:48:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ziepe.ca; s=google; t=1783702065; x=1784306865; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1783702127; x=1784306927; darn=vger.kernel.org;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=ldYpDeT5zs3T98XMfsT8ni9uE73SXe2oYxwTATvCf1s=;
-        b=pJjUs4fxJRRV4JyKYlLYpWw2bzk38dHrOh6nkT9Fk9sBD5r2HLAYjShp/o6Cg6ZF/q
-         Gcp+e2f0MX07bpFIZtTZE3rC/QY83URHHcn/Y7Of2fITSLy3FIy18aw7x1UoV35GELov
-         dNC0vVBsROWvwix7FeVYppBiNutBs7LzTTbELawNd6P7ReUVwboVJ66LT1SzaVt3ZDbv
-         cwpfjr33yr5c0UpQqB072mC1rty2Ao2KZWj4gV2U8OvZPENCqA2SvCxk2+P4seYkMskX
-         N8kFoYFWDXKD+KoWDBl/g/WHzBDxI+NIKG4vTr/cF/0hgOXKAAnzXeMOSvwbBLoVQWwl
-         RI1A==
+        bh=h/T7cJaVh+vpdnCnVWowF/GJXIiYthZ82xWXxPXNVVI=;
+        b=Z1WlVrvZUUSrvSnSylau+EjoBytzRjh0FvlcvopGl/53I/6TMyLyo0K3jdbTWmkxnY
+         CeZadAsfKW8dFZdYQ/lr0S7/oM740hhNxhH+JD8OW0CzgH4Rw/btLC30q1Hu166MhLNh
+         iOAA5lxfxwKu8ouM8/DC7ktuG2m/23J210FJXd4R+ZudxAkdEl2raRufro+w0mKvaKAl
+         awCBXUYKVSyqm7+TkzMjFogHg2hkoyoy2YLjogT9vwuj8K8/JONbigrkt1aPBLIvV7a4
+         D+kmxtgEGOHuZeKwUD1isANdpEM6FY+h+Vo5d8V7eWyMjVHIUgDp0glo4ji1AZBWiBB8
+         U8Ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783702065; x=1784306865;
+        d=1e100.net; s=20251104; t=1783702127; x=1784306927;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=ldYpDeT5zs3T98XMfsT8ni9uE73SXe2oYxwTATvCf1s=;
-        b=IpIu91rzfpo+MTyWVWqXG5giV7o214a760cmY80qNN/lB6i2J4adavaQtS8+r2DdJY
-         icXCEDGhhOyIOG35IeLgU6Xgt+P2l//U9KRU5CiqqBKUyRwkc4gZjvdMIGZIUvw7oMd7
-         PtnOTHVGHg7VzxPAGGXuTOTJnVTTH5WYOLrJ/6QHvZ79Xa8Sm7VuH5XX2G1d2wCBX9QJ
-         ZcpUot618KyUrninVukiGkitCuLDUT9ORo3F8rwYchLKWRePfPvefyfb9KQEIigWodHX
-         bgbQZ+frOjR0d1myPxNzsb40wwSLlLav+Oe+FLR65vHzpD8zNGvHCrErR9m605qLeeO8
-         mnuw==
-X-Forwarded-Encrypted: i=1; AHgh+Rpl4hyKAEtuwXm5yDiqfdWlxFg0ohIR44eNAD8Ra8IM/CIzIoUmflwU3318iIAVp7p8ZjW1KFF8MOQ=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yzhc5O9+O2U52ejYp11OuI30NimCzxHM/U/cLbptti5fNKj8cno
-	bZ/7Wd2on9UTKmc+7nnSVHUhsBF7MxSdoZzt8NqRQeiba0fKWLhv+jiORoAZgjBiPzA=
-X-Gm-Gg: AfdE7ck9wx2dssVX0h5USaEZ1YlZ5WG8HTUoWtOW2ZSaSHu8pvkbT95Mqbd1KNNI+K6
-	HiJPOGCaqRDhgEtKSh8P2vLH/zWHjJ++QCq1GFJHfTpE9GeGdHBogFRFlr4IyjS9maFvXwbBTeE
-	GMKEjdROCYBVDjC9D1BGGFb0dzeaM28g+JomhS7pFnPVJ2n7JhvkUEdJUwb65ZAosoKq6WZD7H1
-	DQanctKkutPB2Au0J+Ss9uWanoGIXCdPzfs58I6GG1gTP7ti1USCzGfipIPmXm0bOnrlP+mIexI
-	2M7zFeZfVffGEZQgYaOG7cdjcmZ9DD26EMUwbeMc5DU1LAf/OGLVToYykGvbRnGEq80Jj9AclNQ
-	/jKSP4K9ERONCcctLQbXHROwAPbbsTiI3y0xzYmPtOutqadCQKPmsfB6vUPrw
-X-Received: by 2002:a05:620a:4044:b0:92a:3ceb:9cf1 with SMTP id af79cd13be357-92ecf68b839mr1385461685a.37.1783702065110;
-        Fri, 10 Jul 2026 09:47:45 -0700 (PDT)
-Received: from ziepe.ca ([159.2.72.92])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-8ffd5bbac2asm45778726d6.21.2026.07.10.09.47.44
+        bh=h/T7cJaVh+vpdnCnVWowF/GJXIiYthZ82xWXxPXNVVI=;
+        b=KkJ/v27vkZB4W7on6WBrZ9KDZyD9U57fyAN1gw1xUSrG1Km3JZvqN2wDWrYSqttcbl
+         hDL+yICzmIqk0ANO+ySXFURRvJr0h7aBANpbodpu8vSof97IaptUWV4ioqiWQaN2V/2Q
+         A9Huuqoi2iyk1rGpx/0kPnwzsAP7m23iO4eJ3fTNWqqyFjbHT4DWQjG+Cnhco4ZF8swl
+         1aglUcIn7fBzTnSYTs8pURzU/QOqG/rt5VtDzjgSWiWB+1lBA9wL6CIlaA1m5z4Icuyb
+         nKZzxYf9YWuutRW1c5fiLVumA7tI0Ye3URSySyuv8OhLltjMAS6n22UzBuU30fT/caU5
+         B8nw==
+X-Forwarded-Encrypted: i=1; AHgh+RrXodpswAdS7NWjmIxQ8KUemeVRteN203w/+jJE08ynRUfAeJuAcZ8GT+OJKeRapQRpXO/QVsxWAu8=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwlUY7VOb+lzJb56p+nJh3nIXCUmrJ+gVDAKPZUPJ0dt4uKqjva
+	QxsBbIv8HO9O0xT/ocGxbHkhbkS0z1O9KRwmQC0zhmwiDGdC0KkkP2o9
+X-Gm-Gg: AfdE7cnRg+2dSizGyJpuQsjkYQJ72yoPCMjA/lRMr4DpgQfO0t2bHEoZzFLDWUsoM93
+	CyGWjmg3kxa3udTGa6HYgz+9m7+F1J8JHWxaE5dixrsgIrPH0AqHDxt+63DhNy0AGwOGcE5rS1+
+	7iCMfXHwcZgMdTVJFclNXlzuKfuJgNZZufZ+uz/lwNijrFchW4g4fx2YG+PO4tCiyrhMmRNcmkm
+	4BwDZN0vYArpau064VVQEvde+Vp+SMjq53aJlg1/+Ap3d/tylyi7fwWvDA8CcTE5QXqQ1uwEf6r
+	UtLYtYslG8U6x2lHxHGpcc1FkltIFZJlxFUvB86L2Ed3YVPbZIF+R+3qTAMPIZ/jO9ayi9VGH+S
+	gGNKpnZ4IwEdkB04Y4fszYy3M9S+SANlyNcRv0/+7m+dWVtN5mZhC1lX9GR33uGu4LsWhr2GK7+
+	NM26fhjzI+mhLiRMQnkN53YTWXUopLsXxHSak/1UJYibXTIbjAMs7sesk=
+X-Received: by 2002:a05:6a00:6c9a:b0:848:2f7a:2e57 with SMTP id d2e1a72fcca58-848438a63damr12313317b3a.70.1783702127271;
+        Fri, 10 Jul 2026 09:48:47 -0700 (PDT)
+Received: from skinsburskii (c-98-225-44-182.hsd1.wa.comcast.net. [98.225.44.182])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-847f6b609acsm10408336b3a.1.2026.07.10.09.48.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 10 Jul 2026 09:47:44 -0700 (PDT)
-Received: from jgg by wakko with local (Exim 4.97)
-	(envelope-from <jgg@ziepe.ca>)
-	id 1wiEO7-00000007ZDn-3hnt;
-	Fri, 10 Jul 2026 13:47:43 -0300
-Date: Fri, 10 Jul 2026 13:47:43 -0300
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: Stanislav Kinsburskii <skinsburskii@gmail.com>
+        Fri, 10 Jul 2026 09:48:46 -0700 (PDT)
+Date: Fri, 10 Jul 2026 09:48:44 -0700
+From: Stanislav Kinsburskii <skinsburskii@gmail.com>
+To: Jason Gunthorpe <jgg@ziepe.ca>
 Cc: airlied@gmail.com, akhilesh@ee.iitb.ac.in, akpm@linux-foundation.org,
 	corbet@lwn.net, dakr@kernel.org, david@kernel.org,
 	decui@microsoft.com, haiyangz@microsoft.com, kees@kernel.org,
@@ -100,7 +97,7 @@ Cc: airlied@gmail.com, akhilesh@ee.iitb.ac.in, akpm@linux-foundation.org,
 	linux-rdma@vger.kernel.org
 Subject: Re: [PATCH v7 2/8] mm/hmm: add hmm_range_fault_unlocked_timeout()
  for mmap lock-drop support
-Message-ID: <20260710164743.GX118978@ziepe.ca>
+Message-ID: <alEibBRYmWQvf1z1@skinsburskii>
 References: <178345345668.660027.2952911919681614557.stgit@skinsburskii>
  <178345362182.660027.12809852179204464964.stgit@skinsburskii>
  <20260710162749.GP118978@ziepe.ca>
@@ -114,42 +111,43 @@ Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 In-Reply-To: <20260710162749.GP118978@ziepe.ca>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [2.34 / 15.00];
+	MID_END_EQ_FROM_USER_PART(4.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_DKIM_ALLOW(-0.20)[ziepe.ca:s=google];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:skinsburskii@gmail.com,m:airlied@gmail.com,m:akhilesh@ee.iitb.ac.in,m:akpm@linux-foundation.org,m:corbet@lwn.net,m:dakr@kernel.org,m:david@kernel.org,m:decui@microsoft.com,m:haiyangz@microsoft.com,m:kees@kernel.org,m:kys@microsoft.com,m:leon@kernel.org,m:liam@infradead.org,m:lizhi.hou@amd.com,m:ljs@kernel.org,m:longli@microsoft.com,m:lyude@redhat.com,m:maarten.lankhorst@linux.intel.com,m:mamin506@gmail.com,m:mhocko@suse.com,m:mripard@kernel.org,m:nouveau@lists.freedesktop.org,m:ogabbay@kernel.org,m:oleg@redhat.com,m:rppt@kernel.org,m:shuah@kernel.org,m:simona@ffwll.ch,m:skhan@linuxfoundation.org,m:surenb@google.com,m:tzimmermann@suse.de,m:vbabka@kernel.org,m:wei.liu@kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-mm@kvack.org,m:linux-doc@vger.kernel.org,m:linux-hyperv@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-rdma@vger.kernel.org,s:lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-96301-lists,linux-doc=lfdr.de];
-	DMARC_NA(0.00)[ziepe.ca];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FORGED_SENDER(0.00)[jgg@ziepe.ca,linux-doc@vger.kernel.org];
 	RCPT_COUNT_TWELVE(0.00)[39];
-	FREEMAIL_CC(0.00)[gmail.com,ee.iitb.ac.in,linux-foundation.org,lwn.net,kernel.org,microsoft.com,infradead.org,amd.com,redhat.com,linux.intel.com,suse.com,lists.freedesktop.org,ffwll.ch,linuxfoundation.org,google.com,suse.de,kvack.org,vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-96302-lists,linux-doc=lfdr.de];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:jgg@ziepe.ca,m:airlied@gmail.com,m:akhilesh@ee.iitb.ac.in,m:akpm@linux-foundation.org,m:corbet@lwn.net,m:dakr@kernel.org,m:david@kernel.org,m:decui@microsoft.com,m:haiyangz@microsoft.com,m:kees@kernel.org,m:kys@microsoft.com,m:leon@kernel.org,m:liam@infradead.org,m:lizhi.hou@amd.com,m:ljs@kernel.org,m:longli@microsoft.com,m:lyude@redhat.com,m:maarten.lankhorst@linux.intel.com,m:mamin506@gmail.com,m:mhocko@suse.com,m:mripard@kernel.org,m:nouveau@lists.freedesktop.org,m:ogabbay@kernel.org,m:oleg@redhat.com,m:rppt@kernel.org,m:shuah@kernel.org,m:simona@ffwll.ch,m:skhan@linuxfoundation.org,m:surenb@google.com,m:tzimmermann@suse.de,m:vbabka@kernel.org,m:wei.liu@kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-mm@kvack.org,m:linux-doc@vger.kernel.org,m:linux-hyperv@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-rdma@vger.kernel.org,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	DKIM_TRACE(0.00)[ziepe.ca:+];
+	FREEMAIL_CC(0.00)[gmail.com,ee.iitb.ac.in,linux-foundation.org,lwn.net,kernel.org,microsoft.com,infradead.org,amd.com,redhat.com,linux.intel.com,suse.com,lists.freedesktop.org,ffwll.ch,linuxfoundation.org,google.com,suse.de,kvack.org,vger.kernel.org];
+	FORGED_SENDER(0.00)[skinsburskii@gmail.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jgg@ziepe.ca,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[skinsburskii@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp,ziepe.ca:from_mime,ziepe.ca:dkim,ziepe.ca:mid]
+	TO_DN_SOME(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,skinsburskii:mid,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 7C8DC73CD1E
+X-Rspamd-Queue-Id: 9D5D773CCC0
 
 On Fri, Jul 10, 2026 at 01:27:49PM -0300, Jason Gunthorpe wrote:
 > On Tue, Jul 07, 2026 at 12:47:01PM -0700, Stanislav Kinsburskii wrote:
@@ -173,21 +171,28 @@ On Fri, Jul 10, 2026 at 01:27:49PM -0300, Jason Gunthorpe wrote:
 > 
 > I really dislike there is a timeout here, HMM is supposed to be more
 > deterministic. GUP doesn't have a timeout, what is this about?
+> 
 
-It looks like you've moved the timeout processing related to the mmnu
-notifier sequence from the callers into this helper. I'm fine with
-that, but maybe add some comments that this timeout is helping
-implement the mmu notifiers, and we do expect that the HMM part will
-not timeout.
+The timeout was added because this version makes the unlocked helper own
+the internal retry loop, including -EBUSY retries.
 
-Though it is a little hard to see how your stated purpose of enabling
-userfaultfd is going to work, aren't you pretty much guarenteed to hit
-a timeout if the userfaultfd process is adversly scheduled? That's
-going to end up broken.
+Several existing HMM users already bound those retries with
+HMM_RANGE_DEFAULT_TIMEOUT, so the timeout argument was meant to avoid
+silently turning those call sites into unbounded waits.
 
-So, maybe the deadline should be resetting after every handled fault?
-ie the timeout really is only about the mmu notifier and we don't
-count the time spent handling faults or walking?
+That said, I agree this mixes driver retry policy into HMM. A cleaner
+split may be to make the new helper timeout-free and have it retry
+internally only when mmap_lock was dropped by the fault path, since that
+is the part HMM must hide for userfaultfd-style faults.
 
-Jason
+If the walk fails with the normal HMM invalidation -EBUSY, the helper
+would return -EBUSY to the caller, preserving the existing driver
+timeout loops and keeping HMM deterministic, closer to GUP.
+
+Is it better from your POV?
+
+THanks,
+Stanislav
+
+> Jason
 
