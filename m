@@ -1,125 +1,235 @@
-Return-Path: <linux-doc+bounces-96201-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96203-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Txh8CDCnUGqy2wIAu9opvQ
-	(envelope-from <linux-doc+bounces-96201-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 10:02:56 +0200
+	id gW4TAzyoUGr12wIAu9opvQ
+	(envelope-from <linux-doc+bounces-96203-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 10:07:24 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 433EF7383D6
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 10:02:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F5E1738473
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 10:07:23 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linux.alibaba.com header.s=default header.b=e56+Jt9o;
-	dmarc=pass (policy=none) header.from=linux.alibaba.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96201-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96201-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b="H6y/9RHU";
+	dkim=pass header.d=redhat.com header.s=google header.b=PTWsO+UZ;
+	dmarc=pass (policy=quarantine) header.from=redhat.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96203-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96203-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 568853084693
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 07:53:26 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 5CF423048578
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 08:02:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B3DA23DCD9D;
-	Fri, 10 Jul 2026 07:53:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 236453E51F5;
+	Fri, 10 Jul 2026 08:02:13 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out30-118.freemail.mail.aliyun.com (out30-118.freemail.mail.aliyun.com [115.124.30.118])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 72F973DB64A;
-	Fri, 10 Jul 2026 07:53:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 743583DE424
+	for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 08:02:11 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783670005; cv=none; b=Mw5+zBqNgTicvArgIRZamE0VoBqHJvYZL7oHJaqjIYD+6asIz8C18AWJRHXLEe0ClutRWOZs+AS5RM9vujZ82Rf8kmATYwFy7+/wZ/8GwpbXU0ge4DTD0iN1cQNVEi86AfcBTIej1JW17Tiyl4QZwUNAHIa7bKyn58mWdFUNnl4=
+	t=1783670533; cv=none; b=W4QdWi+xmyzQL1A+j77Q04SE5EqByHb2/oTsZkUEnp1B2Xbce/Nfd48M5mfDZ17wSLlv9sf7gAEsDG0S4T1gHG5v0YFsUxuAhg4o2T+s5iiuAjYze1hGULZ504/vbEVO3s1qpftORF9Z/7IfASaeddLRHciU78Pzd1LN4a+iV/c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783670005; c=relaxed/simple;
-	bh=/el9B9dmn6AInZvRKDjSL0q9HC4ssjOv77bpWST39zE=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=SGVdSDI3yVnyIfmgMAJ0DyZoIWpqUNz0Y9oncRAh0aSTcYj5gGkjVYVHJAP3jNm+reOQy5TRiS09VTQqVIK6j5Ho0dEz3Klj2x1jjB2YCMeu4VWw79Botl4NfHhV+gJE2LgVrAV13extTx/uqHVtxhTEaxnOtiZOVg5akUkT8mQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com; spf=pass smtp.mailfrom=linux.alibaba.com; dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b=e56+Jt9o; arc=none smtp.client-ip=115.124.30.118
-DKIM-Signature:v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linux.alibaba.com; s=default;
-	t=1783669999; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
-	bh=TM7g+f4DY2IQKDVuMIDRQ7RBAsmrawP7WwfGxU5hrlk=;
-	b=e56+Jt9o0Tgm7NeAFxL3kElR9OfKEoce2Pwnr7wkXwerRrx9XOf4q9Eg+gSWnWswWkw3vAY401VKVzew8JrrrYV6tkP4zl5WPrskC2d6ZZGZ9ieKya77xNVNX30mGGz+T27r21n+4xTXGZ5XodnlnSIS6ZDM+G2/l3znC8kF7Lk=
-X-Alimail-AntiSpam:AC=PASS;BC=-1|-1;BR=01201311R201e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=maildocker-contentspam033045098064;MF=baolin.wang@linux.alibaba.com;NM=1;PH=DS;RN=20;SR=0;TI=SMTPD_---0X6my5Zf_1783669996;
-Received: from 30.74.144.121(mailfrom:baolin.wang@linux.alibaba.com fp:SMTPD_---0X6my5Zf_1783669996 cluster:ay36)
-          by smtp.aliyun-inc.com;
-          Fri, 10 Jul 2026 15:53:17 +0800
-Message-ID: <c8d1b841-3514-4805-bec1-7064a82b8ffe@linux.alibaba.com>
-Date: Fri, 10 Jul 2026 15:53:16 +0800
+	s=arc-20240116; t=1783670533; c=relaxed/simple;
+	bh=s/wTkh6VxtbX/sDC0CijC4ncQbmEF5imof1tuQCO9bI=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=SWYJIExbDNT6D3Ro1U3PxYNL10s9+GjcZbZWMxX/EPyuhsnDR0hcEXmzG5/60YxxWrEUGsJOXMyKH3ZM8DXEEkDCNGbmXBGTjEbuLDwmTe754hRxrnViju8otqY2NW0zYLftCL6q2ZJ0V22bnyPllkQfkE3A+oFJxbT5sd+Lwt8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=H6y/9RHU; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=PTWsO+UZ; arc=none smtp.client-ip=170.10.133.124
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1783670530;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=s/wTkh6VxtbX/sDC0CijC4ncQbmEF5imof1tuQCO9bI=;
+	b=H6y/9RHUayGNFj8XJpyIK1j/+37BGyvlLfsS9r57ZfzTFIyqP0UVSvh8vVBdzcFe4UGwID
+	5WO/6VsiCxVijrngsWEaWR/A71I4/4OW4Dl5dINw0cHUyZWv3avgbEP12cZ+7Nrfkzv0PR
+	WkRwlFlcB5hA4X/8zbLLbKrYpHMJu+E=
+Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
+ [209.85.218.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-394-p7KuIClzNJCGyZL79xIGqg-1; Fri, 10 Jul 2026 04:02:09 -0400
+X-MC-Unique: p7KuIClzNJCGyZL79xIGqg-1
+X-Mimecast-MFC-AGG-ID: p7KuIClzNJCGyZL79xIGqg_1783670528
+Received: by mail-ej1-f70.google.com with SMTP id a640c23a62f3a-c15e555a164so72214766b.1
+        for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 01:02:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=redhat.com; s=google; t=1783670528; x=1784275328; darn=vger.kernel.org;
+        h=mime-version:user-agent:content-transfer-encoding:content-type
+         :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=s/wTkh6VxtbX/sDC0CijC4ncQbmEF5imof1tuQCO9bI=;
+        b=PTWsO+UZtBo/iKKtOh5LqDMRSB5xkCvtjgDbatwnzSTwYAPtyb9FSP2r/GXNaNHd3x
+         Ubo7eyDqlp4DKZfdr130npFmmLHXZT3lz1vHi+BaB9ffPfMlO7YjfRtIrhq8cI9sWyHE
+         IN74R6K5t2fEgOkB4xfheYVOCTFXSHrkeLQIlUnselYxd7SzmpFkhEidH1D8JAKOck4/
+         pP55ZR+dzL4P82pQiG9fmBL2oyO2IiqV/FmjAetwJoLWxk90EP/aODpgQN1nWuHwXJdH
+         t4Q4788ZUH1QNWutFPEMbZ+9Jt+p4IYJDlbpyALgmdRZ8VwIVoCxPXhWOWPfkgbZ3RaN
+         VnGQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783670528; x=1784275328;
+        h=mime-version:user-agent:content-transfer-encoding:content-type
+         :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=s/wTkh6VxtbX/sDC0CijC4ncQbmEF5imof1tuQCO9bI=;
+        b=PewmD6EO60TtTf3tZINEawEgXUZhA4SL2IMJJkfx+Nlai0ZW9XjmLaaT/tvfmw4GYC
+         OmPj7CKhleLqm+nDuaxSU7tJiMeRB6mLGYGqKxymmG9I7/moH55+an89zZIRkLxUwZey
+         2OU1MCzlkh0w5Wncs14860taD6IrmRk5YX77He03gKesSEBeACDjNpBYoNXdXONzzocs
+         in9Pq+t8sTiroZYGDe7BujGHdxshsjosX8wfd5pKEZvJsC3NSznbn+Q0wVTLaW+oiOiY
+         RdJWQmzfSTR6qP5Wds5Co8j+54Xj3evFn2wEm6PjyPl7VnyLmMW+rX2VZMPImlF1YMuM
+         g08Q==
+X-Forwarded-Encrypted: i=1; AHgh+Rrzljr2EzNF05anDF5Um9pDAOsSNfBD70n4AC0rWZwFa7R4pDGIGnY8dJMoOpYwfhSvCwj10qceatc=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwAHL7a0Lv8rUx7bQRXI6YDE9mtYl0bWdWti0Iu1kyHKYAtPkWA
+	BFjUU2l5vpGx6YZ29t0wJDhkW7gTAVwGy7U8yKmAil/6M9wEviHNGy+bM0b7+oVdxS2P+vIW3XN
+	yveNbFwZAxvue93yNY/cH+Wou4nQY1JYVMrwvz5N/CzhZjxj+tHQfnrNgS0rLMQ==
+X-Gm-Gg: AfdE7cksiReG58cCMaHiOmcVgUyAFoxqMxEQUk3YryIybWkJJSbPzzB96d6YRGWKJRw
+	aBO1iULfhCYCa/lF9z3JQ1phPoAvkYGhmVfxibYHOWi9eyjoxpOhoetJA8KO2P7GaV5x5qt37U3
+	X7YzeiJbChb4xArFYE8kfjTiSDIEySNYdQOep6B611RD8eM2AHEnUhuN5Ik5X34ZQnnQroaRxZ2
+	dfx6ymN4kssppYErx9TVCSRblV8JejdLw4rpgM+S5fLmibOIFQHaHEOqMy69EzptkDEIyLF9kUV
+	eMT2nDIBCvfOiu3Myl0/mSvMSfxx69E7vc/OUgW+Qj5mXcstuphqZ5YZMim1+Yldw9fSt3s7fMi
+	CRf9FIYEyHZquaXxyxC7xwg6CNVZbX2rhnx1E2Ww0IMBKcokKns/7PcETNNln
+X-Received: by 2002:a17:907:d50c:b0:c15:d08a:2cb1 with SMTP id a640c23a62f3a-c15fe271f91mr103709666b.0.1783670527676;
+        Fri, 10 Jul 2026 01:02:07 -0700 (PDT)
+X-Received: by 2002:a17:907:d50c:b0:c15:d08a:2cb1 with SMTP id a640c23a62f3a-c15fe271f91mr103708166b.0.1783670527209;
+        Fri, 10 Jul 2026 01:02:07 -0700 (PDT)
+Received: from ?IPv6:2a01:41e1:62d2:1700:b0c7:4985:769b:d2d? ([2a01:41e1:62d2:1700:b0c7:4985:769b:d2d])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-69a19ce4ad4sm10624182a12.12.2026.07.10.01.02.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 10 Jul 2026 01:02:06 -0700 (PDT)
+Message-ID: <fcc4455b1272433bd04ea1f774b5ecd180823795.camel@redhat.com>
+Subject: Re: [PATCH 0/4] KVM: x86: Document and enforce APIC base memory hole
+From: Tim Wiederhake <twiederh@redhat.com>
+To: Sean Christopherson <seanjc@google.com>
+Cc: Borislav Petkov <bp@alien8.de>, Dave Hansen
+ <dave.hansen@linux.intel.com>,  "H. Peter Anvin"	 <hpa@zytor.com>, Ingo
+ Molnar <mingo@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
+	kvm@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org,  Paolo Bonzini <pbonzini@redhat.com>, Shuah
+ Khan <skhan@linuxfoundation.org>, Thomas Gleixner <tglx@kernel.org>, 
+	x86@kernel.org
+Date: Fri, 10 Jul 2026 10:02:06 +0200
+In-Reply-To: <ak_cqiwZwNBEhRNj@google.com>
+References: <20260706092021.3625908-2-twiederh@redhat.com>
+	 <akwrncCjosItvAeO@google.com>
+	 <bceedaf195adf713db70a1dba743055fe4f20bc0.camel@redhat.com>
+	 <ak5TojZfR04SWWd-@google.com>
+	 <8b35057f72cd281637cf9d4bcbe1d0d753a3710e.camel@redhat.com>
+	 <ak_cqiwZwNBEhRNj@google.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.58.2 (3.58.2-1.fc43) 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 8/8] mm: Documentation: clarify where the mTHP stats live
-To: Nico Pache <npache@redhat.com>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-mm@kvack.org
-Cc: Lorenzo Stoakes <ljs@kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>,
- David Hildenbrand <david@kernel.org>, Zi Yan <ziy@nvidia.com>,
- "Liam R. Howlett" <liam@infradead.org>, Ryan Roberts <ryan.roberts@arm.com>,
- Dev Jain <dev.jain@arm.com>, Barry Song <baohua@kernel.org>,
- Lance Yang <lance.yang@linux.dev>, Usama Arif <usama.arif@linux.dev>,
- Vlastimil Babka <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>,
- Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>
-References: <20260706154500.39178-1-npache@redhat.com>
- <20260706154500.39178-9-npache@redhat.com>
-From: Baolin Wang <baolin.wang@linux.alibaba.com>
-In-Reply-To: <20260706154500.39178-9-npache@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-12.16 / 15.00];
-	WHITELIST_DMARC(-7.00)[alibaba.com:D:+];
-	WHITELIST_SPF_DKIM(-3.00)[alibaba.com:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linux.alibaba.com,none];
+	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[linux.alibaba.com:s=default];
+	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:npache@redhat.com,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:ljs@kernel.org,m:akpm@linux-foundation.org,m:david@kernel.org,m:ziy@nvidia.com,m:liam@infradead.org,m:ryan.roberts@arm.com,m:dev.jain@arm.com,m:baohua@kernel.org,m:lance.yang@linux.dev,m:usama.arif@linux.dev,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,s:lists@lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[baolin.wang@linux.alibaba.com,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_FROM(0.00)[bounces-96203-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[13];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-96201-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:seanjc@google.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:hpa@zytor.com,m:mingo@redhat.com,m:corbet@lwn.net,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:pbonzini@redhat.com,m:skhan@linuxfoundation.org,m:tglx@kernel.org,m:x86@kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[twiederh@redhat.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[redhat.com:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[baolin.wang@linux.alibaba.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linux.alibaba.com:+];
+	FROM_NEQ_ENVFROM(0.00)[twiederh@redhat.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp,alibaba.com:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 433EF7383D6
+X-Rspamd-Queue-Id: 3F5E1738473
 
+On Thu, 2026-07-09 at 10:38 -0700, Sean Christopherson wrote:
+> On Wed, Jul 08, 2026, Tim Wiederhake wrote:
+> > On Wed, 2026-07-08 at 06:41 -0700, Sean Christopherson wrote:
+> > > On Wed, Jul 08, 2026, Tim Wiederhake wrote:
+> > > > On Mon, 2026-07-06 at 15:26 -0700, Sean Christopherson wrote:
+> > > > > On Mon, Jul 06, 2026, Tim Wiederhake wrote:
+> > > > > > When an in-kernel irqchip is enabled on x86, KVM installs a
+> > > > > > private
+> > > > > > memory slot at the default APIC base address (0xfee00000)
+> > > > > > during vcpu
+> > > > > > creation.=C2=A0 If user space has already mapped a memory regio=
+n
+> > > > > > covering
+> > > > > > that address, vcpu creation fails with -EEXIST.=C2=A0 The same
+> > > > > > happens in
+> > > > > > reverse: mapping memory over the APIC base after vcpu
+> > > > > > creation also
+> > > > > > fails with -EEXIST.
+> > > > > >=20
+> > > > > > None of this is documented, and the error is reported far
+> > > > > > from where
+> > > > > > the actual conflict is introduced.=C2=A0 A VMM developer hittin=
+g
+> > > > > > this has
+> > > > > > to trace through KVM internals to understand what went
+> > > > > > wrong.
+> > > > > I'm 100% in favor of documenting the behavior, but I'm not
+> > > > > exactly
+> > > > > excited about the enforcement.
+>=20
+> ...
+>=20
+> > > > FWIW, I did run into this exact issue myself and debugging it
+> > > > was
+> > >=20
+> > > What were you doing (or trying to do?) when you ran afoul of
+> > > this?=C2=A0 I ask
+> > > because maybe there's a way to help developers without impacting
+> > > KVM's
+> > > uABI.
+> >=20
+> > Experimenting, mostly with pmode code.=20
+>=20
+> "pmode" being Protected Mode?=C2=A0 Or something else?
+>=20
+Yes, Protected Mode.
 
+> > For simplicity, I use a single memory slot at 0x0. Due to an off-
+> > by-one
+> > error, I gave the VM only 2 GB instead of 4 GB as intended. When I
+> > fixed
+> > that, suddenly vcpu creation failed.
+>=20
+> Heh, fun.=C2=A0 I don't think there's a good answer here.=C2=A0 Or rather=
+, I
+> don't think
+> there's an answer that you'll find satisfying.=C2=A0 "Unintentionally"
+> creating a
+> memslot that overlaps the PCI hole and the RESET vector is always
+> going to end
+> in tears unless VMM and the guest are doing very special things.=C2=A0
+> I.e. not
+> covering up the local APIC base is so foundational that trying to
+> guard against
+> it in KVM isn't worthwhile, because such a goof is just the tip of
+> the iceberg.
 
-On 7/6/26 11:44 PM, Nico Pache wrote:
-> The note about khugepaged counters references /proc/vmstat for the PMD
-> case, but never mentions where the mTHPs stats can be found
-> (i.e.: /sys/kernel/mm/transparent_hugepage/hugepages-<size>kB/stats/)
-> Add a small addition to this section for clarity.
-> 
-> Also fix a missing period while we are at it.
-> 
-> Suggested-by: Lorenzo Stoakes <ljs@kernel.org>
-> Signed-off-by: Nico Pache <npache@redhat.com>
-> ---
+I noticed :). And I learned a lot from the experience, which made it
+worthwhile. But I'd love to make the experience less painful for the
+next person, hence v2 that puts up some warning signs in the docs:
+=20
+https://lore.kernel.org/kvm/20260708133856.302151-1-twiederh@redhat.com/
 
-LGTM.
-Reviewed-by: Baolin Wang <baolin.wang@linux.alibaba.com>
 
