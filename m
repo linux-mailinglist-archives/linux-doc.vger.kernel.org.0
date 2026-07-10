@@ -1,161 +1,172 @@
-Return-Path: <linux-doc+bounces-96222-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96223-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id QsI2IMHEUGo24wIAu9opvQ
-	(envelope-from <linux-doc+bounces-96222-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 12:09:05 +0200
+	id IrMaKXHGUGqc4wIAu9opvQ
+	(envelope-from <linux-doc+bounces-96223-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 12:16:17 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0DB2F739782
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 12:09:05 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BA667398B9
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 12:16:17 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=none;
-	dmarc=none;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96222-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-96222-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=UMjwgew4;
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96223-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96223-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 9BE8D3075CCA
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 10:05:15 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id E31F7306782E
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 10:13:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E79FE400E0C;
-	Fri, 10 Jul 2026 10:05:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7D81A404889;
+	Fri, 10 Jul 2026 10:13:14 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-vs1-f43.google.com (mail-vs1-f43.google.com [209.85.217.43])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 86AD73FF1A4
-	for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 10:05:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38FE83F86F7;
+	Fri, 10 Jul 2026 10:13:12 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783677912; cv=none; b=O/T1/U1BFhCWFs55aeRnQ+bZY07strcuUFZ8SCQ73tOBgo67JGxVm98gy8uTwyaJz6hxy21rSBLR6DveD7pihaQKlNSBaRyEx1+aA13gJYP47wQLrT2Q7qRVSfQOMpp90MVLvMRP/TjYyhnK4+/pWcXKVxFZxszbY09Ei5tmobA=
+	t=1783678394; cv=none; b=cV/Rs42swISrzNzfOZqMXKgj8zmtyzz5lAfxEBbhqy0uSSFF/oI6gLf3zUGBAAGWgwMrRnKhexFSZ23w7OlXVL9UC5BTNWNGYhrLIQv2jf4UQpEOyLKbyxBvloQsHvWEhfGQ6RhfUTSFeCFM2ubi6yH6ry/+swpv18waNrmSmRM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783677912; c=relaxed/simple;
-	bh=Akkf3kL+PsQe7xmYXgLVaSqFrB61iytAQiQ6WDcfnyw=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=kfh++wfviJ0o9ERJJusf+tsaEVIQhdQIFMhJx4hrIQRHkTkPQQTXcZBlToonC6mcdT5Mn17tAiSlfUaG8N7mBuuBlFDVY7Al6TSpDSijHZd9Z8zMUbGpq125KxAEpRnEVo4d8sIM81xlgzPyKqOY82Bscn9UaiKM/ziTWjv/mt8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-m68k.org; spf=pass smtp.mailfrom=gmail.com; arc=none smtp.client-ip=209.85.217.43
-Received: by mail-vs1-f43.google.com with SMTP id ada2fe7eead31-728f9ecd56aso343612137.3
-        for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 03:05:11 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783677910; x=1784282710;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=4CIBplsIuVz8rQQd1I0ICk9drRx4a3WpiYxfYnZ5Bfk=;
-        b=S97qhEXe7kw62G3jay5RHqqHn8HEw09XDQRnRbFwiL1BNuLt4QM/t6R3WGu68xV/VH
-         keQ2PlJ+TW3lN6ZrBd8dpuPAaKdB2bPvw8XRRb3nKmybrpTnOPbZD3FyxsG1fNoLU/VD
-         kmldO1MG/QnvSrd2KTyUE1y17CBsltChmfwYpMfXilpGkS0+zTLefDcXdSJvQxC9fHFx
-         tKTHmXgWDMtUZo+AoHIcMK/JF+oo0UbEaB4mhEGwP4esiCDVAwmIpL0+7YCfz7DVWQAJ
-         giNhW6qoonm97PAzoHBVhf86I9coDuBcPA11Tpjxqeft/UGLpdBPYh8UBknn8vHfAGnQ
-         Ur+g==
-X-Forwarded-Encrypted: i=1; AHgh+RqeAUxAsCD6i1AQ7j/rohXsM9bFjMc7yM8SZKrQLnTJp/VUCGevKomj3CrSTLZKC7TiGadxVKnyjZE=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxVRkTGr9WwxQc8etVqRovhHNtqam4ePnUWmXovMJx+bStbP9+9
-	dUDCQ4CEr6ZfnrDpmGppKce4ikjHTwTwd3BSYwkMQpuOwUgDzi5eXzkN+fV6ctRH6oc=
-X-Gm-Gg: AfdE7cmGR3EbDPANSypobaiSioe7IjNh+RVCFCbYhyMQV+ZrVO4DCBnP16i/KLZ3W1Z
-	3yqypwEQGKpY1oDqecr/+Gi1Kt/Wek2hUo9y/0LaWYJlFBur3BCdhRC8H+/SBvHjw0kLYipLcex
-	Bu5O4kqJ9Wf9m9TJaLo8mvlYeAFLvHb6WPcPGhY3sIlfs8kQyWV01hvyq0uOujRFJ8Pp/Y1LBlG
-	a1sZPwUYmtPz/eZQjJcXDwX5zXI4MGWDgu14YRY/AodBgJriO7/uujiDflnHYtyMA4al8apZkRX
-	eN/j8F+ux0wgv633BTh+Wcr0w5cIPzGQzwLNms9ziLRR0xpUvEaLnlv1nALNbYK+jW1NnwyBLae
-	Lp+hKI42cA3Uxke0RyolNvcsadXCAT2IHv1EB/tEMeHfw0cFQcHEUe2yL6rZQDNMUJM3eO8CuW8
-	DKWGUOzQLqRypnfeDD/oRrdy0ECIaFMf67zhWnU5KIm9P+zrsMNvKa4g==
-X-Received: by 2002:a05:6102:3f44:b0:738:ecd7:1983 with SMTP id ada2fe7eead31-744e03e4c23mr6810853137.28.1783677910363;
-        Fri, 10 Jul 2026 03:05:10 -0700 (PDT)
-Received: from mail-vk1-f182.google.com (mail-vk1-f182.google.com. [209.85.221.182])
-        by smtp.gmail.com with ESMTPSA id ada2fe7eead31-744d6dea737sm4973761137.9.2026.07.10.03.05.08
-        for <linux-doc@vger.kernel.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 10 Jul 2026 03:05:09 -0700 (PDT)
-Received: by mail-vk1-f182.google.com with SMTP id 71dfb90a1353d-5bf94664327so399583e0c.1
-        for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 03:05:08 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+Rq4HzwhzLQn1Bzi6V9mPGgHwc7MBEivOXZK6Y6d4PznVhrx1bru+eLBbceCS2Nt5i/DRhwYOIMDAVs=@vger.kernel.org
-X-Received: by 2002:a05:6102:5605:b0:737:d2e8:d644 with SMTP id
- ada2fe7eead31-744e01af814mr5812204137.20.1783677907869; Fri, 10 Jul 2026
- 03:05:07 -0700 (PDT)
+	s=arc-20240116; t=1783678394; c=relaxed/simple;
+	bh=jF0FLl6ymivZ3T56dpr84k71wyBaBxJUTLlkktAxFGA=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=a18vheETI1/lOXpH+lSCVyqRCavuX/KSXPRoXs4cuj/xYmEOymLe5VyDYCYCjI+Nfk+abIQnLJutAwCJzSaQSTTzoXvCp3fsnb6aZFlWVinn+g+QN9otcz3y9sLJcgIZfHPekqLxwSbHCgw/mgW0hXLSOtpM6F4xaacu4COMKpc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UMjwgew4; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AE9A61F00A3A;
+	Fri, 10 Jul 2026 10:13:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783678392;
+	bh=8hbfKRDuVLHGMoceKywKuoqDqNYu8CtOmnUy8e3NQuw=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=UMjwgew4UIdPCkArdOvI4C4B0xibaemx4mdrCZW/wzcxrR7lEYm9BNEMnBhzMFMVL
+	 q8sKV4m90DH/mLxh7wVsygmAJ2+haumF32jCdVD2mWjxVdnxJigrJpTJ5TKRCJnSD1
+	 c4qGyqXHDrlsnoO3Ly2jVyikKiPlJ7f29tV2b/IZypIngdI9cnonpREabW7KMalRCc
+	 RBHo4ijJTQkgml/4vGmbVXL3Wxx7n+lEv/Zh8cXnu+gcMLZ62i1CE3NTFiyewE33A3
+	 1HqjEYgjYwasy4rNAt/1cQJtVi464Axya9O4HeTQphWKrPxe55vMPggW7owDzQ1hHG
+	 BjBl1+LqTsyoQ==
+Date: Fri, 10 Jul 2026 12:13:08 +0200
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Guenter Roeck <linux@roeck-us.net>
+Cc: "Torreno, Alexis Czezar" <AlexisCzezar.Torreno@analog.com>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, "linux-hwmon@vger.kernel.org" <linux-hwmon@vger.kernel.org>, 
+	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, 
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
+Subject: Re: [PATCH v2 1/5] dt-bindings: hwmon: (pmbus/max20830): add
+ enable-gpios property and complete examples
+Message-ID: <20260710-acrid-enchanted-prawn-5de949@quoll>
+References: <20260706-dev-max20830c-v2-0-37761e89bb5f@analog.com>
+ <20260706-dev-max20830c-v2-1-37761e89bb5f@analog.com>
+ <20260706-neat-perky-malamute-7518b7@quoll>
+ <PH0PR03MB6351C4B212D2CCBA3F1BF113F1F12@PH0PR03MB6351.namprd03.prod.outlook.com>
+ <65ebf21f-5a23-43b5-b10c-684fe421b0dc@roeck-us.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260709163833.3851179-1-sashal@kernel.org>
-In-Reply-To: <20260709163833.3851179-1-sashal@kernel.org>
-From: Geert Uytterhoeven <geert@linux-m68k.org>
-Date: Fri, 10 Jul 2026 12:04:56 +0200
-X-Gmail-Original-Message-ID: <CAMuHMdUCAX642tSJhvG_Ku6Y=D8GK3owbyed9qkhzPpgrU1kdg@mail.gmail.com>
-X-Gm-Features: AUfX_mzFVzbeb8aPhbmCJAceFXYQjpxJuPF0DPyyv44pDz5k7_z7ZhaQ8shBBRI
-Message-ID: <CAMuHMdUCAX642tSJhvG_Ku6Y=D8GK3owbyed9qkhzPpgrU1kdg@mail.gmail.com>
-Subject: Re: [PATCH v7 0/4] kallsyms: embed source file:line info in kernel
- stack traces
-To: Sasha Levin <sashal@kernel.org>
-Cc: Andrew Morton <akpm@linux-foundation.org>, Masahiro Yamada <masahiroy@kernel.org>, 
-	Luis Chamberlain <mcgrof@kernel.org>, Linus Torvalds <torvalds@linux-foundation.org>, 
-	Richard Weinberger <richard@nod.at>, Juergen Gross <jgross@suse.com>, 
-	James Bottomley <James.Bottomley@hansenpartnership.com>, Jonathan Corbet <corbet@lwn.net>, 
-	Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>, Petr Pavlu <petr.pavlu@suse.com>, 
-	Daniel Gomez <da.gomez@kernel.org>, Greg KH <gregkh@linuxfoundation.org>, 
-	Petr Mladek <pmladek@suse.com>, Steven Rostedt <rostedt@goodmis.org>, Kees Cook <kees@kernel.org>, 
-	Peter Zijlstra <peterz@infradead.org>, Thorsten Leemhuis <linux@leemhuis.info>, 
-	Vlastimil Babka <vbabka@kernel.org>, Helge Deller <deller@gmx.de>, Randy Dunlap <rdunlap@infradead.org>, 
-	Laurent Pinchart <laurent.pinchart@ideasonboard.com>, Vivian Wang <wangruikang@iscas.ac.cn>, 
-	Zhen Lei <thunder.leizhen@huawei.com>, Sami Tolvanen <samitolvanen@google.com>, 
-	linux-kernel@vger.kernel.org, linux-kbuild@vger.kernel.org, 
-	linux-modules@vger.kernel.org, linux-doc@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <65ebf21f-5a23-43b5-b10c-684fe421b0dc@roeck-us.net>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.46 / 15.00];
+X-Spamd-Result: default: False [-3.16 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-96222-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	DMARC_NA(0.00)[linux-m68k.org];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:sashal@kernel.org,m:akpm@linux-foundation.org,m:masahiroy@kernel.org,m:mcgrof@kernel.org,m:torvalds@linux-foundation.org,m:richard@nod.at,m:jgross@suse.com,m:James.Bottomley@hansenpartnership.com,m:corbet@lwn.net,m:nathan@kernel.org,m:nsc@kernel.org,m:petr.pavlu@suse.com,m:da.gomez@kernel.org,m:gregkh@linuxfoundation.org,m:pmladek@suse.com,m:rostedt@goodmis.org,m:kees@kernel.org,m:peterz@infradead.org,m:linux@leemhuis.info,m:vbabka@kernel.org,m:deller@gmx.de,m:rdunlap@infradead.org,m:laurent.pinchart@ideasonboard.com,m:wangruikang@iscas.ac.cn,m:thunder.leizhen@huawei.com,m:samitolvanen@google.com,m:linux-kernel@vger.kernel.org,m:linux-kbuild@vger.kernel.org,m:linux-modules@vger.kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[geert@linux-m68k.org,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[30];
-	FREEMAIL_CC(0.00)[linux-foundation.org,kernel.org,nod.at,suse.com,hansenpartnership.com,lwn.net,linuxfoundation.org,goodmis.org,infradead.org,leemhuis.info,gmx.de,ideasonboard.com,iscas.ac.cn,huawei.com,google.com,vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-96223-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	MISSING_XM_UA(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[geert@linux-m68k.org,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	R_DKIM_NA(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:linux@roeck-us.net,m:AlexisCzezar.Torreno@analog.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-hwmon@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
 	TO_DN_SOME(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER(0.00)[krzk@kernel.org,linux-doc@vger.kernel.org];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[krzk@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linux-m68k.org:from_mime,linux-m68k.org:email,vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,mail.gmail.com:mid]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,quoll:mid,analog.com:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 0DB2F739782
+X-Rspamd-Queue-Id: 4BA667398B9
 
-Hi Sasha,
+On Mon, Jul 06, 2026 at 09:33:32AM -0700, Guenter Roeck wrote:
+> On 7/6/26 00:13, Torreno, Alexis Czezar wrote:
+> > 
+> > > On Mon, Jul 06, 2026 at 10:08:41AM +0800, Alexis Czezar Torreno wrote:
+> > > > Adding an entry for the MAX20830 EN (enable) pin. This pin exist but
+> > > > was not included before. Also edited examples entry to be more complete.
+> > > > 
+> > > > Signed-off-by: Alexis Czezar Torreno <alexisczezar.torreno@analog.com>
+> > > > ---
+> > > >   .../devicetree/bindings/hwmon/pmbus/adi,max20830.yaml         | 11
+> > > +++++++++++
+> > > >   1 file changed, 11 insertions(+)
+> > > > 
+> > > 
+> > > How did you address previous feedback?
+> > > 
+> > 
+> > Regarding the enable pin, I added this since I know bindings like being complete
+> > and saw that I didn't add it the first time I submitted max20830.
+> > I added driver code for the gpio but learned that it wasn't really a use case so
+> > I simply dropped the patch for it.
+> > 
+> 
+> I guess I am completely missing the point here. I can not imagine a situation
+> where one would want to connect the enable pin to a driver-controlled GPIO pin,
+> or why would one connect the chip's PGOOD output pin to a GPIO input pin
+> and connect that back to the driver.
+> 
+> I think we will need guidance from devicetree maintainers explaining what
+> "complete" means in such a context to avoid having to repeat this discussion
+> for every driver going forward.
 
-On Thu, 9 Jul 2026 at 18:38, Sasha Levin <sashal@kernel.org> wrote:
-> Changes since v6
-> ================
->
-> - Address Sashiko AI review comments.
+I think complete means all reasonable hardware resources/properties,
+regardless whether current OS implementation uses them or not. That's
+why if there is enable-gpios which is not used by Linux but could be in
+the future, then it should be documented.
 
-What does that mean?
-Please list the changes, so reviewers know what to look at.
-Thanks!
+However if you claim that enable-gpios will absolutely NEVER be used by
+Linux or bootloader or any other DT bindings user (*BSD, Barebox, U-boot
+etc), then I would skip it, just like we do not describe many other
+parts which simply have no use for the software.
 
-Gr{oetje,eeting}s,
+IOW, DTS is description of non-discoverable hardware for the software.
+We do not describe hardware for the sake of description, to mirror
+schematics. That's not the goal. The goal is to make some software
+happy, even if this is a future software implementation.
 
-                        Geert
+What is the case here - I rely on your guidance whether enable-gpios can
+EVER be used by software. If there is a chance, then IMO property could
+stay.
 
--- 
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+Also, no harm will be done if we skip this property and we add it later
+in the future when actual use appears. Maybe no need to spend time on
+discussing such triviality and instead just skip it.
 
-In personal conversations with technical people, I call myself a hacker. But
-when I'm talking to journalists I just say "programmer" or something like that.
-                                -- Linus Torvalds
+Best regards,
+Krzysztof
+
 
