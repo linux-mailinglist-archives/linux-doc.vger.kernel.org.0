@@ -1,133 +1,160 @@
-Return-Path: <linux-doc+bounces-96316-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96317-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id U6Z2KRBHUWoFBwMAu9opvQ
-	(envelope-from <linux-doc+bounces-96316-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 21:25:04 +0200
+	id 2yjwG/tFUWq0BgMAu9opvQ
+	(envelope-from <linux-doc+bounces-96317-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 21:20:27 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id E69C073DBB3
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 21:25:03 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id CD87673DACD
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 21:20:26 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lwn.net header.s=20201203 header.b="sc/ByBHb";
-	dmarc=pass (policy=none) header.from=lwn.net;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96316-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-96316-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=GEJqiMos;
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96317-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-96317-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 92A5C3036EC4
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 19:18:30 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 5D43A3031C99
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 19:20:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 265503822AB;
-	Fri, 10 Jul 2026 19:18:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 144F73382E1;
+	Fri, 10 Jul 2026 19:20:01 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA5AB1624C5;
-	Fri, 10 Jul 2026 19:18:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA7B52C11CA;
+	Fri, 10 Jul 2026 19:19:59 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783711109; cv=none; b=JNBCg99DPLMLb/ioCzOF0SWw04FojSXk8UXV2UDEPqVZnNZsagV8eChtxzdUwhQBSQxCSQHH3UD04hrLuJOTnml0ZhcgIP/PvqQcPazqoOvp5Z4gP1iI+yyrHwEd96JBuwG9Ru06pyM82R+q9/w1V+d6Hcqkgu1cnE8thcd9K88=
+	t=1783711201; cv=none; b=OpyWq5NKKPiQhZfJvvkPL71E/GlL7FYkkQQgwhiXcIwKHH2sjXmMJXR8xqALMyl5GPKlq6NZQ6kvrrMtKGoihTugupGiZ1+TVt40HasTKh02y1bBTd8c5jpWbMuWa/GKWU2vX1jLO1BBf1xGYYuIZ9fHVwQsh9LR9n3mqcG1DUo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783711109; c=relaxed/simple;
-	bh=bbbGVvDT5H7FtvjEiaaZkDtc9lF999Xpt6/mPQKukM8=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=reC6Vguk9rH+HX6o89qTBYudEX5K7G8dEDj0emFaDkTaPQBGfsEKWWFXl2z2VP7Ll85zS1u4ySd/9sZcxryWqbRiVRYOufjnmp7vFhcfewxdImuSXZ/PnWwTjhE8wkvPdBwFvRaZjnsbMrRskif8uLnCKZmrLA0rAlxY7UdZn7Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=sc/ByBHb; arc=none smtp.client-ip=45.79.88.28
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 2B92E4108A
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1783711107; bh=u7jBRLz50XOFennMDJPizEDrV3JafaPuG6zv01eh734=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=sc/ByBHbzb3vKGPF8MSJSeNVG12AIDqUpYMk6kDnNIP9CE41vTZQT+SLKEiE1b735
-	 CM0+RvagsySf1yeI46SmBwrpTLVJro2sFuym46qYTIPWBNujb6Id0ey0YmNLl7QjU9
-	 iCGjToMZxHVT78gM9IsxbEdTmkLMlbS6yDs+lWPVUufj2eYx32erQfYGPH0wb5Uo3a
-	 0r4uES0Lvaq1T+Dix5LZVS0ALmMADxnnHNdD7iu1+kXCOx1KtW2vMUkBka7EMOYFJH
-	 IBY1MygOpndNBlwhnOpj8Dh9m2ACC4KGUUlI4KENeP0dtjr/jqAdCtBHMmT6EyPo98
-	 WPISVKfkWCYyA==
-Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 2B92E4108A;
-	Fri, 10 Jul 2026 19:18:27 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: Yuhong Cheng <ceohunk@gmail.com>, linusw@kernel.org
-Cc: linux-gpio@vger.kernel.org, linux-doc@vger.kernel.org, Yuhong Cheng
- <ceohunk@gmail.com>
-Subject: Re: [PATCH] docs: driver-api: pin-control: fix spelling of below
-In-Reply-To: <20260705070422.764-1-ceohunk@gmail.com>
-References: <20260705070422.764-1-ceohunk@gmail.com>
-Date: Fri, 10 Jul 2026 13:18:26 -0600
-Message-ID: <87cxwulkl9.fsf@trenco.lwn.net>
+	s=arc-20240116; t=1783711201; c=relaxed/simple;
+	bh=2rw2PxLGznQEWQfneszCluqe4OqXoypkNdS9ILgvT5w=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=VD/1RXhLRMykSYf/F/IwvgkCQoVEuOpasaINOZ4PSUie+QKLr2uh5jn96P8MTi6A9ajGCD5ZOp3T/O6QNssrapAjIJBAcY5OIH3bgPM535THtrSFaIixWtLYqoejT4henXWgs1i9ZhNWu5Dw2ibYTcYSNiKtBKC3dnCS7KwHMPc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GEJqiMos; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 05E681F000E9;
+	Fri, 10 Jul 2026 19:19:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783711199;
+	bh=7vaDAEzbyRLblqFIJzSExEX+Fr8GhvQNfu9Gwp2NWyw=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=GEJqiMosDruYqisdW+phxteUPy3iHgILrQMivz5euJ8bS+hUmhdd27d5awf2DrfbK
+	 vcxcVEb622u5gqNn7KE5H4SrHa2iAO8oIWYSiKsghMJ6lOq3dRxdxndkQphjIMisye
+	 h659COxfNcPvdro1ElOBYvHzSwlHarGtFM23U9j7dQLZl1wAfc3mRlMLJk+5C5Z9yh
+	 A0lRv61iPgecL0QQcbl5oJ0GacPMPL/uKju4Z2PSp/LiUxToNRLtGFOF7uhSYEA0bO
+	 4LKKBDQekmE1yhMvWNVUQRA1MmLT/m4MCleo28Jg5z6O9fuYVQL2zJccDI4vZnlQGU
+	 29n6IpB066iUA==
+Date: Fri, 10 Jul 2026 21:19:53 +0200
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Jonathan Corbet <corbet@lwn.net>
+Cc: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+ linux-kernel@vger.kernel.org, Clinton Phillips
+ <clintdotphillips@gmail.com>, Daniel Lundberg Pedersen <dlp@qtec.com>, Hans
+ Verkuil <hverkuil+cisco@kernel.org>, Mauro Carvalho Chehab
+ <mchehab@kernel.org>, Petr Vorel <pvorel@suse.cz>, Randy Dunlap
+ <rdunlap@infradead.org>, Rito Rhymes <rito@ritovision.com>, Shuah Khan
+ <skhan@linuxfoundation.org>, linux-media@vger.kernel.org
+Subject: Re: [PATCH] docs: custom.css: don't limit randering to old 800px
+ monitors
+Message-ID: <20260710211953.2a3dbfa9@foz.lan>
+In-Reply-To: <87fr1qn9us.fsf@trenco.lwn.net>
+References: <1950557405f1150acb1de50de1801f2413223b87.1783673996.git.mchehab+huawei@kernel.org>
+	<87fr1qn9us.fsf@trenco.lwn.net>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-3.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-96316-lists,linux-doc=lfdr.de];
-	TO_DN_SOME(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:ceohunk@gmail.com,m:linusw@kernel.org,m:linux-gpio@vger.kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-96317-lists,linux-doc=lfdr.de,huawei];
 	FORWARDED(0.00)[lists@lfdr.de];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:corbet@lwn.net,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:clintdotphillips@gmail.com,m:dlp@qtec.com,m:hverkuil+cisco@kernel.org,m:mchehab@kernel.org,m:pvorel@suse.cz,m:rdunlap@infradead.org,m:rito@ritovision.com,m:skhan@linuxfoundation.org,m:linux-media@vger.kernel.org,m:hverkuil@kernel.org,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com];
-	FREEMAIL_TO(0.00)[gmail.com,kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	RCPT_COUNT_TWELVE(0.00)[12];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[lwn.net:+];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com,qtec.com,kernel.org,suse.cz,infradead.org,ritovision.com,linuxfoundation.org];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,lwn.net:from_mime,lwn.net:dkim,vger.kernel.org:from_smtp,trenco.lwn.net:mid]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,cisco];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: E69C073DBB3
+X-Rspamd-Queue-Id: CD87673DACD
 
-Yuhong Cheng <ceohunk@gmail.com> writes:
+On Fri, 10 Jul 2026 09:27:23 -0600
+Jonathan Corbet <corbet@lwn.net> wrote:
 
-> Fix the spelling of 'bellow' to 'below' in the PM API section.
->
-> Signed-off-by: Yuhong Cheng <ceohunk@gmail.com>
-> ---
->  Documentation/driver-api/pin-control.rst | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/Documentation/driver-api/pin-control.rst b/Documentation/driver-api/pin-control.rst
-> index 1f585ecca..80106e44a 100644
-> --- a/Documentation/driver-api/pin-control.rst
-> +++ b/Documentation/driver-api/pin-control.rst
-> @@ -1175,7 +1175,7 @@ Possible standard state names are: "default", "init", "sleep" and "idle".
->    selected after the driver probe.
->  
->  - the ``sleep`` and ``idle`` states are for power management and can only
-> -  be selected with the PM API bellow.
-> +  be selected with the PM API below.
->  
+> Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
+> 
+> > Right now, base.css style imposes a maximum limit of 800 horizontal
+> > pixels to be compatible with very old SVGA monitors.
+> >
+> > Remove such artificial limit, letting the output to be adjusted to
+> > the browser windows size.
+> >
+> > Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> > ---
+> >  Documentation/sphinx-static/custom.css | 2 ++
+> >  1 file changed, 2 insertions(+)
+> >
+> > diff --git a/Documentation/sphinx-static/custom.css b/Documentation/sphinx-static/custom.css
+> > index 5aa0a1ed9864..1055db7dc1dd 100644
+> > --- a/Documentation/sphinx-static/custom.css
+> > +++ b/Documentation/sphinx-static/custom.css
+> > @@ -3,6 +3,8 @@
+> >   * CSS tweaks for the Alabaster theme
+> >   */
+> >  
+> > +div.body {  max-width: none; }
+> > +  
+> 
+> 800px is clearly a dumb limit, I have no problem changing that.  Going
+> to arbitrary width doesn't seem good for readability, though.  What do
+> you think about, instead, setting a limit in a resolution-independent
+> say, to (say) 60em?
 
-Applied, thanks.
+60em also seems too small, considering the size of tables we have on
+media. Some tables have one column for each bit, plus one or two other
+columns, so the table would easily have up to 34 columns. After adding
+long fourcc codes there and V4L macro names, it can easily be very big,
+in terms of "em" measures.
 
-jon
+If you don't want to let it become too big(*), then perhaps it could
+be something like:
+
+	div.body {  max-width: 80%; }
+
+(*) personally, I don't see any issues on it. My monitor's ratio is
+    32/9. Quite the opposite, with such ultra-wide screen, I don't like
+    sites that have fixed max-width limits, as they end limiting my
+    personal taste for no good reason.
+
+Thanks,
+Mauro
 
