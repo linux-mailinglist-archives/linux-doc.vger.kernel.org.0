@@ -1,177 +1,203 @@
-Return-Path: <linux-doc+bounces-96251-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96252-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id K68DHFXoUGoM8QIAu9opvQ
-	(envelope-from <linux-doc+bounces-96251-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 14:40:53 +0200
+	id 4ENvEhrtUGpT8gIAu9opvQ
+	(envelope-from <linux-doc+bounces-96252-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 15:01:14 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id B99A273ADA1
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 14:40:52 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 928AC73B01A
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 15:01:13 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=qtec.com header.s=google header.b=YI7DAuk5;
-	dmarc=pass (policy=reject) header.from=qtec.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96251-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-96251-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=O2AA42wc;
+	dmarc=pass (policy=quarantine) header.from=redhat.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96252-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96252-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 30EF23012CF2
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 12:38:14 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id A56E93055D50
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 12:53:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1F89D41168F;
-	Fri, 10 Jul 2026 12:38:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 72E8F426D3F;
+	Fri, 10 Jul 2026 12:53:23 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-lj1-f173.google.com (mail-lj1-f173.google.com [209.85.208.173])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 861CF408624
-	for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 12:38:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8489140800F
+	for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 12:53:21 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783687093; cv=none; b=NX83iofv10Wc1N6rYv4tJKO3SwwoE4urZyUhGTbAb4Jp7Mr1gUVTFMoEYiJCoEvYwZoFr5xqT7sklH3Hjsi7OIR/7dDQRGczXFu8Y3JcpA3wAHlgY/8Qs9bR6inHnKrOlnm3ImgIJ0+IiWo31HnijDkCu8ZVaWPtEFOeMoyCeKQ=
+	t=1783688003; cv=none; b=jaqAuyvN8Wyrvk5OE85DntNSR/fJ24RJhV2URXcUBwRJ3EU0M0r++ya2PF6ejD1q59n0nfr80Avs2YKOc8/u7e/G2C6jYj8BSqXFEJxOshKLb/veXMthsKjS0NfVoB+UrBsO84wHsiADEsXxeEcoVTlTpbqciWYiOAa7dnKcNz8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783687093; c=relaxed/simple;
-	bh=C3HhkpWE6qU85b4hr6HvJtthh4oucD293NGx2vb+4Hw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
-	 In-Reply-To:Content-Type; b=fqFinta0ceUN0b5ntGjsFuLkwOYXFIEAbH14p5A+myy4S4x2IjXzb7OuPQiIOt+CDbHmn+u7UUPJ4q3aAbp8uSFZilBMWDZrx7T/IcU5uHfAQu+kD17Fypj3ue3muBlpmE31an4Rgh9FtC7oLE68TKw1DRmPSbsvNfBJ3wUI7g0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=qtec.com; spf=pass smtp.mailfrom=qtec.com; dkim=pass (2048-bit key) header.d=qtec.com header.i=@qtec.com header.b=YI7DAuk5; arc=none smtp.client-ip=209.85.208.173
-Received: by mail-lj1-f173.google.com with SMTP id 38308e7fff4ca-39c9107baa7so10049981fa.3
-        for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 05:38:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=qtec.com; s=google; t=1783687088; x=1784291888; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=fG0KIih+vx57RDic8M93xs1kz9fPC82KqiNSjebxkcE=;
-        b=YI7DAuk5f4Ug+9+yT5XQ8xLc+RLSBljsssn19UH8KPmiCCXW7zOlzIbT5vtsJtjCNv
-         yI/aoN2c0J2mepHN+eVB4EDrBJ0HYzBhDpxSzDl3/RQRZ9XmhYdi7xTsQN0Bgg5sEqmq
-         DeqF2iEr7mYBtprt6oHG+hO4Rwm0qGEUS58tOiODwwttfXVTBt2oEQqUad/A1rlQ25ar
-         h1bpRWZz8WOMuA1QvCjk7W6qYBqhF8VsmP1ja5pXxggcIwvhBFSAOxU3YLYb0NAcp5bV
-         17roL1f57wUcFBuLXYXOYUDvVJv6eyj7y3cVbpKhWEwvjiF4YXaGoKSWigvUQrDhoHL+
-         gfLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783687088; x=1784291888;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=fG0KIih+vx57RDic8M93xs1kz9fPC82KqiNSjebxkcE=;
-        b=d6wbU1x5cXO0B+lMF6uOIbG4NAbZS5QLcF+werVkZ7iMAJoo288nwUC752nraDP1Qg
-         khPY3QdpmZOIZcOcVjhmVCmMdrMTTlkolOgsrUeRSPeauoXLzMXIGllFDXo1LBMXkWLb
-         MOA2RrGmzfejoB9CczLGjWQcICiCGRRwATfTA+NWk0RoKA0aea1foGF3rKB28tUjfHO3
-         70qPL2zca6SRthSx7qVj4HBUrgsNgVO7qOkrJxFm1yOIxFMhFLMnoRCYr8mQSp046BpO
-         uzUrE4fB7y0UlIqRJ2gjp2MpjBMYrGOIdPtQ6CEO0ve2iXf6eU7pDxdp2h/2K1zPtuFp
-         hkXQ==
-X-Forwarded-Encrypted: i=1; AHgh+RrSCkB0x8Fnm/Hro9v98J5BHiAsCBuiuD0PokFQqacmwjrMGySFBkDM6QIIeiBesCfWYenCR3H0UCs=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzCpi2Y60ieMwft+LVDhxNEzdiKoT/KLJU79F4JEoAb3tEo21or
-	5c840CrulKXZiMddvpvRXFdcEKcYxsgepNmfGXEkF619p+HKMmG4qHU6yYe12aQw2whO5ypVrEj
-	o3g3x+h8=
-X-Gm-Gg: AfdE7cnJ/oRUH6o782pMByt+OW3y8qmQyDYCD7Txe7DIESRjzHcRr/LYRDENA4o7TLX
-	VsvJsOIENzDqTTsq8FHHWU5kYQH6DMWJH3AxxulfBc9q6xoZuzo+F+wqAjT3cCuOlaueE6Loqgl
-	jKxBahsZ0pRPynJCSfQblmJsTKSggu5RodlP02vH+ouaVtR+uLtLM6BkF4ghd7ApTmUzUD9PHUb
-	ATN/Muxp6QdYBvdxMHpSymky9LFHKsr9fUqFnOCf+zcMUv8hPqLs4drz2jdwmDFLgjdX6jFXfsR
-	e5Qq3lgnRm4al9nYEEhYiQUbkk8oHVT+7xbfODwXRg5ob7tmii6w9k/8Meb7UA7703E/vItzpCI
-	mr6V7v1ziP4qJ1J0kYsS2aF9U45NSg01iS8uLfUZVmzKixgDrL4Pxsi6dBUZpYJO5k0pQdZ6pj0
-	Mr+dAkrFEQqsY6HhHE7YL+JQ1glMf8xfWat0uP+9xFkM5n74Tsh0Hni4f1f4c/NbPlJ4NUK15Mp
-	s4cqy04n9YvTh+EYlaD96Mz02kUag4quoVnBW3JIMrm61YhajPwpRAYfns=
-X-Received: by 2002:a05:6512:314f:b0:5ae:c3c1:822a with SMTP id 2adb3069b0e04-5b011478028mr1822557e87.58.1783687088448;
-        Fri, 10 Jul 2026 05:38:08 -0700 (PDT)
-Received: from [192.168.2.43] (cpe.ge-3-0-8-100.ryvnqe10.dk.customer.tdc.net. [80.197.57.18])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b01caa667asm580895e87.66.2026.07.10.05.38.06
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 10 Jul 2026 05:38:06 -0700 (PDT)
-Message-ID: <82c74030-88c6-4bf2-ae76-41c2a68ced61@qtec.com>
-Date: Fri, 10 Jul 2026 14:38:06 +0200
+	s=arc-20240116; t=1783688003; c=relaxed/simple;
+	bh=sxv6a13OPgrK6TOsUQ/kBJYeYtA4hSsjpL/QVUw8MJI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ff14UT4OBEjLXP1iVEMS6o7Z2ggesijQ06mJlFwQgjzpI6FOgUHEu6iTGPo4YpP/+qT/sWBQlud64sQzyMBxKjHQaL4XHYoRQvGBrY55pEP103Sq5H3bRJLP8PwJuIruqFVFTM+pSFV5cdDWq2GOJi46VxS1B9drH1bynbRNoVU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=O2AA42wc; arc=none smtp.client-ip=170.10.133.124
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1783688000;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=XTxMckJ71iKdcnC625lbZ9WJQgTp+gyXuVTaxsSZYeA=;
+	b=O2AA42wc0EFpHFaeTcNaA+5w2Vxj2dLQZ00YjfR5A3+JB1y4OPtfyeY1VNKeuyYVDjlqoy
+	TzMenwjfF9q+zFqyZXi8XP+H48JHs7nMPojLVdTC4UG6U94iupybkM9uqpYd1CMMtl1uyc
+	pySLQjyn0zU5XCWVDK7TvBD50TiZKnw=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-640-duefXCb_NOaqJcpTJsNlCw-1; Fri,
+ 10 Jul 2026 08:53:17 -0400
+X-MC-Unique: duefXCb_NOaqJcpTJsNlCw-1
+X-Mimecast-MFC-AGG-ID: duefXCb_NOaqJcpTJsNlCw_1783687991
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id AAE061801379;
+	Fri, 10 Jul 2026 12:53:07 +0000 (UTC)
+Received: from fedora (unknown [10.44.49.164])
+	by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with SMTP id 8AEF2180029C;
+	Fri, 10 Jul 2026 12:52:47 +0000 (UTC)
+Received: by fedora (nbSMTP-1.00) for uid 1000
+	oleg@redhat.com; Fri, 10 Jul 2026 14:53:07 +0200 (CEST)
+Date: Fri, 10 Jul 2026 14:52:40 +0200
+From: Oleg Nesterov <oleg@redhat.com>
+To: Michal =?iso-8859-1?Q?Such=E1nek?= <msuchanek@suse.de>
+Cc: Thomas Gleixner <tglx@kernel.org>, LKML <linux-kernel@vger.kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Shrikanth Hegde <sshegde@linux.ibm.com>,
+	linuxppc-dev@lists.ozlabs.org, Kees Cook <kees@kernel.org>,
+	Huacai Chen <chenhuacai@kernel.org>, loongarch@lists.linux.dev,
+	Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+	linux-riscv@lists.infradead.org,
+	Sven Schnelle <svens@linux.ibm.com>, linux-s390@vger.kernel.org,
+	x86@kernel.org, Mark Rutland <mark.rutland@arm.com>,
+	Jinjie Ruan <ruanjinjie@huawei.com>,
+	Andy Lutomirski <luto@kernel.org>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	Russell King <linux@armlinux.org.uk>,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Guo Ren <guoren@kernel.org>,
+	Geert Uytterhoeven <geert@linux-m68k.org>,
+	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+	Helge Deller <deller@gmx.de>,
+	Yoshinori Sato <ysato@users.sourceforge.jp>,
+	Richard Weinberger <richard@nod.at>,
+	Chris Zankel <chris@zankel.net>,
+	linux-arm-kernel@lists.infradead.org, linux-alpha@vger.kernel.org,
+	linux-csky@vger.kernel.org, linux-m68k@lists.linux-m68k.org,
+	linux-mips@vger.kernel.org, linux-parisc@vger.kernel.org,
+	linux-sh@vger.kernel.org, linux-um@lists.infradead.org,
+	Arnd Bergmann <arnd@arndb.de>, Vineet Gupta <vgupta@kernel.org>,
+	Will Deacon <will@kernel.org>, Brian Cain <bcain@kernel.org>,
+	Michal Simek <monstr@monstr.eu>, Dinh Nguyen <dinguyen@kernel.org>,
+	"David S. Miller" <davem@davemloft.net>,
+	Andreas Larsson <andreas@gaisler.com>,
+	linux-snps-arc@lists.infradead.org, linux-hexagon@vger.kernel.org,
+	linux-openrisc@vger.kernel.org, sparclinux@vger.kernel.org,
+	linux-arch@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+	linux-doc@vger.kernel.org
+Subject: Re: [patch 13/18] entry: Make trace_syscall_enter() return type bool
+Message-ID: <alDrGBMdTuoLcVyy@redhat.com>
+References: <20260707181957.433213175@kernel.org>
+ <20260707190254.338083894@kernel.org>
+ <ak5ySpil83TNWxeq@kunlun.suse.cz>
+ <87se5tqkyp.ffs@fw13>
+ <alDQ7isUKJFl8Va4@kunlun.suse.cz>
+ <alDaOw8t-e3rxIPm@redhat.com>
+ <alDmTcgzMlKiio9H@kunlun.suse.cz>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Bad wrapping in some tables
-To: Rito Rhymes <rito@ritovision.com>, Jonathan Corbet <corbet@lwn.net>,
- linux-doc@vger.kernel.org, linux-media@vger.kernel.org
-References: <c542aaf7-6a40-4730-8bd6-208c9fe932d5@qtec.com>
- <87pl0yr9ah.fsf@trenco.lwn.net> <DJUP0UXLLHJ0.3P121A982R9TP@ritovision.com>
-Content-Language: en-US
-From: Daniel Lundberg Pedersen <dlp@qtec.com>
-In-Reply-To: <DJUP0UXLLHJ0.3P121A982R9TP@ritovision.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <alDmTcgzMlKiio9H@kunlun.suse.cz>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[qtec.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114];
-	R_DKIM_ALLOW(-0.20)[qtec.com:s=google];
+	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-96251-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-96252-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[kernel.org,vger.kernel.org,infradead.org,ellerman.id.au,linux.ibm.com,lists.ozlabs.org,lists.linux.dev,dabbelt.com,lists.infradead.org,arm.com,huawei.com,linaro.org,armlinux.org.uk,linux-m68k.org,alpha.franken.de,gmx.de,users.sourceforge.jp,nod.at,zankel.net,lists.linux-m68k.org,arndb.de,monstr.eu,davemloft.net,gaisler.com,lwn.net];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns];
+	FORGED_RECIPIENTS(0.00)[m:msuchanek@suse.de,m:tglx@kernel.org,m:linux-kernel@vger.kernel.org,m:peterz@infradead.org,m:mpe@ellerman.id.au,m:sshegde@linux.ibm.com,m:linuxppc-dev@lists.ozlabs.org,m:kees@kernel.org,m:chenhuacai@kernel.org,m:loongarch@lists.linux.dev,m:pjw@kernel.org,m:palmer@dabbelt.com,m:linux-riscv@lists.infradead.org,m:svens@linux.ibm.com,m:linux-s390@vger.kernel.org,m:x86@kernel.org,m:mark.rutland@arm.com,m:ruanjinjie@huawei.com,m:luto@kernel.org,m:richard.henderson@linaro.org,m:linux@armlinux.org.uk,m:catalin.marinas@arm.com,m:guoren@kernel.org,m:geert@linux-m68k.org,m:tsbogend@alpha.franken.de,m:deller@gmx.de,m:ysato@users.sourceforge.jp,m:richard@nod.at,m:chris@zankel.net,m:linux-arm-kernel@lists.infradead.org,m:linux-alpha@vger.kernel.org,m:linux-csky@vger.kernel.org,m:linux-m68k@lists.linux-m68k.org,m:linux-mips@vger.kernel.org,m:linux-parisc@vger.kernel.org,m:linux-sh@vger.kernel.org,m:linux-um@lists.infradead.org,m:arnd@arndb.de,m:vgupta@kernel.org,m:will@ker
+ nel.org,m:bcain@kernel.org,m:monstr@monstr.eu,m:dinguyen@kernel.org,m:davem@davemloft.net,m:andreas@gaisler.com,m:linux-snps-arc@lists.infradead.org,m:linux-hexagon@vger.kernel.org,m:linux-openrisc@vger.kernel.org,m:sparclinux@vger.kernel.org,m:linux-arch@vger.kernel.org,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[redhat.com:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[oleg@redhat.com,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[dlp@qtec.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS(0.00)[m:rito@ritovision.com,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,m:linux-media@vger.kernel.org,s:lists@lfdr.de];
-	DKIM_TRACE(0.00)[qtec.com:+];
-	RCPT_COUNT_THREE(0.00)[4];
-	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[dlp@qtec.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[oleg@redhat.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[52];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,qtec.com:from_mime,qtec.com:dkim,qtec.com:mid]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCVD_COUNT_SEVEN(0.00)[7]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: B99A273ADA1
+X-Rspamd-Queue-Id: 928AC73B01A
 
-Hi
+On 07/10, Michal Suchánek wrote:
+>
+> On Fri, Jul 10, 2026 at 01:40:43PM +0200, Oleg Nesterov wrote:
+> >
+> > I can only say that ptrace users do want to skip the syscall and set the
+> > return value on entry.
+> >
+> > See
+> > 	[PATCH v5 1/2] ptrace: add PTRACE_SET_SYSCALL_INFO syscall skipping support
+> > 	https://lore.kernel.org/all/20260709100949.94345-2-renzo@cs.unibo.it/
+> >
+> > The changelog explains that currently this doesn't work because
+> > among the arches which define HAVE_ARCH_TRACEHOOK (at least) arch/mips is
+> > broken in this regard.
+>
+> Or it could be documented that setting the return value has to be done
+> in the exit trace, and that would than work on any architecture AFAICT.
 
-On 10/07/2026 08:55, Rito Rhymes wrote:
-> I just got caught up to speed, reviewing the links, the regression, the
-> prior state and other relevant context.
-> 
-> Daniel, thanks for pointing out the regression. As Jon said, it's
-> always good to inform the author of the patch, and I'd have been happy
-> to discuss and test out solutions with you.
+Well, ptrace users know the problem. And this what they have to do
+currently.
 
-Sorry about that, I'll remember that for next time.
+> With ppc and s390 using the same register for the syscall number and
+> syscall return value it's very much impossible to poke the return value
+> on entry into a register using the generic register access function. As
+> of now there is no place to store the value ot of the return value
+> outside of the registers, either.
 
-[...]
-> 
-> The best solution:
-> Make targeted changes to the tables to make them fundamentally behave
-> better on smaller screen sizes.
-> 
-> I began this effort with:
-> [PATCH v3] docs: wrap generated tables to contain small-screen overflow
-> 
-> Jon hadn't followed up after testing out the fix with CSS and my
-> explaining why the wrapper was the better approach, because it prevented
-> regressions. That fix is a start, but more would need to be done.
-> 
-> If Daniel is willing to help test out table fixes and provide examples
-> of regressions, and if Jon has the bandwidth to review my patch
-> submissions to improve the tables, I am willing to tackle this systemic
-> issue, which will result in this issue being resolved as well.
+I know nothing about ppc and s390. Can't comment right now.
 
-I don't mind testing some stuff if you want me to, but as Hans mentions 
-the media docs is full of tables which have these issues, from a quick
-check, almost all sub-pages of the Function Reference are affected:
+> And the current PTRACE_SET_SYSCALL_INFO indeed sets the syscall nr and
+> arguments on entry and the syscall return value on exit, that
+> disctincion is implemented.
+>
+> Not sure how the patchset you point out is relevant, it only adds
+> changes in the exit case.
 
-https://www.kernel.org/doc/html/latest/userspace-api/media/v4l/user-func.html
+No. It allows to skip-and-set-retval on PTRACE_EVENT_SECCOMP.
 
-> 
-> Rito
+But ENTRY -> EXIT transition is not yet allowed due to the problems
+above.
 
+Oleg.
 
-Regards Daniel
 
