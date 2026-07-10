@@ -1,40 +1,40 @@
-Return-Path: <linux-doc+bounces-96179-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96178-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id NZJbBLF5UGrYzgIAu9opvQ
-	(envelope-from <linux-doc+bounces-96179-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 06:48:49 +0200
+	id tdSMEZp5UGrRzgIAu9opvQ
+	(envelope-from <linux-doc+bounces-96178-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 06:48:26 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 768F87372F2
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 06:48:48 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 64BBC7372E3
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 06:48:25 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
 	dkim=none;
 	dmarc=none;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96179-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96179-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96178-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-96178-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 3B90D3030D3A
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 04:48:16 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 5C649300E323
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 04:48:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3AA92374A12;
-	Fri, 10 Jul 2026 04:48:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9F89637419B;
+	Fri, 10 Jul 2026 04:48:06 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mailgw.kylinos.cn (mailgw.kylinos.cn [124.126.103.232])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA6AF11CA9;
-	Fri, 10 Jul 2026 04:48:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5C9B937206A;
+	Fri, 10 Jul 2026 04:48:04 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783658888; cv=none; b=PSmwo0oXM8oo9EBnf3uJ9rfP2U+0uZknHzSgw2hroSDWAUXKeF1zEFEwujLAErOHRTeYWhd+Nx3e0VQSRAlwvMntGa0Fkmuqva4KCuBpnVOx0DhgnSeotW8QCwrZIgKyf9K69HZrGxpSJ/ETmJWiaRUInB+9PKRHviF3I7iCOcA=
+	t=1783658886; cv=none; b=BQPFLZ7lC0xNAUpjIpN0WViDk9kWOkDiAao4UPtDn/+3UUQ0dWWKpgErPUcnXbKkd/eIQtIROzOP6HwKfEAhGj74EynSY41UrvPszMqDG1Lw23i92/jDo/5I5fGirLSJQbX079ZUNkgs0sJLp/xLiTVEzlESBUxo4qHJO99dKIc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783658888; c=relaxed/simple;
-	bh=5C5GTG7c+Uy05ZHxhziOxWTUA/qRLmUnU8IWy7/whu0=;
+	s=arc-20240116; t=1783658886; c=relaxed/simple;
+	bh=WYR0yL+aHaVp1VLZ1CUCSqlj23K3iLMPf7cpRDsQ9YE=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=VKiJKqSPrD2fYgHGP/KsLUxXgtRlzPizIJyuxjxWd2OgJTSa14LPdnAVGGnBuHpBGpaP4vgEWr1HpEZHYHCjL3/yf6fcQagkW8yu8xrXcgzHvuqidp6VhZ4tUpI17C7rsHduESXNBZBlwgbVHoV9QvvG5t6D4xUEI+jux+EupKE=
+	 MIME-Version; b=GVCemqcfCUBBfpMXB2UVOLyWjSGiC1ng6lq/f/9WIqXiO5nMP8DESsdeIQUROSIDTYahvllcW3gOGGwEEuTHVluMNO1DDUAXGYAlpjWROXSsj2lFY1pqj+wUQE9gCnHa0YzhSnjjrixSuRexvp7rY0RuHDl4z3RRKsNz0LLvyGM=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=kylinos.cn; spf=pass smtp.mailfrom=kylinos.cn; arc=none smtp.client-ip=124.126.103.232
-X-UUID: 845d487e7c1a11f1aa26b74ffac11d73-20260710
+X-UUID: 869e10d27c1a11f1aa26b74ffac11d73-20260710
 X-CTIC-Tags:
 	HR_CC_COUNT, HR_CC_DOMAIN_COUNT, HR_CC_NAME, HR_CC_NO_NAME, HR_CTE_8B
 	HR_CTT_MISS, HR_DATE_H, HR_DATE_WKD, HR_DATE_ZONE, HR_FROM_NAME
@@ -45,38 +45,37 @@ X-CTIC-Tags:
 	CIE_GOOD, CIE_GOOD_SPF, GTI_FG_BS, GTI_RG_INFO, GTI_C_BU
 	AMN_GOOD, ABX_MISS_RDNS
 X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.12,REQID:9e76af51-41de-4cfc-aed2-34454bb41822,IP:20,
-	URL:0,TC:0,Content:-25,EDM:25,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACT
-	ION:release,TS:20
-X-CID-INFO: VERSION:1.3.12,REQID:9e76af51-41de-4cfc-aed2-34454bb41822,IP:20,UR
-	L:0,TC:0,Content:-25,EDM:25,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
-	N:release,TS:20
-X-CID-META: VersionHash:e7bac3a,CLOUDID:819c28c2fb3c78a1d9ad3cdf9a1536f3,BulkI
-	D:260710124757WD3NRJHV,BulkQuantity:0,Recheck:0,SF:17|19|66|78|81|82|102|1
-	27|865|898,TC:nil,Content:0|15|50,EDM:5,IP:-2,URL:0,File:nil,RT:nil,Bulk:n
-	il,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BR
-	E:0,ARC:0
+X-CID-O-INFO: VERSION:1.3.12,REQID:3aad97ba-e5c6-488a-8f6d-f1ccdcc9a806,IP:20,
+	URL:0,TC:0,Content:-5,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
+	N:release,TS:15
+X-CID-INFO: VERSION:1.3.12,REQID:3aad97ba-e5c6-488a-8f6d-f1ccdcc9a806,IP:20,UR
+	L:0,TC:0,Content:-5,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
+	release,TS:15
+X-CID-META: VersionHash:e7bac3a,CLOUDID:8663a529982b81e3e9e756784a1617fc,BulkI
+	D:2607101248003HIIJI1E,BulkQuantity:0,Recheck:0,SF:17|19|66|78|81|82|102|1
+	27|865|898,TC:nil,Content:0|15|50,EDM:-3,IP:-2,URL:0,File:nil,RT:nil,Bulk:
+	nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,B
+	RE:0,ARC:0
 X-CID-BVR: 2,SSN|SDN
 X-CID-BAS: 2,SSN|SDN,0,_
 X-CID-FACTOR: TF_CID_SPAM_SNR,TF_CID_SPAM_FAS,TF_CID_SPAM_FSD
 X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 845d487e7c1a11f1aa26b74ffac11d73-20260710
+X-UUID: 869e10d27c1a11f1aa26b74ffac11d73-20260710
 X-User: husong@kylinos.cn
 Received: from ctao-book.. [(223.70.159.239)] by mailgw.kylinos.cn
 	(envelope-from <husong@kylinos.cn>)
 	(Generic MTA with TLSv1.3 TLS_AES_256_GCM_SHA384 256/256)
-	with ESMTP id 1617764414; Fri, 10 Jul 2026 12:47:55 +0800
+	with ESMTP id 2065078812; Fri, 10 Jul 2026 12:47:59 +0800
 From: Song Hu <husong@kylinos.cn>
 To: sj@kernel.org
 Cc: damon@lists.linux.dev,
 	linux-mm@kvack.org,
 	linux-kernel@vger.kernel.org,
 	linux-doc@vger.kernel.org,
-	Song Hu <husong@kylinos.cn>,
-	stable@vger.kernel.org
-Subject: [PATCH 1/4] Docs/ABI/damon: fix typo in intervals_goal sysfs path
-Date: Fri, 10 Jul 2026 12:47:34 +0800
-Message-ID: <20260710044737.561102-2-husong@kylinos.cn>
+	Song Hu <husong@kylinos.cn>
+Subject: [PATCH 2/4] Docs/ABI/damon: fix typos
+Date: Fri, 10 Jul 2026 12:47:35 +0800
+Message-ID: <20260710044737.561102-3-husong@kylinos.cn>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260710044737.561102-1-husong@kylinos.cn>
 References: <20260710044737.561102-1-husong@kylinos.cn>
@@ -89,89 +88,70 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [0.04 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-96179-lists,linux-doc=lfdr.de];
-	DMARC_NA(0.00)[kylinos.cn];
-	FORGED_RECIPIENTS(0.00)[m:sj@kernel.org,m:damon@lists.linux.dev,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:husong@kylinos.cn,m:stable@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[husong@kylinos.cn,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	TO_DN_SOME(0.00)[];
+	DMARC_NA(0.00)[kylinos.cn];
+	FORGED_RECIPIENTS(0.00)[m:sj@kernel.org,m:damon@lists.linux.dev,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:husong@kylinos.cn,s:lists@lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-96178-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[husong@kylinos.cn,linux-doc@vger.kernel.org];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[husong@kylinos.cn,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	R_DKIM_NA(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 768F87372F2
+X-Rspamd-Queue-Id: 64BBC7372E3
 
-The ABI document spells the DAMON sysfs directory as "intrvals_goal"
-(missing 'e') in four What: entries, but the kernel creates it as
-"intervals_goal" (mm/damon/sysfs.c).  Following the documented path
-therefore yields a non-existent directory.
+Fix two typos in the DAMON sysfs ABI document:
 
-Fixes: e2b23dc62369 ("Docs/ABI/damon: document intervals auto-tuning ABI")
-Cc: stable@vger.kernel.org
+  - "WDate:" -> "Date:" on the nr_regions/min entry
+  - "manimum" -> "minimum" in the nr_accesses/min description
+
 Signed-off-by: Song Hu <husong@kylinos.cn>
 ---
- Documentation/ABI/testing/sysfs-kernel-mm-damon | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ Documentation/ABI/testing/sysfs-kernel-mm-damon | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/Documentation/ABI/testing/sysfs-kernel-mm-damon b/Documentation/ABI/testing/sysfs-kernel-mm-damon
-index dd6b5bd76e11..885409a26786 100644
+index 885409a26786..03aecc07a5bd 100644
 --- a/Documentation/ABI/testing/sysfs-kernel-mm-damon
 +++ b/Documentation/ABI/testing/sysfs-kernel-mm-damon
-@@ -112,7 +112,7 @@ Description:	Writing a value to this file sets the update interval of the
- 		DAMON context in microseconds as the value.  Reading this file
- 		returns the value.
+@@ -144,7 +144,7 @@ Description:	Writing a value to this file sets the maximum value of
  
--What:		/sys/kernel/mm/damon/admin/kdamonds/<K>/contexts/<C>/monitoring_attrs/intervals/intrvals_goal/access_bp
-+What:		/sys/kernel/mm/damon/admin/kdamonds/<K>/contexts/<C>/monitoring_attrs/intervals/intervals_goal/access_bp
- Date:		Feb 2025
- Contact:	SJ Park <sj@kernel.org>
- Description:	Writing a value to this file sets the monitoring intervals
-@@ -120,7 +120,7 @@ Description:	Writing a value to this file sets the monitoring intervals
- 		the given time interval (aggrs in same directory), in bp
- 		(1/10,000).  Reading this file returns the value.
+ What:		/sys/kernel/mm/damon/admin/kdamonds/<K>/contexts/<C>/monitoring_attrs/nr_regions/min
  
--What:		/sys/kernel/mm/damon/admin/kdamonds/<K>/contexts/<C>/monitoring_attrs/intervals/intrvals_goal/aggrs
-+What:		/sys/kernel/mm/damon/admin/kdamonds/<K>/contexts/<C>/monitoring_attrs/intervals/intervals_goal/aggrs
- Date:		Feb 2025
+-WDate:		Mar 2022
++Date:		Mar 2022
  Contact:	SJ Park <sj@kernel.org>
- Description:	Writing a value to this file sets the time interval to achieve
-@@ -128,14 +128,14 @@ Description:	Writing a value to this file sets the time interval to achieve
- 		access events ratio (access_bp in same directory) within.
- 		Reading this file returns the value.
+ Description:	Writing a value to this file sets the minimum number of
+ 		monitoring regions of the DAMON context as the value.  Reading
+@@ -281,7 +281,7 @@ Description:	Writing to and reading from this file sets and gets the maximum
+ What:		/sys/kernel/mm/damon/admin/kdamonds/<K>/contexts/<C>/schemes/<S>/access_pattern/nr_accesses/min
+ Date:		Mar 2022
+ Contact:	SJ Park <sj@kernel.org>
+-Description:	Writing to and reading from this file sets and gets the manimum
++Description:	Writing to and reading from this file sets and gets the minimum
+ 		'nr_accesses' of the scheme's target regions.
  
--What:		/sys/kernel/mm/damon/admin/kdamonds/<K>/contexts/<C>/monitoring_attrs/intervals/intrvals_goal/min_sample_us
-+What:		/sys/kernel/mm/damon/admin/kdamonds/<K>/contexts/<C>/monitoring_attrs/intervals/intervals_goal/min_sample_us
- Date:		Feb 2025
- Contact:	SJ Park <sj@kernel.org>
- Description:	Writing a value to this file sets the minimum value of
- 		auto-tuned sampling interval in microseconds.  Reading this
- 		file returns the value.
- 
--What:		/sys/kernel/mm/damon/admin/kdamonds/<K>/contexts/<C>/monitoring_attrs/intervals/intrvals_goal/max_sample_us
-+What:		/sys/kernel/mm/damon/admin/kdamonds/<K>/contexts/<C>/monitoring_attrs/intervals/intervals_goal/max_sample_us
- Date:		Feb 2025
- Contact:	SJ Park <sj@kernel.org>
- Description:	Writing a value to this file sets the maximum value of
+ What:		/sys/kernel/mm/damon/admin/kdamonds/<K>/contexts/<C>/schemes/<S>/access_pattern/nr_accesses/max
 -- 
 2.43.0
 
