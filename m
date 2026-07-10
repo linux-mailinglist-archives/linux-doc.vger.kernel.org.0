@@ -1,58 +1,58 @@
-Return-Path: <linux-doc+bounces-96230-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96226-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id b4GzE1bUUGqc5gIAu9opvQ
-	(envelope-from <linux-doc+bounces-96230-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 13:15:34 +0200
+	id 9mVbIk/UUGqX5gIAu9opvQ
+	(envelope-from <linux-doc+bounces-96226-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 13:15:27 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7971A73A0C7
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 13:15:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5811C73A0B3
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 13:15:25 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=none ("invalid DKIM record") header.d=rsg.ci.i.u-tokyo.ac.jp header.s=rs20250326 header.b=WFCDYw6U;
+	dkim=none ("invalid DKIM record") header.d=rsg.ci.i.u-tokyo.ac.jp header.s=rs20250326 header.b=oCRVGQbk;
 	dmarc=fail reason="SPF not aligned (relaxed)" header.from=u-tokyo.ac.jp (policy=none);
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96230-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96230-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96226-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96226-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id C5945300F262
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 11:15:24 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 572B63002D00
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 11:15:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D7B57416CFA;
-	Fri, 10 Jul 2026 11:15:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 99C35414A2A;
+	Fri, 10 Jul 2026 11:15:19 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from www3579.sakura.ne.jp (www3579.sakura.ne.jp [49.212.243.89])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 991AC40E8F9
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 990FF3B1EE4
 	for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 11:15:16 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783682120; cv=none; b=Opx38USbKStgcvYi5KYfHCYZo4BPM6PjtZV906vxtNyvmOidVxzkVeDwwCdq+jBZZvPC+qibNYUtwUPyj14aeCab/R7fUxj+WkyY288eJX2LqI96DjMlUNCReMqaFmT3eNOvz0FHAaCQVVghYBRvB3YOxp2QMUHflju/8UZU4pM=
+	t=1783682119; cv=none; b=aV7yo1SYqVNG3bdppCdfXkYbLlDIAM+SRe5t6XoMB5lNJsfFkhdvcWpzixcaWumaODM1VBbq2kKEip4JJn0Glp+TRyca750zfC3YHRy4xbmsIRPCMeZBt8RIfO2DUCVQanRi2ZfzJgHkNPG2FoasiOn91R3VtYZY1zJadybnd+o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783682120; c=relaxed/simple;
-	bh=3aaGkxuWYeIHEXxQ7jK2xLPaTuF44GG9raRCIo26jOg=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=NCm4iLx1WLsl/zUPGl2Nwj/pKgK/H8iNH6Ckgu4cNXo+ZasWB8qdN1vRJW5A3Uqe1YH0VvmLwQntHN0H9KMDcX+v+GT8Q6m1ZxaVkEt2UlwNSCCIL/iP2Acb+oYqCqgvdCedzaZmTolkulgEgEwWwGP4x7WUS3UtJXntwDFlYvA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rsg.ci.i.u-tokyo.ac.jp; spf=pass smtp.mailfrom=rsg.ci.i.u-tokyo.ac.jp; dkim=fail (0-bit key) header.d=rsg.ci.i.u-tokyo.ac.jp header.i=@rsg.ci.i.u-tokyo.ac.jp header.b=WFCDYw6U reason="key not found in DNS"; arc=none smtp.client-ip=49.212.243.89
+	s=arc-20240116; t=1783682119; c=relaxed/simple;
+	bh=fNgLUnEmlqyfrAV7tVVlH3jDqmlIGrds8QqIzA+zcPw=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=W/tJE6MDD0BESq7yAlEgKElvED980yoLb+OAsTpXjLPYAxmwmXiwnLs2xZ3PB7J0O4i/u1F1X1m5ZmqFN+o1d/5usB+POqntb4HelCgLzwi7oB9Hkjr3cH8GeaIfaj68Ot6jY8fO31NOcJohH/KLRVt83hLvGHsTdoM4pJ737zM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rsg.ci.i.u-tokyo.ac.jp; spf=pass smtp.mailfrom=rsg.ci.i.u-tokyo.ac.jp; dkim=fail (0-bit key) header.d=rsg.ci.i.u-tokyo.ac.jp header.i=@rsg.ci.i.u-tokyo.ac.jp header.b=oCRVGQbk reason="key not found in DNS"; arc=none smtp.client-ip=49.212.243.89
 Received: from h183.csg.ci.i.u-tokyo.ac.jp (h183.csg.ci.i.u-tokyo.ac.jp [133.11.54.183])
 	(authenticated bits=0)
-	by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 66ABEvsE024946
+	by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 66ABEvsF024946
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
 	Fri, 10 Jul 2026 20:15:09 +0900 (JST)
 	(envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
-DKIM-Signature: a=rsa-sha256; bh=KGB+NKL0JfhCiL8lQAxj2/85FwyywY4aNanasRFKkk8=;
+DKIM-Signature: a=rsa-sha256; bh=A1U9p3xnoBS2jAZ6UnAQTf41UHMysFjf1pjjxobco+c=;
         c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
         h=From:Message-Id:To:Subject:Date;
         s=rs20250326; t=1783682109; v=1;
-        b=WFCDYw6UwvD01zELlgqWWQoilYBDJd876u90Q9LWxE0DzNG/4H/ncS1wa4ByRtD7
-         42qpGj0Oi6BB3NOcHNO+Biwcksblt/HN1jBHyv1gVI9wtVMA34nNKKo5oN+C1Wgx
-         IXhAgM1jqUFHq+EBt8IKQE7R3xKru10jMPx8zyW2HT167rD5pNfU87hFhcyT4xph
-         dQOqSiS/96vwp7N58zdhknJgZyK/uQD0N9edcBI8s+ow0cGy4GAjVElIkgvzDaWW
-         Dz8kexKiVA5XoT81MtnakTmS+lPVG8b7kvXm4YQ6/A+9qyLbnyGRp/iOr/tvWlIg
-         LATdvOWMJZkc7xlkeUGuQQ==
+        b=oCRVGQbk2lJFPvYDCiIYcmDhY2QoB5j+kQXnVsbuWv987cCUgl7i2HpWFxWoj4xo
+         Czpj/FgXnC5PBzcTKP8RIvTl5RiMT5sCZEmDaw+XgbWmFn035W3GelktZZYaeQ7T
+         kdWnua8L2gbpgR2CWWteNtuHejoivSLGWRF79n6FkfGoMg3yyXk7X/c5MpVrhz5h
+         PBCCb2F3Z0bEce6wNHnSUuErwyhDfUQJUMBTLg3vXDs41GQn6Icf0CrOrajjhT1j
+         pfvs94NvMST8YYjoRWgMvnbxCepQOMFZCscRIPpny2g/N9lKAH19mnwcTrOB58hc
+         28NpAO2Y1ljEpmevXf1mSw==
 From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Subject: [PATCH v8 00/11] KVM: arm64: PMU: Use multiple host PMUs
-Date: Fri, 10 Jul 2026 20:14:54 +0900
-Message-Id: <20260710-hybrid-v8-0-621409f3a592@rsg.ci.i.u-tokyo.ac.jp>
+Date: Fri, 10 Jul 2026 20:14:55 +0900
+Subject: [PATCH v8 01/11] KVM: arm64: Serialize userspace MDCR_EL2 access
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -61,14 +61,9 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/33Ry27CMBAF0F9BWdeRHxM/WPEfVRe2ZwxuBaFJi
- IgQ/14TRGBTltfyHF+NL1VPXaa+Wq8uVUdj7nN7KMF+rKq484ctsYwlV5LLhksJbDeFLiPjApu
- UwBCirMrlY0cpn2fo8+ueO/o9FW+4H1bB98Riu9/nYb0SRNKgj4EajICUwArjAK1zqE3gCI3h3
- EF1s3a5H9pumjuOYsbmOkq4R51RMMEAhUcvOBnebNBPh3yuy4OzMcrnnOV6mZOMM6618BSVTzZ
- uun5bx1zn+sSG9mdqax/r7+PdUA9Dl1U0i6GKAZpsIim5tfytAU9DCbMYUIyAWoaIYDXAW6N5G
- iDEYjQ3g4MKgC6Bo7eGfjXUYuhikHFoNE8mifDWMK+GXQxTDBmSch7LH4b0r3G9Xv8AO8RVVIE
- CAAA=
-X-Change-ID: 20250224-hybrid-01d5ff47edd2
+Message-Id: <20260710-hybrid-v8-1-621409f3a592@rsg.ci.i.u-tokyo.ac.jp>
+References: <20260710-hybrid-v8-0-621409f3a592@rsg.ci.i.u-tokyo.ac.jp>
+In-Reply-To: <20260710-hybrid-v8-0-621409f3a592@rsg.ci.i.u-tokyo.ac.jp>
 To: Marc Zyngier <maz@kernel.org>, Oliver Upton <oupton@kernel.org>,
         Joey Gouly <joey.gouly@arm.com>,
         Suzuki K Poulose <suzuki.poulose@arm.com>,
@@ -86,13 +81,13 @@ Cc: linux-arm-kernel@lists.infradead.org, kvmarm@lists.linux.dev,
         linux-kselftest@vger.kernel.org,
         Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 X-Mailer: b4 0.16-dev-925f5
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6022;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2777;
  i=odaki@rsg.ci.i.u-tokyo.ac.jp; h=from:subject:message-id;
- bh=3aaGkxuWYeIHEXxQ7jK2xLPaTuF44GG9raRCIo26jOg=;
- b=kA0DAAoWKJ19aUZYEjEByyZiAGpQ1DOjADdd99DcVYORyjtI+t88DTfQUdvgMtOperExO9rXD
- Yh1BAAWCgAdFiEEZHK7CyhbffJxYF+EKJ19aUZYEjEFAmpQ1DMACgkQKJ19aUZYEjEN2gEA+2De
- 2VjJrhKOkt/4XcDubhTXeZN+3XmBBa+PbVtQr24A/iFHmD5h9H3xKCIWyNP1J6+prxFIAzFdp8E
- oR9TdNfMA
+ bh=fNgLUnEmlqyfrAV7tVVlH3jDqmlIGrds8QqIzA+zcPw=;
+ b=owGbwMvMwCWmMbc20y1CyJDxtFoSQ1bAFZM9IrZRGvlMeqLVClzr1HR2uRnwhHyw6qzWNz+z6
+ v7c+u0dpSwMYlwMsmKKLClFu7k1oms/FSbEt8DMYWUCGcLAxSkAEzFpYvjvcVVnx2nF47oTHnvY
+ /L2kvVD6Re9q+71iTSGfZ7LKTvgnzfA/MudQgPXLZ2rHoqwmf27ezuVkLFZqlpqabLFgduf7bg9
+ eAA==
 X-Developer-Key: i=odaki@rsg.ci.i.u-tokyo.ac.jp; a=openpgp;
  fpr=AEDC03C9AF734F2EC26A7BFFA4BAEAA73536753C
 X-Rspamd-Action: no action
@@ -113,7 +108,7 @@ X-Spamd-Result: default: False [0.14 / 15.00];
 	FREEMAIL_TO(0.00)[kernel.org,arm.com,huawei.com,redhat.com,lwn.net,linuxfoundation.org,gmail.com,rasmusvillemoes.dk];
 	FORWARDED(0.00)[lists@lfdr.de];
 	R_DKIM_PERMFAIL(0.00)[rsg.ci.i.u-tokyo.ac.jp:s=rs20250326];
-	TAGGED_FROM(0.00)[bounces-96230-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-96226-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
@@ -128,134 +123,88 @@ X-Spamd-Result: default: False [0.14 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,u-tokyo.ac.jp:email,rsg.ci.i.u-tokyo.ac.jp:mid,rsg.ci.i.u-tokyo.ac.jp:from_mime,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sashiko.dev:url,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,vger.kernel.org:from_smtp,u-tokyo.ac.jp:email,rsg.ci.i.u-tokyo.ac.jp:mid,rsg.ci.i.u-tokyo.ac.jp:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 7971A73A0C7
+X-Rspamd-Queue-Id: 5811C73A0B3
 
-On a heterogeneous arm64 system, KVM's PMU emulation is based on the
-features of a single host PMU instance. When a vCPU is migrated to a
-pCPU with an incompatible PMU, counters such as PMCCNTR_EL0 stop
-incrementing.
+kvm_arm_set_nr_counters() updates MDCR_EL2.HPMN for every vCPU while
+holding kvm->arch.config_lock. However, KVM_SET_ONE_REG currently writes
+MDCR_EL2 through the generic sysreg path without taking the same lock.
+Concurrent PMU configuration and register restore can therefore race and
+lose updates to unrelated MDCR_EL2 bits.
 
-Although this behavior is permitted by the architecture, Windows does
-not handle it gracefully and may crash with a division-by-zero error.
+Add explicit userspace accessors for MDCR_EL2. Serialize them with
+config_lock so whole-register userspace writes cannot race with HPMN
+rewrites, reject HPMN values above the configured PMU counter count, and
+request a PMU reload when HPME changes to match guest trap behavior.
 
-The current workaround requires VMMs to pin vCPUs to a set of pCPUs
-that share a compatible PMU. This is difficult to implement correctly in
-QEMU/libvirt, where pinning occurs after vCPU initialization, and it
-also restricts the guest to a subset of available pCPUs.
-
-This patch introduces the KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY
-attribute. If set, PMUv3 will be emulated without programmable event
-counters. KVM will be able to run VCPUs on any physical CPUs with a
-compatible hardware PMU.
-
-This allows Windows guests to run reliably on heterogeneous systems
-without crashing, even without vCPU pinning, and enables VMMs to
-schedule vCPUs across all available pCPUs, making full use of the host
-hardware.
-
-A QEMU patch that demonstrates the usage of the new attribute is
-available at:
-https://lore.kernel.org/qemu-devel/20260706-kvm-v4-1-089cac8c25c3@rsg.ci.i.u-tokyo.ac.jp/
-("[PATCH RFC v4] target/arm/kvm: Choose PMU backend")
-
+Fixes: c8823e51b534 ("KVM: arm64: Fix MDCR_EL2.HPMN reset value")
+Closes: https://sashiko.dev/#/patchset/20260706-hybrid-v8-0-de459617b59d%40rsg.ci.i.u-tokyo.ac.jp?part=6
+Assisted-by: Codex:gpt-5.5
 Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 ---
-Changes in v8:
-- Added patch
-  "KVM: arm64: Disallow vPMU when pPMUs do not cover all CPUs".
-- Split patch "KVM: arm64: PMU: Introduce FIXED_COUNTERS_ONLY".
-- Documented the FEAT_PMUv3_ICNTR support plan.
-- Ensured KVM_ARM_VCPU_PMU_V3_FILTER and
-  KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY are mutually exclusive.
-- Ensured KVM_ARM_VCPU_PMU_V3_SET_PMU and
-  KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY are mutually exclusive.
-- Dropped the code to support KVM_ARM_VCPU_PMU_V3_SET_NR_COUNTERS for
-  KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY.
-- Added a function to de-duplicate
-  "test_bit(KVM_ARCH_FLAG_PMU_V3_FIXED_COUNTERS_ONLY, ...)".
-- Link to v7: https://lore.kernel.org/r/20260418-hybrid-v7-0-2bf39ad009bf@rsg.ci.i.u-tokyo.ac.jp
+ arch/arm64/kvm/sys_regs.c | 39 ++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 38 insertions(+), 1 deletion(-)
 
-Changes in v7:
-- Fixed the vCPU run hang in test_fixed_counters_only().
-- Link to v6: https://lore.kernel.org/r/20260413-hybrid-v6-0-e79d760f7f1b@rsg.ci.i.u-tokyo.ac.jp
+diff --git a/arch/arm64/kvm/sys_regs.c b/arch/arm64/kvm/sys_regs.c
+index d217530359ba..2b2ea33159e9 100644
+--- a/arch/arm64/kvm/sys_regs.c
++++ b/arch/arm64/kvm/sys_regs.c
+@@ -2949,6 +2949,42 @@ static bool access_mdcr(struct kvm_vcpu *vcpu,
+ 	return true;
+ }
+ 
++static int get_mdcr(struct kvm_vcpu *vcpu, const struct sys_reg_desc *rd,
++		    u64 *val)
++{
++	struct kvm *kvm = vcpu->kvm;
++
++	guard(mutex)(&kvm->arch.config_lock);
++
++	*val = __vcpu_sys_reg(vcpu, MDCR_EL2);
++
++	return 0;
++}
++
++static int set_mdcr(struct kvm_vcpu *vcpu, const struct sys_reg_desc *rd,
++		    u64 val)
++{
++	struct kvm *kvm = vcpu->kvm;
++	u64 old, hpmn = FIELD_GET(MDCR_EL2_HPMN, val);
++
++	guard(mutex)(&kvm->arch.config_lock);
++
++	if (hpmn > vcpu->kvm->arch.nr_pmu_counters)
++		return -EINVAL;
++
++	old = __vcpu_sys_reg(vcpu, MDCR_EL2);
++	__vcpu_assign_sys_reg(vcpu, MDCR_EL2, val);
++
++	/*
++	 * Request a reload of the PMU to enable/disable the counters
++	 * affected by HPME.
++	 */
++	if ((old ^ val) & MDCR_EL2_HPME)
++		kvm_make_request(KVM_REQ_RELOAD_PMU, vcpu);
++
++	return 0;
++}
++
+ static bool access_ras(struct kvm_vcpu *vcpu,
+ 		       struct sys_reg_params *p,
+ 		       const struct sys_reg_desc *r)
+@@ -3652,7 +3688,8 @@ static const struct sys_reg_desc sys_reg_descs[] = {
+ 	EL2_REG_FILTERED(SCTLR2_EL2, access_vm_reg, reset_val, 0,
+ 			 sctlr2_el2_visibility),
+ 	EL2_REG_VNCR(HCR_EL2, reset_hcr, 0),
+-	EL2_REG(MDCR_EL2, access_mdcr, reset_mdcr, 0),
++	SYS_REG_USER_FILTER(MDCR_EL2, access_mdcr, reset_mdcr, 0,
++			    get_mdcr, set_mdcr, el2_visibility),
+ 	EL2_REG(CPTR_EL2, access_rw, reset_val, CPTR_NVHE_EL2_RES1),
+ 	EL2_REG_VNCR(HSTR_EL2, reset_val, 0),
+ 	EL2_REG_VNCR_FILT(HFGRTR_EL2, fgt_visibility),
 
-Changes in v6:
-- Removed WARN_ON_ONCE() in kvm_pmu_create_perf_event(). It can be
-  triggered in kvm_arch_vcpu_load() before it checks supported_cpus.
-- Removed an extra lockdep assertion in kvm_arm_pmu_v3_get_attr().
-- Fixed error messages in test_fixed_counters_only().
-- Fixed the vCPU run in test_fixed_counters_only().
-- Link to v5: https://lore.kernel.org/r/20260411-hybrid-v5-0-b043b4d9f49e@rsg.ci.i.u-tokyo.ac.jp
-
-Changes in v5:
-- Rebased.
-- Fixed the order to clear KVM_ARCH_FLAG_PMU_V3_FIXED_COUNTERS_ONLY in
-  kvm_arm_pmu_v3_set_pmu().
-- Fixed the setting of KVM_ARM_VCPU_PMU_V3_IRQ in
-  test_fixed_counters_only().
-- Changed to WARN_ON_ONCE() when kvm_pmu_probe_armpmu() returns NULL in
-  kvm_pmu_create_perf_event(), which is no longer supposed to happen.
-- Link to v4: https://lore.kernel.org/r/20260317-hybrid-v4-0-bd62bcd48644@rsg.ci.i.u-tokyo.ac.jp
-
-Changes in v4:
-- Extracted kvm_pmu_enabled_counter_mask() into a separate patch.
-- Added patch "KVM: arm64: PMU: Protect the list of PMUs with RCU".
-- Merged KVM_REQ_CREATE_PMU into KVM_REQ_RELOAD_PMU.
-- Added a check to avoid unnecessary KVM_REQ_RELOAD_PMU requests.
-- Dropped the change to avoid setting kvm_arm_set_default_pmu() when
-  KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY is not set.
-- Link to v3: https://lore.kernel.org/r/20260225-hybrid-v3-0-46e8fe220880@rsg.ci.i.u-tokyo.ac.jp
-
-Changes in v3:
-- Renamed the attribute to KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY.
-- Changed to request the creation of perf counters when loading vCPU.
-- Link to v2: https://lore.kernel.org/r/20250806-hybrid-v2-0-0661aec3af8c@rsg.ci.i.u-tokyo.ac.jp
-
-Changes in v2:
-- Added the KVM_ARM_VCPU_PMU_V3_COMPOSITION attribute to opt in the
-  feature.
-- Added code to handle overflow.
-- Link to v1: https://lore.kernel.org/r/20250319-hybrid-v1-1-4d1ada10e705@daynix.com
-
----
-Akihiko Odaki (10):
-      KVM: arm64: Serialize userspace MDCR_EL2 access
-      tools headers: Sync bitfield.h with the kernel
-      KVM: arm64: selftests: Cover PMU state in MDCR_EL2
-      arm64: errata: Require Apple IMPDEF PMUv3 traps on all CPUs
-      KVM: arm64: PMU: Protect the list of PMUs with RCU
-      KVM: arm64: PMU: Pass the pPMU to kvm_map_pmu_event()
-      KVM: arm64: PMU: Pass the target CPU to kvm_pmu_probe_armpmu()
-      KVM: arm64: PMU: Implement fixed-counters-only emulation
-      KVM: arm64: PMU: Introduce FIXED_COUNTERS_ONLY
-      KVM: arm64: selftests: Test PMU_V3_FIXED_COUNTERS_ONLY
-
-Oliver Upton (1):
-      KVM: arm64: Don't clear vcpu->cpu in kvm_arch_vcpu_put()
-
- Documentation/virt/kvm/devices/vcpu.rst            |  30 ++-
- arch/arm64/include/asm/kvm_host.h                  |   4 +
- arch/arm64/include/uapi/asm/kvm.h                  |   1 +
- arch/arm64/kernel/cpu_errata.c                     |   2 +-
- arch/arm64/kvm/arm.c                               |   3 +-
- arch/arm64/kvm/pmu-emul.c                          | 185 ++++++++++++-----
- arch/arm64/kvm/reset.c                             |  16 +-
- arch/arm64/kvm/sys_regs.c                          |  39 +++-
- include/kvm/arm_pmu.h                              |   2 +
- tools/include/linux/bitfield.h                     | 175 +++++++++++++---
- tools/include/linux/bitops.h                       |  19 ++
- tools/include/linux/compiler_types.h               |  13 ++
- tools/include/linux/typecheck.h                    |  34 +++
- .../selftests/kvm/arm64/vpmu_counter_access.c      | 229 ++++++++++++++++++---
- 14 files changed, 635 insertions(+), 117 deletions(-)
----
-base-commit: 1ee27dacbe5dc4def481794d899d67b0d4570094
-change-id: 20250224-hybrid-01d5ff47edd2
-
-Best regards,
---  
-Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+-- 
+2.55.0
 
 
