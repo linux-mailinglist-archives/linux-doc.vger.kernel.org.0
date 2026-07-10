@@ -1,59 +1,59 @@
-Return-Path: <linux-doc+bounces-96228-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96229-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 0ApGCVPUUGqZ5gIAu9opvQ
-	(envelope-from <linux-doc+bounces-96228-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 13:15:31 +0200
+	id SH8fNlTUUGqb5gIAu9opvQ
+	(envelope-from <linux-doc+bounces-96229-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 13:15:32 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6664A73A0BA
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 13:15:30 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A4F173A0BE
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 13:15:32 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=none ("invalid DKIM record") header.d=rsg.ci.i.u-tokyo.ac.jp header.s=rs20250326 header.b="mZ/mHjw+";
+	dkim=none ("invalid DKIM record") header.d=rsg.ci.i.u-tokyo.ac.jp header.s=rs20250326 header.b=cypq5tmg;
 	dmarc=fail reason="SPF not aligned (relaxed)" header.from=u-tokyo.ac.jp (policy=none);
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96228-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-96228-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96229-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-96229-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 0F2D8300E6AA
+	by tor.lore.kernel.org (Postfix) with ESMTP id 6EE1A303CC6B
 	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 11:15:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7A0F1416CF5;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D09C3416CE3;
 	Fri, 10 Jul 2026 11:15:20 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from www3579.sakura.ne.jp (www3579.sakura.ne.jp [49.212.243.89])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1C8341168A
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1AD630D41A
 	for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 11:15:17 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783682120; cv=none; b=cnddzb5h2cU4e1oHdqcMr5N77QVvUTROzvOnz7ii9nOK2BAOi7Z7viin3JtsgHrjVNbcwGCcg6vbwRAcEPQoadTfXSmELNSZbwv1+NFghJhdzuzb4xyBIlecPoCSYbyjUcCoxNylVH3SX5/nOBERO8K8a6UBOiF1m7YpeE05dl0=
+	t=1783682120; cv=none; b=ikQan7wXHMzlSutVCeDlo99D5kxbFU0GlEi1DVWAH79FhAmoKX0RTl5URsHN2bX/BhEeBl01ceWdBZXRqyvzhv3neoMGwlsxVxmwQHnEWbOK6j1Oy9r4RaEOVChVoCKgbUmnkpI8ydrcY73FA0KTojzZUngy1GpCJvVAHX/4sYo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1783682120; c=relaxed/simple;
-	bh=U9MEpE2Ih98r0rKIS5ukgUhQF9OCUYmg2BREdlUGgos=;
+	bh=hp0lEkOwUA4Gek6D7M1hRbpbu/V7WYaGYBv95FZV7oc=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=n5e8wudbR28BOFNjgf2qTbkWzUIFpGg6snvJ6V/r0s+3zQVpHUQW3qWMz0FHNpQ+Qv+G+l9E4Kd+uvATNVUvQ+RboHEddxndGAQkJRBOqyJRp7fPIMlkYmuVrWtY85a3dhezZtfJjdF6HbpuEYCKxSawIx1Q2VQ2/ISKt1NhsjQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rsg.ci.i.u-tokyo.ac.jp; spf=pass smtp.mailfrom=rsg.ci.i.u-tokyo.ac.jp; dkim=fail (0-bit key) header.d=rsg.ci.i.u-tokyo.ac.jp header.i=@rsg.ci.i.u-tokyo.ac.jp header.b=mZ/mHjw+ reason="key not found in DNS"; arc=none smtp.client-ip=49.212.243.89
+	 In-Reply-To:To:Cc; b=lzJBjzooEodqalCfNooI5XuIYJCrKs6GzPuMbeBk8toQbRVydFvD3DqtGy5xLw2O0bLSF6kTF1+qKkuVuUfD0QLRNBG46J91y2Xx2Mx//DYCGn/NfyMjXm60ZJ+q3uqDTOguX6P8LLzH+7BWWE5hA5tNobsc3UW3BTUrOvy/Ub4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rsg.ci.i.u-tokyo.ac.jp; spf=pass smtp.mailfrom=rsg.ci.i.u-tokyo.ac.jp; dkim=fail (0-bit key) header.d=rsg.ci.i.u-tokyo.ac.jp header.i=@rsg.ci.i.u-tokyo.ac.jp header.b=cypq5tmg reason="key not found in DNS"; arc=none smtp.client-ip=49.212.243.89
 Received: from h183.csg.ci.i.u-tokyo.ac.jp (h183.csg.ci.i.u-tokyo.ac.jp [133.11.54.183])
 	(authenticated bits=0)
-	by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 66ABEvsH024946
+	by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 66ABEvsI024946
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
 	Fri, 10 Jul 2026 20:15:10 +0900 (JST)
 	(envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
-DKIM-Signature: a=rsa-sha256; bh=uYrOcz7cPsXjyBNdYSNHFBXBQv6JgbTYi8PN49aaXZ8=;
+DKIM-Signature: a=rsa-sha256; bh=pJjKbNakwtm0jMT04UBxbp6wN2PKOAbYt/K0ZhCrjUc=;
         c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
         h=From:Message-Id:To:Subject:Date;
         s=rs20250326; t=1783682110; v=1;
-        b=mZ/mHjw+q5qmL6SJzncK0NvUHK9WAcp5mzhrd+351BTQ3OTW9tPlk8hESlrpH9eu
-         WvTo7LkX++pgZuuMDnEmALooMjv0hO0A04LoqC/4A3otIkV07uAY+XjdwAoPWgGo
-         yRUSqXk9XRdEfnmK9P3Fq5GSlCllRghQ1G5NsSpAEyEZ6hRnEBSzzBLdG34xVVFt
-         EDKMRxkTq9HDwrSCgmnAOxifIua5gxb1wZW+JboMnZ3aEZM5fulciA4NnS31W//E
-         UV9bw192xIrz4ExCj/R89VqKrh9460iRgoZ38dANsub5tnHciSEnJwPXS5LkDLAi
-         OkRtOUVpJwByY1bh9TdNpA==
+        b=cypq5tmgi8sW1J1vY+7FX5yhIamwUYgJ8fnr/uY3GitaU8yixH4poE4ECyVNednC
+         CpQJaOhbEVn4aCzaqk4zNVeEHkOmedKuH0fSuSDr184wCx92thrc4vMugRvyuFr/
+         w8Pk/BRGggqeeSD6cdoTNEIVR4xONf3EhlvO2hr0lZ4x3AbbdZ3AR9Gpp5dVOsZn
+         nx/HgECEJtwZ4tx3Y7tefssdGAB7Em5FNfC5H5YOeudZ0PnlWw8WZM2gW9dE1nx1
+         mAlH8CoRhbOuyt7CpOxC2wkjp/tpBX8nHzJlWUiS0FJzoOX+9w9/lkgEEDrwjo4U
+         U6Ky2Ar/ayLG5jEEZiGl4A==
 From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Date: Fri, 10 Jul 2026 20:14:57 +0900
-Subject: [PATCH v8 03/11] KVM: arm64: selftests: Cover PMU state in
- MDCR_EL2
+Date: Fri, 10 Jul 2026 20:14:58 +0900
+Subject: [PATCH v8 04/11] arm64: errata: Require Apple IMPDEF PMUv3 traps
+ on all CPUs
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -62,7 +62,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260710-hybrid-v8-3-621409f3a592@rsg.ci.i.u-tokyo.ac.jp>
+Message-Id: <20260710-hybrid-v8-4-621409f3a592@rsg.ci.i.u-tokyo.ac.jp>
 References: <20260710-hybrid-v8-0-621409f3a592@rsg.ci.i.u-tokyo.ac.jp>
 In-Reply-To: <20260710-hybrid-v8-0-621409f3a592@rsg.ci.i.u-tokyo.ac.jp>
 To: Marc Zyngier <maz@kernel.org>, Oliver Upton <oupton@kernel.org>,
@@ -82,20 +82,20 @@ Cc: linux-arm-kernel@lists.infradead.org, kvmarm@lists.linux.dev,
         linux-kselftest@vger.kernel.org,
         Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 X-Mailer: b4 0.16-dev-925f5
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4101;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1261;
  i=odaki@rsg.ci.i.u-tokyo.ac.jp; h=from:subject:message-id;
- bh=U9MEpE2Ih98r0rKIS5ukgUhQF9OCUYmg2BREdlUGgos=;
- b=owGbwMvMwCWmMbc20y1CyJDxtFoSQ1bAFdOoCdslkj9tDK85mGkeprzlWJKYd6tsW/56hf+r2
- KNM+uZ2lLIwiHExyIopsqQU7ebWiK79VJgQ3wIzh5UJZAgDF6cATORBAiPD4fz/qRuFXrndFrHc
- 6Tv74rv96UenzKrcc69SWX9L16LQcwz//Ts3vivq/XrNsfHy8XrPi112U4xuZvXquH6r6vTXVrz
- DAgA=
+ bh=hp0lEkOwUA4Gek6D7M1hRbpbu/V7WYaGYBv95FZV7oc=;
+ b=owGbwMvMwCWmMbc20y1CyJDxtFoSQ1bAFbMHm2WVY578mzc1ruRV9qK3tZ7tuz6LBAXcKpZ5c
+ PX4uvJbHaUsDGJcDLJiiiwpRbu5NaJrPxUmxLfAzGFlAhnCwMUpABOJtmVk+DWtN10kdo3lwx0B
+ f+4c3f7++GrhIzwq9ez/du/89cbvGzMjQ8OutReeTvjbPzeOpbnvdNtddZ9Em+enI33lObbyFwY
+ bsgAA
 X-Developer-Key: i=odaki@rsg.ci.i.u-tokyo.ac.jp; a=openpgp;
  fpr=AEDC03C9AF734F2EC26A7BFFA4BAEAA73536753C
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [0.14 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[u-tokyo.ac.jp : SPF not aligned (relaxed),none];
@@ -109,9 +109,9 @@ X-Spamd-Result: default: False [0.14 / 15.00];
 	FREEMAIL_TO(0.00)[kernel.org,arm.com,huawei.com,redhat.com,lwn.net,linuxfoundation.org,gmail.com,rasmusvillemoes.dk];
 	FORWARDED(0.00)[lists@lfdr.de];
 	R_DKIM_PERMFAIL(0.00)[rsg.ci.i.u-tokyo.ac.jp:s=rs20250326];
-	TAGGED_FROM(0.00)[bounces-96228-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-96229-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
@@ -124,125 +124,39 @@ X-Spamd-Result: default: False [0.14 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,u-tokyo.ac.jp:email,rsg.ci.i.u-tokyo.ac.jp:mid,rsg.ci.i.u-tokyo.ac.jp:from_mime,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,u-tokyo.ac.jp:email,rsg.ci.i.u-tokyo.ac.jp:mid,rsg.ci.i.u-tokyo.ac.jp:from_mime,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 6664A73A0BA
+X-Rspamd-Queue-Id: 3A4F173A0BE
 
-Add MDCR_EL2 coverage to vpmu_counter_access when EL2 is available.
+KVM relies on ARM64_WORKAROUND_PMUV3_IMPDEF_TRAPS as a system-wide
+precondition for PMUv3 emulation on affected Apple CPUs. A local CPU
+erratum is too weak for that: once the workaround is enabled, a late CPU
+that misses it may still be onlined.
 
-For each configured PMCR_EL0.N value, verify that HPMN tracks the
-configured counter count, HPME can be toggled without disturbing HPMN,
-and KVM_SET_ONE_REG rejects an out-of-range HPMN without changing
-MDCR_EL2. Reset the vCPU and verify that HPMN is restored from the
-configured count.
+Make the workaround an all-early-CPU capability instead. The matcher is
+still local because it depends on MIDR_EL1, but the capability is only
+advertised if all early CPUs match, and late CPUs that miss it are
+rejected once the capability is enabled.
 
 Assisted-by: Codex:gpt-5.5
 Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 ---
- .../selftests/kvm/arm64/vpmu_counter_access.c      | 76 ++++++++++++++++++++++
- 1 file changed, 76 insertions(+)
+ arch/arm64/kernel/cpu_errata.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tools/testing/selftests/kvm/arm64/vpmu_counter_access.c b/tools/testing/selftests/kvm/arm64/vpmu_counter_access.c
-index 22223395969e..25203ea117b0 100644
---- a/tools/testing/selftests/kvm/arm64/vpmu_counter_access.c
-+++ b/tools/testing/selftests/kvm/arm64/vpmu_counter_access.c
-@@ -25,6 +25,14 @@
- /* The cycle counter bit position that's common among the PMU registers */
- #define ARMV8_PMU_CYCLE_IDX		31
- 
-+#ifndef MDCR_EL2_HPMN
-+#define MDCR_EL2_HPMN			GENMASK_ULL(4, 0)
-+#endif
-+
-+#ifndef MDCR_EL2_HPME
-+#define MDCR_EL2_HPME			BIT_ULL(7)
-+#endif
-+
- struct vpmu_vm {
- 	struct kvm_vm *vm;
- 	struct kvm_vcpu *vcpu;
-@@ -583,6 +591,73 @@ static void run_pmregs_validity_test(u64 pmcr_n)
- 	destroy_vpmu_vm();
- }
- 
-+static void run_mdcr_el2_validity_test(u64 pmcr_n)
-+{
-+	struct kvm_vcpu_init init;
-+	struct kvm_vcpu *vcpu;
-+	u64 mdcr, old_mdcr;
-+	int ret;
-+
-+	pr_debug("MDCR_EL2 test with pmcr_n %lu\n", pmcr_n);
-+
-+	test_create_vpmu_vm_with_nr_counters(pmcr_n, false);
-+	if (!vm_supports_el2(vpmu_vm.vm)) {
-+		destroy_vpmu_vm();
-+		return;
-+	}
-+
-+	vcpu = vpmu_vm.vcpu;
-+
-+	mdcr = vcpu_get_reg(vcpu, KVM_ARM64_SYS_REG(SYS_MDCR_EL2));
-+	TEST_ASSERT(FIELD_GET(MDCR_EL2_HPMN, mdcr) == pmcr_n,
-+		    "MDCR_EL2.HPMN is not updated after PMU_V3_SET_NR_COUNTERS (expected %lu, got %lu)",
-+		    pmcr_n, FIELD_GET(MDCR_EL2_HPMN, mdcr));
-+
-+	old_mdcr = mdcr;
-+	vcpu_set_reg(vcpu, KVM_ARM64_SYS_REG(SYS_MDCR_EL2),
-+		     old_mdcr ^ MDCR_EL2_HPME);
-+
-+	mdcr = vcpu_get_reg(vcpu, KVM_ARM64_SYS_REG(SYS_MDCR_EL2));
-+	TEST_ASSERT(mdcr == (old_mdcr ^ MDCR_EL2_HPME),
-+		    "MDCR_EL2 was not properly updated after HPME write (expected 0x%lx, got 0x%lx)",
-+		    old_mdcr ^ MDCR_EL2_HPME, mdcr);
-+
-+	if (pmcr_n < FIELD_MAX(MDCR_EL2_HPMN)) {
-+		errno = 0;
-+		old_mdcr = mdcr;
-+		ret = __vcpu_set_reg(vcpu, KVM_ARM64_SYS_REG(SYS_MDCR_EL2),
-+				     u64_replace_bits(mdcr, pmcr_n + 1, MDCR_EL2_HPMN));
-+		TEST_ASSERT(ret == -1 && errno == EINVAL,
-+			    "Setting MDCR_EL2.HPMN to %lu unexpectedly succeeded",
-+			    pmcr_n + 1);
-+
-+		mdcr = vcpu_get_reg(vcpu, KVM_ARM64_SYS_REG(SYS_MDCR_EL2));
-+		TEST_ASSERT(mdcr == old_mdcr,
-+			    "MDCR_EL2 changed after failed HPMN write (expected 0x%lx, got 0x%lx)",
-+			    old_mdcr, mdcr);
-+	}
-+
-+	old_mdcr = mdcr;
-+	vcpu_set_reg(vcpu, KVM_ARM64_SYS_REG(SYS_MDCR_EL2),
-+		     u64_replace_bits(mdcr, 0, MDCR_EL2_HPMN));
-+
-+	mdcr = vcpu_get_reg(vcpu, KVM_ARM64_SYS_REG(SYS_MDCR_EL2));
-+	TEST_ASSERT(mdcr == u64_replace_bits(old_mdcr, 0, MDCR_EL2_HPMN),
-+		    "MDCR_EL2 was not properly updated after HPMN write (expected 0x%lx, got 0x%lx)",
-+		    u64_replace_bits(old_mdcr, 0, MDCR_EL2_HPMN), mdcr);
-+
-+	kvm_get_default_vcpu_target(vpmu_vm.vm, &init);
-+	init.features[0] |= (1 << KVM_ARM_VCPU_PMU_V3);
-+	aarch64_vcpu_setup(vcpu, &init);
-+
-+	mdcr = vcpu_get_reg(vcpu, KVM_ARM64_SYS_REG(SYS_MDCR_EL2));
-+	TEST_ASSERT(FIELD_GET(MDCR_EL2_HPMN, mdcr) == pmcr_n,
-+		    "MDCR_EL2.HPMN is not updated after INIT (expected %lu, got %lu)",
-+		    pmcr_n, FIELD_GET(MDCR_EL2_HPMN, mdcr));
-+
-+	destroy_vpmu_vm();
-+}
-+
- /*
-  * Create a guest with one vCPU, and attempt to set the PMCR_EL0.N for
-  * the vCPU to @pmcr_n, which is larger than the host value.
-@@ -634,6 +709,7 @@ int main(void)
- 	for (i = 0; i <= pmcr_n; i++) {
- 		run_access_test(i);
- 		run_pmregs_validity_test(i);
-+		run_mdcr_el2_validity_test(i);
- 	}
- 
- 	for (i = pmcr_n + 1; i < ARMV8_PMU_MAX_COUNTERS; i++)
+diff --git a/arch/arm64/kernel/cpu_errata.c b/arch/arm64/kernel/cpu_errata.c
+index 476a37c82108..14ce49d693c4 100644
+--- a/arch/arm64/kernel/cpu_errata.c
++++ b/arch/arm64/kernel/cpu_errata.c
+@@ -964,7 +964,7 @@ const struct arm64_cpu_capabilities arm64_errata[] = {
+ 	{
+ 		.desc = "Apple IMPDEF PMUv3 Traps",
+ 		.capability = ARM64_WORKAROUND_PMUV3_IMPDEF_TRAPS,
+-		.type = ARM64_CPUCAP_LOCAL_CPU_ERRATUM,
++		.type = ARM64_CPUCAP_EARLY_LOCAL_CPU_FEATURE,
+ 		.matches = has_impdef_pmuv3,
+ 		.cpu_enable = cpu_enable_impdef_pmuv3_traps,
+ 	},
 
 -- 
 2.55.0
