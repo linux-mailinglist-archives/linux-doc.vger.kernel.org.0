@@ -1,349 +1,261 @@
-Return-Path: <linux-doc+bounces-96225-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96230-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id SkHAI/TRUGor5gIAu9opvQ
-	(envelope-from <linux-doc+bounces-96225-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 13:05:24 +0200
+	id b4GzE1bUUGqc5gIAu9opvQ
+	(envelope-from <linux-doc+bounces-96230-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 13:15:34 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3207D739F71
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 13:05:24 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7971A73A0C7
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 13:15:33 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=O6RrK+c+;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=ZOMjVeZg;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=O6RrK+c+;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=ZOMjVeZg;
-	dmarc=pass (policy=none) header.from=suse.de;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96225-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96225-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=none ("invalid DKIM record") header.d=rsg.ci.i.u-tokyo.ac.jp header.s=rs20250326 header.b=WFCDYw6U;
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=u-tokyo.ac.jp (policy=none);
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96230-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96230-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id C4D25300D156
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 11:01:08 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id C5945300F262
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 11:15:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 01AD1412293;
-	Fri, 10 Jul 2026 11:01:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D7B57416CFA;
+	Fri, 10 Jul 2026 11:15:20 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from www3579.sakura.ne.jp (www3579.sakura.ne.jp [49.212.243.89])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7156940BCB6
-	for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 11:01:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 991AC40E8F9
+	for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 11:15:16 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783681267; cv=none; b=EiCq0qYGEB2tVVxJqb8XSy3mpSdv1W3oOnzJDQ35e8Bpu85o9WudFuj/SwDkau72WjM5Qty3GXOmBEg+IJsxC9At1D45+m7iCPZWMs8OT+03dwhNtLS6rP1cTUs3pJqO02DROgMbtNBHRH7ia0GLvICt/baDvFNNgr1p4K1+AcE=
+	t=1783682120; cv=none; b=Opx38USbKStgcvYi5KYfHCYZo4BPM6PjtZV906vxtNyvmOidVxzkVeDwwCdq+jBZZvPC+qibNYUtwUPyj14aeCab/R7fUxj+WkyY288eJX2LqI96DjMlUNCReMqaFmT3eNOvz0FHAaCQVVghYBRvB3YOxp2QMUHflju/8UZU4pM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783681267; c=relaxed/simple;
-	bh=N/iKtwVV/SDgLjSMeMB99yFSgCAkegP3YEkiL+SWjvQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ZzJ/E1lZ6XTpGG6/JYeg/9/T0KJp+VOxaQ+CvNOAI2Uje6PL9erzEVYuh0rBssKlJGQDu4UG6YjMottMOczxy2rneK3Q60HhhX41cuAQqKRybOPjy73ku7LomtiBsA3rzeuA1CXQM6l/m6lVVHUMs8bjelkt+onbUKZNhZbeMRw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=O6RrK+c+; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=ZOMjVeZg; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=O6RrK+c+; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=ZOMjVeZg; arc=none smtp.client-ip=195.135.223.130
-Received: from kunlun.suse.cz (unknown [IPv6:2a07:de40:b306:2000::2])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id 8391876715;
-	Fri, 10 Jul 2026 11:01:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1783681263; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=UYsS2vBan7uQzdgEWEddgopbLcVe02BSX1ZYLs9ZgnU=;
-	b=O6RrK+c+yEUCBz7JS8C/n3uvL2/ffj5axWsd+OY7/CEczrcwTTxEsLs/dGrk0viRn5MzUe
-	GtnTNGDpvD2O3TvWKyCZYWhXnzThvycDzjVezp2doDQRDuZWsQfOU+4cVOIOZhNJKRbxfw
-	fx3PQHPrPfFlb6kdRd1H2jQ1bqYybjk=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1783681263;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=UYsS2vBan7uQzdgEWEddgopbLcVe02BSX1ZYLs9ZgnU=;
-	b=ZOMjVeZgmcYQW+gxCYgmXBRA3lul7pjSYwltV7OQTpYYU1+O+3dJHoeOdjPx+vWowECub2
-	kiZTkZ3pFRD1rDAw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1783681263; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=UYsS2vBan7uQzdgEWEddgopbLcVe02BSX1ZYLs9ZgnU=;
-	b=O6RrK+c+yEUCBz7JS8C/n3uvL2/ffj5axWsd+OY7/CEczrcwTTxEsLs/dGrk0viRn5MzUe
-	GtnTNGDpvD2O3TvWKyCZYWhXnzThvycDzjVezp2doDQRDuZWsQfOU+4cVOIOZhNJKRbxfw
-	fx3PQHPrPfFlb6kdRd1H2jQ1bqYybjk=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1783681263;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=UYsS2vBan7uQzdgEWEddgopbLcVe02BSX1ZYLs9ZgnU=;
-	b=ZOMjVeZgmcYQW+gxCYgmXBRA3lul7pjSYwltV7OQTpYYU1+O+3dJHoeOdjPx+vWowECub2
-	kiZTkZ3pFRD1rDAw==
-Date: Fri, 10 Jul 2026 13:01:02 +0200
-From: Michal =?iso-8859-1?Q?Such=E1nek?= <msuchanek@suse.de>
-To: Thomas Gleixner <tglx@kernel.org>
-Cc: LKML <linux-kernel@vger.kernel.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Shrikanth Hegde <sshegde@linux.ibm.com>,
-	linuxppc-dev@lists.ozlabs.org, Kees Cook <kees@kernel.org>,
-	Huacai Chen <chenhuacai@kernel.org>, loongarch@lists.linux.dev,
-	Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
-	linux-riscv@lists.infradead.org,
-	Sven Schnelle <svens@linux.ibm.com>, linux-s390@vger.kernel.org,
-	x86@kernel.org, Mark Rutland <mark.rutland@arm.com>,
-	Jinjie Ruan <ruanjinjie@huawei.com>,
-	Andy Lutomirski <luto@kernel.org>, Oleg Nesterov <oleg@redhat.com>,
-	Richard Henderson <richard.henderson@linaro.org>,
-	Russell King <linux@armlinux.org.uk>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Guo Ren <guoren@kernel.org>,
-	Geert Uytterhoeven <geert@linux-m68k.org>,
-	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
-	Helge Deller <deller@gmx.de>,
-	Yoshinori Sato <ysato@users.sourceforge.jp>,
-	Richard Weinberger <richard@nod.at>,
-	Chris Zankel <chris@zankel.net>,
-	linux-arm-kernel@lists.infradead.org, linux-alpha@vger.kernel.org,
-	linux-csky@vger.kernel.org, linux-m68k@lists.linux-m68k.org,
-	linux-mips@vger.kernel.org, linux-parisc@vger.kernel.org,
-	linux-sh@vger.kernel.org, linux-um@lists.infradead.org,
-	Arnd Bergmann <arnd@arndb.de>, Vineet Gupta <vgupta@kernel.org>,
-	Will Deacon <will@kernel.org>, Brian Cain <bcain@kernel.org>,
-	Michal Simek <monstr@monstr.eu>, Dinh Nguyen <dinguyen@kernel.org>,
-	"David S. Miller" <davem@davemloft.net>,
-	Andreas Larsson <andreas@gaisler.com>,
-	linux-snps-arc@lists.infradead.org, linux-hexagon@vger.kernel.org,
-	linux-openrisc@vger.kernel.org, sparclinux@vger.kernel.org,
-	linux-arch@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-	linux-doc@vger.kernel.org
-Subject: Re: [patch 13/18] entry: Make trace_syscall_enter() return type bool
-Message-ID: <alDQ7isUKJFl8Va4@kunlun.suse.cz>
-References: <20260707181957.433213175@kernel.org>
- <20260707190254.338083894@kernel.org>
- <ak5ySpil83TNWxeq@kunlun.suse.cz>
- <87se5tqkyp.ffs@fw13>
+	s=arc-20240116; t=1783682120; c=relaxed/simple;
+	bh=3aaGkxuWYeIHEXxQ7jK2xLPaTuF44GG9raRCIo26jOg=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=NCm4iLx1WLsl/zUPGl2Nwj/pKgK/H8iNH6Ckgu4cNXo+ZasWB8qdN1vRJW5A3Uqe1YH0VvmLwQntHN0H9KMDcX+v+GT8Q6m1ZxaVkEt2UlwNSCCIL/iP2Acb+oYqCqgvdCedzaZmTolkulgEgEwWwGP4x7WUS3UtJXntwDFlYvA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rsg.ci.i.u-tokyo.ac.jp; spf=pass smtp.mailfrom=rsg.ci.i.u-tokyo.ac.jp; dkim=fail (0-bit key) header.d=rsg.ci.i.u-tokyo.ac.jp header.i=@rsg.ci.i.u-tokyo.ac.jp header.b=WFCDYw6U reason="key not found in DNS"; arc=none smtp.client-ip=49.212.243.89
+Received: from h183.csg.ci.i.u-tokyo.ac.jp (h183.csg.ci.i.u-tokyo.ac.jp [133.11.54.183])
+	(authenticated bits=0)
+	by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 66ABEvsE024946
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+	Fri, 10 Jul 2026 20:15:09 +0900 (JST)
+	(envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
+DKIM-Signature: a=rsa-sha256; bh=KGB+NKL0JfhCiL8lQAxj2/85FwyywY4aNanasRFKkk8=;
+        c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
+        h=From:Message-Id:To:Subject:Date;
+        s=rs20250326; t=1783682109; v=1;
+        b=WFCDYw6UwvD01zELlgqWWQoilYBDJd876u90Q9LWxE0DzNG/4H/ncS1wa4ByRtD7
+         42qpGj0Oi6BB3NOcHNO+Biwcksblt/HN1jBHyv1gVI9wtVMA34nNKKo5oN+C1Wgx
+         IXhAgM1jqUFHq+EBt8IKQE7R3xKru10jMPx8zyW2HT167rD5pNfU87hFhcyT4xph
+         dQOqSiS/96vwp7N58zdhknJgZyK/uQD0N9edcBI8s+ow0cGy4GAjVElIkgvzDaWW
+         Dz8kexKiVA5XoT81MtnakTmS+lPVG8b7kvXm4YQ6/A+9qyLbnyGRp/iOr/tvWlIg
+         LATdvOWMJZkc7xlkeUGuQQ==
+From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+Subject: [PATCH v8 00/11] KVM: arm64: PMU: Use multiple host PMUs
+Date: Fri, 10 Jul 2026 20:14:54 +0900
+Message-Id: <20260710-hybrid-v8-0-621409f3a592@rsg.ci.i.u-tokyo.ac.jp>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <87se5tqkyp.ffs@fw13>
-X-Spam-Flag: YES
-X-Spam-Level: ***************
-X-Spamd-Bar: +++++++++++++++
-X-Spam-Score: 15.15
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/33Ry27CMBAF0F9BWdeRHxM/WPEfVRe2ZwxuBaFJi
+ IgQ/14TRGBTltfyHF+NL1VPXaa+Wq8uVUdj7nN7KMF+rKq484ctsYwlV5LLhksJbDeFLiPjApu
+ UwBCirMrlY0cpn2fo8+ueO/o9FW+4H1bB98Riu9/nYb0SRNKgj4EajICUwArjAK1zqE3gCI3h3
+ EF1s3a5H9pumjuOYsbmOkq4R51RMMEAhUcvOBnebNBPh3yuy4OzMcrnnOV6mZOMM6618BSVTzZ
+ uun5bx1zn+sSG9mdqax/r7+PdUA9Dl1U0i6GKAZpsIim5tfytAU9DCbMYUIyAWoaIYDXAW6N5G
+ iDEYjQ3g4MKgC6Bo7eGfjXUYuhikHFoNE8mifDWMK+GXQxTDBmSch7LH4b0r3G9Xv8AO8RVVIE
+ CAAA=
+X-Change-ID: 20250224-hybrid-01d5ff47edd2
+To: Marc Zyngier <maz@kernel.org>, Oliver Upton <oupton@kernel.org>,
+        Joey Gouly <joey.gouly@arm.com>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Zenghui Yu <yuzenghui@huawei.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>, Kees Cook <kees@kernel.org>,
+        "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+        Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <shuah@kernel.org>, Shuah Khan <skhan@linuxfoundation.org>,
+        Yury Norov <yury.norov@gmail.com>,
+        Rasmus Villemoes <linux@rasmusvillemoes.dk>
+Cc: linux-arm-kernel@lists.infradead.org, kvmarm@lists.linux.dev,
+        linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org,
+        devel@daynix.com, kvm@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kselftest@vger.kernel.org,
+        Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+X-Mailer: b4 0.16-dev-925f5
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6022;
+ i=odaki@rsg.ci.i.u-tokyo.ac.jp; h=from:subject:message-id;
+ bh=3aaGkxuWYeIHEXxQ7jK2xLPaTuF44GG9raRCIo26jOg=;
+ b=kA0DAAoWKJ19aUZYEjEByyZiAGpQ1DOjADdd99DcVYORyjtI+t88DTfQUdvgMtOperExO9rXD
+ Yh1BAAWCgAdFiEEZHK7CyhbffJxYF+EKJ19aUZYEjEFAmpQ1DMACgkQKJ19aUZYEjEN2gEA+2De
+ 2VjJrhKOkt/4XcDubhTXeZN+3XmBBa+PbVtQr24A/iFHmD5h9H3xKCIWyNP1J6+prxFIAzFdp8E
+ oR9TdNfMA
+X-Developer-Key: i=odaki@rsg.ci.i.u-tokyo.ac.jp; a=openpgp;
+ fpr=AEDC03C9AF734F2EC26A7BFFA4BAEAA73536753C
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [2.84 / 15.00];
-	SPAM_FLAG(5.00)[];
+X-Spamd-Result: default: False [0.14 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[suse.de,none];
-	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[u-tokyo.ac.jp : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
+	FORGED_SENDER(0.00)[odaki@rsg.ci.i.u-tokyo.ac.jp,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[24];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-96225-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:tglx@kernel.org,m:linux-kernel@vger.kernel.org,m:peterz@infradead.org,m:mpe@ellerman.id.au,m:sshegde@linux.ibm.com,m:linuxppc-dev@lists.ozlabs.org,m:kees@kernel.org,m:chenhuacai@kernel.org,m:loongarch@lists.linux.dev,m:pjw@kernel.org,m:palmer@dabbelt.com,m:linux-riscv@lists.infradead.org,m:svens@linux.ibm.com,m:linux-s390@vger.kernel.org,m:x86@kernel.org,m:mark.rutland@arm.com,m:ruanjinjie@huawei.com,m:luto@kernel.org,m:oleg@redhat.com,m:richard.henderson@linaro.org,m:linux@armlinux.org.uk,m:catalin.marinas@arm.com,m:guoren@kernel.org,m:geert@linux-m68k.org,m:tsbogend@alpha.franken.de,m:deller@gmx.de,m:ysato@users.sourceforge.jp,m:richard@nod.at,m:chris@zankel.net,m:linux-arm-kernel@lists.infradead.org,m:linux-alpha@vger.kernel.org,m:linux-csky@vger.kernel.org,m:linux-m68k@lists.linux-m68k.org,m:linux-mips@vger.kernel.org,m:linux-parisc@vger.kernel.org,m:linux-sh@vger.kernel.org,m:linux-um@lists.infradead.org,m:arnd@arndb.de,m:vgupta@kernel.org,m:will@kerne
- l.org,m:bcain@kernel.org,m:monstr@monstr.eu,m:dinguyen@kernel.org,m:davem@davemloft.net,m:andreas@gaisler.com,m:linux-snps-arc@lists.infradead.org,m:linux-hexagon@vger.kernel.org,m:linux-openrisc@vger.kernel.org,m:sparclinux@vger.kernel.org,m:linux-arch@vger.kernel.org,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[msuchanek@suse.de,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[vger.kernel.org,infradead.org,ellerman.id.au,linux.ibm.com,lists.ozlabs.org,kernel.org,lists.linux.dev,dabbelt.com,lists.infradead.org,arm.com,huawei.com,redhat.com,linaro.org,armlinux.org.uk,linux-m68k.org,alpha.franken.de,gmx.de,users.sourceforge.jp,nod.at,zankel.net,lists.linux-m68k.org,arndb.de,monstr.eu,davemloft.net,gaisler.com,lwn.net];
+	FORGED_RECIPIENTS(0.00)[m:maz@kernel.org,m:oupton@kernel.org,m:joey.gouly@arm.com,m:suzuki.poulose@arm.com,m:yuzenghui@huawei.com,m:catalin.marinas@arm.com,m:will@kernel.org,m:kees@kernel.org,m:gustavoars@kernel.org,m:pbonzini@redhat.com,m:corbet@lwn.net,m:shuah@kernel.org,m:skhan@linuxfoundation.org,m:yury.norov@gmail.com,m:linux@rasmusvillemoes.dk,m:linux-arm-kernel@lists.infradead.org,m:kvmarm@lists.linux.dev,m:linux-kernel@vger.kernel.org,m:linux-hardening@vger.kernel.org,m:devel@daynix.com,m:kvm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:odaki@rsg.ci.i.u-tokyo.ac.jp,m:yurynorov@gmail.com,s:lists@lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
-	FROM_HAS_DN(0.00)[];
+	FREEMAIL_TO(0.00)[kernel.org,arm.com,huawei.com,redhat.com,lwn.net,linuxfoundation.org,gmail.com,rasmusvillemoes.dk];
+	FORWARDED(0.00)[lists@lfdr.de];
+	R_DKIM_PERMFAIL(0.00)[rsg.ci.i.u-tokyo.ac.jp:s=rs20250326];
+	TAGGED_FROM(0.00)[bounces-96230-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[52];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[msuchanek@suse.de,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[suse.de:+];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[odaki@rsg.ci.i.u-tokyo.ac.jp,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[rsg.ci.i.u-tokyo.ac.jp:~];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,kunlun.suse.cz:mid,suse.de:from_mime,suse.de:dkim,vger.kernel.org:from_smtp]
+	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,u-tokyo.ac.jp:email,rsg.ci.i.u-tokyo.ac.jp:mid,rsg.ci.i.u-tokyo.ac.jp:from_mime,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 3207D739F71
+X-Rspamd-Queue-Id: 7971A73A0C7
 
-On Wed, Jul 08, 2026 at 10:34:38PM +0200, Thomas Gleixner wrote:
-> On Wed, Jul 08 2026 at 17:52, Michal Suchánek wrote:
-> > On Tue, Jul 07, 2026 at 09:06:48PM +0200, Thomas Gleixner wrote:
-> >> In preparation of converting the return value of
-> >> syscall_enter_from_user_mode[_work]() bool, rework trace_syscall_enter() to
-> >> 
-> >>  - update the syscall number via a pointer argument
-> >> 
-> >>  - Return True if the syscall number is != -1, False otherwise
-> >
-> > This does not achieve the goal of the initial RFC: To detangle the
-> > return value of syscall_enter_from_user_mode from the syscall number.
-> 
-> As I explained to you before: Your RFC broke the implicit assumption of
-> tracing, which is way worse than having this oddity.
+On a heterogeneous arm64 system, KVM's PMU emulation is based on the
+features of a single host PMU instance. When a vCPU is migrated to a
+pCPU with an incompatible PMU, counters such as PMCCNTR_EL0 stop
+incrementing.
 
-It would be so nice to make the assumptions about the entry API explicit
-so that platforms can agree on the semantics.
+Although this behavior is permitted by the architecture, Windows does
+not handle it gracefully and may crash with a division-by-zero error.
 
-> 
-> > This still conflates them, making it impossible to tell if the syscall
-> > was rejected or syscall number was -1 to start with. Now also obfuscated
-> > by performing the check deeper inside the common code.
-> 
-> That's where it belongs. It's a problem to solve within the given
-> semantics of trace_syscall_enter() and not a problem to be worked around
-> at the call sites if you want to have consolidated semantics.
-> 
-> >> The only difference is that this also returns False, when the syscall
-> >> number was already -1 to begin with, but there is not much which can be
-> >> done about that. As the architecture has to preset the return value to
-> >> -ENOSYS anyway, that results in the correct return value for such an
-> >> invalid syscall.
-> >
-> > That's not possible to do for architectures where the syscall number and
-> > the syscall return value are in the same register.
-> >
-> > You suggested that it is possible to not write the return value into an
-> > actual register but use an additional field for that, and have the exit
-> > code write the register.
-> >
-> > However, that's not what is documented, nor what is currently done.
-> 
-> Just because S390 screwed up their ABI and then on top of that failed to
-> do what _every_ other architecture in the kernel does, i.e. having a
-> result storage which is preset to -ENOSYS does not mean that S390 did
-> the right thing just because it was not documented. Kernel documentation
-> is known to be incomplete and I fixed it up in the last patch as you
-> might have noticed.
-> 
-> Just for the record. Presetting the return value to -ENOSYS has been
-> practice for three decades. I couldn't be bothered to do a full search
+The current workaround requires VMMs to pin vCPUs to a set of pCPUs
+that share a compatible PMU. This is difficult to implement correctly in
+QEMU/libvirt, where pinning occurs after vCPU initialization, and it
+also restricts the guest to a subset of available pCPUs.
 
-No, it isn't practice anymore for decades.
+This patch introduces the KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY
+attribute. If set, PMUv3 will be emulated without programmable event
+counters. KVM will be able to run VCPUs on any physical CPUs with a
+compatible hardware PMU.
 
-The moment ppc and s390 support was merged they do not preset the
-syscall return value to -ENOSYS, for obvious reason.
+This allows Windows guests to run reliably on heterogeneous systems
+without crashing, even without vCPU pinning, and enables VMMs to
+schedule vCPUs across all available pCPUs, making full use of the host
+hardware.
 
-That is how the undocumented, implicit, 'as implemented' API goes. It
-silently changes as the implementation evolves.
+A QEMU patch that demonstrates the usage of the new attribute is
+available at:
+https://lore.kernel.org/qemu-devel/20260706-kvm-v4-1-089cac8c25c3@rsg.ci.i.u-tokyo.ac.jp/
+("[PATCH RFC v4] target/arm/kvm: Choose PMU backend")
 
-> in the history trees to figure out the exact point, but as of 2.1.9,
-> which was released in Nov. 1996, this is definitely the case.
-> 
-> So don't tell me that because S390 missed the train when it was
-> added to mainline in 2007 (, i.e. 11 years _after_ this "undocumented" rule was
-> established that now 20 years later the world has to revolve around S390
-> and your personal idea of "clear and intelligible":
+Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+---
+Changes in v8:
+- Added patch
+  "KVM: arm64: Disallow vPMU when pPMUs do not cover all CPUs".
+- Split patch "KVM: arm64: PMU: Introduce FIXED_COUNTERS_ONLY".
+- Documented the FEAT_PMUv3_ICNTR support plan.
+- Ensured KVM_ARM_VCPU_PMU_V3_FILTER and
+  KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY are mutually exclusive.
+- Ensured KVM_ARM_VCPU_PMU_V3_SET_PMU and
+  KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY are mutually exclusive.
+- Dropped the code to support KVM_ARM_VCPU_PMU_V3_SET_NR_COUNTERS for
+  KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY.
+- Added a function to de-duplicate
+  "test_bit(KVM_ARCH_FLAG_PMU_V3_FIXED_COUNTERS_ONLY, ...)".
+- Link to v7: https://lore.kernel.org/r/20260418-hybrid-v7-0-2bf39ad009bf@rsg.ci.i.u-tokyo.ac.jp
 
-Don't tell me you missed the train on what the actual API of syscall
-entry is.
+Changes in v7:
+- Fixed the vCPU run hang in test_fixed_counters_only().
+- Link to v6: https://lore.kernel.org/r/20260413-hybrid-v6-0-e79d760f7f1b@rsg.ci.i.u-tokyo.ac.jp
 
-> 
-> > While this is an improvement in some respects the goal to have clear and
-> > intelligible API around the generic entry is not acheived.
-> 
-> I'm honestly not sure whether I should laugh or cry.
-> 
-> You are completely missing the point:
-> 
->   1) The set in stone rule is that if the entry code returns -1L as the
->      syscall number then the architecture code has to skip the syscall
->      invocation _and_ is not supposed to change the return value.
+Changes in v6:
+- Removed WARN_ON_ONCE() in kvm_pmu_create_perf_event(). It can be
+  triggered in kvm_arch_vcpu_load() before it checks supported_cpus.
+- Removed an extra lockdep assertion in kvm_arm_pmu_v3_get_attr().
+- Fixed error messages in test_fixed_counters_only().
+- Fixed the vCPU run in test_fixed_counters_only().
+- Link to v5: https://lore.kernel.org/r/20260411-hybrid-v5-0-b043b4d9f49e@rsg.ci.i.u-tokyo.ac.jp
 
-Which stone?
+Changes in v5:
+- Rebased.
+- Fixed the order to clear KVM_ARCH_FLAG_PMU_V3_FIXED_COUNTERS_ONLY in
+  kvm_arm_pmu_v3_set_pmu().
+- Fixed the setting of KVM_ARM_VCPU_PMU_V3_IRQ in
+  test_fixed_counters_only().
+- Changed to WARN_ON_ONCE() when kvm_pmu_probe_armpmu() returns NULL in
+  kvm_pmu_create_perf_event(), which is no longer supposed to happen.
+- Link to v4: https://lore.kernel.org/r/20260317-hybrid-v4-0-bd62bcd48644@rsg.ci.i.u-tokyo.ac.jp
 
-Pics or it did not happen.
+Changes in v4:
+- Extracted kvm_pmu_enabled_counter_mask() into a separate patch.
+- Added patch "KVM: arm64: PMU: Protect the list of PMUs with RCU".
+- Merged KVM_REQ_CREATE_PMU into KVM_REQ_RELOAD_PMU.
+- Added a check to avoid unnecessary KVM_REQ_RELOAD_PMU requests.
+- Dropped the change to avoid setting kvm_arm_set_default_pmu() when
+  KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY is not set.
+- Link to v3: https://lore.kernel.org/r/20260225-hybrid-v3-0-46e8fe220880@rsg.ci.i.u-tokyo.ac.jp
 
-> 
->   2) There is no guarantee and never has been that any of the involved
->      mechanisms (ptrace, seccomp, tracing) will change the return value
->      when it sets the syscall number to -1L.
+Changes in v3:
+- Renamed the attribute to KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY.
+- Changed to request the creation of perf counters when loading vCPU.
+- Link to v2: https://lore.kernel.org/r/20250806-hybrid-v2-0-0661aec3af8c@rsg.ci.i.u-tokyo.ac.jp
 
-For ptrace to correctly emulate a syscall it needs to set the syscall nr
-to an invalid value on entry, and the desired result if the syscall on
-exit AFAICT.
+Changes in v2:
+- Added the KVM_ARM_VCPU_PMU_V3_COMPOSITION attribute to opt in the
+  feature.
+- Added code to handle overflow.
+- Link to v1: https://lore.kernel.org/r/20250319-hybrid-v1-1-4d1ada10e705@daynix.com
 
-Relying on platfrom quirk to assume that the return valu is set to
-ENOSYS is insufficient.
+---
+Akihiko Odaki (10):
+      KVM: arm64: Serialize userspace MDCR_EL2 access
+      tools headers: Sync bitfield.h with the kernel
+      KVM: arm64: selftests: Cover PMU state in MDCR_EL2
+      arm64: errata: Require Apple IMPDEF PMUv3 traps on all CPUs
+      KVM: arm64: PMU: Protect the list of PMUs with RCU
+      KVM: arm64: PMU: Pass the pPMU to kvm_map_pmu_event()
+      KVM: arm64: PMU: Pass the target CPU to kvm_pmu_probe_armpmu()
+      KVM: arm64: PMU: Implement fixed-counters-only emulation
+      KVM: arm64: PMU: Introduce FIXED_COUNTERS_ONLY
+      KVM: arm64: selftests: Test PMU_V3_FIXED_COUNTERS_ONLY
 
-I doubt many platfroms have an ABI that dictates that the register that
-has the syscal nr is set to -1 on exit from syscal. Then even if the
--ENOSYS is preset by the kernel the syscall nr needs to be poked back on
-exit for the emulation to be correct.
+Oliver Upton (1):
+      KVM: arm64: Don't clear vcpu->cpu in kvm_arch_vcpu_put()
 
-> 
->      Quite the contrary there has been a long time (30 years at least)
->      expectation that the return value has been preset to -ENOSYS.
+ Documentation/virt/kvm/devices/vcpu.rst            |  30 ++-
+ arch/arm64/include/asm/kvm_host.h                  |   4 +
+ arch/arm64/include/uapi/asm/kvm.h                  |   1 +
+ arch/arm64/kernel/cpu_errata.c                     |   2 +-
+ arch/arm64/kvm/arm.c                               |   3 +-
+ arch/arm64/kvm/pmu-emul.c                          | 185 ++++++++++++-----
+ arch/arm64/kvm/reset.c                             |  16 +-
+ arch/arm64/kvm/sys_regs.c                          |  39 +++-
+ include/kvm/arm_pmu.h                              |   2 +
+ tools/include/linux/bitfield.h                     | 175 +++++++++++++---
+ tools/include/linux/bitops.h                       |  19 ++
+ tools/include/linux/compiler_types.h               |  13 ++
+ tools/include/linux/typecheck.h                    |  34 +++
+ .../selftests/kvm/arm64/vpmu_counter_access.c      | 229 ++++++++++++++++++---
+ 14 files changed, 635 insertions(+), 117 deletions(-)
+---
+base-commit: 1ee27dacbe5dc4def481794d899d67b0d4570094
+change-id: 20250224-hybrid-01d5ff47edd2
 
-That is your opinion, not the fact. Multiple platforms do not work like
-that.
+Best regards,
+--  
+Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 
-> 
->   3) It's trivial as demonstrated to make ptrace and seccomp more
->      comprehensible but that does not invalidate #2
-> 
->   4) Due to the historical integration of tracing (+probes/BPF) there is
->      an implicit assumption that the return code is preset to -ENOSYS.
->      See #2
-
-False again
-
-> 
->   5) There is an obvious ambiguity between the initial syscall number
->      being -1 and the change of syscall number to -1 in the case of
->      tracing, but that's not unique to tracing:
-> 
->      If e.g. seccomp() observes the handed in syscall number to be -1
->      and tells in the return code to skip the syscall, then it can
->      rightfully assume that the return code will be -ENOSYS and has no
->      obligation to set it explicitly. See #2
-
-False again
-
-> 
-> Q: Is it perfect?
-> A: No
-> 
-> Q: Can it be made perfect?
-> A: No, because you can't change history and established practice.
-> 
-> Just for illustration. Changing the logic in trace_syscall_enter() to:
-> 
-> --- a/kernel/entry/syscall-common.c
-> +++ b/kernel/entry/syscall-common.c
-> @@ -9,13 +9,15 @@
->  
->  bool trace_syscall_enter(struct pt_regs *regs, long *syscall)
->  {
-> +	long orig_syscall = *syscall;
-> +
->  	trace_sys_enter(regs, *syscall);
->  	/*
->  	 * Probes or BPF hooks in the tracepoint may have changed the
->  	 * system call number. Reread it.
->  	 */
->  	*syscall = syscall_get_nr(current, regs);
-> -	return *syscall != -1L;
-> +	return *syscall == orig_syscall || *syscall != -1L;
->  }
->  
->  void trace_syscall_exit(struct pt_regs *regs, long ret)
-> 
-> does not make #2 magically go away. It's still the same problem whether
-> you like it or not.
-
-However, reading the syscall number from pt_regs only after
-syscall_enter_from_user_mode exits does.
-
-Thanks
-
-Michal
 
