@@ -1,125 +1,156 @@
-Return-Path: <linux-doc+bounces-96309-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96310-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 0GtmKDs+UWrDBAMAu9opvQ
-	(envelope-from <linux-doc+bounces-96309-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 20:47:23 +0200
+	id /hioATdCUWqtBQMAu9opvQ
+	(envelope-from <linux-doc+bounces-96310-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 21:04:23 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB39973D69C
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 20:47:22 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5BDC073D837
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 21:04:22 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=mU0n2XBs;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96309-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96309-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=lwn.net header.s=20201203 header.b=Yk7SlW8D;
+	dmarc=pass (policy=none) header.from=lwn.net;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96310-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-96310-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 6663A3024120
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 18:46:10 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 9C4D23017243
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 19:02:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A217433B97A;
-	Fri, 10 Jul 2026 18:46:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 891F333260F;
+	Fri, 10 Jul 2026 19:02:34 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9528F2F4A0C
-	for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 18:46:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5FFD737B409;
+	Fri, 10 Jul 2026 19:02:32 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783709169; cv=none; b=WegDVCZJlyRmAwZeiY6tofW0/edD4ngUjypmhwLriXjAO9fx2rwcPqfukOIIRJRDzb3B3WWd8OrTJ0rauxWoSfBy+NtbpINc5O6Z+ho0VArzPxpK3evc/ZBQMIYQlFHjn8O8Y7JJDRcwxEKmbyFtlrlVVUD0yXeRQaBna6vyj2M=
+	t=1783710154; cv=none; b=O6XsbA0sw/HAkhsqfgsbPix7NJHPIe0hpOEU5/yEY64WY5619WHkhuEhTPx4FJRXK2d6sMpAPtrgE74i81aLlmBGoLRoQksqpS0n4bUoa3g9P56Y1diKZfP5gS2gvOgg6YpInYyplm/sZbb21cHBT9R9mNIYysc9rAr+5HUdNrM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783709169; c=relaxed/simple;
-	bh=n7Be+biVh0O8F8FvhkYQou6CywM8ch+inae9MbJjFs8=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=bYAaVL3vc/llnR7axRWtCTJpnhoLtaJTX12WBV59rm3FeB/ljlGTX7vObVd92EmmMt4yU/OQVyeAGw4pzNdZ7AiNBMYcVKj+zFVS+cStEUgS3brrxh81ygKMjVtj6LtwUU6ck5mMGa6Tei7VBxuPVpuM+51BimzBPKRKqMDdGho=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mU0n2XBs; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 369FE1F000E9
-	for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 18:46:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783709168;
-	bh=n7Be+biVh0O8F8FvhkYQou6CywM8ch+inae9MbJjFs8=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=mU0n2XBstRApFoWzAMKmK3OFVzi6juII8fVi4F4Gog1p1PJLb6zV0JnLFPR+toF/f
-	 gPxFdZpBNyvfNdNQ//+bDN827JRtFxGpHxmNI7ZztATvKSR5/FU7wqPiMDhRhHgl+w
-	 ZMz5SuvIF5WkH+HkBHnqGtOsFdsKb8NChG7Xwqq2aVVe809iQMDcqQKiFxhzGA0sH0
-	 B09edrBUk6RrX2Y12BvSf/zJDRvd1A1dxySrXFVccb81zq/aS1M0WwaIuZ2HDp2tQ+
-	 RNcdOm1m/FidcqUYU5LKa2VueCmFasjxab5st6V5WUJaBYeuuyVQwy1X6z2Karsec9
-	 r1Vj8zlNT549A==
-Received: by mail-lf1-f49.google.com with SMTP id 2adb3069b0e04-5aec139da7eso1401852e87.1
-        for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 11:46:08 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+Rodl03GxO0qLL3v+ZgvJZgyv8NzjPtRQ8dZVh15uT1PamUs09DFF0WG1tVGqxxhhhuo/TSbSgh1qMo=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz4ybbNQqhh15jiVgGMO01TNh5xOTFCcFgbXaINepxUjk42cj/u
-	Dp8K3nHygveKbPO71BYCRHMtG3BEby6Czl5c5k8TaC4jXQrzZoShvj3JBQ1hqve6XtqBVdLwGx5
-	LUhom57JWW6lewAqnWNL/B1Km1hDn/90=
-X-Received: by 2002:a05:6512:22d0:b0:5ae:ba93:abe with SMTP id
- 2adb3069b0e04-5b01c55a3bdmr797550e87.30.1783709166994; Fri, 10 Jul 2026
- 11:46:06 -0700 (PDT)
+	s=arc-20240116; t=1783710154; c=relaxed/simple;
+	bh=wUrOSu7yd2eNPF0tpr5FOe/BFu6WkwYAQPf2HMiCCqY=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=UUKXkLz0ZfTqKAQj1rHLmBGM0F25pKWabdMAqVX7UedNWcd7D2XJmSKjxMiZuofjgwtsKCAOiMPpFYA2Zap9yQzZJcQKmD8sUfArnkp2GlpSGD3XYWZyNk7DLcPggdsUpdrzl5pp/xJAImJq6BBM3i/WyHm2zPiFoFXwBI+7FbY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=Yk7SlW8D; arc=none smtp.client-ip=45.79.88.28
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 54D00415B3
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1783710151; bh=PfSfBele8bfQww3k6pOBLw2dDivMcZ32ODcitgLhnGs=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=Yk7SlW8DKbXE34xSMjb2usELCDIrN/OixmGKaOsAX8cb4Zq1J2yf+DQTKQnBoqfWO
+	 C/ZACU3xuUhi/AYLLXDoCEAFufEAy9k/ERDp8cRZXYxmsW+ns975hHqznM1f3LMC/l
+	 DsVJxrhbEwpBPl2qxaNkis5iyMvJAJHHgx1sSDpaK0xzuhxkoO5eLQMtzz9adJLvN+
+	 Yw1Z6EPuyeMKU6/mY/PRzSPoW8lqI4sqcjwvqyLZ/0gtWKwGXnJU7wntMFuFstOzJV
+	 OBscI4LHTcM8FCG6VP+5iTKcyLj6bZPkfzgQfQd/qrH5IwtXdaE5koV7cSM1OXOhpD
+	 V7ohl4a5gVpDw==
+Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id 54D00415B3;
+	Fri, 10 Jul 2026 19:02:31 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Manuel Ebner <manuelebner@mailbox.org>, Vladimir Oltean
+ <olteanv@gmail.com>, Shuah Khan <skhan@linuxfoundation.org>, Jakub
+ Kicinski <kuba@kernel.org>, Jacob Keller <jacob.e.keller@intel.com>
+Cc: Manuel Ebner <manuelebner@mailbox.org>, Andrew Lunn <andrew@lunn.ch>,
+ Randy Dunlap <rdunlap@infradead.org>, Vladimir Oltean
+ <vladimir.oltean@nxp.com>, netdev@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v3] docs: packing: fix brackets
+In-Reply-To: <20260710060346.417669-2-manuelebner@mailbox.org>
+References: <20260710060346.417669-2-manuelebner@mailbox.org>
+Date: Fri, 10 Jul 2026 13:02:30 -0600
+Message-ID: <8733xqmzw9.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260705070212.1123-1-ceohunk@gmail.com>
-In-Reply-To: <20260705070212.1123-1-ceohunk@gmail.com>
-From: Linus Walleij <linusw@kernel.org>
-Date: Fri, 10 Jul 2026 20:45:53 +0200
-X-Gmail-Original-Message-ID: <CAD++jLkJ-r0LVA_hXQLH_o_XR5z0qaobgzJeK6wcrcQhyUG5JA@mail.gmail.com>
-X-Gm-Features: AUfX_mxAooFVvuvsJQQHCc4fDGZN3viCrD3Ww90IbYgS98QigayAzHFLtLqIpzo
-Message-ID: <CAD++jLkJ-r0LVA_hXQLH_o_XR5z0qaobgzJeK6wcrcQhyUG5JA@mail.gmail.com>
-Subject: Re: [PATCH] docs: driver-api: pin-control: fix spelling of below
-To: Yuhong Cheng <ceohunk@gmail.com>
-Cc: linus.walleij@linaro.org, corbet@lwn.net, linux-gpio@vger.kernel.org, 
-	linux-doc@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-5.16 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:ceohunk@gmail.com,m:linus.walleij@linaro.org,m:corbet@lwn.net,m:linux-gpio@vger.kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:manuelebner@mailbox.org,m:olteanv@gmail.com,m:skhan@linuxfoundation.org,m:kuba@kernel.org,m:jacob.e.keller@intel.com,m:andrew@lunn.ch,m:rdunlap@infradead.org,m:vladimir.oltean@nxp.com,m:netdev@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[12];
 	FORWARDED(0.00)[lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FORGED_SENDER(0.00)[linusw@kernel.org,linux-doc@vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-96309-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORGED_SENDER(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-96310-lists,linux-doc=lfdr.de];
+	FREEMAIL_TO(0.00)[mailbox.org,gmail.com,linuxfoundation.org,kernel.org,intel.com];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linusw@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_FIVE(0.00)[5];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[lwn.net:+];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,mail.gmail.com:mid]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FROM_HAS_DN(0.00)[]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: EB39973D69C
+X-Rspamd-Queue-Id: 5BDC073D837
 
-On Sun, Jul 5, 2026 at 9:02=E2=80=AFAM Yuhong Cheng <ceohunk@gmail.com> wro=
-te:
+Manuel Ebner <manuelebner@mailbox.org> writes:
 
-> Fix the spelling of 'bellow' to 'below' in the PM API section.
+> Add two ')' to nested functions in code block.
 >
-> Signed-off-by: Yuhong Cheng <ceohunk@gmail.com>
+> Fixes: a9ad2a8dfb43 ("lib: packing: document recently added APIs")
+> Signed-off-by: Manuel Ebner <manuelebner@mailbox.org>
+> Reviewed-by: Andrew Lunn <andrew@lunn.ch>
+> Acked-by: Randy Dunlap <rdunlap@infradead.org>
+> ---
+> [v3]
+>  fix subject
+>  add Acked-by
+> [v2]
+>  add Fixes tag.
+>  add Reviewed-by.
+> [v1]
+>  https://lore.kernel.org/all/20260709121427.391749-2-manuelebner@mailbox.org/
+> ---
+>  Documentation/core-api/packing.rst | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/Documentation/core-api/packing.rst b/Documentation/core-api/packing.rst
+> index f68f1e08fef9..cff1a262efce 100644
+> --- a/Documentation/core-api/packing.rst
+> +++ b/Documentation/core-api/packing.rst
+> @@ -330,7 +330,7 @@ Here is an example of how to use the fields APIs:
+>  
+>     void unpack_your_data(const packed_buf_t *buf, struct data *unpacked)
+>     {
+> -           BUILD_BUG_ON(sizeof(*buf) != SIZE;
+> +           BUILD_BUG_ON(sizeof(*buf) != SIZE);
+>  
+>             unpack_fields(buf, sizeof(*buf), unpacked, fields,
+>                           QUIRK_LITTLE_ENDIAN);
+> @@ -338,7 +338,7 @@ Here is an example of how to use the fields APIs:
+>  
+>     void pack_your_data(const struct data *unpacked, packed_buf_t *buf)
+>     {
+> -           BUILD_BUG_ON(sizeof(*buf) != SIZE;
+> +           BUILD_BUG_ON(sizeof(*buf) != SIZE);
+>  
 
-Patch applied.
+Applied, thanks.
 
-Yours,
-Linus Walleij
+jon
 
