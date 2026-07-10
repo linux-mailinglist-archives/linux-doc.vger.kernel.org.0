@@ -1,137 +1,154 @@
-Return-Path: <linux-doc+bounces-96141-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96142-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id DGfSLBFBUGqGvgIAu9opvQ
-	(envelope-from <linux-doc+bounces-96141-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 02:47:13 +0200
+	id z9s0BgZDUGrgvgIAu9opvQ
+	(envelope-from <linux-doc+bounces-96142-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 02:55:34 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0772C7366BA
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 02:47:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5EEDA7366FE
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 02:55:33 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=n26oLl7f;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=DPjqKrHp;
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96141-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96141-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96142-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96142-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 08A70301FFB0
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 00:46:26 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 2D94E3021B19
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 00:55:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 87F2513B58C;
-	Fri, 10 Jul 2026 00:46:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 039D71A5BAE;
+	Fri, 10 Jul 2026 00:55:31 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 736722AD3F;
-	Fri, 10 Jul 2026 00:46:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E660126AC3;
+	Fri, 10 Jul 2026 00:55:29 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783644384; cv=none; b=PnccmGzn5lcBMzMrzul11FD0kM/YJDmxzI0zn+IvmKa1UJFCUwPXOR98VpVtkhEb5uS3lo1FoPqTkhgFfY6feWozN+kruVNL00eDFnodrEuu8n0G7dea79Snq8HyNg7+eON88IGDKVKlJEnArgkF/Z4S8LhOGze9W/p1wlZU/sQ=
+	t=1783644930; cv=none; b=Rb4OWlq8qVH8VwHixY5cIoMKCa3PfHzjBWGzliUyt0npDGJ15BaV1dUfxSdwzJTYbKQ6OaYojotJcfjtVU3OhDEmM0w97Zu7NNsMqThKDPiee0LJwQQztsWmyVjQT79HmsvVI3oDQxDBs1LF0mWYKcQOG0v6T0cAhl2Pzu2fACE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783644384; c=relaxed/simple;
-	bh=NcAY33Cz+Y07dZSUoRE4dYMoOX/ODftBQ6ejSLDLCig=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=ZQ52rdw32Lshb1ZZ2M3gyXJdhXi7X1UUQXrRiTHMRq7vMVE7J22LY/y2/rZecMBjBesBPULZpUnf6MPyo2wxAMTqkPyoo0aIhEBjGszlZqIksTfYZendhzVjI5JbOv/+pstSuZ0Gbn/R8wBXMErZ3RZdqxe2Ok7u/5/M8WLo2K8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=n26oLl7f; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5956F1F000E9;
-	Fri, 10 Jul 2026 00:46:21 +0000 (UTC)
+	s=arc-20240116; t=1783644930; c=relaxed/simple;
+	bh=nXm/ag5fA7v2FMYVNc2dT9EP9yAywIWYd54rfyFqMJw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=XlQjLLFxm9oZMeLAX10x9ZFBXD0SRAV5Tu8sH0PpbY+lA5RS4k1iUYOhWmt5+mg87Bd2kzJ7fFe9P4F8ajg6hhUt0firWSj1SdnFyvQtwhHCKoxqYOQgS+NEpQb+2Fg63sNTskB5hsgtSzXdJsAkogxLscIh5/XTvDGDSVGT3Ds=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DPjqKrHp; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5D70B1F000E9;
+	Fri, 10 Jul 2026 00:55:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783644383;
-	bh=13E5iFkRhhPo8tsl5s9roEJL6c2uaz4ktKevVkLd3/I=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=n26oLl7fvkRaj9R0WlIMV9CH2IijPq0UbKzEoXjkl6V3zPgfQU6pqoeIgXJWJIKQs
-	 R8WnP75NkWglA4FGzr0WfYVH2hQmRxKbEdKD3CY1FE1//vfxrouyUEVHx9LObYbmSC
-	 EFSFATVRBr6ADR3Kg447bHV10pnJAftkOJjiBvRkgiYrWn14nWd/vAOlhZKNm3dS1Y
-	 qpInly4maBuEpmP37Ax7YP3GdlytUCsn+PlrT4puoIZKiV30efH2I0eAbOfCZlzzrh
-	 1pXW2ltxzjOSkgUZFem3MOiJHHWfnhl1uS+eY4I8DAIvgK+TGrFEGWoRZgZiahkg6v
-	 QkNLnaFK4UXfA==
-Date: Fri, 10 Jul 2026 01:46:17 +0100
-From: Jonathan Cameron <jic23@kernel.org>
-To: Janani Sunil <janani.sunil@analog.com>
-Cc: Nuno =?UTF-8?B?U8Oh?= <nuno.sa@analog.com>, Michael Hennerich
- <Michael.Hennerich@analog.com>, "David Lechner" <dlechner@baylibre.com>,
- Andy Shevchenko <andy@kernel.org>, "Rob Herring" <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, "Conor Dooley"
- <conor+dt@kernel.org>, Olivier Moysan <olivier.moysan@foss.st.com>, Philipp
- Zabel <p.zabel@pengutronix.de>, Linus Walleij <linusw@kernel.org>, Bartosz
- Golaszewski <brgl@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan
- <skhan@linuxfoundation.org>, <linux@analog.com>,
- <linux-iio@vger.kernel.org>, <devicetree@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>, <linux-gpio@vger.kernel.org>,
- <linux-doc@vger.kernel.org>, <jananisunil.dev@gmail.com>
-Subject: Re: [PATCH 3/6] iio: adc: adi-axi-adc: Add support for CRC
-Message-ID: <20260710014617.323acf6e@jic23-huawei>
-In-Reply-To: <20260709-ad7768-driver-v1-3-44e1194fd96a@analog.com>
-References: <20260709-ad7768-driver-v1-0-44e1194fd96a@analog.com>
-	<20260709-ad7768-driver-v1-3-44e1194fd96a@analog.com>
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
+	s=k20260515; t=1783644929;
+	bh=85Usl0+rmwMgwBzA88SakyZjzo/AFVAsMDMyNtg5lKk=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=DPjqKrHpXgeg5wMxvaNIVwpjxa/Kp9Qo/YYPHwp7WD/XJUdG1QYQGdAjMasJ/LtFf
+	 ANcOAgfuyYnPy6xEeq1ShMNopJPfQ1kA50NQSSTpnaAufSLk/DX15c6NdgnOLTtGbS
+	 6sVNuvrUq1fQq0fnm5phW06itfa7Htf5RGiDkyJ5LtIzvbvqL8fK9jqGKY94HeACVC
+	 1RcwjE1dqTEyZNqIbdTa10NdOfAobVDMMSYnC3le3J9dvioQgor4J6/SbPRzm3dK8/
+	 WPjW7nIcuDSWwpu0JKoMc6X2hxRLsTNbVJyslj5UksddVPb6N1hFLsOSVqeOIS6S9j
+	 jf32oBNjL0HAg==
+Date: Thu, 9 Jul 2026 17:55:27 -0700
+From: Namhyung Kim <namhyung@kernel.org>
+To: Borislav Petkov <bp@alien8.de>
+Cc: Babu Moger <babu.moger@amd.com>,
+	Arnaldo Carvalho de Melo <acme@redhat.com>, corbet@lwn.net,
+	tony.luck@intel.com, reinette.chatre@intel.com, Dave.Martin@arm.com,
+	james.morse@arm.com, tglx@kernel.org, ben.horgan@arm.com,
+	fenghuay@nvidia.com, skhan@linuxfoundation.org, x86@kernel.org,
+	mingo@redhat.com, dave.hansen@linux.intel.com, hpa@zytor.com,
+	akpm@linux-foundation.org, rdunlap@infradead.org,
+	peterz@infradead.org, feng.tang@linux.alibaba.com,
+	dapeng1.mi@linux.intel.com, elver@google.com,
+	enelsonmoore@gmail.com, kuba@kernel.org, ebiggers@kernel.org,
+	lirongqing@baidu.com, seanjc@google.com, nikunj@amd.com,
+	xin@zytor.com, pawan.kumar.gupta@linux.intel.com,
+	tiala@microsoft.com, chang.seok.bae@intel.com,
+	kprateek.nayak@amd.com, prathyushi.nangia@amd.com,
+	kim.phillips@amd.com, naveen@kernel.org, darwi@linutronix.de,
+	elena.reshetova@intel.com, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, thomas.lendacky@amd.com,
+	eranian@google.com, peternewman@google.com,
+	qinyuntan@linux.alibaba.com
+Subject: Re: [RESEND PATCH v4 01/15] x86/resctrl: Support Privilege Level
+ Zero Association (PLZA)
+Message-ID: <alBC_4TcyduQo2zF@google.com>
+References: <0af5122c-20df-4aea-8ab4-cba63f71dc3b@amd.com>
+ <20260708232806.GCak7dBi1loq3QLjg7@fat_crate.local>
+ <ak7kgJZyKmEVUdMj@google.com>
+ <20260709001242.GDak7nevAzb45IGkem@fat_crate.local>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260709001242.GDak7nevAzb45IGkem@fat_crate.local>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.16 / 15.00];
+X-Spamd-Result: default: False [-5.16 / 15.00];
 	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
-	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	FORGED_RECIPIENTS(0.00)[m:bp@alien8.de,m:babu.moger@amd.com,m:acme@redhat.com,m:corbet@lwn.net,m:tony.luck@intel.com,m:reinette.chatre@intel.com,m:Dave.Martin@arm.com,m:james.morse@arm.com,m:tglx@kernel.org,m:ben.horgan@arm.com,m:fenghuay@nvidia.com,m:skhan@linuxfoundation.org,m:x86@kernel.org,m:mingo@redhat.com,m:dave.hansen@linux.intel.com,m:hpa@zytor.com,m:akpm@linux-foundation.org,m:rdunlap@infradead.org,m:peterz@infradead.org,m:feng.tang@linux.alibaba.com,m:dapeng1.mi@linux.intel.com,m:elver@google.com,m:enelsonmoore@gmail.com,m:kuba@kernel.org,m:ebiggers@kernel.org,m:lirongqing@baidu.com,m:seanjc@google.com,m:nikunj@amd.com,m:xin@zytor.com,m:pawan.kumar.gupta@linux.intel.com,m:tiala@microsoft.com,m:chang.seok.bae@intel.com,m:kprateek.nayak@amd.com,m:prathyushi.nangia@amd.com,m:kim.phillips@amd.com,m:naveen@kernel.org,m:darwi@linutronix.de,m:elena.reshetova@intel.com,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:thomas.lendacky@amd.com,m:eranian@google.com,m:pete
+ rnewman@google.com,m:qinyuntan@linux.alibaba.com,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-96142-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:janani.sunil@analog.com,m:nuno.sa@analog.com,m:Michael.Hennerich@analog.com,m:dlechner@baylibre.com,m:andy@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:olivier.moysan@foss.st.com,m:p.zabel@pengutronix.de,m:linusw@kernel.org,m:brgl@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux@analog.com,m:linux-iio@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-gpio@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jananisunil.dev@gmail.com,m:krzk@kernel.org,m:conor@kernel.org,m:jananisunildev@gmail.com,s:lists@lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER(0.00)[jic23@kernel.org,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-96141-lists,linux-doc=lfdr.de];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	RCPT_COUNT_TWELVE(0.00)[21];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[44];
+	FORGED_SENDER(0.00)[namhyung@kernel.org,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FREEMAIL_CC(0.00)[amd.com,redhat.com,lwn.net,intel.com,arm.com,kernel.org,nvidia.com,linuxfoundation.org,linux.intel.com,zytor.com,linux-foundation.org,infradead.org,linux.alibaba.com,google.com,gmail.com,baidu.com,microsoft.com,linutronix.de,vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jic23@kernel.org,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[analog.com,baylibre.com,kernel.org,foss.st.com,pengutronix.de,lwn.net,linuxfoundation.org,vger.kernel.org,gmail.com];
+	FROM_NEQ_ENVFROM(0.00)[namhyung@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TO_DN_SOME(0.00)[]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 0772C7366BA
+X-Rspamd-Queue-Id: 5EEDA7366FE
 
-On Thu, 9 Jul 2026 10:50:14 +0200
-Janani Sunil <janani.sunil@analog.com> wrote:
+Hi Boris,
 
-> Add support for enabling and disabling Cyclic Redundancy Check (CRC)
-> processing in the AXI ADC backend. CRC provides data integrity verification
-> for high-speed ADC data streams, ensuring reliable data transfer between
-> the ADC frontend and backend processing systems.
+On Wed, Jul 08, 2026 at 05:12:42PM -0700, Borislav Petkov wrote:
+> Hey Namhyung,
 > 
-> Signed-off-by: Janani Sunil <janani.sunil@analog.com>
-The 'other things' I found bit from Sashiko is interesting. Far as I can
-tell it is right and [devm_]mutex_init() is missing for lock
-in struct adi_axi_adc_state().  
-
-Nuno, looks like it was from:
-7ecb8ee5c93b ("iio: adc: adi-axi-adc: support digital interface calibration")
-
-Which indeed adds the lock with a mutex_init()
-
-Jonathan
-
->  static const struct iio_backend_info adi_axi_adc_generic = {
+> On Wed, Jul 08, 2026 at 05:00:00PM -0700, Namhyung Kim wrote:
+> > Well.. it's changed as Linus wanted to not update the headers for
+> > trivial changes.  The script is still there but it's not running
+> > automatically.  For perf, we used to check ioctl and other user-visible
+> > changes for system call tracing.  And some headers moved to the
+> > tools/perf/trace/beauty/include directory to sync separately.
+> > 
+> > I think the headers will be sync-ed less frequently.  So you may need to
+> > update the header for tooling changes manually.
 > 
+> I'm reading this as, we should not touch cpufeatures.h in tools/ and let you
+> guys decide when you actually need bits from it? In the sense: only when you
+> really need bits from it, you'll update it and other, unrelated bits which are
+> not needed, can remain different...
+> 
+> Or?
+
+No, it's perfectly fine to update any tooling headers if you need it.
+It should be up to you whether you update the whole file or just needed
+bits.  Just expect us to do it less frequently. :)
+
+Thanks,
+Namhyung
 
 
