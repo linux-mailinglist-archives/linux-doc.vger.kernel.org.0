@@ -1,64 +1,63 @@
-Return-Path: <linux-doc+bounces-96269-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96270-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id UFGfHg//UGr49gIAu9opvQ
-	(envelope-from <linux-doc+bounces-96269-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 16:17:51 +0200
+	id sr5SJRIBUWpQ9wIAu9opvQ
+	(envelope-from <linux-doc+bounces-96270-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 16:26:26 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1EBA273BAF1
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 16:17:51 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B6C873BB8E
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 16:26:26 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=L+OsDlam;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=bd++3JU6;
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96269-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-96269-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96270-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96270-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 280BC3009F7A
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 14:17:50 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 6B374305A5F8
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 14:19:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2DFA23451CF;
-	Fri, 10 Jul 2026 14:17:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D8D79346E68;
+	Fri, 10 Jul 2026 14:19:07 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1700343889;
-	Fri, 10 Jul 2026 14:17:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCCA9346A08;
+	Fri, 10 Jul 2026 14:19:06 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783693069; cv=none; b=eYC8/nHOgYFCwp6reDgzvHlcqbvKa/CJB+mn1ywuGeJHcXIesrzmwSp8nsuefnL9x6mQF4lpImy3KwtyOA8j6Z3oeYlIxcve//+ydlfJDzN30IHVgqkQjG2+UFetdTd2x3wIbZccOt1xCeaCPT4eahGld0SlaNKfVC09T0+x7Ug=
+	t=1783693147; cv=none; b=VoNOtmed5/zmO+ODy7efaUe4wGNntXcfiyVfIfSQjr2fK0J3OJSYdAIryG00rH68lVwLIxSyx7DYb/kT/oV/s7e/uZdxjd/mIoJKfRC227Frq+7Z0Ev2y7ODqWDobOuR+DcGaqYFetjLkNWgZCGrDVzo4lUnEzIO2av6C/zDsfI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783693069; c=relaxed/simple;
-	bh=N0/uJz0mDfJ4I8JENAbrd128kz3c7Kerpt46zN9J8yQ=;
+	s=arc-20240116; t=1783693147; c=relaxed/simple;
+	bh=NOYvfkSM9ca1CqaAcC0JpA3gF5+Y/2UdSzbdKhkKiLM=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=pShqQXHrZY7nYiGQhiYIZJo5koU+pKc6pTK87rF1b7HqQpKyTKWoGOkGQljsEnNmH6IGEU7r6RRj5lbb78IhCIBHInr68d6ZiOxZqqdjt8DoZIfncEaxpumlGlyNVhm9ZN+T+joHiWyQNr3caERpiB2FhS9VwBc+tO0YxkW9Scw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=L+OsDlam; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 848931F000E9;
-	Fri, 10 Jul 2026 14:17:45 +0000 (UTC)
+	 MIME-Version; b=Owu3/F0QrtP2K2fBDaXWzD1soqimmP2Ebe5yuJjV3OgUTemyQK/gRK0pDFJMzJ01j4wc16rMbpBOmqc+KAcf61JBstBjDEoT3mVPBaWKJFdNAfaxL0wL5P8XEORiF79RlNr/tL04AD14mlE0Af4ynpnVImGnjH0HfClHu/aZBhk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bd++3JU6; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 39D251F00A3A;
+	Fri, 10 Jul 2026 14:19:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783693065;
-	bh=mAXWGA6OSF8O0XuZXZOdAP4iu1AOJgDdR8iw//XVK6w=;
+	s=k20260515; t=1783693146;
+	bh=dlb3WD7/szOCNyvIUD9XAK0jmIyFraoZyD8UZq/GPXg=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=L+OsDlamhtkR0me8N7dd05YqGELnbUe4ClnnZxkAISGzo/elcnuewm+CSAYcZIJNA
-	 rDaDEs7adbIqaX15SOzaJ4pQCa8mDW8gKUA1USxMyrQ24Lo2pZnqyCpzmNB34zx2iy
-	 rt04l2tYAj+Q84fz0ltXNBIobBgt7ZBuWhxDiS8RA71YAp8I/hVWBkDdYyJLk0/cbw
-	 Zt7lrjwSsdkJle0ajimIznpxkzqo6Kc84YIx56V7W9LdygqPOoyUMaleqHO69kCEuD
-	 ae6Lk6vqlNCVDkMtALt+egaBDOgJ5ugRypWMDtRgJiP40oazpU9ORmWd16C0Pfh9Lm
-	 pONQo3alOp9Gg==
+	b=bd++3JU6myGmdIMMne53urwP13UFJCmJ7dBhnvgWv5Fmtz9ryc7S9KMuyqEPbopMO
+	 Cf6kscvoweWO7QVGoOPMYEENlT8EpH/UnguxrAs4oAe9RqqQLww4YlFOxnn6O9Imtw
+	 G5YBpI9tulEdjpz74VJy1oLMZzscuRFxLyAeyReVl9eeqFcyB3rBxL6fF1W72sFJ3L
+	 pQfRHmK/n9/ByfYsUzGSuaMEj2V0jsD9u3Uw1l5nMud/dgZnCp/rMxFpI5qhm9qHfT
+	 AQ14cl4meMv4mfxaMftZxRxzqpUulZ+gA+ID7ejErCHPOvWnBoNrh4lJhhzPECEt/Z
+	 A0XYgiRNFpTcg==
 From: SJ Park <sj@kernel.org>
 To: Song Hu <husong@kylinos.cn>
 Cc: SJ Park <sj@kernel.org>,
 	damon@lists.linux.dev,
 	linux-mm@kvack.org,
 	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: Re: [PATCH 1/4] Docs/ABI/damon: fix typo in intervals_goal sysfs path
-Date: Fri, 10 Jul 2026 07:17:37 -0700
-Message-ID: <20260710141738.24789-1-sj@kernel.org>
+	linux-doc@vger.kernel.org
+Subject: Re: [PATCH 2/4] Docs/ABI/damon: fix typos
+Date: Fri, 10 Jul 2026 07:18:58 -0700
+Message-ID: <20260710141859.24919-1-sj@kernel.org>
 X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260710044737.561102-2-husong@kylinos.cn>
+In-Reply-To: <20260710044737.561102-3-husong@kylinos.cn>
 References: 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -70,55 +69,53 @@ Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-3.66 / 15.00];
 	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
-	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:husong@kylinos.cn,m:sj@kernel.org,m:damon@lists.linux.dev,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:stable@vger.kernel.org,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-96269-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-96270-lists,linux-doc=lfdr.de];
+	TO_DN_SOME(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:husong@kylinos.cn,m:sj@kernel.org,m:damon@lists.linux.dev,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
 	FORWARDED(0.00)[lists@lfdr.de];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,kylinos.cn:email]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,kylinos.cn:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 1EBA273BAF1
+X-Rspamd-Queue-Id: 2B6C873BB8E
 
-On Fri, 10 Jul 2026 12:47:34 +0800 Song Hu <husong@kylinos.cn> wrote:
+On Fri, 10 Jul 2026 12:47:35 +0800 Song Hu <husong@kylinos.cn> wrote:
 
-> The ABI document spells the DAMON sysfs directory as "intrvals_goal"
-> (missing 'e') in four What: entries, but the kernel creates it as
-> "intervals_goal" (mm/damon/sysfs.c).  Following the documented path
-> therefore yields a non-existent directory.
+> Fix two typos in the DAMON sysfs ABI document:
+> 
+>   - "WDate:" -> "Date:" on the nr_regions/min entry
+>   - "manimum" -> "minimum" in the nr_accesses/min description
 
-Nice catch!
+Good eyes!
 
 > 
-> Fixes: e2b23dc62369 ("Docs/ABI/damon: document intervals auto-tuning ABI")
-> Cc: stable@vger.kernel.org
 > Signed-off-by: Song Hu <husong@kylinos.cn>
 
-Reviewed-by: SJ  Park <sj@kernel.org>
+Reviewed-by: SJ Park <sj@kernel.org>
 
 
 Thanks,
