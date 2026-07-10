@@ -1,153 +1,131 @@
-Return-Path: <linux-doc+bounces-96282-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96283-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 8f6HMBQIUWr4+AIAu9opvQ
-	(envelope-from <linux-doc+bounces-96282-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 16:56:20 +0200
+	id KjyzBN4LUWpG+gIAu9opvQ
+	(envelope-from <linux-doc+bounces-96283-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 17:12:30 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5796173BF93
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 16:56:20 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7175D73C1DD
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 17:12:29 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=c6z2sEVL;
-	dmarc=none;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96282-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96282-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=UAET3Lve;
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96283-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-96283-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id CC4A9309025D
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 14:51:50 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 3F43B3001870
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 14:59:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id ADE5142DA37;
-	Fri, 10 Jul 2026 14:50:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 357AE34A3DB;
+	Fri, 10 Jul 2026 14:59:14 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qv1-f53.google.com (mail-qv1-f53.google.com [209.85.219.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 93C38426ED1
-	for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 14:50:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C1A1348C5A;
+	Fri, 10 Jul 2026 14:59:13 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783695034; cv=none; b=rmBCo1xGGKm/tv2/eadcCUW55u+xnCkTSEpEjwuq5Vqc3TuagrToTd91VTC3QEKn5EpcI3EB43s1xXjcbbFTIVsf/cFa4a6P06VnqM3yeXsd6czsae2cq4Pio58KIdrCU06j5JII7TBk1+QluxCk1y+8dds0h7w3pfG7VNPHazk=
+	t=1783695554; cv=none; b=S/Kzb/Agp+s4xe4D0zjAlUg92XQnZpxc+S6gH6ujlawxqazsIrWC2qpj6t801LV+QtN+q6sMsg/V2I4oCbfZ3otu4zUSf1mvbzDFAvhGDjYshOhLUNPQlW5c5Y0VRLCFOO5qRb88fbFrIYu6+QNvooglarkpZjT/iFaUSKgHbjM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783695034; c=relaxed/simple;
-	bh=/GyHDtjvQFjedcHXEDvC6MFal4jcf5suG+7c951oMVM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=GhLj9ARzJLogdhzUa2xBIF5sYiU1GVCispKbu3CCZL0jS5/T6ym5gDjbxa/IyJcvlD4e2QLFhdGWqNCdVuUyxDSJa20lNt8MswzJh5/67zDLXP1W+cCTuxLPqmcWG255RdMDTjh66/a+vgIdRYy+41t5At/DOKPhzVpKPG7aFj0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=c6z2sEVL; arc=none smtp.client-ip=209.85.219.53
-Received: by mail-qv1-f53.google.com with SMTP id 6a1803df08f44-8ee88fce572so11043116d6.1
-        for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 07:50:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783695030; x=1784299830; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:sender:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=/wMIQHIqvpGohrBw2k+kM7bf7+q0a6yUHFC4gdhlqoU=;
-        b=c6z2sEVLvXQ5FldpcqkA+YK++HafQimpA2c3aw5YXwQo9l9ui55P0vXVaOYXg/hl8v
-         tjO9t1rdRoBPnZ/S+wMctR6OTYbScx/88SBbwySiBoO2VZGwV5BlCvZMzl6G1JaadLIB
-         FYUbJb4p1uotatAFaKwzwH4TJbVFmioOGZzeArzqoXJw8la216qZBKwrdKHCgzYSdKbu
-         7zsazEYFlWlAWkkOtYQS04V5TrBYxk3GIT6GxA7tFl5cwQRxG2dchIA5IXBA/p7OpVoZ
-         zVFr5dGvy09HUW5+c6UwFTA/gdwBJDW5Q+wAIfAe+lGl36bUgjpMyzJ70MMQCLqvhlQx
-         Kj0w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783695030; x=1784299830;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:sender:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=/wMIQHIqvpGohrBw2k+kM7bf7+q0a6yUHFC4gdhlqoU=;
-        b=WtyZE+0yN+YnfeCOqexyqY5Mp+s27AzkuPeRpkIXqOHxVIJr/7f1ODN9X3sc/TxO12
-         1vB0otmg2EoeweoSzzsd+l+F2o58aew0GcADUExlBEqttiqzE8pEYwqR8eSEFLXJQcKr
-         zb1ysiuFe+l7fMN123QCangRN47onviyLu8hoSMHCFzv59HYSKlH6c5In88Pl0SD4XDK
-         +PDX9WbhJLQQs+rrqVUKtFBLnTMk2QYmafbGIX5iUv44n0PLrCFwHCvpyBABpNnGETyn
-         CCVeUZvVirLnoX2uWs39YC/04RcoeqYiKO3W8GuLGcdR5RHQ6WuJ+JWqmqK8JtYT5pZk
-         2ZbA==
-X-Forwarded-Encrypted: i=1; AHgh+RozDPLgC8ny+icSuJiymz/A+so25lbHHpDFnPYHOLkUpaBPjwhTyWM38qvdg3wynH73U6vp7Vielpw=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxQneOA2vg2GeS+SvENaSZepSK+ydJ1w5V3DUXGuR+SClRyFhIX
-	cAlMAtCsDoGzq8G5vQaL3zgWC87iGlNjXoYR+/SeqVOFJ9LF2McDgTtN
-X-Gm-Gg: AfdE7cmKu/YxlC5M+wx8N8EadxgyGu5W9Z9zK2h7mXLexZ4ZWvykd+BuUx2Unu0ORuj
-	Zi6aoKfOVdFhqB47Tiif7ypl/TPLaTwclsNviqATqRXgwhOxW8S4vmJLRUa/8QvNK80U4OXHhGE
-	9nIfkyw6GkaLrquk23s6roNfKuBWFNmFMI6VaNn3OIURFYhMsAdirMFg26ZQXBAio4Kzcodfm07
-	g4vY7YWUWfTcVjAYCFuVnErJXEEi9ulRt/AG5+11Q8FRybwK/n8a5qC4/7awnVHROtr39DuCKTx
-	ic3YJDRzIzMz7lFbMozoacZ3h1vsCp0ncuyDVyp2uv+49bOay24w15ML+PyWgpu2Rd4SHTE8j5r
-	MQ1wGmxLPVA9OvpWcXBc/DUaHBQ1nMOO6UHniZlKPPL64nNHTjbN0FrHrh7KZke0Bdl+yAT0HIo
-	Vdv3GOZhUDHYGd6C76AsoFKHOx0g==
-X-Received: by 2002:a05:6214:590c:b0:8f1:ae38:1beb with SMTP id 6a1803df08f44-8fec2276b3cmr143145796d6.32.1783695030456;
-        Fri, 10 Jul 2026 07:50:30 -0700 (PDT)
-Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-8ffd80fd492sm44739756d6.34.2026.07.10.07.50.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 10 Jul 2026 07:50:29 -0700 (PDT)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Date: Fri, 10 Jul 2026 07:50:28 -0700
-From: Guenter Roeck <linux@roeck-us.net>
-To: Eugene Shalygin <eugene.shalygin@gmail.com>
-Cc: Maurice Mehlhaff <maurice.mehlhaff@gmx.de>,
+	s=arc-20240116; t=1783695554; c=relaxed/simple;
+	bh=NXNQCLIrV+WdLw14BokOG34itnagsGEUs0NxFAH0G4k=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=lk7ejLttb5mJpprKPU+wK9i6CtBaq1hYgK8c4JW8jEM2ZjbH6TSa+oTBt4pVEqkCbF+Eoy8l2YRS18QIGBFBU0M9aoPIigPMBhY0pDJLpfzg7CnYfsWcq17EGn78KLXbKBaQedklluyYvZOU48YjT8I+Y3+Yt8IQ6cbdB/o5REo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UAET3Lve; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1F5381F000E9;
+	Fri, 10 Jul 2026 14:59:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783695553;
+	bh=kaHO7iM2fkBkcPXX7E/p4gh+FXOCsDoSAMVqpwRtKPM=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=UAET3LveLjWX8B68X5OoBzwl8nLMnCMESO6AiBDf0f6br2bu+FSY99ro2+vJfAz64
+	 DeRRmqxYubZ+aPo2o4mlrNDX9FsHGuEmWy2qhG53I9Rek1zIkK66Cq+mOMEOuYpHQp
+	 dD8THo33ClgqdfHTq1T38PApc4m22RB+YxRdwdWwIALG5HPuP643Rw8eActmjWHK7v
+	 kNNkfbzUpIfTOfTCHUeRWYnmxvsqN9tcLnlTLjMuZ2GFJ1TfdA3cDiBjpxdxjoclTR
+	 qviEB7Y2/BMljyFgi75PuxISbyXnh9ZD2+cM/qv+VTd90REkj5HFX5D+bOys/r6NB1
+	 sZ+wBLUtR32Lw==
+From: SJ Park <sj@kernel.org>
+To: SJ Park <sj@kernel.org>
+Cc: Andrew Morton <akpm@linux-foundation.org>,
+	"Liam R. Howlett" <liam@infradead.org>,
+	David Hildenbrand <david@kernel.org>,
 	Jonathan Corbet <corbet@lwn.net>,
+	Lorenzo Stoakes <ljs@kernel.org>,
+	Michal Hocko <mhocko@suse.com>,
+	Mike Rapoport <rppt@kernel.org>,
 	Shuah Khan <skhan@linuxfoundation.org>,
-	"open list:HARDWARE MONITORING" <linux-hwmon@vger.kernel.org>,
-	"open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-	open list <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH] hwmon: (asus_ec_sensors) add ProArt Z690-CREATOR WIFI
-Message-ID: <4eeff1a6-2b92-4af8-864a-ca9eff3f23d5@roeck-us.net>
-References: <20260708195638.1324168-1-eugene.shalygin@gmail.com>
+	Suren Baghdasaryan <surenb@google.com>,
+	Vlastimil Babka <vbabka@kernel.org>,
+	damon@lists.linux.dev,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org
+Subject: Re: [PATCH 00/19] mm/damon: introduce data attributes only monitoring
+Date: Fri, 10 Jul 2026 07:59:04 -0700
+Message-ID: <20260710145905.27704-1-sj@kernel.org>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260710134651.18084-1-sj@kernel.org>
+References: 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260708195638.1324168-1-eugene.shalygin@gmail.com>
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-3.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TO_DN_ALL(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-96282-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:eugene.shalygin@gmail.com,m:maurice.mehlhaff@gmx.de,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-hwmon@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:eugeneshalygin@gmail.com,s:lists@lfdr.de];
-	DMARC_NA(0.00)[roeck-us.net];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[gmx.de,lwn.net,linuxfoundation.org,vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FORGED_SENDER(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	TAGGED_RCPT(0.00)[linux-doc];
+	TAGGED_FROM(0.00)[bounces-96283-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	FORGED_RECIPIENTS(0.00)[m:sj@kernel.org,m:akpm@linux-foundation.org,m:liam@infradead.org,m:david@kernel.org,m:corbet@lwn.net,m:ljs@kernel.org,m:mhocko@suse.com,m:rppt@kernel.org,m:skhan@linuxfoundation.org,m:surenb@google.com,m:vbabka@kernel.org,m:damon@lists.linux.dev,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,s:lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	ALIAS_RESOLVED(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,roeck-us.net:mid,roeck-us.net:from_mime,vger.kernel.org:from_smtp,gmx.de:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 5796173BF93
+X-Rspamd-Queue-Id: 7175D73C1DD
 
-On Wed, Jul 08, 2026 at 09:56:26PM +0200, Eugene Shalygin wrote:
-> From: Maurice Mehlhaff <maurice.mehlhaff@gmx.de>
-> 
-> Add support for the ProArt Z690-CREATOR WIFI board
-> 
-> Signed-off-by: Maurice Mehlhaff <maurice.mehlhaff@gmx.de>
-> Signed-off-by: Eugene Shalygin <eugene.shalygin@gmail.com>
+On Fri, 10 Jul 2026 06:46:29 -0700 SJ Park <sj@kernel.org> wrote:
 
-Applied.
+> TL;DR: Introduce a way to get DAMON's best effort accuracy monitoring of
+> user-demanding non-access data attributes.
+
+Sashiko found no blocker for this series.  Sashiko sent findings to damon@
+mailing list [1], and I replied to all the comments.  Please read those for
+details.
+
+[1] https://lore.kernel.org/damon/
+
 
 Thanks,
-Guenter
+SJ
+
+[...]
 
