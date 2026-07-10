@@ -1,174 +1,189 @@
-Return-Path: <linux-doc+bounces-96256-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96257-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id yZ//H9/vUGoS8wIAu9opvQ
-	(envelope-from <linux-doc+bounces-96256-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 15:13:03 +0200
+	id Wth7MLLwUGpL8wIAu9opvQ
+	(envelope-from <linux-doc+bounces-96257-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 15:16:34 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1664273B1F5
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 15:13:03 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id B69C373B285
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 15:16:33 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("headers rsa verify failed") header.d=oss.cyber.gouv.fr header.s=default header.b=BcaUZ6aS;
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=oss.cyber.gouv.fr (policy=none);
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96256-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-96256-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=none;
+	dmarc=none;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96257-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96257-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 8B3F0300FEF0
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 13:09:55 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id DB7DA300B2A3
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 13:16:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CA299426EDE;
-	Fri, 10 Jul 2026 13:09:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 86CD942B334;
+	Fri, 10 Jul 2026 13:16:17 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from oss.cyber.gouv.fr (oss.cyber.gouv.fr [51.159.188.251])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9237131D372;
-	Fri, 10 Jul 2026 13:09:52 +0000 (UTC)
+Received: from zg8tmja5ljk3lje4mi4ymjia.icoremail.net (zg8tmja5ljk3lje4mi4ymjia.icoremail.net [209.97.182.222])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1B567426D18;
+	Fri, 10 Jul 2026 13:16:11 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783688994; cv=none; b=pcSrdV6PCuRb0WfWH7zCWzVZ0gukbBUj4gXHBCFTq71VsMwD8xdagPedA5OFEwLAJnDvDlq3W52mcLTTqYV+Cm9xqBZwt+g8o/x2zNLMRtEXt1aRiV0cT0DQP/0aNOLjKRrhdqkHWjtiYfr+mDA2+ndamFWpUAJWeAN6gTFITX0=
+	t=1783689377; cv=none; b=Ad0xUlUgAhnUEvXoiwcguoCQoogMyEPvDNBlzNQTWIFC9TVFIbIbeE8G9/Uc2gOf9M7KJcnFz1wwk3SjMBorbp9rAKFIYjMMz8+mi1GjDeyJZlqcgSlthTygojm6/k0ywv+JvtnGME8e7nTE2AcsLMvSCSL0pDUeBJu1i9zi8n4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783688994; c=relaxed/simple;
-	bh=LpDSSjIZj3yLjNQ0NCsdZm2XmzUKx3Za503MNzCOYiI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=RkpCqK3Nkctzt6Vs7n2dl+F4b2iuMbRsVcSX+ZdUE0b1EhsQlw4de6oA0f37Tl02JrbfOUysyGal1lEQwBzkZ0yh90njD70L02rth2k2QjkM+0fSPSEO/BJfudxeM3mpMjLw/fxCYeqvN41Nqyz3chjJc+Djyq5bSdTFnefYFJ4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.cyber.gouv.fr; spf=pass smtp.mailfrom=oss.cyber.gouv.fr; dkim=pass (2048-bit key) header.d=oss.cyber.gouv.fr header.i=@oss.cyber.gouv.fr header.b=BcaUZ6aS; arc=none smtp.client-ip=51.159.188.251
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=oss.cyber.gouv.fr; s=default; h=In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
-	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=YNmqdOXHC9bVvxEhK3ClkhyZS4A77BRnu2okgiPeqMo=; b=BcaUZ6aSM1SNiBqGrg6jCSEJ4F
-	OsLZgsHa4E063AAA1q1LrXAUXOHcUqj1E6pJYKhe9ZJEKTzYnnf3izCLC8b7z51gvhWzrS8ZOqXWI
-	HY1UPxZnlTVNgGYkNaHLKYNdDwy+R33IpBb80OlhALWCFMXGIEL9epgXqqqT5LYbbMBUAiPqqdhGE
-	uO21fU+TzArwFixoOkBweRSpJ+Sv+kePQClWgJWGzioBW8c6n95r2rYtpIMtywyx3M7C+KQChor3l
-	s4puZOih3nJSSKSvykeV5vtQI9OOlI6j7fpv9v3DGZ+31ZgmK1PK+24UbhSmNTGa6hIROxKxWam8s
-	Tywpbphw==;
-Received: from laubervilliers-658-1-215-187.w90-63.abo.wanadoo.fr ([90.63.246.187]:56274 helo=archlinux)
-	by pf-012.whm.fr-par.scw.cloud with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
-	(Exim 4.99.4)
-	(envelope-from <nicolas.bouchinet@oss.cyber.gouv.fr>)
-	id 1wiAzD-00000004kUd-3Nbz;
-	Fri, 10 Jul 2026 15:09:45 +0200
-Date: Fri, 10 Jul 2026 13:09:42 +0000
-From: Nicolas Bouchinet <nicolas.bouchinet@oss.cyber.gouv.fr>
-To: Sean Rhodes <sean@starlabs.systems>
-Cc: rafael@kernel.org, lenb@kernel.org, pavel@kernel.org, corbet@lwn.net, 
-	skhan@linuxfoundation.org, paul@paul-moore.com, jmorris@namei.org, serge@hallyn.com, 
-	xiujianfeng@huawei.com, keescook@chromium.org, linux-pm@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-security-module@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, "mjg59@srcf.ucam.org" <mjg59@srcf.ucam.org>
-Subject: Re: [PATCH] PM: hibernate: Allow hibernation opt-in when locked down
-Message-ID: <alDt32nsEOMb5UmI@archlinux>
-References: <CABtds-0AUr1jD2Sri6ViiFiqyBbjc3-6xeAOr12YLJA9ux-2BA@mail.gmail.com>
- <CABtds-1d8uYi5YbxgbL5MwZOXTUgBmeLQWiggVhBKtqct5VC-g@mail.gmail.com>
+	s=arc-20240116; t=1783689377; c=relaxed/simple;
+	bh=iYguRLx+dJrHouVhIoMyiUCvBAD3DDBK50T3tmz7lLE=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=rSJy4zWJpcVEGAMyUwg6pXeAMzfrQQRInfUTD556uuntMOu1O0h3rzAA68s0y7Dc0VZOJ76X/Dj3eT7vhTQdpTDnH51bJEGokYeMgFn2Pydphvarx23cwJzQr9zDdwDqk5u0+6p6OcNu66cyYf8+wFEkf6hS21XDsmFD1keI4eA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=hust.edu.cn; spf=pass smtp.mailfrom=hust.edu.cn; arc=none smtp.client-ip=209.97.182.222
+Received: from hust.edu.cn (unknown [172.16.0.50])
+	by app2 (Coremail) with SMTP id HwEQrAB3TjVh8FBq2tNhAA--.43770S2;
+	Fri, 10 Jul 2026 21:15:13 +0800 (CST)
+Received: from [100.81.40.43] (unknown [222.20.126.216])
+	by gateway (Coremail) with SMTP id _____wA3EOhg8FBqjxW0AA--.31407S2;
+	Fri, 10 Jul 2026 21:15:12 +0800 (CST)
+Message-ID: <57e42f43-44dd-4b22-8d81-c88e20016138@hust.edu.cn>
+Date: Fri, 10 Jul 2026 21:15:12 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CABtds-1d8uYi5YbxgbL5MwZOXTUgBmeLQWiggVhBKtqct5VC-g@mail.gmail.com>
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - pf-012.whm.fr-par.scw.cloud
-X-AntiAbuse: Original Domain - vger.kernel.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - oss.cyber.gouv.fr
-X-Get-Message-Sender-Via: pf-012.whm.fr-par.scw.cloud: authenticated_id: nicolas.bouchinet@oss.cyber.gouv.fr
-X-Authenticated-Sender: pf-012.whm.fr-par.scw.cloud: nicolas.bouchinet@oss.cyber.gouv.fr
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] docs: zh_TW: process: localize terminologies and
+ improve fluency in 8.Conclusion
+To: Weijie Yuan <wy@wyuan.org>, =?UTF-8?B?6JGJ5a645L2R?=
+ <chenyou910331@gmail.com>
+Cc: Hu Haowen <2023002089@link.tyut.edu.cn>, Jonathan Corbet
+ <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+ Dongliang Mu <mudongliangabcd@gmail.com>, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Yuchen Tian <cat@malon.dev>,
+ Alex Shi <alexs@kernel.org>, Yanteng Si <si.yanteng@linux.dev>
+References: <20260603082531.263115-1-chenyou910331@gmail.com>
+ <CAKspUh+2ndK1qMP58hPPmvwczruCikEuaO2tmyw=APCGrd9yaw@mail.gmail.com>
+ <alDs8bnIK8bWApIr@wyuan.org>
+From: Dongliang Mu <dzm91@hust.edu.cn>
+In-Reply-To: <alDs8bnIK8bWApIr@wyuan.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:HwEQrAB3TjVh8FBq2tNhAA--.43770S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxWFy5Ar43Xr13Xr1rWw17Wrg_yoW5Wrykpr
+	WfK3WUKF40yayaywn7tw15ZF1rCa95K3y5JF1rWrnxAas8tF9aqFWIka1Y9a45urs3Ga12
+	vr45ur9xCas8ArJanT9S1TB71UUUUjJqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUQ2b7Iv0xC_Kw4lb4IE77IF4wAFc2x0x2IEx4CE42xK8VAvwI8I
+	cIk0rVWrJVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjx
+	v20xvE14v26w1j6s0DM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4UJVWxJr1l84ACjcxK
+	6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1ln4kS14v26r
+	126r1DM2vYz4IE04k24VAvwVAKI4IrM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI
+	12xvs2x26I8E6xACxx1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj64x0Y40En7xvr7AKxV
+	W8Jr0_Cr1UMcIj6x8ErcxFaVAv8VW8uFyUJr1UMcIj6xkF7I0En7xvr7AKxVW8Jr0_Cr1U
+	McvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwCY1x0262kKe7AKxVWUAVWUtwCF04
+	k20xvY0x0EwIxGrwCF04k20xvE74AGY7Cv6cx26r4fZr1UJr1l4I8I3I0E4IkC6x0Yz7v_
+	Jr0_Gr1l4IxYO2xFxVAFwI0_Jw0_GFylx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8Gjc
+	xK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0
+	cI8IcVAFwI0_Gr0_Xr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8V
+	AvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I8E87Iv6xkF7I0E
+	14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxUvYsjDUUUU
+X-CM-SenderInfo: asqsiiirqrkko6kx23oohg3hdfq/
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.14 / 15.00];
-	R_DKIM_REJECT(1.00)[oss.cyber.gouv.fr:s=default];
+X-Spamd-Result: default: False [-1.46 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[oss.cyber.gouv.fr : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	TAGGED_FROM(0.00)[bounces-96256-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:sean@starlabs.systems,m:rafael@kernel.org,m:lenb@kernel.org,m:pavel@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:paul@paul-moore.com,m:jmorris@namei.org,m:serge@hallyn.com,m:xiujianfeng@huawei.com,m:keescook@chromium.org,m:linux-pm@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-security-module@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:mjg59@srcf.ucam.org,s:lists@lfdr.de];
-	HAS_X_AS(0.00)[nicolas.bouchinet@oss.cyber.gouv.fr];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	HAS_X_GMSV(0.00)[nicolas.bouchinet@oss.cyber.gouv.fr];
+	FREEMAIL_CC(0.00)[link.tyut.edu.cn,lwn.net,linuxfoundation.org,gmail.com,vger.kernel.org,malon.dev,kernel.org,linux.dev];
+	TAGGED_FROM(0.00)[bounces-96257-lists,linux-doc=lfdr.de];
+	DMARC_NA(0.00)[hust.edu.cn];
+	FORGED_RECIPIENTS(0.00)[m:wy@wyuan.org,m:chenyou910331@gmail.com,m:2023002089@link.tyut.edu.cn,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:mudongliangabcd@gmail.com,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:cat@malon.dev,m:alexs@kernel.org,m:si.yanteng@linux.dev,s:lists@lfdr.de];
+	FREEMAIL_TO(0.00)[wyuan.org,gmail.com];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[nicolas.bouchinet@oss.cyber.gouv.fr,linux-doc@vger.kernel.org];
-	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[oss.cyber.gouv.fr:-];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[dzm91@hust.edu.cn,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[nicolas.bouchinet@oss.cyber.gouv.fr,linux-doc@vger.kernel.org];
-	HAS_X_SOURCE(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	HAS_X_ANTIABUSE(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[dzm91@hust.edu.cn,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	ALIAS_RESOLVED(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	R_DKIM_NA(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,oss.cyber.gouv.fr:from_mime,vger.kernel.org:from_smtp,nondeterministic.computer:url,archlinux:mid,dreamwidth.org:url]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,hust.edu.cn:mid,hust.edu.cn:from_mime,l10n.tw:url]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 1664273B1F5
+X-Rspamd-Queue-Id: B69C373B285
 
-On Thu, Jul 09, 2026 at 04:33:38PM -0400, Sean Rhodes wrote:
-> Please ignore this patch; the approach was wrong.
-> 
-> I'll follow up with a v2.
-> 
-> On Thu, 9 Jul 2026 12:23:11 -0700, Sean Rhodes <sean@starlabs.systems> wrote:
-> > Kernel lockdown disables hibernation because the resume image cannot be
-> > verified before it is restored. On systems where external platform or
-> > storage policy protects the hibernation image from offline modification,
-> > users may still need hibernation while lockdown is active.
-> >
-> > Add a hibernate=allow_locked_down command line option to make that opt-in
-> > explicit. This only bypasses the LOCKDOWN_HIBERNATION gate; nohibernate,
-> > secretmem and CXL memory restrictions still apply.
-> >
-> > The kernel does not validate the external policy or authenticate the image
-> > with this option.
-> >
-> > Build-tested with Fedora config:
-> > make O=../linux-lockdown-hibernate-build kernel/power/hibernate.o
 
-Hi Sean, thanks for your contribution.
+On 7/10/26 9:00 PM, Weijie Yuan wrote:
+> On Fri, Jul 10, 2026 at 04:49:30PM +0800, 葉宸佑 wrote:
+>> Gentle ping.
+>>
+>> This v2 addressed the review comments from Alex and Dongliang.
+>> Is there anything else I should improve, or is it queued somewhere
+>> I might have missed?
+> Hi Chenyou,
+>
+> I think currently having Alex apply your patch is a temporary measure,
+> because the maintainer of traditional Chinese seems unlikely to be
+> available in the near future.
 
-While I understand the frustration of Lockdown disabling hibernation, it really
-is necessary in order to protect against the root user which is in Lockdown's
-threat model. Similar discussions already happened in this patch set [1].
+I can help review patches in traditional Chinese. With the help of LLM, 
+it is fine for me to handle local terminologies in zh_TW.
 
-About Lockdown hibernation support, some work have started some time ago by
-Matthew, it blog post [2] describe really well the security issue of hibernation.
-This has then lead to a first implementation [3] that has been recently bumped
-[4] but sadly no news have been given since.
-Some interesting discussion also happened recently about this subject on
-mastodon [5].
+Dongliang Mu
 
-If a solution have to be implemented, it definitively should take a different
-approach than just disabling Lockdown. If your interested by working on the
-original patch, I'd gladly review it.
+>
+> Outside the patch itself, I noticed that Traditional Chinese is actually
+> in a state of stagnation, which makes me think that receiving such
+> patches is a temporary solution rather than a long-term fix.
+>
+> As Jonathan said, "...But there does come a point where a translation
+> is so obsolete that it does more harm than good and there are no
+> prospects of it being updated."
+>
+> So, after a period of about two years of stagnation, the Traditional
+> Chinese documents seem to have really reached an unreadable state. This
+> is something we don't want to see, but we must accept the reality and
+> then take action. Please note that I have no intention of offending
+> Haowen. On the contrary, I am definitely grateful for all that he has
+> done.
+>
+> I did some interactions with one of the L10n Taiwan team (who are
+> involved with Git L10n) [1] in their telegram channel a few days before,
+> but sadly they said the biggest problems are:
+>
+>    1. No one is willing to take over. (hey, I totally understand)
+>    2. There are different opinions on translation. (I don't know the
+>       deeper details)
+>
+> Besides, I'm also very curious about how exactly we define the position
+> of traditional Chinese or zh_TW. From my rough observation, the existing
+> documents merely performed a simple conversion between simplified and
+> traditional Chinese, without taking into account the local expressions
+> specific to Taiwan. Therefore, that's why we are receiving the patch
+> here and commit aba18be23f14 ("docs/zh_TW: replace 接口 with 介面 in stable-api-nonsense.rst")
+> (Please correct me if I'm wrong, as I have not got into many
+> translated pages)
+>
+> So if we are doing zh_TW instead of a direct simplified and traditional
+> Chinese conversion, I don't think we can handle this properly without
+> the help of Taiwanese friends.
+>
+> Of course, I feel quite ashamed that I'm saying these above here without
+> having made any substantial contributions to this community, sorry.
+>
+> Could we discuss this matter in another thread? Very sorry Chenyou, what
+> I'm saying is completely unrelated to the patch itself.
+>
+> Finally, I would like to express my sincere gratitude to Haowen.
+>
+> Thanks,
+> Weijie
+>
+> [1] https://l10n.tw/
 
-[1]: https://lore.kernel.org/all/20250728111517.134116-1-nik.borisov@suse.com/
-[2]: https://mjg59.dreamwidth.org/55845.html
-[3]: https://lore.kernel.org/lkml/20210220013255.1083202-1-matthewgarrett@google.com/
-[4]: https://lore.kernel.org/all/IA1PR14MB62243E515C24AE8BF40E36BCB14BA@IA1PR14MB6224.namprd14.prod.outlook.com/
-[5]: https://nondeterministic.computer/@mjg59/115491928573781876.
-
-Best regards,
-
-Nicolas
 
