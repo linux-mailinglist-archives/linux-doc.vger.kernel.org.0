@@ -1,86 +1,86 @@
-Return-Path: <linux-doc+bounces-96273-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96274-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 4FtKKGABUWpf9wIAu9opvQ
-	(envelope-from <linux-doc+bounces-96273-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 16:27:44 +0200
+	id NxNHH30DUWrJ9wIAu9opvQ
+	(envelope-from <linux-doc+bounces-96274-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 16:36:45 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5765973BBAF
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 16:27:44 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id C819B73BCB2
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 16:36:44 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b="d1Eyy/dH";
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=YtlTzH6H;
 	dmarc=none;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96273-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-96273-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96274-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-96274-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id A6A8F3037DF4
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 14:26:18 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id BB9153006B21
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 14:27:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1F68A349CD0;
-	Fri, 10 Jul 2026 14:26:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0F0B22DF138;
+	Fri, 10 Jul 2026 14:27:34 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1D052BF002
-	for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 14:26:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B29C933B6D3
+	for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 14:27:32 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783693577; cv=none; b=EElx80+RFG9vAHfVK7hbeHijBJFNhcTrVRdOVmCEr6B64YRfHo9033WoDhM4sm+uv0pJ5dHA9sSUGjHbIpgNxsTWafNIRUrNmGO4l+kYc9F+4BpRm48eeiIu4yvZS0za7yTT7vjB1BC96hsm22GZfdsmfZkCGlQNL6z9aoih3w4=
+	t=1783693653; cv=none; b=Lwxe4S/ZnQwSFzmtXL/WQdNSG7M/OXTmzYz96iAA9NSosXfgKvf3Uj9Njuyd164AU0rbZvmmlkZCmpFQUigL2nZHqgSMWp1ymiTlKi3+n49cZpMZ3CIuwz9+W1niU3mTJfCnuCguv3EjOQzrQViiJoqCD4ZGzlU9D2qXfRS/o+w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783693577; c=relaxed/simple;
-	bh=/YUkyMvPt6U+pQ5Roi7nh+XtCxYVUN74DezD4OjWa9s=;
+	s=arc-20240116; t=1783693653; c=relaxed/simple;
+	bh=VE+KzUKDvay1yOjpldzi5tBfXveXWDGcN9KwOkzbdOU=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=aKGN5oVMGrBnlbS0nLya/40f0t3PBIXHAJ8IOOxRbpS5O/aBLrz9wY4u1eAxDa74QM7sZip9qsm/tS+KyrTI9ciEhuHKfCGT3gACuchRIBkpY9mD/BErqehjaEhfeeRtIaaebAPFcKN65OzVMCl5423okPWAeht2d6MbdN9f4x0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=d1Eyy/dH; arc=none smtp.client-ip=209.85.216.51
-Received: by mail-pj1-f51.google.com with SMTP id 98e67ed59e1d1-381018b9375so1279465a91.0
-        for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 07:26:14 -0700 (PDT)
+	 In-Reply-To:Content-Type; b=E7AESBZ0dCw5PhTlkjF3CruX03/YOVIsUoQDisJ5ICZRztJxHQIqWJpS0fgQbct/Ru3T16MreTp8jC+gWfiknGKdzfGe042ixgW0CUorde9xVElwzVlm5ILkmCkKjBWyovkGYFkosACxm8rr2ICRrHhAxnexvfHBBjexdHjm/SQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=YtlTzH6H; arc=none smtp.client-ip=209.85.210.170
+Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-8485b358552so1050658b3a.2
+        for <linux-doc@vger.kernel.org>; Fri, 10 Jul 2026 07:27:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783693574; x=1784298374; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1783693652; x=1784298452; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=BKZTQkHZkeTjhPFHa5agjLsOx5G5hOnFb+f0Lw0BHyk=;
-        b=d1Eyy/dHBtXrp9iXoge829Mg6xvj/pWuGdJw8s0ctD5ng7l78MH2qn3lNIqAh0ejms
-         9DKEurpNP829V3IfE3vsAMYP51sT5g7yiODkxEhu2YfkFsPg8+KJ5sFPVlzV8nrRANeO
-         qbU/AfhHizziWpEtnDKsqulmE+N10tLUbBz1KE6ordVJG6M+urRDi41OHnk2pPLGzF7N
-         Kaa+LMZ+YodDzaANhfp1tjOnQKuPvy0SYI7mSQCnIDW6ZoYn5haNAv9xT+zbp+ViBgfZ
-         8JjkMfnBmXq4+08tq0oucPhvmm6MmKOU9nRHu8ZwXx0Wb33rnSVbcJAD3eRfD23eK8V0
-         Z31w==
+        bh=clgP6emYrlN2My2PM1O9US9f70y/B5sdJzZlKryoOfU=;
+        b=YtlTzH6H16oCM7I71RhqhfJhQPx9crSzl9LIcTqIZfSu4L4XvbNelY6hzCIVxdMSSz
+         +m4oqmo2taAgj0MJAZV2guWTgsT+fEgdY7Ez2ZdjLXzxtUlnS3SamQ+j8NJ8yh7gul50
+         7Fv7F5AOi05bKpqDe7kNKMZjwwGnlXtBaPqthU8U/X6Yg4qubmLSk9nVspgvSmgj6P/x
+         i5rPkFBZq1eiEo8mISJF6JaEY+0P6oOJFJrB5dtwVZD3Q8QvgO2I249+Lw15zxmHhSEg
+         2/GSB3iXL+1O8+ex2Zb9lvF4zYaDkeL4keFRn53oto4GzmfOCWm8QUiMtjiQyOiKdqnf
+         GEQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783693574; x=1784298374;
+        d=1e100.net; s=20251104; t=1783693652; x=1784298452;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=BKZTQkHZkeTjhPFHa5agjLsOx5G5hOnFb+f0Lw0BHyk=;
-        b=j7/heUiNSZmmuIIRlQHxU+r0AGATJTdepvWSrZ95TpJjoxysBvU8heLJZHYxdm7XV7
-         XbiomljA1AEHERWc4Xqm0qYYHvBtsRkW3ZdHduTbo36S2RHxAi685mDXtSQHnjzTInPT
-         0FKmieX6MNkWYIrD6tYq+DaJ9WhqkF293chi4Wvh0d9K5AyVV/DVA2FaSvPSWV7XUlsf
-         8PJxWDBEsdd1A13XqcyEy4rnYEXmGAXp/R40jorR/mL8vSjiY8fKjXtUrv3oBeem7mE0
-         NE1sOFxpAcMubSyNO4r4SXikWtwZl6s4P7RPvxBs0kVAofh/FOfyb7182nrbjcEghxSn
-         UrFw==
-X-Forwarded-Encrypted: i=1; AHgh+RojzRw+e7VpFtb4uIMPE3bpF1N4YbpiZy816ugpawoAOFhFP40a1Pd/TYB+tmi7U+I/2hg9rRzfa2c=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz2xiSSbd22IkViYSlHU7gmCIzaxkSMncGnS8D+a84Cxswi9vyI
-	6qlXxygFHm9trzsQrWgN0RsYJrQyNr3xC+KRExLyfHEDGDXPc4IBgWj+
-X-Gm-Gg: AfdE7cm2DW4UCsARqYNm/wN+u1mAZ0m4jDnTwCMBtIOoObKoPAQg7XlwoQ967wKE0Dw
-	JJBy2b3qGOmnQkLZkDKrCVPgWsRCzKOxryrTHArAdnrTcBLqXCt5RQeWPzpsXCm2QVgPllI6op3
-	li79GnllsXHfVtCkLJVD+IbgPYALo5V1lgzOTuPS0CJilXnvzu/1F6hyqRifiXTwgey8XPAjBMr
-	q1xzler4G49f5U3uVBWrBc63+d1GbY4PLRc2qRRJHrPW+lU9L2KS9BA0OC0h1y15uceWpeuZXtI
-	JxAp9WdKONjR6EfKAn3jL3mjX5N193tRlO2vhRVrEAoDH9o44lQlWJQVFmR76wNfZJFSL2vaoZU
-	BvvcbU8Plxfei5Y16esSVfNw7E0mfT0+GI0JDXOBpNaX4m6rK9fqwno+IKPxUhuxtIdBBv+ZpuH
-	szY3IR1qpATDg8qjImDxgvFeYbMDsRV6u8SK+oI0dnNwUaNWfNz234jwIj+vhVig==
-X-Received: by 2002:a17:90b:564f:b0:37f:d6d5:8e8c with SMTP id 98e67ed59e1d1-3893d91fed4mr11239462a91.0.1783693574235;
-        Fri, 10 Jul 2026 07:26:14 -0700 (PDT)
+        bh=clgP6emYrlN2My2PM1O9US9f70y/B5sdJzZlKryoOfU=;
+        b=dPqGseO/U2mLCDdQiEu73zvY1WY93zqaKgnhRem+yqPO9vz5sjYDycdA3ciDuJb8DZ
+         o8NHynAgmOCE+f77/flGWq0hdkHfop0cGHXVmrxr4pKGVjmxxyVtwChSPRqVkGMb4DLT
+         ezX0buWiFjRZcBFQgAbLjjasucykw7mx2UuPLSAGFTpkpEWU7hwL8apiYNwyRO3bZCqH
+         Nu9OgHodELyNclOVzRy61/DlaP8r5ZIa/l8BwAXQWwl33WVXX7LSdmOXjtfT0HVXmaUx
+         L0EsfpD23EyuviZuEtZcWYYhDS4+mGOwtUy+9eiFc7g/y5tZFS0JSKyM0k/f5SXw19Gb
+         8YMQ==
+X-Forwarded-Encrypted: i=1; AHgh+RohvXcaqELjK8k4kPTAxTdgU+qJqgB3sRPhawqqsxslJmK+i1i8ujg7U82XxC7BE0iAiY32P6DeHv8=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwBjPPA/hMKlapL98/1qQifF67iwG4q/PuBCTWPlaCau4LlzduN
+	nhnNGlmjEuqfJHLXweHYPvCFJhi8yaVSw+fOhnPOCKvG8axJm2sW8mi5
+X-Gm-Gg: AfdE7cmybAfYHJelLf827kzlVYsvm54pbD5CyWyNP13cYNBXHhh4TPAPCdVCTZtHsN+
+	1yLLPLxSLQdwPAIq57R+mxR90CGmLa8BrnBqShvqUD1T+AiD+ZUidLki+dZiummE6AY6EIm9BV7
+	82DdpMr8a5fyKSR0V/pQvSWA3O9phFlNxdK/K+6wM4x9qLMnd8J40SCfzhrnU6sULaipLCchX48
+	B4tGmS02vsFQF4kmhniIwvumbBNld1ya0WerAp9EhS7KSPciWPihOxOE6pUSU0tWctT3wCGmTk2
+	6KmTn68lNdjHNS0H9eiZTRiUixjW+qKsjAHvZJHdFpECecC3+cdHMn4msB+iN5euaIpeg8X2SrD
+	PStztt+C3ZxY8pKOxZMu+eLIYBbtrGn+YLZrDpYbTSWZqoLSpQ+sMDNAlqZU62lmLODbB7Kepfg
+	7N8232gvosR6s/WUt1FtDyxuKAWsaWLGsaAHOkN6giFy4BNKtv2lQCf2aNLElZaQ==
+X-Received: by 2002:a05:6a00:4191:b0:846:1698:6378 with SMTP id d2e1a72fcca58-84842ec537dmr10934205b3a.3.1783693652135;
+        Fri, 10 Jul 2026 07:27:32 -0700 (PDT)
 Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5? ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38a55a47286sm2771225a91.10.2026.07.10.07.26.12
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8483262a17dsm5741881b3a.4.2026.07.10.07.27.31
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 10 Jul 2026 07:26:13 -0700 (PDT)
+        Fri, 10 Jul 2026 07:27:31 -0700 (PDT)
 Sender: Guenter Roeck <groeck7@gmail.com>
-Message-ID: <91905ecd-b7fa-46ea-8936-90c37b85e794@roeck-us.net>
-Date: Fri, 10 Jul 2026 07:26:12 -0700
+Message-ID: <1a16769c-fe52-49f8-b785-81441b78bb89@roeck-us.net>
+Date: Fri, 10 Jul 2026 07:27:30 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -88,15 +88,15 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/8] hwmon/misc: amd-sbi: Move core sbtsi support from
- hwmon to misc
+Subject: Re: [PATCH v4 2/8] hwmon: sbtsi_temp: Refactor temperature register
+ access into helpers
 To: Akshay Gupta <Akshay.Gupta@amd.com>, linux-doc@vger.kernel.org,
  linux-kernel@vger.kernel.org, linux-hwmon@vger.kernel.org
 Cc: corbet@lwn.net, skhan@linuxfoundation.org, arnd@arndb.de,
  gregkh@linuxfoundation.org, NaveenKrishna.Chatradhi@amd.com,
  Anand.Umarji@amd.com, Prathima.Lk@amd.com
 References: <20260710111642.850022-1-Akshay.Gupta@amd.com>
- <20260710111642.850022-2-Akshay.Gupta@amd.com>
+ <20260710111642.850022-3-Akshay.Gupta@amd.com>
 Content-Language: en-US
 From: Guenter Roeck <linux@roeck-us.net>
 Autocrypt: addr=linux@roeck-us.net; keydata=
@@ -142,26 +142,26 @@ Autocrypt: addr=linux@roeck-us.net; keydata=
  F0WaMvQMNrk9UAUziVcUkLU52NS9SXqpVg8vgrO0JKx97IXFPcNh0DWsSj/0Y8HO/RDkGXYn
  FDMj7fZSPKyPQPmEHg+W/KzxSSfdgWIHF2QaQ0b2q1wOSec4Rti52ohmNSY+KNIW/zODhugJ
  np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
-In-Reply-To: <20260710111642.850022-2-Akshay.Gupta@amd.com>
+In-Reply-To: <20260710111642.850022-3-Akshay.Gupta@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	FORGED_SENDER(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-96273-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-96274-lists,linux-doc=lfdr.de];
 	DKIM_TRACE(0.00)[gmail.com:+];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:Akshay.Gupta@amd.com,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-hwmon@vger.kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:arnd@arndb.de,m:gregkh@linuxfoundation.org,m:NaveenKrishna.Chatradhi@amd.com,m:Anand.Umarji@amd.com,m:Prathima.Lk@amd.com,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	DMARC_NA(0.00)[roeck-us.net];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:Akshay.Gupta@amd.com,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-hwmon@vger.kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:arnd@arndb.de,m:gregkh@linuxfoundation.org,m:NaveenKrishna.Chatradhi@amd.com,m:Anand.Umarji@amd.com,m:Prathima.Lk@amd.com,s:lists@lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
@@ -170,48 +170,34 @@ X-Spamd-Result: default: False [-1.66 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	ALIAS_RESOLVED(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCPT_COUNT_SEVEN(0.00)[11];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,roeck-us.net:from_mime,roeck-us.net:email,roeck-us.net:mid,amd.com:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[roeck-us.net:from_mime,roeck-us.net:email,roeck-us.net:mid,vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,amd.com:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 5765973BBAF
+X-Rspamd-Queue-Id: C819B73BCB2
 
 On 7/10/26 04:16, Akshay Gupta wrote:
 > From: Prathima <Prathima.Lk@amd.com>
 > 
-> Move SBTSI(Side-Band Temperature Sensor Interface) core functionality out
-> of the hwmon-only path and into drivers/misc/amd-sbi so it can be reused
-> by non-hwmon consumers.
+> Extract the paired integer/decimal register reads and writes from the
+> hwmon read/write callbacks into sbtsi_temp_read() and sbtsi_temp_write()
+> helpers. This consolidates error handling and respects the ReadOrder bit
+> for atomic temperature latching.
 > 
-> I2C probe parsing is moved from drivers/hwmon/sbtsi_temp.c
-> into drivers/misc/amd-sbi/tsi.c under CONFIG_AMD_SBTSI. The core driver
-> stores struct sbtsi_data on the bus device and registers an auxiliary
-> device amd-sbtsi.temp-sensor.<addr> per target.
-> The current hwmon temp sensor will now require the CONFIG_AMD_SBTSI
-> configuration as a new dependency.
-> 
-> This split prepares the driver for additional interfaces while keeping
-> hwmon support in hwmon subsystem on top of common SBTSI core logic.
-> 
-> Add platform dependencies to clarify this driver is intended to run on
-> the BMC and not on the managed node.
+> This keeps register access independent while preserving existing hwmon
+> functionality.
 > 
 > Reviewed-by: Akshay Gupta <Akshay.Gupta@amd.com>
 > Signed-off-by: Prathima <Prathima.Lk@amd.com>
 
-Regarding Sashiko's comments, I asume there can only be one of these
-in a given system.
-
-Given that,
-
 Acked-by: Guenter Roeck <linux@roeck-us.net>
 
-[ Assuming that the series will be picked up together through some
-   other maintainer ]
+The overflow problem raised by Sashiko should probably be addressed,
+but that does not have to be done with this series.
 
 Thanks,
 Guenter
