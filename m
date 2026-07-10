@@ -1,202 +1,338 @@
-Return-Path: <linux-doc+bounces-96389-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96391-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id cgISFoJxUWoKFAMAu9opvQ
-	(envelope-from <linux-doc+bounces-96389-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 11 Jul 2026 00:26:10 +0200
+	id RDv3AyR6UWqsFQMAu9opvQ
+	(envelope-from <linux-doc+bounces-96391-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 11 Jul 2026 01:03:00 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id B196B73F834
-	for <lists+linux-doc@lfdr.de>; Sat, 11 Jul 2026 00:26:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 54D8F73FB1B
+	for <lists+linux-doc@lfdr.de>; Sat, 11 Jul 2026 01:02:59 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=shazbot.org header.s=fm1 header.b=UpR02u8F;
-	dkim=pass header.d=messagingengine.com header.s=fm2 header.b="e msj31n";
-	dmarc=pass (policy=none) header.from=shazbot.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96389-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96389-lists+linux-doc=lfdr.de@vger.kernel.org";
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=rAfMzrJG;
+	dmarc=pass (policy=reject) header.from=nvidia.com;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96391-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96391-lists+linux-doc=lfdr.de@vger.kernel.org";
+	arc=reject ("cv is fail on i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 2AA473036631
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 22:23:38 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id AAAD83013A64
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2026 23:02:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 894D1435EE0;
-	Fri, 10 Jul 2026 22:23:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 903E43CC313;
+	Fri, 10 Jul 2026 23:02:35 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from fhigh-a3-smtp.messagingengine.com (fhigh-a3-smtp.messagingengine.com [103.168.172.154])
+Received: from CO1PR03CU002.outbound.protection.outlook.com (mail-westus2azon11010051.outbound.protection.outlook.com [52.101.46.51])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CD35F3CA4BB;
-	Fri, 10 Jul 2026 22:23:34 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783722217; cv=none; b=H1pFhGqPOeeHpSSSlhoQXBlsajdmvmahE2MZQQmmjqKPg1wlgMcNeEta/LJpH/jNXDgkcAYU/DwVdybn3assEVyBfNRFdBONwgFMrD3/RzSlrBfRRQgYL0k9tI+bw/xTrP8IfPR/tzqo/WNjVS7TStY4QEXEJbZVml7DN1jEtq8=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783722217; c=relaxed/simple;
-	bh=6XXM8KSG3FL+3M/D5cGYqLDF30wNcMAjyvsq8MhNMtw=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=ad+8gdQ3TrZ/HEbf6gzwnNVimPTd9/aYjzApXWKcW+65BNVCfqHXEZFXPqNrvhJSkMdXb6aWy8DVisEP+xvfjFVOz56XPvfPQ0mRHUynC8D9+44/NMWVPKfF5UDgCT3azPyotfc0kIcWMAFDMI2v6pQVmfmewfY9HM6NZncwY0k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=shazbot.org; spf=pass smtp.mailfrom=shazbot.org; dkim=pass (2048-bit key) header.d=shazbot.org header.i=@shazbot.org header.b=UpR02u8F; dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b=emsj31n5; arc=none smtp.client-ip=103.168.172.154
-Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
-	by mailfhigh.phl.internal (Postfix) with ESMTP id D6B9A1400049;
-	Fri, 10 Jul 2026 18:23:33 -0400 (EDT)
-Received: from phl-frontend-03 ([10.202.2.162])
-  by phl-compute-04.internal (MEProxy); Fri, 10 Jul 2026 18:23:33 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=shazbot.org; h=
-	cc:cc:content-transfer-encoding:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm1; t=1783722213;
-	 x=1783808613; bh=UaM0lzab9XGylzFI5LXmaxEpfkeYwL4PMvkC1gUQrl4=; b=
-	UpR02u8FlFYoDgFmpbgGuD/qozYI1sM1c7s5DG1ofFHZEevBpFf+QG0uLA7OHmNn
-	oqoDPLxaNUq31nkVXYXj3rDhUNo+uMG/yQ8qPVUDDLqCAB7KtO6r2m8c5q/u9ogw
-	k0J1dzVJAfXEqQ65S+KQIFTLTustghajPzooRYc0vOH2LZYsLyxnlz4P2fGKoZO3
-	8erubBW845id3OsyWQVz5V8e9RAQvk7pWt5B8znroeUjCCq+I6Y+DB4mngpl6xqQ
-	Pbfe8bSmAqWUslTAUiM6Yj9rRMGx9O+LzR4c6hmGwmex2onOcuA0+AMrT+ANzya2
-	dkWqudAZzK7RyUeyeYncmg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1783722213; x=
-	1783808613; bh=UaM0lzab9XGylzFI5LXmaxEpfkeYwL4PMvkC1gUQrl4=; b=e
-	msj31n52FDSbiFKZNM/KM38bBZMReNTY+AHwk5X78kdQ8h3/CCl0RlSPmtM1R0C5
-	3Q4rPw6O7qe65s2wNgIfrXYdJScL6UtvSdYCRQhSZNOze4vwGZq2AewTL84F5kf6
-	krbWvspJ9GQoxISbirZLUoBER8EjrfCC2/rxYCEIzkKeUVeIBviYnoDxmuAt/kLm
-	fqydsnDZBuvYRU/s5smrlRblyioq2+A1Q3KWD8PtF24Xb6cdyed1c92iEgRUNxXs
-	bdQaT1bmMJ3SAiouHI3w/FG7s7hyqQdb3AlttgvOA55KZBaomeZ7N6oLHe+E86mE
-	lV8/p7TiYEUqW3MKtYklQ==
-X-ME-Sender: <xms:5XBRam5pOrY9Yz2RM--x2SRabCBqlENkMR8r55FWWJDO3cLVYMh6gg>
-    <xme:5XBRatEOOL34wC3eGW1ftwT0a_f1r-0-747ODoRCwZ4rd1ZLckaojMRK_k7FShItu
-    B4nuZZp0hzeaXTaMvCfsEoFLy9g91IUfAUkIreG9UcMb-sgRqAx_A>
-X-ME-Received: <xmr:5XBRap-NkczGKuSXNlJre_k6L2BuxF7G9SO_Tk8qAuQ0Bskx5jx2MBHPsNg>
-X-ME-Proxy-Cause: dmFkZTGMzXDuQeY5gEq71VJWijR1DWZ9rbms+1N9AX2oGTr8hArY6bxP2G/am96xUkPFv3
-    Z4ApYv3m2mSWvALuvslRIxWhZTDC+hQKcWUNwhuKD541gUvs8bDfo88o/gmIt/+eiMSKZ/
-    PfsKMxh88JCcjukEpflhKnQPQMXN23KiX+qh8YjqzX+GAfpI0rmfBBb+w/+rK+bUFo73gl
-    aP1foO45G+FVhtVWhkJbcsI9jzwmJY7xKCsU82pHyhFyNjMMJasjWA8bW6xCtbAh+JFQbP
-    zks9zj+srb+k4G3rfqsKY8R4EvGE/Z76nI2YOYsp8f456nw6SAcrEWEs+ztpMzUV1dHFcV
-    WubCqGsJewqhxJctXJzEtFeJrO7J9JbdK6aIgEokYeQnpbO9U07Z3Hjdx3aIZPP1dp5qM4
-    AczXB7dIHR/HNnYFNQ4EJr8DraiA0QB6AjWwgR+G7cjwn8XfvPdFHx+8RdVxcJZZNaVfqk
-    yiW4ICvXSg29aUGNa0FTAO2cZ2NPrJTYXm6DjYXM/Tq1s9M3go9u0lQ3qYuy7Ut6//yQcC
-    i/7ZV3MglwuyD6YFIhnRwTTVcjl/+zbc1ud9ubFtfunR9h6osuVVIvUxEAwctYoRTh1Mbr
-    U9CEd+EfNYVA8Dhr6+iIEKhivYms4jaufw2g0MPcC6Npz1lGNg6Lv0H/hGYw
-X-ME-Proxy: <xmx:5XBRavUtk2USJzjF2cfLl27lp286tN6w0-Tgb4s2fjTMwo5hct_b8A>
-    <xmx:5XBRarGUkrXzH4mZu30E6nZyiJzqk8gS41Soej5UamquzErka09mlw>
-    <xmx:5XBRaj78PVjkU_vUlMphE2Mzt4yVORgGvQXZj0xaKqIc_w0-X7KRRg>
-    <xmx:5XBRatK2Jl5PsKiRWA0CullMPi-kXyKzySFMq_xKtk8R5oDnxoVMfQ>
-    <xmx:5XBRaurMOx9P6Jac-dlSw4-ztL4Qs2I2uzA9OmmaS9Iikg1F9VpCJM1P>
-Feedback-ID: i03f14258:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 10 Jul 2026 18:23:31 -0400 (EDT)
-Date: Fri, 10 Jul 2026 16:23:22 -0600
-From: Alex Williamson <alex@shazbot.org>
-To: <mhonap@nvidia.com>
-Cc: <djbw@kernel.org>, <jgg@ziepe.ca>, <jic23@kernel.org>,
- <dave.jiang@intel.com>, <ankita@nvidia.com>,
- <alejandro.lucero-palau@amd.com>, <alison.schofield@intel.com>,
- <dave@stgolabs.net>, <dmatlack@google.com>, <gourry@gourry.net>,
- <ira.weiny@intel.com>, <cjia@nvidia.com>, <kjaju@nvidia.com>,
- <vsethi@nvidia.com>, <zhiw@nvidia.com>, <kvm@vger.kernel.org>,
- <linux-cxl@vger.kernel.org>, <linux-doc@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>, <linux-kselftest@vger.kernel.org>,
- alex@shazbot.org
-Subject: Re: [PATCH v3 05/11] vfio: UAPI for CXL Type-2 device passthrough
-Message-ID: <20260710162322.012be635@shazbot.org>
-In-Reply-To: <20260625165407.1769572-6-mhonap@nvidia.com>
-References: <20260625165407.1769572-1-mhonap@nvidia.com>
-	<20260625165407.1769572-6-mhonap@nvidia.com>
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D9233B3C05;
+	Fri, 10 Jul 2026 23:02:33 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783724555; cv=fail; b=bjuwe7HMjEBIDBiXeW6f1y9CATVB5UjjRvz0BNfqiSrhxw82Msk3p/qgvJn/1zrsmCzRRXHHB6Mj+wtvqbT5aF0glOHtVf7qJgGD4paQ8roDeZ8VEpuS3r22WR4TsRjhBqGzEWQ3PtBhKiSlHK6sC4b7RW6R3jqF96Y0O2MZFJU=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783724555; c=relaxed/simple;
+	bh=KsFl/tu4BdKVJaP0rSLwR8aExR4h4XDIyHlNNp/Zd20=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
+	 Content-Disposition:In-Reply-To:MIME-Version; b=KiraiTYmSXwez0snd1tfHpIXJTOumbu/zBDa6gcQ4qDyjoYXkYU/ISCbvOoh0Mrt3stBLjdPITI3Fy7FumTW1BJJS2VYFwvAOxF5vUrJbQrzxkXgVJV34mcGRPBu8ZSMNfxYbOalrzGpI2X3zJLLfDcMzog8UuJ+OW7iwtcNE1c=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=rAfMzrJG; arc=fail smtp.client-ip=52.101.46.51
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=zVEfsKTGK7JCKxfoUyCdXfx0vtZrwdmNDWv133c/Sbvp8ro6vXjOC1DYQ1ewuvatmUlAsMTlhWCWKiBWeSiwPFe3ZezD9T7jKlvfjjFG1SmzMcVd5Pk/A3Z1cjLnWaWj6UnHP0l2SUL0bZrZvvwVbuQs7Ym78RIBS6f6r25BKcKWJuy9KM9Dkar4pu3LbBxDdDURhSOVHJ7PndK771/Ou7uorAtuJyTA2kuD8THrIMWmp3Pl44k89zvXsWbfUv2Sls9QFa/ct1eM8d38UU7jz/v4PO/j81n+uQw5dqkSMJVTl+vXkyXs1ytxfvPDIdcS/sKR9YzWhi4QCB72/binng==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=SVfJc97+xcPyYJ+FxAepuicN8LA6cIPbsPeA5+fEJMQ=;
+ b=qEozqPohYBW6Ue+mMJx2mCalxhdmZuVd+dRjJWbmzng6cxsT8eax4F+mx/fVQBjdK4gGXJP0MTA8KNJKFvH2YbvgT47CxLQqmyQPmd9eKC6Xyuz/sEEB+UXtTARatiL4+gqHlGCrLcJZAAFjxr2sgvbfn3CG3Zvz8Ly6hJU5+YqS/NyIqSF+XA61VAZVhQ10kHxGeTn37m1fgCqw56GNUEOWfEIqN0GkHm7gLhokrykQvsy60TkjW5D37K2CVPGnqSdTL/H7/iUsoztCcp6611KsXM001QvE0aYj+Z59711U5yhG/pt/Brs6OPfZUXfs+XHid9HHbALs2OUW3fbViw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=SVfJc97+xcPyYJ+FxAepuicN8LA6cIPbsPeA5+fEJMQ=;
+ b=rAfMzrJGCKT6EQEehsyl9yycR2r8DN2J2EFqF6haE9VcQ1duujKYaoXmq6jo+BtKzsdut8qnn3RluK508Upml6HLrtax/zlKMkpqNf+nxvAiL/LCPrNrmT4kq7Iwq1bwg1ywFbMLDwZ6uhUUff7QKj/DFaoR3b7W8MIfS97y0kgfYzPd6amwbsaXmifjDjjnbR1q2T9u1JLcf/sb/i0w1dAqXzgqm5SVyTgUj+qRMi1gxTdt6uJu54CUHPJKRaCbyynLr+qMH7ZrCT+qddN74qvs4pf8KijWA6910sDT6KJ99R3nN5T/8Ro4CAtMdYQJKRXMphtV71XJyypwiDjBQQ==
+Received: from LV3PR12MB9356.namprd12.prod.outlook.com (2603:10b6:408:20c::21)
+ by CY8PR12MB7244.namprd12.prod.outlook.com (2603:10b6:930:57::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.16; Fri, 10 Jul
+ 2026 23:02:28 +0000
+Received: from LV3PR12MB9356.namprd12.prod.outlook.com
+ ([fe80::1c36:31b4:c420:6286]) by LV3PR12MB9356.namprd12.prod.outlook.com
+ ([fe80::1c36:31b4:c420:6286%5]) with mapi id 15.21.0181.016; Fri, 10 Jul 2026
+ 23:02:28 +0000
+Date: Fri, 10 Jul 2026 19:02:26 -0400
+From: Yury Norov <ynorov@nvidia.com>
+To: Shrikanth Hegde <sshegde@linux.ibm.com>
+Cc: linux-kernel@vger.kernel.org, mingo@kernel.org, peterz@infradead.org,
+	juri.lelli@redhat.com, vincent.guittot@linaro.org,
+	yury.norov@gmail.com, kprateek.nayak@amd.com, iii@linux.ibm.com,
+	corbet@lwn.net, tglx@kernel.org, gregkh@linuxfoundation.org,
+	pbonzini@redhat.com, seanjc@google.com, vschneid@redhat.com,
+	huschle@linux.ibm.com, rostedt@goodmis.org,
+	dietmar.eggemann@arm.com, maddy@linux.ibm.com, srikar@linux.ibm.com,
+	hdanton@sina.com, chleroy@kernel.org, vineeth@bitbyteword.org,
+	frederic@kernel.org, arighi@nvidia.com, pauld@redhat.com,
+	christian.loehle@arm.com, tj@kernel.org,
+	tommaso.cucinotta@gmail.com, maz@kernel.org, rafael@kernel.org,
+	rdunlap@infradead.org, kernellwp@gmail.com,
+	linux-doc@vger.kernel.org
+Subject: Re: [PATCH v7 06/12] sched/core: Push current task from non
+ preferred CPU
+Message-ID: <alF6AqiSWZBlF_c2@yury>
+References: <20260709215648.1246821-1-sshegde@linux.ibm.com>
+ <20260709215648.1246821-7-sshegde@linux.ibm.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260709215648.1246821-7-sshegde@linux.ibm.com>
+X-ClientProxiedBy: SJ2P220CA0013.NAMP220.PROD.OUTLOOK.COM
+ (2603:10b6:a03:5da::16) To LV3PR12MB9356.namprd12.prod.outlook.com
+ (2603:10b6:408:20c::21)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: LV3PR12MB9356:EE_|CY8PR12MB7244:EE_
+X-MS-Office365-Filtering-Correlation-Id: 104af64b-0782-45c4-c36c-08deded75091
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|7416014|1800799024|366016|376014|23010399003|3023799007|22082099003|18002099003|56012099006|11063799006|4143699003;
+X-Microsoft-Antispam-Message-Info:
+	6QgsS80VtEwLWSJjJJfe9VW4J3ZbLF4bbYR5N2ZGSNFl2Uvn1VWdYbgyyDfoifz59PPU/6peHXXt+FqV8cVON1NQ88SrLi9UMtkzathRqu8lrqUj8oWanG4O23409Vr4tikx4COqpulLfv1A3v/mLfejUHtwhzcrH9DbaxjR3ObLx0+DAjOMNkW67Ea6sSZqq50rON8VnHwhUxqNos1dadyyvGnJh6GE0ETTo0UFI5jqVD8jAWCOM0Dj4JXGM6tZdlog4Uwc0cz+h449TSfilK2emtIz4NoizmxUYtqF1A0jlrJ3GTS/qgGzJpYRYjriT9NrNKEzrqoPPfXcftby/rNDhD7+W5wsy/l9rR8YtE63qWsVfthRm5Av4cQbkbnPLhWBGZ4l6zLr2Zptrj5tkabAFzz/hvPU1zrFzbLQwdTFW80Z2MqplQ+fx7nNC5+B/lmjFoI2JpwB+9Z+r/PTzAz/U92jDZhcWG1hDOcvw+e7pTUXAUcsn7LGKCnfki+tcaz4lE2Yp80eZzSiJJUBmgTENsgHuE9+kJ86Dsfib4SUEVLojYbMPpmTRAiK0IUNQL5t/xLk86zKtSqEyFmWO+djceaNrGJL3iA1dsUg1CySoJkwdz4M/CoSR89feJTkWyvbLG3zg3Th3Tuy2whNgWkG1D/ucU88CZ9BevUwfO4=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV3PR12MB9356.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(1800799024)(366016)(376014)(23010399003)(3023799007)(22082099003)(18002099003)(56012099006)(11063799006)(4143699003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?D3+WdEya5VbE6cktZ8FXKj41PL84letNN9Rcab41KLLY5J212kN+lSXk8ngX?=
+ =?us-ascii?Q?SrKKSyAJ9OlhSOxSK8Oe8hRIj1ZDMAyBlD3amyxZzEMmFORs5NjBBUS5u2oJ?=
+ =?us-ascii?Q?xC5+DYxXvuwpd4ds6jKWxzBhYikfUqLStnxbspzrDcBpl7a11cXa9TeTtAsf?=
+ =?us-ascii?Q?/rIp9OtWgHnSFyYgyEysDLrl0eZwP4tmTcaEk6ctX98VylTmHmn6c5gl0Arp?=
+ =?us-ascii?Q?9dPm28/V1YJt7Trb9+3HizBXjLefXnH+l3AUIGIjDNtKfEpNV9JRzEjTPG1S?=
+ =?us-ascii?Q?uih+HuPfiJSyQoOcEV8FvTyVWN2Hs5LeomAAGPP38jFrprZJN+vyO5oOL/MI?=
+ =?us-ascii?Q?4D8CRAcuRLrrreeZpKY9uiZ/M19X64W5Nbq3pXQP+lw1En0giifkvl8g3mZh?=
+ =?us-ascii?Q?LWDg1rTpppZkhYtHBXAOL3Dgt6H+3oOw0Dck3DDr4lw9MWjS/AgbIFDL/91s?=
+ =?us-ascii?Q?bu9oIkpuIXNTFTvudSpQcP69qXPBR74Ym9VifqED/XvWvTrX7r2oaMvG1FET?=
+ =?us-ascii?Q?Hwi3xfCYEbIOgDjZ3eOIiydeh/yfoLeJ+NG4Mw7dm3xqGQN6ESIP82YMQJ2F?=
+ =?us-ascii?Q?CgYVUqaffTcuw/BT+n0SxPSinCvMIXXnFUY5lp4euY+o9wQNRBLyhMlsgrMX?=
+ =?us-ascii?Q?jnR/nzDmimsJPQRNVb7nl95nQtBCg5c6FG5a2umhONePKRbGqNHIB3E6WqDc?=
+ =?us-ascii?Q?R3c0fLT+IBaeGYsbYflgBUYuo0RqREKvJZhLGBIVH2ANjySSOAib4SxYi2XH?=
+ =?us-ascii?Q?aK5mwD5NxjRt5v0liyGHxtJNImDsHTu3iMoL5dlTwXNTJEQ9OIaBBD1PqRxP?=
+ =?us-ascii?Q?QiW+CEnHjMV8woGwybpVegdbZFEhVjiVRPf3ZIUQv84taITTTC+oUxQZ7VE5?=
+ =?us-ascii?Q?QYdyWHS5A5R9oZxHaZ9eU3rY2MFBgw/+sE71YA39M9ZYTh0zcCQe8BtyAssa?=
+ =?us-ascii?Q?8F8CDD4EO4NZi81xOMGq4d4O0S9IlqtVgMaEK9xUXE6WYuQf6/PHSBCEKBsS?=
+ =?us-ascii?Q?t7jQvTQMJ30Svn+NaBImHuxe6BtruDj8Ryb8SSX8ayOK3WBFCu5ss9IuefVk?=
+ =?us-ascii?Q?ULx4Q7KEpGOXPgCWu79gdT1WHEyUzWPDjJYS7R2IUw0ney3XKJPgI0quLkD4?=
+ =?us-ascii?Q?fJpWVntPOGQq+rIXheyCbOE5byM6h9WZmWWZcjX/gw/fU9nt8ZIg3TRRFsDO?=
+ =?us-ascii?Q?D4aTQm/u0qnBxO4fJXUYcZ4qdg+ABhBqQAIrnO2rZqdDb5hxqMuVYqAaFbVj?=
+ =?us-ascii?Q?Thum0iSI87NSXR8WdvUibO/PvOKiWYwacqJdrZsdmoKrjmF5f/XSwWJv+xts?=
+ =?us-ascii?Q?A3WWDHPFPkW39iX/vPRsx/Vi2EPstPJTRwle/oiVDaNXS1BKCbARFfscVDPQ?=
+ =?us-ascii?Q?0LHA+ML/3d17NYRjEiYad04AWEElRpxuH+M1bh8EUkhN4YnuqWCP6ByHl5wz?=
+ =?us-ascii?Q?E/B3FLlpU3CUCs33vEjoDau8pgY0ecfowaaGf2lvrq7ERfENEy509ltuFHKI?=
+ =?us-ascii?Q?EC8TWnzwFYcGmDlbEn4Z3VpKeRQEVgSApxCHlsSIOCrTo16Ef3OlHvRRKn1M?=
+ =?us-ascii?Q?Gs+QI/AHghUrblW5wyo0rTPTAeM7gn9/YtFVoujwtJkcHppx2xyqMfS7aSuM?=
+ =?us-ascii?Q?9J9LGrRpt1uOZ9ZOKoo4f4QjTI7ec1hj589i8bzRs746yaD+pdPcSaD6Spj6?=
+ =?us-ascii?Q?eQaeXDs0j7+X1P/t88YGQjwMIRUqdm83jhu/BwQd9J4WbIeLhIGVEcLYmL6y?=
+ =?us-ascii?Q?Sd4vtj2qKQ=3D=3D?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 104af64b-0782-45c4-c36c-08deded75091
+X-MS-Exchange-CrossTenant-AuthSource: LV3PR12MB9356.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jul 2026 23:02:28.5837
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: sLkAewtUseumqNbq6flPZcvZBV0LnNjTWo2XsY6Zu+MgReongFDho451Gd9geakd/HdAc4w4bL1/haT6N6WvCw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7244
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[shazbot.org,none];
+X-Spamd-Result: default: False [-5.16 / 15.00];
+	WHITELIST_DMARC(-7.00)[nvidia.com:D:+];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
+	MID_RHS_NOT_FQDN(0.50)[];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[shazbot.org:s=fm1,messagingengine.com:s=fm2];
+	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[shazbot.org:+,messagingengine.com:+];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-96389-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[alex@shazbot.org,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:mhonap@nvidia.com,m:djbw@kernel.org,m:jgg@ziepe.ca,m:jic23@kernel.org,m:dave.jiang@intel.com,m:ankita@nvidia.com,m:alejandro.lucero-palau@amd.com,m:alison.schofield@intel.com,m:dave@stgolabs.net,m:dmatlack@google.com,m:gourry@gourry.net,m:ira.weiny@intel.com,m:cjia@nvidia.com,m:kjaju@nvidia.com,m:vsethi@nvidia.com,m:zhiw@nvidia.com,m:kvm@vger.kernel.org,m:linux-cxl@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:alex@shazbot.org,s:lists@lfdr.de];
-	FORWARDED(0.00)[lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-96391-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:sshegde@linux.ibm.com,m:linux-kernel@vger.kernel.org,m:mingo@kernel.org,m:peterz@infradead.org,m:juri.lelli@redhat.com,m:vincent.guittot@linaro.org,m:yury.norov@gmail.com,m:kprateek.nayak@amd.com,m:iii@linux.ibm.com,m:corbet@lwn.net,m:tglx@kernel.org,m:gregkh@linuxfoundation.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:vschneid@redhat.com,m:huschle@linux.ibm.com,m:rostedt@goodmis.org,m:dietmar.eggemann@arm.com,m:maddy@linux.ibm.com,m:srikar@linux.ibm.com,m:hdanton@sina.com,m:chleroy@kernel.org,m:vineeth@bitbyteword.org,m:frederic@kernel.org,m:arighi@nvidia.com,m:pauld@redhat.com,m:christian.loehle@arm.com,m:tj@kernel.org,m:tommaso.cucinotta@gmail.com,m:maz@kernel.org,m:rafael@kernel.org,m:rdunlap@infradead.org,m:kernellwp@gmail.com,m:linux-doc@vger.kernel.org,m:yurynorov@gmail.com,m:tommasocucinotta@gmail.com,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[22];
+	RCPT_COUNT_TWELVE(0.00)[34];
+	FORGED_SENDER(0.00)[ynorov@nvidia.com,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[Nvidia.com:+];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[alex@shazbot.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TO_DN_NONE(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[ynorov@nvidia.com,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,infradead.org,redhat.com,linaro.org,gmail.com,amd.com,linux.ibm.com,lwn.net,linuxfoundation.org,google.com,goodmis.org,arm.com,sina.com,bitbyteword.org,nvidia.com];
 	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[messagingengine.com:dkim,shazbot.org:from_mime,shazbot.org:dkim,shazbot.org:mid,nvidia.com:email,vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,nvidia.com:from_mime,vger.kernel.org:from_smtp,Nvidia.com:dkim]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: B196B73F834
+X-Rspamd-Queue-Id: 54D8F73FB1B
 
-On Thu, 25 Jun 2026 22:24:01 +0530
-<mhonap@nvidia.com> wrote:
-> diff --git a/include/uapi/linux/vfio.h b/include/uapi/linux/vfio.h
-> index 5de618a3a5ee..3707d53c4de5 100644
-> --- a/include/uapi/linux/vfio.h
-> +++ b/include/uapi/linux/vfio.h
-> @@ -215,6 +215,7 @@ struct vfio_device_info {
->  #define VFIO_DEVICE_FLAGS_FSL_MC (1 << 6)	/* vfio-fsl-mc device */
->  #define VFIO_DEVICE_FLAGS_CAPS	(1 << 7)	/* Info supports caps */
->  #define VFIO_DEVICE_FLAGS_CDX	(1 << 8)	/* vfio-cdx device */
-> +#define VFIO_DEVICE_FLAGS_CXL	(1 << 9)	/* vfio-cxl Type-2 device */
-
-Would we define a different flag for type-1/3 if we ever found a need
-to expose them through vfio?
-
->  	__u32	num_regions;	/* Max region index + 1 */
->  	__u32	num_irqs;	/* Max IRQ index + 1 */
->  	__u32   cap_offset;	/* Offset within info struct of first cap */
-> @@ -257,6 +258,36 @@ struct vfio_device_info_cap_pci_atomic_comp {
->  	__u32 reserved;
->  };
+On Fri, Jul 10, 2026 at 03:26:42AM +0530, Shrikanth Hegde wrote:
+> Actively push out task running on a non-preferred CPU. Since the task is
+> running on the CPU, need to stop the cpu and push the task out.
+> However, if the task is pinned only to non-preferred CPUs, it will continue
+> running there. This will help in maintaining the userspace affinities
+> unlike CPU hotplug or isolated cpusets.
+> 
+> Though code is similar to  __balance_push_cpu_stop and quite close to
+> push_cpu_stop, it is being kept separate as it provides a cleaner
+> implementation with CONFIG_PREFERRED_CPU.
+> 
+> Add push_task_work_done flag to protect work buffer.
+> Works only with FAIR class.
+> 
+> For now, only current running task is pushed out. This keeps the code
+> simpler. In future optimization maybe done to move all the queued
+> task on the rq.
+> 
+> Signed-off-by: Shrikanth Hegde <sshegde@linux.ibm.com>
+> ---
+> v6->v7:
+> - Moved is_migration_disabled
+> - removed fair class check 
+> 
+>  kernel/sched/core.c  | 78 ++++++++++++++++++++++++++++++++++++++++++++
+>  kernel/sched/sched.h |  8 +++++
+>  2 files changed, 86 insertions(+)
+> 
+> diff --git a/kernel/sched/core.c b/kernel/sched/core.c
+> index 9e8eec4451b6..74c93a88bf84 100644
+> --- a/kernel/sched/core.c
+> +++ b/kernel/sched/core.c
+> @@ -5774,6 +5774,9 @@ void sched_tick(void)
+>  	unsigned long hw_pressure;
+>  	u64 resched_latency;
 >  
+> +	if (!cpu_preferred(cpu))
+> +		sched_push_current_non_preferred_cpu(rq);
+> +
+>  	if (housekeeping_cpu(cpu, HK_TYPE_KERNEL_NOISE))
+>  		arch_scale_freq_tick();
+>  
+> @@ -11292,3 +11295,78 @@ void sched_change_end(struct sched_change_ctx *ctx)
+>  		p->sched_class->prio_changed(rq, p, ctx->prio);
+>  	}
+>  }
+> +
+> +#ifdef CONFIG_PREFERRED_CPU
+> +static DEFINE_PER_CPU(struct cpu_stop_work, npc_push_task_work);
+> +
+> +static int sched_non_preferred_cpu_push_stop(void *arg)
+> +{
+> +	struct task_struct *p = arg;
+> +	struct rq *rq = this_rq();
+> +	struct rq_flags rf;
+> +	int cpu;
+> +
+> +	/* sanity checks and clear */
+> +	if (cpu_preferred(rq->cpu) || is_migration_disabled(p)) {
+> +		scoped_guard(rq_lock, rq)
+> +			rq->push_task_work_done = false;
+> +		put_task_struct(p);
+> +		return 0;
+> +	}
+> +
+> +	raw_spin_lock_irq(&p->pi_lock);
+> +
+> +	/* This could take rq lock. So call it before rq lock is taken */
+> +	cpu = select_fallback_rq(rq->cpu, p);
+> +	rq_lock(rq, &rf);
+> +	rq->push_task_work_done = false;
+> +	update_rq_clock(rq);
+> +
+> +	context_unsafe_alias(rq);
+> +
+> +	if (task_rq(p) == rq && task_on_rq_queued(p))
+> +		rq = __migrate_task(rq, &rf, p, cpu);
+> +
+> +	rq_unlock(rq, &rf);
+> +	raw_spin_unlock_irq(&p->pi_lock);
+> +	put_task_struct(p);
+> +
+> +	return 0;
+> +}
+> +
 > +/*
-> + * VFIO_DEVICE_INFO capability for CXL Type-2 passthrough devices.
-> + * Present when VFIO_DEVICE_FLAGS_CXL is set on vfio_device_info::flags.
+> + * Push the current task running on non-preferred CPU(npc).
+> + * Using this non preferred CPU will lead to more vCPU preemptions
+> + * in the host. So it is better not to use this CPU.
 > + *
-> + * @flags: VFIO_CXL_CAP_HOST_FIRMWARE_COMMITTED indicates the host CXL
-> + *	subsystem committed the endpoint HDM decoder.
-> + * @hdm_region_idx: VFIO region index for the HDM memory region
-> + *	(subtype VFIO_REGION_SUBTYPE_CXL).
-> + * @comp_reg_region_idx: VFIO region index for the CXL Component
-> + *	Register shadow (subtype VFIO_REGION_SUBTYPE_CXL_COMP_REGS).
+> + * Since task is running, call a stopper to push the task out. This is
+> + * similar to how task moves during hotplug. In select_fallback_rq a
+> + * preferred CPU will be chosen and henceforth task shouldn't come back to
+> + * this CPU again.
+> + *
+> + * Works for FAIR class only
+> + *
+> + * If task is affined only non-preferred CPUs, it can't be moved out
+> + */
+> +void sched_push_current_non_preferred_cpu(struct rq *rq)
+> +{
+> +	struct task_struct *push_task = rq->curr;
+> +
+> +	/* Don't push the task if task's affinity doesn't allow */
+> +	if (!task_can_sched_on_preferred(rq->cpu, push_task))
+> +		return;
 
-These regions are self describing via the noted CXL subtypes, what's
-the purpose of double reporting them here?
+Shouldn't you protect it with the rq lock against races with affinity or
+policy changes? The task_can_sched_on_preferred() checks p->sched_class
+and p->cpus_ptr.
 
-> + * @comp_reg_bar: PCI BAR index that contains the CXL component
-> + *	register block.  Get-region-info on this BAR returns a
-> + *	VFIO_REGION_INFO_CAP_SPARSE_MMAP that excludes the CXL block.
-> + * @comp_reg_offset: byte offset of the CXL component register block
-> + *	within @comp_reg_bar.
-> + * @comp_reg_size: byte size of the CXL component register block.
-
-Why don't we describe all of these via a capability on the relevant
-region info?
-
-Does that leave this device level capability describing the device as
-type-2 (by existence), with only a flags field to declare HDM as
-firmware committed, for future compatibility should we support non-fw
-committed?  Thanks,
-
-Alex
+> +
+> +	/* There is already a stopper thread. Don't race with it. */
+> +	if (rq->push_task_work_done)
+> +		return;
+> +
+> +	/* sched_tick runs with interrupts disabled. */
+> +	get_task_struct(push_task);
+> +
+> +	scoped_guard(rq_lock, rq)
+> +		rq->push_task_work_done = true;
+> +
+> +	stop_one_cpu_nowait(rq->cpu, sched_non_preferred_cpu_push_stop,
+> +			    push_task, this_cpu_ptr(&npc_push_task_work));
+> +}
+> +#endif
+> diff --git a/kernel/sched/sched.h b/kernel/sched/sched.h
+> index 6de6366f2faa..80c02e2c09eb 100644
+> --- a/kernel/sched/sched.h
+> +++ b/kernel/sched/sched.h
+> @@ -1277,6 +1277,8 @@ struct rq {
+>  
+>  	struct list_head cfs_tasks;
+>  
+> +	bool			push_task_work_done;
+> +
+>  	struct sched_avg	avg_rt;
+>  	struct sched_avg	avg_dl;
+>  #ifdef CONFIG_HAVE_SCHED_AVG_IRQ
+> @@ -4242,4 +4244,10 @@ static inline bool task_can_sched_on_preferred(int cpu, struct task_struct *p)
+>  	return cpumask_intersects(p->cpus_ptr, cpu_preferred_mask);
+>  }
+>  
+> +#ifdef CONFIG_PREFERRED_CPU
+> +void sched_push_current_non_preferred_cpu(struct rq *rq);
+> +#else	/* !CONFIG_PREFERRED_CPU */
+> +static inline void sched_push_current_non_preferred_cpu(struct rq *rq) { }
+> +#endif
+> +
+>  #endif /* _KERNEL_SCHED_SCHED_H */
+> -- 
+> 2.47.3
 
