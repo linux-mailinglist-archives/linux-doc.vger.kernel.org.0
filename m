@@ -1,222 +1,218 @@
-Return-Path: <linux-doc+bounces-96414-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96415-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 3mQIEWQzUmpQNAMAu9opvQ
-	(envelope-from <linux-doc+bounces-96414-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 11 Jul 2026 14:13:24 +0200
+	id yWILATI3Umr+NAMAu9opvQ
+	(envelope-from <linux-doc+bounces-96415-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 11 Jul 2026 14:29:38 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C8CF74178B
-	for <lists+linux-doc@lfdr.de>; Sat, 11 Jul 2026 14:13:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 937EE741829
+	for <lists+linux-doc@lfdr.de>; Sat, 11 Jul 2026 14:29:37 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=gHFB0fSe;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=KhVAsJnP;
 	dmarc=pass (policy=none) header.from=gmail.com;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96414-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96414-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96415-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96415-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 4A40F300E275
-	for <lists+linux-doc@lfdr.de>; Sat, 11 Jul 2026 12:13:22 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id B86663011759
+	for <lists+linux-doc@lfdr.de>; Sat, 11 Jul 2026 12:29:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 62E8E3C4B72;
-	Sat, 11 Jul 2026 12:13:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id ECECD3C5DA1;
+	Sat, 11 Jul 2026 12:29:27 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8425D3B42C2
-	for <linux-doc@vger.kernel.org>; Sat, 11 Jul 2026 12:13:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B9FA23C4B82
+	for <linux-doc@vger.kernel.org>; Sat, 11 Jul 2026 12:29:25 +0000 (UTC)
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783772001; cv=pass; b=C7lrm0zxWJyohXzSQP+RklXu0o7+3BMCzAE+OSguwdsu+ZIyUr9U1Q7oMIBDDDLHT5ZniPH6poemNRiYNXpSY+khMlhxsWHjkBoYt88x7kZdtJI1eyaZE7BWeVnjUEvrSVvSOnwJdatWQ9H0P6w+Uj5gAhQsPtHReUefy5jv1WI=
+	t=1783772967; cv=pass; b=CfGpH11eA/AxEBz+Eq1pxjMNKv5LWLIgR9mdMVVni7xS9kTCV5zde7o6Mg1iK+BqHtsUK6LnnWh1WCasATtZNYWq5JedKkTmKaOANmw2lFUpfHKMA2U+QCxBugXUn01MVJvAiIVttAF7c7X3NA9XZHrIT/+Aa/fSvdG7kno6UFU=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783772001; c=relaxed/simple;
-	bh=80vo3JIjnCsKn8zo158HX4vkfRXd32w7uPzzJAtLaF0=;
+	s=arc-20240116; t=1783772967; c=relaxed/simple;
+	bh=lgplXt8OmmYK0O5s0vGlPCfavq5E5GB8C7ljQ3QichI=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=K7AeBtbrysa03RQO7Y3e3j90F0Oj8Y6kqi8oFT5O9O/KXnXblwMPAU2wVGM9GF2DN3xVD49rkliVk0YqmesNZWob/gxkt/tJ7cgaEUt7GlN9CTovTwp2udZGGVawJ9ZALJAQMa1RN/zPLSjf4gr0UTIWC1K5RR51PHCjG5q4Sss=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=gHFB0fSe; arc=pass smtp.client-ip=209.85.216.54
-Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-3856d4015e0so265667a91.2
-        for <linux-doc@vger.kernel.org>; Sat, 11 Jul 2026 05:13:19 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783771999; cv=none;
+	 To:Cc:Content-Type; b=n51OnNR2EJHP6s4FDY8ikpgPAfV7O7yhLpcGNGV5g4QsQyZegb/jJS34phenhluhgkKbDSxBbeVrqJ2i3Qice+kZCgzeszscz9cad28kh/Qqq8/1EgLfKWozEDx5ovyoO8NdKCvifA+7RR5WFkMD0OT5PxOs9yl9qZYpU2G3wu8=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=KhVAsJnP; arc=pass smtp.client-ip=209.85.208.41
+Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-697cee2eb6dso1793266a12.0
+        for <linux-doc@vger.kernel.org>; Sat, 11 Jul 2026 05:29:25 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783772964; cv=none;
         d=google.com; s=arc-20260327;
-        b=AcZ50M4Lh5ktOGJCpZaZWujzSxyCHWviJOp5e3CnYtQRdTs70/XwExRp9WXRI29744
-         6ajP5AbEelFb/94qfoFG+pYF+UipilePd1TGuvmKrCJl4KylvvQqvzREe1HBQcQxB2Ez
-         PD5ZFG9aWm7oCjLe/FtFN0Nx91sHhayClmh5QP/44xv+9ZZ6+9lxLBesXD6FtlZX8GcY
-         bGVMAt87BGigG24DBP7x4fNims2ixEatSeO4gdtGoMKLrZmanTBS+PTSlnFzoGfMuJK+
-         J81BNq39AsHg1o3+j1n/4GpTaSgoeufbhepIh7hAnN7mKH9QZGdCiXiDr3SxKMh/2SF6
-         tPUQ==
+        b=g5exdkikExbI6iLSMmCXfRmB3rDL4VBuvG/RYt4F/cWjehX42e27iN5FPHmHgblN2b
+         SU1tBaaVWLFOQqHMmg47mOp6Tht5CzpMzJoSqP5cMvsC5IXmbEToySufg8U422jiZIWn
+         7gLDJVPcMypwP1koM8LuZ00GpFWNaQO2dBgmUnGAqaBFXcSfUI9vjJOAH32hjU1waS1P
+         6WLwov8ihD7drb8c65DxS+h2MsnxR5EfZhGCLj+1FYMeP3+9mS4A36QvI1IXXQtowrNR
+         qs6DnBZFIFa6b2ejGzr3zTy5mCjKcAUq+jh0jDK68ZJp9tZfTfmsS7Nczpqfag3kmB/v
+         82Jw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=80vo3JIjnCsKn8zo158HX4vkfRXd32w7uPzzJAtLaF0=;
-        fh=RhfacSC1I2ciz9MXGjkFmdGMHSKOiI175ir81ReNRu4=;
-        b=cBEywMReG2XmHu6IiV/mhP4bbosCV6CB9ZdWXdeQkVsPaLGWm5/PvCPDn2eYx1Nd18
-         cgwfJIrBA3PSQaMEMpqn04aycCtttM8eVDg8nSiLscXlR3xjNVyEyCg61MAuP6lcCrkw
-         zLWePEJkuRWmPRyT29gEOryknbyVSVPCXjjgH4Crt8s6c9Rr+d+u4UPwUeZ7d/jg1f47
-         W+Juy5n4b61qGztmdzIoUOlYnMx3+5SgpXdoHF4LEc3oWe7jYsAYhPhfH8sL5xJ79qKX
-         5LoAwBOiAfs3ezvEt42rXYU039R2WCBVTJei0/vVFjXKC4NMLt12RnOqDfMBYEjgbmc5
-         HOeA==;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=83oOaaTreHaoFIhiDoHcddDWSjKDujW9xu9zE75la/o=;
+        fh=MCgIt3A9+cYn7ct1jKGRTY5eSC0m4Ania4/qierjXJI=;
+        b=B3cf2A82WlqbA7VnORYft6wiBL5O+VxlXw096Rs0PcB5c2iFaYRJRBrOTYzUcPPFmp
+         4dHmh9pehsjk3HMsX48+3lg9G5f5dfAMWpRP0xPs/yCtc1BApXT3hrx32nXwRwbl9gUH
+         Nf8twl90Afq533JxgdjduhGvnrarayotkDEYCv2DQsmtY/wIq3EEVht4bhxZToHLCIro
+         5a6wOLWf3CRl1Xal74+PE9Or577ybkh/k4SnIm8iTJkR8lnCHHLNQRO6IXvuocV3ms7H
+         Lov66PNRPur++NL5cHjiMrI19Ml9ILxZrZvLO9lAOMWcPMfyXbAUVJAqhXxPJcSL5t/T
+         HGZA==;
         darn=vger.kernel.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783771999; x=1784376799; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=80vo3JIjnCsKn8zo158HX4vkfRXd32w7uPzzJAtLaF0=;
-        b=gHFB0fSemSn6s4jVp/EuBtir/qlPGO8Vq2wg3sOO56WQSEm3m1wgLV+PH+YCzCwe4w
-         40XUJ8N3llKffVv3KvwlpEx0PwjFhEP4ejwfKckXHhOrs4COlZYMuCDJVCD700HVWfby
-         Wef44AYzEvkwlRh4pmvCSPrnSSb+EuoMS7xAp1fqanhd4vgQUbVFs9DMhr/aX2ve4EZi
-         XKK9VbugY1ax8izR6ls1BpqL9Fr7yUJMtkts2rZtlWUvAdEs5tvYZoRcRU9pXB0Y6W76
-         RQw5PmUpYS6rrCfKNmEtUvADgYNWM7gb8xCEbJGzjwstKv7ju7GWWD5f6bQVByQhgD9b
-         Verg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783771999; x=1784376799;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=gmail.com; s=20251104; t=1783772964; x=1784377764; darn=vger.kernel.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=80vo3JIjnCsKn8zo158HX4vkfRXd32w7uPzzJAtLaF0=;
-        b=VO2blwMCr7gE9uH/+buc7Z9oDOfmrcXb28krH9QBOBbBQeHgBcfjpBXgn1oAFosEJa
-         rI2NRWjeh/KjW2OSFMaUZ0NcN6BXHTNAyCoWFFcvtJ4wpkJlx6MtPz5t/l/bKgBbuUxh
-         RLaPSX2mhkYqiAwerdZXOWY33gWzvqyXCErRYYZ5EPepvifz8eoLIeQjaIPbsBLQUIhh
-         7YGkwShE169N+F+iztsYXggTvRMdSzSF7v8gnEGnEMRaqTSD3o3//O2B0Q44r2TJTiQQ
-         k2I3LY+UIhP2iftxgJswhMQxTmMEwq6I10xqSQnpfzsNbz/ZjyJm7/XJGeasoUi8EAFt
-         pmbQ==
-X-Forwarded-Encrypted: i=1; AHgh+RqXlVW+DtODi0zSW7/tCHUHQKsFpcZGm5K21SXs8l3QekJkYe7r/A4o21YJSLuzgc4wWqferraNdec=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxBavX0w+7VmVBCGSbxRzyXLgTms92IUf8uD7Rn562z+nvpW+cC
-	LvSnU86hgPX1Z4AQ3wynDGv9Ew8wj3bOdTvRDEty4c3e5kHZq/kNGuOBKB3H8MWmzQSTkcYt/8d
-	5cprFYMa/EyTQFNu8rV/6ch8DrjF/aqo=
-X-Gm-Gg: AfdE7clFguWOVFwAeYwTZL4YPu4O108h0WdlFcQWDSlgPj6CSatYDEAMSnuhbbhO6c8
-	tLGJtY7SObsedgA7bA7L2cuCYrLD6X2LFsMVscgK7m/zZZ3r4YWWGFoIbuqVKKZERuT1+9TPjLn
-	2NcMSB4QW1c4Em4t+Cl/QwMKaFex0N10/d7iyrXsozS1rMhQ2qU4PR7lfwrOypfSwh3rnUbliHk
-	5V2YZJ5TI6WzdxJ7apuBHxXAJprAmZrbaMDFQ5do+bMKHZp83K/nNNElveS0QYUKL2fIJCVIQ4q
-	Zp8dqF5DHi+5d7hkG+fIaW4v+v5z66oxMSLxanxCbPI08/zUgyyNVnqbqF252cKXFIQq/md9XYC
-	Rizj0csLVhPxA
-X-Received: by 2002:a17:90b:4984:b0:380:9cd1:d985 with SMTP id
- 98e67ed59e1d1-38dc7c111a8mr1909664a91.6.1783771998816; Sat, 11 Jul 2026
- 05:13:18 -0700 (PDT)
+        bh=83oOaaTreHaoFIhiDoHcddDWSjKDujW9xu9zE75la/o=;
+        b=KhVAsJnPccLQtlT6BW0pZOI6M33Kq5peNIi+brKc9mXt9N7FYBNxZiwumx0gXF4fIo
+         sAO6rzobNlVEoIHs9Nr5Ud7Pqw06Wde6xz1P1K2kPK3YZyfFF/QcLy13zXrkpb8v6zCE
+         wa1FryKea8CiALQ/FW+b66R5gxrKvaJKvQ5Z1BuPJv6JghHzUORCw6XB09TKL/k9s/1r
+         i0N8avEwa/AHjCgBU1q0AZKoEW1/H84E5Jz1kEDp/nKMXzLRh+UDioLCoc7tRKEjgsZq
+         3/2AvXjdSUp8fEKFVNQm320lqiCV3PxeKpLmb2suZXyxqugmSpsqzHjcuuYpicZfDTox
+         leNw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783772964; x=1784377764;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=83oOaaTreHaoFIhiDoHcddDWSjKDujW9xu9zE75la/o=;
+        b=TmTGPiXgIubn60LoX/s/4QHZtb9RfOVoKgrZIIH+rKfSAb3B+dV6xkYC6EgRXgEA4T
+         eiM4mg5sEN5FXyK27XL8kEiET39iUdim9pSmR/y6lGhD6L5T7OLIWDigYqQvMsTH52ar
+         Q4MlzPeDA73ELTKFOFFVnSwQ9K4rkMy+BL8aFzetzExxtIDsATV9uKDjUov9NJ0n8SIw
+         E0JbhLPYUaJVHU4yhyX9O7JbS1yDkp/wZOHPAsmG1oD/W130CkfCr6LkAC0bgEQ0fDc+
+         AfOOhUUduiTJ9YcZvNtmQ/q9YBgGToFfPJtuLv3PjG1rnI63HELdauM2+/w7U7N4h9Jj
+         g6hQ==
+X-Forwarded-Encrypted: i=1; AHgh+Ro4cnyNoG5YQ4JPySCxu7ifW+m8pKGd5dqLRXJjFS2cOzq1qSeQ18H3sAGfidCMfmO/6ZtenpYMZbo=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzenW1cKOUWuRDR3Qa/kKNaKZQvjy4NVZGvB8cd6siOry39QS+V
+	E8UnqXXuB2tXp8EtGFZ5rkLdmNvd82fHV2VdVKXxrfYZq9+m2FC5eP2R1gN4P6jK7VfVM0vPbgv
+	EbkFbnJzYSgXNRH6eWBTaA8S96Mj/rNc=
+X-Gm-Gg: AfdE7cnCtWWZS57paCUvmrAbx85U80Uqfy0NTnxXj3OVay88mcvooeSH8Gv3aG6iIu0
+	bb6edQlbvBb3DCJ0k049i66b0lPv7VwAGb2zklaTskuU2C05PvYSSIePYPcq6GCqIfX3aNxjn6/
+	30RevxyEWxNWP2/W4IDoiBOn+xZSll8oEe3XeTkdwOrUjuvL6eancAZTjheEqvNRxzfYGNwWvx3
+	Mjk0swdUGm1IIvQ7HnnHDKjMfCFBejxK6uUIlpY1IBlpPG6dlNc+blamegBUZEhNtGgMAml3D7Q
+	VTuR12xJe6lXAQq+1Qk+6BiSMSWBEzN+mfbZlzTKmgDfC24lJ2kPTMV02oX8yyI=
+X-Received: by 2002:a05:6402:3512:b0:699:728e:48b9 with SMTP id
+ 4fb4d7f45d1cf-69c5edb9cb3mr1210325a12.0.1783772963919; Sat, 11 Jul 2026
+ 05:29:23 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260706061928.66713-1-byungchul@sk.com> <20260706061928.66713-40-byungchul@sk.com>
-In-Reply-To: <20260706061928.66713-40-byungchul@sk.com>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Sat, 11 Jul 2026 14:13:05 +0200
-X-Gm-Features: AUfX_mwWK6GqFCLIKCx9ivosmcno3i0b64L6R15FyNFXSSwj0HKdZlNefQKWcgc
-Message-ID: <CANiq72kEo=bGcHNaSA9JZhv4iuE+YDvu0kN+Z7aopVp3=2C+Wg@mail.gmail.com>
-Subject: Re: [PATCH v19 39/40] rust: completion: Add __rust_helper to rust_helper_wait_for_completion()
-To: Byungchul Park <byungchul@sk.com>, Gary Guo <gary@garyguo.net>
-Cc: linux-kernel@vger.kernel.org, max.byungchul.park@gmail.com, 
-	kernel_team@skhynix.com, torvalds@linux-foundation.org, 
-	damien.lemoal@opensource.wdc.com, linux-ide@vger.kernel.org, 
-	adilger.kernel@dilger.ca, linux-ext4@vger.kernel.org, mingo@redhat.com, 
-	peterz@infradead.org, will@kernel.org, tglx@linutronix.de, 
-	rostedt@goodmis.org, joel@joelfernandes.org, sashal@kernel.org, 
-	daniel.vetter@ffwll.ch, duyuyang@gmail.com, johannes.berg@intel.com, 
-	tj@kernel.org, tytso@mit.edu, willy@infradead.org, david@fromorbit.com, 
-	amir73il@gmail.com, gregkh@linuxfoundation.org, kernel-team@lge.com, 
-	linux-mm@kvack.org, akpm@linux-foundation.org, mhocko@kernel.org, 
-	minchan@kernel.org, hannes@cmpxchg.org, vdavydov.dev@gmail.com, sj@kernel.org, 
-	jglisse@redhat.com, dennis@kernel.org, cl@linux.com, penberg@kernel.org, 
-	rientjes@google.com, vbabka@suse.cz, ngupta@vflare.org, 
-	linux-block@vger.kernel.org, josef@toxicpanda.com, 
-	linux-fsdevel@vger.kernel.org, jack@suse.cz, jlayton@kernel.org, 
-	dan.j.williams@intel.com, hch@infradead.org, djwong@kernel.org, 
-	dri-devel@lists.freedesktop.org, rodrigosiqueiramelo@gmail.com, 
-	melissa.srw@gmail.com, hamohammed.sa@gmail.com, harry.yoo@oracle.com, 
-	chris.p.wilson@intel.com, gwan-gyeong.mun@intel.com, boqun.feng@gmail.com, 
-	longman@redhat.com, yunseong.kim@ericsson.com, ysk@kzalloc.com, 
-	yeoreum.yun@arm.com, netdev@vger.kernel.org, matthew.brost@intel.com, 
-	her0gyugyu@gmail.com, corbet@lwn.net, catalin.marinas@arm.com, bp@alien8.de, 
-	x86@kernel.org, hpa@zytor.com, luto@kernel.org, sumit.semwal@linaro.org, 
-	gustavo@padovan.org, christian.koenig@amd.com, andi.shyti@kernel.org, 
-	arnd@arndb.de, lorenzo.stoakes@oracle.com, Liam.Howlett@oracle.com, 
-	rppt@kernel.org, surenb@google.com, mcgrof@kernel.org, petr.pavlu@suse.com, 
-	da.gomez@kernel.org, samitolvanen@google.com, paulmck@kernel.org, 
-	frederic@kernel.org, neeraj.upadhyay@kernel.org, joelagnelf@nvidia.com, 
-	josh@joshtriplett.org, urezki@gmail.com, mathieu.desnoyers@efficios.com, 
-	jiangshanlai@gmail.com, qiang.zhang@linux.dev, juri.lelli@redhat.com, 
-	vincent.guittot@linaro.org, dietmar.eggemann@arm.com, bsegall@google.com, 
-	mgorman@suse.de, vschneid@redhat.com, chuck.lever@oracle.com, neil@brown.name, 
-	okorniev@redhat.com, Dai.Ngo@oracle.com, tom@talpey.com, trondmy@kernel.org, 
-	anna@kernel.org, kees@kernel.org, bigeasy@linutronix.de, clrkwllms@kernel.org, 
-	mark.rutland@arm.com, ada.coupriediaz@arm.com, kristina.martsenko@arm.com, 
-	wangkefeng.wang@huawei.com, broonie@kernel.org, kevin.brodsky@arm.com, 
-	dwmw@amazon.co.uk, shakeel.butt@linux.dev, ast@kernel.org, ziy@nvidia.com, 
-	yuzhao@google.com, baolin.wang@linux.alibaba.com, usamaarif642@gmail.com, 
-	joel.granados@kernel.org, richard.weiyang@gmail.com, geert+renesas@glider.be, 
-	tim.c.chen@linux.intel.com, linux@treblig.org, 
-	alexander.shishkin@linux.intel.com, lillian@star-ark.net, 
-	chenhuacai@kernel.org, francesco@valla.it, guoweikang.kernel@gmail.com, 
-	link@vivo.com, jpoimboe@kernel.org, masahiroy@kernel.org, brauner@kernel.org, 
-	thomas.weissschuh@linutronix.de, oleg@redhat.com, mjguzik@gmail.com, 
-	andrii@kernel.org, wangfushuai@baidu.com, linux-doc@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, 
-	linaro-mm-sig@lists.linaro.org, linux-i2c@vger.kernel.org, 
-	linux-arch@vger.kernel.org, linux-modules@vger.kernel.org, 
-	rcu@vger.kernel.org, linux-nfs@vger.kernel.org, 
-	linux-rt-devel@lists.linux.dev, 2407018371@qq.com, dakr@kernel.org, 
-	neilb@ownmail.net, bagasdotme@gmail.com, wsa+renesas@sang-engineering.com, 
-	dave.hansen@intel.com, geert@linux-m68k.org, ojeda@kernel.org, 
-	alex.gaynor@gmail.com, bjorn3_gh@protonmail.com, lossin@kernel.org, 
-	a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu, 
-	rust-for-linux@vger.kernel.org
+References: <20260707181957.433213175@kernel.org>
+In-Reply-To: <20260707181957.433213175@kernel.org>
+From: Magnus Lindholm <linmag7@gmail.com>
+Date: Sat, 11 Jul 2026 14:29:12 +0200
+X-Gm-Features: AUfX_mzOlRB8ana7x7qPQc4frMU9J060tNH0Z2GPCNvL1LYqDKQBjM-XzHbrvno
+Message-ID: <CA+=Fv5RpgQ-UeGAT+VcLufte2gAp0H=J5GqZEFR_SuQsmnzy=A@mail.gmail.com>
+Subject: Re: [patch 00/18] entry: Consolidate and rework syscall entry handling
+To: Thomas Gleixner <tglx@kernel.org>
+Cc: LKML <linux-kernel@vger.kernel.org>, Peter Zijlstra <peterz@infradead.org>, 
+	Michael Ellerman <mpe@ellerman.id.au>, Shrikanth Hegde <sshegde@linux.ibm.com>, 
+	linuxppc-dev@lists.ozlabs.org, Kees Cook <kees@kernel.org>, 
+	Huacai Chen <chenhuacai@kernel.org>, loongarch@lists.linux.dev, 
+	Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, linux-riscv@lists.infradead.org, 
+	Sven Schnelle <svens@linux.ibm.com>, linux-s390@vger.kernel.org, x86@kernel.org, 
+	Mark Rutland <mark.rutland@arm.com>, Jinjie Ruan <ruanjinjie@huawei.com>, 
+	Andy Lutomirski <luto@kernel.org>, Oleg Nesterov <oleg@redhat.com>, 
+	Richard Henderson <richard.henderson@linaro.org>, Russell King <linux@armlinux.org.uk>, 
+	Catalin Marinas <catalin.marinas@arm.com>, Guo Ren <guoren@kernel.org>, 
+	Geert Uytterhoeven <geert@linux-m68k.org>, Thomas Bogendoerfer <tsbogend@alpha.franken.de>, 
+	Helge Deller <deller@gmx.de>, Yoshinori Sato <ysato@users.sourceforge.jp>, 
+	Richard Weinberger <richard@nod.at>, Chris Zankel <chris@zankel.net>, linux-arm-kernel@lists.infradead.org, 
+	linux-alpha@vger.kernel.org, linux-csky@vger.kernel.org, 
+	linux-m68k@lists.linux-m68k.org, linux-mips@vger.kernel.org, 
+	linux-parisc@vger.kernel.org, linux-sh@vger.kernel.org, 
+	linux-um@lists.infradead.org, Arnd Bergmann <arnd@arndb.de>, 
+	Vineet Gupta <vgupta@kernel.org>, Will Deacon <will@kernel.org>, Brian Cain <bcain@kernel.org>, 
+	Michal Simek <monstr@monstr.eu>, Dinh Nguyen <dinguyen@kernel.org>, 
+	"David S. Miller" <davem@davemloft.net>, Andreas Larsson <andreas@gaisler.com>, 
+	linux-snps-arc@lists.infradead.org, linux-hexagon@vger.kernel.org, 
+	linux-openrisc@vger.kernel.org, sparclinux@vger.kernel.org, 
+	linux-arch@vger.kernel.org, =?UTF-8?Q?Michal_Such=C3=A1nek?= <msuchanek@suse.de>, 
+	Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-96414-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:byungchul@sk.com,m:gary@garyguo.net,m:linux-kernel@vger.kernel.org,m:max.byungchul.park@gmail.com,m:kernel_team@skhynix.com,m:torvalds@linux-foundation.org,m:damien.lemoal@opensource.wdc.com,m:linux-ide@vger.kernel.org,m:adilger.kernel@dilger.ca,m:linux-ext4@vger.kernel.org,m:mingo@redhat.com,m:peterz@infradead.org,m:will@kernel.org,m:tglx@linutronix.de,m:rostedt@goodmis.org,m:joel@joelfernandes.org,m:sashal@kernel.org,m:daniel.vetter@ffwll.ch,m:duyuyang@gmail.com,m:johannes.berg@intel.com,m:tj@kernel.org,m:tytso@mit.edu,m:willy@infradead.org,m:david@fromorbit.com,m:amir73il@gmail.com,m:gregkh@linuxfoundation.org,m:kernel-team@lge.com,m:linux-mm@kvack.org,m:akpm@linux-foundation.org,m:mhocko@kernel.org,m:minchan@kernel.org,m:hannes@cmpxchg.org,m:vdavydov.dev@gmail.com,m:sj@kernel.org,m:jglisse@redhat.com,m:dennis@kernel.org,m:cl@linux.com,m:penberg@kernel.org,m:rientjes@google.com,m:vbabka@suse.cz,m:ngupta@vflare.org,m:linux-block@vger.kernel.org,m:josef@to
- xicpanda.com,m:linux-fsdevel@vger.kernel.org,m:jack@suse.cz,m:jlayton@kernel.org,m:dan.j.williams@intel.com,m:hch@infradead.org,m:djwong@kernel.org,m:dri-devel@lists.freedesktop.org,m:rodrigosiqueiramelo@gmail.com,m:melissa.srw@gmail.com,m:hamohammed.sa@gmail.com,m:harry.yoo@oracle.com,m:chris.p.wilson@intel.com,m:gwan-gyeong.mun@intel.com,m:boqun.feng@gmail.com,m:longman@redhat.com,m:yunseong.kim@ericsson.com,m:ysk@kzalloc.com,m:yeoreum.yun@arm.com,m:netdev@vger.kernel.org,m:matthew.brost@intel.com,m:her0gyugyu@gmail.com,m:corbet@lwn.net,m:catalin.marinas@arm.com,m:bp@alien8.de,m:x86@kernel.org,m:hpa@zytor.com,m:luto@kernel.org,m:sumit.semwal@linaro.org,m:gustavo@padovan.org,m:christian.koenig@amd.com,m:andi.shyti@kernel.org,m:arnd@arndb.de,m:lorenzo.stoakes@oracle.com,m:Liam.Howlett@oracle.com,m:rppt@kernel.org,m:surenb@google.com,m:mcgrof@kernel.org,m:petr.pavlu@suse.com,m:da.gomez@kernel.org,m:samitolvanen@google.com,m:paulmck@kernel.org,m:frederic@kernel.org,m:neeraj.upadhyay@k
- ernel.org,m:joelagnelf@nvidia.com,m:josh@joshtriplett.org,m:urezki@gmail.com,m:mathieu.desnoyers@efficios.com,m:jiangshanlai@gmail.com,m:qiang.zhang@linux.dev,m:juri.lelli@redhat.com,m:vincent.guittot@linaro.org,m:dietmar.eggemann@arm.com,m:bsegall@google.com,m:mgorman@suse.de,m:vschneid@redhat.com,m:chuck.lever@oracle.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[miguelojedasandonis@gmail.com,linux-doc@vger.kernel.org];
 	TO_DN_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com,skhynix.com,linux-foundation.org,opensource.wdc.com,dilger.ca,redhat.com,infradead.org,kernel.org,linutronix.de,goodmis.org,joelfernandes.org,ffwll.ch,intel.com,mit.edu,fromorbit.com,linuxfoundation.org,lge.com,kvack.org,cmpxchg.org,linux.com,google.com,suse.cz,vflare.org,toxicpanda.com,lists.freedesktop.org,oracle.com,ericsson.com,kzalloc.com,arm.com,lwn.net,alien8.de,zytor.com,linaro.org,padovan.org,amd.com,arndb.de,suse.com,nvidia.com,joshtriplett.org,efficios.com,linux.dev,suse.de,brown.name,talpey.com,huawei.com,amazon.co.uk,linux.alibaba.com,glider.be,linux.intel.com,treblig.org,star-ark.net,valla.it,vivo.com,baidu.com,lists.infradead.org,lists.linaro.org,lists.linux.dev,qq.com,ownmail.net,sang-engineering.com,linux-m68k.org,protonmail.com,umich.edu];
 	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-96415-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:tglx@kernel.org,m:linux-kernel@vger.kernel.org,m:peterz@infradead.org,m:mpe@ellerman.id.au,m:sshegde@linux.ibm.com,m:linuxppc-dev@lists.ozlabs.org,m:kees@kernel.org,m:chenhuacai@kernel.org,m:loongarch@lists.linux.dev,m:pjw@kernel.org,m:palmer@dabbelt.com,m:linux-riscv@lists.infradead.org,m:svens@linux.ibm.com,m:linux-s390@vger.kernel.org,m:x86@kernel.org,m:mark.rutland@arm.com,m:ruanjinjie@huawei.com,m:luto@kernel.org,m:oleg@redhat.com,m:richard.henderson@linaro.org,m:linux@armlinux.org.uk,m:catalin.marinas@arm.com,m:guoren@kernel.org,m:geert@linux-m68k.org,m:tsbogend@alpha.franken.de,m:deller@gmx.de,m:ysato@users.sourceforge.jp,m:richard@nod.at,m:chris@zankel.net,m:linux-arm-kernel@lists.infradead.org,m:linux-alpha@vger.kernel.org,m:linux-csky@vger.kernel.org,m:linux-m68k@lists.linux-m68k.org,m:linux-mips@vger.kernel.org,m:linux-parisc@vger.kernel.org,m:linux-sh@vger.kernel.org,m:linux-um@lists.infradead.org,m:arnd@arndb.de,m:vgupta@kernel.org,m:will@kerne
+ l.org,m:bcain@kernel.org,m:monstr@monstr.eu,m:dinguyen@kernel.org,m:davem@davemloft.net,m:andreas@gaisler.com,m:linux-snps-arc@lists.infradead.org,m:linux-hexagon@vger.kernel.org,m:linux-openrisc@vger.kernel.org,m:sparclinux@vger.kernel.org,m:linux-arch@vger.kernel.org,m:msuchanek@suse.de,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[linmag7@gmail.com,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[vger.kernel.org,infradead.org,ellerman.id.au,linux.ibm.com,lists.ozlabs.org,kernel.org,lists.linux.dev,dabbelt.com,lists.infradead.org,arm.com,huawei.com,redhat.com,linaro.org,armlinux.org.uk,linux-m68k.org,alpha.franken.de,gmx.de,users.sourceforge.jp,nod.at,zankel.net,lists.linux-m68k.org,arndb.de,monstr.eu,davemloft.net,gaisler.com,suse.de,lwn.net];
 	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[165];
+	RCPT_COUNT_GT_50(0.00)[53];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[miguelojedasandonis@gmail.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[linmag7@gmail.com,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[gmail.com:+];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,renesas];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	MID_RHS_MATCH_FROMTLD(0.00)[];
 	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,mail.gmail.com:mid]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp,mail.gmail.com:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 7C8CF74178B
+X-Rspamd-Queue-Id: 937EE741829
 
-On Mon, Jul 6, 2026 at 8:22=E2=80=AFAM Byungchul Park <byungchul@sk.com> wr=
-ote:
 >
-> This is needed to inline these helpers into Rust code, which is required
-> for DEPT to play with wait_for_completion().
+> With that all architectures using the generic syscall entry code follow the
+> same scheme, apply stack randomization at the correct and earliest possible
+> place and skip syscall processing depending on the boolean return value of
+> syscall_enter_from_user_mode[_work]().
 >
-> Signed-off-by: Byungchul Park <byungchul@sk.com>
+> There should be no functional changes, at least there are none intended.
+>
+> The resulting text size for the syscall entry code on x8664 is slightly
+> smaller than before these changes.
+>
+> Testing syscall heavy workloads and micro benchmarks shows a small
+> performance gain for the general rework, but the last patch, which changes
+> the logic to be more understandable has no measurable impact in either
+> direction.
+>
+> The series applies on Linus tree and is also available from git:
+>
+>         git://git.kernel.org/pub/scm/linux/kernel/git/tglx/devel.git entry-rework-v1
+>
 
-Apart from what Gary said -- why did you need to do this in a separate
-patch in the same series?
 
-Cheers,
-Miguel
+Hi Thomas,
+
+Thanks for the series.
+
+I have an Alpha GENERIC_ENTRY series posted and planned for the next
+merge window:
+
+https://lore.kernel.org/linux-alpha/20260706170019.2941459-1-linmag7@gmail.com/T/#t
+
+Only its final patch intersects with this work.
+
+That patch removes Alpha's architecture-specific syscall_trace_enter()
+and syscall_trace_leave() implementations, so the Alpha changes in
+patches 11 and 12 will disappear once the GENERIC_ENTRY conversion is
+applied.
+
+It also currently uses syscall_enter_from_user_mode(), so I will need to
+rebase it onto the new entry interface introduced by this series. I
+expect the integration to be confined to the final GENERIC_ENTRY patch.
+
+The Alpha-specific changes in patches 11 and 12 look correct to me.
+
+Acked-by: Magnus Lindholm <linmag7@gmail.com>
 
