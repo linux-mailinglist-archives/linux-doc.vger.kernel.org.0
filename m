@@ -1,183 +1,160 @@
-Return-Path: <linux-doc+bounces-96419-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96420-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id bj0AIepVUmoTOgMAu9opvQ
-	(envelope-from <linux-doc+bounces-96419-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 11 Jul 2026 16:40:42 +0200
+	id z66+KsZkUmoRPQMAu9opvQ
+	(envelope-from <linux-doc+bounces-96420-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 11 Jul 2026 17:44:06 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id E7C2A741CEB
-	for <lists+linux-doc@lfdr.de>; Sat, 11 Jul 2026 16:40:41 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 31E94742069
+	for <lists+linux-doc@lfdr.de>; Sat, 11 Jul 2026 17:44:06 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=baylibre.com header.s=google header.b=MPtg9XWD;
-	dmarc=none;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96419-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-96419-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=ZIAqARcK;
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96420-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96420-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id DD6B3300B98B
-	for <lists+linux-doc@lfdr.de>; Sat, 11 Jul 2026 14:40:40 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 079273013A84
+	for <lists+linux-doc@lfdr.de>; Sat, 11 Jul 2026 15:44:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B286D2D8DA8;
-	Sat, 11 Jul 2026 14:40:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 73311374E43;
+	Sat, 11 Jul 2026 15:44:01 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oi1-f174.google.com (mail-oi1-f174.google.com [209.85.167.174])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D408E2C21E6
-	for <linux-doc@vger.kernel.org>; Sat, 11 Jul 2026 14:40:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4EA1D31ED83;
+	Sat, 11 Jul 2026 15:44:00 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783780837; cv=none; b=QKp5p3WA0jl2L/IfFl9n5Unsi+3440+8w6Li/gRJO6gOK3X9W4fFlqXRpYkvksB4LQ1TYt/tt1VhqydDasS/eKEPjyFBb/zzVuMpZ98+5S+Bk9OPQfU/VoL33GEHXdXcAZpIAHbgIrdCd8MWo0ZZop8CkxwNrBkzE7TUH2cASjQ=
+	t=1783784641; cv=none; b=jOzUzj/co6awXfddL5QCPA2iVaK1tPJxx03hPfTQjniDEr7L+2VVoOVptwMeb1GRFegfHAhvVb2ePNuJsb4jnNaldEt0O7ehu90s55nBhnMpx+qJP4Gd2oZdRZszWhcLFL7v9sTBU3Tc2nDaSYlHfHxxQbs3KaJiGvYufLuFWGY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783780837; c=relaxed/simple;
-	bh=9tEQngaiXFQ6p90XQLZu9+Hlb+ftUsJNMXOIDlcHt1Y=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=k6/bxiyZIGsupzLex/5p+pOXQFabNFpd3q9gHD5uLTplZTqTkgIWx2LPeVG+gmTViWzJ94/K5Nbs3vkORZA+TbQYFdII/XILNToc2AKz6hoXfVi7HHcExgdoYxZ1tvrOsrhw3CJ9+tPtoaeax13z41LCTdS3Ktjrsyd3tej0Fg8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=MPtg9XWD; arc=none smtp.client-ip=209.85.167.174
-Received: by mail-oi1-f174.google.com with SMTP id 5614622812f47-4a427e628a9so457530b6e.0
-        for <linux-doc@vger.kernel.org>; Sat, 11 Jul 2026 07:40:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1783780835; x=1784385635; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=1w9ieWr9XroIO1XxDfVO0TVOPppCJVnMpU4FYzzgrNE=;
-        b=MPtg9XWDV0VpnvaPqQpCt8aW3ICQydJvTC5FuGx3Myn7HWv9DC8F4C0Vdfq85mRkiW
-         CNmQCWqI6xw0x+8VvmJbCJcvwxu8DhPb5tj76Me3y2u/GCR23e1Nd9fAlwhbz/moMz/I
-         H+h1mfk0KTieAQl+TSLOoZjajaDMoIhy0kLZsEaRp1Fi8AQoHXHcvFG8kAoCgWFaAPu5
-         F3AFt81ANdpY6p5T5FP2QpTD6h5j+BbkwNMOvYYvf5/GN5Rjukk1XXJu0yxPo7WR1a4z
-         a2q+HS74apXBF+mohkocSRmtgmCAeBDOcBMKKaCtNsVdg88TXEVxL+4prGYcDVQM7+Ul
-         o4Nw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783780835; x=1784385635;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=1w9ieWr9XroIO1XxDfVO0TVOPppCJVnMpU4FYzzgrNE=;
-        b=s72rXzs53ubAx4S9A11G9FfY78/aPQRVn8NfHerIdoRFg+ghIAe985cCzbkxjYtm8X
-         dcreTQ12nsu2dyZPT3tBID5VH0SKOmY8GMoKBbcTmqxystwDsEkdPWGB4azI+gPyIRD3
-         sHfs/W1LbdRNNWRb/eHBLcaBUKQyojpaxiorTspTFzmWe21rtcQHX/kSnsqX9fIE/zcw
-         t3lZDDoBSKBo+StLystS7JAFt/1x5XbS30fSfJPXdy++tvH9meMKSqAZZVoQMcvYF6I4
-         3Ho2mjGX7qwuPqu4m66XCajBorTxcDNcYsZJndFZ7YyBmc1Lx2Yv1jPjljl1ZZrJ00Xl
-         AbIQ==
-X-Forwarded-Encrypted: i=1; AFNElJ9TRZbRiL0LLJJo+FotdZUQMU8W0TQtV3r9roWpAuB7Hi6ybqVJuU+QH+pGCGe1R55SQBIOmYdbW4M=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyAzhx7t7358IEdtiyC/R680zp6hbu8D/n5oTgiQTI1ojlMpF7W
-	GE2oMNPdqf1ywLfTS/sG4lxxSJ55uyWKNJkgyq3pGHP+YXdmRUImaWjm/UOjSXG5HQT7oMvZhdh
-	5DP+Q
-X-Gm-Gg: AfdE7cmbghkipg94boy65rQT2+FZBdg2ZiqVPlEsztqvzyR4OUhXo0eZ/gm3bIdp9cH
-	XUPaaPKNr9t+z33duvBYes5zRII6+fsLg2lSPaO3+BcS+ugP34Nfo9MyYc3jlm1MN56voXRWi/6
-	iiHMFmfJKbw1PfsmRRO5L2Y3DCQ8wUcXuu7tpKYZ/01wllpMdbAd6FX767ePvxgqNYnMOTSsd4G
-	6rN9SjrHMDRz9FkRtAXoA7W3hkAzgndZQSxbQlP6G5vMge3w0upkxAqAP9RKupGH1JQdUvOdt5c
-	eHFEVTOXCPQazVeEryL/mptDdXUubRGTvCALdqd1rdM7T/xctbn+8W96ZjyD20q2yxuUQg5+MaZ
-	UvnqY5VPOl0qO8Ad3Jw6+r3TOmfwUPXQpM0dTW9/ZoGhcd/YTVLMJefY4qlDEg783RKdpd8PQ3G
-	nM2jSwZ+qli3EtrXUjn5FCsumsuG1MpiRawRJD6KzL0o1G4s1ywp0Xe2H9NVpk//A=
-X-Received: by 2002:a05:6808:178f:b0:495:da89:c578 with SMTP id 5614622812f47-4a42ace7138mr2433350b6e.9.1783780834868;
-        Sat, 11 Jul 2026 07:40:34 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:a950:74e5:81f2:8c89? ([2600:8803:e7e4:500:a950:74e5:81f2:8c89])
-        by smtp.gmail.com with ESMTPSA id 5614622812f47-4a1afbf92b1sm7672879b6e.10.2026.07.11.07.40.32
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 11 Jul 2026 07:40:33 -0700 (PDT)
-Message-ID: <a96caaaf-5cac-4bc0-9e74-e48b6fe0afc1@baylibre.com>
-Date: Sat, 11 Jul 2026 09:40:32 -0500
+	s=arc-20240116; t=1783784641; c=relaxed/simple;
+	bh=mhFa22vO3qS0/hStH0WuAGzS0XraLdV3PN7ZfZVHf/Q=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=KLhHf9fuoDse9xNYxIKvWOP1814OGiy3mJwpevelF8fkP3+S7YZKXWG2J63cuelCPikYXezm2h3M1SuTXLYbyCE5L1Sk0bVePmQBT1sTonkegD3wlX4gpqFgja+WbQzIP3cSI6ubjSnAPqgOEAzG4kRMIF+lXcj/VnU3aoBXdM0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZIAqARcK; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C7C6E1F000E9;
+	Sat, 11 Jul 2026 15:43:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783784639;
+	bh=+Hx51w8dFEncFI58huRfM4bO4YcYrbYiW5us+lxhCn0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=ZIAqARcKP8hujblE64oSTCkc0UZEMo26D7eVRtr0xDhcXILGxalvRvFmMtdghf/bI
+	 q7qQctgHJCL6WCDEnzfZDVOe0Aectw75OQfsY1G5tto5Q0WSLIy0Frl6snpWxroSwy
+	 Swdl/NBz6s0ZYnNMaB8U5aDNYLrOouKqs+25wP14l7jNzBb3xWc/37FYla9s3u4MAZ
+	 g7PRUdo+J80jx0RVD8zD8zo44CNIR3crgyrCUDjCQsEMxzt/PBhDbBoNShaK1xBH/9
+	 DWdmt+dD+oobnlbRjWzj0rOnAtXSOlOmDsBsDGjFIetPZEjlaem3yegxLO9pjx4qXk
+	 5e/HWkVwggiMg==
+Date: Sat, 11 Jul 2026 17:43:56 +0200
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, Eugen Hristev <ehristev@kernel.org>, 
+	Arnd Bergmann <arnd@arndb.de>, Dennis Zhou <dennis@kernel.org>, Tejun Heo <tj@kernel.org>, 
+	Christoph Lameter <cl@gentwo.org>, Andrew Morton <akpm@linux-foundation.org>, 
+	Thomas Gleixner <tglx@kernel.org>, Peter Zijlstra <peterz@infradead.org>, 
+	Anna-Maria Behnsen <anna-maria@linutronix.de>, Frederic Weisbecker <frederic@kernel.org>, 
+	John Stultz <jstultz@google.com>, Stephen Boyd <sboyd@kernel.org>, Kees Cook <kees@kernel.org>, 
+	Ingo Molnar <mingo@redhat.com>, Juri Lelli <juri.lelli@redhat.com>, 
+	Vincent Guittot <vincent.guittot@linaro.org>, Dietmar Eggemann <dietmar.eggemann@arm.com>, 
+	Steven Rostedt <rostedt@goodmis.org>, Ben Segall <bsegall@google.com>, Mel Gorman <mgorman@suse.de>, 
+	Valentin Schneider <vschneid@redhat.com>, K Prateek Nayak <kprateek.nayak@amd.com>, 
+	David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>, 
+	"Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>, 
+	Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
+	Michal Hocko <mhocko@suse.com>, Brendan Jackman <jackmanb@google.com>, 
+	Johannes Weiner <hannes@cmpxchg.org>, Zi Yan <ziy@nvidia.com>, Chris Li <chrisl@kernel.org>, 
+	Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>, 
+	Nhat Pham <nphamcs@gmail.com>, Baoquan He <baoquan.he@linux.dev>, 
+	Barry Song <baohua@kernel.org>, Youngjun Park <youngjun.park@lge.com>, 
+	Petr Mladek <pmladek@suse.com>, John Ogness <john.ogness@linutronix.de>, 
+	Sergey Senozhatsky <senozhatsky@chromium.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Mathieu Poirier <mathieu.poirier@linaro.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Saravana Kannan <saravanak@kernel.org>, 
+	workflows@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-arch@vger.kernel.org, linux-mm@kvack.org, linux-arm-msm@vger.kernel.org, 
+	linux-remoteproc@vger.kernel.org, devicetree@vger.kernel.org
+Subject: Re: [PATCH v3 25/26] dt-bindings: reserved-memory: Add Google Kinfo
+ Pixel reserved memory
+Message-ID: <20260711-tested-elite-dingo-93efc8@quoll>
+References: <20260708-meminspect-v3-v3-0-7aa5a0a74d5c@oss.qualcomm.com>
+ <20260708-meminspect-v3-v3-25-7aa5a0a74d5c@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/6] dt-bindings: iio: adc: Add AD7768
-To: Jonathan Cameron <jic23@kernel.org>
-Cc: Janani Sunil <janani.sunil@analog.com>, =?UTF-8?Q?Nuno_S=C3=A1?=
- <nuno.sa@analog.com>, Michael Hennerich <Michael.Hennerich@analog.com>,
- Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Olivier Moysan <olivier.moysan@foss.st.com>,
- Philipp Zabel <p.zabel@pengutronix.de>, Linus Walleij <linusw@kernel.org>,
- Bartosz Golaszewski <brgl@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>, linux@analog.com,
- linux-iio@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-gpio@vger.kernel.org,
- linux-doc@vger.kernel.org, jananisunil.dev@gmail.com
-References: <20260709-ad7768-driver-v1-0-44e1194fd96a@analog.com>
- <20260709-ad7768-driver-v1-1-44e1194fd96a@analog.com>
- <36df7c4f-82ea-4ed5-a4f9-3a29c75dc99a@baylibre.com>
- <20260710013322.595f8ee4@jic23-huawei>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260710013322.595f8ee4@jic23-huawei>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260708-meminspect-v3-v3-25-7aa5a0a74d5c@oss.qualcomm.com>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.16 / 15.00];
+X-Spamd-Result: default: False [-3.16 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[baylibre.com:s=google];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-96419-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:jic23@kernel.org,m:janani.sunil@analog.com,m:nuno.sa@analog.com,m:Michael.Hennerich@analog.com,m:andy@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:olivier.moysan@foss.st.com,m:p.zabel@pengutronix.de,m:linusw@kernel.org,m:brgl@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux@analog.com,m:linux-iio@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-gpio@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jananisunil.dev@gmail.com,m:krzk@kernel.org,m:conor@kernel.org,m:jananisunildev@gmail.com,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-96420-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	DMARC_NA(0.00)[baylibre.com];
+	FORGED_RECIPIENTS(0.00)[m:mukesh.ojha@oss.qualcomm.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:ehristev@kernel.org,m:arnd@arndb.de,m:dennis@kernel.org,m:tj@kernel.org,m:cl@gentwo.org,m:akpm@linux-foundation.org,m:tglx@kernel.org,m:peterz@infradead.org,m:anna-maria@linutronix.de,m:frederic@kernel.org,m:jstultz@google.com,m:sboyd@kernel.org,m:kees@kernel.org,m:mingo@redhat.com,m:juri.lelli@redhat.com,m:vincent.guittot@linaro.org,m:dietmar.eggemann@arm.com,m:rostedt@goodmis.org,m:bsegall@google.com,m:mgorman@suse.de,m:vschneid@redhat.com,m:kprateek.nayak@amd.com,m:david@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:jackmanb@google.com,m:hannes@cmpxchg.org,m:ziy@nvidia.com,m:chrisl@kernel.org,m:kasong@tencent.com,m:shikemeng@huaweicloud.com,m:nphamcs@gmail.com,m:baoquan.he@linux.dev,m:baohua@kernel.org,m:youngjun.park@lge.com,m:pmladek@suse.com,m:john.ogness@linutronix.de,m:senozhatsky@chromium.org,m
+ :andersson@kernel.org,m:mathieu.poirier@linaro.org,m:konradybcio@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:saravanak@kernel.org,m:workflows@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-arch@vger.kernel.org,m:linux-mm@kvack.org,m:linux-arm-msm@vger.kernel.org,m:linux-remoteproc@vger.kernel.org,m:devicetree@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[krzk@kernel.org,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[analog.com,kernel.org,foss.st.com,pengutronix.de,lwn.net,linuxfoundation.org,vger.kernel.org,gmail.com];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[dlechner@baylibre.com,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[baylibre.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	RCPT_COUNT_TWELVE(0.00)[21];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[dlechner@baylibre.com,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[lwn.net,linuxfoundation.org,kernel.org,arndb.de,gentwo.org,linux-foundation.org,infradead.org,linutronix.de,google.com,redhat.com,linaro.org,arm.com,goodmis.org,suse.de,amd.com,suse.com,cmpxchg.org,nvidia.com,tencent.com,huaweicloud.com,gmail.com,linux.dev,lge.com,chromium.org,vger.kernel.org,kvack.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[60];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[krzk@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
-	TO_DN_SOME(0.00)[]
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,quoll:mid,vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: E7C2A741CEB
+X-Rspamd-Queue-Id: 31E94742069
 
-On 7/9/26 7:33 PM, Jonathan Cameron wrote:
->>> +  adi,common-mode-output:
->>> +    $ref: /schemas/types.yaml#/definitions/string
->>> +    enum:
->>> +      - avdd-avss-half
->>> +      - 1.65V
->>> +      - 2.5V
->>> +      - 2.14V
->>> +    description:
->>> +      Common mode voltage output selection.  
->>
->> Why not using standard regulator provider bindings for this?
-> 
-> Interesting question.  If that was done there would need to be
-> a consumer which means explicit modelling of any analog circuit.
-> We do that in a few cases but so far (and yup this is a driver thing
-> in a dt-binding) I don't think we have any way to consumer data when
-> a backend is involved.
+On Wed, Jul 08, 2026 at 11:02:04AM +0530, Mukesh Ojha wrote:
+> +maintainers:
+> +  - Eugen Hristev <eugen.hristev@linaro.org>
+> +  - Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+> +
+> +description:
+> +  Reserved memory region for storing kernel debugging information that
+> +  can be read by firmware and bootloader on Google Pixel platforms.
+> +
+> +allOf:
+> +  - $ref: reserved-memory.yaml
+> +
+> +properties:
+> +  compatible:
+> +    const: google,debug-kinfo
 
-There is also the regulator-always-on property, so strictly speaking,
-a consumer is not required.
+I guess: google,pixel-debug-kinfo
 
-> 	
->>
->>> +
->>> +  adi,vcm-power-down:
->>> +    type: boolean
->>> +    description: Power down the common mode output buffer  
->>
->> Is the buffer separate from the output? In that case I would expect
->> buffer to be in the property name, otherwise this should just be
->> part of the enum options above (and the default one at that).
->>
+Or maybe even specific SoC. Both title and description suggest this does
+not apply to other Google devices (makes sense), so compatible should be
+somehow more specific, unless debug-kinfo is already enough to identify
+possible users and there is no conflict with debug-kinfo in Chromebooks,
+for example?
+
+Best regards,
+Krzysztof
 
 
