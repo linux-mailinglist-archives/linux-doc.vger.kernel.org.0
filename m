@@ -1,321 +1,133 @@
-Return-Path: <linux-doc+bounces-96469-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96471-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id zJn6CbznU2pfgAMAu9opvQ
-	(envelope-from <linux-doc+bounces-96469-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 12 Jul 2026 21:15:08 +0200
+	id BeXMKhrsU2rxgAMAu9opvQ
+	(envelope-from <linux-doc+bounces-96471-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 12 Jul 2026 21:33:46 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 793D4745B49
-	for <lists+linux-doc@lfdr.de>; Sun, 12 Jul 2026 21:15:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BA8A745C54
+	for <lists+linux-doc@lfdr.de>; Sun, 12 Jul 2026 21:33:46 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=A+1O9GP1;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=NRgPnzno;
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96469-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96469-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96471-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96471-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 7F2D8300C818
-	for <lists+linux-doc@lfdr.de>; Sun, 12 Jul 2026 19:15:06 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 6F3E7300FB5B
+	for <lists+linux-doc@lfdr.de>; Sun, 12 Jul 2026 19:33:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CAF883B42C0;
-	Sun, 12 Jul 2026 19:15:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7D3443B3C11;
+	Sun, 12 Jul 2026 19:33:36 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5C13D3B3C0F;
-	Sun, 12 Jul 2026 19:15:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 464402BE033;
+	Sun, 12 Jul 2026 19:33:33 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783883705; cv=none; b=MWppHIb1TX+OUuBMmUErSuimNL6g6bYYKmXbnFOKZhH/GDD16xgIAb2EiOjO4sKWQndxp06tG99Ghvl6KOk1vepEoeI/r+PvpaK7j0eUDQykvXLbP/EnH8ETBPjKLQJLHX8WHo0BP0/55xiHNBdu5VBFC3xSgyLB9CdQxCX7jlI=
+	t=1783884816; cv=none; b=ciFV1z8ke4H9NkcZex3FUzGKHR69SOlRn/eEdkk6Mx5a5iiwvq65R4EVf+rBerVNoh3Z+nikIql2oUNQ7XVDSvksRiCKsRW8Ku1DGGpO2eSGhAGeKaYcwAPqBSy5l+TTKWbBW4HcskDf8P7QpamcMX6L9hrSPdKFww2UjetKRUQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783883705; c=relaxed/simple;
-	bh=ikd+TViXq28E5vHcA0r9IRmr5s/Pv4K7YRHMB6XfEAE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=GzScFC9YK672L+lb1nwyc0xhxTdO7DiXAnMXOftMbYDf1d2L8ckcbszuZTMnjJPw7mRTCi+YR51XVR613h8EzXOnTBdDZ3khTCn8nM43y3dilCTWfGFYeu4a9XJGheO1F59QGLmZQECcrSnVz20kocyjKzUEUdhlbd4PIKyzpug=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=A+1O9GP1; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B8B0A1F000E9;
-	Sun, 12 Jul 2026 19:15:03 +0000 (UTC)
+	s=arc-20240116; t=1783884816; c=relaxed/simple;
+	bh=QFKalSKwIi7ekI2DPNRqSKWoIx9BDEHFio9J7E9UmZo=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=kRxgbr4kjZW+8nKKFKg/XhiqXWX81fB2NMWFNR4WucTufTxEkgiyZ7eRZ86KqbqQvCWFirqlUhRjUYjdrq7TfKgm6VSQFNtnVBTtqrClJHX/8nTyuBrC/y0+rrtNBFpBniDptZ8NakenqJ3biI6tBufeLbuxcrR8DyzO1cM9Ayo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NRgPnzno; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CB5771F000E9;
+	Sun, 12 Jul 2026 19:33:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783883704;
-	bh=73b4pL2XQtnec2/Fy5ja53Ba+xumzUzAkyQQn/NfjQc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=A+1O9GP1ucy3KjYEern4zyQU/VnyDWPh8PtiWqJT8ty6GYQZqbKu1DkSIavsJncpD
-	 y3RZOJt5cI+dOZnoZefjzOrN+aUrcYds6YmyMBOdD8ssSPDV63Qs7o22SDqmlSGLjp
-	 umHQkoGwuBXkG2XG/EBnZ5+nkhIVtfYEXUtgGxWSatDlouhoNvsxnqqwrANc4Ppo4Q
-	 XmcRRIf8VIiN5HosFT/oTtM3/zjkNmI/IapPKXbFOfWY2+Dan3wVUw1AqY0v6nEmZt
-	 bGtHO4VTdUx30RXwrWDrLT7NgTHC47U+uf//4DgQpir0YXJ9Ho+XxNYaTEiUEu1h6b
-	 fwbdSyh1O4DQA==
-Date: Sun, 12 Jul 2026 12:15:02 -0700
-From: Drew Fustini <fustini@kernel.org>
-To: Reinette Chatre <reinette.chatre@intel.com>
-Cc: Adrien Ricciardi <aricciardi@baylibre.com>,
-	Alexandre Ghiti <alex@ghiti.fr>,
-	Atish Kumar Patra <atishp@rivosinc.com>,
-	Atish Patra <atish.patra@linux.dev>,
-	Babu Moger <babu.moger@amd.com>, Ben Horgan <ben.horgan@arm.com>,
-	Borislav Petkov <bp@alien8.de>, Chen Pei <cp0613@linux.alibaba.com>,
-	Conor Dooley <conor.dooley@microchip.com>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	Dave Martin <Dave.Martin@arm.com>, Fenghua Yu <fenghuay@nvidia.com>,
-	Gong Shuai <gong.shuai@sanechips.com.cn>,
-	Gong Shuai <gsh517@gmail.com>, guo.wenjia23@zte.com.cn,
-	James Morse <james.morse@arm.com>,
-	Kornel =?utf-8?Q?Dul=C4=99ba?= <mindal@semihalf.com>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, liu.qingtao2@zte.com.cn,
-	Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>, Paul Walmsley <pjw@kernel.org>,
-	Peter Newman <peternewman@google.com>,
-	Radim =?utf-8?B?S3LEjW3DocWZ?= <rkrcmar@ventanamicro.com>,
-	Rob Herring <robh@kernel.org>,
-	Samuel Holland <samuel.holland@sifive.com>,
-	Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-	Tony Luck <tony.luck@intel.com>,
-	Vasudevan Srinivasan <vasu@rivosinc.com>,
-	Ved Shanbhogue <ved@rivosinc.com>, Weiwei Li <liwei1518@gmail.com>,
-	yunhui cui <cuiyunhui@bytedance.com>, linux-kernel@vger.kernel.org,
-	linux-riscv@lists.infradead.org, x86@kernel.org,
-	devicetree@vger.kernel.org, linux-rt-devel@lists.linux.dev,
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v4 5/8] riscv_cbqri: resctrl: Add cache allocation via
- capacity block mask
-Message-ID: <alPntkIPbl17bEiD@x1>
-References: <20260706-dfustini-atl-sc-cbqri-dt-v4-0-e75c20201d64@kernel.org>
- <20260706-dfustini-atl-sc-cbqri-dt-v4-5-e75c20201d64@kernel.org>
- <3e7070fa-16f3-453e-9f0e-9c1a2ef38f9f@intel.com>
+	s=k20260515; t=1783884813;
+	bh=gyuURlUoCp/s/g0oxdLk+8I+A6XzSyGAveEBSGo5ERc=;
+	h=From:To:Cc:Subject:Date;
+	b=NRgPnzno+xayBlPZWhbhoeGIqtd1ILhKqQNSZCwwZqRjQRl/mhgZUyrRhQiUYmk/o
+	 FjoTF6YWmqIJqay81Lzeq/XulBNppRP7M9b+nhKqyT/ZqvFo7Rk+JXnwLu2zjJXELZ
+	 uiOANn0+6nZ48DkE7FPAYo6Mjtj14OlpKetMlRpqwUxlYfTXuN7yQ0+UDBTfw8lDLj
+	 Nvit8Cj/GAqBDJcu1lq64EGcaG9Blkt/bi1Ts6gDUlbiuHOGzMAeRCcyURPz1+a9Wl
+	 hYmBqkm6hC6qsNY1RYu6nV+RjlEf7D593RM4eNqx2qoTliyGCrVjG5NN6rb/C+aYxM
+	 YnxG56CZRo/EQ==
+Received: from mchehab by mail.kernel.org with local (Exim 4.99.4)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1wizvg-00000004KW0-0mv1;
+	Sun, 12 Jul 2026 21:33:32 +0200
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Jonathan Corbet <corbet@lwn.net>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Manuel Ebner <manuelebner@mailbox.org>
+Subject: [PATCH v2 0/1] fixes for maintainers_include
+Date: Sun, 12 Jul 2026 21:33:28 +0200
+Message-ID: <cover.1783884625.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <3e7070fa-16f3-453e-9f0e-9c1a2ef38f9f@intel.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.16 / 15.00];
+X-Spamd-Result: default: False [-3.66 / 15.00];
 	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_FROM(0.00)[bounces-96471-lists,linux-doc=lfdr.de,huawei];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[40];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:reinette.chatre@intel.com,m:aricciardi@baylibre.com,m:alex@ghiti.fr,m:atishp@rivosinc.com,m:atish.patra@linux.dev,m:babu.moger@amd.com,m:ben.horgan@arm.com,m:bp@alien8.de,m:cp0613@linux.alibaba.com,m:conor.dooley@microchip.com,m:conor+dt@kernel.org,m:dave.hansen@linux.intel.com,m:Dave.Martin@arm.com,m:fenghuay@nvidia.com,m:gong.shuai@sanechips.com.cn,m:gsh517@gmail.com,m:guo.wenjia23@zte.com.cn,m:james.morse@arm.com,m:mindal@semihalf.com,m:krzk+dt@kernel.org,m:liu.qingtao2@zte.com.cn,m:zhiwei_liu@linux.alibaba.com,m:palmer@dabbelt.com,m:pjw@kernel.org,m:peternewman@google.com,m:rkrcmar@ventanamicro.com,m:robh@kernel.org,m:samuel.holland@sifive.com,m:bigeasy@linutronix.de,m:tony.luck@intel.com,m:vasu@rivosinc.com,m:ved@rivosinc.com,m:liwei1518@gmail.com,m:cuiyunhui@bytedance.com,m:linux-kernel@vger.kernel.org,m:linux-riscv@lists.infradead.org,m:x86@kernel.org,m:devicetree@vger.kernel.org,m:linux-rt-devel@lists.linux.dev,m:linux-doc@vger.kernel.org,m:conor@ke
- rnel.org,m:krzk@kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-96469-lists,linux-doc=lfdr.de];
-	FORGED_SENDER(0.00)[fustini@kernel.org,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:corbet@lwn.net,m:mchehab@kernel.org,m:mchehab+huawei@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:skhan@linuxfoundation.org,m:manuelebner@mailbox.org,s:lists@lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[fustini@kernel.org,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[baylibre.com,ghiti.fr,rivosinc.com,linux.dev,amd.com,arm.com,alien8.de,linux.alibaba.com,microchip.com,kernel.org,linux.intel.com,nvidia.com,sanechips.com.cn,gmail.com,zte.com.cn,semihalf.com,dabbelt.com,google.com,ventanamicro.com,sifive.com,linutronix.de,intel.com,bytedance.com,vger.kernel.org,lists.infradead.org,lists.linux.dev];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[7];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,huawei];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 793D4745B49
+X-Rspamd-Queue-Id: 4BA8A745C54
 
-On Tue, Jul 07, 2026 at 11:17:14AM -0700, Reinette Chatre wrote:
-> Hi Drew,
+Hi Jon,
 
-Thanks for reviewing and your suggestions.
+This v2 replaces v1 series:
+	[PATCH 0/2] A couple of fixes for maintainers_include.py
 
-> On 7/6/26 4:06 PM, Drew Fustini wrote:
-> 
-> ...
-> 
-> > diff --git a/drivers/resctrl/cbqri_resctrl.c b/drivers/resctrl/cbqri_resctrl.c
-> > new file mode 100644
-> > index 000000000000..cb12a868561b
-> > --- /dev/null
-> > +++ b/drivers/resctrl/cbqri_resctrl.c
-> 
-> ...
-> 
-> > +
-> > +/*
-> > + * fs/resctrl unconditionally references the symbols below before checking
-> > + * mon_capable. They are stubs for features CBQRI does not yet support.
-> > + */
-> 
-> resctrl should not access monitoring related arch functions if the arch
-> does not support monitoring. Could you please highlight which ones are causing
-> problems? From what I can tell, the first one below, resctrl_arch_is_evt_configurable(),
-> is indeed only called via resctrl_l3_mon_resource_init() if the L3 resource is
-> mon_capable.
+It basically fixes an issue reported by Manuel that entries
+are printed duplicated.
 
-You are right, none of the monitoring stubs run for the allocation-only
-CBQRI implementation in this series. The stubs exist only so fs/resctrl
-resolves the symbols at link time. I'll drop the comment.
+In reality, the output maintainer entries are not properly
+named per subsystem, so they appear to be duplicated.
 
-> > +bool resctrl_arch_is_evt_configurable(enum resctrl_event_id evt)
-> > +{
-> > +	return false;
-> > +}
-> > +
-> > +void *resctrl_arch_mon_ctx_alloc(struct rdt_resource *r,
-> > +				 enum resctrl_event_id evtid)
-> 
-> Similarly, this should only be called when reading monitoring data which should only be
-> possible if the resource is capable of monitoring.
+Fixing the name output solves the issue and keeps the list
+alphabetically sorted, as expected.
 
-Agreed, same as above.
+Mauro Carvalho Chehab (1):
+  docs: maintainers_include: fix entry names
 
-> > +/*
-> > + * Walk cbqri_controllers and pick one capacity controller (CC) per cache
-> > + * level (L2/L3) to back the corresponding RDT_RESOURCE_L*. When more than
-> > + * one CC sits at the same level (e.g. one per socket), they must agree on
-> > + * rcid_count / ncblks / alloc_capable. A level whose controllers disagree
-> > + * is dropped, since resctrl exposes a single set of caps per rid, but the
-> > + * other level is still picked. The first matching controller wins.
-> > + */
-> 
-> It works but I find it to be a potentially confusing approach (just a personal opinion!).
+ Documentation/sphinx/maintainers_include.py | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-Good point. I'll restructure it to pick per cache level instead of per
-controller, which removes the separate dropped[] array and the
-overloaded NULL that made it confusing.
+-- 
+2.55.0
 
-> > +static struct rdt_ctrl_domain *cbqri_create_ctrl_domain(struct cbqri_controller *ctrl,
-> > +							struct rdt_resource *res,
-> > +							unsigned int cpu, int dom_id)
-> > +{
-> > +	struct rdt_ctrl_domain *domain;
-> > +	struct list_head *pos = NULL;
-> > +	int err;
-> > +
-> > +	domain = cbqri_new_domain(ctrl);
-> > +	if (!domain)
-> > +		return ERR_PTR(-ENOMEM);
-> > +
-> > +	cpumask_set_cpu(cpu, &domain->hdr.cpu_mask);
-> > +	domain->hdr.id = dom_id;
-> > +	domain->hdr.type = RESCTRL_CTRL_DOMAIN;
-> 
-> Please also initialize domain->hdr.rid that is referenced by the often-used 
-> domain_header_is_valid() helper.
-
-Okay, I will set 'domain->hdr.rid = res->rid'.
-
-> > +
-> > +	err = cbqri_init_domain_ctrlval(res, domain);
-> > +	if (err) {
-> > +		kfree(container_of(domain, struct cbqri_resctrl_dom,
-> > +				   resctrl_ctrl_dom));
-> > +		return ERR_PTR(err);
-> > +	}
-> > +
-> > +	/* Insert sorted by id so user-visible ordering is deterministic. */
-> > +	resctrl_find_domain(&res->ctrl_domains, dom_id, &pos);
-> > +	list_add_tail(&domain->hdr.list, pos);
-> 
-> The domain list became an RCU list when resctrl started supporting MPAM. 
-> commit fb700810d30b ("x86/resctrl: Separate arch and fs resctrl locks") contains
-> a great description of the motivation and the different accesses that the list
-> should support. Historically resctrl always accessed the list with CPU hotplug lock
-> held for which above is ok but there are some planned changes as part of a fix
-> that accesses the list via an RCU read-side critical section. Even with this addition
-> there is no immediate impact to this enabling since it is related to the
-> MBA software controller but I think it is best for archs and resctrl to agree on
-> how the domain list can be accessed safely.
-> 
-> For reference to the upcoming resctrl usage see
-> https://lore.kernel.org/lkml/4c88e01e29df638d9ecad71b2ee3b411e24067bd.1783377598.git.reinette.chatre@intel.com/
->
-> > +
-> > +	resctrl_online_ctrl_domain(res, domain);
-> 
-> With the transition to RCU list the domain should only be added to the list after it is
-> fully initialized.
-
-Thanks for the explanation. I will adopt the RCU list convention. Fully
-initialize the domain, online it, and then publish it.
-
-> > +static void cbqri_detach_cpu_from_ctrl_domains(struct rdt_resource *res,
-> > +					       unsigned int cpu)
-> > +{
-> > +	struct rdt_ctrl_domain *domain, *tmp;
-> > +
-> > +	list_for_each_entry_safe(domain, tmp, &res->ctrl_domains, hdr.list) {
-> > +		if (!cpumask_test_cpu(cpu, &domain->hdr.cpu_mask))
-> > +			continue;
-> > +		cpumask_clear_cpu(cpu, &domain->hdr.cpu_mask);
-> > +		if (cpumask_empty(&domain->hdr.cpu_mask)) {
-> > +			resctrl_offline_ctrl_domain(res, domain);
-> > +			list_del(&domain->hdr.list);
-> 
-> (also related to switch to RCU list, remove domain from list before
-> starting to offline it)
-
-Will do, thanks.
-
-> > +			kfree(container_of(domain, struct cbqri_resctrl_dom,
-> > +					   resctrl_ctrl_dom));
-> > +		}
-> > +	}
-> > +}
-> 
-> How CPUs are associated with control domains are not clear to me. Above appears to
-> be consequence of how platform driver initializes so I will comment more there (patch #8).
-> Just for above, it is unexpected that a CPU needs to be tested against cpu_mask
-> of all control domains. Would a direct query that uses the CPU's cache ID not be
-> quicker? Also, above creates impression that a CPU may belong to multiple control
-> domains which should not happen.
-
-Thanks for the suggestion. I will change it to lookup the domain up directly by
-the cache id.
-
-> > +/*
-> > + * Attach a CPU to every controller that claims it. On failure, detach the
-> > + * CPU from everything attached so far: the cpuhp core does not run this
-> > + * state's offline teardown when its startup fails, so a partial attach
-> > + * would otherwise leak into the domain cpu_masks. Caller holds
-> > + * cbqri_domain_list_lock.
-> > + */
-> > +static int cbqri_attach_cpu_to_all_ctrls(unsigned int cpu)
-> > +{
-> > +	struct cbqri_controller *ctrl;
-> > +	int err = 0;
-> > +
-> > +	lockdep_assert_held(&cbqri_domain_list_lock);
-> > +
-> > +	/*
-> > +	 * Hold cbqri_controllers_lock across the walk so a controller
-> > +	 * registered after boot cannot corrupt it. The register path takes
-> > +	 * it as a leaf and never cbqri_domain_list_lock, so this nesting
-> > +	 * cannot invert.
-> > +	 */
-> > +	guard(mutex)(&cbqri_controllers_lock);
-> > +	list_for_each_entry(ctrl, &cbqri_controllers, list) {
-> > +		if (ctrl->type != CBQRI_CONTROLLER_TYPE_CAPACITY)
-> > +			continue;
-> > +		if (!cpumask_test_cpu(cpu, &ctrl->cache.cpu_mask))
-> > +			continue;
-> 
-> What will happen if @cpu was offline when cbqri_capacity_probe() ran? From what
-> I can tell @cpu will not be in ctrl->cache.cpu_mask in this scenario?
-
-Yes, this is a problem. I will drop the probe-time cpu_mask and associate cpus
-with domains the way you suggest, from the cpu's own cache id at hotplug time.
-
-Thanks,
-Drew
 
