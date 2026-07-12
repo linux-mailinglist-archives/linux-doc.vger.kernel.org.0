@@ -1,71 +1,66 @@
-Return-Path: <linux-doc+bounces-96438-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96439-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id cdHTKD0jU2pYXwMAu9opvQ
-	(envelope-from <linux-doc+bounces-96438-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 12 Jul 2026 07:16:45 +0200
+	id qbLrFAsqU2ryYAMAu9opvQ
+	(envelope-from <linux-doc+bounces-96439-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 12 Jul 2026 07:45:47 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 224FE743EAD
-	for <lists+linux-doc@lfdr.de>; Sun, 12 Jul 2026 07:16:45 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 07EEE743F4A
+	for <lists+linux-doc@lfdr.de>; Sun, 12 Jul 2026 07:45:46 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=wyuan.org header.s=key1 header.b=woJcWOZK;
+	dkim=pass header.d=wyuan.org header.s=key1 header.b=iHWERh+z;
 	dmarc=pass (policy=quarantine) header.from=wyuan.org;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96438-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96438-lists+linux-doc=lfdr.de@vger.kernel.org";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96439-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-96439-lists+linux-doc=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id EE3C23015487
-	for <lists+linux-doc@lfdr.de>; Sun, 12 Jul 2026 05:16:34 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id D5E5030034BE
+	for <lists+linux-doc@lfdr.de>; Sun, 12 Jul 2026 05:45:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1024964;
-	Sun, 12 Jul 2026 05:16:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4ECD715E5DC;
+	Sun, 12 Jul 2026 05:45:41 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-170.mta0.migadu.com (out-170.mta0.migadu.com [91.218.175.170])
+Received: from out-180.mta1.migadu.com (out-180.mta1.migadu.com [95.215.58.180])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C497E23D2A1
-	for <linux-doc@vger.kernel.org>; Sun, 12 Jul 2026 05:16:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 640BBCA6F
+	for <linux-doc@vger.kernel.org>; Sun, 12 Jul 2026 05:45:38 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783833393; cv=none; b=NEvHTVH6TiSgCBPnn/YiCqmivHWLffEPGah2epSlkj7JZCV0fz9MHPHova3zUvk9I1vqbyaIfQQXvmjQz8kQS+DWRz2gu2FAA2k4pwXxOkn9s8uPWiZtvDreRJDpVG4exZNCMdQiVIMVuG7VDPfbDhMbbyBPWLmebCj6OKL6nw0=
+	t=1783835141; cv=none; b=a0kVNPsWad1xDk1Dnc1YDzSobhcn9wI9Y+UnTBHN+1gG+8D46hda18gCoFLlJaRorwJRQSt5H6MRfIs2a5A7fLnM3uGiRvXJBG4MRMFbTzq8F7g2y//lzDMVe++ByDauX0FUX8w7S7uXTPQTrbYweSAsjLnlhTTa6GDFlV/xzN4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783833393; c=relaxed/simple;
-	bh=I9zB1MXYtjXtcX0yfhhLuEHMxDfFPuG/xH9CenBrLBA=;
+	s=arc-20240116; t=1783835141; c=relaxed/simple;
+	bh=f3imobuxecPntOskYKW+07LDVQS5MhSmTcFJLgTLF7Q=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=p1Lk7JUirHC/5UGyQm0zCGxs4eZ2Uy7GvH4UOEY9B/EK6XwCbvU0qkJHyj9SOmW80cZ9glcwDcRBaJsrTPoh6HukcuAo81VPjag0PUyL8IQOceOtE5pCqPjXv4+OVrrcFb6Wl1CbSfj8ap+zmdHcF24FuQ1+ozy5FXYz1qmyKyU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=wyuan.org; spf=pass smtp.mailfrom=wyuan.org; dkim=pass (2048-bit key) header.d=wyuan.org header.i=@wyuan.org header.b=woJcWOZK; arc=none smtp.client-ip=91.218.175.170
-Date: Sun, 12 Jul 2026 13:15:59 +0800
+	 Content-Type:Content-Disposition:In-Reply-To; b=Z24ReyiN9vlBYCT4adYunga0KGr4KYAkpYFXsCPn1jxlu72/0kYne36RLQc1U9P4aEtxnA6sWTMO0mJE0pwJXZrLIhfwp5PFTsOMwZ+7KdOMCOiR7Cy7Ks9Fu34uaLHkG9kun04PlMHrjhjg5xzN1xY6wIz1bfazg/rIE9koTRg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=wyuan.org; spf=pass smtp.mailfrom=wyuan.org; dkim=pass (2048-bit key) header.d=wyuan.org header.i=@wyuan.org header.b=iHWERh+z; arc=none smtp.client-ip=95.215.58.180
+Date: Sun, 12 Jul 2026 13:45:11 +0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=wyuan.org; s=key1;
-	t=1783833378;
+	t=1783835136;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=TT4s4zK5o3KhRlWbIf4iTrnz4W9alszmWfnQvpsGKvY=;
-	b=woJcWOZK6eIcwA6aBswFvaKb73hQlBJembVh+MldF+e2DqNpEgZxu2If2fEqui+C6oKOfN
-	ofof+4e3VI01y/9VT/puKBDTt8Km8wvn47Iu/WmPUa3lKibGrLJORJocBwpdE674G9+nq2
-	+sCckRxxeJANCJoA6g/zgBA4E2H1X663knscQKvXeLIYwO2V+aT7/w2Mttwg/XXs6N3IHq
-	sbUBldbNPcc892jyLPzZcZHgDc8erGr+6I3Gel+gRIjkC4xXpWp18VXmmwjAwKlWgLBYex
-	W5ewwcchNLnZ9Dq6U1Srh78cMjsk1p/juIqxrIjAXAW/Yckw4WKgTGGe0b0a3w==
+	bh=I9dTYXUnpoj/XSX45EfRjBDhz6VbAO4KbHdF8Sk3a7I=;
+	b=iHWERh+zXrqdhbOl8+4XejKrXkhCKpPtKCIaAKWooBtHlJe8H+f2qvQd0SiVLCoujw0afw
+	Nggth71q3yEux5maQ8h26qThRtesjVasV+P+F2SXJppMARvwbOyCWhd/QaxDVKpWqnccgM
+	8XEtrowa6IxM1k102AhWGvJP5+L7OzrqZV2GX3YXbuhZqVyeHKMcgV4JyJz2fckDe2WsT9
+	hCQ6v0ci7QM4zdBf723dKhYZhPabW5wWivFymMYFVC9+P2+UZpIjvn4OUKRb1zk+bCPlo+
+	oHWWyKuXbLlp6WYO4OgOvTbaBWaWsMfUDXTFjBqyt6GUENQD4vorFbHHMXT7EQ==
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
 From: Weijie Yuan <wy@wyuan.org>
-To: Jonathan Corbet <corbet@lwn.net>
-Cc: =?utf-8?B?6JGJ5a645L2R?= <chenyou910331@gmail.com>,
-	Dongliang Mu <dzm91@hust.edu.cn>,
-	Hu Haowen <2023002089@link.tyut.edu.cn>,
+To: Dongliang Mu <dzm91@hust.edu.cn>
+Cc: Alex Shi <alexs@kernel.org>, Yanteng Si <si.yanteng@linux.dev>,
+	Jonathan Corbet <corbet@lwn.net>,
 	Shuah Khan <skhan@linuxfoundation.org>,
-	Dongliang Mu <mudongliangabcd@gmail.com>, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, Yuchen Tian <cat@malon.dev>,
-	Alex Shi <alexs@kernel.org>, Yanteng Si <si.yanteng@linux.dev>
-Subject: Re: [PATCH v2] docs: zh_TW: process: localize terminologies and
- improve fluency in 8.Conclusion
-Message-ID: <alMjD_dNWVgPKOlN@wyuan.org>
-References: <20260603082531.263115-1-chenyou910331@gmail.com>
- <CAKspUh+2ndK1qMP58hPPmvwczruCikEuaO2tmyw=APCGrd9yaw@mail.gmail.com>
- <alDs8bnIK8bWApIr@wyuan.org>
- <57e42f43-44dd-4b22-8d81-c88e20016138@hust.edu.cn>
- <CAKspUhKh=cT_ks1hH9B4G8KppR=XT+THHsmNUFH_irX6xo1SZw@mail.gmail.com>
- <alJ7ocaqtpUkCGrd@wyuan.org>
- <87wlv1i985.fsf@trenco.lwn.net>
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH] docs/zh_CN: add docs-next checkout workaround
+Message-ID: <alMp5-UPJks0xEvS@wyuan.org>
+References: <4e5e728877c77a89f6c59e89c88ba8ffa8842643.1783609005.git.wy@wyuan.org>
+ <ce715802-1b46-4ba6-b388-39260f217ba3@hust.edu.cn>
+ <alD1b7O6KaIMqWpa@wyuan.org>
+ <f637a819-5596-4cd7-b2fe-be7293eedf14@hust.edu.cn>
+ <alD6UJw1Y2VNK3x1@wyuan.org>
+ <91ea31b9-4154-4769-a620-43fea87cb949@hust.edu.cn>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -74,75 +69,119 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <87wlv1i985.fsf@trenco.lwn.net>
+In-Reply-To: <91ea31b9-4154-4769-a620-43fea87cb949@hust.edu.cn>
 X-Migadu-Flow: FLOW_OUT
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [1.44 / 15.00];
-	SUSPICIOUS_URL_IN_SUSPICIOUS_MESSAGE(1.00)[];
-	URIBL_RED(0.50)[wyuan.org:from_mime,wyuan.org:email,wyuan.org:mid,wyuan.org:dkim];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[wyuan.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[wyuan.org:s=key1];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
-	BAD_REP_POLICIES(0.10)[];
-	HAS_ANON_DOMAIN(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-96438-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-96439-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[gmail.com,hust.edu.cn,link.tyut.edu.cn,linuxfoundation.org,vger.kernel.org,malon.dev,kernel.org,linux.dev];
-	R_DKIM_ALLOW(0.00)[wyuan.org:s=key1];
-	FORGED_RECIPIENTS(0.00)[m:corbet@lwn.net,m:chenyou910331@gmail.com,m:dzm91@hust.edu.cn,m:2023002089@link.tyut.edu.cn,m:skhan@linuxfoundation.org,m:mudongliangabcd@gmail.com,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:cat@malon.dev,m:alexs@kernel.org,m:si.yanteng@linux.dev,s:lists@lfdr.de];
-	DMARC_POLICY_ALLOW(0.00)[wyuan.org,quarantine];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:dzm91@hust.edu.cn,m:alexs@kernel.org,m:si.yanteng@linux.dev,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[wy@wyuan.org,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_COUNT_THREE(0.00)[3];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[wy@wyuan.org,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[wyuan.org:+];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[wy@wyuan.org,linux-doc@vger.kernel.org];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	R_SPF_ALLOW(0.00)[+ip6:2600:3c04:e001:36c::/64:c];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
 	MISSING_XM_UA(0.00)[];
-	ARC_ALLOW(0.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[wyuan.org:from_mime,wyuan.org:email,wyuan.org:mid,wyuan.org:dkim,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[wy@wyuan.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[7];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,wtturl.cn:url,nju.edu.cn:url,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 224FE743EAD
+X-Rspamd-Queue-Id: 07EEE743F4A
 
-On Sat, Jul 11, 2026 at 02:04:26PM -0600, Jonathan Corbet wrote:
-> Weijie Yuan <wy@wyuan.org> writes:
-> 
-> > How exactly we define the position of Traditional Chinese or zh_TW?
-> >
-> >   1. Simple conversion between simplified and traditional Chinese
-> >      characters
-> >   2. Taiwanese localized traditional Chinese
-> >
-> > This issue needs to be confirmed by the senior maintenance personnel.
-> > (I will review the archives to confirm. If there is already a clear
-> > definition, please forgive me.)
-> 
-> "Senior maintenance personnel" in this case is the people who actually
-> step up to maintain this translation.  There is no higher level of
-> authority that needs to somehow sign off on it.
+On Sun, Jul 12, 2026 at 12:47:16PM +0800, Dongliang Mu wrote:
+> Hi Weijie,
+> Could you please try cloning
+> https://mirror.nju.edu.cn/git/kernel-doc-zh.git/ <https://link.wtturl.cn/?target=https%3A%2F%2Fmirror.nju.edu.cn%2Fgit%2Fkernel-doc-zh.git%2F&scene=im&aid=582478&lang=zh>
+> and verify whether this mirror is stable?
 
-Yeah, so, due to the current special circumstances, I actually mean that
-I want to seek the opinions of the Simplified Chinese team, and then
-finally have you Ack.
+OK, I just did a quick test on my debian 13 (local physical server):
 
-> The existing translation is essentially abandoned; if somebody wants
-> to carry it forward -- and stay with it -- with a shift in focus, I
-> think that is just fine.
+$ git clone https://mirror.nju.edu.cn/git/kernel-doc-zh.git/
+Cloning into 'kernel-doc-zh'...
+remote: Enumerating objects: 11675982, done.
+remote: Counting objects: 100% (11675982/11675982), done.
+remote: Compressing objects: 100% (2008049/2008049), done.
+error: RPC failed; curl 92 HTTP/2 stream 5 was not closed cleanly: INTERNAL_ERROR (err 2)
+error: 7397 bytes of body are still expected
+fetch-pack: unexpected disconnect while reading sideband packet
+fatal: early EOF
+fatal: fetch-pack: invalid index-pack output
 
-Yes, hope that the following discussion will lead to a consensus.
+then again:
 
-Thanks,
-Weijie
+GIT_TRACE=1 \
+GIT_TRACE_CURL=1 \
+GIT_CURL_VERBOSE=1 \
+git clone https://mirror.nju.edu.cn/git/kernel-doc-zh.git/
+
+[...many verbose outputs]
+remote: Enumerating objects: 11675982, done.
+remote: Counting objects: 100% (11675982/11675982), done.
+remote: Compressing objects: 100% (2008049/2008049), done.
+13:24:10.505880 http.c:994              == Info: HTTP/2 stream 5 was not closed cleanly: INTERNAL_ERROR (err 2)
+13:24:10.505973 http.c:994              == Info: Connection #0 to host mirror.nju.edu.cn left intact
+error: RPC failed; curl 92 HTTP/2 stream 5 was not closed cleanly: INTERNAL_ERROR (err 2)
+error: 6191 bytes of body are still expected
+fetch-pack: unexpected disconnect while reading sideband packet
+fatal: early EOF
+fatal: fetch-pack: invalid index-pack output
+
+From the output, it seems that there was an error in the mirror of NJU's
+nginx, the Git HTTP backend behind nginx, or the upstream connection
+between them, but I'm not 100% sure.
+
+I will conduct several more tests immediately to troubleshoot the
+problem, to see where exactly the problem lies.
+
+In addition, cloning with a cloud server in Hong Kong:
+
+Cloning into 'kernel-doc-zh'...
+remote: Enumerating objects: 11675982, done.
+remote: Counting objects: 100% (11675982/11675982), done.
+remote: Compressing objects: 100% (2008049/2008049), done.
+error: RPC failed; curl 92 HTTP/2 stream 5 was not closed cleanly: INTERNAL_ERROR (err 2)
+error: 3965 bytes of body are still expected
+fetch-pack: unexpected disconnect while reading sideband packet
+fatal: early EOF
+fatal: fetch-pack: invalid index-pack output
+
+> TUNA has limited storage capacity and has asked the NJU mirror site to host
+> this Git repository.
+
+Fully understand, easy to notice that TUNA is under big preesure these days.
+Thanks, NJU!
+
+> We are currently diagnosing network issues on our mirror site. The classic
+> architecture - Nginx (serving static frontend, HTTPS, and caching) -> Apache
+> (reverse proxy + CGI execution) -> cgit / git-http-backend - appears to be
+> functional in principle.
+> The clone failures with large Git repositories are likely caused by
+> insufficient or inappropriate parameter configurations rather than the
+> architecture itself.
+
+Agreed, it is very likely that the transmission problem is caused by the
+large size of the warehouse.
+
+> P.S., I am the mentor of HUST OpenAtom Club, and our club is maintaining the
+> hust mirror site.
+
+Thanks very much.
 
