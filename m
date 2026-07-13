@@ -1,182 +1,173 @@
-Return-Path: <linux-doc+bounces-96574-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96576-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id oVbRHusBVWo4iwAAu9opvQ
-	(envelope-from <linux-doc+bounces-96574-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 17:19:07 +0200
+	id WIJTMIUGVWpRjAAAu9opvQ
+	(envelope-from <linux-doc+bounces-96576-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 17:38:45 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 511AF74CEE8
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 17:19:07 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C52374D241
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 17:38:45 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=DjkyuPnQ;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96574-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-96574-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b="Dl+on/vT";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96576-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96576-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 4FED2300B5BB
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 15:19:01 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id C2098315A400
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 15:26:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E4D80373C12;
-	Mon, 13 Jul 2026 15:18:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3306C3CF213;
+	Mon, 13 Jul 2026 15:26:29 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A2C4C30EF77;
-	Mon, 13 Jul 2026 15:18:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D47582D24B7;
+	Mon, 13 Jul 2026 15:26:27 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783955939; cv=none; b=R6YM64IAJkXDbh+ghGHlNL7VXazTk5PDZnGMIaf/9tXIgbtbwAQUTkw4pwnORzWdoPLzup1aVmzbh1K50wsJkKhnLmWjous8UyItTd3z1mp6LWMvg+Fvt2cM5d/tP0NMLXqyBAIgEKzoMbsUTiaU7VCj58ZrYySpksGpWmj44CE=
+	t=1783956389; cv=none; b=JUjHpGPbGVl/mT1RNdijrQxoHufoiTVnvCNjRjyBt1NlmndoJlmni5IUvsCCu7rZSRLtJDYX70v5OUfemUkOfTRVXN+hD163ULxKiC6aH2noxE4naGjwWpmnAcp1uQyrSetjjTqrrJ4+J0CC+SO+uCo2nfhMdhuH6eNk4X16XDA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783955939; c=relaxed/simple;
-	bh=Q92+vm/2vUfD7BvMv6itjSyYoLq4GSIt9f0Z3LqR9/A=;
-	h=Date:Message-ID:From:To:Cc:Subject:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=IV3q1LSpEiCvMamMXZZzEPMZ71Zy5elVcnkEJ+Rkb+M8zqNMYJeaqwyRCjTDRu70cbAby/GsHy+97E7HMQ+SS4qWhVMIDcNJx+7wuJ0KsiPgJITorkMb+EdmruFfr5YdhJBlu+j36P3B1+WeCNDRF2XMIeE2GvDy7Qd5h1rBLz8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DjkyuPnQ; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 52E321F000E9;
-	Mon, 13 Jul 2026 15:18:58 +0000 (UTC)
+	s=arc-20240116; t=1783956389; c=relaxed/simple;
+	bh=9EPNQBJvr7JAx8C+NnzMbL+BVCZKgwa6QbV19tCWlZ4=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=fkxEirK/3nlIKxx6xPPt1ETU0V8+stv79Rox4k5wlM1YSqsvG7u/DB/ZJy6AW3FsT6p9DM9SqvBaIIcoX1uxiD110oOn8PmjiSGTVG+LxBW/RJyKeyv1p4C7bdm00oBS1HeJnDPrF+sxvxvhEGuiEB+M2Ppne1ObTPjMF+hQFyQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Dl+on/vT; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B5BE41F000E9;
+	Mon, 13 Jul 2026 15:26:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783955938;
-	bh=ciq/I2+BL5j+uB+AABX0XLHmc/WSjoaA1RcZmJWFnaQ=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=DjkyuPnQfstUUzWkidFDDVxGMprS4Et5vhWSDhkPCeRuWSjmhG6Km5kARaCsw/Y+v
-	 EQqZ6DGLbRd3fKpYjPw1huYb83BENbYrx8bs2WT4QditMiCeAJo2ZKD8gwwtzEiO7l
-	 rw/TH4KEOVL10wu4/aeXCa3uRo4kqr0TKxyZb5wSjWCjv8yHaIhPTpEBN/fBC/dLO5
-	 VtkmH49gPUkWjn/EiCa5HfU4GAPRwuJHtQ/ohoCLpDXqvquhmP0ipQHZFCeHXmiMuV
-	 O4F7670dgEeQMnimChpI4eux+NbII+5b7Fa+BK9vRxEnMg7ufPCknKLIsoiAoYSTlr
-	 vD8xxud9rr3Lg==
-Received: from sofa.misterjones.org ([185.219.108.64] helo=lobster-girl.misterjones.org)
-	by disco-boy.misterjones.org with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.98.2)
-	(envelope-from <maz@kernel.org>)
-	id 1wjIQq-00000004Xo1-1iIy;
-	Mon, 13 Jul 2026 15:18:56 +0000
-Date: Mon, 13 Jul 2026 16:20:45 +0100
-Message-ID: <87fr1m6hma.wl-maz@kernel.org>
-From: Marc Zyngier <maz@kernel.org>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: linux-pci@vger.kernel.org,	kernel test robot <lkp@intel.com>,	Krzysztof
- =?UTF-8?B?V2lsY3p5xYRza2k=?= <kwilczynski@kernel.org>,	Bjorn Helgaas
- <bhelgaas@google.com>,	Catalin Marinas <catalin.marinas@arm.com>,	Conor
- Dooley <conor+dt@kernel.org>,	Geert Uytterhoeven <geert+renesas@glider.be>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,	Lorenzo Pieralisi
- <lpieralisi@kernel.org>,	Manivannan Sadhasivam <mani@kernel.org>,	Rob
- Herring <robh@kernel.org>,	Yoshihiro Shimoda
- <yoshihiro.shimoda.uh@renesas.com>,	devicetree@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,	linux-renesas-soc@vger.kernel.org
-Subject: Re: [PATCH] PCI: rcar-gen4: Inline GIC_TRANSLATER offset macro
-In-Reply-To: <2cb03029-0957-4ed8-98bd-9b3e0e0bce2d@mailbox.org>
-References: <20260709201103.90162-1-marek.vasut+renesas@mailbox.org>
-	<87qzlb5jsl.wl-maz@kernel.org>
-	<2cb03029-0957-4ed8-98bd-9b3e0e0bce2d@mailbox.org>
-User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI-EPG/1.14.7 (Harue)
- FLIM-LB/1.14.9 (=?UTF-8?B?R29qxY0=?=) APEL-LB/10.8 EasyPG/1.0.0 Emacs/30.1
- (aarch64-unknown-linux-gnu) MULE/6.0 (HANACHIRUSATO)
+	s=k20260515; t=1783956387;
+	bh=KWkHqistC4QCWTdZeY/UMz9VShi6CbU4xhDCXtjbcEY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=Dl+on/vTDIen4WlPhOmtx9HaeEmfcrQUK6ZlEhwv5eX/PU2G078DnL50UgJ0d/iIW
+	 YSsaF3Z/OCdvEq3bOZTQ+1Vibaw5w7nj5RMwV7+gX83ux1tc8VjuHIGfO5LevHhy7v
+	 ueaI/zuWuZRVeuY8z+MZ7rfgbNLcevFvDvIg3KXhPtyHG19/LQty/eHoRYedEuGsTv
+	 78V3FsWZI9+nKBS0BNqPQ4Bh59ASNyq9hGfnfUSWM5Bi3wpIXP1gWbARM9V+1rEwnG
+	 886tSTYDoIkJE3921W1eMuYRjN4UD1Mey9qLdklZ1UgYW5eWhJOn+g2DnGZVxvjFE8
+	 77HfXaWHhF3ow==
+Date: Mon, 13 Jul 2026 16:26:23 +0100
+From: Sudeep Holla <sudeep.holla@kernel.org>
+To: Will Deacon <will@kernel.org>
+Cc: Yureka Lilian <yureka@cyberchaos.dev>, Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Sudeep Holla <sudeep.holla@kernel.org>,
+	Anshuman Khandual <anshuman.khandual@arm.com>,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org
+Subject: Re: [PATCH v2] arch: arm64: add early_param idle=<wfi|yield|nop>
+Message-ID: <20260713-silky-imperial-kangaroo-a7df94@sudeepholla>
+References: <20260711-arm64-idle-param-v2-1-0ab67652a435@cyberchaos.dev>
+ <20260713-bulky-thistle-leopard-c66a18@sudeepholla>
+ <alTTIx_aw3L0ibqN@willie-the-truck>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-SA-Exim-Connect-IP: 185.219.108.64
-X-SA-Exim-Rcpt-To: marek.vasut@mailbox.org, linux-pci@vger.kernel.org, lkp@intel.com, kwilczynski@kernel.org, bhelgaas@google.com, catalin.marinas@arm.com, conor+dt@kernel.org, geert+renesas@glider.be, krzk+dt@kernel.org, lpieralisi@kernel.org, mani@kernel.org, robh@kernel.org, yoshihiro.shimoda.uh@renesas.com, devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-renesas-soc@vger.kernel.org
-X-SA-Exim-Mail-From: maz@kernel.org
-X-SA-Exim-Scanned: No (on disco-boy.misterjones.org); SAEximRunCond expanded to false
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <alTTIx_aw3L0ibqN@willie-the-truck>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.66 / 15.00];
+X-Spamd-Result: default: False [-4.66 / 15.00];
 	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
-	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-96574-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER(0.00)[maz@kernel.org,linux-doc@vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:marek.vasut@mailbox.org,m:linux-pci@vger.kernel.org,m:lkp@intel.com,m:kwilczynski@kernel.org,m:bhelgaas@google.com,m:catalin.marinas@arm.com,m:conor+dt@kernel.org,m:geert+renesas@glider.be,m:krzk+dt@kernel.org,m:lpieralisi@kernel.org,m:mani@kernel.org,m:robh@kernel.org,m:yoshihiro.shimoda.uh@renesas.com,m:devicetree@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-renesas-soc@vger.kernel.org,m:conor@kernel.org,m:geert@glider.be,m:krzk@kernel.org,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-96576-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[maz@kernel.org,linux-doc@vger.kernel.org];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER(0.00)[sudeep.holla@kernel.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS(0.00)[m:will@kernel.org,m:yureka@cyberchaos.dev,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:catalin.marinas@arm.com,m:sudeep.holla@kernel.org,m:anshuman.khandual@arm.com,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,s:lists@lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
+	MISSING_XM_UA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt,renesas];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sudeep.holla@kernel.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TO_DN_SOME(0.00)[]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 511AF74CEE8
+X-Rspamd-Queue-Id: 1C52374D241
 
-On Fri, 10 Jul 2026 14:35:10 +0100,
-Marek Vasut <marek.vasut@mailbox.org> wrote:
->=20
-> On 7/10/26 10:30 AM, Marc Zyngier wrote:
-> > On Thu, 09 Jul 2026 21:10:03 +0100,
-> > Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
-> >>=20
-> >> Instead of pulling in the whole linux/irqchip/arm-gic-v3.h , copy the
-> >> one GITS_TRANSLATER register offset macro directly into the driver.
-> >> This repairs the ability to build the driver on non-ARM non-GIC targets
-> >> the way it was possible until now, which retains good build test cover=
-age.
-> >>=20
-> >> Reported-by: kernel test robot <lkp@intel.com>
-> >> Closes: https://lore.kernel.org/oe-kbuild-all/202607100310.iQw5m9Uo-lk=
-p@intel.com/
-> >> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> >> ---
-> >> Cc: "Krzysztof Wilczy=C5=84ski" <kwilczynski@kernel.org>
-> >> Cc: Bjorn Helgaas <bhelgaas@google.com>
-> >> Cc: Catalin Marinas <catalin.marinas@arm.com>
-> >> Cc: Conor Dooley <conor+dt@kernel.org>
-> >> Cc: Geert Uytterhoeven <geert+renesas@glider.be>
-> >> Cc: Krzysztof Kozlowski <krzk+dt@kernel.org>
-> >> Cc: Lorenzo Pieralisi <lpieralisi@kernel.org>
-> >> Cc: Manivannan Sadhasivam <mani@kernel.org>
-> >> Cc: Marc Zyngier <maz@kernel.org>
-> >> Cc: Rob Herring <robh@kernel.org>
-> >> Cc: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
-> >> Cc: devicetree@vger.kernel.org
-> >> Cc: linux-arm-kernel@lists.infradead.org
-> >> Cc: linux-doc@vger.kernel.org
-> >> Cc: linux-kernel@vger.kernel.org
-> >> Cc: linux-pci@vger.kernel.org
-> >> Cc: linux-renesas-soc@vger.kernel.org
-> >> ---
-> >> Note: The alternative I could think of would be ifdeffery which
-> >>        is not nice and thwarts the build coverage, or limit the
-> >>        driver to ARM/ARM64 in Kconfig which also thwarts the build
-> >>        coverage. I could also split off the register macros in
-> >>        linux/irqchip/arm-gic-v3.h into some separate header
-> >>        linux/irqchip/arm-gic-v3-regs.h and include that which
-> >>        might be OKish and avoids duplication. Thoughts ?
-> >=20
-> > No, I'm not hacking something that is purely architecture specific for
-> > the purpose of a bizarre integration quirk that should be handled by
-> > the boot firmware, and not Linux.
->=20
-> The PCIe controller is fully controlled by Linux.
+On Mon, Jul 13, 2026 at 12:59:31PM +0100, Will Deacon wrote:
+> On Mon, Jul 13, 2026 at 10:57:38AM +0100, Sudeep Holla wrote:
+> > On Sat, Jul 11, 2026 at 09:35:25AM +0200, Yureka Lilian wrote:
+> > > Overriding the idle mechanism might be useful for debugging and performance
+> > > testing. Add a cmdline parameter for it, similar to the existing idle=
+> > > parameter already present for the x86 and ppc architectures.
+> > > 
+> > > It is also useful on platforms where the WFI instruction misbehaves,
+> > > such as Apple Silicon SoCs. Generally, a misbehaving instruction should
+> > > be treated as an erratum and patched using the alternatives framework.
+> > > However, in the Apple Silicon case we need more flexibility because it is
+> > > difficult to detect whether the erratum applies. For example, Linux VMs
+> > > inside macOS have the same MIDR and may even seem like they're running
+> > > in EL2 in the case of NV, but should continue using WFI (it's trapped and
+> > > handled correctly by the hypervisor there). Thus, we prefer to
+> > > let the m1n1 bootloader add the idle=nop parameter[1].
+> > > 
+> > > Link[1]: https://lore.kernel.org/all/99b69262-e54b-424e-baa2-96ef7013b87a@kernel.org/
+> > > Suggested-by: Will Deacon <will@kernel.org>
+> > > Signed-off-by: Yureka Lilian <yureka@cyberchaos.dev>
+> > > ---
+> > > Changes in v2:
+> > > - Applied suggestions by Anshuman Khandual (Thanks!)
+> > > - Link to v1: https://patch.msgid.link/20260705-arm64-idle-param-v1-1-7454249f473f@cyberchaos.dev
+> > > ---
+> > >  Documentation/admin-guide/kernel-parameters.txt | 23 +++++++++++++++++++
+> > >  arch/arm64/kernel/idle.c                        | 30 +++++++++++++++++++++++--
+> > >  arch/arm64/kernel/idle.h                        | 13 +++++++++++
+> > >  arch/arm64/lib/delay.c                          |  5 ++++-
+> > >  4 files changed, 68 insertions(+), 3 deletions(-)
+> > > 
+> > > diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+> > > index b2d7d3540ded..d7f5471edf8f 100644
+> > > --- a/Documentation/admin-guide/kernel-parameters.txt
+> > > +++ b/Documentation/admin-guide/kernel-parameters.txt
+> > > @@ -2239,6 +2239,29 @@ Kernel parameters
+> > >  
+> > >  			idle=nomwait: Disable mwait for CPU C-states
+> > >  
+> > > +			[ARM64,EARLY]
+> > > +			Format: idle=wfi, idle=yield, idle=nop
+> > > +
+> > > +			idle=wfi: Use the WFI (Wait For Interrupt) hint
+> > > +			instruction in the idle loop. This is the default and
+> > > +			allows the CPU to enter a low-power state until an
+> > > +			interrupt arrives.
+> > 
+> > Just curious as when and why one would need to use idle=wfi if that is the
+> > default behaviour. I am missing the need to have it.
+> 
+> It's probably useful to have so that you can override an idle= option
+> present earlier in the cmdline. e.g.
+> 
+> 	idle=nop idle=wfi
+> 
+> will give you the wfi behaviour, which is handy if the cmdline is
+> stitched topgether from different sources.
+> 
 
-And it shouldn't. Why can't your favourite boot-loader use it, like on
-any reasonable machine?
+Thanks, that makes sense.
 
-	M.
-
---=20
-Jazz isn't dead. It just smells funny.
+-- 
+Regards,
+Sudeep
 
