@@ -1,136 +1,130 @@
-Return-Path: <linux-doc+bounces-96624-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96627-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id gHuSD3RyVWpAogAAu9opvQ
-	(envelope-from <linux-doc+bounces-96624-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 01:19:16 +0200
+	id JiuaHER2VWoMowAAu9opvQ
+	(envelope-from <linux-doc+bounces-96627-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 01:35:32 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id E325C74FAF2
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 01:19:15 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id AAD4874FBDD
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 01:35:31 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linux-foundation.org header.s=korg header.b="nZler/ys";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96624-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-96624-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=none;
+	dkim=pass header.d=linux.dev header.s=key1 header.b=ARblUxDw;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96627-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-96627-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=linux.dev;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id AC6AC301027D
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 23:18:24 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 7E92C3034E37
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 23:35:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 96B70385D66;
-	Mon, 13 Jul 2026 23:18:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F18683B83E8;
+	Mon, 13 Jul 2026 23:35:29 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from out-179.mta1.migadu.com (out-179.mta1.migadu.com [95.215.58.179])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7D5DC2E8B9B;
-	Mon, 13 Jul 2026 23:18:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1286346A0D
+	for <linux-doc@vger.kernel.org>; Mon, 13 Jul 2026 23:35:26 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783984703; cv=none; b=Q1MYIjvrN3UTSMUwMJbDK/dqzvMSzIwGDDJOJfdsxGIqp+/YegwqyTkH4nD4tjmFnBEcyUYBBkC3f92wPcIu4hTXqocqMsQCwDWVXN3OCrl2kB1Lzw3k10ynWv84/+P4iojYfUKf8pdSXxkyyDNjg+evtlieWhPpDJnwu964tIo=
+	t=1783985729; cv=none; b=nf4ZyaXtvvDPC2iXHz4/zgZ8TQNZWe52XG3FWcGb+A7KuOndF4627qV0nlVbsKO/RSaGgY0DHpGF9Lx7X4fbNmRp+5+rQV7f6re9kuwLHjthF5z9uBvzPAdLDQPuDs3WmTy0DUvmjotp/a6Xyix83eWFcYC6jV8xxcm5RruEiXM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783984703; c=relaxed/simple;
-	bh=zAhTcmGet1zbfalwg6YD+G8NVjqXlIHXtbfcMxYpDwc=;
-	h=Date:From:To:Cc:Subject:Message-Id:In-Reply-To:References:
-	 Mime-Version:Content-Type; b=SbDGOj+lNU+P/gdcPgXgrMcLSB9Jt8/P97b5EuSj4yuc3Du/Y+z8t8SUIKCwj8m7pdva2VrDvP5rZXRO8okSIF7QFupvIFfUJZ9RYSWD+tyQ4uUUY3G5esWFE6f6X+2nf/ESX/Uds+pCd+ANDza4gIia2p36dVR8d8v+k2Us8X4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b=nZler/ys; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E807B1F000E9;
-	Mon, 13 Jul 2026 23:18:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linux-foundation.org; s=korg; t=1783984702;
-	bh=f5EDysaFuDNgPurWzUMZsX1j7CfSV1oHh5QC4rjPyqo=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=nZler/ysO6IBo934carYd2XqUDIMaFaeiUMVtZhtTP9n+0D4DjPtZs2k+yOsT1Fx5
-	 TLAeqjC/pvL6zMH2/jytpd4FVcVHGbYHPanj59p1Zh69G+c1G/sD/6MLodFGtLct3E
-	 XADqVu2KrZngtk7/bOTMrI43ujnTM80o4BDpBedk=
-Date: Mon, 13 Jul 2026 16:18:20 -0700
-From: Andrew Morton <akpm@linux-foundation.org>
-To: Stanislav Kinsburskii <skinsburskii@gmail.com>
-Cc: airlied@gmail.com, akhilesh@ee.iitb.ac.in, corbet@lwn.net,
- dakr@kernel.org, david@kernel.org, decui@microsoft.com,
- haiyangz@microsoft.com, jgg@ziepe.ca, kees@kernel.org, kys@microsoft.com,
- leon@kernel.org, liam@infradead.org, lizhi.hou@amd.com, ljs@kernel.org,
- longli@microsoft.com, lyude@redhat.com, maarten.lankhorst@linux.intel.com,
- mamin506@gmail.com, mhocko@suse.com, mripard@kernel.org,
- nouveau@lists.freedesktop.org, ogabbay@kernel.org, oleg@redhat.com,
- rppt@kernel.org, shuah@kernel.org, simona@ffwll.ch,
- skhan@linuxfoundation.org, surenb@google.com, tzimmermann@suse.de,
- vbabka@kernel.org, wei.liu@kernel.org, dri-devel@lists.freedesktop.org,
- linux-mm@kvack.org, linux-doc@vger.kernel.org,
- linux-hyperv@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-kselftest@vger.kernel.org, linux-rdma@vger.kernel.org
-Subject: Re: [PATCH v8 5/8] drm/nouveau: Use
- hmm_range_fault_unlocked_timeout() for SVM faults
-Message-Id: <20260713161820.8f72577b91c730a2e853f6a5@linux-foundation.org>
-In-Reply-To: <alUZZYIPY-UkhpY4@skinsburskii>
-References: <178371866223.900500.12312667138651735591.stgit@skinsburskii>
-	<178371881847.900500.8789369230260725500.stgit@skinsburskii>
-	<20260710151222.ddb35eab9c81a8720491464a@linux-foundation.org>
-	<alG1k3JsoywE2CBM@skinsburskii>
-	<20260710224833.9caf2a0a9906f0515e326a45@linux-foundation.org>
-	<alUZZYIPY-UkhpY4@skinsburskii>
-X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+	s=arc-20240116; t=1783985729; c=relaxed/simple;
+	bh=yPVMwCLgnyNe/t3eNvupdQki5tgzzLQWgNOEymae3F0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=DFCQKwEPmveWmobDDBBJlgDys+QBNSXbbZHtJhDh0BIjZ5peZ4HCvw8axwhWhdMjn3fiDQr7851JmKC0axJPDOuJEX9gwLp1uj8Nty50qhYRi4UI/GuK7JIuUcehHPFthiaUzc9Q49wQRQWUyq2NdGrq4k1f1wkjh1eoeoOPagc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=ARblUxDw; arc=none smtp.client-ip=95.215.58.179
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1783985725;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=FHVGlNEvFJn/BK7H+YlbY2UWGmJPbcmZFwEi8OkY3qI=;
+	b=ARblUxDwrB6jCMBB6Njvy92ejoBMiGOoWcPghFyE1TLYjUqXkvZubmmfTrSgdyeECPgdhs
+	3qrPiBw5SnbePgtVILLcnMPw73mMVP1xhMJ3pp3qNjd6cVoxXA+kMtfKXuyG63eFZJO9Vc
+	YXVGHGAdN6U/doxHSjcSF9eHWjIDzqw=
+From: Thorsten Blum <thorsten.blum@linux.dev>
+To: Andy Lutomirski <luto@kernel.org>,
+	Thomas Gleixner <tglx@kernel.org>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Randy Dunlap <rdunlap@infradead.org>
+Cc: x86@kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Thorsten Blum <thorsten.blum@linux.dev>
+Subject: [PATCH RESEND 0/3] x86/vdso: Improve vdso=/vdso32= boot parameter validation
+Date: Tue, 14 Jul 2026 01:34:23 +0200
+Message-ID: <20260713233422.127348-5-thorsten.blum@linux.dev>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+MIME-Version: 1.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=940; i=thorsten.blum@linux.dev; h=from:subject; bh=yPVMwCLgnyNe/t3eNvupdQki5tgzzLQWgNOEymae3F0=; b=owGbwMvMwCUWt7pQ4caZUj3G02pJDFmhpf9+ZMda23sfcQvLzv1ixnkyQu/fzUlffv7ewvJHv IeleFJdRykLgxgXg6yYIsuDWT9m+JbWVG4yidgJM4eVCWQIAxenAEzk8XqG/9m7jijs3lnk57qJ /8mBdZbTldizCuvjTYT+8pwS7KsxyWBkOJm8vOhN5OLvlz0z/rzrutn4MMBj1uP/Zdcn+Yau+Kf uyQEA
+X-Developer-Key: i=thorsten.blum@linux.dev; a=openpgp; fpr=1D60735E8AEF3BE473B69D84733678FD8DFEEAD4
 Content-Transfer-Encoding: 8bit
+X-Migadu-Flow: FLOW_OUT
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MV_CASE(0.50)[];
-	R_DKIM_ALLOW(-0.20)[linux-foundation.org:s=korg];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:skinsburskii@gmail.com,m:airlied@gmail.com,m:akhilesh@ee.iitb.ac.in,m:corbet@lwn.net,m:dakr@kernel.org,m:david@kernel.org,m:decui@microsoft.com,m:haiyangz@microsoft.com,m:jgg@ziepe.ca,m:kees@kernel.org,m:kys@microsoft.com,m:leon@kernel.org,m:liam@infradead.org,m:lizhi.hou@amd.com,m:ljs@kernel.org,m:longli@microsoft.com,m:lyude@redhat.com,m:maarten.lankhorst@linux.intel.com,m:mamin506@gmail.com,m:mhocko@suse.com,m:mripard@kernel.org,m:nouveau@lists.freedesktop.org,m:ogabbay@kernel.org,m:oleg@redhat.com,m:rppt@kernel.org,m:shuah@kernel.org,m:simona@ffwll.ch,m:skhan@linuxfoundation.org,m:surenb@google.com,m:tzimmermann@suse.de,m:vbabka@kernel.org,m:wei.liu@kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-mm@kvack.org,m:linux-doc@vger.kernel.org,m:linux-hyperv@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-rdma@vger.kernel.org,s:lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	DMARC_NA(0.00)[linux-foundation.org];
-	FORGED_SENDER(0.00)[akpm@linux-foundation.org,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[14];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[39];
-	FREEMAIL_TO(0.00)[gmail.com];
+	TAGGED_FROM(0.00)[bounces-96627-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:luto@kernel.org,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:hpa@zytor.com,m:akpm@linux-foundation.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:rdunlap@infradead.org,m:x86@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:thorsten.blum@linux.dev,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[3];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[thorsten.blum@linux.dev,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[bounces-96624-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[linux-foundation.org:+];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[akpm@linux-foundation.org,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[gmail.com,ee.iitb.ac.in,lwn.net,kernel.org,microsoft.com,ziepe.ca,infradead.org,amd.com,redhat.com,linux.intel.com,suse.com,lists.freedesktop.org,ffwll.ch,linuxfoundation.org,google.com,suse.de,kvack.org,vger.kernel.org];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[thorsten.blum@linux.dev,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[linux.dev:+];
+	ALIAS_RESOLVED(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,linux-foundation.org:from_mime,linux-foundation.org:dkim,linux-foundation.org:mid]
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linux.dev:from_mime,linux.dev:dkim,linux.dev:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: E325C74FAF2
+X-Rspamd-Queue-Id: AAD4874FBDD
 
-On Mon, 13 Jul 2026 09:59:17 -0700 Stanislav Kinsburskii <skinsburskii@gmail.com> wrote:
+Replace the deprecated simple_strtoul() [1] with kstrtouint() when
+parsing the vDSO boot parameters. This provides strict input validation,
+rejects partial input, and warns when disabling vDSO for invalid values.
 
-> > > I'm not sure... The "timeout - jiffies" can become negative.
-> > > Won't 1UL convert both of them to "UL" and thus make the comparison
-> > > overflow?
-> > 
-> > `timeout' and `jiffies' are both unsigned long.
-> 
-> Yeah, I’m sorry for the sloppy wording.
-> 
-> What I meant was: will "max(timeout - jiffies, 1UL)" correctly handle
-> the case where jiffies < timeout?
+Adjust both warnings for consistency and update the documentation.
 
-That will return `timeout - jiffies': a smallish positive number.
+[1] https://www.kernel.org/doc/html/latest/process/deprecated.html#simple-strtol-simple-strtoll-simple-strtoul-simple-strtoull
 
-I'm not sure what's intended here.  Perhaps the code should be
-using time_after() or similar?
+Thorsten Blum (3):
+  x86/vdso: Use kstrtouint() to validate vdso= boot parameter
+  x86/vdso: Use kstrtouint() to validate vdso32= boot parameter
+  Documentation/arch/x86: Remove obsolete vdso32=2 compatibility note
+
+ Documentation/admin-guide/kernel-parameters.txt |  5 +----
+ arch/x86/entry/vdso/vdso32-setup.c              | 10 ++++------
+ arch/x86/entry/vdso/vma.c                       |  6 +++++-
+ 3 files changed, 10 insertions(+), 11 deletions(-)
+
+
+base-commit: 979c294509f9248fe1e7c358d582fb37dd5ca12d
 
