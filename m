@@ -1,258 +1,188 @@
-Return-Path: <linux-doc+bounces-96580-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96625-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id GUyeF5YQVWpUjgAAu9opvQ
-	(envelope-from <linux-doc+bounces-96580-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 18:21:42 +0200
+	id E4YfJad0VWqcogAAu9opvQ
+	(envelope-from <linux-doc+bounces-96625-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 01:28:39 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id E129A74D8AE
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 18:21:41 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3311C74FB82
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 01:28:39 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=YHZfWHGi;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96580-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-96580-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=eeFZ4MWu;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96625-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-96625-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=mailbox.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id D45C4301E76D
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 16:19:46 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 907B330CB3E9
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 23:27:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 96D0040B6C9;
-	Mon, 13 Jul 2026 16:19:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2765A3D7A07;
+	Mon, 13 Jul 2026 23:27:24 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87B9133AD88;
-	Mon, 13 Jul 2026 16:19:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22E1E3B8BD8;
+	Mon, 13 Jul 2026 23:27:20 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783959582; cv=none; b=fFYRzoLMUYuIvxV5/yJ7/wKrfETA1q0VLrN2dKUYMyOnMPTpqtY1X2Y/o34TEeT7wRM7oyetjpxwI1j63Gk3nxstKkT5VtrmdAbeJD+fgKA7YQ6MIIeqFExH56Gx8qJ8Dx6vkSuMUuLYvN09ND6oRRqkR1uGhqWkPbP+vqPt2sQ=
+	t=1783985244; cv=none; b=eJBGJwxLB5nzubMB5tZctdVzb3MnQKwV8pGD1Z+rnf+U7aXvSq2Yovr1CL6ZMLnb/p5cKlV9ddvU0/j1XTsqbk2IiWet1i7f0E/LQ4Z7vschFAebLCB0wegJw+NaaCqAsAeLG4+/ZgEFWeNK98TiQCm4mzIH8Sl/R/Rxu1MIw1U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783959582; c=relaxed/simple;
-	bh=UrU/itlOP+rit6cFnakMEDrwKFJ+4WWvWHfwH/2hf38=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=XxbrRZkA17TUd1QyJdqQ+hnB1zpeNXq5SFoEazJzayVGv2/gq/FLsFLK6X/AbVfU4SnEkxySzPribS5Qj4wK6XiZwssXQjPZRGvr6IW0Gi3GFChEGooW1ts4LtsQhE+hepEWgbtM3yzit7ETvSx3mPjrx7XvM8HDxmcRyGCdQ9Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YHZfWHGi; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 34D041F000E9;
-	Mon, 13 Jul 2026 16:19:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783959576;
-	bh=7sX79a8gzjULeBFsanRoK3h8jRzavZVqjAH+0r52JCY=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=YHZfWHGiNL7wt3TvUIYLlK4BfKSOHjHBwxYwk/zvwIf2rvEop5c3zO5SQWl1FNDl6
-	 sKfWPIc2QkyeFCdUdPj10w69oQF6AbH6ryEwN+hRgJCXVrUUzY99k6/LBPiN+znnZM
-	 9J7twPP/a1frJ3fk6piU7PPiQuWByd4KLbmCS2b3GmW3yHRO0QdqGOVbXC190beDxK
-	 TdfFAUTo/IrZtav5IcEsvwIBJEE6eRU+b+6AdHdjz/2b9Zgqv+nz9QtkKEZDcDLq4A
-	 80MGwLtfTpIUYFSktpkx25fvJnOqLvfRm4QC4fIXU0UHcxVfMU61tfSPdeZN4u9v+e
-	 hOXK/Z3egO6kg==
-Date: Mon, 13 Jul 2026 18:19:28 +0200
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Kishore Batta <kishore.batta@oss.qualcomm.com>
-Cc: Jonathan Corbet <corbet@lwn.net>, 
-	Shuah Khan <skhan@linuxfoundation.org>, Jeff Hugo <jeff.hugo@oss.qualcomm.com>, 
-	Carl Vanderlip <carl.vanderlip@oss.qualcomm.com>, Oded Gabbay <ogabbay@kernel.org>, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	mhi@lists.linux.dev
-Subject: Re: [PATCH v6 4/7] bus: mhi: Add QDU100 Sahara variant and firmware
- fallback
-Message-ID: <kwq7tajvlnm5sesmthseleenbah6d5kuj5d2msyspme7je6o2h@rx3dbqyqeywh>
-References: <20260701-sahara_protocol_new_v2-v6-0-3a78362c4741@oss.qualcomm.com>
- <20260701-sahara_protocol_new_v2-v6-4-3a78362c4741@oss.qualcomm.com>
- <n45ii7ekxeefuxw2ydwzsx7lqlfczbgg6obrzmzpytl2fin7j5@vbhmrptcjvcb>
- <21867efc-b5a8-4ed9-92b4-059a020731a6@oss.qualcomm.com>
+	s=arc-20240116; t=1783985244; c=relaxed/simple;
+	bh=H1hj1fKdkFAMfe6aV1gB0KI7JUT6T6OHj293Gpx6mDA=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=s9RcLAMjySjro+3HUWKtaTX1Qyqmft/VB1ROSLVcOg8lKeEivY1MOuvcriLLDHbZ5sGTLuRE1DydGKeruDvoQRTi4BAn1sC4Kx4f3X/78L+ogJH76Tgy7MQjYIBWKMpUIYo2ZI7TgWziqposGE2UauG4BikBOvqnEU+HziEZxFY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org; spf=pass smtp.mailfrom=mailbox.org; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=eeFZ4MWu; arc=none smtp.client-ip=80.241.56.151
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
+	(No client certificate requested)
+	by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gzdrN5XjXz8v6x;
+	Tue, 14 Jul 2026 01:27:16 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1783985236;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=a6jyp32uUawh83SRhr8POWlLF0OVHeuNyqGYp5nxZsY=;
+	b=eeFZ4MWuPw2jU5Jcg7tSt39IfugRem3NikpSYn2zhVLCahxbtlWJdjgXDpQfyxw4LG+Bw6
+	aFInhLaVgicO1NFdzknmCWt9l5VsdB9KnpHor1SiPt3gYaxV/Kqx0Erhau2IJWA/s0q8PV
+	UUVD2H0b3QfX7LGqCfUUSKN41g1RJc5h9ewzCb4tbC5eBdty4zW9yChEp0C98o4VdDtKRD
+	qr/kbY5B9jBMmrD4Ju2rNBFuzdxSSCpNwQpINvcdpb3Ltvo5kY4+Bbg3A2UBYdBmAhGcq2
+	EP5h2nU9DRLck57ikG3T0RmATVVo8wdJ9DUEjTMOTYfQAIdzm/VF/cOfYyQaVA==
+Message-ID: <7715ca62-be37-4c6e-86d1-3d0816bf9bfb@mailbox.org>
+Date: Mon, 13 Jul 2026 18:20:14 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Subject: Re: [PATCH] PCI: rcar-gen4: Inline GIC_TRANSLATER offset macro
+To: Marc Zyngier <maz@kernel.org>
+Cc: linux-pci@vger.kernel.org, kernel test robot <lkp@intel.com>,
+ =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+ Bjorn Helgaas <bhelgaas@google.com>,
+ Catalin Marinas <catalin.marinas@arm.com>, Conor Dooley
+ <conor+dt@kernel.org>, Geert Uytterhoeven <geert+renesas@glider.be>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Lorenzo Pieralisi <lpieralisi@kernel.org>,
+ Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
+ Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>,
+ devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-renesas-soc@vger.kernel.org
+References: <20260709201103.90162-1-marek.vasut+renesas@mailbox.org>
+ <87qzlb5jsl.wl-maz@kernel.org>
+ <2cb03029-0957-4ed8-98bd-9b3e0e0bce2d@mailbox.org>
+ <87fr1m6hma.wl-maz@kernel.org>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <87fr1m6hma.wl-maz@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <21867efc-b5a8-4ed9-92b4-059a020731a6@oss.qualcomm.com>
+X-MBO-RS-ID: 870d1a74b75403cd9a9
+X-MBO-RS-META: m76s4j99tj8fo9x8q4hzjed7j1qa4ujj
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-4.66 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	DMARC_POLICY_ALLOW(-0.50)[mailbox.org,reject];
+	R_DKIM_ALLOW(-0.20)[mailbox.org:s=mail20150812];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-96625-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:maz@kernel.org,m:linux-pci@vger.kernel.org,m:lkp@intel.com,m:kwilczynski@kernel.org,m:bhelgaas@google.com,m:catalin.marinas@arm.com,m:conor+dt@kernel.org,m:geert+renesas@glider.be,m:krzk+dt@kernel.org,m:lpieralisi@kernel.org,m:mani@kernel.org,m:robh@kernel.org,m:yoshihiro.shimoda.uh@renesas.com,m:devicetree@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-renesas-soc@vger.kernel.org,m:conor@kernel.org,m:geert@glider.be,m:krzk@kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[marek.vasut@mailbox.org,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[18];
+	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:kishore.batta@oss.qualcomm.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:jeff.hugo@oss.qualcomm.com,m:carl.vanderlip@oss.qualcomm.com,m:ogabbay@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-arm-msm@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:mhi@lists.linux.dev,s:lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[mani@kernel.org,linux-doc@vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-96580-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mani@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[marek.vasut@mailbox.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[mailbox.org:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt,renesas];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp,qualcomm.com:email,rx3dbqyqeywh:mid]
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: E129A74D8AE
+X-Rspamd-Queue-Id: 3311C74FB82
 
-On Mon, Jul 13, 2026 at 07:46:02PM +0530, Kishore Batta wrote:
+On 7/13/26 5:20 PM, Marc Zyngier wrote:
+> On Fri, 10 Jul 2026 14:35:10 +0100,
+> Marek Vasut <marek.vasut@mailbox.org> wrote:
+>>
+>> On 7/10/26 10:30 AM, Marc Zyngier wrote:
+>>> On Thu, 09 Jul 2026 21:10:03 +0100,
+>>> Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
+>>>>
+>>>> Instead of pulling in the whole linux/irqchip/arm-gic-v3.h , copy the
+>>>> one GITS_TRANSLATER register offset macro directly into the driver.
+>>>> This repairs the ability to build the driver on non-ARM non-GIC targets
+>>>> the way it was possible until now, which retains good build test coverage.
+>>>>
+>>>> Reported-by: kernel test robot <lkp@intel.com>
+>>>> Closes: https://lore.kernel.org/oe-kbuild-all/202607100310.iQw5m9Uo-lkp@intel.com/
+>>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>>>> ---
+>>>> Cc: "Krzysztof Wilczyński" <kwilczynski@kernel.org>
+>>>> Cc: Bjorn Helgaas <bhelgaas@google.com>
+>>>> Cc: Catalin Marinas <catalin.marinas@arm.com>
+>>>> Cc: Conor Dooley <conor+dt@kernel.org>
+>>>> Cc: Geert Uytterhoeven <geert+renesas@glider.be>
+>>>> Cc: Krzysztof Kozlowski <krzk+dt@kernel.org>
+>>>> Cc: Lorenzo Pieralisi <lpieralisi@kernel.org>
+>>>> Cc: Manivannan Sadhasivam <mani@kernel.org>
+>>>> Cc: Marc Zyngier <maz@kernel.org>
+>>>> Cc: Rob Herring <robh@kernel.org>
+>>>> Cc: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
+>>>> Cc: devicetree@vger.kernel.org
+>>>> Cc: linux-arm-kernel@lists.infradead.org
+>>>> Cc: linux-doc@vger.kernel.org
+>>>> Cc: linux-kernel@vger.kernel.org
+>>>> Cc: linux-pci@vger.kernel.org
+>>>> Cc: linux-renesas-soc@vger.kernel.org
+>>>> ---
+>>>> Note: The alternative I could think of would be ifdeffery which
+>>>>         is not nice and thwarts the build coverage, or limit the
+>>>>         driver to ARM/ARM64 in Kconfig which also thwarts the build
+>>>>         coverage. I could also split off the register macros in
+>>>>         linux/irqchip/arm-gic-v3.h into some separate header
+>>>>         linux/irqchip/arm-gic-v3-regs.h and include that which
+>>>>         might be OKish and avoids duplication. Thoughts ?
+>>>
+>>> No, I'm not hacking something that is purely architecture specific for
+>>> the purpose of a bizarre integration quirk that should be handled by
+>>> the boot firmware, and not Linux.
+>>
+>> The PCIe controller is fully controlled by Linux.
 > 
-> On 7/9/2026 11:49 AM, Manivannan Sadhasivam wrote:
-> > On Wed, Jul 01, 2026 at 04:07:38PM +0530, Kishore Batta wrote:
-> > > The Sahara driver currently selects a firmware image table based on the
-> > > attached device, but it does not recognize QDU100 devices that expose the
-> > > protocol on the SAHARA MHI channel. As a result, the host cannot associate
-> > > QDU100 devices with the correct firmware namespace during image transfer.
-> > > 
-> > > Extend the probe time variant selection to match the SAHARA MHI channel and
-> > > associate it with the QDU100 firmware folder. Add a firmware lookup
-> > > fallback for cases where an image does not have an explicit entry in the
-> > > device's firmware table. This allows required images to be provisioned by
-> > > the platform.
-> > > 
-> > > This change only affects devices matched on the SAHARA MHI channel and
-> > > does not change behavior for existing AIC100 and AIC200 devices.
-> > > 
-> > > Signed-off-by: Kishore Batta <kishore.batta@oss.qualcomm.com>
-> > > ---
-> > >   drivers/bus/mhi/host/clients/sahara/sahara.c | 27 +++++++++++++++--
-> > >   drivers/bus/mhi/host/pci_generic.c           | 45 ++++++++++++++++++++++++++++
-> > >   2 files changed, 70 insertions(+), 2 deletions(-)
-> > > 
-> > > diff --git a/drivers/bus/mhi/host/clients/sahara/sahara.c b/drivers/bus/mhi/host/clients/sahara/sahara.c
-> > > index e339c67e236af271645ca81cc517efd9eead87e4..9adbd84859073d8024ba2a5fcfa33897439d6759 100644
-> > > --- a/drivers/bus/mhi/host/clients/sahara/sahara.c
-> > > +++ b/drivers/bus/mhi/host/clients/sahara/sahara.c
-> > > @@ -189,6 +189,7 @@ static bool is_streaming(struct sahara_context *context)
-> > >   static int sahara_find_image(struct sahara_context *context, u32 image_id)
-> > >   {
-> > > +	char *fw_path;
-> > >   	int ret;
-> > >   	if (image_id == context->active_image_id)
-> > > @@ -201,8 +202,28 @@ static int sahara_find_image(struct sahara_context *context, u32 image_id)
-> > >   	}
-> > >   	if (image_id >= context->table_size || !context->image_table[image_id]) {
-> > > -		dev_err(&context->mhi_dev->dev, "request for unknown image: %d\n", image_id);
-> > > -		return -EINVAL;
-> > > +		if (!context->fw_folder) {
-> > > +			dev_err(&context->mhi_dev->dev,
-> > > +				"Request for unknown image: %u (no fw folder)\n", image_id);
-> > > +			return -EINVAL;
-> > > +		}
-> > > +
-> > > +		fw_path = kasprintf(GFP_KERNEL, "qcom/%s/%u",
-> > > +				    context->fw_folder, image_id);
-> > > +		if (!fw_path)
-> > > +			return -ENOMEM;
-> > > +
-> > > +		ret = firmware_request_nowarn(&context->firmware,
-> > > +					      fw_path,
-> > > +					      &context->mhi_dev->dev);
-> > > +		kfree(fw_path);
-> > > +		if (ret) {
-> > > +			dev_err(&context->mhi_dev->dev,
-> > > +				"request for unknown image: %d\n", image_id);
-> > > +			return -EINVAL;
-> > > +		}
-> > > +		context->active_image_id = image_id;
-> > > +		return 0;
-> > >   	}
-> > >   	/*
-> > > @@ -870,8 +891,10 @@ static void sahara_mhi_dl_xfer_cb(struct mhi_device *mhi_dev, struct mhi_result
-> > >   static const struct mhi_device_id sahara_mhi_match_table[] = {
-> > >   	{ .chan = "QAIC_SAHARA", },
-> > > +	{ .chan = "SAHARA"},
-> > >   	{},
-> > >   };
-> > > +MODULE_DEVICE_TABLE(mhi, sahara_mhi_match_table);
-> > This change should belong to a separate patch.
-> > 
-> > >   static struct mhi_driver sahara_mhi_driver = {
-> > >   	.id_table = sahara_mhi_match_table,
-> > > diff --git a/drivers/bus/mhi/host/pci_generic.c b/drivers/bus/mhi/host/pci_generic.c
-> > > index 391ab146f501c6ce1c81f6138f7c491a49c2f264..82e41632afc555a53dec3d8395558ae039b33bbd 100644
-> > > --- a/drivers/bus/mhi/host/pci_generic.c
-> > > +++ b/drivers/bus/mhi/host/pci_generic.c
-> > > @@ -300,6 +300,43 @@ static const struct mhi_pci_dev_info mhi_qcom_qdu100_info = {
-> > >   	.reset_on_remove = true,
-> > >   };
-> > > +static const char * const qdu100_image_table[] = {
-> > > +	[5] = "qcom/qdu100/uefi.elf",
-> > > +	[8] = "qcom/qdu100/qdsp6sw.mbn",
-> > > +	[16] = "qcom/qdu100/efs1.bin",
-> > > +	[17] = "qcom/qdu100/efs2.bin",
-> > > +	[20] = "qcom/qdu100/efs3.bin",
-> > > +	[23] = "qcom/qdu100/aop.mbn",
-> > > +	[25] = "qcom/qdu100/tz.mbn",
-> > > +	[29] = "qcom/qdu100/zeros_1sector.bin",
-> > > +	[33] = "qcom/qdu100/hypvm.mbn",
-> > > +	[34] = "qcom/qdu100/mdmddr.mbn",
-> > > +	[36] = "qcom/qdu100/multi_image_qti.mbn",
-> > > +	[37] = "qcom/qdu100/multi_image.mbn",
-> > > +	[38] = "qcom/qdu100/xbl_config.elf",
-> > > +	[39] = "qcom/qdu100/abl_userdebug.elf",
-> > > +	[40] = "qcom/qdu100/zeros_1sector.bin",
-> > > +	[41] = "qcom/qdu100/devcfg.mbn",
-> > > +	[42] = "qcom/qdu100/zeros_1sector.bin",
-> > > +	[45] = "qcom/qdu100/tools_l.elf",
-> > > +	[46] = "qcom/qdu100/Quantum.elf",
-> > > +	[47] = "qcom/qdu100/quest.elf",
-> > > +	[48] = "qcom/qdu100/xbl_ramdump.elf",
-> > > +	[49] = "qcom/qdu100/shrm.elf",
-> > > +	[50] = "qcom/qdu100/cpucp.elf",
-> > > +	[51] = "qcom/qdu100/aop_devcfg.mbn",
-> > > +	[52] = "qcom/qdu100/fw_csm_gsi_3.0.elf",
-> > > +	[53] = "qcom/qdu100/qdsp6sw_dtbs.elf",
-> > > +	[54] = "qcom/qdu100/qupv3fw.elf",
-> > > +};
-> > > +
-> > > +static const struct mhi_sahara_fw_table qdu100_sahara_fw = {
-> > > +	.image_table = qdu100_image_table,
-> > > +	.table_size = ARRAY_SIZE(qdu100_image_table),
-> > > +	.fw_folder = "qdu100",
-> > > +	.non_streaming = false,
-> > > +};
-> > > +
-> > >   static const struct mhi_channel_config mhi_qcom_sa8775p_channels[] = {
-> > >   	MHI_CHANNEL_CONFIG_UL(46, "IP_SW0", 2048, 1),
-> > >   	MHI_CHANNEL_CONFIG_DL(47, "IP_SW0", 2048, 2),
-> > > @@ -1399,6 +1436,14 @@ static int mhi_pci_probe(struct pci_dev *pdev, const struct pci_device_id *id)
-> > >   	pci_set_drvdata(pdev, mhi_pdev);
-> > > +	/*
-> > > +	 * Provide Sahara firmware mapping. Sahara consumes it via
-> > > +	 * mhi_dev->mhi_cntrl->sahara_fw at probe time.
-> > > +	 */
-> > > +	if (info == &mhi_qcom_qdu100_info ||
-> > > +	    (info->name && !strcmp(info->name, "qcom-qdu100")))
-> > > +		mhi_cntrl->sahara_fw = &qdu100_sahara_fw;
-> > > +
-> > Why are you adding QAIC MHI controller config in pci_generic driver? This driver
-> > only handles Modem devices.
-> > 
-> > - Mani
-> 
-> 
-> Hi Mani, Above one is for QDU100 device. QAIC is not added in this file.
-> 
+> And it shouldn't. Why can't your favourite boot-loader use it, like on
+> any reasonable machine?
+Because U-Boot is designed to boot as quickly as possible and get out of 
+the way, which means lazy initialization of any and all resources, which 
+means skip initialization of any and all hardware that is not needed to 
+boot the machine. It is one of the core design decisions behind the 
+U-Boot driver model [1].
 
-Sorry, my bad. But anyhow, you should provide this mapping table pointer via
-'struct mhi_pci_dev_info'.
+The R-Car V4H using mainline U-Boot can boot from PCIe/NVMe SSD, but 
+that is purely optional and some users might instead boot from SD cards 
+or eMMCs, and even then the PCIe hardware is shut down before booting 
+the OS to prevent any issues during OS boot or reinitialization by the OS.
 
-- Mani
-
--- 
-மணிவண்ணன் சதாசிவம்
+[1] 
+https://git.u-boot-project.org/u-boot/u-boot/-/blob/main/doc/develop/driver-model/design.rst?ref_type=heads&plain=1#L794
 
