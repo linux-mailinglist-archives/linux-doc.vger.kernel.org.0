@@ -1,283 +1,145 @@
-Return-Path: <linux-doc+bounces-96593-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96594-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 7PpHC+oZVWrbjwAAu9opvQ
-	(envelope-from <linux-doc+bounces-96593-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 19:01:30 +0200
+	id /a7UB5gcVWpJkAAAu9opvQ
+	(envelope-from <linux-doc+bounces-96594-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 19:12:56 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id B6F5C74DD2E
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 19:01:29 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8268174DE69
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 19:12:55 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=AkhOldmC;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96593-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-96593-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=cx5T0bBQ;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96594-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-96594-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 3282D3011EBA
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 17:01:29 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 0AA50309E19C
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 17:08:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 33EA81DF261;
-	Mon, 13 Jul 2026 17:01:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A74CF3438B1;
+	Mon, 13 Jul 2026 17:08:51 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0005280018
-	for <linux-doc@vger.kernel.org>; Mon, 13 Jul 2026 17:01:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6E3253438AB;
+	Mon, 13 Jul 2026 17:08:50 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783962088; cv=none; b=FRnsta+UTIzdMEDvGE9hDWCaeCEaIQtR2dyjDPAzs0gVVCvB3+6HsPO20mtnXrmFpnf3GQV1Kg1lIlnYr051DhQyj+c4B5bV+zIAHwN5nSfVziD5F2d4fGFJe4ILvnvxVfB7ZRIa+krUctI7+/pGFnxXAlBCdh1T7pX7d5r7G4Y=
+	t=1783962531; cv=none; b=hzQpYWimNXbKa5TxP1kaFekVfH7ia7FFog9oVjzMrn+kKb2k0jUj3Rfrffzl6UOPR+e+jV97y4BP1wICEphhQZkI3e9w2h3VIjqIrEQO+1qqQhzpymkIRc72hLUmFhCInnIOC51hGzNYp4IxbEUI8NBIM6rjPgI8pu/awn00H54=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783962088; c=relaxed/simple;
-	bh=SqPTyIhNXXnGeYnJM9ztptY4dZp2tvlRUebzoP8AMpk=;
+	s=arc-20240116; t=1783962531; c=relaxed/simple;
+	bh=FGrZqzYzRMBnPJHSDgyhGqkch0UKbVoeeNZoWv3R68A=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=LNNz+qczczKgm0GL9VdrxZNckUT7hhtunFnvntPvE5N7PCLt2vGHSXiAMEWSw7UlZixn192YcjJL9vwtu3dmG/v8SMsgZv4YORrNgGn/sj35nWS6LhPvzYGnQ8Dae1tMJZxSxu9keUXqkeeIjo0ub+a25pi1DD05zcgMzTxNGwc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=AkhOldmC; arc=none smtp.client-ip=209.85.214.172
-Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-2ce98cb8165so1119565ad.1
-        for <linux-doc@vger.kernel.org>; Mon, 13 Jul 2026 10:01:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783962086; x=1784566886; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=R9LV+16tD32KS6yXCzCBkB0u2lL8SNr6pDg+a+HPC20=;
-        b=AkhOldmCDDLl6AWrOAH2b4PKTeRjNceHNnP8hN2To4OzZo/dmzYg09EBRQ3/kR4/Xp
-         TOYV6mNhKy2x/GMEqloSARoWonpxnlEzKaj/yZoJ0JzZlMyn8oyoGBQy5aUZrNHC+aui
-         ReaybeVbyIieMUdbUBfF2G44VVLzOZ0gilHtNkFeGXG/KyCEvZHRZKbzyqUnDHP8O6d/
-         Sfh0lzrb5T+VFSVQajjx2HY/kA5rh+DCPORYWO372r2nXBV9+rkzJTkxWBzfIasEeE5Z
-         MZpSC10KcG8GTdXC0/Z39118LkAj5g0qDKa8anHxoLyqTYpCz1w+LNjoAFqNTrXFVUJz
-         xrAw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783962086; x=1784566886;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=R9LV+16tD32KS6yXCzCBkB0u2lL8SNr6pDg+a+HPC20=;
-        b=FfzKzKezCXGoBT3DDmVGJZyg0YB+kcPehmJm7KjK6b18wyAW/hukRaezsTzKw/yCkt
-         HPrmH7IkY8BJ0xYvVLCLnmiZSBC1oTZuMjXyrQ9YT3/acCk3hw3J0zfwpsGURRlnp3zz
-         cD2v1jecXphzbXxXh8T3Zv6SOJSW4aydxCfQc2xV982RwMB1KO+pu7gSJ+qJ0cwWfUMQ
-         cLg/O9rIDYa2XheevTtPzi7l/Og9TdSoMk1m3yFrL/jKW7SNhrBn9n9okcag828hNNOO
-         jbEhlMEjqjrkcvS+RNFzpZR9WFLS8w4Fu/Yu34XonEV+GQEQsGej1ffLmGpFi3MX2mJV
-         t1WA==
-X-Forwarded-Encrypted: i=1; AHgh+RpCeNmzyi77gbIQIsjwigF8Zq+Gw41BDF4joLQiKzxjunBlx6lgVIeqP+kq6JzrAVbvMSe0qqRq+rg=@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywz206tNEfp+9q/arVCfjirntXfyLbnu58QjFgxvMw0LZRWf88t
-	xdZVXt08+2TndWZuZQ+yn4HC+OISDT7nyiHgUTrz/m8cLJHtECgvTwB/
-X-Gm-Gg: AfdE7cnj/MOHs8ACJF+aPi8SmnSB11kkHymH8MszgzEKS4IKSlSsEgaH6M4XSTj8Lr+
-	7oG9gFyBvv9TB0du30cNZwR+FcoRs/mJkPx8dXUAdIt+SFhmHYZZ9NlcQ68cxWwUp97Z77s2E6Z
-	X1dB+9D5fsAWgXaXyserm8yDGAoJiDWRIwsMwLLohheqF75OVXIaXIjC+1Ld5679tRjZOCewFf4
-	dIKrLpeYRogy1WyvN0qT2HdRVykcWyPDUdcM+9AjxfW2y3HuZsdRQVgr3biav0dIjHRddP4f76N
-	i8OXwptMmEcDL7OdEpbi0wKKy8syUZfbFnGI49rrWw3PYv6Nz82576UL2+hVhrYabzWlRXqKUjk
-	0y3T7xAr8ubOfVDrtuVaFUt/T6UDYb3Ojfhhkw3oK82UiWnkzFIhLs/tA5oU2CLaDhAlgJEMad/
-	WFpQJIOsl2BkoZy0UQPzeKf+hcdpBrw9OpwxBy+lbRFq3nAewSLegaMSA=
-X-Received: by 2002:a17:902:e88a:b0:2ca:de3:15d7 with SMTP id d9443c01a7336-2ce8292bad0mr123460335ad.16.1783962085860;
-        Mon, 13 Jul 2026 10:01:25 -0700 (PDT)
-Received: from skinsburskii (c-98-225-44-182.hsd1.wa.comcast.net. [98.225.44.182])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ccc9d3d451sm102224465ad.65.2026.07.13.10.01.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 13 Jul 2026 10:01:22 -0700 (PDT)
-Date: Mon, 13 Jul 2026 10:01:20 -0700
-From: Stanislav Kinsburskii <skinsburskii@gmail.com>
-To: Matthew Brost <matthew.brost@intel.com>
-Cc: airlied@gmail.com, akhilesh@ee.iitb.ac.in, akpm@linux-foundation.org,
-	corbet@lwn.net, dakr@kernel.org, david@kernel.org,
-	decui@microsoft.com, haiyangz@microsoft.com, jgg@ziepe.ca,
-	kees@kernel.org, kys@microsoft.com, leon@kernel.org,
-	liam@infradead.org, lizhi.hou@amd.com, ljs@kernel.org,
-	longli@microsoft.com, lyude@redhat.com,
-	maarten.lankhorst@linux.intel.com, mamin506@gmail.com,
-	mhocko@suse.com, mripard@kernel.org, nouveau@lists.freedesktop.org,
-	ogabbay@kernel.org, oleg@redhat.com, rppt@kernel.org,
-	shuah@kernel.org, simona@ffwll.ch, skhan@linuxfoundation.org,
-	surenb@google.com, tzimmermann@suse.de, vbabka@kernel.org,
-	wei.liu@kernel.org, dri-devel@lists.freedesktop.org,
-	linux-mm@kvack.org, linux-doc@vger.kernel.org,
-	linux-hyperv@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-kselftest@vger.kernel.org, linux-rdma@vger.kernel.org
-Subject: Re: [PATCH v8 8/8] drm/gpusvm: Use
- hmm_range_fault_unlocked_timeout() for range faults
-Message-ID: <alUZ4NQptiD9fRfz@skinsburskii>
-References: <178371866223.900500.12312667138651735591.stgit@skinsburskii>
- <178371883977.900500.2198446134676328631.stgit@skinsburskii>
- <alUSq0o7CC2Pnr+H@gsse-cloud1.jf.intel.com>
+	 Content-Type:Content-Disposition:In-Reply-To; b=koVtrkSFWrZL991KiNSqzrXxSbL4yasdwelmGdqYdb2yTaWoKGGkkMxfZR5RbZnQlSdhgiR+xeIYR8HTd6VuQrjJpnwXTUOIa3WkPdi9T39iVS44bZ2zIJJOnwBOo0bLWJwq72/rRDlEZcxNvpoMENhYskpHWz7a6Ql3//kZqaQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cx5T0bBQ; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7DDB01F000E9;
+	Mon, 13 Jul 2026 17:08:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783962530;
+	bh=mu3FeJpom/od9roSeWVWo0wh6ADbWqMooWxoSkpYrWA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=cx5T0bBQEa9KC5N7S3XaA9B3Y4rA5AD+Gjtv0XJb9KDWDEY3X/J292jVgw6T5eqdG
+	 9OY+PnFipzJa3pLYKiQwiHRAoq5Bxn8l9ZcSDpiy+ioJqcPkMDb7cRT5X7Pz90rVuW
+	 NYHKcWiEvI55U3i+mcDz6ppq7VKqt9y0gmQ4AJcCpl00NjGMaaSxYGgXhv+/h8yxiR
+	 V6ezsVSmwbEMIkwyteBwDD4xWURzBUfAWPTNA0RxcyA+TzopIgDEM2ogXwC5fOM3st
+	 g8vVOdpxTfiTcmLde2ThAd4k36lwkOwpubYYIoqmGiGF8rK7Hm7z6g1UUOdoyZFN6c
+	 L6MFHAY4gW2NA==
+Date: Mon, 13 Jul 2026 19:08:39 +0200
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Kishore Batta <kishore.batta@oss.qualcomm.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, Jeff Hugo <jeff.hugo@oss.qualcomm.com>, 
+	Carl Vanderlip <carl.vanderlip@oss.qualcomm.com>, Oded Gabbay <ogabbay@kernel.org>, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+	mhi@lists.linux.dev
+Subject: Re: [PATCH v6 7/7] bus: mhi: Expose DDR training data via controller
+ sysfs
+Message-ID: <wkuia7mvgcwtemuib4abzjffrceekzheuyksqdzrykusxzvgxe@77ggixknltoc>
+References: <20260701-sahara_protocol_new_v2-v6-0-3a78362c4741@oss.qualcomm.com>
+ <20260701-sahara_protocol_new_v2-v6-7-3a78362c4741@oss.qualcomm.com>
+ <n35ouuyvy25ocbfaedksryoz5d53cylk2pcsxz7f25us444gh7@7ybkifq3fbae>
+ <fb34c262-5c91-4beb-a792-f00da203d1b6@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <alUSq0o7CC2Pnr+H@gsse-cloud1.jf.intel.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <fb34c262-5c91-4beb-a792-f00da203d1b6@oss.qualcomm.com>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [2.34 / 15.00];
-	MID_END_EQ_FROM_USER_PART(4.00)[];
+X-Spamd-Result: default: False [-4.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
 	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[40];
-	TAGGED_FROM(0.00)[bounces-96593-lists,linux-doc=lfdr.de];
-	FREEMAIL_FROM(0.00)[gmail.com];
 	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:matthew.brost@intel.com,m:airlied@gmail.com,m:akhilesh@ee.iitb.ac.in,m:akpm@linux-foundation.org,m:corbet@lwn.net,m:dakr@kernel.org,m:david@kernel.org,m:decui@microsoft.com,m:haiyangz@microsoft.com,m:jgg@ziepe.ca,m:kees@kernel.org,m:kys@microsoft.com,m:leon@kernel.org,m:liam@infradead.org,m:lizhi.hou@amd.com,m:ljs@kernel.org,m:longli@microsoft.com,m:lyude@redhat.com,m:maarten.lankhorst@linux.intel.com,m:mamin506@gmail.com,m:mhocko@suse.com,m:mripard@kernel.org,m:nouveau@lists.freedesktop.org,m:ogabbay@kernel.org,m:oleg@redhat.com,m:rppt@kernel.org,m:shuah@kernel.org,m:simona@ffwll.ch,m:skhan@linuxfoundation.org,m:surenb@google.com,m:tzimmermann@suse.de,m:vbabka@kernel.org,m:wei.liu@kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-mm@kvack.org,m:linux-doc@vger.kernel.org,m:linux-hyperv@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-rdma@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[gmail.com,ee.iitb.ac.in,linux-foundation.org,lwn.net,kernel.org,microsoft.com,ziepe.ca,infradead.org,amd.com,redhat.com,linux.intel.com,suse.com,lists.freedesktop.org,ffwll.ch,linuxfoundation.org,google.com,suse.de,kvack.org,vger.kernel.org];
-	FORGED_SENDER(0.00)[skinsburskii@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS(0.00)[m:kishore.batta@oss.qualcomm.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:jeff.hugo@oss.qualcomm.com,m:carl.vanderlip@oss.qualcomm.com,m:ogabbay@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-arm-msm@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:mhi@lists.linux.dev,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[mani@kernel.org,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-96594-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[skinsburskii@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
 	ALIAS_RESOLVED(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[mani@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	RCPT_COUNT_SEVEN(0.00)[11];
 	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.freedesktop.org:email,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,skinsburskii:mid,vger.kernel.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: B6F5C74DD2E
+X-Rspamd-Queue-Id: 8268174DE69
 
-On Mon, Jul 13, 2026 at 09:30:35AM -0700, Matthew Brost wrote:
-> On Fri, Jul 10, 2026 at 02:27:19PM -0700, Stanislav Kinsburskii wrote:
+On Mon, Jul 13, 2026 at 01:00:27PM +0530, Kishore Batta wrote:
 > 
-> Please send series like this to intel-xe@lists.freedesktop.org list too
-> as this will trigger our CI which expercises the change paths changed in
-> this series.
-> 
-> > Several GPU SVM paths take mmap_read_lock() only to call hmm_range_fault(),
-> > then retry -EBUSY until HMM_RANGE_DEFAULT_TIMEOUT expires. Those paths use
-> > MMU interval notifiers whose mm matches the mm that was locked for the HMM
-> > fault.
+> On 7/9/2026 12:27 PM, Manivannan Sadhasivam wrote:
+> > On Wed, Jul 01, 2026 at 04:07:41PM +0530, Kishore Batta wrote:
+> > > DDR training data captured during Sahara command mode needs to be
+> > > accessible to userspace so it can be persisted and reused on subsequent
+> > > boots. Currently, the training data is stored internally in the driver
+> > > but has no external visibility once the Sahara channel is torn down.
+> > > 
+> > > Expose the captured DDR training data via a read-only binary sysfs
+> > > attribute on the MHI controller device:
+> > > 
+> > > /sys/bus/mhi/devices/<mhi_cntrl>/ddr_training_data
+> > > 
+> > > The sysfs read callback serves data directly from controller scoped storage
+> > > and protects access with the controller training data lock. The attribute
+> > > lifetime is tied to the controller device via devres, allowing the data to
+> > > remain readable after Sahara channel teardown and ensuring automatic
+> > > cleanup when controller device is removed.
+> > > 
+> > If this training data is RO, then what is the use of exposing it to userspace?
 > > 
-> > Use hmm_range_fault_unlocked_timeout() for those faults and pass the
-> > remaining retry budget to HMM. The helper owns mmap_lock acquisition and
-> > refreshes range->notifier_seq internally for each retry, while GPU SVM
-> > keeps its existing driver-lock validation with mmu_interval_read_retry()
-> > after a successful fault.
-> > 
-> > Leave drm_gpusvm_check_pages() on hmm_range_fault() because that path is
-> > called with the mmap lock already held by its caller.
-> > 
-> > Signed-off-by: Stanislav Kinsburskii <skinsburskii@gmail.com>
-> > Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
-> > ---
-> >  drivers/gpu/drm/drm_gpusvm.c |   52 ++++++------------------------------------
-> >  1 file changed, 7 insertions(+), 45 deletions(-)
-> > 
-> > diff --git a/drivers/gpu/drm/drm_gpusvm.c b/drivers/gpu/drm/drm_gpusvm.c
-> > index 958cb605aedd..6b7a6eaebcd9 100644
-> > --- a/drivers/gpu/drm/drm_gpusvm.c
-> > +++ b/drivers/gpu/drm/drm_gpusvm.c
-> > @@ -788,22 +788,8 @@ enum drm_gpusvm_scan_result drm_gpusvm_scan_mm(struct drm_gpusvm_range *range,
-> >  	hmm_range.hmm_pfns = pfns;
-> >  
-> >  retry:
-> > -	hmm_range.notifier_seq = mmu_interval_read_begin(notifier);
-> > -	mmap_read_lock(range->gpusvm->mm);
-> > -
-> > -	while (true) {
-> > -		err = hmm_range_fault(&hmm_range);
-> > -		if (err == -EBUSY) {
-> > -			if (time_after(jiffies, timeout))
-> > -				break;
-> > -
-> > -			hmm_range.notifier_seq =
-> > -				mmu_interval_read_begin(notifier);
-> > -			continue;
-> > -		}
-> > -		break;
-> > -	}
-> > -	mmap_read_unlock(range->gpusvm->mm);
-> > +	err = hmm_range_fault_unlocked_timeout(&hmm_range,
-> > +					       max(timeout - jiffies, 1L));
-> >  	if (err)
-> >  		goto err_free;
-> >  
-> > @@ -1439,21 +1425,8 @@ int drm_gpusvm_get_pages(struct drm_gpusvm *gpusvm,
-> >  	}
-> >  
-> >  	hmm_range.hmm_pfns = pfns;
-> > -	while (true) {
-> > -		mmap_read_lock(mm);
-> > -		err = hmm_range_fault(&hmm_range);
-> > -		mmap_read_unlock(mm);
-> > -
-> > -		if (err == -EBUSY) {
-> > -			if (time_after(jiffies, timeout))
-> > -				break;
-> > -
-> > -			hmm_range.notifier_seq =
-> > -				mmu_interval_read_begin(notifier);
-> > -			continue;
-> > -		}
-> > -		break;
-> > -	}
-> > +	err = hmm_range_fault_unlocked_timeout(&hmm_range,
-> > +				max_t(long, timeout - jiffies, 1));
+> > - Mani
 > 
-> Unaligned indentation.
-> 
-> So I'd write this like this to avoid weird wraps:
-> 
-> ctimeout = max_t(long, timeout - jiffies, 1));
-> err = hmm_range_fault_unlocked_timeout(&hmm_range, ctimeout);
-> 
-> >  	mmput(mm);
-> >  	if (err)
-> >  		goto err_free;
-> > @@ -1736,24 +1709,13 @@ int drm_gpusvm_range_evict(struct drm_gpusvm *gpusvm,
-> >  		return -ENOMEM;
-> >  
-> >  	hmm_range.hmm_pfns = pfns;
-> > -	while (!time_after(jiffies, timeout)) {
-> > -		hmm_range.notifier_seq = mmu_interval_read_begin(notifier);
-> > -		if (time_after(jiffies, timeout)) {
-> > -			err = -ETIME;
-> > -			break;
-> > -		}
-> > -
-> > -		mmap_read_lock(mm);
-> > -		err = hmm_range_fault(&hmm_range);
-> > -		mmap_read_unlock(mm);
-> > -		if (err != -EBUSY)
-> > -			break;
-> > -	}
-> > +	err = hmm_range_fault_unlocked_timeout(&hmm_range,
-> > +				max_t(long, timeout - jiffies, 1));
-> >  
-> 
-> Same here.
-> 
-> Nits, aside LGTM.
+> The userspace component will read this from sysfs and save it to a file
+> named mdmddr_0x<serial_no>.mbn.
 > 
 
-Will change as requested and send to intel-xe@lists.freedesktop.org next time.
+You need to mention the exact file name for the read data.
 
-Thanks,
-Stanislav
+- Mani
 
-> Matt
-> 
-> >  	kvfree(pfns);
-> >  	mmput(mm);
-> >  
-> > -	return err;
-> > +	return err == -EBUSY ? -ETIME : err;
-> >  }
-> >  EXPORT_SYMBOL_GPL(drm_gpusvm_range_evict);
-> >  
-> > 
-> > 
+-- 
+மணிவண்ணன் சதாசிவம்
 
