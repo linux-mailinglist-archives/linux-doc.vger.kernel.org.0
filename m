@@ -1,50 +1,50 @@
-Return-Path: <linux-doc+bounces-96628-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96629-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id MXy5HUR2VWoNowAAu9opvQ
-	(envelope-from <linux-doc+bounces-96628-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 01:35:32 +0200
+	id 3r5UK2N2VWoQowAAu9opvQ
+	(envelope-from <linux-doc+bounces-96629-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 01:36:03 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DC04674FBDE
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 01:35:31 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F8EB74FBEC
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 01:36:03 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linux.dev header.s=key1 header.b=hMFS0A4s;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96628-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96628-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=linux.dev header.s=key1 header.b=us1bp+RP;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96629-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-96629-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=linux.dev;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 508693007884
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 23:35:31 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 4D8F93080248
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 23:35:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9F91A346A0D;
-	Mon, 13 Jul 2026 23:35:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 00C4A3D666F;
+	Mon, 13 Jul 2026 23:35:33 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-183.mta1.migadu.com (out-183.mta1.migadu.com [95.215.58.183])
+Received: from out-174.mta1.migadu.com (out-174.mta1.migadu.com [95.215.58.174])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9833A35C193
-	for <linux-doc@vger.kernel.org>; Mon, 13 Jul 2026 23:35:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D5E723B813E
+	for <linux-doc@vger.kernel.org>; Mon, 13 Jul 2026 23:35:29 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783985730; cv=none; b=gIhJJVnd/URjb5+iB2X0fiz0SLwLLeNuKVRrZAxbuE8EPZXJgT8i/TxsyHTSDlACxVT7u+Y/SYLtBhu14Vh/uDiPKYYxGR1tZ7HFx5AEm5ylbt2/8OxOGaU02m3N3zCVROvvulWqs7DEOGA3HgwhO+yf8tT49tllJQDUWjdIbeI=
+	t=1783985732; cv=none; b=Ct5i03mFcG8QmP/a50Dqv410Cw0QygTubfbkVOXqLb4KufshGCahQHNvOkihHw0apPABiC0O5FL+16PVzHetgvYN2kN14AG6lVrPAyWwAub/P+U/UeFJqb/tJJh4hcIsAlf6qVmCkrHrupUZA+eOS7ydsIgCIpUg0DHTbZK3ygE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783985730; c=relaxed/simple;
-	bh=HEu+JS6e27UdjH9GE1tmfLwcK6GeSAghtWAw9k3aF4Y=;
+	s=arc-20240116; t=1783985732; c=relaxed/simple;
+	bh=Jhyde+qVXhwYKT+jfqAojkE5MDc+zEv4Q/4BXY9Wek4=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=uQ5sn/0kN+Ltp1KJa91R0BxwMeRZgtfDcHMlR86/S9MfROXcEPaNlAfucnEpk8+RhfA+G3+6570ct76r5rBt5CFfSo2L2/g2KmtAjjSRvi7ZjJwJMT5Kr7OsltKE690s9TcwNLFUn2xiPtBg9ZNMYwU+kchQcmQYChls5qVHH9E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=hMFS0A4s; arc=none smtp.client-ip=95.215.58.183
+	 MIME-Version; b=B0CiGCyf5jJ+YrWrUMV75pDoYzjhu740OvoHM0U4u4H8A5qJnrsrVQflWTnKix4pzAaQMOSAe7BZ7aw69u0WkL97DVCSSU/bIsTPXDx2HOmzWemviBeocVAcuQqX3naKgaPdc2cYipjnYwCaT7XBvwzXFKu9TGrJ0ZhhetU18h8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=us1bp+RP; arc=none smtp.client-ip=95.215.58.174
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1783985726;
+	t=1783985727;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=InV5x2tAQr64Dz1ODAuqp4ESdrQV5BGDt/M0iINGBP8=;
-	b=hMFS0A4s+uSY8xvnRJyPutJ9wNOhFyepzoNmmsArDLNUi4Wu0OD7B7kQVNFANHcoDieK7w
-	+sydJyvIGJkGo2jM2bQSPVFTCtwYt4X+LabN9p+gQsUq99egxagZqsy2MyfxSsiqst5ZrW
-	mHA06ypWKCxxk7yzefdKmgQrV+lUcog=
+	bh=PH+ap9Z9jRyHTeU0JE3+i1OoIv68/HHTxd5g9JcEcPs=;
+	b=us1bp+RPkonMUZZxUUEVxKxPBLUCgn2Q4dko7zeD5Is3wP17wEYbGzutlnb+UdysOScUJd
+	IvpYVdVlqDP8f0sK4aVrd5YA07PmdOEq7NSZ0fe7u+jMVKSuKFkPiwqt1FxuxxEsOMKlEx
+	65Q3idmHPoUevsf0zPEDanbJ7BGNAlU=
 From: Thorsten Blum <thorsten.blum@linux.dev>
 To: Andy Lutomirski <luto@kernel.org>,
 	Thomas Gleixner <tglx@kernel.org>,
@@ -60,9 +60,9 @@ Cc: x86@kernel.org,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Thorsten Blum <thorsten.blum@linux.dev>
-Subject: [PATCH RESEND 1/3] x86/vdso: Use kstrtouint() to validate vdso= boot parameter
-Date: Tue, 14 Jul 2026 01:34:24 +0200
-Message-ID: <20260713233422.127348-6-thorsten.blum@linux.dev>
+Subject: [PATCH RESEND 2/3] x86/vdso: Use kstrtouint() to validate vdso32= boot parameter
+Date: Tue, 14 Jul 2026 01:34:25 +0200
+Message-ID: <20260713233422.127348-7-thorsten.blum@linux.dev>
 In-Reply-To: <20260713233422.127348-5-thorsten.blum@linux.dev>
 References: <20260713233422.127348-5-thorsten.blum@linux.dev>
 Precedence: bulk
@@ -71,7 +71,7 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1214; i=thorsten.blum@linux.dev; h=from:subject; bh=HEu+JS6e27UdjH9GE1tmfLwcK6GeSAghtWAw9k3aF4Y=; b=owGbwMvMwCUWt7pQ4caZUj3G02pJDFmhZVzc272KbzFURAU+1PBRj9m0fvMJ7lM1684pJTbvk JOazrGro5SFQYyLQVZMkeXBrB8zfEtrKjeZROyEmcPKBDKEgYtTACYiacvI0P1ZVca255b4/ABp s2cLZkc/uv6lbUPio/i9Ae7J73IOvWNkODGHwYpx/2+fGYvfHeq+xbJ/H79E1p9r1raCZ7MkvrI c5gIA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1839; i=thorsten.blum@linux.dev; h=from:subject; bh=Jhyde+qVXhwYKT+jfqAojkE5MDc+zEv4Q/4BXY9Wek4=; b=owGbwMvMwCUWt7pQ4caZUj3G02pJDFmhZVzVHf2rE48VdrbOElj9hm9S1ErOSZdqP/31TJfWV zCZyhTWUcrCIMbFICumyPJg1o8ZvqU1lZtMInbCzGFlAhnCwMUpABOJtmT4H5WouPJrSt7yJXpi iUpigZtzRBoYbzr/kphtq3HjaPvJNEaGY9EP71oZy8WHv1jzb1WgYtSrvLy11r4eJtuyvT5ObZD nAgA=
 X-Developer-Key: i=thorsten.blum@linux.dev; a=openpgp; fpr=1D60735E8AEF3BE473B69D84733678FD8DFEEAD4
 Content-Transfer-Encoding: 8bit
 X-Migadu-Flow: FLOW_OUT
@@ -81,14 +81,14 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCPT_COUNT_TWELVE(0.00)[14];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-96628-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-96629-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS(0.00)[m:luto@kernel.org,m:tglx@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:hpa@zytor.com,m:akpm@linux-foundation.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:rdunlap@infradead.org,m:x86@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:thorsten.blum@linux.dev,s:lists@lfdr.de];
 	RCVD_COUNT_THREE(0.00)[3];
 	FORWARDED(0.00)[lists@lfdr.de];
@@ -106,13 +106,13 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:from_mime,linux.dev:mid,linux.dev:email,linux.dev:dkim,vger.kernel.org:from_smtp,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linux.dev:from_mime,linux.dev:mid,linux.dev:email,linux.dev:dkim]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: DC04674FBDE
+X-Rspamd-Queue-Id: 1F8EB74FBEC
 
 Replace the deprecated simple_strtoul() with kstrtouint() when parsing
-the vdso= boot parameter.
+the vdso32= boot parameter and its X86_32 vdso= alias.
 
 simple_strtoul() accepts partial input and silently converts invalid
 input to 0. Use kstrtouint() for strict input validation instead and
@@ -120,28 +120,42 @@ reject malformed input. Accept only 0 and 1; warn and disable vDSO
 support otherwise.
 
 kstrtouint() converts the input string directly to an unsigned int,
-avoiding an implicit conversion when assigning to vdso64_enabled.
+avoiding an implicit conversion when assigning to vdso32_enabled.
+
+Update the vdso32= handler comment to reflect the supported values.
 
 Signed-off-by: Thorsten Blum <thorsten.blum@linux.dev>
 ---
- arch/x86/entry/vdso/vma.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ arch/x86/entry/vdso/vdso32-setup.c | 10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
 
-diff --git a/arch/x86/entry/vdso/vma.c b/arch/x86/entry/vdso/vma.c
-index 18dfd80a81ef..c5c09c28388e 100644
---- a/arch/x86/entry/vdso/vma.c
-+++ b/arch/x86/entry/vdso/vma.c
-@@ -299,7 +299,11 @@ bool arch_syscall_is_vdso_sigreturn(struct pt_regs *regs)
- #ifdef CONFIG_X86_64
- static __init int vdso_setup(char *s)
+diff --git a/arch/x86/entry/vdso/vdso32-setup.c b/arch/x86/entry/vdso/vdso32-setup.c
+index 8894013eea1d..5f3e548ebf19 100644
+--- a/arch/x86/entry/vdso/vdso32-setup.c
++++ b/arch/x86/entry/vdso/vdso32-setup.c
+@@ -30,10 +30,8 @@ unsigned int __read_mostly vdso32_enabled = VDSO_DEFAULT;
+ 
+ static int __init vdso32_setup(char *s)
  {
--	vdso64_enabled = simple_strtoul(s, NULL, 0);
-+	if (kstrtouint(s, 0, &vdso64_enabled) || vdso64_enabled > 1) {
-+		pr_warn("vdso= values other than 0 and 1 are invalid; vdso disabled\n");
-+		vdso64_enabled = 0;
-+	}
-+
- 	return 1;
+-	vdso32_enabled = simple_strtoul(s, NULL, 0);
+-
+-	if (vdso32_enabled > 1) {
+-		pr_warn("vdso32 values other than 0 and 1 are no longer allowed; vdso disabled\n");
++	if (kstrtouint(s, 0, &vdso32_enabled) || vdso32_enabled > 1) {
++		pr_warn("vdso32= values other than 0 and 1 are invalid; vdso disabled\n");
+ 		vdso32_enabled = 0;
+ 	}
+ 
+@@ -41,9 +39,9 @@ static int __init vdso32_setup(char *s)
  }
- __setup("vdso=", vdso_setup);
+ 
+ /*
+- * For consistency, the argument vdso32=[012] affects the 32-bit vDSO
++ * For consistency, the argument vdso32=[01] affects the 32-bit vDSO
+  * behavior on both 64-bit and 32-bit kernels.
+- * On 32-bit kernels, vdso=[012] means the same thing.
++ * On 32-bit kernels, vdso=[01] means the same thing.
+  */
+ __setup("vdso32=", vdso32_setup);
+ 
 
