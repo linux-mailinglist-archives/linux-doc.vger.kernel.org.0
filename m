@@ -1,272 +1,292 @@
-Return-Path: <linux-doc+bounces-96526-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96530-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id mDswKMPEVGrbSgAAu9opvQ
-	(envelope-from <linux-doc+bounces-96526-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 12:58:11 +0200
+	id b+6hD4HJVGoUTAAAu9opvQ
+	(envelope-from <linux-doc+bounces-96530-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 13:18:25 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E03D174A0FE
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 12:58:10 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id EAEC674A437
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 13:18:24 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=QqW05C7F;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96526-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96526-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=Nvidia.com header.s=selector2 header.b="aTzp3UF/";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96530-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96530-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=nvidia.com;
+	arc=reject ("cv is fail on i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 137CA302D121
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 10:55:53 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 3DBF43046C70
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 11:16:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3E4DE3E2746;
-	Mon, 13 Jul 2026 10:55:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0DA3D3E63A4;
+	Mon, 13 Jul 2026 11:16:12 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from SN4PR2101CU001.outbound.protection.outlook.com (mail-southcentralusazon11012002.outbound.protection.outlook.com [40.93.195.2])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0BC463128B8;
-	Mon, 13 Jul 2026 10:55:50 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783940152; cv=none; b=NkVFIaP3To4WVp6+ulWqxMegV3/r52K75YMnaqhXNDwZ6px72mCpjymII/Q8pIBsw4KxM9Xzki3RIEcuCm6cWX3LsN4+S0z+TGYvpWe736rjhOVUAgIPvZ4YCcYYTtmgE1Hk6B11mKYrmB//iWxpXGv5gjIST4sKucJNs+a5Mpw=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783940152; c=relaxed/simple;
-	bh=OHxeKsuRZMH3tkVAqEqXnbLzGq/1XXYS8H3vtpEZ+0I=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=RBTvPpuJ9l8BdHS24qNIOm5R3bmc7Bi854J5s4jznT/STaXLietPio7FEIxeKlEdw7u5umfPuVvsq2SsVO2UTRSkaHb2gIJKMpXMUHojAx8Tdg4+1mZ9IgtrLgq79me6LHLPQOGQUv1Sw1SpY+OPQFM7W+w34eSshGToiG/TPsk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QqW05C7F; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ECC801F000E9;
-	Mon, 13 Jul 2026 10:55:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783940150;
-	bh=c0ggmWwX6GQOIV2l6a9PTnt/FjxjzQ5JHVZFBNdoHA0=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=QqW05C7FDH/qY4mqQTK/rn2Z8orF2/BAGrrSIH/MKrBIfeJS2VkDrHXWEUeT0foEd
-	 OHQSGFcgVgNHQnJNMr4U/aQYgBMXT9iTkr0RnBe+3Yp2dtocgfBhQwhOr2RtaBiKtK
-	 11RtZ6fmUGSAlfNSC32jUacIKi3fGNNjHP97AdNaqeObRSnH+DJRjucnwCsodSvUnQ
-	 HejdBAYDHoOY1nPXbvcZR+5p5WbkE1oddzzBQQCkUHLrEpf1nbXxsqY2H7t+Vz8Cfy
-	 6YVR3o+tfhmFEYDOowXc6b4h/7XAsXQNrMjfjvpHkccIHNv3zUMRoTAByahUrWxYqu
-	 qY+PGicp9lQ7w==
-Message-ID: <157f60cb-ff83-4fed-8b05-e6c6390f85bc@kernel.org>
-Date: Mon, 13 Jul 2026 12:55:36 +0200
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 241153ACA6A;
+	Mon, 13 Jul 2026 11:16:09 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783941371; cv=fail; b=PcF9dQr6l0+uvucApLwJoXIQk71ffw/FtaE94c0TpUykXKgdvEE9SSUT7vC3MUXi+113Sq1DvXu+CG2LInjQQuIritdPFM9i0mqyH/pmP8aQZIMMC7Z8VIj08YVvmhb2KN8tgrKsNLy84CvkwLg0PyHxvUlbD1TjPuiohadFgoE=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783941371; c=relaxed/simple;
+	bh=hEGfrcizFr9RNGtv4JKdNgeEW8vI1mRKrAfqFDa3BaU=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=R/veKfFfOnEszz2wOvGPlpBkLja87g/lI5mFAsoFgKrKGCjSQmZCVFTSHRbXS8nBOJQoY64RYN6cfurbBfGfN9EQLV6DtvbfpmqwIxGIf56kox+G01AncZBEwh9vsbh0XuroIrS/9KeLEdwXzwIM79Tt9CotAURAqiQC7WuUcqU=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=aTzp3UF/; arc=fail smtp.client-ip=40.93.195.2
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=eOIQIjlTSCJ4S452JrilLqSPkubzMfZPL7eIG13l94J7G/TyXKcn2VoCTROFIeWbjRw1GHr2NRG4oW157HUdbWJOTR5a7BscF/FxzQrS0vPWCxcXqvHP/UfnLBExqFEBMdIaQ26OuEAnIeXGzh/aGbzKNUwTV+7uKEiBScBgMDjdOz/Rc03Xh7GZxQtmVDrnK2wATve1Uapi55BWK1dZvRp0ToucDL5JWQiQB6anBphPcouGN7QkF+BtpxYzSNgT+AcEFo30VbHSccvNbeWZadqk9nfry5MzXdhQsCgnbrUP0aziyy+qjehJuSJ8QqVT1Ao0+JRY9QQ5+5RrcVgY9g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=8weBf1fyxSXgmQEWM5cu/8KhBigfrYFJ7T/OfI1jX8M=;
+ b=KCAPXoXS6UbZJrSMlY8sUZ4VDVvPq3IhpSYbZgB1guJVjD1CWeD+V2U3XGezuPbAumGzX+8zx9M9FxLN1sAX+Td+6w/MOpdulPPJSUzey/hvfBUT7eSXKiZADYGjxgffdOuKCv7crG8BLDEEbCmZe5d8ef086ok8HLmJ1F6r39SwLntmR5neowO+v2/676iniq0X1KM8NMGiP724LGfMDgwr/bYM0DrJalT3bo2n9b2aRf9MDbAZvcBjHb0sLAzBoxD3rpN+5noNlO+iHYSdp6f7/nWHAZKsd4swT+aU5Yj30dofmKrjoM+sKxBOzHD84nwXNpj4+7SIGvQ+b7Sxxw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.161) smtp.rcpttodomain=arm.com smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=8weBf1fyxSXgmQEWM5cu/8KhBigfrYFJ7T/OfI1jX8M=;
+ b=aTzp3UF/wLWiP1HSVnbov3eHCjL0ViHqimD8giNj+wgdzHt7Cvh56WkTCl3SL0eGFyA8VurZNISX0NzIhq92EkZB0aYyigjBEz9OVSPz+NqlYsBCYOPdIu5PKQbVTefggQi5nl7jV+MdEk03ptp1Tzjf5dxVrvY/ZXT76IoN4zomqKHqRNHg//i0fa491zM56q1VlSkz5nGpKX1JeQHnh7H+BhkSWJCHUiGJ7bA8WsWgQJ5DTQE+Z2bXWHYd77smruBWGWubCfuz9OaSkIvxVsTGND5weQn8x5NjJJv/2IcrQsDYBAXtWx2JpFcOPwSQHGvlISUR6Jimn0M6qw9jPg==
+Received: from CH0P223CA0016.NAMP223.PROD.OUTLOOK.COM (2603:10b6:610:116::34)
+ by DS0PR12MB7945.namprd12.prod.outlook.com (2603:10b6:8:153::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.202.18; Mon, 13 Jul
+ 2026 11:16:02 +0000
+Received: from DM2PEPF00003FC7.namprd04.prod.outlook.com
+ (2603:10b6:610:116:cafe::95) by CH0P223CA0016.outlook.office365.com
+ (2603:10b6:610:116::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.202.19 via Frontend Transport; Mon,
+ 13 Jul 2026 11:15:59 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ smtp.mailfrom=nvidia.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.161) by
+ DM2PEPF00003FC7.mail.protection.outlook.com (10.167.23.24) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.223.9 via Frontend Transport; Mon, 13 Jul 2026 11:15:59 +0000
+Received: from rnnvmail203.nvidia.com (10.129.68.9) by mail.nvidia.com
+ (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 13 Jul
+ 2026 04:15:46 -0700
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by rnnvmail203.nvidia.com
+ (10.129.68.9) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 13 Jul
+ 2026 04:15:46 -0700
+Received: from build-amhetre-focal-20250829.internal (10.127.8.12) by
+ mail.nvidia.com (10.129.68.8) with Microsoft SMTP Server id 15.2.2562.20 via
+ Frontend Transport; Mon, 13 Jul 2026 04:15:45 -0700
+From: Ashish Mhetre <amhetre@nvidia.com>
+To: <catalin.marinas@arm.com>, <will@kernel.org>, <corbet@lwn.net>,
+	<skhan@linuxfoundation.org>, <robin.murphy@arm.com>, <joro@8bytes.org>,
+	<nicolinc@nvidia.com>, <jgg@ziepe.ca>
+CC: <linux-arm-kernel@lists.infradead.org>, <linux-doc@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <iommu@lists.linux.dev>,
+	<linux-tegra@vger.kernel.org>, Ashish Mhetre <amhetre@nvidia.com>
+Subject: [PATCH v6 0/3] iommu/arm-smmu-v3: Tegra264 invalidation workaround
+Date: Mon, 13 Jul 2026 11:15:39 +0000
+Message-ID: <20260713111543.1462161-1-amhetre@nvidia.com>
+X-Mailer: git-send-email 2.50.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 4/4] slub: apply new pw_queue_on() interface
-To: Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
- Leonardo Bras <leobras.c@gmail.com>
-Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>,
- Will Deacon <will@kernel.org>, Boqun Feng <boqun@kernel.org>,
- Waiman Long <longman@redhat.com>, Andrew Morton <akpm@linux-foundation.org>,
- David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>,
- "Liam R. Howlett" <liam@infradead.org>, Mike Rapoport <rppt@kernel.org>,
- Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
- Jann Horn <jannh@google.com>, Pedro Falcato <pfalcato@suse.de>,
- Brendan Jackman <jackmanb@google.com>, Johannes Weiner <hannes@cmpxchg.org>,
- Zi Yan <ziy@nvidia.com>, Harry Yoo <harry@kernel.org>,
- Hao Li <hao.li@linux.dev>, Christoph Lameter <cl@gentwo.org>,
- David Rientjes <rientjes@google.com>,
- Roman Gushchin <roman.gushchin@linux.dev>, Chris Li <chrisl@kernel.org>,
- Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>,
- Nhat Pham <nphamcs@gmail.com>, Baoquan He <bhe@redhat.com>,
- Barry Song <baohua@kernel.org>, Youngjun Park <youngjun.park@lge.com>,
- Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>,
- Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>,
- Wei Xu <weixugc@google.com>, "Borislav Petkov (AMD)" <bp@alien8.de>,
- Randy Dunlap <rdunlap@infradead.org>, Feng Tang
- <feng.tang@linux.alibaba.com>, Dapeng Mi <dapeng1.mi@linux.intel.com>,
- Kees Cook <kees@kernel.org>, Marco Elver <elver@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Li RongQing <lirongqing@baidu.com>,
- Eric Biggers <ebiggers@kernel.org>, "Paul E. McKenney" <paulmck@kernel.org>,
- Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>,
- Miguel Ojeda <ojeda@kernel.org>,
- =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
- Thomas Gleixner <tglx@kernel.org>, Douglas Anderson <dianders@chromium.org>,
- Gary Guo <gary@garyguo.net>, Christian Brauner <brauner@kernel.org>,
- Pasha Tatashin <pasha.tatashin@soleen.com>, Coiby Xu <coxu@redhat.com>,
- Masahiro Yamada <masahiroy@kernel.org>,
- Frederic Weisbecker <frederic@kernel.org>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-mm@kvack.org,
- linux-rt-devel@lists.linux.dev, Marcelo Tosatti <mtosatti@redhat.com>
-References: <20260519012754.240804-1-leobras.c@gmail.com>
- <20260519012754.240804-5-leobras.c@gmail.com>
- <20260520145308.nay9zt6r@linutronix.de> <alQWr2L_Kn23pxd9@WindFlash>
- <20260713073634.3Hrxpfcx@linutronix.de>
-From: "Vlastimil Babka (SUSE)" <vbabka@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=vbabka@kernel.org; keydata=
- xsFNBFZdmxYBEADsw/SiUSjB0dM+vSh95UkgcHjzEVBlby/Fg+g42O7LAEkCYXi/vvq31JTB
- KxRWDHX0R2tgpFDXHnzZcQywawu8eSq0LxzxFNYMvtB7sV1pxYwej2qx9B75qW2plBs+7+YB
- 87tMFA+u+L4Z5xAzIimfLD5EKC56kJ1CsXlM8S/LHcmdD9Ctkn3trYDNnat0eoAcfPIP2OZ+
- 9oe9IF/R28zmh0ifLXyJQQz5ofdj4bPf8ecEW0rhcqHfTD8k4yK0xxt3xW+6Exqp9n9bydiy
- tcSAw/TahjW6yrA+6JhSBv1v2tIm+itQc073zjSX8OFL51qQVzRFr7H2UQG33lw2QrvHRXqD
- Ot7ViKam7v0Ho9wEWiQOOZlHItOOXFphWb2yq3nzrKe45oWoSgkxKb97MVsQ+q2SYjJRBBH4
- 8qKhphADYxkIP6yut/eaj9ImvRUZZRi0DTc8xfnvHGTjKbJzC2xpFcY0DQbZzuwsIZ8OPJCc
- LM4S7mT25NE5kUTG/TKQCk922vRdGVMoLA7dIQrgXnRXtyT61sg8PG4wcfOnuWf8577aXP1x
- 6mzw3/jh3F+oSBHb/GcLC7mvWreJifUL2gEdssGfXhGWBo6zLS3qhgtwjay0Jl+kza1lo+Cv
- BB2T79D4WGdDuVa4eOrQ02TxqGN7G0Biz5ZLRSFzQSQwLn8fbwARAQABzSNWbGFzdGltaWwg
- QmFia2EgPHZiYWJrYUBrZXJuZWwub3JnPsLBsAQTAQoAWhYhBKlA1DSZLC6OmRA9UCJPp+fM
- gqZkBQJqFFy6GxSAAAAAAAQADm1hbnUyLDIuNSsxLjEyLDIsMgIbAwUJGtCBUAULCQgHAwUV
- CgkICwUWAgMBAAIeBQIXgAAKCRAiT6fnzIKmZJIUEADFx/tREzUImHrEwVHeSvDFmA7tJysI
- UVrlvrM09E7GIuzphzv7jYmo8n3ANpCczLEVr4G0syYQdTigaZgv3+FQDIIzhKih1IHhu1Ei
- XHlywNWKnQxxQEUNi5Mwx43wQz5XVw9F1A7gtKBKNtfogO511hAbrzagrYajyQacEJ/+sfhZ
- 9Da8ltHIXD8pcYaHUfQgEusCgmEd9+KrUwrTbckFKmYq5chuE6yJ4J0EmWknL096jIE6CnzF
- FRslQ3B1UKDjxVsm1ZHfir5NeWszLkTvGFsddFaWTgh8UycESG6VQzKXjjewXu2pG7YQYRpj
- QKm1W5X2TkwWkXRBZTmfmbhxIUMh3+zf5wQ463rSmDN/8v81tdqBtAW6rH/kzg1GvkaTHXn0
- 507yEHFzBksk2viAuIxxr7km8+/KARYLIdGtx30EG8cKzAUZOK6WqxtNCsXUJNrVE8CWrCaD
- icoNu7Fs1c5hmPHdSTnU48ce67449DdnO4neLSNhRiGlMHJgfJUmgrxu/hcYeOZ3haWmEQ2w
- uW1Mh01OHi8QZHCEyAbABrPs9GUgccc/4eYXX9hIgxfSkYzn8f+8NuIFPWl/0uTvjgqU29FQ
- SbzOLxHq9439Ox40G5mS5eZXRGxITYR+6TXvRGI6P/264jvflnr/pDGUttaikU+0W+1uxgKH
- cmYbEc7ATQRbGTU1AQgAn0H6UrFiWcovkh6EXVcl+SeqyO6JHOPm+e9Wu0Vw+VIUvXZVUVVQ
- La1PQDUi6j00ChlcR66g9/V0sPIcSutacPKfdKYOBvzd4rlhL8rfrdEsQw5ApZxrA8kYZVMh
- FmBRKAa6wos25moTlMKpCWzTH84+WO5+ziCTsTUZASAToz3RdunTD+vQcHj0GqNTPAHK63sf
- bAB2I0BslZkXkY1RLb/YhuA6E7JyEd2pilZOrIuBGl/5q2qSakgnAVFWFBR/DO27JuAksYnq
- +aH8vI0xGvwn75KqSk4UzAkDzWSmO4ZHuahKtQgZNsMYV+PGayRBX9b9zbldzopoLBdqHc4n
- jQARAQABwsF8BBgBCgAmAhsMFiEEqUDUNJksLo6ZED1QIk+n58yCpmQFAmfIHFQFCRYU6J8A
- CgkQIk+n58yCpmS2PA//bqN1LfcotmArgElsa+0EGZSQlYgK48pm8WAeTXTngudP9IJ4SuKY
- HR5RNjHcBeqN+Me0zxRqYzRb8nGanHEkDyf4Im8DQM8d6vbyU+FcPmG4skud4kgS1zMHnlVd
- SXfSIwKC/hKgdHG8aBV7545Lz9X6Iohea+94wneD0aw/hqF+QWewGZhWJriWAZtvEkzNjQOi
- 4U9F/trLten/x7bpphDSnDMKJtITbtzATT1Dq7o7VpIUK1nCTQALMuMjKCdi8OdU/+V+R3O4
- 0PXWvX8qrvqYapVbZ+9KqT74FsuB0Ya9uXwgBF2Q6cRuETZk5vqaqKxzqoQZCO8AOz/58j6O
- 2RHNy/mZEN+7tJ5Tsq42zVJ4jxsT8b9YplavCMsnBgDeRWhcbYhCyttoL7nYISyWg4kQYZ/P
- wIV3OuNv2f8iKYsxNsRuClOAF82+gvqOy1/1pprFjy8uo2pkoOrb63aOP3vO5VHnRKgra6dq
- NcaZ+c6J4H+nEJGi2SkHAUJz5oBzuThvPudLvPA/SK8sKoM01IRxSihev/S/5WLazXB1PGem
- OCbvzC1IjWJJraxiDJ5IygokapUa2RP7+WBR22skQ3SSl6G107QgWKSyTOGWEaRmV53vxQLV
- jXuCmzSSasTL60zq5yGrT4/DYQVSNEUiUbG4pYekxJujNeEDkUlky0Y=
-In-Reply-To: <20260713073634.3Hrxpfcx@linutronix.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-NVConfidentiality: public
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-NV-OnPremToCloud: ExternallySecured
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM2PEPF00003FC7:EE_|DS0PR12MB7945:EE_
+X-MS-Office365-Filtering-Correlation-Id: eb7a7450-308a-4d80-2740-08dee0d01de9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|36860700016|376014|7416014|82310400026|23010399003|18002099003|6133799003|56012099006|11063799006;
+X-Microsoft-Antispam-Message-Info:
+	uPtJ36HziNEDSteegfoPFiHYy+MSDbfuSQ+p7p+jWlBxGotYLYHMjJHGjl9dbMzbJhCFeUmvs9x7Yo0jU/sE/clD0jzrblbmORFX2SSeWkLypnu1DlmzaY1+hYiJOsn9x1MLh4mDwkXhRW2cW3byRqgX15bN+cQdPUDugIOStNTfoyhxayaa5JIe+GGMFN+IQXM7grfyYDKzXhoTt7uCMp7cVYbUa7S9SKqiUrSPbgSpqgcO0NqbHsdT0Gndu9VucqHhgnp7CrkZbgFrL2OkAlxyb+FQBF8Z58ulNjvNq9D+31fPVT3elNmCTpksZswbGqeV92dZA2+wI3BLz/o+6xEcY+xtzfonKaerlRZYTEq12/efjsjIFCl2gYKyZ6k4+SkT9co9Jk8RtO6jBzbURDa9Rk6wxstGBNZFUdmIz/ViqROZy1o3sxTCDbJaKu6UTrauE/I2yhjQ5yRU+25qfda8IKpHqC79MWzTqWWErxUZY8sSKbnHNzeZEj/eGmR/TSep8cvPE8muUrtLVm9mMLaWCl/dyhj/3fQXzaP4pcFOe7ApHzEpB6cQ5qLkdb+3JkmYU7SumOR8fAeK9g/ZVbWShPb1OEc6ob83wgvabbNJyLyob2DercQXHBBWPb385oBOgL/50ONLqITmNfO7ldnBZJi1V+aljkx3m55galOsdbCiTiVPIaVa79JjE31vB11vU7lejXN8R9LmUljqLA==
+X-Forefront-Antispam-Report:
+	CIP:216.228.117.161;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge2.nvidia.com;CAT:NONE;SFS:(13230040)(1800799024)(36860700016)(376014)(7416014)(82310400026)(23010399003)(18002099003)(6133799003)(56012099006)(11063799006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	DI7mXy9ow7+DVANVcwNi5qSyIUatQmHcTZbVj5w379DLJ/WlafTK6ti+9WF5BSYzbI8ouL3RfhgvxtxFJtkkfPze8HqldzPtdiYL3z7n8gigOv0mVqkMUdgiQ+7fKiqOic/2CLbpYf0JREfiqn6T70pM8QPw0d1ymIvrrqj1qgTaiAajmoTlgZ1tuV6zCSMeWZprvrz/HOf+lbT9sjS29Bv/Z9imjH7eQdd1xPgW6XnQ6kEFlPqIhTH+/rD4jKqjYWeEnufbDD+U8Amsys95Ge1wUCcA1+bkJCsLPpl3gTP+Dkntarc590JtR84OXckpBGJwQZt6AzNYoF+M69PpJfatboDkjZLgwmZw7J9fWpWb3C2JqVk1anWLwV0pVIR2HilIEu8i8xy/66NtMyoZHLEsVVmW8S/vtbad4UfdQNfjL6ez0fAexey1Kee5yhPK
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jul 2026 11:15:59.1283
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: eb7a7450-308a-4d80-2740-08dee0d01de9
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.161];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DM2PEPF00003FC7.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB7945
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.66 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64];
+X-Spamd-Result: default: False [-5.66 / 15.00];
+	WHITELIST_DMARC(-7.00)[nvidia.com:D:+];
+	MID_CONTAINS_FROM(1.00)[];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-96526-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	TAGGED_FROM(0.00)[bounces-96530-lists,linux-doc=lfdr.de];
+	FORGED_SENDER(0.00)[amhetre@nvidia.com,linux-doc@vger.kernel.org];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:bigeasy@linutronix.de,m:leobras.c@gmail.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:peterz@infradead.org,m:mingo@redhat.com,m:will@kernel.org,m:boqun@kernel.org,m:longman@redhat.com,m:akpm@linux-foundation.org,m:david@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:jannh@google.com,m:pfalcato@suse.de,m:jackmanb@google.com,m:hannes@cmpxchg.org,m:ziy@nvidia.com,m:harry@kernel.org,m:hao.li@linux.dev,m:cl@gentwo.org,m:rientjes@google.com,m:roman.gushchin@linux.dev,m:chrisl@kernel.org,m:kasong@tencent.com,m:shikemeng@huaweicloud.com,m:nphamcs@gmail.com,m:bhe@redhat.com,m:baohua@kernel.org,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:bp@alien8.de,m:rdunlap@infradead.org,m:feng.tang@linux.alibaba.com,m:dapeng1.mi@linux.intel.com,m:kees@kernel.org,m:elver@google.com,m:kuba@kernel.org,m:lirongqing@baidu.com
- ,m:ebiggers@kernel.org,m:paulmck@kernel.org,m:nathan@kernel.org,m:nsc@kernel.org,m:ojeda@kernel.org,m:thomas.weissschuh@linutronix.de,m:tglx@kernel.org,m:dianders@chromium.org,m:gary@garyguo.net,m:brauner@kernel.org,m:pasha.tatashin@soleen.com,m:coxu@redhat.com,m:masahiroy@kernel.org,m:frederic@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-rt-devel@lists.linux.dev,m:mtosatti@redhat.com,m:leobrasc@gmail.com,s:lists@lfdr.de];
-	FREEMAIL_CC(0.00)[lwn.net,linuxfoundation.org,infradead.org,redhat.com,kernel.org,linux-foundation.org,google.com,suse.com,suse.de,cmpxchg.org,nvidia.com,linux.dev,gentwo.org,tencent.com,huaweicloud.com,gmail.com,lge.com,alien8.de,linux.alibaba.com,linux.intel.com,baidu.com,linutronix.de,chromium.org,garyguo.net,soleen.com,vger.kernel.org,kvack.org,lists.linux.dev];
-	FORWARDED(0.00)[lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_TO(0.00)[linutronix.de,gmail.com];
-	FORGED_SENDER(0.00)[vbabka@kernel.org,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[65];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:catalin.marinas@arm.com,m:will@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:robin.murphy@arm.com,m:joro@8bytes.org,m:nicolinc@nvidia.com,m:jgg@ziepe.ca,m:linux-arm-kernel@lists.infradead.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:iommu@lists.linux.dev,m:linux-tegra@vger.kernel.org,m:amhetre@nvidia.com,s:lists@lfdr.de];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[vbabka@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	ALIAS_RESOLVED(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[amhetre@nvidia.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[Nvidia.com:+];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[Nvidia.com:dkim,nvidia.com:from_mime,nvidia.com:mid,vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[]
+	RCVD_COUNT_SEVEN(0.00)[9]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: E03D174A0FE
+X-Rspamd-Queue-Id: EAEC674A437
 
-On 7/13/26 09:36, Sebastian Andrzej Siewior wrote:
-> On 2026-07-12 19:35:28 [-0300], Leonardo Bras wrote:
->> On Wed, May 20, 2026 at 04:53:08PM +0200, Sebastian Andrzej Siewior wrote:
->> > On 2026-05-18 22:27:50 [-0300], Leonardo Bras wrote:
->> > > @@ -4733,121 +4735,121 @@ void *alloc_from_pcs(struct kmem_cache *s, gfp_t gfp, int node)
->> > >  
->> > >  	/*
->> > >  	 * We assume the percpu sheaves contain only local objects although it's
->> > >  	 * not completely guaranteed, so we verify later.
->> > >  	 */
->> > >  	if (unlikely(node_requested && node != numa_mem_id())) {
->> > >  		stat(s, ALLOC_NODE_MISMATCH);
->> > >  		return NULL;
->> > >  	}
->> > >  
->> > > -	if (!local_trylock(&s->cpu_sheaves->lock))
->> > > +	if (!pw_trylock_local(&s->cpu_sheaves->lock))
->> > >  		return NULL;
->> > 
->> > alloc_from_pcs() can be called from kmalloc_nolock()/ NMI context.
->> > I don't remember why exactly local_trylock_t was introduced here instead
->> > of a per-CPU spinlock_t. 
->> 
->> Probably to save the cost of using atomic operations on locking, and having 
+Nvidia Tegra264 SMMUs are affected by an erratum where a TLB entry can
+survive an invalidation that races with concurrent traffic targeting
+the same entry. The hardware-recommended software workaround is to
+issue every CFGI/TLBI command (each followed by CMD_SYNC) twice.
+The second issue must execute only after the first issue's CMD_SYNC
+has completed, giving the sequence:
 
-Yes. Also function call overhead as spinlocks are often not inlined.
+    TLBI/CFGI ... CMD_SYNC TLBI/CFGI ... CMD_SYNC
 
->> about the same restrictions that would allow using local_locks
+ATC_INV is not affected and must not be doubled.
 
-Indeed.
+The erratum is not flagged by any SMMUv3 IDR/IIDR register, so it
+cannot be detected from hardware ID. Tegra264 is device-tree-only
+(no ACPI/IORT support), so detection is purely by compatible string.
 
->> > But there should be nothing wrong with a
->> > trylock on it from NMI as you do here.
->> 
->> Awesome!
-> 
-> The problem is always the unlock which requires full locking and is
-> usually the problem from NMI.
-> 
->> > 
->> > One thing worth noting, on !PREEMPT_RT, spin_trylock() always succeeds
->> > on UP. kmalloc_nolock() checks for it, not sure about other callers.
->> 
->> 
->> Sorry, I did not sure I understand that part. 
->> You mean we have since it always returns true, we may be in NMI context, 
->> after it was interrupted holding this lock, and it will return true which 
->> will use the protected area even though the lock should avoid it?
-> 
-> from include/linux/spinlock_api_up.h:
-> | static __always_inline int _raw_spin_trylock(raw_spinlock_t *lock)
-> |         __cond_acquires(true, lock)
-> | {
-> |         __LOCK(lock);
-> |         return 1;
-> | }
-> 
-> on UP a spin_trylock() always succeeds.
+This series is structured as a small refactor + infrastructure + enable
+sequence so that each step is reviewable in isolation:
 
-Indeed. This was a problem in the page allocator, because there we don't
-even disable irqs, so it wasn't just nmi, but an irq that could get a
-false-positive spin_trylock(). See 038a102535eb ("mm/page_alloc: prevent pcp
-corruption with SMP=n") which was a hot fix.
+ 1/3 Pure refactor (no functional change): lift the existing
+     force-sync conditions out of arm_smmu_cmdq_batch_add_cmd_p()
+     into a new arm_smmu_cmdq_batch_force_sync() helper, so that
+     adding another condition (in patch 2) is a one-line addition.
+     Authored by Nicolin Chen.
 
-This was later cleaned up with 3 commits starting with a373f371166d
-("mm/page_alloc: effectively disable pcp with CONFIG_SMP=n").
+ 2/3 Add the workaround infrastructure without enabling it. Defines
+     the file-local arm_smmu_erratum_repeat_tlbi_cfgi_key static key
+     with an inline erratum description, the shared
+     arm_smmu_erratum_cmd_needs_repeating() predicate, the
+     arm_smmu_cmdq_issue_cmdlist() wrapper that can re-issue matching
+     cmdlists, the batch-helper force-sync condition, and the iommufd
+     batching split for mixed command classes.
 
-Since here you're also replacing local_trylock() (with no _irqsave) with
-effectively spin_trylock(), the problem also won't be limited to NMIs and
-thus the checks in kmalloc_nolock() won't help.
+ 3/3 Enable the workaround for the existing "nvidia,tegra264-smmu"
+     compatible and document the erratum in silicon-errata.rst.
 
-But I see in Patch 1:
+The series applies cleanly on linux-next/master (base-commit below).
 
-+config PWLOCKS
-+	bool "Per-CPU Work locks"
-+	depends on SMP || COMPILE_TEST
+Changes since v5:
+ - Move arm_smmu_erratum_cmd_needs_repeating() into arm-smmu-v3.c
+   and leave a declaration-only stub in arm-smmu-v3.h. Make
+   arm_smmu_erratum_repeat_tlbi_cfgi_key file-local static and drop
+   jump_label.h from the header.
+ - Add an inline erratum/workaround description at the static key,
+   referenced from arm_smmu_cmdq_batch_force_sync().
+ - Drop the misleading !n comment above arm_smmu_cmdq_issue_cmdlist();
+   keep the defensive !n guard.
+ - Remove the unused smmu parameter from the predicate.
+ - Tweak 2/3 commit-message wording ("commit" vs "patch").
+ - Add Reviewed-by: Nicolin Chen on 3/3.
 
-So that's basically avoiding the problem in the same way as the page
-allocator after the clean up.
-Maybe just remove the COMPILE_TEST part? It's not clear to me what it
-achieves. Just make it require SMP as there's no point for this on !SMP.
+Changes since v4:
+ - Drop ARM_SMMU_OPT_REPEAT_TLBI_CFGI entirely: the option bit was
+   set and read on the exact same "nvidia,tegra264-smmu" compatible
+   as the static key, so it added no per-instance signal that the
+   static key did not already carry. The predicate now gates purely
+   on arm_smmu_erratum_repeat_tlbi_cfgi_key.
+ - Reorder the series so the compatible-string detection lands
+   last, once all the infrastructure exists:
+     1/3  factor out force_sync helper (unchanged)
+     2/3  add static key + WAR functions (no functional change)
+     3/3  enable the key on nvidia,tegra264-smmu + silicon-errata
+   Split the old v4 "Detect" and "Issue twice" patches accordingly.
+ - Update the /* See ARM_SMMU_OPT_REPEAT_TLBI_CFGI */ comment inside
+   arm_smmu_cmdq_batch_force_sync() to reference the static key
+   description instead.
 
->> Humm, but if that scenario exist, then is it actually ok to return true on 
->> trylock() in that scenario?
->> 
->> Thanks!
->> Leo
-> 
-> Sebastian
+Changes since v3:
+ - Drop the cmds->num == 0 early-return so the refactor is
+   truly "no functional change".
+ - Rename ARM_SMMU_OPT_TLBI_TWICE -> ARM_SMMU_OPT_REPEAT_TLBI_CFGI
+   and rephrase its kdoc to be hardware-agnostic.
+ - Rename arm_smmu_cmd_needs_tlbi_twice() ->
+   arm_smmu_erratum_cmd_needs_repeating() and drop the kdoc
+   above it.
+ - Replace the explicit opcode switch with a single range check
+   opcode >= CMDQ_OP_CFGI_STE && opcode < CMDQ_OP_ATC_INV.
+ - Introduce arm_smmu_erratum_repeat_tlbi_cfgi_key static key:
+   the predicate gates on it first so unaffected kernels pay
+   only a single static_branch_unlikely() check.
+ - Drop the verbose Tegra264-specific comments above
+   arm_vsmmu_can_batch_cmd() and inside the batch helper.
+ - Document the erratum in
+   Documentation/arch/arm64/silicon-errata.rst.
+ - Guard the repeat path in arm_smmu_cmdq_issue_cmdlist() with
+   an n > 0 check so cmds[0] is never inspected on an empty
+   cmdlist.
+ - Drop the carried Reviewed-by tags now that the patch
+   shape has changed; re-review appreciated.
+
+Changes since v2:
+ - Split into a 3-patch series (refactor / detect / apply) to keep
+   each step small and bisectable.
+ - Move the classifier to arm-smmu-v3.h as static inline so the
+   iommufd file can share it.
+ - Add arm_vsmmu_can_batch_cmd() to split iommufd batches at
+   "needs repeating" transitions so the per-batch decision based
+   on the first command stays correct under mixed user input.
+ - Spell out in the commit message why detection is via DT and
+   not via IIDR/ACPI.
+
+Changes since v1:
+ - Detect the erratum from the existing "nvidia,tegra264-smmu"
+   compatible instead of adding a new property.
+ - Centralise the doubling at the CMDQ submission layer and only
+   apply it to CFGI/TLBI (not ATC_INV).
+ - Drop the binding/dtsi patches accordingly.
+
+Ashish Mhetre (2):
+  iommu/arm-smmu-v3: Introduce CFGI/TLBI-repeat workaround
+    infrastructure
+  iommu/arm-smmu-v3: Enable CFGI/TLBI-repeat workaround on Tegra264
+
+Nicolin Chen (1):
+  iommu/arm-smmu-v3: Factor out CMDQ batch force-sync conditions
+
+ Documentation/arch/arm64/silicon-errata.rst   |  2 +
+ .../arm/arm-smmu-v3/arm-smmu-v3-iommufd.c     | 15 +++-
+ drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c   | 75 ++++++++++++++++---
+ drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.h   |  1 +
+ 4 files changed, 81 insertions(+), 12 deletions(-)
+
+
+base-commit: bee763d5f341b99cf472afeb508d4988f62a6ca1
+-- 
+2.50.1
 
 
