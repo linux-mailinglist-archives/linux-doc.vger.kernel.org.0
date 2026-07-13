@@ -1,386 +1,120 @@
-Return-Path: <linux-doc+bounces-96566-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96567-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Mq9YOgHuVGqmhQAAu9opvQ
-	(envelope-from <linux-doc+bounces-96566-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 15:54:09 +0200
+	id yyH1DBLuVGqohQAAu9opvQ
+	(envelope-from <linux-doc+bounces-96567-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 15:54:26 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B4B174BED1
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 15:54:09 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3515C74BED9
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 15:54:25 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b="pv/nTXIh";
-	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=WonTAe4+;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96566-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-96566-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=reject) header.from=mailbox.org;
+	dkim=pass header.d=lwn.net header.s=20201203 header.b=PgGQJMLa;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96567-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96567-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=lwn.net;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id E8D4F304B697
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 13:49:51 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id AC494304D9EA
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 13:49:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0337A431E66;
-	Mon, 13 Jul 2026 13:49:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4E3B542A7A6;
+	Mon, 13 Jul 2026 13:49:51 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 452E2433BAB;
-	Mon, 13 Jul 2026 13:49:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C30B433E66
+	for <linux-doc@vger.kernel.org>; Mon, 13 Jul 2026 13:49:49 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783950588; cv=none; b=FptsisUgSxHTLXUvsRiiKTUUuGMDJTuelqlrdwggak707gLFa7qvLkfXcUtnchbqdTMFn34ha9FRHuogfZUTI8C4c2rMWkg5a0X7JnqsoLsmsbC/HImE4e2y82yu4miSflSP1YSNS3IoWk79eI6vwMQIPdB6FvsY2nBjQieBCpU=
+	t=1783950591; cv=none; b=AZQbCigPxWtbUEaW2OKfm1BcUjX6WDUIsF5VQsLcMGyGuJAioe7zyORkQ8Mjp08n2guQJ/lut9DDJoqo6/0bx26PnrUMMgNwNrB1DcCywRuKMgPaPiz+GydoFhY52Wr6HZkqVs1o6iY6GzY97WyWnUsDp2REj5fRWTPPm2HeDd0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783950588; c=relaxed/simple;
-	bh=ZHAXhAB/Nmyfq3sWDdK5q297ggBfC78pdvC3bWLISNI=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=nlkq4jxSSab5AFtrGOQRYnVZWrQXCXLyWseLF0BGKitew6FEMBwFSw+FfJWlpsanfljYPS6D+C6uOZlAGrVs0PP/NiAEYpg13Az+J27Dgkodo2wBTDjggXVFnbUYzy+4L76sxeeVRxAcQvxHQXN0mE8GDBg093KhHfRqtKYuyTI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org; spf=pass smtp.mailfrom=mailbox.org; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=pv/nTXIh; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=WonTAe4+; arc=none smtp.client-ip=80.241.56.161
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+	s=arc-20240116; t=1783950591; c=relaxed/simple;
+	bh=PokocmR9VjH792T9hEpK01TnYL3laM0HlE47t+N2qQQ=;
+	h=From:To:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=U44mquwW/qPmEMQyF6qqZgLR2t9BXELURIsdJARnn2ODMtoumCT6J6L3RbiPzteyrliH9KVwZPohH/lehzusrARQNJfdmpToxCsa4E4PCcH0Rqs/UdVDm39CXrB7yBSimSxep0DSTMY91Q+thM0GF91NxSRibK3XuEvRltlMj7Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=PgGQJMLa; arc=none smtp.client-ip=45.79.88.28
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 48E83410E2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1783950583; bh=Ax8ej4eBUVP+xEvgv8ODOC1k+Omp4pxd/3lwjtz7z4A=;
+	h=From:To:Subject:In-Reply-To:References:Date:From;
+	b=PgGQJMLaRUoLTSvCsb6z/KNQpF/CKNe1+WsLu3dMuB80Ilganq/94OvZygup+LbFi
+	 VijuQkep37gokdR0OZlTsJWqofDSG1ujIGHm6q8OJ1sLuTi/ouY5geRVoMkmV+AOjX
+	 c4VnmBtkB3VcLP+3+cKm67pwgs9oHQIFujuvrHuC3pWrB8goH8Dsh/a5pOoTr3GDQe
+	 BEoxjTT8/vZ1OEFibFZVAJ2GAuT2bxxHUrmFc8RAnHY5vIAdpvrv+VMcWsHif+YPyC
+	 mFxE4WaVa4uZGvEXlLCYG/yROyhx6efn0BLLsIIJplbd2ag96JAPNxvi1U63C1SBha
+	 0weZHuJPIHe2A==
+Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4gzP1s64llzKn7K;
-	Mon, 13 Jul 2026 15:49:37 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1783950577;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=GLe5ZWC2BODKaSwkrw/e68lOSJ3dCQp5mLBoWS0DVVA=;
-	b=pv/nTXIhqAfTPnPTR6rOXi3YsoKa7vTWortN9LYC7EdHLiuFVcONZnEcUGWQKTct1U+ibD
-	Le1QOz/oZrzJFVjN3O80443C9j7xNwcallbH5GyR8JD3FWtDJx0mXoroekuVmi54JTOW3V
-	GOE/LXVGCBpS+AV/hHuc7Q4umKdjbFgpm2xL6C8hPOoLAWg4Ej4MAWZHSRSC1Upypeqr8Z
-	Rff6uAAm2fzbCYzd+HmZf1B0z8uz0tgQ/w1HDFeDtSgdb28E34h8E/5z0p6aSH7PXTn0B2
-	yXo4DKpb/Nv8qEbc+SI4Pzg0YNXiDkIvhqHIPYUMiMmS8Gk8BzLAQiLE2I6aOQ==
-From: Manuel Ebner <manuelebner@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1783950576;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=GLe5ZWC2BODKaSwkrw/e68lOSJ3dCQp5mLBoWS0DVVA=;
-	b=WonTAe4+/eUIhGfZo7F9eTqVuMv6y9xU/G+0xxD+SlsNbZcazKpqdfWFPWeF3nvD+d0zZH
-	54fU0exZr870IEYCeNSxv6Z5UiZ54HRCC7V8uh0bJlON/UDvpFLy93Nz8vb6+h35zlYswY
-	qtAOPAIcy8iHAn8FkLHxadnSIHValYnT+cBq4OxZYvUR0abk0YcUbfOhPaclyPEiaMy2WL
-	RMNj0HUgpII2Nn2hTlZ4ld6Hl7bCumNe8GRf8rnNgYeml+T0jC85iZutVEfC5ZPzDqRN6k
-	d8RAMvCESOSJ9KqNafNHVCZ7m3Yomb46UT5RQnBADKwRQn2/fSgd1QidtqV4MQ==
-To: Conor Dooley <conor+dt@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	devicetree@vger.kernel.org
-Cc: Jonathan Corbet <corbet@lwn.net>,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Manuel Ebner <manuelebner@mailbox.org>
-Subject: [PATCH] dt-bindings: fix typos and brackets
-Date: Mon, 13 Jul 2026 15:47:52 +0200
-Message-ID: <20260713134751.498891-2-manuelebner@mailbox.org>
+	by ms.lwn.net (Postfix) with ESMTPSA id 48E83410E2;
+	Mon, 13 Jul 2026 13:49:43 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Daniel Pereira <danielmaraboo@gmail.com>, linux-doc@vger.kernel.org
+Subject: Re: Question regarding CC list for pt_BR translation patches
+In-Reply-To: <CAMAsx6cLjU1N6zuM47KZcsRhq1ABvRZkw_y57szBHNe1o23tVw@mail.gmail.com>
+References: <CAMAsx6cLjU1N6zuM47KZcsRhq1ABvRZkw_y57szBHNe1o23tVw@mail.gmail.com>
+Date: Mon, 13 Jul 2026 07:49:42 -0600
+Message-ID: <87fr1nhudl.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: a5b33c15717d24ea883
-X-MBO-RS-META: jw3mkywjuuysba6eoireywyga58m15zm
+Content-Type: text/plain
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.84 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[mailbox.org,reject];
-	R_DKIM_ALLOW(-0.20)[mailbox.org:s=mail20150812];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-96566-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[lwn.net,vger.kernel.org,gmail.com,kernel.org,infradead.org,mailbox.org];
-	FORWARDED(0.00)[lists@lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:danielmaraboo@gmail.com,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[manuelebner@mailbox.org,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS(0.00)[m:conor+dt@kernel.org,m:krzk+dt@kernel.org,m:robh@kernel.org,m:devicetree@vger.kernel.org,m:corbet@lwn.net,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:lgirdwood@gmail.com,m:broonie@kernel.org,m:rdunlap@infradead.org,m:manuelebner@mailbox.org,m:conor@kernel.org,m:krzk@kernel.org,s:lists@lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWO(0.00)[2];
+	FORWARDED(0.00)[lists@lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[manuelebner@mailbox.org,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[mailbox.org:+];
-	ALIAS_RESOLVED(0.00)[];
+	FORGED_SENDER(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-96567-lists,linux-doc=lfdr.de];
+	FREEMAIL_TO(0.00)[gmail.com,vger.kernel.org];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[lwn.net:+];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
 	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,dimonoff.com:email,mailbox.org:from_mime,mailbox.org:mid,mailbox.org:email,mailbox.org:dkim]
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp,lwn.net:from_mime,lwn.net:dkim,trenco.lwn.net:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 4B4B174BED1
+X-Rspamd-Queue-Id: 3515C74BED9
 
-Add missing '(', ')', '}'
-Remove needless '(', ')', '{', '}'
-'lover voltage' -> 'lower voltage'
+Daniel Pereira <danielmaraboo@gmail.com> writes:
 
-Signed-off-by: Manuel Ebner <manuelebner@mailbox.org>
----
-Sorry for the noise earlier.
----
- Documentation/devicetree/bindings/arm/mediatek.yaml           | 2 +-
- .../devicetree/bindings/arm/qcom,coresight-tpdm.yaml          | 2 +-
- .../bindings/clock/renesas,rcar-usb2-clock-sel.yaml           | 4 ++--
- .../devicetree/bindings/input/gpio-charlieplex-keypad.yaml    | 2 +-
- Documentation/devicetree/bindings/leds/backlight/88pm860x.txt | 1 +
- .../devicetree/bindings/memory-controllers/renesas,dbsc.yaml  | 2 +-
- .../devicetree/bindings/memory-controllers/ti-aemif.txt       | 4 ++--
- Documentation/devicetree/bindings/mips/brcm/soc.txt           | 2 +-
- Documentation/devicetree/bindings/mmc/sdhci-st.txt            | 1 +
- Documentation/devicetree/bindings/phy/phy-miphy365x.txt       | 2 +-
- Documentation/devicetree/bindings/powerpc/ibm,vas.txt         | 2 +-
- Documentation/devicetree/bindings/regulator/max8907.txt       | 1 -
- .../bindings/regulator/mediatek,mt6358-regulator.yaml         | 2 +-
- .../devicetree/bindings/regulator/pbias-regulator.txt         | 1 +
- .../devicetree/bindings/regulator/rohm,bd71837-regulator.yaml | 4 ++--
- .../devicetree/bindings/regulator/rohm,bd71847-regulator.yaml | 4 ++--
- .../devicetree/bindings/sound/mikroe,mikroe-proto.txt         | 1 -
- Documentation/devicetree/bindings/usb/iproc-udc.txt           | 1 +
- 18 files changed, 20 insertions(+), 18 deletions(-)
+> Could you please clarify if you prefer to be CC'd on these translation
+> patches, or is sending them solely to the mailing list sufficient for
+> your review? I want to make sure we are following the community's best
+> practices.
 
-diff --git a/Documentation/devicetree/bindings/arm/mediatek.yaml b/Documentation/devicetree/bindings/arm/mediatek.yaml
-index 382d0eb4d0af..cd4040ad3437 100644
---- a/Documentation/devicetree/bindings/arm/mediatek.yaml
-+++ b/Documentation/devicetree/bindings/arm/mediatek.yaml
-@@ -314,7 +314,7 @@ properties:
-           - const: google,steelix-sku196608
-           - const: google,steelix
-           - const: mediatek,mt8186
--      - description: Google Squirtle (Acer Chromebook Spin 311 (R724T)
-+      - description: Google Squirtle (Acer Chromebook Spin 311 (R724T))
-         items:
-           - const: google,squirtle
-           - const: mediatek,mt8186
-diff --git a/Documentation/devicetree/bindings/arm/qcom,coresight-tpdm.yaml b/Documentation/devicetree/bindings/arm/qcom,coresight-tpdm.yaml
-index 152403f548c3..c7301f1b28c1 100644
---- a/Documentation/devicetree/bindings/arm/qcom,coresight-tpdm.yaml
-+++ b/Documentation/devicetree/bindings/arm/qcom,coresight-tpdm.yaml
-@@ -9,7 +9,7 @@ title: Trace, Profiling and Diagnostics Monitor - TPDM
- 
- description: |
-   The TPDM or Monitor serves as data collection component for various dataset
--  types specified in the QPMDA spec. It covers Implementation defined ((ImplDef),
-+  types specified in the QPMDA spec. It covers Implementation defined (ImplDef),
-   Basic Counts (BC), Tenure Counts (TC), Continuous Multi-Bit (CMB), and Discrete
-   Single Bit (DSB). It performs data collection in the data producing clock
-   domain and transfers it to the data collection time domain, generally ATB
-diff --git a/Documentation/devicetree/bindings/clock/renesas,rcar-usb2-clock-sel.yaml b/Documentation/devicetree/bindings/clock/renesas,rcar-usb2-clock-sel.yaml
-index c84f29f1810f..a14be249fa33 100644
---- a/Documentation/devicetree/bindings/clock/renesas,rcar-usb2-clock-sel.yaml
-+++ b/Documentation/devicetree/bindings/clock/renesas,rcar-usb2-clock-sel.yaml
-@@ -13,8 +13,8 @@ description: |
-   If you connect an external clock to the USB_EXTAL pin only, you should set
-   the clock rate to "usb_extal" node only.
-   If you connect an oscillator to both the USB_XTAL and USB_EXTAL, this module
--  is not needed because this is default setting. (Of course, you can set the
--  clock rates to both "usb_extal" and "usb_xtal" nodes.
-+  is not needed because this is default setting (Of course, you can set the
-+  clock rates to both "usb_extal" and "usb_xtal" nodes).
- 
-   Case 1: An external clock connects to R-Car SoC
-     +----------+   +--- R-Car ---------------------+
-diff --git a/Documentation/devicetree/bindings/input/gpio-charlieplex-keypad.yaml b/Documentation/devicetree/bindings/input/gpio-charlieplex-keypad.yaml
-index c085de6dab85..c6842c017934 100644
---- a/Documentation/devicetree/bindings/input/gpio-charlieplex-keypad.yaml
-+++ b/Documentation/devicetree/bindings/input/gpio-charlieplex-keypad.yaml
-@@ -11,7 +11,7 @@ maintainers:
-   - Hugo Villeneuve <hvilleneuve@dimonoff.com>
- 
- description: |
--  The charlieplex keypad supports N^2)-N different key combinations (where N is
-+  The charlieplex keypad supports (N^2)-N different key combinations (where N is
-   the number of I/O lines). Key presses and releases are detected by configuring
-   only one line as output at a time, and reading other line states. This process
-   is repeated for each line. Diodes are required to ensure current flows in only
-diff --git a/Documentation/devicetree/bindings/leds/backlight/88pm860x.txt b/Documentation/devicetree/bindings/leds/backlight/88pm860x.txt
-index 261df2799315..9e17807d2ce5 100644
---- a/Documentation/devicetree/bindings/leds/backlight/88pm860x.txt
-+++ b/Documentation/devicetree/bindings/leds/backlight/88pm860x.txt
-@@ -13,3 +13,4 @@ Example:
- 		};
- 		backlight-2 {
- 		};
-+	};
-diff --git a/Documentation/devicetree/bindings/memory-controllers/renesas,dbsc.yaml b/Documentation/devicetree/bindings/memory-controllers/renesas,dbsc.yaml
-index 8e3822314b25..30ad2a858844 100644
---- a/Documentation/devicetree/bindings/memory-controllers/renesas,dbsc.yaml
-+++ b/Documentation/devicetree/bindings/memory-controllers/renesas,dbsc.yaml
-@@ -13,7 +13,7 @@ description: |
-   Renesas SoCs contain one or more memory controllers.  These memory
-   controllers differ from one SoC variant to another, and are called by
-   different names, e.g. "DDR Bus Controller (DBSC)", "DDR3 Bus State Controller
--  (DBSC3)", or "SDRAM Bus State Controller (SBSC)").
-+  (DBSC3)", or "SDRAM Bus State Controller (SBSC)".
- 
- properties:
-   compatible:
-diff --git a/Documentation/devicetree/bindings/memory-controllers/ti-aemif.txt b/Documentation/devicetree/bindings/memory-controllers/ti-aemif.txt
-index 190437a0c146..3ec0a43d4e67 100644
---- a/Documentation/devicetree/bindings/memory-controllers/ti-aemif.txt
-+++ b/Documentation/devicetree/bindings/memory-controllers/ti-aemif.txt
-@@ -111,7 +111,7 @@ Optional child cs node properties:
- 
- - ti,cs-read-hold-ns:		read hold width, ns
- 				Time between the deactivation of the read
--				strobe and the end of the cycle (which may be
-+				strobe and the end of the cycle which may be
- 				either an address change or the deactivation of
- 				the chip select signal.
- 				Minimum value is 1 (0 treated as 1).
-@@ -128,7 +128,7 @@ Optional child cs node properties:
- 
- - ti,cs-write-hold-ns:		write hold width, ns
- 				Time between the deactivation of the write
--				strobe and the end of the cycle (which may be
-+				strobe and the end of the cycle which may be
- 				either an address change or the deactivation of
- 				the chip select signal.
- 				Minimum value is 1 (0 treated as 1).
-diff --git a/Documentation/devicetree/bindings/mips/brcm/soc.txt b/Documentation/devicetree/bindings/mips/brcm/soc.txt
-index 3a66d3c483e1..70cd69a4f173 100644
---- a/Documentation/devicetree/bindings/mips/brcm/soc.txt
-+++ b/Documentation/devicetree/bindings/mips/brcm/soc.txt
-@@ -45,7 +45,7 @@ each of which may have several associated hardware blocks, which are versioned
- independently (control registers, DDR PHYs, etc.). One might consider
- describing these controllers as a parent "memory controllers" block, which
- contains N sub-nodes (one for each controller in the system), each of which is
--associated with a number of hardware register resources (e.g., its PHY.
-+associated with a number of hardware register resources (e.g., its PHY).
- 
- == MEMC (MEMory Controller)
- 
-diff --git a/Documentation/devicetree/bindings/mmc/sdhci-st.txt b/Documentation/devicetree/bindings/mmc/sdhci-st.txt
-index ccf82b4ee838..5927abf0c634 100644
---- a/Documentation/devicetree/bindings/mmc/sdhci-st.txt
-+++ b/Documentation/devicetree/bindings/mmc/sdhci-st.txt
-@@ -71,6 +71,7 @@ mmc0: sdhci@fe81e000 {
- 	clock-names	= "mmc";
- 	clocks		= <&clk_s_a1_ls 1>;
- 	bus-width	= <8>
-+};
- 
- /* Example SD stih407 family configuration */
- 
-diff --git a/Documentation/devicetree/bindings/phy/phy-miphy365x.txt b/Documentation/devicetree/bindings/phy/phy-miphy365x.txt
-index 8772900e056a..e36fac92f0fa 100644
---- a/Documentation/devicetree/bindings/phy/phy-miphy365x.txt
-+++ b/Documentation/devicetree/bindings/phy/phy-miphy365x.txt
-@@ -31,7 +31,7 @@ Required properties (port (child) node):
- 
- Optional properties (port (child) node):
- - st,sata-gen	     :	Generation of locally attached SATA IP. Expected values
--			are {1,2,3). If not supplied generation 1 hardware will
-+			are (1,2,3). If not supplied generation 1 hardware will
- 			be expected
- - st,pcie-tx-pol-inv :	Bool property to invert the polarity PCIe Tx (Txn/Txp)
- - st,sata-tx-pol-inv :	Bool property to invert the polarity SATA Tx (Txn/Txp)
-diff --git a/Documentation/devicetree/bindings/powerpc/ibm,vas.txt b/Documentation/devicetree/bindings/powerpc/ibm,vas.txt
-index bf11d2faf7b8..80ea975697ac 100644
---- a/Documentation/devicetree/bindings/powerpc/ibm,vas.txt
-+++ b/Documentation/devicetree/bindings/powerpc/ibm,vas.txt
-@@ -10,7 +10,7 @@ Required properties:
- - reg : Should contain 4 pairs of 64-bit fields specifying the Hypervisor
-   window context start and length, OS/User window context start and length,
-   "Paste address" start and length, "Paste window id" start bit and number
--  of bits)
-+  of bits
- 
- Example:
- 
-diff --git a/Documentation/devicetree/bindings/regulator/max8907.txt b/Documentation/devicetree/bindings/regulator/max8907.txt
-index 371eccd1cd68..b04c9edd3dcd 100644
---- a/Documentation/devicetree/bindings/regulator/max8907.txt
-+++ b/Documentation/devicetree/bindings/regulator/max8907.txt
-@@ -66,4 +66,3 @@ Example:
- ...
- 			};
- 		};
--	};
-diff --git a/Documentation/devicetree/bindings/regulator/mediatek,mt6358-regulator.yaml b/Documentation/devicetree/bindings/regulator/mediatek,mt6358-regulator.yaml
-index c50402fcba72..4eb635179b6a 100644
---- a/Documentation/devicetree/bindings/regulator/mediatek,mt6358-regulator.yaml
-+++ b/Documentation/devicetree/bindings/regulator/mediatek,mt6358-regulator.yaml
-@@ -145,7 +145,7 @@ allOf:
-     then:
-       patternProperties:
-         # Old regulator node name scheme (with prefix and underscores) only
--        # ([^y-] is used to avoid matching -supply
-+        # ([^y-]) is used to avoid matching -supply
-         "^(?<!buck_)(?<!ldo_)v.*[^y-](?!-supply)$": false
-         "^ldo_vsram-": false
-         # vsram_core regulator doesn't exist on MT6358
-diff --git a/Documentation/devicetree/bindings/regulator/pbias-regulator.txt b/Documentation/devicetree/bindings/regulator/pbias-regulator.txt
-index acbcb452a69a..09b07f7ab94a 100644
---- a/Documentation/devicetree/bindings/regulator/pbias-regulator.txt
-+++ b/Documentation/devicetree/bindings/regulator/pbias-regulator.txt
-@@ -30,3 +30,4 @@ Example:
- 				regulator-min-microvolt = <1800000>;
- 				regulator-max-microvolt = <3000000>;
- 			};
-+		};
-diff --git a/Documentation/devicetree/bindings/regulator/rohm,bd71837-regulator.yaml b/Documentation/devicetree/bindings/regulator/rohm,bd71837-regulator.yaml
-index 29b350a4f88a..9942ee6c60f3 100644
---- a/Documentation/devicetree/bindings/regulator/rohm,bd71837-regulator.yaml
-+++ b/Documentation/devicetree/bindings/regulator/rohm,bd71837-regulator.yaml
-@@ -108,8 +108,8 @@ patternProperties:
-       # Setups where regulator (especially the buck8) output voltage is scaled
-       # by adding external connection where some other regulator output is
-       # connected to feedback-pin (over suitable resistors) is getting popular
--      # amongst users of BD71837. (This allows for example scaling down the
--      # buck8 voltages to suit lover GPU voltages for projects where buck8 is
-+      # amongst users of BD71837. This allows for example scaling down the
-+      # buck8 voltages to suit lower GPU voltages for projects where buck8 is
-       # (ab)used to supply power for GPU.
-       #
-       # So we allow describing this external connection from DT and scale the
-diff --git a/Documentation/devicetree/bindings/regulator/rohm,bd71847-regulator.yaml b/Documentation/devicetree/bindings/regulator/rohm,bd71847-regulator.yaml
-index 7ba4ccf723d8..158d749edaa3 100644
---- a/Documentation/devicetree/bindings/regulator/rohm,bd71847-regulator.yaml
-+++ b/Documentation/devicetree/bindings/regulator/rohm,bd71847-regulator.yaml
-@@ -103,8 +103,8 @@ patternProperties:
-       # Setups where regulator (especially the buck8) output voltage is scaled
-       # by adding external connection where some other regulator output is
-       # connected to feedback-pin (over suitable resistors) is getting popular
--      # amongst users of BD71837. (This allows for example scaling down the
--      # buck8 voltages to suit lover GPU voltages for projects where buck8 is
-+      # amongst users of BD71837. This allows for example scaling down the
-+      # buck8 voltages to suit lower GPU voltages for projects where buck8 is
-       # (ab)used to supply power for GPU.
-       #
-       # So we allow describing this external connection from DT and scale the
-diff --git a/Documentation/devicetree/bindings/sound/mikroe,mikroe-proto.txt b/Documentation/devicetree/bindings/sound/mikroe,mikroe-proto.txt
-index 912f8fae11c5..d6fdcf457926 100644
---- a/Documentation/devicetree/bindings/sound/mikroe,mikroe-proto.txt
-+++ b/Documentation/devicetree/bindings/sound/mikroe,mikroe-proto.txt
-@@ -20,4 +20,3 @@ Example:
- 		audio-codec = <&wm8731>;
- 		dai-format = "i2s";
-         };
--};
-diff --git a/Documentation/devicetree/bindings/usb/iproc-udc.txt b/Documentation/devicetree/bindings/usb/iproc-udc.txt
-index 272d7faf1a97..6a701ce29ff1 100644
---- a/Documentation/devicetree/bindings/usb/iproc-udc.txt
-+++ b/Documentation/devicetree/bindings/usb/iproc-udc.txt
-@@ -19,3 +19,4 @@ Example:
- 		reg = <0x664e0000 0x2000>;
- 		interrupts = <GIC_SPI 424 IRQ_TYPE_LEVEL_HIGH>;
- 		phys = <&usbdrd_phy>;
-+	};
--- 
-2.54.0
+It's always best to CC the maintainer(s) directly.  I do keep an eye on
+the list, but the chances of something falling through the cracks are
+higher if it is not sent to me directly as well.
 
+Thanks,
+
+jon
 
