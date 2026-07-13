@@ -1,59 +1,59 @@
-Return-Path: <linux-doc+bounces-96532-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96533-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id QeYGOqjQVGrRfAAAu9opvQ
-	(envelope-from <linux-doc+bounces-96532-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	id 9hEEJqjQVGrQfAAAu9opvQ
+	(envelope-from <linux-doc+bounces-96533-lists+linux-doc=lfdr.de@vger.kernel.org>)
 	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 13:48:56 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4043774A82E
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 06A6A74A82D
 	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 13:48:56 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=debian.org header.s=smtpauto.stravinsky header.b=ZoSryOM6;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96532-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-96532-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=debian.org header.s=smtpauto.stravinsky header.b=N8JkedrF;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96533-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-96533-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=debian.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id B75D03009F32
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 11:48:50 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 22841302F692
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2026 11:48:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 428243F0A86;
-	Mon, 13 Jul 2026 11:48:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 301103F164E;
+	Mon, 13 Jul 2026 11:48:47 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E32A53EDE7E;
-	Mon, 13 Jul 2026 11:48:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 948CC3BB104;
+	Mon, 13 Jul 2026 11:48:40 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783943323; cv=none; b=HgwL5vtuqiZKQMJ9RDGYhKrf33183CfOdX62RVPzJ12uUBizG8/oE7Kw7AthPKu+KvuLYpMhphzF17a7HnxCcl0qtlmLrBmiKKWnGgCJbOtSq3JLEEi4M/+yMo6XWe503h+IM1z9hQriFJdwVwLG1lets/FbPAV/fmTl88on+k4=
+	t=1783943326; cv=none; b=mdIJ+L0S4hVTL8/UHvN18/LQWtR9APIV2gUi6lpf40XQxlC19rOhgfcrwH54BjmlJPMYfD8rBU1/lkpdzwAAHOiIhDBq3kSVDq0HnmsoKk3DsK8qVqcTjqzsuKbBwSIesOPgmXhVYEoVMHQtODQOfQXPZmjf3A6bVpzB8LW1x/E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783943323; c=relaxed/simple;
-	bh=MfoHjzWLvzBg0lQMWcDC/wF9znVs8BNW7DCTyn2CF7A=;
+	s=arc-20240116; t=1783943326; c=relaxed/simple;
+	bh=YBPJ0mqcwhJO4nOJvC72HAXZ4ErujEc7xC2rk3ArDDU=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=TR/6zSbK1355T1HBZ/zW1Dh9dWOWD1QhbHgTTwDS75RUvx49KJvCbKU0GarLLEdue4YL1ue2zrNKIHrLTeokCQN3x74UzWgj+PIuOcC+ViG7/b6IaLPpBg+DzFOIhRPXLQ56wbYUEoerQaBhGJJgxnu7WGwe44KCqrgGJZzGYuI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org; spf=pass smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=ZoSryOM6; arc=none smtp.client-ip=82.195.75.108
+	 In-Reply-To:To:Cc; b=GBLM+APHqo7UdTt1GOd/e+4vOZVH0apPHHzkgQ8hVMpp7IlxjXIFdEmAD/A79ipNmYFkUKo+CSp1lUkJKp/AUBwj+mEgijCfKXPGCB/pUByMzd9UkC+wXFFFXVZoxlo5k358xO8HftV19aRGg531oykRhBXcTF+bAz6fmTRCiAU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org; spf=pass smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=N8JkedrF; arc=none smtp.client-ip=82.195.75.108
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
 	s=smtpauto.stravinsky; h=X-Debian-User:Cc:To:In-Reply-To:References:
 	Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:
 	From:Reply-To:Content-ID:Content-Description;
-	bh=8LzjJcbcBOXrfLADuXXmAbo73ajPyy8OrPW+mEAjdK4=; b=ZoSryOM6Ov3DSqe5rhcu0hpRgy
-	9nPDwffqAXSVVcZLie7XqTNa6I08xHjd8ztoSRCJrb5XVCa6NSJD3l0inU9tx5r+TF9ZIC/2d+flT
-	tDUgXuwb2hOGsN81/uUdThVyxEa9RQhCGFcCWrrPrw0iXdj9zM377Yp9t2RR+NYdV5IhGo2GYqgh6
-	h0bKjCg4FPrhCZ8ps92Yi8JLzIqg/l/v1ww1bKLaf7eETNsYxPVWzFJ+v8DU/XE3ponBxbujUfvgJ
-	0jzNJp7sIPRbkvnwvcBUQEpoQ9QN6mdcRqAaVm+wBc9eTS2KtkC5w9c0Qi1yG255Z3FS/KG+g5QJI
-	o2qPzl+A==;
+	bh=3PyMSDdhZBE9vEjgfp5OzX/2Lfp7N6HnZTWVkO5qI/k=; b=N8JkedrFp067HCVQay8inu9u1z
+	h83J6ZhcSMk1hIUwslGZNCaiZyFqnaWOOsJk78AZTNS1tiI5I5lutnyQ2lLdSgfVpCv13fvzq4W5w
+	Jesr6LxsBYoDyr92CCet2I/Gr2FmfW8wZ2E6riiDe1JTrJ57enaSMpbor/2nvGGwNCRhOvbvmOVLy
+	x5celDTdld0oC5m6x5c6wGkRexupSwwMHuD5jJG27ycFpFJwLD7XYlZIh++WdVURcDUyiP1qifAeo
+	uUMSzIAsax437bwUusG8r2IbBGIWZwFdvIU4e/nnPfnxxFyUm+BUxZRCLOXNtqFqpYbU7Mg7k0kkN
+	u50fa91Q==;
 Received: from authenticated-user
 	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
 	(Exim 4.96)
 	(envelope-from <leitao@debian.org>)
-	id 1wjF9C-001Tie-0A;
-	Mon, 13 Jul 2026 11:48:30 +0000
+	id 1wjF9H-001Tiq-0i;
+	Mon, 13 Jul 2026 11:48:35 +0000
 From: Breno Leitao <leitao@debian.org>
-Date: Mon, 13 Jul 2026 04:48:04 -0700
-Subject: [PATCH 1/4] mm: kmemleak: confirm suspected leaks with a second
- scan
+Date: Mon, 13 Jul 2026 04:48:05 -0700
+Subject: [PATCH 2/4] mm: kmemleak: report leaks only after N consecutive
+ unreferenced scans
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -62,7 +62,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260713-catalin_pto-v1-1-5b93b1131089@debian.org>
+Message-Id: <20260713-catalin_pto-v1-2-5b93b1131089@debian.org>
 References: <20260713-catalin_pto-v1-0-5b93b1131089@debian.org>
 In-Reply-To: <20260713-catalin_pto-v1-0-5b93b1131089@debian.org>
 To: Catalin Marinas <catalin.marinas@arm.com>, 
@@ -77,20 +77,20 @@ Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
  linux-kselftest@vger.kernel.org, Breno Leitao <leitao@debian.org>, 
  kernel-team@meta.com
 X-Mailer: b4 0.16-dev-d5d98
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5439; i=leitao@debian.org;
- h=from:subject:message-id; bh=2Ik36nD5Ymen0igsLFiFN5pbHvbZF0V0k4IOFO34tCM=;
- b=owEBbQKS/ZANAwAIATWjk5/8eHdtAcsmYgBqVNCDe9n1M9YNOiQ/yUFY2MBL+A8LR6gq6LZuK
- UWDOMGVhmmJAjMEAAEIAB0WIQSshTmm6PRnAspKQ5s1o5Of/Hh3bQUCalTQgwAKCRA1o5Of/Hh3
- bRU8EAChIkFYicCYva6mq7aO2tlOJyY4KTdiQFZL5K3tXxDOFUh9nxGrlQOzkVvtyYfOsPiIrsD
- nfWCwHcQVbyWANPt4qyA0G3rTI+M9f7pfk4Q6PPmgM+gVKTFUNfVyma47kdgItlSycJNfqZLYiI
- Ex5W/qBFwdefN8ey2pxvRc02VreAv4XpDv9T77OqaCC75SzG81fI/qrpMRUcjoAZLZCJZdRb/O1
- vmWed4KgnZMcVKFOkQg8HYCAwxiwB59b110PPiZUFV6V0XIJYrWMeg6aKxm2BHUou7y/fP1E+3j
- L8Q2WPjllunX66rVivlHMCS7gdBlZnpj5JEcUAUN9aNSj8McwdI5cI5vsung2EUM4PomAb2wDnB
- GED78mm8KOr+I6iPAbMA2bXSaEXjjZL2QIDx98zbc2tNOMuKHmv4BmQ3+vJG46dWGhYApAgr/OQ
- ickcPUwvRdGBOMwrvPXi3M/35QeHkVaOl3RzJr0nvda9v9Q7JDiUqLI2gPfiKrawcSIfJi5/fps
- DKia5+UqAAQue+DIcHdFHmFAGlYzvRtXPfdRwc+CI0zG2llHgKUyvyDO4Ew9r2dHVv9Hx5xEuVm
- 8bC8c2HmbD1CGMnNV5yOdPwqmtCrTn12E8WG73WdrcnPEObU7xEPknF5YNfviaV2DyvmEtR+YJP
- 9XJsusLKdLazP+Q==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4344; i=leitao@debian.org;
+ h=from:subject:message-id; bh=YBPJ0mqcwhJO4nOJvC72HAXZ4ErujEc7xC2rk3ArDDU=;
+ b=owEBbQKS/ZANAwAIATWjk5/8eHdtAcsmYgBqVNCDmJoWE4BMqrcZuuBB18LglsrEY2eFnhOvK
+ 1EfO5TjQAmJAjMEAAEIAB0WIQSshTmm6PRnAspKQ5s1o5Of/Hh3bQUCalTQgwAKCRA1o5Of/Hh3
+ bXuAD/9lsfBVuMajHKh8kGKHEKDGGScReuyPF9mfQyBxoY4s107cMCBzbUi/pMqEBi2m0B67sEy
+ 6XWG7EZlOGqW6IgVcv+vDl0/RMSWBMf3BETrnbSI43C1Qf+bE0McySykdVWWvddgc3cFEqkpx4U
+ cPJZlZr5W7wOSZdUXez+yZYFAr8F8/ZYLWtUaYY3a1PoKpvVgsmUDS4XBjA5UDGmfztDO9uShm9
+ hhLlpKkkxUnnnYjEvvxTWpIiQvAzkMP+vScEtsw0bnhx+Y8ew4prxijoLTrWvUs6beu5FLVOhkV
+ 5AL71WmJyCoy3z5wEM0L46Kvq/h8NT2tC9gbl/gDciQZKo9xlIBOXph51YULGnEpyLzty2/4/DF
+ u1DLJviSgu0j2pbe/GOO1i3GhQStWMpCg+88eOmRLdMZpAx4a5aOFSjRnbXLlnj0Uut3PjQ7eiX
+ k5+QryctC9FgYRhpPxD8+d8glFwRbl407dt8GcAsc2UClwaFg//FbzivwKOYtx2LKY0vJ1qEJb4
+ JBYCWKWCb9u0EhicC0FTNbGF1ol1e1KuMVa57VtOWBkJILZdrBudqSfm9kMlJFDtAmW7JBeFgJp
+ r8O/yymkSwOa1Y7akjrjyXPXCegs+pVJ21VAb9dFaM4LVlH3BDdOuVZuZntJl5PxJ0HWU6j7CST
+ VaIvB0nICkpc5/Q==
 X-Developer-Key: i=leitao@debian.org; a=openpgp;
  fpr=AC8539A6E8F46702CA4A439B35A3939FFC78776D
 X-Debian-User: leitao
@@ -98,7 +98,7 @@ X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[debian.org,none];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	R_DKIM_ALLOW(-0.20)[debian.org:s=smtpauto.stravinsky];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -109,11 +109,11 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	FORGED_SENDER(0.00)[leitao@debian.org,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[19];
-	TAGGED_FROM(0.00)[bounces-96532-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-96533-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
@@ -125,169 +125,108 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	TO_DN_SOME(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:email,vger.kernel.org:from_smtp,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,linux-foundation.org:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,arm.com:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 4043774A82E
+X-Rspamd-Queue-Id: 06A6A74A82D
 
-From: Catalin Marinas <catalin.marinas@arm.com>
+kmemleak reports an object the first scan it is found unreferenced. Its
+mark phase runs without stopping the rest of the kernel and without a
+write barrier, so a live object whose only reference is briefly invisible
+during a concurrent RCU update -- e.g. a VMA moved between maple tree
+nodes, or a page-cache xa_node -- can be seen as unreferenced for that one
+scan. Because an object is flagged as reported only once, such a transient
+race turns into a permanent false positive.
 
-The kmemleak marking phase is not atomic. While the object graph is
-traversed, the kernel can modify pointers, free objects or allocate new
-ones. If a reference to an object is moved from one location to another,
-kmemleak scanning may miss it. We have explicit annotations like
-kmemleak_transient_leak() but identifying and maintaining them is not
-trivial.
+Track how many consecutive scans each object has been seen unreferenced
+and only report it once that reaches min_unref_scans, a new module
+parameter. It defaults to 1, leaving the behaviour unchanged; setting it
+higher (e.g. 2) still reports a genuine leak, one scan later, while an
+object referenced again before the threshold restarts its run and is never
+reported.
 
-Given that such transient leaks are short-lived, rather than just
-reporting such objects as leaks, do another scan to confirm the
-suspected objects. If no new leaks are found during the first scan, skip
-the confirmation one.
+min_unref_scans can be set at boot with kmemleak.min_unref_scans=<n> or at
+run-time via /sys/module/kmemleak/parameters/min_unref_scans.
 
-Signed-off-by: Catalin Marinas <catalin.marinas@arm.com>
-Assisted-by: Claude:claude-opus-4-8
 Signed-off-by: Breno Leitao <leitao@debian.org>
-Cc: Andrew Morton <akpm@linux-foundation.org>
+Reviewed-by: Catalin Marinas <catalin.marinas@arm.com>
 ---
- mm/kmemleak.c | 57 ++++++++++++++++++++++++++++++++++++++++++++++++++++++---
- 1 file changed, 54 insertions(+), 3 deletions(-)
+ Documentation/dev-tools/kmemleak.rst |  8 ++++++++
+ mm/kmemleak.c                        | 13 ++++++++++++-
+ 2 files changed, 20 insertions(+), 1 deletion(-)
 
+diff --git a/Documentation/dev-tools/kmemleak.rst b/Documentation/dev-tools/kmemleak.rst
+index 7d784e03f3f9d..a8a83bc69ceb8 100644
+--- a/Documentation/dev-tools/kmemleak.rst
++++ b/Documentation/dev-tools/kmemleak.rst
+@@ -198,6 +198,14 @@ systems, because of pointers temporarily stored in CPU registers or
+ stacks. Kmemleak defines MSECS_MIN_AGE (defaulting to 1000) representing
+ the minimum age of an object to be reported as a memory leak.
+ 
++The ``min_unref_scans`` module parameter (default 1) requires an object to
++be seen unreferenced in that many consecutive scans before it is reported.
++Keeping it at 1 preserves the historical behaviour; higher values filter
++the transient false positives described above, at the cost of delaying
++genuine reports by up to that many scans. It can be set at boot with
++``kmemleak.min_unref_scans=<n>`` or at run-time via
++``/sys/module/kmemleak/parameters/min_unref_scans``.
++
+ Limitations and Drawbacks
+ -------------------------
+ 
 diff --git a/mm/kmemleak.c b/mm/kmemleak.c
-index e96e9efd19b0d..ac77bab580688 100644
+index ac77bab580688..2fff11637e490 100644
 --- a/mm/kmemleak.c
 +++ b/mm/kmemleak.c
-@@ -175,6 +175,8 @@ struct kmemleak_object {
- #define OBJECT_PHYS		(1 << 4)
- /* flag set for per-CPU pointers */
- #define OBJECT_PERCPU		(1 << 5)
-+/* flag set on an object left unreferenced by the full scan, pending confirmation */
-+#define OBJECT_SUSPECT		(1 << 6)
- 
- /* set when __remove_object() called */
- #define DELSTATE_REMOVED	(1 << 0)
-@@ -235,6 +237,8 @@ static unsigned long jiffies_min_age;
+@@ -151,6 +151,8 @@ struct kmemleak_object {
+ 	int min_count;
+ 	/* the total number of pointers found pointing to this object */
+ 	int count;
++	/* consecutive scans the object has been seen unreferenced */
++	unsigned int unref_scans;
+ 	/* checksum for detecting modified objects */
+ 	u32 checksum;
+ 	depot_stack_handle_t trace_handle;
+@@ -234,6 +236,9 @@ static unsigned long max_percpu_addr;
+ static struct task_struct *scan_thread;
+ /* used to avoid reporting of recently allocated objects */
+ static unsigned long jiffies_min_age;
++/* consecutive scans an object must stay unreferenced before reporting */
++static unsigned int min_unref_scans = 1;
++module_param(min_unref_scans, uint, 0644);
  static unsigned long jiffies_last_scan;
  /* delay between automatic memory scannings */
  static unsigned long jiffies_scan_wait;
-+/* number of objects flagged OBJECT_SUSPECT during the current scan */
-+static int nr_suspects;
- /* enables or disables the task stacks scanning */
- static int kmemleak_stack_scan = 1;
- /* protects the memory scanning, parameters and debug/kmemleak file access */
-@@ -1440,6 +1444,11 @@ static void update_refs(struct kmemleak_object *object)
- 	 */
- 	object->count++;
- 	if (color_gray(object)) {
-+		/* referenced after all, no longer a suspect */
-+		if (object->flags & OBJECT_SUSPECT) {
-+			object->flags &= ~OBJECT_SUSPECT;
-+			nr_suspects--;
-+		}
- 		/* put_object() called when removing from gray_list */
- 		WARN_ON(!get_object(object));
- 		list_add_tail(&object->gray_list, &gray_list);
-@@ -1844,16 +1853,16 @@ static void dedup_flush(struct xarray *dedup)
-  * kernel's standard allocators. This function must be called with the
-  * scan_mutex held.
-  */
--static void kmemleak_scan(void)
-+static int __kmemleak_scan(bool full)
- {
- 	struct kmemleak_object *object;
- 	struct zone *zone;
- 	int __maybe_unused i;
--	struct xarray dedup;
--	int new_leaks = 0;
- 	int stop = 0;
+@@ -692,6 +697,7 @@ static struct kmemleak_object *__alloc_object(gfp_t gfp)
+ 	object->excess_ref = 0;
+ 	object->count = 0;			/* white color initially */
+ 	object->checksum = ~0;
++	object->unref_scans = 0;
+ 	object->del_state = 0;
  
- 	jiffies_last_scan = jiffies;
-+	if (full)
-+		nr_suspects = 0;
+ 	/* task information */
+@@ -1890,6 +1896,9 @@ static int __kmemleak_scan(bool full)
+ 				__paint_it(object, KMEMLEAK_BLACK);
+ 		}
  
- 	/* prepare the kmemleak_object's */
- 	rcu_read_lock();
-@@ -1883,6 +1892,8 @@ static void kmemleak_scan(void)
- 
++		/* referenced last scan: restart the unreferenced run */
++		if (!color_white(object))
++			object->unref_scans = 0;
  		/* reset the reference count (whiten the object) */
  		object->count = 0;
-+		if (full)
-+			object->flags &= ~OBJECT_SUSPECT;
- 		if (color_gray(object) && get_object(object))
- 			list_add_tail(&object->gray_list, &gray_list);
- 
-@@ -1950,6 +1961,10 @@ static void kmemleak_scan(void)
- scan_gray:
- 	scan_gray_list();
- 
-+	/* a confirmation scan does not look for modified objects */
-+	if (!full)
-+		return nr_suspects;
-+
- 	/*
- 	 * Check for new or unreferenced objects modified since the previous
- 	 * scan and color them gray until the next scan.
-@@ -1972,6 +1987,11 @@ static void kmemleak_scan(void)
- 			/* color it gray temporarily */
- 			object->count = object->min_count;
- 			list_add_tail(&object->gray_list, &gray_list);
-+		} else if (unreferenced_object(object) &&
-+			   !(object->flags & OBJECT_REPORTED)) {
-+			/* flag the objects left unreferenced by this scan */
-+			object->flags |= OBJECT_SUSPECT;
-+			nr_suspects++;
- 		}
- 		raw_spin_unlock_irq(&object->lock);
- 	}
-@@ -1982,12 +2002,42 @@ static void kmemleak_scan(void)
- 	 */
- 	scan_gray_list();
- 
-+	return nr_suspects;
-+}
-+
-+/*
-+ * Scan the memory and report the unreferenced objects as leaks. Must be
-+ * called with the scan_mutex held.
-+ */
-+static void kmemleak_scan(void)
-+{
-+	struct kmemleak_object *object;
-+	struct xarray dedup;
-+	int new_leaks = 0;
-+
-+	/*
-+	 * Full scan. Objects left unreferenced are flagged OBJECT_SUSPECT and
-+	 * counted in the return value; nothing to confirm or report otherwise.
-+	 */
-+	if (!__kmemleak_scan(true))
-+		return;
-+
- 	/*
- 	 * If scanning was stopped do not report any new unreferenced objects.
- 	 */
- 	if (scan_should_stop())
- 		return;
- 
-+	/*
-+	 * A live object whose only reference is moved by, for example, a
-+	 * concurrent RCU update can be missed for one scan and reported as a
-+	 * transient false positive. Scan again and only report the objects
-+	 * left unreferenced (still flagged OBJECT_SUSPECT) by both scans.
-+	 */
-+	__kmemleak_scan(false);
-+	if (scan_should_stop())
-+		return;
-+
- 	/*
- 	 * Scanning result reporting. When verbose printing is enabled, dedupe
- 	 * by stackdepot trace_handle so each unique backtrace is logged once
-@@ -2015,6 +2065,7 @@ static void kmemleak_scan(void)
+ 		if (full)
+@@ -2064,9 +2073,11 @@ static void kmemleak_scan(void)
+ 		raw_spin_lock_irq(&object->lock);
  		trace_handle = 0;
  		dedup_print = false;
++
  		if (unreferenced_object(object) &&
-+		    (object->flags & OBJECT_SUSPECT) &&
- 		    !(object->flags & OBJECT_REPORTED)) {
+ 		    (object->flags & OBJECT_SUSPECT) &&
+-		    !(object->flags & OBJECT_REPORTED)) {
++		    !(object->flags & OBJECT_REPORTED) &&
++		    ++object->unref_scans >= min_unref_scans) {
  			object->flags |= OBJECT_REPORTED;
  			if (kmemleak_verbose) {
+ 				trace_handle = object->trace_handle;
 
 -- 
 2.53.0-Meta
