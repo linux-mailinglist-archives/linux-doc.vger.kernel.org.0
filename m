@@ -1,141 +1,365 @@
-Return-Path: <linux-doc+bounces-96806-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96807-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id LD99C4Z9VmpL7QAAu9opvQ
-	(envelope-from <linux-doc+bounces-96806-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 20:18:46 +0200
+	id WR24AMF+Vmqs7QAAu9opvQ
+	(envelope-from <linux-doc+bounces-96807-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 20:24:01 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D49D757CA0
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 20:18:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6CA48757D14
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 20:24:00 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=wyuan.org header.s=key1 header.b=ucs+gwSx;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96806-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-96806-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=wyuan.org;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=DC2y09wC;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96807-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-96807-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=gmail.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id C0D933043511
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 18:17:57 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id CC3A530D21BA
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 18:23:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0A3772F39B5;
-	Tue, 14 Jul 2026 18:17:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 830E8412BF1;
+	Tue, 14 Jul 2026 18:23:05 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-179.mta1.migadu.com (out-179.mta1.migadu.com [95.215.58.179])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com [209.85.222.176])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 102473C0A1B
-	for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 18:17:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 032093CF204
+	for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 18:23:02 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784053076; cv=none; b=nnEgrTnD1aH9dHhT9ffNoRROI8aYr1UI9YMChgVusjuv5/1TZYmBrZ6Yl5KfxAVemyOyXU/HkBVEUNzn8aAcZaTBIv4taMIO4qyTnZSqF3+m5/JPxlS8Nt1XOhZc8WIc6SLPvXsZw24fjREmEB24lU7ijbt6Er6ndWfoH7UoFjE=
+	t=1784053385; cv=none; b=phgGthWhNGtWoOdJQgyBS5yGFho3Ik4Uv6rx8Q4FxX7we4NPEnZpYwlltAbd1BiIOM+pXp62bVQ8LqDAuK9CQZkQSNZRcWVWlrnWkSyfq2+Mturd3sLujLwD9BInJ3iFMaalvPW/W8/VkOyu2gtqoeB0BWe0tYLma01Bu/5yHeQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784053076; c=relaxed/simple;
-	bh=8uFUMG/y2FQTaI9putOGxq/IhR2RVTiqiesqfrLcMGI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=o5iLRkaI5Pj7mw+Hv78LKy69Tt1cQ9+kPr98a1lX5dE8x5W2a5as8BHjQ8swr1f/hN6dP7Zdf3P+WvfZQwyk9nsSmtVNeI3YIinJmSl3CIv0GCPqHoTVbDrQBfQbr2gQEzdXOjXbuKEsBT9RatSZrMKkvb5vqB1izfZalFeL0tA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=wyuan.org; spf=pass smtp.mailfrom=wyuan.org; dkim=pass (2048-bit key) header.d=wyuan.org header.i=@wyuan.org header.b=ucs+gwSx; arc=none smtp.client-ip=95.215.58.179
-Date: Wed, 15 Jul 2026 02:17:34 +0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=wyuan.org; s=key1;
-	t=1784053072;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=BKFMkgqosyViKcB2x507n7iQ8e5UUkuAaHVddycnM9U=;
-	b=ucs+gwSxAm2JZ7kWG81MlBd0Le0bGfXZruKsak1nxH9AOIB9kpbDaM6oaJhfeW1c3Z148v
-	ob3LkWDapbaw6mEuHwHm683+K/iH31lQuJOLS8ubj5AC+dUWLg2X6/qNF4utjMCPK9e0iL
-	grd95xkdgmm4YLohkMTp2HMLqSyVwASRTdlrdH7oL4Ql0JcVgkgQWZp/P7zqLhWkOsuEBp
-	Y1aCv34WADxCTbGiKC9MrExyBn8EglJuI4XF0mLwH7/+e0cle7NIC+gYuMl12ruKs4oIti
-	GUz1duR6eEdhbYtdtR1HRjy/YXf7SomUyxrgPCWrBGlicCZpCMqDugSSGySo8w==
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Weijie Yuan <wy@wyuan.org>
-To: Doehyun Baek <doehyunbaek@gmail.com>
-Cc: linux-doc@vger.kernel.org, Alex Shi <alexs@kernel.org>,
-	Yanteng Si <si.yanteng@linux.dev>, Dongliang Mu <dzm91@hust.edu.cn>,
-	Ben Guo <ben.guo@openatom.club>, Gary Guo <gary@garyguo.net>,
-	Yan Zhu <zhuyan2015@qq.com>,
-	Jiandong Qiu <qiujiandong1998@gmail.com>,
-	chengyaqiang <chengyaqiang@tsinghua.edu.cn>,
-	Haoyang Liu <tttturtleruss@gmail.com>
-Subject: Re: What's cooking in zh_CN (Jul 2026, #02)
-Message-ID: <alZ9Pnxf4GylfRo5@wyuan.org>
-References: <alZK0i0HvxOvSKwj@wyuan.org>
- <alZP_6nAXNy_HfZi@wyuan.org>
- <CAN-j9UoUHQ2i4H+9G-XK_mOfKKyE9K9-mwUgPc+4yOVfiizgmA@mail.gmail.com>
- <alZ1AzLX8LrB-JFK@wyuan.org>
- <CAN-j9Uo2f4dmWo8bMkdtXg7g6uayK_XZatkGs5iKv6-dNZ_Y-g@mail.gmail.com>
+	s=arc-20240116; t=1784053385; c=relaxed/simple;
+	bh=90Q3wPqJq9vtC5fD3WzeJQSefMDjzwRVaR4osbPThfw=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=GMeOFMPjQCri2bBd2+nDo9NhFRaOFN0EnzRkI7dT3JyY1X3Fwgfbh4P/jqOlz8TY5oFyNiNOoJ1EhA3ArTBp79arX7OsQ5l1gpFpTl2W7DQMgorKOIHEbRFWhbr35mr3t1mo7cIaX+6y11S6YJXdWj26/8FRGAcESLPhZnxfIyc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=DC2y09wC; arc=none smtp.client-ip=209.85.222.176
+Received: by mail-qk1-f176.google.com with SMTP id af79cd13be357-92e5b048375so299611085a.1
+        for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 11:23:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1784053382; x=1784658182; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=KnIZOQELkUux/iVcCPOwRBkQ6Ntjw2d8jEKYPylt2bg=;
+        b=DC2y09wCUp7UCwNsfcsrQ43zI2YxxHVv9OudR4P549sBA3ba9mMJkz9oCaSdO1eSz2
+         /cFQ8ZTBo+wpXOYSroiIwrj69u0Xi0QCmdeHv50zp91FC6Lmh5RrPsyvxd89RJ08Fgfn
+         HhuH4Uo3ozmkkeeyzj+8C4scApLW3tHp9PkrqtmFWSH4SzokUAACDCsPH1DCga6HHPYT
+         IQMrNhknacKPjxtMugz2PASZ2YbgyRBH8egzgZYfOTJVPmIIXyNSd9x9tgaH8IdRfNsr
+         MtmoMLR3lzQsluRazsATmpbuU8Dk5uDvERoZcL+EFA/Bluqow0BjNekWiGhj40Ap5za7
+         N50g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784053382; x=1784658182;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=KnIZOQELkUux/iVcCPOwRBkQ6Ntjw2d8jEKYPylt2bg=;
+        b=MnS5++kJUqqkRYRqavPoO2PwdYKuIY9KRmiR9PMzgAjTXvbq6MdWCpO51Yfsm9jclE
+         T+5YUHefr92MY1TTtfhBe2c2Xj3k7sTkW56MFCxEe5DnCvKwFHZqyJ+3nYeDR/GhAiVp
+         r1K1VSFotqwXrkx//aTW71vSTShxGGR5hZyAG4KWqG0d8lif8xlDc1BP7EjLSWYXIGeR
+         LdrL85c9L58xErUTDmlqcLCFqkXYw40+AaAUm4jEUQtVw4L28D32UMXpGjeNjaqKk5em
+         /krboRa5VtPb+RqDQvScz78nnS0XvxQvsW4BUPjYIWkPERwNbm13RCfRveHN47uApP1j
+         a6pw==
+X-Forwarded-Encrypted: i=1; AHgh+RqlADqvFOOGzPr2LXHWYvhaj5efb3Yvru4D6o+5IVKrc+csY3Dvb9vVXnQrtQTz/IT6zuOSGD4MVCI=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx0illgxA4ep9MCcoB8gyHdKQGBxrfHND+YDVmN3hkw0dCcOf4q
+	Vmx+XESSJpjrno1IlZIM8/j5opAVNFTwsMTdKAj7IvbR1+XFYu5VFIxs
+X-Gm-Gg: AfdE7ck6cz0AHuTSi25MJjuXJDdDhGacGr6B5w0a0odtdlsf9MVScbDd0Kof7oI9qvH
+	BzaYBJivMUdeLgXAWmRV+PK/WTrDc7N0+XkTDMxxqMtkLHK/uZQ6qu1Rsx2f7nyAw6ij/WvoX/N
+	Dq+xQ0Fwvd20i6myQZY56NLOxBYAelS+W13jusHc5JOLHqAkfi/VJA+dwzbWlt98/bYeGvb9/vy
+	lxpx1WlIUbPOEwAMdHWphF9KXs/KHiAUl6w4vkTvqHIMWnc9REgGkj+y6qx4h+KtjfA/gud6NuQ
+	gEA13u6doNVKF8yucJFbq9Af22CdQ8Krjp4y3kpAPFVHt26SOUZlEOWT6BKwV9cSGlY+aPabvPD
+	8R4IMvWDSYDTFmfHolLd2/fwoNrOAVGJuWBFHNXIWs4Mw/nCnLuZzEE+8yUpVZwUgUyiKN5QsFa
+	+VOuFTDak3pxynZ24FGZjJoRX3CBNfxLMa1QL7xKwiBgWwz7UCZ1s=
+X-Received: by 2002:a05:620a:288b:b0:92e:eeb6:b879 with SMTP id af79cd13be357-93086a8fbf5mr351375685a.41.1784053381649;
+        Tue, 14 Jul 2026 11:23:01 -0700 (PDT)
+Received: from localhost ([48.45.163.146])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-92ee5d61facsm1539300585a.42.2026.07.14.11.22.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 14 Jul 2026 11:23:01 -0700 (PDT)
+From: Jinchao Wang <wangjinchao600@gmail.com>
+To: Andrew Morton <akpm@linux-foundation.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Thomas Gleixner <tglx@kernel.org>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Masami Hiramatsu <mhiramat@kernel.org>
+Cc: Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	"H . Peter Anvin" <hpa@zytor.com>,
+	x86@kernel.org,
+	Arnaldo Carvalho de Melo <acme@kernel.org>,
+	Namhyung Kim <namhyung@kernel.org>,
+	Mark Rutland <mark.rutland@arm.com>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	David Hildenbrand <david@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Matthew Wilcox <willy@infradead.org>,
+	linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org,
+	linux-trace-kernel@vger.kernel.org,
+	linux-perf-users@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	Jinchao Wang <wangjinchao600@gmail.com>
+Subject: [RFC PATCH 00/13] mm/kwatch: dynamic hardware watchpoints for hunting memory corruption
+Date: Wed, 15 Jul 2026 02:22:30 +0800
+Message-ID: <20260714182243.10687-1-wangjinchao600@gmail.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAN-j9Uo2f4dmWo8bMkdtXg7g6uayK_XZatkGs5iKv6-dNZ_Y-g@mail.gmail.com>
-X-Migadu-Flow: FLOW_OUT
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[wyuan.org,quarantine];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_MISSING_CHARSET(0.50)[];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[wyuan.org:s=key1];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-96806-lists,linux-doc=lfdr.de];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:doehyunbaek@gmail.com,m:linux-doc@vger.kernel.org,m:alexs@kernel.org,m:si.yanteng@linux.dev,m:dzm91@hust.edu.cn,m:ben.guo@openatom.club,m:gary@garyguo.net,m:zhuyan2015@qq.com,m:qiujiandong1998@gmail.com,m:chengyaqiang@tsinghua.edu.cn,m:tttturtleruss@gmail.com,s:lists@lfdr.de];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,linux.dev,hust.edu.cn,openatom.club,garyguo.net,qq.com,gmail.com,tsinghua.edu.cn];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[3];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[wy@wyuan.org,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[redhat.com,alien8.de,linux.intel.com,zytor.com,kernel.org,arm.com,efficios.com,lwn.net,infradead.org,vger.kernel.org,kvack.org,gmail.com];
+	TAGGED_FROM(0.00)[bounces-96807-lists,linux-doc=lfdr.de];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:akpm@linux-foundation.org,m:peterz@infradead.org,m:tglx@kernel.org,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mingo@redhat.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:hpa@zytor.com,m:x86@kernel.org,m:acme@kernel.org,m:namhyung@kernel.org,m:mark.rutland@arm.com,m:mathieu.desnoyers@efficios.com,m:david@kernel.org,m:corbet@lwn.net,m:willy@infradead.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-trace-kernel@vger.kernel.org,m:linux-perf-users@vger.kernel.org,m:linux-doc@vger.kernel.org,m:wangjinchao600@gmail.com,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER(0.00)[wangjinchao600@gmail.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[wy@wyuan.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[wyuan.org:+];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[wangjinchao600@gmail.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp,wyuan.org:from_mime,wyuan.org:dkim,wyuan.org:mid]
+	ALIAS_RESOLVED(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 7D49D757CA0
+X-Rspamd-Queue-Id: 6CA48757D14
 
-On Tue, Jul 14, 2026 at 07:56:28PM +0200, Doehyun Baek wrote:
-> > Btw, for example, my patch (Weijie Yuan · docs/zh_CN: add docs-next
-> > checkout workaround) is actually directly discarded after we reached
-> > a consensus during our communication (with Dongliang). But it's
-> > obvious that we didn't say it explicitly. So your website can't
-> > recognize it automaticly right now. Perhaps we can think about how
-> > to deal with this situation later.
-> 
-> Yeah, this is a downside of an automated approach: it can miss details
-> that are only implicit in the discussion. I see roughly three ways to
-> handle such cases:
-> 
-> 1. Allow authors to mark a patch explicitly by replying with a
-> recognized phrase, such as `Patch-status: withdrawn`.
-> 2. Use natural-language reasoning, perhaps with an LLM, to infer the
-> outcome from the discussion. I leaned against it due to cost and
-> complexity.
-> 3. Leave the patch pending and let it move to "Cold" automatically
-> after 30 days.
+Motivation
+==========
 
-Junio originally uses "Stalled", but I don't think there's a difference
-though :-)
+The hardest memory corruption bugs are the silent ones: a rogue writer
+scribbles over a live object through a stale pointer or a race, and
+the victim crashes in a code path far away from the culprit. Any
+single developer hits such a bug rarely, but across the kernel's code
+base and install base they keep arriving, and each one is
+disproportionately expensive to localize. The existing tools report
+the symptom, not the writer:
 
-> I think either the first or the third option makes sense in this situation.
+ - KASAN/KFENCE catch invalid accesses, but a targeted use-after-free
+   or an in-bounds logical overwrite (a *valid* pointer written at the
+   wrong time) never violates memory safety, so they stay silent - and
+   KASAN's rebuild, overhead and redzones often perturb the bug away.
+ - Hardware watchpoints via kgdb or perf can watch one fixed address,
+   system-wide, for the whole run. But the interesting address is
+   usually per-object and per-invocation ("field X of the object this
+   function is currently operating on"), which cannot be expressed.
 
-Agreed.
+Design
+======
+
+KWatch implements two key mechanisms: a function-scoped watch window
+that decides when the hardware breakpoint is armed and released, and
+a flexible expression engine that resolves which address it guards.
+A watch is configured through debugfs with a single line; hits are
+reported through a tracepoint, carrying the writing instruction and
+a stack trace.
+
+The window: a kretprobe pair opens the watch at function entry and
+closes it on return; inside, a per-CPU hardware breakpoint from a
+preallocated pool is re-pointed at the target address. The pool is
+managed locklessly, so a window can open in whatever context the
+watched function runs in - real NMI excepted - and a hit can fire
+and be handled in any context.
+
+The window is also what makes the scarce hardware affordable: x86
+has only four hardware breakpoint slots per CPU, and every corruption
+happens within some execution context, so a breakpoint is armed only
+while that context runs. The rest of the system runs at full speed and
+only the watched function pays the kprobe cost, which keeps KWatch
+usable on busy, highly concurrent systems. Global variables can also
+be watched without a window, in a time-bounded anchor session.
+
+The expression engine: at each entry it evaluates the configured
+watch expression to resolve that invocation's target address. The
+base can be a function argument, the stack pointer, a symbol or an
+absolute address; offsets and pointer dereferences chain on top, so
+heap fields reachable from an argument, globals and stack slots are
+all expressible - no objdump session needed.
+
+KWatch is also designed for painless deployment: it is fully
+self-contained and can be built as a module, loaded only when a
+corruption hunt needs it. It is just a debugfs entry until a watch
+is configured, then just a kprobe on the watched function, with the
+breakpoint armed only when needed.
+
+A real case: dummy_hcd
+======================
+
+Gadget requests were completing through a clobbered req->complete.
+Months of KASAN-enabled syzkaller runs produced only downstream
+symptoms, with no lead on the root cause. Watching the victim field
+with KWatch:
+
+  func_name=usb_gadget_giveback_request watch_expr=arg2+56 \
+  watch_len=8 access_type=0
+
+caught the writer in the act:
+
+  kwatch_hit: KWatch HIT: time=370.399836 ip=memcpy+0xc/0x30
+              addr=0xffff888109cf5218
+   => usb_ep_queue+0xf1/0x3c0
+   => raw_process_ep_io+0x5e4/0xd80
+   => raw_ioctl+0x251c/0x41c0
+   => __se_sys_ioctl+0xfc/0x170
+   => do_syscall_64+0x174/0x580
+   => entry_SYSCALL_64_after_hwframe+0x77/0x7f
+
+on the same request that crashed an instant later - the crash RIP was
+the just-written garbage value. Root cause: dummy_queue()'s single
+shared fifo_req is struct-copied over while dummy_timer() is
+mid-giveback. Neither a use-after-free nor list corruption, so KASAN
+and CONFIG_DEBUG_LIST are blind to it by design. A fix based on this
+diagnosis is under review [1] - KWatch's part was pinpointing the
+root cause: who clobbers the pointer, and from where.
+
+Series layout
+=============
+
+Patches 1-4: a minimal "reinstall" operation for hw_breakpoint.
+Re-pointing an already-installed breakpoint from a kprobe handler is
+not possible with the current API (register/unregister may sleep and
+rebalances constraints); reinstall lets the arch rewrite a slot it
+already owns, and modify_wide_hw_breakpoint_local() exposes that for
+the local CPU - cross-CPU propagation is the caller's job (KWatch
+uses async IPIs). Patch 4 is Masami Hiramatsu's work, carried
+unchanged.
+
+Patches 5-11: KWatch itself, in mm/kwatch/ (patch 7 exports
+stack_trace_save_regs() for the modular build).
+
+Patches 12-13: KUnit tests and documentation.
+
+Testing
+=======
+
+The dummy_hcd hunt above exercised the function-window path against
+a live reproducer. Global watching, session auto-stop and the KUnit
+parser suite were verified end to end under QEMU on x86_64. Both
+KWATCH=y and KWATCH=m build.
+
+arm64
+=====
+
+This RFC deliberately targets x86 only. On arm64 the watchpoint
+exception fires before the access, so the arch must single-step over
+hits, and today it only does that for the default overflow handler.
+Rather than hardcoding a KWatch hook into arm64 core code, I plan a
+follow-up that adds a generic way for in-kernel breakpoint consumers
+to request stepping, and arm64 support on top of it (a prototype
+exists).
+
+Relationship to KStackWatch
+===========================
+
+KWatch grew out of KStackWatch [2], an earlier tool aimed at stack
+corruption only, and has been substantially reworked since. The
+hw_breakpoint prerequisites are carried over from that series.
+
+Major changes since the KStackWatch v8 posting:
+
+ - The watch expression engine widens the watchable range from the
+   stack to any address expressible via function arguments, globals
+   or stack addresses plus pointer dereference chains.
+ - The task_struct and scheduler hooks are gone; KWatch is now fully
+   self-contained, as described above.
+ - A time-bounded anchor context was added for watching global
+   variables (duration=N, auto-stop on expiry).
+ - Hits are reported through a tracepoint carrying a stack trace
+   instead of printk: safe in NMI-like contexts, and recoverable
+   after a crash (ftrace_dump_on_oops, kdump, pstore).
+ - Invocations in real NMI(-like) context are detected and rejected,
+   with a visible nmi_rejected counter.
+ - arm64 support and the auto-canary, profiling and test-module
+   extras were dropped from this first posting to keep it reviewable.
+
+Feedback on the design, the implementation or the usage is welcome;
+if you are staring at a corruption that KASAN and friends cannot
+attribute, give KWatch a try, or simply Cc me - I am glad to help.
+
+[1] https://lore.kernel.org/all/20260714064829.172098-1-wangjinchao600@gmail.com/
+[2] https://lore.kernel.org/all/20251110163634.3686676-1-wangjinchao600@gmail.com/
+
+Jinchao Wang (12):
+  arch: add HAVE_REINSTALL_HW_BREAKPOINT
+  x86/hw_breakpoint: Unify breakpoint install/uninstall
+  x86/hw_breakpoint: Add arch_reinstall_hw_breakpoint
+  mm/kwatch: add watch expression parser and dereference engine
+  mm/kwatch: add lockless per-task context pool
+  stacktrace: export stack_trace_save_regs()
+  mm/kwatch: add hardware breakpoint backend
+  mm/kwatch: add probe lifecycle runtime
+  mm/kwatch: add anchor thread for global watchpoints
+  mm/kwatch: add debugfs control plane
+  mm/kwatch: add KUnit tests for the watch expression parser
+  Documentation/dev-tools: document KWatch
+
+Masami Hiramatsu (Google) (1):
+  HWBP: Add modify_wide_hw_breakpoint_local() API
+
+ Documentation/dev-tools/index.rst    |   1 +
+ Documentation/dev-tools/kwatch.rst   | 193 +++++++++++++++
+ MAINTAINERS                          |   8 +
+ arch/Kconfig                         |  10 +
+ arch/x86/Kconfig                     |   1 +
+ arch/x86/include/asm/hw_breakpoint.h |   8 +
+ arch/x86/kernel/hw_breakpoint.c      | 151 ++++++-----
+ include/linux/hw_breakpoint.h        |   6 +
+ include/trace/events/kwatch.h        |  57 +++++
+ kernel/events/hw_breakpoint.c        |  37 +++
+ kernel/stacktrace.c                  |   2 +
+ mm/Kconfig                           |   1 +
+ mm/Makefile                          |   1 +
+ mm/kwatch/.kunitconfig               |   9 +
+ mm/kwatch/Kconfig                    |  27 ++
+ mm/kwatch/Makefile                   |   4 +
+ mm/kwatch/anchor.c                   |  82 ++++++
+ mm/kwatch/core.c                     | 325 ++++++++++++++++++++++++
+ mm/kwatch/deref.c                    | 174 +++++++++++++
+ mm/kwatch/deref_test.c               | 137 ++++++++++
+ mm/kwatch/hwbp.c                     | 358 +++++++++++++++++++++++++++
+ mm/kwatch/kwatch.h                   | 107 ++++++++
+ mm/kwatch/probe.c                    | 263 ++++++++++++++++++++
+ mm/kwatch/task_ctx.c                 | 105 ++++++++
+ 24 files changed, 2005 insertions(+), 62 deletions(-)
+ create mode 100644 Documentation/dev-tools/kwatch.rst
+ create mode 100644 include/trace/events/kwatch.h
+ create mode 100644 mm/kwatch/.kunitconfig
+ create mode 100644 mm/kwatch/Kconfig
+ create mode 100644 mm/kwatch/Makefile
+ create mode 100644 mm/kwatch/anchor.c
+ create mode 100644 mm/kwatch/core.c
+ create mode 100644 mm/kwatch/deref.c
+ create mode 100644 mm/kwatch/deref_test.c
+ create mode 100644 mm/kwatch/hwbp.c
+ create mode 100644 mm/kwatch/kwatch.h
+ create mode 100644 mm/kwatch/probe.c
+ create mode 100644 mm/kwatch/task_ctx.c
+
+-- 
+2.53.0
+
 
