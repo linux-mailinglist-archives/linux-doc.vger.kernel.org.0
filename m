@@ -1,258 +1,286 @@
-Return-Path: <linux-doc+bounces-96746-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96747-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 7CKENHM0VmqL1QAAu9opvQ
-	(envelope-from <linux-doc+bounces-96746-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 15:06:59 +0200
+	id 2P1CJFs3Vmps1gAAu9opvQ
+	(envelope-from <linux-doc+bounces-96747-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 15:19:23 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 36994754DA0
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 15:06:59 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id DAEA7754FE6
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 15:19:22 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=a7S+f9hR;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96746-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96746-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=reject) header.from=nvidia.com;
-	arc=reject ("cv is fail on i=2")
+	dkim=pass header.d=bytedance.com header.s=google header.b=ga44ZEdv;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96747-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-96747-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=bytedance.com;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id CFE6B316EF0D
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 13:01:40 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id A8E4E32EA39A
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 13:08:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 74DFE44D686;
-	Tue, 14 Jul 2026 13:01:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8AD8B466B52;
+	Tue, 14 Jul 2026 13:07:16 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from PH7PR06CU001.outbound.protection.outlook.com (mail-westus3azon11010012.outbound.protection.outlook.com [52.101.201.12])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ot1-f54.google.com (mail-ot1-f54.google.com [209.85.210.54])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 11ADC38C43A;
-	Tue, 14 Jul 2026 13:01:37 +0000 (UTC)
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784034099; cv=fail; b=IXffL4jf+bk68h50InwEuU+3UAzZRvr4c2EjQLYno7dz/RUP4jyh8N4ELrqKYoozriOJPZUcHDnKdWoMEph3mMOXnbIYULC+1m5ynfktdKCYf51ZOA3PCUyOxu4O53AQldlge8YRWAmkRV9Wu98wwaTx9gWzKb6R1ANnbBJ5T6w=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784034099; c=relaxed/simple;
-	bh=+ok8Z+5kjRGPaDdiVVi7kAuvsJdHadtKpejKsT9rYSo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=W2h53I2fEfJ8d7f1iFASb4oOyVjjYGL/GwYOQSV1lTJV4uBGHWdVVqb86H7Byq7gmzM3MXTLc90kQJ79xRS6CQmVcBXKbYyvYMQG9v/QmQHu0LTraJA8D8oP3U1l0IhiBQk4VaB7SayyaG6wUWFeO3gf5hx/iiAMLyoVp3rwvZY=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=a7S+f9hR; arc=fail smtp.client-ip=52.101.201.12
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=dzDBACXIDncJiKd8xw5IW41Nhpn7krzaMZldDhA3iDDvbJFsHazlB5m601ShSS+K/Ke4TMU1CCjmpB9Y79s8PHOqAzoKBkwHcWpnmADYiLRdJYoQr68dZfNJ/xet1qppP+6otaOaejYVLHGtt5HJS/WEm6RiUmxkZhINFopyDGokwbugPsGcqwBNlxQh6IhNZTkErGVh+8oLzj8/mASCdYBo2Tbs6+kHhqFBO+tMwZhDkTxH78o2D4Ym0JKT4A05uWg0o6aWlPMk+27rU04gQUVCYNivEsGjj4x9FA3I2v0MnmtamnRxcj8p1dhSCqKCb+XayKSGCbM0wsG5JcYTpw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=pelbizQI1y7BuxWWZrm3zZs9kuQEJXzSWNPcIldA8XA=;
- b=gR1+wIoXmH9MWSL8lGU7QMhrvAfShoshQzRVYyI1tMyot+1GD+D5HSi994kDth6GWmE7j6Uz/ug2dJFojQOT8cCoUfy9obzbDNt7Qfx6yvU/0ccdNc8KsouGX3K1IIwGq4kAkrpU/ybBgtE5bU81rdkyr02hC0SYCzDvXVKCZEOkekvggP/HVxBcFOz3RBxg3LCD7BByT2kJYGS3/qN9iXyNyt5V6Pl1mFtkOrs5C9Qaip+UH+aj/KXqd31LaE3FzhTM5kEeOG3HeqpwwkVl/M2sU1M9Ndc1WlP4+YTl1ZblaU5CKxxXJuDO9YObnMEyg1QJl/qkXGp9cGlf134rFw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pelbizQI1y7BuxWWZrm3zZs9kuQEJXzSWNPcIldA8XA=;
- b=a7S+f9hRFQAqfRpvjdF4mBTEf476Mvq/JGUJDxMLqqb32WC47p3kyRo9pw6Pca9IPPwpdbexBkaYWjMhTDSr+D/wkqiIdTogUOvvN5rB0Fl7RQ2lY9o+s7WOgOzjWyAUb7EJ6kCw1OAQU+WzSKIAqSRpZVe0icv7GhbUdahzVteIN7r5O0dLXteB+/qnCPJcvbsc98L5iy5AhpHNPfMVpRUu8y3KmoHCLAcIpxkjjwXniEUyBSiAtkCi+dU2eneG4fB0PfvkFJH4y/9S12Ir2XwHNh9h7y1jJtu0LOwAWsnq0xKXXUF9wvNk+JheLq6njkXYaRDBF5QlviMKRkSnrA==
-Received: from LV3PR12MB9356.namprd12.prod.outlook.com (2603:10b6:408:20c::21)
- by DS4PR12MB999102.namprd12.prod.outlook.com (2603:10b6:8:2fc::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.202.19; Tue, 14 Jul
- 2026 13:01:32 +0000
-Received: from LV3PR12MB9356.namprd12.prod.outlook.com
- ([fe80::1c36:31b4:c420:6286]) by LV3PR12MB9356.namprd12.prod.outlook.com
- ([fe80::1c36:31b4:c420:6286%5]) with mapi id 15.21.0202.014; Tue, 14 Jul 2026
- 13:01:32 +0000
-Date: Tue, 14 Jul 2026 09:01:30 -0400
-From: Yury Norov <ynorov@nvidia.com>
-To: Shrikanth Hegde <sshegde@linux.ibm.com>
-Cc: linux-kernel@vger.kernel.org, mingo@kernel.org, peterz@infradead.org,
-	juri.lelli@redhat.com, vincent.guittot@linaro.org,
-	yury.norov@gmail.com, kprateek.nayak@amd.com, iii@linux.ibm.com,
-	corbet@lwn.net, tglx@kernel.org, gregkh@linuxfoundation.org,
-	pbonzini@redhat.com, seanjc@google.com, vschneid@redhat.com,
-	huschle@linux.ibm.com, rostedt@goodmis.org,
-	dietmar.eggemann@arm.com, maddy@linux.ibm.com, srikar@linux.ibm.com,
-	hdanton@sina.com, chleroy@kernel.org, vineeth@bitbyteword.org,
-	frederic@kernel.org, arighi@nvidia.com, pauld@redhat.com,
-	christian.loehle@arm.com, tj@kernel.org,
-	tommaso.cucinotta@gmail.com, maz@kernel.org, rafael@kernel.org,
-	rdunlap@infradead.org, kernellwp@gmail.com,
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v7 02/12] cpumask: Introduce cpu_preferred_mask
-Message-ID: <alYzKl-KKI6lnMFi@yury>
-References: <20260709215648.1246821-1-sshegde@linux.ibm.com>
- <20260709215648.1246821-3-sshegde@linux.ibm.com>
- <alT78Nzt3xa-7G5Y@yury>
- <df198506-9c6e-4e79-bf3b-798668322708@linux.ibm.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <df198506-9c6e-4e79-bf3b-798668322708@linux.ibm.com>
-X-ClientProxiedBy: BN0PR04CA0091.namprd04.prod.outlook.com
- (2603:10b6:408:ec::6) To LV3PR12MB9356.namprd12.prod.outlook.com
- (2603:10b6:408:20c::21)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E542D466B69
+	for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 13:07:13 +0000 (UTC)
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1784034436; cv=none; b=QI+i8gZv4CnoG3HcRU4wWAfLoOGlAzlaV4XP6P/Bb5MKqUuzD3Vk6aTdxRE9C0v4GQROL/3xB9XeOUBNzCJ/gGEZW+dpGbwGIfXBWeBcZ58w/1n4AaBl6botwhDZlBJRsSryQka05KBUeqQj8SRaOkZBrFjup+T/Dkgpki0MFMc=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1784034436; c=relaxed/simple;
+	bh=aWDiGhV/lDLqtQxlDd4E/xz/jeCA3Oakf6qbhhaXsOw=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=E96eDq8DB6C18bW2iKo17iWvvLjz8b3vY78IUK3bYwIVL3lLQhdM3bKRt3ix4KxXGZiMm0Ech/06Qpr6pGuprcUpSzY/lNav0tzkFwwYCb07qQBm6SUI3Xhg5AcG7BQdE1xHUH37x4vg7baGbqiyxJTWtPO8c+fWtNF4eXr41j8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=bytedance.com; spf=pass smtp.mailfrom=bytedance.com; dkim=pass (2048-bit key) header.d=bytedance.com header.i=@bytedance.com header.b=ga44ZEdv; arc=none smtp.client-ip=209.85.210.54
+Received: by mail-ot1-f54.google.com with SMTP id 46e09a7af769-7e9ecb1e13bso1675163a34.2
+        for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 06:07:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance.com; s=google; t=1784034433; x=1784639233; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Zu2x7nRWgqnkpJB6Jzio2t+71M646t61MeaMLyeHe/o=;
+        b=ga44ZEdv2hBcSKs8eePpyVl7ELdR5AqElHamCr5n8Vns9vyc5oUt/WHFhy3vKgddwe
+         On0sozs3BgdjFUfBcLByNwK0Y2164MCU9eliyYbNYBZo322PmFpF0Gbb/N21iv8m0o6R
+         0ooQHhf5h4glazwG5CtdUP8hDxXhb7MB2h1d7hLkMRXdwBcBYuOWWSzq1vVLQBT8pIjm
+         cuB8PGP5C4J6XLVt+6OXe/QN2lsyLWEARyENQA1BE0re3WPm04sbGeY4dCLolXU4S7DL
+         sNDsbkWRYA3+7KaKTX5ez7JCRurWG6TLzm1JapTIFgD0hEQrJmKsn/L84yYUSqXHWaoB
+         qdWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784034433; x=1784639233;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Zu2x7nRWgqnkpJB6Jzio2t+71M646t61MeaMLyeHe/o=;
+        b=CdsNn7cNM6GQSxG9qalItKuJFyY2WkDvJVAcOtuhWvRYICXLaSxUbi8XccC/T7tf2X
+         YDTGQ+kQZE/W2qXmu1P3vk2ZzqmQaz18YDHfnE1t42jZk9MtnppwcgwLq95fwWZ7lSGH
+         zGnsOhdupcnm1buAuD06zUb6RwEoUeidT2GCj9cZMZf9sa2yRGbjsV93QRjJv5McB6jm
+         0DfiV0roji5Pen8jaxr7XJEr03+GEN8wA6/j8++r11PYMRF6Notz165N2wnXLMuvxku5
+         YjZkqo/ScYLPIvhQWd6LtLwgXIQ6/SVj3lkaAXxfiVG1qUFmHhoWhRJiCRbgeKnvbCDE
+         U8AA==
+X-Forwarded-Encrypted: i=1; AFNElJ9R1+/dLZCw5WKMXf62xDx7wlUeG0czlr64TANkE1ykCE+XsUrnta/Ij/DrvbaoZ5apysretMTyaeQ=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxzxY6h/4n7EuHZ7Dn2CI19XSPUfv5I8woRhq6gbPpLLbXbfYp1
+	nS2Sp/G4Puwwu6/q4lqnyU0OTIPBIgH51UDop15wLq9iDToAJL3/KpcLhFYQHIAHNWI=
+X-Gm-Gg: AfdE7cn0NB0sXnDmwSyf+7WopkfWUgb7LQyKGn5KFMt2WfcHjQ3dZa17XH9pFKVwcZ6
+	hIqBXHGcDS5ovws1DpzFG4QGIL6u3uky5Ar6dntHaD6lpnTA5gVfAOnCFa+PMMaY8YQSIhnvsui
+	590t7R3tcFeQ1qQFY4FAPpY5LlRMjmeZ0uM/KSwTncnqnS6XX5K2s3meeX0Kgs1iAN9Pg3bBESD
+	po6W7Po2ZYHHOVr4mb+jYlhBIsBqINUCkKAEpn373qKOPVfWGKRliHQSDp4XTFG7noGKq7iWUE1
+	pWfQ3rcXO6U9nwl0FI5RLj9ZIOLXPntFq7FKQUhU4DtMWwuKwoJ4sanLaBfrns3uJ1gHKWu4jJ/
+	Wh5I59cAK/yRHkSRiJaYpyg/Q2kGliP18Fqm7S40NiURRarDas6kCVHpqkixkDgGbC5bC0otlf+
+	Ivp0MCF9f9zmy+pDZzG151ek3gVxcGdNL/rYxRZPfzyyqQaZuacbx7DJBMuJepFg==
+X-Received: by 2002:a05:6830:4412:b0:7e7:45f:ce3c with SMTP id 46e09a7af769-7ec096ac473mr7449408a34.14.1784034432564;
+        Tue, 14 Jul 2026 06:07:12 -0700 (PDT)
+Received: from FJ7FR2JRQ3.bytedance.net ([178.93.176.7])
+        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7ebcab8efc3sm14657738a34.0.2026.07.14.06.07.01
+        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+        Tue, 14 Jul 2026 06:07:12 -0700 (PDT)
+From: Zhanpeng Zhang <zhangzhanpeng.jasper@bytedance.com>
+To: joro@8bytes.org,
+	palmer@dabbelt.com,
+	tony.luck@intel.com,
+	reinette.chatre@intel.com,
+	tomasz.jeznach@linux.dev
+Cc: will@kernel.org,
+	robin.murphy@arm.com,
+	fustini@kernel.org,
+	pjw@kernel.org,
+	aou@eecs.berkeley.edu,
+	alex@ghiti.fr,
+	Dave.Martin@arm.com,
+	james.morse@arm.com,
+	babu.moger@amd.com,
+	corbet@lwn.net,
+	shuah@kernel.org,
+	jgg@ziepe.ca,
+	kevin.tian@intel.com,
+	cuiyunhui@bytedance.com,
+	yuanzhu@bytedance.com,
+	iommu@lists.linux.dev,
+	linux-riscv@lists.infradead.org,
+	linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kselftest@vger.kernel.org,
+	x86@kernel.org
+Subject: [RFC PATCH 0/7] riscv: iommu: Add QoS ID support for resctrl device assignment
+Date: Tue, 14 Jul 2026 21:06:50 +0800
+Message-ID: <20260714130657.46963-1-zhangzhanpeng.jasper@bytedance.com>
+X-Mailer: git-send-email 2.50.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV3PR12MB9356:EE_|DS4PR12MB999102:EE_
-X-MS-Office365-Filtering-Correlation-Id: 66ea692a-d04d-456c-23f4-08dee1a806e0
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|1800799024|376014|366016|7416014|6133799003|4143699003|11063799006|56012099006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	PeuJ2eO3nQMemHssyuoZonUe5bQt9B8HTJPnh8W0NQ/r0dXIkyWRNO55Tvk+dbCzGMbXiSuifedS+MjLxiYYUJrHCR4rcnIOcNX5y510Y4gNnBxQbKJd1Svb47XmOBNu0eroM7ZW4Odr8aRXcXqGY2pnCngcr6uOdCLbPVwsUZK8wRrWeVndVekMN8aMCvuR0YkttPuUfpD5mtMzw75GZjb+sHCxxkErLmdDqe1jB2XZ+qvlVJmIX8lYdHrEt+N85IBlhJ/myldKCte/KR0Qc+sHk8CTj2FU60xlL7cYdA1yrkD5+4l6C3RFi81V8WmL/NuyKXAUjs7+2U8taBP/VXXohHPkjrOmps8VNVLhFns3ZprTSNp/edL5S3gny2ZCcCaoCBQ/ZH1oQPQNT0pF2/N5NOAZnsljrfZU23j48lvHMUH1xXpzIIcxAzrKAAK23E6CmsHPGzl4FQ/16sPXPfR3/3fRSiECLEoKOSySS1dlyVVz9sEzeRruFyynsk7aSjqlW6gC39tkuoSfTYoRfgKh2S85xOGS8A23lDS3q91iuw80zCmMWgWMpYKn/Czy+xS8buKASnWP/yG3etCqa2RdSxoqYKk/1lM+Fj2cbX21qvjTSUoT5PjdOgTfz4Rcfon3isY1JB7owWylboYJf5sIYg/2Faqda4SXwsWwBPU=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV3PR12MB9356.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(376014)(366016)(7416014)(6133799003)(4143699003)(11063799006)(56012099006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?stgEGEtmL8PcqdwANJ+84uv226jTnwCzn6WbbWfsqk6pKjmUZ39vr2s4TnP4?=
- =?us-ascii?Q?lSo1tjDxJmw9tpt1q7F/hxwGSkWVqhxWS4Zl3UIuxJg/X0+TGamIPb7ld+TG?=
- =?us-ascii?Q?AmTZ6HElMQLoQ9j7fQhfJGDgIGGWTG8Go3pB2FIaYeP3pTSgwtDeX3Cohgzx?=
- =?us-ascii?Q?Af8jr7E3HeX39NpaccIZVt9cGsiXeJSyog1a78Qg+dShnQV8PSqYmq7JIpls?=
- =?us-ascii?Q?WOVacLmkYnNF/wngOVI3ghYZVVTiHxyu+E0BAeN6AoMu4Gq8XbUPa1tH6097?=
- =?us-ascii?Q?+b5WMfGiJ/GmJRF+eXbnikYjJGihTURiA59xXm/AkfYU13Z+ZO17kxogAWmu?=
- =?us-ascii?Q?Di0M5Df3dXi6/KbZ5zMniN4dJRTYUI4+ugNtIqemAAMzQLvBlJ0niKmSoEa1?=
- =?us-ascii?Q?oyWGo1WjeTzxHPF9gAFEDEFpdsYBrmn33nWRy6RdK2QMkY9PcX9GSTFvk1CZ?=
- =?us-ascii?Q?e+jfzUjwbm/5BhpiJIGuHHkt7dROeCAmpCWvq6dLo6TMB22Xq7/Z6MKtwAra?=
- =?us-ascii?Q?NEGe7PwE7f8SlhFBAO2L97ZHLADPqQi6Y5B0e6AGRkppZEvUK7axhtOnlNe9?=
- =?us-ascii?Q?+/j2lsx3kNIVzWnTYTcWIutrGQYekddUh7luMll1UYWv+P0ppNv2nYcbKUTb?=
- =?us-ascii?Q?UI+9oalhDrtnWKgJpm/z+/Fv5rteO3xfUuf5OBg1KJnHpUm/wGWDxXQSd4rS?=
- =?us-ascii?Q?1DDY4wYqPgtNEE9OxOWc6c1eo0321E2l43JpYR4wG71YAZCE8jl0rSWHqurr?=
- =?us-ascii?Q?UgzKezfEp2sZ8DH2NSkl3mh973QO0aUteuqh0a+VaJDzDqlpAUcL2/QObM3V?=
- =?us-ascii?Q?b+nVDE5ANTRbikjRYyfvTgXaiWdURK0iFvVQJ6eLHPiBkWidFiPzOgm45wWn?=
- =?us-ascii?Q?JFTm4mmerc1IzKX1e7lPvmVo7//i4d+s2gwqHQ7jKYto87aORsP8V1WJEF/L?=
- =?us-ascii?Q?vthwKevhcQU2PoNPa2HpluV2T9Z0yjKrquglB//gUrxC+ivjYDycDe8Uv00i?=
- =?us-ascii?Q?IZR+zsMrmSUq4jPmin43zXBS/L3TUDiRl5hDgyeC7CSnZ7cc+1y1EINNQKHv?=
- =?us-ascii?Q?CUvRKi5hmCDO39XyKzC967gjDAVDuyWPsVEztBDQ0mJ/1/PuT0YhhISL0kE2?=
- =?us-ascii?Q?atkY8TMCzMeJHjw5J9rJxyvo6XQHPX8HFtcnR45wYEthZEHiLfpBm7luACwI?=
- =?us-ascii?Q?TFcakwgeA+akHT7SV0gKLuuIzbcLgMw5cCtwQfL7D5mqt79taE0x3grOn0HP?=
- =?us-ascii?Q?LtoBPFoosdhfoaWoCRzYBMo8vckcANPidghzg2sANegffF3fkRecAuXBsSFu?=
- =?us-ascii?Q?wDfvjqoK0FhbiqPD67Aroi1g19FIVrBHUfZ3Kcc9tZdySZ+LUJVl9WmTkYeG?=
- =?us-ascii?Q?6M8hR46FfMpMad5mtTNA9Lq6fBe5WrkhdOIB/Y5L2BtYAS08cSKG4SWMhwle?=
- =?us-ascii?Q?/FBorDivV5MdDUBFWo5EnJ0UBkRsx1vrTZDZNE75xO9Odkz3cxhnXA/9+zP9?=
- =?us-ascii?Q?OvHpOQLGpTO8VRiIXjux/cU4+x6E8LO1/k8j8HPKxTvalVCRGOztpC3PaK1M?=
- =?us-ascii?Q?sIapmZPY5b4viKjGBM5XLRDbyASifLYzA0wckImdMv0foRUWBOd/aPgXBUuC?=
- =?us-ascii?Q?fCm9W0zLaFYm4oxb+lwO1nETd4HnV3cKsf54x0Xs+kOaPMr9fabR2gjZDfei?=
- =?us-ascii?Q?0kdD9twCHyOT81dMoNWK2MDGpDLNXnYumuBK86XHc6xRxKg9L3JqM4aK/EQ3?=
- =?us-ascii?Q?jsE+oSVLPw=3D=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 66ea692a-d04d-456c-23f4-08dee1a806e0
-X-MS-Exchange-CrossTenant-AuthSource: LV3PR12MB9356.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jul 2026 13:01:32.0917
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: wxKznIv4duk2YPPA95RGQJTQyNXSkPvwM8FRWUE2qeMqj15NR7h/O5sIHZfm/M0BjmkiYWKm2vDLwcmmT4eV4g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PR12MB999102
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-5.16 / 15.00];
-	WHITELIST_DMARC(-7.00)[nvidia.com:D:+];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_REJECT(1.00)[cv is fail on i=2];
-	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[bytedance.com,quarantine];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[bytedance.com:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	TAGGED_FROM(0.00)[bounces-96747-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-96746-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:sshegde@linux.ibm.com,m:linux-kernel@vger.kernel.org,m:mingo@kernel.org,m:peterz@infradead.org,m:juri.lelli@redhat.com,m:vincent.guittot@linaro.org,m:yury.norov@gmail.com,m:kprateek.nayak@amd.com,m:iii@linux.ibm.com,m:corbet@lwn.net,m:tglx@kernel.org,m:gregkh@linuxfoundation.org,m:pbonzini@redhat.com,m:seanjc@google.com,m:vschneid@redhat.com,m:huschle@linux.ibm.com,m:rostedt@goodmis.org,m:dietmar.eggemann@arm.com,m:maddy@linux.ibm.com,m:srikar@linux.ibm.com,m:hdanton@sina.com,m:chleroy@kernel.org,m:vineeth@bitbyteword.org,m:frederic@kernel.org,m:arighi@nvidia.com,m:pauld@redhat.com,m:christian.loehle@arm.com,m:tj@kernel.org,m:tommaso.cucinotta@gmail.com,m:maz@kernel.org,m:rafael@kernel.org,m:rdunlap@infradead.org,m:kernellwp@gmail.com,m:linux-doc@vger.kernel.org,m:yurynorov@gmail.com,m:tommasocucinotta@gmail.com,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:joro@8bytes.org,m:palmer@dabbelt.com,m:tony.luck@intel.com,m:reinette.chatre@intel.com,m:tomasz.jeznach@linux.dev,m:will@kernel.org,m:robin.murphy@arm.com,m:fustini@kernel.org,m:pjw@kernel.org,m:aou@eecs.berkeley.edu,m:alex@ghiti.fr,m:Dave.Martin@arm.com,m:james.morse@arm.com,m:babu.moger@amd.com,m:corbet@lwn.net,m:shuah@kernel.org,m:jgg@ziepe.ca,m:kevin.tian@intel.com,m:cuiyunhui@bytedance.com,m:yuanzhu@bytedance.com,m:iommu@lists.linux.dev,m:linux-riscv@lists.infradead.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:x86@kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[zhangzhanpeng.jasper@bytedance.com,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[34];
-	FORGED_SENDER(0.00)[ynorov@nvidia.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[Nvidia.com:+];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ynorov@nvidia.com,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,infradead.org,redhat.com,linaro.org,gmail.com,amd.com,linux.ibm.com,lwn.net,linuxfoundation.org,google.com,goodmis.org,arm.com,sina.com,bitbyteword.org,nvidia.com];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[zhangzhanpeng.jasper@bytedance.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	TO_DN_NONE(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	DKIM_TRACE(0.00)[bytedance.com:+];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,nvidia.com:from_mime,yury:mid,Nvidia.com:dkim]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCPT_COUNT_TWELVE(0.00)[26];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[bytedance.com:from_mime,bytedance.com:dkim,bytedance.com:mid,vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 36994754DA0
+X-Rspamd-Queue-Id: DAEA7754FE6
 
-On Tue, Jul 14, 2026 at 12:00:51PM +0530, Shrikanth Hegde wrote:
-> Hi Yury,
+This RFC extends RISC-V CBQRI/resctrl support to external requesters
+behind a RISC-V IOMMU.
 
-...
+The RISC-V IOMMU QoS ID extension associates a resource-control ID
+(RCID) and monitoring ID (MCID) with IOMMU-related memory requests [2].
+For a translated device request, the IOMMU obtains the IDs from the
+device context translation attributes (DC.ta) and supplies them to the
+I/O bridge after a successful translation. The bridge and downstream
+CBQRI-controlled resources can then apply their existing allocation and
+monitoring policy to the request.
 
-> > > diff --git a/kernel/Kconfig.preempt b/kernel/Kconfig.preempt
-> > > index 88c594c6d7fc..ed02e4431230 100644
-> > > --- a/kernel/Kconfig.preempt
-> > > +++ b/kernel/Kconfig.preempt
-> > > @@ -192,3 +192,6 @@ config SCHED_CLASS_EXT
-> > >   	  For more information:
-> > >   	    Documentation/scheduler/sched-ext.rst
-> > >   	    https://github.com/sched-ext/scx
-> > > +
-> > > +config PREFERRED_CPU
-> > > +	bool
-> > 
-> > This still should depend on PARAVIRT and SMP. And maybe to enforce it
-> > even stronger, your driver should fail to build if PREFERRED_CPU is
-> > disabled. Imagine a scenario when someone makes PREFERRED_CPU
-> > depending on some other config, but doesn't modify your driver. That
-> > way you'll build the STEAL_MONITOR successfully, but because
-> > PREFERRED_CPU is off, you'll end up with non-working functionality at
-> > best, or corrupted cpu_active_mask at worst.
-> > 
-> 
-> Sorry, i may not understand all the intricacies of kconfigs.
-> But, Since driver selects PREFERRED_CPU, and PREFERRED_CPU can't be enabled
-> individually, driver again can't depend on PREFERRED_CPU right?
-> 
-> As per previous discussion, it is probably better that driver selects PREFERRED_CPU.
-> Keeping them both independent and selectable brings too many variations.
-> No?
-> 
-> I guess you meant below.
-> 
-> In kernel/Kconfig.preempt:
-> config PREFERRED_CPU
-> 	bool
-> 	depends on SMP && PARAVIRT
-> 
-> Driver's Kconfig (this is there already)
-> config VIRT_STEAL_GOVERNOR
-> 	tristate "Virtual Steal Time Governor"
-> 	depends on SMP && PARAVIRT
-> 	select PREFERRED_CPU
+The series is based directly on Drew Fustini's v4 RISC-V Ssqosid and
+CBQRI resctrl series [1]. That dependency provides CPU-side QoS ID
+plumbing and CBQRI-backed resctrl support. This series extends the same
+resctrl identity to device requests translated by a RISC-V IOMMU.
 
-It's just another precaution. In a hypothetical case of making
-preferred CPUs config extended in future, one could keep the steal
-governor configuration consistent to avoid this situation:
+The RISC-V names map to the existing resctrl identifiers as follows:
 
-config PREFERRED_CPU
-	depends on SMP && PARAVIRT && NEW_DEPENDENCY
-	bool
+    resctrl CLOSID  ->  RISC-V RCID
+    resctrl RMID    ->  RISC-V MCID
 
-config VIRT_STEAL_GOVERNOR
-	tristate "Virtual Steal Time Governor"
-	depends on SMP && PARAVIRT      # NEW_DEPENDENCY dependency missed
-	select PREFERRED_CPU            # Selection doesn't happen
+Userspace first creates a resctrl resource group. The new "devices"
+file then assigns an external requester to that group:
 
-In sm_core.c:
+    userspace
+       |
+       | mkdir /sys/fs/resctrl/<group>
+       |
+       | echo "iommu_group:<id>" > /sys/fs/resctrl/<group>/devices
+       v
+    generic resctrl devices file
+       |
+       | (closid, rmid)
+       v
+    RISC-V CBQRI IOMMU binding backend
+       |
+       | (rcid, mcid)
+       v
+    RISC-V IOMMU DC.ta.{RCID,MCID}
 
-  #if !IS_ENABLED(CONFIG_PREFERED_CPU)
-  # error "Preferred CPUs is the requirement"
-  #endif
+The "devices" file is an assignment and membership interface only. It
+does not describe a new resctrl resource, schema, or monitoring domain;
+resource policy remains in the existing schemata and info files.
 
-As said, it's only precaution for hypothetical case, but it
-makes you nice for those working on preferred CPUs in future.
+Common IOMMU helpers:
 
-Thanks,
-Yury
+The userspace ABI names an IOMMU group by the numeric ID already used by
+/sys/kernel/iommu_groups. Patch 1 adds iommu_group_get_by_id() as a
+narrow, reference-counted lookup for that existing identifier.
+
+Updating a group also needs stronger iteration semantics than separate
+iommu_group_for_each_dev() calls can provide. All devices must be
+validated before any device context is changed, and group membership
+must not change between validation and update. Patch 2 therefore adds
+iommu_group_update_devices():
+
+    lock group->mutex
+      for each device: check()          /* may fail, no state changed */
+      for each device: update()         /* non-failing callback */
+    unlock group->mutex
+
+The helper contains no resctrl or QoS policy. It only provides an
+all-or-none validation boundary for a group-wide update while keeping
+IOMMU group internals private. The RISC-V IOMMU QoS code is its first
+caller.
+
+RISC-V IOMMU programming:
+
+For translated device requests, the per-device-context QoS IDs are
+programmed in DC.ta. Active contexts are invalidated after an update so
+cached translations do not retain stale IDs. BARE mode cannot safely
+represent per-IOMMU-group assignment because only the per-IOMMU
+iommu_qosid global default is available, so group assignment rejects
+BARE mode.
+
+The RISC-V IOMMU also has a per-IOMMU iommu_qosid register. The series
+exposes it as:
+
+    /sys/class/iommu/<iommu>/qosid
+
+This sysfs attribute programs the global RCID and MCID used for
+IOMMU-originated DDT, CQ, FQ, PQ, and MSI accesses. In BARE mode,
+device-originated requests also use these IDs. It is not a resctrl group
+assignment interface.
+
+Open questions for this RFC:
+
+  * whether a common resctrl "devices" file is the right ABI for
+    associating external requesters with a resource group;
+  * whether iommu_group_get_by_id() is an acceptable narrow common
+    helper for resolving the numeric IOMMU group ID passed through that
+    ABI; and
+  * whether iommu_group_update_devices() provides the right common
+    contract for checked group-wide updates.
+
+[1] Drew Fustini's CBQRI v4 series:
+https://lore.kernel.org/linux-riscv/20260706-dfustini-atl-sc-cbqri-dt-v4-0-e75c20201d64@kernel.org/
+[2] RISC-V IOMMU QoS ID extension:
+https://docs.riscv.org/reference/cbqri/qos_iommu.html
+
+Zhanpeng Zhang (7):
+  iommu: Add group lookup by ID
+  iommu: Add checked group device update helper
+  resctrl: Add a devices file for external requester assignment
+  iommu/riscv: Program QoS IDs for assigned groups
+  iommu/riscv: Expose global QoS IDs in sysfs
+  riscv_cbqri: Assign IOMMU groups to resource groups
+  selftests/iommu: Add RISC-V IOMMU QoS smoke test
+
+ .../ABI/testing/sysfs-class-iommu-riscv-iommu |  27 +
+ Documentation/filesystems/resctrl.rst         |  26 +
+ MAINTAINERS                                   |  12 +
+ arch/Kconfig                                  |   6 +
+ arch/riscv/include/asm/qos.h                  |  28 +
+ drivers/iommu/iommu.c                         | 140 +++-
+ drivers/iommu/riscv/iommu-bits.h              |  15 +
+ drivers/iommu/riscv/iommu.c                   | 419 ++++++++++-
+ drivers/iommu/riscv/iommu.h                   |  22 +-
+ drivers/resctrl/Kconfig                       |   6 +
+ drivers/resctrl/Makefile                      |   1 +
+ drivers/resctrl/cbqri_iommu.c                 | 276 ++++++++
+ fs/resctrl/rdtgroup.c                         | 206 +++++-
+ include/linux/iommu.h                         |  30 +
+ include/linux/resctrl.h                       |  45 ++
+ tools/testing/selftests/iommu/Makefile        |   2 +
+ .../selftests/iommu/iommu_qos_smoke.sh        | 649 ++++++++++++++++++
+ 17 files changed, 1886 insertions(+), 24 deletions(-)
+ create mode 100644 Documentation/ABI/testing/sysfs-class-iommu-riscv-iommu
+ create mode 100644 drivers/resctrl/cbqri_iommu.c
+ create mode 100755 tools/testing/selftests/iommu/iommu_qos_smoke.sh
+
+
+base-commit: ab754eba620f5a66e7277b7b2d0e706aa7743e8a
+-- 
+2.50.1 (Apple Git-155)
 
