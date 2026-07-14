@@ -1,170 +1,529 @@
-Return-Path: <linux-doc+bounces-96700-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96706-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id aw8xL18MVmonygAAu9opvQ
-	(envelope-from <linux-doc+bounces-96700-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 12:15:59 +0200
+	id nXxSLtMPVmq8ygAAu9opvQ
+	(envelope-from <linux-doc+bounces-96706-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 12:30:43 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 447477534E5
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 12:15:59 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id F2DCB7536A4
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 12:30:42 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=imybyfb4;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96700-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-96700-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=SpVf2tcX;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96706-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96706-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=gmail.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 4FC9F301C909
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 10:15:58 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 1009530179C2
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 10:28:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B3191279792;
-	Tue, 14 Jul 2026 10:15:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A43A2364038;
+	Tue, 14 Jul 2026 10:28:03 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+Received: from mail-pz2-f0.google.com (mail-pz2-f0.google.com [74.125.228.0])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7DD131F3BA4
-	for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 10:15:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6640C1E5714
+	for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 10:28:01 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784024157; cv=none; b=WA/yfcD7OYCurQq/Z8jKtfPEiJigVQb4s3+1n/RQChzY+/sc/psgF9+uLO0/bwl3sgRvaKf3niQE0ui8YxmXv2EZYPsUvqSAHgrrwQiQ0pF6BuAhitvNDq2aJ6G9NShHO9V0PrA4uPdnV4J6G8wsoH9al+JR04nBKSa8sXzxaOU=
+	t=1784024883; cv=none; b=bhmhL9k/B2kb8NtB+npa4uIQVVM2u58nmmZib3x4fKHLs9Orjp7Yww7vB4f3YELZvwqlYHYh/OGq0U8b8/auMkGGhSbkiJkGoQrKnZEQzugrpSfT01R+gTITSclOT5pRgjj39ymV8YpJLBJXymeblmww2E+qys15UYqzORArGjg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784024157; c=relaxed/simple;
-	bh=hEVhFeAcHvH/aZGtAcwRKKTAgVoX/BkHcr7Mu00tItw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=YZXnqvwVVexhT89wjio/I7FlyJcPY6QWHBwThvHoF5aFhO+f0CkiXuZmhlb74EWdbp0aDRZVL5vfCwae3PYhkLcHWshDJlYp3+mdE5GImKZcznTQBJcytGGoGVUIbEG+nlqbRcA41U6o/XcpjeDI/mXVWNOyrIdEQtwosg3igw8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=imybyfb4; arc=none smtp.client-ip=209.85.216.53
-Received: by mail-pj1-f53.google.com with SMTP id 98e67ed59e1d1-381c51fde6bso3976278a91.2
-        for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 03:15:56 -0700 (PDT)
+	s=arc-20240116; t=1784024883; c=relaxed/simple;
+	bh=nX1dasfADMUFXDtmv/kMMBbRlqZgy2bTt0HGn0xBwFw=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=r1btamINab0GvGU7gWTVYMjTo/CgMeVklyC2pZsXzKB8QMA6sAEKl1KP1bL7G7OLiKZMDFpIs6XvYM4xBLFTm9W5Qb7KYyKNworT9cTTPHJpK23dWY66iw4nr75vrI/IhDXKhT+UaZ/48mORbkBS2fwWi8wLjHoLdXG+yobJgUY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=SpVf2tcX; arc=none smtp.client-ip=74.125.228.0
+Received: by mail-pz2-f0.google.com with SMTP id 41be03b00d2f7-ca24d39d8a4so2832826a12.1
+        for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 03:28:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784024156; x=1784628956; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=zlfRyXSi9xNEFSL0XUB0wgZUdzuVWaB2zH0YiT0w7lo=;
-        b=imybyfb4/ZZUC1pmwKJdt5U3qppWAkCAy4yO0ZMk0rby9kAVOwb7oZOvI+lgxw+7ef
-         rQ+pDXRpvOM+lGalywvWOudCY7+X/vIpEWnc+aFdxuulv1B9UuqvZ0QuIpMLMiVDJfGp
-         KvglTXkGnojyi8TAUoLqJ3DzNyuIV28AclWXZ7y0c+lzgnLqLnYhxpcmBMDiTSRM5it4
-         /QEf+cos1HRntwsnWXefWrvQSDg37StaH6h1PJEXgjAx5ALr1yUPdwVhRrhQilmixGhe
-         KdcfiEv3m6saDxE+0CmGODc5BMUZ4XgP7FEi9E6BR1TTkrGziayh5vUksHInFr1qqHEU
-         yfJA==
+        d=gmail.com; s=20251104; t=1784024880; x=1784629680; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=I3uZJKOV8YeAsZnPRtkfSAsNKBXPzdQjBdP4hlRyp6Y=;
+        b=SpVf2tcXvPGEsynzUfq6G0mLIptT3q3ludZc7UW3t+f6mLuUINeOZKwvzeScSa09B6
+         ilXuXjTgyVN/BVvgW7u3HvIIW/L+SjbTro0F2YGqMPWnPMGA/oq7/foOE51P5euZZoCj
+         jtU7aVo0WEzrm8YRKNp4+MMepAByRasZh/GUoScGRGKbw9+8jXJyz5lMqdyl+89mI/Bp
+         4cN23lJ2pbgbLFe5HZE60sqzmEzLLRra5LxLp2M04lmz/biYm0iHgG+/E9gpy71GB8VR
+         HmNt9YFrBERJu73A2icS9QUTmVJUuJugkBH4fMcOqLcA/I39SI/zL6VCfyYmygBWKPun
+         /k0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784024156; x=1784628956;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=zlfRyXSi9xNEFSL0XUB0wgZUdzuVWaB2zH0YiT0w7lo=;
-        b=LB/SbbEAAaQtZXH49d8730fxse03cuCaRYweDpbskXVaaCsiaJwSR3pOvHTo5q6A0/
-         kP8U2s9PrgPXX9d55bXwMpwCoeDkBt7KtnLGspSVLc6zLLGVByt25GoWPTiClGIuPXZq
-         C2/x9JGuuDtFiivasy0HDiXZXBq/pPPDFWLOUYNqHQiYfASjTGbSr47VX/A9429nMtWs
-         YW5RoPz0wO0MOg8AX/X4/Hpe6Uli59EI5WjYwIDtekHVTsoybp85Ab6YDSAN05B/iYcq
-         pxX9kruwZDQSuDoR+RPpz6TyEOfPuFsSU1FuzudoPiyrRXiDOhB4O2QajfqqK71s99XU
-         NA4w==
-X-Gm-Message-State: AOJu0Yy/HyNlrdgr0XJ5GI4nRUud0Ixj5PlUtkZcxR1k5E1l4e+4s4kg
-	aawLn3uN8IRZTq8aAerOx/fWn4RTRaaZ8bDWnjwjTkWOtwQBYInRAxpB
-X-Gm-Gg: AfdE7cnJ74bvXXPbb+i64IFaEs4kfcU3OSElyn0aKyrEAfv/4EI5EG4F8PBcF6wqqsa
-	Zptl5cRsnt0Kh3EZQmZEzbLo7CDzqBztdCburKJFYrMHL2tYNT7xFVn6e3nixs2E0wXc2syFJpi
-	yvXzXcuZ9B3R4HU5GJNEhJt5xLpGvpKw9JceVMI9dNk23gYeY4z5zkyVmHIbO/pdvb+ANsDWyYm
-	pkI9l5QA/+CdVSV0v+bcOJ86pGFLQG31IA/UCPQpnLdGYnQHI9XaUwSM/BLO6J9EwFgMsWfNFUT
-	6DLhoZWKtiaMLvHPYNZEthUIQ0lg6C/4+XrRFQoXheaRc4SsK4Up4d407+RxsJdrRTcDKuBPDJe
-	7vDGb0VLrcP237dp8JgOv5pNUOPKOwIeqnSVl+8Di28VXB7/YJpPtEt7tPi9zYJDoUzIUQGi/1k
-	xo9fQfdgH1sGCXAyQvUYWP+mEMH35RaKv21h/S9nFSoE2PJTQF6dPotg==
-X-Received: by 2002:a17:90b:4fd1:b0:38e:d3b:436f with SMTP id 98e67ed59e1d1-38e0d3b4495mr4808903a91.36.1784024155916;
-        Tue, 14 Jul 2026 03:15:55 -0700 (PDT)
-Received: from ?IPV6:240e:38b:e68:3a00:5c02:dd08:7909:78d5? ([240e:38b:e68:3a00:5c02:dd08:7909:78d5])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38e1745a86esm1212662a91.16.2026.07.14.03.15.52
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 14 Jul 2026 03:15:55 -0700 (PDT)
-Message-ID: <b664685e-6785-44ae-8005-443032508096@gmail.com>
-Date: Tue, 14 Jul 2026 18:15:49 +0800
+        d=1e100.net; s=20251104; t=1784024880; x=1784629680;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=I3uZJKOV8YeAsZnPRtkfSAsNKBXPzdQjBdP4hlRyp6Y=;
+        b=ATGHRruXwGZDtd58kA8sGNim0nRFseCGJ6pCH1BbAbETEpBVGma/Jgr/0zKHuGtdT9
+         jVnDTK+XUS5ITnkVPX61QuUTf9vDurAJ2FIkyXkZwCwKdmf52e/peSIX+702N1OQ98vu
+         3H2N5z40cxi7JkOpZlx3X7w3iiF+G412yvIlwjNjoba3/l5psgHfEf8MD8zEi4Po4arM
+         /kQfpltquU8e2IIth8KjUvHDJrUVTyzMwBDe9Q6tLYJdltJqaYtMGQ4bW7c5HDGnH2dG
+         Tw8zC8jRk0jX7yHIkykIxuOPir+Bfi4vfD0o5hZakRhpZ8v8U5x23Owy6gSKEyRU/2DR
+         oN2g==
+X-Gm-Message-State: AOJu0YwaGWxZZzmxOukwBthTBNVyeuCnWq1XIr72ay92vT1hrHw8s98L
+	y6m2XOgZst4qNzn25R3Be6tB1fiVwbqpOBWd90QWUGq9jOdELUXcWB8Sc5Yd4NYKags=
+X-Gm-Gg: AfdE7cm4R3BxMExXvEvtE20KFzZgbdt0eJtVXtBcsZ5Nu2m/Ay/SUQiy+lOhANXLMVt
+	cl5Z8a3zlXmf+pKMJwzaxo3x+OiUo+jDvXyFvOy6ZbYJ6EJNqO39YTnv66JVstOJyZb5juqY2jc
+	HN8g6vJV/UhWljXrYu0uEZhIY3OGikp4GAg5Tf+XYEoyYf1srZU8jloRqsenwI034R/dGhpwQ5d
+	Vosap0yUspgEchEWBxKmBJt7piWZdSlEHh8035Q8Iu8Mk7zSTfYf9crWtADJngtP4Y9H0/4ZPdf
+	5Eb+X22q5XUkZs1giUpoW1FHKbpM2XtW06yt8wznaJ6jMrOPCxSMb0npr3bn6MbLI3qMk+omHIB
+	/C6yd9sKmrGWAaD7SRbgzkEslMTellwYz0ZumKUCjR0aaveKqvJ2i89JuyXq0HuF058msYMPp0B
+	hg8b299+7LN0+dCpJQTuJhcAv8mTna
+X-Received: by 2002:a05:6a21:a512:b0:3bf:c07b:a9ae with SMTP id adf61e73a8af0-3c1109f0faamr13707578637.58.1784024880195;
+        Tue, 14 Jul 2026 03:28:00 -0700 (PDT)
+Received: from workstation ([2804:29b8:50af:c5b9:eb28:d00f:5a29:a72a])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13b659c865asm86687606c88.11.2026.07.14.03.27.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 14 Jul 2026 03:27:59 -0700 (PDT)
+From: =?UTF-8?q?=C3=81lysson=20Gleyson=20da=20Silva?= <alyssongleyson.dev@gmail.com>
+To: danielmaraboo@gmail.com
+Cc: linux-doc@vger.kernel.org,
+	=?UTF-8?q?=C3=81lysson=20Gleyson=20da=20Silva?= <alyssongleyson.dev@gmail.com>
+Subject: [PATCH] docs: pt_BR: process: Translate the security-bugs.rst
+Date: Tue, 14 Jul 2026 07:26:32 -0300
+Message-ID: <20260714102632.25093-1-alyssongleyson.dev@gmail.com>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: What's cooking in zh_CN (Jul 2026)
-To: Dongliang Mu <dzm91@hust.edu.cn>, Weijie Yuan <wy@wyuan.org>,
- Dongliang Mu <mudongliangabcd@gmail.com>
-Cc: linux-doc@vger.kernel.org, Alex Shi <alexs@kernel.org>,
- Yanteng Si <si.yanteng@linux.dev>, Ben Guo <ben.guo@openatom.club>,
- Gary Guo <gary@garyguo.net>, Yan Zhu <zhuyan2015@qq.com>,
- Doehyun Baek <doehyunbaek@gmail.com>,
- Jiandong Qiu <qiujiandong1998@gmail.com>
-References: <alUXH8qRRjno2eZG@wyuan.org>
- <CAD-N9QVXqYxtsn7YuUtCDWrwwk5+iFAkT2jcs26zbDUfwhAwsQ@mail.gmail.com>
- <alYGtkVxW_0N-VqE@wyuan.org>
- <cc922c1b-49a5-4c3a-855c-af8eb6539f62@hust.edu.cn>
-From: Alex Shi <seakeel@gmail.com>
-Content-Language: en-US
-In-Reply-To: <cc922c1b-49a5-4c3a-855c-af8eb6539f62@hust.edu.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-96700-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-96706-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,linux.dev,openatom.club,garyguo.net,qq.com,gmail.com];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[hust.edu.cn,wyuan.org,gmail.com];
-	FORGED_SENDER(0.00)[seakeel@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:danielmaraboo@gmail.com,m:linux-doc@vger.kernel.org,m:alyssongleyson.dev@gmail.com,m:alyssongleysondev@gmail.com,s:lists@lfdr.de];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FORGED_SENDER(0.00)[alyssongleysondev@gmail.com,linux-doc@vger.kernel.org];
 	TO_DN_SOME(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:dzm91@hust.edu.cn,m:wy@wyuan.org,m:mudongliangabcd@gmail.com,m:linux-doc@vger.kernel.org,m:alexs@kernel.org,m:si.yanteng@linux.dev,m:ben.guo@openatom.club,m:gary@garyguo.net,m:zhuyan2015@qq.com,m:doehyunbaek@gmail.com,m:qiujiandong1998@gmail.com,s:lists@lfdr.de];
+	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_THREE(0.00)[3];
 	FREEMAIL_FROM(0.00)[gmail.com];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[seakeel@gmail.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[alyssongleysondev@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	ALIAS_RESOLVED(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	RCPT_COUNT_SEVEN(0.00)[11];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 447477534E5
+X-Rspamd-Queue-Id: F2DCB7536A4
 
+Translate the documentation on security bugs into Brazilian Portuguese,
+maintaining consistency with the original formatting rules.
 
+Signed-off-by: Álysson Gleyson da Silva <alyssongleyson.dev@gmail.com>
+---
+ Documentation/translations/pt_BR/index.rst    |   1 +
+ .../pt_BR/process/security-bugs.rst           | 370 ++++++++++++++++++
+ 2 files changed, 371 insertions(+)
+ create mode 100644 Documentation/translations/pt_BR/process/security-bugs.rst
 
-On 2026/7/14 17:54, Dongliang Mu wrote:
->>>> Since I made many noise these days on the list, which took up a lot of
->>>> maintainers' time. This email summarizes the patches for zh_CN that are
->>>> currently pending on the mailing list.
->>> This is awesome. Maybe we can establish a dashboard for the activities
->>> in zh_CN/TW related patches of linux-doc.
->>>
->>> I personally kept a knowledge base in the IMA (an app for storing
->>> knowledge base in the cloud) in our club to monitor these activities.
->> I remember kernel.org itself already provides this:
->>
->> https://patchwork.kernel.org/
->>
->> Is this similar to your idea? But I haven't look deep into patchwork
->> before.
->>
->> Of source, having our own thing is definitely okay.
-> 
-> 
-> I am not familar with patchwork too. How about Alex?
+diff --git a/Documentation/translations/pt_BR/index.rst b/Documentation/translations/pt_BR/index.rst
+index 7a488f662..796fe9bca 100644
+--- a/Documentation/translations/pt_BR/index.rst
++++ b/Documentation/translations/pt_BR/index.rst
+@@ -78,3 +78,4 @@ kernel e sobre como ver seu trabalho integrado.
+    Processo do subsistema SoC <process/maintainer-soc>
+    Conformidade de DTS para SoC <process/maintainer-soc-clean-dts>
+    Processo do subsistema KVM x86 <process/maintainer-kvm-x86>
++   Falhas de segurança <process/security-bugs>
+diff --git a/Documentation/translations/pt_BR/process/security-bugs.rst b/Documentation/translations/pt_BR/process/security-bugs.rst
+new file mode 100644
+index 000000000..a0c57219b
+--- /dev/null
++++ b/Documentation/translations/pt_BR/process/security-bugs.rst
+@@ -0,0 +1,370 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++.. _securitybugs_pt_BR:
++
++Falhas de segurança
++===================
++
++Os desenvolvedores do kernel Linux levam a segurança muito a sério. Como tal,
++gostariamos de saber quando uma falha de segurança é encontrada para que ela
++possa ser corrigida e divulgada o mais rápido possível.
++
++Preparando seu relatório
++------------------------
++
++Como em qualquer relatório de bug, um relátorio de falha de segurança exige
++muito trabalho de análise por parte dos desenvolvedores, portanto, quanto mais
++informações você puder compartilhar sobre o problema, melhor. Por favor, revise
++o procedimento descrito em Documentation/admin-guide/reporting-issues.rst se
++você não tiver certeza sobre quais informações são úteis. As seguintes
++informações são absolutamente necessárias em **qualquer** relatório de falha de
++segurança:
++
++  * **versão do kernel afetada**: sem indicação de versão, seu relatório não
++    será processado. Uma parte significativa dos relatórios é de bugs que já
++    foram corrigidos, portanto, é extremamente importante que as
++    vulnerabilidades sejam verificadas em versões recentes (árvore de
++    desenvolvimento ou a versão estável mais recente), pelo menos verificando
++    se o código não mudou desde a versão onde foi detectado.
++
++  * **descrição do problema**: uma descrição detalhada do problema, com rastros
++    mostrando sua manifestação, e por que você considera o comportamento
++    observado como um problema no Kernel, é necessaária.
++
++  * **reproduzir**: os desenvolvedores precisarão ser capazes de reproduzir o
++    problema para considerar uma correção como eficaz. Isso inclui tanto uma
++    maneira de acionar o problema quanto uma maneira de confirmar que ele
++    ocorre. Será necessário um reprodutor com dependências de baixa
++    complexidade (código-fonte, script de shell, seguência de instruções,
++    imagem de sistema de arquivos, etc). Executáveis apenas binários não são
++    aceitos. Exploits funcionais são extremamente úteis e não serão divulgados
++    sem o consentimento do relator, a menos que já sejam públicos. Por
++    definição, se um problema não pode ser reproduzido, ele não é explorável,
++    portanto, não é um bug de segurança.
++
++  * **condições**: se o bug depender de certas opções de configuração, sysctls,
++    permissões, temporização, modificações de código, etc., estas devem ser
++    indicadas.
++
++Além disso, as seguintes informaçẽos são altamente desejáveis:
++
++  * **localização suspeita do bug**: os nomes dos arquivos e funções onde
++    se suspeita que o bug esteja presente são muito importantes, pelo menos
++    para ajudar a encaminhar o relatório aos mantenedores apropriados. Quando
++    não for possível (por exemplo, "o sistema trava toda vez que executo este
++    comando"), a equipe de segurança ajudará a identificar a origem do bug.
++
++  * **uma proposta de correção**: os relatores de bugs que analisaram a causa
++    de uma falha no código-fonte quase sempre têm uma ideia precisa de como
++    corrigi-lo, porque passaram muito tempo estudando o problema e suas
++    implicações. Propor uma correção testada poupará muito tempo dos
++    mantenedores, mesmo que a correção acabe não sendo a correta, pois ajuda a
++    entender o bug. A propor uma correção testada, por favor, formate-a
++    sempre de uma maneira que possa ser mesclada imediatamente (consulte
++    Documentation/process/submitting-patches.rst). Isso evitará algumas trocas
++    de mensagens caso ela seja aceita, e você receberá o crédito por
++    encontrar e corrigir o problema. Observe que, neste caso, apenas uma tag
++    ``Signed-off-by:`` é necessária, sem ``Reported-by:`` quando o relator e
++    o autor forem a mesma pessoa.
++
++  * **mitigações**: com muita frequência, durante a análise de um bug,
++    surgem algumas maneiras de mitigar o problema. È útil compartilhá-las,
++    pois podem ser úteis para manter os usuários finais protegidos durante o
++    tempo que levam para aplicar a correção.
++
++O que se qualifica como um bug de segurança
++-------------------------------------------
++
++É importante que a maioria dos bugs seja tratada publicamente, de modo a
++envolver o maior público possível e encontrar a melhor solução. Por natureza,
++bugs que são tratados em discussões fechadas entre um pequeno conjunto de
++participantes têm menos probabilidade de produzir a melhor correção possível
++(por exemplo, risco de perder casos de uso válidos, capacidades de testes
++limitadas).
++
++Acontece que a maioria dos bugs relatados por meio da equipe de segurança são
++apenas bugs comuns que foram qualificados incorretamente como bugs de segurança
++devido à falta de conhecimento do modelo de ameaças do kernel Linux, conforme
++descrito em Documentation/process/threat-model.rst, e deveriam ter sido
++enviados através dos canais normais descritos em
++Documentation/admin-guide/reporting-issues.rst
++
++A lista de segurança existe para bugs urgentes que concedem a um atacante uma
++capacidade que ele não deveria ter em um sistema de produção corretamente
++configurado, e que podem ser facilmente explorados, representando uma ameaça
++iminente para muitos usuários. Antes de relatar, considere se o problema
++realmente ultrapassa um limite de confiança em tal sistema.
++
++**Se você recorreu a assistência de IA para identificar um bug, você deve
++tratá-lo como público**. Embora você possa ter motivos válidos para acreditar
++que não seja, a experiência da equipe de segurança mostra que os bugs
++descobertos desta forma surgem sistematicamente e de forma simultânea entre
++múltiplos pesquisadores, frequentemente no mesmo dia. Neste caso, não
++compartilhe publicamente um reprodutor, pois isso poderia causar danos não
++intencionais; apenas mencione que um está disponível e os mantenedores poderão
++solicitá-lo privadamente se precisarem.
++
++Se você não tiver certeza se um problema se qualifica, opte por relatar de
++forma privada: a equipe de segurança prefere triar um relatório limítrofe
++a perder uma vulnerabilidade real. Relatar bugs comuns na lista de segurança,
++no entanto, não faz com que eles andem mais rápido e consome a capacidade de
++triagem de que outros relatórios precisam.
++
++Identificando contatos
++----------------------
++
++A maneira mais eficaz de relatar um bug de segurança é enviá-lo diretamente
++aos mantenedores do subsistema afetado e Cc: para a equipe de segurança do
++kernel Linux. Não o envie para uma lista pública nesta fase, a menos que você
++tenha bons motivos para considerar o problema como público ou trivial de ser
++descoberto (por exemplo, resultado de uma ferramenta automatizada de varredura
++de vulnerabilidades amplamente disponível que possa ser repetida por qualquer
++pessoa, ou o uso de ferramentas baseadas em IA).
++
++Se você estiver enviando um relatório de problemas que afetam várias partes no
++kernel, mesmo que sejam problemas bastante semelhantes, envie mensagens
++individuais (pense que os mantenedores não trabalharão todos nos problemas ao
++mesmo tempo). A única exceção é quando um problema diz respeito a partes
++intimamente relacionadas, mantidas pelo exato mesmo subconjunto de
++mantenedores, e espera-se que essas partes sejam todas corrigidas de uma só vez
++pelo mesmo commit; então pode ser aceitável relatá-las de uma vez.
++
++Uma dificuldade para a maioria dos relatores de primeira viagem é descobrir a
++lista certa de destinatários para enviar um relatório. No kernel Linux, todos
++os mantenedores oficiais são confiáveis, portanto as consequências de incluir
++acidentalmente o mantenedor errado são apenas um pequeno ruido para essa
++pessoa, ou seja, nada dramático. Sendo assim, um método adequado para descobrir
++a lista de mantenedores (o qual os oficiais de segurança do kernel usam) é
++contar com o script get_maintainer.pl, ajustado para relatar apenas
++mantenedores. Este script, quando recebe um nome de arquivo, procurará por seu
++caminho no arquivo MAINTAINERS para deduzir uma lista hierárquica de
++mantenedores relevantes. Chamá-lo pela primeira vez com o nível mais refinado
++de filtragem retornará, na maioria das vezes, uma lista curta de mantenedores
++deste arquivo específico::
++
++  $ ./scripts/get_maintainer.pl --no-l --no-r --pattern-depth 1 \
++    drivers/example.c
++  Developer One <dev1@example.com> (maintainer:example driver)
++  Developer Two <dev2@example.org> (maintainer:example driver)
++
++Estes dois mantenedores devem então receber a mensagem. Se o comando não
++retornar nada, isso significa que o arquivo afetado faz parte de um subsistema
++mais amplo, portanto devemos ser menos específicos::
++
++  $ ./scripts/get_maintainer.pl --no-l --no-r drivers/example.c
++  Developer One <dev1@example.com> (maintainer:example subsystem)
++  Developer Two <dev2@example.org> (maintainer:example subsystem)
++  Developer Three <dev3@example.com> (maintainer:example subsystem [GENERAL])
++  Developer Four <dev4@example.org> (maintainer:example subsystem [GENERAL])
++
++Aqui, escolher os primeiros, mais específicos, é suficiente. Quando a lista for
++longa, é possível produzir uma lista de endereços de e-mail delimitada por
++vírgulas em uma única linha adequada para o uso no campo TO: de um cliente de
++e-mail como este::
++
++  $ ./scripts/get_maintainer.pl --no-tree --no-l --no-r --no-n --m \
++    --no-git-fallback --no-substatus --no-rolestats --no-multiline \
++    --pattern-depth 1 drivers/example.c
++  dev1@example.com, dev2@example.org
++
++ou este para a lista mais ampla::
++
++  $ ./scripts/get_maintainer.pl --no-tree --no-l --no-r --no-n --m \
++    --no-git-fallback --no-substatus --no-rolestats --no-multiline \
++    drivers/example.c
++  dev1@example.com, dev2@example.org, dev3@example.com, dev4@example.org
++
++Se a esta altura você ainda estiver enfrentando dificuldades para identificar
++os mantenedores corretos, e apenas neste caso, é possível enviar seu
++relatório apenas para a equipe de segurança do kernel Linux. Sua mensagem
++será triada e você receberá instruções sobre quem contatar, se necessário.
++Sua mensagem poderá igualmente ser encaminhada como está para os mantenedores
++relevantes.
++
++Uso responsável de IA para encontrar bugs
++-----------------------------------------
++
++Uma fração significativa dos relatórios de bugs enviados à equipe de segurança
++é, na verdade, o resultado de revisões de código assistidas por ferramentas de
++IA. Embora isso possa ser um meio eficiente de encontrar bugs em áreas
++raramente exploradas, causa uma sobrecarga nos mantenedores, que às vezes são
++forçados a ignorar tais relatórios devido à sua má qualidade ou precisão. Sendo
++assim, os relatores devem ter um cuidado especial com vários pontos que tendem
++a tornar esses relatórios desnecessariamente difíceis de lidar:
++
++  * **Comprimento**: Os relatórios gerados por IA tendem a ser excessivamente
++    longos, contendo várias seções e detalhes em excesso. Isso dificulta a
++    identificação de informações importantes, como arquivos afetados, versões e
++    impacto. Por favor, certifique-se de que um resumo claro do problema e
++    todos os detalhes críticos sejam apresentados primeiro. Não exija que os
++    engenheiros de triagem analisem várias páginas de texto. Configure suas
++    ferramentas para produzir relatórios concisos e em estilo humano.
++
++  * **Formatação**: A maioria dos relatórios gerados por IA está repleta de
++    tags Markdown. Essas decorações complicam a busca por informações
++    importantes e não sobrevivem aos processos de citação envolvidos no
++    encaminhamento ou nas respostas. Por favor, sempre converta seu relatório
++    para texto simples sem quaisquer decorações de formatação antes de
++    enviá-lo.
++
++  * **Avaliação de Impacto**: Muitos relatórios gerados por IA carecem de uma
++    compreensão do modelo de ameaças do kernel (consulte
++    Documentation/process/threat-model.rst) e fazem de tudo para inventar
++    consequências teóricas. Isso adiciona ruído e complica a triagem. Por
++    favor, limite-se a fatos verificáveis (por exemplo, "este bug permite que
++    qualquer usuário obtenha CAP_NET_ADMIN") sem enumerar implicações
++    especulativas. Faça com que sua ferramenta leia esta documentação como
++    parte do processo de avaliação.
++
++  * **Reproduzidor**: As ferramentas baseadas em IA são frequentemente capazes
++    de gerar reproduzidores. Por favor, certifique-se sempre de que sua
++    ferramenta forneça um e teste-o exaustivamente. Se o reproduzidor não
++    funcionar, ou se a ferramenta não puder produzir um, a validade do
++    relatório deve ser seriamente questionada. Observe que, como o relatório
++    será postado em uma lista pública, o reproduzidor só deve ser compartilhado
++    mediante solicitação dos mantenedores.
++
++  * **Propor uma Correção:** muitas ferramentas de IA são na verdade melhores
++    em escrever código do que em avaliá-lo. Por favor, peça à sua ferramenta
++    para propor uma correção e teste-a antes de relatar o problema.
++    Se a correção não puder ser testada porque depende de hardware raro ou de
++    protocolos de rede quase extintos, é provável que o problema não seja um
++    bug de segurança. Em qualquer caso, se uma correção for proposta, ela deve
++    aderir a Documentation/process/submitting-patches.rst e incluir uma tag
++    'Fixes:' designando o commit que introduziu o bug.
++
++A falha em considerar estes pontos expõe seu relatório ao risco de ser
++ignorado.
++
++Use o bom senso ao avaliar o relatório. Se o arquivo afetado não tiver sido
++alterado por mais de um ano e for mantido por um único indivíduo, é provável
++que o uso tenha diminuído e os usuários expostos sejam virtualmente
++inexistentes (por exemplo, drivers para hardware muito antigo, sistemas de
++arquivos obsoletos). Nesses casos, não há necessidade de consumir o tempo de
++um mantenedor com um relatório sem importância. Se o problema for claramente
++trivial e publicamente detectável, você deve relatá-lo diretamente às listas
++de discussão públicas.
++
++Enviando o relatório
++--------------------
++
++Os relatórios devem ser enviados exclusivamente por e-mail. Por favor, use um
++endereço de e-mail funcional, de preferência o mesmo que você deseja que
++apareça nas tags ``Reported-by``, se houver. Se não tiver certeza, envie o seu
++relatório para você mesmo primeiro.
++
++A equipe de segurança e os mantenedores quase sempre exigem informações
++adicionais além das fornecidas inicialmente em um relatório e dependem de uma
++colaboração ativa e eficiente com o relator para realizar testes adicionais
++(por exemplo, verificar versões, opções de configuração, mitigações ou
++patches). Antes de entrar em contato com a equipe de segurança, o relator deve
++certificar-se de que está disponível para explicar suas descobertas, participar
++de discussões e executar testes adicionais. Relatórios nos quais o relator não
++responde prontamente ou não consegue discutir suas descobertas de forma eficaz
++podem ser abandonados se a comunicação não melhorar rapidamente.
++
++O relatório deve ser enviado aos mantenedores. Se houver dois ou menos
++destinatários em sua mensagem, você também deve sempre colocar em Cc: a equipe
++de segurança do kernel Linux, que garantirá que a mensagem seja entregue às
++pessoas corretas e poderá auxiliar pequenas equipes de mantenedores com
++processos com os quais eles possam não estar familiarizados. Para equipes
++maiores, coloque em Cc: a equipe de segurança do kernel Linux em seus primeiros
++relatórios ou ao buscar ajuda específica, como ao reenviar uma mensagem que não
++obteve resposta dentro de uma semana. Assim que você se sentir confortável com
++o processo após alguns relatórios, não será mais necessário colocar a lista de
++segurança em Cc: ao enviar para equipes grandes. A equipe de segurança do
++kernel Linux pode ser contatada por e-mail em security@kernel.org. Esta é uma
++lista privada de oficiais de segurança que ajudarão a verificar o relatório de
++bug e auxiliarão os desenvolvedores que trabalham em uma correção. É possível
++que a equipe de segurança traga ajuda extra de mantenedores da área para
++entender e corrigir a vulnerabilidade de segurança.
++
++Por favor, envie e-mails em **texto simples** sem anexos, sempre que possível.
++É muito mais difícil ter uma discussão com citações de contexto sobre um
++problema complexo se todos os detalhes estiverem ocultos em anexos. Pense nisso
++como uma :doc:`regular path submission <../process/submitting-patches>`
++(mesmo que você ainda não tenha um patch): descreva o problema e o impacto,
++liste as etapas de reprodução e siga com uma proposta de correção, tudo em
++texto simples. Relatórios formatados em Markdown, HTML e RST são
++particularmente malvistos, pois são bastante difíceis de ler por humanos e
++incentivam o uso de visualizadores dedicados, às vezes online, o que por
++definição não é aceitável para um relatório de segurança confidencial. Note
++que alguns clientes de e-mail tendem a corromper a formatação de texto simples
++por padrão; por favor, consulte Documentation/process/email-clients.rst para
++mais informações.
++
++Divulgação e informações sob embargo
++------------------------------------
++
++A lista de segurança não é um canal de divulgação. Para isso, veja Coordenação
++abaixo.
++
++Assim que uma correção robusta for desenvolvida, o processo de lançamento é
++iniciado. Correções para bugs publicamente conhecidos são lançadas
++imediatamente.
++
++Embora nossa preferência seja lançar correções para bugs publicamente não
++divulgados assim que estiverem disponíveis, isso pode ser adiado a pedido do
++relator ou de uma parte afetada por até 7 dias corridos a partir do início do
++processo de lançamento, com uma extensão excepcional para 14 dias corridos se
++for acordado que a criticidade do bug exige mais tempo. O único motivo válido
++para adiar a publicação de uma correção é acomodar a logística de QA e as
++implantações em larga escala que exigem coordenação de lançamento.
++
++Embora as informações sob embargo possam ser compartilhadas com indivíduos de
++confiança para o desenvolvimento de uma correção, tais informações não serão
++publicadas juntamente com a correção ou em qualquer outro canal de divulgação
++sem a permissão do relator. Isso inclui, mas não se limita ao relatório de bug
++original e discussões de acompanhamento (se houver), exploits, informações de
++CVE ou a identidade do relator.
++
++Em outras palavras, nosso único interesse é fazer com que os bugs sejam
++corrigidos. Todas as outras informações enviadas à lista de segurança e
++quaisquer discussões de acompanhamento do relatório são tratadas de forma
++confidencial, mesmo após o término do embargo, perpetuamente.
++
++Coordenação com outros grupos
++-----------------------------
++
++Embora a equipe de segurança do kernel se concentre exclusivamente em corrigir
++bugs, outros grupos se concentram em corrigir problemas em distribuições e em
++coordenar a divulgação entre fornecedores de sistemas operacionais. A
++coordenação é geralmente tratada pela lista de discussão "linux-distros" e a
++divulgação pela lista pública "oss-security", ambas intimamente relacionadas
++e apresentadas na wiki da linux-distros:
++https://oss-security.openwall.org/wiki/mailing-lists/distros
++
++Por favor, note que as respectivas políticas e regras são diferentes, já que as
++3 listas buscam objetivos distintos. A coordenação entre a equipe de segurança
++do kernel e outras equipes é difícil porque para a equipe de segurança do
++kernel os embargos ocasionais (sujeitos a um número máximo de dias permitido)
++começam a partir da disponibilidade de uma correção, enquanto para a
++"linux-distros" eles começam a partir da postagem inicial na lista,
++independentemente da disponibilidade de uma correção.
++
++Como tal, a equipe de segurança do kernel recomenda fortemente que, como
++relator de um potencial problema de segurança, você NÃO contate a lista de
++discussão "linux-distros" ATÉ que uma correção seja aceita pelos mantenedores
++do código afetado e você tenha lido a página wiki das distribuições acima e
++compreendido totalmente os requisitos que o contato com a "linux-distros"
++imporá a você e à comunidade do kernel. Isso também significa que, em geral,
++não faz sentido colocar ambas as listas em Cc: ao mesmo tempo, exceto talvez
++para coordenação se e enquanto uma correção aceita ainda não tiver sido
++mesclada. Em outras palavras, até que uma correção seja aceita, não coloque
++em Cc: "linux-distros", e após ela ser mesclada, não coloque em Cc: a equipe
++de segurança do kernel.
++
++Atribuição de CVE
++-----------------
++
++A equipe de segurança não atribui CVEs, nem os exigimos para relatórios ou
++correções, pois isso pode complicar desnecessariamente o processo e adiar o
++tratamento do bug. Se um relator desejar que um identificador CVE seja
++atribuído para um problema confirmado, ele pode entrar em contato com a
++:doc:`kernel CVE assignment team<../process/cve>` para obter um.
++
++Acordo de não divulgação
++------------------------
++
++A equipe de segurança do kernel Linux não é um òrgão formal e, portanto, é
++incapaz de celebrar quaisquer acordos de não divulgação.
+-- 
+2.55.0
 
-I don't know if the patchwork has a similar feature like this email, 
-does it?
-
-Thanks!
 
