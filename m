@@ -1,172 +1,283 @@
-Return-Path: <linux-doc+bounces-96735-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96737-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id /0b4GWspVmqo0QAAu9opvQ
-	(envelope-from <linux-doc+bounces-96735-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 14:19:55 +0200
+	id pVGlHaUoVmpK0QAAu9opvQ
+	(envelope-from <linux-doc+bounces-96737-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 14:16:37 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id B690C7546F9
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 14:19:54 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id DF885754633
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 14:16:36 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=resnulli-us.20251104.gappssmtp.com header.s=20251104 header.b=xloPNrV3;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96735-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-96735-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=none;
+	dkim=none;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96737-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96737-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=honor.com (policy=none);
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 8E1EF32A59B3
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 12:02:58 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id A1230305CED3
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 12:15:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0BCA138AC9A;
-	Tue, 14 Jul 2026 12:02:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 385303C0605;
+	Tue, 14 Jul 2026 12:15:46 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mta21.hihonor.com (mta21.honor.com [81.70.160.142])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 141FF35BDC7
-	for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 12:02:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C83AE3BFAE2;
+	Tue, 14 Jul 2026 12:15:40 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784030553; cv=none; b=kzmQ7JrtHSz3EAWeUOhs8VEQr7DtN4IaCf6nXyq5azPRIMxGNzOXhAl2E4Hfbb1B2Zl3fenMjPlL6ILMRSJFkgvYx2m28LS+d0s+L5t/ROI/eOjuBu6zydXzofT2roNsMNWEHrDsu58cuzNsx9KQSk31UExNewsdyPqJP29H0rA=
+	t=1784031344; cv=none; b=N8aIhMAWD3/oFjz9BIIvFfswqhCEL85ZNFj0/DErnwCnay3hoMxInLLUkUu1XFNcDDuX+mNX8ClYZVp8iHfQXGTO+Yrgigs2vmu5KeaUyCWtX6VmD+iXvCz4GxPm9sJSR11IyeV79OX4kK9apcdz+EWC3ENsyS/lOJrQvb50HPo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784030553; c=relaxed/simple;
-	bh=MxGbzJ1EXIdULAavSutQBPVkV2UhDVudqdZG1CWBmp8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Q9rAdlyxlBy5BbRMLgUSRxLRpXy6DlZtHw2f1WUQWdf3L51Fu9Tg9vnkXLqpIlJ8hPxYFsRbaFqzKgYReeWwTD+YYcMpHZOsP7nXDuKdcyYL6YiK25kvsGdebmE9fpFVbRQGxxl7G4aIm0Ypjw7jwMTD86B97AjmFmKtdcQXOlI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=resnulli.us; spf=none smtp.mailfrom=resnulli.us; dkim=pass (2048-bit key) header.d=resnulli-us.20251104.gappssmtp.com header.i=@resnulli-us.20251104.gappssmtp.com header.b=xloPNrV3; arc=none smtp.client-ip=209.85.128.48
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-493f75f7172so27833015e9.1
-        for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 05:02:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=resnulli-us.20251104.gappssmtp.com; s=20251104; t=1784030549; x=1784635349; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=MxGbzJ1EXIdULAavSutQBPVkV2UhDVudqdZG1CWBmp8=;
-        b=xloPNrV3q0dsouuiGc5bUzJJ6bnxilhSIXwGOplClvayzzm6Ah2r3bsykgU0U2Os+e
-         wOWh+yiGW8fcuU5rky5Evy6iXTIQKcCkSFXY8KZImeB1J8C08m2oKYln9lIIznjY1Zct
-         DJX0fzJ6KIV/CB93zTxcQbxy5cryxF3hXYiE/Li2nG8xF4M4cWevWZ1KIRG6WJpccxlI
-         wfj9ddFB7N8Z4YP/NXHbxO3jvLO2x3sFRT5C/kD7Gl/jWquGXSRwOWmBIekE8R82irLb
-         mvwtasVMxsK6/qlM5kwsHk9QiM+vbfmJsl5eDdtTO9E2m77O18rBN/wyfvOu+wigyu/q
-         3tlw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784030549; x=1784635349;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=MxGbzJ1EXIdULAavSutQBPVkV2UhDVudqdZG1CWBmp8=;
-        b=Ap0l/SFCFRks1HQvSjnb8ei7mUg4dAVkXMvUn78b6YSVb2s04LhgnNRLFh8XIAZR8N
-         CiMcCy9woNCHlPEWY7+lVthOVI17lWunJTb9Ft4NLrMuEPm/0qcrf5ueYkdqE0B7CPBj
-         ZUM5bz25tmqTU9rIpxfa7FqRpL2p4q6cqQIGDIAlCi73zIWBNzy11NuyTT2cTOZXY4ro
-         1fcX4Kh8ldwfgx6TjYsg1AeWFplvlJCC85EWyzSsNxvv8Ne9duYbj+wqXBkJ+iH7x8I4
-         aQKmt6D5b0gaZwLffK6inKGUJ/FlnsUpHZz8AYDaTi+2Jz8SKjlwWWuVmB+gWK33ziqU
-         1jWA==
-X-Forwarded-Encrypted: i=1; AHgh+RpXonuPiXdrroTB9ktxFMHVufOuxwRbRbAiRLuZWD0qGtDBbWcvv5o5QiECvbLimAvcmrvDbh+2KqQ=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwTxpnbmBDT0hoBVoE9sX5N5KwWhkIXrYJxaO4t+kS2DrHu+/u0
-	q8DrJBjYq82rs9rxMJcOofMhrhp10+IWwf22zDMBDgL8AcN0lvDzYCOmq+NcEgj36ts=
-X-Gm-Gg: AfdE7cl/0YPgeGCT3s//wrMg9Z0nibHEISyLBoTbfoipGZMNB7yjKqebZw9ocm4Aaii
-	Qlb2LYycrWrPc4JNUB+1eGyeU0D5ieQGyBY0nM4J+NeWTMYCnhEQahtqfFQg8WmtnT9DDvMVEQB
-	Optuo+hmPlxhFTyRZokq8zK47EiuiiAxlz553+EVqzyBm7mnM21PAC4nWJ8pJzAjIQUt4yf+9+M
-	koFAzpKtDJi9l/WdY4St7A+iP0+Mpa/6PUU4YTSlxaI+M6HUAv0rVDPI4Disxpcd9rGFZNDmeFR
-	BUsw+TQnPFIExJtNhFMLBABbNq9FqSYft1NWdPsR2SwDcSkHfL1Hf4mUp5pLYWKNLctN/fWfKhc
-	3U4ZVSm9eOD5rD7PQGkmJ6zUPMbaFjsXqw5mQyCdiRwpt8R1zol+IMWrwa/erqwxDiSy0aGE4Hy
-	K5fX1I3SXpRXkIrsEal/rFGA==
-X-Received: by 2002:a05:600c:6b17:b0:492:4a56:690b with SMTP id 5b1f17b1804b1-493f8834e5emr94066915e9.35.1784030548728;
-        Tue, 14 Jul 2026 05:02:28 -0700 (PDT)
-Received: from localhost ([140.209.217.211])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f4635ac2esm7854172f8f.13.2026.07.14.05.02.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Jul 2026 05:02:28 -0700 (PDT)
-Date: Tue, 14 Jul 2026 14:02:24 +0200
-From: Jiri Pirko <jiri@resnulli.us>
-To: Mark Bloch <mbloch@nvidia.com>
-Cc: Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, 
-	Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
-	Saeed Mahameed <saeedm@nvidia.com>, Leon Romanovsky <leon@kernel.org>, 
-	Tariq Toukan <tariqt@nvidia.com>, Andrew Lunn <andrew+netdev@lunn.ch>, 
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, netdev@vger.kernel.org, 
-	linux-rdma@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH net-next V6 4/4] devlink: Apply eswitch mode boot defaults
-Message-ID: <alYkm08MpcIXnFl9@FV6GYCPJ69>
-References: <20260714061731.531849-1-mbloch@nvidia.com>
- <20260714061731.531849-5-mbloch@nvidia.com>
+	s=arc-20240116; t=1784031344; c=relaxed/simple;
+	bh=f6X73vT6jN5sHClUY/oGE694V8DJVGQ17AUdVqnsvHU=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=l+Uqg3hTp1rhgmDcjzN7e78K7QdWsxLPu5ScKZiNDGLFphaGV3tlEv+l/ydBtTLagnWDl1lf5AmRoGgvR2pBjCGGaTqlzygtIfMG6l0XwZk81NCqorG1zuzfrUkHMZm+EE6fgUOROCvk+fLIndl9d2Rsa6q8Rj4Q0KaXZ8II/Lg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=honor.com; spf=pass smtp.mailfrom=honor.com; arc=none smtp.client-ip=81.70.160.142
+Received: from TW005.hihonor.com (unknown [10.72.0.123])
+	by mta21.hihonor.com (SkyGuard) with ESMTPS id 4gzytp13bjzYl7D0;
+	Tue, 14 Jul 2026 20:15:30 +0800 (CST)
+Received: from TA012-1.hihonor.com (10.77.199.132) by TW005.hihonor.com
+ (10.72.0.123) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Tue, 14 Jul
+ 2026 20:15:29 +0800
+Received: from localhost.localdomain (10.144.5.36) by TA012-1.hihonor.com
+ (10.77.199.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 14 Jul
+ 2026 20:15:19 +0800
+From: Zicheng Wang <wangzicheng@honor.com>
+To: <akpm@linux-foundation.org>, <yuanchu@google.com>
+CC: <tj@kernel.org>, <hannes@cmpxchg.org>, <mkoutny@suse.com>,
+	<corbet@lwn.net>, <kasong@tencent.com>, <qi.zheng@linux.dev>,
+	<shakeel.butt@linux.dev>, <baohua@kernel.org>, <axelrasmussen@google.com>,
+	<weixugc@google.com>, <david@kernel.org>, <ljs@kernel.org>,
+	<liam@infradead.org>, <vbabka@kernel.org>, <rppt@kernel.org>,
+	<surenb@google.com>, <mhocko@suse.com>, <roman.gushchin@linux.dev>,
+	<muchun.song@linux.dev>, <cgroups@vger.kernel.org>, <linux-mm@kvack.org>,
+	<linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+	<willy@infradead.org>, <denghaojie@honor.com>, <baoquan.he@linux.dev>,
+	<kaleshsingh@google.com>, <tjmercier@google.com>, <tao.wangtao@honor.com>,
+	<zhangji1@honor.com>, <wangzhen5@honor.com>, Zicheng Wang
+	<wangzicheng@honor.com>
+Subject: [RFC v2 0/3] mm/mglru: proactive aging via memory.aging
+Date: Tue, 14 Jul 2026 20:15:26 +0800
+Message-ID: <20260714121529.2237261-1-wangzicheng@honor.com>
+X-Mailer: git-send-email 2.25.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260714061731.531849-5-mbloch@nvidia.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: TW004-1.hihonor.com (10.77.232.85) To TA012-1.hihonor.com
+ (10.77.199.132)
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.34 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [0.14 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[resnulli-us.20251104.gappssmtp.com:s=20251104];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[honor.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-96737-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:mbloch@nvidia.com,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:horms@kernel.org,m:saeedm@nvidia.com,m:leon@kernel.org,m:tariqt@nvidia.com,m:andrew+netdev@lunn.ch,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:netdev@vger.kernel.org,m:linux-rdma@vger.kernel.org,m:linux-doc@vger.kernel.org,m:andrew@lunn.ch,s:lists@lfdr.de];
-	DMARC_NA(0.00)[resnulli.us];
-	FORGED_SENDER(0.00)[jiri@resnulli.us,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	TAGGED_FROM(0.00)[bounces-96735-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:akpm@linux-foundation.org,m:yuanchu@google.com,m:tj@kernel.org,m:hannes@cmpxchg.org,m:mkoutny@suse.com,m:corbet@lwn.net,m:kasong@tencent.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:baohua@kernel.org,m:axelrasmussen@google.com,m:weixugc@google.com,m:david@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:roman.gushchin@linux.dev,m:muchun.song@linux.dev,m:cgroups@vger.kernel.org,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:willy@infradead.org,m:denghaojie@honor.com,m:baoquan.he@linux.dev,m:kaleshsingh@google.com,m:tjmercier@google.com,m:tao.wangtao@honor.com,m:zhangji1@honor.com,m:wangzhen5@honor.com,m:wangzicheng@honor.com,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[34];
+	FORGED_SENDER(0.00)[wangzicheng@honor.com,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jiri@resnulli.us,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[resnulli-us.20251104.gappssmtp.com:+];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	MISSING_XM_UA(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[wangzicheng@honor.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,nvidia.com:email,FV6GYCPJ69:mid]
+	FORGED_SENDER_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	TAGGED_RCPT(0.00)[linux-doc];
+	R_DKIM_NA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: B690C7546F9
+X-Rspamd-Queue-Id: DF885754633
 
-Tue, Jul 14, 2026 at 08:17:30AM +0200, mbloch@nvidia.com wrote:
->Apply parsed devlink_eswitch_mode= defaults after devlink registration
->and after successful reload.
->
->Mark the default mode as pending when a devlink instance is allocated.
->Before devl_unlock() releases the instance lock, apply a pending default
->when the instance is registered.
->
->Clear the pending state before calling into the driver so the boot
->default remains a one-shot operation even if the mode change fails.
->
->For successful reloads that performed DRIVER_REINIT, devlink_reload()
->already holds the devlink instance lock and the driver has completed
->reload_up(). Clear the pending state and apply the default directly from
->the reload path.
->
->Treat an explicit user eswitch mode request as consuming the pending
->default mode.
->
+MGLRU inverts the reclaim order when anonymous memory is faulted in
+bulk: anonymous pages sit in the young generations while file pages
+sit in the oldest two, so reclaim evicts hot file pages before cold
+anonymous pages.  swappiness cannot correct it.  This series adds a
+per-cgroup proactive-aging operation, memory.aging, with the
+observability to drive it as a closed loop, so userspace can rebalance
+a cgroup's generations before reclaim runs.
 
-Looks fine to me now. One nit below:
+The problem
+-----------
+
+MGLRU places pages by access path, not hotness.  On the current tree
+the entry rules in lru_gen_folio_seq() give:
+
+  - faulted-in pages (anonymous pages; the fault path sets the active
+    mark) land at the 2nd youngest generation (max_seq - 1);
+  - file pages from read()/fadvise() land in the oldest two
+    generations: non-workingset at min_seq, workingset at min_seq + 1.
+
+Pictorially, for a full four-generation window::
+
+       youngest                          oldest
+       max_seq   max_seq-1   min_seq+1   min_seq
+       -------------------------------------------
+ anon    .          X           .           .     (faulted in)
+ file    .          .           X           X     (read/fadvise)
+                                            ^
+                              reclaim scans from here -> evicts file first
+
+Reclaim scans from min_seq, so file pages are evicted before the
+anonymous pages two generations younger, a hot/cold inversion.
+
+swappiness does not fix it: it only selects which type to scan, not
+the ordering within a type, so reclaim can still evict hot pages.
+swappiness=201 (SWAPPINESS_ANON_ONLY) just flips the inversion to the
+other side: no value recovers a correct hot/cold order, because the
+order comes from the access path, not access recency [1].  This is not
+Android-specific; the same file over-reclaim is shown on servers and
+worked around there by forcing an age iteration before reclaim.
+
+Why userspace-driven
+--------------------
+
+The benefit is workload-dependent: file-cache-bound servers gain from
+aging, anon-bound servers do not, so no kernel default is correct for
+all.  The kernel also cannot know when to age: on Android the right
+moment is the foreground-to-background transition, when the app's pages
+are cold but their PTE accessed bits are still accurate from foreground
+execution, a framework concept.  The kernel therefore provides the
+mechanism; userspace runs the loop.
+
+Design: observation and control
+-------------------------------
+
+The series gives userspace one control primitive and the observation to
+use it.  All three pieces are per-cgroup and gated by CONFIG_LRU_GEN,
+and together they form a closed loop:
+
+  control   memory.aging          write nr_gens to advance max_seq without
+                                  reclaim; the aging counterpart of
+                                  memory.reclaim
+  observe   nr_oldest_anon/file   pages in the oldest generation of each
+                                  type: what the next reclaim can evict
+            aging                 number of aging passes, paired with
+                                  workingset_refault to spot over-aging
+
+A policy reads nr_oldest_* to see whether anon is sheltered, ages with
+memory.aging, then checks the aging counter and workingset_refault.
+A typical flow ages to rebalance, then reclaims::
+
+    echo 2 > /sys/fs/cgroup/foo/memory.aging
+    echo "100M" > /sys/fs/cgroup/foo/memory.reclaim
+
+Why cgroup v2
+-------------
+
+memory.reclaim already lives in cgroup v2, but it is broken when
+anonymous pages are sheltered in the young generations: reclaim cannot
+reach anon until aging advances it.  A useful memory.reclaim therefore
+requires aging first.  Aging is not a new MGLRU detail leaked into
+cgroup v2; it is the other half of the proactive-reclaim operation
+cgroup v2 already exposes.  Putting it anywhere else (sysfs) cuts one
+operation across two ABIs and two addressing models.
+
+memory.aging is gated by CONFIG_LRU_GEN and exposes one primitive
+(advancing the generation), not internal data structures; if MGLRU is
+removed, the file goes with it.
+
+Alternatives considered
+-----------------------
+
+1) sysfs (/sys/kernel/mm/lru_gen/) fights sysfs's one-value-per-file,
+stateless model: the command is multi-argument and per-(memcg,node),
+the read is parameterized per memcg, and css-id addressing is hostile
+to cgroup paths.  It also splits aging from memory.reclaim.
+
+2) in-kernel automatic aging is workload-dependent (memcached regresses)
+and needs a trigger the kernel cannot know: the Android
+foreground-to-background moment is a framework concept.  MGLRU had this
+once: `should_run_aging' fired on a generation-balance heuristic::
+
+    if (young * MIN_NR_GENS > total)
+        return true;
+    if (old * (MIN_NR_GENS + 2) < total)
+        return true;
 
 
-[..]
+3) extending memory.reclaim to run the debugfs aging command
+(`+ memcg_id node_id seq`) overloads a reclaim file with a non-reclaim
+operation and pulls MGLRU's debugfs command syntax into a generic
+cgroup v2 ABI. But Aging is reclaim's counterpart, not one of its modes.
 
->+void devlink_default_esw_mode_instance_init(struct devlink *devlink)
+Results
+-------
+N39 (Device-X1 8 GB/SM7750, Device-X2 12 GB/SM8750).  Production telemetry,
+~300 users, 30K+ device-hours:
+    keep-alive          +15.4% (8 GB) / +10.2% (12 GB)
+    IME dismiss latency -47.2%
+    launch/exit jank >50ms   eliminated
+    one aging pass      342 us median, never on a UX thread
 
+AN90 (a new shipping product, separate from N39):
+    scroll jank >50 ms  -22%, severe jank -26%
+    cold-launch stalls >= 3 s  eliminated
+    workingset_refault (anon + file) and direct reclaim both down
 
-Forgotten "instance" here. With this fixed, feel free to add my
-Reviewed-by: Jiri Pirko <jiri@nvidia.com>
+Server (Intel i7-14700F, 20C/28T, 32 GB DDR5-5600, 1 TB NVMe,
+Ubuntu 24.04; same root cause, aging triggered on the
+reclaim path when anon in the oldest gen ratio < 10%):
+    fio random-read     +31.8%
+    ripgrep             +15.8%
+    memcached           -1.2%   (anon-bound; expected no gain)
 
-[..]
+N39 and AN90 are different products.
+
+Why RFC
+-------
+
+v1 [2] put the control in procfs/debugfs and was NAKed for the
+cgroup-v2 venue.  This version keeps aging in cgroup v2, next to
+memory.reclaim, and argues why above.  Discussed at LSF/MM 2026 [3].
+
+[1] swappiness=0/201 hot/cold inversion, and why the straightforward
+    fix is deferred:
+    https://lore.kernel.org/linux-mm/7829b070df1b405dbc97dd6a028d8c8a@honor.com/
+[2] v1: https://lore.kernel.org/linux-mm/20251128025315.3520689-1-wangzicheng@honor.com/
+[3] LSF/MM 2026 slides:
+    https://docs.google.com/presentation/d/1hUogz6InyLn13c8CjHuvEIzE4rT7saVRUV6xpWZoNfQ/
+
+Changes since v1
+----------------
+
+- Dropped the debugfs -> procfs move; aging is now a cgroup v2 file.
+- Added the AGING counter and nr_oldest_anon/file observability.
+- Corrected the generation-placement description to the current tree
+  (faults at the 2nd youngest, file in the oldest two).
+
+Zicheng Wang (3):
+  mm/lru_gen: add AGING counter and proactive aging helper
+  mm: memcontrol: add memory.aging cgroup v2 file
+  mm/lru_gen: expose oldest-generation page counts in memory.stat
+
+ Documentation/admin-guide/cgroup-v2.rst       |  53 +++++++++++
+ Documentation/admin-guide/mm/multigen_lru.rst |  13 +++
+ include/linux/mmzone.h                        |   3 +
+ mm/internal.h                                 |  19 +++++
+ mm/memcontrol.c                               |  63 +++++++++++
+ mm/vmscan.c                                   | 109 +++++++++++++++++++++
+ mm/vmstat.c                                   |   3 +
+ 7 files changed, 263 insertions(+)
+
+--
+2.25.1
+
 
