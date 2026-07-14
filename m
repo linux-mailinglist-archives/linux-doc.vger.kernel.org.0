@@ -1,57 +1,58 @@
-Return-Path: <linux-doc+bounces-96715-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96717-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id ODaEE2cXVmoxzAAAu9opvQ
-	(envelope-from <linux-doc+bounces-96715-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 13:03:03 +0200
+	id tZ74KaUXVmpPzAAAu9opvQ
+	(envelope-from <linux-doc+bounces-96717-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 13:04:05 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id C1A37753AFD
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 13:03:02 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4EE7C753B63
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 13:04:05 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b="C/6UYlSw";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96715-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96715-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=Jog3ZZRb;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96717-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96717-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 334A83049F5D
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 11:03:00 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E75173104AFB
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 11:03:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B59C138D3EE;
-	Tue, 14 Jul 2026 11:02:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0DF1B37FF41;
+	Tue, 14 Jul 2026 11:02:55 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA27437FF75;
-	Tue, 14 Jul 2026 11:02:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10ECE3815E8;
+	Tue, 14 Jul 2026 11:02:54 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784026973; cv=none; b=rVAbOpqGA3e22nkbDR8eOkZF3vKI1KtNsiwkGKMDnHOKxk6LOerrSld5XHSvTMIYpRhr3Wv0hPsxrPgOKaHWcX3iawZibZi1l+vs9pKjiVfQYcVhINzdMO0zH18DbLVfmmk8tm9kXOdMRmtRyAYwfQKQiRSy/TPsw/3a/KU3WtQ=
+	t=1784026974; cv=none; b=slWm8hO+uqrX/AjpBsBXLPvFUjS5WZLnIoj5H2wlvtWvI1i5yJSfA5fGek6KZFTUC/Qn2ygdJFz0slZ3mMGb17536iIQbxrBwT947ocu9LwdfXzW8IQWMEtbx2iN8M3LPsyMoP3iV5fJhFS2vl+2NSYGswGNe3hqAHtgBM3yxDk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784026973; c=relaxed/simple;
-	bh=LkGR2S/oFgI/+IPKjfMY0lgtsj7hpBpubbqxfDZIpLs=;
+	s=arc-20240116; t=1784026974; c=relaxed/simple;
+	bh=8MhduG14jsXaL5k4h11ocWyrck/47G7XvTTKiN8VDTM=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=hwh3mZLVSRHCxgRve2RxWVG4xj6/AoW/WCUVrdBnXME1uBM0TtZyaMLBoOhh0VKhPyU4GQHDn8zDfsUoQcHHRXFb1xet/xrCeNsEUIQxKBR1H9gZ0iuYGBWPoPRCY4Xhsl58Phh3X2Ww3XeEH8rnXd4QyLG5JUtQnvyyT3ltuIY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=C/6UYlSw; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id CCE94C2BCFF;
+	 In-Reply-To:To:Cc; b=IMbZcid8uSj0I3TCS3iLWbeotw0J3r7SXqyF6ASwRnkcRILkRnx245SOwzOyOtKZ/7a/WxemXhFZdgs1d0hZs8bHbuo/I2C/IaihXZrAvnbtmHvsKCNWWskdZGNiO8eGrfbBRvOEtSxQcg/BT49XnGIMPP2s/+q08TCW3RZjyDk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Jog3ZZRb; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id E522FC2BD05;
 	Tue, 14 Jul 2026 11:02:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1784026972;
-	bh=LkGR2S/oFgI/+IPKjfMY0lgtsj7hpBpubbqxfDZIpLs=;
+	s=k20201202; t=1784026973;
+	bh=8MhduG14jsXaL5k4h11ocWyrck/47G7XvTTKiN8VDTM=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=C/6UYlSwClXIs81nRMWAJVW1BKpx38TOquqYk5CP7/JZtnRnjlMqS4CBGYyLI/8O/
-	 uUOsI7JIMq/y1uzDbNDYvYbexvJxn9QSAMiFbiqExUuo06aA7Moh0Psdqlocjj9bB5
-	 8grsBwU7dvHgpdgzXbMIGY7SxR1PuPoEu98/dKMHVcTFADH4iPzdiim1v2ZtKCPKCs
-	 YNsAWKCeqzKmtCOpU0Gg7y+9AicxYcA4JFUnUnw1wSTJJuBCA5gynOqGtkz8aA4Rr2
-	 fAopuMm+x/z6f/fBNIZoMnZx38qbWS8VRpWhO7wefw8udzT9hnu5VYIpTRwSKoixkH
-	 V3X3a1rrJoObQ==
+	b=Jog3ZZRbZuUfdxFSbv8h1DGU2iGwdwAhFpaLXK2/XCcwMnJWG2VtduhOMKhlJQlg9
+	 pV6dOy5rYQNJlcSb/Jn57B4IqHjZ9PI3ikH5TJk6xh69nR+DFkZsf4Th2CEhEUfeI4
+	 ZX7eJBPE5tpIugb1zHiLzpU78masGDBksdrkehcIqQwjjp6bMXAjJGl5Wy8koYycI2
+	 dHSA5VFpxLC3PDnq8uezsGx8X2cIcu9XAdvg8pSm6y5nU7N9DAzNPvkhubaP0rIXRO
+	 kJecauMN3LDBvQRWeuEAyzuvbJQlblkc+opQb2Ru3hYTuCIpar8NAn7/NaECBI+JGq
+	 zaeOF2UCcQClg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B378FC44508;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C8D90C43458;
 	Tue, 14 Jul 2026 11:02:52 +0000 (UTC)
 From: Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>
-Date: Tue, 14 Jul 2026 12:02:44 +0100
-Subject: [PATCH v8 04/17] iio: add IIO_FREQUENCY channel type
+Date: Tue, 14 Jul 2026 12:02:45 +0100
+Subject: [PATCH v8 05/17] iio: core: support 64-bit register through
+ debugfs
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -60,7 +61,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260714-ad9910-iio-driver-v8-4-36939c3c07d2@analog.com>
+Message-Id: <20260714-ad9910-iio-driver-v8-5-36939c3c07d2@analog.com>
 References: <20260714-ad9910-iio-driver-v8-0-36939c3c07d2@analog.com>
 In-Reply-To: <20260714-ad9910-iio-driver-v8-0-36939c3c07d2@analog.com>
 To: linux-iio@vger.kernel.org, devicetree@vger.kernel.org, 
@@ -76,11 +77,11 @@ Cc: Lars-Peter Clausen <lars@metafoo.de>,
  Kees Cook <kees@kernel.org>, "Gustavo A. R. Silva" <gustavoars@kernel.org>, 
  Rodrigo Alencar <rodrigo.alencar@analog.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784026971; l=1881;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784026971; l=5286;
  i=rodrigo.alencar@analog.com; s=default; h=from:subject:message-id;
- bh=1IPBIAnpoq77uH/f9ncnZ8sog7Fcx5CLyDe5QVK2WqI=;
- b=Hh0U0aJccVFe4NQUgS0JeTmEw8mq9gt3x8+qE/+Jy3iK6KQVx1F6Yl5ukbFN9z+TpRABLwDGz
- HGigzqvoW3eDGXKTVl33FgsQFtOccEyRCmvPCYsFZx0JRxmOJG3JBWZ
+ bh=rhtJXuF4mkm1WH5HBYUmnTDdQ7mLzj7pscCY6q7WDzI=;
+ b=YAxE9pn6u6bhZrcLTw8MHFRH3h+kwoKvhGQSG6whC7jj0LiaeZourqWryPgsnfXbUCR41x+C+
+ C8cqka5RpmGBuPsOo1i+1mN7EYxDmZFhL6AO+rJ10VYfv12Z9NcnQXd
 X-Developer-Key: i=rodrigo.alencar@analog.com; a=ed25519;
  pk=ULeHbgU/OYh/PG/4anHDfLgldFItQHAhOktYRVLMFRo=
 X-Endpoint-Received: by B4 Relay for rodrigo.alencar@analog.com/default
@@ -93,12 +94,12 @@ X-Spamd-Result: default: False [-3.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-96715-lists,linux-doc=lfdr.de,rodrigo.alencar.analog.com];
+	TAGGED_FROM(0.00)[bounces-96717-lists,linux-doc=lfdr.de,rodrigo.alencar.analog.com];
 	FORGED_RECIPIENTS(0.00)[m:linux-iio@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-hardening@vger.kernel.org,m:lars@metafoo.de,m:Michael.Hennerich@analog.com,m:jic23@kernel.org,m:dlechner@baylibre.com,m:andy@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:p.zabel@pengutronix.de,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:kees@kernel.org,m:gustavoars@kernel.org,m:rodrigo.alencar@analog.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
@@ -108,7 +109,7 @@ X-Spamd-Result: default: False [-3.66 / 15.00];
 	RCPT_COUNT_TWELVE(0.00)[19];
 	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	HAS_REPLYTO(0.00)[rodrigo.alencar@analog.com];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
@@ -117,71 +118,151 @@ X-Spamd-Result: default: False [-3.66 / 15.00];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,analog.com:mid,analog.com:email,analog.com:replyto,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp,analog.com:mid,analog.com:email,analog.com:replyto]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: C1A37753AFD
+X-Rspamd-Queue-Id: 4EE7C753B63
 
 From: Rodrigo Alencar <rodrigo.alencar@analog.com>
 
-Add IIO_FREQUENCY channel type to support Direct Digital Synthesizer (DDS)
-devices that handles frequency values written directly to its buffered
-interface.
+Add debugfs_reg64_access function pointer field into iio_info and modify
+file operation callbacks to favor 64-bit variant when it is available.
 
 Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
 ---
- drivers/iio/industrialio-core.c | 1 +
- include/uapi/linux/iio/types.h  | 1 +
- tools/iio/iio_event_monitor.c   | 2 ++
- 3 files changed, 4 insertions(+)
+ drivers/iio/industrialio-core.c | 33 ++++++++++++++++++++++++---------
+ include/linux/iio/iio-opaque.h  |  2 +-
+ include/linux/iio/iio.h         |  7 +++++++
+ 3 files changed, 32 insertions(+), 10 deletions(-)
 
 diff --git a/drivers/iio/industrialio-core.c b/drivers/iio/industrialio-core.c
-index bdf3d4c06331..a45277bc5d99 100644
+index a45277bc5d99..98fc00343dc5 100644
 --- a/drivers/iio/industrialio-core.c
 +++ b/drivers/iio/industrialio-core.c
-@@ -99,6 +99,7 @@ static const char * const iio_chan_type_name_spec[] = {
- 	[IIO_ATTENTION] = "attention",
- 	[IIO_ALTCURRENT] = "altcurrent",
- 	[IIO_COVERAGE] = "coverage",
-+	[IIO_FREQUENCY] = "frequency",
- };
+@@ -388,6 +388,7 @@ static ssize_t iio_debugfs_read_reg(struct file *file, char __user *userbuf,
+ 	struct iio_dev *indio_dev = file->private_data;
+ 	struct iio_dev_opaque *iio_dev_opaque = to_iio_dev_opaque(indio_dev);
+ 	unsigned int val = 0;
++	u64 val64 = 0;
+ 	int ret;
  
- static const char * const iio_modifier_names[] = {
-diff --git a/include/uapi/linux/iio/types.h b/include/uapi/linux/iio/types.h
-index c9295c707041..1996839d1fce 100644
---- a/include/uapi/linux/iio/types.h
-+++ b/include/uapi/linux/iio/types.h
-@@ -54,6 +54,7 @@ enum iio_chan_type {
- 	IIO_ATTENTION,
- 	IIO_ALTCURRENT,
- 	IIO_COVERAGE,
-+	IIO_FREQUENCY,
- };
+ 	if (*ppos > 0)
+@@ -395,9 +396,17 @@ static ssize_t iio_debugfs_read_reg(struct file *file, char __user *userbuf,
+ 					       iio_dev_opaque->read_buf,
+ 					       iio_dev_opaque->read_buf_len);
  
- enum iio_modifier {
-diff --git a/tools/iio/iio_event_monitor.c b/tools/iio/iio_event_monitor.c
-index bc3ef4c77c2b..7885f0f7562e 100644
---- a/tools/iio/iio_event_monitor.c
-+++ b/tools/iio/iio_event_monitor.c
-@@ -66,6 +66,7 @@ static const char * const iio_chan_type_name_spec[] = {
- 	[IIO_ATTENTION] = "attention",
- 	[IIO_ALTCURRENT] = "altcurrent",
- 	[IIO_COVERAGE] = "coverage",
-+	[IIO_FREQUENCY] = "frequency",
- };
+-	ret = indio_dev->info->debugfs_reg_access(indio_dev,
+-						  iio_dev_opaque->cached_reg_addr,
+-						  0, &val);
++	if (indio_dev->info->debugfs_reg64_access) {
++		ret = indio_dev->info->debugfs_reg64_access(indio_dev,
++							    iio_dev_opaque->cached_reg_addr,
++							    0, &val64);
++	} else {
++		ret = indio_dev->info->debugfs_reg_access(indio_dev,
++							  iio_dev_opaque->cached_reg_addr,
++							  0, &val);
++		val64 = val;
++	}
++
+ 	if (ret) {
+ 		dev_err(indio_dev->dev.parent, "%s: read failed\n", __func__);
+ 		return ret;
+@@ -405,7 +414,7 @@ static ssize_t iio_debugfs_read_reg(struct file *file, char __user *userbuf,
  
- static const char * const iio_ev_type_text[] = {
-@@ -196,6 +197,7 @@ static bool event_is_known(struct iio_event_data *event)
- 	case IIO_ATTENTION:
- 	case IIO_ALTCURRENT:
- 	case IIO_COVERAGE:
-+	case IIO_FREQUENCY:
+ 	iio_dev_opaque->read_buf_len = snprintf(iio_dev_opaque->read_buf,
+ 						sizeof(iio_dev_opaque->read_buf),
+-						"0x%X\n", val);
++						"0x%llX\n", val64);
+ 
+ 	return simple_read_from_buffer(userbuf, count, ppos,
+ 				       iio_dev_opaque->read_buf,
+@@ -417,8 +426,9 @@ static ssize_t iio_debugfs_write_reg(struct file *file,
+ {
+ 	struct iio_dev *indio_dev = file->private_data;
+ 	struct iio_dev_opaque *iio_dev_opaque = to_iio_dev_opaque(indio_dev);
+-	unsigned int reg, val;
++	unsigned int reg;
+ 	char buf[80];
++	u64 val64;
+ 	int ret;
+ 
+ 	if (*ppos != 0 || count >= sizeof(buf))
+@@ -431,7 +441,7 @@ static ssize_t iio_debugfs_write_reg(struct file *file,
+ 
+ 	buf[ret] = '\0';
+ 
+-	ret = sscanf(buf, "%i %i", &reg, &val);
++	ret = sscanf(buf, "%i %lli", &reg, &val64);
+ 
+ 	switch (ret) {
+ 	case 1:
+@@ -439,8 +449,12 @@ static ssize_t iio_debugfs_write_reg(struct file *file,
  		break;
- 	default:
- 		return false;
+ 	case 2:
+ 		iio_dev_opaque->cached_reg_addr = reg;
+-		ret = indio_dev->info->debugfs_reg_access(indio_dev, reg,
+-							  val, NULL);
++		if (indio_dev->info->debugfs_reg64_access)
++			ret = indio_dev->info->debugfs_reg64_access(indio_dev, reg,
++								    val64, NULL);
++		else
++			ret = indio_dev->info->debugfs_reg_access(indio_dev, reg,
++								  val64, NULL);
+ 		if (ret) {
+ 			dev_err(indio_dev->dev.parent, "%s: write failed\n",
+ 				__func__);
+@@ -471,7 +485,8 @@ static void iio_device_register_debugfs(struct iio_dev *indio_dev)
+ {
+ 	struct iio_dev_opaque *iio_dev_opaque;
+ 
+-	if (indio_dev->info->debugfs_reg_access == NULL)
++	if (!indio_dev->info->debugfs_reg_access &&
++	    !indio_dev->info->debugfs_reg64_access)
+ 		return;
+ 
+ 	if (!iio_debugfs_dentry)
+diff --git a/include/linux/iio/iio-opaque.h b/include/linux/iio/iio-opaque.h
+index b87841a355f8..98330385e08d 100644
+--- a/include/linux/iio/iio-opaque.h
++++ b/include/linux/iio/iio-opaque.h
+@@ -73,7 +73,7 @@ struct iio_dev_opaque {
+ #if defined(CONFIG_DEBUG_FS)
+ 	struct dentry			*debugfs_dentry;
+ 	unsigned int			cached_reg_addr;
+-	char				read_buf[20];
++	char				read_buf[24];
+ 	unsigned int			read_buf_len;
+ #endif
+ };
+diff --git a/include/linux/iio/iio.h b/include/linux/iio/iio.h
+index 711c00f67371..cd17703274a6 100644
+--- a/include/linux/iio/iio.h
++++ b/include/linux/iio/iio.h
+@@ -484,6 +484,10 @@ struct iio_trigger; /* forward declaration */
+  * @update_scan_mode:	function to configure device and scan buffer when
+  *			channels have changed
+  * @debugfs_reg_access:	function to read or write register value of device
++ * @debugfs_reg64_access: function to read or write 64-bit register value of
++ *			device. debugfs_reg_access() and debugfs_reg64_access()
++ *			are mutually exclusive, but the 64-bit variant has
++ *			precedence in case both are implemented.
+  * @fwnode_xlate:	fwnode based function pointer to obtain channel specifier index.
+  * @hwfifo_set_watermark: function pointer to set the current hardware
+  *			fifo watermark level; see hwfifo_* entries in
+@@ -572,6 +576,9 @@ struct iio_info {
+ 	int (*debugfs_reg_access)(struct iio_dev *indio_dev,
+ 				  unsigned int reg, unsigned int writeval,
+ 				  unsigned int *readval);
++	int (*debugfs_reg64_access)(struct iio_dev *indio_dev,
++				    unsigned int reg, u64 writeval,
++				    u64 *readval);
+ 	int (*fwnode_xlate)(struct iio_dev *indio_dev,
+ 			    const struct fwnode_reference_args *iiospec);
+ 	int (*hwfifo_set_watermark)(struct iio_dev *indio_dev, unsigned int val);
 
 -- 
 2.43.0
