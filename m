@@ -1,249 +1,295 @@
-Return-Path: <linux-doc+bounces-96683-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96684-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 5esvJ7kBVmpLxwAAu9opvQ
-	(envelope-from <linux-doc+bounces-96683-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 11:30:33 +0200
+	id 4MgxDJMCVmqExwAAu9opvQ
+	(envelope-from <linux-doc+bounces-96684-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 11:34:11 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 31BE5752DC7
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 11:30:33 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8D74A752E39
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 11:34:10 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=arm.com header.s=selector1 header.b=c4lbPi7r;
-	dkim=pass header.d=arm.com header.s=selector1 header.b=c4lbPi7r;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96683-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-96683-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=arm.com;
-	arc=reject ("cv is fail on i=3")
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=GLbXntiM;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96684-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96684-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=gmail.com;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id C95723025BC3
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 09:29:45 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 21D1D306C995
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 09:32:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 20AA944163B;
-	Tue, 14 Jul 2026 09:28:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 192623EB0ED;
+	Tue, 14 Jul 2026 09:32:43 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from PA4PR04CU001.outbound.protection.outlook.com (mail-francecentralazon11013065.outbound.protection.outlook.com [40.107.162.65])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-yw1-f176.google.com (mail-yw1-f176.google.com [209.85.128.176])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AEEAF43F8C5;
-	Tue, 14 Jul 2026 09:28:16 +0000 (UTC)
-ARC-Seal:i=3; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784021316; cv=fail; b=YZtX/H2oIDuDDB7JRZ7sSETDD90lMzgnoyfgng+MPoA6qzRm3UOwtmi3mFEK85luStPAVWxfDQQdxNqJmHY/NeoIq0Xo5rTr4Tgdphklhk77+R0xSb1eRAJVTcW5TV2Zl+sIp27Whe/wHLk+Ue+QkV7vpQnzZStNK/EhCdmXzFY=
-ARC-Message-Signature:i=3; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784021316; c=relaxed/simple;
-	bh=JVG8+qajagU23IUzlcmBx5nibxYIWxryeP1fcc48Zgg=;
-	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
-	 Content-Type:MIME-Version; b=Z3+qLvA84N47hU2N5njQqijqlnijAMoyZTBPFR7dRTFcMiBROJWRhWtbxbQBppgpkBV9LJ26fQ0WtIkld4cuw9nKRRYNZtaGebS/qTa8rcnpaWq9v/bXRW35glZCvzwOHRW8OSxm67abRPSPO7qy9dsPJF+vk99L407DKUWq99s=
-ARC-Authentication-Results:i=3; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=c4lbPi7r; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=c4lbPi7r; arc=fail smtp.client-ip=40.107.162.65
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=AnhCLEkt6Dr6Lw9SKmdsKJR8AeBURvl5UB3zBPeR/seiZvGc+cQ4N487jsk04y/jMVARDTEUqELzLlkPyvMyo8OwpJztVfwXGe2Tx4vRm6wfw5oMVK8Ig9obWa7xbtc9bhcjlHrSC6CzPPfI0DEtMsX8onI+SYj62NxnHqJpxwtE85jFh9zCSbyn5+BFD72Fdd0o2+qtgKmPmPZCfnqxZAjqBLge+0M5rvIFq9FlII4r5xr7X4Clibs0ylJmxKTVGmZArqdevPlcN16PtOqGlkrgl8lsISZ1LX3X2eUoHjlMxgWSKou9lc3tFtVwj868PDFz/LJoFk6Xct1u2dQamg==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gopbG7UheHvCh7eBvyWX0sc8UhiYlvHM66YGNojBZlU=;
- b=ooo4Be0l9VzD3OdEsqpWi5DpbVX0Nl/gElh7P2Cmx7O16n6Hb9jjPR4p6U8II/O/fmTV13nZ7gW3ZNVCGuCBX5c4VO3edGX1i7+8+QvxEX5GrQ5TUOScdlhKRXj7mQ0/pVzHtkKbWxFPOkPMT5v75kPHjZrgczLHzupDMTLU9x4zdgxquTkFhRgUdJXPefbxtgk9ylGCZLY7adHNa2i80Xc7ruX0WLjA/0JHHy8RZN+RiPL+2v9C7NiS/nSfK31xG3dSTC5GZZrsmwAdp7Dt8dUNRI3HGx8bLdbidlpma5G5Zkm9zNS4tyKFNZCA+LCgLXX5HPFc9FjRF+4+M3m/ng==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 4.158.2.129) smtp.rcpttodomain=intel.com smtp.mailfrom=arm.com; dmarc=pass
- (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
- (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
- spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gopbG7UheHvCh7eBvyWX0sc8UhiYlvHM66YGNojBZlU=;
- b=c4lbPi7rrA5oQkZwIWgutbcyEL1JEJU18P/wS3CpmnyOWpHER26jVpksu6q0ddqTzWvi06FaxfZbofOHlIHfc+E4x/t8x/unvxtGY5x4bhT/PLdx4Ftr9xxxJYUnOYq9t0zURuX5VCd7jcutNofsvS4Giwz2hQJhxzlVUiAf9Qk=
-Received: from AS4P190CA0029.EURP190.PROD.OUTLOOK.COM (2603:10a6:20b:5d0::19)
- by PAWPR08MB9638.eurprd08.prod.outlook.com (2603:10a6:102:2e0::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.202.18; Tue, 14 Jul
- 2026 09:28:08 +0000
-Received: from AMS1EPF00000048.eurprd04.prod.outlook.com
- (2603:10a6:20b:5d0:cafe::c) by AS4P190CA0029.outlook.office365.com
- (2603:10a6:20b:5d0::19) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.202.20 via Frontend Transport; Tue,
- 14 Jul 2026 09:28:08 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=arm.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
- client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
-Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- AMS1EPF00000048.mail.protection.outlook.com (10.167.16.132) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.223.9
- via Frontend Transport; Tue, 14 Jul 2026 09:28:07 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xWEeTzdvqdvYsBdr6Yj7ejNeiZ+qeyGJbfT2rIkf6GpraANPV7KixjZ/ZNHNvbX1gSP5S4zL/4lXYTtFVVZIpVU3Vnz1+BWpsc0awvXShPMS1Y5wC2F/UaFWb6unUqKrI5qU4HznNR2kNtaFIiTPxdei+aNbgN/KBzedMmD/i+qphzuVg5jPSD/ZGRM59EYtwM/TAaATxqPjxpQ9hBdL9SaGTdLuP9aRLwVECse+JtxCOk4wMxfUqWaLGu4W2mguyY51aNTYFiPRzFRBqoAfRqXaRU7eP9EMzgdKzK59QYINvCtuUe/1oubjsvUQRrUNWQH/Cg1bsJI0vNvDNH16Fw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gopbG7UheHvCh7eBvyWX0sc8UhiYlvHM66YGNojBZlU=;
- b=t+eNOKeFbzZStnDo/xJDcncYwdQJUd6nxaJib8T/4PhvD1bKsJGVLDdU78F/oRG8svbJU3IB0KT6RVe4RLHkVL6wVI783/ESuYZFPApkBcnu0dH3G+G2aci8b9qAAtcArlUMOVhvVkSnF3EZxzNqBFCLnGDuFM0aC5JctDVMjkAXhpKKUQu0NCJKmhFIIkQtJ8xnLWplNSANVB4iNZTOFikHnupTBaXt43f7C9qhEvisxK2HxJKSFMmPNCF5eAEd26w+wQTaLnBjfXrWe2k3m2drO9t9qOW+F9hK0tx/sctgXLKP20QjwXEeLX/u3UJ1IXAf49JK/NdN7NUR9ZFxrw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gopbG7UheHvCh7eBvyWX0sc8UhiYlvHM66YGNojBZlU=;
- b=c4lbPi7rrA5oQkZwIWgutbcyEL1JEJU18P/wS3CpmnyOWpHER26jVpksu6q0ddqTzWvi06FaxfZbofOHlIHfc+E4x/t8x/unvxtGY5x4bhT/PLdx4Ftr9xxxJYUnOYq9t0zURuX5VCd7jcutNofsvS4Giwz2hQJhxzlVUiAf9Qk=
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-Received: from VI0PR08MB11823.eurprd08.prod.outlook.com (2603:10a6:800:324::5)
- by DU4PR08MB11007.eurprd08.prod.outlook.com (2603:10a6:10:570::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.17; Tue, 14 Jul
- 2026 09:27:04 +0000
-Received: from VI0PR08MB11823.eurprd08.prod.outlook.com
- ([fe80::694c:3790:be1a:8ddd]) by VI0PR08MB11823.eurprd08.prod.outlook.com
- ([fe80::694c:3790:be1a:8ddd%7]) with mapi id 15.21.0202.014; Tue, 14 Jul 2026
- 09:27:04 +0000
-Message-ID: <e77d0367-ab24-4b6d-beaa-034dd793cef6@arm.com>
-Date: Tue, 14 Jul 2026 10:27:01 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 06/10] ACPI: APEI: GHES: move CXL CPER helpers
-To: Alison Schofield <alison.schofield@intel.com>
-Cc: "Rafael J. Wysocki" <rafael@kernel.org>, Tony Luck <tony.luck@intel.com>,
- Borislav Petkov <bp@alien8.de>, Hanjun Guo <guohanjun@huawei.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Shuai Xue <xueshuai@linux.alibaba.com>, Len Brown <lenb@kernel.org>,
- Saket Dumbre <saket.dumbre@intel.com>, Davidlohr Bueso <dave@stgolabs.net>,
- Jonathan Cameron <jic23@kernel.org>, Dave Jiang <dave.jiang@intel.com>,
- Vishal Verma <vishal.l.verma@intel.com>, Dan Williams <djbw@kernel.org>,
- Ira Weiny <iweiny@kernel.org>, Li Ming <ming.li@zohomail.com>,
- Mahesh J Salgaonkar <mahesh@linux.ibm.com>,
- Oliver O'Halloran <oohall@gmail.com>, Bjorn Helgaas <bhelgaas@google.com>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>, linux-kernel@vger.kernel.org,
- linux-acpi@vger.kernel.org, acpica-devel@lists.linux.dev,
- linux-cxl@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
- linux-pci@vger.kernel.org, devicetree@vger.kernel.org,
- linux-edac@vger.kernel.org, linux-doc@vger.kernel.org, Dmitry.Lamerov@arm.com
-References: <20260708-topics-ahmtib01-ras_ffh_arm_internal_review-v7-0-8b3a85216cef@arm.com>
- <20260708-topics-ahmtib01-ras_ffh_arm_internal_review-v7-6-8b3a85216cef@arm.com>
- <alWi5hvXYT0-ZPyV@aschofie-mobl2.lan>
-Content-Language: en-GB
-From: Ahmed Tiba <ahmed.tiba@arm.com>
-In-Reply-To: <alWi5hvXYT0-ZPyV@aschofie-mobl2.lan>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO6P265CA0026.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:2ff::16) To VI0PR08MB11823.eurprd08.prod.outlook.com
- (2603:10a6:800:324::5)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 825DE35F615
+	for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 09:32:41 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1784021563; cv=pass; b=oF9LgR7bZhX0e1f2dU/vZhs5EOEJK3iUMRVogNhRZlLxLje6kptI+zj7naWHG2Wle+W/ksmOW1i9MXtlknj5zOGxDttc3W4dUDXGpK9zqFaZzfkMjt/5mUR7upIXZ8zCj9zH95dguCDk7bkO79RWolmiLyB2a4rE+gTUDjOvZBc=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1784021563; c=relaxed/simple;
+	bh=p1dnu5tYbRHwHh8fmbzlrVL9fNl20Bz/is+E5vc5VSI=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=PAi6dLA9t/mFIuBfD9Eejror1LQckAlFd2MrBY4su9vDbr4lfGHroBa1IxCUdIDVyyTw0izX6HguTq0MMhrPLqzBGYdWuXnQNEVmiB+XjFOAymEIQqrIMFSJNOFCRinA53QZM1ySuotvQAYeXVqrOkuspYAHNx025pZInC6I7Z0=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=GLbXntiM; arc=pass smtp.client-ip=209.85.128.176
+Received: by mail-yw1-f176.google.com with SMTP id 00721157ae682-81e6f2ee60bso9976127b3.1
+        for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 02:32:41 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784021560; cv=none;
+        d=google.com; s=arc-20260327;
+        b=MYgWLNWNxH7GBy/3v8Zqa2tnvyhvtEysxb7SYly1jpeECMKv9HD5i2/JzVaV82amBl
+         zVdHTPw/GuVPDKqnwRxdhdjLVfWV0uQ7wzl9MgPnT+VFib5iFInoXshsHEHjbzgZ9S5W
+         rFv+nx/tSa9p4kQyo+VAlrPrDllu5SrHVNI4uOhTRoTG+luf22urS9znRG9NiD/yQ5Qi
+         mdcawCjZWHwOqdok+j144IL2EQ6h532GPmXI9EQFlD7bDSrC+9N9JKIdXJ9gQraiBrlY
+         EFPGxI+7dEtXTxdxmk8UKfp9tDpT0i3RDo9iC2/vG1yTv3/CPNUfY82Jpg/06c65+9u8
+         Kdcg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=km8ZAN829Y9YIgjGXOSg/u7i/Qhc6MRJdZPbwDN0J84=;
+        fh=ph5tKYiwl3rTS6DC+hnPd/Ogfab0x6aWqcMx3c2ndiM=;
+        b=a2EwSCV158MKYE9LL6dFFYAaBCGAOazhTCBwdMj57alCCTLXAgWwQK59havogLMvAu
+         yDgPy9J12YxG8ydcxseeHXipv8p6SuyQX9vrk/+rnQ7nwo7ajh1se8RkRHW3tciLeSH0
+         +P3WrJs2RCzo8HhYo5mWwS1zdmi4IbM86i3v1qvFpufnNhsjxruXk2m5UNfUN9Q6g7Eb
+         ivszKOnwlZNkwqGqwrkNlHtbH5auo7VuNS45d8EJn3SXjhrhCYjOX2QJpWquhJOLWPrg
+         FA2qssaox0zKwTz92V60imbd0EgII3zIRIDVUZWoXKUgaqAdFFHpSUUzMrlAbDoRIPi9
+         sLjQ==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1784021560; x=1784626360; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=km8ZAN829Y9YIgjGXOSg/u7i/Qhc6MRJdZPbwDN0J84=;
+        b=GLbXntiMdtlU4onN9znizUxY9OH5jeoudTRdZn1cpH9RLG8mEUVR6DPskZ2cWQYZpM
+         cjPRLIXYC8hNSlyaV1jhiZ6zDKCVvgaBGe9i7pTQ7JtrEhcx4oA8YrC8OCBfDz1Fyk5u
+         Gk1wPH2ZKApW6dMFkFpkNOw6h1AuZazWeGt+XoTpLM3bNxBP+LPoFmAYrOaAfAjleQQm
+         ll0ACj59XZNk2iEOlzXhQyGRBdlV8A/2pSSTjW5YicYBm+y6O+eZbBszzBUBcekTjIPw
+         sX3Qc/fngUMuprj6+AwiMAQZI0E/FPaKDmVrBu6OFw8Ecy0pdZia1fNNWHtyFBQdJ/vn
+         6ZTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784021560; x=1784626360;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=km8ZAN829Y9YIgjGXOSg/u7i/Qhc6MRJdZPbwDN0J84=;
+        b=U5dS5oxW9HDcf7mpaEKU6bYTMJUZYK0IR5Kmy03VceDC9MZiIz2E22obrS/IOx+/vZ
+         rmxecvPuQykDaa35duIq1Qha+KWatzx5CpyGebqs4C5oI09rSM3TkbzENGSi50R6VNwx
+         fRCZPYmdc4B4L24P/gvi9Ou+VEqr1BItrZ1m9CebzCHono4hrOgoXGe3d/HtGoRzgmJf
+         8Rq/s99SvCikLsl9QBj5qOGrdIYNYv2OJqZXNwEzQK+5A0PaQvDi3ueIvUQ9qiqnIC9Z
+         Uu+Z5FWXg1mNyNLgDAeXOi+iw73QKP02ROygDIUihkR16iyMXHVjQuxANye9Bl81hQjG
+         GkHA==
+X-Gm-Message-State: AOJu0Yzv802kmYByeSL3CCrNxdmeQ3VJb4RUPVjqQCKJkE1slI4ne3l6
+	CwYh0yempfhU462nMUny19o9IlneAxHmCJ4/v+huk9cGmiVqgXfCfxucHzRUpeUSdReg18lrcSp
+	t75EwWdL76z7sMMDC6lEvUuUQ9NQVeDU=
+X-Gm-Gg: AfdE7cnbrVlDb3DG6+yaGHtyYga3g/fm68XL1CANvJvDr4Ks1gw9Wt9ewA4O0cbqQ0E
+	AvPxuu1ZVYau11DD8kvb5g1baoVJJXsX090fFdZ/YdA33z3xWeHU6m+6KIIPdbxiysCz8MMaryl
+	I3wzbDQBSXkz1ZyzleyaUMoMLZqiBNPNq7kQ65VccZ5MYxorayA2Po9U68LsA16YlEmRs2O/1h1
+	BJaNfz3enQbViHHUHDJzRzuh//qlJaATw3bWeWpXk0IV6ROX60tTpkrs8GsPJarRNw5m92LavYX
+	R8jvYOoO
+X-Received: by 2002:a05:690c:6c85:b0:80b:f376:a205 with SMTP id
+ 00721157ae682-81e908371eamr96207737b3.22.1784021560366; Tue, 14 Jul 2026
+ 02:32:40 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-TrafficTypeDiagnostic:
-	VI0PR08MB11823:EE_|DU4PR08MB11007:EE_|AMS1EPF00000048:EE_|PAWPR08MB9638:EE_
-X-MS-Office365-Filtering-Correlation-Id: 273000cb-246c-4b43-8757-08dee18a371e
-X-LD-Processed: f34e5979-57d9-4aaa-ad4d-b122a662184d,ExtAddr,ExtAddr
-x-checkrecipientrouted: true
-NoDisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted:
- BCL:0;ARA:13230040|366016|1800799024|376014|7416014|23010399003|18002099003|22082099003|4143699003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info-Original:
- YDna5YWPiHOSC0aQ9Bwy42tKLSxuJ/4lQlPoJQHb4teX6q8M/UMDU9PFNIX5tl7TKYnUck6wY0p/cLQO+35cDdydvlwc2nJjfck0MpZ8Fpe4snbXLk7L3CJGmyLJNXdu746XitFCC6q6CzjOpUHUlkXoCTpwN9agQ84ht/feofvPkyRt+qIyKLXRie04YshonK0hCt1jfofWAGNzzId0DheyC7+07aZJSmawZtwfuMEGZp3bR2lO0oHAsozXypQnY0zumIsL4F0IBjsMwc4z4eCkPrMwSAgTE0vxpwXc5UFIX1mG1/MDSQ5sMibq5GId5Lxl+HwneDcbHAOyFNcEDnOo3r2gjVJToCi2SwaSAAEveLdp7uYBqTdn1IVpkIqbv9Kw69hUDaYmI+iFr3inqvKFO+CNpFSUlhl6a99yYwFIOqMn1JNKGwyGNdrks+8s6nmaKXahOQ9iDjiwWoZ8K0gF9eQAoNT3Sak6V6dZmDBPKEpsSbGQaxmYlTE3pTHv+Z+mag4A3xk1nAkKS+YD+B7DqMc8cRF1+caOiqXB/45LveABntyV2hJsLHzyyjGTsjTT0nQg1fQp5wH0Ep+0Dd7RdI6WEp99JSyFY6aGY8Fa+2oDAJ7bqP0l7i1ol/qfSiSKA2PjWP4LZGrmMjpxRZvlYwoDsGbSd2P/gpOiORg=
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI0PR08MB11823.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(7416014)(23010399003)(18002099003)(22082099003)(4143699003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
-X-Exchange-RoutingPolicyChecked:
- rXYk/X9saKVSk0Bbw5qrxD9w5c53mNkAmuFh19Gtvou9l+UCOIXHjDyyQ4uYGfvj7V1y7snQt2f98+1yQL29djra3Ats8hIpF1Lbz1HkXuag9MlCCd6DB0g7LDLcpSRP1MYm9xth4cQk37PS+XG/XqYgEucDwdAl6/JfNzkjttnDTvJU0eIC1NASmcUyvIMz0tL/yvIQj/zh1TVCuULbZuBnGUtul3HHj7PFQamTAgt03tQOzkbrAWB3mQYqu9EdMDpJbt2Pbh8IO9prIznzDbSZYj7VfosYwD8Pxb3gMbF/BBEqGde5Kjvyy6GOepJYuDufz1zcFGqhbrHmZGnVaA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR08MB11007
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- AMS1EPF00000048.eurprd04.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	18c16b10-abd4-43d9-97bb-08dee18a10f9
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700016|1800799024|23010399003|14060799003|35042699022|82310400026|376014|7416014|22082099003|18002099003|56012099006|11063799006|4143699003;
-X-Microsoft-Antispam-Message-Info:
-	ibk3J59ge6fgQl/1L/9/TWYGluS/br8nQtyK966nmswXY6QnQkg3uKHDvrYgwkFXaTtQfmUaikH38jqhyrjp3C3UygXgyfPD/PqfWEbRR1cy2HSbdnm2iHZi3fzHTcY/FgTE1JDKQL0PKGWagGRhvP45CL6UgIszA6s4AgePensGvc+prv5MKH306ouy5wEmfsYt0fUAPpN96UZFhtJe4FK2ypXo9G5/XzLRMlG5iWnKCkON+lJfSpvijOCVPSfk8pBYHi6XhiVZhhQwiBPCfSUeYIlqcCNKLstxUSr3cMny3EjGHMdMN8j/9RS9d9gRN9pY6q9fW2MyC10hi2MgmGaxRynbixLpUS404aJheZ+XtzDWXI8aHUZyT6XfD7iYtCtXGrU0Gf4p/kH4ZWDcOWeqYBcaN2/k/WcLXaOwyX9GsNx7UJNtK+rF0bLP5tOoX3eEBh2ddtBb5pme/+1bYFx4QfPnLcf5ibvpQrprnZD5zA0AbxS1Fuofvy0DgZ7qSrvTljpT2hvPu/k2vuoGPtVnpY6+ytjR27lcgalqljFrIPfqxFXo4qGTFdwpp2nBmfgyyJnS4DrhTZcXFyitob04mSjaGtqB09en0GhrF4zc320rixeEUvznG9N0rYBP0R9XGZvw8geQDrtkWuNxL5pjUt6kAiSYpk6pmqffFw6p3Dl4UvJB6lQBlTJLGnNtmg6mnN2FdmpQ6x2vfmydCA==
-X-Forefront-Antispam-Report:
-	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(1800799024)(23010399003)(14060799003)(35042699022)(82310400026)(376014)(7416014)(22082099003)(18002099003)(56012099006)(11063799006)(4143699003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	fXQRKUPTDYk79cwaN8Zep2ZuMV3/0EYPaweY+OvjPbdzOgZS8YIJiW0+1tV1sE9lb6FMHEsfF55WYu8EGXnLxMZCzV9xbCzt9+2pSky81QIvtxCKxZCD4Pk9Y42RgwTjQgatHdKCFJCGgrA0jyVuMk8JUGxlpLSRLZf+JxHhlM8IYH27JFLwdZsxWX1CSUO5QXYJ0oqTPU2HB+wIldgAf6cwlIY96jfgidGb95M6e5kdQg1a1wo+bjiHIUTox9NpnqsoqjCWN4UV1p+TrBZhb1XtJvGwVhsuamFkH6U0o1RK3CtO3MS4HMCmtpd46N4Riw9XOdgyMEHTD9ktoQ/m9ltPh1w2AVmIaATGeKMpnrQx8ucGepilQwLmOzx80X3r7wWg6JztvhSJOYjSckCdbBxDqvVF97HuoRmzTUnAvN7beCxCVBpmOs2W67nsDfmV
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jul 2026 09:28:07.9133
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 273000cb-246c-4b43-8757-08dee18a371e
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	AMS1EPF00000048.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR08MB9638
+References: <alUXH8qRRjno2eZG@wyuan.org>
+In-Reply-To: <alUXH8qRRjno2eZG@wyuan.org>
+From: Dongliang Mu <mudongliangabcd@gmail.com>
+Date: Tue, 14 Jul 2026 17:32:12 +0800
+X-Gm-Features: AVVi8CdNfQDAQrIo6mijxxRKNCVQGIhu-RwEyNghvTYFw8J9QzhCOOb26gqSG5E
+Message-ID: <CAD-N9QVXqYxtsn7YuUtCDWrwwk5+iFAkT2jcs26zbDUfwhAwsQ@mail.gmail.com>
+Subject: Re: What's cooking in zh_CN (Jul 2026)
+To: Weijie Yuan <wy@wyuan.org>
+Cc: linux-doc@vger.kernel.org, Alex Shi <alexs@kernel.org>, 
+	Yanteng Si <si.yanteng@linux.dev>, Dongliang Mu <dzm91@hust.edu.cn>, 
+	Ben Guo <ben.guo@openatom.club>, Gary Guo <gary@garyguo.net>, Yan Zhu <zhuyan2015@qq.com>, 
+	Doehyun Baek <doehyunbaek@gmail.com>, Jiandong Qiu <qiujiandong1998@gmail.com>, 
+	chengyaqiang <chengyaqiang@chengyaqiang.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [1.34 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_REJECT(1.00)[cv is fail on i=3];
-	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
-	R_DKIM_ALLOW(-0.20)[arm.com:s=selector1];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-96683-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:wy@wyuan.org,m:linux-doc@vger.kernel.org,m:alexs@kernel.org,m:si.yanteng@linux.dev,m:dzm91@hust.edu.cn,m:ben.guo@openatom.club,m:gary@garyguo.net,m:zhuyan2015@qq.com,m:doehyunbaek@gmail.com,m:qiujiandong1998@gmail.com,m:chengyaqiang@chengyaqiang.com,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,arm.com:from_mime,arm.com:dkim,arm.com:mid,vger.kernel.org:from_smtp];
-	FORGED_SENDER(0.00)[ahmed.tiba@arm.com,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[34];
-	FORGED_RECIPIENTS(0.00)[m:alison.schofield@intel.com,m:rafael@kernel.org,m:tony.luck@intel.com,m:bp@alien8.de,m:guohanjun@huawei.com,m:mchehab@kernel.org,m:xueshuai@linux.alibaba.com,m:lenb@kernel.org,m:saket.dumbre@intel.com,m:dave@stgolabs.net,m:jic23@kernel.org,m:dave.jiang@intel.com,m:vishal.l.verma@intel.com,m:djbw@kernel.org,m:iweiny@kernel.org,m:ming.li@zohomail.com,m:mahesh@linux.ibm.com,m:oohall@gmail.com,m:bhelgaas@google.com,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-kernel@vger.kernel.org,m:linux-acpi@vger.kernel.org,m:acpica-devel@lists.linux.dev,m:linux-cxl@vger.kernel.org,m:linuxppc-dev@lists.ozlabs.org,m:linux-pci@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-edac@vger.kernel.org,m:linux-doc@vger.kernel.org,m:Dmitry.Lamerov@arm.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-96684-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER(0.00)[mudongliangabcd@gmail.com,linux-doc@vger.kernel.org];
+	TO_DN_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,linux.dev,hust.edu.cn,openatom.club,garyguo.net,qq.com,gmail.com,chengyaqiang.com];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[kernel.org,intel.com,alien8.de,huawei.com,linux.alibaba.com,stgolabs.net,zohomail.com,linux.ibm.com,gmail.com,google.com,lwn.net,linuxfoundation.org,vger.kernel.org,lists.linux.dev,lists.ozlabs.org,arm.com];
-	DKIM_TRACE(0.00)[arm.com:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ahmed.tiba@arm.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	RCVD_COUNT_SEVEN(0.00)[8]
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[mudongliangabcd@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp,qq.com:email,wyuan.org:email,mail.gmail.com:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 31BE5752DC7
+X-Rspamd-Queue-Id: 8D74A752E39
 
-On 14/07/2026 03:45, Alison Schofield wrote:
-> On Wed, Jul 08, 2026 at 02:59:05PM +0100, Ahmed Tiba wrote:
->> Move the CXL CPER handling paths out of ghes.c and into ghes_cper.c so the
->> helpers can be reused. The code is moved as-is, with the public
->> prototypes updated so GHES keeps calling into the new translation unit.
->>
->> While moving this code, also add CXL CPER section length checks and use
->> spinlock_irqsave() in CXL register/unregister paths for locking
->> consistency.
-> 
-> NAK on moving and changing in the same patch, and esp in a patch
-> whose subject only says MOVE.
-Hi Alison,
+On Tue, Jul 14, 2026 at 12:51=E2=80=AFAM Weijie Yuan <wy@wyuan.org> wrote:
+>
+> Hi all,
+>
+> Since I made many noise these days on the list, which took up a lot of
+> maintainers' time. This email summarizes the patches for zh_CN that are
+> currently pending on the mailing list.
 
-I understand the concern.
+This is awesome. Maybe we can establish a dashboard for the activities
+in zh_CN/TW related patches of linux-doc.
 
-I kept those changes in 06/10 because they address pre-existing issues
-reported specifically against this patch by Sashiko, and I wanted to 
-avoid carrying known defects forward in the series. I did this following 
-Boris' feedback to address review-reported issues in-series rather than 
-carry them forward unchanged.
+I personally kept a knowledge base in the IMA (an app for storing
+knowledge base in the cloud) in our club to monitor these activities.
 
-I can also add a dedicated "Sashiko findings addressed" section and 
-update the commit description to state clearly that this patch is not 
-pure move.
+Dongliang Mu
 
-Please advise your preferred way to address Sashiko findings per patch 
-in this series.
+>
+> -----------------------------------------------------------------------
+>
+> * Ben Guo (2026-07-13) 4 commits
+>   [PATCH v2 0/4] docs/zh_CN: update rust documentation translations
+>   [PATCH v2 1/4] docs/zh_CN: Update rust/quick-start.rst translation
+>   [PATCH v2 2/4] docs/zh_CN: Update rust/general-information.rst translat=
+ion
+>   [PATCH v2 3/4] docs/zh_CN: Update rust/arch-support.rst translation
+>   [PATCH v2 4/4] docs/zh_CN: Update rust/testing.rst translation
+>
+>   Reviewed by Dongliang, a part needs to be revised. Expecting a reroll.
+>
+>   cf. https://lore.kernel.org/linux-doc/17094968-1385-4dba-aae8-5d93a2aaf=
+59e@hust.edu.cn/
+>   source: https://lore.kernel.org/linux-doc/cover.1783905132.git.ben.guo@=
+openatom.club/
+>
+> * Doehyun Baek (2026-07-08) 7 commits
+>   [PATCH v6 0/7] docs/zh_CN: update DAMON translations
+>   [PATCH v6 1/7] docs/zh_CN: update DAMON design translation
+>   [PATCH v6 2/7] docs/zh_CN: add DAMON_STAT usage translation
+>   [PATCH v6 3/7] docs/zh_CN: update DAMON index translation
+>   [PATCH v6 4/7] docs/zh_CN: update DAMON start translation
+>   [PATCH v6 5/7] docs/zh_CN: update DAMON usage translation
+>   [PATCH v6 6/7] docs/zh_CN: update DAMON reclaim translation
+>   [PATCH v6 7/7] docs/zh_CN: update DAMON LRU sort translation
 
-Thanks,
-Ahmed
+Maybe I can take a review tomorrow.
+
+>
+>   Needs review.
+>
+>   source: https://lore.kernel.org/linux-doc/20260708073246.1652828-1-doeh=
+yunbaek@gmail.com/
+>
+> * Jiandong Qiu 2026-07-06 2 commits
+>   [PATCH v3 0/2] docs/zh_CN: update translation of doc-guide/sphinx.rst
+>   [PATCH v3 1/2] docs/zh_CN: add process/changes.rst translation
+>   [PATCH v3 2/2] docs/zh_CN: update sphinx.rst translation
+>
+>   Waiting for response(s) to review comment(s). & Needs review.
+>
+>   cf. https://lore.kernel.org/linux-doc/ak1SG5mw7y2UZrvR@wyuan.org/
+>   source: https://lore.kernel.org/linux-doc/20260706151358.2103703-1-qiuj=
+iandong1998@gmail.com/
+>
+> * Yan Zhu (2026-06-12) 10 commits
+>   [not found] <cover.1781105672.git.zhuyan2015@qq.com>
+>   [PATCH 01/10] docs/zh_CN: add LSM/index Chinese translation
+>   [PATCH 02/10] docs/zh_CN: add LSM/apparmor Chinese translation
+>   [PATCH 03/10] docs/zh_CN: add LSM/LoadPin Chinese translation
+>   [PATCH 04/10] docs/zh_CN: add LSM/SELinux Chinese translation
+>   [PATCH 05/10] docs/zh_CN: add LSM/Smack Chinese translation
+>   [PATCH 06/10] docs/zh_CN: add LSM/tomoyo Chinese translation
+>   [PATCH 07/10] docs/zh_CN: add LSM/Yama Chinese translation
+>   [PATCH 08/10] docs/zh_CN: add LSM/SafeSetID Chinese translation
+>   [PATCH 09/10] docs/zh_CN: add LSM/ipe Chinese translation
+>   [PATCH 10/10] docs/zh_CN: add LSM/landlock Chinese translation
+>
+>   Needs review.
+>
+>   source: https://lore.kernel.org/linux-doc/tencent_7080BF6BB8F05936649DD=
+C091FFD8C45210A@qq.com/
+>   Note: cover letter missing on lore archive.
+>
+> * chengyaqiang (2026-05-22) 1 commit
+>   [PATCH] docs/zh_CN: fix KASAN SW_TAGS mode description
+>
+>   Reviewed by Dongliang and Zenghui, will merge to docs-next @alex ?
+>
+>   source: https://lore.kernel.org/linux-doc/20260522075735.2022734-1-chen=
+gyaqiang@chengyaqiang.com/
+>
+> * Haoyang Liu (2026-03-05) 1 commit
+>   [PATCH] docs/zh_CN: fix an inconsistent statement in dev-tools/testing-=
+overview
+>
+>   Expecting a reroll.
+>
+>   cf. https://lore.kernel.org/linux-doc/29bd0dbc-c6f9-43ce-b95f-4e787e3fe=
+9c3@gmail.com/
+>   source: https://lore.kernel.org/linux-doc/20260305192048.16405-1-ttttur=
+tleruss@gmail.com/
+>
+> -----------------------------------------------------------------------
+>
+> Okay, I have checked the 200 most recent messages on the mailing list,
+> going back to 15:09 UTC on February 25, 2026. If I have missed anything,
+> or I made a mistake somewhere, please let me know.
+>
+> As you may have noticed, I borrowed (stole) this idea from Junio C
+> Hamano. Sending this kind of message, somewhat like a weekly status
+> report, not only helps maintainers keep track of outstanding work, but
+> also lets contributors know the current status of their patches.
+
+As mentioned before, can we have a dashboard to see the status of
+patches in zh_CN/TW? This is more useful in my mind.
+
+>
+> More importantly, it gives newcomers an overview of the current state of
+> the project. New contributors can begin not only by submitting patches,
+> but also by reviewing patches already posted to the mailing list,
+> thereby learning how our workflow operates. This may also help reduce
+> the review burden on our friendly maintainers.
+>
+> I would like to try this kind of periodic report as an experimental
+> effort, with its frequency adjusted according to the size of the patch
+> backlog and the level of activity on the mailing list. What do you
+> think? Please feel free to make comments.
+
+I think this is fine since linux-doc or narrowly zh_CN/TW do not have
+many volumes of patches per day.
+
+>
+> By the way, I borrowed the subject line directly from Git's "What's
+> cooking in git.git". Does anyone have a better suggestion for the name? ;=
+-)
+
+fine with this title
+
+>
+> Thanks,
+> Weijie
+>
 
