@@ -1,478 +1,302 @@
-Return-Path: <linux-doc+bounces-96705-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96707-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id GEDyLp4PVmquygAAu9opvQ
-	(envelope-from <linux-doc+bounces-96705-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 12:29:50 +0200
+	id P6tkB5cSVmokywAAu9opvQ
+	(envelope-from <linux-doc+bounces-96707-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 12:42:31 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 17EF9753686
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 12:29:50 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E9CF7537CC
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 12:42:30 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b="V/LzB4T6";
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96705-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96705-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
+	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=sMMegLzS;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96707-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96707-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=reject) header.from=nvidia.com;
+	arc=reject ("cv is fail on i=2")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 666D5312AB52
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 10:26:57 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 4B80B300F0ED
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 10:42:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D71D8371860;
-	Tue, 14 Jul 2026 10:26:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BA23F37268B;
+	Tue, 14 Jul 2026 10:42:25 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from CH5PR02CU005.outbound.protection.outlook.com (mail-northcentralusazon11012010.outbound.protection.outlook.com [40.107.200.10])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 857E236F8F1
-	for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 10:26:53 +0000 (UTC)
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784024816; cv=none; b=nZZ8hEd3TvgeuKUM+1nb68qRslcHKQhivMsLZcUJDlAxcxz3shTj6iybhA/KIB3vVnLaX5/EKZy5XZzclSHH3B6Hj7tiCONowjl0vKTQ32IByhL3ezMqgXcas8LTWeRqpW0wxqAwoheIOtSg8tfCylS1OTNZy4psbDcmLvJ0TOM=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784024816; c=relaxed/simple;
-	bh=KzMdFmMkEjyTVbQdo5qxMsSz35GShfLsbOfMnA/mM8Q=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=W4KTOg5VOhjheKHonVwrNCi+MpZFIO8cO4Zg3iQwVWWmK1xtab4YBYPZoxVFkyeYb6VDnFjtMRhnRvmjHnKcJ+zCpJm1Q4QOClktbjkoBedOBiHrZmAF8DlnIHMSkPznQTSOBfo2ZTJ8UNbmxB3POJKI87okw8lWtzmriD1aXfA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=V/LzB4T6; arc=none smtp.client-ip=209.85.216.53
-Received: by mail-pj1-f53.google.com with SMTP id 98e67ed59e1d1-38dfe7eb825so746686a91.0
-        for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 03:26:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784024813; x=1784629613; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=bxKt5HdnMwoZFhM4EndwnhkPvbuKBGg/aH72DpuZpmE=;
-        b=V/LzB4T6Kurivlcsk/wrK8kGtNYcLkgn8CZ74EfEzdzWMuaMoB0wbTYPjFyR/1J3BJ
-         1jHg5HHjFI1Z9QWcQsPpUNsUhN7ADXi/h/bWsG2kT+p5duowx226pnnFL6qvntZF/EDt
-         Gpx1eom/zUavh077B0qHxgEHCr3bzQmXUb4Q4R1VbHfJMDCSP1w+vpoo5f1mmbC1ojY1
-         /XcpVo2VXEArjKHqk+jlq/7BYY0ZwhtZOtBlVQqsUvmpRHDyFH5ogVVOEmAViPlb68lm
-         HbgcmTVsLt5BrS31LSbDgDxCE2vg2YCBdQFmt4bwZ9fSInOOCkv9GiB6Tk0NcKf63kfm
-         2LFg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784024813; x=1784629613;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=bxKt5HdnMwoZFhM4EndwnhkPvbuKBGg/aH72DpuZpmE=;
-        b=PchBGaZDNp/PDmadrpNuV1ZWuxkMFIqaSJ416X0vZ2NryUEUVHxiyMtJUvlanFzI5Y
-         BhCegAYNOTWfdzA9KPyjSjB6kLEegBQppl1V513m3PNDVc+ayNgdnSnGKzTZJERIqoLV
-         xFLIN9pPYBSOgB0AHW1xm43ZUrioctla71GZrSR2zGTljeeaq5Pn2QvRA504ldlsNWPg
-         9SfwYQrL+W5Rxl5LdXxOVAN0Sqk1e7Y2lJORJbbCUhIm/ed4vP31Azc1ANU7XmtTvu2s
-         D4s06ZLFM9wKOI+2rhqoG6XoBoRMiPmc6sxCXIskEjB1vVSgNy4Baq/15rJoA886cjLb
-         /S3Q==
-X-Forwarded-Encrypted: i=1; AHgh+RqEhLk/KMFKY3c9w2ue0JoVXRSlTuT+uAkI6ypMgPGuqTKpngeMMDB1Rar8spEyu1vlDCdzc5YLCdM=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwOTsy1iPuVXgTTR1M7dt0QCwb6EWUwQNf1dWL+Yf9Ayrrdws2v
-	6eM8el/JiRRmw4vANFgZpHGhyX+eQlMNkALTNmDvRfHb0KxGWiv04FCTzCcojfM79rY=
-X-Gm-Gg: AfdE7clAspRPwFO1rh0b1v6IbZTDnKzsHdJe6OwBF/DUN7enph8TmfP5L8+ndIvD59e
-	nPxuChoziYth3m7ogHGntk3EKlJek8kTj8yAJQkBLEI/jgzdVCf0rA8PvPXwj/kmqFoYPg8HF4x
-	fxFVYY/hCGPX8RaOG2Finx5ytb3XOEg9hcaWpfApjKiSVp5TJu8qmdiFiXcCVuMOhJGnrdy6zAt
-	W1liKvaGpHZ+9nbzx+cJV8I9xldUlaEJr2PyoRIG8QaEM2htaf1BZj2dKRDBI8iQp5koAIndkjE
-	HqTmO+lcV3mYrdMK6CLMhg2dqty7pU8BCJZG2rSVGog8RqPwAM6lI8l1B8rh+8sKcqzf2J/q5Q7
-	v6B8H3f0qOvULgmV3DRPNCOBtW33L7gVBccu7eYueIGsyNY4kCmWJTcjpgfpPIJzaFNwsQ38JTr
-	vb3XBLiy+kyWg0Z+8dCdmAikpgV41s/vkPYaH7f5kxbiL4Zmw4uIvXj7KgOa+/tWiCAA==
-X-Received: by 2002:a17:90b:5583:b0:383:f52b:d616 with SMTP id 98e67ed59e1d1-38dc75e3a5fmr11433251a91.10.1784024812707;
-        Tue, 14 Jul 2026 03:26:52 -0700 (PDT)
-Received: from lappy (221x252x203x146.ap221.ftth.ucom.ne.jp. [221.252.203.146])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38e172cf625sm1264750a91.7.2026.07.14.03.26.51
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Jul 2026 03:26:52 -0700 (PDT)
-From: "Derek J. Clark" <derekjohn.clark@gmail.com>
-To: Jiri Kosina <jikos@kernel.org>,
-	Benjamin Tissoires <bentiss@kernel.org>
-Cc: "Pierre-Loup A . Griffais" <pgriffais@valvesoftware.com>,
-	Denis Benato <denis.benato@linux.dev>,
-	Zhouwang Huang <honjow311@gmail.com>,
-	"Derek J . Clark" <derekjohn.clark@gmail.com>,
-	linux-input@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v12 4/4] HID: hid-msi: Add Rumble Intensity Attributes
-Date: Tue, 14 Jul 2026 03:26:40 -0700
-Message-ID: <20260714102640.18075-5-derekjohn.clark@gmail.com>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260714102640.18075-1-derekjohn.clark@gmail.com>
-References: <20260714102640.18075-1-derekjohn.clark@gmail.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E14417A300;
+	Tue, 14 Jul 2026 10:42:23 +0000 (UTC)
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1784025745; cv=fail; b=Qs/Vl6ePH1BcQFTf3hmIyoyuPIX2AP8JWGv9KnnVgUMOFa0CLuXWCy230SdAyxTZhklmr/Skjj892DF2Fm0zkBFu9ssbECtCVYmyLZnY9W0ElZLQNPn7TjPWq29xrYtKG+U3mhLvVRPQ8PrhyoP1UYFM8+e0YMGSePSlAlubTjc=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1784025745; c=relaxed/simple;
+	bh=tDSIAleWQkrx2k3jRA9G3sco6Hxom6NwC8B/9kc9HX4=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=dHMHHkLXV8TD4uC+OMYupmZNbpabpAqQL1GHjdrpCp5mB2u0fUBm05AlhdrX6OVqf1WSpepxB0QRcQgyUlNM8ycue2ALYWEY+G/GHHiNLEF12tcfp8sjHtdfH6Nq/DqMU2zmrqB/1OZboyKFMYV9PUn7QYjlTdpAoLJl2nZ8xsw=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=sMMegLzS; arc=fail smtp.client-ip=40.107.200.10
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=lLF6kWpYQhHFtKUsZx2/x8XqkhDjVomj+WhIiLLrH7b2bPgSqc931hmDyOLEDGkK8Amw6FkPcKxK9ry4H9TXD0y+s2/b05KIwxSqs7pyTy8N+GfQ8MR0VKwS/kxzSMiRPxjqkqGgSFRcP8TACFFsLNvubXOhmgjXx58T0bjOUH+6J350/ICo8UgI+BB1o6+b5pASLt8uTLOV/B06xQZj+2P6PKAKqQD5t+ehJ9MYrkK3QSEDMLFPqVd8vgeBLqM1e2MmbDSOYaemys/siY6rJOV5trED/vu0BVJaWhTA7rue22YwFF/vYwkLHk52xD9LNwtPyzHdmH8oW6f4MaZLdg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=6nFGjx2hP82JEkaFIq8Q3IgCQ/KznPSMk0LX8YWYitQ=;
+ b=pI2E29pApB/lRC/6bo25mbfgCGPuOJY2cG3n27DXurJ0RvHu1aLp0O5DXvpEF7FHbqPEqIGbb6wANHDL31djXIx+Z8PtrR6iAe8JbwNz/nQpaNQwpsfNr/e8FN47O9hGH0RLuR1mPJfbJQoD/ujx7jnlkiWCs+4J0NNYWHq3kuFCaNCZcdMuENdqhgVHoE5JZVidxcfxvlRZejV4fWMwxIhs0k0iYso/WvTv7+IgptQ5VOwWpjIxAaCQ6qdt9X2h/lEcpTkYlhzXMRchTi/SvqXRmbdxq1OFH7Cjb3RGh0QTmo2BTp5ok2rg0WrywFFW45qnshrGJrc/imxj+YweKA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.118.233) smtp.rcpttodomain=arm.com smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=6nFGjx2hP82JEkaFIq8Q3IgCQ/KznPSMk0LX8YWYitQ=;
+ b=sMMegLzSJiazTggjx0hQMPRPwnFh46TyiQ6pXyvcHx0y4RYapTC8WHgfM6lzf+RitS19+//p2AlW1JvgsbGTtHz1I2JZKTLmejDkz/jSrBMYPQdIyKdYDRnKbIQhGXnk5+kVf5zL4KbqdxTSs1yvhTb4OIyvyGbPMv+zEYhr4lSl+P9QzHxXftNbirLymYl7ojSW9+4GXsuYaze1jDFWQktLQsSHqP/VO9nX91QEzV64fi/l/gk7GiPO7EgLGsrAlkV5v9LgghLZsKcHka5ihwGnCcNJvonaq0uUt9WLHK3SC0kE1mnQFfqgQA7hVsxWHamNum9/QR2RuYc22l95zw==
+Received: from SJ0PR05CA0176.namprd05.prod.outlook.com (2603:10b6:a03:339::31)
+ by DS0PR12MB9275.namprd12.prod.outlook.com (2603:10b6:8:1be::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.202.19; Tue, 14 Jul
+ 2026 10:42:17 +0000
+Received: from SJ5PEPF000001D3.namprd05.prod.outlook.com
+ (2603:10b6:a03:339:cafe::ae) by SJ0PR05CA0176.outlook.office365.com
+ (2603:10b6:a03:339::31) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.223.9 via Frontend Transport; Tue, 14
+ Jul 2026 10:42:17 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.118.233)
+ smtp.mailfrom=nvidia.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.118.233 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.118.233; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.118.233) by
+ SJ5PEPF000001D3.mail.protection.outlook.com (10.167.242.55) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.223.9 via Frontend Transport; Tue, 14 Jul 2026 10:42:16 +0000
+Received: from drhqmail201.nvidia.com (10.126.190.180) by mail.nvidia.com
+ (10.127.129.6) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 14 Jul
+ 2026 03:42:04 -0700
+Received: from drhqmail202.nvidia.com (10.126.190.181) by
+ drhqmail201.nvidia.com (10.126.190.180) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.20; Tue, 14 Jul 2026 03:42:04 -0700
+Received: from build-amhetre-focal-20250829.internal (10.127.8.12) by
+ mail.nvidia.com (10.126.190.181) with Microsoft SMTP Server id 15.2.2562.20
+ via Frontend Transport; Tue, 14 Jul 2026 03:42:04 -0700
+From: Ashish Mhetre <amhetre@nvidia.com>
+To: <catalin.marinas@arm.com>, <will@kernel.org>, <corbet@lwn.net>,
+	<skhan@linuxfoundation.org>, <robin.murphy@arm.com>, <joro@8bytes.org>,
+	<nicolinc@nvidia.com>, <jgg@ziepe.ca>
+CC: <linux-arm-kernel@lists.infradead.org>, <linux-doc@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <iommu@lists.linux.dev>,
+	<linux-tegra@vger.kernel.org>, Ashish Mhetre <amhetre@nvidia.com>
+Subject: [PATCH v7 0/3] iommu/arm-smmu-v3: Tegra264 invalidation workaround
+Date: Tue, 14 Jul 2026 10:41:59 +0000
+Message-ID: <20260714104202.1664187-1-amhetre@nvidia.com>
+X-Mailer: git-send-email 2.50.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+X-NVConfidentiality: public
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-NV-OnPremToCloud: ExternallySecured
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001D3:EE_|DS0PR12MB9275:EE_
+X-MS-Office365-Filtering-Correlation-Id: c22f5fd3-4acb-49b3-cf3a-08dee19492f0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700016|23010399003|7416014|376014|1800799024|82310400026|6133799003|56012099006|11063799006|18002099003|3023799007;
+X-Microsoft-Antispam-Message-Info:
+	WqddxghuX3ND3gXF4jqCT07qKV+hS4XTG8LjATs/UvZ0SZNfLTkH/3FTyqrKs53mdxgk7EMe0NEcN4Exdevi9harH4btF/YzZ9Ht32C6dBhZwtIesneh++jjf/RG9/Zg7i9uNQIDY0CVb+VoIM3vctu4roKdlukE4J11g4ezNUTSUYEXq51bNxMy3ndDxiJPgBRn3t55OcQiJmtUryGQQB4hYKCX9tl3ZeGA1c0ij/j4pzp0/fF4R9hT76qOXze41xcHhI/pQYz9qNzc+PZKhAp6e3GwEC8ishqPCkTvnjA2lGRou+P2wKWid++zz8Ziz+BYA94F1t47eOr7HrTuG/U7/pgu2q2lilCo+SqzfPZx5+mHtbS+aOs37wFPkG3YGvcHEFteyel4O+Fo8dDNASdkEdVYgJ1fFJ1grUbfG+B9uEKdfFZQBw7xTKCmCuboAgTOt4a0AE5fCqWM13ujCw4aWXwX7naKxdOtRw6Mw1+1u+thViy0M4SlAGYtZ2TG7c22CTFtQXp2llvJq3qjf2cL7jBDMO0t6Qq+Xk8EBOswZuQkM9JFCTtfbEemGyiDFoM4kC4dFYUYiVFMNhrGCF8svyqGlXL93p0sWpsRRBUw0LxpR03UBmJ+4MBllnzQBl0YJT5R1fOU8hS6mrEM0EXJe5MgNBk+4M2eZeFuAAHMDDSXuVRaz5OZvlJenwFiE3xuseaA3ZVqgYHW26pymw==
+X-Forefront-Antispam-Report:
+	CIP:216.228.118.233;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc7edge2.nvidia.com;CAT:NONE;SFS:(13230040)(36860700016)(23010399003)(7416014)(376014)(1800799024)(82310400026)(6133799003)(56012099006)(11063799006)(18002099003)(3023799007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	IJ6d5PuvewapO8lLZyTqMKLfWtMeJ9xCLfbz27J7hzPhhZRhegB15D8PKmDtvWjT5LLday+t3YBWI4NVYrIOaWZckTq2JzcajO8g9IgVQYo5qWrfu3q/dcn3HaN6cVEMCsl4YC4JfIsyn4yDA/thaK4ZpulohusMbVwzxWvKoiZjFAXU+QEMrCHOs8ZnVNTnW+OymfVM7QOeHk+x9fZepmNdECt0r33zmLb7xCfi65JvGvhihPrJTA921G08jVoMlFknKGqlQBE0yyf/m9tLH2WvUU+F9xp6QFT8FriiBiy9r6Ba3oJIFgFUVg87xOmH0dEmvp9ZqjbPvDbRPeo+peZhFRhg+f1yS0XAJVdo+tQxAJU9EbNJ+tH7yInu94rEZPMNDnZGJoP6kEdPClUgLFzUWY9uJeQoFdp+0XKsPKbZFMFW+9QjQ2+FA2Lmazjr
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jul 2026 10:42:16.9698
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c22f5fd3-4acb-49b3-cf3a-08dee19492f0
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.118.233];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SJ5PEPF000001D3.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB9275
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+X-Spamd-Result: default: False [-5.66 / 15.00];
+	WHITELIST_DMARC(-7.00)[nvidia.com:D:+];
+	MID_CONTAINS_FROM(1.00)[];
+	ARC_REJECT(1.00)[cv is fail on i=2];
 	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[valvesoftware.com,linux.dev,gmail.com,vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	TAGGED_FROM(0.00)[bounces-96705-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	TAGGED_FROM(0.00)[bounces-96707-lists,linux-doc=lfdr.de];
+	FORGED_SENDER(0.00)[amhetre@nvidia.com,linux-doc@vger.kernel.org];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:jikos@kernel.org,m:bentiss@kernel.org,m:pgriffais@valvesoftware.com,m:denis.benato@linux.dev,m:honjow311@gmail.com,m:derekjohn.clark@gmail.com,m:linux-input@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:derekjohnclark@gmail.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[derekjohnclark@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[derekjohnclark@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:catalin.marinas@arm.com,m:will@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:robin.murphy@arm.com,m:joro@8bytes.org,m:nicolinc@nvidia.com,m:jgg@ziepe.ca,m:linux-arm-kernel@lists.infradead.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:iommu@lists.linux.dev,m:linux-tegra@vger.kernel.org,m:amhetre@nvidia.com,s:lists@lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[amhetre@nvidia.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[Nvidia.com:+];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,msgid.link:url,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	RCVD_COUNT_SEVEN(0.00)[9]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 17EF9753686
+X-Rspamd-Queue-Id: 1E9CF7537CC
 
-Adds intensity adjustment for the left and right rumble motors.
+Nvidia Tegra264 SMMUs are affected by an erratum where a TLB entry can
+survive an invalidation that races with concurrent traffic targeting
+the same entry. The hardware-recommended software workaround is to
+issue every CFGI/TLBI command (each followed by CMD_SYNC) twice.
+The second issue must execute only after the first issue's CMD_SYNC
+has completed, giving the sequence:
 
-Claude was used during the reverse-engineering data gathering for this
-feature done by Zhouwang Huang. As the code had already been affected,
-I used Claude to create the initial framing for the feature, then did
-manual cleanup of the _show and _store functions afterwards to fix bugs
-and keep the coding style consistent. Claude was also used as an initial
-reviewer of this patch.
+    TLBI/CFGI ... CMD_SYNC TLBI/CFGI ... CMD_SYNC
 
-Assisted-by: Claude:claude-sonnet-4-6
-Co-developed-by: Zhouwang Huang <honjow311@gmail.com>
-Signed-off-by: Zhouwang Huang <honjow311@gmail.com>
-Link: https://patch.msgid.link/20260529072111.7565-5-derekjohn.clark@gmail.com
-Signed-off-by: Derek J. Clark <derekjohn.clark@gmail.com>
----
-v12:
-  - On address mismatch, assume stale message return and keep waiting for
-    correct message.
-  - Use spinlock_irqsave for raw_event-reachable locks since completion
-    context isn't guaranteed softirq-only across all HCDs.
-v11:
-  - Restore dropped changes from v10.
-v7:
-  - Match on write address for rumble reports to prevent late ACK
-    from causing synchronization errors.
-  - Use spinlock for read/write profile_pending.
-  - Use smp_[store_release|load_acquire] pattern for checking
-    gamepad_registered to avoid possible races during teardown.
-  - Use struct for rumble reports.
-v6:
-  - Make all timeouts 25ms to ensure at least 2 jiffies in a 100Hz
-    config.
-  - Add spinlock_irqsave for read/write access on rumble_intensity
-    variables.
-  - Gate all attribute show/store functions with gamepad_registered.
-v5:
-  - Remove mkey related changes.
-v2:
-  - Use pending_profile and sync to rom mutexes.
----
- drivers/hid/hid-msi.c | 202 +++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 201 insertions(+), 1 deletion(-)
+ATC_INV is not affected and must not be doubled.
 
-diff --git a/drivers/hid/hid-msi.c b/drivers/hid/hid-msi.c
-index ddb64adb08b9..b78e5bd1cc9e 100644
---- a/drivers/hid/hid-msi.c
-+++ b/drivers/hid/hid-msi.c
-@@ -79,6 +79,8 @@ enum claw_profile_ack_pending {
- 	CLAW_M1_PENDING,
- 	CLAW_M2_PENDING,
- 	CLAW_RGB_PENDING,
-+	CLAW_RUMBLE_LEFT_PENDING,
-+	CLAW_RUMBLE_RIGHT_PENDING,
- };
- 
- enum claw_key_index {
-@@ -271,6 +273,11 @@ static const u16 button_mapping_addr_new[] = {
- static const u16 rgb_addr_old = 0x01fa;
- static const u16 rgb_addr_new = 0x024a;
- 
-+static const u16 rumble_addr[] = {
-+	0x0022,  /* left  */
-+	0x0023,  /* right */
-+};
-+
- struct claw_command_report {
- 	u8 report_id;
- 	u8 padding[2];
-@@ -313,6 +320,12 @@ struct claw_rgb_report {
- 	struct rgb_frame zone_data;
- } __packed;
- 
-+struct claw_rumble_report {
-+	struct claw_profile_report;
-+	u8 padding;
-+	u8 intensity;
-+} __packed;
-+
- struct claw_drvdata {
- 	/* MCU General Variables */
- 	enum claw_profile_ack_pending profile_pending;
-@@ -338,8 +351,12 @@ struct claw_drvdata {
- 	enum claw_gamepad_mode_index gamepad_mode;
- 	u8 m1_codes[CLAW_KEYS_MAX];
- 	u8 m2_codes[CLAW_KEYS_MAX];
--	spinlock_t mode_lock; /* Lock for mode data read/write */
-+	u8 rumble_intensity_right;
-+	u8 rumble_intensity_left;
- 	const u16 *bmap_addr;
-+	spinlock_t rumble_lock; /* lock for rumble_intensity read/write */
-+	spinlock_t mode_lock; /* Lock for mode data read/write */
-+	bool rumble_support;
- 	bool gp_registered;
- 	bool bmap_support;
- 
-@@ -388,6 +405,7 @@ static int claw_gamepad_mode_event(struct claw_drvdata *drvdata,
- static int claw_profile_event(struct claw_drvdata *drvdata, struct claw_command_report *cmd_rep)
- {
- 	enum claw_profile_ack_pending profile;
-+	struct claw_rumble_report *rumble;
- 	struct claw_mkey_report *mkeys;
- 	struct claw_rgb_report *frame;
- 	u16 rgb_addr, read_addr;
-@@ -441,6 +459,20 @@ static int claw_profile_event(struct claw_drvdata *drvdata, struct claw_command_
- 		}
- 
- 		break;
-+	case CLAW_RUMBLE_LEFT_PENDING:
-+		rumble = (struct claw_rumble_report *)cmd_rep->data;
-+		if (be16_to_cpu(rumble->read_addr) != rumble_addr[0])
-+			return -EAGAIN;
-+		scoped_guard(spinlock_irqsave, &drvdata->rumble_lock)
-+			drvdata->rumble_intensity_left = rumble->intensity;
-+		break;
-+	case CLAW_RUMBLE_RIGHT_PENDING:
-+		rumble = (struct claw_rumble_report *)cmd_rep->data;
-+		if (be16_to_cpu(rumble->read_addr) != rumble_addr[1])
-+			return -EAGAIN;
-+		scoped_guard(spinlock_irqsave, &drvdata->rumble_lock)
-+			drvdata->rumble_intensity_right = rumble->intensity;
-+		break;
- 	default:
- 		dev_dbg(&drvdata->hdev->dev,
- 			"Got profile event without changes pending from command: %x\n",
-@@ -988,6 +1020,162 @@ static ssize_t button_mapping_options_show(struct device *dev,
- }
- static DEVICE_ATTR_RO(button_mapping_options);
- 
-+static ssize_t rumble_intensity_left_store(struct device *dev,
-+					   struct device_attribute *attr,
-+					   const char *buf, size_t count)
-+{
-+	struct claw_rumble_report report = { {0x01, cpu_to_be16(rumble_addr[0])}, 0x01 };
-+	struct hid_device *hdev = to_hid_device(dev);
-+	struct claw_drvdata *drvdata = hid_get_drvdata(hdev);
-+	u8 val;
-+	int ret;
-+
-+	scoped_guard(spinlock_irqsave, &drvdata->registration_lock) {
-+		/* Pairs with smp_store_release from cfg_setup_fn in system_wq context */
-+		if (!smp_load_acquire(&drvdata->gp_registered))
-+			return -ENODEV;
-+	}
-+
-+	ret = kstrtou8(buf, 10, &val);
-+	if (ret)
-+		return ret;
-+
-+	if (val > 100)
-+		return -EINVAL;
-+
-+	report.intensity = val;
-+
-+	guard(mutex)(&drvdata->rom_mutex);
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_WRITE_PROFILE_DATA,
-+				    (u8 *)&report, sizeof(report), 25);
-+	if (ret)
-+		return ret;
-+
-+	/* MCU will not send ACK until the USB transaction completes. ACK is sent
-+	 * immediately after and will hit the stale state machine, before the next
-+	 * command re-arms the state machine. Timeout 0 ensures no deadlock waiting
-+	 * for ACK that ill never come.
-+	 */
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_SYNC_TO_ROM, NULL, 0, 0);
-+	if (ret)
-+		return ret;
-+
-+	return count;
-+}
-+
-+static ssize_t rumble_intensity_left_show(struct device *dev,
-+					  struct device_attribute *attr,
-+					  char *buf)
-+{
-+	struct claw_rumble_report report = { {0x01, cpu_to_be16(rumble_addr[0])}, 0x01 };
-+	struct hid_device *hdev = to_hid_device(dev);
-+	struct claw_drvdata *drvdata = hid_get_drvdata(hdev);
-+	int ret;
-+	u8 val;
-+
-+	scoped_guard(spinlock_irqsave, &drvdata->registration_lock) {
-+		/* Pairs with smp_store_release from cfg_setup_fn in system_wq context */
-+		if (!smp_load_acquire(&drvdata->gp_registered))
-+			return -ENODEV;
-+	}
-+
-+	guard(mutex)(&drvdata->profile_mutex);
-+	scoped_guard(spinlock_irqsave, &drvdata->profile_lock)
-+		drvdata->profile_pending = CLAW_RUMBLE_LEFT_PENDING;
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_READ_PROFILE,
-+				    (u8 *)&report, sizeof(report), 25);
-+	if (ret)
-+		return ret;
-+
-+	scoped_guard(spinlock_irqsave, &drvdata->rumble_lock)
-+		val = drvdata->rumble_intensity_left;
-+
-+	return sysfs_emit(buf, "%u\n", val);
-+}
-+static DEVICE_ATTR_RW(rumble_intensity_left);
-+
-+static ssize_t rumble_intensity_right_store(struct device *dev,
-+					    struct device_attribute *attr,
-+					    const char *buf, size_t count)
-+{
-+	struct claw_rumble_report report = { {0x01, cpu_to_be16(rumble_addr[1])}, 0x01 };
-+	struct hid_device *hdev = to_hid_device(dev);
-+	struct claw_drvdata *drvdata = hid_get_drvdata(hdev);
-+	u8 val;
-+	int ret;
-+
-+	scoped_guard(spinlock_irqsave, &drvdata->registration_lock) {
-+		/* Pairs with smp_store_release from cfg_setup_fn in system_wq context */
-+		if (!smp_load_acquire(&drvdata->gp_registered))
-+			return -ENODEV;
-+	}
-+
-+	ret = kstrtou8(buf, 10, &val);
-+	if (ret)
-+		return ret;
-+
-+	if (val > 100)
-+		return -EINVAL;
-+
-+	report.intensity = val;
-+
-+	guard(mutex)(&drvdata->rom_mutex);
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_WRITE_PROFILE_DATA,
-+				    (u8 *)&report, sizeof(report), 25);
-+	if (ret)
-+		return ret;
-+
-+	/* MCU will not send ACK until the USB transaction completes. ACK is sent
-+	 * immediately after and will hit the stale state machine, before the next
-+	 * command re-arms the state machine. Timeout 0 ensures no deadlock waiting
-+	 * for ACK that ill never come.
-+	 */
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_SYNC_TO_ROM, NULL, 0, 0);
-+	if (ret)
-+		return ret;
-+
-+	return count;
-+}
-+
-+static ssize_t rumble_intensity_right_show(struct device *dev,
-+					   struct device_attribute *attr,
-+					   char *buf)
-+{
-+	struct claw_rumble_report report = { {0x01, cpu_to_be16(rumble_addr[1])}, 0x01 };
-+	struct hid_device *hdev = to_hid_device(dev);
-+	struct claw_drvdata *drvdata = hid_get_drvdata(hdev);
-+	int ret;
-+	u8 val;
-+
-+	scoped_guard(spinlock_irqsave, &drvdata->registration_lock) {
-+		/* Pairs with smp_store_release from cfg_setup_fn in system_wq context */
-+		if (!smp_load_acquire(&drvdata->gp_registered))
-+			return -ENODEV;
-+	}
-+
-+	guard(mutex)(&drvdata->profile_mutex);
-+	scoped_guard(spinlock_irqsave, &drvdata->profile_lock)
-+		drvdata->profile_pending = CLAW_RUMBLE_RIGHT_PENDING;
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_READ_PROFILE,
-+				    (u8 *)&report, sizeof(report), 25);
-+	if (ret)
-+		return ret;
-+
-+	scoped_guard(spinlock_irqsave, &drvdata->rumble_lock)
-+		val = drvdata->rumble_intensity_right;
-+
-+	return sysfs_emit(buf, "%u\n", val);
-+}
-+static DEVICE_ATTR_RW(rumble_intensity_right);
-+
-+static ssize_t rumble_intensity_range_show(struct device *dev,
-+					   struct device_attribute *attr,
-+					   char *buf)
-+{
-+	return sysfs_emit(buf, "0-100\n");
-+}
-+static DEVICE_ATTR_RO(rumble_intensity_range);
-+
- static umode_t claw_gamepad_attr_is_visible(struct kobject *kobj, struct attribute *attr,
- 					    int n)
- {
-@@ -1008,6 +1196,12 @@ static umode_t claw_gamepad_attr_is_visible(struct kobject *kobj, struct attribu
- 	    attr == &dev_attr_reset.attr)
- 		return attr->mode;
- 
-+	/* Hide rumble attrs if not supported */
-+	if (attr == &dev_attr_rumble_intensity_left.attr ||
-+	    attr == &dev_attr_rumble_intensity_right.attr ||
-+	    attr == &dev_attr_rumble_intensity_range.attr)
-+		return drvdata->rumble_support ? attr->mode : 0;
-+
- 	/* Hide button mapping attrs if it isn't supported */
- 	return drvdata->bmap_support ? attr->mode : 0;
- }
-@@ -1021,6 +1215,9 @@ static struct attribute *claw_gamepad_attrs[] = {
- 	&dev_attr_mkeys_function.attr,
- 	&dev_attr_mkeys_function_index.attr,
- 	&dev_attr_reset.attr,
-+	&dev_attr_rumble_intensity_left.attr,
-+	&dev_attr_rumble_intensity_right.attr,
-+	&dev_attr_rumble_intensity_range.attr,
- 	NULL,
- };
- 
-@@ -1600,6 +1797,7 @@ static void claw_features_supported(struct claw_drvdata *drvdata)
- 		drvdata->bmap_support = true;
- 		if (minor >= 0x66) {
- 			drvdata->bmap_addr = button_mapping_addr_new;
-+			drvdata->rumble_support = true;
- 			drvdata->rgb_addr = rgb_addr_new;
- 		} else {
- 			drvdata->bmap_addr = button_mapping_addr_old;
-@@ -1611,6 +1809,7 @@ static void claw_features_supported(struct claw_drvdata *drvdata)
- 	if ((major == 0x02 && minor >= 0x17) || major >= 0x03) {
- 		drvdata->bmap_support = true;
- 		drvdata->bmap_addr = button_mapping_addr_new;
-+		drvdata->rumble_support = true;
- 		drvdata->rgb_addr = rgb_addr_new;
- 		return;
- 	}
-@@ -1661,6 +1860,7 @@ static int claw_probe(struct hid_device *hdev, u8 ep)
- 	spin_lock_init(&drvdata->mode_lock);
- 	spin_lock_init(&drvdata->profile_lock);
- 	spin_lock_init(&drvdata->frame_lock);
-+	spin_lock_init(&drvdata->rumble_lock);
- 	init_completion(&drvdata->send_cmd_complete);
- 	INIT_DELAYED_WORK(&drvdata->cfg_resume, &cfg_resume_fn);
- 	INIT_DELAYED_WORK(&drvdata->cfg_setup, &cfg_setup_fn);
+The erratum is not flagged by any SMMUv3 IDR/IIDR register, so it
+cannot be detected from hardware ID. Tegra264 is device-tree-only
+(no ACPI/IORT support), so detection is purely by compatible string.
+
+This series is structured as a small refactor + infrastructure + enable
+sequence so that each step is reviewable in isolation:
+
+ 1/3 Pure refactor (no functional change): lift the existing
+     force-sync conditions out of arm_smmu_cmdq_batch_add_cmd_p()
+     into a new arm_smmu_cmdq_batch_force_sync() helper, so that
+     adding another condition (in patch 2) is a one-line addition.
+     Authored by Nicolin Chen.
+
+ 2/3 Add the workaround infrastructure without enabling it. Defines
+     the file-local arm_smmu_erratum_repeat_tlbi_cfgi_key static key
+     with an inline erratum description, the shared
+     arm_smmu_erratum_cmd_needs_repeating() predicate, the
+     arm_smmu_cmdq_issue_cmdlist() wrapper that can re-issue matching
+     cmdlists, the batch-helper force-sync condition, and the iommufd
+     batching split for mixed command classes.
+
+ 3/3 Enable the workaround for the existing "nvidia,tegra264-smmu"
+     compatible and document the erratum in silicon-errata.rst.
+
+The series applies cleanly on linux-next/master (base-commit below).
+
+Changes since v6:
+ - Add #include <linux/jump_label.h> now that the static key is
+   defined in arm-smmu-v3.c.
+ - Drop the unused smmu parameter from arm_vsmmu_can_batch_cmd().
+ - Expand the arm_smmu_cmdq_batch_force_sync() comment to note that
+   batches never mix CFGI/TLBI with other commands, so checking
+   cmds[0] alone is enough.
+ - Note in 3/3 that a guest kernel enabling CMDQV on Tegra264 must
+   also apply this workaround, since guest-level VCMDQs issue
+   commands directly to the hardware.
+ - Carry Reviewed-by: Nicolin Chen on 2/3 and 3/3.
+
+Changes since v5:
+ - Move arm_smmu_erratum_cmd_needs_repeating() into arm-smmu-v3.c
+   and leave a declaration-only stub in arm-smmu-v3.h. Make
+   arm_smmu_erratum_repeat_tlbi_cfgi_key file-local static.
+ - Add an inline erratum/workaround description at the static key,
+   referenced from arm_smmu_cmdq_batch_force_sync().
+ - Fix (rather than drop) the misleading !n comment above
+   arm_smmu_cmdq_issue_cmdlist(); keep the defensive !n guard.
+ - Remove the unused smmu parameter from the predicate.
+ - Tweak 2/3 commit-message wording ("commit" vs "patch").
+
+Changes since v4:
+ - Drop ARM_SMMU_OPT_REPEAT_TLBI_CFGI entirely: the option bit was
+   set and read on the exact same "nvidia,tegra264-smmu" compatible
+   as the static key, so it added no per-instance signal that the
+   static key did not already carry. The predicate now gates purely
+   on arm_smmu_erratum_repeat_tlbi_cfgi_key.
+ - Reorder the series so the compatible-string detection lands
+   last, once all the infrastructure exists:
+     1/3  factor out force_sync helper (unchanged)
+     2/3  add static key + WAR functions (no functional change)
+     3/3  enable the key on nvidia,tegra264-smmu + silicon-errata
+   Split the old v4 "Detect" and "Issue twice" patches accordingly.
+ - Update the /* See ARM_SMMU_OPT_REPEAT_TLBI_CFGI */ comment inside
+   arm_smmu_cmdq_batch_force_sync() to reference the static key
+   description instead.
+
+Changes since v3:
+ - Drop the cmds->num == 0 early-return so the refactor is
+   truly "no functional change".
+ - Rename ARM_SMMU_OPT_TLBI_TWICE -> ARM_SMMU_OPT_REPEAT_TLBI_CFGI
+   and rephrase its kdoc to be hardware-agnostic.
+ - Rename arm_smmu_cmd_needs_tlbi_twice() ->
+   arm_smmu_erratum_cmd_needs_repeating() and drop the kdoc
+   above it.
+ - Replace the explicit opcode switch with a single range check
+   opcode >= CMDQ_OP_CFGI_STE && opcode < CMDQ_OP_ATC_INV.
+ - Introduce arm_smmu_erratum_repeat_tlbi_cfgi_key static key:
+   the predicate gates on it first so unaffected kernels pay
+   only a single static_branch_unlikely() check.
+ - Drop the verbose Tegra264-specific comments above
+   arm_vsmmu_can_batch_cmd() and inside the batch helper.
+ - Document the erratum in
+   Documentation/arch/arm64/silicon-errata.rst.
+ - Guard the repeat path in arm_smmu_cmdq_issue_cmdlist() with
+   an n > 0 check so cmds[0] is never inspected on an empty
+   cmdlist.
+ - Drop the carried Reviewed-by tags now that the patch
+   shape has changed; re-review appreciated.
+
+Changes since v2:
+ - Split into a 3-patch series (refactor / detect / apply) to keep
+   each step small and bisectable.
+ - Move the classifier to arm-smmu-v3.h as static inline so the
+   iommufd file can share it.
+ - Add arm_vsmmu_can_batch_cmd() to split iommufd batches at
+   "needs repeating" transitions so the per-batch decision based
+   on the first command stays correct under mixed user input.
+ - Spell out in the commit message why detection is via DT and
+   not via IIDR/ACPI.
+
+Changes since v1:
+ - Detect the erratum from the existing "nvidia,tegra264-smmu"
+   compatible instead of adding a new property.
+ - Centralise the doubling at the CMDQ submission layer and only
+   apply it to CFGI/TLBI (not ATC_INV).
+ - Drop the binding/dtsi patches accordingly.
+
+Ashish Mhetre (2):
+  iommu/arm-smmu-v3: Introduce CFGI/TLBI-repeat workaround
+    infrastructure
+  iommu/arm-smmu-v3: Enable CFGI/TLBI-repeat workaround on Tegra264
+
+Nicolin Chen (1):
+  iommu/arm-smmu-v3: Factor out CMDQ batch force-sync conditions
+
+ Documentation/arch/arm64/silicon-errata.rst   |  2 +
+ .../arm/arm-smmu-v3/arm-smmu-v3-iommufd.c     | 14 +++-
+ drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c   | 84 ++++++++++++++++---
+ drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.h   |  1 +
+ 4 files changed, 89 insertions(+), 12 deletions(-)
+
+
+base-commit: bee763d5f341b99cf472afeb508d4988f62a6ca1
 -- 
-2.54.0
+2.50.1
 
 
