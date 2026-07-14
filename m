@@ -1,180 +1,173 @@
-Return-Path: <linux-doc+bounces-96805-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96804-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 4nt/A2p6Vmrq6gAAu9opvQ
-	(envelope-from <linux-doc+bounces-96805-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 20:05:30 +0200
+	id JplNHqh4VmrF6QAAu9opvQ
+	(envelope-from <linux-doc+bounces-96804-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 19:58:00 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 87CF2757B53
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 20:05:29 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 69A32757AB1
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 19:57:59 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=ROUWKxm2;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96805-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-96805-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
-	arc=pass ("subspace.kernel.org:s=arc-20240116:i=2")
+	dkim=pass header.d=linux-foundation.org header.s=korg header.b=Del5tMhz;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96804-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-96804-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=none;
+	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 00BBA302B25D
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 18:05:29 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 74CB1300B0BA
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 17:57:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B7ADB32ED54;
-	Tue, 14 Jul 2026 18:05:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1F228331A43;
+	Tue, 14 Jul 2026 17:57:55 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com [209.85.160.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70F242857EA
-	for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 18:05:25 +0000 (UTC)
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784052326; cv=pass; b=TtSEmV44szenBtOGBcXaBtamxt+hwN3YJl1gzJD7Fry+r1nEsQLRylpiMZwwotJRenonuvku+aYrDYh2X8VVp8KBxhFVFagNgrWpaSZ0aBz/nGQjcEsoV6nuK1ceCRFWKJoGMcOCdwb/BGWiGErJ5hX5804Pg1IfMcceGtCDdK0=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784052326; c=relaxed/simple;
-	bh=cx+fxysmNpIgRvDNQTV/xrnk8HRIU1i3r18wZkxxdk8=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=so0+Od2hcK6M8Ii8oEIphESXEM6e1VBwau2zdVfQJY5XVR7G3ivyYeHQ7VbQny3zfCbGlT2ZrOWyEB4cjlc5+zgnoTuNzybKjq9GF2ufy8neydDLoIu98/YhcwZWwbxjNzDG72PuU++S7NWc8g/Hle+KoJDDGxCo4iXGk5Nrh4g=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ROUWKxm2; arc=pass smtp.client-ip=209.85.160.178
-Received: by mail-qt1-f178.google.com with SMTP id d75a77b69052e-51c72a9cd5dso6346071cf.2
-        for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 11:05:25 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784052324; cv=none;
-        d=google.com; s=arc-20260327;
-        b=p0XMGnhO0sxp0iVDVmLVgXQFoh5p22I+XQyGhKjVEG6L6liQmzU0GiXWR93EUSPOG0
-         Jo3TdGq2SuZgJ7IR2iCooPayjJQsUlYSAiEDOm32ppAb3vxVBxpw0NNA8Vj+yoSp6K8F
-         JY4j/KLuQq+V+IkT+/RAUYPt1ZPHzdcDx/Dgu/gvLCUZWxud7UBditvxOGm2x9/ffCLF
-         07wUcULaNxRXWoayB222jUxTLdnSeWzi8YGTX8sgHyZrnwHj1HyDchKgaT0BT13KltMn
-         bdnKaj2S+ncnuacBerRfvWShlg6GwtAx1LskaeSwbIzMUcgKlaq3DodcUuChZbo65bRv
-         /i8A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=cx+fxysmNpIgRvDNQTV/xrnk8HRIU1i3r18wZkxxdk8=;
-        fh=Uf3OcKFJxnJ5YgBNaGDCVpLLO+7WstTMTBUXzBgGHa8=;
-        b=Un37dlMnlKKAQOIVkVggERNuBR2t4chEJ/kLCwQT0jbDxRfEXDj+GGkSZHmNuAmWms
-         u+9n+/nxLroJQTFBk26AE71vlnt6HbCJAuYI/YIHMJdgS58LUSdv59/GPLE/oAI5YliV
-         niBGB/yau2uAZbFxhGZJuqelSC5+Jg7h4erHJmevs4iPcdfYDXC+MmYF1kx8W+YXmGQf
-         MNxpMpJLinRpwzUxdjziLSUipZe0xE8XR7257cgFRDgBlmv1Mr536DM9KFtGpEiIOv3u
-         vxK22qC6cCEKoGFVn4ObiwFqq5+vLD5IlAVquH+eoVrXWEEh5Fu0I8qROUtQon53XBs3
-         Wenw==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C880832E757;
+	Tue, 14 Jul 2026 17:57:53 +0000 (UTC)
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1784051875; cv=none; b=YhFTKcrSuH1Sg+BcUTonc9P7Q+A+2CgTzL+QSOvUTgm7zEwmr+CVJQMnabk3kFRnwey7EEEUzRGlOY0UuE6U+LIGt93IaqyX5wyGr0hK3P9KOcqo24O+mz+xxZcZrsXxtHnL4h1sQXvL0MEfcmxkCr8NQPI3ZtmHeb4XTlluvro=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1784051875; c=relaxed/simple;
+	bh=OI3JlDuLY07U0gR/Ke0Vick6BYegbcgNSuIJ8n4P2Dw=;
+	h=Date:From:To:Cc:Subject:Message-Id:In-Reply-To:References:
+	 Mime-Version:Content-Type; b=oImAZL7MkL3ZHIjOrQob+aaLlNhb8WxVcI6C1Fgdlc6tTbzbXiwxPkRRc2PgMbb3mAeWQL1+vRJdYcuIwMcMmKhKMOPasKp2+GA/UZrHZgCRO//TRpjcJ84TQwOvcstqnCqSmD+pgYyJw5skmybJx811Aff5VdsZ2lVddMSXb6A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b=Del5tMhz; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 234151F000E9;
+	Tue, 14 Jul 2026 17:57:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784052324; x=1784657124; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=cx+fxysmNpIgRvDNQTV/xrnk8HRIU1i3r18wZkxxdk8=;
-        b=ROUWKxm2vLYPiQlrRNE3Zj1E2mdsprHrurNujQvc5gYb6VcjGtkJcXvqinDURtweRi
-         4uNB60VLZv+Le8n+2CGakta7J5dwzzIJUZvAcdoZgobCFJxlx83HmYLY41nfPj1M3aKi
-         Ylv4+v0IGBpAcH4H2Rx7JKI8qOL9qIMt7w+/Hdaw7bBU2sJ0cEAKZSkmWeaB3bL9YYhi
-         +uI50z3vnYQLNnyAQv1LAexOSaW9Nuk7RjAv2WsquaCvU9FHZRmjwEl2hQ/Cf3UJUuHa
-         KEwHt5/Fii5El8Flp1KdSwTxmNy/xOZxtjRmAsUBFbaGqiAS3Mm2+paO9xOg6BAVphCI
-         T9XQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784052324; x=1784657124;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=cx+fxysmNpIgRvDNQTV/xrnk8HRIU1i3r18wZkxxdk8=;
-        b=i+e+Cz2ozK3wR6e0cWzOSuj5hI3GyBIiIDB00W2cP7oZyGwcVg/y7poOCFF3dToPkw
-         d2yQSo41fgX/bVAreipSPGNUlSxEuf89Otk/G+3GHvW+fi2PotiX8gtI3IrcZC8oGvyA
-         loZrDv91nKp6V3zj/XjBAkjeXxedBdNIZAzUhTsSvIbng/L3YBPff4mIQqPCYI2md8cR
-         87hv21T2TnrFSJNTM2dIlN87V2yMllYkDVd0pL0nBeWkJ9iP8+++7UeZOfGKfhffZGEg
-         1brtpr7GWhqYR2146eCa6vo7YLI8L+hOl1ZM0aRrvJri7tKas0ibB/BbalPNGstcGH9n
-         HlWA==
-X-Gm-Message-State: AOJu0YyPDn3kIE8+yphCOXdG3ZUyyrUfeFQU6w0QVe/tg7hJqNZTJJFJ
-	LeeLGoheDKbB2DBTyfZVWDz4tHg/7K0s93QtEY/zCqo0cRIuEHS0D4nl4zWdo69WGEXVcyHHHR4
-	VEziICOw1n8wpOOWIm7tjYU8YHgwgaLt5mOlHUxhT2g==
-X-Gm-Gg: AfdE7cmZgFHxZ/+mV2/LAWt2tVGx6bT0xF8st/GFzv5Jdoz9p7yMNwxJBdBf71pDL6D
-	cZNzfl8BAA8A8MtdRAnzTS/hbf15DMhFmbRIJ3D55zHOwyvfeqgSfGazXwxfuAmMAJyZYw13LT+
-	ASMfm1ghmGxMN7pimynrOPnTVulzYd2MkRQc4dWvld6bQMJRathTB3QlBV8mlPJcRu6JeUB9VtV
-	nKmzQijj19I2RkMEFoOjyOo7X2Rl47dt2rW9/DtqD/X8taWIy+Y/IYPXv9bmYIZCIph2SK+B+t9
-	unYw70EyerWs5/ZIYHrBBU3kehRmUJZTJdjlIi5PbZbzRnWcr8z+sgbu0rUi+NCT/HHZCDNk1q7
-	iB1KCo0njvw==
-X-Received: by 2002:a53:ac93:0:b0:666:2180:d061 with SMTP id
- 956f58d0204a3-667d79859d3mr9547425d50.0.1784051824629; Tue, 14 Jul 2026
- 10:57:04 -0700 (PDT)
+	d=linux-foundation.org; s=korg; t=1784051873;
+	bh=GZsCQFEgcn6EMOCDEWdLwPkfWWcQqzlkLED/YqdY1Tc=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=Del5tMhzu3youmLCKHjbgtPvdsDIH+7IGGFST8BzaPmqfbbkJZKJ/z7YuaAT/X/p7
+	 YChgX7fSaBbak9aPutlauCQ1Jbkj4qG9n6iEshYriEkzHWNiPFv0rwct2vUBjwBQdh
+	 kaZUweQ5gxNphKPDgOzYUI91+awAsCTyJPp5rwvA=
+Date: Tue, 14 Jul 2026 10:57:51 -0700
+From: Andrew Morton <akpm@linux-foundation.org>
+To: Stanislav Kinsburskii <skinsburskii@gmail.com>
+Cc: airlied@gmail.com, akhilesh@ee.iitb.ac.in, corbet@lwn.net,
+ dakr@kernel.org, david@kernel.org, decui@microsoft.com,
+ haiyangz@microsoft.com, jgg@ziepe.ca, kees@kernel.org, kys@microsoft.com,
+ leon@kernel.org, liam@infradead.org, lizhi.hou@amd.com, ljs@kernel.org,
+ longli@microsoft.com, lyude@redhat.com, maarten.lankhorst@linux.intel.com,
+ mamin506@gmail.com, mhocko@suse.com, mripard@kernel.org,
+ nouveau@lists.freedesktop.org, ogabbay@kernel.org, oleg@redhat.com,
+ rppt@kernel.org, shuah@kernel.org, simona@ffwll.ch,
+ skhan@linuxfoundation.org, surenb@google.com, tzimmermann@suse.de,
+ vbabka@kernel.org, wei.liu@kernel.org, dri-devel@lists.freedesktop.org,
+ linux-mm@kvack.org, linux-doc@vger.kernel.org,
+ linux-hyperv@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-kselftest@vger.kernel.org, linux-rdma@vger.kernel.org
+Subject: Re: [PATCH v8 0/8] mm/hmm: Add mmap lock-drop support for
+ userfaultfd-backed mappings
+Message-Id: <20260714105751.f45ec4c70702c222febdbf07@linux-foundation.org>
+In-Reply-To: <alZfTxfypj39OrCE@skinsburskii>
+References: <178371866223.900500.12312667138651735591.stgit@skinsburskii>
+	<20260710151151.1e193eedd0cf2591ae392f76@linux-foundation.org>
+	<alG2-RSitzPWClAX@skinsburskii>
+	<20260710224950.53bcb43ce7e564f07a1f6a8c@linux-foundation.org>
+	<alVRU38lMfvmUFqJ@skinsburskii>
+	<20260713154535.7656b3a630e2f6f076b4e76e@linux-foundation.org>
+	<alZfTxfypj39OrCE@skinsburskii>
+X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-References: <alZK0i0HvxOvSKwj@wyuan.org> <alZP_6nAXNy_HfZi@wyuan.org>
- <CAN-j9UoUHQ2i4H+9G-XK_mOfKKyE9K9-mwUgPc+4yOVfiizgmA@mail.gmail.com> <alZ1AzLX8LrB-JFK@wyuan.org>
-In-Reply-To: <alZ1AzLX8LrB-JFK@wyuan.org>
-From: Doehyun Baek <doehyunbaek@gmail.com>
-Date: Tue, 14 Jul 2026 19:56:28 +0200
-X-Gm-Features: AUfX_mxJagSm1n-HYb-89z0ajfvxRd1MNPKSx4SnPLgv7pI70eAMO8Rmw3kSIq0
-Message-ID: <CAN-j9Uo2f4dmWo8bMkdtXg7g6uayK_XZatkGs5iKv6-dNZ_Y-g@mail.gmail.com>
-Subject: Re: What's cooking in zh_CN (Jul 2026, #02)
-To: Weijie Yuan <wy@wyuan.org>
-Cc: linux-doc@vger.kernel.org, Alex Shi <alexs@kernel.org>, 
-	Yanteng Si <si.yanteng@linux.dev>, Dongliang Mu <dzm91@hust.edu.cn>, 
-	Ben Guo <ben.guo@openatom.club>, Gary Guo <gary@garyguo.net>, Yan Zhu <zhuyan2015@qq.com>, 
-	Jiandong Qiu <qiujiandong1998@gmail.com>, chengyaqiang <chengyaqiang@tsinghua.edu.cn>, 
-	Haoyang Liu <tttturtleruss@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+X-Spamd-Result: default: False [-1.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MV_CASE(0.50)[];
+	R_DKIM_ALLOW(-0.20)[linux-foundation.org:s=korg];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:wy@wyuan.org,m:linux-doc@vger.kernel.org,m:alexs@kernel.org,m:si.yanteng@linux.dev,m:dzm91@hust.edu.cn,m:ben.guo@openatom.club,m:gary@garyguo.net,m:zhuyan2015@qq.com,m:qiujiandong1998@gmail.com,m:chengyaqiang@tsinghua.edu.cn,m:tttturtleruss@gmail.com,s:lists@lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-96805-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER(0.00)[doehyunbaek@gmail.com,linux-doc@vger.kernel.org];
-	TO_DN_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,linux.dev,hust.edu.cn,openatom.club,garyguo.net,qq.com,gmail.com,tsinghua.edu.cn];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:skinsburskii@gmail.com,m:airlied@gmail.com,m:akhilesh@ee.iitb.ac.in,m:corbet@lwn.net,m:dakr@kernel.org,m:david@kernel.org,m:decui@microsoft.com,m:haiyangz@microsoft.com,m:jgg@ziepe.ca,m:kees@kernel.org,m:kys@microsoft.com,m:leon@kernel.org,m:liam@infradead.org,m:lizhi.hou@amd.com,m:ljs@kernel.org,m:longli@microsoft.com,m:lyude@redhat.com,m:maarten.lankhorst@linux.intel.com,m:mamin506@gmail.com,m:mhocko@suse.com,m:mripard@kernel.org,m:nouveau@lists.freedesktop.org,m:ogabbay@kernel.org,m:oleg@redhat.com,m:rppt@kernel.org,m:shuah@kernel.org,m:simona@ffwll.ch,m:skhan@linuxfoundation.org,m:surenb@google.com,m:tzimmermann@suse.de,m:vbabka@kernel.org,m:wei.liu@kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-mm@kvack.org,m:linux-doc@vger.kernel.org,m:linux-hyperv@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-rdma@vger.kernel.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_TO(0.00)[gmail.com];
+	TAGGED_FROM(0.00)[bounces-96804-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	DMARC_NA(0.00)[linux-foundation.org];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[akpm@linux-foundation.org,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[gmail.com,ee.iitb.ac.in,lwn.net,kernel.org,microsoft.com,ziepe.ca,infradead.org,amd.com,redhat.com,linux.intel.com,suse.com,lists.freedesktop.org,ffwll.ch,linuxfoundation.org,google.com,suse.de,kvack.org,vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[doehyunbaek@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[akpm@linux-foundation.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[linux-foundation.org:+];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,mail.gmail.com:mid]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[39];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 87CF2757B53
+X-Rspamd-Queue-Id: 69A32757AB1
 
-> Btw, for example, my patch (Weijie Yuan =C2=B7 docs/zh_CN: add docs-next
-checkout workaround) is actually directly discarded after we reached
-a consensus during our communication (with Dongliang). But it's
-obvious that we didn't say it explicitly. So your website can't
-recognize it automaticly right now. Perhaps we can think about how
-to deal with this situation later.
+On Tue, 14 Jul 2026 09:09:51 -0700 Stanislav Kinsburskii <skinsburskii@gmail.com> wrote:
 
-Yeah, this is a downside of an automated approach: it can miss details
-that are only implicit in the discussion. I see roughly three ways to
-handle such cases:
+> On Mon, Jul 13, 2026 at 03:45:35PM -0700, Andrew Morton wrote:
+> > On Mon, 13 Jul 2026 13:57:55 -0700 Stanislav Kinsburskii <skinsburskii@gmail.com> wrote:
+> > 
+> > > > > I rebased this series on top of mm-new right before sending it out.
+> > > > > Should I have used a different branch?
+> > > > 
+> > > > mm-new is good - Sashiko attempts that.  But it's changing rapidly at
+> > > > this point in the development cycle.
+> > > > 
+> > > 
+> > > I’d like to send another revision addressing a few comments and also
+> > > replace the `max/max_t` check with something simpler.
+> > > 
+> > > Which branch should I base it on so that Sashiko can apply it
+> > > successfully?
+> > 
+> > mainline Linus would be safest.
+> > 
+> 
+> Looks like linux-next/master has been updated with the v8 of the series.
 
-1. Allow authors to mark a patch explicitly by replying with a
-recognized phrase, such as `Patch-status: withdrawn`.
-2. Use natural-language reasoning, perhaps with an LLM, to infer the
-outcome from the discussion. I leaned against it due to cost and
-complexity.
-3. Leave the patch pending and let it move to =E2=80=9CCold=E2=80=9D automa=
-tically
-after 30 days.
+That's because v8 is in mm.git's mm-unstable branch.
 
-I think either the first or the third option makes sense in this situation.
+> I have v9 with a few small fixes, but it is too late to send it out already?
 
-Thanks,
-Doehyun
+It's called "unstable" for a reason!  Material in mm-unstable is still
+under review, test and the latest stages of development.  Getting
+things finalized for movement into the non-rebasing mm-stable branch,
+then into mainline.
+
+So altering or replacing patchsets while they're in mm-unstable is
+perfectly OK and expected.
+
+> If it's not, then what should I base it on?
+
+Well it's a bit tricky to replace a series when it's in mm-unstable. 
+One can do a git-checkout of the commit which precedes the v8 series. 
+Or base on current Linus mainline, which usually works out.
+
+Sending little fixup patches against what's presently in mm-unstable
+also works.  I'll queue each one immediately behind the patch which it
+alters then squash them into their parent patch before moving the series
+into mm-stable.
+
+A third alternative is for me to drop v8 from mm-unstable, then you
+wait until that has propagated onto the servers or into linux-next,
+then base on that.  This approach is OK but I kinda unprefer it because
+there's a bit of latency and it makes it harder for me to prepare my
+"here's how v9 altered mm.git" summaries.
+
+
+Which would you prefer?
 
