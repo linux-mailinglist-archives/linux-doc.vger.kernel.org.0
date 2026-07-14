@@ -1,81 +1,81 @@
-Return-Path: <linux-doc+bounces-96634-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96635-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id PgrxEGiUVWqBqQAAu9opvQ
-	(envelope-from <linux-doc+bounces-96634-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 03:44:08 +0200
+	id R0foNGWUVWp+qQAAu9opvQ
+	(envelope-from <linux-doc+bounces-96635-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 03:44:05 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DA300750229
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 03:44:07 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BAD875021C
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 03:44:05 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=Bly4fUQ6;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96634-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96634-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=WlaO0CRb;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96635-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96635-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=gmail.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 01B913043797
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 01:43:54 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id B8A923010630
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 01:44:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4F5C936F426;
-	Tue, 14 Jul 2026 01:43:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4307D371887;
+	Tue, 14 Jul 2026 01:43:55 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EAA4369D66
-	for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 01:43:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4154936B067
+	for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 01:43:51 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783993431; cv=none; b=L8i6iT907Nuy0Zg1NgAyv8Va0SdP97xJvspubezoCr/4fvmVUObt7tUgMqmbFmpmed267FeQATLqZlxTrdgreRIXyhDHWNL+yWw+7kLxXEQarmKc3vfvcVkg0MZc7M2rEkSojKjyUFH/09glWxSQMZT7Ym7aCRYqebC2c3nteTQ=
+	t=1783993434; cv=none; b=Zann0CzKP2tqOgfcBae2XLUTKDYUaXk/5qRdUJb8Txe7c8S8cut0N00TefOeT04A4zvon1ew0DBlpQn7UXRfkKE6vyGEjvh3nMoHrftVe99ivexi/EAXIQCA9g26oiQ9rTvMDOc7NUN7vrlUi0F+17gtklN0QkMijVdruzEwQuY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783993431; c=relaxed/simple;
-	bh=5lO/T3tnm3QZEAd2EPJ8hvjU8Xe4okA8Q7GeLUp0bqY=;
+	s=arc-20240116; t=1783993434; c=relaxed/simple;
+	bh=PVs+gHTDyYChhu+7rRJSjmFR790Mb8zOYoVJnPhHsQE=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=mH7mNB+UzX3ucWRqzr/ouvHN24DsOuOXeQQICX9Ac51xO0YUXsY5Ku6zm8kBI+aHhxHNRszfACXRPHAZ/i6pfQGSBpjcxTnZkTFBBzcgCoLI8/gxvGnHxHom7AB1hxiUsFW4GhXpFObf1/u2NnegH/ZFlRt+4o+bW2dhoJnKB1s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Bly4fUQ6; arc=none smtp.client-ip=209.85.215.177
-Received: by mail-pg1-f177.google.com with SMTP id 41be03b00d2f7-c9eefcf9175so401722a12.3
-        for <linux-doc@vger.kernel.org>; Mon, 13 Jul 2026 18:43:48 -0700 (PDT)
+	 MIME-Version; b=Et87kxBOfFo8PCfLz6x0VSyEP1DhE2DPZwP0k65qNupT5vLpu2SpZKuBoTn4l8P7qirZHLli7gUs3/D8PJ+Volg7BxwmE4FEz4GP2XiqKmdbX0T2Y6xpZ4adCtduA83fJZ0xy/b7xkZSandCPCnLHOemZMI40lggQqXlU76ssA4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=WlaO0CRb; arc=none smtp.client-ip=209.85.216.47
+Received: by mail-pj1-f47.google.com with SMTP id 98e67ed59e1d1-3847e8b0f3aso3136978a91.3
+        for <linux-doc@vger.kernel.org>; Mon, 13 Jul 2026 18:43:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783993427; x=1784598227; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1783993430; x=1784598230; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=5bTdiv92W8B3yu+NVFE+yxGCJJQl+ix1X/J4ESOiB7Y=;
-        b=Bly4fUQ6WN18DqhvrKN5f2QLG3kwVrum0T4Rw6IcemrvNbVhSayUSHAil3jeKDnKTQ
-         xUXGPqxWSr62AjBSwkXfOHlyuJtJratHzOVZGwDO/4WeXaBp5G1z8c3BaA+pmOEYyg8P
-         85hLiPOpPXW0rMklWPGXYqCmJoPEhH53Azov1IGHSp6GiYkLqEgXSJ00z6w2dZ8Q9eac
-         pFRliSeWiBBc+UvAvq6gXMCLX8uCGQCRvDvCRFauAbiHRzjrPgDlDGuZj9l2a+Vv27ia
-         Lm5PxIKkQwGpCqPwBJYqcwH9ubE8xamMIkb+yMAJQ+5JTtGSmPtV2xUrD6NrQaYAOeFh
-         cLEg==
+        bh=yLYnguE796013GUUX5AfLaBgg2bMMPqf3FcC8kN1cc0=;
+        b=WlaO0CRb7KrIB/XrVnc1Dmc0UqbtDoG3BelkYEOx55pq640zozcmjQ06wciqCDuD4m
+         EihGqQf486ZkXBPIYQJ/DuULtVXIn2Zao9IGlt3kS3QxxFNnEGnwsItetocmCK3j95nR
+         p5AwSGvhWl/ZxboXSIuqklKmI9g9wDv0qMGK13JB6duvjpXpczqV2l8DJZFsd3rjJc7+
+         L1vM3A5oZNP9rt+pAOO4So5UKxj/qXeJJjq+jizVIY+HoZzFHZTEVTNh5UmvxjS7/mxT
+         sm8bktBnG21uIkqvCQPABtijbfmPWMyGbzSm6RBZTfxX+28xbvNHBRrouRZIWwCLX2Do
+         R2jQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783993427; x=1784598227;
+        d=1e100.net; s=20251104; t=1783993430; x=1784598230;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=5bTdiv92W8B3yu+NVFE+yxGCJJQl+ix1X/J4ESOiB7Y=;
-        b=fbp78+suzP/8z2OeVCvc5t2JvXDefeAwU6uejezAX19sxMhacqVCUYV+PbJotU1WiH
-         aHTtZfz+q3fd/wwN0SMyqQJHp+nTSIigSqj+60cmgH9VzZ+K/Y+FZ2LjmmSLxLROcuQb
-         K8UpEXLa3BUjADs1CRg9LQHpFrWPfEiCumLtrSGksZl0Nio7njIAsA2PoGQ/YeodjPb2
-         V3nooD2OHFAXhluN3NlYkjw+KFPuioO20ppE9hSRZOA9zP5wJLE+oVVhn+GuDWltPB9d
-         NouwdVg77PBUmUr5dshLC4RQWfXwgMuqFQ9QbcOu7llVi0r+WrS1xD17FXL/3WlMGWdw
-         Htxw==
-X-Forwarded-Encrypted: i=1; AHgh+RqifKBrpjh50FI7JjivfJY1mrreU/2BIaBbK8FXAlSEMwncsbezCHlA4NaxejmAJ3iCtGaracjKyus=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwW3G57dyUjGls2C93FCf9ynu6e8lKESaOQW6ehoFWOqVXxAA/6
-	Lsf8RR3wy/OO6vwamg2KBkRKPyiqq8ytr2p+7In2JLru6BwavNKO3bcM
-X-Gm-Gg: AfdE7cnOgcMUU/TZVZEV6pvFNofIzx2d8w34yQK7Fxi43am8Waguzc9juE+Nv1msSf6
-	T99a1wEtn4q6sOUgSHn6aFKMZSvY7FAoWE7PKDdLR3DKknEKLxgvjEujDzyxP7eDAycPnqufnxn
-	UCAbfBS1x2EnUsBDTeJ6WjjHF52GF3jnUD2Bo6VIOZhWFOu91O7uBGtlHFjAy7iLonDDaq+Sf1r
-	BvtSVq7dw2nTfnNcepubrxyYxPZVCaQkXSuyS8oIg6j7QvgfdU7vfNycqAmj3X0xyZP8VAtY4ti
-	ZX2ouHTxUtLLQmoavwGl0DB/tfWruLuIR3bdOVQgFsd2LV0xwrNnld9lpjMZ/f4MZfEO5jtoUKp
-	JEzwAIHXcPNTIYVj3BnXtbyyvmxYFMtBxKV7f115CGLbgrjSCmb2KNFhrXgQTlTBg3baXpbtavm
-	elnYKjVCGUOA==
-X-Received: by 2002:a05:6a21:50b:b0:3c0:9c1b:d0b7 with SMTP id adf61e73a8af0-3c110a1213fmr12717930637.66.1783993427065;
-        Mon, 13 Jul 2026 18:43:47 -0700 (PDT)
+        bh=yLYnguE796013GUUX5AfLaBgg2bMMPqf3FcC8kN1cc0=;
+        b=dCZz6jwtNvCUIycUzDKFicovL6zzlweuzc7ppJztwWedkeoT6udFs+BSacOYMcpx4L
+         UqaTvnHp/DUY7V0kqt/mf/iSJr/z4erTbAA+7I00HIj4a8wkFkvk3VN2Lvks0TCrJ6Y4
+         6JNTkOteT4X7yEKTzgLCc8T8ZAcYm9qjue8LXNYlZlE+8t2NxpRwaoEZHM8f9qnfjLbS
+         P9X/luzseMwCUugWGmBZO3AdIWIqt61xc9ybJOInikTjFmsME60WnWy8rGyQ2SKauKN3
+         4SUFCDe0lmqunv5jwcre6HSIvC3K5QEFzWRIFxfw6Ek5pmrnjqPU78+CleLhM0hNJjFf
+         eVwA==
+X-Forwarded-Encrypted: i=1; AHgh+RomYJkBr4Q3G8H+K9n/xR+eqIxaHwk5s0OVogfzmq81Aq+YC/9VwxOtsYsx7KSSCc+uFKjut4bJOks=@vger.kernel.org
+X-Gm-Message-State: AOJu0Ywp8k6UE7amS6+AORJVk6ynDCH6RorcuFLtnos/IdvY9CamBesI
+	PkwXJjT6ikhIea5usWfsCSSGq4BnbqHyqsQwbCH+rI6MTpe2LHvcOqiD
+X-Gm-Gg: AfdE7cnayocTLyiBDLgb8HDHngmS7A+XmXeTSKpF6Wpo7SCxNYYeirq9wDDq1ONPIp1
+	YdSti/faj6OmbD5Rj8SQBibDkSRIhmOJXnGNW7ZsFdoCRoFpf3lheyPajFSxVAn8uIwfOY0Riqs
+	3Q3w+dv54SmlQptQWkLPGFQVBEnndPqL2TJvzYR5JOP6wBtjDxaTQCU8v3+uJ9ptYZ2IFacTwvJ
+	ybNZ6iZ6PoXQo9R0Eq1Y8qBlSPn3mpI7XLMEYJZZcYg5eFxASjuxxQGIPdtthHuzo3ZY5tCU+78
+	nF3y78v3MEQhMmrEn/x1Sj1vcMHigRl48O1UDqwQax4Izd+j53EhKeuNfxQzbfgNuwkMJ60PbSv
+	wuNbj969srzzSvLx+RHY6EoiyfVBdoixWRzEiY30lDRGGGDb16LgAxMaJFtWHbevaMJcFaEoMT7
+	HDngrtpmE7uQ==
+X-Received: by 2002:a05:6a21:9d48:b0:3c1:85d:fa2f with SMTP id adf61e73a8af0-3c1108c2d4fmr11352039637.36.1783993429962;
+        Mon, 13 Jul 2026 18:43:49 -0700 (PDT)
 Received: from sleipnir ([2804:d45:3612:3b00:32a3:79f0:cdff:a04a])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13b924258a2sm59675775c88.1.2026.07.13.18.43.44
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13b924258a2sm59675775c88.1.2026.07.13.18.43.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 13 Jul 2026 18:43:46 -0700 (PDT)
+        Mon, 13 Jul 2026 18:43:49 -0700 (PDT)
 From: Lincoln Wallace <locnnil0@gmail.com>
 To: paul@paul-moore.com,
 	corbet@lwn.net
@@ -86,9 +86,9 @@ Cc: skhan@linuxfoundation.org,
 	penguin-kernel@I-love.SAKURA.ne.jp,
 	rdunlap@infradead.org,
 	Lincoln Wallace <locnnil0@gmail.com>
-Subject: [PATCH 1/2] doc: LSM: describe CONFIG_LSM and lsm= as the selection mechanism
-Date: Mon, 13 Jul 2026 22:38:31 -0300
-Message-ID: <20260714013832.977443-2-locnnil0@gmail.com>
+Subject: [PATCH 2/2] doc: LSM: fix module ordering description for /sys/kernel/security/lsm
+Date: Mon, 13 Jul 2026 22:38:32 -0300
+Message-ID: <20260714013832.977443-3-locnnil0@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260714013832.977443-1-locnnil0@gmail.com>
 References: <20260714013832.977443-1-locnnil0@gmail.com>
@@ -106,7 +106,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
@@ -114,13 +114,13 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	TO_DN_SOME(0.00)[];
 	FREEMAIL_CC(0.00)[linuxfoundation.org,vger.kernel.org,I-love.SAKURA.ne.jp,infradead.org,gmail.com];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-96634-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-96635-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS(0.00)[m:paul@paul-moore.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-security-module@vger.kernel.org,m:penguin-kernel@I-love.SAKURA.ne.jp,m:rdunlap@infradead.org,m:locnnil0@gmail.com,s:lists@lfdr.de];
 	FORGED_SENDER(0.00)[locnnil0@gmail.com,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	FREEMAIL_FROM(0.00)[gmail.com];
 	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
@@ -133,57 +133,61 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: DA300750229
+X-Rspamd-Queue-Id: 4BAD875021C
 
-The LSM usage document states that security modules are selectable at
-build time via CONFIG_DEFAULT_SECURITY and can be overridden at boot
-time via the "security=..." kernel command line argument.
+The LSM usage document states that the capability module will always
+be first in /sys/kernel/security/lsm, followed by any "minor" modules
+and then the one "major" module.
 
-CONFIG_DEFAULT_SECURITY no longer exists: LSMs are enabled via
-CONFIG_LSM, an ordered list of the LSMs to initialize, which can be
-overridden at boot time with the "lsm=" parameter. The "security="
-parameter remains as a deprecated way to choose a legacy "major"
-security module, and is ignored when "lsm=" is specified; see commit
-89a9684ea158 ("LSM: Ignore "security=" when "lsm=" is specified").
+This does not match the current LSM infrastructure:
 
-A previous attempt replaced "security=" with "lsm=" in place [1],
-which was rejected because the parameters are not equivalent:
-"security=" selects a single major module while the built-in
-CONFIG_LSM list otherwise remains active, whereas "lsm=" must list
-every LSM to enable.
+ - When CONFIG_SECURITY_LOCKDOWN_LSM_EARLY is enabled, lockdown is
+   initialized as an early LSM, before all other modules including
+   capability, and appears first in the list.
 
-Update the paragraph to describe CONFIG_LSM and "lsm=" as the current
-selection mechanism, keeping "security=" documented as the deprecated
-legacy option, matching the wording in kernel-parameters.txt.
+ - The integrity modules (e.g. IMA and EVM) register with
+   LSM_ORDER_LAST and are always placed at the end of the list,
+   regardless of the position of the major module.
 
-Link: https://lore.kernel.org/r/20250114225156.10458-1-rdunlap@infradead.org [1]
+ - The relative order of the remaining modules is not fixed by the
+   framework; it follows CONFIG_LSM or the "lsm=" kernel command
+   line parameter.
+
+Rewrite the paragraph to describe the actual ordering: lockdown
+first when early lockdown is enabled, capability otherwise,
+integrity modules at the end, and the remaining modules in the
+configured order.
 
 Signed-off-by: Lincoln Wallace <locnnil0@gmail.com>
 ---
- Documentation/admin-guide/LSM/index.rst | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ Documentation/admin-guide/LSM/index.rst | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
 
 diff --git a/Documentation/admin-guide/LSM/index.rst b/Documentation/admin-guide/LSM/index.rst
-index b44ef68f6e4d..c24310c709dc 100644
+index c24310c709dc..9518495edfbc 100644
 --- a/Documentation/admin-guide/LSM/index.rst
 +++ b/Documentation/admin-guide/LSM/index.rst
-@@ -6,9 +6,11 @@ The Linux Security Module (LSM) framework provides a mechanism for
- various security checks to be hooked by new kernel extensions. The name
- "module" is a bit of a misnomer since these extensions are not actually
- loadable kernel modules. Instead, they are selectable at build-time via
--CONFIG_DEFAULT_SECURITY and can be overridden at boot-time via the
--``"security=..."`` kernel command line argument, in the case where multiple
--LSMs were built into a given kernel.
-+CONFIG_LSM, an ordered list of the LSMs to enable, and can be
-+overridden at boot-time via the ``"lsm=..."`` kernel command line
-+argument. The ``"security=..."`` kernel command line argument remains
-+available to choose a legacy "major" security module, but has been
-+deprecated by the ``"lsm=..."`` parameter.
+@@ -27,9 +27,15 @@ man-pages project.
+ A list of the active security modules can be found by reading
+ ``/sys/kernel/security/lsm``. This is a comma separated list, and
+ will always include the capability module. The list reflects the
+-order in which checks are made. The capability module will always
+-be first, followed by any "minor" modules (e.g. Yama) and then
+-the one "major" module (e.g. SELinux) if there is one configured.
++order in which checks are made. The capability module will be
++first, unless CONFIG_SECURITY_LOCKDOWN_LSM_EARLY is enabled, in
++which case the lockdown module will precede it. The integrity
++modules (e.g. IMA and EVM), if enabled in the kernel
++configuration, are always placed at the end of the list. Any
++other "minor" modules (e.g. Yama) and the one "major" module
++(e.g. SELinux), if there is one configured, appear in between,
++in the order given by CONFIG_LSM or the ``"lsm=..."`` kernel
++command line parameter.
  
- The primary users of the LSM interface are Mandatory Access Control
- (MAC) extensions which provide a comprehensive security policy. Examples
+ Process attributes associated with "major" security modules should
+ be accessed and maintained using the special files in ``/proc/.../attr``.
 -- 
 2.53.0
 
