@@ -1,88 +1,95 @@
-Return-Path: <linux-doc+bounces-96734-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96735-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id DxnKDAAnVmqs0AAAu9opvQ
-	(envelope-from <linux-doc+bounces-96734-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 14:09:36 +0200
+	id /0b4GWspVmqo0QAAu9opvQ
+	(envelope-from <linux-doc+bounces-96735-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 14:19:55 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 762C57544ED
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 14:09:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B690C7546F9
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 14:19:54 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=intel.com header.s=Intel header.b=A4MAnEao;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96734-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-96734-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=intel.com;
+	dkim=pass header.d=resnulli-us.20251104.gappssmtp.com header.s=20251104 header.b=xloPNrV3;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96735-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-96735-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=none;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 9B581331CA3E
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 11:52:08 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 8E1EF32A59B3
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 12:02:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5187E38CFEF;
-	Tue, 14 Jul 2026 11:46:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0BCA138AC9A;
+	Tue, 14 Jul 2026 12:02:34 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.12])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AEE8D35BDC7;
-	Tue, 14 Jul 2026 11:46:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 141FF35BDC7
+	for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 12:02:30 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784029602; cv=none; b=lRwmfQNRqXmXYWuh8oGkJpwSvZXIqAH+jkcIVF4II8KhmobCoUsHXCwVjyDXIuRjAjg9NUrDYmLO9uKgMmScRI/W+Cgf+oF/d/M2obbnss2XPLjPvR39w4v6VMbOXD586HgJzaiQlTV88wlFWuKPKoZz1R1Q6jKCBy323SciZvA=
+	t=1784030553; cv=none; b=kzmQ7JrtHSz3EAWeUOhs8VEQr7DtN4IaCf6nXyq5azPRIMxGNzOXhAl2E4Hfbb1B2Zl3fenMjPlL6ILMRSJFkgvYx2m28LS+d0s+L5t/ROI/eOjuBu6zydXzofT2roNsMNWEHrDsu58cuzNsx9KQSk31UExNewsdyPqJP29H0rA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784029602; c=relaxed/simple;
-	bh=SuvH0R0BK+/0Ae0Mp+igWDU48vvsC5mEiQoQxHn1sBM=;
+	s=arc-20240116; t=1784030553; c=relaxed/simple;
+	bh=MxGbzJ1EXIdULAavSutQBPVkV2UhDVudqdZG1CWBmp8=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=iCkGaYWApOPFxydJpFe4nKv0aGPPllMioLPgT//6UpmAQFM0+5g7HHmzvsYY92e1A/agzqHPUuQOKtsUhjfeyO7mjP9O72F55GLH15+a4bg5Y1Wi2Yt2yrSGTAQxmhUcFb8IuGcaI17biH9u+TOfu/MghZjbOq8+43XB30Dv5Dg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=A4MAnEao; arc=none smtp.client-ip=192.198.163.12
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1784029601; x=1815565601;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=SuvH0R0BK+/0Ae0Mp+igWDU48vvsC5mEiQoQxHn1sBM=;
-  b=A4MAnEaojvoOKCrFwEaEU2VSDmLGPSwpk3way50gXMEpjtYfYBwJq/Db
-   wC96cIw7nydxtbbwFmuvUKLaXeNLyOdXRBDX3wCKDPMTqsjMq/+CD30QZ
-   0YG1znZdKYlvcCHWpDiGlPwkraFqiaVqmE/u8m22jEJ9b5OoqvSa3CEwO
-   nD7eSeYWFf8x4iatRLvUm5RiIA3wFVQc8Vx4eIlKkgMkKGXn8+AJgFPC1
-   tnY8PIyk9rFrq5eX1Qu9KfnDG9DAmgTTQm3e8hcWPcJPeBUYZgX8pHAvy
-   ebQrqPProBY+xW0D24hKM5jkCiujRwF6DCAyhXEVUEZcVaGftlhwPisYn
-   A==;
-X-CSE-ConnectionGUID: 60E0xN9bTt2qse3fXPtQQg==
-X-CSE-MsgGUID: HaUt82+DS/SGOVUmE4u9ag==
-X-IronPort-AV: E=McAfee;i="6800,10657,11846"; a="88470446"
-X-IronPort-AV: E=Sophos;i="6.25,163,1779174000"; 
-   d="scan'208";a="88470446"
-Received: from fmviesa004.fm.intel.com ([10.60.135.144])
-  by fmvoesa106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Jul 2026 04:46:40 -0700
-X-CSE-ConnectionGUID: RWzRhk1qTOWgY9v/MBMjwA==
-X-CSE-MsgGUID: PFof6ymER0SXkV4IgFNRHQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.25,163,1779174000"; 
-   d="scan'208";a="257801627"
-Received: from kniemiec-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.189])
-  by fmviesa004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Jul 2026 04:46:36 -0700
-Date: Tue, 14 Jul 2026 14:46:33 +0300
-From: Andy Shevchenko <andriy.shevchenko@intel.com>
-To: rodrigo.alencar@analog.com
-Cc: linux-iio@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-hardening@vger.kernel.org,
-	Lars-Peter Clausen <lars@metafoo.de>,
-	Michael Hennerich <Michael.Hennerich@analog.com>,
-	Jonathan Cameron <jic23@kernel.org>,
-	David Lechner <dlechner@baylibre.com>,
-	Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Philipp Zabel <p.zabel@pengutronix.de>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>, Kees Cook <kees@kernel.org>,
-	"Gustavo A. R. Silva" <gustavoars@kernel.org>
-Subject: Re: [PATCH v8 06/17] iio: core: create local
- __iio_chan_prefix_emit() for reuse
-Message-ID: <alYhmR7y7xlMqLJ1@ashevche-desk.local>
-References: <20260714-ad9910-iio-driver-v8-0-36939c3c07d2@analog.com>
- <20260714-ad9910-iio-driver-v8-6-36939c3c07d2@analog.com>
+	 Content-Type:Content-Disposition:In-Reply-To; b=Q9rAdlyxlBy5BbRMLgUSRxLRpXy6DlZtHw2f1WUQWdf3L51Fu9Tg9vnkXLqpIlJ8hPxYFsRbaFqzKgYReeWwTD+YYcMpHZOsP7nXDuKdcyYL6YiK25kvsGdebmE9fpFVbRQGxxl7G4aIm0Ypjw7jwMTD86B97AjmFmKtdcQXOlI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=resnulli.us; spf=none smtp.mailfrom=resnulli.us; dkim=pass (2048-bit key) header.d=resnulli-us.20251104.gappssmtp.com header.i=@resnulli-us.20251104.gappssmtp.com header.b=xloPNrV3; arc=none smtp.client-ip=209.85.128.48
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-493f75f7172so27833015e9.1
+        for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 05:02:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=resnulli-us.20251104.gappssmtp.com; s=20251104; t=1784030549; x=1784635349; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=MxGbzJ1EXIdULAavSutQBPVkV2UhDVudqdZG1CWBmp8=;
+        b=xloPNrV3q0dsouuiGc5bUzJJ6bnxilhSIXwGOplClvayzzm6Ah2r3bsykgU0U2Os+e
+         wOWh+yiGW8fcuU5rky5Evy6iXTIQKcCkSFXY8KZImeB1J8C08m2oKYln9lIIznjY1Zct
+         DJX0fzJ6KIV/CB93zTxcQbxy5cryxF3hXYiE/Li2nG8xF4M4cWevWZ1KIRG6WJpccxlI
+         wfj9ddFB7N8Z4YP/NXHbxO3jvLO2x3sFRT5C/kD7Gl/jWquGXSRwOWmBIekE8R82irLb
+         mvwtasVMxsK6/qlM5kwsHk9QiM+vbfmJsl5eDdtTO9E2m77O18rBN/wyfvOu+wigyu/q
+         3tlw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784030549; x=1784635349;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=MxGbzJ1EXIdULAavSutQBPVkV2UhDVudqdZG1CWBmp8=;
+        b=Ap0l/SFCFRks1HQvSjnb8ei7mUg4dAVkXMvUn78b6YSVb2s04LhgnNRLFh8XIAZR8N
+         CiMcCy9woNCHlPEWY7+lVthOVI17lWunJTb9Ft4NLrMuEPm/0qcrf5ueYkdqE0B7CPBj
+         ZUM5bz25tmqTU9rIpxfa7FqRpL2p4q6cqQIGDIAlCi73zIWBNzy11NuyTT2cTOZXY4ro
+         1fcX4Kh8ldwfgx6TjYsg1AeWFplvlJCC85EWyzSsNxvv8Ne9duYbj+wqXBkJ+iH7x8I4
+         aQKmt6D5b0gaZwLffK6inKGUJ/FlnsUpHZz8AYDaTi+2Jz8SKjlwWWuVmB+gWK33ziqU
+         1jWA==
+X-Forwarded-Encrypted: i=1; AHgh+RpXonuPiXdrroTB9ktxFMHVufOuxwRbRbAiRLuZWD0qGtDBbWcvv5o5QiECvbLimAvcmrvDbh+2KqQ=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwTxpnbmBDT0hoBVoE9sX5N5KwWhkIXrYJxaO4t+kS2DrHu+/u0
+	q8DrJBjYq82rs9rxMJcOofMhrhp10+IWwf22zDMBDgL8AcN0lvDzYCOmq+NcEgj36ts=
+X-Gm-Gg: AfdE7cl/0YPgeGCT3s//wrMg9Z0nibHEISyLBoTbfoipGZMNB7yjKqebZw9ocm4Aaii
+	Qlb2LYycrWrPc4JNUB+1eGyeU0D5ieQGyBY0nM4J+NeWTMYCnhEQahtqfFQg8WmtnT9DDvMVEQB
+	Optuo+hmPlxhFTyRZokq8zK47EiuiiAxlz553+EVqzyBm7mnM21PAC4nWJ8pJzAjIQUt4yf+9+M
+	koFAzpKtDJi9l/WdY4St7A+iP0+Mpa/6PUU4YTSlxaI+M6HUAv0rVDPI4Disxpcd9rGFZNDmeFR
+	BUsw+TQnPFIExJtNhFMLBABbNq9FqSYft1NWdPsR2SwDcSkHfL1Hf4mUp5pLYWKNLctN/fWfKhc
+	3U4ZVSm9eOD5rD7PQGkmJ6zUPMbaFjsXqw5mQyCdiRwpt8R1zol+IMWrwa/erqwxDiSy0aGE4Hy
+	K5fX1I3SXpRXkIrsEal/rFGA==
+X-Received: by 2002:a05:600c:6b17:b0:492:4a56:690b with SMTP id 5b1f17b1804b1-493f8834e5emr94066915e9.35.1784030548728;
+        Tue, 14 Jul 2026 05:02:28 -0700 (PDT)
+Received: from localhost ([140.209.217.211])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f4635ac2esm7854172f8f.13.2026.07.14.05.02.28
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 14 Jul 2026 05:02:28 -0700 (PDT)
+Date: Tue, 14 Jul 2026 14:02:24 +0200
+From: Jiri Pirko <jiri@resnulli.us>
+To: Mark Bloch <mbloch@nvidia.com>
+Cc: Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, 
+	Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
+	Saeed Mahameed <saeedm@nvidia.com>, Leon Romanovsky <leon@kernel.org>, 
+	Tariq Toukan <tariqt@nvidia.com>, Andrew Lunn <andrew+netdev@lunn.ch>, 
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, netdev@vger.kernel.org, 
+	linux-rdma@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH net-next V6 4/4] devlink: Apply eswitch mode boot defaults
+Message-ID: <alYkm08MpcIXnFl9@FV6GYCPJ69>
+References: <20260714061731.531849-1-mbloch@nvidia.com>
+ <20260714061731.531849-5-mbloch@nvidia.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -91,140 +98,75 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260714-ad9910-iio-driver-v8-6-36939c3c07d2@analog.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+In-Reply-To: <20260714061731.531849-5-mbloch@nvidia.com>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.66 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,kernel.org:s:+];
+X-Spamd-Result: default: False [0.34 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	MID_RHS_NOT_FQDN(0.50)[];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_DKIM_ALLOW(-0.20)[resnulli-us.20251104.gappssmtp.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-96734-lists,linux-doc=lfdr.de];
-	HAS_ORG_HEADER(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:rodrigo.alencar@analog.com,m:linux-iio@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-hardening@vger.kernel.org,m:lars@metafoo.de,m:Michael.Hennerich@analog.com,m:jic23@kernel.org,m:dlechner@baylibre.com,m:andy@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:p.zabel@pengutronix.de,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:kees@kernel.org,m:gustavoars@kernel.org,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:mbloch@nvidia.com,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:horms@kernel.org,m:saeedm@nvidia.com,m:leon@kernel.org,m:tariqt@nvidia.com,m:andrew+netdev@lunn.ch,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:netdev@vger.kernel.org,m:linux-rdma@vger.kernel.org,m:linux-doc@vger.kernel.org,m:andrew@lunn.ch,s:lists@lfdr.de];
+	DMARC_NA(0.00)[resnulli.us];
+	FORGED_SENDER(0.00)[jiri@resnulli.us,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	TAGGED_FROM(0.00)[bounces-96735-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[andriy.shevchenko@intel.com,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[andriy.shevchenko@intel.com,linux-doc@vger.kernel.org];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[jiri@resnulli.us,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[resnulli-us.20251104.gappssmtp.com:+];
 	ALIAS_RESOLVED(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,nvidia.com:email,FV6GYCPJ69:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 762C57544ED
+X-Rspamd-Queue-Id: B690C7546F9
 
-On Tue, Jul 14, 2026 at 12:02:46PM +0100, Rodrigo Alencar via B4 Relay wrote:
+Tue, Jul 14, 2026 at 08:17:30AM +0200, mbloch@nvidia.com wrote:
+>Apply parsed devlink_eswitch_mode= defaults after devlink registration
+>and after successful reload.
+>
+>Mark the default mode as pending when a devlink instance is allocated.
+>Before devl_unlock() releases the instance lock, apply a pending default
+>when the instance is registered.
+>
+>Clear the pending state before calling into the driver so the boot
+>default remains a one-shot operation even if the mode change fails.
+>
+>For successful reloads that performed DRIVER_REINIT, devlink_reload()
+>already holds the devlink instance lock and the driver has completed
+>reload_up(). Clear the pending state and apply the default directly from
+>the reload path.
+>
+>Treat an explicit user eswitch mode request as consuming the pending
+>default mode.
+>
 
-> Move logic to create a channel prefix for naming attribute files into a
-> separate __iio_chan_prefix_emit() function for reuse. The dev pointer is
-> passed to __iio_device_attr_init() so that dev_err() replaces WARN().
-> The new helper is going to be used to expose channel relationships as
-> sysfs attributes.
-
-...
-
-> +static ssize_t __iio_chan_prefix_emit(struct device *dev,
-> +				      const struct iio_chan_spec *chan,
-> +				      enum iio_shared_by shared_by,
-> +				      char *buf, size_t len)
-> +{
-> +	const char *type = iio_chan_type_name_spec[chan->type];
-> +	const char *dir = iio_direction[chan->output];
-> +	struct seq_buf s;
-> +
-> +	seq_buf_init(&s, buf, len);
-> +
-> +	switch (shared_by) {
-> +	case IIO_SHARED_BY_ALL:
-> +		break;
-> +	case IIO_SHARED_BY_DIR:
-> +		seq_buf_printf(&s, "%s", dir);
-> +		break;
-> +	case IIO_SHARED_BY_TYPE:
-> +		seq_buf_printf(&s, "%s_%s", dir, type);
-> +		if (chan->differential)
-> +			seq_buf_printf(&s, "-%s", type);
-> +		break;
-> +	case IIO_SEPARATE:
-
-> +		seq_buf_printf(&s, "%s_%s", dir, type);
-> +		if (chan->indexed) {
-> +			seq_buf_printf(&s, "%d", chan->channel);
-> +			if (chan->differential)
-> +				seq_buf_printf(&s, "-%s%d", type, chan->channel2);
-> +		} else if (chan->differential) {
-> +			dev_err(dev, "Differential channels must be indexed\n");
-> +			return -EINVAL;
-> +		}
-> +
-> +		if (chan->modified) {
-> +			if (chan->differential) {
-> +				dev_err(dev, "Differential channels can not have modifier\n");
-> +				return -EINVAL;
-> +			}
-> +			seq_buf_printf(&s, "_%s", iio_modifier_names[chan->channel2]);
-> +		}
-> +
-> +		if (chan->extend_name)
-> +			seq_buf_printf(&s, "_%s", chan->extend_name);
-> +		break;
-
-Can we actually do the validation first without dirtying the output?
-
-		/* Validate differential channel settings */
-		if (chan->differential) {
-			if (!chan->indexed) {
-				dev_err(dev, "Differential channels must be indexed\n");
-				return -EINVAL;
-			}
-			if (chan->modified) {
-				dev_err(dev, "Differential channels can not have modifier\n");
-				return -EINVAL;
-			}
-		}
-
-		seq_buf_printf(&s, "%s_%s", dir, type);
-
-		if (chan->indexed) {
-			seq_buf_printf(&s, "%d", chan->channel);
-
-		if (chan->differential)
-			seq_buf_printf(&s, "-%s%d", type, chan->channel2);
-
-		if (chan->modified)
-			seq_buf_printf(&s, "_%s", iio_modifier_names[chan->channel2]);
-
-		if (chan->extend_name)
-			seq_buf_printf(&s, "_%s", chan->extend_name);
-		break;
+Looks fine to me now. One nit below:
 
 
-> +	}
-> +
-> +	return seq_buf_has_overflowed(&s) ? -EOVERFLOW : s.len;
-> +}
+[..]
 
--- 
-With Best Regards,
-Andy Shevchenko
+>+void devlink_default_esw_mode_instance_init(struct devlink *devlink)
 
 
+Forgotten "instance" here. With this fixed, feel free to add my
+Reviewed-by: Jiri Pirko <jiri@nvidia.com>
+
+[..]
 
