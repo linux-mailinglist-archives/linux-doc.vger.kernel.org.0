@@ -1,386 +1,165 @@
-Return-Path: <linux-doc+bounces-96675-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96677-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id JVDYJsHxVWp1wgAAu9opvQ
-	(envelope-from <linux-doc+bounces-96675-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 10:22:25 +0200
+	id vNJMNiPzVWrdwgAAu9opvQ
+	(envelope-from <linux-doc+bounces-96677-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 10:28:19 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB84675256B
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 10:22:24 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 48572752629
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 10:28:19 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=bK2+Zgwr;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96675-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96675-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b="XPMvh/AR";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96677-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96677-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id AA65D31998A7
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 08:16:07 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 89983306A506
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 08:21:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 969EA3F9277;
-	Tue, 14 Jul 2026 08:16:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BB9D13FAE14;
+	Tue, 14 Jul 2026 08:21:15 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 623483FA5EF
-	for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 08:15:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 203F23FBEBC;
+	Tue, 14 Jul 2026 08:21:12 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784016960; cv=none; b=qJRMK8d0s+vPqEvi6sCqsdLyhNrqhogcB5zoP54W9aUKN+tzd37iau/rD+6MKCqnWPLmCVjzeFiCrItCIQdj/PEOQgxpNEqRAB1V1o3wRJ9fvF8uAL/8ZhBKgaIZEF/COU4rL8SmTgmNT7UUY6xOccZ0PqEl+Ne03YkvtmXcN14=
+	t=1784017273; cv=none; b=SE7ZC/h+4z5MJQq7WWUGEGXWFD9t35pR49Rxb5sP0OtjhmWHzveXTAReD9FAFEsSQrgA/H76y9HNWyQ0LxyhWtv0iTOZI56z738MtJe9j8tQN0p/zCP6S6nb7isoiGHvAHl+zLGdVKTxG/xwKKhFJrIwxx71mDSk/70OcYULJNs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784016960; c=relaxed/simple;
-	bh=uUYlBhAZn84mwF8H+rHHQ5q26TeChr1Bxo2Zj9hIRxs=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=MPuCkgvGZBr7uQDLFCZ9v6sT39FLNrDKU+hd7X5k6QoaEn9pA3Y709aio+o8XfE5MA5cZ36PoRogCfxyra2L3gtHjKjkRbaLL0zzQPmZmnFoDYd+D87BNESug0CykTHWsuTx7jxn2PZ02L+hkG7TkkjvzwgP5tHQ0e90IBbkM9w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=bK2+Zgwr; arc=none smtp.client-ip=209.85.216.45
-Received: by mail-pj1-f45.google.com with SMTP id 98e67ed59e1d1-38dcbade417so2403166a91.1
-        for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 01:15:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784016955; x=1784621755; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=8UXPYiyfSEkWVl+cC8sK2nhliwJgX/ylc+YW6RL4x9c=;
-        b=bK2+ZgwriEcZxcsFZPGVeDHWH/YnTVCMUtFd6ff0Onn15zry6Qs6v6fseWCOJ1iAHL
-         WVBr+3lpCYcscld5d1dI8uYxR0txO7oydcfabcfvlMWAytxh26S3TDBX6+7m34VurCpn
-         ZiBSA2XbzBERk3jXqkA8ZHxLK3By2yZv73hIr1LgjPquhCHoa+lKGFeLD/ZkV2vBnBSi
-         HyifKxTYCOQCroc8Bke03+c8ES+g1R6fx1wL90phx/BiUVroF9EhNf+tbynLkjFLpt2k
-         ARZVJX5pf/sCdXcb6hu06q4gHa9Qq9uUhhgjLor1E8BHlPAgvQ5e5xGFS6XKVj7Jo9hk
-         SvCw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784016955; x=1784621755;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=8UXPYiyfSEkWVl+cC8sK2nhliwJgX/ylc+YW6RL4x9c=;
-        b=oifq/Mh5B2dYEAfxRdzBY1h562WTQPFQmcOGk7eic23gzX3L6M4e8MEkfbxkaXMNSg
-         FQ9wYymuou8FwY8UU3rpcuD6y8jWPpQG69Kc3wSI5+qQStW06RHUFPsX89H80UOWyyCY
-         vmBLXgIiAFhpXRZFe/cQgYk0K2FdUFcKY5nOnd+R/hx/Qg9A6j4frZkA1r4DWmsW86e6
-         6GBofxHbq85ZgV02si9sZcwjv+/OS5Cn5NipvtH4HS0t9hpQfC2NE3cA2ToDa6tiz4Dd
-         y5thcVKAzKp1EszWpZpZhdZrbIlSW1fEvBbkDC+KhvM0FuDIfR5gqBezLYkJHhfCYO2v
-         wXag==
-X-Forwarded-Encrypted: i=1; AHgh+RqTuoCQHx28UNuukfG8vwOfulO93NWPfKzUVMHMXwqK/RKqhW31IzRVCUZzBWhb+cP3H/m9G9lDVmc=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzlU4omsIIyG/nbJ/Vl6PwNHrta7whUW9eMa1nJaPLzjTgULvEz
-	vk5VjW/aNdSMsiOCT0OyiyGCWCK8Uvs19oM8/vLEe6VUiK0xmcGmbGQU
-X-Gm-Gg: AfdE7clC5jVkFYWu7QSAZwDIrffFjlfE5Pb5JIeidwZgv1vp9wS2cBZpWZ3DGdDEwtt
-	vOC1u3saDFnXtpk/zy+8CQ8+brDqXJ5UD7D6dWJuDB596G3D95nqQFt5zBaaGuDiMBn6VmYZbFa
-	dQIvMgeAVwimRlqoRL+0U/io9Mf77qpDJ7TwNdXG3Z2+Ry/JOGJz32OW2TEwcT/DBX8iqs/D9gb
-	gCpuHjqvvuS94XzqIloI6mEZAmg4HGjlX9kw/zAlpFPDKg1VXI93UWZXyRisy7DIh7T23kj9KRV
-	UVhSxOhoH0wuDYL0139uu7Soh/Gt1YHFvAUiiSZ4464Gf9Zh5H0ziBm/tkpYXHKaP1kpUe06BuH
-	eWR5pO+Z/tek1432HW9al47wT5SGKqJz58yTdpYXP0eRr3hiOY5BP1OdKqwXIEaENU5kJ/3olcn
-	k/3Mkm/208vs/5vddET5XWjJBMS7MhnDdCAJmVVq1x
-X-Received: by 2002:a17:90b:28c4:b0:38d:fda6:4873 with SMTP id 98e67ed59e1d1-38e17db7bd5mr2555852a91.10.1784016954644;
-        Tue, 14 Jul 2026 01:15:54 -0700 (PDT)
-Received: from localhost.localdomain ([210.184.73.204])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38e17443f4fsm1091008a91.11.2026.07.14.01.15.47
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Tue, 14 Jul 2026 01:15:54 -0700 (PDT)
-From: Hao Jia <jiahao.kernel@gmail.com>
-To: akpm@linux-foundation.org,
-	tj@kernel.org,
-	hannes@cmpxchg.org,
-	shakeel.butt@linux.dev,
-	mhocko@kernel.org,
-	yosry@kernel.org,
-	mkoutny@suse.com,
-	nphamcs@gmail.com,
-	chengming.zhou@linux.dev,
-	muchun.song@linux.dev,
-	roman.gushchin@linux.dev
-Cc: linux-mm@kvack.org,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	Hao Jia <jiahao1@lixiang.com>
-Subject: [PATCH 2/2] mm/zswap: Support batch writeback in shrink_memcg()
-Date: Tue, 14 Jul 2026 16:15:10 +0800
-Message-Id: <20260714081510.16895-3-jiahao.kernel@gmail.com>
-X-Mailer: git-send-email 2.39.2 (Apple Git-143)
-In-Reply-To: <20260714081510.16895-1-jiahao.kernel@gmail.com>
-References: <20260714081510.16895-1-jiahao.kernel@gmail.com>
+	s=arc-20240116; t=1784017273; c=relaxed/simple;
+	bh=YRQiObYZV7j4K+B9X4FSjAje/rXs+OimtUFNe3Mc5DU=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=hDCnGwcZzahyy1D5dln/T/3nMxz1ZAr0tmGquIaaznv0KsbMuP+Pb4spYN/VlC5cw0yoo1LD5SQ3ah1/CMtVu2+aCAORmisKUAss78hj2jMrkrycFT0GRa5+9G90haqdFTDA+ZAzhiXq8V6gPDP6YMG/KPrrD6YtPcadFDyoIws=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XPMvh/AR; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 31127C2BCB8;
+	Tue, 14 Jul 2026 08:21:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1784017271;
+	bh=YRQiObYZV7j4K+B9X4FSjAje/rXs+OimtUFNe3Mc5DU=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=XPMvh/ARLF279uK9RBvp5K1LgdyJibk0yujjbS7sXtC+lbSGIlb5KlmTSgS0m/TK5
+	 jkR2ZlZ/Xkrtxmr1Vxxg/LvHtLEdQwSzN9xMwGRvIxDB3CVxuD3Co/4AB9Opaupe9c
+	 NSqyOk9NyqIUc8GTm+wauiY3ODC/m+4qvj0nFcO6l4UtdT2fD84flnDVlVdxJdD1Fz
+	 rDaja6m5WMzKzLxJf4MUcpiTdUNTqq1kw6vq0XcnKHH4Fzmst0n1+8rS9oM+kTi9V3
+	 6bYssbrKVSCDkCsehfhvm89c0hL+/cAIZk1ajbFzKLt6Dttnh0PAGjjjl42dn++//8
+	 ZDi8cip5nlD2Q==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D2B9C44501;
+	Tue, 14 Jul 2026 08:21:11 +0000 (UTC)
+From: Andy Chung via B4 Relay <devnull+Andy.Chung.amd.com@kernel.org>
+Subject: [PATCH 0/4] hwmon: Add Kandou KB9002 PCIe retimer driver
+Date: Tue, 14 Jul 2026 16:19:31 +0800
+Message-Id: <20260714-kb9002-upstream-v1-0-8fd2f0b135d8@amd.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIABPxVWoC/yXMTQqEMAxA4atI1hZiC9XxKuKi1oxmxB8aFUG8u
+ 9VZfov3ThAKTAJlckKgnYXnKSJLE/C9mzpS3EaDRm0xz4wamg+iVtsiayA3KrTeFpZMXhgDsVo
+ Cffl4j1X9t2zNj/z6bOC6btc+znpzAAAA
+X-Change-ID: 20260713-kb9002-upstream-06c686e37833
+To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Andy Chung <andy.chung@amd.com>, 
+ Guenter Roeck <linux@roeck-us.net>, Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>
+Cc: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org, 
+ Andy Chung <Andy.Chung@amd.com>
+X-Mailer: b4 0.15.1
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784017234; l=1648;
+ i=Andy.Chung@amd.com; s=20260327; h=from:subject:message-id;
+ bh=YRQiObYZV7j4K+B9X4FSjAje/rXs+OimtUFNe3Mc5DU=;
+ b=JKeIf8l4EpvoK7p0e3AeHEUfiK61el0DEgPKJanCxa3HUQ4wvp2Ik8CYyxiuiYxGC+KMAYZD/
+ iPn5stRt2DABJQdy8BTswG1gdHXRocWel+YJXvZ5m88hXiNqPcFuMSf
+X-Developer-Key: i=Andy.Chung@amd.com; a=ed25519;
+ pk=X2gaHRnhU2q5hvMjkC6xmIcC03vKNvHY9CQRdsj9ecM=
+X-Endpoint-Received: by B4 Relay for Andy.Chung@amd.com/20260327 with
+ auth_id=696
+X-Original-From: Andy Chung <Andy.Chung@amd.com>
+Reply-To: Andy.Chung@amd.com
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-3.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TAGGED_FROM(0.00)[bounces-96675-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-96677-lists,linux-doc=lfdr.de,Andy.Chung.amd.com];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	FORGED_SENDER(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[linux-foundation.org,kernel.org,cmpxchg.org,linux.dev,suse.com,gmail.com];
-	FORGED_RECIPIENTS(0.00)[m:akpm@linux-foundation.org,m:tj@kernel.org,m:hannes@cmpxchg.org,m:shakeel.butt@linux.dev,m:mhocko@kernel.org,m:yosry@kernel.org,m:mkoutny@suse.com,m:nphamcs@gmail.com,m:chengming.zhou@linux.dev,m:muchun.song@linux.dev,m:roman.gushchin@linux.dev,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jiahao1@lixiang.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[jiahaokernel@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS(0.00)[m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:andy.chung@amd.com,m:linux@roeck-us.net,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-hwmon@vger.kernel.org,m:linux-doc@vger.kernel.org,m:Andy.Chung@amd.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jiahaokernel@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	TO_DN_SOME(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,lixiang.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	HAS_REPLYTO(0.00)[Andy.Chung@amd.com]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: EB84675256B
+X-Rspamd-Queue-Id: 48572752629
 
-From: Hao Jia <jiahao1@lixiang.com>
+The Kandou KB9002 is an 8-lane PCIe 5.0 retimer with an integrated
+microcontroller that exposes an SMBus 3.0 target (with mandatory PEC)
+on its sideband interface. Its firmware aggregates per-lane die
+temperatures and publishes the maximum through a register window.
 
-Currently, shrink_memcg() writes back at most one entry per-node during
-its traversal. This makes shrink_worker() inefficient, as it must
-repeatedly re-enter shrink_memcg() to make any substantial progress.
+This series adds a hwmon driver for it. The driver reports the
+aggregated maximum die temperature as temp1_input, and exposes the
+running firmware version and boot status under debugfs.
 
-To address this, extend shrink_memcg() and rewrite its LRU iteration logic
-to support batch writeback. Introduce the nr_to_scan parameter to bound how
-many pages are scanned per call. This enables batch writeback in the
-shrink_worker() path, while maintaining a low scan budget in the
-zswap_store() path.
+The series is organised as:
 
-Additionally, to prepare for future proactive writeback, update the return
-value semantics of shrink_memcg(): a positive value now represents the
-actual number of compressed bytes written back, 0 indicates that candidates
-existed but no writeback succeeded, and a negative value represents an
-error code.
+  1/4  add the "kandou" vendor prefix
+  2/4  device tree binding for the retimer
+  3/4  the driver, Kconfig/Makefile and MAINTAINERS entry
+  4/4  hwmon documentation
 
-Test Setup:
-Total memory: 32 GB.
-zswap settings: max_pool_percent=1, accept_threshold_percent=50,
-shrinker_enabled=N.
-Allocate 512MB of anonymous pages and fill them with random data (to avoid
-compression), then use cgroup memory.reclaim to force a large amount of
-anonymous pages into zswap. At an interval of 2ms, allocate a 4K anonymous
-page where the first 4 bytes are random numbers and the rest are zeros, and
-then trigger a reclamation of this 4K anonymous page through cgroup
-memory.reclaim. When the pool threshold is reached, shrink_memcg() will
-be triggered.
-
-The test data after running for 120s is as follows:
-                           Baseline         Patched
-shrink_worker wakeups          5363             85
-shrink_memcg calls       11,345,012        188,264
-written_back                  40214          40275
-
-Conclusion:
-Under the same workload and run duration, the patched kernel shows a
-significant reduction in both shrink_worker wakeups and shrink_memcg calls.
-
-Suggested-by: Yosry Ahmed <yosry@kernel.org>
-Signed-off-by: Hao Jia <jiahao1@lixiang.com>
+Signed-off-by: Andy Chung <Andy.Chung@amd.com>
 ---
- mm/zswap.c | 89 ++++++++++++++++++++++++++++++++++++++++++------------
- 1 file changed, 69 insertions(+), 20 deletions(-)
+Andy Chung (4):
+      dt-bindings: Add vendor prefix for Kandou
+      dt-bindings: hwmon: Add Kandou KB9002
+      hwmon: (kb9002) Add driver for Kandou KB9002 retimer
+      hwmon: (kb9002) Add documentation
 
-diff --git a/mm/zswap.c b/mm/zswap.c
-index 3d697a1a5365..6d492762957a 100644
---- a/mm/zswap.c
-+++ b/mm/zswap.c
-@@ -160,6 +160,11 @@ struct zswap_pool {
- 	char tfm_name[CRYPTO_MAX_ALG_NAME];
- };
- 
-+struct zswap_shrink_walk_arg {
-+	unsigned long bytes_written;
-+	bool encountered_page_in_swapcache;
-+};
-+
- /* Global LRU lists shared by all zswap pools. */
- static struct list_lru zswap_list_lru;
- 
-@@ -1089,8 +1094,9 @@ static enum lru_status shrink_memcg_cb(struct list_head *item, struct list_lru_o
- 				       void *arg)
- {
- 	struct zswap_entry *entry = container_of(item, struct zswap_entry, lru);
--	bool *encountered_page_in_swapcache = (bool *)arg;
-+	struct zswap_shrink_walk_arg *walk_arg = arg;
- 	swp_entry_t swpentry;
-+	unsigned int length;
- 	enum lru_status ret = LRU_REMOVED_RETRY;
- 	int writeback_result;
- 
-@@ -1133,10 +1139,11 @@ static enum lru_status shrink_memcg_cb(struct list_head *item, struct list_lru_o
- 
- 	/*
- 	 * Once the lru lock is dropped, the entry might get freed. The
--	 * swpentry is copied to the stack, and entry isn't deref'd again
--	 * until the entry is verified to still be alive in the tree.
-+	 * needed fields are copied to the stack, and entry isn't deref'd
-+	 * again until it is verified to still be alive in the tree.
- 	 */
- 	swpentry = entry->swpentry;
-+	length = entry->length;
- 
- 	/*
- 	 * It's safe to drop the lock here because we return either
-@@ -1155,12 +1162,13 @@ static enum lru_status shrink_memcg_cb(struct list_head *item, struct list_lru_o
- 		 * into the warmer region. We should terminate shrinking (if we're in the dynamic
- 		 * shrinker context).
- 		 */
--		if (writeback_result == -EEXIST && encountered_page_in_swapcache) {
-+		if (writeback_result == -EEXIST) {
- 			ret = LRU_STOP;
--			*encountered_page_in_swapcache = true;
-+			walk_arg->encountered_page_in_swapcache = true;
- 		}
- 	} else {
- 		zswap_written_back_pages++;
-+		walk_arg->bytes_written += length;
- 	}
- 
- 	return ret;
-@@ -1169,8 +1177,11 @@ static enum lru_status shrink_memcg_cb(struct list_head *item, struct list_lru_o
- static unsigned long zswap_shrinker_scan(struct shrinker *shrinker,
- 		struct shrink_control *sc)
- {
-+	struct zswap_shrink_walk_arg walk_arg = {
-+		.bytes_written = 0,
-+		.encountered_page_in_swapcache = false,
-+	};
- 	unsigned long shrink_ret;
--	bool encountered_page_in_swapcache = false;
- 
- 	if (!zswap_shrinker_enabled ||
- 			!mem_cgroup_zswap_writeback_enabled(sc->memcg)) {
-@@ -1179,9 +1190,9 @@ static unsigned long zswap_shrinker_scan(struct shrinker *shrinker,
- 	}
- 
- 	shrink_ret = list_lru_shrink_walk(&zswap_list_lru, sc, &shrink_memcg_cb,
--		&encountered_page_in_swapcache);
-+		&walk_arg);
- 
--	if (encountered_page_in_swapcache)
-+	if (walk_arg.encountered_page_in_swapcache)
- 		return SHRINK_STOP;
- 
- 	return shrink_ret ? shrink_ret : SHRINK_STOP;
-@@ -1275,9 +1286,31 @@ static struct shrinker *zswap_alloc_shrinker(void)
- 	return shrinker;
- }
- 
--static int shrink_memcg(struct mem_cgroup *memcg)
-+#define NR_ZSWAP_WB_BATCH	64UL
-+
-+/*
-+ * Scan up to @nr_to_scan pages across the per-node zswap LRUs of @memcg
-+ * and write back the reclaimable ones.
-+ *
-+ * Since the second-chance algorithm rotates referenced entries to the
-+ * LRU tail, the per-node scan is capped at the current LRU length so
-+ * each entry is scanned at most once per call. It is up to the caller
-+ * to handle retries, deciding whether to scan another memcg to complete
-+ * the full iteration, or to rescan the current memcg to drain its zswap
-+ * entries.
-+ *
-+ * Return: The number of compressed bytes written back (>= 0), or -ENOENT
-+ * if @memcg has writeback disabled, is a zombie cgroup, or has empty
-+ * zswap LRUs.
-+ */
-+static long shrink_memcg(struct mem_cgroup *memcg, unsigned long nr_to_scan)
- {
--	int nid, shrunk = 0, scanned = 0;
-+	struct zswap_shrink_walk_arg walk_arg = {
-+		.bytes_written = 0,
-+		.encountered_page_in_swapcache = false,
-+	};
-+	unsigned long nr_remaining = nr_to_scan;
-+	int nid;
- 
- 	if (!mem_cgroup_zswap_writeback_enabled(memcg))
- 		return -ENOENT;
-@@ -1290,24 +1323,40 @@ static int shrink_memcg(struct mem_cgroup *memcg)
- 		return -ENOENT;
- 
- 	for_each_node_state(nid, N_NORMAL_MEMORY) {
--		unsigned long nr_to_walk = 1;
-+		unsigned long nr_to_walk;
- 
--		shrunk += list_lru_walk_one(&zswap_list_lru, nid, memcg,
--					    &shrink_memcg_cb, NULL, &nr_to_walk);
--		scanned += 1 - nr_to_walk;
-+		/*
-+		 * Cap the scan at per-node LRU length so each entry is scanned
-+		 * at most once per call.
-+		 */
-+		nr_to_walk = min(nr_remaining,
-+				 list_lru_count_one(&zswap_list_lru, nid, memcg));
-+		if (!nr_to_walk)
-+			continue;
-+
-+		nr_remaining -= nr_to_walk;
-+		list_lru_walk_one(&zswap_list_lru, nid, memcg, &shrink_memcg_cb,
-+				  &walk_arg, &nr_to_walk);
-+		/* Return the unused share of the budget to the pool. */
-+		nr_remaining += nr_to_walk;
-+
-+		if (!nr_remaining)
-+			break;
- 	}
- 
--	if (!scanned)
-+	/* Nothing was scanned: every LRU under @memcg was empty. */
-+	if (nr_remaining == nr_to_scan)
- 		return -ENOENT;
- 
--	return shrunk ? 0 : -EAGAIN;
-+	return walk_arg.bytes_written;
- }
- 
- static void shrink_worker(struct work_struct *w)
- {
- 	struct mem_cgroup *memcg;
--	int ret, failures = 0, attempts = 0;
-+	int failures = 0, attempts = 0;
- 	unsigned long thr;
-+	long ret;
- 
- 	/* Reclaim down to the accept threshold */
- 	thr = zswap_accept_thr_pages();
-@@ -1369,7 +1418,7 @@ static void shrink_worker(struct work_struct *w)
- 			goto resched;
- 		}
- 
--		ret = shrink_memcg(memcg);
-+		ret = shrink_memcg(memcg, NR_ZSWAP_WB_BATCH);
- 		/* drop the extra reference */
- 		mem_cgroup_put(memcg);
- 
-@@ -1383,7 +1432,7 @@ static void shrink_worker(struct work_struct *w)
- 			continue;
- 		++attempts;
- 
--		if (ret && ++failures == MAX_RECLAIM_RETRIES)
-+		if (ret <= 0 && ++failures == MAX_RECLAIM_RETRIES)
- 			break;
- resched:
- 		cond_resched();
-@@ -1493,7 +1542,7 @@ bool zswap_store(struct folio *folio)
- 	objcg = get_obj_cgroup_from_folio(folio);
- 	if (objcg && !obj_cgroup_may_zswap(objcg)) {
- 		memcg = get_mem_cgroup_from_objcg(objcg);
--		if (shrink_memcg(memcg)) {
-+		if (shrink_memcg(memcg, 1) <= 0) {
- 			mem_cgroup_put(memcg);
- 			goto put_objcg;
- 		}
--- 
-2.34.1
+ .../devicetree/bindings/hwmon/kandou,kb9002.yaml   |  45 ++
+ .../devicetree/bindings/vendor-prefixes.yaml       |   2 +
+ Documentation/hwmon/index.rst                      |   1 +
+ Documentation/hwmon/kb9002.rst                     |  65 +++
+ MAINTAINERS                                        |   8 +
+ drivers/hwmon/Kconfig                              |  11 +
+ drivers/hwmon/Makefile                             |   1 +
+ drivers/hwmon/kb9002.c                             | 473 +++++++++++++++++++++
+ 8 files changed, 606 insertions(+)
+---
+base-commit: ca078d004cf58137bcf8cb24a8b271397431ba58
+change-id: 20260713-kb9002-upstream-06c686e37833
+
+Best regards,
+--  
+Andy Chung <Andy.Chung@amd.com>
+
 
 
