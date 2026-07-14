@@ -1,184 +1,170 @@
-Return-Path: <linux-doc+bounces-96699-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96700-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id N/xVN9wLVmoEygAAu9opvQ
-	(envelope-from <linux-doc+bounces-96699-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 12:13:48 +0200
+	id aw8xL18MVmonygAAu9opvQ
+	(envelope-from <linux-doc+bounces-96700-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 12:15:59 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE654753496
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 12:13:47 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 447477534E5
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 12:15:59 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linutronix.de header.s=2020 header.b=zk2GyPuL;
-	dkim=pass header.d=linutronix.de header.s=2020e header.b=UX4RPTay;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96699-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c15:e001:75::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96699-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=linutronix.de;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=imybyfb4;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96700-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-96700-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=gmail.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 9D1D6301F77C
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 10:13:08 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 4FC9F301C909
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 10:15:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CDFCB3644C9;
-	Tue, 14 Jul 2026 10:12:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B3191279792;
+	Tue, 14 Jul 2026 10:15:57 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 42FD336403C;
-	Tue, 14 Jul 2026 10:12:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7DD131F3BA4
+	for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 10:15:56 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784023974; cv=none; b=StcJP3bie1cXdrP8Kf7AvtBTaTxr3xcIGQhHWFhM19vro7jDIuYWdVXUo5Ou+n0BK3CTCUIBBiRvDiyGg2+uR1cIUQtCfXQ0aHJ7NJhcjckpR+IjwvNvLXtECtsTgtFc+cRrM6FTQYfUAYusxG5JL4QtcxLXM1h9Am8tIeqxXqo=
+	t=1784024157; cv=none; b=WA/yfcD7OYCurQq/Z8jKtfPEiJigVQb4s3+1n/RQChzY+/sc/psgF9+uLO0/bwl3sgRvaKf3niQE0ui8YxmXv2EZYPsUvqSAHgrrwQiQ0pF6BuAhitvNDq2aJ6G9NShHO9V0PrA4uPdnV4J6G8wsoH9al+JR04nBKSa8sXzxaOU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784023974; c=relaxed/simple;
-	bh=eGQhjevRi4VUY0qp+zJAH8KVskQKAiTQMslzprRoCd4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=srvFq2DYjTVSd0EWYkOmqD/GN+ZYhr6CEeBaDaY1mOdNkNLg93oqT2ie+4v4gYvbTPwd74vxLloy85kKrbJ2+MnhDjnfu7gAwCEBJM7N6B/Ler8GkKxqDqwg8X4YtdUTATOtIILnzNsc7baMnYvN8oBmEVL14MK8yWpQjD6hcTA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de; spf=pass smtp.mailfrom=linutronix.de; dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=zk2GyPuL; dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=UX4RPTay; arc=none smtp.client-ip=193.142.43.55
-Date: Tue, 14 Jul 2026 12:12:48 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1784023971;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=iTkmerU8UE91t1uqi1Zg80dTpHp+N6TCCSgmWke5AWY=;
-	b=zk2GyPuLv/CULvPLi8yopdSODYUTrhGxZKZk8dd8mzHUNuBSoZcHm43puFTCkFjFXm8uD0
-	EKzG/04UrVUW5/s+MKyPIecaj7TnLKSsJhra2w69fUBlZqCRtgex48kf84oZWv+ijO7xUB
-	MXwsbqhdUvynljp3nafCL1enVh0Xp8d/AJUv6JgfXle0ZzSTTq8sBb6IEcWVhyy4IO8/Nf
-	/s+UlSdE/v9xVUUZpvRTJ4pVRv9yKjQPDDR3a25XVGjttjZOmrgfZv5qsP92UwibxkupX1
-	ZRClx/XM9C1sf50o+COZoIqgSIL+m5BDD0Lri5/T6Nvz3L8z47TpJqgu3s7SUQ==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1784023971;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=iTkmerU8UE91t1uqi1Zg80dTpHp+N6TCCSgmWke5AWY=;
-	b=UX4RPTayR35zaZYCZZkIfXYdmcBvYC+h+fQ87S32/PfxvcS+wsHmXehsVSYaPPhLzb4Uhl
-	mvzIyqsh+iM8wJCg==
-From: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-To: Leonardo Bras <leobras.c@gmail.com>
-Cc: Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>,
-	Boqun Feng <boqun@kernel.org>, Waiman Long <longman@redhat.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	David Hildenbrand <david@kernel.org>,
-	Lorenzo Stoakes <ljs@kernel.org>,
-	"Liam R. Howlett" <liam@infradead.org>,
-	Vlastimil Babka <vbabka@kernel.org>,
-	Mike Rapoport <rppt@kernel.org>,
-	Suren Baghdasaryan <surenb@google.com>,
-	Michal Hocko <mhocko@suse.com>, Jann Horn <jannh@google.com>,
-	Pedro Falcato <pfalcato@suse.de>,
-	Brendan Jackman <jackmanb@google.com>,
-	Johannes Weiner <hannes@cmpxchg.org>, Zi Yan <ziy@nvidia.com>,
-	Harry Yoo <harry@kernel.org>, Hao Li <hao.li@linux.dev>,
-	Christoph Lameter <cl@gentwo.org>,
-	David Rientjes <rientjes@google.com>,
-	Roman Gushchin <roman.gushchin@linux.dev>,
-	Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>,
-	Kemeng Shi <shikemeng@huaweicloud.com>,
-	Nhat Pham <nphamcs@gmail.com>, Baoquan He <bhe@redhat.com>,
-	Barry Song <baohua@kernel.org>,
-	Youngjun Park <youngjun.park@lge.com>,
-	Qi Zheng <qi.zheng@linux.dev>,
-	Shakeel Butt <shakeel.butt@linux.dev>,
-	Axel Rasmussen <axelrasmussen@google.com>,
-	Yuanchu Xie <yuanchu@google.com>, Wei Xu <weixugc@google.com>,
-	"Borislav Petkov (AMD)" <bp@alien8.de>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Thomas Gleixner <tglx@kernel.org>,
-	Feng Tang <feng.tang@linux.alibaba.com>,
-	Dapeng Mi <dapeng1.mi@linux.intel.com>, Kees Cook <kees@kernel.org>,
-	Marco Elver <elver@google.com>, Jakub Kicinski <kuba@kernel.org>,
-	Li RongQing <lirongqing@baidu.com>,
-	Eric Biggers <ebiggers@kernel.org>,
-	"Paul E. McKenney" <paulmck@kernel.org>,
-	Nathan Chancellor <nathan@kernel.org>,
-	Miguel Ojeda <ojeda@kernel.org>, Nicolas Schier <nsc@kernel.org>,
-	Thomas =?utf-8?Q?Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
-	Douglas Anderson <dianders@chromium.org>,
-	Gary Guo <gary@garyguo.net>, Christian Brauner <brauner@kernel.org>,
-	Pasha Tatashin <pasha.tatashin@soleen.com>,
-	Masahiro Yamada <masahiroy@kernel.org>, Coiby Xu <coxu@redhat.com>,
-	Frederic Weisbecker <frederic@kernel.org>,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-mm@kvack.org, linux-rt-devel@lists.linux.dev
-Subject: Re: [PATCH v4 0/4] Introduce Per-CPU Work helpers (was QPW)
-Message-ID: <20260714101248.hV06z2cr@linutronix.de>
-References: <20260519012754.240804-1-leobras.c@gmail.com>
- <20260520130903.Ebsd4aUa@linutronix.de>
- <alP58SgTc2_8OFPc@WindFlash>
- <20260713080723.XOTiibfG@linutronix.de>
- <alVV44RO_SolaqMW@WindFlash>
+	s=arc-20240116; t=1784024157; c=relaxed/simple;
+	bh=hEVhFeAcHvH/aZGtAcwRKKTAgVoX/BkHcr7Mu00tItw=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=YZXnqvwVVexhT89wjio/I7FlyJcPY6QWHBwThvHoF5aFhO+f0CkiXuZmhlb74EWdbp0aDRZVL5vfCwae3PYhkLcHWshDJlYp3+mdE5GImKZcznTQBJcytGGoGVUIbEG+nlqbRcA41U6o/XcpjeDI/mXVWNOyrIdEQtwosg3igw8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=imybyfb4; arc=none smtp.client-ip=209.85.216.53
+Received: by mail-pj1-f53.google.com with SMTP id 98e67ed59e1d1-381c51fde6bso3976278a91.2
+        for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 03:15:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1784024156; x=1784628956; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=zlfRyXSi9xNEFSL0XUB0wgZUdzuVWaB2zH0YiT0w7lo=;
+        b=imybyfb4/ZZUC1pmwKJdt5U3qppWAkCAy4yO0ZMk0rby9kAVOwb7oZOvI+lgxw+7ef
+         rQ+pDXRpvOM+lGalywvWOudCY7+X/vIpEWnc+aFdxuulv1B9UuqvZ0QuIpMLMiVDJfGp
+         KvglTXkGnojyi8TAUoLqJ3DzNyuIV28AclWXZ7y0c+lzgnLqLnYhxpcmBMDiTSRM5it4
+         /QEf+cos1HRntwsnWXefWrvQSDg37StaH6h1PJEXgjAx5ALr1yUPdwVhRrhQilmixGhe
+         KdcfiEv3m6saDxE+0CmGODc5BMUZ4XgP7FEi9E6BR1TTkrGziayh5vUksHInFr1qqHEU
+         yfJA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784024156; x=1784628956;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=zlfRyXSi9xNEFSL0XUB0wgZUdzuVWaB2zH0YiT0w7lo=;
+        b=LB/SbbEAAaQtZXH49d8730fxse03cuCaRYweDpbskXVaaCsiaJwSR3pOvHTo5q6A0/
+         kP8U2s9PrgPXX9d55bXwMpwCoeDkBt7KtnLGspSVLc6zLLGVByt25GoWPTiClGIuPXZq
+         C2/x9JGuuDtFiivasy0HDiXZXBq/pPPDFWLOUYNqHQiYfASjTGbSr47VX/A9429nMtWs
+         YW5RoPz0wO0MOg8AX/X4/Hpe6Uli59EI5WjYwIDtekHVTsoybp85Ab6YDSAN05B/iYcq
+         pxX9kruwZDQSuDoR+RPpz6TyEOfPuFsSU1FuzudoPiyrRXiDOhB4O2QajfqqK71s99XU
+         NA4w==
+X-Gm-Message-State: AOJu0Yy/HyNlrdgr0XJ5GI4nRUud0Ixj5PlUtkZcxR1k5E1l4e+4s4kg
+	aawLn3uN8IRZTq8aAerOx/fWn4RTRaaZ8bDWnjwjTkWOtwQBYInRAxpB
+X-Gm-Gg: AfdE7cnJ74bvXXPbb+i64IFaEs4kfcU3OSElyn0aKyrEAfv/4EI5EG4F8PBcF6wqqsa
+	Zptl5cRsnt0Kh3EZQmZEzbLo7CDzqBztdCburKJFYrMHL2tYNT7xFVn6e3nixs2E0wXc2syFJpi
+	yvXzXcuZ9B3R4HU5GJNEhJt5xLpGvpKw9JceVMI9dNk23gYeY4z5zkyVmHIbO/pdvb+ANsDWyYm
+	pkI9l5QA/+CdVSV0v+bcOJ86pGFLQG31IA/UCPQpnLdGYnQHI9XaUwSM/BLO6J9EwFgMsWfNFUT
+	6DLhoZWKtiaMLvHPYNZEthUIQ0lg6C/4+XrRFQoXheaRc4SsK4Up4d407+RxsJdrRTcDKuBPDJe
+	7vDGb0VLrcP237dp8JgOv5pNUOPKOwIeqnSVl+8Di28VXB7/YJpPtEt7tPi9zYJDoUzIUQGi/1k
+	xo9fQfdgH1sGCXAyQvUYWP+mEMH35RaKv21h/S9nFSoE2PJTQF6dPotg==
+X-Received: by 2002:a17:90b:4fd1:b0:38e:d3b:436f with SMTP id 98e67ed59e1d1-38e0d3b4495mr4808903a91.36.1784024155916;
+        Tue, 14 Jul 2026 03:15:55 -0700 (PDT)
+Received: from ?IPV6:240e:38b:e68:3a00:5c02:dd08:7909:78d5? ([240e:38b:e68:3a00:5c02:dd08:7909:78d5])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38e1745a86esm1212662a91.16.2026.07.14.03.15.52
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 14 Jul 2026 03:15:55 -0700 (PDT)
+Message-ID: <b664685e-6785-44ae-8005-443032508096@gmail.com>
+Date: Tue, 14 Jul 2026 18:15:49 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <alVV44RO_SolaqMW@WindFlash>
+User-Agent: Mozilla Thunderbird
+Subject: Re: What's cooking in zh_CN (Jul 2026)
+To: Dongliang Mu <dzm91@hust.edu.cn>, Weijie Yuan <wy@wyuan.org>,
+ Dongliang Mu <mudongliangabcd@gmail.com>
+Cc: linux-doc@vger.kernel.org, Alex Shi <alexs@kernel.org>,
+ Yanteng Si <si.yanteng@linux.dev>, Ben Guo <ben.guo@openatom.club>,
+ Gary Guo <gary@garyguo.net>, Yan Zhu <zhuyan2015@qq.com>,
+ Doehyun Baek <doehyunbaek@gmail.com>,
+ Jiandong Qiu <qiujiandong1998@gmail.com>
+References: <alUXH8qRRjno2eZG@wyuan.org>
+ <CAD-N9QVXqYxtsn7YuUtCDWrwwk5+iFAkT2jcs26zbDUfwhAwsQ@mail.gmail.com>
+ <alYGtkVxW_0N-VqE@wyuan.org>
+ <cc922c1b-49a5-4c3a-855c-af8eb6539f62@hust.edu.cn>
+From: Alex Shi <seakeel@gmail.com>
+Content-Language: en-US
+In-Reply-To: <cc922c1b-49a5-4c3a-855c-af8eb6539f62@hust.edu.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linutronix.de,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
-	R_DKIM_ALLOW(-0.20)[linutronix.de:s=2020,linutronix.de:s=2020e];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-96699-lists,linux-doc=lfdr.de];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[bigeasy@linutronix.de,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-96700-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:leobras.c@gmail.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:peterz@infradead.org,m:mingo@redhat.com,m:will@kernel.org,m:boqun@kernel.org,m:longman@redhat.com,m:akpm@linux-foundation.org,m:david@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:jannh@google.com,m:pfalcato@suse.de,m:jackmanb@google.com,m:hannes@cmpxchg.org,m:ziy@nvidia.com,m:harry@kernel.org,m:hao.li@linux.dev,m:cl@gentwo.org,m:rientjes@google.com,m:roman.gushchin@linux.dev,m:chrisl@kernel.org,m:kasong@tencent.com,m:shikemeng@huaweicloud.com,m:nphamcs@gmail.com,m:bhe@redhat.com,m:baohua@kernel.org,m:youngjun.park@lge.com,m:qi.zheng@linux.dev,m:shakeel.butt@linux.dev,m:axelrasmussen@google.com,m:yuanchu@google.com,m:weixugc@google.com,m:bp@alien8.de,m:rdunlap@infradead.org,m:tglx@kernel.org,m:feng.tang@linux.alibaba.com,m:dapeng1.mi@linux.intel.com,m:kees@kernel.org,m:elver@google.com,m:kuba@kernel.org,m:lirong
- qing@baidu.com,m:ebiggers@kernel.org,m:paulmck@kernel.org,m:nathan@kernel.org,m:ojeda@kernel.org,m:nsc@kernel.org,m:thomas.weissschuh@linutronix.de,m:dianders@chromium.org,m:gary@garyguo.net,m:brauner@kernel.org,m:pasha.tatashin@soleen.com,m:masahiroy@kernel.org,m:coxu@redhat.com,m:frederic@kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:linux-rt-devel@lists.linux.dev,m:leobrasc@gmail.com,s:lists@lfdr.de];
-	FREEMAIL_TO(0.00)[gmail.com];
-	RCVD_COUNT_THREE(0.00)[3];
-	FREEMAIL_CC(0.00)[lwn.net,linuxfoundation.org,infradead.org,redhat.com,kernel.org,linux-foundation.org,google.com,suse.com,suse.de,cmpxchg.org,nvidia.com,linux.dev,gentwo.org,tencent.com,huaweicloud.com,gmail.com,lge.com,alien8.de,linux.alibaba.com,linux.intel.com,baidu.com,linutronix.de,chromium.org,garyguo.net,soleen.com,vger.kernel.org,kvack.org,lists.linux.dev];
+	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,linux.dev,openatom.club,garyguo.net,qq.com,gmail.com];
 	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[64];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[bigeasy@linutronix.de,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linutronix.de:+];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FREEMAIL_TO(0.00)[hust.edu.cn,wyuan.org,gmail.com];
+	FORGED_SENDER(0.00)[seakeel@gmail.com,linux-doc@vger.kernel.org];
+	TO_DN_SOME(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:dzm91@hust.edu.cn,m:wy@wyuan.org,m:mudongliangabcd@gmail.com,m:linux-doc@vger.kernel.org,m:alexs@kernel.org,m:si.yanteng@linux.dev,m:ben.guo@openatom.club,m:gary@garyguo.net,m:zhuyan2015@qq.com,m:doehyunbaek@gmail.com,m:qiujiandong1998@gmail.com,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[seakeel@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: DE654753496
+X-Rspamd-Queue-Id: 447477534E5
 
-On 2026-07-13 18:17:23 [-0300], Leonardo Bras wrote:
-> IIRC there are multiple users of this mechanism around the kernel. I 
-> remember picking the first three (swap, slub and memcontrol) as examples of 
-> how to use pwlocks (QPW at the time). With the concept proven, I could then 
-> proceed to work with other potential users to replace it. (We ended up 
-> dropping memcontrol in the process)
+
+
+On 2026/7/14 17:54, Dongliang Mu wrote:
+>>>> Since I made many noise these days on the list, which took up a lot of
+>>>> maintainers' time. This email summarizes the patches for zh_CN that are
+>>>> currently pending on the mailing list.
+>>> This is awesome. Maybe we can establish a dashboard for the activities
+>>> in zh_CN/TW related patches of linux-doc.
+>>>
+>>> I personally kept a knowledge base in the IMA (an app for storing
+>>> knowledge base in the cloud) in our club to monitor these activities.
+>> I remember kernel.org itself already provides this:
+>>
+>> https://patchwork.kernel.org/
+>>
+>> Is this similar to your idea? But I haven't look deep into patchwork
+>> before.
+>>
+>> Of source, having our own thing is definitely okay.
 > 
-> The main idea is to replace as many potential users as possible to reduce 
-> as much as possible the amount of IPIs in isolated cpus, and allow Linux 
-> to run workloads which require much lower latency.
-
-Right. I am not entirely opposed to this idea. If you can't improve the
-situation by other means I would consider this as the last resort. If
-the mm folks are on board with this, then even better.
-
-> This idea came as a general solution to a bunch of latency violations  
-> Marcelo and I were coming across.
 > 
-> Thanks!
-> Leo
+> I am not familar with patchwork too. How about Alex?
 
-Sebastian
+I don't know if the patchwork has a similar feature like this email, 
+does it?
+
+Thanks!
 
