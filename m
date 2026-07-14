@@ -1,242 +1,158 @@
-Return-Path: <linux-doc+bounces-96830-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96831-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id UEdrI4uYVmrz+gAAu9opvQ
-	(envelope-from <linux-doc+bounces-96830-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 22:14:03 +0200
+	id jwGcApeaVmrF+wAAu9opvQ
+	(envelope-from <linux-doc+bounces-96831-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 22:22:47 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 26635758A99
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 22:14:03 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6697A758B3C
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 22:22:46 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=pC1DnLXs;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96830-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96830-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
+	dkim=pass header.d=lunn.ch header.s=20171124 header.b=TWSX3Uo1;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96831-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96831-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=lunn.ch;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 118483031D81
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 20:14:02 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id A0F6A303BDEB
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 20:22:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BA0E243F8D5;
-	Tue, 14 Jul 2026 20:13:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6BA422EEE67;
+	Tue, 14 Jul 2026 20:22:40 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D86A241D63A
-	for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 20:13:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1A112DEA95;
+	Tue, 14 Jul 2026 20:22:38 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784060037; cv=none; b=fXDRJFpN3yuIAuO+UHyQO0hIZ5WNq4d+qqAOej+TevjwwdD4d4LNdlylum9CyrsW3FpjJYwBVe+Q4UQDqVbd78Xa5bDyQmuKfIqGlkVPKsOisnK7nGb7f4VjIg7MBnblzpAKWuHQ8RvUhOuXG2D0wSeaW0R6Ji/7cbQiC1VkfTU=
+	t=1784060560; cv=none; b=iF92oSdNid3RO9vLOTI+warQ34XTSzKX9B5itSYttyG7UTXIO2ior0UMEmW2tw/Qq/2ZHYNAbfgAk0i76Z4a5NVK/w2jZOJTIb110cnuL+xWvt70F5xWOIeempP8PdQr4QzFQqweSb7QjU0q5OrRIXbSy6+xZMtzX/89MWOh948=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784060037; c=relaxed/simple;
-	bh=Q8uBbE9XdPRVXQaZ0ExTI42TK7zcMOJJhXBlrcrT8a4=;
-	h=Subject:From:To:Cc:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=G/fKc7b+iPy1wTr/L8gVCHtY4+eZWftM/D9FMnCGsIwV9IOqKTidt6Vqh8JovCQzwNCyqocK0HIOfIhSxG7VWy7AlnWv0s8YlfMEjnbkH+8YZg5C4zro7Y5QDK6B/ta+AtfcVKck+iH5HNG2T36syKzC9FBt/8k19+1EYtufMiM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=pC1DnLXs; arc=none smtp.client-ip=209.85.214.169
-Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-2cc97653887so54594075ad.1
-        for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 13:13:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784060035; x=1784664835; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:user-agent
-         :references:in-reply-to:message-id:date:cc:to:from:subject:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=EUZJ2b06rpE59kyPt/lRc7T/ATHNB4Peeih6JEYSOE8=;
-        b=pC1DnLXsM9pmrYwdczi94TaLLqpfQzcoJ8YoVM1oFGZFe07rDd/ZCswe0khlgNZrJ1
-         bnZTQhA9whkBaPIDABjABX27M3zaGGfUO76Dkj5z00rDODdddWT6Euq7TCJeurqS0iI3
-         +eHgc2AwQ67JCkvEgbI1biks0xb/SD55hvZpvaIsGXP9UULODby2vYd0uE/y1WHYsLXo
-         KP8oZnUlz/rrrGvauR7PVCczqYe+AYH80h0j9wQGrBsbXdSvplOqRnTqBfpFTMMQNRpz
-         1jD00Q96/vaw21V2zPNgvEJegojwXZXA6TOPslb58rOSvT4N87aKlLO+AFVZUacP7NV4
-         RIqQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784060035; x=1784664835;
-        h=content-transfer-encoding:content-type:mime-version:user-agent
-         :references:in-reply-to:message-id:date:cc:to:from:subject:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=EUZJ2b06rpE59kyPt/lRc7T/ATHNB4Peeih6JEYSOE8=;
-        b=GuK88JPqoaezYDTANRl5uGva8t7xCvU8d5p3md5NHmK5GKsgUbH2M6LKuG3HLPaj8b
-         3mtajlwidj/theMzzWZcT/UCmW4hmMlmAce/tOstQsRXgiAzj6/TicHk2cpCygAI40AV
-         CFPOl15SROmJKbCLaK0geOqvgCOTgxWC3YPrBbMEhANuz2nCc82yfGnR1/s3ZMPSAvHg
-         Dk3hCbGL3b6m4Q6nODThvhL8COIjaK485Q8wq27c87OEkNVMvVY1nL7hyz5Uoezj/DyE
-         w5h8Ha0RMko44sEAdEu1VIdy5dxVZ2a4yNGezvQvOzGcD6UZerpw7hCnlXDfHfMiS8t5
-         PdXQ==
-X-Forwarded-Encrypted: i=1; AHgh+RpIKeeScczxTVDzQV/V6G97IeVPHg8dcCjtS2U9EsBLVSRGCbY6XDjcpJzLQez4bdFVBoBr65kwNuM=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwlNayC6lBqQ0hT/QcNXSJEwM2bCdmsZ4nYGTdibZtgl8Rsu66K
-	kwnlMG9a6fYioGUICudL1t5Q9KSoUSrr6myJmfo1oAzmXgcR7JqxxRe1
-X-Gm-Gg: AfdE7cl2SfoY2IbNK4XO9HD0PA36bTPcf8Ysk0xWhdOMNP/Sp18zQm80dUHM7GSwOj+
-	WxN6gwpq2/LbXasLlVT1iJvQMH/hyvuBTET5bisAuwWgZ7iiQKQyqELQMDelQMRv9OEem/WMFhr
-	F/kNDsVgadg8AAMtnutwuPj2r5kj/Ax7xNhj339DiauP+jBCvztk0w/XD9Hm4EW8fNaDlqgE0+i
-	XZYA+ZOSfVJARXX8bm4cnKIBYgTqKZ/K31rPvZIIZH4IGaZLHS4EJnk8tR52qlPW5ETYi2t3g+2
-	ayyMv2Y5wMLiAHCqDAFciGKmMM7P+KJGqAYQG1MTnyRFf30G/rAnTcHmyo6aTTS0BY7o1Ldh3al
-	aPN5MRVrDJSC33KPHNeDVPZtxHGyMAZjE7KiPSa76XO0+K5nQ9f3Pufa8hxkHroBurK19K4QphA
-	87wX9DRAfk42nroS28UGV5CUFAcOIfZAw5NhAluXBEIghCm2q/rvNhVb/WcdJJIqwVuLuIJA==
-X-Received: by 2002:a17:902:fc8f:b0:2c9:97a8:afe5 with SMTP id d9443c01a7336-2ce9f27e6dbmr139524545ad.40.1784060035193;
-        Tue, 14 Jul 2026 13:13:55 -0700 (PDT)
-Received: from [192.168.0.160] (c-98-225-44-182.hsd1.wa.comcast.net. [98.225.44.182])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ccc9bdb877sm120937885ad.14.2026.07.14.13.13.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Jul 2026 13:13:54 -0700 (PDT)
-Subject: [PATCH 4/4] fixup! drm/gpusvm: use hmm_range_fault_unlocked_timeout()
- for range faults
-From: Stanislav Kinsburskii <skinsburskii@gmail.com>
-To: airlied@gmail.com, akhilesh@ee.iitb.ac.in, akpm@linux-foundation.org,
- corbet@lwn.net, dakr@kernel.org, david@kernel.org, jgg@ziepe.ca,
- kees@kernel.org, leon@kernel.org, liam@infradead.org, lizhi.hou@amd.com,
- ljs@kernel.org, lyude@redhat.com, maarten.lankhorst@linux.intel.com,
- mamin506@gmail.com, mhocko@suse.com, mripard@kernel.org,
- nouveau@lists.freedesktop.org, ogabbay@kernel.org, oleg@redhat.com,
- rppt@kernel.org, shuah@kernel.org, simona@ffwll.ch,
- skhan@linuxfoundation.org, skinsburskii@gmail.com, surenb@google.com,
- tzimmermann@suse.de, vbabka@kernel.org
-Cc: dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-kselftest@vger.kernel.org, linux-rdma@vger.kernel.org
-Date: Tue, 14 Jul 2026 13:13:53 -0700
-Message-ID: <178406003318.1082778.16211328573488321338.stgit@skinsburskii>
-In-Reply-To: <178405975214.1082778.5193079941156341151.stgit@skinsburskii>
-References: <178405975214.1082778.5193079941156341151.stgit@skinsburskii>
-User-Agent: StGit/0.19
+	s=arc-20240116; t=1784060560; c=relaxed/simple;
+	bh=MFpXe0hwZAI39MmHBMAi4Buu7rRntpAi9pLML/7VCJ4=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=IcZxDF+C2xVYhiOVbDNAuE0M/fyWMdVU3V17EXNWbgGeuyNsuTMhTYgNwy7PxX3WtgDwscIEKTgReeh62+8TU1j+9QSv9ftFAoW7zVidwZvQgXIoeTlWqKt3InQxQoV+i9Mldc0ndhtAJABkrs/D/sC62TY0ar7ZqnLo9vkwVWk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=TWSX3Uo1; arc=none smtp.client-ip=156.67.10.101
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+	bh=R8CZEsf4KA93sMMtuykRokWiVz8pAkcIvLnEk4m256s=; b=TWSX3Uo1ZeMp3SXSd/7mfSE4ch
+	eeKsLjJT8UVnFNL2XwXmsBHSmnhXmRGrcyKimyZbMP6BFnTDGzc//E+dB2msSK1oMOnCXxi/MdNqD
+	Om5dKdeXmDaI0JX4tSdS13UknVCcZlqUSxC8oVoWVRIkKhMWuPv8hQHdN4joZaQkgqps=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+	(envelope-from <andrew@lunn.ch>)
+	id 1wjjeA-00CFO0-Hx; Tue, 14 Jul 2026 22:22:30 +0200
+Date: Tue, 14 Jul 2026 22:22:30 +0200
+From: Andrew Lunn <andrew@lunn.ch>
+To: "Shenwei Wang (OSS)" <shenwei.wang@oss.nxp.com>
+Cc: Mathieu Poirier <mathieu.poirier@linaro.org>,
+	Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>, Frank Li <frank.li@nxp.com>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	"linux-gpio@vger.kernel.org" <linux-gpio@vger.kernel.org>,
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	Shenwei Wang <shenwei.wang@nxp.com>, Peng Fan <peng.fan@nxp.com>,
+	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+	"linux-remoteproc@vger.kernel.org" <linux-remoteproc@vger.kernel.org>,
+	"imx@lists.linux.dev" <imx@lists.linux.dev>,
+	"linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>,
+	dl-linux-imx <linux-imx@nxp.com>,
+	Arnaud POULIQUEN <arnaud.pouliquen@foss.st.com>,
+	"b-padhi@ti.com" <b-padhi@ti.com>
+Subject: Re: [PATCH v14 1/5] docs: driver-api: gpio: rpmsg gpio driver over
+ rpmsg bus
+Message-ID: <68a9dd77-a07b-4ea5-ad66-9e2bda490d20@lunn.ch>
+References: <20260625155432.815185-1-shenwei.wang@oss.nxp.com>
+ <20260625155432.815185-2-shenwei.wang@oss.nxp.com>
+ <alUdg9iTysXCFUa5@p14s>
+ <PAXPR04MB918568AE7B2364EC9D16427689F92@PAXPR04MB9185.eurprd04.prod.outlook.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <PAXPR04MB918568AE7B2364EC9D16427689F92@PAXPR04MB9185.eurprd04.prod.outlook.com>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [2.34 / 15.00];
-	MID_END_EQ_FROM_USER_PART(4.00)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[lunn.ch,none];
+	R_DKIM_ALLOW(-0.20)[lunn.ch:s=20171124];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:airlied@gmail.com,m:akhilesh@ee.iitb.ac.in,m:akpm@linux-foundation.org,m:corbet@lwn.net,m:dakr@kernel.org,m:david@kernel.org,m:jgg@ziepe.ca,m:kees@kernel.org,m:leon@kernel.org,m:liam@infradead.org,m:lizhi.hou@amd.com,m:ljs@kernel.org,m:lyude@redhat.com,m:maarten.lankhorst@linux.intel.com,m:mamin506@gmail.com,m:mhocko@suse.com,m:mripard@kernel.org,m:nouveau@lists.freedesktop.org,m:ogabbay@kernel.org,m:oleg@redhat.com,m:rppt@kernel.org,m:shuah@kernel.org,m:simona@ffwll.ch,m:skhan@linuxfoundation.org,m:skinsburskii@gmail.com,m:surenb@google.com,m:tzimmermann@suse.de,m:vbabka@kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-mm@kvack.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-rdma@vger.kernel.org,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[bounces-96831-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	SUBJECT_HAS_EXCLAIM(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com,ee.iitb.ac.in,linux-foundation.org,lwn.net,kernel.org,ziepe.ca,infradead.org,amd.com,redhat.com,linux.intel.com,suse.com,lists.freedesktop.org,ffwll.ch,linuxfoundation.org,google.com,suse.de];
-	FORGED_SENDER(0.00)[skinsburskii@gmail.com,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[34];
-	TAGGED_FROM(0.00)[bounces-96830-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:shenwei.wang@oss.nxp.com,m:mathieu.poirier@linaro.org,m:linusw@kernel.org,m:brgl@kernel.org,m:corbet@lwn.net,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:andersson@kernel.org,m:frank.li@nxp.com,m:s.hauer@pengutronix.de,m:skhan@linuxfoundation.org,m:linux-gpio@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:kernel@pengutronix.de,m:festevam@gmail.com,m:shenwei.wang@nxp.com,m:peng.fan@nxp.com,m:devicetree@vger.kernel.org,m:linux-remoteproc@vger.kernel.org,m:imx@lists.linux.dev,m:linux-arm-kernel@lists.infradead.org,m:linux-imx@nxp.com,m:arnaud.pouliquen@foss.st.com,m:b-padhi@ti.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[26];
+	FREEMAIL_CC(0.00)[linaro.org,kernel.org,lwn.net,nxp.com,pengutronix.de,linuxfoundation.org,vger.kernel.org,gmail.com,lists.linux.dev,lists.infradead.org,foss.st.com,ti.com];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[andrew@lunn.ch,linux-doc@vger.kernel.org];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[skinsburskii@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	TO_DN_NONE(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[andrew@lunn.ch,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[lunn.ch:+];
 	ALIAS_RESOLVED(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,skinsburskii:mid]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,lunn.ch:from_mime,lunn.ch:dkim,lunn.ch:mid,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 26635758A99
+X-Rspamd-Queue-Id: 6697A758B3C
 
-The timeout passed to hmm_range_fault_unlocked_timeout() is a relative
-retry budget for HMM's internal mmu-notifier retry loop. drm_gpusvm was
-still keeping an absolute deadline around the outer driver retry logic
-and passing the remaining time into HMM.
+> The two fields above are required for rpmsg-gpio, but not for virtio-gpio.
+> 
+> In the rpmsg-gpio case, interrupt detection and handling occur on the remote processor. The 
+> interrupt information (such as the GPIO line and trigger type) must therefore be sent to Linux 
+> through this notification message.
+> 
+> In contrast, for virtio-gpio, interrupt handling is performed on the local processor. Since Linux already 
+> has all the necessary interrupt context, the information is not needed.
 
-Pass HMM_RANGE_DEFAULT_TIMEOUT directly to
-hmm_range_fault_unlocked_timeout() on each HMM fault attempt instead.
-If HMM succeeds but the later drm_gpusvm-side mmu_interval_read_retry()
-check observes an invalidation, retry with a fresh HMM retry budget.
+Are you sure about that?
 
-This keeps the timeout focused on repeated notifier retries inside HMM,
-while avoiding an outer deadline that also accounts unrelated driver-side
-work after HMM has made progress.
+virtio_gpio_irq_set_type() sets:
 
-Signed-off-by: Stanislav Kinsburskii <skinsburskii@gmail.com>
----
- drivers/gpu/drm/drm_gpusvm.c |   21 ++++++---------------
- 1 file changed, 6 insertions(+), 15 deletions(-)
+        irq_line->type = type;
+        irq_line->update_pending = true;
 
-diff --git a/drivers/gpu/drm/drm_gpusvm.c b/drivers/gpu/drm/drm_gpusvm.c
-index b8f2dd9982f5..76e8a0028c7f 100644
---- a/drivers/gpu/drm/drm_gpusvm.c
-+++ b/drivers/gpu/drm/drm_gpusvm.c
-@@ -852,8 +852,7 @@ enum drm_gpusvm_scan_result drm_gpusvm_scan_mm(struct drm_gpusvm_range *range,
- 		.end = end,
- 		.dev_private_owner = dev_private_owner,
- 	};
--	unsigned long timeout =
--		jiffies + msecs_to_jiffies(HMM_RANGE_DEFAULT_TIMEOUT);
-+	unsigned long timeout = msecs_to_jiffies(HMM_RANGE_DEFAULT_TIMEOUT);
- 	enum drm_gpusvm_scan_result state = DRM_GPUSVM_SCAN_UNPOPULATED, new_state;
- 	unsigned long *pfns;
- 	unsigned long npages = npages_in_range(start, end);
-@@ -867,8 +866,7 @@ enum drm_gpusvm_scan_result drm_gpusvm_scan_mm(struct drm_gpusvm_range *range,
- 	hmm_range.hmm_pfns = pfns;
- 
- retry:
--	err = hmm_range_fault_unlocked_timeout(&hmm_range,
--					       max(timeout - jiffies, 1L));
-+	err = hmm_range_fault_unlocked_timeout(&hmm_range, timeout);
- 	if (err)
- 		goto err_free;
- 
-@@ -1459,8 +1457,7 @@ int drm_gpusvm_get_pages(struct drm_gpusvm *gpusvm,
- 		.dev_private_owner = ctx->device_private_page_owner,
- 	};
- 	void *zdd;
--	unsigned long timeout =
--		jiffies + msecs_to_jiffies(HMM_RANGE_DEFAULT_TIMEOUT);
-+	unsigned long timeout = msecs_to_jiffies(HMM_RANGE_DEFAULT_TIMEOUT);
- 	unsigned long i, j;
- 	unsigned long npages = npages_in_range(pages_start, pages_end);
- 	unsigned long num_dma_mapped;
-@@ -1478,9 +1475,6 @@ int drm_gpusvm_get_pages(struct drm_gpusvm *gpusvm,
- 		return -EINVAL;
- 
- retry:
--	if (time_after(jiffies, timeout))
--		return -EBUSY;
--
- 	hmm_range.notifier_seq = mmu_interval_read_begin(notifier);
- 	if (drm_gpusvm_pages_valid_unlocked(gpusvm, svm_pages))
- 		goto set_seqno;
-@@ -1495,8 +1489,7 @@ int drm_gpusvm_get_pages(struct drm_gpusvm *gpusvm,
- 	}
- 
- 	hmm_range.hmm_pfns = pfns;
--	err = hmm_range_fault_unlocked_timeout(&hmm_range,
--				max_t(long, timeout - jiffies, 1));
-+	err = hmm_range_fault_unlocked_timeout(&hmm_range, timeout);
- 	mmput(mm);
- 	if (err)
- 		goto err_free;
-@@ -1718,8 +1711,7 @@ int drm_gpusvm_range_evict(struct drm_gpusvm *gpusvm,
- 		.end = drm_gpusvm_range_end(range),
- 		.dev_private_owner = NULL,
- 	};
--	unsigned long timeout =
--		jiffies + msecs_to_jiffies(HMM_RANGE_DEFAULT_TIMEOUT);
-+	unsigned long timeout = msecs_to_jiffies(HMM_RANGE_DEFAULT_TIMEOUT);
- 	unsigned long *pfns;
- 	unsigned long npages = npages_in_range(drm_gpusvm_range_start(range),
- 					       drm_gpusvm_range_end(range));
-@@ -1734,8 +1726,7 @@ int drm_gpusvm_range_evict(struct drm_gpusvm *gpusvm,
- 		return -ENOMEM;
- 
- 	hmm_range.hmm_pfns = pfns;
--	err = hmm_range_fault_unlocked_timeout(&hmm_range,
--				max_t(long, timeout - jiffies, 1));
-+	err = hmm_range_fault_unlocked_timeout(&hmm_range, timeout);
- 
- 	kvfree(pfns);
- 	mmput(mm);
+virtio_gpio_irq_bus_sync_unlock() looks at update_pending and does
+virtio_gpio_req(), passing irq_line->type as type.
 
+This then gets filled into:
 
+/* Virtio GPIO Request / Response */
+struct virtio_gpio_request {
+	__le16 type;
+	__le16 gpio;
+	__le32 value;
+};
+
+which gets scatter/gathered over the virtqueue to the peer.
+
+      Andrew
 
