@@ -1,374 +1,402 @@
-Return-Path: <linux-doc+bounces-96797-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96795-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id l2u1INVpVmpu5AAAu9opvQ
-	(envelope-from <linux-doc+bounces-96797-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 18:54:45 +0200
+	id lWvfI4JpVmpd5AAAu9opvQ
+	(envelope-from <linux-doc+bounces-96795-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 18:53:22 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id ECA6D75720F
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 18:54:44 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 123A57571DF
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 18:53:22 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=tu-dortmund.de header.s=unimail header.b=lqRayNJ3;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96797-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.105.105.114 as permitted sender) smtp.mailfrom="linux-doc+bounces-96797-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=tu-dortmund.de;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=SmIUNbMA;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96795-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96795-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 47077304496A
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 16:53:55 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id AA9173039D6F
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 16:52:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6181C4DB55F;
-	Tue, 14 Jul 2026 16:53:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 01EA74DA557;
+	Tue, 14 Jul 2026 16:52:37 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from unimail.uni-dortmund.de (mx1.hrz.uni-dortmund.de [129.217.128.51])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8EC24DA53B;
-	Tue, 14 Jul 2026 16:53:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66BA74D90CC
+	for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 16:52:35 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784048034; cv=none; b=IiYAu6HE7CeXRUF2Z4nohwMCKf10h94PxgHSkcVe7ta/qp5kgrtz4u/tpLvGhr0WhVafUyO5kItX6KOJfCDFjFfJxrkV4IK4Aei3/lBNKUmPm5OGuhZJajYlZ2yTcLXzeikDtJdDCCl2Bk5XBAzEJjsPpI4BzV20e1feivytIYQ=
+	t=1784047956; cv=none; b=j+so/Rx8I7hzmUr79EuOMB9k/aEob9gJ+4RCVuox0M6Xuzl8VqvHhT68EgzFFFQxSL5pePqznR9C504Ytz2bZGLv4WUPPgI4fw8EVdTuHqUhf3AbhMYOBmz7m38Qdbh9sPJKBlKxc8Y/Hhn5hgmGYADDe4ofVzLmxaoR8tlsLYA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784048034; c=relaxed/simple;
-	bh=83VW9d85zmWMrPStj329fIj3RyywCfOvRZEyveY1Rsg=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=lnRny/zMyhuHh9bYXB7HUVkaGW0vgasHE8cWngq94sv2pmBEugqvvOoK27cavvX0+yiPob0ii8HLGHmIJDiNFrT4qde9srrCBqXIG/W9qRmU9kjvH7R+9zRlnVWgJKVaJ+Kgu48ZfMpCpFUPWXKKSqAMFB1x6XEg6pf4KTPQyx4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=tu-dortmund.de; spf=pass smtp.mailfrom=tu-dortmund.de; dkim=pass (1024-bit key) header.d=tu-dortmund.de header.i=@tu-dortmund.de header.b=lqRayNJ3; arc=none smtp.client-ip=129.217.128.51
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tu-dortmund.de;
-	s=unimail; t=1784047821;
-	bh=vAW5FA3Xl0xSztKqt7pJVGt+YqB7rOYi05byhlzLQA8=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=lqRayNJ3OPsjdq1y/DOs8F0sxr5mMso1IDHhJj0X4synGNhRulMQQ/6PktVJMtej6
-	 ZWI+gYO/xnuOJDlUTsbOjxqn9jRusR/iESWUTPDvjl6xQ4Fg2EKcH8DLggzPlIzQkk
-	 uSYthIBGQgS+vnfh2nXHa1dzDFmE6dWzSOf3Qiu4=
-Received: from [192.168.178.68] (p5dc88f95.dip0.t-ipconnect.de [93.200.143.149])
-	(authenticated bits=0)
-	by unimail.uni-dortmund.de (8.19.0.2/8.19.0.2) with ESMTPSA id 66EGoJuE002571
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Tue, 14 Jul 2026 18:50:19 +0200 (CEST)
-Message-ID: <5016ae84-7049-4a5f-91c9-ba0047b06ee3@tu-dortmund.de>
-Date: Tue, 14 Jul 2026 18:50:18 +0200
+	s=arc-20240116; t=1784047956; c=relaxed/simple;
+	bh=NqUKjeHmP2e5jPIlYwcL77DeZL8TDztFypI8FUZJxIk=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=Adrxs38rmW6nEptgeRlD/SHuo86Y3iNdZFjNvrgSYgrg59eFWVDC2xSVJMa7TJKBCQxxls/QHYyTC7SZ10QMZYsJo5Zk1+2xGeuoqBBV6ygo/rYb0fGJFe4kQGJjiEbt6htcE/hhSORM2NDo618HFhnG3fyWe0HCzxmS2WgkpzA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SmIUNbMA; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 352811F00A3D
+	for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 16:52:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784047955;
+	bh=usA+eQuBbKhAqy88p0ZuKIybdHIRo+5vum9+Gy90cfg=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=SmIUNbMAJzdBFOb3EWIgHmlPEA5j/tNmFEZ0gYzEaWiPJ5c4HC+/DpjnVJtlmNpDK
+	 oWrGY4/dJhMj3n2dYiExdG9KhJgwGt1e5yY+EMeUY/bcFPzOsZDvCylc5utcXkRgGM
+	 qHFLzGKkfE33hk9OE7a4UoB0R2VqTWD/kBusmtMI5hSzdrsBPtPdeUr2B39jAKPXjA
+	 0qawgP+ALUdqCL/leGVMfACUimr8Whfw5uU7W4ECJ+QYdQSzPuvMxMyt5WyuqjiyrX
+	 vZo2jiCLFyXtBLszYAl/7FuE7WmiaCmdPRiKh/JkgyoC2f1iyScAbnkSXhDkfjbv1V
+	 Dkq9aWbSFWfoA==
+Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-c15b1da6b82so143198166b.1
+        for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 09:52:35 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AFNElJ85oDNgNP3zq3LTI1FdK0idsxgh/zeSiYg5bHT6YKKuMReL0vfangYkoCyhphbb5383uFoZOa5cwNU=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yxw/3tqMOvisO4nfCGW/HD40pkxBoMGN82PbP69lb8c95SRV24w
+	++qrYDUVOlHynczC88GeixejI+NVfZ8IY4nTHwKQLroh0QT9MbwI8ORdYrR7nlTDd3U011sUyMR
+	P5RmAxgyXbyW4AXlqO9WbMrbhYO66mTg=
+X-Received: by 2002:a17:907:c22:b0:c16:2d90:6878 with SMTP id
+ a640c23a62f3a-c162d908032mr596876966b.34.1784047953804; Tue, 14 Jul 2026
+ 09:52:33 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net v3] tun/tap & vhost-net: make qdisc backpressure
- opt-in via IFF_BACKPRESSURE
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
-        Jason Wang <jasowangio@gmail.com>,
-        "David S . Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>, netdev@vger.kernel.org,
-        Simon Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-        Shuah Khan <skhan@linuxfoundation.org>,
-        Andrew Lunn <andrew+netdev@lunn.ch>,
-        Tim Gebauer <tim.gebauer@tu-dortmund.de>,
-        Brett Sheffield <brett@librecast.net>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20260709095511.168235-1-simon.schippers@tu-dortmund.de>
- <20260714092506-mutt-send-email-mst@kernel.org>
-Content-Language: en-US
-From: Simon Schippers <simon.schippers@tu-dortmund.de>
-In-Reply-To: <20260714092506-mutt-send-email-mst@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20260714081510.16895-1-jiahao.kernel@gmail.com> <20260714081510.16895-3-jiahao.kernel@gmail.com>
+In-Reply-To: <20260714081510.16895-3-jiahao.kernel@gmail.com>
+From: Yosry Ahmed <yosry@kernel.org>
+Date: Tue, 14 Jul 2026 09:52:22 -0700
+X-Gmail-Original-Message-ID: <CAO9r8zNiT63LUHx8X5i_aboX1UWuGkcFf+p9ch-pekURUuDdXg@mail.gmail.com>
+X-Gm-Features: AUfX_myNiNK6fU_5CvtOxp6oCLEnI38Xv-YxdAfG34np1jpXrEds4Me9pLBjBDQ
+Message-ID: <CAO9r8zNiT63LUHx8X5i_aboX1UWuGkcFf+p9ch-pekURUuDdXg@mail.gmail.com>
+Subject: Re: [PATCH 2/2] mm/zswap: Support batch writeback in shrink_memcg()
+To: Hao Jia <jiahao.kernel@gmail.com>
+Cc: akpm@linux-foundation.org, tj@kernel.org, hannes@cmpxchg.org, 
+	shakeel.butt@linux.dev, mhocko@kernel.org, mkoutny@suse.com, 
+	nphamcs@gmail.com, chengming.zhou@linux.dev, muchun.song@linux.dev, 
+	roman.gushchin@linux.dev, linux-mm@kvack.org, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, Hao Jia <jiahao1@lixiang.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-3.66 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[tu-dortmund.de,none];
-	R_DKIM_ALLOW(-0.20)[tu-dortmund.de:s=unimail];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20260515];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-96797-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-96795-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:jiahao.kernel@gmail.com,m:akpm@linux-foundation.org,m:tj@kernel.org,m:hannes@cmpxchg.org,m:shakeel.butt@linux.dev,m:mhocko@kernel.org,m:mkoutny@suse.com,m:nphamcs@gmail.com,m:chengming.zhou@linux.dev,m:muchun.song@linux.dev,m:roman.gushchin@linux.dev,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jiahao1@lixiang.com,m:jiahaokernel@gmail.com,s:lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER(0.00)[simon.schippers@tu-dortmund.de,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	FORGED_RECIPIENTS(0.00)[m:mst@redhat.com,m:willemdebruijn.kernel@gmail.com,m:jasowangio@gmail.com,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:netdev@vger.kernel.org,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:andrew+netdev@lunn.ch,m:tim.gebauer@tu-dortmund.de,m:brett@librecast.net,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:willemdebruijnkernel@gmail.com,m:andrew@lunn.ch,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[yosry@kernel.org,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	FREEMAIL_TO(0.00)[gmail.com];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[gmail.com,davemloft.net,google.com,kernel.org,redhat.com,vger.kernel.org,lwn.net,linuxfoundation.org,lunn.ch,tu-dortmund.de,librecast.net];
+	FREEMAIL_CC(0.00)[linux-foundation.org,kernel.org,cmpxchg.org,linux.dev,suse.com,gmail.com,kvack.org,vger.kernel.org,lixiang.com];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[simon.schippers@tu-dortmund.de,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[tu-dortmund.de:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	FROM_NEQ_ENVFROM(0.00)[yosry@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	ALIAS_RESOLVED(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,librecast.net:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,mail.gmail.com:mid,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: ECA6D75720F
+X-Rspamd-Queue-Id: 123A57571DF
 
-On 7/14/26 15:40, Michael S. Tsirkin wrote:
-> On Thu, Jul 09, 2026 at 11:55:11AM +0200, Simon Schippers wrote:
->> Commit 1d6e569b7d0c ("tun/tap & vhost-net: avoid ptr_ring tail-drop
->> when a qdisc is present") did not show a relevant performance regression
->> in my testing but on Brett Sheffield's librecast testbed it shows a
->> significant performance drop in a IPv6 multicast testcase. The regression
->> can be pinpointed when multiple iperf3 TCP threads are sending. For 8
->> threads the performance dropped from 13.5 Gbit/s to 9.13 Gbit/s. This is
->> the reason why this patch makes the qdisc backpressure behavior opt-in.
->>
->> One option to accomplish the opt-in would be to set the default qdisc to
->> noqueue at init. However this may also break userspace as users might
->> have chosen a custom qdisc even though most of the qdiscs did nothing
->> for tun/tap in the past due to missing backpressure...
->>
->> This is the reason why in this patch, the flag IFF_BACKPRESSURE is
->> introduced instead which is required to enable the backpressure logic.
->> This means the stopping logic in tun_net_xmit() and the waking logic in
->> __tun_wake_queue() are skipped if the flag is disabled. Setting
->> IFF_BACKPRESSURE makes an attached qdisc effective by stopping the queue
->> instead of tail-dropping when the internal ring is full.
->>
->> To avoid a possible stall due to disabling IFF_BACKPRESSURE, the new
->> helper tun_force_wake_queue() is implemented. The helper safely wakes the
->> respective netdev queue and resets cons_cnt while the consumer_lock and
->> the producer_lock of the ring are held. The helper is run in tun_attach()
->> when a queue (re)attaches, in tun_set_iff() for attached tfiles, and
->> in tun_queue_resize().
->>
->> The documentation in tuntap.rst is updated accordingly.
->>
->> Fixes: 1d6e569b7d0c ("tun/tap & vhost-net: avoid ptr_ring tail-drop when a qdisc is present")
->> Reported-by: Brett Sheffield <brett@librecast.net>
->> Closes: https://lore.kernel.org/netdev/akVnoOYQOrt8k-Gu@karahi.librecast.net/T/#u
->> Signed-off-by: Simon Schippers <simon.schippers@tu-dortmund.de>
-> 
-> 
-> The patch itself is fine:
-> 
-> Acked-by: Michael S. Tsirkin <mst@redhat.com>
-> 
-> What bothers me is the timing: we
-> are past freeze and this new interface hasn't been tested
-> much.
-> 
-> We can either apply this, or revert the original patch for now
-> and reapply with this for next.
+On Tue, Jul 14, 2026 at 1:15=E2=80=AFAM Hao Jia <jiahao.kernel@gmail.com> w=
+rote:
+>
+> From: Hao Jia <jiahao1@lixiang.com>
+>
+> Currently, shrink_memcg() writes back at most one entry per-node during
+> its traversal. This makes shrink_worker() inefficient, as it must
+> repeatedly re-enter shrink_memcg() to make any substantial progress.
 
-I prefer applying it, but you maintainers must decide that.
+Please also mention the case about writeback being slow to keep up
+with refaults in some cases, leading to zswap store failures and pages
+skipping zswap and going directly to disk, which is an LRU inversion.
 
-> 
->> ---
->> V2 -> V3:
->> - As suggested by MST: Clarify in tuntap.rst and the UAPI header what
->>   enabling IFF_BACKPRESSURE opts into: an attached qdisc becomes effective
->>   instead of the driver tail-dropping when the internal ring is full.
->> - Avoid lines over 75 characters.
->> - Update comment in tun_net_xmit() to include IFF_BACKPRESSURE.
->> - Brett: Update in commit message that the referenced tests were TCP.
->>
->> V1 -> V2:
->> - Sashiko: Ensure detached queues are woken on re-attach by calling the
->>   new tun_force_wake_queue() helper from tun_attach(), and reuse it
->>   across the existing wake paths.
->> - Specify the failing test case in the commit message.
->>
->> V1: https://lore.kernel.org/netdev/20260704112058.95421-1-simon.schippers@tu-dortmund.de/T/#u
->> V2: https://lore.kernel.org/netdev/20260706094242.115992-1-simon.schippers@tu-dortmund.de/T/#u
->>
->>  Documentation/networking/tuntap.rst | 22 +++++++++++++
->>  drivers/net/tun.c                   | 51 ++++++++++++++++++++---------
->>  include/uapi/linux/if_tun.h         |  4 +++
->>  tools/include/uapi/linux/if_tun.h   |  1 +
->>  4 files changed, 62 insertions(+), 16 deletions(-)
->>
->> diff --git a/Documentation/networking/tuntap.rst b/Documentation/networking/tuntap.rst
->> index 4d7087f727be..5921a924c2ae 100644
->> --- a/Documentation/networking/tuntap.rst
->> +++ b/Documentation/networking/tuntap.rst
->> @@ -206,6 +206,28 @@ enable is true we enable it, otherwise we disable it::
->>        return ioctl(fd, TUNSETQUEUE, (void *)&ifr);
->>    }
->>  
->> +3.4 qdisc backpressure
->> +----------------------
->> +
->> +Starting with Linux 7.2, IFF_BACKPRESSURE can be set to enable qdisc
->> +backpressure. Without it, TX drops occur when the internal ring buffer
->> +is full, so any attached qdisc is effectively bypassed and applications
->> +only learn about congestion through those drops.
->> +
->> +With it, the kernel stops instead, letting the qdisc hold and schedule
->> +packets, so its AQM, shaping and fairness actually apply. This helps
->> +protocols like TCP, which cut throughput in reaction to packet drops.
->> +With IFF_BACKPRESSURE, drops then only occur as a rare race. Backpressure
->> +requires a qdisc to be attached and has no effect with noqueue.
->> +
->> +The txqueuelen can be reduced alongside this flag to further shift
->> +buffering into the qdisc and reduce bufferbloat, but comes at possible
->> +performance cost.
->> +
->> +When running multiple network streams in parallel through a single
->> +TUN/TAP queue, the flag may reduce performance due to the extra overhead
->> +of the backpressure mechanism.
->> +
->>  Universal TUN/TAP device driver Frequently Asked Question
->>  =========================================================
->>  
->> diff --git a/drivers/net/tun.c b/drivers/net/tun.c
->> index ffbe6f13fb1f..5941e8f302ea 100644
->> --- a/drivers/net/tun.c
->> +++ b/drivers/net/tun.c
->> @@ -98,7 +98,8 @@ static void tun_default_link_ksettings(struct net_device *dev,
->>  #define TUN_FASYNC	IFF_ATTACH_QUEUE
->>  
->>  #define TUN_FEATURES (IFF_NO_PI | IFF_ONE_QUEUE | IFF_VNET_HDR | \
->> -		      IFF_MULTI_QUEUE | IFF_NAPI | IFF_NAPI_FRAGS)
->> +		      IFF_MULTI_QUEUE | IFF_NAPI | IFF_NAPI_FRAGS | \
->> +		      IFF_BACKPRESSURE)
->>  
->>  #define GOODCOPY_LEN 128
->>  
->> @@ -694,6 +695,20 @@ static void tun_detach_all(struct net_device *dev)
->>  		module_put(THIS_MODULE);
->>  }
->>  
->> +static void tun_force_wake_queue(struct tun_struct *tun,
->> +				 struct tun_file *tfile)
->> +{
->> +	/* Ensure that the producer can not stop the
->> +	 * queue concurrently by taking locks.
->> +	 */
->> +	spin_lock_bh(&tfile->tx_ring.consumer_lock);
->> +	spin_lock(&tfile->tx_ring.producer_lock);
->> +	netif_wake_subqueue(tun->dev, tfile->queue_index);
->> +	tfile->cons_cnt = 0;
->> +	spin_unlock(&tfile->tx_ring.producer_lock);
->> +	spin_unlock_bh(&tfile->tx_ring.consumer_lock);
->> +}
->> +
->>  static int tun_attach(struct tun_struct *tun, struct file *file,
->>  		      bool skip_filter, bool napi, bool napi_frags,
->>  		      bool publish_tun)
->> @@ -737,11 +752,9 @@ static int tun_attach(struct tun_struct *tun, struct file *file,
->>  		goto out;
->>  	}
->>  
->> -	spin_lock(&tfile->tx_ring.consumer_lock);
->> -	tfile->cons_cnt = 0;
->> -	spin_unlock(&tfile->tx_ring.consumer_lock);
->>  	tfile->queue_index = tun->numqueues;
->>  	tfile->socket.sk->sk_shutdown &= ~RCV_SHUTDOWN;
->> +	tun_force_wake_queue(tun, tfile);
->>  
->>  	if (tfile->detached) {
->>  		/* Re-attach detached tfile, updating XDP queue_index */
->> @@ -1077,7 +1090,8 @@ static netdev_tx_t tun_net_xmit(struct sk_buff *skb, struct net_device *dev)
->>  
->>  	spin_lock(&tfile->tx_ring.producer_lock);
->>  	ret = __ptr_ring_produce(&tfile->tx_ring, skb);
->> -	if (!qdisc_txq_has_no_queue(queue) &&
->> +	if ((tun->flags & IFF_BACKPRESSURE) &&
->> +	    !qdisc_txq_has_no_queue(queue) &&
->>  	    __ptr_ring_check_produce(&tfile->tx_ring) == -ENOSPC) {
->>  		netif_tx_stop_queue(queue);
->>  		/* Paired with smp_mb() in __tun_wake_queue() */
->> @@ -1088,8 +1102,8 @@ static netdev_tx_t tun_net_xmit(struct sk_buff *skb, struct net_device *dev)
->>  	spin_unlock(&tfile->tx_ring.producer_lock);
->>  
->>  	if (ret) {
->> -		/* This should be a rare case if a qdisc is present, but
->> -		 * can happen due to lltx.
->> +		/* This should be a rare case if IFF_BACKPRESSURE is enabled and
->> +		 * a qdisc is present, but can happen due to lltx.
->>  		 * Since skb_tx_timestamp(), skb_orphan(),
->>  		 * run_ebpf_filter() and pskb_trim() could have tinkered
->>  		 * with the SKB, returning NETDEV_TX_BUSY is unsafe and
->> @@ -2151,8 +2165,12 @@ static ssize_t tun_put_user(struct tun_struct *tun,
->>  static void __tun_wake_queue(struct tun_struct *tun,
->>  			     struct tun_file *tfile, int consumed)
->>  {
->> -	struct netdev_queue *txq = netdev_get_tx_queue(tun->dev,
->> -						tfile->queue_index);
->> +	struct netdev_queue *txq;
->> +
->> +	if (!(tun->flags & IFF_BACKPRESSURE))
->> +		return;
->> +
->> +	txq = netdev_get_tx_queue(tun->dev, tfile->queue_index);
->>  
->>  	/* Paired with smp_mb__after_atomic() in tun_net_xmit() */
->>  	smp_mb();
->> @@ -2764,7 +2782,7 @@ static int tun_set_iff(struct net *net, struct file *file, struct ifreq *ifr)
->>  	struct tun_struct *tun;
->>  	struct tun_file *tfile = file->private_data;
->>  	struct net_device *dev;
->> -	int err;
->> +	int err, i;
->>  
->>  	if (tfile->detached)
->>  		return -EINVAL;
->> @@ -2893,8 +2911,12 @@ static int tun_set_iff(struct net *net, struct file *file, struct ifreq *ifr)
->>  	/* Make sure persistent devices do not get stuck in
->>  	 * xoff state.
->>  	 */
->> -	if (netif_running(tun->dev))
->> -		netif_tx_wake_all_queues(tun->dev);
->> +	if (netif_running(tun->dev)) {
->> +		for (i = 0; i < tun->numqueues; i++) {
->> +			tfile = rtnl_dereference(tun->tfiles[i]);
->> +			tun_force_wake_queue(tun, tfile);
->> +		}
->> +	}
->>  
->>  	strscpy(ifr->ifr_name, tun->dev->name);
->>  	return 0;
->> @@ -3693,10 +3715,7 @@ static int tun_queue_resize(struct tun_struct *tun)
->>  	if (!ret) {
->>  		for (i = 0; i < tun->numqueues; i++) {
->>  			tfile = rtnl_dereference(tun->tfiles[i]);
->> -			spin_lock(&tfile->tx_ring.consumer_lock);
->> -			netif_wake_subqueue(tun->dev, tfile->queue_index);
->> -			tfile->cons_cnt = 0;
->> -			spin_unlock(&tfile->tx_ring.consumer_lock);
->> +			tun_force_wake_queue(tun, tfile);
->>  		}
->>  	}
->>  
->> diff --git a/include/uapi/linux/if_tun.h b/include/uapi/linux/if_tun.h
->> index 79d53c7a1ebd..a0ddc50a7534 100644
->> --- a/include/uapi/linux/if_tun.h
->> +++ b/include/uapi/linux/if_tun.h
->> @@ -69,6 +69,10 @@
->>  #define IFF_NAPI_FRAGS	0x0020
->>  /* Used in TUNSETIFF to bring up tun/tap without carrier */
->>  #define IFF_NO_CARRIER	0x0040
->> +/* Stop the queue instead of dropping when the internal ring is full, so an
->> + * attached qdisc applies backpressure instead of being bypassed.
->> + */
->> +#define IFF_BACKPRESSURE	0x0080
->>  #define IFF_NO_PI	0x1000
->>  /* This flag has no real effect */
->>  #define IFF_ONE_QUEUE	0x2000
->> diff --git a/tools/include/uapi/linux/if_tun.h b/tools/include/uapi/linux/if_tun.h
->> index 2ec07de1d73b..97b670f5bc0a 100644
->> --- a/tools/include/uapi/linux/if_tun.h
->> +++ b/tools/include/uapi/linux/if_tun.h
->> @@ -67,6 +67,7 @@
->>  #define IFF_TAP		0x0002
->>  #define IFF_NAPI	0x0010
->>  #define IFF_NAPI_FRAGS	0x0020
->> +#define IFF_BACKPRESSURE	0x0080
->>  #define IFF_NO_PI	0x1000
->>  /* This flag has no real effect */
->>  #define IFF_ONE_QUEUE	0x2000
->> -- 
->> 2.43.0
-> 
+>
+> To address this, extend shrink_memcg() and rewrite its LRU iteration logi=
+c
+> to support batch writeback. Introduce the nr_to_scan parameter to bound h=
+ow
+> many pages are scanned per call. This enables batch writeback in the
+> shrink_worker() path, while maintaining a low scan budget in the
+> zswap_store() path.
+>
+> Additionally, to prepare for future proactive writeback, update the retur=
+n
+> value semantics of shrink_memcg(): a positive value now represents the
+> actual number of compressed bytes written back, 0 indicates that candidat=
+es
+> existed but no writeback succeeded, and a negative value represents an
+> error code.
+
+This part should be dropped for now, and added with the proactive
+writeback, as it's currently unused AFAICT. Removing
+zswap_shrink_walk_arg will simplify the patch and make it focused on
+the batching part.
+
+>
+> Test Setup:
+> Total memory: 32 GB.
+> zswap settings: max_pool_percent=3D1, accept_threshold_percent=3D50,
+> shrinker_enabled=3DN.
+> Allocate 512MB of anonymous pages and fill them with random data (to avoi=
+d
+> compression), then use cgroup memory.reclaim to force a large amount of
+> anonymous pages into zswap. At an interval of 2ms, allocate a 4K anonymou=
+s
+> page where the first 4 bytes are random numbers and the rest are zeros, a=
+nd
+> then trigger a reclamation of this 4K anonymous page through cgroup
+> memory.reclaim. When the pool threshold is reached, shrink_memcg() will
+> be triggered.
+>
+> The test data after running for 120s is as follows:
+>                            Baseline         Patched
+> shrink_worker wakeups          5363             85
+> shrink_memcg calls       11,345,012        188,264
+> written_back                  40214          40275
+>
+> Conclusion:
+> Under the same workload and run duration, the patched kernel shows a
+> significant reduction in both shrink_worker wakeups and shrink_memcg call=
+s.
+
+Please also include data from the case where zswap store failures are
+observed and pages go to disk, and compare before and after this
+patch. I think that part is also really important.
+
+>
+> Suggested-by: Yosry Ahmed <yosry@kernel.org>
+> Signed-off-by: Hao Jia <jiahao1@lixiang.com>
+> ---
+>  mm/zswap.c | 89 ++++++++++++++++++++++++++++++++++++++++++------------
+>  1 file changed, 69 insertions(+), 20 deletions(-)
+>
+> diff --git a/mm/zswap.c b/mm/zswap.c
+> index 3d697a1a5365..6d492762957a 100644
+> --- a/mm/zswap.c
+> +++ b/mm/zswap.c
+> @@ -160,6 +160,11 @@ struct zswap_pool {
+>         char tfm_name[CRYPTO_MAX_ALG_NAME];
+>  };
+>
+> +struct zswap_shrink_walk_arg {
+> +       unsigned long bytes_written;
+> +       bool encountered_page_in_swapcache;
+> +};
+> +
+>  /* Global LRU lists shared by all zswap pools. */
+>  static struct list_lru zswap_list_lru;
+>
+> @@ -1089,8 +1094,9 @@ static enum lru_status shrink_memcg_cb(struct list_=
+head *item, struct list_lru_o
+>                                        void *arg)
+>  {
+>         struct zswap_entry *entry =3D container_of(item, struct zswap_ent=
+ry, lru);
+> -       bool *encountered_page_in_swapcache =3D (bool *)arg;
+> +       struct zswap_shrink_walk_arg *walk_arg =3D arg;
+>         swp_entry_t swpentry;
+> +       unsigned int length;
+>         enum lru_status ret =3D LRU_REMOVED_RETRY;
+>         int writeback_result;
+>
+> @@ -1133,10 +1139,11 @@ static enum lru_status shrink_memcg_cb(struct lis=
+t_head *item, struct list_lru_o
+>
+>         /*
+>          * Once the lru lock is dropped, the entry might get freed. The
+> -        * swpentry is copied to the stack, and entry isn't deref'd again
+> -        * until the entry is verified to still be alive in the tree.
+> +        * needed fields are copied to the stack, and entry isn't deref'd
+> +        * again until it is verified to still be alive in the tree.
+>          */
+>         swpentry =3D entry->swpentry;
+> +       length =3D entry->length;
+>
+>         /*
+>          * It's safe to drop the lock here because we return either
+> @@ -1155,12 +1162,13 @@ static enum lru_status shrink_memcg_cb(struct lis=
+t_head *item, struct list_lru_o
+>                  * into the warmer region. We should terminate shrinking =
+(if we're in the dynamic
+>                  * shrinker context).
+>                  */
+> -               if (writeback_result =3D=3D -EEXIST && encountered_page_i=
+n_swapcache) {
+> +               if (writeback_result =3D=3D -EEXIST) {
+>                         ret =3D LRU_STOP;
+> -                       *encountered_page_in_swapcache =3D true;
+> +                       walk_arg->encountered_page_in_swapcache =3D true;
+>                 }
+>         } else {
+>                 zswap_written_back_pages++;
+> +               walk_arg->bytes_written +=3D length;
+>         }
+>
+>         return ret;
+> @@ -1169,8 +1177,11 @@ static enum lru_status shrink_memcg_cb(struct list=
+_head *item, struct list_lru_o
+>  static unsigned long zswap_shrinker_scan(struct shrinker *shrinker,
+>                 struct shrink_control *sc)
+>  {
+> +       struct zswap_shrink_walk_arg walk_arg =3D {
+> +               .bytes_written =3D 0,
+> +               .encountered_page_in_swapcache =3D false,
+> +       };
+>         unsigned long shrink_ret;
+> -       bool encountered_page_in_swapcache =3D false;
+>
+>         if (!zswap_shrinker_enabled ||
+>                         !mem_cgroup_zswap_writeback_enabled(sc->memcg)) {
+> @@ -1179,9 +1190,9 @@ static unsigned long zswap_shrinker_scan(struct shr=
+inker *shrinker,
+>         }
+>
+>         shrink_ret =3D list_lru_shrink_walk(&zswap_list_lru, sc, &shrink_=
+memcg_cb,
+> -               &encountered_page_in_swapcache);
+> +               &walk_arg);
+>
+> -       if (encountered_page_in_swapcache)
+> +       if (walk_arg.encountered_page_in_swapcache)
+>                 return SHRINK_STOP;
+>
+>         return shrink_ret ? shrink_ret : SHRINK_STOP;
+> @@ -1275,9 +1286,31 @@ static struct shrinker *zswap_alloc_shrinker(void)
+>         return shrinker;
+>  }
+>
+> -static int shrink_memcg(struct mem_cgroup *memcg)
+> +#define NR_ZSWAP_WB_BATCH      64UL
+> +
+> +/*
+> + * Scan up to @nr_to_scan pages across the per-node zswap LRUs of @memcg
+> + * and write back the reclaimable ones.
+> + *
+> + * Since the second-chance algorithm rotates referenced entries to the
+> + * LRU tail, the per-node scan is capped at the current LRU length so
+> + * each entry is scanned at most once per call. It is up to the caller
+> + * to handle retries, deciding whether to scan another memcg to complete
+> + * the full iteration, or to rescan the current memcg to drain its zswap
+> + * entries.
+> + *
+> + * Return: The number of compressed bytes written back (>=3D 0), or -ENO=
+ENT
+> + * if @memcg has writeback disabled, is a zombie cgroup, or has empty
+> + * zswap LRUs.
+> + */
+> +static long shrink_memcg(struct mem_cgroup *memcg, unsigned long nr_to_s=
+can)
+>  {
+> -       int nid, shrunk =3D 0, scanned =3D 0;
+> +       struct zswap_shrink_walk_arg walk_arg =3D {
+> +               .bytes_written =3D 0,
+> +               .encountered_page_in_swapcache =3D false,
+> +       };
+> +       unsigned long nr_remaining =3D nr_to_scan;
+> +       int nid;
+>
+>         if (!mem_cgroup_zswap_writeback_enabled(memcg))
+>                 return -ENOENT;
+> @@ -1290,24 +1323,40 @@ static int shrink_memcg(struct mem_cgroup *memcg)
+>                 return -ENOENT;
+>
+>         for_each_node_state(nid, N_NORMAL_MEMORY) {
+> -               unsigned long nr_to_walk =3D 1;
+> +               unsigned long nr_to_walk;
+>
+> -               shrunk +=3D list_lru_walk_one(&zswap_list_lru, nid, memcg=
+,
+> -                                           &shrink_memcg_cb, NULL, &nr_t=
+o_walk);
+> -               scanned +=3D 1 - nr_to_walk;
+> +               /*
+> +                * Cap the scan at per-node LRU length so each entry is s=
+canned
+> +                * at most once per call.
+> +                */
+> +               nr_to_walk =3D min(nr_remaining,
+> +                                list_lru_count_one(&zswap_list_lru, nid,=
+ memcg));
+> +               if (!nr_to_walk)
+> +                       continue;
+> +
+> +               nr_remaining -=3D nr_to_walk;
+> +               list_lru_walk_one(&zswap_list_lru, nid, memcg, &shrink_me=
+mcg_cb,
+> +                                 &walk_arg, &nr_to_walk);
+> +               /* Return the unused share of the budget to the pool. */
+> +               nr_remaining +=3D nr_to_walk;
+> +
+> +               if (!nr_remaining)
+> +                       break;
+>         }
+>
+> -       if (!scanned)
+> +       /* Nothing was scanned: every LRU under @memcg was empty. */
+> +       if (nr_remaining =3D=3D nr_to_scan)
+>                 return -ENOENT;
+>
+> -       return shrunk ? 0 : -EAGAIN;
+> +       return walk_arg.bytes_written;
+>  }
+>
+>  static void shrink_worker(struct work_struct *w)
+>  {
+>         struct mem_cgroup *memcg;
+> -       int ret, failures =3D 0, attempts =3D 0;
+> +       int failures =3D 0, attempts =3D 0;
+>         unsigned long thr;
+> +       long ret;
+>
+>         /* Reclaim down to the accept threshold */
+>         thr =3D zswap_accept_thr_pages();
+> @@ -1369,7 +1418,7 @@ static void shrink_worker(struct work_struct *w)
+>                         goto resched;
+>                 }
+>
+> -               ret =3D shrink_memcg(memcg);
+> +               ret =3D shrink_memcg(memcg, NR_ZSWAP_WB_BATCH);
+>                 /* drop the extra reference */
+>                 mem_cgroup_put(memcg);
+>
+> @@ -1383,7 +1432,7 @@ static void shrink_worker(struct work_struct *w)
+>                         continue;
+>                 ++attempts;
+>
+> -               if (ret && ++failures =3D=3D MAX_RECLAIM_RETRIES)
+> +               if (ret <=3D 0 && ++failures =3D=3D MAX_RECLAIM_RETRIES)
+>                         break;
+>  resched:
+>                 cond_resched();
+> @@ -1493,7 +1542,7 @@ bool zswap_store(struct folio *folio)
+>         objcg =3D get_obj_cgroup_from_folio(folio);
+>         if (objcg && !obj_cgroup_may_zswap(objcg)) {
+>                 memcg =3D get_mem_cgroup_from_objcg(objcg);
+> -               if (shrink_memcg(memcg)) {
+> +               if (shrink_memcg(memcg, 1) <=3D 0) {
+>                         mem_cgroup_put(memcg);
+>                         goto put_objcg;
+>                 }
+> --
+> 2.34.1
+>
 
