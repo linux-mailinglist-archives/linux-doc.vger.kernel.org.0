@@ -1,220 +1,148 @@
-Return-Path: <linux-doc+bounces-96824-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96826-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id ugu/Gb6WVmre+QAAu9opvQ
-	(envelope-from <linux-doc+bounces-96824-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 22:06:22 +0200
+	id LoKCLImYVmrp+gAAu9opvQ
+	(envelope-from <linux-doc+bounces-96826-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 22:14:01 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF0CF7589E2
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 22:06:21 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 53997758A8D
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 22:14:01 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=lXiePRH7;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96824-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96824-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
+	dkim=pass header.d=lunn.ch header.s=20171124 header.b=pDJ4GOG2;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96826-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-96826-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=lunn.ch;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 4F2393040681
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 20:06:17 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 947EC30DD6A0
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 20:13:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E406F423E99;
-	Tue, 14 Jul 2026 20:05:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 70BA841D645;
+	Tue, 14 Jul 2026 20:13:33 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 89FF44EA396
-	for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 20:05:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 62933412BED;
+	Tue, 14 Jul 2026 20:13:31 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784059555; cv=none; b=Ee+R/N5ZDDaCcJdlV83FJrb97d4oFe4KcZdTddm1UQRu65L3ka6nUi+DjuZ0SK2XYiGVXiGPf3ZXvdYf2XCc9hmapNaPPRgCuHm0OHUwmqrZhBmD/GpQokbqC2bVCI2udN+DWWxODcxpUo/AAQ9mleI47Xv+R8xRPBdNzFa7gMw=
+	t=1784060013; cv=none; b=mBs3GiHpFQKCKLcuUvzHo7Wm4+capB8bU9YsqpYrSHNOiP1z4Gz6wPYcO5An0YyzhVHLyA1ZGx7WhS3JakrM384fbyDIGw5Gri1KkBJDaqa2FVShG5RbquPGQamrjtZc/A0Ta5Cw+upZBUZj9XuPRkGpbUD+DLLY9XNhbnsrewg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784059555; c=relaxed/simple;
-	bh=1uIy+Qd4I0VZk3IKsXvjdEcJk8DHXM5OZO3Y2c8nsVI=;
+	s=arc-20240116; t=1784060013; c=relaxed/simple;
+	bh=u+5POPI/BtTyXAnp0z7wIeJABK6jmiOfa+id3WMDL+w=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=cuc0zZOsl8NO852BokLCMZ3j8KgVRbrJ5hIizQaKSwSlMmyGBFmzjRU3ClVIDa/h7xt/3csIJAdsqXzuj2SLYFrgh95t+VR+nheSzXnzTArpeWmaeaLpJ23Cplwx48v5YhuFDjLK8j98DoBoKSJf4+OGywo3Op3o4S3rW8gOSKo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=lXiePRH7; arc=none smtp.client-ip=209.85.216.48
-Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-38759bcd877so4105138a91.2
-        for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 13:05:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784059551; x=1784664351; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=2TZmO5aEOGXmRgWMClTIlhAZCzNX5InAxzEzEi9D4GA=;
-        b=lXiePRH7w9MGJyqOlo8uTDd/4y5uBW1g0tMgC14az7iiCSEzd7Uanjh2r4CT+ZOxho
-         N8gZWIs0YIb63jXMothAfdUBtw63WXZe7XZcAvg5cY3vmUxArdpfSrW5u2JADEtjKBoF
-         2iOJYOFo3CqJT6wBKO4xdX152LvIB5PKMLDyBN6X9a7AcvQsjL5wwttKWm86EAanDZ/f
-         krk3xhjFZk7igPScYtg5QMvaGzI4GGziMJOwh30dA92QyhPkR3pT0XJCCemQ/GuX47wx
-         JWjSvKGPRE61v1Oojp3XpYrvuNvqjiXK8QT4+U4DSOe3aHnPkciSg9DtO/23j5ZSqfeH
-         gEdw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784059551; x=1784664351;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=2TZmO5aEOGXmRgWMClTIlhAZCzNX5InAxzEzEi9D4GA=;
-        b=SIMUAqq6z4HLUdJaVNMyBNlKfEJohCI8Db5X/HRz1XZe1+F+bww/514a7l/tz5VMk+
-         QeCYCtwkEXpjqRi/LKinucTWPoiL+l6C7zOak6lMUhWK+vJY/qBTuz6kXRH+Y6ojOAIU
-         NLnTEnor+xuGFgjLJfj05nLkWDv/WzreMNNADeKJJy0S1Rr60UoDJaTJGtdSgXX3kHqU
-         5qKN5F1YKTqn7ugQpGnVqYYJq49oTsAq2ZMXujWsggGUJlHp6iWxexPwyTAIvqx8wbko
-         4zv2jHrnXiSpihz7nXrfY1VBBhclx4h9HezB52uy2sPVB4Sz5wREn434Y6MwKh0vCR0f
-         3J8A==
-X-Forwarded-Encrypted: i=1; AHgh+Ro+hvQvvUyijcwShwiZJBA098yFGPwKyfyLcIKTYr2exiy2ClwSqxmfVO/iWGZY3pbcYpjwAn1jXUE=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwQTSt75Q8noIN8nb4AcJpdwn+Bf7to7bD2gNnlyRrzEqGWQSRl
-	Vi5NUSbeT3hmFZ1yZSUO6HnarZsqYAYekU/HqVj0X/E+c7nTdWupRl2/
-X-Gm-Gg: AfdE7ckeGBis13XzZ4aelzQ6ruWJzFwt/pQ1Q2djrSBLo9Vz/V6bC+L7FsTyXEnGa/a
-	x5RuBkETNVpsRn6JiSSWumEdpOE+3SBg8FVlodPkIBcCoARn5T7s5SrKxnmHR3I0uOGBg9uMa7w
-	CU7sbyiX0PwUCQusQ9sQWcSb3JGJeo1JJt4wPrBU+hr/W2Vvqk9rsldLrQkGmin5f/8Z42RMyFg
-	3b/gePUOfWv7s7XpOJ3v9nehShEgpmO1Awq3Me8axldzy+HgYKZk9TpkXsuL8sDSgXO//uKMVU2
-	fJxlzUHYOI9geIXbeopOIX0VA0rHgZu/8HzgEmpkEtSlrAIv3lA3ehgXJHJWx4nzNJEYdi1s/vg
-	m/q0Cv+L8wQ+wo8kuXazI1K66QXV+QcViBYf7ncYkgdZiRA1HPDLJ0AshBSI1r9sxwHr155x/om
-	G12JzAJGjEvsiLvD2jbBm2IakUnQeR5J3vOfW6cihKP/1R35vEcA1Hkbc=
-X-Received: by 2002:a17:90b:57e5:b0:37f:be6c:f3f2 with SMTP id 98e67ed59e1d1-38e29ff93eemr138372a91.2.1784059550783;
-        Tue, 14 Jul 2026 13:05:50 -0700 (PDT)
-Received: from skinsburskii (c-98-225-44-182.hsd1.wa.comcast.net. [98.225.44.182])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38e172b6cfbsm2007674a91.3.2026.07.14.13.05.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Jul 2026 13:05:50 -0700 (PDT)
-Date: Tue, 14 Jul 2026 13:05:45 -0700
-From: Stanislav Kinsburskii <skinsburskii@gmail.com>
-To: Andrew Morton <akpm@linux-foundation.org>
-Cc: airlied@gmail.com, akhilesh@ee.iitb.ac.in, corbet@lwn.net,
-	dakr@kernel.org, david@kernel.org, decui@microsoft.com,
-	haiyangz@microsoft.com, jgg@ziepe.ca, kees@kernel.org,
-	kys@microsoft.com, leon@kernel.org, liam@infradead.org,
-	lizhi.hou@amd.com, ljs@kernel.org, longli@microsoft.com,
-	lyude@redhat.com, maarten.lankhorst@linux.intel.com,
-	mamin506@gmail.com, mhocko@suse.com, mripard@kernel.org,
-	nouveau@lists.freedesktop.org, ogabbay@kernel.org, oleg@redhat.com,
-	rppt@kernel.org, shuah@kernel.org, simona@ffwll.ch,
-	skhan@linuxfoundation.org, surenb@google.com, tzimmermann@suse.de,
-	vbabka@kernel.org, wei.liu@kernel.org,
-	dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
-	linux-doc@vger.kernel.org, linux-hyperv@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
-	linux-rdma@vger.kernel.org
-Subject: Re: [PATCH v8 0/8] mm/hmm: Add mmap lock-drop support for
- userfaultfd-backed mappings
-Message-ID: <alaWmUEeIBeSkmO0@skinsburskii>
-References: <178371866223.900500.12312667138651735591.stgit@skinsburskii>
- <20260710151151.1e193eedd0cf2591ae392f76@linux-foundation.org>
- <alG2-RSitzPWClAX@skinsburskii>
- <20260710224950.53bcb43ce7e564f07a1f6a8c@linux-foundation.org>
- <alVRU38lMfvmUFqJ@skinsburskii>
- <20260713154535.7656b3a630e2f6f076b4e76e@linux-foundation.org>
- <alZfTxfypj39OrCE@skinsburskii>
- <20260714105751.f45ec4c70702c222febdbf07@linux-foundation.org>
+	 Content-Type:Content-Disposition:In-Reply-To; b=CX+HE/syb5PlRxWpyUpPeL9Z7a5ZYX6/vDz7rXWhHFhXXotxVeYvfdwHE0WqokBS4O7DNse2chAkYJGlk2yoGHLl5cJZgoIX4TCOOszWKMu/gDd3NaFl1CdlKrWhehd6wU22kV1Ppr3HrLL+IHzaNVSWMcNgRrMAiy3zt9KDcOY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=pDJ4GOG2; arc=none smtp.client-ip=156.67.10.101
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+	bh=GZnKgW+PTI85uwSvBTZx6tE/LVkjSY/LHRD2fDPNzO0=; b=pDJ4GOG290nNbD7p9pehUqbd6J
+	liRP7KZdmFIUYrnPXVRorJ+btZrptsNhTyOE6IcMio8Z7W0/PkmCvK/jiRDtGbzxLi5Rm1ihsYGcP
+	D6XqGXjWUEYD1ptZjY+ed8cKUhRvmUeZyVFvFrqTJk3NuFUrKT/o+vUrikzcxituPc94=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+	(envelope-from <andrew@lunn.ch>)
+	id 1wjjVG-00CFLL-Bi; Tue, 14 Jul 2026 22:13:18 +0200
+Date: Tue, 14 Jul 2026 22:13:18 +0200
+From: Andrew Lunn <andrew@lunn.ch>
+To: "Shenwei Wang (OSS)" <shenwei.wang@oss.nxp.com>
+Cc: Mathieu Poirier <mathieu.poirier@linaro.org>,
+	Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>, Frank Li <frank.li@nxp.com>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	"linux-gpio@vger.kernel.org" <linux-gpio@vger.kernel.org>,
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	Shenwei Wang <shenwei.wang@nxp.com>, Peng Fan <peng.fan@nxp.com>,
+	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+	"linux-remoteproc@vger.kernel.org" <linux-remoteproc@vger.kernel.org>,
+	"imx@lists.linux.dev" <imx@lists.linux.dev>,
+	"linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>,
+	dl-linux-imx <linux-imx@nxp.com>,
+	Arnaud POULIQUEN <arnaud.pouliquen@foss.st.com>,
+	"b-padhi@ti.com" <b-padhi@ti.com>
+Subject: Re: [PATCH v14 1/5] docs: driver-api: gpio: rpmsg gpio driver over
+ rpmsg bus
+Message-ID: <680d0633-cdec-4545-9114-79bfd6eaac41@lunn.ch>
+References: <20260625155432.815185-1-shenwei.wang@oss.nxp.com>
+ <20260625155432.815185-2-shenwei.wang@oss.nxp.com>
+ <alUdg9iTysXCFUa5@p14s>
+ <PAXPR04MB91852808D2C7491AEF98CF1589F92@PAXPR04MB9185.eurprd04.prod.outlook.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260714105751.f45ec4c70702c222febdbf07@linux-foundation.org>
+In-Reply-To: <PAXPR04MB91852808D2C7491AEF98CF1589F92@PAXPR04MB9185.eurprd04.prod.outlook.com>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [2.34 / 15.00];
-	MID_END_EQ_FROM_USER_PART(4.00)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[lunn.ch,none];
+	R_DKIM_ALLOW(-0.20)[lunn.ch:s=20171124];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[39];
-	TAGGED_FROM(0.00)[bounces-96824-lists,linux-doc=lfdr.de];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	TAGGED_FROM(0.00)[bounces-96826-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:shenwei.wang@oss.nxp.com,m:mathieu.poirier@linaro.org,m:linusw@kernel.org,m:brgl@kernel.org,m:corbet@lwn.net,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:andersson@kernel.org,m:frank.li@nxp.com,m:s.hauer@pengutronix.de,m:skhan@linuxfoundation.org,m:linux-gpio@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:kernel@pengutronix.de,m:festevam@gmail.com,m:shenwei.wang@nxp.com,m:peng.fan@nxp.com,m:devicetree@vger.kernel.org,m:linux-remoteproc@vger.kernel.org,m:imx@lists.linux.dev,m:linux-arm-kernel@lists.infradead.org,m:linux-imx@nxp.com,m:arnaud.pouliquen@foss.st.com,m:b-padhi@ti.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[26];
+	FREEMAIL_CC(0.00)[linaro.org,kernel.org,lwn.net,nxp.com,pengutronix.de,linuxfoundation.org,vger.kernel.org,gmail.com,lists.linux.dev,lists.infradead.org,foss.st.com,ti.com];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:akpm@linux-foundation.org,m:airlied@gmail.com,m:akhilesh@ee.iitb.ac.in,m:corbet@lwn.net,m:dakr@kernel.org,m:david@kernel.org,m:decui@microsoft.com,m:haiyangz@microsoft.com,m:jgg@ziepe.ca,m:kees@kernel.org,m:kys@microsoft.com,m:leon@kernel.org,m:liam@infradead.org,m:lizhi.hou@amd.com,m:ljs@kernel.org,m:longli@microsoft.com,m:lyude@redhat.com,m:maarten.lankhorst@linux.intel.com,m:mamin506@gmail.com,m:mhocko@suse.com,m:mripard@kernel.org,m:nouveau@lists.freedesktop.org,m:ogabbay@kernel.org,m:oleg@redhat.com,m:rppt@kernel.org,m:shuah@kernel.org,m:simona@ffwll.ch,m:skhan@linuxfoundation.org,m:surenb@google.com,m:tzimmermann@suse.de,m:vbabka@kernel.org,m:wei.liu@kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-mm@kvack.org,m:linux-doc@vger.kernel.org,m:linux-hyperv@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-kselftest@vger.kernel.org,m:linux-rdma@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[andrew@lunn.ch,linux-doc@vger.kernel.org];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[gmail.com,ee.iitb.ac.in,lwn.net,kernel.org,microsoft.com,ziepe.ca,infradead.org,amd.com,redhat.com,linux.intel.com,suse.com,lists.freedesktop.org,ffwll.ch,linuxfoundation.org,google.com,suse.de,kvack.org,vger.kernel.org];
-	FORGED_SENDER(0.00)[skinsburskii@gmail.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[skinsburskii@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[andrew@lunn.ch,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[lunn.ch:+];
+	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,skinsburskii:mid]
+	MISSING_XM_UA(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,lunn.ch:from_mime,lunn.ch:dkim,lunn.ch:mid,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: CF0CF7589E2
+X-Rspamd-Queue-Id: 53997758A8D
 
-On Tue, Jul 14, 2026 at 10:57:51AM -0700, Andrew Morton wrote:
-> On Tue, 14 Jul 2026 09:09:51 -0700 Stanislav Kinsburskii <skinsburskii@gmail.com> wrote:
+> > 1) You did not include messages that mask and unmask interrupts at the driver
+> > side.
 > 
-> > On Mon, Jul 13, 2026 at 03:45:35PM -0700, Andrew Morton wrote:
-> > > On Mon, 13 Jul 2026 13:57:55 -0700 Stanislav Kinsburskii <skinsburskii@gmail.com> wrote:
-> > > 
-> > > > > > I rebased this series on top of mm-new right before sending it out.
-> > > > > > Should I have used a different branch?
-> > > > > 
-> > > > > mm-new is good - Sashiko attempts that.  But it's changing rapidly at
-> > > > > this point in the development cycle.
-> > > > > 
-> > > > 
-> > > > I’d like to send another revision addressing a few comments and also
-> > > > replace the `max/max_t` check with something simpler.
-> > > > 
-> > > > Which branch should I base it on so that Sashiko can apply it
-> > > > successfully?
-> > > 
-> > > mainline Linus would be safest.
-> > > 
-> > 
-> > Looks like linux-next/master has been updated with the v8 of the series.
+> Interrupt masking and unmasking are handled entirely on the local processor.
 > 
-> That's because v8 is in mm.git's mm-unstable branch.
-> 
-> > I have v9 with a few small fixes, but it is too late to send it out already?
-> 
-> It's called "unstable" for a reason!  Material in mm-unstable is still
-> under review, test and the latest stages of development.  Getting
-> things finalized for movement into the non-rebasing mm-stable branch,
-> then into mainline.
-> 
-> So altering or replacing patchsets while they're in mm-unstable is
-> perfectly OK and expected.
-> 
-> > If it's not, then what should I base it on?
-> 
-> Well it's a bit tricky to replace a series when it's in mm-unstable. 
-> One can do a git-checkout of the commit which precedes the v8 series. 
-> Or base on current Linus mainline, which usually works out.
-> 
-> Sending little fixup patches against what's presently in mm-unstable
-> also works.  I'll queue each one immediately behind the patch which it
-> alters then squash them into their parent patch before moving the series
-> into mm-stable.
-> 
-> A third alternative is for me to drop v8 from mm-unstable, then you
-> wait until that has propagated onto the servers or into linux-next,
-> then base on that.  This approach is OK but I kinda unprefer it because
-> there's a bit of latency and it makes it harder for me to prepare my
-> "here's how v9 altered mm.git" summaries.
-> 
-> 
-> Which would you prefer?
+> When an interrupt occurs, the remote system masks the interrupt and then sends a notification 
+> to Linux. After Linux processes the notification, it sends a SET_IRQ_TYPE message back to the 
+> remote system, which then unmasks the interrupt.
 
-Well, given that Sashiko didn’t pick up my series based on mm-new, I’d
-prefer to send a few follow-up patches in the hope that they will be
-reviewed in the context of the original series.
+Masking and unmasking an interrupt are orthogonal to the interrupt
+type.
 
-Thanks,
-Stanislav
+When the interrupt fires, the interrupt core calls the irq_mask()
+operation on the interrupt. That should mask the interrupt. Once the
+handler has finished, the interrupt core, will call irq_unmask() to
+unmask the interrupt.
+
+Edge, level, high, low, raising, falling has nothing to do with
+masking. Please don't mix concepts which Linux keeps separate.
+
+	 Andrew
 
