@@ -1,194 +1,260 @@
-Return-Path: <linux-doc+bounces-96635-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96637-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id R0foNGWUVWp+qQAAu9opvQ
-	(envelope-from <linux-doc+bounces-96635-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 03:44:05 +0200
+	id yoMqCYqZVWqvqgAAu9opvQ
+	(envelope-from <linux-doc+bounces-96637-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 04:06:02 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4BAD875021C
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 03:44:05 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id B979C750435
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 04:06:01 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=WlaO0CRb;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96635-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c09:e001:a7::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96635-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=none) header.from=gmail.com;
+	dkim=pass header.d=amazon.com header.s=amazoncorp2 header.b=otIJdulI;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96637-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-96637-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=quarantine) header.from=amazon.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id B8A923010630
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 01:44:04 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id A12BD30710A1
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 02:04:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4307D371887;
-	Tue, 14 Jul 2026 01:43:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1427B36C9CC;
+	Tue, 14 Jul 2026 02:04:06 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from pdx-out-003.esa.us-west-2.outbound.mail-perimeter.amazon.com (pdx-out-003.esa.us-west-2.outbound.mail-perimeter.amazon.com [44.246.68.102])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4154936B067
-	for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 01:43:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A9B1D2E8DEB;
+	Tue, 14 Jul 2026 02:04:04 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783993434; cv=none; b=Zann0CzKP2tqOgfcBae2XLUTKDYUaXk/5qRdUJb8Txe7c8S8cut0N00TefOeT04A4zvon1ew0DBlpQn7UXRfkKE6vyGEjvh3nMoHrftVe99ivexi/EAXIQCA9g26oiQ9rTvMDOc7NUN7vrlUi0F+17gtklN0QkMijVdruzEwQuY=
+	t=1783994646; cv=none; b=pC8asCpPaHt8PPfIiCa0WHpuLojOSgH9i+t6hV/RQ2E3uGn4Xcqh9M4nSrp/mp7an+17vIX8CQCYjMVNSUyirXdbL4h5FrNSY6MhE4vjaKRd8NeSTZqjpl2aJ5X6GlXlr93IMxYaBmT0aXVZ7WCYPOtvXVqnC53imlRBsk13UF4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783993434; c=relaxed/simple;
-	bh=PVs+gHTDyYChhu+7rRJSjmFR790Mb8zOYoVJnPhHsQE=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Et87kxBOfFo8PCfLz6x0VSyEP1DhE2DPZwP0k65qNupT5vLpu2SpZKuBoTn4l8P7qirZHLli7gUs3/D8PJ+Volg7BxwmE4FEz4GP2XiqKmdbX0T2Y6xpZ4adCtduA83fJZ0xy/b7xkZSandCPCnLHOemZMI40lggQqXlU76ssA4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=WlaO0CRb; arc=none smtp.client-ip=209.85.216.47
-Received: by mail-pj1-f47.google.com with SMTP id 98e67ed59e1d1-3847e8b0f3aso3136978a91.3
-        for <linux-doc@vger.kernel.org>; Mon, 13 Jul 2026 18:43:50 -0700 (PDT)
+	s=arc-20240116; t=1783994646; c=relaxed/simple;
+	bh=W4xS7u8aIfCDP9Xdp+2fPuHvD9e/O6vm2IroUcHwpq8=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=D02GWaNv+67vnS/mUrB8t3D/SJJyXPV8lZu6MjkzQmP8NRU4rKKB4txFa3P2kzbdkU415s7qTXAjZ6TB0xquGBg5gZEOaDcr1z+lCQ5fYUba6jzG32B0nR0LpXFMdqL6og8MoJRKFVlyD79GBPriAWnCMLfLvU1bxsM21G7OGFY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amazon.com; spf=pass smtp.mailfrom=amazon.com; dkim=pass (2048-bit key) header.d=amazon.com header.i=@amazon.com header.b=otIJdulI; arc=none smtp.client-ip=44.246.68.102
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783993430; x=1784598230; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=yLYnguE796013GUUX5AfLaBgg2bMMPqf3FcC8kN1cc0=;
-        b=WlaO0CRb7KrIB/XrVnc1Dmc0UqbtDoG3BelkYEOx55pq640zozcmjQ06wciqCDuD4m
-         EihGqQf486ZkXBPIYQJ/DuULtVXIn2Zao9IGlt3kS3QxxFNnEGnwsItetocmCK3j95nR
-         p5AwSGvhWl/ZxboXSIuqklKmI9g9wDv0qMGK13JB6duvjpXpczqV2l8DJZFsd3rjJc7+
-         L1vM3A5oZNP9rt+pAOO4So5UKxj/qXeJJjq+jizVIY+HoZzFHZTEVTNh5UmvxjS7/mxT
-         sm8bktBnG21uIkqvCQPABtijbfmPWMyGbzSm6RBZTfxX+28xbvNHBRrouRZIWwCLX2Do
-         R2jQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783993430; x=1784598230;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=yLYnguE796013GUUX5AfLaBgg2bMMPqf3FcC8kN1cc0=;
-        b=dCZz6jwtNvCUIycUzDKFicovL6zzlweuzc7ppJztwWedkeoT6udFs+BSacOYMcpx4L
-         UqaTvnHp/DUY7V0kqt/mf/iSJr/z4erTbAA+7I00HIj4a8wkFkvk3VN2Lvks0TCrJ6Y4
-         6JNTkOteT4X7yEKTzgLCc8T8ZAcYm9qjue8LXNYlZlE+8t2NxpRwaoEZHM8f9qnfjLbS
-         P9X/luzseMwCUugWGmBZO3AdIWIqt61xc9ybJOInikTjFmsME60WnWy8rGyQ2SKauKN3
-         4SUFCDe0lmqunv5jwcre6HSIvC3K5QEFzWRIFxfw6Ek5pmrnjqPU78+CleLhM0hNJjFf
-         eVwA==
-X-Forwarded-Encrypted: i=1; AHgh+RomYJkBr4Q3G8H+K9n/xR+eqIxaHwk5s0OVogfzmq81Aq+YC/9VwxOtsYsx7KSSCc+uFKjut4bJOks=@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywp8k6UE7amS6+AORJVk6ynDCH6RorcuFLtnos/IdvY9CamBesI
-	PkwXJjT6ikhIea5usWfsCSSGq4BnbqHyqsQwbCH+rI6MTpe2LHvcOqiD
-X-Gm-Gg: AfdE7cnayocTLyiBDLgb8HDHngmS7A+XmXeTSKpF6Wpo7SCxNYYeirq9wDDq1ONPIp1
-	YdSti/faj6OmbD5Rj8SQBibDkSRIhmOJXnGNW7ZsFdoCRoFpf3lheyPajFSxVAn8uIwfOY0Riqs
-	3Q3w+dv54SmlQptQWkLPGFQVBEnndPqL2TJvzYR5JOP6wBtjDxaTQCU8v3+uJ9ptYZ2IFacTwvJ
-	ybNZ6iZ6PoXQo9R0Eq1Y8qBlSPn3mpI7XLMEYJZZcYg5eFxASjuxxQGIPdtthHuzo3ZY5tCU+78
-	nF3y78v3MEQhMmrEn/x1Sj1vcMHigRl48O1UDqwQax4Izd+j53EhKeuNfxQzbfgNuwkMJ60PbSv
-	wuNbj969srzzSvLx+RHY6EoiyfVBdoixWRzEiY30lDRGGGDb16LgAxMaJFtWHbevaMJcFaEoMT7
-	HDngrtpmE7uQ==
-X-Received: by 2002:a05:6a21:9d48:b0:3c1:85d:fa2f with SMTP id adf61e73a8af0-3c1108c2d4fmr11352039637.36.1783993429962;
-        Mon, 13 Jul 2026 18:43:49 -0700 (PDT)
-Received: from sleipnir ([2804:d45:3612:3b00:32a3:79f0:cdff:a04a])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13b924258a2sm59675775c88.1.2026.07.13.18.43.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 13 Jul 2026 18:43:49 -0700 (PDT)
-From: Lincoln Wallace <locnnil0@gmail.com>
-To: paul@paul-moore.com,
-	corbet@lwn.net
-Cc: skhan@linuxfoundation.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-security-module@vger.kernel.org,
-	penguin-kernel@I-love.SAKURA.ne.jp,
-	rdunlap@infradead.org,
-	Lincoln Wallace <locnnil0@gmail.com>
-Subject: [PATCH 2/2] doc: LSM: fix module ordering description for /sys/kernel/security/lsm
-Date: Mon, 13 Jul 2026 22:38:32 -0300
-Message-ID: <20260714013832.977443-3-locnnil0@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260714013832.977443-1-locnnil0@gmail.com>
-References: <20260714013832.977443-1-locnnil0@gmail.com>
+  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
+  t=1783994644; x=1815530644;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=fIBN2F56Wu25/m+SUVfW47wZOlGL1b8hDI5bp5VSEUw=;
+  b=otIJdulIuzYNgz1m2bslSB0Qz9Us3+arScgsanLt49C6HKiNY1o9D0Vr
+   w58Pt314akWGe8RG50AK3dm4Yn3kbu7MJgJ/54YvUvzevvWqdPzJGygfm
+   uStUXE7rmb1RfnPFU2A57wCDYJwLj3lkVzabPRrwnGSDhynqu6MD4toYf
+   LlQMqnS7WyjEDa/h+q9uNR1biF+IPQuxIl5+aBo7E7jmuvh8TZaLZTWVD
+   98bDmG2NfpS8smu+0Z1fEMjpjSnaTf3cXvXvxcUcWuJ/H8KLVI6pyLX2b
+   MKLI+uEPkjJPZl2vmUCiaV1C3kQoK/h5yFXoM+EXHhrgkvLBia17mWtSg
+   A==;
+X-CSE-ConnectionGUID: NkwsRLxiSy+uT1KTxPwSvg==
+X-CSE-MsgGUID: dbGt8I7mSvi4zKyuezDIPQ==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; 
+   d="scan'208";a="23627315"
+Received: from ip-10-5-0-115.us-west-2.compute.internal (HELO smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.0.115])
+  by internal-pdx-out-003.esa.us-west-2.outbound.mail-perimeter.amazon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Jul 2026 02:04:01 +0000
+Received: from EX19MTAUWA001.ant.amazon.com [205.251.233.236:25871]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.31.54:2525] with esmtp (Farcaster)
+ id e599d138-fc55-4611-b910-4e80013aec45; Tue, 14 Jul 2026 02:04:01 +0000 (UTC)
+X-Farcaster-Flow-ID: e599d138-fc55-4611-b910-4e80013aec45
+Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
+ EX19MTAUWA001.ant.amazon.com (10.250.64.218) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
+ Tue, 14 Jul 2026 02:04:01 +0000
+Received: from dev-dsk-akiyano-1c-2138b29d.eu-west-1.amazon.com (172.19.83.6)
+ by EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
+ Tue, 14 Jul 2026 02:03:56 +0000
+From: Arthur Kiyanovski <akiyano@amazon.com>
+To: David Miller <davem@davemloft.net>, Jakub Kicinski <kuba@kernel.org>,
+	<netdev@vger.kernel.org>
+CC: Arthur Kiyanovski <akiyano@amazon.com>, Richard Cochran
+	<richardcochran@gmail.com>, Eric Dumazet <edumazet@google.com>, Paolo Abeni
+	<pabeni@redhat.com>, David Woodhouse <dwmw2@infradead.org>, Thomas Gleixner
+	<tglx@linutronix.de>, Miroslav Lichvar <mlichvar@redhat.com>, Andrew Lunn
+	<andrew+netdev@lunn.ch>, Wen Gu <guwen@linux.alibaba.com>, Xuan Zhuo
+	<xuanzhuo@linux.alibaba.com>, David Woodhouse <dwmw@amazon.com>, "Yonatan
+ Sarna" <ysarna@amazon.com>, Zorik Machulsky <zorik@amazon.com>, "Alexander
+ Matushevsky" <matua@amazon.com>, Saeed Bshara <saeedb@amazon.com>, Matt
+ Wilson <msw@amazon.com>, Anthony Liguori <aliguori@amazon.com>, Nafea Bshara
+	<nafea@amazon.com>, Evgeny Schmeilin <evgenys@amazon.com>, Netanel Belgazal
+	<netanel@amazon.com>, Ali Saidi <alisaidi@amazon.com>, Benjamin Herrenschmidt
+	<benh@amazon.com>, Noam Dagan <ndagan@amazon.com>, David Arinzon
+	<darinzon@amazon.com>, Evgeny Ostrovsky <evostrov@amazon.com>, Ofir Tabachnik
+	<ofirt@amazon.com>, Amit Bernstein <amitbern@amazon.com>,
+	<linux-kselftest@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+	<shuah@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan
+	<skhan@linuxfoundation.org>, Simon Horman <horms@kernel.org>,
+	<vadim.fedorenko@linux.dev>
+Subject: [PATCH v4 net-next 0/7] ptp: Add PHC timestamp quality attributes
+Date: Tue, 14 Jul 2026 02:03:01 +0000
+Message-ID: <20260714020340.25014-1-akiyano@amazon.com>
+X-Mailer: git-send-email 2.47.3
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: EX19D035UWB002.ant.amazon.com (10.13.138.97) To
+ EX19D001UWA001.ant.amazon.com (10.13.138.214)
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-9.66 / 15.00];
+	WHITELIST_DMARC(-7.00)[amazon.com:D:+];
+	WHITELIST_SPF_DKIM(-3.00)[amazon.com:d:+,kernel.org:s:+];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[amazon.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[amazon.com:s=amazoncorp2];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	TO_DN_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[linuxfoundation.org,vger.kernel.org,I-love.SAKURA.ne.jp,infradead.org,gmail.com];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-96635-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-96637-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:paul@paul-moore.com,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-security-module@vger.kernel.org,m:penguin-kernel@I-love.SAKURA.ne.jp,m:rdunlap@infradead.org,m:locnnil0@gmail.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[locnnil0@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	FORWARDED(0.00)[lists@lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[37];
+	FORGED_RECIPIENTS(0.00)[m:davem@davemloft.net,m:kuba@kernel.org,m:netdev@vger.kernel.org,m:akiyano@amazon.com,m:richardcochran@gmail.com,m:edumazet@google.com,m:pabeni@redhat.com,m:dwmw2@infradead.org,m:tglx@linutronix.de,m:mlichvar@redhat.com,m:andrew+netdev@lunn.ch,m:guwen@linux.alibaba.com,m:xuanzhuo@linux.alibaba.com,m:dwmw@amazon.com,m:ysarna@amazon.com,m:zorik@amazon.com,m:matua@amazon.com,m:saeedb@amazon.com,m:msw@amazon.com,m:aliguori@amazon.com,m:nafea@amazon.com,m:evgenys@amazon.com,m:netanel@amazon.com,m:alisaidi@amazon.com,m:benh@amazon.com,m:ndagan@amazon.com,m:darinzon@amazon.com,m:evostrov@amazon.com,m:ofirt@amazon.com,m:amitbern@amazon.com,m:linux-kselftest@vger.kernel.org,m:linux-doc@vger.kernel.org,m:shuah@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:horms@kernel.org,m:vadim.fedorenko@linux.dev,m:andrew@lunn.ch,s:lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[akiyano@amazon.com,linux-doc@vger.kernel.org];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns];
+	DKIM_TRACE(0.00)[amazon.com:+];
+	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[locnnil0@gmail.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[akiyano@amazon.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FREEMAIL_CC(0.00)[amazon.com,gmail.com,google.com,redhat.com,infradead.org,linutronix.de,lunn.ch,linux.alibaba.com,vger.kernel.org,kernel.org,lwn.net,linuxfoundation.org,linux.dev];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCVD_COUNT_SEVEN(0.00)[7]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 4BAD875021C
+X-Rspamd-Queue-Id: B979C750435
 
-The LSM usage document states that the capability module will always
-be first in /sys/kernel/security/lsm, followed by any "minor" modules
-and then the one "major" module.
+This series adds quality attributes to PTP Hardware Clock (PHC)
+timestamps, allowing userspace to obtain error bound, clock status,
+timescale, and system counter values alongside timestamps in a single
+call.
 
-This does not match the current LSM infrastructure:
+Motivation
+----------
+The existing PTP APIs return timestamps without any indication of
+their quality. Applications that need clock accuracy and
+synchronization status commonly rely on external tools such as
+ptp4l, which implement synchronization logic and can export their
+measurement of clock accuracy. For managed PHC devices — such as
+the ENA network adapter, whose clock is synchronized by the device
+without userspace involvement — these tools are not available, and
+the existing APIs lack a way to report quality metrics to consumers
+of time.
 
- - When CONFIG_SECURITY_LOCKDOWN_LSM_EARLY is enabled, lockdown is
-   initialized as an early LSM, before all other modules including
-   capability, and appears first in the list.
+This was previously proposed as an RFC [1] with a single ioctl.
+Based on community feedback, the design was reworked to cover both
+the extended (multi-sample) and precise (cross-timestamp) paths.
 
- - The integrity modules (e.g. IMA and EVM) register with
-   LSM_ORDER_LAST and are always placed at the end of the list,
-   regardless of the position of the major module.
+Design
+------
+The UAPI was redesigned based on Thomas Gleixner's proposal [2]:
 
- - The relative order of the remaining modules is not fixed by the
-   framework; it follows CONFIG_LSM or the "lsm=" kernel command
-   line parameter.
+- A unified data structure (struct ptp_sys_offset_attrs) is used
+  for both extended and precise ioctls.
 
-Rewrite the paragraph to describe the actual ordering: lockdown
-first when early lockdown is enabled, capability otherwise,
-integrity modules at the end, and the remaining modules in the
-configured order.
+- A u32 valid bitmask in struct ptp_clock_attrs indicates which
+  attributes are populated, replacing sentinel values. Drivers
+  set only the bits for attributes they provide.
 
-Signed-off-by: Lincoln Wallace <locnnil0@gmail.com>
----
- Documentation/admin-guide/LSM/index.rst | 12 +++++++++---
- 1 file changed, 9 insertions(+), 3 deletions(-)
+- System counter values (cycles + counter_id) are carried in
+  struct ptp_sys_time alongside each system timestamp. These are
+  populated by the timekeeping core cross-timestamp infrastructure,
+  which is now merged in net-next [3] — drivers do not fill them.
+  This series therefore applies directly to net-next with no
+  out-of-tree dependency.
 
-diff --git a/Documentation/admin-guide/LSM/index.rst b/Documentation/admin-guide/LSM/index.rst
-index c24310c709dc..9518495edfbc 100644
---- a/Documentation/admin-guide/LSM/index.rst
-+++ b/Documentation/admin-guide/LSM/index.rst
-@@ -27,9 +27,15 @@ man-pages project.
- A list of the active security modules can be found by reading
- ``/sys/kernel/security/lsm``. This is a comma separated list, and
- will always include the capability module. The list reflects the
--order in which checks are made. The capability module will always
--be first, followed by any "minor" modules (e.g. Yama) and then
--the one "major" module (e.g. SELinux) if there is one configured.
-+order in which checks are made. The capability module will be
-+first, unless CONFIG_SECURITY_LOCKDOWN_LSM_EARLY is enabled, in
-+which case the lockdown module will precede it. The integrity
-+modules (e.g. IMA and EVM), if enabled in the kernel
-+configuration, are always placed at the end of the list. Any
-+other "minor" modules (e.g. Yama) and the one "major" module
-+(e.g. SELinux), if there is one configured, appear in between,
-+in the order given by CONFIG_LSM or the ``"lsm=..."`` kernel
-+command line parameter.
- 
- Process attributes associated with "major" security modules should
- be accessed and maintained using the special files in ``/proc/.../attr``.
+- Graceful degradation: the attrs ioctls work even on devices
+  without attrs callbacks, falling back to gettimex64 /
+  getcrosststamp and returning attrs.valid = 0.
+
+A capability flag is added to ptp_clock_caps so userspace can
+discover attributes support.
+
+Patches 2-3 add testptp support for the new ioctls.
+
+Patch 4 implements the attributes for ptp_vmclock, reporting
+error bound, clock status, and timescale.
+
+Patches 5-7 implement the attributes for the ENA driver,
+reporting error bound from the device's PHC layer.
+
+v4:
+- Complete UAPI redesign per Thomas Gleixner's proposal [2]:
+  unified data structure with u32 valid bitmask, system counter
+  in ptp_sys_time (populated by core, not drivers), graceful
+  degradation for devices without attrs callbacks. (Thomas Gleixner,
+  David Woodhouse)
+- Counter values moved from driver attrs callback to timekeeping
+  core infrastructure — drivers no longer set counter_id or
+  counter_value.
+- Flexible array member for timestamps[] (kernel bounds the copy,
+  userspace allocates for num_samples requested).
+- Drop separate ptp_clock_attributes kernel struct — driver
+  callbacks fill the UAPI ptp_clock_attrs directly.
+
+v3:
+- Remove patch 5/8 from v2 (return-code bugfix) — sent separately
+  as [PATCH net] to the net tree.
+- Zero-initialize struct ptp_clock_attributes in PTP core ioctl
+  handlers to prevent stack leak of unset fields. (Simon Horman,
+  sashiko)
+- ptp_vmclock: validate counter_period_shift < 128 to prevent
+  undefined behavior on untrusted hypervisor input. (sashiko)
+- ptp_vmclock: add overflow check on err_hi * NSEC_PER_SEC to
+  prevent silent wraparound producing erroneously small error
+  bound. (sashiko)
+- ptp_vmclock: report PTP_TIMESCALE_TAI after tai_adjust() to
+  avoid timescale mismatch. (sashiko)
+- ENA: set counter_id = 0, counter_value = 0 in gettimexattrs64
+  for defense-in-depth. (sashiko)
+
+v2:
+- Fix build bisectability: move ena_com.c consumer updates into
+  patch 6/8 and ena_phc.c caller update into patch 7/8 so each
+  patch compiles independently.
+- Add missing Cc for Amit Bernstein (co-author of ENA patches).
+
+[1] https://lore.kernel.org/netdev/20250724115657.150-1-darinzon@amazon.com/
+[2] https://lore.kernel.org/all/87se7ht25o.ffs@tglx/
+[3] https://lore.kernel.org/all/20260526165826.392227559@kernel.org/
+
+Arthur Kiyanovski (7):
+  ptp: Add ioctls for PHC timestamps with quality attributes
+  selftests/ptp: Extract print_system_timestamp helper in testptp
+  selftests/ptp: Add testptp support for attributes ioctls
+  ptp: ptp_vmclock: Implement attributes ioctls
+  net: ena: Update PHC admin interface for error bound support
+  net: ena: Add error bound to PHC communication layer
+  net: ena: Implement gettimexattrs64 callback for PTP attributes
+
+ .../device_drivers/ethernet/amazon/ena.rst    |   2 +
+ .../net/ethernet/amazon/ena/ena_admin_defs.h  |  17 +-
+ drivers/net/ethernet/amazon/ena/ena_com.c     |  51 ++--
+ drivers/net/ethernet/amazon/ena/ena_com.h     |   5 +-
+ drivers/net/ethernet/amazon/ena/ena_debugfs.c |   3 +
+ drivers/net/ethernet/amazon/ena/ena_phc.c     |  61 ++++-
+ drivers/ptp/ptp_chardev.c                     | 166 +++++++++++-
+ drivers/ptp/ptp_clock.c                       |   4 +-
+ drivers/ptp/ptp_vmclock.c                     | 197 ++++++++++++--
+ include/linux/ptp_clock_kernel.h              |  30 +++
+ include/uapi/linux/ptp_clock.h                | 254 +++++++++++++++++-
+ tools/testing/selftests/ptp/testptp.c         | 181 ++++++++++---
+ 12 files changed, 862 insertions(+), 109 deletions(-)
+
 -- 
-2.53.0
+2.47.3
 
 
