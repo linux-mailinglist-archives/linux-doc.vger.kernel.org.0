@@ -1,529 +1,318 @@
-Return-Path: <linux-doc+bounces-96706-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96701-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id nXxSLtMPVmq8ygAAu9opvQ
-	(envelope-from <linux-doc+bounces-96706-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 12:30:43 +0200
+	id xt/HLk8PVmqcygAAu9opvQ
+	(envelope-from <linux-doc+bounces-96701-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 12:28:31 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id F2DCB7536A4
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 12:30:42 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0634C75364E
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 12:28:31 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=SpVf2tcX;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96706-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c0a:e001:db::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96706-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=gmail.com header.s=20251104 header.b="C/iC29Kk";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96701-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-96701-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=gmail.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 1009530179C2
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 10:28:04 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id AEE5330B7515
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2026 10:26:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A43A2364038;
-	Tue, 14 Jul 2026 10:28:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 36E4336F411;
+	Tue, 14 Jul 2026 10:26:48 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pz2-f0.google.com (mail-pz2-f0.google.com [74.125.228.0])
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6640C1E5714
-	for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 10:28:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A91A836D51B
+	for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 10:26:46 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784024883; cv=none; b=bhmhL9k/B2kb8NtB+npa4uIQVVM2u58nmmZib3x4fKHLs9Orjp7Yww7vB4f3YELZvwqlYHYh/OGq0U8b8/auMkGGhSbkiJkGoQrKnZEQzugrpSfT01R+gTITSclOT5pRgjj39ymV8YpJLBJXymeblmww2E+qys15UYqzORArGjg=
+	t=1784024808; cv=none; b=VR56WLdC6mFzpp0EtNwDeMwevizBFEhn67D9P8qxQVN3d5W9XM6yXdesQ9/fLGErA9l6YbZGmNg02vqvZkHKEZ6O1nSB8hurdNbO9YZ8cSKZGGcxBmZnSL3zcn00RvvUIBojT0jpRbHvBNSX+zYJv2kiX8bWazEZJQ7AKtnUARk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784024883; c=relaxed/simple;
-	bh=nX1dasfADMUFXDtmv/kMMBbRlqZgy2bTt0HGn0xBwFw=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=r1btamINab0GvGU7gWTVYMjTo/CgMeVklyC2pZsXzKB8QMA6sAEKl1KP1bL7G7OLiKZMDFpIs6XvYM4xBLFTm9W5Qb7KYyKNworT9cTTPHJpK23dWY66iw4nr75vrI/IhDXKhT+UaZ/48mORbkBS2fwWi8wLjHoLdXG+yobJgUY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=SpVf2tcX; arc=none smtp.client-ip=74.125.228.0
-Received: by mail-pz2-f0.google.com with SMTP id 41be03b00d2f7-ca24d39d8a4so2832826a12.1
-        for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 03:28:01 -0700 (PDT)
+	s=arc-20240116; t=1784024808; c=relaxed/simple;
+	bh=K+QIxVhorfR1MyXp+qy4rn09dpd40JsjX9jkdrYe12A=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=nNidqSlIcTGiVkj8RBhpdYoWt8EnWUE/Xvtz43DmFjsandni1xUOeBboOZpbpIyjmvupkS5XMCQb9R8WQpI7kc1cka8SILx/KymGv9Xacao/uIkbFGeVATo+u+tW50fgMT70LxW9/k7dclxdby2ZcapDPAbc7LbBKHTnJrCJl48=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=C/iC29Kk; arc=none smtp.client-ip=209.85.216.52
+Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-388b404ea89so733477a91.0
+        for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 03:26:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784024880; x=1784629680; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=I3uZJKOV8YeAsZnPRtkfSAsNKBXPzdQjBdP4hlRyp6Y=;
-        b=SpVf2tcXvPGEsynzUfq6G0mLIptT3q3ludZc7UW3t+f6mLuUINeOZKwvzeScSa09B6
-         ilXuXjTgyVN/BVvgW7u3HvIIW/L+SjbTro0F2YGqMPWnPMGA/oq7/foOE51P5euZZoCj
-         jtU7aVo0WEzrm8YRKNp4+MMepAByRasZh/GUoScGRGKbw9+8jXJyz5lMqdyl+89mI/Bp
-         4cN23lJ2pbgbLFe5HZE60sqzmEzLLRra5LxLp2M04lmz/biYm0iHgG+/E9gpy71GB8VR
-         HmNt9YFrBERJu73A2icS9QUTmVJUuJugkBH4fMcOqLcA/I39SI/zL6VCfyYmygBWKPun
-         /k0g==
+        d=gmail.com; s=20251104; t=1784024806; x=1784629606; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=boyQ+mZmVrEZmWolDZaO6rWNxBMWstz63XLu9MpBykk=;
+        b=C/iC29Kkt4gJw26FyxAZKmjC1/wKmT+Bgssm8CWWrY3nrvKQ82DZhKd+EPby62TK8p
+         NfZJx14mVfb4F42Zh/zZFZQNgD2l0JDkwd/i7+fz+emDTqRb3bxxy9D7sPVdPQGx97E3
+         ycv4TZyRB+HLxuGjAz+C9zFHxeAJPz8CYnNV2tyun7KPSh/q+n9ACPYip8uCwNS3PPKa
+         +ERTNoQLwBuOTSg2Kgz9wtfx5jUPuljDON4IBGK7hixmmO+92yQu7PhNNaIm41wGZysD
+         TsUxEBnipjLMf7I6KmSs0OxlHsvfhyyjjLZno2/OXl3D91kofr0bxq4xcBR4wg3PyExy
+         oqOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784024880; x=1784629680;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=I3uZJKOV8YeAsZnPRtkfSAsNKBXPzdQjBdP4hlRyp6Y=;
-        b=ATGHRruXwGZDtd58kA8sGNim0nRFseCGJ6pCH1BbAbETEpBVGma/Jgr/0zKHuGtdT9
-         jVnDTK+XUS5ITnkVPX61QuUTf9vDurAJ2FIkyXkZwCwKdmf52e/peSIX+702N1OQ98vu
-         3H2N5z40cxi7JkOpZlx3X7w3iiF+G412yvIlwjNjoba3/l5psgHfEf8MD8zEi4Po4arM
-         /kQfpltquU8e2IIth8KjUvHDJrUVTyzMwBDe9Q6tLYJdltJqaYtMGQ4bW7c5HDGnH2dG
-         Tw8zC8jRk0jX7yHIkykIxuOPir+Bfi4vfD0o5hZakRhpZ8v8U5x23Owy6gSKEyRU/2DR
-         oN2g==
-X-Gm-Message-State: AOJu0YwaGWxZZzmxOukwBthTBNVyeuCnWq1XIr72ay92vT1hrHw8s98L
-	y6m2XOgZst4qNzn25R3Be6tB1fiVwbqpOBWd90QWUGq9jOdELUXcWB8Sc5Yd4NYKags=
-X-Gm-Gg: AfdE7cm4R3BxMExXvEvtE20KFzZgbdt0eJtVXtBcsZ5Nu2m/Ay/SUQiy+lOhANXLMVt
-	cl5Z8a3zlXmf+pKMJwzaxo3x+OiUo+jDvXyFvOy6ZbYJ6EJNqO39YTnv66JVstOJyZb5juqY2jc
-	HN8g6vJV/UhWljXrYu0uEZhIY3OGikp4GAg5Tf+XYEoyYf1srZU8jloRqsenwI034R/dGhpwQ5d
-	Vosap0yUspgEchEWBxKmBJt7piWZdSlEHh8035Q8Iu8Mk7zSTfYf9crWtADJngtP4Y9H0/4ZPdf
-	5Eb+X22q5XUkZs1giUpoW1FHKbpM2XtW06yt8wznaJ6jMrOPCxSMb0npr3bn6MbLI3qMk+omHIB
-	/C6yd9sKmrGWAaD7SRbgzkEslMTellwYz0ZumKUCjR0aaveKqvJ2i89JuyXq0HuF058msYMPp0B
-	hg8b299+7LN0+dCpJQTuJhcAv8mTna
-X-Received: by 2002:a05:6a21:a512:b0:3bf:c07b:a9ae with SMTP id adf61e73a8af0-3c1109f0faamr13707578637.58.1784024880195;
-        Tue, 14 Jul 2026 03:28:00 -0700 (PDT)
-Received: from workstation ([2804:29b8:50af:c5b9:eb28:d00f:5a29:a72a])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13b659c865asm86687606c88.11.2026.07.14.03.27.58
+        d=1e100.net; s=20251104; t=1784024806; x=1784629606;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=boyQ+mZmVrEZmWolDZaO6rWNxBMWstz63XLu9MpBykk=;
+        b=EDvFk2krSPvQ/fab1cY6mgwgasaUPMNkWTwM2U8DA5Vmkl6XD4RlCKZXQCkAD2QEUv
+         IzBjE6B4bEECvk89lbUCGHSFaLUeVIYVGXHtPK9e/Z9LUmK2Zbs/rBk+qefM/pRxm553
+         TRbu3OT9gdmGK3yJIY2OLI/JECCODOWcDRjhmg60PTktAkxrI+zZEE5Zy6l39oeA367J
+         c7iT9kmdD68sg3k0FzZJ8ozp85ee4+Oh5qEdrDjTYjJpiZvkpY3cfXmzY5fEEx02HcvF
+         Uxj+NVJhEXQSVgpTW4/VGpHup2a1+Xni/nt3BmEauNM8a6u5erT+g4H7F53+ll61YWFo
+         ztBw==
+X-Forwarded-Encrypted: i=1; AHgh+RqME25sUVw27lYsheOk4Lag6Fo6DxPA3EytQ0hgvoiqCI6L8S1cycGZS7KFuvNLpVE5wXUWTdU4TQM=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz6/NhqZUg8//2asuvPHqRm1ufRoI1TnYizNPdk4Hof0xIH68vY
+	q2dnMNgsfMjn7voAI1/gpQBFLmXgfYhWcVmhNmzRSV4adjYKO8JOoRMb
+X-Gm-Gg: AfdE7cnKaa/Y1O0HLPVCyAqNxaa+4XYCpsMHun3H2tQdseko5vBYiejlAPipoOl9g1E
+	1mS/m2TG2i+V1XVZTJSuA0pGLOhEvQlPzL+SjC/VYxpg17dkkVerAHPOIYV+dnV033zU4mojzdo
+	pjq3pr5ZC8KhShiF0rYHtbSZKWhe2piaomSfgjtTv0j8OxdXN0JTLZOxHiNTheTZfkko3Qm4qwy
+	5a8QpU0s3q5pn+quI70VWiI57QSJJ+2iIwHSi5Gm+S88FN+um99IFzjWtSuUyZFxLOdAUf+TCcH
+	2xJGZEzd4jzdMzmYo3W8+0gHZJrZ754BN8/su9Ffb18rdLf5ZNQDxC+S32taq7HV8HV9tLJnPkc
+	sqUa5I2ZNDnB50W29qvAMpt4KcIpyVW2mR8CMsYNDHF56yUsNkA0gbQfCCcqPK7oq2lVl9jpyF1
+	3j2ZV3hXkJ4O93tSq/oq8LlYF86h+hjYE+Vud53ufP7DSJMdK1Q1sSs1I=
+X-Received: by 2002:a17:90b:2646:b0:384:927f:3db9 with SMTP id 98e67ed59e1d1-38dc807217fmr9919822a91.1.1784024805678;
+        Tue, 14 Jul 2026 03:26:45 -0700 (PDT)
+Received: from lappy (221x252x203x146.ap221.ftth.ucom.ne.jp. [221.252.203.146])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38e172cf625sm1264750a91.7.2026.07.14.03.26.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Jul 2026 03:27:59 -0700 (PDT)
-From: =?UTF-8?q?=C3=81lysson=20Gleyson=20da=20Silva?= <alyssongleyson.dev@gmail.com>
-To: danielmaraboo@gmail.com
-Cc: linux-doc@vger.kernel.org,
-	=?UTF-8?q?=C3=81lysson=20Gleyson=20da=20Silva?= <alyssongleyson.dev@gmail.com>
-Subject: [PATCH] docs: pt_BR: process: Translate the security-bugs.rst
-Date: Tue, 14 Jul 2026 07:26:32 -0300
-Message-ID: <20260714102632.25093-1-alyssongleyson.dev@gmail.com>
-X-Mailer: git-send-email 2.55.0
+        Tue, 14 Jul 2026 03:26:45 -0700 (PDT)
+From: "Derek J. Clark" <derekjohn.clark@gmail.com>
+To: Jiri Kosina <jikos@kernel.org>,
+	Benjamin Tissoires <bentiss@kernel.org>
+Cc: "Pierre-Loup A . Griffais" <pgriffais@valvesoftware.com>,
+	Denis Benato <denis.benato@linux.dev>,
+	Zhouwang Huang <honjow311@gmail.com>,
+	"Derek J . Clark" <derekjohn.clark@gmail.com>,
+	linux-input@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v12 0/4] Add MSI Claw HID Configuration Driver
+Date: Tue, 14 Jul 2026 03:26:36 -0700
+Message-ID: <20260714102640.18075-1-derekjohn.clark@gmail.com>
+X-Mailer: git-send-email 2.54.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-96706-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:danielmaraboo@gmail.com,m:linux-doc@vger.kernel.org,m:alyssongleyson.dev@gmail.com,m:alyssongleysondev@gmail.com,s:lists@lfdr.de];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FORGED_SENDER(0.00)[alyssongleysondev@gmail.com,linux-doc@vger.kernel.org];
-	TO_DN_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_THREE(0.00)[3];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	FREEMAIL_CC(0.00)[valvesoftware.com,linux.dev,gmail.com,vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
+	TAGGED_FROM(0.00)[bounces-96701-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:jikos@kernel.org,m:bentiss@kernel.org,m:pgriffais@valvesoftware.com,m:denis.benato@linux.dev,m:honjow311@gmail.com,m:derekjohn.clark@gmail.com,m:linux-input@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:derekjohnclark@gmail.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[derekjohnclark@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[alyssongleysondev@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[derekjohnclark@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	MID_RHS_MATCH_FROM(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp,led_cdev.name:url]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: F2DCB7536A4
+X-Rspamd-Queue-Id: 0634C75364E
 
-Translate the documentation on security bugs into Brazilian Portuguese,
-maintaining consistency with the original formatting rules.
+This series adds an HID Configuration driver for the MSI Claw line of
+Handheld Gaming PC's. The MSI Claw HID interface provides multiple
+features, such as the ability to switch between xinput, dinput, and a
+desktop mode, RGB control, rumble intensity, and mapping of the rear "M"
+keys. There are additional gamepad modes that are not included in this
+driver as they appear to be used in assembly line testing or are
+incomplete in the firmware. During my testing I found them to be unstable.
 
-Signed-off-by: Álysson Gleyson da Silva <alyssongleyson.dev@gmail.com>
+The initial version of this driver was written by Denis Benato, which
+contained the initial reverse-engineering and implementation for the
+gamepad mode switching. This work was later expanded by Zhouwang Huang
+to include more gamepad modes and additional features. Finally, I
+refactored the entire driver, fixed multiple bugs, and refined the overall
+format to conform to kernel driver best practices and style guide.
+
+Claude was used initially by Zhouwang Huang to quickly parse HID captures
+during the reverse-engineering of some of the features. Since Claude had
+already been used, as a test of its capabilities I had it implement the
+rumble intensity attribute after I had already rewritten most of the
+driver, which I then manually edited to fix some mistakes. I also used
+Claude to review the driver and these patches for any mistakes and bugs.
+
+Assisted-by: Claude:claude-sonnet-4-6
+Co-developed-by: Denis Benato <denis.benato@linux.dev>
+Signed-off-by: Denis Benato <denis.benato@linux.dev>
+Co-developed-by: Zhouwang Huang <honjow311@gmail.com>
+Signed-off-by: Zhouwang Huang <honjow311@gmail.com>
+Signed-off-by: Derek J. Clark <derekjohn.clark@gmail.com>
 ---
- Documentation/translations/pt_BR/index.rst    |   1 +
- .../pt_BR/process/security-bugs.rst           | 370 ++++++++++++++++++
- 2 files changed, 371 insertions(+)
- create mode 100644 Documentation/translations/pt_BR/process/security-bugs.rst
+v12:
+  - Fix race condition with mode events. Makes claw_hw_output_report() a
+    wrapper that holds cfg_mutex and adds __claw_hw_output_report(),
+    which has the old functionality but uses lockdep_assert_held(), and
+    claw_switch_mode(), which handles cfg_mutex holding and spinlock
+    holding for all mode functions, preventing the multiple callers issue.
+  - Remove goto based cleanup in __claw_hw_output_report(), adds some
+    duplicated code but avoids anti-pattern for cleanup.
+  - Use spinlock_irqsave for raw_event-reachable locks since completion
+    context isn't guaranteed softirq-only across all HCDs.
+  - Add bool to track if the driver is waiting on a sync ack with no
+    timeout to prevent those acks from clearing timeout acks.
+  - On address mismatch, assume stale message return and keep waiting for
+    correct message.
+  - On remove, cancel the rgb_queue last to avoid a re-arming, and in
+    rgb_queue_fn check rgb_registered to avoid running after the sysfs
+    group has been removed.
+  - Add note to led_cdev.name to (hopefully) silence sashiko-bot about
+    an impossible double device collision.
+  - Explicitly check if the current address is less than the rgb_address
+    to avoid invalid overflow math.
+v11: https://lore.kernel.org/linux-input/20260529072111.7565-1-derekjohn.clark@gmail.com/#r
+  - Restore dropped changes from v10.
+v10: https://lore.kernel.org/linux-input/20260527222122.10620-1-derekjohn.clark@gmail.com/
+  - Remove additional gamepad_registered variable left over after rename
+    to gp_registered.
+v9: https://lore.kernel.org/linux-input/20260525020543.519082-1-derekjohn.clark@gmail.com/
+  - Don't use devm_* functions in cfg_setup_fn, do manual adding
+    and cleanup to prevent possible use after free.
+  - Use scoped_guard instead of guard in claw_remove.
+  - Rename gamepad_registered to gp_registered for brevity.
+  - Check for drvdata in rgb_queue_fn to avoid use after free during
+    teardown.
+  - Ensure rgb_queue work is canceled during suspend.
+  - Limit guard usage in cfg_setup_fn to avoid holding a lock during
+    registration and add group events.
+v8: https://lore.kernel.org/linux-input/20260522015518.1111290-1-derekjohn.clark@gmail.com/
+  - Use spinlock when accessing gamepad_registered.
+  - Clear state machine on all errors in claw_hw_output_report.
+  - Wrap all branches under single cmd_lock guard in claw_raw_event.
+  - Reject generic ACK in claw_raw_event if waiting_cmd is for another
+    branch.
+  - Wrap all branches under single cmd_lock guard in claw_raw_event.
+  - Reject generic ACK in claw_raw_event if waiting_cmd is for another
+    branch.
+  - Don't close hid devices that couldn't have been opened.
+  - Ensure led_classdev is unregistered if adding attribute group fails.
+  - Reorder remove actions to ensure no use-after free or rearming cleared
+    flags.
+v7: https://lore.kernel.org/linux-input/20260520013158.3633277-1-derekjohn.clark@gmail.com/
+  - Use smp_[store_release|load_acquire] pattern for checking
+    gamepad_registered and rgb_registered to avoid possible races during
+    teardown.
+  - Reorder reinit_completion in claw_hw_output_report to avoid race
+    with possible incoming ACKs.
+  - Reorder cancel_delayed_work_sync to ensure setup can't be re-armed
+    after cancel.
+  - Reset command state machine if hw_output_report has an error.
+  - Add comments to (hopefully) silence sashinko-bot warnings about the
+    use of endpoint matching and the impossible scenario of switching to
+    the alternate endpoint from userspace while the driver is bound.
+  - Don't use spinlock_irqsave when already in irq context.
+  - Add profile_lock for read/write profile_pending.
+  - Use struct for mkey reports and rumble reports, following the
+    pattern established by rgb reports previously.
+  - Add gating to cfg_setup_fn, allowing either gamepad settings or rgb
+    settings to populate if the other fails for any reason.
+  - Match on write address for rumble and mkey reports to prevent late
+    ACK from causing synchronization errors.
 
-diff --git a/Documentation/translations/pt_BR/index.rst b/Documentation/translations/pt_BR/index.rst
-index 7a488f662..796fe9bca 100644
---- a/Documentation/translations/pt_BR/index.rst
-+++ b/Documentation/translations/pt_BR/index.rst
-@@ -78,3 +78,4 @@ kernel e sobre como ver seu trabalho integrado.
-    Processo do subsistema SoC <process/maintainer-soc>
-    Conformidade de DTS para SoC <process/maintainer-soc-clean-dts>
-    Processo do subsistema KVM x86 <process/maintainer-kvm-x86>
-+   Falhas de segurança <process/security-bugs>
-diff --git a/Documentation/translations/pt_BR/process/security-bugs.rst b/Documentation/translations/pt_BR/process/security-bugs.rst
-new file mode 100644
-index 000000000..a0c57219b
---- /dev/null
-+++ b/Documentation/translations/pt_BR/process/security-bugs.rst
-@@ -0,0 +1,370 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+.. _securitybugs_pt_BR:
-+
-+Falhas de segurança
-+===================
-+
-+Os desenvolvedores do kernel Linux levam a segurança muito a sério. Como tal,
-+gostariamos de saber quando uma falha de segurança é encontrada para que ela
-+possa ser corrigida e divulgada o mais rápido possível.
-+
-+Preparando seu relatório
-+------------------------
-+
-+Como em qualquer relatório de bug, um relátorio de falha de segurança exige
-+muito trabalho de análise por parte dos desenvolvedores, portanto, quanto mais
-+informações você puder compartilhar sobre o problema, melhor. Por favor, revise
-+o procedimento descrito em Documentation/admin-guide/reporting-issues.rst se
-+você não tiver certeza sobre quais informações são úteis. As seguintes
-+informações são absolutamente necessárias em **qualquer** relatório de falha de
-+segurança:
-+
-+  * **versão do kernel afetada**: sem indicação de versão, seu relatório não
-+    será processado. Uma parte significativa dos relatórios é de bugs que já
-+    foram corrigidos, portanto, é extremamente importante que as
-+    vulnerabilidades sejam verificadas em versões recentes (árvore de
-+    desenvolvimento ou a versão estável mais recente), pelo menos verificando
-+    se o código não mudou desde a versão onde foi detectado.
-+
-+  * **descrição do problema**: uma descrição detalhada do problema, com rastros
-+    mostrando sua manifestação, e por que você considera o comportamento
-+    observado como um problema no Kernel, é necessaária.
-+
-+  * **reproduzir**: os desenvolvedores precisarão ser capazes de reproduzir o
-+    problema para considerar uma correção como eficaz. Isso inclui tanto uma
-+    maneira de acionar o problema quanto uma maneira de confirmar que ele
-+    ocorre. Será necessário um reprodutor com dependências de baixa
-+    complexidade (código-fonte, script de shell, seguência de instruções,
-+    imagem de sistema de arquivos, etc). Executáveis apenas binários não são
-+    aceitos. Exploits funcionais são extremamente úteis e não serão divulgados
-+    sem o consentimento do relator, a menos que já sejam públicos. Por
-+    definição, se um problema não pode ser reproduzido, ele não é explorável,
-+    portanto, não é um bug de segurança.
-+
-+  * **condições**: se o bug depender de certas opções de configuração, sysctls,
-+    permissões, temporização, modificações de código, etc., estas devem ser
-+    indicadas.
-+
-+Além disso, as seguintes informaçẽos são altamente desejáveis:
-+
-+  * **localização suspeita do bug**: os nomes dos arquivos e funções onde
-+    se suspeita que o bug esteja presente são muito importantes, pelo menos
-+    para ajudar a encaminhar o relatório aos mantenedores apropriados. Quando
-+    não for possível (por exemplo, "o sistema trava toda vez que executo este
-+    comando"), a equipe de segurança ajudará a identificar a origem do bug.
-+
-+  * **uma proposta de correção**: os relatores de bugs que analisaram a causa
-+    de uma falha no código-fonte quase sempre têm uma ideia precisa de como
-+    corrigi-lo, porque passaram muito tempo estudando o problema e suas
-+    implicações. Propor uma correção testada poupará muito tempo dos
-+    mantenedores, mesmo que a correção acabe não sendo a correta, pois ajuda a
-+    entender o bug. A propor uma correção testada, por favor, formate-a
-+    sempre de uma maneira que possa ser mesclada imediatamente (consulte
-+    Documentation/process/submitting-patches.rst). Isso evitará algumas trocas
-+    de mensagens caso ela seja aceita, e você receberá o crédito por
-+    encontrar e corrigir o problema. Observe que, neste caso, apenas uma tag
-+    ``Signed-off-by:`` é necessária, sem ``Reported-by:`` quando o relator e
-+    o autor forem a mesma pessoa.
-+
-+  * **mitigações**: com muita frequência, durante a análise de um bug,
-+    surgem algumas maneiras de mitigar o problema. È útil compartilhá-las,
-+    pois podem ser úteis para manter os usuários finais protegidos durante o
-+    tempo que levam para aplicar a correção.
-+
-+O que se qualifica como um bug de segurança
-+-------------------------------------------
-+
-+É importante que a maioria dos bugs seja tratada publicamente, de modo a
-+envolver o maior público possível e encontrar a melhor solução. Por natureza,
-+bugs que são tratados em discussões fechadas entre um pequeno conjunto de
-+participantes têm menos probabilidade de produzir a melhor correção possível
-+(por exemplo, risco de perder casos de uso válidos, capacidades de testes
-+limitadas).
-+
-+Acontece que a maioria dos bugs relatados por meio da equipe de segurança são
-+apenas bugs comuns que foram qualificados incorretamente como bugs de segurança
-+devido à falta de conhecimento do modelo de ameaças do kernel Linux, conforme
-+descrito em Documentation/process/threat-model.rst, e deveriam ter sido
-+enviados através dos canais normais descritos em
-+Documentation/admin-guide/reporting-issues.rst
-+
-+A lista de segurança existe para bugs urgentes que concedem a um atacante uma
-+capacidade que ele não deveria ter em um sistema de produção corretamente
-+configurado, e que podem ser facilmente explorados, representando uma ameaça
-+iminente para muitos usuários. Antes de relatar, considere se o problema
-+realmente ultrapassa um limite de confiança em tal sistema.
-+
-+**Se você recorreu a assistência de IA para identificar um bug, você deve
-+tratá-lo como público**. Embora você possa ter motivos válidos para acreditar
-+que não seja, a experiência da equipe de segurança mostra que os bugs
-+descobertos desta forma surgem sistematicamente e de forma simultânea entre
-+múltiplos pesquisadores, frequentemente no mesmo dia. Neste caso, não
-+compartilhe publicamente um reprodutor, pois isso poderia causar danos não
-+intencionais; apenas mencione que um está disponível e os mantenedores poderão
-+solicitá-lo privadamente se precisarem.
-+
-+Se você não tiver certeza se um problema se qualifica, opte por relatar de
-+forma privada: a equipe de segurança prefere triar um relatório limítrofe
-+a perder uma vulnerabilidade real. Relatar bugs comuns na lista de segurança,
-+no entanto, não faz com que eles andem mais rápido e consome a capacidade de
-+triagem de que outros relatórios precisam.
-+
-+Identificando contatos
-+----------------------
-+
-+A maneira mais eficaz de relatar um bug de segurança é enviá-lo diretamente
-+aos mantenedores do subsistema afetado e Cc: para a equipe de segurança do
-+kernel Linux. Não o envie para uma lista pública nesta fase, a menos que você
-+tenha bons motivos para considerar o problema como público ou trivial de ser
-+descoberto (por exemplo, resultado de uma ferramenta automatizada de varredura
-+de vulnerabilidades amplamente disponível que possa ser repetida por qualquer
-+pessoa, ou o uso de ferramentas baseadas em IA).
-+
-+Se você estiver enviando um relatório de problemas que afetam várias partes no
-+kernel, mesmo que sejam problemas bastante semelhantes, envie mensagens
-+individuais (pense que os mantenedores não trabalharão todos nos problemas ao
-+mesmo tempo). A única exceção é quando um problema diz respeito a partes
-+intimamente relacionadas, mantidas pelo exato mesmo subconjunto de
-+mantenedores, e espera-se que essas partes sejam todas corrigidas de uma só vez
-+pelo mesmo commit; então pode ser aceitável relatá-las de uma vez.
-+
-+Uma dificuldade para a maioria dos relatores de primeira viagem é descobrir a
-+lista certa de destinatários para enviar um relatório. No kernel Linux, todos
-+os mantenedores oficiais são confiáveis, portanto as consequências de incluir
-+acidentalmente o mantenedor errado são apenas um pequeno ruido para essa
-+pessoa, ou seja, nada dramático. Sendo assim, um método adequado para descobrir
-+a lista de mantenedores (o qual os oficiais de segurança do kernel usam) é
-+contar com o script get_maintainer.pl, ajustado para relatar apenas
-+mantenedores. Este script, quando recebe um nome de arquivo, procurará por seu
-+caminho no arquivo MAINTAINERS para deduzir uma lista hierárquica de
-+mantenedores relevantes. Chamá-lo pela primeira vez com o nível mais refinado
-+de filtragem retornará, na maioria das vezes, uma lista curta de mantenedores
-+deste arquivo específico::
-+
-+  $ ./scripts/get_maintainer.pl --no-l --no-r --pattern-depth 1 \
-+    drivers/example.c
-+  Developer One <dev1@example.com> (maintainer:example driver)
-+  Developer Two <dev2@example.org> (maintainer:example driver)
-+
-+Estes dois mantenedores devem então receber a mensagem. Se o comando não
-+retornar nada, isso significa que o arquivo afetado faz parte de um subsistema
-+mais amplo, portanto devemos ser menos específicos::
-+
-+  $ ./scripts/get_maintainer.pl --no-l --no-r drivers/example.c
-+  Developer One <dev1@example.com> (maintainer:example subsystem)
-+  Developer Two <dev2@example.org> (maintainer:example subsystem)
-+  Developer Three <dev3@example.com> (maintainer:example subsystem [GENERAL])
-+  Developer Four <dev4@example.org> (maintainer:example subsystem [GENERAL])
-+
-+Aqui, escolher os primeiros, mais específicos, é suficiente. Quando a lista for
-+longa, é possível produzir uma lista de endereços de e-mail delimitada por
-+vírgulas em uma única linha adequada para o uso no campo TO: de um cliente de
-+e-mail como este::
-+
-+  $ ./scripts/get_maintainer.pl --no-tree --no-l --no-r --no-n --m \
-+    --no-git-fallback --no-substatus --no-rolestats --no-multiline \
-+    --pattern-depth 1 drivers/example.c
-+  dev1@example.com, dev2@example.org
-+
-+ou este para a lista mais ampla::
-+
-+  $ ./scripts/get_maintainer.pl --no-tree --no-l --no-r --no-n --m \
-+    --no-git-fallback --no-substatus --no-rolestats --no-multiline \
-+    drivers/example.c
-+  dev1@example.com, dev2@example.org, dev3@example.com, dev4@example.org
-+
-+Se a esta altura você ainda estiver enfrentando dificuldades para identificar
-+os mantenedores corretos, e apenas neste caso, é possível enviar seu
-+relatório apenas para a equipe de segurança do kernel Linux. Sua mensagem
-+será triada e você receberá instruções sobre quem contatar, se necessário.
-+Sua mensagem poderá igualmente ser encaminhada como está para os mantenedores
-+relevantes.
-+
-+Uso responsável de IA para encontrar bugs
-+-----------------------------------------
-+
-+Uma fração significativa dos relatórios de bugs enviados à equipe de segurança
-+é, na verdade, o resultado de revisões de código assistidas por ferramentas de
-+IA. Embora isso possa ser um meio eficiente de encontrar bugs em áreas
-+raramente exploradas, causa uma sobrecarga nos mantenedores, que às vezes são
-+forçados a ignorar tais relatórios devido à sua má qualidade ou precisão. Sendo
-+assim, os relatores devem ter um cuidado especial com vários pontos que tendem
-+a tornar esses relatórios desnecessariamente difíceis de lidar:
-+
-+  * **Comprimento**: Os relatórios gerados por IA tendem a ser excessivamente
-+    longos, contendo várias seções e detalhes em excesso. Isso dificulta a
-+    identificação de informações importantes, como arquivos afetados, versões e
-+    impacto. Por favor, certifique-se de que um resumo claro do problema e
-+    todos os detalhes críticos sejam apresentados primeiro. Não exija que os
-+    engenheiros de triagem analisem várias páginas de texto. Configure suas
-+    ferramentas para produzir relatórios concisos e em estilo humano.
-+
-+  * **Formatação**: A maioria dos relatórios gerados por IA está repleta de
-+    tags Markdown. Essas decorações complicam a busca por informações
-+    importantes e não sobrevivem aos processos de citação envolvidos no
-+    encaminhamento ou nas respostas. Por favor, sempre converta seu relatório
-+    para texto simples sem quaisquer decorações de formatação antes de
-+    enviá-lo.
-+
-+  * **Avaliação de Impacto**: Muitos relatórios gerados por IA carecem de uma
-+    compreensão do modelo de ameaças do kernel (consulte
-+    Documentation/process/threat-model.rst) e fazem de tudo para inventar
-+    consequências teóricas. Isso adiciona ruído e complica a triagem. Por
-+    favor, limite-se a fatos verificáveis (por exemplo, "este bug permite que
-+    qualquer usuário obtenha CAP_NET_ADMIN") sem enumerar implicações
-+    especulativas. Faça com que sua ferramenta leia esta documentação como
-+    parte do processo de avaliação.
-+
-+  * **Reproduzidor**: As ferramentas baseadas em IA são frequentemente capazes
-+    de gerar reproduzidores. Por favor, certifique-se sempre de que sua
-+    ferramenta forneça um e teste-o exaustivamente. Se o reproduzidor não
-+    funcionar, ou se a ferramenta não puder produzir um, a validade do
-+    relatório deve ser seriamente questionada. Observe que, como o relatório
-+    será postado em uma lista pública, o reproduzidor só deve ser compartilhado
-+    mediante solicitação dos mantenedores.
-+
-+  * **Propor uma Correção:** muitas ferramentas de IA são na verdade melhores
-+    em escrever código do que em avaliá-lo. Por favor, peça à sua ferramenta
-+    para propor uma correção e teste-a antes de relatar o problema.
-+    Se a correção não puder ser testada porque depende de hardware raro ou de
-+    protocolos de rede quase extintos, é provável que o problema não seja um
-+    bug de segurança. Em qualquer caso, se uma correção for proposta, ela deve
-+    aderir a Documentation/process/submitting-patches.rst e incluir uma tag
-+    'Fixes:' designando o commit que introduziu o bug.
-+
-+A falha em considerar estes pontos expõe seu relatório ao risco de ser
-+ignorado.
-+
-+Use o bom senso ao avaliar o relatório. Se o arquivo afetado não tiver sido
-+alterado por mais de um ano e for mantido por um único indivíduo, é provável
-+que o uso tenha diminuído e os usuários expostos sejam virtualmente
-+inexistentes (por exemplo, drivers para hardware muito antigo, sistemas de
-+arquivos obsoletos). Nesses casos, não há necessidade de consumir o tempo de
-+um mantenedor com um relatório sem importância. Se o problema for claramente
-+trivial e publicamente detectável, você deve relatá-lo diretamente às listas
-+de discussão públicas.
-+
-+Enviando o relatório
-+--------------------
-+
-+Os relatórios devem ser enviados exclusivamente por e-mail. Por favor, use um
-+endereço de e-mail funcional, de preferência o mesmo que você deseja que
-+apareça nas tags ``Reported-by``, se houver. Se não tiver certeza, envie o seu
-+relatório para você mesmo primeiro.
-+
-+A equipe de segurança e os mantenedores quase sempre exigem informações
-+adicionais além das fornecidas inicialmente em um relatório e dependem de uma
-+colaboração ativa e eficiente com o relator para realizar testes adicionais
-+(por exemplo, verificar versões, opções de configuração, mitigações ou
-+patches). Antes de entrar em contato com a equipe de segurança, o relator deve
-+certificar-se de que está disponível para explicar suas descobertas, participar
-+de discussões e executar testes adicionais. Relatórios nos quais o relator não
-+responde prontamente ou não consegue discutir suas descobertas de forma eficaz
-+podem ser abandonados se a comunicação não melhorar rapidamente.
-+
-+O relatório deve ser enviado aos mantenedores. Se houver dois ou menos
-+destinatários em sua mensagem, você também deve sempre colocar em Cc: a equipe
-+de segurança do kernel Linux, que garantirá que a mensagem seja entregue às
-+pessoas corretas e poderá auxiliar pequenas equipes de mantenedores com
-+processos com os quais eles possam não estar familiarizados. Para equipes
-+maiores, coloque em Cc: a equipe de segurança do kernel Linux em seus primeiros
-+relatórios ou ao buscar ajuda específica, como ao reenviar uma mensagem que não
-+obteve resposta dentro de uma semana. Assim que você se sentir confortável com
-+o processo após alguns relatórios, não será mais necessário colocar a lista de
-+segurança em Cc: ao enviar para equipes grandes. A equipe de segurança do
-+kernel Linux pode ser contatada por e-mail em security@kernel.org. Esta é uma
-+lista privada de oficiais de segurança que ajudarão a verificar o relatório de
-+bug e auxiliarão os desenvolvedores que trabalham em uma correção. É possível
-+que a equipe de segurança traga ajuda extra de mantenedores da área para
-+entender e corrigir a vulnerabilidade de segurança.
-+
-+Por favor, envie e-mails em **texto simples** sem anexos, sempre que possível.
-+É muito mais difícil ter uma discussão com citações de contexto sobre um
-+problema complexo se todos os detalhes estiverem ocultos em anexos. Pense nisso
-+como uma :doc:`regular path submission <../process/submitting-patches>`
-+(mesmo que você ainda não tenha um patch): descreva o problema e o impacto,
-+liste as etapas de reprodução e siga com uma proposta de correção, tudo em
-+texto simples. Relatórios formatados em Markdown, HTML e RST são
-+particularmente malvistos, pois são bastante difíceis de ler por humanos e
-+incentivam o uso de visualizadores dedicados, às vezes online, o que por
-+definição não é aceitável para um relatório de segurança confidencial. Note
-+que alguns clientes de e-mail tendem a corromper a formatação de texto simples
-+por padrão; por favor, consulte Documentation/process/email-clients.rst para
-+mais informações.
-+
-+Divulgação e informações sob embargo
-+------------------------------------
-+
-+A lista de segurança não é um canal de divulgação. Para isso, veja Coordenação
-+abaixo.
-+
-+Assim que uma correção robusta for desenvolvida, o processo de lançamento é
-+iniciado. Correções para bugs publicamente conhecidos são lançadas
-+imediatamente.
-+
-+Embora nossa preferência seja lançar correções para bugs publicamente não
-+divulgados assim que estiverem disponíveis, isso pode ser adiado a pedido do
-+relator ou de uma parte afetada por até 7 dias corridos a partir do início do
-+processo de lançamento, com uma extensão excepcional para 14 dias corridos se
-+for acordado que a criticidade do bug exige mais tempo. O único motivo válido
-+para adiar a publicação de uma correção é acomodar a logística de QA e as
-+implantações em larga escala que exigem coordenação de lançamento.
-+
-+Embora as informações sob embargo possam ser compartilhadas com indivíduos de
-+confiança para o desenvolvimento de uma correção, tais informações não serão
-+publicadas juntamente com a correção ou em qualquer outro canal de divulgação
-+sem a permissão do relator. Isso inclui, mas não se limita ao relatório de bug
-+original e discussões de acompanhamento (se houver), exploits, informações de
-+CVE ou a identidade do relator.
-+
-+Em outras palavras, nosso único interesse é fazer com que os bugs sejam
-+corrigidos. Todas as outras informações enviadas à lista de segurança e
-+quaisquer discussões de acompanhamento do relatório são tratadas de forma
-+confidencial, mesmo após o término do embargo, perpetuamente.
-+
-+Coordenação com outros grupos
-+-----------------------------
-+
-+Embora a equipe de segurança do kernel se concentre exclusivamente em corrigir
-+bugs, outros grupos se concentram em corrigir problemas em distribuições e em
-+coordenar a divulgação entre fornecedores de sistemas operacionais. A
-+coordenação é geralmente tratada pela lista de discussão "linux-distros" e a
-+divulgação pela lista pública "oss-security", ambas intimamente relacionadas
-+e apresentadas na wiki da linux-distros:
-+https://oss-security.openwall.org/wiki/mailing-lists/distros
-+
-+Por favor, note que as respectivas políticas e regras são diferentes, já que as
-+3 listas buscam objetivos distintos. A coordenação entre a equipe de segurança
-+do kernel e outras equipes é difícil porque para a equipe de segurança do
-+kernel os embargos ocasionais (sujeitos a um número máximo de dias permitido)
-+começam a partir da disponibilidade de uma correção, enquanto para a
-+"linux-distros" eles começam a partir da postagem inicial na lista,
-+independentemente da disponibilidade de uma correção.
-+
-+Como tal, a equipe de segurança do kernel recomenda fortemente que, como
-+relator de um potencial problema de segurança, você NÃO contate a lista de
-+discussão "linux-distros" ATÉ que uma correção seja aceita pelos mantenedores
-+do código afetado e você tenha lido a página wiki das distribuições acima e
-+compreendido totalmente os requisitos que o contato com a "linux-distros"
-+imporá a você e à comunidade do kernel. Isso também significa que, em geral,
-+não faz sentido colocar ambas as listas em Cc: ao mesmo tempo, exceto talvez
-+para coordenação se e enquanto uma correção aceita ainda não tiver sido
-+mesclada. Em outras palavras, até que uma correção seja aceita, não coloque
-+em Cc: "linux-distros", e após ela ser mesclada, não coloque em Cc: a equipe
-+de segurança do kernel.
-+
-+Atribuição de CVE
-+-----------------
-+
-+A equipe de segurança não atribui CVEs, nem os exigimos para relatórios ou
-+correções, pois isso pode complicar desnecessariamente o processo e adiar o
-+tratamento do bug. Se um relator desejar que um identificador CVE seja
-+atribuído para um problema confirmado, ele pode entrar em contato com a
-+:doc:`kernel CVE assignment team<../process/cve>` para obter um.
-+
-+Acordo de não divulgação
-+------------------------
-+
-+A equipe de segurança do kernel Linux não é um òrgão formal e, portanto, é
-+incapaz de celebrar quaisquer acordos de não divulgação.
+v6: https://lore.kernel.org/linux-input/20260518222935.1802071-1-derekjohn.clark@gmail.com/
+  - Add send/ack pattern to ensure synchronous acks.
+  - Use spinlock_irqsave instead of mutex for read/write MODE event
+    data.
+  - add select NEW_LEDS to kconfig.
+  - Make all timeouts 25ms to ensure at least 2 jiffies in a 100Hz
+    config.
+  - Gate all attribute show/store functions with gamepad_registered or
+    rgb_registered, enabling use of devm_device_add_group and ending
+    the need to hold a mutex during remove.
+  - Don't set gamepad_mode on resume, MCU preserves state.
+  - Ensure all count variables are checked for > 0 characters before
+    setting buf - 1 to \n.
+  - Re-arm cfg_setup in resume if it was canceled in an early suspend.
+  - Remove duplicated argv_free macro.
+  - Add spinlock_irqsave vice mutex for read/write access on attribute
+    variables.
+v5: https://lore.kernel.org/linux-input/20260517013925.3120314-1-derekjohn.clark@gmail.com/
+  - Swap disabled & combination mkeys_function enum values.
+  - Fix bug introduced in v5 where claw_buttons_store would return
+    -EINVAL on all valid key entries.
+  - Ensure mode_mutex is properly init.
+  - Ensure claw_remove is calling hid_hw_close and not hid_hw_stop for
+    all paths.
+  - Ensure adding "DISABLED" key to valid entries is done in the correct
+    patch.
+  - Re-enable sending an empty string to clear button mappings in
+    addition to setting DISABLED.
+  - Move adding the RGB device into cfg_setup to prevent led core
+    attributes from being written to prior to setup completing.
+  - Ensure frame_lock is properly init.
+  - Change variable names in RGB functions from frame and zone to f and
+    z respectively to fit all scoped_guard actions in 100 columns.
+v4: https://lore.kernel.org/linux-input/20260516042841.500299-1-derekjohn.clark@gmail.com/
+  - Add msi_suspend/claw_suspend.
+  - Reorder claw_remove to cancel all work before removing sysfs.
+  - Add mutex lock for removing sysfs attributes.
+  - Add mutex lock for MODE command data read/write.
+  - Change dev_warn to dev_dbg in claw_profile_event.
+  - use __free with DEFINE_FREE macro for argv instead of manually
+    running argv_free, cleaining up scoped_guard goto.
+  - Fix frame_calc validity check to use >=.
+  - Use spinlock instead of mutex in raw_event and related attribute
+    _store function.
+  - Ensure delayed work is canceled in suspend & canceled before sysfs
+    attribute removal.
+v3: https://lore.kernel.org/linux-input/20260515033622.2095277-1-derekjohn.clark@gmail.com/
+  - Add mutex for read/write if rgb frame data.
+  - Ensure claw_hw_output_report is properly guarded.
+  - Remove setting rgb_frame_count when reading rgb profiles as it always
+    returns garbage data.
+  - Ensure rgb_speed is getting drvdata from a valid lookup (not hdev).
+  - Use scoped_guard where necessary.
+  - Reoder claw_probe to ensure all mutex, completion, and variable
+    assignments are in place prior to setting drvdata.
+  - Ensure gamepad_mode is set to a valid enum value in claw_probe.
+v2: https://lore.kernel.org/linux-input/20260513231445.3213501-1-derekjohn.clark@gmail.com/
+  - Use mutexes to guard SYNC_TO_ROM calls and pending_profile calls.
+  - Rename driver to hid-msi and add generic entrypoints for
+    probe/resume/remove that call claw specific functions in order to
+    future proof the driver for other MSI HID interfaces.
+  - Fix various bugs and formatting issues.
+v1: https://lore.kernel.org/linux-input/20260510043510.442807-1-derekjohn.clark@gmail.com/
+
+
+Derek J. Clark (4):
+  HID: hid-msi: Add MSI Claw configuration driver
+  HID: hid-msi: Add M-key mapping attributes
+  HID: hid-msi: Add RGB control interface
+  HID: hid-msi: Add Rumble Intensity Attributes
+
+ MAINTAINERS           |    6 +
+ drivers/hid/Kconfig   |   13 +
+ drivers/hid/Makefile  |    1 +
+ drivers/hid/hid-ids.h |    5 +
+ drivers/hid/hid-msi.c | 2058 +++++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 2083 insertions(+)
+ create mode 100644 drivers/hid/hid-msi.c
+
 -- 
-2.55.0
+2.54.0
 
 
