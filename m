@@ -1,78 +1,78 @@
-Return-Path: <linux-doc+bounces-96917-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96920-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 6KJmNAhyV2qbOAEAu9opvQ
-	(envelope-from <linux-doc+bounces-96917-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 13:42:00 +0200
+	id XULmMjpzV2oOOQEAu9opvQ
+	(envelope-from <linux-doc+bounces-96920-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 13:47:06 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 898F675DA3C
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 13:42:00 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2C6BF75DB49
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 13:47:06 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=analog.com header.s=DKIM header.b=vmRwTPna;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96917-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-96917-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=analog.com header.s=DKIM header.b="ti9umuQ/";
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96920-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-96920-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=quarantine) header.from=analog.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 10A0230078AA
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 11:42:00 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 9DC183161BFE
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 11:42:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E90B3448CF3;
-	Wed, 15 Jul 2026 11:41:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 02E66448CFC;
+	Wed, 15 Jul 2026 11:42:06 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mx0a-00128a01.pphosted.com (mx0a-00128a01.pphosted.com [148.163.135.77])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 61F00432E86;
-	Wed, 15 Jul 2026 11:41:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 29F5D448D03;
+	Wed, 15 Jul 2026 11:42:00 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784115718; cv=none; b=i0Ihb/AgGRFkxTiV36ThL7SiQUiOHRSPns4YSFQPscjj2pL8zUctWIaGo6XPo297Dzk+vyIANqvUZEFFOOUdb+tu/CoL2Hns61B9p79VNQX8tmEwjfOne//PN4iVJ3Jf+1i4UDiXp47FOf93G5ueccSwF4I2SzGjbeqv1Aw+EPg=
+	t=1784115725; cv=none; b=Ji/QnOy44SCQbsA5AI5aOPCDQJpXFmrPIHCx+pdb1eeMSG7GQv0/4lWcChRcvrBCBVcatU7MuEYzXT8R6igmhSiphF+gJ6HabN0nJ3aETtHkgYiWXyRDowADQwBAC9hOi2myWKRYfTBFrLNPJ1+FWfgFV7VJx8ug4bfueuxqlCw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784115718; c=relaxed/simple;
-	bh=SNJI92VrprHtT5MzdFsRMm8PBprcV5VudH8UFNZRHUM=;
+	s=arc-20240116; t=1784115725; c=relaxed/simple;
+	bh=21OJd7m2egWDVGrGbW/ZtbwclJwnKRyz6WrrkqTffk4=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:References:
-	 In-Reply-To:To:CC; b=oKTDGzUnYNDkteyBARdcEAleVy92wbF14mPoM6Ft7mrVJL9BCByEZeplp2xj4CrQYfj9Q8S8BC4KBePz0y9yesxU33w2hxphzuC2sRXadZnRyuMJMFMOD18LlbQNnWAesq0kA59jhf9RYASJdbWJvSmmdq4UqWnAqXU7rIswOo4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=analog.com; spf=pass smtp.mailfrom=analog.com; dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b=vmRwTPna; arc=none smtp.client-ip=148.163.135.77
+	 In-Reply-To:To:CC; b=q6lvKPfYO7baIW1HUURAkDuE+d75ykcOCsI6S17Ce1kneRNmUCJd3Eu36Fi2H7qoPbkWqEoKDjF7vQJCENoBLH9/cq5thPGxzFwk60cMiuKozGaE1DCLacB1MRNQchtpkp2aJ35K5eBI25J81ebDv9VH7CpqzeffEl1ku6N+RQ8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=analog.com; spf=pass smtp.mailfrom=analog.com; dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b=ti9umuQ/; arc=none smtp.client-ip=148.163.135.77
 Received: from pps.filterd (m0167088.ppops.net [127.0.0.1])
-	by mx0a-00128a01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66FBZjUo874893;
-	Wed, 15 Jul 2026 07:41:37 -0400
+	by mx0a-00128a01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66FBZiNr874876;
+	Wed, 15 Jul 2026 07:41:41 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=analog.com; h=cc
 	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=DKIM; bh=BE8eW
-	SesmvUP52eRWrhETcYMR+9iEWP4oNF9iE59a/0=; b=vmRwTPna0MewKPr1yaSD2
-	NlgFDeYCTd61bZkqWouOspTWRkiB53bgg9QYbG/lhpBq0YMrQ2tX28UkbBEXSt/+
-	PGcZYgkEdi6x03vwc85bczhiyiPzGX+I8AmQG4mrTQFURW0c85gd0tRqfC9GGPnH
-	iKglgDZrF90/YQS4TRFOL5GnF9NRHjRSFI2ZLgG6yjctdiNjY1r3M/Afe6M7zBwF
-	5/7+1Ru8PlGKS3fg/Qt/GxA/xFvot2a9gk/fQzJJ6ufT/2Bcc2PdCEYlC4WPvU/N
-	xwpxaeS5cst2gg+fLJJatwX1WGXJvAsnALh2KjnxKjfOYkzCLnxXV/VUX/NbVPHn
-	A==
+	:message-id:mime-version:references:subject:to; s=DKIM; bh=twPuT
+	N86UO5XovlX18irC14nN3OHnXtDsxjEQaT48fk=; b=ti9umuQ/JNEpYlWNKIj2C
+	LYi7mmw1wcnTzgO/72BRnXD04GHkspvL+sHPuMBagdne4KQ3Rilb3ZWY/mwJOWsq
+	mfIefzjBS5V7R0Jm19CAqrhFhCocATaTJZN6BKaEQ37VfvnteiYBl+h2z7HqrWtY
+	/fWjJGaAE5v2tGhpsz+OTrUcGiieqk4aPRLrVmnA1xkHgMEW9q/yYhH8hVGYzZf5
+	IHcEWNjeeXuB/CwOZic0vDirx+scReAiNS/zu/OTG9Z7V5KoaNDiBshiH0hjNCoe
+	A4Cf9qGQi6VD9FNYjHy7IVEFLIcrzAGNiC9rRGm83W6tCe51Y9EnDtLRMD8h4s8Z
+	Q==
 Received: from nwd2mta4.analog.com ([137.71.173.58])
-	by mx0a-00128a01.pphosted.com (PPS) with ESMTPS id 4fe8a8883w-1
+	by mx0a-00128a01.pphosted.com (PPS) with ESMTPS id 4fe8a88845-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 15 Jul 2026 07:41:36 -0400 (EDT)
+	Wed, 15 Jul 2026 07:41:41 -0400 (EDT)
 Received: from ASHBMBX9.ad.analog.com (ASHBMBX9.ad.analog.com [10.64.17.10])
-	by nwd2mta4.analog.com (8.14.7/8.14.7) with ESMTP id 66FBfZgr004882
+	by nwd2mta4.analog.com (8.14.7/8.14.7) with ESMTP id 66FBfeDe004902
 	(version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 15 Jul 2026 07:41:35 -0400
-Received: from ASHBCASHYB4.ad.analog.com (10.64.17.132) by
+	Wed, 15 Jul 2026 07:41:40 -0400
+Received: from ASHBCASHYB5.ad.analog.com (10.64.17.133) by
  ASHBMBX9.ad.analog.com (10.64.17.10) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1748.37; Wed, 15 Jul 2026 07:41:35 -0400
+ 15.2.1748.37; Wed, 15 Jul 2026 07:41:40 -0400
 Received: from ASHBMBX8.ad.analog.com (10.64.17.5) by
- ASHBCASHYB4.ad.analog.com (10.64.17.132) with Microsoft SMTP Server
+ ASHBCASHYB5.ad.analog.com (10.64.17.133) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1748.37; Wed, 15 Jul 2026 07:41:35 -0400
+ 15.2.1748.37; Wed, 15 Jul 2026 07:41:40 -0400
 Received: from zeus.spd.analog.com (10.66.68.11) by ashbmbx8.ad.analog.com
  (10.64.17.5) with Microsoft SMTP Server id 15.2.1748.37 via Frontend
- Transport; Wed, 15 Jul 2026 07:41:35 -0400
+ Transport; Wed, 15 Jul 2026 07:41:38 -0400
 Received: from HYB-e1y2fvUQ3cx.ad.analog.com (HYB-e1y2fvUQ3cx.ad.analog.com [10.44.3.54])
-	by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 66FBfASq024964;
-	Wed, 15 Jul 2026 07:41:26 -0400
+	by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 66FBfASr024964;
+	Wed, 15 Jul 2026 07:41:29 -0400
 From: Janani Sunil <janani.sunil@analog.com>
-Date: Wed, 15 Jul 2026 13:41:04 +0200
-Subject: [PATCH v6 1/5] spi: dt-bindings: Add spi-device-addr peripheral
- property
+Date: Wed, 15 Jul 2026 13:41:05 +0200
+Subject: [PATCH v6 2/5] dt-bindings: iio: adc: microchip,mcp3564: Add
+ spi-device-addr
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -81,7 +81,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20260715-ad5529r-driver-v6-1-cfdf8b9f5ee3@analog.com>
+Message-ID: <20260715-ad5529r-driver-v6-2-cfdf8b9f5ee3@analog.com>
 References: <20260715-ad5529r-driver-v6-0-cfdf8b9f5ee3@analog.com>
 In-Reply-To: <20260715-ad5529r-driver-v6-0-cfdf8b9f5ee3@analog.com>
 To: Lars-Peter Clausen <lars@metafoo.de>,
@@ -115,37 +115,37 @@ CC: <linux-iio@vger.kernel.org>, <devicetree@vger.kernel.org>,
 	<nedo80@gmail.com>,
         Janani Sunil <janani.sunil@analog.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784115670; l=1148;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784115670; l=1698;
  i=janani.sunil@analog.com; s=20260507; h=from:subject:message-id;
- bh=SNJI92VrprHtT5MzdFsRMm8PBprcV5VudH8UFNZRHUM=;
- b=pzNNW1QbN+ccdNtmkPwTFxF9iqFGKbQUrmN0S7awc+xek4HDg6H3THNO8ijwYeBa/+I1P4H5W
- EvwBWa7adgTBrcABGeclidNoJbMWTGl+cKJ0NoRAH4KGkR4j/ctbzD8
+ bh=21OJd7m2egWDVGrGbW/ZtbwclJwnKRyz6WrrkqTffk4=;
+ b=GbDT4zivmoReHlqy9eOVRGUfmruQ4LexRQW/nc4XHiWv0pJKKtDTBUlefVP5hxhR5rC6e4T7y
+ xzV/Bge1dZUBmJNWzXcOzhKW//m27WGB8J6G1Fi++F8q0N5OTNOTPWY
 X-Developer-Key: i=janani.sunil@analog.com; a=ed25519;
  pk=e25MyjRLPY3RWrYm/LrJ+/+t1MZJUbkgIW5CZg+g+hA=
 X-ADIRuleOP-NewSCL: Rule Triggered
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE1MDExNSBTYWx0ZWRfX1hs7wp4VSwTz
- Q3EUt2AteiS47mKN1KWiy3Fe4QtNUZBbRPrss0FCokb8KBHaQUfIXTzo0jM1Nckq2kclTLnH1NW
- X4sl2SgjDCwnyYQc5I1uvVr9PqQfVHpBeehqKyAUOr4UemyBl6u2XxC2B8XUIv5sD86FcZTUvHu
- JKMz7fKLBDOz9hf1lxkXVp7jPoNiKChTHQvnGGnzHw2Aw4U8UZLfmCE8l1ZW+rbfGjkyn4/IOqJ
- z8W79uBepiKLU6wxL76QX4KgHESlqqyQhinkKX+yhGvDpiWx5oe0GY8ofw7A3s2bo3BJ4N7nI+7
- ryYoB/SkrzC8VOCqPFE2cJYurTI4Z1zqiKNtmc50AEeElP1FFCRcOpCFTEWltGdqwGks5LF58ZX
- 3HZk5By3axn7kuhEQKCd3D4d/JA+JiXr8oqjkzooVBEDNbvPgZN4jcGSLC9cQOPdHm1gdhjQRgj
- 5CAUKb0D7z+ZijMxmMQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE1MDExNSBTYWx0ZWRfX7VunHA09cExb
- V/Lo1JX/hMo+mVonSF4yKirmlwDy28mIkaJ8z+zxZ3o1aJyjpsVEWw4xnvDq3h7tVo8Ilp5TlVZ
- bSjuREix5pMbXYl24SklRkpZz4ZH/7P3JdeqHhFVrcl5cV3kmOX0
-X-Authority-Analysis: v=2.4 cv=R4sz39RX c=1 sm=1 tr=0 ts=6a5771f0 cx=c_pps
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE1MDExNSBTYWx0ZWRfXx4CiunAPUsMN
+ nHUWr7FE/pCCyj3JvpqPOn5Prm9HLezqlkW+X9yXytpAfKGbP5+ngCKXr/Qzf9aROTpAb8cxHaU
+ L27kKSyASrXb9VarPjyTGWYFSklUFQYBH+FtUc366WUf4D+ntKbjrLrBXc2ujYWtoMi3AE1E8kE
+ SUgYOPtSCbYWxUhWbyE0wPJRcfuM2XY2Zn8sWhO0RQLNE4VdLhzNBJjiwyQaKuyzipVJpsYPUPY
+ a9Dd2KCIC5IkH6z6lJYQSA+SYBe8BHmlsoP5Ema1FZsrQo5ZtB58nFs5RP1S5sgDP8U+vq9r6uZ
+ H39xAr4jD9UwBrVOAm7cIzZmHArJUA1+QOHL5fIUapZopRFxiEM3wYzIfd5a5UoS0yjidRp4s8S
+ x2yNaSJPlSo+BO9KWw8ZwUR1BurKvARTlpa1TjpWsvHx2alrDVximDfg9aftc/W7zukJuPTOh8Q
+ A3M6/oq1ySDb7VgQhFQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE1MDExNSBTYWx0ZWRfXzkXIaUIyJdgT
+ 8QdVRC7RWRSavzLFH7R/kZC3GtHf7o70QP7kbVvI2fYveL89JVeQeDMeGbVjbfecgQgvNCwNila
+ Op2LRP4JgmXPTykB6MhJhTxiJtvYOFotZmjg7vxgIvY6wonk+Kim
+X-Authority-Analysis: v=2.4 cv=R4sz39RX c=1 sm=1 tr=0 ts=6a5771f5 cx=c_pps
  a=3WNzaoukacrqR9RwcOSAdA==:117 a=3WNzaoukacrqR9RwcOSAdA==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=VkNPw1HP01LnGYTKEx00:22
  a=0sLvza09kfJOxVLZPwjg:22 a=uXIjobp8t2wMuQ0fPvqm:22 a=gAnH3GRIAAAA:8
- a=p7DZuduEnTu05McJuzUA:9 a=QEXdDO2ut3YA:10
-X-Proofpoint-ORIG-GUID: 31ukvQkm1fW_4KvNVQb5YUvFd8FAehHz
-X-Proofpoint-GUID: 31ukvQkm1fW_4KvNVQb5YUvFd8FAehHz
+ a=x4a6AN7Hyicx1yu3BJYA:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-ORIG-GUID: oWXlvGnF1D_Ak67dhXWjNDXJ-LBNQ-vo
+X-Proofpoint-GUID: oWXlvGnF1D_Ak67dhXWjNDXJ-LBNQ-vo
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-15_02,2026-07-15_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 spamscore=0 malwarescore=0 clxscore=1011 priorityscore=1501
+ bulkscore=0 spamscore=0 malwarescore=0 clxscore=1015 priorityscore=1501
  lowpriorityscore=0 impostorscore=0 phishscore=0 suspectscore=0 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607150115
@@ -155,13 +155,13 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[analog.com,quarantine];
 	R_DKIM_ALLOW(-0.20)[analog.com:s=DKIM];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-96917-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-96920-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,analog.com:from_mime,analog.com:mid,analog.com:email,analog.com:dkim];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,analog.com:from_mime,analog.com:mid,analog.com:email,analog.com:dkim];
 	FREEMAIL_TO(0.00)[metafoo.de,analog.com,kernel.org,baylibre.com,pengutronix.de,lwn.net,linuxfoundation.org,microchip.com,gmail.com,minoris.se];
 	FORGED_SENDER(0.00)[janani.sunil@analog.com,linux-doc@vger.kernel.org];
 	RCPT_COUNT_TWELVE(0.00)[24];
@@ -180,39 +180,61 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
 	RCVD_COUNT_SEVEN(0.00)[10]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 898F675DA3C
+X-Rspamd-Queue-Id: 2C6BF75DB49
 
-Some SPI devices support sharing a single chip select across multiple
-physical chips by encoding a device address in the SPI frame itself.
-Add the generic spi-device-addr property for describing these hardware
-addresses. The property is placed on the SPI peripheral node and may
-contain multiple addresses.
+Add the generic spi-device-addr property to the binding and deprecate
+the existing vendor specific microchip,hw-device-address property.
 
 Signed-off-by: Janani Sunil <janani.sunil@analog.com>
 ---
- Documentation/devicetree/bindings/spi/spi-peripheral-props.yaml | 5 +++++
- 1 file changed, 5 insertions(+)
+ Documentation/devicetree/bindings/iio/adc/microchip,mcp3564.yaml | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/Documentation/devicetree/bindings/spi/spi-peripheral-props.yaml b/Documentation/devicetree/bindings/spi/spi-peripheral-props.yaml
-index 880a9f624566..135657582131 100644
---- a/Documentation/devicetree/bindings/spi/spi-peripheral-props.yaml
-+++ b/Documentation/devicetree/bindings/spi/spi-peripheral-props.yaml
-@@ -142,6 +142,11 @@ properties:
-     minItems: 2
-     maxItems: 4
+diff --git a/Documentation/devicetree/bindings/iio/adc/microchip,mcp3564.yaml b/Documentation/devicetree/bindings/iio/adc/microchip,mcp3564.yaml
+index 675319276197..02bb198e9fa7 100644
+--- a/Documentation/devicetree/bindings/iio/adc/microchip,mcp3564.yaml
++++ b/Documentation/devicetree/bindings/iio/adc/microchip,mcp3564.yaml
+@@ -80,6 +80,7 @@ properties:
+     $ref: /schemas/types.yaml#/definitions/uint32
+     minimum: 0
+     maximum: 3
++    deprecated: true
+     description:
+       The address is set on a per-device basis by fuses in the factory,
+       configured on request. If not requested, the fuses are set for 0x1.
+@@ -91,6 +92,11 @@ properties:
+       clocking of the device address (BITS[7:6] - top two bits of COMMAND BYTE
+       which is first one on the wire).
  
 +  spi-device-addr:
-+    $ref: /schemas/types.yaml#/definitions/uint32-array
-+    description:
-+      Device address used when multiple peripherals share a single chip select.
++    maxItems: 1
++    items:
++      enum: [0, 1, 2, 3]
 +
-   st,spi-midi-ns:
-     deprecated: true
-     description: |
+   "#io-channel-cells":
+     const: 1
+ 
+@@ -123,7 +129,6 @@ dependencies:
+ required:
+   - compatible
+   - reg
+-  - microchip,hw-device-address
+   - spi-max-frequency
+ 
+ allOf:
+@@ -159,7 +164,7 @@ examples:
+             spi-cpha;
+             spi-cpol;
+             spi-max-frequency = <10000000>;
+-            microchip,hw-device-address = <1>;
++            spi-device-addr = <1>;
+ 
+             #address-cells = <1>;
+             #size-cells = <0>;
 
 -- 
 2.43.0
