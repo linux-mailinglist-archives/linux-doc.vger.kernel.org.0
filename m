@@ -1,48 +1,50 @@
-Return-Path: <linux-doc+bounces-96950-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96949-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id fZojFsefV2pnYAAAu9opvQ
-	(envelope-from <linux-doc+bounces-96950-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 16:57:11 +0200
+	id Xl4RDaOfV2pZYAAAu9opvQ
+	(envelope-from <linux-doc+bounces-96949-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 16:56:35 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id DA1D875FAA0
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 16:57:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EB6B375FA82
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 16:56:34 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=linux.dev header.s=key1 header.b=VzVlT6Lu;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96950-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-96950-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=linux.dev header.s=key1 header.b=daUlspi8;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96949-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-96949-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=pass (policy=none) header.from=linux.dev;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 809DF301C2F4
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 14:55:45 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id C933C30324C7
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 14:55:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E1BD147CC96;
-	Wed, 15 Jul 2026 14:54:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A7D73472765;
+	Wed, 15 Jul 2026 14:54:28 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-180.mta0.migadu.com (out-180.mta0.migadu.com [91.218.175.180])
+Received: from out-186.mta0.migadu.com (out-186.mta0.migadu.com [91.218.175.186])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 388513F4100
-	for <linux-doc@vger.kernel.org>; Wed, 15 Jul 2026 14:54:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D2A239D6E9;
+	Wed, 15 Jul 2026 14:54:24 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784127269; cv=none; b=Mt4+SiXG52hPmQ7ExOPnmo/wMQxq3+RnmdUyF7B0Mc4F8lqGTDBvBrpmsNCkrZjcdjmMJFj12R/IWgPqqKghK36KNUMczYuIfGDmvfBcGZHat9DI8SnXnGnM+xzrhjTsLb5l/BFFAeOt8MpA3QriQc4KmwQO/H/dS/N8u6fN1c4=
+	t=1784127268; cv=none; b=JknFceyjW3Sw1u9r1UzniIAafMgwxlPrFkZz6/Z19uQXaxLMwlv70KutrE7/6WlZa35sKR6x0Z3PyVkPbDkn0at7YlHB3pedhDtQihFRj0stWUzrkvZMbTMQzZ3YHyu47yZ1n2zOwp5av+AnCelEatmvsVSAV3DrpvW/I0gVyUo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784127269; c=relaxed/simple;
-	bh=R+l0BoEIULdGpPMTKiBinIBNKvPrlGhKO6LL/ImEs7A=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=SqGYsvhmUvimQHrdcuh6izhmd7h0BC0JW6MRNStcP2jKsKaNNbJmlMUEufYU9AowNgyQ/F/J9KuLr/yLw3vmSWwyoiiKaM/EtF6P3h+II6K3+H4Wl/DcrmwO8Liv5rzI8r7NO7/aL7LjsQvcugkAM4EXeQcMlNNn8a9FiY9rIqY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=VzVlT6Lu; arc=none smtp.client-ip=91.218.175.180
+	s=arc-20240116; t=1784127268; c=relaxed/simple;
+	bh=YyPEuMuyqMojfkauQ1cJlUP1yepRyWdPdGctS43UDF4=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=ZLUyDyn7Kf8R6wuwZ+RMBCz60Wnu3IQxalkZ7nTXgsXIpBZ8zsVHz1VgBG0nt54AqJglnocqBJdQfRRPagUlpv1dRvU9Xb/PJpkmiM1cqPWF150HP/xUp2EGRHI0HFGkTLrnDZeqssSUQMQSVZkdSBEcL885uuq8kfd8KGNiikY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=daUlspi8; arc=none smtp.client-ip=91.218.175.186
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1784127253;
+	t=1784127260;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=jOShTpG1lf1o8AyRmdTFIb3iL+dIT2emRuFOvlyVsDs=;
-	b=VzVlT6Lu2OjZRRsil4JjB9tukxpjUfkgyxgjqjyPj44/SFXsG+C/D4NZW6so6DBI1mf01u
-	yYFF6IhC5NJe9BUo8yO3xJnlKvGZ24WfpBHJcGbWk2XHS+H3GVeOtdGep8rDNyTqZagKaL
-	hbXDKUSTjocfTUK+pONAw5eCiyVVnmo=
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=hwZLS8o3i4sMyxo+i8ArT9POnhAqjleO4BkvUvWUla0=;
+	b=daUlspi8tAUflgYybjOPKInf9VJHf2qWkYwQPKcpXc+ot9Tc5cLKt1VRH1Iz1S84q1AqkM
+	eutn+riCgtZNoVMOALPYaQixlwo85wW/RDUtqJP7EiuaWl891pbO3k/19zOTEHjO1hruPu
+	XgD29kthOoOccfZdEeZttqe/kFK1N6A=
 From: Leon Hwang <leon.hwang@linux.dev>
 To: netdev@vger.kernel.org
 Cc: "David S . Miller" <davem@davemloft.net>,
@@ -66,9 +68,11 @@ Cc: "David S . Miller" <davem@davemloft.net>,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	linux-kselftest@vger.kernel.org
-Subject: [RFC PATCH net-next v2 0/2] tcp: Add net.ipv4.tcp_purge_receive_queue sysctl
-Date: Wed, 15 Jul 2026 22:53:25 +0800
-Message-ID: <20260715145328.54597-1-leon.hwang@linux.dev>
+Subject: [RFC PATCH net-next v2 1/2] tcp: Add net.ipv4.tcp_purge_receive_queue sysctl
+Date: Wed, 15 Jul 2026 22:53:26 +0800
+Message-ID: <20260715145328.54597-2-leon.hwang@linux.dev>
+In-Reply-To: <20260715145328.54597-1-leon.hwang@linux.dev>
+References: <20260715145328.54597-1-leon.hwang@linux.dev>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -89,14 +93,14 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	HAS_LIST_UNSUB(-0.01)[];
 	FREEMAIL_CC(0.00)[davemloft.net,google.com,kernel.org,redhat.com,lwn.net,linuxfoundation.org,nvidia.com,linux.dev,nokia-bell-labs.com,gmail.com,icloud.com,vger.kernel.org];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-96950-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-96949-lists,linux-doc=lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[22];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:netdev@vger.kernel.org,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:ncardwell@google.com,m:kuniyu@google.com,m:idosch@nvidia.com,m:ij@kernel.org,m:leon.hwang@linux.dev,m:chia-yu.chang@nokia-bell-labs.com,m:yuuchihsu@gmail.com,m:bronzed_45_vested@icloud.com,m:kerneljasonxing@gmail.com,m:lance.yang@linux.dev,m:jiayuan.chen@linux.dev,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-kselftest@vger.kernel.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[3];
 	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_SENDER(0.00)[leon.hwang@linux.dev,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[3];
+	FORGED_RECIPIENTS(0.00)[m:netdev@vger.kernel.org,m:davem@davemloft.net,m:edumazet@google.com,m:kuba@kernel.org,m:pabeni@redhat.com,m:horms@kernel.org,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:ncardwell@google.com,m:kuniyu@google.com,m:idosch@nvidia.com,m:ij@kernel.org,m:leon.hwang@linux.dev,m:chia-yu.chang@nokia-bell-labs.com,m:yuuchihsu@gmail.com,m:bronzed_45_vested@icloud.com,m:kerneljasonxing@gmail.com,m:lance.yang@linux.dev,m:jiayuan.chen@linux.dev,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-kselftest@vger.kernel.org,s:lists@lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
@@ -109,9 +113,9 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:dkim,linux.dev:mid,linux.dev:from_mime,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:dkim,linux.dev:email,linux.dev:mid,linux.dev:from_mime,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: DA1D875FAA0
+X-Rspamd-Queue-Id: EB6B375FA82
 X-Rspamd-Action: no action
 
 Introduce a new sysctl knob, net.ipv4.tcp_purge_receive_queue, to
@@ -139,32 +143,128 @@ of SKBs and their associated memory resources.
 The feature is disabled by default to maintain backward compatibility
 with existing behavior.
 
-Note: the user-space issue, the root cause of the unreleased SKBs, has
-been fixed by https://github.com/IBM/sarama/pull/3384.
-
-Changes:
-v1 -> v2:
-* Update 'tp->copied_seq', 'tp->urg_data', and 'sk->sk_peek_off' like
-  'tcp_disconnect()'.
-* Drop "memory leak" words in commit msg. (per Eric)
-* Add two packetdrill tests. (per Eric)
-* v1: https://lore.kernel.org/netdev/20260225074633.149590-1-leon.huangfu@shopee.com/
-
-Leon Hwang (2):
-  tcp: Add net.ipv4.tcp_purge_receive_queue sysctl
-  selftests/net: packetdrill: Add two tcp_purge_receive_queue tests
-
- Documentation/networking/ip-sysctl.rst        | 18 ++++++++
+Signed-off-by: Leon Hwang <leon.hwang@linux.dev>
+---
+ Documentation/networking/ip-sysctl.rst        | 18 +++++++++++++++
  .../net_cachelines/netns_ipv4_sysctl.rst      |  1 +
  include/net/netns/ipv4.h                      |  1 +
- net/ipv4/sysctl_net_ipv4.c                    |  9 ++++
- net/ipv4/tcp_input.c                          | 22 ++++++++++
- .../tcp_purge_receive_queue_disabled.pkt      | 40 ++++++++++++++++++
- .../tcp_purge_receive_queue_enabled.pkt       | 42 +++++++++++++++++++
- 7 files changed, 133 insertions(+)
- create mode 100644 tools/testing/selftests/net/packetdrill/tcp_purge_receive_queue_disabled.pkt
- create mode 100644 tools/testing/selftests/net/packetdrill/tcp_purge_receive_queue_enabled.pkt
+ net/ipv4/sysctl_net_ipv4.c                    |  9 ++++++++
+ net/ipv4/tcp_input.c                          | 22 +++++++++++++++++++
+ 5 files changed, 51 insertions(+)
 
+diff --git a/Documentation/networking/ip-sysctl.rst b/Documentation/networking/ip-sysctl.rst
+index 208f46967ee5..abbee0326f15 100644
+--- a/Documentation/networking/ip-sysctl.rst
++++ b/Documentation/networking/ip-sysctl.rst
+@@ -1448,6 +1448,24 @@ tcp_rto_max_ms - INTEGER
+ 
+ 	Default: 120,000
+ 
++tcp_purge_receive_queue - BOOLEAN
++	When a socket in the TCP_CLOSE_WAIT state receives a RST packet, the
++	default behavior is to not clear its receive queue.  As a result,
++	any SKBs in the queue are not freed until the socket is closed.
++	Consequently, the pages held by these SKBs are not released, which
++	can also prevent the associated page pool from being freed.
++
++	If enabled, the receive queue is purged upon receiving the RST,
++	allowing the SKBs and their associated memory to be released
++	promptly.
++
++	Possible values:
++
++	- 0 (disabled)
++	- 1 (enabled)
++
++	Default: 0 (disabled)
++
+ UDP variables
+ =============
+ 
+diff --git a/Documentation/networking/net_cachelines/netns_ipv4_sysctl.rst b/Documentation/networking/net_cachelines/netns_ipv4_sysctl.rst
+index 3dc03bff739e..2945de40ad78 100644
+--- a/Documentation/networking/net_cachelines/netns_ipv4_sysctl.rst
++++ b/Documentation/networking/net_cachelines/netns_ipv4_sysctl.rst
+@@ -126,6 +126,7 @@ unsigned_long                   sysctl_tcp_comp_sack_delay_ns
+ unsigned_long                   sysctl_tcp_comp_sack_slack_ns                                                        __tcp_ack_snd_check
+ int                             sysctl_max_syn_backlog
+ int                             sysctl_tcp_fastopen
++u8                              sysctl_tcp_purge_receive_queue
+ struct_tcp_congestion_ops       tcp_congestion_control                                                               init_cc
+ struct_tcp_fastopen_context     tcp_fastopen_ctx
+ unsigned_int                    sysctl_tcp_fastopen_blackhole_timeout
+diff --git a/include/net/netns/ipv4.h b/include/net/netns/ipv4.h
+index cb7f8bf15671..ab9b92807d9f 100644
+--- a/include/net/netns/ipv4.h
++++ b/include/net/netns/ipv4.h
+@@ -222,6 +222,7 @@ struct netns_ipv4 {
+ 	u8 sysctl_tcp_nometrics_save;
+ 	u8 sysctl_tcp_no_ssthresh_metrics_save;
+ 	u8 sysctl_tcp_workaround_signed_windows;
++	u8 sysctl_tcp_purge_receive_queue;
+ 	int sysctl_tcp_challenge_ack_limit;
+ 	u8 sysctl_tcp_min_tso_segs;
+ 	u8 sysctl_tcp_reflect_tos;
+diff --git a/net/ipv4/sysctl_net_ipv4.c b/net/ipv4/sysctl_net_ipv4.c
+index ca1180dba1de..82412fd98e0e 100644
+--- a/net/ipv4/sysctl_net_ipv4.c
++++ b/net/ipv4/sysctl_net_ipv4.c
+@@ -1652,6 +1652,15 @@ static struct ctl_table ipv4_net_table[] = {
+ 		.extra1		= SYSCTL_ONE_THOUSAND,
+ 		.extra2		= &tcp_rto_max_max,
+ 	},
++	{
++		.procname       = "tcp_purge_receive_queue",
++		.data           = &init_net.ipv4.sysctl_tcp_purge_receive_queue,
++		.maxlen         = sizeof(u8),
++		.mode           = 0644,
++		.proc_handler   = proc_dou8vec_minmax,
++		.extra1         = SYSCTL_ZERO,
++		.extra2         = SYSCTL_ONE,
++	},
+ };
+ 
+ static __net_init int ipv4_sysctl_init_net(struct net *net)
+diff --git a/net/ipv4/tcp_input.c b/net/ipv4/tcp_input.c
+index 61045a8886e4..4f1027173e95 100644
+--- a/net/ipv4/tcp_input.c
++++ b/net/ipv4/tcp_input.c
+@@ -4853,6 +4853,7 @@ void tcp_done_with_error(struct sock *sk, int err)
+ /* When we get a reset we do this. */
+ void tcp_reset(struct sock *sk, struct sk_buff *skb)
+ {
++	const struct net *net = sock_net(sk);
+ 	int err;
+ 
+ 	trace_tcp_receive_reset(sk);
+@@ -4869,6 +4870,27 @@ void tcp_reset(struct sock *sk, struct sk_buff *skb)
+ 		err = ECONNREFUSED;
+ 		break;
+ 	case TCP_CLOSE_WAIT:
++		/* RFC9293 3.10.7.4. Other States
++		 *   Second, check the RST bit:
++		 *     CLOSE-WAIT STATE
++		 *
++		 * If the RST bit is set, then any outstanding RECEIVEs and
++		 * SEND should receive "reset" responses.  All segment queues
++		 * should be flushed.  Users should also receive an unsolicited
++		 * general "connection reset" signal.  Enter the CLOSED state,
++		 * delete the TCB, and return.
++		 *
++		 * If net.ipv4.tcp_purge_receive_queue is enabled,
++		 * sk_receive_queue will be flushed too.
++		 */
++		if (unlikely(READ_ONCE(net->ipv4.sysctl_tcp_purge_receive_queue))) {
++			struct tcp_sock *tp = tcp_sk(sk);
++
++			skb_queue_purge(&sk->sk_receive_queue);
++			WRITE_ONCE(tp->copied_seq, tp->rcv_nxt);
++			WRITE_ONCE(tp->urg_data, 0);
++			sk_set_peek_off(sk, -1);
++		}
+ 		err = EPIPE;
+ 		break;
+ 	case TCP_CLOSE:
 -- 
 2.55.0
 
