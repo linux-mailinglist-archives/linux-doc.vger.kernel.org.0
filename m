@@ -1,153 +1,146 @@
-Return-Path: <linux-doc+bounces-96879-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96880-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id r3E8ErjoVmorCwEAu9opvQ
-	(envelope-from <linux-doc+bounces-96879-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 03:56:08 +0200
+	id ck88BArxVmohDQEAu9opvQ
+	(envelope-from <linux-doc+bounces-96880-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 04:31:38 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD42F759FBC
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 03:56:07 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id EFDC075A110
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 04:31:36 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=none;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96879-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.232.135.74 as permitted sender) smtp.mailfrom="linux-doc+bounces-96879-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dkim=pass header.d=linux-foundation.org header.s=korg header.b=gmDU5hMl;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96880-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-96880-lists+linux-doc=lfdr.de@vger.kernel.org";
 	dmarc=none;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 3CEB5301F4BD
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 01:56:07 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 1FA55300F79C
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 02:31:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EE81886341;
-	Wed, 15 Jul 2026 01:56:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B66B5207DF7;
+	Wed, 15 Jul 2026 02:31:32 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from azure-sdnproxy.icoremail.net (azure-sdnproxy.icoremail.net [13.76.78.106])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A076B38F653
-	for <linux-doc@vger.kernel.org>; Wed, 15 Jul 2026 01:55:59 +0000 (UTC)
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 258572441B8;
+	Wed, 15 Jul 2026 02:31:30 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784080564; cv=none; b=hZRTn5qVgEibJvnDpWunBbRZoBsEXEwhUTcQGOZszRBHtrVf+Y+rxYuxCeLqnVpaEQjOamorElxBdynbcplmQu5NIT9iHXcMfhHYi0IfgO9Yp8V2JL7CsIilY4TSX74AAb1Vx8evi41qgZnqoLo6gavW9Yws7o74OIxhWKZ1T08=
+	t=1784082692; cv=none; b=a9l3ENEW8vRtQDwq4nSXqB4ZMZ5j1Vmc4mCqDsOwE9oAOM5rIBj6L8PCwQL2CI35DW9VhXRNNey2wRHxzFGZYXEO6YycWQWFjBDts5bxjr+KAOeVm32QFlWC0YfW8udxZrNzLCS7S+N/lK07OM6F7BS1J/P3A79HncDitE1tOsw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784080564; c=relaxed/simple;
-	bh=pabU2DrBONdzNZumK8alQTYyFJzt2AVA2IMSbinFY48=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=rZqdQ8LPb7NixNnnbplcxQFn2QLCmazElywzJqOJW69ebktutae54VtaTZZluQnqEA4/ZlaMfoEQ4Gc9wTdnM0ESQXW9Y0LXMFzi2h7ZcUvwLsRCYacrWHG+atyNn6ABGtKieo2eLJJCPk6UT5lpOCH0XeBVjMHlxPE5oiD7XY4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=hust.edu.cn; spf=pass smtp.mailfrom=hust.edu.cn; arc=none smtp.client-ip=13.76.78.106
-Received: from hust.edu.cn (unknown [172.16.0.50])
-	by app1 (Coremail) with SMTP id HgEQrAAX7qKZ6FZqzP4FAg--.15716S2;
-	Wed, 15 Jul 2026 09:55:37 +0800 (CST)
-Received: from [100.81.40.43] (unknown [10.12.191.55])
-	by gateway (Coremail) with SMTP id _____wA3IBKX6FZqTvnNAA--.5042S2;
-	Wed, 15 Jul 2026 09:55:37 +0800 (CST)
-Message-ID: <ecae49cd-4861-44e0-b873-6ca98e205855@hust.edu.cn>
-Date: Wed, 15 Jul 2026 09:55:35 +0800
+	s=arc-20240116; t=1784082692; c=relaxed/simple;
+	bh=N8wNqY82D3MGDP04hcCK6O5FzSajaVrEh+o+Jhgts5U=;
+	h=Date:From:To:Cc:Subject:Message-Id:In-Reply-To:References:
+	 Mime-Version:Content-Type; b=BMbPp4Mn8mcTo3ugek3uycFQsFktpG9yuiOHxrDeGl0iw32YLmVAE33dkG0CksFPH8pf88JrMPYMIZN4Ixj0EKWCFfwgzbOAUV0anNIXsG4re3npEj3Hh4lYZZOz5tv0RTy0bJ83AxIPLc6TWeqLMQrF2qphKFA7K7iSkMpJhos=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b=gmDU5hMl; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3A1161F000E9;
+	Wed, 15 Jul 2026 02:31:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=linux-foundation.org; s=korg; t=1784082690;
+	bh=PETTDer1Lz0zU/rZ0npgKBBCQhBtVIsuhyXSioi/2do=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=gmDU5hMllGW2Vs9zJT6ACfKxhTPgVM312oSQWjAaeSuMAu11MFBxD2dBVKEr/ZvS0
+	 mBcnXHoIKVG5cZxnxxtz7zPZDw2ljoxQAvS2/d4zucxgKRoklEZHeMU4HO5XlaSyZZ
+	 0qqN60qj59XccC9LcCGAx0O7ZpsA+Nl65N/zGeiU=
+Date: Tue, 14 Jul 2026 19:31:29 -0700
+From: Andrew Morton <akpm@linux-foundation.org>
+To: Yosry Ahmed <yosry@kernel.org>
+Cc: Hao Jia <jiahao.kernel@gmail.com>, tj@kernel.org, hannes@cmpxchg.org,
+ shakeel.butt@linux.dev, mhocko@kernel.org, mkoutny@suse.com,
+ nphamcs@gmail.com, chengming.zhou@linux.dev, muchun.song@linux.dev,
+ roman.gushchin@linux.dev, linux-mm@kvack.org, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, Hao Jia <jiahao1@lixiang.com>,
+ stable@vger.kernel.org
+Subject: Re: [PATCH 1/2] mm/zswap: Fix global shrinker when memory cgroup is
+ disabled
+Message-Id: <20260714193129.f81711f516504b659d544741@linux-foundation.org>
+In-Reply-To: <CAO9r8zM5nzDqNcx5UoDgGexvR6jf8MmJV9SomM4AS7n-rZ2o5Q@mail.gmail.com>
+References: <20260714081510.16895-1-jiahao.kernel@gmail.com>
+	<20260714081510.16895-2-jiahao.kernel@gmail.com>
+	<CAO9r8zM5nzDqNcx5UoDgGexvR6jf8MmJV9SomM4AS7n-rZ2o5Q@mail.gmail.com>
+X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: What's cooking in zh_CN (Jul 2026, #02)
-To: Doehyun Baek <doehyunbaek@gmail.com>, Weijie Yuan <wy@wyuan.org>
-Cc: linux-doc@vger.kernel.org, Alex Shi <alexs@kernel.org>,
- Yanteng Si <si.yanteng@linux.dev>, Ben Guo <ben.guo@openatom.club>,
- Gary Guo <gary@garyguo.net>, Yan Zhu <zhuyan2015@qq.com>,
- Jiandong Qiu <qiujiandong1998@gmail.com>,
- chengyaqiang <chengyaqiang@tsinghua.edu.cn>,
- Haoyang Liu <tttturtleruss@gmail.com>
-References: <alZK0i0HvxOvSKwj@wyuan.org> <alZP_6nAXNy_HfZi@wyuan.org>
- <CAN-j9UoUHQ2i4H+9G-XK_mOfKKyE9K9-mwUgPc+4yOVfiizgmA@mail.gmail.com>
- <alZ1AzLX8LrB-JFK@wyuan.org>
- <CAN-j9Uo2f4dmWo8bMkdtXg7g6uayK_XZatkGs5iKv6-dNZ_Y-g@mail.gmail.com>
-From: Dongliang Mu <dzm91@hust.edu.cn>
-In-Reply-To: <CAN-j9Uo2f4dmWo8bMkdtXg7g6uayK_XZatkGs5iKv6-dNZ_Y-g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:HgEQrAAX7qKZ6FZqzP4FAg--.15716S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7Xw15Xry3ZF1DJrW3urWUtwb_yoW8Jr4kpr
-	WSgas8ua1Fq3sYyFn7Jw1Ivr1Fkw4xWF9xK3Z5Gw4kCas8GFsYvas7twnrCr9Igrn5tF1a
-	grWj9r95W3Z8AFJanT9S1TB71UUUUjDqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUQ2b7Iv0xC_Cr1lb4IE77IF4wAFc2x0x2IEx4CE42xK8VAvwI8I
-	cIk0rVWrJVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjx
-	v20xvE14v26w1j6s0DM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4UJVWxJr1l84ACjcxK
-	6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1ln4kS14v26r
-	126r1DM2vYz4IE04k24VAvwVAKI4IrM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI
-	12xvs2x26I8E6xACxx1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj64x0Y40En7xvr7AKxV
-	W8Jr0_Cr1UMcIj6x8ErcxFaVAv8VW8uFyUJr1UMcIj6xkF7I0En7xvr7AKxVW8Jr0_Cr1U
-	McvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwCY1x0262kKe7AKxVWUAVWUtwCF04
-	k20xvY0x0EwIxGrwCF04k20xvE74AGY7Cv6cx26r4fZr1UJr1l4I8I3I0E4IkC6x0Yz7v_
-	Jr0_Gr1l4IxYO2xFxVAFwI0_GFv_Wrylx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8Gjc
-	xK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0
-	cI8IcVAFwI0_Xr0_Ar1lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8V
-	AvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I8E87Iv6xkF7I0E
-	14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxUVYhFDUUUU
-X-CM-SenderInfo: asqsiiirqrkko6kx23oohg3hdfq/
+Mime-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.46 / 15.00];
+X-Spamd-Result: default: False [0.34 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	MV_CASE(0.50)[];
+	R_DKIM_ALLOW(-0.20)[linux-foundation.org:s=korg];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	FORGED_RECIPIENTS(0.00)[m:yosry@kernel.org,m:jiahao.kernel@gmail.com,m:tj@kernel.org,m:hannes@cmpxchg.org,m:shakeel.butt@linux.dev,m:mhocko@kernel.org,m:mkoutny@suse.com,m:nphamcs@gmail.com,m:chengming.zhou@linux.dev,m:muchun.song@linux.dev,m:roman.gushchin@linux.dev,m:linux-mm@kvack.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:jiahao1@lixiang.com,m:stable@vger.kernel.org,m:jiahaokernel@gmail.com,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,linux.dev,openatom.club,garyguo.net,qq.com,gmail.com,tsinghua.edu.cn];
-	TAGGED_FROM(0.00)[bounces-96879-lists,linux-doc=lfdr.de];
-	DMARC_NA(0.00)[hust.edu.cn];
-	FORGED_RECIPIENTS(0.00)[m:doehyunbaek@gmail.com,m:wy@wyuan.org,m:linux-doc@vger.kernel.org,m:alexs@kernel.org,m:si.yanteng@linux.dev,m:ben.guo@openatom.club,m:gary@garyguo.net,m:zhuyan2015@qq.com,m:qiujiandong1998@gmail.com,m:chengyaqiang@tsinghua.edu.cn,m:tttturtleruss@gmail.com,s:lists@lfdr.de];
-	FREEMAIL_TO(0.00)[gmail.com,wyuan.org];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER(0.00)[akpm@linux-foundation.org,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-96880-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	DMARC_NA(0.00)[linux-foundation.org];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[dzm91@hust.edu.cn,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[linux-foundation.org:+];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[dzm91@hust.edu.cn,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	ALIAS_RESOLVED(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	R_DKIM_NA(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[akpm@linux-foundation.org,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[gmail.com,kernel.org,cmpxchg.org,linux.dev,suse.com,kvack.org,vger.kernel.org,lixiang.com];
 	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,vger.kernel.org:from_smtp]
+	TO_DN_SOME(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sashiko.dev:url,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,vger.kernel.org:from_smtp,linux-foundation.org:from_mime,linux-foundation.org:dkim,linux-foundation.org:mid,lixiang.com:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: BD42F759FBC
+X-Rspamd-Queue-Id: EFDC075A110
 
+On Tue, 14 Jul 2026 09:52:59 -0700 Yosry Ahmed <yosry@kernel.org> wrote:
 
-On 7/15/26 1:56 AM, Doehyun Baek wrote:
->> Btw, for example, my patch (Weijie Yuan · docs/zh_CN: add docs-next
-> checkout workaround) is actually directly discarded after we reached
-> a consensus during our communication (with Dongliang). But it's
-> obvious that we didn't say it explicitly. So your website can't
-> recognize it automaticly right now. Perhaps we can think about how
-> to deal with this situation later.
->
-> Yeah, this is a downside of an automated approach: it can miss details
-> that are only implicit in the discussion. I see roughly three ways to
-> handle such cases:
->
-> 1. Allow authors to mark a patch explicitly by replying with a
-> recognized phrase, such as `Patch-status: withdrawn`.
+> > When memory cgroup is disabled, mem_cgroup_iter() always returns NULL.
+> > Therefore, the global shrinker shrink_worker() always takes the !memcg
+> > branch. After MAX_RECLAIM_RETRIES empty walks, the worker simply gives up,
+> > so it fails to write back anything.
+> >
+> > Therefore, when memory cgroup is disabled, fall through with the !memcg
+> > branch and shrink the root memcg directly.
+> >
+> > With memcg disabled, shrink_memcg() only returns -ENOENT when the root
+> > LRU is empty, which means the total pages are already below thr. The
+> > loop then safely bails out via the zswap_total_pages() <= thr check.
+> > For any other return value from shrink_memcg(), the loop is guaranteed
+> > to terminate, either after MAX_RECLAIM_RETRIES failures or once the
+> > threshold is met.
+> >
+> > Fixes: a65b0e7607cc ("zswap: make shrinking memcg-aware")
+> > Cc: stable@vger.kernel.org
+> > Suggested-by: Nhat Pham <nphamcs@gmail.com>
+> > Acked-by: Nhat Pham <nphamcs@gmail.com>
+> > Acked-by: Yosry Ahmed <yosry@kernel.org>
+> > Reported-by: Yosry Ahmed <yosry@kernel.org>
+> > Closes: https://lore.kernel.org/all/CAO9r8zPVzMKFbCixxD-qgtRrkFxWVrHiZZeLc=eyTPKPVQgX4g@mail.gmail.com
+> > Signed-off-by: Hao Jia <jiahao1@lixiang.com>
+> 
+> Patch 2 doesn't really depend on this one, right?
+> 
+> If that's the case I think this can (and should be) picked up
+> separately as a hotfix. Andrew, WDYT?
 
-This is better.
+Please update the changelog to clearly describe the userspace-visible
+effects of the bug, thanks.
 
-Or similar to syzbot, we can provide an option in the webpage to 
-directly mark patchset as invalid.
-
-> 2. Use natural-language reasoning, perhaps with an LLM, to infer the
-> outcome from the discussion. I leaned against it due to cost and
-> complexity.
-> 3. Leave the patch pending and let it move to “Cold” automatically
-> after 30 days.
-Better together with 1. We may forget to reply a mark patch when busy.
->
-> I think either the first or the third option makes sense in this situation.
->
-> Thanks,
-> Doehyun
-
+Also, AI review has flagged several possible issues, all appear to be
+serious:
+	https://sashiko.dev/#/patchset/20260714081510.16895-1-jiahao.kernel@gmail.com
 
