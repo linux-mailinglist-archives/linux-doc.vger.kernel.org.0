@@ -1,221 +1,185 @@
-Return-Path: <linux-doc+bounces-96912-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96913-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id A1ZuHtROV2oCJAEAu9opvQ
-	(envelope-from <linux-doc+bounces-96912-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 11:11:48 +0200
+	id bxwpM5JsV2okNwEAu9opvQ
+	(envelope-from <linux-doc+bounces-96913-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 13:18:42 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8811675C48C
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 11:11:47 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4158175D7FA
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 13:18:42 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=nK6Frkh3;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96912-lists+linux-doc=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="linux-doc+bounces-96912-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	dkim=pass header.d=intel.com header.s=Intel header.b=XOVHw0oU;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96913-lists+linux-doc=lfdr.de@vger.kernel.org" designates 2600:3c04:e001:36c::12fc:5321 as permitted sender) smtp.mailfrom="linux-doc+bounces-96913-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=pass (policy=none) header.from=intel.com;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 5E0A9302F51F
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 09:09:39 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 637B0306E16A
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 11:18:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EC90E3F1AB1;
-	Wed, 15 Jul 2026 09:09:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 12C74448CE0;
+	Wed, 15 Jul 2026 11:18:02 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1D1F3EDE59;
-	Wed, 15 Jul 2026 09:09:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8941541A903;
+	Wed, 15 Jul 2026 11:17:58 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784106561; cv=none; b=kUMgxNH1PAd8VVCAWcpu+BptagrNcUBKgBTicHlVp4sjNWX0xNfVzLhySupQPJ/N6P/irQRZV2QkG8/lbm3RnsfhoKX0iWHyMISUgkQisMUAaXjp+6zju1BKKl7fdBkTyOsE16TvTIxeU/G/1hyyAx5TBI+ZSSVJ6z2gEmgPTdE=
+	t=1784114281; cv=none; b=CB0VwGwb0Qnq8tMaR6ajDXaZIfXBjyFeMw025EH1MOmNkUhTY2VxVPmRx0btJ3gUBhS6Z+Qt5p9ChTksdMd1P3vRFZSlVysrlZRby06KhxsZ6Ipk5uTfLjvZcDsBKFkYNI7BeT5Qcrv4sfzaJElSLZbgFbx9XgBh+D6URtu+xks=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784106561; c=relaxed/simple;
-	bh=12v4kLfM0t53W8e1jIm92V7bHObkh5Z/3ph0XkzStPQ=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=RropRS0sAKfd7IPbMaSCoudKM3bjwpbeTpiORdfUjHiXosUmxaqCpWZUAgqXEbNx6LqUNy9MKU7lqBotCNajCAklvNVWQ528su+QGxg42495Bp7uTIQROBQE8tDKR475OEbk+dN8eaPH0TZxF3pODvJwfynOw49d5bIMr/w5wUc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nK6Frkh3; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 8B3D9C2BD01;
-	Wed, 15 Jul 2026 09:09:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1784106561;
-	bh=12v4kLfM0t53W8e1jIm92V7bHObkh5Z/3ph0XkzStPQ=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=nK6Frkh3OBSy57BXYR8scrdihVLTCkjjZy8diwqh5FZw7Zw1QPavvK8KAs7zqoWEg
-	 T/qibLbQgujb4MOJVufcsJ3BqvfDPquLdAsRXrzdqDSmnQUJoXWWnlAqLJyxvRLyA9
-	 9dJGV9hKNcGtfqrc/yKOrSQ/d8SiCa9dfUPQYws2UPJVaPQ0uaHBwxJy0tO3FYa9wK
-	 tVoFbnHPZIMgmlDmOJ6ImSLkMkT/STqRTmi0qiiwVl+GUESXWUj6ro3UPyC9WCOwgj
-	 Hb9SvqRLzWC2YWQiiRs7tU38L0CkFYDOM+RlxwT8SyXT1wy1Hc6KCY3ilM6f+N5/Ev
-	 /etkZjEjY14ig==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7143AC4450F;
-	Wed, 15 Jul 2026 09:09:21 +0000 (UTC)
-From: Andy Chung via B4 Relay <devnull+Andy.Chung.amd.com@kernel.org>
-Date: Wed, 15 Jul 2026 17:08:38 +0800
-Subject: [PATCH v2 4/4] hwmon: (kb9002) Add documentation
+	s=arc-20240116; t=1784114281; c=relaxed/simple;
+	bh=sIY1J/umhJmWf27+JDas0eGOf7rwLe6iPhl2N/ISoXQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=Q/kbhgIU7kDs/YPYA9FncJyVYuumHYC2quU5/Ixm31SLZsc0eJ1LnjVdNrU23zCmhGRIWwJ+athX0RQV/L6IPfLT8HoNQgXW/tz4clVAgRCJAU2Pc6EUpUKeOPGwqCi/KDDx/gDCb+KMKrhUQ4K11pMsClzOFpE6f9iDdSrauL8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=XOVHw0oU; arc=none smtp.client-ip=198.175.65.10
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1784114278; x=1815650278;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=sIY1J/umhJmWf27+JDas0eGOf7rwLe6iPhl2N/ISoXQ=;
+  b=XOVHw0oUGAQHUcEe0KcPxSHhvS5v54eH5gNHfhG/F1QbND44iZ6Q64rI
+   6ceZOy3Ckrky7G+/5AQglvHRpVXP0MZNgTQ7kTwxpNrzfHmXvNJ5ipUEC
+   Zl1lKiE530yjrqGfAkulk/pelQcKOkrq8CUMSOhdFLe1bP4VizSHTGGiM
+   YkfdtUi39sniHnzsBWzwUququPstquq+kr/PzVHWu+h/eYj5k0nX5dE50
+   aT+XxjaEuESa0oZfGJcT3BVE0iEwWgl4YnZlM8EYG+QzBQcbwnRA5l3Iw
+   GQDnPU6BqAdWyPiL0j2DB68M1RGrPDSmt+O0CIUqKQU91Ft3zlnJ/AR9f
+   A==;
+X-CSE-ConnectionGUID: HR99xGWaSG2SdUaKvuK4Ew==
+X-CSE-MsgGUID: 30OI+x/IQHaWGzbjU1Syhg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11847"; a="102172333"
+X-IronPort-AV: E=Sophos;i="6.25,165,1779174000"; 
+   d="scan'208";a="102172333"
+Received: from fmviesa009.fm.intel.com ([10.60.135.149])
+  by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Jul 2026 04:17:58 -0700
+X-CSE-ConnectionGUID: XzUOvba2Tmy+Tqf2vn7jwQ==
+X-CSE-MsgGUID: mIcV2l16TsGMn4KaXOIWuA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.25,165,1779174000"; 
+   d="scan'208";a="249782220"
+Received: from rknop-desk.igk.intel.com (HELO rknop-desk.ger.corp.intel.com) ([172.28.178.99])
+  by fmviesa009-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Jul 2026 04:17:56 -0700
+From: Ryszard Knop <ryszard.knop@intel.com>
+To: Randy Dunlap <rdunlap@infradead.org>,
+	linux-doc@vger.kernel.org
+Cc: Shuicheng Lin <shuicheng.lin@intel.com>,
+	Jani Nikula <jani.nikula@linux.intel.com>,
+	linux-kernel@vger.kernel.org,
+	intel-xe@lists.freedesktop.org
+Subject: [PATCH v2] scripts/kernel-doc: Suggest possible names for excess descriptions
+Date: Wed, 15 Jul 2026 13:17:26 +0200
+Message-ID: <20260715111726.394565-1-ryszard.knop@intel.com>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260714111208.323108-1-ryszard.knop@intel.com>
+References: <20260714111208.323108-1-ryszard.knop@intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260715-kb9002-upstream-v2-4-2fd390383da5@amd.com>
-References: <20260715-kb9002-upstream-v2-0-2fd390383da5@amd.com>
-In-Reply-To: <20260715-kb9002-upstream-v2-0-2fd390383da5@amd.com>
-To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Andy Chung <andy.chung@amd.com>, 
- Guenter Roeck <linux@roeck-us.net>, Jonathan Corbet <corbet@lwn.net>, 
- Shuah Khan <skhan@linuxfoundation.org>
-Cc: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org, 
- Andy Chung <Andy.Chung@amd.com>
-X-Mailer: b4 0.15.1
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784106525; l=3142;
- i=Andy.Chung@amd.com; s=20260327; h=from:subject:message-id;
- bh=N49+QrvixV76oNVim+qejmy5UhGOUcqywymzDOcJACo=;
- b=zZ6aRKFfqNlk6jBV8GQA33hkWntZJMk1yvIiBUghf/dKfD0R2qzpU517LRtgWUYGYU4uiMaKa
- mJVDwnAKyCdDGvhSJpeXSicA/CnSrvFlm/hq+LZy1bALHjqnj9KFSwU
-X-Developer-Key: i=Andy.Chung@amd.com; a=ed25519;
- pk=X2gaHRnhU2q5hvMjkC6xmIcC03vKNvHY9CQRdsj9ecM=
-X-Endpoint-Received: by B4 Relay for Andy.Chung@amd.com/20260327 with
- auth_id=696
-X-Original-From: Andy Chung <Andy.Chung@amd.com>
-Reply-To: Andy.Chung@amd.com
+Organization: Intel Technology Poland sp. z o.o. - ul. Slowackiego 173, 80-298 Gdansk - KRS 101882 - NIP 957-07-52-316
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-3.66 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[kernel.org:d:+,kernel.org:s:+];
-	SUSPICIOUS_RECIPS(1.50)[];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,kernel.org:s:+];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-96912-lists,linux-doc=lfdr.de,Andy.Chung.amd.com];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	FORGED_SENDER(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:andy.chung@amd.com,m:linux@roeck-us.net,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-hwmon@vger.kernel.org,m:linux-doc@vger.kernel.org,m:Andy.Chung@amd.com,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
-	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-96913-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:rdunlap@infradead.org,m:linux-doc@vger.kernel.org,m:shuicheng.lin@intel.com,m:jani.nikula@linux.intel.com,m:linux-kernel@vger.kernel.org,m:intel-xe@lists.freedesktop.org,s:lists@lfdr.de];
 	TO_DN_SOME(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[ryszard.knop@intel.com,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	HAS_ORG_HEADER(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	HAS_REPLYTO(0.00)[Andy.Chung@amd.com]
+	RCPT_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[ryszard.knop@intel.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,intel.com:from_mime,intel.com:mid,intel.com:email,intel.com:dkim,vger.kernel.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 8811675C48C
+X-Rspamd-Queue-Id: 4158175D7FA
 
-From: Andy Chung <Andy.Chung@amd.com>
+Since check_sections() now warns if a documentation tag member name is
+the same as defined in the struct, we can suggest names the checker
+knows, so that it's more obvious how to deal with the warning.
 
-Document the sysfs and debugfs interfaces of the Kandou KB9002 hwmon
-driver.
+v2 (rdunlap):
+- Strip whitespace from warnings, nicer when the hint is empty
 
-Signed-off-by: Andy Chung <Andy.Chung@amd.com>
+Signed-off-by: Ryszard Knop <ryszard.knop@intel.com>
 ---
- Documentation/hwmon/index.rst  |  1 +
- Documentation/hwmon/kb9002.rst | 65 ++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 66 insertions(+)
+ tools/lib/python/kdoc/kdoc_parser.py | 13 +++++++++++--
+ 1 file changed, 11 insertions(+), 2 deletions(-)
 
-diff --git a/Documentation/hwmon/index.rst b/Documentation/hwmon/index.rst
-index 226789376217..9dc796d087dc 100644
---- a/Documentation/hwmon/index.rst
-+++ b/Documentation/hwmon/index.rst
-@@ -112,6 +112,7 @@ Hardware Monitoring Kernel Drivers
-    jc42
-    k10temp
-    k8temp
-+   kb9002
-    kbatt
-    kfan
-    lan966x
-diff --git a/Documentation/hwmon/kb9002.rst b/Documentation/hwmon/kb9002.rst
-new file mode 100644
-index 000000000000..e6d8d9c78923
---- /dev/null
-+++ b/Documentation/hwmon/kb9002.rst
-@@ -0,0 +1,65 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
+diff --git a/tools/lib/python/kdoc/kdoc_parser.py b/tools/lib/python/kdoc/kdoc_parser.py
+index 2dedda215c22..a22c3e3182f0 100644
+--- a/tools/lib/python/kdoc/kdoc_parser.py
++++ b/tools/lib/python/kdoc/kdoc_parser.py
+@@ -558,6 +558,13 @@ class KernelDoc:
+                         self.push_parameter(ln, decl_type, param, dtype,
+                                             arg, declaration_name)
+ 
++    def get_suggestions_hint(self, decl_name, possible_names):
++        suggestions = set(name for name in possible_names if decl_name in name)
++        if not suggestions:
++            return ""
 +
-+Kernel driver kb9002
-+====================
++        return f"(did you mean one of: '{"', '".join(suggestions)}')"
 +
-+Supported chips:
-+
-+  * Kandou KB9002
-+
-+    Prefix: 'kb9002'
-+
-+    Addresses scanned: -
-+
-+    Datasheet: KA-015171-PD (available from Kandou under NDA)
-+
-+Author: Andy Chung <andy.chung@amd.com>
-+
-+Description
-+-----------
-+
-+The Kandou KB9002 is an 8-lane PCIe 5.0 retimer with an integrated
-+microcontroller. It exposes an SMBus 3.0 target (with mandatory PEC)
-+on its sideband interface. The internal firmware aggregates per-lane
-+die temperatures and publishes the maximum value through a 16-bit
-+addressed register window.
-+
-+This driver reports that aggregated maximum as the only hwmon
-+temperature channel. The running firmware version and the firmware
-+boot status are exposed under debugfs.
-+
-+sysfs interface
-+---------------
-+
-+==================  ===============================================
-+temp1_input         Aggregated maximum die temperature across all
-+                    active lanes (millidegrees Celsius).
-+temp1_label         Always "kb9002".
-+==================  ===============================================
-+
-+debugfs interface
-+-----------------
-+
-+Files live in the per-client debugfs directory created by the I2C
-+core: ``/sys/kernel/debug/i2c/i2c-<bus>/<bus>-<addr>/``.
-+
-+==================  ===============================================
-+fw_ver              Running firmware version in
-+                    "major.minor.patch.suffix" format. Read-only.
-+fw_load_status      Firmware boot status: "normal" once firmware has
-+                    finished initialising, "abnormal" otherwise.
-+                    Read-only.
-+==================  ===============================================
-+
-+Notes
-+-----
-+
-+The driver requires ``I2C_FUNC_SMBUS_BLOCK_DATA``,
-+``I2C_FUNC_SMBUS_PEC`` and ``I2C_FUNC_I2C`` from the host adapter. The
-+last is needed only during probe for the host-interface mode switch;
-+runtime accesses use SMBus block transactions exclusively.
-+
-+The retimer's SMBus address is configurable on three strap pins and
-+ranges from 0x20 to 0x27. The address is selected through device tree
-+(or i2c board info) the same way as any other I2C device; the driver
-+does not auto-detect.
-
+     def check_sections(self, ln, decl_name, decl_type):
+         """
+         Check for errors inside sections, emitting warnings if not found
+@@ -566,12 +573,13 @@ class KernelDoc:
+         for section in self.entry.sections:
+             if section not in self.entry.parameterlist and \
+                not known_sections.search(section):
++                hint = self.get_suggestions_hint(section, self.entry.parameterlist)
+                 if decl_type == 'function':
+                     dname = f"{decl_type} parameter"
+                 else:
+                     dname = f"{decl_type} member"
+                 self.emit_msg(ln,
+-                              f"Excess {dname} '{section}' description in '{decl_name}'")
++                              f"Excess {dname} '{section}' description in '{decl_name}' {hint}".strip())
+ 
+         #
+         # Check that documented parameter names (from doc comments, including
+@@ -591,12 +599,13 @@ class KernelDoc:
+             if param_name in self.entry.parameterlist:
+                 continue
+ 
++            hint = self.get_suggestions_hint(param_name, self.entry.parameterlist)
+             if decl_type == 'function':
+                 dname = f"{decl_type} parameter"
+             else:
+                 dname = f"{decl_type} member"
+             self.emit_msg(ln,
+-                          f"Excess {dname} '{param_name}' description in '{decl_name}'")
++                          f"Excess {dname} '{param_name}' description in '{decl_name}' {hint}".strip())
+ 
+     def check_return_section(self, ln, declaration_name, return_type):
+         """
 -- 
-2.34.1
-
+2.55.0
 
 
