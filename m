@@ -1,317 +1,188 @@
-Return-Path: <linux-doc+bounces-96864-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-96871-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id w8wlGIrdVmqECAEAu9opvQ
-	(envelope-from <linux-doc+bounces-96864-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 03:08:26 +0200
+	id WFdNCpPmVmqoCgEAu9opvQ
+	(envelope-from <linux-doc+bounces-96871-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 03:46:59 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id A2BE9759CE4
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 03:08:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 71C11759F2D
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 03:46:58 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=qualcomm.com header.s=qcppdkim1 header.b=bTIv3TVG;
-	dkim=pass header.d=oss.qualcomm.com header.s=google header.b=jCrhHjPd;
-	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96864-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-96864-lists+linux-doc=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=reject) header.from=qualcomm.com;
+	dkim=none;
+	spf=pass (mail.lfdr.de: domain of "linux-doc+bounces-96871-lists+linux-doc=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="linux-doc+bounces-96871-lists+linux-doc=lfdr.de@vger.kernel.org";
+	dmarc=none;
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 6A7EC3023517
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 01:08:24 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id BA9753043FA6
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Jul 2026 01:45:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 10509265CA2;
-	Wed, 15 Jul 2026 01:08:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5347312E1DC;
+	Wed, 15 Jul 2026 01:45:14 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC04D26ED37
-	for <linux-doc@vger.kernel.org>; Wed, 15 Jul 2026 01:08:18 +0000 (UTC)
+Received: from azure-sdnproxy.icoremail.net (azure-sdnproxy.icoremail.net [4.193.249.245])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BDA5B18872A
+	for <linux-doc@vger.kernel.org>; Wed, 15 Jul 2026 01:45:06 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784077703; cv=none; b=QO+WTK2gE8G2j6zWGRW48ElsYzYSBCClg7SBDFI7fRbfCmjHL37NkJVhrW/kItL0icIZklhJiIUld/9iJdom9jbsSfNKgVWG1Fni2eO4u7de5XE0F1daM9KUWzfkCYN302kOIlMYZXizajjWWowyL/cw5AnuweLNYm7PyDQ+We8=
+	t=1784079914; cv=none; b=iHuJsElUmHXR2Jqbx29lR9xYnOx16Z3OVyzogLXZGd+n/fwQNYirMWTTOFt5a4uSDx9zPQa+bG3hqN+R3B32iNKtXDT8nIFOD+4dSBrCvot7B+SJ9WzsG1euQfvklOwuuL/yJrsADafub/mYEpxbY6bw4YgmHF66t3uYOLeQOoE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784077703; c=relaxed/simple;
-	bh=tN35dLZPzwzi+5Sd9xksFVjFrsn7f2K4Ef6bj0jV96g=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=LJ9v9AS3jmy7CuoC3g4aQ17rXJugn9dgBT/7PpEbYomQETcLKETMBhxVadi9+bkuYjlj5ROXY0YdiX244XdTbwtm/+5ImqUN535wHotsTL0BZAUw8W8hsMBu+Mlfzqxnzfe+PuYLV5V3+tY/iCh/JtQld7ydAwXwDkv6ytjiqSM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=bTIv3TVG; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=jCrhHjPd; arc=none smtp.client-ip=205.220.180.131
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66F0IW8f2172241
-	for <linux-doc@vger.kernel.org>; Wed, 15 Jul 2026 01:08:17 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	aXTMMshAVtUeQo0IZUDx3gK+TpvQrcV476loM7bSKzc=; b=bTIv3TVGY9TPZ32r
-	WeYkeoiwDe+S4dCEL46RoqTcV9RQrbX3KUXFsbpgCmcgjE4iqFbEEopQlayy3D+W
-	HGoovpmQnRJAO1OOOORAJFG1ZRT1XJ/zVmYBY1HT7Vlj03rQzoll0REwAOma2JZV
-	lvmg4mzOa60ASK1WPwKkUSIpnG4LAdCLwegm77fih29cktCXfBwq0ihd5Pb/YpS/
-	oejQr3Mo09H8pvoCETvplmeoVqw0WGxkwAgPayWNYZqEPLRwwmtjFBb2IHbrHjs0
-	8KtLsWNLQZSySO/jlKYjYFcP7Y0OqMvwDgwh0qsJr3PcEWYQaA0QW2TQ39H1hsTZ
-	E6Y/Cw==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fdnnqteq3-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-doc@vger.kernel.org>; Wed, 15 Jul 2026 01:08:17 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-c891ed872ddso8622625a12.2
-        for <linux-doc@vger.kernel.org>; Tue, 14 Jul 2026 18:08:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784077696; x=1784682496; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:organization
-         :references:in-reply-to:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=aXTMMshAVtUeQo0IZUDx3gK+TpvQrcV476loM7bSKzc=;
-        b=jCrhHjPdiSt1PJFwxwdvi980LWTS+oRBSsRAjfeCqYO869sOiTkZIUOSRxwP2req5p
-         9AJQNIUhVNiBwQWCqcprC4YnkoHy3Fl4miar3p+PSQpJLdy2k8nAO9vCD5gKpUe8sW1+
-         YQCA1gDAno5EbuWz3aKKdHg+KVb2IS30Z4juAEuQskNRojriISwKxSRrX3tHlQZtNPjy
-         issubbGRGLyuUX10MtZIXhZuSYBRBAeuk1LzImCat1S5J29YfPpTW8OT8cQ/1lCel6JV
-         3xI36SVW3PKEMIbrlWDNqJjLGrhu8JoYVpQf1eek3Inof1lDedrKLvYvGWyi1GSlo6Qq
-         YgRQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784077696; x=1784682496;
-        h=content-transfer-encoding:content-type:mime-version:organization
-         :references:in-reply-to:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=aXTMMshAVtUeQo0IZUDx3gK+TpvQrcV476loM7bSKzc=;
-        b=QQVBbMGqPcOyO9urRAfYY2vec6QAYI5CqEVF7mlBGERFYZw4bX5/by7uBa5/PDLirv
-         DUyw3sSema+YRenTXo1GAi2qoC8TfbgY7/eNGPiKfznxWCoeeLiVqN28klVNB1eLITeF
-         BG+eSi5KprUbzrmzHw3if0VIxaI3UUUY8/o1KFNYTpQJqveDtfDUhSGSrSQs9f7vd/Wn
-         faSwJRfqqKyI5xcVq2BJm0WYzemoiFIHHrNZw0Lc1A4zLQ2EC1NwpU3VIQ6OCxPOZtJ/
-         9ZpXi7qlSfzBEvHmYU3HEhMsuHh0Ila055Tdavlu4/qe7/ZVASiA/EBX1K9wf3+l5j1E
-         e40A==
-X-Forwarded-Encrypted: i=1; AHgh+RocqYPSVktxPtI/DulO089EbzRLcHvGmyz61GMSR8iiWsC1oG0MpzEC01hQaDadRFGo7Vv+8lk2hSQ=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw/Fzc6h2PL3gBcGCy80KQEg2VrjQ5/JWjy7eWdvUmpGvJ91Pf8
-	17cQ7odL7w7r0kNnkK3F51fnqlpocMxmgzpCTqPNnl8uPXCfnqvJ20rG/WncsGnxtqAeJVFetCM
-	Z/4AsNE8fWL9w/1XrHhlPxBM4SqHRBhLLpvyZnJ85xq2QC0Ap/TNT4x4k3IUOCK0=
-X-Gm-Gg: AfdE7cmf+kj7zri3ue7IYyfHS8XvvAYyDec2SNKWZrjwLhj0ieWxp64K+FIc7fhfeWD
-	kLFlOTeOXm4M8xitY3VjDU3buLGyB41VhwSTxfI3viJEf/cpyWA5mup+wMxrdAt+K1tw8XMxKQd
-	9XfmLxqBejNkTDddsjryes50oCuFXeX2+Ij41x/w4oGUYNK34UecMNLhhqTudA5OdXEwS9XjVMg
-	dQBQcu81t2f6S7im343bqHQDwXexANzMcihdmH3hS44iCxC5ZF4ov62W9gkRT0R++6SymtvbcgX
-	DJZIztK2HGpEWxV1Wqqn4HNC2apdH3FEajmCAcBpPE4r7eHYlb3Fptrf/xNQNeWYGRGKkUZNGy0
-	T1Joog7Z/UFRCrBXTfEOkFiPHm+eUoGaT2sH8
-X-Received: by 2002:a05:6a21:694:b0:3c0:9c1a:8937 with SMTP id adf61e73a8af0-3c34d8b2322mr7739464637.63.1784077696496;
-        Tue, 14 Jul 2026 18:08:16 -0700 (PDT)
-X-Received: by 2002:a05:6a21:694:b0:3c0:9c1a:8937 with SMTP id adf61e73a8af0-3c34d8b2322mr7739430637.63.1784077696047;
-        Tue, 14 Jul 2026 18:08:16 -0700 (PDT)
-Received: from localhost ([50.35.46.84])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13b924258a2sm78642078c88.1.2026.07.14.18.08.14
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Jul 2026 18:08:15 -0700 (PDT)
-Date: Tue, 14 Jul 2026 18:08:12 -0700
-From: Jonathan Cameron <jonathan.cameron@oss.qualcomm.com>
-To: Rodrigo Alencar <455.rodrigo.alencar@gmail.com>
-Cc: Jonathan Cameron <jic23@kernel.org>,
-        Rodrigo Alencar via B4 Relay
- <devnull+rodrigo.alencar.analog.com@kernel.org>,
-        linux-iio@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-hardening@vger.kernel.org, Lars-Peter
- Clausen <lars@metafoo.de>,
-        Michael Hennerich
- <Michael.Hennerich@analog.com>,
-        David Lechner <dlechner@baylibre.com>,
-        Andy
- Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof
- Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Philipp
- Zabel <p.zabel@pengutronix.de>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Shuah
- Khan <skhan@linuxfoundation.org>, Kees Cook <kees@kernel.org>,
-        "Gustavo A.
- R. Silva" <gustavoars@kernel.org>
-Subject: Re: [PATCH v7 07/17] iio: test: add kunit tests for channel prefix
- naming generation
-Message-ID: <20260714180812.000070c4@oss.qualcomm.com>
-In-Reply-To: <egyms7ulkxsgu4pvfkoruelec3sf6ca4bndcuqkvxljrdluqwu@edlqne7oy3xs>
-References: <20260707-ad9910-iio-driver-v7-0-a4ec30f63700@analog.com>
-	<20260707-ad9910-iio-driver-v7-7-a4ec30f63700@analog.com>
-	<20260712020928.2c8d1667@jic23-huawei>
-	<egyms7ulkxsgu4pvfkoruelec3sf6ca4bndcuqkvxljrdluqwu@edlqne7oy3xs>
-Organization: Qualcomm
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.51; x86_64-w64-mingw32)
+	s=arc-20240116; t=1784079914; c=relaxed/simple;
+	bh=sI+tcKRdsQ7VT1k0mUR7wnLMSNPH9oU1FXsEc64e1bk=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=HCSvTYlieIVfIRJCm7zdGsDSpEw2U+kj1Cz7ygAeHPKiOnlLrXrGMh7GepFudEp7Km8G+X5Tk4/OKK4cblKxlX/m1T1bk+vRHnr2WflJhCIL7lTNeQZKmXwm+/k0wgfHqCArI/La9hx4HL548MVnxi6NppPi5UoPciGCG4E0u8o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=hust.edu.cn; spf=pass smtp.mailfrom=hust.edu.cn; arc=none smtp.client-ip=4.193.249.245
+Received: from hust.edu.cn (unknown [172.16.0.52])
+	by app1 (Coremail) with SMTP id HgEQrADH7KHl5VZqZd0FAg--.8358S2;
+	Wed, 15 Jul 2026 09:44:05 +0800 (CST)
+Received: from [192.168.1.31] (unknown [183.94.132.115])
+	by gateway (Coremail) with SMTP id _____wAXEMTb5VZqTXWLAA--.10837S2;
+	Wed, 15 Jul 2026 09:43:57 +0800 (CST)
+Message-ID: <52d302fc-ed86-4d5e-8b68-b8a99226bf98@hust.edu.cn>
+Date: Wed, 15 Jul 2026 09:43:55 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE1MDAwOCBTYWx0ZWRfX0fWdqcu9GgqY
- 0tiTlmc+GwN2Je+g1SRI88uRk/5YU49bsAaP313KkFkz0wxQDhcoB3VRaeiL4Gn6A/O4ZB6msJr
- HQcXxp3/rx00nI/IoVdkGj6o8k93kmSJvDmLvgSTDSuS+4q5XK1q1GDPfObSSk7bKqDFj+EYHT3
- q8aaQQ5sgE1NIvArJFyfQL1z0XcSeZJ+AoqDen90LkZBWBm2CwG+zBvo52tVIel1mdUS3rtulIO
- zEF2DoEh0Aa7wcC2rLEWSGBIeJYMO0jeJxBHkX7n5v+pyPIeBwStV8355y9IIjowCxVB/i7fVdy
- cD/MQJn6AcRUNPTgOiJyiLJo2fgGDXe0vowkidEi+saiUXfNVqAOyRkRQTWf7K1yQwAClgWcUUr
- Q30R7EEIrR9U15triBmB4VrHgZeHj/7DWP3OjvOXXSl/cO4bsUAnNmsoadeiyTz1CWePB7SjkGK
- 7UKl613bhezUMvVf0nw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE1MDAwOCBTYWx0ZWRfX0KnddUvshVwZ
- YkmI9Sud0SG5bAUYYlJyc7SZHg05KsLtlLq5UZJ2XRPFZzBTS95OWBOFmbKZNIWmK8qIbfL8hM9
- QblCTU0TYtMVHODx8xSPDGLXaaxw68w=
-X-Authority-Analysis: v=2.4 cv=U+Oiy+ru c=1 sm=1 tr=0 ts=6a56dd81 cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=qC1CW/w66vtJz1P9yTJxNA==:17
- a=kj9zAlcOel0A:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=pGLkceISAAAA:8 a=VwQbUJbxAAAA:8 a=gAnH3GRIAAAA:8 a=7zneujqQnARXn4JFaX0A:9
- a=CjuIK1q_8ugA:10 a=3WC7DwWrALyhR5TkjVHa:22
-X-Proofpoint-GUID: oF64iH0Flb8gVdSwr5traLwgPdyX5vP9
-X-Proofpoint-ORIG-GUID: oF64iH0Flb8gVdSwr5traLwgPdyX5vP9
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-15_01,2026-07-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 malwarescore=0 bulkscore=0 lowpriorityscore=0 suspectscore=0
- clxscore=1011 priorityscore=1501 impostorscore=0 adultscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607150008
+User-Agent: Mozilla Thunderbird
+Subject: Re: What's cooking in zh_CN (Jul 2026, #02)
+To: Doehyun Baek <doehyunbaek@gmail.com>, Weijie Yuan <wy@wyuan.org>
+Cc: linux-doc@vger.kernel.org, Alex Shi <alexs@kernel.org>,
+ Yanteng Si <si.yanteng@linux.dev>, Ben Guo <ben.guo@openatom.club>,
+ Gary Guo <gary@garyguo.net>, Yan Zhu <zhuyan2015@qq.com>,
+ Jiandong Qiu <qiujiandong1998@gmail.com>,
+ chengyaqiang <chengyaqiang@tsinghua.edu.cn>,
+ Haoyang Liu <tttturtleruss@gmail.com>
+References: <alZK0i0HvxOvSKwj@wyuan.org> <alZP_6nAXNy_HfZi@wyuan.org>
+ <CAN-j9UoUHQ2i4H+9G-XK_mOfKKyE9K9-mwUgPc+4yOVfiizgmA@mail.gmail.com>
+From: Dongliang Mu <dzm91@hust.edu.cn>
+In-Reply-To: <CAN-j9UoUHQ2i4H+9G-XK_mOfKKyE9K9-mwUgPc+4yOVfiizgmA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:HgEQrADH7KHl5VZqZd0FAg--.8358S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7WFy8GF1DCFWfXw1UAF4rGrg_yoW8trW8pF
+	WrGrn3tF4rXr48Jws7Ka109a1UWa4Fya4agwn8Jw15JF9IqF1SqF109r4a9r1qv34rCrZ3
+	tF45Zw1vg34DZrJanT9S1TB71UUUUjDqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUHab7Iv0xC_Zr1lb4IE77IF4wAFc2x0x2IEx4CE42xK8VAvwI8I
+	cIk0rVWrJVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjx
+	v20xvE14v26w1j6s0DM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4UJVWxJr1l84ACjcxK
+	6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1ln4kS14v26r
+	126r1DM2vYz4IE04k24VAvwVAKI4IrM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI
+	12xvs2x26I8E6xACxx1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj64x0Y40En7xvr7AKxV
+	W8Jr0_Cr1UMcIj6x8ErcxFaVAv8VW8uFyUJr1UMcIj6xkF7I0En7xvr7AKxVW8Jr0_Cr1U
+	McvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwCY1x0262kKe7AKxVWUAVWUtwCF04
+	k20xvY0x0EwIxGrwCF04k20xvE74AGY7Cv6cx26r4fZr1UJr1l4I8I3I0E4IkC6x0Yz7v_
+	Jr0_Gr1l4IxYO2xFxVAFwI0_JF0_Jw1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8Gjc
+	xK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYY7kG6IIYr7AKxVW8JVW5JwCI
+	c40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x0267
+	AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_
+	Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjxU3fOzUU
+	UUU
+X-CM-SenderInfo: asqsiiirqrkko6kx23oohg3hdfq/
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-1.46 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[qualcomm.com,reject];
-	R_DKIM_ALLOW(-0.20)[qualcomm.com:s=qcppdkim1,oss.qualcomm.com:s=google];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,linux.dev,openatom.club,garyguo.net,qq.com,gmail.com,tsinghua.edu.cn];
+	TAGGED_FROM(0.00)[bounces-96871-lists,linux-doc=lfdr.de];
+	DMARC_NA(0.00)[hust.edu.cn];
+	FORGED_RECIPIENTS(0.00)[m:doehyunbaek@gmail.com,m:wy@wyuan.org,m:linux-doc@vger.kernel.org,m:alexs@kernel.org,m:si.yanteng@linux.dev,m:ben.guo@openatom.club,m:gary@garyguo.net,m:zhuyan2015@qq.com,m:qiujiandong1998@gmail.com,m:chengyaqiang@tsinghua.edu.cn,m:tttturtleruss@gmail.com,s:lists@lfdr.de];
+	FREEMAIL_TO(0.00)[gmail.com,wyuan.org];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	TAGGED_FROM(0.00)[bounces-96864-lists,linux-doc=lfdr.de];
-	FORGED_SENDER(0.00)[jonathan.cameron@oss.qualcomm.com,linux-doc@vger.kernel.org];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:455.rodrigo.alencar@gmail.com,m:jic23@kernel.org,m:devnull+rodrigo.alencar.analog.com@kernel.org,m:linux-iio@vger.kernel.org,m:devicetree@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-doc@vger.kernel.org,m:linux-hardening@vger.kernel.org,m:lars@metafoo.de,m:Michael.Hennerich@analog.com,m:dlechner@baylibre.com,m:andy@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:p.zabel@pengutronix.de,m:corbet@lwn.net,m:skhan@linuxfoundation.org,m:kees@kernel.org,m:gustavoars@kernel.org,m:455rodrigoalencar@gmail.com,m:devnull@kernel.org,m:krzk@kernel.org,m:conor@kernel.org,s:lists@lfdr.de];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
-	HAS_ORG_HEADER(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,vger.kernel.org:from_smtp,qualcomm.com:dkim];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[dzm91@hust.edu.cn,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jonathan.cameron@oss.qualcomm.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[qualcomm.com:+,oss.qualcomm.com:+];
-	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[dzm91@hust.edu.cn,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ALIAS_RESOLVED(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	R_DKIM_NA(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,rodrigo.alencar.analog.com,dt];
-	RCVD_COUNT_SEVEN(0.00)[7]
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,googlesource.com:url,doehyunbaek.github.io:url,wyuan.org:email,hust.edu.cn:url,hust.edu.cn:from_mime,hust.edu.cn:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: A2BE9759CE4
+X-Rspamd-Queue-Id: 71C11759F2D
 
-On Mon, 13 Jul 2026 10:52:56 +0100
-Rodrigo Alencar <455.rodrigo.alencar@gmail.com> wrote:
 
-> On 12/07/26 02:09, Jonathan Cameron wrote:
-> > On Tue, 07 Jul 2026 15:04:28 +0100
-> > Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org> wrote:
-> >   
-> > > From: Rodrigo Alencar <rodrigo.alencar@analog.com>
-> > > 
-> > > Add a KUnit test suite covering __iio_chan_prefix_emit(), the helper
-> > > that builds IIO sysfs attribute name prefixes from an iio_chan_spec.
-> > > The suite groups cases by the enum iio_shared_by mode it exercises:
-> > > 
-> > >   - IIO_SHARED_BY_ALL: produces an empty prefix.
-> > >   - IIO_SHARED_BY_DIR: emits direction only ("in" / "out").
-> > >   - IIO_SHARED_BY_TYPE: emits "<dir>_<type>" and the differential
-> > >     "<dir>_<type>-<type>" variant.
-> > >   - IIO_SEPARATE: covers the full matrix of indexed, differential,
-> > >     modified, output and extend_name combinations, plus the two
-> > >     documented error paths (differential without indexed, differential
-> > >     with modifier).
-> > > 
-> > > A final case exercises the seq_buf overflow path by passing an
-> > > undersized buffer and expects -EOVERFLOW.
-> > > 
-> > > Because __iio_chan_prefix_emit() is static, the test translation unit
-> > > is pulled into industrialio-core.c.  
-> > 
-> > Isn't there some magic route cases like this that makes it non static
-> > only when self tests are enabled? 
-> > Claude tells me to look at include/kunit/visibility.h  
-> 
-> There is, Although I think that using
-> 
-> 	#if IS_ENABLED(CONFIG_IIO_CHANNEL_PREFIX_KUNIT_TEST)
-> 		#include "test/iio-test-channel-prefix.c"
-> 	#endif
-> 
-> was more straight forward, less invasive and easier to change than..
-> 
-> 	/* In "drivers/iio/industrialio-core.c" */
-> 
-> 	#include <kunit/visibility.h>
-> 	...
-> 	VISIBLE_IF_KUNIT ssize_t __iio_chan_prefix_emit(...)
-> 	{
-> 	...
-> 	}
-> 	EXPORT_SYMBOL_IF_KUNIT(__iio_chan_prefix_emit);
-> 
-> 	/* In "iio_core.h" */
-> 
-> 	#if IS_ENABLED(CONFIG_KUNIT)
-> 		ssize_t __iio_chan_prefix_emit(...);
-> 	#endif
-> 
-> 	/* In "drivers/iio/test/iio-test-channel-prefix.c" */
-> 
-> 	#include <kunit/visibility.h>
-> 	#include <iio_core.h>
-> 	...
-> 	MODULE_IMPORT_NS("EXPORTED_FOR_KUNIT_TESTING");
-> 	...
-> 	// Use __iio_chan_prefix_emit() in tests
+On 7/15/26 1:05 AM, Doehyun Baek wrote:
+> Hi Weijie,
+>
+> Thanks for putting together the “What’s cooking” reports!
+> I "cooked" up a small website this evening that attempts to automate them:
+>
+> https://doehyunbaek.github.io/cook-linux-zhcn/
+> <https://doehyunbaek.github.io/cook-linux-zhcn/>
 
-I'd rather this wasn't built into the core module.  So prefer you jump
-though those hoops.
 
-Jonathan
+This is what I want. From this webpage, I can quickly locate patches 
+which needs review and start working.
 
-> 
-> > 
-> > Very nice.  A couple of really small additions requested inline.
-> > I might well have missed where you exercised the corners requested though!
-> > + I'll need an Ack from Lars for that maintainers entry. I'll guess that
-> > Lars won't give one as not very active at the moment in this area.
-> > 
-> > Jonathan
-> >   
-> > > 
-> > > Also, an entry is created under MAINTAINERS dedicated to tests for IIO
-> > > core helpers.
-> > > 
-> > > Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
-> > > ---
-> > >  MAINTAINERS                                |   8 +
-> > >  drivers/iio/industrialio-core.c            |   4 +
-> > >  drivers/iio/test/Kconfig                   |  14 ++
-> > >  drivers/iio/test/iio-test-channel-prefix.c | 246 +++++++++++++++++++++++++++++
-> > >  4 files changed, 272 insertions(+)
-> > > 
-> > > diff --git a/MAINTAINERS b/MAINTAINERS
-> > > index 2b1ec46c5919..57ffc0dcfdb6 100644
-> > > --- a/MAINTAINERS
-> > > +++ b/MAINTAINERS
-> > > @@ -12634,6 +12634,14 @@ F:	include/dt-bindings/iio/
-> > >  F:	include/linux/iio/
-> > >  F:	tools/iio/
-> > >  
-> > > +IIO CORE KUNIT TESTS
-> > > +M:	Lars-Peter Clausen <lars@metafoo.de>  
-> > 
-> > I'd need an Ack from Lars for this entry.   If we don't get one are you
-> > fine looking after this without Lars listed?    
-> 
-> That is fine, will drop his name.
-> 
+
+>
+> Every hour, a GitHub Actions workflow scans recent `docs/zh_CN` 
+> patches on the linux-doc mailing list, groups rerolls, and compares 
+> their subjects with Alex’s `docs-next` tree to determine whether they 
+> have been applied. Pending series with no update for more than 30 days 
+> are classified as “Cold.”
+>
+> This is still an experimental prototype, and its heuristics may have 
+> bugs, particularly when threads or patch subjects change. The source 
+> is available here:
+>
+> https://github.com/doehyunbaek/cook-linux-zhcn
+> <https://github.com/doehyunbaek/cook-linux-zhcn>
+
+
+Let me take a look and think what I can help contribute.
+
+
+>
+> Issues, suggestions, and pull requests are welcome!
+>
+> Thanks,
+> Doehyun
+>
+> On Tue, Jul 14, 2026 at 5:04 PM Weijie Yuan <wy@wyuan.org> wrote:
+>
+>     On Tue, Jul 14, 2026 at 10:42:34PM +0800, Weijie Yuan wrote:
+>     > Here are the topics that have been cooking in Alex's tree.
+>
+>     This statement is incorrect. I will correct it next time.
+>
+>     Sorry for the noise.
+>
+>     > Copies of the source code to Chinese documentation development
+>     tree live
+>     > in here:
+>     >
+>     >   
+>      git://git.kernel.org/pub/scm/linux/kernel/git/alexs/linux.git
+>     <https://mail.hust.edu.cn:8443/linkserver?dest=http%3A%2F%2Fgit.kernel.org%2Fpub%2Fscm%2Flinux%2Fkernel%2Fgit%2Falexs%2Flinux.git&tid=_____wAnVXVDblZqsIeJAA--.51119S3&rcpt=dzm91@hust.edu.cn&ifnotice=1&rindex=0>
+>     > https://git.kernel.org/pub/scm/linux/kernel/git/alexs/linux.git
+>     >
+>     https://kernel.googlesource.com/pub/scm/linux/kernel/git/alexs/linux.git
+>     >
+>     > Mirrors:
+>     >
+>     > https://mirrors.hust.edu.cn/git/kernel-doc-zh.git
+>     > https://mirror.nju.edu.cn/git/kernel-doc-zh.git (experimental)
+>
+>
+>
+> -- 
+> Doehyun Baek
 
 
